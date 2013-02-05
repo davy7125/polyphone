@@ -1,0 +1,87 @@
+<table>
+	<tr>
+		<td width=10% align="left"> <a href="qrc:/aide/page04en.html">&#60;</a> </td>
+		<td width=80% align="center"> <a href="qrc:/aide/help.html">start page</a> </td>
+		<td width=10% align="right"> <a href="qrc:/aide/page06en.html">&#62;</a> </td>
+	</tr>
+</table>
+<HR />
+
+<p align="center"><h1><font color="red">SAMPLES</font></h1></p> 
+
+<br />
+<p align="justify">When clicking on one of the samples of a .sf2 file in the tree, the page of the sample edition appears.</p>
+
+<p align="center"><img src="qrc:/aide/page2 en.png" /></p>
+
+<p align="justify">This page is divided into several parts:
+<ul>
+	<li>the graph,</li>
+	<li>the "information" part,</li>
+	<li>the "frequency" part,</li>
+	<li>the "equalizer" part,</li>
+	<li>the player.</li>
+</ul>
+</p>
+
+<p align="left"><h2>The graph</h2></p> 
+
+<p align="justify">The graph allows the visualization of the sound wave. It is possible to zoom vertically and horizontally by holding a mouse right click:
+<ul>
+	<li>sliding right expands the horizontal axis,</li>
+	<li>sliding left condenses the horizontal axis,</li>
+	<li>sliding up expands the vertical axis,</li>
+	<li>sliding down condenses the vertical axis.</li>
+</ul>
+A green vertical bar indicates the start position of the loop (changeable by left click), a red bar indicates the position of the end of the loop (changeable by right click).<br />
+During playback, a white vertical bar runs the graph and indicates the playback position in real time.
+</p>
+
+<p align="left"><h2>Information</h2></p> 
+
+<p align="justify">This section allows the edition of the following information:
+<ul>
+	<li>start and end of the loop,</li>
+	<li>rootkey of the sample,</li>
+	<li>correction to be applied for the sound to be tuned in the equal temperament,</li>
+	<li>sound sample rate (a change will cause resampling),</li>
+	<li>sound type (not linked: mono, otherwise left, right or linked),</li>
+	<li>the linked sample if the sample is stereo.</li>
+</ul>
+In addition, the sample size in samples (number of values) and seconds is shown.
+</p>
+
+<p align="left"><h2>Frequencies</h2></p> 
+
+<p align="justify"> The Fourier transform is displayed as well as the list of dominant peaks (intensity relative to the maximum frequency, corresponding key number and correction). From these data, an estimate of the sound pitch is made. This estimate can be used as a basis for tuning.
+</p>
+
+<p align="left"><h2>Equalizer</h2></p> 
+
+<p align="justify">The equalizer makes it possible to increases or decreases certain frequencies, from -15 to 15dB. The effect is applied after pressing the "Apply" button. Pressing "reset" resets all the buttons to 0dB (but does not remove the effect on the sound: for that use the "redo" button).
+</p>
+
+<p align="left"><h2>Player</h2></p> 
+
+<p align="justify">The player plays the sound. During playback, a white cursor traverses the graph to indicate the playback position. Playback options are:
+<ul>
+	<li><b>Loop</b><br />
+	Plays the sound loop if the beginning and end of the loop are completed.
+	</li>
+	<li><b>Stereo</b><br />
+	Plays the sample in stereo, with its linked sample. If looping is required, the two respective loops are used (they can be different).
+	</li>
+	<li><b>Sinus</b><br />
+	A sinus calibration is added to the sound, allowing a sample tuning to the nearest pitch hundredth. At first the root key must be filled. At this level, beats can be heard if the frequency of the sinus differs slightly from the fundamental frequency of the sound. It remains to finely adjust the correction to make the beats as slow as possible, so that the sample is tuned at best.
+	</li>
+</ul>
+</p>
+
+<HR />
+<table>
+	<tr>
+		<td width=10% align="left"> <a href="qrc:/aide/page04en.html">&#60;</a> </td>
+		<td width=80% align="center"> <a href="qrc:/aide/help.html">start page</a> </td>
+		<td width=10% align="right"> <a href="qrc:/aide/page06en.html">&#62;</a> </td>
+	</tr>
+</table>

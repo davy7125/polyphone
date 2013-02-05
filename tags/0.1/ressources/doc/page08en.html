@@ -1,0 +1,129 @@
+<table>
+	<tr>
+		<td width=10% align="left"> <a href="qrc:/aide/page07en.html">&#60;</a> </td>
+		<td width=80% align="center"> <a href="qrc:/aide/help.html">start page</a> </td>
+		<td width=10% align="right"> <a href="qrc:/aide/page09en.html">&#62;</a> </td>
+	</tr>
+</table>
+<HR />
+
+<p align="center"><h1><font color="red">TOOLS</font></h1></p> 
+
+
+<br />
+<p align="left"><h2>Sample tools</h2></p> 
+
+<p align="justify">When one or more samples is selected, the "tools" menu offers several features:
+<ul>
+	<li><b>Trim to end loop</b><br />
+	If a loop is defined for the selected sample, the software will cut the sound after the end of the loop (leaving a margin of 8 samples).
+	</li>
+	<li><b>Auto loop</b><br />
+	The software seeks a stable area of the sample and then artificially creates a loop. A sound segment is copied with a crossfade, so that two positions in the sound correspond exactly.
+	</li>
+	<li><b>Decrease whistling</b><br />
+	This tool is used to apply a filter to break all frequencies whose intensity is above a threshold. The threshold is defined by three parameters: the frequency at which the filter begins to act, the frequency at which the filter is complete, the stiffness that defines the evolution of the threshold between the two previous frequencies (linear or with a sudden drop).
+	</li>
+	<li><b>Remove blank at start</b><br />
+	Blank lying before the sample attack is eliminated.
+	</li>
+	<li><b>Brick-wall filter</b><br />
+	A cutoff frequency is required, then all sample frequencies lying beyond this value will be totally eliminated (frequency intensities set to 0 in the Fourier transform).
+	</li>
+	<li><b>Normalize volume</b><br />
+	The sample volume will be normalized to 90% of the maximum intensity.
+	</li>
+	<li><b>Balance adjustment</b><br />
+	If the sound is linked to another (stereo), the software can equalize the intensity of the sounds to adjust the balance.
+	</li>
+	<li><b>Transpose</b><br />
+	Requires a shift in semitones and then resamples the sound to change the pitch.
+	</li>
+</ul>
+</p>
+
+<p align="left"><h2>Instrument tools</h2></p>
+
+<p align="justify">When an instrument or one of its associated samples is selected, the "tools" menu enables the following features:
+<ul>
+	<li><b>Mixture creation...</b><br />
+	Specific to the organ, this tool allows the creation of a mixture from an existing instrument. An interface appears for specifying the different mixture divisions, and for each the list of the ranks. Types of possible ranks are very diverse, ranging from the octave to the 19th harmonic.<br />
+	To work, this tool relies on all samples associated to the selected instrument, the range defined for each sample and the corresponding attenuation. Samples have to be tune regardless the definition of the instrument (via the page of <a href="qrc:/aide/page05en.html">sample edition</a>) and the root key specified must not take into account membership in a stop (no transposition if the sound is a principal 4' for example).<br />
+	An option allows the automatic loop of created samples, another sets the creation interval of samples.
+	</li>
+</ul>
+<p align="center"><img src="qrc:/aide/outil3 en.png" /></p>
+<p align="justify">
+<ul>
+	<li><b>Ondulating detuning</b><br />
+	This feature slightly detunes the instrument notes, so as to create a undulating effect. The intensity of the effect is adjustable.
+	</li>
+	<li><b>Division duplication</b><br />
+	This action has for effect the duplication of all divisions of an instrument. For example, if a sample linked to an instrument has a keyrange of 36-38, the software duplicates this division so as to have 3 times this linked sample for the keyranges 36-36, 37-37 and 38-38. It makes then possible to thoroughly edit each sample parameter for each different note, instead of editing whole divisions with the same parameters.
+	</li>
+	<li><b>Global setting</b><br />
+	L'outil de paramétrage global permet de modifier un paramètre de tous les sons liés à un instrument simultanément. Le graphique représente l'intensité de la modification, la première valeur à gauche correspondant à la modification appliquée au son le plus grave de l'instrument, et la dernière valeur à droite correspondant à la modification appliquée au son le plus aigü de l'instrument. Il est possible d'éditer la courbe manuellement grâce à la souris, ou d'utiliser une loi linéaire, exponentielle, ou une génération aléatoire (en modifiant le motif). Le paramètre à modifier est à indiquer dans "Paramètre", et le type de modification est à renseigner dans "Modification" :
+	The global setting tool allows the edition of a parameter for all samples linked to an instrument simultaneously. The graph represents the modification intensity, the first value on the left corresponding to the change applied to the lowest sample of the instrument, and the last value on the right corresponding to the change applied to the highest sample of the instrument. It is possible to manually edit the curve using the mouse, or use a linear, exponential, or a random generation (by changing the pattern). The parameter to be modified is chosen in "Parameter", and the modification type is chosen in "Modification":
+	<ul>
+		<li><b>Addition</b><br />
+		The modifier is added to the value of the selected parameter.
+		</li>
+		<li><b>Multiplication</b><br />
+		The modifier is multiplied with the value of the selected parameter.
+		</li>
+		<li><b>Replacement</b><br />
+		The modifier replaces the value of the selected parameter.
+		</li>
+	</ul>
+	</li>
+</ul>
+</p>
+<p align="center"><img src="qrc:/aide/outil1 en.png" /></p>
+<p align="justify">
+<ul>
+	<li><b>Automatic divisioning</b><br />
+	The software automatically determines the keyranges of samples linked to an instrument, in order to optimize their use in the keyrange 0-128.
+	</li>
+	<li><b>Sound spatialization</b><br />
+	This feature spatializes sounds according to their pitch, which can be useful for a piano for example (bass and treble left to right). The bars in the graph represent each a string or pipe, having a length in relation to the pitch (the shortest bar corresponding to the highest note and the longest bar corresponding to the lowest note). Each note is thus positioned in the space, the far left corresponding to a sound coming from the left and the extreme right corresponding to a sound coming from the right. Several patterns can be selected:
+	<ul>
+		<li><b>Ascending</b><br />
+		Trebles are in the left side, basses are in the right side.
+		</li>
+		<li><b>Hollow</b><br />
+		Basses are at both extremities, trebles are centered.
+		</li>
+		<li><b>Descending</b><br />
+		Basses are in the left side, trebles are in the right side.
+		</li>
+		<li><b>Spike</b><br />
+		Trebles are at both extremities, basses are centered.<br />
+		</li>
+	</ul>
+	Other options are available such as the number of pattern repetitions (divisions number), the intensity of the effect (spreading), the filling of a division (filling), the offset left - right if the spreading is not 100% (offset) or inversions. The graph is updated every time a setting changes for a better visualization. 
+	</li>
+</ul>
+</p>
+
+<p align="center"><img src="qrc:/aide/outil2 en.png" /></p>
+
+<p align="left"><h2>Sf2 tools</h2></p>
+<p align="justify">
+<ul>
+	<li><b>Remove unused elements</b><br />
+	All samples and instruments being used by no instrument or preset are automatically deleted.
+	</li>
+	<li><b>Adjust minimal attenuation</b><br />
+	The software determines the minimal attenuation of all samples linked to instruments, and modifies all attenuations so that the minimum attenuation matches the one specified by the user.
+	</li>
+</ul>
+</p>
+
+<HR />
+<table>
+	<tr>
+		<td width=10% align="left"> <a href="qrc:/aide/page07en.html">&#60;</a> </td>
+		<td width=80% align="center"> <a href="qrc:/aide/help.html">start page</a> </td>
+		<td width=10% align="right"> <a href="qrc:/aide/page09en.html">&#62;</a> </td>
+	</tr>
+</table>

@@ -1,0 +1,88 @@
+/***************************************************************************
+**                                                                        **
+**  Polyphone, a soundfont editor                                         **
+**  Copyright (C) 2013 Davy Triponney                                     **
+**                                                                        **
+**  This program is free software: you can redistribute it and/or modify  **
+**  it under the terms of the GNU General Public License as published by  **
+**  the Free Software Foundation, either version 3 of the License, or     **
+**  (at your option) any later version.                                   **
+**                                                                        **
+**  This program is distributed in the hope that it will be useful,       **
+**  but WITHOUT ANY WARRANTY; without even the implied warranty of        **
+**  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the         **
+**  GNU General Public License for more details.                          **
+**                                                                        **
+**  You should have received a copy of the GNU General Public License     **
+**  along with this program.  If not, see http://www.gnu.org/licenses/.   **
+**                                                                        **
+****************************************************************************
+**           Author: Davy Triponney                                       **
+**  Website/Contact: http://www.polyphone.fr/                             **
+**             Date: 01.01.2013                                           **
+****************************************************************************/
+
+#include "dialog_list.h"
+#include "ui_dialog_list.h"
+#include "mainwindow.h"
+
+DialogList::DialogList(QWidget *parent) :
+    QDialog(parent),
+    ui(new Ui::DialogList)
+{
+    ui->setupUi(this);
+}
+
+DialogList::~DialogList()
+{
+    delete ui;
+}
+
+void DialogList::showDialog(EltID idSrc)
+{
+    if (idSrc.typeElement != elementInst && idSrc.typeElement != elementSmpl)
+        return;
+    // Titre
+    ElementType element;
+    if (idSrc.typeElement == elementSmpl)
+    {
+        this->setWindowTitle(tr("Liste des instruments"));
+        element = elementInst;
+    }
+    else
+    {
+        this->setWindowTitle(tr("Liste des presets"));
+        element = elementPrst;
+    }
+    // Remplissage de la liste
+    this->ui->listWidget->clear();
+    this->ui->listWidget->scrollToTop();
+    EltID id = {element, idSrc.indexSf2, 0, 0, 0};
+    ListWidgetItem *item;
+    for (int i = 0; i < this->sf2->count(id); i++)
+    {
+        id.indexElt = i;
+        if (!this->sf2->get(id, champ_hidden).bValue)
+        {
+            item = new ListWidgetItem(this->sf2->getQstr(id, champ_name));
+            item->id = id;
+            this->ui->listWidget->addItem(item);
+        }
+    }
+    this->ui->listWidget->clearSelection();
+    // Affichage du dialogue
+    this->setWindowModality(Qt::ApplicationModal);
+    this->show();
+}
+
+void DialogList::accept()
+{
+    // élément sélectionné ?
+    if (this->ui->listWidget->selectedItems().count())
+    {
+        ListWidgetItem *item = dynamic_cast<ListWidgetItem *>(this->ui->listWidget->currentItem());
+        // Association de MainWindow
+        this->window->associer(item->id);
+    }
+    QDialog::accept();
+}
