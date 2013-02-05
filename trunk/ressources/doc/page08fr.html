@@ -1,0 +1,128 @@
+<table>
+	<tr>
+		<td width=10% align="left"> <a href="qrc:/aide/page07fr.html">&#60;</a> </td>
+		<td width=80% align="center"> <a href="qrc:/aide/aide.html">accueil</a> </td>
+		<td width=10% align="right"> <a href="qrc:/aide/page09fr.html">&#62;</a> </td>
+	</tr>
+</table>
+<HR />
+
+<p align="center"><h1><font color="red">OUTILS</font></h1></p> 
+
+
+<br />
+<p align="left"><h2>Outils sample</h2></p> 
+
+<p align="justify">Suite à la sélection d'un ou plusieurs son(s) dans l'arborescence, le menu "outils" propose plusieurs fonctionnalités :
+<ul>
+	<li><b>Ajuster à la fin de boucle</b><br />
+	Si une boucle est définie pour le son sélectionné, le logiciel coupera le son après la fin de la boucle (en laissant une marge de 8 échantillons).
+	</li>
+	<li><b>Bouclage automatique</b><br />
+	Le logiciel cherche une zone stable du son pour ensuite créer une boucle artificiellement. Un segment du son est recopié avec un crossfade, de manière à faire correspondre exactement 2 positions dans le son.
+	</li>
+	<li><b>Diminuer sifflements</b><br />
+	Cet outil permet d'appliquer un filtre qui cassera toutes les fréquences dont l'intensité est au-dessus d'un seuil. Le seuil est défini par 3 paramètres : la fréquence à partir de laquelle le filtre commence à agir, la fréquence à partir de laquelle le filtrage est complet, la raideur qui définit l'évolution du seuil entre les 2 précédentes fréquences (linéaire ou avec une chute brutale).
+	</li>
+	<li><b>Enlever blanc au départ</b><br />
+	Le blanc se trouvant avant l'attaque du son est éliminé.
+	</li>
+	<li><b>Filtre "mur de brique"</b><br />
+	Une fréquence de coupure est demandée, puis toutes les fréquences du son se trouvant au delà de cette valeur seront totalement éliminées (mise à 0 de fréquences dans la transformée de Fourier).
+	</li>
+	<li><b>Normaliser volume</b><br />
+	Le volume du son sera normalisé à 90% de l'intensité maximale.
+	</li>
+	<li><b>Réglage balance</b><br />
+	Si le son est lié à un autre (stéréo), le logiciel peut égaliser l'intensité des deux sons pour ajuster la balance.
+	</li>
+	<li><b>Transposer</b><br />
+	Demande un décalage en demi-tons puis rééchantillonne le son pour modifier la hauteur de note.
+	</li>
+</ul>
+</p>
+
+<p align="left"><h2>Outils instrument</h2></p>
+
+<p align="justify">Lorsqu'un instrument ou l'un de ses sons associé est sélectionné, le menu "outils" permet les fonctionnalités suivantes :
+<ul>
+	<li><b>Création mixture</b><br />
+	Spécifique à l'orgue, cet outil propose de créer une mixture à partir d'un instrument existant. Une interface s'ouvre permettant de spécifier les différentes divisions de la mixture, et pour chacune la liste des rangs la composant. Les types de rangs possibles sont très variés, allant de l'octave à la 19ème harmonique.<br />
+	Pour fonctionner, cet outil s'appuie sur tous les sons liés à un instrument, l'étendue définie pour chaque son ainsi que l'atténuation correspondante. Les sons devront être accordés en dehors de la définition de l'instrument (via la page d'édition des <a href="qrc:/aide/page05fr.html">sons</a>), et la note de base ne doit pas prendre en compte l'appartenance à un jeu (pas de transposition si le son est un principal 4' par exemple).<br />
+	Une option autorise le bouclage automatique des sons créés, une autre définit l'intervalle de création des sons.
+	</li>
+</ul>
+<p align="center"><img src="qrc:/aide/outil3.png" /></p>
+<p align="justify">
+<ul>
+	<li><b>Désaccordage ondulant</b><br />
+	Cette fonctionnalité permet de désaccorder légérement les notes d'un instrument, de manière à créer un effet ondulant. L'intensité de l'effet est ajustable.
+	</li>
+	<li><b>Duplication des divisions</b><br />
+	Cette action a pour effet de dupliquer toutes les divisions d'un instrument. Par exemple, si un son lié à un instrument a une étendue de note 36-38, le logiciel duplique cette division de manière à avoir 3 fois ce son lié pour les étendues 36-36, 37-37 et 38-38. Il sera possible par la suite de régler finement chaque paramètre du son lié pour chaque note différente, au lieu de paramètrer des divisions entière de manière identique.
+	</li>
+	<li><b>Paramétrage global</b><br />
+	L'outil de paramétrage global permet de modifier un paramètre de tous les sons liés à un instrument simultanément. Le graphique représente l'intensité de la modification, la première valeur à gauche correspondant à la modification appliquée au son le plus grave de l'instrument, et la dernière valeur à droite correspondant à la modification appliquée au son le plus aigü de l'instrument. Il est possible d'éditer la courbe manuellement grâce à la souris, ou d'utiliser une loi linéaire, exponentielle, ou une génération aléatoire (en modifiant le motif). Le paramètre à modifier est à indiquer dans "Paramètre", et le type de modification est à renseigner dans "Modification" :
+	<ul>
+		<li><b>Ajout</b><br />
+		Le modificateur sera ajouté à la valeur du paramètre choisi.
+		</li>
+		<li><b>Multiplication</b><br />
+		Le modificateur sera multiplié à la valeur du paramètre choisi.
+		</li>
+		<li><b>Remplacement</b><br />
+		Le modificateur sera remplacé par la valeur du paramètre choisi.
+		</li>
+	</ul>
+	</li>
+</ul>
+</p>
+<p align="center"><img src="qrc:/aide/outil1.png" /></p>
+<p align="justify">
+<ul>
+	<li><b>Répartition automatique</b><br />
+	Le logiciel détermine automatiquement les étendues des sons liés à un instrument, de manière à optimiser leur utilisation sur l'étendue de note 0-128.
+	</li>
+	<li><b>Spatialisation du son</b><br />
+	Cette fonctionalité permet de spatialiser les sons en fonction de leur hauteur de note, ce qui peut être utile pour un piano par exemple (les sons graves à gauche et les aigüs à droite). Les barres dans le graphique representent chacune une corde ou un tuyau, ayant une longueur en rapport avec le son émis (la barre la plus courte correspondant à la note la plus aigües et la barre la plus longue correspondant à la note la plus grave). Chaque note est ainsi positionnée dans l'espace, l'extrême gauche correspondant à un son provenant de la gauche, et l'extrême droite correspondant à un son provenant de la droite. Plusieurs motifs peuvent être choisis :
+	<ul>
+		<li><b>Ascendant</b><br />
+		Les aigüs se trouvent à gauche, les graves à droite.
+		</li>
+		<li><b>Creux</b><br />
+		Les graves se trouvent sur les extrémités, les aigüs au centre.
+		</li>
+		<li><b>Descendant</b><br />
+		Les graves se trouvent à gauche, les aigüs à droite.
+		</li>
+		<li><b>Pointe</b><br />
+		Les aigüs se trouvent sur les extrémités, les graves au centre.
+		</li>
+	</ul>
+	D'autres options sont disponibles comme le nombre de répétition du motif (nombre divisions), l'intensité de l'effet (étalement), l'occupation d'une division (occupation), l'offset gauche - droite si l'étalement n'est pas de 100% (offset), ou des renversements. Le graphique est mis à jour à chaque modification d'un paramètre pour une meilleure visualisation.
+	</li>
+</ul>
+</p>
+
+<p align="center"><img src="qrc:/aide/outil2.png" /></p>
+
+<p align="left"><h2>Outils sf2</h2></p>
+<p align="justify">
+<ul>
+	<li><b>Enlever les éléments non utilisés</b><br />
+	Tous les sons et instruments n'étant utilisés par aucun preset sont automatiquement supprimés.
+	</li>
+	<li><b>Régler atténuation minimale</b><br />
+	Le logiciel détermine l'atténuation minimale de tous les sons liés aux instruments, et modifie l'ensemble des atténuations pour que l'atténuation minimale corresponde à celle indiquée par l'utilisateur.
+	</li>
+</ul>
+</p>
+
+<HR />
+<table>
+	<tr>
+		<td width=10% align="left"> <a href="qrc:/aide/page07fr.html">&#60;</a> </td>
+		<td width=80% align="center"> <a href="qrc:/aide/aide.html">accueil</a> </td>
+		<td width=10% align="right"> <a href="qrc:/aide/page09fr.html">&#62;</a> </td>
+	</tr>
+</table>
