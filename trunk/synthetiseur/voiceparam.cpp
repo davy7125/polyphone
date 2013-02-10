@@ -35,6 +35,7 @@ VoiceParam::VoiceParam(Pile_sf2 *sf2, EltID id, VoiceParam *voiceParamTmp) : m_s
 
         this->pan               = 0;
         this->attenuation       = 0;
+        this->fixedVelocity     = -1;
         this->filterFreq        = 0;
         this->filterQ           = 0;
         // Enveloppe volume
@@ -109,21 +110,23 @@ VoiceParam::VoiceParam(Pile_sf2 *sf2, EltID id, VoiceParam *voiceParamTmp) : m_s
         // Paramétrage spécifique
         if (id.typeElement == elementInstSmpl)
         {
-            this->rootkey = this->get(champ_overridingRootKey, readWord, -1);
-            this->keynum = this->get(champ_keynum, readWord, -1);
-            this->loopStart = this->get(champ_startloopAddrsOffset, readShort, 0) +
+            this->rootkey       = this->get(champ_overridingRootKey, readWord, -1);
+            this->keynum        = this->get(champ_keynum, readWord, -1);
+            this->fixedVelocity = this->get(champ_velocity, readWord, -1);
+            this->loopStart     = this->get(champ_startloopAddrsOffset, readShort, 0) +
                     this->get(champ_startloopAddrsCoarseOffset, readShort, 0) * 32768;
-            this->loopEnd = this->get(champ_endloopAddrsOffset, readShort, 0) +
+            this->loopEnd       = this->get(champ_endloopAddrsOffset, readShort, 0) +
                     this->get(champ_endloopAddrsCoarseOffset, readShort, 0) * 32768;
-            this->loopMode = this->get(champ_sampleModes, readWord, 0);
+            this->loopMode      = this->get(champ_sampleModes, readWord, 0);
         }
         else
         {
-            this->rootkey = -1;
-            this->loopStart = 0;
-            this->loopEnd = 0;
-            this->keynum = -1;
-            this->loopMode = -1;
+            this->rootkey       = -1;
+            this->loopStart     = 0;
+            this->loopEnd       = 0;
+            this->keynum        = -1;
+            this->fixedVelocity = -1;
+            this->loopMode      = -1;
         }
     }
 
@@ -169,6 +172,8 @@ void VoiceParam::add(VoiceParam * voiceParamTmp)
         this->rootkey = voiceParamTmp->rootkey;
     if (voiceParamTmp->keynum != -1)
         this->keynum = voiceParamTmp->keynum;
+    if (voiceParamTmp->fixedVelocity != -1)
+        this->fixedVelocity = voiceParamTmp->fixedVelocity;
     this->loopStart         += voiceParamTmp->loopStart;
     this->loopEnd           += voiceParamTmp->loopEnd;
 }

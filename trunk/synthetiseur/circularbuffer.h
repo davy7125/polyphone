@@ -34,7 +34,7 @@ class CircularBuffer : public QIODevice
 
 public:
     CircularBuffer(quint32 bufferSize, quint32 avanceBuffer, QObject * parent = NULL);
-    ~CircularBuffer() {}
+    ~CircularBuffer();
     qint64 readData(char *data, qint64 maxlen);
     qint64 readData(char *data1, char *data2, qint64 maxlen);
 protected:
@@ -47,7 +47,9 @@ protected:
     virtual void generateData(qint64 nbData = 0) = 0;
 private:
     // Buffer et positions
-    QByteArray m_buffer, m_buffer2;
+    char * m_data;
+    char * m_data2;
+    quint32 m_bufferSize;
     qint64 m_avance;
     qint64 m_posEcriture, m_posLecture;
     qint64 m_currentBufferLength;

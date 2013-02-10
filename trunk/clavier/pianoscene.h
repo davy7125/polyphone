@@ -33,7 +33,7 @@ public:
     virtual void noteOff( const int note ) = 0;
 };
 
-class VPIANO_EXPORT PianoScene : public QGraphicsScene
+class PianoScene : public QGraphicsScene
 {
     Q_OBJECT
     
@@ -44,8 +44,6 @@ public:
                  QObject * parent = 0 );
     
     QSize sizeHint() const;
-    void setKeyboardMap( KeyboardMap* map ) { m_keybdMap = map; }
-    KeyboardMap* getKeyboardMap() const { return m_keybdMap; }
     PianoHandler* getPianoHandler() const { return m_handler; }
     void setPianoHandler(PianoHandler* handler) { m_handler = handler; }
     QColor getKeyPressedColor() const { return m_keyPressedColor; }
@@ -69,8 +67,6 @@ public:
     void allKeysOff();
     void keyOn( const int note );
     void keyOff( const int note );
-    bool getRawKeyboardMode() const { return m_rawkbd; }
-    void setRawKeyboardMode(const bool b);
     void useCustomNoteNames(const QStringList& names);
     void useStandardNoteNames();
     int getVelocity() { return m_velocity; }
@@ -86,14 +82,11 @@ protected:
     void keyOn( PianoKey* key );
     void keyOff( PianoKey* key );
     PianoKey* getKeyForPos( const QPointF& p ) const;
-    PianoKey* getPianoKey( const int key ) const;
     QString noteName(const int note);
 
     void mouseMoveEvent ( QGraphicsSceneMouseEvent * mouseEvent );
     void mousePressEvent ( QGraphicsSceneMouseEvent * mouseEvent );
     void mouseReleaseEvent ( QGraphicsSceneMouseEvent * mouseEvent );
-    void keyPressEvent ( QKeyEvent * keyEvent );
-    void keyReleaseEvent ( QKeyEvent * keyEvent );
 
 private:
     void hideOrShowKeys();
@@ -106,12 +99,10 @@ private:
     int m_transpose;
     bool m_showLabels;
     bool m_useFlats;
-    bool m_rawkbd;
     QColor m_keyPressedColor;
     bool m_mousePressed;
     int m_velocity;
     PianoHandler* m_handler;
-    KeyboardMap* m_keybdMap;
     QList<PianoKey*> m_keys;
     QList<KeyLabel*> m_labels;
     QStringList m_noteNames;

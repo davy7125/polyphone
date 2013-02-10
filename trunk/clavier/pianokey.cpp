@@ -22,15 +22,12 @@
 #include <QtGui/QPalette>
 #include <QtSvg/QSvgRenderer>
 
-static const QBrush blackBrush = QBrush(Qt::black);
-static const QBrush whiteBrush = QBrush(Qt::white);
-
 PianoKey::PianoKey(const QRectF &rect, const QBrush &brush, const int note)
     : QGraphicsRectItem(rect),
     m_pressed(false),
     m_brush(brush), 
     m_note(note),
-    m_black(brush == blackBrush)
+    m_black(brush == QBrush(Qt::black))
 {
     setAcceptedMouseButtons(Qt::NoButton);
 }
@@ -38,7 +35,7 @@ PianoKey::PianoKey(const QRectF &rect, const QBrush &brush, const int note)
 PianoKey::PianoKey(const QRectF &rect, const bool black, const int note)
     : QGraphicsRectItem(rect),
     m_pressed(false),
-    m_brush( black ? blackBrush : whiteBrush ),
+    m_brush( black ? QBrush(Qt::black) : QBrush(Qt::white) ),
     m_note(note),
     m_black(black)
 {

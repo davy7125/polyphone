@@ -43,7 +43,6 @@ Synth::Synth(Pile_sf2 *sf2, QObject *parent) :
 }
 Synth::~Synth()
 {
-    this->interruption();
 }
 
 // signal de lecture ou de fin
@@ -55,7 +54,7 @@ void Synth::play(int type, int idSf2, int idElt, int note, int velocity, VoicePa
         m_mutexVoices.lock();
         if (note == -1)
         {
-            // Arrêt lecture d'un sample
+            // Arret lecture d'un sample
             for (int i = m_listeVoix.size()-1; i >= 0; i--)
                 if (m_listeVoix.at(i)->getNote() < 0)
                     m_listeVoix.at(i)->release();
@@ -86,7 +85,7 @@ void Synth::play(int type, int idSf2, int idElt, int note, int velocity, VoicePa
             SFSampleLink typeLien = m_sf2->get(idSmpl, champ_sfSampleType).sfLinkValue;
             if (typeLien != monoSample && typeLien != RomMonoSample)
             {
-                // Smpl lié
+                // Smpl lie
                 EltID idSmpl2 = {elementSmpl, idSf2, m_sf2->get(idSmpl, champ_wSampleLink).wValue, 0, 0};
                 VoiceParam * voiceParam2 = new VoiceParam(m_sf2, idSmpl2, voiceParamTmp);
                 voiceParam2->volReleaseTime = 0.2;
@@ -102,17 +101,17 @@ void Synth::play(int type, int idSf2, int idElt, int note, int velocity, VoicePa
                     voiceParam1->pan = 50;
                     voiceParam2->pan = -50;
                 }
-                // Création voix 2
+                // Creation voix 2
                 voiceTmp2 = new Voice(m_sf2->getData(idSmpl2, champ_sampleData32),
                                              m_sf2->get(idSmpl2, champ_dwSampleRate).dwValue,
-                                             m_format.sampleRate(), -2, voiceParam2);
+                                             m_format.sampleRate(), -2, 127, voiceParam2);
             }
-            // Création voix 1
+            // Creation voix 1
             voiceTmp1 = new Voice(m_sf2->getData(idSmpl, champ_sampleData32),
                                          m_sf2->get(idSmpl, champ_dwSampleRate).dwValue,
-                                         m_format.sampleRate(), -1, voiceParam1);
+                                         m_format.sampleRate(), -1, 127, voiceParam1);
             connect(voiceTmp1, SIGNAL(currentPosChanged(int)), this, SLOT(emitCurrentPosChanged(int)));
-            // Création sinus
+            // Creation sinus
             VoiceParam *voiceParam3 = new VoiceParam(m_sf2, idSmpl);
             voiceParam3->volReleaseTime = 0.2;
             Voice *voiceTmp3 = new Voice(m_format.sampleRate(), voiceParam3);
@@ -129,12 +128,13 @@ void Synth::play(int type, int idSf2, int idElt, int note, int velocity, VoicePa
         else
         {
             EltID idSmpl = {elementSmpl, idSf2, idElt, 0, 0};
-            // Récupération des paramètres
+            // Recuperation des parametres
             VoiceParam * voiceParam = new VoiceParam(m_sf2, idSmpl, voiceParamTmp);
-            // Création voix
+            // Creation voix
             Voice * voiceTmp = new Voice(m_sf2->getData(idSmpl, champ_sampleData32),
                                          m_sf2->get(idSmpl, champ_dwSampleRate).dwValue,
-                                         m_format.sampleRate(), note, voiceParam);
+                                         m_format.sampleRate(), note, velocity,
+                                         voiceParam);
             m_mutexVoices.lock();
             m_listeVoix.append(voiceTmp);
             m_listeVoix.last()->setGain(this->m_gain);
@@ -142,7 +142,7 @@ void Synth::play(int type, int idSf2, int idElt, int note, int velocity, VoicePa
         }
         break;
     case 1:{ // instrument
-        // Parcours de tous les samples liés
+        // Parcours de tous les samples lies
         EltID idInstSmpl = {elementInstSmpl, idSf2, idElt, 0, 0};
         for (int i = 0; i < m_sf2->count(idInstSmpl); i++)
         {
@@ -166,7 +166,7 @@ void Synth::play(int type, int idSf2, int idElt, int note, int velocity, VoicePa
                 if (keyMin <= note     && keyMax >= note &&
                     velMin <= velocity && velMax >= velocity)
                 {
-                    // Récupération des paramètres
+                    // Recuperation des parametres
                     VoiceParam * voiceParam = new VoiceParam(m_sf2, idInstSmpl, voiceParamTmp);
                     // Lecture de l'instrument associé
                     this->play(0, idSf2, m_sf2->get(idInstSmpl, champ_sampleID).wValue,
@@ -177,7 +177,7 @@ void Synth::play(int type, int idSf2, int idElt, int note, int velocity, VoicePa
         }
         }break;
     case 2:{ // preset
-        // Parcours de tous les instruments liés
+        // Parcours de tous les instruments lies
         EltID idPrstInst = {elementPrstInst, idSf2, idElt, 0, 0};
         for (int i = 0; i < m_sf2->count(idPrstInst); i++)
         {
@@ -201,9 +201,9 @@ void Synth::play(int type, int idSf2, int idElt, int note, int velocity, VoicePa
                 if (keyMin <= note     && keyMax >= note &&
                     velMin <= velocity && velMax >= velocity)
                 {
-                    // Récupération des paramètres
+                    // Recuperation des parametres
                     VoiceParam * voiceParam = new VoiceParam(m_sf2, idPrstInst);
-                    // Lecture de l'instrument associé
+                    // Lecture de l'instrument associe
                     this->play(1, idSf2, m_sf2->get(idPrstInst, champ_instrument).wValue,
                                note, velocity, voiceParam);
                     delete voiceParam;
@@ -217,33 +217,33 @@ void Synth::play(int type, int idSf2, int idElt, int note, int velocity, VoicePa
 }
 void Synth::stop()
 {
-    // Arrêt demandé de toutes les voix
+    // Arret demande de toutes les voix
     m_mutexVoices.lock();
     for (int i = m_listeVoix.size()-1; i >= 0; i--)
         delete m_listeVoix.takeAt(i);
     m_mutexVoices.unlock();
-    // réinitialisation buffer
+    // reinitialisation buffer
     this->reinit();
 }
 
 void Synth::generateData(qint64 nbData)
 {
     //// GENERATION DES DONNEES ////
-    if (nbData == 0) return;
+    if (nbData <= 0) return;
+    // Nombre de valeurs à ajouter
     nbData = 4 * nbData / m_format.sampleSize() + 1; // division par (nb voix * octets) et 0 interdit
     if (!m_isJack)
     {
-        // Initialisation données à écrire
-        QByteArray baData;
-        baData.resize(nbData * 8); // 2 voix de 4 octets
-        baData.fill(0);
+        // Initialisation des donnees a ecrire
+        char data[nbData * 8]; // 2 voix de 4 octets
+        for (int i = 0; i < nbData * 8; i++)
+            data[i] = 0;
         // Fusion des voix
         m_mutexVoices.lock();
-        //qDebug() << "GENERATE DATA, nombre de voix:" << m_listeVoix.size() << "points demandes: " << nbData;
         QList<Voice *> listeVoice;
         for (int i = 0; i < m_listeVoix.size(); i++)
-            listeVoice.append(this->fusion(baData.data(), nbData * 8, m_listeVoix.at(i)));
-        // Suppression des voix terminées
+            listeVoice.append(this->fusion(data, nbData * 8, m_listeVoix.at(i)));
+        // Suppression des voix terminees
         for (int i = 0; i < listeVoice.size(); i++)
             this->endVoice(listeVoice.at(i));
         m_mutexVoices.unlock();
@@ -252,20 +252,21 @@ void Synth::generateData(qint64 nbData)
         if (m_format.sampleType() == QAudioFormat::UnSignedInt)
         {
             // Conversion signed => unsigned
-            const qint32 * data = (const qint32 *)baData.data();
-            quint32 * dataU = (quint32 *)baData.data();
-            for (int i = 0; i < baData.size()/4; i++)
-                dataU[i] = (qint64)data[i] + 2147483648LL;
+            const qint32 * data32 = (const qint32 *)data;
+            quint32 * dataU32 = (quint32 *)data;
+            for (int i = 0; i < nbData * 2; i++)
+                dataU32[i] = (qint64)data32[i] + 2147483648LL;
         }
         // adaptation bits par sample et endianness
-        baData = Sound::bpsConversion(baData, 32, m_format.sampleSize(),
-                                      m_format.byteOrder() == QAudioFormat::BigEndian);
+        char data2[nbData * m_format.sampleSize() / 4];
+        Sound::bpsConversion(data2, data, 8 * nbData, 32, m_format.sampleSize(),
+                             m_format.byteOrder() == QAudioFormat::BigEndian);
         //// ECRITURE SUR LE BUFFER ////
-        this->writeData(baData.constData(), baData.size());
+        this->writeData(data2, nbData * m_format.sampleSize() / 4);
     }
     else
     {
-        // Initialisation données à écrire
+        // Initialisation donnees a ecrire
         QByteArray baData1, baData2;
         baData1.resize(nbData * 4);
         baData2.resize(nbData * 4); // 2 voix de 4 octets
@@ -276,7 +277,7 @@ void Synth::generateData(qint64 nbData)
         QList<Voice *> listeVoice;
         for (int i = 0; i < m_listeVoix.size(); i++)
             listeVoice.append(this->fusion(baData1.data(), baData2.data(), nbData * 4, m_listeVoix.at(i)));
-        // Suppression des voix terminées
+        // Suppression des voix terminees
         for (int i = 0; i < listeVoice.size(); i++)
             this->endVoice(listeVoice.at(i));
         m_mutexVoices.unlock();
@@ -287,7 +288,7 @@ void Synth::generateData(qint64 nbData)
 Voice* Synth::fusion(char * data1, qint64 size, Voice * voice)
 {
     Voice * voiceRet = NULL;
-    // Récupération des données
+    // Recuperation des donnees
     char data[size/2];
     qint64 nbRead = voice->readData(data, size / 2); // passage mono
     if (nbRead < 0)
@@ -297,11 +298,11 @@ Voice* Synth::fusion(char * data1, qint64 size, Voice * voice)
     }
     if (nbRead != size / 2)
         qDebug() << "warning: synth asked" << size/2 << "samples and got" << nbRead;
-    // Ajout en séparant les voix
+    // Ajout en separant les voix
     double pan = (voice->getVoiceParam()->pan + 50) / 100; // entre 0 et 1
     qint32 * data1I = (qint32 *)data1;
     qint32 * dataI = (qint32 *)data;
-    // Ajout en séparant les voix (stéréo)
+    // Ajout en separant les voix (stereo)
     for (quint32 i = 0; i < nbRead / 4; i++)
     {
         data1I[2*i]   += pan        * dataI[i];
@@ -312,7 +313,7 @@ Voice* Synth::fusion(char * data1, qint64 size, Voice * voice)
 Voice* Synth::fusion(char * data1, char * data2, qint64 size, Voice * voice)
 {
     Voice * voiceRet = NULL;
-    // Récupération des données
+    // Recuperation des donnees
     char data[size];
     qint64 nbRead = voice->readData(data, size);
     if (nbRead < 0)
@@ -322,7 +323,7 @@ Voice* Synth::fusion(char * data1, char * data2, qint64 size, Voice * voice)
     }
     if (nbRead != size)
         qDebug() << "warning: synth asked" << size << "samples and got" << nbRead;
-    // Ajout en séparant les voix, conversion en float en même temps
+    // Ajout en separant les voix, conversion en float en meme temps
     double pan = (voice->getVoiceParam()->pan + 50) / 100; // entre 0 et 1
     float * data1F = (float *)data1;
     float * data2F = (float *)data2;
@@ -350,6 +351,8 @@ void Synth::endVoice(Voice * voice)
         }
     }
 }
+
+// Lecture d'un sample
 void Synth::setGain(double gain)
 {
     // Modification du gain
@@ -360,14 +363,12 @@ void Synth::setGain(double gain)
             m_listeVoix.at(i)->setGain(m_gain);
     m_mutexVoices.unlock();
 }
-
-// Lecture d'un sample
 void Synth::setGainSample(int gain)
 {
     // Modification du gain des samples
     m_mutexVoices.lock();
     m_gainSmpl = gain - 50;
-    // Mise à jour voix -1 et -2
+    // Mise a jour voix -1 et -2
     for (int i = 0; i < m_listeVoix.size(); i++)
         if (m_listeVoix.at(i)->getNote() == -1)
         {
@@ -380,14 +381,13 @@ void Synth::setGainSample(int gain)
             m_listeVoix.at(i)->setGain(m_gainSmpl);
     m_mutexVoices.unlock();
 }
-
 void Synth::setStereo(int isStereo, bool withMutex)
 {
     // Modification lecture mono ou stereo
     if (withMutex)
         m_mutexVoices.lock();
     m_isStereo = isStereo;
-    // Mise à jour voix -1 et -2
+    // Mise a jour voix -1 et -2
     Voice * voice1 = NULL;
     Voice * voice2 = NULL;
     for (int i = 0; i < m_listeVoix.size(); i++)
@@ -429,13 +429,12 @@ void Synth::setStereo(int isStereo, bool withMutex)
     if (withMutex)
         m_mutexVoices.unlock();
 }
-
 void Synth::setLoopEnabled(int isEnabled)
 {
     // Modification lecture en boucle ou non
     m_mutexVoices.lock();
     m_isLoopEnabled = isEnabled;
-    // Mise à jour voix -1 et -2
+    // Mise a jour voix -1 et -2
     Voice * voice1 = NULL;
     Voice * voice2 = NULL;
     for (int i = 0; i < m_listeVoix.size(); i++)
@@ -451,14 +450,13 @@ void Synth::setLoopEnabled(int isEnabled)
         voice2->getVoiceParam()->loopMode = isEnabled;
     m_mutexVoices.unlock();
 }
-
 void Synth::setSinusEnabled(int isEnabled, bool withMutex)
 {
     // Modification lecture avec sinus non
     if (withMutex)
         m_mutexVoices.lock();
     m_isSinusEnabled = isEnabled;
-    // Mise à jour voix -3
+    // Mise a jour voix -3
     Voice * voice3 = NULL;
     for (int i = 0; i < m_listeVoix.size(); i++)
     {
@@ -475,10 +473,9 @@ void Synth::setSinusEnabled(int isEnabled, bool withMutex)
     if (withMutex)
         m_mutexVoices.unlock();
 }
-
 void Synth::setStartLoop(int startLoop)
 {
-    // mise à jour voix -1
+    // mise a jour voix -1
     m_mutexVoices.lock();
     Voice * voice = NULL;
     for (int i = 0; i < m_listeVoix.size(); i++)
@@ -492,7 +489,7 @@ void Synth::setStartLoop(int startLoop)
 }
 void Synth::setEndLoop(int endLoop)
 {
-    // mise à jour voix -1
+    // mise a jour voix -1
     m_mutexVoices.lock();
     Voice * voice = NULL;
     for (int i = 0; i < m_listeVoix.size(); i++)
@@ -506,7 +503,7 @@ void Synth::setEndLoop(int endLoop)
 }
 void Synth::setPitchCorrection(int correction)
 {
-    // mise à jour voix -1
+    // mise a jour voix -1
     m_mutexVoices.lock();
     Voice * voice = NULL;
     for (int i = 0; i < m_listeVoix.size(); i++)
@@ -520,7 +517,7 @@ void Synth::setPitchCorrection(int correction)
 }
 void Synth::setRootKey(int rootKey)
 {
-    // mise à jour voix -3 (sinus)
+    // mise a jour voix -3 (sinus)
     m_mutexVoices.lock();
     Voice * voice = NULL;
     for (int i = 0; i < m_listeVoix.size(); i++)
@@ -538,13 +535,13 @@ void Synth::emitCurrentPosChanged(int pos)
     this->currentPosChanged(pos);
 }
 
-// Boucle déclenchant la génération de données
+// Boucle declenchant la generation de donnees
 void Synth::start()
 {
     m_mutexInterrupt.lock();
     m_interrupt = false;
     m_mutexInterrupt.unlock();
-    // Surveillance du buffer après chaque lecture
+    // Surveillance du buffer apres chaque lecture
     while (!getInterrupt())
     {
         if (this->dataNeeded())
@@ -581,9 +578,9 @@ qint64 Synth::readData(char *data1, char *data2, qint64 maxlen)
 
 void Synth::setFormat(QAudioFormat format, bool isJack)
 {
-    // Mutex inutile : pas de génération de données lors de l'appel à setFormat
+    // Mutex inutile : pas de generation de donnees lors de l'appel a setFormat
     m_format = format;
     m_isJack = isJack;
-    // Réinitialisation
+    // Reinitialisation
     this->stop();
 }

@@ -46,6 +46,7 @@ public:
     int loopMode;
     // ATTENUATION, BALANCE
     double attenuation, pan;
+    int fixedVelocity;
     // ENVELOPPE VOLUME
     double volDelayTime, volAttackTime, volHoldTime, volDecayTime, volReleaseTime;
     qint32 volKeynumToHold, volKeynumToDecay;

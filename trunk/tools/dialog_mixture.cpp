@@ -20,7 +20,7 @@
 **           Author: Davy Triponney                                       **
 **  Website/Contact: http://www.polyphone.fr/                             **
 **             Date: 01.01.2013                                           **
-****************************************************************************/
+***************************************************************************/
 
 #include "dialog_mixture.h"
 #include "ui_dialog_mixture.h"

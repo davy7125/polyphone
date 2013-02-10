@@ -29,8 +29,8 @@
 #include "RtMidi.h"
 #include <QEvent>
 
-// Evenements
 
+// Evenements
 class NoteEvent : public QEvent
 {
 public:
@@ -50,12 +50,19 @@ class PianoKeybdCustom : public PianoKeybd
 {
     Q_OBJECT
 public:
+    enum KeyboardType
+    {
+        KEYBOARD_5_OCTAVES,
+        KEYBOARD_6_OCTAVES,
+        KEYBOARD_128_NOTES
+    };
     PianoKeybdCustom(QWidget * parent);
     ~PianoKeybdCustom();
     // Méthodes publiques
     QStringList getPortNames();
     void openMidiPort(int val);
     void changeKey(int key, int vel);
+    void setKeyboardType(KeyboardType type);
 signals:
     void keyChanged(int note, int vel);
 protected:

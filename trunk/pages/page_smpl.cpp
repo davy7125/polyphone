@@ -20,7 +20,7 @@
 **           Author: Davy Triponney                                       **
 **  Website/Contact: http://www.polyphone.fr/                             **
 **             Date: 01.01.2013                                           **
-****************************************************************************/
+***************************************************************************/
 
 #include "page_smpl.h"
 #include "ui_page_smpl.h"
@@ -48,7 +48,6 @@ Page_Smpl::Page_Smpl(QWidget *parent) :
     // Couleur de fond du graphe Fourier
     this->ui->grapheFourier->setBackgroundColor(this->palette().background().color());
 }
-
 Page_Smpl::~Page_Smpl()
 {
     delete ui;
@@ -59,26 +58,32 @@ void Page_Smpl::afficher()
     // Préparation de l'affichage
     preparation = true;
     EltID id = this->tree->getID(0);
+    // Remplissage des informations
     DWORD dwSmplRate = this->sf2->get(id, champ_dwSampleRate).dwValue;
     char T[50];
     sprintf(T, "%lu", dwSmplRate);
     this->ui->comboSampleRate->setCurrentIndex(this->ui->comboSampleRate->findText(T));
-    // Remplissage du graphe et initialisation des données
-    QByteArray baData = this->sf2->getData(id, champ_sampleData16);
-    this->ui->graphe->setData(baData, dwSmplRate); // Prend du temps, thread séparé !!!
     qint32 posStart = this->sf2->get(id, champ_dwStartLoop).dwValue;
     qint32 posEnd = this->sf2->get(id, champ_dwEndLoop).dwValue;
-    this->ui->graphe->setStartLoop(posStart);
-    this->ui->graphe->setEndLoop(posEnd);
-    // Remplissage des informations
     DWORD dwTmp = this->sf2->get(id, champ_dwLength).dwValue;
     sprintf(T, "%lu - %.3fs", dwTmp, (double)dwTmp / dwSmplRate);
     this->ui->labelTaille->setText(T);
+    this->ui->spinStartLoop->blockSignals(true);
+    this->ui->spinEndLoop->blockSignals(true);
     this->ui->spinStartLoop->setMaximum(posEnd);
     this->ui->spinEndLoop->setMaximum(dwTmp);
     this->ui->spinEndLoop->setMinimum(posStart);
     this->ui->spinStartLoop->setValue(posStart);
     this->ui->spinEndLoop->setValue(posEnd);
+    this->ui->spinStartLoop->blockSignals(false);
+    this->ui->spinEndLoop->blockSignals(false);
+    // Remplissage du graphe
+    QByteArray baData = this->sf2->getData(id, champ_sampleData16);
+    this->ui->graphe->clearAll();
+    this->ui->graphe->setData(baData); // prend du temps
+    this->ui->graphe->setStartLoop(posStart, false);
+    this->ui->graphe->setEndLoop(posEnd, false);
+    this->ui->graphe->zoomDrag();
     if (this->ui->spinEndLoop->value() == this->ui->spinStartLoop->value())
     {
         this->ui->checkLectureBoucle->setEnabled(false);
@@ -182,9 +187,9 @@ void Page_Smpl::afficher()
         qStr.prepend(QString::fromUtf8(tr("<b>Sample lié aux instruments : </b>").toStdString().c_str()));
     this->ui->labelInst->setText(qStr);
     // Remplissage du graphe fourier
-    this->ui->grapheFourier->setData(baData, posStart, posEnd, dwSmplRate); // Prend du temps, thread séparé !!!
+    this->ui->grapheFourier->setData(baData, posStart, posEnd, dwSmplRate);
     // Basculement affichage
-    this->qStackedWidget->setCurrentWidget(this);
+    this->qStackedWidget->setCurrentWidget(this); // prend du temps
     preparation = false;
 }
 
@@ -1301,17 +1306,21 @@ Graphique::Graphique(QWidget * parent) : QCustomPlot(parent)
     graphPen.setColor(QColor(255, 0, 0));
     graphPen.setWidthF(2);
     this->graph(2)->setPen(graphPen);
-    // Graphe contenant le curseur de lecture
-    this->addGraph();
-    graphPen.setColor(QColor(255, 255, 255));
-    graphPen.setWidthF(1);
-    this->graph(3)->setPen(graphPen);
     // Graphe pour la ligne de zoom
     this->addGraph();
     graphPen.setColor(QColor(255, 255, 255));
     graphPen.setWidthF(1);
     graphPen.setStyle(Qt::DashLine);
+    this->graph(3)->setPen(graphPen);
+    // Graphes contenant l'overlay
+    this->addGraph();
+    graphPen.setColor(QColor(100, 255, 100, 150));
+    graphPen.setWidth(2);
+    graphPen.setStyle(Qt::DotLine);
     this->graph(4)->setPen(graphPen);
+    this->addGraph();
+    graphPen.setColor(QColor(255, 0, 0, 200));
+    this->graph(5)->setPen(graphPen);
     // Axes
     this->xAxis2->setRange(0, 1);
     this->yAxis2->setRange(0, 1);
@@ -1331,28 +1340,28 @@ Graphique::Graphique(QWidget * parent) : QCustomPlot(parent)
 }
 
 // Méthodes publiques
-void Graphique::setData(QByteArray baData, DWORD dwSmplRate)
+void Graphique::clearAll()
 {
-    // Réinitialisation du graphe
     this->graph(0)->clearData();
     this->graph(1)->clearData();
     this->graph(2)->clearData();
     this->graph(3)->clearData();
     this->graph(4)->clearData();
+    this->graph(5)->clearData();
+}
+void Graphique::setData(QByteArray baData)
+{
     // Ajout des données
-    this->dwSmplRate = dwSmplRate;
     DWORD size_x = baData.size() / 2;
-    this->sizeX = ((double)size_x - 1) / dwSmplRate;
+    this->sizeX = ((double)size_x - 1);
     qint16 * data = (qint16 *)baData.data();
     QVector<double> x(size_x), y(size_x);
-    for (unsigned long i=0; i < size_x; i++)
+    for (unsigned long i = 0; i < size_x; i++)
     {
-        x[i] = this->sizeX * i/((double)size_x - 1);
-        y[i] = (double)data[i]/32768; // normalisation entre -1 et 1
+        x[i] = i;
+        y[i] = (double)data[i] / 32768; // normalisation entre -1 et 1
     }
     this->graph(0)->setData(x, y);
-    this->zoomDrag();
-    this->replot();
 }
 void Graphique::linkSliderX(QScrollBar * qScrollX)
 {
@@ -1376,47 +1385,95 @@ void Graphique::setPosX(int posX)
         bFromExt = false;
     }
 }
-void Graphique::setStartLoop(int pos)
+void Graphique::setStartLoop(int pos, bool replot)
 {
-    this->graph(1)->clearData();
     if (pos >= 0)
     {
         QVector<double> x(2), y(2);
-        x[0] = (double)pos / dwSmplRate;
-        x[1] = (double)pos / dwSmplRate;
+        x[0] = pos;
+        x[1] = pos;
         y[0] = -1;
         y[1] = 1;
         this->graph(1)->setData(x, y);
     }
-    this->replot();
+    this->plotOverlay();
+    if (replot)
+        this->replot();
 }
-void Graphique::setEndLoop(int pos)
+void Graphique::setEndLoop(int pos, bool replot)
 {
-    this->graph(2)->clearData();
     if (pos >= 0)
     {
         QVector<double> x(2), y(2);
-        x[0] = (double)pos / dwSmplRate;
-        x[1] = (double)pos / dwSmplRate;
+        x[0] = pos;
+        x[1] = pos;
         y[0] = -1;
         y[1] = 1;
         this->graph(2)->setData(x, y);
     }
-    this->replot();
+    this->plotOverlay();
+    if (replot)
+        this->replot();
 }
 void Graphique::setCurrentSample(int pos)
 {
-    this->graph(3)->clearData();
-    if (pos >= 0)
+    m_currentPos = this->xAxis->coordToPixel(pos);
+    this->repaint();
+    this->update();
+}
+void Graphique::paintEvent(QPaintEvent *event)
+{
+    QCustomPlot::paintEvent(event);
+    // Ajout du trait de lecture
+    if (m_currentPos > 0)
     {
-        QVector<double> x(2), y(2);
-        x[0] = (double)pos / dwSmplRate;
-        x[1] = (double)pos / dwSmplRate;
-        y[0] = -1;
-        y[1] = 1;
-        this->graph(3)->setData(x, y);
+        QPainter painter(this);
+        QPen pen;
+        pen.setColor(QColor(255, 255, 255));
+        pen.setWidthF(1);
+        painter.setPen(pen);
+        painter.drawLine(QPointF(m_currentPos, -10000), QPointF(m_currentPos, 10000));
     }
+}
+void Graphique::zoomDrag()
+{
+    // Bornes des paramètres d'affichage
+    if (this->zoomX < 1)
+        this->zoomX = 1;
+    else if (this->zoomX > sizeX * 200)
+        this->zoomX = sizeX * 200;
+    if (this->zoomY < 1)
+        this->zoomY = 1;
+    else if (this->zoomY > 50)
+        this->zoomY = 50;
+    if (this->posX < 0)
+        this->posX = 0;
+    else if (this->posX > 1)
+        this->posX = 1;
+    if (this->posY < 0)
+        this->posY = 0;
+    else if (this->posY > 1)
+        this->posY = 1;
+    posY = 0.5; // blocage sur Y
+    // Application du drag et zoom
+    double etendueX = sizeX / zoomX;
+    double offsetX = (sizeX - etendueX) * posX;
+    this->xAxis->setRange(offsetX, offsetX + etendueX);
+    double etendueY = 2. / zoomY;
+    double offsetY = (2. - etendueY) * posY - 1;
+    this->yAxis->setRange(offsetY, offsetY + etendueY);
+    // Mise à jour
     this->replot();
+    // Envoi signal
+    if (!bFromExt && qScrollX)
+    {
+        // Mise à jour du scrollbar
+        double valMax = ((zoomX-1.)*sizeX) / 10000;
+        qScrollX->blockSignals(true);
+        qScrollX->setRange(0, valMax);
+        qScrollX->setValue(valMax*posX);
+        qScrollX->blockSignals(false);
+    }
 }
 
 // Méthodes privées
@@ -1457,49 +1514,8 @@ void Graphique::drag(QPoint point)
     // Mise à jour
     this->zoomDrag();
 }
-void Graphique::zoomDrag()
-{
-    // Bornes des paramètres d'affichage
-    if (this->zoomX < 1)
-        this->zoomX = 1;
-    else if (this->zoomX > sizeX * 200)
-        this->zoomX = sizeX * 200;
-    if (this->zoomY < 1)
-        this->zoomY = 1;
-    else if (this->zoomY > 50)
-        this->zoomY = 50;
-    if (this->posX < 0)
-        this->posX = 0;
-    else if (this->posX > 1)
-        this->posX = 1;
-    if (this->posY < 0)
-        this->posY = 0;
-    else if (this->posY > 1)
-        this->posY = 1;
-    posY = 0.5; // blocage sur Y
-    // Application du drag et zoom
-    double etendueX = sizeX / zoomX;
-    double offsetX = (sizeX - etendueX) * posX;
-    this->xAxis->setRange(offsetX, offsetX + etendueX);
-    double etendueY = 2 / zoomY;
-    double offsetY = (2 - etendueY) * posY - 1;
-    this->yAxis->setRange(offsetY, offsetY + etendueY);
-    // Mise à jour
-    this->replot();
-    // Envoi signal
-    if (!bFromExt && qScrollX)
-    {
-        // Mise à jour du scrollbar
-        int valMax = (zoomX-1.0)*5.0*sizeX;
-        qScrollX->blockSignals(true);
-        qScrollX->setRange(0, valMax);
-        qScrollX->setValue(valMax*posX);
-        qScrollX->blockSignals(false);
-    }
-}
 void Graphique::setZoomLine(double x1, double y1, double x2, double y2)
 {
-    this->graph(4)->clearData();
     if (x1 >= 0)
     {
         // Conversion
@@ -1508,11 +1524,43 @@ void Graphique::setZoomLine(double x1, double y1, double x2, double y2)
         x[1] = sizeX * (x2 + posX * (zoomX - 1)) / zoomX;
         y[0] = 2 * (y1 + posY * (zoomY - 1)) / zoomY - 1;
         y[1] = 2 * (y2 + posY * (zoomY - 1)) / zoomY - 1;
-        this->graph(4)->setData(x, y);
+        this->graph(3)->setData(x, y);
     }
+    else
+        this->graph(3)->clearData();
     this->replot();
 }
-
+void Graphique::plotOverlay()
+{
+    int sizeOverlay = 20;
+    qint32 posDebut = this->spinStart->value();
+    qint32 posFin = this->spinEnd->value();
+    if (posDebut > 0 && posFin > 0 && posDebut != posFin)
+    {
+        QVector<double> x1(2 * sizeOverlay), y1(2 * sizeOverlay),
+                x2(2 * sizeOverlay), y2(2 * sizeOverlay);
+        for (int i = 0; i < 2 * sizeOverlay; i++)
+        {
+            // Partie droite recopiée à gauche
+            x1[i]                       = posDebut - sizeOverlay + i;
+            x1[2 * sizeOverlay - i - 1] = posDebut + sizeOverlay - i;
+            y1[i]                       = this->graph(0)->data()->value(posFin - sizeOverlay + i).value;
+            y1[2 * sizeOverlay - i - 1] = this->graph(0)->data()->value(posFin + sizeOverlay - i).value;
+            // Partie gauche recopiée à droite
+            x2[i]                       = posFin - sizeOverlay + i;
+            x2[2 * sizeOverlay - i - 1] = posFin + sizeOverlay - i;
+            y2[i]                       = this->graph(0)->data()->value(posDebut - sizeOverlay + i).value;
+            y2[2 * sizeOverlay - i - 1] = this->graph(0)->data()->value(posDebut + sizeOverlay - i).value;
+        }
+        this->graph(4)->setData(x1, y1);
+        this->graph(5)->setData(x2, y2);
+    }
+    else
+    {
+        this->graph(4)->clearData();
+        this->graph(5)->clearData();
+    }
+}
 
 ///////////////////////////////////////////////////////////////////////
 ////////////////////////// GRAPHIQUE FOURIER //////////////////////////
@@ -1606,7 +1654,7 @@ void GraphiqueFourier::setPos(qint32 posStart, qint32 posEnd)
     QByteArray baData2 = baData.mid(posStart * 2, (posEnd - posStart) * 2);
     // Corrélation du signal de 20 à 20000Hz
     qint32 dMin;
-    QByteArray baCorrel = Sound::correlation(baData2, dwSmplRate, 16, 20, 20000, dMin);
+    QByteArray baCorrel = Sound::correlation(baData2.left(qMin(baData2.size(), 8000)), dwSmplRate, 16, 20, 20000, dMin);
     // Transformée de Fourier du signal
     unsigned long size = 0;
     Complex * cpxData = Sound::fromBaToComplex(baData2, 16, size);
@@ -1625,7 +1673,7 @@ void GraphiqueFourier::setPos(qint32 posStart, qint32 posEnd)
     delete fc_sortie_fft;
 
     // Recherche des corrélations minimales (= plus grandes similitudes)
-    quint32 * posMinCor = Sound::findMins(baCorrel, 32, 10, 0.9);
+    quint32 * posMinCor = Sound::findMins(baCorrel, 16, 10, 0.9);
 
     // Recherche des intensités maximales
     int nbPic = 50;
@@ -1645,7 +1693,6 @@ void GraphiqueFourier::setPos(qint32 posStart, qint32 posEnd)
         rep = iMin < posMaxFFT[numeroPic] && posMaxFFT[numeroPic] < iMax;
         if (!rep) numeroPic++;
     }
-
     double freq = 0;
     if (!rep)
     {

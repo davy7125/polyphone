@@ -20,7 +20,7 @@
 **           Author: Davy Triponney                                       **
 **  Website/Contact: http://www.polyphone.fr/                             **
 **             Date: 01.01.2013                                           **
-****************************************************************************/
+***************************************************************************/
 
 #ifndef PAGE_SMPL_H
 #define PAGE_SMPL_H
@@ -117,7 +117,7 @@ public:
                 if (!modifiedFlag)
                 {
                     // Modification start loop
-                    int val = this->dwSmplRate * sizeX / zoomX * \
+                    int val = sizeX / zoomX * \
                             ((zoomX - 1)*posX + xInit);
                     if (this->spinStart && this->spinEnd)
                     {
@@ -140,7 +140,7 @@ public:
                 if (!modifiedFlag)
                 {
                     // Modification end loop
-                    int val = this->dwSmplRate * sizeX / zoomX * \
+                    int val = sizeX / zoomX * \
                             ((zoomX - 1)*posX + xInit);
                     if (this->spinStart && this->spinEnd)
                     {
@@ -191,21 +191,25 @@ public:
         return false;
     }
     // Méthodes publiques
-    void setData(QByteArray baData, DWORD dwSmplRate);
+    void clearAll();
+    void setData(QByteArray baData);
     void linkSliderX(QScrollBar * qScrollX);
     void linkSpinBoxes(QSpinBox * spinStart, QSpinBox * spinEnd);
+    void zoomDrag();
+
 public slots:
     void setPosX(int posX);
-    void setStartLoop(int pos);
-    void setEndLoop(int pos);
+    void setStartLoop(int pos, bool replot = true);
+    void setEndLoop(int pos, bool replot = true);
     void setCurrentSample(int pos);
 signals:
     void startLoopChanged();
     void endLoopChanged();
+protected:
+    void paintEvent(QPaintEvent *event);
 private:
     // Attributs privés
     double sizeX;
-    DWORD dwSmplRate;
     bool zoomFlag;
     bool dragFlag;
     bool modifiedFlag;
@@ -217,11 +221,12 @@ private:
     QScrollBar * qScrollX;
     QSpinBox * spinStart;
     QSpinBox * spinEnd;
+    int m_currentPos;
     // Méthodes privées
     void zoom(QPoint point);
     void drag(QPoint point);
-    void zoomDrag();
     void setZoomLine(double x1, double y1, double x2, double y2);
+    void plotOverlay();
 };
 
 class GraphiqueFourier : public QCustomPlot

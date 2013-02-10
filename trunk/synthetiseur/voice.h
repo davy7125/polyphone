@@ -25,7 +25,7 @@
 #ifndef VOICE_H
 #define VOICE_H
 
-#define BUFFER_VOICE_SIZE     45000
+#define BUFFER_VOICE_SIZE     90000
 #define BUFFER_VOICE_AVANCE   20000
 
 #include "sound.h"
@@ -39,7 +39,7 @@ class Voice : public CircularBuffer
 
 public:
     Voice(QByteArray baData, DWORD smplRate, DWORD audioSmplRate, int note,
-          VoiceParam *voiceParam, QObject *parent = NULL);
+          int velocity, VoiceParam *voiceParam, QObject *parent = NULL);
     Voice(DWORD audioSmplRate, VoiceParam *voiceParam, QObject *parent = NULL);
     ~Voice();
     qint64 readData(char *data, qint64 maxlen);
@@ -58,6 +58,7 @@ private:
     QByteArray m_baData;
     DWORD m_smplRate, m_audioSmplRate;
     int m_note;
+    int m_velocity;
     double m_gain;
     VoiceParam * m_voiceParam;
     // Lecture du sample
@@ -68,11 +69,11 @@ private:
     // enveloppe
     EnveloppeVol m_enveloppeVol;
     EnveloppeVol m_enveloppeMod;
-    // paramètres pour le resampling
-    double m_d;
-    qint32 m_valPrec;
+    // retenues pour le resampling
+    double m_deltaPos;
+    qint32 m_valPrec, m_valBase;
     // Méthodes privées
-    QByteArray takeData(qint64 nbRead, bool &end);
+    bool takeData(qint32 *data, qint64 nbRead);
 };
 
 #endif // VOICE_H
