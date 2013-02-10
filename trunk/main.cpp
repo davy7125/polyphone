@@ -20,25 +20,44 @@
 **           Author: Davy Triponney                                       **
 **  Website/Contact: http://www.polyphone.fr/                             **
 **             Date: 01.01.2013                                           **
-****************************************************************************/
+***************************************************************************/
 
 #include <QApplication>
-#include <QDesktopWidget>
 #include "mainwindow.h"
+
+//void crashingMessageHandler(QtMsgType type, const char *msg)
+//{
+//    switch (type) {
+//    case QtDebugMsg:
+//        qDebug() << "Debug:" << msg;
+//        break;
+//    case QtWarningMsg:
+//        qDebug() << "Warning:" << msg;
+//        break;
+//    case QtCriticalMsg:
+//        qDebug() << "Critical:" << msg;
+//        break;
+//    case QtFatalMsg:
+//        qDebug() << "Fatal:" << msg;
+//        __asm("int3");
+//        abort();
+//    }
+//}
 
 int main(int argc, char *argv[])
 {
-    // Nom de l'application
-    QCoreApplication::setApplicationName("Polyphone");
-    QCoreApplication::setOrganizationName("polyphone");
     // Traduction si nécessaire
     QTranslator translator;
     translator.load(":/traductions/polyphone_en"); // Doit se placer avant QApplication
     QApplication a(argc, argv);
+    // Nom de l'application
+    a.setApplicationName("Polyphone");
+    a.setOrganizationName("polyphone");
     QString locale = QLocale::system().name().section('_', 0, 0);
     if (locale.compare("fr") != 0)
         a.installTranslator(&translator);
     // Affichage fenêtre
+//    qInstallMsgHandler(crashingMessageHandler);
     MainWindow w;
     w.show();
     // Centrage de la fenêtre (doit être après w.show)

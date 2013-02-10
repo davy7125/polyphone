@@ -25,7 +25,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "sound.h"
-#include <QDesktopWidget>
 #include <QFileDialog>
 #include <QInputDialog>
 
@@ -53,7 +52,6 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent, Qt::Window | Qt::W
     connect(this, SIGNAL(initAudio(int)), this->audioDevice, SLOT(initAudio(int)));
     this->audioDevice->moveToThread(&this->audioThread);
     this->audioThread.start();
-    qDebug() << "type" << this->configuration.getAudioType() << "index" << this->configuration.getAudioIndex();
     if (this->configuration.getAudioType() == 0)
         this->setAudioEngine(this->configuration.getAudioIndex());
     else
@@ -92,26 +90,28 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent, Qt::Window | Qt::W
         this->page_prst->setModVisible(0);
     }
     // Clavier
+    this->keyboard = new PianoKeybdCustom(this);
+    QHBoxLayout * layout = (QHBoxLayout*)this->ui->ensembleKeyboard->layout();
+    layout->insertWidget(2, this->keyboard);
     this->setKeyboardType(this->configuration.getKeyboardType());
-    this->ui->keyboard->setFrameStyle(0);
     // Déplacement dans la barre de menu
     this->ui->toolBar->setContentsMargins(0, 0, 0, 0);
     this->ui->ensembleKeyboard->setMaximumHeight(this->ui->toolBar->height()+5);
-    this->ui->keyboard->setMaximumHeight(this->ui->toolBar->height()+5);
+    this->keyboard->setMaximumHeight(this->ui->toolBar->height()+5);
     this->ui->velocityButton->setMaximumHeight(this->ui->toolBar->height()+5);
     this->ui->toolBar->addWidget(this->ui->ensembleKeyboard);
     this->showKeyboard(false);
     this->ui->velocityButton->setValue(this->configuration.getKeyboardVelocity());
     // Ouverture port midi et connexions
-    this->ui->keyboard->openMidiPort(this->configuration.getNumPortMidi());
-    connect(this->ui->keyboard, SIGNAL(keyChanged(int,int)), this, SLOT(noteChanged(int,int)));
-    connect(this->ui->keyboard, SIGNAL(noteOn(int)), this, SLOT(noteOn(int)));
-    connect(this->ui->keyboard, SIGNAL(noteOff(int)), this, SLOT(noteOff(int)));
+    this->keyboard->openMidiPort(this->configuration.getNumPortMidi());
+    connect(this->keyboard, SIGNAL(keyChanged(int,int)), this, SLOT(noteChanged(int,int)));
+    connect(this->keyboard, SIGNAL(noteOn(int)), this, SLOT(noteOn(int)));
+    connect(this->keyboard, SIGNAL(noteOff(int)), this, SLOT(noteOff(int)));
     connect(this->page_smpl, SIGNAL(noteChanged(int,int)), this, SLOT(noteChanged(int,int)));
 }
 MainWindow::~MainWindow()
 {
-    this->synth->interruption();
+    //this->synth->interruption();
     delete this->sf2;
     delete this->page_inst;
     delete this->page_prst;
@@ -124,6 +124,7 @@ MainWindow::~MainWindow()
     this->synthThread.wait(200);
     delete this->synth;
     delete this->audioDevice;
+    delete this->keyboard;
     delete ui;
 }
 
@@ -470,11 +471,7 @@ void MainWindow::setKeyboardType(int val)
     {
     case 1:
         // Clavier 5 octaves
-        this->ui->keyboard->setNumOctaves(6);
-        this->ui->keyboard->setBaseOctave(3);
-        this->ui->keyboard->setMaxNote(96);
-        this->ui->keyboard->setMaximumWidth(360);
-        this->ui->keyboard->setMinimumWidth(360);
+        this->keyboard->setKeyboardType(PianoKeybdCustom::KEYBOARD_5_OCTAVES);
         this->ui->action5_octaves->setChecked(true);
         if (ui->stackedWidget->currentWidget() == this->page_inst ||
             ui->stackedWidget->currentWidget() == this->page_prst)
@@ -482,11 +479,7 @@ void MainWindow::setKeyboardType(int val)
         break;
     case 2:
         // Clavier 6 octaves
-        this->ui->keyboard->setNumOctaves(7);
-        this->ui->keyboard->setBaseOctave(3);
-        this->ui->keyboard->setMaxNote(108);
-        this->ui->keyboard->setMaximumWidth(400);
-        this->ui->keyboard->setMinimumWidth(400);
+        this->keyboard->setKeyboardType(PianoKeybdCustom::KEYBOARD_6_OCTAVES);
         this->ui->action6_octaves->setChecked(true);
         if (ui->stackedWidget->currentWidget() == this->page_inst ||
             ui->stackedWidget->currentWidget() == this->page_prst)
@@ -494,11 +487,7 @@ void MainWindow::setKeyboardType(int val)
         break;
     case 3:
         // Clavier 128 notes
-        this->ui->keyboard->setNumOctaves(11);
-        this->ui->keyboard->setBaseOctave(0);
-        this->ui->keyboard->setMaxNote(127);
-        this->ui->keyboard->setMaximumWidth(650);
-        this->ui->keyboard->setMinimumWidth(650);
+        this->keyboard->setKeyboardType(PianoKeybdCustom::KEYBOARD_128_NOTES);
         this->ui->action128_notes->setChecked(true);
         if (ui->stackedWidget->currentWidget() == this->page_inst ||
             ui->stackedWidget->currentWidget() == this->page_prst)
@@ -2306,7 +2295,7 @@ void MainWindow::setAudioEngine(int audioEngine)
 }
 void MainWindow::showKeyboard(bool val)
 {
-    this->ui->keyboard->setVisible(val);
+    this->keyboard->setVisible(val);
     this->ui->velocityButton->setVisible(val);
     this->ui->labelNote->setVisible(val);
     this->ui->labelVelocite->setVisible(val);
@@ -2321,11 +2310,11 @@ void MainWindow::setVelocity(int val)
 }
 QStringList MainWindow::getListMidi()
 {
-    return this->ui->keyboard->getPortNames();
+    return this->keyboard->getPortNames();
 }
 void MainWindow::openMidiPort(int val)
 {
-    this->ui->keyboard->openMidiPort(val);
+    this->keyboard->openMidiPort(val);
 }
 void MainWindow::noteOn(int key)    {this->noteChanged(key, this->configuration.getKeyboardVelocity());}
 void MainWindow::noteOff(int key)   {this->noteChanged(key, 0);}

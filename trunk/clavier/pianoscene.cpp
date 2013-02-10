@@ -17,7 +17,6 @@
 */
 
 #include "pianoscene.h"
-#include "rawkeybdapp.h"
 #include <QtGui/QApplication>
 #include <QtGui/QPalette>
 #include <QtGui/QGraphicsSceneMouseEvent>
@@ -38,7 +37,6 @@ PianoScene::PianoScene ( const int baseOctave,
     m_transpose( 0 ),
     m_showLabels( false ),
     m_useFlats( false ),
-    m_rawkbd( false ),
     m_keyPressedColor( keyPressedColor ),
     m_mousePressed( false ),
     m_velocity( 100 ),
@@ -208,41 +206,6 @@ void PianoScene::mouseReleaseEvent ( QGraphicsSceneMouseEvent * mouseEvent )
     mouseEvent->ignore();
 }
 
-PianoKey* PianoScene::getPianoKey( const int key ) const
-{
-    if (m_keybdMap != NULL) {
-        KeyboardMap::ConstIterator it = m_keybdMap->constFind(key);
-        if ((it != m_keybdMap->constEnd()) && (it.key() == key)) {
-            int note = it.value();
-            if (note < m_keys.size())
-                return m_keys[note];
-        }
-    }
-    return NULL;
-}
-
-void PianoScene::keyPressEvent ( QKeyEvent * keyEvent )
-{
-    if ( !m_rawkbd && !keyEvent->isAutoRepeat() ) { // ignore auto-repeats
-        PianoKey* key = getPianoKey(keyEvent->key());
-        if (key != NULL) {
-            keyOn(key);
-        }
-    }
-    keyEvent->accept();
-}
-
-void PianoScene::keyReleaseEvent ( QKeyEvent * keyEvent )
-{
-    if ( !m_rawkbd && !keyEvent->isAutoRepeat() ) { // ignore auto-repeats
-        PianoKey* key = getPianoKey(keyEvent->key());
-        if (key != NULL) {
-            keyOff(key);
-        }
-    }   
-    keyEvent->accept();
-}
-
 void PianoScene::allKeysOff()
 {
     QList<PianoKey*>::ConstIterator it; 
@@ -352,15 +315,6 @@ void PianoScene::setTranspose(const int transpose)
         m_transpose = transpose;
         hideOrShowKeys();
         refreshLabels();
-    }
-}
-
-void PianoScene::setRawKeyboardMode(bool b)
-{
-    if (m_rawkbd != b) {
-        m_rawkbd = b;
-        RawKeybdApp* rapp = dynamic_cast<RawKeybdApp*>(qApp);
-        if (rapp != NULL) rapp->setRawKbdEnable(m_rawkbd);
     }
 }
 

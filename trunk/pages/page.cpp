@@ -20,7 +20,7 @@
 **           Author: Davy Triponney                                       **
 **  Website/Contact: http://www.polyphone.fr/                             **
 **             Date: 01.01.2013                                           **
-****************************************************************************/
+***************************************************************************/
 
 #include "page.h"
 #include "pile_sf2.h"
@@ -328,7 +328,8 @@ genAmountType Page::getValue(QString texte, WORD champ, bool &ok)
             genAmount.ranges.byHi = limit(val2, 0, 127);
         }
         }; break;
-    case champ_initialAttenuation: genAmount.wAmount = (WORD)limit(10*texte.toDouble(&ok), 0, 1440);
+    case champ_initialAttenuation: case champ_sustainVolEnv:
+        genAmount.wAmount = (WORD)limit(10*texte.toDouble(&ok), 0, 1440);
         break;
     case champ_pan: genAmount.shAmount = (short)limit(10*texte.toDouble(&ok), -500, 500);
         break;
@@ -365,7 +366,7 @@ genAmountType Page::getValue(QString texte, WORD champ, bool &ok)
     case champ_attackVolEnv: case champ_decayVolEnv: case champ_releaseVolEnv:
         genAmount.shAmount = (short)limit(1200*log2(texte.toDouble(&ok)), -12000, 8000);
         break;
-    case champ_sustainVolEnv: case champ_sustainModEnv:
+    case champ_sustainModEnv:
         genAmount.wAmount = (WORD)limit(10*texte.toDouble(&ok), 0, 1000);
         break;
     case champ_keynumToModEnvHold: case champ_keynumToVolEnvHold:

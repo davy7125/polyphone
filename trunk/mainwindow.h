@@ -41,6 +41,7 @@
 #include "page_prst.h"
 #include "audiodevice.h"
 #include "synth.h"
+#include "pianokeybdcustom.h"
 
 namespace Ui
 {
@@ -148,6 +149,8 @@ private:
     Config configuration;
     DialogHelp help;
     DialogList dialList;
+    PianoKeybdCustom * keyboard;
+
     // Méthodes privées
     void updateTitle();
     int sauvegarder(int indexSf2, bool saveAs);

@@ -62,7 +62,6 @@
         <file alias="page07fr.html">ressources/doc/page07fr.html</file>
         <file alias="page08fr.html">ressources/doc/page08fr.html</file>
         <file alias="page09fr.html">ressources/doc/page09fr.html</file>
-        <file alias="pref.png">ressources/doc/pref.png</file>
         <file alias="outil1.png">ressources/doc/outil1.png</file>
         <file alias="outil2.png">ressources/doc/outil2.png</file>
         <file alias="page01en.html">ressources/doc/page01en.html</file>
@@ -85,7 +84,10 @@
         <file alias="page2 en.png">ressources/doc/page 2 en.png</file>
         <file alias="page3 en.png">ressources/doc/page 3 en.png</file>
         <file alias="page4 en.png">ressources/doc/page 4 en.png</file>
-        <file alias="pref en.png">ressources/doc/pref en.png</file>
+        <file alias="pref 1.png">ressources/doc/pref 1.png</file>
+        <file alias="pref 1 en.png">ressources/doc/pref 1 en.png</file>
+        <file alias="pref 2.png">ressources/doc/pref 2.png</file>
+        <file alias="pref 2 en.png">ressources/doc/pref 2 en.png</file>
     </qresource>
     <qresource prefix="/traductions">
         <file alias="polyphone_en.qm">ressources/traductions/polyphone_en.qm</file>

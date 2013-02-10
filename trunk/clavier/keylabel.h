@@ -19,10 +19,9 @@
 #ifndef KEYLABEL_H
 #define KEYLABEL_H
 
-#include "pianodefs.h"
 #include <QtGui/QGraphicsTextItem>
 
-class VPIANO_EXPORT KeyLabel : public QGraphicsTextItem
+class KeyLabel : public QGraphicsTextItem
 {
 public:
     KeyLabel(QGraphicsItem *parent = 0);

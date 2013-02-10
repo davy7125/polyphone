@@ -20,7 +20,7 @@
 **           Author: Davy Triponney                                       **
 **  Website/Contact: http://www.polyphone.fr/                             **
 **             Date: 01.01.2013                                           **
-****************************************************************************/
+***************************************************************************/
 
 #ifndef SOUND_H
 #define SOUND_H
@@ -55,6 +55,7 @@ public:
     static QByteArray EQ(QByteArray baData, DWORD dwSmplRate, WORD wBps, int i1, int i2, int i3, int i4, int i5,
                          int i6, int i7, int i8, int i9, int i10);
     static QByteArray bpsConversion(QByteArray baData, WORD wBpsInit, WORD wBpsFinal, bool bigEndian = false);
+    static void bpsConversion(char *cDest, const char *cFrom, qint32 size, WORD wBpsInit, WORD wBpsFinal, bool bigEndian = false);
     static QByteArray from2MonoTo1Stereo(QByteArray baData1, QByteArray baData2, WORD wBps, bool bigEndian = false);
     static Complex * fromBaToComplex(QByteArray baData, WORD wBps, unsigned long &size);
     static QByteArray fromComplexToBa(Complex * cpxData, int size, WORD wBps);
