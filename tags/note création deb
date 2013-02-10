@@ -1,3 +1,0 @@
-# Commande pour création un package
-dpkg-deb --build polyphone-0.1
-
