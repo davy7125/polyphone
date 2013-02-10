@@ -47,7 +47,7 @@ public:
     ~Config();
     // accesseurs
     QString getFile(int num){if (num < 5 && num >= 0) return files[num]; else return "";}
-    bool getRam()               {return ram;}
+    bool getRam()               {return false/*ram*/;}
     int  getAudioIndex()        {return audioIndex;}
     bool getAfficheMod()        {return afficheMod;}
     bool getAfficheToolBar()    {return afficheToolBar;}

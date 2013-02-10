@@ -13,16 +13,16 @@
 <br />
 <p align="justify">Les préférences du logiciel sont accessibles en allant dans la barre de menu, "Édition", "Préférences".</p>
 
-<p align="center"><img src="qrc:/aide/pref.png" /></p>
+<p align="center"><img src="qrc:/aide/pref 1.png" /></p>
 
 <p align="justify">Cette fenêtre de dialogue permet la modification des paramètres suivants :
 
 <ul>
-	<li><b>Gestion RAM</b><br />
-	Ce paramètre définit le comportement du logiciel lors de l'ouverture de fichiers .sf2 ou audio : il est possible de tout charger toutes les données dans la RAM de l'ordinateur ou de ne charger que le minimum. Dans le 1er cas le chargement peut être plus long, mais l'ensemble des traitements sera plus rapides par la suite.
-	</li>
 	<li><b>Sortie audio</b><br />
-	Modifie la sortie audio utilisée lors de la lecture d'un son.
+	Modifie la sortie audio utilisée lors de la lecture d'un son. Les drivers Jack et Asio (ce dernier pour Windows seulement) peuvent être choisis.
+	</li>
+	<li><b>Entrée midi</b><br />
+	Modifie l'entrée midi pilotant le clavier virtuel.
 	</li>
 	<li><b>Import fichiers wav : ajuster à la boucle</b><br />
 	Lors de l'import d'un fichier wav, les données situées après la fin de la boucle sont automatiquement enlevées.
@@ -31,8 +31,11 @@
 	Lors de l'import d'un fichier wav, le blanc situé avant le début de l'attaque est automatiquement enlevé.
 	</li>
 </ul>
-Note : un redémarrage du logiciel sera nécessaire pour la prise en compte de certains paramètres.<br />
 </p>
+
+<p align="center"><img src="qrc:/aide/pref 2.png" /></p>
+
+<p> Cet onglet ne contient pour l'instant qu'un seul élément modifiant le volume du synthétiseur (instrument et preset).</p>
 
 
 <HR />

@@ -25,7 +25,7 @@
 #include "voice.h"
 
 // Constructeur, destructeur
-Voice::Voice(QByteArray baData, DWORD smplRate, DWORD audioSmplRate, int note,
+Voice::Voice(QByteArray baData, DWORD smplRate, DWORD audioSmplRate, int note, int velocity,
              VoiceParam * voiceParam, QObject * parent) :
     CircularBuffer(BUFFER_VOICE_SIZE, BUFFER_VOICE_AVANCE, parent),
     m_sinusOsc(audioSmplRate),
@@ -33,6 +33,7 @@ Voice::Voice(QByteArray baData, DWORD smplRate, DWORD audioSmplRate, int note,
     m_smplRate(smplRate),
     m_audioSmplRate(audioSmplRate),
     m_note(note),
+    m_velocity(velocity),
     m_voiceParam(voiceParam),
     m_currentSmplPos(0),
     m_time(0),
@@ -40,15 +41,21 @@ Voice::Voice(QByteArray baData, DWORD smplRate, DWORD audioSmplRate, int note,
     m_finished(false),
     m_enveloppeVol(voiceParam, audioSmplRate, 0),
     m_enveloppeMod(voiceParam, audioSmplRate, 1),
-    m_d(0)
-{}
+    m_deltaPos(0),
+    m_valPrec(0)
+{
+    // Initialisation resampling
+    takeData(&m_valBase, 1);
+}
 
+// Sinus
 Voice::Voice(DWORD audioSmplRate, VoiceParam *voiceParam, QObject *parent) :
     CircularBuffer(BUFFER_VOICE_SIZE, BUFFER_VOICE_AVANCE, parent),
     m_sinusOsc(audioSmplRate),
     m_smplRate(audioSmplRate),
     m_audioSmplRate(audioSmplRate),
     m_note(-3),
+    m_velocity(127),
     m_voiceParam(voiceParam),
     m_currentSmplPos(0),
     m_time(0),
@@ -56,8 +63,12 @@ Voice::Voice(DWORD audioSmplRate, VoiceParam *voiceParam, QObject *parent) :
     m_finished(false),
     m_enveloppeVol(voiceParam, audioSmplRate, 0),
     m_enveloppeMod(voiceParam, audioSmplRate, 1),
-    m_d(0)
-{}
+    m_deltaPos(0),
+    m_valPrec(0)
+{
+    // Initialisation resampling
+    takeData(&m_valBase, 1);
+}
 
 Voice::~Voice()
 {
@@ -76,72 +87,68 @@ qint64 Voice::readData(char *data, qint64 maxlen)
 
 void Voice::generateData(qint64 nbData)
 {
-    if (nbData == 0) return;
-    QByteArray baData;
+    if (nbData <= 0) return;
+    qint32 data[nbData];
     bool bRet = true;
     if (m_note == -3)
     {
         // Génération d'un sinus
         double f = 440.0 * pow(2.0, (double)(m_voiceParam->rootkey - 69) / 12);
-        baData.resize(nbData);
-        m_sinusOsc.getSinus(baData.data(), baData.size(), f);
+        m_sinusOsc.getSinus((char*)data, 4*nbData, f);
     }
     else
     {
-        // Nombre d'échantillons à mettre dans le buffer
-        int nbFinal = nbData / 4 + 100; // division par 4 car 1 voix et 4 octets par echantillon et une petite marge
-        // Nombre d'échantillons à lire au départ
-        int nbInit = 0;
-        // Fréquence d'échantillonnage initiale fictive (pour accordage)
-        double tuneMod = 0;
-        int avanceModEnv = 0;
-        if (m_voiceParam->modEnvToPitch != 0)
-        {
-            // Prise en compte de la modulation
-            qint32 valTmp[1];
-            valTmp[0] = m_voiceParam->modEnvToPitch;
-            m_enveloppeMod.applyEnveloppe(valTmp, 1, m_release, m_note, m_voiceParam, 0);
-            tuneMod = (double)valTmp[0] / 100;
-            avanceModEnv++;
-        }
-        double bpsInit = 0;
-        if (m_note < 0)
-            bpsInit = (double)m_smplRate * pow(2, ((m_voiceParam->getPitchDifference(m_voiceParam->rootkey) + tuneMod) / 12));
-        else
-            bpsInit = (double)m_smplRate * pow(2, ((m_voiceParam->getPitchDifference(this->m_note) + tuneMod) / 12));
+        /// ENVELOPPE DE MODULATION ///
 
-        if (bpsInit != m_audioSmplRate)
-            nbInit = qMax(100.0, (nbFinal * bpsInit) / m_audioSmplRate);
+        qint32 dataMod[nbData+20];///////
+        m_enveloppeMod.applyEnveloppe(dataMod, nbData, m_release, m_note, 127, m_voiceParam, 0, 1000);
+
+        // MODULATION DU PITCH
+        double deltaPitchFixe = 0;
+        if (m_note < 0)
+            deltaPitchFixe = 12 * log2((double)m_audioSmplRate / m_smplRate) +
+                    m_voiceParam->getPitchDifference(m_voiceParam->rootkey);
         else
-            nbInit = qMax(100, nbFinal);
-        //// CONSTITUTION DES DONNEES ////
-        baData = takeData(nbInit, bRet);
-        // Resampling
-        if (bpsInit != m_audioSmplRate)
+            deltaPitchFixe = -12 * log2((double)m_audioSmplRate / m_smplRate) +
+                    m_voiceParam->getPitchDifference(this->m_note);
+        double modPitch[nbData+19];////////////
+        for (int i = 0; i < nbData; i++)
+            modPitch[i+1] = deltaPitchFixe + (double)(dataMod[i] * m_voiceParam->modEnvToPitch) / 100000;
+
+        // Conversion en distance cumulée entre points
+        modPitch[0] = m_deltaPos + 1;
+        for (int i = 1; i <= nbData; i++)
+            modPitch[i] = pow(2, modPitch[i] / 12) + modPitch[i-1];
+        m_deltaPos = modPitch[nbData];
+        m_deltaPos = m_deltaPos - ceil(m_deltaPos);
+
+        // Constitution des données
+        int nbDataTmp = ceil(modPitch[nbData]) - 1;
+        qint32 dataTmp[nbDataTmp + 20];////////////
+        dataTmp[0] = m_valPrec;
+        dataTmp[1] = m_valBase;
+        bRet = takeData(&dataTmp[2], nbDataTmp);
+        m_valPrec = dataTmp[nbDataTmp];
+        m_valBase = dataTmp[nbDataTmp + 1];
+        double pos;
+        qint32 val1, val2;
+        for (int i = 0; i < nbData; i++)
         {
-            // Récupération des dernières valeurs avant resampling
-            qint32 * data = (qint32*)baData.data();
-            qint32 fin = data[baData.size()/4-1];
-            baData = Sound::resampleMono(baData, bpsInit, m_audioSmplRate, 32, m_valPrec, m_d);
-            // Mise à jour des valeurs précédentes
-            m_valPrec = fin;
-        }
-        // Avance dans la modulation
-        if (m_voiceParam->modEnvToPitch != 0)
-        {
-            QByteArray baTmp;
-            baTmp.resize(baData.size() - 4);
-            qint32 * dataTmp = (qint32 *)baTmp.data();
-            m_enveloppeMod.applyEnveloppe(dataTmp, baData.size()/4, m_release, m_note, m_voiceParam, 0);
+            pos = modPitch[i];
+            val1 = dataTmp[(int)floor(pos)];
+            val2 = dataTmp[(int)ceil(pos)];
+            pos -= floor(pos);
+            data[i] = (1. - pos) * val1 + pos * val2;
         }
     }
-    // Application de l'enveloppe
-    qint32 * data = (qint32 *)baData.data();
+    // Application de l'enveloppe de volume
     bool bRet2 = false;
     if (m_note < 0)
-        bRet2 = m_enveloppeVol.applyEnveloppe(data, baData.size()/4, m_release, m_voiceParam->rootkey, m_voiceParam, m_gain);
+        bRet2 = m_enveloppeVol.applyEnveloppe(data, nbData, m_release, m_voiceParam->rootkey,
+                                              m_velocity, m_voiceParam, m_gain);
     else
-        bRet2 = m_enveloppeVol.applyEnveloppe(data, baData.size()/4, m_release, m_note, m_voiceParam, m_gain);
+        bRet2 = m_enveloppeVol.applyEnveloppe(data, nbData, m_release, m_note,
+                                              m_velocity, m_voiceParam, m_gain);
     if (bRet2 || !bRet)
     {
         m_finished = true;
@@ -150,17 +157,16 @@ void Voice::generateData(qint64 nbData)
     else
         emit(currentPosChanged(m_currentSmplPos));
     //// ECRITURE SUR LE BUFFER ////
-    this->writeData(baData.constData(), baData.size());
+    this->writeData((char *)data, nbData * 4);
 }
 
-QByteArray Voice::takeData(qint64 nbRead, bool &end)
+bool Voice::takeData(qint32 * data, qint64 nbRead)
 {
-    const char * data = m_baData.constData();
-    QByteArray baDataRet;
-    baDataRet.resize(nbRead * 4);
-    baDataRet.fill(0);
-    char * dataRet = baDataRet.data();
-    if (m_voiceParam->loopMode && m_voiceParam->loopStart != m_voiceParam->loopEnd)
+    bool ok = true;
+    const qint32 * dataSmpl = (qint32 *)m_baData.constData();
+    if ((m_voiceParam->loopMode == 1 || m_voiceParam->loopMode == 2 ||
+         (m_voiceParam->loopMode == 3 && !m_release)) &&
+            m_voiceParam->loopStart != m_voiceParam->loopEnd)
     {
         // Boucle
         if (m_currentSmplPos >= m_voiceParam->loopEnd) m_currentSmplPos = m_voiceParam->loopStart;
@@ -168,31 +174,30 @@ QByteArray Voice::takeData(qint64 nbRead, bool &end)
         while (nbRead - total > 0)
         {
             const qint64 chunk = qMin(m_voiceParam->loopEnd - m_currentSmplPos, nbRead - total);
-            memcpy(dataRet + 4 * total, data + 4 * m_currentSmplPos, 4 * chunk);
+            memcpy(&data[total], &dataSmpl[m_currentSmplPos], chunk * sizeof(qint32));
             m_currentSmplPos += chunk;
             if (m_currentSmplPos >= m_voiceParam->loopEnd) m_currentSmplPos = m_voiceParam->loopStart;
             total += chunk;
         }
-        end = true;
     }
     else
     {
         // Pas de boucle
         if (m_baData.size()/4 - m_currentSmplPos < nbRead)
         {
-            baDataRet.fill(0);
-            memcpy(dataRet, data + 4 * m_currentSmplPos, m_baData.size() - 4 * m_currentSmplPos);
+            memcpy(data, &dataSmpl[m_currentSmplPos], m_baData.size() - 4 * m_currentSmplPos);
+            for (int i = m_baData.size()/4 - m_currentSmplPos; i < nbRead; i++)
+                data[i] = 0;
             m_currentSmplPos = m_baData.size() / 4;
-            end = false;
+            ok = false;
         }
         else
         {
-            memcpy(dataRet, data + 4 * m_currentSmplPos, 4 * nbRead);
+            memcpy(data, &dataSmpl[m_currentSmplPos], nbRead * sizeof(qint32));
             m_currentSmplPos += nbRead;
-            end = true;
         }
     }
-    return baDataRet;
+    return ok;
 }
 
 void Voice::setGain(double gain)

@@ -1,6 +1,0 @@
-COMPILATION
-
-Run "make" in the root directory to compile the project. An executable file "polyphone" should then appear if everything went right.
-Please note that QT libraries are required, along with QT Multimedia Kit.
-
-If you are using QT Creator, the project may be opened via its .pro file present in the root directory.

@@ -23,15 +23,27 @@
 ***************************************************************************/
 
 #include "circularbuffer.h"
+#include <QDebug>
 
 CircularBuffer::CircularBuffer(quint32 bufferSize, quint32 avanceBuffer, QObject *parent) :
     QIODevice(parent),
+    m_data(NULL),
+    m_data2(NULL),
+    m_bufferSize(bufferSize),
     m_avance(avanceBuffer)
 {
     this->reinit();
-    m_buffer.resize(bufferSize);
-    m_buffer2.resize(bufferSize);
+    if (m_bufferSize)
+    {
+        m_data = new char [m_bufferSize];
+        m_data2 = new char [m_bufferSize];
+    }
     this->open(QIODevice::ReadOnly);
+}
+CircularBuffer::~CircularBuffer()
+{
+    delete [] m_data;
+    delete [] m_data2;
 }
 
 qint64 CircularBuffer::readData(char *data, qint64 maxlen)
@@ -41,9 +53,9 @@ qint64 CircularBuffer::readData(char *data, qint64 maxlen)
     qint64 total = 0;
     while (writeLen - total > 0)
     {
-        const qint64 chunk = qMin((m_buffer.size() - m_posLecture), writeLen - total);
-        memcpy(data + total, m_buffer.constData() + m_posLecture, chunk);
-        m_posLecture = (m_posLecture + chunk) % m_buffer.size();
+        const qint64 chunk = qMin((m_bufferSize - m_posLecture), writeLen - total);
+        memcpy(&data[total], &m_data[m_posLecture], chunk);
+        m_posLecture = (m_posLecture + chunk) % m_bufferSize;
         total += chunk;
     }
     m_currentBufferLength -= total;
@@ -58,10 +70,10 @@ qint64 CircularBuffer::readData(char *data1, char *data2, qint64 maxlen)
     qint64 total = 0;
     while (writeLen - total > 0)
     {
-        const qint64 chunk = qMin((m_buffer.size() - m_posLecture), writeLen - total);
-        memcpy(data1 + total, m_buffer.constData() + m_posLecture, chunk);
-        memcpy(data2 + total, m_buffer2.constData() + m_posLecture, chunk);
-        m_posLecture = (m_posLecture + chunk) % m_buffer.size();
+        const qint64 chunk = qMin((m_bufferSize - m_posLecture), writeLen - total);
+        memcpy(&data1[total], &m_data[m_posLecture], chunk);
+        memcpy(&data2[total], &m_data2[m_posLecture], chunk);
+        m_posLecture = (m_posLecture + chunk) % m_bufferSize;
         total += chunk;
     }
     m_currentBufferLength -= total;
@@ -72,15 +84,15 @@ qint64 CircularBuffer::readData(char *data1, char *data2, qint64 maxlen)
 qint64 CircularBuffer::writeData(const char *data, qint64 len)
 {
     m_mutex.lock();
-    if ((m_posEcriture + len) > m_buffer.size())
+    qint64 total = 0;
+    while (len - total > 0)
     {
-        qint64 firstData = m_buffer.size() - m_posEcriture;
-        memcpy(m_buffer.data() + m_posEcriture, data, firstData);
-        memcpy(m_buffer.data(), data + firstData, len - firstData);
+        const qint64 chunk = qMin(m_bufferSize - m_posEcriture, len - total);
+        memcpy(&m_data[m_posEcriture], &data[total], chunk);
+        m_posEcriture += chunk;
+        if (m_posEcriture >= m_bufferSize) m_posEcriture = 0;
+        total += chunk;
     }
-    else
-        memcpy(m_buffer.data() + m_posEcriture, data, len);
-    m_posEcriture = (m_posEcriture + len) % m_buffer.size();
     m_currentBufferLength += len;
     m_mutex.unlock();
     return len;
@@ -89,20 +101,16 @@ qint64 CircularBuffer::writeData(const char *data, qint64 len)
 qint64 CircularBuffer::writeData(const char *data1, const char *data2, qint64 len)
 {
     m_mutex.lock();
-    if ((m_posEcriture + len) > m_buffer.size())
+    qint64 total = 0;
+    while (len - total > 0)
     {
-        qint64 firstData = m_buffer.size() - m_posEcriture;
-        memcpy(m_buffer.data() + m_posEcriture, data1, firstData);
-        memcpy(m_buffer.data(), data1 + firstData, len - firstData);
-        memcpy(m_buffer2.data() + m_posEcriture, data2, firstData);
-        memcpy(m_buffer2.data(), data2 + firstData, len - firstData);
+        const qint64 chunk = qMin(m_bufferSize - m_posEcriture, len - total);
+        memcpy(&m_data[m_posEcriture], &data1[total], chunk);
+        memcpy(&m_data2[m_posEcriture], &data2[total], chunk);
+        m_posEcriture += chunk;
+        if (m_posEcriture >= m_bufferSize) m_posEcriture = 0;
+        total += chunk;
     }
-    else
-    {
-        memcpy(m_buffer.data() + m_posEcriture, data1, len);
-        memcpy(m_buffer2.data() + m_posEcriture, data2, len);
-    }
-    m_posEcriture = (m_posEcriture + len) % m_buffer.size();
     m_currentBufferLength += len;
     m_mutex.unlock();
     return len;

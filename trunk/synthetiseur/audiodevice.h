@@ -29,7 +29,7 @@
 #include <jack/jack.h>
 #include <jack/session.h>
 #include "synth.h"
-#ifdef WIN32
+#ifdef PA_USE_ASIO
 #include "portaudio.h"
 #endif
 
@@ -66,7 +66,7 @@ private:
     void closeConnections();
     // Serveur son, sortie standard
     QAudioOutput * m_audioOutput;
-#ifdef WIN32
+#ifdef PA_USE_ASIO
     // Serveur son, asio
     int m_isAsioRunning;
     PaStream * m_asioStream;

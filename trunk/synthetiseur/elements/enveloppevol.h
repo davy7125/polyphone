@@ -32,7 +32,8 @@ class EnveloppeVol
 {
 public:
     EnveloppeVol(VoiceParam * voiceParam, quint32 sampleRate, bool isMod);
-    bool applyEnveloppe(qint32 * data, quint32 size, bool release, int note, VoiceParam * voiceParam, double gain);
+    bool applyEnveloppe(qint32 * data, quint32 size, bool release, int note, int velocity, VoiceParam * voiceParam,
+                        double gain, qint32 valFixe = 0);
 private:
     enum EnveloppePhase
     {
@@ -59,6 +60,7 @@ private:
     double m_noteToHold, m_noteToDecay;
     // Volume
     double m_volume;
+    int m_fixedVelocity;
     // Echantillonnage
     quint32 m_sampleRate;
 };

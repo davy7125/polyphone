@@ -19,11 +19,10 @@
 #ifndef PIANOKEY_H_
 #define PIANOKEY_H_
 
-#include "pianodefs.h"
 #include <QtGui/QGraphicsRectItem>
 #include <QtGui/QBrush>
 
-class VPIANO_EXPORT PianoKey : public QGraphicsRectItem
+class PianoKey : public QGraphicsRectItem
 {
 public:
     PianoKey(QGraphicsItem * parent = 0 ) 

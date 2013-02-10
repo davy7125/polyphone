@@ -44,7 +44,7 @@ Config::Config(QWidget *parent) : QDialog(parent), ui(new Ui::Config)
     QDir dir(dirPath);
     if (!dir.exists())
         dir.mkdir(dirPath);
-    this->confFile = dirPath + QDir::separator() + "conf";
+    this->confFile = dirPath + "/conf";
     // CHARGEMENT DE LA CONFIGURATION
     this->load();
     // initialisation des élements
@@ -56,22 +56,22 @@ Config::Config(QWidget *parent) : QDialog(parent), ui(new Ui::Config)
     this->ui->comboAudioOuput->addItem("-");
     foreach (const QAudioDeviceInfo &deviceInfo, QAudioDeviceInfo::availableDevices(QAudio::AudioOutput))
         this->ui->comboAudioOuput->addItem(deviceInfo.deviceName());
-#ifdef WIN32
-    bool isWindows = true;
+#ifdef PA_USE_ASIO
+    bool isAsioEnabled = true;
 #else
-    bool isWindows = false;
+    bool isAsioEnabled = false;
 #endif
     this->ui->comboAudioOuput->addItem("Jack");
-    if (isWindows)
+    if (isAsioEnabled)
         this->ui->comboAudioOuput->addItem("Asio");
     int nbItem = this->ui->comboAudioOuput->count();
     if (this->audioType == 0)
     {
-        if (this->audioIndex < nbItem - 2 - isWindows && this->audioIndex >= 0)
+        if (this->audioIndex < nbItem - 2 - isAsioEnabled && this->audioIndex >= 0)
             this->ui->comboAudioOuput->setCurrentIndex(this->audioIndex+1);
         else
         {
-            if (nbItem > 2 + isWindows)
+            if (nbItem > 2 + isAsioEnabled)
                 this->ui->comboAudioOuput->setCurrentIndex(1);
             else
                 this->ui->comboAudioOuput->setCurrentIndex(0);
@@ -80,12 +80,16 @@ Config::Config(QWidget *parent) : QDialog(parent), ui(new Ui::Config)
     else if (this->audioType == -1)
             this->ui->comboAudioOuput->setCurrentIndex(0);
     else if (this->audioType == -2)
-        this->ui->comboAudioOuput->setCurrentIndex(nbItem - 1 - isWindows); // Jack
+        this->ui->comboAudioOuput->setCurrentIndex(nbItem - 1 - isAsioEnabled); // Jack
     else if (this->audioType == -3)
         this->ui->comboAudioOuput->setCurrentIndex(nbItem - 1); // Asio
     this->ui->checkBoucle->setChecked(this->wavAutoLoop);
     this->ui->checkBlanc->setChecked(this->wavRemoveBlank);
     // Paramètres synthétiseur
+    if (this->synthGain < 0)
+        this->synthGain = 0;
+    else if (this->synthGain > 50)
+        this->synthGain = 50;
     this->ui->sliderGain->setValue(this->synthGain);
     this->ui->labelGain->setNum(this->synthGain);
     this->loaded = 1;
@@ -96,7 +100,8 @@ Config::Config(QWidget *parent) : QDialog(parent), ui(new Ui::Config)
         this->keyboardVelocity = 0;
     else if (this->keyboardVelocity > 127)
         this->keyboardVelocity = 127;
-
+    this->ui->comboRam->setVisible(false); // Temporaire : tout charger dans la ram n'apporte rien pour l'instant
+    this->ui->label_2->setVisible(false);
 }
 Config::~Config()
 {
@@ -267,7 +272,7 @@ void Config::init()
 }
 void Config::load()
 {
-    FILE *fi = fopen(confFile.toStdString().c_str(), "r+");
+    FILE *fi = fopen(confFile.toUtf8().data(), "r+");
     FILE *fiTmp;
     if (!fi)
     {

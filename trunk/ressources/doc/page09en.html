@@ -13,16 +13,16 @@
 <br />
 <p align="justify">Software preferences are accessible under "Edition" in the menu bar.</p>
 
-<p align="center"><img src="qrc:/aide/pref en.png" /></p>
+<p align="center"><img src="qrc:/aide/pref 1 en.png" /></p>
 
 <p align="justify">This dialog allows the modification of the following parameters:
 
 <ul>
-	<li><b>RAM management</b><br />
-	This parameter specifies the software behaviour during file opening (audio and .sf2) : it is possible to fully load all data or to only load the essential. In the first case the loading time may be longer, but following treatments will be faster.
+	<li><b>Audio backend</b><br />
+	Specifies the audio backend used to play samples. Jack and Asio drivers (the latter for Windows only) may be chosen.
 	</li>
-	<li><b>Audio output</b><br />
-	Specifies the audio backend used during sample playing.
+	<li><b>Midi input</b><br />
+	Specifies the midi input driving the virtual keyboard.
 	</li>
 	<li><b>Importation of .wav files : trim to loop</b><br />
 	When importing a .wav file, data located next the end of loop are automaticaly removed.
@@ -31,8 +31,12 @@
 	When importing a .wav file, blank located before the beginning of the attack is automaticaly removed.
 	</li>
 </ul>
-Note : restarting the software will be needed to take some of the parameters into account.<br />
 </p>
+
+<p align="center"><img src="qrc:/aide/pref 2 en.png" /></p>
+
+<p>This tab contains for now only one item modifying the synth volume (instrument and preset).</p>
+
 
 <HR />
 <table>

@@ -20,40 +20,17 @@
 #define PIANOKEYBD_H
 
 #include "pianoscene.h"
-#include "rawkeybdapp.h"
 #include <QtGui/QGraphicsView>
+#include <QApplication>
 
-#if defined(VPIANO_PLUGIN)
-#include <QtDesigner/QDesignerExportWidget>
-#else
-#define QDESIGNER_WIDGET_EXPORT
-#endif
-
-class QDESIGNER_WIDGET_EXPORT PianoKeybd : public QGraphicsView, public RawKbdHandler
+class PianoKeybd : public QGraphicsView
 {
     Q_OBJECT
-    Q_PROPERTY( int baseOctave READ baseOctave WRITE setBaseOctave )
-    Q_PROPERTY( int numOctaves READ numOctaves WRITE setNumOctaves )
-    Q_PROPERTY( int rotation READ getRotation WRITE setRotation )
-    Q_PROPERTY( QColor keyPressedColor READ getKeyPressedColor WRITE setKeyPressedColor )
-    Q_PROPERTY( bool showLabels READ showLabels WRITE setShowLabels )
-    Q_PROPERTY( bool useFlats READ useFlats WRITE setUseFlats )
-    Q_PROPERTY( int transpose READ getTranspose WRITE setTranspose )
-#if defined(VPIANO_PLUGIN)
-    Q_CLASSINFO("Author", "Pedro Lopez-Cabanillas <plcl@users.sf.net>")
-    Q_CLASSINFO("URL", "http://sourceforge.net/projects/vmpk")
-    Q_CLASSINFO("Version", "0.9")
-#endif
+
 public:
     PianoKeybd(QWidget *parent = 0);
     PianoKeybd(const int baseOctave, const int numOctaves, QWidget *parent = 0);
     virtual ~PianoKeybd();
-    void setKeyboardMap(KeyboardMap* m) { m_scene->setKeyboardMap(m); }
-    void resetKeyboardMap() { m_scene->setKeyboardMap(&m_defaultMap); }
-    KeyboardMap* getKeyboardMap() { return m_scene->getKeyboardMap(); }
-    void setRawKeyboardMap(KeyboardMap* m) { m_rawMap = m; }
-    KeyboardMap* getRawKeyboardMap() { return m_rawMap; }
-    void resetRawKeyboardMap() { m_rawMap = &m_defaultRawMap; }
 
     int baseOctave() const { return m_scene->baseOctave(); }
     int numOctaves() const { return m_scene->numOctaves(); }
@@ -76,15 +53,10 @@ public:
     void setShowLabels(bool show) { m_scene->setShowLabels(show); }
     bool useFlats() const { return m_scene->useFlats(); }
     void setUseFlats(bool use) { m_scene->setUseFlats(use); }
-    bool getRawKeyboardMode() const { return m_scene->getRawKeyboardMode(); }
-    void setRawKeyboardMode(const bool b) { m_scene->setRawKeyboardMode(b); }
     void useCustomNoteNames(const QStringList& names) { m_scene->useCustomNoteNames(names); }
     void useStandardNoteNames() { m_scene->useStandardNoteNames(); }
     int getVelocity() { return m_scene->getVelocity(); }
     void setVelocity(const int velocity) { m_scene->setVelocity(velocity); }
-// RawKbdHandler methods
-    bool handleKeyPressed(int keycode);
-    bool handleKeyReleased(int keycode);
 
 public slots:
     void showNoteOn( int midiNote, int vel = 0 );
@@ -96,16 +68,12 @@ signals:
 
 protected:
     void initialize();
-    void initDefaultMap();
     void initScene(int base, int num, const QColor& c = QColor());
     void resizeEvent(QResizeEvent *event);
 
 private:
     int m_rotation;
     PianoScene *m_scene;
-    KeyboardMap *m_rawMap;
-    KeyboardMap m_defaultMap;
-    KeyboardMap m_defaultRawMap;
 };
 
 #endif // PIANOKEYBD_H

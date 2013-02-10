@@ -57,6 +57,7 @@ void midiCallback(double deltatime, std::vector< unsigned char > *message, void 
 PianoKeybdCustom::PianoKeybdCustom(QWidget *parent) : PianoKeybd(parent),
     midiin(NULL)
 {
+    this->setFrameStyle(0);
     // Connexion midi
     try
     {
@@ -69,8 +70,6 @@ PianoKeybdCustom::PianoKeybdCustom(QWidget *parent) : PianoKeybd(parent),
     }
     catch (RtError &error)
     {
-        // Handle the exception here
-        error.printMessage();
         this->midiin = NULL;
     }
     if (this->midiin)
@@ -78,7 +77,6 @@ PianoKeybdCustom::PianoKeybdCustom(QWidget *parent) : PianoKeybd(parent),
         midiin->ignoreTypes(false, false, false);
         this->midiin->setCallback(&midiCallback, this);
     }
-    this->setKeyboardMap(NULL);
 }
 PianoKeybdCustom::~PianoKeybdCustom()
 {
@@ -123,4 +121,33 @@ void PianoKeybdCustom::changeKey(int key, int vel)
         this->showNoteOff(key, 0);
     // Envoi signal
     this->keyChanged(key, vel);
+}
+
+void PianoKeybdCustom::setKeyboardType(KeyboardType type)
+{
+    switch(type)
+         {
+    case KEYBOARD_5_OCTAVES:
+        this->setMaximumWidth(360);
+        this->setMinimumWidth(360);
+        this->setNumOctaves(6);
+        this->setBaseOctave(3);
+        this->setMaxNote(96);
+        break;
+    case KEYBOARD_6_OCTAVES:
+        this->setMaximumWidth(400);
+        this->setMinimumWidth(400);
+        this->setNumOctaves(7);
+        this->setBaseOctave(3);
+        this->setMaxNote(108);
+        break;
+    case KEYBOARD_128_NOTES:
+        this->setMaximumWidth(650);
+        this->setMinimumWidth(650);
+        this->setNumOctaves(11);
+        this->setBaseOctave(0);
+        this->setMaxNote(127);
+        break;
+    default: break;
+    }
 }

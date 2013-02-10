@@ -51,7 +51,7 @@ int jackProcess(jack_nframes_t nframes, void * arg)
 void jack_shutdown(void *arg) {Q_UNUSED(arg); exit(1);}
 
 // Callback d'asio
-#ifdef WIN32
+#ifdef PA_USE_ASIO
 int asioProcess(const void* inputBuffer, void* outputBuffer,
                 unsigned long framesPerBuffer, const PaStreamCallbackTimeInfo* timeInfo,
                 PaStreamCallbackFlags statusFlags, void* userData)
@@ -75,9 +75,9 @@ int asioProcess(const void* inputBuffer, void* outputBuffer,
 AudioDevice::AudioDevice(Synth *synth, QObject *parent) : QObject(parent),
     m_synth(synth),
     m_audioOutput(NULL),
-#ifdef WIN32
+#ifdef PA_USE_ASIO
+    m_isAsioRunning(false),
     m_asioStream(NULL),
-    m_isAsioRunning(false)
 #endif
     m_jack_client(NULL),
     m_typeConnection(CONNECTION_NONE)
@@ -87,7 +87,7 @@ AudioDevice::AudioDevice(Synth *synth, QObject *parent) : QObject(parent),
 AudioDevice::~AudioDevice()
 {
     this->closeConnections();
-#ifdef WIN32
+#ifdef PA_USE_ASIO
     Pa_Terminate();
 #endif
 }
@@ -119,7 +119,7 @@ void AudioDevice::initAudio(int numDevice)
                 m_typeConnection = CONNECTION_NONE;
         }
     }
-#ifdef WIN32
+#ifdef PA_USE_ASIO
     else if (numDevice == -3)
     {
         // Lancement Asio
@@ -138,6 +138,8 @@ void AudioDevice::initAudio(int numDevice)
 #endif
     else
     {
+        if (numDevice < 0 || numDevice >= QAudioDeviceInfo::availableDevices(QAudio::AudioOutput).count())
+            return;
         this->openQAudioConnection(numDevice);
         if (m_audioOutput)
             m_typeConnection = CONNECTION_QAUDIO;
@@ -148,7 +150,7 @@ void AudioDevice::initAudio(int numDevice)
                 m_typeConnection = CONNECTION_JACK;
             else
             {
-#ifdef WIN32
+#ifdef PA_USE_ASIO
                 this->openAsioConnection();
                 if (m_isAsioRunning)
                     m_typeConnection = CONNECTION_ASIO;
@@ -248,7 +250,7 @@ void AudioDevice::openJackConnection()
     }
     free(ports);
 }
-#ifdef WIN32
+#ifdef PA_USE_ASIO
 void AudioDevice::openAsioConnection()
 {
     PaError err = Pa_Initialize();
@@ -355,7 +357,7 @@ void AudioDevice::closeConnections()
         jack_client_close(m_jack_client);
         m_jack_client = NULL;
     }
-#ifdef WIN32
+#ifdef PA_USE_ASIO
     if (m_isAsioRunning)
     {
         Pa_StopStream(m_asioStream);

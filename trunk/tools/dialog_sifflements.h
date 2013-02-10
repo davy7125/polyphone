@@ -20,7 +20,7 @@
 **           Author: Davy Triponney                                       **
 **  Website/Contact: http://www.polyphone.fr/                             **
 **             Date: 01.01.2013                                           **
-****************************************************************************/
+***************************************************************************/
 
 #ifndef DIALOG_SIFFLEMENTS_H
 #define DIALOG_SIFFLEMENTS_H

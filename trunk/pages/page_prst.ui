@@ -331,7 +331,7 @@
      </row>
      <row>
       <property name="text">
-       <string>Mod env sustain (dB)</string>
+       <string>Mod env sustain (%)</string>
       </property>
      </row>
      <row>
