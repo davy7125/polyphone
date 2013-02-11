@@ -733,7 +733,7 @@ int Pile_sf2::ouvrirSf2(QString fileName)
         pos = pos + taille;
     }
     if (this->getQstr(idSf2, champ_name).isEmpty())
-        this->set(idSf2, champ_name, trUtf8("sans titre"));
+        this->set(idSf2, champ_name, trUtf8("sans titre"), false);
     free(bloc_info);
     /////////////////////////   EXTRACTION DES CHAMPS DANS LES BLOCS INST, IBAG, IMOD, IGEN   //////////////////////
     EltID id2;
