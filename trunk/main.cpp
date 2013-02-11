@@ -25,24 +25,6 @@
 #include <QApplication>
 #include "mainwindow.h"
 
-//void crashingMessageHandler(QtMsgType type, const char *msg)
-//{
-//    switch (type) {
-//    case QtDebugMsg:
-//        qDebug() << "Debug:" << msg;
-//        break;
-//    case QtWarningMsg:
-//        qDebug() << "Warning:" << msg;
-//        break;
-//    case QtCriticalMsg:
-//        qDebug() << "Critical:" << msg;
-//        break;
-//    case QtFatalMsg:
-//        qDebug() << "Fatal:" << msg;
-//        __asm("int3");
-//        abort();
-//    }
-//}
 
 int main(int argc, char *argv[])
 {
@@ -57,7 +39,6 @@ int main(int argc, char *argv[])
     if (locale.compare("fr") != 0)
         a.installTranslator(&translator);
     // Affichage fenêtre
-//    qInstallMsgHandler(crashingMessageHandler);
     MainWindow w;
     w.show();
     // Centrage de la fenêtre (doit être après w.show)

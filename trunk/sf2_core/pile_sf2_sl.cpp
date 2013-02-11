@@ -732,6 +732,8 @@ int Pile_sf2::ouvrirSf2(QString fileName)
 //            QMessageBox::information(NULL, "Champ supplémentaire trouvé", bloc);
         pos = pos + taille;
     }
+    if (this->getQstr(idSf2, champ_name).isEmpty())
+        this->set(idSf2, champ_name, trUtf8("sans titre"));
     free(bloc_info);
     /////////////////////////   EXTRACTION DES CHAMPS DANS LES BLOCS INST, IBAG, IMOD, IGEN   //////////////////////
     EltID id2;
