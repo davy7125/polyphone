@@ -367,18 +367,18 @@ void Synth::setGainSample(int gain)
 {
     // Modification du gain des samples
     m_mutexVoices.lock();
-    m_gainSmpl = gain - 50;
+    m_gainSmpl = gain;
     // Mise a jour voix -1 et -2
     for (int i = 0; i < m_listeVoix.size(); i++)
         if (m_listeVoix.at(i)->getNote() == -1)
         {
             if (m_isStereo)
-                m_listeVoix.at(i)->setGain(m_gainSmpl);
+                m_listeVoix.at(i)->setGain(m_gainSmpl - 12);
             else
-                m_listeVoix.at(i)->setGain(m_gainSmpl+12);
+                m_listeVoix.at(i)->setGain(m_gainSmpl);
         }
         else if (m_listeVoix.at(i)->getNote() == -2 && m_isStereo)
-            m_listeVoix.at(i)->setGain(m_gainSmpl);
+            m_listeVoix.at(i)->setGain(m_gainSmpl - 12);
     m_mutexVoices.unlock();
 }
 void Synth::setStereo(int isStereo, bool withMutex)
@@ -406,12 +406,12 @@ void Synth::setStereo(int isStereo, bool withMutex)
             else if (voice1->getVoiceParam()->pan > 0)
                 voice1->getVoiceParam()->pan = 50;
             if (voice2)
-                voice1->setGain(m_gainSmpl);
+                voice1->setGain(m_gainSmpl - 12);
             else
-                voice1->setGain(m_gainSmpl+12);
+                voice1->setGain(m_gainSmpl);
         }
         if (voice2)
-            voice2->setGain(m_gainSmpl);
+            voice2->setGain(m_gainSmpl - 12);
     }
     else
     {
@@ -421,7 +421,7 @@ void Synth::setStereo(int isStereo, bool withMutex)
                 voice1->getVoiceParam()->pan = -1;
             else if (voice1->getVoiceParam()->pan > 0)
                 voice1->getVoiceParam()->pan = 1;
-            voice1->setGain(m_gainSmpl+12);
+            voice1->setGain(m_gainSmpl);
         }
         if (voice2)
             voice2->setGain(-1000);
