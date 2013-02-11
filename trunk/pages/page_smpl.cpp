@@ -1641,6 +1641,12 @@ void GraphiqueFourier::setData(QByteArray baData, qint32 posStart, qint32 posEnd
 }
 void GraphiqueFourier::setPos(qint32 posStart, qint32 posEnd)
 {
+    if (this->baData.size() == 0)
+    {
+        this->text1->setText("");
+        this->graph(0)->clearData();
+        return;
+    }
     // Détermination du régime permanent pour transformée de Fourier et corrélation
     if (posStart == posEnd)
         Sound::regimePermanent(this->baData, dwSmplRate, 16, posStart, posEnd);
@@ -1683,7 +1689,10 @@ void GraphiqueFourier::setPos(qint32 posStart, qint32 posEnd)
     quint32 iMin, iMax;
     iMin = (size - 1) / (posMinCor[0]+dMin+1) - 1;
     if (iMin < 1) iMin = 1;
-    iMax = (size - 1) / (posMinCor[0]+dMin-1) + 1;
+    if (!(posMinCor[0] + dMin - 1))
+        iMax = 0;
+    else
+        iMax = (size - 1) / (posMinCor[0]+dMin-1) + 1;
     if (iMax > size/2) iMax = size/2;
     // Un pic s'y trouve-t-il ?
     bool rep = false;
@@ -1770,7 +1779,7 @@ void GraphiqueFourier::setPos(qint32 posStart, qint32 posEnd)
     for (unsigned long i=0; i < size_x; i++)
     {
         x[i] = (double)i/(size_x - 1);
-        if (i < (unsigned)baFourier.size() / 4)
+        if (i < (unsigned)baFourier.size() / 4 && posMaxFFT[0] != 0)
             y[i] = (double)data[i]/data[posMaxFFT[0]]; // normalisation entre 0 et 1
         else
             y[i] = 0;

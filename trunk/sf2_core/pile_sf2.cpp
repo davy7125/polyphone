@@ -46,7 +46,7 @@ Pile_sf2::SF2::SF2()
     sfVersionTmp.wMinor = 0;
     this->IVER = sfVersionTmp;
     this->ISNG = "EMU8000";
-    this->INAM = "no title";
+    this->INAM = "";
     this->IROM = "";
     this->ICRD = "";
     this->IENG = "";
@@ -1856,6 +1856,7 @@ int Pile_sf2::set(EltID id, Champ champ, QString qStr, bool storeAction)
             qStr = qStr.left(256);
             tmp->INAM = qStr;
             // Modification de l'élément graphique
+            qDebug() << qStr << qStr.size() << qStr.simplified();
             tmp->eltTree->setText(0, qStr);
             tmp->eltTree->setText(5, qStr);
             this->tree->trier(0);
