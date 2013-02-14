@@ -100,7 +100,7 @@ void Voice::generateData(qint64 nbData)
     {
         /// ENVELOPPE DE MODULATION ///
 
-        qint32 dataMod[nbData+20];///////
+        qint32 dataMod[nbData];
         m_enveloppeMod.applyEnveloppe(dataMod, nbData, m_release, m_note, 127, m_voiceParam, 0, 1000);
 
         // MODULATION DU PITCH
@@ -111,20 +111,20 @@ void Voice::generateData(qint64 nbData)
         else
             deltaPitchFixe = -12 * log2((double)m_audioSmplRate / m_smplRate) +
                     m_voiceParam->getPitchDifference(this->m_note);
-        double modPitch[nbData+19];////////////
+        double modPitch[nbData+1];
         for (int i = 0; i < nbData; i++)
             modPitch[i+1] = deltaPitchFixe + (double)(dataMod[i] * m_voiceParam->modEnvToPitch) / 100000;
 
         // Conversion en distance cumulée entre points
         modPitch[0] = m_deltaPos + 1;
         for (int i = 1; i <= nbData; i++)
-            modPitch[i] = pow(2, modPitch[i] / 12) + modPitch[i-1];
+            modPitch[i] = qMin(qMax(0.001, pow(2, modPitch[i] / 12)), 64.) + modPitch[i-1];
         m_deltaPos = modPitch[nbData];
         m_deltaPos = m_deltaPos - ceil(m_deltaPos);
 
         // Constitution des données
         int nbDataTmp = ceil(modPitch[nbData]) - 1;
-        qint32 dataTmp[nbDataTmp + 20];////////////
+        qint32 dataTmp[nbDataTmp + 2];
         dataTmp[0] = m_valPrec;
         dataTmp[1] = m_valBase;
         bRet = takeData(&dataTmp[2], nbDataTmp);

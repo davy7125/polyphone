@@ -1779,9 +1779,25 @@ int Pile_sf2::set(EltID id, Champ champ, Valeur value, bool storeAction)
         {
             // Nom de l'instrument lié
             EltID id2 = {elementInst, id.indexSf2, value.wValue, 0, 0};
-            tmp->eltTree->setText(0, this->getQstr(id2, champ_name));
-            tmp->eltTree->setText(5, this->getQstr(id2, champ_name));
-            this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt)->eltTree->sortChildren(5, Qt::AscendingOrder);
+            QString qStr = this->getQstr(id2, champ_name);
+            tmp->eltTree->setText(0, qStr);
+            // Modification élément graphique
+            char str[20];
+            sprintf(str, "%.3d", this->get(id, champ_keyRange).rValue.byLo);
+            QString qStr2 = QString(str);
+            tmp->eltTree->setText(5, qStr2.append(qStr));
+            this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt)->eltTree->sortChildren(5, Qt::AscendingOrder);
+        }
+        else if (champ == champ_keyRange)
+        {
+            // Modification élément graphique
+            char str[20];
+            sprintf(str, "%.3d", value.rValue.byLo);
+            QString qStr = QString(str);
+            EltID id2 = {elementInst, id.indexSf2, this->get(id, champ_instrument).wValue, 0, 0};
+            qStr.append(this->getQstr(id2, champ_name));
+            tmp->eltTree->setText(5, qStr);
+            this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt)->eltTree->sortChildren(5, Qt::AscendingOrder);
         }
         }break;
     case elementInstMod: case elementPrstMod: case elementInstSmplMod: case elementPrstInstMod:{
@@ -1856,7 +1872,6 @@ int Pile_sf2::set(EltID id, Champ champ, QString qStr, bool storeAction)
             qStr = qStr.left(256);
             tmp->INAM = qStr;
             // Modification de l'élément graphique
-            qDebug() << qStr << qStr.size() << qStr.simplified();
             tmp->eltTree->setText(0, qStr);
             tmp->eltTree->setText(5, qStr);
             this->tree->trier(0);
@@ -2177,9 +2192,7 @@ Valeur Pile_sf2::SF2::BAG::GEN::getGen(Champ champ)
         // Recherche si la propriété existe
         GEN *genTmp = this;
         while((genTmp->sfGenOper != champ) && genTmp->suivant != NULL)
-        {
             genTmp = genTmp->suivant;
-        }
         if (genTmp->sfGenOper == champ) value.genValue = genTmp->genAmount;
     }
     return value;

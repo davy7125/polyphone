@@ -46,7 +46,7 @@ public:
     explicit Config(QWidget *parent = 0);
     ~Config();
     // accesseurs
-    QString getFile(int num){if (num < 5 && num >= 0) return files[num]; else return "";}
+    QString getFile(int num){if (num < 5 && num >= 0) return listFiles.at(num); else return "";}
     bool getRam()               {return false/*ram*/;}
     int  getAudioIndex()        {return audioIndex;}
     bool getAfficheMod()        {return afficheMod;}
@@ -56,7 +56,7 @@ public:
     int  getKeyboardType()      {return keyboardType;}
     int  getKeyboardVelocity()  {return keyboardVelocity;}
     int  getNumPortMidi()       {return numPortMidi;}
-    char getAudioType()         {return audioType;}
+    int  getAudioType()         {return audioType;}
     int  getSynthGain()         {return synthGain;}
     // méthodes publiques
     void addFavorite(QString filePath);
@@ -78,9 +78,9 @@ private:
     Ui::Config *ui;
     MainWindow * mainWindow;
     // Paramètres configuration
-    char files[5][256];
+    QStringList listFiles;
     bool ram;
-    char audioType;
+    int audioType;
     int audioIndex;
     bool afficheMod;
     bool afficheToolBar;
@@ -94,7 +94,6 @@ private:
     QString confFile;
     bool loaded;
     // Méthodes privées
-    void init();
     void load();
     void store();
 };

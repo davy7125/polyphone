@@ -299,7 +299,7 @@
   </connection>
   <connection>
    <sender>sliderGain</sender>
-   <signal>sliderMoved(int)</signal>
+   <signal>valueChanged(int)</signal>
    <receiver>labelGain</receiver>
    <slot>setNum(int)</slot>
    <hints>
@@ -315,7 +315,7 @@
   </connection>
   <connection>
    <sender>sliderGain</sender>
-   <signal>sliderMoved(int)</signal>
+   <signal>valueChanged(int)</signal>
    <receiver>Config</receiver>
    <slot>setSynthGain(int)</slot>
    <hints>

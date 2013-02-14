@@ -46,10 +46,12 @@ public:
     void repartitionAuto();
     void spatialisation();
     void mixture();
+    void release();
 private slots:
     void spatialisation(int motif, int nbDiv, int etalement, int occupation, int offset, int sens, int sens2);
     void paramGlobal(QVector<double> dValues, int typeModif, int param);
     void mixture(QList<QList<int> > listeParam, QString nomInst, bool bouclage, int freq);
+    void release(double duree36, double division, double deTune);
 private:
     Ui::Page_Inst *ui;
     // Méthodes
