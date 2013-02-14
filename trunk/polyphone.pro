@@ -87,7 +87,8 @@ SOURCES	+= main.cpp \
     synthetiseur/voiceparam.cpp \
     synthetiseur/elements/enveloppevol.cpp \
     synthetiseur/audiodevice.cpp \
-    synthetiseur/elements/oscsinus.cpp
+    synthetiseur/elements/oscsinus.cpp \
+    tools/dialog_release.cpp
 
 HEADERS  += mainwindow.h \
     sf2_core/sf2_types.h \
@@ -122,7 +123,8 @@ HEADERS  += mainwindow.h \
     synthetiseur/voiceparam.h \
     synthetiseur/elements/enveloppevol.h \
     synthetiseur/audiodevice.h \
-    synthetiseur/elements/oscsinus.h
+    synthetiseur/elements/oscsinus.h \
+    tools/dialog_release.h
 
 FORMS    += mainwindow.ui \
     gui_divers/config.ui \
@@ -135,7 +137,8 @@ FORMS    += mainwindow.ui \
     tools/dialog_space.ui \
     tools/dialog_paramglobal.ui \
     tools/dialog_mixture.ui \
-    tools/dialog_sifflements.ui
+    tools/dialog_sifflements.ui \
+    tools/dialog_release.ui
 
 RESOURCES += ressources.qrc \
     clavier/pianokeybd.qrc

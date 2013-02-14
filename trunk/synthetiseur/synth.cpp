@@ -76,7 +76,7 @@ void Synth::play(int type, int idSf2, int idElt, int note, int velocity, VoicePa
         {
             // Lecture d'un sample, association possible
             EltID idSmpl = {elementSmpl, idSf2, idElt, 0, 0};
-            VoiceParam * voiceParam1 = new VoiceParam(m_sf2, idSmpl, voiceParamTmp);
+            VoiceParam * voiceParam1 = new VoiceParam(m_sf2, idSmpl, voiceParamTmp, true);
             voiceParam1->volReleaseTime = 0.2;
             voiceParam1->loopMode = this->m_isLoopEnabled;
             Voice *voiceTmp1 = NULL;
@@ -85,9 +85,9 @@ void Synth::play(int type, int idSf2, int idElt, int note, int velocity, VoicePa
             SFSampleLink typeLien = m_sf2->get(idSmpl, champ_sfSampleType).sfLinkValue;
             if (typeLien != monoSample && typeLien != RomMonoSample)
             {
-                // Smpl lie
+                // Smpl lié
                 EltID idSmpl2 = {elementSmpl, idSf2, m_sf2->get(idSmpl, champ_wSampleLink).wValue, 0, 0};
-                VoiceParam * voiceParam2 = new VoiceParam(m_sf2, idSmpl2, voiceParamTmp);
+                VoiceParam * voiceParam2 = new VoiceParam(m_sf2, idSmpl2, voiceParamTmp, true);
                 voiceParam2->volReleaseTime = 0.2;
                 voiceParam2->loopMode = this->m_isLoopEnabled;
                 // Balance
@@ -101,18 +101,18 @@ void Synth::play(int type, int idSf2, int idElt, int note, int velocity, VoicePa
                     voiceParam1->pan = 50;
                     voiceParam2->pan = -50;
                 }
-                // Creation voix 2
+                // Création voix 2
                 voiceTmp2 = new Voice(m_sf2->getData(idSmpl2, champ_sampleData32),
                                              m_sf2->get(idSmpl2, champ_dwSampleRate).dwValue,
                                              m_format.sampleRate(), -2, 127, voiceParam2);
             }
-            // Creation voix 1
+            // Création voix 1
             voiceTmp1 = new Voice(m_sf2->getData(idSmpl, champ_sampleData32),
                                          m_sf2->get(idSmpl, champ_dwSampleRate).dwValue,
                                          m_format.sampleRate(), -1, 127, voiceParam1);
             connect(voiceTmp1, SIGNAL(currentPosChanged(int)), this, SLOT(emitCurrentPosChanged(int)));
             // Creation sinus
-            VoiceParam *voiceParam3 = new VoiceParam(m_sf2, idSmpl);
+            VoiceParam *voiceParam3 = new VoiceParam(m_sf2, idSmpl, NULL, true);
             voiceParam3->volReleaseTime = 0.2;
             Voice *voiceTmp3 = new Voice(m_format.sampleRate(), voiceParam3);
             // Ajout des voix dans la liste

@@ -32,7 +32,7 @@
 
 
 Page_Smpl::Page_Smpl(QWidget *parent) :
-    Page(parent), ui(new Ui::Page_Smpl)
+    Page(PAGE_SMPL, parent), ui(new Ui::Page_Smpl)
 {
     ui->setupUi(this);
     // Initialisation des données

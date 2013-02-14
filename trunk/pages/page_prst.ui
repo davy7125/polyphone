@@ -35,10 +35,10 @@
       <number>6</number>
      </property>
      <property name="topMargin">
-      <number>0</number>
+      <number>2</number>
      </property>
      <property name="bottomMargin">
-      <number>6</number>
+      <number>4</number>
      </property>
      <item>
       <widget class="QLabel" name="label_2">
@@ -255,7 +255,7 @@
      </row>
      <row>
       <property name="text">
-       <string>Filtre, fréquence (Hz)</string>
+       <string>Filtre, fréquence (×)</string>
       </property>
       <property name="font">
        <font>
@@ -271,22 +271,22 @@
      </row>
      <row>
       <property name="text">
-       <string>Vol env delay (s)</string>
+       <string>Vol env delay (×)</string>
       </property>
      </row>
      <row>
       <property name="text">
-       <string>Vol env attack (s)</string>
+       <string>Vol env attack (×)</string>
       </property>
      </row>
      <row>
       <property name="text">
-       <string>Vol env hold (s)</string>
+       <string>Vol env hold (×)</string>
       </property>
      </row>
      <row>
       <property name="text">
-       <string>Vol env decay (s)</string>
+       <string>Vol env decay (×)</string>
       </property>
      </row>
      <row>
@@ -296,7 +296,7 @@
      </row>
      <row>
       <property name="text">
-       <string>Vol env release (s)</string>
+       <string>Vol env release (×)</string>
       </property>
      </row>
      <row>
@@ -311,22 +311,22 @@
      </row>
      <row>
       <property name="text">
-       <string>Mod env delay (s)</string>
+       <string>Mod env delay (×)</string>
       </property>
      </row>
      <row>
       <property name="text">
-       <string>Mod env attack (s)</string>
+       <string>Mod env attack (×)</string>
       </property>
      </row>
      <row>
       <property name="text">
-       <string>Mod env hold (s)</string>
+       <string>Mod env hold (×)</string>
       </property>
      </row>
      <row>
       <property name="text">
-       <string>Mod env decay (s)</string>
+       <string>Mod env decay (×)</string>
       </property>
      </row>
      <row>
@@ -336,7 +336,7 @@
      </row>
      <row>
       <property name="text">
-       <string>Mod env release (s)</string>
+       <string>Mod env release (×)</string>
       </property>
      </row>
      <row>
@@ -361,12 +361,12 @@
      </row>
      <row>
       <property name="text">
-       <string>Mod LFO delay (s)</string>
+       <string>Mod LFO delay (×)</string>
       </property>
      </row>
      <row>
       <property name="text">
-       <string>Mod LFO freq (Hz)</string>
+       <string>Mod LFO freq (×)</string>
       </property>
      </row>
      <row>
@@ -386,12 +386,12 @@
      </row>
      <row>
       <property name="text">
-       <string>Vib LFO delay (s)</string>
+       <string>Vib LFO delay (×)</string>
       </property>
      </row>
      <row>
       <property name="text">
-       <string>Vib LFO freq (Hz)</string>
+       <string>Vib LFO freq (×)</string>
       </property>
      </row>
      <row>

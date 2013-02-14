@@ -180,7 +180,7 @@
      <x>0</x>
      <y>0</y>
      <width>943</width>
-     <height>21</height>
+     <height>23</height>
     </rect>
    </property>
    <property name="accessibleDescription">
@@ -271,12 +271,23 @@
      <addaction name="action_Cr_ation_mutation_mixture"/>
      <addaction name="actionD_saccordage_ondulant"/>
      <addaction name="actionD_uplication_des_divisions"/>
+     <addaction name="action_laboration_release"/>
      <addaction name="action_Param_trage_global"/>
      <addaction name="action_R_partition_automatique"/>
      <addaction name="actionSpacialisation_du_son"/>
     </widget>
+    <widget class="QMenu" name="menuPreset">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="title">
+      <string>&amp;Preset</string>
+     </property>
+     <addaction name="actionDuplication_des_divisions"/>
+    </widget>
     <addaction name="menuSample"/>
     <addaction name="menuInstrument"/>
+    <addaction name="menuPreset"/>
     <addaction name="menuDivers"/>
    </widget>
    <widget class="QMenu" name="menuAffichage">
@@ -1073,6 +1084,26 @@
    </property>
    <property name="text">
     <string>&amp;Aucun</string>
+   </property>
+  </action>
+  <action name="actionR_initialiserInst">
+   <property name="text">
+    <string>&amp;Réinitialiser</string>
+   </property>
+  </action>
+  <action name="actionR_initialiserPrst">
+   <property name="text">
+    <string>&amp;Réinitialiser</string>
+   </property>
+  </action>
+  <action name="actionDuplication_des_divisions">
+   <property name="text">
+    <string>&amp;Duplication des divisions</string>
+   </property>
+  </action>
+  <action name="action_laboration_release">
+   <property name="text">
+    <string>&amp;Élaboration release...</string>
    </property>
   </action>
  </widget>
@@ -1960,6 +1991,38 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>actionDuplication_des_divisions</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>duplicationPrst()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>471</x>
+     <y>215</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>action_laboration_release</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>release()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>471</x>
+     <y>215</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>ouvrir()</slot>
@@ -2010,5 +2073,7 @@
   <slot>setKeyboardType2()</slot>
   <slot>setKeyboardType3()</slot>
   <slot>setVelocity(int)</slot>
+  <slot>duplicationPrst()</slot>
+  <slot>release()</slot>
  </slots>
 </ui>
