@@ -25,7 +25,7 @@
 #include "voiceparam.h"
 
 // Chargement des paramètres
-VoiceParam::VoiceParam(Pile_sf2 *sf2, EltID id, VoiceParam *voiceParamTmp) : m_sf2(sf2)
+VoiceParam::VoiceParam(Pile_sf2 *sf2, EltID id, VoiceParam *voiceParamTmp, bool smplMode) : m_sf2(sf2)
 {
     // Chargement des données
     if (id.typeElement == elementSmpl)
@@ -36,24 +36,49 @@ VoiceParam::VoiceParam(Pile_sf2 *sf2, EltID id, VoiceParam *voiceParamTmp) : m_s
         this->pan               = 0;
         this->attenuation       = 0;
         this->fixedVelocity     = -1;
-        this->filterFreq        = 0;
+        if (smplMode)
+            this->filterFreq    = 20000;
+        else
+            this->filterFreq    = 1;
         this->filterQ           = 0;
         // Enveloppe volume
-        this->volDelayTime      = 0;
-        this->volAttackTime     = 0;
-        this->volHoldTime       = 0;
-        this->volDecayTime      = 0;
-        this->volSustainLevel   = 0;
-        this->volReleaseTime    = 0;
-        this->volKeynumToHold   = 0;
-        this->volKeynumToDecay  = 0;
+        if (smplMode)
+        {
+            this->volDelayTime      = 0.001;
+            this->volAttackTime     = 0.001;
+            this->volHoldTime       = 0.001;
+            this->volDecayTime      = 0.001;
+            this->volReleaseTime    = 0.001;
+        }
+        else
+        {
+            this->volDelayTime      = 1;
+            this->volAttackTime     = 1;
+            this->volHoldTime       = 1;
+            this->volDecayTime      = 1;
+            this->volReleaseTime    = 1;
+        }
+        this->volSustainLevel       = 0;
+        this->volKeynumToHold       = 0;
+        this->volKeynumToDecay      = 0;
         // Enveloppe modulation
-        this->modDelayTime      = 0;
-        this->modAttackTime     = 0;
-        this->modHoldTime       = 0;
-        this->modDecayTime      = 0;
+        if (smplMode)
+        {
+            this->modDelayTime      = 0.001;
+            this->modAttackTime     = 0.001;
+            this->modHoldTime       = 0.001;
+            this->modDecayTime      = 0.001;
+            this->modReleaseTime    = 0.001;
+        }
+        else
+        {
+            this->modDelayTime      = 1;
+            this->modAttackTime     = 1;
+            this->modHoldTime       = 1;
+            this->modDecayTime      = 1;
+            this->modReleaseTime    = 1;
+        }
         this->modSustainLevel   = 0;
-        this->modReleaseTime    = 0;
         this->modKeynumToHold   = 0;
         this->modKeynumToDecay  = 0;
         this->modEnvToPitch     = 0;
@@ -79,37 +104,49 @@ VoiceParam::VoiceParam(Pile_sf2 *sf2, EltID id, VoiceParam *voiceParamTmp) : m_s
         else
             m_idGlobal.typeElement = elementPrst;
 
-        // Paramètres communs instruments et presets
+        // Accordage, position, attenuation
         this->fineTune          = this->get(champ_fineTune, readShort, 0);
         this->coarseTune        = this->get(champ_coarseTune, readShort, 0);
-        this->scaleTune         = this->get(champ_scaleTuning, readWord, 0);
+        this->scaleTune         = this->get(champ_scaleTuning, readShort, 0);
         this->pan               = (double)this->get(champ_pan, readShort, 0) / 10;
-        this->attenuation       = (double)this->get(champ_initialAttenuation, readWord, 0) / 10;
-        this->filterFreq        = this->get(champ_initialFilterFc, readWord, 13500);
-        this->filterQ           = this->get(champ_initialFilterQ, readWord, 0);
+        this->attenuation       = (double)this->get(champ_initialAttenuation, readShort, 0) / 10;
+        this->filterQ           = (double)this->get(champ_initialFilterQ, readShort, 0) / 10;
+
         // Enveloppe volume
-        this->volDelayTime      = d1200e2(this->get(champ_delayVolEnv, readShort, -12000));
-        this->volAttackTime     = d1200e2(this->get(champ_attackVolEnv, readShort, -12000));
-        this->volHoldTime       = d1200e2(this->get(champ_holdVolEnv, readShort, -12000));
-        this->volDecayTime      = d1200e2(this->get(champ_decayVolEnv, readShort, -12000));
-        this->volSustainLevel   = (double)this->get(champ_sustainVolEnv, readWord, 0) / 10;
-        this->volReleaseTime    = d1200e2(this->get(champ_releaseVolEnv, readShort, -12000));
+        this->volSustainLevel   = (double)this->get(champ_sustainVolEnv, readShort, 0) / 10;
         this->volKeynumToHold   = this->get(champ_keynumToVolEnvHold, readShort, 0);
         this->volKeynumToDecay  = this->get(champ_keynumToVolEnvDecay, readShort, 0);
-        this->modEnvToPitch     = this->get(champ_modEnvToPitch, readShort, 0);
-        this->modEnvToFilterFc  = this->get(champ_modEnvToFilterFc, readShort, 0);
+
         // Enveloppe modulation
-        this->modDelayTime      = d1200e2(this->get(champ_delayModEnv, readShort, -12000));
-        this->modAttackTime     = d1200e2(this->get(champ_attackModEnv, readShort, -12000));
-        this->modHoldTime       = d1200e2(this->get(champ_holdModEnv, readShort, -12000));
-        this->modDecayTime      = d1200e2(this->get(champ_decayModEnv, readShort, -12000));
-        this->modSustainLevel   = (double)this->get(champ_sustainModEnv, readWord, 0) / 10;
-        this->modReleaseTime    = d1200e2(this->get(champ_releaseModEnv, readShort, -12000));
+        this->modSustainLevel   = (double)this->get(champ_sustainModEnv, readShort, 0) / 10;
         this->modKeynumToHold   = this->get(champ_keynumToModEnvHold, readShort, 0);
         this->modKeynumToDecay  = this->get(champ_keynumToModEnvDecay, readShort, 0);
+        this->modEnvToPitch     = this->get(champ_modEnvToPitch, readShort, 0);
+        this->modEnvToFilterFc  = this->get(champ_modEnvToFilterFc, readShort, 0);
+
         // Paramétrage spécifique
         if (id.typeElement == elementInstSmpl)
         {
+            // Filtre
+            this->filterFreq        = this->get(champ_initialFilterFc, readShort, 13500);
+
+            // Enveloppe volume
+            this->volDelayTime      = d1200e2(this->get(champ_delayVolEnv, readShort, -12000));
+            this->volAttackTime     = d1200e2(this->get(champ_attackVolEnv, readShort, -12000));
+            this->volHoldTime       = d1200e2(this->get(champ_holdVolEnv, readShort, -12000));
+            this->volDecayTime      = d1200e2(this->get(champ_decayVolEnv, readShort, -12000));
+            this->volReleaseTime    = d1200e2(this->get(champ_releaseVolEnv, readShort, -12000));
+            this->volKeynumToHold   = this->get(champ_keynumToVolEnvHold, readShort, 0);
+            this->volKeynumToDecay  = this->get(champ_keynumToVolEnvDecay, readShort, 0);
+
+            // Enveloppe modulation
+            this->modDelayTime      = d1200e2(this->get(champ_delayModEnv, readShort, -12000));
+            this->modAttackTime     = d1200e2(this->get(champ_attackModEnv, readShort, -12000));
+            this->modHoldTime       = d1200e2(this->get(champ_holdModEnv, readShort, -12000));
+            this->modDecayTime      = d1200e2(this->get(champ_decayModEnv, readShort, -12000));
+            this->modReleaseTime    = d1200e2(this->get(champ_releaseModEnv, readShort, -12000));
+
+            // Valeurs fixes, boucle
             this->rootkey       = this->get(champ_overridingRootKey, readWord, -1);
             this->keynum        = this->get(champ_keynum, readWord, -1);
             this->fixedVelocity = this->get(champ_velocity, readWord, -1);
@@ -121,6 +158,24 @@ VoiceParam::VoiceParam(Pile_sf2 *sf2, EltID id, VoiceParam *voiceParamTmp) : m_s
         }
         else
         {
+            // Filtre
+            this->filterFreq        = this->get(champ_initialFilterFc, readShort, 1);
+
+            // Enveloppe volume
+            this->volDelayTime      = d1200e2(this->get(champ_delayVolEnv, readShort, 0));
+            this->volAttackTime     = d1200e2(this->get(champ_attackVolEnv, readShort, 0));
+            this->volHoldTime       = d1200e2(this->get(champ_holdVolEnv, readShort, 0));
+            this->volDecayTime      = d1200e2(this->get(champ_decayVolEnv, readShort, 0));
+            this->volReleaseTime    = d1200e2(this->get(champ_releaseVolEnv, readShort, 0));
+
+            // Enveloppe modulation
+            this->modDelayTime      = d1200e2(this->get(champ_delayModEnv, readShort, 0));
+            this->modAttackTime     = d1200e2(this->get(champ_attackModEnv, readShort, 0));
+            this->modHoldTime       = d1200e2(this->get(champ_holdModEnv, readShort, 0));
+            this->modDecayTime      = d1200e2(this->get(champ_decayModEnv, readShort, 0));
+            this->modReleaseTime    = d1200e2(this->get(champ_releaseModEnv, readShort, 0));
+
+            // Valeurs fixes, boucle
             this->rootkey       = -1;
             this->loopStart     = 0;
             this->loopEnd       = 0;
@@ -133,6 +188,32 @@ VoiceParam::VoiceParam(Pile_sf2 *sf2, EltID id, VoiceParam *voiceParamTmp) : m_s
     // Addition avec voiceParamTmp si présent
     if (voiceParamTmp)
         this->add(voiceParamTmp);
+    // Limites
+    this->fineTune      = limit(this->fineTune,     -99,    99);
+    this->coarseTune    = limit(this->coarseTune,   -120,   120);
+    this->pan           = limit(this->pan,          -50.,   50.);
+    this->attenuation   = limit(this->attenuation,  0.,     144.);
+    this->scaleTune     = limit(this->scaleTune,    0,      1200);
+    this->filterFreq    = limit(this->filterFreq,   18.,    19914.);
+    this->filterQ       = limit(this->filterQ,      0.,     96.);
+    this->volDelayTime      = limit(this->volDelayTime, 0.001, 18.);
+    this->volAttackTime     = limit(this->volAttackTime, 0.001, 101.6);
+    this->volHoldTime       = limit(this->volHoldTime, 0.001, 18.);
+    this->volDecayTime      = limit(this->volDecayTime, 0.001, 101.6);
+    this->volSustainLevel   = limit(this->volSustainLevel, 0., 144.);
+    this->volReleaseTime    = limit(this->volReleaseTime, 0.001, 101.6);
+    this->volKeynumToHold   = limit(this->volKeynumToHold, -1200, 1200);
+    this->volKeynumToDecay  = limit(this->volKeynumToDecay, -1200, 1200);
+    this->modDelayTime      = limit(this->modDelayTime, 0.001, 18.);
+    this->modAttackTime     = limit(this->modAttackTime, 0.001, 101.6);
+    this->modHoldTime       = limit(this->modHoldTime, 0.001, 18.);
+    this->modDecayTime      = limit(this->modDecayTime, 0.001, 101.6);
+    this->modSustainLevel   = limit(this->modSustainLevel, 0., 144.);
+    this->modReleaseTime    = limit(this->modReleaseTime, 0.001, 101.6);
+    this->modKeynumToHold   = limit(this->modKeynumToHold, -1200, 1200);
+    this->modKeynumToDecay  = limit(this->modKeynumToDecay, -1200, 1200);
+    this->modEnvToPitch     = limit(this->modEnvToPitch, -12000, 12000);
+    this->modEnvToFilterFc  = limit(this->modEnvToFilterFc, -12000, 12000);
 }
 
 // Remplissage des paramètres
@@ -143,24 +224,24 @@ void VoiceParam::add(VoiceParam * voiceParamTmp)
     this->pan               += voiceParamTmp->pan;
     this->attenuation       += voiceParamTmp->attenuation;
     this->scaleTune         += voiceParamTmp->scaleTune;
-    this->filterFreq        += voiceParamTmp->filterFreq;
+    this->filterFreq        *= voiceParamTmp->filterFreq;
     this->filterQ           += voiceParamTmp->filterQ;
     // Enveloppe volume
-    this->volDelayTime      += voiceParamTmp->volDelayTime;
-    this->volAttackTime     += voiceParamTmp->volAttackTime;
-    this->volHoldTime       += voiceParamTmp->volHoldTime;
-    this->volDecayTime      += voiceParamTmp->volDecayTime;
+    this->volDelayTime      *= voiceParamTmp->volDelayTime;
+    this->volAttackTime     *= voiceParamTmp->volAttackTime;
+    this->volHoldTime       *= voiceParamTmp->volHoldTime;
+    this->volDecayTime      *= voiceParamTmp->volDecayTime;
     this->volSustainLevel   += voiceParamTmp->volSustainLevel;
-    this->volReleaseTime    += voiceParamTmp->volReleaseTime;
+    this->volReleaseTime    *= voiceParamTmp->volReleaseTime;
     this->volKeynumToHold   += voiceParamTmp->volKeynumToHold;
     this->volKeynumToDecay  += voiceParamTmp->volKeynumToDecay;
     // Enveloppe modulation
-    this->modDelayTime      += voiceParamTmp->modDelayTime;
-    this->modAttackTime     += voiceParamTmp->modAttackTime;
-    this->modHoldTime       += voiceParamTmp->modHoldTime;
-    this->modDecayTime      += voiceParamTmp->modDecayTime;
+    this->modDelayTime      *= voiceParamTmp->modDelayTime;
+    this->modAttackTime     *= voiceParamTmp->modAttackTime;
+    this->modHoldTime       *= voiceParamTmp->modHoldTime;
+    this->modDecayTime      *= voiceParamTmp->modDecayTime;
     this->modSustainLevel   += voiceParamTmp->modSustainLevel;
-    this->modReleaseTime    += voiceParamTmp->modReleaseTime;
+    this->modReleaseTime    *= voiceParamTmp->modReleaseTime;
     this->modKeynumToHold   += voiceParamTmp->modKeynumToHold;
     this->modKeynumToDecay  += voiceParamTmp->modKeynumToDecay;
     this->modEnvToPitch     += voiceParamTmp->modEnvToPitch;
@@ -209,4 +290,21 @@ double VoiceParam::getPitchDifference(int note)
 double VoiceParam::d1200e2(qint32 val)
 {
     return pow(2, ((double)val / 1200));
+}
+
+double VoiceParam::limit(double val, double min, double max)
+{
+    if (val < min)
+        return min;
+    else if (val > max)
+        return max;
+    return val;
+}
+qint32 VoiceParam::limit(qint32 val, qint32 min, qint32 max)
+{
+    if (val < min)
+        return min;
+    else if (val > max)
+        return max;
+    return val;
 }

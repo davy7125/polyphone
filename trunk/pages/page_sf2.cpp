@@ -29,7 +29,7 @@
 
 Page_Sf2::Page_Sf2(MainWindow * mainWindow, Tree * tree, QStackedWidget * qStackedWidget, \
                    Pile_sf2 * sf2, Synth *synth, QWidget * parent) :
-    Page(parent), ui(new Ui::Page_Sf2)
+    Page(PAGE_SF2, parent), ui(new Ui::Page_Sf2)
 {
     ui->setupUi(this);
     this->mainWindow = mainWindow;

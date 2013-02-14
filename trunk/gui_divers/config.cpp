@@ -33,6 +33,9 @@
 
 Config::Config(QWidget *parent) : QDialog(parent), ui(new Ui::Config)
 {
+    for (int i = 0; i < 5; i++)
+        listFiles.append("");
+
     this->mainWindow = (MainWindow *)parent;
     this->loaded = 0;
     ui->setupUi(this);
@@ -86,8 +89,8 @@ Config::Config(QWidget *parent) : QDialog(parent), ui(new Ui::Config)
     this->ui->checkBoucle->setChecked(this->wavAutoLoop);
     this->ui->checkBlanc->setChecked(this->wavRemoveBlank);
     // Paramètres synthétiseur
-    if (this->synthGain < 0)
-        this->synthGain = 0;
+    if (this->synthGain < -50)
+        this->synthGain = -50;
     else if (this->synthGain > 50)
         this->synthGain = 50;
     this->ui->sliderGain->setValue(this->synthGain);
@@ -235,120 +238,74 @@ void Config::addFavorite(QString filePath)
 {
     // Modification des fichiers récemment ouverts
     int n = 4;
-    if (strcmp(filePath.toStdString().c_str(), this->files[0]) == 0)
+    if (filePath.compare(this->listFiles.at(0)) == 0)
         n = 0;
-    else if (strcmp(filePath.toStdString().c_str(), this->files[1]) == 0)
+    else if (filePath.compare(this->listFiles.at(1)) == 0)
         n = 1;
-    else if (strcmp(filePath.toStdString().c_str(), this->files[2]) == 0)
+    else if (filePath.compare(this->listFiles.at(2)) == 0)
         n = 2;
-    else if (strcmp(filePath.toStdString().c_str(), this->files[3]) == 0)
+    else if (filePath.compare(this->listFiles.at(3)) == 0)
         n = 3;
-    else if (strcmp(filePath.toStdString().c_str(), this->files[4]) == 0)
+    else if (filePath.compare(this->listFiles.at(4)) == 0)
         n = 4;
     for (int i = n-1; i >= 0; i--)
-        strcpy(this->files[i+1], this->files[i]);
-    strcpy(this->files[0], filePath.toStdString().c_str());
+        listFiles[i+1] = this->listFiles.at(i);
+    listFiles[0] = filePath;
     this->store();
 }
 
-// Gestion du fichier de configuration
-void Config::init()
-{
-    for (int i = 0; i < 5; i++)
-        this->files[i][0] = '\0';
-    this->ram = 0;
-    this->afficheMod = 1;
-    this->afficheToolBar = 1;
-    this->audioIndex = 0;
-    this->wavAutoLoop = 0;
-    this->wavRemoveBlank = 0;
-    this->keyboardType = 1;
-    this->keyboardVelocity = 64;
-    this->numPortMidi = 0;
-    this->audioType = 0;
-    this->synthGain = 0;
-    // Stockage
-    this->store();
-}
+// Gestion des configurations
 void Config::load()
 {
-    FILE *fi = fopen(confFile.toUtf8().data(), "r+");
-    FILE *fiTmp;
-    if (!fi)
+    QSettings settings(this);
+    // Chargement des fichiers récents
+    int j = 0;
+    QString strTmp;
+    for (int i = 0; i < 5; i++)
     {
-        // Le fichier n'existe pas, création
-        this->init();
+        strTmp = settings.value("recent_file/file_" + QString::number(i), "\0").toString();
+        // test
+        QFile file(strTmp);
+        if (file.exists())
+        {
+            settings.setValue("recent_file/file_" + QString::number(i), strTmp);
+            listFiles[j++] = strTmp;
+        }
     }
-    else
+    // Correction du fichier de configuration
+    for (int i = j; i < 5; i++)
     {
-        // Le fichier existe, lecture
-        // fichiers récents
-        char str[256];
-        int j = 0;
-        for (int i = 0; i < 5; i++)
-        {
-            // placement du curseur pour lecture
-            fseek(fi,i*256*sizeof(char), SEEK_SET);
-            if (fgets(str, 255, fi))
-            {
-                // vérification du lien
-                fiTmp = fopen(QString(str).toUtf8().data(), "r");
-                if (fiTmp)
-                {
-                    // Lien valide
-                    fclose(fiTmp);
-                    strcpy(this->files[j], str);
-                    if (j > 0 && j != i)
-                    {
-                        fseek(fi,j*256*sizeof(char), SEEK_SET);
-                        fwrite("\0", 256, sizeof(char), fi);
-                        fseek(fi,j*256*sizeof(char), SEEK_SET);
-                        fwrite(this->files[j], 256, sizeof(char), fi);
-                    }
-                    j++;
-                }
-            }
-        }
-        // Correction du fichier de configuration
-        for (int i = j; i < 5; i++)
-        {
-            fseek(fi,i*256*sizeof(char), SEEK_SET);
-            fwrite("\0", 256, sizeof(char), fi);
-            for (int k = 0; k < 256; k++)
-                this->files[i][k] = '\0';
-        }
-        // Chargement ram
-        fseek(fi,5*256*sizeof(char), SEEK_SET);
-        fread(&this->ram,               sizeof(char), 1, fi);
-        fread(&this->afficheToolBar,    sizeof(char), 1, fi);
-        fread(&this->afficheMod,        sizeof(char), 1, fi);
-        fread(&this->audioIndex,        sizeof(int),  1, fi);
-        fread(&this->wavAutoLoop,       sizeof(char), 1, fi);
-        fread(&this->wavRemoveBlank,    sizeof(char), 1, fi);
-        fread(&this->keyboardType,      sizeof(int),  1, fi);
-        fread(&this->keyboardVelocity,  sizeof(int),  1, fi);
-        fread(&this->numPortMidi,       sizeof(int),  1, fi);
-        fread(&this->audioType,         sizeof(char), 1, fi);
-        fread(&this->synthGain,         sizeof(int),  1, fi);
-        fclose(fi);
+        listFiles[i] = "";
+        settings.setValue("recent_file/file_" + QString::number(i), "");
     }
+    // Chargement des autres paramètres
+    this->afficheToolBar = settings.value("affichage/tool_bar", true).toBool();
+    this->afficheMod = settings.value("affichage/section_modulateur", true).toBool();
+    this->audioIndex = settings.value("audio/index", 0).toInt();
+    this->audioType = settings.value("audio/type", 0).toInt();
+    this->wavAutoLoop = settings.value("wav_auto_loop", false).toBool();
+    this->wavRemoveBlank = settings.value("wav_remove_bank", false).toBool();
+    this->keyboardType = settings.value("keyboard/type", 1).toInt();
+    this->keyboardVelocity = settings.value("keyboard/velocity", 64).toInt();
+    this->numPortMidi = settings.value("midi/index_port", 0).toInt();
+    this->synthGain = settings.value("synth/gain", 0).toInt();
 }
 void Config::store()
 {
-    FILE *fi = fopen(confFile.toStdString().c_str(), "r+");
-    // Fichiers récents
-    for (int i = 0; i < 5; i++)
-        fwrite(this->files[i], 256, sizeof(char), fi);
-    fwrite(&this->ram,              1, sizeof(char), fi);   // Chargement dans la ram
-    fwrite(&this->afficheToolBar,   1, sizeof(char), fi);   // Affichage barre d'outils
-    fwrite(&this->afficheMod,       1, sizeof(char), fi);   // Affichage section mod
-    fwrite(&this->audioIndex,       1, sizeof(int),  fi);   // Index audio output
-    fwrite(&this->wavAutoLoop,      1, sizeof(char), fi);   // Import wav : autoloop
-    fwrite(&this->wavRemoveBlank,   1, sizeof(char), fi);   // Import wav : autoblank
-    fwrite(&this->keyboardType,     1, sizeof(int),  fi);   // type de clavier
-    fwrite(&this->keyboardVelocity, 1, sizeof(int),  fi);   // vélocité du clavier
-    fwrite(&this->numPortMidi,      1, sizeof(int),  fi);   // port midi
-    fwrite(&this->audioType,        1, sizeof(char), fi);   // utilisation jack / asio / rien
-    fwrite(&this->synthGain,        1, sizeof(int),  fi);   // synthé : gain
-    fclose(fi);
+    QSettings settings(this);
+    settings.setValue("recent_file/file_0", listFiles.at(0));
+    settings.setValue("recent_file/file_1", listFiles.at(1));
+    settings.setValue("recent_file/file_2", listFiles.at(2));
+    settings.setValue("recent_file/file_3", listFiles.at(3));
+    settings.setValue("recent_file/file_4", listFiles.at(4));
+    settings.setValue("affichage/tool_bar", this->afficheToolBar);
+    settings.setValue("affichage/section_modulateur", this->afficheMod);
+    settings.setValue("audio/index", this->audioIndex);
+    settings.setValue("audio/type", this->audioType);
+    settings.setValue("wav_auto_loop", this->wavAutoLoop);
+    settings.setValue("wav_remove_bank", this->wavRemoveBlank);
+    settings.setValue("keyboard/type", this->keyboardType);
+    settings.setValue("keyboard/velocity", this->keyboardVelocity);
+    settings.setValue("midi/index_port", this->numPortMidi);
+    settings.setValue("synth/gain", this->synthGain);
 }

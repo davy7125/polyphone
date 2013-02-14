@@ -683,6 +683,10 @@ void MainWindow::updateActions()
             ui->menuInstrument->setEnabled(1);
         else
             ui->menuInstrument->setEnabled(0);
+        if ((type == elementPrst || type == elementPrstInst) && familleUnique)
+            ui->menuPreset->setEnabled(1);
+        else
+            ui->menuPreset->setEnabled(0);
         ui->menuDivers->setEnabled(1);
     }
     else
@@ -2100,6 +2104,8 @@ void MainWindow::paramGlobal()      {this->page_inst->paramGlobal();}
 void MainWindow::repartitionAuto()  {this->page_inst->repartitionAuto();}
 void MainWindow::spatialisation()   {this->page_inst->spatialisation();}
 void MainWindow::mixture()          {this->page_inst->mixture();}
+void MainWindow::duplicationPrst()  {this->page_prst->duplication();}
+void MainWindow::release()          {this->page_inst->release();}
 void MainWindow::purger()
 {
     // Suppression des éléments non utilisés
@@ -2240,8 +2246,8 @@ void MainWindow::attenuationMini()
                 {
                     if (this->sf2->isSet(id2, champ_initialAttenuation))
                     {
-                        if (attenuationMini == -1 || this->sf2->get(id2, champ_initialAttenuation).wValue < attenuationMini)
-                            attenuationMini = this->sf2->get(id2, champ_initialAttenuation).wValue;
+                        if (attenuationMini == -1 || this->sf2->get(id2, champ_initialAttenuation).shValue < attenuationMini)
+                            attenuationMini = this->sf2->get(id2, champ_initialAttenuation).shValue;
                     }
                     else
                         attenuationMini = 0;
@@ -2274,9 +2280,9 @@ void MainWindow::attenuationMini()
                 if (!this->sf2->get(id2, champ_hidden).bValue)
                 {
                     if (this->sf2->isSet(id2, champ_initialAttenuation))
-                        val.wValue = this->sf2->get(id2, champ_initialAttenuation).wValue + decalage;
+                        val.shValue = this->sf2->get(id2, champ_initialAttenuation).shValue + decalage;
                     else
-                        val.wValue = decalage;
+                        val.shValue = decalage;
                     this->sf2->set(id2, champ_initialAttenuation, val);
                 }
             }

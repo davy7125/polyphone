@@ -26,13 +26,13 @@
 #include "sound.h"
 #include <QMessageBox>
 
-DWORD freadSize(FILE *fi)
+DWORD freadSize(QFile &fi)
 {
     unsigned char b0, b1, b2, b3;
-    if (!fread(&b3, sizeof b3, 1, fi) || \
-        !fread(&b2, sizeof b2, 1, fi) || \
-        !fread(&b1, sizeof b1, 1, fi) || \
-        !fread(&b0, sizeof b0, 1, fi))
+    if (fi.read((char*)&b3, 1) != 1 || \
+        fi.read((char*)&b2, 1) != 1 || \
+        fi.read((char*)&b1, 1) != 1 || \
+        fi.read((char*)&b0, 1) != 1)
     {
         QMessageBox::warning(NULL, QObject::tr("Attention"), QObject::tr("Lecture impossible."));
         return 0;

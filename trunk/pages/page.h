@@ -49,10 +49,18 @@ class Page : public QWidget
 {
     Q_OBJECT
 public:
-    Page(QWidget *parent = 0);
+    enum TypePage
+    {
+        PAGE_SF2,
+        PAGE_SMPL,
+        PAGE_INST,
+        PAGE_PRST
+    };
+    Page(TypePage typePage, QWidget *parent = 0);
     // Méthodes publiques
     virtual void afficher() = 0;
 protected:
+
     // Attributs protégés
     bool preparation;
     static MainWindow *mainWindow;
@@ -61,15 +69,16 @@ protected:
     static Pile_sf2 *sf2;
     static Synth * synth;
     // Méthodes protégées
-    static char * getTextValue(char * T, WORD champ, genAmountType genVal);
+    char * getTextValue(char * T, WORD champ, genAmountType genVal);
     static char * getTextValue(char * T, WORD champ, int iVal);
     static char * getTextValue(char * T, WORD champ, SFModulator sfModVal);
     static QString getIndexName(WORD iVal, int CC);
     static QString getGenName(WORD iVal);
-    static genAmountType getValue(QString texte, WORD champ, bool &ok);
+    genAmountType getValue(QString texte, WORD champ, bool &ok);
 private:
+    TypePage m_typePage;
     // Méthodes privées
-    static int limit(int iTmp, int min, int max);
+    int limit(int iTmp, int minInst, int maxInst, int minPrst = 0, int maxPrst = 0);
 };
 
 // Classe QTableWidget avec inclusion d'une ID
@@ -298,7 +307,7 @@ class PageTable : public Page
 {
     Q_OBJECT
 public:
-    PageTable(QWidget *parent = 0);
+    PageTable(TypePage typePage, QWidget *parent = 0);
     // Méthodes publiques
     void afficher();
     void reselect();

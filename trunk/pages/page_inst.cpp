@@ -28,13 +28,14 @@
 #include "dialog_space.h"
 #include "dialog_paramglobal.h"
 #include "dialog_mixture.h"
+#include "dialog_release.h"
 #include <QProgressDialog>
 #include <QInputDialog>
 
 
 // Constructeur, destructeur
 Page_Inst::Page_Inst(QWidget *parent) :
-    PageTable(parent), ui(new Ui::Page_Inst)
+    PageTable(PAGE_INST, parent), ui(new Ui::Page_Inst)
 {
     ui->setupUi(this);
     this->preparation = 0;
@@ -731,7 +732,7 @@ void Page_Inst::mixture(QList<QList<int> > listeParam, QString nomInst, bool bou
                     idSmpl = closestSample(idInst, noteTmp, ecart, cote, idInstSmplTmp);
                     double attenuation = 0;
                     if (sf2->isSet(idInstSmplTmp, champ_initialAttenuation))
-                        attenuation = (double)sf2->get(idInstSmplTmp, champ_initialAttenuation).wValue / 10.0;
+                        attenuation = (double)sf2->get(idInstSmplTmp, champ_initialAttenuation).shValue / 10.0;
                     if (attenuation < attMini)
                         attMini = attenuation;
                 }
@@ -760,7 +761,7 @@ void Page_Inst::mixture(QList<QList<int> > listeParam, QString nomInst, bool bou
                         double attenuation = 1;
                         if (sf2->isSet(idInstSmplTmp, champ_initialAttenuation))
                         {
-                            attenuation = (double)sf2->get(idInstSmplTmp, champ_initialAttenuation).wValue / 10.0 - attMini;
+                            attenuation = (double)sf2->get(idInstSmplTmp, champ_initialAttenuation).shValue / 10.0 - attMini;
                             attenuation = pow(10, -attenuation / 20.0);
                         }
     //                    // Prise en compte fréquence de coupure en Hz (filtre passe bas 2ème ordre)
@@ -854,6 +855,82 @@ void Page_Inst::mixture(QList<QList<int> > listeParam, QString nomInst, bool bou
     }
     // Actualisation
     this->mainWindow->updateDo();
+}
+void Page_Inst::release()
+{
+    EltID idInst = this->tree->getID(0);
+    idInst.typeElement = elementInstSmpl;
+    if (this->sf2->count(idInst) == 0)
+    {
+        QMessageBox::warning(NULL, tr("Attention"), tr("L'instrument doit contenir des sons."));
+        return;
+    }
+    DialogRelease * dialogRelease = new DialogRelease(this);
+    dialogRelease->setAttribute(Qt::WA_DeleteOnClose, true);
+    this->connect(dialogRelease, SIGNAL(accepted(double, double, double)),
+                  SLOT(release(double, double, double)));
+    dialogRelease->show();
+}
+void Page_Inst::release(double duree36, double division, double deTune)
+{
+    this->sf2->prepareNewActions();
+    // Reprise de l'identificateur si modification
+    EltID id = this->tree->getID(0);
+    // Modification pour chaque sample lié
+    id.typeElement = elementInstSmpl;
+    for (int i = 0; i < this->sf2->count(id); i++)
+    {
+        id.indexElt2 = i;
+        if (!this->sf2->get(id, champ_hidden).bValue)
+        {
+            // Note moyenne
+            double noteMoy = (double)(this->sf2->get(id, champ_keyRange).rValue.byHi +
+                    this->sf2->get(id, champ_keyRange).rValue.byLo) / 2;
+            // Calcul durée release
+            double release = pow(division, ((36 - noteMoy) / 12)) * duree36;
+            if (release < 0.001) release = 0.001;
+            else if (release > 101.594) release = 101.594;
+            // Valeur correspondante
+            short val = 1200 * log2(release);
+            // Modification instSmpl
+            Valeur valeur;
+            if (this->sf2->get(id, champ_releaseVolEnv).shValue != val)
+            {
+                valeur.shValue = val;
+                this->sf2->set(id, champ_releaseVolEnv, valeur);
+            }
+            if (deTune != 0)
+            {
+                // Release de l'enveloppe de modulation
+                if (this->sf2->get(id, champ_releaseModEnv).shValue != val)
+                {
+                    valeur.shValue = val;
+                    this->sf2->set(id, champ_releaseModEnv, valeur);
+                }
+                if (this->sf2->get(id, champ_modEnvToPitch).shValue != -(int)100*deTune)
+                {
+                    valeur.shValue = -(int)100*deTune;
+                    this->sf2->set(id, champ_modEnvToPitch, valeur);
+                }
+                // Hauteur de l'effet
+                int tuningCoarse = floor(deTune);
+                int tuningFine = 100*(deTune - tuningCoarse);
+                valeur.shValue = this->sf2->get(id, champ_coarseTune).shValue + tuningCoarse;
+                if (valeur.shValue != 0)
+                    this->sf2->set(id, champ_coarseTune, valeur);
+                else
+                    this->sf2->reset(id, champ_coarseTune);
+                valeur.shValue = this->sf2->get(id, champ_fineTune).shValue + tuningFine;
+                if (valeur.shValue != 0)
+                    this->sf2->set(id, champ_fineTune, valeur);
+                else
+                    this->sf2->reset(id, champ_fineTune);
+            }
+        }
+    }
+    // Actualisation
+    this->mainWindow->updateDo();
+    this->afficher();
 }
 
 double Page_Inst::getOffset(int type1, int type2)

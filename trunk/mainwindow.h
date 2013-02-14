@@ -123,9 +123,11 @@ private slots:
     void repartitionAuto();     // outil instrument, répartition automatique keyrange
     void spatialisation();      // outil instrument, spatialisation du son
     void mixture();             // outil instrument, création mixture
-    void attenuationMini();     // outil divers, mise à jour de toutes les atténuations
-    void purger();              // outil divers, suppression des éléments non utilisés
-    void sifflements();         // outil divers, suppression des sifflements
+    void release();             // outil instrument, élaboration de releases
+    void duplicationPrst();     // outil preset, duplication des divisions
+    void attenuationMini();     // outil sf2, mise à jour de toutes les atténuations
+    void purger();              // outil sf2, suppression des éléments non utilisés
+    void sifflements();         // outil sf2, suppression des sifflements
 
     void noteOn(int key);
     void noteOff(int key);

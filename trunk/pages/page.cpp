@@ -30,8 +30,9 @@
 
 //////////////////////////////////////////// PAGE ////////////////////////////////////////////
 
-Page::Page(QWidget *parent) : QWidget(parent)
+Page::Page(TypePage typePage, QWidget *parent) : QWidget(parent)
 {
+    m_typePage = typePage;
 }
 // Initialisation des variables statiques
 MainWindow * Page::mainWindow = NULL;
@@ -46,52 +47,54 @@ char * Page::getTextValue(char * T, WORD champ, genAmountType genVal)
     switch (champ)
     {
     case champ_keyRange: case champ_velRange:
-        sprintf(T,"%d-%d", genVal.ranges.byLo, genVal.ranges.byHi); break;
-    case champ_initialAttenuation:
-        sprintf(T,"%.1f", (double)genVal.wAmount/10); break;
-    case champ_pan:
-        sprintf(T,"%.1f", (double)genVal.shAmount/10); break;
-    case champ_sampleModes:
-        sprintf(T,"%d", genVal.wAmount); break;
-    case champ_overridingRootKey: case champ_scaleTuning:
-        sprintf(T,"%d", genVal.wAmount); break;
-    case champ_coarseTune: case champ_fineTune:
-        sprintf(T,"%d", genVal.shAmount); break;
-    case champ_initialFilterFc:
-        sprintf(T,"%.0f", exp2((double)genVal.wAmount/1200)*8.176); break;
-    case champ_initialFilterQ:
-        sprintf(T,"%.1f", (double)genVal.wAmount/10); break;
-    case champ_modEnvToPitch: case champ_modLfoToPitch: case champ_vibLfoToPitch:
-    case champ_modLfoToFilterFc: case champ_modEnvToFilterFc:
-        sprintf(T,"%d", genVal.shAmount); break;
+        sprintf(T,"%d-%d", genVal.ranges.byLo, genVal.ranges.byHi);
+        break;
+
+    case champ_initialAttenuation: case champ_pan: case champ_initialFilterQ:
     case champ_modLfoToVolume:
-        sprintf(T,"%.1f", (double)genVal.shAmount/10); break;
-    case champ_delayModEnv: case champ_attackModEnv: case champ_holdModEnv: case champ_decayModEnv: case champ_releaseModEnv:
-    case champ_delayVolEnv: case champ_attackVolEnv: case champ_holdVolEnv: case champ_decayVolEnv: case champ_releaseVolEnv:
-    case champ_delayModLFO: case champ_delayVibLFO:
-        sprintf(T,"%.3f", exp2((double)genVal.shAmount/1200)); break;
     case champ_sustainVolEnv: case champ_sustainModEnv:
-        sprintf(T,"%.1f", (double)genVal.wAmount/10); break;
+    case champ_chorusEffectsSend: case champ_reverbEffectsSend:
+        sprintf(T,"%.1f", (double)genVal.shAmount/10);
+        break;
+
+    case champ_sampleModes: case champ_overridingRootKey: case champ_exclusiveClass:
+    case champ_keynum: case champ_velocity:
+        sprintf(T,"%d", genVal.wAmount);
+        break;
+
+    case champ_scaleTuning: case champ_coarseTune: case champ_fineTune:
+    case champ_modLfoToFilterFc: case champ_modEnvToFilterFc:
+    case champ_modEnvToPitch: case champ_modLfoToPitch: case champ_vibLfoToPitch:
     case champ_keynumToModEnvHold: case champ_keynumToVolEnvHold:
     case champ_keynumToModEnvDecay: case champ_keynumToVolEnvDecay:
-        sprintf(T,"%d", genVal.shAmount); break;
-    case champ_freqModLFO: case champ_freqVibLFO:
-        sprintf(T,"%.3f", exp2((double)genVal.shAmount/1200)*8.176); break;
-    case champ_exclusiveClass:
-        sprintf(T,"%d", genVal.wAmount); break;
-    case champ_chorusEffectsSend: case champ_reverbEffectsSend:
-        sprintf(T,"%.1f", (float)genVal.wAmount/10); break;
-    case champ_keynum:
-        sprintf(T,"%d", genVal.wAmount); break;
-    case champ_velocity:
-        sprintf(T,"%d", genVal.wAmount); break;
     case champ_startAddrsOffset: case champ_startAddrsCoarseOffset:
     case champ_startloopAddrsOffset: case champ_startloopAddrsCoarseOffset:
     case champ_endAddrsOffset: case champ_endAddrsCoarseOffset:
     case champ_endloopAddrsOffset: case champ_endloopAddrsCoarseOffset:
-        sprintf(T,"%d", genVal.shAmount); break;
+        sprintf(T,"%d", genVal.shAmount);
+        break;
+
+    case champ_initialFilterFc:
+        if (m_typePage == PAGE_PRST)
+            sprintf(T,"%.3f", exp2((double)genVal.shAmount/1200));
+        else
+            sprintf(T,"%.0f", exp2((double)genVal.shAmount/1200)*8.176);
+        break;
+
+    case champ_freqModLFO: case champ_freqVibLFO:
+        if (m_typePage == PAGE_PRST)
+            sprintf(T,"%.3f", exp2((double)genVal.shAmount/1200));
+        else
+            sprintf(T,"%.3f", exp2((double)genVal.shAmount/1200)*8.176);
+        break;
+
+    case champ_delayModEnv: case champ_attackModEnv: case champ_holdModEnv: case champ_decayModEnv: case champ_releaseModEnv:
+    case champ_delayVolEnv: case champ_attackVolEnv: case champ_holdVolEnv: case champ_decayVolEnv: case champ_releaseVolEnv:
+    case champ_delayModLFO: case champ_delayVibLFO:
+        sprintf(T,"%.3f", exp2((double)genVal.shAmount/1200)); break;
+
     case champ_sfModDestOper:
-        sprintf(T,"%d", genVal.wAmount); break;
+        sprintf(T,"%d", genVal.wAmount);
         break;
     case champ_sfModTransOper:
         switch (genVal.wAmount)
@@ -101,10 +104,10 @@ char * Page::getTextValue(char * T, WORD champ, genAmountType genVal)
         }
         break;
     case champ_modAmount:
-        sprintf(T,"%d", genVal.shAmount); break;
+        sprintf(T,"%d", genVal.shAmount);
         break;
     case champ_indexMod:
-        sprintf(T,"%d", genVal.wAmount+1); break;
+        sprintf(T,"%d", genVal.wAmount+1);
         break;
     default: break;
     }
@@ -324,14 +327,14 @@ genAmountType Page::getValue(QString texte, WORD champ, bool &ok)
                 val1 = val2;
                 val2 = val3;
             }
-            genAmount.ranges.byLo = limit(val1, 0, 127);
-            genAmount.ranges.byHi = limit(val2, 0, 127);
+            genAmount.ranges.byLo = limit(val1, 0, 127, 0, 127);
+            genAmount.ranges.byHi = limit(val2, 0, 127, 0, 127);
         }
         }; break;
     case champ_initialAttenuation: case champ_sustainVolEnv:
-        genAmount.wAmount = (WORD)limit(10*texte.toDouble(&ok), 0, 1440);
+        genAmount.shAmount = (WORD)limit(10*texte.toDouble(&ok), 0, 1440, -1440, 1440);
         break;
-    case champ_pan: genAmount.shAmount = (short)limit(10*texte.toDouble(&ok), -500, 500);
+    case champ_pan: genAmount.shAmount = (short)limit(10*texte.toDouble(&ok), -500, 500, -1000, 1000);
         break;
     case champ_sampleModes:
         iTmp = texte.toDouble(&ok);
@@ -340,46 +343,52 @@ genAmountType Page::getValue(QString texte, WORD champ, bool &ok)
         break;
     case champ_overridingRootKey: genAmount.wAmount = (WORD)limit(texte.toDouble(&ok), 0, 127);
         break;
-    case champ_coarseTune: genAmount.shAmount = (short)limit(texte.toDouble(&ok), -120, 120);
+    case champ_coarseTune: genAmount.shAmount = (short)limit(texte.toDouble(&ok), -120, 120, -240, 240);
         break;
-    case champ_fineTune: genAmount.shAmount = (short)limit(texte.toDouble(&ok), -99, 99);
+    case champ_fineTune: genAmount.shAmount = (short)limit(texte.toDouble(&ok), -99, 99, -198, 198);
         break;
-    case champ_scaleTuning: genAmount.wAmount = (WORD)limit(texte.toDouble(&ok), 0, 99);
+    case champ_scaleTuning: genAmount.shAmount = (WORD)limit(texte.toDouble(&ok), 0, 1200, -1200, 1200);
         break;
     case champ_initialFilterFc:
-        genAmount.wAmount = (WORD)limit(1200*log2(texte.toDouble(&ok)/8.176), 1500, 13500);
+        if (m_typePage == PAGE_PRST)
+            genAmount.shAmount = (WORD)limit(1200*log2(texte.toDouble(&ok)), 0, 0, -12000, 12000);
+        else
+            genAmount.shAmount = (WORD)limit(1200*log2(texte.toDouble(&ok)/8.176), 1500, 13500);
         break;
-    case champ_initialFilterQ: genAmount.wAmount = (WORD)limit(10*texte.toDouble(&ok), 0, 960);
+    case champ_initialFilterQ: genAmount.shAmount = (WORD)limit(10*texte.toDouble(&ok), 0, 960, -960, 960);
         break;
     case champ_modEnvToPitch: case champ_modLfoToPitch: case champ_vibLfoToPitch:
     case champ_modLfoToFilterFc: case champ_modEnvToFilterFc:
-        genAmount.shAmount = (short)limit(texte.toDouble(&ok), -12000, 12000);
+        genAmount.shAmount = (short)limit(texte.toDouble(&ok), -12000, 12000, -24000, 24000);
         break;
-    case champ_modLfoToVolume: genAmount.shAmount = (short)limit(10*texte.toDouble(&ok), -960, 960);
+    case champ_modLfoToVolume: genAmount.shAmount = (short)limit(10*texte.toDouble(&ok), -960, 960, -1920, 1920);
         break;
     case champ_delayModEnv: case champ_holdModEnv:
     case champ_delayVolEnv: case champ_holdVolEnv:
     case champ_delayModLFO: case champ_delayVibLFO:
-        genAmount.shAmount = (short)limit(1200*log2(texte.toDouble(&ok)), -12000, 5000);
+        genAmount.shAmount = (short)limit(1200*log2(texte.toDouble(&ok)), -12000, 5000, -20000, 17000);
         break;
     case champ_attackModEnv: case champ_decayModEnv: case champ_releaseModEnv:
     case champ_attackVolEnv: case champ_decayVolEnv: case champ_releaseVolEnv:
-        genAmount.shAmount = (short)limit(1200*log2(texte.toDouble(&ok)), -12000, 8000);
+        genAmount.shAmount = (short)limit(1200*log2(texte.toDouble(&ok)), -12000, 8000, -20000, 20000);
         break;
     case champ_sustainModEnv:
-        genAmount.wAmount = (WORD)limit(10*texte.toDouble(&ok), 0, 1000);
+        genAmount.shAmount = (WORD)limit(10*texte.toDouble(&ok), 0, 1000, -1000, 1000);
         break;
     case champ_keynumToModEnvHold: case champ_keynumToVolEnvHold:
     case champ_keynumToModEnvDecay: case champ_keynumToVolEnvDecay:
-        genAmount.shAmount = (short)limit(texte.toDouble(&ok), -1200, 1200);
+        genAmount.shAmount = (short)limit(texte.toDouble(&ok), -1200, 1200, -2400, 2400);
         break;
     case champ_freqModLFO: case champ_freqVibLFO:
-        genAmount.shAmount = (short)limit(1200*log2(texte.toDouble(&ok)/8.176), -16000, 4500);
+        if (m_typePage == PAGE_PRST)
+            genAmount.shAmount = (short)limit(1200*log2(texte.toDouble(&ok)), 0, 0, -21000, 20500);
+        else
+            genAmount.shAmount = (short)limit(1200*log2(texte.toDouble(&ok)/8.176), -16000, 4500);
         break;
     case champ_exclusiveClass: genAmount.wAmount = (WORD)limit(texte.toDouble(&ok), 1, 127);
         break;
     case champ_chorusEffectsSend: case champ_reverbEffectsSend:
-        genAmount.wAmount = (WORD)limit(10*texte.toDouble(&ok), 0, 1000);
+        genAmount.shAmount = (WORD)limit(10*texte.toDouble(&ok), 0, 1000, -1000, 1000);
         break;
     case champ_keynum: genAmount.wAmount = (WORD)limit(texte.toDouble(&ok), 0, 127);
         break;
@@ -404,20 +413,34 @@ genAmountType Page::getValue(QString texte, WORD champ, bool &ok)
     return genAmount;
 }
 // Méthodes privées
-int Page::limit(int iTmp, int min, int max)
+int Page::limit(int iTmp, int minInst, int maxInst, int minPrst, int maxPrst)
 {
-    if (iTmp < min)
-        return min;
-    else if (iTmp > max)
-        return max;
+    int valRet = 0;
+    if (m_typePage == PAGE_PRST)
+    {
+        if (iTmp < minPrst)
+            valRet = minPrst;
+        else if (iTmp > maxPrst)
+            valRet = maxPrst;
+        else
+            valRet = iTmp;
+    }
     else
-        return iTmp;
+    {
+        if (iTmp < minInst)
+            valRet = minInst;
+        else if (iTmp > maxInst)
+            valRet = maxInst;
+        else
+            valRet = iTmp;
+    }
+    return valRet;
 }
 
 
 //////////////////////////////////////////// PAGE TABLE ////////////////////////////////////////////
 
-PageTable::PageTable(QWidget *parent) : Page(parent)
+PageTable::PageTable(TypePage typePage, QWidget *parent) : Page(typePage, parent)
 {
     this->table = NULL;
     this->tableMod = NULL;
@@ -540,10 +563,18 @@ void PageTable::afficher()
             else
             {
                 id3.indexElt = this->sf2->get(id, champ_instrument).wValue;
-                qStr = this->sf2->getQstr(id3, champ_name);
+                sprintf(str, "%.03d%s", this->sf2->get(id, champ_keyRange).rValue.byLo, \
+                        this->sf2->getQstr(id3, champ_name).toStdString().c_str());
+                qStr = this->sf2->getQstr(id3, champ_name).left(10);
+                qStr.append("\n");
+                qStr.append(this->sf2->getQstr(id3, champ_name).mid(10).left(10));
                 for (int j = 1; j < nbSmplInst+1; j++)
                 {
-                    if (qStr.toLower().compare(this->table->horizontalHeaderItem(j)->text().toLower()) > 1)
+                    // note basse de la colonne, et prise en compte du nom de l'instrument lié
+                    id3.indexElt = this->sf2->get(this->table->getID(j), champ_instrument).wValue;
+                    sprintf(str2, "%.03d%s", this->sf2->get(this->table->getID(j), champ_keyRange).rValue.byLo, \
+                            this->sf2->getQstr(id3, champ_name).toStdString().c_str());
+                    if (strcmp(str, str2) > 0)
                         numCol++;
                 }
             }
