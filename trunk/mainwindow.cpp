@@ -416,10 +416,10 @@ void MainWindow::showConfig()
 void MainWindow::showAbout()
 {
     QMessageBox::about(this, "Polyphone",
-        QString::fromUtf8(tr("<b>Polyphone</b> © 2013<br/>" \
-        "Version : " VERSION "<br/>" \
+        trUtf8("<b>Polyphone</b> © 2013<br/>" \
+        "Version : ") + VERSION  + trUtf8("<br/>" \
         "Auteur : Davy Triponney<br/>" \
-        "Support : <a href=\"mailto:info@polyphone.fr\">info@polyphone.fr</a>").toStdString().c_str()));
+        "Support : <a href=\"mailto:info@polyphone.fr\">info@polyphone.fr</a>").toStdString().c_str());
 }
 void MainWindow::showHelp()
 {
