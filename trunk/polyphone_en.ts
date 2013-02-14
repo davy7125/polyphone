@@ -1661,10 +1661,16 @@
         <source>&lt;b&gt;Polyphone&lt;/b&gt; Â© 2012&lt;br/&gt;Version : 0.1&lt;br/&gt;Auteur : Davy Triponney&lt;br/&gt;Support : &lt;a href=&quot;mailto:info@polyphone-editor.com&quot;&gt;info@polyphone-editor.com&lt;/a&gt;</source>
         <translation type="obsolete">&lt;b&gt;Polyphone&lt;/b&gt; Â© 2012&lt;br/&gt;Version: 0.1&lt;br/&gt;Author: Davy Triponney&lt;br/&gt;Support: &lt;a href=&quot;mailto:info@polyphone-editor.com&quot;&gt;info@polyphone-editor.com&lt;/a&gt;</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="mainwindow.cpp" line="419"/>
-        <source>&lt;b&gt;Polyphone&lt;/b&gt; Â© 2013&lt;br/&gt;Version : </source>
-        <translation>&lt;b&gt;Polyphone&lt;/b&gt; Â© 2013&lt;br/&gt;Version: </translation>
+        <source>&lt;b&gt;Polyphone&lt;/b&gt; © 2013&lt;br/&gt;Version : </source>
+        <oldsource>&lt;b&gt;Polyphone&lt;/b&gt; Â© 2013&lt;br/&gt;Version : </oldsource>
+        <translation>&lt;b&gt;Polyphone&lt;/b&gt; © 2013&lt;br/&gt;Version : </translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="420"/>
+        <source>&lt;br/&gt;Auteur : Davy Triponney&lt;br/&gt;Support : &lt;a href=&quot;mailto:info@polyphone.fr&quot;&gt;info@polyphone.fr&lt;/a&gt;</source>
+        <translation>&lt;br/&gt;Author: Davy Triponney&lt;br/&gt;Support: &lt;a href=&quot;mailto:info@polyphone.fr&quot;&gt;info@polyphone.fr&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="654"/>
