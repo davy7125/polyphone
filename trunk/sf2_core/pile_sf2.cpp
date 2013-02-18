@@ -1786,7 +1786,7 @@ int Pile_sf2::set(EltID id, Champ champ, Valeur value, bool storeAction)
             sprintf(str, "%.3d", this->get(id, champ_keyRange).rValue.byLo);
             QString qStr2 = QString(str);
             tmp->eltTree->setText(5, qStr2.append(qStr));
-            this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt)->eltTree->sortChildren(5, Qt::AscendingOrder);
+            this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt)->eltTree->sortChildren(5, Qt::AscendingOrder);
         }
         else if (champ == champ_keyRange)
         {
@@ -1797,7 +1797,7 @@ int Pile_sf2::set(EltID id, Champ champ, Valeur value, bool storeAction)
             EltID id2 = {elementInst, id.indexSf2, this->get(id, champ_instrument).wValue, 0, 0};
             qStr.append(this->getQstr(id2, champ_name));
             tmp->eltTree->setText(5, qStr);
-            this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt)->eltTree->sortChildren(5, Qt::AscendingOrder);
+            this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt)->eltTree->sortChildren(5, Qt::AscendingOrder);
         }
         }break;
     case elementInstMod: case elementPrstMod: case elementInstSmplMod: case elementPrstInstMod:{
