@@ -144,7 +144,9 @@ RESOURCES += ressources.qrc \
     clavier/pianokeybd.qrc
 RC_FILE = polyphone.rc
 
-TRANSLATIONS = polyphone_en.ts
+TRANSLATIONS = polyphone_en.ts \
+    polyphone_de.ts \
+    polyphone_nl.ts
 
 # si ASIO activé (CONFIG += use_asio)
 use_asio{

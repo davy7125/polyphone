@@ -29,6 +29,8 @@ Voice::Voice(QByteArray baData, DWORD smplRate, DWORD audioSmplRate, int note, i
              VoiceParam * voiceParam, QObject * parent) :
     CircularBuffer(BUFFER_VOICE_SIZE, BUFFER_VOICE_AVANCE, parent),
     m_sinusOsc(audioSmplRate),
+    m_modLFO(audioSmplRate, voiceParam->modLfoDelay),
+    m_vibLFO(audioSmplRate, voiceParam->vibLfoDelay),
     m_baData(baData),
     m_smplRate(smplRate),
     m_audioSmplRate(audioSmplRate),
@@ -42,7 +44,8 @@ Voice::Voice(QByteArray baData, DWORD smplRate, DWORD audioSmplRate, int note, i
     m_enveloppeVol(voiceParam, audioSmplRate, 0),
     m_enveloppeMod(voiceParam, audioSmplRate, 1),
     m_deltaPos(0),
-    m_valPrec(0)
+    m_valPrec(0),
+    m_x1(0), m_x2(0), m_y1(0), m_y2(0)
 {
     // Initialisation resampling
     takeData(&m_valBase, 1);
@@ -52,6 +55,8 @@ Voice::Voice(QByteArray baData, DWORD smplRate, DWORD audioSmplRate, int note, i
 Voice::Voice(DWORD audioSmplRate, VoiceParam *voiceParam, QObject *parent) :
     CircularBuffer(BUFFER_VOICE_SIZE, BUFFER_VOICE_AVANCE, parent),
     m_sinusOsc(audioSmplRate),
+    m_modLFO(audioSmplRate, voiceParam->modLfoDelay),
+    m_vibLFO(audioSmplRate, voiceParam->vibLfoDelay),
     m_smplRate(audioSmplRate),
     m_audioSmplRate(audioSmplRate),
     m_note(-3),
@@ -64,7 +69,8 @@ Voice::Voice(DWORD audioSmplRate, VoiceParam *voiceParam, QObject *parent) :
     m_enveloppeVol(voiceParam, audioSmplRate, 0),
     m_enveloppeMod(voiceParam, audioSmplRate, 1),
     m_deltaPos(0),
-    m_valPrec(0)
+    m_valPrec(0),
+    m_x1(0), m_x2(0), m_y1(0), m_y2(0)
 {
     // Initialisation resampling
     takeData(&m_valBase, 1);
@@ -88,33 +94,39 @@ qint64 Voice::readData(char *data, qint64 maxlen)
 void Voice::generateData(qint64 nbData)
 {
     if (nbData <= 0) return;
-    qint32 data[nbData];
+    double data[nbData];
     bool bRet = true;
+    double gainLowPassFilter = 0;
     if (m_note == -3)
     {
         // Génération d'un sinus
-        double f = 440.0 * pow(2.0, (double)(m_voiceParam->rootkey - 69) / 12);
-        m_sinusOsc.getSinus((char*)data, 4*nbData, f);
+        m_sinusOsc.getSinus(data, nbData, 440.0 * pow(2.0, (double)(m_voiceParam->rootkey - 69.) / 12.));
     }
     else
     {
         /// ENVELOPPE DE MODULATION ///
-
-        qint32 dataMod[nbData];
-        m_enveloppeMod.applyEnveloppe(dataMod, nbData, m_release, m_note, 127, m_voiceParam, 0, 1000);
+        double dataMod[nbData];
+        m_enveloppeMod.applyEnveloppe(dataMod, nbData, m_release, m_note, 127, m_voiceParam, 0, true);
+        /// LFOs ///
+        double modLfo[nbData];
+        m_modLFO.getSinus(modLfo, nbData, m_voiceParam->modLfoFreq);
+        double vibLfo[nbData];
+        m_vibLFO.getSinus(vibLfo, nbData, m_voiceParam->vibLfoFreq);
 
         // MODULATION DU PITCH
         double deltaPitchFixe = 0;
         if (m_note < 0)
-            deltaPitchFixe = 12 * log2((double)m_audioSmplRate / m_smplRate) +
+            deltaPitchFixe = -12 * log2((double)m_audioSmplRate / m_smplRate) +
                     m_voiceParam->getPitchDifference(m_voiceParam->rootkey);
         else
             deltaPitchFixe = -12 * log2((double)m_audioSmplRate / m_smplRate) +
                     m_voiceParam->getPitchDifference(this->m_note);
         double modPitch[nbData+1];
         for (int i = 0; i < nbData; i++)
-            modPitch[i+1] = deltaPitchFixe + (double)(dataMod[i] * m_voiceParam->modEnvToPitch) / 100000;
-
+            modPitch[i + 1] = deltaPitchFixe
+                    + (dataMod[i] * m_voiceParam->modEnvToPitch
+                    + modLfo[i] * m_voiceParam->modLfoToPitch
+                    + vibLfo[i] * m_voiceParam->vibLfoToPitch)/ 100;
         // Conversion en distance cumulée entre points
         modPitch[0] = m_deltaPos + 1;
         for (int i = 1; i <= nbData; i++)
@@ -138,17 +150,51 @@ void Voice::generateData(qint64 nbData)
             val1 = dataTmp[(int)floor(pos)];
             val2 = dataTmp[(int)ceil(pos)];
             pos -= floor(pos);
-            data[i] = (1. - pos) * val1 + pos * val2;
+            data[i] = ((1. - pos) * val1 + pos * val2) / 2147483648; // Passage en double de -1 à 1
+        }
+
+        // FILTRE PASSE-BAS
+        double modFreq[nbData];
+        for (int i = 0; i < nbData; i++)
+        {
+            modFreq[i] = m_voiceParam->filterFreq * pow(2., (dataMod[i] * m_voiceParam->modEnvToFilterFc
+                    + modLfo[i] * m_voiceParam->modLfoToFilterFreq) / 1200);
+            if (modFreq[i] > 20000)
+                modFreq[i] = 20000;
+            else if (modFreq[i] < 20)
+                modFreq[i] = 20;
+        }
+        double a0, a1, a2, b1, b2, valTmp;
+        double q_lin = pow(10, m_voiceParam->filterQ / 20.);
+        for (int i = 0; i < nbData; i++)
+        {
+            this->biQuadCoefficients(a0, a1, a2, b1, b2, modFreq[i], q_lin);
+            valTmp = a0 * data[i] + a1 * m_x1 + a2 * m_x2 - b1 * m_y1 - b2 * m_y2;
+            m_x2 = m_x1;
+            m_x1 = data[i];
+            m_y2 = m_y1;
+            m_y1 = valTmp;
+            data[i] = valTmp;
+        }
+        gainLowPassFilter = m_voiceParam->filterQ / 2;
+
+        // Modulation du volume, conversion des dB
+        double coefMax = pow(10, (double)m_voiceParam->modLfoToVolume / 50.); // normalement division par 10
+        double coefMin = pow(10, -(double)m_voiceParam->modLfoToVolume / 50.); // normalement division par 10
+        for (int i = 0; i < nbData; i++)
+        {
+            valTmp = (modLfo[i] + 1.) / 2;
+            data[i] *= valTmp * coefMax + (1. - valTmp) * coefMin;
         }
     }
     // Application de l'enveloppe de volume
     bool bRet2 = false;
     if (m_note < 0)
         bRet2 = m_enveloppeVol.applyEnveloppe(data, nbData, m_release, m_voiceParam->rootkey,
-                                              m_velocity, m_voiceParam, m_gain);
+                                              m_velocity, m_voiceParam, m_gain - gainLowPassFilter);
     else
         bRet2 = m_enveloppeVol.applyEnveloppe(data, nbData, m_release, m_note,
-                                              m_velocity, m_voiceParam, m_gain);
+                                              m_velocity, m_voiceParam, m_gain - gainLowPassFilter);
     if (bRet2 || !bRet)
     {
         m_finished = true;
@@ -156,8 +202,9 @@ void Voice::generateData(qint64 nbData)
     }
     else
         emit(currentPosChanged(m_currentSmplPos));
+
     //// ECRITURE SUR LE BUFFER ////
-    this->writeData((char *)data, nbData * 4);
+    this->writeData((char *)data, nbData * 8);
 }
 
 bool Voice::takeData(qint32 * data, qint64 nbRead)
@@ -205,3 +252,41 @@ void Voice::setGain(double gain)
     this->m_gain = gain;
 }
 
+void Voice::biQuadCoefficients(double &a0, double &a1, double &a2, double &b1, double &b2,
+                               double freq, double Q)
+{
+    // Calcul des coefficients d'une structure bi-quad pour un passe-bas
+    double theta = 2. * PI * freq / m_audioSmplRate;
+
+    if (Q == 0)
+    {
+        a0 = 1;
+        a1 = 0;
+        a2 = 0;
+        b1 = 0;
+        b2 = 0;
+    }
+    else
+    {
+        double d = 1. / Q;
+        double dTmp = d * sin(theta) / 2.;
+        if (dTmp == -1)
+        {
+            a0 = 1;
+            a1 = 0;
+            a2 = 0;
+            b1 = 0;
+            b2 = 0;
+        }
+        else
+        {
+            double beta = 0.5 * (1. - dTmp) / (1. + dTmp);
+            double gamma = (0.5 + beta) * cos(theta);
+            a0 = (0.5 + beta - gamma) / 2.;
+            a1 = 2. * a0;
+            a2 = a0;
+            b1 = -2. * gamma;
+            b2 = 2. * beta;
+        }
+    }
+}

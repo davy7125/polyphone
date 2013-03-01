@@ -32,8 +32,8 @@ class EnveloppeVol
 {
 public:
     EnveloppeVol(VoiceParam * voiceParam, quint32 sampleRate, bool isMod);
-    bool applyEnveloppe(qint32 * data, quint32 size, bool release, int note, int velocity, VoiceParam * voiceParam,
-                        double gain, qint32 valFixe = 0);
+    bool applyEnveloppe(double *data, quint32 size, bool release, int note, int velocity, VoiceParam * voiceParam,
+                        double gain, bool applyOn1 = false);
 private:
     enum EnveloppePhase
     {

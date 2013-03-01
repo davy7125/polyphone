@@ -29,15 +29,21 @@
 int main(int argc, char *argv[])
 {
     // Traduction si nécessaire
-    QTranslator translator;
-    translator.load(":/traductions/polyphone_en"); // Doit se placer avant QApplication
+    QTranslator translatorEN, translatorDE, translatorNL;
+    translatorEN.load(":/traductions/polyphone_en"); // Doit se placer avant QApplication
+    translatorDE.load(":/traductions/polyphone_de");
+    translatorNL.load(":/traductions/polyphone_nl");
     QApplication a(argc, argv);
     // Nom de l'application
     a.setApplicationName("Polyphone");
     a.setOrganizationName("polyphone");
     QString locale = QLocale::system().name().section('_', 0, 0);
-    if (locale.compare("fr") != 0)
-        a.installTranslator(&translator);
+    if (locale.compare("de") == 0)
+        a.installTranslator(&translatorDE);
+    else if (locale.compare("nl") == 0)
+        a.installTranslator(&translatorNL);
+    else if (locale.compare("fr") != 0)
+        a.installTranslator(&translatorEN);
     // Affichage fenêtre
     MainWindow w;
     w.show();

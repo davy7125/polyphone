@@ -1,65 +1,68 @@
 #include "oscsinus.h"
 
-OscSinus::OscSinus(qint32 sampleRate) :
+OscSinus::OscSinus(qint32 sampleRate, double delay) :
     _sampleRate(sampleRate),
     _previousFreq(-1),
-    _currentPos(0)
+    _delayTime(delay * sampleRate),
+    _currentDelay(0)
 {
 }
 
-void OscSinus::getSinus(char * data, qint32 len, double freq)
+// Générateur Gordon-Smith
+void OscSinus::getSinus(double * data, qint32 len, double freq)
 {
-    if (freq != _previousFreq)
+    // Attente
+    qint64 total = qMin(_delayTime - _currentDelay, len);
+    for (int i = 0; i < total; i++)
+        data[i] = 0;
+    _currentDelay += total;
+
+    // Sinus
+    if (total != len)
     {
-        _previousFreq = freq;
-        this->initializeBuffer();
-    }
-    qint64 total = 0;
-    while (len - total > 0)
-    {
-        const qint64 chunk = qMin((_buffer.size() - _currentPos), (int)(len - total));
-        memcpy(data + total, _buffer.constData() + _currentPos, chunk);
-        _currentPos = (_currentPos + chunk) % _buffer.size();
-        total += chunk;
+        if (_previousFreq == -1)
+        {
+            // Initialisation du système
+            _previousFreq = freq;
+            computeEpsilon(freq, _theta, _epsilon);
+            _posPrec = qSin(-_theta);
+            _posPrecQuad = qCos(-_theta);
+        }
+        if (_previousFreq != freq)
+        {
+            double theta2, epsilon2;
+            computeEpsilon(freq, theta2, epsilon2);
+            _previousFreq = freq;
+
+            double progEpsilon;
+            for (int i = total; i < len; i++)
+            {
+                progEpsilon = (double)(len - i) / (len - total) * _epsilon
+                        + (double)(i - total) / (len - total) * epsilon2;
+                _posPrecQuad -= progEpsilon * _posPrec;
+                _posPrec     += progEpsilon * _posPrecQuad;
+                data[i] = _posPrec;
+            }
+
+            // Mise à jour valeurs
+            _theta = theta2;
+            _epsilon = epsilon2;
+            _previousFreq = freq;
+        }
+        else
+        {
+            for (int i = total; i < len; i++)
+            {
+                _posPrecQuad -= _epsilon * _posPrec;
+                _posPrec     += _epsilon * _posPrecQuad;
+                data[i] = _posPrec;
+            }
+        }
     }
 }
 
-void OscSinus::initializeBuffer()
+void OscSinus::computeEpsilon(double freq, double &theta, double &epsilon)
 {
-    // Dimensionnement du buffer en fonction de la fréquence
-    qint64 lengthT;
-    double freqAjustee = 0;
-    if (_previousFreq < 100)
-    {
-        // Longueur de 10 périodes
-        lengthT = (double)(10.0 * _sampleRate) / _previousFreq;
-        // Ajustement fréquence
-        freqAjustee = (double)(10.0 * _sampleRate) / lengthT;
-    }
-    else if (_previousFreq < 1000)
-    {
-        // Longueur de 100 périodes
-        lengthT = (double)(100.0 * _sampleRate) / _previousFreq;
-        // Ajustement fréquence
-        freqAjustee = (double)(100.0 * _sampleRate) / lengthT;
-    }
-    else
-    {
-        // Longueur de 1000 périodes
-        lengthT = (double)(1000.0 * _sampleRate) / _previousFreq;
-        // Ajustement fréquence
-        freqAjustee = (double)(1000.0 * _sampleRate) / lengthT;
-    }
-    qint64 length = 4 * lengthT;
-    _buffer.resize(length);
-    // Création du sinus
-    qint32 *ptr = (qint32 *)_buffer.data();
-    double x;
-    for (int i = 0; i < lengthT; i++)
-    {
-        x = qSin((2. * M_PI * freqAjustee * i) / _sampleRate);
-        ptr[i] = static_cast<qint32>(x * 300000000);
-    }
-    // Positionnement au départ
-    _currentPos = 0;
+    theta = 2. * M_PI * freq / _sampleRate;
+    epsilon = 2. * qSin(theta / 2.);
 }
