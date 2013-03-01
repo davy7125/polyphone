@@ -36,19 +36,19 @@ VoiceParam::VoiceParam(Pile_sf2 *sf2, EltID id, VoiceParam *voiceParamTmp, bool 
         this->pan               = 0;
         this->attenuation       = 0;
         this->fixedVelocity     = -1;
-        if (smplMode)
-            this->filterFreq    = 20000;
+        if (smplMode || !voiceParamTmp)
+            this->filterFreq    = 19914;
         else
             this->filterFreq    = 1;
         this->filterQ           = 0;
         // Enveloppe volume
-        if (smplMode)
+        if (smplMode || !voiceParamTmp)
         {
             this->volDelayTime      = 0.001;
             this->volAttackTime     = 0.001;
             this->volHoldTime       = 0.001;
             this->volDecayTime      = 0.001;
-            this->volReleaseTime    = 0.001;
+            this->volReleaseTime    = 0.1;
         }
         else
         {
@@ -62,7 +62,7 @@ VoiceParam::VoiceParam(Pile_sf2 *sf2, EltID id, VoiceParam *voiceParamTmp, bool 
         this->volKeynumToHold       = 0;
         this->volKeynumToDecay      = 0;
         // Enveloppe modulation
-        if (smplMode)
+        if (smplMode || !voiceParamTmp)
         {
             this->modDelayTime      = 0.001;
             this->modAttackTime     = 0.001;
@@ -84,14 +84,38 @@ VoiceParam::VoiceParam(Pile_sf2 *sf2, EltID id, VoiceParam *voiceParamTmp, bool 
         this->modEnvToPitch     = 0;
         this->modEnvToFilterFc  = 0;
         // Note et boucle
+        if (smplMode || !voiceParamTmp)
+            this->scaleTune = 100;
+        else
+            this->scaleTune         = 0;
         this->fineTune          = m_sf2->get(m_id, champ_chPitchCorrection).cValue;
         this->coarseTune        = 0;
-        this->scaleTune         = 0;
         this->keynum            = -1;
         this->rootkey           = m_sf2->get(m_id, champ_byOriginalPitch).bValue;
         this->loopStart         = m_sf2->get(m_id, champ_dwStartLoop).dwValue;
         this->loopEnd           = m_sf2->get(m_id, champ_dwEndLoop).dwValue;
+        this->sampleStart       = 0;
+        this->sampleEnd         = 0;
         this->loopMode          = 0;
+        // LFOs
+        if (smplMode || !voiceParamTmp)
+        {
+            this->modLfoDelay       = 0.001;
+            this->modLfoFreq        = 8.176;
+            this->vibLfoDelay       = 0.001;
+            this->vibLfoFreq        = 8.176;
+        }
+        else
+        {
+            this->modLfoDelay       = 1;
+            this->modLfoFreq        = 1;
+            this->vibLfoDelay       = 1;
+            this->vibLfoFreq        = 1;
+        }
+        this->modLfoToPitch = 0;
+        this->modLfoToFilterFreq = 0;
+        this->modLfoToVolume = 0;
+        this->vibLfoToPitch = 0;
     }
     else
     {
@@ -107,7 +131,6 @@ VoiceParam::VoiceParam(Pile_sf2 *sf2, EltID id, VoiceParam *voiceParamTmp, bool 
         // Accordage, position, attenuation
         this->fineTune          = this->get(champ_fineTune, readShort, 0);
         this->coarseTune        = this->get(champ_coarseTune, readShort, 0);
-        this->scaleTune         = this->get(champ_scaleTuning, readShort, 0);
         this->pan               = (double)this->get(champ_pan, readShort, 0) / 10;
         this->attenuation       = (double)this->get(champ_initialAttenuation, readShort, 0) / 10;
         this->filterQ           = (double)this->get(champ_initialFilterQ, readShort, 0) / 10;
@@ -124,11 +147,17 @@ VoiceParam::VoiceParam(Pile_sf2 *sf2, EltID id, VoiceParam *voiceParamTmp, bool 
         this->modEnvToPitch     = this->get(champ_modEnvToPitch, readShort, 0);
         this->modEnvToFilterFc  = this->get(champ_modEnvToFilterFc, readShort, 0);
 
+        // LFOs
+        this->modLfoToPitch     = this->get(champ_modLfoToPitch, readShort, 0);
+        this->modLfoToFilterFreq= this->get(champ_modLfoToFilterFc, readShort, 0);
+        this->modLfoToVolume    = (double)this->get(champ_modLfoToVolume, readShort, 0) / 10;
+        this->vibLfoToPitch     = this->get(champ_vibLfoToPitch, readShort, 0);
+
         // Paramétrage spécifique
         if (id.typeElement == elementInstSmpl)
         {
             // Filtre
-            this->filterFreq        = this->get(champ_initialFilterFc, readShort, 13500);
+            this->filterFreq        = d1200e2(this->get(champ_initialFilterFc, readShort, 13500)) * 8.176;
 
             // Enveloppe volume
             this->volDelayTime      = d1200e2(this->get(champ_delayVolEnv, readShort, -12000));
@@ -147,19 +176,30 @@ VoiceParam::VoiceParam(Pile_sf2 *sf2, EltID id, VoiceParam *voiceParamTmp, bool 
             this->modReleaseTime    = d1200e2(this->get(champ_releaseModEnv, readShort, -12000));
 
             // Valeurs fixes, boucle
-            this->rootkey       = this->get(champ_overridingRootKey, readWord, -1);
-            this->keynum        = this->get(champ_keynum, readWord, -1);
-            this->fixedVelocity = this->get(champ_velocity, readWord, -1);
-            this->loopStart     = this->get(champ_startloopAddrsOffset, readShort, 0) +
+            this->rootkey           = this->get(champ_overridingRootKey, readWord, -1);
+            this->keynum            = this->get(champ_keynum, readWord, -1);
+            this->scaleTune         = this->get(champ_scaleTuning, readShort, 100);
+            this->fixedVelocity     = this->get(champ_velocity, readWord, -1);
+            this->loopStart         = this->get(champ_startloopAddrsOffset, readShort, 0) +
                     this->get(champ_startloopAddrsCoarseOffset, readShort, 0) * 32768;
-            this->loopEnd       = this->get(champ_endloopAddrsOffset, readShort, 0) +
+            this->loopEnd           = this->get(champ_endloopAddrsOffset, readShort, 0) +
                     this->get(champ_endloopAddrsCoarseOffset, readShort, 0) * 32768;
-            this->loopMode      = this->get(champ_sampleModes, readWord, 0);
+            this->sampleStart         = this->get(champ_startAddrsOffset, readShort, 0) +
+                    this->get(champ_startAddrsCoarseOffset, readShort, 0) * 32768;
+            this->sampleEnd           = this->get(champ_endAddrsOffset, readShort, 0) +
+                    this->get(champ_endAddrsCoarseOffset, readShort, 0) * 32768;
+            this->loopMode          = this->get(champ_sampleModes, readWord, 0);
+
+            // LFOs
+            this->modLfoDelay       = d1200e2(this->get(champ_delayModLFO, readShort, -12000));
+            this->modLfoFreq        = d1200e2(this->get(champ_freqModLFO, readShort, 0)) * 8.176;
+            this->vibLfoDelay       = d1200e2(this->get(champ_delayVibLFO, readShort, -12000));
+            this->vibLfoFreq        = d1200e2(this->get(champ_freqVibLFO, readShort, 0)) * 8.176;
         }
         else
         {
             // Filtre
-            this->filterFreq        = this->get(champ_initialFilterFc, readShort, 1);
+            this->filterFreq        = d1200e2(this->get(champ_initialFilterFc, readShort, 0));
 
             // Enveloppe volume
             this->volDelayTime      = d1200e2(this->get(champ_delayVolEnv, readShort, 0));
@@ -176,44 +216,65 @@ VoiceParam::VoiceParam(Pile_sf2 *sf2, EltID id, VoiceParam *voiceParamTmp, bool 
             this->modReleaseTime    = d1200e2(this->get(champ_releaseModEnv, readShort, 0));
 
             // Valeurs fixes, boucle
-            this->rootkey       = -1;
-            this->loopStart     = 0;
-            this->loopEnd       = 0;
-            this->keynum        = -1;
-            this->fixedVelocity = -1;
-            this->loopMode      = -1;
+            this->rootkey           = -1;
+            this->loopStart         = 0;
+            this->loopEnd           = 0;
+            this->sampleStart       = 0;
+            this->sampleEnd         = 0;
+            this->keynum            = -1;
+            this->scaleTune         = this->get(champ_scaleTuning, readShort, 0);
+            this->fixedVelocity     = -1;
+            this->loopMode          = -1;
+
+            // LFOs
+            this->modLfoDelay       = d1200e2(this->get(champ_delayModLFO, readShort, 0));
+            this->modLfoFreq        = d1200e2(this->get(champ_freqModLFO, readShort, 0));
+            this->vibLfoDelay       = d1200e2(this->get(champ_delayVibLFO, readShort, 0));
+            this->vibLfoFreq        = d1200e2(this->get(champ_freqVibLFO, readShort, 0));
         }
     }
 
     // Addition avec voiceParamTmp si présent
     if (voiceParamTmp)
         this->add(voiceParamTmp);
+
     // Limites
-    this->fineTune      = limit(this->fineTune,     -99,    99);
-    this->coarseTune    = limit(this->coarseTune,   -120,   120);
-    this->pan           = limit(this->pan,          -50.,   50.);
-    this->attenuation   = limit(this->attenuation,  0.,     144.);
-    this->scaleTune     = limit(this->scaleTune,    0,      1200);
-    this->filterFreq    = limit(this->filterFreq,   18.,    19914.);
-    this->filterQ       = limit(this->filterQ,      0.,     96.);
-    this->volDelayTime      = limit(this->volDelayTime, 0.001, 18.);
-    this->volAttackTime     = limit(this->volAttackTime, 0.001, 101.6);
-    this->volHoldTime       = limit(this->volHoldTime, 0.001, 18.);
-    this->volDecayTime      = limit(this->volDecayTime, 0.001, 101.6);
-    this->volSustainLevel   = limit(this->volSustainLevel, 0., 144.);
-    this->volReleaseTime    = limit(this->volReleaseTime, 0.001, 101.6);
-    this->volKeynumToHold   = limit(this->volKeynumToHold, -1200, 1200);
-    this->volKeynumToDecay  = limit(this->volKeynumToDecay, -1200, 1200);
-    this->modDelayTime      = limit(this->modDelayTime, 0.001, 18.);
-    this->modAttackTime     = limit(this->modAttackTime, 0.001, 101.6);
-    this->modHoldTime       = limit(this->modHoldTime, 0.001, 18.);
-    this->modDecayTime      = limit(this->modDecayTime, 0.001, 101.6);
-    this->modSustainLevel   = limit(this->modSustainLevel, 0., 144.);
-    this->modReleaseTime    = limit(this->modReleaseTime, 0.001, 101.6);
-    this->modKeynumToHold   = limit(this->modKeynumToHold, -1200, 1200);
-    this->modKeynumToDecay  = limit(this->modKeynumToDecay, -1200, 1200);
-    this->modEnvToPitch     = limit(this->modEnvToPitch, -12000, 12000);
-    this->modEnvToFilterFc  = limit(this->modEnvToFilterFc, -12000, 12000);
+    if (id.typeElement == elementSmpl)
+    {
+        this->fineTune          = limit(this->fineTune,     -99,    99);
+        this->coarseTune        = limit(this->coarseTune,   -120,   120);
+        this->pan               = limit(this->pan,          -50.,   50.);
+        this->attenuation       = limit(this->attenuation,  0.,     144.);
+        this->scaleTune         = limit(this->scaleTune,    0,      1200);
+        this->filterFreq        = limit(this->filterFreq,   18.,    19914.);
+        this->filterQ           = limit(this->filterQ,      0.,     96.);
+        this->volDelayTime      = limit(this->volDelayTime, 0.001, 18.);
+        this->volAttackTime     = limit(this->volAttackTime, 0.001, 101.6);
+        this->volHoldTime       = limit(this->volHoldTime, 0.001, 18.);
+        this->volDecayTime      = limit(this->volDecayTime, 0.001, 101.6);
+        this->volSustainLevel   = limit(this->volSustainLevel, 0., 144.);
+        this->volReleaseTime    = limit(this->volReleaseTime, 0.001, 101.6);
+        this->volKeynumToHold   = limit(this->volKeynumToHold, -1200, 1200);
+        this->volKeynumToDecay  = limit(this->volKeynumToDecay, -1200, 1200);
+        this->modDelayTime      = limit(this->modDelayTime, 0.001, 18.);
+        this->modAttackTime     = limit(this->modAttackTime, 0.001, 101.6);
+        this->modHoldTime       = limit(this->modHoldTime, 0.001, 18.);
+        this->modDecayTime      = limit(this->modDecayTime, 0.001, 101.6);
+        this->modSustainLevel   = limit(this->modSustainLevel, 0., 144.);
+        this->modReleaseTime    = limit(this->modReleaseTime, 0.001, 101.6);
+        this->modKeynumToHold   = limit(this->modKeynumToHold, -1200, 1200);
+        this->modKeynumToDecay  = limit(this->modKeynumToDecay, -1200, 1200);
+        this->modEnvToPitch     = limit(this->modEnvToPitch, -12000, 12000);
+        this->modEnvToFilterFc  = limit(this->modEnvToFilterFc, -12000, 12000);
+        this->modLfoDelay       = limit(this->modLfoDelay, 0.001, 20.);
+        this->modLfoFreq        = limit(this->modLfoFreq, 0.001, 100.);
+        this->vibLfoDelay       = limit(this->vibLfoDelay, 0.001, 20.);
+        this->vibLfoFreq        = limit(this->vibLfoFreq, 0.001, 100.);
+        this->modLfoToPitch     = limit(this->modLfoToPitch, -12000, 12000);
+        this->modLfoToFilterFreq= limit(this->modLfoToFilterFreq, -12000, 12000);
+        this->modLfoToVolume    = limit(this->modLfoToVolume, -96., 96.);
+        this->vibLfoToPitch     = limit(this->vibLfoToPitch, -12000, 12000);
+    }
 }
 
 // Remplissage des paramètres
@@ -246,7 +307,16 @@ void VoiceParam::add(VoiceParam * voiceParamTmp)
     this->modKeynumToDecay  += voiceParamTmp->modKeynumToDecay;
     this->modEnvToPitch     += voiceParamTmp->modEnvToPitch;
     this->modEnvToFilterFc  += voiceParamTmp->modEnvToFilterFc;
-    //
+    // LFOs
+    this->modLfoDelay       *= voiceParamTmp->modLfoDelay;
+    this->modLfoFreq        *= voiceParamTmp->modLfoFreq;
+    this->vibLfoDelay       *= voiceParamTmp->vibLfoDelay;
+    this->vibLfoFreq        *= voiceParamTmp->vibLfoFreq;
+    this->modLfoToPitch     += voiceParamTmp->modLfoToPitch;
+    this->modLfoToFilterFreq+= voiceParamTmp->modLfoToFilterFreq;
+    this->modLfoToVolume    += voiceParamTmp->modLfoToVolume;
+    this->vibLfoToPitch     += voiceParamTmp->vibLfoToPitch;
+    // Autres
     if (voiceParamTmp->loopMode != -1)
         this->loopMode = voiceParamTmp->loopMode;
     if (voiceParamTmp->rootkey != -1)
@@ -257,6 +327,8 @@ void VoiceParam::add(VoiceParam * voiceParamTmp)
         this->fixedVelocity = voiceParamTmp->fixedVelocity;
     this->loopStart         += voiceParamTmp->loopStart;
     this->loopEnd           += voiceParamTmp->loopEnd;
+    this->sampleStart       += voiceParamTmp->sampleStart;
+    this->sampleEnd         += voiceParamTmp->sampleEnd;
 }
 
 qint32 VoiceParam::get(Champ champ, ReadMethod readMethod, qint32 defaultValue)
@@ -283,13 +355,13 @@ double VoiceParam::getPitchDifference(int note)
     double noteJouee = note;
     if (this->keynum > -1)
         noteJouee = this->keynum;
-    noteJouee += (double)(fineTune) / 100 + coarseTune;
-    return noteJouee - this->rootkey;
+    return (noteJouee - this->rootkey) * ((double)scaleTune / 100.)
+           + (double)(fineTune) / 100 + coarseTune;
 }
 
 double VoiceParam::d1200e2(qint32 val)
 {
-    return pow(2, ((double)val / 1200));
+    return pow(2., ((double)val / 1200));
 }
 
 double VoiceParam::limit(double val, double min, double max)

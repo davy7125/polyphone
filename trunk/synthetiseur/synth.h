@@ -78,10 +78,13 @@ protected slots:
     void emitCurrentPosChanged(int pos);
 
 private:
-    Voice *fusion(char * data1, qint64 size, Voice * voice);
-    Voice *fusion(char * data1, char * data2, qint64 size, Voice * voice);
+    static Voice *fusion(char * data1, qint64 size, Voice * voice);
+    static Voice *fusion(char * data1, char * data2, qint64 size, Voice * voice);
+    void clip(double * data, qint64 size);
+    void clip(double * data1, double *data2, qint64 size);
     void endVoice(Voice * voice);
     bool getInterrupt();
+
     // Pointeur vers les données
     Pile_sf2 * m_sf2;
     // Liste des voix
@@ -96,6 +99,8 @@ private:
     bool m_isStereo;
     bool m_isLoopEnabled;
     bool m_isSinusEnabled;
+    // Etat clipping
+    double m_clipCoef;
     // Protection des données et déclenchement de la génération de données
     QMutex m_mutexInterrupt;
     QMutex m_mutexVoices;

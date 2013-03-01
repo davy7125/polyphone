@@ -41,9 +41,9 @@ public:
     double rootkey;
     // FILTRE
     double filterFreq, filterQ;
-    // BOUCLES
-    qint32 loopStart, loopEnd;
+    // BOUCLES ET OFFSETS
     int loopMode;
+    qint32 loopStart, loopEnd, sampleStart, sampleEnd;
     // ATTENUATION, BALANCE
     double attenuation, pan;
     int fixedVelocity;
@@ -56,6 +56,10 @@ public:
     qint32 modKeynumToHold, modKeynumToDecay;
     qint32 modEnvToPitch, modEnvToFilterFc;
     double modSustainLevel;
+    // LFOs
+    double modLfoDelay, modLfoFreq, vibLfoDelay, vibLfoFreq;
+    qint32 modLfoToPitch, modLfoToFilterFreq, vibLfoToPitch;
+    double modLfoToVolume;
 private:
     enum ReadMethod
     {

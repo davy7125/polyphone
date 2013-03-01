@@ -35,6 +35,7 @@ Synth::Synth(Pile_sf2 *sf2, QObject *parent) :
     m_isStereo(false),
     m_isLoopEnabled(false),
     m_isSinusEnabled(false),
+    m_clipCoef(1),
     m_interrupt(false)
 {
     m_mutexInterrupt.unlock();
@@ -232,27 +233,65 @@ void Synth::generateData(qint64 nbData)
     if (nbData <= 0) return;
     // Nombre de valeurs à ajouter
     nbData = 4 * nbData / m_format.sampleSize() + 1; // division par (nb voix * octets) et 0 interdit
-    if (!m_isJack)
+    if (m_isJack)
     {
-        // Initialisation des donnees a ecrire
-        char data[nbData * 8]; // 2 voix de 4 octets
+        // Initialisation données à écrire
+        char data1[nbData * 8];
+        char data2[nbData * 8]; // 2 voix de 8 octets
         for (int i = 0; i < nbData * 8; i++)
+        {
+            data1[i] = 0;
+            data2[i] = 0;
+        }
+        // Fusion des voix
+        m_mutexVoices.lock();
+        QList<Voice *> listeVoice;
+        for (int i = 0; i < m_listeVoix.size(); i++)
+            listeVoice.append(this->fusion(data1, data2, nbData * 8, m_listeVoix.at(i)));
+        // Suppression des voix terminées
+        for (int i = 0; i < listeVoice.size(); i++)
+            this->endVoice(listeVoice.at(i));
+        m_mutexVoices.unlock();
+        // TODO : vérif -1, 1 et passage en float
+        clip((double*)data1, (double*)data2, nbData);
+        double * dataD1 = (double *)data1;
+        float * dataF1 = (float *)data1;
+        double * dataD2 = (double *)data2;
+        float * dataF2 = (float *)data2;
+        for (qint64 i = 0; i < nbData * 2; i++)
+        {
+            dataF1[i] = (float)dataD1[i];
+            dataF2[i] = (float)dataD2[i];
+        }
+        //// ECRITURE SUR LE BUFFER ////
+        this->writeData(data1, data2, nbData * 4);
+    }
+    else
+    {
+        // Initialisation des données à écrire
+        char data[nbData * 16]; // 2 voix de 8 octets
+        for (int i = 0; i < nbData * 16; i++)
             data[i] = 0;
         // Fusion des voix
         m_mutexVoices.lock();
         QList<Voice *> listeVoice;
         for (int i = 0; i < m_listeVoix.size(); i++)
-            listeVoice.append(this->fusion(data, nbData * 8, m_listeVoix.at(i)));
+            listeVoice.append(this->fusion(data, nbData * 16, m_listeVoix.at(i)));
         // Suppression des voix terminees
         for (int i = 0; i < listeVoice.size(); i++)
             this->endVoice(listeVoice.at(i));
         m_mutexVoices.unlock();
+        // Clip et passage qint32
+        clip((double*)data, nbData * 2);
+        double * dataD = (double *)data;
+        qint32 * data32 = (qint32 *)data;
+        for (qint64 i = 0; i < nbData * 2; i++)
+            data32[i] = (qint32)(dataD[i] * 2147483647);
         //// ADAPTATION AU FORMAT AUDIO ////
         // adaptation signed / unsigned
         if (m_format.sampleType() == QAudioFormat::UnSignedInt)
         {
             // Conversion signed => unsigned
-            const qint32 * data32 = (const qint32 *)data;
             quint32 * dataU32 = (quint32 *)data;
             for (int i = 0; i < nbData * 2; i++)
                 dataU32[i] = (qint64)data32[i] + 2147483648LL;
@@ -264,31 +303,11 @@ void Synth::generateData(qint64 nbData)
         //// ECRITURE SUR LE BUFFER ////
         this->writeData(data2, nbData * m_format.sampleSize() / 4);
     }
-    else
-    {
-        // Initialisation donnees a ecrire
-        QByteArray baData1, baData2;
-        baData1.resize(nbData * 4);
-        baData2.resize(nbData * 4); // 2 voix de 4 octets
-        baData1.fill(0);
-        baData2.fill(0);
-        // Fusion des voix
-        m_mutexVoices.lock();
-        QList<Voice *> listeVoice;
-        for (int i = 0; i < m_listeVoix.size(); i++)
-            listeVoice.append(this->fusion(baData1.data(), baData2.data(), nbData * 4, m_listeVoix.at(i)));
-        // Suppression des voix terminees
-        for (int i = 0; i < listeVoice.size(); i++)
-            this->endVoice(listeVoice.at(i));
-        m_mutexVoices.unlock();
-        //// ECRITURE SUR LE BUFFER ////
-        this->writeData(baData1.constData(), baData2.constData(), nbData * 4);
-    }
 }
 Voice* Synth::fusion(char * data1, qint64 size, Voice * voice)
 {
     Voice * voiceRet = NULL;
-    // Recuperation des donnees
+    // Récupération des donnees
     char data[size/2];
     qint64 nbRead = voice->readData(data, size / 2); // passage mono
     if (nbRead < 0)
@@ -298,15 +317,16 @@ Voice* Synth::fusion(char * data1, qint64 size, Voice * voice)
     }
     if (nbRead != size / 2)
         qDebug() << "warning: synth asked" << size/2 << "samples and got" << nbRead;
-    // Ajout en separant les voix
+    // Ajout en imbriquant les voix
     double pan = (voice->getVoiceParam()->pan + 50) / 100; // entre 0 et 1
-    qint32 * data1I = (qint32 *)data1;
-    qint32 * dataI = (qint32 *)data;
+    double pan2 = 1. - pan;
+    double * data1D = (double *)data1;
+    double * dataD = (double *)data;
     // Ajout en separant les voix (stereo)
-    for (quint32 i = 0; i < nbRead / 4; i++)
+    for (quint32 i = 0; i < nbRead / 8; i++)
     {
-        data1I[2*i]   += pan        * dataI[i];
-        data1I[2*i+1] += (1. - pan) * dataI[i];
+        data1D[2*i]   += pan  * dataD[i];
+        data1D[2*i+1] += pan2 * dataD[i];
     }
     return voiceRet;
 }
@@ -323,19 +343,85 @@ Voice* Synth::fusion(char * data1, char * data2, qint64 size, Voice * voice)
     }
     if (nbRead != size)
         qDebug() << "warning: synth asked" << size << "samples and got" << nbRead;
-    // Ajout en separant les voix, conversion en float en meme temps
+    // Ajout en séparant les voix
     double pan = (voice->getVoiceParam()->pan + 50) / 100; // entre 0 et 1
-    float * data1F = (float *)data1;
-    float * data2F = (float *)data2;
-    qint32 * dataI = (qint32 *)data;
-    double dTmp;
-    for (quint32 i = 0; i < size / 4; i++)
+    double pan2 = 1. - pan;
+    double * data1D = (double *)data1;
+    double * data2D = (double *)data2;
+    double * dataD = (double *)data;
+    for (quint32 i = 0; i < size / 8; i++)
     {
-        dTmp = (double)dataI[i] / 2147483647;
-        data1F[i] += pan        * dTmp;
-        data2F[i] += (1. - pan) * dTmp;
+        data1D[i] += pan  * dataD[i];
+        data2D[i] += pan2 * dataD[i];
     }
     return voiceRet;
+}
+void Synth::clip(double * data, qint64 size)
+{
+    // Recherche valeur maxi
+    double dMax = 0;
+    qint32 pos = -1;
+    double dTmp;
+    for (qint32 i = 0; i < size; i++)
+    {
+        dTmp = qAbs(data[i]);
+        if (dTmp > dMax)
+        {
+            dMax = dTmp;
+            pos = i;
+        }
+    }
+    if (dMax > .99)
+    {
+        double coef = .99 / dMax;
+        for (int i = 0; i < pos; i++)
+        {
+            data[i] *= (double)(pos - i) / pos * m_clipCoef
+                     + (double)i / pos * coef;
+        }
+        m_clipCoef = coef;
+        for (int i = pos; i < size; i++)
+            data[i] *= coef;
+    }
+}
+void Synth::clip(double * data1, double * data2, qint64 size)
+{
+    // Recherche valeur maxi
+    double dMax = 0;
+    qint32 pos = -1;
+    double dTmp;
+    for (qint32 i = 0; i < size; i++)
+    {
+        dTmp = qAbs(data1[i]);
+        if (dTmp > dMax)
+        {
+            dMax = dTmp;
+            pos = i;
+        }
+        dTmp = qAbs(data2[i]);
+        if (dTmp > dMax)
+        {
+            dMax = dTmp;
+            pos = i;
+        }
+    }
+    if (dMax > .99)
+    {
+        double coef = .99 / dMax;
+        for (int i = 0; i < pos; i++)
+        {
+            dTmp = (double)(pos - i) / pos * m_clipCoef
+                    + (double)i / pos * coef;
+            data1[i] *= dTmp;
+            data2[i] *= dTmp;
+        }
+        m_clipCoef = coef;
+        for (int i = pos; i < size; i++)
+        {
+            data1[i] *= coef;
+            data2[i] *= coef;
+        }
+    }
 }
 void Synth::endVoice(Voice * voice)
 {
