@@ -93,5 +93,7 @@
     </qresource>
     <qresource prefix="/traductions">
         <file alias="polyphone_en.qm">ressources/traductions/polyphone_en.qm</file>
+        <file alias="polyphone_de.qm">ressources/traductions/polyphone_de.qm</file>
+        <file alias="polyphone_nl.qm">ressources/traductions/polyphone_nl.qm</file>
     </qresource>
 </RCC>
