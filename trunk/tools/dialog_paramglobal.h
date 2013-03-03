@@ -27,6 +27,7 @@
 
 #include <QDialog>
 #include "qcustomplot.h"
+#include "pile_sf2.h"
 
 namespace Ui
 {
@@ -38,16 +39,24 @@ class DialogParamGlobal : public QDialog
     Q_OBJECT
     
 public:
-    explicit DialogParamGlobal(QWidget *parent = 0);
+    explicit DialogParamGlobal(Pile_sf2 *sf2, EltID id, QWidget *parent = 0);
     ~DialogParamGlobal();
+
 private slots:
     void accept();
     void indexMotifChanged(int index);  // Action sur le combobox motif
     void raideurChanged(double value);  // Action sur spinBox raideur
+    void applyToOthers();
+    void eltChanged(QList<EltID> listElt);
+
 signals:
-    void accepted(QVector<double> dValues, int typeModif, int param);
+    void accepted(QVector<double> dValues, QList<EltID> listElt, int typeModif, int param);
+
 private:
+    Pile_sf2 * _sf2;
     Ui::DialogParamGlobal *ui;
+    QList<EltID> _listElt;
+    EltID _initialID;
 };
 
 class GraphParamGlobal : public QCustomPlot
@@ -82,6 +91,7 @@ public:
     void indexMotifChanged(int index);
     void raideurChanged(double value);
     QVector<double> getValues();
+
 private:
     QVector<double> dValues;
     bool flagEdit;

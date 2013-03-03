@@ -50,7 +50,7 @@ public:
     static void exporter(QString fileName, Sound son);
     static void exporter(QString fileName, Sound son1, Sound son2);
     // utilitaires
-    static QByteArray resampleMono(QByteArray data, double echInit, qint32 echFinal, WORD wBps, qint32 valPrec, double &d, bool quick = true);
+    static QByteArray resampleMono(QByteArray data, double echInit, qint32 echFinal, WORD wBps);
     static QByteArray bandFilter(QByteArray baData, WORD wBps, double dwSmplRate, double fBas, double fHaut, int ordre);
     static QByteArray EQ(QByteArray baData, DWORD dwSmplRate, WORD wBps, int i1, int i2, int i3, int i4, int i5,
                          int i6, int i7, int i8, int i9, int i10);
@@ -118,7 +118,11 @@ private:
     static qint32 mediane(QByteArray baData, WORD wBps);
     static qint64 somme(QByteArray baData, WORD wBps);
     static qint64 sommeCarre(QByteArray baData, WORD wBps);
-    static void regimePermanent(QByteArray baData, DWORD dwSmplRate, WORD wBps, qint32 &posStart, qint32 &posEnd, int nbOK, double coef);
+    static void regimePermanent(QByteArray baData, DWORD dwSmplRate, WORD wBps, qint32 &posStart,
+                                qint32 &posEnd, int nbOK, double coef);
+    static double sinc(double x);
+    static void KBDWindow(double* window, int size, double alpha);
+    static double BesselI0(double x);
 };
 
 #endif // SOUND_H

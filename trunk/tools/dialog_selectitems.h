@@ -22,71 +22,36 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef PAGE_PRST_H
-#define PAGE_PRST_H
+#ifndef DIALOG_SELECTITEMS_H
+#define DIALOG_SELECTITEMS_H
 
-#include <QWidget>
-#include "page.h"
+#include <QDialog>
+#include "pile_sf2.h"
 
-namespace Ui
-{
-    class Page_Prst;
+namespace Ui {
+class DialogSelectItems;
 }
 
-
-class SpinBox; // Déclaration anticipée
-
-class Page_Prst : public PageTable
+class DialogSelectItems : public QDialog
 {
     Q_OBJECT
+    
 public:
-    explicit Page_Prst(QWidget *parent = 0);
-    ~Page_Prst();
-    void setModVisible(bool visible);
-    void afficher();
-    void spinUpDown(int steps, SpinBox *spin);
-    void firstAvailablePresetBank(EltID id, int &nBank, int &nPreset);
-    void duplication();
+    explicit DialogSelectItems(EltID id, QList<EltID> listChecked, Pile_sf2 *sf2, QWidget *parent = 0);
+    ~DialogSelectItems();
 
-public slots:
-    void setBank();
-    void setPreset();
+private slots:
+    void accept();
+    void on_pushSelectAll_clicked();
+    void on_pushSelectCurrent_clicked();
+
+signals:
+    void accepted(QList<EltID> listID);
 
 private:
-    Ui::Page_Prst *ui;
-    static int closestAvailablePreset(EltID id, WORD wBank, WORD wPreset);
-    static bool isAvailable(EltID id, WORD wBank, WORD wPreset);
-    // Outils
-    void duplication(EltID id);
+    Ui::DialogSelectItems *ui;
+    Pile_sf2 *_sf2;
+    EltID _initialID;
 };
 
-// Classe TableWidget pour presets
-class TableWidgetPrst : public TableWidget
-{
-    Q_OBJECT
-public:
-    // Constructeur
-    TableWidgetPrst(QWidget *parent = 0);
-    ~TableWidgetPrst();
-    // Association champ - ligne
-    Champ getChamp(int row);
-    int getRow(WORD champ);
-};
-
-
-// SpinBox
-class SpinBox : public QSpinBox
-{
-    Q_OBJECT
-public:
-    // Constructeur
-    SpinBox(QWidget *parent = 0) : QSpinBox(parent) {}
-    // Initialisation du sf2
-    void init(Page_Prst *page) {this->page = page;}
-public slots:
-    virtual void stepBy(int steps) {this->page->spinUpDown(steps, this);}
-private:
-    Page_Prst *page;
-};
-
-#endif // PAGE_PRST_H
+#endif // DIALOG_SELECTITEMS_H

@@ -40,19 +40,29 @@ class DialogList : public QDialog
     Q_OBJECT
 
 public:
+    enum ModeListDialog
+    {
+        MODE_ASSOCIATION,
+        MODE_REMPLACEMENT
+    };
+
     explicit DialogList(QWidget *parent = 0);
     ~DialogList();
     // méthodes
     void init(MainWindow *window, Pile_sf2 *sf2) {this->window = window; this->sf2 = sf2;}
-    void showDialog(EltID idSrc);
+    void showDialog(EltID idSrc, ModeListDialog mode);
+
 private slots:
     void accept();
+
 signals:
     void selectedID(EltID id);
+
 private:
     Ui::DialogList *ui;
     Pile_sf2 *sf2;
     MainWindow *window;
+    ModeListDialog _mode;
 };
 
 class ListWidgetItem : public QListWidgetItem

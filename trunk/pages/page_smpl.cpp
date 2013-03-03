@@ -29,7 +29,7 @@
 #include "dialog_sifflements.h"
 #include <QProgressDialog>
 #include <QInputDialog>
-
+#include "dialog_wait.h"
 
 Page_Smpl::Page_Smpl(QWidget *parent) :
     Page(PAGE_SMPL, parent), ui(new Ui::Page_Smpl)
@@ -519,6 +519,10 @@ void Page_Smpl::setRate(int index)
     sf2->prepareNewActions();
     // Reprise de l'identificateur si modification
     id = this->tree->getID(0);
+    // Message d'attente (ne fonctionne pas !!!)
+//    DialogWait dial(trUtf8("Rééchantillonnage en cours..."), this);
+//    dial.setModal(true);
+//    dial.open();
     // Sample associé ?
     SFSampleLink typeLien = this->sf2->get(id, champ_sfSampleType).sfLinkValue;
     if (typeLien != monoSample && typeLien != RomMonoSample)
@@ -529,6 +533,7 @@ void Page_Smpl::setRate(int index)
             setRateElt(id2, echFinal);
     }
     setRateElt(id, echFinal);
+//    dial.close();
     // Actualisation
     this->mainWindow->updateDo();
     this->afficher();
@@ -538,8 +543,7 @@ void Page_Smpl::setRateElt(EltID id, DWORD echFinal)
     // Modification échantillonnage
     DWORD echInit = this->sf2->get(id, champ_dwSampleRate).dwValue;
     QByteArray baData = this->sf2->getData(id, champ_sampleDataFull24);
-    double d = 0;
-    baData = Sound::resampleMono(baData, echInit, echFinal, 24, 0, d, false);
+    baData = Sound::resampleMono(baData, echInit, echFinal, 24);
     this->sf2->set(id, champ_sampleDataFull24, baData);
     Valeur val;
     val.dwValue = echFinal;
@@ -548,11 +552,11 @@ void Page_Smpl::setRateElt(EltID id, DWORD echFinal)
     val.dwValue = baData.size()/3;
     this->sf2->set(id, champ_dwLength, val);
     DWORD dwTmp = this->sf2->get(id, champ_dwStartLoop).dwValue;
-    dwTmp = (dwTmp * echFinal) / echInit;
+    dwTmp = ((quint64)dwTmp * (quint64)echFinal) / (quint64)echInit;
     val.dwValue = dwTmp;
     this->sf2->set(id, champ_dwStartLoop, val);
     dwTmp = this->sf2->get(id, champ_dwEndLoop).dwValue;
-    dwTmp = (dwTmp * echFinal) / echInit;
+    dwTmp = ((quint64)dwTmp * (quint64)echFinal) / (quint64)echInit;
     val.dwValue = dwTmp;
     this->sf2->set(id, champ_dwEndLoop, val);
 }
@@ -1098,8 +1102,7 @@ void Page_Smpl::transposer()
                 // Calcul de l'échantillonnage fictif de départ
                 double echInit = (double)echFinal * pow(2, rep/12);
                 // Rééchantillonnage
-                double d = 0;
-                baData = Sound::resampleMono(baData, echInit, echFinal, 24, 0, d, false);
+                baData = Sound::resampleMono(baData, echInit, echFinal, 24);
                 this->sf2->set(id, champ_sampleDataFull24, baData);
                 // Ajustement de length, startLoop, endLoop
                 Valeur val;
@@ -1680,7 +1683,6 @@ void GraphiqueFourier::setPos(qint32 posStart, qint32 posEnd)
 
     // Recherche des corrélations minimales (= plus grandes similitudes)
     quint32 * posMinCor = Sound::findMins(baCorrel, 16, 10, 0.9);
-
     // Recherche des intensités maximales
     int nbPic = 50;
     quint32 * posMaxFFT = Sound::findMax(baFourier, 32, nbPic, 0.05);
@@ -1714,17 +1716,19 @@ void GraphiqueFourier::setPos(qint32 posStart, qint32 posEnd)
         numeroPic = 0;
         while (rep == false && numeroPic < nbPic)
         {
+            //qDebug() << "iMin" << iMin << "iMax" << iMax << "numeroPic" << numeroPic << "posMaxFFT" << posMaxFFT[numeroPic];
             rep = iMin < posMaxFFT[numeroPic] && posMaxFFT[numeroPic] < iMax;
             if (!rep) numeroPic++;
         }
         if (!rep)
         {
             // On prend le plus grand pic de Fourier
-            numeroPic = posMaxFFT[0];
+            numeroPic = 0;
         }
     }
-    freq = (double)(posMaxFFT[numeroPic] * dwSmplRate) / (size - 1);
 
+    freq = (double)((double)posMaxFFT[numeroPic] * (double)dwSmplRate) / (double)(size - 1);
+    //qDebug() << "numero pic" << numeroPic << "freq" << freq;
     // Numéro de la note correspondant à cette fréquence
     double note3 = 12*log2(freq)-36.3763;
     if (note3 < 0) note3 = 0;

@@ -150,7 +150,7 @@ void Voice::generateData(qint64 nbData)
             val1 = dataTmp[(int)floor(pos)];
             val2 = dataTmp[(int)ceil(pos)];
             pos -= floor(pos);
-            data[i] = ((1. - pos) * val1 + pos * val2) / 2147483648; // Passage en double de -1 à 1
+            data[i] = ((1. - pos) * val1 + pos * val2) / 2147483648LL; // Passage en double de -1 à 1
         }
 
         // FILTRE PASSE-BAS

@@ -25,15 +25,15 @@
 #include "page.h"
 #include "pile_sf2.h"
 #include "mainwindow.h"
+#include "dialog_paramglobal.h"
 #include <QScrollBar>
 
 
 //////////////////////////////////////////// PAGE ////////////////////////////////////////////
 
-Page::Page(TypePage typePage, QWidget *parent) : QWidget(parent)
-{
-    m_typePage = typePage;
-}
+Page::Page(TypePage typePage, QWidget *parent) : QWidget(parent),
+    m_typePage(typePage)
+{}
 // Initialisation des variables statiques
 MainWindow * Page::mainWindow = NULL;
 Tree * Page::tree = NULL;
@@ -314,12 +314,10 @@ genAmountType Page::getValue(QString texte, WORD champ, bool &ok)
     switch (champ)
     {
     case champ_keyRange: case champ_velRange: {
-        char T[11];
+        char T[20];
         strcpy(T, texte.toStdString().c_str());
         int val1, val2, val3;
-        if (sscanf(T, "%d-%d", &val1, &val2) != 2)
-            ok = 0;
-        else
+        if (sscanf(T, "%d-%d", &val1, &val2) == 2)
         {
             if (val1 > val2)
             {
@@ -330,6 +328,13 @@ genAmountType Page::getValue(QString texte, WORD champ, bool &ok)
             genAmount.ranges.byLo = limit(val1, 0, 127, 0, 127);
             genAmount.ranges.byHi = limit(val2, 0, 127, 0, 127);
         }
+        else if (sscanf(T, "%d-%d", &val1, &val2) == 1)
+        {
+            genAmount.ranges.byLo = limit(val1, 0, 127, 0, 127);
+            genAmount.ranges.byHi = limit(val1, 0, 127, 0, 127);
+        }
+        else
+            ok = 0;
         }; break;
     case champ_initialAttenuation: case champ_sustainVolEnv:
         genAmount.shAmount = (WORD)limit(10*texte.toDouble(&ok), 0, 1440, -1440, 1440);
@@ -439,6 +444,8 @@ int Page::limit(int iTmp, int minInst, int maxInst, int minPrst, int maxPrst)
 
 
 //////////////////////////////////////////// PAGE TABLE ////////////////////////////////////////////
+
+QList<PageTable::Modulator> PageTable::_modulatorCopy;
 
 PageTable::PageTable(TypePage typePage, QWidget *parent) : Page(typePage, parent)
 {
@@ -1355,8 +1362,8 @@ void PageTable::setDest(int index)
     if (id2.typeElement != elementUnknown)
     {
         // Comparaison avec valeur précédente
-        val.wValue = this->sf2->get(id2, champ_sfModDestOper).wValue;
-        if (val.wValue != index)
+        val.sfGenValue = this->sf2->get(id2, champ_sfModDestOper).sfGenValue;
+        if (val.sfGenValue != (Champ)index)
         {
             this->sf2->prepareNewActions();
             // Reprise des identificateurs si modification
@@ -1393,7 +1400,7 @@ void PageTable::setDest(int index)
                     id4.indexMod = this->getAssociatedMod(id3);
                     if (id4.indexMod != -1)
                     {
-                        val2.wValue = 0;
+                        val2.sfGenValue = (Champ)0;
                         this->sf2->set(id4, champ_sfModDestOper, val2);
                     }
                 } while (id4.indexMod != -1);
@@ -1402,7 +1409,7 @@ void PageTable::setDest(int index)
                 val2.sfModValue.CC = 0;
                 this->sf2->set(id3, champ_sfModSrcOper, val2);
             }
-            val.wValue = index;
+            val.sfGenValue = (Champ)index;
             this->sf2->set(id2, champ_sfModDestOper, val);
             if (this->tableMod->selectedItems().count())
                 this->afficheMod(id, this->tableMod->selectedItems().takeFirst()->row());
@@ -1883,6 +1890,126 @@ void PageTable::nouveauMod()
     this->afficheMod(this->tree->getID(0), id.indexMod);
     this->mainWindow->updateDo();
 }
+void PageTable::copyMod()
+{
+    // Sauvegarde des mods
+    if (this->tree->getSelectedItemsNumber() != 1)
+        return;
+    EltID id = this->tree->getID(0);
+    if (id.typeElement == elementInst) id.typeElement = elementInstMod;
+    else if (id.typeElement == elementPrst) id.typeElement = elementPrstMod;
+    else if (id.typeElement == elementInstSmpl) id.typeElement = elementInstSmplMod;
+    else if (id.typeElement == elementPrstInst) id.typeElement = elementPrstInstMod;
+    else return;
+    _modulatorCopy.clear();
+    for (int i = 0; i < this->sf2->count(id); i++)
+    {
+        id.indexMod = i;
+        if (!this->sf2->get(id, champ_hidden).bValue)
+        {
+            Modulator modTmp;
+            modTmp.modSrcOper = this->sf2->get(id, champ_sfModSrcOper).sfModValue;
+            modTmp.modDestOper = this->sf2->get(id, champ_sfModDestOper).sfGenValue;
+            modTmp.modAmount = this->sf2->get(id, champ_modAmount).shValue;
+            modTmp.modAmtSrcOper = this->sf2->get(id, champ_sfModAmtSrcOper).sfModValue;
+            modTmp.modTransOper = this->sf2->get(id, champ_sfModTransOper).sfTransValue;
+            modTmp.index = i;
+            _modulatorCopy.append(modTmp);
+        }
+    }
+}
+void PageTable::pasteMod()
+{
+    if (this->tree->getSelectedItemsNumber() != 1)
+        return;
+    this->sf2->prepareNewActions();
+    EltID id = this->tree->getID(0);
+    if (id.typeElement == elementInst) id.typeElement = elementInstMod;
+    else if (id.typeElement == elementPrst) id.typeElement = elementPrstMod;
+    else if (id.typeElement == elementInstSmpl) id.typeElement = elementInstSmplMod;
+    else if (id.typeElement == elementPrstInst) id.typeElement = elementPrstInstMod;
+    else return;
+    if (id.typeElement == elementPrstMod || id.typeElement == elementPrstInstMod)
+    {
+        // Vérification que toutes les destinations sont possibles
+        Champ champTmp;
+        for (int i = 0; i < _modulatorCopy.size(); i++)
+        {
+            champTmp = _modulatorCopy[i].modDestOper;
+            QString warnQStr = trUtf8("Action impossible : ");
+            if (champTmp == champ_startAddrsOffset ||
+                    champTmp == champ_startAddrsCoarseOffset ||
+                    champTmp == champ_startloopAddrsOffset ||
+                    champTmp == champ_startloopAddrsCoarseOffset ||
+                    champTmp == champ_endAddrsOffset ||
+                    champTmp == champ_endAddrsCoarseOffset ||
+                    champTmp == champ_endloopAddrsOffset ||
+                    champTmp == champ_endloopAddrsCoarseOffset)
+            {
+                QMessageBox::warning(this, tr("Attention"), warnQStr +
+                                     trUtf8("les offsets ne peuvent être modulés dans un preset."));
+                return;
+            }
+            else if (champTmp == champ_keynum || champTmp == champ_velocity ||
+                    champTmp == champ_sampleModes ||
+                    champTmp == champ_exclusiveClass ||
+                    champTmp == champ_overridingRootKey)
+            {
+                QMessageBox::warning(this, tr("Attention"), warnQStr +
+                                     "\"" + getGenName(champTmp) + trUtf8("\" ne peut être modulé dans un preset."));
+                return;
+            }
+        }
+    }
+    // Suppression des mods existants
+    int nbElt = this->sf2->count(id);
+    for (int i = nbElt - 1; i >= 0; i--)
+    {
+        id.indexMod = i;
+        if (!this->sf2->get(id, champ_hidden).bValue)
+            this->sf2->remove(id);
+    }
+    // Création de nouveaux mods
+    QList<int> listIndex;
+    for (int i = 0; i < _modulatorCopy.size(); i++)
+        listIndex.append(this->sf2->add(id));
+    // Copie des configurations des mods sauvegardés
+    Valeur valTmp;
+    Modulator modTmp;
+    for (int i = 0; i < _modulatorCopy.size(); i++)
+    {
+        id.indexMod = listIndex.at(i);
+        modTmp = _modulatorCopy.at(i);
+        valTmp.sfModValue = modTmp.modSrcOper;
+        this->sf2->set(id, champ_sfModSrcOper, valTmp);
+        if (modTmp.modDestOper >= 32768)
+        {
+            // Lien vers un autre modulateur
+            int link = modTmp.modDestOper - 32768;
+            int pos = -1;
+            for (int j = 0; j < _modulatorCopy.size(); j++)
+            {
+                if (_modulatorCopy[j].index == link)
+                    pos = j;
+            }
+            if (pos != i && pos > -1)
+                valTmp.sfGenValue = (Champ)(32768 + listIndex.at(pos));
+            else
+                valTmp.sfGenValue = (Champ)0;
+        }
+        else
+            valTmp.sfGenValue = modTmp.modDestOper;
+        this->sf2->set(id, champ_sfModDestOper, valTmp);
+        valTmp.shValue = modTmp.modAmount;
+        this->sf2->set(id, champ_modAmount, valTmp);
+        valTmp.sfModValue = modTmp.modAmtSrcOper;
+        this->sf2->set(id, champ_sfModAmtSrcOper, valTmp);
+        valTmp.sfTransValue = modTmp.modTransOper;
+        this->sf2->set(id, champ_sfModTransOper, valTmp);
+    }
+    this->afficheMod(this->tree->getID(0), -1);
+    this->mainWindow->updateDo();
+}
 
 void PageTable::remplirComboSource(ComboBox *comboBox)
 {
@@ -2265,6 +2392,374 @@ int PageTable::limit(int iVal, Champ champ, EltID id)
     return ret;
 }
 
+void PageTable::paramGlobal()
+{
+    this->sf2->prepareNewActions();
+    EltID id = this->tree->getID(0);
+    if (m_typePage == PAGE_INST)
+        id.typeElement = elementInstSmpl;
+    else
+        id.typeElement = elementPrstInst;
+    // Vérification que l'élément possède au moins un élément lié, avec un keyrange valide
+    int nbElt = 0;
+    int posMin = 128;
+    int posMax = 0;
+    for (int i = 0; i < this->sf2->count(id); i++)
+    {
+        id.indexElt2 = i;
+        if (!this->sf2->get(id, champ_hidden).bValue)
+        {
+            nbElt++;
+            if (this->sf2->isSet(id, champ_keyRange))
+            {
+                if (this->sf2->get(id, champ_keyRange).rValue.byLo < posMin)
+                    posMin = this->sf2->get(id, champ_keyRange).rValue.byLo;
+                if (this->sf2->get(id, champ_keyRange).rValue.byHi > posMax)
+                    posMax = this->sf2->get(id, champ_keyRange).rValue.byHi;
+            }
+        }
+    }
+    if (!nbElt)
+    {
+        if (m_typePage == PAGE_INST)
+            QMessageBox::warning(this, tr("Attention"), trUtf8("L'instrument doit contenir des sons."));
+        else
+            QMessageBox::warning(this, tr("Attention"), trUtf8("Le preset doit contenir des instruments."));
+        return;
+    }
+    if (posMin == posMax)
+    {
+        if (m_typePage == PAGE_INST)
+            QMessageBox::warning(this, tr("Attention"), trUtf8("L'étendue de l'instrument doit contenir au moins 2 notes."));
+        else
+            QMessageBox::warning(this, tr("Attention"), trUtf8("L'étendue du preset doit contenir au moins 2 notes."));
+        return;
+    }
+    else if (posMin > posMax)
+    {
+        if (m_typePage == PAGE_INST)
+            QMessageBox::warning(this, tr("Attention"), trUtf8("Aucune étendue de notes spécifiée pour l'instrument."));
+        else
+            QMessageBox::warning(this, tr("Attention"), trUtf8("Aucune étendue de notes spécifiée pour le preset."));
+        return;
+    }
+    DialogParamGlobal * dialogParam = new DialogParamGlobal(this->sf2, id, this);
+    dialogParam->setAttribute(Qt::WA_DeleteOnClose, true);
+    this->connect(dialogParam, SIGNAL(accepted(QVector<double>,QList<EltID>,int,int)),
+                  SLOT(paramGlobal(QVector<double>,QList<EltID>,int,int)));
+    dialogParam->show();
+}
+void PageTable::paramGlobal(QVector<double> dValues, QList<EltID> listElt, int typeModif, int param)
+{
+    // Paramètre à modifier
+    Champ champ = champ_unknown;
+    switch (param)
+    {
+    case 0: champ = champ_initialAttenuation; break;
+    case 1: champ = champ_coarseTune; break;
+    case 2: champ = champ_fineTune; break;
+    case 3: champ = champ_scaleTuning; break;
+    case 4: champ = champ_initialFilterFc; break;
+    case 5: champ = champ_initialFilterQ; break;
+    case 6: champ = champ_delayVolEnv; break;
+    case 7: champ = champ_attackVolEnv; break;
+    case 8: champ = champ_holdVolEnv; break;
+    case 9: champ = champ_decayVolEnv; break;
+    case 10: champ = champ_sustainVolEnv; break;
+    case 11: champ = champ_releaseVolEnv; break;
+    case 12: champ = champ_keynumToVolEnvHold; break;
+    case 13: champ = champ_keynumToVolEnvDecay; break;
+    case 14: champ = champ_delayModEnv; break;
+    case 15: champ = champ_attackModEnv; break;
+    case 16: champ = champ_holdModEnv; break;
+    case 17: champ = champ_decayModEnv; break;
+    case 18: champ = champ_sustainModEnv; break;
+    case 19: champ = champ_releaseModEnv; break;
+    case 20: champ = champ_modEnvToPitch; break;
+    case 21: champ = champ_modEnvToFilterFc; break;
+    case 22: champ = champ_keynumToModEnvHold; break;
+    case 23: champ = champ_keynumToModEnvDecay; break;
+    case 24: champ = champ_delayModLFO; break;
+    case 25: champ = champ_freqModLFO; break;
+    case 26: champ = champ_modLfoToPitch; break;
+    case 27: champ = champ_modLfoToFilterFc; break;
+    case 28: champ = champ_modLfoToVolume; break;
+    case 29: champ = champ_delayVibLFO; break;
+    case 30: champ = champ_freqVibLFO; break;
+    case 31: champ = champ_vibLfoToPitch; break;
+    case 32: champ = champ_chorusEffectsSend; break;
+    case 33: champ = champ_reverbEffectsSend; break;
+    }
+    // Modification de tous les éléments
+    EltID id;
+    int posMin, posMax;
+    for (int numID = 0; numID < listElt.size(); numID++)
+    {
+        // Pos min et max sur le clavier
+        id = listElt.at(numID);
+        if (id.typeElement == elementInst || id.typeElement == elementInstSmpl)
+            id.typeElement = elementInstSmpl;
+        else
+            id.typeElement = elementPrstInst;
+        posMin = 128;
+        posMax = 0;
+        for (int i = 0; i < this->sf2->count(id); i++)
+        {
+            id.indexElt2 = i;
+            if (!this->sf2->get(id, champ_hidden).bValue)
+            {
+                if (this->sf2->isSet(id, champ_keyRange))
+                {
+                    if (this->sf2->get(id, champ_keyRange).rValue.byLo < posMin)
+                        posMin = this->sf2->get(id, champ_keyRange).rValue.byLo;
+                    if (this->sf2->get(id, champ_keyRange).rValue.byHi > posMax)
+                        posMax = this->sf2->get(id, champ_keyRange).rValue.byHi;
+                }
+            }
+        }
+        if (posMin < posMax)
+        {
+            // Modification des valeurs pour chaque élément associé à id
+            double amount;
+            int pos;
+            char T[30];
+            bool ok;
+            Valeur value;
+            for (int i = 0; i < this->sf2->count(id); i++)
+            {
+                id.indexElt2 = i;
+                if (!this->sf2->get(id, champ_hidden).bValue)
+                {
+                    amount = QString(getTextValue(T, champ, this->sf2->get(id, champ).genValue)).toDouble();
+                    // Calcul de la modification
+                    pos = (this->sf2->get(id, champ_keyRange).rValue.byLo +
+                           this->sf2->get(id, champ_keyRange).rValue.byHi) / 2;
+                    pos = (double)((dValues.size()-1) * (pos - posMin)) / (posMax - posMin);
+                    // Application de la modification
+                    switch (typeModif)
+                    {
+                    case 0: // Ajout
+                        amount += dValues.at(pos);
+                        break;
+                    case 1: // Multiplication
+                        amount *= dValues.at(pos);
+                        break;
+                    case 2: // Remplacement
+                        amount = dValues.at(pos);
+                        break;
+                    }
+                    value.genValue = getValue(QString::number(amount), champ, ok);
+                    this->sf2->set(id, champ, value);
+                }
+            }
+        }
+    }
+    // Actualisation
+    this->mainWindow->updateDo();
+    this->afficher();
+}
+
+
+int PageTable::getDestNumber(int i)
+{
+    if (m_typePage == PAGE_PRST)
+    {
+        switch (i)
+        {
+        case 0:  return 52; // Pitch/Effects
+        case 1:  return 51;
+        case 2:  return 56;
+        case 3:  return 8;
+        case 4:  return 9;
+        case 5:  return 17;
+        case 6:  return 15;
+        case 7:  return 16;
+        case 8:  return 48; // Volume envelope
+        case 9:  return 33;
+        case 10: return 34;
+        case 11: return 35;
+        case 12: return 36;
+        case 13: return 37;
+        case 14: return 38;
+        case 15: return 39;
+        case 16: return 40;
+        case 17: return 25; // Modulation envelope
+        case 18: return 26;
+        case 19: return 27;
+        case 20: return 28;
+        case 21: return 29;
+        case 22: return 30;
+        case 23: return 7;
+        case 24: return 11;
+        case 25: return 31;
+        case 26: return 32;
+        case 27: return 21; // Modulation LFO
+        case 28: return 22;
+        case 29: return 5;
+        case 30: return 13;
+        case 31: return 10;
+        case 32: return 23; // Vibrato LFO
+        case 33: return 24;
+        case 34: return 6;
+        default: return 100;
+        }
+    }
+    else
+    {
+        switch (i)
+        {
+        case 0:  return 0; // Sample
+        case 1:  return 4;
+        case 2:  return 1;
+        case 3:  return 12;
+        case 4:  return 2;
+        case 5:  return 45;
+        case 6:  return 3;
+        case 7:  return 50;
+        case 8:  return 58; // Pitch/Effects
+        case 9:  return 52;
+        case 10: return 51;
+        case 11: return 56;
+        case 12: return 8;
+        case 13: return 9;
+        case 14: return 17;
+        case 15: return 15;
+        case 16: return 16;
+        case 17: return 46;
+        case 18: return 57;
+        case 19: return 48; // Volume envelope
+        case 20: return 33;
+        case 21: return 34;
+        case 22: return 35;
+        case 23: return 36;
+        case 24: return 37;
+        case 25: return 38;
+        case 26: return 39;
+        case 27: return 40;
+        case 28: return 47;
+        case 29: return 54;
+        case 30: return 25; // Modulation envelope
+        case 31: return 26;
+        case 32: return 27;
+        case 33: return 28;
+        case 34: return 29;
+        case 35: return 30;
+        case 36: return 7;
+        case 37: return 11;
+        case 38: return 31;
+        case 39: return 32;
+        case 40: return 21; // Modulation LFO
+        case 41: return 22;
+        case 42: return 5;
+        case 43: return 13;
+        case 44: return 10;
+        case 45: return 23; // Vibrato LFO
+        case 46: return 24;
+        case 47: return 6;
+        default: return 100;
+        }
+    }
+}
+int PageTable::getDestIndex(int i)
+{
+    if (m_typePage == PAGE_PRST)
+    {
+        switch (i)
+        {
+        case 52: return 0; // Pitch/Effects
+        case 51: return 1;
+        case 56: return 2;
+        case 8:  return 3;
+        case 9:  return 4;
+        case 17: return 5;
+        case 15: return 6;
+        case 16: return 7;
+        case 48: return 8; // Volume envelope
+        case 33: return 9;
+        case 34: return 10;
+        case 35: return 11;
+        case 36: return 12;
+        case 37: return 13;
+        case 38: return 14;
+        case 39: return 15;
+        case 40: return 16;
+        case 25: return 17; // Modulation envelope
+        case 26: return 18;
+        case 27: return 19;
+        case 28: return 20;
+        case 29: return 21;
+        case 30: return 22;
+        case 7:  return 23;
+        case 11: return 24;
+        case 31: return 25;
+        case 32: return 26;
+        case 21: return 27; // Modulation LFO
+        case 22: return 28;
+        case 5:  return 29;
+        case 13: return 30;
+        case 10: return 31;
+        case 23: return 32; // Vibrato LFO
+        case 24: return 33;
+        case 6:  return 34;
+        default: return 100;
+        }
+    }
+    else
+    {
+        switch (i)
+        {
+        case 0:  return 0; // Sample
+        case 4:  return 1;
+        case 1:  return 2;
+        case 12: return 3;
+        case 2:  return 4;
+        case 45: return 5;
+        case 3:  return 6;
+        case 50: return 7;
+        case 58: return 8;
+        case 52: return 9; // Pitch/Effects
+        case 51: return 10;
+        case 56: return 11;
+        case 8:  return 12;
+        case 9:  return 13;
+        case 17: return 14;
+        case 15: return 15;
+        case 16: return 16;
+        case 46: return 17;
+        case 57: return 18;
+        case 48: return 19; // Volume envelope
+        case 33: return 20;
+        case 34: return 21;
+        case 35: return 22;
+        case 36: return 23;
+        case 37: return 24;
+        case 38: return 25;
+        case 39: return 26;
+        case 40: return 27;
+        case 47: return 28;
+        case 54: return 29;
+        case 25: return 30; // Modulation envelope
+        case 26: return 31;
+        case 27: return 32;
+        case 28: return 33;
+        case 29: return 34;
+        case 30: return 35;
+        case 7:  return 36;
+        case 11: return 37;
+        case 31: return 38;
+        case 32: return 39;
+        case 21: return 40; // Modulation LFO
+        case 22: return 41;
+        case 5:  return 42;
+        case 13: return 43;
+        case 10: return 44;
+        case 23: return 45; // Vibrato LFO
+        case 24: return 46;
+        case 6:  return 47;
+        default: return 100;
+        }
+    }
+}
 
 //////////////////////////////////////////// TABLE WIDGET ////////////////////////////////////////////
 

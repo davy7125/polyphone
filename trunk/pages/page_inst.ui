@@ -497,6 +497,48 @@
           </property>
          </widget>
         </item>
+        <item>
+         <spacer name="horizontalSpacer">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeType">
+           <enum>QSizePolicy::Fixed</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>10</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pushCopyMod">
+          <property name="maximumSize">
+           <size>
+            <width>50</width>
+            <height>24</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>copier</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pushPasteMod">
+          <property name="maximumSize">
+           <size>
+            <width>50</width>
+            <height>24</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>coller</string>
+          </property>
+         </widget>
+        </item>
        </layout>
       </item>
       <item>
@@ -1124,6 +1166,38 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>pushCopyMod</sender>
+   <signal>clicked()</signal>
+   <receiver>Page_Inst</receiver>
+   <slot>copyMod()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>611</x>
+     <y>197</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>349</x>
+     <y>167</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushPasteMod</sender>
+   <signal>clicked()</signal>
+   <receiver>Page_Inst</receiver>
+   <slot>pasteMod()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>667</x>
+     <y>197</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>349</x>
+     <y>167</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>set(int,int)</slot>
@@ -1138,5 +1212,7 @@
   <slot>setSource2(int)</slot>
   <slot>nouveauMod()</slot>
   <slot>supprimerMod()</slot>
+  <slot>copyMod()</slot>
+  <slot>pasteMod()</slot>
  </slots>
 </ui>

@@ -22,71 +22,19 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef PAGE_PRST_H
-#define PAGE_PRST_H
+#include "dialog_wait.h"
+#include "ui_dialog_wait.h"
 
-#include <QWidget>
-#include "page.h"
-
-namespace Ui
+DialogWait::DialogWait(QString text, QWidget *parent) :
+    QDialog(parent),
+    ui(new Ui::DialogWait)
 {
-    class Page_Prst;
+    ui->setupUi(this);
+    this->ui->label->setText(text);
+    this->ui->label->show();
 }
 
-
-class SpinBox; // Déclaration anticipée
-
-class Page_Prst : public PageTable
+DialogWait::~DialogWait()
 {
-    Q_OBJECT
-public:
-    explicit Page_Prst(QWidget *parent = 0);
-    ~Page_Prst();
-    void setModVisible(bool visible);
-    void afficher();
-    void spinUpDown(int steps, SpinBox *spin);
-    void firstAvailablePresetBank(EltID id, int &nBank, int &nPreset);
-    void duplication();
-
-public slots:
-    void setBank();
-    void setPreset();
-
-private:
-    Ui::Page_Prst *ui;
-    static int closestAvailablePreset(EltID id, WORD wBank, WORD wPreset);
-    static bool isAvailable(EltID id, WORD wBank, WORD wPreset);
-    // Outils
-    void duplication(EltID id);
-};
-
-// Classe TableWidget pour presets
-class TableWidgetPrst : public TableWidget
-{
-    Q_OBJECT
-public:
-    // Constructeur
-    TableWidgetPrst(QWidget *parent = 0);
-    ~TableWidgetPrst();
-    // Association champ - ligne
-    Champ getChamp(int row);
-    int getRow(WORD champ);
-};
-
-
-// SpinBox
-class SpinBox : public QSpinBox
-{
-    Q_OBJECT
-public:
-    // Constructeur
-    SpinBox(QWidget *parent = 0) : QSpinBox(parent) {}
-    // Initialisation du sf2
-    void init(Page_Prst *page) {this->page = page;}
-public slots:
-    virtual void stepBy(int steps) {this->page->spinUpDown(steps, this);}
-private:
-    Page_Prst *page;
-};
-
-#endif // PAGE_PRST_H
+    delete ui;
+}

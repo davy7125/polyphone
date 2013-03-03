@@ -62,6 +62,7 @@ public:
     void updateDo();
     void updateActions();
     void associer(EltID idDest);
+    void remplacer(EltID idSrc);
     void desactiveOutilsSmpl();
     void activeOutilsSmpl();
     bool isPlaying();
@@ -91,6 +92,7 @@ private slots:
     void nouvelInstrument();    // Création d'un instrument
     void nouveauPreset();       // Création d'un preset
     void associer();            // Association InstSmpl et PrstInst
+    void remplacer();           // Remplacement InstSmpl et PrstInst
     void copier();              // Envoi du signal "copier"
     void coller();              // Envoi du signal "coller"
     void supprimer();           // Envoi du signal "supprimer"
@@ -125,6 +127,7 @@ private slots:
     void mixture();             // outil instrument, création mixture
     void release();             // outil instrument, élaboration de releases
     void duplicationPrst();     // outil preset, duplication des divisions
+    void paramGlobal2();        // outil preset, modification globale d'un paramètre
     void attenuationMini();     // outil sf2, mise à jour de toutes les atténuations
     void purger();              // outil sf2, suppression des éléments non utilisés
     void sifflements();         // outil sf2, suppression des sifflements

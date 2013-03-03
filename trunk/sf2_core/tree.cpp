@@ -30,7 +30,7 @@
 // Constructeur, destructeur
 Tree::Tree(QWidget *parent) : QTreeWidget(parent)
 {
-    this->viewport()->installEventFilter(this); // drag&drop
+    this->viewport()->installEventFilter(this); // drag & drop
     this->installEventFilter(this);             // keypress
     this->menuArborescence = NULL;
     this->mainWindow = NULL;
@@ -52,35 +52,39 @@ Tree::menuClicDroit::menuClicDroit(MainWindow *mainWindow)
 {
     // Constructeur menu clic droit sur l'arborescence
     this->menu = new QMenu;
-    this->nouveauSample = new QAction(tr("Nouveau sample..."), this->menu);
+    this->nouveauSample = new QAction(trUtf8("Nouveau sample..."), this->menu);
     connect(this->nouveauSample, SIGNAL(triggered()), mainWindow, SLOT(importerSmpl()));
     this->menu->addAction(this->nouveauSample);
-    this->nouvelInstrument = new QAction(tr("Nouvel instrument..."), this->menu);
+    this->nouvelInstrument = new QAction(trUtf8("Nouvel instrument..."), this->menu);
     connect(this->nouvelInstrument, SIGNAL(triggered()), mainWindow, SLOT(nouvelInstrument()));
     this->menu->addAction(this->nouvelInstrument);
-    this->nouveauPreset = new QAction(tr("Nouveau preset..."), this->menu);
+    this->nouveauPreset = new QAction(trUtf8("Nouveau preset..."), this->menu);
     connect(this->nouveauPreset, SIGNAL(triggered()), mainWindow, SLOT(nouveauPreset()));
     this->menu->addAction(this->nouveauPreset);
     this->menu->addSeparator();
-    this->associer = new QAction(QString::fromUtf8(tr("Associer à...").toStdString().c_str()), this->menu);
+    // Remplacer / associer
+    this->associer = new QAction(trUtf8("Associer à..."), this->menu);
     connect(this->associer, SIGNAL(triggered()), mainWindow, SLOT(associer()));
     this->menu->addAction(this->associer);
+    this->remplacer = new QAction(trUtf8("Remplacer par..."), this->menu);
+    connect(this->remplacer, SIGNAL(triggered()), mainWindow, SLOT(remplacer()));
+    this->menu->addAction(this->remplacer);
     this->menu->addSeparator();
     // Supprimer
-    this->supprimer = new QAction(tr("&Supprimer"), this->menu);
-    this->supprimer->setShortcut(tr("Del"));
+    this->supprimer = new QAction(trUtf8("Supprimer"), this->menu);
+    this->supprimer->setShortcut(trUtf8("Del"));
     connect(this->supprimer, SIGNAL(triggered()), mainWindow, SLOT(supprimerElt()));
     this->menu->addAction(this->supprimer);
     this->menu->addSeparator();
     // Renommer
-    this->renommer = new QAction(tr("&Renommer..."), this->menu);
+    this->renommer = new QAction(trUtf8("Renommer..."), this->menu);
     this->renommer->setShortcut(Qt::Key_F2);
     connect(this->renommer, SIGNAL(triggered()), mainWindow, SLOT(renommer()));
     this->menu->addAction(this->renommer);
     this->menu->addSeparator();
     // Fermer
-    this->fermer = new QAction(tr("&Fermer le fichier"), this->menu);
-    this->fermer->setShortcut(tr("Ctrl+W"));
+    this->fermer = new QAction(trUtf8("Fermer le fichier"), this->menu);
+    this->fermer->setShortcut(trUtf8("Ctrl+W"));
     connect(this->fermer, SIGNAL(triggered()), mainWindow, SLOT(Fermer()));
     this->menu->addAction(this->fermer);
 }
@@ -179,26 +183,33 @@ void Tree::clicTree()
     if (fichierUnique)
     {
         // Action possible : fermer
-        menuArborescence->fermer->setEnabled(1);
+        menuArborescence->fermer->setEnabled(true);
         // Actions possibles : nouveau sample, instrument, preset
-        menuArborescence->nouveauSample->setEnabled(1);
-        menuArborescence->nouvelInstrument->setEnabled(1);
-        menuArborescence->nouveauPreset->setEnabled(1);
+        menuArborescence->nouveauSample->setEnabled(true);
+        menuArborescence->nouvelInstrument->setEnabled(true);
+        menuArborescence->nouveauPreset->setEnabled(true);
         // Associer
-        if (typeUnique && (type == elementSmpl || type == elementInst)) menuArborescence->associer->setEnabled(1);
-        else menuArborescence->associer->setEnabled(0);
+        if (typeUnique && (type == elementSmpl || type == elementInst))
+            menuArborescence->associer->setEnabled(true);
+        else
+            menuArborescence->associer->setEnabled(false);
+        // Remplacer
+        if (nb == 1 && (type == elementInstSmpl || type == elementPrstInst))
+            menuArborescence->remplacer->setEnabled(true);
+        else
+            menuArborescence->remplacer->setEnabled(false);
         // Supprimer
         if (typeUnique && (((type == elementInstSmpl || type == elementPrstInst) && familleUnique) \
                            || type == elementSmpl || type == elementInst || type == elementPrst)
                        && !this->mainWindow->isPlaying())
-            menuArborescence->supprimer->setEnabled(1);
+            menuArborescence->supprimer->setEnabled(true);
         else
-            menuArborescence->supprimer->setEnabled(0);
+            menuArborescence->supprimer->setEnabled(false);
         // Renommer
         if (nb == 1 && typeUnique && (type == elementSmpl || type == elementInst || type == elementPrst || type == elementSf2))
         {
             menuArborescence->renommer->setText(tr("&Renommer..."));
-            menuArborescence->renommer->setEnabled(1);
+            menuArborescence->renommer->setEnabled(true);
         }
         else
         {
@@ -210,25 +221,22 @@ void Tree::clicTree()
             else
             {
                 menuArborescence->renommer->setText(tr("&Renommer..."));
-                menuArborescence->renommer->setEnabled(0);
+                menuArborescence->renommer->setEnabled(false);
             }
         }
     }
     else
     {
-        // Action impossible : fermer
-        menuArborescence->fermer->setEnabled(0);
-        // Actions impossibles : nouveau sample, instrument, preset
-        menuArborescence->nouveauSample->setEnabled(0);
-        menuArborescence->nouvelInstrument->setEnabled(0);
-        menuArborescence->nouveauPreset->setEnabled(0);
-        // Actions impossibles : associer
-        menuArborescence->associer->setEnabled(0);
-        // Action impossible : supprimer
-        menuArborescence->supprimer->setEnabled(0);
-        // Action impossible : renommer
+        // Aucune action possible
+        menuArborescence->fermer->setEnabled(false);
+        menuArborescence->nouveauSample->setEnabled(false);
+        menuArborescence->nouvelInstrument->setEnabled(false);
+        menuArborescence->nouveauPreset->setEnabled(false);
+        menuArborescence->associer->setEnabled(false);
+        menuArborescence->supprimer->setEnabled(false);
         menuArborescence->renommer->setText(tr("&Renommer..."));
-        menuArborescence->renommer->setEnabled(0);
+        menuArborescence->renommer->setEnabled(false);
+        menuArborescence->remplacer->setEnabled(false);
     }
     // Activation, désactivation des actions de MainWindow
     this->mainWindow->updateActions();
