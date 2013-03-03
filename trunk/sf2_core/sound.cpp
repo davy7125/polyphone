@@ -71,7 +71,7 @@ QByteArray Sound::getData(WORD wBps)
             QFile *fi = new QFile(fileName);
             if (!fi->exists())
             {
-                // Si impossible �  ouvrir : pas de message d'erreur et remplissage 0
+                // Si impossible à ouvrir : pas de message d'erreur et remplissage 0
                 baRet.resize(this->info.dwLength);
                 baRet.fill(0);
             }
@@ -111,7 +111,7 @@ QByteArray Sound::getData(WORD wBps)
             QFile *fi = new QFile(fileName);
             if (!fi->exists())
             {
-                // Si impossible �  ouvrir : pas de message d'erreur et remplissage 0
+                // Si impossible à ouvrir : pas de message d'erreur et remplissage 0
                 baRet.resize(this->info.dwLength*2);
                 baRet.fill(0);
             }
@@ -172,7 +172,7 @@ QByteArray Sound::getData(WORD wBps)
             QFile *fi = new QFile(fileName);
             if (!fi->exists())
             {
-                // Si impossible �  ouvrir : pas de message d'erreur et remplissage 0
+                // Si impossible à ouvrir : pas de message d'erreur et remplissage 0
                 baRet.resize(this->info.dwLength*3);
                 baRet.fill(0);
             }
@@ -235,7 +235,7 @@ QByteArray Sound::getData(WORD wBps)
             QFile *fi = new QFile(fileName);
             if (!fi->exists())
             {
-                // Si impossible �  ouvrir : pas de message d'erreur et remplissage 0
+                // Si impossible à ouvrir : pas de message d'erreur et remplissage 0
                 baRet.resize(this->info.dwLength*4);
                 baRet.fill(0);
             }
@@ -439,15 +439,13 @@ void Sound::exporter(QString fileName, Sound son1, Sound son2)
     if (son2.info.dwSampleRate > dwSmplRate)
     {
         // Ajustement son1
-        double d = 0;
-        channel1 = resampleMono(channel1, dwSmplRate, son2.info.dwSampleRate, wBps, 0, d);
+        channel1 = resampleMono(channel1, dwSmplRate, son2.info.dwSampleRate, wBps);
         dwSmplRate = son2.info.dwSampleRate;
     }
     else if (son2.info.dwSampleRate < dwSmplRate)
     {
         // Ajustement son2
-        double d = 0;
-        channel2 = resampleMono(channel2, son2.info.dwSampleRate, dwSmplRate, wBps, 0, d);
+        channel2 = resampleMono(channel2, son2.info.dwSampleRate, dwSmplRate, wBps);
     }
     // Taille et mise en forme des données
     quint32 dwLength = channel1.size();
@@ -976,84 +974,81 @@ void Sound::exporter(QString fileName, QByteArray baData, quint32 dwSmplRate, WO
 //////////////////////////       UTILITAIRES      //////////////////////////
 ////////////////////////////////////////////////////////////////////////////
 
-QByteArray Sound::resampleMono(QByteArray baData, double echInit, qint32 echFinal, WORD wBps, qint32 valPrec, double &d, bool quick)
+QByteArray Sound::resampleMono(QByteArray baData, double echInit, qint32 echFinal, WORD wBps)
 {
-    // Rééchantillonnage d'un signal audio
-    if (echFinal < echInit && !quick)
+    // Paramètres
+    double alpha = 3;
+    qint32 nbPoints = 10;
+
+    // Préparation signal d'entrée
+    baData = bpsConversion(baData, wBps, 32);
+    if (echFinal < echInit)
     {
         // Filtre passe bas (voir sinc filter)
-        baData = Sound::bandFilter(baData, wBps, echInit, echFinal/2, 0, -1);
+        baData = Sound::bandFilter(baData, 32, echInit, echFinal/2, 0, -1);
     }
+    qint32 sizeInit = baData.size() / 4;
+    qint32 * dataI = (qint32*)baData.data();
+    double * data = new double[sizeInit]; // utilisation de new sinon possibilité de dépasser une limite de mémoire
+    for (int i = 0; i < sizeInit; i++)
+        data[i] = (double)dataI[i] / 2147483648.;
+
+    // Création fenêtre Kaiser-Bessel 2048 points
+    double kbdWindow[2048];
+    KBDWindow(kbdWindow, 2048, alpha);
+
+    // Nombre de points à trouver
+    qint32 sizeFinal = (double)(sizeInit - 1.0) * (double)echFinal / echInit + 1;
+    double * dataRet = new double[sizeFinal]; // utilisation de new : même raison
+
+    // Calcul des points par interpolation à bande limitée
+    double pos, delta;
+    qint32 pos1, pos2;
+    double sincCoef[1 + 2 * nbPoints];
+    double valMax = 0;
+    for (qint32 i = 0; i < sizeFinal; i++)
+    {
+        // Position à interpoler
+        pos = (echInit * i) / (double)echFinal;
+        // Calcul des coefs
+        for (qint32 j = -nbPoints; j <= nbPoints; j++)
+        {
+            delta = pos - floor(pos);
+            // Calcul sinus cardinal
+            sincCoef[j + nbPoints] = sinc(M_PI * ((double)j - delta));
+            // Application fenêtre
+            delta = (double)(j + nbPoints - delta) / (1 + 2 * nbPoints) * 2048;
+            pos1 = qMax(0., qMin(floor(delta), 2047.)) + .5;
+            pos2 = qMax(0., qMin(ceil (delta), 2047.)) + .5;
+            sincCoef[j + nbPoints] *= kbdWindow[pos1] * (ceil((delta)) - delta)
+                    + kbdWindow[pos2] * (1. - ceil((delta)) + delta);
+        }
+        // Valeur
+        dataRet[i] = 0;
+        for (int j = qMax(0, (qint32)pos - nbPoints); j <= qMin(sizeInit-1, (qint32)pos + nbPoints); j++)
+            dataRet[i] += sincCoef[j - (qint32)pos + nbPoints] * data[j];
+
+        valMax = qMax(valMax, qAbs(dataRet[i]));
+    }
+
+    // Passage qint32 et limitation si besoin
     QByteArray baRet;
-    if (wBps == 16)
-    {
-        // Ajout de la valeur précédente
-        QByteArray baPrep; baPrep.resize(2); qint16 * dataPrep = (qint16 *)baPrep.data(); dataPrep[0] = valPrec;
-        baData.prepend(baPrep);
-        // Nombre de points �  trouver
-        qint32 sizeInit = (long int)baData.size() / 2 - 1;
-        qint32 sizeFinal = (double)(sizeInit - d - 1.0) * (double)echFinal / echInit + 1;
-        baRet.resize(sizeFinal * 2);
-        // Calcul des points par interpolation linéaire
-        double pos = 0;
-        long long value;
-        qint16 * shData = (qint16 *)baData.constData();
-        qint16 * shDataRet = (qint16 *)baRet.data();
-        for (int i = 0; i < sizeFinal; i++)
-        {
-            pos = (double)(i * echInit) / (double)echFinal + 1.0 + d;
-            // Valeur
-            if (floor(pos) == pos)
-                value = shData[(qint32)pos];
-            else
-                value = (ceil (pos) - pos) * (double)shData[(qint32)floor(pos)] +
-                        (pos - floor(pos)) * (double)shData[(qint32)ceil (pos)];
-            // Sauvegarde
-            shDataRet[i] = value;
-        }
-        // mise �  jour du décalage
-        d = pos - sizeInit + echInit / (double)echFinal - 1.0;
-    }
+    baRet.resize(sizeFinal * 4);
+    qint32 * dataRetI = (qint32*)baRet.data();
+    double coef;
+    if (valMax > 1)
+        coef = 2147483648. / valMax;
     else
-    {
-        // passage 32 bits
-        if (wBps == 24)
-            baData = bpsConversion(baData, 24, 32);
-        // Ajout de la valeur précédente
-        QByteArray baPrep; baPrep.resize(4); qint32 * dataPrep = (qint32 *)baPrep.data(); dataPrep[0] = valPrec;
-        baData.prepend(baPrep);
-        // Nombre de points �  trouver
-        qint32 sizeInit = (long int)baData.size() / 4 - 1;
-        qint32 sizeFinal = (double)(sizeInit - d - 1.0) * (double)echFinal / echInit + 1;
-        baRet.resize(sizeFinal * 4);
-        // Calcul des points par interpolation linéaire
-        double pos = 0;
-        qint32 value;
-        qint32 * lData = (qint32 *)baData.constData();
-        qint32 * lDataRet = (qint32 *)baRet.data();
-        for (long i = 0; i < sizeFinal; i++)
-        {
-            pos = (double)(i * echInit) / (double)echFinal + 1.0 + d;
-            // Valeur
-            if (floor(pos) == pos)
-                value = lData[(qint32)pos];
-            else
-                value = (ceil (pos) - pos) * (double)lData[(qint32)floor(pos)] +
-                        (pos - floor(pos)) * (double)lData[(qint32)ceil (pos)];
-            // Sauvegarde
-            lDataRet[i] = value;
-        }
-        // mise �  jour du décalage
-        d = pos - sizeInit + echInit / (double)echFinal - 1.0;
-        // retour 24 bits
-        if (wBps == 24)
-            baRet = bpsConversion(baRet, 32, 24);
-    }
-    if (!quick)
-    {
-        // Filtre passe bas après resampling
-        baRet = Sound::bandFilter(baRet, wBps, echFinal, echFinal/2, 0, -1);
-    }
+        coef = 2147483648LL;
+    for (int i = 0; i < sizeFinal; i++)
+        dataRetI[i] = dataRet[i] * coef;
+
+    delete dataRet;
+    delete data;
+
+    // Filtre passe bas après resampling
+    baRet = Sound::bandFilter(baRet, 32, echFinal, echFinal/2, 0, -1);
+    baRet = bpsConversion(baRet, 32, wBps);
     return baRet;
 }
 QByteArray Sound::bandFilter(QByteArray baData, WORD wBps, double dwSmplRate, double fBas, double fHaut, int ordre)
@@ -1799,7 +1794,7 @@ QByteArray Sound::enleveBlanc(QByteArray baData, double seuil, WORD wBps, quint3
     qint32 * data2 = (qint32 *)baData2.data();
     for (int i = 0; i < baData.size()/4; i++) data2[i] = qAbs(data[i]);
     qint32 median = mediane(baData2, 32);
-    // Calcul du nombre d'éléments �  sauter
+    // Calcul du nombre d'éléments   sauter
     while ((signed)pos < baData.size()/4 - 1 && (data2[pos] < seuil * median)) pos++;
     // Saut
     if ((signed)pos < baData.size()/4 - 1)
@@ -1857,7 +1852,7 @@ QByteArray Sound::correlation(QByteArray baData, DWORD dwSmplRate, WORD wBps, qi
             // Ressemblance
             qTmp = 0;
             for (int j = 0; j < baData.size() / 2 - dMax; j++)
-                qTmp += qAbs(data[j] - data[j+i]);
+                qTmp += (qint64)qAbs(data[j] - data[j+i]);
             dataCorrel[i - dMin] = qTmp / (baData.size() / 2 - dMax);
         }
     }
@@ -1893,7 +1888,7 @@ QByteArray Sound::bouclage(QByteArray baData, DWORD dwSmplRate, qint32 &loopStar
         regimePermanent(baData, dwSmplRate, 32, posStart, loopEnd);
     if (loopEnd - posStart < (signed)dwSmplRate)
         return QByteArray();
-    // Extraction du segment B de 0.05s �  la fin du régime permanent
+    // Extraction du segment B de 0.05s   la fin du régime permanent
     qint32 longueurSegmentB = 0.05 * dwSmplRate;
     QByteArray segmentB = baData.mid(4 * (loopEnd - longueurSegmentB), 4 * longueurSegmentB);
     // Calcul des corrélations
@@ -2010,25 +2005,25 @@ QByteArray Sound::sifflements(QByteArray baData, DWORD dwSmplRate, WORD wBps, do
 quint32 * Sound::findMins(QByteArray baCorrel, WORD wBps, int nb, double minFrac)
 {
     // recherche des pics
-    if (wBps != 16)
-        baCorrel = bpsConversion(baCorrel, wBps, 16);
+    if (wBps != 32)
+        baCorrel = bpsConversion(baCorrel, wBps, 32);
     // Calcul mini maxi
-    qint16 * data = (qint16 *)baCorrel.data();
-    qint16 mini, maxi;
+    qint32 * data = (qint32 *)baCorrel.data();
+    qint32 mini, maxi;
     mini = data[0];
     maxi = data[0];
-    for (qint32 i = 1; i < baCorrel.size() / 2; i++)
+    for (qint32 i = 1; i < baCorrel.size() / 4; i++)
     {
         if (data[i] < mini) mini = data[i];
         if (data[i] > maxi) maxi = data[i];
     }
-    // Valeur �  ne pas dépasser
-    qint16 valMax = maxi - minFrac * (maxi - mini);
+    // Valeur à ne pas dépasser
+    qint32 valMax = maxi - minFrac * (maxi - mini);
     // Recherche de l'indice des premiers grands pics
     quint32 * indices = new quint32[nb];
     qint32 i = 1;
     int pos = 0;
-    while ((i < baCorrel.size() / 2 - 1) && pos < nb)
+    while ((i < baCorrel.size() / 4 - 1) && pos < nb)
     {
         if (data[i-1] > data[i] && data[i+1] > data[i] && data[i] < valMax)
         {
@@ -2058,7 +2053,7 @@ quint32 * Sound::findMax(QByteArray baData, WORD wBps, int nb, double minFrac)
         if (data[i] < mini) mini = data[i];
         if (data[i] > maxi) maxi = data[i];
     }
-    // Valeur �  dépasser
+    // Valeur à dépasser
     qint32 valMin = mini + minFrac * (maxi - mini);
     // Recherche de l'indice des premiers grands pics
     quint32 * indices = new quint32[nb];
@@ -2339,7 +2334,7 @@ void Sound::regimePermanent(QByteArray baData, DWORD dwSmplRate, WORD wBps, qint
     qint32 *data = (qint32 *)baData.data();
     for (int i = 0; i < baData.size() / 4; i++)
         data[i] = qAbs(data[i]);
-    // Calcul de la moyenne des valeurs absolues sur une période de 0.05s �  chaque 10ième de seconde
+    // Calcul de la moyenne des valeurs absolues sur une période de 0.05s   chaque 10ième de seconde
     qint32 sizePeriode = dwSmplRate / 10;
     qint32 nbValeurs = (baData.size() / 4 - sizePeriode) / (dwSmplRate/20);
     QByteArray tableauMoyennes;
@@ -2375,4 +2370,83 @@ void Sound::regimePermanent(QByteArray baData, DWORD dwSmplRate, WORD wBps, qint
     posStart *= dwSmplRate / 20;
     posEnd *= dwSmplRate / 20;
     posEnd += sizePeriode;
+}
+
+double Sound::sinc(double x)
+{
+    double epsilon0 = 0.32927225399135962333569506281281311031656150598474e-9L;
+    double epsilon2 = qSqrt(epsilon0);
+    double epsilon4 = qSqrt(epsilon2);
+
+    if (qAbs(x) >= epsilon4)
+        return(qSin(x)/x);
+    else
+    {
+        // x très proche de 0, développement limité ordre 0
+        double result = 1;
+        if (qAbs(x) >= epsilon0)
+        {
+            double x2 = x*x;
+
+            // x un peu plus loin de 0, développement limité ordre 2
+            result -= x2 / 6.;
+
+            if (qAbs(x) >= epsilon2)
+            {
+                // x encore plus loin de 0, développement limité ordre 4
+                result += (x2 * x2) / 120.;
+            }
+        }
+        return(result);
+    }
+}
+
+// Keser-Bessel window
+void Sound::KBDWindow(double* window, int size, double alpha)
+{
+    double sumvalue = 0.;
+    int i;
+
+    for (i = 0; i < size/2; i++)
+    {
+        sumvalue += BesselI0(M_PI * alpha * sqrt(1. - pow(4.0*i/size - 1., 2)));
+        window[i] = sumvalue;
+    }
+
+    // need to add one more value to the nomalization factor at size/2:
+    sumvalue += BesselI0(PI * alpha * sqrt(1. - pow(4.0*(size/2) / size-1., 2)));
+
+    // normalize the window and fill in the righthand side of the window:
+    for (i = 0; i < size/2; i++)
+    {
+        window[i] = sqrt(window[i]/sumvalue);
+        window[size-1-i] = window[i];
+    }
+}
+
+double Sound::BesselI0(double x)
+{
+    double denominator;
+    double numerator;
+    double z;
+
+    if (x == 0.0)
+        return 1.0;
+    else
+    {
+        z = x * x;
+        numerator = (z* (z* (z* (z* (z* (z* (z* (z* (z* (z* (z* (z* (z*
+                                                                     (z* 0.210580722890567e-22  + 0.380715242345326e-19 ) +
+                                                                     0.479440257548300e-16) + 0.435125971262668e-13 ) +
+                                                             0.300931127112960e-10) + 0.160224679395361e-7  ) +
+                                                     0.654858370096785e-5)  + 0.202591084143397e-2  ) +
+                                             0.463076284721000e0)   + 0.754337328948189e2   ) +
+                                     0.830792541809429e4)   + 0.571661130563785e6   ) +
+                             0.216415572361227e8)   + 0.356644482244025e9   ) +
+                     0.144048298227235e10);
+        denominator = (z*(z*(z-0.307646912682801e4)+
+                          0.347626332405882e7)-0.144048298227235e10);
+    }
+
+    return -numerator/denominator;
 }

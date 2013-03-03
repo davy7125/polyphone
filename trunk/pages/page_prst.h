@@ -47,13 +47,13 @@ public:
     void spinUpDown(int steps, SpinBox *spin);
     void firstAvailablePresetBank(EltID id, int &nBank, int &nPreset);
     void duplication();
+
 public slots:
     void setBank();
     void setPreset();
+
 private:
     Ui::Page_Prst *ui;
-    int getDestNumber(int i);
-    int getDestIndex(int i);
     static int closestAvailablePreset(EltID id, WORD wBank, WORD wPreset);
     static bool isAvailable(EltID id, WORD wBank, WORD wPreset);
     // Outils

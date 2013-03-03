@@ -415,14 +415,38 @@
     </layout>
    </item>
    <item>
-    <widget class="QDialogButtonBox" name="buttonBox">
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
-     </property>
-     <property name="standardButtons">
-      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
-     </property>
-    </widget>
+    <layout class="QHBoxLayout" name="horizontalLayout_2">
+     <item>
+      <widget class="QPushButton" name="pushApplyToOthers">
+       <property name="text">
+        <string>Appliquer à d'autres instruments...</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QDialogButtonBox" name="buttonBox">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="standardButtons">
+        <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </item>
   </layout>
  </widget>
@@ -502,9 +526,26 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>pushApplyToOthers</sender>
+   <signal>clicked()</signal>
+   <receiver>DialogParamGlobal</receiver>
+   <slot>applyToOthers()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>110</x>
+     <y>209</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>279</x>
+     <y>116</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>indexMotifChanged(int)</slot>
   <slot>raideurChanged(double)</slot>
+  <slot>applyToOthers()</slot>
  </slots>
 </ui>

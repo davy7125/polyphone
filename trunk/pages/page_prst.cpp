@@ -180,90 +180,6 @@ Champ TableWidgetPrst::getChamp(int row)
     }
     return champ;
 }
-int Page_Prst::getDestNumber(int i)
-{
-    switch (i)
-    {
-    case 0: return 52; // Pitch/Effects
-    case 1: return 51;
-    case 2: return 56;
-    case 3: return 8;
-    case 4: return 9;
-    case 5: return 17;
-    case 6: return 15;
-    case 7: return 16;
-    case 8: return 48; // Volume envelope
-    case 9: return 33;
-    case 10: return 34;
-    case 11: return 35;
-    case 12: return 36;
-    case 13: return 37;
-    case 14: return 38;
-    case 15: return 39;
-    case 16: return 40;
-    case 17: return 25; // Modulation envelope
-    case 18: return 26;
-    case 19: return 27;
-    case 20: return 28;
-    case 21: return 29;
-    case 22: return 30;
-    case 23: return 7;
-    case 24: return 11;
-    case 25: return 31;
-    case 26: return 32;
-    case 27: return 21; // Modulation LFO
-    case 28: return 22;
-    case 29: return 5;
-    case 30: return 13;
-    case 31: return 10;
-    case 32: return 23; // Vibrato LFO
-    case 33: return 24;
-    case 34: return 6;
-    default: return 100;
-    }
-}
-int Page_Prst::getDestIndex(int i)
-{
-    switch (i)
-    {
-    case 52: return 0; // Pitch/Effects
-    case 51: return 1;
-    case 56: return 2;
-    case 8: return 3;
-    case 9: return 4;
-    case 17: return 5;
-    case 15: return 6;
-    case 16: return 7;
-    case 48: return 8; // Volume envelope
-    case 33: return 9;
-    case 34: return 10;
-    case 35: return 11;
-    case 36: return 12;
-    case 37: return 13;
-    case 38: return 14;
-    case 39: return 15;
-    case 40: return 16;
-    case 25: return 17; // Modulation envelope
-    case 26: return 18;
-    case 27: return 19;
-    case 28: return 20;
-    case 29: return 21;
-    case 30: return 22;
-    case 7: return 23;
-    case 11: return 24;
-    case 31: return 25;
-    case 32: return 26;
-    case 21: return 27; // Modulation LFO
-    case 22: return 28;
-    case 5: return 29;
-    case 13: return 30;
-    case 10: return 31;
-    case 23: return 32; // Vibrato LFO
-    case 24: return 33;
-    case 6: return 34;
-    default: return 100;
-    }
-}
 
 void Page_Prst::spinUpDown(int steps, SpinBox *spin)
 {
@@ -533,4 +449,3 @@ void Page_Prst::duplication(EltID id)
         }
     }
 }
-

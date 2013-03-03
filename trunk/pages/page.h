@@ -59,8 +59,8 @@ public:
     Page(TypePage typePage, QWidget *parent = 0);
     // Méthodes publiques
     virtual void afficher() = 0;
-protected:
 
+protected:
     // Attributs protégés
     bool preparation;
     static MainWindow *mainWindow;
@@ -68,6 +68,7 @@ protected:
     static QStackedWidget *qStackedWidget;
     static Pile_sf2 *sf2;
     static Synth * synth;
+    TypePage m_typePage;
     // Méthodes protégées
     char * getTextValue(char * T, WORD champ, genAmountType genVal);
     static char * getTextValue(char * T, WORD champ, int iVal);
@@ -75,8 +76,8 @@ protected:
     static QString getIndexName(WORD iVal, int CC);
     static QString getGenName(WORD iVal);
     genAmountType getValue(QString texte, WORD champ, bool &ok);
+
 private:
-    TypePage m_typePage;
     // Méthodes privées
     int limit(int iTmp, int minInst, int maxInst, int minPrst = 0, int maxPrst = 0);
 };
@@ -98,8 +99,10 @@ public:
     // Association champ - ligne (méthodes virtuelles pures)
     virtual Champ getChamp(int row) = 0;
     virtual int getRow(WORD champ) = 0;
+
 private slots:
     void emitSet(int ligne, int colonne, bool newAction);
+
 signals:
     void set(int ligne, int colonne, bool newAction);
 };
@@ -312,6 +315,8 @@ public:
     void afficher();
     void reselect();
     void updateId(EltID id);
+    void paramGlobal();
+
 protected:
     // Attributs protégés
     ElementType contenant;
@@ -336,16 +341,31 @@ protected:
     void selectNone(bool refresh = false);
     void select(EltID id, bool refresh = false);
     static void remplirComboSource(ComboBox *comboBox);
-    virtual int getDestIndex(int i) = 0;
-    virtual int getDestNumber(int i) = 0;
+    int getDestIndex(int i);
+    int getDestNumber(int i);
     WORD getSrcIndex(WORD wVal, bool bVal);
     WORD getSrcNumber(WORD wVal, bool &CC);
+
 private:
+    class Modulator
+    {
+    public:
+        SFModulator modSrcOper;
+        Champ modDestOper;
+        qint32 modAmount;
+        SFModulator modAmtSrcOper;
+        SFTransform modTransOper;
+        qint32 index;
+    };
+
     void afficheMod(EltID id, int selectedRow = -1);
     static void addAvailableReceiverMod(ComboBox *combo, EltID id);
     static void addAvailableSenderMod(ComboBox *combo, EltID id);
     int getAssociatedMod(EltID id);
     int limit(int iVal, Champ champ, EltID id);
+
+    static QList<Modulator> _modulatorCopy;
+
 public slots:
     void set(int ligne, int colonne, bool newAction = true);
     void setAmount();
@@ -359,6 +379,13 @@ public slots:
     void setSource2(int index);
     void supprimerMod();
     void nouveauMod();
+
+protected slots:
+    void copyMod();
+    void pasteMod();
+
+private slots:
+    void paramGlobal(QVector<double> dValues, QList<EltID> listElt, int typeModif, int param);
 };
 
 

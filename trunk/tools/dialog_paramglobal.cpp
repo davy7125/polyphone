@@ -24,15 +24,20 @@
 
 #include "dialog_paramglobal.h"
 #include "ui_dialog_paramglobal.h"
-
+#include "dialog_selectitems.h"
 
 // Constructeur, destructeur
-DialogParamGlobal::DialogParamGlobal(QWidget *parent) :
+DialogParamGlobal::DialogParamGlobal(Pile_sf2 *sf2, EltID id, QWidget *parent) :
     QDialog(parent),
-    ui(new Ui::DialogParamGlobal)
+    _sf2(sf2),
+    ui(new Ui::DialogParamGlobal),
+    _initialID(id)
 {
     ui->setupUi(this);
+    if (id.typeElement == elementPrst || id.typeElement == elementPrstInst)
+        this->ui->pushApplyToOthers->setText(trUtf8("Appliquer à d'autres presets..."));
     this->ui->graphParamGlobal->raideurChanged(this->ui->doubleSpinRaideur->value());
+    _listElt.append(id);
 }
 DialogParamGlobal::~DialogParamGlobal()
 {
@@ -60,9 +65,22 @@ void DialogParamGlobal::accept()
     double dMax = this->ui->doubleSpinMax->value();
     for (int i = 0; i < dValues.size(); i++)
         dValues[i] = dValues.at(i) * (dMax - dMin) + dMin;
-    emit(accepted(dValues, this->ui->comboModif->currentIndex(),
+    emit(accepted(dValues, _listElt, this->ui->comboModif->currentIndex(),
                   this->ui->comboValeur->currentIndex()));
     QDialog::accept();
+}
+void DialogParamGlobal::applyToOthers()
+{
+    // Affichage liste d'éléments
+    DialogSelectItems * dialogSelect = new DialogSelectItems(_initialID, _listElt, _sf2, this);
+    dialogSelect->setAttribute(Qt::WA_DeleteOnClose, true);
+    this->connect(dialogSelect, SIGNAL(accepted(QList<EltID>)),
+                  SLOT(eltChanged(QList<EltID>)));
+    dialogSelect->show();
+}
+void DialogParamGlobal::eltChanged(QList<EltID> listElt)
+{
+    _listElt = listElt;
 }
 
 /////////////////////////////////////////////////////

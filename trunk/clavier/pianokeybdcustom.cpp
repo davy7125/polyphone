@@ -128,22 +128,22 @@ void PianoKeybdCustom::setKeyboardType(KeyboardType type)
     switch(type)
          {
     case KEYBOARD_5_OCTAVES:
-        this->setMaximumWidth(360);
-        this->setMinimumWidth(360);
+        this->setMaximumWidth(330);
+        this->setMinimumWidth(330);
         this->setNumOctaves(6);
         this->setBaseOctave(3);
         this->setMaxNote(96);
         break;
     case KEYBOARD_6_OCTAVES:
-        this->setMaximumWidth(400);
-        this->setMinimumWidth(400);
+        this->setMaximumWidth(380);
+        this->setMinimumWidth(380);
         this->setNumOctaves(7);
         this->setBaseOctave(3);
         this->setMaxNote(108);
         break;
     case KEYBOARD_128_NOTES:
-        this->setMaximumWidth(650);
-        this->setMinimumWidth(650);
+        this->setMaximumWidth(610);
+        this->setMinimumWidth(610);
         this->setNumOctaves(11);
         this->setBaseOctave(0);
         this->setMaxNote(127);

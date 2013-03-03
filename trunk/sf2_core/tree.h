@@ -45,6 +45,7 @@ public:
         QAction *nouveauSample;
         QAction *nouvelInstrument;
         QAction *nouveauPreset;
+        QAction *remplacer;
         QAction *associer;
         QAction *supprimer;
         QAction *renommer;

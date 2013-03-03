@@ -323,9 +323,24 @@ Valeur Pile_sf2::get(EltID id, Champ champ)
             value = tmp->gen->getGen(champ);
         }
         }break;
-    case elementInstMod:{
-        // Analyse d'un mod d'un instrument
-        SF2::BAG::MOD *tmp = this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt)->bagGlobal.mod->getElt(id.indexMod);
+    case elementInstMod: case elementPrstMod: case elementInstSmplMod: case elementPrstInstMod:{
+        // Analyse d'un mod
+        SF2::BAG::MOD *tmp = NULL;
+        switch ((int)id.typeElement)
+        {
+        case elementInstMod:
+            tmp = this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt)->bagGlobal.mod->getElt(id.indexMod);
+            break;
+        case elementPrstMod:
+            tmp = this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt)->bagGlobal.mod->getElt(id.indexMod);
+            break;
+        case elementInstSmplMod:
+            tmp = this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt)->bag->getElt(id.indexElt2)->mod->getElt(id.indexMod);
+            break;
+        case elementPrstInstMod:
+            tmp = this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt)->bag->getElt(id.indexElt2)->mod->getElt(id.indexMod);
+            break;
+        }
         switch ((int)champ)
         {
         case champ_sfModSrcOper:
@@ -344,101 +359,24 @@ Valeur Pile_sf2::get(EltID id, Champ champ)
             value.bValue = tmp->hidden; break;
         }
         }break;
-    case elementPrstMod:{
-        // Analyse d'un mod d'un preset
-        SF2::BAG::MOD *tmp = this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt)->bagGlobal.mod->getElt(id.indexMod);
-        switch ((int)champ)
+    case elementInstGen: case elementPrstGen: case elementInstSmplGen: case elementPrstInstGen:{
+        // Analyse d'un gen
+        SF2::BAG::GEN *tmp = NULL;
+        switch ((int)id.typeElement)
         {
-        case champ_sfModSrcOper:
-            value.sfModValue = tmp->sfModSrcOper; break;
-        case champ_sfModDestOper:
-            value.sfGenValue = tmp->sfModDestOper; break;
-        case champ_modAmount:
-            value.shValue = tmp->modAmount; break;
-        case champ_sfModAmtSrcOper:
-            value.sfModValue = tmp->sfModAmtSrcOper; break;
-        case champ_sfModTransOper:
-            value.sfTransValue = tmp->sfModTransOper; break;
-        case champ_indexMod:
-            value.wValue = tmp->index; break;
-        case champ_hidden:
-            value.bValue = tmp->hidden; break;
+        case elementInstGen:
+            tmp = this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt)->bagGlobal.gen->getElt(id.indexMod);
+            break;
+        case elementPrstGen:
+            tmp = this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt)->bagGlobal.gen->getElt(id.indexMod);
+            break;
+        case elementInstSmplGen:
+            tmp = this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt)->bag->getElt(id.indexElt2)->gen->getElt(id.indexMod);
+            break;
+        case elementPrstInstGen:
+            tmp = this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt)->bag->getElt(id.indexElt2)->gen->getElt(id.indexMod);
+            break;
         }
-        }break;
-    case elementInstSmplMod:{
-        // Analyse d'un mod d'un sample lié à un instrument
-        SF2::BAG::MOD *tmp = this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt)->bag->getElt(id.indexElt2)->mod->getElt(id.indexMod);
-        switch ((int)champ)
-        {
-        case champ_sfModSrcOper:
-            value.sfModValue = tmp->sfModSrcOper; break;
-        case champ_sfModDestOper:
-            value.sfGenValue = tmp->sfModDestOper; break;
-        case champ_modAmount:
-            value.shValue = tmp->modAmount; break;
-        case champ_sfModAmtSrcOper:
-            value.sfModValue = tmp->sfModAmtSrcOper; break;
-        case champ_sfModTransOper:
-            value.sfTransValue = tmp->sfModTransOper; break;
-        case champ_indexMod:
-            value.wValue = tmp->index; break;
-        case champ_hidden:
-            value.bValue = tmp->hidden; break;
-        }
-        }break;
-    case elementPrstInstMod:{
-        // Analyse d'un mod d'un instrument lié à un preset
-        SF2::BAG::MOD *tmp = this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt)->bag->getElt(id.indexElt2)->mod->getElt(id.indexMod);
-        switch ((int)champ)
-        {
-        case champ_sfModSrcOper:
-            value.sfModValue = tmp->sfModSrcOper; break;
-        case champ_sfModDestOper:
-            value.sfGenValue = tmp->sfModDestOper; break;
-        case champ_modAmount:
-            value.shValue = tmp->modAmount; break;
-        case champ_sfModAmtSrcOper:
-            value.sfModValue = tmp->sfModAmtSrcOper; break;
-        case champ_sfModTransOper:
-            value.sfTransValue = tmp->sfModTransOper; break;
-        case champ_indexMod:
-            value.wValue = tmp->index; break;
-        case champ_hidden:
-            value.bValue = tmp->hidden; break;
-        }
-        }break;
-    case elementInstGen:{
-        SF2::BAG::GEN *tmp = this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt)->bagGlobal.gen->getElt(id.indexMod);
-        switch ((int)champ)
-        {
-        case champ_sfGenOper:
-            value.sfGenValue = tmp->sfGenOper; break;
-        case champ_sfGenAmount:
-            value.genValue = tmp->genAmount; break;
-        }
-        }break;
-    case elementPrstGen:{
-        SF2::BAG::GEN *tmp = this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt)->bagGlobal.gen->getElt(id.indexMod);
-        switch ((int)champ)
-        {
-        case champ_sfGenOper:
-            value.sfGenValue = tmp->sfGenOper; break;
-        case champ_sfGenAmount:
-            value.genValue = tmp->genAmount; break;
-        }
-        }break;
-    case elementInstSmplGen:{
-        SF2::BAG::GEN *tmp = this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt)->bag->getElt(id.indexElt2)->gen->getElt(id.indexMod);
-        switch ((int)champ)
-        {
-        case champ_sfGenOper:
-            value.sfGenValue = tmp->sfGenOper; break;
-        case champ_sfGenAmount:
-            value.genValue = tmp->genAmount; break;
-        }
-        }break;
-    case elementPrstInstGen:{
-        SF2::BAG::GEN *tmp = this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt)->bag->getElt(id.indexElt2)->gen->getElt(id.indexMod);
         switch ((int)champ)
         {
         case champ_sfGenOper:

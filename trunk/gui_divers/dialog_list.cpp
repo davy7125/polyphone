@@ -38,20 +38,29 @@ DialogList::~DialogList()
     delete ui;
 }
 
-void DialogList::showDialog(EltID idSrc)
+void DialogList::showDialog(EltID idSrc, ModeListDialog mode)
 {
-    if (idSrc.typeElement != elementInst && idSrc.typeElement != elementSmpl)
+    _mode = mode;
+    if ((mode == MODE_ASSOCIATION &&
+        (idSrc.typeElement != elementInst && idSrc.typeElement != elementSmpl)) ||
+        (mode == MODE_REMPLACEMENT &&
+        (idSrc.typeElement != elementInstSmpl && idSrc.typeElement != elementPrstInst)))
         return;
     // Titre
     ElementType element;
-    if (idSrc.typeElement == elementSmpl)
+    if (idSrc.typeElement == elementInstSmpl)
     {
-        this->setWindowTitle(tr("Liste des instruments"));
+        this->setWindowTitle(trUtf8("Liste des samples"));
+        element = elementSmpl;
+    }
+    else if (idSrc.typeElement == elementSmpl || idSrc.typeElement == elementPrstInst)
+    {
+        this->setWindowTitle(trUtf8("Liste des instruments"));
         element = elementInst;
     }
     else
     {
-        this->setWindowTitle(tr("Liste des presets"));
+        this->setWindowTitle(trUtf8("Liste des presets"));
         element = elementPrst;
     }
     // Remplissage de la liste
@@ -64,12 +73,22 @@ void DialogList::showDialog(EltID idSrc)
         id.indexElt = i;
         if (!this->sf2->get(id, champ_hidden).bValue)
         {
-            item = new ListWidgetItem(this->sf2->getQstr(id, champ_name));
+            if (id.typeElement == elementPrst)
+            {
+                char T[40];
+                sprintf(T, "%.3d:%.3d %s", this->sf2->get(id, champ_wBank).wValue,
+                        this->sf2->get(id, champ_wPreset).wValue,
+                        this->sf2->getQstr(id, champ_name).toStdString().c_str());
+                item = new ListWidgetItem(T);
+            }
+            else
+                item = new ListWidgetItem(this->sf2->getQstr(id, champ_name));
             item->id = id;
             this->ui->listWidget->addItem(item);
         }
     }
     this->ui->listWidget->clearSelection();
+    this->ui->listWidget->sortItems();
     // Affichage du dialogue
     this->setWindowModality(Qt::ApplicationModal);
     this->show();
@@ -82,7 +101,10 @@ void DialogList::accept()
     {
         ListWidgetItem *item = dynamic_cast<ListWidgetItem *>(this->ui->listWidget->currentItem());
         // Association de MainWindow
-        this->window->associer(item->id);
+        if (_mode == MODE_ASSOCIATION)
+            this->window->associer(item->id);
+        else
+            this->window->remplacer(item->id);
     }
     QDialog::accept();
 }
