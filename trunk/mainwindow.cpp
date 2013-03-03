@@ -419,6 +419,7 @@ void MainWindow::showAbout()
         trUtf8("<b>Polyphone</b> © 2013<br/>" \
         "Version : ") + VERSION  + trUtf8("<br/>" \
         "Auteur : Davy Triponney<br/>" \
+        "Site web : <a href=\"http://www.polyphone.fr\">www.polyphone.fr</a><br/>" \
         "Support : <a href=\"mailto:info@polyphone.fr\">info@polyphone.fr</a>").toStdString().c_str());
 }
 void MainWindow::showHelp()
@@ -930,6 +931,35 @@ void MainWindow::dragAndDrop(EltID idDest, EltID idSrc, int temps, int *msg, QBy
                 id.indexElt2 = this->sf2->add(id);
                 val.wValue = idSrc.indexElt;
                 this->sf2->set(id, champ_instrument, val);
+                // Key range
+                int keyMin = 127;
+                int keyMax = 0;
+                EltID idLinked = idSrc;
+                idLinked.typeElement = elementInstSmpl;
+                for (int i = 0; i < this->sf2->count(idLinked); i++)
+                {
+                    idLinked.indexElt2 = i;
+                    if (!this->sf2->get(idLinked, champ_hidden).bValue)
+                    {
+                        if (this->sf2->isSet(idLinked, champ_keyRange))
+                        {
+                            keyMin = qMin(keyMin, (int)this->sf2->get(idLinked, champ_keyRange).rValue.byLo);
+                            keyMax = qMax(keyMax, (int)this->sf2->get(idLinked, champ_keyRange).rValue.byHi);
+                        }
+                    }
+                }
+                Valeur value;
+                if (keyMin < keyMax)
+                {
+                    value.rValue.byLo = keyMin;
+                    value.rValue.byHi = keyMax;
+                }
+                else
+                {
+                    value.rValue.byLo = 0;
+                    value.rValue.byHi = 127;
+                }
+                this->sf2->set(id, champ_keyRange, value);
             }
             else if ((idDest.typeElement == elementInst || idDest.typeElement == elementInstSmpl) && \
                      idSrc.indexElt != idDest.indexElt)
@@ -978,8 +1008,6 @@ void MainWindow::dragAndDrop(EltID idDest, EltID idSrc, int temps, int *msg, QBy
                     this->sf2->set(idDest, champ_sfModTransOper, this->sf2->get(idSrc, champ_sfModTransOper));
                 }
                 idSrc.typeElement = elementInstSmpl;
-                // Suppression InstSmpl de départ
-                //this->sf2->remove(idSrc);
             }
             break;
         case elementPrst:
@@ -1996,7 +2024,7 @@ void MainWindow::associer()
     if (nb == 0) return;
     EltID id = ui->arborescence->getID(0);
     this->anticipateNewAction(); // Les ID ne changeront pas lors du prochain prepareNewAction
-    this->dialList.showDialog(id);
+    this->dialList.showDialog(id, DialogList::MODE_ASSOCIATION);
 }
 void MainWindow::associer(EltID idDest)
 {
@@ -2013,9 +2041,9 @@ void MainWindow::associer(EltID idDest)
         idDest.typeElement = elementPrstInst;
         champ = champ_instrument;
     }
+    sf2->prepareNewActions();
     Valeur val;
     EltID idSrc;
-    sf2->prepareNewActions();
     for (int i = 0; i < nb; i++)
     {
         idSrc = this->ui->arborescence->getID(i);
@@ -2045,11 +2073,73 @@ void MainWindow::associer(EltID idDest)
                 this->sf2->set(idDest, champ_pan, val);
             }
         }
+        else
+        {
+            // Key range
+            int keyMin = 127;
+            int keyMax = 0;
+            EltID idLinked = idSrc;
+            idLinked.typeElement = elementInstSmpl;
+            for (int i = 0; i < this->sf2->count(idLinked); i++)
+            {
+                idLinked.indexElt2 = i;
+                if (!this->sf2->get(idLinked, champ_hidden).bValue)
+                {
+                    if (this->sf2->isSet(idLinked, champ_keyRange))
+                    {
+                        keyMin = qMin(keyMin, (int)this->sf2->get(idLinked, champ_keyRange).rValue.byLo);
+                        keyMax = qMax(keyMax, (int)this->sf2->get(idLinked, champ_keyRange).rValue.byHi);
+                    }
+                }
+            }
+            Valeur value;
+            if (keyMin < keyMax)
+            {
+                value.rValue.byLo = keyMin;
+                value.rValue.byHi = keyMax;
+            }
+            else
+            {
+                value.rValue.byLo = 0;
+                value.rValue.byHi = 127;
+            }
+            this->sf2->set(idDest, champ_keyRange, value);
+        }
     }
     updateDo();
     this->ui->arborescence->searchTree(this->ui->editSearch->text());
     updateActions();
 }
+void MainWindow::remplacer()
+{
+    int nb = ui->arborescence->getSelectedItemsNumber();
+    if (nb != 1) return;
+    EltID id = ui->arborescence->getID(0);
+    this->anticipateNewAction(); // Les ID ne changeront pas lors du prochain prepareNewAction
+    this->dialList.showDialog(id, DialogList::MODE_REMPLACEMENT);
+}
+void MainWindow::remplacer(EltID idSrc)
+{
+    int nb = ui->arborescence->getSelectedItemsNumber();
+    if (nb != 1 || (idSrc.typeElement != elementSmpl && idSrc.typeElement != elementInst)) return;
+    EltID idDest = this->ui->arborescence->getID(0);
+    if (idDest.typeElement != elementInstSmpl && idDest.typeElement != elementPrstInst)
+        return;
+    sf2->prepareNewActions();
+    Champ champ;
+    if (idSrc.typeElement == elementSmpl)
+        champ = champ_sampleID;
+    else
+        champ = champ_instrument;
+    // Remplacement d'un sample ou instrument lié
+    Valeur val;
+    val.wValue = idSrc.indexElt;
+    this->sf2->set(idDest, champ, val);
+    updateDo();
+    this->ui->arborescence->searchTree(this->ui->editSearch->text());
+    updateActions();
+}
+
 
 // Envoi de signaux
 void MainWindow::copier()
@@ -2104,8 +2194,9 @@ void MainWindow::paramGlobal()      {this->page_inst->paramGlobal();}
 void MainWindow::repartitionAuto()  {this->page_inst->repartitionAuto();}
 void MainWindow::spatialisation()   {this->page_inst->spatialisation();}
 void MainWindow::mixture()          {this->page_inst->mixture();}
-void MainWindow::duplicationPrst()  {this->page_prst->duplication();}
 void MainWindow::release()          {this->page_inst->release();}
+void MainWindow::duplicationPrst()  {this->page_prst->duplication();}
+void MainWindow::paramGlobal2()     {this->page_prst->paramGlobal();}
 void MainWindow::purger()
 {
     // Suppression des éléments non utilisés

@@ -325,8 +325,8 @@ Voice* Synth::fusion(char * data1, qint64 size, Voice * voice)
     // Ajout en separant les voix (stereo)
     for (quint32 i = 0; i < nbRead / 8; i++)
     {
-        data1D[2*i]   += pan  * dataD[i];
-        data1D[2*i+1] += pan2 * dataD[i];
+        data1D[2*i+1]   += pan  * dataD[i];
+        data1D[2*i] += pan2 * dataD[i];
     }
     return voiceRet;
 }

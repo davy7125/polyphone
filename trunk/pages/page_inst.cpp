@@ -26,7 +26,6 @@
 #include "mainwindow.h"
 #include "ui_page_inst.h"
 #include "dialog_space.h"
-#include "dialog_paramglobal.h"
 #include "dialog_mixture.h"
 #include "dialog_release.h"
 #include <QProgressDialog>
@@ -286,115 +285,7 @@ void Page_Inst::duplication(EltID id)
         }
     }
 }
-void Page_Inst::paramGlobal()
-{
-    EltID idInst = this->tree->getID(0);
-    idInst.typeElement = elementInstSmpl;
-    if (this->sf2->count(idInst) == 0)
-    {
-        QMessageBox::warning(NULL, tr("Attention"), tr("L'instrument doit contenir des sons."));
-        return;
-    }
-    DialogParamGlobal * dialogParam = new DialogParamGlobal(this);
-    dialogParam->setAttribute(Qt::WA_DeleteOnClose, true);
-    this->connect(dialogParam, SIGNAL(accepted(QVector<double>,int,int)),
-                  SLOT(paramGlobal(QVector<double>,int,int)));
-    dialogParam->show();
-}
-void Page_Inst::paramGlobal(QVector<double> dValues, int typeModif, int param)
-{
-    // Paramètre à modifier
-    Champ champ = champ_unknown;
-    switch (param)
-    {
-    case 0: champ = champ_initialAttenuation; break;
-    case 1: champ = champ_coarseTune; break;
-    case 2: champ = champ_fineTune; break;
-    case 3: champ = champ_scaleTuning; break;
-    case 4: champ = champ_initialFilterFc; break;
-    case 5: champ = champ_initialFilterQ; break;
-    case 6: champ = champ_delayVolEnv; break;
-    case 7: champ = champ_attackVolEnv; break;
-    case 8: champ = champ_holdVolEnv; break;
-    case 9: champ = champ_decayVolEnv; break;
-    case 10: champ = champ_sustainVolEnv; break;
-    case 11: champ = champ_releaseVolEnv; break;
-    case 12: champ = champ_keynumToVolEnvHold; break;
-    case 13: champ = champ_keynumToVolEnvDecay; break;
-    case 14: champ = champ_delayModEnv; break;
-    case 15: champ = champ_attackModEnv; break;
-    case 16: champ = champ_holdModEnv; break;
-    case 17: champ = champ_decayModEnv; break;
-    case 18: champ = champ_sustainModEnv; break;
-    case 19: champ = champ_releaseModEnv; break;
-    case 20: champ = champ_modEnvToPitch; break;
-    case 21: champ = champ_modEnvToFilterFc; break;
-    case 22: champ = champ_keynumToModEnvHold; break;
-    case 23: champ = champ_keynumToModEnvDecay; break;
-    case 24: champ = champ_delayModLFO; break;
-    case 25: champ = champ_freqModLFO; break;
-    case 26: champ = champ_modLfoToPitch; break;
-    case 27: champ = champ_modLfoToFilterFc; break;
-    case 28: champ = champ_modLfoToVolume; break;
-    case 29: champ = champ_delayVibLFO; break;
-    case 30: champ = champ_freqVibLFO; break;
-    case 31: champ = champ_vibLfoToPitch; break;
-    case 32: champ = champ_chorusEffectsSend; break;
-    case 33: champ = champ_reverbEffectsSend; break;
-    }
-    // Ligne correspondante dans la table
-    int ligne = this->ui->tableInst->getRow(champ);
-    // Pos min et max sur le clavier
-    EltID id = this->tree->getID(0);
-    id.typeElement = elementInstSmpl;
-    int posMin = 128;
-    int posMax = 0;
-    for (int i = 0; i < this->sf2->count(id); i++)
-    {
-        id.indexElt2 = i;
-        if (!this->sf2->get(id, champ_hidden).bValue)
-        {
-            if (this->sf2->get(id, champ_keyRange).rValue.byLo < posMin)
-                posMin = this->sf2->get(id, champ_keyRange).rValue.byLo;
-            if (this->sf2->get(id, champ_keyRange).rValue.byHi > posMax)
-                posMax = this->sf2->get(id, champ_keyRange).rValue.byHi;
-        }
-    }
-    if (posMin >= posMax) return;
-    // Modification pour chaque colonne du tableau
-    this->sf2->prepareNewActions();
-    double value, value2;
-    int pos;
-    this->ui->tableInst->blockSignals(true);
-    for (int i = 1; i < this->ui->tableInst->columnCount(); i++)
-    {
-        value = this->ui->tableInst->item(ligne, i)->text().toDouble();
-        // Calcul de la modification
-        pos = (this->sf2->get(this->ui->tableInst->getID(i), champ_keyRange).rValue.byLo +
-               this->sf2->get(this->ui->tableInst->getID(i), champ_keyRange).rValue.byHi) / 2;
-        pos = (double)((dValues.size()-1) * (pos - posMin)) / (posMax - posMin);
-        value2 = dValues.at(pos);
-        // Application de la modification
-        switch (typeModif)
-        {
-        case 0: // Ajout
-            value += value2;
-            break;
-        case 1: // Multiplication
-            value *= value2;
-            break;
-        case 2: // Remplacement
-            value = value2;
-            break;
-        }
-        this->ui->tableInst->item(ligne, i)->setText(QString::number(value));
-        this->set(ligne, i, false);
-    }
-    this->ui->tableInst->blockSignals(false);
-    // Actualisation
-    this->mainWindow->updateDo();
-    this->afficher();
-}
+
 void Page_Inst::repartitionAuto()
 {
     EltID id = this->tree->getID(0);
@@ -772,8 +663,7 @@ void Page_Inst::mixture(QList<QList<int> > listeParam, QString nomInst, bool bou
     //                        baDataTmp = Sound::bandFilter(baDataTmp, 32, dwSmplRate, cut, 0, 1);
     //                    }
                         // Rééchantillonnage
-                        double d = 0;
-                        baDataTmp = Sound::resampleMono(baDataTmp, fEchInit, fEch, 32, 0, d, false);
+                        baDataTmp = Sound::resampleMono(baDataTmp, fEchInit, fEch, 32);
                         // Ajout du son
                         baData = addSampleData(baData, baDataTmp, attenuation);
                     }
@@ -1180,114 +1070,4 @@ Champ TableWidgetInst::getChamp(int row)
     default: champ = champ_unknown;
     }
     return champ;
-}
-int Page_Inst::getDestNumber(int i)
-{
-    switch (i)
-    {
-    case 0: return 0; // Sample
-    case 1: return 4;
-    case 2: return 1;
-    case 3: return 12;
-    case 4: return 2;
-    case 5: return 45;
-    case 6: return 3;
-    case 7: return 50;
-    case 8: return 58; // Pitch/Effects
-    case 9: return 52;
-    case 10: return 51;
-    case 11: return 56;
-    case 12: return 8;
-    case 13: return 9;
-    case 14: return 17;
-    case 15: return 15;
-    case 16: return 16;
-    case 17: return 46;
-    case 18: return 57;
-    case 19: return 48; // Volume envelope
-    case 20: return 33;
-    case 21: return 34;
-    case 22: return 35;
-    case 23: return 36;
-    case 24: return 37;
-    case 25: return 38;
-    case 26: return 39;
-    case 27: return 40;
-    case 28: return 47;
-    case 29: return 54;
-    case 30: return 25; // Modulation envelope
-    case 31: return 26;
-    case 32: return 27;
-    case 33: return 28;
-    case 34: return 29;
-    case 35: return 30;
-    case 36: return 7;
-    case 37: return 11;
-    case 38: return 31;
-    case 39: return 32;
-    case 40: return 21; // Modulation LFO
-    case 41: return 22;
-    case 42: return 5;
-    case 43: return 13;
-    case 44: return 10;
-    case 45: return 23; // Vibrato LFO
-    case 46: return 24;
-    case 47: return 6;
-    default: return 100;
-    }
-}
-int Page_Inst::getDestIndex(int i)
-{
-    switch (i)
-    {
-    case 0: return 0; // Sample
-    case 4: return 1;
-    case 1: return 2;
-    case 12: return 3;
-    case 2: return 4;
-    case 45: return 5;
-    case 3: return 6;
-    case 50: return 7;
-    case 58: return 8;
-    case 52: return 9; // Pitch/Effects
-    case 51: return 10;
-    case 56: return 11;
-    case 8: return 12;
-    case 9: return 13;
-    case 17: return 14;
-    case 15: return 15;
-    case 16: return 16;
-    case 46: return 17;
-    case 57: return 18;
-    case 48: return 19; // Volume envelope
-    case 33: return 20;
-    case 34: return 21;
-    case 35: return 22;
-    case 36: return 23;
-    case 37: return 24;
-    case 38: return 25;
-    case 39: return 26;
-    case 40: return 27;
-    case 47: return 28;
-    case 54: return 29;
-    case 25: return 30; // Modulation envelope
-    case 26: return 31;
-    case 27: return 32;
-    case 28: return 33;
-    case 29: return 34;
-    case 30: return 35;
-    case 7: return 36;
-    case 11: return 37;
-    case 31: return 38;
-    case 32: return 39;
-    case 21: return 40; // Modulation LFO
-    case 22: return 41;
-    case 5: return 42;
-    case 13: return 43;
-    case 10: return 44;
-    case 23: return 45; // Vibrato LFO
-    case 24: return 46;
-    case 6: return 47;
-    default: return 100;
-    }
 }

@@ -22,71 +22,25 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef PAGE_PRST_H
-#define PAGE_PRST_H
+#ifndef DIALOG_WAIT_H
+#define DIALOG_WAIT_H
 
-#include <QWidget>
-#include "page.h"
+#include <QDialog>
 
-namespace Ui
-{
-    class Page_Prst;
+namespace Ui {
+class DialogWait;
 }
 
-
-class SpinBox; // Déclaration anticipée
-
-class Page_Prst : public PageTable
+class DialogWait : public QDialog
 {
     Q_OBJECT
+    
 public:
-    explicit Page_Prst(QWidget *parent = 0);
-    ~Page_Prst();
-    void setModVisible(bool visible);
-    void afficher();
-    void spinUpDown(int steps, SpinBox *spin);
-    void firstAvailablePresetBank(EltID id, int &nBank, int &nPreset);
-    void duplication();
-
-public slots:
-    void setBank();
-    void setPreset();
-
+    explicit DialogWait(QString text, QWidget *parent = 0);
+    ~DialogWait();
+    
 private:
-    Ui::Page_Prst *ui;
-    static int closestAvailablePreset(EltID id, WORD wBank, WORD wPreset);
-    static bool isAvailable(EltID id, WORD wBank, WORD wPreset);
-    // Outils
-    void duplication(EltID id);
+    Ui::DialogWait *ui;
 };
 
-// Classe TableWidget pour presets
-class TableWidgetPrst : public TableWidget
-{
-    Q_OBJECT
-public:
-    // Constructeur
-    TableWidgetPrst(QWidget *parent = 0);
-    ~TableWidgetPrst();
-    // Association champ - ligne
-    Champ getChamp(int row);
-    int getRow(WORD champ);
-};
-
-
-// SpinBox
-class SpinBox : public QSpinBox
-{
-    Q_OBJECT
-public:
-    // Constructeur
-    SpinBox(QWidget *parent = 0) : QSpinBox(parent) {}
-    // Initialisation du sf2
-    void init(Page_Prst *page) {this->page = page;}
-public slots:
-    virtual void stepBy(int steps) {this->page->spinUpDown(steps, this);}
-private:
-    Page_Prst *page;
-};
-
-#endif // PAGE_PRST_H
+#endif // DIALOG_WAIT_H

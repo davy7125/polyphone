@@ -284,6 +284,7 @@
       <string>&amp;Preset</string>
      </property>
      <addaction name="actionDuplication_des_divisions"/>
+     <addaction name="action_Param_trage_global_2"/>
     </widget>
     <addaction name="menuSample"/>
     <addaction name="menuInstrument"/>
@@ -322,6 +323,9 @@
    </property>
    <property name="autoFillBackground">
     <bool>false</bool>
+   </property>
+   <property name="allowedAreas">
+    <set>Qt::BottomToolBarArea|Qt::TopToolBarArea</set>
    </property>
    <attribute name="toolBarArea">
     <enum>TopToolBarArea</enum>
@@ -1104,6 +1108,11 @@
   <action name="action_laboration_release">
    <property name="text">
     <string>&amp;Élaboration release...</string>
+   </property>
+  </action>
+  <action name="action_Param_trage_global_2">
+   <property name="text">
+    <string>&amp;Paramétrage global...</string>
    </property>
   </action>
  </widget>
@@ -2023,6 +2032,22 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>action_Param_trage_global_2</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>paramGlobal2()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>471</x>
+     <y>215</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>ouvrir()</slot>
@@ -2075,5 +2100,6 @@
   <slot>setVelocity(int)</slot>
   <slot>duplicationPrst()</slot>
   <slot>release()</slot>
+  <slot>paramGlobal2()</slot>
  </slots>
 </ui>
