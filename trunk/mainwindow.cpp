@@ -2347,7 +2347,7 @@ void MainWindow::attenuationMini()
         }
     }
     // Décalage à effectuer
-    double decalage = 10.0*rep - attenuationMini;
+    double decalage = 10.0 * rep - attenuationMini;
     if (decalage == 0) return;
     // Application du décalage
     Valeur val;
@@ -2384,6 +2384,90 @@ void MainWindow::attenuationMini()
     if (ui->stackedWidget->currentWidget() == this->page_inst)
         this->page_inst->afficher();
 }
+void MainWindow::associationAutoSmpl()
+{
+    // Association automatique des samples
+    // Condition : même nom sauf pour la dernière lettre (R ou L)
+    this->sf2->prepareNewActions();
+    EltID id = this->ui->arborescence->getID(0);
+    id.typeElement = elementSmpl;
+    // Constitution listes de noms et indices
+    QList<EltID> listID;
+    QStringList  listNom;
+    QList<bool>  listSens;
+    QString currentStr;
+    for (int i = 0; i < this->sf2->count(id); i++)
+    {
+        id.indexElt = i;
+        if (!this->sf2->get(id, champ_hidden).bValue)
+        {
+            currentStr = this->sf2->getQstr(id, champ_name);
+            if (currentStr.right(1).toUpper() == "R")
+            {
+                listID.append(id);
+                listNom.append(currentStr.left(currentStr.size() - 1));
+                listSens.append(false);
+            }
+            else if (currentStr.right(1).toUpper() == "L")
+            {
+                listID.append(id);
+                listNom.append(currentStr.left(currentStr.size() - 1));
+                listSens.append(true);
+            }
+        }
+    }
+    // Assemblage
+    EltID currentID, idBis;
+    bool currentSens;
+    bool isFound;
+    int indice;
+    Valeur value;
+    while (listID.size())
+    {
+        currentID = listID.takeLast();
+        currentStr = listNom.takeLast();
+        currentSens = listSens.takeLast();
+        // Recherche d'une association
+        indice = 0;
+        isFound = false;
+        while (indice < listID.size() && !isFound)
+        {
+            if (listNom.at(indice) == currentStr && listSens.at(indice) != currentSens)
+            {
+                idBis = listID.takeAt(indice);
+                listNom.takeAt(indice);
+                listSens.takeAt(indice);
+                // Association idBis avec currentID
+                value.wValue = idBis.indexElt;
+                this->sf2->set(currentID, champ_wSampleLink, value);
+                value.wValue = currentID.indexElt;
+                this->sf2->set(idBis, champ_wSampleLink, value);
+                if (currentSens)
+                {
+                    value.sfLinkValue = leftSample;
+                    this->sf2->set(currentID, champ_sfSampleType, value);
+                    value.sfLinkValue = rightSample;
+                    this->sf2->set(idBis, champ_sfSampleType, value);
+                }
+                else
+                {
+                    value.sfLinkValue = rightSample;
+                    this->sf2->set(currentID, champ_sfSampleType, value);
+                    value.sfLinkValue = leftSample;
+                    this->sf2->set(idBis, champ_sfSampleType, value);
+                }
+                isFound = true;
+            }
+            else
+                indice++;
+        }
+    }
+    // Mise à jour
+    this->updateDo();
+    if (ui->stackedWidget->currentWidget() == this->page_smpl)
+        this->page_smpl->afficher();
+}
+
 
 // Gestion du clavier virtuel / du son
 void MainWindow::setAudioEngine(int audioEngine)

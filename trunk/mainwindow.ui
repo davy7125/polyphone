@@ -258,6 +258,7 @@
      <property name="title">
       <string>&amp;Sf2</string>
      </property>
+     <addaction name="action_Association_auto_samples"/>
      <addaction name="action_Enlever_les_l_ments_non_utilis_s"/>
      <addaction name="actionR_gler_att_nuation_minimale"/>
     </widget>
@@ -1113,6 +1114,11 @@
   <action name="action_Param_trage_global_2">
    <property name="text">
     <string>&amp;Paramétrage global...</string>
+   </property>
+  </action>
+  <action name="action_Association_auto_samples">
+   <property name="text">
+    <string>&amp;Association auto samples</string>
    </property>
   </action>
  </widget>
@@ -2048,6 +2054,22 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>action_Association_auto_samples</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>associationAutoSmpl()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>471</x>
+     <y>215</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>ouvrir()</slot>
@@ -2101,5 +2123,6 @@
   <slot>duplicationPrst()</slot>
   <slot>release()</slot>
   <slot>paramGlobal2()</slot>
+  <slot>associationAutoSmpl()</slot>
  </slots>
 </ui>
