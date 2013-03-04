@@ -25,7 +25,7 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#define VERSION "0.4"
+#define VERSION "0.5"
 
 #include <QMainWindow>
 #include <QDir>
@@ -119,6 +119,7 @@ private slots:
     void filtreMur();           // outil sample, filtre "mur de brique"
     void reglerBalance();       // outil sample, réglage de la balance (samples liés)
     void transposer();          // outil sample, transposition
+    void sifflements();         // outil sample, suppression des sifflements
     void desaccorder();         // outil instrument, désaccordage ondulant
     void duplication();         // outil instrument, duplication des divisions
     void paramGlobal();         // outil instrument, modification globale d'un paramètre
@@ -130,7 +131,7 @@ private slots:
     void paramGlobal2();        // outil preset, modification globale d'un paramètre
     void attenuationMini();     // outil sf2, mise à jour de toutes les atténuations
     void purger();              // outil sf2, suppression des éléments non utilisés
-    void sifflements();         // outil sf2, suppression des sifflements
+    void associationAutoSmpl(); // outil sf2, association auto gauche-droite des samples
 
     void noteOn(int key);
     void noteOff(int key);
