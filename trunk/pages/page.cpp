@@ -2392,7 +2392,7 @@ int PageTable::limit(int iVal, Champ champ, EltID id)
     return ret;
 }
 
-void PageTable::paramGlobal()
+void PageTable::paramGlobal(Config *configuration)
 {
     this->sf2->prepareNewActions();
     EltID id = this->tree->getID(0);
@@ -2419,7 +2419,7 @@ void PageTable::paramGlobal()
             }
         }
     }
-    if (!nbElt)
+    if (nbElt == 0)
     {
         if (m_typePage == PAGE_INST)
             QMessageBox::warning(this, tr("Attention"), trUtf8("L'instrument doit contenir des sons."));
@@ -2427,15 +2427,7 @@ void PageTable::paramGlobal()
             QMessageBox::warning(this, tr("Attention"), trUtf8("Le preset doit contenir des instruments."));
         return;
     }
-    if (posMin == posMax)
-    {
-        if (m_typePage == PAGE_INST)
-            QMessageBox::warning(this, tr("Attention"), trUtf8("L'étendue de l'instrument doit contenir au moins 2 notes."));
-        else
-            QMessageBox::warning(this, tr("Attention"), trUtf8("L'étendue du preset doit contenir au moins 2 notes."));
-        return;
-    }
-    else if (posMin > posMax)
+    if (posMin > posMax)
     {
         if (m_typePage == PAGE_INST)
             QMessageBox::warning(this, tr("Attention"), trUtf8("Aucune étendue de notes spécifiée pour l'instrument."));
@@ -2443,7 +2435,7 @@ void PageTable::paramGlobal()
             QMessageBox::warning(this, tr("Attention"), trUtf8("Aucune étendue de notes spécifiée pour le preset."));
         return;
     }
-    DialogParamGlobal * dialogParam = new DialogParamGlobal(this->sf2, id, this);
+    DialogParamGlobal * dialogParam = new DialogParamGlobal(this->sf2, id, configuration, this);
     dialogParam->setAttribute(Qt::WA_DeleteOnClose, true);
     this->connect(dialogParam, SIGNAL(accepted(QVector<double>,QList<EltID>,int,int)),
                   SLOT(paramGlobal(QVector<double>,QList<EltID>,int,int)));
@@ -2492,7 +2484,6 @@ void PageTable::paramGlobal(QVector<double> dValues, QList<EltID> listElt, int t
     }
     // Modification de tous les éléments
     EltID id;
-    int posMin, posMax;
     for (int numID = 0; numID < listElt.size(); numID++)
     {
         // Pos min et max sur le clavier
@@ -2501,56 +2492,41 @@ void PageTable::paramGlobal(QVector<double> dValues, QList<EltID> listElt, int t
             id.typeElement = elementInstSmpl;
         else
             id.typeElement = elementPrstInst;
-        posMin = 128;
-        posMax = 0;
+
+        // Modification des valeurs pour chaque élément associé à id
+        double amount;
+        int pos;
+        char T[30];
+        bool ok;
+        Valeur value;
         for (int i = 0; i < this->sf2->count(id); i++)
         {
             id.indexElt2 = i;
             if (!this->sf2->get(id, champ_hidden).bValue)
             {
-                if (this->sf2->isSet(id, champ_keyRange))
+                amount = QString(getTextValue(T, champ, this->sf2->get(id, champ).genValue)).toDouble();
+                // Calcul de la modification
+                pos = (double)(this->sf2->get(id, champ_keyRange).rValue.byLo +
+                       this->sf2->get(id, champ_keyRange).rValue.byHi) / 2 * dValues.size() / 127. + 0.5;
+                if (pos < 0)
+                    pos = 0;
+                else if (pos >= dValues.size())
+                    pos = dValues.size() - 1;
+                // Application de la modification
+                switch (typeModif)
                 {
-                    if (this->sf2->get(id, champ_keyRange).rValue.byLo < posMin)
-                        posMin = this->sf2->get(id, champ_keyRange).rValue.byLo;
-                    if (this->sf2->get(id, champ_keyRange).rValue.byHi > posMax)
-                        posMax = this->sf2->get(id, champ_keyRange).rValue.byHi;
+                case 0: // Ajout
+                    amount += dValues.at(pos);
+                    break;
+                case 1: // Multiplication
+                    amount *= dValues.at(pos);
+                    break;
+                case 2: // Remplacement
+                    amount = dValues.at(pos);
+                    break;
                 }
-            }
-        }
-        if (posMin < posMax)
-        {
-            // Modification des valeurs pour chaque élément associé à id
-            double amount;
-            int pos;
-            char T[30];
-            bool ok;
-            Valeur value;
-            for (int i = 0; i < this->sf2->count(id); i++)
-            {
-                id.indexElt2 = i;
-                if (!this->sf2->get(id, champ_hidden).bValue)
-                {
-                    amount = QString(getTextValue(T, champ, this->sf2->get(id, champ).genValue)).toDouble();
-                    // Calcul de la modification
-                    pos = (this->sf2->get(id, champ_keyRange).rValue.byLo +
-                           this->sf2->get(id, champ_keyRange).rValue.byHi) / 2;
-                    pos = (double)((dValues.size()-1) * (pos - posMin)) / (posMax - posMin);
-                    // Application de la modification
-                    switch (typeModif)
-                    {
-                    case 0: // Ajout
-                        amount += dValues.at(pos);
-                        break;
-                    case 1: // Multiplication
-                        amount *= dValues.at(pos);
-                        break;
-                    case 2: // Remplacement
-                        amount = dValues.at(pos);
-                        break;
-                    }
-                    value.genValue = getValue(QString::number(amount), champ, ok);
-                    this->sf2->set(id, champ, value);
-                }
+                value.genValue = getValue(QString::number(amount), champ, ok);
+                this->sf2->set(id, champ, value);
             }
         }
     }

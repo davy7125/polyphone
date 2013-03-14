@@ -2190,13 +2190,13 @@ void MainWindow::transposer()       {this->page_smpl->transposer();}
 void MainWindow::sifflements()      {this->page_smpl->sifflements();}
 void MainWindow::desaccorder()      {this->page_inst->desaccorder();}
 void MainWindow::duplication()      {this->page_inst->duplication();}
-void MainWindow::paramGlobal()      {this->page_inst->paramGlobal();}
+void MainWindow::paramGlobal()      {this->page_inst->paramGlobal(&this->configuration);}
 void MainWindow::repartitionAuto()  {this->page_inst->repartitionAuto();}
 void MainWindow::spatialisation()   {this->page_inst->spatialisation();}
 void MainWindow::mixture()          {this->page_inst->mixture();}
 void MainWindow::release()          {this->page_inst->release();}
 void MainWindow::duplicationPrst()  {this->page_prst->duplication();}
-void MainWindow::paramGlobal2()     {this->page_prst->paramGlobal();}
+void MainWindow::paramGlobal2()     {this->page_prst->paramGlobal(&this->configuration);}
 void MainWindow::purger()
 {
     // Suppression des éléments non utilisés
