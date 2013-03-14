@@ -37,6 +37,8 @@
 #include <QApplication>
 #include <QPushButton>
 
+class Config;
+
 namespace Ui
 {
     class Page;
@@ -315,7 +317,7 @@ public:
     void afficher();
     void reselect();
     void updateId(EltID id);
-    void paramGlobal();
+    void paramGlobal(Config *configuration);
 
 protected:
     // Attributs protégés

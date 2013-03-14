@@ -84,7 +84,7 @@
         <item>
          <widget class="QLabel" name="label_6">
           <property name="text">
-           <string>Raideur</string>
+           <string notr="true">-</string>
           </property>
          </widget>
         </item>
@@ -542,10 +542,44 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>doubleSpinMin</sender>
+   <signal>valueChanged(double)</signal>
+   <receiver>DialogParamGlobal</receiver>
+   <slot>minChanged(double)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>463</x>
+     <y>83</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>279</x>
+     <y>116</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>doubleSpinMax</sender>
+   <signal>valueChanged(double)</signal>
+   <receiver>DialogParamGlobal</receiver>
+   <slot>maxChanged(double)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>463</x>
+     <y>114</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>279</x>
+     <y>116</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>indexMotifChanged(int)</slot>
   <slot>raideurChanged(double)</slot>
   <slot>applyToOthers()</slot>
+  <slot>minChanged(double)</slot>
+  <slot>maxChanged(double)</slot>
  </slots>
 </ui>
