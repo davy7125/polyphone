@@ -60,6 +60,8 @@ public:
     double modLfoDelay, modLfoFreq, vibLfoDelay, vibLfoFreq;
     qint32 modLfoToPitch, modLfoToFilterFreq, vibLfoToPitch;
     double modLfoToVolume;
+    // EFFETS
+    double reverb, chorus;
 private:
     enum ReadMethod
     {

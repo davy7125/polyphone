@@ -417,7 +417,7 @@ void GraphParamGlobal::writeMotif()
         for (int i = 0; i < this->nbPoints; i++)
         {
             double valTmp = (double)(qrand() % 2000) / 1000. - 1.;
-            double exp = qExp((50 - this->raideurExp) / 15.);
+            double exp = qExp((50. - this->raideurExp) / 15.);
             if (valTmp < 0)
                 this->dValues[i] = -qPow(qAbs(valTmp), exp);
             else

@@ -251,6 +251,12 @@ void Voice::setGain(double gain)
 {
     this->m_gain = gain;
 }
+void Voice::setChorus(int level, int depth, int frequency)
+{
+    m_chorus.setEffectMix((double)level / 200. * (double)this->m_voiceParam->chorus / 100.);
+    m_chorus.setModDepth((double)depth / 4000.);
+    m_chorus.setModFrequency((double)frequency / 15.);
+}
 
 void Voice::biQuadCoefficients(double &a0, double &a1, double &a2, double &b1, double &b2,
                                double freq, double Q)
@@ -289,4 +295,28 @@ void Voice::biQuadCoefficients(double &a0, double &a1, double &a2, double &b1, d
             b2 = 2. * beta;
         }
     }
+}
+
+Voice* Voice::readData(double * data1, double * data2, qint64 size)
+{
+    Voice * voiceRet = NULL;
+    // Récupération des données
+    double data[size];
+    qint64 nbRead = this->readData((char *)data, 8 * size) / 8;
+    if (nbRead < 0)
+    {
+        nbRead = -nbRead;
+        voiceRet = this;
+    }
+    if (nbRead != size)
+        qDebug() << "warning: synth asked" << size << "samples and got" << nbRead;
+    // Ajout en séparant les voix et application chorus
+    double pan = (this->getVoiceParam()->pan + 50) / 100; // entre 0 et 1
+    double pan2 = 1. - pan;
+    for (quint32 i = 0; i < size; i++)
+    {
+        data1[i] = pan  * m_chorus.tick(data[i]);
+        data2[i] = pan2 * m_chorus.lastOut(1);
+    }
+    return voiceRet;
 }
