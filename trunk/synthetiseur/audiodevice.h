@@ -25,17 +25,31 @@
 #ifndef AUDIODEVICE_H
 #define AUDIODEVICE_H
 
-#include <QAudioOutput>
-#include <jack/jack.h>
-#include <jack/session.h>
-#include "synth.h"
-#ifdef PA_USE_ASIO
+#include <QObject>
+#include "jack.h"
+#include <session.h>
 #include "portaudio.h"
-#endif
+
+class Synth;
 
 #define BUFFER_AUDIO          20000
 #define SAMPLE_RATE           48000
 #define FRAMES_PER_BUFFER     1024
+
+class AudioFormat
+{
+public:
+    void setChannelCount(qint32 value)  {m_channelCount = value;}
+    void setSampleRate(qint32 value)    {m_sampleRate = value;}
+    void setSampleSize(qint32 value)    {m_sampleSize = value;}
+    qint32 channelCount()               {return m_channelCount;}
+    qint32 sampleRate()                 {return m_sampleRate;}
+    qint32 sampleSize()                 {return m_sampleSize;}
+private:
+    qint32 m_channelCount;
+    qint32 m_sampleRate;
+    qint32 m_sampleSize;
+};
 
 class AudioDevice : public QObject
 {
@@ -47,10 +61,11 @@ public:
     jack_port_t * m_output_port_R;
     jack_port_t * m_output_port_L;
     Synth * m_synth;
-    // Accès au format audio par Asio
-    QAudioFormat m_format;
+    // Accès au format audio
+    AudioFormat m_format;
 public slots:
     void initAudio(int numDevice);
+    void closeConnections();
 signals:
     void start();
 private:
@@ -59,19 +74,13 @@ private:
         CONNECTION_NONE,
         CONNECTION_JACK,
         CONNECTION_ASIO,
-        CONNECTION_QAUDIO
+        CONNECTION_STANDARD
     };
     void openJackConnection();
-    void openQAudioConnection(int numDevice);
-    void closeConnections();
-    // Serveur son, sortie standard
-    QAudioOutput * m_audioOutput;
-#ifdef PA_USE_ASIO
-    // Serveur son, asio
-    int m_isAsioRunning;
-    PaStream * m_asioStream;
-    void openAsioConnection();
-#endif
+    void openStandardConnection(bool isAsio);
+    // Serveur son, sortie standard ou asio
+    bool m_isStandardRunning;
+    PaStream * m_standardStream;
     // Serveur son, jack
     jack_client_t * m_jack_client;
     TypeConnection m_typeConnection;

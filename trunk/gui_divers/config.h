@@ -27,8 +27,6 @@
 
 #include <QMessageBox>
 #include <QDialog>
-#include <stdlib.h>
-#include <stdio.h>
 #include <QString>
 
 namespace Ui
@@ -58,21 +56,37 @@ public:
     int  getNumPortMidi()       {return numPortMidi;}
     int  getAudioType()         {return audioType;}
     int  getSynthGain()         {return synthGain;}
+    int  getSynthRevLevel()     {return revLevel;}
+    int  getSynthRevSize()      {return revSize;}
+    int  getSynthRevWidth()     {return revWidth;}
+    int  getSynthRevDamp()      {return revDamping;}
+    int  getSynthChoLevel()     {return choLevel;}
+    int  getSynthChoDepth()     {return choDepth;}
+    int  getSynthChoFrequency() {return choFrequency;}
     // méthodes publiques
     void addFavorite(QString filePath);
     void show();
 
 public slots:
-    void setRam(int val);
     void setAfficheMod(int val);
     void setAfficheToolBar(int val);
+    void setKeyboardType(int val);
+    void setKeyboardVelocity(int val);
+
+private slots:
+    void setRam(int val);
     void setAudioOutput(int index);
     void setWavAutoLoop(bool checked);
     void setWavRemoveBlank(bool checked);
-    void setKeyboardType(int val);
-    void setKeyboardVelocity(int val);
     void setNumPortMidi(int val);
     void setSynthGain(int val);
+    void on_dialRevNiveau_valueChanged(int value);
+    void on_dialRevProfondeur_valueChanged(int value);
+    void on_dialRevDensite_valueChanged(int value);
+    void on_dialRevAttenuation_valueChanged(int value);
+    void on_dialChoNiveau_valueChanged(int value);
+    void on_dialChoAmplitude_valueChanged(int value);
+    void on_dialChoFrequence_valueChanged(int value);
 
 private:
     Ui::Config *ui;
@@ -90,8 +104,9 @@ private:
     int keyboardVelocity;
     int numPortMidi;
     int synthGain;
+    int revLevel, revSize, revDamping, revWidth;
+    int choLevel, choDepth, choFrequency;
     // Autres
-    QString confFile;
     bool loaded;
     // Méthodes privées
     void load();

@@ -29,10 +29,9 @@
 #define BUFFER_SYNTH_SIZE     60000
 #define BUFFER_SYNTH_AVANCE   20000
 
-//#include <QtMultimedia/QAudioOutput>
-#include <QAudioFormat>
 #include "pile_sf2.h"
 #include "voice.h"
+#include "audiodevice.h"
 
 class Synth : public CircularBuffer
 {
@@ -48,9 +47,9 @@ public:
               VoiceParam * voiceParamTmp = NULL);
     void stop();
     void setGain(double gain);
+    void setReverb(int level, int size, int width, int damping);
+    void setChorus(int level, int depth, int frequency);
     // Paramètres de lecture de samples
-    //void setReverb(int level, int room, int width, int damp);
-    //void setChorus(int level, int count, int freq, int depth);
     void setGainSample(int gain);
     void setStereo(int isStereo, bool withMutex = true);
     void setStartLoop(int startLoop);
@@ -61,9 +60,8 @@ public:
     void setPitchCorrection(int correction);
 
     // Exécution par le serveur audio (thread 3)
-    qint64 readData(char *data, qint64 maxlen);
     qint64 readData(char *data1, char *data2, qint64 maxlen);
-    void setFormat(QAudioFormat format, bool isJack);
+    void setFormat(AudioFormat format);
 
 public slots:
     // Exécution par synth (thread 2)
@@ -78,10 +76,7 @@ protected slots:
     void emitCurrentPosChanged(int pos);
 
 private:
-    static Voice *fusion(char * data1, qint64 size, Voice * voice);
-    static Voice *fusion(char * data1, char * data2, qint64 size, Voice * voice);
-    void clip(double * data, qint64 size);
-    void clip(double * data1, double *data2, qint64 size);
+    void clip(double * data1, double * data2, qint64 size);
     void endVoice(Voice * voice);
     bool getInterrupt();
 
@@ -90,8 +85,7 @@ private:
     // Liste des voix
     QList<Voice *> m_listeVoix;
     // Format audio
-    QAudioFormat m_format;
-    bool m_isJack;
+    AudioFormat m_format;
     // Paramètre global
     double m_gain;
     // Paramètres lecture sample
@@ -99,6 +93,9 @@ private:
     bool m_isStereo;
     bool m_isLoopEnabled;
     bool m_isSinusEnabled;
+    // Effets
+    int m_choLevel, m_choDepth, m_choFrequency;
+    FreeVerb m_reverb;
     // Etat clipping
     double m_clipCoef;
     // Protection des données et déclenchement de la génération de données

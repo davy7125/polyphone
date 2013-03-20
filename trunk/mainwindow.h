@@ -71,6 +71,8 @@ public:
     void openMidiPort(int val);
     void setAudioEngine(int audioEngine);
     void setSynthGain(int val);
+    void setSynthReverb(int level, int size, int width, int damping);
+    void setSynthChorus(int level, int depth, int frequency);
 public slots:
     void supprimerElt();        // Suppression des éléments sélectionnés dans l'arbre
 private slots:
@@ -139,6 +141,7 @@ private slots:
 
 signals:
     void initAudio(int numDevice);
+    void stopAudio();
     void play(int type, int idSf2, int idElt, int note, int velocity);
 
 private:

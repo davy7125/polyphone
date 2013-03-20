@@ -4,20 +4,20 @@
 #
 #-------------------------------------------------
 
-QT       += core gui printsupport svg #multimedia
+QT       += core gui printsupport svg
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = polyphone
 TEMPLATE = app
 
-CONFIG(release, debug|release) {
+CONFIG(release, debug|release){
     DESTDIR = RELEASE
     OBJECTS_DIR = RELEASE/.obj
     MOC_DIR = RELEASE/.moc
     RCC_DIR = RELEASE/.rcc
     UI_DIR = RELEASE/.ui
 }
-CONFIG(debug, debug|release) {
+CONFIG(debug, debug|release){
     DESTDIR = DEBUG
     OBJECTS_DIR = DEBUG/.obj
     MOC_DIR = DEBUG/.moc
@@ -25,22 +25,30 @@ CONFIG(debug, debug|release) {
     UI_DIR = DEBUG/.ui
 }
 
-LIBS +=  -Lsynthetiseur/jack \
-    -ljack
-
-win32 {
-    QT += multimedia
-    DEFINES += __WINDOWS_MM__
-    CONFIG += use_asio
-    LIBS += -lwinmm
+win32{
+    DEFINES += __WINDOWS_MM__ PA_USE_ASIO
+    LIBS += -Llib/win -lportaudio -ljack \
+            -lwinmm libole32
+    INCLUDEPATH += lib/win/
+    HEADERS  += lib/win/jack.h \
+        lib/win/weakmacros.h \
+        lib/win/types.h \
+        lib/win/transport.h \
+        lib/win/systemdeps.h \
+        lib/win/session.h
 }
-unix {
-    CONFIG += mobility
-    MOBILITY += multimedia
+unix{
     DEFINES += __LINUX_ALSASEQ__
     CONFIG += link_pkgconfig
     PKGCONFIG += alsa
     INCLUDEPATH += /usr/include/jack
+
+    # Spécificités 32 - 64 bits
+    contains(QMAKE_HOST.arch, x86_64):{
+        LIBS += -Llib/unix64 -lportaudio -ljack
+    } else {
+        LIBS += -Llib/unix32 -lportaudio -ljack
+    }
 }
 
 INCLUDEPATH += gui_divers \
@@ -52,6 +60,7 @@ INCLUDEPATH += gui_divers \
     clavier \
     synthetiseur \
     synthetiseur/elements \
+    lib \
     .
 
 SOURCES	+= main.cpp \
@@ -65,6 +74,7 @@ SOURCES	+= main.cpp \
     gui_divers/config.cpp \
     gui_divers/dialog_list.cpp \
     gui_divers/dialog_help.cpp \
+    gui_divers/dialog_wait.cpp \
     pages/page_sf2.cpp \
     pages/page_smpl.cpp \
     pages/page_inst.cpp \
@@ -75,6 +85,8 @@ SOURCES	+= main.cpp \
     tools/dialog_paramglobal.cpp \
     tools/dialog_mixture.cpp \
     tools/dialog_sifflements.cpp \
+    tools/dialog_release.cpp \
+    tools/dialog_selectitems.cpp \
     clavier/RtMidi.cpp \
     clavier/pianoscene.cpp \
     clavier/pianokey.cpp \
@@ -88,9 +100,13 @@ SOURCES	+= main.cpp \
     synthetiseur/elements/enveloppevol.cpp \
     synthetiseur/audiodevice.cpp \
     synthetiseur/elements/oscsinus.cpp \
-    tools/dialog_release.cpp \
-    tools/dialog_selectitems.cpp \
-    gui_divers/dialog_wait.cpp
+    synthetiseur/elements/Stk.cpp \
+    synthetiseur/elements/SineWave.cpp \
+    synthetiseur/elements/OnePole.cpp \
+    synthetiseur/elements/FreeVerb.cpp \
+    synthetiseur/elements/Delay.cpp \
+    synthetiseur/elements/Chorus.cpp \
+    synthetiseur/elements/DelayL.cpp
 
 HEADERS  += mainwindow.h \
     sf2_core/sf2_types.h \
@@ -101,6 +117,7 @@ HEADERS  += mainwindow.h \
     gui_divers/config.h \
     gui_divers/dialog_list.h \
     gui_divers/dialog_help.h \
+    gui_divers/dialog_wait.h \
     pages/page_sf2.h \
     pages/page_smpl.h \
     pages/page_inst.h \
@@ -111,6 +128,8 @@ HEADERS  += mainwindow.h \
     tools/dialog_paramglobal.h \
     tools/dialog_mixture.h \
     tools/dialog_sifflements.h \
+    tools/dialog_release.h \
+    tools/dialog_selectitems.h \
     clavier/RtMidi.h \
     clavier/RtError.h \
     clavier/pianoscene.h \
@@ -126,14 +145,23 @@ HEADERS  += mainwindow.h \
     synthetiseur/elements/enveloppevol.h \
     synthetiseur/audiodevice.h \
     synthetiseur/elements/oscsinus.h \
-    tools/dialog_release.h \
-    tools/dialog_selectitems.h \
-    gui_divers/dialog_wait.h
+    lib/portaudio.h \
+    synthetiseur/elements/Stk.h \
+    synthetiseur/elements/SineWave.h \
+    synthetiseur/elements/OnePole.h \
+    synthetiseur/elements/Generator.h \
+    synthetiseur/elements/FreeVerb.h \
+    synthetiseur/elements/Filter.h \
+    synthetiseur/elements/Effect.h \
+    synthetiseur/elements/Delay.h \
+    synthetiseur/elements/Chorus.h \
+    synthetiseur/elements/DelayL.h
 
 FORMS    += mainwindow.ui \
     gui_divers/config.ui \
     gui_divers/dialog_list.ui \
     gui_divers/dialog_help.ui \
+    gui_divers/dialog_wait.ui \
     pages/page_sf2.ui \
     pages/page_smpl.ui \
     pages/page_inst.ui \
@@ -143,8 +171,7 @@ FORMS    += mainwindow.ui \
     tools/dialog_mixture.ui \
     tools/dialog_sifflements.ui \
     tools/dialog_release.ui \
-    tools/dialog_selectitems.ui \
-    gui_divers/dialog_wait.ui
+    tools/dialog_selectitems.ui
 
 RESOURCES += ressources.qrc \
     clavier/pianokeybd.qrc
@@ -153,35 +180,3 @@ RC_FILE = polyphone.rc
 TRANSLATIONS = polyphone_en.ts \
     polyphone_de.ts \
     polyphone_nl.ts
-
-# si ASIO activé (CONFIG += use_asio)
-use_asio{
-    LIBS += libole32
-    DEFINES += PA_USE_ASIO
-    DEFINES -= UNICODE
-    INCLUDEPATH += synthetiseur/portaudio/include \
-        synthetiseur/portaudio/src/common \
-        synthetiseur/portaudio/src/os/win \
-        synthetiseur/ASIOSDK2/common \
-        synthetiseur/ASIOSDK2/host \
-        synthetiseur/ASIOSDK2/host/pc
-    SOURCES += synthetiseur/ASIOSDK2/common/asio.cpp \
-        synthetiseur/ASIOSDK2/host/asiodrivers.cpp \
-        synthetiseur/ASIOSDK2/host/pc/asiolist.cpp \
-        synthetiseur/portaudio/src/hostapi/asio/pa_asio.cpp \
-        synthetiseur/portaudio/src/common/pa_trace.c \
-        synthetiseur/portaudio/src/common/pa_stream.c \
-        synthetiseur/portaudio/src/common/pa_ringbuffer.c \
-        synthetiseur/portaudio/src/common/pa_process.c \
-        synthetiseur/portaudio/src/common/pa_front.c \
-        synthetiseur/portaudio/src/common/pa_dither.c \
-        synthetiseur/portaudio/src/common/pa_cpuload.c \
-        synthetiseur/portaudio/src/common/pa_converters.c \
-        synthetiseur/portaudio/src/common/pa_allocation.c \
-        synthetiseur/portaudio/src/os/win/pa_x86_plain_converters.c \
-        synthetiseur/portaudio/src/os/win/pa_win_waveformat.c \
-        synthetiseur/portaudio/src/os/win/pa_win_util.c \
-        synthetiseur/portaudio/src/os/win/pa_win_hostapis.c \
-        synthetiseur/portaudio/src/os/win/pa_win_coinitialize.c \
-        synthetiseur/portaudio/src/hostapi/asio/iasiothiscallresolver.cpp
-}

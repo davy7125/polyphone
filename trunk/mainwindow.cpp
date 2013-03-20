@@ -50,6 +50,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent, Qt::Window | Qt::W
     // Initialisation de la sortie audio
     this->audioDevice = new AudioDevice(this->synth);
     connect(this, SIGNAL(initAudio(int)), this->audioDevice, SLOT(initAudio(int)));
+    connect(this, SIGNAL(stopAudio()), this->audioDevice, SLOT(closeConnections()), Qt::BlockingQueuedConnection);
     this->audioDevice->moveToThread(&this->audioThread);
     this->audioThread.start();
     if (this->configuration.getAudioType() == 0)
@@ -57,6 +58,13 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent, Qt::Window | Qt::W
     else
         this->setAudioEngine(this->configuration.getAudioType());
     this->setSynthGain(this->configuration.getSynthGain());
+    this->setSynthChorus(this->configuration.getSynthChoLevel(),
+                         this->configuration.getSynthChoDepth(),
+                         this->configuration.getSynthChoFrequency());
+    this->setSynthReverb(this->configuration.getSynthRevLevel(),
+                         this->configuration.getSynthRevSize(),
+                         this->configuration.getSynthRevWidth(),
+                         this->configuration.getSynthRevDamp());
     // Création des widgets
     page_sf2 = new Page_Sf2(this, ui->arborescence, ui->stackedWidget, this->sf2, this->synth);
     page_smpl = new Page_Smpl();
@@ -111,7 +119,9 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent, Qt::Window | Qt::W
 }
 MainWindow::~MainWindow()
 {
-    //this->synth->interruption();
+    // Arrêt audio et fin du synthé
+    this->stopAudio();
+    this->synth->interruption();
     delete this->sf2;
     delete this->page_inst;
     delete this->page_prst;
@@ -2543,4 +2553,12 @@ void MainWindow::noteChanged(int key, int vel)
 void MainWindow::setSynthGain(int val)
 {
     this->synth->setGain(val);
+}
+void MainWindow::setSynthReverb(int level, int size, int width, int damping)
+{
+    this->synth->setReverb(level, size, width, damping);
+}
+void MainWindow::setSynthChorus(int level, int depth, int frequency)
+{
+    this->synth->setChorus(level, depth, frequency);
 }

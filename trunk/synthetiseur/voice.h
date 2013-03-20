@@ -32,6 +32,10 @@
 #include "circularbuffer.h"
 #include "enveloppevol.h"
 #include "oscsinus.h"
+#include "Chorus.h"
+#include "FreeVerb.h"
+
+using namespace stk;
 
 class Voice : public CircularBuffer
 {
@@ -47,6 +51,8 @@ public:
     VoiceParam * getVoiceParam() {return m_voiceParam;}
     void release()               {m_release = true;}
     void setGain(double gain);
+    void setChorus(int level, int depth, int frequency);
+    Voice * readData(double * data1, double * data2, qint64 size);
 
 signals:
     void currentPosChanged(int pos);
@@ -77,6 +83,8 @@ private:
     qint32 m_valPrec, m_valBase;
     // sauvegarde état pour filtre passe bas
     double m_x1, m_x2, m_y1, m_y2;
+    // Effets
+    Chorus m_chorus;
     // Méthodes privées
     bool takeData(qint32 *data, qint64 nbRead);
     void biQuadCoefficients(double &a0, double &a1, double &a2, double &b1, double &b2,
