@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "asiosample", "..\driver\asiosample\asiosample\asiosample.vcxproj", "{FE7ECDA7-129E-DDB8-2E76-63F19BB838CD}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "hostsample", "..\host\sample\hostsample.vcxproj", "{DB3137E0-6153-6BCD-9667-7B74C077C89B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+		Template|Win32 = Template|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FE7ECDA7-129E-DDB8-2E76-63F19BB838CD}.Debug|Win32.ActiveCfg = Debug|Win32
+		{FE7ECDA7-129E-DDB8-2E76-63F19BB838CD}.Debug|Win32.Build.0 = Debug|Win32
+		{FE7ECDA7-129E-DDB8-2E76-63F19BB838CD}.Release|Win32.ActiveCfg = Release|Win32
+		{FE7ECDA7-129E-DDB8-2E76-63F19BB838CD}.Release|Win32.Build.0 = Release|Win32
+		{FE7ECDA7-129E-DDB8-2E76-63F19BB838CD}.Template|Win32.ActiveCfg = Release|Win32
+		{FE7ECDA7-129E-DDB8-2E76-63F19BB838CD}.Template|Win32.Build.0 = Release|Win32
+		{DB3137E0-6153-6BCD-9667-7B74C077C89B}.Debug|Win32.ActiveCfg = Debug|Win32
+		{DB3137E0-6153-6BCD-9667-7B74C077C89B}.Debug|Win32.Build.0 = Debug|Win32
+		{DB3137E0-6153-6BCD-9667-7B74C077C89B}.Release|Win32.ActiveCfg = Release|Win32
+		{DB3137E0-6153-6BCD-9667-7B74C077C89B}.Release|Win32.Build.0 = Release|Win32
+		{DB3137E0-6153-6BCD-9667-7B74C077C89B}.Template|Win32.ActiveCfg = Template|Win32
+		{DB3137E0-6153-6BCD-9667-7B74C077C89B}.Template|Win32.Build.0 = Template|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

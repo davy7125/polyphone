@@ -1,0 +1,55 @@
+﻿Build started 19/03/2013 02:52:56.
+     1>Project "C:\Users\Davy\Desktop\trunk\synthetiseur\ASIOSDK2\host\sample\hostsample.vcxproj" on node 3 (build target(s)).
+     1>InitializeBuildStatus:
+         Creating ".\Debug\hostsample.unsuccessfulbuild" because "AlwaysCreate" was specified.
+       ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /I../../common /I../../host /I../../host/pc /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _VC80_UPGRADE=0x0600 /D _MBCS /Gm /EHsc /RTC1 /MTd /GS /Gy- /fp:precise /Zc:wchar_t /Zc:forScope /Fo".\Debug\\" /Fd".\Debug\vc100.pdb" /FR".\Debug\\" /Gd /TP /analyze- /errorReport:prompt ..\..\common\asio.cpp ..\asiodrivers.cpp ..\pc\asiolist.cpp hostsample.cpp
+         hostsample.cpp
+     1>c:\users\davy\desktop\trunk\synthetiseur\asiosdk2\host\sample\hostsample.cpp(207): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\stdio.h(371) : see declaration of 'sprintf'
+         asiolist.cpp
+     1>c:\users\davy\desktop\trunk\synthetiseur\asiosdk2\host\pc\asiolist.cpp(87): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
+     1>c:\users\davy\desktop\trunk\synthetiseur\asiosdk2\host\pc\asiolist.cpp(89): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
+     1>c:\users\davy\desktop\trunk\synthetiseur\asiosdk2\host\pc\asiolist.cpp(224): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
+     1>c:\users\davy\desktop\trunk\synthetiseur\asiosdk2\host\pc\asiolist.cpp(246): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
+         asiodrivers.cpp
+         asio.cpp
+     1>c:\users\davy\desktop\trunk\synthetiseur\asiosdk2\common\asio.cpp(76): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
+     1>c:\users\davy\desktop\trunk\synthetiseur\asiosdk2\common\asio.cpp(86): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
+     1>c:\users\davy\desktop\trunk\synthetiseur\asiosdk2\common\asio.cpp(205): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : see declaration of 'strcpy'
+         Generating Code...
+       ManifestResourceCompile:
+         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\rc.exe /nologo /fo".\Debug\hostsample.exe.embed.manifest.res" .\Debug\hostsample_manifest.rc 
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:".\Debug\hostsample.exe" /INCREMENTAL /NOLOGO odbc32.lib odbccp32.lib winmm.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:".\Debug\hostsample.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"C:\Users\Davy\Desktop\trunk\synthetiseur\ASIOSDK2\host\sample\Debug\hostsample.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:".\Debug\hostsample.lib" /MACHINE:X86 .\Debug\hostsample.exe.embed.manifest.res
+         .\Debug\asio.obj
+         .\Debug\asiodrivers.obj
+         .\Debug\asiolist.obj
+         .\Debug\hostsample.obj
+       Manifest:
+         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /out:".\Debug\hostsample.exe.embed.manifest" /manifest .\Debug\hostsample.exe.intermediate.manifest
+         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\rc.exe /nologo /fo".\Debug\hostsample.exe.embed.manifest.res" .\Debug\hostsample_manifest.rc 
+       LinkEmbedManifest:
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:".\Debug\hostsample.exe" /INCREMENTAL /NOLOGO odbc32.lib odbccp32.lib winmm.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:".\Debug\hostsample.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"C:\Users\Davy\Desktop\trunk\synthetiseur\ASIOSDK2\host\sample\Debug\hostsample.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:".\Debug\hostsample.lib" /MACHINE:X86 .\Debug\hostsample.exe.embed.manifest.res
+         .\Debug\asio.obj
+         .\Debug\asiodrivers.obj
+         .\Debug\asiolist.obj
+         .\Debug\hostsample.obj
+         hostsample.vcxproj -> C:\Users\Davy\Desktop\trunk\synthetiseur\ASIOSDK2\host\sample\.\Debug\hostsample.exe
+       BscMake:
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\bscmake.exe /nologo /o".\Debug\hostsample.bsc" .\Debug\asio.sbr .\Debug\asiodrivers.sbr .\Debug\asiolist.sbr .\Debug\hostsample.sbr
+       FinalizeBuildStatus:
+         Deleting file ".\Debug\hostsample.unsuccessfulbuild".
+         Touching ".\Debug\hostsample.lastbuildstate".
+     1>Done Building Project "C:\Users\Davy\Desktop\trunk\synthetiseur\ASIOSDK2\host\sample\hostsample.vcxproj" (build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:07.07

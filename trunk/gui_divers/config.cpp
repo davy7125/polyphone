@@ -22,14 +22,13 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-//#include <QtMultimedia/QAudioOutput>
-#include <QAudioOutput>
 #include <QSettings>
 #include <QFileInfo>
 #include <QDir>
 #include "config.h"
 #include "ui_config.h"
 #include "mainwindow.h"
+#include "portaudio.h"
 
 Config::Config(QWidget *parent) : QDialog(parent), ui(new Ui::Config)
 {
@@ -39,15 +38,6 @@ Config::Config(QWidget *parent) : QDialog(parent), ui(new Ui::Config)
     this->mainWindow = (MainWindow *)parent;
     this->loaded = 0;
     ui->setupUi(this);
-    // chemin du fichier de configuration (dépendant du système d'exploitation)
-    QSettings ini(QSettings::IniFormat, QSettings::UserScope,
-                  QCoreApplication::organizationName(),
-                  QCoreApplication::applicationName());
-    QString dirPath = QFileInfo(ini.fileName()).absolutePath();
-    QDir dir(dirPath);
-    if (!dir.exists())
-        dir.mkdir(dirPath);
-    this->confFile = dirPath + "/conf";
     // CHARGEMENT DE LA CONFIGURATION
     this->load();
     // initialisation des élements
@@ -57,8 +47,8 @@ Config::Config(QWidget *parent) : QDialog(parent), ui(new Ui::Config)
         ui->comboRam->setCurrentIndex(0);
     // liste des sorties audio
     this->ui->comboAudioOuput->addItem("-");
-    foreach (const QAudioDeviceInfo &deviceInfo, QAudioDeviceInfo::availableDevices(QAudio::AudioOutput))
-        this->ui->comboAudioOuput->addItem(deviceInfo.deviceName());
+    this->ui->comboAudioOuput->addItem(trUtf8("Défaut"));
+
 #ifdef PA_USE_ASIO
     bool isAsioEnabled = true;
 #else
@@ -95,6 +85,13 @@ Config::Config(QWidget *parent) : QDialog(parent), ui(new Ui::Config)
         this->synthGain = 50;
     this->ui->sliderGain->setValue(this->synthGain);
     this->ui->labelGain->setNum(this->synthGain);
+    this->ui->dialRevNiveau->setValue(this->revLevel);
+    this->ui->dialRevProfondeur->setValue(this->revLevel);
+    this->ui->dialRevDensite->setValue(this->revWidth);
+    this->ui->dialRevAttenuation->setValue(this->revDamping);
+    this->ui->dialChoNiveau->setValue(this->choLevel);
+    this->ui->dialChoAmplitude->setValue(this->choDepth);
+    this->ui->dialChoFrequence->setValue(this->choFrequency);
     this->loaded = 1;
     // Correction
     if (this->keyboardType < 0 || this->keyboardType > 3)
@@ -103,7 +100,7 @@ Config::Config(QWidget *parent) : QDialog(parent), ui(new Ui::Config)
         this->keyboardVelocity = 0;
     else if (this->keyboardVelocity > 127)
         this->keyboardVelocity = 127;
-    this->ui->comboRam->setVisible(false); // Temporaire : tout charger dans la ram n'apporte rien pour l'instant
+    this->ui->comboRam->setVisible(false); // Temporaire : tout charger dans la ram n'apporte rien pour l'instant (sur linux)
     this->ui->label_2->setVisible(false);
 }
 Config::~Config()
@@ -184,15 +181,6 @@ void Config::setAudioOutput(int index)
         this->store();
     }
 }
-void Config::setSynthGain(int val)
-{
-    if (this->loaded)
-    {
-        this->synthGain = val;
-        this->store();
-        this->mainWindow->setSynthGain(val);
-    }
-}
 void Config::setWavAutoLoop(bool checked)
 {
     if (this->loaded)
@@ -253,6 +241,78 @@ void Config::addFavorite(QString filePath)
     listFiles[0] = filePath;
     this->store();
 }
+void Config::setSynthGain(int val)
+{
+    if (this->loaded)
+    {
+        this->synthGain = val;
+        this->store();
+        this->mainWindow->setSynthGain(val);
+    }
+}
+void Config::on_dialRevNiveau_valueChanged(int value)
+{
+    if (this->loaded)
+    {
+        this->revLevel = value;
+        this->store();
+        this->mainWindow->setSynthReverb(revLevel, revSize, revWidth, revDamping);
+    }
+}
+void Config::on_dialRevProfondeur_valueChanged(int value)
+{
+    if (this->loaded)
+    {
+        this->revSize = value;
+        this->store();
+        this->mainWindow->setSynthReverb(revLevel, revSize, revWidth, revDamping);
+    }
+}
+void Config::on_dialRevDensite_valueChanged(int value)
+{
+    if (this->loaded)
+    {
+        this->revWidth = value;
+        this->store();
+        this->mainWindow->setSynthReverb(revLevel, revSize, revWidth, revDamping);
+    }
+}
+void Config::on_dialRevAttenuation_valueChanged(int value)
+{
+    if (this->loaded)
+    {
+        this->revDamping = value;
+        this->store();
+        this->mainWindow->setSynthReverb(revLevel, revSize, revWidth, revDamping);
+    }
+}
+void Config::on_dialChoNiveau_valueChanged(int value)
+{
+    if (this->loaded)
+    {
+        this->choLevel = value;
+        this->store();
+        this->mainWindow->setSynthChorus(choLevel, choDepth, choFrequency);
+    }
+}
+void Config::on_dialChoAmplitude_valueChanged(int value)
+{
+    if (this->loaded)
+    {
+        this->choDepth = value;
+        this->store();
+        this->mainWindow->setSynthChorus(choLevel, choDepth, choFrequency);
+    }
+}
+void Config::on_dialChoFrequence_valueChanged(int value)
+{
+    if (this->loaded)
+    {
+        this->choFrequency = value;
+        this->store();
+        this->mainWindow->setSynthChorus(choLevel, choDepth, choFrequency);
+    }
+}
 
 // Gestion des configurations
 void Config::load()
@@ -279,33 +339,47 @@ void Config::load()
         settings.setValue("recent_file/file_" + QString::number(i), "");
     }
     // Chargement des autres paramètres
-    this->afficheToolBar = settings.value("affichage/tool_bar", true).toBool();
-    this->afficheMod = settings.value("affichage/section_modulateur", true).toBool();
-    this->audioIndex = settings.value("audio/index", 0).toInt();
-    this->audioType = settings.value("audio/type", 0).toInt();
-    this->wavAutoLoop = settings.value("wav_auto_loop", false).toBool();
-    this->wavRemoveBlank = settings.value("wav_remove_bank", false).toBool();
-    this->keyboardType = settings.value("keyboard/type", 1).toInt();
-    this->keyboardVelocity = settings.value("keyboard/velocity", 64).toInt();
-    this->numPortMidi = settings.value("midi/index_port", 0).toInt();
-    this->synthGain = settings.value("synth/gain", 0).toInt();
+    this->afficheToolBar    = settings.value("affichage/tool_bar", true).toBool();
+    this->afficheMod        = settings.value("affichage/section_modulateur", true).toBool();
+    this->audioIndex        = settings.value("audio/index", 0).toInt();
+    this->audioType         = settings.value("audio/type", 0).toInt();
+    this->wavAutoLoop       = settings.value("wav_auto_loop", false).toBool();
+    this->wavRemoveBlank    = settings.value("wav_remove_bank", false).toBool();
+    this->keyboardType      = settings.value("keyboard/type", 1).toInt();
+    this->keyboardVelocity  = settings.value("keyboard/velocity", 64).toInt();
+    this->numPortMidi       = settings.value("midi/index_port", 0).toInt();
+    this->synthGain         = settings.value("synth/gain", 0).toInt();
+    this->revLevel          = settings.value("synth/rev_level", 0).toInt();
+    this->revSize           = settings.value("synth/rev_size", 0).toInt();
+    this->revWidth          = settings.value("synth/rev_width", 0).toInt();
+    this->revDamping        = settings.value("synth/rev_damping", 0).toInt();
+    this->choLevel          = settings.value("synth/cho_level", 0).toInt();
+    this->choDepth          = settings.value("synth/cho_depth", 0).toInt();
+    this->choFrequency      = settings.value("synth/cho_frequency", 0).toInt();
 }
 void Config::store()
 {
     QSettings settings(this);
-    settings.setValue("recent_file/file_0", listFiles.at(0));
-    settings.setValue("recent_file/file_1", listFiles.at(1));
-    settings.setValue("recent_file/file_2", listFiles.at(2));
-    settings.setValue("recent_file/file_3", listFiles.at(3));
-    settings.setValue("recent_file/file_4", listFiles.at(4));
-    settings.setValue("affichage/tool_bar", this->afficheToolBar);
-    settings.setValue("affichage/section_modulateur", this->afficheMod);
-    settings.setValue("audio/index", this->audioIndex);
-    settings.setValue("audio/type", this->audioType);
-    settings.setValue("wav_auto_loop", this->wavAutoLoop);
-    settings.setValue("wav_remove_bank", this->wavRemoveBlank);
-    settings.setValue("keyboard/type", this->keyboardType);
-    settings.setValue("keyboard/velocity", this->keyboardVelocity);
-    settings.setValue("midi/index_port", this->numPortMidi);
-    settings.setValue("synth/gain", this->synthGain);
+    settings.setValue("recent_file/file_0",             listFiles.at(0));
+    settings.setValue("recent_file/file_1",             listFiles.at(1));
+    settings.setValue("recent_file/file_2",             listFiles.at(2));
+    settings.setValue("recent_file/file_3",             listFiles.at(3));
+    settings.setValue("recent_file/file_4",             listFiles.at(4));
+    settings.setValue("affichage/tool_bar",             this->afficheToolBar);
+    settings.setValue("affichage/section_modulateur",   this->afficheMod);
+    settings.setValue("audio/index",                    this->audioIndex);
+    settings.setValue("audio/type",                     this->audioType);
+    settings.setValue("wav_auto_loop",                  this->wavAutoLoop);
+    settings.setValue("wav_remove_bank",                this->wavRemoveBlank);
+    settings.setValue("keyboard/type",                  this->keyboardType);
+    settings.setValue("keyboard/velocity",              this->keyboardVelocity);
+    settings.setValue("midi/index_port",                this->numPortMidi);
+    settings.setValue("synth/gain",                     this->synthGain);
+    settings.setValue("synth/rev_level",                this->revLevel);
+    settings.setValue("synth/rev_size",                 this->revSize);
+    settings.setValue("synth/rev_width",                this->revWidth);
+    settings.setValue("synth/rev_damping",              this->revDamping);
+    settings.setValue("synth/cho_level",                this->choLevel);
+    settings.setValue("synth/cho_depth",                this->choDepth);
+    settings.setValue("synth/cho_frequency",            this->choFrequency);
 }

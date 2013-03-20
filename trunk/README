@@ -1,7 +1,7 @@
 COMPILATION
 
 Run "qmake && make" in the root directory to compile the project. An executable file "polyphone" in RELEASE directory should then appear if everything went right.
-Please note that QT libraries are required, along with QT Multimedia Kit.
+Please note that QT libraries are required.
 
 If you are using linux, you will need to install alsa and jack headers (libasound2-dev and libjack-jack2-dev).
 

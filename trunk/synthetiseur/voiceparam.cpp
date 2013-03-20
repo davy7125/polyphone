@@ -116,6 +116,9 @@ VoiceParam::VoiceParam(Pile_sf2 *sf2, EltID id, VoiceParam *voiceParamTmp, bool 
         this->modLfoToFilterFreq = 0;
         this->modLfoToVolume = 0;
         this->vibLfoToPitch = 0;
+        // Effets
+        this->reverb = 0;
+        this->chorus = 0;
     }
     else
     {
@@ -152,6 +155,10 @@ VoiceParam::VoiceParam(Pile_sf2 *sf2, EltID id, VoiceParam *voiceParamTmp, bool 
         this->modLfoToFilterFreq= this->get(champ_modLfoToFilterFc, readShort, 0);
         this->modLfoToVolume    = (double)this->get(champ_modLfoToVolume, readShort, 0) / 10;
         this->vibLfoToPitch     = this->get(champ_vibLfoToPitch, readShort, 0);
+
+        // Effets
+        this->reverb            = (double)this->get(champ_reverbEffectsSend, readShort, 0) / 10;
+        this->chorus            = (double)this->get(champ_chorusEffectsSend, readShort, 0) / 10;
 
         // Paramétrage spécifique
         if (id.typeElement == elementInstSmpl)
@@ -274,6 +281,8 @@ VoiceParam::VoiceParam(Pile_sf2 *sf2, EltID id, VoiceParam *voiceParamTmp, bool 
         this->modLfoToFilterFreq= limit(this->modLfoToFilterFreq, -12000, 12000);
         this->modLfoToVolume    = limit(this->modLfoToVolume, -96., 96.);
         this->vibLfoToPitch     = limit(this->vibLfoToPitch, -12000, 12000);
+        this->reverb            = limit(this->reverb, 0., 100.);
+        this->chorus            = limit(this->chorus, 0., 100.);
     }
 }
 
@@ -316,6 +325,9 @@ void VoiceParam::add(VoiceParam * voiceParamTmp)
     this->modLfoToFilterFreq+= voiceParamTmp->modLfoToFilterFreq;
     this->modLfoToVolume    += voiceParamTmp->modLfoToVolume;
     this->vibLfoToPitch     += voiceParamTmp->vibLfoToPitch;
+    // Effets
+    this->reverb            += voiceParamTmp->reverb;
+    this->chorus            += voiceParamTmp->chorus;
     // Autres
     if (voiceParamTmp->loopMode != -1)
         this->loopMode = voiceParamTmp->loopMode;
