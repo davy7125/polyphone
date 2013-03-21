@@ -37,14 +37,15 @@ public:
     ~CircularBuffer();
     qint64 readData(char *data, qint64 maxlen);
     qint64 readData(char *data1, char *data2, qint64 maxlen);
+
 protected:
     qint64 writeData(const char *data, qint64 len);
     qint64 writeData(const char *data1, const char *data2, qint64 len);
     qint64 bytesAvailable();
     qint64 dataNeeded();
     void reinit();
-protected:
     virtual void generateData(qint64 nbData = 0) = 0;
+
 private:
     // Buffer et positions
     char * m_data;
