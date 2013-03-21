@@ -23,7 +23,6 @@
 ***************************************************************************/
 
 #include "circularbuffer.h"
-#include <QDebug>
 
 CircularBuffer::CircularBuffer(quint32 bufferSize, quint32 avanceBuffer, QObject *parent) :
     QIODevice(parent),
@@ -37,6 +36,11 @@ CircularBuffer::CircularBuffer(quint32 bufferSize, quint32 avanceBuffer, QObject
     {
         m_data = new char [m_bufferSize];
         m_data2 = new char [m_bufferSize];
+        for (unsigned int i = 0; i < m_bufferSize; i++)
+        {
+            m_data[i] = 0;
+            m_data2[i] = 0;
+        }
     }
     this->open(QIODevice::ReadOnly);
 }

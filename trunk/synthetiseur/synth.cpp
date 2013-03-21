@@ -106,6 +106,8 @@ void Synth::play(int type, int idSf2, int idElt, int note, int velocity, VoicePa
                 voiceTmp2 = new Voice(m_sf2->getData(idSmpl2, champ_sampleData32),
                                              m_sf2->get(idSmpl2, champ_dwSampleRate).dwValue,
                                              m_format.sampleRate(), -2, 127, voiceParam2);
+                // Initialisation chorus
+                voiceTmp2->setChorus(0, 0, 0);
             }
             // Création voix 1
             voiceTmp1 = new Voice(m_sf2->getData(idSmpl, champ_sampleData32),
@@ -116,6 +118,9 @@ void Synth::play(int type, int idSf2, int idElt, int note, int velocity, VoicePa
             VoiceParam *voiceParam3 = new VoiceParam(m_sf2, idSmpl, NULL, true);
             voiceParam3->volReleaseTime = 0.2;
             Voice *voiceTmp3 = new Voice(m_format.sampleRate(), voiceParam3);
+            // Initialisation chorus
+            voiceTmp1->setChorus(0, 0, 0);
+            voiceTmp3->setChorus(0, 0, 0);
             // Ajout des voix dans la liste
             m_mutexVoices.lock();
             m_listeVoix.append(voiceTmp1);
@@ -271,7 +276,7 @@ void Synth::generateData(qint64 nbData)
     for (int i = 0; i < listeVoice.size(); i++)
         this->endVoice(listeVoice.at(i));
     m_mutexVoices.unlock();
-    // Prise en compte de la réverbération
+    // Application réverbération et addition
     for (int i = 0; i < nbData; i++)
     {
         data1[i] += m_reverb.tick(data1Rev[i], data2Rev[i]);
@@ -286,6 +291,11 @@ void Synth::generateData(qint64 nbData)
         dataF1[i] = (float)data1[i];
         dataF2[i] = (float)data2[i];
     }
+
+    double sum = 0;
+    for (int i = 0; i < qMin(100, (int)nbData); i++)
+        sum += dataF1[i] + dataF2[i];
+
     //// ECRITURE SUR LE DOUBLE BUFFER ////
     this->writeData((char *)data1, (char *)data2, nbData * 4);
 }
@@ -578,13 +588,18 @@ void Synth::interruption()
 qint64 Synth::readData(char *data1, char *data2, qint64 maxlen)
 {
     int valRet = CircularBuffer::readData(data1, data2, maxlen);
+    for (int i = valRet; i < maxlen; i++)
+    {
+        data1[i] = 0;
+        data2[i] = 0;
+    }
     m_mutexCompleted.unlock();
     return valRet;
 }
 
 void Synth::setFormat(AudioFormat format)
 {
-    // Mutex inutile : pas de generation de donnees lors de l'appel a setFormat
+    // Mutex inutile : pas de generation de données lors de l'appel à setFormat
     m_format = format;
     // Reinitialisation
     this->stop();
