@@ -32,9 +32,8 @@
 
 class Synth;
 
-#define BUFFER_AUDIO          20000
 #define SAMPLE_RATE           48000
-#define FRAMES_PER_BUFFER     1024
+#define FRAMES_PER_BUFFER     512
 
 class AudioFormat
 {

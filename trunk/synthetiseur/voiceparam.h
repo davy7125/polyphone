@@ -32,7 +32,7 @@
 class VoiceParam
 {
 public:
-    VoiceParam(Pile_sf2 * sf2, EltID id, VoiceParam * voiceParamTmp = NULL, bool smplMode = false);
+    VoiceParam(Pile_sf2 * sf2, EltID id, VoiceParam * voiceParamTmp = NULL);
     ~VoiceParam() {}
     double getPitchDifference(int note);
     // Liste des paramètres de lecture (libre accès)
@@ -62,6 +62,8 @@ public:
     double modLfoToVolume;
     // EFFETS
     double reverb, chorus;
+    // DIVERS
+    int exclusiveClass, numPreset;
 private:
     enum ReadMethod
     {
@@ -71,13 +73,18 @@ private:
         readWord    // 16 bits unsigned
     };
     Pile_sf2 * m_sf2;
-    EltID m_id, m_idGlobal, m_idChild;
     // Méthodes privées
-    qint32 get(Champ champ, ReadMethod readMethod, qint32 defaultValue);
     void add(VoiceParam *voiceParamTmp);
     double d1200e2(qint32 val);
     static double limit(double val, double min, double max);
     static qint32 limit(qint32 val, qint32 min, qint32 max);
+    // Méthodes de lecture
+    void readSample(EltID id);
+    void read(EltID id);
+    void updateParam(EltID id, VoiceParam &voiceParamTmp, QList<Champ> listeChamps, QList<Valeur> listeValeurs);
+    // Copie / initialisation
+    void init(EltID id);
+    void copy(VoiceParam * voiceParamTmp);
 };
 
 

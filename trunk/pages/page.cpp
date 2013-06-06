@@ -2737,6 +2737,36 @@ int PageTable::getDestIndex(int i)
     }
 }
 
+void PageTable::enlightColumn(int key, bool isEnlighted)
+{
+    // Mise à jour éléments enclenchés
+    if (isEnlighted && _listKeyEnlighted.indexOf(key) == -1)
+        _listKeyEnlighted.append(key);
+    else
+        _listKeyEnlighted.removeAll(key);
+
+    // Mise à jour de la table
+    for (int i = 1; i < this->table->columnCount(); i++)
+    {
+        EltID id = this->table->getID(i);
+        bool enlighted = false;
+        if (!this->sf2->get(id, champ_hidden).bValue)
+        {
+            int key1 = this->sf2->get(id, champ_keyRange).rValue.byLo;
+            int key2 = this->sf2->get(id, champ_keyRange).rValue.byHi;
+            if (!this->sf2->isSet(id, champ_keyRange))
+            {
+                key1 = 0;
+                key2 = 128;
+            }
+            for (int j = 0; j < _listKeyEnlighted.size(); j++)
+                enlighted = enlighted || (qMin(key1, key2) <= _listKeyEnlighted.at(j)
+                                          && qMax(key1, key2) >= _listKeyEnlighted.at(j));
+        }
+        this->table->setEnlighted(i, enlighted);
+    }
+}
+
 //////////////////////////////////////////// TABLE WIDGET ////////////////////////////////////////////
 
 TableWidget::TableWidget(QWidget *parent) : QTableWidget(parent)
@@ -2744,6 +2774,8 @@ TableWidget::TableWidget(QWidget *parent) : QTableWidget(parent)
     KeyPressCatcher * keyPressCatcher = new KeyPressCatcher(this);
     this->installEventFilter(keyPressCatcher);
     connect(keyPressCatcher, SIGNAL(set(int, int, bool)), this, SLOT(emitSet(int,int,bool)));
+    _timer = new QTimer(this);
+    connect(_timer, SIGNAL(timeout()), this, SLOT(updateColors()));
 }
 TableWidget::~TableWidget()
 {
@@ -2770,9 +2802,11 @@ void TableWidget::addColumn(int column, QString title)
     this->insertColumn(column);
     // Création d'éléments
     for (int i = 0; i < this->rowCount(); i++)
-        this->setItem(i, column, new QTableWidgetItem);
+        this->setItem(i, column, new QTableWidgetItem());
     // Modification du titre
     this->setHorizontalHeaderItem(column, new QTableWidgetItem(title));
+    // Ajout d'un élément couleur
+    _listColors.insert(column, QColor(0, 0, 0));
 }
 void TableWidget::setID(EltID id, int colonne)
 {
@@ -2811,7 +2845,57 @@ EltID TableWidget::getID(int colonne)
     id.indexMod = 0;
     return id;
 }
+void TableWidget::setEnlighted(int colonne, bool isEnlighted)
+{
+    if (colonne >= this->columnCount())
+        return;
 
+    if (isEnlighted)
+        _listColors[colonne] = QColor(70, 120, 210);
+    else
+        _listColors[colonne] = QColor(0, 0, 0);
+
+    _timer->start(30);
+}
+void TableWidget::updateColors()
+{
+    int minChange = 40;
+    bool toutPareil = true;
+    for (int i = 0; i < this->columnCount(); i++)
+    {
+        if (this->horizontalHeaderItem(i))
+        {
+            QColor couleur1 = this->horizontalHeaderItem(i)->foreground().color();
+            QColor couleur2 = _listColors.at(i);
+            if (couleur1 != couleur2)
+            {
+                int deltaRouge = qMax(-minChange, qMin(minChange, couleur2.red() - couleur1.red()));
+                int deltaVert = qMax(-minChange, qMin(minChange, couleur2.green() - couleur1.green()));
+                int deltaBleu = qMax(-minChange, qMin(minChange, couleur2.blue() - couleur1.blue()));
+                couleur1.setRed(couleur1.red() + deltaRouge);
+                couleur1.setGreen(couleur1.green() + deltaVert);
+                couleur1.setBlue(couleur1.blue() + deltaBleu);
+                this->horizontalHeaderItem(i)->setForeground(couleur1);
+            }
+            if (couleur1 != couleur2)
+                toutPareil = false;
+        }
+    }
+    if (toutPareil)
+        _timer->stop();
+}
+void TableWidget::setColumnCount(int columns)
+{
+    QTableWidget::setColumnCount(columns);
+    _listColors.clear();
+    for (int i = 0; i < columns; i++)
+        _listColors << QColor(0, 0, 0);
+}
+void TableWidget::removeColumn(int column)
+{
+    QTableWidget::removeColumn(column);
+    _listColors.removeAt(column);
+}
 
 //////////////////////////////////////////// TABLE WIDGET MOD ////////////////////////////////////////////
 

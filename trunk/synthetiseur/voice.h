@@ -25,8 +25,8 @@
 #ifndef VOICE_H
 #define VOICE_H
 
-#define BUFFER_VOICE_SIZE     180000
-#define BUFFER_VOICE_AVANCE   40000
+#define BUFFER_VOICE_SIZE     130000
+#define BUFFER_VOICE_AVANCE   5000
 
 #include "sound.h"
 #include "circularbuffer.h"
@@ -47,9 +47,9 @@ public:
     Voice(DWORD audioSmplRate, VoiceParam *voiceParam, QObject *parent = NULL);
     ~Voice();
     qint64 readData(char *data, qint64 maxlen);
-    int getNote()                {return m_note;}
-    VoiceParam * getVoiceParam() {return m_voiceParam;}
-    void release()               {m_release = true;}
+    int getNote()                       {return m_note;}
+    VoiceParam * getVoiceParam()        {return m_voiceParam;}
+    void release(bool quick = false);
     void setGain(double gain);
     void setChorus(int level, int depth, int frequency);
     Voice * readData(double * data1, double * data2, qint64 size);

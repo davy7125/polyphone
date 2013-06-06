@@ -235,6 +235,7 @@ void AudioDevice::openStandardConnection(bool isAsio)
     // Recherche du device à utiliser
     int numDevice = -1;
     QList<int> listDevices;
+    double maxLatency = 0.2;
     for (int i = 0; i < Pa_GetDeviceCount(); i++)
     {
         const PaDeviceInfo * deviceInfo = Pa_GetDeviceInfo(i);
@@ -249,6 +250,7 @@ void AudioDevice::openStandardConnection(bool isAsio)
                     if(Pa_GetHostApiInfo(deviceInfo->hostApi)->defaultOutputDevice == i)
                         numDevice = i;
                     listDevices << i;
+                    maxLatency = 0.04;
                 }
             }
             else
@@ -293,7 +295,7 @@ void AudioDevice::openStandardConnection(bool isAsio)
         outputParameters.channelCount = 2;
     m_format.setChannelCount(outputParameters.channelCount);
     outputParameters.sampleFormat = paFloat32 | paNonInterleaved;
-    outputParameters.suggestedLatency = pdi->defaultLowOutputLatency;
+    outputParameters.suggestedLatency = qMin(maxLatency, pdi->defaultLowOutputLatency);
     outputParameters.hostApiSpecificStreamInfo = NULL;
     // Ouverture du flux
     err = Pa_OpenStream(&m_standardStream,

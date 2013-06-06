@@ -34,6 +34,7 @@ public:
     EnveloppeVol(VoiceParam * voiceParam, quint32 sampleRate, bool isMod);
     bool applyEnveloppe(double *data, quint32 size, bool release, int note, int velocity, VoiceParam * voiceParam,
                         double gain, bool applyOn1 = false);
+    void quickRelease();
 private:
     enum EnveloppePhase
     {
