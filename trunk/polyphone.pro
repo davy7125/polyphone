@@ -106,7 +106,8 @@ SOURCES	+= main.cpp \
     synthetiseur/elements/FreeVerb.cpp \
     synthetiseur/elements/Delay.cpp \
     synthetiseur/elements/Chorus.cpp \
-    synthetiseur/elements/DelayL.cpp
+    synthetiseur/elements/DelayL.cpp \
+    gui_divers/dialog_rename.cpp
 
 HEADERS  += mainwindow.h \
     sf2_core/sf2_types.h \
@@ -155,7 +156,8 @@ HEADERS  += mainwindow.h \
     synthetiseur/elements/Effect.h \
     synthetiseur/elements/Delay.h \
     synthetiseur/elements/Chorus.h \
-    synthetiseur/elements/DelayL.h
+    synthetiseur/elements/DelayL.h \
+    gui_divers/dialog_rename.h
 
 FORMS    += mainwindow.ui \
     gui_divers/config.ui \
@@ -171,7 +173,8 @@ FORMS    += mainwindow.ui \
     tools/dialog_mixture.ui \
     tools/dialog_sifflements.ui \
     tools/dialog_release.ui \
-    tools/dialog_selectitems.ui
+    tools/dialog_selectitems.ui \
+    gui_divers/dialog_rename.ui
 
 RESOURCES += ressources.qrc \
     clavier/pianokeybd.qrc

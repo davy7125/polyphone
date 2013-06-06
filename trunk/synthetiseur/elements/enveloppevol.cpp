@@ -280,3 +280,11 @@ bool EnveloppeVol::applyEnveloppe(double * data, quint32 size, bool release, int
     }
     return fin;
 }
+
+void EnveloppeVol::quickRelease()
+{
+    // Arrêt par classe exclusive : release très courte
+    m_timeRelease = 0.02 * m_sampleRate;
+    m_currentPhase = phase6release;
+    m_currentSmpl = 0;
+}

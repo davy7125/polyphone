@@ -77,7 +77,7 @@ void Synth::play(int type, int idSf2, int idElt, int note, int velocity, VoicePa
         {
             // Lecture d'un sample, association possible
             EltID idSmpl = {elementSmpl, idSf2, idElt, 0, 0};
-            VoiceParam * voiceParam1 = new VoiceParam(m_sf2, idSmpl, voiceParamTmp, true);
+            VoiceParam * voiceParam1 = new VoiceParam(m_sf2, idSmpl);
             voiceParam1->volReleaseTime = 0.2;
             voiceParam1->loopMode = this->m_isLoopEnabled;
             Voice *voiceTmp1 = NULL;
@@ -88,7 +88,7 @@ void Synth::play(int type, int idSf2, int idElt, int note, int velocity, VoicePa
             {
                 // Smpl lié
                 EltID idSmpl2 = {elementSmpl, idSf2, m_sf2->get(idSmpl, champ_wSampleLink).wValue, 0, 0};
-                VoiceParam * voiceParam2 = new VoiceParam(m_sf2, idSmpl2, voiceParamTmp, true);
+                VoiceParam * voiceParam2 = new VoiceParam(m_sf2, idSmpl2);
                 voiceParam2->volReleaseTime = 0.2;
                 voiceParam2->loopMode = this->m_isLoopEnabled;
                 // Balance
@@ -115,7 +115,7 @@ void Synth::play(int type, int idSf2, int idElt, int note, int velocity, VoicePa
                                          m_format.sampleRate(), -1, 127, voiceParam1);
             connect(voiceTmp1, SIGNAL(currentPosChanged(int)), this, SLOT(emitCurrentPosChanged(int)));
             // Création sinus
-            VoiceParam *voiceParam3 = new VoiceParam(m_sf2, idSmpl, NULL, true);
+            VoiceParam *voiceParam3 = new VoiceParam(m_sf2, idSmpl);
             voiceParam3->volReleaseTime = 0.2;
             Voice *voiceTmp3 = new Voice(m_format.sampleRate(), voiceParam3);
             // Initialisation chorus
@@ -141,9 +141,19 @@ void Synth::play(int type, int idSf2, int idElt, int note, int velocity, VoicePa
                                          m_sf2->get(idSmpl, champ_dwSampleRate).dwValue,
                                          m_format.sampleRate(), note, velocity,
                                          voiceParam);
+            m_listeVoixTmp << voiceTmp;
             // Initialisation chorus
             voiceTmp->setChorus(m_choLevel, m_choDepth, m_choFrequency);
             m_mutexVoices.lock();
+            if (voiceParam->exclusiveClass != 0)
+            {
+                // Parcours de toutes les voix
+                for (int i = m_listeVoix.size()-1; i >= 0; i--)
+                    if (m_listeVoix.at(i)->getVoiceParam()->exclusiveClass == voiceParam->exclusiveClass &&
+                            m_listeVoix.at(i)->getVoiceParam()->numPreset == voiceParam->numPreset &&
+                            m_listeVoixTmp.indexOf(m_listeVoix.at(i)) == -1)
+                        m_listeVoix.at(i)->release(true);
+            }
             m_listeVoix.append(voiceTmp);
             m_listeVoix.last()->setGain(this->m_gain);
             m_mutexVoices.unlock();
@@ -174,7 +184,7 @@ void Synth::play(int type, int idSf2, int idElt, int note, int velocity, VoicePa
                 if (keyMin <= note     && keyMax >= note &&
                     velMin <= velocity && velMax >= velocity)
                 {
-                    // Recuperation des parametres
+                    // Récupération des paramètres
                     VoiceParam * voiceParam = new VoiceParam(m_sf2, idInstSmpl, voiceParamTmp);
                     // Lecture de l'instrument associé
                     this->play(0, idSf2, m_sf2->get(idInstSmpl, champ_sampleID).wValue,
@@ -222,6 +232,8 @@ void Synth::play(int type, int idSf2, int idElt, int note, int velocity, VoicePa
     default:
         return;
     }
+    if (!voiceParamTmp)
+        m_listeVoixTmp.clear();
 }
 void Synth::stop()
 {
@@ -599,8 +611,8 @@ qint64 Synth::readData(char *data1, char *data2, qint64 maxlen)
 
 void Synth::setFormat(AudioFormat format)
 {
-    // Mutex inutile : pas de generation de données lors de l'appel à setFormat
+    // Mutex inutile : pas de génération de données lors de l'appel à setFormat
     m_format = format;
-    // Reinitialisation
+    // Réinitialisation
     this->stop();
 }

@@ -98,15 +98,23 @@ public:
     void addColumn(int column, QString title);
     void setID(EltID id, int colonne);
     EltID getID(int colonne);
+    void setEnlighted(int colonne, bool isEnlighted);
     // Association champ - ligne (méthodes virtuelles pures)
     virtual Champ getChamp(int row) = 0;
     virtual int getRow(WORD champ) = 0;
+    void setColumnCount(int columns);
+    void removeColumn(int column);
 
 private slots:
     void emitSet(int ligne, int colonne, bool newAction);
+    void updateColors();
 
 signals:
     void set(int ligne, int colonne, bool newAction);
+
+private:
+    QTimer *_timer;
+    QList<QColor> _listColors;
 };
 
 // Classe QTableWidget pour mod
@@ -318,6 +326,7 @@ public:
     void reselect();
     void updateId(EltID id);
     void paramGlobal(Config *configuration);
+    void enlightColumn(int key, bool isEnlighted);
 
 protected:
     // Attributs protégés
@@ -367,6 +376,7 @@ private:
     int limit(int iVal, Champ champ, EltID id);
 
     static QList<Modulator> _modulatorCopy;
+    QList<int> _listKeyEnlighted;
 
 public slots:
     void set(int ligne, int colonne, bool newAction = true);
