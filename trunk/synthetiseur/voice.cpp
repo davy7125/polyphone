@@ -247,6 +247,16 @@ bool Voice::takeData(qint32 * data, qint64 nbRead)
     return ok;
 }
 
+void Voice::release(bool quick)
+{
+    if (quick)
+    {
+        // Arrêt par classe exclusive, arrêt rapide
+        m_enveloppeVol.quickRelease();
+    }
+    m_release = true;
+}
+
 void Voice::setGain(double gain)
 {
     this->m_gain = gain;

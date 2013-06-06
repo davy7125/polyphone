@@ -25,6 +25,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "sound.h"
+#include "dialog_rename.h"
 #include <QFileDialog>
 #include <QInputDialog>
 
@@ -42,7 +43,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent, Qt::Window | Qt::W
     // Initialisation de l'objet pile sf2
     this->sf2 = new Pile_sf2(ui->arborescence, this->configuration.getRam());
     // Connexion avec mise à jour table
-    connect(this->sf2, SIGNAL(updateTable(int,int,int,int)), this, SLOT(updateTable(int,int,int,int)));
+    connect(this->sf2, SIGNAL(updateTable(int,int,int,int)), this,
+            SLOT(updateTable(int,int,int,int)));
     // Initialisation du synthétiseur
     this->synth = new Synth(this->sf2);
     this->synth->moveToThread(&this->synthThread);
@@ -50,9 +52,14 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent, Qt::Window | Qt::W
     // Initialisation de la sortie audio
     this->audioDevice = new AudioDevice(this->synth);
     connect(this, SIGNAL(initAudio(int)), this->audioDevice, SLOT(initAudio(int)));
-    connect(this, SIGNAL(stopAudio()), this->audioDevice, SLOT(closeConnections()), Qt::BlockingQueuedConnection);
+    connect(this, SIGNAL(stopAudio()), this->audioDevice, SLOT(closeConnections()),
+            Qt::BlockingQueuedConnection);
     this->audioDevice->moveToThread(&this->audioThread);
     this->audioThread.start();
+    // Priorité des thread
+    this->audioThread.setPriority(QThread::HighestPriority);
+    this->synthThread.setPriority(QThread::TimeCriticalPriority);
+
     if (this->configuration.getAudioType() == 0)
         this->setAudioEngine(this->configuration.getAudioIndex());
     else
@@ -820,68 +827,96 @@ void MainWindow::renommer()
     if (nb == 0) return;
     EltID ID = ui->arborescence->getID(0);
     ElementType type = ID.typeElement;
-    QString msg, msg2;
     if ((nb > 1 && type == elementSmpl) || (nb == 1 && (type == elementSmpl || type == elementInst || type == elementPrst || type == elementSf2)))
     {
         if (nb > 1)
-            msg = QString::fromUtf8(tr("Nom des samples (max 15 caractères) :").toStdString().c_str());
+        {
+            DialogRename * dial = new DialogRename(sf2->getQstr(ID, champ_name), this);
+            dial->setAttribute(Qt::WA_DeleteOnClose);
+            connect(dial, SIGNAL(updateNames(QString,int)), this, SLOT(renommerEnMasse(QString,int)));
+            dial->show();
+        }
         else
         {
+            QString msg;
             if (type == elementSmpl) msg = QString::fromUtf8(tr("Nom du sample (max 20 caractères) :").toStdString().c_str());
             else if (type == elementInst) msg = QString::fromUtf8(tr("Nom de l'instrument (max 20 caractères) :").toStdString().c_str());
             else if (type == elementPrst) msg = QString::fromUtf8(tr("Nom du preset (max 20 caractères) :").toStdString().c_str());
             else if (type == elementSf2) msg = QString::fromUtf8(tr("Nom du SF2 (max 255 caractères) :").toStdString().c_str());
-            msg2 = sf2->getQstr(ID, champ_name);
-        }
-        QString text = QInputDialog::getText(this, tr("Question"), msg, QLineEdit::Normal, msg2, &ok);
-        if (ok && !text.isEmpty())
-        {
-            sf2->prepareNewActions();
-            if (nb == 1)
+            QString text = QInputDialog::getText(this, tr("Question"), msg, QLineEdit::Normal, sf2->getQstr(ID, champ_name), &ok);
+            if (ok && !text.isEmpty())
             {
+                sf2->prepareNewActions();
                 ID = ui->arborescence->getID(0);
                 sf2->set(ID, champ_name, text);
+                updateDo();
+                updateActions();
+                this->ui->arborescence->searchTree(this->ui->editSearch->text());
             }
-            else
-            {
-                // Renommage de masse
-                int note, comparaison;
-                int j = 0;
-                for (int i = 0; i < nb; i++)
-                {
-                    // note du sample
-                    ID = ui->arborescence->getID(i-j);
-                    note = sf2->get(ID, champ_byOriginalPitch).bValue;
-                    char str2[20];
-                    sprintf(str2,"%.3hu", note);
-                    // position du sample
-                    SFSampleLink pos = sf2->get(ID, champ_sfSampleType).sfLinkValue;
-                    text = text.left(15);
-                    QString str;
-                    if (pos == rightSample || pos == RomRightSample)
-                        str = text + ' ' + str2 + 'R';
-                    else if (pos == leftSample || pos == RomLeftSample)
-                        str = text + ' ' + str2 + 'L';
-                    else
-                        str = text + ' ' + str2;
-                    comparaison = strcmp(sf2->getQstr(ID, champ_name).toLower().toStdString().c_str(), str.toLower().toStdString().c_str());
-                    if (comparaison < 0)
-                    {
-                        j++;
-                        sf2->set(ID, champ_name, str);
-                    }
-                    else if (comparaison == 0 && j > 0)
-                    {
-                        i--; j--;
-                    }
-                    else sf2->set(ID, champ_name, str);
-                }
-            }
-            updateDo();
-            updateActions();
-            this->ui->arborescence->searchTree(this->ui->editSearch->text());
         }
     }
+}
+void MainWindow::renommerEnMasse(QString name, int modificationType)
+{
+    // Renommage de masse
+    if (name.isEmpty())
+        return;
+    sf2->prepareNewActions();
+
+    QList<EltID> listID;
+    for (unsigned int i = 0; i < ui->arborescence->getSelectedItemsNumber(); i++)
+        listID << ui->arborescence->getID(i);
+
+    for (int i = 0; i < listID.size(); i++)
+    {
+        EltID ID = listID.at(i);
+
+        // Détermination du nom
+        QString newName;
+        switch (modificationType)
+        {
+        case 0:{
+            // Remplacement du nom, ajout note de base et indication L/R
+            name = name.left(15);
+            // note du sample
+            int note = sf2->get(ID, champ_byOriginalPitch).bValue;
+            char str2[20];
+            sprintf(str2,"%.3hu", note);
+            // position du sample
+            SFSampleLink pos = sf2->get(ID, champ_sfSampleType).sfLinkValue;
+            // Concaténation
+            if (pos == rightSample || pos == RomRightSample)
+                newName = name + ' ' + str2 + 'R';
+            else if (pos == leftSample || pos == RomLeftSample)
+                newName = name + ' ' + str2 + 'L';
+            else
+                newName = name + ' ' + str2;
+            }break;
+        case 1:
+            // Remplacement du nom, ajout incrément
+            name = name.left(17);
+            char str2[20];
+            sprintf(str2,"%.2hu", (i+1)%100);
+            newName = name + "-" + str2;
+            break;
+        case 2:
+            // Ajout d'un préfixe
+            newName = name + sf2->getQstr(ID, champ_name);
+            break;
+        case 3:
+            // Ajout d'un suffixe
+            newName = sf2->getQstr(ID, champ_name) + name;
+            break;
+        }
+        newName = newName.left(20);
+
+        if (strcmp(sf2->getQstr(ID, champ_name).toLower().toStdString().c_str(),
+                   newName.toLower().toStdString().c_str()) != 0)
+            sf2->set(ID, champ_name, newName);
+    }
+    updateDo();
+    updateActions();
+    this->ui->arborescence->searchTree(this->ui->editSearch->text());
 }
 void MainWindow::dragAndDrop(EltID idDest, EltID idSrc, int temps, int *msg, QByteArray *ba1, QByteArray *ba2)
 {
@@ -1002,7 +1037,7 @@ void MainWindow::dragAndDrop(EltID idDest, EltID idSrc, int temps, int *msg, QBy
                 {
                     idSrc.indexMod = i;
                     val.genValue = this->sf2->get(idSrc, champ_sfGenAmount).genValue;
-                    this->sf2->set(idDest, (Champ)this->sf2->get(idSrc, champ_sfGenOper).wValue, val);
+                    this->sf2->set(idDest, this->sf2->get(idSrc, champ_sfGenOper).sfGenValue, val);
                 }
                 // Copie des mods
                 idSrc.typeElement = elementInstSmplMod;
@@ -1052,7 +1087,7 @@ void MainWindow::dragAndDrop(EltID idDest, EltID idSrc, int temps, int *msg, QBy
                 {
                     idSrc.indexMod = i;
                     val.genValue = this->sf2->get(idSrc, champ_sfGenAmount).genValue;
-                    this->sf2->set(idDest, (Champ)this->sf2->get(idSrc, champ_sfGenOper).wValue, val);
+                    this->sf2->set(idDest, this->sf2->get(idSrc, champ_sfGenOper).sfGenValue, val);
                 }
                 // Copie des mods
                 idSrc.typeElement = elementPrstInstMod;
@@ -2511,6 +2546,10 @@ void MainWindow::noteOn(int key)    {this->noteChanged(key, this->configuration.
 void MainWindow::noteOff(int key)   {this->noteChanged(key, 0);}
 void MainWindow::noteChanged(int key, int vel)
 {
+    // Mise en évidence de la ou des éléments liés étant en train de jouer
+    this->page_inst->enlightColumn(key, vel != 0);
+    this->page_prst->enlightColumn(key, vel != 0);
+
     // Cas particulier : arrêt de la lecture d'un sample
     if (key == -1 && vel == 0)
     {
@@ -2538,8 +2577,7 @@ void MainWindow::noteChanged(int key, int vel)
             this->ui->arborescence->isSelectedItemsTypeUnique())
         {
             EltID id = this->ui->arborescence->getID(0);
-            if (id.typeElement == elementSmpl &&
-                    this->ui->arborescence->getSelectedItemsNumber() == 1)
+            if (id.typeElement == elementSmpl && this->ui->arborescence->getSelectedItemsNumber() == 1)
                 this->synth->play(0, id.indexSf2, id.indexElt, key, vel);
             else if ((id.typeElement == elementInst || id.typeElement == elementInstSmpl) &&
                      this->ui->arborescence->isSelectedItemsFamilyUnique())

@@ -815,6 +815,40 @@ void Pile_sf2::redo()
 void Pile_sf2::storeEdition(int indexSf2) {this->sf2->getElt(indexSf2)->numEdition = this->pileActions->getEdition(indexSf2);}
 bool Pile_sf2::isEdited(int indexSf2) {return this->pileActions->getEdition(indexSf2) != this->sf2->getElt(indexSf2)->numEdition;}
 
+// Récupération liste de champs et valeurs de bags
+void Pile_sf2::getListeBags(EltID id, QList<Champ> &listeChamps, QList<Valeur> &listeValeurs)
+{
+    if (!this->isValide(id))
+    {
+        QMessageBox::warning(NULL, QObject::tr("Attention"), QObject::tr("Dans fonction Pile_sf2::getListeBags, ID non valide."));
+        return;
+    }
+    switch (id.typeElement)
+    {
+    case elementInst:
+        id.typeElement = elementInstGen;
+        break;
+    case elementInstSmpl:
+        id.typeElement = elementInstSmplGen;
+        break;
+    case elementPrst:
+        id.typeElement = elementPrstGen;
+        break;
+    case elementPrstInst:
+        id.typeElement = elementPrstInstGen;
+        break;
+    default:
+        return;
+    }
+    int nbElt = this->count(id);
+    for (int i = 0; i < nbElt; i++)
+    {
+        id.indexMod = i;
+        listeChamps << this->get(id, champ_sfGenOper).sfGenValue;
+        listeValeurs << this->get(id, champ_sfGenAmount);
+    }
+}
+
 ///////////////////////// METHODES PRIVEES /////////////////////////
 
 // Ajoute un enfant à id

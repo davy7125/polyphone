@@ -27,7 +27,7 @@
 
 
 #define BUFFER_SYNTH_SIZE     60000
-#define BUFFER_SYNTH_AVANCE   20000
+#define BUFFER_SYNTH_AVANCE   22000
 
 #include "pile_sf2.h"
 #include "voice.h"
@@ -83,7 +83,7 @@ private:
     // Pointeur vers les données
     Pile_sf2 * m_sf2;
     // Liste des voix
-    QList<Voice *> m_listeVoix;
+    QList<Voice *> m_listeVoix, m_listeVoixTmp;
     // Format audio
     AudioFormat m_format;
     // Paramètre global

@@ -25,7 +25,7 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#define VERSION "0.5"
+#define VERSION "0.6"
 
 #include <QMainWindow>
 #include <QDir>
@@ -88,6 +88,7 @@ private slots:
     void Fermer();              // Clic sur l'action "fermer"
 
     void renommer();            // Renommer un ou plusieurs éléments dans l'arborescence
+    void renommerEnMasse(QString name, int modificationType);
     void dragAndDrop(EltID idDest, EltID idSrc, int temps, int *msg, QByteArray *ba1, QByteArray *ba2);
     void importerSmpl();        // Import d'un sample
     void exporterSmpl();        // Export d'un sample
