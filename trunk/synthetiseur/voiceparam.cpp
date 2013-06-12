@@ -28,16 +28,11 @@
 VoiceParam::VoiceParam(Pile_sf2 *sf2, EltID id, VoiceParam *voiceParamTmp) :
     m_sf2(sf2)
 {
-    if (voiceParamTmp)
-    {
-        // Recopie
-        this->copy(voiceParamTmp);
-    }
+    // Initialisation
+    if (voiceParamTmp && id.typeElement == elementSmpl)
+        this->init(elementPrst);
     else
-    {
-        // Initialisation
-        this->init(id);
-    }
+        this->init(id.typeElement, id.indexElt);
 
     // Lecture
     if (sf2)
@@ -46,10 +41,17 @@ VoiceParam::VoiceParam(Pile_sf2 *sf2, EltID id, VoiceParam *voiceParamTmp) :
             this->readSample(id);
         else
             this->read(id);
+
+        // Prise en compte des paramètres dans l'instance
+        if (voiceParamTmp)
+            this->add(voiceParamTmp);
     }
+
+    if (id.typeElement == elementSmpl)
+        this->limit();
 }
 
-void VoiceParam::init(EltID id)
+void VoiceParam::init(ElementType type, int numPreset)
 {
     // TON
     this->fineTune              = 0;
@@ -89,7 +91,7 @@ void VoiceParam::init(EltID id)
     this->exclusiveClass        = 0;
 
     // Initialisation spécifiques
-    if (id.typeElement == elementSmpl)
+    if (type == elementSmpl)
     {
         // Initialisation sample
         this->filterFreq            = 19914;
@@ -111,7 +113,7 @@ void VoiceParam::init(EltID id)
         this->loopMode              = -1;
         this->numPreset             = -1;
     }
-    else if (id.typeElement == elementInstSmpl)
+    else if (type == elementInstSmpl)
     {
         this->filterFreq            = 19914;
         this->volDelayTime          = 0.001;
@@ -151,114 +153,58 @@ void VoiceParam::init(EltID id)
         this->vibLfoFreq            = 1;
         this->scaleTune             = 0;
         this->loopMode              = -1;
-        this->numPreset             = id.indexElt;
+        this->numPreset             = numPreset;
     }
-}
-void VoiceParam::copy(VoiceParam * voiceParamTmp)
-{
-    // TON
-    this->fineTune              = voiceParamTmp->fineTune;
-    this->coarseTune            = voiceParamTmp->coarseTune;
-    this->keynum                = voiceParamTmp->keynum;
-    this->scaleTune             = voiceParamTmp->scaleTune;
-    this->rootkey               = voiceParamTmp->rootkey;
-    // FILTRE
-    this->filterFreq            = voiceParamTmp->filterFreq;
-    this->filterQ               = voiceParamTmp->filterQ;
-    // BOUCLES ET OFFSETS
-    this->loopMode              = voiceParamTmp->loopMode;
-    this->loopStart             = voiceParamTmp->loopStart;
-    this->loopEnd               = voiceParamTmp->loopEnd;
-    this->sampleStart           = voiceParamTmp->sampleStart;
-    this->sampleEnd             = voiceParamTmp->sampleEnd;
-    // ATTENUATION, BALANCE
-    this->attenuation           = voiceParamTmp->attenuation;
-    this->pan                   = voiceParamTmp->pan;
-    this->fixedVelocity         = voiceParamTmp->fixedVelocity;
-    // ENVELOPPE VOLUME
-    this->volDelayTime          = voiceParamTmp->volDelayTime;
-    this->volAttackTime         = voiceParamTmp->volAttackTime;
-    this->volHoldTime           = voiceParamTmp->volHoldTime;
-    this->volDecayTime          = voiceParamTmp->volDecayTime;
-    this->volReleaseTime        = voiceParamTmp->volReleaseTime;
-    this->volKeynumToHold       = voiceParamTmp->volKeynumToHold;
-    this->volKeynumToDecay      = voiceParamTmp->volKeynumToDecay;
-    this->volSustainLevel       = voiceParamTmp->volSustainLevel;
-    // ENVELOPPE MODULATION
-    this->modDelayTime          = voiceParamTmp->modDelayTime;
-    this->modAttackTime         = voiceParamTmp->modAttackTime;
-    this->modHoldTime           = voiceParamTmp->modHoldTime;
-    this->modDecayTime          = voiceParamTmp->modDecayTime;
-    this->modReleaseTime        = voiceParamTmp->modReleaseTime;
-    this->modKeynumToHold       = voiceParamTmp->modKeynumToHold;
-    this->modKeynumToDecay      = voiceParamTmp->modKeynumToDecay;
-    this->modEnvToPitch         = voiceParamTmp->modEnvToPitch;
-    this->modEnvToFilterFc      = voiceParamTmp->modEnvToFilterFc;
-    this->modSustainLevel       = voiceParamTmp->modSustainLevel;
-    // LFOs
-    this->modLfoDelay           = voiceParamTmp->modLfoDelay;
-    this->modLfoFreq            = voiceParamTmp->modLfoFreq;
-    this->vibLfoDelay           = voiceParamTmp->vibLfoDelay;
-    this->vibLfoFreq            = voiceParamTmp->vibLfoFreq;
-    this->modLfoToPitch         = voiceParamTmp->modLfoToPitch;
-    this->modLfoToFilterFreq    = voiceParamTmp->modLfoToFilterFreq;
-    this->vibLfoToPitch         = voiceParamTmp->vibLfoToPitch;
-    this->modLfoToVolume        = voiceParamTmp->modLfoToVolume;
-    // EFFETS
-    this->reverb                = voiceParamTmp->reverb;
-    this->chorus                = voiceParamTmp->chorus;
-    // DIVERS
-    this->exclusiveClass        = voiceParamTmp->exclusiveClass;
-    this->numPreset             = voiceParamTmp->numPreset;
 }
 
 void VoiceParam::readSample(EltID id)
 {
     // Lecture d'un sample
     this->fineTune          += m_sf2->get(id, champ_chPitchCorrection).cValue;
-    if (this->rootkey == -1)
-        this->rootkey       = m_sf2->get(id, champ_byOriginalPitch).bValue;
+    this->rootkey            = m_sf2->get(id, champ_byOriginalPitch).bValue;
     this->loopStart         += m_sf2->get(id, champ_dwStartLoop).dwValue;
     this->loopEnd           += m_sf2->get(id, champ_dwEndLoop).dwValue;
-    if (this->loopMode == -1)
-        this->loopMode = 0;
+    this->loopMode           = 0;
+}
 
+void VoiceParam::limit()
+{
     // Limites
-    this->fineTune          = limit(this->fineTune,             -99,    99);
-    this->coarseTune        = limit(this->coarseTune,           -120,   120);
-    this->pan               = limit(this->pan,                  -50.,   50.);
-    this->attenuation       = limit(this->attenuation,          0.,     144.);
-    this->scaleTune         = limit(this->scaleTune,            0,      1200);
-    this->filterFreq        = limit(this->filterFreq,           18.,    19914.);
-    this->filterQ           = limit(this->filterQ,              0.,     96.);
-    this->volDelayTime      = limit(this->volDelayTime,         0.001,  18.);
-    this->volAttackTime     = limit(this->volAttackTime,        0.001,  101.6);
-    this->volHoldTime       = limit(this->volHoldTime,          0.001,  18.);
-    this->volDecayTime      = limit(this->volDecayTime,         0.001,  101.6);
-    this->volSustainLevel   = limit(this->volSustainLevel,      0.,     144.);
-    this->volReleaseTime    = limit(this->volReleaseTime,       0.001,  101.6);
-    this->volKeynumToHold   = limit(this->volKeynumToHold,      -1200,  1200);
-    this->volKeynumToDecay  = limit(this->volKeynumToDecay,     -1200,  1200);
-    this->modDelayTime      = limit(this->modDelayTime,         0.001,  18.);
-    this->modAttackTime     = limit(this->modAttackTime,        0.001,  101.6);
-    this->modHoldTime       = limit(this->modHoldTime,          0.001,  18.);
-    this->modDecayTime      = limit(this->modDecayTime,         0.001,  101.6);
-    this->modSustainLevel   = limit(this->modSustainLevel,      0.,     144.);
-    this->modReleaseTime    = limit(this->modReleaseTime,       0.001,  101.6);
-    this->modKeynumToHold   = limit(this->modKeynumToHold,      -1200,  1200);
-    this->modKeynumToDecay  = limit(this->modKeynumToDecay,     -1200,  1200);
-    this->modEnvToPitch     = limit(this->modEnvToPitch,        -12000, 12000);
-    this->modEnvToFilterFc  = limit(this->modEnvToFilterFc,     -12000, 12000);
-    this->modLfoDelay       = limit(this->modLfoDelay,          0.001,  20.);
-    this->modLfoFreq        = limit(this->modLfoFreq,           0.001,  100.);
-    this->vibLfoDelay       = limit(this->vibLfoDelay,          0.001,  20.);
-    this->vibLfoFreq        = limit(this->vibLfoFreq,           0.001,  100.);
-    this->modLfoToPitch     = limit(this->modLfoToPitch,        -12000, 12000);
-    this->modLfoToFilterFreq= limit(this->modLfoToFilterFreq,   -12000, 12000);
-    this->modLfoToVolume    = limit(this->modLfoToVolume,       -96.,   96.);
-    this->vibLfoToPitch     = limit(this->vibLfoToPitch,        -12000, 12000);
-    this->reverb            = limit(this->reverb,               0.,     100.);
-    this->chorus            = limit(this->chorus,               0.,     100.);
+    this->fineTune           = limit(this->fineTune,             -99,    99      );
+    this->coarseTune         = limit(this->coarseTune,           -120,   120     );
+    this->pan                = limit(this->pan,                  -50.,   50.     );
+    this->attenuation        = limit(this->attenuation,          0.,     144.    );
+    this->scaleTune          = limit(this->scaleTune,            0,      1200    );
+    this->filterFreq         = limit(this->filterFreq,           18.,    19914.  );
+    this->filterQ            = limit(this->filterQ,              0.,     96.     );
+    this->volDelayTime       = limit(this->volDelayTime,         0.001,  18.     );
+    this->volAttackTime      = limit(this->volAttackTime,        0.001,  101.6   );
+    this->volHoldTime        = limit(this->volHoldTime,          0.001,  18.     );
+    this->volDecayTime       = limit(this->volDecayTime,         0.001,  101.6   );
+    this->volSustainLevel    = limit(this->volSustainLevel,      0.,     144.    );
+    this->volReleaseTime     = limit(this->volReleaseTime,       0.001,  101.6   );
+    this->volKeynumToHold    = limit(this->volKeynumToHold,      -1200,  1200    );
+    this->volKeynumToDecay   = limit(this->volKeynumToDecay,     -1200,  1200    );
+    this->modDelayTime       = limit(this->modDelayTime,         0.001,  18.     );
+    this->modAttackTime      = limit(this->modAttackTime,        0.001,  101.6   );
+    this->modHoldTime        = limit(this->modHoldTime,          0.001,  18.     );
+    this->modDecayTime       = limit(this->modDecayTime,         0.001,  101.6   );
+    this->modSustainLevel    = limit(this->modSustainLevel,      0.,     144.    );
+    this->modReleaseTime     = limit(this->modReleaseTime,       0.001,  101.6   );
+    this->modKeynumToHold    = limit(this->modKeynumToHold,      -1200,  1200    );
+    this->modKeynumToDecay   = limit(this->modKeynumToDecay,     -1200,  1200    );
+    this->modEnvToPitch      = limit(this->modEnvToPitch,        -12000, 12000   );
+    this->modEnvToFilterFc   = limit(this->modEnvToFilterFc,     -12000, 12000   );
+    this->modLfoDelay        = limit(this->modLfoDelay,          0.001,  20.     );
+    this->modLfoFreq         = limit(this->modLfoFreq,           0.001,  100.    );
+    this->vibLfoDelay        = limit(this->vibLfoDelay,          0.001,  20.     );
+    this->vibLfoFreq         = limit(this->vibLfoFreq,           0.001,  100.    );
+    this->modLfoToPitch      = limit(this->modLfoToPitch,        -12000, 12000   );
+    this->modLfoToFilterFreq = limit(this->modLfoToFilterFreq,   -12000, 12000   );
+    this->modLfoToVolume     = limit(this->modLfoToVolume,       -96.,   96.     );
+    this->vibLfoToPitch      = limit(this->vibLfoToPitch,        -12000, 12000   );
+    this->reverb             = limit(this->reverb,               0.,     100.    );
+    this->chorus             = limit(this->chorus,               0.,     100.    );
 }
 
 void VoiceParam::read(EltID id)
@@ -268,22 +214,16 @@ void VoiceParam::read(EltID id)
         id.typeElement = elementInst;
     else
         id.typeElement = elementPrst;
-    QList<Champ> listChampsGlobaux;
-    QList<Valeur> listValeursGlobales;
-    m_sf2->getListeBags(id, listChampsGlobaux, listValeursGlobales);
+    QList<Champ> listChamps;
+    QList<genAmountType> listValeurs;
+    m_sf2->getListeBags(id, listChamps, listValeurs);
 
     // Chargement des bags des éléments
-    QList<Champ> listChampsElements;
-    QList<Valeur> listValeursElements;
     if (id.typeElement == elementInst)
         id.typeElement = elementInstSmpl;
     else
         id.typeElement = elementPrstInst;
-    m_sf2->getListeBags(id, listChampsElements, listValeursElements);
-
-    // Fusion
-    listChampsGlobaux.append(listChampsElements);
-    listValeursGlobales.append(listValeursElements);
+    m_sf2->getListeBags(id, listChamps, listValeurs);
 
     // Doublons à enlever
     QList<Champ> listChampsNonDoublon;
@@ -298,100 +238,84 @@ void VoiceParam::read(EltID id)
     for (int i = 0; i < listChampsNonDoublon.size(); i++)
     {
         Champ champTmp = listChampsNonDoublon.at(i);
-        if (listChampsGlobaux.count(champTmp) > 1)
+        if (listChamps.count(champTmp) > 1)
         {
-            int lastIndex = listChampsGlobaux.lastIndexOf(champTmp);
-            listChampsGlobaux.removeAt(lastIndex);
-            listValeursGlobales.removeAt(lastIndex);
+            int firstIndex = listChamps.indexOf(champTmp);
+            listChamps.removeAt(firstIndex);
+            listValeurs.removeAt(firstIndex);
         }
     }
 
-    // Initialisation paramètres temporaires
-    VoiceParam voiceParamTmp(NULL, id);
-
-    // Chargement des données des bags
-    if (id.typeElement == elementInstSmpl)
-        id.typeElement = elementInstGen;
-    else
-        id.typeElement = elementPrstGen;
-    this->updateParam(id, voiceParamTmp, listChampsGlobaux, listValeursGlobales);
-
-    // Prise en compte des paramètres dans l'instance
-    this->add(&voiceParamTmp);
-}
-
-void VoiceParam::updateParam(EltID id, VoiceParam &voiceParamTmp, QList<Champ> listeChamps, QList<Valeur> listeValeurs)
-{
     Champ champTmp;
-    Valeur valTmp;
-    for (int i = 0; i < listeChamps.size(); i++)
+    genAmountType valTmp;
+    for (int i = 0; i < listChamps.size(); i++)
     {
-        champTmp = listeChamps.at(i);
-        valTmp = listeValeurs.at(i);
+        champTmp = listChamps.at(i);
+        valTmp = listValeurs.at(i);
         switch (champTmp)
         {
-        case champ_fineTune:                    voiceParamTmp.fineTune          = valTmp.shValue;               break;
-        case champ_coarseTune:                  voiceParamTmp.coarseTune        = valTmp.shValue;               break;
-        case champ_pan:                         voiceParamTmp.pan               = (double)valTmp.shValue / 10.; break;
-        case champ_initialAttenuation:          voiceParamTmp.attenuation       = (double)valTmp.shValue / 10.; break;
-        case champ_initialFilterQ:              voiceParamTmp.filterQ           = (double)valTmp.shValue / 10.; break;
-        case champ_sustainVolEnv:               voiceParamTmp.volSustainLevel   = (double)valTmp.shValue / 10.; break;
-        case champ_keynumToVolEnvHold:          voiceParamTmp.volKeynumToHold   = valTmp.shValue;               break;
-        case champ_keynumToVolEnvDecay:         voiceParamTmp.volKeynumToDecay  = valTmp.shValue;               break;
-        case champ_sustainModEnv:               voiceParamTmp.modSustainLevel   = (double)valTmp.shValue / 10.; break;
-        case champ_keynumToModEnvHold:          voiceParamTmp.modKeynumToHold   = valTmp.shValue;               break;
-        case champ_keynumToModEnvDecay:         voiceParamTmp.modKeynumToDecay  = valTmp.shValue;               break;
-        case champ_modEnvToPitch:               voiceParamTmp.modEnvToPitch     = valTmp.shValue;               break;
-        case champ_modEnvToFilterFc:            voiceParamTmp.modEnvToFilterFc  = valTmp.shValue;               break;
-        case champ_modLfoToPitch:               voiceParamTmp.modLfoToPitch     = valTmp.shValue;               break;
-        case champ_modLfoToFilterFc:            voiceParamTmp.modLfoToFilterFreq= valTmp.shValue;               break;
-        case champ_modLfoToVolume:              voiceParamTmp.modLfoToVolume    = (double)valTmp.shValue / 10.; break;
-        case champ_vibLfoToPitch:               voiceParamTmp.vibLfoToPitch     = valTmp.shValue;               break;
-        case champ_reverbEffectsSend:           voiceParamTmp.reverb            = (double)valTmp.shValue / 10.; break;
-        case champ_chorusEffectsSend:           voiceParamTmp.chorus            = (double)valTmp.shValue / 10.; break;
-        case champ_delayVolEnv:                 voiceParamTmp.volDelayTime      = d1200e2(valTmp.shValue);      break;
-        case champ_attackVolEnv:                voiceParamTmp.volAttackTime     = d1200e2(valTmp.shValue);      break;
-        case champ_holdVolEnv:                  voiceParamTmp.volHoldTime       = d1200e2(valTmp.shValue);      break;
-        case champ_decayVolEnv:                 voiceParamTmp.volDecayTime      = d1200e2(valTmp.shValue);      break;
-        case champ_releaseVolEnv:               voiceParamTmp.volReleaseTime    = d1200e2(valTmp.shValue);      break;
-        case champ_delayModEnv:                 voiceParamTmp.modDelayTime      = d1200e2(valTmp.shValue);      break;
-        case champ_attackModEnv:                voiceParamTmp.modAttackTime     = d1200e2(valTmp.shValue);      break;
-        case champ_holdModEnv:                  voiceParamTmp.modHoldTime       = d1200e2(valTmp.shValue);      break;
-        case champ_decayModEnv:                 voiceParamTmp.modDecayTime      = d1200e2(valTmp.shValue);      break;
-        case champ_releaseModEnv:               voiceParamTmp.modReleaseTime    = d1200e2(valTmp.shValue);      break;
-        case champ_delayModLFO:                 voiceParamTmp.modLfoDelay       = d1200e2(valTmp.shValue);      break;
-        case champ_delayVibLFO:                 voiceParamTmp.vibLfoDelay       = d1200e2(valTmp.shValue);      break;
-        case champ_scaleTuning:                 voiceParamTmp.scaleTune         = valTmp.shValue;               break;
-        case champ_overridingRootKey:           voiceParamTmp.rootkey           = valTmp.wValue;                break;
-        case champ_keynum:                      voiceParamTmp.keynum            = valTmp.wValue;                break;
-        case champ_velocity:                    voiceParamTmp.fixedVelocity     = valTmp.wValue;                break;
-        case champ_sampleModes:                 voiceParamTmp.loopMode          = valTmp.wValue;                break;
-        case champ_exclusiveClass:              voiceParamTmp.exclusiveClass    = valTmp.wValue;                break;
-        case champ_startloopAddrsOffset:        voiceParamTmp.loopStart        += valTmp.shValue;               break;
-        case champ_startloopAddrsCoarseOffset:  voiceParamTmp.loopStart        += valTmp.shValue * 32768;       break;
-        case champ_endloopAddrsOffset:          voiceParamTmp.loopEnd          += valTmp.shValue;               break;
-        case champ_endloopAddrsCoarseOffset:    voiceParamTmp.loopEnd          += valTmp.shValue * 32768;       break;
-        case champ_startAddrsOffset:            voiceParamTmp.sampleStart      += valTmp.shValue;               break;
-        case champ_startAddrsCoarseOffset:      voiceParamTmp.sampleStart      += valTmp.shValue * 32768;       break;
-        case champ_endAddrsOffset:              voiceParamTmp.sampleEnd        += valTmp.shValue;               break;
-        case champ_endAddrsCoarseOffset:        voiceParamTmp.sampleEnd        += valTmp.shValue * 32768;       break;
+        case champ_fineTune:                    this->fineTune           = valTmp.shAmount;               break;
+        case champ_coarseTune:                  this->coarseTune         = valTmp.shAmount;               break;
+        case champ_pan:                         this->pan                = (double)valTmp.shAmount / 10.; break;
+        case champ_initialAttenuation:          this->attenuation        = (double)valTmp.shAmount / 10.; break;
+        case champ_initialFilterQ:              this->filterQ            = (double)valTmp.shAmount / 10.; break;
+        case champ_sustainVolEnv:               this->volSustainLevel    = (double)valTmp.shAmount / 10.; break;
+        case champ_keynumToVolEnvHold:          this->volKeynumToHold    = valTmp.shAmount;               break;
+        case champ_keynumToVolEnvDecay:         this->volKeynumToDecay   = valTmp.shAmount;               break;
+        case champ_sustainModEnv:               this->modSustainLevel    = (double)valTmp.shAmount / 10.; break;
+        case champ_keynumToModEnvHold:          this->modKeynumToHold    = valTmp.shAmount;               break;
+        case champ_keynumToModEnvDecay:         this->modKeynumToDecay   = valTmp.shAmount;               break;
+        case champ_modEnvToPitch:               this->modEnvToPitch      = valTmp.shAmount;               break;
+        case champ_modEnvToFilterFc:            this->modEnvToFilterFc   = valTmp.shAmount;               break;
+        case champ_modLfoToPitch:               this->modLfoToPitch      = valTmp.shAmount;               break;
+        case champ_modLfoToFilterFc:            this->modLfoToFilterFreq = valTmp.shAmount;               break;
+        case champ_modLfoToVolume:              this->modLfoToVolume     = (double)valTmp.shAmount / 10.; break;
+        case champ_vibLfoToPitch:               this->vibLfoToPitch      = valTmp.shAmount;               break;
+        case champ_reverbEffectsSend:           this->reverb             = (double)valTmp.shAmount / 10.; break;
+        case champ_chorusEffectsSend:           this->chorus             = (double)valTmp.shAmount / 10.; break;
+        case champ_delayVolEnv:                 this->volDelayTime       = d1200e2(valTmp.shAmount);      break;
+        case champ_attackVolEnv:                this->volAttackTime      = d1200e2(valTmp.shAmount);      break;
+        case champ_holdVolEnv:                  this->volHoldTime        = d1200e2(valTmp.shAmount);      break;
+        case champ_decayVolEnv:                 this->volDecayTime       = d1200e2(valTmp.shAmount);      break;
+        case champ_releaseVolEnv:               this->volReleaseTime     = d1200e2(valTmp.shAmount);      break;
+        case champ_delayModEnv:                 this->modDelayTime       = d1200e2(valTmp.shAmount);      break;
+        case champ_attackModEnv:                this->modAttackTime      = d1200e2(valTmp.shAmount);      break;
+        case champ_holdModEnv:                  this->modHoldTime        = d1200e2(valTmp.shAmount);      break;
+        case champ_decayModEnv:                 this->modDecayTime       = d1200e2(valTmp.shAmount);      break;
+        case champ_releaseModEnv:               this->modReleaseTime     = d1200e2(valTmp.shAmount);      break;
+        case champ_delayModLFO:                 this->modLfoDelay        = d1200e2(valTmp.shAmount);      break;
+        case champ_delayVibLFO:                 this->vibLfoDelay        = d1200e2(valTmp.shAmount);      break;
+        case champ_scaleTuning:                 this->scaleTune          = valTmp.shAmount;               break;
+        case champ_overridingRootKey:           this->rootkey            = valTmp.wAmount;                break;
+        case champ_keynum:                      this->keynum             = valTmp.wAmount;                break;
+        case champ_velocity:                    this->fixedVelocity      = valTmp.wAmount;                break;
+        case champ_sampleModes:                 this->loopMode           = valTmp.wAmount;                break;
+        case champ_exclusiveClass:              this->exclusiveClass     = valTmp.wAmount;                break;
+        case champ_startloopAddrsOffset:        this->loopStart         += valTmp.shAmount;               break;
+        case champ_startloopAddrsCoarseOffset:  this->loopStart         += valTmp.shAmount * 32768;       break;
+        case champ_endloopAddrsOffset:          this->loopEnd           += valTmp.shAmount;               break;
+        case champ_endloopAddrsCoarseOffset:    this->loopEnd           += valTmp.shAmount * 32768;       break;
+        case champ_startAddrsOffset:            this->sampleStart       += valTmp.shAmount;               break;
+        case champ_startAddrsCoarseOffset:      this->sampleStart       += valTmp.shAmount * 32768;       break;
+        case champ_endAddrsOffset:              this->sampleEnd         += valTmp.shAmount;               break;
+        case champ_endAddrsCoarseOffset:        this->sampleEnd         += valTmp.shAmount * 32768;       break;
         case champ_initialFilterFc:
             if (id.typeElement == elementInstSmpl)
-                voiceParamTmp.filterFreq = d1200e2(valTmp.shValue) * 8.176;
+                this->filterFreq = d1200e2(valTmp.shAmount) * 8.176;
             else
-                voiceParamTmp.filterFreq = d1200e2(valTmp.shValue);
+                this->filterFreq = d1200e2(valTmp.shAmount);
             break;
         case champ_freqModLFO:
             if (id.typeElement == elementInstSmpl)
-                voiceParamTmp.modLfoFreq = d1200e2(valTmp.shValue) * 8.176;
+                this->modLfoFreq = d1200e2(valTmp.shAmount) * 8.176;
             else
-                voiceParamTmp.modLfoFreq = d1200e2(valTmp.shValue);
+                this->modLfoFreq = d1200e2(valTmp.shAmount);
             break;
         case champ_freqVibLFO:
             if (id.typeElement == elementInstSmpl)
-                voiceParamTmp.vibLfoFreq = d1200e2(valTmp.shValue) * 8.176;
+                this->vibLfoFreq = d1200e2(valTmp.shAmount) * 8.176;
             else
-                voiceParamTmp.vibLfoFreq = d1200e2(valTmp.shValue);
+                this->vibLfoFreq = d1200e2(valTmp.shAmount);
             break;
         default:
             break;
@@ -401,62 +325,62 @@ void VoiceParam::updateParam(EltID id, VoiceParam &voiceParamTmp, QList<Champ> l
 
 void VoiceParam::add(VoiceParam * voiceParamTmp)
 {
-    this->fineTune          += voiceParamTmp->fineTune;
-    this->coarseTune        += voiceParamTmp->coarseTune;
-    this->pan               += voiceParamTmp->pan;
-    this->attenuation       += voiceParamTmp->attenuation;
-    this->scaleTune         += voiceParamTmp->scaleTune;
-    this->filterFreq        *= voiceParamTmp->filterFreq;
-    this->filterQ           += voiceParamTmp->filterQ;
+    this->fineTune           += voiceParamTmp->fineTune;
+    this->coarseTune         += voiceParamTmp->coarseTune;
+    this->pan                += voiceParamTmp->pan;
+    this->attenuation        += voiceParamTmp->attenuation;
+    this->scaleTune          += voiceParamTmp->scaleTune;
+    this->filterFreq         *= voiceParamTmp->filterFreq;
+    this->filterQ            += voiceParamTmp->filterQ;
     // Enveloppe volume
-    this->volDelayTime      *= voiceParamTmp->volDelayTime;
-    this->volAttackTime     *= voiceParamTmp->volAttackTime;
-    this->volHoldTime       *= voiceParamTmp->volHoldTime;
-    this->volDecayTime      *= voiceParamTmp->volDecayTime;
-    this->volSustainLevel   += voiceParamTmp->volSustainLevel;
-    this->volReleaseTime    *= voiceParamTmp->volReleaseTime;
-    this->volKeynumToHold   += voiceParamTmp->volKeynumToHold;
-    this->volKeynumToDecay  += voiceParamTmp->volKeynumToDecay;
+    this->volDelayTime       *= voiceParamTmp->volDelayTime;
+    this->volAttackTime      *= voiceParamTmp->volAttackTime;
+    this->volHoldTime        *= voiceParamTmp->volHoldTime;
+    this->volDecayTime       *= voiceParamTmp->volDecayTime;
+    this->volSustainLevel    += voiceParamTmp->volSustainLevel;
+    this->volReleaseTime     *= voiceParamTmp->volReleaseTime;
+    this->volKeynumToHold    += voiceParamTmp->volKeynumToHold;
+    this->volKeynumToDecay   += voiceParamTmp->volKeynumToDecay;
     // Enveloppe modulation
-    this->modDelayTime      *= voiceParamTmp->modDelayTime;
-    this->modAttackTime     *= voiceParamTmp->modAttackTime;
-    this->modHoldTime       *= voiceParamTmp->modHoldTime;
-    this->modDecayTime      *= voiceParamTmp->modDecayTime;
-    this->modSustainLevel   += voiceParamTmp->modSustainLevel;
-    this->modReleaseTime    *= voiceParamTmp->modReleaseTime;
-    this->modKeynumToHold   += voiceParamTmp->modKeynumToHold;
-    this->modKeynumToDecay  += voiceParamTmp->modKeynumToDecay;
-    this->modEnvToPitch     += voiceParamTmp->modEnvToPitch;
-    this->modEnvToFilterFc  += voiceParamTmp->modEnvToFilterFc;
+    this->modDelayTime       *= voiceParamTmp->modDelayTime;
+    this->modAttackTime      *= voiceParamTmp->modAttackTime;
+    this->modHoldTime        *= voiceParamTmp->modHoldTime;
+    this->modDecayTime       *= voiceParamTmp->modDecayTime;
+    this->modSustainLevel    += voiceParamTmp->modSustainLevel;
+    this->modReleaseTime     *= voiceParamTmp->modReleaseTime;
+    this->modKeynumToHold    += voiceParamTmp->modKeynumToHold;
+    this->modKeynumToDecay   += voiceParamTmp->modKeynumToDecay;
+    this->modEnvToPitch      += voiceParamTmp->modEnvToPitch;
+    this->modEnvToFilterFc   += voiceParamTmp->modEnvToFilterFc;
     // LFOs
-    this->modLfoDelay       *= voiceParamTmp->modLfoDelay;
-    this->modLfoFreq        *= voiceParamTmp->modLfoFreq;
-    this->vibLfoDelay       *= voiceParamTmp->vibLfoDelay;
-    this->vibLfoFreq        *= voiceParamTmp->vibLfoFreq;
-    this->modLfoToPitch     += voiceParamTmp->modLfoToPitch;
-    this->modLfoToFilterFreq+= voiceParamTmp->modLfoToFilterFreq;
-    this->modLfoToVolume    += voiceParamTmp->modLfoToVolume;
-    this->vibLfoToPitch     += voiceParamTmp->vibLfoToPitch;
+    this->modLfoDelay        *= voiceParamTmp->modLfoDelay;
+    this->modLfoFreq         *= voiceParamTmp->modLfoFreq;
+    this->vibLfoDelay        *= voiceParamTmp->vibLfoDelay;
+    this->vibLfoFreq         *= voiceParamTmp->vibLfoFreq;
+    this->modLfoToPitch      += voiceParamTmp->modLfoToPitch;
+    this->modLfoToFilterFreq += voiceParamTmp->modLfoToFilterFreq;
+    this->modLfoToVolume     += voiceParamTmp->modLfoToVolume;
+    this->vibLfoToPitch      += voiceParamTmp->vibLfoToPitch;
     // Effets
-    this->reverb            += voiceParamTmp->reverb;
-    this->chorus            += voiceParamTmp->chorus;
+    this->reverb             += voiceParamTmp->reverb;
+    this->chorus             += voiceParamTmp->chorus;
     // Autres
     if (voiceParamTmp->loopMode != -1)
-        this->loopMode = voiceParamTmp->loopMode;
+        this->loopMode        = voiceParamTmp->loopMode;
     if (voiceParamTmp->rootkey != -1)
-        this->rootkey = voiceParamTmp->rootkey;
+        this->rootkey         = voiceParamTmp->rootkey;
     if (voiceParamTmp->keynum != -1)
-        this->keynum = voiceParamTmp->keynum;
+        this->keynum          = voiceParamTmp->keynum;
     if (voiceParamTmp->fixedVelocity != -1)
-        this->fixedVelocity = voiceParamTmp->fixedVelocity;
-    this->loopStart         += voiceParamTmp->loopStart;
-    this->loopEnd           += voiceParamTmp->loopEnd;
-    this->sampleStart       += voiceParamTmp->sampleStart;
-    this->sampleEnd         += voiceParamTmp->sampleEnd;
+        this->fixedVelocity   = voiceParamTmp->fixedVelocity;
+    this->loopStart          += voiceParamTmp->loopStart;
+    this->loopEnd            += voiceParamTmp->loopEnd;
+    this->sampleStart        += voiceParamTmp->sampleStart;
+    this->sampleEnd          += voiceParamTmp->sampleEnd;
     if (voiceParamTmp->exclusiveClass != 0)
-        this->exclusiveClass = voiceParamTmp->exclusiveClass;
+        this->exclusiveClass  = voiceParamTmp->exclusiveClass;
     if (voiceParamTmp->numPreset != -1)
-        this->numPreset = voiceParamTmp->numPreset;
+        this->numPreset       = voiceParamTmp->numPreset;
 }
 
 double VoiceParam::getPitchDifference(int note)

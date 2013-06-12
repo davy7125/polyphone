@@ -2577,6 +2577,9 @@ void MainWindow::noteChanged(int key, int vel)
             this->ui->arborescence->isSelectedItemsTypeUnique())
         {
             EltID id = this->ui->arborescence->getID(0);
+
+            QTime time = QTime::currentTime();
+
             if (id.typeElement == elementSmpl && this->ui->arborescence->getSelectedItemsNumber() == 1)
                 this->synth->play(0, id.indexSf2, id.indexElt, key, vel);
             else if ((id.typeElement == elementInst || id.typeElement == elementInstSmpl) &&
@@ -2585,6 +2588,18 @@ void MainWindow::noteChanged(int key, int vel)
             else if ((id.typeElement == elementPrst || id.typeElement == elementPrstInst) &&
                      this->ui->arborescence->isSelectedItemsFamilyUnique())
                 this->synth->play(2, id.indexSf2, id.indexElt, key, vel);
+
+            if (vel)
+            {
+                if (id.typeElement == elementSmpl && this->ui->arborescence->getSelectedItemsNumber() == 1)
+                    qDebug() << "lecture smpl" << time.msecsTo(QTime::currentTime()) << "ms";
+                else if ((id.typeElement == elementInst || id.typeElement == elementInstSmpl) &&
+                         this->ui->arborescence->isSelectedItemsFamilyUnique())
+                    qDebug() << "lecture inst" << time.msecsTo(QTime::currentTime()) << "ms";
+                else if ((id.typeElement == elementPrst || id.typeElement == elementPrstInst) &&
+                         this->ui->arborescence->isSelectedItemsFamilyUnique())
+                    qDebug() << "lecture prst" << time.msecsTo(QTime::currentTime()) << "ms";
+            }
         }
     }
 }
