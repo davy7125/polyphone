@@ -75,16 +75,15 @@ private:
     Pile_sf2 * m_sf2;
     // Méthodes privées
     void add(VoiceParam *voiceParamTmp);
-    double d1200e2(qint32 val);
-    static double limit(double val, double min, double max);
-    static qint32 limit(qint32 val, qint32 min, qint32 max);
-    // Méthodes de lecture
+    static double d1200e2(qint32 val);
+    // Initialisation, lecture
+    void init(ElementType type, int numPreset = -1);
     void readSample(EltID id);
     void read(EltID id);
-    void updateParam(EltID id, VoiceParam &voiceParamTmp, QList<Champ> listeChamps, QList<Valeur> listeValeurs);
-    // Copie / initialisation
-    void init(EltID id);
-    void copy(VoiceParam * voiceParamTmp);
+    // Limites
+    void limit();
+    static double limit(double val, double min, double max);
+    static qint32 limit(qint32 val, qint32 min, qint32 max);
 };
 
 

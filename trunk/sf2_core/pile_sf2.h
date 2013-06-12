@@ -67,7 +67,7 @@ public:
     int sauvegarder(int indexSf2, QString fileName);
     bool isEdited(int indexSf2);
     // Récupération d'une liste de champs et de valeurs contenues dans les bags de l'élément id
-    void getListeBags(EltID id, QList<Champ> &listeChamps, QList<Valeur> &listeValeurs);
+    void getListeBags(EltID id, QList<Champ> &listeChamps, QList<genAmountType> &listeValeurs);
 signals:
     void updateTable(int type, int sf2, int elt, int elt2);
 private:

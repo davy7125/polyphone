@@ -816,36 +816,36 @@ void Pile_sf2::storeEdition(int indexSf2) {this->sf2->getElt(indexSf2)->numEditi
 bool Pile_sf2::isEdited(int indexSf2) {return this->pileActions->getEdition(indexSf2) != this->sf2->getElt(indexSf2)->numEdition;}
 
 // Récupération liste de champs et valeurs de bags
-void Pile_sf2::getListeBags(EltID id, QList<Champ> &listeChamps, QList<Valeur> &listeValeurs)
+void Pile_sf2::getListeBags(EltID id, QList<Champ> &listeChamps, QList<genAmountType> &listeValeurs)
 {
-    if (!this->isValide(id))
-    {
-        QMessageBox::warning(NULL, QObject::tr("Attention"), QObject::tr("Dans fonction Pile_sf2::getListeBags, ID non valide."));
-        return;
-    }
+//    if (!this->isValide(id))
+//    {
+//        QMessageBox::warning(NULL, QObject::tr("Attention"), QObject::tr("Dans fonction Pile_sf2::getListeBags, ID non valide."));
+//        return;
+//    }
+    SF2::BAG::GEN * gen = NULL;
     switch (id.typeElement)
     {
     case elementInst:
-        id.typeElement = elementInstGen;
+        gen = this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt)->bagGlobal.gen;
         break;
     case elementInstSmpl:
-        id.typeElement = elementInstSmplGen;
+        gen = this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt)->bag->getElt(id.indexElt2)->gen;
         break;
     case elementPrst:
-        id.typeElement = elementPrstGen;
+        gen = this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt)->bagGlobal.gen;
         break;
     case elementPrstInst:
-        id.typeElement = elementPrstInstGen;
+        gen = this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt)->bag->getElt(id.indexElt2)->gen;
         break;
     default:
-        return;
+        break;
     }
-    int nbElt = this->count(id);
-    for (int i = 0; i < nbElt; i++)
+    while (gen)
     {
-        id.indexMod = i;
-        listeChamps << this->get(id, champ_sfGenOper).sfGenValue;
-        listeValeurs << this->get(id, champ_sfGenAmount);
+        listeChamps << gen->sfGenOper;
+        listeValeurs << gen->genAmount;
+        gen = gen->suivant;
     }
 }
 
