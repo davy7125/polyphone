@@ -48,7 +48,7 @@ VoiceParam::VoiceParam(Pile_sf2 *sf2, EltID id, VoiceParam *voiceParamTmp) :
     }
 
     if (id.typeElement == elementSmpl)
-        this->limit();
+        this->limit(id);
 }
 
 void VoiceParam::init(ElementType type, int numPreset)
@@ -160,14 +160,19 @@ void VoiceParam::init(ElementType type, int numPreset)
 void VoiceParam::readSample(EltID id)
 {
     // Lecture d'un sample
-    this->fineTune          += m_sf2->get(id, champ_chPitchCorrection).cValue;
-    this->rootkey            = m_sf2->get(id, champ_byOriginalPitch).bValue;
-    this->loopStart         += m_sf2->get(id, champ_dwStartLoop).dwValue;
-    this->loopEnd           += m_sf2->get(id, champ_dwEndLoop).dwValue;
-    this->loopMode           = 0;
+    this->fineTune          = m_sf2->get(id, champ_chPitchCorrection).cValue;
+    this->rootkey           = m_sf2->get(id, champ_byOriginalPitch).bValue;
+    // Début et fin du sample
+    this->sampleStart       = 0;
+    this->sampleEnd         = m_sf2->get(id, champ_dwLength).dwValue;
+    // Début et fin de la boucle
+    this->loopStart         = m_sf2->get(id, champ_dwStartLoop).dwValue;
+    this->loopEnd           = m_sf2->get(id, champ_dwEndLoop).dwValue;
+    // Type de boucle
+    this->loopMode          = 0;
 }
 
-void VoiceParam::limit()
+void VoiceParam::limit(EltID id)
 {
     // Limites
     this->fineTune           = limit(this->fineTune,             -99,    99      );
@@ -205,6 +210,13 @@ void VoiceParam::limit()
     this->vibLfoToPitch      = limit(this->vibLfoToPitch,        -12000, 12000   );
     this->reverb             = limit(this->reverb,               0.,     100.    );
     this->chorus             = limit(this->chorus,               0.,     100.    );
+
+    // Positions de début et fin
+    int length = m_sf2->get(id, champ_dwLength).dwValue;
+    this->sampleStart        = limit(this->sampleStart, 0, length);
+    this->sampleEnd          = limit(this->sampleEnd, this->sampleStart, length);
+    this->loopStart          = limit(this->loopStart, this->sampleStart, this->sampleEnd);
+    this->loopEnd            = limit(this->loopEnd, this->loopStart, this->sampleEnd);
 }
 
 void VoiceParam::read(EltID id)

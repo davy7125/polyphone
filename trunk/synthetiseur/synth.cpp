@@ -521,7 +521,7 @@ void Synth::setStartLoop(int startLoop)
 }
 void Synth::setEndLoop(int endLoop)
 {
-    // mise a jour voix -1
+    // mise à jour voix -1
     m_mutexVoices.lock();
     Voice * voice = NULL;
     for (int i = 0; i < m_listeVoix.size(); i++)

@@ -163,7 +163,7 @@ public:
             {
                 // Touche retour ou suppr (efface la cellule)
                 this->table->blockSignals(true);
-                // Retrait des éléments sélectionné sur les lignes 0 à 3 inclus
+                // Retrait des éléments sélectionnés sur les lignes 0 à 3 inclus
                 QList<QTableWidgetItem *> listCell = this->table->selectedItems();
                 int nbElt = listCell.count();
                 for (int i = nbElt-1; i >= 0; i--)
