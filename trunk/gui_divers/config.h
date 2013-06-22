@@ -41,10 +41,12 @@ class Config : public QDialog
     Q_OBJECT
     
 public:
-    explicit Config(QWidget *parent = 0);
+    static Config * getInstance(QWidget *parent = NULL);
+    static void kill();
     ~Config();
     // accesseurs
     QString getFile(int num){if (num < 5 && num >= 0) return listFiles.at(num); else return "";}
+    QString getRecordFile()     {return recordFile;}
     bool getRam()               {return false/*ram*/;}
     int  getAudioIndex()        {return audioIndex;}
     bool getAfficheMod()        {return afficheMod;}
@@ -65,6 +67,7 @@ public:
     int  getSynthChoFrequency() {return choFrequency;}
     // méthodes publiques
     void addFavorite(QString filePath);
+    void setRecordFile(QString filePath);
     void show();
 
 public slots:
@@ -89,10 +92,13 @@ private slots:
     void on_dialChoFrequence_valueChanged(int value);
 
 private:
-    Ui::Config *ui;
+    Ui::Config * ui;
     MainWindow * mainWindow;
+    // Instance unique
+    static Config * _instance;
     // Paramètres configuration
     QStringList listFiles;
+    QString recordFile;
     bool ram;
     int audioType;
     int audioIndex;
@@ -109,6 +115,7 @@ private:
     // Autres
     bool loaded;
     // Méthodes privées
+    explicit Config(QWidget *parent = 0);
     void load();
     void store();
 };

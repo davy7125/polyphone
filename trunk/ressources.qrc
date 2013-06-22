@@ -41,6 +41,9 @@
         <file alias="settings">ressources/system-run.png</file>
         <file alias="close">ressources/window-close.png</file>
         <file alias="document">ressources/document.png</file>
+        <file alias="pause">ressources/player_pause.png</file>
+        <file alias="play">ressources/player_play.png</file>
+        <file alias="record">ressources/player_record.png</file>
     </qresource>
     <qresource prefix="/aide">
         <file alias="help.html">ressources/doc/help.html</file>

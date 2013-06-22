@@ -40,7 +40,7 @@ class DialogParamGlobal : public QDialog
     Q_OBJECT
     
 public:
-    explicit DialogParamGlobal(Pile_sf2 *sf2, EltID id, Config *configuration, QWidget *parent = 0);
+    explicit DialogParamGlobal(Pile_sf2 *sf2, EltID id, QWidget *parent = 0);
     ~DialogParamGlobal();
 
 private slots:

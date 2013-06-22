@@ -27,7 +27,7 @@
 #include "dialog_selectitems.h"
 
 // Constructeur, destructeur
-DialogParamGlobal::DialogParamGlobal(Pile_sf2 *sf2, EltID id, Config *configuration, QWidget *parent) :
+DialogParamGlobal::DialogParamGlobal(Pile_sf2 *sf2, EltID id, QWidget *parent) :
     QDialog(parent),
     _sf2(sf2),
     ui(new Ui::DialogParamGlobal),
@@ -39,7 +39,7 @@ DialogParamGlobal::DialogParamGlobal(Pile_sf2 *sf2, EltID id, Config *configurat
     this->ui->graphParamGlobal->raideurChanged(this->ui->doubleSpinRaideur->value());
     _listElt.append(id);
     // zone du clavier
-    ui->graphParamGlobal->setEtendueClavier(configuration->getKeyboardType());
+    ui->graphParamGlobal->setEtendueClavier(Config::getInstance()->getKeyboardType());
 }
 DialogParamGlobal::~DialogParamGlobal()
 {

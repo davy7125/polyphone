@@ -291,6 +291,7 @@
     <addaction name="menuInstrument"/>
     <addaction name="menuPreset"/>
     <addaction name="menuDivers"/>
+    <addaction name="actionMagn_tophone"/>
    </widget>
    <widget class="QMenu" name="menuAffichage">
     <property name="title">
@@ -1119,6 +1120,11 @@
   <action name="action_Association_auto_samples">
    <property name="text">
     <string>&amp;Association auto samples</string>
+   </property>
+  </action>
+  <action name="actionMagn_tophone">
+   <property name="text">
+    <string>Magnétophone</string>
    </property>
   </action>
  </widget>
@@ -2070,6 +2076,22 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>actionMagn_tophone</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>magnetophone()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>471</x>
+     <y>215</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>ouvrir()</slot>
@@ -2124,5 +2146,6 @@
   <slot>release()</slot>
   <slot>paramGlobal2()</slot>
   <slot>associationAutoSmpl()</slot>
+  <slot>magnetophone()</slot>
  </slots>
 </ui>
