@@ -93,6 +93,8 @@
         <file alias="pref 2 en.png">ressources/doc/pref 2 en.png</file>
         <file alias="outil4.png">ressources/doc/outil4.png</file>
         <file alias="outil4 en.png">ressources/doc/outil4 en.png</file>
+        <file alias="magneto en.png">ressources/doc/magneto en.png</file>
+        <file alias="magneto fr.png">ressources/doc/magneto fr.png</file>
     </qresource>
     <qresource prefix="/traductions">
         <file alias="polyphone_en.qm">ressources/traductions/polyphone_en.qm</file>
