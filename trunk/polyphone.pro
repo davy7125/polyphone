@@ -107,7 +107,8 @@ SOURCES	+= main.cpp \
     synthetiseur/elements/Delay.cpp \
     synthetiseur/elements/Chorus.cpp \
     synthetiseur/elements/DelayL.cpp \
-    gui_divers/dialog_rename.cpp
+    gui_divers/dialog_rename.cpp \
+    tools/dialog_magnetophone.cpp
 
 HEADERS  += mainwindow.h \
     sf2_core/sf2_types.h \
@@ -157,7 +158,8 @@ HEADERS  += mainwindow.h \
     synthetiseur/elements/Delay.h \
     synthetiseur/elements/Chorus.h \
     synthetiseur/elements/DelayL.h \
-    gui_divers/dialog_rename.h
+    gui_divers/dialog_rename.h \
+    tools/dialog_magnetophone.h
 
 FORMS    += mainwindow.ui \
     gui_divers/config.ui \
@@ -174,7 +176,8 @@ FORMS    += mainwindow.ui \
     tools/dialog_sifflements.ui \
     tools/dialog_release.ui \
     tools/dialog_selectitems.ui \
-    gui_divers/dialog_rename.ui
+    gui_divers/dialog_rename.ui \
+    tools/dialog_magnetophone.ui
 
 RESOURCES += ressources.qrc \
     clavier/pianokeybd.qrc

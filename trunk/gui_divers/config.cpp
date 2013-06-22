@@ -30,6 +30,21 @@
 #include "mainwindow.h"
 #include "portaudio.h"
 
+Config * Config::_instance = NULL;
+
+
+Config * Config::getInstance(QWidget * parent)
+{
+    if (_instance == NULL)
+        _instance = new Config(parent);
+    return _instance;
+}
+
+void Config::kill()
+{
+    delete _instance;
+}
+
 Config::Config(QWidget *parent) : QDialog(parent), ui(new Ui::Config)
 {
     for (int i = 0; i < 5; i++)
@@ -241,6 +256,12 @@ void Config::addFavorite(QString filePath)
     listFiles[0] = filePath;
     this->store();
 }
+void Config::setRecordFile(QString filePath)
+{
+    recordFile = filePath;
+    this->store();
+}
+
 void Config::setSynthGain(int val)
 {
     if (this->loaded)
@@ -319,6 +340,7 @@ void Config::load()
 {
     QSettings settings(this);
     // Chargement des fichiers récents
+    this->recordFile        = settings.value("recent_file/record", "").toString();
     int j = 0;
     QString strTmp;
     for (int i = 0; i < 5; i++)
@@ -360,6 +382,7 @@ void Config::load()
 void Config::store()
 {
     QSettings settings(this);
+    settings.setValue("recent_file/record",             this->recordFile);
     settings.setValue("recent_file/file_0",             listFiles.at(0));
     settings.setValue("recent_file/file_1",             listFiles.at(1));
     settings.setValue("recent_file/file_2",             listFiles.at(2));

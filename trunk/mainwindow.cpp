@@ -35,13 +35,19 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent, Qt::Window | Qt::W
                                                       Qt::WindowSystemMenuHint | Qt::WindowTitleHint |
                                                       Qt::CustomizeWindowHint),
     ui(new Ui::MainWindow),
-    configuration(this), help(this)
+    synth(NULL),
+    audioDevice(NULL),
+    configuration(Config::getInstance(this)),
+    help(this),
+    dialList(this),
+    keyboard(NULL),
+    dialogMagneto(NULL) // doit être appelé après le premier appel au singleton Config
 {
     ui->setupUi(this);
     // Taille max de l'application
     this->setMaximumSize(QApplication::desktop()->size());
     // Initialisation de l'objet pile sf2
-    this->sf2 = new Pile_sf2(ui->arborescence, this->configuration.getRam());
+    this->sf2 = new Pile_sf2(ui->arborescence, this->configuration->getRam());
     // Connexion avec mise à jour table
     connect(this->sf2, SIGNAL(updateTable(int,int,int,int)), this,
             SLOT(updateTable(int,int,int,int)));
@@ -60,18 +66,18 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent, Qt::Window | Qt::W
     this->audioThread.setPriority(QThread::HighestPriority);
     this->synthThread.setPriority(QThread::TimeCriticalPriority);
 
-    if (this->configuration.getAudioType() == 0)
-        this->setAudioEngine(this->configuration.getAudioIndex());
+    if (this->configuration->getAudioType() == 0)
+        this->setAudioEngine(this->configuration->getAudioIndex());
     else
-        this->setAudioEngine(this->configuration.getAudioType());
-    this->setSynthGain(this->configuration.getSynthGain());
-    this->setSynthChorus(this->configuration.getSynthChoLevel(),
-                         this->configuration.getSynthChoDepth(),
-                         this->configuration.getSynthChoFrequency());
-    this->setSynthReverb(this->configuration.getSynthRevLevel(),
-                         this->configuration.getSynthRevSize(),
-                         this->configuration.getSynthRevWidth(),
-                         this->configuration.getSynthRevDamp());
+        this->setAudioEngine(this->configuration->getAudioType());
+    this->setSynthGain(this->configuration->getSynthGain());
+    this->setSynthChorus(this->configuration->getSynthChoLevel(),
+                         this->configuration->getSynthChoDepth(),
+                         this->configuration->getSynthChoFrequency());
+    this->setSynthReverb(this->configuration->getSynthRevLevel(),
+                         this->configuration->getSynthRevSize(),
+                         this->configuration->getSynthRevWidth(),
+                         this->configuration->getSynthRevDamp());
     // Création des widgets
     page_sf2 = new Page_Sf2(this, ui->arborescence, ui->stackedWidget, this->sf2, this->synth);
     page_smpl = new Page_Smpl();
@@ -93,12 +99,12 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent, Qt::Window | Qt::W
     // Affichage logo logiciel
     ui->stackedWidget->setCurrentWidget(ui->page_Soft);
     // Préférences d'affichage
-    if (!this->configuration.getAfficheToolBar())
+    if (!this->configuration->getAfficheToolBar())
     {
         this->ui->actionBarre_d_outils->setChecked(0);
         ui->toolBar->setVisible(0);
     }
-    if (!this->configuration.getAfficheMod())
+    if (!this->configuration->getAfficheMod())
     {
         this->ui->actionSection_modulateurs->setChecked(0);
         this->page_inst->setModVisible(0);
@@ -108,7 +114,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent, Qt::Window | Qt::W
     this->keyboard = new PianoKeybdCustom(this);
     QHBoxLayout * layout = (QHBoxLayout*)this->ui->ensembleKeyboard->layout();
     layout->insertWidget(2, this->keyboard);
-    this->setKeyboardType(this->configuration.getKeyboardType());
+    this->setKeyboardType(this->configuration->getKeyboardType());
     // Déplacement dans la barre de menu
     this->ui->toolBar->setContentsMargins(0, 0, 0, 0);
     this->ui->ensembleKeyboard->setMaximumHeight(this->ui->toolBar->height()+5);
@@ -116,13 +122,19 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent, Qt::Window | Qt::W
     this->ui->velocityButton->setMaximumHeight(this->ui->toolBar->height()+5);
     this->ui->toolBar->addWidget(this->ui->ensembleKeyboard);
     this->showKeyboard(false);
-    this->ui->velocityButton->setValue(this->configuration.getKeyboardVelocity());
+    this->ui->velocityButton->setValue(this->configuration->getKeyboardVelocity());
     // Ouverture port midi et connexions
-    this->keyboard->openMidiPort(this->configuration.getNumPortMidi());
+    this->keyboard->openMidiPort(this->configuration->getNumPortMidi());
     connect(this->keyboard, SIGNAL(keyChanged(int,int)), this, SLOT(noteChanged(int,int)));
     connect(this->keyboard, SIGNAL(noteOn(int)), this, SLOT(noteOn(int)));
     connect(this->keyboard, SIGNAL(noteOff(int)), this, SLOT(noteOff(int)));
     connect(this->page_smpl, SIGNAL(noteChanged(int,int)), this, SLOT(noteChanged(int,int)));
+    // Connexions du magnétophone avec le synthé
+    connect(this->synth, SIGNAL(sampleRateChanged(qint32)), &dialogMagneto, SLOT(setSampleRate(qint32)));
+    connect(this->synth, SIGNAL(samplesRead(int)), &dialogMagneto, SLOT(avanceSamples(int)));
+    connect(&dialogMagneto, SIGNAL(startRecord(QString)), this->synth, SLOT(startNewRecord(QString)));
+    connect(&dialogMagneto, SIGNAL(endRecord()), this->synth, SLOT(endRecord()));
+    connect(&dialogMagneto, SIGNAL(pause(bool)), this->synth, SLOT(pause(bool)));
 }
 MainWindow::~MainWindow()
 {
@@ -142,6 +154,7 @@ MainWindow::~MainWindow()
     delete this->synth;
     delete this->audioDevice;
     delete this->keyboard;
+    Config::kill();
     delete ui;
 }
 
@@ -190,8 +203,9 @@ void MainWindow::closeEvent(QCloseEvent *event)
         msgBox.setDefaultButton(QMessageBox::Save);
         switch (msgBox.exec())
         {
-        case QMessageBox::Cancel: event->ignore();
-            break;
+        case QMessageBox::Cancel:
+            event->ignore();
+            return;
         case QMessageBox::Save:
             for (int i = 0; i < nbSf2; i++)
             {
@@ -207,6 +221,7 @@ void MainWindow::closeEvent(QCloseEvent *event)
             break;
         }
     }
+    dialogMagneto.close();
 }
 
 // Ouverture, fermeture, suppression
@@ -221,11 +236,11 @@ void MainWindow::ouvrir()
     fileName = fileNameTmp;
     ouvrir(fileName);
 }
-void MainWindow::ouvrirFichier1() {fileName = this->configuration.getFile(0); ouvrir(this->configuration.getFile(0));}
-void MainWindow::ouvrirFichier2() {fileName = this->configuration.getFile(1); ouvrir(this->configuration.getFile(1));}
-void MainWindow::ouvrirFichier3() {fileName = this->configuration.getFile(2); ouvrir(this->configuration.getFile(2));}
-void MainWindow::ouvrirFichier4() {fileName = this->configuration.getFile(3); ouvrir(this->configuration.getFile(3));}
-void MainWindow::ouvrirFichier5() {fileName = this->configuration.getFile(4); ouvrir(this->configuration.getFile(4));}
+void MainWindow::ouvrirFichier1() {fileName = this->configuration->getFile(0); ouvrir(this->configuration->getFile(0));}
+void MainWindow::ouvrirFichier2() {fileName = this->configuration->getFile(1); ouvrir(this->configuration->getFile(1));}
+void MainWindow::ouvrirFichier3() {fileName = this->configuration->getFile(2); ouvrir(this->configuration->getFile(2));}
+void MainWindow::ouvrirFichier4() {fileName = this->configuration->getFile(3); ouvrir(this->configuration->getFile(3));}
+void MainWindow::ouvrirFichier5() {fileName = this->configuration->getFile(4); ouvrir(this->configuration->getFile(4));}
 void MainWindow::ouvrir(QString fileName)
 {
     // Chargement d'un fichier .sf2
@@ -234,7 +249,7 @@ void MainWindow::ouvrir(QString fileName)
     {
     case 0:
         // le chargement s'est bien déroulé
-        this->configuration.addFavorite(fileName);
+        this->configuration->addFavorite(fileName);
         updateFavoriteFiles();
         updateDo();
         ui->arborescence->clearSelection();
@@ -376,7 +391,7 @@ int  MainWindow::sauvegarder(int indexSf2, bool saveAs)
         if (sf2->getQstr(id, champ_filename) == "")
         {
             QFileInfo fileInfo = fileNameTmp;
-            fileNameTmp = fileInfo.filePath() + QDir::separator() + sf2->getQstr(id, champ_name) + ".sf2";
+            fileNameTmp = fileInfo.filePath() + "/" + sf2->getQstr(id, champ_name) + ".sf2";
             fileNameTmp = QFileDialog::getSaveFileName(this, tr("Sauvegarder une soundfont"), fileNameTmp, tr("Fichier .sf2 (*.sf2)"));
         }
         else
@@ -391,7 +406,7 @@ int  MainWindow::sauvegarder(int indexSf2, bool saveAs)
     case 0:
         // sauvegarde ok
         updateDo();
-        this->configuration.addFavorite(fileName);
+        this->configuration->addFavorite(fileName);
         updateFavoriteFiles();
         if (ui->stackedWidget->currentWidget() == this->page_sf2)
             this->page_sf2->afficher();
@@ -427,8 +442,8 @@ void MainWindow::redo()
 // Fenetres / affichage
 void MainWindow::showConfig()
 {
-    this->configuration.setWindowModality(Qt::ApplicationModal);
-    this->configuration.show();
+    this->configuration->setWindowModality(Qt::ApplicationModal);
+    this->configuration->show();
 }
 void MainWindow::showAbout()
 {
@@ -447,12 +462,12 @@ void MainWindow::AfficherBarreOutils()
 {
     if (ui->actionBarre_d_outils->isChecked())
     {
-        this->configuration.setAfficheToolBar(1);
+        this->configuration->setAfficheToolBar(1);
         ui->toolBar->setVisible(1);
     }
     else
     {
-        this->configuration.setAfficheToolBar(0);
+        this->configuration->setAfficheToolBar(0);
         ui->toolBar->setVisible(0);
     }
 }
@@ -460,13 +475,13 @@ void MainWindow::afficherSectionModulateurs()
 {
     if (ui->actionSection_modulateurs->isChecked())
     {
-        this->configuration.setAfficheMod(1);
+        this->configuration->setAfficheMod(1);
         this->page_inst->setModVisible(1);
         this->page_prst->setModVisible(1);
     }
     else
     {
-        this->configuration.setAfficheMod(0);
+        this->configuration->setAfficheMod(0);
         this->page_inst->setModVisible(0);
         this->page_prst->setModVisible(0);
     }
@@ -522,7 +537,7 @@ void MainWindow::setKeyboardType(int val)
     this->ui->action6_octaves->blockSignals(false);
     this->ui->action128_notes->blockSignals(false);
     // Sauvegarde du paramètre
-    this->configuration.setKeyboardType(val);
+    this->configuration->setKeyboardType(val);
 }
 
 // Mise à jour
@@ -602,7 +617,7 @@ void MainWindow::updateActions()
         {
             // Affichage page Smpl
             page_smpl->afficher();
-            if (this->configuration.getKeyboardType())
+            if (this->configuration->getKeyboardType())
                 this->showKeyboard(true);
             else
                 this->showKeyboard(false);
@@ -613,7 +628,7 @@ void MainWindow::updateActions()
             {
                 // Affichage page Inst
                 page_inst->afficher();
-                if (this->configuration.getKeyboardType())
+                if (this->configuration->getKeyboardType())
                     this->showKeyboard(true);
                 else
                     this->showKeyboard(false);
@@ -622,7 +637,7 @@ void MainWindow::updateActions()
             {
                 // Affichage page Prst
                 page_prst->afficher();
-                if (this->configuration.getKeyboardType())
+                if (this->configuration->getKeyboardType())
                     this->showKeyboard(true);
                 else
                     this->showKeyboard(false);
@@ -777,9 +792,9 @@ void MainWindow::updateFavoriteFiles()
         case 3: qAct = ui->actionFichier_4; break;
         case 4: qAct = ui->actionFichier_5; break;
         }
-        if (this->configuration.getFile(i)[0] != '\0')
+        if (this->configuration->getFile(i)[0] != '\0')
         {
-            qAct->setText(this->configuration.getFile(i));
+            qAct->setText(this->configuration->getFile(i));
             qAct->setVisible(1);
             qAct->setEnabled(1);
         }
@@ -1870,15 +1885,15 @@ void MainWindow::importerSmpl()
                 val.cValue = (char)son->get(champ_chPitchCorrection);
                 this->sf2->set(id, champ_chPitchCorrection, val);
                 // Retrait automatique du blanc au départ ?
-                if (this->configuration.getRemoveBlank())
+                if (this->configuration->getRemoveBlank())
                     this->page_smpl->enleveBlanc(id);
                 // Ajustement automatique à la boucle ?
-                if (this->configuration.getWavAutoLoop())
+                if (this->configuration->getWavAutoLoop())
                     this->page_smpl->enleveFin(id);
             }
 
             // Chargement dans la ram
-            if (this->configuration.getRam())
+            if (this->configuration->getRam())
             {
                 val.wValue = 1;
                 this->sf2->set(id, champ_ram, val);
@@ -2236,13 +2251,13 @@ void MainWindow::transposer()       {this->page_smpl->transposer();}
 void MainWindow::sifflements()      {this->page_smpl->sifflements();}
 void MainWindow::desaccorder()      {this->page_inst->desaccorder();}
 void MainWindow::duplication()      {this->page_inst->duplication();}
-void MainWindow::paramGlobal()      {this->page_inst->paramGlobal(&this->configuration);}
+void MainWindow::paramGlobal()      {this->page_inst->paramGlobal();}
 void MainWindow::repartitionAuto()  {this->page_inst->repartitionAuto();}
 void MainWindow::spatialisation()   {this->page_inst->spatialisation();}
 void MainWindow::mixture()          {this->page_inst->mixture();}
 void MainWindow::release()          {this->page_inst->release();}
 void MainWindow::duplicationPrst()  {this->page_prst->duplication();}
-void MainWindow::paramGlobal2()     {this->page_prst->paramGlobal(&this->configuration);}
+void MainWindow::paramGlobal2()     {this->page_prst->paramGlobal();}
 void MainWindow::purger()
 {
     // Suppression des éléments non utilisés
@@ -2514,6 +2529,11 @@ void MainWindow::associationAutoSmpl()
         this->page_smpl->afficher();
 }
 
+// Affichage du magnétophone
+void MainWindow::magnetophone()
+{
+    dialogMagneto.show();
+}
 
 // Gestion du clavier virtuel / du son
 void MainWindow::setAudioEngine(int audioEngine)
@@ -2529,7 +2549,7 @@ void MainWindow::showKeyboard(bool val)
 }
 void MainWindow::setVelocity(int val)
 {
-    this->configuration.setKeyboardVelocity(val);
+    this->configuration->setKeyboardVelocity(val);
     if (val > 0)
         this->ui->labelVelocite->setText(QString("%1").arg(val));
     else
@@ -2543,7 +2563,7 @@ void MainWindow::openMidiPort(int val)
 {
     this->keyboard->openMidiPort(val);
 }
-void MainWindow::noteOn(int key)    {this->noteChanged(key, this->configuration.getKeyboardVelocity());}
+void MainWindow::noteOn(int key)    {this->noteChanged(key, this->configuration->getKeyboardVelocity());}
 void MainWindow::noteOff(int key)   {this->noteChanged(key, 0);}
 void MainWindow::noteChanged(int key, int vel)
 {
@@ -2557,7 +2577,7 @@ void MainWindow::noteChanged(int key, int vel)
         this->synth->play(0, 0, 0, -1, 0);
         return;
     }
-    int defaultVelocity = this->configuration.getKeyboardVelocity();
+    int defaultVelocity = this->configuration->getKeyboardVelocity();
     if (defaultVelocity > 0 && vel > 0)
         vel = defaultVelocity;
     if (vel > 0 && key != -1)

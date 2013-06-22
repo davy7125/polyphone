@@ -42,6 +42,7 @@
 #include "audiodevice.h"
 #include "synth.h"
 #include "pianokeybdcustom.h"
+#include "dialog_magnetophone.h"
 
 namespace Ui
 {
@@ -135,6 +136,7 @@ private slots:
     void attenuationMini();     // outil sf2, mise à jour de toutes les atténuations
     void purger();              // outil sf2, suppression des éléments non utilisés
     void associationAutoSmpl(); // outil sf2, association auto gauche-droite des samples
+    void magnetophone();        // affichage du magnétophone
 
     void noteOn(int key);
     void noteOff(int key);
@@ -156,10 +158,11 @@ private:
     QThreadEx audioThread;
     QThreadEx synthThread;
     QString fileName;
-    Config configuration;
+    Config * configuration;
     DialogHelp help;
     DialogList dialList;
     PianoKeybdCustom * keyboard;
+    DialogMagnetophone dialogMagneto;
 
     // Méthodes privées
     void updateTitle();
