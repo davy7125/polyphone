@@ -81,7 +81,7 @@ private:
     void readSample(EltID id);
     void read(EltID id);
     // Limites
-    void limit();
+    void limit(EltID id);
     static double limit(double val, double min, double max);
     static qint32 limit(qint32 val, qint32 min, qint32 max);
 };

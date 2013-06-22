@@ -37,7 +37,7 @@ Voice::Voice(QByteArray baData, DWORD smplRate, DWORD audioSmplRate, int note, i
     m_note(note),
     m_velocity(velocity),
     m_voiceParam(voiceParam),
-    m_currentSmplPos(0),
+    m_currentSmplPos(voiceParam->sampleStart),
     m_time(0),
     m_release(false),
     m_finished(false),
@@ -230,12 +230,12 @@ bool Voice::takeData(qint32 * data, qint64 nbRead)
     else
     {
         // Pas de boucle
-        if (m_baData.size()/4 - m_currentSmplPos < nbRead)
+        if (m_voiceParam->sampleEnd - m_currentSmplPos < nbRead)
         {
-            memcpy(data, &dataSmpl[m_currentSmplPos], m_baData.size() - 4 * m_currentSmplPos);
-            for (int i = m_baData.size()/4 - m_currentSmplPos; i < nbRead; i++)
+            memcpy(data, &dataSmpl[m_currentSmplPos], 4 * (m_voiceParam->sampleEnd - m_currentSmplPos));
+            for (int i = m_voiceParam->sampleEnd - m_currentSmplPos; i < nbRead; i++)
                 data[i] = 0;
-            m_currentSmplPos = m_baData.size() / 4;
+            m_currentSmplPos = m_voiceParam->sampleEnd;
             ok = false;
         }
         else

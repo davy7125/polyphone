@@ -394,6 +394,8 @@ void Tree::updateSelectionInfo()
     int indexSf2 = -1;
     int type = -1;
     int family = -1;
+    bool isInst = true;
+    bool isPrst = true;
     EltID id;
     QTreeWidgetItem * itemTmp;
     for (int i = 0; i < this->selectedItems().count(); i++)
@@ -415,8 +417,11 @@ void Tree::updateSelectionInfo()
                 this->infoIsSelectedItemsTypeUnique = this->infoIsSelectedItemsTypeUnique && (type == id.typeElement);
                 this->infoIsSelectedItemsFamilyUnique = this->infoIsSelectedItemsFamilyUnique && (family == id.indexElt);
             }
+            isInst = isInst && (id.typeElement == elementInst || id.typeElement == elementInstSmpl);
+            isPrst = isPrst && (id.typeElement == elementPrst || id.typeElement == elementPrstInst);
         }
     }
+    this->infoIsSelectedItemsFamilyUnique = this->infoIsSelectedItemsFamilyUnique && (isInst || isPrst);
     if (!this->infoSelectedItemsNumber)
     {
         this->infoIsSelectedItemsSf2Unique = false;
