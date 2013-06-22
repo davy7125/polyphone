@@ -325,7 +325,7 @@ public:
     void afficher();
     void reselect();
     void updateId(EltID id);
-    void paramGlobal(Config *configuration);
+    void paramGlobal();
     void enlightColumn(int key, bool isEnlighted);
 
 protected:

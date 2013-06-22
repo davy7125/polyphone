@@ -66,10 +66,15 @@ public:
 public slots:
     // Exécution par synth (thread 2)
     void start();
+    void startNewRecord(QString fileName);
+    void endRecord();
+    void pause(bool isOn);
 
 signals:
     void currentPosChanged(int pos);
     void readFinished();
+    void sampleRateChanged(qint32 sampleRate);
+    void samplesRead(int number);
 
 protected slots:
     void generateData(qint64 nbData = 0);

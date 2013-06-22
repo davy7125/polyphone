@@ -2395,7 +2395,7 @@ int PageTable::limit(int iVal, Champ champ, EltID id)
     return ret;
 }
 
-void PageTable::paramGlobal(Config *configuration)
+void PageTable::paramGlobal()
 {
     this->sf2->prepareNewActions();
     EltID id = this->tree->getID(0);
@@ -2438,7 +2438,7 @@ void PageTable::paramGlobal(Config *configuration)
             QMessageBox::warning(this, tr("Attention"), trUtf8("Aucune étendue de notes spécifiée pour le preset."));
         return;
     }
-    DialogParamGlobal * dialogParam = new DialogParamGlobal(this->sf2, id, configuration, this);
+    DialogParamGlobal * dialogParam = new DialogParamGlobal(this->sf2, id, this);
     dialogParam->setAttribute(Qt::WA_DeleteOnClose, true);
     this->connect(dialogParam, SIGNAL(accepted(QVector<double>,QList<EltID>,int,int)),
                   SLOT(paramGlobal(QVector<double>,QList<EltID>,int,int)));

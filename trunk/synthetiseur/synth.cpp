@@ -419,7 +419,7 @@ void Synth::setStereo(int isStereo, bool withMutex)
     if (withMutex)
         m_mutexVoices.lock();
     m_isStereo = isStereo;
-    // Mise a jour voix -1 et -2
+    // Mise à jour voix -1 et -2
     Voice * voice1 = NULL;
     Voice * voice2 = NULL;
     for (int i = 0; i < m_listeVoix.size(); i++)
@@ -615,4 +615,21 @@ void Synth::setFormat(AudioFormat format)
     m_format = format;
     // Réinitialisation
     this->stop();
+    // Envoi signal de modification de l'échantillonnage
+    this->sampleRateChanged(format.sampleRate());
+}
+
+void Synth::startNewRecord(QString fileName)
+{
+
+}
+
+void Synth::endRecord()
+{
+
+}
+
+void Synth::pause(bool isOn)
+{
+
 }
