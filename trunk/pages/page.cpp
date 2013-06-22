@@ -1654,21 +1654,24 @@ void PageTable::selected()
     if (this->preparation) return;
     // Mise à jour de la sélection dans l'arborescence
     this->tree->blockSignals(true);
-    this->tree->selectNone();
     int compte = this->table->selectedItems().count();
-    int colonne;
-    for (int i = 0; i < compte; i++)
-    {
-        colonne = this->table->selectedItems().takeAt(i)->column();
-        this->tree->select(this->table->getID(colonne));
-    }
-    // Mise à jour des informations sur les mods
     if (compte)
     {
-        this->preparation = 1;
-        colonne = this->table->selectedItems().takeAt(compte-1)->column();
-        this->afficheMod(this->table->getID(colonne));
-        this->preparation = 0;
+        this->tree->selectNone();
+        int colonne;
+        for (int i = 0; i < compte; i++)
+        {
+            colonne = this->table->selectedItems().takeAt(i)->column();
+            this->tree->select(this->table->getID(colonne));
+        }
+        // Mise à jour des informations sur les mods
+        if (compte)
+        {
+            this->preparation = 1;
+            colonne = this->table->selectedItems().takeAt(compte-1)->column();
+            this->afficheMod(this->table->getID(colonne));
+            this->preparation = 0;
+        }
     }
     this->tree->blockSignals(false);
 }

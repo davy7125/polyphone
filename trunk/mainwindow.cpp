@@ -598,27 +598,21 @@ void MainWindow::updateActions()
         typeUnique = ui->arborescence->isSelectedItemsTypeUnique();
         familleUnique = ui->arborescence->isSelectedItemsFamilyUnique();
         // Affichage partie droite
-        if (typeUnique && fichierUnique && familleUnique)
+        if (id.typeElement == elementSmpl && nb == 1)
         {
-            if (id.typeElement == elementSmpl)
+            // Affichage page Smpl
+            page_smpl->afficher();
+            if (this->configuration.getKeyboardType())
+                this->showKeyboard(true);
+            else
+                this->showKeyboard(false);
+        }
+        else if (fichierUnique && familleUnique)
+        {
+            if (id.typeElement == elementInst || id.typeElement == elementInstSmpl)
             {
-                page_smpl->afficher();
-                if (this->configuration.getKeyboardType())
-                    this->showKeyboard(true);
-                else
-                    this->showKeyboard(false);
-            }
-            else if (id.typeElement == elementInst || id.typeElement == elementInstSmpl)
-            {
+                // Affichage page Inst
                 page_inst->afficher();
-                if (this->configuration.getKeyboardType())
-                    this->showKeyboard(true);
-                else
-                    this->showKeyboard(false);
-            }
-            else if (id.typeElement == elementPrst || id.typeElement == elementPrstInst)
-            {
-                page_prst->afficher();
                 if (this->configuration.getKeyboardType())
                     this->showKeyboard(true);
                 else
@@ -626,13 +620,20 @@ void MainWindow::updateActions()
             }
             else
             {
-                page_sf2->afficher();
-                this->showKeyboard(false);
+                // Affichage page Prst
+                page_prst->afficher();
+                if (this->configuration.getKeyboardType())
+                    this->showKeyboard(true);
+                else
+                    this->showKeyboard(false);
             }
         }
         else
         {
-            ui->stackedWidget->setCurrentWidget(ui->page_Soft);
+            if (fichierUnique)
+                page_sf2->afficher();
+            else
+                ui->stackedWidget->setCurrentWidget(ui->page_Soft);
             this->showKeyboard(false);
         }
     }
@@ -2573,32 +2574,19 @@ void MainWindow::noteChanged(int key, int vel)
     // Lecture ?
     if (this->ui->arborescence->getSelectedItemsNumber())
     {
-        if (this->ui->arborescence->isSelectedItemsSf2Unique() &&
-            this->ui->arborescence->isSelectedItemsTypeUnique())
+        EltID id = this->ui->arborescence->getID(0);
+        if (this->ui->arborescence->isSelectedItemsSf2Unique())
         {
-            EltID id = this->ui->arborescence->getID(0);
-
-            QTime time = QTime::currentTime();
-
             if (id.typeElement == elementSmpl && this->ui->arborescence->getSelectedItemsNumber() == 1)
                 this->synth->play(0, id.indexSf2, id.indexElt, key, vel);
-            else if ((id.typeElement == elementInst || id.typeElement == elementInstSmpl) &&
-                     this->ui->arborescence->isSelectedItemsFamilyUnique())
-                this->synth->play(1, id.indexSf2, id.indexElt, key, vel);
-            else if ((id.typeElement == elementPrst || id.typeElement == elementPrstInst) &&
-                     this->ui->arborescence->isSelectedItemsFamilyUnique())
-                this->synth->play(2, id.indexSf2, id.indexElt, key, vel);
-
-            if (vel)
+            else if (this->ui->arborescence->isSelectedItemsFamilyUnique())
             {
-                if (id.typeElement == elementSmpl && this->ui->arborescence->getSelectedItemsNumber() == 1)
-                    qDebug() << "lecture smpl" << time.msecsTo(QTime::currentTime()) << "ms";
-                else if ((id.typeElement == elementInst || id.typeElement == elementInstSmpl) &&
-                         this->ui->arborescence->isSelectedItemsFamilyUnique())
-                    qDebug() << "lecture inst" << time.msecsTo(QTime::currentTime()) << "ms";
+                if ((id.typeElement == elementInst || id.typeElement == elementInstSmpl) &&
+                        this->ui->arborescence->isSelectedItemsFamilyUnique())
+                    this->synth->play(1, id.indexSf2, id.indexElt, key, vel);
                 else if ((id.typeElement == elementPrst || id.typeElement == elementPrstInst) &&
                          this->ui->arborescence->isSelectedItemsFamilyUnique())
-                    qDebug() << "lecture prst" << time.msecsTo(QTime::currentTime()) << "ms";
+                    this->synth->play(2, id.indexSf2, id.indexElt, key, vel);
             }
         }
     }
