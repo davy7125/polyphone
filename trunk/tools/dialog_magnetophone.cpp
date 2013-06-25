@@ -1,3 +1,27 @@
+/***************************************************************************
+**                                                                        **
+**  Polyphone, a soundfont editor                                         **
+**  Copyright (C) 2013 Davy Triponney                                     **
+**                                                                        **
+**  This program is free software: you can redistribute it and/or modify  **
+**  it under the terms of the GNU General Public License as published by  **
+**  the Free Software Foundation, either version 3 of the License, or     **
+**  (at your option) any later version.                                   **
+**                                                                        **
+**  This program is distributed in the hope that it will be useful,       **
+**  but WITHOUT ANY WARRANTY; without even the implied warranty of        **
+**  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the         **
+**  GNU General Public License for more details.                          **
+**                                                                        **
+**  You should have received a copy of the GNU General Public License     **
+**  along with this program.  If not, see http://www.gnu.org/licenses/.   **
+**                                                                        **
+****************************************************************************
+**           Author: Davy Triponney                                       **
+**  Website/Contact: http://www.polyphone.fr/                             **
+**             Date: 01.01.2013                                           **
+***************************************************************************/
+
 #include "dialog_magnetophone.h"
 #include "ui_dialog_magnetophone.h"
 #include <QTime>
@@ -6,10 +30,12 @@
 #include <QDesktopServices>
 #include <QFileDialog>
 #include "config.h"
+#include "synth.h"
 
 DialogMagnetophone::DialogMagnetophone(QWidget *parent) :
     QWidget(parent),
-    ui(new Ui::DialogMagnetophone)
+    ui(new Ui::DialogMagnetophone),
+    _sampleRate(0)
 {
     ui->setupUi(this);
 
@@ -34,7 +60,6 @@ void DialogMagnetophone::initGui()
     // Initialisation des variables
     _isPause = false;
     _currentSample = 0;
-    _sampleRate = 0;
 }
 
 void DialogMagnetophone::setSampleRate(qint32 sampleRate)
@@ -58,7 +83,7 @@ void DialogMagnetophone::closeEvent(QCloseEvent *)
 {
     // Arrêt de l'enregistrement si besoin
     if (ui->pushRecord->isChecked())
-        this->endRecord();
+        _synth->endRecord();
     this->initGui();
 }
 
@@ -72,11 +97,13 @@ void DialogMagnetophone::on_pushRecord_toggled(bool checked)
                                                    defaultPath, tr("Fichier .wav (*.wav)"));
         if (defaultPath.size())
         {
+            if (defaultPath.right(4).toLower() != ".wav")
+                defaultPath.append(".wav");
             Config::getInstance()->setRecordFile(defaultPath);
             // Début de l'enregistrement
             ui->pushPlayPause->setIcon(QIcon(":/icones/pause"));
             _isPause = false;
-            this->startRecord(defaultPath);
+            _synth->startNewRecord(defaultPath);
         }
         else
         {
@@ -88,9 +115,8 @@ void DialogMagnetophone::on_pushRecord_toggled(bool checked)
     else
     {
         // Arrêt de l'enregistrement
-        ui->pushPlayPause->setIcon(QIcon(":/icones/play"));
-        _isPause = true;
-        this->endRecord();
+        this->initGui();
+        _synth->endRecord();
     }
 }
 
@@ -103,7 +129,7 @@ void DialogMagnetophone::on_pushPlayPause_clicked()
             ui->pushPlayPause->setIcon(QIcon(":/icones/play"));
         else
             ui->pushPlayPause->setIcon(QIcon(":/icones/pause"));
-        this->pause(_isPause);
+        _synth->pause(_isPause);
     }
 }
 

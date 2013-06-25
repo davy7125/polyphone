@@ -55,6 +55,10 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent, Qt::Window | Qt::W
     this->synth = new Synth(this->sf2);
     this->synth->moveToThread(&this->synthThread);
     this->synthThread.start();
+    // Connexions du magnétophone avec le synthé
+    this->dialogMagneto.setSynth(this->synth);
+    connect(this->synth, SIGNAL(sampleRateChanged(qint32)), &dialogMagneto, SLOT(setSampleRate(qint32)));
+    connect(this->synth, SIGNAL(samplesRead(int)), &dialogMagneto, SLOT(avanceSamples(int)));
     // Initialisation de la sortie audio
     this->audioDevice = new AudioDevice(this->synth);
     connect(this, SIGNAL(initAudio(int)), this->audioDevice, SLOT(initAudio(int)));
@@ -129,12 +133,6 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent, Qt::Window | Qt::W
     connect(this->keyboard, SIGNAL(noteOn(int)), this, SLOT(noteOn(int)));
     connect(this->keyboard, SIGNAL(noteOff(int)), this, SLOT(noteOff(int)));
     connect(this->page_smpl, SIGNAL(noteChanged(int,int)), this, SLOT(noteChanged(int,int)));
-    // Connexions du magnétophone avec le synthé
-    connect(this->synth, SIGNAL(sampleRateChanged(qint32)), &dialogMagneto, SLOT(setSampleRate(qint32)));
-    connect(this->synth, SIGNAL(samplesRead(int)), &dialogMagneto, SLOT(avanceSamples(int)));
-    connect(&dialogMagneto, SIGNAL(startRecord(QString)), this->synth, SLOT(startNewRecord(QString)));
-    connect(&dialogMagneto, SIGNAL(endRecord()), this->synth, SLOT(endRecord()));
-    connect(&dialogMagneto, SIGNAL(pause(bool)), this->synth, SLOT(pause(bool)));
 }
 MainWindow::~MainWindow()
 {
