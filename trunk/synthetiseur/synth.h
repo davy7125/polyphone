@@ -41,7 +41,7 @@ public:
     Synth(Pile_sf2 * sf2, QObject *parent = NULL);
     ~Synth();
 
-    // Execution par mainWindow (thread 1)
+    // Exécution par mainWindow (thread 1)
     void interruption();
     void play(int type, int idSf2, int idElt, int note, int velocity,
               VoiceParam * voiceParamTmp = NULL);
@@ -58,6 +58,10 @@ public:
     void setRootKey(int rootKey);
     void setSinusEnabled(int isEnabled, bool withMutex = true);
     void setPitchCorrection(int correction);
+    // Gestion de l'enregistrement
+    void startNewRecord(QString fileName);
+    void endRecord();
+    void pause(bool isOn);
 
     // Exécution par le serveur audio (thread 3)
     qint64 readData(char *data1, char *data2, qint64 maxlen);
@@ -66,9 +70,6 @@ public:
 public slots:
     // Exécution par synth (thread 2)
     void start();
-    void startNewRecord(QString fileName);
-    void endRecord();
-    void pause(bool isOn);
 
 signals:
     void currentPosChanged(int pos);
@@ -109,6 +110,11 @@ private:
     QMutex m_mutexCompleted;
     // Interruption de la boucle
     bool m_interrupt;
+    // Gestion de l'enregistrement
+    QFile * m_recordFile;
+    QDataStream m_recordStream;
+    bool m_isRecording;
+    quint32 m_recordLength;
 };
 
 

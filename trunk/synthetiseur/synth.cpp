@@ -36,7 +36,9 @@ Synth::Synth(Pile_sf2 *sf2, QObject *parent) :
     m_isSinusEnabled(false),
     m_choLevel(0), m_choDepth(0), m_choFrequency(0),
     m_clipCoef(1),
-    m_interrupt(false)
+    m_interrupt(false),
+    m_recordFile(NULL),
+    m_isRecording(true)
 {
     m_mutexInterrupt.unlock();
     m_mutexVoices.unlock();
@@ -304,12 +306,23 @@ void Synth::generateData(qint64 nbData)
         dataF2[i] = (float)data2[i];
     }
 
-    double sum = 0;
-    for (int i = 0; i < qMin(100, (int)nbData); i++)
-        sum += dataF1[i] + dataF2[i];
-
     //// ECRITURE SUR LE DOUBLE BUFFER ////
     this->writeData((char *)data1, (char *)data2, nbData * 4);
+
+    // Enregistrement dans un fichier si demandé
+    if (m_recordFile && m_isRecording)
+    {
+        // Entrelacement et écriture
+        for (int i = nbData - 1; i >= 0; i--)
+        {
+            dataF1[2 * i + 1] = dataF2[i];
+            dataF1[2 * i]     = dataF1[i];
+        }
+        m_recordStream.writeRawData((char*)dataF1, nbData * 8);
+        // Prise en compte de l'avance
+        m_recordLength += nbData * 8;
+        this->samplesRead(nbData);
+    }
 }
 void Synth::clip(double * data1, double * data2, qint64 size)
 {
@@ -621,15 +634,77 @@ void Synth::setFormat(AudioFormat format)
 
 void Synth::startNewRecord(QString fileName)
 {
+    if (m_recordFile)
+        this->endRecord();
+    m_recordFile = new QFile(fileName);
+    if (m_recordFile->open(QIODevice::WriteOnly))
+    {
+        // Création de l'entête
+        quint32 dwTemp = 0;
+        quint16 wTemp;
+        m_recordStream.setDevice(m_recordFile);
+        m_recordStream.setByteOrder(QDataStream::LittleEndian);
+        m_recordLength = 0;
+        // Entete
+        m_recordStream.writeRawData("RIFF", 4);
+        m_recordStream << (quint32)(m_recordLength + 18 + 4 + 8 + 8);
+        m_recordStream.writeRawData("WAVE", 4);
+        ///////////// BLOC FMT /////////////
+        m_recordStream.writeRawData("fmt ", 4);
+        dwTemp = 18;
+        m_recordStream << dwTemp;
+        // Compression code
+        wTemp = 3;
+        m_recordStream << wTemp;
+        // Number of channels
+        wTemp = 2;
+        m_recordStream << wTemp;
+        // Sample rate
+        dwTemp = m_format.sampleRate();
+        m_recordStream << dwTemp;
+        // Average byte per second
+        dwTemp *= 2 * 4;
+        m_recordStream << dwTemp;
+        // Block align
+        wTemp = 2 * 4;
+        m_recordStream << wTemp;
+        // Significants bits per smpl
+        m_recordStream << (quint16)32;
+        // Extra format bytes
+        wTemp = 0;
+        m_recordStream << wTemp;
+        ///////////// BLOC DATA /////////////
+        m_recordStream.writeRawData("data", 4);
+        m_recordStream << m_recordLength;
 
+        m_isRecording = true;
+    }
+    else
+    {
+        delete m_recordFile;
+        m_recordFile = NULL;
+    }
 }
-
 void Synth::endRecord()
 {
+    if (m_recordFile)
+    {
+        // Ajustement des dimensions du fichier
+        m_recordFile->seek(4);
+        m_recordStream << (quint32)(m_recordLength + 18 + 4 + 8 + 8);
+        m_recordFile->seek(42);
+        m_recordStream << m_recordLength;
 
+        // Fermeture
+        m_recordStream.setDevice(NULL);
+        m_recordFile->close();
+        delete m_recordFile;
+        m_recordFile = NULL;
+
+        m_isRecording = false;
+    }
 }
-
 void Synth::pause(bool isOn)
 {
-
+    m_isRecording = !isOn;
 }
