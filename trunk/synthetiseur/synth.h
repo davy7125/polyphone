@@ -115,6 +115,7 @@ private:
     QDataStream m_recordStream;
     bool m_isRecording;
     quint32 m_recordLength;
+    QMutex m_mutexRecord;
 };
 
 
