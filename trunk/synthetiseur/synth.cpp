@@ -43,6 +43,7 @@ Synth::Synth(Pile_sf2 *sf2, QObject *parent) :
     m_mutexInterrupt.unlock();
     m_mutexVoices.unlock();
     m_mutexCompleted.unlock();
+    m_mutexRecord.unlock();
 }
 Synth::~Synth()
 {
@@ -310,6 +311,7 @@ void Synth::generateData(qint64 nbData)
     this->writeData((char *)data1, (char *)data2, nbData * 4);
 
     // Enregistrement dans un fichier si demandé
+    m_mutexRecord.lock();
     if (m_recordFile && m_isRecording)
     {
         // Entrelacement et écriture
@@ -323,6 +325,7 @@ void Synth::generateData(qint64 nbData)
         m_recordLength += nbData * 8;
         this->samplesRead(nbData);
     }
+    m_mutexRecord.unlock();
 }
 void Synth::clip(double * data1, double * data2, qint64 size)
 {
@@ -634,6 +637,7 @@ void Synth::setFormat(AudioFormat format)
 
 void Synth::startNewRecord(QString fileName)
 {
+    m_mutexRecord.lock();
     if (m_recordFile)
         this->endRecord();
     m_recordFile = new QFile(fileName);
@@ -684,9 +688,11 @@ void Synth::startNewRecord(QString fileName)
         delete m_recordFile;
         m_recordFile = NULL;
     }
+    m_mutexRecord.unlock();
 }
 void Synth::endRecord()
 {
+    m_mutexRecord.lock();
     if (m_recordFile)
     {
         // Ajustement des dimensions du fichier
@@ -703,8 +709,11 @@ void Synth::endRecord()
 
         m_isRecording = false;
     }
+    m_mutexRecord.unlock();
 }
 void Synth::pause(bool isOn)
 {
+    m_mutexRecord.lock();
     m_isRecording = !isOn;
+    m_mutexRecord.unlock();
 }
