@@ -56,10 +56,12 @@ signals:
     void accepted(QVector<double> dValues, QList<EltID> listElt, int typeModif, int param);
 
 private:
+    Config * _conf;
     Pile_sf2 * _sf2;
     Ui::DialogParamGlobal *ui;
     QList<EltID> _listElt;
     EltID _initialID;
+    bool _isPrst;
 };
 
 class GraphParamGlobal : public QCustomPlot
@@ -116,6 +118,7 @@ public:
     void setEtendueClavier(int keyboardType);
     void setMinMax(double min, double max) { yMin = qMin(min, max); yMax = qMax(min, max); }
     QVector<double> getValues();
+    void setValues(QVector<double> val);
 
 private:
     TypeForme forme;

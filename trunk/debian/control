@@ -1,0 +1,35 @@
+Source: polyphone
+Section: sound
+Priority: optional
+Maintainer: Davy Triponney <davy.triponney@gmail.com>
+Build-Depends: debhelper (>= 8.0.0), dpkg-dev (>= 1.16.1~)
+Standards-Version: 3.9.4
+Homepage: http://www.polyphone.fr
+
+Package: polyphone
+Architecture: any
+Replaces: polyphone-0.1
+Depends: ${shlibs:Depends}, ${misc:Depends}, libx11-data, fontconfig-config, locales, libatk1.0-data, liborbit2, libicu48, libglib2.0-data, cups-filters, libqt4-svg, libasound2, libportaudio2
+Description: soundfont editor
+ Polyphone is a free software for editing soundfonts in format sf2.
+ These files contain a multitude of audio samples put together and
+ configured so as to form musical instruments that can be used by
+ synthesizers such as fluidsynth and played using a MIDI keyboard.
+ The goal of Polyphone is to provide:
+  - a simple and efficient interface for creating and editing .sf2 files,
+ available on both Linux and Windows,
+  - tools to facilitate and automate the setting of different parameters,
+ making it possible to handle a large amount of data.
+ .
+ Main features:
+  - support of sf2 format v2.01 and v2.04,
+  - support for 24 bits samples,
+  - support for jack and asio audio servers,
+  - analysis of frequency peaks and estimation of sample pitch,
+  - automatic loop of samples, with steady state detection and use of a
+ crossfade,
+  - simultaneous edition of every samples of an instrument,
+  - specific tools for musical instrument creation,
+  - a recorder, for the record of what is played in a .wav file,
+  - built-in synthetizer, using a virtual keyboard or midi signals,
+  - built-in user manual.

@@ -29,17 +29,47 @@
 // Constructeur, destructeur
 DialogParamGlobal::DialogParamGlobal(Pile_sf2 *sf2, EltID id, QWidget *parent) :
     QDialog(parent),
+    _conf(Config::getInstance()),
     _sf2(sf2),
     ui(new Ui::DialogParamGlobal),
     _initialID(id)
 {
     ui->setupUi(this);
     if (id.typeElement == elementPrst || id.typeElement == elementPrstInst)
+    {
         this->ui->pushApplyToOthers->setText(trUtf8("Appliquer à d'autres presets..."));
-    this->ui->graphParamGlobal->raideurChanged(this->ui->doubleSpinRaideur->value());
+        _isPrst = true;
+    }
+    else
+        _isPrst = false;
+    ui->comboMotif->blockSignals(true);
+    ui->comboMotif->setCurrentIndex(_conf->getTools_global_motif(_isPrst));
+    ui->comboMotif->blockSignals(false);
+    ui->doubleSpinRaideur->blockSignals(true);
+    ui->doubleSpinRaideur->setValue(_conf->getTools_global_raideur(_isPrst));
+    ui->doubleSpinRaideur->blockSignals(false);
+    ui->doubleSpinMin->blockSignals(true);
+    ui->doubleSpinMin->setValue(_conf->getTools_global_mini(_isPrst));
+    ui->doubleSpinMin->blockSignals(false);
+    ui->doubleSpinMax->blockSignals(true);
+    ui->doubleSpinMax->setValue(_conf->getTools_global_maxi(_isPrst));
+    ui->doubleSpinMax->blockSignals(false);
+    ui->comboModif->blockSignals(true);
+    ui->comboModif->setCurrentIndex(_conf->getTools_global_modification(_isPrst));
+    ui->comboModif->blockSignals(false);
+    ui->comboValeur->blockSignals(true);
+    ui->comboValeur->setCurrentIndex(_conf->getTools_global_parametre(_isPrst));
+    ui->comboValeur->blockSignals(false);
+
+    // Initialisation id
     _listElt.append(id);
+
+    // Dessin
+    this->indexMotifChanged(this->ui->comboMotif->currentIndex());
+    this->ui->graphParamGlobal->setValues(_conf->getTools_global_courbe(_isPrst));
+
     // zone du clavier
-    ui->graphParamGlobal->setEtendueClavier(Config::getInstance()->getKeyboardType());
+    ui->graphParamGlobal->setEtendueClavier(_conf->getKeyboardType());
 }
 DialogParamGlobal::~DialogParamGlobal()
 {
@@ -79,6 +109,14 @@ void DialogParamGlobal::maxChanged(double value)
 }
 void DialogParamGlobal::accept()
 {
+    // Sauvegarde des paramètres
+    _conf->setTools_global_courbe(_isPrst, this->ui->graphParamGlobal->getValues());
+    _conf->setTools_global_motif(_isPrst, this->ui->comboMotif->currentIndex());
+    _conf->setTools_global_raideur(_isPrst, this->ui->doubleSpinRaideur->value());
+    _conf->setTools_global_mini(_isPrst, this->ui->doubleSpinMin->value());
+    _conf->setTools_global_maxi(_isPrst, this->ui->doubleSpinMax->value());
+    _conf->setTools_global_modification(_isPrst, this->ui->comboModif->currentIndex());
+    _conf->setTools_global_parametre(_isPrst, this->ui->comboValeur->currentIndex());
     // Récupération et mise en forme des modificateurs
     QVector<double> dValues = this->ui->graphParamGlobal->getValues();
     double dMin = this->ui->doubleSpinMin->value();
@@ -245,6 +283,11 @@ void GraphParamGlobal::raideurChanged(double value)
 QVector<double> GraphParamGlobal::getValues()
 {
     return this->dValues;
+}
+void GraphParamGlobal::setValues(QVector<double> val)
+{
+    for (int i = 0; i < qMin(this->nbPoints, val.size()); i++)
+        dValues[i] = val.at(i);
 }
 
 // Méthodes privées

@@ -44,6 +44,9 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent, Qt::Window | Qt::W
     dialogMagneto(NULL) // doit être appelé après le premier appel au singleton Config
 {
     ui->setupUi(this);
+#if QT_VERSION >= 0x040700
+    ui->editSearch->setPlaceholderText(trUtf8("Rechercher..."));
+#endif
     // Taille max de l'application
     this->setMaximumSize(QApplication::desktop()->size());
     // Initialisation de l'objet pile sf2
@@ -2370,11 +2373,13 @@ void MainWindow::attenuationMini()
 {
     // Atténuation minimale souhaitée
     bool ok;
+    Config * conf = Config::getInstance();
     double rep = QInputDialog::getDouble(this, tr("Question"),
                                          QString::fromUtf8(tr("Atténuation minimale (dB) :").toStdString().c_str()),
-                                         5, 0, 200, 2,
+                                         conf->getTools_2_attenuation_dB(), 0, 200, 2,
                                          &ok);
     if (!ok) return;
+    conf->setTools_2_attenuation_dB(rep);
     // Calcul de l'atténuation minimale actuelle
     EltID id = this->ui->arborescence->getID(0);
     id.typeElement = elementInst;

@@ -24,12 +24,17 @@
 
 #include "dialog_sifflements.h"
 #include "ui_dialog_sifflements.h"
+#include "config.h"
 
 DialogSifflements::DialogSifflements(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::DialogSifflements)
 {
     ui->setupUi(this);
+    Config * conf = Config::getInstance();
+    ui->spinFreq1->setValue(conf->getTools_s_sifflements_debut());
+    ui->spinFreq2->setValue(conf->getTools_s_sifflements_fin());
+    ui->doubleSpinRaideur->setValue(conf->getTools_s_sifflements_raideur());
 }
 
 DialogSifflements::~DialogSifflements()
