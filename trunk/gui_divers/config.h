@@ -28,6 +28,7 @@
 #include <QMessageBox>
 #include <QDialog>
 #include <QString>
+#include <QSettings>
 
 namespace Ui
 {
@@ -65,6 +66,149 @@ public:
     int  getSynthChoLevel()     {return choLevel;}
     int  getSynthChoDepth()     {return choDepth;}
     int  getSynthChoFrequency() {return choFrequency;}
+    // Accès aux paramètres des outils
+    int    getTools_s_sifflements_debut()   { return settings.value("tools/sample/sifflements_debut", 8000).toInt(); }
+    int    getTools_s_sifflements_fin()     { return settings.value("tools/sample/sifflements_fin", 20000).toInt();}
+    double getTools_s_sifflements_raideur() { return settings.value("tools/sample/sifflements_raideur", 5.).toDouble(); }
+    double getTools_s_mur_coupure()         { return settings.value("tools/sample/mur_coupure", 15000.).toDouble(); }
+    double getTools_s_transpo_ton()         { return settings.value("tools/sample/transposition_ton", 12.).toDouble(); }
+    double getTools_i_ondulant_battements() { return settings.value("tools/instrument/ondulation_herz", 4.).toDouble(); }
+    double getTools_i_release_dureeDo()     { return settings.value("tools/instrument/release_durationC", 1.5).toDouble(); }
+    double getTools_i_release_division()    { return settings.value("tools/instrument/release_division", 2.).toDouble(); }
+    double getTools_i_release_desaccordage(){ return settings.value("tools/instrument/release_desaccordage", 0.).toDouble(); }
+    int    getTools_i_space_motif()         { return settings.value("tools/instrument/space_motif", 0).toInt(); }
+    int    getTools_i_space_divisions()     { return settings.value("tools/instrument/space_divisions", 1).toInt(); }
+    int    getTools_i_space_etalement()     { return settings.value("tools/instrument/space_etalement", 100).toInt(); }
+    int    getTools_i_space_occupation()    { return settings.value("tools/instrument/space_occupation", 100).toInt(); }
+    int    getTools_i_space_offset()        { return settings.value("tools/instrument/space_offset", 50).toInt(); }
+    bool   getTools_i_space_renversement1() { return settings.value("tools/instrument/space_renversement1", false).toBool(); }
+    bool   getTools_i_space_renversement2() { return settings.value("tools/instrument/space_renversement2", false).toBool(); }
+    double getTools_2_attenuation_dB()      { return settings.value("tools/sf2/attenuation_dB", 5.).toDouble(); }
+    QVector<double> getTools_global_courbe(bool isPrst)
+    {
+        QList<QVariant> listTmp;
+        if (isPrst)
+            listTmp = settings.value("tools/preset/global_courbe", QList<QVariant>()).toList();
+        else
+            listTmp = settings.value("tools/instrument/global_courbe", QList<QVariant>()).toList();
+        QVector<double> vectRet;
+        vectRet.resize(listTmp.size());
+        for (int i = 0; i < listTmp.size(); i++)
+            vectRet[i] = listTmp.at(i).toDouble();
+        return vectRet;
+    }
+    int    getTools_global_motif(bool isPrst)
+    {
+        if (isPrst)
+            return settings.value("tools/preset/global_motif", 0).toInt();
+        else
+            return settings.value("tools/instrument/global_motif", 0).toInt();
+    }
+    int    getTools_global_modification(bool isPrst)
+    {
+        if (isPrst)
+            return settings.value("tools/preset/global_modification", 0).toInt();
+        else
+            return settings.value("tools/instrument/global_modification", 0).toInt();
+    }
+    int    getTools_global_parametre(bool isPrst)
+    {
+        if (isPrst)
+            return settings.value("tools/preset/global_parametre", 0).toInt();
+        else
+            return settings.value("tools/instrument/global_parametre", 0).toInt();
+    }
+    double getTools_global_raideur(bool isPrst)
+    {
+        if (isPrst)
+            return settings.value("tools/preset/global_raideur", 50.).toDouble();
+        else
+            return settings.value("tools/instrument/global_raideur", 50.).toDouble();
+    }
+    double getTools_global_mini(bool isPrst)
+    {
+        if (isPrst)
+            return settings.value("tools/preset/global_mini", 0.).toDouble();
+        else
+            return settings.value("tools/instrument/global_mini", 0.).toDouble();
+    }
+    double getTools_global_maxi(bool isPrst)
+    {
+        if (isPrst)
+            return settings.value("tools/preset/global_maxi", 1.).toDouble();
+        else
+            return settings.value("tools/instrument/global_maxi", 1.).toDouble();
+    }
+    // Modification des paramètres des outils
+    void setTools_s_sifflements_debut(int val)      { settings.setValue("tools/sample/sifflements_debut", val); }
+    void setTools_s_sifflements_fin(int val)        { settings.setValue("tools/sample/sifflements_fin", val); }
+    void setTools_s_sifflements_raideur(double val) { settings.setValue("tools/sample/sifflements_raideur", val); }
+    void setTools_s_mur_coupure(double val)         { settings.setValue("tools/sample/mur_coupure", val); }
+    void setTools_s_transpo_ton(double val)         { settings.setValue("tools/sample/transposition_ton", val); }
+    void setTools_i_ondulant_battements(double val) { settings.setValue("tools/instrument/ondulation_herz", val); }
+    void setTools_i_release_dureeDo(double val)     { settings.setValue("tools/instrument/release_durationC", val); }
+    void setTools_i_release_division(double val)    { settings.setValue("tools/instrument/release_division", val); }
+    void setTools_i_release_desaccordage(double val){ settings.setValue("tools/instrument/release_desaccordage", val); }
+    void setTools_i_space_motif(int val)            { settings.setValue("tools/instrument/space_motif", val); }
+    void setTools_i_space_divisions(int val)        { settings.setValue("tools/instrument/space_divisions", val); }
+    void setTools_i_space_etalement(int val)        { settings.setValue("tools/instrument/space_etalement", val); }
+    void setTools_i_space_occupation(int val)       { settings.setValue("tools/instrument/space_occupation", val); }
+    void setTools_i_space_offset(int val)           { settings.setValue("tools/instrument/space_offset", val); }
+    void setTools_i_space_renversement1(bool val)   { settings.setValue("tools/instrument/space_renversement1", val); }
+    void setTools_i_space_renversement2(bool val)   { settings.setValue("tools/instrument/space_renversement2", val); }
+    void setTools_2_attenuation_dB(double val)      { settings.setValue("tools/sf2/attenuation_dB", val); }
+    void setTools_global_courbe(bool isPrst, QVector<double> val)
+    {
+        QVariantList listTmp;
+        for (int i = 0; i < val.size(); i++)
+            listTmp << val.at(i);
+        if (isPrst)
+            settings.setValue("tools/preset/global_courbe", listTmp);
+        else
+            settings.setValue("tools/instrument/global_courbe", listTmp);
+    }
+    void setTools_global_motif(bool isPrst, int val)
+    {
+        if (isPrst)
+            settings.setValue("tools/preset/global_motif", val);
+        else
+            settings.setValue("tools/instrument/global_motif", val);
+    }
+    void setTools_global_modification(bool isPrst, int val)
+    {
+        if (isPrst)
+            settings.setValue("tools/preset/global_modification", val);
+        else
+            settings.setValue("tools/instrument/global_modification", val);
+    }
+    void setTools_global_parametre(bool isPrst, int val)
+    {
+        if (isPrst)
+            settings.setValue("tools/preset/global_parametre", val);
+        else
+            settings.setValue("tools/instrument/global_parametre", val);
+    }
+    void setTools_global_raideur(bool isPrst, double val)
+    {
+        if (isPrst)
+            settings.setValue("tools/preset/global_raideur", val);
+        else
+            settings.setValue("tools/instrument/global_raideur", val);
+    }
+    void setTools_global_mini(bool isPrst, double val)
+    {
+        if (isPrst)
+            settings.setValue("tools/preset/global_mini", val);
+        else
+            settings.setValue("tools/instrument/global_mini", val);
+    }
+    void setTools_global_maxi(bool isPrst, double val)
+    {
+        if (isPrst)
+            settings.setValue("tools/preset/global_maxi", val);
+        else
+            settings.setValue("tools/instrument/global_maxi", val);
+    }
     // méthodes publiques
     void addFavorite(QString filePath);
     void setRecordFile(QString filePath);
@@ -92,6 +236,7 @@ private slots:
     void on_dialChoFrequence_valueChanged(int value);
 
 private:
+    QSettings settings;
     Ui::Config * ui;
     MainWindow * mainWindow;
     // Instance unique

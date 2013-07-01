@@ -24,12 +24,17 @@
 
 #include "dialog_release.h"
 #include "ui_dialog_release.h"
+#include "config.h"
 
 DialogRelease::DialogRelease(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::DialogRelease)
 {
     ui->setupUi(this);
+    Config * conf = Config::getInstance();
+    ui->doubleDuree36->setValue(conf->getTools_i_release_dureeDo());
+    ui->doubleDivision->setValue(conf->getTools_i_release_division());
+    ui->doubleDeTune->setValue(conf->getTools_i_release_desaccordage());
 }
 
 DialogRelease::~DialogRelease()

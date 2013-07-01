@@ -135,10 +135,12 @@ void Page_Inst::desaccorder()
     // Désaccordage ondulant
     // Nombre de battements par secondes
     bool ok;
+    Config * conf = Config::getInstance();
     double rep = QInputDialog::getDouble(this, tr("Question"),
         QString::fromUtf8(tr("Nombre de battements par seconde :\n(le signe définit le sens du désaccordage)").toStdString().c_str()),
-        4, -10, 10, 1, &ok);
+        conf->getTools_i_ondulant_battements(), -10, 10, 1, &ok);
     if (!ok || rep == 0) return;
+    conf->setTools_i_ondulant_battements(rep);
     this->sf2->prepareNewActions();
     // Reprise de l'identificateur si modification
     id = this->tree->getID(0);
@@ -387,6 +389,15 @@ void Page_Inst::spatialisation()
 void Page_Inst::spatialisation(int motif, int nbDiv, int etalement, int occupation, int offset, int sens, int sens2)
 {
     this->sf2->prepareNewActions();
+    // Sauvegarde des valeurs
+    Config * conf = Config::getInstance();
+    conf->setTools_i_space_motif(motif);
+    conf->setTools_i_space_divisions(nbDiv);
+    conf->setTools_i_space_etalement(etalement);
+    conf->setTools_i_space_occupation(occupation);
+    conf->setTools_i_space_offset(offset);
+    conf->setTools_i_space_renversement1(sens);
+    conf->setTools_i_space_renversement2(sens2);
     // Liste des samples avec le lien le cas échéant
     QList<EltID> list1;
     QList<genAmountType> listRange;
@@ -764,6 +775,11 @@ void Page_Inst::release()
 void Page_Inst::release(double duree36, double division, double deTune)
 {
     this->sf2->prepareNewActions();
+    // Sauvegarde des valeurs
+    Config * conf = Config::getInstance();
+    conf->setTools_i_release_dureeDo(duree36);
+    conf->setTools_i_release_division(division);
+    conf->setTools_i_release_desaccordage(deTune);
     // Reprise de l'identificateur si modification
     EltID id = this->tree->getID(0);
     // Modification pour chaque sample lié

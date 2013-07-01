@@ -837,10 +837,12 @@ void Page_Smpl::filtreMur()
     if (preparation) return;
     // Fréquence de filtre
     bool ok;
+    Config * conf = Config::getInstance();
     double rep = QInputDialog::getDouble(this, tr("Question"),
                                          QString::fromUtf8(tr("Fréquence de coupure :").toStdString().c_str()),
-                                         15000, 20, 96000, 2, &ok);
+                                         conf->getTools_s_mur_coupure(), 20, 96000, 2, &ok);
     if (!ok) return;
+    conf->setTools_s_mur_coupure(rep);
     sf2->prepareNewActions();
     EltID id;
     // Calcul du nombre d'étapes
@@ -1002,6 +1004,11 @@ void Page_Smpl::sifflements()
 }
 void Page_Smpl::sifflements(int freq1, int freq2, double raideur)
 {
+    // Sauvegarde des valeurs
+    Config * conf = Config::getInstance();
+    conf->setTools_s_sifflements_debut(freq1);
+    conf->setTools_s_sifflements_fin(freq2);
+    conf->setTools_s_sifflements_raideur(raideur);
     // Elimination des sifflements
     this->sf2->prepareNewActions();
     EltID id;
@@ -1059,11 +1066,13 @@ void Page_Smpl::transposer()
     if (preparation) return;
     // Ecart en demi-tons
     bool ok;
+    Config * conf = Config::getInstance();
     double rep = QInputDialog::getDouble(this, tr("Question"),
                                          QString::fromUtf8(tr("Écart en demi-tons :").toStdString().c_str()),
-                                         12, -36, 36, 2,
+                                         conf->getTools_s_transpo_ton(), -36, 36, 2,
                                          &ok);
     if (!ok) return;
+    conf->setTools_s_transpo_ton(rep);
     sf2->prepareNewActions();
 
     EltID id;

@@ -26,7 +26,8 @@
 #include "ui_dialog_help.h"
 
 DialogHelp::DialogHelp(QWidget *parent) :
-    QDialog(parent, Qt::WindowCloseButtonHint | Qt::WindowSystemMenuHint | Qt::Window | Qt::WindowStaysOnTopHint),
+    QDialog(parent, Qt::WindowCloseButtonHint | Qt::WindowMinMaxButtonsHint |
+            Qt::WindowSystemMenuHint | Qt::Window | Qt::WindowStaysOnTopHint),
     ui(new Ui::DialogHelp)
 {
     ui->setupUi(this);

@@ -24,6 +24,7 @@
 
 #include "dialog_space.h"
 #include "ui_dialog_space.h"
+#include "config.h"
 
 // Constructeur, destructeur
 DialogSpace::DialogSpace(QWidget *parent) :
@@ -31,8 +32,41 @@ DialogSpace::DialogSpace(QWidget *parent) :
     ui(new Ui::DialogSpace)
 {
     ui->setupUi(this);
-    this->ui->checkSens2->setEnabled(false);
-    this->ui->checkSens2->setEnabled(false);
+    Config * conf = Config::getInstance();
+    this->ui->comboMotif->blockSignals(true);
+    this->ui->comboMotif->setCurrentIndex(conf->getTools_i_space_motif());
+    this->ui->comboMotif->blockSignals(false);
+    this->ui->spinNbDivision->blockSignals(true);
+    this->ui->spinNbDivision->setValue(conf->getTools_i_space_divisions());
+    this->ui->spinNbDivision->blockSignals(false);
+    this->ui->spinEtalement->blockSignals(true);
+    this->ui->spinEtalement->setValue(conf->getTools_i_space_etalement());
+    this->ui->spinEtalement->blockSignals(false);
+    this->ui->spinOccupation->blockSignals(true);
+    this->ui->spinOccupation->setValue(conf->getTools_i_space_occupation());
+    this->ui->spinOccupation->blockSignals(false);
+    this->ui->spinOffset->blockSignals(true);
+    this->ui->spinOffset->setValue(conf->getTools_i_space_offset());
+    this->ui->spinOffset->blockSignals(false);
+    this->ui->checkSens->blockSignals(true);
+    this->ui->checkSens->setChecked(conf->getTools_i_space_renversement1());
+    this->ui->checkSens->blockSignals(false);
+    this->ui->checkSens2->blockSignals(true);
+    this->ui->checkSens2->setChecked(conf->getTools_i_space_renversement2());
+    this->ui->checkSens2->blockSignals(false);
+
+    // Activation des renversements
+    if (ui->spinNbDivision->value() == 1)
+        this->ui->checkSens->setEnabled(false);
+    else
+        this->ui->checkSens->setEnabled(true);
+    if (ui->comboMotif->currentIndex() == 0 || ui->comboMotif->currentIndex() == 2)
+        this->ui->checkSens2->setEnabled(false);
+    else
+        this->ui->checkSens2->setEnabled(true);
+
+
+    // Remplissage du graphique
     this->ui->grapheSpace->setData(
                 this->ui->comboMotif->currentIndex(),
                 this->ui->spinNbDivision->value(),
@@ -63,15 +97,9 @@ void DialogSpace::accept()
 void DialogSpace::motifChanged(int value)
 {
     if (value == 0 || value == 2)
-    {
         this->ui->checkSens2->setEnabled(false);
-        this->ui->checkSens2->setEnabled(false);
-    }
     else
-    {
         this->ui->checkSens2->setEnabled(true);
-        this->ui->checkSens2->setEnabled(true);
-    }
     this->ui->grapheSpace->setData(
                 value,
                 this->ui->spinNbDivision->value(),
@@ -83,6 +111,10 @@ void DialogSpace::motifChanged(int value)
 }
 void DialogSpace::nbDivChanged(int value)
 {
+    if (value == 1)
+        this->ui->checkSens->setEnabled(false);
+    else
+        this->ui->checkSens->setEnabled(true);
     this->ui->grapheSpace->setData(
                 this->ui->comboMotif->currentIndex(),
                 value,

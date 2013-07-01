@@ -40,7 +40,7 @@ DialogMagnetophone::DialogMagnetophone(QWidget *parent) :
     ui->setupUi(this);
 
     // Initialisation
-    this->setWindowFlags(this->windowFlags() | Qt::WindowStaysOnTopHint);
+    this->setWindowFlags(Qt::Tool | Qt::WindowStaysOnTopHint | Qt::WindowCloseButtonHint);
     this->initGui();
 }
 
