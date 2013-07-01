@@ -1,8 +1,18 @@
 COMPILATION
 
-Run "qmake && make" in the root directory to compile the project. An executable file "polyphone" in RELEASE directory should then appear if everything went right.
-Please note that QT libraries are required, svg features included.
+The following libraries are required (the name may vary depending on your system):
+ - qt (libqt4-gui, libqt4-core, libqt4-svg, maybe others)
+ - alsa (libasound2-dev / alsa-lib-devel)
+ - jack (libjack-jack2-dev / jack-audio-connection-kit-devel)
+ - portaudio (libportaudio2 / portaudio-devel)
+Use your package manager to install them: synaptic, yum,...
 
-If you are using linux, you will need to install alsa, portaudio2 and jack headers (libportaudio2, libasound2-dev and libjack-jack2-dev).
+Links may be adjusted in the file polyphone.pro. If libportaudio is not found for example, first locate it on your system and edit the following line:
+LIBS += /usr/lib/x86_64-linux-gnu/libportaudio.so.2
+It could be:
+LIBS += /usr/lib64/libportaudio.so.2
 
-If you are using QT Creator, the project may be opened via its .pro file present in the root directory. Take care shadow build is not checked.
+Run "qmake && make" (or qmake-qt4 && make) in the root directory to compile the project. An executable file "polyphone" in the directory "RELEASE" should then appear if everything went right.
+
+If you are using QT Creator, the project may be opened via its .pro file present in the root directory. Take care shadow build is not checked (project properties).
+

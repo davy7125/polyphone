@@ -17,10 +17,19 @@
 */
 
 #include "pianokey.h"
+
+#if QT_VERSION >= QT_VERSION_CHECK(5, 0, 0)
+#include <QApplication>
+#include <QPainter>
+#include <QPalette>
+#else
 #include <QtGui/QApplication>
 #include <QtGui/QPainter>
 #include <QtGui/QPalette>
+#endif
+
 #include <QtSvg/QSvgRenderer>
+
 
 PianoKey::PianoKey(const QRectF &rect, const QBrush &brush, const int note)
     : QGraphicsRectItem(rect),

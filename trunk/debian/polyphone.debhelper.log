@@ -15,7 +15,6 @@ dh_installdebconf
 dh_installemacsen
 dh_installifupdown
 dh_installinfo
-dh_pysupport
 dh_installinit
 dh_installmenu
 dh_installmime

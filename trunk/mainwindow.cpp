@@ -28,6 +28,9 @@
 #include "dialog_rename.h"
 #include <QFileDialog>
 #include <QInputDialog>
+#if QT_VERSION >= QT_VERSION_CHECK(5, 0, 0)
+#include <QDesktopWidget>
+#endif
 
 // Constructeurs, destructeurs
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent, Qt::Window | Qt::WindowCloseButtonHint |
@@ -44,7 +47,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent, Qt::Window | Qt::W
     dialogMagneto(NULL) // doit être appelé après le premier appel au singleton Config
 {
     ui->setupUi(this);
-#if QT_VERSION >= 0x040700
+#if QT_VERSION >= QT_VERSION_CHECK(4, 7, 0)
     ui->editSearch->setPlaceholderText(trUtf8("Rechercher..."));
 #endif
     // Taille max de l'application
@@ -99,8 +102,11 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent, Qt::Window | Qt::W
     // Initialisation dialog liste (pointeur vers les sf2 et mainWindow)
     this->dialList.init(this, this->sf2);
     // Initialisation répertoire de départ
+#if QT_VERSION >= QT_VERSION_CHECK(5, 0, 0)
+    fileName =  QStandardPaths::displayName(QStandardPaths::DesktopLocation);
+#else
     fileName = QDesktopServices::storageLocation(QDesktopServices::DesktopLocation);
-    //fileName =  QStandardPaths::displayName(QStandardPaths::DesktopLocation); // QT 5
+#endif
     // Fichiers récents
     updateFavoriteFiles();
     // Affichage logo logiciel

@@ -158,6 +158,11 @@ QString DialogMagnetophone::getDefaultPath()
             defaultPath = folderName + "/" + name;
     }
     else
+#if QT_VERSION >= QT_VERSION_CHECK(5, 0, 0)
+        defaultPath = QStandardPaths::displayName(QStandardPaths::DesktopLocation) + "/" + trUtf8("enregistrement");
+#else
         defaultPath = QDesktopServices::storageLocation(QDesktopServices::DesktopLocation) + "/" + trUtf8("enregistrement");
+#endif
+
     return defaultPath + ".wav";
 }

@@ -19,7 +19,14 @@
 #ifndef PIANOKEY_H_
 #define PIANOKEY_H_
 
+#include "qglobal.h"
+
+#if QT_VERSION >= QT_VERSION_CHECK(5, 0, 0)
+#include <QGraphicsRectItem>
+#else
 #include <QtGui/QGraphicsRectItem>
+#endif
+
 #include <QtGui/QBrush>
 
 class PianoKey : public QGraphicsRectItem

@@ -20,7 +20,13 @@
 #define PIANOKEYBD_H
 
 #include "pianoscene.h"
+
+#if QT_VERSION >= QT_VERSION_CHECK(5, 0, 0)
+#include <QGraphicsView>
+#else
 #include <QtGui/QGraphicsView>
+#endif
+
 #include <QApplication>
 
 class PianoKeybd : public QGraphicsView
