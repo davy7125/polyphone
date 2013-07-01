@@ -22,7 +22,6 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#include <QSettings>
 #include <QFileInfo>
 #include <QDir>
 #include "config.h"
@@ -45,7 +44,9 @@ void Config::kill()
     delete _instance;
 }
 
-Config::Config(QWidget *parent) : QDialog(parent), ui(new Ui::Config)
+Config::Config(QWidget *parent) : QDialog(parent),
+    settings(this),
+    ui(new Ui::Config)
 {
     for (int i = 0; i < 5; i++)
         listFiles.append("");
@@ -86,7 +87,7 @@ Config::Config(QWidget *parent) : QDialog(parent), ui(new Ui::Config)
         }
     }
     else if (this->audioType == -1)
-            this->ui->comboAudioOuput->setCurrentIndex(0);
+        this->ui->comboAudioOuput->setCurrentIndex(0);
     else if (this->audioType == -2)
         this->ui->comboAudioOuput->setCurrentIndex(nbItem - 1 - isAsioEnabled); // Jack
     else if (this->audioType == -3)
@@ -145,7 +146,7 @@ void Config::setRam(int val)
         else
             this->ram = 1;
         QMessageBox::information(QApplication::activeWindow(), tr("Information"), \
-            QString::fromUtf8(tr("La modification sera prise en compte lors du prochain démarrage du logiciel.").toStdString().c_str()));
+                                 QString::fromUtf8(tr("La modification sera prise en compte lors du prochain démarrage du logiciel.").toStdString().c_str()));
         this->store();
     }
 }
@@ -338,7 +339,6 @@ void Config::on_dialChoFrequence_valueChanged(int value)
 // Gestion des configurations
 void Config::load()
 {
-    QSettings settings(this);
     // Chargement des fichiers récents
     this->recordFile        = settings.value("recent_file/record", "").toString();
     int j = 0;
@@ -381,7 +381,6 @@ void Config::load()
 }
 void Config::store()
 {
-    QSettings settings(this);
     settings.setValue("recent_file/record",             this->recordFile);
     settings.setValue("recent_file/file_0",             listFiles.at(0));
     settings.setValue("recent_file/file_1",             listFiles.at(1));

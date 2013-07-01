@@ -42,12 +42,12 @@ unix{
     CONFIG += link_pkgconfig
     PKGCONFIG += alsa
     INCLUDEPATH += /usr/include/jack
-
-    # Spécificités 32 - 64 bits
+    LIBS += -ljack
+    # Spécifités 32 - 64 bits
     contains(QMAKE_HOST.arch, x86_64):{
-        LIBS += -Llib/unix64 -lportaudio -ljack
+        LIBS += /usr/lib/x86_64-linux-gnu/libportaudio.so.2
     } else {
-        LIBS += -Llib/unix32 -lportaudio -ljack
+        LIBS += /usr/lib/i386-linux-gnu/libportaudio.so.2
     }
 }
 

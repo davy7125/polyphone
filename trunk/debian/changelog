@@ -1,0 +1,15 @@
+polyphone (0.7-2) UNRELEASED; urgency=low
+
+  * Adapted watch file
+  * Created upstream changelog
+  * Corrected a dependency
+
+ -- Davy Triponney <davy.triponney@gmail.com>  Sat, 29 Jun 2013 17:46:42 +0100
+
+
+polyphone (0.7-1) UNRELEASED; urgency=low
+
+  * New upstream version
+  * Initial debian release (Closes: Bug#714454)
+
+ -- Davy Triponney <davy.triponney@gmail.com>  Sat, 29 Jun 2013 17:46:42 +0100
