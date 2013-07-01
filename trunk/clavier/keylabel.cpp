@@ -22,7 +22,12 @@
 KeyLabel::KeyLabel(QGraphicsItem *parent) : QGraphicsTextItem(parent)
 {
     setAcceptedMouseButtons(Qt::NoButton);
+
+#if QT_VERSION >= QT_VERSION_CHECK(5, 0, 0)
+    this->setRotation(270);
+#else
     rotate(270);
+#endif
 }
 
 QRectF KeyLabel::boundingRect() const
