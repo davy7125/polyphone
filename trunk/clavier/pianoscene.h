@@ -22,7 +22,13 @@
 #include "pianokey.h"
 #include "keylabel.h"
 #include "keyboardmap.h"
+
+#if QT_VERSION >= QT_VERSION_CHECK(5, 0, 0)
+#include <QGraphicsScene>
+#else
 #include <QtGui/QGraphicsScene>
+#endif
+
 #include <QtCore/QHash>
 
 class PianoHandler

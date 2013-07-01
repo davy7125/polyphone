@@ -19,7 +19,13 @@
 #ifndef KEYLABEL_H
 #define KEYLABEL_H
 
+#include "qglobal.h"
+
+#if QT_VERSION >= QT_VERSION_CHECK(5, 0, 0)
+#include <QGraphicsTextItem>
+#else
 #include <QtGui/QGraphicsTextItem>
+#endif
 
 class KeyLabel : public QGraphicsTextItem
 {
