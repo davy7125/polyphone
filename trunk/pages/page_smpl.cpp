@@ -192,6 +192,10 @@ void Page_Smpl::afficher()
     this->qStackedWidget->setCurrentWidget(this); // prend du temps
     preparation = false;
 }
+void Page_Smpl::updateColors()
+{
+    this->ui->graphe->updateStyle();
+}
 
 void Page_Smpl::setStartLoop()
 {
@@ -1300,58 +1304,84 @@ Graphique::Graphique(QWidget * parent) : QCustomPlot(parent)
     spinStart = NULL;
     spinEnd = NULL;
     this->installEventFilter(this);
-    // Création des graphes et définition des pinceaux
+    // Création des graphes
     // Graphe des données
     this->addGraph();
-    QPen graphPen;
-    graphPen.setColor(QColor(0, 0, 255));
-    graphPen.setWidthF(1);
-    this->graph(0)->setPen(graphPen);
     this->graph(0)->setAntialiased(false);
     // Graphe contenant startLoop
     this->addGraph();
-    graphPen.setColor(QColor(100, 255, 100));
-    graphPen.setWidthF(2);
-    this->graph(1)->setPen(graphPen);
     // Graphe contenant endLoop
     this->addGraph();
-    graphPen.setColor(QColor(255, 0, 0));
-    graphPen.setWidthF(2);
-    this->graph(2)->setPen(graphPen);
     // Graphe pour la ligne de zoom
     this->addGraph();
-    graphPen.setColor(QColor(255, 255, 255));
-    graphPen.setWidthF(1);
-    graphPen.setStyle(Qt::DashLine);
-    this->graph(3)->setPen(graphPen);
     // Graphes contenant l'overlay
     this->addGraph();
-    graphPen.setColor(QColor(100, 255, 100, 150));
-    graphPen.setWidth(2);
-    graphPen.setStyle(Qt::DotLine);
-    this->graph(4)->setPen(graphPen);
     this->addGraph();
-    graphPen.setColor(QColor(255, 0, 0, 200));
-    this->graph(5)->setPen(graphPen);
     // Axes
     this->xAxis2->setRange(0, 1);
     this->yAxis2->setRange(0, 1);
     this->yAxis->setRange(-1, 1);
-    graphPen.setColor(QColor(60, 60, 100));
-    graphPen.setWidthF(1);
-    this->yAxis->setZeroLinePen(graphPen);
-    graphPen.setStyle(Qt::DotLine);
-    this->yAxis->setGridPen(graphPen);
     this->xAxis->setVisible(false);
     this->yAxis->setTicks(false);
     // Marges
     this->setAutoMargin(false);
     this->setMargin(0, 0, 0, 0);
-    // Couleur de fond
-    this->setColor(QColor(0, 0, 0));
+    // Paramétrage des couleurs
+    this->updateStyle();
 }
 
 // Méthodes publiques
+void Graphique::updateStyle()
+{
+    QList<QColor> colors = Config::getInstance()->getColors();
+    if (colors.size() != 6)
+        return;
+    // Couleur de fond
+    this->setColor(colors.at(0));
+    QPen graphPen;
+    graphPen.setColor(colors.at(0));
+    this->yAxis->setBasePen(graphPen);
+    // Couleur de l'onde
+    graphPen.setColor(colors.at(1));
+    graphPen.setWidthF(1);
+    this->graph(0)->setPen(graphPen);
+    // Couleur début de boucle
+    graphPen.setColor(colors.at(3));
+    graphPen.setWidthF(2);
+    this->graph(1)->setPen(graphPen);
+    // Couleur fin de boucle
+    graphPen.setColor(colors.at(4));
+    graphPen.setWidthF(2);
+    this->graph(2)->setPen(graphPen);
+    // Ligne de zoom
+    graphPen.setColor(colors.at(5));
+    graphPen.setWidthF(1);
+    graphPen.setStyle(Qt::DashLine);
+    this->graph(3)->setPen(graphPen);
+    // Overlay
+    QColor colorTmp = colors.at(3);
+    colorTmp.setAlpha(175);
+    graphPen.setColor(colorTmp);
+    graphPen.setWidth(2);
+    graphPen.setStyle(Qt::DotLine);
+    this->graph(4)->setPen(graphPen);
+    colorTmp = colors.at(4);
+    colorTmp.setAlpha(175);
+    graphPen.setColor(colorTmp);
+    this->graph(5)->setPen(graphPen);
+    // Couleur de la grille
+    graphPen.setColor(colors.at(2));
+    graphPen.setWidthF(1);
+    this->yAxis->setZeroLinePen(graphPen);
+    graphPen.setStyle(Qt::DotLine);
+    this->yAxis->setGridPen(graphPen);
+    // Curseur de lecture
+    penLecture.setColor(colors.at(5));
+    penLecture.setWidthF(1);
+
+    this->replot();
+}
+
 void Graphique::clearAll()
 {
     this->graph(0)->clearData();
@@ -1440,10 +1470,7 @@ void Graphique::paintEvent(QPaintEvent *event)
     if (m_currentPos > 0)
     {
         QPainter painter(this);
-        QPen pen;
-        pen.setColor(QColor(255, 255, 255));
-        pen.setWidthF(1);
-        painter.setPen(pen);
+        painter.setPen(penLecture);
         painter.drawLine(QPointF(m_currentPos, -10000), QPointF(m_currentPos, 10000));
     }
 }
@@ -1739,9 +1766,7 @@ void GraphiqueFourier::setPos(qint32 posStart, qint32 posEnd)
     freq = (double)((double)posMaxFFT[numeroPic] * (double)dwSmplRate) / (double)(size - 1);
     //qDebug() << "numero pic" << numeroPic << "freq" << freq;
     // Numéro de la note correspondant à cette fréquence
-    double note3 = 12*log2(freq)-36.3763;
-    if (note3 < 0) note3 = 0;
-    else if (note3 > 128) note3 = 128;
+    double note3 = 12 * log2(freq) - 36.3763;
 
     // note la plus proche
     int note = note3 + 0.5;
@@ -1749,37 +1774,40 @@ void GraphiqueFourier::setPos(qint32 posStart, qint32 posEnd)
 
     // Affichage
     QString qStr1 = "";
-    qStr1.sprintf("%s %d, %s %d (%s)", tr("note").toStdString().c_str(), note,
-                  tr("correction").toStdString().c_str(), correction, tr("estimation").toStdString().c_str());
-    this->text1->setText(qStr1);
     QString qStr2 = "";
     QString qStr3 = "";
     QString qStr4 = "";
     QString qStr5 = "";
     QString qTmp;
-    for (int i = 0; i < 10; i++)
+    if (note >= 0 && note <= 128)
     {
-        if (posMaxFFT[i] != 0)
+        qStr1.sprintf("%s %d, %s %d (%s)", tr("note").toStdString().c_str(), note,
+                      tr("correction").toStdString().c_str(), correction, tr("estimation").toStdString().c_str());
+        for (int i = 0; i < 10; i++)
         {
-            // intensité
-            qTmp.sprintf("%.2f\n", (double)data[posMaxFFT[i]] / data[posMaxFFT[0]]);
-            qStr2.append(qTmp);
-            // fréquence
-            double freq = (double)(posMaxFFT[i] * dwSmplRate) / (size - 1);
-            qTmp.sprintf("%.2f Hz\n", freq);
-            qStr3.append(qTmp);
-            // note la plus proche
-            double note = 12*log2(freq)-36.3763;
-            if (note < 0) note = 0;
-            else if (note > 128) note = 128;
-            int note2 = note + .5;
-            int correction = (note2 - note) * 100 + 0.5;
-            qTmp.sprintf("%d\n", note2);
-            qStr4.append(qTmp);
-            qTmp.sprintf("%d\n", correction);
-            qStr5.append(qTmp);
+            if (posMaxFFT[i] != 0)
+            {
+                // intensité
+                qTmp.sprintf("%.2f\n", (double)data[posMaxFFT[i]] / data[posMaxFFT[0]]);
+                qStr2.append(qTmp);
+                // fréquence
+                double freq = (double)(posMaxFFT[i] * dwSmplRate) / (size - 1);
+                qTmp.sprintf("%.2f Hz\n", freq);
+                qStr3.append(qTmp);
+                // note la plus proche
+                double note = 12 * log2(freq) - 36.3763;
+                if (note < 0) note = 0;
+                else if (note > 128) note = 128;
+                int note2 = note + .5;
+                int correction = (note2 - note) * 100 + 0.5;
+                qTmp.sprintf("%d\n", note2);
+                qStr4.append(qTmp);
+                qTmp.sprintf("%d\n", correction);
+                qStr5.append(qTmp);
+            }
         }
     }
+    this->text1->setText(qStr1);
     this->text2->setText(qStr2);
     this->text3->setText(qStr3);
     this->text4->setText(qStr4);

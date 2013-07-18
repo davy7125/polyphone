@@ -44,6 +44,10 @@
         <file alias="pause">ressources/player_pause.png</file>
         <file alias="play">ressources/player_play.png</file>
         <file alias="record">ressources/player_record.png</file>
+        <file alias="arrow_down">ressources/arrow_down.png</file>
+        <file alias="arrow_left">ressources/arrow_left.png</file>
+        <file alias="arrow_right">ressources/arrow_right.png</file>
+        <file alias="arrow_up">ressources/arrow_up.png</file>
     </qresource>
     <qresource prefix="/aide">
         <file alias="help.html">ressources/doc/help.html</file>

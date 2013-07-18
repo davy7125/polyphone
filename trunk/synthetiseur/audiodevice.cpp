@@ -38,7 +38,7 @@ int standardProcess(const void* inputBuffer, void* outputBuffer,
     char** outputs = (char**)outputBuffer;
     // Envoi de données
     if (instance->m_format.channelCount() == 2)
-        instance->m_synth->readData(outputs[0], outputs[1], 4 * framesPerBuffer);
+        instance->m_synth->readData(outputs[1], outputs[0], 4 * framesPerBuffer);
     return 0;
 }
 
@@ -51,8 +51,8 @@ int jackProcess(jack_nframes_t nframes, void * arg)
     if (instance->m_output_port_R && instance->m_output_port_L)
     {
         // Stéréo
-        char * out1 = (char *)jack_port_get_buffer(instance->m_output_port_L, nframes);
-        char * out2 = (char *)jack_port_get_buffer(instance->m_output_port_R, nframes);
+        char * out1 = (char *)jack_port_get_buffer(instance->m_output_port_R, nframes);
+        char * out2 = (char *)jack_port_get_buffer(instance->m_output_port_L, nframes);
         instance->m_synth->readData(out1, out2, 4 * nframes);
     }
     return 0;

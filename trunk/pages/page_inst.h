@@ -41,7 +41,6 @@ public:
     void setModVisible(bool visible);
     void afficher();
     void desaccorder();
-    void duplication();
     void repartitionAuto();
     void spatialisation();
     void mixture();
@@ -56,7 +55,6 @@ private:
     Ui::Page_Inst *ui;
     // Outils
     void desaccorder(EltID id, double bps);
-    void duplication(EltID id);
     static double getOffset(int type1, int type2);
     static EltID closestSample(EltID idInst, double pitch, double &ecart, int cote, EltID &idInstSmpl);
     static QByteArray getSampleData(EltID idSmpl, qint32 nbRead);

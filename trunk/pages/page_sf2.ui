@@ -277,14 +277,14 @@
         <item>
          <widget class="QLabel" name="label_12">
           <property name="text">
-           <string>Nombre de paramètres renseignés pour instruments</string>
+           <string>Nombre de paramètres renseignés pour les instruments</string>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QLabel" name="label_8">
           <property name="text">
-           <string>Nombre de paramètres renseignés pour presets</string>
+           <string>Nombre de paramètres renseignés pour les presets</string>
           </property>
          </widget>
         </item>

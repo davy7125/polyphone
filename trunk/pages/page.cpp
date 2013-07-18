@@ -2537,7 +2537,114 @@ void PageTable::paramGlobal(QVector<double> dValues, QList<EltID> listElt, int t
     this->mainWindow->updateDo();
     this->afficher();
 }
-
+void PageTable::duplication()
+{
+    EltID id = this->tree->getID(0);
+    if (m_typePage == PAGE_INST)
+    {
+        id.typeElement = elementInstSmpl;
+        if (this->sf2->count(id) == 0)
+        {
+            QMessageBox::warning(NULL, tr("Attention"), tr("L'instrument doit contenir des sons."));
+            return;
+        }
+    }
+    else
+    {
+        id.typeElement = elementPrstInst;
+        if (this->sf2->count(id) == 0)
+        {
+            QMessageBox::warning(NULL, tr("Attention"), tr("Le preset doit contenir des instruments."));
+            return;
+        }
+    }
+    // Obtention d'une division par note
+    this->sf2->prepareNewActions();
+    // Reprise de l'identificateur si modification
+    id = this->tree->getID(0);
+    // Modification pour chaque élément lié
+    EltID id2 = id;
+    if (m_typePage == PAGE_INST)
+        id2.typeElement = elementInstSmpl;
+    else
+        id2.typeElement = elementPrstInst;
+    int nbElementsLies = this->sf2->count(id2);
+    for (int i = 0; i < nbElementsLies; i++)
+    {
+        id2.indexElt2 = i;
+        if (!this->sf2->get(id2, champ_hidden).bValue)
+            this->duplication(id2);
+    }
+    // Actualisation
+    this->mainWindow->updateDo();
+    this->afficher();
+}
+void PageTable::duplication(EltID id)
+{
+    // Etendue du sample sur le clavier
+    int numBas = this->sf2->get(id, champ_keyRange).rValue.byLo;
+    int numHaut = this->sf2->get(id, champ_keyRange).rValue.byHi;
+    if (numBas != numHaut)
+    {
+        // Modification keyrange
+        Valeur val;
+        val.rValue.byLo = numBas;
+        val.rValue.byHi = numBas;
+        this->sf2->set(id, champ_keyRange, val);
+        // Création de divisions identiques pour les autres notes
+        EltID id2 = id;
+        for (int i = numBas+1; i <= numHaut; i++)
+        {
+            if (m_typePage == PAGE_INST)
+            {
+                id.typeElement = elementInstSmpl;
+                id2.typeElement = elementInstSmpl;
+                id2.indexElt2 = this->sf2->add(id);
+                // Recopiage des gens
+                id.typeElement = elementInstSmplGen;
+            }
+            else
+            {
+                id.typeElement = elementPrstInst;
+                id2.typeElement = elementPrstInst;
+                id2.indexElt2 = this->sf2->add(id);
+                // Recopiage des gens
+                id.typeElement = elementPrstInstGen;
+            }
+            for (int j = 0; j < this->sf2->count(id); j++)
+            {
+                id.indexMod = j;
+                this->sf2->set(id2, (Champ)this->sf2->get(id, champ_sfGenOper).wValue,
+                               this->sf2->get(id, champ_sfGenAmount));
+            }
+            // Modification keyrange
+            val.rValue.byLo = i;
+            val.rValue.byHi = i;
+            this->sf2->set(id2, champ_keyRange, val);
+            // Recopiage des mods
+            if (m_typePage == PAGE_INST)
+            {
+                id.typeElement = elementInstSmplMod;
+                id2.typeElement = elementInstSmplMod;
+            }
+            else
+            {
+                id.typeElement = elementPrstInstMod;
+                id2.typeElement = elementPrstInstMod;
+            }
+            for (int j = 0; j < this->sf2->count(id); j++)
+            {
+                id.indexMod = j;
+                id2.indexMod = this->sf2->add(id2);
+                this->sf2->set(id2, champ_modAmount, this->sf2->get(id, champ_modAmount));
+                this->sf2->set(id2, champ_sfModSrcOper, this->sf2->get(id, champ_sfModSrcOper));
+                this->sf2->set(id2, champ_sfModAmtSrcOper, this->sf2->get(id, champ_sfModAmtSrcOper));
+                this->sf2->set(id2, champ_sfModDestOper, this->sf2->get(id, champ_sfModDestOper));
+                this->sf2->set(id2, champ_sfModTransOper, this->sf2->get(id, champ_sfModTransOper));
+            }
+        }
+    }
+}
 
 int PageTable::getDestNumber(int i)
 {

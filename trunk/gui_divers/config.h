@@ -42,12 +42,17 @@ class Config : public QDialog
     Q_OBJECT
     
 public:
+    enum TypeFichier
+    {
+        typeFichierSf2,
+        typeFichierSample,
+        typeFichierEnregistrement
+    };
+
     static Config * getInstance(QWidget *parent = NULL);
     static void kill();
     ~Config();
     // accesseurs
-    QString getFile(int num){if (num < 5 && num >= 0) return listFiles.at(num); else return "";}
-    QString getRecordFile()     {return recordFile;}
     bool getRam()               {return false/*ram*/;}
     int  getAudioIndex()        {return audioIndex;}
     bool getAfficheMod()        {return afficheMod;}
@@ -66,6 +71,7 @@ public:
     int  getSynthChoLevel()     {return choLevel;}
     int  getSynthChoDepth()     {return choDepth;}
     int  getSynthChoFrequency() {return choFrequency;}
+    QList<QColor> getColors()   {return colorList;}
     // Accès aux paramètres des outils
     int    getTools_s_sifflements_debut()   { return settings.value("tools/sample/sifflements_debut", 8000).toInt(); }
     int    getTools_s_sifflements_fin()     { return settings.value("tools/sample/sifflements_fin", 20000).toInt();}
@@ -139,6 +145,20 @@ public:
         else
             return settings.value("tools/instrument/global_maxi", 1.).toDouble();
     }
+    int getTools_global_miniX(bool isPrst)
+    {
+        if (isPrst)
+            return settings.value("tools/preset/global_miniX", 0).toInt();
+        else
+            return settings.value("tools/instrument/global_miniX", 0).toInt();
+    }
+    double getTools_global_maxiX(bool isPrst)
+    {
+        if (isPrst)
+            return settings.value("tools/preset/global_maxiX", 140).toInt();
+        else
+            return settings.value("tools/instrument/global_maxiX", 140).toInt();
+    }
     // Modification des paramètres des outils
     void setTools_s_sifflements_debut(int val)      { settings.setValue("tools/sample/sifflements_debut", val); }
     void setTools_s_sifflements_fin(int val)        { settings.setValue("tools/sample/sifflements_fin", val); }
@@ -209,10 +229,41 @@ public:
         else
             settings.setValue("tools/instrument/global_maxi", val);
     }
-    // méthodes publiques
-    void addFavorite(QString filePath);
-    void setRecordFile(QString filePath);
+    void setTools_global_miniX(bool isPrst, int val)
+    {
+        if (isPrst)
+            settings.setValue("tools/preset/global_miniX", val);
+        else
+            settings.setValue("tools/instrument/global_miniX", val);
+    }
+    void setTools_global_maxiX(bool isPrst, int val)
+    {
+        if (isPrst)
+            settings.setValue("tools/preset/global_maxiX", val);
+        else
+            settings.setValue("tools/instrument/global_maxiX", val);
+    }
+    // Paramètres divers
+    bool getActivationSaveWarning_toManyGenerators()
+    {
+        return settings.value("warnings/to_many_generators", true).toBool();
+    }
+    void setActivationSaveWarning_toManyGenerators(bool activated)
+    {
+        settings.setValue("warnings/to_many_generators", activated);
+    }
+
+    // Gestion des fichiers
+    QString getLastFile(TypeFichier typeFichier, int num=0);
+    QString getLastDirectory(TypeFichier typeFichier);
+    void addFile(TypeFichier typeFichier, QString filePath);
+    // Affichage de la fenêtre
     void show();
+    // Initialisation
+    void setListeActions(QList<QAction *> actions);
+
+signals:
+    void colorsChanged();
 
 public slots:
     void setAfficheMod(int val);
@@ -234,6 +285,20 @@ private slots:
     void on_dialChoNiveau_valueChanged(int value);
     void on_dialChoAmplitude_valueChanged(int value);
     void on_dialChoFrequence_valueChanged(int value);
+    void on_pushColorBackground_clicked();
+    void on_pushColorForeground_clicked();
+    void on_pushColorGrid_clicked();
+    void on_pushColorStartloop_clicked();
+    void on_pushColorEndloop_clicked();
+    void on_pushColorPlay_clicked();
+    void on_pushColorRestore_clicked();
+    void on_pushUp_clicked();
+    void on_pushRight_clicked();
+    void on_pushLeft_clicked();
+    void on_pushDown_clicked();
+    void on_pushResetToolbar_clicked();
+    void on_listToolbar_itemSelectionChanged();
+    void on_listActions_itemSelectionChanged();
 
 private:
     QSettings settings;
@@ -244,6 +309,7 @@ private:
     // Paramètres configuration
     QStringList listFiles;
     QString recordFile;
+    QString sampleFile;
     bool ram;
     int audioType;
     int audioIndex;
@@ -257,12 +323,18 @@ private:
     int synthGain;
     int revLevel, revSize, revDamping, revWidth;
     int choLevel, choDepth, choFrequency;
+    QList<QColor> colorList;
+    QList<QAction *> actionList;
+    QByteArray actionListToolbar;
     // Autres
     bool loaded;
     // Méthodes privées
     explicit Config(QWidget *parent = 0);
     void load();
     void store();
+    void setColors();
+    void fillActions();
+    QByteArray getDefaultListActions();
 };
 
 #endif // CONFIG_H

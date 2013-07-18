@@ -273,12 +273,15 @@ GraphSpace::GraphSpace(QWidget * parent) : QCustomPlot(parent)
 {
     // Configuration du graphe
     this->addGraph();
+    this->addGraph();
+
+    // Couche données
     QPen graphPen;
     graphPen.setColor(QColor(100, 130, 250));
     graphPen.setWidthF(2);
-    this->graph(0)->setPen(graphPen);
-    this->graph(0)->setLineStyle(QCPGraph::lsImpulse);
-    this->graph(0)->setAntialiased(false);
+    this->graph(1)->setPen(graphPen);
+    this->graph(1)->setLineStyle(QCPGraph::lsImpulse);
+    this->graph(1)->setAntialiased(false);
     // Axes
     this->xAxis->setRange(0, 1);
     this->yAxis->setRange(0, 1.05);
@@ -289,6 +292,37 @@ GraphSpace::GraphSpace(QWidget * parent) : QCustomPlot(parent)
     // Marges
     this->setAutoMargin(false);
     this->setMargin(0, 0, 0, 0);
+
+    // Couche déco
+    this->addGraph();
+    graphPen.setWidthF(1);
+    graphPen.setColor(QColor(0, 0, 0, 40));
+    graphPen.setStyle(Qt::DashDotLine);
+    graph(0)->setPen(graphPen);
+    QVector<double> x, y;
+    x << 0.5 << 0.5;
+    y << -10 << 10;
+    graph(0)->setData(x, y);
+
+    // Ajout D / D
+    QCPItemText * text = new QCPItemText(this);
+    text->position->setType(QCPItemPosition::ptAxisRectRatio);
+    text->position->setCoords(0, 0);
+    text->setPositionAlignment(Qt::AlignLeft | Qt::AlignTop);
+    text->setTextAlignment(Qt::AlignLeft);
+    text->setFont(QFont(font().family(), 10, 100));
+    text->setColor(QColor(0, 0, 0, 75));
+    text->setText(trUtf8("G"));
+    this->addItem(text);
+    text = new QCPItemText(this);
+    text->position->setType(QCPItemPosition::ptAxisRectRatio);
+    text->position->setCoords(1, 0);
+    text->setPositionAlignment(Qt::AlignRight | Qt::AlignTop);
+    text->setTextAlignment(Qt::AlignRight);
+    text->setFont(QFont(font().family(), 10, 100));
+    text->setColor(QColor(0, 0, 0, 75));
+    text->setText(trUtf8("D"));
+    this->addItem(text);
 }
 
 void GraphSpace::setData(int motif, int nbDiv, int etalement, int occupation, int offset, int sens, int sens2)
@@ -310,6 +344,6 @@ void GraphSpace::setData(int motif, int nbDiv, int etalement, int occupation, in
                                   motif, nbDiv, etalement, occupation,
                                   offset, sens, sens2);
     }
-    this->graph(0)->setData(x, y);
+    this->graph(1)->setData(x, y);
     this->replot();
 }
