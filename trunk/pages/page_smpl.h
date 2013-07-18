@@ -78,6 +78,7 @@ private slots:
     void setGainSample(int val);
     void setStereo(int val);
     void selectionChanged();
+    void updateColors();
 private:
     Ui::Page_Smpl *ui;
     bool lectureEnCours;
@@ -196,12 +197,14 @@ public:
     void linkSliderX(QScrollBar * qScrollX);
     void linkSpinBoxes(QSpinBox * spinStart, QSpinBox * spinEnd);
     void zoomDrag();
+    void updateStyle();
 
 public slots:
     void setPosX(int posX);
     void setStartLoop(int pos, bool replot = true);
     void setEndLoop(int pos, bool replot = true);
     void setCurrentSample(int pos);
+
 signals:
     void startLoopChanged();
     void endLoopChanged();
@@ -209,6 +212,7 @@ protected:
     void paintEvent(QPaintEvent *event);
 private:
     // Attributs privés
+    QPen penLecture;
     double sizeX;
     bool zoomFlag;
     bool dragFlag;

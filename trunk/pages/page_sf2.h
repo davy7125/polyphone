@@ -53,6 +53,8 @@ public:
     ~Page_Sf2();
     // Méthodes publiques
     void afficher();
+    void compte(int &unusedSmpl, int &unusedInst, int &usedSmpl, int &usedInst, int &usedPrst, int &instGen, int &prstGen);
+
 public slots:
         void set24bits(int checked);
         void setName();

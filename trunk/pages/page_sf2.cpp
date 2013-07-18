@@ -217,16 +217,65 @@ void Page_Sf2::compte()
 {
     if (this->tree->getSelectedItemsNumber() == 0) return;
     if (!this->tree->isSelectedItemsSf2Unique()) return;
+    // Compte des samples, instruments et presets utilisés et non utilisés
+    int unusedSmpl, unusedInst, usedSmpl, usedInst, usedPrst, instGen, prstGen;
+    this->compte(unusedSmpl, unusedInst, usedSmpl, usedInst, usedPrst, instGen, prstGen);
+    // Affichage
+    char T[30];
+    sprintf(T,"%d", unusedSmpl);
+    this->ui->label_unusedSmpl->setText(QString::fromUtf8(T));
+    if (unusedSmpl)
+        this->ui->label_unusedSmpl->setStyleSheet("QLabel { color : red; font-weight: bold;}");
+    else
+        this->ui->label_unusedSmpl->setStyleSheet("QLabel { color : black; font-weight: normal;}");
+    sprintf(T,"%d", unusedInst);
+    this->ui->label_unusedInst->setText(QString::fromUtf8(T));
+    if (unusedInst)
+        this->ui->label_unusedInst->setStyleSheet("QLabel { color : red; font-weight: bold;}");
+    else
+        this->ui->label_unusedInst->setStyleSheet("QLabel { color : black; font-weight: normal;}");
+    sprintf(T,"%d", usedSmpl);
+    this->ui->label_nbSmpl->setText(QString::fromUtf8(T));
+    sprintf(T,"%d", usedInst);
+    this->ui->label_nbInst->setText(QString::fromUtf8(T));
+    sprintf(T,"%d", usedPrst);
+    this->ui->label_nbPrst->setText(QString::fromUtf8(T));
+    if (instGen <= 65536)
+    {
+        this->ui->label_nbInstGen->setStyleSheet("QLabel{color:#008800;}");
+        this->ui->label_nbInstGen->setText(QString::number(instGen) + trUtf8(" (≤ 65536)"));
+    }
+    else
+    {
+        this->ui->label_nbInstGen->setStyleSheet("QLabel{color:#FF0000;}");
+        this->ui->label_nbInstGen->setText(QString::number(instGen) + " (> 65536)");
+    }
+    if (prstGen <= 65536)
+    {
+        this->ui->label_nbPrstGen->setStyleSheet("QLabel{color:#008800;}");
+        this->ui->label_nbPrstGen->setText(QString::number(prstGen) + trUtf8(" (≤ 65536)"));
+    }
+    else
+    {
+        this->ui->label_nbPrstGen->setStyleSheet("QLabel{color:#FF0000;}");
+        this->ui->label_nbPrstGen->setText(QString::number(prstGen) + " (> 65536)");
+    }
+}
+
+void Page_Sf2::compte(int &unusedSmpl, int &unusedInst, int &usedSmpl, int &usedInst, int &usedPrst, int &instGen, int &prstGen)
+{
+    unusedSmpl = 0;
+    unusedInst = 0;
+    usedSmpl = 0;
+    usedInst = 0;
+    usedPrst = 0;
+    instGen = 0;
+    prstGen = 0;
+    if (this->tree->getSelectedItemsNumber() == 0) return;
+    if (!this->tree->isSelectedItemsSf2Unique()) return;
     EltID id = this->tree->getID(0);
     EltID id2 = this->tree->getID(0);
     // Compte des samples, instruments et presets utilisés et non utilisés
-    int unusedSmpl = 0;
-    int unusedInst = 0;
-    int usedSmpl = 0;
-    int usedInst = 0;
-    int usedPrst = 0;
-    int instGen = 0;
-    int prstGen = 0;
     id.typeElement = elementSmpl;
     int nbSmpl = sf2->count(id);
     id.typeElement = elementInst;
@@ -362,28 +411,4 @@ void Page_Sf2::compte()
             }
         }
     }
-    // Affichage
-    char T[30];
-    sprintf(T,"%d", unusedSmpl);
-    this->ui->label_unusedSmpl->setText(QString::fromUtf8(T));
-    if (unusedSmpl)
-        this->ui->label_unusedSmpl->setStyleSheet("QLabel { color : red; font-weight: bold;}");
-    else
-        this->ui->label_unusedSmpl->setStyleSheet("QLabel { color : black; font-weight: normal;}");
-    sprintf(T,"%d", unusedInst);
-    this->ui->label_unusedInst->setText(QString::fromUtf8(T));
-    if (unusedInst)
-        this->ui->label_unusedInst->setStyleSheet("QLabel { color : red; font-weight: bold;}");
-    else
-        this->ui->label_unusedInst->setStyleSheet("QLabel { color : black; font-weight: normal;}");
-    sprintf(T,"%d", usedSmpl);
-    this->ui->label_nbSmpl->setText(QString::fromUtf8(T));
-    sprintf(T,"%d", usedInst);
-    this->ui->label_nbInst->setText(QString::fromUtf8(T));
-    sprintf(T,"%d", usedPrst);
-    this->ui->label_nbPrst->setText(QString::fromUtf8(T));
-    sprintf(T,"%d", instGen);
-    this->ui->label_nbInstGen->setText(QString::fromUtf8(T));
-    sprintf(T,"%d", prstGen);
-    this->ui->label_nbPrstGen->setText(QString::fromUtf8(T));
 }
