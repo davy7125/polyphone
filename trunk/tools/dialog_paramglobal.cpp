@@ -60,12 +60,16 @@ DialogParamGlobal::DialogParamGlobal(Pile_sf2 *sf2, EltID id, QWidget *parent) :
     ui->comboValeur->blockSignals(true);
     ui->comboValeur->setCurrentIndex(_conf->getTools_global_parametre(_isPrst));
     ui->comboValeur->blockSignals(false);
+    ui->graphParamGlobal->setMinMax(_conf->getTools_global_mini(_isPrst),
+                                    _conf->getTools_global_maxi(_isPrst));
 
     // Initialisation id
     _listElt.append(id);
 
     // Dessin
     this->indexMotifChanged(this->ui->comboMotif->currentIndex());
+    ui->graphParamGlobal->setMinMaxX(_conf->getTools_global_miniX(_isPrst),
+                                     _conf->getTools_global_maxiX(_isPrst));
     this->ui->graphParamGlobal->setValues(_conf->getTools_global_courbe(_isPrst));
 
     // zone du clavier
@@ -117,6 +121,8 @@ void DialogParamGlobal::accept()
     _conf->setTools_global_maxi(_isPrst, this->ui->doubleSpinMax->value());
     _conf->setTools_global_modification(_isPrst, this->ui->comboModif->currentIndex());
     _conf->setTools_global_parametre(_isPrst, this->ui->comboValeur->currentIndex());
+    _conf->setTools_global_miniX(_isPrst, this->ui->graphParamGlobal->getXmin());
+    _conf->setTools_global_maxiX(_isPrst, this->ui->graphParamGlobal->getXmax());
     // Récupération et mise en forme des modificateurs
     QVector<double> dValues = this->ui->graphParamGlobal->getValues();
     double dMin = this->ui->doubleSpinMin->value();

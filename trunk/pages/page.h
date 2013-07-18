@@ -326,6 +326,7 @@ public:
     void reselect();
     void updateId(EltID id);
     void paramGlobal();
+    void duplication();
     void enlightColumn(int key, bool isEnlighted);
 
 protected:
@@ -374,6 +375,7 @@ private:
     static void addAvailableSenderMod(ComboBox *combo, EltID id);
     int getAssociatedMod(EltID id);
     int limit(int iVal, Champ champ, EltID id);
+    void duplication(EltID id);
 
     static QList<Modulator> _modulatorCopy;
     QList<int> _listKeyEnlighted;

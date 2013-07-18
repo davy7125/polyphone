@@ -34,6 +34,33 @@
     <property name="horizontalSpacing">
      <number>6</number>
     </property>
+    <item row="2" column="0">
+     <widget class="QStackedWidget" name="stackedWidget">
+      <property name="currentIndex">
+       <number>0</number>
+      </property>
+      <widget class="QWidget" name="page_Soft">
+       <layout class="QGridLayout" name="gridLayout_2">
+        <item row="0" column="0">
+         <widget class="QLabel" name="label">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+            <horstretch>50</horstretch>
+            <verstretch>50</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="pixmap">
+           <pixmap resource="ressources.qrc">:/icones/logo</pixmap>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+    </item>
     <item row="0" column="0">
      <widget class="QWidget" name="ensembleKeyboard" native="true">
       <layout class="QHBoxLayout" name="horizontalLayout_4">
@@ -143,33 +170,6 @@
         </widget>
        </item>
       </layout>
-     </widget>
-    </item>
-    <item row="2" column="0">
-     <widget class="QStackedWidget" name="stackedWidget">
-      <property name="currentIndex">
-       <number>0</number>
-      </property>
-      <widget class="QWidget" name="page_Soft">
-       <layout class="QGridLayout" name="gridLayout_2">
-        <item row="0" column="0">
-         <widget class="QLabel" name="label">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
-            <horstretch>50</horstretch>
-            <verstretch>50</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="text">
-           <string/>
-          </property>
-          <property name="pixmap">
-           <pixmap resource="ressources.qrc">:/icones/logo</pixmap>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </widget>
      </widget>
     </item>
    </layout>
@@ -323,9 +323,6 @@
    <property name="toolTip">
     <string/>
    </property>
-   <property name="autoFillBackground">
-    <bool>false</bool>
-   </property>
    <property name="allowedAreas">
     <set>Qt::BottomToolBarArea|Qt::TopToolBarArea</set>
    </property>
@@ -335,18 +332,6 @@
    <attribute name="toolBarBreak">
     <bool>false</bool>
    </attribute>
-   <addaction name="actionNouveau"/>
-   <addaction name="actionOuvrir"/>
-   <addaction name="actionEnregistrer"/>
-   <addaction name="separator"/>
-   <addaction name="actionAnnuler"/>
-   <addaction name="actionR_tablir"/>
-   <addaction name="separator"/>
-   <addaction name="actionImporter"/>
-   <addaction name="actionNouvel_instrument"/>
-   <addaction name="actionNouveau_preset"/>
-   <addaction name="separator"/>
-   <addaction name="action_Supprimer"/>
   </widget>
   <widget class="QDockWidget" name="dockWidget">
    <property name="minimumSize">
@@ -794,7 +779,7 @@
   </action>
   <action name="action_Enlever_les_l_ments_non_utilis_s">
    <property name="enabled">
-    <bool>true</bool>
+    <bool>false</bool>
    </property>
    <property name="text">
     <string>&amp;Enlever les éléments non utilisés</string>
@@ -955,103 +940,123 @@
    </property>
   </action>
   <action name="actionEnlever_blanc_au_d_part">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>&amp;Enlever blanc au départ</string>
    </property>
   </action>
   <action name="actionAjuster_la_fin_de_boucle">
    <property name="enabled">
-    <bool>true</bool>
+    <bool>false</bool>
    </property>
    <property name="text">
     <string>&amp;Ajuster à la fin de boucle</string>
    </property>
   </action>
   <action name="actionNormaliser_volume">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>&amp;Normaliser volume</string>
    </property>
   </action>
   <action name="actionBouclage_automatique">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>&amp;Bouclage automatique</string>
    </property>
   </action>
   <action name="actionFiltre_mur_de_brique">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>&amp;Filtre &quot;mur de brique&quot;...</string>
    </property>
   </action>
   <action name="actionTransposer">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>&amp;Transposer...</string>
    </property>
   </action>
   <action name="actionR_gler_att_nuation_minimale">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>&amp;Régler atténuation minimale...</string>
    </property>
   </action>
   <action name="actionD_saccordage_ondulant">
    <property name="enabled">
-    <bool>true</bool>
+    <bool>false</bool>
    </property>
    <property name="text">
-    <string>&amp;Désaccordage ondulant...</string>
+    <string>&amp;Désaccordage céleste...</string>
    </property>
   </action>
   <action name="actionSpacialisation_du_son">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>&amp;Spatialisation du son...</string>
    </property>
   </action>
   <action name="action_R_partition_automatique">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>&amp;Répartition automatique</string>
    </property>
   </action>
   <action name="actionD_uplication_des_divisions">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>D&amp;uplication des divisions</string>
    </property>
   </action>
   <action name="action_Param_trage_global">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>&amp;Paramétrage global...</string>
    </property>
   </action>
   <action name="action_R_glage_balance">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>&amp;Réglage balance</string>
    </property>
   </action>
   <action name="action_Cr_ation_mutation_mixture">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>&amp;Création mixture...</string>
    </property>
   </action>
   <action name="action_Diminuer_sifflements">
    <property name="enabled">
-    <bool>true</bool>
+    <bool>false</bool>
    </property>
    <property name="text">
     <string>&amp;Diminuer sifflements...</string>
-   </property>
-  </action>
-  <action name="action_Diminuer_sifflements_2">
-   <property name="text">
-    <string>&amp;Diminuer sifflements...</string>
-   </property>
-  </action>
-  <action name="action_Clavier">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="checked">
-    <bool>true</bool>
-   </property>
-   <property name="text">
-    <string>&amp;Clavier</string>
    </property>
   </action>
   <action name="action5_octaves">
@@ -1089,32 +1094,34 @@
     <string>&amp;Aucun</string>
    </property>
   </action>
-  <action name="actionR_initialiserInst">
-   <property name="text">
-    <string>&amp;Réinitialiser</string>
-   </property>
-  </action>
-  <action name="actionR_initialiserPrst">
-   <property name="text">
-    <string>&amp;Réinitialiser</string>
-   </property>
-  </action>
   <action name="actionDuplication_des_divisions">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>&amp;Duplication des divisions</string>
    </property>
   </action>
   <action name="action_laboration_release">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>&amp;Élaboration release...</string>
    </property>
   </action>
   <action name="action_Param_trage_global_2">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>&amp;Paramétrage global...</string>
    </property>
   </action>
   <action name="action_Association_auto_samples">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>&amp;Association auto samples</string>
    </property>
@@ -2013,7 +2020,7 @@
    <sender>actionDuplication_des_divisions</sender>
    <signal>triggered()</signal>
    <receiver>MainWindow</receiver>
-   <slot>duplicationPrst()</slot>
+   <slot>duplication()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>-1</x>
@@ -2045,7 +2052,7 @@
    <sender>action_Param_trage_global_2</sender>
    <signal>triggered()</signal>
    <receiver>MainWindow</receiver>
-   <slot>paramGlobal2()</slot>
+   <slot>paramGlobal()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>-1</x>
@@ -2139,10 +2146,9 @@
   <slot>setKeyboardType2()</slot>
   <slot>setKeyboardType3()</slot>
   <slot>setVelocity(int)</slot>
-  <slot>duplicationPrst()</slot>
   <slot>release()</slot>
-  <slot>paramGlobal2()</slot>
   <slot>associationAutoSmpl()</slot>
   <slot>magnetophone()</slot>
+  <slot>showToolBarManager()</slot>
  </slots>
 </ui>

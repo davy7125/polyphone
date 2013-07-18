@@ -44,7 +44,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent, Qt::Window | Qt::W
     help(this),
     dialList(this),
     keyboard(NULL),
-    dialogMagneto(NULL) // doit être appelé après le premier appel au singleton Config
+    dialogMagneto(NULL), // doit être appelé après le premier appel au singleton Config
+    actionKeyboard(NULL)
 {
     ui->setupUi(this);
 #if QT_VERSION >= QT_VERSION_CHECK(4, 7, 0)
@@ -101,12 +102,6 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent, Qt::Window | Qt::W
     ui->arborescence->init(this);
     // Initialisation dialog liste (pointeur vers les sf2 et mainWindow)
     this->dialList.init(this, this->sf2);
-    // Initialisation répertoire de départ
-#if QT_VERSION >= QT_VERSION_CHECK(5, 0, 0)
-    fileName =  QStandardPaths::displayName(QStandardPaths::DesktopLocation);
-#else
-    fileName = QDesktopServices::storageLocation(QDesktopServices::DesktopLocation);
-#endif
     // Fichiers récents
     updateFavoriteFiles();
     // Affichage logo logiciel
@@ -133,7 +128,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent, Qt::Window | Qt::W
     this->ui->ensembleKeyboard->setMaximumHeight(this->ui->toolBar->height()+5);
     this->keyboard->setMaximumHeight(this->ui->toolBar->height()+5);
     this->ui->velocityButton->setMaximumHeight(this->ui->toolBar->height()+5);
-    this->ui->toolBar->addWidget(this->ui->ensembleKeyboard);
+    actionKeyboard = this->ui->toolBar->addWidget(this->ui->ensembleKeyboard);
     this->showKeyboard(false);
     this->ui->velocityButton->setValue(this->configuration->getKeyboardVelocity());
     // Ouverture port midi et connexions
@@ -142,6 +137,10 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent, Qt::Window | Qt::W
     connect(this->keyboard, SIGNAL(noteOn(int)), this, SLOT(noteOn(int)));
     connect(this->keyboard, SIGNAL(noteOff(int)), this, SLOT(noteOff(int)));
     connect(this->page_smpl, SIGNAL(noteChanged(int,int)), this, SLOT(noteChanged(int,int)));
+    // Connexion changement de couleur
+    connect(Config::getInstance(), SIGNAL(colorsChanged()), this->page_smpl, SLOT(updateColors()));
+    // Initialisation des actions dans les configurations
+    this->configuration->setListeActions(this->getListeActions());
 }
 MainWindow::~MainWindow()
 {
@@ -235,19 +234,17 @@ void MainWindow::closeEvent(QCloseEvent *event)
 void MainWindow::ouvrir()
 {
     // Chargement d'un fichier .sf2
-    QFileInfo fileInfo(fileName);
-    QString fileNameTmp = fileInfo.completeBaseName() + ".sf2";
-    fileNameTmp = QFileDialog::getOpenFileName(this, tr("Ouvrir une soundfont"),
-                                               fileNameTmp, tr("Fichier .sf2 (*.sf2)"));
-    if (fileNameTmp.isNull()) return;
-    fileName = fileNameTmp;
+    QString fileName = QFileDialog::getOpenFileName(this, tr("Ouvrir une soundfont"),
+                                                    Config::getInstance()->getLastDirectory(Config::typeFichierSf2),
+                                                    tr("Fichier .sf2 (*.sf2)"));
+    if (fileName.isNull()) return;
     ouvrir(fileName);
 }
-void MainWindow::ouvrirFichier1() {fileName = this->configuration->getFile(0); ouvrir(this->configuration->getFile(0));}
-void MainWindow::ouvrirFichier2() {fileName = this->configuration->getFile(1); ouvrir(this->configuration->getFile(1));}
-void MainWindow::ouvrirFichier3() {fileName = this->configuration->getFile(2); ouvrir(this->configuration->getFile(2));}
-void MainWindow::ouvrirFichier4() {fileName = this->configuration->getFile(3); ouvrir(this->configuration->getFile(3));}
-void MainWindow::ouvrirFichier5() {fileName = this->configuration->getFile(4); ouvrir(this->configuration->getFile(4));}
+void MainWindow::ouvrirFichier1() {ouvrir(this->configuration->getLastFile(Config::typeFichierSf2, 0));}
+void MainWindow::ouvrirFichier2() {ouvrir(this->configuration->getLastFile(Config::typeFichierSf2, 1));}
+void MainWindow::ouvrirFichier3() {ouvrir(this->configuration->getLastFile(Config::typeFichierSf2, 2));}
+void MainWindow::ouvrirFichier4() {ouvrir(this->configuration->getLastFile(Config::typeFichierSf2, 3));}
+void MainWindow::ouvrirFichier5() {ouvrir(this->configuration->getLastFile(Config::typeFichierSf2, 4));}
 void MainWindow::ouvrir(QString fileName)
 {
     // Chargement d'un fichier .sf2
@@ -256,7 +253,7 @@ void MainWindow::ouvrir(QString fileName)
     {
     case 0:
         // le chargement s'est bien déroulé
-        this->configuration->addFavorite(fileName);
+        this->configuration->addFile(Config::typeFichierSf2, fileName);
         updateFavoriteFiles();
         updateDo();
         ui->arborescence->clearSelection();
@@ -374,9 +371,9 @@ int  MainWindow::sauvegarder(int indexSf2, bool saveAs)
     this->sf2->prepareNewActions();
     EltID id = {elementSf2, indexSf2, 0, 0, 0};
     // Avertissement si enregistrement dans une résolution inférieure
-    int ret = QMessageBox::Save;
     if (sf2->get(id, champ_wBpsSave).wValue < sf2->get(id, champ_wBpsInit).wValue)
     {
+        int ret = QMessageBox::Save;
         QMessageBox msgBox(this);
         msgBox.setIcon(QMessageBox::Warning);
         char T[20];
@@ -390,22 +387,52 @@ int  MainWindow::sauvegarder(int indexSf2, bool saveAs)
         msgBox.button(QMessageBox::Cancel)->setText(tr("&Non"));
         msgBox.setDefaultButton(QMessageBox::Cancel);
         ret = msgBox.exec();
+        if (ret == QMessageBox::Cancel) return 1;
     }
-    if (ret == QMessageBox::Cancel) return 1;
+
+
+    // Compte du nombre de générateurs utilisés
+    int unusedSmpl, unusedInst, usedSmpl, usedInst, usedPrst, instGen, prstGen;
+    this->page_sf2->compte(unusedSmpl, unusedInst, usedSmpl, usedInst, usedPrst, instGen, prstGen);
+    if ((instGen < 65536 || prstGen < 65536) && Config::getInstance()->getActivationSaveWarning_toManyGenerators())
+    {
+        int ret = QMessageBox::Save;
+        QMessageBox msgBox(this);
+        msgBox.setIcon(QMessageBox::Warning);
+        QString texte;
+        if (instGen < 65536 && prstGen < 65536)
+            texte = trUtf8("<b>Trop de paramètres dans les instruments et les presets.</b>");
+        else if (instGen < 65536)
+            texte = trUtf8("<b>Trop de paramètres dans les instruments.</b>");
+        else
+            texte = trUtf8("<b>Trop de paramètres dans les presets.</b>");
+        msgBox.setText(texte);
+        msgBox.setInformativeText(trUtf8("Certains synthétiseurs ne prennent pas en compte "
+                                         "les paramètres au delà du 65536ème.\n"
+                                         "Diviser le fichier en plusieurs sf2 peut résoudre le problème."));
+        msgBox.setStandardButtons(QMessageBox::Cancel | QMessageBox::Save | QMessageBox::YesAll);
+        msgBox.button(QMessageBox::Save)->setText(trUtf8("&Sauvegarder"));
+        msgBox.button(QMessageBox::YesAll)->setText(trUtf8("Sauvegarder, &désactiver ce message"));
+        msgBox.button(QMessageBox::Cancel)->setText(trUtf8("&Annuler"));
+        msgBox.setDefaultButton(QMessageBox::Cancel);
+        ret = msgBox.exec();
+        if (ret == QMessageBox::Cancel) return 1;
+        if (ret == QMessageBox::YesAll)
+            Config::getInstance()->setActivationSaveWarning_toManyGenerators(false);
+    }
+
+    QString fileName;
     if (saveAs || sf2->getQstr(id, champ_filename) == "")
     {
-        QString fileNameTmp = fileName;
         if (sf2->getQstr(id, champ_filename) == "")
         {
-            QFileInfo fileInfo = fileNameTmp;
-            fileNameTmp = fileInfo.filePath() + "/" + sf2->getQstr(id, champ_name) + ".sf2";
-            fileNameTmp = QFileDialog::getSaveFileName(this, tr("Sauvegarder une soundfont"), fileNameTmp, tr("Fichier .sf2 (*.sf2)"));
+            fileName = Config::getInstance()->getLastDirectory(Config::typeFichierSf2) + "/" + sf2->getQstr(id, champ_name) + ".sf2";
+            fileName = QFileDialog::getSaveFileName(this, tr("Sauvegarder une soundfont"), fileName, tr("Fichier .sf2 (*.sf2)"));
         }
         else
-            fileNameTmp = QFileDialog::getSaveFileName(this, tr("Sauvegarder une soundfont"), \
-                                                       sf2->getQstr(id, champ_filename), tr("Fichier .sf2 (*.sf2)"));
-        if (fileNameTmp.isNull()) return 1;
-        else fileName = fileNameTmp;
+            fileName = QFileDialog::getSaveFileName(this, tr("Sauvegarder une soundfont"), \
+                                                    sf2->getQstr(id, champ_filename), tr("Fichier .sf2 (*.sf2)"));
+        if (fileName.isNull()) return 1;
     }
     else fileName = sf2->getQstr(id, champ_filename);
     switch (this->sf2->sauvegarder(indexSf2, fileName))
@@ -413,7 +440,7 @@ int  MainWindow::sauvegarder(int indexSf2, bool saveAs)
     case 0:
         // sauvegarde ok
         updateDo();
-        this->configuration->addFavorite(fileName);
+        this->configuration->addFile(Config::typeFichierSf2, fileName);
         updateFavoriteFiles();
         if (ui->stackedWidget->currentWidget() == this->page_sf2)
             this->page_sf2->afficher();
@@ -712,23 +739,27 @@ void MainWindow::updateActions()
         ui->actionNouveau_preset->setEnabled(1);
         ui->actionNouvel_instrument->setEnabled(1);
         // Outils
+        this->enableActionSample(typeUnique && type == elementSmpl && !this->page_smpl->isPlaying());
+        this->enableActionInstrument((type == elementInst || type == elementInstSmpl) && familleUnique);
+        this->enableActionPreset((type == elementPrst || type == elementPrstInst) && familleUnique);
+        this->enableActionSf2(true);
+
+        // Particularité 1 : un outil des sf2 doit être désactivé si la lecture est en cours
         if (!this->page_smpl->isPlaying())
             ui->action_Enlever_les_l_ments_non_utilis_s->setEnabled(1);
         else
             ui->action_Enlever_les_l_ments_non_utilis_s->setEnabled(0);
-        if (typeUnique && type == elementSmpl && !this->page_smpl->isPlaying())
-            ui->menuSample->setEnabled(1);
-        else
-            ui->menuSample->setEnabled(0);
-        if ((type == elementInst || type == elementInstSmpl) && familleUnique)
-            ui->menuInstrument->setEnabled(1);
-        else
-            ui->menuInstrument->setEnabled(0);
-        if ((type == elementPrst || type == elementPrstInst) && familleUnique)
-            ui->menuPreset->setEnabled(1);
-        else
-            ui->menuPreset->setEnabled(0);
-        ui->menuDivers->setEnabled(1);
+
+        // Particularité 2 : "duplication" et "paramétrage globale" sont communs aux instruments
+        // et aux presets -> pas de désactivation si l'une des 2 conditions est remplie
+        if (familleUnique && (type == elementInst || type == elementInstSmpl ||
+                              type == elementPrst || type == elementPrstInst))
+        {
+            ui->actionDuplication_des_divisions->setEnabled(true);
+            ui->actionD_uplication_des_divisions->setEnabled(true);
+            ui->action_Param_trage_global->setEnabled(true);
+            ui->action_Param_trage_global_2->setEnabled(true);
+        }
     }
     else
     {
@@ -746,15 +777,44 @@ void MainWindow::updateActions()
         // Nouveau sample, instrument, preset
         ui->actionNouveau_preset->setEnabled(0);
         ui->actionNouvel_instrument->setEnabled(0);
+        // Renommer, clavier, ...
+        ui->actionRenommer->setEnabled(0);
+        this->showKeyboard(false);
         // Outils
-        ui->menuSample->setEnabled(0);
-        ui->menuInstrument->setEnabled(0);
-        ui->menuDivers->setEnabled(0);
-        ui->action_Enlever_les_l_ments_non_utilis_s->setEnabled(0);
+        this->enableActionSample(false);
+        this->enableActionInstrument(false);
+        this->enableActionPreset(false);
+        this->enableActionSf2(false);
     }
 }
+void MainWindow::enableActionSample(bool isEnabled)
+{
+    ui->menuSample->setEnabled(isEnabled);
+    for (int i = 0; i < ui->menuSample->actions().size(); i++)
+        ui->menuSample->actions().at(i)->setEnabled(isEnabled);
+}
+void MainWindow::enableActionInstrument(bool isEnabled)
+{
+    ui->menuInstrument->setEnabled(isEnabled);
+    for (int i = 0; i < ui->menuInstrument->actions().size(); i++)
+        ui->menuInstrument->actions().at(i)->setEnabled(isEnabled);
+}
+void MainWindow::enableActionPreset(bool isEnabled)
+{
+    ui->menuPreset->setEnabled(isEnabled);
+    for (int i = 0; i < ui->menuPreset->actions().size(); i++)
+        ui->menuPreset->actions().at(i)->setEnabled(isEnabled);
+}
+void MainWindow::enableActionSf2(bool isEnabled)
+{
+    ui->menuDivers->setEnabled(isEnabled);
+    for (int i = 0; i < ui->menuDivers->actions().size(); i++)
+        ui->menuDivers->actions().at(i)->setEnabled(isEnabled);
+}
+
 void MainWindow::desactiveOutilsSmpl()
 {
+    // Appel depuis pageSmpl
     this->ui->action_Supprimer->setEnabled(0);
     this->ui->menuSample->setEnabled(0);
     this->ui->action_Enlever_les_l_ments_non_utilis_s->setEnabled(0);
@@ -762,6 +822,7 @@ void MainWindow::desactiveOutilsSmpl()
 }
 void MainWindow::activeOutilsSmpl()
 {
+    // Appel depuis pageSmpl
     int nb = ui->arborescence->getSelectedItemsNumber();
     if (nb != 1)
     {
@@ -799,9 +860,9 @@ void MainWindow::updateFavoriteFiles()
         case 3: qAct = ui->actionFichier_4; break;
         case 4: qAct = ui->actionFichier_5; break;
         }
-        if (this->configuration->getFile(i)[0] != '\0')
+        if (!this->configuration->getLastFile(Config::typeFichierSf2, i).isEmpty())
         {
-            qAct->setText(this->configuration->getFile(i));
+            qAct->setText(this->configuration->getLastFile(Config::typeFichierSf2, i));
             qAct->setVisible(1);
             qAct->setEnabled(1);
         }
@@ -1734,10 +1795,9 @@ void MainWindow::dragAndDrop(EltID idDest, EltID idSrc, int temps, int *msg, QBy
 void MainWindow::importerSmpl()
 {
     if (ui->arborescence->getSelectedItemsNumber() == 0) return;
-    QFileInfo qFileInfo = fileName;
     // Affichage dialogue
-    QStringList strList = QFileDialog::getOpenFileNames(this, tr("Importer un fichier audio"), \
-        qFileInfo.absolutePath(), tr("Fichier .wav (*.wav)"));
+    QStringList strList = QFileDialog::getOpenFileNames(this, tr("Importer un fichier audio"),
+        Config::getInstance()->getLastDirectory(Config::typeFichierSample), tr("Fichier .wav (*.wav)"));
     if (strList.count() == 0) return;
     this->sf2->prepareNewActions();
     EltID id = {elementSmpl, this->ui->arborescence->getID(0).indexSf2, 0, 0, 0};
@@ -1747,8 +1807,9 @@ void MainWindow::importerSmpl()
     for (int i = 0; i < nbElt; i++)
     {
         qStr = strList.takeAt(0);
-        if (i == 0) fileName = qStr;
-        qFileInfo = qStr;
+        if (i == 0)
+            Config::getInstance()->addFile(Config::typeFichierSample, qStr);
+        QFileInfo qFileInfo = qStr;
         // Récupération des informations d'un sample
         Sound * son = new Sound(qStr);
         int nChannels = son->get(champ_wChannels);
@@ -1917,9 +1978,8 @@ void MainWindow::exporterSmpl()
     int nbElt = ui->arborescence->getSelectedItemsNumber();
     if (nbElt == 0) return;
     EltID id;
-    QFileInfo qFileInfo = fileName;
-    QString qDir = QFileDialog::getExistingDirectory(this, QString::fromUtf8(tr("Choisir un répertoire de destination").toStdString().c_str()), \
-                                                     qFileInfo.absolutePath());
+    QString qDir = QFileDialog::getExistingDirectory(this, trUtf8("Choisir un répertoire de destination"), \
+                                                     Config::getInstance()->getLastDirectory(Config::typeFichierSample));
     if (qDir.isEmpty()) return;
     qDir.append(QDir::separator());
     QFile file;
@@ -2020,6 +2080,7 @@ void MainWindow::exporterSmpl()
                     Sound::exporter(qStr2, this->sf2->getSon(id));
                 else
                     Sound::exporter(qStr2, this->sf2->getSon(id), this->sf2->getSon(id2));
+                Config::getInstance()->addFile(Config::typeFichierSample, qStr2);
             }
         }
     }
@@ -2257,14 +2318,28 @@ void MainWindow::reglerBalance()    {this->page_smpl->reglerBalance();}
 void MainWindow::transposer()       {this->page_smpl->transposer();}
 void MainWindow::sifflements()      {this->page_smpl->sifflements();}
 void MainWindow::desaccorder()      {this->page_inst->desaccorder();}
-void MainWindow::duplication()      {this->page_inst->duplication();}
-void MainWindow::paramGlobal()      {this->page_inst->paramGlobal();}
+void MainWindow::duplication()
+{
+    if (ui->arborescence->getSelectedItemsNumber() == 0) return;
+    ElementType type = ui->arborescence->getID(0).typeElement;
+    if (type == elementInst || type == elementInstSmpl)
+        this->page_inst->duplication();
+    else if (type == elementPrst || type == elementPrstInst)
+        this->page_prst->duplication();
+}
+void MainWindow::paramGlobal()
+{
+    if (ui->arborescence->getSelectedItemsNumber() == 0) return;
+    ElementType type = ui->arborescence->getID(0).typeElement;
+    if (type == elementInst || type == elementInstSmpl)
+        this->page_inst->paramGlobal();
+    else if (type == elementPrst || type == elementPrstInst)
+        this->page_prst->paramGlobal();
+}
 void MainWindow::repartitionAuto()  {this->page_inst->repartitionAuto();}
 void MainWindow::spatialisation()   {this->page_inst->spatialisation();}
 void MainWindow::mixture()          {this->page_inst->mixture();}
 void MainWindow::release()          {this->page_inst->release();}
-void MainWindow::duplicationPrst()  {this->page_prst->duplication();}
-void MainWindow::paramGlobal2()     {this->page_prst->paramGlobal();}
 void MainWindow::purger()
 {
     // Suppression des éléments non utilisés
@@ -2631,4 +2706,73 @@ void MainWindow::setSynthReverb(int level, int size, int width, int damping)
 void MainWindow::setSynthChorus(int level, int depth, int frequency)
 {
     this->synth->setChorus(level, depth, frequency);
+}
+
+QList<QAction *> MainWindow::getListeActions()
+{
+    QList<QAction *> listeAction;
+    listeAction << ui->actionNouveau
+                << ui->actionOuvrir
+                << ui->actionEnregistrer
+                << ui->actionEnregistrer_sous
+                << ui->actionImporter
+                << ui->actionExporter
+                << ui->actionFermer_le_fichier
+                << ui->actionNouvel_instrument
+                << ui->actionNouveau_preset
+                << ui->actionAnnuler
+                << ui->actionR_tablir
+                << ui->actionCopier
+                << ui->actionColler
+                << ui->action_Supprimer
+                << ui->actionRenommer
+                << ui->actionPr_f_rences
+                << ui->actionAjuster_la_fin_de_boucle
+                << ui->actionBouclage_automatique
+                << ui->action_Diminuer_sifflements
+                << ui->actionEnlever_blanc_au_d_part
+                << ui->actionFiltre_mur_de_brique
+                << ui->actionNormaliser_volume
+                << ui->action_R_glage_balance
+                << ui->actionTransposer
+                << ui->action_Cr_ation_mutation_mixture
+                << ui->actionD_saccordage_ondulant
+                << ui->actionD_uplication_des_divisions
+                << ui->action_laboration_release
+                << ui->action_Param_trage_global
+                << ui->action_R_partition_automatique
+                << ui->actionSpacialisation_du_son
+                << ui->action_Association_auto_samples
+                << ui->action_Enlever_les_l_ments_non_utilis_s
+                << ui->actionR_gler_att_nuation_minimale
+                << ui->actionMagn_tophone
+                << ui->actionSommaire;
+    return listeAction;
+}
+void MainWindow::setListeActions(QList<QAction *> listeActions)
+{
+    // On vide la barre d'outils
+    QList<QAction *> actions = this->getListeActions();
+    for (int i = 0; i < actions.size(); i++)
+        this->ui->toolBar->removeAction(actions.at(i));
+    this->ui->toolBar->removeAction(actionKeyboard);
+    int size = actionSeparators.size();
+    for (int i = 0; i < size; i++)
+    {
+        this->ui->toolBar->removeAction(actionSeparators.at(0));
+        delete actionSeparators.takeFirst();
+    }
+
+    // Ajout des actions
+    for (int i = 0; i < listeActions.size(); i++)
+    {
+        if (listeActions.at(i))
+            this->ui->toolBar->addAction(listeActions.at(i));
+        else
+        {
+            // Ajout d'un séparateur
+            actionSeparators << this->ui->toolBar->addSeparator();
+        }
+    }
+    this->ui->toolBar->addAction(actionKeyboard);
 }

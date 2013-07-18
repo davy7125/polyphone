@@ -46,7 +46,6 @@ public:
     void afficher();
     void spinUpDown(int steps, SpinBox *spin);
     void firstAvailablePresetBank(EltID id, int &nBank, int &nPreset);
-    void duplication();
 
 public slots:
     void setBank();
@@ -56,8 +55,6 @@ private:
     Ui::Page_Prst *ui;
     static int closestAvailablePreset(EltID id, WORD wBank, WORD wPreset);
     static bool isAvailable(EltID id, WORD wBank, WORD wPreset);
-    // Outils
-    void duplication(EltID id);
 };
 
 // Classe TableWidget pour presets

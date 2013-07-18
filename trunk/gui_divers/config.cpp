@@ -108,8 +108,6 @@ Config::Config(QWidget *parent) : QDialog(parent),
     this->ui->dialChoNiveau->setValue(this->choLevel);
     this->ui->dialChoAmplitude->setValue(this->choDepth);
     this->ui->dialChoFrequence->setValue(this->choFrequency);
-    this->loaded = 1;
-    // Correction
     if (this->keyboardType < 0 || this->keyboardType > 3)
         this->keyboardType = 1;
     if (this->keyboardVelocity < 0)
@@ -118,6 +116,9 @@ Config::Config(QWidget *parent) : QDialog(parent),
         this->keyboardVelocity = 127;
     this->ui->comboRam->setVisible(false); // Temporaire : tout charger dans la ram n'apporte rien pour l'instant (sur linux)
     this->ui->label_2->setVisible(false);
+    this->setColors();
+
+    this->loaded = 1;
 }
 Config::~Config()
 {
@@ -129,10 +130,13 @@ void Config::show()
     // Liste des entrées midi à mettre à jour continuellement
     this->ui->comboMidiInput->clear();
     QStringList listMidi = this->mainWindow->getListMidi();
+    this->ui->comboMidiInput->addItem("-");
     this->ui->comboMidiInput->addItems(listMidi);
     // Sélection
-    if (this->ui->comboMidiInput->count() > this->numPortMidi)
-        this->ui->comboMidiInput->setCurrentIndex(this->numPortMidi);
+    if (this->ui->comboMidiInput->count() > this->numPortMidi + 1)
+        this->ui->comboMidiInput->setCurrentIndex(this->numPortMidi + 1);
+    else
+        this->ui->comboMidiInput->setCurrentIndex(0);
     // Affichage du dialogue
     QDialog::show();
 }
@@ -233,34 +237,86 @@ void Config::setNumPortMidi(int val)
 {
     if (this->loaded)
     {
-        this->numPortMidi = val;
+        this->numPortMidi = val-1;
         this->store();
-        this->mainWindow->openMidiPort(val);
+        this->mainWindow->openMidiPort(val-1);
     }
 }
-void Config::addFavorite(QString filePath)
+void Config::addFile(TypeFichier typeFichier, QString filePath)
 {
     // Modification des fichiers récemment ouverts
-    int n = 4;
-    if (filePath.compare(this->listFiles.at(0)) == 0)
-        n = 0;
-    else if (filePath.compare(this->listFiles.at(1)) == 0)
-        n = 1;
-    else if (filePath.compare(this->listFiles.at(2)) == 0)
-        n = 2;
-    else if (filePath.compare(this->listFiles.at(3)) == 0)
-        n = 3;
-    else if (filePath.compare(this->listFiles.at(4)) == 0)
-        n = 4;
-    for (int i = n-1; i >= 0; i--)
-        listFiles[i+1] = this->listFiles.at(i);
-    listFiles[0] = filePath;
+    switch (typeFichier)
+    {
+    case typeFichierEnregistrement:
+        recordFile = filePath;
+        break;
+    case typeFichierSample:
+        sampleFile = filePath;
+        break;
+    case typeFichierSf2:{
+        int n = 4;
+        if (filePath.compare(this->listFiles.at(0)) == 0)
+            n = 0;
+        else if (filePath.compare(this->listFiles.at(1)) == 0)
+            n = 1;
+        else if (filePath.compare(this->listFiles.at(2)) == 0)
+            n = 2;
+        else if (filePath.compare(this->listFiles.at(3)) == 0)
+            n = 3;
+        else if (filePath.compare(this->listFiles.at(4)) == 0)
+            n = 4;
+        for (int i = n-1; i >= 0; i--)
+            listFiles[i+1] = this->listFiles.at(i);
+        listFiles[0] = filePath;
+        }break;
+    }
     this->store();
 }
-void Config::setRecordFile(QString filePath)
+QString Config::getLastFile(TypeFichier typeFichier, int num)
 {
-    recordFile = filePath;
-    this->store();
+    QString lastFile;
+    switch (typeFichier)
+    {
+    case typeFichierEnregistrement:
+        lastFile = recordFile;
+        break;
+    case typeFichierSample:
+        lastFile = sampleFile;
+        break;
+    case typeFichierSf2:
+        if (num >= 0 && num < 5)
+            lastFile = listFiles.at(num);
+        break;
+    }
+
+    return lastFile;
+}
+QString Config::getLastDirectory(TypeFichier typeFichier)
+{
+    QString lastDir;
+    switch (typeFichier)
+    {
+    case typeFichierEnregistrement:
+        lastDir = recordFile;
+        break;
+    case typeFichierSample:
+        lastDir = sampleFile;
+        break;
+    case typeFichierSf2:
+        lastDir = this->listFiles.at(0);
+        break;
+    }
+    if (!lastDir.isEmpty())
+        lastDir = QFileInfo(lastDir).dir().path();
+
+    if (lastDir.isEmpty() || !QDir(lastDir).exists())
+#if QT_VERSION >= QT_VERSION_CHECK(5, 0, 0)
+        lastDir =  QStandardPaths::displayName(QStandardPaths::DesktopLocation);
+#else
+        lastDir = QDesktopServices::storageLocation(QDesktopServices::DesktopLocation);
+#endif
+
+    return lastDir;
 }
 
 void Config::setSynthGain(int val)
@@ -341,6 +397,7 @@ void Config::load()
 {
     // Chargement des fichiers récents
     this->recordFile        = settings.value("recent_file/record", "").toString();
+    this->sampleFile        = settings.value("recent_file/sample", "").toString();
     int j = 0;
     QString strTmp;
     for (int i = 0; i < 5; i++)
@@ -369,7 +426,7 @@ void Config::load()
     this->wavRemoveBlank    = settings.value("wav_remove_bank", false).toBool();
     this->keyboardType      = settings.value("keyboard/type", 1).toInt();
     this->keyboardVelocity  = settings.value("keyboard/velocity", 64).toInt();
-    this->numPortMidi       = settings.value("midi/index_port", 0).toInt();
+    this->numPortMidi       = settings.value("midi/index_port", -1).toInt();
     this->synthGain         = settings.value("synth/gain", 0).toInt();
     this->revLevel          = settings.value("synth/rev_level", 0).toInt();
     this->revSize           = settings.value("synth/rev_size", 0).toInt();
@@ -378,10 +435,18 @@ void Config::load()
     this->choLevel          = settings.value("synth/cho_level", 0).toInt();
     this->choDepth          = settings.value("synth/cho_depth", 0).toInt();
     this->choFrequency      = settings.value("synth/cho_frequency", 0).toInt();
+    this->colorList.clear();
+    this->colorList << settings.value("colors/graph_background", QColor(0, 0, 0)).toString()
+                    << settings.value("colors/graph_waveform", QColor(0, 0, 255)).toString()
+                    << settings.value("colors/graph_grid", QColor(60, 60, 100)).toString()
+                    << settings.value("colors/graph_startloop", QColor(100, 255, 100)).toString()
+                    << settings.value("colors/graph_endloop", QColor(255, 0, 0)).toString()
+                    << settings.value("colors/graph_timecursor", QColor(255, 255, 255)).toString();
 }
 void Config::store()
 {
     settings.setValue("recent_file/record",             this->recordFile);
+    settings.setValue("recent_file/sample",             this->sampleFile);
     settings.setValue("recent_file/file_0",             listFiles.at(0));
     settings.setValue("recent_file/file_1",             listFiles.at(1));
     settings.setValue("recent_file/file_2",             listFiles.at(2));
@@ -404,4 +469,274 @@ void Config::store()
     settings.setValue("synth/cho_level",                this->choLevel);
     settings.setValue("synth/cho_depth",                this->choDepth);
     settings.setValue("synth/cho_frequency",            this->choFrequency);
+    settings.setValue("colors/graph_background",        this->colorList.at(0).name());
+    settings.setValue("colors/graph_waveform",          this->colorList.at(1).name());
+    settings.setValue("colors/graph_grid",              this->colorList.at(2).name());
+    settings.setValue("colors/graph_startloop",         this->colorList.at(3).name());
+    settings.setValue("colors/graph_endloop",           this->colorList.at(4).name());
+    settings.setValue("colors/graph_timecursor",        this->colorList.at(5).name());
+}
+
+void Config::setColors()
+{
+    QString styleStart = "QPushButton{border: 1px solid #888; background-color: ";
+    this->ui->pushColorBackground->setStyleSheet(styleStart + this->colorList.at(0).name() + ";}");
+    this->ui->pushColorForeground->setStyleSheet(styleStart + this->colorList.at(1).name() + ";}");
+    this->ui->pushColorGrid->setStyleSheet(styleStart + this->colorList.at(2).name() + ";}");
+    this->ui->pushColorStartloop->setStyleSheet(styleStart + this->colorList.at(3).name() + ";}");
+    this->ui->pushColorEndloop->setStyleSheet(styleStart + this->colorList.at(4).name() + ";}");
+    this->ui->pushColorPlay->setStyleSheet(styleStart + this->colorList.at(5).name() + ";}");
+    this->colorsChanged();
+}
+void Config::on_pushColorBackground_clicked()
+{
+    QColor color = QColorDialog::getColor(this->colorList.at(0), this, trUtf8("Couleur du fond"));
+    if (color.isValid())
+    {
+        this->colorList[0] = color;
+        this->store();
+        this->setColors();
+    }
+}
+void Config::on_pushColorForeground_clicked()
+{
+    QColor color = QColorDialog::getColor(this->colorList.at(1), this, trUtf8("Couleur de l'onde"));
+    if (color.isValid())
+    {
+        this->colorList[1] = color;
+        this->store();
+        this->setColors();
+    }
+}
+void Config::on_pushColorGrid_clicked()
+{
+    QColor color = QColorDialog::getColor(this->colorList.at(2), this, trUtf8("Couleur de la grille"));
+    if (color.isValid())
+    {
+        this->colorList[2] = color;
+        this->store();
+        this->setColors();
+    }
+}
+void Config::on_pushColorStartloop_clicked()
+{
+    QColor color = QColorDialog::getColor(this->colorList.at(3), this, trUtf8("Couleur du début de la boucle"));
+    if (color.isValid())
+    {
+        this->colorList[3] = color;
+        this->store();
+        this->setColors();
+    }
+}
+void Config::on_pushColorEndloop_clicked()
+{
+    QColor color = QColorDialog::getColor(this->colorList.at(4), this, trUtf8("Couleur de la fin de la boucle"));
+    if (color.isValid())
+    {
+        this->colorList[4] = color;
+        this->store();
+        this->setColors();
+    }
+}
+void Config::on_pushColorPlay_clicked()
+{
+    QColor color = QColorDialog::getColor(this->colorList.at(5), this, trUtf8("Couleur du curseur de lecture"));
+    if (color.isValid())
+    {
+        this->colorList[5] = color;
+        this->store();
+        this->setColors();
+    }
+}
+void Config::on_pushColorRestore_clicked()
+{
+    this->colorList.clear();
+    this->colorList << QColor(0, 0, 0) << QColor(0, 0, 255) << QColor(60, 60, 100)
+                    << QColor(100, 255, 100) << QColor(255, 0, 0) << QColor(255, 255, 255);
+    this->store();
+    this->setColors();
+}
+
+void Config::setListeActions(QList<QAction *> actions)
+{
+    actionList = actions;
+    actionListToolbar = settings.value("affichage/actions", this->getDefaultListActions()).toByteArray();
+    this->fillActions();
+}
+void Config::fillActions()
+{
+    // Liste des actions disponibles
+    ui->listActions->clear();
+    for (int i = 0; i < actionList.size(); i++)
+    {
+        if (!actionListToolbar.contains((char)i))
+        {
+            ui->listActions->addItem(actionList.at(i)->text().replace("&", ""));
+            QListWidgetItem * item = ui->listActions->item(ui->listActions->count()-1);
+            item->setIcon(actionList.at(i)->icon());
+            item->setData(Qt::UserRole, i);
+        }
+    }
+    ui->listActions->sortItems();
+    ui->listActions->insertItem(0, trUtf8("---- séparateur ----"));
+    ui->listActions->item(0)->setData(Qt::UserRole, -1);
+    QFont font = ui->listActions->item(0)->font();
+    font.setItalic(true);
+    ui->listActions->item(0)->setFont(font);
+
+    // Liste des éléments dans la toolbar
+    ui->listToolbar->clear();
+    char num;
+    for (int i = 0; i < actionListToolbar.size(); i++)
+    {
+        num = actionListToolbar.at(i);
+        if (num < actionList.size())
+        {
+            if (num == -1)
+            {
+                ui->listToolbar->addItem(trUtf8("---- séparateur ----"));
+                QListWidgetItem * item = ui->listToolbar->item(ui->listToolbar->count()-1);
+                item->setData(Qt::UserRole, -1);
+                item->setFont(font);
+            }
+            else
+            {
+                ui->listToolbar->addItem(actionList.at(num)->text().replace("&", ""));
+                QListWidgetItem * item = ui->listToolbar->item(ui->listToolbar->count()-1);
+                item->setIcon(actionList.at(num)->icon());
+                item->setData(Qt::UserRole, num);
+            }
+        }
+    }
+
+    // Sauvegarde et mise à jour MainWindow
+    if (loaded)
+    {
+        settings.setValue("affichage/actions", actionListToolbar);
+        QList<QAction *> liste;
+        for (int i = 0; i < actionListToolbar.size(); i++)
+        {
+            char index = actionListToolbar.at(i);
+            if (index < actionList.size())
+            {
+                if (index == -1)
+                    liste << NULL;
+                else
+                    liste << actionList.at(index);
+            }
+        }
+        mainWindow->setListeActions(liste);
+    }
+}
+void Config::on_pushUp_clicked()
+{
+    if (this->ui->listToolbar->currentRow() > 0)
+    {
+        int index = this->ui->listToolbar->currentRow();
+        if (index < this->actionListToolbar.size())
+        {
+            char numTmp = this->actionListToolbar.at(index);
+            this->actionListToolbar[index] = this->actionListToolbar.at(index - 1);
+            this->actionListToolbar[index - 1] = numTmp;
+            this->fillActions();
+            ui->listToolbar->setCurrentRow(index - 1);
+        }
+    }
+}
+void Config::on_pushDown_clicked()
+{
+    if (this->ui->listToolbar->currentRow() != -1 &&
+            this->ui->listToolbar->currentRow() != this->ui->listToolbar->count() - 1)
+    {
+        int index = this->ui->listToolbar->currentRow();
+        if (index < this->actionListToolbar.size() - 1)
+        {
+            char numTmp = this->actionListToolbar.at(index);
+            this->actionListToolbar[index] = this->actionListToolbar.at(index + 1);
+            this->actionListToolbar[index + 1] = numTmp;
+            this->fillActions();
+            ui->listToolbar->setCurrentRow(index + 1);
+        }
+    }
+}
+void Config::on_pushRight_clicked()
+{
+    int index = this->ui->listActions->currentRow();
+    if (index != -1)
+    {
+        actionListToolbar.append((char)this->ui->listActions->currentItem()->data(Qt::UserRole).toInt());
+        this->fillActions();
+        if (this->ui->listActions->count())
+        {
+            if (index >= this->ui->listActions->count())
+                index--;
+            this->ui->listActions->setCurrentRow(index);
+        }
+    }
+}
+void Config::on_pushLeft_clicked()
+{
+    int index = this->ui->listToolbar->currentRow();
+    if (index != -1 && index < actionListToolbar.size())
+    {
+        actionListToolbar.remove(index, 1);
+        this->fillActions();
+        if (this->ui->listToolbar->count())
+        {
+            if (index >= this->ui->listToolbar->count())
+                index--;
+            this->ui->listToolbar->setCurrentRow(index);
+        }
+    }
+}
+void Config::on_pushResetToolbar_clicked()
+{
+    this->actionListToolbar = this->getDefaultListActions();
+    this->fillActions();
+}
+void Config::on_listToolbar_itemSelectionChanged()
+{
+    QList<QListWidgetItem *> listItems = this->ui->listToolbar->selectedItems();
+    this->ui->pushLeft->setEnabled(listItems.count());
+    if (listItems.count() == 1)
+    {
+        this->ui->pushLeft->setEnabled(true);
+        if (ui->listToolbar->count() > 1)
+        {
+            this->ui->pushDown->setEnabled(listItems.at(0) != ui->listToolbar->item(ui->listToolbar->count()-1));
+            this->ui->pushUp->setEnabled(listItems.at(0) != ui->listToolbar->item(0));
+        }
+        else
+        {
+            this->ui->pushDown->setEnabled(false);
+            this->ui->pushUp->setEnabled(false);
+        }
+    }
+    else
+    {
+        this->ui->pushLeft->setEnabled(false);
+        this->ui->pushUp->setEnabled(false);
+        this->ui->pushDown->setEnabled(false);
+    }
+}
+void Config::on_listActions_itemSelectionChanged()
+{
+    this->ui->pushRight->setEnabled(this->ui->listActions->selectedItems().count());
+}
+QByteArray Config::getDefaultListActions()
+{
+    QByteArray baData;
+    baData.append((char)0);
+    baData.append((char)1);
+    baData.append((char)2);
+    baData.append((char)-1);
+    baData.append((char)9);
+    baData.append((char)10);
+    baData.append((char)-1);
+    baData.append((char)4);
+    baData.append((char)7);
+    baData.append((char)8);
+    baData.append((char)-1);
+    baData.append((char)6);
+    return baData;
 }

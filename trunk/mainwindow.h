@@ -62,6 +62,10 @@ public:
     void anticipateNewAction();
     void updateDo();
     void updateActions();
+    void enableActionSample(bool isEnabled);
+    void enableActionInstrument(bool isEnabled);
+    void enableActionPreset(bool isEnabled);
+    void enableActionSf2(bool isEnabled);
     void associer(EltID idDest);
     void remplacer(EltID idSrc);
     void desactiveOutilsSmpl();
@@ -74,8 +78,11 @@ public:
     void setSynthGain(int val);
     void setSynthReverb(int level, int size, int width, int damping);
     void setSynthChorus(int level, int depth, int frequency);
+    void setListeActions(QList<QAction *> listeActions);
+
 public slots:
     void supprimerElt();        // Suppression des éléments sélectionnés dans l'arbre
+
 private slots:
     void updateTable(int type, int sf2, int elt, int elt2);  // Mise à jour tables si suppression définitive d'un élément masqué
 
@@ -131,8 +138,6 @@ private slots:
     void spatialisation();      // outil instrument, spatialisation du son
     void mixture();             // outil instrument, création mixture
     void release();             // outil instrument, élaboration de releases
-    void duplicationPrst();     // outil preset, duplication des divisions
-    void paramGlobal2();        // outil preset, modification globale d'un paramètre
     void attenuationMini();     // outil sf2, mise à jour de toutes les atténuations
     void purger();              // outil sf2, suppression des éléments non utilisés
     void associationAutoSmpl(); // outil sf2, association auto gauche-droite des samples
@@ -157,12 +162,13 @@ private:
     AudioDevice * audioDevice;
     QThreadEx audioThread;
     QThreadEx synthThread;
-    QString fileName;
     Config * configuration;
     DialogHelp help;
     DialogList dialList;
     PianoKeybdCustom * keyboard;
     DialogMagnetophone dialogMagneto;
+    QAction * actionKeyboard;
+    QList<QAction *> actionSeparators;
 
     // Méthodes privées
     void updateTitle();
@@ -170,6 +176,7 @@ private:
     void updateFavoriteFiles();
     void setKeyboardType(int val);
     void showKeyboard(bool val);
+    QList<QAction *> getListeActions();
 
 protected:
     void closeEvent(QCloseEvent *event);

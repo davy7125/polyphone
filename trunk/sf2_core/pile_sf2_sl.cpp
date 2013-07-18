@@ -1199,7 +1199,18 @@ int Pile_sf2::sauvegarderSf2(int indexSf2, QString fileName)
     fi.write("ifil", 4); // version, champ obligatoire
     dwTmp = 4; fi.write((char *)&dwTmp, 4);
     id.typeElement = elementSf2;
-    sfVersionTmp = this->get(id, champ_IFIL).sfVerValue;
+
+    // sfVersionTmp = this->get(id, champ_IFIL).sfVerValue; // Message d'erreur dans Viena
+    if (this->get(id, champ_wBpsSave).wValue == 24)
+    {
+        sfVersionTmp.wMajor = 2;
+        sfVersionTmp.wMinor = 4;
+    }
+    else
+    {
+        sfVersionTmp.wMajor = 2;
+        sfVersionTmp.wMinor = 1;
+    }
     fi.write((char *)&sfVersionTmp, 4);
 
     fi.write("isng", 4); // wavetable sound engine, champ obligatoire

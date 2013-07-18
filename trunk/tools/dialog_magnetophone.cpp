@@ -99,7 +99,7 @@ void DialogMagnetophone::on_pushRecord_toggled(bool checked)
         {
             if (defaultPath.right(4).toLower() != ".wav")
                 defaultPath.append(".wav");
-            Config::getInstance()->setRecordFile(defaultPath);
+            Config::getInstance()->addFile(Config::typeFichierEnregistrement, defaultPath);
             // Début de l'enregistrement
             ui->pushPlayPause->setIcon(QIcon(":/icones/pause"));
             _isPause = false;
@@ -135,7 +135,7 @@ void DialogMagnetophone::on_pushPlayPause_clicked()
 
 QString DialogMagnetophone::getDefaultPath()
 {
-    QString defaultPath = Config::getInstance()->getRecordFile();
+    QString defaultPath = Config::getInstance()->getLastFile(Config::typeFichierEnregistrement);
     QFileInfo info(defaultPath);
     if (info.dir().exists() && defaultPath.size())
     {

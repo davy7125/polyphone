@@ -116,9 +116,12 @@ public:
     void indexMotifChanged(int index);
     void raideurChanged(double value);
     void setEtendueClavier(int keyboardType);
-    void setMinMax(double min, double max) { yMin = qMin(min, max); yMax = qMax(min, max); }
+    void setMinMax(double min, double max)  { yMin = qMin(min, max); yMax = qMax(min, max); }
+    void setMinMaxX(int min, int max)       { xMin = qMin(min, max); xMax = qMax(min, max); }
     QVector<double> getValues();
     void setValues(QVector<double> val);
+    int getXmin()                           { return xMin; }
+    int getXmax()                           { return xMax; }
 
 private:
     TypeForme forme;

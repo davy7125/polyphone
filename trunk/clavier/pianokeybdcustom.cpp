@@ -95,21 +95,19 @@ QStringList PianoKeybdCustom::getPortNames()
 }
 void PianoKeybdCustom::openMidiPort(int val)
 {
-    if (!this->midiin)
-        return;
-    if ((signed)this->midiin->getPortCount() <= val)
+    if (this->midiin)
     {
-        this->midiin = NULL;
-        return;
-    }
-    this->midiin->closePort();
-    try
-    {
-        this->midiin->openPort(val);
-    }
-    catch (RtError &error)
-    {
-        this->midiin = NULL;
+        this->midiin->closePort();
+        if (val < (signed)this->midiin->getPortCount() && val != -1)
+        {
+            try
+            {
+                this->midiin->openPort(val);
+            }
+            catch (RtError &error)
+            {
+            }
+        }
     }
 }
 void PianoKeybdCustom::changeKey(int key, int vel)
@@ -126,7 +124,7 @@ void PianoKeybdCustom::changeKey(int key, int vel)
 void PianoKeybdCustom::setKeyboardType(KeyboardType type)
 {
     switch(type)
-         {
+    {
     case KEYBOARD_5_OCTAVES:
         this->setMaximumWidth(330);
         this->setMinimumWidth(330);

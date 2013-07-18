@@ -2154,7 +2154,10 @@ void Sound::FFT_calculate(Complex * x, long N /* must be a power of 2 */,
 }
 double Sound::moyenne(QByteArray baData, WORD wBps)
 {
-    return somme(baData, wBps) / (baData.size() / (wBps/8));
+    if (baData.size())
+        return somme(baData, wBps) / (baData.size() / (wBps/8));
+    else
+        return 0;
 }
 double Sound::moyenneCarre(QByteArray baData, WORD wBps)
 {
@@ -2330,12 +2333,19 @@ void Sound::regimePermanent(QByteArray baData, DWORD dwSmplRate, WORD wBps, qint
 {
     if (wBps != 32)
         baData = bpsConversion(baData, wBps, 32);
+
     // Valeur absolue
     qint32 *data = (qint32 *)baData.data();
     for (int i = 0; i < baData.size() / 4; i++)
         data[i] = qAbs(data[i]);
-    // Calcul de la moyenne des valeurs absolues sur une période de 0.05s   chaque 10ième de seconde
+    // Calcul de la moyenne des valeurs absolues sur une période de 0.05 s à chaque 10ième de seconde
     qint32 sizePeriode = dwSmplRate / 10;
+    if (baData.size() < 4 * sizePeriode)
+    {
+        posStart = 0;
+        posEnd = baData.size() / 4;
+        return;
+    }
     qint32 nbValeurs = (baData.size() / 4 - sizePeriode) / (dwSmplRate/20);
     QByteArray tableauMoyennes;
     tableauMoyennes.resize(nbValeurs * 4);
