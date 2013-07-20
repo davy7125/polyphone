@@ -22,38 +22,31 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#include "dialog_release.h"
-#include "ui_dialog_release.h"
-#include "config.h"
+#ifndef DIALOG_CELESTE_H
+#define DIALOG_CELESTE_H
 
-DialogRelease::DialogRelease(QWidget *parent) :
-    QDialog(parent),
-    ui(new Ui::DialogRelease)
-{
-    ui->setupUi(this);
-    Config * conf = Config::getInstance();
-    ui->doubleDuree36->setValue(conf->getTools_i_release_dureeDo());
-    ui->doubleDivision->setValue(conf->getTools_i_release_division());
-    ui->doubleDeTune->setValue(conf->getTools_i_release_desaccordage());
+#include <QDialog>
+
+namespace Ui {
+class DialogCeleste;
 }
 
-DialogRelease::~DialogRelease()
+class DialogCeleste : public QDialog
 {
-    delete ui;
-}
+    Q_OBJECT
+    
+public:
+    explicit DialogCeleste(QWidget *parent = 0);
+    ~DialogCeleste();
+    
+signals:
+    void accepted(double herz60, double division);
 
-// ACCEPTATION
+private slots:
+    void accept();
 
-void DialogRelease::accept()
-{
-    // Sauvegarde des valeurs
-    Config * conf = Config::getInstance();
-    conf->setTools_i_release_dureeDo(this->ui->doubleDuree36->value());
-    conf->setTools_i_release_division(this->ui->doubleDivision->value());
-    conf->setTools_i_release_desaccordage(this->ui->doubleDeTune->value());
-    // Envoi des valeurs
-    this->accepted(this->ui->doubleDuree36->value(),
-                   this->ui->doubleDivision->value(),
-                   this->ui->doubleDeTune->value());
-    QDialog::accept();
-}
+private:
+    Ui::DialogCeleste *ui;
+};
+
+#endif // DIALOG_CELESTE_H

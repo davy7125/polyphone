@@ -264,7 +264,7 @@
     </widget>
     <widget class="QMenu" name="menuInstrument">
      <property name="enabled">
-      <bool>false</bool>
+      <bool>true</bool>
      </property>
      <property name="title">
       <string>&amp;Instrument</string>
@@ -276,16 +276,18 @@
      <addaction name="action_Param_trage_global"/>
      <addaction name="action_R_partition_automatique"/>
      <addaction name="actionSpacialisation_du_son"/>
+     <addaction name="action_Visualiseur"/>
     </widget>
     <widget class="QMenu" name="menuPreset">
      <property name="enabled">
-      <bool>false</bool>
+      <bool>true</bool>
      </property>
      <property name="title">
       <string>&amp;Preset</string>
      </property>
      <addaction name="actionDuplication_des_divisions"/>
      <addaction name="action_Param_trage_global_2"/>
+     <addaction name="action_Visualiseur_2"/>
     </widget>
     <addaction name="menuSample"/>
     <addaction name="menuInstrument"/>
@@ -690,6 +692,9 @@
    <property name="text">
     <string>&amp;Préférences</string>
    </property>
+   <property name="toolTip">
+    <string>Ouvre les préférences</string>
+   </property>
   </action>
   <action name="actionBarre_d_outils">
    <property name="checkable">
@@ -700,6 +705,9 @@
    </property>
    <property name="text">
     <string>&amp;Barre d'outils</string>
+   </property>
+   <property name="toolTip">
+    <string>Afficher / masque la barre d'outils</string>
    </property>
   </action>
   <action name="actionFermer_le_fichier">
@@ -731,6 +739,9 @@
    <property name="text">
     <string>&amp;Copier</string>
    </property>
+   <property name="toolTip">
+    <string>Copie un élément</string>
+   </property>
    <property name="shortcut">
     <string>Ctrl+C</string>
    </property>
@@ -748,6 +759,9 @@
    </property>
    <property name="text">
     <string>C&amp;oller</string>
+   </property>
+   <property name="toolTip">
+    <string>Colle un élément</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+V</string>
@@ -781,6 +795,10 @@
    <property name="enabled">
     <bool>false</bool>
    </property>
+   <property name="icon">
+    <iconset resource="ressources.qrc">
+     <normaloff>:/icones/auto_remove</normaloff>:/icones/auto_remove</iconset>
+   </property>
    <property name="text">
     <string>&amp;Enlever les éléments non utilisés</string>
    </property>
@@ -792,8 +810,15 @@
    <property name="enabled">
     <bool>false</bool>
    </property>
+   <property name="icon">
+    <iconset resource="ressources.qrc">
+     <normaloff>:/icones/rename</normaloff>:/icones/rename</iconset>
+   </property>
    <property name="text">
     <string>&amp;Renommer</string>
+   </property>
+   <property name="toolTip">
+    <string>Renomme un ou plusieurs élément(s)</string>
    </property>
    <property name="shortcut">
     <string>F2</string>
@@ -902,6 +927,10 @@
    <property name="enabled">
     <bool>false</bool>
    </property>
+   <property name="icon">
+    <iconset resource="ressources.qrc">
+     <normaloff>:/icones/export</normaloff>:/icones/export</iconset>
+   </property>
    <property name="text">
     <string>E&amp;xporter ...</string>
    </property>
@@ -943,120 +972,225 @@
    <property name="enabled">
     <bool>false</bool>
    </property>
+   <property name="icon">
+    <iconset resource="ressources.qrc">
+     <normaloff>:/icones/couper_blanc</normaloff>:/icones/couper_blanc</iconset>
+   </property>
    <property name="text">
     <string>&amp;Enlever blanc au départ</string>
+   </property>
+   <property name="toolTip">
+    <string>Enleve le blanc au début d'un sample</string>
    </property>
   </action>
   <action name="actionAjuster_la_fin_de_boucle">
    <property name="enabled">
     <bool>false</bool>
    </property>
+   <property name="icon">
+    <iconset resource="ressources.qrc">
+     <normaloff>:/icones/couper_fin_boucle</normaloff>:/icones/couper_fin_boucle</iconset>
+   </property>
    <property name="text">
     <string>&amp;Ajuster à la fin de boucle</string>
+   </property>
+   <property name="toolTip">
+    <string>Ajuste le sample à sa fin de boucle</string>
    </property>
   </action>
   <action name="actionNormaliser_volume">
    <property name="enabled">
     <bool>false</bool>
    </property>
+   <property name="icon">
+    <iconset resource="ressources.qrc">
+     <normaloff>:/icones/normalise</normaloff>:/icones/normalise</iconset>
+   </property>
    <property name="text">
     <string>&amp;Normaliser volume</string>
+   </property>
+   <property name="toolTip">
+    <string>Normalise le volume</string>
    </property>
   </action>
   <action name="actionBouclage_automatique">
    <property name="enabled">
     <bool>false</bool>
    </property>
+   <property name="icon">
+    <iconset resource="ressources.qrc">
+     <normaloff>:/icones/loop</normaloff>:/icones/loop</iconset>
+   </property>
    <property name="text">
     <string>&amp;Bouclage automatique</string>
+   </property>
+   <property name="toolTip">
+    <string>Boucle automatiquement le sample</string>
    </property>
   </action>
   <action name="actionFiltre_mur_de_brique">
    <property name="enabled">
     <bool>false</bool>
    </property>
+   <property name="icon">
+    <iconset resource="ressources.qrc">
+     <normaloff>:/icones/brickwall</normaloff>:/icones/brickwall</iconset>
+   </property>
    <property name="text">
     <string>&amp;Filtre &quot;mur de brique&quot;...</string>
+   </property>
+   <property name="toolTip">
+    <string>Applique un filtre &quot;mur de brique&quot;</string>
    </property>
   </action>
   <action name="actionTransposer">
    <property name="enabled">
     <bool>false</bool>
    </property>
+   <property name="icon">
+    <iconset resource="ressources.qrc">
+     <normaloff>:/icones/transposer</normaloff>:/icones/transposer</iconset>
+   </property>
    <property name="text">
     <string>&amp;Transposer...</string>
+   </property>
+   <property name="toolTip">
+    <string>Transpose le sample</string>
    </property>
   </action>
   <action name="actionR_gler_att_nuation_minimale">
    <property name="enabled">
     <bool>false</bool>
    </property>
+   <property name="icon">
+    <iconset resource="ressources.qrc">
+     <normaloff>:/icones/volume_mini</normaloff>:/icones/volume_mini</iconset>
+   </property>
    <property name="text">
     <string>&amp;Régler atténuation minimale...</string>
+   </property>
+   <property name="toolTip">
+    <string>Régle l'atténuation minimale</string>
    </property>
   </action>
   <action name="actionD_saccordage_ondulant">
    <property name="enabled">
     <bool>false</bool>
    </property>
+   <property name="icon">
+    <iconset resource="ressources.qrc">
+     <normaloff>:/icones/celeste</normaloff>:/icones/celeste</iconset>
+   </property>
    <property name="text">
-    <string>&amp;Désaccordage céleste...</string>
+    <string>&amp;Accordage céleste...</string>
+   </property>
+   <property name="toolTip">
+    <string>Accorde les sons pour créer des battements</string>
    </property>
   </action>
   <action name="actionSpacialisation_du_son">
    <property name="enabled">
     <bool>false</bool>
    </property>
+   <property name="icon">
+    <iconset resource="ressources.qrc">
+     <normaloff>:/icones/spacialisation</normaloff>:/icones/spacialisation</iconset>
+   </property>
    <property name="text">
     <string>&amp;Spatialisation du son...</string>
+   </property>
+   <property name="toolTip">
+    <string>Dispose les sons dans l'espace</string>
    </property>
   </action>
   <action name="action_R_partition_automatique">
    <property name="enabled">
     <bool>false</bool>
    </property>
+   <property name="icon">
+    <iconset resource="ressources.qrc">
+     <normaloff>:/icones/repartition_auto</normaloff>:/icones/repartition_auto</iconset>
+   </property>
    <property name="text">
     <string>&amp;Répartition automatique</string>
+   </property>
+   <property name="toolTip">
+    <string>Répartit automatiquement les sons sur le clavier</string>
    </property>
   </action>
   <action name="actionD_uplication_des_divisions">
    <property name="enabled">
     <bool>false</bool>
    </property>
+   <property name="icon">
+    <iconset resource="ressources.qrc">
+     <normaloff>:/icones/dupliquer</normaloff>:/icones/dupliquer</iconset>
+   </property>
    <property name="text">
     <string>D&amp;uplication des divisions</string>
+   </property>
+   <property name="toolTip">
+    <string>Duplique les divisions</string>
    </property>
   </action>
   <action name="action_Param_trage_global">
    <property name="enabled">
     <bool>false</bool>
    </property>
+   <property name="icon">
+    <iconset resource="ressources.qrc">
+     <normaloff>:/icones/parametrageGlobal</normaloff>:/icones/parametrageGlobal</iconset>
+   </property>
    <property name="text">
     <string>&amp;Paramétrage global...</string>
+   </property>
+   <property name="toolTip">
+    <string>Paramètre toutes les divisions simultanément</string>
    </property>
   </action>
   <action name="action_R_glage_balance">
    <property name="enabled">
     <bool>false</bool>
    </property>
+   <property name="icon">
+    <iconset resource="ressources.qrc">
+     <normaloff>:/icones/balance</normaloff>:/icones/balance</iconset>
+   </property>
    <property name="text">
     <string>&amp;Réglage balance</string>
+   </property>
+   <property name="toolTip">
+    <string>Règle la balance du sample</string>
    </property>
   </action>
   <action name="action_Cr_ation_mutation_mixture">
    <property name="enabled">
     <bool>false</bool>
    </property>
+   <property name="icon">
+    <iconset resource="ressources.qrc">
+     <normaloff>:/icones/mixture_creation</normaloff>:/icones/mixture_creation</iconset>
+   </property>
    <property name="text">
     <string>&amp;Création mixture...</string>
+   </property>
+   <property name="toolTip">
+    <string>Crée une mixture</string>
    </property>
   </action>
   <action name="action_Diminuer_sifflements">
    <property name="enabled">
     <bool>false</bool>
    </property>
+   <property name="icon">
+    <iconset resource="ressources.qrc">
+     <normaloff>:/icones/sifflement</normaloff>:/icones/sifflement</iconset>
+   </property>
    <property name="text">
     <string>&amp;Diminuer sifflements...</string>
+   </property>
+   <property name="toolTip">
+    <string>Diminue les sifflements</string>
    </property>
   </action>
   <action name="action5_octaves">
@@ -1069,6 +1203,9 @@
    <property name="text">
     <string>&amp;5 octaves</string>
    </property>
+   <property name="toolTip">
+    <string>affiche un clavier de 5 octaves</string>
+   </property>
   </action>
   <action name="action6_octaves">
    <property name="checkable">
@@ -1076,6 +1213,9 @@
    </property>
    <property name="text">
     <string>&amp;6 octaves</string>
+   </property>
+   <property name="toolTip">
+    <string>affiche un clavie de 6 octaves</string>
    </property>
   </action>
   <action name="action128_notes">
@@ -1085,6 +1225,9 @@
    <property name="text">
     <string>&amp;128 notes</string>
    </property>
+   <property name="toolTip">
+    <string>affiche un clavier de 128 notes</string>
+   </property>
   </action>
   <action name="actionAucun">
    <property name="checkable">
@@ -1093,42 +1236,110 @@
    <property name="text">
     <string>&amp;Aucun</string>
    </property>
+   <property name="toolTip">
+    <string>n'affiche aucun clavier</string>
+   </property>
   </action>
   <action name="actionDuplication_des_divisions">
    <property name="enabled">
     <bool>false</bool>
    </property>
+   <property name="icon">
+    <iconset resource="ressources.qrc">
+     <normaloff>:/icones/dupliquer</normaloff>:/icones/dupliquer</iconset>
+   </property>
    <property name="text">
     <string>&amp;Duplication des divisions</string>
+   </property>
+   <property name="toolTip">
+    <string>Duplique les divisions</string>
    </property>
   </action>
   <action name="action_laboration_release">
    <property name="enabled">
     <bool>false</bool>
    </property>
+   <property name="icon">
+    <iconset resource="ressources.qrc">
+     <normaloff>:/icones/release</normaloff>:/icones/release</iconset>
+   </property>
    <property name="text">
     <string>&amp;Élaboration release...</string>
+   </property>
+   <property name="toolTip">
+    <string>Crée automatiquement une release pour tous les sons liés</string>
    </property>
   </action>
   <action name="action_Param_trage_global_2">
    <property name="enabled">
     <bool>false</bool>
    </property>
+   <property name="icon">
+    <iconset resource="ressources.qrc">
+     <normaloff>:/icones/parametrageGlobal</normaloff>:/icones/parametrageGlobal</iconset>
+   </property>
    <property name="text">
     <string>&amp;Paramétrage global...</string>
+   </property>
+   <property name="toolTip">
+    <string>Paramètre toutes les divisions simultanément</string>
    </property>
   </action>
   <action name="action_Association_auto_samples">
    <property name="enabled">
     <bool>false</bool>
    </property>
+   <property name="icon">
+    <iconset resource="ressources.qrc">
+     <normaloff>:/icones/link</normaloff>:/icones/link</iconset>
+   </property>
    <property name="text">
     <string>&amp;Association auto samples</string>
    </property>
+   <property name="toolTip">
+    <string>Associe automatiquement les samples G/D</string>
+   </property>
   </action>
   <action name="actionMagn_tophone">
+   <property name="icon">
+    <iconset resource="ressources.qrc">
+     <normaloff>:/icones/recorder</normaloff>:/icones/recorder</iconset>
+   </property>
    <property name="text">
     <string>Magnétophone</string>
+   </property>
+   <property name="toolTip">
+    <string>Affiche le magnétophone</string>
+   </property>
+  </action>
+  <action name="action_Visualiseur">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="ressources.qrc">
+     <normaloff>:/icones/monitor</normaloff>:/icones/monitor</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Visualiseur</string>
+   </property>
+   <property name="toolTip">
+    <string>Visualise dans un graphique les paramètres utilisés</string>
+   </property>
+  </action>
+  <action name="action_Visualiseur_2">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="ressources.qrc">
+     <normaloff>:/icones/monitor</normaloff>:/icones/monitor</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Visualiseur</string>
+   </property>
+   <property name="toolTip">
+    <string>Visualise dans un graphique les paramètres utilisés</string>
    </property>
   </action>
  </widget>
@@ -2096,6 +2307,38 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>action_Visualiseur</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>visualize()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>471</x>
+     <y>215</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>action_Visualiseur_2</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>visualize()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>471</x>
+     <y>215</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>ouvrir()</slot>
@@ -2150,5 +2393,6 @@
   <slot>associationAutoSmpl()</slot>
   <slot>magnetophone()</slot>
   <slot>showToolBarManager()</slot>
+  <slot>visualize()</slot>
  </slots>
 </ui>

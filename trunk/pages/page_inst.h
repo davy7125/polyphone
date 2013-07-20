@@ -49,12 +49,12 @@ public:
 private slots:
     void spatialisation(int motif, int nbDiv, int etalement, int occupation, int offset, int sens, int sens2);
     void mixture(QList<QList<int> > listeParam, QString nomInst, bool bouclage, int freq);
-    void release(double duree36, double division, double deTune);
+    void release(double duree60, double division, double deTune);
+    void desaccorder(double doHerz, double division);
 
 private:
     Ui::Page_Inst *ui;
     // Outils
-    void desaccorder(EltID id, double bps);
     static double getOffset(int type1, int type2);
     static EltID closestSample(EltID idInst, double pitch, double &ecart, int cote, EltID &idInstSmpl);
     static QByteArray getSampleData(EltID idSmpl, qint32 nbRead);

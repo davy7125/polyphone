@@ -327,6 +327,7 @@ public:
     void updateId(EltID id);
     void paramGlobal();
     void duplication();
+    void visualize();
     void enlightColumn(int key, bool isEnlighted);
 
 protected:

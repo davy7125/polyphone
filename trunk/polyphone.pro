@@ -7,6 +7,9 @@
 QT       += core gui printsupport svg
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
+# Option for developpers ONLY
+DEFINES += SHOW_ID_ERROR
+
 TARGET = polyphone
 TEMPLATE = app
 
@@ -108,7 +111,9 @@ SOURCES	+= main.cpp \
     synthetiseur/elements/Chorus.cpp \
     synthetiseur/elements/DelayL.cpp \
     gui_divers/dialog_rename.cpp \
-    tools/dialog_magnetophone.cpp
+    tools/dialog_magnetophone.cpp \
+    tools/dialog_celeste.cpp \
+    tools/dialog_visualizer.cpp
 
 HEADERS  += mainwindow.h \
     sf2_core/sf2_types.h \
@@ -159,7 +164,9 @@ HEADERS  += mainwindow.h \
     synthetiseur/elements/Chorus.h \
     synthetiseur/elements/DelayL.h \
     gui_divers/dialog_rename.h \
-    tools/dialog_magnetophone.h
+    tools/dialog_magnetophone.h \
+    tools/dialog_celeste.h \
+    tools/dialog_visualizer.h
 
 FORMS    += mainwindow.ui \
     gui_divers/config.ui \
@@ -177,7 +184,9 @@ FORMS    += mainwindow.ui \
     tools/dialog_release.ui \
     tools/dialog_selectitems.ui \
     gui_divers/dialog_rename.ui \
-    tools/dialog_magnetophone.ui
+    tools/dialog_magnetophone.ui \
+    tools/dialog_celeste.ui \
+    tools/dialog_visualizer.ui
 
 RESOURCES += ressources.qrc \
     clavier/pianokeybd.qrc

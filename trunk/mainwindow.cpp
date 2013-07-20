@@ -750,8 +750,8 @@ void MainWindow::updateActions()
         else
             ui->action_Enlever_les_l_ments_non_utilis_s->setEnabled(0);
 
-        // Particularité 2 : "duplication" et "paramétrage globale" sont communs aux instruments
-        // et aux presets -> pas de désactivation si l'une des 2 conditions est remplie
+        // Particularité 2 : "duplication", "paramétrage globale", "visualiseur" sont communs aux
+        // instruments et aux presets -> pas de désactivation si l'une des 2 conditions est remplie
         if (familleUnique && (type == elementInst || type == elementInstSmpl ||
                               type == elementPrst || type == elementPrstInst))
         {
@@ -759,6 +759,8 @@ void MainWindow::updateActions()
             ui->actionD_uplication_des_divisions->setEnabled(true);
             ui->action_Param_trage_global->setEnabled(true);
             ui->action_Param_trage_global_2->setEnabled(true);
+            ui->action_Visualiseur->setEnabled(true);
+            ui->action_Visualiseur_2->setEnabled(true);
         }
     }
     else
@@ -2149,8 +2151,8 @@ void MainWindow::nouveauPreset()
 }
 void MainWindow::associer()
 {
-    int nb = ui->arborescence->getSelectedItemsNumber();
-    if (nb == 0) return;
+    if (!ui->arborescence->getSelectedItemsNumber())
+        return;
     EltID id = ui->arborescence->getID(0);
     this->anticipateNewAction(); // Les ID ne changeront pas lors du prochain prepareNewAction
     this->dialList.showDialog(id, DialogList::MODE_ASSOCIATION);
@@ -2173,9 +2175,13 @@ void MainWindow::associer(EltID idDest)
     sf2->prepareNewActions();
     Valeur val;
     EltID idSrc;
+    // Liste des éléments sources
+    QList<EltID> listeSrc;
+    for (int i = 0; i < nb; i++)
+        listeSrc << this->ui->arborescence->getID(i);
     for (int i = 0; i < nb; i++)
     {
-        idSrc = this->ui->arborescence->getID(i);
+        idSrc = listeSrc.at(i);
         // Création élément lié
         idDest.indexElt2 = this->sf2->add(idDest);
         // Association de idSrc vers idDest
@@ -2336,6 +2342,16 @@ void MainWindow::paramGlobal()
     else if (type == elementPrst || type == elementPrstInst)
         this->page_prst->paramGlobal();
 }
+void MainWindow::visualize()
+{
+    if (ui->arborescence->getSelectedItemsNumber() == 0) return;
+    ElementType type = ui->arborescence->getID(0).typeElement;
+    if (type == elementInst || type == elementInstSmpl)
+        this->page_inst->visualize();
+    else if (type == elementPrst || type == elementPrstInst)
+        this->page_prst->visualize();
+}
+
 void MainWindow::repartitionAuto()  {this->page_inst->repartitionAuto();}
 void MainWindow::spatialisation()   {this->page_inst->spatialisation();}
 void MainWindow::mixture()          {this->page_inst->mixture();}
@@ -2746,7 +2762,8 @@ QList<QAction *> MainWindow::getListeActions()
                 << ui->action_Enlever_les_l_ments_non_utilis_s
                 << ui->actionR_gler_att_nuation_minimale
                 << ui->actionMagn_tophone
-                << ui->actionSommaire;
+                << ui->actionSommaire
+                << ui->action_Visualiseur;
     return listeAction;
 }
 void MainWindow::setListeActions(QList<QAction *> listeActions)

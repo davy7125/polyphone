@@ -78,10 +78,11 @@ public:
     double getTools_s_sifflements_raideur() { return settings.value("tools/sample/sifflements_raideur", 5.).toDouble(); }
     double getTools_s_mur_coupure()         { return settings.value("tools/sample/mur_coupure", 15000.).toDouble(); }
     double getTools_s_transpo_ton()         { return settings.value("tools/sample/transposition_ton", 12.).toDouble(); }
-    double getTools_i_ondulant_battements() { return settings.value("tools/instrument/ondulation_herz", 4.).toDouble(); }
-    double getTools_i_release_dureeDo()     { return settings.value("tools/instrument/release_durationC", 1.5).toDouble(); }
+    double getTools_i_release_dureeDo()     { return settings.value("tools/instrument/release_durationC", 0.3).toDouble(); }
     double getTools_i_release_division()    { return settings.value("tools/instrument/release_division", 2.).toDouble(); }
     double getTools_i_release_desaccordage(){ return settings.value("tools/instrument/release_desaccordage", 0.).toDouble(); }
+    double getTools_i_celeste_herzDo()      { return settings.value("tools/instrument/ondulation_herz", 4.).toDouble(); }
+    double getTools_i_celeste_division()    { return settings.value("tools/instrument/ondulation_division", 1.).toDouble(); }
     int    getTools_i_space_motif()         { return settings.value("tools/instrument/space_motif", 0).toInt(); }
     int    getTools_i_space_divisions()     { return settings.value("tools/instrument/space_divisions", 1).toInt(); }
     int    getTools_i_space_etalement()     { return settings.value("tools/instrument/space_etalement", 100).toInt(); }
@@ -165,10 +166,11 @@ public:
     void setTools_s_sifflements_raideur(double val) { settings.setValue("tools/sample/sifflements_raideur", val); }
     void setTools_s_mur_coupure(double val)         { settings.setValue("tools/sample/mur_coupure", val); }
     void setTools_s_transpo_ton(double val)         { settings.setValue("tools/sample/transposition_ton", val); }
-    void setTools_i_ondulant_battements(double val) { settings.setValue("tools/instrument/ondulation_herz", val); }
     void setTools_i_release_dureeDo(double val)     { settings.setValue("tools/instrument/release_durationC", val); }
     void setTools_i_release_division(double val)    { settings.setValue("tools/instrument/release_division", val); }
     void setTools_i_release_desaccordage(double val){ settings.setValue("tools/instrument/release_desaccordage", val); }
+    void setTools_i_celeste_herzDo(double val)      { settings.setValue("tools/instrument/ondulation_herz", val); }
+    void setTools_i_celeste_division(double val)    { settings.setValue("tools/instrument/ondulation_division", val); }
     void setTools_i_space_motif(int val)            { settings.setValue("tools/instrument/space_motif", val); }
     void setTools_i_space_divisions(int val)        { settings.setValue("tools/instrument/space_divisions", val); }
     void setTools_i_space_etalement(int val)        { settings.setValue("tools/instrument/space_etalement", val); }
