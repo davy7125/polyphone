@@ -28,6 +28,7 @@
 #include "dialog_space.h"
 #include "dialog_mixture.h"
 #include "dialog_release.h"
+#include "dialog_celeste.h"
 #include <QProgressDialog>
 #include <QInputDialog>
 
@@ -132,88 +133,92 @@ void Page_Inst::desaccorder()
         QMessageBox::warning(NULL, tr("Attention"), tr("L'instrument doit contenir des sons."));
         return;
     }
-    // Désaccordage ondulant
-    // Nombre de battements par secondes
-    bool ok;
-    Config * conf = Config::getInstance();
-    double rep = QInputDialog::getDouble(this, tr("Question"),
-        QString::fromUtf8(tr("Nombre de battements par seconde :\n(le signe définit le sens du désaccordage)").toStdString().c_str()),
-        conf->getTools_i_ondulant_battements(), -10, 10, 1, &ok);
-    if (!ok || rep == 0) return;
-    conf->setTools_i_ondulant_battements(rep);
+    DialogCeleste * dialogCeleste = new DialogCeleste(this);
+    dialogCeleste->setAttribute(Qt::WA_DeleteOnClose, true);
+    this->connect(dialogCeleste, SIGNAL(accepted(double,double)),
+                  SLOT(desaccorder(double, double)));
+    dialogCeleste->show();
+}
+void Page_Inst::desaccorder(double doHerz, double division)
+{
     this->sf2->prepareNewActions();
     // Reprise de l'identificateur si modification
-    id = this->tree->getID(0);
+    EltID id = this->tree->getID(0);
     // Modification pour chaque sample lié
     id.typeElement = elementInstSmpl;
     for (int i = 0; i < this->sf2->count(id); i++)
     {
         id.indexElt2 = i;
         if (!this->sf2->get(id, champ_hidden).bValue)
-            this->desaccorder(id, rep);
+        {
+            // Sample lié
+            EltID id2 = id;
+            id2.typeElement = elementSmpl;
+            id2.indexElt = this->sf2->get(id, champ_sampleID).genValue.wAmount;
+            // Numéro de la note du sample
+            int numNoteSmpl = this->sf2->get(id2, champ_byOriginalPitch).bValue;
+            // Note de base sur le clavier correspondant à numNoteSmpl;
+            int numBase = numNoteSmpl;
+            if (this->sf2->isSet(id, champ_overridingRootKey))
+                numBase = this->sf2->get(id, champ_overridingRootKey).wValue;
+            // Etendue du sample sur le clavier
+            int numBas = 0;
+            int numHaut = 0;
+            // Intervalle joué par le sample
+            if (this->sf2->isSet(id, champ_keynum))
+            {
+                numBas = numNoteSmpl + this->sf2->get(id, champ_keynum).wValue - numBase;
+                numHaut = numBas;
+            }
+            else
+            {
+                numBas = numNoteSmpl + this->sf2->get(id, champ_keyRange).rValue.byLo - numBase;
+                numHaut = numNoteSmpl + this->sf2->get(id, champ_keyRange).rValue.byHi - numBase;
+            }
+            // Fréquence des battements
+            double keyMoy = (double)(this->sf2->get(id, champ_keyRange).rValue.byHi +
+                                     this->sf2->get(id, champ_keyRange).rValue.byLo) / 2.;
+            double bps = doHerz * qPow(division, (60. - keyMoy) / 12.);
+            if (bps < -30)
+                bps = -30;
+            else if (bps > 30)
+                bps = 30;
+            // Note moyenne
+            double noteMoy = (double)(numBas + numHaut) / 2;
+            // Calcul du désaccordage, passage en frequence
+            double freqMoy = exp2((noteMoy + 36.3763) / 12);
+            // Ajout du désaccordage
+            // - octave ondulante : division par 2 de bps
+            // - diminution désaccordage vers les graves
+            // - accentuation désaccordage vers les aigus
+            double freqMod = freqMoy + 1.2 * exp2((noteMoy - 60)/30) * bps / 2;
+            // Retour en pitch
+            double noteMod = 12 * log2(freqMod) - 36.3763;
+            // Décalage
+            int decalage = ceil(100*(noteMod - noteMoy)-0.5);
+            if (bps > 0)
+            {
+                if (decalage < 1) decalage = 1;
+                else if (decalage > 50) decalage = 50;
+            }
+            else if (bps < 0)
+            {
+                if (decalage < -50) decalage = -50;
+                else if (decalage > -1) decalage = -1;
+            }
+            // Modification instSmpl
+            if (this->sf2->get(id, champ_fineTune).shValue != decalage)
+            {
+                Valeur val;
+                val.shValue = decalage;
+                this->sf2->set(id, champ_fineTune, val);
+            }
+        }
     }
     // Actualisation
     this->mainWindow->updateDo();
     this->afficher();
 }
-void Page_Inst::desaccorder(EltID id, double bps)
-{
-    // Sample lié
-    EltID id2 = id;
-    id2.typeElement = elementSmpl;
-    id2.indexElt = this->sf2->get(id, champ_sampleID).genValue.wAmount;
-    // Numero de la note du sample
-    int numNoteSmpl = this->sf2->get(id2, champ_byOriginalPitch).bValue;
-    // Note de base sur le clavier correspondant à numNoteSmpl;
-    int numBase = numNoteSmpl;
-    if (this->sf2->isSet(id, champ_overridingRootKey))
-        numBase = this->sf2->get(id, champ_overridingRootKey).wValue;
-    // Etendue du sample sur le clavier
-    int numBas = 0;
-    int numHaut = 0;
-    // Intervalle joué par le sample
-    if (this->sf2->isSet(id, champ_keynum))
-    {
-        numBas = numNoteSmpl + this->sf2->get(id, champ_keynum).wValue - numBase;
-        numHaut = numBas;
-    }
-    else
-    {
-        numBas = numNoteSmpl + this->sf2->get(id, champ_keyRange).rValue.byLo - numBase;
-        numHaut = numNoteSmpl + this->sf2->get(id, champ_keyRange).rValue.byHi - numBase;
-    }
-    // Note moyenne
-    double noteMoy = (double)(numBas + numHaut) / 2;
-    // Calcul du désaccordage, passage en frequence
-    double freqMoy = exp2((noteMoy + 36.3763) / 12);
-    // Ajout du désaccordage
-    // - octave ondulante : division par 2 de bps
-    // - diminution désaccordage vers les graves
-    // - accentuation désaccordage vers les aigus
-    double freqMod = freqMoy + 1.2*exp2((noteMoy - 60)/30) * bps / 2;
-    // Retour en pitch
-    double noteMod = 12*log2(freqMod)-36.3763;
-    // Décalage
-    int decalage = ceil(100*(noteMod - noteMoy)-0.5);
-    if (bps > 0)
-    {
-        if (decalage < 1) decalage = 1;
-        else if (decalage > 50) decalage = 50;
-    }
-    else
-    {
-        if (decalage < -50) decalage = -50;
-        else if (decalage > -1) decalage = -1;
-    }
-    // Modification instSmpl
-    if (this->sf2->get(id, champ_fineTune).shValue != decalage)
-    {
-        Valeur val;
-        val.shValue = decalage;
-        this->sf2->set(id, champ_fineTune, val);
-    }
-}
-
 void Page_Inst::repartitionAuto()
 {
     EltID id = this->tree->getID(0);
@@ -698,14 +703,9 @@ void Page_Inst::release()
                   SLOT(release(double, double, double)));
     dialogRelease->show();
 }
-void Page_Inst::release(double duree36, double division, double deTune)
+void Page_Inst::release(double duree60, double division, double deTune)
 {
     this->sf2->prepareNewActions();
-    // Sauvegarde des valeurs
-    Config * conf = Config::getInstance();
-    conf->setTools_i_release_dureeDo(duree36);
-    conf->setTools_i_release_division(division);
-    conf->setTools_i_release_desaccordage(deTune);
     // Reprise de l'identificateur si modification
     EltID id = this->tree->getID(0);
     // Modification pour chaque sample lié
@@ -719,7 +719,7 @@ void Page_Inst::release(double duree36, double division, double deTune)
             double noteMoy = (double)(this->sf2->get(id, champ_keyRange).rValue.byHi +
                     this->sf2->get(id, champ_keyRange).rValue.byLo) / 2;
             // Calcul durée release
-            double release = pow(division, ((36 - noteMoy) / 12)) * duree36;
+            double release = pow(division, ((60. - noteMoy) / 12.)) * duree60;
             if (release < 0.001) release = 0.001;
             else if (release > 101.594) release = 101.594;
             // Valeur correspondante

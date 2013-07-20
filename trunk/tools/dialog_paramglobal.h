@@ -28,7 +28,6 @@
 #include <QDialog>
 #include "qcustomplot.h"
 #include "pile_sf2.h"
-#include "config.h"
 
 namespace Ui
 {
@@ -56,7 +55,6 @@ signals:
     void accepted(QVector<double> dValues, QList<EltID> listElt, int typeModif, int param);
 
 private:
-    Config * _conf;
     Pile_sf2 * _sf2;
     Ui::DialogParamGlobal *ui;
     QList<EltID> _listElt;
@@ -67,6 +65,7 @@ private:
 class GraphParamGlobal : public QCustomPlot
 {
     Q_OBJECT
+
 public:
     enum TypeForme
     {
@@ -79,6 +78,7 @@ public:
     };
 
     explicit GraphParamGlobal(QWidget *parent = 0);
+    ~GraphParamGlobal();
 
     bool eventFilter(QObject* o, QEvent* e)
     {

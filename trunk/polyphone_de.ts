@@ -119,35 +119,150 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="507"/>
+        <location filename="gui_divers/config.ui" line="489"/>
+        <source>Graphique</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="gui_divers/config.ui" line="495"/>
+        <source>Couleurs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <location filename="gui_divers/config.ui" line="516"/>
+        <source>Arrière-plan</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="gui_divers/config.ui" line="709"/>
+        <source>Onde</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="gui_divers/config.ui" line="716"/>
+        <source>Grille</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <location filename="gui_divers/config.ui" line="729"/>
+        <source>Début de boucle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="gui_divers/config.ui" line="736"/>
+        <source>Fin de boucle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="gui_divers/config.ui" line="743"/>
+        <source>Barre de lecture</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <location filename="gui_divers/config.ui" line="774"/>
+        <location filename="gui_divers/config.ui" line="1053"/>
+        <source>Réinitialiser</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="gui_divers/config.ui" line="800"/>
+        <source>Barre d&apos;outils</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="gui_divers/config.ui" line="826"/>
+        <source>Actions disponibles</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="gui_divers/config.ui" line="1090"/>
         <source>Fermer</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="gui_divers/config.cpp" line="65"/>
+        <location filename="gui_divers/config.cpp" line="66"/>
         <source>Défaut</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="gui_divers/config.cpp" line="147"/>
+        <location filename="gui_divers/config.cpp" line="152"/>
         <source>Information</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="gui_divers/config.cpp" line="148"/>
+        <location filename="gui_divers/config.cpp" line="153"/>
         <source>La modification sera prise en compte lors du prochain dÃ©marrage du logiciel.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="gui_divers/config.cpp" line="493"/>
+        <source>Couleur du fond</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="gui_divers/config.cpp" line="503"/>
+        <source>Couleur de l&apos;onde</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="gui_divers/config.cpp" line="513"/>
+        <source>Couleur de la grille</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <location filename="gui_divers/config.cpp" line="523"/>
+        <source>Couleur du début de la boucle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="gui_divers/config.cpp" line="533"/>
+        <source>Couleur de la fin de la boucle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="gui_divers/config.cpp" line="543"/>
+        <source>Couleur du curseur de lecture</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <location filename="gui_divers/config.cpp" line="581"/>
+        <location filename="gui_divers/config.cpp" line="597"/>
+        <source>---- séparateur ----</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>DialogCeleste</name>
+    <message utf8="true">
+        <location filename="tools/dialog_celeste.ui" line="29"/>
+        <source>Accordage céleste</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="tools/dialog_celeste.ui" line="39"/>
+        <source>Nombre de battements par secondes au do 3 (note 60)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <location filename="tools/dialog_celeste.ui" line="72"/>
+        <source>Le signe définit le sens du désaccordage.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <location filename="tools/dialog_celeste.ui" line="79"/>
+        <source>Division à l&apos;octave suivante</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>DialogHelp</name>
     <message>
-        <location filename="gui_divers/dialog_help.ui" line="26"/>
+        <location filename="gui_divers/dialog_help.ui" line="20"/>
         <source>Aide</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_help.cpp" line="33"/>
+        <location filename="gui_divers/dialog_help.cpp" line="34"/>
         <source>qrc:/aide/aide.html</source>
         <translation type="unfinished"></translation>
     </message>
@@ -178,17 +293,18 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="tools/dialog_magnetophone.cpp" line="71"/>
+        <location filename="tools/dialog_magnetophone.cpp" line="96"/>
         <source>Sauvegarder un enregistrement</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="tools/dialog_magnetophone.cpp" line="72"/>
+        <location filename="tools/dialog_magnetophone.cpp" line="97"/>
         <source>Fichier .wav (*.wav)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="tools/dialog_magnetophone.cpp" line="135"/>
+        <location filename="tools/dialog_magnetophone.cpp" line="162"/>
+        <location filename="tools/dialog_magnetophone.cpp" line="164"/>
         <source>enregistrement</source>
         <translation type="unfinished"></translation>
     </message>
@@ -649,17 +765,17 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="tools/dialog_paramglobal.cpp" line="53"/>
+        <location filename="tools/dialog_paramglobal.cpp" line="87"/>
         <source>Raideur</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="tools/dialog_paramglobal.cpp" line="58"/>
+        <location filename="tools/dialog_paramglobal.cpp" line="92"/>
         <source>Répartition</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="tools/dialog_paramglobal.cpp" line="63"/>
+        <location filename="tools/dialog_paramglobal.cpp" line="97"/>
         <source>-</source>
         <translation type="unfinished"></translation>
     </message>
@@ -904,7 +1020,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="tools/dialog_paramglobal.cpp" line="38"/>
+        <location filename="tools/dialog_paramglobal.cpp" line="40"/>
         <source>Appliquer à d&apos;autres presets...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -923,7 +1039,8 @@
     </message>
     <message utf8="true">
         <location filename="tools/dialog_release.ui" line="104"/>
-        <source>Durée release au do 36</source>
+        <source>Durée release au do 3 (note 60)</source>
+        <oldsource>Durée release au do 36</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
@@ -1084,19 +1201,32 @@ instrument courant</source>
     </message>
 </context>
 <context>
+    <name>GraphSpace</name>
+    <message>
+        <location filename="tools/dialog_space.cpp" line="315"/>
+        <source>G</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="tools/dialog_space.cpp" line="324"/>
+        <source>D</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>GraphiqueFourier</name>
     <message>
-        <location filename="pages/page_smpl.cpp" line="1743"/>
+        <location filename="pages/page_smpl.cpp" line="1784"/>
         <source>note</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="pages/page_smpl.cpp" line="1744"/>
+        <location filename="pages/page_smpl.cpp" line="1785"/>
         <source>correction</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="pages/page_smpl.cpp" line="1744"/>
+        <location filename="pages/page_smpl.cpp" line="1785"/>
         <source>estimation</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1109,8 +1239,8 @@ instrument courant</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="90"/>
         <location filename="mainwindow.ui" line="117"/>
+        <location filename="mainwindow.ui" line="144"/>
         <source>-</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1170,771 +1300,796 @@ instrument courant</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="384"/>
+        <location filename="mainwindow.ui" line="369"/>
         <source>Arborescence</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="479"/>
+        <location filename="mainwindow.ui" line="464"/>
         <source>Enroule l&apos;arborescence</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="mainwindow.ui" line="505"/>
+        <location filename="mainwindow.ui" line="490"/>
         <source>Déroule l&apos;arborescence</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="534"/>
+        <location filename="mainwindow.cpp" line="52"/>
         <source>Rechercher...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="547"/>
+        <location filename="mainwindow.ui" line="529"/>
         <source>Efface la recherche</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="574"/>
+        <location filename="mainwindow.ui" line="556"/>
         <source>&amp;Ouvrir...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="577"/>
+        <location filename="mainwindow.ui" line="559"/>
         <source>Ouvre un fichier</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="580"/>
+        <location filename="mainwindow.ui" line="562"/>
         <source>Ctrl+O</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="589"/>
+        <location filename="mainwindow.ui" line="571"/>
         <source>&amp;Quitter</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="592"/>
+        <location filename="mainwindow.ui" line="574"/>
         <source>Ctrl+Q</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="601"/>
+        <location filename="mainwindow.ui" line="583"/>
         <source>&amp;Manuel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="604"/>
+        <location filename="mainwindow.ui" line="586"/>
         <source>F1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="613"/>
+        <location filename="mainwindow.ui" line="595"/>
         <source>&amp;A propos</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="625"/>
-        <location filename="mainwindow.cpp" line="199"/>
-        <location filename="mainwindow.cpp" line="312"/>
+        <location filename="mainwindow.ui" line="607"/>
+        <location filename="mainwindow.cpp" line="205"/>
+        <location filename="mainwindow.cpp" line="316"/>
         <source>&amp;Enregistrer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="628"/>
+        <location filename="mainwindow.ui" line="610"/>
         <source>Enregistre le fichier actuel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="631"/>
+        <location filename="mainwindow.ui" line="613"/>
         <source>Ctrl+S</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="643"/>
+        <location filename="mainwindow.ui" line="625"/>
         <source>Enregistrer &amp;sous...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="646"/>
+        <location filename="mainwindow.ui" line="628"/>
         <source>Enregistre sous un autre fichier</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="649"/>
+        <location filename="mainwindow.ui" line="631"/>
         <source>Ctrl+Shift+S</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="658"/>
+        <location filename="mainwindow.ui" line="640"/>
         <source>&amp;Nouveau...</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="mainwindow.ui" line="661"/>
+        <location filename="mainwindow.ui" line="643"/>
         <source>Crée un nouveau fichier</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="664"/>
+        <location filename="mainwindow.ui" line="646"/>
         <source>Ctrl+N</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="676"/>
+        <location filename="mainwindow.ui" line="658"/>
         <source>&amp;Annuler</source>
         <comment>1</comment>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="mainwindow.ui" line="679"/>
+        <location filename="mainwindow.ui" line="661"/>
         <source>Annule la dernière action</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="682"/>
+        <location filename="mainwindow.ui" line="664"/>
         <source>Ctrl+Z</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="mainwindow.ui" line="694"/>
+        <location filename="mainwindow.ui" line="676"/>
         <source>Ré&amp;tablir</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="mainwindow.ui" line="697"/>
+        <location filename="mainwindow.ui" line="679"/>
         <source>Refait la dernière action annulée</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="700"/>
+        <location filename="mainwindow.ui" line="682"/>
         <source>Ctrl+Shift+Z</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="mainwindow.ui" line="709"/>
+        <location filename="mainwindow.ui" line="691"/>
         <source>&amp;Préférences</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="720"/>
+        <location filename="mainwindow.ui" line="702"/>
         <source>&amp;Barre d&apos;outils</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="732"/>
+        <location filename="mainwindow.ui" line="714"/>
         <source>&amp;Fermer le fichier</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="735"/>
+        <location filename="mainwindow.ui" line="717"/>
         <source>Ferme le fichier</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="738"/>
+        <location filename="mainwindow.ui" line="720"/>
         <source>Ctrl+W</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="750"/>
+        <location filename="mainwindow.ui" line="732"/>
         <source>&amp;Copier</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="753"/>
+        <location filename="mainwindow.ui" line="735"/>
         <source>Ctrl+C</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="768"/>
+        <location filename="mainwindow.ui" line="750"/>
         <source>C&amp;oller</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="771"/>
+        <location filename="mainwindow.ui" line="753"/>
         <source>Ctrl+V</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="786"/>
+        <location filename="mainwindow.ui" line="768"/>
         <source>&amp;Supprimer</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="mainwindow.ui" line="789"/>
+        <location filename="mainwindow.ui" line="771"/>
         <source>Supprime un élément</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="792"/>
+        <location filename="mainwindow.ui" line="774"/>
         <source>Del</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="mainwindow.ui" line="803"/>
+        <location filename="mainwindow.ui" line="789"/>
         <source>&amp;Enlever les éléments non utilisés</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="mainwindow.ui" line="806"/>
+        <location filename="mainwindow.ui" line="792"/>
         <source>Enleve les éléments non utilisés</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="814"/>
-        <location filename="mainwindow.cpp" line="681"/>
-        <location filename="mainwindow.cpp" line="693"/>
+        <location filename="mainwindow.ui" line="804"/>
+        <location filename="mainwindow.cpp" line="715"/>
+        <location filename="mainwindow.cpp" line="727"/>
         <source>&amp;Renommer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="817"/>
+        <location filename="mainwindow.ui" line="807"/>
         <source>F2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="825"/>
+        <location filename="mainwindow.ui" line="815"/>
         <source>fichier 1</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="mainwindow.ui" line="828"/>
-        <location filename="mainwindow.ui" line="842"/>
-        <location filename="mainwindow.ui" line="856"/>
-        <location filename="mainwindow.ui" line="870"/>
-        <location filename="mainwindow.ui" line="884"/>
+        <location filename="mainwindow.ui" line="818"/>
+        <location filename="mainwindow.ui" line="832"/>
+        <location filename="mainwindow.ui" line="846"/>
+        <location filename="mainwindow.ui" line="860"/>
+        <location filename="mainwindow.ui" line="874"/>
         <source>Ouvre un fichier récent</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="839"/>
+        <location filename="mainwindow.ui" line="829"/>
         <source>fichier 2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="853"/>
+        <location filename="mainwindow.ui" line="843"/>
         <source>fichier 3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="867"/>
+        <location filename="mainwindow.ui" line="857"/>
         <source>fichier 4</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="881"/>
+        <location filename="mainwindow.ui" line="871"/>
         <source>fichier 5</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="898"/>
+        <location filename="mainwindow.ui" line="888"/>
         <source>&amp;Section modulateurs</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="901"/>
+        <location filename="mainwindow.ui" line="891"/>
         <source>Affiche la section modulateurs</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="913"/>
+        <location filename="mainwindow.ui" line="903"/>
         <source>&amp;Importer ...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="916"/>
+        <location filename="mainwindow.ui" line="906"/>
         <source>Importe un fichier audio</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="924"/>
+        <location filename="mainwindow.ui" line="918"/>
         <source>E&amp;xporter ...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="927"/>
+        <location filename="mainwindow.ui" line="921"/>
         <source>Exporte au format wav</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="939"/>
+        <location filename="mainwindow.ui" line="933"/>
         <source>Nouvel instrument</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="mainwindow.ui" line="942"/>
+        <location filename="mainwindow.ui" line="936"/>
         <source>Crée un nouvel instrument</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="954"/>
+        <location filename="mainwindow.ui" line="948"/>
         <source>Nouveau preset</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="mainwindow.ui" line="957"/>
+        <location filename="mainwindow.ui" line="951"/>
         <source>Crée un nouveau preset</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="mainwindow.ui" line="962"/>
+        <location filename="mainwindow.ui" line="963"/>
         <source>&amp;Enlever blanc au départ</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="mainwindow.ui" line="970"/>
+        <location filename="mainwindow.ui" line="975"/>
         <source>&amp;Ajuster à la fin de boucle</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="975"/>
+        <location filename="mainwindow.ui" line="987"/>
         <source>&amp;Normaliser volume</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="980"/>
+        <location filename="mainwindow.ui" line="999"/>
         <source>&amp;Bouclage automatique</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="985"/>
+        <location filename="mainwindow.ui" line="1011"/>
         <source>&amp;Filtre &quot;mur de brique&quot;...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="990"/>
+        <location filename="mainwindow.ui" line="1023"/>
         <source>&amp;Transposer...</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="mainwindow.ui" line="995"/>
+        <location filename="mainwindow.ui" line="1035"/>
         <source>&amp;Régler atténuation minimale...</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="mainwindow.ui" line="1003"/>
-        <source>&amp;Désaccordage ondulant...</source>
+        <location filename="mainwindow.ui" line="1047"/>
+        <source>&amp;Accordage céleste...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <location filename="mainwindow.ui" line="1050"/>
+        <source>Accordage céleste</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1008"/>
+        <location filename="mainwindow.ui" line="1062"/>
         <source>&amp;Spatialisation du son...</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="mainwindow.ui" line="1013"/>
+        <location filename="mainwindow.ui" line="1074"/>
         <source>&amp;Répartition automatique</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1018"/>
+        <location filename="mainwindow.ui" line="1086"/>
         <source>D&amp;uplication des divisions</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="mainwindow.ui" line="1023"/>
-        <location filename="mainwindow.ui" line="1117"/>
+        <location filename="mainwindow.ui" line="1098"/>
+        <location filename="mainwindow.ui" line="1205"/>
         <source>&amp;Paramétrage global...</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="mainwindow.ui" line="1028"/>
+        <location filename="mainwindow.ui" line="1110"/>
         <source>&amp;Réglage balance</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="mainwindow.ui" line="1033"/>
+        <location filename="mainwindow.ui" line="1122"/>
         <source>&amp;Création mixture...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1041"/>
-        <location filename="mainwindow.ui" line="1046"/>
+        <location filename="mainwindow.ui" line="1134"/>
         <source>&amp;Diminuer sifflements...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1057"/>
-        <source>&amp;Clavier</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="mainwindow.ui" line="1068"/>
+        <location filename="mainwindow.ui" line="1145"/>
         <source>&amp;5 octaves</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1076"/>
+        <location filename="mainwindow.ui" line="1153"/>
         <source>&amp;6 octaves</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1084"/>
+        <location filename="mainwindow.ui" line="1161"/>
         <source>&amp;128 notes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1092"/>
+        <location filename="mainwindow.ui" line="1169"/>
         <source>&amp;Aucun</source>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
-        <location filename="mainwindow.ui" line="1097"/>
-        <location filename="mainwindow.ui" line="1102"/>
-        <source>&amp;Réinitialiser</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
-        <location filename="mainwindow.ui" line="1107"/>
+        <location filename="mainwindow.ui" line="1181"/>
         <source>&amp;Duplication des divisions</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="mainwindow.ui" line="1112"/>
+        <location filename="mainwindow.ui" line="1193"/>
         <source>&amp;Élaboration release...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1122"/>
+        <location filename="mainwindow.ui" line="1217"/>
         <source>&amp;Association auto samples</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="mainwindow.ui" line="1127"/>
+        <location filename="mainwindow.ui" line="1226"/>
         <source>Magnétophone</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="187"/>
+        <location filename="mainwindow.cpp" line="193"/>
         <source>&lt;b&gt;Les fichiers suivants ont Ã©tÃ© modifiÃ©s depuis leur dernier enregistrement :&lt;br/&gt; - </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="193"/>
-        <location filename="mainwindow.cpp" line="306"/>
+        <location filename="mainwindow.cpp" line="199"/>
+        <location filename="mainwindow.cpp" line="310"/>
         <source>&lt;b&gt;Voulez-vous enregistrer les modifications du fichier Â«&amp;#160;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="193"/>
+        <location filename="mainwindow.cpp" line="199"/>
         <source>&amp;#160;Â» avant de quitter ?&lt;/b&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="196"/>
-        <location filename="mainwindow.cpp" line="309"/>
+        <location filename="mainwindow.cpp" line="202"/>
+        <location filename="mainwindow.cpp" line="313"/>
         <source>Si vous n&apos;enregistrez pas, les modifications effectuÃ©es depuis la derniÃ¨re sauvegarde seront dÃ©finitivement perdues.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="200"/>
-        <location filename="mainwindow.cpp" line="313"/>
+        <location filename="mainwindow.cpp" line="206"/>
+        <location filename="mainwindow.cpp" line="317"/>
+        <location filename="mainwindow.cpp" line="416"/>
         <source>&amp;Annuler</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="201"/>
+        <location filename="mainwindow.cpp" line="207"/>
         <source>&amp;Quitter sans enregistrer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="233"/>
+        <location filename="mainwindow.cpp" line="237"/>
         <source>Ouvrir une soundfont</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="234"/>
-        <location filename="mainwindow.cpp" line="395"/>
-        <location filename="mainwindow.cpp" line="399"/>
+        <location filename="mainwindow.cpp" line="239"/>
+        <location filename="mainwindow.cpp" line="430"/>
+        <location filename="mainwindow.cpp" line="434"/>
         <source>Fichier .sf2 (*.sf2)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="260"/>
-        <location filename="mainwindow.cpp" line="263"/>
-        <location filename="mainwindow.cpp" line="266"/>
-        <location filename="mainwindow.cpp" line="269"/>
-        <location filename="mainwindow.cpp" line="272"/>
-        <location filename="mainwindow.cpp" line="275"/>
-        <location filename="mainwindow.cpp" line="416"/>
-        <location filename="mainwindow.cpp" line="419"/>
-        <location filename="mainwindow.cpp" line="422"/>
-        <location filename="mainwindow.cpp" line="1578"/>
-        <location filename="mainwindow.cpp" line="2053"/>
+        <location filename="mainwindow.cpp" line="264"/>
+        <location filename="mainwindow.cpp" line="267"/>
+        <location filename="mainwindow.cpp" line="270"/>
+        <location filename="mainwindow.cpp" line="273"/>
+        <location filename="mainwindow.cpp" line="276"/>
+        <location filename="mainwindow.cpp" line="279"/>
+        <location filename="mainwindow.cpp" line="450"/>
+        <location filename="mainwindow.cpp" line="453"/>
+        <location filename="mainwindow.cpp" line="456"/>
+        <location filename="mainwindow.cpp" line="1646"/>
+        <location filename="mainwindow.cpp" line="2121"/>
         <source>Attention</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="263"/>
+        <location filename="mainwindow.cpp" line="267"/>
         <source>Le fichier est dÃ©jÃ  chargÃ©.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="266"/>
+        <location filename="mainwindow.cpp" line="270"/>
         <source>Impossible d&apos;ouvrir le fichier.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="269"/>
+        <location filename="mainwindow.cpp" line="273"/>
         <source>Lecture impossible.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="272"/>
+        <location filename="mainwindow.cpp" line="276"/>
         <source>Le fichier est corrompu.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="275"/>
+        <location filename="mainwindow.cpp" line="279"/>
         <source>La somme de la taille des blocs ne donne pas la taille totale du fichier.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="282"/>
+        <location filename="mainwindow.cpp" line="286"/>
         <source>Nom de la nouvelle soundfont :</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="307"/>
+        <location filename="mainwindow.cpp" line="311"/>
         <source>&amp;#160;Â» avant de le fermer ?&lt;/b&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="314"/>
+        <location filename="mainwindow.cpp" line="318"/>
         <source>&amp;Fermer sans enregistrer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="377"/>
+        <location filename="mainwindow.cpp" line="381"/>
         <source>&lt;b&gt;Perte de rÃ©solution </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="377"/>
+        <location filename="mainwindow.cpp" line="381"/>
         <source> bits&lt;/b&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="379"/>
+        <location filename="mainwindow.cpp" line="383"/>
         <source>La qualitÃ© des samples sera abaissÃ©e suite Ã  cette opÃ©ration. Continuer ?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="382"/>
+        <location filename="mainwindow.cpp" line="386"/>
         <source>&amp;Oui</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="383"/>
+        <location filename="mainwindow.cpp" line="387"/>
         <source>&amp;Non</source>
         <translation type="unfinished"></translation>
     </message>
+    <message utf8="true">
+        <location filename="mainwindow.cpp" line="404"/>
+        <source>&lt;b&gt;Trop de paramètres dans les instruments et les presets.&lt;/b&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <location filename="mainwindow.cpp" line="406"/>
+        <source>&lt;b&gt;Trop de paramètres dans les instruments.&lt;/b&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <location filename="mainwindow.cpp" line="408"/>
+        <source>&lt;b&gt;Trop de paramètres dans les presets.&lt;/b&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <location filename="mainwindow.cpp" line="410"/>
+        <source>Certains synthétiseurs ne prennent pas en compte les paramètres au delà du 65536ème.
+Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
+        <translation type="unfinished"></translation>
+    </message>
     <message>
-        <location filename="mainwindow.cpp" line="395"/>
-        <location filename="mainwindow.cpp" line="398"/>
+        <location filename="mainwindow.cpp" line="414"/>
+        <source>&amp;Sauvegarder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message utf8="true">
+        <location filename="mainwindow.cpp" line="415"/>
+        <source>Sauvegarder, &amp;désactiver ce message</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="430"/>
+        <location filename="mainwindow.cpp" line="433"/>
         <source>Sauvegarder une soundfont</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="416"/>
+        <location filename="mainwindow.cpp" line="450"/>
         <source>Extension inconnue.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="419"/>
+        <location filename="mainwindow.cpp" line="453"/>
         <source>Fichier dÃ©jÃ  ouvert, impossible de sauvegarder.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="422"/>
+        <location filename="mainwindow.cpp" line="456"/>
         <source>Impossible d&apos;enregistrer le fichier.</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="mainwindow.cpp" line="451"/>
+        <location filename="mainwindow.cpp" line="485"/>
         <source>&lt;b&gt;Polyphone&lt;/b&gt; © 2013&lt;br/&gt;Version : </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="452"/>
+        <location filename="mainwindow.cpp" line="486"/>
         <source>&lt;br/&gt;Auteur : Davy Triponney&lt;br/&gt;Site web : &lt;a href=&quot;http://www.polyphone.fr&quot;&gt;www.polyphone.fr&lt;/a&gt;&lt;br/&gt;Support : &lt;a href=&quot;mailto:info@polyphone.fr&quot;&gt;info@polyphone.fr&lt;/a&gt;</source>
         <oldsource>&lt;br/&gt;Auteur : Davy Triponney&lt;br/&gt;Support : &lt;a href=&quot;mailto:info@polyphone.fr&quot;&gt;info@polyphone.fr&lt;/a&gt;</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="688"/>
+        <location filename="mainwindow.cpp" line="722"/>
         <source>&amp;Renommer en masse</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="858"/>
+        <location filename="mainwindow.cpp" line="926"/>
         <source>Nom du sample (max 20 caractÃ¨res) :</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="859"/>
+        <location filename="mainwindow.cpp" line="927"/>
         <source>Nom de l&apos;instrument (max 20 caractÃ¨res) :</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="860"/>
+        <location filename="mainwindow.cpp" line="928"/>
         <source>Nom du preset (max 20 caractÃ¨res) :</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="861"/>
+        <location filename="mainwindow.cpp" line="929"/>
         <source>Nom du SF2 (max 255 caractÃ¨res) :</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="862"/>
-        <location filename="mainwindow.cpp" line="2375"/>
+        <location filename="mainwindow.cpp" line="930"/>
+        <location filename="mainwindow.cpp" line="2462"/>
         <source>Question</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1176"/>
-        <location filename="mainwindow.cpp" line="1767"/>
-        <location filename="mainwindow.cpp" line="1773"/>
-        <location filename="mainwindow.cpp" line="1782"/>
+        <location filename="mainwindow.cpp" line="1244"/>
+        <location filename="mainwindow.cpp" line="1835"/>
+        <location filename="mainwindow.cpp" line="1841"/>
+        <location filename="mainwindow.cpp" line="1850"/>
         <source>Le sample Â«&amp;#160;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1177"/>
-        <location filename="mainwindow.cpp" line="1783"/>
+        <location filename="mainwindow.cpp" line="1245"/>
+        <location filename="mainwindow.cpp" line="1851"/>
         <source>&amp;#160;Â» existe dÃ©jÃ .&lt;br /&gt;Que faire ?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1182"/>
-        <location filename="mainwindow.cpp" line="1295"/>
-        <location filename="mainwindow.cpp" line="1515"/>
-        <location filename="mainwindow.cpp" line="1797"/>
+        <location filename="mainwindow.cpp" line="1250"/>
+        <location filename="mainwindow.cpp" line="1363"/>
+        <location filename="mainwindow.cpp" line="1583"/>
+        <location filename="mainwindow.cpp" line="1865"/>
         <source>&amp;Remplacer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1183"/>
-        <location filename="mainwindow.cpp" line="1296"/>
-        <location filename="mainwindow.cpp" line="1516"/>
-        <location filename="mainwindow.cpp" line="1798"/>
+        <location filename="mainwindow.cpp" line="1251"/>
+        <location filename="mainwindow.cpp" line="1364"/>
+        <location filename="mainwindow.cpp" line="1584"/>
+        <location filename="mainwindow.cpp" line="1866"/>
         <source>R&amp;emplacer tout</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1184"/>
-        <location filename="mainwindow.cpp" line="1297"/>
-        <location filename="mainwindow.cpp" line="1517"/>
-        <location filename="mainwindow.cpp" line="1799"/>
+        <location filename="mainwindow.cpp" line="1252"/>
+        <location filename="mainwindow.cpp" line="1365"/>
+        <location filename="mainwindow.cpp" line="1585"/>
+        <location filename="mainwindow.cpp" line="1867"/>
         <source>&amp;Dupliquer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1185"/>
-        <location filename="mainwindow.cpp" line="1298"/>
-        <location filename="mainwindow.cpp" line="1518"/>
-        <location filename="mainwindow.cpp" line="1800"/>
+        <location filename="mainwindow.cpp" line="1253"/>
+        <location filename="mainwindow.cpp" line="1366"/>
+        <location filename="mainwindow.cpp" line="1586"/>
+        <location filename="mainwindow.cpp" line="1868"/>
         <source>D&amp;upliquer tout</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1186"/>
-        <location filename="mainwindow.cpp" line="1299"/>
-        <location filename="mainwindow.cpp" line="1519"/>
-        <location filename="mainwindow.cpp" line="1801"/>
+        <location filename="mainwindow.cpp" line="1254"/>
+        <location filename="mainwindow.cpp" line="1367"/>
+        <location filename="mainwindow.cpp" line="1587"/>
+        <location filename="mainwindow.cpp" line="1869"/>
         <source>&amp;Ignorer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1187"/>
-        <location filename="mainwindow.cpp" line="1300"/>
-        <location filename="mainwindow.cpp" line="1520"/>
-        <location filename="mainwindow.cpp" line="1802"/>
+        <location filename="mainwindow.cpp" line="1255"/>
+        <location filename="mainwindow.cpp" line="1368"/>
+        <location filename="mainwindow.cpp" line="1588"/>
+        <location filename="mainwindow.cpp" line="1870"/>
         <source>I&amp;gnorer tout</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1289"/>
+        <location filename="mainwindow.cpp" line="1357"/>
         <source>L&apos;instrument Â«&amp;#160;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1290"/>
-        <location filename="mainwindow.cpp" line="1510"/>
+        <location filename="mainwindow.cpp" line="1358"/>
+        <location filename="mainwindow.cpp" line="1578"/>
         <source>&amp;#160;Â» existe dÃ©jÃ .&lt;br /&gt;Souhaitez-vous le remplacer ?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1509"/>
+        <location filename="mainwindow.cpp" line="1577"/>
         <source>Le preset Â«&amp;#160;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1578"/>
-        <location filename="mainwindow.cpp" line="2053"/>
+        <location filename="mainwindow.cpp" line="1646"/>
+        <location filename="mainwindow.cpp" line="2121"/>
         <source>Aucun preset n&apos;est disponible.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1732"/>
+        <location filename="mainwindow.cpp" line="1799"/>
         <source>Importer un fichier audio</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1733"/>
+        <location filename="mainwindow.cpp" line="1800"/>
         <source>Fichier .wav (*.wav)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1768"/>
+        <location filename="mainwindow.cpp" line="1836"/>
         <source>L&amp;#160;Â» existe dÃ©jÃ .&lt;br /&gt;Que faire ?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1774"/>
+        <location filename="mainwindow.cpp" line="1842"/>
         <source>R&amp;#160;Â» existe dÃ©jÃ .&lt;br /&gt;Que faire ?</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
-        <location filename="mainwindow.cpp" line="1914"/>
-        <source>Choisir un rÃ©pertoire de destination</source>
+    <message utf8="true">
+        <location filename="mainwindow.cpp" line="1981"/>
+        <source>Choisir un répertoire de destination</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2027"/>
+        <location filename="mainwindow.cpp" line="2095"/>
         <source>Nom du nouvel instrument :</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2063"/>
+        <location filename="mainwindow.cpp" line="2131"/>
         <source>Nom du nouveau preset :</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2360"/>
+        <location filename="mainwindow.cpp" line="2446"/>
         <source>%d sample et </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2361"/>
+        <location filename="mainwindow.cpp" line="2447"/>
         <source>%d samples et </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2363"/>
+        <location filename="mainwindow.cpp" line="2449"/>
         <source>%d instrument ont Ã©tÃ© supprimÃ©s.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2364"/>
+        <location filename="mainwindow.cpp" line="2450"/>
         <source>%d instruments ont Ã©tÃ© supprimÃ©s.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2376"/>
+        <location filename="mainwindow.cpp" line="2463"/>
         <source>AttÃ©nuation minimale (dB) :</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1979,6 +2134,8 @@ instrument courant</source>
         <location filename="pages/page.cpp" line="2430"/>
         <location filename="pages/page.cpp" line="2436"/>
         <location filename="pages/page.cpp" line="2438"/>
+        <location filename="pages/page.cpp" line="2548"/>
+        <location filename="pages/page.cpp" line="2557"/>
         <source>Attention</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1994,11 +2151,13 @@ instrument courant</source>
     </message>
     <message>
         <location filename="pages/page.cpp" line="2428"/>
+        <location filename="pages/page.cpp" line="2548"/>
         <source>L&apos;instrument doit contenir des sons.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="pages/page.cpp" line="2430"/>
+        <location filename="pages/page.cpp" line="2557"/>
         <source>Le preset doit contenir des instruments.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2336,63 +2495,50 @@ instrument courant</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="pages/page_inst.cpp" line="117"/>
+        <location filename="pages/page_inst.cpp" line="118"/>
         <source>&lt;b&gt;Instrument liÃ© Ã  aucun preset.&lt;/b&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="pages/page_inst.cpp" line="119"/>
+        <location filename="pages/page_inst.cpp" line="120"/>
         <source>&lt;b&gt;Instrument liÃ© au preset : &lt;/b&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="pages/page_inst.cpp" line="121"/>
+        <location filename="pages/page_inst.cpp" line="122"/>
         <source>&lt;b&gt;Instrument liÃ© aux presets : &lt;/b&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="pages/page_inst.cpp" line="132"/>
-        <location filename="pages/page_inst.cpp" line="220"/>
-        <location filename="pages/page_inst.cpp" line="295"/>
-        <location filename="pages/page_inst.cpp" line="378"/>
-        <location filename="pages/page_inst.cpp" line="542"/>
-        <location filename="pages/page_inst.cpp" line="755"/>
+        <location filename="pages/page_inst.cpp" line="133"/>
+        <location filename="pages/page_inst.cpp" line="228"/>
+        <location filename="pages/page_inst.cpp" line="311"/>
+        <location filename="pages/page_inst.cpp" line="484"/>
+        <location filename="pages/page_inst.cpp" line="697"/>
         <source>Attention</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="pages/page_inst.cpp" line="132"/>
-        <location filename="pages/page_inst.cpp" line="220"/>
-        <location filename="pages/page_inst.cpp" line="295"/>
-        <location filename="pages/page_inst.cpp" line="378"/>
-        <location filename="pages/page_inst.cpp" line="542"/>
-        <location filename="pages/page_inst.cpp" line="755"/>
+        <location filename="pages/page_inst.cpp" line="133"/>
+        <location filename="pages/page_inst.cpp" line="228"/>
+        <location filename="pages/page_inst.cpp" line="311"/>
+        <location filename="pages/page_inst.cpp" line="484"/>
+        <location filename="pages/page_inst.cpp" line="697"/>
         <source>L&apos;instrument doit contenir des sons.</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
-        <location filename="pages/page_inst.cpp" line="138"/>
-        <source>Question</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="pages/page_inst.cpp" line="139"/>
-        <source>Nombre de battements par seconde :
-(le signe dÃ©finit le sens du dÃ©saccordage)</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message utf8="true">
-        <location filename="pages/page_inst.cpp" line="563"/>
+        <location filename="pages/page_inst.cpp" line="505"/>
         <source>Création </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="pages/page_inst.cpp" line="564"/>
+        <location filename="pages/page_inst.cpp" line="506"/>
         <source>Annuler</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="pages/page_inst.cpp" line="579"/>
+        <location filename="pages/page_inst.cpp" line="521"/>
         <source>sans nom</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2679,16 +2825,6 @@ instrument courant</source>
         <source>Valeur abs.</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
-        <location filename="pages/page_prst.cpp" line="384"/>
-        <source>Attention</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="pages/page_prst.cpp" line="384"/>
-        <source>Le preset doit contenir des instruments.</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>Page_Sf2</name>
@@ -2805,12 +2941,14 @@ instrument courant</source>
     </message>
     <message utf8="true">
         <location filename="pages/page_sf2.ui" line="280"/>
-        <source>Nombre de paramètres renseignés pour instruments</source>
+        <source>Nombre de paramètres renseignés pour les instruments</source>
+        <oldsource>Nombre de paramètres renseignés pour instruments</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
         <location filename="pages/page_sf2.ui" line="287"/>
-        <source>Nombre de paramètres renseignés pour presets</source>
+        <source>Nombre de paramètres renseignés pour les presets</source>
+        <oldsource>Nombre de paramètres renseignés pour presets</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2873,6 +3011,12 @@ instrument courant</source>
         <source>dÃ©cembre</source>
         <translation type="unfinished"></translation>
     </message>
+    <message utf8="true">
+        <location filename="pages/page_sf2.cpp" line="246"/>
+        <location filename="pages/page_sf2.cpp" line="256"/>
+        <source> (≤ 65536)</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Page_Smpl</name>
@@ -2883,208 +3027,208 @@ instrument courant</source>
     </message>
     <message>
         <location filename="pages/page_smpl.ui" line="77"/>
-        <location filename="pages/page_smpl.ui" line="966"/>
+        <location filename="pages/page_smpl.ui" line="984"/>
         <source>TextLabel</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="pages/page_smpl.ui" line="158"/>
+        <location filename="pages/page_smpl.ui" line="176"/>
         <source>&lt;b&gt;Fréquences&lt;/b&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="pages/page_smpl.ui" line="177"/>
+        <location filename="pages/page_smpl.ui" line="195"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Informations&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="pages/page_smpl.ui" line="190"/>
+        <location filename="pages/page_smpl.ui" line="208"/>
         <source>&lt;b&gt;Egaliseur&lt;/b&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="pages/page_smpl.ui" line="242"/>
+        <location filename="pages/page_smpl.ui" line="260"/>
         <source>32</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="pages/page_smpl.ui" line="281"/>
+        <location filename="pages/page_smpl.ui" line="299"/>
         <source>64</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="pages/page_smpl.ui" line="323"/>
+        <location filename="pages/page_smpl.ui" line="341"/>
         <source>125</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="pages/page_smpl.ui" line="362"/>
+        <location filename="pages/page_smpl.ui" line="380"/>
         <source>250</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="pages/page_smpl.ui" line="401"/>
+        <location filename="pages/page_smpl.ui" line="419"/>
         <source>500</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="pages/page_smpl.ui" line="440"/>
+        <location filename="pages/page_smpl.ui" line="458"/>
         <source>1k</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="pages/page_smpl.ui" line="479"/>
+        <location filename="pages/page_smpl.ui" line="497"/>
         <source>2k</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="pages/page_smpl.ui" line="518"/>
+        <location filename="pages/page_smpl.ui" line="536"/>
         <source>4k</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="pages/page_smpl.ui" line="557"/>
+        <location filename="pages/page_smpl.ui" line="575"/>
         <source>8k</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="pages/page_smpl.ui" line="596"/>
+        <location filename="pages/page_smpl.ui" line="614"/>
         <source>16k</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="pages/page_smpl.ui" line="651"/>
+        <location filename="pages/page_smpl.ui" line="669"/>
         <source> +15dB</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="pages/page_smpl.ui" line="674"/>
+        <location filename="pages/page_smpl.ui" line="692"/>
         <source>Réinitialiser</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="pages/page_smpl.ui" line="687"/>
+        <location filename="pages/page_smpl.ui" line="705"/>
         <source>Appliquer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="pages/page_smpl.ui" line="707"/>
+        <location filename="pages/page_smpl.ui" line="725"/>
         <source> -15dB</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="pages/page_smpl.ui" line="790"/>
+        <location filename="pages/page_smpl.ui" line="808"/>
         <source>Lecture</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="pages/page_smpl.ui" line="822"/>
+        <location filename="pages/page_smpl.ui" line="840"/>
         <source>en boucle</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="pages/page_smpl.ui" line="857"/>
+        <location filename="pages/page_smpl.ui" line="875"/>
         <source>stéréo</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="pages/page_smpl.ui" line="864"/>
+        <location filename="pages/page_smpl.ui" line="882"/>
         <source>sinus</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="pages/page_smpl.ui" line="898"/>
+        <location filename="pages/page_smpl.ui" line="916"/>
         <source>Taille</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="pages/page_smpl.ui" line="905"/>
+        <location filename="pages/page_smpl.ui" line="923"/>
         <source>Boucle</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="pages/page_smpl.ui" line="912"/>
+        <location filename="pages/page_smpl.ui" line="930"/>
         <source>Note de base</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="pages/page_smpl.ui" line="919"/>
+        <location filename="pages/page_smpl.ui" line="937"/>
         <source>Correction (centième)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="pages/page_smpl.ui" line="926"/>
+        <location filename="pages/page_smpl.ui" line="944"/>
         <source>Echantillonnage</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="pages/page_smpl.ui" line="933"/>
+        <location filename="pages/page_smpl.ui" line="951"/>
         <source>Type</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="pages/page_smpl.ui" line="940"/>
+        <location filename="pages/page_smpl.ui" line="958"/>
         <source>Lien</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="pages/page_smpl.ui" line="1063"/>
+        <location filename="pages/page_smpl.ui" line="1081"/>
         <source>192000</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="pages/page_smpl.ui" line="1068"/>
+        <location filename="pages/page_smpl.ui" line="1086"/>
         <source>96000</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="pages/page_smpl.ui" line="1073"/>
+        <location filename="pages/page_smpl.ui" line="1091"/>
         <source>48000</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="pages/page_smpl.ui" line="1078"/>
+        <location filename="pages/page_smpl.ui" line="1096"/>
         <source>44100</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="pages/page_smpl.ui" line="1083"/>
+        <location filename="pages/page_smpl.ui" line="1101"/>
         <source>32000</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="pages/page_smpl.ui" line="1088"/>
+        <location filename="pages/page_smpl.ui" line="1106"/>
         <source>22050</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="pages/page_smpl.ui" line="1093"/>
+        <location filename="pages/page_smpl.ui" line="1111"/>
         <source>11025</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="pages/page_smpl.cpp" line="117"/>
-        <location filename="pages/page_smpl.cpp" line="356"/>
-        <location filename="pages/page_smpl.cpp" line="486"/>
-        <location filename="pages/page_smpl.cpp" line="502"/>
+        <location filename="pages/page_smpl.cpp" line="360"/>
+        <location filename="pages/page_smpl.cpp" line="490"/>
+        <location filename="pages/page_smpl.cpp" line="506"/>
         <source>mono</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="pages/page_smpl.cpp" line="127"/>
-        <location filename="pages/page_smpl.cpp" line="487"/>
+        <location filename="pages/page_smpl.cpp" line="491"/>
         <source>droit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="pages/page_smpl.cpp" line="128"/>
-        <location filename="pages/page_smpl.cpp" line="488"/>
+        <location filename="pages/page_smpl.cpp" line="492"/>
         <source>gauche</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="pages/page_smpl.cpp" line="129"/>
-        <location filename="pages/page_smpl.cpp" line="489"/>
+        <location filename="pages/page_smpl.cpp" line="493"/>
         <source>lien</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3104,42 +3248,42 @@ instrument courant</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="pages/page_smpl.cpp" line="584"/>
-        <location filename="pages/page_smpl.cpp" line="639"/>
-        <location filename="pages/page_smpl.cpp" line="715"/>
-        <location filename="pages/page_smpl.cpp" line="785"/>
-        <location filename="pages/page_smpl.cpp" line="860"/>
-        <location filename="pages/page_smpl.cpp" line="921"/>
-        <location filename="pages/page_smpl.cpp" line="1022"/>
-        <location filename="pages/page_smpl.cpp" line="1084"/>
+        <location filename="pages/page_smpl.cpp" line="588"/>
+        <location filename="pages/page_smpl.cpp" line="643"/>
+        <location filename="pages/page_smpl.cpp" line="719"/>
+        <location filename="pages/page_smpl.cpp" line="789"/>
+        <location filename="pages/page_smpl.cpp" line="866"/>
+        <location filename="pages/page_smpl.cpp" line="927"/>
+        <location filename="pages/page_smpl.cpp" line="1033"/>
+        <location filename="pages/page_smpl.cpp" line="1097"/>
         <source>Traitement </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="pages/page_smpl.cpp" line="585"/>
-        <location filename="pages/page_smpl.cpp" line="640"/>
-        <location filename="pages/page_smpl.cpp" line="716"/>
-        <location filename="pages/page_smpl.cpp" line="786"/>
-        <location filename="pages/page_smpl.cpp" line="861"/>
-        <location filename="pages/page_smpl.cpp" line="922"/>
-        <location filename="pages/page_smpl.cpp" line="1023"/>
-        <location filename="pages/page_smpl.cpp" line="1085"/>
+        <location filename="pages/page_smpl.cpp" line="589"/>
+        <location filename="pages/page_smpl.cpp" line="644"/>
+        <location filename="pages/page_smpl.cpp" line="720"/>
+        <location filename="pages/page_smpl.cpp" line="790"/>
+        <location filename="pages/page_smpl.cpp" line="867"/>
+        <location filename="pages/page_smpl.cpp" line="928"/>
+        <location filename="pages/page_smpl.cpp" line="1034"/>
+        <location filename="pages/page_smpl.cpp" line="1098"/>
         <source>Annuler</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="pages/page_smpl.cpp" line="840"/>
-        <location filename="pages/page_smpl.cpp" line="1062"/>
+        <location filename="pages/page_smpl.cpp" line="845"/>
+        <location filename="pages/page_smpl.cpp" line="1074"/>
         <source>Question</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="pages/page_smpl.cpp" line="841"/>
+        <location filename="pages/page_smpl.cpp" line="846"/>
         <source>FrÃ©quence de coupure :</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="pages/page_smpl.cpp" line="1063"/>
+        <location filename="pages/page_smpl.cpp" line="1075"/>
         <source>Ãcart en demi-tons :</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3147,94 +3291,94 @@ instrument courant</source>
 <context>
     <name>PianoScene</name>
     <message>
-        <location filename="clavier/pianoscene.cpp" line="266"/>
-        <location filename="clavier/pianoscene.cpp" line="269"/>
+        <location filename="clavier/pianoscene.cpp" line="275"/>
+        <location filename="clavier/pianoscene.cpp" line="278"/>
         <source>C</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="clavier/pianoscene.cpp" line="266"/>
+        <location filename="clavier/pianoscene.cpp" line="275"/>
         <source>C♯</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="clavier/pianoscene.cpp" line="266"/>
-        <location filename="clavier/pianoscene.cpp" line="269"/>
+        <location filename="clavier/pianoscene.cpp" line="275"/>
+        <location filename="clavier/pianoscene.cpp" line="278"/>
         <source>D</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="clavier/pianoscene.cpp" line="266"/>
+        <location filename="clavier/pianoscene.cpp" line="275"/>
         <source>D♯</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="clavier/pianoscene.cpp" line="266"/>
-        <location filename="clavier/pianoscene.cpp" line="269"/>
+        <location filename="clavier/pianoscene.cpp" line="275"/>
+        <location filename="clavier/pianoscene.cpp" line="278"/>
         <source>E</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="clavier/pianoscene.cpp" line="267"/>
-        <location filename="clavier/pianoscene.cpp" line="270"/>
+        <location filename="clavier/pianoscene.cpp" line="276"/>
+        <location filename="clavier/pianoscene.cpp" line="279"/>
         <source>F</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="clavier/pianoscene.cpp" line="267"/>
+        <location filename="clavier/pianoscene.cpp" line="276"/>
         <source>F♯</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="clavier/pianoscene.cpp" line="267"/>
-        <location filename="clavier/pianoscene.cpp" line="270"/>
+        <location filename="clavier/pianoscene.cpp" line="276"/>
+        <location filename="clavier/pianoscene.cpp" line="279"/>
         <source>G</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="clavier/pianoscene.cpp" line="267"/>
+        <location filename="clavier/pianoscene.cpp" line="276"/>
         <source>G♯</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="clavier/pianoscene.cpp" line="268"/>
-        <location filename="clavier/pianoscene.cpp" line="271"/>
+        <location filename="clavier/pianoscene.cpp" line="277"/>
+        <location filename="clavier/pianoscene.cpp" line="280"/>
         <source>A</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="clavier/pianoscene.cpp" line="268"/>
+        <location filename="clavier/pianoscene.cpp" line="277"/>
         <source>A♯</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="clavier/pianoscene.cpp" line="268"/>
-        <location filename="clavier/pianoscene.cpp" line="271"/>
+        <location filename="clavier/pianoscene.cpp" line="277"/>
+        <location filename="clavier/pianoscene.cpp" line="280"/>
         <source>B</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="clavier/pianoscene.cpp" line="269"/>
+        <location filename="clavier/pianoscene.cpp" line="278"/>
         <source>D♭</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="clavier/pianoscene.cpp" line="269"/>
+        <location filename="clavier/pianoscene.cpp" line="278"/>
         <source>E♭</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="clavier/pianoscene.cpp" line="270"/>
+        <location filename="clavier/pianoscene.cpp" line="279"/>
         <source>G♭</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="clavier/pianoscene.cpp" line="270"/>
+        <location filename="clavier/pianoscene.cpp" line="279"/>
         <source>A♭</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="clavier/pianoscene.cpp" line="271"/>
+        <location filename="clavier/pianoscene.cpp" line="280"/>
         <source>B♭</source>
         <translation type="unfinished"></translation>
     </message>

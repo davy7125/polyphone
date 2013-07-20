@@ -26,6 +26,7 @@
 #include "pile_sf2.h"
 #include "mainwindow.h"
 #include "dialog_paramglobal.h"
+#include "dialog_visualizer.h"
 #include <QScrollBar>
 
 
@@ -2645,6 +2646,32 @@ void PageTable::duplication(EltID id)
         }
     }
 }
+void PageTable::visualize()
+{
+    EltID id = this->tree->getID(0);
+    if (m_typePage == PAGE_INST)
+    {
+        id.typeElement = elementInstSmpl;
+        if (this->sf2->count(id) == 0)
+        {
+            QMessageBox::warning(NULL, tr("Attention"), tr("L'instrument doit contenir des sons."));
+            return;
+        }
+    }
+    else
+    {
+        id.typeElement = elementPrstInst;
+        if (this->sf2->count(id) == 0)
+        {
+            QMessageBox::warning(NULL, tr("Attention"), tr("Le preset doit contenir des instruments."));
+            return;
+        }
+    }
+    DialogVisualizer * dialogVisu = new DialogVisualizer(this->sf2, id, this);
+    dialogVisu->setAttribute(Qt::WA_DeleteOnClose, true);
+    dialogVisu->show();
+}
+
 
 int PageTable::getDestNumber(int i)
 {
