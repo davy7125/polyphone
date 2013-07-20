@@ -25,11 +25,11 @@
 #include "dialog_paramglobal.h"
 #include "ui_dialog_paramglobal.h"
 #include "dialog_selectitems.h"
+#include "config.h"
 
 // Constructeur, destructeur
 DialogParamGlobal::DialogParamGlobal(Pile_sf2 *sf2, EltID id, QWidget *parent) :
     QDialog(parent),
-    _conf(Config::getInstance()),
     _sf2(sf2),
     ui(new Ui::DialogParamGlobal),
     _initialID(id)
@@ -42,38 +42,39 @@ DialogParamGlobal::DialogParamGlobal(Pile_sf2 *sf2, EltID id, QWidget *parent) :
     }
     else
         _isPrst = false;
+    Config * conf = Config::getInstance();
     ui->comboMotif->blockSignals(true);
-    ui->comboMotif->setCurrentIndex(_conf->getTools_global_motif(_isPrst));
+    ui->comboMotif->setCurrentIndex(conf->getTools_global_motif(_isPrst));
     ui->comboMotif->blockSignals(false);
     ui->doubleSpinRaideur->blockSignals(true);
-    ui->doubleSpinRaideur->setValue(_conf->getTools_global_raideur(_isPrst));
+    ui->doubleSpinRaideur->setValue(conf->getTools_global_raideur(_isPrst));
     ui->doubleSpinRaideur->blockSignals(false);
     ui->doubleSpinMin->blockSignals(true);
-    ui->doubleSpinMin->setValue(_conf->getTools_global_mini(_isPrst));
+    ui->doubleSpinMin->setValue(conf->getTools_global_mini(_isPrst));
     ui->doubleSpinMin->blockSignals(false);
     ui->doubleSpinMax->blockSignals(true);
-    ui->doubleSpinMax->setValue(_conf->getTools_global_maxi(_isPrst));
+    ui->doubleSpinMax->setValue(conf->getTools_global_maxi(_isPrst));
     ui->doubleSpinMax->blockSignals(false);
     ui->comboModif->blockSignals(true);
-    ui->comboModif->setCurrentIndex(_conf->getTools_global_modification(_isPrst));
+    ui->comboModif->setCurrentIndex(conf->getTools_global_modification(_isPrst));
     ui->comboModif->blockSignals(false);
     ui->comboValeur->blockSignals(true);
-    ui->comboValeur->setCurrentIndex(_conf->getTools_global_parametre(_isPrst));
+    ui->comboValeur->setCurrentIndex(conf->getTools_global_parametre(_isPrst));
     ui->comboValeur->blockSignals(false);
-    ui->graphParamGlobal->setMinMax(_conf->getTools_global_mini(_isPrst),
-                                    _conf->getTools_global_maxi(_isPrst));
+    ui->graphParamGlobal->setMinMax(conf->getTools_global_mini(_isPrst),
+                                    conf->getTools_global_maxi(_isPrst));
 
     // Initialisation id
     _listElt.append(id);
 
     // Dessin
     this->indexMotifChanged(this->ui->comboMotif->currentIndex());
-    ui->graphParamGlobal->setMinMaxX(_conf->getTools_global_miniX(_isPrst),
-                                     _conf->getTools_global_maxiX(_isPrst));
-    this->ui->graphParamGlobal->setValues(_conf->getTools_global_courbe(_isPrst));
+    ui->graphParamGlobal->setMinMaxX(conf->getTools_global_miniX(_isPrst),
+                                     conf->getTools_global_maxiX(_isPrst));
+    this->ui->graphParamGlobal->setValues(conf->getTools_global_courbe(_isPrst));
 
     // zone du clavier
-    ui->graphParamGlobal->setEtendueClavier(_conf->getKeyboardType());
+    ui->graphParamGlobal->setEtendueClavier(conf->getKeyboardType());
 }
 DialogParamGlobal::~DialogParamGlobal()
 {
@@ -114,15 +115,16 @@ void DialogParamGlobal::maxChanged(double value)
 void DialogParamGlobal::accept()
 {
     // Sauvegarde des paramètres
-    _conf->setTools_global_courbe(_isPrst, this->ui->graphParamGlobal->getValues());
-    _conf->setTools_global_motif(_isPrst, this->ui->comboMotif->currentIndex());
-    _conf->setTools_global_raideur(_isPrst, this->ui->doubleSpinRaideur->value());
-    _conf->setTools_global_mini(_isPrst, this->ui->doubleSpinMin->value());
-    _conf->setTools_global_maxi(_isPrst, this->ui->doubleSpinMax->value());
-    _conf->setTools_global_modification(_isPrst, this->ui->comboModif->currentIndex());
-    _conf->setTools_global_parametre(_isPrst, this->ui->comboValeur->currentIndex());
-    _conf->setTools_global_miniX(_isPrst, this->ui->graphParamGlobal->getXmin());
-    _conf->setTools_global_maxiX(_isPrst, this->ui->graphParamGlobal->getXmax());
+    Config * conf = Config::getInstance();
+    conf->setTools_global_courbe(_isPrst, this->ui->graphParamGlobal->getValues());
+    conf->setTools_global_motif(_isPrst, this->ui->comboMotif->currentIndex());
+    conf->setTools_global_raideur(_isPrst, this->ui->doubleSpinRaideur->value());
+    conf->setTools_global_mini(_isPrst, this->ui->doubleSpinMin->value());
+    conf->setTools_global_maxi(_isPrst, this->ui->doubleSpinMax->value());
+    conf->setTools_global_modification(_isPrst, this->ui->comboModif->currentIndex());
+    conf->setTools_global_parametre(_isPrst, this->ui->comboValeur->currentIndex());
+    conf->setTools_global_miniX(_isPrst, this->ui->graphParamGlobal->getXmin());
+    conf->setTools_global_maxiX(_isPrst, this->ui->graphParamGlobal->getXmax());
     // Récupération et mise en forme des modificateurs
     QVector<double> dValues = this->ui->graphParamGlobal->getValues();
     double dMin = this->ui->doubleSpinMin->value();
@@ -159,6 +161,7 @@ GraphParamGlobal::GraphParamGlobal(QWidget * parent) : QCustomPlot(parent),
     raideurExp(50.0),
     yMin(0.), yMax(1.),
     xMin(0), xMax(140),
+    labelCoord(NULL),
     previousX(-1)
 {
     // Layer pour la position des octaves
@@ -247,6 +250,9 @@ GraphParamGlobal::GraphParamGlobal(QWidget * parent) : QCustomPlot(parent),
     this->installEventFilter(this);
     // Affichage
     this->replot();
+}
+GraphParamGlobal::~GraphParamGlobal()
+{
 }
 
 // Méthodes publiques

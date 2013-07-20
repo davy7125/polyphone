@@ -22,38 +22,35 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#include "dialog_release.h"
-#include "ui_dialog_release.h"
+#include "dialog_celeste.h"
+#include "ui_dialog_celeste.h"
 #include "config.h"
 
-DialogRelease::DialogRelease(QWidget *parent) :
+DialogCeleste::DialogCeleste(QWidget *parent) :
     QDialog(parent),
-    ui(new Ui::DialogRelease)
+    ui(new Ui::DialogCeleste)
 {
     ui->setupUi(this);
     Config * conf = Config::getInstance();
-    ui->doubleDuree36->setValue(conf->getTools_i_release_dureeDo());
-    ui->doubleDivision->setValue(conf->getTools_i_release_division());
-    ui->doubleDeTune->setValue(conf->getTools_i_release_desaccordage());
+    ui->doubleSpinHerz->setValue(conf->getTools_i_celeste_herzDo());
+    ui->doubleSpinDiv->setValue(conf->getTools_i_celeste_division());
 }
 
-DialogRelease::~DialogRelease()
+DialogCeleste::~DialogCeleste()
 {
     delete ui;
 }
 
 // ACCEPTATION
 
-void DialogRelease::accept()
+void DialogCeleste::accept()
 {
     // Sauvegarde des valeurs
     Config * conf = Config::getInstance();
-    conf->setTools_i_release_dureeDo(this->ui->doubleDuree36->value());
-    conf->setTools_i_release_division(this->ui->doubleDivision->value());
-    conf->setTools_i_release_desaccordage(this->ui->doubleDeTune->value());
+    conf->setTools_i_celeste_herzDo(this->ui->doubleSpinHerz->value());
+    conf->setTools_i_celeste_division(this->ui->doubleSpinDiv->value());
     // Envoi des valeurs
-    this->accepted(this->ui->doubleDuree36->value(),
-                   this->ui->doubleDivision->value(),
-                   this->ui->doubleDeTune->value());
+    this->accepted(this->ui->doubleSpinHerz->value(),
+                   this->ui->doubleSpinDiv->value());
     QDialog::accept();
 }

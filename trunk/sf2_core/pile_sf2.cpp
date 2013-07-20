@@ -118,7 +118,9 @@ bool Pile_sf2::isSet(EltID id, Champ champ)
     bool value = false;
     if (!this->isValide(id, champ == champ_hidden))
     {
+#ifdef SHOW_ID_ERROR
         QMessageBox::warning(NULL, QObject::tr("Attention"), QObject::tr("Dans fonction Pile_sf2::isSet, ID non valide."));
+#endif
         return value;
     }
     // Type d'élément à analyser
@@ -211,7 +213,9 @@ Valeur Pile_sf2::get(EltID id, Champ champ)
     value.bValue = 0;
     if (!this->isValide(id, champ == champ_hidden))
     {
+#ifdef SHOW_ID_ERROR
         QMessageBox::warning(NULL, QObject::tr("Attention"), QObject::tr("Dans fonction Pile_sf2::get, ID non valide."));
+#endif
         return value;
     }
     // Type d'élément à analyser
@@ -393,7 +397,9 @@ Sound Pile_sf2::getSon(EltID id)
     Sound son;
     if (!this->isValide(id, 0))
     {
+#ifdef SHOW_ID_ERROR
         QMessageBox::warning(NULL, QObject::tr("Attention"), QObject::tr("Dans fonction Pile_sf2::getSon, ID non valide."));
+#endif
         return son;
     }
     if (id.typeElement == elementSmpl)
@@ -404,7 +410,9 @@ QString Pile_sf2::getQstr(EltID id, Champ champ)
 {
     if (!this->isValide(id, 0))
     {
+#ifdef SHOW_ID_ERROR
         QMessageBox::warning(NULL, QObject::tr("Attention"), QObject::tr("Dans fonction Pile_sf2::getQstr, ID non valide."));
+#endif
         return "";
     }
     // Type d'élément à analyser
@@ -473,7 +481,9 @@ QByteArray Pile_sf2::getData(EltID id, Champ champ)
 {
     if (!this->isValide(id, 0))
     {
+#ifdef SHOW_ID_ERROR
         QMessageBox::warning(NULL, QObject::tr("Attention"), QObject::tr("Dans fonction Pile_sf2::getData, ID non valide."));
+#endif
         return NULL;
     }
     // Type d'élément à analyser
@@ -525,7 +535,9 @@ int Pile_sf2::count(EltID id)
     }
     if (!this->isValide(id, 1))
     {
+#ifdef SHOW_ID_ERROR
         QMessageBox::warning(NULL, QObject::tr("Attention"), QObject::tr("Dans fonction Pile_sf2::count, ID non valide."));
+#endif
         return -1;
     }
     int i = 0;
@@ -863,7 +875,9 @@ int Pile_sf2::add(EltID id, bool storeAction)
     else id.indexMod = -1;
     if (!this->isValide(id))
     {
+#ifdef SHOW_ID_ERROR
         QMessageBox::warning(NULL, QObject::tr("Attention"), QObject::tr("Dans fonction Pile_sf2::add, ID non valide."));
+#endif
         return -1;
     }
     int i = -1;
@@ -1158,8 +1172,9 @@ int Pile_sf2::remove(EltID id, bool permanently, bool storeAction, int *message)
 {
     if (!this->isValide(id, permanently)) // Les ID masqués sont acceptés pour une suppression définitive
     {
+#ifdef SHOW_ID_ERROR
         QMessageBox::warning(NULL, QObject::tr("Attention"), QObject::tr("Dans fonction Pile_sf2::remove, ID non valide."));
-        MESSAGE(id);
+#endif
         return 1;
     }
     // Type d'élément à supprimer
@@ -1580,12 +1595,16 @@ int Pile_sf2::set(EltID id, Champ champ, Valeur value, bool storeAction)
 {
     if (champ == champ_hidden)
     {
+#ifdef SHOW_ID_ERROR
         QMessageBox::warning(NULL, QObject::tr("Attention"), QObject::tr("Set hidden ne passe pas par la fonction set !"));
+#endif
         return 1;
     }
     if (!this->isValide(id) && champ != champ_ram)
     {
+#ifdef SHOW_ID_ERROR
         QMessageBox::warning(NULL, QObject::tr("Attention"), QObject::tr("Dans fonction Pile_sf2::set (valeur), ID non valide."));
+#endif
         return 1;
     }
     Valeur oldValue;
@@ -1827,7 +1846,9 @@ int Pile_sf2::set(EltID id, Champ champ, QString qStr, bool storeAction)
 {
     if (!this->isValide(id))
     {
+#ifdef SHOW_ID_ERROR
         QMessageBox::warning(NULL, QObject::tr("Attention"), QObject::tr("Dans fonction Pile_sf2::set (QString), ID non valide."));
+#endif
         return 1;
     }
     QString qOldStr = "";
@@ -2020,7 +2041,9 @@ int Pile_sf2::set(EltID id, Champ champ, QByteArray data, bool storeAction)
 {
     if (!this->isValide(id))
     {
+#ifdef SHOW_ID_ERROR
         QMessageBox::warning(NULL, QObject::tr("Attention"), QObject::tr("Dans fonction Pile_sf2::set (data), ID non valide."));
+#endif
         return 1;
     }
     QByteArray oldData;
@@ -2078,7 +2101,9 @@ int Pile_sf2::reset(EltID id, Champ champ, bool storeAction)
 {
     if (!this->isValide(id))
     {
+#ifdef SHOW_ID_ERROR
         QMessageBox::warning(NULL, QObject::tr("Attention"), QObject::tr("Dans fonction Pile_sf2::reset, ID non valide."));
+#endif
         return 0;
     }
     Valeur oldValue;
@@ -2390,7 +2415,9 @@ int Pile_sf2::display(EltID id)
 {
     if (!this->isValide(id, 1))
     {
+#ifdef SHOW_ID_ERROR
         QMessageBox::warning(NULL, QObject::tr("Attention"), QObject::tr("Dans fonction Pile_sf2::display, ID non valide."));
+#endif
         return 1;
     }
     // Type d'élément à afficher (suite à une suppression non définitive)

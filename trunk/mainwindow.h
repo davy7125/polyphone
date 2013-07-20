@@ -132,12 +132,13 @@ private slots:
     void transposer();          // outil sample, transposition
     void sifflements();         // outil sample, suppression des sifflements
     void desaccorder();         // outil instrument, désaccordage ondulant
-    void duplication();         // outil instrument, duplication des divisions
-    void paramGlobal();         // outil instrument, modification globale d'un paramètre
     void repartitionAuto();     // outil instrument, répartition automatique keyrange
     void spatialisation();      // outil instrument, spatialisation du son
     void mixture();             // outil instrument, création mixture
     void release();             // outil instrument, élaboration de releases
+    void duplication();         // outil instrument et preset, duplication des divisions
+    void paramGlobal();         // outil instrument et preset, modification globale d'un paramètre
+    void visualize();           // outil instrument et preset, visualise les paramètres utilisés dans un graphique
     void attenuationMini();     // outil sf2, mise à jour de toutes les atténuations
     void purger();              // outil sf2, suppression des éléments non utilisés
     void associationAutoSmpl(); // outil sf2, association auto gauche-droite des samples
