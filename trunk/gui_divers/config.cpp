@@ -423,7 +423,12 @@ void Config::load()
     this->audioIndex        = settings.value("audio/index", 0).toInt();
     this->audioType         = settings.value("audio/type", 0).toInt();
     this->wavAutoLoop       = settings.value("wav_auto_loop", false).toBool();
-    this->wavRemoveBlank    = settings.value("wav_remove_bank", false).toBool();
+    if (settings.contains("wav_remove_bank"))
+    {
+        settings.setValue("wav_remove_blank", settings.value("wav_remove_bank").toBool());
+        settings.remove("wav_remove_bank");
+    }
+    this->wavRemoveBlank    = settings.value("wav_remove_blank", false).toBool();
     this->keyboardType      = settings.value("keyboard/type", 1).toInt();
     this->keyboardVelocity  = settings.value("keyboard/velocity", 64).toInt();
     this->numPortMidi       = settings.value("midi/index_port", -1).toInt();
@@ -457,7 +462,7 @@ void Config::store()
     settings.setValue("audio/index",                    this->audioIndex);
     settings.setValue("audio/type",                     this->audioType);
     settings.setValue("wav_auto_loop",                  this->wavAutoLoop);
-    settings.setValue("wav_remove_bank",                this->wavRemoveBlank);
+    settings.setValue("wav_remove_blank",               this->wavRemoveBlank);
     settings.setValue("keyboard/type",                  this->keyboardType);
     settings.setValue("keyboard/velocity",              this->keyboardVelocity);
     settings.setValue("midi/index_port",                this->numPortMidi);
@@ -739,4 +744,38 @@ QByteArray Config::getDefaultListActions()
     baData.append((char)-1);
     baData.append((char)6);
     return baData;
+}
+
+
+QList<QList<int> > Config::getTools_i_mixture_ranks()
+{
+    QList<QList<int> > listRet;
+    if (settings.contains("tools/instrument/mixture_ranks"))
+    {
+        QList<QVariant> listTmp;
+        QByteArray sousListTmp;
+        listTmp = settings.value("tools/instrument/mixture_ranks").toList();
+        for (int i = 0; i < listTmp.size(); i++)
+        {
+            listRet << QList<int>();
+            sousListTmp = listTmp.at(i).toByteArray();
+            for (int j = 0; j < sousListTmp.size(); j++)
+                listRet[i] << sousListTmp.at(j);
+        }
+    }
+    return listRet;
+}
+
+void Config::setTools_i_mixture_ranks(QList<QList<int> > val)
+{
+    QList<QVariant> listTmp;
+    QByteArray sousListTmp;
+    for (int i = 0; i < val.size(); i++)
+    {
+        sousListTmp.clear();
+        for (int j = 0; j < val.at(i).size(); j++)
+            sousListTmp.append(val.at(i).at(j));
+        listTmp << sousListTmp;
+    }
+    settings.setValue("tools/instrument/mixture_ranks", listTmp);
 }

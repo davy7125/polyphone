@@ -264,13 +264,13 @@
     </widget>
     <widget class="QMenu" name="menuInstrument">
      <property name="enabled">
-      <bool>true</bool>
+      <bool>false</bool>
      </property>
      <property name="title">
       <string>&amp;Instrument</string>
      </property>
-     <addaction name="action_Cr_ation_mutation_mixture"/>
      <addaction name="actionD_saccordage_ondulant"/>
+     <addaction name="action_Cr_ation_mutation_mixture"/>
      <addaction name="actionD_uplication_des_divisions"/>
      <addaction name="action_laboration_release"/>
      <addaction name="action_Param_trage_global"/>
@@ -280,7 +280,7 @@
     </widget>
     <widget class="QMenu" name="menuPreset">
      <property name="enabled">
-      <bool>true</bool>
+      <bool>false</bool>
      </property>
      <property name="title">
       <string>&amp;Preset</string>

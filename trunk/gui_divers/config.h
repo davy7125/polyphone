@@ -91,6 +91,10 @@ public:
     bool   getTools_i_space_renversement1() { return settings.value("tools/instrument/space_renversement1", false).toBool(); }
     bool   getTools_i_space_renversement2() { return settings.value("tools/instrument/space_renversement2", false).toBool(); }
     double getTools_2_attenuation_dB()      { return settings.value("tools/sf2/attenuation_dB", 5.).toDouble(); }
+    QList<QList<int> > getTools_i_mixture_ranks();
+    QString getTools_i_mixture_nom()        { return settings.value("tools/instrument/mixture_nom", "").toString(); }
+    bool   getTools_i_mixture_boucle()      { return settings.value("tools/instrument/mixture_boucle", true).toBool(); }
+    int    getTools_i_mixture_density()     { return settings.value("tools/instrument/mixture_density", 0).toInt(); }
     QVector<double> getTools_global_courbe(bool isPrst)
     {
         QList<QVariant> listTmp;
@@ -146,19 +150,33 @@ public:
         else
             return settings.value("tools/instrument/global_maxi", 1.).toDouble();
     }
-    int getTools_global_miniX(bool isPrst)
+    int    getTools_global_miniX(bool isPrst)
     {
         if (isPrst)
             return settings.value("tools/preset/global_miniX", 0).toInt();
         else
             return settings.value("tools/instrument/global_miniX", 0).toInt();
     }
-    double getTools_global_maxiX(bool isPrst)
+    int    getTools_global_maxiX(bool isPrst)
     {
         if (isPrst)
             return settings.value("tools/preset/global_maxiX", 140).toInt();
         else
             return settings.value("tools/instrument/global_maxiX", 140).toInt();
+    }
+    int    getTools_visualizer_parameter(bool isPrst)
+    {
+        if (isPrst)
+            return settings.value("tools/preset/visualizer_parameter", 0).toInt();
+        else
+            return settings.value("tools/instrument/visualizer_parameter", 0).toInt();
+    }
+    bool   getTools_visualizer_logScale(bool isPrst)
+    {
+        if (isPrst)
+            return settings.value("tools/preset/visualizer_logScale", false).toBool();
+        else
+            return settings.value("tools/instrument/visualizer_logScale", false).toBool();
     }
     // Modification des paramètres des outils
     void setTools_s_sifflements_debut(int val)      { settings.setValue("tools/sample/sifflements_debut", val); }
@@ -179,6 +197,10 @@ public:
     void setTools_i_space_renversement1(bool val)   { settings.setValue("tools/instrument/space_renversement1", val); }
     void setTools_i_space_renversement2(bool val)   { settings.setValue("tools/instrument/space_renversement2", val); }
     void setTools_2_attenuation_dB(double val)      { settings.setValue("tools/sf2/attenuation_dB", val); }
+    void setTools_i_mixture_ranks(QList<QList<int> > val);
+    void setTools_i_mixture_nom(QString val)        { settings.setValue("tools/instrument/mixture_nom", val); }
+    void setTools_i_mixture_boucle(bool val)        { settings.setValue("tools/instrument/mixture_boucle", val); }
+    void setTools_i_mixture_density(int val)        { settings.setValue("tools/instrument/mixture_density", val); }
     void setTools_global_courbe(bool isPrst, QVector<double> val)
     {
         QVariantList listTmp;
@@ -244,6 +266,20 @@ public:
             settings.setValue("tools/preset/global_maxiX", val);
         else
             settings.setValue("tools/instrument/global_maxiX", val);
+    }
+    void setTools_visualizer_parameter(bool isPrst, int val)
+    {
+        if (isPrst)
+            settings.setValue("tools/preset/visualizer_parameter", val);
+        else
+            settings.setValue("tools/instrument/visualizer_parameter", val);
+    }
+    void setTools_visualizer_logScale(bool isPrst, bool val)
+    {
+        if (isPrst)
+            settings.setValue("tools/preset/visualizer_logScale", val);
+        else
+            settings.setValue("tools/instrument/visualizer_logScale", val);
     }
     // Paramètres divers
     bool getActivationSaveWarning_toManyGenerators()
