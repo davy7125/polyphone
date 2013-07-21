@@ -335,6 +335,8 @@ void MainWindow::Fermer()
         sf2->remove(id);
         updateActions();
         updateDo();
+        this->page_inst->clearTable();
+        this->page_prst->clearTable();
         }break;
     }
 }
@@ -2691,11 +2693,12 @@ void MainWindow::noteChanged(int key, int vel)
         if (defaultVelocity == 0)
             this->ui->labelVelocite->setText("-");
     }
+
     // Lecture ?
     if (this->ui->arborescence->getSelectedItemsNumber())
     {
         EltID id = this->ui->arborescence->getID(0);
-        if (this->ui->arborescence->isSelectedItemsSf2Unique())
+        if (this->ui->arborescence->isSelectedItemsSf2Unique() && !this->sf2->get(id, champ_hidden).bValue)
         {
             if (id.typeElement == elementSmpl && this->ui->arborescence->getSelectedItemsNumber() == 1)
                 this->synth->play(0, id.indexSf2, id.indexElt, key, vel);

@@ -15,4 +15,3 @@ LIBS += /usr/lib64/libportaudio.so.2
 Run "qmake && make" (or qmake-qt4 && make) in the root directory to compile the project. An executable file "polyphone" in the directory "RELEASE" should then appear if everything went right.
 
 If you are using QT Creator, the project may be opened via its .pro file present in the root directory. Take care shadow build is not checked (project properties).
-

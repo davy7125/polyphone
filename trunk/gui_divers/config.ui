@@ -22,7 +22,7 @@
   <property name="maximumSize">
    <size>
     <width>413</width>
-    <height>283</height>
+    <height>250</height>
    </size>
   </property>
   <property name="windowTitle">
@@ -491,6 +491,12 @@
       <layout class="QVBoxLayout" name="verticalLayout_4">
        <item>
         <widget class="QGroupBox" name="groupBox_3">
+         <property name="font">
+          <font>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
          <property name="title">
           <string>Couleurs</string>
          </property>
@@ -512,6 +518,12 @@
           </property>
           <item row="0" column="0">
            <widget class="QLabel" name="label_13">
+            <property name="font">
+             <font>
+              <weight>50</weight>
+              <bold>false</bold>
+             </font>
+            </property>
             <property name="text">
              <string>Arrière-plan</string>
             </property>
@@ -705,6 +717,12 @@
           </item>
           <item row="1" column="0">
            <widget class="QLabel" name="label_14">
+            <property name="font">
+             <font>
+              <weight>50</weight>
+              <bold>false</bold>
+             </font>
+            </property>
             <property name="text">
              <string>Onde</string>
             </property>
@@ -712,6 +730,12 @@
           </item>
           <item row="2" column="0">
            <widget class="QLabel" name="label_15">
+            <property name="font">
+             <font>
+              <weight>50</weight>
+              <bold>false</bold>
+             </font>
+            </property>
             <property name="text">
              <string>Grille</string>
             </property>
@@ -725,6 +749,12 @@
               <height>0</height>
              </size>
             </property>
+            <property name="font">
+             <font>
+              <weight>50</weight>
+              <bold>false</bold>
+             </font>
+            </property>
             <property name="text">
              <string>Début de boucle</string>
             </property>
@@ -732,6 +762,12 @@
           </item>
           <item row="1" column="3">
            <widget class="QLabel" name="label_17">
+            <property name="font">
+             <font>
+              <weight>50</weight>
+              <bold>false</bold>
+             </font>
+            </property>
             <property name="text">
              <string>Fin de boucle</string>
             </property>
@@ -739,6 +775,12 @@
           </item>
           <item row="2" column="3">
            <widget class="QLabel" name="label_18">
+            <property name="font">
+             <font>
+              <weight>50</weight>
+              <bold>false</bold>
+             </font>
+            </property>
             <property name="text">
              <string>Barre de lecture</string>
             </property>
@@ -769,6 +811,12 @@
                 <width>16777215</width>
                 <height>24</height>
                </size>
+              </property>
+              <property name="font">
+               <font>
+                <weight>50</weight>
+                <bold>false</bold>
+               </font>
               </property>
               <property name="text">
                <string>Réinitialiser</string>
