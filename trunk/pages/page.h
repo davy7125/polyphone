@@ -323,6 +323,7 @@ public:
     PageTable(TypePage typePage, QWidget *parent = 0);
     // Méthodes publiques
     void afficher();
+    void clearTable();
     void reselect();
     void updateId(EltID id);
     void paramGlobal();

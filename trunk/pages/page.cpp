@@ -1056,6 +1056,10 @@ void PageTable::afficher()
     this->qStackedWidget->setCurrentWidget(this);
     this->table->verticalScrollBar()->setValue(posV);
 }
+void PageTable::clearTable()
+{
+    this->table->setColumnCount(0);
+}
 void PageTable::afficheMod(EltID id, int selectedRow)
 {
     QString qStr;
@@ -2797,45 +2801,6 @@ void PageTable::paramGlobal()
 }
 void PageTable::paramGlobal(QVector<double> dValues, QList<EltID> listElt, int typeModif, int champ)
 {
-    // Paramètre à modifier
-//    Champ champ = champ_unknown;
-//    switch (param)
-//    {
-//    case 0: champ = champ_initialAttenuation; break;
-//    case 1: champ = champ_coarseTune; break;
-//    case 2: champ = champ_fineTune; break;
-//    case 3: champ = champ_scaleTuning; break;
-//    case 4: champ = champ_initialFilterFc; break;
-//    case 5: champ = champ_initialFilterQ; break;
-//    case 6: champ = champ_delayVolEnv; break;
-//    case 7: champ = champ_attackVolEnv; break;
-//    case 8: champ = champ_holdVolEnv; break;
-//    case 9: champ = champ_decayVolEnv; break;
-//    case 10: champ = champ_sustainVolEnv; break;
-//    case 11: champ = champ_releaseVolEnv; break;
-//    case 12: champ = champ_keynumToVolEnvHold; break;
-//    case 13: champ = champ_keynumToVolEnvDecay; break;
-//    case 14: champ = champ_delayModEnv; break;
-//    case 15: champ = champ_attackModEnv; break;
-//    case 16: champ = champ_holdModEnv; break;
-//    case 17: champ = champ_decayModEnv; break;
-//    case 18: champ = champ_sustainModEnv; break;
-//    case 19: champ = champ_releaseModEnv; break;
-//    case 20: champ = champ_modEnvToPitch; break;
-//    case 21: champ = champ_modEnvToFilterFc; break;
-//    case 22: champ = champ_keynumToModEnvHold; break;
-//    case 23: champ = champ_keynumToModEnvDecay; break;
-//    case 24: champ = champ_delayModLFO; break;
-//    case 25: champ = champ_freqModLFO; break;
-//    case 26: champ = champ_modLfoToPitch; break;
-//    case 27: champ = champ_modLfoToFilterFc; break;
-//    case 28: champ = champ_modLfoToVolume; break;
-//    case 29: champ = champ_delayVibLFO; break;
-//    case 30: champ = champ_freqVibLFO; break;
-//    case 31: champ = champ_vibLfoToPitch; break;
-//    case 32: champ = champ_chorusEffectsSend; break;
-//    case 33: champ = champ_reverbEffectsSend; break;
-//    }
     // Modification de tous les éléments
     EltID id;
     for (int numID = 0; numID < listElt.size(); numID++)
@@ -3000,22 +2965,43 @@ void PageTable::visualize()
 {
     EltID id = this->tree->getID(0);
     if (m_typePage == PAGE_INST)
-    {
         id.typeElement = elementInstSmpl;
-        if (this->sf2->count(id) == 0)
+    else
+        id.typeElement = elementPrstInst;
+    // Vérification que l'élément possède au moins un élément lié, avec un keyrange valide
+    int nbElt = 0;
+    int posMin = 128;
+    int posMax = 0;
+    for (int i = 0; i < this->sf2->count(id); i++)
+    {
+        id.indexElt2 = i;
+        if (!this->sf2->get(id, champ_hidden).bValue)
         {
-            QMessageBox::warning(NULL, tr("Attention"), tr("L'instrument doit contenir des sons."));
-            return;
+            nbElt++;
+            if (this->sf2->isSet(id, champ_keyRange))
+            {
+                if (this->sf2->get(id, champ_keyRange).rValue.byLo < posMin)
+                    posMin = this->sf2->get(id, champ_keyRange).rValue.byLo;
+                if (this->sf2->get(id, champ_keyRange).rValue.byHi > posMax)
+                    posMax = this->sf2->get(id, champ_keyRange).rValue.byHi;
+            }
         }
     }
-    else
+    if (nbElt == 0)
     {
-        id.typeElement = elementPrstInst;
-        if (this->sf2->count(id) == 0)
-        {
-            QMessageBox::warning(NULL, tr("Attention"), tr("Le preset doit contenir des instruments."));
-            return;
-        }
+        if (m_typePage == PAGE_INST)
+            QMessageBox::warning(this, tr("Attention"), trUtf8("L'instrument doit contenir des sons."));
+        else
+            QMessageBox::warning(this, tr("Attention"), trUtf8("Le preset doit contenir des instruments."));
+        return;
+    }
+    if (posMin > posMax)
+    {
+        if (m_typePage == PAGE_INST)
+            QMessageBox::warning(this, tr("Attention"), trUtf8("Aucune étendue de notes spécifiée pour l'instrument."));
+        else
+            QMessageBox::warning(this, tr("Attention"), trUtf8("Aucune étendue de notes spécifiée pour le preset."));
+        return;
     }
     DialogVisualizer * dialogVisu = new DialogVisualizer(this->sf2, id, this);
     dialogVisu->setAttribute(Qt::WA_DeleteOnClose, true);

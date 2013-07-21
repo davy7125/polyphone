@@ -1,3 +1,10 @@
+polyphone (0.8-1) UNRELEASED; urgency=low
+
+  * New upstream version
+
+ -- Davy Triponney <davy.triponney@gmail.com>  Sun, 21 Jul 2013 16:25:21 +0100
+
+
 polyphone (0.7-2) UNRELEASED; urgency=low
 
   * Adapted watch file

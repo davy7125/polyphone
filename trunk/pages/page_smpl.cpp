@@ -1071,7 +1071,7 @@ void Page_Smpl::transposer()
     // Ecart en demi-tons
     bool ok;
     Config * conf = Config::getInstance();
-    double rep = QInputDialog::getDouble(this, tr("Question"),
+    double rep = QInputDialog::getDouble(this, tr("Transposition"),
                                          QString::fromUtf8(tr("Écart en demi-tons :").toStdString().c_str()),
                                          conf->getTools_s_transpo_ton(), -36, 36, 2,
                                          &ok);
