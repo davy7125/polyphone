@@ -61,6 +61,7 @@ public:
     Page(TypePage typePage, QWidget *parent = 0);
     // Méthodes publiques
     virtual void afficher() = 0;
+    static QString getGenName(WORD iVal, int type = 0);
 
 protected:
     // Attributs protégés
@@ -76,7 +77,6 @@ protected:
     static char * getTextValue(char * T, WORD champ, int iVal);
     static char * getTextValue(char * T, WORD champ, SFModulator sfModVal);
     static QString getIndexName(WORD iVal, int CC);
-    static QString getGenName(WORD iVal);
     genAmountType getValue(QString texte, WORD champ, bool &ok);
 
 private:
@@ -400,7 +400,7 @@ protected slots:
     void pasteMod();
 
 private slots:
-    void paramGlobal(QVector<double> dValues, QList<EltID> listElt, int typeModif, int param);
+    void paramGlobal(QVector<double> dValues, QList<EltID> listElt, int typeModif, int champ);
 };
 
 

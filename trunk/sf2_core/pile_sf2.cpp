@@ -2190,7 +2190,8 @@ Valeur Pile_sf2::SF2::BAG::GEN::getGen(Champ champ)
         GEN *genTmp = this;
         while((genTmp->sfGenOper != champ) && genTmp->suivant != NULL)
             genTmp = genTmp->suivant;
-        if (genTmp->sfGenOper == champ) value.genValue = genTmp->genAmount;
+        if (genTmp->sfGenOper == champ)
+            value.genValue = genTmp->genAmount;
     }
     return value;
 }

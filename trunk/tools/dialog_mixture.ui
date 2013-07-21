@@ -226,7 +226,7 @@
            <item>
             <widget class="QSpinBox" name="spinDivStart">
              <property name="maximum">
-              <number>128</number>
+              <number>127</number>
              </property>
              <property name="value">
               <number>36</number>
@@ -236,7 +236,7 @@
            <item>
             <widget class="QSpinBox" name="spinDivEnd">
              <property name="maximum">
-              <number>128</number>
+              <number>127</number>
              </property>
              <property name="value">
               <number>96</number>
