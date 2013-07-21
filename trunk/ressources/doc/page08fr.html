@@ -51,23 +51,36 @@
 	Pour fonctionner, cet outil s'appuie sur tous les sons liés à un instrument, l'étendue définie pour chaque son ainsi que l'atténuation correspondante. Les sons devront être accordés en dehors de la définition de l'instrument (via la page d'édition des <a href="qrc:/aide/page05fr.html">sons</a>), et la note de base ne doit pas prendre en compte l'appartenance à un jeu (pas de transposition si le son est un principal 4' par exemple).<br />
 	Une option autorise le bouclage automatique des sons créés, une autre définit l'intervalle de création des sons.
 	</li>
+
 </ul>
+</p>
 <p align="center"><img src="qrc:/aide/outil3.png" /></p>
 <p align="justify">
 <ul>
-	<li><b>Désaccordage ondulant</b><br />
+
+	<li><b>Accordage céleste</b><br />
 	Cette fonctionnalité permet de désaccorder légérement les notes d'un instrument, de manière à créer un effet ondulant. L'intensité de l'effet est ajustable.
 	</li>
+
+</ul>
+</p>
+<p align="center"><img src="qrc:/aide/outil6.png" /></p>
+<p align="justify">
+<ul>
+
 	<li><b>Duplication des divisions</b><br />
 	Cette action a pour effet de dupliquer toutes les divisions d'un instrument. Par exemple, si un son lié à un instrument a une étendue de note 36-38, le logiciel duplique cette division de manière à avoir 3 fois ce son lié pour les étendues 36-36, 37-37 et 38-38. Il sera possible par la suite de régler finement chaque paramètre du son lié pour chaque note différente, au lieu de paramètrer des divisions entière de manière identique.
 	</li>
-</ul>
-<p align="center"><img src="qrc:/aide/outil4.png" /></p>
-<p align="justify">
-<ul>
 	<li><b>Élaboration release</b><br />
 	Cet outil crée automatiquement des releases pour chaque division de l'instrument. Les temps de release sont calculés à partir des deux premiers paramètres et une modification du pitch peut être associée en utilisant le troisième.
 	</li>
+
+</ul>
+</p>
+<p align="center"><img src="qrc:/aide/outil4.png" /></p>
+<p align="justify">
+<ul>
+
 	<li><b>Paramétrage global</b><br />
 	L'outil de paramétrage global permet de modifier un paramètre de tous les sons liés à un instrument simultanément. Le graphique représente l'intensité de la modification, la première valeur à gauche correspondant à la modification appliquée au son lié à la note 0, et la dernière valeur à droite correspondant à la modification appliquée au son lié à la note 127. Il est possible d'éditer la courbe manuellement grâce à la souris, ou d'utiliser une loi linéaire, exponentielle, ou une génération aléatoire (en modifiant le motif). Dans le cas où une loi linéaire ou exponentielle est utilisée, un clic gauche de la souris dans le graphique définit le début de la période linéaire ou exponentielle, un clic droit définit la fin.<br />
 	Le paramètre à modifier est à indiquer dans "Paramètre", et le type de modification est à renseigner dans "Modification" :
@@ -84,11 +97,13 @@
 	</ul><br />
 	Il est possible de modifier simultanément d'autres instruments en appuyant sur "Appliquer à d'autres instruments...".
 	</li>
+
 </ul>
 </p>
 <p align="center"><img src="qrc:/aide/outil1.png" /></p>
 <p align="justify">
 <ul>
+
 	<li><b>Répartition automatique</b><br />
 	Le logiciel détermine automatiquement les étendues des sons liés à un instrument, de manière à optimiser leur utilisation sur l'étendue de note 0-128.
 	</li>
@@ -107,14 +122,23 @@
 		<li><b>Pointe</b><br />
 		Les aigüs se trouvent sur les extrémités, les graves au centre.
 		</li>
-	</ul>
+	</ul><br />
 	D'autres options sont disponibles comme le nombre de répétition du motif (nombre divisions), l'intensité de l'effet (étalement), l'occupation d'une division (occupation), l'offset gauche - droite si l'étalement n'est pas de 100% (offset), ou des renversements. Le graphique est mis à jour à chaque modification d'un paramètre pour une meilleure visualisation.
 	</li>
+	
 </ul>
 </p>
-
 <p align="center"><img src="qrc:/aide/outil2.png" /></p>
+<p align="justify">
+<ul>
 
+	<li><b>Visualiseur</b><br />
+	Cet outil permet de visualiser l'évolution d'un paramètre d'un instrument ou d'un preset en fonction du numéro de note. Une échelle logarithmique est disponible (attention aux valeurs inférieures ou égales à 0 !).
+	</li>
+
+</ul>
+</p>
+<p align="center"><img src="qrc:/aide/outil5.png" /></p>
 
 <p align="left"><h2>Outils preset</h2></p>
 <p align="justify">
@@ -124,6 +148,9 @@
 	</li>
 	<li><b>Paramétrage global</b><br />
 	Même effet que "paramétrage global" pour les instruments.
+	</li>
+	<li><b>Visualiseur</b><br />
+	Même effet que "visualiseur" pour les instruments.
 	</li>
 </ul>
 </p>

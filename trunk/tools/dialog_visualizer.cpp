@@ -321,35 +321,35 @@ GraphVisualizer::GraphVisualizer(QWidget *parent) :
         textLabel->setColor(QColor(40, 40, 40));
     }
 
+    // Layer des moyennes
+    this->addGraph();
+    graphPen.setColor(QColor(30, 250, 80));
+    graphPen.setWidth(2);
+    this->graph(1)->setPen(graphPen);
+    this->graph(1)->setLineStyle(QCPGraph::lsNone);
+    this->graph(1)->setScatterStyle(QCP::ssCircle);
+    this->graph(1)->setScatterSize(7);
+    this->graph(1)->setAntialiasedScatters(true);
+
     // Layer des valeurs
     this->addGraph();
     graphPen.setColor(QColor(100, 130, 250));
     graphPen.setWidth(2);
-    this->graph(1)->setPen(graphPen);
-    this->graph(1)->setScatterSize(5);
-    this->graph(1)->setLineStyle(QCPGraph::lsNone);
-    this->graph(1)->setScatterStyle(QCP::ssCross);
-    this->graph(1)->setAntialiasedScatters(false);
-
-    // Layer des valeurs par défaut
-    this->addGraph();
-    graphPen.setColor(QColor(100, 130, 250));
-    graphPen.setWidth(1);
     this->graph(2)->setPen(graphPen);
     this->graph(2)->setScatterSize(5);
     this->graph(2)->setLineStyle(QCPGraph::lsNone);
     this->graph(2)->setScatterStyle(QCP::ssCross);
     this->graph(2)->setAntialiasedScatters(false);
 
-    // Layer des moyennes
+    // Layer des valeurs par défaut
     this->addGraph();
-    graphPen.setColor(QColor(30, 250, 80));
-    graphPen.setWidth(2);
+    graphPen.setColor(QColor(100, 130, 250));
+    graphPen.setWidth(1);
     this->graph(3)->setPen(graphPen);
+    this->graph(3)->setScatterSize(5);
     this->graph(3)->setLineStyle(QCPGraph::lsNone);
-    this->graph(3)->setScatterStyle(QCP::ssCircle);
-    this->graph(3)->setScatterSize(7);
-    this->graph(3)->setAntialiasedScatters(true);
+    this->graph(3)->setScatterStyle(QCP::ssCross);
+    this->graph(3)->setAntialiasedScatters(false);
 
     // Layer aperçu valeurs
     this->addGraph();
@@ -468,9 +468,9 @@ void GraphVisualizer::setData(QVector<QList<double> > listPoints, QVector<QList<
     this->xAxis->setRange(xMinDonnees - 1, xMaxDonnees + 1);
 
     // Affichage
-    this->graph(1)->setData(vectValX, vectValY);
-    this->graph(2)->setData(vectDefValX, vectDefValY);
-    this->graph(3)->setData(vectMoyX, vectMoyY);
+    this->graph(1)->setData(vectMoyX, vectMoyY);
+    this->graph(2)->setData(vectValX, vectValY);
+    this->graph(3)->setData(vectDefValX, vectDefValY);
     this->setScale();
 }
 void GraphVisualizer::setScale()
