@@ -25,6 +25,7 @@
 #include "dialog_mixture.h"
 #include "ui_dialog_mixture.h"
 #include "sf2_types.h"
+#include "config.h"
 
 // Constructeur, destructeur
 DialogMixture::DialogMixture(QWidget *parent) :
@@ -32,8 +33,19 @@ DialogMixture::DialogMixture(QWidget *parent) :
     ui(new Ui::DialogMixture)
 {
     ui->setupUi(this);
+
+    // Chargement des valeurs
+    Config * conf = Config::getInstance();
+    this->listeParam = conf->getTools_i_mixture_ranks();
+    this->ui->lineNom->setText(conf->getTools_i_mixture_nom());
+    this->ui->comboFreq->setCurrentIndex(conf->getTools_i_mixture_density());
+    this->ui->checkBouclage->setChecked(conf->getTools_i_mixture_boucle());
+
     // Sélection octaves
     this->on_comboType1_currentIndexChanged(0);
+
+    // Affichage des divisions
+    this->dispDiv();
 }
 DialogMixture::~DialogMixture()
 {
@@ -43,8 +55,10 @@ DialogMixture::~DialogMixture()
 
 // EDITION DIVISIONS
 
-void DialogMixture::on_listDivisions_currentRowChanged(int currentRow)
+void DialogMixture::on_listDivisions_itemSelectionChanged()
 {
+    int currentRow = this->ui->listDivisions->currentRow();
+
     // Modification des spinboxes
     QList<int> sousListe = this->listeParam.at(currentRow);
     this->ui->spinDivStart->blockSignals(true);
@@ -56,6 +70,7 @@ void DialogMixture::on_listDivisions_currentRowChanged(int currentRow)
     // Affichage rangs
     this->dispRang(currentRow);
 }
+
 void DialogMixture::on_pushAddDiv_pressed()
 {
     // Ajout d'une division
@@ -106,13 +121,15 @@ void DialogMixture::on_spinDivEnd_valueChanged(int arg1)
 
 // EDITION RANGS
 
-void DialogMixture::on_listRangs_currentRowChanged(int currentRow)
+void DialogMixture::on_listRangs_itemSelectionChanged()
 {
+    int currentRow = this->ui->listRangs->currentRow();
+
     // Récupération numéro de division et rang
     int numDiv = this->getNumDiv();
     if (numDiv < 0) return;
-    if (currentRow*2+2 >= this->listeParam.at(numDiv).length()) return;
-    // Mise à jour des comboboxes
+    if (currentRow * 2 + 2 >= this->listeParam.at(numDiv).length()) return;
+    // Mise à jour des combobox
     this->ui->comboType1->blockSignals(true);
     this->ui->comboType2->blockSignals(true);
     this->ui->comboType1->setCurrentIndex(this->listeParam.at(numDiv).at(2+2*currentRow));
@@ -122,6 +139,7 @@ void DialogMixture::on_listRangs_currentRowChanged(int currentRow)
     this->ui->comboType1->blockSignals(false);
     this->ui->comboType2->blockSignals(false);
 }
+
 void DialogMixture::on_pushAddRank_clicked()
 {
     // Récupération numéro de division
@@ -179,7 +197,14 @@ void DialogMixture::on_comboType2_currentIndexChanged(int index)
 // ACCEPTATION
 
 void DialogMixture::accept()
-{
+{    
+    // Sauvegarde des valeurs
+    Config * conf = Config::getInstance();
+    conf->setTools_i_mixture_ranks(this->listeParam);
+    conf->setTools_i_mixture_nom(this->ui->lineNom->text());
+    conf->setTools_i_mixture_density(this->ui->comboFreq->currentIndex());
+    conf->setTools_i_mixture_boucle(this->ui->checkBouclage->isChecked());
+
     // Envoi des valeurs
     QString text = this->ui->lineNom->text();
     if (text.isEmpty())

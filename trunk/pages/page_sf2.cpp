@@ -25,7 +25,6 @@
 #include "page_sf2.h"
 #include "ui_page_sf2.h"
 #include "mainwindow.h"
-#include <time.h>
 
 Page_Sf2::Page_Sf2(MainWindow * mainWindow, Tree * tree, QStackedWidget * qStackedWidget, \
                    Pile_sf2 * sf2, Synth *synth, QWidget * parent) :
@@ -190,24 +189,8 @@ void Page_Sf2::setCommentaire()
 
 void Page_Sf2::setNow()
 {
-    const char * NomMois[] = {tr("janvier").toStdString().c_str(),
-                              tr("février").toStdString().c_str(),
-                              tr("mars").toStdString().c_str(),
-                              tr("avril").toStdString().c_str(),
-                              tr("mai").toStdString().c_str(),
-                              tr("juin").toStdString().c_str(),
-                              tr("juillet").toStdString().c_str(),
-                              tr("août").toStdString().c_str(),
-                              tr("septembre").toStdString().c_str(),
-                              tr("octobre").toStdString().c_str(),
-                              tr("novembre").toStdString().c_str(),
-                              tr("décembre").toStdString().c_str()};
-    char T[30];
-    time_t timestamp = time(NULL);
-    struct tm * t = localtime(&timestamp);
-    sprintf(T, "%u %s %u, %02u:%02u:%02u", t->tm_mday, NomMois[t->tm_mon], 1900 + t->tm_year, \
-            t->tm_hour, t->tm_min, t->tm_sec);
-    ui->lineEdit_date->setText(QString::fromUtf8(T));
+    QString date = QDateTime::currentDateTime().toString("dddd d MMMM yyyy, hh:mm:ss");
+    ui->lineEdit_date->setText(date);
     setDate();
 }
 

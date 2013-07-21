@@ -26,6 +26,7 @@
 #include "ui_dialog_paramglobal.h"
 #include "dialog_selectitems.h"
 #include "config.h"
+#include "page.h"
 
 // Constructeur, destructeur
 DialogParamGlobal::DialogParamGlobal(Pile_sf2 *sf2, EltID id, QWidget *parent) :
@@ -34,6 +35,44 @@ DialogParamGlobal::DialogParamGlobal(Pile_sf2 *sf2, EltID id, QWidget *parent) :
     ui(new Ui::DialogParamGlobal),
     _initialID(id)
 {
+    // Initialisation liste des champs
+    QList<Champ> listeDesChamps;
+    listeDesChamps << champ_initialAttenuation
+                   << champ_pan
+                   << champ_coarseTune
+                   << champ_fineTune
+                   << champ_scaleTuning
+                   << champ_initialFilterFc
+                   << champ_initialFilterQ
+                   << champ_delayVolEnv
+                   << champ_attackVolEnv
+                   << champ_holdVolEnv
+                   << champ_decayVolEnv
+                   << champ_sustainVolEnv
+                   << champ_releaseVolEnv
+                   << champ_keynumToVolEnvHold
+                   << champ_keynumToVolEnvDecay
+                   << champ_delayModEnv
+                   << champ_attackModEnv
+                   << champ_holdModEnv
+                   << champ_decayModEnv
+                   << champ_sustainModEnv
+                   << champ_releaseModEnv
+                   << champ_modEnvToPitch
+                   << champ_modEnvToFilterFc
+                   << champ_keynumToModEnvHold
+                   << champ_keynumToModEnvDecay
+                   << champ_delayModLFO
+                   << champ_freqModLFO
+                   << champ_modLfoToPitch
+                   << champ_modLfoToFilterFc
+                   << champ_modLfoToVolume
+                   << champ_delayVibLFO
+                   << champ_freqVibLFO
+                   << champ_vibLfoToPitch
+                   << champ_chorusEffectsSend
+                   << champ_reverbEffectsSend;
+
     ui->setupUi(this);
     if (id.typeElement == elementPrst || id.typeElement == elementPrstInst)
     {
@@ -43,6 +82,14 @@ DialogParamGlobal::DialogParamGlobal(Pile_sf2 *sf2, EltID id, QWidget *parent) :
     else
         _isPrst = false;
     Config * conf = Config::getInstance();
+    ui->comboValeur->blockSignals(true);
+    for (int i = 0; i < listeDesChamps.size(); i++)
+    {
+        ui->comboValeur->addItem(Page::getGenName(listeDesChamps.at(i), 1 + _isPrst));
+        ui->comboValeur->setItemData(i, (int)listeDesChamps.at(i));
+    }
+    ui->comboValeur->setCurrentIndex(conf->getTools_global_parametre(_isPrst));
+    ui->comboValeur->blockSignals(false);
     ui->comboMotif->blockSignals(true);
     ui->comboMotif->setCurrentIndex(conf->getTools_global_motif(_isPrst));
     ui->comboMotif->blockSignals(false);
@@ -58,9 +105,6 @@ DialogParamGlobal::DialogParamGlobal(Pile_sf2 *sf2, EltID id, QWidget *parent) :
     ui->comboModif->blockSignals(true);
     ui->comboModif->setCurrentIndex(conf->getTools_global_modification(_isPrst));
     ui->comboModif->blockSignals(false);
-    ui->comboValeur->blockSignals(true);
-    ui->comboValeur->setCurrentIndex(conf->getTools_global_parametre(_isPrst));
-    ui->comboValeur->blockSignals(false);
     ui->graphParamGlobal->setMinMax(conf->getTools_global_mini(_isPrst),
                                     conf->getTools_global_maxi(_isPrst));
 
@@ -73,7 +117,7 @@ DialogParamGlobal::DialogParamGlobal(Pile_sf2 *sf2, EltID id, QWidget *parent) :
                                      conf->getTools_global_maxiX(_isPrst));
     this->ui->graphParamGlobal->setValues(conf->getTools_global_courbe(_isPrst));
 
-    // zone du clavier
+    // Zone du clavier
     ui->graphParamGlobal->setEtendueClavier(conf->getKeyboardType());
 }
 DialogParamGlobal::~DialogParamGlobal()
@@ -132,7 +176,7 @@ void DialogParamGlobal::accept()
     for (int i = 0; i < dValues.size(); i++)
         dValues[i] = dValues.at(i) * (dMax - dMin) + dMin;
     emit(accepted(dValues, _listElt, this->ui->comboModif->currentIndex(),
-                  this->ui->comboValeur->currentIndex()));
+                  this->ui->comboValeur->itemData(this->ui->comboValeur->currentIndex()).toInt()));
     QDialog::accept();
 }
 void DialogParamGlobal::applyToOthers()
@@ -261,7 +305,7 @@ void GraphParamGlobal::setEtendueClavier(int keyboardType)
     QVector<double> x, y;
     x.resize(2);
     y.resize(2);
-    x[0] = 36. * this->nbPoints / 127. ;
+    x[0] = 36. * this->nbPoints / 127.;
     y[0] = y[1] = 2;
     if (keyboardType == 1)
     {

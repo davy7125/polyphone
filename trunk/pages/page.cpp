@@ -248,61 +248,411 @@ QString Page::getIndexName(WORD iVal, int CC)
     }
     return qStr;
 }
-QString Page::getGenName(WORD iVal)
+QString Page::getGenName(WORD iVal, int type)
 {
     QString qStr = "";
     switch (iVal)
     {
-    case 0: qStr = "Sample: start offset"; break;
-    case 1: qStr = "Sample: end offset"; break;
-    case 2: qStr = "Sample: loop start offset"; break;
-    case 3: qStr = "Sample: loop end offset"; break;
-    case 4: qStr = "Sample: start offset (coarse)"; break;
-    case 5: qStr = "Modulation LFO: to pitch"; break;
-    case 6: qStr = "Vibrato LFO: to pitch"; break;
-    case 7: qStr = "Modulation envelope: to pitch"; break;
-    case 8: qStr = "Pitch/Effects: filter cutoff"; break;
-    case 9: qStr = "Pitch/Effects: filter Q"; break;
-    case 10: qStr = "Modulation LFO: to filter cutoff"; break;
-    case 11: qStr = "Modulation envelope: to filter cutoff"; break;
-    case 12: qStr = "Sample: end offset (coarse)"; break;
-    case 13: qStr = "Modulation LFO: to volume"; break;
-    case 15: qStr = "Pitch/Effects: chorus"; break;
-    case 16: qStr = "Pitch/Effects: reverb"; break;
-    case 17: qStr = "Pitch/Effects: pan"; break;
-    case 21: qStr = "Modulation LFO: delay"; break;
-    case 22: qStr = "Modulation LFO: frequency"; break;
-    case 23: qStr = "Vibrato LFO: delay"; break;
-    case 24: qStr = "Vibrato LFO: frequency"; break;
-    case 25: qStr = "Modulation envelope: delay"; break;
-    case 26: qStr = "Modulation envelope: attack"; break;
-    case 27: qStr = "Modulation envelope: hold"; break;
-    case 28: qStr = "Modulation envelope: decay"; break;
-    case 29: qStr = "Modulation envelope: sustain"; break;
-    case 30: qStr = "Modulation envelope: release"; break;
-    case 31: qStr = "Modulation envelope: note to hold"; break;
-    case 32: qStr = "Modulation envelope: note to decay"; break;
-    case 33: qStr = "Volume envelope: delay"; break;
-    case 34: qStr = "Volume envelope: attack"; break;
-    case 35: qStr = "Volume envelope: hold"; break;
-    case 36: qStr = "Volume envelope: decay"; break;
-    case 37: qStr = "Volume envelope: sustain"; break;
-    case 38: qStr = "Volume envelope: release"; break;
-    case 39: qStr = "Volume envelope: note to hold"; break;
-    case 40: qStr = "Volume envelope: note to decay"; break;
-    case 43: qStr = "Key range"; break;
-    case 44: qStr = "Velocity range"; break;
-    case 45: qStr = "Sample: loop start offset (coarse)"; break;
-    case 46: qStr = "Pitch/Effects: forced midi note"; break;
-    case 47: qStr = "Volume envelope: forced midi velocity"; break;
-    case 48: qStr = "Volume envelope: attenuation"; break;
-    case 50: qStr = "Sample: loop end offset (coarse)"; break;
-    case 51: qStr = "Pitch/Effects: tune (coarse)"; break;
-    case 52: qStr = "Pitch/Effects: tune (fine)"; break;
-    case 54: qStr = "Volume envelope: sample mode"; break;
-    case 56: qStr = "Pitch/Effects: scale tuning"; break;
-    case 57: qStr = "Pitch/Effects: exclusive class"; break;
-    case 58: qStr = "Pitch/Effects: root note"; break;
+    case 0:
+        switch (type)
+        {
+        case 1: qStr = trUtf8("Offset début sample"); break;
+        case 2: qStr = "impossible"; break;
+        default: qStr = "Sample: start offset"; break;
+        }
+        break;
+    case 1:
+        switch (type)
+        {
+        case 1: qStr = trUtf8("Offset fin sample"); break;
+        case 2: qStr = "impossible"; break;
+        default: qStr = "Sample: end offset"; break;
+        }
+        break;
+    case 2:
+        switch (type)
+        {
+        case 1: qStr = trUtf8("Offset début boucle"); break;
+        case 2: qStr = "impossible"; break;
+        default: qStr = "Sample: loop start offset"; break;
+        }
+        break;
+    case 3:
+        switch (type)
+        {
+        case 1: qStr = trUtf8("Offset fin boucle"); break;
+        case 2: qStr = "impossible"; break;
+        default: qStr = "Sample: loop end offset"; break;
+        }
+        break;
+    case 4:
+        switch (type)
+        {
+        case 1: qStr = trUtf8("Offset début sample"); break;
+        case 2: qStr = "impossible"; break;
+        default: qStr = "Sample: start offset (coarse)"; break;
+        }
+        break;
+    case 5:
+        switch (type)
+        {
+        case 1: qStr = trUtf8("Mod LFO → ton (c)"); break;
+        case 2: qStr = trUtf8("Mod LFO → ton (c)"); break;
+        default: qStr = "Modulation LFO: to pitch"; break;
+        }
+        break;
+    case 6:
+        switch (type)
+        {
+        case 1: qStr = trUtf8("Vib LFO → ton (c)"); break;
+        case 2: qStr = trUtf8("Vib LFO → ton (c)"); break;
+        default: qStr = "Vibrato LFO: to pitch"; break;
+        }
+        break;
+    case 7:
+        switch (type)
+        {
+        case 1: qStr = trUtf8("Mod env → ton (c)"); break;
+        case 2: qStr = trUtf8("Mod env → ton (c)"); break;
+        default: qStr = "Modulation envelope: to pitch"; break;
+        }
+        break;
+    case 8:
+        switch (type)
+        {
+        case 1: qStr = trUtf8("Filtre, fréquence (Hz)"); break;
+        case 2: qStr = trUtf8("Filtre, fréquence (×)"); break;
+        default: qStr = "Pitch/Effects: filter cutoff"; break;
+        }
+        break;
+    case 9:
+        switch (type)
+        {
+        case 1: qStr = trUtf8("Filtre, résonance (dB)"); break;
+        case 2: qStr = trUtf8("Filtre, résonance (dB)"); break;
+        default: qStr = "Pitch/Effects: filter Q"; break;
+        }
+        break;
+    case 10:
+        switch (type)
+        {
+        case 1: qStr = trUtf8("Mod LFO → filtre (c)"); break;
+        case 2: qStr = trUtf8("Mod LFO → filtre (c)"); break;
+        default: qStr = "Modulation LFO: to filter cutoff"; break;
+        }
+        break;
+    case 11:
+        switch (type)
+        {
+        case 1: qStr = trUtf8("Mod env → filtre (c)"); break;
+        case 2: qStr = trUtf8("Mod env → filtre (c)"); break;
+        default: qStr = "Modulation envelope: to filter cutoff"; break;
+        }
+        break;
+    case 12:
+        switch (type)
+        {
+        case 1: qStr = trUtf8("Offset fin sample"); break;
+        case 2: qStr = "impossible"; break;
+        default: qStr = "Sample: end offset (coarse)"; break;
+        }
+        break;
+    case 13:
+        switch (type)
+        {
+        case 1: qStr = trUtf8("Mod LFO → volume (dB)"); break;
+        case 2: qStr = trUtf8("Mod LFO → volume (dB)"); break;
+        default: qStr = "Modulation LFO: to volume"; break;
+        }
+        break;
+    case 15:
+        switch (type)
+        {
+        case 1: qStr = trUtf8("Chorus (%)"); break;
+        case 2: qStr = trUtf8("Chorus (%)"); break;
+        default: qStr = "Pitch/Effects: chorus"; break;
+        }
+        break;
+    case 16:
+        switch (type)
+        {
+        case 1: qStr = trUtf8("Réverbération (%)"); break;
+        case 2: qStr = trUtf8("Réverbération (%)"); break;
+        default: qStr = "Pitch/Effects: reverb"; break;
+        }
+        break;
+    case 17:
+        switch (type)
+        {
+        case 1: qStr = trUtf8("Balance [-50;50]"); break;
+        case 2: qStr = trUtf8("Balance [-100;100]"); break;
+        default: qStr = "Pitch/Effects: pan"; break;
+        }
+        break;
+    case 21:
+        switch (type)
+        {
+        case 1: qStr = trUtf8("Mod LFO delay (s)"); break;
+        case 2: qStr = trUtf8("Mod LFO delay (×)"); break;
+        default: qStr = "Modulation LFO: delay"; break;
+        }
+        break;
+    case 22:
+        switch (type)
+        {
+        case 1: qStr = trUtf8("Mod LFO freq (Hz)"); break;
+        case 2: qStr = trUtf8("Mod LFO freq (×)"); break;
+        default: qStr = "Modulation LFO: frequency"; break;
+        }
+        break;
+    case 23:
+        switch (type)
+        {
+        case 1: qStr = trUtf8("Vib LFO delay (s)"); break;
+        case 2: qStr = trUtf8("Vib LFO delay (×)"); break;
+        default: qStr = "Vibrato LFO: delay"; break;
+        }
+        break;
+    case 24:
+        switch (type)
+        {
+        case 1: qStr = trUtf8("Vib LFO freq (Hz)"); break;
+        case 2: qStr = trUtf8("Vib LFO freq (×)"); break;
+        default: qStr = "Vibrato LFO: frequency"; break;
+        }
+        break;
+    case 25:
+        switch (type)
+        {
+        case 1: qStr = trUtf8("Mod env delay (s)"); break;
+        case 2: qStr = trUtf8("Mod env delay (×)"); break;
+        default: qStr = "Modulation envelope: delay"; break;
+        }
+        break;
+    case 26:
+        switch (type)
+        {
+        case 1: qStr = trUtf8("Mod env attack (s)"); break;
+        case 2: qStr = trUtf8("Mod env attack (×)"); break;
+        default: qStr = "Modulation envelope: attack"; break;
+        }
+        break;
+    case 27:
+        switch (type)
+        {
+        case 1: qStr = trUtf8("Mod env hold (s)"); break;
+        case 2: qStr = trUtf8("Mod env hold (×)"); break;
+        default: qStr = "Modulation envelope: hold"; break;
+        }
+        break;
+    case 28:
+        switch (type)
+        {
+        case 1: qStr = trUtf8("Mod env decay (s)"); break;
+        case 2: qStr = trUtf8("Mod env decay (×)"); break;
+        default: qStr = "Modulation envelope: decay"; break;
+        }
+        break;
+    case 29:
+        switch (type)
+        {
+        case 1: qStr = trUtf8("Mod env sustain (%)"); break;
+        case 2: qStr = trUtf8("Mod env sustain (%)"); break;
+        default: qStr = "Modulation envelope: sustain"; break;
+        }
+        break;
+    case 30:
+        switch (type)
+        {
+        case 1: qStr = trUtf8("Mod env release (s)"); break;
+        case 2: qStr = trUtf8("Mod env release (×)"); break;
+        default: qStr = "Modulation envelope: release"; break;
+        }
+        break;
+    case 31:
+        switch (type)
+        {
+        case 1: qStr = trUtf8("Note → Mod env hold (c)"); break;
+        case 2: qStr = trUtf8("Note → Mod env hold (c)"); break;
+        default: qStr = "Modulation envelope: note to hold"; break;
+        }
+        break;
+    case 32:
+        switch (type)
+        {
+        case 1: qStr = trUtf8("Note → Mod env decay (c)"); break;
+        case 2: qStr = trUtf8("Note → Mod env decay (c)"); break;
+        default: qStr = "Modulation envelope: note to decay"; break;
+        }
+        break;
+    case 33:
+        switch (type)
+        {
+        case 1: qStr = trUtf8("Vol env decay (s)"); break;
+        case 2: qStr = trUtf8("Vol env decay (×)"); break;
+        default: qStr = "Volume envelope: delay"; break;
+        }
+        break;
+    case 34:
+        switch (type)
+        {
+        case 1: qStr = trUtf8("Vol env attack (s)"); break;
+        case 2: qStr = trUtf8("Vol env attack (×)"); break;
+        default: qStr = "Volume envelope: attack"; break;
+        }
+        break;
+    case 35:
+        switch (type)
+        {
+        case 1: qStr = trUtf8("Vol env hold (s)"); break;
+        case 2: qStr = trUtf8("Vol env hold (×)"); break;
+        default: qStr = "Volume envelope: hold"; break;
+        }
+        break;
+    case 36:
+        switch (type)
+        {
+        case 1: qStr = trUtf8("Vol env decay (s)"); break;
+        case 2: qStr = trUtf8("Vol env decay (×)"); break;
+        default: qStr = "Volume envelope: decay"; break;
+        }
+        break;
+    case 37:
+        switch (type)
+        {
+        case 1: qStr = trUtf8("Vol env sustain (%)"); break;
+        case 2: qStr = trUtf8("Vol env sustain (%)"); break;
+        default: qStr = "Volume envelope: sustain"; break;
+        }
+        break;
+    case 38:
+        switch (type)
+        {
+        case 1: qStr = trUtf8("Vol env release (s)"); break;
+        case 2: qStr = trUtf8("Vol env release (×)"); break;
+        default: qStr = "Volume envelope: release"; break;
+        }
+        break;
+    case 39:
+        switch (type)
+        {
+        case 1: qStr = trUtf8("Note → Vol env hold (c)"); break;
+        case 2: qStr = trUtf8("Note → Vol env hold (c)"); break;
+        default: qStr = "Volume envelope: note to hold"; break;
+        }
+        break;
+    case 40:
+        switch (type)
+        {
+        case 1: qStr = trUtf8("Note → Vol env decay (c)"); break;
+        case 2: qStr = trUtf8("Note → Vol env decay (c)"); break;
+        default: qStr = "Volume envelope: note to decay"; break;
+        }
+        break;
+    case 43:
+        switch (type)
+        {
+        case 1: qStr = trUtf8("Étendue note"); break;
+        case 2: qStr = trUtf8("Étendue note"); break;
+        default: qStr = "Key range"; break;
+        }
+        break;
+    case 44:
+        switch (type)
+        {
+        case 1: qStr = trUtf8("Étendue vélocité"); break;
+        case 2: qStr = trUtf8("Étendue vélocité"); break;
+        default: qStr = "Velocity range"; break;
+        }
+        break;
+    case 45:
+        switch (type)
+        {
+        case 1: qStr = trUtf8("Offset début sample"); break;
+        case 2: qStr = "impossible"; break;
+        default: qStr = "Sample: loop start offset (coarse)"; break;
+        }
+        break;
+    case 46:
+        switch (type)
+        {
+        case 1: qStr = trUtf8("Note fixe"); break;
+        case 2: qStr = "impossible"; break;
+        default: qStr = "Pitch/Effects: forced midi note"; break;
+        }
+        break;
+    case 47:
+        switch (type)
+        {
+        case 1: qStr = trUtf8("Vélocité fixe"); break;
+        case 2: qStr = "impossible"; break;
+        default: qStr = "Volume envelope: forced midi velocity"; break;
+        }
+        break;
+    case 48:
+        switch (type)
+        {
+        case 1: qStr = trUtf8("Atténuation (dB)"); break;
+        case 2: qStr = trUtf8("Atténuation (dB)"); break;
+        default: qStr = "Volume envelope: attenuation"; break;
+        }
+        break;
+    case 50:
+        switch (type)
+        {
+        case 1: qStr = trUtf8("Offset fin boucle"); break;
+        case 2: qStr = "impossible"; break;
+        default: qStr = "Sample: loop end offset (coarse)"; break;
+        }
+        break;
+    case 51:
+        switch (type)
+        {
+        case 1: qStr = trUtf8("Accordage (demi-tons)"); break;
+        case 2: qStr = trUtf8("Accordage (demi-tons)"); break;
+        default: qStr = "Pitch/Effects: tune (coarse)"; break;
+        }
+        break;
+    case 52:
+        switch (type)
+        {
+        case 1: qStr = trUtf8("Accordage (centièmes)"); break;
+        case 2: qStr = trUtf8("Accordage (centièmes)"); break;
+        default: qStr = "Pitch/Effects: tune (fine)"; break;
+        }
+        break;
+    case 54:
+        switch (type)
+        {
+        case 1: qStr = trUtf8("Lecture en boucle"); break;
+        case 2: qStr = "impossible"; break;
+        default: qStr = "Volume envelope: sample mode"; break;
+        }
+        break;
+    case 56:
+        switch (type)
+        {
+        case 1: qStr = trUtf8("Accordage (scale)"); break;
+        case 2: qStr = trUtf8("Accordage (scale)"); break;
+        default: qStr = "Pitch/Effects: scale tuning"; break;
+        }
+        break;
+    case 57:
+        switch (type)
+        {
+        case 1: qStr = trUtf8("Classe exclusive"); break;
+        case 2: qStr = "impossible"; break;
+        default: qStr = "Pitch/Effects: exclusive class"; break;
+        }
+        break;
+    case 58:
+        switch (type)
+        {
+        case 1: qStr = trUtf8("Note de base"); break;
+        case 2: qStr = "impossible"; break;
+        default: qStr = "Pitch/Effects: root note"; break;
+        }
+        break;
     default: qStr = "Unknown"; break;
     }
     return qStr;
@@ -2445,47 +2795,47 @@ void PageTable::paramGlobal()
                   SLOT(paramGlobal(QVector<double>,QList<EltID>,int,int)));
     dialogParam->show();
 }
-void PageTable::paramGlobal(QVector<double> dValues, QList<EltID> listElt, int typeModif, int param)
+void PageTable::paramGlobal(QVector<double> dValues, QList<EltID> listElt, int typeModif, int champ)
 {
     // Paramètre à modifier
-    Champ champ = champ_unknown;
-    switch (param)
-    {
-    case 0: champ = champ_initialAttenuation; break;
-    case 1: champ = champ_coarseTune; break;
-    case 2: champ = champ_fineTune; break;
-    case 3: champ = champ_scaleTuning; break;
-    case 4: champ = champ_initialFilterFc; break;
-    case 5: champ = champ_initialFilterQ; break;
-    case 6: champ = champ_delayVolEnv; break;
-    case 7: champ = champ_attackVolEnv; break;
-    case 8: champ = champ_holdVolEnv; break;
-    case 9: champ = champ_decayVolEnv; break;
-    case 10: champ = champ_sustainVolEnv; break;
-    case 11: champ = champ_releaseVolEnv; break;
-    case 12: champ = champ_keynumToVolEnvHold; break;
-    case 13: champ = champ_keynumToVolEnvDecay; break;
-    case 14: champ = champ_delayModEnv; break;
-    case 15: champ = champ_attackModEnv; break;
-    case 16: champ = champ_holdModEnv; break;
-    case 17: champ = champ_decayModEnv; break;
-    case 18: champ = champ_sustainModEnv; break;
-    case 19: champ = champ_releaseModEnv; break;
-    case 20: champ = champ_modEnvToPitch; break;
-    case 21: champ = champ_modEnvToFilterFc; break;
-    case 22: champ = champ_keynumToModEnvHold; break;
-    case 23: champ = champ_keynumToModEnvDecay; break;
-    case 24: champ = champ_delayModLFO; break;
-    case 25: champ = champ_freqModLFO; break;
-    case 26: champ = champ_modLfoToPitch; break;
-    case 27: champ = champ_modLfoToFilterFc; break;
-    case 28: champ = champ_modLfoToVolume; break;
-    case 29: champ = champ_delayVibLFO; break;
-    case 30: champ = champ_freqVibLFO; break;
-    case 31: champ = champ_vibLfoToPitch; break;
-    case 32: champ = champ_chorusEffectsSend; break;
-    case 33: champ = champ_reverbEffectsSend; break;
-    }
+//    Champ champ = champ_unknown;
+//    switch (param)
+//    {
+//    case 0: champ = champ_initialAttenuation; break;
+//    case 1: champ = champ_coarseTune; break;
+//    case 2: champ = champ_fineTune; break;
+//    case 3: champ = champ_scaleTuning; break;
+//    case 4: champ = champ_initialFilterFc; break;
+//    case 5: champ = champ_initialFilterQ; break;
+//    case 6: champ = champ_delayVolEnv; break;
+//    case 7: champ = champ_attackVolEnv; break;
+//    case 8: champ = champ_holdVolEnv; break;
+//    case 9: champ = champ_decayVolEnv; break;
+//    case 10: champ = champ_sustainVolEnv; break;
+//    case 11: champ = champ_releaseVolEnv; break;
+//    case 12: champ = champ_keynumToVolEnvHold; break;
+//    case 13: champ = champ_keynumToVolEnvDecay; break;
+//    case 14: champ = champ_delayModEnv; break;
+//    case 15: champ = champ_attackModEnv; break;
+//    case 16: champ = champ_holdModEnv; break;
+//    case 17: champ = champ_decayModEnv; break;
+//    case 18: champ = champ_sustainModEnv; break;
+//    case 19: champ = champ_releaseModEnv; break;
+//    case 20: champ = champ_modEnvToPitch; break;
+//    case 21: champ = champ_modEnvToFilterFc; break;
+//    case 22: champ = champ_keynumToModEnvHold; break;
+//    case 23: champ = champ_keynumToModEnvDecay; break;
+//    case 24: champ = champ_delayModLFO; break;
+//    case 25: champ = champ_freqModLFO; break;
+//    case 26: champ = champ_modLfoToPitch; break;
+//    case 27: champ = champ_modLfoToFilterFc; break;
+//    case 28: champ = champ_modLfoToVolume; break;
+//    case 29: champ = champ_delayVibLFO; break;
+//    case 30: champ = champ_freqVibLFO; break;
+//    case 31: champ = champ_vibLfoToPitch; break;
+//    case 32: champ = champ_chorusEffectsSend; break;
+//    case 33: champ = champ_reverbEffectsSend; break;
+//    }
     // Modification de tous les éléments
     EltID id;
     for (int numID = 0; numID < listElt.size(); numID++)
@@ -2508,7 +2858,7 @@ void PageTable::paramGlobal(QVector<double> dValues, QList<EltID> listElt, int t
             id.indexElt2 = i;
             if (!this->sf2->get(id, champ_hidden).bValue)
             {
-                amount = QString(getTextValue(T, champ, this->sf2->get(id, champ).genValue)).toDouble();
+                amount = QString(getTextValue(T, (Champ)champ, this->sf2->get(id, (Champ)champ).genValue)).toDouble();
                 // Calcul de la modification
                 pos = (double)(this->sf2->get(id, champ_keyRange).rValue.byLo +
                        this->sf2->get(id, champ_keyRange).rValue.byHi) / 2 * dValues.size() / 127. + 0.5;
@@ -2529,8 +2879,8 @@ void PageTable::paramGlobal(QVector<double> dValues, QList<EltID> listElt, int t
                     amount = dValues.at(pos);
                     break;
                 }
-                value.genValue = getValue(QString::number(amount), champ, ok);
-                this->sf2->set(id, champ, value);
+                value.genValue = getValue(QString::number(amount), (Champ)champ, ok);
+                this->sf2->set(id, (Champ)champ, value);
             }
         }
     }

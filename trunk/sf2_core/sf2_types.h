@@ -95,7 +95,7 @@ typedef enum
 typedef enum
 {
     champ_unknown = -1,
-    champ_startAddrsOffset = 0,         // Début champs des generateurs
+    champ_startAddrsOffset = 0,         // Début champs des générateurs
     champ_endAddrsOffset = 1,
     champ_startloopAddrsOffset = 2,
     champ_endloopAddrsOffset = 3,

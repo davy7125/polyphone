@@ -46,8 +46,6 @@ signals:
 
 private slots:
     void accept();
-    void on_listRangs_currentRowChanged(int currentRow);
-    void on_listDivisions_currentRowChanged(int currentRow);
     void on_pushAddDiv_pressed();
     void on_pushRemoveDiv_pressed();
     void on_spinDivStart_valueChanged(int arg1);
@@ -56,6 +54,8 @@ private slots:
     void on_pushRemoveRank_clicked();
     void on_comboType1_currentIndexChanged(int index);
     void on_comboType2_currentIndexChanged(int index);
+    void on_listDivisions_itemSelectionChanged();
+    void on_listRangs_itemSelectionChanged();
 
 private:
     Ui::DialogMixture *ui;

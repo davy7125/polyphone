@@ -235,7 +235,7 @@
      </row>
      <row>
       <property name="text">
-       <string>Balance [-50;50]</string>
+       <string>Balance [-100;100]</string>
       </property>
      </row>
      <row>
