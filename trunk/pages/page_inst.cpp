@@ -348,35 +348,38 @@ void Page_Inst::spatialisation(int motif, int nbDiv, int etalement, int occupati
             amount = this->sf2->get(id, champ_keyRange).genValue;
             if (amount.ranges.byLo < noteMin) noteMin = amount.ranges.byLo;
             if (amount.ranges.byHi > noteMax) noteMax = amount.ranges.byHi;
-            // Recherche d'une note ayant la même étendue sur le clavier
+            // Recherche d'une note liée ayant la même étendue sur le clavier
             found = false;
             pos = 0;
             while (pos < list1.size() && !found)
             {
                 if (amount.ranges.byHi == listRange.at(pos).ranges.byHi &&
-                    amount.ranges.byLo == listRange.at(pos).ranges.byLo)
-                    found = true;
-                else
+                    amount.ranges.byLo == listRange.at(pos).ranges.byLo &&
+                    list2.at(pos).indexElt2 == -1)
+                {
+                    // Les samples sont-ils liés ?
+                    EltID idSmpl1 = id;
+                    idSmpl1.indexElt = this->sf2->get(id, champ_sampleID).wValue;
+                    idSmpl1.typeElement = elementSmpl;
+                    EltID idSmpl2 = list1.at(pos);
+                    idSmpl2.indexElt = this->sf2->get(idSmpl2, champ_sampleID).wValue;
+                    idSmpl2.typeElement = elementSmpl;
+                    if (idSmpl1.indexElt == this->sf2->get(idSmpl2, champ_wSampleLink).wValue)
+                    {
+                        SFSampleLink type1 = this->sf2->get(idSmpl1, champ_sfSampleType).sfLinkValue;
+                        SFSampleLink type2 = this->sf2->get(idSmpl2, champ_sfSampleType).sfLinkValue;
+                        if (((type1 == rightSample || type1 == RomRightSample) && (type2 == leftSample || type2 == RomLeftSample)) ||
+                            ((type1 == leftSample || type1 == RomLeftSample) && (type2 == rightSample || type2 == RomRightSample)))
+                            found = true;
+                    }
+                }
+                if (!found)
                     pos++;
             }
             if (found)
             {
-                // Element déjà lié ?
-                if (list2.at(pos).indexElt2 != -1)
-                {
-                    // Ajout à liste 1
-                    list1.append(id);
-                    // Element nul dans liste 2
-                    id.indexElt2 = -1;
-                    list2.append(id);
-                    // Etendue
-                    listRange.append(amount);
-                }
-                else
-                {
-                    // Lien
-                    list2[pos] = id;
-                }
+                // Lien
+                list2[pos] = id;
             }
             else
             {
@@ -405,7 +408,7 @@ void Page_Inst::spatialisation(int motif, int nbDiv, int etalement, int occupati
         if (list2.at(i).indexElt2 == -1)
         {
             // pas de lien
-            val.genValue.shAmount = 1000*pan - 500;
+            val.genValue.shAmount = 1000 * pan - 500;
             this->sf2->set(list1.at(i), champ_pan, val);
         }
         else
@@ -416,21 +419,19 @@ void Page_Inst::spatialisation(int motif, int nbDiv, int etalement, int occupati
             id2 = list1.at(i);
             id2.indexElt = this->sf2->get(id2, champ_sampleID).wValue;
             id2.typeElement = elementSmpl;
+            SFSampleLink type1 = this->sf2->get(id2, champ_sfSampleType).sfLinkValue;
             // Sample correspondant 2
             id3 = list2.at(i);
             id3.indexElt = this->sf2->get(id3, champ_sampleID).wValue;
             id3.typeElement = elementSmpl;
-            if ((this->sf2->get(id2, champ_sfSampleType).sfLinkValue == leftSample ||
-                 this->sf2->get(id2, champ_sfSampleType).sfLinkValue == RomLeftSample) &&
-                 this->sf2->get(id3, champ_sfSampleType).sfLinkValue != leftSample &&
-                 this->sf2->get(id3, champ_sfSampleType).sfLinkValue != RomLeftSample)
+            SFSampleLink type2 = this->sf2->get(id3, champ_sfSampleType).sfLinkValue;
+            if ((type1 == leftSample || type1 == RomLeftSample) &&
+                 type2 != leftSample && type2 != RomLeftSample)
             {
                 sampleG = 0;
             }
-            else if((this->sf2->get(id2, champ_sfSampleType).sfLinkValue == rightSample ||
-                     this->sf2->get(id2, champ_sfSampleType).sfLinkValue == RomRightSample) &&
-                     this->sf2->get(id3, champ_sfSampleType).sfLinkValue != rightSample &&
-                     this->sf2->get(id3, champ_sfSampleType).sfLinkValue != RomRightSample)
+            else if ((type1 == rightSample || type1 == RomRightSample) &&
+                     type2 != rightSample && type2 != RomRightSample)
             {
                 sampleG = 1;
             }

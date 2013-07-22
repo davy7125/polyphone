@@ -94,8 +94,9 @@ private:
     typedef enum
     {
         fileUnknown = 0,
-        fileSf2 = 1,
-        fileWav = 2
+        fileSf2,
+        fileWav,
+        fileCustom1
     }FileType;
     // Attributs privés
     QString fileName;
