@@ -86,6 +86,18 @@ QByteArray Sound::getData(WORD wBps)
                 case fileWav:
                     baRet = getDataWav(fi, 1);
                     break;
+                case fileCustom1:{
+                    typedef QByteArray (*GetDataSound)(QFile*, WORD, InfoSound);
+                    GetDataSound getDataSound = (GetDataSound) QLibrary::resolve(QCoreApplication::applicationDirPath() + "/extension_lecture",
+                                                                             "getDataSound");
+                    if (getDataSound)
+                        baRet = getDataSound(fi, 1, this->info);
+                    else
+                    {
+                        baRet.resize(this->info.dwLength);
+                        baRet.fill(0);
+                    }
+                    }break;
                 default:
                     QMessageBox::warning(NULL, QObject::tr("Attention"), QObject::tr("Fichier non pris en charge."));
                 }
@@ -126,6 +138,18 @@ QByteArray Sound::getData(WORD wBps)
                 case fileWav:
                     baRet = getDataWav(fi, 2);
                     break;
+                case fileCustom1:{
+                    typedef QByteArray (*GetDataSound)(QFile*, WORD, InfoSound);
+                    GetDataSound getDataSound = (GetDataSound) QLibrary::resolve(QCoreApplication::applicationDirPath() + "/extension_lecture",
+                                                                             "getDataSound");
+                    if (getDataSound)
+                        baRet = getDataSound(fi, 2, this->info);
+                    else
+                    {
+                        baRet.resize(this->info.dwLength*2);
+                        baRet.fill(0);
+                    }
+                    }break;
                 default:
                     QMessageBox::warning(NULL, QObject::tr("Attention"), QObject::tr("Fichier non pris en charge."));
                 }
@@ -187,6 +211,18 @@ QByteArray Sound::getData(WORD wBps)
                 case fileWav:
                     baRet = getDataWav(fi, 3);
                     break;
+                case fileCustom1:{
+                    typedef QByteArray (*GetDataSound)(QFile*, WORD, InfoSound);
+                    GetDataSound getDataSound = (GetDataSound) QLibrary::resolve(QCoreApplication::applicationDirPath() + "/extension_lecture",
+                                                                             "getDataSound");
+                    if (getDataSound)
+                        baRet = getDataSound(fi, 3, this->info);
+                    else
+                    {
+                        baRet.resize(this->info.dwLength*3);
+                        baRet.fill(0);
+                    }
+                    }break;
                 default:
                     QMessageBox::warning(NULL, QObject::tr("Attention"), QObject::tr("Fichier non pris en charge."));
                 }
@@ -250,6 +286,18 @@ QByteArray Sound::getData(WORD wBps)
                 case fileWav:
                     baRet = getDataWav(fi, 4);
                     break;
+                case fileCustom1:{
+                    typedef QByteArray (*GetDataSound)(QFile*, WORD, InfoSound);
+                    GetDataSound getDataSound = (GetDataSound) QLibrary::resolve(QCoreApplication::applicationDirPath() + "/extension_lecture",
+                                                                             "getDataSound");
+                    if (getDataSound)
+                        baRet = getDataSound(fi, 4, this->info);
+                    else
+                    {
+                        baRet.resize(this->info.dwLength*4);
+                        baRet.fill(0);
+                    }
+                    }break;
                 default:
                     QMessageBox::warning(NULL, QObject::tr("Attention"), QObject::tr("Fichier non pris en charge."));
                 }
@@ -480,10 +528,20 @@ Sound::FileType Sound::getFileType()
 {
     QFileInfo fileInfo = this->fileName;
     QString ext = fileInfo.suffix().toLower();
+
+    QString extCustom = "";
+    typedef QString (*MyPrototype)();
+    MyPrototype myFunction = (MyPrototype) QLibrary::resolve(QCoreApplication::applicationDirPath() + "/extension_lecture",
+                                                             "getExtension");
+    if (myFunction)
+        extCustom = myFunction();
+
     if (ext.compare("sf2") == 0)
         return fileSf2;
     else if (ext.compare("wav") == 0)
         return fileWav;
+    else if (ext.compare(extCustom) == 0 && !extCustom.isEmpty())
+        return fileCustom1;
     else
         return fileUnknown;
 }
@@ -500,6 +558,29 @@ void Sound::getInfoSound()
         this->info.wChannel = 0;
         this->info.wChannels = 1;
         break;
+    case fileCustom1:{
+        typedef bool (*GetInfoSound)(QString, InfoSound*);
+        GetInfoSound getInfoSound = (GetInfoSound) QLibrary::resolve(QCoreApplication::applicationDirPath() + "/extension_lecture",
+                                                                 "getInfoSound");
+        if (getInfoSound)
+        {
+            if (!getInfoSound(this->fileName, &this->info))
+            {
+                this->info.wFormat = 0;
+                this->info.dwLength = 0;
+                this->info.wChannel = 0;
+                this->info.wChannels = 0;
+                this->info.dwStart = 0;
+                this->info.dwStart2 = 0;
+                this->info.dwSampleRate = 0;
+                this->info.dwStartLoop = 0;
+                this->info.dwEndLoop = 0;
+                this->info.dwNote = 0;
+                this->info.iCent = 0;
+                this->info.wBpsFile = 0;
+            }
+        }
+        }break;
     default:
         this->info.wFormat = 0;
         this->info.dwLength = 0;
