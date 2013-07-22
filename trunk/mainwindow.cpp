@@ -1799,9 +1799,18 @@ void MainWindow::dragAndDrop(EltID idDest, EltID idSrc, int temps, int *msg, QBy
 void MainWindow::importerSmpl()
 {
     if (ui->arborescence->getSelectedItemsNumber() == 0) return;
+
+    // Autre format permis ?
+    QString ext = "";
+    typedef QString (*MyPrototype)();
+    MyPrototype myFunction = (MyPrototype) QLibrary::resolve(QCoreApplication::applicationDirPath() + "/extension_lecture",
+                                                             "getExtensionFilter");
+    if (myFunction)
+        ext = myFunction();
+
     // Affichage dialogue
     QStringList strList = QFileDialog::getOpenFileNames(this, tr("Importer un fichier audio"),
-        Config::getInstance()->getLastDirectory(Config::typeFichierSample), tr("Fichier .wav (*.wav)"));
+        Config::getInstance()->getLastDirectory(Config::typeFichierSample), tr("Fichier .wav (*.wav)") + ext);
     if (strList.count() == 0) return;
     this->sf2->prepareNewActions();
     EltID id = {elementSmpl, this->ui->arborescence->getID(0).indexSf2, 0, 0, 0};
