@@ -328,6 +328,7 @@ public:
     void updateId(EltID id);
     void paramGlobal();
     void duplication();
+    void spatialisation();
     void visualize();
     void enlightColumn(int key, bool isEnlighted);
 
@@ -402,6 +403,7 @@ protected slots:
 
 private slots:
     void paramGlobal(QVector<double> dValues, QList<EltID> listElt, int typeModif, int champ);
+    void spatialisation(int motif, int nbDiv, int etalement, int occupation, int offset, int sens, int sens2);
 };
 
 

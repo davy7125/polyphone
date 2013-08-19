@@ -694,7 +694,7 @@ void Sound::getInfoSoundWav(QByteArray baData)
             if (taille2 == 0) taille2 = baData.size() - pos;
             info.dwStart = pos;
             if (info.wBpsFile != 0 && info.wChannels != 0)
-                info.dwLength = taille2 / (info.wBpsFile * info.wChannels / 8);
+                info.dwLength = qMin(taille2, baData.size() - pos) / (info.wBpsFile * info.wChannels / 8);
             pos += taille2;
         }
         else

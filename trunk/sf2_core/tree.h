@@ -66,36 +66,22 @@ public:
             {
                 // Nombre d'éléments sélectionnés
                 int nbElt = this->getSelectedItemsNumber();
-                if (nbElt == 0)
-                {
-                    delete [] this->idList;
-                    this->idList = NULL;
-                    this->nbId = 0;
-                }
-                else
+                this->clearPastedID();
+                if (nbElt >= 0)
                 {
                     if (this->isSelectedItemsSf2Unique() && this->isSelectedItemsTypeUnique())
                     {
                         this->anticipateNewAction();
                         // Copie des éléments
-                        delete [] this->idList;
-                        this->idList = new EltID[nbElt];
-                        this->nbId = nbElt;
                         for (int i = 0; i < nbElt; i++)
-                            this->idList[i] = this->getID(i);
-                    }
-                    else
-                    {
-                        delete [] this->idList;
-                        this->idList = NULL;
-                        this->nbId = 0;
+                            this->idList << this->getID(i);
                     }
                 }
             }
             else if (keyEvent->matches(QKeySequence::Paste))
             {
                 int nbElt = this->getSelectedItemsNumber();
-                if (nbElt > 0 && this->idList)
+                if (nbElt > 0 && this->idList.size())
                 {
                     if (this->isSelectedItemsSf2Unique() && this->isSelectedItemsTypeUnique() && \
                             (this->getID(0).typeElement == elementSmpl || this->isSelectedItemsFamilyUnique()))
@@ -110,13 +96,13 @@ public:
                         ba1->clear();
                         QByteArray * ba2 = new QByteArray; // Correspondances des index des instruments (delete dans mainwindow)
                         ba2->clear();
-                        for (int i = 0; i < this->nbId; i++)
+                        for (int i = 0; i < this->idList.size(); i++)
                         {
-                            if (this->nbId > 1)
+                            if (this->idList.size() > 1)
                             {
                                 if (i == 0)
                                     emit (dropped(idDest, this->idList[i], -1, msg, ba1, ba2));
-                                else if (i == this->nbId)
+                                else if (i == this->idList.size() - 1)
                                     emit (dropped(idDest, this->idList[i], 1, msg, ba1, ba2));
                                 else
                                     emit (dropped(idDest, this->idList[i], 0, msg, ba1, ba2));
@@ -204,8 +190,7 @@ private:
     menuClicDroit *menuArborescence;
     bool refresh;
     bool updateNext;
-    EltID * idList;
-    int nbId;
+    QList<EltID> idList;
     void updateSelectionInfo();
     unsigned int infoSelectedItemsNumber;
     bool infoIsSelectedItemsTypeUnique;

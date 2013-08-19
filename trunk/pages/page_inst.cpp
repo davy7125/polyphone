@@ -25,7 +25,6 @@
 #include "page_inst.h"
 #include "mainwindow.h"
 #include "ui_page_inst.h"
-#include "dialog_space.h"
 #include "dialog_mixture.h"
 #include "dialog_release.h"
 #include "dialog_celeste.h"
@@ -128,9 +127,9 @@ void Page_Inst::desaccorder()
 {
     EltID id = this->tree->getID(0);
     id.typeElement = elementInstSmpl;
-    if (this->sf2->count(id) == 0)
+    if (this->sf2->count(id, false) == 0)
     {
-        QMessageBox::warning(NULL, tr("Attention"), tr("L'instrument doit contenir des sons."));
+        QMessageBox::warning(this, tr("Attention"), tr("L'instrument doit contenir des sons."));
         return;
     }
     DialogCeleste * dialogCeleste = new DialogCeleste(this);
@@ -223,9 +222,9 @@ void Page_Inst::repartitionAuto()
 {
     EltID id = this->tree->getID(0);
     id.typeElement = elementInstSmpl;
-    if (this->sf2->count(id) == 0)
+    if (this->sf2->count(id, false) == 0)
     {
-        QMessageBox::warning(NULL, tr("Attention"), tr("L'instrument doit contenir des sons."));
+        QMessageBox::warning(this, tr("Attention"), tr("L'instrument doit contenir des sons."));
         return;
     }
     // Répartition automatique des notes sur le clavier
@@ -302,187 +301,14 @@ void Page_Inst::repartitionAuto()
     this->mainWindow->updateDo();
     this->afficher();
 }
-void Page_Inst::spatialisation()
-{
-    EltID idInst = this->tree->getID(0);
-    idInst.typeElement = elementInstSmpl;
-    if (this->sf2->count(idInst) == 0)
-    {
-        QMessageBox::warning(NULL, tr("Attention"), tr("L'instrument doit contenir des sons."));
-        return;
-    }
-    DialogSpace * dialogSpace = new DialogSpace(this);
-    dialogSpace->setAttribute(Qt::WA_DeleteOnClose, true);
-    this->connect(dialogSpace, SIGNAL(accepted(int,int,int,int,int,int,int)),
-                  SLOT(spatialisation(int,int,int,int,int,int,int)));
-    dialogSpace->show();
-}
-void Page_Inst::spatialisation(int motif, int nbDiv, int etalement, int occupation, int offset, int sens, int sens2)
-{
-    this->sf2->prepareNewActions();
-    // Sauvegarde des valeurs
-    Config * conf = Config::getInstance();
-    conf->setTools_i_space_motif(motif);
-    conf->setTools_i_space_divisions(nbDiv);
-    conf->setTools_i_space_etalement(etalement);
-    conf->setTools_i_space_occupation(occupation);
-    conf->setTools_i_space_offset(offset);
-    conf->setTools_i_space_renversement1(sens);
-    conf->setTools_i_space_renversement2(sens2);
-    // Liste des samples avec le lien le cas échéant
-    QList<EltID> list1;
-    QList<genAmountType> listRange;
-    QList<EltID> list2;
-    EltID id = this->tree->getID(0);
-    genAmountType amount;
-    bool found;
-    int pos;
-    int noteMin = 128;
-    int noteMax = 0;
-    id.typeElement = elementInstSmpl;
-    for (int i = 0; i < this->sf2->count(id); i++)
-    {
-        id.indexElt2 = i;
-        if (!this->sf2->get(id, champ_hidden).bValue)
-        {
-            amount = this->sf2->get(id, champ_keyRange).genValue;
-            if (amount.ranges.byLo < noteMin) noteMin = amount.ranges.byLo;
-            if (amount.ranges.byHi > noteMax) noteMax = amount.ranges.byHi;
-            // Recherche d'une note liée ayant la même étendue sur le clavier
-            found = false;
-            pos = 0;
-            while (pos < list1.size() && !found)
-            {
-                if (amount.ranges.byHi == listRange.at(pos).ranges.byHi &&
-                    amount.ranges.byLo == listRange.at(pos).ranges.byLo &&
-                    list2.at(pos).indexElt2 == -1)
-                {
-                    // Les samples sont-ils liés ?
-                    EltID idSmpl1 = id;
-                    idSmpl1.indexElt = this->sf2->get(id, champ_sampleID).wValue;
-                    idSmpl1.typeElement = elementSmpl;
-                    EltID idSmpl2 = list1.at(pos);
-                    idSmpl2.indexElt = this->sf2->get(idSmpl2, champ_sampleID).wValue;
-                    idSmpl2.typeElement = elementSmpl;
-                    if (idSmpl1.indexElt == this->sf2->get(idSmpl2, champ_wSampleLink).wValue)
-                    {
-                        SFSampleLink type1 = this->sf2->get(idSmpl1, champ_sfSampleType).sfLinkValue;
-                        SFSampleLink type2 = this->sf2->get(idSmpl2, champ_sfSampleType).sfLinkValue;
-                        if (((type1 == rightSample || type1 == RomRightSample) && (type2 == leftSample || type2 == RomLeftSample)) ||
-                            ((type1 == leftSample || type1 == RomLeftSample) && (type2 == rightSample || type2 == RomRightSample)))
-                            found = true;
-                    }
-                }
-                if (!found)
-                    pos++;
-            }
-            if (found)
-            {
-                // Lien
-                list2[pos] = id;
-            }
-            else
-            {
-                // Ajout à liste 1
-                list1.append(id);
-                // Element nul dans liste 2
-                id.indexElt2 = -1;
-                list2.append(id);
-                // Etendue
-                listRange.append(amount);
-            }
-        }
-    }
-    // Spatialisation
-    double pan = 0;
-    int note = 64;
-    EltID id2, id3;
-    int sampleG;
-    Valeur val;
-    for (int i = 0; i < list1.size(); i++)
-    {
-        note = (listRange.at(i).ranges.byLo + listRange.at(i).ranges.byHi) / 2;
-        pan = DialogSpace::space(noteMin, noteMax, note, motif, nbDiv,
-                                 etalement, occupation, offset, sens, sens2);
-        // Lien ?
-        if (list2.at(i).indexElt2 == -1)
-        {
-            // pas de lien
-            val.genValue.shAmount = 1000 * pan - 500;
-            this->sf2->set(list1.at(i), champ_pan, val);
-        }
-        else
-        {
-            // Quel sample est à gauche ?
-            sampleG = 0;
-            // Sample correspondant 1
-            id2 = list1.at(i);
-            id2.indexElt = this->sf2->get(id2, champ_sampleID).wValue;
-            id2.typeElement = elementSmpl;
-            SFSampleLink type1 = this->sf2->get(id2, champ_sfSampleType).sfLinkValue;
-            // Sample correspondant 2
-            id3 = list2.at(i);
-            id3.indexElt = this->sf2->get(id3, champ_sampleID).wValue;
-            id3.typeElement = elementSmpl;
-            SFSampleLink type2 = this->sf2->get(id3, champ_sfSampleType).sfLinkValue;
-            if ((type1 == leftSample || type1 == RomLeftSample) &&
-                 type2 != leftSample && type2 != RomLeftSample)
-            {
-                sampleG = 0;
-            }
-            else if ((type1 == rightSample || type1 == RomRightSample) &&
-                     type2 != rightSample && type2 != RomRightSample)
-            {
-                sampleG = 1;
-            }
-            else
-            {
-                if (this->sf2->get(list1.at(i), champ_pan).shValue <
-                        this->sf2->get(list2.at(i), champ_pan).shValue)
-                    sampleG = 0;
-                else if (this->sf2->get(list1.at(i), champ_pan).shValue >
-                        this->sf2->get(list2.at(i), champ_pan).shValue)
-                    sampleG = 1;
-            }
-            if (sampleG == 0)
-            {
-                // Inversion
-                id2 = list1.at(i);
-                list1[i] = list2.at(i);
-                list2[i] = id2;
-            }
-            // lien
-            if (pan < 0.5)
-            {
-                // Gauche
-                val.genValue.shAmount = -500;
-                this->sf2->set(list1.at(i), champ_pan, val);
-                // Droite
-                val.genValue.shAmount = 2000 * pan - 500;
-                this->sf2->set(list2.at(i), champ_pan, val);
-            }
-            else
-            {
-                // Gauche
-                val.genValue.shAmount = 2000 * pan - 1500;
-                this->sf2->set(list1.at(i), champ_pan, val);
-                // Droite
-                val.genValue.shAmount = 500;
-                this->sf2->set(list2.at(i), champ_pan, val);
-            }
-        }
-    }
-    // Actualisation
-    this->mainWindow->updateDo();
-    this->afficher();
-}
+
 void Page_Inst::mixture()
 {
     EltID idInst = this->tree->getID(0);
     idInst.typeElement = elementInstSmpl;
-    if (this->sf2->count(idInst) == 0)
+    if (this->sf2->count(idInst, false) == 0)
     {
-        QMessageBox::warning(NULL, tr("Attention"), tr("L'instrument doit contenir des sons."));
+        QMessageBox::warning(this, tr("Attention"), tr("L'instrument doit contenir des sons."));
         return;
     }
     DialogMixture * dialogMixture = new DialogMixture(this);
@@ -542,7 +368,7 @@ void Page_Inst::mixture(QList<QList<int> > listeParam, QString nomInst, bool bou
         // Pour chaque note
         for (int note = noteStart; note <= noteEnd; note += freq)
         {
-            // Pour chaque cote
+            // Pour chaque côté
             for (int cote = 0; cote < 2; cote++)
             {
                 QString name = nomInst.left(15);
@@ -583,10 +409,10 @@ void Page_Inst::mixture(QList<QList<int> > listeParam, QString nomInst, bool bou
                         double ecart;
                         EltID idInstSmplTmp;
                         idSmpl = closestSample(idInst, noteTmp, ecart, cote, idInstSmplTmp);
-    //                    printf("touche %d, note cherchee %.2f, sample %s, instsmpl %d-%d\n",
-    //                           note, noteTmp, sf2->getQstr(idSmpl, champ_name).toStdString().c_str(),
-    //                           sf2->get(idInstSmplTmp, champ_keyRange).rValue.byLo,
-    //                           sf2->get(idInstSmplTmp, champ_keyRange).rValue.byHi);
+//                        printf("touche %d, note cherchee %.2f, sample %s, instsmpl %d-%d\n",
+//                               note, noteTmp, sf2->getQstr(idSmpl, champ_name).toStdString().c_str(),
+//                               sf2->get(idInstSmplTmp, champ_keyRange).rValue.byLo,
+//                               sf2->get(idInstSmplTmp, champ_keyRange).rValue.byHi);
                         // Fréquence d'échantillonnage initiale fictive (pour accordage)
                         double fEchInit = (double)this->sf2->get(idSmpl, champ_dwSampleRate).dwValue * pow(2, ecart/12.0);
                         // Récupération du son
@@ -693,9 +519,9 @@ void Page_Inst::release()
 {
     EltID idInst = this->tree->getID(0);
     idInst.typeElement = elementInstSmpl;
-    if (this->sf2->count(idInst) == 0)
+    if (this->sf2->count(idInst, false) == 0)
     {
-        QMessageBox::warning(NULL, tr("Attention"), tr("L'instrument doit contenir des sons."));
+        QMessageBox::warning(this, tr("Attention"), tr("L'instrument doit contenir des sons."));
         return;
     }
     DialogRelease * dialogRelease = new DialogRelease(this);
@@ -704,7 +530,7 @@ void Page_Inst::release()
                   SLOT(release(double, double, double)));
     dialogRelease->show();
 }
-void Page_Inst::release(double duree60, double division, double deTune)
+void Page_Inst::release(double duree36, double division, double deTune)
 {
     this->sf2->prepareNewActions();
     // Reprise de l'identificateur si modification
@@ -720,7 +546,7 @@ void Page_Inst::release(double duree60, double division, double deTune)
             double noteMoy = (double)(this->sf2->get(id, champ_keyRange).rValue.byHi +
                     this->sf2->get(id, champ_keyRange).rValue.byLo) / 2;
             // Calcul durée release
-            double release = pow(division, ((60. - noteMoy) / 12.)) * duree60;
+            double release = pow(division, ((36. - noteMoy) / 12.)) * duree36;
             if (release < 0.001) release = 0.001;
             else if (release > 101.594) release = 101.594;
             // Valeur correspondante

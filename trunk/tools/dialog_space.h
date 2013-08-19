@@ -38,7 +38,7 @@ class DialogSpace : public QDialog
     Q_OBJECT
     
 public:
-    explicit DialogSpace(QWidget *parent = 0);
+    explicit DialogSpace(bool isPrst, QWidget *parent = 0);
     ~DialogSpace();
     // Méthode publique
     static double space(int noteMin, int noteMax, int note,
@@ -57,6 +57,7 @@ private slots:
     void sens2Changed(int value);
 private:
     Ui::DialogSpace * ui;
+    bool _isPrst;
 };
 
 
