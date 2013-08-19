@@ -42,14 +42,12 @@ public:
     void afficher();
     void desaccorder();
     void repartitionAuto();
-    void spatialisation();
     void mixture();
     void release();
 
 private slots:
-    void spatialisation(int motif, int nbDiv, int etalement, int occupation, int offset, int sens, int sens2);
     void mixture(QList<QList<int> > listeParam, QString nomInst, bool bouclage, int freq);
-    void release(double duree60, double division, double deTune);
+    void release(double duree36, double division, double deTune);
     void desaccorder(double doHerz, double division);
 
 private:

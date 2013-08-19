@@ -392,19 +392,18 @@ int  MainWindow::sauvegarder(int indexSf2, bool saveAs)
         if (ret == QMessageBox::Cancel) return 1;
     }
 
-
     // Compte du nombre de générateurs utilisés
     int unusedSmpl, unusedInst, usedSmpl, usedInst, usedPrst, instGen, prstGen;
     this->page_sf2->compte(unusedSmpl, unusedInst, usedSmpl, usedInst, usedPrst, instGen, prstGen);
-    if ((instGen < 65536 || prstGen < 65536) && Config::getInstance()->getActivationSaveWarning_toManyGenerators())
+    if ((instGen > 65536 || prstGen > 65536) && Config::getInstance()->getActivationSaveWarning_toManyGenerators())
     {
         int ret = QMessageBox::Save;
         QMessageBox msgBox(this);
         msgBox.setIcon(QMessageBox::Warning);
         QString texte;
-        if (instGen < 65536 && prstGen < 65536)
+        if (instGen > 65536 && prstGen > 65536)
             texte = trUtf8("<b>Trop de paramètres dans les instruments et les presets.</b>");
-        else if (instGen < 65536)
+        else if (instGen > 65536)
             texte = trUtf8("<b>Trop de paramètres dans les instruments.</b>");
         else
             texte = trUtf8("<b>Trop de paramètres dans les presets.</b>");
@@ -462,6 +461,7 @@ int  MainWindow::sauvegarder(int indexSf2, bool saveAs)
 }
 void MainWindow::undo()
 {
+    this->ui->arborescence->clearPastedID();
     sf2->undo();
     updateActions();
     updateDo();
@@ -469,6 +469,7 @@ void MainWindow::undo()
 }
 void MainWindow::redo()
 {
+    this->ui->arborescence->clearPastedID();
     sf2->redo();
     updateActions();
     updateDo();
@@ -752,7 +753,7 @@ void MainWindow::updateActions()
         else
             ui->action_Enlever_les_l_ments_non_utilis_s->setEnabled(0);
 
-        // Particularité 2 : "duplication", "paramétrage globale", "visualiseur" sont communs aux
+        // Particularité 2 : "duplication", "paramétrage globale", "visualiseur" et "spatialiseur" sont communs aux
         // instruments et aux presets -> pas de désactivation si l'une des 2 conditions est remplie
         if (familleUnique && (type == elementInst || type == elementInstSmpl ||
                               type == elementPrst || type == elementPrstInst))
@@ -763,6 +764,8 @@ void MainWindow::updateActions()
             ui->action_Param_trage_global_2->setEnabled(true);
             ui->action_Visualiseur->setEnabled(true);
             ui->action_Visualiseur_2->setEnabled(true);
+            ui->actionSpacialisation_du_son->setEnabled(true);
+            ui->actionSpatialisation_du_son->setEnabled(true);
         }
     }
     else
@@ -1105,7 +1108,8 @@ void MainWindow::dragAndDrop(EltID idDest, EltID idSrc, int temps, int *msg, QBy
                 for (int i = 0; i < nbInstSmpl; i++)
                 {
                     id.indexElt2 = i;
-                    this->dragAndDrop(idDest, id, 0, msg, ba1, ba2);
+                    if (!this->sf2->get(id, champ_hidden).bValue)
+                        this->dragAndDrop(idDest, id, 0, msg, ba1, ba2);
                 }
             }
             break;
@@ -1155,7 +1159,8 @@ void MainWindow::dragAndDrop(EltID idDest, EltID idSrc, int temps, int *msg, QBy
                 for (int i = 0; i < nbPrstInst; i++)
                 {
                     id.indexElt2 = i;
-                    this->dragAndDrop(idDest, id, 0, msg, ba1, ba2);
+                    if (!this->sf2->get(id, champ_hidden).bValue)
+                        this->dragAndDrop(idDest, id, 0, msg, ba1, ba2);
                 }
             }
             break;
@@ -2353,6 +2358,15 @@ void MainWindow::paramGlobal()
     else if (type == elementPrst || type == elementPrstInst)
         this->page_prst->paramGlobal();
 }
+void MainWindow::spatialisation()
+{
+    if (ui->arborescence->getSelectedItemsNumber() == 0) return;
+    ElementType type = ui->arborescence->getID(0).typeElement;
+    if (type == elementInst || type == elementInstSmpl)
+        this->page_inst->spatialisation();
+    else if (type == elementPrst || type == elementPrstInst)
+        this->page_prst->spatialisation();
+}
 void MainWindow::visualize()
 {
     if (ui->arborescence->getSelectedItemsNumber() == 0) return;
@@ -2364,7 +2378,6 @@ void MainWindow::visualize()
 }
 
 void MainWindow::repartitionAuto()  {this->page_inst->repartitionAuto();}
-void MainWindow::spatialisation()   {this->page_inst->spatialisation();}
 void MainWindow::mixture()          {this->page_inst->mixture();}
 void MainWindow::release()          {this->page_inst->release();}
 void MainWindow::purger()

@@ -287,6 +287,7 @@
      </property>
      <addaction name="actionDuplication_des_divisions"/>
      <addaction name="action_Param_trage_global_2"/>
+     <addaction name="actionSpatialisation_du_son"/>
      <addaction name="action_Visualiseur_2"/>
     </widget>
     <addaction name="menuSample"/>
@@ -1342,6 +1343,21 @@
     <string>Visualise dans un graphique les paramètres utilisés</string>
    </property>
   </action>
+  <action name="actionSpatialisation_du_son">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="ressources.qrc">
+     <normaloff>:/icones/spacialisation</normaloff>:/icones/spacialisation</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Spatialisation du son...</string>
+   </property>
+   <property name="toolTip">
+    <string>Dispose les sons dans l'espace</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
@@ -2328,6 +2344,22 @@
    <signal>triggered()</signal>
    <receiver>MainWindow</receiver>
    <slot>visualize()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>471</x>
+     <y>215</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionSpatialisation_du_son</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>spatialisation()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>-1</x>

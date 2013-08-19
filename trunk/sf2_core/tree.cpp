@@ -40,13 +40,10 @@ Tree::Tree(QWidget *parent) : QTreeWidget(parent)
     this->infoIsSelectedItemsSf2Unique = false;
     this->infoIsSelectedItemsTypeUnique = false;
     this->updateNext = true;
-    this->idList = NULL;
-    this->nbId = 0;
 }
 Tree::~Tree()
 {
     delete this->menuArborescence;
-    delete [] this->idList;
 }
 Tree::menuClicDroit::menuClicDroit(MainWindow *mainWindow)
 {
@@ -260,8 +257,7 @@ void Tree::activeSuppression()
 }
 void Tree::clearPastedID()
 {
-    delete [] idList;
-    this->idList = NULL;
+    this->idList.clear();
 }
 
 void Tree::updateAtNextSelectionRequest() {this->updateNext = true;}

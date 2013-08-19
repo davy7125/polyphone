@@ -83,13 +83,6 @@ public:
     double getTools_i_release_desaccordage(){ return settings.value("tools/instrument/release_desaccordage", 0.).toDouble(); }
     double getTools_i_celeste_herzDo()      { return settings.value("tools/instrument/ondulation_herz", 4.).toDouble(); }
     double getTools_i_celeste_division()    { return settings.value("tools/instrument/ondulation_division", 1.).toDouble(); }
-    int    getTools_i_space_motif()         { return settings.value("tools/instrument/space_motif", 0).toInt(); }
-    int    getTools_i_space_divisions()     { return settings.value("tools/instrument/space_divisions", 1).toInt(); }
-    int    getTools_i_space_etalement()     { return settings.value("tools/instrument/space_etalement", 100).toInt(); }
-    int    getTools_i_space_occupation()    { return settings.value("tools/instrument/space_occupation", 100).toInt(); }
-    int    getTools_i_space_offset()        { return settings.value("tools/instrument/space_offset", 50).toInt(); }
-    bool   getTools_i_space_renversement1() { return settings.value("tools/instrument/space_renversement1", false).toBool(); }
-    bool   getTools_i_space_renversement2() { return settings.value("tools/instrument/space_renversement2", false).toBool(); }
     double getTools_2_attenuation_dB()      { return settings.value("tools/sf2/attenuation_dB", 5.).toDouble(); }
     QList<QList<int> > getTools_i_mixture_ranks();
     QString getTools_i_mixture_nom()        { return settings.value("tools/instrument/mixture_nom", "").toString(); }
@@ -178,6 +171,55 @@ public:
         else
             return settings.value("tools/instrument/visualizer_logScale", false).toBool();
     }
+    int    getTools_i_space_motif(bool isPrst)
+    {
+        if (isPrst)
+            return settings.value("tools/preset/space_motif", 0).toInt();
+        else
+            return settings.value("tools/instrument/space_motif", 0).toInt();
+    }
+    int    getTools_i_space_divisions(bool isPrst)
+    {
+        if (isPrst)
+            return settings.value("tools/preset/space_divisions", 1).toInt();
+        else
+            return settings.value("tools/instrument/space_divisions", 1).toInt();
+    }
+    int    getTools_i_space_etalement(bool isPrst)
+    {
+        if (isPrst)
+            return settings.value("tools/preset/space_etalement", 100).toInt();
+        else
+            return settings.value("tools/instrument/space_etalement", 100).toInt();
+    }
+    int    getTools_i_space_occupation(bool isPrst)
+    {
+        if (isPrst)
+            return settings.value("tools/preset/space_occupation", 100).toInt();
+        else
+            return settings.value("tools/instrument/space_occupation", 100).toInt();
+    }
+    int    getTools_i_space_offset(bool isPrst)
+    {
+        if (isPrst)
+            return settings.value("tools/preset/space_offset", 50).toInt();
+        else
+            return settings.value("tools/instrument/space_offset", 50).toInt();
+    }
+    bool   getTools_i_space_renversement1(bool isPrst)
+    {
+        if (isPrst)
+            return settings.value("tools/preset/space_renversement1", false).toBool();
+        else
+            return settings.value("tools/instrument/space_renversement1", false).toBool();
+    }
+    bool   getTools_i_space_renversement2(bool isPrst)
+    {
+        if (isPrst)
+            return settings.value("tools/preset/space_renversement2", false).toBool();
+        else
+            return settings.value("tools/instrument/space_renversement2", false).toBool();
+    }
     // Modification des paramètres des outils
     void setTools_s_sifflements_debut(int val)      { settings.setValue("tools/sample/sifflements_debut", val); }
     void setTools_s_sifflements_fin(int val)        { settings.setValue("tools/sample/sifflements_fin", val); }
@@ -189,13 +231,6 @@ public:
     void setTools_i_release_desaccordage(double val){ settings.setValue("tools/instrument/release_desaccordage", val); }
     void setTools_i_celeste_herzDo(double val)      { settings.setValue("tools/instrument/ondulation_herz", val); }
     void setTools_i_celeste_division(double val)    { settings.setValue("tools/instrument/ondulation_division", val); }
-    void setTools_i_space_motif(int val)            { settings.setValue("tools/instrument/space_motif", val); }
-    void setTools_i_space_divisions(int val)        { settings.setValue("tools/instrument/space_divisions", val); }
-    void setTools_i_space_etalement(int val)        { settings.setValue("tools/instrument/space_etalement", val); }
-    void setTools_i_space_occupation(int val)       { settings.setValue("tools/instrument/space_occupation", val); }
-    void setTools_i_space_offset(int val)           { settings.setValue("tools/instrument/space_offset", val); }
-    void setTools_i_space_renversement1(bool val)   { settings.setValue("tools/instrument/space_renversement1", val); }
-    void setTools_i_space_renversement2(bool val)   { settings.setValue("tools/instrument/space_renversement2", val); }
     void setTools_2_attenuation_dB(double val)      { settings.setValue("tools/sf2/attenuation_dB", val); }
     void setTools_i_mixture_ranks(QList<QList<int> > val);
     void setTools_i_mixture_nom(QString val)        { settings.setValue("tools/instrument/mixture_nom", val); }
@@ -281,6 +316,56 @@ public:
         else
             settings.setValue("tools/instrument/visualizer_logScale", val);
     }
+    void setTools_space_motif(bool isPrst, int val)
+    {
+        if (isPrst)
+            settings.setValue("tools/preset/space_motif", val);
+        else
+            settings.setValue("tools/instrument/space_motif", val);
+    }
+    void setTools_space_divisions(bool isPrst, int val)
+    {
+        if (isPrst)
+            settings.setValue("tools/preset/space_divisions", val);
+        else
+            settings.setValue("tools/instrument/space_divisions", val);
+    }
+    void setTools_space_etalement(bool isPrst, int val)
+    {
+        if (isPrst)
+            settings.setValue("tools/preset/space_etalement", val);
+        else
+            settings.setValue("tools/instrument/space_etalement", val);
+    }
+    void setTools_space_occupation(bool isPrst, int val)
+    {
+        if (isPrst)
+            settings.setValue("tools/preset/space_occupation", val);
+        else
+            settings.setValue("tools/instrument/space_occupation", val);
+    }
+    void setTools_space_offset(bool isPrst, int val)
+    {
+        if (isPrst)
+            settings.setValue("tools/preset/space_offset", val);
+        else
+            settings.setValue("tools/instrument/space_offset", val);
+    }
+    void setTools_space_renversement1(bool isPrst, bool val)
+    {
+        if (isPrst)
+            settings.setValue("tools/preset/space_renversement1", val);
+        else
+            settings.setValue("tools/instrument/space_renversement1", val);
+    }
+    void setTools_space_renversement2(bool isPrst, bool val)
+    {
+        if (isPrst)
+            settings.setValue("tools/preset/space_renversement2", val);
+        else
+            settings.setValue("tools/instrument/space_renversement2", val);
+    }
+
     // Paramètres divers
     bool getActivationSaveWarning_toManyGenerators()
     {
