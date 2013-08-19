@@ -27,32 +27,33 @@
 #include "config.h"
 
 // Constructeur, destructeur
-DialogSpace::DialogSpace(QWidget *parent) :
+DialogSpace::DialogSpace(bool isPrst, QWidget *parent) :
     QDialog(parent),
-    ui(new Ui::DialogSpace)
+    ui(new Ui::DialogSpace),
+    _isPrst(isPrst)
 {
     ui->setupUi(this);
     Config * conf = Config::getInstance();
     this->ui->comboMotif->blockSignals(true);
-    this->ui->comboMotif->setCurrentIndex(conf->getTools_i_space_motif());
+    this->ui->comboMotif->setCurrentIndex(conf->getTools_i_space_motif(isPrst));
     this->ui->comboMotif->blockSignals(false);
     this->ui->spinNbDivision->blockSignals(true);
-    this->ui->spinNbDivision->setValue(conf->getTools_i_space_divisions());
+    this->ui->spinNbDivision->setValue(conf->getTools_i_space_divisions(isPrst));
     this->ui->spinNbDivision->blockSignals(false);
     this->ui->spinEtalement->blockSignals(true);
-    this->ui->spinEtalement->setValue(conf->getTools_i_space_etalement());
+    this->ui->spinEtalement->setValue(conf->getTools_i_space_etalement(isPrst));
     this->ui->spinEtalement->blockSignals(false);
     this->ui->spinOccupation->blockSignals(true);
-    this->ui->spinOccupation->setValue(conf->getTools_i_space_occupation());
+    this->ui->spinOccupation->setValue(conf->getTools_i_space_occupation(isPrst));
     this->ui->spinOccupation->blockSignals(false);
     this->ui->spinOffset->blockSignals(true);
-    this->ui->spinOffset->setValue(conf->getTools_i_space_offset());
+    this->ui->spinOffset->setValue(conf->getTools_i_space_offset(isPrst));
     this->ui->spinOffset->blockSignals(false);
     this->ui->checkSens->blockSignals(true);
-    this->ui->checkSens->setChecked(conf->getTools_i_space_renversement1());
+    this->ui->checkSens->setChecked(conf->getTools_i_space_renversement1(isPrst));
     this->ui->checkSens->blockSignals(false);
     this->ui->checkSens2->blockSignals(true);
-    this->ui->checkSens2->setChecked(conf->getTools_i_space_renversement2());
+    this->ui->checkSens2->setChecked(conf->getTools_i_space_renversement2(isPrst));
     this->ui->checkSens2->blockSignals(false);
 
     // Activation des renversements

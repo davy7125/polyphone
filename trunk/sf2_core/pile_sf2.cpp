@@ -518,7 +518,7 @@ int Pile_sf2::set(EltID id, Champ champ, QByteArray data) {return this->set(id, 
 int Pile_sf2::reset(EltID id, Champ champ) {return this->reset(id, champ, 1);}
 
 // Nombre de freres de id (id compris)
-int Pile_sf2::count(EltID id)
+int Pile_sf2::count(EltID id, bool withHidden)
 {
     switch ((int)id.typeElement)
     {
@@ -549,7 +549,8 @@ int Pile_sf2::count(EltID id)
         SF2 *tmp = this->sf2;
         while (tmp)
         {
-            i++;
+            if (!tmp->hidden || withHidden)
+                i++;
             tmp = tmp->suivant;
         }
         return i;
@@ -559,7 +560,8 @@ int Pile_sf2::count(EltID id)
         SF2::SMPL *tmp = this->sf2->getElt(id.indexSf2)->smpl;
         while (tmp)
         {
-            i++;
+            if (!tmp->hidden || withHidden)
+                i++;
             tmp = tmp->suivant;
         }
         return i;
@@ -569,7 +571,8 @@ int Pile_sf2::count(EltID id)
         SF2::INST *tmp = this->sf2->getElt(id.indexSf2)->inst;
         while (tmp)
         {
-            i++;
+            if (!tmp->hidden || withHidden)
+                i++;
             tmp = tmp->suivant;
         }
         return i;
@@ -579,7 +582,8 @@ int Pile_sf2::count(EltID id)
         SF2::PRST *tmp = this->sf2->getElt(id.indexSf2)->prst;
         while (tmp)
         {
-            i++;
+            if (!tmp->hidden || withHidden)
+                i++;
             tmp = tmp->suivant;
         }
         return i;
@@ -589,7 +593,8 @@ int Pile_sf2::count(EltID id)
         SF2::BAG *tmp = this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt)->bag;
         while (tmp)
         {
-            i++;
+            if (!tmp->hidden || withHidden)
+                i++;
             tmp = tmp->suivant;
         }
         return i;
@@ -599,7 +604,8 @@ int Pile_sf2::count(EltID id)
         SF2::BAG *tmp = this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt)->bag;
         while (tmp)
         {
-            i++;
+            if (!tmp->hidden || withHidden)
+                i++;
             tmp = tmp->suivant;
         }
         return i;

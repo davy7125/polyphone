@@ -53,7 +53,7 @@ public:
     int set(EltID id, Champ champ, QByteArray data);
     int reset(EltID id, Champ champ);
     // Nombre de freres de id (id compris)
-    int count(EltID id);
+    int count(EltID id, bool withHidden = true);
     // Gestionnaire d'actions
     void prepareNewActions();
     void cleanActions();
