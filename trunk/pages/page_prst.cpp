@@ -235,7 +235,7 @@ void Page_Prst::setBank()
         int sens = 0;
         do
         {
-            if (initVal + delta < 128)
+            if (initVal + delta < 129)
             {
                 if (initVal + delta == nBank)
                     sens = 2;
@@ -250,7 +250,7 @@ void Page_Prst::setBank()
                     sens = -1;
             }
             delta++;
-        } while (sens == 0 && delta < 128);
+        } while (sens == 0 && delta < 129);
         if (sens == 1 || sens == -1)
         {
             initVal += sens * (delta-1);
