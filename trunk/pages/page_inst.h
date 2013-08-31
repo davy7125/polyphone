@@ -46,7 +46,7 @@ public:
     void release();
 
 private slots:
-    void mixture(QList<QList<int> > listeParam, QString nomInst, bool bouclage, int freq);
+    void mixture(QList<QList<int> > listeParam, QString nomInst, bool bouclage, int freq, bool stereo);
     void release(double duree36, double division, double deTune);
     void desaccorder(double doHerz, double division);
 
