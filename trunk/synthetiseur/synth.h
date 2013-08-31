@@ -119,12 +119,4 @@ private:
 };
 
 
-class QThreadEx : public QThread
-{
-protected:
-    void run() {exec();}
-public:
-    static void mSleep(unsigned long mSec) {msleep(mSec);} // accès publique
-};
-
 #endif // SYNTH_H

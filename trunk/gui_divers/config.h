@@ -88,6 +88,7 @@ public:
     QString getTools_i_mixture_nom()        { return settings.value("tools/instrument/mixture_nom", "").toString(); }
     bool   getTools_i_mixture_boucle()      { return settings.value("tools/instrument/mixture_boucle", true).toBool(); }
     int    getTools_i_mixture_density()     { return settings.value("tools/instrument/mixture_density", 0).toInt(); }
+    bool   getTools_i_mixture_stereo()      { return settings.value("tools/instrument/mixture_stereo", true).toBool(); }
     QVector<double> getTools_global_courbe(bool isPrst)
     {
         QList<QVariant> listTmp;
@@ -236,6 +237,7 @@ public:
     void setTools_i_mixture_nom(QString val)        { settings.setValue("tools/instrument/mixture_nom", val); }
     void setTools_i_mixture_boucle(bool val)        { settings.setValue("tools/instrument/mixture_boucle", val); }
     void setTools_i_mixture_density(int val)        { settings.setValue("tools/instrument/mixture_density", val); }
+    void setTools_i_mixture_stereo(bool val)        { settings.setValue("tools/instrument/mixture_stereo", val); }
     void setTools_global_courbe(bool isPrst, QVector<double> val)
     {
         QVariantList listTmp;
