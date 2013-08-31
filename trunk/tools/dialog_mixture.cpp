@@ -40,6 +40,7 @@ DialogMixture::DialogMixture(QWidget *parent) :
     this->ui->lineNom->setText(conf->getTools_i_mixture_nom());
     this->ui->comboFreq->setCurrentIndex(conf->getTools_i_mixture_density());
     this->ui->checkBouclage->setChecked(conf->getTools_i_mixture_boucle());
+    this->ui->checkStereo->setChecked(conf->getTools_i_mixture_stereo());
 
     // Sélection octaves
     this->on_comboType1_currentIndexChanged(0);
@@ -204,6 +205,7 @@ void DialogMixture::accept()
     conf->setTools_i_mixture_nom(this->ui->lineNom->text());
     conf->setTools_i_mixture_density(this->ui->comboFreq->currentIndex());
     conf->setTools_i_mixture_boucle(this->ui->checkBouclage->isChecked());
+    conf->setTools_i_mixture_stereo(this->ui->checkStereo->isChecked());
 
     // Envoi des valeurs
     QString text = this->ui->lineNom->text();
@@ -227,7 +229,8 @@ void DialogMixture::accept()
     case 2: freq = 6; break;
     }
     if (this->listeParam.length() > 0)
-        emit(accepted(this->listeParam, text, this->ui->checkBouclage->isChecked(), freq));
+        emit(accepted(this->listeParam, text, this->ui->checkBouclage->isChecked(),
+                      freq, this->ui->checkStereo->isChecked()));
     QDialog::accept();
 }
 

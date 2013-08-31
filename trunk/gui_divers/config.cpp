@@ -128,6 +128,7 @@ Config::~Config()
 void Config::show()
 {
     // Liste des entrées midi à mettre à jour continuellement
+    this->ui->comboMidiInput->blockSignals(true);
     this->ui->comboMidiInput->clear();
     QStringList listMidi = this->mainWindow->getListMidi();
     this->ui->comboMidiInput->addItem("-");
@@ -137,6 +138,7 @@ void Config::show()
         this->ui->comboMidiInput->setCurrentIndex(this->numPortMidi + 1);
     else
         this->ui->comboMidiInput->setCurrentIndex(0);
+    this->ui->comboMidiInput->blockSignals(false);
     // Affichage du dialogue
     QDialog::show();
 }

@@ -313,11 +313,11 @@ void Page_Inst::mixture()
     }
     DialogMixture * dialogMixture = new DialogMixture(this);
     dialogMixture->setAttribute(Qt::WA_DeleteOnClose, true);
-    this->connect(dialogMixture, SIGNAL(accepted(QList<QList<int> >, QString, bool, int)),
-                  SLOT(mixture(QList<QList<int> >, QString, bool, int)));
+    this->connect(dialogMixture, SIGNAL(accepted(QList<QList<int> >, QString, bool, int, bool)),
+                  SLOT(mixture(QList<QList<int> >, QString, bool, int, bool)));
     dialogMixture->show();
 }
-void Page_Inst::mixture(QList<QList<int> > listeParam, QString nomInst, bool bouclage, int freq)
+void Page_Inst::mixture(QList<QList<int> > listeParam, QString nomInst, bool bouclage, int freq, bool stereo)
 {
     // Création d'une mixture
     this->sf2->prepareNewActions();
@@ -328,6 +328,8 @@ void Page_Inst::mixture(QList<QList<int> > listeParam, QString nomInst, bool bou
         int nbNotes = (qAbs(listeParam.at(i).at(0) - listeParam.at(i).at(1))) / freq + 1;
         nbEtapes += nbNotes * (listeParam.at(i).length() + 2 * bouclage);
     }
+    if (!stereo)
+        nbEtapes /= 2;
     // Ouverture d'une barre de progression
     QString textProgress = trUtf8("Création ");
     QProgressDialog progress("", tr("Annuler"), 0, nbEtapes, this);
@@ -369,15 +371,24 @@ void Page_Inst::mixture(QList<QList<int> > listeParam, QString nomInst, bool bou
         for (int note = noteStart; note <= noteEnd; note += freq)
         {
             // Pour chaque côté
-            for (int cote = 0; cote < 2; cote++)
+            for (int cote = 0; cote < 1 + stereo; cote++)
             {
-                QString name = nomInst.left(15);
+                QString name;
+                if (stereo)
+                    name = nomInst.left(15);
+                else
+                    name = nomInst.left(16);
                 char str2[20];
                 sprintf(str2,"%.3hu", note);
-                if (cote == 0)
-                    name = name + ' ' + str2 + 'R';
+                if (stereo)
+                {
+                    if (cote == 0)
+                        name = name + ' ' + str2 + 'R';
+                    else
+                        name = name + ' ' + str2 + 'L';
+                }
                 else
-                    name = name + ' ' + str2 + 'L';
+                    name = name + ' ' + str2;
                 progress.setLabelText(textProgress + name);
                 QApplication::processEvents();
                 baData.resize(dureeSmpl*fEch*4);
@@ -401,6 +412,12 @@ void Page_Inst::mixture(QList<QList<int> > listeParam, QString nomInst, bool bou
                 {
                     if (!progress.wasCanceled())
                         progress.setValue(progress.value() + 1);
+                    else
+                    {
+                        // Actualisation et retour
+                        this->mainWindow->updateDo();
+                        return;
+                    }
                     // Calcul de la note à ajouter à la mixture
                     double noteTmp = (double)note + getOffset(listRangs.at(2*numRang), listRangs.at(2*numRang+1));
                     if (noteTmp <= 120)
@@ -439,6 +456,12 @@ void Page_Inst::mixture(QList<QList<int> > listeParam, QString nomInst, bool bou
                 }
                 if (!progress.wasCanceled())
                     progress.setValue(progress.value() + 1);
+                else
+                {
+                    // Actualisation et retour
+                    this->mainWindow->updateDo();
+                    return;
+                }
                 qint32 loopStart = 0;
                 qint32 loopEnd = 0;
                 // Bouclage du sample
@@ -449,6 +472,12 @@ void Page_Inst::mixture(QList<QList<int> > listeParam, QString nomInst, bool bou
                         baData = baData2;
                     if (!progress.wasCanceled())
                         progress.setValue(progress.value() + 1);
+                    else
+                    {
+                        // Actualisation et retour
+                        this->mainWindow->updateDo();
+                        return;
+                    }
                 }
                 // Création d'un nouveau sample
                 idSmpl.indexElt = this->sf2->add(idSmpl);
@@ -474,10 +503,15 @@ void Page_Inst::mixture(QList<QList<int> > listeParam, QString nomInst, bool bou
                 this->sf2->set(idSmpl, champ_dwEndLoop, value);
                 this->sf2->set(idSmpl, champ_name, name);
                 // Lien
-                if (cote == 0)
-                    value.sfLinkValue = rightSample;
+                if (stereo)
+                {
+                    if (cote == 0)
+                        value.sfLinkValue = rightSample;
+                    else
+                        value.sfLinkValue = leftSample;
+                }
                 else
-                    value.sfLinkValue = leftSample;
+                    value.sfLinkValue = monoSample;
                 this->sf2->set(idSmpl, champ_sfSampleType, value);
                 if (cote == 1)
                 {
@@ -496,10 +530,15 @@ void Page_Inst::mixture(QList<QList<int> > listeParam, QString nomInst, bool bou
                 value.rValue.byLo = qMax(noteStart2, note-freq+1);
                 value.rValue.byHi = note;
                 this->sf2->set(idInstSmpl, champ_keyRange, value);
-                if (cote == 0)
-                    value.shValue = 500;
+                if (stereo)
+                {
+                    if (cote == 0)
+                        value.shValue = 500;
+                    else
+                        value.shValue = -500;
+                }
                 else
-                    value.shValue = -500;
+                    value.shValue = 0;
                 this->sf2->set(idInstSmpl, champ_pan, value);
                 value.wValue = attMini * 10;
                 this->sf2->set(idInstSmpl, champ_initialAttenuation, value);
@@ -633,6 +672,7 @@ EltID Page_Inst::closestSample(EltID idInst, double pitch, double &ecart, int co
         }
     }
     // Type de sample
+    int indexEltBase = idSmplRet.indexElt;
     SFSampleLink type = sf2->get(idSmplRet, champ_sfSampleType).sfLinkValue;
     if (!(type == RomMonoSample || type == monoSample ||
        ((type == RomRightSample || type == rightSample || type == RomLinkedSample || type == linkedSample) && cote == 0) ||
@@ -673,13 +713,49 @@ EltID Page_Inst::closestSample(EltID idInst, double pitch, double &ecart, int co
             }
         }
     }
+    if (ecartMin > 900 && idSmplRet.indexElt != indexEltBase)
+    {
+        // Le sample associé n'a pas été trouvé, retour sur le sample de base
+        idSmplRet.indexElt = indexEltBase;
+        rootKeySmpl = sf2->get(idSmplRet, champ_byOriginalPitch).bValue;
+        for (int i = 0; i < sf2->count(idInstSmplTmp); i++)
+        {
+            idInstSmplTmp.indexElt2 = i;
+            if (!sf2->get(idInstSmplTmp, champ_hidden).bValue)
+            {
+                if (sf2->get(idInstSmplTmp, champ_sampleID).wValue == idSmplRet.indexElt)
+                {
+                    // Notes min et max pour lesquels le sample est joué
+                    int noteMin = sf2->get(idInstSmplTmp, champ_keyRange).rValue.byLo;
+                    int noteMax = sf2->get(idInstSmplTmp, champ_keyRange).rValue.byHi;
+                    // Ajustement
+                    int rootKeyInstSmpl = rootKeySmpl;
+                    if (sf2->isSet(idInstSmplTmp, champ_overridingRootKey))
+                        rootKeyInstSmpl = sf2->get(idInstSmplTmp, champ_overridingRootKey).wValue;
+                    noteMin += rootKeySmpl - rootKeyInstSmpl;
+                    noteMax += rootKeySmpl - rootKeyInstSmpl;
+                    // Mesure de l'écart
+                    if (pitch < noteMin)
+                        ecartTmp = noteMin - pitch;
+                    else if (pitch > noteMax)
+                        ecartTmp = pitch - noteMax;
+                    else
+                        ecartTmp = 0;
+                    if (ecartTmp < ecartMin)
+                    {
+                        ecartMin = ecartTmp;
+                        idInstSmpl = idInstSmplTmp;
+                    }
+                }
+            }
+        }
+    }
     return idSmplRet;
 }
 QByteArray Page_Inst::getSampleData(EltID idSmpl, qint32 nbRead)
 {
     // Récupération de données provenant d'un sample, en prenant en compte la boucle
-    QByteArray baData = sf2->getData(idSmpl, champ_sampleDataFull24);
-    baData = Sound::bpsConversion(baData, 24, 32);
+    QByteArray baData = sf2->getData(idSmpl, champ_sampleData32);
     qint64 loopStart = sf2->get(idSmpl, champ_dwStartLoop).dwValue;
     qint64 loopEnd = sf2->get(idSmpl, champ_dwEndLoop).dwValue;
     QByteArray baDataRet;
@@ -703,13 +779,13 @@ QByteArray Page_Inst::getSampleData(EltID idSmpl, qint32 nbRead)
     else
     {
         // Pas de boucle
-        if (baData.size()/4 - posInit < nbRead)
+        if (baData.size()/4 < nbRead)
         {
             baDataRet.fill(0);
-            memcpy(dataRet, data + 4 * posInit, baData.size() - 4 * posInit);
+            memcpy(dataRet, data, baData.size());
         }
         else
-            memcpy(dataRet, data + 4 * posInit, 4 * nbRead);
+            memcpy(dataRet, data, 4 * nbRead);
     }
     return baDataRet;
 }

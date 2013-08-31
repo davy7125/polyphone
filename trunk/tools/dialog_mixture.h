@@ -42,7 +42,7 @@ public:
 
 signals:
     void accepted(QList<QList<int> > listeParam, QString nom,
-                  bool bouclage, int freq);
+                  bool bouclage, int freq, bool stereo);
 
 private slots:
     void accept();

@@ -161,8 +161,8 @@ private:
     Pile_sf2 * sf2;
     Synth * synth;
     AudioDevice * audioDevice;
-    QThreadEx audioThread;
-    QThreadEx synthThread;
+    QThread audioThread;
+    QThread synthThread;
     Config * configuration;
     DialogHelp help;
     DialogList dialList;
