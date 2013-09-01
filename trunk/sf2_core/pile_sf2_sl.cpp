@@ -29,7 +29,7 @@
 
 void Pile_sf2::nouveau(QString name)
 {
-    EltID id = {elementSf2, -1, 0, 0, 0};
+    EltID id(elementSf2, -1, 0, 0, 0);
     id.indexSf2 = this->add(id);
     // Initialisation de l'édition
     this->sf2->getElt(id.indexSf2)->numEdition = this->pileActions->getEdition(id.indexSf2)-1;
@@ -51,7 +51,7 @@ int Pile_sf2::ouvrir(QString fileName)
 
     // Vérification que le fichier n'a pas déjà été chargé
     bool ok = 1;
-    EltID id = {elementSf2, -1, 0, 0, 0};
+    EltID id(elementSf2, -1, 0, 0, 0);
     for (int i = 0; i < this->count(id); i++)
     {
         id.indexSf2 = i;
@@ -83,7 +83,7 @@ int Pile_sf2::sauvegarder(int indexSf2, QString fileName)
 
     // Vérification qu'une autre soundfont ne s'appelle pas fileName
     bool ok = 1;
-    EltID id = {elementSf2, -1, 0, 0, 0};
+    EltID id(elementSf2, -1, 0, 0, 0);
     for (int i = 0; i < this->count(id); i++)
     {
         id.indexSf2 = i;
@@ -608,9 +608,9 @@ int Pile_sf2::ouvrirSf2(QString fileName)
     // Fin de la séparation des blocs de pdta
     free(bloc_pdta);
     // Création d'un nouvel SF2
-    EltID id = {elementSf2, -1, 0, 0, 0};
+    EltID id(elementSf2, -1, 0, 0, 0);
     int indexSf2 = this->add(id, false); // Nouvelle action
-    EltID idSf2 = {elementSf2, indexSf2, 0, 0, 0};
+    EltID idSf2(elementSf2, indexSf2, 0, 0, 0);
     Valeur value;
     this->set(idSf2, champ_filename, fileName, false);
     ////////////////////   EXTRACTION DES CHAMPS DANS LE BLOC SHDR  ////////////////////
@@ -944,7 +944,7 @@ int Pile_sf2::ouvrirSf2(QString fileName)
 
 int Pile_sf2::sauvegarderSf2(int indexSf2, QString fileName)
 {
-    EltID id = {elementSf2, indexSf2, 0, 0, 0};
+    EltID id(elementSf2, indexSf2, 0, 0, 0);
     // Préparation de la sauvegarde
     sfVersionTag sfVersionTmp;
     DWORD dwTmp, dwTmp2;
@@ -1031,7 +1031,7 @@ int Pile_sf2::sauvegarderSf2(int indexSf2, QString fileName)
     }
 
     taille_smpl = 12;
-    EltID id2 = {elementSmpl, id.indexSf2, 0, 0, 0};
+    EltID id2(elementSmpl, id.indexSf2, 0, 0, 0);
     for (int i = 0; i < this->count(id2); i++)
     {
         id2.indexElt = i;
@@ -1051,7 +1051,7 @@ int Pile_sf2::sauvegarderSf2(int indexSf2, QString fileName)
         // Sauvegarde 16 bits
         taille_sm24 = 0;
     }
-    EltID id3 = {elementPrst, id.indexSf2, 0, 0, 0};
+    EltID id3(elementPrst, id.indexSf2, 0, 0, 0);
     id.typeElement = elementPrst;
     taille_phdr = 38;
     for (int i = 0; i < this->count(id); i++)
@@ -2203,7 +2203,7 @@ int Pile_sf2::ConvertMod::calculDestIndex(int destIndex)
 // Conversion du numéro de sample lié
 Pile_sf2::ConvertSmpl::ConvertSmpl(Pile_sf2 *sf2, int indexSf2)
 {
-    EltID id = {elementSmpl, indexSf2, 0, 0, 0};
+    EltID id(elementSmpl, indexSf2, 0, 0, 0);
     this->nbElt = sf2->count(id);
     this->listHidden = new int[this->nbElt];
     int pos = 0;
@@ -2243,7 +2243,7 @@ int Pile_sf2::ConvertSmpl::calculIndex(int index)
 // Conversion du numéro d'instrument lié
 Pile_sf2::ConvertInst::ConvertInst(Pile_sf2 *sf2, int indexSf2)
 {
-    EltID id = {elementInst, indexSf2, 0, 0, 0};
+    EltID id(elementInst, indexSf2, 0, 0, 0);
     this->nbElt = sf2->count(id);
     this->listHidden = new int[this->nbElt];
     int pos = 0;

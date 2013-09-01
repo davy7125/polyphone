@@ -165,7 +165,8 @@ void Voice::generateData(qint64 nbData)
                 modFreq[i] = 20;
         }
         double a0, a1, a2, b1, b2, valTmp;
-        double q_lin = pow(10, m_voiceParam->filterQ / 20.);
+        double filterQ = m_voiceParam->filterQ - 3.01;
+        double q_lin = pow(10, filterQ / 20.);
         for (int i = 0; i < nbData; i++)
         {
             this->biQuadCoefficients(a0, a1, a2, b1, b2, modFreq[i], q_lin);
@@ -176,15 +177,18 @@ void Voice::generateData(qint64 nbData)
             m_y1 = valTmp;
             data[i] = valTmp;
         }
-        gainLowPassFilter = m_voiceParam->filterQ / 2;
+        gainLowPassFilter = qMax(1.33 * filterQ, 0.);
 
         // Modulation du volume, conversion des dB
-        double coefMax = pow(10, (double)m_voiceParam->modLfoToVolume / 50.); // normalement division par 10
-        double coefMin = pow(10, -(double)m_voiceParam->modLfoToVolume / 50.); // normalement division par 10
+        int signe;
+        if (m_voiceParam->modLfoToVolume < 0)
+            signe = 1;
+        else
+            signe = -1;
         for (int i = 0; i < nbData; i++)
         {
-            valTmp = (modLfo[i] + 1.) / 2;
-            data[i] *= valTmp * coefMax + (1. - valTmp) * coefMin;
+            valTmp = qMax(signe * modLfo[i], 0.);
+            data[i] *= pow(10., signe * (double)m_voiceParam->modLfoToVolume / 20. * valTmp);
         }
     }
     // Application de l'enveloppe de volume
@@ -321,12 +325,13 @@ Voice* Voice::readData(double * data1, double * data2, qint64 size)
     if (nbRead != size)
         qDebug() << "warning: synth asked" << size << "samples and got" << nbRead;
     // Ajout en séparant les voix et application chorus
-    double pan = (this->getVoiceParam()->pan + 50) / 100; // entre 0 et 1
-    double pan2 = 1. - pan;
+    double pan = (this->getVoiceParam()->pan + 50) * PI / 200.;    // Entre 0 et pi / 2
+    double coef1 = sin(pan);
+    double coef2 = cos(pan);
     for (quint32 i = 0; i < size; i++)
     {
-        data1[i] = pan  * m_chorus.tick(data[i]);
-        data2[i] = pan2 * m_chorus.lastOut(1);
+        data1[i] = coef1 * m_chorus.tick(data[i]);
+        data2[i] = coef2 * m_chorus.lastOut(1);
     }
     return voiceRet;
 }

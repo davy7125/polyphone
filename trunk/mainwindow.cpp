@@ -168,7 +168,7 @@ void MainWindow::closeEvent(QCloseEvent *event)
 {
     // Nombre de fichiers non sauvegardés
     int nbFile = 0;
-    EltID id = {elementSf2, -1, 0, 0, 0};
+    EltID id(elementSf2, -1, 0, 0, 0);
     int nbSf2 = sf2->count(id);
     QString qStr = "";
     for (int i = 0; i < nbSf2; i++)
@@ -371,7 +371,7 @@ void MainWindow::sauvegarderSous()
 int  MainWindow::sauvegarder(int indexSf2, bool saveAs)
 {
     this->sf2->prepareNewActions();
-    EltID id = {elementSf2, indexSf2, 0, 0, 0};
+    EltID id(elementSf2, indexSf2, 0, 0, 0);
     // Avertissement si enregistrement dans une résolution inférieure
     if (sf2->get(id, champ_wBpsSave).wValue < sf2->get(id, champ_wBpsInit).wValue)
     {
@@ -593,7 +593,7 @@ void MainWindow::updateTitle()
 {
     // Nombre d'éléments sélectionnés
     int nb = ui->arborescence->getSelectedItemsNumber();
-    EltID id = {elementSf2, 0, 0, 0, 0};
+    EltID id(elementSf2, 0, 0, 0, 0);
     bool fichierUnique = 0;
     if (nb > 0)
     {
@@ -883,7 +883,7 @@ void MainWindow::updateFavoriteFiles()
 void MainWindow::updateTable(int type, int sf2, int elt, int elt2)
 {
     // Un élément a été supprimé définitivement, mise à jour des tables
-    EltID id = {(ElementType)type, sf2, elt, elt2, 0};
+    EltID id((ElementType)type, sf2, elt, elt2, 0);
     if (this->ui->stackedWidget->currentWidget() == this->page_inst &&
             (id.typeElement == elementSf2 || id.typeElement == elementInst ||
              id.typeElement == elementInstSmpl ||
@@ -1818,7 +1818,7 @@ void MainWindow::importerSmpl()
         Config::getInstance()->getLastDirectory(Config::typeFichierSample), tr("Fichier .wav (*.wav)") + ext);
     if (strList.count() == 0) return;
     this->sf2->prepareNewActions();
-    EltID id = {elementSmpl, this->ui->arborescence->getID(0).indexSf2, 0, 0, 0};
+    EltID id(elementSmpl, this->ui->arborescence->getID(0).indexSf2, 0, 0, 0);
     QString qStr, nom;
     int replace = 0;
     int nbElt = strList.count();
