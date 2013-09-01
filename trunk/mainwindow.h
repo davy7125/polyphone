@@ -25,7 +25,7 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#define VERSION "0.9.1 UNRELEASED"
+#define VERSION "1.0"
 
 #include <QMainWindow>
 #include <QDir>

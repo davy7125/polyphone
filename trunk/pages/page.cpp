@@ -3433,21 +3433,24 @@ void PageTable::enlightColumn(int key, bool isEnlighted)
     for (int i = 1; i < this->table->columnCount(); i++)
     {
         EltID id = this->table->getID(i);
-        bool enlighted = false;
-        if (!this->sf2->get(id, champ_hidden).bValue)
+        if (sf2->isValide(id))
         {
-            int key1 = this->sf2->get(id, champ_keyRange).rValue.byLo;
-            int key2 = this->sf2->get(id, champ_keyRange).rValue.byHi;
-            if (!this->sf2->isSet(id, champ_keyRange))
+            bool enlighted = false;
+            if (!this->sf2->get(id, champ_hidden).bValue)
             {
-                key1 = 0;
-                key2 = 128;
+                int key1 = this->sf2->get(id, champ_keyRange).rValue.byLo;
+                int key2 = this->sf2->get(id, champ_keyRange).rValue.byHi;
+                if (!this->sf2->isSet(id, champ_keyRange))
+                {
+                    key1 = 0;
+                    key2 = 128;
+                }
+                for (int j = 0; j < _listKeyEnlighted.size(); j++)
+                    enlighted = enlighted || (qMin(key1, key2) <= _listKeyEnlighted.at(j)
+                                              && qMax(key1, key2) >= _listKeyEnlighted.at(j));
             }
-            for (int j = 0; j < _listKeyEnlighted.size(); j++)
-                enlighted = enlighted || (qMin(key1, key2) <= _listKeyEnlighted.at(j)
-                                          && qMax(key1, key2) >= _listKeyEnlighted.at(j));
+            this->table->setEnlighted(i, enlighted);
         }
-        this->table->setEnlighted(i, enlighted);
     }
 }
 
@@ -3513,20 +3516,23 @@ void TableWidget::setID(EltID id, int colonne)
 }
 EltID TableWidget::getID(int colonne)
 {
-    EltID id;
-    if (strcmp(this->item(0, colonne)->text().toStdString().c_str(), "Inst") == 0)
-        id.typeElement = elementInst;
-    else if (strcmp(this->item(0, colonne)->text().toStdString().c_str(), "InstSmpl") == 0)
-        id.typeElement = elementInstSmpl;
-    else if (strcmp(this->item(0, colonne)->text().toStdString().c_str(), "Prst") == 0)
-        id.typeElement = elementPrst;
-    else if (strcmp(this->item(0, colonne)->text().toStdString().c_str(), "PrstInst") == 0)
-        id.typeElement = elementPrstInst;
-    sscanf(this->item(1, colonne)->text().toStdString().c_str(), "%d", &id.indexSf2);
-    sscanf(this->item(2, colonne)->text().toStdString().c_str(), "%d", &id.indexElt);
-    sscanf(this->item(3, colonne)->text().toStdString().c_str(), "%d", &id.indexElt2);
-    //sscanf(this->item(4, colonne)->text().toStdString().c_str(), "%d", &id.indexMod);
-    id.indexMod = 0;
+    EltID id(elementUnknown, 0, 0, 0, 0);
+    if (this->columnCount() > colonne)
+    {
+        if (strcmp(this->item(0, colonne)->text().toStdString().c_str(), "Inst") == 0)
+            id.typeElement = elementInst;
+        else if (strcmp(this->item(0, colonne)->text().toStdString().c_str(), "InstSmpl") == 0)
+            id.typeElement = elementInstSmpl;
+        else if (strcmp(this->item(0, colonne)->text().toStdString().c_str(), "Prst") == 0)
+            id.typeElement = elementPrst;
+        else if (strcmp(this->item(0, colonne)->text().toStdString().c_str(), "PrstInst") == 0)
+            id.typeElement = elementPrstInst;
+        sscanf(this->item(1, colonne)->text().toStdString().c_str(), "%d", &id.indexSf2);
+        sscanf(this->item(2, colonne)->text().toStdString().c_str(), "%d", &id.indexElt);
+        sscanf(this->item(3, colonne)->text().toStdString().c_str(), "%d", &id.indexElt2);
+        //sscanf(this->item(4, colonne)->text().toStdString().c_str(), "%d", &id.indexMod);
+        id.indexMod = 0;
+    }
     return id;
 }
 void TableWidget::setEnlighted(int colonne, bool isEnlighted)
@@ -3645,7 +3651,7 @@ EltID TableWidgetMod::getID(int row)
 }
 EltID TableWidgetMod::getID()
 {
-    EltID id = {elementUnknown, 0, 0, 0, 0};
+    EltID id(elementUnknown, 0, 0, 0, 0);
     if (this->selectedItems().count())
         id = getID(this->selectedItems().takeAt(0)->row());
     return id;

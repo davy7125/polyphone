@@ -77,7 +77,7 @@ bool EnveloppeVol::applyEnveloppe(double * data, quint32 size, bool release, int
     if (applyOn1)
         levelSustain = 1. - m_levelSustain / 100; // %
     else
-        levelSustain = pow(10, -m_levelSustain / 50); // dB
+        levelSustain = pow(10, -m_levelSustain / 20); // dB
     // Ajustement hold time et volume
     quint32 timeHold = m_timeHold * pow(2, m_noteToHold * (60 - note));
     quint32 timeDecay = m_timeDecay * pow(2, m_noteToDecay * (60 - note));
@@ -177,7 +177,6 @@ bool EnveloppeVol::applyEnveloppe(double * data, quint32 size, bool release, int
         case phase4decay:
             // Nombre de valeurs restantes dans la phase
             duree = timeDecay - m_currentSmpl;
-            val2 = levelSustain;
             if (duree <= size - avancement)
             {
                 m_currentPhase = phase5sustain;
@@ -187,28 +186,27 @@ bool EnveloppeVol::applyEnveloppe(double * data, quint32 size, bool release, int
             {
                 duree = size - avancement;
                 m_currentSmpl += duree;
-                val2 = 1. - ((double)m_currentSmpl / timeDecay) * (1 - val2);
             }
             if (applyOn1)
             {
-                // Linéaire
-                coef = (val2 - this->m_precValue) / duree;
-                valTmp = 0;
+                // Décroissance exponentielle
+                coef = pow(0.001 / (1. - levelSustain + 0.001), 1. / timeDecay);
+                val2 = (m_precValue - levelSustain) * coef + levelSustain;
                 for (quint32 i = 0; i < duree; i++)
                 {
-                    data[avancement + i] = volume * (valTmp + this->m_precValue);
-                    valTmp += coef;
+                    data[avancement + i] = volume * val2;
+                    val2 = (val2 - levelSustain) * coef + levelSustain;
                 }
             }
             else
             {
                 // Décroissance exponentielle
-                coef = pow(levelSustain, 1. / timeDecay);
-                val2 = m_precValue;
+                coef = pow(0.00001585 / (1. - levelSustain + 0.00001585), 1. / timeDecay);
+                val2 = (m_precValue - levelSustain) * coef + levelSustain;
                 for (quint32 i = 0; i < duree; i++)
                 {
                     data[avancement + i] = volume * (data[avancement + i] * val2);
-                    val2 *= coef;
+                    val2 = (val2 - levelSustain) * coef + levelSustain;
                 }
             }
             break;
@@ -234,30 +232,30 @@ bool EnveloppeVol::applyEnveloppe(double * data, quint32 size, bool release, int
             {
                 m_currentPhase = phase7off;
                 m_currentSmpl = 0;
-                val2 = 0;
             }
             else
             {
                 duree = size - avancement;
                 m_currentSmpl += duree;
-                val2 = m_precValue * (1. - ((double)m_currentSmpl / m_timeRelease));
             }
             if (applyOn1)
             {
                 // Linéaire
-                valTmp = 0;
-                coef = (val2 - this->m_precValue) / duree;
+                coef = -1. / m_timeRelease;
+                val2 = m_precValue + coef;
                 for (quint32 i = 0; i < duree; i++)
                 {
-                    data[avancement + i] = volume * (valTmp + this->m_precValue);
-                    valTmp += coef;
+                    data[avancement + i] = volume * val2;
+                    val2 += coef;
+                    if (val2 < 0)
+                        val2 = 0;
                 }
             }
             else
             {
                 // Décroissance exponentielle
-                coef = pow(0.01, 1. / m_timeRelease);
-                val2 = m_precValue;
+                coef = pow(0.00001585, 1. / m_timeRelease);
+                val2 = m_precValue * coef;
                 for (quint32 i = 0; i < duree; i++)
                 {
                     data[avancement + i] = volume * (data[avancement + i] * val2);

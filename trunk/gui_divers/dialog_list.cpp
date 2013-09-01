@@ -66,7 +66,7 @@ void DialogList::showDialog(EltID idSrc, ModeListDialog mode)
     // Remplissage de la liste
     this->ui->listWidget->clear();
     this->ui->listWidget->scrollToTop();
-    EltID id = {element, idSrc.indexSf2, 0, 0, 0};
+    EltID id(element, idSrc.indexSf2, 0, 0, 0);
     ListWidgetItem *item;
     for (int i = 0; i < this->sf2->count(id); i++)
     {

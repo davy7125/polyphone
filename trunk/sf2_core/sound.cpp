@@ -2002,6 +2002,7 @@ QByteArray Sound::bouclage(QByteArray baData, DWORD dwSmplRate, qint32 &loopStar
                 cr1[i] * data[posStartLoop - longueurBouclage + i];
     }
     baData = baData.left(loopEnd * 4);
+    data = (qint32*)baData.data();
     // Ajout de 8 valeurs
     QByteArray baTmp;
     baTmp.resize(4*8);

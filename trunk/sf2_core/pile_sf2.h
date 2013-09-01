@@ -68,6 +68,8 @@ public:
     bool isEdited(int indexSf2);
     // Récupération d'une liste de champs et de valeurs contenues dans les bags de l'élément id
     void getListeBags(EltID id, QList<Champ> &listeChamps, QList<genAmountType> &listeValeurs);
+    // Détermination de la validité d'un ID (en acceptant ou non les ID masqués, par défaut non)
+    bool isValide(EltID id, bool acceptHidden = 0);
 signals:
     void updateTable(int type, int sf2, int elt, int elt2);
 private:
@@ -279,8 +281,6 @@ private:
     int display(EltID id);
     // Supprime ou masque l'élément id. Si l'élément est utilisé par un autre : erreur
     int remove(EltID id, bool permanently, bool storeAction, int *message = NULL);
-    // Détermination de la validité d'un ID (en acceptant ou non les ID masqués, par défaut non)
-    bool isValide(EltID id, bool acceptHidden = 0);
     // Modification de propriétés
     int set(EltID id, Champ champ, Valeur value, bool storeAction);
     int set(EltID id, Champ champ, QString qStr, bool storeAction);

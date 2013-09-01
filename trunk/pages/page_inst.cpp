@@ -441,13 +441,6 @@ void Page_Inst::mixture(QList<QList<int> > listeParam, QString nomInst, bool bou
                             attenuation = (double)sf2->get(idInstSmplTmp, champ_initialAttenuation).shValue / 10.0 - attMini;
                             attenuation = pow(10, -attenuation / 20.0);
                         }
-    //                    // Prise en compte fréquence de coupure en Hz (filtre passe bas 2ème ordre)
-    //                    if (sf2->isSet(idInstSmplTmp, champ_initialFilterFc))
-    //                    {
-    //                        double cut = exp2((double)sf2->get(idInstSmplTmp, champ_initialFilterFc).wValue/1200)*8.176;
-    //                        DWORD dwSmplRate = sf2->get(idSmpl, champ_dwSampleRate).dwValue;
-    //                        baDataTmp = Sound::bandFilter(baDataTmp, 32, dwSmplRate, cut, 0, 1);
-    //                    }
                         // Rééchantillonnage
                         baDataTmp = Sound::resampleMono(baDataTmp, fEchInit, fEch, 32);
                         // Ajout du son
