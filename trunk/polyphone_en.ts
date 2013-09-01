@@ -217,48 +217,48 @@
         <translation>Default</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.cpp" line="152"/>
+        <location filename="gui_divers/config.cpp" line="154"/>
         <source>Information</source>
         <translation>Information</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.cpp" line="153"/>
+        <location filename="gui_divers/config.cpp" line="155"/>
         <source>La modification sera prise en compte lors du prochain dÃ©marrage du logiciel.</source>
         <translation>This modification will be applied during the next start of the software.</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.cpp" line="498"/>
+        <location filename="gui_divers/config.cpp" line="500"/>
         <source>Couleur du fond</source>
         <translation>Background color</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.cpp" line="508"/>
+        <location filename="gui_divers/config.cpp" line="510"/>
         <source>Couleur de l&apos;onde</source>
         <translation>Waveform color</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.cpp" line="518"/>
+        <location filename="gui_divers/config.cpp" line="520"/>
         <source>Couleur de la grille</source>
         <translation>Grid color</translation>
     </message>
     <message utf8="true">
-        <location filename="gui_divers/config.cpp" line="528"/>
+        <location filename="gui_divers/config.cpp" line="530"/>
         <source>Couleur du début de la boucle</source>
         <translation>Loop start color</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.cpp" line="538"/>
+        <location filename="gui_divers/config.cpp" line="540"/>
         <source>Couleur de la fin de la boucle</source>
         <translation>Loop end color</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.cpp" line="548"/>
+        <location filename="gui_divers/config.cpp" line="550"/>
         <source>Couleur du curseur de lecture</source>
         <translation>Play cursor color</translation>
     </message>
     <message utf8="true">
-        <location filename="gui_divers/config.cpp" line="586"/>
-        <location filename="gui_divers/config.cpp" line="602"/>
+        <location filename="gui_divers/config.cpp" line="588"/>
+        <location filename="gui_divers/config.cpp" line="604"/>
         <source>---- séparateur ----</source>
         <translation>---- separator ----</translation>
     </message>
@@ -384,408 +384,413 @@
         <source>Bouclage</source>
         <translation>Auto loop</translation>
     </message>
+    <message utf8="true">
+        <location filename="tools/dialog_mixture.ui" line="93"/>
+        <source>Stéréo</source>
+        <translation>Stereo</translation>
+    </message>
     <message>
-        <location filename="tools/dialog_mixture.ui" line="100"/>
+        <location filename="tools/dialog_mixture.ui" line="107"/>
         <source>Divisions</source>
         <translation>Divisions</translation>
     </message>
     <message>
-        <location filename="tools/dialog_mixture.ui" line="222"/>
+        <location filename="tools/dialog_mixture.ui" line="229"/>
         <source>Etendue</source>
         <translation>Key range</translation>
     </message>
     <message>
-        <location filename="tools/dialog_mixture.ui" line="268"/>
+        <location filename="tools/dialog_mixture.ui" line="275"/>
         <source>Rangs</source>
         <translation>Ranks</translation>
     </message>
     <message>
-        <location filename="tools/dialog_mixture.ui" line="393"/>
+        <location filename="tools/dialog_mixture.ui" line="400"/>
         <source>Type</source>
         <translation>Type</translation>
     </message>
     <message>
-        <location filename="tools/dialog_mixture.ui" line="401"/>
+        <location filename="tools/dialog_mixture.ui" line="408"/>
         <source>octave</source>
         <translation>octave</translation>
     </message>
     <message>
-        <location filename="tools/dialog_mixture.ui" line="406"/>
+        <location filename="tools/dialog_mixture.ui" line="413"/>
         <source>quinte</source>
         <translation>fifth</translation>
     </message>
     <message>
-        <location filename="tools/dialog_mixture.ui" line="411"/>
+        <location filename="tools/dialog_mixture.ui" line="418"/>
         <source>tierce</source>
         <translation>third</translation>
     </message>
     <message utf8="true">
-        <location filename="tools/dialog_mixture.ui" line="416"/>
+        <location filename="tools/dialog_mixture.ui" line="423"/>
         <source>septième</source>
         <translation>seventh</translation>
     </message>
     <message utf8="true">
-        <location filename="tools/dialog_mixture.ui" line="421"/>
+        <location filename="tools/dialog_mixture.ui" line="428"/>
         <source>neuvième</source>
         <translation>ninth</translation>
     </message>
     <message utf8="true">
-        <location filename="tools/dialog_mixture.ui" line="426"/>
+        <location filename="tools/dialog_mixture.ui" line="433"/>
         <source>onzième</source>
         <translation>eleventh</translation>
     </message>
     <message utf8="true">
-        <location filename="tools/dialog_mixture.ui" line="431"/>
+        <location filename="tools/dialog_mixture.ui" line="438"/>
         <source>treizième</source>
         <translation>thirteenth</translation>
     </message>
     <message utf8="true">
-        <location filename="tools/dialog_mixture.ui" line="436"/>
+        <location filename="tools/dialog_mixture.ui" line="443"/>
         <source>quinzième</source>
         <translation>fifteenth</translation>
     </message>
     <message utf8="true">
-        <location filename="tools/dialog_mixture.ui" line="441"/>
+        <location filename="tools/dialog_mixture.ui" line="448"/>
         <source>dix-septième</source>
         <translation>seventeenth</translation>
     </message>
     <message utf8="true">
-        <location filename="tools/dialog_mixture.ui" line="446"/>
+        <location filename="tools/dialog_mixture.ui" line="453"/>
         <source>dix-neuvième</source>
         <translation>nineteenth</translation>
     </message>
     <message>
-        <location filename="tools/dialog_mixture.cpp" line="211"/>
+        <location filename="tools/dialog_mixture.cpp" line="213"/>
         <source>sans nom</source>
         <translation>untitled</translation>
     </message>
     <message>
-        <location filename="tools/dialog_mixture.cpp" line="286"/>
+        <location filename="tools/dialog_mixture.cpp" line="289"/>
         <source>32&apos;</source>
         <translation>32&apos;</translation>
     </message>
     <message>
-        <location filename="tools/dialog_mixture.cpp" line="287"/>
+        <location filename="tools/dialog_mixture.cpp" line="290"/>
         <source>16&apos;</source>
         <translation>16&apos;</translation>
     </message>
     <message>
-        <location filename="tools/dialog_mixture.cpp" line="288"/>
+        <location filename="tools/dialog_mixture.cpp" line="291"/>
         <source>8&apos;</source>
         <translation>8&apos;</translation>
     </message>
     <message>
-        <location filename="tools/dialog_mixture.cpp" line="289"/>
+        <location filename="tools/dialog_mixture.cpp" line="292"/>
         <source>4&apos;</source>
         <translation>4&apos;</translation>
     </message>
     <message>
-        <location filename="tools/dialog_mixture.cpp" line="290"/>
+        <location filename="tools/dialog_mixture.cpp" line="293"/>
         <source>2&apos;</source>
         <translation>2&apos;</translation>
     </message>
     <message>
-        <location filename="tools/dialog_mixture.cpp" line="291"/>
+        <location filename="tools/dialog_mixture.cpp" line="294"/>
         <source>1&apos;</source>
         <translation>1&apos;</translation>
     </message>
     <message>
-        <location filename="tools/dialog_mixture.cpp" line="292"/>
+        <location filename="tools/dialog_mixture.cpp" line="295"/>
         <source>1/2&apos;</source>
         <translation>1/2&apos;</translation>
     </message>
     <message>
-        <location filename="tools/dialog_mixture.cpp" line="293"/>
+        <location filename="tools/dialog_mixture.cpp" line="296"/>
         <source>1/4&apos;</source>
         <translation>1/4&apos;</translation>
     </message>
     <message>
-        <location filename="tools/dialog_mixture.cpp" line="294"/>
+        <location filename="tools/dialog_mixture.cpp" line="297"/>
         <source>1/8&apos;</source>
         <translation>1/8&apos;</translation>
     </message>
     <message>
-        <location filename="tools/dialog_mixture.cpp" line="295"/>
+        <location filename="tools/dialog_mixture.cpp" line="298"/>
         <source>1/16&apos;</source>
         <translation>1/16&apos;</translation>
     </message>
     <message>
-        <location filename="tools/dialog_mixture.cpp" line="301"/>
+        <location filename="tools/dialog_mixture.cpp" line="304"/>
         <source>10&apos; 2/3</source>
         <translation>10&apos; 2/3</translation>
     </message>
     <message>
-        <location filename="tools/dialog_mixture.cpp" line="302"/>
+        <location filename="tools/dialog_mixture.cpp" line="305"/>
         <source>5&apos; 1/3</source>
         <translation>5&apos; 1/3</translation>
     </message>
     <message>
-        <location filename="tools/dialog_mixture.cpp" line="303"/>
+        <location filename="tools/dialog_mixture.cpp" line="306"/>
         <source>2&apos; 2/3</source>
         <translation>2&apos; 2/3</translation>
     </message>
     <message>
-        <location filename="tools/dialog_mixture.cpp" line="304"/>
+        <location filename="tools/dialog_mixture.cpp" line="307"/>
         <source>1&apos; 1/3</source>
         <translation>1&apos; 1/3</translation>
     </message>
     <message>
-        <location filename="tools/dialog_mixture.cpp" line="305"/>
+        <location filename="tools/dialog_mixture.cpp" line="308"/>
         <source>2/3&apos;</source>
         <translation>2/3&apos;</translation>
     </message>
     <message>
-        <location filename="tools/dialog_mixture.cpp" line="306"/>
+        <location filename="tools/dialog_mixture.cpp" line="309"/>
         <source>1/3&apos;</source>
         <translation>1/3&apos;</translation>
     </message>
     <message>
-        <location filename="tools/dialog_mixture.cpp" line="307"/>
+        <location filename="tools/dialog_mixture.cpp" line="310"/>
         <source>1/6&apos;</source>
         <translation>1/6&apos;</translation>
     </message>
     <message>
-        <location filename="tools/dialog_mixture.cpp" line="308"/>
+        <location filename="tools/dialog_mixture.cpp" line="311"/>
         <source>1/12&apos;</source>
         <translation>1/12&apos;</translation>
     </message>
     <message>
-        <location filename="tools/dialog_mixture.cpp" line="314"/>
+        <location filename="tools/dialog_mixture.cpp" line="317"/>
         <source>6&apos; 2/5</source>
         <translation>6&apos; 2/5</translation>
     </message>
     <message>
-        <location filename="tools/dialog_mixture.cpp" line="315"/>
+        <location filename="tools/dialog_mixture.cpp" line="318"/>
         <source>3&apos; 1/5</source>
         <translation>3&apos; 1/5</translation>
     </message>
     <message>
-        <location filename="tools/dialog_mixture.cpp" line="316"/>
+        <location filename="tools/dialog_mixture.cpp" line="319"/>
         <source>1&apos; 3/5</source>
         <translation>1&apos; 3/5</translation>
     </message>
     <message>
-        <location filename="tools/dialog_mixture.cpp" line="317"/>
+        <location filename="tools/dialog_mixture.cpp" line="320"/>
         <source>4/5&apos;</source>
         <translation>4/5&apos;</translation>
     </message>
     <message>
-        <location filename="tools/dialog_mixture.cpp" line="318"/>
+        <location filename="tools/dialog_mixture.cpp" line="321"/>
         <source>2/5&apos;</source>
         <translation>2/5&apos;</translation>
     </message>
     <message>
-        <location filename="tools/dialog_mixture.cpp" line="319"/>
+        <location filename="tools/dialog_mixture.cpp" line="322"/>
         <source>1/5&apos;</source>
         <translation>1/5&apos;</translation>
     </message>
     <message>
-        <location filename="tools/dialog_mixture.cpp" line="320"/>
+        <location filename="tools/dialog_mixture.cpp" line="323"/>
         <source>1/10&apos;</source>
         <translation>1/10&apos;</translation>
     </message>
     <message>
-        <location filename="tools/dialog_mixture.cpp" line="326"/>
+        <location filename="tools/dialog_mixture.cpp" line="329"/>
         <source>4&apos; 4/7</source>
         <translation>4&apos; 4/7</translation>
     </message>
     <message>
-        <location filename="tools/dialog_mixture.cpp" line="327"/>
+        <location filename="tools/dialog_mixture.cpp" line="330"/>
         <source>2&apos; 2/7</source>
         <translation>2&apos; 2/7</translation>
     </message>
     <message>
-        <location filename="tools/dialog_mixture.cpp" line="328"/>
+        <location filename="tools/dialog_mixture.cpp" line="331"/>
         <source>1&apos; 1/7</source>
         <translation>1&apos; 1/7</translation>
     </message>
     <message>
-        <location filename="tools/dialog_mixture.cpp" line="329"/>
+        <location filename="tools/dialog_mixture.cpp" line="332"/>
         <source>4/7&apos;</source>
         <translation>4/7&apos;</translation>
     </message>
     <message>
-        <location filename="tools/dialog_mixture.cpp" line="330"/>
+        <location filename="tools/dialog_mixture.cpp" line="333"/>
         <source>2/7&apos;</source>
         <translation>2/7&apos;</translation>
     </message>
     <message>
-        <location filename="tools/dialog_mixture.cpp" line="331"/>
+        <location filename="tools/dialog_mixture.cpp" line="334"/>
         <source>1/7&apos;</source>
         <translation>1/7&apos;</translation>
     </message>
     <message>
-        <location filename="tools/dialog_mixture.cpp" line="332"/>
+        <location filename="tools/dialog_mixture.cpp" line="335"/>
         <source>1/14&apos;</source>
         <translation>1/14&apos;</translation>
     </message>
     <message>
-        <location filename="tools/dialog_mixture.cpp" line="338"/>
+        <location filename="tools/dialog_mixture.cpp" line="341"/>
         <source>3&apos; 5/9</source>
         <translation>3&apos; 5/9</translation>
     </message>
     <message>
-        <location filename="tools/dialog_mixture.cpp" line="339"/>
+        <location filename="tools/dialog_mixture.cpp" line="342"/>
         <source>1&apos; 7/9</source>
         <translation>1&apos; 7/9</translation>
     </message>
     <message>
-        <location filename="tools/dialog_mixture.cpp" line="340"/>
+        <location filename="tools/dialog_mixture.cpp" line="343"/>
         <source>8/9&apos;</source>
         <translation>8/9&apos;</translation>
     </message>
     <message>
-        <location filename="tools/dialog_mixture.cpp" line="341"/>
+        <location filename="tools/dialog_mixture.cpp" line="344"/>
         <source>4/9&apos;</source>
         <translation>4/9&apos;</translation>
     </message>
     <message>
-        <location filename="tools/dialog_mixture.cpp" line="342"/>
+        <location filename="tools/dialog_mixture.cpp" line="345"/>
         <source>2/9&apos;</source>
         <translation>2/9&apos;</translation>
     </message>
     <message>
-        <location filename="tools/dialog_mixture.cpp" line="343"/>
+        <location filename="tools/dialog_mixture.cpp" line="346"/>
         <source>1/9&apos;</source>
         <translation>1/9&apos;</translation>
     </message>
     <message>
-        <location filename="tools/dialog_mixture.cpp" line="349"/>
+        <location filename="tools/dialog_mixture.cpp" line="352"/>
         <source>2&apos; 10/11</source>
         <translation>2&apos; 10/11</translation>
     </message>
     <message>
-        <location filename="tools/dialog_mixture.cpp" line="350"/>
+        <location filename="tools/dialog_mixture.cpp" line="353"/>
         <source>1&apos; 5/11</source>
         <translation>1&apos; 5/11</translation>
     </message>
     <message>
-        <location filename="tools/dialog_mixture.cpp" line="351"/>
+        <location filename="tools/dialog_mixture.cpp" line="354"/>
         <source>8/11&apos;</source>
         <translation>8/11&apos;</translation>
     </message>
     <message>
-        <location filename="tools/dialog_mixture.cpp" line="352"/>
+        <location filename="tools/dialog_mixture.cpp" line="355"/>
         <source>4/11&apos;</source>
         <translation>4/11&apos;</translation>
     </message>
     <message>
-        <location filename="tools/dialog_mixture.cpp" line="353"/>
+        <location filename="tools/dialog_mixture.cpp" line="356"/>
         <source>2/11&apos;</source>
         <translation>2/11&apos;</translation>
     </message>
     <message>
-        <location filename="tools/dialog_mixture.cpp" line="354"/>
+        <location filename="tools/dialog_mixture.cpp" line="357"/>
         <source>1/11&apos;</source>
         <translation>1/11&apos;</translation>
     </message>
     <message>
-        <location filename="tools/dialog_mixture.cpp" line="360"/>
+        <location filename="tools/dialog_mixture.cpp" line="363"/>
         <source>2&apos; 6/13</source>
         <translation>2&apos; 6/13</translation>
     </message>
     <message>
-        <location filename="tools/dialog_mixture.cpp" line="361"/>
+        <location filename="tools/dialog_mixture.cpp" line="364"/>
         <source>1&apos; 3/13</source>
         <translation>1&apos; 3/13</translation>
     </message>
     <message>
-        <location filename="tools/dialog_mixture.cpp" line="362"/>
+        <location filename="tools/dialog_mixture.cpp" line="365"/>
         <source>8/13&apos;</source>
         <translation>8/13&apos;</translation>
     </message>
     <message>
-        <location filename="tools/dialog_mixture.cpp" line="363"/>
+        <location filename="tools/dialog_mixture.cpp" line="366"/>
         <source>4/13&apos;</source>
         <translation>4/13&apos;</translation>
     </message>
     <message>
-        <location filename="tools/dialog_mixture.cpp" line="364"/>
+        <location filename="tools/dialog_mixture.cpp" line="367"/>
         <source>2/13&apos;</source>
         <translation>2/13&apos;</translation>
     </message>
     <message>
-        <location filename="tools/dialog_mixture.cpp" line="365"/>
+        <location filename="tools/dialog_mixture.cpp" line="368"/>
         <source>1/13&apos;</source>
         <translation>1/13&apos;</translation>
     </message>
     <message>
-        <location filename="tools/dialog_mixture.cpp" line="371"/>
+        <location filename="tools/dialog_mixture.cpp" line="374"/>
         <source>2&apos; 2/15</source>
         <translation>2&apos; 2/15</translation>
     </message>
     <message>
-        <location filename="tools/dialog_mixture.cpp" line="372"/>
+        <location filename="tools/dialog_mixture.cpp" line="375"/>
         <source>1&apos; 1/15</source>
         <translation>1&apos; 1/15</translation>
     </message>
     <message>
-        <location filename="tools/dialog_mixture.cpp" line="373"/>
+        <location filename="tools/dialog_mixture.cpp" line="376"/>
         <source>8/15&apos;</source>
         <translation>8/15&apos;</translation>
     </message>
     <message>
-        <location filename="tools/dialog_mixture.cpp" line="374"/>
+        <location filename="tools/dialog_mixture.cpp" line="377"/>
         <source>4/15&apos;</source>
         <translation>4/15&apos;</translation>
     </message>
     <message>
-        <location filename="tools/dialog_mixture.cpp" line="375"/>
+        <location filename="tools/dialog_mixture.cpp" line="378"/>
         <source>2/15&apos;</source>
         <translation>2/15&apos;</translation>
     </message>
     <message>
-        <location filename="tools/dialog_mixture.cpp" line="376"/>
+        <location filename="tools/dialog_mixture.cpp" line="379"/>
         <source>1/15&apos;</source>
         <translation>1/15&apos;</translation>
     </message>
     <message>
-        <location filename="tools/dialog_mixture.cpp" line="382"/>
+        <location filename="tools/dialog_mixture.cpp" line="385"/>
         <source>1&apos; 15/17</source>
         <translation>1&apos; 15/17</translation>
     </message>
     <message>
-        <location filename="tools/dialog_mixture.cpp" line="383"/>
+        <location filename="tools/dialog_mixture.cpp" line="386"/>
         <source>16/17&apos;</source>
         <translation>16/17&apos;</translation>
     </message>
     <message>
-        <location filename="tools/dialog_mixture.cpp" line="384"/>
+        <location filename="tools/dialog_mixture.cpp" line="387"/>
         <source>8/17&apos;</source>
         <translation>8/17&apos;</translation>
     </message>
     <message>
-        <location filename="tools/dialog_mixture.cpp" line="385"/>
+        <location filename="tools/dialog_mixture.cpp" line="388"/>
         <source>4/17&apos;</source>
         <translation>4/17&apos;</translation>
     </message>
     <message>
-        <location filename="tools/dialog_mixture.cpp" line="386"/>
+        <location filename="tools/dialog_mixture.cpp" line="389"/>
         <source>2/17&apos;</source>
         <translation>2/17&apos;</translation>
     </message>
     <message>
-        <location filename="tools/dialog_mixture.cpp" line="392"/>
+        <location filename="tools/dialog_mixture.cpp" line="395"/>
         <source>1&apos; 13/19</source>
         <translation>1&apos; 13/19</translation>
     </message>
     <message>
-        <location filename="tools/dialog_mixture.cpp" line="393"/>
+        <location filename="tools/dialog_mixture.cpp" line="396"/>
         <source>16/19&apos;</source>
         <translation>16/19&apos;</translation>
     </message>
     <message>
-        <location filename="tools/dialog_mixture.cpp" line="394"/>
+        <location filename="tools/dialog_mixture.cpp" line="397"/>
         <source>8/19&apos;</source>
         <translation>8/19&apos;</translation>
     </message>
     <message>
-        <location filename="tools/dialog_mixture.cpp" line="395"/>
+        <location filename="tools/dialog_mixture.cpp" line="398"/>
         <source>4/19&apos;</source>
         <translation>4/19&apos;</translation>
     </message>
     <message>
-        <location filename="tools/dialog_mixture.cpp" line="396"/>
+        <location filename="tools/dialog_mixture.cpp" line="399"/>
         <source>2/19&apos;</source>
         <translation>2/19&apos;</translation>
     </message>
@@ -3122,7 +3127,7 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
         <location filename="pages/page_inst.cpp" line="132"/>
         <location filename="pages/page_inst.cpp" line="227"/>
         <location filename="pages/page_inst.cpp" line="311"/>
-        <location filename="pages/page_inst.cpp" line="524"/>
+        <location filename="pages/page_inst.cpp" line="563"/>
         <source>Attention</source>
         <translation>Warning</translation>
     </message>
@@ -3130,7 +3135,7 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
         <location filename="pages/page_inst.cpp" line="132"/>
         <location filename="pages/page_inst.cpp" line="227"/>
         <location filename="pages/page_inst.cpp" line="311"/>
-        <location filename="pages/page_inst.cpp" line="524"/>
+        <location filename="pages/page_inst.cpp" line="563"/>
         <source>L&apos;instrument doit contenir des sons.</source>
         <translation>The instrument contains no samples.</translation>
     </message>
@@ -3145,17 +3150,17 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
 (the algebraic sign determines the detuning direction)</translation>
     </message>
     <message utf8="true">
-        <location filename="pages/page_inst.cpp" line="332"/>
+        <location filename="pages/page_inst.cpp" line="334"/>
         <source>Création </source>
-        <translation>Creation</translation>
+        <translation>Creation </translation>
     </message>
     <message>
-        <location filename="pages/page_inst.cpp" line="333"/>
+        <location filename="pages/page_inst.cpp" line="335"/>
         <source>Annuler</source>
         <translation>Cancel</translation>
     </message>
     <message>
-        <location filename="pages/page_inst.cpp" line="348"/>
+        <location filename="pages/page_inst.cpp" line="350"/>
         <source>sans nom</source>
         <translation>untitled</translation>
     </message>

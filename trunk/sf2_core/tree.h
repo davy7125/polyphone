@@ -199,7 +199,7 @@ private:
     // Méthodes privées
     void anticipateNewAction();
     QTreeWidgetItem * selectedItem(unsigned int pos);
-    static EltID getItemID(QTreeWidgetItem *Elt);
+    static EltID getItemID(QTreeWidgetItem *elt);
     void supprimerElt();
 };
 

@@ -440,21 +440,21 @@ QTreeWidgetItem * Tree::selectedItem(unsigned int pos)
     else
         return NULL;
 }
-EltID Tree::getItemID(QTreeWidgetItem *Elt)
+EltID Tree::getItemID(QTreeWidgetItem *elt)
 {
-    eltID ID;
-    if (!Elt) return ID;
+    EltID ID;
+    if (!elt) return ID;
     string type, str;
     int indexSf2, indexElt, indexElt2;
     // Index Sf2, Elt et Elt2
-    str = Elt->text(1).toStdString();
+    str = elt->text(1).toStdString();
     sscanf(str.c_str(), "%d", &indexSf2);
-    str = Elt->text(3).toStdString();
+    str = elt->text(3).toStdString();
     sscanf(str.c_str(), "%d", &indexElt);
-    str = Elt->text(4).toStdString();
+    str = elt->text(4).toStdString();
     sscanf(str.c_str(), "%d", &indexElt2);
     // Type
-    type = Elt->text(2).toStdString();
+    type = elt->text(2).toStdString();
     // Création de l'ID
     if (type == "smpl") ID.typeElement = elementSmpl;
     else if (type == "inst") ID.typeElement = elementInst;

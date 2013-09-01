@@ -79,7 +79,7 @@ void Synth::play(int type, int idSf2, int idElt, int note, int velocity, VoicePa
         if (note == -1)
         {
             // Lecture d'un sample, association possible
-            EltID idSmpl = {elementSmpl, idSf2, idElt, 0, 0};
+            EltID idSmpl(elementSmpl, idSf2, idElt, 0, 0);
             VoiceParam * voiceParam1 = new VoiceParam(m_sf2, idSmpl);
             voiceParam1->volReleaseTime = 0.2;
             voiceParam1->loopMode = this->m_isLoopEnabled;
@@ -90,7 +90,7 @@ void Synth::play(int type, int idSf2, int idElt, int note, int velocity, VoicePa
             if (typeLien != monoSample && typeLien != RomMonoSample)
             {
                 // Smpl lié
-                EltID idSmpl2 = {elementSmpl, idSf2, m_sf2->get(idSmpl, champ_wSampleLink).wValue, 0, 0};
+                EltID idSmpl2(elementSmpl, idSf2, m_sf2->get(idSmpl, champ_wSampleLink).wValue, 0, 0);
                 VoiceParam * voiceParam2 = new VoiceParam(m_sf2, idSmpl2);
                 voiceParam2->volReleaseTime = 0.2;
                 voiceParam2->loopMode = this->m_isLoopEnabled;
@@ -136,7 +136,7 @@ void Synth::play(int type, int idSf2, int idElt, int note, int velocity, VoicePa
         }
         else
         {
-            EltID idSmpl = {elementSmpl, idSf2, idElt, 0, 0};
+            EltID idSmpl(elementSmpl, idSf2, idElt, 0, 0);
             // Récupération des paramètres
             VoiceParam * voiceParam = new VoiceParam(m_sf2, idSmpl, voiceParamTmp);
             // Création voix
@@ -164,7 +164,7 @@ void Synth::play(int type, int idSf2, int idElt, int note, int velocity, VoicePa
         break;
     case 1:{ // instrument
         // Parcours de tous les samples liés
-        EltID idInstSmpl = {elementInstSmpl, idSf2, idElt, 0, 0};
+        EltID idInstSmpl(elementInstSmpl, idSf2, idElt, 0, 0);
         for (int i = 0; i < m_sf2->count(idInstSmpl); i++)
         {
             idInstSmpl.indexElt2 = i;
@@ -199,7 +199,7 @@ void Synth::play(int type, int idSf2, int idElt, int note, int velocity, VoicePa
         }break;
     case 2:{ // preset
         // Parcours de tous les instruments lies
-        EltID idPrstInst = {elementPrstInst, idSf2, idElt, 0, 0};
+        EltID idPrstInst(elementPrstInst, idSf2, idElt, 0, 0);
         for (int i = 0; i < m_sf2->count(idPrstInst); i++)
         {
             idPrstInst.indexElt2 = i;

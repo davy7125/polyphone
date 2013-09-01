@@ -59,14 +59,32 @@ typedef enum
     elementPrstInstGen = 16
 }ElementType;
 
-typedef struct eltID
+class EltID
 {
+public:
+    EltID(ElementType elementType, int indexSf2, int indexElt, int indexElt2, int indexMod)
+    {
+        this->typeElement = elementType;
+        this->indexSf2    = indexSf2;
+        this->indexElt    = indexElt;
+        this->indexElt2   = indexElt2;
+        this->indexMod    = indexMod;
+    }
+    EltID()
+    {
+        this->typeElement = elementUnknown;
+        this->indexSf2 = 0;
+        this->indexElt = 0;
+        this->indexElt2 = 0;
+        this->indexMod = 0;
+    }
+
     ElementType typeElement;
     int indexSf2;
     int indexElt;
     int indexElt2;
-    int indexMod;
-}EltID;
+    int indexMod;   
+};
 
 typedef struct sfVersionTag
 {

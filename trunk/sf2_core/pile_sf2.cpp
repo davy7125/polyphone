@@ -1191,7 +1191,7 @@ int Pile_sf2::remove(EltID id, bool permanently, bool storeAction, int *message)
         storeAction = false;
         // suppression d'un SF2
         // nombre de presets associés
-        EltID id2 = {elementPrst, id.indexSf2, 0, 0, 0};
+        EltID id2(elementPrst, id.indexSf2, 0, 0, 0);
         int max = this->count(id2);
         for (int i = max - 1; i >= 0; i--)
         {
@@ -1279,7 +1279,7 @@ int Pile_sf2::remove(EltID id, bool permanently, bool storeAction, int *message)
             return 1;
         }
         // sample lié ?
-        EltID id2 = {elementSmpl, id.indexSf2, 0, 0, 0};
+        EltID id2(elementSmpl, id.indexSf2, 0, 0, 0);
         int i = -1;
         Valeur value;
         SF2::SMPL *smplTmp = this->sf2->getElt(id.indexSf2)->smpl;
@@ -1363,7 +1363,7 @@ int Pile_sf2::remove(EltID id, bool permanently, bool storeAction, int *message)
             return 1;
         }
         // Propagation aux samples liés
-        EltID id2 = {elementInstSmpl, id.indexSf2, id.indexElt, 0, 0};
+        EltID id2(elementInstSmpl, id.indexSf2, id.indexElt, 0, 0);
         int nbInstSmpl = this->count(id2);
         for (int i = nbInstSmpl - 1; i >= 0; i--)
         {
@@ -1413,7 +1413,7 @@ int Pile_sf2::remove(EltID id, bool permanently, bool storeAction, int *message)
         }break;
     case elementPrst:{
         // suppression d'un preset
-        EltID id2 = {elementPrstInst, id.indexSf2, id.indexElt, 0, 0};
+        EltID id2(elementPrstInst, id.indexSf2, id.indexElt, 0, 0);
         // Propagation aux instruments liés
         int nbPrstInst = this->count(id2);
         for (int i = nbPrstInst - 1; i >= 0; i--)
@@ -1461,7 +1461,7 @@ int Pile_sf2::remove(EltID id, bool permanently, bool storeAction, int *message)
         }break;
     case elementInstSmpl:{
         // suppression d'un sample lié à un instrument
-        EltID id2 = {elementInstSmplMod, id.indexSf2, id.indexElt, id.indexElt2, 0};
+        EltID id2(elementInstSmplMod, id.indexSf2, id.indexElt, id.indexElt2, 0);
         // Propagation aux mods associés
         int nbInstSmplMod = this->count(id2);
         for (int i = nbInstSmplMod -1; i >= 0; i--)
@@ -1501,7 +1501,7 @@ int Pile_sf2::remove(EltID id, bool permanently, bool storeAction, int *message)
         }break;
     case elementPrstInst:{
         // suppression d'un instrument lié à un preset
-        EltID id2 = {elementPrstInstMod, id.indexSf2, id.indexElt, id.indexElt2, 0};
+        EltID id2(elementPrstInstMod, id.indexSf2, id.indexElt, id.indexElt2, 0);
         // Propagation aux mods associés
         int nbPrstInstMod = this->count(id2);
         for (int i = nbPrstInstMod -1; i >= 0; i--)
@@ -1744,7 +1744,7 @@ int Pile_sf2::set(EltID id, Champ champ, Valeur value, bool storeAction)
         if (champ == champ_sampleID)
         {
             // Nom du sample lié
-            EltID id2 = {elementSmpl, id.indexSf2, value.wValue, 0, 0};
+            EltID id2(elementSmpl, id.indexSf2, value.wValue, 0, 0);
             QString qStr = this->getQstr(id2, champ_name);
             tmp->eltTree->setText(0, qStr);
             // Modification élément graphique
@@ -1760,7 +1760,7 @@ int Pile_sf2::set(EltID id, Champ champ, Valeur value, bool storeAction)
             char str[20];
             sprintf(str, "%.3d", value.rValue.byLo);
             QString qStr = QString(str);
-            EltID id2 = {elementSmpl, id.indexSf2, this->get(id, champ_sampleID).wValue, 0, 0};
+            EltID id2(elementSmpl, id.indexSf2, this->get(id, champ_sampleID).wValue, 0, 0);
             qStr.append(this->getQstr(id2, champ_name));
             tmp->eltTree->setText(5, qStr);
             this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt)->eltTree->sortChildren(5, Qt::AscendingOrder);
@@ -1775,7 +1775,7 @@ int Pile_sf2::set(EltID id, Champ champ, Valeur value, bool storeAction)
         if (champ == champ_instrument)
         {
             // Nom de l'instrument lié
-            EltID id2 = {elementInst, id.indexSf2, value.wValue, 0, 0};
+            EltID id2(elementInst, id.indexSf2, value.wValue, 0, 0);
             QString qStr = this->getQstr(id2, champ_name);
             tmp->eltTree->setText(0, qStr);
             // Modification élément graphique
@@ -1791,7 +1791,7 @@ int Pile_sf2::set(EltID id, Champ champ, Valeur value, bool storeAction)
             char str[20];
             sprintf(str, "%.3d", value.rValue.byLo);
             QString qStr = QString(str);
-            EltID id2 = {elementInst, id.indexSf2, this->get(id, champ_instrument).wValue, 0, 0};
+            EltID id2(elementInst, id.indexSf2, this->get(id, champ_instrument).wValue, 0, 0);
             qStr.append(this->getQstr(id2, champ_name));
             tmp->eltTree->setText(5, qStr);
             this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt)->eltTree->sortChildren(5, Qt::AscendingOrder);
@@ -1852,8 +1852,10 @@ int Pile_sf2::set(EltID id, Champ champ, QString qStr, bool storeAction)
 {
     if (!this->isValide(id))
     {
+        MESSAGE(id);
+        MESSAGE(qStr);
 #ifdef SHOW_ID_ERROR
-        QMessageBox::warning(NULL, QObject::tr("Attention"), QObject::tr("Dans fonction Pile_sf2::set (QString), ID non valide."));
+        QMessageBox::warning(NULL, QObject::tr("Attention"), QObject::tr("Dans fonction Pile_sf2::set(QString), ID non valide."));
 #endif
         return 1;
     }
@@ -2560,6 +2562,8 @@ bool Pile_sf2::isValide(EltID id, bool acceptHidden)
          && id.typeElement != elementInstSmplGen && id.typeElement != elementPrstInstGen \
          && id.typeElement != elementInstSmplMod && id.typeElement != elementPrstInstMod)
         return 0;
+//    if (id.indexElt < -1 || id.indexElt2 < -1 || id.indexMod < -1 || id.indexSf2 < -1)
+//        return 0;
     if ((id.typeElement == elementSf2 || id.typeElement == elementRootSmpl || id.typeElement == elementRootInst \
          || id.typeElement == elementRootPrst) && id.indexSf2 == -1) return 1;
     // Vérification qu'indexSf2 est correct
