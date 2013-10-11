@@ -3,7 +3,7 @@
  <class>DialogVisualizer</class>
  <widget class="QDialog" name="DialogVisualizer">
   <property name="windowModality">
-   <enum>Qt::WindowModal</enum>
+   <enum>Qt::ApplicationModal</enum>
   </property>
   <property name="geometry">
    <rect>

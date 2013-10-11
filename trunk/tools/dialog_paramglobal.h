@@ -52,7 +52,8 @@ private slots:
     void eltChanged(QList<EltID> listElt);
 
 signals:
-    void accepted(QVector<double> dValues, QList<EltID> listElt, int typeModif, int param);
+    void accepted(QVector<double> dValues, QList<EltID> listElt, int typeModif, int param,
+                  int minVel, int maxVel);
 
 private:
     Pile_sf2 * _sf2;

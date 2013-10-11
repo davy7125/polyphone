@@ -141,6 +141,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent, Qt::Window | Qt::W
     connect(Config::getInstance(), SIGNAL(colorsChanged()), this->page_smpl, SLOT(updateColors()));
     // Initialisation des actions dans les configurations
     this->configuration->setListeActions(this->getListeActions());
+    // Passage du mapper au clavier
+    this->keyboard->setMapper(this->configuration->getMapper());
 }
 MainWindow::~MainWindow()
 {

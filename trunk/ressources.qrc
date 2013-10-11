@@ -70,6 +70,8 @@
         <file alias="couper_blanc">ressources/couper_blanc.png</file>
         <file alias="couper_fin_boucle">ressources/couper_fin_boucle.png</file>
         <file alias="monitor">ressources/monitor.png</file>
+        <file alias="octave_down">ressources/octave_down.png</file>
+        <file alias="octave_up">ressources/octave_up.png</file>
     </qresource>
     <qresource prefix="/aide">
         <file alias="help.html">ressources/doc/help.html</file>

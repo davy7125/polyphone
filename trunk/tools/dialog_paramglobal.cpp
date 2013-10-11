@@ -107,6 +107,8 @@ DialogParamGlobal::DialogParamGlobal(Pile_sf2 *sf2, EltID id, QWidget *parent) :
     ui->comboModif->blockSignals(false);
     ui->graphParamGlobal->setMinMax(conf->getTools_global_mini(_isPrst),
                                     conf->getTools_global_maxi(_isPrst));
+    ui->spinVelMin->setValue(conf->getTools_global_miniVel(_isPrst));
+    ui->spinVelMax->setValue(conf->getTools_global_maxiVel(_isPrst));
 
     // Initialisation id
     _listElt.append(id);
@@ -169,6 +171,8 @@ void DialogParamGlobal::accept()
     conf->setTools_global_parametre(_isPrst, this->ui->comboValeur->currentIndex());
     conf->setTools_global_miniX(_isPrst, this->ui->graphParamGlobal->getXmin());
     conf->setTools_global_maxiX(_isPrst, this->ui->graphParamGlobal->getXmax());
+    conf->setTools_global_miniVel(_isPrst, this->ui->spinVelMin->value());
+    conf->setTools_global_maxiVel(_isPrst, this->ui->spinVelMax->value());
     // Récupération et mise en forme des modificateurs
     QVector<double> dValues = this->ui->graphParamGlobal->getValues();
     double dMin = this->ui->doubleSpinMin->value();
@@ -176,7 +180,9 @@ void DialogParamGlobal::accept()
     for (int i = 0; i < dValues.size(); i++)
         dValues[i] = dValues.at(i) * (dMax - dMin) + dMin;
     emit(accepted(dValues, _listElt, this->ui->comboModif->currentIndex(),
-                  this->ui->comboValeur->itemData(this->ui->comboValeur->currentIndex()).toInt()));
+                  this->ui->comboValeur->itemData(this->ui->comboValeur->currentIndex()).toInt(),
+                  this->ui->spinVelMin->value(),
+                  this->ui->spinVelMax->value()));
     QDialog::accept();
 }
 void DialogParamGlobal::applyToOthers()

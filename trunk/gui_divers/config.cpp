@@ -118,6 +118,18 @@ Config::Config(QWidget *parent) : QDialog(parent),
     this->ui->label_2->setVisible(false);
     this->setColors();
 
+    // Initialisation mappage
+    octaveMapping = this->getOctaveMap();
+    mapper.setOctave(octaveMapping);
+    for (int i = 36; i <= 84; i++)
+        mapper.addCombinaisonKey(i, QKeySequence::fromString(getKeyMapped(i)));
+    mapper.addCombinaisonKey(48, QKeySequence::fromString(getKeyMapped(482)));
+    mapper.addCombinaisonKey(60, QKeySequence::fromString(getKeyMapped(602)));
+    mapper.addCombinaisonKey(72, QKeySequence::fromString(getKeyMapped(722)));
+    this->ui->tableKeyboardMap->setMapper(&mapper);
+    this->ui->tableKeyboardMap->setOctave(octaveMapping);
+    connect(ui->tableKeyboardMap, SIGNAL(combinaisonChanged(int,QString)), this, SLOT(combinaisonChanged(int, QString)));
+
     this->loaded = 1;
 }
 Config::~Config()
@@ -780,4 +792,31 @@ void Config::setTools_i_mixture_ranks(QList<QList<int> > val)
         listTmp << sousListTmp;
     }
     settings.setValue("tools/instrument/mixture_ranks", listTmp);
+}
+
+void Config::on_pushOctavePlus_clicked()
+{
+    if (octaveMapping < 4)
+    {
+        octaveMapping++;
+        this->setOctaveMap(octaveMapping);
+        this->mapper.setOctave(octaveMapping);
+        this->ui->tableKeyboardMap->setOctave(octaveMapping);
+    }
+}
+
+void Config::on_pushOctaveMoins_clicked()
+{
+    if (octaveMapping > -3)
+    {
+        octaveMapping--;
+        this->setOctaveMap(octaveMapping);
+        this->mapper.setOctave(octaveMapping);
+        this->ui->tableKeyboardMap->setOctave(octaveMapping);
+    }
+}
+
+void Config::combinaisonChanged(int numKey, QString combinaison)
+{
+    this->setKeyMapped(numKey, combinaison);
 }

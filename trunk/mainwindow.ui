@@ -1128,7 +1128,7 @@
      <normaloff>:/icones/dupliquer</normaloff>:/icones/dupliquer</iconset>
    </property>
    <property name="text">
-    <string>D&amp;uplication des divisions</string>
+    <string>D&amp;uplication des divisions...</string>
    </property>
    <property name="toolTip">
     <string>Duplique les divisions</string>
@@ -1250,7 +1250,10 @@
      <normaloff>:/icones/dupliquer</normaloff>:/icones/dupliquer</iconset>
    </property>
    <property name="text">
-    <string>&amp;Duplication des divisions</string>
+    <string>&amp;Duplication des divisions...</string>
+   </property>
+   <property name="iconText">
+    <string>Duplication des divisions</string>
    </property>
    <property name="toolTip">
     <string>Duplique les divisions</string>
