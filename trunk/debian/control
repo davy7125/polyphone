@@ -9,7 +9,7 @@ Homepage: http://www.polyphone.fr
 Package: polyphone
 Architecture: any
 Replaces: polyphone-0.1
-Depends: ${shlibs:Depends}, ${misc:Depends}, libx11-data, fontconfig-config, locales, libatk1.0-data, liborbit2, libicu48, libglib2.0-data, cups-filters, libqt4-svg, libasound2, libportaudio2
+Depends: ${shlibs:Depends}, ${misc:Depends}, libx11-data, fontconfig-config, locales, libatk1.0-data, liborbit2, libicu48, libglib2.0-data, cups-filters, libqt4-svg (>= 4:4.6.3), libasound2, libportaudio2
 Description: soundfont editor
  Polyphone is a free software for editing soundfonts in format sf2.
  These files contain a multitude of audio samples put together and

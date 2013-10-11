@@ -29,6 +29,7 @@
 #include <QDialog>
 #include <QString>
 #include <QSettings>
+#include "keymapper.h"
 
 namespace Ui
 {
@@ -157,6 +158,48 @@ public:
             return settings.value("tools/preset/global_maxiX", 140).toInt();
         else
             return settings.value("tools/instrument/global_maxiX", 140).toInt();
+    }
+    int    getTools_global_miniVel(bool isPrst)
+    {
+        if (isPrst)
+            return settings.value("tools/preset/global_miniVel", 0).toInt();
+        else
+            return settings.value("tools/instrument/global_miniVel", 0).toInt();
+    }
+    int    getTools_global_maxiVel(bool isPrst)
+    {
+        if (isPrst)
+            return settings.value("tools/preset/global_maxiVel", 127).toInt();
+        else
+            return settings.value("tools/instrument/global_maxiVel", 127).toInt();
+    }
+    QVector<int> getTools_duplication_velocites(bool isPrst)
+    {
+        QList<QVariant> listTmp, defaultList;
+        defaultList << 0 << 127;
+        if (isPrst)
+            listTmp = settings.value("tools/preset/duplication_velocites", defaultList).toList();
+        else
+            listTmp = settings.value("tools/instrument/duplication_velocites", defaultList).toList();
+        QVector<int> vectRet;
+        vectRet.resize(listTmp.size());
+        for (int i = 0; i < listTmp.size(); i++)
+            vectRet[i] = listTmp.at(i).toDouble();
+        return vectRet;
+    }
+    bool   getTools_duplication_duplicKey(bool isPrst)
+    {
+        if (isPrst)
+            return settings.value("tools/preset/duplication_duplicationKeys", true).toBool();
+        else
+            return settings.value("tools/instrument/duplication_duplicationKeys", true).toBool();
+    }
+    bool   getTools_duplication_duplicVel(bool isPrst)
+    {
+        if (isPrst)
+            return settings.value("tools/preset/duplication_duplicationVelocity", false).toBool();
+        else
+            return settings.value("tools/instrument/duplication_duplicationVelocity", false).toBool();
     }
     int    getTools_visualizer_parameter(bool isPrst)
     {
@@ -304,6 +347,44 @@ public:
         else
             settings.setValue("tools/instrument/global_maxiX", val);
     }
+    void setTools_global_miniVel(bool isPrst, int val)
+    {
+        if (isPrst)
+            settings.setValue("tools/preset/global_miniVel", val);
+        else
+            settings.setValue("tools/instrument/global_miniVel", val);
+    }
+    void setTools_global_maxiVel(bool isPrst, int val)
+    {
+        if (isPrst)
+            settings.setValue("tools/preset/global_maxiVel", val);
+        else
+            settings.setValue("tools/instrument/global_maxiVel", val);
+    }
+    void setTools_duplication_velocites(bool isPrst, QVector<int> val)
+    {
+        QVariantList listTmp;
+        for (int i = 0; i < val.size(); i++)
+            listTmp << val.at(i);
+        if (isPrst)
+            settings.setValue("tools/preset/duplication_velocites", listTmp);
+        else
+            settings.setValue("tools/instrument/duplication_velocites", listTmp);
+    }
+    void setTools_duplication_duplicKey(bool isPrst, bool val)
+    {
+        if (isPrst)
+            settings.setValue("tools/preset/duplication_duplicationKeys", val);
+        else
+            settings.setValue("tools/instrument/duplication_duplicationKeys", val);
+    }
+    void setTools_duplication_duplicVel(bool isPrst, bool val)
+    {
+        if (isPrst)
+            settings.setValue("tools/preset/duplication_duplicationVelocity", val);
+        else
+            settings.setValue("tools/instrument/duplication_duplicationVelocity", val);
+    }
     void setTools_visualizer_parameter(bool isPrst, int val)
     {
         if (isPrst)
@@ -378,6 +459,80 @@ public:
         settings.setValue("warnings/to_many_generators", activated);
     }
 
+    // Mappage
+    QString getKeyMapped(int num)
+    {
+        QString txt = "";
+        switch (num)
+        {
+        case 36:    txt = trUtf8("w");      break;
+        case 37:    txt = trUtf8("s");      break;
+        case 38:    txt = trUtf8("x");      break;
+        case 39:    txt = trUtf8("d");      break;
+        case 40:    txt = trUtf8("c");      break;
+        case 41:    txt = trUtf8("v");      break;
+        case 42:    txt = trUtf8("g");      break;
+        case 43:    txt = trUtf8("b");      break;
+        case 44:    txt = trUtf8("h");      break;
+        case 45:    txt = trUtf8("n");      break;
+        case 46:    txt = trUtf8("j");      break;
+        case 47:    txt = trUtf8(",");      break;
+        case 48:    txt = trUtf8(";");      break;
+        case 482:   txt = trUtf8("a");      break;
+        case 49:    txt = trUtf8("é");      break;
+        case 50:    txt = trUtf8("z");      break;
+        case 51:    txt = trUtf8("\"");     break;
+        case 52:    txt = trUtf8("e");      break;
+        case 53:    txt = trUtf8("r");      break;
+        case 54:    txt = trUtf8("(");      break;
+        case 55:    txt = trUtf8("t");      break;
+        case 56:    txt = trUtf8("-");      break;
+        case 57:    txt = trUtf8("y");      break;
+        case 58:    txt = trUtf8("è");      break;
+        case 59:    txt = trUtf8("u");      break;
+        case 60:    txt = trUtf8("i");      break;
+        case 602:   txt = trUtf8("Shift+w");break;
+        case 61:    txt = trUtf8("Shift+s");break;
+        case 62:    txt = trUtf8("Shift+x");break;
+        case 63:    txt = trUtf8("Shift+d");break;
+        case 64:    txt = trUtf8("Shift+c");break;
+        case 65:    txt = trUtf8("Shift+v");break;
+        case 66:    txt = trUtf8("Shift+g");break;
+        case 67:    txt = trUtf8("Shift+b");break;
+        case 68:    txt = trUtf8("Shift+h");break;
+        case 69:    txt = trUtf8("Shift+n");break;
+        case 70:    txt = trUtf8("Shift+j");break;
+        case 71:    txt = trUtf8("Shift+?");break;
+        case 72:    txt = trUtf8("Shift+.");break;
+        case 722:   txt = trUtf8("Shift+a");break;
+        case 73:    txt = trUtf8("Shift+2");break;
+        case 74:    txt = trUtf8("Shift+z");break;
+        case 75:    txt = trUtf8("Shift+3");break;
+        case 76:    txt = trUtf8("Shift+e");break;
+        case 77:    txt = trUtf8("Shift+r");break;
+        case 78:    txt = trUtf8("Shift+5");break;
+        case 79:    txt = trUtf8("Shift+t");break;
+        case 80:    txt = trUtf8("Shift+6");break;
+        case 81:    txt = trUtf8("Shift+y");break;
+        case 82:    txt = trUtf8("Shift+7");break;
+        case 83:    txt = trUtf8("Shift+u");break;
+        case 84:    txt = trUtf8("Shift+i");break;
+        }
+        return settings.value("map/key_" + QString::number(num), txt).toString();
+    }
+    void setKeyMapped(int num, QString txt)
+    {
+        settings.setValue("map/key_" + QString::number(num), txt);
+    }
+    int getOctaveMap()
+    {
+        return settings.value("map/octave_offset", 0).toInt();
+    }
+    void setOctaveMap(int octave)
+    {
+        settings.setValue("map/octave_offset", octave);
+    }
+
     // Gestion des fichiers
     QString getLastFile(TypeFichier typeFichier, int num=0);
     QString getLastDirectory(TypeFichier typeFichier);
@@ -386,6 +541,7 @@ public:
     void show();
     // Initialisation
     void setListeActions(QList<QAction *> actions);
+    KeyMapper * getMapper() { return &mapper; }
 
 signals:
     void colorsChanged();
@@ -424,6 +580,9 @@ private slots:
     void on_pushResetToolbar_clicked();
     void on_listToolbar_itemSelectionChanged();
     void on_listActions_itemSelectionChanged();
+    void on_pushOctavePlus_clicked();
+    void on_pushOctaveMoins_clicked();
+    void combinaisonChanged(int numKey, QString combinaison);
 
 private:
     QSettings settings;
@@ -453,6 +612,9 @@ private:
     QByteArray actionListToolbar;
     // Autres
     bool loaded;
+    KeyMapper mapper;
+    int octaveMapping;
+
     // Méthodes privées
     explicit Config(QWidget *parent = 0);
     void load();

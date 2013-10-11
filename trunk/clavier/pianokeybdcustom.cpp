@@ -55,7 +55,8 @@ void midiCallback(double deltatime, std::vector< unsigned char > *message, void 
 
 // Constructeur, destructeur
 PianoKeybdCustom::PianoKeybdCustom(QWidget *parent) : PianoKeybd(parent),
-    midiin(NULL)
+    midiin(NULL),
+    _mapper(NULL)
 {
     this->setFrameStyle(0);
     // Connexion midi

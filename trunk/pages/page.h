@@ -379,6 +379,7 @@ private:
     int getAssociatedMod(EltID id);
     int limit(int iVal, Champ champ, EltID id);
     void duplication(EltID id);
+    void duplication(EltID id, QVector<int> listeVelocite);
 
     static QList<Modulator> _modulatorCopy;
     QList<int> _listKeyEnlighted;
@@ -402,8 +403,9 @@ protected slots:
     void pasteMod();
 
 private slots:
-    void paramGlobal(QVector<double> dValues, QList<EltID> listElt, int typeModif, int champ);
+    void paramGlobal(QVector<double> dValues, QList<EltID> listElt, int typeModif, int champ, int velMin, int velMax);
     void spatialisation(int motif, int nbDiv, int etalement, int occupation, int offset, int sens, int sens2);
+    void duplication(QVector<int> listeVelocites, bool duplicKey, bool duplicVel);
 };
 
 
