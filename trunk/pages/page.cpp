@@ -28,6 +28,7 @@
 #include "dialog_paramglobal.h"
 #include "dialog_visualizer.h"
 #include "dialog_space.h"
+#include "dialog_duplication.h"
 #include <QScrollBar>
 
 
@@ -901,42 +902,30 @@ void PageTable::afficher()
             // Ajout d'un élément lié
             numCol = 1;
             // Détermination de la colonne
+            Champ cElementLie;
             if (this->contenant == elementInst)
-            {
-                id3.indexElt = this->sf2->get(id, champ_sampleID).wValue;
-                sprintf(str, "%.03d%s", this->sf2->get(id, champ_keyRange).rValue.byLo, \
-                        this->sf2->getQstr(id3, champ_name).toStdString().c_str());
-                qStr = this->sf2->getQstr(id3, champ_name).left(10);
-                qStr.append("\n");
-                qStr.append(this->sf2->getQstr(id3, champ_name).mid(10).left(10));
-                for (int j = 1; j < nbSmplInst+1; j++)
-                {
-                    // note basse de la colonne, et prise en compte du nom du sample lié
-                    id3.indexElt = this->sf2->get(this->table->getID(j), champ_sampleID).wValue;
-                    sprintf(str2, "%.03d%s", this->sf2->get(this->table->getID(j), champ_keyRange).rValue.byLo, \
-                            this->sf2->getQstr(id3, champ_name).toStdString().c_str());
-                    if (strcmp(str, str2) > 0)
-                        numCol++;
-                }
-            }
+                cElementLie = champ_sampleID;
             else
+                cElementLie = champ_instrument;
+
+            id3.indexElt = this->sf2->get(id, cElementLie).wValue;
+            sprintf(str, "%.03d%.03d%s", this->sf2->get(id, champ_keyRange).rValue.byLo,
+                    this->sf2->get(id, champ_velRange).rValue.byLo,
+                    this->sf2->getQstr(id3, champ_name).toStdString().c_str());
+            qStr = this->sf2->getQstr(id3, champ_name).left(10);
+            qStr.append("\n");
+            qStr.append(this->sf2->getQstr(id3, champ_name).mid(10).left(10));
+            for (int j = 1; j < nbSmplInst+1; j++)
             {
-                id3.indexElt = this->sf2->get(id, champ_instrument).wValue;
-                sprintf(str, "%.03d%s", this->sf2->get(id, champ_keyRange).rValue.byLo, \
+                // note et vélocité basses de la colonne et prise en compte du nom de l'élément lié
+                id3.indexElt = this->sf2->get(this->table->getID(j), cElementLie).wValue;
+                sprintf(str2, "%.03d%.03d%s", this->sf2->get(this->table->getID(j), champ_keyRange).rValue.byLo,
+                        this->sf2->get(this->table->getID(j), champ_velRange).rValue.byLo,
                         this->sf2->getQstr(id3, champ_name).toStdString().c_str());
-                qStr = this->sf2->getQstr(id3, champ_name).left(10);
-                qStr.append("\n");
-                qStr.append(this->sf2->getQstr(id3, champ_name).mid(10).left(10));
-                for (int j = 1; j < nbSmplInst+1; j++)
-                {
-                    // note basse de la colonne, et prise en compte du nom de l'instrument lié
-                    id3.indexElt = this->sf2->get(this->table->getID(j), champ_instrument).wValue;
-                    sprintf(str2, "%.03d%s", this->sf2->get(this->table->getID(j), champ_keyRange).rValue.byLo, \
-                            this->sf2->getQstr(id3, champ_name).toStdString().c_str());
-                    if (strcmp(str, str2) > 0)
-                        numCol++;
-                }
+                if (strcmp(str, str2) > 0)
+                    numCol++;
             }
+
             nbSmplInst++;
             offsetStart = 0;
             offsetEnd = 0;
@@ -2799,14 +2788,20 @@ void PageTable::paramGlobal()
     }
     DialogParamGlobal * dialogParam = new DialogParamGlobal(this->sf2, id, this);
     dialogParam->setAttribute(Qt::WA_DeleteOnClose, true);
-    this->connect(dialogParam, SIGNAL(accepted(QVector<double>,QList<EltID>,int,int)),
-                  SLOT(paramGlobal(QVector<double>,QList<EltID>,int,int)));
+    this->connect(dialogParam, SIGNAL(accepted(QVector<double>,QList<EltID>,int,int,int,int)),
+                  SLOT(paramGlobal(QVector<double>,QList<EltID>,int,int,int,int)));
     dialogParam->show();
 }
-void PageTable::paramGlobal(QVector<double> dValues, QList<EltID> listElt, int typeModif, int champ)
+void PageTable::paramGlobal(QVector<double> dValues, QList<EltID> listElt, int typeModif, int champ, int velMin, int velMax)
 {
     // Modification de tous les éléments
     EltID id;
+    if (velMin > velMax)
+    {
+        int tmp = velMin;
+        velMin = velMax;
+        velMax = tmp;
+    }
     for (int numID = 0; numID < listElt.size(); numID++)
     {
         // Pos min et max sur le clavier
@@ -2827,29 +2822,45 @@ void PageTable::paramGlobal(QVector<double> dValues, QList<EltID> listElt, int t
             id.indexElt2 = i;
             if (!this->sf2->get(id, champ_hidden).bValue)
             {
-                amount = QString(getTextValue(T, (Champ)champ, this->sf2->get(id, (Champ)champ).genValue)).toDouble();
-                // Calcul de la modification
-                pos = (double)(this->sf2->get(id, champ_keyRange).rValue.byLo +
-                       this->sf2->get(id, champ_keyRange).rValue.byHi) / 2 * dValues.size() / 127. + 0.5;
-                if (pos < 0)
-                    pos = 0;
-                else if (pos >= dValues.size())
-                    pos = dValues.size() - 1;
-                // Application de la modification
-                switch (typeModif)
+                int velMin2 = 0;
+                int velMax2 = 127;
+                if (this->sf2->isSet(id, champ_velRange))
                 {
-                case 0: // Ajout
-                    amount += dValues.at(pos);
-                    break;
-                case 1: // Multiplication
-                    amount *= dValues.at(pos);
-                    break;
-                case 2: // Remplacement
-                    amount = dValues.at(pos);
-                    break;
+                    velMin2 = this->sf2->get(id, champ_velRange).rValue.byLo;
+                    velMax2 = this->sf2->get(id, champ_velRange).rValue.byHi;
                 }
-                value.genValue = getValue(QString::number(amount), (Champ)champ, ok);
-                this->sf2->set(id, (Champ)champ, value);
+                if (velMin2 > velMax2)
+                {
+                    int tmp = velMin2;
+                    velMin2 = velMax2;
+                    velMax2 = tmp;
+                }
+                if (velMin2 >= velMin && velMax2 <= velMax)
+                {
+                    amount = QString(getTextValue(T, (Champ)champ, this->sf2->get(id, (Champ)champ).genValue)).toDouble();
+                    // Calcul de la modification
+                    pos = (double)(this->sf2->get(id, champ_keyRange).rValue.byLo +
+                           this->sf2->get(id, champ_keyRange).rValue.byHi) / 2 * dValues.size() / 127. + 0.5;
+                    if (pos < 0)
+                        pos = 0;
+                    else if (pos >= dValues.size())
+                        pos = dValues.size() - 1;
+                    // Application de la modification
+                    switch (typeModif)
+                    {
+                    case 0: // Ajout
+                        amount += dValues.at(pos);
+                        break;
+                    case 1: // Multiplication
+                        amount *= dValues.at(pos);
+                        break;
+                    case 2: // Remplacement
+                        amount = dValues.at(pos);
+                        break;
+                    }
+                    value.genValue = getValue(QString::number(amount), (Champ)champ, ok);
+                    this->sf2->set(id, (Champ)champ, value);
+                }
             }
         }
     }
@@ -2878,23 +2889,45 @@ void PageTable::duplication()
             return;
         }
     }
-    // Obtention d'une division par note
+    DialogDuplication * dialogDuplication = new DialogDuplication(m_typePage == PAGE_PRST, this);
+    dialogDuplication->setAttribute(Qt::WA_DeleteOnClose, true);
+    this->connect(dialogDuplication, SIGNAL(accepted(QVector<int>,bool,bool)),
+                  SLOT(duplication(QVector<int>,bool,bool)));
+    dialogDuplication->show();
+}
+void PageTable::duplication(QVector<int> listeVelocites, bool duplicKey, bool duplicVel)
+{
     this->sf2->prepareNewActions();
-    // Reprise de l'identificateur si modification
-    id = this->tree->getID(0);
-    // Modification pour chaque élément lié
-    EltID id2 = id;
+    EltID id = this->tree->getID(0);
     if (m_typePage == PAGE_INST)
-        id2.typeElement = elementInstSmpl;
+        id.typeElement = elementInstSmpl;
     else
-        id2.typeElement = elementPrstInst;
-    int nbElementsLies = this->sf2->count(id2);
-    for (int i = 0; i < nbElementsLies; i++)
+        id.typeElement = elementPrstInst;
+
+    // Duplication pour chaque note
+    if (duplicKey)
     {
-        id2.indexElt2 = i;
-        if (!this->sf2->get(id2, champ_hidden).bValue)
-            this->duplication(id2);
+        int nbElementsLies = this->sf2->count(id);
+        for (int i = 0; i < nbElementsLies; i++)
+        {
+            id.indexElt2 = i;
+            if (!this->sf2->get(id, champ_hidden).bValue)
+                this->duplication(id);
+        }
     }
+
+    // Duplication pour chaque velocityRange
+    if (duplicVel)
+    {
+        int nbElementsLies = this->sf2->count(id);
+        for (int i = 0; i < nbElementsLies; i++)
+        {
+            id.indexElt2 = i;
+            if (!this->sf2->get(id, champ_hidden).bValue)
+                this->duplication(id, listeVelocites);
+        }
+    }
+
     // Actualisation
     this->mainWindow->updateDo();
     this->afficher();
@@ -2908,6 +2941,12 @@ void PageTable::duplication(EltID id)
     {
         numBas = this->sf2->get(id, champ_keyRange).rValue.byLo;
         numHaut = this->sf2->get(id, champ_keyRange).rValue.byHi;
+        if (numBas > numHaut)
+        {
+            int temp = numBas;
+            numBas = numHaut;
+            numHaut = temp;
+        }
     }
     if (numBas != numHaut)
     {
@@ -2946,6 +2985,163 @@ void PageTable::duplication(EltID id)
             val.rValue.byLo = i;
             val.rValue.byHi = i;
             this->sf2->set(id2, champ_keyRange, val);
+            // Recopiage des mods
+            if (m_typePage == PAGE_INST)
+            {
+                id.typeElement = elementInstSmplMod;
+                id2.typeElement = elementInstSmplMod;
+            }
+            else
+            {
+                id.typeElement = elementPrstInstMod;
+                id2.typeElement = elementPrstInstMod;
+            }
+            for (int j = 0; j < this->sf2->count(id); j++)
+            {
+                id.indexMod = j;
+                id2.indexMod = this->sf2->add(id2);
+                this->sf2->set(id2, champ_modAmount, this->sf2->get(id, champ_modAmount));
+                this->sf2->set(id2, champ_sfModSrcOper, this->sf2->get(id, champ_sfModSrcOper));
+                this->sf2->set(id2, champ_sfModAmtSrcOper, this->sf2->get(id, champ_sfModAmtSrcOper));
+                this->sf2->set(id2, champ_sfModDestOper, this->sf2->get(id, champ_sfModDestOper));
+                this->sf2->set(id2, champ_sfModTransOper, this->sf2->get(id, champ_sfModTransOper));
+            }
+        }
+    }
+}
+void PageTable::duplication(EltID id, QVector<int> listeVelocite)
+{
+    QVector<bool> rangeOk;
+    rangeOk.fill(false, listeVelocite.size() / 2);
+
+    // Element lié
+    int idLinked;
+    if (m_typePage == PAGE_INST)
+        idLinked = this->sf2->get(id, champ_sampleID).wValue;
+    else
+        idLinked = this->sf2->get(id, champ_instrument).wValue;
+
+    // Keyrange
+    int noteMin = 0;
+    int noteMax = 127;
+    if (this->sf2->isSet(id, champ_keyRange))
+    {
+        noteMin = this->sf2->get(id, champ_keyRange).rValue.byLo;
+        noteMax = this->sf2->get(id, champ_keyRange).rValue.byHi;
+        if (noteMin > noteMax)
+        {
+            int tmp = noteMin;
+            noteMin = noteMax;
+            noteMax = tmp;
+        }
+    }
+
+    // On scanne tous les éléments liés pour savoir si des étendues sont déjà présentes
+    bool selfOk = false;
+    int indexSelf = id.indexElt2;
+    int nbElementsLies = this->sf2->count(id);
+    for (int i = 0; i < nbElementsLies; i++)
+    {
+        id.indexElt2 = i;
+        if (!this->sf2->get(id, champ_hidden).bValue)
+        {
+            // Keyrange
+            int noteMin2 = 0;
+            int noteMax2 = 127;
+            if (this->sf2->isSet(id, champ_keyRange))
+            {
+                noteMin2 = this->sf2->get(id, champ_keyRange).rValue.byLo;
+                noteMax2 = this->sf2->get(id, champ_keyRange).rValue.byHi;
+                if (noteMin2 > noteMax2)
+                {
+                    int tmp = noteMin2;
+                    noteMin2 = noteMax2;
+                    noteMax2 = tmp;
+                }
+            }
+            int idLinked2;
+            if (m_typePage == PAGE_INST)
+                idLinked2 = this->sf2->get(id, champ_sampleID).wValue;
+            else
+                idLinked2 = this->sf2->get(id, champ_instrument).wValue;
+
+            if (noteMin == noteMin2 && noteMax == noteMax2 && idLinked == idLinked2)
+            {
+                int velMin2 = 0;
+                int velMax2 = 127;
+                if (this->sf2->isSet(id, champ_keyRange))
+                {
+                    velMin2 = this->sf2->get(id, champ_velRange).rValue.byLo;
+                    velMax2 = this->sf2->get(id, champ_velRange).rValue.byHi;
+                    if (velMin2 > velMax2)
+                    {
+                        int tmp = velMin2;
+                        velMin2 = velMax2;
+                        velMax2 = tmp;
+                    }
+                }
+
+                for (int j = 0; j < listeVelocite.size() / 2; j++)
+                {
+                    int velMin = qMin(listeVelocite.at(2 * j), listeVelocite.at(2 * j + 1));
+                    int velMax = qMax(listeVelocite.at(2 * j), listeVelocite.at(2 * j + 1));
+
+                    if (velMin == velMin2 && velMax == velMax2)
+                    {
+                        rangeOk[j] = true;
+                        if (i == indexSelf)
+                            selfOk = true;
+                    }
+                }
+            }
+        }
+    }
+
+    if (rangeOk.indexOf(false) != -1)
+    {
+        id.indexElt2 = indexSelf;
+
+        if (!selfOk)
+        {
+            // Modification de l'étendue de vélocité de l'élément de départ
+            int pos = rangeOk.indexOf(false);
+            rangeOk[pos] = true;
+            Valeur val;
+            val.rValue.byLo = qMin(listeVelocite.at(2 * pos), listeVelocite.at(2 * pos + 1));
+            val.rValue.byHi = qMax(listeVelocite.at(2 * pos), listeVelocite.at(2 * pos + 1));
+            this->sf2->set(id, champ_velRange, val);
+        }
+
+        while (rangeOk.indexOf(false) != -1)
+        {
+            // Duplication
+            if (m_typePage == PAGE_INST)
+                id.typeElement = elementInstSmpl;
+            else
+                id.typeElement = elementPrstInst;
+            EltID id2 = id;
+            id2.indexElt2 = this->sf2->add(id);
+
+            // Recopiage des gens
+            if (m_typePage == PAGE_INST)
+                id.typeElement = elementInstSmplGen;
+            else
+                id.typeElement = elementPrstInstGen;
+            for (int j = 0; j < this->sf2->count(id); j++)
+            {
+                id.indexMod = j;
+                this->sf2->set(id2, (Champ)this->sf2->get(id, champ_sfGenOper).wValue,
+                               this->sf2->get(id, champ_sfGenAmount));
+            }
+
+            // Modification étendue de vélocité
+            int pos = rangeOk.indexOf(false);
+            rangeOk[pos] = true;
+            Valeur val;
+            val.rValue.byLo = qMin(listeVelocite.at(2 * pos), listeVelocite.at(2 * pos + 1));
+            val.rValue.byHi = qMax(listeVelocite.at(2 * pos), listeVelocite.at(2 * pos + 1));
+            this->sf2->set(id2, champ_velRange, val);
+
             // Recopiage des mods
             if (m_typePage == PAGE_INST)
             {

@@ -113,7 +113,11 @@ SOURCES	+= main.cpp \
     gui_divers/dialog_rename.cpp \
     tools/dialog_magnetophone.cpp \
     tools/dialog_celeste.cpp \
-    tools/dialog_visualizer.cpp
+    tools/dialog_visualizer.cpp \
+    tools/dialog_duplication.cpp \
+    clavier/keymapper.cpp \
+    gui_divers/editkey.cpp \
+    gui_divers/tablekey.cpp
 
 HEADERS  += mainwindow.h \
     sf2_core/sf2_types.h \
@@ -166,7 +170,11 @@ HEADERS  += mainwindow.h \
     gui_divers/dialog_rename.h \
     tools/dialog_magnetophone.h \
     tools/dialog_celeste.h \
-    tools/dialog_visualizer.h
+    tools/dialog_visualizer.h \
+    tools/dialog_duplication.h \
+    clavier/keymapper.h \
+    gui_divers/editkey.h \
+    gui_divers/tablekey.h
 
 FORMS    += mainwindow.ui \
     gui_divers/config.ui \
@@ -186,7 +194,8 @@ FORMS    += mainwindow.ui \
     gui_divers/dialog_rename.ui \
     tools/dialog_magnetophone.ui \
     tools/dialog_celeste.ui \
-    tools/dialog_visualizer.ui
+    tools/dialog_visualizer.ui \
+    tools/dialog_duplication.ui
 
 RESOURCES += ressources.qrc \
     clavier/pianokeybd.qrc
