@@ -83,8 +83,7 @@ public:
                 int nbElt = this->getSelectedItemsNumber();
                 if (nbElt > 0 && this->idList.size())
                 {
-                    if (this->isSelectedItemsSf2Unique() && this->isSelectedItemsTypeUnique() && \
-                            (this->getID(0).typeElement == elementSmpl || this->isSelectedItemsFamilyUnique()))
+                    if (this->isSelectedItemsSf2Unique() && this->isSelectedItemsTypeUnique())
                     {
                         EltID idDest = this->getID(0);
                         int *msg = new int[4]; // Messages (delete dans mainwindow)

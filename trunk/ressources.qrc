@@ -72,6 +72,7 @@
         <file alias="monitor">ressources/monitor.png</file>
         <file alias="octave_down">ressources/octave_down.png</file>
         <file alias="octave_up">ressources/octave_up.png</file>
+        <file alias="export2">ressources/export2.png</file>
     </qresource>
     <qresource prefix="/aide">
         <file alias="help.html">ressources/doc/help.html</file>
@@ -136,5 +137,10 @@
         <file alias="polyphone_en.qm">ressources/traductions/polyphone_en.qm</file>
         <file alias="polyphone_de.qm">ressources/traductions/polyphone_de.qm</file>
         <file alias="polyphone_nl.qm">ressources/traductions/polyphone_nl.qm</file>
+    </qresource>
+    <qresource prefix="/logo">
+        <file alias="noel">ressources/logo_noel.png</file>
+        <file alias="halloween">ressources/logo_halloween.png</file>
+        <file alias="valentin">ressources/logo_valentin.png</file>
     </qresource>
 </RCC>

@@ -100,6 +100,7 @@ private slots:
     void dragAndDrop(EltID idDest, EltID idSrc, int temps, int *msg, QByteArray *ba1, QByteArray *ba2);
     void importerSmpl();        // Import d'un sample
     void exporterSmpl();        // Export d'un sample
+    void exporterSfz();         // Export sous le format sfz
     void nouvelInstrument();    // Création d'un instrument
     void nouveauPreset();       // Création d'un preset
     void associer();            // Association InstSmpl et PrstInst
