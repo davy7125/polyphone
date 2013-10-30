@@ -111,7 +111,7 @@ private:
     QByteArray getDataWav(QByteArray baData, WORD byte);
     void getInfoSoundWav();
     void getInfoSoundWav(QByteArray baData);
-    static void exporter(QString fileName, QByteArray baData, quint32 dwSmplRate, WORD wBps, WORD wChan, Sound son1);
+    static void exporter(QString fileName, QByteArray baData, InfoSound info);
     static void FFT_calculate(Complex * x, long N /* must be a power of 2 */,
             Complex * X, Complex * scratch, Complex * twiddles);
     static double moyenne(QByteArray baData, WORD wBps);

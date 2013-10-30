@@ -26,6 +26,7 @@
 #include "ui_mainwindow.h"
 #include "sound.h"
 #include "dialog_rename.h"
+#include "conversion_sfz.h"
 #include <QFileDialog>
 #include <QInputDialog>
 #if QT_VERSION >= QT_VERSION_CHECK(5, 0, 0)
@@ -143,6 +144,14 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent, Qt::Window | Qt::W
     this->configuration->setListeActions(this->getListeActions());
     // Passage du mapper au clavier
     this->keyboard->setMapper(this->configuration->getMapper());
+
+    QDate date = QDate::currentDate();
+    if (date.month() == 10 && date.day() == 31)
+        this->ui->label->setPixmap(QPixmap(":/logo/halloween"));
+    else if (date.month() == 12 && (date.day() == 24 || date.day() == 25))
+        this->ui->label->setPixmap(QPixmap(":/logo/noel"));
+    else if (date.month() == 2 && date.day() == 14)
+        this->ui->label->setPixmap(QPixmap(":/logo/valentin"));
 }
 MainWindow::~MainWindow()
 {
@@ -733,8 +742,9 @@ void MainWindow::updateActions()
                 ui->actionRenommer->setEnabled(0);
             }
         }
-        // Actions enregistrer sous
-        ui->actionEnregistrer_sous->setEnabled(1);
+        // Actions enregistrer sous, exporter sfz
+        ui->actionEnregistrer_sous->setEnabled(true);
+        ui->actionExporter_en_tant_qu_sfz->setEnabled(true);
         // Action exporter
         if ((typeUnique && type == elementSmpl) || (familleUnique && type == elementInstSmpl))
             ui->actionExporter->setEnabled(1);
@@ -781,8 +791,9 @@ void MainWindow::updateActions()
         // Actions importer, exporter
         ui->actionImporter->setEnabled(0);
         ui->actionExporter->setEnabled(0);
-        // Actions enregistrer sous
+        // Actions enregistrer sous, exporter en sfz
         ui->actionEnregistrer_sous->setEnabled(0);
+        ui->actionExporter_en_tant_qu_sfz->setEnabled(0);
         // Nouveau sample, instrument, preset
         ui->actionNouveau_preset->setEnabled(0);
         ui->actionNouvel_instrument->setEnabled(0);
@@ -1646,8 +1657,8 @@ void MainWindow::dragAndDrop(EltID idDest, EltID idSrc, int temps, int *msg, QBy
             else
             {
                 // Vérification qu'un emplacement dans la banque est disponible
-                int numPreset;
-                int numBank;
+                int numPreset = this->sf2->get(idSrc, champ_wPreset).wValue;
+                int numBank = this->sf2->get(idSrc, champ_wBank).wValue;
                 this->page_prst->firstAvailablePresetBank(idDest, numBank, numPreset);
                 if (numPreset == -1)
                 {
@@ -1997,14 +2008,12 @@ void MainWindow::exporterSmpl()
 {
     int nbElt = ui->arborescence->getSelectedItemsNumber();
     if (nbElt == 0) return;
-    EltID id;
     QString qDir = QFileDialog::getExistingDirectory(this, trUtf8("Choisir un répertoire de destination"), \
                                                      Config::getInstance()->getLastDirectory(Config::typeFichierSample));
     if (qDir.isEmpty()) return;
     qDir.append(QDir::separator());
     QFile file;
-    EltID id2;
-    id = this->ui->arborescence->getID(0);
+    EltID id = this->ui->arborescence->getID(0);
     id.typeElement = elementSmpl;
     // Initialisation des états d'exportation des samples
     int nbSmpl = this->sf2->count(id);
@@ -2015,6 +2024,7 @@ void MainWindow::exporterSmpl()
     int sampleID = -1;
     int sampleID2 = -1;
     QString qStr, qStr2;
+    EltID id2;
     for (int i = 0; i < nbElt; i++)
     {
         id = this->ui->arborescence->getID(i);
@@ -2106,6 +2116,18 @@ void MainWindow::exporterSmpl()
     }
     delete [] status;
 }
+
+void MainWindow::exporterSfz()
+{
+    int nbElt = ui->arborescence->getSelectedItemsNumber();
+    if (nbElt == 0) return;
+    QString qDir = QFileDialog::getExistingDirectory(this, trUtf8("Choisir un répertoire de destination"), \
+                                                     Config::getInstance()->getLastDirectory(Config::typeFichierSfz));
+    if (qDir.isEmpty()) return;
+    ConversionSfz converter(this->sf2);
+    Config::getInstance()->addFile(Config::typeFichierSfz, converter.convert(qDir, this->ui->arborescence->getID(0)));
+}
+
 void MainWindow::nouvelInstrument()
 {
     int nb = ui->arborescence->getSelectedItemsNumber();
@@ -2133,8 +2155,8 @@ void MainWindow::nouveauPreset()
     if (nb == 0) return;
     EltID id = ui->arborescence->getID(0);
     // Vérification qu'un preset est disponible
-    int nPreset;
-    int nBank;
+    int nPreset = -1;
+    int nBank = -1;
     this->page_prst->firstAvailablePresetBank(id, nBank, nPreset);
     if (nPreset == -1)
     {
@@ -2790,7 +2812,8 @@ QList<QAction *> MainWindow::getListeActions()
                 << ui->actionR_gler_att_nuation_minimale
                 << ui->actionMagn_tophone
                 << ui->actionSommaire
-                << ui->action_Visualiseur;
+                << ui->action_Visualiseur
+                << ui->actionExporter_en_tant_qu_sfz;
     return listeAction;
 }
 void MainWindow::setListeActions(QList<QAction *> listeActions)

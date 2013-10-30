@@ -198,6 +198,7 @@
     <addaction name="separator"/>
     <addaction name="actionImporter"/>
     <addaction name="actionExporter"/>
+    <addaction name="actionExporter_en_tant_qu_sfz"/>
     <addaction name="separator"/>
     <addaction name="actionFichier_1"/>
     <addaction name="actionFichier_2"/>
@@ -918,7 +919,7 @@
      <normaloff>:/icones/wave</normaloff>:/icones/wave</iconset>
    </property>
    <property name="text">
-    <string>&amp;Importer ...</string>
+    <string>&amp;Importer sample...</string>
    </property>
    <property name="toolTip">
     <string>Importe un fichier audio</string>
@@ -933,7 +934,7 @@
      <normaloff>:/icones/export</normaloff>:/icones/export</iconset>
    </property>
    <property name="text">
-    <string>E&amp;xporter ...</string>
+    <string>E&amp;xporter sample...</string>
    </property>
    <property name="toolTip">
     <string>Exporte au format wav</string>
@@ -1359,6 +1360,21 @@
    </property>
    <property name="toolTip">
     <string>Dispose les sons dans l'espace</string>
+   </property>
+  </action>
+  <action name="actionExporter_en_tant_qu_sfz">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="ressources.qrc">
+     <normaloff>:/icones/export2</normaloff>:/icones/export2</iconset>
+   </property>
+   <property name="text">
+    <string>Exporter (sf&amp;z)</string>
+   </property>
+   <property name="toolTip">
+    <string>Exporter en tant que fichier sfz</string>
    </property>
   </action>
  </widget>
@@ -2374,6 +2390,22 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>actionExporter_en_tant_qu_sfz</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>exporterSfz()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>471</x>
+     <y>215</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>ouvrir()</slot>
@@ -2429,5 +2461,6 @@
   <slot>magnetophone()</slot>
   <slot>showToolBarManager()</slot>
   <slot>visualize()</slot>
+  <slot>exporterSfz()</slot>
  </slots>
 </ui>

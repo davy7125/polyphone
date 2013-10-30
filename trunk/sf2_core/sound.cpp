@@ -43,9 +43,7 @@ Sound::Sound(QString filename)
     this->info.wBpsFile = 0;
     this->setFileName(filename);
 }
-Sound::~Sound()
-{
-}
+Sound::~Sound() {}
 
 ////////////////////////////////////////////////////////////////////////////
 //////////////////////////   METHODES PUBLIQUES   //////////////////////////
@@ -465,8 +463,12 @@ void Sound::exporter(QString fileName, Sound son)
     else
         wBps = 16;
     QByteArray baData = son.getData(wBps);
+
     // Création d'un fichier
-    exporter(fileName, baData, son.info.dwSampleRate, wBps, 1, son);
+    InfoSound info = son.info;
+    info.wBpsFile = wBps;
+    info.wChannels = 1;
+    exporter(fileName, baData, info);
 }
 void Sound::exporter(QString fileName, Sound son1, Sound son2)
 {
@@ -514,10 +516,16 @@ void Sound::exporter(QString fileName, Sound son1, Sound son2)
         baTemp.fill(0);
         channel2.append(baTemp);
     }
+
     // Assemblage des canaux
     QByteArray baData = from2MonoTo1Stereo(channel1, channel2, wBps);
+
     // Création d'un fichier
-    exporter(fileName, baData, dwSmplRate, wBps, 2, son1);
+    InfoSound info = son1.info;
+    info.wBpsFile = wBps;
+    info.dwSampleRate = dwSmplRate;
+    info.wChannels = 2;
+    exporter(fileName, baData, info);
 }
 
 ////////////////////////////////////////////////////////////////////////////
@@ -675,14 +683,17 @@ void Sound::getInfoSoundWav(QByteArray baData)
             {
                 // numéro note
                 info.dwNote = readDWORD(baData, pos + 12);
+                if (info.dwNote > 127)
+                    info.dwNote = 127;
                 // accordage
                 info.iCent = (int)readDWORD(baData, pos + 16);
+                info.iCent = (double)info.iCent / 2147483648. * 50. + 0.5;
             }
             if (taille2 >= 60)
             {
                 // boucle
                 info.dwStartLoop = readDWORD(baData, pos + 44);
-                info.dwEndLoop = readDWORD(baData, pos + 48);
+                info.dwEndLoop = readDWORD(baData, pos + 48) + 1;
             }
             pos += taille2;
         }
@@ -973,7 +984,7 @@ QByteArray Sound::getDataWav(QByteArray baData, WORD byte)
     return baRet;
 }
 
-void Sound::exporter(QString fileName, QByteArray baData, quint32 dwSmplRate, WORD wBps, WORD wChan, Sound son1)
+void Sound::exporter(QString fileName, QByteArray baData, InfoSound info)
 {
     // Création d'un fichier
     QFile fi(fileName);
@@ -998,18 +1009,18 @@ void Sound::exporter(QString fileName, QByteArray baData, quint32 dwSmplRate, WO
     wTemp = 1; // no compression
     out << wTemp;
     // Number of channels
-    wTemp = wChan;
+    wTemp = info.wChannels;
     out << wTemp;
     // Sample rate
-    out << dwSmplRate;
+    out << (quint32)info.dwSampleRate;
     // Average byte per second
-    dwTemp = dwSmplRate * wChan * wBps / 8;
+    dwTemp = info.dwSampleRate * info.wChannels * info.wBpsFile / 8;
     out << dwTemp;
     // Block align
-    wTemp = wChan * wBps / 8;
+    wTemp = info.wChannels * info.wBpsFile / 8;
     out << wTemp;
     // Significants bits per smpl
-    out << wBps;
+    out << info.wBpsFile;
     // Extra format bytes
     wTemp = 0;
     out << wTemp;
@@ -1019,26 +1030,44 @@ void Sound::exporter(QString fileName, QByteArray baData, quint32 dwSmplRate, WO
     dwTemp = 0;
     out << dwTemp; // manufacturer
     out << dwTemp; // product
-    dwTemp = 1000000000/dwSmplRate;
+    dwTemp = 1000000000 / info.dwSampleRate;
     out << dwTemp; // smpl period
-    dwTemp = son1.info.dwNote;
-    out << dwTemp; // note
-    dwTemp = son1.info.iCent;
-    out << dwTemp; // tuning
+    // Note et correction
+    if (info.iCent > 50)
+    {
+        dwTemp = qMin((DWORD)127, info.dwNote + 1);
+        out << dwTemp;
+        dwTemp = ((double)(info.iCent - 50) / 50.) * 2147483648. + 0.5;
+        out << dwTemp;
+    }
+    else if (info.iCent < -50)
+    {
+        dwTemp = qMax((DWORD)0, info.dwNote - 1);
+        out << dwTemp;
+        dwTemp = ((double)(info.iCent + 50) / 50.) * 2147483648. + 0.5;
+        out << dwTemp;
+    }
+    else
+    {
+        dwTemp = info.dwNote;
+        out << dwTemp;
+        dwTemp = ((double)info.iCent / 50.) * 2147483648. + 0.5;
+        out << dwTemp;
+    }
     dwTemp = 0;
     out << dwTemp; // smpte format
     out << dwTemp; // smpte offset
     dwTemp = 1;
     out << dwTemp; // nombre boucles
-    dwTemp = 24;
-    out << dwTemp; // taille sampler data
+    dwTemp = 0;
+    out << dwTemp; // taille sampler data (après les boucles)
     dwTemp = 1;
     out << dwTemp; // CUE point id
     dwTemp = 0;
     out << dwTemp; // type
-    dwTemp = son1.info.dwStartLoop;
+    dwTemp = info.dwStartLoop;
     out << dwTemp; // début boucle
-    dwTemp = son1.info.dwEndLoop;
+    dwTemp = info.dwEndLoop-1;
     out << dwTemp; // fin boucle
     dwTemp = 0;
     out << dwTemp; // fraction
