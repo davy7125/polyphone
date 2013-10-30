@@ -117,7 +117,8 @@ SOURCES	+= main.cpp \
     tools/dialog_duplication.cpp \
     clavier/keymapper.cpp \
     gui_divers/editkey.cpp \
-    gui_divers/tablekey.cpp
+    gui_divers/tablekey.cpp \
+    tools/conversion_sfz.cpp
 
 HEADERS  += mainwindow.h \
     sf2_core/sf2_types.h \
@@ -174,7 +175,8 @@ HEADERS  += mainwindow.h \
     tools/dialog_duplication.h \
     clavier/keymapper.h \
     gui_divers/editkey.h \
-    gui_divers/tablekey.h
+    gui_divers/tablekey.h \
+    tools/conversion_sfz.h
 
 FORMS    += mainwindow.ui \
     gui_divers/config.ui \

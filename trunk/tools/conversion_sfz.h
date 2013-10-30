@@ -22,38 +22,57 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef TABLEKEY_H
-#define TABLEKEY_H
+#ifndef CONVERSION_SFZ_H
+#define CONVERSION_SFZ_H
 
-#include <QTableWidget>
-#include <QSignalMapper>
+#include <QString>
+#include <QList>
+#include "sf2_types.h"
 
-class KeyMapper;
+class Pile_sf2;
 
-class TableKey : public QTableWidget
+
+class ParamListe
 {
-    Q_OBJECT
-
 public:
-    TableKey(QWidget * parent = NULL);
-    void setMapper(KeyMapper * mapper);
-    void setOctave(int octave);
-
-signals:
-    void combinaisonChanged(int numKey, QString combinaison);
-
-protected:
-    void resizeEvent(QResizeEvent *);
-
-private slots:
-    void rowChanged(int row);
+    ParamListe(Pile_sf2 * sf2, EltID id);
+    ParamListe(Pile_sf2 * sf2, ParamListe * paramPrst, EltID idInst);
+    Champ getChamp(int num)     { return _listeChamps.at(num); }
+    double getValeur(int num)   { return _listeValeurs.at(num); }
+    int size()                  { return _listeChamps.size(); }
 
 private:
-    KeyMapper * _mapper;
-    int _rootKey;
-    QString getName(int note);
-    QSignalMapper * _signalMapper;
+    QList<Champ> _listeChamps;
+    QList<double> _listeValeurs;
+
+    double getValue(Champ champ, genAmountType amount, bool isPrst);
+    double d1200e2(qint32 val) { return exp2((double)val / 1200.); }
+    double limit(double val, Champ champ);
+    void load(Pile_sf2 *sf2, EltID id);
+    void mix(Champ champCoarse, Champ champFine);
+    void fusion(Champ champ, double value);
+    double getDefaultValue(Champ champ);
+    void prepend(Champ champ);
 };
 
 
-#endif // TABLEKEY_H
+class ConversionSfz
+{
+public:
+    ConversionSfz(Pile_sf2 * sf2);
+
+    // Export en sfz, renvoi de l'adresse du dernier instrument créé
+    QString convert(QString dir, EltID id);
+
+private:
+    Pile_sf2 * _sf2;
+
+    QString exportPrst(QString dir, EltID id);
+    QString getPathSfz(QString dir, QString name);
+    void writeEntete(QFile * fichierSfz, EltID id);
+    void writeGroup(QFile * fichierSfz, ParamListe * listeParam);
+    void writeRegion(QFile * fichierSfz, ParamListe * listeParam);
+    void writeElement(QTextStream &out, Champ champ, double value);
+};
+
+#endif // CONVERSION_SFZ_H

@@ -267,6 +267,9 @@ void Config::addFile(TypeFichier typeFichier, QString filePath)
     case typeFichierSample:
         sampleFile = filePath;
         break;
+    case typeFichierSfz:
+        sfzFile = filePath;
+        break;
     case typeFichierSf2:{
         int n = 4;
         if (filePath.compare(this->listFiles.at(0)) == 0)
@@ -301,6 +304,9 @@ QString Config::getLastFile(TypeFichier typeFichier, int num)
         if (num >= 0 && num < 5)
             lastFile = listFiles.at(num);
         break;
+    case typeFichierSfz:
+        lastFile = sfzFile;
+        break;
     }
 
     return lastFile;
@@ -318,6 +324,9 @@ QString Config::getLastDirectory(TypeFichier typeFichier)
         break;
     case typeFichierSf2:
         lastDir = this->listFiles.at(0);
+        break;
+    case typeFichierSfz:
+        lastDir = sfzFile;
         break;
     }
     if (!lastDir.isEmpty())
@@ -412,6 +421,7 @@ void Config::load()
     // Chargement des fichiers récents
     this->recordFile        = settings.value("recent_file/record", "").toString();
     this->sampleFile        = settings.value("recent_file/sample", "").toString();
+    this->sfzFile           = settings.value("recent_file/sfz", "").toString();
     int j = 0;
     QString strTmp;
     for (int i = 0; i < 5; i++)
@@ -466,6 +476,7 @@ void Config::store()
 {
     settings.setValue("recent_file/record",             this->recordFile);
     settings.setValue("recent_file/sample",             this->sampleFile);
+    settings.setValue("recent_file/sfz",                this->sfzFile);
     settings.setValue("recent_file/file_0",             listFiles.at(0));
     settings.setValue("recent_file/file_1",             listFiles.at(1));
     settings.setValue("recent_file/file_2",             listFiles.at(2));

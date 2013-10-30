@@ -310,6 +310,12 @@ void Page_Prst::setPreset()
 
 void Page_Prst::firstAvailablePresetBank(EltID id, int &nBank, int &nPreset)
 {
+    if (nBank != -1 && nPreset != -1)
+    {
+        // bank et preset par défaut disponibles ?
+        if (isAvailable(id, nBank, nPreset))
+            return;
+    }
     nBank = -2;
     nPreset = -1;
     int nBankParcours = 0;
