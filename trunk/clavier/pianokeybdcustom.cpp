@@ -31,13 +31,14 @@ void midiCallback(double deltatime, std::vector< unsigned char > *message, void 
 {
     Q_UNUSED(deltatime);
     // Constantes
-    int STATUS_NOTEOFF = 0x80;
-    int STATUS_NOTEON  = 0x90;
+    int STATUS_NOTEOFF    = 0x80;
+    int STATUS_NOTEON     = 0x90;
+    int STATUS_CONTROLLER = 0xB0;
     //int MASK_CHANNEL   = 0x0f;
-    int MASK_STATUS    = 0xf0;
+    int MASK_STATUS    = 0xF0;
     // Récupération de l'instance de PianoKeybdCustom
     PianoKeybdCustom * instance = static_cast<PianoKeybdCustom*>(userData);
-    NoteEvent* ev = 0;
+    QEvent* ev = 0;
     //unsigned char channel = message->at(0) & MASK_CHANNEL;
     unsigned char status = message->at(0) & MASK_STATUS;
     if (status == STATUS_NOTEON || status == STATUS_NOTEOFF)
@@ -48,6 +49,12 @@ void midiCallback(double deltatime, std::vector< unsigned char > *message, void 
             ev = new NoteEvent(midi_note, 0);
         else
             ev = new NoteEvent(midi_note, vel);
+    }
+    else if (status == STATUS_CONTROLLER)
+    {
+        unsigned char numController = message->at(1);
+        unsigned char value = message->at(2);
+        ev = new ControllerEvent(numController, value);
     }
     if (ev)
         QApplication::postEvent(instance, ev);
@@ -118,8 +125,23 @@ void PianoKeybdCustom::changeKey(int key, int vel)
         this->showNoteOn(key, vel);
     else
         this->showNoteOff(key, 0);
+
     // Envoi signal
     this->keyChanged(key, vel);
+}
+
+void PianoKeybdCustom::changeController(int numController, int value)
+{
+    if (numController == 64)
+    {
+        // Pédale sustain
+        this->sustainChanged(value >= 64);
+    }
+    else if (numController == 7)
+    {
+        // Volume général
+        this->volumeChanged(value);
+    }
 }
 
 void PianoKeybdCustom::setKeyboardType(KeyboardType type)

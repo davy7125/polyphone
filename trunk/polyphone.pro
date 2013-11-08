@@ -118,7 +118,8 @@ SOURCES	+= main.cpp \
     clavier/keymapper.cpp \
     gui_divers/editkey.cpp \
     gui_divers/tablekey.cpp \
-    tools/conversion_sfz.cpp
+    tools/conversion_sfz.cpp \
+    gui_divers/dialog_about.cpp
 
 HEADERS  += mainwindow.h \
     sf2_core/sf2_types.h \
@@ -176,7 +177,8 @@ HEADERS  += mainwindow.h \
     clavier/keymapper.h \
     gui_divers/editkey.h \
     gui_divers/tablekey.h \
-    tools/conversion_sfz.h
+    tools/conversion_sfz.h \
+    gui_divers/dialog_about.h
 
 FORMS    += mainwindow.ui \
     gui_divers/config.ui \
@@ -197,7 +199,8 @@ FORMS    += mainwindow.ui \
     tools/dialog_magnetophone.ui \
     tools/dialog_celeste.ui \
     tools/dialog_visualizer.ui \
-    tools/dialog_duplication.ui
+    tools/dialog_duplication.ui \
+    gui_divers/dialog_about.ui
 
 RESOURCES += ressources.qrc \
     clavier/pianokeybd.qrc

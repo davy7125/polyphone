@@ -50,9 +50,7 @@ int main(int argc, char *argv[])
     // Affichage fenêtre
     MainWindow w;
     w.show();
-    // Centrage de la fenêtre (doit être après w.show)
-    w.move((a.desktop()->width()  - w.size().width() ) / 2,
-           (a.desktop()->height() - w.size().height()) / 2 - 20);
+
     // Ouverture des fichiers sf2 passés en argument
     QStringList listeArg = QCoreApplication::arguments();
     for (int i = 1; i < listeArg.size(); i++)

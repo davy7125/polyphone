@@ -39,6 +39,7 @@ public:
     // constructeur, destructeur
     Sound(QString filename = "");
     ~Sound();
+
     // méthodes publiques
     QByteArray getData(WORD wBps);
     DWORD get(Champ champ);
@@ -73,6 +74,7 @@ public:
     static quint32 * findMax(QByteArray baData, WORD wBps, int nb, double minFrac = 0);
     static qint32 max(QByteArray baData, WORD wBps);
     static double moyenneCarre(QByteArray baData, WORD wBps);
+    static int lastLettersToRemove(QString str1, QString str2);
 private:
     // Structure de données pour informations sur un sample
     typedef struct infoSound
@@ -109,6 +111,7 @@ private:
     QByteArray getDataSf2(QFile *fi, WORD byte);
     QByteArray getDataWav(QFile *fi, WORD byte);
     QByteArray getDataWav(QByteArray baData, WORD byte);
+    void determineRootKey();
     void getInfoSoundWav();
     void getInfoSoundWav(QByteArray baData);
     static void exporter(QString fileName, QByteArray baData, InfoSound info);

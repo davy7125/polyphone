@@ -258,6 +258,7 @@ void Page_Inst::repartitionAuto()
             listNote.insert(pos, note);
         }
     }
+
     // Répartition
     Valeur val;
     noteSuivante = -1;
@@ -275,18 +276,22 @@ void Page_Inst::repartitionAuto()
                 if (noteSuivante == -1 && listNote.at(i) != listNote.at(j))
                     noteSuivante = listNote.at(j);
             }
+
             // borne inférieure de la division
             if (notePrecedente == -1)
                 val.rValue.byLo = 0;
             else
                 val.rValue.byLo = val.rValue.byHi + 1;
-            if (val.rValue.byLo > 128) val.rValue.byLo = 128;
+            if (val.rValue.byLo > 127)
+                val.rValue.byLo = 127;
+
             // borne supérieure de la division
-            if (noteSuivante == -1) val.rValue.byHi = 128;
+            if (noteSuivante == -1)
+                val.rValue.byHi = 127;
             else
             {
-                val.rValue.byHi = qMin(note+(128 - note)/20,
-                                       (int)floor((double)(2*note + noteSuivante)/3));
+                val.rValue.byHi = qMin(note + (127 - note) / 20,
+                                       (int)floor((double)(2 * note + noteSuivante) / 3));
                 if (val.rValue.byLo > val.rValue.byHi)
                     val.rValue.byHi = val.rValue.byLo;
             }

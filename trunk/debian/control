@@ -2,14 +2,13 @@ Source: polyphone
 Section: sound
 Priority: optional
 Maintainer: Davy Triponney <davy.triponney@gmail.com>
-Build-Depends: debhelper (>= 8.0.0), dpkg-dev (>= 1.16.1~)
+Build-Depends: debhelper (>= 8.0.0), dpkg-dev (>= 1.16.1~), libasound2-dev, alsa-utils, libqt4-dev (>= 4:4.6.3), libjack-jackd2-dev, libportaudio2
 Standards-Version: 3.9.4
 Homepage: http://www.polyphone.fr
 
 Package: polyphone
 Architecture: any
-Replaces: polyphone-0.1
-Depends: ${shlibs:Depends}, ${misc:Depends}, libx11-data, fontconfig-config, locales, libatk1.0-data, liborbit2, libicu48, libglib2.0-data, cups-filters, libqt4-svg (>= 4:4.6.3), libasound2, libportaudio2
+Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: soundfont editor
  Polyphone is a free software for editing soundfonts in format sf2.
  These files contain a multitude of audio samples put together and

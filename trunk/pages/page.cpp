@@ -994,9 +994,31 @@ void PageTable::afficher()
     }
 
     ////// MISE EN FORME DE LA TABLE (couleurs, alignement) //////
+    QBrush brush1(QPixmap(":/style/fond.png"));
+    QBrush brush2(QPixmap(":/style/fondJaune.png"));
     if (this->contenant == elementInst)
     {
-        for (int i = 0; i < this->table->columnCount(); i++)
+        for (int j = 0; j < this->table->rowCount(); j++)
+        {
+            if (j < 9)
+                this->table->item(j, 0)->setBackground(brush1);
+            else if (j < 13)
+                this->table->item(j, 0)->setBackground(brush2);
+            else if (j < 15)
+                this->table->item(j, 0)->setBackground(brush1);
+            else if (j < 23)
+                this->table->item(j, 0)->setBackground(brush2);
+            else if (j < 33)
+                this->table->item(j, 0)->setBackground(brush1);
+            else if (j < 41)
+                this->table->item(j, 0)->setBackground(brush2);
+            else if (j < 46)
+                this->table->item(j, 0)->setBackground(brush1);
+            else
+                this->table->item(j, 0)->setBackground(brush2);
+            this->table->item(j, 0)->setTextAlignment(0x0082);
+        }
+        for (int i = 1; i < this->table->columnCount(); i++)
         {
             for (int j = 0; j < this->table->rowCount(); j++)
             {
@@ -1018,7 +1040,25 @@ void PageTable::afficher()
     }
     else
     {
-        for (int i = 0; i < this->table->columnCount(); i++)
+        for (int j = 0; j < this->table->rowCount(); j++)
+        {
+            if (j < 8)
+                this->table->item(j, 0)->setBackground(brush1);
+            else if (j < 11)
+                this->table->item(j, 0)->setBackground(brush2);
+            else if (j < 13)
+                this->table->item(j, 0)->setBackground(brush1);
+            else if (j < 21)
+                this->table->item(j, 0)->setBackground(brush2);
+            else if (j < 31)
+                this->table->item(j, 0)->setBackground(brush1);
+            else if (j < 39)
+                this->table->item(j, 0)->setBackground(brush2);
+            else
+                this->table->item(j, 0)->setBackground(brush1);
+            this->table->item(j, 0)->setTextAlignment(0x0082);
+        }
+        for (int i = 1; i < this->table->columnCount(); i++)
         {
             for (int j = 0; j < this->table->rowCount(); j++)
             {
@@ -1038,6 +1078,7 @@ void PageTable::afficher()
     for (int i = 0; i < 4; i++)
         this->table->hideRow(i);
     this->table->resizeColumnsToContents();
+
     ///////////////////// REMPLISSAGE DES MODS //////////////////////////
     this->afficheMod(ori);
     // Fin de la préparation et basculement de l'affichage
