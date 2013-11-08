@@ -651,6 +651,7 @@ void Sound::getInfoSoundWav(QByteArray baData)
         return;
     }
     pos = 12;
+    bool rootKeyOk = false;
     while (pos < baData.size()-8)
     {
         if (!strcmp("fmt ", baData.mid(pos, 4)))
@@ -685,6 +686,8 @@ void Sound::getInfoSoundWav(QByteArray baData)
                 info.dwNote = readDWORD(baData, pos + 12);
                 if (info.dwNote > 127)
                     info.dwNote = 127;
+                rootKeyOk = true;
+
                 // accordage
                 info.iCent = (int)readDWORD(baData, pos + 16);
                 info.iCent = (double)info.iCent / 2147483648. * 50. + 0.5;
@@ -716,6 +719,60 @@ void Sound::getInfoSoundWav(QByteArray baData)
             pos += taille2 + 4;
         }
     }
+    if (!rootKeyOk)
+        determineRootKey();
+}
+
+void Sound::determineRootKey()
+{
+    // Détermination de la note à partir du nom de fichier
+    int note = -1;
+    for (int i = 0; i <= 127; i++)
+    {
+        // Nom de la note
+        QString nomNote = "";
+        switch (i % 12)
+        {
+        case 0:  nomNote = "c";     break;
+        case 1:  nomNote = "c#";    break;
+        case 2:  nomNote = "d";     break;
+        case 3:  nomNote = "d#";    break;
+        case 4:  nomNote = "e";     break;
+        case 5:  nomNote = "f";     break;
+        case 6:  nomNote = "f#";    break;
+        case 7:  nomNote = "g";     break;
+        case 8:  nomNote = "g#";    break;
+        case 9:  nomNote = "a";     break;
+        case 10: nomNote = "a#";    break;
+        case 11: nomNote = "b";     break;
+        }
+        nomNote += QString::number((i + 3) / 12 - 1);
+
+        // Recherche de la note dans le nom de fichier
+        if (fileName.toLower().contains(nomNote))
+            note = i;
+    }
+
+    if (note == -1)
+    {
+        // Recherche du numéro de la note
+        QString name = fileName;
+        QStringList listeNum = name.replace(QRegExp("[^0-9]"), "-").split("-", QString::SkipEmptyParts);
+        if (listeNum.size())
+        {
+            // 0n étudie le dernier
+            bool ok;
+            int numNote = listeNum.last().toInt(&ok);
+            if (ok)
+            {
+                if (numNote >= 0 && numNote < 128)
+                    note = numNote;
+            }
+        }
+    }
+
+    if (note != -1)
+        this->info.dwNote = note;
 }
 
 QByteArray Sound::getDataSf2(QFile * fi, WORD byte)
@@ -2570,4 +2627,43 @@ double Sound::BesselI0(double x)
     }
 
     return -numerator/denominator;
+}
+
+// Reconnaissance de liens R - L dans les noms de samples
+int Sound::lastLettersToRemove(QString str1, QString str2)
+{
+    str1 = str1.toLower();
+    str2 = str2.toLower();
+    int nbLetters = 0;
+
+    int size = 0;
+    if (str1.size() == str2.size())
+        size = str1.size();
+    else return 0;
+
+    if (str1.left(size - 2).compare(str2.left(size - 2)) != 0)
+        return 0;
+
+    QString fin1_3 = str1.right(3);
+    QString fin2_3 = str2.right(3);
+    QString fin1_2 = str1.right(2).left(1);
+    QString fin2_2 = str2.right(2).left(1);
+    QString fin1_1 = str1.right(1);
+    QString fin2_1 = str2.right(1);
+
+    if ((fin1_3.compare("(r)") == 0 && fin2_3.compare("(l)") == 0) ||
+        (fin1_3.compare("(l)") == 0 && fin2_3.compare("(r)") == 0))
+        nbLetters = 3;
+    else if (((fin1_1.compare("r") == 0 && fin2_1.compare("l") == 0) ||
+              (fin1_1.compare("l") == 0 && fin2_1.compare("r") == 0)) &&
+             str1.left(size - 1).compare(str2.left(size - 1)) == 0)
+    {
+        nbLetters = 1;
+        if ((fin1_2.compare("-") == 0 && fin2_2.compare("-") == 0) ||
+            (fin1_2.compare("_") == 0 && fin2_2.compare("_") == 0) ||
+            (fin1_2.compare(".") == 0 && fin2_2.compare(".") == 0))
+            nbLetters = 2;
+    }
+
+    return nbLetters;
 }

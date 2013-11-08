@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>943</width>
-    <height>431</height>
+    <width>369</width>
+    <height>403</height>
    </rect>
   </property>
   <property name="contextMenuPolicy">
@@ -179,7 +179,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>943</width>
+     <width>369</width>
      <height>23</height>
     </rect>
    </property>
@@ -340,8 +340,8 @@
   <widget class="QDockWidget" name="dockWidget">
    <property name="minimumSize">
     <size>
-     <width>220</width>
-     <height>367</height>
+     <width>150</width>
+     <height>0</height>
     </size>
    </property>
    <property name="maximumSize">
@@ -919,7 +919,7 @@
      <normaloff>:/icones/wave</normaloff>:/icones/wave</iconset>
    </property>
    <property name="text">
-    <string>&amp;Importer sample...</string>
+    <string>&amp;Importer des sons...</string>
    </property>
    <property name="toolTip">
     <string>Importe un fichier audio</string>
@@ -934,7 +934,7 @@
      <normaloff>:/icones/export</normaloff>:/icones/export</iconset>
    </property>
    <property name="text">
-    <string>E&amp;xporter sample...</string>
+    <string>E&amp;xporter des sons...</string>
    </property>
    <property name="toolTip">
     <string>Exporte au format wav</string>
@@ -1371,7 +1371,7 @@
      <normaloff>:/icones/export2</normaloff>:/icones/export2</iconset>
    </property>
    <property name="text">
-    <string>Exporter (sf&amp;z)</string>
+    <string>Exporter (sf&amp;z)...</string>
    </property>
    <property name="toolTip">
     <string>Exporter en tant que fichier sfz</string>

@@ -132,6 +132,10 @@
         <file alias="outil5 en.png">ressources/doc/outil5 en.png</file>
         <file alias="outil6.png">ressources/doc/outil6.png</file>
         <file alias="outil6 en.png">ressources/doc/outil6 en.png</file>
+        <file alias="outil7.png">ressources/doc/outil7.png</file>
+        <file alias="outil7 en.png">ressources/doc/outil7 en.png</file>
+        <file alias="pref 5.png">ressources/doc/pref 5.png</file>
+        <file alias="pref 5 en.png">ressources/doc/pref 5 en.png</file>
     </qresource>
     <qresource prefix="/traductions">
         <file alias="polyphone_en.qm">ressources/traductions/polyphone_en.qm</file>
@@ -142,5 +146,9 @@
         <file alias="noel">ressources/logo_noel.png</file>
         <file alias="halloween">ressources/logo_halloween.png</file>
         <file alias="valentin">ressources/logo_valentin.png</file>
+    </qresource>
+    <qresource prefix="/style">
+        <file alias="fondJaune.png">ressources/fondJaune.png</file>
+        <file alias="fond.png">ressources/fond.png</file>
     </qresource>
 </RCC>

@@ -33,29 +33,29 @@ EnveloppeVol::EnveloppeVol(VoiceParam * voiceParam, quint32 sampleRate, bool isM
     // Stockage des paramètres initiaux
     if (isMod)
     {
-        this->m_timeDelay       = voiceParam->modDelayTime * m_sampleRate;
-        this->m_timeAttack      = voiceParam->modAttackTime * m_sampleRate;
-        this->m_timeHold        = voiceParam->modHoldTime * m_sampleRate;
-        this->m_timeDecay       = voiceParam->modDecayTime * m_sampleRate;
-        this->m_levelSustain    = voiceParam->modSustainLevel;
-        this->m_timeRelease     = voiceParam->modReleaseTime * m_sampleRate;
-        this->m_noteToHold      = (double)voiceParam->modKeynumToHold / 1200;
-        this->m_noteToDecay     = (double)voiceParam->modKeynumToDecay / 1200;
-        this->m_volume          = 0;
-        this->m_fixedVelocity   = voiceParam->fixedVelocity;
+        m_timeDelay       = voiceParam->modDelayTime * m_sampleRate;
+        m_timeAttack      = voiceParam->modAttackTime * m_sampleRate;
+        m_timeHold        = voiceParam->modHoldTime * m_sampleRate;
+        m_timeDecay       = voiceParam->modDecayTime * m_sampleRate;
+        m_levelSustain    = voiceParam->modSustainLevel;
+        m_timeRelease     = voiceParam->modReleaseTime * m_sampleRate;
+        m_noteToHold      = (double)voiceParam->modKeynumToHold / 1200;
+        m_noteToDecay     = (double)voiceParam->modKeynumToDecay / 1200;
+        m_volume          = 0;
+        m_fixedVelocity   = voiceParam->fixedVelocity;
     }
     else
     {
-        this->m_timeDelay       = voiceParam->volDelayTime * m_sampleRate;
-        this->m_timeAttack      = voiceParam->volAttackTime * m_sampleRate;
-        this->m_timeHold        = voiceParam->volHoldTime * m_sampleRate;
-        this->m_timeDecay       = voiceParam->volDecayTime * m_sampleRate;
-        this->m_levelSustain    = voiceParam->volSustainLevel;
-        this->m_timeRelease     = voiceParam->volReleaseTime * m_sampleRate;
-        this->m_noteToHold      = (double)voiceParam->volKeynumToHold / 1200;
-        this->m_noteToDecay     = (double)voiceParam->volKeynumToDecay / 1200;
-        this->m_volume          = -voiceParam->attenuation;
-        this->m_fixedVelocity   = voiceParam->fixedVelocity;
+        m_timeDelay       = voiceParam->volDelayTime * m_sampleRate;
+        m_timeAttack      = voiceParam->volAttackTime * m_sampleRate;
+        m_timeHold        = voiceParam->volHoldTime * m_sampleRate;
+        m_timeDecay       = voiceParam->volDecayTime * m_sampleRate;
+        m_levelSustain    = voiceParam->volSustainLevel;
+        m_timeRelease     = voiceParam->volReleaseTime * m_sampleRate;
+        m_noteToHold      = (double)voiceParam->volKeynumToHold / 1200;
+        m_noteToDecay     = (double)voiceParam->volKeynumToDecay / 1200;
+        m_volume          = -voiceParam->attenuation;
+        m_fixedVelocity   = voiceParam->fixedVelocity;
     }
 }
 

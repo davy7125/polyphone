@@ -405,7 +405,7 @@ double VoiceParam::getPitchDifference(int note)
 }
 double VoiceParam::d1200e2(qint32 val)
 {
-    return pow(2., ((double)val / 1200));
+    return exp2((double)val / 1200);
 }
 double VoiceParam::limit(double val, double min, double max)
 {

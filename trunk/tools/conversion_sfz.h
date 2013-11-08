@@ -66,13 +66,19 @@ public:
 
 private:
     Pile_sf2 * _sf2;
+    QList<int> _sampleIDs;
+    QList<QString> _samplePaths;
 
     QString exportPrst(QString dir, EltID id);
     QString getPathSfz(QString dir, QString name);
+    QString getLink(QString root, EltID idSmpl);
     void writeEntete(QFile * fichierSfz, EltID id);
     void writeGroup(QFile * fichierSfz, ParamListe * listeParam);
-    void writeRegion(QFile * fichierSfz, ParamListe * listeParam);
+    void writeRegion(QFile * fichierSfz, ParamListe * listeParam, QString pathSample);
     void writeElement(QTextStream &out, Champ champ, double value);
+    static double dbToPercent(double dB) { return 100. * pow(10, -dB / 20); }
+    static QString escapeStr(QString str);
+    static int lastLettersToRemove(QString str1, QString str2);
 };
 
 #endif // CONVERSION_SFZ_H

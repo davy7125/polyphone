@@ -73,27 +73,28 @@ AudioDevice::~AudioDevice()
 {
 }
 
-void AudioDevice::initAudio(int numDevice)
+void AudioDevice::initAudio(int numDevice, int bufferSize)
 {
     //  0 : défaut
     // -1 : arrêt
     // -2 : jack
     // -3 : asio
-    if (numDevice == -2 && m_jack_client)
-        return;
+
     // Arrêt des serveurs son si besoin
     this->closeConnections();
-    if (numDevice == -1) return;
+    if (numDevice == -1)
+        return;
+
     // Ouverture serveur son (doit être fait après la création, une fois dans le bon thread)
     if (numDevice == -2)
     {
         // Lancement Jack
-        this->openJackConnection();
+        this->openJackConnection(bufferSize);
         if (m_jack_client)
             m_typeConnection = CONNECTION_JACK;
         else
         {
-            this->openStandardConnection(false);
+            this->openStandardConnection(bufferSize, false);
             if (m_isStandardRunning)
                 m_typeConnection = CONNECTION_STANDARD;
             else
@@ -103,12 +104,12 @@ void AudioDevice::initAudio(int numDevice)
     else if (numDevice == -3)
     {
         // Lancement Asio
-        this->openStandardConnection(true);
+        this->openStandardConnection(bufferSize, true);
         if (m_isStandardRunning)
             m_typeConnection = CONNECTION_ASIO;
         else
         {
-            this->openStandardConnection(false);
+            this->openStandardConnection(bufferSize, false);
             if (m_isStandardRunning)
                 m_typeConnection = CONNECTION_STANDARD;
             else
@@ -117,17 +118,17 @@ void AudioDevice::initAudio(int numDevice)
     }
     else
     {
-        this->openStandardConnection(false);
+        this->openStandardConnection(bufferSize, false);
         if (m_isStandardRunning)
             m_typeConnection = CONNECTION_STANDARD;
         else
         {
-            this->openJackConnection();
+            this->openJackConnection(bufferSize);
             if (m_jack_client)
                 m_typeConnection = CONNECTION_JACK;
             else
             {
-                this->openStandardConnection(true);
+                this->openStandardConnection(bufferSize, true);
                 if (m_isStandardRunning)
                     m_typeConnection = CONNECTION_ASIO;
                 else
@@ -137,15 +138,17 @@ void AudioDevice::initAudio(int numDevice)
     }
 }
 
-void AudioDevice::openJackConnection()
+void AudioDevice::openJackConnection(int bufferSize)
 {
     // Format audio à l'écoute
     m_format.setSampleRate(SAMPLE_RATE);
     m_format.setChannelCount(2);
     m_format.setSampleSize(32);
+
     // Nom du serveur
     const char *client_name = "Polyphone";
     jack_status_t status;
+
     // Ouverture d'une session cliente au serveur Jack
     m_jack_client = jack_client_open(client_name, JackNullOption, &status);
     if (m_jack_client == NULL)
@@ -162,11 +165,17 @@ void AudioDevice::openJackConnection()
         client_name = jack_get_client_name(m_jack_client);
         printf("unique name '%s' assigned\n", client_name);
     }
+
     // Callback de jack pour la récupération de données et l'arrêt
     jack_set_process_callback(m_jack_client, jackProcess, this);
     jack_on_shutdown(m_jack_client, jack_shutdown, 0);
+
     // Enregistrement fréquence d'échantillonnage
     this->m_format.setSampleRate((int)jack_get_sample_rate(m_jack_client));
+
+    // Modification taille buffer
+    jack_set_buffer_size(m_jack_client, bufferSize);
+
     // Nombre de sorties audio
     const char ** ports = jack_get_ports(m_jack_client, NULL, NULL,
             JackPortIsPhysical|JackPortIsInput);
@@ -176,6 +185,7 @@ void AudioDevice::openJackConnection()
         return;
     }
     bool mono = ports[1] == NULL;
+
     // Création ports de sortie
     if (mono)
     {
@@ -204,9 +214,11 @@ void AudioDevice::openJackConnection()
             return;
         }
     }
+
     // Envoi du format au synthé et activation
     m_synth->setFormat(m_format);
     emit(start());
+
     // Activation du serveur et connexion du port de sortie avec les hauts parleurs
     if (jack_activate(m_jack_client))
     {
@@ -223,7 +235,7 @@ void AudioDevice::openJackConnection()
     }
     free(ports);
 }
-void AudioDevice::openStandardConnection(bool isAsio)
+void AudioDevice::openStandardConnection(int bufferSize, bool isAsio)
 {
     PaError err = Pa_Initialize();
     if (err != paNoError)
@@ -286,6 +298,7 @@ void AudioDevice::openStandardConnection(bool isAsio)
     m_format.setSampleRate(SAMPLE_RATE);
     m_format.setChannelCount(2);
     m_format.setSampleSize(32);
+
     // Sortie audio par défaut, nombre de canaux max
     PaStreamParameters outputParameters;
     outputParameters.device = numDevice;
@@ -297,12 +310,13 @@ void AudioDevice::openStandardConnection(bool isAsio)
     outputParameters.sampleFormat = paFloat32 | paNonInterleaved;
     outputParameters.suggestedLatency = qMin(maxLatency, pdi->defaultLowOutputLatency);
     outputParameters.hostApiSpecificStreamInfo = NULL;
+
     // Ouverture du flux
     err = Pa_OpenStream(&m_standardStream,
                         NULL,               // pas d'entrée
                         &outputParameters,  // paramètres
                         SAMPLE_RATE,        // sample rate
-                        FRAMES_PER_BUFFER,  // frame par buffer
+                        bufferSize,         // frame par buffer
                         0, //paClipOff,     // avec clipping
                         standardProcess,    // callback
                         this);              // instance d'audiodevice

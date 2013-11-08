@@ -49,15 +49,17 @@ public:
     void setGain(double gain);
     void setReverb(int level, int size, int width, int damping);
     void setChorus(int level, int depth, int frequency);
+
     // Paramètres de lecture de samples
     void setGainSample(int gain);
     void setStereo(int isStereo, bool withMutex = true);
-    void setStartLoop(int startLoop);
-    void setEndLoop(int endLoop);
+    void setStartLoop(int startLoop, bool repercute);
+    void setEndLoop(int endLoop, bool repercute);
     void setLoopEnabled(int isEnabled);
     void setRootKey(int rootKey);
     void setSinusEnabled(int isEnabled, bool withMutex = true);
-    void setPitchCorrection(int correction);
+    void setPitchCorrection(int correction, bool repercute);
+
     // Gestion de l'enregistrement
     void startNewRecord(QString fileName);
     void endRecord();

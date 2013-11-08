@@ -54,9 +54,11 @@ public:
     static Config * getInstance(QWidget *parent = NULL);
     static void kill();
     ~Config();
+
     // accesseurs
     bool getRam()               {return false/*ram*/;}
     int  getAudioIndex()        {return audioIndex;}
+    int  getBufferSize()        {return bufferSize;}
     bool getAfficheMod()        {return afficheMod;}
     bool getAfficheToolBar()    {return afficheToolBar;}
     bool getWavAutoLoop()       {return wavAutoLoop;}
@@ -74,6 +76,8 @@ public:
     int  getSynthChoDepth()     {return choDepth;}
     int  getSynthChoFrequency() {return choFrequency;}
     QList<QColor> getColors()   {return colorList;}
+    bool getRepercussionStereo(){return modifStereo;}
+
     // Accès aux paramètres des outils
     int    getTools_s_sifflements_debut()   { return settings.value("tools/sample/sifflements_debut", 8000).toInt(); }
     int    getTools_s_sifflements_fin()     { return settings.value("tools/sample/sifflements_fin", 20000).toInt();}
@@ -265,6 +269,7 @@ public:
         else
             return settings.value("tools/instrument/space_renversement2", false).toBool();
     }
+
     // Modification des paramètres des outils
     void setTools_s_sifflements_debut(int val)      { settings.setValue("tools/sample/sifflements_debut", val); }
     void setTools_s_sifflements_fin(int val)        { settings.setValue("tools/sample/sifflements_fin", val); }
@@ -538,11 +543,22 @@ public:
     QString getLastFile(TypeFichier typeFichier, int num=0);
     QString getLastDirectory(TypeFichier typeFichier);
     void addFile(TypeFichier typeFichier, QString filePath);
+
+    // Etat fenêtre principale
+    void setWindowGeometry(QByteArray ba)   { settings.setValue("affichage/windowGeometry", ba); }
+    void setWindowState(QByteArray ba)      { settings.setValue("affichage/windowState", ba); }
+    QByteArray getWindowGeometry()          { return settings.value("affichage/windowGeometry", QByteArray()).toByteArray(); }
+    QByteArray getWindowState()             { return settings.value("affichage/windowState", QByteArray()).toByteArray(); }
+    void setDockWidth(int val)              { settings.setValue("affichage/dock_width", val); }
+    int getDockWidth()                      { return settings.value("affichage/dock_width", 150).toInt(); }
+
     // Affichage de la fenêtre
     void show();
+
     // Initialisation
     void setListeActions(QList<QAction *> actions);
     KeyMapper * getMapper() { return &mapper; }
+    void setVolume(int val);
 
 signals:
     void colorsChanged();
@@ -584,6 +600,8 @@ private slots:
     void on_pushOctavePlus_clicked();
     void on_pushOctaveMoins_clicked();
     void combinaisonChanged(int numKey, QString combinaison);
+    void on_checkRepercussionStereo_clicked();
+    void on_comboBufferSize_activated(int index);
 
 private:
     QSettings settings;
@@ -612,6 +630,9 @@ private:
     QList<QColor> colorList;
     QList<QAction *> actionList;
     QByteArray actionListToolbar;
+    bool modifStereo;
+    int bufferSize;
+
     // Autres
     bool loaded;
     KeyMapper mapper;

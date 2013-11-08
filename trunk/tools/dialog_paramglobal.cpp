@@ -107,8 +107,8 @@ DialogParamGlobal::DialogParamGlobal(Pile_sf2 *sf2, EltID id, QWidget *parent) :
     ui->comboModif->blockSignals(false);
     ui->graphParamGlobal->setMinMax(conf->getTools_global_mini(_isPrst),
                                     conf->getTools_global_maxi(_isPrst));
-    ui->spinVelMin->setValue(conf->getTools_global_miniVel(_isPrst));
-    ui->spinVelMax->setValue(conf->getTools_global_maxiVel(_isPrst));
+    ui->spinVelMin->setValue(qMin(conf->getTools_global_miniVel(_isPrst), conf->getTools_global_maxiVel(_isPrst)));
+    ui->spinVelMax->setValue(qMax(conf->getTools_global_maxiVel(_isPrst), conf->getTools_global_miniVel(_isPrst)));
 
     // Initialisation id
     _listElt.append(id);

@@ -43,45 +43,63 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent, Qt::Window | Qt::W
     audioDevice(NULL),
     configuration(Config::getInstance(this)),
     help(this),
+    about(this),
     dialList(this),
     keyboard(NULL),
     dialogMagneto(NULL), // doit être appelé après le premier appel au singleton Config
-    actionKeyboard(NULL)
+    actionKeyboard(NULL),
+    _isSustainOn(false)
 {
     ui->setupUi(this);
 #if QT_VERSION >= QT_VERSION_CHECK(4, 7, 0)
     ui->editSearch->setPlaceholderText(trUtf8("Rechercher..."));
 #endif
-    // Taille max de l'application
+    // Taille max de l'application et restauration de l'état de la fenêtre
     this->setMaximumSize(QApplication::desktop()->size());
+    restoreGeometry(configuration->getWindowGeometry());
+    restoreState(configuration->getWindowState());
+
+    // Bug QT: restauration de la largeur d'un QDockWidget si fenêtre maximisée
+    int dockWidth = configuration->getDockWidth();
+    if (ui->dockWidget->width() < dockWidth)
+        ui->dockWidget->setMinimumWidth(dockWidth);
+    else
+        ui->dockWidget->setMaximumWidth(dockWidth);
+    QTimer::singleShot(1, this, SLOT(returnToOldMaxMinSizes()));
+
     // Initialisation de l'objet pile sf2
     this->sf2 = new Pile_sf2(ui->arborescence, this->configuration->getRam());
+
     // Connexion avec mise à jour table
     connect(this->sf2, SIGNAL(updateTable(int,int,int,int)), this,
             SLOT(updateTable(int,int,int,int)));
+
     // Initialisation du synthétiseur
     this->synth = new Synth(this->sf2);
     this->synth->moveToThread(&this->synthThread);
     this->synthThread.start();
+
     // Connexions du magnétophone avec le synthé
     this->dialogMagneto.setSynth(this->synth);
     connect(this->synth, SIGNAL(sampleRateChanged(qint32)), &dialogMagneto, SLOT(setSampleRate(qint32)));
     connect(this->synth, SIGNAL(samplesRead(int)), &dialogMagneto, SLOT(avanceSamples(int)));
+
     // Initialisation de la sortie audio
     this->audioDevice = new AudioDevice(this->synth);
-    connect(this, SIGNAL(initAudio(int)), this->audioDevice, SLOT(initAudio(int)));
+    connect(this, SIGNAL(initAudio(int, int)), this->audioDevice, SLOT(initAudio(int, int)));
     connect(this, SIGNAL(stopAudio()), this->audioDevice, SLOT(closeConnections()),
             Qt::BlockingQueuedConnection);
     this->audioDevice->moveToThread(&this->audioThread);
     this->audioThread.start();
+
     // Priorité des thread
     this->audioThread.setPriority(QThread::HighestPriority);
     this->synthThread.setPriority(QThread::TimeCriticalPriority);
 
     if (this->configuration->getAudioType() == 0)
-        this->setAudioEngine(this->configuration->getAudioIndex());
+        this->setAudioEngine(configuration->getAudioIndex(), configuration->getBufferSize());
     else
-        this->setAudioEngine(this->configuration->getAudioType());
+        this->setAudioEngine(configuration->getAudioType(), configuration->getBufferSize());
     this->setSynthGain(this->configuration->getSynthGain());
     this->setSynthChorus(this->configuration->getSynthChoLevel(),
                          this->configuration->getSynthChoDepth(),
@@ -90,6 +108,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent, Qt::Window | Qt::W
                          this->configuration->getSynthRevSize(),
                          this->configuration->getSynthRevWidth(),
                          this->configuration->getSynthRevDamp());
+
     // Création des widgets
     page_sf2 = new Page_Sf2(this, ui->arborescence, ui->stackedWidget, this->sf2, this->synth);
     page_smpl = new Page_Smpl();
@@ -99,14 +118,19 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent, Qt::Window | Qt::W
     ui->stackedWidget->addWidget(page_smpl);
     ui->stackedWidget->addWidget(page_inst);
     ui->stackedWidget->addWidget(page_prst);
+
     // Initialisation arbre (passage de l'adresse de mainWindow)
     ui->arborescence->init(this);
+
     // Initialisation dialog liste (pointeur vers les sf2 et mainWindow)
     this->dialList.init(this, this->sf2);
+
     // Fichiers récents
     updateFavoriteFiles();
+
     // Affichage logo logiciel
     ui->stackedWidget->setCurrentWidget(ui->page_Soft);
+
     // Préférences d'affichage
     if (!this->configuration->getAfficheToolBar())
     {
@@ -119,11 +143,13 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent, Qt::Window | Qt::W
         this->page_inst->setModVisible(0);
         this->page_prst->setModVisible(0);
     }
+
     // Clavier
     this->keyboard = new PianoKeybdCustom(this);
     QHBoxLayout * layout = (QHBoxLayout*)this->ui->ensembleKeyboard->layout();
     layout->insertWidget(2, this->keyboard);
     this->setKeyboardType(this->configuration->getKeyboardType());
+
     // Déplacement dans la barre de menu
     this->ui->toolBar->setContentsMargins(0, 0, 0, 0);
     this->ui->ensembleKeyboard->setMaximumHeight(this->ui->toolBar->height()+5);
@@ -132,16 +158,22 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent, Qt::Window | Qt::W
     actionKeyboard = this->ui->toolBar->addWidget(this->ui->ensembleKeyboard);
     this->showKeyboard(false);
     this->ui->velocityButton->setValue(this->configuration->getKeyboardVelocity());
+
     // Ouverture port midi et connexions
     this->keyboard->openMidiPort(this->configuration->getNumPortMidi());
     connect(this->keyboard, SIGNAL(keyChanged(int,int)), this, SLOT(noteChanged(int,int)));
+    connect(this->keyboard, SIGNAL(sustainChanged(bool)), this, SLOT(setSustain(bool)));
+    connect(this->keyboard, SIGNAL(volumeChanged(int)), this, SLOT(setVolume(int)));
     connect(this->keyboard, SIGNAL(noteOn(int)), this, SLOT(noteOn(int)));
     connect(this->keyboard, SIGNAL(noteOff(int)), this, SLOT(noteOff(int)));
     connect(this->page_smpl, SIGNAL(noteChanged(int,int)), this, SLOT(noteChanged(int,int)));
+
     // Connexion changement de couleur
     connect(Config::getInstance(), SIGNAL(colorsChanged()), this->page_smpl, SLOT(updateColors()));
+
     // Initialisation des actions dans les configurations
     this->configuration->setListeActions(this->getListeActions());
+
     // Passage du mapper au clavier
     this->keyboard->setMapper(this->configuration->getMapper());
 
@@ -175,8 +207,19 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+void MainWindow::returnToOldMaxMinSizes()
+{
+    ui->dockWidget->setMinimumWidth(150);
+    ui->dockWidget->setMaximumWidth(300);
+}
+
 void MainWindow::closeEvent(QCloseEvent *event)
 {
+    // Sauvegarde de la géométrie
+    configuration->setDockWidth(ui->dockWidget->width());
+    configuration->setWindowGeometry(saveGeometry());
+    configuration->setWindowState(saveState());
+
     // Nombre de fichiers non sauvegardés
     int nbFile = 0;
     EltID id(elementSf2, -1, 0, 0, 0);
@@ -495,12 +538,7 @@ void MainWindow::showConfig()
 }
 void MainWindow::showAbout()
 {
-    QMessageBox::about(this, "Polyphone",
-        trUtf8("<b>Polyphone</b> © 2013<br/>" \
-        "Version : ") + VERSION  + trUtf8("<br/>" \
-        "Auteur : Davy Triponney<br/>" \
-        "Site web : <a href=\"http://www.polyphone.fr\">www.polyphone.fr</a><br/>" \
-        "Support : <a href=\"mailto:info@polyphone.fr\">info@polyphone.fr</a>").toStdString().c_str());
+    about.show();
 }
 void MainWindow::showHelp()
 {
@@ -2050,36 +2088,23 @@ void MainWindow::exporterSmpl()
                     sampleID2 = this->sf2->get(id, champ_wSampleLink).wValue;
                     id2.indexElt = sampleID2;
                     id2.typeElement = elementSmpl;
+
                     // Nom du fichier
-                    if (this->sf2->getQstr(id, champ_name).size() == this->sf2->getQstr(id2, champ_name).size())
+                    QString nom1 = sf2->getQstr(id, champ_name);
+                    QString nom2 = sf2->getQstr(id2, champ_name);
+                    int nb = Sound::lastLettersToRemove(nom1, nom2);
+                    qStr.append(nom1.left(nom1.size() - nb));
+
+                    if (this->sf2->get(id, champ_sfSampleType).wValue == rightSample && \
+                            this->sf2->get(id, champ_sfSampleType).wValue != RomRightSample)
                     {
-                        QString nom1 = this->sf2->getQstr(id, champ_name);
-                        QString nom2 = this->sf2->getQstr(id2, champ_name);
-                        int size = nom1.size();
-                        if (nom1.compare(nom2) == 0)
-                            qStr = qStr.append(nom1);
-                        else
-                        {
-                            // Les noms sont différents
-                            QString nom1bis = nom1;
-                            QString nom2bis = nom2;
-                            if (nom1bis.left(size-1).compare(nom2bis.left(size-1)) == 0)
-                            {
-                                // Seule la dernière lettre change
-                                const char c1 = this->sf2->getQstr(id, champ_name).right(1).toLower().toStdString()[0];
-                                const char c2 = this->sf2->getQstr(id2, champ_name).right(1).toLower().toStdString()[0];
-                                if ((c1 == 'l' || c1 == 'r') && (c2 == 'l' || c2 == 'r'))
-                                    qStr = qStr.append(nom1.left(size-1));
-                                else
-                                    qStr = qStr.append(nom1);
-                            }
-                            else
-                                qStr = qStr.append(nom1);
-                        }
+                        // Inversion smpl1 smpl2
+                        EltID idTmp = id;
+                        id = id2;
+                        id2 = idTmp;
                     }
-                    else
-                        qStr.append(this->sf2->getQstr(id, champ_name));
-                    // Mise à jour des états d'exporations
+
+                    // Mise à jour des états d'exportations
                     status[sampleID] = 1;
                     status[sampleID2] = 1;
                 }
@@ -2684,9 +2709,9 @@ void MainWindow::magnetophone()
 }
 
 // Gestion du clavier virtuel / du son
-void MainWindow::setAudioEngine(int audioEngine)
+void MainWindow::setAudioEngine(int audioEngine, int bufferSize)
 {
-    emit(initAudio(audioEngine));
+    emit(initAudio(audioEngine, bufferSize));
 }
 void MainWindow::showKeyboard(bool val)
 {
@@ -2711,20 +2736,54 @@ void MainWindow::openMidiPort(int val)
 {
     this->keyboard->openMidiPort(val);
 }
-void MainWindow::noteOn(int key)    {this->noteChanged(key, this->configuration->getKeyboardVelocity());}
-void MainWindow::noteOff(int key)   {this->noteChanged(key, 0);}
+void MainWindow::noteOn(int key)    { noteChanged(key, this->configuration->getKeyboardVelocity()); }
+void MainWindow::noteOff(int key)   { noteChanged(key, 0); }
+void MainWindow::setSustain(bool isOn)
+{
+    _isSustainOn = isOn;
+    if (!isOn)
+    {
+        // On relâche les notes maintenues
+        while (_listKeysToRelease.size())
+        {
+            noteChanged(_listKeysToRelease.takeFirst(), 0);
+        }
+    }
+}
+void MainWindow::setVolume(int vol)
+{
+    vol = (double)vol / 127. * 101. - 50.5;
+    configuration->setVolume(vol);
+    setSynthGain(vol);
+}
 void MainWindow::noteChanged(int key, int vel)
 {
-    // Mise en évidence de la ou des éléments liés étant en train de jouer
-    this->page_inst->enlightColumn(key, vel != 0);
-    this->page_prst->enlightColumn(key, vel != 0);
-
     // Cas particulier : arrêt de la lecture d'un sample
     if (key == -1 && vel == 0)
     {
         this->synth->play(0, 0, 0, -1, 0);
         return;
     }
+
+    // Mise en évidence de la ou des éléments liés étant en train de jouer
+    this->page_inst->enlightColumn(key, vel != 0);
+    this->page_prst->enlightColumn(key, vel != 0);
+
+    if (vel)
+    {
+        if (_listKeysToRelease.contains(key))
+            noteChanged(key, 0);
+    }
+    else
+    {
+        if (_isSustainOn)
+        {
+            if (!_listKeysToRelease.contains(key))
+                _listKeysToRelease << key;
+            return;
+        }
+    }
+
     int defaultVelocity = this->configuration->getKeyboardVelocity();
     if (defaultVelocity > 0 && vel > 0)
         vel = defaultVelocity;
