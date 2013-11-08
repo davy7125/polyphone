@@ -1,3 +1,10 @@
+polyphone (1.1-1) UNRELEASED; urgency=low
+
+  * New upstream version
+
+ -- Davy Triponney <davy.triponney@gmail.com>  Fri, 8 Nov 2013 19:57:27 +0100
+
+
 polyphone (1.0-1) UNRELEASED; urgency=low
 
   * New upstream version
@@ -34,3 +41,4 @@ polyphone (0.7-1) UNRELEASED; urgency=low
   * Initial debian release (Closes: Bug#714454)
 
  -- Davy Triponney <davy.triponney@gmail.com>  Sat, 29 Jun 2013 17:46:42 +0100
+

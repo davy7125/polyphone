@@ -58,6 +58,7 @@ void Page_Smpl::afficher()
     // Préparation de l'affichage
     preparation = true;
     EltID id = this->tree->getID(0);
+
     // Remplissage des informations
     DWORD dwSmplRate = this->sf2->get(id, champ_dwSampleRate).dwValue;
     char T[50];
@@ -77,6 +78,7 @@ void Page_Smpl::afficher()
     this->ui->spinEndLoop->setValue(posEnd);
     this->ui->spinStartLoop->blockSignals(false);
     this->ui->spinEndLoop->blockSignals(false);
+
     // Remplissage du graphe
     QByteArray baData = this->sf2->getData(id, champ_sampleData16);
     this->ui->graphe->clearAll();
@@ -96,10 +98,12 @@ void Page_Smpl::afficher()
     }
     this->ui->spinRootKey->setValue(this->sf2->get(id, champ_byOriginalPitch).bValue);
     this->ui->spinTune->setValue(this->sf2->get(id, champ_chPitchCorrection).cValue);
+
     // Type et lien
     EltID id2 = id;
     this->ui->comboLink->clear();
     this->ui->comboType->clear();
+
     // Liens possibles
     for (int i = 0; i < this->sf2->count(id2); i++)
     {
@@ -112,6 +116,7 @@ void Page_Smpl::afficher()
     }
     this->ui->comboLink->model()->sort(0);
     this->ui->comboLink->insertItem(0, "-");
+
     // Types possibles et sélections
     SFSampleLink typeLink = this->sf2->get(id, champ_sfSampleType).sfLinkValue;
     this->ui->comboType->addItem(tr("mono"));
@@ -144,6 +149,7 @@ void Page_Smpl::afficher()
         this->ui->comboLink->setCurrentIndex(this->ui->comboLink->findText(this->sf2->getQstr(id2, champ_name)));
         this->ui->checkLectureLien->setEnabled(true);
     }
+
     // Liste des instruments qui utilisent le sample
     int nbInst = 0;
     bool isFound;
@@ -158,6 +164,7 @@ void Page_Smpl::afficher()
     {
         id2.indexElt = i;
         id3.indexElt = i;
+
         // Parcours de tous les samples liés à l'instrument
         isFound = false;
         j = 0;
@@ -186,8 +193,10 @@ void Page_Smpl::afficher()
     else
         qStr.prepend(QString::fromUtf8(tr("<b>Sample lié aux instruments : </b>").toStdString().c_str()));
     this->ui->labelInst->setText(qStr);
+
     // Remplissage du graphe fourier
     this->ui->grapheFourier->setData(baData, posStart, posEnd, dwSmplRate);
+
     // Basculement affichage
     this->qStackedWidget->setCurrentWidget(this); // prend du temps
     preparation = false;
@@ -219,14 +228,32 @@ void Page_Smpl::setStartLoop()
         this->ui->checkLectureBoucle->setEnabled(true);
         this->ui->checkLectureBoucle->setChecked(true);
     }
+
+    // Sample associé ?
+    EltID id2 = getRepercussionID();
+    if (id2.indexElt != -1)
+    {
+        if ((unsigned)this->ui->spinStartLoop->value() != this->sf2->get(id2, champ_dwStartLoop).dwValue &&
+                (unsigned)this->ui->spinStartLoop->value() <= this->sf2->get(id2, champ_dwLength).dwValue)
+            this->sf2->set(id2, champ_dwStartLoop, val);
+    }
+
     this->mainWindow->updateDo();
+
     // Mise à jour graphe Fourier
     this->ui->grapheFourier->setPos(this->ui->spinStartLoop->value(), this->ui->spinEndLoop->value());
 }
 void Page_Smpl::setStartLoop(int val)
 {
+    EltID id2 = getRepercussionID();
+    if (id2.indexElt != -1)
+    {
+        if ((unsigned)this->ui->spinStartLoop->value() > this->sf2->get(id2, champ_dwLength).dwValue)
+            id2.indexElt = -1;
+    }
+
     // Modif synth
-    this->synth->setStartLoop(val);
+    this->synth->setStartLoop(val, id2.indexElt != -1);
 }
 void Page_Smpl::setEndLoop()
 {
@@ -235,6 +262,7 @@ void Page_Smpl::setEndLoop()
     if ((unsigned)this->ui->spinEndLoop->value() == this->sf2->get(id, champ_dwEndLoop).dwValue) return;
     this->ui->spinStartLoop->setMaximum(this->ui->spinEndLoop->value());
     sf2->prepareNewActions();
+
     // Reprise de l'adresse si modification
     id = this->tree->getID(0);
     Valeur val;
@@ -250,14 +278,32 @@ void Page_Smpl::setEndLoop()
         this->ui->checkLectureBoucle->setEnabled(true);
         this->ui->checkLectureBoucle->setChecked(true);
     }
+
+    // Sample associé ?
+    EltID id2 = getRepercussionID();
+    if (id2.indexElt != -1)
+    {
+        if ((unsigned)this->ui->spinEndLoop->value() != this->sf2->get(id2, champ_dwEndLoop).dwValue &&
+                (unsigned)this->ui->spinEndLoop->value() <= this->sf2->get(id2, champ_dwLength).dwValue)
+            this->sf2->set(id2, champ_dwEndLoop, val);
+    }
+
     this->mainWindow->updateDo();
+
     // Mise à jour graphe Fourier
     this->ui->grapheFourier->setPos(this->ui->spinStartLoop->value(), this->ui->spinEndLoop->value());
 }
 void Page_Smpl::setEndLoop(int val)
 {
+    EltID id2 = getRepercussionID();
+    if (id2.indexElt != -1)
+    {
+        if ((unsigned)this->ui->spinEndLoop->value() > this->sf2->get(id2, champ_dwLength).dwValue)
+            id2.indexElt = -1;
+    }
+
     // Modif synth
-    this->synth->setEndLoop(val);
+    this->synth->setEndLoop(val, id2.indexElt != -1);
 }
 void Page_Smpl::setRootKey()
 {
@@ -265,19 +311,20 @@ void Page_Smpl::setRootKey()
     EltID id = this->tree->getID(0);
     if ((unsigned)this->ui->spinRootKey->value() == this->sf2->get(id, champ_byOriginalPitch).bValue) return;
     sf2->prepareNewActions();
+
     // Reprise de l'adresse si modification
     id = this->tree->getID(0);
     Valeur val;
     val.bValue = this->ui->spinRootKey->value();
+
     // Sample associé ?
-    SFSampleLink typeLien = this->sf2->get(id, champ_sfSampleType).sfLinkValue;
-    if (typeLien != monoSample && typeLien != RomMonoSample)
+    EltID id2 = getRepercussionID();
+    if (id2.indexElt != -1)
     {
-        EltID id2 = id;
-        id2.indexElt = this->sf2->get(id, champ_wSampleLink).wValue;
         if ((unsigned)this->ui->spinRootKey->value() != this->sf2->get(id2, champ_byOriginalPitch).bValue)
             this->sf2->set(id2, champ_byOriginalPitch, val);
     }
+
     this->sf2->set(id, champ_byOriginalPitch, val);
     this->mainWindow->updateDo();
 }
@@ -292,26 +339,27 @@ void Page_Smpl::setTune()
     EltID id = this->tree->getID(0);
     if (this->ui->spinTune->value() == this->sf2->get(id, champ_chPitchCorrection).cValue) return;
     sf2->prepareNewActions();
+
     // Reprise de l'adresse si modification
     id = this->tree->getID(0);
     Valeur val;
     val.cValue = this->ui->spinTune->value();
+
     // Sample associé ?
-    SFSampleLink typeLien = this->sf2->get(id, champ_sfSampleType).sfLinkValue;
-    if (typeLien != monoSample && typeLien != RomMonoSample)
+    EltID id2 = getRepercussionID();
+    if (id2.indexElt != -1)
     {
-        EltID id2 = id;
-        id2.indexElt = this->sf2->get(id, champ_wSampleLink).wValue;
         if ((unsigned)this->ui->spinTune->value() != this->sf2->get(id2, champ_chPitchCorrection).bValue)
             this->sf2->set(id2, champ_chPitchCorrection, val);
     }
+
     this->sf2->set(id, champ_chPitchCorrection, val);
     this->mainWindow->updateDo();
 }
 void Page_Smpl::setTune(int val)
 {
     // Modif synth
-    this->synth->setPitchCorrection(val);
+    this->synth->setPitchCorrection(val, getRepercussionID().indexElt != -1);
 }
 void Page_Smpl::setType(int index)
 {
@@ -514,6 +562,7 @@ void Page_Smpl::setLinkedSmpl(int index)
 void Page_Smpl::setRate(int index)
 {
     if (preparation) return;
+
     // Modification de l'échantillonnage
     Q_UNUSED(index);
     EltID id = this->tree->getID(0);
@@ -521,6 +570,7 @@ void Page_Smpl::setRate(int index)
     DWORD echInit = this->sf2->get(id, champ_dwSampleRate).dwValue;
     if (echInit == echFinal) return;
     sf2->prepareNewActions();
+
     // Reprise de l'identificateur si modification
     id = this->tree->getID(0);
     // Message d'attente (ne fonctionne pas !!!)
@@ -528,14 +578,13 @@ void Page_Smpl::setRate(int index)
 //    dial.setModal(true);
 //    dial.open();
     // Sample associé ?
-    SFSampleLink typeLien = this->sf2->get(id, champ_sfSampleType).sfLinkValue;
-    if (typeLien != monoSample && typeLien != RomMonoSample)
+    EltID id2 = getRepercussionID();
+    if (id2.indexElt != -1)
     {
-        EltID id2 = id;
-        id2.indexElt = this->sf2->get(id, champ_wSampleLink).wValue;
         if (echFinal != this->sf2->get(id2, champ_dwSampleRate).dwValue)
             setRateElt(id2, echFinal);
     }
+
     setRateElt(id, echFinal);
 //    dial.close();
     // Actualisation
@@ -552,6 +601,7 @@ void Page_Smpl::setRateElt(EltID id, DWORD echFinal)
     Valeur val;
     val.dwValue = echFinal;
     this->sf2->set(id, champ_dwSampleRate, val);
+
     // Ajustement de length, startLoop, endLoop
     val.dwValue = baData.size()/3;
     this->sf2->set(id, champ_dwLength, val);
@@ -563,6 +613,19 @@ void Page_Smpl::setRateElt(EltID id, DWORD echFinal)
     dwTmp = ((quint64)dwTmp * (quint64)echFinal) / (quint64)echInit;
     val.dwValue = dwTmp;
     this->sf2->set(id, champ_dwEndLoop, val);
+}
+EltID Page_Smpl::getRepercussionID()
+{
+    EltID id = tree->getID(0);
+    EltID id2 = id;
+
+    // Recherche du sample associé, le cas échéant et si la répercussion est activée
+    SFSampleLink typeLien = this->sf2->get(id, champ_sfSampleType).sfLinkValue;
+    if (typeLien != monoSample && typeLien != RomMonoSample && Config::getInstance()->getRepercussionStereo())
+        id2.indexElt = this->sf2->get(id, champ_wSampleLink).wValue;
+    else
+        id2.indexElt = -1;
+    return id2;
 }
 
 // Outils
@@ -1163,8 +1226,9 @@ void Page_Smpl::applyEQ()
         return;
     sf2->prepareNewActions();
     EltID id = this->tree->getID(0);
-    QByteArray baData = this->sf2->getData(id, champ_sampleDataFull24);
+
     // Traitement
+    QByteArray baData = this->sf2->getData(id, champ_sampleDataFull24);
     baData = Sound::EQ(baData, this->sf2->get(id, champ_dwSampleRate).dwValue, 24,
                        this->ui->verticalSlider_1->value(),
                        this->ui->verticalSlider_2->value(),
@@ -1177,6 +1241,26 @@ void Page_Smpl::applyEQ()
                        this->ui->verticalSlider_9->value(),
                        this->ui->verticalSlider_10->value());
     this->sf2->set(id, champ_sampleDataFull24, baData);
+
+    // Sample associé ?
+    EltID id2 = getRepercussionID();
+    if (id2.indexElt != -1)
+    {
+        QByteArray baData = this->sf2->getData(id2, champ_sampleDataFull24);
+        baData = Sound::EQ(baData, this->sf2->get(id2, champ_dwSampleRate).dwValue, 24,
+                           this->ui->verticalSlider_1->value(),
+                           this->ui->verticalSlider_2->value(),
+                           this->ui->verticalSlider_3->value(),
+                           this->ui->verticalSlider_4->value(),
+                           this->ui->verticalSlider_5->value(),
+                           this->ui->verticalSlider_6->value(),
+                           this->ui->verticalSlider_7->value(),
+                           this->ui->verticalSlider_8->value(),
+                           this->ui->verticalSlider_9->value(),
+                           this->ui->verticalSlider_10->value());
+        this->sf2->set(id2, champ_sampleDataFull24, baData);
+    }
+
     // Actualisation
     this->mainWindow->updateDo();
     this->afficher();

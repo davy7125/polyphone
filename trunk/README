@@ -1,7 +1,7 @@
 COMPILATION
 
 The following libraries are required (the name may vary depending on your system):
- - qt (libqt4-gui, libqt4-core, libqt4-svg, maybe others)
+ - qt (libqt4-dev)
  - alsa (libasound2-dev / alsa-lib-devel)
  - jack (libjack-jack2-dev / jack-audio-connection-kit-devel)
  - portaudio (libportaudio2 / portaudio-devel)

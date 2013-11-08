@@ -35,6 +35,7 @@
 #include "config.h"
 #include "dialog_list.h"
 #include "dialog_help.h"
+#include "dialog_about.h"
 #include "page_sf2.h"
 #include "page_smpl.h"
 #include "page_inst.h"
@@ -74,13 +75,14 @@ public:
     void ouvrir(QString fileName);
     QStringList getListMidi();
     void openMidiPort(int val);
-    void setAudioEngine(int audioEngine);
+    void setAudioEngine(int audioEngine, int bufferSize);
     void setSynthGain(int val);
     void setSynthReverb(int level, int size, int width, int damping);
     void setSynthChorus(int level, int depth, int frequency);
     void setListeActions(QList<QAction *> listeActions);
 
 public slots:
+    void returnToOldMaxMinSizes();
     void supprimerElt();        // Suppression des éléments sélectionnés dans l'arbre
 
 private slots:
@@ -147,10 +149,12 @@ private slots:
 
     void noteOn(int key);
     void noteOff(int key);
+    void setSustain(bool isOn);
+    void setVolume(int vol);
     void noteChanged(int key, int vel);
 
 signals:
-    void initAudio(int numDevice);
+    void initAudio(int numDevice, int bufferSize);
     void stopAudio();
     void play(int type, int idSf2, int idElt, int note, int velocity);
 
@@ -166,11 +170,16 @@ private:
     QThread synthThread;
     Config * configuration;
     DialogHelp help;
+    DialogAbout about;
     DialogList dialList;
     PianoKeybdCustom * keyboard;
     DialogMagnetophone dialogMagneto;
     QAction * actionKeyboard;
     QList<QAction *> actionSeparators;
+
+    // Gestion sustain pedal
+    QList<int> _listKeysToRelease;
+    bool _isSustainOn;
 
     // Méthodes privées
     void updateTitle();

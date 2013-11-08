@@ -958,9 +958,9 @@ int Pile_sf2::sauvegarderSf2(int indexSf2, QString fileName)
 
     //////////////////// TAILLES DES BLOCS ////////////////////
 
-    DWORD taille_fichier, taille_info, taille_smpl, taille_pdta, \
-            taille_phdr, taille_pbag, taille_pmod, taille_pgen, \
-            taille_inst, taille_ibag, taille_imod, taille_igen,\
+    DWORD taille_fichier, taille_info, taille_smpl, taille_pdta,
+            taille_phdr, taille_pbag, taille_pmod, taille_pgen,
+            taille_inst, taille_ibag, taille_imod, taille_igen,
             taille_shdr, taille_sm24;
     taille_info = 16; // INFO + champ ifil
     dwTmp = this->getQstr(id, champ_ISNG).length();
@@ -1229,7 +1229,7 @@ int Pile_sf2::sauvegarderSf2(int indexSf2, QString fileName)
     {
         dwTmp2 = 8;
         fi.write((char *)&dwTmp2, 4);
-        fi.write("EMU8000", 7);
+        fi.write("Generic", 7);
         charTmp = '\0';
         fi.write(&charTmp, 1);
     }
@@ -1718,6 +1718,10 @@ int Pile_sf2::sauvegarderSf2(int indexSf2, QString fileName)
                 wTmp = champ_keyRange;
                 fi.write((char *)&wTmp, 2);
                 genTmp = this->get(id, champ_keyRange).genValue;
+                if (genTmp.ranges.byLo > 127)
+                    genTmp.ranges.byLo = 127;
+                if (genTmp.ranges.byHi > 127)
+                    genTmp.ranges.byHi = 127;
                 fi.write((char *)&genTmp, 2);
             }
             if (this->isSet(id, champ_velRange))
@@ -1725,6 +1729,10 @@ int Pile_sf2::sauvegarderSf2(int indexSf2, QString fileName)
                 wTmp = champ_velRange;
                 fi.write((char *)&wTmp, 2);
                 genTmp = this->get(id, champ_velRange).genValue;
+                if (genTmp.ranges.byLo > 127)
+                    genTmp.ranges.byLo = 127;
+                if (genTmp.ranges.byHi > 127)
+                    genTmp.ranges.byHi = 127;
                 fi.write((char *)&genTmp, 2);
             }
             for (int k = 0; k < this->count(id3); k++)
@@ -1755,6 +1763,10 @@ int Pile_sf2::sauvegarderSf2(int indexSf2, QString fileName)
                         wTmp = champ_keyRange;
                         fi.write((char *)&wTmp, 2);
                         genTmp = this->get(id2, champ_keyRange).genValue;
+                        if (genTmp.ranges.byLo > 127)
+                            genTmp.ranges.byLo = 127;
+                        if (genTmp.ranges.byHi > 127)
+                            genTmp.ranges.byHi = 127;
                         fi.write((char *)&genTmp, 2);
                     }
                     if (this->isSet(id2, champ_velRange))
@@ -1762,6 +1774,10 @@ int Pile_sf2::sauvegarderSf2(int indexSf2, QString fileName)
                         wTmp = champ_velRange;
                         fi.write((char *)&wTmp, 2);
                         genTmp = this->get(id2, champ_velRange).genValue;
+                        if (genTmp.ranges.byLo > 127)
+                            genTmp.ranges.byLo = 127;
+                        if (genTmp.ranges.byHi > 127)
+                            genTmp.ranges.byHi = 127;
                         fi.write((char *)&genTmp, 2);
                     }
                     for (int k = 0; k < this->count(id3); k++)
@@ -2005,6 +2021,10 @@ int Pile_sf2::sauvegarderSf2(int indexSf2, QString fileName)
                 wTmp = champ_keyRange;
                 fi.write((char *)&wTmp, 2);
                 genTmp = this->get(id, champ_keyRange).genValue;
+                if (genTmp.ranges.byLo > 127)
+                    genTmp.ranges.byLo = 127;
+                if (genTmp.ranges.byHi > 127)
+                    genTmp.ranges.byHi = 127;
                 fi.write((char *)&genTmp, 2);
             }
             if (this->isSet(id, champ_velRange))
@@ -2012,6 +2032,10 @@ int Pile_sf2::sauvegarderSf2(int indexSf2, QString fileName)
                 wTmp = champ_velRange;
                 fi.write((char *)&wTmp, 2);
                 genTmp = this->get(id, champ_velRange).genValue;
+                if (genTmp.ranges.byLo > 127)
+                    genTmp.ranges.byLo = 127;
+                if (genTmp.ranges.byHi > 127)
+                    genTmp.ranges.byHi = 127;
                 fi.write((char *)&genTmp, 2);
             }
             for (int k = 0; k < this->count(id3); k++)
@@ -2042,6 +2066,10 @@ int Pile_sf2::sauvegarderSf2(int indexSf2, QString fileName)
                         wTmp = champ_keyRange;
                         fi.write((char *)&wTmp, 2);
                         genTmp = this->get(id2, champ_keyRange).genValue;
+                        if (genTmp.ranges.byLo > 127)
+                            genTmp.ranges.byLo = 127;
+                        if (genTmp.ranges.byHi > 127)
+                            genTmp.ranges.byHi = 127;
                         fi.write((char *)&genTmp, 2);
                     }
                     if (this->isSet(id2, champ_velRange))
@@ -2049,6 +2077,10 @@ int Pile_sf2::sauvegarderSf2(int indexSf2, QString fileName)
                         wTmp = champ_velRange;
                         fi.write((char *)&wTmp, 2);
                         genTmp = this->get(id2, champ_velRange).genValue;
+                        if (genTmp.ranges.byLo > 127)
+                            genTmp.ranges.byLo = 127;
+                        if (genTmp.ranges.byHi > 127)
+                            genTmp.ranges.byHi = 127;
                         fi.write((char *)&genTmp, 2);
                     }
                     for (int k = 0; k < this->count(id3); k++)

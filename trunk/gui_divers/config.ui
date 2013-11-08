@@ -10,19 +10,13 @@
     <x>0</x>
     <y>0</y>
     <width>413</width>
-    <height>250</height>
+    <height>283</height>
    </rect>
-  </property>
-  <property name="minimumSize">
-   <size>
-    <width>413</width>
-    <height>250</height>
-   </size>
   </property>
   <property name="maximumSize">
    <size>
     <width>413</width>
-    <height>250</height>
+    <height>283</height>
    </size>
   </property>
   <property name="windowTitle">
@@ -43,6 +37,9 @@
        <string>Général</string>
       </attribute>
       <layout class="QGridLayout" name="gridLayout_2">
+       <property name="verticalSpacing">
+        <number>3</number>
+       </property>
        <item row="0" column="0">
         <widget class="QLabel" name="label_2">
          <property name="text">
@@ -52,6 +49,12 @@
        </item>
        <item row="0" column="1">
         <widget class="QComboBox" name="comboRam">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
          <item>
           <property name="text">
            <string>Charger en mémoire lorsque nécessaire</string>
@@ -74,17 +77,17 @@
        <item row="1" column="1">
         <widget class="QComboBox" name="comboAudioOuput"/>
        </item>
-       <item row="2" column="0">
+       <item row="3" column="0">
         <widget class="QLabel" name="label_4">
          <property name="text">
           <string>Entrée midi</string>
          </property>
         </widget>
        </item>
-       <item row="2" column="1">
+       <item row="3" column="1">
         <widget class="QComboBox" name="comboMidiInput"/>
        </item>
-       <item row="3" column="0">
+       <item row="4" column="0">
         <widget class="QLabel" name="label_3">
          <property name="minimumSize">
           <size>
@@ -97,17 +100,77 @@
          </property>
         </widget>
        </item>
-       <item row="3" column="1">
+       <item row="4" column="1">
         <widget class="QCheckBox" name="checkBoucle">
          <property name="text">
           <string>ajuster à la boucle</string>
          </property>
         </widget>
        </item>
-       <item row="4" column="1">
+       <item row="5" column="1">
         <widget class="QCheckBox" name="checkBlanc">
          <property name="text">
           <string>enlever le blanc au départ</string>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="1">
+        <widget class="QCheckBox" name="checkRepercussionStereo">
+         <property name="text">
+          <string>répercuter les modifications si stéréo</string>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="0">
+        <widget class="QLabel" name="label_20">
+         <property name="text">
+          <string>Édition des samples</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="1">
+        <widget class="QComboBox" name="comboBufferSize">
+         <item>
+          <property name="text">
+           <string>16</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>32</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>64</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>128</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>256</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>512</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>1024</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item row="2" column="0">
+        <widget class="QLabel" name="label_21">
+         <property name="text">
+          <string>Taille du tampon</string>
          </property>
         </widget>
        </item>

@@ -435,6 +435,7 @@ void Synth::setStereo(int isStereo, bool withMutex)
     if (withMutex)
         m_mutexVoices.lock();
     m_isStereo = isStereo;
+
     // Mise à jour voix -1 et -2
     Voice * voice1 = NULL;
     Voice * voice2 = NULL;
@@ -504,7 +505,8 @@ void Synth::setSinusEnabled(int isEnabled, bool withMutex)
     if (withMutex)
         m_mutexVoices.lock();
     m_isSinusEnabled = isEnabled;
-    // Mise a jour voix -3
+
+    // Mise à jour voix -3
     Voice * voice3 = NULL;
     for (int i = 0; i < m_listeVoix.size(); i++)
     {
@@ -521,51 +523,42 @@ void Synth::setSinusEnabled(int isEnabled, bool withMutex)
     if (withMutex)
         m_mutexVoices.unlock();
 }
-void Synth::setStartLoop(int startLoop)
+void Synth::setStartLoop(int startLoop, bool repercute)
 {
-    // mise a jour voix -1
+    // mise à jour voix -1 et -2 si répercussion
     m_mutexVoices.lock();
-    Voice * voice = NULL;
     for (int i = 0; i < m_listeVoix.size(); i++)
     {
-        if (m_listeVoix.at(i)->getNote() == -1)
-            voice = m_listeVoix.at(i);
+        if (m_listeVoix.at(i)->getNote() == -1 || (m_listeVoix.at(i)->getNote() == -2 && repercute))
+            m_listeVoix[i]->getVoiceParam()->loopStart = startLoop;
     }
-    if (voice)
-        voice->getVoiceParam()->loopStart = startLoop;
     m_mutexVoices.unlock();
 }
-void Synth::setEndLoop(int endLoop)
+void Synth::setEndLoop(int endLoop, bool repercute)
 {
-    // mise à jour voix -1
+    // mise à jour voix -1 et -2 si répercussion
     m_mutexVoices.lock();
-    Voice * voice = NULL;
     for (int i = 0; i < m_listeVoix.size(); i++)
     {
-        if (m_listeVoix.at(i)->getNote() == -1)
-            voice = m_listeVoix.at(i);
+        if (m_listeVoix.at(i)->getNote() == -1 || (m_listeVoix.at(i)->getNote() == -2 && repercute))
+            m_listeVoix[i]->getVoiceParam()->loopEnd = endLoop;
     }
-    if (voice)
-        voice->getVoiceParam()->loopEnd = endLoop;
     m_mutexVoices.unlock();
 }
-void Synth::setPitchCorrection(int correction)
+void Synth::setPitchCorrection(int correction, bool repercute)
 {
-    // mise a jour voix -1
+    // mise à jour voix -1 et -2 si répercussion
     m_mutexVoices.lock();
-    Voice * voice = NULL;
     for (int i = 0; i < m_listeVoix.size(); i++)
     {
-        if (m_listeVoix.at(i)->getNote() == -1)
-            voice = m_listeVoix.at(i);
+        if (m_listeVoix.at(i)->getNote() == -1 || (m_listeVoix.at(i)->getNote() == -2 && repercute))
+            m_listeVoix[i]->getVoiceParam()->fineTune = correction;
     }
-    if (voice)
-        voice->getVoiceParam()->fineTune = correction;
     m_mutexVoices.unlock();
 }
 void Synth::setRootKey(int rootKey)
 {
-    // mise a jour voix -3 (sinus)
+    // mise à jour voix -3 (sinus)
     m_mutexVoices.lock();
     Voice * voice = NULL;
     for (int i = 0; i < m_listeVoix.size(); i++)

@@ -26,6 +26,7 @@
 #define DIALOG_HELP_H
 
 #include <QDialog>
+#include <QUrl>
 
 namespace Ui
 {
@@ -40,8 +41,15 @@ public:
     explicit DialogHelp(QWidget * parent);
     ~DialogHelp();
     
+private slots:
+    void on_pushPrevious_clicked();
+    void on_pushNext_clicked();
+    void on_pushHome_clicked();
+    void on_textBrowser_sourceChanged(const QUrl &arg1);
+
 private:
     Ui::DialogHelp *ui;
+    QString _previous, _next;
 };
 
 #endif // DIALOG_HELP_H

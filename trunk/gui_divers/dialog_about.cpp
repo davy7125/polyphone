@@ -22,69 +22,30 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef AUDIODEVICE_H
-#define AUDIODEVICE_H
+#include "dialog_about.h"
+#include "ui_dialog_about.h"
 
-#include <QObject>
-#include "jack.h"
-#include <session.h>
-#include "portaudio.h"
+#include "mainwindow.h"
 
-class Synth;
-
-#define SAMPLE_RATE           44100
-
-class AudioFormat
+DialogAbout::DialogAbout(QWidget *parent) :
+    QDialog(parent),
+    ui(new Ui::DialogAbout)
 {
-public:
-    void setChannelCount(qint32 value)  {m_channelCount = value;}
-    void setSampleRate(qint32 value)    {m_sampleRate = value;}
-    void setSampleSize(qint32 value)    {m_sampleSize = value;}
-    qint32 channelCount()               {return m_channelCount;}
-    qint32 sampleRate()                 {return m_sampleRate;}
-    qint32 sampleSize()                 {return m_sampleSize;}
-private:
-    qint32 m_channelCount;
-    qint32 m_sampleRate;
-    qint32 m_sampleSize;
-};
+    ui->setupUi(this);
+    ui->labelNomVersion->setText("Polyphone " + QString(VERSION));
+}
 
-class AudioDevice : public QObject
+DialogAbout::~DialogAbout()
 {
-    Q_OBJECT
-public:
-    AudioDevice(Synth *synth, QObject *parent = NULL);
-    ~AudioDevice();
+    delete ui;
+}
 
-    // Accès aux ports et synthé pour Jack
-    jack_port_t * m_output_port_R;
-    jack_port_t * m_output_port_L;
-    Synth * m_synth;
+void DialogAbout::on_pushCredit_clicked(bool checked)
+{
+    ui->stackedWidget->setCurrentIndex(!checked);
+}
 
-    // Accès au format audio
-    AudioFormat m_format;
-
-public slots:
-    void initAudio(int numDevice, int bufferSize);
-    void closeConnections();
-signals:
-    void start();
-private:
-    enum TypeConnection
-    {
-        CONNECTION_NONE,
-        CONNECTION_JACK,
-        CONNECTION_ASIO,
-        CONNECTION_STANDARD
-    };
-    void openJackConnection(int bufferSize);
-    void openStandardConnection(int bufferSize, bool isAsio);
-    // Serveur son, sortie standard ou asio
-    bool m_isStandardRunning;
-    PaStream * m_standardStream;
-    // Serveur son, jack
-    jack_client_t * m_jack_client;
-    TypeConnection m_typeConnection;
-};
-
-#endif // AUDIODEVICE_H
+void DialogAbout::on_pushClose_clicked()
+{
+    QDialog::close();
+}

@@ -58,7 +58,7 @@ void Page_Sf2::afficher()
     // Mode 24 bits ?
     ui->check_24bits->setChecked(this->sf2->get(id, champ_wBpsSave).wValue == 24);
     // Informations
-    ui->label_filename->setText(this->sf2->getQstr(id, champ_filename));
+    ui->label_filename->setText(" " + this->sf2->getQstr(id, champ_filename));
     char T[20];
     if (this->sf2->get(id, champ_IFIL).sfVerValue.wMinor < 10)
         sprintf(T, "%d.0%d", this->sf2->get(id, champ_IFIL).sfVerValue.wMajor, this->sf2->get(id, champ_IFIL).sfVerValue.wMinor);
@@ -200,29 +200,44 @@ void Page_Sf2::compte()
 {
     if (this->tree->getSelectedItemsNumber() == 0) return;
     if (!this->tree->isSelectedItemsSf2Unique()) return;
+
     // Compte des samples, instruments et presets utilisés et non utilisés
     int unusedSmpl, unusedInst, usedSmpl, usedInst, usedPrst, instGen, prstGen;
     this->compte(unusedSmpl, unusedInst, usedSmpl, usedInst, usedPrst, instGen, prstGen);
+
     // Affichage
-    char T[30];
-    sprintf(T,"%d", unusedSmpl);
-    this->ui->label_unusedSmpl->setText(QString::fromUtf8(T));
     if (unusedSmpl)
-        this->ui->label_unusedSmpl->setStyleSheet("QLabel { color : red; font-weight: bold;}");
+    {
+        if (unusedSmpl > 1)
+            this->ui->label_nbSmpl->setText(QString::number(usedSmpl) +
+                                            trUtf8(" (inutilisés : ") + QString::number(unusedSmpl) + ")");
+        else
+            this->ui->label_nbSmpl->setText(QString::number(usedSmpl) +
+                                            trUtf8(" (inutilisé : ") + QString::number(unusedSmpl) + ")");
+        this->ui->label_nbSmpl->setStyleSheet("QLabel { color : red; font-weight: bold;}");
+    }
     else
-        this->ui->label_unusedSmpl->setStyleSheet("QLabel { color : black; font-weight: normal;}");
-    sprintf(T,"%d", unusedInst);
-    this->ui->label_unusedInst->setText(QString::fromUtf8(T));
+    {
+        this->ui->label_nbSmpl->setText(QString::number(usedSmpl));
+        this->ui->label_nbSmpl->setStyleSheet("QLabel { color : black; font-weight: normal;}");
+    }
     if (unusedInst)
-        this->ui->label_unusedInst->setStyleSheet("QLabel { color : red; font-weight: bold;}");
+    {
+        if (unusedInst > 1)
+            this->ui->label_nbInst->setText(QString::number(usedInst) +
+                                            trUtf8(" (inutilisés : ") + QString::number(unusedInst) + ")");
+        else
+            this->ui->label_nbInst->setText(QString::number(usedInst) +
+                                            trUtf8(" (inutilisé : ") + QString::number(unusedInst) + ")");
+        this->ui->label_nbInst->setStyleSheet("QLabel { color : red; font-weight: bold;}");
+    }
     else
-        this->ui->label_unusedInst->setStyleSheet("QLabel { color : black; font-weight: normal;}");
-    sprintf(T,"%d", usedSmpl);
-    this->ui->label_nbSmpl->setText(QString::fromUtf8(T));
-    sprintf(T,"%d", usedInst);
-    this->ui->label_nbInst->setText(QString::fromUtf8(T));
-    sprintf(T,"%d", usedPrst);
-    this->ui->label_nbPrst->setText(QString::fromUtf8(T));
+    {
+        this->ui->label_nbInst->setText(QString::number(usedInst));
+        this->ui->label_nbInst->setStyleSheet("QLabel { color : black; font-weight: normal;}");
+    }
+    this->ui->label_nbPrst->setText(QString::number(usedPrst));
+
     if (instGen <= 65536)
     {
         this->ui->label_nbInstGen->setStyleSheet("QLabel{color:#008800;}");

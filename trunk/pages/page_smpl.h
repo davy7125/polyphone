@@ -41,6 +41,7 @@ class Page_Smpl : public Page
 public:
     explicit Page_Smpl(QWidget * parent = 0);
     ~Page_Smpl();
+
     // Méthodes publiques
     void afficher();
     void normalisation();
@@ -54,8 +55,10 @@ public:
     void transposer();
     void sifflements();
     bool isPlaying();
+
 signals:
     void noteChanged(int unused, int vel);
+
 private slots:
     void lecture();
     void lecteurFinished();
@@ -82,8 +85,10 @@ private slots:
 private:
     Ui::Page_Smpl *ui;
     bool lectureEnCours;
+
     // Méthodes privées
     void setRateElt(EltID id, DWORD echFinal);
+    EltID getRepercussionID();
 };
 
 class Graphique : public QCustomPlot

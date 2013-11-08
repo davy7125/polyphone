@@ -52,7 +52,7 @@ Config::Config(QWidget *parent) : QDialog(parent),
         listFiles.append("");
 
     this->mainWindow = (MainWindow *)parent;
-    this->loaded = 0;
+    this->loaded = false;
     ui->setupUi(this);
     // CHARGEMENT DE LA CONFIGURATION
     this->load();
@@ -92,8 +92,15 @@ Config::Config(QWidget *parent) : QDialog(parent),
         this->ui->comboAudioOuput->setCurrentIndex(nbItem - 1 - isAsioEnabled); // Jack
     else if (this->audioType == -3)
         this->ui->comboAudioOuput->setCurrentIndex(nbItem - 1); // Asio
+    int pos = log2(bufferSize) - 4;
+    if (pos < 0)
+        pos = 0;
+    if (pos > ui->comboBufferSize->count() - 1)
+        pos = ui->comboBufferSize->count() - 1;
+    this->ui->comboBufferSize->setCurrentIndex(pos);
     this->ui->checkBoucle->setChecked(this->wavAutoLoop);
     this->ui->checkBlanc->setChecked(this->wavRemoveBlank);
+
     // Paramètres synthétiseur
     if (this->synthGain < -50)
         this->synthGain = -50;
@@ -108,6 +115,7 @@ Config::Config(QWidget *parent) : QDialog(parent),
     this->ui->dialChoNiveau->setValue(this->choLevel);
     this->ui->dialChoAmplitude->setValue(this->choDepth);
     this->ui->dialChoFrequence->setValue(this->choFrequency);
+    this->ui->checkRepercussionStereo->setChecked(this->modifStereo);
     if (this->keyboardType < 0 || this->keyboardType > 3)
         this->keyboardType = 1;
     if (this->keyboardVelocity < 0)
@@ -130,7 +138,7 @@ Config::Config(QWidget *parent) : QDialog(parent),
     this->ui->tableKeyboardMap->setOctave(octaveMapping);
     connect(ui->tableKeyboardMap, SIGNAL(combinaisonChanged(int,QString)), this, SLOT(combinaisonChanged(int, QString)));
 
-    this->loaded = 1;
+    this->loaded = true;
 }
 Config::~Config()
 {
@@ -151,6 +159,7 @@ void Config::show()
     else
         this->ui->comboMidiInput->setCurrentIndex(0);
     this->ui->comboMidiInput->blockSignals(false);
+
     // Affichage du dialogue
     QDialog::show();
 }
@@ -192,27 +201,36 @@ void Config::setAudioOutput(int index)
         {
             this->audioIndex = 0;
             this->audioType = -1;
-            this->mainWindow->setAudioEngine(-1);
+            this->mainWindow->setAudioEngine(-1, bufferSize);
         }
         else if (!this->ui->comboAudioOuput->itemText(index).compare("Jack"))
         {
             this->audioIndex = 0;
             this->audioType = -2;
-            this->mainWindow->setAudioEngine(-2);
+            this->mainWindow->setAudioEngine(-2, bufferSize);
         }
         else if (!this->ui->comboAudioOuput->itemText(index).compare("Asio"))
         {
             this->audioIndex = 0;
             this->audioType = -3;
-            this->mainWindow->setAudioEngine(-3);
+            this->mainWindow->setAudioEngine(-3, bufferSize);
         }
         else
         {
             this->audioIndex = index-1;
             this->audioType = 0;
-            this->mainWindow->setAudioEngine(index-1);
+            this->mainWindow->setAudioEngine(index-1, bufferSize);
         }
         this->store();
+    }
+}
+void Config::on_comboBufferSize_activated(int index)
+{
+    // Modification de la taille du buffer
+    if (this->loaded)
+    {
+        bufferSize = pow(2, index + 4);
+        setAudioOutput(ui->comboAudioOuput->currentIndex());
     }
 }
 void Config::setWavAutoLoop(bool checked)
@@ -351,6 +369,16 @@ void Config::setSynthGain(int val)
         this->mainWindow->setSynthGain(val);
     }
 }
+
+void Config::setVolume(int val)
+{
+    setSynthGain(val);
+    ui->sliderGain->blockSignals(true);
+    ui->sliderGain->setValue(val);
+    ui->labelGain->setText(QString::number(val));
+    ui->sliderGain->blockSignals(false);
+}
+
 void Config::on_dialRevNiveau_valueChanged(int value)
 {
     if (this->loaded)
@@ -414,6 +442,15 @@ void Config::on_dialChoFrequence_valueChanged(int value)
         this->mainWindow->setSynthChorus(choLevel, choDepth, choFrequency);
     }
 }
+void Config::on_checkRepercussionStereo_clicked()
+{
+    if (this->loaded)
+    {
+        this->modifStereo = ui->checkRepercussionStereo->isChecked();
+        this->store();
+    }
+}
+
 
 // Gestion des configurations
 void Config::load()
@@ -445,6 +482,7 @@ void Config::load()
     this->afficheToolBar    = settings.value("affichage/tool_bar", true).toBool();
     this->afficheMod        = settings.value("affichage/section_modulateur", true).toBool();
     this->audioIndex        = settings.value("audio/index", 0).toInt();
+    this->bufferSize        = settings.value("audio/buffer_size", 512).toInt();
     this->audioType         = settings.value("audio/type", 0).toInt();
     this->wavAutoLoop       = settings.value("wav_auto_loop", false).toBool();
     if (settings.contains("wav_remove_bank"))
@@ -471,6 +509,7 @@ void Config::load()
                     << settings.value("colors/graph_startloop", QColor(100, 255, 100)).toString()
                     << settings.value("colors/graph_endloop", QColor(255, 0, 0)).toString()
                     << settings.value("colors/graph_timecursor", QColor(255, 255, 255)).toString();
+    this->modifStereo       = settings.value("General/stereo_modification", false).toBool();
 }
 void Config::store()
 {
@@ -485,6 +524,7 @@ void Config::store()
     settings.setValue("affichage/tool_bar",             this->afficheToolBar);
     settings.setValue("affichage/section_modulateur",   this->afficheMod);
     settings.setValue("audio/index",                    this->audioIndex);
+    settings.setValue("audio/buffer_size",              this->bufferSize);
     settings.setValue("audio/type",                     this->audioType);
     settings.setValue("wav_auto_loop",                  this->wavAutoLoop);
     settings.setValue("wav_remove_blank",               this->wavRemoveBlank);
@@ -505,6 +545,7 @@ void Config::store()
     settings.setValue("colors/graph_startloop",         this->colorList.at(3).name());
     settings.setValue("colors/graph_endloop",           this->colorList.at(4).name());
     settings.setValue("colors/graph_timecursor",        this->colorList.at(5).name());
+    settings.setValue("General/stereo_modification",    this->modifStereo);
 }
 
 void Config::setColors()
