@@ -141,7 +141,7 @@ void DialogParamGlobal::indexMotifChanged(int index)
     }
     else
     {
-        this->ui->label_6->setText(trUtf8("-"));
+        this->ui->label_6->setText("-");
         this->ui->doubleSpinRaideur->setEnabled(false);
     }
     this->ui->graphParamGlobal->indexMotifChanged(index);

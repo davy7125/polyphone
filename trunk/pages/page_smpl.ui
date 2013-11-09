@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string notr="true">Form</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <property name="spacing">
@@ -243,7 +243,7 @@
               </sizepolicy>
              </property>
              <property name="text">
-              <string>500</string>
+              <string notr="true">500</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignCenter</set>
@@ -259,7 +259,7 @@
               </sizepolicy>
              </property>
              <property name="text">
-              <string>4k</string>
+              <string notr="true">4k</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignCenter</set>
@@ -275,7 +275,7 @@
               </sizepolicy>
              </property>
              <property name="text">
-              <string>1k</string>
+              <string notr="true">1k</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignCenter</set>
@@ -378,7 +378,7 @@
               </sizepolicy>
              </property>
              <property name="text">
-              <string>32</string>
+              <string notr="true">32</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignCenter</set>
@@ -394,7 +394,7 @@
               </sizepolicy>
              </property>
              <property name="text">
-              <string>64</string>
+              <string notr="true">64</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignCenter</set>
@@ -438,7 +438,7 @@
               </sizepolicy>
              </property>
              <property name="text">
-              <string>8k</string>
+              <string notr="true">8k</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignCenter</set>
@@ -510,7 +510,7 @@
               </sizepolicy>
              </property>
              <property name="text">
-              <string>125</string>
+              <string notr="true">125</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignCenter</set>
@@ -582,7 +582,7 @@
               </sizepolicy>
              </property>
              <property name="text">
-              <string>250</string>
+              <string notr="true">250</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignCenter</set>
@@ -598,7 +598,7 @@
               </sizepolicy>
              </property>
              <property name="text">
-              <string>2k</string>
+              <string notr="true">2k</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignCenter</set>
@@ -642,7 +642,7 @@
               </sizepolicy>
              </property>
              <property name="text">
-              <string>16k</string>
+              <string notr="true">16k</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignCenter</set>
@@ -819,7 +819,7 @@
            <item row="0" column="1" colspan="2">
             <widget class="QLabel" name="labelTaille">
              <property name="text">
-              <string>TextLabel</string>
+              <string notr="true">TextLabel</string>
              </property>
             </widget>
            </item>
@@ -844,37 +844,37 @@
             <widget class="QComboBox" name="comboSampleRate">
              <item>
               <property name="text">
-               <string>192000</string>
+               <string notr="true">192000</string>
               </property>
              </item>
              <item>
               <property name="text">
-               <string>96000</string>
+               <string notr="true">96000</string>
               </property>
              </item>
              <item>
               <property name="text">
-               <string>48000</string>
+               <string notr="true">48000</string>
               </property>
              </item>
              <item>
               <property name="text">
-               <string>44100</string>
+               <string notr="true">44100</string>
               </property>
              </item>
              <item>
               <property name="text">
-               <string>32000</string>
+               <string notr="true">32000</string>
               </property>
              </item>
              <item>
               <property name="text">
-               <string>22050</string>
+               <string notr="true">22050</string>
               </property>
              </item>
              <item>
               <property name="text">
-               <string>11025</string>
+               <string notr="true">11025</string>
               </property>
              </item>
             </widget>

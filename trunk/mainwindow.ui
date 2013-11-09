@@ -14,7 +14,7 @@
    <enum>Qt::CustomContextMenu</enum>
   </property>
   <property name="windowTitle">
-   <string>Polyphone</string>
+   <string notr="true">Polyphone</string>
   </property>
   <property name="windowIcon">
    <iconset resource="ressources.qrc">
@@ -114,7 +114,7 @@
             </font>
            </property>
            <property name="text">
-            <string>-</string>
+            <string notr="true">-</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignCenter</set>
@@ -141,7 +141,7 @@
             </font>
            </property>
            <property name="text">
-            <string>-</string>
+            <string notr="true">-</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignCenter</set>
@@ -190,8 +190,8 @@
     <property name="title">
      <string>&amp;Fichier</string>
     </property>
-    <addaction name="actionNouveau"/>
     <addaction name="actionOuvrir"/>
+    <addaction name="actionNouveau"/>
     <addaction name="separator"/>
     <addaction name="actionEnregistrer"/>
     <addaction name="actionEnregistrer_sous"/>
@@ -341,7 +341,7 @@
    <property name="minimumSize">
     <size>
      <width>150</width>
-     <height>0</height>
+     <height>149</height>
     </size>
    </property>
    <property name="maximumSize">
@@ -805,7 +805,7 @@
     <string>&amp;Enlever les éléments non utilisés</string>
    </property>
    <property name="toolTip">
-    <string>Enleve les éléments non utilisés</string>
+    <string>Enlève les samples et instruments non utilisés</string>
    </property>
   </action>
   <action name="actionRenommer">
@@ -833,6 +833,9 @@
    <property name="text">
     <string>fichier 1</string>
    </property>
+   <property name="iconText">
+    <string notr="true">fichier 1</string>
+   </property>
    <property name="toolTip">
     <string>Ouvre un fichier récent</string>
    </property>
@@ -846,6 +849,9 @@
    </property>
    <property name="text">
     <string>fichier 2</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">fichier 2</string>
    </property>
    <property name="toolTip">
     <string>Ouvre un fichier récent</string>
@@ -861,6 +867,9 @@
    <property name="text">
     <string>fichier 3</string>
    </property>
+   <property name="iconText">
+    <string notr="true">fichier 3</string>
+   </property>
    <property name="toolTip">
     <string>Ouvre un fichier récent</string>
    </property>
@@ -875,6 +884,9 @@
    <property name="text">
     <string>fichier 4</string>
    </property>
+   <property name="iconText">
+    <string notr="true">fichier 4</string>
+   </property>
    <property name="toolTip">
     <string>Ouvre un fichier récent</string>
    </property>
@@ -888,6 +900,9 @@
    </property>
    <property name="text">
     <string>fichier 5</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">fichier 5</string>
    </property>
    <property name="toolTip">
     <string>Ouvre un fichier récent</string>
@@ -1131,6 +1146,9 @@
    <property name="text">
     <string>D&amp;uplication des divisions...</string>
    </property>
+   <property name="iconText">
+    <string>Duplication des divisions...</string>
+   </property>
    <property name="toolTip">
     <string>Duplique les divisions</string>
    </property>
@@ -1217,7 +1235,7 @@
     <string>&amp;6 octaves</string>
    </property>
    <property name="toolTip">
-    <string>affiche un clavie de 6 octaves</string>
+    <string>affiche un clavier de 6 octaves</string>
    </property>
   </action>
   <action name="action128_notes">
@@ -1374,7 +1392,7 @@
     <string>Exporter (sf&amp;z)...</string>
    </property>
    <property name="toolTip">
-    <string>Exporter en tant que fichier sfz</string>
+    <string>Exporte en tant que fichier sfz</string>
    </property>
   </action>
  </widget>

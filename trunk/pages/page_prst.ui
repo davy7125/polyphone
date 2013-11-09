@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string notr="true">Form</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <property name="spacing">
@@ -200,22 +200,22 @@
      </attribute>
      <row>
       <property name="text">
-       <string>typeElement</string>
+       <string notr="true">typeElement</string>
       </property>
      </row>
      <row>
       <property name="text">
-       <string>indexSf2</string>
+       <string notr="true">indexSf2</string>
       </property>
      </row>
      <row>
       <property name="text">
-       <string>indexElt</string>
+       <string notr="true">indexElt</string>
       </property>
      </row>
      <row>
       <property name="text">
-       <string>indexElt2</string>
+       <string notr="true">indexElt2</string>
       </property>
      </row>
      <row>
@@ -638,32 +638,32 @@
            </attribute>
            <column>
             <property name="text">
-             <string>typeElement</string>
+             <string notr="true">typeElement</string>
             </property>
            </column>
            <column>
             <property name="text">
-             <string>indexSf2</string>
+             <string notr="true">indexSf2</string>
             </property>
            </column>
            <column>
             <property name="text">
-             <string>indexElt</string>
+             <string notr="true">indexElt</string>
             </property>
            </column>
            <column>
             <property name="text">
-             <string>indexElt2</string>
+             <string notr="true">indexElt2</string>
             </property>
            </column>
            <column>
             <property name="text">
-             <string>indexMod</string>
+             <string notr="true">indexMod</string>
             </property>
            </column>
            <column>
             <property name="text">
-             <string>#</string>
+             <string notr="true">#</string>
             </property>
             <property name="font">
              <font>

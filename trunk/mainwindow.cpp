@@ -2527,15 +2527,17 @@ void MainWindow::purger()
         }
     }
     // Bilan
-    char c1[20];
-    if (unusedSmpl < 2) sprintf(c1, tr("%d sample et ").toStdString().c_str(), unusedSmpl);
-    else sprintf(c1, tr("%d samples et ").toStdString().c_str(), unusedSmpl);
-    char c2[40];
-    if (unusedInst < 2) sprintf(c2, tr("%d instrument ont été supprimés.").toStdString().c_str(), unusedInst);
-    else sprintf(c2, tr("%d instruments ont été supprimés.").toStdString().c_str(), unusedInst);
-    QString qStr = c1;
-    qStr.append(c2);
-    QMessageBox::information(this, "", QString::fromUtf8(qStr.toStdString().c_str()));
+    QString qStr;
+    if (unusedSmpl < 2)
+        qStr = QString::number(unusedSmpl) + trUtf8(" sample et ");
+    else
+        qStr = QString::number(unusedSmpl) + trUtf8(" samples et ");
+    if (unusedInst < 2)
+        qStr += QString::number(unusedInst) + trUtf8(" instrument ont été supprimés.");
+    else
+        qStr += QString::number(unusedInst) + trUtf8(" instruments ont été supprimés.");
+
+    QMessageBox::information(this, "", qStr);
     updateDo();
     updateActions();
 }

@@ -32,21 +32,20 @@
 int main(int argc, char *argv[])
 {
     // Traduction si nécessaire
-    QTranslator translatorEN, translatorDE, translatorNL;
+    QTranslator translatorEN, translatorES;
     translatorEN.load(":/traductions/polyphone_en"); // Doit se placer avant QApplication
-    translatorDE.load(":/traductions/polyphone_de");
-    translatorNL.load(":/traductions/polyphone_nl");
+    translatorES.load(":/traductions/polyphone_es");
     QApplication a(argc, argv);
+
     // Nom de l'application
     a.setApplicationName("Polyphone");
     a.setOrganizationName("polyphone");
     QString locale = QLocale::system().name().section('_', 0, 0);
-    /*if (locale.compare("de") == 0)
-        a.installTranslator(&translatorDE);
-    else if (locale.compare("nl") == 0)
-        a.installTranslator(&translatorNL);
-    else */if (locale.compare("fr") != 0)
+    if (locale.compare("es") == 0)
+        a.installTranslator(&translatorES);
+    else if (locale.compare("fr") != 0)
         a.installTranslator(&translatorEN);
+
     // Affichage fenêtre
     MainWindow w;
     w.show();
@@ -60,5 +59,6 @@ int main(int argc, char *argv[])
         if (!suffix.compare("sf2"))
             w.ouvrir(listeArg.at(i));
     }
+
     return a.exec();
 }

@@ -241,7 +241,7 @@ void Page_Sf2::compte()
     if (instGen <= 65536)
     {
         this->ui->label_nbInstGen->setStyleSheet("QLabel{color:#008800;}");
-        this->ui->label_nbInstGen->setText(QString::number(instGen) + trUtf8(" (≤ 65536)"));
+        this->ui->label_nbInstGen->setText(QString::number(instGen) + QString::fromUtf8(" (≤ 65536)"));
     }
     else
     {
@@ -251,7 +251,7 @@ void Page_Sf2::compte()
     if (prstGen <= 65536)
     {
         this->ui->label_nbPrstGen->setStyleSheet("QLabel{color:#008800;}");
-        this->ui->label_nbPrstGen->setText(QString::number(prstGen) + trUtf8(" (≤ 65536)"));
+        this->ui->label_nbPrstGen->setText(QString::number(prstGen) + QString::fromUtf8(" (≤ 65536)"));
     }
     else
     {

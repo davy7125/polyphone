@@ -286,117 +286,117 @@ QString DialogMixture::getText(int type1, int type2)
     case 0: // octaves
         switch (type2)
         {
-        case 0: text = trUtf8("32'"); break;
-        case 1: text = trUtf8("16'"); break;
-        case 2: text = trUtf8("8'"); break;
-        case 3: text = trUtf8("4'"); break;
-        case 4: text = trUtf8("2'"); break;
-        case 5: text = trUtf8("1'"); break;
-        case 6: text = trUtf8("1/2'"); break;
-        case 7: text = trUtf8("1/4'"); break;
-        case 8: text = trUtf8("1/8'"); break;
-        case 9: text = trUtf8("1/16'"); break;
+        case 0: text = "32'"; break;
+        case 1: text = "16'"; break;
+        case 2: text = "8'"; break;
+        case 3: text = "4'"; break;
+        case 4: text = "2'"; break;
+        case 5: text = "1'"; break;
+        case 6: text = "1/2'"; break;
+        case 7: text = "1/4'"; break;
+        case 8: text = "1/8'"; break;
+        case 9: text = "1/16'"; break;
         }
         break;
     case 1: // quintes
         switch (type2)
         {
-        case 0: text = trUtf8("10' 2/3"); break;
-        case 1: text = trUtf8("5' 1/3"); break;
-        case 2: text = trUtf8("2' 2/3"); break;
-        case 3: text = trUtf8("1' 1/3"); break;
-        case 4: text = trUtf8("2/3'"); break;
-        case 5: text = trUtf8("1/3'"); break;
-        case 6: text = trUtf8("1/6'"); break;
-        case 7: text = trUtf8("1/12'"); break;
+        case 0: text = "10' 2/3"; break;
+        case 1: text = "5' 1/3"; break;
+        case 2: text = "2' 2/3"; break;
+        case 3: text = "1' 1/3"; break;
+        case 4: text = "2/3'"; break;
+        case 5: text = "1/3'"; break;
+        case 6: text = "1/6'"; break;
+        case 7: text = "1/12'"; break;
         }
         break;
     case 2: // tierces
         switch (type2)
         {
-        case 0: text = trUtf8("6' 2/5"); break;
-        case 1: text = trUtf8("3' 1/5"); break;
-        case 2: text = trUtf8("1' 3/5"); break;
-        case 3: text = trUtf8("4/5'"); break;
-        case 4: text = trUtf8("2/5'"); break;
-        case 5: text = trUtf8("1/5'"); break;
-        case 6: text = trUtf8("1/10'"); break;
+        case 0: text = "6' 2/5"; break;
+        case 1: text = "3' 1/5"; break;
+        case 2: text = "1' 3/5"; break;
+        case 3: text = "4/5'"; break;
+        case 4: text = "2/5'"; break;
+        case 5: text = "1/5'"; break;
+        case 6: text = "1/10'"; break;
         }
         break;
     case 3: // septièmes
         switch (type2)
         {
-        case 0: text = trUtf8("4' 4/7"); break;
-        case 1: text = trUtf8("2' 2/7"); break;
-        case 2: text = trUtf8("1' 1/7"); break;
-        case 3: text = trUtf8("4/7'"); break;
-        case 4: text = trUtf8("2/7'"); break;
-        case 5: text = trUtf8("1/7'"); break;
-        case 6: text = trUtf8("1/14'"); break;
+        case 0: text = "4' 4/7"; break;
+        case 1: text = "2' 2/7"; break;
+        case 2: text = "1' 1/7"; break;
+        case 3: text = "4/7'"; break;
+        case 4: text = "2/7'"; break;
+        case 5: text = "1/7'"; break;
+        case 6: text = "1/14'"; break;
         }
         break;
     case 4: // neuvièmes
         switch (type2)
         {
-        case 0: text = trUtf8("3' 5/9"); break;
-        case 1: text = trUtf8("1' 7/9"); break;
-        case 2: text = trUtf8("8/9'"); break;
-        case 3: text = trUtf8("4/9'"); break;
-        case 4: text = trUtf8("2/9'"); break;
-        case 5: text = trUtf8("1/9'"); break;
+        case 0: text = "3' 5/9"; break;
+        case 1: text = "1' 7/9"; break;
+        case 2: text = "8/9'"; break;
+        case 3: text = "4/9'"; break;
+        case 4: text = "2/9'"; break;
+        case 5: text = "1/9'"; break;
         }
         break;
     case 5: // onzièmes
         switch (type2)
         {
-        case 0: text = trUtf8("2' 10/11"); break;
-        case 1: text = trUtf8("1' 5/11"); break;
-        case 2: text = trUtf8("8/11'"); break;
-        case 3: text = trUtf8("4/11'"); break;
-        case 4: text = trUtf8("2/11'"); break;
-        case 5: text = trUtf8("1/11'"); break;
+        case 0: text = "2' 10/11"; break;
+        case 1: text = "1' 5/11"; break;
+        case 2: text = "8/11'"; break;
+        case 3: text = "4/11'"; break;
+        case 4: text = "2/11'"; break;
+        case 5: text = "1/11'"; break;
         }
         break;
     case 6: // treizièmes
         switch (type2)
         {
-        case 0: text = trUtf8("2' 6/13"); break;
-        case 1: text = trUtf8("1' 3/13"); break;
-        case 2: text = trUtf8("8/13'"); break;
-        case 3: text = trUtf8("4/13'"); break;
-        case 4: text = trUtf8("2/13'"); break;
-        case 5: text = trUtf8("1/13'"); break;
+        case 0: text = "2' 6/13"; break;
+        case 1: text = "1' 3/13"; break;
+        case 2: text = "8/13'"; break;
+        case 3: text = "4/13'"; break;
+        case 4: text = "2/13'"; break;
+        case 5: text = "1/13'"; break;
         }
         break;
     case 7: // quinzièmes
         switch (type2)
         {
-        case 0: text = trUtf8("2' 2/15"); break;
-        case 1: text = trUtf8("1' 1/15"); break;
-        case 2: text = trUtf8("8/15'"); break;
-        case 3: text = trUtf8("4/15'"); break;
-        case 4: text = trUtf8("2/15'"); break;
-        case 5: text = trUtf8("1/15'"); break;
+        case 0: text = "2' 2/15"; break;
+        case 1: text = "1' 1/15"; break;
+        case 2: text = "8/15'"; break;
+        case 3: text = "4/15'"; break;
+        case 4: text = "2/15'"; break;
+        case 5: text = "1/15'"; break;
         }
         break;
     case 8: // dix-septièmes
         switch (type2)
         {
-        case 0: text = trUtf8("1' 15/17"); break;
-        case 1: text = trUtf8("16/17'"); break;
-        case 2: text = trUtf8("8/17'"); break;
-        case 3: text = trUtf8("4/17'"); break;
-        case 4: text = trUtf8("2/17'"); break;
+        case 0: text = "1' 15/17"; break;
+        case 1: text = "16/17'"; break;
+        case 2: text = "8/17'"; break;
+        case 3: text = "4/17'"; break;
+        case 4: text = "2/17'"; break;
         }
         break;
     case 9: // dix-neuvièmes
         switch (type2)
         {
-        case 0: text = trUtf8("1' 13/19"); break;
-        case 1: text = trUtf8("16/19'"); break;
-        case 2: text = trUtf8("8/19'"); break;
-        case 3: text = trUtf8("4/19'"); break;
-        case 4: text = trUtf8("2/19'"); break;
+        case 0: text = "1' 13/19"; break;
+        case 1: text = "16/19'"; break;
+        case 2: text = "8/19'"; break;
+        case 3: text = "4/19'"; break;
+        case 4: text = "2/19'"; break;
         }
         break;
     }
