@@ -132,37 +132,37 @@
         <widget class="QComboBox" name="comboBufferSize">
          <item>
           <property name="text">
-           <string>16</string>
+           <string notr="true">16</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string>32</string>
+           <string notr="true">32</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string>64</string>
+           <string notr="true">64</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string>128</string>
+           <string notr="true">128</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string>256</string>
+           <string notr="true">256</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string>512</string>
+           <string notr="true">512</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string>1024</string>
+           <string notr="true">1024</string>
           </property>
          </item>
         </widget>
@@ -536,7 +536,7 @@
             </size>
            </property>
            <property name="text">
-            <string>0</string>
+            <string notr="true">0</string>
            </property>
            <property name="alignment">
             <set>Qt::AlignCenter</set>

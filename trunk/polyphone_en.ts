@@ -19,6 +19,7 @@
     <message>
         <location filename="gui_divers/config.ui" line="46"/>
         <source>Gestion RAM</source>
+        <translatorcomment>(this settings is disabled)</translatorcomment>
         <translation>RAM management</translation>
     </message>
     <message>
@@ -34,11 +35,13 @@
     <message utf8="true">
         <location filename="gui_divers/config.ui" line="60"/>
         <source>Charger en mémoire lorsque nécessaire</source>
+        <translatorcomment>(this settings is disabled)</translatorcomment>
         <translation>Load in RAM only when necessary</translation>
     </message>
     <message utf8="true">
         <location filename="gui_divers/config.ui" line="65"/>
         <source>Tout charger en mémoire</source>
+        <translatorcomment>(this settings is disabled)</translatorcomment>
         <translation>Always load in RAM</translation>
     </message>
     <message utf8="true">
@@ -65,41 +68,6 @@
         <location filename="gui_divers/config.ui" line="127"/>
         <source>Édition des samples</source>
         <translation>Sample editing</translation>
-    </message>
-    <message>
-        <location filename="gui_divers/config.ui" line="135"/>
-        <source>16</source>
-        <translation>16</translation>
-    </message>
-    <message>
-        <location filename="gui_divers/config.ui" line="140"/>
-        <source>32</source>
-        <translation>32</translation>
-    </message>
-    <message>
-        <location filename="gui_divers/config.ui" line="145"/>
-        <source>64</source>
-        <translation>64</translation>
-    </message>
-    <message>
-        <location filename="gui_divers/config.ui" line="150"/>
-        <source>128</source>
-        <translation>128</translation>
-    </message>
-    <message>
-        <location filename="gui_divers/config.ui" line="155"/>
-        <source>256</source>
-        <translation>256</translation>
-    </message>
-    <message>
-        <location filename="gui_divers/config.ui" line="160"/>
-        <source>512</source>
-        <translation>512</translation>
-    </message>
-    <message>
-        <location filename="gui_divers/config.ui" line="165"/>
-        <source>1024</source>
-        <translation>1024</translation>
     </message>
     <message>
         <location filename="gui_divers/config.ui" line="173"/>
@@ -153,11 +121,6 @@
         <location filename="gui_divers/config.ui" line="453"/>
         <source>Amplitude</source>
         <translation>Depth</translation>
-    </message>
-    <message>
-        <location filename="gui_divers/config.ui" line="539"/>
-        <source>0</source>
-        <translation>0</translation>
     </message>
     <message>
         <location filename="gui_divers/config.ui" line="552"/>
@@ -228,7 +191,7 @@
     <message>
         <location filename="gui_divers/config.ui" line="99"/>
         <source>Import fichiers wav</source>
-        <translation>Importation of .wav files</translation>
+        <translation>Wav files import</translation>
     </message>
     <message>
         <location filename="gui_divers/config.ui" line="1298"/>
@@ -289,6 +252,7 @@
     <message>
         <location filename="gui_divers/config.h" line="474"/>
         <source>w</source>
+        <translatorcomment>default mapping of the keyboard</translatorcomment>
         <translation>z</translation>
     </message>
     <message>
@@ -555,99 +519,19 @@
         <translation>About</translation>
     </message>
     <message utf8="true">
-        <location filename="gui_divers/dialog_about.ui" line="94"/>
-        <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Liberation Serif&apos;; font-size:11pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;table border=&quot;0&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px;&quot; cellspacing=&quot;2&quot; cellpadding=&quot;0&quot;&gt;
-&lt;tr&gt;
-&lt;td width=&quot;50%&quot;&gt;
-&lt;p align=&quot;right&quot; style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:9pt;&quot;&gt;Créé par &lt;/span&gt;&lt;/p&gt;&lt;/td&gt;
-&lt;td width=&quot;50%&quot;&gt;
-&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;mailto:info@polyphone.fr&quot;&gt;&lt;span style=&quot; font-size:9pt; text-decoration: underline; color:#0000ff;&quot;&gt;Davy Triponney&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;
-&lt;p align=&quot;right&quot; style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:9pt;&quot;&gt;Contributeur &lt;/span&gt;&lt;/p&gt;&lt;/td&gt;
-&lt;td&gt;
-&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;mailto:kinwie@yahoo.com&quot;&gt;&lt;span style=&quot; font-size:9pt; text-decoration: underline; color:#0000ff;&quot;&gt;Kinwie&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;
-&lt;p align=&quot;right&quot; style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:9pt;&quot;&gt;Traduit par &lt;/span&gt;&lt;/p&gt;&lt;/td&gt;
-&lt;td&gt;
-&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;mailto:info@polyphone.fr&quot;&gt;&lt;span style=&quot; font-size:9pt; text-decoration: underline; color:#0000ff;&quot;&gt;Davy Triponney&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <oldsource>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Liberation Serif&apos;; font-size:11pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;table border=&quot;0&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px;&quot; cellspacing=&quot;2&quot; cellpadding=&quot;0&quot;&gt;
-&lt;tr&gt;
-&lt;td width=&quot;50%&quot;&gt;
-&lt;p align=&quot;right&quot; style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:9pt;&quot;&gt;Créé par &lt;/span&gt;&lt;/p&gt;&lt;/td&gt;
-&lt;td width=&quot;50%&quot;&gt;
-&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;mailto:info@polyphone.fr&quot;&gt;&lt;span style=&quot; font-size:9pt; text-decoration: underline; color:#0000ff;&quot;&gt;Davy Triponney&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;
-&lt;p align=&quot;right&quot; style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:9pt;&quot;&gt;Contributeur &lt;/span&gt;&lt;/p&gt;&lt;/td&gt;
-&lt;td&gt;
-&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:9pt;&quot;&gt;Kinwie&lt;/span&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;
-&lt;p align=&quot;right&quot; style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:9pt;&quot;&gt;Traduit par &lt;/span&gt;&lt;/p&gt;&lt;/td&gt;
-&lt;td&gt;
-&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;mailto:info@polyphone.fr&quot;&gt;&lt;span style=&quot; font-size:9pt; text-decoration: underline; color:#0000ff;&quot;&gt;Davy Triponney&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/body&gt;&lt;/html&gt;</oldsource>
-        <translation>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Liberation Serif&apos;; font-size:11pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;table border=&quot;0&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px;&quot; cellspacing=&quot;2&quot; cellpadding=&quot;0&quot;&gt;
-&lt;tr&gt;
-&lt;td width=&quot;50%&quot;&gt;
-&lt;p align=&quot;right&quot; style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:9pt;&quot;&gt;Created by &lt;/span&gt;&lt;/p&gt;&lt;/td&gt;
-&lt;td width=&quot;50%&quot;&gt;
-&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;mailto:info@polyphone.fr&quot;&gt;&lt;span style=&quot; font-size:9pt; text-decoration: underline; color:#0000ff;&quot;&gt;Davy Triponney&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;
-&lt;p align=&quot;right&quot; style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:9pt;&quot;&gt;Contributor &lt;/span&gt;&lt;/p&gt;&lt;/td&gt;
-&lt;td&gt;
-&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;mailto:kinwie@yahoo.com&quot;&gt;&lt;span style=&quot; font-size:9pt; text-decoration: underline; color:#0000ff;&quot;&gt;Kinwie&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;
-&lt;p align=&quot;right&quot; style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:9pt;&quot;&gt;Translated by &lt;/span&gt;&lt;/p&gt;&lt;/td&gt;
-&lt;td&gt;
-&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;a href=&quot;mailto:info@polyphone.fr&quot;&gt;&lt;span style=&quot; font-size:9pt; text-decoration: underline; color:#0000ff;&quot;&gt;Davy Triponney&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-    </message>
-    <message utf8="true">
-        <location filename="gui_divers/dialog_about.ui" line="145"/>
+        <location filename="gui_divers/dialog_about.ui" line="117"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;Copyright © 2013 Davy Triponney&lt;br/&gt;&lt;br/&gt;&lt;a href=&quot;http://www.polyphone.fr/index.php?lang=fr&amp;amp;page=home&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;Site internet de Polyphone&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <oldsource>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;Copyright © 2013 Davy Triponney&lt;br/&gt;&lt;br/&gt;&lt;a href=&quot;http://www.polyphone.fr&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;Site internet de Polyphone&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</oldsource>
+        <translatorcomment>only &quot;Polyphone website&quot; has to be translated</translatorcomment>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;Copyright © 2013 Davy Triponney&lt;br/&gt;&lt;br/&gt;&lt;a href=&quot;http://www.polyphone.fr&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;Polyphone website&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message utf8="true">
-        <location filename="gui_divers/dialog_about.ui" line="167"/>
+        <location filename="gui_divers/dialog_about.ui" line="139"/>
         <source>Crédits</source>
         <translation>Credit</translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_about.ui" line="190"/>
+        <location filename="gui_divers/dialog_about.ui" line="162"/>
         <source>Fermer</source>
         <translation>Close</translation>
     </message>
@@ -702,16 +586,6 @@ p, li { white-space: pre-wrap; }
         <translation>Help</translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_help.ui" line="66"/>
-        <source>Titre</source>
-        <translation>Title</translation>
-    </message>
-    <message>
-        <location filename="gui_divers/dialog_help.ui" line="83"/>
-        <source>page</source>
-        <translation>page</translation>
-    </message>
-    <message>
         <location filename="gui_divers/dialog_help.ui" line="145"/>
         <source>Accueil</source>
         <translation>Home page</translation>
@@ -719,6 +593,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="gui_divers/dialog_help.cpp" line="54"/>
         <source>qrc:/aide/aide.html</source>
+        <translatorcomment>Put the corresponding english link if there is no documentation available in your language</translatorcomment>
         <translation>qrc:/aide/help.html</translation>
     </message>
 </context>
@@ -770,6 +645,7 @@ p, li { white-space: pre-wrap; }
         <location filename="tools/dialog_mixture.ui" line="29"/>
         <source>Création mixture</source>
         <oldsource>Création mutation / mixture</oldsource>
+        <translatorcomment>Mixture = organ stop made of a combinaison of harmonics</translatorcomment>
         <translation>Mixture creation</translation>
     </message>
     <message>
@@ -882,336 +758,6 @@ p, li { white-space: pre-wrap; }
         <source>sans nom</source>
         <translation>untitled</translation>
     </message>
-    <message>
-        <location filename="tools/dialog_mixture.cpp" line="289"/>
-        <source>32&apos;</source>
-        <translation>32&apos;</translation>
-    </message>
-    <message>
-        <location filename="tools/dialog_mixture.cpp" line="290"/>
-        <source>16&apos;</source>
-        <translation>16&apos;</translation>
-    </message>
-    <message>
-        <location filename="tools/dialog_mixture.cpp" line="291"/>
-        <source>8&apos;</source>
-        <translation>8&apos;</translation>
-    </message>
-    <message>
-        <location filename="tools/dialog_mixture.cpp" line="292"/>
-        <source>4&apos;</source>
-        <translation>4&apos;</translation>
-    </message>
-    <message>
-        <location filename="tools/dialog_mixture.cpp" line="293"/>
-        <source>2&apos;</source>
-        <translation>2&apos;</translation>
-    </message>
-    <message>
-        <location filename="tools/dialog_mixture.cpp" line="294"/>
-        <source>1&apos;</source>
-        <translation>1&apos;</translation>
-    </message>
-    <message>
-        <location filename="tools/dialog_mixture.cpp" line="295"/>
-        <source>1/2&apos;</source>
-        <translation>1/2&apos;</translation>
-    </message>
-    <message>
-        <location filename="tools/dialog_mixture.cpp" line="296"/>
-        <source>1/4&apos;</source>
-        <translation>1/4&apos;</translation>
-    </message>
-    <message>
-        <location filename="tools/dialog_mixture.cpp" line="297"/>
-        <source>1/8&apos;</source>
-        <translation>1/8&apos;</translation>
-    </message>
-    <message>
-        <location filename="tools/dialog_mixture.cpp" line="298"/>
-        <source>1/16&apos;</source>
-        <translation>1/16&apos;</translation>
-    </message>
-    <message>
-        <location filename="tools/dialog_mixture.cpp" line="304"/>
-        <source>10&apos; 2/3</source>
-        <translation>10&apos; 2/3</translation>
-    </message>
-    <message>
-        <location filename="tools/dialog_mixture.cpp" line="305"/>
-        <source>5&apos; 1/3</source>
-        <translation>5&apos; 1/3</translation>
-    </message>
-    <message>
-        <location filename="tools/dialog_mixture.cpp" line="306"/>
-        <source>2&apos; 2/3</source>
-        <translation>2&apos; 2/3</translation>
-    </message>
-    <message>
-        <location filename="tools/dialog_mixture.cpp" line="307"/>
-        <source>1&apos; 1/3</source>
-        <translation>1&apos; 1/3</translation>
-    </message>
-    <message>
-        <location filename="tools/dialog_mixture.cpp" line="308"/>
-        <source>2/3&apos;</source>
-        <translation>2/3&apos;</translation>
-    </message>
-    <message>
-        <location filename="tools/dialog_mixture.cpp" line="309"/>
-        <source>1/3&apos;</source>
-        <translation>1/3&apos;</translation>
-    </message>
-    <message>
-        <location filename="tools/dialog_mixture.cpp" line="310"/>
-        <source>1/6&apos;</source>
-        <translation>1/6&apos;</translation>
-    </message>
-    <message>
-        <location filename="tools/dialog_mixture.cpp" line="311"/>
-        <source>1/12&apos;</source>
-        <translation>1/12&apos;</translation>
-    </message>
-    <message>
-        <location filename="tools/dialog_mixture.cpp" line="317"/>
-        <source>6&apos; 2/5</source>
-        <translation>6&apos; 2/5</translation>
-    </message>
-    <message>
-        <location filename="tools/dialog_mixture.cpp" line="318"/>
-        <source>3&apos; 1/5</source>
-        <translation>3&apos; 1/5</translation>
-    </message>
-    <message>
-        <location filename="tools/dialog_mixture.cpp" line="319"/>
-        <source>1&apos; 3/5</source>
-        <translation>1&apos; 3/5</translation>
-    </message>
-    <message>
-        <location filename="tools/dialog_mixture.cpp" line="320"/>
-        <source>4/5&apos;</source>
-        <translation>4/5&apos;</translation>
-    </message>
-    <message>
-        <location filename="tools/dialog_mixture.cpp" line="321"/>
-        <source>2/5&apos;</source>
-        <translation>2/5&apos;</translation>
-    </message>
-    <message>
-        <location filename="tools/dialog_mixture.cpp" line="322"/>
-        <source>1/5&apos;</source>
-        <translation>1/5&apos;</translation>
-    </message>
-    <message>
-        <location filename="tools/dialog_mixture.cpp" line="323"/>
-        <source>1/10&apos;</source>
-        <translation>1/10&apos;</translation>
-    </message>
-    <message>
-        <location filename="tools/dialog_mixture.cpp" line="329"/>
-        <source>4&apos; 4/7</source>
-        <translation>4&apos; 4/7</translation>
-    </message>
-    <message>
-        <location filename="tools/dialog_mixture.cpp" line="330"/>
-        <source>2&apos; 2/7</source>
-        <translation>2&apos; 2/7</translation>
-    </message>
-    <message>
-        <location filename="tools/dialog_mixture.cpp" line="331"/>
-        <source>1&apos; 1/7</source>
-        <translation>1&apos; 1/7</translation>
-    </message>
-    <message>
-        <location filename="tools/dialog_mixture.cpp" line="332"/>
-        <source>4/7&apos;</source>
-        <translation>4/7&apos;</translation>
-    </message>
-    <message>
-        <location filename="tools/dialog_mixture.cpp" line="333"/>
-        <source>2/7&apos;</source>
-        <translation>2/7&apos;</translation>
-    </message>
-    <message>
-        <location filename="tools/dialog_mixture.cpp" line="334"/>
-        <source>1/7&apos;</source>
-        <translation>1/7&apos;</translation>
-    </message>
-    <message>
-        <location filename="tools/dialog_mixture.cpp" line="335"/>
-        <source>1/14&apos;</source>
-        <translation>1/14&apos;</translation>
-    </message>
-    <message>
-        <location filename="tools/dialog_mixture.cpp" line="341"/>
-        <source>3&apos; 5/9</source>
-        <translation>3&apos; 5/9</translation>
-    </message>
-    <message>
-        <location filename="tools/dialog_mixture.cpp" line="342"/>
-        <source>1&apos; 7/9</source>
-        <translation>1&apos; 7/9</translation>
-    </message>
-    <message>
-        <location filename="tools/dialog_mixture.cpp" line="343"/>
-        <source>8/9&apos;</source>
-        <translation>8/9&apos;</translation>
-    </message>
-    <message>
-        <location filename="tools/dialog_mixture.cpp" line="344"/>
-        <source>4/9&apos;</source>
-        <translation>4/9&apos;</translation>
-    </message>
-    <message>
-        <location filename="tools/dialog_mixture.cpp" line="345"/>
-        <source>2/9&apos;</source>
-        <translation>2/9&apos;</translation>
-    </message>
-    <message>
-        <location filename="tools/dialog_mixture.cpp" line="346"/>
-        <source>1/9&apos;</source>
-        <translation>1/9&apos;</translation>
-    </message>
-    <message>
-        <location filename="tools/dialog_mixture.cpp" line="352"/>
-        <source>2&apos; 10/11</source>
-        <translation>2&apos; 10/11</translation>
-    </message>
-    <message>
-        <location filename="tools/dialog_mixture.cpp" line="353"/>
-        <source>1&apos; 5/11</source>
-        <translation>1&apos; 5/11</translation>
-    </message>
-    <message>
-        <location filename="tools/dialog_mixture.cpp" line="354"/>
-        <source>8/11&apos;</source>
-        <translation>8/11&apos;</translation>
-    </message>
-    <message>
-        <location filename="tools/dialog_mixture.cpp" line="355"/>
-        <source>4/11&apos;</source>
-        <translation>4/11&apos;</translation>
-    </message>
-    <message>
-        <location filename="tools/dialog_mixture.cpp" line="356"/>
-        <source>2/11&apos;</source>
-        <translation>2/11&apos;</translation>
-    </message>
-    <message>
-        <location filename="tools/dialog_mixture.cpp" line="357"/>
-        <source>1/11&apos;</source>
-        <translation>1/11&apos;</translation>
-    </message>
-    <message>
-        <location filename="tools/dialog_mixture.cpp" line="363"/>
-        <source>2&apos; 6/13</source>
-        <translation>2&apos; 6/13</translation>
-    </message>
-    <message>
-        <location filename="tools/dialog_mixture.cpp" line="364"/>
-        <source>1&apos; 3/13</source>
-        <translation>1&apos; 3/13</translation>
-    </message>
-    <message>
-        <location filename="tools/dialog_mixture.cpp" line="365"/>
-        <source>8/13&apos;</source>
-        <translation>8/13&apos;</translation>
-    </message>
-    <message>
-        <location filename="tools/dialog_mixture.cpp" line="366"/>
-        <source>4/13&apos;</source>
-        <translation>4/13&apos;</translation>
-    </message>
-    <message>
-        <location filename="tools/dialog_mixture.cpp" line="367"/>
-        <source>2/13&apos;</source>
-        <translation>2/13&apos;</translation>
-    </message>
-    <message>
-        <location filename="tools/dialog_mixture.cpp" line="368"/>
-        <source>1/13&apos;</source>
-        <translation>1/13&apos;</translation>
-    </message>
-    <message>
-        <location filename="tools/dialog_mixture.cpp" line="374"/>
-        <source>2&apos; 2/15</source>
-        <translation>2&apos; 2/15</translation>
-    </message>
-    <message>
-        <location filename="tools/dialog_mixture.cpp" line="375"/>
-        <source>1&apos; 1/15</source>
-        <translation>1&apos; 1/15</translation>
-    </message>
-    <message>
-        <location filename="tools/dialog_mixture.cpp" line="376"/>
-        <source>8/15&apos;</source>
-        <translation>8/15&apos;</translation>
-    </message>
-    <message>
-        <location filename="tools/dialog_mixture.cpp" line="377"/>
-        <source>4/15&apos;</source>
-        <translation>4/15&apos;</translation>
-    </message>
-    <message>
-        <location filename="tools/dialog_mixture.cpp" line="378"/>
-        <source>2/15&apos;</source>
-        <translation>2/15&apos;</translation>
-    </message>
-    <message>
-        <location filename="tools/dialog_mixture.cpp" line="379"/>
-        <source>1/15&apos;</source>
-        <translation>1/15&apos;</translation>
-    </message>
-    <message>
-        <location filename="tools/dialog_mixture.cpp" line="385"/>
-        <source>1&apos; 15/17</source>
-        <translation>1&apos; 15/17</translation>
-    </message>
-    <message>
-        <location filename="tools/dialog_mixture.cpp" line="386"/>
-        <source>16/17&apos;</source>
-        <translation>16/17&apos;</translation>
-    </message>
-    <message>
-        <location filename="tools/dialog_mixture.cpp" line="387"/>
-        <source>8/17&apos;</source>
-        <translation>8/17&apos;</translation>
-    </message>
-    <message>
-        <location filename="tools/dialog_mixture.cpp" line="388"/>
-        <source>4/17&apos;</source>
-        <translation>4/17&apos;</translation>
-    </message>
-    <message>
-        <location filename="tools/dialog_mixture.cpp" line="389"/>
-        <source>2/17&apos;</source>
-        <translation>2/17&apos;</translation>
-    </message>
-    <message>
-        <location filename="tools/dialog_mixture.cpp" line="395"/>
-        <source>1&apos; 13/19</source>
-        <translation>1&apos; 13/19</translation>
-    </message>
-    <message>
-        <location filename="tools/dialog_mixture.cpp" line="396"/>
-        <source>16/19&apos;</source>
-        <translation>16/19&apos;</translation>
-    </message>
-    <message>
-        <location filename="tools/dialog_mixture.cpp" line="397"/>
-        <source>8/19&apos;</source>
-        <translation>8/19&apos;</translation>
-    </message>
-    <message>
-        <location filename="tools/dialog_mixture.cpp" line="398"/>
-        <source>4/19&apos;</source>
-        <translation>4/19&apos;</translation>
-    </message>
-    <message>
-        <location filename="tools/dialog_mixture.cpp" line="399"/>
-        <source>2/19&apos;</source>
-        <translation>2/19&apos;</translation>
-    </message>
 </context>
 <context>
     <name>DialogParamGlobal</name>
@@ -1234,11 +780,6 @@ p, li { white-space: pre-wrap; }
         <location filename="tools/dialog_paramglobal.cpp" line="139"/>
         <source>Répartition</source>
         <translation>Distribution</translation>
-    </message>
-    <message>
-        <location filename="tools/dialog_paramglobal.cpp" line="144"/>
-        <source>-</source>
-        <translation>-</translation>
     </message>
     <message>
         <location filename="tools/dialog_paramglobal.ui" line="97"/>
@@ -1380,10 +921,10 @@ p, li { white-space: pre-wrap; }
 </context>
 <context>
     <name>DialogSelectItems</name>
-    <message>
+    <message utf8="true">
         <location filename="tools/dialog_selectitems.ui" line="17"/>
-        <source>Dialog</source>
-        <translation>Dialog</translation>
+        <source>Sélection</source>
+        <translation>Selection</translation>
     </message>
     <message utf8="true">
         <location filename="tools/dialog_selectitems.ui" line="29"/>
@@ -1430,12 +971,13 @@ instrument courant</source>
     <message>
         <location filename="tools/dialog_space.ui" line="90"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Motif&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translatorcomment>Only &quot;Pattern&quot; has to be translated</translatorcomment>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Pattern&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="tools/dialog_space.ui" line="97"/>
         <source>Nombre divisions</source>
-        <translation>Divisions number</translation>
+        <translation>Division number</translation>
     </message>
     <message>
         <location filename="tools/dialog_space.ui" line="104"/>
@@ -1517,33 +1059,17 @@ instrument courant</source>
     </message>
 </context>
 <context>
-    <name>DialogWait</name>
-    <message>
-        <location filename="gui_divers/dialog_wait.ui" line="14"/>
-        <source>Dialog</source>
-        <translation>Dialog</translation>
-    </message>
-    <message>
-        <location filename="gui_divers/dialog_wait.ui" line="20"/>
-        <source>TextLabel</source>
-        <translation>TextLabel</translation>
-    </message>
-    <message>
-        <location filename="gui_divers/dialog_wait.ui" line="27"/>
-        <source>PushButton</source>
-        <translation>PushButton</translation>
-    </message>
-</context>
-<context>
     <name>GraphSpace</name>
     <message>
         <location filename="tools/dialog_space.cpp" line="316"/>
         <source>G</source>
+        <translatorcomment>first letter of &quot;Left&quot;</translatorcomment>
         <translation>L</translation>
     </message>
     <message>
         <location filename="tools/dialog_space.cpp" line="325"/>
         <source>D</source>
+        <translatorcomment>first letter of &quot;Right&quot;</translatorcomment>
         <translation>R</translation>
     </message>
 </context>
@@ -1552,23 +1078,23 @@ instrument courant</source>
     <message>
         <location filename="tools/dialog_visualizer.cpp" line="504"/>
         <source>Impossible d&apos;afficher tous les points.</source>
-        <translation>Cannot display all the values</translation>
+        <translation>Cannot display all the values.</translation>
     </message>
 </context>
 <context>
     <name>GraphiqueFourier</name>
     <message>
-        <location filename="pages/page_smpl.cpp" line="1868"/>
+        <location filename="pages/page_smpl.cpp" line="1867"/>
         <source>note</source>
         <translation>key</translation>
     </message>
     <message>
-        <location filename="pages/page_smpl.cpp" line="1869"/>
+        <location filename="pages/page_smpl.cpp" line="1868"/>
         <source>correction</source>
         <translation>correction</translation>
     </message>
     <message>
-        <location filename="pages/page_smpl.cpp" line="1869"/>
+        <location filename="pages/page_smpl.cpp" line="1868"/>
         <source>estimation</source>
         <translation>estimation</translation>
     </message>
@@ -1576,19 +1102,9 @@ instrument courant</source>
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="mainwindow.ui" line="17"/>
-        <source>Polyphone</source>
-        <translation>Polyphone</translation>
-    </message>
-    <message>
-        <location filename="mainwindow.ui" line="117"/>
-        <location filename="mainwindow.ui" line="144"/>
-        <source>-</source>
-        <translation>-</translation>
-    </message>
-    <message>
         <location filename="mainwindow.ui" line="191"/>
         <source>&amp;Fichier</source>
+        <translatorcomment>Put the character &quot;&amp;&quot; to access an element in a menu via Alt + the following letter.</translatorcomment>
         <translation>&amp;File</translation>
     </message>
     <message>
@@ -1664,6 +1180,7 @@ instrument courant</source>
     <message>
         <location filename="mainwindow.ui" line="566"/>
         <source>Ctrl+O</source>
+        <translatorcomment>Shortcut opening a file</translatorcomment>
         <translation>Ctrl+O</translation>
     </message>
     <message>
@@ -1674,11 +1191,13 @@ instrument courant</source>
     <message>
         <location filename="mainwindow.ui" line="578"/>
         <source>Ctrl+Q</source>
+        <translatorcomment>Shortcut exiting the software</translatorcomment>
         <translation>Ctrl+Q</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="590"/>
         <source>F1</source>
+        <translatorcomment>Shortcut opening the help</translatorcomment>
         <translation>F1</translation>
     </message>
     <message>
@@ -1701,6 +1220,7 @@ instrument courant</source>
     <message>
         <location filename="mainwindow.ui" line="617"/>
         <source>Ctrl+S</source>
+        <translatorcomment>Shortcut saving a file</translatorcomment>
         <translation>Ctrl+S</translation>
     </message>
     <message>
@@ -1717,6 +1237,7 @@ instrument courant</source>
     <message>
         <location filename="mainwindow.ui" line="635"/>
         <source>Ctrl+Shift+S</source>
+        <translatorcomment>Shortcut saving a file as...</translatorcomment>
         <translation>Ctrl+Shift+S</translation>
     </message>
     <message>
@@ -1732,6 +1253,7 @@ instrument courant</source>
     <message>
         <location filename="mainwindow.ui" line="650"/>
         <source>Ctrl+N</source>
+        <translatorcomment>Shortcut creating a new file</translatorcomment>
         <translation>Ctrl+N</translation>
     </message>
     <message>
@@ -1765,6 +1287,7 @@ instrument courant</source>
         <location filename="mainwindow.ui" line="662"/>
         <source>&amp;Annuler</source>
         <comment>1</comment>
+        <translatorcomment>Undo an action</translatorcomment>
         <translation>&amp;Undo</translation>
     </message>
     <message utf8="true">
@@ -1775,6 +1298,7 @@ instrument courant</source>
     <message>
         <location filename="mainwindow.ui" line="668"/>
         <source>Ctrl+Z</source>
+        <translatorcomment>Shortcut undoing an action</translatorcomment>
         <translation>Ctrl+Z</translation>
     </message>
     <message utf8="true">
@@ -1790,6 +1314,7 @@ instrument courant</source>
     <message>
         <location filename="mainwindow.ui" line="686"/>
         <source>Ctrl+Shift+Z</source>
+        <translatorcomment>Shortcut redoing an action undone</translatorcomment>
         <translation>Ctrl+Shift+Z</translation>
     </message>
     <message utf8="true">
@@ -1825,6 +1350,7 @@ instrument courant</source>
     <message>
         <location filename="mainwindow.ui" line="730"/>
         <source>Ctrl+W</source>
+        <translatorcomment>Shortcut closing a file</translatorcomment>
         <translation>Ctrl+W</translation>
     </message>
     <message>
@@ -1840,6 +1366,7 @@ instrument courant</source>
     <message>
         <location filename="mainwindow.ui" line="748"/>
         <source>Ctrl+C</source>
+        <translatorcomment>Shortcut copying sth</translatorcomment>
         <translation>Ctrl+C</translation>
     </message>
     <message>
@@ -1855,6 +1382,7 @@ instrument courant</source>
     <message>
         <location filename="mainwindow.ui" line="769"/>
         <source>Ctrl+V</source>
+        <translatorcomment>Shortcut pasting sth</translatorcomment>
         <translation>Ctrl+V</translation>
     </message>
     <message>
@@ -1870,6 +1398,7 @@ instrument courant</source>
     <message>
         <location filename="mainwindow.ui" line="790"/>
         <source>Del</source>
+        <translatorcomment>Shortcut deleting sth</translatorcomment>
         <translation>Del</translation>
     </message>
     <message utf8="true">
@@ -1879,8 +1408,9 @@ instrument courant</source>
     </message>
     <message utf8="true">
         <location filename="mainwindow.ui" line="808"/>
-        <source>Enleve les éléments non utilisés</source>
-        <translation>Remove unused samples, instruments and presets</translation>
+        <source>Enlève les samples et instruments non utilisés</source>
+        <oldsource>Enleve les éléments non utilisés</oldsource>
+        <translation>Remove unused samples and instruments</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="820"/>
@@ -1897,6 +1427,7 @@ instrument courant</source>
     <message>
         <location filename="mainwindow.ui" line="826"/>
         <source>F2</source>
+        <translatorcomment>Shortcut renaming sth</translatorcomment>
         <translation>F2</translation>
     </message>
     <message>
@@ -1905,351 +1436,357 @@ instrument courant</source>
         <translation>file1</translation>
     </message>
     <message utf8="true">
-        <location filename="mainwindow.ui" line="837"/>
-        <location filename="mainwindow.ui" line="851"/>
-        <location filename="mainwindow.ui" line="865"/>
-        <location filename="mainwindow.ui" line="879"/>
-        <location filename="mainwindow.ui" line="893"/>
+        <location filename="mainwindow.ui" line="840"/>
+        <location filename="mainwindow.ui" line="857"/>
+        <location filename="mainwindow.ui" line="874"/>
+        <location filename="mainwindow.ui" line="891"/>
+        <location filename="mainwindow.ui" line="908"/>
         <source>Ouvre un fichier récent</source>
         <translation>Open a recent file</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="848"/>
+        <location filename="mainwindow.ui" line="851"/>
         <source>fichier 2</source>
         <translation>file2</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="862"/>
+        <location filename="mainwindow.ui" line="868"/>
         <source>fichier 3</source>
         <translation>file3</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="876"/>
+        <location filename="mainwindow.ui" line="885"/>
         <source>fichier 4</source>
         <translation>file4</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="890"/>
+        <location filename="mainwindow.ui" line="902"/>
         <source>fichier 5</source>
         <translation>file5</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="907"/>
+        <location filename="mainwindow.ui" line="922"/>
         <source>&amp;Section modulateurs</source>
         <translation>&amp;Modulator section</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="922"/>
+        <location filename="mainwindow.ui" line="937"/>
         <source>&amp;Importer des sons...</source>
         <oldsource>&amp;Importer sample...</oldsource>
         <translation>&amp;Import samples...</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="937"/>
+        <location filename="mainwindow.ui" line="952"/>
         <source>E&amp;xporter des sons...</source>
         <oldsource>E&amp;xporter sample...</oldsource>
         <translation>E&amp;xport samples...</translation>
     </message>
     <message utf8="true">
-        <location filename="mainwindow.ui" line="985"/>
+        <location filename="mainwindow.ui" line="1000"/>
         <source>Enleve le blanc au début d&apos;un sample</source>
         <translation>Remove the blank at the beginning of a sample</translation>
     </message>
     <message utf8="true">
-        <location filename="mainwindow.ui" line="1000"/>
+        <location filename="mainwindow.ui" line="1015"/>
         <source>Ajuste le sample à sa fin de boucle</source>
         <translation>Cut the sample at the end of its loop</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1015"/>
+        <location filename="mainwindow.ui" line="1030"/>
         <source>Normalise le volume</source>
         <translation>Normalize the volume</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1030"/>
+        <location filename="mainwindow.ui" line="1045"/>
         <source>Boucle automatiquement le sample</source>
         <translation>Loop automatically the sample</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1045"/>
+        <location filename="mainwindow.ui" line="1060"/>
         <source>Applique un filtre &quot;mur de brique&quot;</source>
         <translation>Apply a brickwall filter</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1060"/>
+        <location filename="mainwindow.ui" line="1075"/>
         <source>Transpose le sample</source>
         <translation>Transpose the sample</translation>
     </message>
     <message utf8="true">
-        <location filename="mainwindow.ui" line="1075"/>
+        <location filename="mainwindow.ui" line="1090"/>
         <source>Régle l&apos;atténuation minimale</source>
-        <translation>Adjust the minimum attenuation </translation>
+        <translation>Adjust the minimum attenuation</translation>
     </message>
     <message utf8="true">
-        <location filename="mainwindow.ui" line="1087"/>
+        <location filename="mainwindow.ui" line="1102"/>
         <source>&amp;Accordage céleste...</source>
         <translation>&amp;Celeste tuning...</translation>
     </message>
     <message utf8="true">
-        <location filename="mainwindow.ui" line="1090"/>
+        <location filename="mainwindow.ui" line="1105"/>
         <source>Accorde les sons pour créer des battements</source>
         <translation>Tune the sounds to create beats</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1195"/>
+        <location filename="mainwindow.ui" line="1150"/>
+        <source>Duplication des divisions...</source>
+        <translation>Division duplication...</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="1213"/>
         <source>Diminue les sifflements</source>
         <translation>Decrease the whistling</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1242"/>
+        <location filename="mainwindow.ui" line="1238"/>
+        <source>affiche un clavier de 6 octaves</source>
+        <translation>Display a 6-octave keyboard</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="1260"/>
         <source>n&apos;affiche aucun clavier</source>
         <translation>Display no keyboard</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1257"/>
+        <location filename="mainwindow.ui" line="1275"/>
         <source>Duplication des divisions</source>
-        <translation>Division duplication</translation>
+        <translation>Division duplication...</translation>
     </message>
     <message utf8="true">
-        <location filename="mainwindow.ui" line="1317"/>
+        <location filename="mainwindow.ui" line="1335"/>
         <source>Affiche le magnétophone</source>
         <translation>Display the recorder</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1329"/>
-        <location filename="mainwindow.ui" line="1344"/>
+        <location filename="mainwindow.ui" line="1347"/>
+        <location filename="mainwindow.ui" line="1362"/>
         <source>&amp;Visualiseur</source>
         <translation>&amp;Visualizer</translation>
     </message>
     <message utf8="true">
-        <location filename="mainwindow.ui" line="1332"/>
-        <location filename="mainwindow.ui" line="1347"/>
+        <location filename="mainwindow.ui" line="1350"/>
+        <location filename="mainwindow.ui" line="1365"/>
         <source>Visualise dans un graphique les paramètres utilisés</source>
         <translation>Visualize in a graph the parameters used</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1374"/>
+        <location filename="mainwindow.ui" line="1392"/>
         <source>Exporter (sf&amp;z)...</source>
         <oldsource>Exporter (sf&amp;z)</oldsource>
         <translation>Export (sf&amp;z)...</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1377"/>
-        <source>Exporter en tant que fichier sfz</source>
-        <translation>Export as sfz</translation>
+        <location filename="mainwindow.ui" line="1395"/>
+        <source>Exporte en tant que fichier sfz</source>
+        <translation>Export as an sfz file</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1206"/>
+        <location filename="mainwindow.ui" line="1224"/>
         <source>&amp;5 octaves</source>
         <translation>&amp;5 octaves</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1209"/>
+        <location filename="mainwindow.ui" line="1227"/>
         <source>affiche un clavier de 5 octaves</source>
         <translation>Display a 5-octave keyboard</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1217"/>
+        <location filename="mainwindow.ui" line="1235"/>
         <source>&amp;6 octaves</source>
         <translation>&amp;6 octaves</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1220"/>
-        <source>affiche un clavie de 6 octaves</source>
-        <translation>Display a 6-octave keyboard</translation>
-    </message>
-    <message>
-        <location filename="mainwindow.ui" line="1228"/>
+        <location filename="mainwindow.ui" line="1246"/>
         <source>&amp;128 notes</source>
         <translation>&amp;128 keys</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1231"/>
+        <location filename="mainwindow.ui" line="1249"/>
         <source>affiche un clavier de 128 notes</source>
         <translation>Display a 128-key keyboard</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1239"/>
+        <location filename="mainwindow.ui" line="1257"/>
         <source>&amp;Aucun</source>
         <translation>&amp;None</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1254"/>
+        <location filename="mainwindow.ui" line="1272"/>
         <source>&amp;Duplication des divisions...</source>
         <oldsource>&amp;Duplication des divisions</oldsource>
         <translation>&amp;Division duplication...</translation>
     </message>
     <message utf8="true">
-        <location filename="mainwindow.ui" line="1272"/>
+        <location filename="mainwindow.ui" line="1290"/>
         <source>&amp;Élaboration release...</source>
         <translation>&amp;Release maker</translation>
     </message>
     <message utf8="true">
-        <location filename="mainwindow.ui" line="1275"/>
+        <location filename="mainwindow.ui" line="1293"/>
         <source>Crée automatiquement une release pour tous les sons liés</source>
         <translation>Create automatically a release for all linked sounds</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1302"/>
+        <location filename="mainwindow.ui" line="1320"/>
         <source>&amp;Association auto samples</source>
         <translation>Auto &amp;sample association</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1305"/>
+        <location filename="mainwindow.ui" line="1323"/>
         <source>Associe automatiquement les samples G/D</source>
         <translation>Automatically link the samples L/R</translation>
     </message>
     <message utf8="true">
-        <location filename="mainwindow.ui" line="1314"/>
+        <location filename="mainwindow.ui" line="1332"/>
         <source>Magnétophone</source>
         <translation>Recorder</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="910"/>
+        <location filename="mainwindow.ui" line="925"/>
         <source>Affiche la section modulateurs</source>
         <translation>Display the modulator section</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="925"/>
+        <location filename="mainwindow.ui" line="940"/>
         <source>Importe un fichier audio</source>
         <translation>Import an audio file</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="940"/>
+        <location filename="mainwindow.ui" line="955"/>
         <source>Exporte au format wav</source>
         <translation>Export in a wav format</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="952"/>
+        <location filename="mainwindow.ui" line="967"/>
         <source>Nouvel instrument</source>
         <translation>New instrument</translation>
     </message>
     <message utf8="true">
-        <location filename="mainwindow.ui" line="955"/>
+        <location filename="mainwindow.ui" line="970"/>
         <source>Crée un nouvel instrument</source>
         <translation>Create a new instrument</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="967"/>
+        <location filename="mainwindow.ui" line="982"/>
         <source>Nouveau preset</source>
         <translation>New preset</translation>
     </message>
     <message utf8="true">
-        <location filename="mainwindow.ui" line="970"/>
+        <location filename="mainwindow.ui" line="985"/>
         <source>Crée un nouveau preset</source>
         <translation>Create a new preset</translation>
     </message>
     <message utf8="true">
-        <location filename="mainwindow.ui" line="982"/>
+        <location filename="mainwindow.ui" line="997"/>
         <source>&amp;Enlever blanc au départ</source>
         <translation>&amp;Remove blank at start</translation>
     </message>
     <message utf8="true">
-        <location filename="mainwindow.ui" line="997"/>
+        <location filename="mainwindow.ui" line="1012"/>
         <source>&amp;Ajuster à la fin de boucle</source>
         <translation>&amp;Trim to end loop</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1012"/>
+        <location filename="mainwindow.ui" line="1027"/>
         <source>&amp;Normaliser volume</source>
         <translation>&amp;Normalize volume</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1027"/>
+        <location filename="mainwindow.ui" line="1042"/>
         <source>&amp;Bouclage automatique</source>
         <translation>&amp;Auto loop</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1042"/>
+        <location filename="mainwindow.ui" line="1057"/>
         <source>&amp;Filtre &quot;mur de brique&quot;...</source>
         <translation>Brick-wall &amp;filter...</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1057"/>
+        <location filename="mainwindow.ui" line="1072"/>
         <source>&amp;Transposer...</source>
         <translation>&amp;Transpose...</translation>
     </message>
     <message utf8="true">
-        <location filename="mainwindow.ui" line="1072"/>
+        <location filename="mainwindow.ui" line="1087"/>
         <source>&amp;Régler atténuation minimale...</source>
         <oldsource>Régler atténuation minimale...</oldsource>
         <translation>&amp;Adjust minimal attenuation...</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1102"/>
-        <location filename="mainwindow.ui" line="1359"/>
+        <location filename="mainwindow.ui" line="1117"/>
+        <location filename="mainwindow.ui" line="1377"/>
         <source>&amp;Spatialisation du son...</source>
         <translation>&amp;Sound spatialization...</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1105"/>
-        <location filename="mainwindow.ui" line="1362"/>
+        <location filename="mainwindow.ui" line="1120"/>
+        <location filename="mainwindow.ui" line="1380"/>
         <source>Dispose les sons dans l&apos;espace</source>
         <translation>Place sounds in space</translation>
     </message>
     <message utf8="true">
-        <location filename="mainwindow.ui" line="1117"/>
+        <location filename="mainwindow.ui" line="1132"/>
         <source>&amp;Répartition automatique</source>
         <translation>&amp;Automatic divisioning</translation>
     </message>
     <message utf8="true">
-        <location filename="mainwindow.ui" line="1120"/>
+        <location filename="mainwindow.ui" line="1135"/>
         <source>Répartit automatiquement les sons sur le clavier</source>
         <translation>Automatically arrange the samples over the keyboard</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1132"/>
+        <location filename="mainwindow.ui" line="1147"/>
         <source>D&amp;uplication des divisions...</source>
         <oldsource>D&amp;uplication des divisions</oldsource>
         <translation>&amp;Division duplication...</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1135"/>
-        <location filename="mainwindow.ui" line="1260"/>
+        <location filename="mainwindow.ui" line="1153"/>
+        <location filename="mainwindow.ui" line="1278"/>
         <source>Duplique les divisions</source>
         <translation>Duplicate the divisions</translation>
     </message>
     <message utf8="true">
-        <location filename="mainwindow.ui" line="1147"/>
-        <location filename="mainwindow.ui" line="1287"/>
+        <location filename="mainwindow.ui" line="1165"/>
+        <location filename="mainwindow.ui" line="1305"/>
         <source>&amp;Paramétrage global...</source>
         <translation>&amp;Global setting...</translation>
     </message>
     <message utf8="true">
-        <location filename="mainwindow.ui" line="1150"/>
-        <location filename="mainwindow.ui" line="1290"/>
+        <location filename="mainwindow.ui" line="1168"/>
+        <location filename="mainwindow.ui" line="1308"/>
         <source>Paramètre toutes les divisions simultanément</source>
         <translation>Set all divisions simultaneously</translation>
     </message>
     <message utf8="true">
-        <location filename="mainwindow.ui" line="1162"/>
+        <location filename="mainwindow.ui" line="1180"/>
         <source>&amp;Réglage balance</source>
         <translation>&amp;Balance adjustment</translation>
     </message>
     <message utf8="true">
-        <location filename="mainwindow.ui" line="1165"/>
+        <location filename="mainwindow.ui" line="1183"/>
         <source>Règle la balance du sample</source>
         <translation>Set the sample pan</translation>
     </message>
     <message utf8="true">
-        <location filename="mainwindow.ui" line="1177"/>
+        <location filename="mainwindow.ui" line="1195"/>
         <source>&amp;Création mixture...</source>
         <translation>&amp;Mixture creation...</translation>
     </message>
     <message utf8="true">
-        <location filename="mainwindow.ui" line="1180"/>
+        <location filename="mainwindow.ui" line="1198"/>
         <source>Crée une mixture</source>
         <translation>Create a mixture</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1192"/>
+        <location filename="mainwindow.ui" line="1210"/>
         <source>&amp;Diminuer sifflements...</source>
         <translation>Reduce &amp;whistling...</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="247"/>
         <source>&lt;b&gt;Les fichiers suivants ont Ã©tÃ© modifiÃ©s depuis leur dernier enregistrement :&lt;br/&gt; - </source>
-        <translation>&lt;b&gt;Following files have been modified since their last save:&lt;br/&gt; -</translation>
+        <translatorcomment>mind the &quot; -&quot; at the end</translatorcomment>
+        <translation>&lt;b&gt;Following files have been modified since their last save:&lt;br/&gt; - </translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="253"/>
@@ -2341,24 +1878,10 @@ instrument courant</source>
         <translation>&amp;Close without saving </translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2531"/>
-        <source>%d sample et </source>
-        <translation>%d sample and </translation>
-    </message>
-    <message>
         <location filename="mainwindow.cpp" line="2532"/>
-        <source>%d samples et </source>
-        <translation>%d samples and </translation>
-    </message>
-    <message>
-        <location filename="mainwindow.cpp" line="2534"/>
-        <source>%d instrument ont Ã©tÃ© supprimÃ©s.</source>
-        <translation>%d instrument have been deleted.</translation>
-    </message>
-    <message>
-        <location filename="mainwindow.cpp" line="2535"/>
-        <source>%d instruments ont Ã©tÃ© supprimÃ©s.</source>
-        <translation>%d instruments have been deleted.</translation>
+        <source> sample et </source>
+        <oldsource> sample and </oldsource>
+        <translation> sample and </translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="437"/>
@@ -2373,7 +1896,7 @@ instrument courant</source>
     <message>
         <location filename="mainwindow.cpp" line="439"/>
         <source>La qualitÃ© des samples sera abaissÃ©e suite Ã  cette opÃ©ration. Continuer ?</source>
-        <translation>The quality of the samples will be lowered after this operation. Continue?</translation>
+        <translation>The sample quality will be lowered after this operation. Continue?</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="442"/>
@@ -2464,7 +1987,7 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="988"/>
-        <location filename="mainwindow.cpp" line="2547"/>
+        <location filename="mainwindow.cpp" line="2549"/>
         <source>Question</source>
         <translation>Question</translation>
     </message>
@@ -2480,7 +2003,7 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
         <location filename="mainwindow.cpp" line="1305"/>
         <location filename="mainwindow.cpp" line="1920"/>
         <source>&amp;#160;Â» existe dÃ©jÃ .&lt;br /&gt;Que faire ?</source>
-        <translation>&quot; already exists.&lt;br/&gt;What is to be done? </translation>
+        <translation>&quot; already exists.&lt;br/&gt;What is to be done?</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1310"/>
@@ -2566,11 +2089,13 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
     <message>
         <location filename="mainwindow.cpp" line="1905"/>
         <source>L&amp;#160;Â» existe dÃ©jÃ .&lt;br /&gt;Que faire ?</source>
+        <translatorcomment>L is the first letter of &quot;Left&quot;</translatorcomment>
         <translation>L&quot; already exists.&lt;br/&gt;What is to be done?</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1911"/>
         <source>R&amp;#160;Â» existe dÃ©jÃ .&lt;br /&gt;Que faire ?</source>
+        <translatorcomment>R is the first letter of &quot;Right&quot;</translatorcomment>
         <translation>R&quot; already exists.&lt;br/&gt;What is to be done?</translation>
     </message>
     <message utf8="true">
@@ -2590,7 +2115,25 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
         <translation>Name of the new preset:</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2548"/>
+        <location filename="mainwindow.cpp" line="2534"/>
+        <source> samples et </source>
+        <oldsource> samples and </oldsource>
+        <translation> samples and </translation>
+    </message>
+    <message utf8="true">
+        <location filename="mainwindow.cpp" line="2536"/>
+        <source> instrument ont été supprimés.</source>
+        <translatorcomment>instrument: singular</translatorcomment>
+        <translation> instrument have been deleted.</translation>
+    </message>
+    <message utf8="true">
+        <location filename="mainwindow.cpp" line="2538"/>
+        <source> instruments ont été supprimés.</source>
+        <translatorcomment>instrument: plural</translatorcomment>
+        <translation> instruments have been deleted.</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="2550"/>
         <source>AttÃ©nuation minimale (dB) :</source>
         <translation>Minimal attenuation (dB):</translation>
     </message>
@@ -2703,6 +2246,7 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
     <message>
         <location filename="pages/page.cpp" line="397"/>
         <source>Mod LFO delay (s)</source>
+        <translatorcomment>english formulations may be kept...</translatorcomment>
         <translation>Mod LFO delay (s)</translation>
     </message>
     <message utf8="true">
@@ -2948,7 +2492,7 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
     <message>
         <location filename="pages/page.cpp" line="1133"/>
         <source>Lien (invalide)</source>
-        <translation>Lien (invalid)</translation>
+        <translation>Link (invalid)</translation>
     </message>
     <message>
         <location filename="pages/page.cpp" line="2329"/>
@@ -3014,40 +2558,6 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
 </context>
 <context>
     <name>Page_Inst</name>
-    <message>
-        <location filename="pages/page_inst.ui" line="14"/>
-        <source>Form</source>
-        <translation>Form</translation>
-    </message>
-    <message>
-        <location filename="pages/page_inst.ui" line="80"/>
-        <source>TextLabel</source>
-        <translation>TextLabel</translation>
-    </message>
-    <message>
-        <location filename="pages/page_inst.ui" line="141"/>
-        <location filename="pages/page_inst.ui" line="624"/>
-        <source>typeElement</source>
-        <translation>typeElement</translation>
-    </message>
-    <message>
-        <location filename="pages/page_inst.ui" line="146"/>
-        <location filename="pages/page_inst.ui" line="629"/>
-        <source>indexSf2</source>
-        <translation>indexSf2</translation>
-    </message>
-    <message>
-        <location filename="pages/page_inst.ui" line="151"/>
-        <location filename="pages/page_inst.ui" line="634"/>
-        <source>indexElt</source>
-        <translation>indexElt</translation>
-    </message>
-    <message>
-        <location filename="pages/page_inst.ui" line="156"/>
-        <location filename="pages/page_inst.ui" line="639"/>
-        <source>indexElt2</source>
-        <translation>indexElt2</translation>
-    </message>
     <message>
         <location filename="pages/page_inst.ui" line="161"/>
         <source>Etendue note</source>
@@ -3195,7 +2705,7 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
         <location filename="pages/page_inst.ui" line="307"/>
         <source>Note → Mod env decay (c)</source>
         <oldsource>Mod env note → decay (c)</oldsource>
-        <translation>Key →Mod env decay (c)</translation>
+        <translation>Key → Mod env decay (c)</translation>
     </message>
     <message>
         <location filename="pages/page_inst.ui" line="312"/>
@@ -3303,16 +2813,6 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
         <translation>paste</translation>
     </message>
     <message>
-        <location filename="pages/page_inst.ui" line="644"/>
-        <source>indexMod</source>
-        <translation>indexMod</translation>
-    </message>
-    <message>
-        <location filename="pages/page_inst.ui" line="649"/>
-        <source>#</source>
-        <translation>#</translation>
-    </message>
-    <message>
         <location filename="pages/page_inst.ui" line="660"/>
         <source>Source</source>
         <translation>Source</translation>
@@ -3388,11 +2888,6 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
 <context>
     <name>Page_Prst</name>
     <message>
-        <location filename="pages/page_prst.ui" line="14"/>
-        <source>Form</source>
-        <translation>Form</translation>
-    </message>
-    <message>
         <location filename="pages/page_prst.ui" line="64"/>
         <source>Banque</source>
         <translation>Bank</translation>
@@ -3401,30 +2896,6 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
         <location filename="pages/page_prst.ui" line="114"/>
         <source>Preset</source>
         <translation>Preset</translation>
-    </message>
-    <message>
-        <location filename="pages/page_prst.ui" line="203"/>
-        <location filename="pages/page_prst.ui" line="641"/>
-        <source>typeElement</source>
-        <translation>typeElement</translation>
-    </message>
-    <message>
-        <location filename="pages/page_prst.ui" line="208"/>
-        <location filename="pages/page_prst.ui" line="646"/>
-        <source>indexSf2</source>
-        <translation>indexSf2</translation>
-    </message>
-    <message>
-        <location filename="pages/page_prst.ui" line="213"/>
-        <location filename="pages/page_prst.ui" line="651"/>
-        <source>indexElt</source>
-        <translation>indexElt</translation>
-    </message>
-    <message>
-        <location filename="pages/page_prst.ui" line="218"/>
-        <location filename="pages/page_prst.ui" line="656"/>
-        <source>indexElt2</source>
-        <translation>indexElt2</translation>
     </message>
     <message>
         <location filename="pages/page_prst.ui" line="223"/>
@@ -3652,16 +3123,6 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
         <translation>paste</translation>
     </message>
     <message>
-        <location filename="pages/page_prst.ui" line="661"/>
-        <source>indexMod</source>
-        <translation>indexMod</translation>
-    </message>
-    <message>
-        <location filename="pages/page_prst.ui" line="666"/>
-        <source>#</source>
-        <translation>#</translation>
-    </message>
-    <message>
         <location filename="pages/page_prst.ui" line="677"/>
         <source>Source</source>
         <translation>Source</translation>
@@ -3690,11 +3151,6 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
 </context>
 <context>
     <name>Page_Sf2</name>
-    <message>
-        <location filename="pages/page_sf2.ui" line="14"/>
-        <source>Form</source>
-        <translation>Form</translation>
-    </message>
     <message>
         <location filename="pages/page_sf2.ui" line="65"/>
         <source>Nom</source>
@@ -3778,39 +3234,26 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
         <translation>Editing software</translation>
     </message>
     <message>
-        <location filename="pages/page_sf2.ui" line="135"/>
-        <location filename="pages/page_sf2.ui" line="177"/>
-        <location filename="pages/page_sf2.ui" line="190"/>
-        <location filename="pages/page_sf2.ui" line="224"/>
-        <location filename="pages/page_sf2.ui" line="250"/>
-        <location filename="pages/page_sf2.ui" line="270"/>
-        <location filename="pages/page_sf2.ui" line="283"/>
-        <location filename="pages/page_sf2.ui" line="303"/>
-        <location filename="pages/page_sf2.ui" line="323"/>
-        <location filename="pages/page_sf2.ui" line="343"/>
-        <source>TextLabel</source>
-        <translation>TextLabel</translation>
-    </message>
-    <message>
         <location filename="pages/page_sf2.ui" line="204"/>
         <source>Nombre de samples</source>
-        <translation>Samples number</translation>
+        <translation>Sample number</translation>
     </message>
     <message>
         <location filename="pages/page_sf2.ui" line="197"/>
         <source>Nombre d&apos;instruments</source>
-        <translation>Instruments number</translation>
+        <translation>Instrument number</translation>
     </message>
     <message>
         <location filename="pages/page_sf2.ui" line="257"/>
         <source>Nombre de presets</source>
-        <translation>Presets number</translation>
+        <translation>Preset number</translation>
     </message>
     <message utf8="true">
         <location filename="pages/page_sf2.cpp" line="213"/>
         <location filename="pages/page_sf2.cpp" line="228"/>
         <source> (inutilisés : </source>
         <oldsource> (inutilisés: </oldsource>
+        <translatorcomment>plural</translatorcomment>
         <translation> (unused: </translation>
     </message>
     <message utf8="true">
@@ -3818,25 +3261,14 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
         <location filename="pages/page_sf2.cpp" line="231"/>
         <source> (inutilisé : </source>
         <oldsource> (inutilisé: </oldsource>
+        <translatorcomment>singular</translatorcomment>
         <translation> (unused: </translation>
-    </message>
-    <message utf8="true">
-        <location filename="pages/page_sf2.cpp" line="244"/>
-        <location filename="pages/page_sf2.cpp" line="254"/>
-        <source> (≤ 65536)</source>
-        <translation> (≤ 65536)</translation>
     </message>
 </context>
 <context>
     <name>Page_Smpl</name>
     <message>
-        <location filename="pages/page_smpl.ui" line="14"/>
-        <source>Form</source>
-        <translation>Form</translation>
-    </message>
-    <message>
         <location filename="pages/page_smpl.ui" line="77"/>
-        <location filename="pages/page_smpl.ui" line="822"/>
         <source>TextLabel</source>
         <translation>TextLabel</translation>
     </message>
@@ -3849,56 +3281,6 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
         <location filename="pages/page_smpl.ui" line="908"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Informations&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Information&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-    </message>
-    <message>
-        <location filename="pages/page_smpl.ui" line="381"/>
-        <source>32</source>
-        <translation>32</translation>
-    </message>
-    <message>
-        <location filename="pages/page_smpl.ui" line="397"/>
-        <source>64</source>
-        <translation>64</translation>
-    </message>
-    <message>
-        <location filename="pages/page_smpl.ui" line="513"/>
-        <source>125</source>
-        <translation>125</translation>
-    </message>
-    <message>
-        <location filename="pages/page_smpl.ui" line="585"/>
-        <source>250</source>
-        <translation>250</translation>
-    </message>
-    <message>
-        <location filename="pages/page_smpl.ui" line="246"/>
-        <source>500</source>
-        <translation>500</translation>
-    </message>
-    <message>
-        <location filename="pages/page_smpl.ui" line="278"/>
-        <source>1k</source>
-        <translation>1k</translation>
-    </message>
-    <message>
-        <location filename="pages/page_smpl.ui" line="601"/>
-        <source>2k</source>
-        <translation>2k</translation>
-    </message>
-    <message>
-        <location filename="pages/page_smpl.ui" line="262"/>
-        <source>4k</source>
-        <translation>4k</translation>
-    </message>
-    <message>
-        <location filename="pages/page_smpl.ui" line="441"/>
-        <source>8k</source>
-        <translation>8k</translation>
-    </message>
-    <message>
-        <location filename="pages/page_smpl.ui" line="645"/>
-        <source>16k</source>
-        <translation>16k</translation>
     </message>
     <message utf8="true">
         <location filename="pages/page_smpl.ui" line="691"/>
@@ -3971,80 +3353,57 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
         <translation>Link</translation>
     </message>
     <message>
-        <location filename="pages/page_smpl.ui" line="847"/>
-        <source>192000</source>
-        <translation>192000</translation>
-    </message>
-    <message>
-        <location filename="pages/page_smpl.ui" line="852"/>
-        <source>96000</source>
-        <translation>96000</translation>
-    </message>
-    <message>
-        <location filename="pages/page_smpl.ui" line="857"/>
-        <source>48000</source>
-        <translation>48000</translation>
-    </message>
-    <message>
-        <location filename="pages/page_smpl.ui" line="862"/>
-        <source>44100</source>
-        <translation>44100</translation>
-    </message>
-    <message>
-        <location filename="pages/page_smpl.ui" line="867"/>
-        <source>32000</source>
-        <translation>32000</translation>
-    </message>
-    <message>
-        <location filename="pages/page_smpl.ui" line="872"/>
-        <source>22050</source>
-        <translation>22050</translation>
-    </message>
-    <message>
-        <location filename="pages/page_smpl.ui" line="877"/>
-        <source>11025</source>
-        <translation>11025</translation>
-    </message>
-    <message>
-        <location filename="pages/page_smpl.cpp" line="122"/>
-        <location filename="pages/page_smpl.cpp" line="408"/>
-        <location filename="pages/page_smpl.cpp" line="538"/>
-        <location filename="pages/page_smpl.cpp" line="554"/>
+        <location filename="pages/page_smpl.cpp" line="121"/>
+        <location filename="pages/page_smpl.cpp" line="407"/>
+        <location filename="pages/page_smpl.cpp" line="537"/>
+        <location filename="pages/page_smpl.cpp" line="553"/>
         <source>mono</source>
         <translation>mono</translation>
     </message>
     <message>
-        <location filename="pages/page_smpl.cpp" line="132"/>
-        <location filename="pages/page_smpl.cpp" line="539"/>
+        <location filename="pages/page_smpl.cpp" line="131"/>
+        <location filename="pages/page_smpl.cpp" line="538"/>
         <source>droit</source>
         <translation>right</translation>
     </message>
     <message>
-        <location filename="pages/page_smpl.cpp" line="133"/>
-        <location filename="pages/page_smpl.cpp" line="540"/>
+        <location filename="pages/page_smpl.cpp" line="132"/>
+        <location filename="pages/page_smpl.cpp" line="539"/>
         <source>gauche</source>
         <translation>left</translation>
     </message>
     <message>
-        <location filename="pages/page_smpl.cpp" line="134"/>
-        <location filename="pages/page_smpl.cpp" line="541"/>
+        <location filename="pages/page_smpl.cpp" line="133"/>
+        <location filename="pages/page_smpl.cpp" line="540"/>
         <source>lien</source>
         <translation>link</translation>
     </message>
     <message>
-        <location filename="pages/page_smpl.cpp" line="190"/>
+        <location filename="pages/page_smpl.cpp" line="189"/>
         <source>&lt;b&gt;Sample liÃ© Ã  aucun instrument.&lt;/b&gt;</source>
         <translation>&lt;b&gt;Sample linked to no instrument.&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="pages/page_smpl.cpp" line="192"/>
+        <location filename="pages/page_smpl.cpp" line="191"/>
         <source>&lt;b&gt;Sample liÃ© Ã  l&apos;instrument : &lt;/b&gt;</source>
         <translation>&lt;b&gt;Sample linked to instrument: &lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="pages/page_smpl.cpp" line="194"/>
+        <location filename="pages/page_smpl.cpp" line="193"/>
         <source>&lt;b&gt;Sample liÃ© aux instruments : &lt;/b&gt;</source>
         <translation>&lt;b&gt;Sample linked to instruments: &lt;/b&gt;</translation>
+    </message>
+    <message>
+        <location filename="pages/page_smpl.cpp" line="650"/>
+        <location filename="pages/page_smpl.cpp" line="705"/>
+        <location filename="pages/page_smpl.cpp" line="781"/>
+        <location filename="pages/page_smpl.cpp" line="851"/>
+        <location filename="pages/page_smpl.cpp" line="928"/>
+        <location filename="pages/page_smpl.cpp" line="989"/>
+        <location filename="pages/page_smpl.cpp" line="1095"/>
+        <location filename="pages/page_smpl.cpp" line="1159"/>
+        <source>Traitement </source>
+        <translation>Treatment  </translation>
     </message>
     <message>
         <location filename="pages/page_smpl.cpp" line="651"/>
@@ -4055,135 +3414,28 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
         <location filename="pages/page_smpl.cpp" line="990"/>
         <location filename="pages/page_smpl.cpp" line="1096"/>
         <location filename="pages/page_smpl.cpp" line="1160"/>
-        <source>Traitement </source>
-        <translation>Treatment</translation>
-    </message>
-    <message>
-        <location filename="pages/page_smpl.cpp" line="652"/>
-        <location filename="pages/page_smpl.cpp" line="707"/>
-        <location filename="pages/page_smpl.cpp" line="783"/>
-        <location filename="pages/page_smpl.cpp" line="853"/>
-        <location filename="pages/page_smpl.cpp" line="930"/>
-        <location filename="pages/page_smpl.cpp" line="991"/>
-        <location filename="pages/page_smpl.cpp" line="1097"/>
-        <location filename="pages/page_smpl.cpp" line="1161"/>
         <source>Annuler</source>
         <translation>Cancel</translation>
     </message>
     <message>
-        <location filename="pages/page_smpl.cpp" line="1137"/>
+        <location filename="pages/page_smpl.cpp" line="1136"/>
         <source>Transposition</source>
         <translation>Transposition</translation>
     </message>
     <message>
-        <location filename="pages/page_smpl.cpp" line="908"/>
+        <location filename="pages/page_smpl.cpp" line="907"/>
         <source>Question</source>
         <translation>Question</translation>
     </message>
     <message>
-        <location filename="pages/page_smpl.cpp" line="909"/>
+        <location filename="pages/page_smpl.cpp" line="908"/>
         <source>FrÃ©quence de coupure :</source>
         <translation>Cutoff frequency:</translation>
     </message>
     <message>
-        <location filename="pages/page_smpl.cpp" line="1138"/>
+        <location filename="pages/page_smpl.cpp" line="1137"/>
         <source>Ãcart en demi-tons :</source>
         <translation>Difference in semi-tons:</translation>
-    </message>
-</context>
-<context>
-    <name>PianoScene</name>
-    <message>
-        <location filename="clavier/pianoscene.cpp" line="275"/>
-        <location filename="clavier/pianoscene.cpp" line="278"/>
-        <source>C</source>
-        <translation>C</translation>
-    </message>
-    <message utf8="true">
-        <location filename="clavier/pianoscene.cpp" line="275"/>
-        <source>C♯</source>
-        <translation>C♯</translation>
-    </message>
-    <message>
-        <location filename="clavier/pianoscene.cpp" line="275"/>
-        <location filename="clavier/pianoscene.cpp" line="278"/>
-        <source>D</source>
-        <translation>D</translation>
-    </message>
-    <message utf8="true">
-        <location filename="clavier/pianoscene.cpp" line="275"/>
-        <source>D♯</source>
-        <translation>D♯</translation>
-    </message>
-    <message>
-        <location filename="clavier/pianoscene.cpp" line="275"/>
-        <location filename="clavier/pianoscene.cpp" line="278"/>
-        <source>E</source>
-        <translation>E</translation>
-    </message>
-    <message>
-        <location filename="clavier/pianoscene.cpp" line="276"/>
-        <location filename="clavier/pianoscene.cpp" line="279"/>
-        <source>F</source>
-        <translation>F</translation>
-    </message>
-    <message utf8="true">
-        <location filename="clavier/pianoscene.cpp" line="276"/>
-        <source>F♯</source>
-        <translation>F♯</translation>
-    </message>
-    <message>
-        <location filename="clavier/pianoscene.cpp" line="276"/>
-        <location filename="clavier/pianoscene.cpp" line="279"/>
-        <source>G</source>
-        <translation>G</translation>
-    </message>
-    <message utf8="true">
-        <location filename="clavier/pianoscene.cpp" line="276"/>
-        <source>G♯</source>
-        <translation>G♯</translation>
-    </message>
-    <message>
-        <location filename="clavier/pianoscene.cpp" line="277"/>
-        <location filename="clavier/pianoscene.cpp" line="280"/>
-        <source>A</source>
-        <translation>A</translation>
-    </message>
-    <message utf8="true">
-        <location filename="clavier/pianoscene.cpp" line="277"/>
-        <source>A♯</source>
-        <translation>A♯</translation>
-    </message>
-    <message>
-        <location filename="clavier/pianoscene.cpp" line="277"/>
-        <location filename="clavier/pianoscene.cpp" line="280"/>
-        <source>B</source>
-        <translation>B</translation>
-    </message>
-    <message utf8="true">
-        <location filename="clavier/pianoscene.cpp" line="278"/>
-        <source>D♭</source>
-        <translation>D♭</translation>
-    </message>
-    <message utf8="true">
-        <location filename="clavier/pianoscene.cpp" line="278"/>
-        <source>E♭</source>
-        <translation>E♭</translation>
-    </message>
-    <message utf8="true">
-        <location filename="clavier/pianoscene.cpp" line="279"/>
-        <source>G♭</source>
-        <translation>G♭</translation>
-    </message>
-    <message utf8="true">
-        <location filename="clavier/pianoscene.cpp" line="279"/>
-        <source>A♭</source>
-        <translation>A♭</translation>
-    </message>
-    <message utf8="true">
-        <location filename="clavier/pianoscene.cpp" line="280"/>
-        <source>B♭</source>
-        <translation>B♭</translation>
     </message>
 </context>
 <context>
@@ -4191,7 +3443,7 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
     <message>
         <location filename="sf2_core/pile_sf2_sl.cpp" line="746"/>
         <source>sans titre</source>
-        <translation>no title</translation>
+        <translation>untitled</translation>
     </message>
 </context>
 <context>
@@ -4299,7 +3551,7 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
     <message>
         <location filename="sf2_core/pile_sf2.cpp" line="1605"/>
         <source>Set hidden ne passe pas par la fonction set !</source>
-        <translation>Set hidden does not go trought the function set!</translation>
+        <translation>Set hidden does not go trough the function set!</translation>
     </message>
     <message>
         <location filename="sf2_core/pile_sf2.cpp" line="1612"/>
@@ -4370,7 +3622,7 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
     <message>
         <location filename="sf2_core/sound.cpp" line="674"/>
         <source>RÃ©solution insuffisante</source>
-        <translation>Insufficient resolution.</translation>
+        <translation>Insufficient resolution</translation>
     </message>
     <message>
         <location filename="sf2_core/sound.cpp" line="1243"/>
@@ -4391,6 +3643,7 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
     <message>
         <location filename="tools/conversion_sfz.cpp" line="139"/>
         <source>// Nom         : </source>
+        <translatorcomment>count the spaces so that the &quot;:&quot; are aligned</translatorcomment>
         <translation>// Name     :</translation>
     </message>
     <message>
@@ -4413,6 +3666,23 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
         <source>// Commentaire : </source>
         <translation>// Comment  :</translation>
     </message>
+    <message utf8="true">
+        <location filename="gui_divers/dialog_about.cpp" line="83"/>
+        <source>Créé par </source>
+        <translatorcomment>mind the final space</translatorcomment>
+        <translation>Created by </translation>
+    </message>
+    <message>
+        <location filename="gui_divers/dialog_about.cpp" line="84"/>
+        <source>Contributeur </source>
+        <translatorcomment>singular for now</translatorcomment>
+        <translation>Contributor </translation>
+    </message>
+    <message>
+        <location filename="gui_divers/dialog_about.cpp" line="85"/>
+        <source>Traduit par </source>
+        <translation>Translated by </translation>
+    </message>
 </context>
 <context>
     <name>TableKey</name>
@@ -4429,6 +3699,7 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
     <message>
         <location filename="gui_divers/tablekey.cpp" line="102"/>
         <source>do</source>
+        <translatorcomment>name of musical note</translatorcomment>
         <translation>C</translation>
     </message>
     <message>
