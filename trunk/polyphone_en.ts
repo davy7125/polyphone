@@ -519,13 +519,6 @@
         <translation>About</translation>
     </message>
     <message utf8="true">
-        <location filename="gui_divers/dialog_about.ui" line="117"/>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;Copyright © 2013 Davy Triponney&lt;br/&gt;&lt;br/&gt;&lt;a href=&quot;http://www.polyphone.fr/index.php?lang=fr&amp;amp;page=home&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;Site internet de Polyphone&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <oldsource>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;Copyright © 2013 Davy Triponney&lt;br/&gt;&lt;br/&gt;&lt;a href=&quot;http://www.polyphone.fr&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;Site internet de Polyphone&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</oldsource>
-        <translatorcomment>only &quot;Polyphone website&quot; has to be translated</translatorcomment>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;Copyright © 2013 Davy Triponney&lt;br/&gt;&lt;br/&gt;&lt;a href=&quot;http://www.polyphone.fr&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#0000ff;&quot;&gt;Polyphone website&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-    </message>
-    <message utf8="true">
         <location filename="gui_divers/dialog_about.ui" line="139"/>
         <source>Crédits</source>
         <translation>Credit</translation>
@@ -534,6 +527,11 @@
         <location filename="gui_divers/dialog_about.ui" line="162"/>
         <source>Fermer</source>
         <translation>Close</translation>
+    </message>
+    <message>
+        <location filename="gui_divers/dialog_about.cpp" line="47"/>
+        <source>Site internet de Polyphone</source>
+        <translation>Polyphone website</translation>
     </message>
 </context>
 <context>
@@ -3667,19 +3665,19 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
         <translation>// Comment  :</translation>
     </message>
     <message utf8="true">
-        <location filename="gui_divers/dialog_about.cpp" line="83"/>
+        <location filename="gui_divers/dialog_about.cpp" line="95"/>
         <source>Créé par </source>
         <translatorcomment>mind the final space</translatorcomment>
         <translation>Created by </translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_about.cpp" line="84"/>
+        <location filename="gui_divers/dialog_about.cpp" line="96"/>
         <source>Contributeur </source>
         <translatorcomment>singular for now</translatorcomment>
         <translation>Contributor </translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_about.cpp" line="85"/>
+        <location filename="gui_divers/dialog_about.cpp" line="97"/>
         <source>Traduit par </source>
         <translation>Translated by </translation>
     </message>
