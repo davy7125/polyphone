@@ -77,7 +77,6 @@ SOURCES	+= main.cpp \
     gui_divers/config.cpp \
     gui_divers/dialog_list.cpp \
     gui_divers/dialog_help.cpp \
-    gui_divers/dialog_wait.cpp \
     pages/page_sf2.cpp \
     pages/page_smpl.cpp \
     pages/page_inst.cpp \
@@ -130,7 +129,6 @@ HEADERS  += mainwindow.h \
     gui_divers/config.h \
     gui_divers/dialog_list.h \
     gui_divers/dialog_help.h \
-    gui_divers/dialog_wait.h \
     pages/page_sf2.h \
     pages/page_smpl.h \
     pages/page_inst.h \
@@ -184,7 +182,6 @@ FORMS    += mainwindow.ui \
     gui_divers/config.ui \
     gui_divers/dialog_list.ui \
     gui_divers/dialog_help.ui \
-    gui_divers/dialog_wait.ui \
     pages/page_sf2.ui \
     pages/page_smpl.ui \
     pages/page_inst.ui \
@@ -207,5 +204,4 @@ RESOURCES += ressources.qrc \
 RC_FILE = polyphone.rc
 
 TRANSLATIONS = polyphone_en.ts \
-    polyphone_de.ts \
-    polyphone_nl.ts
+    polyphone_es.ts

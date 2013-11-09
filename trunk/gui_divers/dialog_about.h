@@ -26,10 +26,29 @@
 #define DIALOG_ABOUT_H
 
 #include <QDialog>
+#define VERSION "1.1"
 
 namespace Ui {
 class DialogAbout;
 }
+
+
+class Credit
+{
+public:
+    Credit() {}
+    void addCreator(QString name, QString mail);
+    void addContributor(QString name, QString mail);
+    void addTranslator(QString name, QString mail);
+    QString getText();
+private:
+    QString getGroup(QString nameGroup, QStringList listName, QStringList listMail);
+    QString getFormattedName(QString name, QString email);
+    QStringList _listCreatorName, _listCreatorMail,
+        _listContributorName, _listContributorMail,
+        _listTranslatorName, _listTranslatorMail;
+};
+
 
 class DialogAbout : public QDialog
 {
@@ -45,6 +64,7 @@ private slots:
 
 private:
     Ui::DialogAbout *ui;
+    Credit _credit;
 };
 
 #endif // DIALOG_ABOUT_H

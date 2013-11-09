@@ -63,7 +63,7 @@
         </font>
        </property>
        <property name="text">
-        <string>Titre</string>
+        <string notr="true">Titre</string>
        </property>
        <property name="alignment">
         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -80,7 +80,7 @@
         </font>
        </property>
        <property name="text">
-        <string>page</string>
+        <string notr="true">page</string>
        </property>
        <property name="alignment">
         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>

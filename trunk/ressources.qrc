@@ -139,8 +139,7 @@
     </qresource>
     <qresource prefix="/traductions">
         <file alias="polyphone_en.qm">ressources/traductions/polyphone_en.qm</file>
-        <file alias="polyphone_de.qm">ressources/traductions/polyphone_de.qm</file>
-        <file alias="polyphone_nl.qm">ressources/traductions/polyphone_nl.qm</file>
+        <file alias="polypone_es.qm">ressources/traductions/polyphone_es.qm</file>
     </qresource>
     <qresource prefix="/logo">
         <file alias="noel">ressources/logo_noel.png</file>

@@ -29,7 +29,6 @@
 #include "dialog_sifflements.h"
 #include <QProgressDialog>
 #include <QInputDialog>
-#include "dialog_wait.h"
 
 Page_Smpl::Page_Smpl(QWidget *parent) :
     Page(PAGE_SMPL, parent), ui(new Ui::Page_Smpl)
