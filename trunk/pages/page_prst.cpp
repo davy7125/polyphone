@@ -40,7 +40,7 @@ Page_Prst::Page_Prst(QWidget *parent) :
     this->lienGen = elementPrstInstGen;
     this->lienMod = elementPrstInstMod;
     this->table = this->ui->tablePrst;
-    connect(this->table, SIGNAL(set(int,int,bool)), this, SLOT(set(int,int,bool)));
+    connect(this->table, SIGNAL(set(int, int, bool)), this, SLOT(set(int, int, bool)));
     this->tableMod = this->ui->tableMod;
     this->spinAmount = this->ui->spinSource2;
     this->checkAbs = this->ui->checkAbs;
@@ -51,13 +51,16 @@ Page_Prst::Page_Prst(QWidget *parent) :
     this->comboSource1 = this->ui->comboSource1;
     this->comboSource2 = this->ui->comboSource2;
     this->comboDestination = this->ui->comboDestination;
+
     // Remplissage de comboDestination
     for (int i = 0; i < 35; i++)
         this->comboDestination->addItem(getGenName(this->getDestNumber(i)));
     this->comboDestination->setLimite(35);
+
     // Remplissage des combosources
     this->remplirComboSource(this->comboSource1);
     this->remplirComboSource(this->comboSource2);
+
     // Initialisation spinBoxes
     this->ui->spinBank->init(this);
     this->ui->spinPreset->init(this);

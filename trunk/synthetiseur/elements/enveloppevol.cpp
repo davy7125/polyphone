@@ -43,6 +43,7 @@ EnveloppeVol::EnveloppeVol(VoiceParam * voiceParam, quint32 sampleRate, bool isM
         m_noteToDecay     = (double)voiceParam->modKeynumToDecay / 1200;
         m_volume          = 0;
         m_fixedVelocity   = voiceParam->fixedVelocity;
+        m_allowRelease    = (voiceParam->loopMode != 3);
     }
     else
     {
@@ -56,6 +57,7 @@ EnveloppeVol::EnveloppeVol(VoiceParam * voiceParam, quint32 sampleRate, bool isM
         m_noteToDecay     = (double)voiceParam->volKeynumToDecay / 1200;
         m_volume          = -voiceParam->attenuation;
         m_fixedVelocity   = voiceParam->fixedVelocity;
+        m_allowRelease    = (voiceParam->loopMode != 3);
     }
 }
 
@@ -67,10 +69,24 @@ bool EnveloppeVol::applyEnveloppe(double * data, quint32 size, bool release, int
     Q_UNUSED(voiceParam);
     // Application de l'enveloppe sur des données
     // renvoie 1 si la fin de la release est atteint
+
     if (release && m_currentPhase != phase7off && m_currentPhase != phase6release)
     {
-        m_currentPhase = phase6release;
-        m_currentSmpl = 0;
+        if (m_allowRelease)
+        {
+            m_currentPhase = phase6release;
+            m_currentSmpl = 0;
+        }
+        else if (m_currentPhase != phase5sustain)
+        {
+            if (m_precValue < m_levelSustain)
+            {
+                m_levelSustain = m_precValue;
+                m_currentPhase = phase5sustain;
+            }
+            else
+                m_currentPhase = phase4decay;
+        }
     }
     // Ajustement sustain level
     double levelSustain = 0;
@@ -78,6 +94,7 @@ bool EnveloppeVol::applyEnveloppe(double * data, quint32 size, bool release, int
         levelSustain = 1. - m_levelSustain / 100; // %
     else
         levelSustain = pow(10, -m_levelSustain / 20); // dB
+
     // Ajustement hold time et volume
     quint32 timeHold = m_timeHold * pow(2, m_noteToHold * (60 - note));
     quint32 timeDecay = m_timeDecay * pow(2, m_noteToDecay * (60 - note));
@@ -86,6 +103,7 @@ bool EnveloppeVol::applyEnveloppe(double * data, quint32 size, bool release, int
         volume *= (double)(m_fixedVelocity * m_fixedVelocity) / 16129;
     else
         volume *= (double)(velocity * velocity) / 16129;
+
     // Avancement
     bool fin = false;
     quint32 avancement = 0;
@@ -273,7 +291,7 @@ bool EnveloppeVol::applyEnveloppe(double * data, quint32 size, bool release, int
             fin = true;
         }
         // On retient la dernière valeur et on avance
-        this->m_precValue = val2;
+        m_precValue = val2;
         avancement += duree;
     }
     return fin;

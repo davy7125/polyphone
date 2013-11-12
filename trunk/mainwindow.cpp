@@ -699,11 +699,11 @@ void MainWindow::updateActions()
         typeUnique = ui->arborescence->isSelectedItemsTypeUnique();
         familleUnique = ui->arborescence->isSelectedItemsFamilyUnique();
         // Affichage partie droite
-        if (id.typeElement == elementSmpl && nb == 1)
+        if (id.typeElement == elementSmpl)
         {
             // Affichage page Smpl
             page_smpl->afficher();
-            if (this->configuration->getKeyboardType())
+            if (this->configuration->getKeyboardType() && nb == 1)
                 this->showKeyboard(true);
             else
                 this->showKeyboard(false);
@@ -742,12 +742,16 @@ void MainWindow::updateActions()
     // ACTIVATION, DESACTIVATION DES COMMANDES
     if (fichierUnique)
     {
-        // Action possible : fermer
-        ui->actionFermer_le_fichier->setEnabled(1);
-        // Action possible : importer
-        ui->actionImporter->setEnabled(1);
-        // Action possible : coller
-        ui->actionColler->setEnabled(1);
+        // Actions possibles : fermer, importer, coller, enregistrer sous, exporter sfz
+        // Nouveau sample, instrument, preset
+        ui->actionFermer_le_fichier->setEnabled(true);
+        ui->actionImporter->setEnabled(true);
+        ui->actionColler->setEnabled(true);
+        ui->actionEnregistrer_sous->setEnabled(true);
+        ui->actionExporter_en_tant_qu_sfz->setEnabled(true);
+        ui->actionNouveau_preset->setEnabled(true);
+        ui->actionNouvel_instrument->setEnabled(true);
+
         // Supprimer, copier
         if (typeUnique && (((type == elementInstSmpl || type == elementPrstInst) && familleUnique) \
                            || type == elementSmpl || type == elementInst || type == elementPrst)
@@ -761,6 +765,7 @@ void MainWindow::updateActions()
             ui->action_Supprimer->setEnabled(0);
             ui->actionCopier->setEnabled(0);
         }
+
         // Renommer
         if (nb == 1 && typeUnique && (type == elementSmpl || type == elementInst || type == elementPrst || type == elementSf2))
         {
@@ -772,36 +777,32 @@ void MainWindow::updateActions()
             if (nb > 1 && typeUnique && type == elementSmpl)
             {
                 ui->actionRenommer->setText(tr("&Renommer en masse"));
-                ui->actionRenommer->setEnabled(1);
+                ui->actionRenommer->setEnabled(true);
             }
             else
             {
                 ui->actionRenommer->setText(tr("&Renommer"));
-                ui->actionRenommer->setEnabled(0);
+                ui->actionRenommer->setEnabled(false);
             }
         }
-        // Actions enregistrer sous, exporter sfz
-        ui->actionEnregistrer_sous->setEnabled(true);
-        ui->actionExporter_en_tant_qu_sfz->setEnabled(true);
+
         // Action exporter
         if ((typeUnique && type == elementSmpl) || (familleUnique && type == elementInstSmpl))
-            ui->actionExporter->setEnabled(1);
+            ui->actionExporter->setEnabled(true);
         else
-            ui->actionExporter->setEnabled(0);
-        // Nouveau sample, instrument, preset
-        ui->actionNouveau_preset->setEnabled(1);
-        ui->actionNouvel_instrument->setEnabled(1);
+            ui->actionExporter->setEnabled(false);
+
         // Outils
         this->enableActionSample(typeUnique && type == elementSmpl && !this->page_smpl->isPlaying());
         this->enableActionInstrument((type == elementInst || type == elementInstSmpl) && familleUnique);
         this->enableActionPreset((type == elementPrst || type == elementPrstInst) && familleUnique);
         this->enableActionSf2(true);
 
-        // Particularité 1 : un outil des sf2 doit être désactivé si la lecture est en cours
+        // Particularité 1 : "enlever éléments non utilisés" doit être désactivé si la lecture est en cours
         if (!this->page_smpl->isPlaying())
-            ui->action_Enlever_les_l_ments_non_utilis_s->setEnabled(1);
+            ui->action_Enlever_les_l_ments_non_utilis_s->setEnabled(true);
         else
-            ui->action_Enlever_les_l_ments_non_utilis_s->setEnabled(0);
+            ui->action_Enlever_les_l_ments_non_utilis_s->setEnabled(false);
 
         // Particularité 2 : "duplication", "paramétrage globale", "visualiseur" et "spatialiseur" sont communs aux
         // instruments et aux presets -> pas de désactivation si l'une des 2 conditions est remplie
@@ -1951,19 +1952,23 @@ void MainWindow::importerSmpl()
         }
         for (int j = 0; j < nChannels; j++)
         {
-            if (replace < 3 || (nChannels == 2 && j == 0 && indexL == -1) || \
-                    (nChannels == 2 && j == 1 && indexR == -1) || \
+            if (replace < 3 || (nChannels == 2 && j == 0 && indexL == -1) ||
+                    (nChannels == 2 && j == 1 && indexR == -1) ||
                     (nChannels == 1 && indexL == -1)) // Si pas ignorer
             {
-                if (((nChannels == 2 && j == 0 && indexL != -1) || \
-                    (nChannels == 2 && j == 1 && indexR != -1) || \
+                if (((nChannels == 2 && j == 0 && indexL != -1) ||
+                    (nChannels == 2 && j == 1 && indexR != -1) ||
                      (nChannels == 1 && indexL != -1)) && (replace == 2 || replace == 1))
                 {
                     if ((nChannels == 2 && j == 0 && indexL != -1) || (nChannels == 1 && indexL != -1))
                         id.indexElt = indexL;
                     else
                         id.indexElt = indexR;
+
                     // Mise à jour des données
+                    Valeur valTmp;
+                    valTmp.wValue = j;
+                    son->set(champ_wChannel, valTmp);
                     QByteArray data = son->getData(24);
                     this->sf2->set(id, champ_sampleDataFull24, data);
                 }
@@ -2348,10 +2353,8 @@ void MainWindow::copier()
     QWidget* focused = QApplication::focusWidget();
     if( focused != 0 )
     {
-        QApplication::postEvent(focused,
-            new QKeyEvent(QEvent::KeyPress, Qt::Key_C, Qt::ControlModifier));
-        QApplication::postEvent(focused,
-            new QKeyEvent(QEvent::KeyRelease, Qt::Key_C, Qt::ControlModifier));
+        QApplication::postEvent(focused, new QKeyEvent(QEvent::KeyPress, Qt::Key_C, Qt::ControlModifier));
+        QApplication::postEvent(focused, new QKeyEvent(QEvent::KeyRelease, Qt::Key_C, Qt::ControlModifier));
     }
 }
 void MainWindow::coller()
@@ -2360,10 +2363,8 @@ void MainWindow::coller()
     QWidget* focused = QApplication::focusWidget();
     if( focused != 0 )
     {
-        QApplication::postEvent(focused,
-            new QKeyEvent(QEvent::KeyPress, Qt::Key_V, Qt::ControlModifier));
-        QApplication::postEvent(focused,
-            new QKeyEvent(QEvent::KeyRelease, Qt::Key_V, Qt::ControlModifier));
+        QApplication::postEvent(focused, new QKeyEvent(QEvent::KeyPress, Qt::Key_V, Qt::ControlModifier));
+        QApplication::postEvent(focused, new QKeyEvent(QEvent::KeyRelease, Qt::Key_V, Qt::ControlModifier));
     }
 }
 void MainWindow::supprimer()
