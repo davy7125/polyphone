@@ -83,6 +83,8 @@ public:
 public slots:
     void returnToOldMaxMinSizes();
     void supprimerElt();        // Suppression des éléments sélectionnés dans l'arbre
+    void copier();              // Envoi du signal "copier"
+    void coller();              // Envoi du signal "coller"
 
 private slots:
     void updateTable(int type, int sf2, int elt, int elt2);  // Mise à jour tables si suppression définitive d'un élément masqué
@@ -106,8 +108,6 @@ private slots:
     void nouveauPreset();       // Création d'un preset
     void associer();            // Association InstSmpl et PrstInst
     void remplacer();           // Remplacement InstSmpl et PrstInst
-    void copier();              // Envoi du signal "copier"
-    void coller();              // Envoi du signal "coller"
     void supprimer();           // Envoi du signal "supprimer"
 
     void showConfig();          // Affichage fenêtre configuration

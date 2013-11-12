@@ -770,6 +770,7 @@ genAmountType Page::getValue(QString texte, WORD champ, bool &ok)
     }
     return genAmount;
 }
+
 // Méthodes privées
 int Page::limit(int iTmp, int minInst, int maxInst, int minPrst, int maxPrst)
 {
@@ -1305,278 +1306,234 @@ void PageTable::updateId(EltID id)
     this->afficheMod(this->table->getID(0), this->tableMod->currentRow());
 }
 
+
+void PageTable::resetChamp(bool &newAction, int colonne, Champ champ1, Champ champ2)
+{
+    EltID id = table->getID(colonne);
+    bool ok = sf2->isSet(id, champ1);
+    if (champ2 != champ_unknown)
+        ok = ok || sf2->isSet(id, champ2);
+
+    if (ok)
+    {
+        // On efface la donnée
+        if (newAction)
+            sf2->prepareNewActions();
+        id = table->getID(colonne);
+        sf2->reset(id, champ1);
+        if (champ2 != champ_unknown)
+            sf2->reset(id, champ2);
+        newAction = false;
+
+        // Mise à jour fenêtre
+        mainWindow->updateDo();
+    }
+}
+void PageTable::setOffset(bool &newAction, int ligne, int colonne, Champ champ1, Champ champ2)
+{
+    EltID id = this->table->getID(colonne);
+    bool ok;
+    char T[20];
+    QString texte = this->table->item(ligne, colonne)->text().left(9);
+    genAmountType genAmount = getValue(texte, champ1, ok);
+    if (ok)
+    {
+        // Enregistrement de la nouvelle valeur
+        genAmountType genAmount2 = getValue(texte, champ2, ok);
+        int iVal = limit(32768 * genAmount2.shAmount + genAmount.shAmount, champ1, id);
+        genAmount2.shAmount = iVal / 32768;
+        genAmount.shAmount = iVal % 32768;
+        if (genAmount.shAmount != this->sf2->get(id, champ1).shValue ||
+            genAmount2.shAmount != this->sf2->get(id, champ2).shValue)
+        {
+            // Modification du sf2
+            if (newAction)
+                this->sf2->prepareNewActions();
+            id = this->table->getID(colonne);
+            Valeur value;
+            value.genValue = genAmount;
+            this->sf2->set(id, champ1, value);
+            value.genValue = genAmount2;
+            this->sf2->set(id, champ2, value);
+            newAction = false;
+
+            // Mise à jour fenêtre
+            this->mainWindow->updateDo();
+        }
+        // Mise à jour de la valeur dans la cellule
+        int offset = this->sf2->get(id, champ1).genValue.shAmount +
+                32768 * this->sf2->get(id, champ2).genValue.shAmount;
+        this->table->item(ligne, colonne)->setText(getTextValue(T, champ1, offset));
+    }
+    else
+    {
+        // Restauration valeur précédente
+        if (this->sf2->isSet(id, champ1) || this->sf2->isSet(id, champ2))
+        {
+            int offset = this->sf2->get(id, champ1).genValue.shAmount +
+                    32768 * this->sf2->get(id, champ2).genValue.shAmount;
+            this->table->item(ligne, colonne)->setText(getTextValue(T, champ1, offset));
+        }
+        else
+            this->table->item(ligne, colonne)->setText("");
+    }
+}
 void PageTable::set(int ligne, int colonne, bool newAction)
 {
-    if (this->preparation) return;
+    if (this->preparation)
+        return;
+
+    // Modification de toutes les cellules sélectionnées
+    QString text = table->item(ligne, colonne)->text();
+    for (int i = 0; i < table->selectedItems().size(); i++)
+    {
+        table->blockSignals(true);
+        table->selectedItems()[i]->setText(text);
+        table->blockSignals(false);
+        set(table->selectedItems().at(i)->row(), table->selectedItems().at(i)->column(), newAction, true);
+    }
+}
+void PageTable::set(int ligne, int colonne, bool &newAction, bool allowPropagation)
+{
     // modification d'un élément du tableau
-    EltID id = this->table->getID(colonne);
     Champ champ = this->table->getChamp(ligne);
-    QString texte = this->table->item(ligne, colonne)->text();
-    char T[20];
-    int offset;
-    if (texte.isEmpty())
+    if (champ == champ_unknown)
+        return;
+
+    if (table->item(ligne, colonne)->text().isEmpty())
     {
         // Effacement d'un paramètre ?
         switch ((int)champ)
         {
         case champ_startAddrsOffset:
-            if (this->sf2->isSet(id, champ_startAddrsOffset) || this->sf2->isSet(id, champ_startAddrsCoarseOffset))
-            {
-                // On efface la donnée
-                if (newAction) this->sf2->prepareNewActions();
-                id = this->table->getID(colonne);
-                this->sf2->reset(id, champ_startAddrsOffset);
-                this->sf2->reset(id, champ_startAddrsCoarseOffset);
-                // Mise à jour fenêtre
-                this->mainWindow->updateDo();
-                // Redimensionnement du tableau
-                this->table->resizeColumnsToContents();
-            }
+            resetChamp(newAction, colonne, champ_startAddrsOffset, champ_startAddrsCoarseOffset);
             break;
         case champ_endAddrsOffset:
-            if (this->sf2->isSet(id, champ_endAddrsOffset) || this->sf2->isSet(id, champ_endAddrsCoarseOffset))
-            {
-                // On efface la donnée
-                if (newAction) this->sf2->prepareNewActions();
-                id = this->table->getID(colonne);
-                this->sf2->reset(id, champ_endAddrsOffset);
-                this->sf2->reset(id, champ_endAddrsCoarseOffset);
-                // Mise à jour fenêtre
-                this->mainWindow->updateDo();
-                // Redimensionnement du tableau
-                this->table->resizeColumnsToContents();
-            }
+            resetChamp(newAction, colonne, champ_endAddrsOffset, champ_endAddrsCoarseOffset);
             break;
         case champ_startloopAddrsOffset:
-            if (this->sf2->isSet(id, champ_startloopAddrsOffset) || this->sf2->isSet(id, champ_startloopAddrsCoarseOffset))
-            {
-                // On efface la donnée
-                if (newAction) this->sf2->prepareNewActions();
-                id = this->table->getID(colonne);
-                this->sf2->reset(id, champ_startloopAddrsOffset);
-                this->sf2->reset(id, champ_startloopAddrsCoarseOffset);
-                // Mise à jour fenêtre
-                this->mainWindow->updateDo();
-                // Redimensionnement du tableau
-                this->table->resizeColumnsToContents();
-            }
+            resetChamp(newAction, colonne, champ_startloopAddrsOffset, champ_startloopAddrsCoarseOffset);
             break;
         case champ_endloopAddrsOffset:
-            if (this->sf2->isSet(id, champ_endloopAddrsOffset) || this->sf2->isSet(id, champ_endloopAddrsCoarseOffset))
-            {
-                // On efface la donnée
-                if (newAction) this->sf2->prepareNewActions();
-                id = this->table->getID(colonne);
-                this->sf2->reset(id, champ_endloopAddrsOffset);
-                this->sf2->reset(id, champ_endloopAddrsCoarseOffset);
-                // Mise à jour fenêtre
-                this->mainWindow->updateDo();
-                // Redimensionnement du tableau
-                this->table->resizeColumnsToContents();
-            }
+            resetChamp(newAction, colonne, champ_endloopAddrsOffset, champ_endloopAddrsCoarseOffset);
             break;
         default:
-            if (this->sf2->isSet(id, champ))
-            {
-                // On efface la donnée
-                if (newAction) this->sf2->prepareNewActions();
-                id = this->table->getID(colonne);
-                this->sf2->reset(id, champ);
-                // Mise à jour fenêtre
-                this->mainWindow->updateDo();
-                // Redimensionnement du tableau
-                this->table->resizeColumnsToContents();
-            }
+            resetChamp(newAction, colonne, champ, champ_unknown);
         }
     }
     else
     {
-        texte = texte.left(9);
-        bool ok;
-        genAmountType genAmount = getValue(texte, champ, ok);
-        if (ok)
+        preparation = 1;
+        switch ((int)champ)
         {
-            this->preparation = 1;
-            int iVal;
-            genAmountType genAmount2;
-            switch ((int)champ)
+        case champ_startAddrsOffset:
+            setOffset(newAction, ligne, colonne, champ_startAddrsOffset, champ_startAddrsCoarseOffset);
+            break;
+        case champ_endAddrsOffset:
+            setOffset(newAction, ligne, colonne, champ_endAddrsOffset, champ_endAddrsCoarseOffset);
+            break;
+        case champ_startloopAddrsOffset:
+            setOffset(newAction, ligne, colonne, champ_startloopAddrsOffset, champ_startloopAddrsCoarseOffset);
+            break;
+        case champ_endloopAddrsOffset:
+            setOffset(newAction, ligne, colonne, champ_endloopAddrsOffset, champ_endloopAddrsCoarseOffset);
+            break;
+        default:{
+            QString texte = this->table->item(ligne, colonne)->text().left(9);
+            bool ok;
+            char T[20];
+            EltID id = this->table->getID(colonne);
+            genAmountType genAmount = getValue(texte, champ, ok);
+            if (ok)
             {
-            case champ_startAddrsOffset:
-                genAmount2 = getValue(texte, champ_startAddrsCoarseOffset, ok);
-                iVal = limit(32768 * genAmount2.shAmount + genAmount.shAmount, champ_startAddrsOffset, id);
-                genAmount2.shAmount = iVal / 32768;
-                genAmount.shAmount = iVal % 32768;
-                if (genAmount.shAmount != this->sf2->get(id, champ_startAddrsOffset).shValue || \
-                    genAmount2.shAmount != this->sf2->get(id, champ_startAddrsCoarseOffset).shValue)
-                {
-                    // Modification du sf2
-                    if (newAction) this->sf2->prepareNewActions();
-                    id = this->table->getID(colonne);
-                    Valeur value;
-                    value.genValue = genAmount;
-                    this->sf2->set(id, champ_startAddrsOffset, value);
-                    value.genValue = genAmount2;
-                    this->sf2->set(id, champ_startAddrsCoarseOffset, value);
-                    // Mise à jour fenêtre
-                    this->mainWindow->updateDo();
-                    // Redimensionnement du tableau
-                    this->table->resizeColumnsToContents();
-                }
-                // Mise à jour de la valeur dans la cellule
-                offset = this->sf2->get(id, champ_startAddrsOffset).genValue.shAmount + \
-                        32768 * this->sf2->get(id, champ_startAddrsCoarseOffset).genValue.shAmount;
-                this->table->item(ligne, colonne)->setText(getTextValue(T, champ, offset));
-                break;
-            case champ_endAddrsOffset:
-                genAmount2 = getValue(texte, champ_endAddrsCoarseOffset, ok);
-                iVal = limit(32768 * genAmount2.shAmount + genAmount.shAmount, champ_endAddrsOffset, id);
-                genAmount2.shAmount = iVal / 32768;
-                genAmount.shAmount = iVal % 32768;
-                if (genAmount.shAmount != this->sf2->get(id, champ_endAddrsOffset).shValue || \
-                    genAmount2.shAmount != this->sf2->get(id, champ_endAddrsCoarseOffset).shValue)
-                {
-                    // Modification du sf2
-                    if (newAction) this->sf2->prepareNewActions();
-                    id = this->table->getID(colonne);
-                    Valeur value;
-                    value.genValue = genAmount;
-                    this->sf2->set(id, champ_endAddrsOffset, value);
-                    value.genValue = genAmount2;
-                    this->sf2->set(id, champ_endAddrsCoarseOffset, value);
-                    // Mise à jour fenêtre
-                    this->mainWindow->updateDo();
-                    // Redimensionnement du tableau
-                    this->table->resizeColumnsToContents();
-                }
-                // Mise à jour de la valeur dans la cellule
-                offset = this->sf2->get(id, champ_endAddrsOffset).genValue.shAmount + \
-                        32768 * this->sf2->get(id, champ_endAddrsCoarseOffset).genValue.shAmount;
-                this->table->item(ligne, colonne)->setText(getTextValue(T, champ, offset));
-                break;
-            case champ_startloopAddrsOffset:
-                genAmount2 = getValue(texte, champ_startloopAddrsCoarseOffset, ok);
-                iVal = limit(32768 * genAmount2.shAmount + genAmount.shAmount, champ_startloopAddrsOffset, id);
-                genAmount2.shAmount = iVal / 32768;
-                genAmount.shAmount = iVal % 32768;
-                if (genAmount.shAmount != this->sf2->get(id, champ_startloopAddrsOffset).shValue || \
-                    genAmount2.shAmount != this->sf2->get(id, champ_startloopAddrsCoarseOffset).shValue)
-                {
-                    // Modification du sf2
-                    if (newAction) this->sf2->prepareNewActions();
-                    id = this->table->getID(colonne);
-                    Valeur value;
-                    value.genValue = genAmount;
-                    this->sf2->set(id, champ_startloopAddrsOffset, value);
-                    value.genValue = genAmount2;
-                    this->sf2->set(id, champ_startloopAddrsCoarseOffset, value);
-                    // Mise à jour fenêtre
-                    this->mainWindow->updateDo();
-                    // Redimensionnement du tableau
-                    this->table->resizeColumnsToContents();
-                }
-                // Mise à jour de la valeur dans la cellule
-                offset = this->sf2->get(id, champ_startloopAddrsOffset).genValue.shAmount + \
-                        32768 * this->sf2->get(id, champ_startloopAddrsCoarseOffset).genValue.shAmount;
-                this->table->item(ligne, colonne)->setText(getTextValue(T, champ, offset));
-                break;
-            case champ_endloopAddrsOffset:
-                genAmount2 = getValue(texte, champ_endloopAddrsCoarseOffset, ok);
-                iVal = limit(32768 * genAmount2.shAmount + genAmount.shAmount, champ_endloopAddrsOffset, id);
-                genAmount2.shAmount = iVal / 32768;
-                genAmount.shAmount = iVal % 32768;
-                if (genAmount.shAmount != this->sf2->get(id, champ_endloopAddrsOffset).shValue || \
-                    genAmount2.shAmount != this->sf2->get(id, champ_endloopAddrsCoarseOffset).shValue)
-                {
-                    // Modification du sf2
-                    if (newAction) this->sf2->prepareNewActions();
-                    id = this->table->getID(colonne);
-                    Valeur value;
-                    value.genValue = genAmount;
-                    this->sf2->set(id, champ_endloopAddrsOffset, value);
-                    value.genValue = genAmount2;
-                    this->sf2->set(id, champ_endloopAddrsCoarseOffset, value);
-                    // Mise à jour fenêtre
-                    this->mainWindow->updateDo();
-                    // Redimensionnement du tableau
-                    this->table->resizeColumnsToContents();
-                }
-                // Mise à jour de la valeur dans la cellule
-                offset = this->sf2->get(id, champ_endloopAddrsOffset).genValue.shAmount + \
-                        32768 * this->sf2->get(id, champ_endloopAddrsCoarseOffset).genValue.shAmount;
-                this->table->item(ligne, colonne)->setText(getTextValue(T, champ, offset));
-                break;
-            default:
+                // Modification champ
                 if (genAmount.wAmount != this->sf2->get(id, champ).wValue || !this->sf2->isSet(id, champ))
                 {
                     // Modification du sf2
-                    if (newAction) this->sf2->prepareNewActions();
+                    if (newAction)
+                        this->sf2->prepareNewActions();
                     id = this->table->getID(colonne);
                     Valeur value;
                     value.genValue = genAmount;
                     this->sf2->set(id, champ, value);
+                    newAction = false;
+
                     // Mise à jour fenêtre
-                    this->mainWindow->updateDo();
-                    // Redimensionnement du tableau
-                    this->table->resizeColumnsToContents();
+                    mainWindow->updateDo();
                 }
                 // Mise à jour de la valeur dans la cellule
-                this->table->item(ligne, colonne)->setText(getTextValue(T, champ, genAmount));
+                table->item(ligne, colonne)->setText(getTextValue(T, champ, genAmount));
             }
-            this->preparation = 0;
-        }
-        else
-        {
-            // On restaure le texte précédent
-            this->preparation = 1;
-            switch (champ)
+            else
             {
-            case champ_startAddrsOffset:
-                if (this->sf2->isSet(id, champ_startAddrsOffset) || this->sf2->isSet(id, champ_startAddrsCoarseOffset))
-                {
-                    offset = this->sf2->get(id, champ_startAddrsOffset).genValue.shAmount + \
-                            32768 * this->sf2->get(id, champ_startAddrsCoarseOffset).genValue.shAmount;
-                    this->table->item(ligne, colonne)->setText(getTextValue(T, champ_startAddrsOffset, offset));
-                }
-                else this->table->item(ligne, colonne)->setText("");
-                break;
-            case champ_endAddrsOffset:
-                if (this->sf2->isSet(id, champ_endAddrsOffset) || this->sf2->isSet(id, champ_endAddrsCoarseOffset))
-                {
-                    offset = this->sf2->get(id, champ_endAddrsOffset).genValue.shAmount + \
-                            32768 * this->sf2->get(id, champ_endAddrsCoarseOffset).genValue.shAmount;
-                    this->table->item(ligne, colonne)->setText(getTextValue(T, champ_endAddrsOffset, offset));
-                }
-                else this->table->item(ligne, colonne)->setText("");
-                break;
-            case champ_startloopAddrsOffset:
-                if (this->sf2->isSet(id, champ_startloopAddrsOffset) || this->sf2->isSet(id, champ_startloopAddrsCoarseOffset))
-                {
-                    offset = this->sf2->get(id, champ_startloopAddrsOffset).genValue.shAmount + \
-                            32768 * this->sf2->get(id, champ_startloopAddrsCoarseOffset).genValue.shAmount;
-                    this->table->item(ligne, colonne)->setText(getTextValue(T, champ_startloopAddrsOffset, offset));
-                }
-                else this->table->item(ligne, colonne)->setText("");
-                break;
-            case champ_endloopAddrsOffset:
-                if (this->sf2->isSet(id, champ_endloopAddrsOffset) || this->sf2->isSet(id, champ_endloopAddrsCoarseOffset))
-                {
-                    offset = this->sf2->get(id, champ_endloopAddrsOffset).genValue.shAmount + \
-                            32768 * this->sf2->get(id, champ_endloopAddrsCoarseOffset).genValue.shAmount;
-                    this->table->item(ligne, colonne)->setText(getTextValue(T, champ_endloopAddrsOffset, offset));
-                }
-                else this->table->item(ligne, colonne)->setText("");
-                break;
-            default:
+                // Restauration valeur précédente
                 if (this->sf2->isSet(id, champ))
                     this->table->item(ligne, colonne)->setText(getTextValue(T, champ, this->sf2->get(id, champ).genValue));
                 else this->table->item(ligne, colonne)->setText("");
             }
-            this->preparation = 0;
+            }
         }
+        preparation = 0;
     }
     this->table->resizeColumnsToContents();
+
     // Mise à jour partie mod (car entre 2 des mod peuvent être définitivement détruits, et les index peuvent être mis à jour)
+    EltID id = this->table->getID(colonne);
     this->afficheMod(id);
+
+    if (allowPropagation && Config::getInstance()->getRepercussionStereo() && id.typeElement == elementInstSmpl &&
+            champ != champ_pan)
+    {
+        // Répercussion des modifications sur le sample stéréo s'il est présent
+        EltID idSmpl = id;
+        idSmpl.typeElement = elementSmpl;
+        idSmpl.indexElt = sf2->get(id, champ_sampleID).wValue;
+        SFSampleLink typeLink = sf2->get(idSmpl, champ_sfSampleType).sfLinkValue;
+        if (typeLink == rightSample || typeLink == leftSample || typeLink == linkedSample ||
+                typeLink == RomRightSample || typeLink == RomLeftSample || typeLink == RomLinkedSample)
+        {
+            int numSmpl2 = sf2->get(idSmpl, champ_wSampleLink).wValue;
+            rangesType keyRange = sf2->get(id, champ_keyRange).rValue;
+            rangesType velRange = sf2->get(id, champ_velRange).rValue;
+
+            // Recherche d'une correspondance dans les samples liés
+            bool ok = true;
+            int numCol2 = -1;
+            EltID idTmp = id;
+            for (int i = 1; i < table->columnCount(); i++)
+            {
+                idTmp = this->table->getID(i);
+                if (!sf2->get(idTmp, champ_hidden).bValue && i != colonne)
+                {
+                    rangesType keyRange2 = sf2->get(idTmp, champ_keyRange).rValue;
+                    rangesType velRange2 = sf2->get(idTmp, champ_velRange).rValue;
+                    if (keyRange2.byLo == keyRange.byLo && keyRange2.byHi == keyRange.byHi &&
+                            velRange2.byLo == velRange.byLo && velRange2.byHi == velRange.byHi)
+                    {
+                        int iTmp = sf2->get(idTmp, champ_sampleID).wValue;
+                        if (iTmp == id.indexElt2)
+                            ok = false; // ambiguité
+                        else if (iTmp == numSmpl2)
+                        {
+                            if (numCol2 == -1)
+                                numCol2 = i;
+                            else
+                                ok = false; // ambiguité
+                        }
+                    }
+                }
+            }
+
+            // Application de la modification
+            if (numCol2 != -1 && ok)
+            {
+                table->blockSignals(true);
+                table->item(ligne, numCol2)->setText(table->item(ligne, colonne)->text());
+                table->blockSignals(false);
+                set(ligne, numCol2, newAction, false);
+            }
+        }
+    }
 }
 void PageTable::setAmount()
 {
@@ -2879,6 +2836,7 @@ void PageTable::paramGlobal(QVector<double> dValues, QList<EltID> listElt, int t
                 if (velMin2 >= velMin && velMax2 <= velMax)
                 {
                     amount = QString(getTextValue(T, (Champ)champ, this->sf2->get(id, (Champ)champ).genValue)).toDouble();
+
                     // Calcul de la modification
                     pos = (double)(this->sf2->get(id, champ_keyRange).rValue.byLo +
                            this->sf2->get(id, champ_keyRange).rValue.byHi) / 2 * dValues.size() / 127. + 0.5;
@@ -2886,6 +2844,7 @@ void PageTable::paramGlobal(QVector<double> dValues, QList<EltID> listElt, int t
                         pos = 0;
                     else if (pos >= dValues.size())
                         pos = dValues.size() - 1;
+
                     // Application de la modification
                     switch (typeModif)
                     {
@@ -3697,7 +3656,7 @@ TableWidget::TableWidget(QWidget *parent) : QTableWidget(parent)
 {
     KeyPressCatcher * keyPressCatcher = new KeyPressCatcher(this);
     this->installEventFilter(keyPressCatcher);
-    connect(keyPressCatcher, SIGNAL(set(int, int, bool)), this, SLOT(emitSet(int,int,bool)));
+    connect(keyPressCatcher, SIGNAL(set(int, int, bool)), this, SLOT(emitSet(int, int, bool)));
     _timer = new QTimer(this);
     connect(_timer, SIGNAL(timeout()), this, SLOT(updateColors()));
 }

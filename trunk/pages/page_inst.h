@@ -52,6 +52,7 @@ private slots:
 
 private:
     Ui::Page_Inst *ui;
+
     // Outils
     static double getOffset(int type1, int type2);
     static EltID closestSample(EltID idInst, double pitch, double &ecart, int cote, EltID &idInstSmpl);
@@ -67,6 +68,7 @@ public:
     // Constructeur
     TableWidgetInst(QWidget *parent = 0);
     ~TableWidgetInst();
+
     // Association champ - ligne
     Champ getChamp(int row);
     int getRow(WORD champ);
