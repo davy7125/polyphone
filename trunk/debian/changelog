@@ -1,44 +1,6 @@
 polyphone (1.1-1) UNRELEASED; urgency=low
 
-  * New upstream version
-
- -- Davy Triponney <davy.triponney@gmail.com>  Fri, 8 Nov 2013 19:57:27 +0100
-
-
-polyphone (1.0-1) UNRELEASED; urgency=low
-
-  * New upstream version
-
- -- Davy Triponney <davy.triponney@gmail.com>  Sun, 1 Sep 2013 09:06:42 +0100
-
-
-polyphone (0.9-1) UNRELEASED; urgency=low
-
-  * New upstream version
-
- -- Davy Triponney <davy.triponney@gmail.com>  Sun, 20 Aug 2013 18:32:05 +0100
-
-
-polyphone (0.8-1) UNRELEASED; urgency=low
-
-  * New upstream version
-
- -- Davy Triponney <davy.triponney@gmail.com>  Sun, 21 Jul 2013 16:25:21 +0100
-
-
-polyphone (0.7-2) UNRELEASED; urgency=low
-
-  * Adapted watch file
-  * Created upstream changelog
-  * Corrected a dependency
-
- -- Davy Triponney <davy.triponney@gmail.com>  Sat, 29 Jun 2013 17:46:42 +0100
-
-
-polyphone (0.7-1) UNRELEASED; urgency=low
-
-  * New upstream version
   * Initial debian release (Closes: Bug#714454)
 
- -- Davy Triponney <davy.triponney@gmail.com>  Sat, 29 Jun 2013 17:46:42 +0100
+ -- Davy Triponney <davy.triponney@gmail.com>  Fri, 8 Nov 2013 19:57:27 +0100
 

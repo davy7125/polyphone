@@ -2,7 +2,7 @@ Source: polyphone
 Section: sound
 Priority: optional
 Maintainer: Davy Triponney <davy.triponney@gmail.com>
-Build-Depends: debhelper (>= 8.0.0), dpkg-dev (>= 1.16.1~), libasound2-dev, alsa-utils, libqt4-dev (>= 4:4.6.3), libjack-jackd2-dev, libportaudio2
+Build-Depends: debhelper (>= 9.0.0), dpkg-dev (>= 1.16.1~), libasound2-dev, alsa-utils, libqt4-dev (>= 4:4.6.3), libjack-jackd2-dev, libportaudio2
 Standards-Version: 3.9.4
 Homepage: http://www.polyphone.fr
 

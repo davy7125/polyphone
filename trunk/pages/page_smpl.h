@@ -82,13 +82,14 @@ private slots:
     void setStereo(int val);
     void selectionChanged();
     void updateColors();
+
 private:
     Ui::Page_Smpl *ui;
     bool lectureEnCours;
 
     // Méthodes privées
     void setRateElt(EltID id, DWORD echFinal);
-    EltID getRepercussionID();
+    EltID getRepercussionID(int num = 0);
 };
 
 class Graphique : public QCustomPlot
@@ -98,6 +99,8 @@ public:
     explicit Graphique(QWidget *parent = 0);
     bool eventFilter(QObject* object, QEvent* event)
     {
+        if (!filterEventEnabled)
+            return false;
         if (event->type() == QEvent::MouseButtonPress && object == this)
         {
             QMouseEvent* mouseEvent = static_cast<QMouseEvent*>(event);
@@ -203,6 +206,7 @@ public:
     void linkSpinBoxes(QSpinBox * spinStart, QSpinBox * spinEnd);
     void zoomDrag();
     void updateStyle();
+    void displayMultipleSelection(bool isOn);
 
 public slots:
     void setPosX(int posX);
@@ -213,8 +217,10 @@ public slots:
 signals:
     void startLoopChanged();
     void endLoopChanged();
+
 protected:
     void paintEvent(QPaintEvent *event);
+
 private:
     // Attributs privés
     QPen penLecture;
@@ -231,6 +237,9 @@ private:
     QSpinBox * spinStart;
     QSpinBox * spinEnd;
     int m_currentPos;
+    bool filterEventEnabled;
+    QCPItemText * textMultipleSelection;
+
     // Méthodes privées
     void zoom(QPoint point);
     void drag(QPoint point);

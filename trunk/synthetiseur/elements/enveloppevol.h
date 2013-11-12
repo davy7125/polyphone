@@ -51,6 +51,7 @@ private:
     quint32 m_currentSmpl;
     double m_precValue;
     EnveloppePhase m_currentPhase;
+
     // Paramètres de l'enveloppe
     quint32 m_timeDelay;
     quint32 m_timeAttack;
@@ -62,8 +63,12 @@ private:
     // Volume
     double m_volume;
     int m_fixedVelocity;
+
     // Echantillonnage
     quint32 m_sampleRate;
+
+    // Release autorisée ?
+    bool m_allowRelease;
 };
 
 #endif // ENVELOPPEVOL_H

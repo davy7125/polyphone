@@ -169,7 +169,7 @@ void Voice::generateData(qint64 nbData)
         double q_lin = pow(10, filterQ / 20.);
         for (int i = 0; i < nbData; i++)
         {
-            this->biQuadCoefficients(a0, a1, a2, b1, b2, modFreq[i], q_lin);
+            biQuadCoefficients(a0, a1, a2, b1, b2, modFreq[i], q_lin);
             valTmp = a0 * data[i] + a1 * m_x1 + a2 * m_x2 - b1 * m_y1 - b2 * m_y2;
             m_x2 = m_x1;
             m_x1 = data[i];
@@ -199,7 +199,7 @@ void Voice::generateData(qint64 nbData)
     else
         bRet2 = m_enveloppeVol.applyEnveloppe(data, nbData, m_release, m_note,
                                               m_velocity, m_voiceParam, m_gain - gainLowPassFilter);
-    if (bRet2 || !bRet)
+    if ((bRet2 && m_voiceParam->loopMode != 3) || !bRet)
     {
         m_finished = true;
         emit(currentPosChanged(0));
@@ -215,6 +215,7 @@ bool Voice::takeData(qint32 * data, qint64 nbRead)
 {
     bool ok = true;
     const qint32 * dataSmpl = (qint32 *)m_baData.constData();
+
     if ((m_voiceParam->loopMode == 1 || m_voiceParam->loopMode == 2 ||
          (m_voiceParam->loopMode == 3 && !m_release)) &&
             m_voiceParam->loopStart != m_voiceParam->loopEnd)
@@ -263,11 +264,11 @@ void Voice::release(bool quick)
 
 void Voice::setGain(double gain)
 {
-    this->m_gain = gain;
+    m_gain = gain;
 }
 void Voice::setChorus(int level, int depth, int frequency)
 {
-    m_chorus.setEffectMix((double)level / 200. * (double)this->m_voiceParam->chorus / 100.);
+    m_chorus.setEffectMix((double)level / 200. * (double)m_voiceParam->chorus / 100.);
     m_chorus.setModDepth((double)depth / 4000.);
     m_chorus.setModFrequency((double)frequency / 15.);
 }

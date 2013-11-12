@@ -844,27 +844,7 @@
             <widget class="QComboBox" name="comboSampleRate">
              <item>
               <property name="text">
-               <string notr="true">192000</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string notr="true">96000</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string notr="true">48000</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string notr="true">44100</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string notr="true">32000</string>
+               <string notr="true">11025</string>
               </property>
              </item>
              <item>
@@ -874,7 +854,27 @@
              </item>
              <item>
               <property name="text">
-               <string notr="true">11025</string>
+               <string notr="true">32000</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string notr="true">44100</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string notr="true">48000</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string notr="true">96000</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string notr="true">192000</string>
               </property>
              </item>
             </widget>

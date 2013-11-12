@@ -41,12 +41,15 @@ public:
     public :
         // constructeur
         menuClicDroit(MainWindow *mainWindow);
+
         // attributs
         QAction *nouveauSample;
         QAction *nouvelInstrument;
         QAction *nouveauPreset;
         QAction *remplacer;
         QAction *associer;
+        QAction *copier;
+        QAction *coller;
         QAction *supprimer;
         QAction *renommer;
         QAction *fermer;

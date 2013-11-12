@@ -59,6 +59,7 @@ public:
         PAGE_PRST
     };
     Page(TypePage typePage, QWidget *parent = 0);
+
     // Méthodes publiques
     virtual void afficher() = 0;
     static QString getGenName(WORD iVal, int type = 0);
@@ -72,6 +73,7 @@ protected:
     static Pile_sf2 *sf2;
     static Synth * synth;
     TypePage m_typePage;
+
     // Méthodes protégées
     char * getTextValue(char * T, WORD champ, genAmountType genVal);
     static char * getTextValue(char * T, WORD champ, int iVal);
@@ -99,6 +101,7 @@ public:
     void setID(EltID id, int colonne);
     EltID getID(int colonne);
     void setEnlighted(int colonne, bool isEnlighted);
+
     // Association champ - ligne (méthodes virtuelles pures)
     virtual Champ getChamp(int row) = 0;
     virtual int getRow(WORD champ) = 0;
@@ -125,6 +128,7 @@ public:
     // Constructeur
     TableWidgetMod(QWidget *parent = 0);
     ~TableWidgetMod();
+
     // Méthodes publiques
     void clear();
     void addRow(int row);
@@ -138,6 +142,7 @@ class KeyPressCatcher : public QObject
     Q_OBJECT
 signals:
     void set(int ligne, int row, bool newAction);
+
 public:
     KeyPressCatcher(TableWidget *table) : QObject()
     {
@@ -163,6 +168,7 @@ public:
             {
                 // Touche retour ou suppr (efface la cellule)
                 this->table->blockSignals(true);
+
                 // Retrait des éléments sélectionnés sur les lignes 0 à 3 inclus
                 QList<QTableWidgetItem *> listCell = this->table->selectedItems();
                 int nbElt = listCell.count();
@@ -184,16 +190,6 @@ public:
                              false));
                 }
                 this->table->blockSignals(false);
-            }
-            else if (keyEvent->key() == Qt::Key_Return || keyEvent->key() == Qt::Key_Enter)
-            {
-                // Touche entrée (entre dans la cellule)
-                if (this->table->selectedItems().count() == 1)
-                {
-                    //int row = this->table->selectedItems().takeAt(0)->row();
-                    //int column = this->table->selectedItems().takeAt(0)->column();
-                    //this->table->editItem(this->table->item(row, column));
-                }
             }
         }
         // on laisse passer l'événement
@@ -380,6 +376,9 @@ private:
     int limit(int iVal, Champ champ, EltID id);
     void duplication(EltID id);
     void duplication(EltID id, QVector<int> listeVelocite);
+    void resetChamp(bool &newAction, int colonne, Champ champ1, Champ champ2);
+    void setOffset(bool &newAction, int ligne, int colonne, Champ champ1, Champ champ2);
+    void set(int ligne, int colonne, bool &newAction, bool allowPropagation);
 
     static QList<Modulator> _modulatorCopy;
     QList<int> _listKeyEnlighted;

@@ -84,6 +84,13 @@ public:
     int indexElt;
     int indexElt2;
     int indexMod;   
+
+    bool operator==(const EltID &other)
+    {
+        return (this->indexSf2 == other.indexSf2) && (this->indexElt == other.indexElt) &&
+                (this->indexElt2 == other.indexElt2) && (this->indexMod == other.indexMod) &&
+                (this->typeElement == other.typeElement);
+    }
 };
 
 typedef struct sfVersionTag
@@ -100,6 +107,7 @@ typedef enum
 
 typedef enum
 {
+    linkInvalid = 0,
     monoSample = 1,
     rightSample = 2,
     leftSample = 4,
