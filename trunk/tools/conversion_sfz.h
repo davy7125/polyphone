@@ -62,14 +62,14 @@ public:
     ConversionSfz(Pile_sf2 * sf2);
 
     // Export en sfz, renvoi de l'adresse du dernier instrument créé
-    QString convert(QString dir, EltID id);
+    void convert(QString dir, QList<EltID> listID);
 
 private:
     Pile_sf2 * _sf2;
     QList<int> _sampleIDs;
     QList<QString> _samplePaths;
 
-    QString exportPrst(QString dir, EltID id);
+    void exportPrst(QString dir, EltID id);
     QString getPathSfz(QString dir, QString name);
     QString getLink(QString root, EltID idSmpl);
     void writeEntete(QFile * fichierSfz, EltID id);

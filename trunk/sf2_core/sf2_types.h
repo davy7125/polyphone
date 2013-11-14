@@ -87,9 +87,33 @@ public:
 
     bool operator==(const EltID &other)
     {
-        return (this->indexSf2 == other.indexSf2) && (this->indexElt == other.indexElt) &&
-                (this->indexElt2 == other.indexElt2) && (this->indexMod == other.indexMod) &&
-                (this->typeElement == other.typeElement);
+        bool ok = true;
+        if (this->typeElement != other.typeElement || this->indexSf2 != other.indexSf2)
+            ok = false;
+        else
+        {
+            switch (typeElement)
+            {
+            case elementUnknown:
+                ok = false;
+                break;
+            case elementInstMod: case elementPrstMod:
+            case elementInstGen: case elementPrstGen: // Pas besoin de vérifier sur indexElt2
+                ok = (this->indexElt == other.indexElt) &&
+                        (this->indexMod == other.indexMod);
+                break;
+            case elementInstSmplMod: case elementPrstInstMod:
+            case elementInstSmplGen: case elementPrstInstGen:
+                ok = (this->indexMod == other.indexMod);
+            case elementInstSmpl: case elementPrstInst:
+                ok = ok && (this->indexElt2 == other.indexElt2);
+            case elementSmpl: case elementInst: case elementPrst:
+                ok = ok && (this->indexElt == other.indexElt);
+            default:
+                break;
+            }
+        }
+        return ok;
     }
 };
 

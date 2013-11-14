@@ -30,12 +30,13 @@ ConversionSfz::ConversionSfz(Pile_sf2 *sf2) :
     _sf2(sf2)
 {}
 
-QString ConversionSfz::convert(QString dir, EltID id)
+void ConversionSfz::convert(QString dir, QList<EltID> listID)
 {
-    id.typeElement = elementPrst;
+    if (listID.isEmpty())
+        return;
 
     // Création d'un répertoire
-    EltID idSF2 = id;
+    EltID idSF2 = listID.at(0);
     idSF2.typeElement = elementSf2;
     QString rootDir = QFileInfo(_sf2->getQstr(idSF2, champ_filename)).baseName();
     QDir dossier(dir + "/" + rootDir);
@@ -50,17 +51,13 @@ QString ConversionSfz::convert(QString dir, EltID id)
     QDir(rootDir).mkdir(rootDir);
 
     // For each preset, a sfz file is created
-    for (int i = 0; i < _sf2->count(id); i++)
-    {
-        id.indexElt = i;
-        if (!_sf2->get(id, champ_hidden).bValue)
-            exportPrst(rootDir, id);
-    }
+    for (int i = 0; i < listID.count(); i++)
+        exportPrst(rootDir, listID.at(i));
 
-    return rootDir;
+    return;
 }
 
-QString ConversionSfz::exportPrst(QString dir, EltID id)
+void ConversionSfz::exportPrst(QString dir, EltID id)
 {
     QDir().mkdir(dir + "/samples");
     QString path = getPathSfz(dir, _sf2->getQstr(id, champ_name)) + ".sfz";
@@ -109,7 +106,7 @@ QString ConversionSfz::exportPrst(QString dir, EltID id)
         fichierSfz.close();
     }
 
-    return path;
+    return;
 }
 
 QString ConversionSfz::getPathSfz(QString dir, QString name)

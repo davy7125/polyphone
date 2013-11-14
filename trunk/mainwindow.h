@@ -59,7 +59,7 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
     // Méthodes publiques
-    void anticipateNewAction();
+    void prepareNewAction();
     void updateDo();
     void updateActions();
     void enableActionSample(bool isEnabled);
@@ -79,6 +79,7 @@ public:
     void setSynthReverb(int level, int size, int width, int damping);
     void setSynthChorus(int level, int depth, int frequency);
     void setListeActions(QList<QAction *> listeActions);
+    void dragAndDrop(EltID idDest, QList<EltID> idSources);
 
 public slots:
     void returnToOldMaxMinSizes();
@@ -100,10 +101,10 @@ private slots:
 
     void renommer();            // Renommer un ou plusieurs éléments dans l'arborescence
     void renommerEnMasse(QString name, int modificationType);
-    void dragAndDrop(EltID idDest, EltID idSrc, int temps, int *msg, QByteArray *ba1, QByteArray *ba2);
     void importerSmpl();        // Import d'un sample
     void exporterSmpl();        // Export d'un sample
-    void exporterSfz();         // Export sous le format sfz
+    void exporter();            // Export d'un ou plusieurs preset(s)
+    void exporter(QList<EltID> listID, QString dir, int format);
     void nouvelInstrument();    // Création d'un instrument
     void nouveauPreset();       // Création d'un preset
     void associer();            // Association InstSmpl et PrstInst

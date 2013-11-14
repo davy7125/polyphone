@@ -30,18 +30,20 @@
 #include "sound.h"
 #include "tree.h"
 #include <string>
-    using std::string;
+using std::string;
 
 class Pile_sf2 : public QObject
 {
     Q_OBJECT
 public:
     // METHODES PUBLIQUES DE LA CLASSE PILE_SF2
-    Pile_sf2(Tree *tree, bool ram);
+    Pile_sf2(Tree *tree, bool ram, QWidget * parent = NULL);
     virtual ~Pile_sf2() {}
+
     // Ajout / suppression des données
     int add(EltID id);
     void remove(EltID id, int *message = NULL);
+
     // Accès / modification des propriétés
     bool isSet(EltID id, Champ champ);
     Valeur get(EltID id, Champ champ);
@@ -52,8 +54,10 @@ public:
     int set(EltID id, Champ champ, QString qStr);
     int set(EltID id, Champ champ, QByteArray data);
     int reset(EltID id, Champ champ);
+
     // Nombre de freres de id (id compris)
     int count(EltID id, bool withHidden = true);
+
     // Gestionnaire d'actions
     void prepareNewActions();
     void cleanActions();
@@ -61,17 +65,27 @@ public:
     bool isRedoable();
     void undo();
     void redo();
+
     // Chargement / sauvegarde / nouveau
     void nouveau(QString name);
     int ouvrir(QString fileName);
     int sauvegarder(int indexSf2, QString fileName);
     bool isEdited(int indexSf2);
+
     // Récupération d'une liste de champs et de valeurs contenues dans les bags de l'élément id
     void getListeBags(EltID id, QList<Champ> &listeChamps, QList<genAmountType> &listeValeurs);
+
     // Détermination de la validité d'un ID (en acceptant ou non les ID masqués, par défaut non)
     bool isValide(EltID id, bool acceptHidden = 0);
+
+    // Disponibilité de bank / preset
+    void firstAvailablePresetBank(EltID id, int &nBank, int &nPreset);
+    int closestAvailablePreset(EltID id, WORD wBank, WORD wPreset);
+    bool isAvailable(EltID id, WORD wBank, WORD wPreset);
+
 signals:
     void updateTable(int type, int sf2, int elt, int elt2);
+
 private:
     // Type de fichier
     typedef enum
@@ -274,6 +288,8 @@ private:
     Tree *tree;
     Pile_actions *pileActions;
     bool static CONFIG_RAM;
+    QWidget * parent;
+
     // METHODES PRIVEES DE LA CLASSE PILE_SF2
     // Ajoute un enfant à id
     int add(EltID id, bool storeAction);

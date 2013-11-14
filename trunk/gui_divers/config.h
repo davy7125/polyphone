@@ -48,7 +48,7 @@ public:
         typeFichierSf2,
         typeFichierSample,
         typeFichierEnregistrement,
-        typeFichierSfz
+        typeFichierExport
     };
 
     static Config * getInstance(QWidget *parent = NULL);
@@ -551,6 +551,10 @@ public:
     QByteArray getWindowState()             { return settings.value("affichage/windowState", QByteArray()).toByteArray(); }
     void setDockWidth(int val)              { settings.setValue("affichage/dock_width", val); }
     int getDockWidth()                      { return settings.value("affichage/dock_width", 150).toInt(); }
+
+    // Export
+    void setExportType(int val)             { settings.setValue("export_type", val); }
+    int getExportType()                     { return settings.value("export_type", 0).toInt(); }
 
     // Affichage de la fenêtre
     void show();
