@@ -598,6 +598,9 @@
            <property name="verticalScrollMode">
             <enum>QAbstractItemView::ScrollPerItem</enum>
            </property>
+           <property name="horizontalScrollMode">
+            <enum>QAbstractItemView::ScrollPerPixel</enum>
+           </property>
            <property name="columnCount">
             <number>9</number>
            </property>

@@ -1400,6 +1400,61 @@ void PageTable::set(int ligne, int colonne, bool &newAction, bool allowPropagati
     if (champ == champ_unknown)
         return;
 
+    EltID id = this->table->getID(colonne);
+    if (allowPropagation && Config::getInstance()->getRepercussionStereo() && id.typeElement == elementInstSmpl &&
+            champ != champ_pan)
+    {
+        // Répercussion des modifications sur le sample stéréo s'il est présent
+        EltID idSmpl = id;
+        idSmpl.typeElement = elementSmpl;
+        idSmpl.indexElt = sf2->get(id, champ_sampleID).wValue;
+        SFSampleLink typeLink = sf2->get(idSmpl, champ_sfSampleType).sfLinkValue;
+        if (typeLink == rightSample || typeLink == leftSample || typeLink == linkedSample ||
+                typeLink == RomRightSample || typeLink == RomLeftSample || typeLink == RomLinkedSample)
+        {
+            int numSmpl2 = sf2->get(idSmpl, champ_wSampleLink).wValue;
+            rangesType keyRange = sf2->get(id, champ_keyRange).rValue;
+            rangesType velRange = sf2->get(id, champ_velRange).rValue;
+
+            // Recherche d'une correspondance dans les samples liés
+            bool ok = true;
+            int numCol2 = -1;
+            EltID idTmp = id;
+            for (int i = 1; i < table->columnCount(); i++)
+            {
+                idTmp = this->table->getID(i);
+                if (!sf2->get(idTmp, champ_hidden).bValue && i != colonne)
+                {
+                    rangesType keyRange2 = sf2->get(idTmp, champ_keyRange).rValue;
+                    rangesType velRange2 = sf2->get(idTmp, champ_velRange).rValue;
+                    if (keyRange2.byLo == keyRange.byLo && keyRange2.byHi == keyRange.byHi &&
+                            velRange2.byLo == velRange.byLo && velRange2.byHi == velRange.byHi)
+                    {
+                        int iTmp = sf2->get(idTmp, champ_sampleID).wValue;
+                        if (iTmp == id.indexElt2)
+                            ok = false; // ambiguité
+                        else if (iTmp == numSmpl2)
+                        {
+                            if (numCol2 == -1)
+                                numCol2 = i;
+                            else
+                                ok = false; // ambiguité
+                        }
+                    }
+                }
+            }
+
+            // Application de la modification
+            if (numCol2 != -1 && ok)
+            {
+                table->blockSignals(true);
+                table->item(ligne, numCol2)->setText(table->item(ligne, colonne)->text());
+                table->blockSignals(false);
+                set(ligne, numCol2, newAction, false);
+            }
+        }
+    }
+
     if (table->item(ligne, colonne)->text().isEmpty())
     {
         // Effacement d'un paramètre ?
@@ -1477,63 +1532,9 @@ void PageTable::set(int ligne, int colonne, bool &newAction, bool allowPropagati
     }
     this->table->resizeColumnsToContents();
 
-    // Mise à jour partie mod (car entre 2 des mod peuvent être définitivement détruits, et les index peuvent être mis à jour)
-    EltID id = this->table->getID(colonne);
+    // Mise à jour partie mod (car entre 2 des mods peuvent être définitivement détruits, et les index peuvent être mis à jour)
+    id = this->table->getID(colonne);
     this->afficheMod(id);
-
-    if (allowPropagation && Config::getInstance()->getRepercussionStereo() && id.typeElement == elementInstSmpl &&
-            champ != champ_pan)
-    {
-        // Répercussion des modifications sur le sample stéréo s'il est présent
-        EltID idSmpl = id;
-        idSmpl.typeElement = elementSmpl;
-        idSmpl.indexElt = sf2->get(id, champ_sampleID).wValue;
-        SFSampleLink typeLink = sf2->get(idSmpl, champ_sfSampleType).sfLinkValue;
-        if (typeLink == rightSample || typeLink == leftSample || typeLink == linkedSample ||
-                typeLink == RomRightSample || typeLink == RomLeftSample || typeLink == RomLinkedSample)
-        {
-            int numSmpl2 = sf2->get(idSmpl, champ_wSampleLink).wValue;
-            rangesType keyRange = sf2->get(id, champ_keyRange).rValue;
-            rangesType velRange = sf2->get(id, champ_velRange).rValue;
-
-            // Recherche d'une correspondance dans les samples liés
-            bool ok = true;
-            int numCol2 = -1;
-            EltID idTmp = id;
-            for (int i = 1; i < table->columnCount(); i++)
-            {
-                idTmp = this->table->getID(i);
-                if (!sf2->get(idTmp, champ_hidden).bValue && i != colonne)
-                {
-                    rangesType keyRange2 = sf2->get(idTmp, champ_keyRange).rValue;
-                    rangesType velRange2 = sf2->get(idTmp, champ_velRange).rValue;
-                    if (keyRange2.byLo == keyRange.byLo && keyRange2.byHi == keyRange.byHi &&
-                            velRange2.byLo == velRange.byLo && velRange2.byHi == velRange.byHi)
-                    {
-                        int iTmp = sf2->get(idTmp, champ_sampleID).wValue;
-                        if (iTmp == id.indexElt2)
-                            ok = false; // ambiguité
-                        else if (iTmp == numSmpl2)
-                        {
-                            if (numCol2 == -1)
-                                numCol2 = i;
-                            else
-                                ok = false; // ambiguité
-                        }
-                    }
-                }
-            }
-
-            // Application de la modification
-            if (numCol2 != -1 && ok)
-            {
-                table->blockSignals(true);
-                table->item(ligne, numCol2)->setText(table->item(ligne, colonne)->text());
-                table->blockSignals(false);
-                set(ligne, numCol2, newAction, false);
-            }
-        }
-    }
 }
 void PageTable::setAmount()
 {

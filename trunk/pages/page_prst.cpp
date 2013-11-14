@@ -213,7 +213,7 @@ void Page_Prst::spinUpDown(int steps, SpinBox *spin)
             wPreset = valInit + nbIncrement * increment;
             bTmp = (this->sf2->get(id, champ_wPreset).wValue == wPreset);
         }
-        valPossible = isAvailable(id, wBank, wPreset) || bTmp;
+        valPossible = sf2->isAvailable(id, wBank, wPreset) || bTmp;
         nbIncrement++;
     } while (!valPossible && valInit + nbIncrement * increment < 128 \
              && valInit + nbIncrement * increment > -1);
@@ -242,14 +242,14 @@ void Page_Prst::setBank()
             {
                 if (initVal + delta == nBank)
                     sens = 2;
-                else if (isAvailable(id, initVal + delta, nPreset))
+                else if (sf2->isAvailable(id, initVal + delta, nPreset))
                     sens = 1;
             }
             if (initVal - delta > -1 && sens == 0)
             {
                 if (initVal - delta == nBank)
                     sens = -2;
-                else if (isAvailable(id, initVal - delta, nPreset))
+                else if (sf2->isAvailable(id, initVal - delta, nPreset))
                     sens = -1;
             }
             delta++;
@@ -287,7 +287,7 @@ void Page_Prst::setPreset()
     if (this->sf2->get(id, champ_wPreset).wValue != initVal)
     {
         // Valeur possible ?
-        initVal = closestAvailablePreset(id, this->sf2->get(id, champ_wBank).wValue, initVal);
+        initVal = sf2->closestAvailablePreset(id, this->sf2->get(id, champ_wBank).wValue, initVal);
         int nPreset = this->sf2->get(id, champ_wPreset).wValue;
         if (initVal >= 0 && initVal != nPreset)
         {
@@ -309,77 +309,4 @@ void Page_Prst::setPreset()
         }
     }
     this->preparation = 0;
-}
-
-void Page_Prst::firstAvailablePresetBank(EltID id, int &nBank, int &nPreset)
-{
-    if (nBank != -1 && nPreset != -1)
-    {
-        // bank et preset par défaut disponibles ?
-        if (isAvailable(id, nBank, nPreset))
-            return;
-    }
-    nBank = -2;
-    nPreset = -1;
-    int nBankParcours = 0;
-    int nPresetParcours = 0;
-    do
-    {
-        if (isAvailable(id, nBankParcours, nPresetParcours))
-        {
-            nBank = nBankParcours;
-            nPreset = nPresetParcours;
-        }
-        else
-        {
-            nPresetParcours++;
-            if (nPresetParcours > 127)
-            {
-                nPresetParcours = 0;
-                nBankParcours++;
-                if (nBankParcours > 127)
-                    nBank = -1;
-            }
-        }
-    }
-    while (nBank == -2);
-}
-int Page_Prst::closestAvailablePreset(EltID id, WORD wBank, WORD wPreset)
-{
-    int initVal = wPreset;
-    int delta = 0;
-    int sens = 0;
-    do
-    {
-        if (initVal + delta < 128)
-        {
-            if (isAvailable(id, wBank, initVal + delta))
-                sens = 1;
-        }
-        if (initVal - delta > -1 && sens == 0)
-        {
-            if (isAvailable(id, wBank, initVal - delta))
-                sens = -1;
-        }
-        delta++;
-    } while (sens == 0 && delta < 128);
-    if (sens == 1 || sens == -1)
-        return initVal + sens * (delta-1);
-    else
-        return -1;
-}
-bool Page_Prst::isAvailable(EltID id, WORD wBank, WORD wPreset)
-{
-    id.typeElement = elementPrst;
-    for (int i = 0; i < sf2->count(id); i++)
-    {
-        id.indexElt = i;
-        if (!sf2->get(id, champ_hidden).bValue)
-        {
-            if (sf2->get(id, champ_wBank).wValue == wBank && \
-                    sf2->get(id, champ_wPreset).wValue == wPreset)
-                return false;
-        }
-    }
-    return true;
 }

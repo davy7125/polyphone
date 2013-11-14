@@ -74,7 +74,8 @@ public:
                 {
                     if (this->isSelectedItemsSf2Unique() && this->isSelectedItemsTypeUnique())
                     {
-                        this->anticipateNewAction();
+                        this->prepareNewAction(true);
+
                         // Copie des éléments
                         for (int i = 0; i < nbElt; i++)
                             this->idList << this->getID(i);
@@ -83,36 +84,12 @@ public:
             }
             else if (keyEvent->matches(QKeySequence::Paste))
             {
+                this->prepareNewAction(false);
                 int nbElt = this->getSelectedItemsNumber();
                 if (nbElt > 0 && this->idList.size())
                 {
                     if (this->isSelectedItemsSf2Unique() && this->isSelectedItemsTypeUnique())
-                    {
-                        EltID idDest = this->getID(0);
-                        int *msg = new int[4]; // Messages (delete dans mainwindow)
-                        msg[0] = 0;
-                        msg[1] = 0;
-                        msg[2] = 0;
-                        msg[3] = 0;
-                        QByteArray * ba1 = new QByteArray; // Correspondances des index des samples (delete dans mainwindow)
-                        ba1->clear();
-                        QByteArray * ba2 = new QByteArray; // Correspondances des index des instruments (delete dans mainwindow)
-                        ba2->clear();
-                        for (int i = 0; i < this->idList.size(); i++)
-                        {
-                            if (this->idList.size() > 1)
-                            {
-                                if (i == 0)
-                                    emit (dropped(idDest, this->idList[i], -1, msg, ba1, ba2));
-                                else if (i == this->idList.size() - 1)
-                                    emit (dropped(idDest, this->idList[i], 1, msg, ba1, ba2));
-                                else
-                                    emit (dropped(idDest, this->idList[i], 0, msg, ba1, ba2));
-                            }
-                            else
-                                emit (dropped(idDest, this->idList[i], 2, msg, ba1, ba2));
-                        }
-                    }
+                        this->dragAndDrop(this->getID(0), this->idList);
                 }
             }
         }
@@ -127,38 +104,19 @@ public:
         }
         else if (event->type() == QEvent::Drop && object == this->viewport())
         {
-            this->anticipateNewAction();
+            this->prepareNewAction(false);
+
+            // Destination
             QDragMoveEvent* dragMoveEvent = static_cast<QDragMoveEvent*>(event);
             EltID idDest = this->getItemID(this->itemAt(dragMoveEvent->pos()));
-            // Emission d'un signal pour chaque élément déplacé
+
+            // Constitution de la liste des éléments à copier / lier
             int nbElt = this->selectedItems().count();
-            EltID *ids = new EltID[nbElt];
-            // Enregistrement des ID
+            QList<EltID> liste;
             for (int i = 0; i < nbElt; i++)
-                ids[i] = this->getID(i);
-            // Puis modification de la structure
-            int *msg = new int[4]; // Messages (delete dans mainwindow)
-            msg[0] = 0;
-            msg[1] = 0;
-            msg[2] = 0;
-            msg[3] = 0;
-            QByteArray * ba1 = new QByteArray(); // Correspondances des index des samples (delete dans mainwindow)
-            QByteArray * ba2 = new QByteArray(); // Correspondances des index des instruments (delete dans mainwindow)
-            for (int i = 0; i < nbElt; i++)
-            {
-                if (nbElt > 1)
-                {
-                    if (i == 0)
-                        emit (dropped(idDest, ids[i], -1, msg, ba1, ba2));
-                    else if (i == nbElt - 1)
-                        emit (dropped(idDest, ids[i], 1, msg, ba1, ba2));
-                    else
-                        emit (dropped(idDest, ids[i], 0, msg, ba1, ba2));
-                }
-                else
-                    emit (dropped(idDest, ids[i], 2, msg, ba1, ba2));
-            }
-            if (nbElt) delete [] ids;
+                liste << this->getID(i);
+
+            this->dragAndDrop(idDest, liste);
             return true; // termine le drop
         }
         return false;
@@ -179,13 +137,16 @@ public:
     void desactiveSuppression();
     void activeSuppression();
     void clearPastedID();
+
 public slots:
     void collapse() {this->trier(1);}       // Clic sur "enrouler"
     void searchTree(QString qStr);          // Lors d'une modification du champ recherche
     void clicTree();                        // Modification de la sélection dans l'arborescence
     void clicTreeRight();                   // Clic droit dans l'arborescence
+
 signals:
     void dropped(EltID dest, EltID src, int temps, int *msg, QByteArray *ba1, QByteArray *ba2);
+
 private:
     // Attributs privés
     MainWindow *mainWindow;
@@ -198,11 +159,13 @@ private:
     bool infoIsSelectedItemsTypeUnique;
     bool infoIsSelectedItemsSf2Unique;
     bool infoIsSelectedItemsFamilyUnique;
+
     // Méthodes privées
-    void anticipateNewAction();
+    void prepareNewAction(bool withUpdateDo);
     QTreeWidgetItem * selectedItem(unsigned int pos);
     static EltID getItemID(QTreeWidgetItem *elt);
     void supprimerElt();
+    void dragAndDrop(EltID idDest, QList<EltID> idSources);
 };
 
 #endif // TREE_H

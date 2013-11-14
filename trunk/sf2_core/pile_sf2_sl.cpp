@@ -25,7 +25,7 @@
 #include "pile_sf2.h"
 #include <QMessageBox>
 
-//////////// METHODES PUBLIQUES ////////////
+//////////// SF2 : SAVE / LOAD ////////////
 
 void Pile_sf2::nouveau(QString name)
 {

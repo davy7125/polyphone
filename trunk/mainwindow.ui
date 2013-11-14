@@ -1389,7 +1389,7 @@
      <normaloff>:/icones/export2</normaloff>:/icones/export2</iconset>
    </property>
    <property name="text">
-    <string>Exporter (sf&amp;z)...</string>
+    <string>Exporter sound&amp;font...</string>
    </property>
    <property name="toolTip">
     <string>Exporte en tant que fichier sfz</string>
@@ -1825,22 +1825,6 @@
     <hint type="sourcelabel">
      <x>-1</x>
      <y>-1</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>699</x>
-     <y>499</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>arborescence</sender>
-   <signal>dropped(EltID,EltID,int,int*,QByteArray*,QByteArray*)</signal>
-   <receiver>MainWindow</receiver>
-   <slot>dragAndDrop(EltID,EltID,int,int*,QByteArray*,QByteArray*)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>128</x>
-     <y>524</y>
     </hint>
     <hint type="destinationlabel">
      <x>699</x>
@@ -2412,7 +2396,7 @@
    <sender>actionExporter_en_tant_qu_sfz</sender>
    <signal>triggered()</signal>
    <receiver>MainWindow</receiver>
-   <slot>exporterSfz()</slot>
+   <slot>exporter()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>-1</x>
@@ -2445,7 +2429,6 @@
   <slot>showConfig()</slot>
   <slot>showAbout()</slot>
   <slot>afficherSectionModulateurs()</slot>
-  <slot>dragAndDrop(EltID,EltID,int,int*,QByteArray*,QByteArray*)</slot>
   <slot>coller()</slot>
   <slot>copier()</slot>
   <slot>supprimerElt()</slot>
@@ -2479,6 +2462,6 @@
   <slot>magnetophone()</slot>
   <slot>showToolBarManager()</slot>
   <slot>visualize()</slot>
-  <slot>exporterSfz()</slot>
+  <slot>exporter()</slot>
  </slots>
 </ui>
