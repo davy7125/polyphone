@@ -191,29 +191,40 @@ void Tree::clicTree()
     }
     if (fichierUnique)
     {
-        // Action possible : fermer
+        // Actions possibles : fermer, nouveau sample, instrument, preset
         menuArborescence->fermer->setEnabled(true);
-        // Actions possibles : nouveau sample, instrument, preset
         menuArborescence->nouveauSample->setEnabled(true);
         menuArborescence->nouvelInstrument->setEnabled(true);
         menuArborescence->nouveauPreset->setEnabled(true);
+
         // Associer
         if (typeUnique && (type == elementSmpl || type == elementInst))
             menuArborescence->associer->setEnabled(true);
         else
             menuArborescence->associer->setEnabled(false);
+
         // Remplacer
         if (nb == 1 && (type == elementInstSmpl || type == elementPrstInst))
             menuArborescence->remplacer->setEnabled(true);
         else
             menuArborescence->remplacer->setEnabled(false);
-        // Supprimer
+
+        // Supprimer, copier, coller
         if (typeUnique && (((type == elementInstSmpl || type == elementPrstInst) && familleUnique) \
                            || type == elementSmpl || type == elementInst || type == elementPrst)
                        && !this->mainWindow->isPlaying())
+        {
             menuArborescence->supprimer->setEnabled(true);
+            menuArborescence->copier->setEnabled(true);
+            menuArborescence->coller->setEnabled(true);
+        }
         else
+        {
             menuArborescence->supprimer->setEnabled(false);
+            menuArborescence->copier->setEnabled(false);
+            menuArborescence->coller->setEnabled(false);
+        }
+
         // Renommer
         if (nb == 1 && typeUnique && (type == elementSmpl || type == elementInst || type == elementPrst || type == elementSf2))
         {
@@ -500,7 +511,14 @@ void Tree::supprimerElt()
     if (this->menuArborescence->supprimer->isEnabled())
         this->mainWindow->supprimerElt();
 }
-void Tree::anticipateNewAction()
+void Tree::prepareNewAction(bool withUpdateDo)
 {
-    this->mainWindow->anticipateNewAction(); // Les ID ne changeront pas lors du prochain prepareNewAction
+    this->mainWindow->prepareNewAction();
+    if (withUpdateDo)
+        this->mainWindow->updateDo();
+}
+
+void Tree::dragAndDrop(EltID idDest, QList<EltID> idSources)
+{
+    this->mainWindow->dragAndDrop(idDest, idSources);
 }

@@ -27,6 +27,8 @@
 #include "sound.h"
 #include "dialog_rename.h"
 #include "conversion_sfz.h"
+#include "dialog_export.h"
+#include "duplicator.h"
 #include <QFileDialog>
 #include <QInputDialog>
 #if QT_VERSION >= QT_VERSION_CHECK(5, 0, 0)
@@ -68,7 +70,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent, Qt::Window | Qt::W
     QTimer::singleShot(1, this, SLOT(returnToOldMaxMinSizes()));
 
     // Initialisation de l'objet pile sf2
-    this->sf2 = new Pile_sf2(ui->arborescence, this->configuration->getRam());
+    this->sf2 = new Pile_sf2(ui->arborescence, this->configuration->getRam(), this);
 
     // Connexion avec mise à jour table
     connect(this->sf2, SIGNAL(updateTable(int,int,int,int)), this,
@@ -482,10 +484,10 @@ int  MainWindow::sauvegarder(int indexSf2, bool saveAs)
         if (sf2->getQstr(id, champ_filename) == "")
         {
             fileName = Config::getInstance()->getLastDirectory(Config::typeFichierSf2) + "/" + sf2->getQstr(id, champ_name) + ".sf2";
-            fileName = QFileDialog::getSaveFileName(this, tr("Sauvegarder une soundfont"), fileName, tr("Fichier .sf2 (*.sf2)"));
+            fileName = QFileDialog::getSaveFileName(this, trUtf8("Sauvegarder une soundfont"), fileName, tr("Fichier .sf2 (*.sf2)"));
         }
         else
-            fileName = QFileDialog::getSaveFileName(this, tr("Sauvegarder une soundfont"), \
+            fileName = QFileDialog::getSaveFileName(this, trUtf8("Sauvegarder une soundfont"), \
                                                     sf2->getQstr(id, champ_filename), tr("Fichier .sf2 (*.sf2)"));
         if (fileName.isNull()) return 1;
     }
@@ -502,13 +504,13 @@ int  MainWindow::sauvegarder(int indexSf2, bool saveAs)
         return 0;
         break;
     case 1:
-        QMessageBox::warning(NULL, tr("Attention"), tr("Extension inconnue."));
+        QMessageBox::warning(this, trUtf8("Attention"), trUtf8("Extension inconnue."));
         break;
     case 2:
-        QMessageBox::warning(NULL, tr("Attention"), QString::fromUtf8(tr("Fichier déjà ouvert, impossible de sauvegarder.").toStdString().c_str()));
+        QMessageBox::warning(this, trUtf8("Attention"), trUtf8("Fichier déjà ouvert, impossible de sauvegarder."));
         break;
     case 3:
-        QMessageBox::warning(NULL, tr("Attention"), QString::fromUtf8(tr("Impossible d'enregistrer le fichier.").toStdString().c_str()));
+        QMessageBox::warning(this, trUtf8("Attention"), trUtf8("Impossible d'enregistrer le fichier."));
         break;
     }
     return 1;
@@ -624,6 +626,80 @@ void MainWindow::setKeyboardType(int val)
     this->ui->action128_notes->blockSignals(false);
     // Sauvegarde du paramètre
     this->configuration->setKeyboardType(val);
+}
+void MainWindow::magnetophone()
+{
+    dialogMagneto.show();
+}
+QList<QAction *> MainWindow::getListeActions()
+{
+    QList<QAction *> listeAction;
+    listeAction << ui->actionNouveau
+                << ui->actionOuvrir
+                << ui->actionEnregistrer
+                << ui->actionEnregistrer_sous
+                << ui->actionImporter
+                << ui->actionExporter
+                << ui->actionFermer_le_fichier
+                << ui->actionNouvel_instrument
+                << ui->actionNouveau_preset
+                << ui->actionAnnuler
+                << ui->actionR_tablir
+                << ui->actionCopier
+                << ui->actionColler
+                << ui->action_Supprimer
+                << ui->actionRenommer
+                << ui->actionPr_f_rences
+                << ui->actionAjuster_la_fin_de_boucle
+                << ui->actionBouclage_automatique
+                << ui->action_Diminuer_sifflements
+                << ui->actionEnlever_blanc_au_d_part
+                << ui->actionFiltre_mur_de_brique
+                << ui->actionNormaliser_volume
+                << ui->action_R_glage_balance
+                << ui->actionTransposer
+                << ui->action_Cr_ation_mutation_mixture
+                << ui->actionD_saccordage_ondulant
+                << ui->actionD_uplication_des_divisions
+                << ui->action_laboration_release
+                << ui->action_Param_trage_global
+                << ui->action_R_partition_automatique
+                << ui->actionSpacialisation_du_son
+                << ui->action_Association_auto_samples
+                << ui->action_Enlever_les_l_ments_non_utilis_s
+                << ui->actionR_gler_att_nuation_minimale
+                << ui->actionMagn_tophone
+                << ui->actionSommaire
+                << ui->action_Visualiseur
+                << ui->actionExporter_en_tant_qu_sfz;
+    return listeAction;
+}
+void MainWindow::setListeActions(QList<QAction *> listeActions)
+{
+    // On vide la barre d'outils
+    QList<QAction *> actions = this->getListeActions();
+    for (int i = 0; i < actions.size(); i++)
+        this->ui->toolBar->removeAction(actions.at(i));
+    this->ui->toolBar->removeAction(actionKeyboard);
+    int size = actionSeparators.size();
+    for (int i = 0; i < size; i++)
+    {
+        this->ui->toolBar->removeAction(actionSeparators.at(0));
+        delete actionSeparators.takeFirst();
+    }
+
+    // Ajout des actions
+    for (int i = 0; i < listeActions.size(); i++)
+    {
+        if (listeActions.at(i))
+            this->ui->toolBar->addAction(listeActions.at(i));
+        else
+        {
+            // Ajout d'un séparateur
+            actionSeparators << this->ui->toolBar->addSeparator();
+        }
+    }
+    this->ui->toolBar->addAction(actionKeyboard);
 }
 
 // Mise à jour
@@ -955,10 +1031,9 @@ void MainWindow::updateTable(int type, int sf2, int elt, int elt2)
     // Annulation des ID copiés dans l'arborescence
     this->ui->arborescence->clearPastedID();
 }
-void MainWindow::anticipateNewAction()
+void MainWindow::prepareNewAction()
 {
     this->sf2->prepareNewActions();
-    this->updateDo();
 }
 
 // Modifications
@@ -1061,797 +1136,16 @@ void MainWindow::renommerEnMasse(QString name, int modificationType)
     updateActions();
     this->ui->arborescence->searchTree(this->ui->editSearch->text());
 }
-void MainWindow::dragAndDrop(EltID idDest, EltID idSrc, int temps, int *msg, QByteArray *ba1, QByteArray *ba2)
+void MainWindow::dragAndDrop(EltID idDest, QList<EltID> idSources)
 {
-    if (idDest.typeElement != elementSf2 && idDest.typeElement != elementInst && \
-            idDest.typeElement != elementInstSmpl && idDest.typeElement != elementRootInst && \
-            idDest.typeElement != elementPrst && idDest.typeElement != elementPrstInst && \
-            idDest.typeElement != elementRootPrst && idDest.typeElement != elementRootSmpl) return;
-    // Copie / lien, de idSrc vers idDest
-    // temps = -1 : nouvelle série d'actions
-    // temps =  0 : série en cours
-    // temps =  1 : fin de la série d'actions
-    // temps =  2 : début et fin de la série (1 seule action)
-    if (idDest.indexSf2 == idSrc.indexSf2)
-    {
-        // Déplacement / lien dans le même sf2
-        switch (idSrc.typeElement)
-        {
-        case elementSmpl:
-            if (idDest.typeElement == elementInst || idDest.typeElement == elementInstSmpl)
-            {
-                // Ajout d'un sample dans un instrument
-                EltID id = idDest;
-                Valeur val;
-                id.typeElement = elementInstSmpl;
-                if (temps == -1 || temps == 2) this->sf2->prepareNewActions();
-                id.indexElt2 = this->sf2->add(id);
-                val.wValue = idSrc.indexElt;
-                this->sf2->set(id, champ_sampleID, val);
-                // Balance
-                if (this->sf2->get(idSrc, champ_sfSampleType).sfLinkValue == rightSample || \
-                        this->sf2->get(idSrc, champ_sfSampleType).sfLinkValue == RomRightSample)
-                {
-                    val.shValue = 500;
-                    this->sf2->set(id, champ_pan, val);
-                }
-                else if (this->sf2->get(idSrc, champ_sfSampleType).sfLinkValue == leftSample || \
-                         this->sf2->get(idSrc, champ_sfSampleType).sfLinkValue == RomLeftSample)
-                {
-                    val.shValue = -500;
-                    this->sf2->set(id, champ_pan, val);
-                }
-                else
-                {
-                    val.shValue = 0;
-                    this->sf2->set(id, champ_pan, val);
-                }
-            }
-            break;
-        case elementInst:
-            if (idDest.typeElement == elementPrst || idDest.typeElement == elementPrstInst)
-            {
-                // Ajout d'un instrument dans un preset
-                EltID id = idDest;
-                Valeur val;
-                id.typeElement = elementPrstInst;
-                if (temps == -1 || temps == 2) this->sf2->prepareNewActions();
-                id.indexElt2 = this->sf2->add(id);
-                val.wValue = idSrc.indexElt;
-                this->sf2->set(id, champ_instrument, val);
-                // Key range
-                int keyMin = 127;
-                int keyMax = 0;
-                EltID idLinked = idSrc;
-                idLinked.typeElement = elementInstSmpl;
-                for (int i = 0; i < this->sf2->count(idLinked); i++)
-                {
-                    idLinked.indexElt2 = i;
-                    if (!this->sf2->get(idLinked, champ_hidden).bValue)
-                    {
-                        if (this->sf2->isSet(idLinked, champ_keyRange))
-                        {
-                            keyMin = qMin(keyMin, (int)this->sf2->get(idLinked, champ_keyRange).rValue.byLo);
-                            keyMax = qMax(keyMax, (int)this->sf2->get(idLinked, champ_keyRange).rValue.byHi);
-                        }
-                    }
-                }
-                Valeur value;
-                if (keyMin < keyMax)
-                {
-                    value.rValue.byLo = keyMin;
-                    value.rValue.byHi = keyMax;
-                }
-                else
-                {
-                    value.rValue.byLo = 0;
-                    value.rValue.byHi = 127;
-                }
-                this->sf2->set(id, champ_keyRange, value);
-            }
-            else if ((idDest.typeElement == elementInst || idDest.typeElement == elementInstSmpl) && \
-                     idSrc.indexElt != idDest.indexElt)
-            {
-                // Copie de tous les samples de l'instrument dans un autre
-                EltID id = idSrc;
-                id.typeElement = elementInstSmpl;
-                int nbInstSmpl = this->sf2->count(id);
-                if (temps == -1 || temps == 2) this->sf2->prepareNewActions();
-                for (int i = 0; i < nbInstSmpl; i++)
-                {
-                    id.indexElt2 = i;
-                    if (!this->sf2->get(id, champ_hidden).bValue)
-                        this->dragAndDrop(idDest, id, 0, msg, ba1, ba2);
-                }
-            }
-            break;
-        case elementInstSmpl:
-            if ((idDest.typeElement == elementInst || idDest.typeElement == elementInstSmpl) && \
-                    idDest.indexElt != idSrc.indexElt)
-            {
-                // Copie d'un sample lié à un instrument
-                Valeur val;
-                idDest.typeElement = elementInstSmpl;
-                if (temps == -1 || temps == 2) this->sf2->prepareNewActions();
-                // Création InstSmpl
-                idDest.indexElt2 = this->sf2->add(idDest);
-                // Copie des gens
-                idSrc.typeElement = elementInstSmplGen;
-                for (int i = 0; i < this->sf2->count(idSrc); i++)
-                {
-                    idSrc.indexMod = i;
-                    val.genValue = this->sf2->get(idSrc, champ_sfGenAmount).genValue;
-                    this->sf2->set(idDest, this->sf2->get(idSrc, champ_sfGenOper).sfGenValue, val);
-                }
-                // Copie des mods
-                idSrc.typeElement = elementInstSmplMod;
-                idDest.typeElement = elementInstSmplMod;
-                for (int i = 0; i < this->sf2->count(idSrc); i++)
-                {
-                    idSrc.indexMod = i;
-                    idDest.indexMod = this->sf2->add(idDest);
-                    this->sf2->set(idDest, champ_modAmount, this->sf2->get(idSrc, champ_modAmount));
-                    this->sf2->set(idDest, champ_sfModSrcOper, this->sf2->get(idSrc, champ_sfModSrcOper));
-                    this->sf2->set(idDest, champ_sfModAmtSrcOper, this->sf2->get(idSrc, champ_sfModAmtSrcOper));
-                    this->sf2->set(idDest, champ_sfModDestOper, this->sf2->get(idSrc, champ_sfModDestOper));
-                    this->sf2->set(idDest, champ_sfModTransOper, this->sf2->get(idSrc, champ_sfModTransOper));
-                }
-                idSrc.typeElement = elementInstSmpl;
-            }
-            break;
-        case elementPrst:
-            if ((idDest.typeElement == elementPrst || idDest.typeElement == elementPrstInst) && \
-                                 idSrc.indexElt != idDest.indexElt)
-            {
-                // Copie de tous les instruments du preset dans un autre
-                EltID id = idSrc;
-                id.typeElement = elementPrstInst;
-                int nbPrstInst = this->sf2->count(id);
-                if (temps == -1 || temps == 2) this->sf2->prepareNewActions();
-                for (int i = 0; i < nbPrstInst; i++)
-                {
-                    id.indexElt2 = i;
-                    if (!this->sf2->get(id, champ_hidden).bValue)
-                        this->dragAndDrop(idDest, id, 0, msg, ba1, ba2);
-                }
-            }
-            break;
-        case elementPrstInst:
-            if ((idDest.typeElement == elementPrst || idDest.typeElement == elementPrstInst) && \
-                    idDest.indexElt != idSrc.indexElt)
-            {
-                // Copie d'un instrument lié à un preset
-                Valeur val;
-                idDest.typeElement = elementPrstInst;
-                if (temps == -1 || temps == 2) this->sf2->prepareNewActions();
-                // Création PrstInst
-                idDest.indexElt2 = this->sf2->add(idDest);
-                // Copie des gens
-                idSrc.typeElement = elementPrstInstGen;
-                for (int i = 0; i < this->sf2->count(idSrc); i++)
-                {
-                    idSrc.indexMod = i;
-                    val.genValue = this->sf2->get(idSrc, champ_sfGenAmount).genValue;
-                    this->sf2->set(idDest, this->sf2->get(idSrc, champ_sfGenOper).sfGenValue, val);
-                }
-                // Copie des mods
-                idSrc.typeElement = elementPrstInstMod;
-                idDest.typeElement = elementPrstInstMod;
-                for (int i = 0; i < this->sf2->count(idSrc); i++)
-                {
-                    idSrc.indexMod = i;
-                    idDest.indexMod = this->sf2->add(idDest);
-                    this->sf2->set(idDest, champ_modAmount, this->sf2->get(idSrc, champ_modAmount));
-                    this->sf2->set(idDest, champ_sfModSrcOper, this->sf2->get(idSrc, champ_sfModSrcOper));
-                    this->sf2->set(idDest, champ_sfModAmtSrcOper, this->sf2->get(idSrc, champ_sfModAmtSrcOper));
-                    this->sf2->set(idDest, champ_sfModDestOper, this->sf2->get(idSrc, champ_sfModDestOper));
-                    this->sf2->set(idDest, champ_sfModTransOper, this->sf2->get(idSrc, champ_sfModTransOper));
-                }
-                idSrc.typeElement = elementPrstInst;
-            }
-            break;
-        default: return;
-        }
-    }
-    else
-    {
-        // Copie entre 2 sf2
-        if (ba1->isEmpty())
-        {
-            // Préparation des samples
-            EltID id = idSrc;
-            id.typeElement = elementSmpl;
-            ba1->resize(this->sf2->count(id)*4);
-            qint32 * baba1 = (qint32 *)ba1->data();
-            for (int i = 0; i < this->sf2->count(id); i++)
-                baba1[i] = -1;
-        }
-        if (ba2->isEmpty())
-        {
-            // Préparation des instruments
-            EltID id = idSrc;
-            id.typeElement = elementInst;
-            ba2->resize(this->sf2->count(id)*4);
-            qint32 * baba2 = (qint32 *)ba2->data();
-            for (int i = 0; i < this->sf2->count(id); i++)
-                baba2[i] = -1;
-        }
-        switch (idSrc.typeElement)
-        {
-        case elementSmpl:{
-            if (temps == -1 || temps == 2) this->sf2->prepareNewActions();
-            // Copie d'un sample
-            idDest.typeElement = elementSmpl;
-            // Nom du sample à copier
-            QString nom = this->sf2->getQstr(idSrc, champ_name);
-            // Recherche si un sample du même nom existe déjà
-            int index = -1;
-            if (msg[0] != -1)
-            {
-                for (int j = 0; j < this->sf2->count(idDest); j++)
-                {
-                    idDest.indexElt = j;
-                    if (!this->sf2->get(idDest, champ_hidden).bValue)
-                    {
-                        if (this->sf2->getQstr(idDest, champ_name).compare(nom.left(20)) == 0)
-                            index = j;
-                    }
-                }
-                if (msg[0] != 2 && msg[0] != 4 && (index != -1))
-                {
-                    // Remplacement ?
-                    QMessageBox msgBox(this);
-                    msgBox.setIcon(QMessageBox::Warning);
-                    QString qStr3 = tr("Le sample «&#160;") + nom.left(20).toUtf8() + \
-                            tr("&#160;» existe déjà.<br />Que faire ?");
-                    msgBox.setText(QString::fromUtf8(qStr3.toStdString().c_str()));
-                    msgBox.setInformativeText("");
-                    msgBox.setStandardButtons(QMessageBox::YesAll | QMessageBox::Yes | QMessageBox::SaveAll | QMessageBox::Save | \
-                                              QMessageBox::NoAll | QMessageBox::No);
-                    msgBox.button(QMessageBox::Yes)->setText(tr("&Remplacer"));
-                    msgBox.button(QMessageBox::YesAll)->setText(tr("R&emplacer tout"));
-                    msgBox.button(QMessageBox::Save)->setText(tr("&Dupliquer"));
-                    msgBox.button(QMessageBox::SaveAll)->setText(tr("D&upliquer tout"));
-                    msgBox.button(QMessageBox::No)->setText(tr("&Ignorer"));
-                    msgBox.button(QMessageBox::NoAll)->setText(tr("I&gnorer tout"));
-                    msgBox.setDefaultButton(QMessageBox::YesAll);
-                    switch (msgBox.exec())
-                    {
-                    case QMessageBox::NoAll: msg[0] = 4; break;
-                    case QMessageBox::No: msg[0] = 3; break;
-                    case QMessageBox::YesAll: msg[0] = 2; break;
-                    case QMessageBox::Yes: msg[0] = 1; break;
-                    case QMessageBox::Save: msg[0] = 0; break;
-                    case QMessageBox::SaveAll: msg[0] = -1; break;
-                    }
-                }
-            }
-            if (index != -1 && msg[0] > 0)
-            {
-                // utilisation de l'index d'un sample existant
-                idDest.indexElt = index;
-            }
-            else
-            {
-                // création d'un nouveau smpl
-                idDest.indexElt = this->sf2->add(idDest);
-            }
-            qint32 * baba1 = (qint32 *)ba1->data();
-            if (index == -1 || msg[0] < 3)
-            {
-                // Configuration du sample
-                this->sf2->set(idDest, champ_sampleData16, this->sf2->getData(idSrc, champ_sampleData16));
-                EltID id3 = idDest;
-                id3.typeElement = elementSf2;
-                if (this->sf2->get(id3, champ_wBpsSave).wValue == 24)
-                    this->sf2->set(idDest, champ_sampleData24, this->sf2->getData(idSrc, champ_sampleData24));
-                this->sf2->set(idDest, champ_dwLength, this->sf2->get(idSrc, champ_dwLength));
-                this->sf2->set(idDest, champ_dwSampleRate, this->sf2->get(idSrc, champ_dwSampleRate));
-                this->sf2->set(idDest, champ_dwStartLoop, this->sf2->get(idSrc, champ_dwStartLoop));
-                this->sf2->set(idDest, champ_dwEndLoop, this->sf2->get(idSrc, champ_dwEndLoop));
-                this->sf2->set(idDest, champ_sfSampleType, this->sf2->get(idSrc, champ_sfSampleType));
-                this->sf2->set(idDest, champ_byOriginalPitch, this->sf2->get(idSrc, champ_byOriginalPitch));
-                this->sf2->set(idDest, champ_chPitchCorrection, this->sf2->get(idSrc, champ_chPitchCorrection));
-                this->sf2->set(idDest, champ_name, this->sf2->getQstr(idSrc, champ_name).left(20));
-                // Lien
-                if (this->sf2->get(idSrc, champ_sfSampleType).wValue != RomMonoSample &&
-                        this->sf2->get(idSrc, champ_sfSampleType).wValue != monoSample)
-                {
-                    // Possible ?
-                    WORD indexLink = this->sf2->get(idSrc, champ_wSampleLink).wValue;
-                    if (baba1[indexLink] != -1)
-                    {
-                        // Association
-                        Valeur val;
-                        EltID idLink = idDest;
-                        idLink.indexElt = baba1[indexLink];
-                        val.wValue = idLink.indexElt;
-                        this->sf2->set(idDest, champ_wSampleLink, val);
-                        val.wValue = idDest.indexElt;
-                        this->sf2->set(idLink, champ_wSampleLink, val);
-                    }
-                }
-            }
-            // Enregistrement de l'index
-            baba1[idSrc.indexElt] = idDest.indexElt;
-        }break;
-        case elementInst:{
-            if (temps == -1 || temps == 2) this->sf2->prepareNewActions();
-            // Copie des InstSmpl associés
-            EltID id = idSrc;
-            EltID id2 = idSrc;
-            id.typeElement = elementInstSmpl;
-            id2.typeElement = elementSmpl;
-            qint32 * baba1 = (qint32 *)ba1->data();
-            for (int i = 0; i < this->sf2->count(id); i++)
-            {
-                id.indexElt2 = i;
-                if (!this->sf2->get(id, champ_hidden).bValue)
-                {
-                    id2.indexElt = this->sf2->get(id, champ_sampleID).wValue;
-                    if (baba1[id2.indexElt] == -1) // Ne pas copier un smpl déjà copié
-                        this->dragAndDrop(idDest, id2, 0, msg, ba1, ba2);
-                }
-            }
-            // Copie d'un instrument
-            idDest.typeElement = elementInst;
-            // Nom de l'instrument à copier
-            QString nom = this->sf2->getQstr(idSrc, champ_name);
-            // Recherche si un instrument du même nom existe déjà
-            int index = -1;
-            if (msg[1] != -1)
-            {
-                for (int j = 0; j < this->sf2->count(idDest); j++)
-                {
-                    idDest.indexElt = j;
-                    if (!this->sf2->get(idDest, champ_hidden).bValue)
-                    {
-                        if (this->sf2->getQstr(idDest, champ_name).compare(nom.left(20)) == 0)
-                            index = j;
-                    }
-                }
-                if (msg[1] != 2 && msg[1] != 4 && (index != -1))
-                {
-                    // Remplacement ?
-                    QMessageBox msgBox(this);
-                    msgBox.setIcon(QMessageBox::Warning);
-                    QString qStr3 = tr("L'instrument «&#160;") + nom.left(20).toUtf8() + \
-                            tr("&#160;» existe déjà.<br />Souhaitez-vous le remplacer ?");
-                    msgBox.setText(QString::fromUtf8(qStr3.toStdString().c_str()));
-                    msgBox.setInformativeText("");
-                    msgBox.setStandardButtons(QMessageBox::YesAll | QMessageBox::Yes | QMessageBox::SaveAll | QMessageBox::Save | \
-                                              QMessageBox::NoAll | QMessageBox::No);
-                    msgBox.button(QMessageBox::Yes)->setText(tr("&Remplacer"));
-                    msgBox.button(QMessageBox::YesAll)->setText(tr("R&emplacer tout"));
-                    msgBox.button(QMessageBox::Save)->setText(tr("&Dupliquer"));
-                    msgBox.button(QMessageBox::SaveAll)->setText(tr("D&upliquer tout"));
-                    msgBox.button(QMessageBox::No)->setText(tr("&Ignorer"));
-                    msgBox.button(QMessageBox::NoAll)->setText(tr("I&gnorer tout"));
-                    msgBox.setDefaultButton(QMessageBox::YesAll);
-                    switch (msgBox.exec())
-                    {
-                    case QMessageBox::NoAll: msg[1] = 4; break;
-                    case QMessageBox::No: msg[1] = 3; break;
-                    case QMessageBox::YesAll: msg[1] = 2; break;
-                    case QMessageBox::Yes: msg[1] = 1; break;
-                    case QMessageBox::Save: msg[1] = 0; break;
-                    case QMessageBox::SaveAll: msg[1] = -1; break;
-                    }
-                }
-            }
-            if (index != -1 && msg[1] > 0)
-            {
-                // utilisation de l'index d'un instrument déjà existant
-                idDest.indexElt = index;
-                if (msg[1] < 3)
-                {
-                    // effacement des mods globaux, gens globaux et des InstSmpl
-                    id = idDest;
-                    id.typeElement = elementInstGen;
-                    id.indexMod = 0;
-                    for (int i = 0; i < this->sf2->count(id); i++)
-                    {
-                        id.indexMod = i;
-                        this->sf2->reset(idDest, this->sf2->get(id, champ_sfGenOper).sfGenValue);
-                    }
-                    id.typeElement = elementInstMod;
-                    for (int i = 0; i < this->sf2->count(id); i++)
-                    {
-                        id.indexMod = i;
-                        if (!this->sf2->get(id, champ_hidden).bValue)
-                            this->sf2->remove(id);
-                    }
-                    id.typeElement = elementInstSmpl;
-                    for (int i = 0; i < this->sf2->count(id); i++)
-                    {
-                        id.indexElt2 = i;
-                        if (!this->sf2->get(id, champ_hidden).bValue)
-                            this->sf2->remove(id);
-                    }
-                }
-            }
-            else
-            {
-                // création d'un nouvel instrument
-                idDest.indexElt = this->sf2->add(idDest);
-            }
-            qint32 * baba2 = (qint32 *)ba2->data();
-            // Modification de l'instrument
-            if (index == -1 || msg[1] < 3)
-            {
-                // Info
-                this->sf2->set(idDest, champ_name, nom.left(20));
-                // Gen globaux
-                id = idSrc;
-                id.typeElement = elementInstGen;
-                Valeur val;
-                for (int i = 0; i < this->sf2->count(id); i++)
-                {
-                    id.indexMod = i;
-                    val = this->sf2->get(id, champ_sfGenAmount);
-                    this->sf2->set(idDest, this->sf2->get(id, champ_sfGenOper).sfGenValue, val);
-                }
-                // Mod globaux
-                id.typeElement = elementInstMod;
-                idDest.typeElement = elementInstMod;
-                // Correspondance des index et initialisation
-                int *indMod = new int[this->sf2->count(id)];
-                for (int i = 0; i < this->sf2->count(id); i++)
-                    indMod[i] = -1;
-                for (int i = 0; i < this->sf2->count(id); i++)
-                {
-                    id.indexMod = i;
-                    if (!this->sf2->get(id, champ_hidden).bValue)
-                    {
-                        // Création nouveau mod
-                        idDest.indexMod = this->sf2->add(idDest);
-                        indMod[i] = idDest.indexMod;
-                        this->sf2->set(idDest, champ_sfModSrcOper, this->sf2->get(id, champ_sfModSrcOper));
-                        this->sf2->set(idDest, champ_sfModAmtSrcOper, this->sf2->get(id, champ_sfModAmtSrcOper));
-                        this->sf2->set(idDest, champ_sfModTransOper, this->sf2->get(id, champ_sfModTransOper));
-                        this->sf2->set(idDest, champ_modAmount, this->sf2->get(id, champ_modAmount));
-                        if (this->sf2->get(id, champ_sfModDestOper).wValue < 32768) // pas de lien
-                            this->sf2->set(idDest, champ_sfModDestOper, this->sf2->get(id, champ_sfModDestOper));
-                    }
-                }
-                // Mise en place des liens
-                for (int i = 0; i < this->sf2->count(id); i++)
-                {
-                    id.indexMod = i;
-                    if (!this->sf2->get(id, champ_hidden).bValue)
-                    {
-                        if (this->sf2->get(id, champ_sfModDestOper).wValue > 32767)
-                        {
-                            idDest.indexMod = indMod[i];
-                            val.wValue = 32768 + indMod[this->sf2->get(id, champ_sfModDestOper).wValue - 32768];
-                            this->sf2->set(idDest, champ_sfModDestOper, val);
-                        }
-                    }
-                }
-                delete indMod;
-                // InstSmpl
-                id.typeElement = elementInstSmpl;
-                for (int i = 0; i < this->sf2->count(id); i++)
-                {
-                    id.indexElt2 = i;
-                    if (!this->sf2->get(id, champ_hidden).bValue)
-                    {
-                        // Création d'un lien avec sample
-                        idDest.typeElement = elementInstSmpl;
-                        idDest.indexElt2 = this->sf2->add(idDest);
-                        id2 = id;
-                        // Copie des gens
-                        id2.typeElement = elementInstSmplGen;
-                        for (int j = 0; j < this->sf2->count(id2); j++)
-                        {
-                            id2.indexMod = j;
-                            if (this->sf2->get(id2, champ_sfGenOper).sfGenValue == champ_sampleID)
-                                val.wValue = baba1[this->sf2->get(id2, champ_sfGenAmount).wValue];
-                            else
-                                val = this->sf2->get(id2, champ_sfGenAmount);
-                            this->sf2->set(idDest, this->sf2->get(id2, champ_sfGenOper).sfGenValue, val);
-                        }
-                        // Copie des mods
-                        idDest.typeElement = elementInstSmplMod;
-                        id2.typeElement = elementInstSmplMod;
-                        // Correspondance des index et initialisation
-                        int *indMod = new int[this->sf2->count(id2)];
-                        for (int j = 0; j < this->sf2->count(id2); j++)
-                            indMod[j] = -1;
-                        for (int j = 0; j < this->sf2->count(id2); j++)
-                        {
-                            id2.indexMod = j;
-                            if (!this->sf2->get(id2, champ_hidden).bValue)
-                            {
-                                idDest.indexMod = this->sf2->add(idDest);
-                                indMod[j] = idDest.indexMod;
-                                this->sf2->set(idDest, champ_sfModSrcOper, this->sf2->get(id2, champ_sfModSrcOper));
-                                this->sf2->set(idDest, champ_sfModAmtSrcOper, this->sf2->get(id2, champ_sfModAmtSrcOper));
-                                this->sf2->set(idDest, champ_sfModTransOper, this->sf2->get(id2, champ_sfModTransOper));
-                                this->sf2->set(idDest, champ_modAmount, this->sf2->get(id2, champ_modAmount));
-                                if (this->sf2->get(id2, champ_sfModDestOper).wValue < 32768) // pas de lien
-                                    this->sf2->set(idDest, champ_sfModDestOper, this->sf2->get(id2, champ_sfModDestOper));
-                            }
-                        }
-                        // Mise en place des liens
-                        for (int j = 0; j < this->sf2->count(id2); j++)
-                        {
-                            id2.indexMod = j;
-                            if (!this->sf2->get(id2, champ_hidden).bValue)
-                            {
-                                if (this->sf2->get(id2, champ_sfModDestOper).wValue > 32767)
-                                {
-                                    idDest.indexMod = indMod[j];
-                                    val.wValue = 32768 + indMod[this->sf2->get(id2, champ_sfModDestOper).wValue - 32768];
-                                    this->sf2->set(idDest, champ_sfModDestOper, val);
-                                }
-                            }
-                        }
-                        delete indMod;
-                    }
-                }
-            }
-            // Enregistrement de l'index
-            baba2[idSrc.indexElt] = idDest.indexElt;
-        }break;
-        case elementPrst:
-        {
-            if (temps == -1 || temps == 2) this->sf2->prepareNewActions();
-            // Copie des PrstInst associés
-            EltID id = idSrc;
-            EltID id2 = idSrc;
-            id.typeElement = elementPrstInst;
-            id2.typeElement = elementInst;
-            qint32 * baba2 = (qint32 *)ba2->data();
-            for (int i = 0; i < this->sf2->count(id); i++)
-            {
-                id.indexElt2 = i;
-                if (!this->sf2->get(id, champ_hidden).bValue)
-                {
-                    id2.indexElt = this->sf2->get(id, champ_instrument).wValue;
-                    if (baba2[id2.indexElt] == -1) // Ne pas copier un inst déjà copié
-                        this->dragAndDrop(idDest, id2, 0, msg, ba1, ba2);
-                }
-            }
-            // Copie d'un preset
-            idDest.typeElement = elementPrst;
-            // Nom du preset à copier
-            QString nom = this->sf2->getQstr(idSrc, champ_name);
-            // Recherche si un preset du même nom existe déjà
-            int index = -1;
-            if (msg[2] != -1)
-            {
-                for (int j = 0; j < this->sf2->count(idDest); j++)
-                {
-                    idDest.indexElt = j;
-                    if (!this->sf2->get(idDest, champ_hidden).bValue)
-                    {
-                        if (this->sf2->getQstr(idDest, champ_name).compare(nom.left(20)) == 0)
-                            index = j;
-                    }
-                }
-                if (msg[2] != 2 && msg[2] != 4 && (index != -1))
-                {
-                    // Remplacement ?
-                    QMessageBox msgBox(this);
-                    msgBox.setIcon(QMessageBox::Warning);
-                    QString qStr3 = tr("Le preset «&#160;") + nom.left(20).toUtf8() + \
-                            tr("&#160;» existe déjà.<br />Souhaitez-vous le remplacer ?");
-                    msgBox.setText(QString::fromUtf8(qStr3.toStdString().c_str()));
-                    msgBox.setInformativeText("");
-                    msgBox.setStandardButtons(QMessageBox::YesAll | QMessageBox::Yes | QMessageBox::SaveAll | QMessageBox::Save | \
-                                              QMessageBox::NoAll | QMessageBox::No);
-                    msgBox.button(QMessageBox::Yes)->setText(tr("&Remplacer"));
-                    msgBox.button(QMessageBox::YesAll)->setText(tr("R&emplacer tout"));
-                    msgBox.button(QMessageBox::Save)->setText(tr("&Dupliquer"));
-                    msgBox.button(QMessageBox::SaveAll)->setText(tr("D&upliquer tout"));
-                    msgBox.button(QMessageBox::No)->setText(tr("&Ignorer"));
-                    msgBox.button(QMessageBox::NoAll)->setText(tr("I&gnorer tout"));
-                    msgBox.setDefaultButton(QMessageBox::YesAll);
-                    switch (msgBox.exec())
-                    {
-                    case QMessageBox::NoAll: msg[2] = 4; break;
-                    case QMessageBox::No: msg[2] = 3; break;
-                    case QMessageBox::YesAll: msg[2] = 2; break;
-                    case QMessageBox::Yes: msg[2] = 1; break;
-                    case QMessageBox::Save: msg[2] = 0; break;
-                    case QMessageBox::SaveAll: msg[2] = -1; break;
-                    }
-                }
-            }
-            if (index != -1 && msg[2] > 0)
-            {
-                // utilisation de l'index d'un preset existant
-                idDest.indexElt = index;
-                if (msg[2] < 3)
-                {
-                    // effacement des mods globaux, gens globaux et des PrstInst
-                    id = idDest;
-                    id.typeElement = elementPrstGen;
-                    id.indexMod = 0;
-                    Champ champ;
-                    for (int i = 0; i < this->sf2->count(id); i++)
-                    {
-                        id.indexMod = i;
-                        champ = this->sf2->get(id, champ_sfGenOper).sfGenValue;
-                        if (champ != champ_wBank && champ != champ_wPreset) // on garde bank et preset
-                            this->sf2->reset(idDest, champ);
-                    }
-                    id.typeElement = elementPrstMod;
-                    for (int i = 0; i < this->sf2->count(id); i++)
-                    {
-                        id.indexMod = i;
-                        if (!this->sf2->get(id, champ_hidden).bValue)
-                            this->sf2->remove(id);
-                    }
-                    id.typeElement = elementPrstInst;
-                    for (int i = 0; i < this->sf2->count(id); i++)
-                    {
-                        id.indexElt2 = i;
-                        if (!this->sf2->get(id, champ_hidden).bValue)
-                            this->sf2->remove(id);
-                    }
-                }
-            }
-            else
-            {
-                // Vérification qu'un emplacement dans la banque est disponible
-                int numPreset = this->sf2->get(idSrc, champ_wPreset).wValue;
-                int numBank = this->sf2->get(idSrc, champ_wBank).wValue;
-                this->page_prst->firstAvailablePresetBank(idDest, numBank, numPreset);
-                if (numPreset == -1)
-                {
-                    // Aucun preset disponible
-                    if (msg[3] == 0)
-                    {
-                        QMessageBox::warning(this, tr("Attention"), QString::fromUtf8(tr("Aucun preset n'est disponible.").toStdString().c_str()));
-                        msg[3] = 1;
-                    }
-                    idDest.indexElt = -1;
-                }
-                else
-                {
-                    // création d'un nouveau preset
-                    idDest.indexElt = this->sf2->add(idDest);
-                    Valeur val;
-                    val.wValue = numBank;
-                    this->sf2->set(idDest, champ_wBank, val);
-                    val.wValue = numPreset;
-                    this->sf2->set(idDest, champ_wPreset, val);
-                }
-            }
-            // Modification du preset
-            if (idDest.indexElt != -1 && (index == -1 || msg[2] < 3))
-            {
-                // Info
-                this->sf2->set(idDest, champ_name, nom.left(20));
-                // Gen globaux
-                id = idSrc;
-                id.typeElement = elementPrstGen;
-                Valeur val;
-                Champ champ;
-                for (int i = 0; i < this->sf2->count(id); i++)
-                {
-                    id.indexMod = i;
-                    val = this->sf2->get(id, champ_sfGenAmount);
-                    champ = this->sf2->get(id, champ_sfGenOper).sfGenValue;
-                    if (champ != champ_wBank && champ != champ_wPreset)
-                        this->sf2->set(idDest, champ, val);
-                }
-                // Mod globaux
-                id.typeElement = elementPrstMod;
-                idDest.typeElement = elementPrstMod;
-                // Correspondance des index et initialisation
-                int *indMod = new int[this->sf2->count(id)];
-                for (int i = 0; i < this->sf2->count(id); i++)
-                    indMod[i] = -1;
-                for (int i = 0; i < this->sf2->count(id); i++)
-                {
-                    id.indexMod = i;
-                    if (!this->sf2->get(id, champ_hidden).bValue)
-                    {
-                        // Création nouveau mod
-                        idDest.indexMod = this->sf2->add(idDest);
-                        indMod[i] = idDest.indexMod;
-                        this->sf2->set(idDest, champ_sfModSrcOper, this->sf2->get(id, champ_sfModSrcOper));
-                        this->sf2->set(idDest, champ_sfModAmtSrcOper, this->sf2->get(id, champ_sfModAmtSrcOper));
-                        this->sf2->set(idDest, champ_sfModTransOper, this->sf2->get(id, champ_sfModTransOper));
-                        this->sf2->set(idDest, champ_modAmount, this->sf2->get(id, champ_modAmount));
-                        if (this->sf2->get(id, champ_sfModDestOper).wValue < 32768) // pas de lien
-                            this->sf2->set(idDest, champ_sfModDestOper, this->sf2->get(id, champ_sfModDestOper));
-                    }
-                }
-                // Mise en place des liens
-                for (int i = 0; i < this->sf2->count(id); i++)
-                {
-                    id.indexMod = i;
-                    if (!this->sf2->get(id, champ_hidden).bValue)
-                    {
-                        if (this->sf2->get(id, champ_sfModDestOper).wValue > 32767)
-                        {
-                            idDest.indexMod = indMod[i];
-                            val.wValue = 32768 + indMod[this->sf2->get(id, champ_sfModDestOper).wValue - 32768];
-                            this->sf2->set(idDest, champ_sfModDestOper, val);
-                        }
-                    }
-                }
-                delete indMod;
-                // PrstInst
-                id.typeElement = elementPrstInst;
-                for (int i = 0; i < this->sf2->count(id); i++)
-                {
-                    id.indexElt2 = i;
-                    if (!this->sf2->get(id, champ_hidden).bValue)
-                    {
-                        // Création d'un lien avec instrument
-                        idDest.typeElement = elementPrstInst;
-                        idDest.indexElt2 = this->sf2->add(idDest);
-                        id2 = id;
-                        // Copie des gens
-                        id2.typeElement = elementPrstInstGen;
-                        for (int j = 0; j < this->sf2->count(id2); j++)
-                        {
-                            id2.indexMod = j;
-                            if (this->sf2->get(id2, champ_sfGenOper).sfGenValue == champ_instrument)
-                                val.wValue = baba2[this->sf2->get(id2, champ_sfGenAmount).wValue];
-                            else
-                                val = this->sf2->get(id2, champ_sfGenAmount);
-                            this->sf2->set(idDest, this->sf2->get(id2, champ_sfGenOper).sfGenValue, val);
-                        }
-                        // Copie des mods
-                        idDest.typeElement = elementPrstInstMod;
-                        id2.typeElement = elementPrstInstMod;
-                        // Correspondance des index et initialisation
-                        int *indMod = new int[this->sf2->count(id2)];
-                        for (int j = 0; j < this->sf2->count(id2); j++)
-                            indMod[j] = -1;
-                        for (int j = 0; j < this->sf2->count(id2); j++)
-                        {
-                            id2.indexMod = j;
-                            if (!this->sf2->get(id2, champ_hidden).bValue)
-                            {
-                                idDest.indexMod = this->sf2->add(idDest);
-                                indMod[j] = idDest.indexMod;
-                                this->sf2->set(idDest, champ_sfModSrcOper, this->sf2->get(id2, champ_sfModSrcOper));
-                                this->sf2->set(idDest, champ_sfModAmtSrcOper, this->sf2->get(id2, champ_sfModAmtSrcOper));
-                                this->sf2->set(idDest, champ_sfModTransOper, this->sf2->get(id2, champ_sfModTransOper));
-                                this->sf2->set(idDest, champ_modAmount, this->sf2->get(id2, champ_modAmount));
-                                if (this->sf2->get(id2, champ_sfModDestOper).wValue < 32768) // pas de lien
-                                    this->sf2->set(idDest, champ_sfModDestOper, this->sf2->get(id2, champ_sfModDestOper));
-                            }
-                        }
-                        // Mise en place des liens
-                        for (int j = 0; j < this->sf2->count(id2); j++)
-                        {
-                            id2.indexMod = j;
-                            if (!this->sf2->get(id2, champ_hidden).bValue)
-                            {
-                                if (this->sf2->get(id2, champ_sfModDestOper).wValue > 32767)
-                                {
-                                    idDest.indexMod = indMod[j];
-                                    val.wValue = 32768 + indMod[this->sf2->get(id2, champ_sfModDestOper).wValue - 32768];
-                                    this->sf2->set(idDest, champ_sfModDestOper, val);
-                                }
-                            }
-                        }
-                        delete indMod;
-                    }
-                }
-            }
-        }
-        break;
-        default: return;
-        }
-    }
-    if (temps > 0)
-    {
-        delete [] msg;
-        delete ba1;
-        delete ba2;
-        // Mise à jour de l'affichage
-        this->updateDo();
-        this->updateActions();
-    }
+    // Ici prepareNewActions() a déjà été appelé
+    Duplicator duplicator(this->sf2, this->sf2, this);
+    for (int i = 0; i < idSources.size(); i++)
+        duplicator.copy(idSources.at(i), idDest);
+
+    // Mise à jour de l'affichage
+    this->updateDo();
+    this->updateActions();
 }
 void MainWindow::importerSmpl()
 {
@@ -2146,18 +1440,71 @@ void MainWindow::exporterSmpl()
     }
     delete [] status;
 }
-
-void MainWindow::exporterSfz()
+void MainWindow::exporter()
 {
     int nbElt = ui->arborescence->getSelectedItemsNumber();
-    if (nbElt == 0) return;
-    QString qDir = QFileDialog::getExistingDirectory(this, trUtf8("Choisir un répertoire de destination"), \
-                                                     Config::getInstance()->getLastDirectory(Config::typeFichierSfz));
-    if (qDir.isEmpty()) return;
-    ConversionSfz converter(this->sf2);
-    Config::getInstance()->addFile(Config::typeFichierSfz, converter.convert(qDir, this->ui->arborescence->getID(0)));
-}
+    if (nbElt == 0)
+        return;
 
+    DialogExport * dial = new DialogExport(sf2, ui->arborescence->getID(0), this);
+    connect(dial, SIGNAL(accepted(QList<EltID>,QString,int)), this, SLOT(exporter(QList<EltID>,QString,int)));
+    dial->show();
+}
+void MainWindow::exporter(QList<EltID> listID, QString dir, int format)
+{
+    if (dir.isEmpty() || !QDir(dir).exists() || listID.isEmpty())
+        return;
+
+    switch (format)
+    {
+    case 0:{
+        // Export sf2, création d'un nouvel sf2 indépendant
+        Pile_sf2 newSf2(NULL, false, NULL);
+        EltID idDest(elementSf2, 0, 0, 0, 0);
+        idDest.indexSf2 = newSf2.add(idDest);
+
+        // Copie des infos
+        EltID idSf2Source = listID.at(0);
+        idSf2Source.typeElement = elementSf2;
+        QString name = sf2->getQstr(idSf2Source, champ_name);
+        newSf2.set(idDest, champ_name, name);
+        newSf2.set(idDest, champ_ISNG, sf2->getQstr(idSf2Source, champ_ISNG));
+        newSf2.set(idDest, champ_IROM, sf2->getQstr(idSf2Source, champ_IROM));
+        newSf2.set(idDest, champ_ICRD, sf2->getQstr(idSf2Source, champ_ICRD));
+        newSf2.set(idDest, champ_IENG, sf2->getQstr(idSf2Source, champ_IENG));
+        newSf2.set(idDest, champ_IPRD, sf2->getQstr(idSf2Source, champ_IPRD));
+        newSf2.set(idDest, champ_ICOP, sf2->getQstr(idSf2Source, champ_ICOP));
+        newSf2.set(idDest, champ_ICMT, sf2->getQstr(idSf2Source, champ_ICMT));
+        newSf2.set(idDest, champ_ISFT, sf2->getQstr(idSf2Source, champ_ISFT));
+
+        // Ajout des presets
+        Duplicator duplicator(this->sf2, &newSf2, this);
+        for (int i = 0; i < listID.size(); i++)
+            duplicator.copy(listID.at(i), idDest);
+
+        // Détermination du nom de fichier
+        QFile fichier(dir + "/" + name + ".sf2");
+        if (fichier.exists())
+        {
+            int i = 1;
+            while (QFile(dir + "/" + name + "-" + QString::number(i) + ".sf2").exists())
+                i++;
+            name += "-" + QString::number(i);
+        }
+        name = dir + "/" + name + ".sf2";
+
+        // Sauvegarde
+        newSf2.sauvegarder(idDest.indexSf2, name);
+        }break;
+    case 1:{
+        // Export sfz
+        ConversionSfz converter(sf2);
+        converter.convert(dir, listID);
+        }break;
+    default:
+        break;
+    }
+}
 void MainWindow::nouvelInstrument()
 {
     int nb = ui->arborescence->getSelectedItemsNumber();
@@ -2187,7 +1534,7 @@ void MainWindow::nouveauPreset()
     // Vérification qu'un preset est disponible
     int nPreset = -1;
     int nBank = -1;
-    this->page_prst->firstAvailablePresetBank(id, nBank, nPreset);
+    sf2->firstAvailablePresetBank(id, nBank, nPreset);
     if (nPreset == -1)
     {
         QMessageBox::warning(this, tr("Attention"), QString::fromUtf8(tr("Aucun preset n'est disponible.").toStdString().c_str()));
@@ -2224,13 +1571,17 @@ void MainWindow::associer()
     if (!ui->arborescence->getSelectedItemsNumber())
         return;
     EltID id = ui->arborescence->getID(0);
-    this->anticipateNewAction(); // Les ID ne changeront pas lors du prochain prepareNewAction
+    this->sf2->prepareNewActions();
     this->dialList.showDialog(id, DialogList::MODE_ASSOCIATION);
 }
 void MainWindow::associer(EltID idDest)
 {
     int nb = ui->arborescence->getSelectedItemsNumber();
-    if (nb == 0 || (idDest.typeElement != elementInst && idDest.typeElement != elementPrst)) return;
+    if (nb == 0 || (idDest.typeElement != elementInst && idDest.typeElement != elementPrst))
+    {
+        updateDo();
+        return;
+    }
     Champ champ;
     if (idDest.typeElement == elementInst)
     {
@@ -2260,13 +1611,13 @@ void MainWindow::associer(EltID idDest)
         if (champ == champ_sampleID)
         {
             // Balance
-            if (this->sf2->get(idSrc, champ_sfSampleType).sfLinkValue == rightSample || \
+            if (this->sf2->get(idSrc, champ_sfSampleType).sfLinkValue == rightSample ||
                     this->sf2->get(idSrc, champ_sfSampleType).sfLinkValue == RomRightSample)
             {
                 val.shValue = 500;
                 this->sf2->set(idDest, champ_pan, val);
             }
-            else if (this->sf2->get(idSrc, champ_sfSampleType).sfLinkValue == leftSample || \
+            else if (this->sf2->get(idSrc, champ_sfSampleType).sfLinkValue == leftSample ||
                      this->sf2->get(idSrc, champ_sfSampleType).sfLinkValue == RomLeftSample)
             {
                 val.shValue = -500;
@@ -2320,13 +1671,17 @@ void MainWindow::remplacer()
     int nb = ui->arborescence->getSelectedItemsNumber();
     if (nb != 1) return;
     EltID id = ui->arborescence->getID(0);
-    this->anticipateNewAction(); // Les ID ne changeront pas lors du prochain prepareNewAction
+    this->sf2->prepareNewActions();
     this->dialList.showDialog(id, DialogList::MODE_REMPLACEMENT);
 }
 void MainWindow::remplacer(EltID idSrc)
 {
     int nb = ui->arborescence->getSelectedItemsNumber();
-    if (nb != 1 || (idSrc.typeElement != elementSmpl && idSrc.typeElement != elementInst)) return;
+    if (nb != 1 || (idSrc.typeElement != elementSmpl && idSrc.typeElement != elementInst))
+    {
+        updateDo();
+        return;
+    }
     EltID idDest = this->ui->arborescence->getID(0);
     if (idDest.typeElement != elementInstSmpl && idDest.typeElement != elementPrstInst)
         return;
@@ -2426,7 +1781,6 @@ void MainWindow::visualize()
     else if (type == elementPrst || type == elementPrstInst)
         this->page_prst->visualize();
 }
-
 void MainWindow::repartitionAuto()  {this->page_inst->repartitionAuto();}
 void MainWindow::mixture()          {this->page_inst->mixture();}
 void MainWindow::release()          {this->page_inst->release();}
@@ -2705,12 +2059,6 @@ void MainWindow::associationAutoSmpl()
         this->page_smpl->afficher();
 }
 
-// Affichage du magnétophone
-void MainWindow::magnetophone()
-{
-    dialogMagneto.show();
-}
-
 // Gestion du clavier virtuel / du son
 void MainWindow::setAudioEngine(int audioEngine, int bufferSize)
 {
@@ -2833,75 +2181,4 @@ void MainWindow::setSynthReverb(int level, int size, int width, int damping)
 void MainWindow::setSynthChorus(int level, int depth, int frequency)
 {
     this->synth->setChorus(level, depth, frequency);
-}
-
-QList<QAction *> MainWindow::getListeActions()
-{
-    QList<QAction *> listeAction;
-    listeAction << ui->actionNouveau
-                << ui->actionOuvrir
-                << ui->actionEnregistrer
-                << ui->actionEnregistrer_sous
-                << ui->actionImporter
-                << ui->actionExporter
-                << ui->actionFermer_le_fichier
-                << ui->actionNouvel_instrument
-                << ui->actionNouveau_preset
-                << ui->actionAnnuler
-                << ui->actionR_tablir
-                << ui->actionCopier
-                << ui->actionColler
-                << ui->action_Supprimer
-                << ui->actionRenommer
-                << ui->actionPr_f_rences
-                << ui->actionAjuster_la_fin_de_boucle
-                << ui->actionBouclage_automatique
-                << ui->action_Diminuer_sifflements
-                << ui->actionEnlever_blanc_au_d_part
-                << ui->actionFiltre_mur_de_brique
-                << ui->actionNormaliser_volume
-                << ui->action_R_glage_balance
-                << ui->actionTransposer
-                << ui->action_Cr_ation_mutation_mixture
-                << ui->actionD_saccordage_ondulant
-                << ui->actionD_uplication_des_divisions
-                << ui->action_laboration_release
-                << ui->action_Param_trage_global
-                << ui->action_R_partition_automatique
-                << ui->actionSpacialisation_du_son
-                << ui->action_Association_auto_samples
-                << ui->action_Enlever_les_l_ments_non_utilis_s
-                << ui->actionR_gler_att_nuation_minimale
-                << ui->actionMagn_tophone
-                << ui->actionSommaire
-                << ui->action_Visualiseur
-                << ui->actionExporter_en_tant_qu_sfz;
-    return listeAction;
-}
-void MainWindow::setListeActions(QList<QAction *> listeActions)
-{
-    // On vide la barre d'outils
-    QList<QAction *> actions = this->getListeActions();
-    for (int i = 0; i < actions.size(); i++)
-        this->ui->toolBar->removeAction(actions.at(i));
-    this->ui->toolBar->removeAction(actionKeyboard);
-    int size = actionSeparators.size();
-    for (int i = 0; i < size; i++)
-    {
-        this->ui->toolBar->removeAction(actionSeparators.at(0));
-        delete actionSeparators.takeFirst();
-    }
-
-    // Ajout des actions
-    for (int i = 0; i < listeActions.size(); i++)
-    {
-        if (listeActions.at(i))
-            this->ui->toolBar->addAction(listeActions.at(i));
-        else
-        {
-            // Ajout d'un séparateur
-            actionSeparators << this->ui->toolBar->addSeparator();
-        }
-    }
-    this->ui->toolBar->addAction(actionKeyboard);
 }

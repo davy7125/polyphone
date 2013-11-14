@@ -50,6 +50,50 @@ Page_Smpl::Page_Smpl(QWidget *parent) :
 
     // Couleur de fond du graphe Fourier
     this->ui->grapheFourier->setBackgroundColor(this->palette().background().color());
+
+    // Adaptation petits écrans
+    if (QApplication::desktop()->width() <= 800)
+    {
+        QTabWidget * tabWidget = new QTabWidget(this);
+        QFont fontBold = tabWidget->font();
+        fontBold.setBold(true);
+        tabWidget->setFont(fontBold);
+        fontBold.setBold(false);
+        QFont font = fontBold;
+        ui->label->setFont(font);
+        ui->label_2->setFont(font);
+        ui->label_3->setFont(font);
+        ui->label_4->setFont(font);
+        ui->label_5->setFont(font);
+        ui->label_6->setFont(font);
+        ui->label_7->setFont(font);
+        ui->label_8->setFont(font);
+        ui->label_9->setFont(font);
+        ui->label_10->setFont(font);
+        ui->label_11->setFont(font);
+        ui->label_12->setFont(font);
+        ui->label_13->setFont(font);
+        ui->label_14->setFont(font);
+        ui->label_15->setFont(font);
+        ui->label_16->setFont(font);
+        ui->label_17->setFont(font);
+        ui->labelTaille->setFont(font);
+        ui->comboLink->setFont(font);
+        ui->comboSampleRate->setFont(font);
+        ui->comboType->setFont(font);
+        ui->spinEndLoop->setFont(font);
+        ui->spinRootKey->setFont(font);
+        ui->spinStartLoop->setFont(font);
+        ui->spinTune->setFont(font);
+        ui->pushEgaliser->setFont(font);
+        ui->pushEgalRestore->setFont(font);
+        tabWidget->addTab(ui->frame_2, trUtf8("Informations"));
+        tabWidget->addTab(ui->frame_7, trUtf8("Égaliseur (±15 dB)"));
+        delete ui->label_20;
+        delete ui->label_21;
+        QGridLayout * layout = (QGridLayout *) ui->frame_5->layout();
+        layout->addWidget(tabWidget, 0, 0, 0, 1);
+    }
 }
 Page_Smpl::~Page_Smpl()
 {

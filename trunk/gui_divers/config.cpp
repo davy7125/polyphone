@@ -285,7 +285,7 @@ void Config::addFile(TypeFichier typeFichier, QString filePath)
     case typeFichierSample:
         sampleFile = filePath;
         break;
-    case typeFichierSfz:
+    case typeFichierExport:
         sfzFile = filePath;
         break;
     case typeFichierSf2:{
@@ -322,7 +322,7 @@ QString Config::getLastFile(TypeFichier typeFichier, int num)
         if (num >= 0 && num < 5)
             lastFile = listFiles.at(num);
         break;
-    case typeFichierSfz:
+    case typeFichierExport:
         lastFile = sfzFile;
         break;
     }
@@ -343,7 +343,7 @@ QString Config::getLastDirectory(TypeFichier typeFichier)
     case typeFichierSf2:
         lastDir = this->listFiles.at(0);
         break;
-    case typeFichierSfz:
+    case typeFichierExport:
         lastDir = sfzFile;
         break;
     }
@@ -509,7 +509,7 @@ void Config::load()
                     << settings.value("colors/graph_startloop", QColor(100, 255, 100)).toString()
                     << settings.value("colors/graph_endloop", QColor(255, 0, 0)).toString()
                     << settings.value("colors/graph_timecursor", QColor(255, 255, 255)).toString();
-    this->modifStereo       = settings.value("General/stereo_modification", false).toBool();
+    this->modifStereo       = settings.value("stereo_modification", false).toBool();
 }
 void Config::store()
 {
@@ -545,7 +545,7 @@ void Config::store()
     settings.setValue("colors/graph_startloop",         this->colorList.at(3).name());
     settings.setValue("colors/graph_endloop",           this->colorList.at(4).name());
     settings.setValue("colors/graph_timecursor",        this->colorList.at(5).name());
-    settings.setValue("General/stereo_modification",    this->modifStereo);
+    settings.setValue("stereo_modification",    this->modifStereo);
 }
 
 void Config::setColors()

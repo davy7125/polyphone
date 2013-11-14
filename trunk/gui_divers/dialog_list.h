@@ -54,6 +54,7 @@ public:
 
 private slots:
     void accept();
+    void reject();
 
 signals:
     void selectedID(EltID id);
