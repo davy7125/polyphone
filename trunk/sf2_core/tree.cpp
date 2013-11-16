@@ -568,6 +568,10 @@ void Tree::dropEvent(QDropEvent *event)
         for (int i = 0; i < event->mimeData()->urls().count(); i++)
         {
             QString path = QUrl::fromPercentEncoding(event->mimeData()->urls().at(i).encodedPath());
+#ifdef PA_USE_ASIO
+            if (path.left(1).compare("/") == 0)
+                path = path.right(path.length() - 1);
+#endif
             if (!path.isEmpty())
                 mainWindow->dragAndDrop(path, getItemID(itemAt(event->pos())), replace);
         }

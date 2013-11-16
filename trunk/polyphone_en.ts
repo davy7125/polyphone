@@ -3473,38 +3473,38 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
 <context>
     <name>QObject</name>
     <message utf8="true">
-        <location filename="sf2_core/duplicator.cpp" line="217"/>
+        <location filename="sf2_core/duplicator.cpp" line="241"/>
         <source>Le sample « </source>
         <oldsource>Le sample «&amp;#160;</oldsource>
         <translation>The sample &quot;</translation>
     </message>
     <message utf8="true">
-        <location filename="sf2_core/duplicator.cpp" line="218"/>
+        <location filename="sf2_core/duplicator.cpp" line="242"/>
         <source> » existe déjà.&lt;br /&gt;Que faire ?</source>
         <oldsource>&amp;#160;» existe déjà.&lt;br /&gt;Que faire ?</oldsource>
         <translation>&quot; already exists.&lt;br/&gt;Replace?</translation>
     </message>
     <message utf8="true">
-        <location filename="sf2_core/duplicator.cpp" line="322"/>
+        <location filename="sf2_core/duplicator.cpp" line="346"/>
         <source>L&apos;instrument « </source>
         <oldsource>L&apos;instrument «&amp;#160;</oldsource>
         <translation>The instrument &quot;</translation>
     </message>
     <message utf8="true">
-        <location filename="sf2_core/duplicator.cpp" line="323"/>
-        <location filename="sf2_core/duplicator.cpp" line="419"/>
+        <location filename="sf2_core/duplicator.cpp" line="347"/>
+        <location filename="sf2_core/duplicator.cpp" line="443"/>
         <source> » existe déjà.&lt;br /&gt;Souhaitez-vous le remplacer ?</source>
         <oldsource>&amp;#160;» existe déjà.&lt;br /&gt;Souhaitez-vous le remplacer ?</oldsource>
         <translation>&quot; already exists.&lt;br/&gt;Replace?</translation>
     </message>
     <message utf8="true">
-        <location filename="sf2_core/duplicator.cpp" line="418"/>
+        <location filename="sf2_core/duplicator.cpp" line="442"/>
         <source>Le preset « </source>
         <oldsource>Le preset «&amp;#160;</oldsource>
         <translation>The preset &quot;</translation>
     </message>
     <message>
-        <location filename="sf2_core/duplicator.cpp" line="441"/>
+        <location filename="sf2_core/duplicator.cpp" line="465"/>
         <location filename="sf2_core/pile_sf2.cpp" line="1304"/>
         <location filename="sf2_core/pile_sf2.cpp" line="1393"/>
         <location filename="sf2_core/pile_sf2_sl.cpp" line="284"/>
@@ -3523,37 +3523,37 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
         <translation>Warning</translation>
     </message>
     <message>
-        <location filename="sf2_core/duplicator.cpp" line="442"/>
+        <location filename="sf2_core/duplicator.cpp" line="466"/>
         <source>Aucun preset n&apos;est disponible.</source>
         <translation>No preset available.</translation>
     </message>
     <message>
-        <location filename="sf2_core/duplicator.cpp" line="650"/>
+        <location filename="sf2_core/duplicator.cpp" line="673"/>
         <source>&amp;Remplacer</source>
         <translation>&amp;Replace</translation>
     </message>
     <message>
-        <location filename="sf2_core/duplicator.cpp" line="651"/>
+        <location filename="sf2_core/duplicator.cpp" line="674"/>
         <source>R&amp;emplacer tout</source>
         <translation>R&amp;eplace all</translation>
     </message>
     <message>
-        <location filename="sf2_core/duplicator.cpp" line="652"/>
+        <location filename="sf2_core/duplicator.cpp" line="675"/>
         <source>&amp;Dupliquer</source>
         <translation>&amp;Duplicate</translation>
     </message>
     <message>
-        <location filename="sf2_core/duplicator.cpp" line="653"/>
+        <location filename="sf2_core/duplicator.cpp" line="676"/>
         <source>D&amp;upliquer tout</source>
         <translation>D&amp;uplicate all</translation>
     </message>
     <message>
-        <location filename="sf2_core/duplicator.cpp" line="654"/>
+        <location filename="sf2_core/duplicator.cpp" line="677"/>
         <source>&amp;Ignorer</source>
         <translation>&amp;Ignore</translation>
     </message>
     <message>
-        <location filename="sf2_core/duplicator.cpp" line="655"/>
+        <location filename="sf2_core/duplicator.cpp" line="678"/>
         <source>I&amp;gnorer tout</source>
         <translation>I&amp;gnore all</translation>
     </message>
