@@ -281,8 +281,8 @@ int Pile_sf2::ouvrirSf2(QString fileName)
             else
             {
                 // on ignore le bloc sm24
-                QMessageBox::warning(NULL, QObject::tr("Attention"),
-                                     QString::fromUtf8(QObject::tr("Fichier corrompu : utilisation des samples en qualité 16 bits.").toStdString().c_str()));
+                QMessageBox::warning(parent, QObject::trUtf8("Attention"),
+                                     QObject::trUtf8("Fichier corrompu : utilisation des samples en qualité 16 bits."));
                 taille_sm24 = 0;
                 wSm24 = 0;
                 fi.seek(fi.pos() + taille_sm24); // en avant de taille_sm24

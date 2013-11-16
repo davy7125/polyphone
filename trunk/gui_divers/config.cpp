@@ -172,8 +172,8 @@ void Config::setRam(int val)
             this->ram = 0;
         else
             this->ram = 1;
-        QMessageBox::information(QApplication::activeWindow(), tr("Information"), \
-                                 QString::fromUtf8(tr("La modification sera prise en compte lors du prochain démarrage du logiciel.").toStdString().c_str()));
+        QMessageBox::information(QApplication::activeWindow(), trUtf8("Information"),
+                                 trUtf8("La modification sera prise en compte lors du prochain démarrage du logiciel."));
         this->store();
     }
 }

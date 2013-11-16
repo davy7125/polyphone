@@ -34,7 +34,6 @@ DWORD freadSize(QFile &fi)
         fi.read((char*)&b1, 1) != 1 || \
         fi.read((char*)&b0, 1) != 1)
     {
-        QMessageBox::warning(NULL, QObject::tr("Attention"), QObject::tr("Lecture impossible."));
         return 0;
     }
     // Assuming file is little-endian.

@@ -288,7 +288,7 @@ public:
             // On cherche le modulateur numChamp
             numChamp -= 32768;
             char T[20];
-            sprintf(T, "%s: #%d", tr("Modulateur").toStdString().c_str(), numChamp+1);
+            sprintf(T, "%s: #%d", trUtf8("Modulateur").toStdString().c_str(), numChamp+1);
             int iVal = this->findText(T);
             if (iVal != -1)
                 this->setCurrentIndex(iVal);

@@ -102,7 +102,7 @@ char * Page::getTextValue(char * T, WORD champ, genAmountType genVal)
     case champ_sfModTransOper:
         switch (genVal.wAmount)
         {
-        case 2: strcpy(T, tr(", valeur absolue").toStdString().c_str()); break;
+        case 2: strcpy(T, trUtf8(", valeur absolue").toStdString().c_str()); break;
         default: T[0] = '\0';
         }
         break;
@@ -828,7 +828,7 @@ void PageTable::afficher()
     this->table->clear();
 
     ////// AFFICHAGE DES PARAMETRES GLOBAUX //////
-    this->table->addColumn(0, tr("Global"));
+    this->table->addColumn(0, trUtf8("Global"));
     id.typeElement = this->contenantGen;
     id.indexElt2 = 0;
     for (int i = 0; i < this->sf2->count(id); i++)
@@ -1127,11 +1127,11 @@ void PageTable::afficheMod(EltID id, int selectedRow)
                 iVal = getAssociatedMod(id);
                 if (iVal > -1)
                 {
-                    sprintf(T, "%s: #%d", tr("Modulateur").toStdString().c_str(), iVal+1);
+                    sprintf(T, "%s: #%d", trUtf8("Modulateur").toStdString().c_str(), iVal+1);
                     qStr = T;
                 }
                 else
-                    qStr = tr("Lien (invalide)");
+                    qStr = trUtf8("Lien (invalide)");
             }
             else qStr = getIndexName(sfModTmp.Index, sfModTmp.CC);
             this->tableMod->item(numLigne, 6)->setText(qStr);
@@ -1149,7 +1149,7 @@ void PageTable::afficheMod(EltID id, int selectedRow)
             if (genValTmp.wAmount > 99)
             {
                 // lien vers modulateur
-                sprintf(T, "%s: #%d", tr("Modulateur").toStdString().c_str(), genValTmp.wAmount - 32767);
+                sprintf(T, "%s: #%d", trUtf8("Modulateur").toStdString().c_str(), genValTmp.wAmount - 32767);
                 qStr = T;
             }
             else qStr = getGenName(genValTmp.wAmount);
@@ -2070,7 +2070,7 @@ void PageTable::addAvailableReceiverMod(ComboBox *combo, EltID id)
             if (!found)
             {
                 // id2 peut recevoir les signaux de id
-                sprintf(T, "%s: #%d", tr("Modulateur").toStdString().c_str(), id2.indexMod+1);
+                sprintf(T, "%s: #%d", trUtf8("Modulateur").toStdString().c_str(), id2.indexMod+1);
                 combo->addItem(T);
             }
         }
@@ -2139,7 +2139,7 @@ void PageTable::addAvailableSenderMod(ComboBox *combo, EltID id)
             if (!found)
             {
                 // id2 peut envoyer des signaux à id
-                sprintf(T, "%s: #%d", tr("Modulateur").toStdString().c_str(), id2.indexMod+1);
+                sprintf(T, "%s: #%d", trUtf8("Modulateur").toStdString().c_str(), id2.indexMod+1);
                 combo->addItem(T);
             }
         }
@@ -2294,7 +2294,7 @@ void PageTable::pasteMod()
                     champTmp == champ_endloopAddrsOffset ||
                     champTmp == champ_endloopAddrsCoarseOffset)
             {
-                QMessageBox::warning(this, tr("Attention"), warnQStr +
+                QMessageBox::warning(this, trUtf8("Attention"), warnQStr +
                                      trUtf8("les offsets ne peuvent être modulés dans un preset."));
                 return;
             }
@@ -2303,7 +2303,7 @@ void PageTable::pasteMod()
                     champTmp == champ_exclusiveClass ||
                     champTmp == champ_overridingRootKey)
             {
-                QMessageBox::warning(this, tr("Attention"), warnQStr +
+                QMessageBox::warning(this, trUtf8("Attention"), warnQStr +
                                      "\"" + getGenName(champTmp) + trUtf8("\" ne peut être modulé dans un preset."));
                 return;
             }
@@ -2770,18 +2770,18 @@ void PageTable::paramGlobal()
     if (nbElt == 0)
     {
         if (m_typePage == PAGE_INST)
-            QMessageBox::warning(this, tr("Attention"), trUtf8("L'instrument doit contenir des sons."));
+            QMessageBox::warning(this, trUtf8("Attention"), trUtf8("L'instrument doit contenir des sons."));
         else
-            QMessageBox::warning(this, tr("Attention"), trUtf8("Le preset doit contenir des instruments."));
+            QMessageBox::warning(this, trUtf8("Attention"), trUtf8("Le preset doit contenir des instruments."));
         this->mainWindow->updateDo();
         return;
     }
     if (posMin > posMax)
     {
         if (m_typePage == PAGE_INST)
-            QMessageBox::warning(this, tr("Attention"), trUtf8("Aucune étendue de notes spécifiée pour l'instrument."));
+            QMessageBox::warning(this, trUtf8("Attention"), trUtf8("Aucune étendue de notes spécifiée pour l'instrument."));
         else
-            QMessageBox::warning(this, tr("Attention"), trUtf8("Aucune étendue de notes spécifiée pour le preset."));
+            QMessageBox::warning(this, trUtf8("Attention"), trUtf8("Aucune étendue de notes spécifiée pour le preset."));
         this->mainWindow->updateDo();
         return;
     }
@@ -2877,7 +2877,7 @@ void PageTable::duplication()
         id.typeElement = elementInstSmpl;
         if (this->sf2->count(id, false) == 0)
         {
-            QMessageBox::warning(this, tr("Attention"), tr("L'instrument doit contenir des sons."));
+            QMessageBox::warning(this, trUtf8("Attention"), trUtf8("L'instrument doit contenir des sons."));
             return;
         }
     }
@@ -2886,7 +2886,7 @@ void PageTable::duplication()
         id.typeElement = elementPrstInst;
         if (this->sf2->count(id, false) == 0)
         {
-            QMessageBox::warning(this, tr("Attention"), tr("Le preset doit contenir des instruments."));
+            QMessageBox::warning(this, trUtf8("Attention"), trUtf8("Le preset doit contenir des instruments."));
             return;
         }
     }
@@ -3175,7 +3175,7 @@ void PageTable::spatialisation()
         id.typeElement = elementInstSmpl;
         if (this->sf2->count(id, false) == 0)
         {
-            QMessageBox::warning(this, tr("Attention"), tr("L'instrument doit contenir des sons."));
+            QMessageBox::warning(this, trUtf8("Attention"), trUtf8("L'instrument doit contenir des sons."));
             return;
         }
     }
@@ -3184,7 +3184,7 @@ void PageTable::spatialisation()
         id.typeElement = elementPrstInst;
         if (this->sf2->count(id, false) == 0)
         {
-            QMessageBox::warning(this, tr("Attention"), tr("Le preset doit contenir des instruments."));
+            QMessageBox::warning(this, trUtf8("Attention"), trUtf8("Le preset doit contenir des instruments."));
             return;
         }
     }
@@ -3398,17 +3398,17 @@ void PageTable::visualize()
     if (nbElt == 0)
     {
         if (m_typePage == PAGE_INST)
-            QMessageBox::warning(this, tr("Attention"), trUtf8("L'instrument doit contenir des sons."));
+            QMessageBox::warning(this, trUtf8("Attention"), trUtf8("L'instrument doit contenir des sons."));
         else
-            QMessageBox::warning(this, tr("Attention"), trUtf8("Le preset doit contenir des instruments."));
+            QMessageBox::warning(this, trUtf8("Attention"), trUtf8("Le preset doit contenir des instruments."));
         return;
     }
     if (posMin > posMax)
     {
         if (m_typePage == PAGE_INST)
-            QMessageBox::warning(this, tr("Attention"), trUtf8("Aucune étendue de notes spécifiée pour l'instrument."));
+            QMessageBox::warning(this, trUtf8("Attention"), trUtf8("Aucune étendue de notes spécifiée pour l'instrument."));
         else
-            QMessageBox::warning(this, tr("Attention"), trUtf8("Aucune étendue de notes spécifiée pour le preset."));
+            QMessageBox::warning(this, trUtf8("Attention"), trUtf8("Aucune étendue de notes spécifiée pour le preset."));
         return;
     }
     DialogVisualizer * dialogVisu = new DialogVisualizer(this->sf2, id, this);

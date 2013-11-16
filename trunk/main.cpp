@@ -52,13 +52,9 @@ int main(int argc, char *argv[])
 
     // Ouverture des fichiers sf2 passés en argument
     QStringList listeArg = QCoreApplication::arguments();
+    int replace = 0;
     for (int i = 1; i < listeArg.size(); i++)
-    {
-        QFileInfo fileInfo(listeArg.at(i));
-        QString suffix = fileInfo.suffix().toLower();
-        if (!suffix.compare("sf2"))
-            w.ouvrir(listeArg.at(i));
-    }
+        w.dragAndDrop(listeArg.at(i), EltID(elementUnknown, -1, -1, -1, -1), replace);
 
     return a.exec();
 }

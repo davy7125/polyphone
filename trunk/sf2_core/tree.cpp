@@ -30,8 +30,6 @@
 // Constructeur, destructeur
 Tree::Tree(QWidget *parent) : QTreeWidget(parent)
 {
-    this->viewport()->installEventFilter(this); // drag & drop
-    this->installEventFilter(this);             // keypress
     this->menuArborescence = NULL;
     this->mainWindow = NULL;
     this->refresh = true;
@@ -228,19 +226,19 @@ void Tree::clicTree()
         // Renommer
         if (nb == 1 && typeUnique && (type == elementSmpl || type == elementInst || type == elementPrst || type == elementSf2))
         {
-            menuArborescence->renommer->setText(tr("&Renommer..."));
+            menuArborescence->renommer->setText(trUtf8("&Renommer..."));
             menuArborescence->renommer->setEnabled(true);
         }
         else
         {
             if (nb > 1 && typeUnique && type == elementSmpl)
             {
-                menuArborescence->renommer->setText(tr("&Renommer en masse..."));
+                menuArborescence->renommer->setText(trUtf8("&Renommer en masse..."));
                 menuArborescence->renommer->setEnabled(1);
             }
             else
             {
-                menuArborescence->renommer->setText(tr("&Renommer..."));
+                menuArborescence->renommer->setText(trUtf8("&Renommer..."));
                 menuArborescence->renommer->setEnabled(false);
             }
         }
@@ -465,7 +463,7 @@ QTreeWidgetItem * Tree::selectedItem(unsigned int pos)
 }
 EltID Tree::getItemID(QTreeWidgetItem *elt)
 {
-    EltID ID;
+    EltID ID(elementUnknown, -1, -1, -1, -1);
     if (!elt) return ID;
     string type, str;
     int indexSf2, indexElt, indexElt2;
@@ -511,14 +509,82 @@ void Tree::supprimerElt()
     if (this->menuArborescence->supprimer->isEnabled())
         this->mainWindow->supprimerElt();
 }
-void Tree::prepareNewAction(bool withUpdateDo)
-{
-    this->mainWindow->prepareNewAction();
-    if (withUpdateDo)
-        this->mainWindow->updateDo();
-}
 
-void Tree::dragAndDrop(EltID idDest, QList<EltID> idSources)
+
+////////////////
+// EVENEMENTS //
+////////////////
+
+void Tree::keyPressEvent(QKeyEvent *event)
 {
-    this->mainWindow->dragAndDrop(idDest, idSources);
+    if (event->key() == Qt::Key_Delete)
+    {
+        // Touche suppr : efface l'élément
+        this->supprimerElt();
+    }
+    else if (event->matches(QKeySequence::Copy))
+    {
+        // Nombre d'éléments sélectionnés
+        int nbElt = this->getSelectedItemsNumber();
+        this->clearPastedID();
+        if (nbElt >= 0)
+        {
+            if (this->isSelectedItemsSf2Unique() && this->isSelectedItemsTypeUnique())
+            {
+                mainWindow->prepareNewAction();
+                mainWindow->updateDo();
+
+                // Copie des éléments
+                for (int i = 0; i < nbElt; i++)
+                    this->idList << this->getID(i);
+            }
+        }
+    }
+    else if (event->matches(QKeySequence::Paste))
+    {
+        mainWindow->prepareNewAction();
+        int nbElt = this->getSelectedItemsNumber();
+        if (nbElt > 0 && this->idList.size())
+        {
+            if (this->isSelectedItemsSf2Unique() && this->isSelectedItemsTypeUnique())
+                mainWindow->dragAndDrop(this->getID(0), this->idList);
+        }
+        mainWindow->updateDo();
+    }
+}
+void Tree::dragEnterEvent(QDragEnterEvent * event)
+{
+    if ((this->isSelectedItemsSf2Unique() && this->isSelectedItemsTypeUnique()) ||
+            event->mimeData()->hasFormat("text/uri-list"))
+        event->acceptProposedAction();
+}
+void Tree::dropEvent(QDropEvent *event)
+{
+    mainWindow->prepareNewAction();
+
+    if (event->mimeData()->hasUrls() && event->source() == NULL)
+    {
+        int replace = 0;
+        for (int i = 0; i < event->mimeData()->urls().count(); i++)
+        {
+            QString path = QUrl::fromPercentEncoding(event->mimeData()->urls().at(i).encodedPath());
+            if (!path.isEmpty())
+                mainWindow->dragAndDrop(path, getItemID(itemAt(event->pos())), replace);
+        }
+    }
+    else
+    {
+        // Destination
+        EltID idDest = this->getItemID(this->itemAt(event->pos()));
+
+        // Constitution de la liste des éléments à copier / lier
+        int nbElt = this->selectedItems().count();
+        QList<EltID> liste;
+        for (int i = 0; i < nbElt; i++)
+            liste << this->getID(i);
+
+        mainWindow->dragAndDrop(idDest, liste);
+    }
+
+    mainWindow->updateDo();
 }

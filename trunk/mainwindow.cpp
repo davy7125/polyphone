@@ -186,6 +186,9 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent, Qt::Window | Qt::W
         this->ui->label->setPixmap(QPixmap(":/logo/noel"));
     else if (date.month() == 2 && date.day() == 14)
         this->ui->label->setPixmap(QPixmap(":/logo/valentin"));
+
+    // Initialisation objet Sound
+    Sound::setParent(this);
 }
 MainWindow::~MainWindow()
 {
@@ -234,9 +237,11 @@ void MainWindow::closeEvent(QCloseEvent *event)
         {
             if (sf2->isEdited(i))
             {
-                if (nbFile) qStr.append("<br /> - " + sf2->getQstr(id, champ_name));
-                else qStr = sf2->getQstr(id, champ_name);
-                nbFile ++;
+                if (nbFile)
+                    qStr.append("<br /> - " + sf2->getQstr(id, champ_name));
+                else
+                    qStr = sf2->getQstr(id, champ_name);
+                nbFile++;
             }
         }
     }
@@ -244,23 +249,21 @@ void MainWindow::closeEvent(QCloseEvent *event)
     {
         QMessageBox msgBox(this);
         msgBox.setIcon(QMessageBox::Warning);
+        msgBox.setText(trUtf8("<b>Sauvegarder avant de quitter ?</b>"));
         if (nbFile > 1)
         {
-            qStr.prepend(tr("<b>Les fichiers suivants ont été modifiés depuis leur dernier enregistrement :<br/> - "));
-            qStr.append("</b>");
-            msgBox.setText(QString::fromUtf8(qStr.toStdString().c_str()));
+            qStr.prepend(trUtf8("Les fichiers suivants ont été modifiés :<br/> - "));
+            msgBox.setInformativeText(qStr);
         }
         else
         {
-            qStr = tr("<b>Voulez-vous enregistrer les modifications du fichier «&#160;") + qStr + tr("&#160;» avant de quitter ?</b>");
-            msgBox.setText(QString::fromUtf8(qStr.toStdString().c_str()));
+            qStr = trUtf8("Le fichier « ") + qStr + trUtf8(" » a été modifié.");
+            msgBox.setInformativeText(qStr);
         }
-        qStr = tr("Si vous n'enregistrez pas, les modifications effectuées depuis la dernière sauvegarde seront définitivement perdues.");
-        msgBox.setInformativeText(QString::fromUtf8(qStr.toStdString().c_str()));
         msgBox.setStandardButtons(QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel);
-        msgBox.button(QMessageBox::Save)->setText(tr("&Enregistrer"));
-        msgBox.button(QMessageBox::Cancel)->setText(tr("&Annuler"));
-        msgBox.button(QMessageBox::Discard)->setText(tr("&Quitter sans enregistrer"));
+        msgBox.button(QMessageBox::Save)->setText(trUtf8("&Enregistrer"));
+        msgBox.button(QMessageBox::Cancel)->setText(trUtf8("&Annuler"));
+        msgBox.button(QMessageBox::Discard)->setText(trUtf8("&Quitter sans enregistrer"));
         msgBox.button(QMessageBox::Save)->setIcon(QIcon::fromTheme("filesave"));
         msgBox.setDefaultButton(QMessageBox::Save);
         switch (msgBox.exec())
@@ -290,9 +293,9 @@ void MainWindow::closeEvent(QCloseEvent *event)
 void MainWindow::ouvrir()
 {
     // Chargement d'un fichier .sf2
-    QString fileName = QFileDialog::getOpenFileName(this, tr("Ouvrir une soundfont"),
+    QString fileName = QFileDialog::getOpenFileName(this, trUtf8("Ouvrir une soundfont"),
                                                     Config::getInstance()->getLastDirectory(Config::typeFichierSf2),
-                                                    tr("Fichier .sf2 (*.sf2)"));
+                                                    trUtf8("Fichier .sf2 (*.sf2)"));
     if (fileName.isNull()) return;
     ouvrir(fileName);
 }
@@ -317,29 +320,31 @@ void MainWindow::ouvrir(QString fileName)
         updateActions();
         break;
     case 1:
-        QMessageBox::warning(this, tr("Attention"), "Format inconnu.");
+        QMessageBox::warning(this, trUtf8("Attention"), trUtf8("Format inconnu."));
+        updateDo();
         break;
     case 2:
-        QMessageBox::warning(this, tr("Attention"), QString::fromUtf8(tr("Le fichier est déjà chargé.").toStdString().c_str()));
+        QMessageBox::warning(this, trUtf8("Attention"), trUtf8("Le fichier est déjà chargé."));
+        updateDo();
         break;
     case 3:
-        QMessageBox::warning(this, tr("Attention"), QString::fromUtf8(tr("Impossible d'ouvrir le fichier.").toStdString().c_str()));
+        QMessageBox::warning(this, trUtf8("Attention"), trUtf8("Impossible d'ouvrir le fichier."));
+        updateDo();
         break;
     case 4:
-        QMessageBox::warning(this, tr("Attention"), tr("Lecture impossible."));
+        QMessageBox::warning(this, trUtf8("Attention"), trUtf8("Lecture impossible."));
+        updateDo();
         break;
-    case 5:
-        QMessageBox::warning(this, tr("Attention"), tr("Le fichier est corrompu."));
-        break;
-    case 6:
-        QMessageBox::warning(this, tr("Attention"), tr("La somme de la taille des blocs ne donne pas la taille totale du fichier."));
+    case 5: case 6:
+        QMessageBox::warning(this, trUtf8("Attention"), trUtf8("Le fichier est corrompu."));
+        updateDo();
         break;
     }
 }
 void MainWindow::nouveau()
 {
     bool ok;
-    QString name = QInputDialog::getText(this, QString::fromUtf8(" "), tr("Nom de la nouvelle soundfont :"), QLineEdit::Normal, "", &ok);
+    QString name = QInputDialog::getText(this, " ", trUtf8("Nom de la nouvelle soundfont :"), QLineEdit::Normal, "", &ok);
     if (ok && !name.isEmpty())
     {
         sf2->prepareNewActions();
@@ -363,15 +368,14 @@ void MainWindow::Fermer()
         QMessageBox msgBox(this);
         msgBox.setIcon(QMessageBox::Warning);
         id.typeElement = elementSf2;
-        QString qStr = tr("<b>Voulez-vous enregistrer les modifications du fichier «&#160;") + sf2->getQstr(id,champ_name) + \
-                tr("&#160;» avant de le fermer ?</b>");
-        msgBox.setText(QString::fromUtf8(qStr.toStdString().c_str()));
-        qStr = tr("Si vous n'enregistrez pas, les modifications effectuées depuis la dernière sauvegarde seront définitivement perdues.");
-        msgBox.setInformativeText(QString::fromUtf8(qStr.toStdString().c_str()));
+        QString qStr = trUtf8("<b>Sauvegarder avant de quitter ?</b>");
+        msgBox.setText(qStr);
+        qStr = trUtf8("Le fichier « ") + sf2->getQstr(id,champ_name) + trUtf8(" » a été modifié.");
+        msgBox.setInformativeText(qStr);
         msgBox.setStandardButtons(QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel);
-        msgBox.button(QMessageBox::Save)->setText(tr("&Enregistrer"));
-        msgBox.button(QMessageBox::Cancel)->setText(tr("&Annuler"));
-        msgBox.button(QMessageBox::Discard)->setText(tr("&Fermer sans enregistrer"));
+        msgBox.button(QMessageBox::Save)->setText(trUtf8("&Enregistrer"));
+        msgBox.button(QMessageBox::Cancel)->setText(trUtf8("&Annuler"));
+        msgBox.button(QMessageBox::Discard)->setText(trUtf8("&Fermer sans enregistrer"));
         msgBox.button(QMessageBox::Save)->setIcon(QIcon::fromTheme("filesave"));
         msgBox.setDefaultButton(QMessageBox::Save);
         ret = msgBox.exec();
@@ -393,7 +397,7 @@ void MainWindow::Fermer()
         updateDo();
         this->page_inst->clearTable();
         this->page_prst->clearTable();
-        }break;
+    }break;
     }
 }
 void MainWindow::supprimerElt()
@@ -436,13 +440,11 @@ int  MainWindow::sauvegarder(int indexSf2, bool saveAs)
         msgBox.setIcon(QMessageBox::Warning);
         char T[20];
         sprintf(T,"%d &#8658; %d", sf2->get(id, champ_wBpsInit).wValue, sf2->get(id, champ_wBpsSave).wValue);
-        QString qStr = tr("<b>Perte de résolution ") + QString(T) + tr(" bits</b>");
-        msgBox.setText(QString::fromUtf8(qStr.toStdString().c_str()));
-        qStr = tr("La qualité des samples sera abaissée suite à cette opération. Continuer ?");
-        msgBox.setInformativeText(QString::fromUtf8(qStr.toStdString().c_str()));
+        msgBox.setText( trUtf8("<b>Perte de résolution ") + QString(T) + trUtf8(" bits</b>"));
+        msgBox.setInformativeText(trUtf8("La qualité des samples sera abaissée suite à cette opération. Continuer ?"));
         msgBox.setStandardButtons(QMessageBox::Cancel | QMessageBox::Save);
-        msgBox.button(QMessageBox::Save)->setText(tr("&Oui"));
-        msgBox.button(QMessageBox::Cancel)->setText(tr("&Non"));
+        msgBox.button(QMessageBox::Save)->setText(trUtf8("&Oui"));
+        msgBox.button(QMessageBox::Cancel)->setText(trUtf8("&Non"));
         msgBox.setDefaultButton(QMessageBox::Cancel);
         ret = msgBox.exec();
         if (ret == QMessageBox::Cancel) return 1;
@@ -484,11 +486,11 @@ int  MainWindow::sauvegarder(int indexSf2, bool saveAs)
         if (sf2->getQstr(id, champ_filename) == "")
         {
             fileName = Config::getInstance()->getLastDirectory(Config::typeFichierSf2) + "/" + sf2->getQstr(id, champ_name) + ".sf2";
-            fileName = QFileDialog::getSaveFileName(this, trUtf8("Sauvegarder une soundfont"), fileName, tr("Fichier .sf2 (*.sf2)"));
+            fileName = QFileDialog::getSaveFileName(this, trUtf8("Sauvegarder une soundfont"), fileName, trUtf8("Fichier .sf2 (*.sf2)"));
         }
         else
-            fileName = QFileDialog::getSaveFileName(this, trUtf8("Sauvegarder une soundfont"), \
-                                                    sf2->getQstr(id, champ_filename), tr("Fichier .sf2 (*.sf2)"));
+            fileName = QFileDialog::getSaveFileName(this, trUtf8("Sauvegarder une soundfont"),
+                                                    sf2->getQstr(id, champ_filename), trUtf8("Fichier .sf2 (*.sf2)"));
         if (fileName.isNull()) return 1;
     }
     else fileName = sf2->getQstr(id, champ_filename);
@@ -595,7 +597,7 @@ void MainWindow::setKeyboardType(int val)
         this->keyboard->setKeyboardType(PianoKeybdCustom::KEYBOARD_5_OCTAVES);
         this->ui->action5_octaves->setChecked(true);
         if (ui->stackedWidget->currentWidget() == this->page_inst ||
-            ui->stackedWidget->currentWidget() == this->page_prst)
+                ui->stackedWidget->currentWidget() == this->page_prst)
             this->showKeyboard(true);
         break;
     case 2:
@@ -603,7 +605,7 @@ void MainWindow::setKeyboardType(int val)
         this->keyboard->setKeyboardType(PianoKeybdCustom::KEYBOARD_6_OCTAVES);
         this->ui->action6_octaves->setChecked(true);
         if (ui->stackedWidget->currentWidget() == this->page_inst ||
-            ui->stackedWidget->currentWidget() == this->page_prst)
+                ui->stackedWidget->currentWidget() == this->page_prst)
             this->showKeyboard(true);
         break;
     case 3:
@@ -611,7 +613,7 @@ void MainWindow::setKeyboardType(int val)
         this->keyboard->setKeyboardType(PianoKeybdCustom::KEYBOARD_128_NOTES);
         this->ui->action128_notes->setChecked(true);
         if (ui->stackedWidget->currentWidget() == this->page_inst ||
-            ui->stackedWidget->currentWidget() == this->page_prst)
+                ui->stackedWidget->currentWidget() == this->page_prst)
             this->showKeyboard(true);
         break;
     default:
@@ -831,7 +833,7 @@ void MainWindow::updateActions()
         // Supprimer, copier
         if (typeUnique && (((type == elementInstSmpl || type == elementPrstInst) && familleUnique) \
                            || type == elementSmpl || type == elementInst || type == elementPrst)
-                       && !this->page_smpl->isPlaying())
+                && !this->page_smpl->isPlaying())
         {
             ui->action_Supprimer->setEnabled(1);
             ui->actionCopier->setEnabled(1);
@@ -845,19 +847,19 @@ void MainWindow::updateActions()
         // Renommer
         if (nb == 1 && typeUnique && (type == elementSmpl || type == elementInst || type == elementPrst || type == elementSf2))
         {
-            ui->actionRenommer->setText(tr("&Renommer"));
+            ui->actionRenommer->setText(trUtf8("&Renommer"));
             ui->actionRenommer->setEnabled(1);
         }
         else
         {
             if (nb > 1 && typeUnique && type == elementSmpl)
             {
-                ui->actionRenommer->setText(tr("&Renommer en masse"));
+                ui->actionRenommer->setText(trUtf8("&Renommer en masse"));
                 ui->actionRenommer->setEnabled(true);
             }
             else
             {
-                ui->actionRenommer->setText(tr("&Renommer"));
+                ui->actionRenommer->setText(trUtf8("&Renommer"));
                 ui->actionRenommer->setEnabled(false);
             }
         }
@@ -1033,7 +1035,7 @@ void MainWindow::updateTable(int type, int sf2, int elt, int elt2)
 }
 void MainWindow::prepareNewAction()
 {
-    this->sf2->prepareNewActions();
+    sf2->prepareNewActions();
 }
 
 // Modifications
@@ -1057,11 +1059,11 @@ void MainWindow::renommer()
         else
         {
             QString msg;
-            if (type == elementSmpl) msg = QString::fromUtf8(tr("Nom du sample (max 20 caractères) :").toStdString().c_str());
-            else if (type == elementInst) msg = QString::fromUtf8(tr("Nom de l'instrument (max 20 caractères) :").toStdString().c_str());
-            else if (type == elementPrst) msg = QString::fromUtf8(tr("Nom du preset (max 20 caractères) :").toStdString().c_str());
-            else if (type == elementSf2) msg = QString::fromUtf8(tr("Nom du SF2 (max 255 caractères) :").toStdString().c_str());
-            QString text = QInputDialog::getText(this, tr("Question"), msg, QLineEdit::Normal, sf2->getQstr(ID, champ_name), &ok);
+            if (type == elementSmpl) msg = trUtf8("Nom du sample (max 20 caractères) :");
+            else if (type == elementInst) msg = trUtf8("Nom de l'instrument (max 20 caractères) :");
+            else if (type == elementPrst) msg = trUtf8("Nom du preset (max 20 caractères) :");
+            else if (type == elementSf2) msg = trUtf8("Nom du SF2 (max 255 caractères) :");
+            QString text = QInputDialog::getText(this, trUtf8("Question"), msg, QLineEdit::Normal, sf2->getQstr(ID, champ_name), &ok);
             if (ok && !text.isEmpty())
             {
                 sf2->prepareNewActions();
@@ -1109,7 +1111,7 @@ void MainWindow::renommerEnMasse(QString name, int modificationType)
                 newName = name + ' ' + str2 + 'L';
             else
                 newName = name + ' ' + str2;
-            }break;
+        }break;
         case 1:
             // Remplacement du nom, ajout incrément
             name = name.left(17);
@@ -1138,14 +1140,31 @@ void MainWindow::renommerEnMasse(QString name, int modificationType)
 }
 void MainWindow::dragAndDrop(EltID idDest, QList<EltID> idSources)
 {
-    // Ici prepareNewActions() a déjà été appelé
+    // prepareNewActions() et updateDo() faits à l'extérieur
     Duplicator duplicator(this->sf2, this->sf2, this);
     for (int i = 0; i < idSources.size(); i++)
         duplicator.copy(idSources.at(i), idDest);
-
-    // Mise à jour de l'affichage
-    this->updateDo();
-    this->updateActions();
+    updateActions();
+}
+void MainWindow::dragAndDrop(QString path, EltID idDest, int &replace)
+{
+    // prepareNewActions() et updateDo() faits à l'extérieur
+    QFileInfo fileInfo(path);
+    QString extension = fileInfo.suffix().toLower();
+    if (extension.compare("sf2") == 0)
+    {
+        // Ouverture d'un fichier sf2
+        this->ouvrir(path);
+    }
+    else if (extension.compare("sfz") == 0)
+    {
+        // Import sfz
+    }
+    else if (extension.compare("wav") == 0 && idDest.typeElement != elementUnknown && idDest.indexSf2 != -1)
+    {
+        // Chargement d'un son wav
+        importerSmpl(path, idDest, replace);
+    }
 }
 void MainWindow::importerSmpl()
 {
@@ -1160,186 +1179,194 @@ void MainWindow::importerSmpl()
         ext = myFunction();
 
     // Affichage dialogue
-    QStringList strList = QFileDialog::getOpenFileNames(this, tr("Importer un fichier audio"),
-        Config::getInstance()->getLastDirectory(Config::typeFichierSample), tr("Fichier .wav (*.wav)") + ext);
-    if (strList.count() == 0) return;
+    QStringList strList = QFileDialog::getOpenFileNames(this, trUtf8("Importer un fichier audio"),
+                                                        Config::getInstance()->getLastDirectory(Config::typeFichierSample),
+                                                        trUtf8("Fichier .wav (*.wav)") + ext);
+    if (strList.count() == 0)
+        return;
+
     this->sf2->prepareNewActions();
-    EltID id(elementSmpl, this->ui->arborescence->getID(0).indexSf2, 0, 0, 0);
-    QString qStr, nom;
+    EltID id = this->ui->arborescence->getID(0);
     int replace = 0;
-    int nbElt = strList.count();
-    for (int i = 0; i < nbElt; i++)
-    {
-        qStr = strList.takeAt(0);
-        if (i == 0)
-            Config::getInstance()->addFile(Config::typeFichierSample, qStr);
-        QFileInfo qFileInfo = qStr;
-        // Récupération des informations d'un sample
-        Sound * son = new Sound(qStr);
-        int nChannels = son->get(champ_wChannels);
-        // Ajout d'un sample
-        Valeur val;
-        nom = qFileInfo.completeBaseName();
-        // Remplacement ?
-        int indexL = -1;
-        int indexR = -1;
-        QString qStr3 = "";
-        if (replace != -1)
-        {
-            for (int j = 0; j < this->sf2->count(id); j++)
-            {
-                id.indexElt = j;
-                if (!this->sf2->get(id, champ_hidden).bValue)
-                {
-                    if (nChannels == 2)
-                    {
-                        if (this->sf2->getQstr(id, champ_name).compare(nom.left(19).append("L")) == 0)
-                        {
-                            indexL = j;
-                            qStr3 = tr("Le sample «&#160;") + nom.left(19).toUtf8() + \
-                                                tr("L&#160;» existe déjà.<br />Que faire ?");
-                        }
-                        else if (this->sf2->getQstr(id, champ_name).compare(nom.left(19).append("R")) == 0)
-                        {
-                            indexR = j;
-                            qStr3 = tr("Le sample «&#160;") + nom.left(19).toUtf8() + \
-                                                tr("R&#160;» existe déjà.<br />Que faire ?");
-                        }
-                    }
-                    else
-                    {
-                        if (this->sf2->getQstr(id, champ_name).compare(nom.left(20)) == 0)
-                        {
-                            indexL = j;
-                            qStr3 = tr("Le sample «&#160;") + nom.left(20).toUtf8() + \
-                                                tr("&#160;» existe déjà.<br />Que faire ?");
-                        }
-                    }
-                }
-            }
-            if (replace != 2 && replace != 4 && (indexL != -1 || indexR != -1))
-            {
-                // Remplacement ?
-                QMessageBox msgBox(this);
-                msgBox.setIcon(QMessageBox::Warning);
-                msgBox.setText(QString::fromUtf8(qStr3.toStdString().c_str()));
-                msgBox.setInformativeText("");
-                msgBox.setStandardButtons(QMessageBox::YesAll | QMessageBox::Yes | QMessageBox::SaveAll | QMessageBox::Save | \
-                                          QMessageBox::NoAll | QMessageBox::No);
-                msgBox.button(QMessageBox::Yes)->setText(tr("&Remplacer"));
-                msgBox.button(QMessageBox::YesAll)->setText(tr("R&emplacer tout"));
-                msgBox.button(QMessageBox::Save)->setText(tr("&Dupliquer"));
-                msgBox.button(QMessageBox::SaveAll)->setText(tr("D&upliquer tout"));
-                msgBox.button(QMessageBox::No)->setText(tr("&Ignorer"));
-                msgBox.button(QMessageBox::NoAll)->setText(tr("I&gnorer tout"));
-                msgBox.setDefaultButton(QMessageBox::YesAll);
-                switch (msgBox.exec())
-                {
-                case QMessageBox::NoAll: replace = 4; break;
-                case QMessageBox::No: replace = 3; break;
-                case QMessageBox::YesAll: replace = 2; break;
-                case QMessageBox::Yes: replace = 1; break;
-                case QMessageBox::Save: replace = 0; break;
-                case QMessageBox::SaveAll: replace = -1; break;
-                }
-            }
-        }
-        for (int j = 0; j < nChannels; j++)
-        {
-            if (replace < 3 || (nChannels == 2 && j == 0 && indexL == -1) ||
-                    (nChannels == 2 && j == 1 && indexR == -1) ||
-                    (nChannels == 1 && indexL == -1)) // Si pas ignorer
-            {
-                if (((nChannels == 2 && j == 0 && indexL != -1) ||
-                    (nChannels == 2 && j == 1 && indexR != -1) ||
-                     (nChannels == 1 && indexL != -1)) && (replace == 2 || replace == 1))
-                {
-                    if ((nChannels == 2 && j == 0 && indexL != -1) || (nChannels == 1 && indexL != -1))
-                        id.indexElt = indexL;
-                    else
-                        id.indexElt = indexR;
-
-                    // Mise à jour des données
-                    Valeur valTmp;
-                    valTmp.wValue = j;
-                    son->set(champ_wChannel, valTmp);
-                    QByteArray data = son->getData(24);
-                    this->sf2->set(id, champ_sampleDataFull24, data);
-                }
-                else
-                {
-                    // Ajout d'un sample
-                    id.indexElt = this->sf2->add(id);
-                    if (nChannels == 2)
-                    {
-                        if (j == 0)
-                        {
-                            // Gauche
-                            this->sf2->set(id, champ_name, nom.left(19).append("L"));
-                            val.wValue = id.indexElt + 1;
-                            this->sf2->set(id, champ_wSampleLink, val);
-                            val.sfLinkValue = leftSample;
-                            this->sf2->set(id, champ_sfSampleType, val);
-                        }
-                        else
-                        {
-                            // Droite
-                            this->sf2->set(id, champ_name, nom.left(19).append("R"));
-                            val.wValue = id.indexElt - 1;
-                            this->sf2->set(id, champ_wSampleLink, val);
-                            val.sfLinkValue = rightSample;
-                            this->sf2->set(id, champ_sfSampleType, val);
-                        }
-                    }
-                    else
-                    {
-                        this->sf2->set(id, champ_name, QString(nom.left(20)));
-                        val.wValue = 0;
-                        this->sf2->set(id, champ_wSampleLink, val);
-                        val.sfLinkValue = monoSample;
-                        this->sf2->set(id, champ_sfSampleType, val);
-                    }
-                    this->sf2->set(id, champ_filename, qStr);
-                    val.dwValue = son->get(champ_dwStart16);
-                    this->sf2->set(id, champ_dwStart16, val);
-                    val.dwValue = son->get(champ_dwStart24);
-                    this->sf2->set(id, champ_dwStart24, val);
-                }
-                // Configuration du sample
-                val.wValue = j;
-                this->sf2->set(id, champ_wChannel, val);
-                val.dwValue = son->get(champ_dwLength);
-                this->sf2->set(id, champ_dwLength, val);
-                val.dwValue = son->get(champ_dwSampleRate);
-                this->sf2->set(id, champ_dwSampleRate, val);
-                val.dwValue = son->get(champ_dwStartLoop);
-                this->sf2->set(id, champ_dwStartLoop, val);
-                val.dwValue = son->get(champ_dwEndLoop);
-                this->sf2->set(id, champ_dwEndLoop, val);
-                val.bValue = (BYTE)son->get(champ_byOriginalPitch);
-                this->sf2->set(id, champ_byOriginalPitch, val);
-                val.cValue = (char)son->get(champ_chPitchCorrection);
-                this->sf2->set(id, champ_chPitchCorrection, val);
-                // Retrait automatique du blanc au départ ?
-                if (this->configuration->getRemoveBlank())
-                    this->page_smpl->enleveBlanc(id);
-                // Ajustement automatique à la boucle ?
-                if (this->configuration->getWavAutoLoop())
-                    this->page_smpl->enleveFin(id);
-            }
-
-            // Chargement dans la ram
-            if (this->configuration->getRam())
-            {
-                val.wValue = 1;
-                this->sf2->set(id, champ_ram, val);
-            }
-        }
-        delete son;
-    }
+    while (!strList.isEmpty())
+        this->dragAndDrop(strList.takeAt(0), id, replace);
     updateDo();
     updateActions();
     this->ui->arborescence->searchTree(this->ui->editSearch->text());
+}
+void MainWindow::importerSmpl(QString path, EltID id, int &replace)
+{
+    id.typeElement = elementSmpl;
+    QString qStr, nom;
+
+    qStr = path;
+    Config::getInstance()->addFile(Config::typeFichierSample, qStr);
+    QFileInfo qFileInfo = qStr;
+
+    // Récupération des informations d'un sample
+    Sound * son = new Sound(qStr);
+    int nChannels = son->get(champ_wChannels);
+
+    // Ajout d'un sample
+    Valeur val;
+    nom = qFileInfo.completeBaseName();
+
+    // Remplacement ?
+    int indexL = -1;
+    int indexR = -1;
+    QString qStr3 = "";
+    if (replace != -1)
+    {
+        for (int j = 0; j < this->sf2->count(id); j++)
+        {
+            id.indexElt = j;
+            if (!this->sf2->get(id, champ_hidden).bValue)
+            {
+                if (nChannels == 2)
+                {
+                    if (this->sf2->getQstr(id, champ_name).compare(nom.left(19).append("L")) == 0)
+                    {
+                        indexL = j;
+                        qStr3 = trUtf8("Le sample « ") + nom.left(19).toUtf8() + \
+                                trUtf8("L » existe déjà.<br />Que faire ?");
+                    }
+                    else if (this->sf2->getQstr(id, champ_name).compare(nom.left(19).append("R")) == 0)
+                    {
+                        indexR = j;
+                        qStr3 = trUtf8("Le sample « ") + nom.left(19).toUtf8() + \
+                                trUtf8("R » existe déjà.<br />Que faire ?");
+                    }
+                }
+                else
+                {
+                    if (this->sf2->getQstr(id, champ_name).compare(nom.left(20)) == 0)
+                    {
+                        indexL = j;
+                        qStr3 = trUtf8("Le sample « ") + nom.left(20).toUtf8() + \
+                                trUtf8(" » existe déjà.<br />Que faire ?");
+                    }
+                }
+            }
+        }
+        if (replace != 2 && replace != 4 && (indexL != -1 || indexR != -1))
+        {
+            // Remplacement ?
+            QMessageBox msgBox(this);
+            msgBox.setIcon(QMessageBox::Warning);
+            msgBox.setText(qStr3);
+            msgBox.setInformativeText("");
+            msgBox.setStandardButtons(QMessageBox::YesAll | QMessageBox::Yes | QMessageBox::SaveAll | QMessageBox::Save | \
+                                      QMessageBox::NoAll | QMessageBox::No);
+            msgBox.button(QMessageBox::Yes)->setText(trUtf8("&Remplacer"));
+            msgBox.button(QMessageBox::YesAll)->setText(trUtf8("R&emplacer tout"));
+            msgBox.button(QMessageBox::Save)->setText(trUtf8("&Dupliquer"));
+            msgBox.button(QMessageBox::SaveAll)->setText(trUtf8("D&upliquer tout"));
+            msgBox.button(QMessageBox::No)->setText(trUtf8("&Ignorer"));
+            msgBox.button(QMessageBox::NoAll)->setText(trUtf8("I&gnorer tout"));
+            msgBox.setDefaultButton(QMessageBox::YesAll);
+            switch (msgBox.exec())
+            {
+            case QMessageBox::NoAll: replace = 4; break;
+            case QMessageBox::No: replace = 3; break;
+            case QMessageBox::YesAll: replace = 2; break;
+            case QMessageBox::Yes: replace = 1; break;
+            case QMessageBox::Save: replace = 0; break;
+            case QMessageBox::SaveAll: replace = -1; break;
+            }
+        }
+    }
+    for (int j = 0; j < nChannels; j++)
+    {
+        if (replace < 3 || (nChannels == 2 && j == 0 && indexL == -1) ||
+                (nChannels == 2 && j == 1 && indexR == -1) ||
+                (nChannels == 1 && indexL == -1)) // Si pas ignorer
+        {
+            if (((nChannels == 2 && j == 0 && indexL != -1) ||
+                 (nChannels == 2 && j == 1 && indexR != -1) ||
+                 (nChannels == 1 && indexL != -1)) && (replace == 2 || replace == 1))
+            {
+                if ((nChannels == 2 && j == 0 && indexL != -1) || (nChannels == 1 && indexL != -1))
+                    id.indexElt = indexL;
+                else
+                    id.indexElt = indexR;
+
+                // Mise à jour des données
+                Valeur valTmp;
+                valTmp.wValue = j;
+                son->set(champ_wChannel, valTmp);
+                QByteArray data = son->getData(24);
+                this->sf2->set(id, champ_sampleDataFull24, data);
+            }
+            else
+            {
+                // Ajout d'un sample
+                id.indexElt = this->sf2->add(id);
+                if (nChannels == 2)
+                {
+                    if (j == 0)
+                    {
+                        // Gauche
+                        this->sf2->set(id, champ_name, nom.left(19).append("L"));
+                        val.wValue = id.indexElt + 1;
+                        this->sf2->set(id, champ_wSampleLink, val);
+                        val.sfLinkValue = leftSample;
+                        this->sf2->set(id, champ_sfSampleType, val);
+                    }
+                    else
+                    {
+                        // Droite
+                        this->sf2->set(id, champ_name, nom.left(19).append("R"));
+                        val.wValue = id.indexElt - 1;
+                        this->sf2->set(id, champ_wSampleLink, val);
+                        val.sfLinkValue = rightSample;
+                        this->sf2->set(id, champ_sfSampleType, val);
+                    }
+                }
+                else
+                {
+                    this->sf2->set(id, champ_name, QString(nom.left(20)));
+                    val.wValue = 0;
+                    this->sf2->set(id, champ_wSampleLink, val);
+                    val.sfLinkValue = monoSample;
+                    this->sf2->set(id, champ_sfSampleType, val);
+                }
+                this->sf2->set(id, champ_filename, qStr);
+                val.dwValue = son->get(champ_dwStart16);
+                this->sf2->set(id, champ_dwStart16, val);
+                val.dwValue = son->get(champ_dwStart24);
+                this->sf2->set(id, champ_dwStart24, val);
+            }
+            // Configuration du sample
+            val.wValue = j;
+            this->sf2->set(id, champ_wChannel, val);
+            val.dwValue = son->get(champ_dwLength);
+            this->sf2->set(id, champ_dwLength, val);
+            val.dwValue = son->get(champ_dwSampleRate);
+            this->sf2->set(id, champ_dwSampleRate, val);
+            val.dwValue = son->get(champ_dwStartLoop);
+            this->sf2->set(id, champ_dwStartLoop, val);
+            val.dwValue = son->get(champ_dwEndLoop);
+            this->sf2->set(id, champ_dwEndLoop, val);
+            val.bValue = (BYTE)son->get(champ_byOriginalPitch);
+            this->sf2->set(id, champ_byOriginalPitch, val);
+            val.cValue = (char)son->get(champ_chPitchCorrection);
+            this->sf2->set(id, champ_chPitchCorrection, val);
+            // Retrait automatique du blanc au départ ?
+            if (this->configuration->getRemoveBlank())
+                this->page_smpl->enleveBlanc(id);
+            // Ajustement automatique à la boucle ?
+            if (this->configuration->getWavAutoLoop())
+                this->page_smpl->enleveFin(id);
+        }
+
+        // Chargement dans la ram
+        if (this->configuration->getRam())
+        {
+            val.wValue = 1;
+            this->sf2->set(id, champ_ram, val);
+        }
+    }
+    delete son;
 }
 void MainWindow::exporterSmpl()
 {
@@ -1495,12 +1522,12 @@ void MainWindow::exporter(QList<EltID> listID, QString dir, int format)
 
         // Sauvegarde
         newSf2.sauvegarder(idDest.indexSf2, name);
-        }break;
+    }break;
     case 1:{
         // Export sfz
         ConversionSfz converter(sf2);
         converter.convert(dir, listID);
-        }break;
+    }break;
     default:
         break;
     }
@@ -1511,7 +1538,7 @@ void MainWindow::nouvelInstrument()
     if (nb == 0) return;
     EltID id = ui->arborescence->getID(0);
     bool ok;
-    QString name = QInputDialog::getText(this, QString::fromUtf8(" "), tr("Nom du nouvel instrument :"), QLineEdit::Normal, "", &ok);
+    QString name = QInputDialog::getText(this, QString::fromUtf8(" "), trUtf8("Nom du nouvel instrument :"), QLineEdit::Normal, "", &ok);
     if (ok && !name.isEmpty())
     {
         sf2->prepareNewActions();
@@ -1537,7 +1564,7 @@ void MainWindow::nouveauPreset()
     sf2->firstAvailablePresetBank(id, nBank, nPreset);
     if (nPreset == -1)
     {
-        QMessageBox::warning(this, tr("Attention"), QString::fromUtf8(tr("Aucun preset n'est disponible.").toStdString().c_str()));
+        QMessageBox::warning(this, trUtf8("Attention"), trUtf8("Aucun preset n'est disponible."));
         return;
     }
     bool ok;
@@ -1547,7 +1574,7 @@ void MainWindow::nouveauPreset()
         id.typeElement = elementInst;
         text = this->sf2->getQstr(id, champ_name);
     }
-    QString name = QInputDialog::getText(this, QString::fromUtf8(" "), tr("Nom du nouveau preset :"), QLineEdit::Normal, text, &ok);
+    QString name = QInputDialog::getText(this, " ", trUtf8("Nom du nouveau preset :"), QLineEdit::Normal, text, &ok);
     if (ok && !name.isEmpty())
     {
         Valeur val;
@@ -1700,7 +1727,6 @@ void MainWindow::remplacer(EltID idSrc)
     updateActions();
 }
 
-
 // Envoi de signaux
 void MainWindow::copier()
 {
@@ -1729,9 +1755,9 @@ void MainWindow::supprimer()
     if( focused != 0 )
     {
         QApplication::postEvent(focused,
-            new QKeyEvent(QEvent::KeyPress, Qt::Key_Delete, 0));
+                                new QKeyEvent(QEvent::KeyPress, Qt::Key_Delete, 0));
         QApplication::postEvent(focused,
-            new QKeyEvent(QEvent::KeyRelease, Qt::Key_Delete, 0));
+                                new QKeyEvent(QEvent::KeyRelease, Qt::Key_Delete, 0));
     }
 }
 
@@ -1901,8 +1927,8 @@ void MainWindow::attenuationMini()
     // Atténuation minimale souhaitée
     bool ok;
     Config * conf = Config::getInstance();
-    double rep = QInputDialog::getDouble(this, tr("Question"),
-                                         QString::fromUtf8(tr("Atténuation minimale (dB) :").toStdString().c_str()),
+    double rep = QInputDialog::getDouble(this, trUtf8("Question"),
+                                         trUtf8("Atténuation minimale (dB) :"),
                                          conf->getTools_2_attenuation_dB(), 0, 200, 2,
                                          &ok);
     if (!ok) return;
