@@ -120,7 +120,7 @@ bool Pile_sf2::isSet(EltID id, Champ champ)
     if (!this->isValide(id, champ == champ_hidden))
     {
 #ifdef SHOW_ID_ERROR
-        QMessageBox::warning(parent, QObject::tr("Attention"), QObject::tr("Dans fonction Pile_sf2::isSet, ID non valide."));
+        QMessageBox::warning(parent, "warning", "In Pile_sf2::isSet, invalid ID");
 #endif
         return value;
     }
@@ -215,7 +215,7 @@ Valeur Pile_sf2::get(EltID id, Champ champ)
     if (!this->isValide(id, champ == champ_hidden))
     {
 #ifdef SHOW_ID_ERROR
-        QMessageBox::warning(parent, QObject::tr("Attention"), QObject::tr("Dans fonction Pile_sf2::get, ID non valide."));
+        QMessageBox::warning(parent, "warning", "In Pile_sf2::get, invalid ID");
 #endif
         return value;
     }
@@ -399,7 +399,7 @@ Sound Pile_sf2::getSon(EltID id)
     if (!this->isValide(id, 0))
     {
 #ifdef SHOW_ID_ERROR
-        QMessageBox::warning(parent, QObject::tr("Attention"), QObject::tr("Dans fonction Pile_sf2::getSon, ID non valide."));
+        QMessageBox::warning(parent, "warning", "In Pile_sf2::getSon, invalid ID.");
 #endif
         return son;
     }
@@ -412,7 +412,7 @@ QString Pile_sf2::getQstr(EltID id, Champ champ)
     if (!this->isValide(id, 0))
     {
 #ifdef SHOW_ID_ERROR
-        QMessageBox::warning(parent, QObject::tr("Attention"), QObject::tr("Dans fonction Pile_sf2::getQstr, ID non valide."));
+        QMessageBox::warning(parent, "warning", "In Pile_sf2::getQstr, invalid ID.");
 #endif
         return "";
     }
@@ -483,7 +483,7 @@ QByteArray Pile_sf2::getData(EltID id, Champ champ)
     if (!this->isValide(id, 0))
     {
 #ifdef SHOW_ID_ERROR
-        QMessageBox::warning(parent, QObject::tr("Attention"), QObject::tr("Dans fonction Pile_sf2::getData, ID non valide."));
+        QMessageBox::warning(parent, "warning", "In Pile_sf2::getData, invalid ID.");
 #endif
         return NULL;
     }
@@ -537,7 +537,7 @@ int Pile_sf2::count(EltID id, bool withHidden)
     if (!this->isValide(id, 1))
     {
 #ifdef SHOW_ID_ERROR
-        QMessageBox::warning(parent, QObject::tr("Attention"), QObject::tr("Dans fonction Pile_sf2::count, ID non valide."));
+        QMessageBox::warning(parent, "warning", "In Pile_sf2::count, invalid ID.");
 #endif
         return -1;
     }
@@ -840,7 +840,7 @@ void Pile_sf2::getListeBags(EltID id, QList<Champ> &listeChamps, QList<genAmount
     if (!this->isValide(id))
     {
 #ifdef SHOW_ID_ERROR
-        QMessageBox::warning(parent, QObject::tr("Attention"), QObject::tr("Dans fonction Pile_sf2::getListeBags, ID non valide."));
+        QMessageBox::warning(parent, "warning", "In Pile_sf2::getListeBags, invalid ID.");
 #endif
         return;
     }
@@ -885,7 +885,7 @@ int Pile_sf2::add(EltID id, bool storeAction)
     if (!this->isValide(id))
     {
 #ifdef SHOW_ID_ERROR
-        QMessageBox::warning(parent, QObject::tr("Attention"), QObject::tr("Dans fonction Pile_sf2::add, ID non valide."));
+        QMessageBox::warning(parent, "warning", "In Pile_sf2::add, invalid ID.");
 #endif
         return -1;
     }
@@ -933,7 +933,7 @@ int Pile_sf2::add(EltID id, bool storeAction)
             sf2->eltTree->setIcon(0, QIcon(":/icones/document"));
             // Conteneurs pour samples, instruments et presets
             sf2->eltTreeSmpl = new QTreeWidgetItem(sf2->eltTree);
-            sf2->eltTreeSmpl->setText(0, QObject::tr("Samples"));
+            sf2->eltTreeSmpl->setText(0, QObject::trUtf8("Samples"));
             sf2->eltTreeSmpl->setText(1, str);
             sf2->eltTreeSmpl->setText(2, "S");
             sf2->eltTreeSmpl->setText(5, "a");
@@ -941,14 +941,14 @@ int Pile_sf2::add(EltID id, bool storeAction)
             font.setPointSize(10);
             sf2->eltTreeSmpl->setFont(0, font);
             sf2->eltTreeInst = new QTreeWidgetItem(sf2->eltTree);
-            sf2->eltTreeInst->setText(0, QObject::tr("Instruments"));
+            sf2->eltTreeInst->setText(0, QObject::trUtf8("Instruments"));
             sf2->eltTreeInst->setText(1, str);
             sf2->eltTreeInst->setText(2, "I");
             sf2->eltTreeInst->setText(5, "b");
             sf2->eltTreeInst->setSizeHint(0, QSize(0,23));
             sf2->eltTreeInst->setFont(0, font);
             sf2->eltTreePrst = new QTreeWidgetItem(sf2->eltTree);
-            sf2->eltTreePrst->setText(0, QObject::tr("Presets"));
+            sf2->eltTreePrst->setText(0, QObject::trUtf8("Presets"));
             sf2->eltTreePrst->setText(1, str);
             sf2->eltTreePrst->setText(2, "P");
             sf2->eltTreePrst->setText(5, "c");
@@ -1201,7 +1201,7 @@ int Pile_sf2::remove(EltID id, bool permanently, bool storeAction, int *message)
     if (!this->isValide(id, permanently)) // Les ID masqués sont acceptés pour une suppression définitive
     {
 #ifdef SHOW_ID_ERROR
-        QMessageBox::warning(parent, QObject::tr("Attention"), QObject::tr("Dans fonction Pile_sf2::remove, ID non valide."));
+        QMessageBox::warning(parent, "warning", "In Pile_sf2::remove, invalid ID.");
 #endif
         return 1;
     }
@@ -1301,7 +1301,7 @@ int Pile_sf2::remove(EltID id, bool permanently, bool storeAction, int *message)
         {
             if (*message %2 != 0 || !message)
             {
-                QMessageBox::warning(parent, QObject::tr("Attention"),
+                QMessageBox::warning(parent, QObject::trUtf8("Attention"),
                                      QObject::trUtf8("Impossible de supprimer un sample s'il est utilisé par un instrument."));
                 *message *= 2;
             }
@@ -1390,7 +1390,7 @@ int Pile_sf2::remove(EltID id, bool permanently, bool storeAction, int *message)
         {
             if (*message %3 != 0 || !message)
             {
-                QMessageBox::warning(parent, QObject::tr("Attention"),
+                QMessageBox::warning(parent, QObject::trUtf8("Attention"),
                                      QObject::trUtf8("Impossible de supprimer un instrument s'il est utilisé par un preset."));
                 (*message) = *message * 3;
             }
@@ -1656,14 +1656,14 @@ int Pile_sf2::set(EltID id, Champ champ, Valeur value, bool storeAction)
     if (champ == champ_hidden)
     {
 #ifdef SHOW_ID_ERROR
-        QMessageBox::warning(parent, QObject::tr("Attention"), QObject::tr("Set hidden ne passe pas par la fonction set !"));
+        QMessageBox::warning(parent, "warning", "Set hidden cannot be made in function set!");
 #endif
         return 1;
     }
     if (!this->isValide(id) && champ != champ_ram)
     {
 #ifdef SHOW_ID_ERROR
-        QMessageBox::warning(parent, QObject::tr("Attention"), QObject::tr("Dans fonction Pile_sf2::set (valeur), ID non valide."));
+        QMessageBox::warning(parent, "warning", "In Pile_sf2::set(value), invalid ID.");
 #endif
         return 1;
     }
@@ -1909,7 +1909,7 @@ int Pile_sf2::set(EltID id, Champ champ, QString qStr, bool storeAction)
         MESSAGE(id);
         MESSAGE(qStr);
 #ifdef SHOW_ID_ERROR
-        QMessageBox::warning(parent, QObject::tr("Attention"), QObject::tr("Dans fonction Pile_sf2::set(QString), ID non valide."));
+        QMessageBox::warning(parent, "warning", "In Pile_sf2::set(QString), invalid ID.");
 #endif
         return 1;
     }
@@ -2116,7 +2116,7 @@ int Pile_sf2::set(EltID id, Champ champ, QByteArray data, bool storeAction)
     if (!this->isValide(id))
     {
 #ifdef SHOW_ID_ERROR
-        QMessageBox::warning(parent, QObject::tr("Attention"), QObject::tr("Dans fonction Pile_sf2::set (data), ID non valide."));
+        QMessageBox::warning(parent, "warning", "In Pile_sf2::set(data), invalid ID.");
 #endif
         return 1;
     }
@@ -2176,7 +2176,7 @@ int Pile_sf2::reset(EltID id, Champ champ, bool storeAction)
     if (!this->isValide(id))
     {
 #ifdef SHOW_ID_ERROR
-        QMessageBox::warning(parent, QObject::tr("Attention"), QObject::tr("Dans fonction Pile_sf2::reset, ID non valide."));
+        QMessageBox::warning(parent, "warning", "In Pile_sf2::reset, invalid ID.");
 #endif
         return 0;
     }
@@ -2492,7 +2492,7 @@ int Pile_sf2::display(EltID id)
     if (!this->isValide(id, 1))
     {
 #ifdef SHOW_ID_ERROR
-        QMessageBox::warning(parent, QObject::tr("Attention"), QObject::tr("Dans fonction Pile_sf2::display, ID non valide."));
+        QMessageBox::warning(parent, "warning", "In Pile_sf2::display, invalid ID");
 #endif
         return 1;
     }

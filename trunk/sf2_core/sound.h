@@ -41,6 +41,7 @@ public:
     ~Sound();
 
     // méthodes publiques
+    static void setParent(QWidget * parent) { _parent = parent; }
     QByteArray getData(WORD wBps);
     DWORD get(Champ champ);
     QString getFileName();
@@ -127,6 +128,8 @@ private:
     static double sinc(double x);
     static void KBDWindow(double* window, int size, double alpha);
     static double BesselI0(double x);
+
+    static QWidget * _parent;
 };
 
 #endif // SOUND_H

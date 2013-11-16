@@ -25,6 +25,8 @@
 #include "sound.h"
 #include <QMessageBox>
 
+QWidget * Sound::_parent = NULL;
+
 // Constructeur / destructeur
 Sound::Sound(QString filename)
 {
@@ -97,7 +99,7 @@ QByteArray Sound::getData(WORD wBps)
                     }
                     }break;
                 default:
-                    QMessageBox::warning(NULL, QObject::tr("Attention"), QObject::tr("Fichier non pris en charge."));
+                    QMessageBox::warning(_parent, QObject::trUtf8("Attention"), QObject::trUtf8("Fichier non pris en charge."));
                 }
                 // Fermeture du fichier
                 fi->close();
@@ -149,7 +151,7 @@ QByteArray Sound::getData(WORD wBps)
                     }
                     }break;
                 default:
-                    QMessageBox::warning(NULL, QObject::tr("Attention"), QObject::tr("Fichier non pris en charge."));
+                    QMessageBox::warning(_parent, QObject::trUtf8("Attention"), QObject::trUtf8("Fichier non pris en charge."));
                 }
                 // Fermeture du fichier
                 fi->close();
@@ -222,7 +224,7 @@ QByteArray Sound::getData(WORD wBps)
                     }
                     }break;
                 default:
-                    QMessageBox::warning(NULL, QObject::tr("Attention"), QObject::tr("Fichier non pris en charge."));
+                    QMessageBox::warning(_parent, QObject::trUtf8("Attention"), QObject::trUtf8("Fichier non pris en charge."));
                 }
                 // Fermeture du fichier
                 fi->close();
@@ -297,7 +299,7 @@ QByteArray Sound::getData(WORD wBps)
                     }
                     }break;
                 default:
-                    QMessageBox::warning(NULL, QObject::tr("Attention"), QObject::tr("Fichier non pris en charge."));
+                    QMessageBox::warning(_parent, QObject::trUtf8("Attention"), QObject::trUtf8("Fichier non pris en charge."));
                 }
                 // Fermeture du fichier
                 fi->close();
@@ -306,7 +308,7 @@ QByteArray Sound::getData(WORD wBps)
         }
         break;
     default:
-        QMessageBox::warning(NULL, QObject::tr("Attention"), QObject::tr("Erreur dans Sound::getData."));
+        QMessageBox::warning(_parent, QObject::trUtf8("Attention"), QObject::trUtf8("Erreur dans Sound::getData."));
     }
     return baRet;
 }
@@ -368,8 +370,7 @@ void Sound::setData(QByteArray data, WORD wBps)
         this->smpl = data;
     }
     else
-        QMessageBox::information(NULL, QObject::tr("Attention"),
-                                 QString::fromUtf8(QObject::tr("Dans setData : opération non autorisée.").toStdString().c_str()));
+        QMessageBox::warning(_parent, "warning", "In Sound::setData, forbidden operation");
 }
 void Sound::set(Champ champ, Valeur value)
 {
@@ -428,6 +429,7 @@ void Sound::set(Champ champ, Valeur value)
 void Sound::setFileName(QString qStr)
 {
     this->fileName = qStr;
+
     // Récupération des infos sur le son
     this->getInfoSound();
 }
@@ -620,8 +622,8 @@ void Sound::getInfoSoundWav()
     QFile fi(fileName);
     if (!fi.exists())
     {
-        QMessageBox::warning(NULL, QObject::tr("Attention"),
-                             QString::fromUtf8(QObject::tr("Impossible d'ouvrir le fichier").toStdString().c_str()));
+        QMessageBox::warning(_parent, QObject::trUtf8("Attention"),
+                             QObject::trUtf8("Impossible d'ouvrir le fichier"));
         return;
     }
     fi.open(QFile::ReadOnly | QFile::Unbuffered);
@@ -634,20 +636,20 @@ void Sound::getInfoSoundWav(QByteArray baData)
     int taille, taille2, pos;
     if (strcmp("RIFF", baData.left(4)))
     {
-        QMessageBox::warning(NULL, QObject::tr("Attention"), QObject::tr("Le fichier est corrompu."));
+        QMessageBox::warning(_parent, QObject::trUtf8("Attention"), QObject::trUtf8("Le fichier est corrompu."));
         return;
     }
     // Taille totale du fichier - 8 octets
     taille = readDWORD(baData, 4);
     if (taille == 0)
     {
-        QMessageBox::warning(NULL, QObject::tr("Attention"), QObject::tr("Le fichier est corrompu."));
+        QMessageBox::warning(_parent, QObject::trUtf8("Attention"), QObject::trUtf8("Le fichier est corrompu."));
         return;
     }
     taille = taille + 8;
     if (strcmp("WAVE", baData.mid(8, 4)))
     {
-        QMessageBox::warning(NULL, QObject::tr("Attention"), QObject::tr("Le fichier est corrompu."));
+        QMessageBox::warning(_parent, QObject::trUtf8("Attention"), QObject::trUtf8("Le fichier est corrompu."));
         return;
     }
     pos = 12;
@@ -662,7 +664,7 @@ void Sound::getInfoSoundWav(QByteArray baData)
             pos += 4;
             if (taille2 < 16 || taille2 > 40)
             {
-                QMessageBox::warning(NULL, QObject::tr("Attention"), QObject::tr("Le fichier est corrompu."));
+                QMessageBox::warning(_parent, QObject::trUtf8("Attention"), QObject::trUtf8("Le fichier est corrompu."));
                 return;
             }
             info.wFormat = readWORD(baData, pos);
@@ -670,8 +672,8 @@ void Sound::getInfoSoundWav(QByteArray baData)
             info.dwSampleRate = readDWORD(baData, pos + 4);
             info.wBpsFile = readWORD(baData, pos + 14);
             if (info.wBpsFile < 16)
-                QMessageBox::warning(NULL, QObject::tr("Attention"),
-                                     QString::fromUtf8(QObject::tr("Résolution insuffisante").toStdString().c_str()));
+                QMessageBox::warning(_parent, QObject::trUtf8("Attention"),
+                                     QObject::trUtf8("Résolution insuffisante"));
             pos += taille2;
         }
         else if (!strcmp("smpl", baData.mid(pos, 4)))
@@ -1239,8 +1241,7 @@ QByteArray Sound::bandFilter(QByteArray baData, WORD wBps, double dwSmplRate, do
     if (!dwSmplRate || (fHaut <= 0 && fBas <= 0) || 2 * fHaut > dwSmplRate || 2 * fBas > dwSmplRate)
     {
         // Controle des fréquences de coupures (il faut que Fc<Fe/2 )
-        QMessageBox::information(NULL, QObject::tr("Attention"),
-                                 QString::fromUtf8(QObject::tr("Mauvais paramètres dans bandFilter").toStdString().c_str()));
+        QMessageBox::warning(_parent, "warning", "Sound::bandFilter, bad values");
     }
     else
     {

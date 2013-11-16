@@ -148,7 +148,7 @@ void Duplicator::linkInst(EltID idSource, EltID idDest)
     for (int i = 0; i < _source->count(idLinked); i++)
     {
         idLinked.indexElt2 = i;
-        if (_source->get(idLinked, champ_hidden).bValue)
+        if (!_source->get(idLinked, champ_hidden).bValue)
         {
             if (_source->isSet(idLinked, champ_keyRange))
             {
@@ -214,8 +214,8 @@ void Duplicator::copySmpl(EltID idSource, EltID idDest)
 
         // Remplacement ?
         if (_copieSmpl != REMPLACER_TOUT && _copieSmpl != IGNORER_TOUT && (index != -1))
-            _copieSmpl = openDialog(QObject::trUtf8("Le sample «&#160;") + nom.left(20).toUtf8() +
-                                    QObject::trUtf8("&#160;» existe déjà.<br />Que faire ?"));
+            _copieSmpl = openDialog(QObject::trUtf8("Le sample « ") + nom.left(20).toUtf8() +
+                                    QObject::trUtf8(" » existe déjà.<br />Que faire ?"));
     }
     if (index != -1 && _copieSmpl != DUPLIQUER_TOUT && _copieSmpl != DUPLIQUER)
     {
@@ -319,8 +319,8 @@ void Duplicator::copyInst(EltID idSource, EltID idDest)
 
         // Remplacement ?
         if (_copieInst != REMPLACER_TOUT && _copieInst != IGNORER_TOUT && (index != -1))
-            _copieInst = openDialog(QObject::trUtf8("L'instrument «&#160;") + nom.left(20).toUtf8() +
-                                    QObject::trUtf8("&#160;» existe déjà.<br />Souhaitez-vous le remplacer ?"));
+            _copieInst = openDialog(QObject::trUtf8("L'instrument « ") + nom.left(20).toUtf8() +
+                                    QObject::trUtf8(" » existe déjà.<br />Souhaitez-vous le remplacer ?"));
     }
     if (index != -1 && _copieInst != DUPLIQUER_TOUT && _copieInst != DUPLIQUER)
     {
@@ -415,8 +415,8 @@ void Duplicator::copyPrst(EltID idSource, EltID idDest)
 
         // Remplacement ?
         if (_copiePrst != REMPLACER_TOUT && _copiePrst != IGNORER_TOUT && (index != -1))
-            _copiePrst = openDialog(QObject::trUtf8("Le preset «&#160;") + nom.left(20).toUtf8() +
-                                    QObject::trUtf8("&#160;» existe déjà.<br />Souhaitez-vous le remplacer ?"));
+            _copiePrst = openDialog(QObject::trUtf8("Le preset « ") + nom.left(20).toUtf8() +
+                                    QObject::trUtf8(" » existe déjà.<br />Souhaitez-vous le remplacer ?"));
     }
     if (index != -1 && _copiePrst != DUPLIQUER_TOUT && _copiePrst != DUPLIQUER)
     {
@@ -538,10 +538,9 @@ void Duplicator::copyGen(EltID idSource, EltID idDest)
         if (_source->get(idSource, champ_sfGenOper).sfGenValue != champ_wBank &&
                 _source->get(idSource, champ_sfGenOper).sfGenValue != champ_wPreset)
         {
-            // Possible qu'il faille ajuster les liens
+            // Ajustement des liens
             if ((_source->get(idSource, champ_sfGenOper).sfGenValue == champ_sampleID ||
-                    _source->get(idSource, champ_sfGenOper).sfGenValue == champ_instrument) &&
-                    _destination != _source)
+                    _source->get(idSource, champ_sfGenOper).sfGenValue == champ_instrument))
             {
                 EltID idLinkSource = idSource;
                 if (idSource.typeElement == elementInstGen)

@@ -28,7 +28,7 @@
 #include "qtreewidget.h"
 #include "sf2_types.h"
 #include <string>
-    using std::string;
+using std::string;
 
 class MainWindow;
 
@@ -55,72 +55,6 @@ public:
         QAction *fermer;
         QMenu *menu;
     };
-    bool eventFilter(QObject* object, QEvent* event)
-    {
-        if (event->type() == QEvent::KeyPress && object == this)
-        {
-            QKeyEvent *keyEvent = dynamic_cast<QKeyEvent *>(event);
-            if (keyEvent->key() == Qt::Key_Delete)
-            {
-                // Touche suppr : efface l'élément
-                this->supprimerElt();
-            }
-            else if (keyEvent->matches(QKeySequence::Copy))
-            {
-                // Nombre d'éléments sélectionnés
-                int nbElt = this->getSelectedItemsNumber();
-                this->clearPastedID();
-                if (nbElt >= 0)
-                {
-                    if (this->isSelectedItemsSf2Unique() && this->isSelectedItemsTypeUnique())
-                    {
-                        this->prepareNewAction(true);
-
-                        // Copie des éléments
-                        for (int i = 0; i < nbElt; i++)
-                            this->idList << this->getID(i);
-                    }
-                }
-            }
-            else if (keyEvent->matches(QKeySequence::Paste))
-            {
-                this->prepareNewAction(false);
-                int nbElt = this->getSelectedItemsNumber();
-                if (nbElt > 0 && this->idList.size())
-                {
-                    if (this->isSelectedItemsSf2Unique() && this->isSelectedItemsTypeUnique())
-                        this->dragAndDrop(this->getID(0), this->idList);
-                }
-            }
-        }
-        else if (event->type() == QEvent::DragEnter && object == this->viewport())
-        {
-            if (!this->isSelectedItemsSf2Unique() || !this->isSelectedItemsTypeUnique())
-                this->setDragDropMode(NoDragDrop);
-        }
-        else if (event->type() == QEvent::DragMove && object == this->viewport())
-        {
-            // Modification du curseur ?
-        }
-        else if (event->type() == QEvent::Drop && object == this->viewport())
-        {
-            this->prepareNewAction(false);
-
-            // Destination
-            QDragMoveEvent* dragMoveEvent = static_cast<QDragMoveEvent*>(event);
-            EltID idDest = this->getItemID(this->itemAt(dragMoveEvent->pos()));
-
-            // Constitution de la liste des éléments à copier / lier
-            int nbElt = this->selectedItems().count();
-            QList<EltID> liste;
-            for (int i = 0; i < nbElt; i++)
-                liste << this->getID(i);
-
-            this->dragAndDrop(idDest, liste);
-            return true; // termine le drop
-        }
-        return false;
-    }
     explicit Tree(QWidget *parent = 0);
     ~Tree();
     // Méthodes publiques
@@ -147,6 +81,18 @@ public slots:
 signals:
     void dropped(EltID dest, EltID src, int temps, int *msg, QByteArray *ba1, QByteArray *ba2);
 
+protected:
+    virtual void keyPressEvent(QKeyEvent *event);
+    virtual void dragEnterEvent(QDragEnterEvent * event);
+    virtual void dropEvent(QDropEvent *event);
+
+    QStringList mimeTypes() const
+    {
+        QStringList qstrList;
+        qstrList.append("text/uri-list");
+        return qstrList;
+    }
+
 private:
     // Attributs privés
     MainWindow *mainWindow;
@@ -161,11 +107,9 @@ private:
     bool infoIsSelectedItemsFamilyUnique;
 
     // Méthodes privées
-    void prepareNewAction(bool withUpdateDo);
     QTreeWidgetItem * selectedItem(unsigned int pos);
     static EltID getItemID(QTreeWidgetItem *elt);
     void supprimerElt();
-    void dragAndDrop(EltID idDest, QList<EltID> idSources);
 };
 
 #endif // TREE_H

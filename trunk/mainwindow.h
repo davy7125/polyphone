@@ -58,6 +58,7 @@ public:
     Ui::MainWindow *ui;
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
+
     // Méthodes publiques
     void prepareNewAction();
     void updateDo();
@@ -71,7 +72,6 @@ public:
     void desactiveOutilsSmpl();
     void activeOutilsSmpl();
     bool isPlaying();
-    void ouvrir(QString fileName);
     QStringList getListMidi();
     void openMidiPort(int val);
     void setAudioEngine(int audioEngine, int bufferSize);
@@ -80,6 +80,7 @@ public:
     void setSynthChorus(int level, int depth, int frequency);
     void setListeActions(QList<QAction *> listeActions);
     void dragAndDrop(EltID idDest, QList<EltID> idSources);
+    void dragAndDrop(QString path, EltID idDest, int &replace);
 
 public slots:
     void returnToOldMaxMinSizes();
@@ -182,6 +183,8 @@ private:
     bool _isSustainOn;
 
     // Méthodes privées
+    void ouvrir(QString fileName);
+    void importerSmpl(QString path, EltID id, int &replace);
     void updateTitle();
     int sauvegarder(int indexSf2, bool saveAs);
     void updateFavoriteFiles();
