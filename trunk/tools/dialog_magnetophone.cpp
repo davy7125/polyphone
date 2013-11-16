@@ -93,8 +93,8 @@ void DialogMagnetophone::on_pushRecord_toggled(bool checked)
     {
         // Nom de fichier
         QString defaultPath = this->getDefaultPath();
-        defaultPath = QFileDialog::getSaveFileName(this, tr("Sauvegarder un enregistrement"),
-                                                   defaultPath, tr("Fichier .wav (*.wav)"));
+        defaultPath = QFileDialog::getSaveFileName(this, trUtf8("Sauvegarder un enregistrement"),
+                                                   defaultPath, trUtf8("Fichier .wav (*.wav)"));
         if (defaultPath.size())
         {
             if (defaultPath.right(4).toLower() != ".wav")

@@ -116,11 +116,11 @@ void Page_Inst::afficher()
         }
     }
     if (nbPrst == 0)
-        qStr = QString::fromUtf8(tr("<b>Instrument lié à aucun preset.</b>").toStdString().c_str());
+        qStr = trUtf8("<b>Instrument lié à aucun preset.</b>");
     else if (nbPrst == 1)
-        qStr.prepend(QString::fromUtf8(tr("<b>Instrument lié au preset : </b>").toStdString().c_str()));
+        qStr.prepend(trUtf8("<b>Instrument lié au preset : </b>"));
     else
-        qStr.prepend(QString::fromUtf8(tr("<b>Instrument lié aux presets : </b>").toStdString().c_str()));
+        qStr.prepend(trUtf8("<b>Instrument lié aux presets : </b>"));
     this->ui->labelPrst->setText(qStr);
 }
 
@@ -131,7 +131,7 @@ void Page_Inst::desaccorder()
     id.typeElement = elementInstSmpl;
     if (this->sf2->count(id, false) == 0)
     {
-        QMessageBox::warning(this, tr("Attention"), tr("L'instrument doit contenir des sons."));
+        QMessageBox::warning(this, trUtf8("Attention"), trUtf8("L'instrument doit contenir des sons."));
         return;
     }
     DialogCeleste * dialogCeleste = new DialogCeleste(this);
@@ -226,7 +226,7 @@ void Page_Inst::repartitionAuto()
     id.typeElement = elementInstSmpl;
     if (this->sf2->count(id, false) == 0)
     {
-        QMessageBox::warning(this, tr("Attention"), tr("L'instrument doit contenir des sons."));
+        QMessageBox::warning(this, trUtf8("Attention"), trUtf8("L'instrument doit contenir des sons."));
         return;
     }
     // Répartition automatique des notes sur le clavier
@@ -315,7 +315,7 @@ void Page_Inst::mixture()
     idInst.typeElement = elementInstSmpl;
     if (this->sf2->count(idInst, false) == 0)
     {
-        QMessageBox::warning(this, tr("Attention"), tr("L'instrument doit contenir des sons."));
+        QMessageBox::warning(this, trUtf8("Attention"), trUtf8("L'instrument doit contenir des sons."));
         return;
     }
     DialogMixture * dialogMixture = new DialogMixture(this);
@@ -339,7 +339,7 @@ void Page_Inst::mixture(QList<QList<int> > listeParam, QString nomInst, bool bou
         nbEtapes /= 2;
     // Ouverture d'une barre de progression
     QString textProgress = trUtf8("Création ");
-    QProgressDialog progress("", tr("Annuler"), 0, nbEtapes, this);
+    QProgressDialog progress("", trUtf8("Annuler"), 0, nbEtapes, this);
     progress.setWindowModality(Qt::WindowModal);
     progress.setFixedWidth(350);
     progress.show();
@@ -354,7 +354,7 @@ void Page_Inst::mixture(QList<QList<int> > listeParam, QString nomInst, bool bou
     idNewInst.indexElt = this->sf2->add(idNewInst);
     // Configuration instrument
     if (nomInst.isEmpty())
-        nomInst = tr("sans nom");
+        nomInst = trUtf8("sans nom");
     this->sf2->set(idNewInst, champ_name, nomInst.left(20));
     if (bouclage)
     {
@@ -560,7 +560,7 @@ void Page_Inst::release()
     idInst.typeElement = elementInstSmpl;
     if (this->sf2->count(idInst, false) == 0)
     {
-        QMessageBox::warning(this, tr("Attention"), tr("L'instrument doit contenir des sons."));
+        QMessageBox::warning(this, trUtf8("Attention"), trUtf8("L'instrument doit contenir des sons."));
         return;
     }
     DialogRelease * dialogRelease = new DialogRelease(this);

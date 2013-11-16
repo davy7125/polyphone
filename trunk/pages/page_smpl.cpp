@@ -711,7 +711,7 @@ void Page_Smpl::setLinkedSmpl(int index)
         this->sf2->set(id, champ_sfSampleType, val);
         // Mise à jour combobox
         this->ui->comboType->clear();
-        this->ui->comboType->addItem(tr("mono"));
+        this->ui->comboType->addItem(trUtf8("mono"));
         this->ui->comboLink->setCurrentIndex(0);
         this->ui->checkLectureLien->setEnabled(false);
         this->ui->checkLectureLien->setChecked(false);
@@ -2090,8 +2090,8 @@ void GraphiqueFourier::setPos(qint32 posStart, qint32 posEnd)
     QString qTmp;
     if (note >= 0 && note <= 128)
     {
-        qStr1.sprintf("%s %d, %s %d (%s)", tr("note").toStdString().c_str(), note,
-                      tr("correction").toStdString().c_str(), correction, tr("estimation").toStdString().c_str());
+        qStr1.sprintf("%s %d, %s %d (%s)", trUtf8("note").toStdString().c_str(), note,
+                      trUtf8("correction").toStdString().c_str(), correction, trUtf8("estimation").toStdString().c_str());
         for (int i = 0; i < 10; i++)
         {
             if (posMaxFFT[i] != 0)

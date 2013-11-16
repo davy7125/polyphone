@@ -210,7 +210,7 @@ void DialogMixture::accept()
     // Envoi des valeurs
     QString text = this->ui->lineNom->text();
     if (text.isEmpty())
-        text = tr("sans nom");
+        text = trUtf8("sans nom");
     // Suppression des divisions vides
     int nbDiv = this->listeParam.length();
     int currentPos = 0;
