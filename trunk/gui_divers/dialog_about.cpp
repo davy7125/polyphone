@@ -49,6 +49,7 @@ DialogAbout::DialogAbout(QWidget *parent) :
     // Crédit
     _credit.addCreator("Davy Triponney", "info@polyphone.fr");
     _credit.addContributor("Kinwie", "kinwie@yahoo.com");
+    _credit.addContributor("Steve Clarke", "stevertyu@yahoo.com");
     _credit.addTranslator("Davy Triponney", "info@polyphone.fr");
     ui->textBrowser->setHtml(_credit.getText());
 }
@@ -93,7 +94,7 @@ QString Credit::getText()
             "cellspacing='2' cellpadding='0'>";
 
     text += getGroup(QObject::trUtf8("Créé par "), _listCreatorName, _listCreatorMail) + "<tr></tr>";
-    text += getGroup(QObject::trUtf8("Contributeur "), _listContributorName, _listContributorMail) + "<tr></tr>";
+    text += getGroup(QObject::trUtf8("Contributeurs "), _listContributorName, _listContributorMail) + "<tr></tr>";
     text += getGroup(QObject::trUtf8("Traduit par "), _listTranslatorName, _listTranslatorMail);
 
     return text + "</table></body></html>";

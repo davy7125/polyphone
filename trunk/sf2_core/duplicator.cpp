@@ -24,6 +24,7 @@
 
 #include "duplicator.h"
 #include "mainwindow.h"
+#include "config.h"
 
 Duplicator::Duplicator(Pile_sf2 *source, Pile_sf2 *destination, QWidget * parent) :
     _parent(parent),
@@ -32,7 +33,8 @@ Duplicator::Duplicator(Pile_sf2 *source, Pile_sf2 *destination, QWidget * parent
     _copieSmpl(DUPLIQUER),
     _copieInst(DUPLIQUER),
     _copiePrst(DUPLIQUER),
-    _presetFull(false)
+    _presetFull(false),
+    _displayWarningGlobal(Config::getInstance()->getActivationWarning_GlobalNotOverwritten())
 {
 }
 
@@ -58,6 +60,9 @@ void Duplicator::copy(EltID idSource, EltID idDest)
             else if ((idDest.typeElement == elementInst || idDest.typeElement == elementInstSmpl) &&
                      idSource.indexElt != idDest.indexElt)
             {
+                // Copie de la division globale
+                copyGlobal(idSource, idDest);
+
                 // Copie de tous les samples d'un instrument dans un autre
                 idSource.typeElement = elementInstSmpl;
                 int nbInstSmpl = _source->count(idSource);
@@ -78,6 +83,9 @@ void Duplicator::copy(EltID idSource, EltID idDest)
             if ((idDest.typeElement == elementPrst || idDest.typeElement == elementPrstInst) &&
                     idSource.indexElt != idDest.indexElt)
             {
+                // Copie de la division globale
+                copyGlobal(idSource, idDest);
+
                 // Copie de tous les instruments d'un preset dans un autre
                 idSource.typeElement = elementPrstInst;
                 int nbPrstInst = _source->count(idSource);
@@ -197,7 +205,7 @@ void Duplicator::linkInst(EltID idSource, EltID idDest)
 
 // Copie d'un instrument lié dans un autre instrument
 // idSource : instSmpl ou prstInst
-// idDest   : inst/instSmpl ou prst/prstInst (autre element)
+// idDest   : inst/instSmpl ou prst/prstInst (autre élément)
 void Duplicator::copyLink(EltID idSource, EltID idDest)
 {
     idDest.typeElement = idSource.typeElement;
@@ -210,6 +218,41 @@ void Duplicator::copyLink(EltID idSource, EltID idDest)
     copyMod(idSource, idDest);
 }
 
+// Copie d'une division global d'un instrument ou d'un preset à un autre
+// idSource : inst ou prst
+// idDest   : inst/instSmpl ou prst/prstInst (autre élément)
+void Duplicator::copyGlobal(EltID idSource, EltID idDest)
+{
+    if (isGlobalEmpty(idSource))
+        return;
+
+    if (idSource.typeElement == elementInst)
+        idDest.typeElement = elementInst;
+    else
+        idDest.typeElement = elementPrst;
+
+    if (isGlobalEmpty(idDest))
+    {
+        // Copie des paramètres et modulateurs globaux
+        copyGen(idSource, idDest);
+        copyMod(idSource, idDest);
+    }
+    else if (_displayWarningGlobal)
+    {
+        // Affichage warning
+        QMessageBox msgBox(_parent);
+        msgBox.setIcon(QMessageBox::Warning);
+        msgBox.setText(QObject::trUtf8("<b>Des paramètres globaux sont déjà renseignés.</b>"));
+        msgBox.setInformativeText(QObject::trUtf8("La division globale ne sera pas recopiée."));
+        msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::YesAll);
+        msgBox.button(QMessageBox::Yes)->setText(QObject::trUtf8("&Ok"));
+        msgBox.button(QMessageBox::YesAll)->setText(QObject::trUtf8("Ok, &désactiver ce message"));
+        msgBox.setDefaultButton(QMessageBox::Yes);
+        if (msgBox.exec() == QMessageBox::YesAll)
+            Config::getInstance()->setActivationWarning_GlobalNotOverwritten(false);
+    }
+    _displayWarningGlobal = false;
+}
 
 //////////////////////////////////
 // OPERATIONS DANS UN AUTRE SF2 //
@@ -702,10 +745,10 @@ void Duplicator::reset(EltID idDest)
     int number = _destination->count(id);
     for (int i = number - 1; i >= 0; i--)
     {
-        idDest.indexMod = i;
+        id.indexMod = i;
         if (_destination->get(id, champ_sfGenOper).sfGenValue != champ_wBank &&
                 _destination->get(id, champ_sfGenOper).sfGenValue != champ_wPreset) // On garde bank et preset
-            _destination->reset(idDest, _destination->get(id, champ_sfGenOper).sfGenValue);
+            _destination->reset(id, _destination->get(id, champ_sfGenOper).sfGenValue);
     }
 
     // Suppression des modulateurs
@@ -731,4 +774,23 @@ void Duplicator::reset(EltID idDest)
         if (!_destination->get(id, champ_hidden).bValue)
             _destination->remove(id);
     }
+}
+
+bool Duplicator::isGlobalEmpty(EltID id)
+{
+    // Nombre de paramètres présents
+    if (id.typeElement == elementInst || id.typeElement == elementInstSmpl)
+        id.typeElement = elementInstGen;
+    else
+        id.typeElement = elementPrstGen;
+    bool isEmpty = _destination->count(id, false) == 0;
+
+    // Nombre de modulateurs
+    if (id.typeElement == elementInstGen)
+        id.typeElement = elementInstMod;
+    else
+        id.typeElement = elementPrstMod;
+    isEmpty = isEmpty && _destination->count(id, false) == 0;
+
+    return isEmpty;
 }
