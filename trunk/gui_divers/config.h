@@ -464,6 +464,14 @@ public:
     {
         settings.setValue("warnings/to_many_generators", activated);
     }
+    bool getActivationWarning_GlobalNotOverwritten()
+    {
+        return settings.value("warnings/global_not_overwritten", true).toBool();
+    }
+    void setActivationWarning_GlobalNotOverwritten(bool activated)
+    {
+        settings.setValue("warnings/global_not_overwritten", activated);
+    }
 
     // Mappage
     QString getKeyMapped(int num)

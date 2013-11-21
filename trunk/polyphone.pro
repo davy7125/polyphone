@@ -120,7 +120,8 @@ SOURCES	+= main.cpp \
     tools/conversion_sfz.cpp \
     gui_divers/dialog_about.cpp \
     gui_divers/dialog_export.cpp \
-    sf2_core/duplicator.cpp
+    sf2_core/duplicator.cpp \
+    tools/import_sfz.cpp
 
 HEADERS  += mainwindow.h \
     sf2_core/sf2_types.h \
@@ -180,7 +181,8 @@ HEADERS  += mainwindow.h \
     tools/conversion_sfz.h \
     gui_divers/dialog_about.h \
     gui_divers/dialog_export.h \
-    sf2_core/duplicator.h
+    sf2_core/duplicator.h \
+    tools/import_sfz.h
 
 FORMS    += mainwindow.ui \
     gui_divers/config.ui \

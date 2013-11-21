@@ -58,12 +58,13 @@ private:
     // Correspondances
     QList<EltID> _listCopy, _listPaste;
     EtatMessage _copieSmpl, _copieInst, _copiePrst;
-    bool _presetFull;
+    bool _presetFull, _displayWarningGlobal;
 
     // DEPLACEMENT DANS UN MEME SF2 //
     void linkSmpl(EltID idSource, EltID idDest);
     void linkInst(EltID idSource, EltID idDest);
     void copyLink(EltID idSource, EltID idDest);
+    void copyGlobal(EltID idSource, EltID idDest);
 
     // DEPLACEMENT DANS UN AUTRE SF2 //
     void copySmpl(EltID idSource, EltID idDest);
@@ -75,6 +76,7 @@ private:
     void copyMod(EltID idSource, EltID idDest);
     EtatMessage openDialog(QString question);
     void reset(EltID idDest);
+    bool isGlobalEmpty(EltID id);
 };
 
 #endif // DUPLICATOR_H

@@ -29,6 +29,7 @@
 #include "conversion_sfz.h"
 #include "dialog_export.h"
 #include "duplicator.h"
+#include "import_sfz.h"
 #include <QFileDialog>
 #include <QInputDialog>
 #if QT_VERSION >= QT_VERSION_CHECK(5, 0, 0)
@@ -673,7 +674,8 @@ QList<QAction *> MainWindow::getListeActions()
                 << ui->actionMagn_tophone
                 << ui->actionSommaire
                 << ui->action_Visualiseur
-                << ui->actionExporter_en_tant_qu_sfz;
+                << ui->actionExporter_en_tant_qu_sfz
+                << ui->actionI_mporter_soundfont;
     return listeAction;
 }
 void MainWindow::setListeActions(QList<QAction *> listeActions)
@@ -1159,6 +1161,9 @@ void MainWindow::dragAndDrop(QString path, EltID idDest, int &replace)
     else if (extension.compare("sfz") == 0)
     {
         // Import sfz
+        ImportSfz import(this->sf2);
+        import.import(path, replace);
+        Config::getInstance()->addFile(Config::typeFichierExport, path);
     }
     else if (extension.compare("wav") == 0 && idDest.typeElement != elementUnknown && idDest.indexSf2 != -1)
     {
@@ -1372,7 +1377,7 @@ void MainWindow::exporterSmpl()
 {
     int nbElt = ui->arborescence->getSelectedItemsNumber();
     if (nbElt == 0) return;
-    QString qDir = QFileDialog::getExistingDirectory(this, trUtf8("Choisir un répertoire de destination"), \
+    QString qDir = QFileDialog::getExistingDirectory(this, trUtf8("Choisir un répertoire de destination"),
                                                      Config::getInstance()->getLastDirectory(Config::typeFichierSample));
     if (qDir.isEmpty()) return;
     qDir.append(QDir::separator());
@@ -1476,6 +1481,23 @@ void MainWindow::exporter()
     DialogExport * dial = new DialogExport(sf2, ui->arborescence->getID(0), this);
     connect(dial, SIGNAL(accepted(QList<EltID>,QString,int)), this, SLOT(exporter(QList<EltID>,QString,int)));
     dial->show();
+}
+void MainWindow::importer()
+{
+    // Affichage dialogue
+    QStringList strList = QFileDialog::getOpenFileNames(this, trUtf8("Importer une soundfont"),
+                                                        Config::getInstance()->getLastDirectory(Config::typeFichierExport),
+                                                        trUtf8("Fichier .sfz (*.sfz)"));
+    if (strList.count() == 0)
+        return;
+
+    this->sf2->prepareNewActions();
+    int numSf2 = -1;
+    while (!strList.isEmpty())
+        this->dragAndDrop(strList.takeFirst(), EltID(elementUnknown, -1, -1, -1, -1), numSf2);
+    updateDo();
+    updateActions();
+    this->ui->arborescence->searchTree(this->ui->editSearch->text());
 }
 void MainWindow::exporter(QList<EltID> listID, QString dir, int format)
 {
