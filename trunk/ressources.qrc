@@ -74,6 +74,7 @@
         <file alias="octave_up">ressources/octave_up.png</file>
         <file alias="export2">ressources/export2.png</file>
         <file alias="folder">ressources/folder.png</file>
+        <file alias="import">ressources/import.png</file>
     </qresource>
     <qresource prefix="/aide">
         <file alias="help.html">ressources/doc/help.html</file>

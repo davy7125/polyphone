@@ -106,6 +106,7 @@ private slots:
     void exporterSmpl();        // Export d'un sample
     void exporter();            // Export d'un ou plusieurs preset(s)
     void exporter(QList<EltID> listID, QString dir, int format);
+    void importer();            // Import de soundfont non sf2
     void nouvelInstrument();    // Création d'un instrument
     void nouveauPreset();       // Création d'un preset
     void associer();            // Association InstSmpl et PrstInst
