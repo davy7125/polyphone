@@ -257,6 +257,16 @@
    <container>1</container>
   </customwidget>
  </customwidgets>
+ <tabstops>
+  <tabstop>comboMotif</tabstop>
+  <tabstop>spinNbDivision</tabstop>
+  <tabstop>spinEtalement</tabstop>
+  <tabstop>spinOccupation</tabstop>
+  <tabstop>spinOffset</tabstop>
+  <tabstop>checkSens</tabstop>
+  <tabstop>checkSens2</tabstop>
+  <tabstop>buttonBox</tabstop>
+ </tabstops>
  <resources>
   <include location="../ressources.qrc"/>
  </resources>

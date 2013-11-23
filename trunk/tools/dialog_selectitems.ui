@@ -55,6 +55,12 @@ instrument courant</string>
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>pushSelectAll</tabstop>
+  <tabstop>pushSelectCurrent</tabstop>
+  <tabstop>listWidget</tabstop>
+  <tabstop>buttonBox</tabstop>
+ </tabstops>
  <resources>
   <include location="../ressources.qrc"/>
  </resources>

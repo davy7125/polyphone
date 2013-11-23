@@ -133,6 +133,12 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>doubleDuree36</tabstop>
+  <tabstop>doubleDivision</tabstop>
+  <tabstop>doubleDeTune</tabstop>
+  <tabstop>buttonBox</tabstop>
+ </tabstops>
  <resources>
   <include location="../ressources.qrc"/>
  </resources>

@@ -29,6 +29,9 @@ DialogExport::DialogExport(Pile_sf2 *sf2, EltID idSf2, QWidget *parent) :
         }
     }
 
+    // Tri
+    ui->listPresets->sortItems();
+
     ui->comboFormat->setCurrentIndex(Config::getInstance()->getExportType());
     ui->lineFolder->setText(Config::getInstance()->getLastFile(Config::typeFichierExport));
 }

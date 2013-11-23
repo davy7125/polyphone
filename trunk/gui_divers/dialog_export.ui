@@ -143,6 +143,15 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>pushTick</tabstop>
+  <tabstop>pushUntick</tabstop>
+  <tabstop>listPresets</tabstop>
+  <tabstop>lineFolder</tabstop>
+  <tabstop>comboFormat</tabstop>
+  <tabstop>pushAnnuler</tabstop>
+  <tabstop>pushExport</tabstop>
+ </tabstops>
  <resources>
   <include location="../ressources.qrc"/>
  </resources>
