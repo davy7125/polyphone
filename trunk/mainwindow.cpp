@@ -289,6 +289,36 @@ void MainWindow::closeEvent(QCloseEvent *event)
     }
     dialogMagneto.close();
 }
+void MainWindow::resizeEvent(QResizeEvent *)
+{
+    QString titre;
+    if (_title.isEmpty())
+        titre = "Polyphone";
+    else
+    {
+        QString path = _title;
+        if (_title.indexOf("*") == 0)
+        {
+            titre = "*";
+            path = path.right(path.size() - 1);
+        }
+        else
+            titre = "";
+
+        QFileInfo fileInfo(path);
+        QString titreCourt = titre + fileInfo.fileName() + " - Polyphone";
+        QString titreLong = titre + fileInfo.fileName() + " (" + fileInfo.path() + ") - Polyphone";
+
+        QFont font = QApplication::font("QWorkspaceTitleBar");
+        QFontMetrics fm(font);
+        if (fm.width(titreLong) > this->width() - 100)
+            titre = titreCourt;
+        else
+            titre = titreLong;
+    }
+
+    this->setWindowTitle(titre);
+}
 
 // Ouverture, fermeture, suppression
 void MainWindow::ouvrir()
@@ -734,21 +764,23 @@ void MainWindow::updateTitle()
     {
         if (sf2->isEdited(id.indexSf2))
         {
-            setWindowTitle("*" + sf2->getQstr(id, champ_filename) + " - Polyphone");
+            _title = "*" + sf2->getQstr(id, champ_filename);
             ui->actionEnregistrer->setEnabled(1);
         }
         else
         {
-            setWindowTitle(sf2->getQstr(id, champ_filename) + " - Polyphone");
+            _title = sf2->getQstr(id, champ_filename);
             ui->actionEnregistrer->setEnabled(0);
         }
     }
     else
     {
-        setWindowTitle("Polyphone");
+        _title = "";
         ui->actionEnregistrer->setEnabled(0);
     }
+    resizeEvent(NULL);
 }
+
 void MainWindow::updateActions()
 {
     // Un élément est cliqué dans l'arborescence
@@ -833,7 +865,7 @@ void MainWindow::updateActions()
         ui->actionNouvel_instrument->setEnabled(true);
 
         // Supprimer, copier
-        if (typeUnique && (((type == elementInstSmpl || type == elementPrstInst) && familleUnique) \
+        if (typeUnique && (((type == elementInstSmpl || type == elementPrstInst) && familleUnique)
                            || type == elementSmpl || type == elementInst || type == elementPrst)
                 && !this->page_smpl->isPlaying())
         {
@@ -1232,13 +1264,13 @@ void MainWindow::importerSmpl(QString path, EltID id, int &replace)
                     if (this->sf2->getQstr(id, champ_name).compare(nom.left(19).append("L")) == 0)
                     {
                         indexL = j;
-                        qStr3 = trUtf8("Le sample « ") + nom.left(19).toUtf8() + \
+                        qStr3 = trUtf8("Le sample « ") + nom.left(19).toUtf8() +
                                 trUtf8("L » existe déjà.<br />Que faire ?");
                     }
                     else if (this->sf2->getQstr(id, champ_name).compare(nom.left(19).append("R")) == 0)
                     {
                         indexR = j;
-                        qStr3 = trUtf8("Le sample « ") + nom.left(19).toUtf8() + \
+                        qStr3 = trUtf8("Le sample « ") + nom.left(19).toUtf8() +
                                 trUtf8("R » existe déjà.<br />Que faire ?");
                     }
                 }
@@ -1247,7 +1279,7 @@ void MainWindow::importerSmpl(QString path, EltID id, int &replace)
                     if (this->sf2->getQstr(id, champ_name).compare(nom.left(20)) == 0)
                     {
                         indexL = j;
-                        qStr3 = trUtf8("Le sample « ") + nom.left(20).toUtf8() + \
+                        qStr3 = trUtf8("Le sample « ") + nom.left(20).toUtf8() +
                                 trUtf8(" » existe déjà.<br />Que faire ?");
                     }
                 }
@@ -1260,7 +1292,7 @@ void MainWindow::importerSmpl(QString path, EltID id, int &replace)
             msgBox.setIcon(QMessageBox::Warning);
             msgBox.setText(qStr3);
             msgBox.setInformativeText("");
-            msgBox.setStandardButtons(QMessageBox::YesAll | QMessageBox::Yes | QMessageBox::SaveAll | QMessageBox::Save | \
+            msgBox.setStandardButtons(QMessageBox::YesAll | QMessageBox::Yes | QMessageBox::SaveAll | QMessageBox::Save |
                                       QMessageBox::NoAll | QMessageBox::No);
             msgBox.button(QMessageBox::Yes)->setText(trUtf8("&Remplacer"));
             msgBox.button(QMessageBox::YesAll)->setText(trUtf8("R&emplacer tout"));
@@ -1413,7 +1445,7 @@ void MainWindow::exporterSmpl()
                 // Stéréo ?
                 id.typeElement = elementSmpl;
                 id.indexElt = sampleID;
-                if (this->sf2->get(id, champ_sfSampleType).wValue != monoSample && \
+                if (this->sf2->get(id, champ_sfSampleType).wValue != monoSample &&
                         this->sf2->get(id, champ_sfSampleType).wValue != RomMonoSample)
                 {
                     sampleID2 = this->sf2->get(id, champ_wSampleLink).wValue;
@@ -1426,7 +1458,7 @@ void MainWindow::exporterSmpl()
                     int nb = Sound::lastLettersToRemove(nom1, nom2);
                     qStr.append(nom1.left(nom1.size() - nb));
 
-                    if (this->sf2->get(id, champ_sfSampleType).wValue == rightSample && \
+                    if (this->sf2->get(id, champ_sfSampleType).wValue == rightSample &&
                             this->sf2->get(id, champ_sfSampleType).wValue != RomRightSample)
                     {
                         // Inversion smpl1 smpl2
@@ -1544,12 +1576,11 @@ void MainWindow::exporter(QList<EltID> listID, QString dir, int format)
 
         // Sauvegarde
         newSf2.sauvegarder(idDest.indexSf2, name);
-    }break;
-    case 1:{
+        }break;
+    case 1:
         // Export sfz
-        ConversionSfz converter(sf2);
-        converter.convert(dir, listID);
-    }break;
+        ConversionSfz(sf2).convert(dir, listID);
+        break;
     default:
         break;
     }

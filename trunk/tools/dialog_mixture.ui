@@ -491,6 +491,23 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>lineNom</tabstop>
+  <tabstop>checkStereo</tabstop>
+  <tabstop>comboFreq</tabstop>
+  <tabstop>checkBouclage</tabstop>
+  <tabstop>listDivisions</tabstop>
+  <tabstop>pushAddDiv</tabstop>
+  <tabstop>pushRemoveDiv</tabstop>
+  <tabstop>spinDivStart</tabstop>
+  <tabstop>spinDivEnd</tabstop>
+  <tabstop>listRangs</tabstop>
+  <tabstop>pushAddRank</tabstop>
+  <tabstop>pushRemoveRank</tabstop>
+  <tabstop>comboType1</tabstop>
+  <tabstop>comboType2</tabstop>
+  <tabstop>buttonBox</tabstop>
+ </tabstops>
  <resources>
   <include location="../ressources.qrc"/>
  </resources>

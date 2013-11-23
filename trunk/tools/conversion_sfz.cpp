@@ -50,17 +50,47 @@ void ConversionSfz::convert(QString dir, QList<EltID> listID)
     rootDir = dir + "/" + rootDir;
     QDir(rootDir).mkdir(rootDir);
 
-    // For each preset, a sfz file is created
+    // Plusieurs banques sont utilisées ?
+    int numBank = -1;
+    _bankUnique = true;
     for (int i = 0; i < listID.count(); i++)
-        exportPrst(rootDir, listID.at(i));
+    {
+        if (numBank == -1)
+            numBank = _sf2->get(listID.at(i), champ_wBank).wValue;
+        else
+            _bankUnique &= (numBank == _sf2->get(listID.at(i), champ_wBank).wValue);
+    }
+
+    // Répertoire samples
+    _dirSamples = rootDir + "/samples";
+    QDir().mkdir(_dirSamples);
+
+    // Un fichier sfz pour chaque preset
+    if (_bankUnique)
+    {
+        for (int i = 0; i < listID.count(); i++)
+            exportPrst(rootDir, listID.at(i));
+    }
+    else
+    {
+        for (int i = 0; i < listID.count(); i++)
+        {
+            QString numText;
+            numText.sprintf("%.3u", _sf2->get(listID.at(i), champ_wBank).wValue);
+            if (!QDir(rootDir + "/" + numText).exists())
+                QDir(rootDir + "/" + numText).mkdir(rootDir + "/" + numText);
+            exportPrst(rootDir + "/" + numText, listID.at(i));
+        }
+    }
 
     return;
 }
 
 void ConversionSfz::exportPrst(QString dir, EltID id)
 {
-    QDir().mkdir(dir + "/samples");
-    QString path = getPathSfz(dir, _sf2->getQstr(id, champ_name)) + ".sfz";
+    QString numText;
+    numText.sprintf("%.3u", _sf2->get(id, champ_wPreset).wValue);
+    QString path = getPathSfz(dir, numText + "_" + _sf2->getQstr(id, champ_name)) + ".sfz";
     QFile fichierSfz(path);
     if (fichierSfz.open(QIODevice::WriteOnly))
     {
@@ -95,7 +125,7 @@ void ConversionSfz::exportPrst(QString dir, EltID id)
                         EltID idSmpl = idInst;
                         idSmpl.typeElement = elementSmpl;
                         idSmpl.indexElt = _sf2->get(idInst, champ_sampleID).wValue;
-                        writeRegion(&fichierSfz, paramInstSmpl, getLink(dir + "/samples", idSmpl));
+                        writeRegion(&fichierSfz, paramInstSmpl, getLink(idSmpl));
                         delete paramInstSmpl;
                     }
                 }
@@ -252,7 +282,7 @@ void ConversionSfz::writeElement(QTextStream &out, Champ champ, double value)
     }
 }
 
-QString ConversionSfz::getLink(QString root, EltID idSmpl)
+QString ConversionSfz::getLink(EltID idSmpl)
 {
     QString path = "";
     if (_sampleIDs.contains(idSmpl.indexElt))
@@ -264,7 +294,7 @@ QString ConversionSfz::getLink(QString root, EltID idSmpl)
         idSmpl2.indexElt = -1;
 
         // Stéréo ?
-        if (_sf2->get(idSmpl, champ_sfSampleType).wValue != monoSample && \
+        if (_sf2->get(idSmpl, champ_sfSampleType).wValue != monoSample &&
                 _sf2->get(idSmpl, champ_sfSampleType).wValue != RomMonoSample)
         {
             idSmpl2.indexElt = _sf2->get(idSmpl, champ_wSampleLink).wValue;
@@ -275,7 +305,7 @@ QString ConversionSfz::getLink(QString root, EltID idSmpl)
             int nb = Sound::lastLettersToRemove(nom1, nom2);
             name = nom1.left(nom1.size() - nb);
 
-            if (_sf2->get(idSmpl, champ_sfSampleType).wValue == rightSample && \
+            if (_sf2->get(idSmpl, champ_sfSampleType).wValue == rightSample &&
                     _sf2->get(idSmpl, champ_sfSampleType).wValue != RomRightSample)
             {
                 // Inversion smpl1 smpl2
@@ -290,15 +320,18 @@ QString ConversionSfz::getLink(QString root, EltID idSmpl)
         }
 
         name = escapeStr(name);
-        QFile file(root + "/" + name + ".wav");
+        QFile file(_dirSamples + "/" + name + ".wav");
         if (file.exists())
         {
             int i = 1;
-            while (QFile(root + "/" + name + "-" + QString::number(i) + ".wav").exists())
+            while (QFile(_dirSamples + "/" + name + "-" + QString::number(i) + ".wav").exists())
                 i++;
             name = name + "-" + QString::number(i);
         }
-        path = QDir(root).dirName() + "\\" + name + ".wav";
+
+        path = QDir(_dirSamples).dirName() + "/" + name + ".wav";
+        if (!_bankUnique)
+            path.prepend("../");
 
         // Export et sauvegarde
         if (idSmpl.indexElt == -1 || idSmpl2.indexElt == -1)
@@ -307,20 +340,20 @@ QString ConversionSfz::getLink(QString root, EltID idSmpl)
             {
                 _sampleIDs << idSmpl.indexElt;
                 _samplePaths << path;
-                Sound::exporter(root + "/" + name + ".wav", _sf2->getSon(idSmpl));
+                Sound::exporter(_dirSamples + "/" + name + ".wav", _sf2->getSon(idSmpl));
             }
             else if (idSmpl2.indexElt != -1)
             {
                 _sampleIDs << idSmpl2.indexElt;
                 _samplePaths << path;
-                Sound::exporter(root + "/" + name + ".wav", _sf2->getSon(idSmpl2));
+                Sound::exporter(_dirSamples + "/" + name + ".wav", _sf2->getSon(idSmpl2));
             }
         }
         else
         {
             _sampleIDs << idSmpl.indexElt << idSmpl2.indexElt;
             _samplePaths << path << path;
-            Sound::exporter(root + "/" + name + ".wav", _sf2->getSon(idSmpl), _sf2->getSon(idSmpl2));
+            Sound::exporter(_dirSamples + "/" + name + ".wav", _sf2->getSon(idSmpl), _sf2->getSon(idSmpl2));
         }
     }
     return path;

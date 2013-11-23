@@ -1088,6 +1088,32 @@
    <container>1</container>
   </customwidget>
  </customwidgets>
+ <tabstops>
+  <tabstop>spinStartLoop</tabstop>
+  <tabstop>spinEndLoop</tabstop>
+  <tabstop>spinRootKey</tabstop>
+  <tabstop>spinTune</tabstop>
+  <tabstop>comboSampleRate</tabstop>
+  <tabstop>comboType</tabstop>
+  <tabstop>comboLink</tabstop>
+  <tabstop>pushLecture</tabstop>
+  <tabstop>checkLectureBoucle</tabstop>
+  <tabstop>checkLectureLien</tabstop>
+  <tabstop>sliderLectureVolume</tabstop>
+  <tabstop>checkLectureSinus</tabstop>
+  <tabstop>verticalSlider_1</tabstop>
+  <tabstop>verticalSlider_2</tabstop>
+  <tabstop>verticalSlider_3</tabstop>
+  <tabstop>verticalSlider_4</tabstop>
+  <tabstop>verticalSlider_5</tabstop>
+  <tabstop>verticalSlider_6</tabstop>
+  <tabstop>verticalSlider_7</tabstop>
+  <tabstop>verticalSlider_8</tabstop>
+  <tabstop>verticalSlider_9</tabstop>
+  <tabstop>verticalSlider_10</tabstop>
+  <tabstop>pushEgalRestore</tabstop>
+  <tabstop>pushEgaliser</tabstop>
+ </tabstops>
  <resources/>
  <connections>
   <connection>

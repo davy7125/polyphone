@@ -38,20 +38,36 @@ class TextEdit : public QTextEdit
     Q_OBJECT
 public:
     TextEdit(QWidget *parent=0) : QTextEdit(parent) {}
+
 private:
-    void focusOutEvent(QFocusEvent *e) {if (e->lostFocus()) emit(editingFinished());}
+    void focusOutEvent(QFocusEvent *e)
+    {
+        if (e->lostFocus())
+            emit(editingFinished());
+        QTextEdit::focusOutEvent(e);
+    }
+    void keyPressEvent(QKeyEvent *e)
+    {
+        int key = e->key();
+        if (this->toPlainText().size() < 255 || key == Qt::Key_Backspace || key == Qt::Key_Delete ||
+                key == Qt::Key_Left || key == Qt::Key_Up || key == Qt::Key_Right ||
+                key == Qt::Key_Down || key == Qt::Key_PageUp || key == Qt::Key_PageDown ||
+                key == Qt::Key_Home || key == Qt::Key_End)
+            QTextEdit::keyPressEvent(e);
+    }
+
 signals:
     void editingFinished();
 };
+
 
 class Page_Sf2 : public Page
 {
     Q_OBJECT
 public:
-    explicit Page_Sf2(MainWindow *mainWindow, Tree *tree, QStackedWidget *qStackedWidget, \
+    explicit Page_Sf2(MainWindow *mainWindow, Tree *tree, QStackedWidget *qStackedWidget,
                       Pile_sf2 * sf2, Synth * synth, QWidget *parent = 0);
     ~Page_Sf2();
-    // Méthodes publiques
     void afficher();
     void compte(int &unusedSmpl, int &unusedInst, int &usedSmpl, int &usedInst, int &usedPrst, int &instGen, int &prstGen);
 
@@ -64,9 +80,9 @@ public slots:
         void setProduct();
         void setCommentaire();
         void setNow();
+
 private:
     Ui::Page_Sf2 *ui;
-    // Méthodes privées
     void compte();
 };
 

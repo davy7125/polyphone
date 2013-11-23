@@ -96,6 +96,9 @@
        <pointsize>10</pointsize>
       </font>
      </property>
+     <property name="focusPolicy">
+      <enum>Qt::NoFocus</enum>
+     </property>
      <property name="acceptDrops">
       <bool>false</bool>
      </property>
@@ -180,6 +183,10 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>pushHome</tabstop>
+  <tabstop>textBrowser</tabstop>
+ </tabstops>
  <resources>
   <include location="../ressources.qrc"/>
  </resources>
