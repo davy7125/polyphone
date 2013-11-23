@@ -68,10 +68,12 @@ private:
     Pile_sf2 * _sf2;
     QList<int> _sampleIDs;
     QList<QString> _samplePaths;
+    QString _dirSamples;
+    bool _bankUnique;
 
     void exportPrst(QString dir, EltID id);
     QString getPathSfz(QString dir, QString name);
-    QString getLink(QString root, EltID idSmpl);
+    QString getLink(EltID idSmpl);
     void writeEntete(QFile * fichierSfz, EltID id);
     void writeGroup(QFile * fichierSfz, ParamListe * listeParam);
     void writeRegion(QFile * fichierSfz, ParamListe * listeParam, QString pathSample);

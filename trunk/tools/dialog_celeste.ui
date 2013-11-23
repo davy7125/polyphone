@@ -111,6 +111,11 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>doubleSpinHerz</tabstop>
+  <tabstop>doubleSpinDiv</tabstop>
+  <tabstop>buttonBox</tabstop>
+ </tabstops>
  <resources>
   <include location="../ressources.qrc"/>
  </resources>

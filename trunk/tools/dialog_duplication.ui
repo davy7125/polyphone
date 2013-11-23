@@ -10,7 +10,7 @@
     <x>0</x>
     <y>0</y>
     <width>320</width>
-    <height>214</height>
+    <height>341</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -180,6 +180,16 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>checkForEachKey</tabstop>
+  <tabstop>checkForEachVelocityRange</tabstop>
+  <tabstop>listVelocites</tabstop>
+  <tabstop>pushAdd</tabstop>
+  <tabstop>pushRemove</tabstop>
+  <tabstop>spinMinVel</tabstop>
+  <tabstop>spinMaxVel</tabstop>
+  <tabstop>buttonBox</tabstop>
+ </tabstops>
  <resources>
   <include location="../ressources.qrc"/>
  </resources>

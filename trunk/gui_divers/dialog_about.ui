@@ -90,6 +90,9 @@
        </property>
        <item>
         <widget class="QTextBrowser" name="textBrowser">
+         <property name="focusPolicy">
+          <enum>Qt::NoFocus</enum>
+         </property>
          <property name="openExternalLinks">
           <bool>true</bool>
          </property>
@@ -167,6 +170,10 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>pushCredit</tabstop>
+  <tabstop>pushClose</tabstop>
+ </tabstops>
  <resources>
   <include location="../ressources.qrc"/>
  </resources>

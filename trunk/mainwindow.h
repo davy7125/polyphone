@@ -178,6 +178,7 @@ private:
     DialogMagnetophone dialogMagneto;
     QAction * actionKeyboard;
     QList<QAction *> actionSeparators;
+    QString _title;
 
     // Gestion sustain pedal
     QList<int> _listKeysToRelease;
@@ -195,6 +196,7 @@ private:
 
 protected:
     void closeEvent(QCloseEvent *event);
+    void resizeEvent(QResizeEvent *);
 };
 
 

@@ -995,6 +995,23 @@
    <header>page_prst.h</header>
   </customwidget>
  </customwidgets>
+ <tabstops>
+  <tabstop>spinBank</tabstop>
+  <tabstop>spinPreset</tabstop>
+  <tabstop>tablePrst</tabstop>
+  <tabstop>pushNouveauMod</tabstop>
+  <tabstop>pushSupprimerMod</tabstop>
+  <tabstop>pushCopyMod</tabstop>
+  <tabstop>pushPasteMod</tabstop>
+  <tabstop>tableMod</tabstop>
+  <tabstop>comboSource1</tabstop>
+  <tabstop>comboCourbeSource1</tabstop>
+  <tabstop>comboSource2</tabstop>
+  <tabstop>comboCourbeSource2</tabstop>
+  <tabstop>spinSource2</tabstop>
+  <tabstop>comboDestination</tabstop>
+  <tabstop>checkAbs</tabstop>
+ </tabstops>
  <resources>
   <include location="../ressources.qrc"/>
  </resources>

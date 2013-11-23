@@ -1310,6 +1310,32 @@ QTableWidget
    <header>tablekey.h</header>
   </customwidget>
  </customwidgets>
+ <tabstops>
+  <tabstop>tabWidget</tabstop>
+  <tabstop>comboRam</tabstop>
+  <tabstop>comboAudioOuput</tabstop>
+  <tabstop>comboBufferSize</tabstop>
+  <tabstop>comboMidiInput</tabstop>
+  <tabstop>checkBoucle</tabstop>
+  <tabstop>checkBlanc</tabstop>
+  <tabstop>checkRepercussionStereo</tabstop>
+  <tabstop>dialRevNiveau</tabstop>
+  <tabstop>dialRevProfondeur</tabstop>
+  <tabstop>dialRevDensite</tabstop>
+  <tabstop>dialRevAttenuation</tabstop>
+  <tabstop>dialChoNiveau</tabstop>
+  <tabstop>dialChoAmplitude</tabstop>
+  <tabstop>dialChoFrequence</tabstop>
+  <tabstop>sliderGain</tabstop>
+  <tabstop>pushColorRestore</tabstop>
+  <tabstop>pushResetToolbar</tabstop>
+  <tabstop>listActions</tabstop>
+  <tabstop>listToolbar</tabstop>
+  <tabstop>tableKeyboardMap</tabstop>
+  <tabstop>pushOctavePlus</tabstop>
+  <tabstop>pushOctaveMoins</tabstop>
+  <tabstop>pushFermer</tabstop>
+ </tabstops>
  <resources>
   <include location="../ressources.qrc"/>
  </resources>

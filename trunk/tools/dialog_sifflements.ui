@@ -96,6 +96,12 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>spinFreq1</tabstop>
+  <tabstop>spinFreq2</tabstop>
+  <tabstop>doubleSpinRaideur</tabstop>
+  <tabstop>buttonBox</tabstop>
+ </tabstops>
  <resources>
   <include location="../ressources.qrc"/>
  </resources>
