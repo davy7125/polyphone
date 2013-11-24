@@ -2662,7 +2662,8 @@ int Sound::lastLettersToRemove(QString str1, QString str2)
         nbLetters = 1;
         if ((fin1_2.compare("-") == 0 && fin2_2.compare("-") == 0) ||
             (fin1_2.compare("_") == 0 && fin2_2.compare("_") == 0) ||
-            (fin1_2.compare(".") == 0 && fin2_2.compare(".") == 0))
+            (fin1_2.compare(".") == 0 && fin2_2.compare(".") == 0) ||
+            (fin1_2.compare(" ") == 0 && fin2_2.compare(" ") == 0))
             nbLetters = 2;
     }
 

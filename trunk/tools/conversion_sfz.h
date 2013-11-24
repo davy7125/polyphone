@@ -49,7 +49,8 @@ private:
     double d1200e2(qint32 val) { return exp2((double)val / 1200.); }
     double limit(double val, Champ champ);
     void load(Pile_sf2 *sf2, EltID id);
-    void mix(Champ champCoarse, Champ champFine);
+    void getGlobalValue(Pile_sf2 * sf2, EltID id, Champ champ);
+    void mix(Champ champCoarse, Champ champFine, int addValue = 0);
     void fusion(Champ champ, double value);
     double getDefaultValue(Champ champ);
     void prepend(Champ champ);

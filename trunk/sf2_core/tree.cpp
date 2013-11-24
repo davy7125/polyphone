@@ -546,7 +546,7 @@ void Tree::keyPressEvent(QKeyEvent *event)
         int nbElt = this->getSelectedItemsNumber();
         if (nbElt > 0 && this->idList.size())
         {
-            if (this->isSelectedItemsSf2Unique() && this->isSelectedItemsTypeUnique())
+            if (this->isSelectedItemsSf2Unique() && this->isSelectedItemsTypeUnique() && this->isSelectedItemsFamilyUnique())
                 mainWindow->dragAndDrop(this->getID(0), this->idList);
         }
         mainWindow->updateDo();
