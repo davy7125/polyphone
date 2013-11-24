@@ -462,49 +462,41 @@ ParamListe::ParamListe(Pile_sf2 * sf2, ParamListe * paramPrst, EltID idInst)
                     sf2->get(idSmpl, champ_chPitchCorrection).cValue;
         }
 
-        if (!_listeChamps.contains(champ_startloopAddrsOffset))
-        {
-            _listeChamps << champ_startloopAddrsOffset;
-            _listeValeurs << sf2->get(idSmpl, champ_dwStartLoop).dwValue;
-        }
-        else
-        {
-            _listeValeurs[_listeChamps.indexOf(champ_startloopAddrsOffset)] +=
-                    sf2->get(idSmpl, champ_dwStartLoop).dwValue;
-        }
+        // Adaptation des offsets
+        mix(champ_startAddrsCoarseOffset, champ_startAddrsOffset);
+        mix(champ_endAddrsCoarseOffset, champ_endAddrsOffset, sf2->get(idSmpl, champ_dwLength).dwValue);
+        mix(champ_startloopAddrsCoarseOffset, champ_startloopAddrsOffset, sf2->get(idSmpl, champ_dwStartLoop).dwValue);
+        mix(champ_endloopAddrsCoarseOffset, champ_endloopAddrsOffset, sf2->get(idSmpl, champ_dwEndLoop).dwValue);
 
-        if (!_listeChamps.contains(champ_endloopAddrsOffset))
+        // Gestion de la note fixe
+        if (_listeChamps.contains(champ_keynum))
         {
-            _listeChamps << champ_endloopAddrsOffset;
-            _listeValeurs << sf2->get(idSmpl, champ_dwEndLoop).dwValue;
-        }
-        else
-        {
-            _listeValeurs[_listeChamps.indexOf(champ_endloopAddrsOffset)] +=
-                    sf2->get(idSmpl, champ_dwEndLoop).dwValue;
-        }
+            int indexKeynum = _listeChamps.indexOf(champ_keynum);
+            int delta = _listeValeurs.at(indexKeynum) -
+                    _listeValeurs.at(_listeChamps.indexOf(champ_overridingRootKey));
 
-        if (!_listeChamps.contains(champ_endAddrsOffset))
-        {
-            _listeChamps << champ_endAddrsOffset;
-            _listeValeurs << sf2->get(idSmpl, champ_dwLength).dwValue;
-        }
-        else
-        {
-            _listeValeurs[_listeChamps.indexOf(champ_endAddrsOffset)] +=
-                    sf2->get(idSmpl, champ_dwLength).dwValue;
+            // Equivalence en utilisant scaleTuning / rootkey / coarse tune
+            if (_listeChamps.contains(champ_scaleTuning))
+                _listeValeurs[_listeChamps.indexOf(champ_scaleTuning)] = 0;
+            else
+            {
+                _listeChamps << champ_scaleTuning;
+                _listeValeurs << 0;
+            }
+            _listeValeurs[_listeChamps.indexOf(champ_overridingRootKey)] =
+                    _listeValeurs.at(indexKeynum);
+            if (_listeChamps.contains(champ_coarseTune))
+                _listeValeurs[_listeChamps.indexOf(champ_coarseTune)] += delta;
+            else
+            {
+                _listeChamps << champ_coarseTune;
+                _listeValeurs << delta;
+            }
+
+            _listeChamps.removeAt(indexKeynum);
+            _listeValeurs.removeAt(indexKeynum);
         }
     }
-
-    // Gestion des offsets
-    mix(champ_startAddrsCoarseOffset, champ_startAddrsOffset);
-    mix(champ_endAddrsCoarseOffset, champ_endAddrsOffset);
-    mix(champ_startloopAddrsCoarseOffset, champ_startloopAddrsOffset);
-    mix(champ_endloopAddrsCoarseOffset, champ_endloopAddrsOffset);
-
-    // Gestion de la note fixe
-    if (_listeChamps.contains(champ_keynum))
-        _listeChamps.removeAll(champ_overridingRootKey);
 
     // Fusion des 2 listes de paramètres
     if (idInst.typeElement == elementInst)
@@ -620,18 +612,58 @@ void ParamListe::load(Pile_sf2 * sf2, EltID id)
         if (!_listeChamps.contains(sf2->get(id, champ_sfGenOper).sfGenValue))
         {
             Champ champ = sf2->get(id, champ_sfGenOper).sfGenValue;
-            _listeChamps << champ;
-            _listeValeurs << getValue(champ, sf2->get(id, champ_sfGenAmount).genValue, isPrst);
+            if (id.typeElement != elementInstGen || (
+                        champ != champ_startAddrsCoarseOffset &&
+                        champ != champ_startAddrsOffset &&
+                        champ != champ_startloopAddrsCoarseOffset &&
+                        champ != champ_startloopAddrsOffset &&
+                        champ != champ_endAddrsCoarseOffset &&
+                        champ != champ_endAddrsOffset &&
+                        champ != champ_endloopAddrsCoarseOffset &&
+                        champ != champ_endloopAddrsOffset &&
+                        champ != champ_keynum))
+            {
+                _listeChamps << champ;
+                _listeValeurs << getValue(champ, sf2->get(id, champ_sfGenAmount).genValue, isPrst);
+            }
         }
+    }
+
+    if (id.typeElement == elementInstSmplGen)
+    {
+        id.typeElement = elementInst;
+
+        // Chargement des offsets de la division globale
+        getGlobalValue(sf2, id, champ_startAddrsCoarseOffset);
+        getGlobalValue(sf2, id, champ_startAddrsOffset);
+        getGlobalValue(sf2, id, champ_startloopAddrsCoarseOffset);
+        getGlobalValue(sf2, id, champ_startloopAddrsOffset);
+        getGlobalValue(sf2, id, champ_endAddrsCoarseOffset);
+        getGlobalValue(sf2, id, champ_endAddrsOffset);
+        getGlobalValue(sf2, id, champ_endloopAddrsCoarseOffset);
+        getGlobalValue(sf2, id, champ_endloopAddrsOffset);
+
+        // Chargement de la note fixe de la division globale
+        getGlobalValue(sf2, id, champ_keynum);
     }
 }
 
-void ParamListe::mix(Champ champCoarse, Champ champFine)
+void ParamListe::getGlobalValue(Pile_sf2 * sf2, EltID id, Champ champ)
 {
-    if (_listeChamps.indexOf(champCoarse) != -1)
+    // Chargement d'une valeur de la division globale
+    if (!_listeChamps.contains(champ) && sf2->isSet(id, champ))
+    {
+        _listeChamps << champ;
+        _listeValeurs << getValue(champ, sf2->get(id, champ).genValue, false);
+    }
+}
+
+void ParamListe::mix(Champ champCoarse, Champ champFine, int addValue)
+{
+    if (_listeChamps.contains(champCoarse))
     {
         int indexCoarse = _listeChamps.indexOf(champCoarse);
-        if (_listeChamps.indexOf(champFine) != -1)
+        if (_listeChamps.contains(champFine))
         {
             _listeValeurs[_listeChamps.indexOf(champFine)] += _listeValeurs[indexCoarse];
             _listeChamps.removeAt(indexCoarse);
@@ -639,6 +671,14 @@ void ParamListe::mix(Champ champCoarse, Champ champFine)
         }
         else
             _listeChamps[indexCoarse] = champFine;
+    }
+
+    if (_listeChamps.contains(champFine))
+        _listeValeurs[_listeChamps.indexOf(champFine)] += addValue;
+    else
+    {
+        _listeChamps << champFine;
+        _listeValeurs << addValue;
     }
 }
 

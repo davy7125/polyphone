@@ -306,8 +306,11 @@ void MainWindow::resizeEvent(QResizeEvent *)
             titre = "";
 
         QFileInfo fileInfo(path);
+        path = fileInfo.path();
+        if (path.indexOf(QDir::homePath()) == 0)
+            path = "~" + path.right(path.size() - QDir::homePath().size());
         QString titreCourt = titre + fileInfo.fileName() + " - Polyphone";
-        QString titreLong = titre + fileInfo.fileName() + " (" + fileInfo.path() + ") - Polyphone";
+        QString titreLong = titre + fileInfo.fileName() + " (" + path + ") - Polyphone";
 
         QFont font = QApplication::font("QWorkspaceTitleBar");
         QFontMetrics fm(font);
@@ -1195,7 +1198,6 @@ void MainWindow::dragAndDrop(QString path, EltID idDest, int &replace)
         // Import sfz
         ImportSfz import(this->sf2);
         import.import(path, replace);
-        Config::getInstance()->addFile(Config::typeFichierExport, path);
     }
     else if (extension.compare("wav") == 0 && idDest.typeElement != elementUnknown && idDest.indexSf2 != -1)
     {
@@ -1522,6 +1524,8 @@ void MainWindow::importer()
                                                         trUtf8("Fichier .sfz (*.sfz)"));
     if (strList.count() == 0)
         return;
+
+    Config::getInstance()->addFile(Config::typeFichierExport, strList.first());
 
     this->sf2->prepareNewActions();
     int numSf2 = -1;

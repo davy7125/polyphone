@@ -43,54 +43,88 @@ public:
         op_keyMax,
         op_velMin,
         op_velMax,
-        op_attenuation,
-        op_balance,
-        op_loopMode,
         op_rootKey,
+        op_exclusiveClass,
         op_tuningFine,
         op_tuningCoarse,
+        op_delay,
+        op_offset,
+        op_end,
+        op_loop_start,
+        op_loop_end,
+        op_loop_mode,
+        op_volume,
+        op_pan,
+        op_width,
+        op_position,
         op_tuningScale,
+        op_chorus,
+        op_reverb,
+        op_filterType,
         op_filterFreq,
         op_filterQ,
-        op_volEnvDelay,
-        op_volEnvAttack,
-        op_volEnvHold,
-        op_volEnvSustain,
-        op_volEnvRelease,
+        op_amp_velcurve_1,
+        op_amp_velcurve_127,
+
+        // Enveloppe volume
+        op_ampeg_delay,
+        op_ampeg_attack,
+        op_ampeg_hold,
+        op_ampeg_decay,
+        op_ampeg_sustain,
+        op_ampeg_release,
         op_noteToVolEnvHold,
         op_noteToVolEnvDecay,
-        op_modEnvDelay,
-        op_modEnvAttack,
-        op_modEnvHold,
-        op_modEnvDecay,
-        op_modEnvSustain,
-        op_modEnvRelease,
-        op_modEnvToTon,
-        op_modEnvToFilter,
-        op_noteToModEnvHold,
-        op_noteToModEnvDecay,
+
+        // LFO volume
         op_modLFOdelay,
         op_modLFOfreq,
-        op_modLFOtoTon,
-        op_modLFOtoFilter,
         op_modLFOtoVolume,
+
+        // Enveloppe pitch
+        op_pitcheg_delay,
+        op_pitcheg_attack,
+        op_pitcheg_hold,
+        op_pitcheg_decay,
+        op_pitcheg_sustain,
+        op_pitcheg_release,
+        op_noteToModEnvHold,
+        op_noteToModEnvDecay,
+        op_modEnvToTon,
+
+        // LFO pitch
         op_vibLFOdelay,
         op_vibLFOfreq,
         op_vibLFOtoTon,
-        op_exclusiveClass,
-        op_chorus,
-        op_reverb,
-        op_sampleLoopStart,
-        op_sampleLoopEnd,
-        op_sampleStart,
-        op_sampleEnd
+
+        // Enveloppe filtre (si équivalent à enveloppe pitch, ou si enveloppe pitch non utilisé)
+        op_fileg_delay,
+        op_fileg_attack,
+        op_fileg_hold,
+        op_fileg_decay,
+        op_fileg_sustain,
+        op_fileg_release,
+        op_modEnvToFilter,
+        op_fileg_holdcc133,
+        op_fileg_decaycc133,
+
+        // LFO filtre (si équivalent à LFO volume ou si LFO volume non utilisé)
+        op_filLFOdelay,
+        op_filLFOfreq,
+        op_modLFOtoFilter
     };
 
     Parametre(QString opcode, QString valeur);
+    Parametre(OpCode opcode, int valeur) :
+        _opcode(opcode),
+        _intValue(valeur),
+        _dblValue(0.)
+    {}
     OpCode  getOpCode()      const { return _opcode;   }
     int     getIntValue()    const { return _intValue; }
-    int     getDoubleValue() const { return _dblValue; }
+    double  getDoubleValue() const { return _dblValue; }
     QString getStringValue() const { return _strValue; }
+    void    setIntValue(int value) { _intValue = value; }
 
 private:
     OpCode  _opcode;
@@ -110,16 +144,51 @@ public:
 
     // Décodage
     void decode(Pile_sf2 * sf2, EltID idElt) const;
-    bool containsSample() const
+    QList<int> getSampleIndex(Pile_sf2 * sf2, EltID idElt, QString pathSfz) const;
+    void adaptOffsets(int startLoop, int endLoop, int length);
+    void checkFilter();
+
+    // Lecture
+    bool isDefined(Parametre::OpCode opcode) const
     {
         bool bRet = false;
         for (int i = 0; i < _listeParam.size(); i++)
-            bRet = bRet || _listeParam.at(i).getOpCode() == Parametre::op_sample;
+            if (_listeParam.at(i).getOpCode() == opcode)
+                bRet = true;
         return bRet;
     }
+    int getIntValue(Parametre::OpCode opcode) const
+    {
+        int iRet = 0;
+        for (int i = 0; i < _listeParam.size(); i++)
+            if (_listeParam.at(i).getOpCode() == opcode)
+                iRet = _listeParam.at(i).getIntValue();
+        return iRet;
+    }
+    double getDoubleValue(Parametre::OpCode opcode) const
+    {
+        double dRet = 0;
+        for (int i = 0; i < _listeParam.size(); i++)
+            if (_listeParam.at(i).getOpCode() == opcode)
+                dRet = _listeParam.at(i).getDoubleValue();
+        return dRet;
+    }
+    QString getStrValue(Parametre::OpCode opcode) const
+    {
+        QString strRet = 0;
+        for (int i = 0; i < _listeParam.size(); i++)
+            if (_listeParam.at(i).getOpCode() == opcode)
+                strRet = _listeParam.at(i).getStringValue();
+        return strRet;
+    }
+    static double percentToDB(double percent) { return log10(percent / 100.) * 20.; }
 
 private:
     QList<Parametre> _listeParam;
+    static QStringList getFullPath(QString base, QStringList directories);
+    static double log2m1200(double value) { return 1200. * log2(value); }
+    static double d1200e2(int value) { return exp2(value / 1200.); }
+    static void addSeconds(double value, Champ champ, Pile_sf2 * sf2, EltID id);
 };
 
 class EnsembleGroupes
@@ -135,9 +204,11 @@ public:
         else
             _listeDivisions.last() << Parametre(opcode, valeur);
     }
+    void moveOpcodeInSamples(Parametre::OpCode opcode);
+    void checkFilter();
 
     // Décodage
-    void decode(Pile_sf2 * sf2, EltID idInst) const;
+    void decode(Pile_sf2 * sf2, EltID idInst, QString pathSfz);
 
 private:
     GroupeParametres _paramGlobaux;
@@ -165,6 +236,7 @@ private:
 
     void changeBloc(QString bloc);
     void addOpcode(QString opcode, QString value);
+    QString getNomInstrument(QString filePath, int &numBank, int &numPreset);
 };
 
 #endif // IMPORT_SFZ_H

@@ -606,7 +606,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="gui_divers/dialog_export.cpp" line="57"/>
+        <location filename="gui_divers/dialog_export.cpp" line="60"/>
         <source>Choisir un répertoire de destination</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1253,7 +1253,7 @@ instrument courant</source>
     <message>
         <location filename="mainwindow.ui" line="612"/>
         <location filename="mainwindow.cpp" line="265"/>
-        <location filename="mainwindow.cpp" line="407"/>
+        <location filename="mainwindow.cpp" line="410"/>
         <source>&amp;Enregistrer</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1421,8 +1421,8 @@ instrument courant</source>
     </message>
     <message>
         <location filename="mainwindow.ui" line="821"/>
-        <location filename="mainwindow.cpp" line="884"/>
-        <location filename="mainwindow.cpp" line="896"/>
+        <location filename="mainwindow.cpp" line="887"/>
+        <location filename="mainwindow.cpp" line="899"/>
         <source>&amp;Renommer</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1800,14 +1800,14 @@ instrument courant</source>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="266"/>
-        <location filename="mainwindow.cpp" line="408"/>
-        <location filename="mainwindow.cpp" line="506"/>
+        <location filename="mainwindow.cpp" line="411"/>
+        <location filename="mainwindow.cpp" line="509"/>
         <source>&amp;Annuler</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="253"/>
-        <location filename="mainwindow.cpp" line="402"/>
+        <location filename="mainwindow.cpp" line="405"/>
         <source>&lt;b&gt;Sauvegarder avant de quitter ?&lt;/b&gt;</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1819,14 +1819,14 @@ instrument courant</source>
     </message>
     <message utf8="true">
         <location filename="mainwindow.cpp" line="261"/>
-        <location filename="mainwindow.cpp" line="404"/>
+        <location filename="mainwindow.cpp" line="407"/>
         <source>Le fichier « </source>
         <oldsource>Le fichier «&amp;#160;</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
         <location filename="mainwindow.cpp" line="261"/>
-        <location filename="mainwindow.cpp" line="404"/>
+        <location filename="mainwindow.cpp" line="407"/>
         <source> » a été modifié.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1836,290 +1836,290 @@ instrument courant</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="327"/>
+        <location filename="mainwindow.cpp" line="330"/>
         <source>Ouvrir une soundfont</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="329"/>
-        <location filename="mainwindow.cpp" line="520"/>
-        <location filename="mainwindow.cpp" line="524"/>
+        <location filename="mainwindow.cpp" line="332"/>
+        <location filename="mainwindow.cpp" line="523"/>
+        <location filename="mainwindow.cpp" line="527"/>
         <source>Fichier .sf2 (*.sf2)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="354"/>
-        <location filename="mainwindow.cpp" line="358"/>
-        <location filename="mainwindow.cpp" line="362"/>
-        <location filename="mainwindow.cpp" line="366"/>
-        <location filename="mainwindow.cpp" line="370"/>
-        <location filename="mainwindow.cpp" line="540"/>
+        <location filename="mainwindow.cpp" line="357"/>
+        <location filename="mainwindow.cpp" line="361"/>
+        <location filename="mainwindow.cpp" line="365"/>
+        <location filename="mainwindow.cpp" line="369"/>
+        <location filename="mainwindow.cpp" line="373"/>
         <location filename="mainwindow.cpp" line="543"/>
         <location filename="mainwindow.cpp" line="546"/>
-        <location filename="mainwindow.cpp" line="1621"/>
+        <location filename="mainwindow.cpp" line="549"/>
+        <location filename="mainwindow.cpp" line="1624"/>
         <source>Attention</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="362"/>
+        <location filename="mainwindow.cpp" line="365"/>
         <source>Impossible d&apos;ouvrir le fichier.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="366"/>
+        <location filename="mainwindow.cpp" line="369"/>
         <source>Lecture impossible.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="370"/>
+        <location filename="mainwindow.cpp" line="373"/>
         <source>Le fichier est corrompu.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="378"/>
+        <location filename="mainwindow.cpp" line="381"/>
         <source>Nom de la nouvelle soundfont :</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="409"/>
+        <location filename="mainwindow.cpp" line="412"/>
         <source>&amp;Fermer sans enregistrer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="474"/>
+        <location filename="mainwindow.cpp" line="477"/>
         <source> bits&lt;/b&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="477"/>
+        <location filename="mainwindow.cpp" line="480"/>
         <source>&amp;Oui</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="478"/>
+        <location filename="mainwindow.cpp" line="481"/>
         <source>&amp;Non</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="mainwindow.cpp" line="494"/>
+        <location filename="mainwindow.cpp" line="497"/>
         <source>&lt;b&gt;Trop de paramètres dans les instruments et les presets.&lt;/b&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="mainwindow.cpp" line="496"/>
+        <location filename="mainwindow.cpp" line="499"/>
         <source>&lt;b&gt;Trop de paramètres dans les instruments.&lt;/b&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="mainwindow.cpp" line="498"/>
+        <location filename="mainwindow.cpp" line="501"/>
         <source>&lt;b&gt;Trop de paramètres dans les presets.&lt;/b&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="mainwindow.cpp" line="500"/>
+        <location filename="mainwindow.cpp" line="503"/>
         <source>Certains synthétiseurs ne prennent pas en compte les paramètres au delà du 65536ème.
 Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="504"/>
+        <location filename="mainwindow.cpp" line="507"/>
         <source>&amp;Sauvegarder</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="mainwindow.cpp" line="505"/>
+        <location filename="mainwindow.cpp" line="508"/>
         <source>Sauvegarder, &amp;désactiver ce message</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="520"/>
         <location filename="mainwindow.cpp" line="523"/>
+        <location filename="mainwindow.cpp" line="526"/>
         <source>Sauvegarder une soundfont</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="540"/>
+        <location filename="mainwindow.cpp" line="543"/>
         <source>Extension inconnue.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="546"/>
+        <location filename="mainwindow.cpp" line="549"/>
         <source>Impossible d&apos;enregistrer le fichier.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="891"/>
+        <location filename="mainwindow.cpp" line="894"/>
         <source>&amp;Renommer en masse</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1520"/>
+        <location filename="mainwindow.cpp" line="1522"/>
         <source>Importer une soundfont</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1522"/>
+        <location filename="mainwindow.cpp" line="1524"/>
         <source>Fichier .sfz (*.sfz)</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="mainwindow.cpp" line="1985"/>
+        <location filename="mainwindow.cpp" line="1988"/>
         <source>Atténuation minimale (dB) :</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="mainwindow.cpp" line="1096"/>
+        <location filename="mainwindow.cpp" line="1099"/>
         <source>Nom du sample (max 20 caractères) :</source>
         <oldsource>Nom du SF2 (max 255 caractÃ¨res) :</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1100"/>
-        <location filename="mainwindow.cpp" line="1984"/>
+        <location filename="mainwindow.cpp" line="1103"/>
+        <location filename="mainwindow.cpp" line="1987"/>
         <source>Question</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1297"/>
+        <location filename="mainwindow.cpp" line="1299"/>
         <source>&amp;Remplacer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1298"/>
+        <location filename="mainwindow.cpp" line="1300"/>
         <source>R&amp;emplacer tout</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1299"/>
+        <location filename="mainwindow.cpp" line="1301"/>
         <source>&amp;Dupliquer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1300"/>
+        <location filename="mainwindow.cpp" line="1302"/>
         <source>D&amp;upliquer tout</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1301"/>
+        <location filename="mainwindow.cpp" line="1303"/>
         <source>&amp;Ignorer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1302"/>
+        <location filename="mainwindow.cpp" line="1304"/>
         <source>I&amp;gnorer tout</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1621"/>
+        <location filename="mainwindow.cpp" line="1624"/>
         <source>Aucun preset n&apos;est disponible.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1219"/>
+        <location filename="mainwindow.cpp" line="1221"/>
         <source>Importer un fichier audio</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="354"/>
+        <location filename="mainwindow.cpp" line="357"/>
         <source>Format inconnu.</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="mainwindow.cpp" line="358"/>
+        <location filename="mainwindow.cpp" line="361"/>
         <source>Le fichier est déjà chargé.</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="mainwindow.cpp" line="474"/>
+        <location filename="mainwindow.cpp" line="477"/>
         <source>&lt;b&gt;Perte de résolution </source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="mainwindow.cpp" line="475"/>
+        <location filename="mainwindow.cpp" line="478"/>
         <source>La qualité des samples sera abaissée suite à cette opération. Continuer ?</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="mainwindow.cpp" line="543"/>
+        <location filename="mainwindow.cpp" line="546"/>
         <source>Fichier déjà ouvert, impossible de sauvegarder.</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="mainwindow.cpp" line="1097"/>
+        <location filename="mainwindow.cpp" line="1100"/>
         <source>Nom de l&apos;instrument (max 20 caractères) :</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="mainwindow.cpp" line="1098"/>
+        <location filename="mainwindow.cpp" line="1101"/>
         <source>Nom du preset (max 20 caractères) :</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="mainwindow.cpp" line="1099"/>
+        <location filename="mainwindow.cpp" line="1102"/>
         <source>Nom du SF2 (max 255 caractères) :</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1221"/>
+        <location filename="mainwindow.cpp" line="1223"/>
         <source>Fichier .wav (*.wav)</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="mainwindow.cpp" line="1412"/>
+        <location filename="mainwindow.cpp" line="1414"/>
         <source>Choisir un répertoire de destination</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1595"/>
+        <location filename="mainwindow.cpp" line="1598"/>
         <source>Nom du nouvel instrument :</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1631"/>
+        <location filename="mainwindow.cpp" line="1634"/>
         <source>Nom du nouveau preset :</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1969"/>
+        <location filename="mainwindow.cpp" line="1972"/>
         <source> samples et </source>
         <oldsource> samples and </oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="mainwindow.cpp" line="1971"/>
+        <location filename="mainwindow.cpp" line="1974"/>
         <source> instrument ont été supprimés.</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="mainwindow.cpp" line="1973"/>
+        <location filename="mainwindow.cpp" line="1976"/>
         <source> instruments ont été supprimés.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1967"/>
+        <location filename="mainwindow.cpp" line="1970"/>
         <source> sample et </source>
         <oldsource> sample and </oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="mainwindow.cpp" line="1267"/>
-        <location filename="mainwindow.cpp" line="1273"/>
-        <location filename="mainwindow.cpp" line="1282"/>
+        <location filename="mainwindow.cpp" line="1269"/>
+        <location filename="mainwindow.cpp" line="1275"/>
+        <location filename="mainwindow.cpp" line="1284"/>
         <source>Le sample « </source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="mainwindow.cpp" line="1268"/>
+        <location filename="mainwindow.cpp" line="1270"/>
         <source>L » existe déjà.&lt;br /&gt;Que faire ?</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="mainwindow.cpp" line="1274"/>
+        <location filename="mainwindow.cpp" line="1276"/>
         <source>R » existe déjà.&lt;br /&gt;Que faire ?</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="mainwindow.cpp" line="1283"/>
+        <location filename="mainwindow.cpp" line="1285"/>
         <source> » existe déjà.&lt;br /&gt;Que faire ?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3211,14 +3211,14 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="pages/page_sf2.cpp" line="213"/>
-        <location filename="pages/page_sf2.cpp" line="228"/>
+        <location filename="pages/page_sf2.cpp" line="210"/>
+        <location filename="pages/page_sf2.cpp" line="225"/>
         <source> (inutilisés : </source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="pages/page_sf2.cpp" line="216"/>
-        <location filename="pages/page_sf2.cpp" line="231"/>
+        <location filename="pages/page_sf2.cpp" line="213"/>
+        <location filename="pages/page_sf2.cpp" line="228"/>
         <source> (inutilisé : </source>
         <translation type="unfinished"></translation>
     </message>
@@ -3455,26 +3455,26 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="sf2_core/duplicator.cpp" line="389"/>
+        <location filename="sf2_core/duplicator.cpp" line="422"/>
         <source>L&apos;instrument « </source>
         <oldsource>L&apos;instrument «&amp;#160;</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="sf2_core/duplicator.cpp" line="390"/>
-        <location filename="sf2_core/duplicator.cpp" line="486"/>
+        <location filename="sf2_core/duplicator.cpp" line="423"/>
+        <location filename="sf2_core/duplicator.cpp" line="519"/>
         <source> » existe déjà.&lt;br /&gt;Souhaitez-vous le remplacer ?</source>
         <oldsource>&amp;#160;» existe déjà.&lt;br /&gt;Souhaitez-vous le remplacer ?</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="sf2_core/duplicator.cpp" line="485"/>
+        <location filename="sf2_core/duplicator.cpp" line="518"/>
         <source>Le preset « </source>
         <oldsource>Le preset «&amp;#160;</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="sf2_core/duplicator.cpp" line="508"/>
+        <location filename="sf2_core/duplicator.cpp" line="541"/>
         <location filename="sf2_core/pile_sf2.cpp" line="1304"/>
         <location filename="sf2_core/pile_sf2.cpp" line="1393"/>
         <location filename="sf2_core/pile_sf2_sl.cpp" line="284"/>
@@ -3493,37 +3493,37 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="sf2_core/duplicator.cpp" line="509"/>
+        <location filename="sf2_core/duplicator.cpp" line="542"/>
         <source>Aucun preset n&apos;est disponible.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="sf2_core/duplicator.cpp" line="716"/>
+        <location filename="sf2_core/duplicator.cpp" line="749"/>
         <source>&amp;Remplacer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="sf2_core/duplicator.cpp" line="717"/>
+        <location filename="sf2_core/duplicator.cpp" line="750"/>
         <source>R&amp;emplacer tout</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="sf2_core/duplicator.cpp" line="718"/>
+        <location filename="sf2_core/duplicator.cpp" line="751"/>
         <source>&amp;Dupliquer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="sf2_core/duplicator.cpp" line="719"/>
+        <location filename="sf2_core/duplicator.cpp" line="752"/>
         <source>D&amp;upliquer tout</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="sf2_core/duplicator.cpp" line="720"/>
+        <location filename="sf2_core/duplicator.cpp" line="753"/>
         <source>&amp;Ignorer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="sf2_core/duplicator.cpp" line="721"/>
+        <location filename="sf2_core/duplicator.cpp" line="754"/>
         <source>I&amp;gnorer tout</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3590,37 +3590,38 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="tools/conversion_sfz.cpp" line="115"/>
+        <location filename="tools/conversion_sfz.cpp" line="145"/>
+        <location filename="tools/import_sfz.cpp" line="208"/>
         <source>sans nom</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="tools/conversion_sfz.cpp" line="135"/>
+        <location filename="tools/conversion_sfz.cpp" line="165"/>
         <source>// Sfz exporté depuis un sf2 par Polyphone</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="tools/conversion_sfz.cpp" line="136"/>
+        <location filename="tools/conversion_sfz.cpp" line="166"/>
         <source>// Nom         : </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="tools/conversion_sfz.cpp" line="137"/>
+        <location filename="tools/conversion_sfz.cpp" line="167"/>
         <source>// Auteur      : </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="tools/conversion_sfz.cpp" line="138"/>
+        <location filename="tools/conversion_sfz.cpp" line="168"/>
         <source>// Copyright   : </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="tools/conversion_sfz.cpp" line="139"/>
+        <location filename="tools/conversion_sfz.cpp" line="169"/>
         <source>// Date        : </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="tools/conversion_sfz.cpp" line="140"/>
+        <location filename="tools/conversion_sfz.cpp" line="170"/>
         <source>// Commentaire : </source>
         <translation type="unfinished"></translation>
     </message>
@@ -3640,7 +3641,7 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="tools/import_sfz.cpp" line="93"/>
+        <location filename="tools/import_sfz.cpp" line="110"/>
         <source>Import sfz</source>
         <translation type="unfinished"></translation>
     </message>
