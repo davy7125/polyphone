@@ -319,15 +319,48 @@ void Duplicator::copySmpl(EltID idSource, EltID idDest)
             // Possible ?
             EltID idSourceLink = idSource;
             idSourceLink.indexElt = _source->get(idSource, champ_wSampleLink).wValue;
+            Valeur val;
             if (_listCopy.contains(idSourceLink))
             {
                 // Association
-                Valeur val;
                 EltID idDestLink = _listPaste.at(_listCopy.indexOf(idSourceLink));
                 val.wValue = idDestLink.indexElt;
                 _destination->set(idDest, champ_wSampleLink, val);
                 val.wValue = idDest.indexElt;
                 _destination->set(idDestLink, champ_wSampleLink, val);
+
+                switch (_source->get(idSource, champ_sfSampleType).wValue)
+                {
+                case linkedSample:
+                    val.sfLinkValue = linkedSample;
+                    break;
+                case rightSample:
+                    val.sfLinkValue = rightSample;
+                    break;
+                case leftSample:
+                    val.sfLinkValue = leftSample;
+                    break;
+                case RomLinkedSample:
+                    val.sfLinkValue = RomLinkedSample;
+                    break;
+                case RomRightSample:
+                    val.sfLinkValue = RomLeftSample;
+                    break;
+                case RomLeftSample:
+                    val.sfLinkValue = RomRightSample;
+                    break;
+                }
+                _destination->set(idDestLink, champ_sfSampleType, val);
+            }
+            else
+            {
+                if (_source->get(idSource, champ_sfSampleType).wValue == linkedSample ||
+                        _source->get(idSource, champ_sfSampleType).wValue == rightSample ||
+                        _source->get(idSource, champ_sfSampleType).wValue == leftSample)
+                    val.sfLinkValue = monoSample;
+                else
+                    val.sfLinkValue = RomMonoSample;
+                _destination->set(idDest, champ_sfSampleType, val);
             }
         }
     }

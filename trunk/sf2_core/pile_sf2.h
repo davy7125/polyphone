@@ -34,6 +34,10 @@ using std::string;
 
 class Pile_sf2 : public QObject
 {
+    friend class GroupeParametres;
+    friend class EnsembleGroupes;
+    friend class ImportSfz;
+
     Q_OBJECT
 public:
     // METHODES PUBLIQUES DE LA CLASSE PILE_SF2

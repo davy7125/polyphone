@@ -33,7 +33,7 @@ DialogExport::DialogExport(Pile_sf2 *sf2, EltID idSf2, QWidget *parent) :
     ui->listPresets->sortItems();
 
     ui->comboFormat->setCurrentIndex(Config::getInstance()->getExportType());
-    ui->lineFolder->setText(Config::getInstance()->getLastFile(Config::typeFichierExport));
+    ui->lineFolder->setText(Config::getInstance()->getLastDirectory(Config::typeFichierExport));
 }
 
 DialogExport::~DialogExport()
@@ -73,7 +73,7 @@ void DialogExport::on_pushExport_clicked()
     // Sauvegarde des paramètres
     Config::getInstance()->setExportType(ui->comboFormat->currentIndex());
     if (QDir(ui->lineFolder->text()).exists())
-        Config::getInstance()->addFile(Config::typeFichierExport, ui->lineFolder->text());
+        Config::getInstance()->addFile(Config::typeFichierExport, ui->lineFolder->text() + "/soundfont.sfz");
     else
         QDialog::close();
 
