@@ -62,26 +62,27 @@ class ConversionSfz
 public:
     ConversionSfz(Pile_sf2 * sf2);
 
-    // Export en sfz, renvoi de l'adresse du dernier instrument créé
-    void convert(QString dir, QList<EltID> listID);
+    // Export en sfz
+    void convert(QString dir, QList<EltID> listID, bool presetPrefix, bool bankDir, bool gmSort);
 
 private:
     Pile_sf2 * _sf2;
     QList<int> _sampleIDs;
     QList<QString> _samplePaths;
     QString _dirSamples;
-    bool _bankUnique;
+    bool _bankSortEnabled, _gmSortEnabled;
 
-    void exportPrst(QString dir, EltID id);
+    void exportPrst(QString dir, EltID id, bool presetPrefix);
     QString getPathSfz(QString dir, QString name);
     QString getLink(EltID idSmpl);
     void writeEntete(QFile * fichierSfz, EltID id);
-    void writeGroup(QFile * fichierSfz, ParamListe * listeParam);
+    void writeGroup(QFile * fichierSfz, ParamListe * listeParam, bool isPercKit);
     void writeRegion(QFile * fichierSfz, ParamListe * listeParam, QString pathSample);
     void writeElement(QTextStream &out, Champ champ, double value);
     static double dbToPercent(double dB) { return 100. * pow(10, -dB / 20); }
     static QString escapeStr(QString str);
     static int lastLettersToRemove(QString str1, QString str2);
+    static QString getDirectoryName(int numPreset);
 };
 
 #endif // CONVERSION_SFZ_H

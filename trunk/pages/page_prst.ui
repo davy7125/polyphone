@@ -153,6 +153,13 @@
        </property>
       </spacer>
      </item>
+     <item>
+      <widget class="QLabel" name="labelPercussion">
+       <property name="text">
+        <string>(percussion)</string>
+       </property>
+      </widget>
+     </item>
     </layout>
    </item>
    <item>

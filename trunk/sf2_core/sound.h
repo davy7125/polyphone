@@ -37,7 +37,7 @@ class Sound
 public:
 
     // constructeur, destructeur
-    Sound(QString filename = "");
+    Sound(QString filename = "", bool tryFindRootkey = true);
     ~Sound();
 
     // méthodes publiques
@@ -46,7 +46,7 @@ public:
     DWORD get(Champ champ);
     QString getFileName();
     void set(Champ champ, Valeur value);
-    void setFileName(QString qStr);
+    void setFileName(QString qStr, bool tryFindRootKey = true);
     void setData(QByteArray data, WORD wBps);
     void setRam(bool ram);
     static void exporter(QString fileName, Sound son);
@@ -108,13 +108,13 @@ private:
     QByteArray sm24;
     // Méthodes privées
     FileType getFileType();
-    void getInfoSound();
+    void getInfoSound(bool tryFindRootkey);
     QByteArray getDataSf2(QFile *fi, WORD byte);
     QByteArray getDataWav(QFile *fi, WORD byte);
     QByteArray getDataWav(QByteArray baData, WORD byte);
     void determineRootKey();
-    void getInfoSoundWav();
-    void getInfoSoundWav(QByteArray baData);
+    void getInfoSoundWav(bool tryFindRootkey);
+    void getInfoSoundWav(QByteArray baData, bool tryFindRootkey);
     static void exporter(QString fileName, QByteArray baData, InfoSound info);
     static void FFT_calculate(Complex * x, long N /* must be a power of 2 */,
             Complex * X, Complex * scratch, Complex * twiddles);

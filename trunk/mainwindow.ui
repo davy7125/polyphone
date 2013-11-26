@@ -258,9 +258,10 @@
       <bool>false</bool>
      </property>
      <property name="title">
-      <string>&amp;Sf2</string>
+      <string>&amp;Global</string>
      </property>
      <addaction name="action_Association_auto_samples"/>
+     <addaction name="action_Dissocier_les_samples_st_r_o"/>
      <addaction name="action_Enlever_les_l_ments_non_utilis_s"/>
      <addaction name="actionR_gler_att_nuation_minimale"/>
     </widget>
@@ -1406,6 +1407,21 @@
    </property>
    <property name="toolTip">
     <string>Importe une soundfont</string>
+   </property>
+  </action>
+  <action name="action_Dissocier_les_samples_st_r_o">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="ressources.qrc">
+     <normaloff>:/icones/unlink</normaloff>:/icones/unlink</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Dissocier les samples stéréo</string>
+   </property>
+   <property name="toolTip">
+    <string>Dissocie les samples stéréo</string>
    </property>
   </action>
  </widget>

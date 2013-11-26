@@ -708,7 +708,8 @@ QList<QAction *> MainWindow::getListeActions()
                 << ui->actionSommaire
                 << ui->action_Visualiseur
                 << ui->actionExporter_en_tant_qu_sfz
-                << ui->actionI_mporter_soundfont;
+                << ui->actionI_mporter_soundfont
+                << ui->action_Dissocier_les_samples_st_r_o;
     return listeAction;
 }
 void MainWindow::setListeActions(QList<QAction *> listeActions)
@@ -1183,7 +1184,7 @@ void MainWindow::dragAndDrop(EltID idDest, QList<EltID> idSources)
         duplicator.copy(idSources.at(i), idDest);
     updateActions();
 }
-void MainWindow::dragAndDrop(QString path, EltID idDest, int &replace)
+void MainWindow::dragAndDrop(QString path, EltID idDest, int * replace)
 {
     // prepareNewActions() et updateDo() faits à l'extérieur
     QFileInfo fileInfo(path);
@@ -1196,12 +1197,18 @@ void MainWindow::dragAndDrop(QString path, EltID idDest, int &replace)
     else if (extension.compare("sfz") == 0)
     {
         // Import sfz
+        int valueTmp = -1;
+        if (replace == NULL)
+            replace = &valueTmp;
         ImportSfz import(this->sf2);
         import.import(path, replace);
     }
     else if (extension.compare("wav") == 0 && idDest.typeElement != elementUnknown && idDest.indexSf2 != -1)
     {
         // Chargement d'un son wav
+        int valueTmp = 0;
+        if (replace == NULL)
+            replace = &valueTmp;
         importerSmpl(path, idDest, replace);
     }
 }
@@ -1228,12 +1235,12 @@ void MainWindow::importerSmpl()
     EltID id = this->ui->arborescence->getID(0);
     int replace = 0;
     while (!strList.isEmpty())
-        this->dragAndDrop(strList.takeAt(0), id, replace);
+        this->dragAndDrop(strList.takeAt(0), id, &replace);
     updateDo();
     updateActions();
     this->ui->arborescence->searchTree(this->ui->editSearch->text());
 }
-void MainWindow::importerSmpl(QString path, EltID id, int &replace)
+void MainWindow::importerSmpl(QString path, EltID id, int * replace)
 {
     id.typeElement = elementSmpl;
     QString qStr, nom;
@@ -1254,7 +1261,7 @@ void MainWindow::importerSmpl(QString path, EltID id, int &replace)
     int indexL = -1;
     int indexR = -1;
     QString qStr3 = "";
-    if (replace != -1)
+    if (*replace != -1)
     {
         for (int j = 0; j < this->sf2->count(id); j++)
         {
@@ -1287,7 +1294,7 @@ void MainWindow::importerSmpl(QString path, EltID id, int &replace)
                 }
             }
         }
-        if (replace != 2 && replace != 4 && (indexL != -1 || indexR != -1))
+        if (*replace != 2 && *replace != 4 && (indexL != -1 || indexR != -1))
         {
             // Remplacement ?
             QMessageBox msgBox(this);
@@ -1305,24 +1312,24 @@ void MainWindow::importerSmpl(QString path, EltID id, int &replace)
             msgBox.setDefaultButton(QMessageBox::YesAll);
             switch (msgBox.exec())
             {
-            case QMessageBox::NoAll: replace = 4; break;
-            case QMessageBox::No: replace = 3; break;
-            case QMessageBox::YesAll: replace = 2; break;
-            case QMessageBox::Yes: replace = 1; break;
-            case QMessageBox::Save: replace = 0; break;
-            case QMessageBox::SaveAll: replace = -1; break;
+            case QMessageBox::NoAll: *replace = 4; break;
+            case QMessageBox::No: *replace = 3; break;
+            case QMessageBox::YesAll: *replace = 2; break;
+            case QMessageBox::Yes: *replace = 1; break;
+            case QMessageBox::Save: *replace = 0; break;
+            case QMessageBox::SaveAll: *replace = -1; break;
             }
         }
     }
     for (int j = 0; j < nChannels; j++)
     {
-        if (replace < 3 || (nChannels == 2 && j == 0 && indexL == -1) ||
+        if (*replace < 3 || (nChannels == 2 && j == 0 && indexL == -1) ||
                 (nChannels == 2 && j == 1 && indexR == -1) ||
                 (nChannels == 1 && indexL == -1)) // Si pas ignorer
         {
             if (((nChannels == 2 && j == 0 && indexL != -1) ||
                  (nChannels == 2 && j == 1 && indexR != -1) ||
-                 (nChannels == 1 && indexL != -1)) && (replace == 2 || replace == 1))
+                 (nChannels == 1 && indexL != -1)) && (*replace == 2 || *replace == 1))
             {
                 if ((nChannels == 2 && j == 0 && indexL != -1) || (nChannels == 1 && indexL != -1))
                     id.indexElt = indexL;
@@ -1513,7 +1520,8 @@ void MainWindow::exporter()
         return;
 
     DialogExport * dial = new DialogExport(sf2, ui->arborescence->getID(0), this);
-    connect(dial, SIGNAL(accepted(QList<EltID>,QString,int)), this, SLOT(exporter(QList<EltID>,QString,int)));
+    connect(dial, SIGNAL(accepted(QList<EltID>,QString,int,bool,bool,bool)),
+            this, SLOT(exporter(QList<EltID>,QString,int,bool,bool,bool)));
     dial->show();
 }
 void MainWindow::importer()
@@ -1530,12 +1538,12 @@ void MainWindow::importer()
     this->sf2->prepareNewActions();
     int numSf2 = -1;
     while (!strList.isEmpty())
-        this->dragAndDrop(strList.takeFirst(), EltID(elementUnknown, -1, -1, -1, -1), numSf2);
+        this->dragAndDrop(strList.takeFirst(), EltID(elementUnknown, -1, -1, -1, -1), &numSf2);
     updateDo();
     updateActions();
     this->ui->arborescence->searchTree(this->ui->editSearch->text());
 }
-void MainWindow::exporter(QList<EltID> listID, QString dir, int format)
+void MainWindow::exporter(QList<EltID> listID, QString dir, int format, bool presetPrefix, bool bankDir, bool gmSort)
 {
     if (dir.isEmpty() || !QDir(dir).exists() || listID.isEmpty())
         return;
@@ -1583,7 +1591,7 @@ void MainWindow::exporter(QList<EltID> listID, QString dir, int format)
         }break;
     case 1:
         // Export sfz
-        ConversionSfz(sf2).convert(dir, listID);
+        ConversionSfz(sf2).convert(dir, listID, presetPrefix, bankDir, gmSort);
         break;
     default:
         break;
@@ -2136,6 +2144,43 @@ void MainWindow::associationAutoSmpl()
                 indice++;
         }
     }
+    // Mise à jour
+    this->updateDo();
+    if (ui->stackedWidget->currentWidget() == this->page_smpl)
+        this->page_smpl->afficher();
+}
+
+// Suppression des liens de tous les samples
+void MainWindow::on_action_Dissocier_les_samples_st_r_o_triggered()
+{
+    this->sf2->prepareNewActions();
+    EltID id = this->ui->arborescence->getID(0);
+    id.typeElement = elementSmpl;
+    for (int i = 0; i < sf2->count(id); i++)
+    {
+        id.indexElt = i;
+        if (!sf2->get(id, champ_hidden).bValue)
+        {
+            SFSampleLink type = sf2->get(id, champ_sfSampleType).sfLinkValue;
+            if (type != monoSample && type != RomMonoSample)
+            {
+                Valeur value;
+                if (type == leftSample || type == rightSample || type == linkedSample)
+                {
+                    value.sfLinkValue = monoSample;
+                    sf2->set(id, champ_sfSampleType, value);
+                }
+                else if (type == RomLeftSample || type == RomRightSample || type == RomLinkedSample)
+                {
+                    value.sfLinkValue = RomMonoSample;
+                    sf2->set(id, champ_sfSampleType, value);
+                }
+                value.wValue = 0;
+                sf2->set(id, champ_wSampleLink, value);
+            }
+        }
+    }
+
     // Mise à jour
     this->updateDo();
     if (ui->stackedWidget->currentWidget() == this->page_smpl)

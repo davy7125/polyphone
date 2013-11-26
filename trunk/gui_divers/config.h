@@ -561,8 +561,14 @@ public:
     int getDockWidth()                      { return settings.value("affichage/dock_width", 150).toInt(); }
 
     // Export
-    void setExportType(int val)             { settings.setValue("export_type", val); }
-    int getExportType()                     { return settings.value("export_type", 0).toInt(); }
+    void setExportType(int val)             { settings.setValue("export/type", val); }
+    void setExportPreset(bool val)          { settings.setValue("export/preset_prefix", val); }
+    void setExportBank(bool val)            { settings.setValue("export/bank_directory", val); }
+    void setExportGM(bool val)              { settings.setValue("export/gm_sort", val); }
+    int  getExportType()                    { return settings.value("export/type", 0).toInt(); }
+    bool getExportPreset()                  { return settings.value("export/preset_prefix", true).toBool(); }
+    bool getExportBank()                    { return settings.value("export/bank_directory", false).toBool(); }
+    bool getExportGM()                      { return settings.value("export/gm_sort", false).toBool(); }
 
     // Affichage de la fenêtre
     void show();

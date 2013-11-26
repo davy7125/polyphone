@@ -54,7 +54,7 @@ int main(int argc, char *argv[])
     QStringList listeArg = QCoreApplication::arguments();
     int replace = 0;
     for (int i = 1; i < listeArg.size(); i++)
-        w.dragAndDrop(listeArg.at(i), EltID(elementUnknown, -1, -1, -1, -1), replace);
+        w.dragAndDrop(listeArg.at(i), EltID(elementUnknown, -1, -1, -1, -1), &replace);
 
     return a.exec();
 }

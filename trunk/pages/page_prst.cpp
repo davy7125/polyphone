@@ -81,6 +81,7 @@ void Page_Prst::afficher()
     this->preparation = 1;
     this->ui->spinBank->setValue(this->sf2->get(id, champ_wBank).wValue);
     this->ui->spinPreset->setValue(this->sf2->get(id, champ_wPreset).wValue);
+    ui->labelPercussion->setVisible(sf2->get(id, champ_wBank).wValue == 128);
     this->preparation = 0;
 }
 
@@ -275,6 +276,7 @@ void Page_Prst::setBank()
         }
     }
     this->preparation = 0;
+    ui->labelPercussion->setVisible(ui->spinBank->value() == 128);
 }
 void Page_Prst::setPreset()
 {

@@ -34,18 +34,15 @@ using std::string;
 
 class Pile_sf2 : public QObject
 {
-    friend class GroupeParametres;
-    friend class EnsembleGroupes;
-    friend class ImportSfz;
-
     Q_OBJECT
+
 public:
     // METHODES PUBLIQUES DE LA CLASSE PILE_SF2
     Pile_sf2(Tree *tree, bool ram, QWidget * parent = NULL);
     virtual ~Pile_sf2() {}
 
     // Ajout / suppression des données
-    int add(EltID id);
+    int add(EltID id, bool storeAction = true);
     void remove(EltID id, int *message = NULL);
 
     // Accès / modification des propriétés
@@ -54,9 +51,9 @@ public:
     QString getQstr(EltID id, Champ champ);
     Sound getSon(EltID id);
     QByteArray getData(EltID id, Champ champ);
-    int set(EltID id, Champ champ, Valeur value);
-    int set(EltID id, Champ champ, QString qStr);
-    int set(EltID id, Champ champ, QByteArray data);
+    int set(EltID id, Champ champ, Valeur value, bool storeAction = true);
+    int set(EltID id, Champ champ, QString qStr, bool storeAction = true);
+    int set(EltID id, Champ champ, QByteArray data, bool storeAction = true);
     int reset(EltID id, Champ champ);
 
     // Nombre de freres de id (id compris)
@@ -295,16 +292,11 @@ private:
     QWidget * parent;
 
     // METHODES PRIVEES DE LA CLASSE PILE_SF2
-    // Ajoute un enfant à id
-    int add(EltID id, bool storeAction);
     // Affiche l'élément id
     int display(EltID id);
     // Supprime ou masque l'élément id. Si l'élément est utilisé par un autre : erreur
     int remove(EltID id, bool permanently, bool storeAction, int *message = NULL);
     // Modification de propriétés
-    int set(EltID id, Champ champ, Valeur value, bool storeAction);
-    int set(EltID id, Champ champ, QString qStr, bool storeAction);
-    int set(EltID id, Champ champ, QByteArray data, bool storeAction);
     int reset(EltID id, Champ champ, bool storeAction);
     // Type de fichier
     static FileType getFileType(QString fileName);
