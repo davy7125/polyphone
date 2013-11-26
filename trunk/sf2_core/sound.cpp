@@ -28,7 +28,7 @@
 QWidget * Sound::_parent = NULL;
 
 // Constructeur / destructeur
-Sound::Sound(QString filename)
+Sound::Sound(QString filename, bool tryFindRootkey)
 {
     this->sm24.clear();
     this->smpl.clear();
@@ -43,7 +43,7 @@ Sound::Sound(QString filename)
     this->info.dwNote = 0;
     this->info.iCent = 0;
     this->info.wBpsFile = 0;
-    this->setFileName(filename);
+    this->setFileName(filename, tryFindRootkey);
 }
 Sound::~Sound() {}
 
@@ -426,12 +426,12 @@ void Sound::set(Champ champ, Valeur value)
         break;
     }
 }
-void Sound::setFileName(QString qStr)
+void Sound::setFileName(QString qStr, bool tryFindRootKey)
 {
     this->fileName = qStr;
 
     // Récupération des infos sur le son
-    this->getInfoSound();
+    this->getInfoSound(tryFindRootKey);
 }
 void Sound::setRam(bool ram)
 {
@@ -556,13 +556,13 @@ Sound::FileType Sound::getFileType()
         return fileUnknown;
 }
 
-void Sound::getInfoSound()
+void Sound::getInfoSound(bool tryFindRootkey)
 {
     // Chargement des caractéristiques du sample
     switch (this->getFileType())
     {
     case fileWav:
-        getInfoSoundWav();
+        getInfoSoundWav(tryFindRootkey);
         break;
     case fileSf2:
         this->info.wChannel = 0;
@@ -606,7 +606,7 @@ void Sound::getInfoSound()
         this->info.wBpsFile = 0;
     }
 }
-void Sound::getInfoSoundWav()
+void Sound::getInfoSoundWav(bool tryFindRootkey)
 {
     // Caractéristiques d'un fichier wav
     info.wFormat = 0;
@@ -617,7 +617,7 @@ void Sound::getInfoSoundWav()
     info.wChannels = 0;
     info.dwStartLoop = 0;
     info.dwEndLoop = 0;
-    info.dwNote = 0;
+    info.dwNote = 60; // Par défaut do central
     info.iCent = 0;
     QFile fi(fileName);
     if (!fi.exists())
@@ -629,9 +629,9 @@ void Sound::getInfoSoundWav()
     fi.open(QFile::ReadOnly | QFile::Unbuffered);
     QByteArray baData = fi.readAll();
     fi.close();
-    this->getInfoSoundWav(baData);
+    this->getInfoSoundWav(baData, tryFindRootkey);
 }
-void Sound::getInfoSoundWav(QByteArray baData)
+void Sound::getInfoSoundWav(QByteArray baData, bool tryFindRootkey)
 {
     int taille, taille2, pos;
     if (strcmp("RIFF", baData.left(4)))
@@ -721,7 +721,7 @@ void Sound::getInfoSoundWav(QByteArray baData)
             pos += taille2 + 4;
         }
     }
-    if (!rootKeyOk)
+    if (!rootKeyOk && tryFindRootkey)
         determineRootKey();
 }
 
@@ -1047,20 +1047,28 @@ void Sound::exporter(QString fileName, QByteArray baData, InfoSound info)
 {
     // Création d'un fichier
     QFile fi(fileName);
-    if (!fi.open(QIODevice::WriteOnly)) return;
+    if (!fi.open(QIODevice::WriteOnly))
+        return;
+
+    bool withLoop = (info.dwStartLoop != info.dwEndLoop);
+
     // Ecriture
     quint32 dwTemp;
     quint16 wTemp;
     QDataStream out(&fi);
     out.setByteOrder(QDataStream::LittleEndian);
     quint32 dwTailleFmt = 18;
-    quint32 dwTailleSmpl = 60;
+    quint32 dwTailleSmpl = 36;
+    if (withLoop)
+        dwTailleSmpl += 24;
     quint32 dwLength = baData.size();
     dwTemp = dwLength + dwTailleFmt + dwTailleSmpl + 12 + 8 + 8;
+
     // Entete
     out.writeRawData("RIFF", 4);
     out << dwTemp;
     out.writeRawData("WAVE", 4);
+
     ///////////// BLOC FMT /////////////
     out.writeRawData("fmt ", 4);
     out << dwTailleFmt;
@@ -1083,6 +1091,7 @@ void Sound::exporter(QString fileName, QByteArray baData, InfoSound info)
     // Extra format bytes
     wTemp = 0;
     out << wTemp;
+
     ///////////// BLOC SMPL /////////////
     out.writeRawData("smpl", 4);
     out << dwTailleSmpl;
@@ -1116,25 +1125,37 @@ void Sound::exporter(QString fileName, QByteArray baData, InfoSound info)
     dwTemp = 0;
     out << dwTemp; // smpte format
     out << dwTemp; // smpte offset
-    dwTemp = 1;
-    out << dwTemp; // nombre boucles
-    dwTemp = 0;
-    out << dwTemp; // taille sampler data (après les boucles)
-    dwTemp = 1;
-    out << dwTemp; // CUE point id
-    dwTemp = 0;
-    out << dwTemp; // type
-    dwTemp = info.dwStartLoop;
-    out << dwTemp; // début boucle
-    dwTemp = info.dwEndLoop-1;
-    out << dwTemp; // fin boucle
-    dwTemp = 0;
-    out << dwTemp; // fraction
-    out << dwTemp; // play count (infinite)
+    if (withLoop)
+    {
+        dwTemp = 1;
+        out << dwTemp; // nombre boucles
+        dwTemp = 0;
+        out << dwTemp; // taille sampler data (après les boucles)
+        dwTemp = 1;
+        out << dwTemp; // CUE point id
+        dwTemp = 0;
+        out << dwTemp; // type
+        dwTemp = info.dwStartLoop;
+        out << dwTemp; // début boucle
+        dwTemp = info.dwEndLoop-1;
+        out << dwTemp; // fin boucle
+        dwTemp = 0;
+        out << dwTemp; // fraction
+        out << dwTemp; // play count (infinite)
+    }
+    else
+    {
+        dwTemp = 0;
+        out << dwTemp; // nombre boucles
+        out << dwTemp; // taille sampler data (après les boucles)
+    }
+
+
     ///////////// BLOC DATA /////////////
     out.writeRawData("data", 4);
     out << dwLength;
     out.writeRawData(baData.constData(), baData.size());
+
     // Fermeture du fichier
     fi.close();
 }

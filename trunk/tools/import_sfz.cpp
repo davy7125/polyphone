@@ -26,17 +26,21 @@
 #include "pile_sf2.h"
 #include "config.h"
 
+
+double Parametre::_attenuationOffset = 0;
+
 ImportSfz::ImportSfz(Pile_sf2 * sf2) :
     _sf2(sf2),
     _currentBloc(BLOC_UNKNOWN)
 {
 }
 
-void ImportSfz::import(QString fileName, int &numSf2)
+void ImportSfz::import(QString fileName, int * numSf2)
 {
     QFile inputFile(fileName);
     if (inputFile.open(QIODevice::ReadOnly))
     {
+        Parametre::_attenuationOffset = 0;
         QTextStream in(&inputFile);
         while (!in.atEnd())
         {
@@ -84,6 +88,9 @@ void ImportSfz::import(QString fileName, int &numSf2)
 
         // Les offsets doivent se trouver à côté des samples, pas dans les divisions globales
         // On ne garde que les filtres supportés par le format sf2
+        // Ajustement éventuel du volume
+        // Recherche du canal 10
+        bool isChannel10 = true;
         for (int i = 0; i < _listeEnsembles.size(); i++)
         {
             _listeEnsembles[i].moveOpcodeInSamples(Parametre::op_offset);
@@ -91,22 +98,27 @@ void ImportSfz::import(QString fileName, int &numSf2)
             _listeEnsembles[i].moveOpcodeInSamples(Parametre::op_loop_start);
             _listeEnsembles[i].moveOpcodeInSamples(Parametre::op_loop_end);
             _listeEnsembles[i].checkFilter();
+            if (Parametre::_attenuationOffset > 0)
+                _listeEnsembles[i].adjustVolume(Parametre::_attenuationOffset);
+            isChannel10 &= _listeEnsembles[i].isChannel10();
         }
 
         // Création d'un sf2
         int numBank = 0;
         int numPreset = 0;
         QString nom = getNomInstrument(fileName, numBank, numPreset);
+        if (isChannel10)
+            numBank = 128;
         EltID idSf2(elementSf2, -1, -1, -1, -1);
-        if (numSf2 == -1)
+        if (*numSf2 == -1)
         {
             idSf2.indexSf2 = _sf2->add(idSf2, false);
-            numSf2 = idSf2.indexSf2;
+            *numSf2 = idSf2.indexSf2;
             _sf2->set(idSf2, champ_name, nom, false);
         }
         else
         {
-            idSf2.indexSf2 = numSf2;
+            idSf2.indexSf2 = *numSf2;
             _sf2->set(idSf2, champ_name, QObject::trUtf8("Import sfz"), false);
         }
         _sf2->closestAvailablePreset(idSf2, numBank, numPreset);
@@ -129,10 +141,10 @@ void ImportSfz::import(QString fileName, int &numSf2)
         {
             idInst.indexElt = _sf2->add(idInst, false);
             QString nomInst = nom;
-            if (_listeEnsembles.size() > 10)
-                nomInst = nom.left(17) + "-" + QString::number(i);
+            if (_listeEnsembles.size() > 9)
+                nomInst = nom.left(17) + "-" + QString::number(i+1);
             else if (_listeEnsembles.size() > 1)
-                nomInst = nom.left(18) + "-" + QString::number(i);
+                nomInst = nom.left(18) + "-" + QString::number(i+1);
             else
                 nomInst = nom;
             _sf2->set(idInst, champ_name, nomInst, false);
@@ -157,7 +169,16 @@ void ImportSfz::import(QString fileName, int &numSf2)
             for (int j = 0; j < nbInstSmpl; j++)
             {
                 idInstSmpl.indexElt2 = j;
-                rangesType range = _sf2->get(idInstSmpl, champ_keyRange).rValue;
+                if (_sf2->isSet(idInstSmpl, champ_keyRange))
+                {
+                    rangesType range = _sf2->get(idInstSmpl, champ_keyRange).rValue;
+                    keyMin = qMin(keyMin, (int)range.byLo);
+                    keyMax = qMax(keyMax, (int)range.byHi);
+                }
+            }
+            if (_sf2->isSet(idInst, champ_keyRange))
+            {
+                rangesType range = _sf2->get(idInst, champ_keyRange).rValue;
                 keyMin = qMin(keyMin, (int)range.byLo);
                 keyMax = qMax(keyMax, (int)range.byHi);
             }
@@ -245,11 +266,24 @@ void EnsembleGroupes::moveOpcodeInSamples(Parametre::OpCode opcode)
     }
 }
 
+void EnsembleGroupes::adjustVolume(double offset)
+{
+    _paramGlobaux.adjustVolume(offset);
+    for (int i = 0; i < _listeDivisions.size(); i++)
+        _listeDivisions[i].adjustVolume(offset);
+}
+
 void EnsembleGroupes::checkFilter()
 {
     _paramGlobaux.checkFilter();
     for (int i = 0; i < _listeDivisions.size(); i++)
         _listeDivisions[i].checkFilter();
+}
+
+bool EnsembleGroupes::isChannel10()
+{
+    return (_paramGlobaux.getIntValue(Parametre::op_chanMin) == 10 &&
+            _paramGlobaux.getIntValue(Parametre::op_chanMax) == 10);
 }
 
 void EnsembleGroupes::decode(Pile_sf2 * sf2, EltID idInst, QString pathSfz)
@@ -328,7 +362,7 @@ void EnsembleGroupes::decode(Pile_sf2 * sf2, EltID idInst, QString pathSfz)
             if (_listeDivisions.at(i).isDefined(Parametre::op_pan))
             {
                 double pan = _listeDivisions.at(i).getDoubleValue(Parametre::op_pan);
-                attenuation = -GroupeParametres::percentToDB(100 - qAbs(pan));
+                attenuation = -GroupeParametres::percentToDB(100 - qAbs(pan)) * 1.7;
                 if (pan < 0)
                     panDefined = 1;
                 else if (pan > 0)
@@ -347,7 +381,7 @@ void EnsembleGroupes::decode(Pile_sf2 * sf2, EltID idInst, QString pathSfz)
                 // Pan
                 if (panDefined == j)
                 {
-                    val.shValue = 10 * attenuation;
+                    val.shValue = 10. * attenuation + 0.5;
                     sf2->set(idInstSmpl, champ_initialAttenuation, val, false);
                 }
 
@@ -405,7 +439,7 @@ QList<int> GroupeParametres::getSampleIndex(Pile_sf2 *sf2, EltID idElt, QString 
         return sampleIndex;
 
     // Récupération des informations d'un sample
-    Sound son(fileName);
+    Sound son(fileName, false);
     int nChannels = son.get(champ_wChannels);
     QString nom = QFileInfo(fileName).completeBaseName();
 
@@ -477,25 +511,16 @@ QList<int> GroupeParametres::getSampleIndex(Pile_sf2 *sf2, EltID idElt, QString 
 
 void GroupeParametres::adaptOffsets(int startLoop, int endLoop, int length)
 {
-    bool loopStartDefined = false;
-    bool loopEndDefined = false;
-
     for (int i = 0; i < _listeParam.size(); i++)
     {
         if (_listeParam.at(i).getOpCode() == Parametre::op_loop_start)
-        {
-            loopStartDefined = true;
             _listeParam[i].setIntValue(_listeParam.at(i).getIntValue() - startLoop);
-        }
         else if (_listeParam.at(i).getOpCode() == Parametre::op_loop_end)
-        {
-            loopEndDefined = true;
             _listeParam[i].setIntValue(_listeParam.at(i).getIntValue() - endLoop);
-        }
         else if (_listeParam.at(i).getOpCode() == Parametre::op_end)
             _listeParam[i].setIntValue(_listeParam.at(i).getIntValue() - length);
     }
-    if (loopStartDefined && loopEndDefined && !isDefined(Parametre::op_loop_mode))
+    if (startLoop != endLoop && !isDefined(Parametre::op_loop_mode))
         _listeParam << Parametre("loop_mode", "loop_continuous");
 }
 
@@ -519,6 +544,21 @@ void GroupeParametres::checkFilter()
                 _listeParam.removeAt(i);
         }
     }
+}
+
+void GroupeParametres::adjustVolume(double offset)
+{
+    bool isDefined = false;
+    for (int i = 0; i < _listeParam.size(); i++)
+    {
+        if (_listeParam.at(i).getOpCode() == Parametre::op_volume)
+        {
+            _listeParam[i].setDoubleValue(_listeParam.at(i).getDoubleValue() - offset);
+            isDefined = true;
+        }
+    }
+    if (!isDefined)
+        _listeParam << Parametre(Parametre::op_volume, -offset);
 }
 
 QStringList GroupeParametres::getFullPath(QString base, QStringList directories)
@@ -551,6 +591,8 @@ void GroupeParametres::decode(Pile_sf2 * sf2, EltID idElt) const
             val.rValue.byLo = _listeParam.at(i).getIntValue();
             val.rValue.byHi = val.rValue.byLo;
             sf2->set(idElt, champ_keyRange, val, false);
+            val.wValue = _listeParam.at(i).getIntValue();
+            sf2->set(idElt, champ_overridingRootKey, val, false);
             break;
         case Parametre::op_keyMin:
             if (sf2->isSet(idElt, champ_keyRange))
@@ -585,12 +627,16 @@ void GroupeParametres::decode(Pile_sf2 * sf2, EltID idElt) const
             sf2->set(idElt, champ_velRange, val, false);
             break;
         case Parametre::op_rootKey:
-            val.wValue = _listeParam.at(i).getIntValue();
-            sf2->set(idElt, champ_overridingRootKey, val, false);
+            if (!isDefined(Parametre::op_key))
+            {
+                val.wValue = _listeParam.at(i).getIntValue();
+                sf2->set(idElt, champ_overridingRootKey, val, false);
+            }
             break;
         case Parametre::op_exclusiveClass:
             val.wValue = _listeParam.at(i).getIntValue();
-            sf2->set(idElt, champ_exclusiveClass, val, false);
+            if (isDefined(Parametre::op_off_by) && getIntValue(Parametre::op_off_by) == val.wValue)
+                sf2->set(idElt, champ_exclusiveClass, val, false);
             break;
         case Parametre::op_tuningFine:
             val.wValue = _listeParam.at(i).getIntValue();
@@ -659,7 +705,7 @@ void GroupeParametres::decode(Pile_sf2 * sf2, EltID idElt) const
             sf2->set(idElt, champ_sampleModes, val, false);
             break;
         case Parametre::op_volume:
-            dTmp = qMax(0., -_listeParam.at(i).getDoubleValue());
+            dTmp = -_listeParam.at(i).getDoubleValue() / 0.68;
             if (sf2->isSet(idElt, champ_initialAttenuation))
                 dTmp += (double)sf2->get(idElt, champ_initialAttenuation).shValue / 10.;
             val.shValue = 10. * dTmp + .5;
@@ -955,6 +1001,11 @@ Parametre::Parametre(QString opcode, QString valeur) :
         _opcode = op_exclusiveClass;
         _intValue = valeurLow.toInt();
     }
+    else if (opcode == "off_by" || opcode == "offby")
+    {
+        _opcode = op_off_by;
+        _intValue = valeurLow.toInt();
+    }
     else if (opcode == "tune")
     {
         _opcode = op_tuningFine;
@@ -988,7 +1039,7 @@ Parametre::Parametre(QString opcode, QString valeur) :
     else if (opcode == "loop_end")
     {
         _opcode = op_loop_end;
-        _intValue = valeurLow.toInt();
+        _intValue = valeurLow.toInt() + 1;
     }
     else if (opcode == "loop_mode")
     {
@@ -1014,6 +1065,8 @@ Parametre::Parametre(QString opcode, QString valeur) :
     {
         _opcode = op_volume;
         _dblValue = valeurLow.toDouble();
+        if (_dblValue > _attenuationOffset)
+            _attenuationOffset = _dblValue;
     }
     else if (opcode == "pitch_keytrack")
     {
@@ -1170,8 +1223,6 @@ Parametre::Parametre(QString opcode, QString valeur) :
         _opcode = op_amp_velcurve_127;
         _dblValue = valeurLow.toDouble();
     }
-
-
     else if (opcode == "fileg_delay")
     {
         _opcode = op_fileg_delay;
@@ -1217,8 +1268,6 @@ Parametre::Parametre(QString opcode, QString valeur) :
         _opcode = op_fileg_decaycc133;
         _intValue = valeurLow.toInt();
     }
-
-
     else if (opcode == "fillfo_delay")
     {
         _opcode = op_filLFOdelay;
@@ -1234,8 +1283,16 @@ Parametre::Parametre(QString opcode, QString valeur) :
         _opcode = op_modLFOtoFilter;
         _intValue = valeurLow.toInt();
     }
-
-
+    else if (opcode == "lochan")
+    {
+        _opcode = op_chanMin;
+        _intValue = valeurLow.toInt();
+    }
+    else if (opcode == "hichan")
+    {
+        _opcode = op_chanMax;
+        _intValue = valeurLow.toInt();
+    }
     else
         qDebug() << "non pris en charge: " + opcode + " (" + valeur + ")";
 }
