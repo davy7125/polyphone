@@ -43,8 +43,11 @@ public:
         op_keyMax,
         op_velMin,
         op_velMax,
+        op_chanMin,
+        op_chanMax,
         op_rootKey,
         op_exclusiveClass,
+        op_off_by,
         op_tuningFine,
         op_tuningCoarse,
         op_delay,
@@ -120,11 +123,19 @@ public:
         _intValue(valeur),
         _dblValue(0.)
     {}
-    OpCode  getOpCode()      const { return _opcode;   }
-    int     getIntValue()    const { return _intValue; }
-    double  getDoubleValue() const { return _dblValue; }
-    QString getStringValue() const { return _strValue; }
-    void    setIntValue(int value) { _intValue = value; }
+    Parametre(OpCode opcode, double valeur) :
+        _opcode(opcode),
+        _intValue(0),
+        _dblValue(valeur)
+    {}
+    OpCode  getOpCode()      const       { return _opcode;   }
+    int     getIntValue()    const       { return _intValue; }
+    double  getDoubleValue() const       { return _dblValue; }
+    QString getStringValue() const       { return _strValue; }
+    void    setIntValue(int value)       { _intValue = value; }
+    void    setDoubleValue(double value) { _dblValue = value; }
+
+    static double _attenuationOffset;
 
 private:
     OpCode  _opcode;
@@ -147,6 +158,7 @@ public:
     QList<int> getSampleIndex(Pile_sf2 * sf2, EltID idElt, QString pathSfz) const;
     void adaptOffsets(int startLoop, int endLoop, int length);
     void checkFilter();
+    void adjustVolume(double offset);
 
     // Lecture
     bool isDefined(Parametre::OpCode opcode) const
@@ -206,6 +218,8 @@ public:
     }
     void moveOpcodeInSamples(Parametre::OpCode opcode);
     void checkFilter();
+    bool isChannel10();
+    void adjustVolume(double offset);
 
     // Décodage
     void decode(Pile_sf2 * sf2, EltID idInst, QString pathSfz);
@@ -220,7 +234,7 @@ class ImportSfz
 {
 public:
     ImportSfz(Pile_sf2 *sf2);
-    void import(QString fileName, int &numSf2);
+    void import(QString fileName, int *numSf2);
 
 private:
     enum Bloc

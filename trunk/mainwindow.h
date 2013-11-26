@@ -80,7 +80,7 @@ public:
     void setSynthChorus(int level, int depth, int frequency);
     void setListeActions(QList<QAction *> listeActions);
     void dragAndDrop(EltID idDest, QList<EltID> idSources);
-    void dragAndDrop(QString path, EltID idDest, int &replace);
+    void dragAndDrop(QString path, EltID idDest, int *replace = NULL);
 
 public slots:
     void returnToOldMaxMinSizes();
@@ -105,7 +105,8 @@ private slots:
     void importerSmpl();        // Import d'un sample
     void exporterSmpl();        // Export d'un sample
     void exporter();            // Export d'un ou plusieurs preset(s)
-    void exporter(QList<EltID> listID, QString dir, int format);
+    void exporter(QList<EltID> listID, QString dir, int format,
+                  bool presetPrefix, bool bankDir, bool gmSort);
     void importer();            // Import de soundfont non sf2
     void nouvelInstrument();    // Création d'un instrument
     void nouveauPreset();       // Création d'un preset
@@ -155,6 +156,8 @@ private slots:
     void setVolume(int vol);
     void noteChanged(int key, int vel);
 
+    void on_action_Dissocier_les_samples_st_r_o_triggered();
+
 signals:
     void initAudio(int numDevice, int bufferSize);
     void stopAudio();
@@ -186,7 +189,7 @@ private:
 
     // Méthodes privées
     void ouvrir(QString fileName);
-    void importerSmpl(QString path, EltID id, int &replace);
+    void importerSmpl(QString path, EltID id, int *replace);
     void updateTitle();
     int sauvegarder(int indexSf2, bool saveAs);
     void updateFavoriteFiles();

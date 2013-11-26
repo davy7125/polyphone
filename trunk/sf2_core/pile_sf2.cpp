@@ -110,7 +110,6 @@ Pile_sf2::SF2::BAG::GEN::GEN()
 ///////////////////////// METHODES PUBLIQUES /////////////////////////
 
 // Ajout / suppression des données
-int Pile_sf2::add(EltID id) {return this->add(id, 1);}
 void Pile_sf2::remove(EltID id, int *message) {this->remove(id, 0, 1, message);}
 
 // Accès / modification des propriétés
@@ -512,9 +511,6 @@ QByteArray Pile_sf2::getData(EltID id, Champ champ)
     QByteArray baRet;
     return baRet;
 }
-int Pile_sf2::set(EltID id, Champ champ, Valeur value) {return this->set(id, champ, value, 1);}
-int Pile_sf2::set(EltID id, Champ champ, QString value) {return this->set(id, champ, value, 1);}
-int Pile_sf2::set(EltID id, Champ champ, QByteArray data) {return this->set(id, champ, data, 1);}
 
 int Pile_sf2::reset(EltID id, Champ champ) {return this->reset(id, champ, 1);}
 

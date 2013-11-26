@@ -10,7 +10,7 @@
     <x>0</x>
     <y>0</y>
     <width>322</width>
-    <height>323</height>
+    <height>375</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -54,9 +54,9 @@
    </item>
    <item>
     <layout class="QGridLayout" name="gridLayout">
-     <item row="0" column="1">
-      <widget class="QLineEdit" name="lineFolder"/>
-     </item>
+     <property name="verticalSpacing">
+      <number>3</number>
+     </property>
      <item row="0" column="2">
       <widget class="QPushButton" name="pushFolder">
        <property name="maximumSize">
@@ -87,13 +87,6 @@
        </property>
       </widget>
      </item>
-     <item row="1" column="0">
-      <widget class="QLabel" name="label_2">
-       <property name="text">
-        <string>Format</string>
-       </property>
-      </widget>
-     </item>
      <item row="1" column="1" colspan="2">
       <widget class="QComboBox" name="comboFormat">
        <item>
@@ -106,6 +99,37 @@
          <string notr="true">.sfz</string>
         </property>
        </item>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <widget class="QLabel" name="label_2">
+       <property name="text">
+        <string>Format</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="QLineEdit" name="lineFolder"/>
+     </item>
+     <item row="2" column="1" colspan="2">
+      <widget class="QCheckBox" name="checkPreset">
+       <property name="text">
+        <string>numéro de preset en préfixe</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="1" colspan="2">
+      <widget class="QCheckBox" name="checkBank">
+       <property name="text">
+        <string>un répertoire par banque</string>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="1" colspan="2">
+      <widget class="QCheckBox" name="checkGM">
+       <property name="text">
+        <string>classement général midi</string>
+       </property>
       </widget>
      </item>
     </layout>

@@ -30,7 +30,7 @@ ConversionSfz::ConversionSfz(Pile_sf2 *sf2) :
     _sf2(sf2)
 {}
 
-void ConversionSfz::convert(QString dir, QList<EltID> listID)
+void ConversionSfz::convert(QString dir, QList<EltID> listID, bool presetPrefix, bool bankDir, bool gmSort)
 {
     if (listID.isEmpty())
         return;
@@ -52,45 +52,63 @@ void ConversionSfz::convert(QString dir, QList<EltID> listID)
 
     // Plusieurs banques sont utilisées ?
     int numBank = -1;
-    _bankUnique = true;
-    for (int i = 0; i < listID.count(); i++)
+    _bankSortEnabled = false;
+    if (bankDir)
     {
-        if (numBank == -1)
-            numBank = _sf2->get(listID.at(i), champ_wBank).wValue;
-        else
-            _bankUnique &= (numBank == _sf2->get(listID.at(i), champ_wBank).wValue);
+        for (int i = 0; i < listID.count(); i++)
+        {
+            if (numBank == -1)
+                numBank = _sf2->get(listID.at(i), champ_wBank).wValue;
+            else
+                _bankSortEnabled |= (numBank != _sf2->get(listID.at(i), champ_wBank).wValue);
+        }
     }
+    _gmSortEnabled = gmSort;
 
     // Répertoire samples
     _dirSamples = rootDir + "/samples";
     QDir().mkdir(_dirSamples);
 
-    // Un fichier sfz pour chaque preset
-    if (_bankUnique)
+
+    for (int i = 0; i < listID.count(); i++)
     {
-        for (int i = 0; i < listID.count(); i++)
-            exportPrst(rootDir, listID.at(i));
-    }
-    else
-    {
-        for (int i = 0; i < listID.count(); i++)
+        // Répertoire allant contenir le fichier sfz
+        QString sourceDir = rootDir;
+
+        int numBank = _sf2->get(listID.at(i), champ_wBank).wValue;
+        int numPreset = _sf2->get(listID.at(i), champ_wPreset).wValue;
+
+        if (_bankSortEnabled)
         {
             QString numText;
-            numText.sprintf("%.3u", _sf2->get(listID.at(i), champ_wBank).wValue);
-            if (!QDir(rootDir + "/" + numText).exists())
-                QDir(rootDir + "/" + numText).mkdir(rootDir + "/" + numText);
-            exportPrst(rootDir + "/" + numText, listID.at(i));
+            numText.sprintf("%.3u", numBank);
+            sourceDir += "/" + numText;
+            if (!QDir(sourceDir).exists())
+                QDir(sourceDir).mkdir(sourceDir);
         }
+        if (_gmSortEnabled)
+        {
+            if (numBank == 128)
+                sourceDir += "/" + getDirectoryName(128);
+            else
+                sourceDir += "/" + getDirectoryName(numPreset);
+            if (!QDir(sourceDir).exists())
+                QDir(sourceDir).mkdir(sourceDir);
+        }
+
+        exportPrst(sourceDir, listID.at(i), presetPrefix);
     }
 
     return;
 }
 
-void ConversionSfz::exportPrst(QString dir, EltID id)
+void ConversionSfz::exportPrst(QString dir, EltID id, bool presetPrefix)
 {
     QString numText;
-    numText.sprintf("%.3u", _sf2->get(id, champ_wPreset).wValue);
-    QString path = getPathSfz(dir, numText + "_" + _sf2->getQstr(id, champ_name)) + ".sfz";
+    if (presetPrefix)
+        numText.sprintf("%.3u_", _sf2->get(id, champ_wPreset).wValue);
+    int numBank = _sf2->get(id, champ_wBank).wValue;
+    QString path = getPathSfz(dir, numText + _sf2->getQstr(id, champ_name)) + ".sfz";
     QFile fichierSfz(path);
     if (fichierSfz.open(QIODevice::WriteOnly))
     {
@@ -111,7 +129,7 @@ void ConversionSfz::exportPrst(QString dir, EltID id)
 
                 // Paramètres globaux (groupe)
                 ParamListe * paramGroupe = new ParamListe(_sf2, paramPrst, idInst);
-                writeGroup(&fichierSfz, paramGroupe);
+                writeGroup(&fichierSfz, paramGroupe, numBank == 128);
                 delete paramGroupe;
 
                 // Ecriture de chaque élément présent dans l'instrument
@@ -171,11 +189,13 @@ void ConversionSfz::writeEntete(QFile * fichierSfz, EltID id)
         << endl;
 }
 
-void ConversionSfz::writeGroup(QFile * fichierSfz, ParamListe * listeParam)
+void ConversionSfz::writeGroup(QFile * fichierSfz, ParamListe * listeParam, bool isPercKit)
 {
     // Ecriture de paramètres communs à plusieurs régions
     QTextStream out(fichierSfz);
     out << "<group>" << endl;
+    if (isPercKit)
+        out << "lochan=10 hichan=10" << endl;
     for (int i = 0; i < listeParam->size(); i++)
         writeElement(out, listeParam->getChamp(i), listeParam->getValeur(i));
     out << endl;
@@ -186,7 +206,7 @@ void ConversionSfz::writeRegion(QFile * fichierSfz, ParamListe * listeParam, QSt
     // Ecriture de paramètres spécifique à une région
     QTextStream out(fichierSfz);
     out << "<region>" << endl
-        << "sample=" << pathSample << endl;
+        << "sample=" << pathSample.replace("/", "\\") << endl;
     for (int i = 0; i < listeParam->size(); i++)
         writeElement(out, listeParam->getChamp(i), listeParam->getValeur(i));
     out << endl;
@@ -202,10 +222,10 @@ void ConversionSfz::writeElement(QTextStream &out, Champ champ, double value)
     case champ_scaleTuning:             out << "pitch_keytrack=" << (int)(value + 0.5) << endl;     break;
     case champ_startloopAddrsOffset:    out << "loop_start=" << (int)(value + 0.5) << endl;         break;
     case champ_startAddrsOffset:        out << "offset=" << (int)(value + 0.5) << endl;             break;
-    case champ_endloopAddrsOffset:      out << "loop_end=" << (int)(value + 0.5) << endl;           break;
+    case champ_endloopAddrsOffset:      out << "loop_end=" << (int)(value + 0.5) - 1 << endl;       break;
     case champ_endAddrsOffset:          out << "end=" << (int)(value + 0.5) << endl;                break;
     case champ_pan:                     out << "pan=" << 2 * value << endl;                         break;
-    case champ_initialAttenuation:      out << "volume=" << -value << endl;                         break;
+    case champ_initialAttenuation:      out << "volume=" << -value * 0.68 << endl;                  break;
     case champ_initialFilterQ:          out << "resonance=" << value << endl;                       break;
     case champ_sustainModEnv:           out << "fileg_sustain=" << dbToPercent(value) << endl
                                             << "pitcheg_sustain=" << dbToPercent(value) << endl;    break;
@@ -253,7 +273,8 @@ void ConversionSfz::writeElement(QTextStream &out, Champ champ, double value)
                                             << "amp_velcurve_127=" << value / 127. << endl;         break;
     case champ_exclusiveClass:
         if (value != 0)
-            out << "group=" << (int)(value + 0.5) << endl;
+            out << "group=" << (int)(value + 0.5) << endl
+                << "off_by=" << (int)(value + 0.5) << endl;
         break;
     case champ_initialFilterFc:
         out << "fil_type=lpf_2p" << endl
@@ -330,7 +351,9 @@ QString ConversionSfz::getLink(EltID idSmpl)
         }
 
         path = QDir(_dirSamples).dirName() + "/" + name + ".wav";
-        if (!_bankUnique)
+        if (_bankSortEnabled)
+            path.prepend("../");
+        if (_gmSortEnabled)
             path.prepend("../");
 
         // Export et sauvegarde
@@ -400,6 +423,48 @@ int ConversionSfz::lastLettersToRemove(QString str1, QString str2)
     }
 
     return nbLetters;
+}
+
+QString ConversionSfz::getDirectoryName(int numPreset)
+{
+    QString strRet = QObject::trUtf8("autre");
+
+    if (numPreset < 8)
+        strRet = "000-007 " + QObject::trUtf8("Piano");
+    else if (numPreset < 16)
+        strRet = "008-015 " + QObject::trUtf8("Percussions chromatiques");
+    else if (numPreset < 24)
+        strRet = "016-023 " + QObject::trUtf8("Orgues");
+    else if (numPreset < 32)
+        strRet = "024-031 " + QObject::trUtf8("Guitares");
+    else if (numPreset < 40)
+        strRet = "032-039 " + QObject::trUtf8("Basses");
+    else if (numPreset < 48)
+        strRet = "040-047 " + QObject::trUtf8("Cordes");
+    else if (numPreset < 56)
+        strRet = "048-055 " + QObject::trUtf8("Orchestre");
+    else if (numPreset < 64)
+        strRet = "056-063 " + QObject::trUtf8("Cuivres");
+    else if (numPreset < 72)
+        strRet = "064-071 " + QObject::trUtf8("Instrument à anches");
+    else if (numPreset < 80)
+        strRet = "072-079 " + QObject::trUtf8("Flûtes");
+    else if (numPreset < 88)
+        strRet = "080-087 " + QObject::trUtf8("Synthétiseur solo");
+    else if (numPreset < 96)
+        strRet = "088-095 " + QObject::trUtf8("Nappes de synthétiseur");
+    else if (numPreset < 104)
+        strRet = "096-103 " + QObject::trUtf8("Effets de synthétiseur");
+    else if (numPreset < 112)
+        strRet = "104-111 " + QObject::trUtf8("Instruments ethniques");
+    else if (numPreset < 120)
+        strRet = "112-119 " + QObject::trUtf8("Percussions");
+    else if (numPreset < 128)
+        strRet = "120-127 " + QObject::trUtf8("Effets sonores");
+    else if (numPreset == 128)
+        strRet = QObject::trUtf8("Kit de percussion");
+
+    return strRet;
 }
 
 

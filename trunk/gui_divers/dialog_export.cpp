@@ -33,7 +33,12 @@ DialogExport::DialogExport(Pile_sf2 *sf2, EltID idSf2, QWidget *parent) :
     ui->listPresets->sortItems();
 
     ui->comboFormat->setCurrentIndex(Config::getInstance()->getExportType());
+    on_comboFormat_currentIndexChanged(ui->comboFormat->currentIndex());
     ui->lineFolder->setText(Config::getInstance()->getLastDirectory(Config::typeFichierExport));
+
+    ui->checkBank->setChecked(Config::getInstance()->getExportBank());
+    ui->checkPreset->setChecked(Config::getInstance()->getExportPreset());
+    ui->checkGM->setChecked(Config::getInstance()->getExportGM());
 }
 
 DialogExport::~DialogExport()
@@ -59,8 +64,8 @@ void DialogExport::on_pushFolder_clicked()
 {
     QString qDir = QFileDialog::getExistingDirectory(this, trUtf8("Choisir un répertoire de destination"),
                                                      ui->lineFolder->text());
-    ui->lineFolder->setText(qDir);
-
+    if (!qDir.isEmpty())
+        ui->lineFolder->setText(qDir);
 }
 
 void DialogExport::on_pushAnnuler_clicked()
@@ -90,6 +95,20 @@ void DialogExport::on_pushExport_clicked()
             listID.append(id);
         }
     }
-    emit(accepted(listID, ui->lineFolder->text(), ui->comboFormat->currentIndex()));
+
+    Config::getInstance()->setExportPreset(ui->checkPreset->isChecked());
+    Config::getInstance()->setExportBank(ui->checkBank->isChecked());
+    Config::getInstance()->setExportGM(ui->checkGM->isChecked());
+
+    emit(accepted(listID, ui->lineFolder->text(), ui->comboFormat->currentIndex(),
+                  ui->checkPreset->isChecked(), ui->checkBank->isChecked(),
+                  ui->checkGM->isChecked()));
     QDialog::accept();
+}
+
+void DialogExport::on_comboFormat_currentIndexChanged(int index)
+{
+    ui->checkBank->setVisible(index == 1);
+    ui->checkGM->setVisible(index == 1);
+    ui->checkPreset->setVisible(index == 1);
 }

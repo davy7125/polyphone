@@ -25,8 +25,11 @@ private slots:
     void on_pushAnnuler_clicked();
     void on_pushExport_clicked();
 
+    void on_comboFormat_currentIndexChanged(int index);
+
 signals:
-    void accepted(QList<EltID> listID, QString dir, int format);
+    void accepted(QList<EltID> listID, QString dir, int format,
+                  bool presetPrefix, bool bankDir, bool gmSort);
 
 private:
     Ui::DialogExport *ui;
