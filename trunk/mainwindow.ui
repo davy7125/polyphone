@@ -1146,7 +1146,7 @@
      <normaloff>:/icones/dupliquer</normaloff>:/icones/dupliquer</iconset>
    </property>
    <property name="text">
-    <string>D&amp;uplication des divisions...</string>
+    <string>&amp;Duplication des divisions...</string>
    </property>
    <property name="iconText">
     <string>Duplication des divisions...</string>
@@ -1331,7 +1331,7 @@
      <normaloff>:/icones/recorder</normaloff>:/icones/recorder</iconset>
    </property>
    <property name="text">
-    <string>Magnétophone</string>
+    <string>&amp;Magnétophone</string>
    </property>
    <property name="toolTip">
     <string>Affiche le magnétophone</string>

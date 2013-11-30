@@ -37,7 +37,6 @@ Page_Inst::Page_Inst(QWidget *parent) :
     PageTable(PAGE_INST, parent), ui(new Ui::Page_Inst)
 {
     ui->setupUi(this);
-    this->preparation = 0;
     this->contenant = elementInst;
     this->contenantGen = elementInstGen;
     this->contenantMod = elementInstMod;

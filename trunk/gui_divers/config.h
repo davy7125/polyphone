@@ -48,7 +48,8 @@ public:
         typeFichierSf2,
         typeFichierSample,
         typeFichierEnregistrement,
-        typeFichierExport
+        typeFichierExport,
+        typeFichierImport
     };
 
     static Config * getInstance(QWidget *parent = NULL);
@@ -629,9 +630,7 @@ private:
     static Config * _instance;
     // Paramètres configuration
     QStringList listFiles;
-    QString recordFile;
-    QString sampleFile;
-    QString sfzFile;
+    QString recordFile, sampleFile, exportFile, importFile;
     bool ram;
     int audioType;
     int audioIndex;

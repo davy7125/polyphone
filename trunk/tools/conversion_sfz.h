@@ -83,6 +83,7 @@ private:
     static QString escapeStr(QString str);
     static int lastLettersToRemove(QString str1, QString str2);
     static QString getDirectoryName(int numPreset);
+    static QString getDrumCategory(int numPreset);
 };
 
 #endif // CONVERSION_SFZ_H

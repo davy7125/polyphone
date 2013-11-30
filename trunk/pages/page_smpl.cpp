@@ -31,13 +31,12 @@
 #include <QInputDialog>
 
 Page_Smpl::Page_Smpl(QWidget *parent) :
-    Page(PAGE_SMPL, parent), ui(new Ui::Page_Smpl)
+    Page(PAGE_SMPL, parent),
+    ui(new Ui::Page_Smpl),
+    lectureEnCours(false),
+    preventStop(0)
 {
     ui->setupUi(this);
-
-    // Initialisation des données
-    this->preparation = 0;
-    this->lectureEnCours = false;
 
     // Initialisation du graphique
     this->ui->graphe->linkSliderX(this->ui->sliderGraphe);
@@ -222,7 +221,7 @@ void Page_Smpl::afficher()
     }
     ui->comboLink->model()->sort(0);
     ui->comboLink->insertItem(0, "-");
-    ui->comboLink->setEnabled(nombreElements == 1);
+    ui->comboLink->setEnabled(nombreElements == 1 && !lectureEnCours);
 
     // Types possibles et sélections
     this->ui->comboType->addItem(trUtf8("mono"));
@@ -262,7 +261,7 @@ void Page_Smpl::afficher()
 
         ui->checkLectureLien->setEnabled(nombreElements == 1);
     }
-    ui->comboType->setEnabled(nombreElements == 1);
+    ui->comboType->setEnabled(nombreElements == 1 && !lectureEnCours);
 
     // Liste des instruments qui utilisent le sample
     if (nombreElements > 1)
@@ -1478,6 +1477,7 @@ void Page_Smpl::lecture()
         this->ui->verticalSlider_10->setEnabled(false);
         this->ui->pushEgaliser->setEnabled(false);
         this->ui->pushEgalRestore->setEnabled(false);
+
         // Désactivation outils sample
         this->mainWindow->desactiveOutilsSmpl();
         this->lectureEnCours = true;
@@ -1490,6 +1490,12 @@ void Page_Smpl::lecture()
 }
 void Page_Smpl::lecteurFinished()
 {
+    if (preventStop)
+    {
+        preventStop--;
+        return;
+    }
+
     this->ui->graphe->setCurrentSample(0);
     // Réinitialisation des boutons
     ui->comboLink->setEnabled(true);
@@ -1507,6 +1513,7 @@ void Page_Smpl::lecteurFinished()
     ui->verticalSlider_10->setEnabled(true);
     ui->pushEgaliser->setEnabled(true);
     ui->pushEgalRestore->setEnabled(true);
+
     // Réactivation outils sample
     if (this->qStackedWidget->currentWidget() == this)
         this->mainWindow->activeOutilsSmpl();
@@ -1522,10 +1529,18 @@ void Page_Smpl::lecteurFinished()
 void Page_Smpl::selectionChanged()
 {
     if (this->lectureEnCours)
+    {
         this->noteChanged(-1, 0);
+        if (this->isVisible())
+        {
+            ui->pushLecture->setChecked(true);
+            this->lecture();
+            preventStop++;
+        }
+    }
 }
 
-bool Page_Smpl::isPlaying() {return this->lectureEnCours;}
+bool Page_Smpl::isPlaying() { return this->lectureEnCours; }
 void Page_Smpl::setLoopEnabled(int val)
 {
     // Modif synth
