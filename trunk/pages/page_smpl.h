@@ -86,6 +86,7 @@ private slots:
 private:
     Ui::Page_Smpl *ui;
     bool lectureEnCours;
+    int preventStop;
 
     // Méthodes privées
     void setRateElt(EltID id, DWORD echFinal);

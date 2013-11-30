@@ -35,6 +35,7 @@
 //////////////////////////////////////////// PAGE ////////////////////////////////////////////
 
 Page::Page(TypePage typePage, QWidget *parent) : QWidget(parent),
+    preparation(false),
     m_typePage(typePage)
 {}
 // Initialisation des variables statiques
@@ -1431,7 +1432,7 @@ void PageTable::set(int ligne, int colonne, bool &newAction, bool allowPropagati
                             velRange2.byLo == velRange.byLo && velRange2.byHi == velRange.byHi)
                     {
                         int iTmp = sf2->get(idTmp, champ_sampleID).wValue;
-                        if (iTmp == id.indexElt2)
+                        if (iTmp == idSmpl.indexElt)
                             ok = false; // ambiguité
                         else if (iTmp == numSmpl2)
                         {

@@ -103,7 +103,7 @@ private:
     }FileType;
     // Attributs privés
     QString fileName;
-    InfoSound info;
+    InfoSound _info;
     QByteArray smpl;
     QByteArray sm24;
     // Méthodes privées

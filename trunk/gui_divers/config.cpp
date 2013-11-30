@@ -286,7 +286,10 @@ void Config::addFile(TypeFichier typeFichier, QString filePath)
         sampleFile = filePath;
         break;
     case typeFichierExport:
-        sfzFile = filePath;
+        exportFile = filePath;
+        break;
+    case typeFichierImport:
+        importFile = filePath;
         break;
     case typeFichierSf2:{
         int n = 4;
@@ -323,7 +326,10 @@ QString Config::getLastFile(TypeFichier typeFichier, int num)
             lastFile = listFiles.at(num);
         break;
     case typeFichierExport:
-        lastFile = sfzFile;
+        lastFile = exportFile;
+        break;
+    case typeFichierImport:
+        lastFile = importFile;
         break;
     }
 
@@ -344,7 +350,10 @@ QString Config::getLastDirectory(TypeFichier typeFichier)
         lastDir = this->listFiles.at(0);
         break;
     case typeFichierExport:
-        lastDir = sfzFile;
+        lastDir = exportFile;
+        break;
+    case typeFichierImport:
+        lastDir = importFile;
         break;
     }
     if (!lastDir.isEmpty())
@@ -458,7 +467,8 @@ void Config::load()
     // Chargement des fichiers récents
     this->recordFile        = settings.value("recent_file/record", "").toString();
     this->sampleFile        = settings.value("recent_file/sample", "").toString();
-    this->sfzFile           = settings.value("recent_file/sfz", "").toString();
+    this->exportFile        = settings.value("recent_file/export", "").toString();
+    this->importFile        = settings.value("recent_file/import", "").toString();
     int j = 0;
     QString strTmp;
     for (int i = 0; i < 5; i++)
@@ -515,7 +525,8 @@ void Config::store()
 {
     settings.setValue("recent_file/record",             this->recordFile);
     settings.setValue("recent_file/sample",             this->sampleFile);
-    settings.setValue("recent_file/sfz",                this->sfzFile);
+    settings.setValue("recent_file/export",             this->exportFile);
+    settings.setValue("recent_file/import",             this->importFile);
     settings.setValue("recent_file/file_0",             listFiles.at(0));
     settings.setValue("recent_file/file_1",             listFiles.at(1));
     settings.setValue("recent_file/file_2",             listFiles.at(2));
