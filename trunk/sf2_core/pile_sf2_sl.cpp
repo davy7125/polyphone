@@ -622,7 +622,7 @@ int Pile_sf2::ouvrirSf2(QString fileName)
     for (unsigned int i = 0; i < taille/46-1; i++)
     {
         id.indexElt = this->add(id, false);
-        this->set(id, champ_name, QString(readdata(buffer, bloc_pdta_shdr, pos, 20)), false);
+        this->set(id, champ_name, QString(readdata(buffer, bloc_pdta_shdr, pos, 20)).trimmed(), false);
         value.bValue = readBYTE(bloc_pdta_shdr, pos+40);
         this->set(id, champ_byOriginalPitch, value, false);
         value.cValue = bloc_pdta_shdr[pos+41];
@@ -716,28 +716,28 @@ int Pile_sf2::ouvrirSf2(QString fileName)
             this->set(idSf2, champ_IFIL, val, false);
         }
         else if (!strcmp(bloc, "isng"))
-            this->set(idSf2, champ_ISNG, QString(readdata(buffer, bloc_info, pos, taille)), false);
+            this->set(idSf2, champ_ISNG, QString(readdata(buffer, bloc_info, pos, taille)).trimmed(), false);
         else if (!strcmp(bloc, "INAM"))
-            this->set(idSf2, champ_name, QString(readdata(buffer, bloc_info, pos, taille)), false);
+            this->set(idSf2, champ_name, QString(readdata(buffer, bloc_info, pos, taille)).trimmed(), false);
         else if (!strcmp(bloc, "irom"))
-            this->set(idSf2, champ_IROM, QString(readdata(buffer, bloc_info, pos, taille)), false);
+            this->set(idSf2, champ_IROM, QString(readdata(buffer, bloc_info, pos, taille)).trimmed(), false);
         else if (!strcmp(bloc, "iver"))
         {
             val.sfVerValue = readSFVersionTag(bloc_info, pos);
             this->set(idSf2, champ_IVER, val, false);
         }
         else if (!strcmp(bloc, "ICRD"))
-            this->set(idSf2, champ_ICRD, QString(readdata(buffer, bloc_info, pos, taille)), false);
+            this->set(idSf2, champ_ICRD, QString(readdata(buffer, bloc_info, pos, taille)).trimmed(), false);
         else if (!strcmp(bloc, "IENG"))
-            this->set(idSf2, champ_IENG, QString(readdata(buffer, bloc_info, pos, taille)), false);
+            this->set(idSf2, champ_IENG, QString(readdata(buffer, bloc_info, pos, taille)).trimmed(), false);
         else if (!strcmp(bloc, "IPRD"))
-            this->set(idSf2, champ_IPRD, QString(readdata(buffer, bloc_info, pos, taille)), false);
+            this->set(idSf2, champ_IPRD, QString(readdata(buffer, bloc_info, pos, taille)).trimmed(), false);
         else if (!strcmp(bloc, "ICOP"))
-            this->set(idSf2, champ_ICOP, QString(readdata(buffer, bloc_info, pos, taille)), false);
+            this->set(idSf2, champ_ICOP, QString(readdata(buffer, bloc_info, pos, taille)).trimmed(), false);
         else if (!strcmp(bloc, "ICMT"))
-            this->set(idSf2, champ_ICMT, QString(readdata(buffer, bloc_info, pos, taille)), false);
+            this->set(idSf2, champ_ICMT, QString(readdata(buffer, bloc_info, pos, taille)).trimmed(), false);
         else if (!strcmp(bloc, "ISFT"))
-            this->set(idSf2, champ_ISFT, QString(readdata(buffer, bloc_info, pos, taille)), false);
+            this->set(idSf2, champ_ISFT, QString(readdata(buffer, bloc_info, pos, taille)).trimmed(), false);
 //        else
 //            QMessageBox::information(NULL, "Champ supplémentaire trouvé", bloc);
         pos = pos + taille;
@@ -760,7 +760,7 @@ int Pile_sf2::ouvrirSf2(QString fileName)
         l = 0;
         id.indexElt = this->add(id, false);
         id2.indexElt = id.indexElt;
-        this->set(id, champ_name, QString(readdata(buffer, bloc_pdta_inst, 22*i, 20)), false);
+        this->set(id, champ_name, QString(readdata(buffer, bloc_pdta_inst, 22*i, 20)).trimmed(), false);
         // Indices des IBAG
         bagmin = readWORD(bloc_pdta_inst, 22 * i + 20);
         if (i < taille_p2/22 - 2)
@@ -849,7 +849,7 @@ int Pile_sf2::ouvrirSf2(QString fileName)
         l = 0;
         id.indexElt = this->add(id, false);
         id2.indexElt = id.indexElt;
-        this->set(id, champ_name, QString(readdata(buffer, bloc_pdta_phdr, 38*i, 20)), false);
+        this->set(id, champ_name, QString(readdata(buffer, bloc_pdta_phdr, 38*i, 20)).trimmed(), false);
         value.wValue = readWORD(bloc_pdta_phdr, 38*i+20);
         this->set(id, champ_wPreset, value, false);
         value.wValue = readWORD(bloc_pdta_phdr, 38*i+22);

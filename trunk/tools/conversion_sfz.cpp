@@ -51,18 +51,18 @@ void ConversionSfz::convert(QString dir, QList<EltID> listID, bool presetPrefix,
     QDir(rootDir).mkdir(rootDir);
 
     // Plusieurs banques sont utilisées ?
-    int numBank = -1;
+    int numBankUnique = -1;
     _bankSortEnabled = false;
-    if (bankDir)
+    for (int i = 0; i < listID.count(); i++)
     {
-        for (int i = 0; i < listID.count(); i++)
-        {
-            if (numBank == -1)
-                numBank = _sf2->get(listID.at(i), champ_wBank).wValue;
-            else
-                _bankSortEnabled |= (numBank != _sf2->get(listID.at(i), champ_wBank).wValue);
-        }
+        if (numBankUnique == -1)
+            numBankUnique = _sf2->get(listID.at(i), champ_wBank).wValue;
+        else
+            _bankSortEnabled |= (numBankUnique != _sf2->get(listID.at(i), champ_wBank).wValue);
     }
+    if (_bankSortEnabled)
+        numBankUnique = -1; // Si numBankUnique est différent de -1, il nous donne le numéro unique de banque utilisée
+    _bankSortEnabled &= bankDir;
     _gmSortEnabled = gmSort;
 
     // Répertoire samples
@@ -89,7 +89,12 @@ void ConversionSfz::convert(QString dir, QList<EltID> listID, bool presetPrefix,
         if (_gmSortEnabled)
         {
             if (numBank == 128)
-                sourceDir += "/" + getDirectoryName(128);
+            {
+                if (_bankSortEnabled || numBankUnique == 128)
+                    sourceDir += "/" + getDrumCategory(numPreset);
+                else
+                    sourceDir += "/" + getDirectoryName(128);
+            }
             else
                 sourceDir += "/" + getDirectoryName(numPreset);
             if (!QDir(sourceDir).exists())
@@ -384,7 +389,8 @@ QString ConversionSfz::getLink(EltID idSmpl)
 
 QString ConversionSfz::escapeStr(QString str)
 {
-    return str.replace(QRegExp(QString::fromUtf8("[`~!@$%^*|:;<>«»,.?/{}\'\"\\\[\\]\\\\]")), "_");
+    //return str.replace(QRegExp(QString::fromUtf8("[`~!@$%^*|:;<>«»,.?/{}\'\"\\\[\\]\\\\]")), "_");
+    return str.replace(QRegExp(QString::fromUtf8("[`~*|:<>«»?/{}\"\\\\]")), "_");
 }
 
 int ConversionSfz::lastLettersToRemove(QString str1, QString str2)
@@ -462,7 +468,47 @@ QString ConversionSfz::getDirectoryName(int numPreset)
     else if (numPreset < 128)
         strRet = "120-127 " + QObject::trUtf8("Effets sonores");
     else if (numPreset == 128)
-        strRet = QObject::trUtf8("Kit de percussion");
+        strRet = QObject::trUtf8("Kits de percussion");
+
+    return strRet;
+}
+
+QString ConversionSfz::getDrumCategory(int numPreset)
+{
+    QString strRet = QObject::trUtf8("autre");
+
+    if (numPreset < 8)
+        strRet = "000-007 Standard kit";
+    else if (numPreset < 16)
+        strRet = "008-015 Room kit";
+    else if (numPreset < 24)
+        strRet = "016-023 Power kit";
+    else if (numPreset < 32)
+        strRet = "024-031 Electronic kit";
+    else if (numPreset < 40)
+        strRet = "032-039 Jazz kit";
+    else if (numPreset < 48)
+        strRet = "040-047 Brush kit";
+    else if (numPreset < 56)
+        strRet = "048-055 Orchestra kit";
+    else if (numPreset < 64)
+        strRet = "056-063 Sound FX kit";
+    else if (numPreset < 72)
+        strRet = "064-071 Additional kit";
+    else if (numPreset < 80)
+        strRet = "072-079 Additional kit";
+    else if (numPreset < 88)
+        strRet = "080-087 Additional kit";
+    else if (numPreset < 96)
+        strRet = "088-095 Additional kit";
+    else if (numPreset < 104)
+        strRet = "096-103 Additional kit";
+    else if (numPreset < 112)
+        strRet = "104-111 Additional kit";
+    else if (numPreset < 120)
+        strRet = "112-119 Additional kit";
+    else if (numPreset < 128)
+        strRet = "120-127 Additional kit";
 
     return strRet;
 }

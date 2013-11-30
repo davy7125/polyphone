@@ -62,20 +62,11 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent, Qt::Window | Qt::W
     restoreGeometry(configuration->getWindowGeometry());
     restoreState(configuration->getWindowState());
 
-    // Bug QT: restauration de la largeur d'un QDockWidget si fenêtre maximisée
-    int dockWidth = configuration->getDockWidth();
-    if (ui->dockWidget->width() < dockWidth)
-        ui->dockWidget->setMinimumWidth(dockWidth);
-    else
-        ui->dockWidget->setMaximumWidth(dockWidth);
-    QTimer::singleShot(1, this, SLOT(returnToOldMaxMinSizes()));
-
     // Initialisation de l'objet pile sf2
     this->sf2 = new Pile_sf2(ui->arborescence, this->configuration->getRam(), this);
 
     // Connexion avec mise à jour table
-    connect(this->sf2, SIGNAL(updateTable(int,int,int,int)), this,
-            SLOT(updateTable(int,int,int,int)));
+    connect(this->sf2, SIGNAL(updateTable(int,int,int,int)), this, SLOT(updateTable(int,int,int,int)));
 
     // Initialisation du synthétiseur
     this->synth = new Synth(this->sf2);
@@ -90,8 +81,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent, Qt::Window | Qt::W
     // Initialisation de la sortie audio
     this->audioDevice = new AudioDevice(this->synth);
     connect(this, SIGNAL(initAudio(int, int)), this->audioDevice, SLOT(initAudio(int, int)));
-    connect(this, SIGNAL(stopAudio()), this->audioDevice, SLOT(closeConnections()),
-            Qt::BlockingQueuedConnection);
+    connect(this, SIGNAL(stopAudio()), this->audioDevice, SLOT(closeConnections()), Qt::BlockingQueuedConnection);
     this->audioDevice->moveToThread(&this->audioThread);
     this->audioThread.start();
 
@@ -190,6 +180,15 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent, Qt::Window | Qt::W
 
     // Initialisation objet Sound
     Sound::setParent(this);
+
+    // Bug QT: restauration de la largeur d'un QDockWidget si fenêtre maximisée
+    QApplication::processEvents();
+    int dockWidth = configuration->getDockWidth();
+    if (ui->dockWidget->width() < dockWidth)
+        ui->dockWidget->setMinimumWidth(dockWidth);
+    else
+        ui->dockWidget->setMaximumWidth(dockWidth);
+    QTimer::singleShot(1, this, SLOT(returnToOldMaxMinSizes()));
 }
 MainWindow::~MainWindow()
 {
@@ -803,6 +802,7 @@ void MainWindow::updateActions()
     {
         // Rien n'est sélectionné
         fichierUnique = 0;
+
         // Affichage page logiciel
         ui->stackedWidget->setCurrentWidget(ui->page_Soft);
     }
@@ -815,7 +815,7 @@ void MainWindow::updateActions()
         typeUnique = ui->arborescence->isSelectedItemsTypeUnique();
         familleUnique = ui->arborescence->isSelectedItemsFamilyUnique();
         // Affichage partie droite
-        if (id.typeElement == elementSmpl)
+        if (typeUnique && fichierUnique && id.typeElement == elementSmpl)
         {
             // Affichage page Smpl
             page_smpl->afficher();
@@ -1528,12 +1528,12 @@ void MainWindow::importer()
 {
     // Affichage dialogue
     QStringList strList = QFileDialog::getOpenFileNames(this, trUtf8("Importer une soundfont"),
-                                                        Config::getInstance()->getLastDirectory(Config::typeFichierExport),
+                                                        Config::getInstance()->getLastDirectory(Config::typeFichierImport),
                                                         trUtf8("Fichier .sfz (*.sfz)"));
-    if (strList.count() == 0)
+    if (strList.isEmpty())
         return;
 
-    Config::getInstance()->addFile(Config::typeFichierExport, strList.first());
+    Config::getInstance()->addFile(Config::typeFichierImport, strList.first());
 
     this->sf2->prepareNewActions();
     int numSf2 = -1;

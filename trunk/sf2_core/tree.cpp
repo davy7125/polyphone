@@ -163,6 +163,7 @@ void Tree::clicTree()
     this->updateSelectionInfo();
     this->setDragDropMode(DragDrop);
     if (!this->refresh) return;
+
     // Activation, désactivation des actions de menuArborescence
     int nb;
     bool fichierUnique = 1;
@@ -170,6 +171,7 @@ void Tree::clicTree()
     bool typeUnique = 1;
     ElementType type;
     EltID id;
+
     // Caractéristiques de la sélection
     // Nombre d'éléments sélectionnés
     nb = this->getSelectedItemsNumber();
@@ -208,7 +210,7 @@ void Tree::clicTree()
             menuArborescence->remplacer->setEnabled(false);
 
         // Supprimer, copier, coller
-        if (typeUnique && (((type == elementInstSmpl || type == elementPrstInst) && familleUnique) \
+        if (typeUnique && (((type == elementInstSmpl || type == elementPrstInst) && familleUnique)
                            || type == elementSmpl || type == elementInst || type == elementPrst)
                        && !this->mainWindow->isPlaying())
         {

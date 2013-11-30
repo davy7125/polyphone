@@ -36,7 +36,6 @@ Page_Sf2::Page_Sf2(MainWindow * mainWindow, Tree * tree, QStackedWidget * qStack
     this->qStackedWidget = qStackedWidget;
     this->sf2 = sf2;
     this->synth = synth;
-    this->preparation = 0;
 }
 
 Page_Sf2::~Page_Sf2()
