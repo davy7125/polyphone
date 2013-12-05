@@ -512,8 +512,6 @@ QByteArray Pile_sf2::getData(EltID id, Champ champ)
     return baRet;
 }
 
-int Pile_sf2::reset(EltID id, Champ champ) {return this->reset(id, champ, 1);}
-
 // Nombre de freres de id (id compris)
 int Pile_sf2::count(EltID id, bool withHidden)
 {

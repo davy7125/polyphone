@@ -20,6 +20,8 @@ locate it on your system and edit the following line:
 LIBS += /usr/lib/x86_64-linux-gnu/libportaudio.so.2
 It could become:
 LIBS += /usr/lib64/libportaudio.so.2
+or (fedora)
+LIBS += -lportaudio
 
 
 ######### 3. Build #################################################################################

@@ -45,8 +45,9 @@ unix{
     CONFIG += link_pkgconfig
     PKGCONFIG += alsa
     INCLUDEPATH += /usr/include/jack
-    LIBS += -ljack # Fedora: -libportaudio
+    LIBS += -ljack
 
+    # Linking portaudio may need adjustments (see README file)
     contains(QMAKE_HOST.arch, x86_64):{
         LIBS += /usr/lib/x86_64-linux-gnu/libportaudio.so.2
     } else {

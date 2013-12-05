@@ -27,8 +27,6 @@
 #include "config.h"
 
 
-double Parametre::_attenuationOffset = 0;
-
 ImportSfz::ImportSfz(Pile_sf2 * sf2) :
     _sf2(sf2),
     _currentBloc(BLOC_UNKNOWN)
@@ -40,7 +38,6 @@ void ImportSfz::import(QString fileName, int * numSf2)
     QFile inputFile(fileName);
     if (inputFile.open(QIODevice::ReadOnly))
     {
-        Parametre::_attenuationOffset = 0;
         QTextStream in(&inputFile);
         while (!in.atEnd())
         {
@@ -87,21 +84,32 @@ void ImportSfz::import(QString fileName, int * numSf2)
         inputFile.close();
 
         // Les offsets doivent se trouver à côté des samples, pas dans les divisions globales
+        // Idem pan
         // On ne garde que les filtres supportés par le format sf2
-        // Ajustement éventuel du volume
+        // Ajustement du volume des sons stéréo
+        // Ajustement du volume si le modulation de volume est appliqué
         // Recherche du canal 10
+        // Recherche de l'amplification max
         bool isChannel10 = true;
+        double ampliMax = 0;
         for (int i = 0; i < _listeEnsembles.size(); i++)
         {
             _listeEnsembles[i].moveOpcodeInSamples(Parametre::op_offset);
             _listeEnsembles[i].moveOpcodeInSamples(Parametre::op_end);
             _listeEnsembles[i].moveOpcodeInSamples(Parametre::op_loop_start);
             _listeEnsembles[i].moveOpcodeInSamples(Parametre::op_loop_end);
+            _listeEnsembles[i].moveOpcodeInSamples(Parametre::op_pan, true);
+            _listeEnsembles[i].adjustStereoVolumeAndCorrection(QFileInfo(fileName).path());
+            _listeEnsembles[i].adjustModulationVolume();
             _listeEnsembles[i].checkFilter();
-            if (Parametre::_attenuationOffset > 0)
-                _listeEnsembles[i].adjustVolume(Parametre::_attenuationOffset);
+            ampliMax = qMax(ampliMax, _listeEnsembles[i].getAmpliMax());
             isChannel10 &= _listeEnsembles[i].isChannel10();
         }
+
+        // Ajustement du volume si amplification max > 0
+        if (ampliMax > 0)
+            for (int i = 0; i < _listeEnsembles.size(); i++)
+                _listeEnsembles[i].adjustVolume(ampliMax);
 
         // Création d'un sf2
         int numBank = 0;
@@ -162,10 +170,12 @@ void ImportSfz::import(QString fileName, int * numSf2)
             // Remplissage de l'instrument et création des samples
             _listeEnsembles[i].decode(_sf2, idInst, QFileInfo(fileName).path());
 
-            // Détermination keyRange du preset
+            // Détermination keyRange et velRange du preset
             int nbInstSmpl = _sf2->count(idInstSmpl);
             int keyMin = 127;
             int keyMax = 0;
+            int velMin = 127;
+            int velMax = 0;
             for (int j = 0; j < nbInstSmpl; j++)
             {
                 idInstSmpl.indexElt2 = j;
@@ -175,12 +185,24 @@ void ImportSfz::import(QString fileName, int * numSf2)
                     keyMin = qMin(keyMin, (int)range.byLo);
                     keyMax = qMax(keyMax, (int)range.byHi);
                 }
+                if (_sf2->isSet(idInstSmpl, champ_velRange))
+                {
+                    rangesType range = _sf2->get(idInstSmpl, champ_velRange).rValue;
+                    velMin = qMin(velMin, (int)range.byLo);
+                    velMax = qMax(velMax, (int)range.byHi);
+                }
             }
             if (_sf2->isSet(idInst, champ_keyRange))
             {
                 rangesType range = _sf2->get(idInst, champ_keyRange).rValue;
                 keyMin = qMin(keyMin, (int)range.byLo);
                 keyMax = qMax(keyMax, (int)range.byHi);
+            }
+            if (_sf2->isSet(idInst, champ_velRange))
+            {
+                rangesType range = _sf2->get(idInst, champ_velRange).rValue;
+                velMin = qMin(velMin, (int)range.byLo);
+                velMax = qMax(velMax, (int)range.byHi);
             }
             if (keyMin > keyMax)
             {
@@ -190,6 +212,43 @@ void ImportSfz::import(QString fileName, int * numSf2)
             val.rValue.byLo = keyMin;
             val.rValue.byHi = keyMax;
             _sf2->set(idPrstInst, champ_keyRange, val, false);
+            if (velMin <= velMax)
+            {
+                val.rValue.byLo = velMin;
+                val.rValue.byHi = velMax;
+                _sf2->set(idPrstInst, champ_velRange, val, false);
+            }
+
+            // Suppression des atténuations, corrections et type loop inutiles
+            if (!_sf2->isSet(idInst, champ_initialAttenuation))
+            {
+                for (int i = 0; i < _sf2->count(idInstSmpl); i++)
+                {
+                    idInstSmpl.indexElt2 = i;
+                    if (_sf2->get(idInstSmpl, champ_initialAttenuation).wValue == 0)
+                        _sf2->reset(idInstSmpl, champ_initialAttenuation, false);
+                }
+            }
+            if (!_sf2->isSet(idInst, champ_fineTune))
+            {
+                for (int i = 0; i < _sf2->count(idInstSmpl); i++)
+                {
+                    idInstSmpl.indexElt2 = i;
+                    if (_sf2->get(idInstSmpl, champ_fineTune).wValue == 0)
+                        _sf2->reset(idInstSmpl, champ_fineTune, false);
+                }
+            }
+            int typeLoop = _sf2->get(idInst, champ_sampleModes).wValue;
+            for (int i = 0; i < _sf2->count(idInstSmpl); i++)
+            {
+                idInstSmpl.indexElt2 = i;
+                if (_sf2->get(idInstSmpl, champ_sampleModes).wValue == typeLoop)
+                    _sf2->reset(idInstSmpl, champ_sampleModes, false);
+            }
+
+            // Suppression keyrange et velocity range de la division globale de l'instrument
+            _sf2->reset(idInst, champ_velRange, false);
+            _sf2->reset(idInst, champ_keyRange, false);
         }
     }
 }
@@ -240,6 +299,8 @@ void ImportSfz::changeBloc(QString bloc)
     else if (bloc == "region")
     {
         _currentBloc = BLOC_REGION;
+        if (_listeEnsembles.isEmpty())
+            _listeEnsembles << EnsembleGroupes();
         _listeEnsembles.last().newGroup();
     }
     else
@@ -253,15 +314,30 @@ void ImportSfz::addOpcode(QString opcode, QString value)
 }
 
 
-void EnsembleGroupes::moveOpcodeInSamples(Parametre::OpCode opcode)
+void EnsembleGroupes::moveOpcodeInSamples(Parametre::OpCode opcode, bool isDouble)
 {
-    if (_paramGlobaux.isDefined(opcode))
+    if (isDouble)
     {
-        int value = _paramGlobaux.getIntValue(opcode);
-        for (int i = 0; i < _listeDivisions.size(); i++)
+        if (_paramGlobaux.isDefined(opcode))
         {
-            if (!_listeDivisions.at(i).isDefined(opcode))
-                _listeDivisions[i] << Parametre(opcode, value);
+            double value = _paramGlobaux.getDoubleValue(opcode);
+            for (int i = 0; i < _listeDivisions.size(); i++)
+            {
+                if (!_listeDivisions.at(i).isDefined(opcode))
+                    _listeDivisions[i] << Parametre(opcode, value);
+            }
+        }
+    }
+    else
+    {
+        if (_paramGlobaux.isDefined(opcode))
+        {
+            int value = _paramGlobaux.getIntValue(opcode);
+            for (int i = 0; i < _listeDivisions.size(); i++)
+            {
+                if (!_listeDivisions.at(i).isDefined(opcode))
+                    _listeDivisions[i] << Parametre(opcode, value);
+            }
         }
     }
 }
@@ -271,6 +347,32 @@ void EnsembleGroupes::adjustVolume(double offset)
     _paramGlobaux.adjustVolume(offset);
     for (int i = 0; i < _listeDivisions.size(); i++)
         _listeDivisions[i].adjustVolume(offset);
+}
+
+void EnsembleGroupes::adjustStereoVolumeAndCorrection(QString path)
+{
+    for (int i = 0; i < _listeDivisions.size(); i++)
+        _listeDivisions[i].adjustStereoVolumeAndCorrection(path);
+}
+
+void EnsembleGroupes::adjustModulationVolume()
+{
+    double correctionGlobale = 0;
+    if (_paramGlobaux.isDefined(Parametre::op_modLFOtoVolume))
+    {
+        correctionGlobale = qAbs(_paramGlobaux.getDoubleValue(Parametre::op_modLFOtoVolume));
+        _paramGlobaux.adjustVolume(-correctionGlobale);
+    }
+    for (int i = 0; i < _listeDivisions.size(); i++)
+    {
+        double correction;
+        if (_listeDivisions.at(i).isDefined(Parametre::op_modLFOtoVolume))
+            correction = qAbs(_listeDivisions.at(i).getDoubleValue(Parametre::op_modLFOtoVolume));
+        else
+            correction = correctionGlobale;
+        if (correction != 0)
+            _listeDivisions[i].adjustVolume(-correction);
+    }
 }
 
 void EnsembleGroupes::checkFilter()
@@ -284,6 +386,14 @@ bool EnsembleGroupes::isChannel10()
 {
     return (_paramGlobaux.getIntValue(Parametre::op_chanMin) == 10 &&
             _paramGlobaux.getIntValue(Parametre::op_chanMax) == 10);
+}
+
+double EnsembleGroupes::getAmpliMax()
+{
+    double ampliMax = _paramGlobaux.getDoubleValue(Parametre::op_volume);
+    for (int i = 0; i < _listeDivisions.size(); i++)
+        ampliMax = qMax(ampliMax, _listeDivisions.at(i).getDoubleValue(Parametre::op_volume));
+    return ampliMax;
 }
 
 void EnsembleGroupes::decode(Pile_sf2 * sf2, EltID idInst, QString pathSfz)
@@ -381,7 +491,7 @@ void EnsembleGroupes::decode(Pile_sf2 * sf2, EltID idInst, QString pathSfz)
                 // Pan
                 if (panDefined == j)
                 {
-                    val.shValue = 10. * attenuation + 0.5;
+                    val.shValue = qRound(10. * attenuation);
                     sf2->set(idInstSmpl, champ_initialAttenuation, val, false);
                 }
 
@@ -524,6 +634,18 @@ void GroupeParametres::adaptOffsets(int startLoop, int endLoop, int length)
         _listeParam << Parametre("loop_mode", "loop_continuous");
 }
 
+void GroupeParametres::adjustStereoVolumeAndCorrection(QString path)
+{
+    QString sample = getStrValue(Parametre::op_sample);
+    if (!sample.isEmpty())
+    {
+        Sound son(path + "/" + sample);
+        if (son.get(champ_wChannels) == 2)
+            adjustVolume(3.);
+        adjustCorrection(son.get(champ_chPitchCorrection));
+    }
+}
+
 void GroupeParametres::checkFilter()
 {
     bool removeFilter = false;
@@ -559,6 +681,21 @@ void GroupeParametres::adjustVolume(double offset)
     }
     if (!isDefined)
         _listeParam << Parametre(Parametre::op_volume, -offset);
+}
+
+void GroupeParametres::adjustCorrection(int offset)
+{
+    bool isDefined = false;
+    for (int i = 0; i < _listeParam.size(); i++)
+    {
+        if (_listeParam.at(i).getOpCode() == Parametre::op_tuningFine)
+        {
+            _listeParam[i].setIntValue(_listeParam.at(i).getIntValue() - offset);
+            isDefined = true;
+        }
+    }
+    if (!isDefined)
+        _listeParam << Parametre(Parametre::op_tuningFine, -offset);
 }
 
 QStringList GroupeParametres::getFullPath(QString base, QStringList directories)
@@ -705,10 +842,10 @@ void GroupeParametres::decode(Pile_sf2 * sf2, EltID idElt) const
             sf2->set(idElt, champ_sampleModes, val, false);
             break;
         case Parametre::op_volume:
-            dTmp = -_listeParam.at(i).getDoubleValue() / 0.68;
+            dTmp = -_listeParam.at(i).getDoubleValue() / DB_SF2_TO_SFZ;
             if (sf2->isSet(idElt, champ_initialAttenuation))
                 dTmp += (double)sf2->get(idElt, champ_initialAttenuation).shValue / 10.;
-            val.shValue = 10. * dTmp + .5;
+            val.shValue = qRound(10. * dTmp);
             sf2->set(idElt, champ_initialAttenuation, val, false);
             break;
         case Parametre::op_tuningScale:
@@ -719,27 +856,27 @@ void GroupeParametres::decode(Pile_sf2 * sf2, EltID idElt) const
             addSeconds(_listeParam.at(i).getDoubleValue(), champ_delayVolEnv, sf2, idElt);
             break;
         case Parametre::op_ampeg_attack:
-            val.shValue = log2m1200(_listeParam.at(i).getDoubleValue()) + .5;
+            val.shValue = qRound(log2m1200(_listeParam.at(i).getDoubleValue()));
             sf2->set(idElt, champ_attackVolEnv, val, false);
             break;
         case Parametre::op_ampeg_hold:
-            val.shValue = log2m1200(_listeParam.at(i).getDoubleValue()) + .5;
+            val.shValue = qRound(log2m1200(_listeParam.at(i).getDoubleValue()));
             sf2->set(idElt, champ_holdVolEnv, val, false);
             break;
         case Parametre::op_ampeg_decay:
-            val.shValue = log2m1200(_listeParam.at(i).getDoubleValue()) + .5;
+            val.shValue = qRound(log2m1200(_listeParam.at(i).getDoubleValue()));
             sf2->set(idElt, champ_decayVolEnv, val, false);
             break;
         case Parametre::op_ampeg_sustain:
             dTmp = _listeParam.at(i).getDoubleValue();
             if (dTmp >= 0.1)
-                val.shValue = -10. * percentToDB(dTmp) + .5;
+                val.shValue = qRound(-10. * percentToDB(dTmp));
             else
                 val.shValue = 1440;
             sf2->set(idElt, champ_sustainVolEnv, val, false);
             break;
         case Parametre::op_ampeg_release:
-            val.shValue = log2m1200(_listeParam.at(i).getDoubleValue()) + .5;
+            val.shValue = qRound(log2m1200(_listeParam.at(i).getDoubleValue()));
             sf2->set(idElt, champ_releaseVolEnv, val, false);
             break;
         case Parametre::op_noteToVolEnvHold:
@@ -751,19 +888,19 @@ void GroupeParametres::decode(Pile_sf2 * sf2, EltID idElt) const
             sf2->set(idElt, champ_keynumToVolEnvDecay, val, false);
             break;
         case Parametre::op_reverb:
-            val.wValue = 10. * _listeParam.at(i).getDoubleValue() + .5;
+            val.wValue = qRound(10. * _listeParam.at(i).getDoubleValue());
             sf2->set(idElt, champ_reverbEffectsSend, val, false);
             break;
         case Parametre::op_chorus:
-            val.wValue = 10. * _listeParam.at(i).getDoubleValue() + .5;
+            val.wValue = qRound(10. * _listeParam.at(i).getDoubleValue());
             sf2->set(idElt, champ_chorusEffectsSend, val, false);
             break;
         case Parametre::op_filterFreq:
-            val.shValue = log2m1200(_listeParam.at(i).getDoubleValue() / 8.176) + .5;
+            val.shValue = qRound(log2m1200(_listeParam.at(i).getDoubleValue() / 8.176));
             sf2->set(idElt, champ_initialFilterFc, val, false);
             break;
         case Parametre::op_filterQ:
-            val.shValue = 10. * _listeParam.at(i).getDoubleValue() + .5;
+            val.shValue = qRound(10. * _listeParam.at(i).getDoubleValue());
             sf2->set(idElt, champ_initialFilterQ, val, false);
             break;
         case Parametre::op_vibLFOdelay:
@@ -771,7 +908,7 @@ void GroupeParametres::decode(Pile_sf2 * sf2, EltID idElt) const
                 addSeconds(_listeParam.at(i).getDoubleValue(), champ_delayVibLFO, sf2, idElt);
             break;
         case Parametre::op_vibLFOfreq:
-            val.shValue = log2m1200(_listeParam.at(i).getDoubleValue() / 8.176);
+            val.shValue = qRound(log2m1200(_listeParam.at(i).getDoubleValue() / 8.176));
             sf2->set(idElt, champ_freqVibLFO, val, false);
             break;
         case Parametre::op_vibLFOtoTon:
@@ -783,27 +920,27 @@ void GroupeParametres::decode(Pile_sf2 * sf2, EltID idElt) const
                 addSeconds(_listeParam.at(i).getDoubleValue(), champ_delayModEnv, sf2, idElt);
             break;
         case Parametre::op_pitcheg_attack:
-            val.shValue = log2m1200(_listeParam.at(i).getDoubleValue()) + .5;
+            val.shValue = qRound(log2m1200(_listeParam.at(i).getDoubleValue()));
             sf2->set(idElt, champ_attackModEnv, val, false);
             break;
         case Parametre::op_pitcheg_hold:
-            val.shValue = log2m1200(_listeParam.at(i).getDoubleValue()) + .5;
+            val.shValue = qRound(log2m1200(_listeParam.at(i).getDoubleValue()));
             sf2->set(idElt, champ_holdModEnv, val, false);
             break;
         case Parametre::op_pitcheg_decay:
-            val.shValue = log2m1200(_listeParam.at(i).getDoubleValue()) + .5;
+            val.shValue = qRound(log2m1200(_listeParam.at(i).getDoubleValue()));
             sf2->set(idElt, champ_decayModEnv, val, false);
             break;
         case Parametre::op_pitcheg_sustain:
             dTmp = _listeParam.at(i).getDoubleValue();
             if (dTmp >= 0.1)
-                val.shValue = -10. * percentToDB(dTmp) + .5;
+                val.shValue = qRound(-10. * percentToDB(dTmp));
             else
                 val.shValue = 1440;
             sf2->set(idElt, champ_sustainModEnv, val, false);
             break;
         case Parametre::op_pitcheg_release:
-            val.shValue = log2m1200(_listeParam.at(i).getDoubleValue()) + .5;
+            val.shValue = qRound(log2m1200(_listeParam.at(i).getDoubleValue()));
             sf2->set(idElt, champ_releaseModEnv, val, false);
             break;
         case Parametre::op_modEnvToTon:
@@ -822,11 +959,11 @@ void GroupeParametres::decode(Pile_sf2 * sf2, EltID idElt) const
             addSeconds(_listeParam.at(i).getDoubleValue(), champ_delayModLFO, sf2, idElt);
             break;
         case Parametre::op_modLFOfreq:
-            val.shValue = log2m1200(_listeParam.at(i).getDoubleValue() / 8.176);
+            val.shValue = qRound(log2m1200(_listeParam.at(i).getDoubleValue() / 8.176));
             sf2->set(idElt, champ_freqModLFO, val, false);
             break;
         case Parametre::op_modLFOtoVolume:
-            val.shValue = 10. * _listeParam.at(i).getDoubleValue();
+            val.shValue = qRound(10. * _listeParam.at(i).getDoubleValue() / DB_SF2_TO_SFZ);
             sf2->set(idElt, champ_modLfoToVolume, val, false);
             break;
         default:
@@ -837,8 +974,8 @@ void GroupeParametres::decode(Pile_sf2 * sf2, EltID idElt) const
     // Vélocité fixe
     if (isDefined(Parametre::op_amp_velcurve_1) && isDefined(Parametre::op_amp_velcurve_127))
     {
-        int velMin = 127. * getDoubleValue(Parametre::op_amp_velcurve_1) + .5;
-        int velMax = 127. * getDoubleValue(Parametre::op_amp_velcurve_127) + .5;
+        int velMin = qRound(127. * getDoubleValue(Parametre::op_amp_velcurve_1));
+        int velMax = qRound(127. * getDoubleValue(Parametre::op_amp_velcurve_127));
         if (velMin == velMax)
         {
             val.wValue = velMin;
@@ -871,31 +1008,31 @@ void GroupeParametres::decode(Pile_sf2 * sf2, EltID idElt) const
                 addSeconds(getDoubleValue(Parametre::op_fileg_delay), champ_delayModEnv, sf2, idElt);
             if (isDefined(Parametre::op_fileg_attack))
             {
-                val.shValue = log2m1200(getDoubleValue(Parametre::op_fileg_attack)) + .5;
+                val.shValue = qRound(log2m1200(getDoubleValue(Parametre::op_fileg_attack)));
                 sf2->set(idElt, champ_attackModEnv, val, false);
             }
             if (isDefined(Parametre::op_fileg_hold))
             {
-                val.shValue = log2m1200(getDoubleValue(Parametre::op_fileg_hold)) + .5;
+                val.shValue = qRound(log2m1200(getDoubleValue(Parametre::op_fileg_hold)));
                 sf2->set(idElt, champ_holdModEnv, val, false);
             }
             if (isDefined(Parametre::op_fileg_decay))
             {
-                val.shValue = log2m1200(getDoubleValue(Parametre::op_fileg_decay)) + .5;
+                val.shValue = qRound(log2m1200(getDoubleValue(Parametre::op_fileg_decay)));
                 sf2->set(idElt, champ_decayModEnv, val, false);
             }
             if (isDefined(Parametre::op_fileg_sustain))
             {
                 dTmp = getDoubleValue(Parametre::op_fileg_sustain);
                 if (dTmp >= 0.1)
-                    val.shValue = -10. * percentToDB(dTmp) + .5;
+                    val.shValue = qRound(-10. * percentToDB(dTmp));
                 else
                     val.shValue = 1440;
                 sf2->set(idElt, champ_sustainModEnv, val, false);
             }
             if (isDefined(Parametre::op_fileg_release))
             {
-                val.shValue = log2m1200(getDoubleValue(Parametre::op_fileg_release)) + .5;
+                val.shValue = qRound(log2m1200(getDoubleValue(Parametre::op_fileg_release)));
                 sf2->set(idElt, champ_releaseModEnv, val, false);
             }
             if (isDefined(Parametre::op_fileg_holdcc133))
@@ -933,7 +1070,7 @@ void GroupeParametres::decode(Pile_sf2 * sf2, EltID idElt) const
                 addSeconds(getDoubleValue(Parametre::op_filLFOdelay), champ_delayModLFO, sf2, idElt);
             if (isDefined(Parametre::op_filLFOfreq))
             {
-                val.shValue = log2m1200(getDoubleValue(Parametre::op_filLFOfreq) / 8.176);
+                val.shValue = qRound(log2m1200(getDoubleValue(Parametre::op_filLFOfreq) / 8.176));
                 sf2->set(idElt, champ_freqModLFO, val, false);
             }
             val.shValue = getIntValue(Parametre::op_modLFOtoFilter);
@@ -950,7 +1087,7 @@ void GroupeParametres::addSeconds(double value, Champ champ, Pile_sf2 * sf2, Elt
         dTmp = d1200e2(sf2->get(id, champ).shValue);
     else
         dTmp = 0;
-    val.shValue = log2m1200(dTmp + value) + 0.5;
+    val.shValue = qRound(log2m1200(dTmp + value));
     sf2->set(id, champ, val, false);
 }
 
@@ -1029,7 +1166,7 @@ Parametre::Parametre(QString opcode, QString valeur) :
     else if (opcode == "end")
     {
         _opcode = op_end;
-        _intValue = valeurLow.toInt();
+        _intValue = valeurLow.toInt() + 1;
     }
     else if (opcode == "loop_start")
     {
@@ -1065,8 +1202,6 @@ Parametre::Parametre(QString opcode, QString valeur) :
     {
         _opcode = op_volume;
         _dblValue = valeurLow.toDouble();
-        if (_dblValue > _attenuationOffset)
-            _attenuationOffset = _dblValue;
     }
     else if (opcode == "pitch_keytrack")
     {

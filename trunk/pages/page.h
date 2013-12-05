@@ -403,7 +403,7 @@ protected slots:
 
 private slots:
     void paramGlobal(QVector<double> dValues, QList<EltID> listElt, int typeModif, int champ, int velMin, int velMax);
-    void spatialisation(int motif, int nbDiv, int etalement, int occupation, int offset, int sens, int sens2);
+    void spatialisation(QMap<int, double> mapPan);
     void duplication(QVector<int> listeVelocites, bool duplicKey, bool duplicVel);
 };
 
