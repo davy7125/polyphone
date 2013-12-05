@@ -145,9 +145,10 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent, Qt::Window | Qt::W
 
     // Déplacement dans la barre de menu
     this->ui->toolBar->setContentsMargins(0, 0, 0, 0);
-    this->ui->ensembleKeyboard->setMaximumHeight(this->ui->toolBar->height()+5);
-    this->keyboard->setMaximumHeight(this->ui->toolBar->height()+5);
-    this->ui->velocityButton->setMaximumHeight(this->ui->toolBar->height()+5);
+    ui->toolBar->setFixedHeight(40);
+    this->ui->ensembleKeyboard->setMaximumHeight(this->ui->toolBar->height() + 0);
+    this->keyboard->setMaximumHeight(this->ui->toolBar->height() + 0);
+    this->ui->velocityButton->setMaximumHeight(this->ui->toolBar->height() + 0);
     actionKeyboard = this->ui->toolBar->addWidget(this->ui->ensembleKeyboard);
     this->showKeyboard(false);
     this->ui->velocityButton->setValue(this->configuration->getKeyboardVelocity());

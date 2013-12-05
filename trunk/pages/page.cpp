@@ -3189,25 +3189,40 @@ void PageTable::spatialisation()
             return;
         }
     }
-    DialogSpace * dialogSpace = new DialogSpace(m_typePage == PAGE_PRST, this);
-    dialogSpace->setAttribute(Qt::WA_DeleteOnClose, true);
-    this->connect(dialogSpace, SIGNAL(accepted(int,int,int,int,int,int,int)),
-                  SLOT(spatialisation(int,int,int,int,int,int,int)));
+
+    // Détermination note min, note max
+    int noteMin = 127;
+    int noteMax = 0;
+    genAmountType amount;
+    for (int i = 0; i < this->sf2->count(id); i++)
+    {
+        id.indexElt2 = i;
+        if (!this->sf2->get(id, champ_hidden).bValue)
+        {
+            if (this->sf2->isSet(id, champ_keyRange))
+                amount = this->sf2->get(id, champ_keyRange).genValue;
+            else
+            {
+                amount.ranges.byLo = 0;
+                amount.ranges.byHi = 127;
+            }
+            if (amount.ranges.byLo < noteMin) noteMin = amount.ranges.byLo;
+            if (amount.ranges.byHi > noteMax) noteMax = amount.ranges.byHi;
+        }
+    }
+
+    DialogSpace * dialogSpace = new DialogSpace(m_typePage == PAGE_PRST, noteMin, noteMax, this);
+    dialogSpace->setAttribute(Qt::WA_DeleteOnClose);
+    connect(dialogSpace, SIGNAL(accepted(QMap<int,double>)), this, SLOT(spatialisation(QMap<int,double>)));
     dialogSpace->show();
 }
-void PageTable::spatialisation(int motif, int nbDiv, int etalement, int occupation, int offset, int sens, int sens2)
+
+void PageTable::spatialisation(QMap<int, double> mapPan)
 {
     this->sf2->prepareNewActions();
+
     // Sauvegarde des valeurs
-    Config * conf = Config::getInstance();
-    bool isPrst = m_typePage == PAGE_PRST;
-    conf->setTools_space_motif(isPrst, motif);
-    conf->setTools_space_divisions(isPrst, nbDiv);
-    conf->setTools_space_etalement(isPrst, etalement);
-    conf->setTools_space_occupation(isPrst, occupation);
-    conf->setTools_space_offset(isPrst, offset);
-    conf->setTools_space_renversement1(isPrst, sens);
-    conf->setTools_space_renversement2(isPrst, sens2);
+    bool isPrst = (m_typePage == PAGE_PRST);
 
     // Liste des éléments liés avec leur lien (stéréo) le cas échéant
     QList<EltID> list1;
@@ -3286,6 +3301,7 @@ void PageTable::spatialisation(int motif, int nbDiv, int etalement, int occupati
             }
         }
     }
+
     // Spatialisation
     double pan = 0;
     int note = 64;
@@ -3295,8 +3311,8 @@ void PageTable::spatialisation(int motif, int nbDiv, int etalement, int occupati
     for (int i = 0; i < list1.size(); i++)
     {
         note = (listRange.at(i).ranges.byLo + listRange.at(i).ranges.byHi) / 2;
-        pan = DialogSpace::space(noteMin, noteMax, note, motif, nbDiv,
-                                 etalement, occupation, offset, sens, sens2);
+        pan = mapPan.value(note);
+
         // Lien ?
         if (list2.at(i).indexElt2 == -1)
         {

@@ -692,7 +692,7 @@ void Sound::getInfoSoundWav(QByteArray baData, bool tryFindRootkey)
 
                 // accordage
                 _info.iCent = (int)readDWORD(baData, pos + 16);
-                _info.iCent = (double)_info.iCent / 2147483648. * 50. + 0.5;
+                _info.iCent = qRound((double)_info.iCent / 2147483648. * 50.);
             }
             if (taille2 >= 60)
             {
@@ -1105,21 +1105,21 @@ void Sound::exporter(QString fileName, QByteArray baData, InfoSound info)
     {
         dwTemp = qMin((DWORD)127, info.dwNote + 1);
         out << dwTemp;
-        dwTemp = ((double)(info.iCent - 50) / 50.) * 2147483648. + 0.5;
+        dwTemp = qRound(((double)(info.iCent - 50) / 50.) * 2147483648.);
         out << dwTemp;
     }
     else if (info.iCent < -50)
     {
         dwTemp = qMax((DWORD)0, info.dwNote - 1);
         out << dwTemp;
-        dwTemp = ((double)(info.iCent + 50) / 50.) * 2147483648. + 0.5;
+        dwTemp = qRound(((double)(info.iCent + 50) / 50.) * 2147483648.);
         out << dwTemp;
     }
     else
     {
         dwTemp = info.dwNote;
         out << dwTemp;
-        dwTemp = ((double)info.iCent / 50.) * 2147483648. + 0.5;
+        dwTemp = qRound(((double)info.iCent / 50.) * 2147483648.);
         out << dwTemp;
     }
     dwTemp = 0;

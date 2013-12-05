@@ -69,15 +69,15 @@ Tree::menuClicDroit::menuClicDroit(MainWindow *mainWindow)
 
     // Copier / coller / supprimer
     this->copier = new QAction(trUtf8("Copier"), this->menu);
-    this->copier->setShortcut(trUtf8("Ctrl+C"));
+    this->copier->setShortcut(QString("Ctrl+C"));
     connect(this->copier, SIGNAL(triggered()), mainWindow, SLOT(copier()));
     this->menu->addAction(this->copier);
     this->coller = new QAction(trUtf8("Coller"), this->menu);
-    this->coller->setShortcut(trUtf8("Ctrl+V"));
+    this->coller->setShortcut(QString("Ctrl+V"));
     connect(this->coller, SIGNAL(triggered()), mainWindow, SLOT(coller()));
     this->menu->addAction(this->coller);
     this->supprimer = new QAction(trUtf8("Supprimer"), this->menu);
-    this->supprimer->setShortcut(trUtf8("Del"));
+    this->supprimer->setShortcut(QString("Del"));
     connect(this->supprimer, SIGNAL(triggered()), mainWindow, SLOT(supprimerElt()));
     this->menu->addAction(this->supprimer);
     this->menu->addSeparator();
@@ -91,7 +91,7 @@ Tree::menuClicDroit::menuClicDroit(MainWindow *mainWindow)
 
     // Fermer
     this->fermer = new QAction(trUtf8("Fermer le fichier"), this->menu);
-    this->fermer->setShortcut(trUtf8("Ctrl+W"));
+    this->fermer->setShortcut(QString("Ctrl+W"));
     connect(this->fermer, SIGNAL(triggered()), mainWindow, SLOT(Fermer()));
     this->menu->addAction(this->fermer);
 }

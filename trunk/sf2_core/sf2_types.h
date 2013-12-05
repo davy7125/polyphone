@@ -29,6 +29,9 @@
 #include <stdio.h>
 #include <QtGui>
 
+#define DB_SF2_TO_SFZ 0.397
+
+
 // Déclaration anticipée
 typedef struct infoSound InfoSound;
 
@@ -337,5 +340,6 @@ void MESSAGE(QString qStr);
 void MESSAGE(char * text);
 void MESSAGE(EltID id);
 void MESSAGE(SFModulator sfMod);
+
 
 #endif // SF2_TYPES_H

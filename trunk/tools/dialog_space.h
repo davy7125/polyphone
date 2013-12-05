@@ -38,14 +38,12 @@ class DialogSpace : public QDialog
     Q_OBJECT
     
 public:
-    explicit DialogSpace(bool isPrst, QWidget *parent = 0);
+    explicit DialogSpace(bool isPrst, int noteMin, int noteMax, QWidget *parent = 0);
     ~DialogSpace();
-    // Méthode publique
-    static double space(int noteMin, int noteMax, int note,
-                        int motif, int nbDiv, int etalement, int occupation,
-                        int offset, int sens, int sens2);
+
 signals:
-    void accepted(int motif, int nbDiv, int etalement, int occupation, int offset, int sens, int sens2);
+    void accepted(QMap<int, double> mapPan);
+
 private slots:
     void accept();
     void motifChanged(int value);
@@ -55,9 +53,20 @@ private slots:
     void offsetChanged(int value);
     void sensChanged(int value);
     void sens2Changed(int value);
+
 private:
+    double spaceLinear(int note, int nbDiv, int etalement, int occupation, int offset, int sens, bool isAscending);
+    double spaceCurve(int note, int nbDiv, int etalement, int occupation, int offset, int sens, int sens2, bool isHollow);
+
+    static double getAxe(int note, int nbDiv, bool sens);
+
+    void updateRenversements();
+    void updateGraph();
+    void computeData(QVector<double> &x, QVector<int> &y);
+
     Ui::DialogSpace * ui;
     bool _isPrst;
+    int _noteMin, _noteMax;
 };
 
 
@@ -66,7 +75,34 @@ class GraphSpace : public QCustomPlot
     Q_OBJECT
 public:
     explicit GraphSpace(QWidget *parent = 0);
-    void setData(int motif, int nbDiv, int etalement, int occupation, int offset, int sens, int sens2);
+    void setData(QVector<double> x, QVector<int> y);
+
+    bool eventFilter(QObject* o, QEvent* e)
+    {
+        if ((e->type() == QEvent::MouseMove ||
+             e->type() == QEvent::MouseButtonPress ||
+             e->type() == QEvent::MouseButtonRelease ||
+             e->type() == QEvent::Leave)
+                && o == this)
+        {
+            QMouseEvent * mouseEvent = static_cast<QMouseEvent *>(e);
+            QPoint pos = mouseEvent->pos();
+            if (mouseEvent->type() == QEvent::MouseMove)
+                this->mouseMoved(pos);
+            else if (mouseEvent->type() == QEvent::Leave)
+                this->mouseLeft();
+            return true;
+        }
+        return false;
+    }
+private:
+    void mouseMoved(QPoint pos);
+    void mouseLeft();
+
+    void afficheCoord(double xPan, double yLength, int key);
+    QVector<double> _xPan, _yLength;
+    QVector<int> _yKey;
+    QCPItemText * labelCoord;
 };
 
 
