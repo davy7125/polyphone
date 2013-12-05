@@ -155,13 +155,13 @@
          <property name="minimumSize">
           <size>
            <width>45</width>
-           <height>35</height>
+           <height>30</height>
           </size>
          </property>
          <property name="maximumSize">
           <size>
            <width>45</width>
-           <height>40</height>
+           <height>35</height>
           </size>
          </property>
          <property name="maximum">
@@ -180,7 +180,7 @@
      <x>0</x>
      <y>0</y>
      <width>369</width>
-     <height>23</height>
+     <height>21</height>
     </rect>
    </property>
    <property name="accessibleDescription">
@@ -565,7 +565,7 @@
     <string>Ouvre un fichier</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+O</string>
+    <string notr="true">Ctrl+O</string>
    </property>
   </action>
   <action name="actionQuitter">
@@ -577,7 +577,7 @@
     <string>&amp;Quitter</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+Q</string>
+    <string notr="true">Ctrl+Q</string>
    </property>
   </action>
   <action name="actionSommaire">
@@ -589,7 +589,7 @@
     <string>&amp;Manuel</string>
    </property>
    <property name="shortcut">
-    <string>F1</string>
+    <string notr="true">F1</string>
    </property>
   </action>
   <action name="actionA_propos">
@@ -616,7 +616,7 @@
     <string>Enregistre le fichier actuel</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+S</string>
+    <string notr="true">Ctrl+S</string>
    </property>
   </action>
   <action name="actionEnregistrer_sous">
@@ -634,7 +634,7 @@
     <string>Enregistre sous un autre fichier</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+Shift+S</string>
+    <string notr="true">Ctrl+Shift+S</string>
    </property>
   </action>
   <action name="actionNouveau">
@@ -649,7 +649,7 @@
     <string>Crée un nouveau fichier</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+N</string>
+    <string notr="true">Ctrl+N</string>
    </property>
   </action>
   <action name="actionAnnuler">
@@ -667,7 +667,7 @@
     <string>Annule la dernière action</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+Z</string>
+    <string notr="true">Ctrl+Z</string>
    </property>
   </action>
   <action name="actionR_tablir">
@@ -685,7 +685,7 @@
     <string>Refait la dernière action annulée</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+Shift+Z</string>
+    <string notr="true">Ctrl+Shift+Z</string>
    </property>
   </action>
   <action name="actionPr_f_rences">
@@ -729,7 +729,7 @@
     <string>Ferme le fichier</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+W</string>
+    <string notr="true">Ctrl+W</string>
    </property>
   </action>
   <action name="actionCopier">
@@ -747,7 +747,7 @@
     <string>Copie un élément</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+C</string>
+    <string notr="true">Ctrl+C</string>
    </property>
    <property name="shortcutContext">
     <enum>Qt::WidgetShortcut</enum>
@@ -768,7 +768,7 @@
     <string>Colle un élément</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+V</string>
+    <string notr="true">Ctrl+V</string>
    </property>
    <property name="shortcutContext">
     <enum>Qt::WidgetShortcut</enum>
@@ -789,7 +789,7 @@
     <string>Supprime un élément</string>
    </property>
    <property name="shortcut">
-    <string>Del</string>
+    <string notr="true">Del</string>
    </property>
    <property name="shortcutContext">
     <enum>Qt::WidgetShortcut</enum>
@@ -825,7 +825,7 @@
     <string>Renomme un ou plusieurs élément(s)</string>
    </property>
    <property name="shortcut">
-    <string>F2</string>
+    <string notr="true">F2</string>
    </property>
   </action>
   <action name="actionFichier_1">

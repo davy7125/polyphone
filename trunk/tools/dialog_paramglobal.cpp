@@ -599,7 +599,7 @@ void GraphParamGlobal::afficheCoord(double x, double y)
         else
             labelCoord->setPositionAlignment(Qt::AlignBottom | Qt::AlignHCenter);
         char T[20];
-        sprintf(T, "%.3d:%.2f", (int)((double)x * 128. / this->nbPoints + 0.5),
+        sprintf(T, "%.3d:%.2f", qRound((double)x * 128. / this->nbPoints),
                 yMin + (yMax - yMin) * y);
         labelCoord->setText(T);
         // Ajustement position

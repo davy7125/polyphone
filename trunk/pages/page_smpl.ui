@@ -974,7 +974,7 @@
              <string>Lecture</string>
             </property>
             <property name="shortcut">
-             <string>Space</string>
+             <string notr="true">Space</string>
             </property>
             <property name="checkable">
              <bool>true</bool>

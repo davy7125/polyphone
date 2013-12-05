@@ -40,6 +40,7 @@ public:
     Champ getChamp(int num)     { return _listeChamps.at(num); }
     double getValeur(int num)   { return _listeValeurs.at(num); }
     int size()                  { return _listeChamps.size(); }
+    int findChamp(Champ champ)  { return _listeChamps.indexOf(champ); }
 
 private:
     QList<Champ> _listeChamps;
@@ -67,17 +68,16 @@ public:
 
 private:
     Pile_sf2 * _sf2;
-    QList<int> _sampleIDs;
-    QList<QString> _samplePaths;
+    QMap<int, QString> _mapStereoSamples, _mapMonoSamples;
     QString _dirSamples;
     bool _bankSortEnabled, _gmSortEnabled;
 
     void exportPrst(QString dir, EltID id, bool presetPrefix);
     QString getPathSfz(QString dir, QString name);
-    QString getLink(EltID idSmpl);
+    QString getLink(EltID idSmpl, bool enableStereo);
     void writeEntete(QFile * fichierSfz, EltID id);
     void writeGroup(QFile * fichierSfz, ParamListe * listeParam, bool isPercKit);
-    void writeRegion(QFile * fichierSfz, ParamListe * listeParam, QString pathSample);
+    void writeRegion(QFile * fichierSfz, ParamListe * listeParam, QString pathSample, bool ignorePan);
     void writeElement(QTextStream &out, Champ champ, double value);
     static double dbToPercent(double dB) { return 100. * pow(10, -dB / 20); }
     static QString escapeStr(QString str);

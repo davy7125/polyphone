@@ -606,15 +606,15 @@ void GraphVisualizer::afficheCoord(double x, double y)
             labelCoord->setPositionAlignment(Qt::AlignBottom | Qt::AlignHCenter);
         char T[20];
         if (y == 0)
-            sprintf(T, "%.3d:%.0f", (int)((double)x + 0.5), y);
+            sprintf(T, "%.3d:%.0f", qRound(x), y);
         else if (y < 1)
-            sprintf(T, "%.3d:%.3f", (int)((double)x + 0.5), y);
+            sprintf(T, "%.3d:%.3f", qRound(x), y);
         else if (y < 10)
-            sprintf(T, "%.3d:%.2f", (int)((double)x + 0.5), y);
+            sprintf(T, "%.3d:%.2f", qRound(x), y);
         else if (y < 100)
-            sprintf(T, "%.3d:%.1f", (int)((double)x + 0.5), y);
+            sprintf(T, "%.3d:%.1f", qRound(x), y);
         else
-            sprintf(T, "%.3d:%.0f", (int)((double)x + 0.5), y);
+            sprintf(T, "%.3d:%.0f", qRound(x), y);
         labelCoord->setText(T);
         // Ajustement position sur x
         QFontMetrics fm(labelCoord->font());

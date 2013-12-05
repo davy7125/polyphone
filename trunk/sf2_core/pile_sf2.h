@@ -54,7 +54,7 @@ public:
     int set(EltID id, Champ champ, Valeur value, bool storeAction = true);
     int set(EltID id, Champ champ, QString qStr, bool storeAction = true);
     int set(EltID id, Champ champ, QByteArray data, bool storeAction = true);
-    int reset(EltID id, Champ champ);
+    int reset(EltID id, Champ champ, bool storeAction = true);
 
     // Nombre de freres de id (id compris)
     int count(EltID id, bool withHidden = true);
@@ -296,8 +296,6 @@ private:
     int display(EltID id);
     // Supprime ou masque l'élément id. Si l'élément est utilisé par un autre : erreur
     int remove(EltID id, bool permanently, bool storeAction, int *message = NULL);
-    // Modification de propriétés
-    int reset(EltID id, Champ champ, bool storeAction);
     // Type de fichier
     static FileType getFileType(QString fileName);
     // Chargement

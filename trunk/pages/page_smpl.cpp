@@ -313,6 +313,9 @@ void Page_Smpl::afficher()
         this->ui->labelInst->setText(qStr);
     }
 
+    if (!ui->pushLecture->isChecked())
+        ui->pushLecture->setText(trUtf8("lecture"));
+
     // Basculement affichage
     this->qStackedWidget->setCurrentWidget(this); // prend du temps
     preparation = false;
@@ -596,8 +599,8 @@ void Page_Smpl::setLinkedSmpl(int index)
     EltID id = this->tree->getID(0);
     // Ancien et nouveau samples liés
     EltID idLinkedOld = id;
-    if (this->sf2->get(id, champ_sfSampleType).sfLinkValue != monoSample && \
-            this->sf2->get(id, champ_sfSampleType).sfLinkValue != RomMonoSample)
+    SFSampleLink type = sf2->get(id, champ_sfSampleType).sfLinkValue;
+    if (type != monoSample && type != RomMonoSample)
         idLinkedOld.indexElt = this->sf2->get(id, champ_wSampleLink).wValue;
     else
         idLinkedOld.indexElt = -1; // Pas de lien initialement
@@ -627,8 +630,8 @@ void Page_Smpl::setLinkedSmpl(int index)
     sf2->prepareNewActions();
     // Reprise des adresses si modification
     id = this->tree->getID(0);
-    if (this->sf2->get(id, champ_sfSampleType).sfLinkValue != monoSample && \
-            this->sf2->get(id, champ_sfSampleType).sfLinkValue != RomMonoSample)
+    type = sf2->get(id, champ_sfSampleType).sfLinkValue;
+    if (type != monoSample && type != RomMonoSample)
         idLinkedOld.indexElt = this->sf2->get(id, champ_wSampleLink).wValue;
     else
         idLinkedOld.indexElt = -1; // Pas de lien initialement
@@ -667,8 +670,8 @@ void Page_Smpl::setLinkedSmpl(int index)
     if (idLinkedNew.indexElt > -1)
     {
         // Le nouveau sample à lier est-il déjà lié ?
-        if (this->sf2->get(idLinkedNew, champ_sfSampleType).sfLinkValue != monoSample && \
-                this->sf2->get(idLinkedNew, champ_sfSampleType).sfLinkValue != RomMonoSample)
+        SFSampleLink typeLinkedNew = sf2->get(idLinkedNew, champ_sfSampleType).sfLinkValue;
+        if (typeLinkedNew != monoSample && typeLinkedNew != RomMonoSample)
         {
             // On délie le sample lié au sample que l'on veut lier
             EltID id2 = id;
@@ -678,27 +681,41 @@ void Page_Smpl::setLinkedSmpl(int index)
             val.sfLinkValue = monoSample;
             this->sf2->set(id2, champ_sfSampleType, val);
         }
+
         // Lien vers le nouveau sample
         val.wValue = idLinkedNew.indexElt;
         this->sf2->set(id, champ_wSampleLink, val);
-        val.sfLinkValue = linkedSample;
-        this->sf2->set(id, champ_sfSampleType, val);
+
         // Lien du nouveau sample lié
-        this->sf2->set(idLinkedNew, champ_sfSampleType, val);
         val.wValue = id.indexElt;
         this->sf2->set(idLinkedNew, champ_wSampleLink, val);
+
+        // Restauration des types de liens
+        bool keepTypeLink = (type == rightSample && typeLinkedNew == leftSample) ||
+                (type == RomRightSample && typeLinkedNew == RomLeftSample) ||
+                (type == leftSample && typeLinkedNew == rightSample) ||
+                (type == RomLeftSample && typeLinkedNew == RomRightSample);
+        if (!keepTypeLink)
+        {
+            val.sfLinkValue = linkedSample;
+            this->sf2->set(id, champ_sfSampleType, val);
+            this->sf2->set(idLinkedNew, champ_sfSampleType, val);
+
+            // Mise à jour combobox
+            this->ui->comboType->clear();
+            this->ui->comboType->addItem(trUtf8("mono"));
+            this->ui->comboType->addItem(trUtf8("droit"));
+            this->ui->comboType->addItem(trUtf8("gauche"));
+            this->ui->comboType->addItem(trUtf8("lien"));
+            this->ui->comboType->setCurrentIndex(3);
+        }
+
         // Ajustement rootKey et tune du sample lié
         val = this->sf2->get(id, champ_byOriginalPitch);
         this->sf2->set(idLinkedNew, champ_byOriginalPitch, val);
         val = this->sf2->get(id, champ_chPitchCorrection);
         this->sf2->set(idLinkedNew, champ_chPitchCorrection, val);
-        // Mise à jour combobox
-        this->ui->comboType->clear();
-        this->ui->comboType->addItem(trUtf8("mono"));
-        this->ui->comboType->addItem(trUtf8("droit"));
-        this->ui->comboType->addItem(trUtf8("gauche"));
-        this->ui->comboType->addItem(trUtf8("lien"));
-        this->ui->comboType->setCurrentIndex(3);
+
         this->ui->checkLectureLien->setEnabled(true);
     }
     else
@@ -1460,6 +1477,7 @@ void Page_Smpl::lecture()
 {
     if (this->ui->pushLecture->isChecked())
     {
+        ui->pushLecture->setText(trUtf8("arrêt"));
         this->noteChanged(-1, 127);
         // Désactivations
         this->ui->comboLink->setEnabled(false);
@@ -1484,6 +1502,7 @@ void Page_Smpl::lecture()
     }
     else
     {
+        ui->pushLecture->setText(trUtf8("lecture"));
         this->lectureEnCours = false;
         this->noteChanged(-1, 0);
     }
@@ -2093,8 +2112,8 @@ void GraphiqueFourier::setPos(qint32 posStart, qint32 posEnd)
     double note3 = 12 * log2(freq) - 36.3763;
 
     // note la plus proche
-    int note = note3 + 0.5;
-    int correction = (note - note3) * 100 + 0.5;
+    int note = qRound(note3);
+    int correction = qRound(((double)note - note3) * 100.);
 
     // Affichage
     QString qStr1 = "";
@@ -2123,7 +2142,7 @@ void GraphiqueFourier::setPos(qint32 posStart, qint32 posEnd)
                 if (note < 0) note = 0;
                 else if (note > 128) note = 128;
                 int note2 = note + .5;
-                int correction = (note2 - note) * 100 + 0.5;
+                int correction = qRound(((double)note2 - note) * 100.);
                 qTmp.sprintf("%d\n", note2);
                 qStr4.append(qTmp);
                 qTmp.sprintf("%d\n", correction);

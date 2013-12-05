@@ -26,6 +26,7 @@
 #include "pile_sf2.h"
 #include <QFile>
 
+
 ConversionSfz::ConversionSfz(Pile_sf2 *sf2) :
     _sf2(sf2)
 {}
@@ -39,6 +40,8 @@ void ConversionSfz::convert(QString dir, QList<EltID> listID, bool presetPrefix,
     EltID idSF2 = listID.at(0);
     idSF2.typeElement = elementSf2;
     QString rootDir = QFileInfo(_sf2->getQstr(idSF2, champ_filename)).baseName();
+    if (rootDir.isEmpty())
+        rootDir = escapeStr(_sf2->getQstr(idSF2, champ_name));
     QDir dossier(dir + "/" + rootDir);
     if (dossier.exists())
     {
@@ -113,17 +116,20 @@ void ConversionSfz::exportPrst(QString dir, EltID id, bool presetPrefix)
     if (presetPrefix)
         numText.sprintf("%.3u_", _sf2->get(id, champ_wPreset).wValue);
     int numBank = _sf2->get(id, champ_wBank).wValue;
-    QString path = getPathSfz(dir, numText + _sf2->getQstr(id, champ_name)) + ".sfz";
-    QFile fichierSfz(path);
+
+    QFile fichierSfz(getPathSfz(dir, numText + _sf2->getQstr(id, champ_name)) + ".sfz");
     if (fichierSfz.open(QIODevice::WriteOnly))
     {
         writeEntete(&fichierSfz, id);
         id.typeElement = elementPrstInst;
+
         for (int i = 0; i < _sf2->count(id); i++)
         {
             id.indexElt2 = i;
             if (!_sf2->get(id, champ_hidden).bValue)
             {
+                QList<EltID> listProcessedInstSmpl;
+
                 // Paramètres du prst
                 ParamListe * paramPrst = new ParamListe(_sf2, id);
 
@@ -139,17 +145,111 @@ void ConversionSfz::exportPrst(QString dir, EltID id, bool presetPrefix)
 
                 // Ecriture de chaque élément présent dans l'instrument
                 idInst.typeElement = elementInstSmpl;
+
+                // Ordre des instSmpl
+                QMultiMap<int, EltID> map;
                 for (int j = 0; j < _sf2->count(idInst); j++)
                 {
                     idInst.indexElt2 = j;
                     if (!_sf2->get(idInst, champ_hidden).bValue)
+                        map.insert(_sf2->get(idInst, champ_keyRange).rValue.byLo, idInst);
+                }
+
+                QList<EltID> listInstSmpl = map.values();
+                for (int j = 0; j < listInstSmpl.count(); j++)
+                {
+                    idInst = listInstSmpl.at(j);
+                    if (!listProcessedInstSmpl.contains(idInst))
                     {
                         ParamListe * paramInstSmpl = new ParamListe(_sf2, paramPrst, idInst);
                         EltID idSmpl = idInst;
                         idSmpl.typeElement = elementSmpl;
                         idSmpl.indexElt = _sf2->get(idInst, champ_sampleID).wValue;
-                        writeRegion(&fichierSfz, paramInstSmpl, getLink(idSmpl));
+
+                        // Utilisation sample mono ou stéréo ?
+                        SFSampleLink typeSample = _sf2->get(idSmpl, champ_sfSampleType).sfLinkValue;
+                        double pan = 0;
+                        if (paramInstSmpl->findChamp(champ_pan) != -1)
+                            pan = paramInstSmpl->getValeur(paramInstSmpl->findChamp(champ_pan));
+                        bool enableStereo = ((typeSample == leftSample || typeSample == RomLeftSample) && pan == -50) ||
+                                ((typeSample == rightSample || typeSample == RomRightSample) && pan == 50);
+
+                        bool ignorePan = false;
+                        if (enableStereo)
+                        {
+                            // Sample lié
+                            EltID idSmplLinked = idSmpl;
+                            idSmplLinked.indexElt = _sf2->get(idSmpl, champ_wSampleLink).wValue;
+
+                            // Vérification que les paramètres liés aux samples sont identiques
+                            if (_sf2->get(idSmpl, champ_dwStartLoop).dwValue == _sf2->get(idSmplLinked, champ_dwStartLoop).dwValue &&
+                                _sf2->get(idSmpl, champ_dwEndLoop).dwValue == _sf2->get(idSmplLinked, champ_dwEndLoop).dwValue &&
+                                _sf2->get(idSmpl, champ_dwLength).dwValue == _sf2->get(idSmplLinked, champ_dwLength).dwValue &&
+                                _sf2->get(idSmpl, champ_chPitchCorrection).dwValue == _sf2->get(idSmplLinked, champ_chPitchCorrection).dwValue &&
+                                _sf2->get(idSmpl, champ_byOriginalPitch).dwValue == _sf2->get(idSmplLinked, champ_byOriginalPitch).dwValue &&
+                                _sf2->get(idSmpl, champ_dwSampleRate).dwValue == _sf2->get(idSmplLinked, champ_dwSampleRate).dwValue)
+                            {
+                                // Recherche d'un instSmpl correspondant exactement à l'autre canal
+                                int index = -1;
+                                for (int k = j + 1; k < listInstSmpl.count(); k++)
+                                {
+                                    if (_sf2->get(listInstSmpl.at(k), champ_sampleID).wValue == idSmplLinked.indexElt)
+                                    {
+                                        // Comparaison des gen
+                                        bool isEqual = true;
+                                        EltID idInstSmplGen = idInst;
+                                        idInstSmplGen.typeElement = elementInstSmplGen;
+                                        EltID idLinkedInstSmplGen = listInstSmpl.at(k);
+                                        idLinkedInstSmplGen.typeElement = elementInstSmplGen;
+                                        QMap<Champ, genAmountType> map, mapLinked;
+                                        for (int l = 0; l < _sf2->count(idInstSmplGen); l++)
+                                        {
+                                            idInstSmplGen.indexMod = l;
+                                            map.insert(_sf2->get(idInstSmplGen, champ_sfGenOper).sfGenValue,
+                                                       _sf2->get(idInstSmplGen, champ_sfGenAmount).genValue);
+                                        }
+                                        for (int l = 0; l < _sf2->count(idLinkedInstSmplGen); l++)
+                                        {
+                                            idLinkedInstSmplGen.indexMod = l;
+                                            mapLinked.insert(_sf2->get(idLinkedInstSmplGen, champ_sfGenOper).sfGenValue,
+                                                       _sf2->get(idLinkedInstSmplGen, champ_sfGenAmount).genValue);
+                                        }
+                                        QList<Champ> listeChamps = map.keys();
+                                        QList<Champ> listeChampsLinked = mapLinked.keys();
+                                        QList<genAmountType> listeValeurs = map.values();
+                                        QList<genAmountType> listeValeursLinked = mapLinked.values();
+                                        if (listeChamps.size() == listeChampsLinked.size())
+                                        {
+                                            for (int l = 0; l < listeChamps.size(); l++)
+                                            {
+                                                if (listeChamps.at(l) == champ_pan)
+                                                    isEqual &= listeChamps.at(l) == listeChampsLinked.at(l) &&
+                                                        listeValeurs.at(l).shAmount == -listeValeursLinked.at(l).shAmount;
+                                                else if (listeChamps.at(l) != champ_sampleID)
+                                                    isEqual &= listeChamps.at(l) == listeChampsLinked.at(l) &&
+                                                        listeValeurs.at(l).shAmount == listeValeursLinked.at(l).shAmount;
+                                            }
+                                        }
+                                        else
+                                            isEqual = false;
+                                        if (isEqual)
+                                            index = k;
+                                    }
+
+                                }
+                                if (index != -1)
+                                {
+                                    listProcessedInstSmpl << listInstSmpl.at(index);
+                                    ignorePan = true;
+                                }
+                            }
+                            else
+                                enableStereo = false;
+                        }
+
+                        writeRegion(&fichierSfz, paramInstSmpl, getLink(idSmpl, enableStereo), ignorePan);
                         delete paramInstSmpl;
+                        listProcessedInstSmpl << idInst;
                     }
                 }
 
@@ -190,31 +290,39 @@ void ConversionSfz::writeEntete(QFile * fichierSfz, EltID id)
         << QObject::trUtf8("// Auteur      : ") << _sf2->getQstr(id, champ_IENG).replace(QRegExp("[\r\n]"), " ") << endl
         << QObject::trUtf8("// Copyright   : ") << _sf2->getQstr(id, champ_ICOP).replace(QRegExp("[\r\n]"), " ") << endl
         << QObject::trUtf8("// Date        : ") << QDate::currentDate().toString("yyyy/MM/dd") << endl
-        << QObject::trUtf8("// Commentaire : ") << _sf2->getQstr(id, champ_ICMT).replace(QRegExp("[\r\n]"), " ") << endl
-        << endl;
+        << QObject::trUtf8("// Commentaire : ") << _sf2->getQstr(id, champ_ICMT).replace(QRegExp("[\r\n]"), " ") << endl;
 }
 
 void ConversionSfz::writeGroup(QFile * fichierSfz, ParamListe * listeParam, bool isPercKit)
 {
     // Ecriture de paramètres communs à plusieurs régions
     QTextStream out(fichierSfz);
-    out << "<group>" << endl;
+    out << endl << "<group>" << endl;
     if (isPercKit)
         out << "lochan=10 hichan=10" << endl;
     for (int i = 0; i < listeParam->size(); i++)
         writeElement(out, listeParam->getChamp(i), listeParam->getValeur(i));
-    out << endl;
 }
 
-void ConversionSfz::writeRegion(QFile * fichierSfz, ParamListe * listeParam, QString pathSample)
+void ConversionSfz::writeRegion(QFile * fichierSfz, ParamListe * listeParam, QString pathSample, bool ignorePan)
 {
+    // Correction de volume lorsqu'un son passe en stéréo
+    double deltaVolumeIfIgnorePan = 3.;
+
     // Ecriture de paramètres spécifique à une région
     QTextStream out(fichierSfz);
-    out << "<region>" << endl
+    out << endl << "<region>" << endl
         << "sample=" << pathSample.replace("/", "\\") << endl;
+    if (ignorePan && listeParam->findChamp(champ_initialAttenuation) == -1)
+        writeElement(out, champ_initialAttenuation, -deltaVolumeIfIgnorePan / DB_SF2_TO_SFZ);
     for (int i = 0; i < listeParam->size(); i++)
-        writeElement(out, listeParam->getChamp(i), listeParam->getValeur(i));
-    out << endl;
+    {
+        if (ignorePan && listeParam->getChamp(i) == champ_initialAttenuation)
+            writeElement(out, champ_initialAttenuation, listeParam->getValeur(i) -
+                         deltaVolumeIfIgnorePan / DB_SF2_TO_SFZ);
+        else if (!ignorePan || listeParam->getChamp(i) != champ_pan)
+            writeElement(out, listeParam->getChamp(i), listeParam->getValeur(i));
+    }
 }
 
 void ConversionSfz::writeElement(QTextStream &out, Champ champ, double value)
@@ -222,15 +330,15 @@ void ConversionSfz::writeElement(QTextStream &out, Champ champ, double value)
     QString v2 = " // sfz v2";
     switch (champ)
     {
-    case champ_fineTune:                out << "tune=" << (int)(value + 0.5) << endl;               break;
-    case champ_coarseTune:              out << "transpose=" << (int)(value + 0.5) << endl;          break;
-    case champ_scaleTuning:             out << "pitch_keytrack=" << (int)(value + 0.5) << endl;     break;
-    case champ_startloopAddrsOffset:    out << "loop_start=" << (int)(value + 0.5) << endl;         break;
-    case champ_startAddrsOffset:        out << "offset=" << (int)(value + 0.5) << endl;             break;
-    case champ_endloopAddrsOffset:      out << "loop_end=" << (int)(value + 0.5) - 1 << endl;       break;
-    case champ_endAddrsOffset:          out << "end=" << (int)(value + 0.5) << endl;                break;
+    case champ_fineTune:                out << "tune=" << qRound(value) << endl;                    break;
+    case champ_coarseTune:              out << "transpose=" << qRound(value) << endl;               break;
+    case champ_scaleTuning:             out << "pitch_keytrack=" << qRound(value) << endl;          break;
+    case champ_startloopAddrsOffset:    out << "loop_start=" << qRound(value) << endl;              break;
+    case champ_startAddrsOffset:        out << "offset=" << qRound(value) << endl;                  break;
+    case champ_endloopAddrsOffset:      out << "loop_end=" << qRound(value) - 1 << endl;            break;
+    case champ_endAddrsOffset:          out << "end=" << qRound(value) - 1 << endl;                 break;
     case champ_pan:                     out << "pan=" << 2 * value << endl;                         break;
-    case champ_initialAttenuation:      out << "volume=" << -value * 0.68 << endl;                  break;
+    case champ_initialAttenuation:      out << "volume=" << -value * DB_SF2_TO_SFZ << endl;         break;
     case champ_initialFilterQ:          out << "resonance=" << value << endl;                       break;
     case champ_sustainModEnv:           out << "fileg_sustain=" << dbToPercent(value) << endl
                                             << "pitcheg_sustain=" << dbToPercent(value) << endl;    break;
@@ -244,8 +352,8 @@ void ConversionSfz::writeElement(QTextStream &out, Champ champ, double value)
                                             << "fileg_decay=" << value << endl;                     break;
     case champ_releaseModEnv:           out << "pitcheg_release=" << value << endl
                                             << "fileg_release=" << value << endl;                   break;
-    case champ_modEnvToPitch:           out << "pitcheg_depth=" << (int)(value + 0.5) << endl;      break;
-    case champ_modEnvToFilterFc:        out << "fileg_depth=" << (int)(value + 0.5) << endl;        break;
+    case champ_modEnvToPitch:           out << "pitcheg_depth=" << qRound(value) << endl;           break;
+    case champ_modEnvToFilterFc:        out << "fileg_depth=" << qRound(value) << endl;             break;
     case champ_keynumToModEnvHold:      out << "pitcheg_holdcc133=" << value << v2 << endl
                                             << "fileg_holdcc133=" << value << v2 << endl;           break;
     case champ_keynumToModEnvDecay:     out << "pitcheg_decaycc133=" << value << v2 << endl
@@ -254,11 +362,11 @@ void ConversionSfz::writeElement(QTextStream &out, Champ champ, double value)
                                             << "fillfo_delay=" << value << endl;                    break;
     case champ_freqModLFO:              out << "amplfo_freq=" << value << endl
                                             << "fillfo_freq=" << value << endl;                     break;
-    case champ_modLfoToVolume:          out << "amplfo_depth=" << value << endl;                    break;
+    case champ_modLfoToVolume:          out << "amplfo_depth=" << value * DB_SF2_TO_SFZ << endl;    break;
     case champ_modLfoToFilterFc:        out << "fillfo_depth=" << value << endl;                    break;
 
     case champ_modLfoToPitch:           /* IMPOSSIBLE !!! */                                        break;
-    case champ_keynum:                  out << "pitch_keycenter=" << (int)(value + 0.5) << endl
+    case champ_keynum:                  out << "pitch_keycenter=" << qRound(value) << endl
                                             << "pitch_keytrack=0" << endl;                          break;
     case champ_reverbEffectsSend:       out << "effect1=" << value << endl;                         break;
     case champ_chorusEffectsSend:       out << "effect2=" << value << endl;                         break;
@@ -270,29 +378,29 @@ void ConversionSfz::writeElement(QTextStream &out, Champ champ, double value)
     case champ_keynumToVolEnvHold:      out << "ampeg_holdcc133=" << value << v2 << endl;           break;
     case champ_keynumToVolEnvDecay:     out << "ampeg_decaycc133=" << value << v2 << endl;          break;
     case champ_releaseVolEnv:           out << "ampeg_release=" << value << endl;                   break;
-    case champ_overridingRootKey:       out << "pitch_keycenter=" << (int)(value + 0.5) << endl;    break;
+    case champ_overridingRootKey:       out << "pitch_keycenter=" << qRound(value) << endl;         break;
     case champ_delayVibLFO:             out << "pitchlfo_delay=" << value << endl;                  break;
     case champ_freqVibLFO:              out << "pitchlfo_freq=" << value << endl;                   break;
-    case champ_vibLfoToPitch:           out << "pitchlfo_depth=" << (int)(value + 0.5) << endl;     break;
+    case champ_vibLfoToPitch:           out << "pitchlfo_depth=" << qRound(value) << endl;          break;
     case champ_velocity:                out << "amp_velcurve_1=" << value / 127. << endl
                                             << "amp_velcurve_127=" << value / 127. << endl;         break;
     case champ_exclusiveClass:
         if (value != 0)
-            out << "group=" << (int)(value + 0.5) << endl
-                << "off_by=" << (int)(value + 0.5) << endl;
+            out << "group=" << qRound(value) << endl
+                << "off_by=" << qRound(value) << endl;
         break;
     case champ_initialFilterFc:
         out << "fil_type=lpf_2p" << endl
-            << "cutoff="   << (int)(value + 0.5) << endl;
+            << "cutoff="   << qRound(value) << endl;
         break;
     case champ_keyRange:{
-        int lokey = value / 1000. + 0.5;
-        int hikey = value - 1000. * lokey + 0.5;
+        int lokey = qRound(value / 1000.);
+        int hikey = qRound(value - 1000. * lokey);
         out << "lokey=" << lokey << " hikey=" << hikey << endl;
         }break;
     case champ_velRange:{
-        int lovel = value / 1000. + 0.5;
-        int hivel = value - 1000. * lovel + 0.5;
+        int lovel = qRound(value / 1000.);
+        int hivel = qRound(value - 1000. * lovel);
         out << "lovel=" << lovel << " hivel=" << hivel << endl;
         }break;
     case champ_sampleModes:
@@ -308,11 +416,13 @@ void ConversionSfz::writeElement(QTextStream &out, Champ champ, double value)
     }
 }
 
-QString ConversionSfz::getLink(EltID idSmpl)
+QString ConversionSfz::getLink(EltID idSmpl, bool enableStereo)
 {
     QString path = "";
-    if (_sampleIDs.contains(idSmpl.indexElt))
-        path = _samplePaths.at(_sampleIDs.indexOf(idSmpl.indexElt));
+    if (!enableStereo && _mapMonoSamples.contains(idSmpl.indexElt))
+        path = _mapMonoSamples.value(idSmpl.indexElt);
+    else if (enableStereo && _mapStereoSamples.contains(idSmpl.indexElt))
+        path = _mapStereoSamples.value(idSmpl.indexElt);
     else
     {
         QString name;
@@ -320,7 +430,7 @@ QString ConversionSfz::getLink(EltID idSmpl)
         idSmpl2.indexElt = -1;
 
         // Stéréo ?
-        if (_sf2->get(idSmpl, champ_sfSampleType).wValue != monoSample &&
+        if (enableStereo && _sf2->get(idSmpl, champ_sfSampleType).wValue != monoSample &&
                 _sf2->get(idSmpl, champ_sfSampleType).wValue != RomMonoSample)
         {
             idSmpl2.indexElt = _sf2->get(idSmpl, champ_wSampleLink).wValue;
@@ -331,7 +441,7 @@ QString ConversionSfz::getLink(EltID idSmpl)
             int nb = Sound::lastLettersToRemove(nom1, nom2);
             name = nom1.left(nom1.size() - nb);
 
-            if (_sf2->get(idSmpl, champ_sfSampleType).wValue == rightSample &&
+            if (_sf2->get(idSmpl, champ_sfSampleType).wValue != rightSample &&
                     _sf2->get(idSmpl, champ_sfSampleType).wValue != RomRightSample)
             {
                 // Inversion smpl1 smpl2
@@ -341,9 +451,7 @@ QString ConversionSfz::getLink(EltID idSmpl)
             }
         }
         else
-        {
             name = _sf2->getQstr(idSmpl, champ_name);
-        }
 
         name = escapeStr(name);
         QFile file(_dirSamples + "/" + name + ".wav");
@@ -364,24 +472,24 @@ QString ConversionSfz::getLink(EltID idSmpl)
         // Export et sauvegarde
         if (idSmpl.indexElt == -1 || idSmpl2.indexElt == -1)
         {
+            // Mono
             if (idSmpl.indexElt2 != -1)
             {
-                _sampleIDs << idSmpl.indexElt;
-                _samplePaths << path;
+                _mapMonoSamples.insert(idSmpl.indexElt, path);
                 Sound::exporter(_dirSamples + "/" + name + ".wav", _sf2->getSon(idSmpl));
             }
             else if (idSmpl2.indexElt != -1)
             {
-                _sampleIDs << idSmpl2.indexElt;
-                _samplePaths << path;
+                _mapMonoSamples.insert(idSmpl2.indexElt, path);
                 Sound::exporter(_dirSamples + "/" + name + ".wav", _sf2->getSon(idSmpl2));
             }
         }
         else
         {
-            _sampleIDs << idSmpl.indexElt << idSmpl2.indexElt;
-            _samplePaths << path << path;
-            Sound::exporter(_dirSamples + "/" + name + ".wav", _sf2->getSon(idSmpl), _sf2->getSon(idSmpl2));
+            // Stéréo
+            _mapStereoSamples.insert(idSmpl.indexElt, path);
+            _mapStereoSamples.insert(idSmpl2.indexElt, path);
+            Sound::exporter(_dirSamples + "/" + name + ".wav", _sf2->getSon(idSmpl2), _sf2->getSon(idSmpl));
         }
     }
     return path;
@@ -389,7 +497,6 @@ QString ConversionSfz::getLink(EltID idSmpl)
 
 QString ConversionSfz::escapeStr(QString str)
 {
-    //return str.replace(QRegExp(QString::fromUtf8("[`~!@$%^*|:;<>«»,.?/{}\'\"\\\[\\]\\\\]")), "_");
     return str.replace(QRegExp(QString::fromUtf8("[`~*|:<>«»?/{}\"\\\\]")), "_");
 }
 
@@ -678,21 +785,45 @@ ParamListe::ParamListe(Pile_sf2 * sf2, ParamListe * paramPrst, EltID idInst)
     }
 
     // Fréquence par défaut si non défini
-    if ((_listeChamps.contains(champ_modLfoToFilterFc) || _listeChamps.contains(champ_modLfoToPitch) ||
-         _listeChamps.contains(champ_modLfoToVolume)) && !_listeChamps.contains(champ_freqModLFO))
+    idInst.typeElement = elementInst;
+    if (!sf2->isSet(idInst, champ_freqModLFO))
     {
-        _listeChamps << champ_freqModLFO;
-        _listeValeurs << getDefaultValue(champ_freqModLFO);
+        if ((_listeChamps.contains(champ_modLfoToFilterFc) || _listeChamps.contains(champ_modLfoToPitch) ||
+             _listeChamps.contains(champ_modLfoToVolume)) && !_listeChamps.contains(champ_freqModLFO))
+        {
+            _listeChamps << champ_freqModLFO;
+            _listeValeurs << getDefaultValue(champ_freqModLFO);
+        }
     }
-    if (_listeChamps.contains(champ_vibLfoToPitch) && !_listeChamps.contains(champ_freqVibLFO))
+    if (!sf2->isSet(idInst, champ_freqVibLFO))
     {
-        _listeChamps << champ_freqVibLFO;
-        _listeValeurs << getDefaultValue(champ_freqVibLFO);
+        if (_listeChamps.contains(champ_vibLfoToPitch) && !_listeChamps.contains(champ_freqVibLFO))
+        {
+            _listeChamps << champ_freqVibLFO;
+            _listeValeurs << getDefaultValue(champ_freqVibLFO);
+        }
     }
 
     // Limites
     for (int i = 0; i < _listeChamps.size(); i++)
         _listeValeurs[i] = limit(_listeValeurs.at(i), _listeChamps.at(i));
+
+    // Correction volume si modLfoToVolume est actif
+    double correction = 0;
+    if (_listeChamps.contains(champ_modLfoToVolume))
+        correction = qAbs(_listeValeurs.at(_listeChamps.indexOf(champ_modLfoToVolume)));
+    else if (sf2->isSet(idInst, champ_modLfoToVolume))
+        correction = qAbs((double)sf2->get(idInst, champ_modLfoToVolume).shValue / 10.);
+    if (correction != 0)
+    {
+        if (_listeChamps.contains(champ_initialAttenuation))
+            _listeValeurs[_listeChamps.indexOf(champ_initialAttenuation)] += correction;
+        else
+        {
+            _listeChamps << champ_initialAttenuation;
+            _listeValeurs << correction;
+        }
+    }
 
     // Ordre
     prepend(champ_velRange);
@@ -869,10 +1000,10 @@ void ParamListe::fusion(Champ champ, double value)
         _listeValeurs[index] *= value;
         break;
     case champ_keyRange: case champ_velRange:{
-        int minNew = value / 1000 + 0.5;
-        int maxNew = value - 1000 * minNew + 0.5;
-        int minOld = _listeValeurs.at(index) / 1000 + 0.5;
-        int maxOld = _listeValeurs.at(index) - 1000 * minOld + 0.5;
+        int minNew = qRound(value / 1000.);
+        int maxNew = qRound(value - 1000. * minNew);
+        int minOld = qRound(_listeValeurs.at(index) / 1000.);
+        int maxOld = qRound(_listeValeurs.at(index) - 1000. * minOld);
         if (minNew > maxNew)
         {
             int tmp = maxNew;

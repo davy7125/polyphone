@@ -135,8 +135,6 @@ public:
     void    setIntValue(int value)       { _intValue = value; }
     void    setDoubleValue(double value) { _dblValue = value; }
 
-    static double _attenuationOffset;
-
 private:
     OpCode  _opcode;
     int     _intValue;
@@ -157,8 +155,10 @@ public:
     void decode(Pile_sf2 * sf2, EltID idElt) const;
     QList<int> getSampleIndex(Pile_sf2 * sf2, EltID idElt, QString pathSfz) const;
     void adaptOffsets(int startLoop, int endLoop, int length);
+    void adjustStereoVolumeAndCorrection(QString path);
     void checkFilter();
     void adjustVolume(double offset);
+    void adjustCorrection(int offset);
 
     // Lecture
     bool isDefined(Parametre::OpCode opcode) const
@@ -187,7 +187,7 @@ public:
     }
     QString getStrValue(Parametre::OpCode opcode) const
     {
-        QString strRet = 0;
+        QString strRet = "";
         for (int i = 0; i < _listeParam.size(); i++)
             if (_listeParam.at(i).getOpCode() == opcode)
                 strRet = _listeParam.at(i).getStringValue();
@@ -216,9 +216,12 @@ public:
         else
             _listeDivisions.last() << Parametre(opcode, valeur);
     }
-    void moveOpcodeInSamples(Parametre::OpCode opcode);
+    void moveOpcodeInSamples(Parametre::OpCode opcode, bool isDouble = false);
     void checkFilter();
+    void adjustStereoVolumeAndCorrection(QString path);
+    void adjustModulationVolume();
     bool isChannel10();
+    double getAmpliMax();
     void adjustVolume(double offset);
 
     // Décodage
