@@ -24,7 +24,7 @@
    <item>
     <widget class="QLabel" name="label">
      <property name="text">
-      <string>Nom des samples (20 caractères au total) :</string>
+      <string>Nom des échantillons (20 caractères au total) :</string>
      </property>
     </widget>
    </item>

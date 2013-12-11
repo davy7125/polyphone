@@ -188,7 +188,6 @@ HEADERS  += mainwindow.h \
 FORMS    += mainwindow.ui \
     gui_divers/config.ui \
     gui_divers/dialog_list.ui \
-    gui_divers/dialog_help.ui \
     pages/page_sf2.ui \
     pages/page_smpl.ui \
     pages/page_inst.ui \

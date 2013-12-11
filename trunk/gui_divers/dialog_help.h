@@ -27,11 +27,11 @@
 
 #include <QDialog>
 #include <QUrl>
-
-namespace Ui
-{
-    class DialogHelp;
-}
+#include <QSplitter>
+#include <QTreeWidget>
+#include <QTextBrowser>
+#include <QPushButton>
+#include <QLabel>
 
 class DialogHelp : public QDialog
 {
@@ -42,14 +42,25 @@ public:
     ~DialogHelp();
     
 private slots:
-    void on_pushPrevious_clicked();
-    void on_pushNext_clicked();
-    void on_pushHome_clicked();
-    void on_textBrowser_sourceChanged(const QUrl &arg1);
+    void onTextSourceChanged(const QUrl &arg1, bool store = true);
+    void onTreeClicked(QTreeWidgetItem* item, QTreeWidgetItem*);
+    void onPreviousClicked();
+    void onNextClicked();
 
 private:
-    Ui::DialogHelp *ui;
-    QString _previous, _next;
+    void createUi();
+    void fillTree();
+    QTreeWidgetItem * createItem(QString name, QString htmlPage, QTreeWidgetItem * parent = NULL);
+    QTreeWidgetItem * findItem(QTreeWidgetItem *item, QString url);
+    void updateNextPreviousStates();
+
+    QSplitter * _splitter;
+    QTreeWidget * _tree;
+    QLabel * _label;
+    QTextBrowser * _textBrowser;
+    QPushButton * _buttonLeft, * _buttonRight;
+
+    QStringList _urlPrevious, _urlNext;
 };
 
 #endif // DIALOG_HELP_H

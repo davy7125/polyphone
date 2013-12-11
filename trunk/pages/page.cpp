@@ -259,7 +259,7 @@ QString Page::getGenName(WORD iVal, int type)
     case 0:
         switch (type)
         {
-        case 1: qStr = trUtf8("Offset début sample"); break;
+        case 1: qStr = trUtf8("Offset début échantillon"); break;
         case 2: qStr = "impossible"; break;
         default: qStr = "Sample: start offset"; break;
         }
@@ -267,7 +267,7 @@ QString Page::getGenName(WORD iVal, int type)
     case 1:
         switch (type)
         {
-        case 1: qStr = trUtf8("Offset fin sample"); break;
+        case 1: qStr = trUtf8("Offset fin échantillon"); break;
         case 2: qStr = "impossible"; break;
         default: qStr = "Sample: end offset"; break;
         }
@@ -291,7 +291,7 @@ QString Page::getGenName(WORD iVal, int type)
     case 4:
         switch (type)
         {
-        case 1: qStr = trUtf8("Offset début sample"); break;
+        case 1: qStr = trUtf8("Offset début échantillon"); break;
         case 2: qStr = "impossible"; break;
         default: qStr = "Sample: start offset (coarse)"; break;
         }
@@ -355,7 +355,7 @@ QString Page::getGenName(WORD iVal, int type)
     case 12:
         switch (type)
         {
-        case 1: qStr = trUtf8("Offset fin sample"); break;
+        case 1: qStr = trUtf8("Offset fin échantillon"); break;
         case 2: qStr = "impossible"; break;
         default: qStr = "Sample: end offset (coarse)"; break;
         }
@@ -571,7 +571,7 @@ QString Page::getGenName(WORD iVal, int type)
     case 45:
         switch (type)
         {
-        case 1: qStr = trUtf8("Offset début sample"); break;
+        case 1: qStr = trUtf8("Offset début échantillon"); break;
         case 2: qStr = "impossible"; break;
         default: qStr = "Sample: loop start offset (coarse)"; break;
         }

@@ -180,7 +180,7 @@
      <x>0</x>
      <y>0</y>
      <width>369</width>
-     <height>21</height>
+     <height>23</height>
     </rect>
    </property>
    <property name="accessibleDescription">
@@ -190,8 +190,8 @@
     <property name="title">
      <string>&amp;Fichier</string>
     </property>
-    <addaction name="actionOuvrir"/>
     <addaction name="actionNouveau"/>
+    <addaction name="actionOuvrir"/>
     <addaction name="separator"/>
     <addaction name="actionEnregistrer"/>
     <addaction name="actionEnregistrer_sous"/>
@@ -242,7 +242,7 @@
       <bool>false</bool>
      </property>
      <property name="title">
-      <string>&amp;Sample</string>
+      <string>&amp;Échantillon</string>
      </property>
      <addaction name="actionAjuster_la_fin_de_boucle"/>
      <addaction name="actionBouclage_automatique"/>
@@ -807,7 +807,7 @@
     <string>&amp;Enlever les éléments non utilisés</string>
    </property>
    <property name="toolTip">
-    <string>Enlève les samples et instruments non utilisés</string>
+    <string>Enlève les échantillons et instruments non utilisés</string>
    </property>
   </action>
   <action name="actionRenommer">
@@ -936,7 +936,7 @@
      <normaloff>:/icones/wave</normaloff>:/icones/wave</iconset>
    </property>
    <property name="text">
-    <string>&amp;Importer des sons...</string>
+    <string>&amp;Importer des échantillons...</string>
    </property>
    <property name="toolTip">
     <string>Importe un fichier audio</string>
@@ -951,7 +951,7 @@
      <normaloff>:/icones/export</normaloff>:/icones/export</iconset>
    </property>
    <property name="text">
-    <string>E&amp;xporter des sons...</string>
+    <string>E&amp;xporter des échantillons...</string>
    </property>
    <property name="toolTip">
     <string>Exporte au format wav</string>
@@ -999,7 +999,7 @@
     <string>&amp;Enlever blanc au départ</string>
    </property>
    <property name="toolTip">
-    <string>Enleve le blanc au début d'un sample</string>
+    <string>Enleve le blanc au début d'un échantillon</string>
    </property>
   </action>
   <action name="actionAjuster_la_fin_de_boucle">
@@ -1014,7 +1014,7 @@
     <string>&amp;Ajuster à la fin de boucle</string>
    </property>
    <property name="toolTip">
-    <string>Ajuste le sample à sa fin de boucle</string>
+    <string>Ajuste l'échantillon à sa fin de boucle</string>
    </property>
   </action>
   <action name="actionNormaliser_volume">
@@ -1044,7 +1044,7 @@
     <string>&amp;Bouclage automatique</string>
    </property>
    <property name="toolTip">
-    <string>Boucle automatiquement le sample</string>
+    <string>Boucle automatiquement l'échantillon</string>
    </property>
   </action>
   <action name="actionFiltre_mur_de_brique">
@@ -1074,7 +1074,7 @@
     <string>&amp;Transposer...</string>
    </property>
    <property name="toolTip">
-    <string>Transpose le sample</string>
+    <string>Transpose l'échantillon</string>
    </property>
   </action>
   <action name="actionR_gler_att_nuation_minimale">
@@ -1182,7 +1182,7 @@
     <string>&amp;Réglage balance</string>
    </property>
    <property name="toolTip">
-    <string>Règle la balance du sample</string>
+    <string>Règle la balance de l'échantillon</string>
    </property>
   </action>
   <action name="action_Cr_ation_mutation_mixture">
@@ -1319,10 +1319,10 @@
      <normaloff>:/icones/link</normaloff>:/icones/link</iconset>
    </property>
    <property name="text">
-    <string>&amp;Association auto samples</string>
+    <string>&amp;Association auto échantillons</string>
    </property>
    <property name="toolTip">
-    <string>Associe automatiquement les samples G/D</string>
+    <string>Associe automatiquement les échantillons G/D</string>
    </property>
   </action>
   <action name="actionMagn_tophone">
@@ -1418,10 +1418,10 @@
      <normaloff>:/icones/unlink</normaloff>:/icones/unlink</iconset>
    </property>
    <property name="text">
-    <string>&amp;Dissocier les samples stéréo</string>
+    <string>&amp;Dissocier les échantillons stéréo</string>
    </property>
    <property name="toolTip">
-    <string>Dissocie les samples stéréo</string>
+    <string>Dissocie les échantillons stéréo</string>
    </property>
   </action>
  </widget>
