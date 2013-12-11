@@ -305,16 +305,16 @@ void Page_Smpl::afficher()
             }
         }
         if (nbInst == 0)
-            qStr = trUtf8("<b>Sample lié à aucun instrument.</b>");
+            qStr = trUtf8("<b>Échantillon lié à aucun instrument.</b>");
         else if (nbInst == 1)
-            qStr.prepend(trUtf8("<b>Sample lié à l'instrument : </b>"));
+            qStr.prepend(trUtf8("<b>Échantillon lié à l'instrument : </b>"));
         else
-            qStr.prepend(trUtf8("<b>Sample lié aux instruments : </b>"));
+            qStr.prepend(trUtf8("<b>Échantillon lié aux instruments : </b>"));
         this->ui->labelInst->setText(qStr);
     }
 
     if (!ui->pushLecture->isChecked())
-        ui->pushLecture->setText(trUtf8("lecture"));
+        ui->pushLecture->setText(trUtf8("Lecture"));
 
     // Basculement affichage
     this->qStackedWidget->setCurrentWidget(this); // prend du temps
@@ -1477,7 +1477,7 @@ void Page_Smpl::lecture()
 {
     if (this->ui->pushLecture->isChecked())
     {
-        ui->pushLecture->setText(trUtf8("arrêt"));
+        ui->pushLecture->setText(trUtf8("Arrêt"));
         this->noteChanged(-1, 127);
         // Désactivations
         this->ui->comboLink->setEnabled(false);
@@ -1502,7 +1502,7 @@ void Page_Smpl::lecture()
     }
     else
     {
-        ui->pushLecture->setText(trUtf8("lecture"));
+        ui->pushLecture->setText(trUtf8("Lecture"));
         this->lectureEnCours = false;
         this->noteChanged(-1, 0);
     }

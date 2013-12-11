@@ -50,7 +50,7 @@ void DialogList::showDialog(EltID idSrc, ModeListDialog mode)
     ElementType element;
     if (idSrc.typeElement == elementInstSmpl)
     {
-        this->setWindowTitle(trUtf8("Liste des samples"));
+        this->setWindowTitle(trUtf8("Liste des échantillons"));
         element = elementSmpl;
     }
     else if (idSrc.typeElement == elementSmpl || idSrc.typeElement == elementPrstInst)

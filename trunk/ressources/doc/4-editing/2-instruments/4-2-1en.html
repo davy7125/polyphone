@@ -1,0 +1,82 @@
+<p align="justify">When clicking on an instrument or on a sample linked to an instrument, the page of instrument edition appears.</p>
+
+<p align="center"><img src="qrc:/aide/page3 en.png" /></p>
+
+<p align="justify">This page is divided in two parts:
+<ul>
+	<li>the table,</li>
+	<li>the modulator section (which can be displayed or hidden via the menu "View").</li>
+</ul>
+Moreover, a virtual keyboard may be used to test the instrument under edition.
+</p>
+
+<p align="left"><h2>The table</h2></p>
+
+<p align="justify">The table allows the view and edition of the overall configuration of an instrument. A change of a parameter in "global" applies to all samples linked to the instrument, except for samples whose same parameter is already specified..<br />
+The editable parameters are:
+<ul>
+	<li><b>Keyrange</b><br />
+	Keyrange for which the sound will be heard.
+	</li>
+	<li><b>Velocity range</b><br />
+	Velocity range for which the sound will be heard. It is possible to set different sounds for the same note, with different velocity ranges (to distinguish different nuances of a piano key for example).
+	</li>
+	<li><b>Attenuation</b><br />
+	Attenuation applied to sample.
+	</li>
+	<li><b>Pan</b><br />
+	Balance applied to the souned, to hear it to the left or to the right in stereo.
+	</li>
+	<li><b>Loop playback</b><br />
+	0 indicates a sound reproduced with no loop, 1 indicates a sound which loops continuously, 3 indicates a sound which loops for the duration of key depression and then proceeds to play the remainder of the sample.
+	</li>
+	<li><b>Rootkey</b><br />
+	Allows you to overwrite the rootkey of a sample to hear a different note from that normally used.
+	</li>
+	<li><b>Tuning</b><br />
+	Change the tuning in semitones and cents of semitones. Change "scale" plays on the difference between two consecutive notes.
+	</li>
+	<li><b>Filter</b><br />
+	Apply or not a low-pass filter, by specifying the cutoff frequency and the resonance.
+	</li>
+	<li><b>Volume envelope</b><br />
+	Change the volume envelope, and possibly its evolution with the note.
+	</li>
+	<li><b>Modulation</b><br />
+	Set a modulation (envelope, delay, frequency, changes with the note) and its effect on the tone, filter, volume.
+	</li>
+	<li><b>Vibrato</b><br />
+	Set a vibrato (time, frequency) and its effect on the tone
+	</li>
+	<li><b>Classe exclusive</b><br />
+	This parameter defines exclusive classes, assigning a set of sounds the same value different from 0. When an exclusive class is defined, any note triggered from one of the sounds of the exclusive class ends all the sounds of the class. The scope of an exclusive class is the preset in which the class is defined (a sound triggered in an instrument may ends a sound of another instrument if the two instruments are in the same preset). This effect can be used for percussions like a cymbal.
+	</li>
+	<li><b>Chorus and reverb</b><br />
+	Indicates the intensity of chorus and reverb effects.
+	</li>
+	<li><b>Fixed key and velocity</b><br />
+	Can freezes the key and velocity on the keyrange specified by the linked sample.
+	</li>
+	<li><b>Offsets</b><br />
+	Changes the positions of the start and end of a sound during playback, as well as the start and end of the loop.
+	</li>
+</ul>
+Note: pressing the button "delete" or "del" deletes the contents of a box.
+</p>
+
+<p align="left"><h2>The modulator section</h2></p>
+
+<p align="justify">This section is intended to the creation of modulators, globally for an instrument or for a particular linked sample. A modulator allows the use of a first parameter, the optionally multiplication by a second one, to modify a third one. The output of a modulator can be used as input to another modulator (this function appeared in version 2.04 of sf2 format and may not be supported by some synthesizers).<br />
+The addition or deletion of modulators is made through the buttons "+" and "-" on the right of the interface. The parameters can be entered below.<br />
+It is possible to copy the different modulators of the list in another section of an instrument or preset by using the "copy" and "paste" buttons on the right of the interface.
+</p>
+<p align="left"><h2>The virtual keyboard</h2></p>
+
+<p align="justify">This keyboard may be used to test an instrument under edition. Two values at its left represent the pitch and the velocity of the key being pressed. At its right a button forces a velocity to be used if the value is not 0, or allows the use of the velocity received by the midi signals if the value is 0. Each element being played is enlighted in the table.<br/>
+The computer keyboard may also be used to play, the mapping being defined in the <a href="qrc:/aide/page09en.html">preferences</a>.
+</p>
+
+
+
+<p align="center">Warning: modulators are not yet implemented in the synth.</p>
+

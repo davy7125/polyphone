@@ -47,7 +47,7 @@ Tree::menuClicDroit::menuClicDroit(MainWindow *mainWindow)
 {
     // Constructeur menu clic droit sur l'arborescence
     this->menu = new QMenu();
-    this->nouveauSample = new QAction(trUtf8("Nouveau sample..."), this->menu);
+    this->nouveauSample = new QAction(trUtf8("Nouvel échantillon..."), this->menu);
     connect(this->nouveauSample, SIGNAL(triggered()), mainWindow, SLOT(importerSmpl()));
     this->menu->addAction(this->nouveauSample);
     this->nouvelInstrument = new QAction(trUtf8("Nouvel instrument..."), this->menu);

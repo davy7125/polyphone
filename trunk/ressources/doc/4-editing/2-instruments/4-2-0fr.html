@@ -1,0 +1,60 @@
+<p align="justify">Le tableau permet la visualisation globale et l'édition du paramétrage d'un instrument. Une modification d'un paramètre dans «&#160;global&#160;» s'appliquera à toutes les divisions d'un instrument, exceptées les divisions dont le même paramètre est déjà renseigné.</p>
+
+<p align="justify">Les paramètres modifiables sont&#160;:
+<ul>
+	<li><b>Etendue note</b><br />
+	Etendue du clavier sur laquelle le son sera entendu.
+	</li>
+	<li><b>Etendue vélocité</b><br />
+	Etendue de vélocité sur laquelle le son sera entendu. Il est possible de définir plusieurs sons pour la même note, avec des étendues de vélocités différentes (pour distinguer plusieurs nuances d'une touche de piano par exemple).
+	</li>
+	<li><b>Atténuation</b><br />
+	Atténuation s'appliquant au son.
+	</li>
+	<li><b>Balance</b><br />
+	Balance s'appliquant au son, pour l'entendre plus à gauche ou plus à droite en stéréo.
+	</li>
+	<li><b>Lecture en boucle</b><br />
+	0 indique que le son est reproduit sans boucle, 1 indique que le son boucle continuellement, 3 indique que le son boucle pendant le temps de l'appui sur la touche puis se termine par le reste de l'échantillon.
+	</li>
+	<li><b>Note de base</b><br />
+	Permet de modifier la note de base d'un son, pour l'entendre à une note différente de celle qui lui était normalement destinée.
+	</li>
+	<li><b>Accordage</b><br />
+	Modifie l'accordage en demi-tons et centièmes de demi-tons. Modifier «&#160;scale&#160;» joue sur l'écart entre deux notes consécutives.
+	</li>
+	<li><b>Filtre</b><br />
+	Applique ou non un filtre passe-bas en précisant la fréquence de coupure et la résonance.
+	</li>
+	<li><b>Enveloppe de volume</b><br />
+	Modifie l'enveloppe du volume, et éventuellement son évolution avec la note.
+	</li>
+	<li><b>Modulation</b><br />
+	Permet de paramétrer une modulation (enveloppe, délai, fréquence, évolution avec la note) et son effet sur le ton, le filtre, le volume.
+	</li>
+	<li><b>Vibrato</b><br />
+	Permet de paramétrer un vibrato (délai, fréquence) et son effet sur le ton.
+	</li>
+	<li><b>Classe exclusive</b><br />
+	Ce paramètre permet de définir des classes exclusives, en assignant à un ensemble de sons liés une même valeur différente de 0. Lorsqu'une classe exclusive est définie, n'importe quel début de note parmi l'un des sons de la classe exclusive termine l'ensemble des sons de la classe. La portée d'une classe exclusive est le preset dans lequel la classe est définie (un son initié dans un instrument peut ainsi terminer un son d'un autre instrument si les deux instruments sont dans le même preset). Cet effet peut être utilisé pour des percussions comme une cymbale.
+	</li>
+	<li><b>Chorus et réverbération</b><br />
+	Indique l'intensité des effets chorus et réverbération.
+	</li>
+	<li><b>Note et vélocité fixes</b><br />
+	Permet de figer la note et la vélocité sur l'étendue de note précisée par la division.
+	</li>
+	<li><b>Offsets</b><br />
+	Modifie les positions de début et fin d'un son pendant la lecture, ainsi que le début et la fin de la boucle.
+	</li>
+</ul>
+
+<h3>Facilités d'édition dans le tableau</h3>
+Pour faciliter et accélérer l'édition dans un tableau, les fonctionnalités suivantes ont été implémentées&#160;:
+<ul>
+	<li>une sélection multiple, suivie de l'édition de la dernière cellule, entraînera l'édition de toutes les cellules en même temps,</li>
+	<li>les touches «&#160;effacer&#160;» et «&#160;suppr&#160;» suppriment le contenu d'une ou plusieurs cellules,</li>
+	<li>les échantillons stéréo peuvent être édités simultanément si l'option est cochée dans les <a href="qrc:/aide/6-0fr.html">préférences</a> du logiciel.</li>
+</ul>
+Ne pas oublier les <a href="qrc:/aide/5-1fr.html">outils</a> à disposition&#160;! Notamment l'outil de <a href="qrc:/aide/5-1-4fr.html">paramétrage global</a>.
+</p>

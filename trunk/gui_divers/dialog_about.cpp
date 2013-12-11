@@ -51,6 +51,7 @@ DialogAbout::DialogAbout(QWidget *parent) :
     _credit.addContributor("Kinwie", "kinwie@yahoo.com");
     _credit.addContributor("Steve Clarke", "stevertyu@yahoo.com");
     _credit.addTranslator("Davy Triponney", "info@polyphone.fr");
+    _credit.addTranslator("F.J. Martínez Murcia", "fjesusmartinez@ugr.es");
     ui->textBrowser->setHtml(_credit.getText());
 }
 
@@ -119,8 +120,8 @@ QString Credit::getFormattedName(QString name, QString email)
     QString text = "<p>";
     if (email.size())
         text += "<a href='mailto:" + email + "'><span style='font-size:9pt; text-decoration: underline; color:#0000ff;'>" +
-                name + "</span></a>";
+                QString::fromUtf8(name.toStdString().c_str()) + "</span></a>";
     else
-        text += "<span style='font-size:9pt;'>" + name + "</span>";
+        text += "<span style='font-size:9pt;'>" + QString::fromUtf8(name.toStdString().c_str()) + "</span>";
     return text + "</p>";
 }

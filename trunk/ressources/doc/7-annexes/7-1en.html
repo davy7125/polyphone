@@ -1,0 +1,20 @@
+<p align="justify">
+
+<h3>Limitations on the sfz import</h3>
+<ul>
+	<li>Only opcodes having a counterpart in <a href="qrc:/aide/4-2-0en.html">tables</a> are imported.</li>
+	<li>The envelope applied to tone and filter being the same <a href="qrc:/aide/7-0en.html">sf2</a> files (Mod env), importing different envelopes for tone and filter is not possible (fileg_* and pitcheg_* opcodes).</li>
+	<li>The only filter that can be imported is the second order low pass filter (fil_type=lpf_2p)</li>.
+	<li>To be imported correctly, "group" and "off_by" opcodes must contain the same value within the same group.</li>
+</ul>
+Warning: "width" and "position" opcodes may not be interpreted correctly.
+
+<h3>Limitations on the sfz export</h3>
+<ul>
+	<li><a href="qrc:/aide/4-2-1en.html">Modulators</a> are currently not exported.</li>
+	<li>The sfz format (version 1) allowing only one tone modulation, the two parameters "Vib LFO &#8594; ton (c)" and "Mod LFO &#8594; ton (c)" cannot be exported simultaneously.</li>
+</ul>
+
+<h3>In general</h3>
+The import / export has been tested with Sforzando software to respect at most the sound level (in dB). It may however remain some differences.
+</p>

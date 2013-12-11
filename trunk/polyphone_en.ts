@@ -12,191 +12,191 @@
 <context>
     <name>Config</name>
     <message utf8="true">
-        <location filename="gui_divers/config.ui" line="23"/>
+        <location filename="gui_divers/config.ui" line="17"/>
         <source>Préférences</source>
         <translation>Settings</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="46"/>
+        <location filename="gui_divers/config.ui" line="40"/>
         <source>Gestion RAM</source>
         <translatorcomment>(this settings is disabled)</translatorcomment>
         <translation>RAM management</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="73"/>
+        <location filename="gui_divers/config.ui" line="67"/>
         <source>Sortie audio</source>
         <translation>Audio backend</translation>
     </message>
     <message utf8="true">
-        <location filename="gui_divers/config.ui" line="37"/>
+        <location filename="gui_divers/config.ui" line="31"/>
         <source>Général</source>
         <translation>General</translation>
     </message>
     <message utf8="true">
-        <location filename="gui_divers/config.ui" line="60"/>
+        <location filename="gui_divers/config.ui" line="54"/>
         <source>Charger en mémoire lorsque nécessaire</source>
         <translatorcomment>(this settings is disabled)</translatorcomment>
         <translation>Load in RAM only when necessary</translation>
     </message>
     <message utf8="true">
-        <location filename="gui_divers/config.ui" line="65"/>
+        <location filename="gui_divers/config.ui" line="59"/>
         <source>Tout charger en mémoire</source>
         <translatorcomment>(this settings is disabled)</translatorcomment>
         <translation>Always load in RAM</translation>
     </message>
     <message utf8="true">
-        <location filename="gui_divers/config.ui" line="83"/>
+        <location filename="gui_divers/config.ui" line="77"/>
         <source>Entrée midi</source>
         <translation>Midi input</translation>
     </message>
     <message utf8="true">
-        <location filename="gui_divers/config.ui" line="106"/>
+        <location filename="gui_divers/config.ui" line="100"/>
         <source>ajuster à la boucle</source>
         <translation>trim to loop</translation>
     </message>
     <message utf8="true">
-        <location filename="gui_divers/config.ui" line="113"/>
+        <location filename="gui_divers/config.ui" line="107"/>
         <source>enlever le blanc au départ</source>
         <translation>remove blank at start</translation>
     </message>
     <message utf8="true">
-        <location filename="gui_divers/config.ui" line="120"/>
+        <location filename="gui_divers/config.ui" line="114"/>
         <source>répercuter les modifications</source>
         <oldsource>répercuter les modifications si stéréo</oldsource>
         <translation>change linked sample</translation>
     </message>
     <message utf8="true">
-        <location filename="gui_divers/config.ui" line="127"/>
+        <location filename="gui_divers/config.ui" line="121"/>
         <source>Édition stéréo</source>
         <oldsource>Édition des samples</oldsource>
         <translation>Stereo editing</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="173"/>
+        <location filename="gui_divers/config.ui" line="167"/>
         <source>Taille du tampon</source>
         <oldsource>Taille tampon</oldsource>
         <translation>Buffer size</translation>
     </message>
     <message utf8="true">
-        <location filename="gui_divers/config.ui" line="181"/>
+        <location filename="gui_divers/config.ui" line="175"/>
         <source>Synthétiseur</source>
         <translation>Synth</translation>
     </message>
     <message utf8="true">
-        <location filename="gui_divers/config.ui" line="201"/>
+        <location filename="gui_divers/config.ui" line="195"/>
         <source>Réverbération</source>
         <oldsource>Reverbération</oldsource>
         <translation>Reverb</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="237"/>
-        <location filename="gui_divers/config.ui" line="395"/>
+        <location filename="gui_divers/config.ui" line="231"/>
+        <location filename="gui_divers/config.ui" line="389"/>
         <source>Niveau</source>
         <translation>Level</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="305"/>
+        <location filename="gui_divers/config.ui" line="299"/>
         <source>Profondeur</source>
         <translation>Room</translation>
     </message>
     <message utf8="true">
-        <location filename="gui_divers/config.ui" line="321"/>
+        <location filename="gui_divers/config.ui" line="315"/>
         <source>Densité</source>
         <translation>Width</translation>
     </message>
     <message utf8="true">
-        <location filename="gui_divers/config.ui" line="337"/>
+        <location filename="gui_divers/config.ui" line="331"/>
         <source>Atténuation</source>
         <translation>Damp</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="362"/>
+        <location filename="gui_divers/config.ui" line="356"/>
         <source>Chorus</source>
         <translation>Chorus</translation>
     </message>
     <message utf8="true">
-        <location filename="gui_divers/config.ui" line="437"/>
+        <location filename="gui_divers/config.ui" line="431"/>
         <source>Fréquence</source>
         <translation>Frequency</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="453"/>
+        <location filename="gui_divers/config.ui" line="447"/>
         <source>Amplitude</source>
         <translation>Depth</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="552"/>
+        <location filename="gui_divers/config.ui" line="546"/>
         <source>Graphique</source>
         <translation>Graph</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="564"/>
+        <location filename="gui_divers/config.ui" line="558"/>
         <source>Couleurs</source>
         <translation>Colors</translation>
     </message>
     <message utf8="true">
-        <location filename="gui_divers/config.ui" line="591"/>
+        <location filename="gui_divers/config.ui" line="585"/>
         <source>Arrière-plan</source>
         <translation>Background</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="790"/>
+        <location filename="gui_divers/config.ui" line="784"/>
         <source>Onde</source>
         <translation>Waveform</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="803"/>
+        <location filename="gui_divers/config.ui" line="797"/>
         <source>Grille</source>
         <translation>Grid</translation>
     </message>
     <message utf8="true">
-        <location filename="gui_divers/config.ui" line="822"/>
+        <location filename="gui_divers/config.ui" line="816"/>
         <source>Début de boucle</source>
         <translation>Loop start</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="835"/>
+        <location filename="gui_divers/config.ui" line="829"/>
         <source>Fin de boucle</source>
         <translation>Loop end</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="848"/>
+        <location filename="gui_divers/config.ui" line="842"/>
         <source>Barre de lecture</source>
         <translation>Play cursor</translation>
     </message>
     <message utf8="true">
-        <location filename="gui_divers/config.ui" line="885"/>
-        <location filename="gui_divers/config.ui" line="1164"/>
+        <location filename="gui_divers/config.ui" line="879"/>
+        <location filename="gui_divers/config.ui" line="1158"/>
         <source>Réinitialiser</source>
         <translation>Reset</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="911"/>
+        <location filename="gui_divers/config.ui" line="905"/>
         <source>Barre d&apos;outils</source>
         <translation>Toolbar</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="937"/>
+        <location filename="gui_divers/config.ui" line="931"/>
         <source>Actions disponibles</source>
         <translation>Available actions</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="1183"/>
+        <location filename="gui_divers/config.ui" line="1177"/>
         <source>Clavier</source>
         <translation>Keyboard</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="498"/>
+        <location filename="gui_divers/config.ui" line="492"/>
         <source>Gain (dB)</source>
         <translation>Gain (dB)</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="99"/>
+        <location filename="gui_divers/config.ui" line="93"/>
         <source>Import fichiers wav</source>
         <translation>Wav files import</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="1298"/>
+        <location filename="gui_divers/config.ui" line="1292"/>
         <source>Fermer</source>
         <translation>Close</translation>
     </message>
@@ -636,27 +636,339 @@
 <context>
     <name>DialogHelp</name>
     <message>
-        <location filename="gui_divers/dialog_help.ui" line="20"/>
+        <location filename="gui_divers/dialog_help.cpp" line="100"/>
+        <source>aide</source>
+        <translation>Help</translation>
+    </message>
+    <message utf8="true">
+        <location filename="gui_divers/dialog_help.cpp" line="106"/>
+        <source>Présentation du logiciel</source>
+        <translation>Software presentation</translation>
+    </message>
+    <message>
+        <location filename="gui_divers/dialog_help.cpp" line="108"/>
+        <source>Barre de menu</source>
+        <translation>Menubar</translation>
+    </message>
+    <message>
+        <location filename="gui_divers/dialog_help.cpp" line="109"/>
+        <source>Fichier</source>
+        <translation>File</translation>
+    </message>
+    <message utf8="true">
+        <location filename="gui_divers/dialog_help.cpp" line="110"/>
+        <source>Édition</source>
+        <translation>Edit</translation>
+    </message>
+    <message>
+        <location filename="gui_divers/dialog_help.cpp" line="111"/>
+        <location filename="gui_divers/dialog_help.cpp" line="140"/>
+        <source>Outils</source>
+        <translation>Tools</translation>
+    </message>
+    <message>
+        <location filename="gui_divers/dialog_help.cpp" line="112"/>
+        <source>Affichage</source>
+        <translation>View</translation>
+    </message>
+    <message>
+        <location filename="gui_divers/dialog_help.cpp" line="113"/>
         <source>Aide</source>
         <translation>Help</translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_help.ui" line="148"/>
-        <source>Accueil</source>
-        <translation>Home page</translation>
+        <location filename="gui_divers/dialog_help.cpp" line="115"/>
+        <location filename="gui_divers/dialog_help.cpp" line="179"/>
+        <source>Barre d&apos;outils</source>
+        <translation>Toolbar</translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_help.cpp" line="54"/>
+        <location filename="gui_divers/dialog_help.cpp" line="116"/>
+        <source>Raccourcis</source>
+        <translation>Shortcuts</translation>
+    </message>
+    <message>
+        <location filename="gui_divers/dialog_help.cpp" line="117"/>
+        <source>Clavier virtuel</source>
+        <translation>Virtual keyboard</translation>
+    </message>
+    <message>
+        <location filename="gui_divers/dialog_help.cpp" line="119"/>
+        <source>Arborescence</source>
+        <translation>Tree</translation>
+    </message>
+    <message>
+        <location filename="gui_divers/dialog_help.cpp" line="120"/>
+        <source>Structure</source>
+        <translation>Structure</translation>
+    </message>
+    <message>
+        <location filename="gui_divers/dialog_help.cpp" line="121"/>
+        <source>Menu contextuel</source>
+        <translation>Context menu</translation>
+    </message>
+    <message utf8="true">
+        <location filename="gui_divers/dialog_help.cpp" line="122"/>
+        <source>Glisser / déposer</source>
+        <translation>Drag &amp; drop</translation>
+    </message>
+    <message>
+        <location filename="gui_divers/dialog_help.cpp" line="123"/>
+        <source>Recherche</source>
+        <translation>Search</translation>
+    </message>
+    <message utf8="true">
+        <location filename="gui_divers/dialog_help.cpp" line="125"/>
+        <source>Pages d&apos;édition</source>
+        <translation>Edit pages</translation>
+    </message>
+    <message utf8="true">
+        <location filename="gui_divers/dialog_help.cpp" line="126"/>
+        <source>Informations générales</source>
+        <translation>Global information</translation>
+    </message>
+    <message utf8="true">
+        <source>Éditables</source>
+        <translation type="obsolete">Editable</translation>
+    </message>
+    <message utf8="true">
+        <source>Non-éditables</source>
+        <translation type="obsolete">Non-editable</translation>
+    </message>
+    <message utf8="true">
+        <location filename="gui_divers/dialog_help.cpp" line="127"/>
+        <source>Zone d&apos;édition</source>
+        <translation>Edit area</translation>
+    </message>
+    <message>
+        <location filename="gui_divers/dialog_help.cpp" line="128"/>
+        <source>Zone d&apos;informations</source>
+        <translation>Information area</translation>
+    </message>
+    <message utf8="true">
+        <location filename="gui_divers/dialog_help.cpp" line="129"/>
+        <location filename="gui_divers/dialog_help.cpp" line="141"/>
+        <source>Échantillons</source>
+        <translation>Samples</translation>
+    </message>
+    <message>
+        <location filename="gui_divers/dialog_help.cpp" line="130"/>
+        <location filename="gui_divers/dialog_help.cpp" line="178"/>
+        <source>Graphique</source>
+        <translation>Graph</translation>
+    </message>
+    <message>
+        <location filename="gui_divers/dialog_help.cpp" line="131"/>
+        <source>Informations</source>
+        <translation>Information</translation>
+    </message>
+    <message utf8="true">
+        <location filename="gui_divers/dialog_help.cpp" line="132"/>
+        <source>Fréquences</source>
+        <translation>Frequency</translation>
+    </message>
+    <message utf8="true">
+        <location filename="gui_divers/dialog_help.cpp" line="133"/>
+        <source>Égaliseur</source>
+        <translation>Equalizer</translation>
+    </message>
+    <message>
+        <location filename="gui_divers/dialog_help.cpp" line="134"/>
+        <source>Lecteur</source>
+        <translation>Playback</translation>
+    </message>
+    <message>
+        <location filename="gui_divers/dialog_help.cpp" line="135"/>
+        <location filename="gui_divers/dialog_help.cpp" line="151"/>
+        <source>Instruments</source>
+        <translation>Instruments</translation>
+    </message>
+    <message>
+        <location filename="gui_divers/dialog_help.cpp" line="136"/>
+        <source>Tableau</source>
+        <translation>Table</translation>
+    </message>
+    <message>
+        <location filename="gui_divers/dialog_help.cpp" line="137"/>
+        <source>Section modulateur</source>
+        <translation>Modulator section</translation>
+    </message>
+    <message>
+        <location filename="gui_divers/dialog_help.cpp" line="138"/>
+        <location filename="gui_divers/dialog_help.cpp" line="161"/>
+        <source>Presets</source>
+        <translation>Presets</translation>
+    </message>
+    <message utf8="true">
+        <location filename="gui_divers/dialog_help.cpp" line="142"/>
+        <source>Ajuster à la fin de boucle</source>
+        <translation>Trim to end loop</translation>
+    </message>
+    <message>
+        <location filename="gui_divers/dialog_help.cpp" line="143"/>
+        <source>Bouclage automatique</source>
+        <translation>Auto loop</translation>
+    </message>
+    <message>
+        <location filename="gui_divers/dialog_help.cpp" line="144"/>
+        <source>Diminuer sifflements</source>
+        <translation>Decrease whistling</translation>
+    </message>
+    <message utf8="true">
+        <location filename="gui_divers/dialog_help.cpp" line="145"/>
+        <source>Enlever blanc au départ</source>
+        <translation>Remove blank at start</translation>
+    </message>
+    <message>
+        <location filename="gui_divers/dialog_help.cpp" line="146"/>
+        <source>Filtre &quot;mur de brique&quot;</source>
+        <translation>brick-wall filter</translation>
+    </message>
+    <message>
+        <location filename="gui_divers/dialog_help.cpp" line="147"/>
+        <source>Normaliser volume</source>
+        <translation>Normalize volume</translation>
+    </message>
+    <message utf8="true">
+        <location filename="gui_divers/dialog_help.cpp" line="148"/>
+        <source>Réglage balance</source>
+        <translation>Balance adjustment</translation>
+    </message>
+    <message>
+        <location filename="gui_divers/dialog_help.cpp" line="149"/>
+        <source>Transposer</source>
+        <translation>Transpose</translation>
+    </message>
+    <message utf8="true">
+        <location filename="gui_divers/dialog_help.cpp" line="152"/>
+        <source>Création mixture</source>
+        <translation>Mixture creation</translation>
+    </message>
+    <message utf8="true">
+        <location filename="gui_divers/dialog_help.cpp" line="153"/>
+        <source>Accordage céleste</source>
+        <translation>Celeste tuning</translation>
+    </message>
+    <message>
+        <location filename="gui_divers/dialog_help.cpp" line="154"/>
+        <location filename="gui_divers/dialog_help.cpp" line="162"/>
+        <source>Duplication des divisions</source>
+        <translation>Division duplication</translation>
+    </message>
+    <message utf8="true">
+        <location filename="gui_divers/dialog_help.cpp" line="155"/>
+        <source>Élaboration release</source>
+        <translation>Release maker</translation>
+    </message>
+    <message utf8="true">
+        <location filename="gui_divers/dialog_help.cpp" line="156"/>
+        <location filename="gui_divers/dialog_help.cpp" line="163"/>
+        <source>Paramétrage global</source>
+        <translation>Global setting</translation>
+    </message>
+    <message utf8="true">
+        <location filename="gui_divers/dialog_help.cpp" line="157"/>
+        <source>Répartition automatique</source>
+        <translation>Automatic divisioning</translation>
+    </message>
+    <message>
+        <location filename="gui_divers/dialog_help.cpp" line="158"/>
+        <location filename="gui_divers/dialog_help.cpp" line="164"/>
+        <source>Spatialisation du son</source>
+        <translation>Sound spatialization</translation>
+    </message>
+    <message>
+        <location filename="gui_divers/dialog_help.cpp" line="159"/>
+        <location filename="gui_divers/dialog_help.cpp" line="165"/>
+        <source>Visualiseur</source>
+        <translation>Visualizer</translation>
+    </message>
+    <message>
+        <location filename="gui_divers/dialog_help.cpp" line="167"/>
+        <source>Globaux</source>
+        <translation>Global</translation>
+    </message>
+    <message utf8="true">
+        <location filename="gui_divers/dialog_help.cpp" line="168"/>
+        <source>Association auto échantillons</source>
+        <translation>Automatic divisioning</translation>
+    </message>
+    <message utf8="true">
+        <location filename="gui_divers/dialog_help.cpp" line="170"/>
+        <source>Enlever les éléments non utilisés</source>
+        <translation>Remove unused elements</translation>
+    </message>
+    <message utf8="true">
+        <location filename="gui_divers/dialog_help.cpp" line="171"/>
+        <source>Régler atténuation minimale</source>
+        <translation>Adjust the minimum attenuation</translation>
+    </message>
+    <message utf8="true">
+        <location filename="gui_divers/dialog_help.cpp" line="173"/>
+        <source>Magnétophone</source>
+        <translation>Recorder</translation>
+    </message>
+    <message utf8="true">
+        <location filename="gui_divers/dialog_help.cpp" line="175"/>
+        <source>Préférences du logiciel</source>
+        <translation>Settings</translation>
+    </message>
+    <message utf8="true">
+        <location filename="gui_divers/dialog_help.cpp" line="176"/>
+        <source>Général</source>
+        <translation>General</translation>
+    </message>
+    <message utf8="true">
+        <location filename="gui_divers/dialog_help.cpp" line="177"/>
+        <source>Synthétiseur</source>
+        <translation>Synth</translation>
+    </message>
+    <message>
+        <location filename="gui_divers/dialog_help.cpp" line="180"/>
+        <source>Clavier</source>
+        <translation>Keyboard</translation>
+    </message>
+    <message>
+        <location filename="gui_divers/dialog_help.cpp" line="182"/>
+        <source>Annexes</source>
+        <translation>Appendices</translation>
+    </message>
+    <message>
+        <location filename="gui_divers/dialog_help.cpp" line="183"/>
+        <source>Soundfonts sf2</source>
+        <translation>Sf2 soundfonts</translation>
+    </message>
+    <message>
+        <location filename="gui_divers/dialog_help.cpp" line="184"/>
+        <source>Import / export sfz</source>
+        <translation>Sfz import / export</translation>
+    </message>
+    <message>
+        <location filename="gui_divers/dialog_help.cpp" line="185"/>
+        <source>Limitations du logiciel</source>
+        <translation>Software limitations</translation>
+    </message>
+    <message>
+        <location filename="gui_divers/dialog_help.cpp" line="200"/>
+        <source>fr</source>
+        <translation>en</translation>
+    </message>
+    <message>
+        <source>Accueil</source>
+        <translation type="obsolete">Home page</translation>
+    </message>
+    <message>
         <source>qrc:/aide/aide.html</source>
         <translatorcomment>Put the corresponding english link if there is no documentation available in your language</translatorcomment>
-        <translation>qrc:/aide/help.html</translation>
+        <translation type="obsolete">qrc:/aide/help.html</translation>
     </message>
 </context>
 <context>
     <name>DialogList</name>
-    <message>
+    <message utf8="true">
         <location filename="gui_divers/dialog_list.cpp" line="53"/>
-        <source>Liste des samples</source>
+        <source>Liste des échantillons</source>
+        <oldsource>Liste des samples</oldsource>
         <translation>Sample list</translation>
     </message>
     <message>
@@ -950,7 +1262,8 @@
     </message>
     <message utf8="true">
         <location filename="gui_divers/dialog_rename.ui" line="27"/>
-        <source>Nom des samples (20 caractères au total) :</source>
+        <source>Nom des échantillons (20 caractères au total) :</source>
+        <oldsource>Nom des samples (20 caractères au total) :</oldsource>
         <translation>Sample name (max 20 characters):</translation>
     </message>
     <message utf8="true">
@@ -1144,7 +1457,7 @@ instrument courant</source>
 <context>
     <name>Graphique</name>
     <message utf8="true">
-        <location filename="pages/page_smpl.cpp" line="1623"/>
+        <location filename="pages/page_smpl.cpp" line="1642"/>
         <source>Sélection multiple</source>
         <translation>Multiple selection</translation>
     </message>
@@ -1152,17 +1465,17 @@ instrument courant</source>
 <context>
     <name>GraphiqueFourier</name>
     <message>
-        <location filename="pages/page_smpl.cpp" line="2108"/>
+        <location filename="pages/page_smpl.cpp" line="2127"/>
         <source>note</source>
         <translation>key</translation>
     </message>
     <message>
-        <location filename="pages/page_smpl.cpp" line="2109"/>
+        <location filename="pages/page_smpl.cpp" line="2128"/>
         <source>correction</source>
         <translation>correction</translation>
     </message>
     <message>
-        <location filename="pages/page_smpl.cpp" line="2109"/>
+        <location filename="pages/page_smpl.cpp" line="2128"/>
         <source>estimation</source>
         <translation>estimation</translation>
     </message>
@@ -1191,9 +1504,8 @@ instrument courant</source>
         <translation>&amp;Tools</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="245"/>
         <source>&amp;Sample</source>
-        <translation>&amp;Sample</translation>
+        <translation type="obsolete">&amp;Sample</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="273"/>
@@ -1257,8 +1569,8 @@ instrument courant</source>
     </message>
     <message>
         <location filename="mainwindow.ui" line="613"/>
-        <location filename="mainwindow.cpp" line="264"/>
-        <location filename="mainwindow.cpp" line="409"/>
+        <location filename="mainwindow.cpp" line="265"/>
+        <location filename="mainwindow.cpp" line="410"/>
         <source>&amp;Enregistrer</source>
         <translation>&amp;Save</translation>
     </message>
@@ -1289,9 +1601,9 @@ instrument courant</source>
         <translation>Create a new file</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="265"/>
-        <location filename="mainwindow.cpp" line="410"/>
-        <location filename="mainwindow.cpp" line="508"/>
+        <location filename="mainwindow.cpp" line="266"/>
+        <location filename="mainwindow.cpp" line="411"/>
+        <location filename="mainwindow.cpp" line="509"/>
         <source>&amp;Annuler</source>
         <translation>&amp;Cancel</translation>
     </message>
@@ -1399,14 +1711,14 @@ instrument courant</source>
     </message>
     <message utf8="true">
         <location filename="mainwindow.ui" line="810"/>
-        <source>Enlève les samples et instruments non utilisés</source>
-        <oldsource>Enleve les éléments non utilisés</oldsource>
+        <source>Enlève les échantillons et instruments non utilisés</source>
+        <oldsource>Enlève les samples et instruments non utilisés</oldsource>
         <translation>Remove unused samples and instruments</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="822"/>
-        <location filename="mainwindow.cpp" line="888"/>
-        <location filename="mainwindow.cpp" line="900"/>
+        <location filename="mainwindow.cpp" line="889"/>
+        <location filename="mainwindow.cpp" line="901"/>
         <source>&amp;Renommer</source>
         <translation>&amp;Rename</translation>
     </message>
@@ -1454,26 +1766,28 @@ instrument courant</source>
         <source>&amp;Section modulateurs</source>
         <translation>&amp;Modulator section</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="mainwindow.ui" line="939"/>
-        <source>&amp;Importer des sons...</source>
-        <oldsource>&amp;Importer sample...</oldsource>
+        <source>&amp;Importer des échantillons...</source>
+        <oldsource>&amp;Importer des sons...</oldsource>
         <translation>&amp;Import samples...</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="mainwindow.ui" line="954"/>
-        <source>E&amp;xporter des sons...</source>
-        <oldsource>E&amp;xporter sample...</oldsource>
+        <source>E&amp;xporter des échantillons...</source>
+        <oldsource>E&amp;xporter des sons...</oldsource>
         <translation>E&amp;xport samples...</translation>
     </message>
     <message utf8="true">
         <location filename="mainwindow.ui" line="1002"/>
-        <source>Enleve le blanc au début d&apos;un sample</source>
+        <source>Enleve le blanc au début d&apos;un échantillon</source>
+        <oldsource>Enleve le blanc au début d&apos;un sample</oldsource>
         <translation>Remove the blank at the beginning of a sample</translation>
     </message>
     <message utf8="true">
         <location filename="mainwindow.ui" line="1017"/>
-        <source>Ajuste le sample à sa fin de boucle</source>
+        <source>Ajuste l&apos;échantillon à sa fin de boucle</source>
+        <oldsource>Ajuste le sample à sa fin de boucle</oldsource>
         <translation>Cut the sample at the end of its loop</translation>
     </message>
     <message>
@@ -1481,9 +1795,10 @@ instrument courant</source>
         <source>Normalise le volume</source>
         <translation>Normalize the volume</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="mainwindow.ui" line="1047"/>
-        <source>Boucle automatiquement le sample</source>
+        <source>Boucle automatiquement l&apos;échantillon</source>
+        <oldsource>Boucle automatiquement le sample</oldsource>
         <translation>Loop automatically the sample</translation>
     </message>
     <message>
@@ -1491,9 +1806,10 @@ instrument courant</source>
         <source>Applique un filtre &quot;mur de brique&quot;</source>
         <translation>Apply a brickwall filter</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="mainwindow.ui" line="1077"/>
-        <source>Transpose le sample</source>
+        <source>Transpose l&apos;échantillon</source>
+        <oldsource>Transpose le sample</oldsource>
         <translation>Transpose the sample</translation>
     </message>
     <message utf8="true">
@@ -1576,12 +1892,14 @@ instrument courant</source>
     </message>
     <message utf8="true">
         <location filename="mainwindow.ui" line="1421"/>
-        <source>&amp;Dissocier les samples stéréo</source>
+        <source>&amp;Dissocier les échantillons stéréo</source>
+        <oldsource>&amp;Dissocier les samples stéréo</oldsource>
         <translation>&amp;Split all stereo samples</translation>
     </message>
     <message utf8="true">
         <location filename="mainwindow.ui" line="1424"/>
-        <source>Dissocie les samples stéréo</source>
+        <source>Dissocie les échantillons stéréo</source>
+        <oldsource>Dissocie les samples stéréo</oldsource>
         <translation>Split all stereo samples</translation>
     </message>
     <message>
@@ -1631,14 +1949,16 @@ instrument courant</source>
         <source>Crée automatiquement une release pour tous les sons liés</source>
         <translation>Create automatically a release for all linked sounds</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="mainwindow.ui" line="1322"/>
-        <source>&amp;Association auto samples</source>
+        <source>&amp;Association auto échantillons</source>
+        <oldsource>&amp;Association auto samples</oldsource>
         <translation>Auto &amp;sample association</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="mainwindow.ui" line="1325"/>
-        <source>Associe automatiquement les samples G/D</source>
+        <source>Associe automatiquement les échantillons G/D</source>
+        <oldsource>Associe automatiquement les samples G/D</oldsource>
         <translation>Automatically link the samples L/R</translation>
     </message>
     <message utf8="true">
@@ -1651,6 +1971,11 @@ instrument courant</source>
         <location filename="mainwindow.ui" line="927"/>
         <source>Affiche la section modulateurs</source>
         <translation>Display the modulator section</translation>
+    </message>
+    <message utf8="true">
+        <location filename="mainwindow.ui" line="245"/>
+        <source>&amp;Échantillon</source>
+        <translation>&amp;Sample</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="261"/>
@@ -1770,7 +2095,8 @@ instrument courant</source>
     </message>
     <message utf8="true">
         <location filename="mainwindow.ui" line="1185"/>
-        <source>Règle la balance du sample</source>
+        <source>Règle la balance de l&apos;échantillon</source>
+        <oldsource>Règle la balance du sample</oldsource>
         <translation>Set the sample pan</translation>
     </message>
     <message utf8="true">
@@ -1789,322 +2115,334 @@ instrument courant</source>
         <translation>Reduce &amp;whistling...</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="266"/>
+        <location filename="mainwindow.cpp" line="267"/>
         <source>&amp;Quitter sans enregistrer</source>
         <translation>&amp;Close without saving</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="329"/>
+        <location filename="mainwindow.cpp" line="330"/>
         <source>Ouvrir une soundfont</source>
         <translation>Open a soundfont</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="331"/>
-        <location filename="mainwindow.cpp" line="522"/>
-        <location filename="mainwindow.cpp" line="526"/>
+        <location filename="mainwindow.cpp" line="332"/>
+        <location filename="mainwindow.cpp" line="523"/>
+        <location filename="mainwindow.cpp" line="527"/>
         <source>Fichier .sf2 (*.sf2)</source>
         <translation>.sf2 file (*.sf2)</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="356"/>
-        <location filename="mainwindow.cpp" line="360"/>
-        <location filename="mainwindow.cpp" line="364"/>
-        <location filename="mainwindow.cpp" line="368"/>
-        <location filename="mainwindow.cpp" line="372"/>
-        <location filename="mainwindow.cpp" line="542"/>
-        <location filename="mainwindow.cpp" line="545"/>
-        <location filename="mainwindow.cpp" line="548"/>
-        <location filename="mainwindow.cpp" line="1632"/>
+        <location filename="mainwindow.cpp" line="357"/>
+        <location filename="mainwindow.cpp" line="361"/>
+        <location filename="mainwindow.cpp" line="365"/>
+        <location filename="mainwindow.cpp" line="369"/>
+        <location filename="mainwindow.cpp" line="373"/>
+        <location filename="mainwindow.cpp" line="543"/>
+        <location filename="mainwindow.cpp" line="546"/>
+        <location filename="mainwindow.cpp" line="549"/>
+        <location filename="mainwindow.cpp" line="1633"/>
         <source>Attention</source>
         <translation>Warning</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="364"/>
+        <location filename="mainwindow.cpp" line="365"/>
         <source>Impossible d&apos;ouvrir le fichier.</source>
         <translation>Cannot open the file.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="368"/>
+        <location filename="mainwindow.cpp" line="369"/>
         <source>Lecture impossible.</source>
         <translation>Cannot read the file.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="372"/>
+        <location filename="mainwindow.cpp" line="373"/>
         <source>Le fichier est corrompu.</source>
         <translation>Corrupted file.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="380"/>
+        <location filename="mainwindow.cpp" line="381"/>
         <source>Nom de la nouvelle soundfont :</source>
         <translation>Name of the new soundfont:</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="411"/>
+        <location filename="mainwindow.cpp" line="412"/>
         <source>&amp;Fermer sans enregistrer</source>
         <translation>&amp;Close without saving </translation>
     </message>
     <message utf8="true">
-        <location filename="mainwindow.cpp" line="1101"/>
+        <location filename="mainwindow.cpp" line="1102"/>
         <source>Nom de l&apos;instrument (max 20 caractères) :</source>
         <translation>Instrument name (max 20 characters):</translation>
     </message>
     <message utf8="true">
-        <location filename="mainwindow.cpp" line="1102"/>
+        <location filename="mainwindow.cpp" line="1103"/>
         <source>Nom du preset (max 20 caractères) :</source>
         <translation>Preset name (max 20 characters):</translation>
     </message>
     <message utf8="true">
-        <location filename="mainwindow.cpp" line="1103"/>
+        <location filename="mainwindow.cpp" line="1104"/>
         <source>Nom du SF2 (max 255 caractères) :</source>
         <translation>Soundfont name (max 255 characters):</translation>
     </message>
     <message utf8="true">
-        <location filename="mainwindow.cpp" line="1276"/>
-        <location filename="mainwindow.cpp" line="1282"/>
-        <location filename="mainwindow.cpp" line="1291"/>
         <source>Le sample « </source>
-        <translation>The sample &quot;</translation>
+        <translation type="obsolete">The sample &quot;</translation>
     </message>
     <message utf8="true">
-        <location filename="mainwindow.cpp" line="1277"/>
+        <location filename="mainwindow.cpp" line="1278"/>
         <source>L » existe déjà.&lt;br /&gt;Que faire ?</source>
         <translation>L&quot; already exists.&lt;br/&gt;Replace?</translation>
     </message>
     <message utf8="true">
-        <location filename="mainwindow.cpp" line="1283"/>
+        <location filename="mainwindow.cpp" line="1284"/>
         <source>R » existe déjà.&lt;br /&gt;Que faire ?</source>
         <translation>R&quot; already exists.&lt;br/&gt;Replace?</translation>
     </message>
     <message utf8="true">
-        <location filename="mainwindow.cpp" line="1292"/>
+        <location filename="mainwindow.cpp" line="1293"/>
         <source> » existe déjà.&lt;br /&gt;Que faire ?</source>
         <translation>&quot; already exists.&lt;br/&gt;Replace?</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1978"/>
         <source> sample et </source>
         <oldsource> sample and </oldsource>
-        <translation> sample and </translation>
+        <translation type="obsolete"> sample and </translation>
     </message>
     <message utf8="true">
-        <location filename="mainwindow.cpp" line="1996"/>
+        <location filename="mainwindow.cpp" line="1997"/>
         <source>Atténuation minimale (dB) :</source>
         <translation>Minimal attenuation (dB):</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="476"/>
+        <location filename="mainwindow.cpp" line="477"/>
         <source> bits&lt;/b&gt;</source>
         <translation> bits&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="252"/>
-        <location filename="mainwindow.cpp" line="404"/>
+        <location filename="mainwindow.cpp" line="253"/>
+        <location filename="mainwindow.cpp" line="405"/>
         <source>&lt;b&gt;Sauvegarder avant de quitter ?&lt;/b&gt;</source>
         <translation>&lt;b&gt;Save before exiting?&lt;/b&gt;</translation>
     </message>
     <message utf8="true">
-        <location filename="mainwindow.cpp" line="255"/>
+        <location filename="mainwindow.cpp" line="256"/>
         <source>Les fichiers suivants ont été modifiés :&lt;br/&gt; - </source>
         <oldsource>Les fichiers suivants ont été modifiés depuis leur dernier enregistrement :&lt;br/&gt; - </oldsource>
         <translation>The following files have been modified:&lt;br/&gt; - </translation>
     </message>
     <message utf8="true">
-        <location filename="mainwindow.cpp" line="260"/>
-        <location filename="mainwindow.cpp" line="406"/>
+        <location filename="mainwindow.cpp" line="261"/>
+        <location filename="mainwindow.cpp" line="407"/>
         <source>Le fichier « </source>
         <oldsource>Le fichier «&amp;#160;</oldsource>
         <translation>The file &quot;</translation>
     </message>
     <message utf8="true">
-        <location filename="mainwindow.cpp" line="260"/>
-        <location filename="mainwindow.cpp" line="406"/>
+        <location filename="mainwindow.cpp" line="261"/>
+        <location filename="mainwindow.cpp" line="407"/>
         <source> » a été modifié.</source>
         <translation>&quot; has been modified.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="479"/>
+        <location filename="mainwindow.cpp" line="480"/>
         <source>&amp;Oui</source>
         <translation>&amp;Yes</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="480"/>
+        <location filename="mainwindow.cpp" line="481"/>
         <source>&amp;Non</source>
         <translation>&amp;No</translation>
     </message>
     <message utf8="true">
-        <location filename="mainwindow.cpp" line="496"/>
+        <location filename="mainwindow.cpp" line="497"/>
         <source>&lt;b&gt;Trop de paramètres dans les instruments et les presets.&lt;/b&gt;</source>
         <translation>&lt;b&gt;To many parameters defined in both the intruments and the presets.&lt;/b&gt;</translation>
     </message>
     <message utf8="true">
-        <location filename="mainwindow.cpp" line="498"/>
+        <location filename="mainwindow.cpp" line="499"/>
         <source>&lt;b&gt;Trop de paramètres dans les instruments.&lt;/b&gt;</source>
         <translation>&lt;b&gt;To many parameters defined in the instruments.&lt;/b&gt;</translation>
     </message>
     <message utf8="true">
-        <location filename="mainwindow.cpp" line="500"/>
+        <location filename="mainwindow.cpp" line="501"/>
         <source>&lt;b&gt;Trop de paramètres dans les presets.&lt;/b&gt;</source>
         <translation>&lt;b&gt;To many parameters defined in the presets.&lt;/b&gt;</translation>
     </message>
     <message utf8="true">
-        <location filename="mainwindow.cpp" line="502"/>
+        <location filename="mainwindow.cpp" line="503"/>
         <source>Certains synthétiseurs ne prennent pas en compte les paramètres au delà du 65536ème.
 Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
         <translation>Some synthesizers skip parameters beyond the  65536th. Splitting the file into several sf2 might solve the problem.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="506"/>
+        <location filename="mainwindow.cpp" line="507"/>
         <source>&amp;Sauvegarder</source>
         <translation>&amp;Save</translation>
     </message>
     <message utf8="true">
-        <location filename="mainwindow.cpp" line="507"/>
+        <location filename="mainwindow.cpp" line="508"/>
         <source>Sauvegarder, &amp;désactiver ce message</source>
         <translation>Save, &amp;disable this message</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="522"/>
-        <location filename="mainwindow.cpp" line="525"/>
+        <location filename="mainwindow.cpp" line="523"/>
+        <location filename="mainwindow.cpp" line="526"/>
         <source>Sauvegarder une soundfont</source>
         <translation>Save a soundfont</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="542"/>
+        <location filename="mainwindow.cpp" line="543"/>
         <source>Extension inconnue.</source>
         <translation>Unknown extension.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="548"/>
+        <location filename="mainwindow.cpp" line="549"/>
         <source>Impossible d&apos;enregistrer le fichier.</source>
         <translation>Cannot save the file.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="895"/>
+        <location filename="mainwindow.cpp" line="896"/>
         <source>&amp;Renommer en masse</source>
         <translation>&amp;Bulk rename</translation>
     </message>
     <message utf8="true">
-        <location filename="mainwindow.cpp" line="1100"/>
-        <source>Nom du sample (max 20 caractères) :</source>
-        <oldsource>Nom du SF2 (max 255 caractÃ¨res) :</oldsource>
+        <location filename="mainwindow.cpp" line="1101"/>
+        <source>Nom de l&apos;échantillon (max 20 caractères) :</source>
+        <oldsource>Nom du sample (max 20 caractères) :</oldsource>
         <translation>Sample name (max 20 characters):</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1104"/>
-        <location filename="mainwindow.cpp" line="1995"/>
+        <location filename="mainwindow.cpp" line="1105"/>
+        <location filename="mainwindow.cpp" line="1996"/>
         <source>Question</source>
         <translation>Question</translation>
     </message>
+    <message utf8="true">
+        <location filename="mainwindow.cpp" line="1277"/>
+        <location filename="mainwindow.cpp" line="1283"/>
+        <location filename="mainwindow.cpp" line="1292"/>
+        <source>L&apos;échantillon « </source>
+        <translation>The sample &quot;</translation>
+    </message>
     <message>
-        <location filename="mainwindow.cpp" line="1306"/>
+        <location filename="mainwindow.cpp" line="1307"/>
         <source>&amp;Remplacer</source>
         <translation>&amp;Replace</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1307"/>
+        <location filename="mainwindow.cpp" line="1308"/>
         <source>R&amp;emplacer tout</source>
         <translation>R&amp;eplace all</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1308"/>
+        <location filename="mainwindow.cpp" line="1309"/>
         <source>&amp;Dupliquer</source>
         <translation>&amp;Duplicate</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1309"/>
+        <location filename="mainwindow.cpp" line="1310"/>
         <source>D&amp;upliquer tout</source>
         <translation>D&amp;uplicate all</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1310"/>
+        <location filename="mainwindow.cpp" line="1311"/>
         <source>&amp;Ignorer</source>
         <translation>&amp;Ignore</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1311"/>
+        <location filename="mainwindow.cpp" line="1312"/>
         <source>I&amp;gnorer tout</source>
         <translation>I&amp;gnore all</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1530"/>
+        <location filename="mainwindow.cpp" line="1531"/>
         <source>Importer une soundfont</source>
         <translation>Import a soundfont</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1532"/>
+        <location filename="mainwindow.cpp" line="1533"/>
         <source>Fichier .sfz (*.sfz)</source>
         <translation>Sfz file (*.sfz)</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1632"/>
+        <location filename="mainwindow.cpp" line="1633"/>
         <source>Aucun preset n&apos;est disponible.</source>
         <translation>No preset available.</translation>
     </message>
+    <message utf8="true">
+        <location filename="mainwindow.cpp" line="1979"/>
+        <source> échantillon et </source>
+        <translation> sample and </translation>
+    </message>
+    <message utf8="true">
+        <location filename="mainwindow.cpp" line="1981"/>
+        <source> échantillons et </source>
+        <translation> samples and </translation>
+    </message>
     <message>
-        <location filename="mainwindow.cpp" line="1228"/>
+        <location filename="mainwindow.cpp" line="1229"/>
         <source>Importer un fichier audio</source>
         <translation>Import an audio file</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="356"/>
+        <location filename="mainwindow.cpp" line="357"/>
         <source>Format inconnu.</source>
         <translation>Unknown format.</translation>
     </message>
     <message utf8="true">
-        <location filename="mainwindow.cpp" line="360"/>
+        <location filename="mainwindow.cpp" line="361"/>
         <source>Le fichier est déjà chargé.</source>
         <translation>File already loaded.</translation>
     </message>
     <message utf8="true">
-        <location filename="mainwindow.cpp" line="476"/>
+        <location filename="mainwindow.cpp" line="477"/>
         <source>&lt;b&gt;Perte de résolution </source>
         <translation>&lt;b&gt;Losing resolution </translation>
     </message>
     <message utf8="true">
-        <location filename="mainwindow.cpp" line="477"/>
+        <location filename="mainwindow.cpp" line="478"/>
         <source>La qualité des samples sera abaissée suite à cette opération. Continuer ?</source>
         <translation>The sample quality will be lowered. Continue?</translation>
     </message>
     <message utf8="true">
-        <location filename="mainwindow.cpp" line="545"/>
+        <location filename="mainwindow.cpp" line="546"/>
         <source>Fichier déjà ouvert, impossible de sauvegarder.</source>
         <translation>File already open, cannot save.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1230"/>
+        <location filename="mainwindow.cpp" line="1231"/>
         <source>Fichier .wav (*.wav)</source>
         <oldsource>Fichier .wav (*.wav);</oldsource>
         <translation>Wav file (*.wav)</translation>
     </message>
     <message utf8="true">
-        <location filename="mainwindow.cpp" line="1421"/>
+        <location filename="mainwindow.cpp" line="1422"/>
         <source>Choisir un répertoire de destination</source>
         <translation>Choose a destination folder</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1606"/>
+        <location filename="mainwindow.cpp" line="1607"/>
         <source>Nom du nouvel instrument :</source>
         <translation>Name of the new instrument:</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1642"/>
+        <location filename="mainwindow.cpp" line="1643"/>
         <source>Nom du nouveau preset :</source>
         <translation>Name of the new preset:</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1980"/>
         <source> samples et </source>
         <oldsource> samples and </oldsource>
-        <translation> samples and </translation>
+        <translation type="obsolete"> samples and </translation>
     </message>
     <message utf8="true">
-        <location filename="mainwindow.cpp" line="1982"/>
+        <location filename="mainwindow.cpp" line="1983"/>
         <source> instrument ont été supprimés.</source>
         <translatorcomment>instrument: singular</translatorcomment>
         <translation> instrument have been deleted.</translation>
     </message>
     <message utf8="true">
-        <location filename="mainwindow.cpp" line="1984"/>
+        <location filename="mainwindow.cpp" line="1985"/>
         <source> instruments ont été supprimés.</source>
         <translatorcomment>instrument: plural</translatorcomment>
         <translation> instruments have been deleted.</translation>
@@ -2121,14 +2459,16 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
         <location filename="pages/page.cpp" line="262"/>
         <location filename="pages/page.cpp" line="294"/>
         <location filename="pages/page.cpp" line="574"/>
-        <source>Offset début sample</source>
-        <translation>Start sample offset</translation>
+        <source>Offset début échantillon</source>
+        <oldsource>Offset début sample</oldsource>
+        <translation>Sample start offset</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/page.cpp" line="270"/>
         <location filename="pages/page.cpp" line="358"/>
-        <source>Offset fin sample</source>
-        <translation>End sample offset</translation>
+        <source>Offset fin échantillon</source>
+        <oldsource>Offset fin sample</oldsource>
+        <translation>Sample end offset</translation>
     </message>
     <message utf8="true">
         <location filename="pages/page.cpp" line="278"/>
@@ -2746,13 +3086,15 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
     </message>
     <message utf8="true">
         <location filename="pages/page_inst.ui" line="377"/>
-        <source>Offset début sample</source>
-        <translation>Start sample offset</translation>
+        <source>Offset début échantillon</source>
+        <oldsource>Offset début sample</oldsource>
+        <translation>Sample start offset</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/page_inst.ui" line="382"/>
-        <source>Offset fin sample</source>
-        <translation>End sample offset</translation>
+        <source>Offset fin échantillon</source>
+        <oldsource>Offset fin sample</oldsource>
+        <translation>Sample end offset</translation>
     </message>
     <message utf8="true">
         <location filename="pages/page_inst.ui" line="387"/>
@@ -3171,6 +3513,11 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
         <source>Commentaires</source>
         <translation>Comments</translation>
     </message>
+    <message utf8="true">
+        <location filename="pages/page_sf2.ui" line="135"/>
+        <source>Échantillons</source>
+        <translation>Samples</translation>
+    </message>
     <message>
         <location filename="pages/page_sf2.ui" line="187"/>
         <source>Version Soundfont</source>
@@ -3188,9 +3535,8 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
         <translation>ROM name and version</translation>
     </message>
     <message>
-        <location filename="pages/page_sf2.ui" line="135"/>
         <source>Samples</source>
-        <translation>Samples</translation>
+        <translation type="obsolete">Samples</translation>
     </message>
     <message>
         <location filename="pages/page_sf2.ui" line="142"/>
@@ -3213,9 +3559,10 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
         <oldsource>Logiciel d&apos;édition</oldsource>
         <translation>Editing software</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/page_sf2.ui" line="227"/>
-        <source>Nombre de samples</source>
+        <source>Nombre d&apos;échantillons</source>
+        <oldsource>Nombre de samples</oldsource>
         <translation>Sample number</translation>
     </message>
     <message>
@@ -3269,6 +3616,8 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
     </message>
     <message>
         <location filename="pages/page_smpl.ui" line="974"/>
+        <location filename="pages/page_smpl.cpp" line="317"/>
+        <location filename="pages/page_smpl.cpp" line="1505"/>
         <source>Lecture</source>
         <translation>Play</translation>
     </message>
@@ -3335,59 +3684,68 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
     </message>
     <message>
         <location filename="pages/page_smpl.cpp" line="227"/>
-        <location filename="pages/page_smpl.cpp" line="567"/>
-        <location filename="pages/page_smpl.cpp" line="697"/>
-        <location filename="pages/page_smpl.cpp" line="713"/>
+        <location filename="pages/page_smpl.cpp" line="570"/>
+        <location filename="pages/page_smpl.cpp" line="706"/>
+        <location filename="pages/page_smpl.cpp" line="730"/>
         <source>mono</source>
         <translation>mono</translation>
     </message>
     <message>
         <location filename="pages/page_smpl.cpp" line="237"/>
-        <location filename="pages/page_smpl.cpp" line="698"/>
+        <location filename="pages/page_smpl.cpp" line="707"/>
         <source>droit</source>
         <translation>right</translation>
     </message>
     <message>
         <location filename="pages/page_smpl.cpp" line="238"/>
-        <location filename="pages/page_smpl.cpp" line="699"/>
+        <location filename="pages/page_smpl.cpp" line="708"/>
         <source>gauche</source>
         <translation>left</translation>
     </message>
     <message>
         <location filename="pages/page_smpl.cpp" line="239"/>
-        <location filename="pages/page_smpl.cpp" line="700"/>
+        <location filename="pages/page_smpl.cpp" line="709"/>
         <source>lien</source>
         <translation>link</translation>
     </message>
     <message utf8="true">
         <location filename="pages/page_smpl.cpp" line="308"/>
-        <source>&lt;b&gt;Sample lié à aucun instrument.&lt;/b&gt;</source>
+        <source>&lt;b&gt;Échantillon lié à aucun instrument.&lt;/b&gt;</source>
+        <oldsource>&lt;b&gt;Sample lié à aucun instrument.&lt;/b&gt;</oldsource>
         <translation>&lt;b&gt;Sample linked to no instrument.&lt;/b&gt;</translation>
     </message>
     <message utf8="true">
         <location filename="pages/page_smpl.cpp" line="310"/>
-        <source>&lt;b&gt;Sample lié à l&apos;instrument : &lt;/b&gt;</source>
+        <source>&lt;b&gt;Échantillon lié à l&apos;instrument : &lt;/b&gt;</source>
+        <oldsource>&lt;b&gt;Sample lié à l&apos;instrument : &lt;/b&gt;</oldsource>
         <translation>&lt;b&gt;Sample linked to the instrument: &lt;/b&gt;</translation>
     </message>
     <message utf8="true">
         <location filename="pages/page_smpl.cpp" line="312"/>
-        <source>&lt;b&gt;Sample lié aux instruments : &lt;/b&gt;</source>
+        <source>&lt;b&gt;Échantillon lié aux instruments : &lt;/b&gt;</source>
+        <oldsource>&lt;b&gt;Sample lié aux instruments : &lt;/b&gt;</oldsource>
         <translation>&lt;b&gt;Sample linked to the instruments: &lt;/b&gt;</translation>
     </message>
     <message utf8="true">
-        <location filename="pages/page_smpl.cpp" line="1301"/>
+        <location filename="pages/page_smpl.cpp" line="1318"/>
         <source>Écart en demi-tons :</source>
         <translation>Tuning in semitones:</translation>
     </message>
+    <message utf8="true">
+        <location filename="pages/page_smpl.cpp" line="1480"/>
+        <source>Arrêt</source>
+        <oldsource>arrêt</oldsource>
+        <translation>Stop</translation>
+    </message>
     <message>
-        <location filename="pages/page_smpl.cpp" line="812"/>
-        <location filename="pages/page_smpl.cpp" line="867"/>
-        <location filename="pages/page_smpl.cpp" line="945"/>
-        <location filename="pages/page_smpl.cpp" line="1015"/>
-        <location filename="pages/page_smpl.cpp" line="1092"/>
-        <location filename="pages/page_smpl.cpp" line="1153"/>
-        <location filename="pages/page_smpl.cpp" line="1259"/>
-        <location filename="pages/page_smpl.cpp" line="1323"/>
+        <location filename="pages/page_smpl.cpp" line="829"/>
+        <location filename="pages/page_smpl.cpp" line="884"/>
+        <location filename="pages/page_smpl.cpp" line="962"/>
+        <location filename="pages/page_smpl.cpp" line="1032"/>
+        <location filename="pages/page_smpl.cpp" line="1109"/>
+        <location filename="pages/page_smpl.cpp" line="1170"/>
+        <location filename="pages/page_smpl.cpp" line="1276"/>
+        <location filename="pages/page_smpl.cpp" line="1340"/>
         <source>Traitement </source>
         <translation>Treatment  </translation>
     </message>
@@ -3402,29 +3760,29 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
         <translation>Equalizer (±15 dB)</translation>
     </message>
     <message>
-        <location filename="pages/page_smpl.cpp" line="813"/>
-        <location filename="pages/page_smpl.cpp" line="868"/>
-        <location filename="pages/page_smpl.cpp" line="946"/>
-        <location filename="pages/page_smpl.cpp" line="1016"/>
-        <location filename="pages/page_smpl.cpp" line="1093"/>
-        <location filename="pages/page_smpl.cpp" line="1154"/>
-        <location filename="pages/page_smpl.cpp" line="1260"/>
-        <location filename="pages/page_smpl.cpp" line="1324"/>
+        <location filename="pages/page_smpl.cpp" line="830"/>
+        <location filename="pages/page_smpl.cpp" line="885"/>
+        <location filename="pages/page_smpl.cpp" line="963"/>
+        <location filename="pages/page_smpl.cpp" line="1033"/>
+        <location filename="pages/page_smpl.cpp" line="1110"/>
+        <location filename="pages/page_smpl.cpp" line="1171"/>
+        <location filename="pages/page_smpl.cpp" line="1277"/>
+        <location filename="pages/page_smpl.cpp" line="1341"/>
         <source>Annuler</source>
         <translation>Cancel</translation>
     </message>
     <message utf8="true">
-        <location filename="pages/page_smpl.cpp" line="1072"/>
+        <location filename="pages/page_smpl.cpp" line="1089"/>
         <source>Fréquence de coupure :</source>
         <translation>Cut-off frequency:</translation>
     </message>
     <message>
-        <location filename="pages/page_smpl.cpp" line="1300"/>
+        <location filename="pages/page_smpl.cpp" line="1317"/>
         <source>Transposition</source>
         <translation>Transposition</translation>
     </message>
     <message>
-        <location filename="pages/page_smpl.cpp" line="1071"/>
+        <location filename="pages/page_smpl.cpp" line="1088"/>
         <source>Question</source>
         <translation>Question</translation>
     </message>
@@ -3460,9 +3818,14 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
         <translation>Ok, &amp;disable this message</translation>
     </message>
     <message utf8="true">
-        <location filename="sf2_core/duplicator.cpp" line="284"/>
         <source>Le sample « </source>
         <oldsource>Le sample «&amp;#160;</oldsource>
+        <translation type="obsolete">The sample &quot;</translation>
+    </message>
+    <message utf8="true">
+        <location filename="sf2_core/duplicator.cpp" line="284"/>
+        <source>L&apos;échantillon « </source>
+        <oldsource>l&apos;échantillon « </oldsource>
         <translation>The sample &quot;</translation>
     </message>
     <message utf8="true">
@@ -3492,8 +3855,8 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
     </message>
     <message>
         <location filename="sf2_core/duplicator.cpp" line="541"/>
-        <location filename="sf2_core/pile_sf2.cpp" line="1300"/>
-        <location filename="sf2_core/pile_sf2.cpp" line="1389"/>
+        <location filename="sf2_core/pile_sf2.cpp" line="1298"/>
+        <location filename="sf2_core/pile_sf2.cpp" line="1387"/>
         <location filename="sf2_core/pile_sf2_sl.cpp" line="284"/>
         <location filename="sf2_core/sound.cpp" line="102"/>
         <location filename="sf2_core/sound.cpp" line="154"/>
@@ -3545,34 +3908,39 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
         <translation>I&amp;gnore all</translation>
     </message>
     <message>
-        <location filename="sf2_core/pile_sf2.cpp" line="932"/>
         <source>Samples</source>
+        <translation type="obsolete">Samples</translation>
+    </message>
+    <message utf8="true">
+        <location filename="sf2_core/pile_sf2.cpp" line="930"/>
+        <source>Échantillons</source>
         <translation>Samples</translation>
     </message>
     <message>
-        <location filename="sf2_core/pile_sf2.cpp" line="940"/>
+        <location filename="sf2_core/pile_sf2.cpp" line="938"/>
         <source>Instruments</source>
         <translation>Instruments</translation>
     </message>
     <message>
-        <location filename="sf2_core/pile_sf2.cpp" line="947"/>
+        <location filename="sf2_core/pile_sf2.cpp" line="945"/>
         <source>Presets</source>
         <translation>Presets</translation>
     </message>
     <message utf8="true">
-        <location filename="sf2_core/pile_sf2.cpp" line="1301"/>
-        <source>Impossible de supprimer un sample s&apos;il est utilisé par un instrument.</source>
+        <location filename="sf2_core/pile_sf2.cpp" line="1299"/>
+        <source>Impossible de supprimer un échantillon s&apos;il est utilisé par un instrument.</source>
+        <oldsource>Impossible de supprimer un sample s&apos;il est utilisé par un instrument.</oldsource>
         <translation>Cannot delete a sample used by another instrument.</translation>
     </message>
     <message utf8="true">
-        <location filename="sf2_core/pile_sf2.cpp" line="1390"/>
+        <location filename="sf2_core/pile_sf2.cpp" line="1388"/>
         <source>Impossible de supprimer un instrument s&apos;il est utilisé par un preset.</source>
         <translation>Cannot delete an instrument used by another preset.</translation>
     </message>
     <message utf8="true">
         <location filename="sf2_core/pile_sf2_sl.cpp" line="285"/>
-        <source>Fichier corrompu : utilisation des samples en qualité 16 bits.</source>
-        <oldsource>Fichier corrompu : utilisation des samples en qualitÃ© 16 bits.</oldsource>
+        <source>Fichier corrompu : utilisation des échantillons en qualité 16 bits.</source>
+        <oldsource>Fichier corrompu : utilisation des samples en qualité 16 bits.</oldsource>
         <translation>Corrupted file: use of 16 bits samples.</translation>
     </message>
     <message>
@@ -3607,131 +3975,131 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
         <translation>Corrupted file.</translation>
     </message>
     <message>
-        <location filename="tools/conversion_sfz.cpp" line="168"/>
-        <location filename="tools/import_sfz.cpp" line="249"/>
+        <location filename="tools/conversion_sfz.cpp" line="268"/>
+        <location filename="tools/import_sfz.cpp" line="288"/>
         <source>sans nom</source>
         <translation>untitled</translation>
     </message>
     <message utf8="true">
-        <location filename="tools/conversion_sfz.cpp" line="188"/>
+        <location filename="tools/conversion_sfz.cpp" line="288"/>
         <source>// Sfz exporté depuis un sf2 par Polyphone</source>
         <oldsource>// Sfz exported from sf2 by Polyphone</oldsource>
         <translation>// Sfz exported from sf2 by Polyphone</translation>
     </message>
     <message>
-        <location filename="tools/conversion_sfz.cpp" line="189"/>
+        <location filename="tools/conversion_sfz.cpp" line="289"/>
         <source>// Nom         : </source>
         <translatorcomment>count the spaces so that the &quot;:&quot; are aligned</translatorcomment>
         <translation>// Name     :</translation>
     </message>
     <message>
-        <location filename="tools/conversion_sfz.cpp" line="190"/>
+        <location filename="tools/conversion_sfz.cpp" line="290"/>
         <source>// Auteur      : </source>
         <translation>// Author   :</translation>
     </message>
     <message>
-        <location filename="tools/conversion_sfz.cpp" line="191"/>
+        <location filename="tools/conversion_sfz.cpp" line="291"/>
         <source>// Copyright   : </source>
         <translation>// Copyright:</translation>
     </message>
     <message>
-        <location filename="tools/conversion_sfz.cpp" line="192"/>
+        <location filename="tools/conversion_sfz.cpp" line="292"/>
         <source>// Date        : </source>
         <translation>// Date     :</translation>
     </message>
     <message>
-        <location filename="tools/conversion_sfz.cpp" line="193"/>
+        <location filename="tools/conversion_sfz.cpp" line="293"/>
         <source>// Commentaire : </source>
         <translation>// Comment  :</translation>
     </message>
     <message>
-        <location filename="tools/conversion_sfz.cpp" line="436"/>
-        <location filename="tools/conversion_sfz.cpp" line="478"/>
+        <location filename="tools/conversion_sfz.cpp" line="543"/>
+        <location filename="tools/conversion_sfz.cpp" line="585"/>
         <source>autre</source>
         <translation>other</translation>
     </message>
     <message>
-        <location filename="tools/conversion_sfz.cpp" line="439"/>
+        <location filename="tools/conversion_sfz.cpp" line="546"/>
         <source>Piano</source>
         <translation>Piano</translation>
     </message>
     <message>
-        <location filename="tools/conversion_sfz.cpp" line="441"/>
+        <location filename="tools/conversion_sfz.cpp" line="548"/>
         <source>Percussions chromatiques</source>
         <translation>Chromatic percussion</translation>
     </message>
     <message>
-        <location filename="tools/conversion_sfz.cpp" line="443"/>
+        <location filename="tools/conversion_sfz.cpp" line="550"/>
         <source>Orgues</source>
         <translation>Organ</translation>
     </message>
     <message>
-        <location filename="tools/conversion_sfz.cpp" line="445"/>
+        <location filename="tools/conversion_sfz.cpp" line="552"/>
         <source>Guitares</source>
         <translation>Guitar</translation>
     </message>
     <message>
-        <location filename="tools/conversion_sfz.cpp" line="447"/>
+        <location filename="tools/conversion_sfz.cpp" line="554"/>
         <source>Basses</source>
         <translation>Bass</translation>
     </message>
     <message>
-        <location filename="tools/conversion_sfz.cpp" line="449"/>
+        <location filename="tools/conversion_sfz.cpp" line="556"/>
         <source>Cordes</source>
         <translation>Strings</translation>
     </message>
     <message>
-        <location filename="tools/conversion_sfz.cpp" line="451"/>
+        <location filename="tools/conversion_sfz.cpp" line="558"/>
         <source>Orchestre</source>
         <translation>Ensemble</translation>
     </message>
     <message>
-        <location filename="tools/conversion_sfz.cpp" line="453"/>
+        <location filename="tools/conversion_sfz.cpp" line="560"/>
         <source>Cuivres</source>
         <translation>Brass</translation>
     </message>
     <message utf8="true">
-        <location filename="tools/conversion_sfz.cpp" line="455"/>
+        <location filename="tools/conversion_sfz.cpp" line="562"/>
         <source>Instrument à anches</source>
         <translation>Reed</translation>
     </message>
     <message utf8="true">
-        <location filename="tools/conversion_sfz.cpp" line="457"/>
+        <location filename="tools/conversion_sfz.cpp" line="564"/>
         <source>Flûtes</source>
         <translation>Pipe</translation>
     </message>
     <message utf8="true">
-        <location filename="tools/conversion_sfz.cpp" line="459"/>
+        <location filename="tools/conversion_sfz.cpp" line="566"/>
         <source>Synthétiseur solo</source>
         <translation>Synth lead</translation>
     </message>
     <message utf8="true">
-        <location filename="tools/conversion_sfz.cpp" line="461"/>
+        <location filename="tools/conversion_sfz.cpp" line="568"/>
         <source>Nappes de synthétiseur</source>
         <translation>Synth pad</translation>
     </message>
     <message utf8="true">
-        <location filename="tools/conversion_sfz.cpp" line="463"/>
+        <location filename="tools/conversion_sfz.cpp" line="570"/>
         <source>Effets de synthétiseur</source>
         <translation>Synth effects</translation>
     </message>
     <message>
-        <location filename="tools/conversion_sfz.cpp" line="465"/>
+        <location filename="tools/conversion_sfz.cpp" line="572"/>
         <source>Instruments ethniques</source>
         <translation>Ethnic</translation>
     </message>
     <message>
-        <location filename="tools/conversion_sfz.cpp" line="467"/>
+        <location filename="tools/conversion_sfz.cpp" line="574"/>
         <source>Percussions</source>
         <translation>Percussive</translation>
     </message>
     <message>
-        <location filename="tools/conversion_sfz.cpp" line="469"/>
+        <location filename="tools/conversion_sfz.cpp" line="576"/>
         <source>Effets sonores</source>
         <translation>Sound effects</translation>
     </message>
     <message>
-        <location filename="tools/conversion_sfz.cpp" line="471"/>
+        <location filename="tools/conversion_sfz.cpp" line="578"/>
         <source>Kits de percussion</source>
         <translation>Percussion kit</translation>
     </message>
@@ -3752,7 +4120,7 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
         <translation>Translated by </translation>
     </message>
     <message>
-        <location filename="tools/import_sfz.cpp" line="122"/>
+        <location filename="tools/import_sfz.cpp" line="130"/>
         <source>Import sfz</source>
         <translation>Sfz import</translation>
     </message>
@@ -3834,9 +4202,8 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
 <context>
     <name>Tree</name>
     <message>
-        <location filename="sf2_core/tree.cpp" line="50"/>
         <source>Nouveau sample...</source>
-        <translation>New &amp;sample...</translation>
+        <translation type="obsolete">New &amp;sample...</translation>
     </message>
     <message>
         <location filename="sf2_core/tree.cpp" line="53"/>
@@ -3857,6 +4224,11 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
         <location filename="sf2_core/tree.cpp" line="62"/>
         <source>Associer à...</source>
         <translation>Bind to...</translation>
+    </message>
+    <message utf8="true">
+        <location filename="sf2_core/tree.cpp" line="50"/>
+        <source>Nouvel échantillon...</source>
+        <translation>New sample...</translation>
     </message>
     <message>
         <location filename="sf2_core/tree.cpp" line="71"/>
