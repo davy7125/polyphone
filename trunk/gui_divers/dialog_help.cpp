@@ -23,219 +23,265 @@
 ***************************************************************************/
 
 #include "dialog_help.h"
-#include "ui_dialog_help.h"
+#include <QHBoxLayout>
+#include <QHeaderView>
 
 DialogHelp::DialogHelp(QWidget *parent) :
     QDialog(parent, Qt::WindowCloseButtonHint | Qt::WindowMinMaxButtonsHint |
-            Qt::WindowSystemMenuHint | Qt::Window | Qt::WindowStaysOnTopHint),
-    ui(new Ui::DialogHelp)
+            Qt::WindowSystemMenuHint | Qt::Window | Qt::WindowStaysOnTopHint)
 {
-    ui->setupUi(this);
-    on_pushHome_clicked();
+    // Création de l'interface et remplissage de l'arborescence
+    createUi();
+    fillTree();
+
+    onTreeClicked(_tree->topLevelItem(0), NULL);
+    updateNextPreviousStates();
 }
 
 DialogHelp::~DialogHelp()
 {
-    delete ui;
 }
 
-void DialogHelp::on_pushPrevious_clicked()
+void DialogHelp::createUi()
 {
-    ui->textBrowser->setSource(QUrl(_previous));
+    // Layout
+    QHBoxLayout * layout = new QHBoxLayout();
+    this->setLayout(layout);
+    layout->setContentsMargins(3, 3, 3, 3);
+
+    // Splitter
+    _splitter = new QSplitter(this);
+    layout->addWidget(_splitter);
+
+    // TreeWidget
+    _tree = new QTreeWidget();
+    _splitter->addWidget(_tree);
+    _tree->header()->hide();
+    _tree->setColumnCount(1);
+
+    // TextBrowser avec titre et boutons de navigation
+    QWidget * widget = new QWidget();
+    _splitter->addWidget(widget);
+    QVBoxLayout * layout2 = new QVBoxLayout();
+    layout2->setContentsMargins(0, 0, 0, 0);
+    widget->setLayout(layout2);
+    QHBoxLayout * layout3 = new QHBoxLayout();
+    _buttonLeft = new QPushButton();
+    _buttonLeft->setIcon(QIcon(":/icones/arrow_left"));
+    _buttonLeft->setMaximumSize(24, 24);
+    _buttonLeft->setFlat(true);
+    _buttonLeft->setFocusPolicy(Qt::NoFocus);
+    layout3->addWidget(_buttonLeft);
+    _label = new QLabel();
+    QFont font = _label->font();
+    font.setBold(true);
+    _label->setFont(font);
+    _label->setAlignment(Qt::AlignCenter);
+    layout3->addWidget(_label);
+    _buttonRight = new QPushButton();
+    _buttonRight->setIcon(QIcon(":/icones/arrow_right"));
+    _buttonRight->setMaximumSize(24, 24);
+    _buttonRight->setFlat(true);
+    _buttonRight->setFocusPolicy(Qt::NoFocus);
+    layout3->addWidget(_buttonRight);
+    layout2->addLayout(layout3);
+    _textBrowser = new QTextBrowser();
+    layout2->addWidget(_textBrowser);
+
+    // Connexions
+    connect(_tree, SIGNAL(currentItemChanged(QTreeWidgetItem*,QTreeWidgetItem*)),
+            this, SLOT(onTreeClicked(QTreeWidgetItem*,QTreeWidgetItem*)));
+    connect(_buttonLeft, SIGNAL(clicked()), this, SLOT(onPreviousClicked()));
+    connect(_buttonRight, SIGNAL(clicked()), this, SLOT(onNextClicked()));
+    connect(_textBrowser, SIGNAL(sourceChanged(QUrl)), this, SLOT(onTextSourceChanged(QUrl)));
+
+    // Redimensionnement et nom de la fenêtre
+    this->resize(700, 400);
+    this->setWindowTitle("Polyphone - " + trUtf8("aide"));
 }
 
-void DialogHelp::on_pushNext_clicked()
+void DialogHelp::fillTree()
 {
-    ui->textBrowser->setSource(QUrl(_next));
+    QTreeWidgetItem * level1, * level2;
+    createItem(trUtf8("Présentation du logiciel"), "0");
+
+    level1 = createItem(trUtf8("Barre de menu"), "1");
+    createItem(trUtf8("Fichier"), "1-0", level1);
+    createItem(trUtf8("Édition"), "1-1", level1);
+    createItem(trUtf8("Outils"), "1-2", level1);
+    createItem(trUtf8("Affichage"), "1-3", level1);
+    createItem(trUtf8("Aide"), "1-4", level1);
+
+    level1 = createItem(trUtf8("Barre d'outils"), "2");
+    createItem(trUtf8("Raccourcis"), "2-0", level1);
+    createItem(trUtf8("Clavier virtuel"), "2-1", level1);
+
+    level1 = createItem(trUtf8("Arborescence"), "3");
+    createItem(trUtf8("Structure"), "3-0", level1);
+    createItem(trUtf8("Menu contextuel"), "3-1", level1);
+    createItem(trUtf8("Glisser / déposer"), "3-2", level1);
+    createItem(trUtf8("Recherche"), "3-3", level1);
+
+    level1 = createItem(trUtf8("Pages d'édition"), "4");
+    level2 = createItem(trUtf8("Informations générales"), "4-0", level1);
+    createItem(trUtf8("Zone d'édition"), "4-0-0", level2);
+    createItem(trUtf8("Zone d'informations"), "4-0-1", level2);
+    level2 = createItem(trUtf8("Échantillons"), "4-1", level1);
+    createItem(trUtf8("Graphique"), "4-1-0", level2);
+    createItem(trUtf8("Informations"), "4-1-1", level2);
+    createItem(trUtf8("Fréquences"), "4-1-2", level2);
+    createItem(trUtf8("Égaliseur"), "4-1-3", level2);
+    createItem(trUtf8("Lecteur"), "4-1-4", level2);
+    level2 = createItem(trUtf8("Instruments"), "4-2", level1);
+    createItem(trUtf8("Tableau"), "4-2-0", level2);
+    createItem(trUtf8("Section modulateur"), "4-2-1", level2);
+    createItem(trUtf8("Presets"), "4-3", level1);
+
+    level1 = createItem(trUtf8("Outils"), "5");
+    level2 = createItem(trUtf8("Échantillons"), "5-0", level1);
+    createItem(trUtf8("Ajuster à la fin de boucle"), "5-0-0", level2);
+    createItem(trUtf8("Bouclage automatique"), "5-0-1", level2);
+    createItem(trUtf8("Diminuer sifflements"), "5-0-2", level2);
+    createItem(trUtf8("Enlever blanc au départ"), "5-0-3", level2);
+    createItem(trUtf8("Filtre \"mur de brique\""), "5-0-4", level2);
+    createItem(trUtf8("Normaliser volume"), "5-0-5", level2);
+    createItem(trUtf8("Réglage balance"), "5-0-6", level2);
+    createItem(trUtf8("Transposer"), "5-0-7", level2);
+
+    level2 = createItem(trUtf8("Instruments"), "5-1", level1);
+    createItem(trUtf8("Création mixture"), "5-1-0", level2);
+    createItem(trUtf8("Accordage céleste"), "5-1-1", level2);
+    createItem(trUtf8("Duplication des divisions"), "5-1-2", level2);
+    createItem(trUtf8("Élaboration release"), "5-1-3", level2);
+    createItem(trUtf8("Paramétrage global"), "5-1-4", level2);
+    createItem(trUtf8("Répartition automatique"), "5-1-5", level2);
+    createItem(trUtf8("Spatialisation du son"), "5-1-6", level2);
+    createItem(trUtf8("Visualiseur"), "5-1-7", level2);
+
+    level2 = createItem(trUtf8("Presets"), "5-2", level1);
+    createItem(trUtf8("Duplication des divisions"), "5-2-0", level2);
+    createItem(trUtf8("Paramétrage global"), "5-2-1", level2);
+    createItem(trUtf8("Spatialisation du son"), "5-2-2", level2);
+    createItem(trUtf8("Visualiseur"), "5-2-3", level2);
+
+    level2 = createItem(trUtf8("Globaux"), "5-3", level1);
+    createItem(trUtf8("Association auto échantillons"), "5-3-0", level2);
+    createItem(trUtf8("Dissocier les échantillons stéréo"), "5-3-1", level2);
+    createItem(trUtf8("Enlever les éléments non utilisés"), "5-3-2", level2);
+    createItem(trUtf8("Régler atténuation minimale"), "5-3-3", level2);
+
+    createItem(trUtf8("Magnétophone"), "5-4", level1);
+
+    level1 = createItem(trUtf8("Préférences du logiciel"), "6");
+    createItem(trUtf8("Général"), "6-0", level1);
+    createItem(trUtf8("Synthétiseur"), "6-1", level1);
+    createItem(trUtf8("Graphique"), "6-2", level1);
+    createItem(trUtf8("Barre d'outils"), "6-3", level1);
+    createItem(trUtf8("Clavier"), "6-4", level1);
+
+    level1 = createItem(trUtf8("Annexes"), "7");
+    createItem(trUtf8("Soundfonts sf2"), "7-0", level1);
+    createItem(trUtf8("Import / export sfz"), "7-1", level1);
+    createItem(trUtf8("Limitations du logiciel"), "7-2", level1);
+
+    // Redimensionnement de l'arborescence
+    QList<int> sizes;
+    sizes << 30 << this->width() - 30;
+    _splitter->setSizes(sizes);
+    _tree->resizeColumnToContents(0);
+    sizes.clear();
+    sizes << _tree->columnWidth(0) + 20 << this->width() - _tree->columnWidth(0) - 20;
+    _splitter->setSizes(sizes);
+    _splitter->setStretchFactor(1, 100);
 }
 
-void DialogHelp::on_pushHome_clicked()
+QTreeWidgetItem * DialogHelp::createItem(QString name, QString htmlPage, QTreeWidgetItem * parent)
 {
-    ui->textBrowser->setSource(QUrl(tr("qrc:/aide/aide.html")));
+    QString extension = trUtf8("fr");
+    QTreeWidgetItem * item = new QTreeWidgetItem(parent, QStringList(name));
+    item->setData(0, Qt::UserRole, "qrc:/aide/" + htmlPage + extension + ".html");
+    _tree->addTopLevelItem(item);
+    return item;
 }
 
-void DialogHelp::on_textBrowser_sourceChanged(const QUrl &arg1)
+void DialogHelp::onTreeClicked(QTreeWidgetItem* item, QTreeWidgetItem *)
+{
+    _textBrowser->setSource(QUrl(item->data(0, Qt::UserRole).toString()));
+}
+
+void DialogHelp::onTextSourceChanged(const QUrl &arg1, bool store)
 {
     QString currentPage = arg1.toString();
+    QTreeWidgetItem *itemToSelect = NULL;
+    for (int i = 0; i < _tree->topLevelItemCount(); i++)
+    {
+        QTreeWidgetItem *item = findItem(_tree->topLevelItem(i), currentPage);
+        if (item)
+        {
+            itemToSelect = item;
+            _label->setText(item->text(0));
+        }
+    }
+    _tree->blockSignals(true);
+    _tree->setCurrentItem(itemToSelect, 0);
+    _tree->blockSignals(false);
 
-    if (currentPage.compare("qrc:/aide/help.html") == 0)
+    if (store)
     {
-        _previous = "qrc:/aide/help.html";
-        ui->pushPrevious->setEnabled(false);
-        ui->pushNext->setEnabled(true);
-        _next = "qrc:/aide/page01en.html";
-        ui->labelTitre->setText("POLYPHONE");
-        ui->labelPage->setText("1/10");
+        _urlNext.clear();
+        _urlPrevious.insert(0, currentPage);
+        while (_urlPrevious.size() > 51)
+            _urlPrevious.removeLast();
+        updateNextPreviousStates();
     }
-    else if (currentPage.compare("qrc:/aide/page01en.html") == 0)
+}
+
+QTreeWidgetItem * DialogHelp::findItem(QTreeWidgetItem * item, QString url)
+{
+    QTreeWidgetItem * itemRet = NULL;
+    if (item->data(0, Qt::UserRole).toString() == url)
+        itemRet = item;
+    else
     {
-        _previous = "qrc:/aide/help.html";
-        ui->pushPrevious->setEnabled(true);
-        ui->pushNext->setEnabled(true);
-        _next = "qrc:/aide/page02en.html";
-        ui->labelTitre->setText("MENU BAR");
-        ui->labelPage->setText("2/10");
+        for (int i = 0; i < item->childCount(); i++)
+        {
+            QTreeWidgetItem * itemTmp = findItem(item->child(i), url);
+            if (itemTmp)
+                itemRet = itemTmp;
+        }
     }
-    else if (currentPage.compare("qrc:/aide/page02en.html") == 0)
+    return itemRet;
+}
+
+void DialogHelp::onPreviousClicked()
+{
+    if (_urlPrevious.size() > 1)
     {
-        _previous = "qrc:/aide/page01en.html";
-        ui->pushPrevious->setEnabled(true);
-        ui->pushNext->setEnabled(true);
-        _next = "qrc:/aide/page03en.html";
-        ui->labelTitre->setText("TOOLBAR");
-        ui->labelPage->setText("3/10");
+        _urlNext.insert(0, _urlPrevious.takeFirst());
+        _textBrowser->blockSignals(true);
+        _textBrowser->setSource(QUrl(_urlPrevious.first()));
+        _textBrowser->blockSignals(false);
+        onTextSourceChanged(_urlPrevious.first(), false);
+        updateNextPreviousStates();
     }
-    else if (currentPage.compare("qrc:/aide/page03en.html") == 0)
+}
+
+void DialogHelp::onNextClicked()
+{
+    if (!_urlNext.isEmpty())
     {
-        _previous = "qrc:/aide/page02en.html";
-        ui->pushPrevious->setEnabled(true);
-        ui->pushNext->setEnabled(true);
-        _next = "qrc:/aide/page04en.html";
-        ui->labelTitre->setText("TREE");
-        ui->labelPage->setText("4/10");
+        QString url = _urlNext.takeFirst();
+        _textBrowser->blockSignals(true);
+        _textBrowser->setSource(QUrl(url));
+        _textBrowser->blockSignals(false);
+        onTextSourceChanged(url, false);
+        _urlPrevious.insert(0, url);
+        updateNextPreviousStates();
     }
-    else if (currentPage.compare("qrc:/aide/page04en.html") == 0)
-    {
-        _previous = "qrc:/aide/page03en.html";
-        ui->pushPrevious->setEnabled(true);
-        ui->pushNext->setEnabled(true);
-        _next = "qrc:/aide/page05en.html";
-        ui->labelTitre->setText("GLOBAL INFORMATION");
-        ui->labelPage->setText("5/10");
-    }
-    else if (currentPage.compare("qrc:/aide/page05en.html") == 0)
-    {
-        _previous = "qrc:/aide/page04en.html";
-        ui->pushPrevious->setEnabled(true);
-        ui->pushNext->setEnabled(true);
-        _next = "qrc:/aide/page06en.html";
-        ui->labelTitre->setText("SAMPLES");
-        ui->labelPage->setText("6/10");
-    }
-    else if (currentPage.compare("qrc:/aide/page06en.html") == 0)
-    {
-        _previous = "qrc:/aide/page05en.html";
-        ui->pushPrevious->setEnabled(true);
-        ui->pushNext->setEnabled(true);
-        _next = "qrc:/aide/page07en.html";
-        ui->labelTitre->setText("INSTRUMENTS");
-        ui->labelPage->setText("7/10");
-    }
-    else if (currentPage.compare("qrc:/aide/page07en.html") == 0)
-    {
-        _previous = "qrc:/aide/page06en.html";
-        ui->pushPrevious->setEnabled(true);
-        ui->pushNext->setEnabled(true);
-        _next = "qrc:/aide/page08en.html";
-        ui->labelTitre->setText("PRESETS");
-        ui->labelPage->setText("8/10");
-    }
-    else if (currentPage.compare("qrc:/aide/page08en.html") == 0)
-    {
-        _previous = "qrc:/aide/page07en.html";
-        ui->pushPrevious->setEnabled(true);
-        ui->pushNext->setEnabled(true);
-        _next = "qrc:/aide/page09en.html";
-        ui->labelTitre->setText("TOOLS");
-        ui->labelPage->setText("9/10");
-    }
-    else if (currentPage.compare("qrc:/aide/page09en.html") == 0)
-    {
-        _previous = "qrc:/aide/page08en.html";
-        ui->pushPrevious->setEnabled(true);
-        ui->pushNext->setEnabled(false);
-        _next = "qrc:/aide/page09en.html";
-        ui->labelTitre->setText("PREFERENCES");
-        ui->labelPage->setText("10/10");
-    }
-    else if (currentPage.compare("qrc:/aide/aide.html") == 0)
-    {
-        _previous = "qrc:/aide/aide.html";
-        ui->pushPrevious->setEnabled(false);
-        ui->pushNext->setEnabled(true);
-        _next = "qrc:/aide/page01fr.html";
-        ui->labelTitre->setText("POLYPHONE");
-        ui->labelPage->setText("1/10");
-    }
-    else if (currentPage.compare("qrc:/aide/page01fr.html") == 0)
-    {
-        _previous = "qrc:/aide/aide.html";
-        ui->pushPrevious->setEnabled(true);
-        ui->pushNext->setEnabled(true);
-        _next = "qrc:/aide/page02fr.html";
-        ui->labelTitre->setText("BARRE DE MENU");
-        ui->labelPage->setText("2/10");
-    }
-    else if (currentPage.compare("qrc:/aide/page02fr.html") == 0)
-    {
-        _previous = "qrc:/aide/page01fr.html";
-        ui->pushPrevious->setEnabled(true);
-        ui->pushNext->setEnabled(true);
-        _next = "qrc:/aide/page03fr.html";
-        ui->labelTitre->setText("BARRE D'OUTILS");
-        ui->labelPage->setText("3/10");
-    }
-    else if (currentPage.compare("qrc:/aide/page03fr.html") == 0)
-    {
-        _previous = "qrc:/aide/page02fr.html";
-        ui->pushPrevious->setEnabled(true);
-        ui->pushNext->setEnabled(true);
-        _next = "qrc:/aide/page04fr.html";
-        ui->labelTitre->setText("ARBORESCENCE");
-        ui->labelPage->setText("4/10");
-    }
-    else if (currentPage.compare("qrc:/aide/page04fr.html") == 0)
-    {
-        _previous = "qrc:/aide/page03fr.html";
-        ui->pushPrevious->setEnabled(true);
-        ui->pushNext->setEnabled(true);
-        _next = "qrc:/aide/page05fr.html";
-        ui->labelTitre->setText("INFORMATIONS GENERALES");
-        ui->labelPage->setText("5/10");
-    }
-    else if (currentPage.compare("qrc:/aide/page05fr.html") == 0)
-    {
-        _previous = "qrc:/aide/page04fr.html";
-        ui->pushPrevious->setEnabled(true);
-        ui->pushNext->setEnabled(true);
-        _next = "qrc:/aide/page06fr.html";
-        ui->labelTitre->setText("SONS");
-        ui->labelPage->setText("6/10");
-    }
-    else if (currentPage.compare("qrc:/aide/page06fr.html") == 0)
-    {
-        _previous = "qrc:/aide/page05fr.html";
-        ui->pushPrevious->setEnabled(true);
-        ui->pushNext->setEnabled(true);
-        _next = "qrc:/aide/page07fr.html";
-        ui->labelTitre->setText("INSTRUMENTS");
-        ui->labelPage->setText("7/10");
-    }
-    else if (currentPage.compare("qrc:/aide/page07fr.html") == 0)
-    {
-        _previous = "qrc:/aide/page06fr.html";
-        ui->pushPrevious->setEnabled(true);
-        ui->pushNext->setEnabled(true);
-        _next = "qrc:/aide/page08fr.html";
-        ui->labelTitre->setText("PRESETS");
-        ui->labelPage->setText("8/10");
-    }
-    else if (currentPage.compare("qrc:/aide/page08fr.html") == 0)
-    {
-        _previous = "qrc:/aide/page07fr.html";
-        ui->pushPrevious->setEnabled(true);
-        ui->pushNext->setEnabled(true);
-        _next = "qrc:/aide/page09fr.html";
-        ui->labelTitre->setText("OUTILS");
-        ui->labelPage->setText("9/10");
-    }
-    else if (currentPage.compare("qrc:/aide/page09fr.html") == 0)
-    {
-        _previous = "qrc:/aide/page08fr.html";
-        ui->pushPrevious->setEnabled(true);
-        ui->pushNext->setEnabled(false);
-        _next = "qrc:/aide/page09fr.html";
-        ui->labelTitre->setText("PREFERENCES");
-        ui->labelPage->setText("10/10");
-    }
+}
+
+void DialogHelp::updateNextPreviousStates()
+{
+    _buttonLeft->setEnabled(_urlPrevious.size() > 1);
+    _buttonRight->setEnabled(!_urlNext.isEmpty());
 }

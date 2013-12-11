@@ -132,7 +132,7 @@
         <item row="6" column="0">
          <widget class="QLabel" name="label_6">
           <property name="text">
-           <string>Samples</string>
+           <string>Échantillons</string>
           </property>
          </widget>
         </item>
@@ -224,7 +224,7 @@
         <item row="0" column="0">
          <widget class="QLabel" name="label_7">
           <property name="text">
-           <string>Nombre de samples</string>
+           <string>Nombre d'échantillons</string>
           </property>
          </widget>
         </item>

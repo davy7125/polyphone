@@ -374,12 +374,12 @@
      </row>
      <row>
       <property name="text">
-       <string>Offset début sample</string>
+       <string>Offset début échantillon</string>
       </property>
      </row>
      <row>
       <property name="text">
-       <string>Offset fin sample</string>
+       <string>Offset fin échantillon</string>
       </property>
      </row>
      <row>

@@ -927,7 +927,7 @@ int Pile_sf2::add(EltID id, bool storeAction)
             sf2->eltTree->setIcon(0, QIcon(":/icones/document"));
             // Conteneurs pour samples, instruments et presets
             sf2->eltTreeSmpl = new QTreeWidgetItem(sf2->eltTree);
-            sf2->eltTreeSmpl->setText(0, QObject::trUtf8("Samples"));
+            sf2->eltTreeSmpl->setText(0, QObject::trUtf8("Échantillons"));
             sf2->eltTreeSmpl->setText(1, str);
             sf2->eltTreeSmpl->setText(2, "S");
             sf2->eltTreeSmpl->setText(5, "a");
@@ -1296,7 +1296,7 @@ int Pile_sf2::remove(EltID id, bool permanently, bool storeAction, int *message)
             if (*message %2 != 0 || !message)
             {
                 QMessageBox::warning(parent, QObject::trUtf8("Attention"),
-                                     QObject::trUtf8("Impossible de supprimer un sample s'il est utilisé par un instrument."));
+                                     QObject::trUtf8("Impossible de supprimer un échantillon s'il est utilisé par un instrument."));
                 *message *= 2;
             }
             return 1;

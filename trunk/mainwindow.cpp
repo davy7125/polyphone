@@ -1098,7 +1098,7 @@ void MainWindow::renommer()
         else
         {
             QString msg;
-            if (type == elementSmpl) msg = trUtf8("Nom du sample (max 20 caractères) :");
+            if (type == elementSmpl) msg = trUtf8("Nom de l'échantillon (max 20 caractères) :");
             else if (type == elementInst) msg = trUtf8("Nom de l'instrument (max 20 caractères) :");
             else if (type == elementPrst) msg = trUtf8("Nom du preset (max 20 caractères) :");
             else if (type == elementSf2) msg = trUtf8("Nom du SF2 (max 255 caractères) :");
@@ -1274,13 +1274,13 @@ void MainWindow::importerSmpl(QString path, EltID id, int * replace)
                     if (this->sf2->getQstr(id, champ_name).compare(nom.left(19).append("L")) == 0)
                     {
                         indexL = j;
-                        qStr3 = trUtf8("Le sample « ") + nom.left(19).toUtf8() +
+                        qStr3 = trUtf8("L'échantillon « ") + nom.left(19).toUtf8() +
                                 trUtf8("L » existe déjà.<br />Que faire ?");
                     }
                     else if (this->sf2->getQstr(id, champ_name).compare(nom.left(19).append("R")) == 0)
                     {
                         indexR = j;
-                        qStr3 = trUtf8("Le sample « ") + nom.left(19).toUtf8() +
+                        qStr3 = trUtf8("L'échantillon « ") + nom.left(19).toUtf8() +
                                 trUtf8("R » existe déjà.<br />Que faire ?");
                     }
                 }
@@ -1289,7 +1289,7 @@ void MainWindow::importerSmpl(QString path, EltID id, int * replace)
                     if (this->sf2->getQstr(id, champ_name).compare(nom.left(20)) == 0)
                     {
                         indexL = j;
-                        qStr3 = trUtf8("Le sample « ") + nom.left(20).toUtf8() +
+                        qStr3 = trUtf8("L'échantillon « ") + nom.left(20).toUtf8() +
                                 trUtf8(" » existe déjà.<br />Que faire ?");
                     }
                 }
@@ -1976,9 +1976,9 @@ void MainWindow::purger()
     // Bilan
     QString qStr;
     if (unusedSmpl < 2)
-        qStr = QString::number(unusedSmpl) + trUtf8(" sample et ");
+        qStr = QString::number(unusedSmpl) + trUtf8(" échantillon et ");
     else
-        qStr = QString::number(unusedSmpl) + trUtf8(" samples et ");
+        qStr = QString::number(unusedSmpl) + trUtf8(" échantillons et ");
     if (unusedInst < 2)
         qStr += QString::number(unusedInst) + trUtf8(" instrument ont été supprimés.");
     else
