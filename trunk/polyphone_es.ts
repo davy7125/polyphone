@@ -559,7 +559,7 @@
     <message>
         <location filename="tools/dialog_duplication.ui" line="23"/>
         <source>Duplication des divisions</source>
-        <translation>Dupliación de las divisiones</translation>
+        <translation>Duplicación de las divisiones</translation>
     </message>
     <message>
         <location filename="tools/dialog_duplication.ui" line="33"/>
@@ -593,27 +593,27 @@
     <message>
         <location filename="gui_divers/dialog_export.ui" line="86"/>
         <source>Emplacement</source>
-        <translation type="unfinished"></translation>
+        <translation>Ubicación</translation>
     </message>
     <message>
         <location filename="gui_divers/dialog_export.ui" line="107"/>
         <source>Format</source>
-        <translation type="unfinished"></translation>
+        <translation>Formato</translation>
     </message>
     <message utf8="true">
         <location filename="gui_divers/dialog_export.ui" line="117"/>
         <source>numéro de preset en préfixe</source>
-        <translation type="unfinished"></translation>
+        <translation>Número de preset en prefijo</translation>
     </message>
     <message utf8="true">
         <location filename="gui_divers/dialog_export.ui" line="124"/>
         <source>un répertoire par banque</source>
-        <translation type="unfinished"></translation>
+        <translation>Una carpeta por banco</translation>
     </message>
     <message utf8="true">
         <location filename="gui_divers/dialog_export.ui" line="131"/>
         <source>classement général midi</source>
-        <translation type="unfinished"></translation>
+        <translation>Clasificación general MIDI</translation>
     </message>
     <message>
         <location filename="gui_divers/dialog_export.ui" line="142"/>
@@ -629,322 +629,320 @@
 <context>
     <name>DialogHelp</name>
     <message>
-        <location filename="gui_divers/dialog_help.cpp" line="100"/>
+        <location filename="gui_divers/dialog_help.cpp" line="101"/>
         <source>aide</source>
-        <translation type="unfinished"></translation>
+        <translation>ayuda</translation>
     </message>
     <message utf8="true">
-        <location filename="gui_divers/dialog_help.cpp" line="106"/>
+        <location filename="gui_divers/dialog_help.cpp" line="107"/>
         <source>Présentation du logiciel</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="gui_divers/dialog_help.cpp" line="108"/>
-        <source>Barre de menu</source>
-        <translation type="unfinished"></translation>
+        <translation>Descripción del software</translation>
     </message>
     <message>
         <location filename="gui_divers/dialog_help.cpp" line="109"/>
-        <source>Fichier</source>
-        <translation type="unfinished">Archivo</translation>
-    </message>
-    <message utf8="true">
-        <location filename="gui_divers/dialog_help.cpp" line="110"/>
-        <source>Édition</source>
-        <translation type="unfinished"></translation>
+        <source>Barre de menu</source>
+        <translation>Barra de menús</translation>
     </message>
     <message>
+        <location filename="gui_divers/dialog_help.cpp" line="110"/>
+        <source>Fichier</source>
+        <translation>Archivo</translation>
+    </message>
+    <message utf8="true">
         <location filename="gui_divers/dialog_help.cpp" line="111"/>
-        <location filename="gui_divers/dialog_help.cpp" line="140"/>
-        <source>Outils</source>
-        <translation type="unfinished"></translation>
+        <source>Édition</source>
+        <translation>Editar</translation>
     </message>
     <message>
         <location filename="gui_divers/dialog_help.cpp" line="112"/>
-        <source>Affichage</source>
-        <translation type="unfinished"></translation>
+        <location filename="gui_divers/dialog_help.cpp" line="141"/>
+        <source>Outils</source>
+        <translation>Herramientas</translation>
     </message>
     <message>
         <location filename="gui_divers/dialog_help.cpp" line="113"/>
+        <source>Affichage</source>
+        <translation>Ver</translation>
+    </message>
+    <message>
+        <location filename="gui_divers/dialog_help.cpp" line="114"/>
         <source>Aide</source>
         <translation>Ayuda</translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_help.cpp" line="115"/>
-        <location filename="gui_divers/dialog_help.cpp" line="179"/>
-        <source>Barre d&apos;outils</source>
-        <translation type="unfinished">Barra de herramientas</translation>
-    </message>
-    <message>
         <location filename="gui_divers/dialog_help.cpp" line="116"/>
-        <source>Raccourcis</source>
-        <translation type="unfinished"></translation>
+        <location filename="gui_divers/dialog_help.cpp" line="180"/>
+        <source>Barre d&apos;outils</source>
+        <translation>Barra de herramientas</translation>
     </message>
     <message>
         <location filename="gui_divers/dialog_help.cpp" line="117"/>
-        <source>Clavier virtuel</source>
-        <translation type="unfinished"></translation>
+        <source>Raccourcis</source>
+        <translation>Atajos</translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_help.cpp" line="119"/>
-        <source>Arborescence</source>
-        <translation type="unfinished">Vista de árbol</translation>
+        <location filename="gui_divers/dialog_help.cpp" line="118"/>
+        <source>Clavier virtuel</source>
+        <translation>Teclado virtual</translation>
     </message>
     <message>
         <location filename="gui_divers/dialog_help.cpp" line="120"/>
-        <source>Structure</source>
-        <translation type="unfinished"></translation>
+        <source>Arborescence</source>
+        <translation>Vista de árbol</translation>
     </message>
     <message>
         <location filename="gui_divers/dialog_help.cpp" line="121"/>
-        <source>Menu contextuel</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message utf8="true">
-        <location filename="gui_divers/dialog_help.cpp" line="122"/>
-        <source>Glisser / déposer</source>
-        <translation type="unfinished"></translation>
+        <source>Structure</source>
+        <translation>Estructura</translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_help.cpp" line="123"/>
-        <source>Recherche</source>
-        <translation type="unfinished"></translation>
+        <location filename="gui_divers/dialog_help.cpp" line="122"/>
+        <source>Menu contextuel</source>
+        <translation>Menú contextual</translation>
     </message>
     <message utf8="true">
-        <location filename="gui_divers/dialog_help.cpp" line="125"/>
-        <source>Pages d&apos;édition</source>
-        <translation type="unfinished"></translation>
+        <location filename="gui_divers/dialog_help.cpp" line="123"/>
+        <source>Glisser / déposer</source>
+        <translation>Arrastrar / soltar</translation>
+    </message>
+    <message>
+        <location filename="gui_divers/dialog_help.cpp" line="124"/>
+        <source>Recherche</source>
+        <translation>Buscar</translation>
     </message>
     <message utf8="true">
         <location filename="gui_divers/dialog_help.cpp" line="126"/>
-        <source>Informations générales</source>
-        <translation type="unfinished"></translation>
+        <source>Pages d&apos;édition</source>
+        <translation>Páginas de edición</translation>
     </message>
     <message utf8="true">
         <location filename="gui_divers/dialog_help.cpp" line="127"/>
-        <source>Zone d&apos;édition</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="gui_divers/dialog_help.cpp" line="128"/>
-        <source>Zone d&apos;informations</source>
-        <translation type="unfinished"></translation>
+        <source>Informations générales</source>
+        <translation>Información general</translation>
     </message>
     <message utf8="true">
-        <location filename="gui_divers/dialog_help.cpp" line="129"/>
-        <location filename="gui_divers/dialog_help.cpp" line="141"/>
-        <source>Échantillons</source>
-        <translation type="unfinished"></translation>
+        <location filename="gui_divers/dialog_help.cpp" line="128"/>
+        <source>Zone d&apos;édition</source>
+        <translation>Área de edición</translation>
     </message>
     <message>
+        <location filename="gui_divers/dialog_help.cpp" line="129"/>
+        <source>Zone d&apos;informations</source>
+        <translation>Área de información</translation>
+    </message>
+    <message utf8="true">
         <location filename="gui_divers/dialog_help.cpp" line="130"/>
-        <location filename="gui_divers/dialog_help.cpp" line="178"/>
-        <source>Graphique</source>
-        <translation type="unfinished">Gráficos</translation>
+        <location filename="gui_divers/dialog_help.cpp" line="142"/>
+        <source>Échantillons</source>
+        <translation>Muestras</translation>
     </message>
     <message>
         <location filename="gui_divers/dialog_help.cpp" line="131"/>
-        <source>Informations</source>
-        <translation type="unfinished">Información</translation>
+        <location filename="gui_divers/dialog_help.cpp" line="179"/>
+        <source>Graphique</source>
+        <translation>Gráficos</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="gui_divers/dialog_help.cpp" line="132"/>
-        <source>Fréquences</source>
-        <translation type="unfinished"></translation>
+        <source>Informations</source>
+        <translation>Información</translation>
     </message>
     <message utf8="true">
         <location filename="gui_divers/dialog_help.cpp" line="133"/>
-        <source>Égaliseur</source>
-        <translation type="unfinished"></translation>
+        <source>Fréquences</source>
+        <translation>Frecuencias</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="gui_divers/dialog_help.cpp" line="134"/>
-        <source>Lecteur</source>
-        <translation type="unfinished"></translation>
+        <source>Égaliseur</source>
+        <translation>Ecualizador</translation>
     </message>
     <message>
         <location filename="gui_divers/dialog_help.cpp" line="135"/>
-        <location filename="gui_divers/dialog_help.cpp" line="151"/>
-        <source>Instruments</source>
-        <translation type="unfinished">Instrumentos</translation>
+        <source>Lecteur</source>
+        <translation>Reproductor</translation>
     </message>
     <message>
         <location filename="gui_divers/dialog_help.cpp" line="136"/>
-        <source>Tableau</source>
-        <translation type="unfinished"></translation>
+        <location filename="gui_divers/dialog_help.cpp" line="152"/>
+        <source>Instruments</source>
+        <translation>Instrumentos</translation>
     </message>
     <message>
         <location filename="gui_divers/dialog_help.cpp" line="137"/>
-        <source>Section modulateur</source>
-        <translation type="unfinished"></translation>
+        <source>Tableau</source>
+        <translation>Tabla</translation>
     </message>
     <message>
         <location filename="gui_divers/dialog_help.cpp" line="138"/>
-        <location filename="gui_divers/dialog_help.cpp" line="161"/>
-        <source>Presets</source>
-        <translation type="unfinished">Presets</translation>
-    </message>
-    <message utf8="true">
-        <location filename="gui_divers/dialog_help.cpp" line="142"/>
-        <source>Ajuster à la fin de boucle</source>
-        <translation type="unfinished"></translation>
+        <source>Section modulateur</source>
+        <translation>Sección de moduladores</translation>
     </message>
     <message>
+        <location filename="gui_divers/dialog_help.cpp" line="139"/>
+        <location filename="gui_divers/dialog_help.cpp" line="162"/>
+        <source>Presets</source>
+        <translation>Presets</translation>
+    </message>
+    <message utf8="true">
         <location filename="gui_divers/dialog_help.cpp" line="143"/>
-        <source>Bouclage automatique</source>
-        <translation type="unfinished"></translation>
+        <source>Ajuster à la fin de boucle</source>
+        <translation>Recortar al final del loop</translation>
     </message>
     <message>
         <location filename="gui_divers/dialog_help.cpp" line="144"/>
-        <source>Diminuer sifflements</source>
-        <translation type="unfinished">Reducción de silbido</translation>
-    </message>
-    <message utf8="true">
-        <location filename="gui_divers/dialog_help.cpp" line="145"/>
-        <source>Enlever blanc au départ</source>
-        <translation type="unfinished"></translation>
+        <source>Bouclage automatique</source>
+        <translation>Auto loop</translation>
     </message>
     <message>
+        <location filename="gui_divers/dialog_help.cpp" line="145"/>
+        <source>Diminuer sifflements</source>
+        <translation>Reducción de silbido</translation>
+    </message>
+    <message utf8="true">
         <location filename="gui_divers/dialog_help.cpp" line="146"/>
-        <source>Filtre &quot;mur de brique&quot;</source>
-        <translation type="unfinished"></translation>
+        <source>Enlever blanc au départ</source>
+        <translation>Eliminar silencio al inicio</translation>
     </message>
     <message>
         <location filename="gui_divers/dialog_help.cpp" line="147"/>
-        <source>Normaliser volume</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message utf8="true">
-        <location filename="gui_divers/dialog_help.cpp" line="148"/>
-        <source>Réglage balance</source>
-        <translation type="unfinished"></translation>
+        <source>Filtre &quot;mur de brique&quot;</source>
+        <translation>Filtro &quot;pared de ladrillo&quot;</translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_help.cpp" line="149"/>
-        <source>Transposer</source>
-        <translation type="unfinished"></translation>
+        <location filename="gui_divers/dialog_help.cpp" line="148"/>
+        <source>Normaliser volume</source>
+        <translation>Normalizar volumen</translation>
     </message>
     <message utf8="true">
-        <location filename="gui_divers/dialog_help.cpp" line="152"/>
-        <source>Création mixture</source>
-        <translation type="unfinished">Creación de mezclas</translation>
+        <location filename="gui_divers/dialog_help.cpp" line="149"/>
+        <source>Réglage balance</source>
+        <translation>Ajustar balance</translation>
+    </message>
+    <message>
+        <location filename="gui_divers/dialog_help.cpp" line="150"/>
+        <source>Transposer</source>
+        <translation>Transportar</translation>
     </message>
     <message utf8="true">
         <location filename="gui_divers/dialog_help.cpp" line="153"/>
-        <source>Accordage céleste</source>
-        <translation type="unfinished">Afinación celeste</translation>
-    </message>
-    <message>
-        <location filename="gui_divers/dialog_help.cpp" line="154"/>
-        <location filename="gui_divers/dialog_help.cpp" line="162"/>
-        <source>Duplication des divisions</source>
-        <translation type="unfinished"></translation>
+        <source>Création mixture</source>
+        <translation>Creación de mixturas</translation>
     </message>
     <message utf8="true">
+        <location filename="gui_divers/dialog_help.cpp" line="154"/>
+        <source>Accordage céleste</source>
+        <translation>Afinación celeste</translation>
+    </message>
+    <message>
         <location filename="gui_divers/dialog_help.cpp" line="155"/>
-        <source>Élaboration release</source>
-        <translation type="unfinished">Versión de desarrollo</translation>
+        <location filename="gui_divers/dialog_help.cpp" line="163"/>
+        <source>Duplication des divisions</source>
+        <translation>Duplicación de las divisiones</translation>
     </message>
     <message utf8="true">
         <location filename="gui_divers/dialog_help.cpp" line="156"/>
-        <location filename="gui_divers/dialog_help.cpp" line="163"/>
-        <source>Paramétrage global</source>
-        <translation type="unfinished">Parámetros generales</translation>
+        <source>Élaboration release</source>
+        <translation>Asignar valores de release</translation>
     </message>
     <message utf8="true">
         <location filename="gui_divers/dialog_help.cpp" line="157"/>
-        <source>Répartition automatique</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="gui_divers/dialog_help.cpp" line="158"/>
         <location filename="gui_divers/dialog_help.cpp" line="164"/>
-        <source>Spatialisation du son</source>
-        <translation type="unfinished"></translation>
+        <source>Paramétrage global</source>
+        <translation>Parámetros generales</translation>
+    </message>
+    <message utf8="true">
+        <location filename="gui_divers/dialog_help.cpp" line="158"/>
+        <source>Répartition automatique</source>
+        <translation>Distribución automática</translation>
     </message>
     <message>
         <location filename="gui_divers/dialog_help.cpp" line="159"/>
         <location filename="gui_divers/dialog_help.cpp" line="165"/>
-        <source>Visualiseur</source>
-        <translation type="unfinished">Visualizador</translation>
+        <source>Spatialisation du son</source>
+        <translation>Espacialización del sonido</translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_help.cpp" line="167"/>
+        <location filename="gui_divers/dialog_help.cpp" line="160"/>
+        <location filename="gui_divers/dialog_help.cpp" line="166"/>
+        <source>Visualiseur</source>
+        <translation>Visualizador</translation>
+    </message>
+    <message>
+        <location filename="gui_divers/dialog_help.cpp" line="168"/>
         <source>Globaux</source>
-        <translation type="unfinished"></translation>
+        <translation>Global</translation>
     </message>
     <message utf8="true">
-        <location filename="gui_divers/dialog_help.cpp" line="168"/>
+        <location filename="gui_divers/dialog_help.cpp" line="169"/>
         <source>Association auto échantillons</source>
-        <translation type="unfinished"></translation>
+        <translation>Asociación automática de muestras</translation>
     </message>
     <message utf8="true">
         <location filename="gui_divers/dialog_help.cpp" line="170"/>
-        <source>Enlever les éléments non utilisés</source>
-        <translation type="unfinished"></translation>
+        <source>Dissocier les échantillons stéréo</source>
+        <translation>Dividir las muestras estéreo</translation>
     </message>
     <message utf8="true">
         <location filename="gui_divers/dialog_help.cpp" line="171"/>
+        <source>Enlever les éléments non utilisés</source>
+        <translation>Eliminar elementos no utilizados</translation>
+    </message>
+    <message utf8="true">
+        <location filename="gui_divers/dialog_help.cpp" line="172"/>
         <source>Régler atténuation minimale</source>
-        <translation type="unfinished"></translation>
+        <translation>Establecer atenuación mínima</translation>
     </message>
     <message utf8="true">
-        <location filename="gui_divers/dialog_help.cpp" line="173"/>
+        <location filename="gui_divers/dialog_help.cpp" line="174"/>
         <source>Magnétophone</source>
-        <translation type="unfinished">Grabadora</translation>
-    </message>
-    <message utf8="true">
-        <location filename="gui_divers/dialog_help.cpp" line="175"/>
-        <source>Préférences du logiciel</source>
-        <translation type="unfinished"></translation>
+        <translation>Grabadora</translation>
     </message>
     <message utf8="true">
         <location filename="gui_divers/dialog_help.cpp" line="176"/>
-        <source>Général</source>
-        <translation type="unfinished">General</translation>
+        <source>Préférences du logiciel</source>
+        <translation>Preferencias de software</translation>
     </message>
     <message utf8="true">
         <location filename="gui_divers/dialog_help.cpp" line="177"/>
+        <source>Général</source>
+        <translation>General</translation>
+    </message>
+    <message utf8="true">
+        <location filename="gui_divers/dialog_help.cpp" line="178"/>
         <source>Synthétiseur</source>
-        <translation type="unfinished">Sintetizador</translation>
+        <translation>Sintetizador</translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_help.cpp" line="180"/>
+        <location filename="gui_divers/dialog_help.cpp" line="181"/>
         <source>Clavier</source>
-        <translation type="unfinished">Teclado</translation>
-    </message>
-    <message>
-        <location filename="gui_divers/dialog_help.cpp" line="182"/>
-        <source>Annexes</source>
-        <translation type="unfinished"></translation>
+        <translation>Teclado</translation>
     </message>
     <message>
         <location filename="gui_divers/dialog_help.cpp" line="183"/>
-        <source>Soundfonts sf2</source>
-        <translation type="unfinished"></translation>
+        <source>Annexes</source>
+        <translation>Apéndices</translation>
     </message>
     <message>
         <location filename="gui_divers/dialog_help.cpp" line="184"/>
-        <source>Import / export sfz</source>
-        <translation type="unfinished"></translation>
+        <source>Soundfonts sf2</source>
+        <translation>Soundfonts sf2</translation>
     </message>
     <message>
         <location filename="gui_divers/dialog_help.cpp" line="185"/>
+        <source>Import / export sfz</source>
+        <translation>Importar / exportar sfz</translation>
+    </message>
+    <message>
+        <location filename="gui_divers/dialog_help.cpp" line="186"/>
         <source>Limitations du logiciel</source>
-        <translation type="unfinished"></translation>
+        <translation>Limitaciones del software</translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_help.cpp" line="200"/>
+        <location filename="gui_divers/dialog_help.cpp" line="201"/>
         <source>fr</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Accueil</source>
-        <translation type="obsolete">Bienvenido</translation>
-    </message>
-    <message>
-        <source>qrc:/aide/aide.html</source>
-        <translation type="obsolete">qrc:/aide/help.html</translation>
+        <translatorcomment>will be &quot;es&quot; if a spanish translation of the documentation is done</translatorcomment>
+        <translation>en</translation>
     </message>
 </context>
 <context>
@@ -953,7 +951,7 @@
         <location filename="gui_divers/dialog_list.cpp" line="53"/>
         <source>Liste des échantillons</source>
         <oldsource>Liste des samples</oldsource>
-        <translation type="unfinished">Lista de muestras</translation>
+        <translation>Lista de muestras</translation>
     </message>
     <message>
         <location filename="gui_divers/dialog_list.cpp" line="58"/>
@@ -995,12 +993,12 @@
     <message utf8="true">
         <location filename="tools/dialog_mixture.ui" line="29"/>
         <source>Création mixture</source>
-        <translation>Creación de mezclas</translation>
+        <translation>Creación de mixturas</translation>
     </message>
     <message>
         <location filename="tools/dialog_mixture.ui" line="47"/>
         <source>Nom de la mixture :</source>
-        <translation>Nombre de la mezcla:</translation>
+        <translation>Nombre de la mixtura:</translation>
     </message>
     <message utf8="true">
         <location filename="tools/dialog_mixture.ui" line="57"/>
@@ -1216,7 +1214,7 @@
     <message utf8="true">
         <location filename="tools/dialog_release.ui" line="29"/>
         <source>Élaboration release</source>
-        <translation>Versión de desarrollo</translation>
+        <translation>Asignar valores de release</translation>
     </message>
     <message utf8="true">
         <location filename="tools/dialog_release.ui" line="61"/>
@@ -1245,7 +1243,7 @@
         <location filename="gui_divers/dialog_rename.ui" line="27"/>
         <source>Nom des échantillons (20 caractères au total) :</source>
         <oldsource>Nom des samples (20 caractères au total) :</oldsource>
-        <translation type="unfinished">Nombre de las muestras (20 caracteres en total):</translation>
+        <translation>Nombre de las muestras (20 caracteres en total):</translation>
     </message>
     <message utf8="true">
         <location filename="gui_divers/dialog_rename.ui" line="37"/>
@@ -1361,7 +1359,7 @@ instrumento actual</translation>
     <message utf8="true">
         <location filename="tools/dialog_space.ui" line="203"/>
         <source>Aléatoire</source>
-        <translation type="unfinished">Aleatorio</translation>
+        <translation>Aleatorio</translation>
     </message>
     <message>
         <location filename="tools/dialog_space.ui" line="188"/>
@@ -1417,7 +1415,7 @@ instrumento actual</translation>
     <message>
         <location filename="tools/dialog_space.cpp" line="348"/>
         <source>G</source>
-        <translation type="unfinished">I</translation>
+        <translation>I</translation>
     </message>
     <message>
         <location filename="tools/dialog_space.cpp" line="357"/>
@@ -1438,7 +1436,7 @@ instrumento actual</translation>
     <message utf8="true">
         <location filename="pages/page_smpl.cpp" line="1642"/>
         <source>Sélection multiple</source>
-        <translation type="unfinished">Selección múltiple</translation>
+        <translation>Selección múltiple</translation>
     </message>
 </context>
 <context>
@@ -1469,7 +1467,7 @@ instrumento actual</translation>
     <message>
         <location filename="mainwindow.ui" line="215"/>
         <source>&amp;Aide</source>
-        <translation type="unfinished">A&amp;yuda</translation>
+        <translation>A&amp;yuda</translation>
     </message>
     <message utf8="true">
         <location filename="mainwindow.ui" line="223"/>
@@ -1480,10 +1478,6 @@ instrumento actual</translation>
         <location filename="mainwindow.ui" line="238"/>
         <source>&amp;Outils</source>
         <translation>&amp;Herramientas</translation>
-    </message>
-    <message>
-        <source>&amp;Sample</source>
-        <translation type="obsolete">&amp;Muestra</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="261"/>
@@ -1682,7 +1676,7 @@ instrumento actual</translation>
         <location filename="mainwindow.ui" line="810"/>
         <source>Enlève les échantillons et instruments non utilisés</source>
         <oldsource>Enlève les samples et instruments non utilisés</oldsource>
-        <translation type="unfinished">Elimina las muestras e instrumentos no utilizados</translation>
+        <translation>Elimina las muestras e instrumentos no utilizados</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="822"/>
@@ -1744,7 +1738,7 @@ instrumento actual</translation>
         <location filename="mainwindow.ui" line="939"/>
         <source>&amp;Importer des échantillons...</source>
         <oldsource>&amp;Importer des sons...</oldsource>
-        <translation type="unfinished">&amp;Importar muestras...</translation>
+        <translation>&amp;Importar muestras...</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="942"/>
@@ -1755,7 +1749,7 @@ instrumento actual</translation>
         <location filename="mainwindow.ui" line="954"/>
         <source>E&amp;xporter des échantillons...</source>
         <oldsource>E&amp;xporter des sons...</oldsource>
-        <translation type="unfinished">E&amp;xportar las muestras...</translation>
+        <translation>E&amp;xportar las muestras...</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="957"/>
@@ -1791,18 +1785,18 @@ instrumento actual</translation>
         <location filename="mainwindow.ui" line="1002"/>
         <source>Enleve le blanc au début d&apos;un échantillon</source>
         <oldsource>Enleve le blanc au début d&apos;un sample</oldsource>
-        <translation type="unfinished">Elimina el silencio al inicio de una muestra</translation>
+        <translation>Elimina el silencio al inicio de una muestra</translation>
     </message>
     <message utf8="true">
         <location filename="mainwindow.ui" line="1014"/>
         <source>&amp;Ajuster à la fin de boucle</source>
-        <translation type="unfinished">Re&amp;cortar al final del loop</translation>
+        <translation>Re&amp;cortar al final del loop</translation>
     </message>
     <message utf8="true">
         <location filename="mainwindow.ui" line="1017"/>
         <source>Ajuste l&apos;échantillon à sa fin de boucle</source>
         <oldsource>Ajuste le sample à sa fin de boucle</oldsource>
-        <translation type="unfinished">Recorta la muestra al final del loop</translation>
+        <translation>Recorta la muestra al final del loop</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="1029"/>
@@ -1823,7 +1817,7 @@ instrumento actual</translation>
         <location filename="mainwindow.ui" line="1047"/>
         <source>Boucle automatiquement l&apos;échantillon</source>
         <oldsource>Boucle automatiquement le sample</oldsource>
-        <translation type="unfinished">Crear loop automáticamente con la muestra</translation>
+        <translation>Crear loop automáticamente con la muestra</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="1059"/>
@@ -1844,7 +1838,7 @@ instrumento actual</translation>
         <location filename="mainwindow.ui" line="1077"/>
         <source>Transpose l&apos;échantillon</source>
         <oldsource>Transpose le sample</oldsource>
-        <translation type="unfinished">Transportar la muestra</translation>
+        <translation>Transportar la muestra</translation>
     </message>
     <message utf8="true">
         <location filename="mainwindow.ui" line="1089"/>
@@ -1881,7 +1875,7 @@ instrumento actual</translation>
     <message utf8="true">
         <location filename="mainwindow.ui" line="1134"/>
         <source>&amp;Répartition automatique</source>
-        <translation>&amp;Distribución automática</translation>
+        <translation>D&amp;istribución automática</translation>
     </message>
     <message utf8="true">
         <location filename="mainwindow.ui" line="1137"/>
@@ -1893,12 +1887,12 @@ instrumento actual</translation>
         <location filename="mainwindow.ui" line="1274"/>
         <source>&amp;Duplication des divisions...</source>
         <oldsource>D&amp;uplication des divisions...</oldsource>
-        <translation type="unfinished">&amp;Duplicación de las divisiones...</translation>
+        <translation>&amp;Duplicación de las divisiones...</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="1152"/>
         <source>Duplication des divisions...</source>
-        <translation type="unfinished">Duplicación de las divisiones...</translation>
+        <translation>Duplicación de las divisiones...</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="1155"/>
@@ -1927,17 +1921,17 @@ instrumento actual</translation>
         <location filename="mainwindow.ui" line="1185"/>
         <source>Règle la balance de l&apos;échantillon</source>
         <oldsource>Règle la balance du sample</oldsource>
-        <translation type="unfinished">Ajusta el balance de la muestra</translation>
+        <translation>Ajusta el balance de la muestra</translation>
     </message>
     <message utf8="true">
         <location filename="mainwindow.ui" line="1197"/>
         <source>&amp;Création mixture...</source>
-        <translation>&amp;Creación de mezclas...</translation>
+        <translation>&amp;Creación de mixturas...</translation>
     </message>
     <message utf8="true">
         <location filename="mainwindow.ui" line="1200"/>
         <source>Crée une mixture</source>
-        <translation>Crear una mezcla</translation>
+        <translation>Crear una mixtura</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="1212"/>
@@ -1972,7 +1966,7 @@ instrumento actual</translation>
     <message>
         <location filename="mainwindow.ui" line="1394"/>
         <source>Exporter sound&amp;font...</source>
-        <translation type="unfinished">Exportar sound&amp;font...</translation>
+        <translation>Exportar sound&amp;font...</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="1397"/>
@@ -1982,24 +1976,24 @@ instrumento actual</translation>
     <message>
         <location filename="mainwindow.ui" line="1406"/>
         <source>I&amp;mporter soundfont...</source>
-        <translation type="unfinished">I&amp;mportar soundfont...</translation>
+        <translation>I&amp;mportar soundfont...</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="1409"/>
         <source>Importe une soundfont</source>
-        <translation type="unfinished">Importar una soundfont</translation>
+        <translation>Importar una soundfont</translation>
     </message>
     <message utf8="true">
         <location filename="mainwindow.ui" line="1421"/>
         <source>&amp;Dissocier les échantillons stéréo</source>
         <oldsource>&amp;Dissocier les samples stéréo</oldsource>
-        <translation type="unfinished">&amp;Dividirse las muestras estéreo</translation>
+        <translation>&amp;Dividir las muestras estéreo</translation>
     </message>
     <message utf8="true">
         <location filename="mainwindow.ui" line="1424"/>
         <source>Dissocie les échantillons stéréo</source>
         <oldsource>Dissocie les samples stéréo</oldsource>
-        <translation type="unfinished">Dividirse las muestras estéreo</translation>
+        <translation>Dividir las muestras estéreo</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="1248"/>
@@ -2009,7 +2003,7 @@ instrumento actual</translation>
     <message utf8="true">
         <location filename="mainwindow.ui" line="245"/>
         <source>&amp;Échantillon</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Muestra</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="1251"/>
@@ -2034,7 +2028,7 @@ instrumento actual</translation>
     <message utf8="true">
         <location filename="mainwindow.ui" line="1292"/>
         <source>&amp;Élaboration release...</source>
-        <translation type="unfinished">&amp;Versión de desarrollo...!!</translation>
+        <translation>Asignar valores de &amp;release...</translation>
     </message>
     <message utf8="true">
         <location filename="mainwindow.ui" line="1295"/>
@@ -2045,13 +2039,13 @@ instrumento actual</translation>
         <location filename="mainwindow.ui" line="1322"/>
         <source>&amp;Association auto échantillons</source>
         <oldsource>&amp;Association auto samples</oldsource>
-        <translation type="unfinished">&amp;Asociación automática de muestras</translation>
+        <translation>&amp;Asociación automática de muestras</translation>
     </message>
     <message utf8="true">
         <location filename="mainwindow.ui" line="1325"/>
         <source>Associe automatiquement les échantillons G/D</source>
         <oldsource>Associe automatiquement les samples G/D</oldsource>
-        <translation type="unfinished">Asociar automáticamente las muestras I/D</translation>
+        <translation>Asociar automáticamente las muestras L/R</translation>
     </message>
     <message utf8="true">
         <location filename="mainwindow.ui" line="1334"/>
@@ -2211,7 +2205,7 @@ Dividir el fichero en diferentes sf2 puede resolver el problema.</translation>
     <message utf8="true">
         <location filename="mainwindow.cpp" line="256"/>
         <source>Les fichiers suivants ont été modifiés :&lt;br/&gt; - </source>
-        <translation type="unfinished">Los siguientes ficheros se han modificado :&lt;br/&gt; - </translation>
+        <translation>Los siguientes ficheros se han modificado:&lt;br/&gt; - </translation>
     </message>
     <message utf8="true">
         <location filename="mainwindow.cpp" line="261"/>
@@ -2223,17 +2217,17 @@ Dividir el fichero en diferentes sf2 puede resolver el problema.</translation>
         <location filename="mainwindow.cpp" line="261"/>
         <location filename="mainwindow.cpp" line="407"/>
         <source> » a été modifié.</source>
-        <translation type="unfinished"></translation>
+        <translation> » ha sido modificado.</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="357"/>
         <source>Format inconnu.</source>
-        <translation type="unfinished">Formato desconocido.</translation>
+        <translation>Formato desconocido.</translation>
     </message>
     <message utf8="true">
         <location filename="mainwindow.cpp" line="361"/>
         <source>Le fichier est déjà chargé.</source>
-        <translation type="unfinished">Ya se ha cargado el archivo.</translation>
+        <translation>Ya se ha cargado el archivo.</translation>
     </message>
     <message utf8="true">
         <location filename="mainwindow.cpp" line="477"/>
@@ -2248,7 +2242,7 @@ Dividir el fichero en diferentes sf2 puede resolver el problema.</translation>
     <message utf8="true">
         <location filename="mainwindow.cpp" line="546"/>
         <source>Fichier déjà ouvert, impossible de sauvegarder.</source>
-        <translation type="unfinished"></translation>
+        <translation>No se puede guardar, el archivo todavía está abierto.</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="549"/>
@@ -2261,13 +2255,9 @@ Dividir el fichero en diferentes sf2 puede resolver el problema.</translation>
         <translation>&amp;Renombrado masivo</translation>
     </message>
     <message utf8="true">
-        <source>Le sample « </source>
-        <translation type="obsolete">La muestra « </translation>
-    </message>
-    <message utf8="true">
         <location filename="mainwindow.cpp" line="1278"/>
         <source>L » existe déjà.&lt;br /&gt;Que faire ?</source>
-        <translation>I » ya existe.&lt;br /&gt;¿Qué hacer?</translation>
+        <translation>L » ya existe.&lt;br /&gt;¿Qué hacer?</translation>
     </message>
     <message utf8="true">
         <location filename="mainwindow.cpp" line="1284"/>
@@ -2282,12 +2272,12 @@ Dividir el fichero en diferentes sf2 puede resolver el problema.</translation>
     <message utf8="true">
         <location filename="mainwindow.cpp" line="1979"/>
         <source> échantillon et </source>
-        <translation type="unfinished"></translation>
+        <translation> muestra y </translation>
     </message>
     <message utf8="true">
         <location filename="mainwindow.cpp" line="1981"/>
         <source> échantillons et </source>
-        <translation type="unfinished"></translation>
+        <translation> muestras y </translation>
     </message>
     <message utf8="true">
         <location filename="mainwindow.cpp" line="1997"/>
@@ -2299,6 +2289,11 @@ Dividir el fichero en diferentes sf2 puede resolver el problema.</translation>
         <location filename="mainwindow.cpp" line="1996"/>
         <source>Question</source>
         <translation>Pregunta</translation>
+    </message>
+    <message utf8="true">
+        <location filename="mainwindow.cpp" line="1101"/>
+        <source>Nom de l&apos;échantillon (max 20 caractères) :</source>
+        <translation>Nombre de la muestra (20 caracteres en total):</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1307"/>
@@ -2341,12 +2336,6 @@ Dividir el fichero en diferentes sf2 puede resolver el problema.</translation>
         <translation>Importar un archivo de audio</translation>
     </message>
     <message utf8="true">
-        <location filename="mainwindow.cpp" line="1101"/>
-        <source>Nom de l&apos;échantillon (max 20 caractères) :</source>
-        <oldsource>Nom du sample (max 20 caractères) :</oldsource>
-        <translation type="unfinished">Nombre de la muestra (max 20 caracteres):</translation>
-    </message>
-    <message utf8="true">
         <location filename="mainwindow.cpp" line="1102"/>
         <source>Nom de l&apos;instrument (max 20 caractères) :</source>
         <translation>Nombre del instrumento (max 20 caracteres):</translation>
@@ -2371,7 +2360,7 @@ Dividir el fichero en diferentes sf2 puede resolver el problema.</translation>
         <location filename="mainwindow.cpp" line="1283"/>
         <location filename="mainwindow.cpp" line="1292"/>
         <source>L&apos;échantillon « </source>
-        <translation type="unfinished"></translation>
+        <translation>La muestra « </translation>
     </message>
     <message utf8="true">
         <location filename="mainwindow.cpp" line="1422"/>
@@ -2398,11 +2387,6 @@ Dividir el fichero en diferentes sf2 puede resolver el problema.</translation>
         <source>Nom du nouveau preset :</source>
         <translation>Nombre del nuevo preset:</translation>
     </message>
-    <message>
-        <source> samples et </source>
-        <oldsource> samples and </oldsource>
-        <translation type="obsolete"> muestras y </translation>
-    </message>
     <message utf8="true">
         <location filename="mainwindow.cpp" line="1983"/>
         <source> instrument ont été supprimés.</source>
@@ -2412,11 +2396,6 @@ Dividir el fichero en diferentes sf2 puede resolver el problema.</translation>
         <location filename="mainwindow.cpp" line="1985"/>
         <source> instruments ont été supprimés.</source>
         <translation> instrumentos han sido eliminados.</translation>
-    </message>
-    <message>
-        <source> sample et </source>
-        <oldsource> sample and </oldsource>
-        <translation type="obsolete"> muestra y </translation>
     </message>
 </context>
 <context>
@@ -2431,15 +2410,13 @@ Dividir el fichero en diferentes sf2 puede resolver el problema.</translation>
         <location filename="pages/page.cpp" line="294"/>
         <location filename="pages/page.cpp" line="574"/>
         <source>Offset début échantillon</source>
-        <oldsource>Offset début sample</oldsource>
-        <translation type="unfinished">Desfase de inicio de muestra</translation>
+        <translation>Desfase de inicio de muestra</translation>
     </message>
     <message utf8="true">
         <location filename="pages/page.cpp" line="270"/>
         <location filename="pages/page.cpp" line="358"/>
         <source>Offset fin échantillon</source>
-        <oldsource>Offset fin sample</oldsource>
-        <translation type="unfinished">Desfase de fin de muestra</translation>
+        <translation>Desfase de fin de muestra</translation>
     </message>
     <message utf8="true">
         <location filename="pages/page.cpp" line="278"/>
@@ -3054,13 +3031,13 @@ Dividir el fichero en diferentes sf2 puede resolver el problema.</translation>
         <location filename="pages/page_inst.ui" line="377"/>
         <source>Offset début échantillon</source>
         <oldsource>Offset début sample</oldsource>
-        <translation type="unfinished">Desfase de inicio de muestra</translation>
+        <translation>Desfase de inicio de muestra</translation>
     </message>
     <message utf8="true">
         <location filename="pages/page_inst.ui" line="382"/>
         <source>Offset fin échantillon</source>
         <oldsource>Offset fin sample</oldsource>
-        <translation type="unfinished">Desfase de fin de muestra</translation>
+        <translation>Desfase de fin de muestra</translation>
     </message>
     <message utf8="true">
         <location filename="pages/page_inst.ui" line="387"/>
@@ -3182,7 +3159,7 @@ Dividir el fichero en diferentes sf2 puede resolver el problema.</translation>
     <message>
         <location filename="pages/page_prst.ui" line="159"/>
         <source>(percussion)</source>
-        <translation type="unfinished">(percusión)</translation>
+        <translation>(percusión)</translation>
     </message>
     <message>
         <location filename="pages/page_prst.ui" line="230"/>
@@ -3458,14 +3435,10 @@ Dividir el fichero en diferentes sf2 puede resolver el problema.</translation>
         <source>Produit</source>
         <translation>Producto</translation>
     </message>
-    <message>
-        <source>Samples</source>
-        <translation type="obsolete">Muestras</translation>
-    </message>
     <message utf8="true">
         <location filename="pages/page_sf2.ui" line="135"/>
         <source>Échantillons</source>
-        <translation type="unfinished"></translation>
+        <translation>Muestras</translation>
     </message>
     <message>
         <location filename="pages/page_sf2.ui" line="142"/>
@@ -3486,7 +3459,7 @@ Dividir el fichero en diferentes sf2 puede resolver el problema.</translation>
         <location filename="pages/page_sf2.ui" line="227"/>
         <source>Nombre d&apos;échantillons</source>
         <oldsource>Nombre de samples</oldsource>
-        <translation type="unfinished">Número de muestras</translation>
+        <translation>Número de muestras</translation>
     </message>
     <message utf8="true">
         <location filename="pages/page_sf2.ui" line="234"/>
@@ -3658,22 +3631,9 @@ Dividir el fichero en diferentes sf2 puede resolver el problema.</translation>
         <translation>enlace</translation>
     </message>
     <message utf8="true">
-        <location filename="pages/page_smpl.cpp" line="308"/>
-        <source>&lt;b&gt;Échantillon lié à aucun instrument.&lt;/b&gt;</source>
-        <oldsource>&lt;b&gt;Sample lié à aucun instrument.&lt;/b&gt;</oldsource>
-        <translation type="unfinished">&lt;b&gt;Muestra no ligada a ningún instrumento.&lt;/b&gt;</translation>
-    </message>
-    <message utf8="true">
-        <location filename="pages/page_smpl.cpp" line="310"/>
-        <source>&lt;b&gt;Échantillon lié à l&apos;instrument : &lt;/b&gt;</source>
-        <oldsource>&lt;b&gt;Sample lié à l&apos;instrument : &lt;/b&gt;</oldsource>
-        <translation type="unfinished">&lt;b&gt;Muestra ligada al instrumento: &lt;/b&gt;</translation>
-    </message>
-    <message utf8="true">
-        <location filename="pages/page_smpl.cpp" line="312"/>
-        <source>&lt;b&gt;Échantillon lié aux instruments : &lt;/b&gt;</source>
-        <oldsource>&lt;b&gt;Sample lié aux instruments : &lt;/b&gt;</oldsource>
-        <translation type="unfinished">&lt;b&gt;Muestra ligada a los instrumentos: &lt;/b&gt;</translation>
+        <location filename="pages/page_smpl.cpp" line="1480"/>
+        <source>Arrêt</source>
+        <translation>Parada</translation>
     </message>
     <message utf8="true">
         <location filename="pages/page_smpl.cpp" line="1089"/>
@@ -3684,12 +3644,6 @@ Dividir el fichero en diferentes sf2 puede resolver el problema.</translation>
         <location filename="pages/page_smpl.cpp" line="1318"/>
         <source>Écart en demi-tons :</source>
         <translation>Cantidad en semitonos:</translation>
-    </message>
-    <message utf8="true">
-        <location filename="pages/page_smpl.cpp" line="1480"/>
-        <source>Arrêt</source>
-        <oldsource>arrêt</oldsource>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="pages/page_smpl.cpp" line="829"/>
@@ -3702,6 +3656,21 @@ Dividir el fichero en diferentes sf2 puede resolver el problema.</translation>
         <location filename="pages/page_smpl.cpp" line="1340"/>
         <source>Traitement </source>
         <translation>Procesando </translation>
+    </message>
+    <message utf8="true">
+        <location filename="pages/page_smpl.cpp" line="308"/>
+        <source>&lt;b&gt;Échantillon lié à aucun instrument.&lt;/b&gt;</source>
+        <translation>&lt;b&gt;Muestra no ligada a ningún instrumento.&lt;/b&gt;</translation>
+    </message>
+    <message utf8="true">
+        <location filename="pages/page_smpl.cpp" line="310"/>
+        <source>&lt;b&gt;Échantillon lié à l&apos;instrument : &lt;/b&gt;</source>
+        <translation>&lt;b&gt;Muestra ligada al instrumento: &lt;/b&gt;</translation>
+    </message>
+    <message utf8="true">
+        <location filename="pages/page_smpl.cpp" line="312"/>
+        <source>&lt;b&gt;Échantillon lié aux instruments : &lt;/b&gt;</source>
+        <translation>&lt;b&gt;Muestra ligada a los instrumentos: &lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="pages/page_smpl.cpp" line="830"/>
@@ -3739,32 +3708,27 @@ Dividir el fichero en diferentes sf2 puede resolver el problema.</translation>
     <message utf8="true">
         <location filename="sf2_core/duplicator.cpp" line="245"/>
         <source>&lt;b&gt;Des paramètres globaux sont déjà renseignés.&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Los parámetros globales ya han sido asignados.&lt;/b&gt;</translation>
     </message>
     <message utf8="true">
         <location filename="sf2_core/duplicator.cpp" line="246"/>
         <source>La division globale ne sera pas recopiée.</source>
-        <translation type="unfinished"></translation>
+        <translation>La división global no se copiará.</translation>
     </message>
     <message>
         <location filename="sf2_core/duplicator.cpp" line="248"/>
         <source>&amp;Ok</source>
-        <translation type="unfinished">&amp;Ok</translation>
+        <translation>&amp;Ok</translation>
     </message>
     <message utf8="true">
         <location filename="sf2_core/duplicator.cpp" line="249"/>
         <source>Ok, &amp;désactiver ce message</source>
-        <translation type="unfinished">Ok, &amp;desactivar este mensaje</translation>
-    </message>
-    <message utf8="true">
-        <source>Le sample « </source>
-        <translation type="obsolete">La muestra « </translation>
+        <translation>Ok, &amp;desactivar este mensaje</translation>
     </message>
     <message utf8="true">
         <location filename="sf2_core/duplicator.cpp" line="284"/>
         <source>L&apos;échantillon « </source>
-        <oldsource>l&apos;échantillon « </oldsource>
-        <translation type="unfinished"></translation>
+        <translation>La muestra « </translation>
     </message>
     <message utf8="true">
         <location filename="sf2_core/duplicator.cpp" line="285"/>
@@ -3809,46 +3773,42 @@ Dividir el fichero en diferentes sf2 puede resolver el problema.</translation>
     <message>
         <location filename="sf2_core/duplicator.cpp" line="542"/>
         <source>Aucun preset n&apos;est disponible.</source>
-        <translation type="unfinished">No hay presets disponibles.</translation>
+        <translation>No hay presets disponibles.</translation>
     </message>
     <message>
         <location filename="sf2_core/duplicator.cpp" line="749"/>
         <source>&amp;Remplacer</source>
-        <translation type="unfinished">&amp;Reemplazar</translation>
+        <translation>&amp;Reemplazar</translation>
     </message>
     <message>
         <location filename="sf2_core/duplicator.cpp" line="750"/>
         <source>R&amp;emplacer tout</source>
-        <translation type="unfinished">R&amp;eemplazar todo</translation>
+        <translation>R&amp;eemplazar todo</translation>
     </message>
     <message>
         <location filename="sf2_core/duplicator.cpp" line="751"/>
         <source>&amp;Dupliquer</source>
-        <translation type="unfinished">&amp;Duplicar</translation>
+        <translation>&amp;Duplicar</translation>
     </message>
     <message>
         <location filename="sf2_core/duplicator.cpp" line="752"/>
         <source>D&amp;upliquer tout</source>
-        <translation type="unfinished">D&amp;uplicar todo</translation>
+        <translation>D&amp;uplicar todo</translation>
     </message>
     <message>
         <location filename="sf2_core/duplicator.cpp" line="753"/>
         <source>&amp;Ignorer</source>
-        <translation type="unfinished">&amp;Ignorar</translation>
+        <translation>&amp;Ignorar</translation>
     </message>
     <message>
         <location filename="sf2_core/duplicator.cpp" line="754"/>
         <source>I&amp;gnorer tout</source>
-        <translation type="unfinished">I&amp;gnorar todo</translation>
-    </message>
-    <message>
-        <source>Samples</source>
-        <translation type="obsolete">Muestras</translation>
+        <translation>I&amp;gnorar todo</translation>
     </message>
     <message utf8="true">
         <location filename="sf2_core/pile_sf2.cpp" line="930"/>
         <source>Échantillons</source>
-        <translation type="unfinished"></translation>
+        <translation>Muestras</translation>
     </message>
     <message>
         <location filename="sf2_core/pile_sf2.cpp" line="938"/>
@@ -3863,8 +3823,7 @@ Dividir el fichero en diferentes sf2 puede resolver el problema.</translation>
     <message utf8="true">
         <location filename="sf2_core/pile_sf2.cpp" line="1299"/>
         <source>Impossible de supprimer un échantillon s&apos;il est utilisé par un instrument.</source>
-        <oldsource>Impossible de supprimer un sample s&apos;il est utilisé par un instrument.</oldsource>
-        <translation type="unfinished">No se puede eliminar una muestra si ésta está siendo utilizada por un instrumento.</translation>
+        <translation>No se puede eliminar una muestra si ésta está siendo utilizada por un instrumento.</translation>
     </message>
     <message utf8="true">
         <location filename="sf2_core/pile_sf2.cpp" line="1388"/>
@@ -3875,7 +3834,7 @@ Dividir el fichero en diferentes sf2 puede resolver el problema.</translation>
         <location filename="sf2_core/pile_sf2_sl.cpp" line="285"/>
         <source>Fichier corrompu : utilisation des échantillons en qualité 16 bits.</source>
         <oldsource>Fichier corrompu : utilisation des samples en qualité 16 bits.</oldsource>
-        <translation type="unfinished">Archivo corrupto: utilización de muestras en calidad 16 bits.</translation>
+        <translation>Archivo corrupto: utilización de muestras en calidad 16 bits.</translation>
     </message>
     <message>
         <location filename="sf2_core/sound.cpp" line="102"/>
@@ -3948,92 +3907,92 @@ Dividir el fichero en diferentes sf2 puede resolver el problema.</translation>
         <location filename="tools/conversion_sfz.cpp" line="543"/>
         <location filename="tools/conversion_sfz.cpp" line="585"/>
         <source>autre</source>
-        <translation type="unfinished"></translation>
+        <translation>otro</translation>
     </message>
     <message>
         <location filename="tools/conversion_sfz.cpp" line="546"/>
         <source>Piano</source>
-        <translation type="unfinished"></translation>
+        <translation>Piano</translation>
     </message>
     <message>
         <location filename="tools/conversion_sfz.cpp" line="548"/>
         <source>Percussions chromatiques</source>
-        <translation type="unfinished"></translation>
+        <translation>Percusión cromática</translation>
     </message>
     <message>
         <location filename="tools/conversion_sfz.cpp" line="550"/>
         <source>Orgues</source>
-        <translation type="unfinished"></translation>
+        <translation>Órganos</translation>
     </message>
     <message>
         <location filename="tools/conversion_sfz.cpp" line="552"/>
         <source>Guitares</source>
-        <translation type="unfinished"></translation>
+        <translation>Guitarras</translation>
     </message>
     <message>
         <location filename="tools/conversion_sfz.cpp" line="554"/>
         <source>Basses</source>
-        <translation type="unfinished"></translation>
+        <translation>Bajos</translation>
     </message>
     <message>
         <location filename="tools/conversion_sfz.cpp" line="556"/>
         <source>Cordes</source>
-        <translation type="unfinished"></translation>
+        <translation>Cuerdas</translation>
     </message>
     <message>
         <location filename="tools/conversion_sfz.cpp" line="558"/>
         <source>Orchestre</source>
-        <translation type="unfinished"></translation>
+        <translation>Orquesta</translation>
     </message>
     <message>
         <location filename="tools/conversion_sfz.cpp" line="560"/>
         <source>Cuivres</source>
-        <translation type="unfinished"></translation>
+        <translation>Viento metal</translation>
     </message>
     <message utf8="true">
         <location filename="tools/conversion_sfz.cpp" line="562"/>
         <source>Instrument à anches</source>
-        <translation type="unfinished"></translation>
+        <translation>Viento madera</translation>
     </message>
     <message utf8="true">
         <location filename="tools/conversion_sfz.cpp" line="564"/>
         <source>Flûtes</source>
-        <translation type="unfinished"></translation>
+        <translation>Flautas</translation>
     </message>
     <message utf8="true">
         <location filename="tools/conversion_sfz.cpp" line="566"/>
         <source>Synthétiseur solo</source>
-        <translation type="unfinished"></translation>
+        <translation>Sintetizador lead</translation>
     </message>
     <message utf8="true">
         <location filename="tools/conversion_sfz.cpp" line="568"/>
         <source>Nappes de synthétiseur</source>
-        <translation type="unfinished"></translation>
+        <translation>Pads</translation>
     </message>
     <message utf8="true">
         <location filename="tools/conversion_sfz.cpp" line="570"/>
         <source>Effets de synthétiseur</source>
-        <translation type="unfinished"></translation>
+        <translation>Efectos de sintetizador</translation>
     </message>
     <message>
         <location filename="tools/conversion_sfz.cpp" line="572"/>
         <source>Instruments ethniques</source>
-        <translation type="unfinished"></translation>
+        <translation>Instrumentos étnicos</translation>
     </message>
     <message>
         <location filename="tools/conversion_sfz.cpp" line="574"/>
         <source>Percussions</source>
-        <translation type="unfinished"></translation>
+        <translation>Percusiones</translation>
     </message>
     <message>
         <location filename="tools/conversion_sfz.cpp" line="576"/>
         <source>Effets sonores</source>
-        <translation type="unfinished"></translation>
+        <translation>Effectos de sonido</translation>
     </message>
     <message>
         <location filename="tools/conversion_sfz.cpp" line="578"/>
         <source>Kits de percussion</source>
-        <translation type="unfinished"></translation>
+        <translation>Kits de percusión</translation>
     </message>
     <message utf8="true">
         <location filename="gui_divers/dialog_about.cpp" line="97"/>
@@ -4053,7 +4012,7 @@ Dividir el fichero en diferentes sf2 puede resolver el problema.</translation>
     <message>
         <location filename="tools/import_sfz.cpp" line="130"/>
         <source>Import sfz</source>
-        <translation type="unfinished"></translation>
+        <translation>Importar sfz</translation>
     </message>
 </context>
 <context>
@@ -4131,14 +4090,10 @@ Dividir el fichero en diferentes sf2 puede resolver el problema.</translation>
 </context>
 <context>
     <name>Tree</name>
-    <message>
-        <source>Nouveau sample...</source>
-        <translation type="obsolete">Nueva muestra...</translation>
-    </message>
     <message utf8="true">
         <location filename="sf2_core/tree.cpp" line="50"/>
         <source>Nouvel échantillon...</source>
-        <translation type="unfinished"></translation>
+        <translation>Nueva muestra...</translation>
     </message>
     <message>
         <location filename="sf2_core/tree.cpp" line="53"/>

@@ -87,6 +87,7 @@ void DialogHelp::createUi()
     layout2->addLayout(layout3);
     _textBrowser = new QTextBrowser();
     layout2->addWidget(_textBrowser);
+    _textBrowser->setOpenExternalLinks(true);
 
     // Connexions
     connect(_tree, SIGNAL(currentItemChanged(QTreeWidgetItem*,QTreeWidgetItem*)),

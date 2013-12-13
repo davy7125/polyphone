@@ -76,6 +76,7 @@
         <file alias="folder">ressources/folder.png</file>
         <file alias="import">ressources/import.png</file>
         <file alias="unlink">ressources/unlink.png</file>
+        <file alias="external_link.gif">ressources/external_link.gif</file>
     </qresource>
     <qresource prefix="/aide">
         <file alias="page0.png">ressources/doc/page 0.png</file>
