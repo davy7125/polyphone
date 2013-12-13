@@ -193,7 +193,7 @@
     <message>
         <location filename="gui_divers/config.ui" line="93"/>
         <source>Import fichiers wav</source>
-        <translation>Wav files import</translation>
+        <translation>Wav file import</translation>
     </message>
     <message>
         <location filename="gui_divers/config.ui" line="1292"/>
@@ -636,331 +636,319 @@
 <context>
     <name>DialogHelp</name>
     <message>
-        <location filename="gui_divers/dialog_help.cpp" line="100"/>
+        <location filename="gui_divers/dialog_help.cpp" line="101"/>
         <source>aide</source>
         <translation>Help</translation>
     </message>
     <message utf8="true">
-        <location filename="gui_divers/dialog_help.cpp" line="106"/>
+        <location filename="gui_divers/dialog_help.cpp" line="107"/>
         <source>Présentation du logiciel</source>
         <translation>Software presentation</translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_help.cpp" line="108"/>
+        <location filename="gui_divers/dialog_help.cpp" line="109"/>
         <source>Barre de menu</source>
         <translation>Menubar</translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_help.cpp" line="109"/>
+        <location filename="gui_divers/dialog_help.cpp" line="110"/>
         <source>Fichier</source>
         <translation>File</translation>
     </message>
     <message utf8="true">
-        <location filename="gui_divers/dialog_help.cpp" line="110"/>
+        <location filename="gui_divers/dialog_help.cpp" line="111"/>
         <source>Édition</source>
         <translation>Edit</translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_help.cpp" line="111"/>
-        <location filename="gui_divers/dialog_help.cpp" line="140"/>
+        <location filename="gui_divers/dialog_help.cpp" line="112"/>
+        <location filename="gui_divers/dialog_help.cpp" line="141"/>
         <source>Outils</source>
         <translation>Tools</translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_help.cpp" line="112"/>
+        <location filename="gui_divers/dialog_help.cpp" line="113"/>
         <source>Affichage</source>
         <translation>View</translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_help.cpp" line="113"/>
+        <location filename="gui_divers/dialog_help.cpp" line="114"/>
         <source>Aide</source>
         <translation>Help</translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_help.cpp" line="115"/>
-        <location filename="gui_divers/dialog_help.cpp" line="179"/>
+        <location filename="gui_divers/dialog_help.cpp" line="116"/>
+        <location filename="gui_divers/dialog_help.cpp" line="180"/>
         <source>Barre d&apos;outils</source>
         <translation>Toolbar</translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_help.cpp" line="116"/>
+        <location filename="gui_divers/dialog_help.cpp" line="117"/>
         <source>Raccourcis</source>
         <translation>Shortcuts</translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_help.cpp" line="117"/>
+        <location filename="gui_divers/dialog_help.cpp" line="118"/>
         <source>Clavier virtuel</source>
         <translation>Virtual keyboard</translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_help.cpp" line="119"/>
+        <location filename="gui_divers/dialog_help.cpp" line="120"/>
         <source>Arborescence</source>
         <translation>Tree</translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_help.cpp" line="120"/>
+        <location filename="gui_divers/dialog_help.cpp" line="121"/>
         <source>Structure</source>
         <translation>Structure</translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_help.cpp" line="121"/>
+        <location filename="gui_divers/dialog_help.cpp" line="122"/>
         <source>Menu contextuel</source>
         <translation>Context menu</translation>
     </message>
     <message utf8="true">
-        <location filename="gui_divers/dialog_help.cpp" line="122"/>
+        <location filename="gui_divers/dialog_help.cpp" line="123"/>
         <source>Glisser / déposer</source>
         <translation>Drag &amp; drop</translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_help.cpp" line="123"/>
+        <location filename="gui_divers/dialog_help.cpp" line="124"/>
         <source>Recherche</source>
         <translation>Search</translation>
     </message>
     <message utf8="true">
-        <location filename="gui_divers/dialog_help.cpp" line="125"/>
+        <location filename="gui_divers/dialog_help.cpp" line="126"/>
         <source>Pages d&apos;édition</source>
-        <translation>Edit pages</translation>
+        <translation>Editing pages</translation>
     </message>
     <message utf8="true">
-        <location filename="gui_divers/dialog_help.cpp" line="126"/>
+        <location filename="gui_divers/dialog_help.cpp" line="127"/>
         <source>Informations générales</source>
         <translation>Global information</translation>
     </message>
     <message utf8="true">
-        <source>Éditables</source>
-        <translation type="obsolete">Editable</translation>
-    </message>
-    <message utf8="true">
-        <source>Non-éditables</source>
-        <translation type="obsolete">Non-editable</translation>
-    </message>
-    <message utf8="true">
-        <location filename="gui_divers/dialog_help.cpp" line="127"/>
+        <location filename="gui_divers/dialog_help.cpp" line="128"/>
         <source>Zone d&apos;édition</source>
-        <translation>Edit area</translation>
+        <translation>Editing area</translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_help.cpp" line="128"/>
+        <location filename="gui_divers/dialog_help.cpp" line="129"/>
         <source>Zone d&apos;informations</source>
-        <translation>Information area</translation>
+        <translation>Informative area</translation>
     </message>
     <message utf8="true">
-        <location filename="gui_divers/dialog_help.cpp" line="129"/>
-        <location filename="gui_divers/dialog_help.cpp" line="141"/>
+        <location filename="gui_divers/dialog_help.cpp" line="130"/>
+        <location filename="gui_divers/dialog_help.cpp" line="142"/>
         <source>Échantillons</source>
         <translation>Samples</translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_help.cpp" line="130"/>
-        <location filename="gui_divers/dialog_help.cpp" line="178"/>
+        <location filename="gui_divers/dialog_help.cpp" line="131"/>
+        <location filename="gui_divers/dialog_help.cpp" line="179"/>
         <source>Graphique</source>
         <translation>Graph</translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_help.cpp" line="131"/>
+        <location filename="gui_divers/dialog_help.cpp" line="132"/>
         <source>Informations</source>
         <translation>Information</translation>
     </message>
     <message utf8="true">
-        <location filename="gui_divers/dialog_help.cpp" line="132"/>
+        <location filename="gui_divers/dialog_help.cpp" line="133"/>
         <source>Fréquences</source>
         <translation>Frequency</translation>
     </message>
     <message utf8="true">
-        <location filename="gui_divers/dialog_help.cpp" line="133"/>
+        <location filename="gui_divers/dialog_help.cpp" line="134"/>
         <source>Égaliseur</source>
         <translation>Equalizer</translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_help.cpp" line="134"/>
+        <location filename="gui_divers/dialog_help.cpp" line="135"/>
         <source>Lecteur</source>
-        <translation>Playback</translation>
+        <translation>Player</translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_help.cpp" line="135"/>
-        <location filename="gui_divers/dialog_help.cpp" line="151"/>
+        <location filename="gui_divers/dialog_help.cpp" line="136"/>
+        <location filename="gui_divers/dialog_help.cpp" line="152"/>
         <source>Instruments</source>
         <translation>Instruments</translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_help.cpp" line="136"/>
+        <location filename="gui_divers/dialog_help.cpp" line="137"/>
         <source>Tableau</source>
         <translation>Table</translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_help.cpp" line="137"/>
+        <location filename="gui_divers/dialog_help.cpp" line="138"/>
         <source>Section modulateur</source>
         <translation>Modulator section</translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_help.cpp" line="138"/>
-        <location filename="gui_divers/dialog_help.cpp" line="161"/>
+        <location filename="gui_divers/dialog_help.cpp" line="139"/>
+        <location filename="gui_divers/dialog_help.cpp" line="162"/>
         <source>Presets</source>
         <translation>Presets</translation>
     </message>
     <message utf8="true">
-        <location filename="gui_divers/dialog_help.cpp" line="142"/>
+        <location filename="gui_divers/dialog_help.cpp" line="143"/>
         <source>Ajuster à la fin de boucle</source>
-        <translation>Trim to end loop</translation>
+        <translation>Trim to end of loop</translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_help.cpp" line="143"/>
+        <location filename="gui_divers/dialog_help.cpp" line="144"/>
         <source>Bouclage automatique</source>
         <translation>Auto loop</translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_help.cpp" line="144"/>
+        <location filename="gui_divers/dialog_help.cpp" line="145"/>
         <source>Diminuer sifflements</source>
         <translation>Decrease whistling</translation>
     </message>
     <message utf8="true">
-        <location filename="gui_divers/dialog_help.cpp" line="145"/>
+        <location filename="gui_divers/dialog_help.cpp" line="146"/>
         <source>Enlever blanc au départ</source>
         <translation>Remove blank at start</translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_help.cpp" line="146"/>
+        <location filename="gui_divers/dialog_help.cpp" line="147"/>
         <source>Filtre &quot;mur de brique&quot;</source>
         <translation>brick-wall filter</translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_help.cpp" line="147"/>
+        <location filename="gui_divers/dialog_help.cpp" line="148"/>
         <source>Normaliser volume</source>
         <translation>Normalize volume</translation>
     </message>
     <message utf8="true">
-        <location filename="gui_divers/dialog_help.cpp" line="148"/>
+        <location filename="gui_divers/dialog_help.cpp" line="149"/>
         <source>Réglage balance</source>
         <translation>Balance adjustment</translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_help.cpp" line="149"/>
+        <location filename="gui_divers/dialog_help.cpp" line="150"/>
         <source>Transposer</source>
         <translation>Transpose</translation>
     </message>
     <message utf8="true">
-        <location filename="gui_divers/dialog_help.cpp" line="152"/>
+        <location filename="gui_divers/dialog_help.cpp" line="153"/>
         <source>Création mixture</source>
         <translation>Mixture creation</translation>
     </message>
     <message utf8="true">
-        <location filename="gui_divers/dialog_help.cpp" line="153"/>
+        <location filename="gui_divers/dialog_help.cpp" line="154"/>
         <source>Accordage céleste</source>
         <translation>Celeste tuning</translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_help.cpp" line="154"/>
-        <location filename="gui_divers/dialog_help.cpp" line="162"/>
+        <location filename="gui_divers/dialog_help.cpp" line="155"/>
+        <location filename="gui_divers/dialog_help.cpp" line="163"/>
         <source>Duplication des divisions</source>
         <translation>Division duplication</translation>
     </message>
     <message utf8="true">
-        <location filename="gui_divers/dialog_help.cpp" line="155"/>
+        <location filename="gui_divers/dialog_help.cpp" line="156"/>
         <source>Élaboration release</source>
         <translation>Release maker</translation>
     </message>
     <message utf8="true">
-        <location filename="gui_divers/dialog_help.cpp" line="156"/>
-        <location filename="gui_divers/dialog_help.cpp" line="163"/>
+        <location filename="gui_divers/dialog_help.cpp" line="157"/>
+        <location filename="gui_divers/dialog_help.cpp" line="164"/>
         <source>Paramétrage global</source>
         <translation>Global setting</translation>
     </message>
     <message utf8="true">
-        <location filename="gui_divers/dialog_help.cpp" line="157"/>
-        <source>Répartition automatique</source>
-        <translation>Automatic divisioning</translation>
-    </message>
-    <message>
         <location filename="gui_divers/dialog_help.cpp" line="158"/>
-        <location filename="gui_divers/dialog_help.cpp" line="164"/>
-        <source>Spatialisation du son</source>
-        <translation>Sound spatialization</translation>
+        <source>Répartition automatique</source>
+        <translation>Automatic distribution</translation>
     </message>
     <message>
         <location filename="gui_divers/dialog_help.cpp" line="159"/>
         <location filename="gui_divers/dialog_help.cpp" line="165"/>
+        <source>Spatialisation du son</source>
+        <translation>Sound spatialization</translation>
+    </message>
+    <message>
+        <location filename="gui_divers/dialog_help.cpp" line="160"/>
+        <location filename="gui_divers/dialog_help.cpp" line="166"/>
         <source>Visualiseur</source>
         <translation>Visualizer</translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_help.cpp" line="167"/>
+        <location filename="gui_divers/dialog_help.cpp" line="168"/>
         <source>Globaux</source>
         <translation>Global</translation>
     </message>
     <message utf8="true">
-        <location filename="gui_divers/dialog_help.cpp" line="168"/>
+        <location filename="gui_divers/dialog_help.cpp" line="169"/>
         <source>Association auto échantillons</source>
         <translation>Automatic divisioning</translation>
     </message>
     <message utf8="true">
         <location filename="gui_divers/dialog_help.cpp" line="170"/>
+        <source>Dissocier les échantillons stéréo</source>
+        <translation>Split all stereo samples</translation>
+    </message>
+    <message utf8="true">
+        <location filename="gui_divers/dialog_help.cpp" line="171"/>
         <source>Enlever les éléments non utilisés</source>
         <translation>Remove unused elements</translation>
     </message>
     <message utf8="true">
-        <location filename="gui_divers/dialog_help.cpp" line="171"/>
+        <location filename="gui_divers/dialog_help.cpp" line="172"/>
         <source>Régler atténuation minimale</source>
         <translation>Adjust the minimum attenuation</translation>
     </message>
     <message utf8="true">
-        <location filename="gui_divers/dialog_help.cpp" line="173"/>
+        <location filename="gui_divers/dialog_help.cpp" line="174"/>
         <source>Magnétophone</source>
         <translation>Recorder</translation>
     </message>
     <message utf8="true">
-        <location filename="gui_divers/dialog_help.cpp" line="175"/>
+        <location filename="gui_divers/dialog_help.cpp" line="176"/>
         <source>Préférences du logiciel</source>
-        <translation>Settings</translation>
+        <translation>Software settings</translation>
     </message>
     <message utf8="true">
-        <location filename="gui_divers/dialog_help.cpp" line="176"/>
+        <location filename="gui_divers/dialog_help.cpp" line="177"/>
         <source>Général</source>
         <translation>General</translation>
     </message>
     <message utf8="true">
-        <location filename="gui_divers/dialog_help.cpp" line="177"/>
+        <location filename="gui_divers/dialog_help.cpp" line="178"/>
         <source>Synthétiseur</source>
         <translation>Synth</translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_help.cpp" line="180"/>
+        <location filename="gui_divers/dialog_help.cpp" line="181"/>
         <source>Clavier</source>
         <translation>Keyboard</translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_help.cpp" line="182"/>
+        <location filename="gui_divers/dialog_help.cpp" line="183"/>
         <source>Annexes</source>
         <translation>Appendices</translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_help.cpp" line="183"/>
+        <location filename="gui_divers/dialog_help.cpp" line="184"/>
         <source>Soundfonts sf2</source>
         <translation>Sf2 soundfonts</translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_help.cpp" line="184"/>
+        <location filename="gui_divers/dialog_help.cpp" line="185"/>
         <source>Import / export sfz</source>
         <translation>Sfz import / export</translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_help.cpp" line="185"/>
+        <location filename="gui_divers/dialog_help.cpp" line="186"/>
         <source>Limitations du logiciel</source>
         <translation>Software limitations</translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_help.cpp" line="200"/>
+        <location filename="gui_divers/dialog_help.cpp" line="201"/>
         <source>fr</source>
         <translation>en</translation>
-    </message>
-    <message>
-        <source>Accueil</source>
-        <translation type="obsolete">Home page</translation>
-    </message>
-    <message>
-        <source>qrc:/aide/aide.html</source>
-        <translatorcomment>Put the corresponding english link if there is no documentation available in your language</translatorcomment>
-        <translation type="obsolete">qrc:/aide/help.html</translation>
     </message>
 </context>
 <context>
@@ -1504,10 +1492,6 @@ instrument courant</source>
         <translation>&amp;Tools</translation>
     </message>
     <message>
-        <source>&amp;Sample</source>
-        <translation type="obsolete">&amp;Sample</translation>
-    </message>
-    <message>
         <location filename="mainwindow.ui" line="273"/>
         <source>&amp;Instrument</source>
         <translation>&amp;Instrument</translation>
@@ -2020,7 +2004,7 @@ instrument courant</source>
     <message utf8="true">
         <location filename="mainwindow.ui" line="1014"/>
         <source>&amp;Ajuster à la fin de boucle</source>
-        <translation>&amp;Trim to end loop</translation>
+        <translation>&amp;Trim to end of loop</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="1029"/>
@@ -2063,7 +2047,7 @@ instrument courant</source>
     <message utf8="true">
         <location filename="mainwindow.ui" line="1134"/>
         <source>&amp;Répartition automatique</source>
-        <translation>&amp;Automatic divisioning</translation>
+        <translation>&amp;Automatic distribution</translation>
     </message>
     <message utf8="true">
         <location filename="mainwindow.ui" line="1137"/>
@@ -2185,10 +2169,6 @@ instrument courant</source>
         <translation>Soundfont name (max 255 characters):</translation>
     </message>
     <message utf8="true">
-        <source>Le sample « </source>
-        <translation type="obsolete">The sample &quot;</translation>
-    </message>
-    <message utf8="true">
         <location filename="mainwindow.cpp" line="1278"/>
         <source>L » existe déjà.&lt;br /&gt;Que faire ?</source>
         <translation>L&quot; already exists.&lt;br/&gt;Replace?</translation>
@@ -2202,11 +2182,6 @@ instrument courant</source>
         <location filename="mainwindow.cpp" line="1293"/>
         <source> » existe déjà.&lt;br /&gt;Que faire ?</source>
         <translation>&quot; already exists.&lt;br/&gt;Replace?</translation>
-    </message>
-    <message>
-        <source> sample et </source>
-        <oldsource> sample and </oldsource>
-        <translation type="obsolete"> sample and </translation>
     </message>
     <message utf8="true">
         <location filename="mainwindow.cpp" line="1997"/>
@@ -2429,11 +2404,6 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
         <location filename="mainwindow.cpp" line="1643"/>
         <source>Nom du nouveau preset :</source>
         <translation>Name of the new preset:</translation>
-    </message>
-    <message>
-        <source> samples et </source>
-        <oldsource> samples and </oldsource>
-        <translation type="obsolete"> samples and </translation>
     </message>
     <message utf8="true">
         <location filename="mainwindow.cpp" line="1983"/>
@@ -3535,10 +3505,6 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
         <translation>ROM name and version</translation>
     </message>
     <message>
-        <source>Samples</source>
-        <translation type="obsolete">Samples</translation>
-    </message>
-    <message>
         <location filename="pages/page_sf2.ui" line="142"/>
         <source>Fichier</source>
         <translation>File</translation>
@@ -3818,11 +3784,6 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
         <translation>Ok, &amp;disable this message</translation>
     </message>
     <message utf8="true">
-        <source>Le sample « </source>
-        <oldsource>Le sample «&amp;#160;</oldsource>
-        <translation type="obsolete">The sample &quot;</translation>
-    </message>
-    <message utf8="true">
         <location filename="sf2_core/duplicator.cpp" line="284"/>
         <source>L&apos;échantillon « </source>
         <oldsource>l&apos;échantillon « </oldsource>
@@ -3906,10 +3867,6 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
         <location filename="sf2_core/duplicator.cpp" line="754"/>
         <source>I&amp;gnorer tout</source>
         <translation>I&amp;gnore all</translation>
-    </message>
-    <message>
-        <source>Samples</source>
-        <translation type="obsolete">Samples</translation>
     </message>
     <message utf8="true">
         <location filename="sf2_core/pile_sf2.cpp" line="930"/>
@@ -4201,10 +4158,6 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
 </context>
 <context>
     <name>Tree</name>
-    <message>
-        <source>Nouveau sample...</source>
-        <translation type="obsolete">New &amp;sample...</translation>
-    </message>
     <message>
         <location filename="sf2_core/tree.cpp" line="53"/>
         <source>Nouvel instrument...</source>
