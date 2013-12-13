@@ -1,107 +1,37 @@
-<p align="left"><h2>Structure</h2></p> 
-
-<p align="justify">The tree, located at the left side of the software, provides a global view and a quick access to the elements of all soundfonts under edition.</p>
-
-<p align="center"><img src="qrc:/aide/arbre1 en.png" /></p>
-
-<p align="justify">Each opened .sf2 file is recognized by its title, and contains 3 subtrees:
-<ul>
-	<li><b>Samples</b><br />
-	All samples are listed under this subtree. A click on one of them leads to the page of <a href="qrc:/aide/page05en.html">sample edition</a>.
-	</li>
-	<li><b>Instruments</b><br />
-	This tree contains all instruments present in the .sf2 file. Each instrument may contain samples. A click on an instrument or on one of its linked samples leads to the page of <a href="qrc:/aide/page06en.html">instrument edition</a>.
-	</li>
-	<li><b>Presets</b><br />
-	The presets are gathered here and each preset may contain instruments. A click on a preset or on one of its linked instruments shows the page of <a href="qrc:/aide/page07en.html">preset edition</a>.
-	</li>
-</ul>
-A click on the file title, or on the header of one of the three subtrees shows the page of <a href="qrc:/aide/page04en.html">global information edition</a>.
-</p>
-
-<p align="left"><h2>Contextual menu</h2></p> 
-
-A right clic on an element shows a menu comprising the following actions:
-<ul>
-	<li><b>New sample...</b><br />
-	Import new samples.
-	</li>
-	<li><b>New instrument...</b><br />
-	Create a new instrument.
-	</li>
-	<li><b>New preset...</b><br />
-	Create a new preset.
-	</li>
-	<li><b>Bind to...</b><br />
-	Bind the selected sample(s) to an instrument, or the selected instrument(s) to a preset.
-	</li>
-	<li><b>Replace by...</b><br />
-	Replace a sample linked to an instrument by another sample, or replace an instrument linked to a preset by another instrument. The configuration of the sample or instrument is kept.
-	</li>
-	<li><b>Delete</b><br />
-	Delete the selected element(s).
-	</li>
-	<li><b>Rename or bulk rename</b><br />
-	Rename the selected element. Several samples may be simultaneously renamed according to different options:
-	<ul>
-		<li>overwrite existing name with rootkey as suffix,</li>
-		<li>overwrite existing name with numerical ascending suffix,</li>
-		<li>append to existing name,</li>
-		<li>prepend to existing name.</li>
-	</ul>
-	</li>
-	<li><b>Close file</b><br />
-	Close the file under edition.
-	</li>
-</ul>
-
-<p align="center"><img src="qrc:/aide/arbre2 en.png" /></p>
-
-<p align="left"><h2>Drag & drop</h2></p> 
-
 <p align="justify">
-The operation drag & drop in the tree enables rapid associations or copies within or between .sf2 files.
+The operation drag & drop (or copy / paste) in the tree enables rapid associations or copies. A multiple selection is possible with the buttons "ctrl" and "shift".</p>
+
+<h3>Drag & drop within one soundfont</h3>
+
 <ul>
-	<li>Dragging one or more sample(s)...
-		<ul>
-			<li>to an instrument within the same file: association of the sample(s) to the instrument.</li>
-			<li>to another file: copy of the sample(s) to destination file.</li>
-		</ul>
-	</li>
-	<li>Dragging one or more instrument(s)...
-		<ul>
-			<li>to a preset within the same file: association of the instrument(s) to the preset.</li>
-			<li>to another instrument within the same file: association of the linked samples of the selected instrument(s) to the destination instrument, with the same configuration.
-			<li>to another file: copy of the instrument(s) to the destination file, including all needed samples.</li>
-		</ul>
-	</li>
-	<li>Dragging one or more linked sample(s) of one or more instrument(s)...
-		<ul>
-			<li>to an instrument within the same file: addition of the linked sample(s) of the selected instrument(s) to the destination instrument, with the same configuration.
-		</ul>
-	</li>
-	<li>Dragging one or more preset(s)...
-		<ul>
-			<li>to another preset within the same file: association of the linked instruments of the selected preset(s) to the destination preset.</li>
-			<li>to another file: copy of the preset(s) to the destination file, including all needed instruments and samples.</li>
-		</ul>
-	</li>
-	<li>Dragging one or more linked instrument(s) of one or more preset(s)...
-		<ul>
-			<li>to another preset within the same file: addition of the linked instrument(s) of the selected preset(s) to the destination preset, with the same configuration.
-		</ul>
-	</li>
-	<ul></ul>
+	<li><b>Sample &#8594; instrument</b><br/>
+	Association of the sample to the instrument, creation of an instrument division.</li>
+	<li><b>Instrument &#8594; preset</b><br/>
+	Association of the instrument to the preset, creation of a preset division.</li>
+	<li><b>Instrument &#8594; another instrument</b><br/>
+	Copy of all divisions of the source instrument into the destination instrument.</li>
+	<li><b>Instrument division &#8594; another instrument</b><br/>
+	Copy of the division of the source instrument into the destination instrument.</li>
+	<li><b>Preset &#8594; another preset</b><br/>
+	Copy of all divisions of the source preset into the destination preset.</li>
+	<li><b>Preset division &#8594; another preset</b><br/>
+	Copy of the disivion of the source preset into the destination preset.</li>
 </ul>
-<br />
-Note: the operation copy / paste allows the same operations.
 
-</p>
+<h3>Drag & drop between different soudfonts</h3>
 
-<p align="left"><h2>Miscellaneous</h2></p> 
+<ul>
+	<li><b>Sample</b><br/>
+	Copy of the sample.</li>
+	<li><b>Instrument</b><br/>
+	Copy of the instrument including all samples linked.</li>
+	<li><b>Preset</b><br/>
+	Copy of the preset including all instruments and samples linked.</li>
+</ul>
 
-<p align="justify">
-A search bar is available for filtering the elements displayed in the tree. A click on the cross located to the right  of the editable field cancels the filter.<br /><br />
-Two buttons located to the left of the editable field provided for search expand or collapse the entire tree.
-</p>
-
+During a copy of elements between different soundfonts, if an element already exists several options are provided:
+<ul>
+	<li>ignore the operation,</li>
+	<li>replace the existing element,</li>
+	<li>duplicate the element.</li>
+</ul>
