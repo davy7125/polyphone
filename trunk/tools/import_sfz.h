@@ -155,10 +155,17 @@ public:
     void decode(Pile_sf2 * sf2, EltID idElt) const;
     QList<int> getSampleIndex(Pile_sf2 * sf2, EltID idElt, QString pathSfz) const;
     void adaptOffsets(int startLoop, int endLoop, int length);
-    void adjustStereoVolumeAndCorrection(QString path);
+    void adjustStereoVolumeAndCorrection(QString path, int defaultCorrection);
+    bool sampleValid(QString path) const;
     void checkFilter();
     void adjustVolume(double offset);
-    void adjustCorrection(int offset);
+    void adjustCorrection(int offset, int defaultCorrection);
+    void removeOpCode(Parametre::OpCode opcode)
+    {
+        for (int i = _listeParam.size() - 1; i >= 0; i--)
+            if (_listeParam.at(i).getOpCode() == opcode)
+                _listeParam.removeAt(i);
+    }
 
     // Lecture
     bool isDefined(Parametre::OpCode opcode) const
@@ -217,7 +224,9 @@ public:
             _listeDivisions.last() << Parametre(opcode, valeur);
     }
     void moveOpcodeInSamples(Parametre::OpCode opcode, bool isDouble = false);
+    void checkSampleValid(QString path);
     void checkFilter();
+    void simplifyAttenuation();
     void adjustStereoVolumeAndCorrection(QString path);
     void adjustModulationVolume();
     bool isChannel10();

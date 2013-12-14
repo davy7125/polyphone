@@ -340,8 +340,8 @@ void ConversionSfz::writeElement(QTextStream &out, Champ champ, double value)
     case champ_pan:                     out << "pan=" << 2 * value << endl;                         break;
     case champ_initialAttenuation:      out << "volume=" << -value * DB_SF2_TO_SFZ << endl;         break;
     case champ_initialFilterQ:          out << "resonance=" << value << endl;                       break;
-    case champ_sustainModEnv:           out << "fileg_sustain=" << dbToPercent(value) << endl
-                                            << "pitcheg_sustain=" << dbToPercent(value) << endl;    break;
+    case champ_sustainModEnv:           out << "fileg_sustain=" << value << endl
+                                            << "pitcheg_sustain=" << value << endl;                 break;
     case champ_delayModEnv:             out << "pitcheg_delay=" << value << endl
                                             << "fileg_delay=" << value << endl;                     break;
     case champ_attackModEnv:            out << "pitcheg_attack=" << value << endl
@@ -671,8 +671,14 @@ ParamListe::ParamListe(Pile_sf2 * sf2, ParamListe * paramPrst, EltID idInst)
 
         if (!_listeChamps.contains(champ_fineTune))
         {
-            _listeChamps << champ_fineTune;
-            _listeValeurs << sf2->get(idSmpl, champ_chPitchCorrection).cValue;
+            int fineTuneSample = sf2->get(idSmpl, champ_chPitchCorrection).cValue;
+            if (fineTuneSample != 0)
+            {
+                _listeChamps << champ_fineTune;
+                EltID idInstGlobal = idInst;
+                idInstGlobal.typeElement = elementInst;
+                _listeValeurs << sf2->get(idInstGlobal, champ_fineTune).shValue + fineTuneSample;
+            }
         }
         else
         {

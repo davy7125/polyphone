@@ -49,7 +49,7 @@ void ImportSfz::import(QString fileName, int * numSf2)
                 line = line.left(line.indexOf("//"));
 
             // Découpage
-            QStringList list = line.split(" ", QString::SkipEmptyParts);
+            QStringList list = line.split(" ", QString::KeepEmptyParts);
             int length = list.size();
             for (int i = length - 1; i >= 1; i--)
             {
@@ -83,6 +83,7 @@ void ImportSfz::import(QString fileName, int * numSf2)
         }
         inputFile.close();
 
+        // Les samples doivent être valides
         // Les offsets doivent se trouver à côté des samples, pas dans les divisions globales
         // Idem pan
         // On ne garde que les filtres supportés par le format sf2
@@ -94,6 +95,7 @@ void ImportSfz::import(QString fileName, int * numSf2)
         double ampliMax = 0;
         for (int i = 0; i < _listeEnsembles.size(); i++)
         {
+            _listeEnsembles[i].checkSampleValid(QFileInfo(fileName).path());
             _listeEnsembles[i].moveOpcodeInSamples(Parametre::op_offset);
             _listeEnsembles[i].moveOpcodeInSamples(Parametre::op_end);
             _listeEnsembles[i].moveOpcodeInSamples(Parametre::op_loop_start);
@@ -110,6 +112,10 @@ void ImportSfz::import(QString fileName, int * numSf2)
         if (ampliMax > 0)
             for (int i = 0; i < _listeEnsembles.size(); i++)
                 _listeEnsembles[i].adjustVolume(ampliMax);
+
+        // Simplification des atténuations
+        for (int i = 0; i < _listeEnsembles.size(); i++)
+            _listeEnsembles[i].simplifyAttenuation();
 
         // Création d'un sf2
         int numBank = 0;
@@ -239,6 +245,8 @@ void ImportSfz::import(QString fileName, int * numSf2)
                 }
             }
             int typeLoop = _sf2->get(idInst, champ_sampleModes).wValue;
+            if (typeLoop == 0)
+                _sf2->reset(idInst, champ_sampleModes);
             for (int i = 0; i < _sf2->count(idInstSmpl); i++)
             {
                 idInstSmpl.indexElt2 = i;
@@ -352,7 +360,7 @@ void EnsembleGroupes::adjustVolume(double offset)
 void EnsembleGroupes::adjustStereoVolumeAndCorrection(QString path)
 {
     for (int i = 0; i < _listeDivisions.size(); i++)
-        _listeDivisions[i].adjustStereoVolumeAndCorrection(path);
+        _listeDivisions[i].adjustStereoVolumeAndCorrection(path, _paramGlobaux.getIntValue(Parametre::op_tuningFine));
 }
 
 void EnsembleGroupes::adjustModulationVolume()
@@ -375,11 +383,53 @@ void EnsembleGroupes::adjustModulationVolume()
     }
 }
 
+void EnsembleGroupes::checkSampleValid(QString path)
+{
+    int size = _listeDivisions.size();
+    for (int i = size - 1; i >= 0; i--)
+        if (!_listeDivisions.at(i).sampleValid(path))
+            _listeDivisions.removeAt(i);
+}
+
 void EnsembleGroupes::checkFilter()
 {
     _paramGlobaux.checkFilter();
     for (int i = 0; i < _listeDivisions.size(); i++)
         _listeDivisions[i].checkFilter();
+}
+
+void EnsembleGroupes::simplifyAttenuation()
+{
+    bool attenuationUnique = true;
+    double attenuation = -1;
+    double defaultAttenuation = _paramGlobaux.getDoubleValue(Parametre::op_volume);
+    for (int i = 0; i < _listeDivisions.size(); i++)
+    {
+        double dTmp = defaultAttenuation;
+        if (_listeDivisions[i].isDefined(Parametre::op_volume))
+            dTmp = _listeDivisions[i].getDoubleValue(Parametre::op_volume);
+        if (attenuation == -1)
+            attenuation = dTmp;
+        else
+        {
+            if (attenuation != dTmp)
+                attenuationUnique = false;
+        }
+    }
+    if (attenuationUnique)
+    {
+        for (int i = 0; i < _listeDivisions.size(); i++)
+            _listeDivisions[i].removeOpCode(Parametre::op_volume);
+        if (attenuation == 0)
+            _paramGlobaux.removeOpCode(Parametre::op_volume);
+        else
+        {
+            if (_paramGlobaux.isDefined(Parametre::op_volume))
+                _paramGlobaux.adjustVolume(_paramGlobaux.getDoubleValue(Parametre::op_volume) - attenuation);
+            else
+                _paramGlobaux << Parametre(Parametre::op_volume, attenuation);
+        }
+    }
 }
 
 bool EnsembleGroupes::isChannel10()
@@ -630,20 +680,33 @@ void GroupeParametres::adaptOffsets(int startLoop, int endLoop, int length)
         else if (_listeParam.at(i).getOpCode() == Parametre::op_end)
             _listeParam[i].setIntValue(_listeParam.at(i).getIntValue() - length);
     }
-    if (startLoop != endLoop && !isDefined(Parametre::op_loop_mode))
+    if (startLoop != endLoop && !isDefined(Parametre::op_loop_mode) && (startLoop != 0 || endLoop != 1))
         _listeParam << Parametre("loop_mode", "loop_continuous");
 }
 
-void GroupeParametres::adjustStereoVolumeAndCorrection(QString path)
+void GroupeParametres::adjustStereoVolumeAndCorrection(QString path, int defaultCorrection)
 {
-    QString sample = getStrValue(Parametre::op_sample);
+    QString sample = getStrValue(Parametre::op_sample).replace("\\", "/");
     if (!sample.isEmpty())
     {
         Sound son(path + "/" + sample);
         if (son.get(champ_wChannels) == 2)
             adjustVolume(3.);
-        adjustCorrection(son.get(champ_chPitchCorrection));
+        int correctionSample = son.get(champ_chPitchCorrection);
+        if (correctionSample != 0)
+            adjustCorrection(correctionSample, defaultCorrection);
     }
+}
+
+bool GroupeParametres::sampleValid(QString path) const
+{
+    bool bRet = false;
+    if (this->isDefined(Parametre::op_sample))
+    {
+        QString sample = getStrValue(Parametre::op_sample).replace("\\", "/");
+        bRet = QFile(path + "/" + sample).exists();
+    }
+    return bRet;
 }
 
 void GroupeParametres::checkFilter()
@@ -683,7 +746,7 @@ void GroupeParametres::adjustVolume(double offset)
         _listeParam << Parametre(Parametre::op_volume, -offset);
 }
 
-void GroupeParametres::adjustCorrection(int offset)
+void GroupeParametres::adjustCorrection(int offset, int defaultCorrection)
 {
     bool isDefined = false;
     for (int i = 0; i < _listeParam.size(); i++)
@@ -695,7 +758,7 @@ void GroupeParametres::adjustCorrection(int offset)
         }
     }
     if (!isDefined)
-        _listeParam << Parametre(Parametre::op_tuningFine, -offset);
+        _listeParam << Parametre(Parametre::op_tuningFine, defaultCorrection - offset);
 }
 
 QStringList GroupeParametres::getFullPath(QString base, QStringList directories)
@@ -932,11 +995,7 @@ void GroupeParametres::decode(Pile_sf2 * sf2, EltID idElt) const
             sf2->set(idElt, champ_decayModEnv, val, false);
             break;
         case Parametre::op_pitcheg_sustain:
-            dTmp = _listeParam.at(i).getDoubleValue();
-            if (dTmp >= 0.1)
-                val.shValue = qRound(-10. * percentToDB(dTmp));
-            else
-                val.shValue = 1440;
+            val.shValue = qRound(10. * _listeParam.at(i).getDoubleValue());
             sf2->set(idElt, champ_sustainModEnv, val, false);
             break;
         case Parametre::op_pitcheg_release:
@@ -1023,11 +1082,7 @@ void GroupeParametres::decode(Pile_sf2 * sf2, EltID idElt) const
             }
             if (isDefined(Parametre::op_fileg_sustain))
             {
-                dTmp = getDoubleValue(Parametre::op_fileg_sustain);
-                if (dTmp >= 0.1)
-                    val.shValue = qRound(-10. * percentToDB(dTmp));
-                else
-                    val.shValue = 1440;
+                val.shValue = qRound(10. * getDoubleValue(Parametre::op_fileg_sustain));
                 sf2->set(idElt, champ_sustainModEnv, val, false);
             }
             if (isDefined(Parametre::op_fileg_release))
