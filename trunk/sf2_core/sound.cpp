@@ -623,7 +623,7 @@ void Sound::getInfoSoundWav(bool tryFindRootkey)
     if (!fi.exists())
     {
         QMessageBox::warning(_parent, QObject::trUtf8("Attention"),
-                             QObject::trUtf8("Impossible d'ouvrir le fichier"));
+                             QObject::trUtf8("Impossible d'ouvrir le fichier") + " " + fileName);
         return;
     }
     fi.open(QFile::ReadOnly | QFile::Unbuffered);
