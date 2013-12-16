@@ -81,6 +81,7 @@ public:
 signals:
     void noteOn(int n);
     void noteOff(int n);
+    void mouseOver(int n);
 
 protected:
     void showKeyOn( PianoKey* key, int vel );
@@ -93,6 +94,7 @@ protected:
     void mouseMoveEvent ( QGraphicsSceneMouseEvent * mouseEvent );
     void mousePressEvent ( QGraphicsSceneMouseEvent * mouseEvent );
     void mouseReleaseEvent ( QGraphicsSceneMouseEvent * mouseEvent );
+    bool event(QEvent *event);
 
 private:
     void hideOrShowKeys();

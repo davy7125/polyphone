@@ -692,6 +692,22 @@ ParamListe::ParamListe(Pile_sf2 * sf2, ParamListe * paramPrst, EltID idInst)
         mix(champ_startloopAddrsCoarseOffset, champ_startloopAddrsOffset, sf2->get(idSmpl, champ_dwStartLoop).dwValue);
         mix(champ_endloopAddrsCoarseOffset, champ_endloopAddrsOffset, sf2->get(idSmpl, champ_dwEndLoop).dwValue);
 
+        // Suppression début / fin de loop si 0 - 0
+        if (_listeChamps.contains(champ_startAddrsOffset) && _listeChamps.contains(champ_endloopAddrsOffset))
+        {
+            int startLoop = _listeValeurs.at(_listeChamps.indexOf(champ_startloopAddrsOffset));
+            int endLoop = _listeValeurs.at(_listeChamps.indexOf(champ_endloopAddrsOffset));
+            if (startLoop == endLoop)
+            {
+                int index = _listeChamps.indexOf(champ_startloopAddrsOffset);
+                _listeChamps.removeAt(index);
+                _listeValeurs.removeAt(index);
+                index = _listeChamps.indexOf(champ_endloopAddrsOffset);
+                _listeChamps.removeAt(index);
+                _listeValeurs.removeAt(index);
+            }
+        }
+
         // Gestion de la note fixe
         if (_listeChamps.contains(champ_keynum))
         {

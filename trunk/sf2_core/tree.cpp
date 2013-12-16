@@ -26,18 +26,20 @@
 #include "mainwindow.h"
 #include <QMenu>
 #include <QAction>
+#include "pile_sf2.h"
 
 // Constructeur, destructeur
-Tree::Tree(QWidget *parent) : QTreeWidget(parent)
+Tree::Tree(QWidget *parent) : QTreeWidget(parent),
+    mainWindow(NULL),
+    menuArborescence(NULL),
+    refresh(true),
+    updateNext(true),
+    infoSelectedItemsNumber(0),
+    infoIsSelectedItemsTypeUnique(false),
+    infoIsSelectedItemsSf2Unique(false),
+    infoIsSelectedItemsFamilyUnique(false),
+    _sf2(NULL)
 {
-    this->menuArborescence = NULL;
-    this->mainWindow = NULL;
-    this->refresh = true;
-    this->infoSelectedItemsNumber = 0;
-    this->infoIsSelectedItemsFamilyUnique = false;
-    this->infoIsSelectedItemsSf2Unique = false;
-    this->infoIsSelectedItemsTypeUnique = false;
-    this->updateNext = true;
 }
 Tree::~Tree()
 {
@@ -98,9 +100,11 @@ Tree::menuClicDroit::menuClicDroit(MainWindow *mainWindow)
 
 // Méthodes publiques
 
-void Tree::init(MainWindow *mainWindow)
+void Tree::init(MainWindow *mainWindow, Pile_sf2 * sf2)
 {
     this->mainWindow = mainWindow;
+    this->_sf2 = sf2;
+
     // Création menu contextuel
     this->menuArborescence = new menuClicDroit(mainWindow);
 }
@@ -137,26 +141,193 @@ void Tree::searchTree(QString qStr)
     unsigned int max = this->topLevelItemCount();
     unsigned int max2;
     QTreeWidgetItem *child;
+
+    // Etat initial
+    _displayedElements.clear();
+    bool isDisplayed = qStr.isEmpty();
     for (unsigned int i = 0; i < max; i ++)
     {
         child = this->topLevelItem(i);
         max2 = child->childCount();
+
+        // Niveau 1: en-têtes "échantillons", "instruments", "presets"
         for (unsigned int j = 0; j < max2; j++)
         {
+            // Niveau 2: sample, instrument ou preset
             for (int k = 0; k < child->child(j)->childCount(); k++)
             {
-                if (child->child(j)->child(k)->text(6) == "0")
+                QTreeWidgetItem * item = child->child(j)->child(k);
+                if (item->text(6) == "0") // Si l'élément n'est pas masqué par une suppression non définitive
+                    item->setHidden(!isDisplayed);
+            }
+        }
+    }
+    if (isDisplayed)
+        return;
+
+    for (unsigned int i = 0; i < max; i ++)
+    {
+        child = this->topLevelItem(i);
+        max2 = child->childCount();
+
+        // Niveau 1: en-têtes "échantillons", "instruments", "presets"
+        for (unsigned int j = 0; j < max2; j++)
+        {
+            // Niveau 2: sample, instrument ou preset
+            for (int k = 0; k < child->child(j)->childCount(); k++)
+            {
+                QTreeWidgetItem * item = child->child(j)->child(k);
+                if (item->text(6) == "0") // Si l'élément n'est pas masqué par une suppression non définitive
                 {
-                    if (child->child(j)->child(k)->text(0).toLower().indexOf(qStr) != -1)
-                        // La chaine a été trouvée
-                        child->child(j)->child(k)->setHidden(0);
-                    else
-                        child->child(j)->child(k)->setHidden(1);
+                    if (item->text(0).toLower().indexOf(qStr) != -1)
+                    {
+                        if (item->text(2) == "smpl")
+                            displaySample(item->text(1).toInt(), item->text(3).toInt());
+                        else if (item->text(2) == "inst")
+                            displayInstrument(item->text(1).toInt(), item->text(3).toInt());
+                        else if (item->text(2) == "prst")
+                            displayPreset(item->text(1).toInt(), item->text(3).toInt());
+                    }
                 }
             }
         }
     }
 }
+void Tree::displaySample(int idSf2, int index, bool repercute)
+{
+    // Affichage de l'échantillon
+    EltID idSmpl(elementSmpl, idSf2, index, -1, -1);
+    displayElement(idSmpl);
+
+    // Affichage des instruments utilisant le sample
+    if (repercute)
+    {
+        EltID idInst = idSmpl;
+        idInst.typeElement = elementInst;
+        EltID idInstSmpl = idSmpl;
+        idInstSmpl.typeElement = elementInstSmpl;
+        int nbInst = _sf2->count(idInst);
+        for (int i = 0; i < nbInst; i++)
+        {
+            idInst.indexElt = i;
+            idInstSmpl.indexElt = i;
+            if (!_sf2->get(idInst, champ_hidden).bValue)
+            {
+                int nbInstSmpl = _sf2->count(idInstSmpl);
+                for (int j = 0; j < nbInstSmpl; j++)
+                {
+                    idInstSmpl.indexElt2 = j;
+                    if (!_sf2->get(idInstSmpl, champ_hidden).bValue)
+                    {
+                        if (_sf2->get(idInstSmpl, champ_sampleID).wValue == index)
+                            displayInstrument(idSf2, i, false, true);
+                    }
+                }
+            }
+        }
+    }
+}
+
+void Tree::displayInstrument(int idSf2, int index, bool repercuteSmpl, bool repercutePrst)
+{
+    EltID idInst(elementInst, idSf2, index, -1, -1);
+    displayElement(idInst);
+
+    // Affichage des samples
+    if (repercuteSmpl)
+    {
+        EltID idInstSmpl = idInst;
+        idInstSmpl.typeElement = elementInstSmpl;
+        int nbElement = _sf2->count(idInstSmpl);
+        for (int i = 0; i < nbElement; i++)
+        {
+            idInstSmpl.indexElt2 = i;
+            if (!_sf2->get(idInstSmpl, champ_hidden).bValue)
+                displaySample(idSf2, _sf2->get(idInstSmpl, champ_sampleID).wValue, false);
+        }
+    }
+
+    // Affichage des presets utilisant l'instrument
+    if (repercutePrst)
+    {
+        EltID idPrst = idInst;
+        idPrst.typeElement = elementPrst;
+        EltID idPrstInst = idInst;
+        idPrstInst.typeElement = elementPrstInst;
+        int nbPrst = _sf2->count(idPrst);
+        for (int i = 0; i < nbPrst; i++)
+        {
+            idPrst.indexElt = i;
+            idPrstInst.indexElt = i;
+            if (!_sf2->get(idPrst, champ_hidden).bValue)
+            {
+                int nbPrstInst = _sf2->count(idPrstInst);
+                for (int j = 0; j < nbPrstInst; j++)
+                {
+                    idPrstInst.indexElt2 = j;
+                    if (!_sf2->get(idPrstInst, champ_hidden).bValue)
+                    {
+                        if (_sf2->get(idPrstInst, champ_instrument).wValue == index)
+                            displayPreset(idSf2, i, false);
+                    }
+                }
+            }
+        }
+    }
+}
+
+void Tree::displayPreset(int idSf2, int index, bool repercute)
+{
+    EltID idPrst(elementPrst, idSf2, index, -1, -1);
+    displayElement(idPrst);
+
+    // Affichage des instruments
+    if (repercute)
+    {
+        EltID idPrstInst = idPrst;
+        idPrstInst.typeElement = elementPrstInst;
+        int nbElement = _sf2->count(idPrstInst);
+        for (int i = 0; i < nbElement; i++)
+        {
+            idPrstInst.indexElt2 = i;
+            if (!_sf2->get(idPrstInst, champ_hidden).bValue)
+                displayInstrument(idSf2, _sf2->get(idPrstInst, champ_instrument).wValue, true, false);
+        }
+    }
+}
+
+void Tree::displayElement(EltID id)
+{
+    if (_displayedElements.contains(id))
+        return;
+    _displayedElements << id;
+
+    // Affichage
+    QTreeWidgetItem *child;
+
+    int max = this->topLevelItemCount();
+    for (int i = 0; i < max; i++)
+    {
+        child = this->topLevelItem(i);
+        if (child->text(1).toInt() == id.indexSf2)
+        {
+            if (id.typeElement == elementSmpl)
+                child = child->child(0);
+            else if (id.typeElement == elementInst)
+                child = child->child(1);
+            else
+                child = child->child(2);
+            int numChilds = child->childCount();
+            for (int j = 0; j < numChilds; j++)
+            {
+                // Affichage de la sous-arborescence
+                if (child->child(j)->text(3).toInt() == id.indexElt)
+                    child->child(j)->setHidden(false);
+            }
+        }
+    }
+}
+
 void Tree::clicTree()
 {
     // Informations concernant la sélection
@@ -545,12 +716,8 @@ void Tree::keyPressEvent(QKeyEvent *event)
     else if (event->matches(QKeySequence::Paste))
     {
         mainWindow->prepareNewAction();
-        int nbElt = this->getSelectedItemsNumber();
-        if (nbElt > 0 && this->idList.size())
-        {
-            if (this->isSelectedItemsSf2Unique() && this->isSelectedItemsTypeUnique() && this->isSelectedItemsFamilyUnique())
-                mainWindow->dragAndDrop(this->getID(0), this->idList);
-        }
+        if (this->getSelectedItemsNumber() == 1 && this->idList.size())
+            mainWindow->dragAndDrop(this->getID(0), this->idList);
         mainWindow->updateDo();
     }
     else
@@ -571,7 +738,7 @@ void Tree::dropEvent(QDropEvent *event)
         for (int i = 0; i < event->mimeData()->urls().count(); i++)
         {
             QString path = QUrl::fromPercentEncoding(event->mimeData()->urls().at(i).encodedPath());
-#ifdef PA_USE_ASIO
+#ifdef PA_USE_ASIO // Si windows
             if (path.left(1).compare("/") == 0)
                 path = path.right(path.length() - 1);
 #endif
