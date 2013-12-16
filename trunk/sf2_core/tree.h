@@ -30,6 +30,8 @@
 #include <string>
 using std::string;
 
+class Pile_sf2;
+
 class MainWindow;
 
 class Tree : public QTreeWidget
@@ -58,7 +60,7 @@ public:
     explicit Tree(QWidget *parent = 0);
     ~Tree();
     // Méthodes publiques
-    void init(MainWindow *mainWindow);
+    void init(MainWindow *mainWindow, Pile_sf2 *sf2);
     void trier(int forme);
     void updateAtNextSelectionRequest();
     unsigned int getSelectedItemsNumber();
@@ -100,16 +102,22 @@ private:
     bool refresh;
     bool updateNext;
     QList<EltID> idList;
-    void updateSelectionInfo();
     unsigned int infoSelectedItemsNumber;
     bool infoIsSelectedItemsTypeUnique;
     bool infoIsSelectedItemsSf2Unique;
     bool infoIsSelectedItemsFamilyUnique;
+    Pile_sf2 * _sf2;
+    QList<EltID> _displayedElements;
 
     // Méthodes privées
+    void updateSelectionInfo();
     QTreeWidgetItem * selectedItem(unsigned int pos);
     static EltID getItemID(QTreeWidgetItem *elt);
     void supprimerElt();
+    void displaySample(int idSf2, int index, bool repercute = true);
+    void displayInstrument(int idSf2, int index, bool repercuteSmpl = true, bool repercutePrst = true);
+    void displayPreset(int idSf2, int index, bool repercute = true);
+    void displayElement(EltID id);
 };
 
 #endif // TREE_H

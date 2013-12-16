@@ -162,10 +162,12 @@ void Page_Smpl::afficher()
 
     // Graphiques
     ui->graphe->clearAll();
+    ui->grapheFourier->setSampleName(sf2->getQstr(id, champ_name));
     if (nombreElements > 1)
     {
         ui->graphe->displayMultipleSelection(true);
-        ui->grapheFourier->setData(QByteArray(), 0, 0, 0);
+        ui->grapheFourier->setData(QByteArray(), 0);
+        ui->grapheFourier->setPos(0, 0);
     }
     else
     {
@@ -177,7 +179,8 @@ void Page_Smpl::afficher()
         ui->graphe->zoomDrag();
 
         // Remplissage du graphe fourier
-        ui->grapheFourier->setData(baData, startLoop, endLoop, sampleRate);
+        ui->grapheFourier->setData(baData, sampleRate);
+        ui->grapheFourier->setPos(startLoop, endLoop);
     }
 
     // Lecteur
@@ -1581,6 +1584,20 @@ void Page_Smpl::setStereo(int val)
     this->synth->setStereo(val);
 }
 
+void Page_Smpl::getPeakFrequencies(EltID id, QList<double> &frequencies, QList<double> &factors,
+                                   QList<int> &keys, QList<int> &corrections)
+{
+    GraphiqueFourier graphTmp(NULL);
+    graphTmp.setData(sf2->getData(id, champ_sampleData16), sf2->get(id, champ_dwSampleRate).dwValue);
+    frequencies.clear();
+    factors.clear();
+    keys.clear();
+    corrections.clear();
+    graphTmp.setPos(sf2->get(id, champ_dwStartLoop).dwValue, sf2->get(id, champ_dwEndLoop).dwValue,
+                    frequencies, factors, keys, corrections);
+}
+
+
 ///////////////////////////////////////////////////////////////////////
 ////////////////////////////// GRAPHIQUE //////////////////////////////
 ///////////////////////////////////////////////////////////////////////
@@ -1940,22 +1957,51 @@ void Graphique::plotOverlay()
 ///////////////////////////////////////////////////////////////////////
 
 // Constructeur
-GraphiqueFourier::GraphiqueFourier(QWidget * parent) : QCustomPlot(parent)
+GraphiqueFourier::GraphiqueFourier(QWidget * parent) : QCustomPlot(parent),
+    _menu(NULL)
 {
-
     // Configuration du graphe
     this->addGraph();
     QPen graphPen;
     graphPen.setColor(QColor(45, 45, 45));
     graphPen.setWidthF(1);
     this->graph(0)->setPen(graphPen);
+
     // Axes
-    this->xAxis->setRange(0, 1);
-    this->yAxis->setRange(0, 1.05);
+    QPen penGrid = this->xAxis->gridPen();
+    QPen penSubGrid = this->xAxis->subGridPen();
+    penGrid.setColor(QColor(140, 140, 140));
+    penSubGrid.setColor(QColor(220, 220, 220));
+    this->xAxis->setRange(0, 20000);
     this->xAxis->setVisible(false);
     this->xAxis->setTicks(false);
+    this->xAxis->setLabel(trUtf8("Fréquence (Hz)"));
+    this->xAxis->setAutoSubTicks(false);
+    this->xAxis->setAutoTickStep(false);
+    this->xAxis->setTickStep(2000);
+    this->xAxis->setSubTickCount(3);
+    this->xAxis->setSubGrid(true);
+    this->xAxis->setGridPen(penGrid);
+    this->xAxis->setSubGridPen(penSubGrid);
+    this->xAxis->setTickLength(0);
+    this->xAxis->setSubTickLength(0);
+    this->xAxis->setBasePen(penGrid);
+
+    this->yAxis->setRange(0, 1.05);
     this->yAxis->setVisible(false);
     this->yAxis->setTicks(false);
+    this->yAxis->setLabel(trUtf8("Intensité"));
+    this->yAxis->setAutoSubTicks(false);
+    this->yAxis->setAutoTickStep(false);
+    this->yAxis->setTickStep(0.2);
+    this->yAxis->setSubTickCount(1);
+    this->yAxis->setSubGrid(true);
+    this->yAxis->setGridPen(penGrid);
+    this->yAxis->setSubGridPen(penSubGrid);
+    this->yAxis->setTickLength(0);
+    this->yAxis->setSubTickLength(0);
+    this->yAxis->setBasePen(penGrid);
+
     // Marges
     this->setAutoMargin(false);
     this->setMargin(0, 0, 0, 0);
@@ -1996,8 +2042,11 @@ GraphiqueFourier::GraphiqueFourier(QWidget * parent) : QCustomPlot(parent)
     text5->setFont(QFont(font().family(), 8));
     text5->setColor(QColor(0, 0, 150, 150));
     this->addItem(text5);
-    // Filtre
-    this->installEventFilter(this);
+
+    // Préparation du menu contextuel
+    _menu = new QMenu(this);
+    QAction * action = _menu->addAction(trUtf8("Exporter graphique"));
+    connect(action, SIGNAL(triggered()), this, SLOT(exportPng()));
 }
 
 // Méthodes publiques
@@ -2006,13 +2055,19 @@ void GraphiqueFourier::setBackgroundColor(QColor color)
     // Modification de la couleur de fond
     this->setColor(color);
 }
-void GraphiqueFourier::setData(QByteArray baData, qint32 posStart, qint32 posEnd, DWORD dwSmplRate)
+void GraphiqueFourier::setData(QByteArray baData, DWORD dwSmplRate)
 {
     this->baData = baData;
     this->dwSmplRate = dwSmplRate;
-    this->setPos(posStart, posEnd);
 }
 void GraphiqueFourier::setPos(qint32 posStart, qint32 posEnd)
+{
+    QList<double> freq, factor;
+    QList<int> pitch, corrections;
+    setPos(posStart, posEnd, freq, factor, pitch, corrections);
+}
+void GraphiqueFourier::setPos(qint32 posStart, qint32 posEnd, QList<double> &frequencies, QList<double> &factors,
+                              QList<int> &pitch, QList<int> &corrections)
 {
     if (this->baData.size() == 0)
     {
@@ -2131,22 +2186,26 @@ void GraphiqueFourier::setPos(qint32 posStart, qint32 posEnd)
             if (posMaxFFT[i] != 0)
             {
                 // intensité
+                factors << (double)data[posMaxFFT[i]] / data[posMaxFFT[0]];
                 qTmp.sprintf("%.2f\n", (double)data[posMaxFFT[i]] / data[posMaxFFT[0]]);
                 qStr2.append(qTmp);
                 // fréquence
                 double freq = (double)(posMaxFFT[i] * dwSmplRate) / (size - 1);
+                frequencies << freq;
                 qTmp.sprintf("%.2f Hz\n", freq);
                 qStr3.append(qTmp);
                 // note la plus proche
                 double note = 12 * log2(freq) - 36.3763;
                 if (note < 0) note = 0;
                 else if (note > 128) note = 128;
-                int note2 = note + .5;
+                int note2 = qRound(note);
                 int correction = qRound(((double)note2 - note) * 100.);
                 qTmp.sprintf("%d\n", note2);
                 qStr4.append(qTmp);
                 qTmp.sprintf("%d\n", correction);
                 qStr5.append(qTmp);
+                pitch << note2;
+                corrections << correction;
             }
         }
     }
@@ -2162,9 +2221,9 @@ void GraphiqueFourier::setPos(qint32 posStart, qint32 posEnd)
     // Ajout des données
     DWORD size_x = ((long int)baFourier.size() / 4 * 40000) / this->dwSmplRate;
     QVector<double> x(size_x), y(size_x);
-    for (unsigned long i=0; i < size_x; i++)
+    for (unsigned long i = 0; i < size_x; i++)
     {
-        x[i] = (double)i/(size_x - 1);
+        x[i] = (double)i/(size_x - 1) * 20000; // Conversion Hz
         if (i < (unsigned)baFourier.size() / 4 && posMaxFFT[0] != 0)
             y[i] = (double)data[i]/data[posMaxFFT[0]]; // normalisation entre 0 et 1
         else
@@ -2177,7 +2236,7 @@ void GraphiqueFourier::setPos(qint32 posStart, qint32 posEnd)
     delete [] posMaxFFT;
     delete [] posMinCor;
 }
-void GraphiqueFourier::resized()
+void GraphiqueFourier::resizeEvent(QResizeEvent * event)
 {
     // Repositionnement du texte
     QSize size = this->size();
@@ -2186,4 +2245,75 @@ void GraphiqueFourier::resized()
     text3->position->setCoords((double)(size.width() - 45) / size.width(), y);
     text4->position->setCoords((double)(size.width() - 20) / size.width(), y);
     text5->position->setCoords((double)(size.width() - 1) / size.width(), y);
+
+    QCustomPlot::resizeEvent(event);
+}
+void GraphiqueFourier::mousePressEvent(QMouseEvent *event)
+{
+    if (event->button() == Qt::RightButton)
+    {
+        // Affichage menu contextuel
+        _menu->exec(QCursor::pos());
+    }
+}
+void GraphiqueFourier::exportPng()
+{
+    Config * conf = Config::getInstance();
+
+    QString defaultFile = conf->getLastDirectory(Config::typeFichierFrequences) + "/" +
+            _name.replace(QRegExp(QString::fromUtf8("[`~*|:<>«»?/{}\"\\\\]")), "_") + ".png";
+    QString fileName = QFileDialog::getSaveFileName(this, trUtf8("Exporter un graphique"),
+                                                    defaultFile, trUtf8("Fichier .png (*.png)"));
+    if (!fileName.isEmpty())
+    {
+        conf->addFile(Config::typeFichierFrequences, fileName);
+        exportPng(fileName);
+    }
+}
+void GraphiqueFourier::exportPng(QString fileName)
+{
+    // Préparation
+    this->yAxis->setRange(0, 1);
+    QColor backgroundColor = this->color();
+    this->setColor(Qt::white);
+    this->xAxis->setVisible(true);
+    this->xAxis->setTicks(true);
+    this->yAxis->setVisible(true);
+    this->yAxis->setTicks(true);
+    this->setAutoMargin(true);
+    this->setTitle(_name);
+    QPen graphPen;
+    graphPen.setColor(QColor(240, 0, 0));
+    graphPen.setWidthF(1);
+    this->graph(0)->setPen(graphPen);
+
+    // Redimensionnement
+    QSize minSize = this->minimumSize();
+    this->setMinimumSize(1200, 400);
+
+    // Création fichier png
+    QFile file(fileName);
+    if (file.open(QIODevice::WriteOnly))
+    {
+        QPixmap pix = QPixmap::grabWidget(this);
+        pix.save(&file, "PNG");
+        file.close();
+    }
+
+    // Restauration du style du départ
+    this->yAxis->setRange(0, 1.05);
+    this->setColor(backgroundColor);
+    this->xAxis->setVisible(false);
+    this->xAxis->setTicks(false);
+    this->yAxis->setVisible(false);
+    this->yAxis->setTicks(false);
+    this->setAutoMargin(false);
+    this->setMargin(0, 0, 0, 0);
+    this->setTitle("");
+    graphPen.setColor(QColor(45, 45, 45));
+    graphPen.setWidthF(1);
+    this->graph(0)->setPen(graphPen);
+
+    // Redimensionnement
+    this->setMinimumSize(minSize);
 }

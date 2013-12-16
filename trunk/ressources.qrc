@@ -77,6 +77,7 @@
         <file alias="import">ressources/import.png</file>
         <file alias="unlink">ressources/unlink.png</file>
         <file alias="external_link.gif">ressources/external_link.gif</file>
+        <file alias="csv">ressources/csv.png</file>
     </qresource>
     <qresource prefix="/aide">
         <file alias="page0.png">ressources/doc/page 0.png</file>
@@ -261,6 +262,10 @@
         <file alias="toolbar2.png">ressources/doc/toolbar2.png</file>
         <file alias="arbre3.png">ressources/doc/arbre3.png</file>
         <file alias="arbre3 en.png">ressources/doc/arbre3 en.png</file>
+        <file alias="fourier.png">ressources/doc/fourier.png</file>
+        <file alias="fourier en.png">ressources/doc/fourier en.png</file>
+        <file alias="5-3-4en.html">ressources/doc/5-tools/3-global/5-3-4en.html</file>
+        <file alias="5-3-4fr.html">ressources/doc/5-tools/3-global/5-3-4fr.html</file>
     </qresource>
     <qresource prefix="/traductions">
         <file alias="polyphone_en.qm">ressources/traductions/polyphone_en.qm</file>

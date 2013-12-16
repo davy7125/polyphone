@@ -41,6 +41,7 @@ void PianoKeybd::initScene(int base, int num, const QColor& c)
     m_scene = new PianoScene(base, num, c, this);
     connect(m_scene, SIGNAL(noteOn(int)), SIGNAL(noteOn(int)));
     connect(m_scene, SIGNAL(noteOff(int)), SIGNAL(noteOff(int)));
+    connect(m_scene, SIGNAL(mouseOver(int)), SIGNAL(mouseOver(int)));
     setScene(m_scene);
 }
 

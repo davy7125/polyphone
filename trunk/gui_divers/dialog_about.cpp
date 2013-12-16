@@ -49,6 +49,8 @@ DialogAbout::DialogAbout(QWidget *parent) :
     // Crédit
     _credit.addCreator("Davy Triponney", "info@polyphone.fr");
     _credit.addContributor("Kinwie", "kinwie@yahoo.com");
+    _credit.addContributor("Michael Schyllberg", "michael.schyllberg@bredband.net");
+    _credit.addContributor("Paul Stratman", "pcstratman@gmail.com");
     _credit.addContributor("Steve Clarke", "stevertyu@yahoo.com");
     _credit.addTranslator("Davy Triponney", "info@polyphone.fr");
     _credit.addTranslator("F.J. Martínez Murcia", "fjesusmartinez@ugr.es");

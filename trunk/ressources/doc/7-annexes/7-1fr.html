@@ -5,7 +5,7 @@
 	<li>Seuls les opcodes ayant un homologue dans les <a href="qrc:/aide/4-2-0fr.html">tableaux</a> sont importés.</li>
 	<li>L'enveloppe appliquée au ton et au filtre étant commune dans le format <a href="qrc:/aide/7-0fr.html">sf2</a> (Mod env), il n'est pas possible d'importer des enveloppes différentes pour le ton et le filtre (opcodes fileg_* et pitcheg_*).</li>
 	<li>Le LFO appliqué au volume et au filtre étant commun dans le format <a href="qrc:/aide/7-0fr.html">sf2</a> (Mod LFO), il n'est pas possible d'importer des LFOs différents pour le volume et le filtre (opcodes amplfo_* et fillfo_*).</li>
-	<li>Le seul filtre pouvant être importé est le filtre passe bas du 2ème ordre (fil_type=lpf_2p)</li>.
+	<li>Le seul filtre pouvant être importé est le filtre passe bas du 2ème ordre (fil_type=lpf_2p).</li>
 	<li>Pour être importés correctement, les opcodes «&#160;group&#160;» et «&#160;off_by&#160;» doivent contenir la même valeur au sein d'un même groupe.</li>
 </ul>
 Attention&#160;: les opcodes «&#160;width&#160;» et «&#160;position&#160;» peuvent ne pas être correctement interprétés.
@@ -14,6 +14,8 @@ Attention&#160;: les opcodes «&#160;width&#160;» et «&#160;position&#160;» peuve
 <ul>
 	<li>Les <a href="qrc:/aide/4-2-1fr.html">modulateurs</a> ne sont actuellement pas exportés.</li>
 	<li>Le format sfz (version 1) n'autorisant qu'une seule modulation du ton, les deux paramètres «&#160;Vib LFO &#8594; ton (c)&#160;» et «&#160;Mod LFO &#8594; ton (c)&#160;» ne peuvent pas être exportés simultanément.</li>
+	<li>Une boucle 0-1 peut être exportée mais est ignorée par la plupart des lecteurs sfz.</li>
+	<li>Les échantillons 24 bits peuvent ne pas être supportés dans certains synthétiseurs.</li>
 </ul>
 
 <h3>De manière générale</h3>

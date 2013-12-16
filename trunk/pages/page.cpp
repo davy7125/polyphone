@@ -3674,6 +3674,7 @@ TableWidget::TableWidget(QWidget *parent) : QTableWidget(parent)
 {
     KeyPressCatcher * keyPressCatcher = new KeyPressCatcher(this);
     this->installEventFilter(keyPressCatcher);
+    //this->verticalScrollBar()->installEventFilter(keyPressCatcher);
     connect(keyPressCatcher, SIGNAL(set(int, int, bool)), this, SLOT(emitSet(int, int, bool)));
     _timer = new QTimer(this);
     connect(_timer, SIGNAL(timeout()), this, SLOT(updateColors()));
@@ -3704,6 +3705,7 @@ void TableWidget::addColumn(int column, QString title)
     // Création d'éléments
     for (int i = 0; i < this->rowCount(); i++)
         this->setItem(i, column, new QTableWidgetItem());
+
     // Modification du titre
     this->setHorizontalHeaderItem(column, new QTableWidgetItem(title));
     // Ajout d'un élément couleur
