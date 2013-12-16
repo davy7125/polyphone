@@ -176,7 +176,8 @@ PianoKey* PianoScene::getKeyForPos( const QPointF& p ) const
 
 void PianoScene::mouseMoveEvent ( QGraphicsSceneMouseEvent * mouseEvent )
 {
-    if (m_mousePressed) {
+    if (m_mousePressed)
+    {
         PianoKey* key = getKeyForPos(mouseEvent->scenePos());
         PianoKey* lastkey = getKeyForPos(mouseEvent->lastScenePos());
         if ((lastkey != NULL) && (lastkey != key) && lastkey->isPressed()) {
@@ -187,6 +188,14 @@ void PianoScene::mouseMoveEvent ( QGraphicsSceneMouseEvent * mouseEvent )
         }
         mouseEvent->accept();
         return;
+    }
+    else
+    {
+        PianoKey* key = getKeyForPos(mouseEvent->scenePos());
+        if (key)
+            mouseOver(m_baseOctave*12 + key->getNote() + m_transpose);
+        else
+            mouseOver(-1);
     }
     mouseEvent->ignore();
 }
@@ -337,4 +346,11 @@ void PianoScene::useStandardNoteNames()
 {
     m_noteNames.clear();
     refreshLabels();
+}
+
+bool PianoScene::event(QEvent *event)
+{
+    if (event->type() == QEvent::Leave)
+        mouseOver(-1);
+    return QGraphicsScene::event(event);
 }

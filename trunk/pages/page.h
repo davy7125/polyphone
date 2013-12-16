@@ -60,12 +60,10 @@ public:
     };
     Page(TypePage typePage, QWidget *parent = 0);
 
-    // Méthodes publiques
     virtual void afficher() = 0;
     static QString getGenName(WORD iVal, int type = 0);
 
 protected:
-    // Attributs protégés
     bool preparation;
     static MainWindow *mainWindow;
     static Tree *tree;
@@ -74,7 +72,6 @@ protected:
     static Synth * synth;
     TypePage m_typePage;
 
-    // Méthodes protégées
     char * getTextValue(char * T, WORD champ, genAmountType genVal);
     static char * getTextValue(char * T, WORD champ, int iVal);
     static char * getTextValue(char * T, WORD champ, SFModulator sfModVal);
@@ -91,10 +88,8 @@ class TableWidget : public QTableWidget
 {
     Q_OBJECT
 public:
-    // Constructeur
     TableWidget(QWidget *parent = 0);
     ~TableWidget();
-    // Méthodes publiques
     void clear();
     void efface();
     void addColumn(int column, QString title);
@@ -107,6 +102,8 @@ public:
     virtual int getRow(WORD champ) = 0;
     void setColumnCount(int columns);
     void removeColumn(int column);
+
+    int isEditing() { return (int)this->state(); }
 
 private slots:
     void emitSet(int ligne, int colonne, bool newAction);
@@ -125,11 +122,9 @@ class TableWidgetMod : public QTableWidget
 {
     Q_OBJECT
 public:
-    // Constructeur
     TableWidgetMod(QWidget *parent = 0);
     ~TableWidgetMod();
 
-    // Méthodes publiques
     void clear();
     void addRow(int row);
     void setID(EltID id, int row);
@@ -191,6 +186,19 @@ public:
                 }
                 this->table->blockSignals(false);
             }
+        }
+        else if (event->type() == QEvent::Wheel)
+        {
+            qDebug() << this->table->isEditing();
+            QWheelEvent * wheelEvent = (QWheelEvent*)event;
+            if (wheelEvent->orientation() == Qt::Horizontal)
+            {
+                int numDegrees = wheelEvent->delta() / 8;
+                int numSteps = numDegrees / 15;
+                qDebug() << numSteps;
+            }
+            event->accept();
+            return true; // Pas de propagation
         }
         // on laisse passer l'événement
         return QObject::eventFilter(object, event);

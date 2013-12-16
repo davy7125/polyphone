@@ -291,6 +291,9 @@ void Config::addFile(TypeFichier typeFichier, QString filePath)
     case typeFichierImport:
         importFile = filePath;
         break;
+    case typeFichierFrequences:
+        pngFile = filePath;
+        break;
     case typeFichierSf2:{
         int n = 4;
         if (filePath.compare(this->listFiles.at(0)) == 0)
@@ -331,31 +334,16 @@ QString Config::getLastFile(TypeFichier typeFichier, int num)
     case typeFichierImport:
         lastFile = importFile;
         break;
+    case typeFichierFrequences:
+        lastFile = pngFile;
+        break;
     }
 
     return lastFile;
 }
 QString Config::getLastDirectory(TypeFichier typeFichier)
 {
-    QString lastDir;
-    switch (typeFichier)
-    {
-    case typeFichierEnregistrement:
-        lastDir = recordFile;
-        break;
-    case typeFichierSample:
-        lastDir = sampleFile;
-        break;
-    case typeFichierSf2:
-        lastDir = this->listFiles.at(0);
-        break;
-    case typeFichierExport:
-        lastDir = exportFile;
-        break;
-    case typeFichierImport:
-        lastDir = importFile;
-        break;
-    }
+    QString lastDir = getLastFile(typeFichier);
     if (!lastDir.isEmpty())
         lastDir = QFileInfo(lastDir).dir().path();
 

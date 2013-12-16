@@ -49,7 +49,8 @@ public:
         typeFichierSample,
         typeFichierEnregistrement,
         typeFichierExport,
-        typeFichierImport
+        typeFichierImport,
+        typeFichierFrequences
     };
 
     static Config * getInstance(QWidget *parent = NULL);
@@ -630,7 +631,7 @@ private:
     static Config * _instance;
     // Paramètres configuration
     QStringList listFiles;
-    QString recordFile, sampleFile, exportFile, importFile;
+    QString recordFile, sampleFile, exportFile, importFile, pngFile;
     bool ram;
     int audioType;
     int audioIndex;

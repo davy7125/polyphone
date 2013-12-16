@@ -71,6 +71,7 @@ public slots:
 signals:
     void noteOn( int midiNote );
     void noteOff( int midiNote );
+    void mouseOver( int midiNote );
 
 protected:
     void initialize();

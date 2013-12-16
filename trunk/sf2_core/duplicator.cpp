@@ -643,7 +643,7 @@ void Duplicator::copyGen(EltID idSource, EltID idDest)
                     _source->get(idSource, champ_sfGenOper).sfGenValue == champ_instrument))
             {
                 EltID idLinkSource = idSource;
-                if (idSource.typeElement == elementInstGen)
+                if (idSource.typeElement == elementInstSmplGen)
                     idLinkSource.typeElement = elementSmpl;
                 else
                     idLinkSource.typeElement = elementInst;

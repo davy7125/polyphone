@@ -149,14 +149,15 @@ private slots:
     void purger();              // outil sf2, suppression des éléments non utilisés
     void associationAutoSmpl(); // outil sf2, association auto gauche-droite des samples
     void magnetophone();        // affichage du magnétophone
+    void on_action_Dissocier_les_samples_st_r_o_triggered();
+    void on_actionExporter_pics_de_fr_quence_triggered();
 
     void noteOn(int key);
     void noteOff(int key);
+    void noteHover(int key);
     void setSustain(bool isOn);
     void setVolume(int vol);
     void noteChanged(int key, int vel);
-
-    void on_action_Dissocier_les_samples_st_r_o_triggered();
 
 signals:
     void initAudio(int numDevice, int bufferSize);
@@ -182,6 +183,7 @@ private:
     QAction * actionKeyboard;
     QList<QAction *> actionSeparators;
     QString _title;
+    int _currentKey;
 
     // Gestion sustain pedal
     QList<int> _listKeysToRelease;
@@ -190,6 +192,7 @@ private:
     // Méthodes privées
     void ouvrir(QString fileName);
     void importerSmpl(QString path, EltID id, int *replace);
+    void exporterFrequences(QString fileName);
     void updateTitle();
     int sauvegarder(int indexSf2, bool saveAs);
     void updateFavoriteFiles();

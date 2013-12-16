@@ -56,6 +56,8 @@ public:
     void sifflements();
     bool isPlaying();
 
+    void getPeakFrequencies(EltID id, QList<double> &frequencies, QList<double> &factors, QList<int> &keys, QList<int> &corrections);
+
 signals:
     void noteChanged(int unused, int vel);
 
@@ -251,26 +253,35 @@ private:
 class GraphiqueFourier : public QCustomPlot
 {
     Q_OBJECT
+
 public:
     explicit GraphiqueFourier(QWidget *parent = 0);
     void setBackgroundColor(QColor color);
-    void setData(QByteArray baData, qint32 posStart, qint32 posEnd, DWORD dwSmplRate);
+    void setData(QByteArray baData, DWORD dwSmplRate);
+    void setSampleName(QString name) { _name = name; }
     void setPos(qint32 posStart, qint32 posEnd);
-    bool eventFilter(QObject* object, QEvent* event)
-    {
-        if (event->type() == QEvent::Resize && object == this)
-            this->resized();
-        return false;
-    }
+    void setPos(qint32 posStart, qint32 posEnd, QList<double> &frequencies, QList<double> &factors,
+                QList<int> &pitch, QList<int> &corrections);
+
+protected:
+    void resizeEvent(QResizeEvent *event);
+    void mousePressEvent(QMouseEvent *event);
+
+private slots:
+    void exportPng();
+
 private:
     QByteArray baData;
     DWORD dwSmplRate;
+    QString _name;
     QCPItemText * text1; // estimation
     QCPItemText * text2; // intensité
     QCPItemText * text3; // fréquence
     QCPItemText * text4; // note
     QCPItemText * text5; // correction
+    QMenu * _menu;
     void resized();
+    void exportPng(QString fileName);
 };
 
 

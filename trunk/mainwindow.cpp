@@ -51,6 +51,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent, Qt::Window | Qt::W
     keyboard(NULL),
     dialogMagneto(NULL), // doit être appelé après le premier appel au singleton Config
     actionKeyboard(NULL),
+    _currentKey(-1),
     _isSustainOn(false)
 {
     ui->setupUi(this);
@@ -113,7 +114,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent, Qt::Window | Qt::W
     ui->stackedWidget->addWidget(page_prst);
 
     // Initialisation arbre (passage de l'adresse de mainWindow)
-    ui->arborescence->init(this);
+    ui->arborescence->init(this, sf2);
 
     // Initialisation dialog liste (pointeur vers les sf2 et mainWindow)
     this->dialList.init(this, this->sf2);
@@ -160,6 +161,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent, Qt::Window | Qt::W
     connect(this->keyboard, SIGNAL(volumeChanged(int)), this, SLOT(setVolume(int)));
     connect(this->keyboard, SIGNAL(noteOn(int)), this, SLOT(noteOn(int)));
     connect(this->keyboard, SIGNAL(noteOff(int)), this, SLOT(noteOff(int)));
+    connect(this->keyboard, SIGNAL(mouseOver(int)), this, SLOT(noteHover(int)));
     connect(this->page_smpl, SIGNAL(noteChanged(int,int)), this, SLOT(noteChanged(int,int)));
 
     // Connexion changement de couleur
@@ -709,7 +711,8 @@ QList<QAction *> MainWindow::getListeActions()
                 << ui->action_Visualiseur
                 << ui->actionExporter_en_tant_qu_sfz
                 << ui->actionI_mporter_soundfont
-                << ui->action_Dissocier_les_samples_st_r_o;
+                << ui->action_Dissocier_les_samples_st_r_o
+                << ui->actionExporter_pics_de_fr_quence;
     return listeAction;
 }
 void MainWindow::setListeActions(QList<QAction *> listeActions)
@@ -2188,6 +2191,64 @@ void MainWindow::on_action_Dissocier_les_samples_st_r_o_triggered()
         this->page_smpl->afficher();
 }
 
+void MainWindow::on_actionExporter_pics_de_fr_quence_triggered()
+{
+    EltID id = this->ui->arborescence->getID(0);
+    id.typeElement = elementSf2;
+    QString defaultFile = configuration->getLastDirectory(Config::typeFichierFrequences) + "/" +
+            sf2->getQstr(id, champ_name).replace(QRegExp(QString::fromUtf8("[`~*|:<>«»?/{}\"\\\\]")), "_") + ".csv";
+    QString fileName = QFileDialog::getSaveFileName(this, trUtf8("Exporter les pics de fréquence"),
+                                                    defaultFile, trUtf8("Fichier .csv (*.csv)"));
+    if (!fileName.isEmpty())
+    {
+        configuration->addFile(Config::typeFichierFrequences, fileName);
+        exporterFrequences(fileName);
+    }
+}
+
+void MainWindow::exporterFrequences(QString fileName)
+{
+    // Création fichier csv
+    QFile file(fileName);
+    if (!file.open(QIODevice::WriteOnly))
+        return;
+
+    QString sep = trUtf8(";");
+    QTextStream stream(&file);
+    stream << "\"" << trUtf8("Echantillon") << "\"" << sep << "\"" << trUtf8("Numéro de pic") << "\"" << sep << "\""
+           << trUtf8("Facteur") << "\"" << sep << "\"" << trUtf8("Fréquence") << "\"" << sep << "\""
+           << trUtf8("Note") << "\"" << sep << "\"" << trUtf8("Correction") << "\"";
+
+    EltID id = this->ui->arborescence->getID(0);
+    id.typeElement = elementSmpl;
+    QString nomSmpl;
+    QList<double> listeFrequences, listeFacteurs;
+    QList<int> listeNotes, listeCorrections;
+    for (int i = 0; i < sf2->count(id); i++)
+    {
+        id.indexElt = i;
+        if (!sf2->get(id, champ_hidden).bValue)
+        {
+            nomSmpl = sf2->getQstr(id, champ_name).replace(QRegExp(QString::fromUtf8("[`~*|:<>«»?/{}\"\\\\]")), "_");
+
+            // Ecriture valeurs pour l'échantillon
+            page_smpl->getPeakFrequencies(id, listeFrequences, listeFacteurs, listeNotes, listeCorrections);
+
+            for (int j = 0; j < listeFrequences.size(); j++)
+            {
+                stream << endl;
+                stream << "\"" << nomSmpl << "\"" << sep;
+                stream << j << sep;
+                stream << QString::number(listeFacteurs.at(j)).replace(".", trUtf8(",")) << sep;
+                stream << QString::number(listeFrequences.at(j)).replace(".", trUtf8(",")) << sep;
+                stream << listeNotes.at(j) << sep;
+                stream << listeCorrections.at(j);
+            }
+        }
+    }
+    file.close();
+}
+
 // Gestion du clavier virtuel / du son
 void MainWindow::setAudioEngine(int audioEngine, int bufferSize)
 {
@@ -2199,6 +2260,8 @@ void MainWindow::showKeyboard(bool val)
     this->ui->velocityButton->setVisible(val);
     this->ui->labelNote->setVisible(val);
     this->ui->labelVelocite->setVisible(val);
+    this->ui->label_2->setVisible(val);
+    this->ui->label_3->setVisible(val);
 }
 void MainWindow::setVelocity(int val)
 {
@@ -2216,8 +2279,21 @@ void MainWindow::openMidiPort(int val)
 {
     this->keyboard->openMidiPort(val);
 }
-void MainWindow::noteOn(int key)    { noteChanged(key, this->configuration->getKeyboardVelocity()); }
+void MainWindow::noteOn(int key)
+{
+    noteChanged(key, this->configuration->getKeyboardVelocity());
+}
 void MainWindow::noteOff(int key)   { noteChanged(key, 0); }
+void MainWindow::noteHover(int key)
+{
+    if (_currentKey == -1)
+    {
+        if (key != -1)
+            this->ui->labelNote->setText(QString("%1").arg(key));
+        else
+            this->ui->labelNote->setText("-");
+    }
+}
 void MainWindow::setSustain(bool isOn)
 {
     _isSustainOn = isOn;
@@ -2238,6 +2314,11 @@ void MainWindow::setVolume(int vol)
 }
 void MainWindow::noteChanged(int key, int vel)
 {
+    if (vel == 0)
+         _currentKey = -1;
+    else
+        _currentKey = key;
+
     // Cas particulier : arrêt de la lecture d'un sample
     if (key == -1 && vel == 0)
     {
@@ -2269,7 +2350,7 @@ void MainWindow::noteChanged(int key, int vel)
         vel = defaultVelocity;
     if (vel > 0 && key != -1)
     {
-        this->ui->labelNote->setText(QString("#%1").arg(key));
+        this->ui->labelNote->setText(QString("%1").arg(key));
         this->ui->labelVelocite->setText(QString("%1").arg(vel));
     }
     else
