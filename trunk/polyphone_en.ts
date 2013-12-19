@@ -4,7 +4,7 @@
 <context>
     <name>ComboBox</name>
     <message>
-        <location filename="pages/page.h" line="291"/>
+        <location filename="pages/page.h" line="305"/>
         <source>Modulateur</source>
         <translation>Modulator</translation>
     </message>
