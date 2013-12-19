@@ -8,7 +8,7 @@ QT       += core gui printsupport svg
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 # Option for developers ONLY
-DEFINES += SHOW_ID_ERROR
+#DEFINES += SHOW_ID_ERROR
 
 TARGET = polyphone
 TEMPLATE = app
