@@ -75,6 +75,9 @@ PianoKeybdCustom::PianoKeybdCustom(QWidget *parent) : PianoKeybd(parent),
 #if defined(__WINDOWS_MM__)
         this->midiin = new RtMidiInWinMM("Polyphone");
 #endif
+#if defined(__MACOSX_CORE__)
+        this->midiin = new RtMidiInCoreMidi("Polyphone");
+#endif
     }
     catch (RtError &error)
     {

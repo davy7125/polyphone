@@ -83,10 +83,31 @@ private:
     int limit(int iTmp, int minInst, int maxInst, int minPrst = 0, int maxPrst = 0);
 };
 
+
+
+class TableDelegate : public QStyledItemDelegate
+{
+    Q_OBJECT
+
+public:
+    TableDelegate(QTableWidget * table, QObject * parent = NULL): QStyledItemDelegate(parent),
+        _table(table)
+    {}
+
+protected:
+    QWidget * createEditor(QWidget *parent, const QStyleOptionViewItem &option, const QModelIndex &index) const;
+
+private:
+    QTableWidget * _table;
+};
+
+
+
 // Classe QTableWidget avec inclusion d'une ID
 class TableWidget : public QTableWidget
 {
     Q_OBJECT
+
 public:
     TableWidget(QWidget *parent = 0);
     ~TableWidget();
@@ -102,8 +123,6 @@ public:
     virtual int getRow(WORD champ) = 0;
     void setColumnCount(int columns);
     void removeColumn(int column);
-
-    int isEditing() { return (int)this->state(); }
 
 private slots:
     void emitSet(int ligne, int colonne, bool newAction);
@@ -135,6 +154,7 @@ public:
 class KeyPressCatcher : public QObject
 {
     Q_OBJECT
+
 signals:
     void set(int ligne, int row, bool newAction);
 
@@ -180,25 +200,10 @@ public:
                 for (int i = 1; i < listCell.count(); i++)
                 {
                     listCell.at(i)->setText("");
-                    emit(set(listCell.at(i)->row(),
-                             listCell.at(i)->column(),
-                             false));
+                    emit(set(listCell.at(i)->row(), listCell.at(i)->column(), false));
                 }
                 this->table->blockSignals(false);
             }
-        }
-        else if (event->type() == QEvent::Wheel)
-        {
-            qDebug() << this->table->isEditing();
-            QWheelEvent * wheelEvent = (QWheelEvent*)event;
-            if (wheelEvent->orientation() == Qt::Horizontal)
-            {
-                int numDegrees = wheelEvent->delta() / 8;
-                int numSteps = numDegrees / 15;
-                qDebug() << numSteps;
-            }
-            event->accept();
-            return true; // Pas de propagation
         }
         // on laisse passer l'événement
         return QObject::eventFilter(object, event);
@@ -238,6 +243,7 @@ public:
         this->setModel(model);
         view->resizeColumnsToContents();
     }
+
     bool eventFilter(QObject* object, QEvent* event)
     {
         if (event->type() == QEvent::MouseButtonPress && object == view()->viewport())

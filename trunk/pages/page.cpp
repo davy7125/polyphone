@@ -3674,7 +3674,7 @@ TableWidget::TableWidget(QWidget *parent) : QTableWidget(parent)
 {
     KeyPressCatcher * keyPressCatcher = new KeyPressCatcher(this);
     this->installEventFilter(keyPressCatcher);
-    //this->verticalScrollBar()->installEventFilter(keyPressCatcher);
+    this->setItemDelegate(new TableDelegate(this));
     connect(keyPressCatcher, SIGNAL(set(int, int, bool)), this, SLOT(emitSet(int, int, bool)));
     _timer = new QTimer(this);
     connect(_timer, SIGNAL(timeout()), this, SLOT(updateColors()));
@@ -3871,4 +3871,81 @@ EltID TableWidgetMod::getID()
     if (this->selectedItems().count())
         id = getID(this->selectedItems().takeAt(0)->row());
     return id;
+}
+
+QWidget * TableDelegate::createEditor(QWidget *parent, const QStyleOptionViewItem &option, const QModelIndex &index) const
+{
+    Q_UNUSED(option)
+
+    int isNumeric = true;
+    int nbDecimales = 0;
+    if (_table->rowCount() == 50)
+    {
+        // Table instrument
+        switch (index.row())
+        {
+        case 4: case 5:
+            isNumeric = false;
+            break;
+        case 6: case 7: case 14: case 19: case 27: case 37: case 42: case 43:
+            nbDecimales = 1;
+            break;
+        case 15: case 16: case 17: case 18: case 20:
+        case 23: case 24: case 25: case 26: case 28:
+        case 33: case 34: case 38: case 39:
+            nbDecimales = 3;
+            break;
+        }
+    }
+    else
+    {
+        // Table preset
+        switch (index.row())
+        {
+        case 4: case 5:
+            isNumeric = false;
+            break;
+        case 6: case 7: case 12: case 17: case 25: case 35: case 39: case 40:
+            nbDecimales = 1;
+            break;
+        case 11: case 13: case 14: case 15: case 16: case 18:
+        case 21: case 22: case 23: case 24: case 26: case 31:
+        case 32: case 36: case 37:
+            nbDecimales = 3;
+            break;
+        }
+    }
+
+    QWidget * widget;
+    QColor highlightColor = parent->palette().color(QPalette::Highlight);
+    if (isNumeric)
+    {
+        if (nbDecimales == 0)
+        {
+            QSpinBox * spin = new QSpinBox(parent);
+            spin->setMinimum(-1000000);
+            spin->setMaximum(1000000);
+            spin->setStyleSheet("QSpinBox{ border: 3px solid " + highlightColor.name() + "; }"
+                                "QSpinBox::down-button{width:0px;} QSpinBox::up-button{width:0px;} ");
+            widget = spin;
+        }
+        else
+        {
+            QDoubleSpinBox * spin = new QDoubleSpinBox(parent);
+            spin->setMinimum(-1000000);
+            spin->setMaximum(1000000);
+            spin->setSingleStep(.1);
+            spin->setStyleSheet("QDoubleSpinBox{ border: 3px solid " + highlightColor.name() + "; }"
+                                  "QDoubleSpinBox::down-button{width:0px;} QDoubleSpinBox::up-button{width:0px;} ");
+            spin->setDecimals(nbDecimales);
+            widget = spin;
+        }
+    }
+    else
+    {
+        widget = new QLineEdit(parent);
+        widget->setStyleSheet("QLineEdit{ border: 3px solid " + highlightColor.name() + "; }");
+    }
+
+    return widget;
 }

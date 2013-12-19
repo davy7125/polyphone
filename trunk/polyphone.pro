@@ -30,9 +30,9 @@ CONFIG(debug, debug|release){
 
 win32{
     DEFINES += __WINDOWS_MM__ PA_USE_ASIO
+    INCLUDEPATH += lib/win/
     LIBS += -Llib/win -lportaudio -ljack \
             -lwinmm libole32
-    INCLUDEPATH += lib/win/
     HEADERS  += lib/win/jack.h \
         lib/win/weakmacros.h \
         lib/win/types.h \
@@ -53,6 +53,13 @@ unix{
     } else {
         LIBS += /usr/lib/i386-linux-gnu/libportaudio.so.2
     }
+}
+macx {
+    DEFINES += __MACOSX_CORE__
+    INCLUDEPATH += lib/mac/
+    LIBS += -Llib/mac -lportaudio -ljack
+    # to be continued ...
+    HEADERS  += lib/mac/jack.h
 }
 
 INCLUDEPATH += gui_divers \
