@@ -105,7 +105,7 @@ class GraphLegend : public QCustomPlot
 
 public:
     explicit GraphLegend(QWidget *parent = 0);
-    void plot(QCP::ScatterStyle style, QColor couleur, int size, int epaisseur, bool antiAliased);
+    void plot(QCPScatterStyle::ScatterShape style, QColor couleur, int size, int epaisseur, bool antiAliased);
 };
 
 #endif // DIALOG_VISUALIZER_H

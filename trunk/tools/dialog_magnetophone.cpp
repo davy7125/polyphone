@@ -159,7 +159,7 @@ QString DialogMagnetophone::getDefaultPath()
     }
     else
 #if QT_VERSION >= QT_VERSION_CHECK(5, 0, 0)
-        defaultPath = QStandardPaths::displayName(QStandardPaths::DesktopLocation) + "/" + trUtf8("enregistrement");
+        defaultPath = QDir::home().path() + "/" + trUtf8("enregistrement");
 #else
         defaultPath = QDesktopServices::storageLocation(QDesktopServices::DesktopLocation) + "/" + trUtf8("enregistrement");
 #endif

@@ -9,8 +9,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>413</width>
-    <height>283</height>
+    <width>474</width>
+    <height>281</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -21,6 +21,21 @@
     <normaloff>:/icones/icon</normaloff>:/icones/icon</iconset>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
+   <property name="spacing">
+    <number>6</number>
+   </property>
+   <property name="leftMargin">
+    <number>6</number>
+   </property>
+   <property name="topMargin">
+    <number>12</number>
+   </property>
+   <property name="rightMargin">
+    <number>6</number>
+   </property>
+   <property name="bottomMargin">
+    <number>6</number>
+   </property>
    <item>
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
@@ -31,17 +46,46 @@
        <string>Général</string>
       </attribute>
       <layout class="QGridLayout" name="gridLayout_2">
+       <property name="leftMargin">
+        <number>6</number>
+       </property>
+       <property name="topMargin">
+        <number>6</number>
+       </property>
+       <property name="rightMargin">
+        <number>6</number>
+       </property>
+       <property name="bottomMargin">
+        <number>6</number>
+       </property>
        <property name="verticalSpacing">
         <number>3</number>
        </property>
-       <item row="0" column="0">
-        <widget class="QLabel" name="label_2">
+       <item row="3" column="2">
+        <widget class="QComboBox" name="comboMidiInput"/>
+       </item>
+       <item row="3" column="0">
+        <widget class="QLabel" name="label_4">
          <property name="text">
-          <string>Gestion RAM</string>
+          <string>Entrée midi</string>
          </property>
         </widget>
        </item>
-       <item row="0" column="1">
+       <item row="5" column="2">
+        <widget class="QCheckBox" name="checkBlanc">
+         <property name="text">
+          <string>enlever le blanc au départ</string>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="2">
+        <widget class="QCheckBox" name="checkBoucle">
+         <property name="text">
+          <string>ajuster à la boucle</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="2">
         <widget class="QComboBox" name="comboRam">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
@@ -61,26 +105,6 @@
          </item>
         </widget>
        </item>
-       <item row="1" column="0">
-        <widget class="QLabel" name="label">
-         <property name="text">
-          <string>Sortie audio</string>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="1">
-        <widget class="QComboBox" name="comboAudioOuput"/>
-       </item>
-       <item row="3" column="0">
-        <widget class="QLabel" name="label_4">
-         <property name="text">
-          <string>Entrée midi</string>
-         </property>
-        </widget>
-       </item>
-       <item row="3" column="1">
-        <widget class="QComboBox" name="comboMidiInput"/>
-       </item>
        <item row="4" column="0">
         <widget class="QLabel" name="label_3">
          <property name="minimumSize">
@@ -94,35 +118,10 @@
          </property>
         </widget>
        </item>
-       <item row="4" column="1">
-        <widget class="QCheckBox" name="checkBoucle">
-         <property name="text">
-          <string>ajuster à la boucle</string>
-         </property>
-        </widget>
+       <item row="1" column="2">
+        <widget class="QComboBox" name="comboAudioOuput"/>
        </item>
-       <item row="5" column="1">
-        <widget class="QCheckBox" name="checkBlanc">
-         <property name="text">
-          <string>enlever le blanc au départ</string>
-         </property>
-        </widget>
-       </item>
-       <item row="6" column="1">
-        <widget class="QCheckBox" name="checkRepercussionStereo">
-         <property name="text">
-          <string>répercuter les modifications</string>
-         </property>
-        </widget>
-       </item>
-       <item row="6" column="0">
-        <widget class="QLabel" name="label_20">
-         <property name="text">
-          <string>Édition stéréo</string>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="1">
+       <item row="2" column="2">
         <widget class="QComboBox" name="comboBufferSize">
          <item>
           <property name="text">
@@ -161,10 +160,38 @@
          </item>
         </widget>
        </item>
+       <item row="6" column="2">
+        <widget class="QCheckBox" name="checkRepercussionStereo">
+         <property name="text">
+          <string>répercuter les modifications</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="0">
+        <widget class="QLabel" name="label_2">
+         <property name="text">
+          <string>Gestion RAM</string>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="0">
+        <widget class="QLabel" name="label_20">
+         <property name="text">
+          <string>Édition stéréo</string>
+         </property>
+        </widget>
+       </item>
        <item row="2" column="0">
         <widget class="QLabel" name="label_21">
          <property name="text">
           <string>Taille du tampon</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="QLabel" name="label">
+         <property name="text">
+          <string>Sortie audio</string>
          </property>
         </widget>
        </item>
@@ -175,6 +202,18 @@
        <string>Synthétiseur</string>
       </attribute>
       <layout class="QHBoxLayout" name="horizontalLayout_3">
+       <property name="leftMargin">
+        <number>6</number>
+       </property>
+       <property name="topMargin">
+        <number>6</number>
+       </property>
+       <property name="rightMargin">
+        <number>6</number>
+       </property>
+       <property name="bottomMargin">
+        <number>6</number>
+       </property>
        <item>
         <layout class="QVBoxLayout" name="verticalLayout_2">
          <item>
@@ -546,6 +585,18 @@
        <string>Graphique</string>
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_4">
+       <property name="leftMargin">
+        <number>6</number>
+       </property>
+       <property name="topMargin">
+        <number>6</number>
+       </property>
+       <property name="rightMargin">
+        <number>6</number>
+       </property>
+       <property name="bottomMargin">
+        <number>6</number>
+       </property>
        <item>
         <widget class="QGroupBox" name="groupBox_3">
          <property name="font">
@@ -572,6 +623,9 @@
           </property>
           <property name="bottomMargin">
            <number>0</number>
+          </property>
+          <property name="spacing">
+           <number>6</number>
           </property>
           <item row="0" column="0">
            <widget class="QLabel" name="label_13">
@@ -905,6 +959,18 @@
        <string>Barre d'outils</string>
       </attribute>
       <layout class="QHBoxLayout" name="horizontalLayout_2">
+       <property name="leftMargin">
+        <number>6</number>
+       </property>
+       <property name="topMargin">
+        <number>6</number>
+       </property>
+       <property name="rightMargin">
+        <number>6</number>
+       </property>
+       <property name="bottomMargin">
+        <number>6</number>
+       </property>
        <item>
         <layout class="QVBoxLayout" name="verticalLayout_6">
          <item>
@@ -1177,6 +1243,18 @@
        <string>Clavier</string>
       </attribute>
       <layout class="QHBoxLayout" name="horizontalLayout_7">
+       <property name="leftMargin">
+        <number>6</number>
+       </property>
+       <property name="topMargin">
+        <number>6</number>
+       </property>
+       <property name="rightMargin">
+        <number>6</number>
+       </property>
+       <property name="bottomMargin">
+        <number>6</number>
+       </property>
        <item>
         <widget class="TableKey" name="tableKeyboardMap">
          <property name="styleSheet">
@@ -1281,7 +1359,7 @@ QTableWidget
        <property name="sizeHint" stdset="0">
         <size>
          <width>40</width>
-         <height>20</height>
+         <height>10</height>
         </size>
        </property>
       </spacer>

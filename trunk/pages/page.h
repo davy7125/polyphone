@@ -36,6 +36,7 @@
 #include <QTextEdit>
 #include <QApplication>
 #include <QPushButton>
+#include <QStyledItemDelegate>
 
 class Config;
 

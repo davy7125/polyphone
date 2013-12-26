@@ -35,7 +35,7 @@ void EditKey::keyPressEvent(QKeyEvent * event)
         event->ignore();
     else
     {
-        QString combinaison = getSequence(event);
+        QString combinaison = getSequence(event).toString();
         if (combinaison.isEmpty())
             this->setText("...");
         else
@@ -66,7 +66,7 @@ void EditKey::keyReleaseEvent(QKeyEvent * event)
         event->ignore();
     else
     {
-        QString combinaison = getSequence(event);
+        QString combinaison = getSequence(event).toString();
         if (combinaison.isEmpty())
         {
             if (this->hasFocus())
@@ -97,7 +97,7 @@ QKeySequence EditKey::getSequence(QKeyEvent * event)
     // Sensibilité à la touche shift uniquement
     if (event->modifiers() & Qt::ShiftModifier)
         modifier += "Shift+";
-    QString key = (QString)QKeySequence(event->key());
+    QString key = QKeySequence(event->key()).toString();
     return QKeySequence(modifier + key);
 }
 

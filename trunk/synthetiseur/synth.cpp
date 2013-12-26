@@ -40,10 +40,6 @@ Synth::Synth(Pile_sf2 *sf2, QObject *parent) :
     m_recordFile(NULL),
     m_isRecording(true)
 {
-    m_mutexInterrupt.unlock();
-    m_mutexVoices.unlock();
-    m_mutexCompleted.unlock();
-    m_mutexRecord.unlock();
 }
 Synth::~Synth()
 {
@@ -604,6 +600,7 @@ void Synth::interruption()
     m_mutexInterrupt.lock();
     m_interrupt = true;
     m_mutexInterrupt.unlock();
+    m_mutexCompleted.tryLock();
     m_mutexCompleted.unlock();
 }
 qint64 Synth::readData(char *data1, char *data2, qint64 maxlen)

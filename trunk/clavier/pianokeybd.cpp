@@ -56,7 +56,8 @@ void PianoKeybd::initialize()
     setOptimizationFlag(DontClipPainter, true);
     setOptimizationFlag(DontSavePainterState, true);
     setOptimizationFlag(DontAdjustForAntialiasing, true);
-    setBackgroundBrush(QApplication::palette().background());
+    //setBackgroundBrush(QApplication::palette().background());
+    this->setStyleSheet("background-color: transparent;");
 }
 
 void PianoKeybd::resizeEvent(QResizeEvent *event)

@@ -29,6 +29,8 @@
 #include "dialog_sifflements.h"
 #include <QProgressDialog>
 #include <QInputDialog>
+#include <QDesktopWidget>
+#include <QFileDialog>
 
 Page_Smpl::Page_Smpl(QWidget *parent) :
     Page(PAGE_SMPL, parent),
@@ -1646,8 +1648,8 @@ Graphique::Graphique(QWidget * parent) : QCustomPlot(parent),
     this->yAxis->setTicks(false);
 
     // Marges
-    this->setAutoMargin(false);
-    this->setMargin(0, 0, 0, 0);
+    this->axisRect()->setAutoMargins(QCP::msNone);
+    this->axisRect()->setMargins(QMargins(0, 0, 0, 0));
 
     // Message "sélection multiple"
     textMultipleSelection = new QCPItemText(this);
@@ -1670,7 +1672,7 @@ void Graphique::updateStyle()
     if (colors.size() != 6)
         return;
     // Couleur de fond
-    this->setColor(colors.at(0));
+    this->setBackground(colors.at(0));
     QPen graphPen;
     graphPen.setColor(colors.at(0));
     this->yAxis->setBasePen(graphPen);
@@ -1705,9 +1707,9 @@ void Graphique::updateStyle()
     // Couleur de la grille
     graphPen.setColor(colors.at(2));
     graphPen.setWidthF(1);
-    this->yAxis->setZeroLinePen(graphPen);
+    this->yAxis->grid()->setZeroLinePen(graphPen);
     graphPen.setStyle(Qt::DotLine);
-    this->yAxis->setGridPen(graphPen);
+    this->yAxis->grid()->setPen(graphPen);
     // Curseur de lecture et message (sélection multiple)
     penLecture.setColor(colors.at(5));
     penLecture.setWidthF(1);
@@ -1968,8 +1970,8 @@ GraphiqueFourier::GraphiqueFourier(QWidget * parent) : QCustomPlot(parent),
     this->graph(0)->setPen(graphPen);
 
     // Axes
-    QPen penGrid = this->xAxis->gridPen();
-    QPen penSubGrid = this->xAxis->subGridPen();
+    QPen penGrid = this->xAxis->grid()->pen();
+    QPen penSubGrid = this->xAxis->grid()->subGridPen();
     penGrid.setColor(QColor(140, 140, 140));
     penSubGrid.setColor(QColor(220, 220, 220));
     this->xAxis->setRange(0, 20000);
@@ -1980,9 +1982,9 @@ GraphiqueFourier::GraphiqueFourier(QWidget * parent) : QCustomPlot(parent),
     this->xAxis->setAutoTickStep(false);
     this->xAxis->setTickStep(2000);
     this->xAxis->setSubTickCount(3);
-    this->xAxis->setSubGrid(true);
-    this->xAxis->setGridPen(penGrid);
-    this->xAxis->setSubGridPen(penSubGrid);
+    this->xAxis->grid()->setSubGridVisible(true);
+    this->xAxis->grid()->setPen(penGrid);
+    this->xAxis->grid()->setSubGridPen(penSubGrid);
     this->xAxis->setTickLength(0);
     this->xAxis->setSubTickLength(0);
     this->xAxis->setBasePen(penGrid);
@@ -1995,16 +1997,17 @@ GraphiqueFourier::GraphiqueFourier(QWidget * parent) : QCustomPlot(parent),
     this->yAxis->setAutoTickStep(false);
     this->yAxis->setTickStep(0.2);
     this->yAxis->setSubTickCount(1);
-    this->yAxis->setSubGrid(true);
-    this->yAxis->setGridPen(penGrid);
-    this->yAxis->setSubGridPen(penSubGrid);
+    this->yAxis->grid()->setSubGridVisible(true);
+    this->yAxis->grid()->setPen(penGrid);
+    this->yAxis->grid()->setSubGridPen(penSubGrid);
     this->yAxis->setTickLength(0);
     this->yAxis->setSubTickLength(0);
     this->yAxis->setBasePen(penGrid);
 
     // Marges
-    this->setAutoMargin(false);
-    this->setMargin(0, 0, 0, 0);
+    this->axisRect()->setAutoMargins(QCP::msNone);
+    this->axisRect()->setMargins(QMargins(0, 0, 0, 0));
+
     // Texte
     text1 = new QCPItemText(this);
     text1->position->setType(QCPItemPosition::ptAxisRectRatio);
@@ -2047,13 +2050,17 @@ GraphiqueFourier::GraphiqueFourier(QWidget * parent) : QCustomPlot(parent),
     _menu = new QMenu(this);
     QAction * action = _menu->addAction(trUtf8("Exporter graphique"));
     connect(action, SIGNAL(triggered()), this, SLOT(exportPng()));
+
+    this->plotLayout()->insertRow(0);
+    this->plotLayout()->setRowStretchFactors(QList<double>() << 0 << 100);
+    this->plotLayout()->setRowSpacing(0);
 }
 
 // Méthodes publiques
 void GraphiqueFourier::setBackgroundColor(QColor color)
 {
     // Modification de la couleur de fond
-    this->setColor(color);
+    this->setBackground(color);
 }
 void GraphiqueFourier::setData(QByteArray baData, DWORD dwSmplRate)
 {
@@ -2274,14 +2281,15 @@ void GraphiqueFourier::exportPng(QString fileName)
 {
     // Préparation
     this->yAxis->setRange(0, 1);
-    QColor backgroundColor = this->color();
-    this->setColor(Qt::white);
+    QColor backgroundColor = this->mBackgroundBrush.color();
+    this->setBackgroundColor(Qt::white);
     this->xAxis->setVisible(true);
     this->xAxis->setTicks(true);
     this->yAxis->setVisible(true);
     this->yAxis->setTicks(true);
-    this->setAutoMargin(true);
-    this->setTitle(_name);
+    this->axisRect()->setAutoMargins(QCP::msAll);
+    QCPPlotTitle * title = new QCPPlotTitle(this, _name);
+    this->plotLayout()->addElement(0, 0, title);
     QPen graphPen;
     graphPen.setColor(QColor(240, 0, 0));
     graphPen.setWidthF(1);
@@ -2302,14 +2310,14 @@ void GraphiqueFourier::exportPng(QString fileName)
 
     // Restauration du style du départ
     this->yAxis->setRange(0, 1.05);
-    this->setColor(backgroundColor);
+    this->setBackgroundColor(backgroundColor);
     this->xAxis->setVisible(false);
     this->xAxis->setTicks(false);
     this->yAxis->setVisible(false);
     this->yAxis->setTicks(false);
-    this->setAutoMargin(false);
-    this->setMargin(0, 0, 0, 0);
-    this->setTitle("");
+    this->axisRect()->setAutoMargins(QCP::msNone);
+    this->axisRect()->setMargins(QMargins(0, 0, 0, 0));
+    this->plotLayout()->remove(title);
     graphPen.setColor(QColor(45, 45, 45));
     graphPen.setWidthF(1);
     this->graph(0)->setPen(graphPen);

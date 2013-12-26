@@ -27,6 +27,7 @@
 
 
 #include <QMainWindow>
+#include <QDockWidget>
 #include <QDir>
 #include <stdlib.h>
 #include <stdio.h>
@@ -49,6 +50,30 @@ namespace Ui
     class MainWindow;
     class Tree;
 }
+
+class DockWidget: public QDockWidget
+{
+    Q_OBJECT
+
+public:
+    explicit DockWidget(QWidget * parent = NULL) : QDockWidget(parent)
+    {
+#ifdef Q_OS_MAC
+        this->setStyleSheet("DockWidget::title{padding-left: 20px; text-align: left;}");
+#else
+        this->setStyleSheet("DockWidget::title{border: 0px; padding: 3px;}");
+#endif
+    }
+
+protected:
+    virtual void closeEvent(QCloseEvent * event)
+    {
+        // Retour dans le dock
+        this->setFloating(false);
+
+        event->ignore();
+    }
+};
 
 class MainWindow : public QMainWindow
 {
@@ -204,6 +229,5 @@ protected:
     void closeEvent(QCloseEvent *event);
     void resizeEvent(QResizeEvent *);
 };
-
 
 #endif // MAINWINDOW_H

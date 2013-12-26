@@ -2,6 +2,7 @@
 #include "ui_dialog_export.h"
 #include "pile_sf2.h"
 #include "config.h"
+#include <QFileDialog>
 
 DialogExport::DialogExport(Pile_sf2 *sf2, EltID idSf2, QWidget *parent) :
     QDialog(parent),

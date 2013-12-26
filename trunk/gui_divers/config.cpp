@@ -24,6 +24,7 @@
 
 #include <QFileInfo>
 #include <QDir>
+#include <QColorDialog>
 #include "config.h"
 #include "ui_config.h"
 #include "mainwindow.h"
@@ -48,12 +49,17 @@ Config::Config(QWidget *parent) : QDialog(parent),
     settings(this),
     ui(new Ui::Config)
 {
+    ui->setupUi(this);
+
+#ifdef Q_OS_MAC
+    ui->groupBox->layout()->setMargin(10);
+#endif
+
     for (int i = 0; i < 5; i++)
         listFiles.append("");
 
     this->mainWindow = (MainWindow *)parent;
     this->loaded = false;
-    ui->setupUi(this);
     // CHARGEMENT DE LA CONFIGURATION
     this->load();
     // initialisation des élements
@@ -229,7 +235,7 @@ void Config::on_comboBufferSize_activated(int index)
     // Modification de la taille du buffer
     if (this->loaded)
     {
-        bufferSize = pow(2, index + 4);
+        bufferSize = pow(2.0f, index + 4);
         setAudioOutput(ui->comboAudioOuput->currentIndex());
     }
 }
@@ -349,7 +355,7 @@ QString Config::getLastDirectory(TypeFichier typeFichier)
 
     if (lastDir.isEmpty() || !QDir(lastDir).exists())
 #if QT_VERSION >= QT_VERSION_CHECK(5, 0, 0)
-        lastDir =  QStandardPaths::displayName(QStandardPaths::DesktopLocation);
+        lastDir =  QDir::home().path();
 #else
         lastDir = QDesktopServices::storageLocation(QDesktopServices::DesktopLocation);
 #endif
