@@ -66,7 +66,8 @@ public:
     void pause(bool isOn);
 
     // Exécution par le serveur audio (thread 3)
-    qint64 readData(char *data1, char *data2, qint64 maxlen);
+    using CircularBuffer::readData;
+    virtual qint64 readData(char *data1, char *data2, qint64 maxlen);
     void setFormat(AudioFormat format);
 
 public slots:

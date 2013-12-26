@@ -10,7 +10,7 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 # Option for developers ONLY
 #DEFINES += SHOW_ID_ERROR
 
-TARGET = polyphone
+TARGET = Polyphone
 TEMPLATE = app
 
 CONFIG(release, debug|release){
@@ -39,14 +39,14 @@ win32{
         lib/win/transport.h \
         lib/win/systemdeps.h \
         lib/win/session.h
+    RC_FILE = polyphone.rc
 }
-unix{
+unix:!macx{
     DEFINES += __LINUX_ALSASEQ__
     CONFIG += link_pkgconfig
     PKGCONFIG += alsa
     INCLUDEPATH += /usr/include/jack
     LIBS += -ljack
-
     # Linking portaudio may need adjustments (see README file)
     contains(QMAKE_HOST.arch, x86_64):{
         LIBS += /usr/lib/x86_64-linux-gnu/libportaudio.so.2
@@ -57,9 +57,10 @@ unix{
 macx {
     DEFINES += __MACOSX_CORE__
     INCLUDEPATH += lib/mac/
-    LIBS += -Llib/mac -lportaudio -ljack
-    # to be continued ...
-    HEADERS  += lib/mac/jack.h
+    LIBS += -Llib/mac -lportaudio -ljack \
+    -framework CoreAudio -framework CoreMIDI -framework CoreFoundation \
+    -framework AudioUnit -framework AudioToolbox -framework Cocoa
+    ICON = polyphone.icns
 }
 
 INCLUDEPATH += gui_divers \
@@ -215,7 +216,6 @@ FORMS    += mainwindow.ui \
 
 RESOURCES += ressources.qrc \
     clavier/pianokeybd.qrc
-RC_FILE = polyphone.rc
 
 TRANSLATIONS = polyphone_en.ts \
     polyphone_es.ts

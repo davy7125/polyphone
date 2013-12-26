@@ -28,7 +28,16 @@
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QGridLayout" name="gridLayout">
-    <property name="margin">
+    <property name="leftMargin">
+     <number>0</number>
+    </property>
+    <property name="topMargin">
+     <number>0</number>
+    </property>
+    <property name="rightMargin">
+     <number>0</number>
+    </property>
+    <property name="bottomMargin">
      <number>0</number>
     </property>
     <property name="horizontalSpacing">
@@ -67,7 +76,16 @@
        <property name="spacing">
         <number>0</number>
        </property>
-       <property name="margin">
+       <property name="leftMargin">
+        <number>0</number>
+       </property>
+       <property name="topMargin">
+        <number>0</number>
+       </property>
+       <property name="rightMargin">
+        <number>0</number>
+       </property>
+       <property name="bottomMargin">
         <number>0</number>
        </property>
        <item>
@@ -107,7 +125,7 @@
            </property>
            <property name="font">
             <font>
-             <pointsize>9</pointsize>
+             <pointsize>10</pointsize>
             </font>
            </property>
            <property name="text">
@@ -134,7 +152,7 @@
            </property>
            <property name="font">
             <font>
-             <pointsize>9</pointsize>
+             <pointsize>10</pointsize>
             </font>
            </property>
            <property name="text">
@@ -147,6 +165,11 @@
          </item>
          <item row="1" column="0">
           <widget class="QLabel" name="label_2">
+           <property name="font">
+            <font>
+             <pointsize>10</pointsize>
+            </font>
+           </property>
            <property name="text">
             <string>Vél.</string>
            </property>
@@ -157,6 +180,11 @@
          </item>
          <item row="0" column="0">
           <widget class="QLabel" name="label_3">
+           <property name="font">
+            <font>
+             <pointsize>10</pointsize>
+            </font>
+           </property>
            <property name="text">
             <string>Note</string>
            </property>
@@ -197,7 +225,7 @@
      <x>0</x>
      <y>0</y>
      <width>592</width>
-     <height>23</height>
+     <height>22</height>
     </rect>
    </property>
    <property name="accessibleDescription">
@@ -357,7 +385,7 @@
     <bool>false</bool>
    </attribute>
   </widget>
-  <widget class="QDockWidget" name="dockWidget">
+  <widget class="DockWidget" name="dockWidget">
    <property name="minimumSize">
     <size>
      <width>150</width>
@@ -376,13 +404,6 @@
      <bold>true</bold>
     </font>
    </property>
-   <property name="styleSheet">
-    <string notr="true">QDockWidget::title
-{
-	border: 0px;
-	padding: 3px;
-}</string>
-   </property>
    <property name="features">
     <set>QDockWidget::DockWidgetFloatable|QDockWidget::DockWidgetMovable</set>
    </property>
@@ -400,7 +421,16 @@
      <property name="spacing">
       <number>0</number>
      </property>
-     <property name="margin">
+     <property name="leftMargin">
+      <number>0</number>
+     </property>
+     <property name="topMargin">
+      <number>0</number>
+     </property>
+     <property name="rightMargin">
+      <number>0</number>
+     </property>
+     <property name="bottomMargin">
       <number>0</number>
      </property>
      <item>
@@ -473,7 +503,16 @@
          <property name="spacing">
           <number>2</number>
          </property>
-         <property name="margin">
+         <property name="leftMargin">
+          <number>2</number>
+         </property>
+         <property name="topMargin">
+          <number>2</number>
+         </property>
+         <property name="rightMargin">
+          <number>2</number>
+         </property>
+         <property name="bottomMargin">
           <number>2</number>
          </property>
          <item>
@@ -1472,6 +1511,12 @@
     <slot>clicTree()</slot>
     <slot>clicTreeRight()</slot>
    </slots>
+  </customwidget>
+  <customwidget>
+   <class>DockWidget</class>
+   <extends>QDockWidget</extends>
+   <header>mainwindow.h</header>
+   <container>1</container>
   </customwidget>
  </customwidgets>
  <resources>

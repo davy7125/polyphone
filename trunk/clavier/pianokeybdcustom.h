@@ -99,7 +99,7 @@ protected:
                 QString modifier = QString::null;
                 if (event->modifiers() & Qt::ShiftModifier)
                     modifier += "Shift+";
-                QString key = (QString)QKeySequence(event->key());
+                QString key = QKeySequence(event->key()).toString();
                 int note = _mapper->getKey(QKeySequence(modifier + key));
                 if (note != -1)
                     this->changeKey(note, 127);
@@ -119,7 +119,7 @@ protected:
                 QString modifier = QString::null;
                 if (event->modifiers() & Qt::ShiftModifier)
                     modifier += "Shift+";
-                QString key = (QString)QKeySequence(event->key());
+                QString key = QKeySequence(event->key()).toString();
                 int note = _mapper->getKey(QKeySequence(modifier + key));
                 if (note != -1)
                     this->changeKey(note, 0);

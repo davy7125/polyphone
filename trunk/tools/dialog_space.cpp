@@ -334,8 +334,8 @@ GraphSpace::GraphSpace(QWidget * parent) : QCustomPlot(parent)
     this->yAxis->setTicks(false);
 
     // Marges
-    this->setAutoMargin(false);
-    this->setMargin(0, 0, 0, 0);
+    this->axisRect()->setAutoMargins(QCP::msNone);
+    this->axisRect()->setMargins(QMargins(0, 0, 0, 0));
 
     // Ajout G / D
     QCPItemText * text = new QCPItemText(this);
@@ -362,7 +362,7 @@ GraphSpace::GraphSpace(QWidget * parent) : QCustomPlot(parent)
     graphPen.setColor(QColor(0, 0, 0));
     graphPen.setWidth(1);
     this->graph(2)->setPen(graphPen);
-    this->graph(2)->setScatterStyle(QCP::ssPlus);
+    this->graph(2)->setScatterStyle(QCPScatterStyle::ssPlus);
     labelCoord = new QCPItemText(this);
     this->addItem(labelCoord);
     labelCoord->position->setType(QCPItemPosition::ptPlotCoords);

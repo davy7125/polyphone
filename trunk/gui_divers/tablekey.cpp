@@ -42,6 +42,10 @@ TableKey::TableKey(QWidget * parent) : QTableWidget(parent),
     this->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     this->setSelectionMode(QAbstractItemView::NoSelection);
 
+    QFont font = this->font();
+    font.setBold(true);
+    this->horizontalHeader()->setFont(font);
+
     // Redimensionnement initial
     this->resizeEvent(NULL);
 

@@ -86,7 +86,7 @@ public:
     int indexSf2;
     int indexElt;
     int indexElt2;
-    int indexMod;   
+    int indexMod;
 
     bool operator==(const EltID &other)
     {

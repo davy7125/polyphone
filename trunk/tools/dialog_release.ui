@@ -9,21 +9,9 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>320</width>
-    <height>139</height>
+    <width>330</width>
+    <height>122</height>
    </rect>
-  </property>
-  <property name="minimumSize">
-   <size>
-    <width>320</width>
-    <height>139</height>
-   </size>
-  </property>
-  <property name="maximumSize">
-   <size>
-    <width>320</width>
-    <height>139</height>
-   </size>
   </property>
   <property name="windowTitle">
    <string>Élaboration release</string>
@@ -36,6 +24,18 @@
    <bool>true</bool>
   </property>
   <layout class="QGridLayout" name="gridLayout">
+   <property name="leftMargin">
+    <number>6</number>
+   </property>
+   <property name="topMargin">
+    <number>6</number>
+   </property>
+   <property name="rightMargin">
+    <number>6</number>
+   </property>
+   <property name="bottomMargin">
+    <number>6</number>
+   </property>
    <property name="verticalSpacing">
     <number>3</number>
    </property>

@@ -41,7 +41,8 @@ public:
 protected:
     qint64 writeData(const char *data, qint64 len);
     qint64 writeData(const char *data1, const char *data2, qint64 len);
-    qint64 bytesAvailable();
+    using QIODevice::bytesAvailable;
+    virtual qint64 bytesAvailable();
     qint64 dataNeeded();
     void reinit();
     virtual void generateData(qint64 nbData = 0) = 0;

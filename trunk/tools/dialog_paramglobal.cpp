@@ -263,7 +263,7 @@ GraphParamGlobal::GraphParamGlobal(QWidget * parent) : QCustomPlot(parent),
     graphPen.setWidth(2);
     this->graph(3)->setPen(graphPen);
     this->graph(3)->setLineStyle(QCPGraph::lsNone);
-    this->graph(3)->setScatterStyle(QCP::ssDot);
+    this->graph(3)->setScatterStyle(QCPScatterStyle::ssDot);
     this->graph(3)->setAntialiased(true);
     this->graph(3)->setAntialiasedScatters(true);
 
@@ -272,7 +272,7 @@ GraphParamGlobal::GraphParamGlobal(QWidget * parent) : QCustomPlot(parent),
     graphPen.setColor(QColor(0, 0, 0));
     graphPen.setWidth(1);
     this->graph(4)->setPen(graphPen);
-    this->graph(4)->setScatterStyle(QCP::ssPlus);
+    this->graph(4)->setScatterStyle(QCPScatterStyle::ssPlus);
     labelCoord = new QCPItemText(this);
     this->addItem(labelCoord);
     labelCoord->position->setType(QCPItemPosition::ptPlotCoords);
@@ -291,8 +291,8 @@ GraphParamGlobal::GraphParamGlobal(QWidget * parent) : QCustomPlot(parent),
     this->yAxis->setTicks(false);
 
     // Marges
-    this->setAutoMargin(false);
-    this->setMargin(0, 0, 0, 0);
+    this->axisRect()->setAutoMargins(QCP::msNone);
+    this->axisRect()->setMargins(QMargins(0, 0, 0, 0));
     // Préparation des données
     this->dValues.resize(this->nbPoints);
     this->dValues.fill(0.5);
