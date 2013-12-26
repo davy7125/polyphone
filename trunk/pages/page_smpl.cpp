@@ -2052,7 +2052,7 @@ GraphiqueFourier::GraphiqueFourier(QWidget * parent) : QCustomPlot(parent),
     connect(action, SIGNAL(triggered()), this, SLOT(exportPng()));
 
     this->plotLayout()->insertRow(0);
-    this->plotLayout()->setRowStretchFactors(QList<double>() << 0 << 100);
+    this->plotLayout()->setRowStretchFactors(QList<double>() << 1 << 100);
     this->plotLayout()->setRowSpacing(0);
 }
 
