@@ -65,6 +65,10 @@ Page_Inst::Page_Inst(QWidget *parent) :
     // Remplissage des combosources
     this->remplirComboSource(this->comboSource1);
     this->remplirComboSource(this->comboSource2);
+
+#ifdef Q_OS_MAC
+    this->table->setStyleSheet("QHeaderView::section:horizontal{padding: 4px 10px 4px 10px;}");
+#endif
 }
 Page_Inst::~Page_Inst()
 {
@@ -72,7 +76,7 @@ Page_Inst::~Page_Inst()
 }
 void Page_Inst::setModVisible(bool visible)
 {
-    this->ui->dockWidget->setHidden(!visible);
+    this->ui->frameModulator->setVisible(visible);
 }
 void Page_Inst::afficher()
 {
@@ -385,7 +389,7 @@ void Page_Inst::mixture(QList<QList<int> > listeParam, QString nomInst, bool bou
                 else
                     name = nomInst.left(16);
                 char str2[20];
-                sprintf(str2,"%.3hu", note);
+                sprintf(str2,"%.3d", note);
                 if (stereo)
                 {
                     if (cote == 0)
@@ -633,7 +637,7 @@ void Page_Inst::release(double duree36, double division, double deTune)
 double Page_Inst::getOffset(int type1, int type2)
 {
     // Calcul du multiple de la fréquence fondamentale
-    double multiple = (double)(2 * type1 + 1) * pow(2, type2-2);
+    double multiple = (double)(2 * type1 + 1) * pow(2.0f, type2-2);
     // Renvoi du nombre de demi-tons à ajouter à la fondamentale pour obtenir l'harmonique
     return 12.0 * log2(multiple);
 }

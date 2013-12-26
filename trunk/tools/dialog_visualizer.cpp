@@ -94,9 +94,9 @@ DialogVisualizer::DialogVisualizer(Pile_sf2 *sf2, EltID id, QWidget *parent) :
     this->on_comboParameter_currentIndexChanged(ui->comboParameter->currentIndex());
 
     // Légendes
-    this->ui->widgetLegendDefined->plot(QCP::ssCross, QColor(100, 130, 250), 5, 2, false);
-    this->ui->widgetLegendDefault->plot(QCP::ssCross, QColor(100, 130, 250), 5, 1, false);
-    this->ui->widgetLegendMoyenne->plot(QCP::ssCircle, QColor(30, 250, 80), 7, 2, true);
+    this->ui->widgetLegendDefined->plot(QCPScatterStyle::ssCross, QColor(100, 130, 250), 5, 2, false);
+    this->ui->widgetLegendDefault->plot(QCPScatterStyle::ssCross, QColor(100, 130, 250), 5, 1, false);
+    this->ui->widgetLegendMoyenne->plot(QCPScatterStyle::ssCircle, QColor(30, 250, 80), 7, 2, true);
 }
 
 DialogVisualizer::~DialogVisualizer()
@@ -327,8 +327,7 @@ GraphVisualizer::GraphVisualizer(QWidget *parent) :
     graphPen.setWidth(2);
     this->graph(1)->setPen(graphPen);
     this->graph(1)->setLineStyle(QCPGraph::lsNone);
-    this->graph(1)->setScatterStyle(QCP::ssCircle);
-    this->graph(1)->setScatterSize(7);
+    this->graph(1)->setScatterStyle(QCPScatterStyle(QCPScatterStyle::ssCircle, 7));
     this->graph(1)->setAntialiasedScatters(true);
 
     // Layer des valeurs
@@ -336,9 +335,8 @@ GraphVisualizer::GraphVisualizer(QWidget *parent) :
     graphPen.setColor(QColor(100, 130, 250));
     graphPen.setWidth(2);
     this->graph(2)->setPen(graphPen);
-    this->graph(2)->setScatterSize(5);
     this->graph(2)->setLineStyle(QCPGraph::lsNone);
-    this->graph(2)->setScatterStyle(QCP::ssCross);
+    this->graph(2)->setScatterStyle(QCPScatterStyle(QCPScatterStyle::ssCross, 5));
     this->graph(2)->setAntialiasedScatters(false);
 
     // Layer des valeurs par défaut
@@ -346,9 +344,8 @@ GraphVisualizer::GraphVisualizer(QWidget *parent) :
     graphPen.setColor(QColor(100, 130, 250));
     graphPen.setWidth(1);
     this->graph(3)->setPen(graphPen);
-    this->graph(3)->setScatterSize(5);
     this->graph(3)->setLineStyle(QCPGraph::lsNone);
-    this->graph(3)->setScatterStyle(QCP::ssCross);
+    this->graph(3)->setScatterStyle(QCPScatterStyle(QCPScatterStyle::ssCross, 5));
     this->graph(3)->setAntialiasedScatters(false);
 
     // Layer aperçu valeurs
@@ -356,7 +353,7 @@ GraphVisualizer::GraphVisualizer(QWidget *parent) :
     graphPen.setColor(QColor(0, 0, 0));
     graphPen.setWidth(1);
     this->graph(4)->setPen(graphPen);
-    this->graph(4)->setScatterStyle(QCP::ssPlus);
+    this->graph(4)->setScatterStyle(QCPScatterStyle::ssPlus);
     labelCoord = new QCPItemText(this);
     this->addItem(labelCoord);
     labelCoord->position->setType(QCPItemPosition::ptPlotCoords);
@@ -382,8 +379,8 @@ GraphVisualizer::GraphVisualizer(QWidget *parent) :
     this->yAxis->setTicks(false);
 
     // Marges
-    this->setAutoMargin(false);
-    this->setMargin(0, 0, 0, 0);
+    this->axisRect()->setAutoMargins(QCP::msNone);
+    this->axisRect()->setMargins(QMargins(0, 0, 0, 0));
 
     // Filtre sur les événements
     this->installEventFilter(this);
@@ -668,16 +665,15 @@ GraphLegend::GraphLegend(QWidget *parent) : QCustomPlot(parent)
     this->yAxis->setRange(-1, 1);
 
     // Marges
-    this->setAutoMargin(false);
-    this->setMargin(0, 0, 0, 0);
+    this->axisRect()->setAutoMargins(QCP::msNone);
+    this->axisRect()->setMargins(QMargins(0, 0, 0, 0));
 
     // Couleur de fond
-    this->setColor(parent->palette().background().color());
+    this->setBackground(parent->palette().background().color());
 }
-void GraphLegend::plot(QCP::ScatterStyle style, QColor couleur, int size, int epaisseur, bool antiAliased)
+void GraphLegend::plot(QCPScatterStyle::ScatterShape style, QColor couleur, int size, int epaisseur, bool antiAliased)
 {
-    this->graph(0)->setScatterStyle(style);
-    this->graph(0)->setScatterSize(size);
+    this->graph(0)->setScatterStyle(QCPScatterStyle(style, size));
     this->graph(0)->setAntialiasedScatters(antiAliased);
     QPen pen;
     pen.setColor(couleur);

@@ -1774,9 +1774,9 @@ int Pile_sf2::set(EltID id, Champ champ, Valeur value, bool storeAction)
             // Modification de l'élément graphique
             char num1[4], num2[4], chaine[30];
             unsigned int i = tmp->wBank;
-            sprintf(num1, "%.3hu", i);
+            sprintf(num1, "%.3d", i);
             i = tmp->wPreset;
-            sprintf(num2, "%.3hu", i);
+            sprintf(num2, "%.3d", i);
             sprintf(chaine, "%s:%s %s", num1, num2, tmp->Name);
             tmp->eltTree->setText(0, chaine);
             tmp->eltTree->setText(5, chaine);
@@ -2064,26 +2064,8 @@ int Pile_sf2::set(EltID id, Champ champ, QString qStr, bool storeAction)
             if (tree)
             {
                 // Modification de l'élément graphique
-                char num1[4], num2[4], chaine[30];
-                unsigned int i = tmp->wBank;
-                if (i < 10)
-                    sprintf(num1, "00%hu", i);
-                else if (i < 100)
-                    sprintf(num1, "0%hu", i);
-                else if (i < 1000)
-                    sprintf(num1, "%hu", i);
-                else
-                    num1[0] = '\0';
-                i = tmp->wPreset;
-                if (i < 10)
-                    sprintf(num2, "00%hu", i);
-                else if (i < 100)
-                    sprintf(num2, "0%hu", i);
-                else if (i < 1000)
-                    sprintf(num2, "%hu", i);
-                else
-                    num2[0] = '\0';
-                sprintf(chaine, "%s:%s %s", num1, num2, tmp->Name);
+                char chaine[30];
+                sprintf(chaine, "%.3d:%.3d %s", tmp->wBank, tmp->wPreset, tmp->Name);
                 tmp->eltTree->setText(0, chaine);
                 tmp->eltTree->setText(5, chaine);
                 this->sf2->getElt(id.indexSf2)->eltTreePrst->sortChildren(5, Qt::AscendingOrder);

@@ -101,7 +101,12 @@ void DialogDuplication::on_spinMaxVel_valueChanged(int arg1)
 
 void DialogDuplication::on_checkForEachVelocityRange_clicked()
 {
-    this->ui->frameVelocity->setVisible(this->ui->checkForEachVelocityRange->isChecked());
+    bool isEnabled = ui->checkForEachVelocityRange->isChecked();
+    ui->listVelocites->setEnabled(isEnabled);
+    ui->pushAdd->setEnabled(isEnabled);
+    ui->pushRemove->setEnabled(isEnabled);
+    ui->spinMaxVel->setEnabled(isEnabled);
+    ui->spinMinVel->setEnabled(isEnabled);
 }
 
 void DialogDuplication::accept()

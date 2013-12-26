@@ -1143,7 +1143,7 @@ void MainWindow::renommerEnMasse(QString name, int modificationType)
             // note du sample
             int note = sf2->get(ID, champ_byOriginalPitch).bValue;
             char str2[20];
-            sprintf(str2,"%.3hu", note);
+            sprintf(str2,"%.3d", note);
             // position du sample
             SFSampleLink pos = sf2->get(ID, champ_sfSampleType).sfLinkValue;
             // Concaténation
@@ -1158,7 +1158,7 @@ void MainWindow::renommerEnMasse(QString name, int modificationType)
             // Remplacement du nom, ajout incrément
             name = name.left(17);
             char str2[20];
-            sprintf(str2,"%.2hu", (i+1)%100);
+            sprintf(str2,"%.2d", (i+1)%100);
             newName = name + "-" + str2;
             break;
         case 2:

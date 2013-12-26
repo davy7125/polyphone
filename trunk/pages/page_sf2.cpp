@@ -57,7 +57,12 @@ void Page_Sf2::afficher()
     // Mode 24 bits ?
     ui->check_24bits->setChecked(this->sf2->get(id, champ_wBpsSave).wValue == 24);
     // Informations
-    ui->label_filename->setText(" " + this->sf2->getQstr(id, champ_filename));
+    QString txt;
+#ifndef Q_OS_MAC
+    txt = " "; // Sinon le premier "/" n'est pas visible entièrement
+#endif
+    txt += this->sf2->getQstr(id, champ_filename);
+    ui->label_filename->setText(txt);
     char T[20];
     if (this->sf2->get(id, champ_IFIL).sfVerValue.wMinor < 10)
         sprintf(T, "%d.0%d", this->sf2->get(id, champ_IFIL).sfVerValue.wMajor, this->sf2->get(id, champ_IFIL).sfVerValue.wMinor);

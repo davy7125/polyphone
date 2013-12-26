@@ -737,11 +737,13 @@ void Tree::dropEvent(QDropEvent *event)
     {
         for (int i = 0; i < event->mimeData()->urls().count(); i++)
         {
-            QString path = QUrl::fromPercentEncoding(event->mimeData()->urls().at(i).encodedPath());
+            QString path = QUrl::fromPercentEncoding(event->mimeData()->urls().at(i).toEncoded());
 #ifdef PA_USE_ASIO // Si windows
             if (path.left(1).compare("/") == 0)
                 path = path.right(path.length() - 1);
 #endif
+            if (path.left(7).compare("file://") == 0)
+                path = path.right(path.length() - 7);
             if (!path.isEmpty())
                 mainWindow->dragAndDrop(path, getItemID(itemAt(event->pos())));
         }

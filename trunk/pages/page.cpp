@@ -30,6 +30,7 @@
 #include "dialog_space.h"
 #include "dialog_duplication.h"
 #include <QScrollBar>
+#include <QLineEdit>
 
 
 //////////////////////////////////////////// PAGE ////////////////////////////////////////////

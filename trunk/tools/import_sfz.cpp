@@ -1492,7 +1492,7 @@ int Parametre::getNumNote(QString noteStr)
     int note = noteStr.toInt();
     if (note == 0 && noteStr != "0" && noteStr.size() >= 2)
     {
-        switch (noteStr.at(0).toAscii())
+        switch (noteStr.at(0).unicode())
         {
         case 'c': note = 60; break;
         case 'd': note = 62; break;
@@ -1504,12 +1504,12 @@ int Parametre::getNumNote(QString noteStr)
         default : return -1; break;
         }
         noteStr = noteStr.right(noteStr.size() - 1);
-        if (noteStr.at(0).toAscii() == '#')
+        if (noteStr.at(0).unicode() == '#')
         {
             note ++;
             noteStr = noteStr.right(noteStr.size() - 1);
         }
-        else if (noteStr.at(0).toAscii() == 'b')
+        else if (noteStr.at(0).unicode() == 'b')
         {
             note --;
             noteStr = noteStr.right(noteStr.size() - 1);

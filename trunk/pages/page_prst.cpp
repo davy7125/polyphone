@@ -63,6 +63,10 @@ Page_Prst::Page_Prst(QWidget *parent) :
     // Initialisation spinBoxes
     this->ui->spinBank->init(this);
     this->ui->spinPreset->init(this);
+
+#ifdef Q_OS_MAC
+    this->table->setStyleSheet("QHeaderView::section:horizontal{padding: 4px 10px 4px 10px;}");
+#endif
 }
 Page_Prst::~Page_Prst()
 {
@@ -70,7 +74,7 @@ Page_Prst::~Page_Prst()
 }
 void Page_Prst::setModVisible(bool visible)
 {
-    this->ui->dockWidget->setHidden(!visible);
+    this->ui->frameModulator->setVisible(visible);
 }
 void Page_Prst::afficher()
 {

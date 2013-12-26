@@ -26,6 +26,7 @@
 #define PAGE_SMPL_H
 
 #include <QWidget>
+#include <QMenu>
 #include "page.h"
 #include "qcustomplot.h"
 
@@ -256,6 +257,7 @@ class GraphiqueFourier : public QCustomPlot
 
 public:
     explicit GraphiqueFourier(QWidget *parent = 0);
+
     void setBackgroundColor(QColor color);
     void setData(QByteArray baData, DWORD dwSmplRate);
     void setSampleName(QString name) { _name = name; }
