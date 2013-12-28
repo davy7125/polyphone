@@ -28,6 +28,9 @@
 #endif
 #include "mainwindow.h"
 
+#ifdef Q_OS_MAC
+#include "macapplication.h"
+#endif
 
 int main(int argc, char *argv[])
 {
@@ -35,7 +38,13 @@ int main(int argc, char *argv[])
     QTranslator translatorEN, translatorES;
     translatorEN.load(":/traductions/polyphone_en"); // Doit se placer avant QApplication
     translatorES.load(":/traductions/polyphone_es");
+
+#ifdef Q_OS_MACX
+    QStringList listPathMac;
+    MacApplication a(argc, argv, &listPathMac);
+#else
     QApplication a(argc, argv);
+#endif
 
     // Nom de l'application
     a.setApplicationName("Polyphone");
@@ -55,6 +64,13 @@ int main(int argc, char *argv[])
     int replace = 0;
     for (int i = 1; i < listeArg.size(); i++)
         w.dragAndDrop(listeArg.at(i), EltID(elementUnknown, -1, -1, -1, -1), &replace);
+
+#ifdef Q_OS_MACX
+    for (int i = 0; i < listPathMac.size(); i++)
+        w.dragAndDrop(listPathMac.at(i), EltID(elementUnknown, -1, -1, -1, -1), &replace);
+    a.stopAppending();
+    QObject::connect(&a, SIGNAL(openFile(QString)), &w, SLOT(ouvrir(QString)));
+#endif
 
     return a.exec();
 }
