@@ -29,6 +29,7 @@
 #include <QMainWindow>
 #include <QDockWidget>
 #include <QDir>
+#include <QEvent>
 #include <stdlib.h>
 #include <stdio.h>
 #include "pile_sf2.h"
@@ -44,6 +45,7 @@
 #include "synth.h"
 #include "pianokeybdcustom.h"
 #include "dialog_magnetophone.h"
+
 
 namespace Ui
 {
@@ -108,6 +110,7 @@ public:
     void dragAndDrop(QString path, EltID idDest, int *replace = NULL);
 
 public slots:
+    void ouvrir(QString fileName);
     void returnToOldMaxMinSizes();
     void supprimerElt();        // Suppression des éléments sélectionnés dans l'arbre
     void copier();              // Envoi du signal "copier"
@@ -215,7 +218,6 @@ private:
     bool _isSustainOn;
 
     // Méthodes privées
-    void ouvrir(QString fileName);
     void importerSmpl(QString path, EltID id, int *replace);
     void exporterFrequences(QString fileName);
     void updateTitle();

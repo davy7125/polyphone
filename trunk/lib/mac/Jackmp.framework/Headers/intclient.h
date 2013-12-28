@@ -1,27 +1,28 @@
 /*
- *  Copyright (C) 2004 Jack O'Quin
- *  
- *  This program is free software; you can redistribute it and/or modify
- *  it under the terms of the GNU Lesser General Public License as published by
- *  the Free Software Foundation; either version 2.1 of the License, or
- *  (at your option) any later version.
- *  
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU Lesser General Public License for more details.
- *  
- *  You should have received a copy of the GNU Lesser General Public License
- *  along with this program; if not, write to the Free Software 
- *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
- *
- */
+*  Copyright (C) 2004 Jack O'Quin
+*  
+*  This program is free software; you can redistribute it and/or modify
+*  it under the terms of the GNU Lesser General Public License as published by
+*  the Free Software Foundation; either version 2.1 of the License, or
+*  (at your option) any later version.
+*  
+*  This program is distributed in the hope that it will be useful,
+*  but WITHOUT ANY WARRANTY; without even the implied warranty of
+*  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+*  GNU Lesser General Public License for more details.
+*  
+*  You should have received a copy of the GNU Lesser General Public License
+*  along with this program; if not, write to the Free Software 
+*  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+*
+*/
 
 #ifndef __jack_intclient_h__
 #define __jack_intclient_h__
 
 #ifdef __cplusplus
-extern "C" {
+extern "C"
+{
 #endif
 
 #include <jack/types.h>
@@ -39,10 +40,10 @@ extern "C" {
  *
  * @return NULL if unsuccessful, otherwise pointer to the internal
  * client name obtained from the heap via malloc().  The caller should
- * free() this storage when no longer needed.
+ * jack_free() this storage when no longer needed.
  */
 char *jack_get_internal_client_name (jack_client_t *client,
-				     jack_intclient_t intclient);
+                                     jack_intclient_t intclient);
 
 /**
  * Return the @ref jack_intclient_t handle for an internal client
@@ -63,8 +64,8 @@ char *jack_get_internal_client_name (jack_client_t *client,
  * JackNoSuchClient and @ref JackFailure bits.
  */
 jack_intclient_t jack_internal_client_handle (jack_client_t *client,
-					      const char *client_name,
-					      jack_status_t *status);
+        const char *client_name,
+        jack_status_t *status);
 
 /**
  * Load an internal client into the JACK server.
@@ -104,9 +105,9 @@ jack_intclient_t jack_internal_client_handle (jack_client_t *client,
  * @a *status includes the @ref JackFailure bit.
  */
 jack_intclient_t jack_internal_client_load (jack_client_t *client,
-					    const char *client_name,
-					    jack_options_t options,
-					    jack_status_t *status, ...);
+        const char *client_name,
+        jack_options_t options,
+        jack_status_t *status, ...);
 /**
  * Unload an internal client from a JACK server.  This calls the
  * intclient's jack_finish() entry point then removes it.  See @ref
@@ -120,7 +121,7 @@ jack_intclient_t jack_internal_client_load (jack_client_t *client,
  * @return 0 if successful, otherwise @ref JackStatus bits.
  */
 jack_status_t jack_internal_client_unload (jack_client_t *client,
-					   jack_intclient_t intclient);
+        jack_intclient_t intclient);
 
 #ifdef __cplusplus
 }

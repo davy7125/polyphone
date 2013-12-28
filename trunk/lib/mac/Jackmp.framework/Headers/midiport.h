@@ -1,18 +1,18 @@
 /*
     Copyright (C) 2004 Ian Esten
-    
+
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU Lesser General Public License as published by
     the Free Software Foundation; either version 2.1 of the License, or
     (at your option) any later version.
-    
+
     This program is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU Lesser General Public License for more details.
-    
+
     You should have received a copy of the GNU Lesser General Public License
-    along with this program; if not, write to the Free Software 
+    along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 
 */
@@ -24,12 +24,12 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-	
+
 #include <jack/weakmacros.h>
 #include <jack/types.h>
 #include <stdlib.h>
 
-	
+
 /** Type for raw event data contained in @ref jack_midi_event_t. */
 typedef unsigned char jack_midi_data_t;
 
@@ -44,21 +44,21 @@ typedef struct _jack_midi_event
 
 
 /**
- * @defgroup MIDIAPI Reading and writing MIDI data 
+ * @defgroup MIDIAPI Reading and writing MIDI data
  * @{
  */
 
-/* Get number of events in a port buffer.
+/** Get number of events in a port buffer.
  *
  * @param port_buffer Port buffer from which to retrieve event.
  * @return number of events inside @a port_buffer
  */
-jack_nframes_t
-jack_midi_get_event_count(void*          port_buffer) JACK_OPTIONAL_WEAK_EXPORT;
+uint32_t
+jack_midi_get_event_count(void* port_buffer) JACK_OPTIONAL_WEAK_EXPORT;
 
 
 /** Get a MIDI event from an event port buffer.
- * 
+ *
  * Jack MIDI is normalised, the MIDI event returned by this function is
  * guaranteed to be a complete MIDI event (the status byte will always be
  * present, and no realtime events will interspered with the event).
@@ -70,12 +70,12 @@ jack_midi_get_event_count(void*          port_buffer) JACK_OPTIONAL_WEAK_EXPORT;
  */
 int
 jack_midi_event_get(jack_midi_event_t *event,
-                    void              *port_buffer,
-                    uint32_t           event_index) JACK_OPTIONAL_WEAK_EXPORT;
+                    void        *port_buffer,
+                    uint32_t    event_index) JACK_OPTIONAL_WEAK_EXPORT;
 
 
 /** Clear an event buffer.
- * 
+ *
  * This should be called at the beginning of each process cycle before calling
  * @ref jack_midi_event_reserve or @ref jack_midi_event_write. This
  * function may not be called on an input port's buffer.
@@ -83,7 +83,7 @@ jack_midi_event_get(jack_midi_event_t *event,
  * @param port_buffer Port buffer to clear (must be an output port buffer).
  */
 void
-jack_midi_clear_buffer(void           *port_buffer) JACK_OPTIONAL_WEAK_EXPORT;
+jack_midi_clear_buffer(void *port_buffer) JACK_OPTIONAL_WEAK_EXPORT;
 
 
 /** Get the size of the largest event that can be stored by the port.
@@ -107,7 +107,7 @@ jack_midi_max_event_size(void* port_buffer) JACK_OPTIONAL_WEAK_EXPORT;
  * when they occur on their own, like other messages).
  *
  * Events must be written in order, sorted by their sample offsets.
- * JACK will not sort the events for you, and will refuse to store 
+ * JACK will not sort the events for you, and will refuse to store
  * out-of-order events.
  *
  * @param port_buffer Buffer to write event to.
@@ -117,9 +117,9 @@ jack_midi_max_event_size(void* port_buffer) JACK_OPTIONAL_WEAK_EXPORT;
  * NULL on error (ie not enough space).
  */
 jack_midi_data_t*
-jack_midi_event_reserve(void           *port_buffer,
-                        jack_nframes_t  time, 
-                        size_t          data_size) JACK_OPTIONAL_WEAK_EXPORT;
+jack_midi_event_reserve(void *port_buffer,
+                        jack_nframes_t  time,
+                        size_t data_size) JACK_OPTIONAL_WEAK_EXPORT;
 
 
 /** Write an event into an event port buffer.
@@ -134,7 +134,7 @@ jack_midi_event_reserve(void           *port_buffer,
  * when they occur on their own, like other messages).
  *
  * Events must be written in order, sorted by their sample offsets.
- * JACK will not sort the events for you, and will refuse to store 
+ * JACK will not sort the events for you, and will refuse to store
  * out-of-order events.
  *
  * @param port_buffer Buffer to write event to.
@@ -144,10 +144,10 @@ jack_midi_event_reserve(void           *port_buffer,
  * @return 0 on success, ENOBUFS if there's not enough space in buffer for event.
  */
 int
-jack_midi_event_write(void                   *port_buffer,
-                      jack_nframes_t          time,
+jack_midi_event_write(void *port_buffer,
+                      jack_nframes_t time,
                       const jack_midi_data_t *data,
-                      size_t                  data_size) JACK_OPTIONAL_WEAK_EXPORT;
+                      size_t data_size) JACK_OPTIONAL_WEAK_EXPORT;
 
 
 /** Get the number of events that could not be written to @a port_buffer.
@@ -159,10 +159,9 @@ jack_midi_event_write(void                   *port_buffer,
  * @returns Number of events that could not be written to @a port_buffer.
  */
 uint32_t
-jack_midi_get_lost_event_count(void           *port_buffer) JACK_OPTIONAL_WEAK_EXPORT;
+jack_midi_get_lost_event_count(void *port_buffer) JACK_OPTIONAL_WEAK_EXPORT;
 
 /*@}*/
-
 
 #ifdef __cplusplus
 }

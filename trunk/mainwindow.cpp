@@ -1190,6 +1190,13 @@ void MainWindow::dragAndDrop(EltID idDest, QList<EltID> idSources)
 }
 void MainWindow::dragAndDrop(QString path, EltID idDest, int * replace)
 {
+#ifdef PA_USE_ASIO // Si windows
+    if (path.left(1).compare("/") == 0)
+        path = path.right(path.length() - 1);
+#endif
+    if (path.left(7).compare("file://") == 0)
+        path = path.right(path.length() - 7);
+
     // prepareNewActions() et updateDo() faits à l'extérieur
     QFileInfo fileInfo(path);
     QString extension = fileInfo.suffix().toLower();
