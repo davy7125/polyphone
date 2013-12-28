@@ -56,11 +56,12 @@ unix:!macx{
 }
 macx {
     DEFINES += __MACOSX_CORE__
-    INCLUDEPATH += lib/mac/
-    LIBS += -Llib/mac -lportaudio -ljack \
+    INCLUDEPATH += lib/mac/Jackmp.framework/Headers
+    LIBS += -Llib/mac -lportaudio -F$$(PWD)lib/mac/ -framework Jackmp \
     -framework CoreAudio -framework CoreMIDI -framework CoreFoundation \
     -framework AudioUnit -framework AudioToolbox -framework Cocoa
     ICON = polyphone.icns
+    QMAKE_INFO_PLIST = polyphone.plist
 }
 
 INCLUDEPATH += gui_divers \
@@ -191,7 +192,8 @@ HEADERS  += mainwindow.h \
     gui_divers/dialog_about.h \
     gui_divers/dialog_export.h \
     sf2_core/duplicator.h \
-    tools/import_sfz.h
+    tools/import_sfz.h \
+    macapplication.h
 
 FORMS    += mainwindow.ui \
     gui_divers/config.ui \

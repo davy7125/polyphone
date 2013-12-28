@@ -2,17 +2,17 @@
     Copyright (C) 2001 Paul Davis
     Copyright (C) 2004 Jack O'Quin
     Copyright (C) 2010 Torben Hohn
-    
+
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU Lesser General Public License as published by
     the Free Software Foundation; either version 2.1 of the License, or
     (at your option) any later version.
-    
+
     This program is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU Lesser General Public License for more details.
-    
+
     You should have received a copy of the GNU Lesser General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
@@ -25,8 +25,8 @@
 extern "C" {
 #endif
 
-#include "types.h"
-#include "weakmacros.h"
+#include <jack/types.h>
+#include <jack/weakmacros.h>
 
 /**
  * @defgroup SessionClientFunctions Session API for clients.
@@ -37,7 +37,7 @@ extern "C" {
 /**
  * Session event type.
  *
- * if a client cant save templates, i might just do a normal save.
+ * If a client cant save templates, i might just do a normal save.
  *
  * There is no "quit without saving" event because a client might refuse to
  * quit when it has unsaved data, but other clients may have already quit.
@@ -168,7 +168,7 @@ typedef void (*JackSessionCallback)(jack_session_event_t *event,
  *
  * setting more than one session_callback per process is probably a design
  * error. if you have a multiclient application its more sensible to create
- * a jack_client with only a session callback set. 
+ * a jack_client with only a session callback set.
  *
  * @return 0 on success, otherwise a non-zero error code
  */
@@ -190,19 +190,20 @@ int jack_session_reply (jack_client_t        *client,
 
 
 /**
- * free memory used by a jack_session_event_t
- * this also frees the memory used by the command_line pointer.
- * if its non NULL.
+ * Free memory used by a jack_session_event_t.
+ *
+ * This also frees the memory used by the command_line pointer, if its non NULL.
  */
 void jack_session_event_free (jack_session_event_t *event) JACK_WEAK_EXPORT;
 
 
 /**
- * get the assigned uuid for client.
- * safe to call from callback and all other threads.
- * memory needs to be freed.
+ * Get the assigned uuid for client.
+ * Safe to call from callback and all other threads.
+ *
+ * The caller is responsible for calling jack_free(3) on any non-NULL
+ * returned value.
  */
-
 char *jack_client_get_uuid (jack_client_t *client) JACK_WEAK_EXPORT;
 
 /**
@@ -242,7 +243,11 @@ void jack_session_commands_free (jack_session_command_t *cmds) JACK_WEAK_EXPORT;
 
 /**
  * Get the session ID for a client name.
+ *
  * The session manager needs this to reassociate a client name to the session_id.
+ *
+ * The caller is responsible for calling jack_free(3) on any non-NULL
+ * returned value.
  */
 char *jack_get_uuid_for_client_name (jack_client_t *client,
                                      const char    *client_name) JACK_WEAK_EXPORT;
@@ -252,6 +257,9 @@ char *jack_get_uuid_for_client_name (jack_client_t *client,
  *
  * In order to snapshot the graph connections, the session manager needs to map
  * session_ids to client names.
+ *
+ * The caller is responsible for calling jack_free(3) on any non-NULL
+ * returned value.
  */
 char *jack_get_client_name_by_uuid (jack_client_t *client,
                                     const char    *client_uuid ) JACK_WEAK_EXPORT;
@@ -278,10 +286,6 @@ jack_reserve_client_name (jack_client_t *client,
  */
 int
 jack_client_has_session_callback (jack_client_t *client, const char *client_name) JACK_WEAK_EXPORT;
-
-/**
- * @}
- */
 
 #ifdef __cplusplus
 }

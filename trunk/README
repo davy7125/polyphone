@@ -1,5 +1,5 @@
 ####################################################################################################
-######################################## BUILDING POLYPHONE ########################################
+################################### BUILDING POLYPHONE FOR LINUX ###################################
 ####################################################################################################
 
 
@@ -33,6 +33,42 @@ Note: If you are using QT Creator, the project may be opened via its .pro file p
 directory. Take care shadow build is not checked (project properties).
 
 
+
+####################################################################################################
+################################## BUILDING POLYPHONE FOR MAC OS X #################################
+####################################################################################################
+
+
+######### 1. Prerequisite ##########################################################################
+
+The following applications are required:
+ - Xcode (available in app store)
+ - qt (http://qt-project.org/downloads)
+
+
+######### 2. Build #################################################################################
+
+Open polyphone.pro with QT Creator. When configuring the project, take care shadow build is not
+checked.
+Build the project, a bundle should appear in the directory "RELEASE".
+
+
+######### 3. Complete the bundle ###################################################################
+
+Run the following command to include libraries / frameworks inside the bundle (adjust the path
+first!):
+/Path/To/Qt/5.2.0/clang_64/bin/macdeployqt /Path/To/trunk/RELEASE/Polyphone.app
+
+Copy / paste the framework Jackmp from trunk/lib/mac to:
+trunk/RELEASE/Polyphone.app/Contents/Frameworks
+
+Finally, run the following command in a single line (adjust the last path first!):
+install_name_tool -change /System/Library/Frameworks/Jackmp.framework/Versions/A/Jackmp 
+@executable_path/../Frameworks/Jackmp.framework/Versions/A/Jackmp 
+/Path/To/trunk/RELEASE/Polyphone.app/Contents/MacOS/Polyphone 
+
+If you want to provide a .dmg file, use
+/Path/To/Qt/5.2.0/clang_64/bin/macdeployqt /Path/To/trunk/RELEASE/Polyphone.app -dmg
 
 
 ####################################################################################################
@@ -89,4 +125,3 @@ You may also want to build yourself Polyphone if you cannot wait:
    "/ressources/traductions" within the sources ("polyphone_es.qm" for instance),
  - close Qt Linguist,
  - build Polyphone (take a look at the first part of this file).
-
