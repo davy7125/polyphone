@@ -2095,8 +2095,8 @@ QByteArray Sound::bouclage(QByteArray baData, DWORD dwSmplRate, qint32 &loopStar
     qint32 longueurBouclage = qMin(meilleuresCorrel[0] + 2 * longueurSegmentB,
                                    (quint32)floor(dwSmplRate*4*(double)(2147483647-baCorrelations[meilleuresCorrel[0]])/2147483647));
     // Détermination des coefficients pour crossfade
-    double cr1[longueurBouclage];
-    double cr2[longueurBouclage];
+    double * cr1 = new double[longueurBouclage];
+    double * cr2 = new double[longueurBouclage];
     for (int i = 0; i < longueurBouclage;i++)
     {
         cr1[i] = (double)i/(longueurBouclage-1);
@@ -2109,6 +2109,8 @@ QByteArray Sound::bouclage(QByteArray baData, DWORD dwSmplRate, qint32 &loopStar
                 cr2[i] * data[loopEnd - longueurBouclage + i] +
                 cr1[i] * data[posStartLoop - longueurBouclage + i];
     }
+    delete [] cr1;
+    delete [] cr2;
     baData = baData.left(loopEnd * 4);
     data = (qint32*)baData.data();
     // Ajout de 8 valeurs
