@@ -44,9 +44,9 @@ win32{
 unix:!macx{
     DEFINES += __LINUX_ALSASEQ__
     CONFIG += link_pkgconfig
-    PKGCONFIG += alsa
+    PKGCONFIG += alsa jack
     INCLUDEPATH += /usr/include/jack
-    LIBS += -ljack
+
     # Linking portaudio may need adjustments (see README file)
     contains(QMAKE_HOST.arch, x86_64):{
         LIBS += /usr/lib/x86_64-linux-gnu/libportaudio.so.2
