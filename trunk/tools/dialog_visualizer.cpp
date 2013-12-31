@@ -316,7 +316,7 @@ GraphVisualizer::GraphVisualizer(QWidget *parent) :
         textLabel->setPositionAlignment(Qt::AlignBottom|Qt::AlignHCenter);
         textLabel->position->setType(QCPItemPosition::ptPlotCoords);
         textLabel->position->setCoords(note, 0);
-        textLabel->setText(QString::number(note));
+        textLabel->setText(Config::getInstance()->getKeyName(note));
         textLabel->setFont(QFont(font().family(), 8));
         textLabel->setColor(QColor(40, 40, 40));
     }

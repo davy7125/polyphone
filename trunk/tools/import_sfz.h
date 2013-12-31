@@ -140,8 +140,6 @@ private:
     int     _intValue;
     double  _dblValue;
     QString _strValue;
-
-    int getNumNote(QString noteStr);
 };
 
 class GroupeParametres

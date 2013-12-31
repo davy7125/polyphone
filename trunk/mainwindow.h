@@ -108,6 +108,7 @@ public:
     void setListeActions(QList<QAction *> listeActions);
     void dragAndDrop(EltID idDest, QList<EltID> idSources);
     void dragAndDrop(QString path, EltID idDest, int *replace = NULL);
+    void noteNameChanged();
 
 public slots:
     void ouvrir(QString fileName);

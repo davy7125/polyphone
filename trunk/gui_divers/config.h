@@ -53,6 +53,14 @@ public:
         typeFichierFrequences
     };
 
+    enum NameMiddleC
+    {
+        middleC_60,
+        middleC_C3,
+        middleC_C4,
+        middleC_C5
+    };
+
     static Config * getInstance(QWidget *parent = NULL);
     static void kill();
     ~Config();
@@ -79,6 +87,9 @@ public:
     int  getSynthChoFrequency() {return choFrequency;}
     QList<QColor> getColors()   {return colorList;}
     bool getRepercussionStereo(){return modifStereo;}
+    NameMiddleC getNameMiddleC(){return nameMiddleC;}
+    QString getKeyName(int keyNum, bool forceTexte = false, bool with0 = true);
+    int getKeyNum(QString keyName);
 
     // Accès aux paramètres des outils
     int    getTools_s_sifflements_debut()   { return settings.value("tools/sample/sifflements_debut", 8000).toInt(); }
@@ -622,6 +633,7 @@ private slots:
     void combinaisonChanged(int numKey, QString combinaison);
     void on_checkRepercussionStereo_clicked();
     void on_comboBufferSize_activated(int index);
+    void on_comboKeyName_currentIndexChanged(int index);
 
 private:
     QSettings settings;
@@ -650,6 +662,7 @@ private:
     QByteArray actionListToolbar;
     bool modifStereo;
     int bufferSize;
+    NameMiddleC nameMiddleC;
 
     // Autres
     bool loaded;

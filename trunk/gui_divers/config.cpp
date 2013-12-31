@@ -59,9 +59,11 @@ Config::Config(QWidget *parent) : QDialog(parent),
         listFiles.append("");
 
     this->mainWindow = (MainWindow *)parent;
-    this->loaded = false;
+
     // CHARGEMENT DE LA CONFIGURATION
+    this->loaded = false;
     this->load();
+
     // initialisation des élements
     if (this->ram)
         ui->comboRam->setCurrentIndex(1);
@@ -115,13 +117,14 @@ Config::Config(QWidget *parent) : QDialog(parent),
     this->ui->sliderGain->setValue(this->synthGain);
     this->ui->labelGain->setNum(this->synthGain);
     this->ui->dialRevNiveau->setValue(this->revLevel);
-    this->ui->dialRevProfondeur->setValue(this->revLevel);
+    this->ui->dialRevProfondeur->setValue(this->revSize);
     this->ui->dialRevDensite->setValue(this->revWidth);
     this->ui->dialRevAttenuation->setValue(this->revDamping);
     this->ui->dialChoNiveau->setValue(this->choLevel);
     this->ui->dialChoAmplitude->setValue(this->choDepth);
     this->ui->dialChoFrequence->setValue(this->choFrequency);
     this->ui->checkRepercussionStereo->setChecked(this->modifStereo);
+    this->ui->comboKeyName->setCurrentIndex((int)this->nameMiddleC);
     if (this->keyboardType < 0 || this->keyboardType > 3)
         this->keyboardType = 1;
     if (this->keyboardVelocity < 0)
@@ -514,6 +517,7 @@ void Config::load()
                     << settings.value("colors/graph_endloop", QColor(255, 0, 0)).toString()
                     << settings.value("colors/graph_timecursor", QColor(255, 255, 255)).toString();
     this->modifStereo       = settings.value("stereo_modification", false).toBool();
+    this->nameMiddleC       = (NameMiddleC)settings.value("name_middle_c", 0).toInt();
 }
 void Config::store()
 {
@@ -550,7 +554,8 @@ void Config::store()
     settings.setValue("colors/graph_startloop",         this->colorList.at(3).name());
     settings.setValue("colors/graph_endloop",           this->colorList.at(4).name());
     settings.setValue("colors/graph_timecursor",        this->colorList.at(5).name());
-    settings.setValue("stereo_modification",    this->modifStereo);
+    settings.setValue("stereo_modification",            this->modifStereo);
+    settings.setValue("name_middle_c",                  (int)this->nameMiddleC);
 }
 
 void Config::setColors()
@@ -876,4 +881,100 @@ void Config::on_pushOctaveMoins_clicked()
 void Config::combinaisonChanged(int numKey, QString combinaison)
 {
     this->setKeyMapped(numKey, combinaison);
+}
+
+void Config::on_comboKeyName_currentIndexChanged(int index)
+{
+    if (this->loaded)
+    {
+        this->nameMiddleC = (NameMiddleC)index;
+        this->store();
+        this->mainWindow->noteNameChanged();
+    }
+}
+
+QString Config::getKeyName(int keyNum, bool forceTexte, bool with0)
+{
+    if (this->nameMiddleC == middleC_60 && !forceTexte)
+    {
+        if (with0)
+        {
+            if (keyNum < 10)
+                return "00" + QString::number(keyNum);
+            else if (keyNum < 100)
+                return "0" + QString::number(keyNum);
+            else
+                return QString::number(keyNum);
+        }
+        else
+            return QString::number(keyNum);
+    }
+
+    QString keyName;
+    switch (keyNum % 12)
+    {
+    case 0:  keyName = "C";  break;
+    case 1:  keyName = "C#"; break;
+    case 2:  keyName = "D";  break;
+    case 3:  keyName = "D#"; break;
+    case 4:  keyName = "E";  break;
+    case 5:  keyName = "F";  break;
+    case 6:  keyName = "F#"; break;
+    case 7:  keyName = "G";  break;
+    case 8:  keyName = "G#"; break;
+    case 9:  keyName = "A";  break;
+    case 10: keyName = "A#"; break;
+    case 11: keyName = "B";  break;
+    }
+    int numOctave = (keyNum + 3) / 12 - 1;
+    if (nameMiddleC == middleC_C3)
+        numOctave -= 1;
+    else if (nameMiddleC == middleC_C5)
+        numOctave += 1;
+    keyName += QString::number(numOctave);
+
+    return keyName;
+}
+
+int Config::getKeyNum(QString keyName)
+{
+    keyName = keyName.toLower();
+    int note = keyName.toInt();
+    if (note == 0 && keyName != "0" && keyName.size() >= 2)
+    {
+        switch (keyName.at(0).unicode())
+        {
+        case 'a': note = 57; break;
+        case 'b': note = 59; break;
+        case 'c': note = 60; break;
+        case 'd': note = 62; break;
+        case 'e': note = 64; break;
+        case 'f': note = 65; break;
+        case 'g': note = 67; break;
+        default : return -1; break;
+        }
+        keyName = keyName.right(keyName.size() - 1);
+        if (keyName.at(0).unicode() == '#')
+        {
+            note++;
+            keyName = keyName.right(keyName.size() - 1);
+        }
+        else if (keyName.at(0).unicode() == 'b')
+        {
+            note --;
+            keyName = keyName.right(keyName.size() - 1);
+        }
+
+        int octave = keyName.toInt();
+        if ((octave == 0 && keyName != "0") || keyName.isEmpty())
+            return -1;
+        else
+            note += (octave - 4) * 12;
+
+        if (this->nameMiddleC == middleC_C3)
+            note += 12;
+        else if (this->nameMiddleC == middleC_C5)
+            note -= 12;
+    }
+    return note;
 }

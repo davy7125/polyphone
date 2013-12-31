@@ -22,39 +22,81 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#include "dialog_celeste.h"
-#include "ui_dialog_celeste.h"
-#include "config.h"
+#ifndef SPINBOXRANGE_H
+#define SPINBOXRANGE_H
 
-DialogCeleste::DialogCeleste(QWidget *parent) :
-    QDialog(parent),
-    ui(new Ui::DialogCeleste)
+#include <QAbstractSpinBox>
+
+class SpinBoxRange : public QAbstractSpinBox
 {
-    ui->setupUi(this);
-    Config * conf = Config::getInstance();
-    ui->doubleSpinHerz->setValue(conf->getTools_i_celeste_herzDo());
-    ui->doubleSpinDiv->setValue(conf->getTools_i_celeste_division());
+    Q_OBJECT
 
-    ui->label->setText(trUtf8("Nombre de battements par secondes (note ") +
-                       conf->getKeyName(60) + ")");
-}
+public:
+    SpinBoxRange(QWidget * parent);
+    ~SpinBoxRange() {}
 
-DialogCeleste::~DialogCeleste()
+    // QAbstractSpinBox virtual members
+    virtual void stepBy(int steps);
+    virtual QValidator::State validate(QString& input, int& pos) const;
+
+    int getValMin();
+    int getValMax();
+    void setText(QString text);
+
+public slots:
+    virtual void clear();
+
+signals:
+    void valueChanged();
+
+protected:
+    virtual StepEnabled stepEnabled() const;
+    virtual QString getText(int value) const = 0;
+    virtual int getValue(QString &text, bool &ok) const = 0;
+    void formatText();
+
+private slots:
+    void updateValue();
+
+private:
+    enum SpinboxSection
+    {
+        SectionMin,
+        SectionMax,
+        SectionNone
+    };
+    SpinboxSection getCurrentSection() const;
+    void stringToRange(QString input, int &valMin, int &valMax, QValidator::State &state) const;
+    static QString SEPARATOR;
+    static int MINI;
+    static int MAXI;
+    int _valMin, _valMax;
+};
+
+class SpinBoxVelocityRange : public SpinBoxRange
 {
-    delete ui;
-}
+    Q_OBJECT
 
-// ACCEPTATION
+public:
+    SpinBoxVelocityRange(QWidget * parent) : SpinBoxRange(parent) {formatText();}
+    ~SpinBoxVelocityRange() {}
 
-void DialogCeleste::accept()
+protected:
+    virtual QString getText(int value) const;
+    virtual int getValue(QString &text, bool &ok) const;
+};
+
+class SpinBoxKeyRange : public SpinBoxRange
 {
-    // Sauvegarde des valeurs
-    Config * conf = Config::getInstance();
-    conf->setTools_i_celeste_herzDo(this->ui->doubleSpinHerz->value());
-    conf->setTools_i_celeste_division(this->ui->doubleSpinDiv->value());
+    Q_OBJECT
 
-    // Envoi des valeurs
-    this->accepted(this->ui->doubleSpinHerz->value(),
-                   this->ui->doubleSpinDiv->value());
-    QDialog::accept();
-}
+public:
+    SpinBoxKeyRange(QWidget * parent) : SpinBoxRange(parent) {formatText();}
+    ~SpinBoxKeyRange() {}
+
+protected:
+    virtual QString getText(int value) const;
+    virtual int getValue(QString &text, bool &ok) const;
+};
+
+#endif // SPINBOXRANGE_H
