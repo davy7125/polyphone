@@ -443,8 +443,9 @@ void GraphSpace::afficheCoord(double xPan, double yLength, int key)
         else
             labelCoord->setPositionAlignment(Qt::AlignBottom | Qt::AlignHCenter);
         char T[20];
-        sprintf(T, "#%.3d: %.1f", key, xPan * 100 - 50);
-        labelCoord->setText(T);
+        sprintf(T, "%.3d: %.1f", key, xPan * 100 - 50);
+        labelCoord->setText(Config::getInstance()->getKeyName(key) + ":" +
+                            QString::number(xPan * 100 - 50, 'f', 1));
 
         // Ajustement position
         QFontMetrics fm(labelCoord->font());

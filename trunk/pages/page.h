@@ -97,6 +97,7 @@ public:
 
 protected:
     QWidget * createEditor(QWidget *parent, const QStyleOptionViewItem &option, const QModelIndex &index) const;
+    void setEditorData(QWidget *editor, const QModelIndex &index) const;
 
 private:
     QTableWidget * _table;

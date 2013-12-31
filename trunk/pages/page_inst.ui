@@ -436,23 +436,14 @@
       <enum>QFrame::Raised</enum>
      </property>
      <layout class="QGridLayout" name="gridLayout_2" rowstretch="1,2,1,0" columnstretch="100,1,1,1,1,1,1" columnminimumwidth="0,0,0,24,24,0,0">
-      <property name="leftMargin">
-       <number>0</number>
-      </property>
-      <property name="topMargin">
-       <number>0</number>
-      </property>
-      <property name="rightMargin">
-       <number>0</number>
-      </property>
-      <property name="bottomMargin">
-       <number>0</number>
-      </property>
       <property name="horizontalSpacing">
        <number>6</number>
       </property>
       <property name="verticalSpacing">
        <number>2</number>
+      </property>
+      <property name="margin">
+       <number>0</number>
       </property>
       <item row="0" column="4">
        <widget class="QPushButton" name="pushSupprimerMod">

@@ -236,7 +236,7 @@ GraphParamGlobal::GraphParamGlobal(QWidget * parent) : QCustomPlot(parent),
         textLabel->setPositionAlignment(Qt::AlignBottom|Qt::AlignHCenter);
         textLabel->position->setType(QCPItemPosition::ptPlotCoords);
         textLabel->position->setCoords(pos, 0);
-        textLabel->setText(QString::number(note));
+        textLabel->setText(Config::getInstance()->getKeyName(note));
         textLabel->setFont(QFont(font().family(), 8));
         textLabel->setColor(QColor(40, 40, 40));
     }
@@ -598,10 +598,8 @@ void GraphParamGlobal::afficheCoord(double x, double y)
             labelCoord->setPositionAlignment(Qt::AlignTop    | Qt::AlignHCenter);
         else
             labelCoord->setPositionAlignment(Qt::AlignBottom | Qt::AlignHCenter);
-        char T[20];
-        sprintf(T, "%.3d:%.2f", qRound((double)x * 128. / this->nbPoints),
-                yMin + (yMax - yMin) * y);
-        labelCoord->setText(T);
+        labelCoord->setText(Config::getInstance()->getKeyName(qRound((double)x * 128. / this->nbPoints)) + ":" +
+                            QString::number(yMin + (yMax - yMin) * y, 'f', 2));
         // Ajustement position
         QFontMetrics fm(labelCoord->font());
         double distX = this->xAxis->pixelToCoord(fm.width(labelCoord->text()) / 2 + 2);

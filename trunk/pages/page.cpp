@@ -29,6 +29,8 @@
 #include "dialog_visualizer.h"
 #include "dialog_space.h"
 #include "dialog_duplication.h"
+#include "spinboxkey.h"
+#include "spinboxrange.h"
 #include <QScrollBar>
 #include <QLineEdit>
 
@@ -39,6 +41,7 @@ Page::Page(TypePage typePage, QWidget *parent) : QWidget(parent),
     preparation(false),
     m_typePage(typePage)
 {}
+
 // Initialisation des variables statiques
 MainWindow * Page::mainWindow = NULL;
 Tree * Page::tree = NULL;
@@ -51,19 +54,31 @@ char * Page::getTextValue(char * T, WORD champ, genAmountType genVal)
 {
     switch (champ)
     {
-    case champ_keyRange: case champ_velRange:
-        sprintf(T,"%d-%d", genVal.ranges.byLo, genVal.ranges.byHi);
+    case champ_velRange:
+        if (genVal.ranges.byLo == genVal.ranges.byHi)
+            sprintf(T, "%d", genVal.ranges.byLo);
+        else
+            sprintf(T, "%d_%d", genVal.ranges.byLo, genVal.ranges.byHi);
         break;
-
+    case champ_keyRange:
+        if (genVal.ranges.byLo == genVal.ranges.byHi)
+            sprintf(T, "%s", Config::getInstance()->getKeyName(genVal.ranges.byLo, false, false).toStdString().c_str());
+        else
+            sprintf(T, "%s_%s", Config::getInstance()->getKeyName(genVal.ranges.byLo, false, false).toStdString().c_str(),
+                    Config::getInstance()->getKeyName(genVal.ranges.byHi, false, false).toStdString().c_str());
+        break;
     case champ_initialAttenuation: case champ_pan: case champ_initialFilterQ:
     case champ_modLfoToVolume:
     case champ_sustainVolEnv: case champ_sustainModEnv:
     case champ_chorusEffectsSend: case champ_reverbEffectsSend:
-        sprintf(T,"%.1f", (double)genVal.shAmount/10);
+        sprintf(T, "%.1f", (double)genVal.shAmount/10);
         break;
 
-    case champ_sampleModes: case champ_overridingRootKey: case champ_exclusiveClass:
-    case champ_keynum: case champ_velocity:
+    case champ_keynum: case champ_overridingRootKey:
+        sprintf(T, "%s", Config::getInstance()->getKeyName(genVal.wAmount).toStdString().c_str());
+        break;
+
+    case champ_sampleModes: case champ_exclusiveClass: case champ_velocity:
         sprintf(T,"%d", genVal.wAmount);
         break;
 
@@ -665,32 +680,51 @@ genAmountType Page::getValue(QString texte, WORD champ, bool &ok)
 {
     genAmountType genAmount;
     int iTmp;
-    ok = 1;
+    ok = true;
     switch (champ)
     {
     case champ_keyRange: case champ_velRange: {
-        char T[20];
-        strcpy(T, texte.toStdString().c_str());
-        int val1, val2, val3;
-        if (sscanf(T, "%d-%d", &val1, &val2) == 2)
+        int posSeparator = texte.indexOf("_");
+        QString txtLeft, txtRight;
+        if (posSeparator == -1)
+            txtLeft = txtRight = texte;
+        else
         {
-            if (val1 > val2)
-            {
-                val3 = val1;
-                val1 = val2;
-                val2 = val3;
-            }
-            genAmount.ranges.byLo = limit(val1, 0, 127, 0, 127);
-            genAmount.ranges.byHi = limit(val2, 0, 127, 0, 127);
+            txtLeft = texte.left(posSeparator);
+            txtRight = texte.right(texte.size() - posSeparator - 1);
         }
-        else if (sscanf(T, "%d-%d", &val1, &val2) == 1)
+
+        int val1, val2;
+
+        if (champ == champ_velRange)
         {
-            genAmount.ranges.byLo = limit(val1, 0, 127, 0, 127);
-            genAmount.ranges.byHi = limit(val1, 0, 127, 0, 127);
+            val1 = txtLeft.toInt(&ok);
+            bool tmp = ok;
+            val2 = txtRight.toInt(&ok);
+            ok = ok && tmp;
         }
         else
-            ok = 0;
-        }; break;
+        {
+            val1 = Config::getInstance()->getKeyNum(txtLeft);
+            val2 = Config::getInstance()->getKeyNum(txtRight);
+            ok = (val1 != -1) && (val2 != -1);
+        }
+
+        if (txtLeft.isEmpty())
+            val1 = 0;
+        if (txtRight.isEmpty())
+            val2 = 127;
+
+        if (val1 > val2)
+        {
+            int val3 = val1;
+            val1 = val2;
+            val2 = val3;
+        }
+
+        genAmount.ranges.byLo = limit(val1, 0, 127, 0, 127);
+        genAmount.ranges.byHi = limit(val2, 0, 127, 0, 127);
+    }; break;
     case champ_initialAttenuation: case champ_sustainVolEnv:
         genAmount.shAmount = (WORD)limit(10*texte.toDouble(&ok), 0, 1440, -1440, 1440);
         break;
@@ -701,8 +735,11 @@ genAmountType Page::getValue(QString texte, WORD champ, bool &ok)
         if (iTmp != 0 && iTmp != 1 && iTmp != 3) iTmp = 0;
         genAmount.wAmount = (WORD)iTmp;
         break;
-    case champ_overridingRootKey: genAmount.wAmount = (WORD)limit(texte.toDouble(&ok), 0, 127);
-        break;
+    case champ_overridingRootKey: case champ_keynum:{
+        int keyNum = Config::getInstance()->getKeyNum(texte);
+        ok = (keyNum >= 0);
+        genAmount.wAmount = (WORD)limit(keyNum, 0, 127);
+    }break;
     case champ_coarseTune: genAmount.shAmount = (short)limit(texte.toDouble(&ok), -120, 120, -240, 240);
         break;
     case champ_fineTune: genAmount.shAmount = (short)limit(texte.toDouble(&ok), -99, 99, -198, 198);
@@ -749,8 +786,6 @@ genAmountType Page::getValue(QString texte, WORD champ, bool &ok)
         break;
     case champ_chorusEffectsSend: case champ_reverbEffectsSend:
         genAmount.shAmount = (WORD)limit(10*texte.toDouble(&ok), 0, 1000, -1000, 1000);
-        break;
-    case champ_keynum: genAmount.wAmount = (WORD)limit(texte.toDouble(&ok), 0, 127);
         break;
     case champ_velocity: genAmount.wAmount = (WORD)limit(texte.toDouble(&ok), 1, 127);
         break;
@@ -1297,7 +1332,7 @@ void PageTable::updateId(EltID id)
         {
             id2 = this->table->getID(i);
             if (id2.indexElt2 > id.indexElt2  && id2.indexSf2 == id.indexSf2
-                     && id2.indexElt == id.indexElt)
+                    && id2.indexElt == id.indexElt)
             {
                 id2.indexElt2--;
                 this->table->setID(id2, i);
@@ -1346,7 +1381,7 @@ void PageTable::setOffset(bool &newAction, int ligne, int colonne, Champ champ1,
         genAmount2.shAmount = iVal / 32768;
         genAmount.shAmount = iVal % 32768;
         if (genAmount.shAmount != this->sf2->get(id, champ1).shValue ||
-            genAmount2.shAmount != this->sf2->get(id, champ2).shValue)
+                genAmount2.shAmount != this->sf2->get(id, champ2).shValue)
         {
             // Modification du sf2
             if (newAction)
@@ -1528,7 +1563,7 @@ void PageTable::set(int ligne, int colonne, bool &newAction, bool allowPropagati
                     this->table->item(ligne, colonne)->setText(getTextValue(T, champ, this->sf2->get(id, champ).genValue));
                 else this->table->item(ligne, colonne)->setText("");
             }
-            }
+        }
         }
         preparation = 0;
     }
@@ -1983,7 +2018,7 @@ void PageTable::select(EltID id, bool refresh)
         id2 = this->table->getID(i);
         if (id.typeElement == id2.typeElement && id.indexSf2 == id2.indexSf2 && \
                 id.indexElt == id2.indexElt &&(id.indexElt2 == id2.indexElt2 ||
-                id.typeElement == elementInst || id.typeElement == elementPrst))
+                                               id.typeElement == elementInst || id.typeElement == elementPrst))
         {
             this->table->item(1,i)->setSelected(true);
             max = this->table->horizontalScrollBar()->maximum();
@@ -2301,9 +2336,9 @@ void PageTable::pasteMod()
                 return;
             }
             else if (champTmp == champ_keynum || champTmp == champ_velocity ||
-                    champTmp == champ_sampleModes ||
-                    champTmp == champ_exclusiveClass ||
-                    champTmp == champ_overridingRootKey)
+                     champTmp == champ_sampleModes ||
+                     champTmp == champ_exclusiveClass ||
+                     champTmp == champ_overridingRootKey)
             {
                 QMessageBox::warning(this, trUtf8("Attention"), warnQStr +
                                      "\"" + getGenName(champTmp) + trUtf8("\" ne peut être modulé dans un preset."));
@@ -2842,7 +2877,7 @@ void PageTable::paramGlobal(QVector<double> dValues, QList<EltID> listElt, int t
 
                     // Calcul de la modification
                     pos = (double)(this->sf2->get(id, champ_keyRange).rValue.byLo +
-                           this->sf2->get(id, champ_keyRange).rValue.byHi) / 2 * dValues.size() / 127. + 0.5;
+                                   this->sf2->get(id, champ_keyRange).rValue.byHi) / 2 * dValues.size() / 127. + 0.5;
                     if (pos < 0)
                         pos = 0;
                     else if (pos >= dValues.size())
@@ -3262,8 +3297,8 @@ void PageTable::spatialisation(QMap<int, double> mapPan)
                 while (pos < list1.size() && !found)
                 {
                     if (amount.ranges.byHi == listRange.at(pos).ranges.byHi &&
-                        amount.ranges.byLo == listRange.at(pos).ranges.byLo &&
-                        list2.at(pos).indexElt2 == -1)
+                            amount.ranges.byLo == listRange.at(pos).ranges.byLo &&
+                            list2.at(pos).indexElt2 == -1)
                     {
                         // Les samples sont-ils liés ?
                         EltID idSmpl1 = id;
@@ -3277,7 +3312,7 @@ void PageTable::spatialisation(QMap<int, double> mapPan)
                             SFSampleLink type1 = this->sf2->get(idSmpl1, champ_sfSampleType).sfLinkValue;
                             SFSampleLink type2 = this->sf2->get(idSmpl2, champ_sfSampleType).sfLinkValue;
                             if (((type1 == rightSample || type1 == RomRightSample) && (type2 == leftSample || type2 == RomLeftSample)) ||
-                                ((type1 == leftSample || type1 == RomLeftSample) && (type2 == rightSample || type2 == RomRightSample)))
+                                    ((type1 == leftSample || type1 == RomLeftSample) && (type2 == rightSample || type2 == RomRightSample)))
                                 found = true;
                         }
                     }
@@ -3336,7 +3371,7 @@ void PageTable::spatialisation(QMap<int, double> mapPan)
             id3.typeElement = elementSmpl;
             SFSampleLink type2 = this->sf2->get(id3, champ_sfSampleType).sfLinkValue;
             if ((type1 == leftSample || type1 == RomLeftSample) &&
-                 type2 != leftSample && type2 != RomLeftSample)
+                    type2 != leftSample && type2 != RomLeftSample)
             {
                 sampleG = 0;
             }
@@ -3351,7 +3386,7 @@ void PageTable::spatialisation(QMap<int, double> mapPan)
                         this->sf2->get(list2.at(i), champ_pan).shValue)
                     sampleG = 0;
                 else if (this->sf2->get(list1.at(i), champ_pan).shValue >
-                        this->sf2->get(list2.at(i), champ_pan).shValue)
+                         this->sf2->get(list2.at(i), champ_pan).shValue)
                     sampleG = 1;
             }
             if (sampleG == 0)
@@ -3394,6 +3429,7 @@ void PageTable::visualize()
         id.typeElement = elementInstSmpl;
     else
         id.typeElement = elementPrstInst;
+
     // Vérification que l'élément possède au moins un élément lié, avec un keyrange valide
     int nbElt = 0;
     int posMin = 128;
@@ -3808,7 +3844,6 @@ void TableWidget::removeColumn(int column)
 
 TableWidgetMod::TableWidgetMod(QWidget *parent) : QTableWidget(parent) {}
 TableWidgetMod::~TableWidgetMod() {}
-// Méthodes publiques
 void TableWidgetMod::clear()
 {
     for (int i = 0; i < this->columnCount(); i++)
@@ -3878,14 +3913,19 @@ QWidget * TableDelegate::createEditor(QWidget *parent, const QStyleOptionViewIte
 {
     Q_UNUSED(option)
 
-    int isNumeric = true;
+    bool isNumeric = true;
+    bool isKey = false;
     int nbDecimales = 0;
     if (_table->rowCount() == 50)
     {
         // Table instrument
         switch (index.row())
         {
-        case 4: case 5:
+        case 4:
+            isNumeric = false;
+            isKey = true;
+            break;
+        case 5:
             isNumeric = false;
             break;
         case 6: case 7: case 14: case 19: case 27: case 37: case 42: case 43:
@@ -3896,6 +3936,9 @@ QWidget * TableDelegate::createEditor(QWidget *parent, const QStyleOptionViewIte
         case 33: case 34: case 38: case 39:
             nbDecimales = 3;
             break;
+        case 9: case 44:
+            isKey = true;
+            break;
         }
     }
     else
@@ -3903,7 +3946,11 @@ QWidget * TableDelegate::createEditor(QWidget *parent, const QStyleOptionViewIte
         // Table preset
         switch (index.row())
         {
-        case 4: case 5:
+        case 4:
+            isNumeric = false;
+            isKey = true;
+            break;
+        case 5:
             isNumeric = false;
             break;
         case 6: case 7: case 12: case 17: case 25: case 35: case 39: case 40:
@@ -3921,7 +3968,16 @@ QWidget * TableDelegate::createEditor(QWidget *parent, const QStyleOptionViewIte
     QColor highlightColor = parent->palette().color(QPalette::Highlight);
     if (isNumeric)
     {
-        if (nbDecimales == 0)
+        if (isKey)
+        {
+            SpinBoxKey * spin = new SpinBoxKey(parent);
+            spin->setMinimum(0);
+            spin->setMaximum(127);
+            spin->setStyleSheet("SpinBoxKey{ border: 3px solid " + highlightColor.name() + "; }"
+                                "SpinBoxKey::down-button{width:0px;} SpinBoxKey::up-button{width:0px;} ");
+            widget = spin;
+        }
+        else if (nbDecimales == 0)
         {
             QSpinBox * spin = new QSpinBox(parent);
             spin->setMinimum(-1000000);
@@ -3937,16 +3993,45 @@ QWidget * TableDelegate::createEditor(QWidget *parent, const QStyleOptionViewIte
             spin->setMaximum(1000000);
             spin->setSingleStep(.1);
             spin->setStyleSheet("QDoubleSpinBox{ border: 3px solid " + highlightColor.name() + "; }"
-                                  "QDoubleSpinBox::down-button{width:0px;} QDoubleSpinBox::up-button{width:0px;} ");
+                                "QDoubleSpinBox::down-button{width:0px;} QDoubleSpinBox::up-button{width:0px;} ");
             spin->setDecimals(nbDecimales);
             widget = spin;
         }
     }
     else
     {
-        widget = new QLineEdit(parent);
-        widget->setStyleSheet("QLineEdit{ border: 3px solid " + highlightColor.name() + "; }");
+        // Etendue
+        SpinBoxRange * spin;
+        if (isKey)
+            spin = new SpinBoxKeyRange(parent);
+        else
+            spin = new SpinBoxVelocityRange(parent);
+        spin->setStyleSheet("SpinBoxRange{ border: 3px solid " + highlightColor.name() + "; }"
+                            "SpinBoxRange::down-button{width:0px;} SpinBoxRange::up-button{width:0px;} ");
+        widget = spin;
     }
 
     return widget;
+}
+
+void TableDelegate::setEditorData(QWidget *editor, const QModelIndex &index) const
+{
+    if (index.row() == 4 || index.row() == 5)
+    {
+        SpinBoxRange * spin = (SpinBoxRange *)editor;
+        if (index.data().isNull())
+            spin->setText("0_127");
+        else
+            spin->setText(index.data().toString());
+    }
+    else if (_table->rowCount() == 50 && (index.row() == 9 || index.row() == 44))
+    {
+        SpinBoxKey * spin = (SpinBoxKey *)editor;
+        if (index.data().isNull())
+            spin->setValue(60); // valeur par défaut
+        else
+            spin->setValue(Config::getInstance()->getKeyNum(index.data().toString()));
+    }
+    else
+        QStyledItemDelegate::setEditorData(editor, index);
 }
