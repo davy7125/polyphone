@@ -24,6 +24,7 @@
 
 #include "sound.h"
 #include <QMessageBox>
+#include "config.h"
 
 QWidget * Sound::_parent = NULL;
 
@@ -732,26 +733,10 @@ void Sound::determineRootKey()
     for (int i = 0; i <= 127; i++)
     {
         // Nom de la note
-        QString nomNote = "";
-        switch (i % 12)
-        {
-        case 0:  nomNote = "c";     break;
-        case 1:  nomNote = "c#";    break;
-        case 2:  nomNote = "d";     break;
-        case 3:  nomNote = "d#";    break;
-        case 4:  nomNote = "e";     break;
-        case 5:  nomNote = "f";     break;
-        case 6:  nomNote = "f#";    break;
-        case 7:  nomNote = "g";     break;
-        case 8:  nomNote = "g#";    break;
-        case 9:  nomNote = "a";     break;
-        case 10: nomNote = "a#";    break;
-        case 11: nomNote = "b";     break;
-        }
-        nomNote += QString::number((i + 3) / 12 - 1);
+        QString nomNote = Config::getInstance()->getKeyName(i, true);
 
         // Recherche de la note dans le nom de fichier
-        if (fileName.toLower().contains(nomNote))
+        if (fileName.toUpper().contains(nomNote))
             note = i;
     }
 

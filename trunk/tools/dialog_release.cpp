@@ -35,6 +35,8 @@ DialogRelease::DialogRelease(QWidget *parent) :
     ui->doubleDuree36->setValue(conf->getTools_i_release_dureeDo());
     ui->doubleDivision->setValue(conf->getTools_i_release_division());
     ui->doubleDeTune->setValue(conf->getTools_i_release_desaccordage());
+    ui->label->setText(trUtf8("Durée release (note ") +
+                              conf->getKeyName(36) + ")");
 }
 
 DialogRelease::~DialogRelease()

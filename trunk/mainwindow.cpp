@@ -1080,6 +1080,16 @@ void MainWindow::prepareNewAction()
     sf2->prepareNewActions();
 }
 
+void MainWindow::noteNameChanged()
+{
+    if (this->ui->stackedWidget->currentWidget() == this->page_smpl)
+        this->page_smpl->afficher();
+    else if (this->ui->stackedWidget->currentWidget() == this->page_inst)
+        this->page_inst->afficher();
+    else if (this->ui->stackedWidget->currentWidget() == this->page_prst)
+        this->page_prst->afficher();
+}
+
 // Modifications
 void MainWindow::renommer()
 {
@@ -1138,21 +1148,15 @@ void MainWindow::renommerEnMasse(QString name, int modificationType)
         switch (modificationType)
         {
         case 0:{
-            // Remplacement du nom, ajout note de base et indication L/R
-            name = name.left(15);
-            // note du sample
-            int note = sf2->get(ID, champ_byOriginalPitch).bValue;
-            char str2[20];
-            sprintf(str2,"%.3d", note);
-            // position du sample
+            // Suffix
+            QString suffix = " " + Config::getInstance()->getKeyName(sf2->get(ID, champ_byOriginalPitch).bValue);
             SFSampleLink pos = sf2->get(ID, champ_sfSampleType).sfLinkValue;
-            // Concaténation
             if (pos == rightSample || pos == RomRightSample)
-                newName = name + ' ' + str2 + 'R';
+                suffix += 'R';
             else if (pos == leftSample || pos == RomLeftSample)
-                newName = name + ' ' + str2 + 'L';
-            else
-                newName = name + ' ' + str2;
+                suffix += 'L';
+
+            newName = name.left(20 - suffix.size()) + suffix;
         }break;
         case 1:
             // Remplacement du nom, ajout incrément
@@ -2160,8 +2164,6 @@ void MainWindow::associationAutoSmpl()
     if (ui->stackedWidget->currentWidget() == this->page_smpl)
         this->page_smpl->afficher();
 }
-
-// Suppression des liens de tous les samples
 void MainWindow::on_action_Dissocier_les_samples_st_r_o_triggered()
 {
     this->sf2->prepareNewActions();
@@ -2197,7 +2199,6 @@ void MainWindow::on_action_Dissocier_les_samples_st_r_o_triggered()
     if (ui->stackedWidget->currentWidget() == this->page_smpl)
         this->page_smpl->afficher();
 }
-
 void MainWindow::on_actionExporter_pics_de_fr_quence_triggered()
 {
     EltID id = this->ui->arborescence->getID(0);
@@ -2212,7 +2213,6 @@ void MainWindow::on_actionExporter_pics_de_fr_quence_triggered()
         exporterFrequences(fileName);
     }
 }
-
 void MainWindow::exporterFrequences(QString fileName)
 {
     // Création fichier csv
@@ -2248,7 +2248,7 @@ void MainWindow::exporterFrequences(QString fileName)
                 stream << j << sep;
                 stream << QString::number(listeFacteurs.at(j)).replace(".", trUtf8(",")) << sep;
                 stream << QString::number(listeFrequences.at(j)).replace(".", trUtf8(",")) << sep;
-                stream << listeNotes.at(j) << sep;
+                stream << Config::getInstance()->getKeyName(listeNotes.at(j)) << sep;
                 stream << listeCorrections.at(j);
             }
         }
@@ -2296,7 +2296,7 @@ void MainWindow::noteHover(int key)
     if (_currentKey == -1)
     {
         if (key != -1)
-            this->ui->labelNote->setText(QString("%1").arg(key));
+            this->ui->labelNote->setText(configuration->getKeyName(key));
         else
             this->ui->labelNote->setText("-");
     }
@@ -2357,8 +2357,8 @@ void MainWindow::noteChanged(int key, int vel)
         vel = defaultVelocity;
     if (vel > 0 && key != -1)
     {
-        this->ui->labelNote->setText(QString("%1").arg(key));
-        this->ui->labelVelocite->setText(QString("%1").arg(vel));
+        this->ui->labelNote->setText(configuration->getKeyName(key));
+        this->ui->labelVelocite->setText(QString::number(vel));
     }
     else
     {

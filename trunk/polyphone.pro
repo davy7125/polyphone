@@ -44,15 +44,8 @@ win32{
 unix:!macx{
     DEFINES += __LINUX_ALSASEQ__
     CONFIG += link_pkgconfig
-    PKGCONFIG += alsa jack
+    PKGCONFIG += alsa jack portaudio-2.0
     INCLUDEPATH += /usr/include/jack
-
-    # Linking portaudio may need adjustments (see README file)
-    contains(QMAKE_HOST.arch, x86_64):{
-        LIBS += /usr/lib/x86_64-linux-gnu/libportaudio.so.2
-    } else {
-        LIBS += /usr/lib/i386-linux-gnu/libportaudio.so.2
-    }
 }
 macx {
     DEFINES += __MACOSX_CORE__
@@ -131,7 +124,9 @@ SOURCES	+= main.cpp \
     gui_divers/dialog_about.cpp \
     gui_divers/dialog_export.cpp \
     sf2_core/duplicator.cpp \
-    tools/import_sfz.cpp
+    tools/import_sfz.cpp \
+    gui_divers/spinboxkey.cpp \
+    gui_divers/spinboxrange.cpp
 
 HEADERS  += mainwindow.h \
     sf2_core/sf2_types.h \
@@ -193,7 +188,9 @@ HEADERS  += mainwindow.h \
     gui_divers/dialog_export.h \
     sf2_core/duplicator.h \
     tools/import_sfz.h \
-    macapplication.h
+    macapplication.h \
+    gui_divers/spinboxkey.h \
+    gui_divers/spinboxrange.h
 
 FORMS    += mainwindow.ui \
     gui_divers/config.ui \

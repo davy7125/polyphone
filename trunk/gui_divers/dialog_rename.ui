@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>351</width>
-    <height>169</height>
+    <height>180</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -22,18 +22,9 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <property name="spacing">
-    <number>6</number>
+    <number>3</number>
    </property>
-   <property name="leftMargin">
-    <number>6</number>
-   </property>
-   <property name="topMargin">
-    <number>6</number>
-   </property>
-   <property name="rightMargin">
-    <number>6</number>
-   </property>
-   <property name="bottomMargin">
+   <property name="margin">
     <number>6</number>
    </property>
    <item>
@@ -53,7 +44,7 @@
    <item>
     <widget class="QRadioButton" name="radioRootkey">
      <property name="text">
-      <string>Écraser nom existant avec note de base en suffixe</string>
+      <string>Écraser nom existant avec nom de la note en suffixe</string>
      </property>
      <property name="checked">
       <bool>true</bool>

@@ -68,6 +68,7 @@ void DialogMixture::on_listDivisions_itemSelectionChanged()
     this->ui->spinDivEnd->setValue(sousListe.at(1));
     this->ui->spinDivStart->blockSignals(false);
     this->ui->spinDivEnd->blockSignals(false);
+
     // Affichage rangs
     this->dispRang(currentRow);
 }
@@ -250,9 +251,8 @@ void DialogMixture::dispDiv()
         // Ajout élément
         valMin = qMin(sousListe.at(0), sousListe.at(1));
         valMax = qMax(sousListe.at(0), sousListe.at(1));
-        char T[30];
-        sprintf(T, "%d - %d", valMin, valMax);
-        this->ui->listDivisions->addItem(T);
+        this->ui->listDivisions->addItem(Config::getInstance()->getKeyName(valMin) + " - " +
+                                         Config::getInstance()->getKeyName(valMax));
     }
     this->ui->listDivisions->blockSignals(false);
 }

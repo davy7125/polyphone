@@ -2183,34 +2183,29 @@ void GraphiqueFourier::setPos(qint32 posStart, qint32 posEnd, QList<double> &fre
     QString qStr3 = "";
     QString qStr4 = "";
     QString qStr5 = "";
-    QString qTmp;
     if (note >= 0 && note <= 128)
     {
-        qStr1.sprintf("%s %d, %s %d (%s)", trUtf8("note").toStdString().c_str(), note,
-                      trUtf8("correction").toStdString().c_str(), correction, trUtf8("estimation").toStdString().c_str());
+        qStr1 = trUtf8("note") + " " + Config::getInstance()->getKeyName(note) + ", " +
+                trUtf8("correction") + " " + QString::number(correction) + " (" + trUtf8("estimation") + ")";
         for (int i = 0; i < 10; i++)
         {
             if (posMaxFFT[i] != 0)
             {
                 // intensité
                 factors << (double)data[posMaxFFT[i]] / data[posMaxFFT[0]];
-                qTmp.sprintf("%.2f\n", (double)data[posMaxFFT[i]] / data[posMaxFFT[0]]);
-                qStr2.append(qTmp);
+                qStr2 += QString::number((double)data[posMaxFFT[i]] / data[posMaxFFT[0]], 'f', 2) + "\n";
                 // fréquence
                 double freq = (double)(posMaxFFT[i] * dwSmplRate) / (size - 1);
                 frequencies << freq;
-                qTmp.sprintf("%.2f Hz\n", freq);
-                qStr3.append(qTmp);
+                qStr3 += QString::number(freq, 'f', 2) + " Hz\n";
                 // note la plus proche
                 double note = 12 * log2(freq) - 36.3763;
                 if (note < 0) note = 0;
                 else if (note > 128) note = 128;
                 int note2 = qRound(note);
                 int correction = qRound(((double)note2 - note) * 100.);
-                qTmp.sprintf("%d\n", note2);
-                qStr4.append(qTmp);
-                qTmp.sprintf("%d\n", correction);
-                qStr5.append(qTmp);
+                qStr4 += Config::getInstance()->getKeyName(note2) + "\n";
+                qStr5 += QString::number(correction) + "\n";
                 pitch << note2;
                 corrections << correction;
             }

@@ -1161,17 +1161,17 @@ Parametre::Parametre(QString opcode, QString valeur) :
     else if (opcode == "key")
     {
         _opcode = op_key;
-        _intValue = getNumNote(valeurLow);
+        _intValue = Config::getInstance()->getKeyNum(valeurLow);
     }
     else if (opcode == "lokey")
     {
         _opcode = op_keyMin;
-        _intValue = getNumNote(valeurLow);
+        _intValue = Config::getInstance()->getKeyNum(valeurLow);
     }
     else if (opcode == "hikey")
     {
         _opcode = op_keyMax;
-        _intValue = getNumNote(valeurLow);
+        _intValue = Config::getInstance()->getKeyNum(valeurLow);
     }
     else if (opcode == "lovel")
     {
@@ -1186,7 +1186,7 @@ Parametre::Parametre(QString opcode, QString valeur) :
     else if (opcode == "pitch_keycenter")
     {
         _opcode = op_rootKey;
-        _intValue = getNumNote(valeurLow);
+        _intValue = Config::getInstance()->getKeyNum(valeurLow);
     }
     else if (opcode == "group")
     {
@@ -1485,41 +1485,4 @@ Parametre::Parametre(QString opcode, QString valeur) :
     }
     else
         qDebug() << "non pris en charge: " + opcode + " (" + valeur + ")";
-}
-
-int Parametre::getNumNote(QString noteStr)
-{
-    int note = noteStr.toInt();
-    if (note == 0 && noteStr != "0" && noteStr.size() >= 2)
-    {
-        switch (noteStr.at(0).unicode())
-        {
-        case 'c': note = 60; break;
-        case 'd': note = 62; break;
-        case 'e': note = 64; break;
-        case 'f': note = 65; break;
-        case 'g': note = 67; break;
-        case 'a': note = 69; break;
-        case 'b': note = 71; break;
-        default : return -1; break;
-        }
-        noteStr = noteStr.right(noteStr.size() - 1);
-        if (noteStr.at(0).unicode() == '#')
-        {
-            note ++;
-            noteStr = noteStr.right(noteStr.size() - 1);
-        }
-        else if (noteStr.at(0).unicode() == 'b')
-        {
-            note --;
-            noteStr = noteStr.right(noteStr.size() - 1);
-        }
-
-        int octave = noteStr.toInt();
-        if ((octave == 0 && noteStr != "0") || noteStr.isEmpty())
-            return -1;
-        else
-            note += (octave - 4) * 12;
-    }
-    return note;
 }

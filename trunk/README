@@ -6,28 +6,17 @@
 ######### 1. Prerequisite ##########################################################################
 
 The following libraries are required (the name may vary depending on your system):
- - qt (libqt4-dev / qt4-devel)
- - alsa (libasound2-dev / alsa-lib-devel)
- - jack (libjack-jack2-dev / jack-audio-connection-kit-devel)
- - portaudio (libportaudio2 / portaudio-devel)
+ - qt        (libqt4-dev / qt4-devel)
+ - alsa      (libasound2-dev / alsa-lib-devel)
+ - jack      (libjack-jack2-dev / jack-audio-connection-kit-devel)
+ - portaudio (portaudio19-dev / portaudio-devel)
 Use your package manager to install them: synaptic, yum,...
 
 
-######### 2. Link ##################################################################################
+######### 2. Build #################################################################################
 
-Links may be adjusted in the file polyphone.pro. If libportaudio is not found for example, first 
-locate it on your system and edit the following line:
-LIBS += /usr/lib/x86_64-linux-gnu/libportaudio.so.2
-It could become:
-LIBS += /usr/lib64/libportaudio.so.2
-or (fedora)
-LIBS += -lportaudio
-
-
-######### 3. Build #################################################################################
-
-Run "qmake && make" (or qmake-qt4 && make) in the root directory to compile the project. An
- executable file "polyphone" in the directory "RELEASE" should then appear if everything went right.
+Run "qmake && make" (or qmake-qt4 && make) in the root directory to compile the project. An 
+executable file "polyphone" in the directory "RELEASE" should then appear if everything went right.
 
 Note: If you are using QT Creator, the project may be opened via its .pro file present in the root 
 directory. Take care shadow build is not checked (project properties).
@@ -43,7 +32,7 @@ directory. Take care shadow build is not checked (project properties).
 
 The following applications are required:
  - Xcode (available in app store)
- - qt (http://qt-project.org/downloads)
+ - qt    (http://qt-project.org/downloads)
 
 
 ######### 2. Build #################################################################################
@@ -90,7 +79,7 @@ https://code.google.com/p/traders-home-task-ng/downloads/detail?name=qt-linguist
 
 With Qt Linguist, open the .ts file you want to edit. This file is located in the root folder of 
 the sources. For example, open polyphone_es.ts for a spanish translation.
-If the translation file is not present yet, ask the developper --> "info@polyphone.fr"
+If the translation file is not present yet, ask the developer --> "info@polyphone.fr"
 
 Polyphone's native language is French. If you want to translate from another language (from English 
 for instance), once you have opened your .ts file go to "file" -> "Open Read-Only" and select 

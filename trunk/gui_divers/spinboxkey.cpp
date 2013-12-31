@@ -22,39 +22,32 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#include "dialog_celeste.h"
-#include "ui_dialog_celeste.h"
+#include "spinboxkey.h"
 #include "config.h"
 
-DialogCeleste::DialogCeleste(QWidget *parent) :
-    QDialog(parent),
-    ui(new Ui::DialogCeleste)
+SpinBoxKey::SpinBoxKey(QWidget *parent) :
+    QSpinBox(parent)
 {
-    ui->setupUi(this);
-    Config * conf = Config::getInstance();
-    ui->doubleSpinHerz->setValue(conf->getTools_i_celeste_herzDo());
-    ui->doubleSpinDiv->setValue(conf->getTools_i_celeste_division());
-
-    ui->label->setText(trUtf8("Nombre de battements par secondes (note ") +
-                       conf->getKeyName(60) + ")");
+    this->setMinimum(0);
+    this->setMaximum(127);
+    this->setValue(60);
 }
 
-DialogCeleste::~DialogCeleste()
+QValidator::State SpinBoxKey::validate(QString &input, int &pos) const
 {
-    delete ui;
+    Q_UNUSED(pos);
+    int numKey = Config::getInstance()->getKeyNum(input);
+    if (numKey < 0 || numKey > 127)
+        return QValidator::Invalid;
+    return QValidator::Acceptable;
 }
 
-// ACCEPTATION
-
-void DialogCeleste::accept()
+int SpinBoxKey::valueFromText(const QString &text) const
 {
-    // Sauvegarde des valeurs
-    Config * conf = Config::getInstance();
-    conf->setTools_i_celeste_herzDo(this->ui->doubleSpinHerz->value());
-    conf->setTools_i_celeste_division(this->ui->doubleSpinDiv->value());
+    return Config::getInstance()->getKeyNum(text);
+}
 
-    // Envoi des valeurs
-    this->accepted(this->ui->doubleSpinHerz->value(),
-                   this->ui->doubleSpinDiv->value());
-    QDialog::accept();
+QString SpinBoxKey::textFromValue(int val) const
+{
+    return Config::getInstance()->getKeyName(val);
 }
