@@ -3980,8 +3980,8 @@ QWidget * TableDelegate::createEditor(QWidget *parent, const QStyleOptionViewIte
         else if (nbDecimales == 0)
         {
             QSpinBox * spin = new QSpinBox(parent);
-            spin->setMinimum(-1000000);
-            spin->setMaximum(1000000);
+            spin->setMinimum(-2147483648);
+            spin->setMaximum(2147483647);
             spin->setStyleSheet("QSpinBox{ border: 3px solid " + highlightColor.name() + "; }"
                                 "QSpinBox::down-button{width:0px;} QSpinBox::up-button{width:0px;} ");
             widget = spin;
