@@ -60,6 +60,7 @@ If you want to provide a .dmg file, use
 /Path/To/Qt/5.2.0/clang_64/bin/macdeployqt /Path/To/trunk/RELEASE/Polyphone.app -dmg
 
 
+
 ####################################################################################################
 ###################################### TRANSLATING POLYPHONE #######################################
 ####################################################################################################
@@ -102,7 +103,7 @@ A translation needs attention and may be therefore cumbersome. Please take care 
  - the first and final spaces
  - the character case (lowercase / uppercase)
  - singular and plural forms
-Just an advice: take your time !
+Just an advice: take your time!
 
 
 ######### 4. Submitting your work ##################################################################
