@@ -1,7 +1,7 @@
 /***************************************************************************
 **                                                                        **
 **  Polyphone, a soundfont editor                                         **
-**  Copyright (C) 2013 Davy Triponney                                     **
+**  Copyright (C) 2013-2014 Davy Triponney                                **
 **                                                                        **
 **  This program is free software: you can redistribute it and/or modify  **
 **  it under the terms of the GNU General Public License as published by  **
@@ -1149,7 +1149,7 @@ void MainWindow::renommerEnMasse(QString name, int modificationType)
         {
         case 0:{
             // Suffix
-            QString suffix = " " + Config::getInstance()->getKeyName(sf2->get(ID, champ_byOriginalPitch).bValue);
+            QString suffix = " " + Config::getInstance()->getKeyName(sf2->get(ID, champ_byOriginalPitch).bValue, false, true);
             SFSampleLink pos = sf2->get(ID, champ_sfSampleType).sfLinkValue;
             if (pos == rightSample || pos == RomRightSample)
                 suffix += 'R';

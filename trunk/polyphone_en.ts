@@ -563,12 +563,12 @@
         <translation>About</translation>
     </message>
     <message utf8="true">
-        <location filename="gui_divers/dialog_about.ui" line="175"/>
+        <location filename="gui_divers/dialog_about.ui" line="148"/>
         <source>Crédits</source>
         <translation>Credit</translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_about.ui" line="198"/>
+        <location filename="gui_divers/dialog_about.ui" line="171"/>
         <source>Fermer</source>
         <translation>Close</translation>
     </message>
@@ -586,18 +586,18 @@
         <translation>Celeste tuning</translation>
     </message>
     <message>
-        <location filename="tools/dialog_celeste.ui" line="39"/>
+        <location filename="tools/dialog_celeste.ui" line="30"/>
         <source>Nombre de battements par secondes au do 4 (note 60)</source>
         <oldsource>Nombre de battements par secondes au do 3 (note 60)</oldsource>
         <translation>Number of beats per second at C4 (key 60)</translation>
     </message>
     <message utf8="true">
-        <location filename="tools/dialog_celeste.ui" line="56"/>
+        <location filename="tools/dialog_celeste.ui" line="47"/>
         <source>Le signe définit le sens du désaccordage.</source>
         <translation>The algebraic sign determines the tuning direction.</translation>
     </message>
     <message utf8="true">
-        <location filename="tools/dialog_celeste.ui" line="79"/>
+        <location filename="tools/dialog_celeste.ui" line="70"/>
         <source>Division à l&apos;octave suivante</source>
         <translation>Division to the next octave</translation>
     </message>
@@ -674,7 +674,7 @@
         <translation>Cancel</translation>
     </message>
     <message utf8="true">
-        <location filename="gui_divers/dialog_export.cpp" line="66"/>
+        <location filename="gui_divers/dialog_export.cpp" line="90"/>
         <source>Choisir un répertoire de destination</source>
         <translation>Choose a destination folder</translation>
     </message>
@@ -786,12 +786,12 @@
     <message utf8="true">
         <location filename="gui_divers/dialog_help.cpp" line="130"/>
         <location filename="gui_divers/dialog_help.cpp" line="142"/>
+        <location filename="gui_divers/dialog_help.cpp" line="180"/>
         <source>Échantillons</source>
         <translation>Samples</translation>
     </message>
     <message>
         <location filename="gui_divers/dialog_help.cpp" line="131"/>
-        <location filename="gui_divers/dialog_help.cpp" line="180"/>
         <source>Graphique</source>
         <translation>Graph</translation>
     </message>
@@ -1276,18 +1276,18 @@
         <translation>Release maker</translation>
     </message>
     <message utf8="true">
-        <location filename="tools/dialog_release.ui" line="114"/>
+        <location filename="tools/dialog_release.ui" line="105"/>
         <source>Désaccordage provoqué (demi-tons)</source>
         <translation>Detuning induced (semi-tons)</translation>
     </message>
     <message utf8="true">
-        <location filename="tools/dialog_release.ui" line="61"/>
+        <location filename="tools/dialog_release.ui" line="52"/>
         <source>Durée release au do 2 (note 36)</source>
         <oldsource>Durée release au do 1 (note 36)</oldsource>
         <translation>Release time at C2 (key 36)</translation>
     </message>
     <message utf8="true">
-        <location filename="tools/dialog_release.ui" line="68"/>
+        <location filename="tools/dialog_release.ui" line="59"/>
         <source>Division à l&apos;octave suivante</source>
         <translation>Division to the next octave</translation>
     </message>
@@ -1300,33 +1300,33 @@
 <context>
     <name>DialogRename</name>
     <message>
-        <location filename="gui_divers/dialog_rename.ui" line="14"/>
+        <location filename="gui_divers/dialog_rename.ui" line="17"/>
         <source>Renommage de masse</source>
         <translation>Bulk rename</translation>
     </message>
     <message utf8="true">
-        <location filename="gui_divers/dialog_rename.ui" line="33"/>
+        <location filename="gui_divers/dialog_rename.ui" line="36"/>
         <source>Nom des échantillons (20 caractères au total) :</source>
         <oldsource>Nom des samples (20 caractères au total) :</oldsource>
         <translation>Sample name (max 20 characters):</translation>
     </message>
     <message utf8="true">
-        <location filename="gui_divers/dialog_rename.ui" line="47"/>
+        <location filename="gui_divers/dialog_rename.ui" line="50"/>
         <source>Écraser nom existant avec nom de la note en suffixe</source>
         <translation>Overwrite existing name with key name as suffix</translation>
     </message>
     <message utf8="true">
-        <location filename="gui_divers/dialog_rename.ui" line="57"/>
+        <location filename="gui_divers/dialog_rename.ui" line="60"/>
         <source>Écraser nom existant avec incrément en suffixe</source>
         <translation>Overwrite existing name with numerical ascending suffix</translation>
     </message>
     <message utf8="true">
-        <location filename="gui_divers/dialog_rename.ui" line="64"/>
+        <location filename="gui_divers/dialog_rename.ui" line="67"/>
         <source>Préfixe au nom existant</source>
         <translation>Prepend to existing name</translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_rename.ui" line="71"/>
+        <location filename="gui_divers/dialog_rename.ui" line="74"/>
         <source>Suffixe au nom existant</source>
         <translation>Append to existing name</translation>
     </message>
@@ -1339,12 +1339,12 @@
         <translation>Selection</translation>
     </message>
     <message utf8="true">
-        <location filename="tools/dialog_selectitems.ui" line="50"/>
+        <location filename="tools/dialog_selectitems.ui" line="41"/>
         <source>Tout sélectionner</source>
         <translation>Select all</translation>
     </message>
     <message utf8="true">
-        <location filename="tools/dialog_selectitems.ui" line="42"/>
+        <location filename="tools/dialog_selectitems.ui" line="33"/>
         <source>Sélectionner
 instrument courant</source>
         <translation>Select current instrument</translation>
@@ -1358,17 +1358,17 @@ instrument courant</source>
         <translation>Decrease whistling</translation>
     </message>
     <message utf8="true">
-        <location filename="tools/dialog_sifflements.ui" line="96"/>
+        <location filename="tools/dialog_sifflements.ui" line="87"/>
         <source>Début de la coupure (Hz)</source>
         <translation>Cut start (Hz)</translation>
     </message>
     <message>
-        <location filename="tools/dialog_sifflements.ui" line="72"/>
+        <location filename="tools/dialog_sifflements.ui" line="63"/>
         <source>Fin de la coupure (Hz)</source>
         <translation>Cut end (Hz)</translation>
     </message>
     <message>
-        <location filename="tools/dialog_sifflements.ui" line="79"/>
+        <location filename="tools/dialog_sifflements.ui" line="70"/>
         <source>Raideur (0-10)</source>
         <translation>Stiffness (0-10)</translation>
     </message>
@@ -1381,58 +1381,58 @@ instrument courant</source>
         <translation>Spatialization</translation>
     </message>
     <message>
-        <location filename="tools/dialog_space.ui" line="148"/>
+        <location filename="tools/dialog_space.ui" line="139"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Motif&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translatorcomment>Only &quot;Pattern&quot; has to be translated</translatorcomment>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Pattern&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="tools/dialog_space.ui" line="45"/>
+        <location filename="tools/dialog_space.ui" line="36"/>
         <source>Nombre divisions</source>
         <translation>Division number</translation>
     </message>
     <message>
-        <location filename="tools/dialog_space.ui" line="105"/>
+        <location filename="tools/dialog_space.ui" line="96"/>
         <source>Etalement (%)</source>
         <translation>Spreading (%)</translation>
     </message>
     <message>
-        <location filename="tools/dialog_space.ui" line="52"/>
+        <location filename="tools/dialog_space.ui" line="43"/>
         <source>Occupation (%)</source>
         <translation>Filling (%)</translation>
     </message>
     <message>
-        <location filename="tools/dialog_space.ui" line="155"/>
+        <location filename="tools/dialog_space.ui" line="146"/>
         <source>Offset (0-100)</source>
         <translation>Offset (0-100)</translation>
     </message>
     <message>
-        <location filename="tools/dialog_space.ui" line="59"/>
+        <location filename="tools/dialog_space.ui" line="50"/>
         <source>Renversements</source>
         <translation>Inversions</translation>
     </message>
     <message>
-        <location filename="tools/dialog_space.ui" line="67"/>
+        <location filename="tools/dialog_space.ui" line="58"/>
         <source>Ascendant</source>
         <translation>Ascending</translation>
     </message>
     <message>
-        <location filename="tools/dialog_space.ui" line="77"/>
+        <location filename="tools/dialog_space.ui" line="68"/>
         <source>Creux</source>
         <translation>Hollow</translation>
     </message>
     <message utf8="true">
-        <location filename="tools/dialog_space.ui" line="87"/>
+        <location filename="tools/dialog_space.ui" line="78"/>
         <source>Aléatoire</source>
         <translation>Random</translation>
     </message>
     <message>
-        <location filename="tools/dialog_space.ui" line="72"/>
+        <location filename="tools/dialog_space.ui" line="63"/>
         <source>Descendant</source>
         <translation>Descending</translation>
     </message>
     <message>
-        <location filename="tools/dialog_space.ui" line="82"/>
+        <location filename="tools/dialog_space.ui" line="73"/>
         <source>Pointe</source>
         <translation>Spike</translation>
     </message>
@@ -1445,32 +1445,32 @@ instrument courant</source>
         <translation>Visualizer</translation>
     </message>
     <message>
-        <location filename="tools/dialog_visualizer.ui" line="107"/>
+        <location filename="tools/dialog_visualizer.ui" line="89"/>
         <source>Visualisation</source>
         <translation>Display options</translation>
     </message>
     <message utf8="true">
-        <location filename="tools/dialog_visualizer.ui" line="172"/>
+        <location filename="tools/dialog_visualizer.ui" line="145"/>
         <source>Légende</source>
         <translation>Legend</translation>
     </message>
     <message>
-        <location filename="tools/dialog_visualizer.ui" line="199"/>
+        <location filename="tools/dialog_visualizer.ui" line="163"/>
         <source>Valeur moyenne par note</source>
         <translation>Mean value per key</translation>
     </message>
     <message utf8="true">
-        <location filename="tools/dialog_visualizer.ui" line="212"/>
+        <location filename="tools/dialog_visualizer.ui" line="176"/>
         <source>Paramètres par défaut</source>
         <translation>Default parameters</translation>
     </message>
     <message utf8="true">
-        <location filename="tools/dialog_visualizer.ui" line="225"/>
+        <location filename="tools/dialog_visualizer.ui" line="189"/>
         <source>Paramètres définis</source>
         <translation>Defined parameters</translation>
     </message>
     <message utf8="true">
-        <location filename="tools/dialog_visualizer.ui" line="150"/>
+        <location filename="tools/dialog_visualizer.ui" line="123"/>
         <source>échelle log</source>
         <translation>Log scale</translation>
     </message>
@@ -3232,92 +3232,102 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
         <translation>Global</translation>
     </message>
     <message>
-        <location filename="pages/page_inst.ui" line="714"/>
+        <location filename="pages/page_inst.ui" line="472"/>
+        <source>Supprime un modulateur</source>
+        <translation>Delete a modulator</translation>
+    </message>
+    <message utf8="true">
+        <location filename="pages/page_inst.ui" line="657"/>
+        <source>Colle les modulateurs copiés</source>
+        <translation>Paste the copied modulators</translation>
+    </message>
+    <message>
+        <location filename="pages/page_inst.ui" line="745"/>
         <source>Modulateurs</source>
         <translation>Modulators</translation>
     </message>
     <message>
-        <location filename="pages/page_inst.ui" line="744"/>
-        <source>copier</source>
-        <translation>copy</translation>
+        <location filename="pages/page_inst.ui" line="764"/>
+        <source>Ajoute un modulateur</source>
+        <translation>Add a modulator</translation>
     </message>
     <message>
-        <location filename="pages/page_inst.ui" line="639"/>
-        <source>coller</source>
-        <translation>paste</translation>
+        <location filename="pages/page_inst.ui" line="784"/>
+        <source>Copie l&apos;ensemble des modulateurs</source>
+        <translation>Copy all modulators</translation>
     </message>
     <message>
-        <location filename="pages/page_inst.ui" line="859"/>
+        <location filename="pages/page_inst.ui" line="912"/>
         <source>Source</source>
         <translation>Source</translation>
     </message>
     <message utf8="true">
-        <location filename="pages/page_inst.ui" line="870"/>
+        <location filename="pages/page_inst.ui" line="923"/>
         <source>Quantité</source>
         <translation>Amount</translation>
     </message>
     <message>
-        <location filename="pages/page_inst.ui" line="646"/>
-        <location filename="pages/page_inst.ui" line="881"/>
+        <location filename="pages/page_inst.ui" line="677"/>
+        <location filename="pages/page_inst.ui" line="934"/>
         <source>Destination</source>
         <translation>Destination</translation>
     </message>
     <message utf8="true">
-        <location filename="pages/page_inst.ui" line="474"/>
+        <location filename="pages/page_inst.ui" line="486"/>
         <source>Source / Quantité</source>
         <translation>Source / Amount</translation>
     </message>
     <message>
-        <location filename="pages/page_inst.ui" line="698"/>
+        <location filename="pages/page_inst.ui" line="729"/>
         <source>Valeur abs.</source>
         <translation>Abs. value</translation>
     </message>
     <message utf8="true">
-        <location filename="pages/page_inst.cpp" line="122"/>
+        <location filename="pages/page_inst.cpp" line="125"/>
         <source>&lt;b&gt;Instrument lié à aucun preset.&lt;/b&gt;</source>
         <oldsource>&lt;b&gt;Instrument liÃ© Ã  aucun preset.&lt;/b&gt;</oldsource>
         <translation>&lt;b&gt;Instrument linked to no preset.&lt;/b&gt;</translation>
     </message>
     <message utf8="true">
-        <location filename="pages/page_inst.cpp" line="124"/>
+        <location filename="pages/page_inst.cpp" line="127"/>
         <source>&lt;b&gt;Instrument lié au preset : &lt;/b&gt;</source>
         <oldsource>&lt;b&gt;Instrument liÃ© au preset : &lt;/b&gt;</oldsource>
         <translation>&lt;b&gt;Instrument linked to preset: &lt;/b&gt;</translation>
     </message>
     <message utf8="true">
-        <location filename="pages/page_inst.cpp" line="126"/>
+        <location filename="pages/page_inst.cpp" line="129"/>
         <source>&lt;b&gt;Instrument lié aux presets : &lt;/b&gt;</source>
         <oldsource>&lt;b&gt;Instrument liÃ© aux presets : &lt;/b&gt;</oldsource>
         <translation>&lt;b&gt;Instrument linked to presets: &lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="pages/page_inst.cpp" line="137"/>
-        <location filename="pages/page_inst.cpp" line="232"/>
-        <location filename="pages/page_inst.cpp" line="321"/>
-        <location filename="pages/page_inst.cpp" line="566"/>
+        <location filename="pages/page_inst.cpp" line="140"/>
+        <location filename="pages/page_inst.cpp" line="235"/>
+        <location filename="pages/page_inst.cpp" line="324"/>
+        <location filename="pages/page_inst.cpp" line="569"/>
         <source>Attention</source>
         <translation>Warning</translation>
     </message>
     <message>
-        <location filename="pages/page_inst.cpp" line="137"/>
-        <location filename="pages/page_inst.cpp" line="232"/>
-        <location filename="pages/page_inst.cpp" line="321"/>
-        <location filename="pages/page_inst.cpp" line="566"/>
+        <location filename="pages/page_inst.cpp" line="140"/>
+        <location filename="pages/page_inst.cpp" line="235"/>
+        <location filename="pages/page_inst.cpp" line="324"/>
+        <location filename="pages/page_inst.cpp" line="569"/>
         <source>L&apos;instrument doit contenir des sons.</source>
         <translation>The instrument contains no samples.</translation>
     </message>
     <message utf8="true">
-        <location filename="pages/page_inst.cpp" line="344"/>
+        <location filename="pages/page_inst.cpp" line="347"/>
         <source>Création </source>
         <translation>Creation </translation>
     </message>
     <message>
-        <location filename="pages/page_inst.cpp" line="345"/>
+        <location filename="pages/page_inst.cpp" line="348"/>
         <source>Annuler</source>
         <translation>Cancel</translation>
     </message>
     <message>
-        <location filename="pages/page_inst.cpp" line="360"/>
+        <location filename="pages/page_inst.cpp" line="363"/>
         <source>sans nom</source>
         <translation>untitled</translation>
     </message>
@@ -3549,44 +3559,54 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
         <source>Global</source>
         <translation>Global</translation>
     </message>
+    <message utf8="true">
+        <location filename="pages/page_prst.ui" line="474"/>
+        <source>Colle les modulateurs copiés</source>
+        <translation>Paste the copied modulators</translation>
+    </message>
     <message>
-        <location filename="pages/page_prst.ui" line="759"/>
+        <location filename="pages/page_prst.ui" line="653"/>
+        <source>Copie l&apos;ensemble des modulateurs</source>
+        <translation>Copy all modulators</translation>
+    </message>
+    <message>
+        <location filename="pages/page_prst.ui" line="685"/>
+        <source>Ajoute un modulateur</source>
+        <translation>Add a modulator</translation>
+    </message>
+    <message>
+        <location filename="pages/page_prst.ui" line="727"/>
+        <source>Supprime un modulateur</source>
+        <translation>Delete a modulator</translation>
+    </message>
+    <message>
+        <location filename="pages/page_prst.ui" line="803"/>
         <source>Modulateurs</source>
         <translation>Modulators</translation>
     </message>
     <message>
-        <location filename="pages/page_prst.ui" line="628"/>
-        <source>copier</source>
-        <translation>copy</translation>
-    </message>
-    <message>
-        <location filename="pages/page_prst.ui" line="468"/>
-        <source>coller</source>
-        <translation>paste</translation>
-    </message>
-    <message>
-        <location filename="pages/page_prst.ui" line="858"/>
+        <location filename="pages/page_prst.ui" line="902"/>
         <source>Source</source>
         <translation>Source</translation>
     </message>
     <message utf8="true">
-        <location filename="pages/page_prst.ui" line="869"/>
+        <location filename="pages/page_prst.ui" line="913"/>
         <source>Quantité</source>
         <translation>Amount</translation>
     </message>
     <message>
-        <location filename="pages/page_prst.ui" line="697"/>
-        <location filename="pages/page_prst.ui" line="880"/>
+        <location filename="pages/page_prst.ui" line="741"/>
+        <location filename="pages/page_prst.ui" line="924"/>
         <source>Destination</source>
         <translation>Destination</translation>
     </message>
     <message utf8="true">
-        <location filename="pages/page_prst.ui" line="481"/>
+        <location filename="pages/page_prst.ui" line="500"/>
         <source>Source / Quantité</source>
         <translation>Source / Amount</translation>
     </message>
     <message>
-        <location filename="pages/page_prst.ui" line="743"/>
+        <location filename="pages/page_prst.ui" line="787"/>
         <source>Valeur abs.</source>
         <translation>Abs. value</translation>
     </message>

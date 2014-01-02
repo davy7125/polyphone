@@ -1,7 +1,7 @@
 /***************************************************************************
 **                                                                        **
 **  Polyphone, a soundfont editor                                         **
-**  Copyright (C) 2013 Davy Triponney                                     **
+**  Copyright (C) 2013-2014 Davy Triponney                                **
 **                                                                        **
 **  This program is free software: you can redistribute it and/or modify  **
 **  it under the terms of the GNU General Public License as published by  **
@@ -603,15 +603,15 @@ void GraphVisualizer::afficheCoord(double x, double y)
             labelCoord->setPositionAlignment(Qt::AlignBottom | Qt::AlignHCenter);
         char T[20];
         if (y == 0)
-            sprintf(T, "%.3d:%.0f", qRound(x), y);
+            sprintf(T, "%s:%.0f", Config::getInstance()->getKeyName(qRound(x)).toStdString().c_str(), y);
         else if (y < 1)
-            sprintf(T, "%.3d:%.3f", qRound(x), y);
+            sprintf(T, "%s:%.3f", Config::getInstance()->getKeyName(qRound(x)).toStdString().c_str(), y);
         else if (y < 10)
-            sprintf(T, "%.3d:%.2f", qRound(x), y);
+            sprintf(T, "%s:%.2f", Config::getInstance()->getKeyName(qRound(x)).toStdString().c_str(), y);
         else if (y < 100)
-            sprintf(T, "%.3d:%.1f", qRound(x), y);
+            sprintf(T, "%s:%.1f", Config::getInstance()->getKeyName(qRound(x)).toStdString().c_str(), y);
         else
-            sprintf(T, "%.3d:%.0f", qRound(x), y);
+            sprintf(T, "%s:%.0f", Config::getInstance()->getKeyName(qRound(x)).toStdString().c_str(), y);
         labelCoord->setText(T);
         // Ajustement position sur x
         QFontMetrics fm(labelCoord->font());

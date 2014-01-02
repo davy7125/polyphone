@@ -1,7 +1,7 @@
 /***************************************************************************
 **                                                                        **
 **  Polyphone, a soundfont editor                                         **
-**  Copyright (C) 2013 Davy Triponney                                     **
+**  Copyright (C) 2013-2014 Davy Triponney                                **
 **                                                                        **
 **  This program is free software: you can redistribute it and/or modify  **
 **  it under the terms of the GNU General Public License as published by  **
@@ -26,7 +26,7 @@
 #define DIALOG_ABOUT_H
 
 #include <QDialog>
-#define VERSION "(unreleased)" // vers 1.3
+#define VERSION "1.2.1 (Mac OS X)" // vers 1.3
 
 namespace Ui {
 class DialogAbout;
@@ -41,6 +41,7 @@ public:
     void addContributor(QString name, QString mail);
     void addTranslator(QString name, QString mail);
     QString getText();
+
 private:
     QString getGroup(QString nameGroup, QStringList listName, QStringList listMail);
     QString getFormattedName(QString name, QString email);

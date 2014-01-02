@@ -1,7 +1,7 @@
 /***************************************************************************
 **                                                                        **
 **  Polyphone, a soundfont editor                                         **
-**  Copyright (C) 2013 Davy Triponney                                     **
+**  Copyright (C) 2013-2014 Davy Triponney                                **
 **                                                                        **
 **  This program is free software: you can redistribute it and/or modify  **
 **  it under the terms of the GNU General Public License as published by  **
@@ -66,6 +66,9 @@ Page_Prst::Page_Prst(QWidget *parent) :
 
 #ifdef Q_OS_MAC
     this->table->setStyleSheet("QHeaderView::section:horizontal{padding: 4px 10px 4px 10px;}");
+    QFont font = this->table->font();
+    font.setPixelSize(10);
+    this->table->setFont(font);
 #endif
 }
 Page_Prst::~Page_Prst()

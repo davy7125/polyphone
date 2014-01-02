@@ -103,7 +103,7 @@
     <widget class="TableWidgetInst" name="tableInst">
      <property name="font">
       <font>
-       <pointsize>8</pointsize>
+       <pointsize>9</pointsize>
       </font>
      </property>
      <property name="frameShape">
@@ -436,14 +436,23 @@
       <enum>QFrame::Raised</enum>
      </property>
      <layout class="QGridLayout" name="gridLayout_2" rowstretch="1,2,1,0" columnstretch="100,1,1,1,1,1,1" columnminimumwidth="0,0,0,24,24,0,0">
+      <property name="leftMargin">
+       <number>0</number>
+      </property>
+      <property name="topMargin">
+       <number>3</number>
+      </property>
+      <property name="rightMargin">
+       <number>0</number>
+      </property>
+      <property name="bottomMargin">
+       <number>0</number>
+      </property>
       <property name="horizontalSpacing">
        <number>6</number>
       </property>
       <property name="verticalSpacing">
        <number>2</number>
-      </property>
-      <property name="margin">
-       <number>0</number>
       </property>
       <item row="0" column="4">
        <widget class="QPushButton" name="pushSupprimerMod">
@@ -458,6 +467,9 @@
           <width>24</width>
           <height>24</height>
          </size>
+        </property>
+        <property name="toolTip">
+         <string>Supprime un modulateur</string>
         </property>
         <property name="text">
          <string/>
@@ -635,8 +647,27 @@
       </item>
       <item row="0" column="6">
        <widget class="QPushButton" name="pushPasteMod">
+        <property name="maximumSize">
+         <size>
+          <width>24</width>
+          <height>24</height>
+         </size>
+        </property>
+        <property name="toolTip">
+         <string>Colle les modulateurs copiés</string>
+        </property>
         <property name="text">
-         <string>coller</string>
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset resource="../ressources.qrc">
+          <normaloff>:/icones/paste</normaloff>:/icones/paste</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>22</width>
+          <height>22</height>
+         </size>
         </property>
        </widget>
       </item>
@@ -729,6 +760,9 @@
           <height>24</height>
          </size>
         </property>
+        <property name="toolTip">
+         <string>Ajoute un modulateur</string>
+        </property>
         <property name="text">
          <string/>
         </property>
@@ -740,8 +774,27 @@
       </item>
       <item row="0" column="5">
        <widget class="QPushButton" name="pushCopyMod">
+        <property name="maximumSize">
+         <size>
+          <width>24</width>
+          <height>24</height>
+         </size>
+        </property>
+        <property name="toolTip">
+         <string>Copie l'ensemble des modulateurs</string>
+        </property>
         <property name="text">
-         <string>copier</string>
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset resource="../ressources.qrc">
+          <normaloff>:/icones/copy</normaloff>:/icones/copy</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>22</width>
+          <height>22</height>
+         </size>
         </property>
        </widget>
       </item>

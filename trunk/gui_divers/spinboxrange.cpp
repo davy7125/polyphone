@@ -1,7 +1,7 @@
 /***************************************************************************
 **                                                                        **
 **  Polyphone, a soundfont editor                                         **
-**  Copyright (C) 2013 Davy Triponney                                     **
+**  Copyright (C) 2013-2014 Davy Triponney                                **
 **                                                                        **
 **  This program is free software: you can redistribute it and/or modify  **
 **  it under the terms of the GNU General Public License as published by  **
@@ -258,7 +258,7 @@ int SpinBoxVelocityRange::getValue(QString &text, bool &ok) const
 
 QString SpinBoxKeyRange::getText(int value) const
 {
-    return Config::getInstance()->getKeyName(value, false, false);
+    return Config::getInstance()->getKeyName(value);
 }
 
 int SpinBoxKeyRange::getValue(QString &text, bool &ok) const
