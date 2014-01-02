@@ -9,7 +9,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>474</width>
+    <width>432</width>
     <height>292</height>
    </rect>
   </property>
@@ -201,6 +201,12 @@
        </item>
        <item row="2" column="0" colspan="3">
         <widget class="QGroupBox" name="groupBox_6">
+         <property name="font">
+          <font>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
          <property name="title">
           <string>Divers</string>
          </property>
@@ -222,6 +228,12 @@
           </property>
           <item row="0" column="1">
            <widget class="QComboBox" name="comboKeyName">
+            <property name="font">
+             <font>
+              <weight>50</weight>
+              <bold>false</bold>
+             </font>
+            </property>
             <item>
              <property name="text">
               <string>Numérique (do central → 60)</string>
@@ -246,6 +258,12 @@
           </item>
           <item row="0" column="0">
            <widget class="QLabel" name="label_22">
+            <property name="font">
+             <font>
+              <weight>50</weight>
+              <bold>false</bold>
+             </font>
+            </property>
             <property name="text">
              <string>Nom des notes</string>
             </property>
@@ -253,6 +271,12 @@
           </item>
           <item row="1" column="0">
            <widget class="QLabel" name="label_2">
+            <property name="font">
+             <font>
+              <weight>50</weight>
+              <bold>false</bold>
+             </font>
+            </property>
             <property name="text">
              <string>Gestion RAM</string>
             </property>
@@ -265,6 +289,12 @@
               <horstretch>0</horstretch>
               <verstretch>0</verstretch>
              </sizepolicy>
+            </property>
+            <property name="font">
+             <font>
+              <weight>50</weight>
+              <bold>false</bold>
+             </font>
             </property>
             <item>
              <property name="text">

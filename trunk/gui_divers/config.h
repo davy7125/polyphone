@@ -1,7 +1,7 @@
 /***************************************************************************
 **                                                                        **
 **  Polyphone, a soundfont editor                                         **
-**  Copyright (C) 2013 Davy Triponney                                     **
+**  Copyright (C) 2013-2014 Davy Triponney                                **
 **                                                                        **
 **  This program is free software: you can redistribute it and/or modify  **
 **  it under the terms of the GNU General Public License as published by  **
@@ -88,7 +88,7 @@ public:
     QList<QColor> getColors()   {return colorList;}
     bool getRepercussionStereo(){return modifStereo;}
     NameMiddleC getNameMiddleC(){return nameMiddleC;}
-    QString getKeyName(int keyNum, bool forceTexte = false, bool with0 = true);
+    QString getKeyName(int keyNum, bool forceTexte = false, bool with0 = false);
     int getKeyNum(QString keyName);
 
     // Accès aux paramètres des outils

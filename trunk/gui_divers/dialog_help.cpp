@@ -1,7 +1,7 @@
 /***************************************************************************
 **                                                                        **
 **  Polyphone, a soundfont editor                                         **
-**  Copyright (C) 2013 Davy Triponney                                     **
+**  Copyright (C) 2013-2014 Davy Triponney                                **
 **                                                                        **
 **  This program is free software: you can redistribute it and/or modify  **
 **  it under the terms of the GNU General Public License as published by  **
@@ -28,7 +28,7 @@
 
 DialogHelp::DialogHelp(QWidget *parent) :
     QDialog(parent, Qt::WindowCloseButtonHint | Qt::WindowMinMaxButtonsHint |
-            Qt::WindowSystemMenuHint | Qt::Window | Qt::WindowStaysOnTopHint)
+            Qt::WindowSystemMenuHint | Qt::Window)
 {
     // Création de l'interface et remplissage de l'arborescence
     createUi();
@@ -177,7 +177,7 @@ void DialogHelp::fillTree()
     level1 = createItem(trUtf8("Préférences du logiciel"), "6");
     createItem(trUtf8("Général"), "6-0", level1);
     createItem(trUtf8("Synthétiseur"), "6-1", level1);
-    createItem(trUtf8("Graphique"), "6-2", level1);
+    createItem(trUtf8("Échantillons"), "6-2", level1);
     createItem(trUtf8("Barre d'outils"), "6-3", level1);
     createItem(trUtf8("Clavier"), "6-4", level1);
 

@@ -3,7 +3,7 @@
  <class>DialogSelectItems</class>
  <widget class="QDialog" name="DialogSelectItems">
   <property name="windowModality">
-   <enum>Qt::ApplicationModal</enum>
+   <enum>Qt::WindowModal</enum>
   </property>
   <property name="geometry">
    <rect>
@@ -21,16 +21,7 @@
     <normaloff>:/icones/icon</normaloff>:/icones/icon</iconset>
   </property>
   <layout class="QGridLayout" name="gridLayout">
-   <property name="leftMargin">
-    <number>6</number>
-   </property>
-   <property name="topMargin">
-    <number>6</number>
-   </property>
-   <property name="rightMargin">
-    <number>6</number>
-   </property>
-   <property name="bottomMargin">
+   <property name="margin">
     <number>6</number>
    </property>
    <property name="spacing">
