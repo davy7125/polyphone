@@ -1,7 +1,7 @@
 /***************************************************************************
 **                                                                        **
 **  Polyphone, a soundfont editor                                         **
-**  Copyright (C) 2013 Davy Triponney                                     **
+**  Copyright (C) 2013-2014 Davy Triponney                                **
 **                                                                        **
 **  This program is free software: you can redistribute it and/or modify  **
 **  it under the terms of the GNU General Public License as published by  **
@@ -62,10 +62,10 @@ char * Page::getTextValue(char * T, WORD champ, genAmountType genVal)
         break;
     case champ_keyRange:
         if (genVal.ranges.byLo == genVal.ranges.byHi)
-            sprintf(T, "%s", Config::getInstance()->getKeyName(genVal.ranges.byLo, false, false).toStdString().c_str());
+            sprintf(T, "%s", Config::getInstance()->getKeyName(genVal.ranges.byLo).toStdString().c_str());
         else
-            sprintf(T, "%s_%s", Config::getInstance()->getKeyName(genVal.ranges.byLo, false, false).toStdString().c_str(),
-                    Config::getInstance()->getKeyName(genVal.ranges.byHi, false, false).toStdString().c_str());
+            sprintf(T, "%s_%s", Config::getInstance()->getKeyName(genVal.ranges.byLo).toStdString().c_str(),
+                    Config::getInstance()->getKeyName(genVal.ranges.byHi).toStdString().c_str());
         break;
     case champ_initialAttenuation: case champ_pan: case champ_initialFilterQ:
     case champ_modLfoToVolume:
@@ -4010,6 +4010,12 @@ QWidget * TableDelegate::createEditor(QWidget *parent, const QStyleOptionViewIte
                             "SpinBoxRange::down-button{width:0px;} SpinBoxRange::up-button{width:0px;} ");
         widget = spin;
     }
+
+#ifdef Q_OS_MAC
+    QFont font = parent->font();
+    font.setPixelSize(10);
+    widget->setFont(font);
+#endif
 
     return widget;
 }

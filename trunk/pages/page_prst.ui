@@ -168,7 +168,7 @@
     <widget class="TableWidgetPrst" name="tablePrst">
      <property name="font">
       <font>
-       <pointsize>8</pointsize>
+       <pointsize>9</pointsize>
       </font>
      </property>
      <property name="frameShape">
@@ -448,7 +448,7 @@
        <number>0</number>
       </property>
       <property name="topMargin">
-       <number>0</number>
+       <number>3</number>
       </property>
       <property name="rightMargin">
        <number>0</number>
@@ -464,8 +464,27 @@
       </property>
       <item row="0" column="6">
        <widget class="QPushButton" name="pushPasteMod">
+        <property name="maximumSize">
+         <size>
+          <width>24</width>
+          <height>24</height>
+         </size>
+        </property>
+        <property name="toolTip">
+         <string>Colle les modulateurs copiés</string>
+        </property>
         <property name="text">
-         <string>coller</string>
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset resource="../ressources.qrc">
+          <normaloff>:/icones/paste</normaloff>:/icones/paste</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>22</width>
+          <height>22</height>
+         </size>
         </property>
        </widget>
       </item>
@@ -624,8 +643,27 @@
       </item>
       <item row="0" column="5">
        <widget class="QPushButton" name="pushCopyMod">
+        <property name="maximumSize">
+         <size>
+          <width>24</width>
+          <height>24</height>
+         </size>
+        </property>
+        <property name="toolTip">
+         <string>Copie l'ensemble des modulateurs</string>
+        </property>
         <property name="text">
-         <string>copier</string>
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset resource="../ressources.qrc">
+          <normaloff>:/icones/copy</normaloff>:/icones/copy</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>22</width>
+          <height>22</height>
+         </size>
         </property>
        </widget>
       </item>
@@ -642,6 +680,9 @@
           <width>24</width>
           <height>24</height>
          </size>
+        </property>
+        <property name="toolTip">
+         <string>Ajoute un modulateur</string>
         </property>
         <property name="text">
          <string/>
@@ -681,6 +722,9 @@
           <width>24</width>
           <height>24</height>
          </size>
+        </property>
+        <property name="toolTip">
+         <string>Supprime un modulateur</string>
         </property>
         <property name="text">
          <string/>
@@ -1153,6 +1197,38 @@
     <hint type="sourcelabel">
      <x>589</x>
      <y>290</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>310</x>
+     <y>213</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>spinBank</sender>
+   <signal>editingFinished()</signal>
+   <receiver>Page_Prst</receiver>
+   <slot>setBank()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>85</x>
+     <y>12</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>310</x>
+     <y>213</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>spinPreset</sender>
+   <signal>editingFinished()</signal>
+   <receiver>Page_Prst</receiver>
+   <slot>setPreset()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>204</x>
+     <y>12</y>
     </hint>
     <hint type="destinationlabel">
      <x>310</x>
