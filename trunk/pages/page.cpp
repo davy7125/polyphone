@@ -29,8 +29,6 @@
 #include "dialog_visualizer.h"
 #include "dialog_space.h"
 #include "dialog_duplication.h"
-#include "spinboxkey.h"
-#include "spinboxrange.h"
 #include <QScrollBar>
 #include <QLineEdit>
 
@@ -862,7 +860,9 @@ void PageTable::afficher()
     char T[20];char str[40];char str2[40];
     this->preparation = 1;
     // Destruction des cellules précédentes
+    table->blockSignals(true);
     this->table->clear();
+    table->blockSignals(false);
 
     ////// AFFICHAGE DES PARAMETRES GLOBAUX //////
     this->table->addColumn(0, trUtf8("Global"));
@@ -926,6 +926,7 @@ void PageTable::afficher()
         this->table->item(row, 0)->setText(getTextValue(T, champ_endloopAddrsOffset, offsetEndLoop));
     }
     this->table->setID(id, 0);
+
     ////// AFFICHAGE DES PARAMETRES PAR ELEMENT LIÉ //////
     nbSmplInst = 0;
     id.typeElement = this->lien;
@@ -1415,20 +1416,29 @@ void PageTable::setOffset(bool &newAction, int ligne, int colonne, Champ champ1,
             this->table->item(ligne, colonne)->setText("");
     }
 }
-void PageTable::set(int ligne, int colonne, bool newAction)
+void PageTable::set(int ligne, int colonne)
 {
     if (this->preparation)
         return;
 
     // Modification de toutes les cellules sélectionnées
     QString text = table->item(ligne, colonne)->text();
-    for (int i = 0; i < table->selectedItems().size(); i++)
+    bool newAction = true;
+    QList<QTableWidgetItem*> listItems = table->selectedItems();
+    for (int i = 0; i < listItems.size(); i++)
     {
-        table->blockSignals(true);
-        table->selectedItems()[i]->setText(text);
-        table->blockSignals(false);
-        set(table->selectedItems().at(i)->row(), table->selectedItems().at(i)->column(), newAction, true);
+        if (listItems.at(i)->text() != text)
+        {
+            table->blockSignals(true);
+            listItems[i]->setText(text);
+            table->blockSignals(false);
+            set(listItems.at(i)->row(), listItems.at(i)->column(), newAction, true);
+        }
     }
+
+    Champ champ = table->getChamp(ligne);
+    if (champ == champ_overridingRootKey || champ == champ_keyRange)
+        customizeKeyboard();
 }
 void PageTable::set(int ligne, int colonne, bool &newAction, bool allowPropagation)
 {
@@ -1996,34 +2006,30 @@ void PageTable::setSource2(int index)
 
 void PageTable::reselect()
 {
-    this->selectNone();
+    this->table->clearSelection();
     this->table->setSelectionMode(QAbstractItemView::MultiSelection);
     for (unsigned int i = 0; i < this->tree->getSelectedItemsNumber(); i++)
         this->select(this->tree->getID(i));
     this->table->setSelectionMode(QAbstractItemView::ExtendedSelection);
+    customizeKeyboard();
 }
-void PageTable::selectNone(bool refresh)
+void PageTable::select(EltID id)
 {
-    this->preparation = !refresh;
-    this->table->clearSelection();
-    this->preparation = false;
-}
-void PageTable::select(EltID id, bool refresh)
-{
-    this->preparation = !refresh;
+    this->preparation = true;
     EltID id2;
     int max;
     for (int i = 0; i < this->table->columnCount(); i++)
     {
         id2 = this->table->getID(i);
-        if (id.typeElement == id2.typeElement && id.indexSf2 == id2.indexSf2 && \
-                id.indexElt == id2.indexElt &&(id.indexElt2 == id2.indexElt2 ||
-                                               id.typeElement == elementInst || id.typeElement == elementPrst))
+        if (id.typeElement == id2.typeElement && id.indexSf2 == id2.indexSf2 && id.indexElt == id2.indexElt &&
+                (id.indexElt2 == id2.indexElt2 || id.typeElement == elementInst || id.typeElement == elementPrst))
         {
-            this->table->item(1,i)->setSelected(true);
+            table->blockSignals(true);
+            this->table->item(1, i)->setSelected(true);
+            table->blockSignals(false);
             max = this->table->horizontalScrollBar()->maximum();
             if (max / this->table->columnCount() > 62)
-                this->table->horizontalScrollBar()->setValue((max*(i-1))/this->table->columnCount());
+                this->table->horizontalScrollBar()->setValue((max*(i-1)) / this->table->columnCount());
             else
                 this->table->scrollToItem(this->table->item(10, i), QAbstractItemView::PositionAtCenter);
         }
@@ -2033,29 +2039,108 @@ void PageTable::select(EltID id, bool refresh)
 void PageTable::selected()
 {
     if (this->preparation) return;
+
     // Mise à jour de la sélection dans l'arborescence
     this->tree->blockSignals(true);
-    int compte = this->table->selectedItems().count();
+    QList<QTableWidgetItem*> listItems = table->selectedItems();
+    int compte = listItems.count();
     if (compte)
     {
         this->tree->selectNone();
         int colonne;
         for (int i = 0; i < compte; i++)
         {
-            colonne = this->table->selectedItems().takeAt(i)->column();
+            colonne = listItems.at(i)->column();
             this->tree->select(this->table->getID(colonne));
         }
         this->tree->updateAtNextSelectionRequest();
+
         // Mise à jour des informations sur les mods
-        if (compte)
-        {
-            this->preparation = 1;
-            colonne = this->table->selectedItems().takeAt(compte-1)->column();
-            this->afficheMod(this->table->getID(colonne));
-            this->preparation = 0;
-        }
+        this->preparation = true;
+        colonne = listItems.last()->column();
+        this->afficheMod(this->table->getID(colonne));
+        this->preparation = false;
     }
+    customizeKeyboard();
     this->tree->blockSignals(false);
+}
+void PageTable::customizeKeyboard()
+{
+    mainWindow->clearKeyboardCustomisation();
+    QList<QTableWidgetItem*> listItems = table->selectedItems();
+    int nbCol = table->columnCount();
+    for (int i = 0; i < nbCol; i++)
+        if (table->item(1, i)->isSelected())
+            listItems << table->item(1, i); // row 1 is hidden
+    if (!listItems.isEmpty())
+    {
+        for (int i = 0; i < listItems.count(); i++)
+        {
+            int colonne = listItems.at(i)->column();
+            EltID id = this->table->getID(colonne);
+            if (id.typeElement == elementInstSmpl || id.typeElement == elementPrstInst)
+            {
+                int rootKey = -1;
+                if (id.typeElement == elementInstSmpl)
+                {
+                    if (sf2->isSet(id, champ_overridingRootKey))
+                        rootKey = sf2->get(id, champ_overridingRootKey).wValue;
+                    else
+                    {
+                        EltID idSmpl = id;
+                        idSmpl.typeElement = elementSmpl;
+                        idSmpl.indexElt = sf2->get(id, champ_sampleID).wValue;
+                        rootKey = sf2->get(idSmpl, champ_byOriginalPitch).wValue;
+                    }
+                }
+
+                rangesType keyRange;
+                keyRange.byLo = 0;
+                keyRange.byHi = 127;
+                if (sf2->isSet(id, champ_keyRange))
+                    keyRange = sf2->get(id, champ_keyRange).rValue;
+                else
+                {
+                    if (id.typeElement == elementInstSmpl)
+                        id.typeElement = elementInst;
+                    else
+                        id.typeElement = elementPrst;
+                    if (sf2->isSet(id, champ_keyRange))
+                        keyRange = sf2->get(id, champ_keyRange).rValue;
+                }
+                mainWindow->setRangeAndRootKey(rootKey, keyRange.byLo, keyRange.byHi);
+            }
+            else if (id.typeElement == elementInst || id.typeElement == elementPrst)
+            {
+                rangesType defaultKeyRange;
+                if (sf2->isSet(id, champ_keyRange))
+                    defaultKeyRange = sf2->get(id, champ_keyRange).rValue;
+                else
+                {
+                    defaultKeyRange.byLo = 0;
+                    defaultKeyRange.byHi = 127;
+                }
+                if (id.typeElement == elementInst)
+                    id.typeElement = elementInstSmpl;
+                else
+                    id.typeElement = elementPrstInst;
+                int nbInstSmpl = sf2->count(id);
+                for (int i = 0; i < nbInstSmpl; i++)
+                {
+                    id.indexElt2 = i;
+                    if (!sf2->get(id, champ_hidden).bValue)
+                    {
+                        rangesType keyRange;
+                        if (sf2->isSet(id, champ_keyRange))
+                            keyRange = sf2->get(id, champ_keyRange).rValue;
+                        else
+                            keyRange = defaultKeyRange;
+                        mainWindow->setRangeAndRootKey(-1, keyRange.byLo, keyRange.byHi);
+                    }
+                }
+            }
+        }
+    }   
 }
 
 void PageTable::addAvailableReceiverMod(ComboBox *combo, EltID id)
@@ -3252,7 +3337,6 @@ void PageTable::spatialisation()
     connect(dialogSpace, SIGNAL(accepted(QMap<int,double>)), this, SLOT(spatialisation(QMap<int,double>)));
     dialogSpace->show();
 }
-
 void PageTable::spatialisation(QMap<int, double> mapPan)
 {
     this->sf2->prepareNewActions();
@@ -3421,7 +3505,6 @@ void PageTable::spatialisation(QMap<int, double> mapPan)
     this->mainWindow->updateDo();
     this->afficher();
 }
-
 void PageTable::visualize()
 {
     EltID id = this->tree->getID(0);
@@ -3469,7 +3552,6 @@ void PageTable::visualize()
     dialogVisu->setAttribute(Qt::WA_DeleteOnClose, true);
     dialogVisu->show();
 }
-
 
 int PageTable::getDestNumber(int i)
 {
@@ -3705,140 +3787,6 @@ void PageTable::enlightColumn(int key, bool isEnlighted)
     }
 }
 
-//////////////////////////////////////////// TABLE WIDGET ////////////////////////////////////////////
-
-TableWidget::TableWidget(QWidget *parent) : QTableWidget(parent)
-{
-    KeyPressCatcher * keyPressCatcher = new KeyPressCatcher(this);
-    this->installEventFilter(keyPressCatcher);
-    this->setItemDelegate(new TableDelegate(this));
-    connect(keyPressCatcher, SIGNAL(set(int, int, bool)), this, SLOT(emitSet(int, int, bool)));
-    _timer = new QTimer(this);
-    connect(_timer, SIGNAL(timeout()), this, SLOT(updateColors()));
-}
-TableWidget::~TableWidget()
-{
-}
-void TableWidget::emitSet(int ligne, int colonne, bool newAction)
-{
-    bool enabled = this->signalsBlocked();
-    this->blockSignals(false);
-    emit(set(ligne, colonne, newAction));
-    this->blockSignals(enabled);
-}
-void TableWidget::clear()
-{
-    for (int i = 0; i < this->columnCount(); i++)
-    {
-        for (int j = 0; j < this->rowCount(); j++)
-            delete this->item(j, i);
-    }
-    this->setColumnCount(0);
-}
-void TableWidget::addColumn(int column, QString title)
-{
-    // Ajout d'une colonne
-    this->insertColumn(column);
-    // Création d'éléments
-    for (int i = 0; i < this->rowCount(); i++)
-        this->setItem(i, column, new QTableWidgetItem());
-
-    // Modification du titre
-    this->setHorizontalHeaderItem(column, new QTableWidgetItem(title));
-    // Ajout d'un élément couleur
-    _listColors.insert(column, QColor(0, 0, 0));
-}
-void TableWidget::setID(EltID id, int colonne)
-{
-    char T[20];
-    switch(id.typeElement)
-    {
-    case elementInstGen: case elementInst: strcpy(T, "Inst"); break;
-    case elementInstSmplGen: case elementInstSmpl: strcpy(T, "InstSmpl"); break;
-    case elementPrstGen: case elementPrst: strcpy(T, "Prst"); break;
-    case elementPrstInstGen: case elementPrstInst: strcpy(T, "PrstInst"); break;
-    default: break;
-    }
-    this->item(0, colonne)->setText(T);
-    sprintf(T, "%d", id.indexSf2);
-    this->item(1, colonne)->setText(T);
-    sprintf(T, "%d", id.indexElt);
-    this->item(2, colonne)->setText(T);
-    sprintf(T, "%d", id.indexElt2);
-    this->item(3, colonne)->setText(T);
-}
-EltID TableWidget::getID(int colonne)
-{
-    EltID id(elementUnknown, 0, 0, 0, 0);
-    if (this->columnCount() > colonne)
-    {
-        if (strcmp(this->item(0, colonne)->text().toStdString().c_str(), "Inst") == 0)
-            id.typeElement = elementInst;
-        else if (strcmp(this->item(0, colonne)->text().toStdString().c_str(), "InstSmpl") == 0)
-            id.typeElement = elementInstSmpl;
-        else if (strcmp(this->item(0, colonne)->text().toStdString().c_str(), "Prst") == 0)
-            id.typeElement = elementPrst;
-        else if (strcmp(this->item(0, colonne)->text().toStdString().c_str(), "PrstInst") == 0)
-            id.typeElement = elementPrstInst;
-        sscanf(this->item(1, colonne)->text().toStdString().c_str(), "%d", &id.indexSf2);
-        sscanf(this->item(2, colonne)->text().toStdString().c_str(), "%d", &id.indexElt);
-        sscanf(this->item(3, colonne)->text().toStdString().c_str(), "%d", &id.indexElt2);
-        //sscanf(this->item(4, colonne)->text().toStdString().c_str(), "%d", &id.indexMod);
-        id.indexMod = 0;
-    }
-    return id;
-}
-void TableWidget::setEnlighted(int colonne, bool isEnlighted)
-{
-    if (colonne >= this->columnCount())
-        return;
-
-    if (isEnlighted)
-        _listColors[colonne] = QColor(70, 120, 210);
-    else
-        _listColors[colonne] = QColor(0, 0, 0);
-
-    _timer->start(30);
-}
-void TableWidget::updateColors()
-{
-    int minChange = 40;
-    bool toutPareil = true;
-    for (int i = 0; i < this->columnCount(); i++)
-    {
-        if (this->horizontalHeaderItem(i))
-        {
-            QColor couleur1 = this->horizontalHeaderItem(i)->foreground().color();
-            QColor couleur2 = _listColors.at(i);
-            if (couleur1 != couleur2)
-            {
-                int deltaRouge = qMax(-minChange, qMin(minChange, couleur2.red() - couleur1.red()));
-                int deltaVert = qMax(-minChange, qMin(minChange, couleur2.green() - couleur1.green()));
-                int deltaBleu = qMax(-minChange, qMin(minChange, couleur2.blue() - couleur1.blue()));
-                couleur1.setRed(couleur1.red() + deltaRouge);
-                couleur1.setGreen(couleur1.green() + deltaVert);
-                couleur1.setBlue(couleur1.blue() + deltaBleu);
-                this->horizontalHeaderItem(i)->setForeground(couleur1);
-            }
-            if (couleur1 != couleur2)
-                toutPareil = false;
-        }
-    }
-    if (toutPareil)
-        _timer->stop();
-}
-void TableWidget::setColumnCount(int columns)
-{
-    QTableWidget::setColumnCount(columns);
-    _listColors.clear();
-    for (int i = 0; i < columns; i++)
-        _listColors << QColor(0, 0, 0);
-}
-void TableWidget::removeColumn(int column)
-{
-    QTableWidget::removeColumn(column);
-    _listColors.removeAt(column);
-}
 
 //////////////////////////////////////////// TABLE WIDGET MOD ////////////////////////////////////////////
 
@@ -3905,139 +3853,6 @@ EltID TableWidgetMod::getID()
 {
     EltID id(elementUnknown, 0, 0, 0, 0);
     if (this->selectedItems().count())
-        id = getID(this->selectedItems().takeAt(0)->row());
+        id = getID(this->selectedItems().at(0)->row());
     return id;
-}
-
-QWidget * TableDelegate::createEditor(QWidget *parent, const QStyleOptionViewItem &option, const QModelIndex &index) const
-{
-    Q_UNUSED(option)
-
-    bool isNumeric = true;
-    bool isKey = false;
-    int nbDecimales = 0;
-    if (_table->rowCount() == 50)
-    {
-        // Table instrument
-        switch (index.row())
-        {
-        case 4:
-            isNumeric = false;
-            isKey = true;
-            break;
-        case 5:
-            isNumeric = false;
-            break;
-        case 6: case 7: case 14: case 19: case 27: case 37: case 42: case 43:
-            nbDecimales = 1;
-            break;
-        case 15: case 16: case 17: case 18: case 20:
-        case 23: case 24: case 25: case 26: case 28:
-        case 33: case 34: case 38: case 39:
-            nbDecimales = 3;
-            break;
-        case 9: case 44:
-            isKey = true;
-            break;
-        }
-    }
-    else
-    {
-        // Table preset
-        switch (index.row())
-        {
-        case 4:
-            isNumeric = false;
-            isKey = true;
-            break;
-        case 5:
-            isNumeric = false;
-            break;
-        case 6: case 7: case 12: case 17: case 25: case 35: case 39: case 40:
-            nbDecimales = 1;
-            break;
-        case 11: case 13: case 14: case 15: case 16: case 18:
-        case 21: case 22: case 23: case 24: case 26: case 31:
-        case 32: case 36: case 37:
-            nbDecimales = 3;
-            break;
-        }
-    }
-
-    QWidget * widget;
-    QColor highlightColor = parent->palette().color(QPalette::Highlight);
-    if (isNumeric)
-    {
-        if (isKey)
-        {
-            SpinBoxKey * spin = new SpinBoxKey(parent);
-            spin->setMinimum(0);
-            spin->setMaximum(127);
-            spin->setStyleSheet("SpinBoxKey{ border: 3px solid " + highlightColor.name() + "; }"
-                                "SpinBoxKey::down-button{width:0px;} SpinBoxKey::up-button{width:0px;} ");
-            widget = spin;
-        }
-        else if (nbDecimales == 0)
-        {
-            QSpinBox * spin = new QSpinBox(parent);
-            spin->setMinimum(-2147483648);
-            spin->setMaximum(2147483647);
-            spin->setStyleSheet("QSpinBox{ border: 3px solid " + highlightColor.name() + "; }"
-                                "QSpinBox::down-button{width:0px;} QSpinBox::up-button{width:0px;} ");
-            widget = spin;
-        }
-        else
-        {
-            QDoubleSpinBox * spin = new QDoubleSpinBox(parent);
-            spin->setMinimum(-1000000);
-            spin->setMaximum(1000000);
-            spin->setSingleStep(.1);
-            spin->setStyleSheet("QDoubleSpinBox{ border: 3px solid " + highlightColor.name() + "; }"
-                                "QDoubleSpinBox::down-button{width:0px;} QDoubleSpinBox::up-button{width:0px;} ");
-            spin->setDecimals(nbDecimales);
-            widget = spin;
-        }
-    }
-    else
-    {
-        // Etendue
-        SpinBoxRange * spin;
-        if (isKey)
-            spin = new SpinBoxKeyRange(parent);
-        else
-            spin = new SpinBoxVelocityRange(parent);
-        spin->setStyleSheet("SpinBoxRange{ border: 3px solid " + highlightColor.name() + "; }"
-                            "SpinBoxRange::down-button{width:0px;} SpinBoxRange::up-button{width:0px;} ");
-        widget = spin;
-    }
-
-#ifdef Q_OS_MAC
-    QFont font = parent->font();
-    font.setPixelSize(10);
-    widget->setFont(font);
-#endif
-
-    return widget;
-}
-
-void TableDelegate::setEditorData(QWidget *editor, const QModelIndex &index) const
-{
-    if (index.row() == 4 || index.row() == 5)
-    {
-        SpinBoxRange * spin = (SpinBoxRange *)editor;
-        if (index.data().isNull())
-            spin->setText("0_127");
-        else
-            spin->setText(index.data().toString());
-    }
-    else if (_table->rowCount() == 50 && (index.row() == 9 || index.row() == 44))
-    {
-        SpinBoxKey * spin = (SpinBoxKey *)editor;
-        if (index.data().isNull())
-            spin->setValue(60); // valeur par défaut
-        else
-            spin->setValue(Config::getInstance()->getKeyNum(index.data().toString()));
-    }
-    else
-        QStyledItemDelegate::setEditorData(editor, index);
 }

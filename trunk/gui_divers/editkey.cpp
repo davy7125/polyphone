@@ -27,6 +27,8 @@
 EditKey::EditKey(QWidget *parent) : QLineEdit(parent),
     _combinaison("")
 {
+    setReadOnly(true);
+    setAlignment(Qt::AlignCenter | Qt::AlignHCenter);
 }
 
 void EditKey::keyPressEvent(QKeyEvent * event)

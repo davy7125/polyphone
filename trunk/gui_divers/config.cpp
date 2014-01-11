@@ -32,11 +32,10 @@
 
 Config * Config::_instance = NULL;
 
-
-Config * Config::getInstance(QWidget * parent)
+Config * Config::getInstance(QWidget * parent, PianoKeybdCustom * keyboard)
 {
     if (_instance == NULL)
-        _instance = new Config(parent);
+        _instance = new Config(parent, keyboard);
     return _instance;
 }
 
@@ -45,9 +44,10 @@ void Config::kill()
     delete _instance;
 }
 
-Config::Config(QWidget *parent) : QDialog(parent),
+Config::Config(QWidget *parent, PianoKeybdCustom *keyboard) : QDialog(parent),
     settings(this),
-    ui(new Ui::Config)
+    ui(new Ui::Config),
+    _keyboard(keyboard)
 {
     ui->setupUi(this);
 
@@ -114,38 +114,41 @@ Config::Config(QWidget *parent) : QDialog(parent),
         this->synthGain = -50;
     else if (this->synthGain > 50)
         this->synthGain = 50;
-    this->ui->sliderGain->setValue(this->synthGain);
-    this->ui->labelGain->setNum(this->synthGain);
-    this->ui->dialRevNiveau->setValue(this->revLevel);
-    this->ui->dialRevProfondeur->setValue(this->revSize);
-    this->ui->dialRevDensite->setValue(this->revWidth);
-    this->ui->dialRevAttenuation->setValue(this->revDamping);
-    this->ui->dialChoNiveau->setValue(this->choLevel);
-    this->ui->dialChoAmplitude->setValue(this->choDepth);
-    this->ui->dialChoFrequence->setValue(this->choFrequency);
-    this->ui->checkRepercussionStereo->setChecked(this->modifStereo);
-    this->ui->comboKeyName->setCurrentIndex((int)this->nameMiddleC);
-    if (this->keyboardType < 0 || this->keyboardType > 3)
+    ui->sliderGain->setValue(this->synthGain);
+    ui->labelGain->setNum(this->synthGain);
+    ui->dialRevNiveau->setValue(this->revLevel);
+    ui->dialRevProfondeur->setValue(this->revSize);
+    ui->dialRevDensite->setValue(this->revWidth);
+    ui->dialRevAttenuation->setValue(this->revDamping);
+    ui->dialChoNiveau->setValue(this->choLevel);
+    ui->dialChoAmplitude->setValue(this->choDepth);
+    ui->dialChoFrequence->setValue(this->choFrequency);
+    ui->checkRepercussionStereo->setChecked(this->modifStereo);
+    ui->comboKeyName->setCurrentIndex((int)this->nameMiddleC);
+    if (this->keyboardType < 0 || this->keyboardType > 4)
         this->keyboardType = 1;
     if (this->keyboardVelocity < 0)
         this->keyboardVelocity = 0;
     else if (this->keyboardVelocity > 127)
         this->keyboardVelocity = 127;
-    this->ui->comboRam->setVisible(false); // Temporaire : tout charger dans la ram n'apporte rien pour l'instant (sur linux)
-    this->ui->label_2->setVisible(false);
+    ui->comboRam->setVisible(false); // Temporaire : tout charger dans la ram n'apporte rien pour l'instant (sur linux)
+    ui->label_2->setVisible(false);
     this->setColors();
 
     // Initialisation mappage
     octaveMapping = this->getOctaveMap();
-    mapper.setOctave(octaveMapping);
-    for (int i = 36; i <= 84; i++)
-        mapper.addCombinaisonKey(i, QKeySequence::fromString(getKeyMapped(i)));
-    mapper.addCombinaisonKey(48, QKeySequence::fromString(getKeyMapped(482)));
-    mapper.addCombinaisonKey(60, QKeySequence::fromString(getKeyMapped(602)));
-    mapper.addCombinaisonKey(72, QKeySequence::fromString(getKeyMapped(722)));
-    this->ui->tableKeyboardMap->setMapper(&mapper);
-    this->ui->tableKeyboardMap->setOctave(octaveMapping);
-    connect(ui->tableKeyboardMap, SIGNAL(combinaisonChanged(int,QString)), this, SLOT(combinaisonChanged(int, QString)));
+    if (octaveMapping >= ui->comboDo->count())
+        octaveMapping = 3;
+    ui->comboDo->setCurrentIndex(octaveMapping);
+    _keyboard->set(PianoKeybd::PROPERTY_MAPPING_FIRST_NOTE, 12 * octaveMapping);
+    for (int i = 0; i < 4; i++)
+    {
+        for (int j = 0; j < 13; j++)
+            _keyboard->setMapping((PianoKeybd::Key)j, i, QKeySequence::fromString(getKeyMapped(i, (PianoKeybd::Key)j)));
+    }
+    this->ui->tableKeyboardMap->setKeyboard(_keyboard);
+    connect(ui->tableKeyboardMap, SIGNAL(combinaisonChanged(int,int,QString)), this, SLOT(combinaisonChanged(int,int,QString)));
+    renameComboDo();
 
     this->loaded = true;
 }
@@ -856,31 +859,9 @@ void Config::setTools_i_mixture_ranks(QList<QList<int> > val)
     settings.setValue("tools/instrument/mixture_ranks", listTmp);
 }
 
-void Config::on_pushOctavePlus_clicked()
+void Config::combinaisonChanged(int key, int numOctave, QString combinaison)
 {
-    if (octaveMapping < 4)
-    {
-        octaveMapping++;
-        this->setOctaveMap(octaveMapping);
-        this->mapper.setOctave(octaveMapping);
-        this->ui->tableKeyboardMap->setOctave(octaveMapping);
-    }
-}
-
-void Config::on_pushOctaveMoins_clicked()
-{
-    if (octaveMapping > -3)
-    {
-        octaveMapping--;
-        this->setOctaveMap(octaveMapping);
-        this->mapper.setOctave(octaveMapping);
-        this->ui->tableKeyboardMap->setOctave(octaveMapping);
-    }
-}
-
-void Config::combinaisonChanged(int numKey, QString combinaison)
-{
-    this->setKeyMapped(numKey, combinaison);
+    settings.setValue("map/key_" + QString::number(numOctave) + "_" + QString::number(key), combinaison);
 }
 
 void Config::on_comboKeyName_currentIndexChanged(int index)
@@ -890,6 +871,7 @@ void Config::on_comboKeyName_currentIndexChanged(int index)
         this->nameMiddleC = (NameMiddleC)index;
         this->store();
         this->mainWindow->noteNameChanged();
+        renameComboDo();
     }
 }
 
@@ -977,4 +959,25 @@ int Config::getKeyNum(QString keyName)
             note -= 12;
     }
     return note;
+}
+
+void Config::on_comboDo_currentIndexChanged(int index)
+{
+    this->setOctaveMap(index);
+    _keyboard->set(PianoKeybd::PROPERTY_MAPPING_FIRST_NOTE, index * 12);
+}
+
+void Config::setOctaveMap(int octave)
+{
+    settings.setValue("map/octave_offset", octave);
+    ui->comboDo->blockSignals(true);
+    ui->comboDo->setCurrentIndex(octave);
+    ui->comboDo->blockSignals(false);
+}
+
+void Config::renameComboDo()
+{
+    int nbElement = ui->comboDo->count();
+    for (int i = 0; i < nbElement; i++)
+        ui->comboDo->setItemText(i, getKeyName(12 * i));
 }

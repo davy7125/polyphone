@@ -161,31 +161,57 @@ void Synth::play(int type, int idSf2, int idElt, int note, int velocity, VoicePa
     case 1:{ // instrument
         // Parcours de tous les samples liés
         EltID idInstSmpl(elementInstSmpl, idSf2, idElt, 0, 0);
+        EltID idInst = idInstSmpl;
+        idInst.typeElement = elementInst;
+        rangesType defaultKeyRange, defaultVelRange;
+        if (m_sf2->isSet(idInst, champ_keyRange))
+            defaultKeyRange = m_sf2->get(idInst, champ_keyRange).rValue;
+        else
+        {
+            defaultKeyRange.byLo = 0;
+            defaultKeyRange.byHi = 127;
+        }
+        if (m_sf2->isSet(idInst, champ_velRange))
+            defaultVelRange = m_sf2->get(idInst, champ_velRange).rValue;
+        else
+        {
+            defaultVelRange.byLo = 0;
+            defaultVelRange.byHi = 127;
+        }
+        int keyMin, keyMax, velMin, velMax;
+        rangesType rangeTmp;
         for (int i = 0; i < m_sf2->count(idInstSmpl); i++)
         {
             idInstSmpl.indexElt2 = i;
             if (!m_sf2->get(idInstSmpl, champ_hidden).bValue)
             {
-                int keyMin = 0;
-                int keyMax = 127;
                 if (m_sf2->isSet(idInstSmpl, champ_keyRange))
                 {
-                    keyMin = m_sf2->get(idInstSmpl, champ_keyRange).rValue.byLo;
-                    keyMax = m_sf2->get(idInstSmpl, champ_keyRange).rValue.byHi;
+                    rangeTmp = m_sf2->get(idInstSmpl, champ_keyRange).rValue;
+                    keyMin = rangeTmp.byLo;
+                    keyMax = rangeTmp.byHi;
                 }
-                int velMin = 0;
-                int velMax = 127;
+                else
+                {
+                    keyMin = defaultKeyRange.byLo;
+                    keyMax = defaultKeyRange.byHi;
+                }
                 if (m_sf2->isSet(idInstSmpl, champ_velRange))
                 {
-                    velMin = m_sf2->get(idInstSmpl, champ_velRange).rValue.byLo;
-                    velMax = m_sf2->get(idInstSmpl, champ_velRange).rValue.byHi;
+                    rangeTmp = m_sf2->get(idInstSmpl, champ_velRange).rValue;
+                    velMin = rangeTmp.byLo;
+                    velMax = rangeTmp.byHi;
+                }
+                else
+                {
+                    velMin = defaultVelRange.byLo;
+                    velMax = defaultVelRange.byHi;
                 }
                 if (keyMin <= note     && keyMax >= note &&
                     velMin <= velocity && velMax >= velocity)
                 {
-                    // Récupération des paramètres
+                    // Récupération des paramètres et lecture du sample associé
                     VoiceParam * voiceParam = new VoiceParam(m_sf2, idInstSmpl, voiceParamTmp);
-                    // Lecture de l'instrument associé
                     this->play(0, idSf2, m_sf2->get(idInstSmpl, champ_sampleID).wValue,
                                note, velocity, voiceParam);
                     delete voiceParam;
@@ -196,31 +222,57 @@ void Synth::play(int type, int idSf2, int idElt, int note, int velocity, VoicePa
     case 2:{ // preset
         // Parcours de tous les instruments lies
         EltID idPrstInst(elementPrstInst, idSf2, idElt, 0, 0);
+        EltID idPrst = idPrstInst;
+        idPrst.typeElement = elementPrst;
+        rangesType defaultKeyRange, defaultVelRange;
+        if (m_sf2->isSet(idPrst, champ_keyRange))
+            defaultKeyRange = m_sf2->get(idPrst, champ_keyRange).rValue;
+        else
+        {
+            defaultKeyRange.byLo = 0;
+            defaultKeyRange.byHi = 127;
+        }
+        if (m_sf2->isSet(idPrst, champ_velRange))
+            defaultVelRange = m_sf2->get(idPrst, champ_velRange).rValue;
+        else
+        {
+            defaultVelRange.byLo = 0;
+            defaultVelRange.byHi = 127;
+        }
+        int keyMin, keyMax, velMin, velMax;
+        rangesType rangeTmp;
         for (int i = 0; i < m_sf2->count(idPrstInst); i++)
         {
             idPrstInst.indexElt2 = i;
             if (!m_sf2->get(idPrstInst, champ_hidden).bValue)
             {
-                int keyMin = 0;
-                int keyMax = 127;
                 if (m_sf2->isSet(idPrstInst, champ_keyRange))
                 {
-                    keyMin = m_sf2->get(idPrstInst, champ_keyRange).rValue.byLo;
-                    keyMax = m_sf2->get(idPrstInst, champ_keyRange).rValue.byHi;
+                    rangeTmp = m_sf2->get(idPrstInst, champ_keyRange).rValue;
+                    keyMin = rangeTmp.byLo;
+                    keyMax = rangeTmp.byHi;
                 }
-                int velMin = 0;
-                int velMax = 127;
+                else
+                {
+                    keyMin = defaultKeyRange.byLo;
+                    keyMax = defaultKeyRange.byHi;
+                }
                 if (m_sf2->isSet(idPrstInst, champ_velRange))
                 {
-                    velMin = m_sf2->get(idPrstInst, champ_velRange).rValue.byLo;
-                    velMax = m_sf2->get(idPrstInst, champ_velRange).rValue.byHi;
+                    rangeTmp = m_sf2->get(idPrstInst, champ_velRange).rValue;
+                    velMin = rangeTmp.byLo;
+                    velMax = rangeTmp.byHi;
+                }
+                else
+                {
+                    velMin = defaultVelRange.byLo;
+                    velMax = defaultVelRange.byHi;
                 }
                 if (keyMin <= note     && keyMax >= note &&
                     velMin <= velocity && velMax >= velocity)
                 {
-                    // Récupération des paramètres
+                    // Récupération des paramètres et lecture de l'instrument associé
                     VoiceParam * voiceParam = new VoiceParam(m_sf2, idPrstInst);
-                    // Lecture de l'instrument associe
                     this->play(1, idSf2, m_sf2->get(idPrstInst, champ_instrument).wValue,
                                note, velocity, voiceParam);
                     delete voiceParam;
@@ -236,7 +288,7 @@ void Synth::play(int type, int idSf2, int idElt, int note, int velocity, VoicePa
 }
 void Synth::stop()
 {
-    // Arret demande de toutes les voix
+    // Arrêt demandé de toutes les voix
     m_mutexVoices.lock();
     for (int i = m_listeVoix.size()-1; i >= 0; i--)
         delete m_listeVoix.takeAt(i);

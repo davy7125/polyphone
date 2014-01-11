@@ -24,7 +24,7 @@
 
 #include "pianokeybdcustom.h"
 #include "sf2_types.h"
-
+#include "config.h"
 
 // Callback des signaux midi
 void midiCallback(double deltatime, std::vector< unsigned char > *message, void *userData)
@@ -62,10 +62,14 @@ void midiCallback(double deltatime, std::vector< unsigned char > *message, void 
 
 // Constructeur, destructeur
 PianoKeybdCustom::PianoKeybdCustom(QWidget *parent) : PianoKeybd(parent),
-    midiin(NULL),
-    _mapper(NULL)
+    midiin(NULL)
 {
-    this->setFrameStyle(0);
+    // Couleurs et style
+    set(PROPERTY_COLOR_BLACK_KEYS, QColor(130, 130, 130));
+    set(PROPERTY_COLOR_WHITE_KEYS, QColor(230, 230, 230));
+    set(PROPERTY_COLOR_1, QColor(50, 80, 255));
+    setFrameStyle(0);
+
     // Connexion midi
     try
     {
@@ -125,12 +129,12 @@ void PianoKeybdCustom::changeKey(int key, int vel)
 {
     // Action sur les touches
     if (vel > 0)
-        this->showNoteOn(key, vel);
+        this->inputNoteOn(key, vel);
     else
-        this->showNoteOff(key, 0);
+        this->inputNoteOff(key);
 
     // Envoi signal
-    this->keyChanged(key, vel);
+    this->noteOn(key, vel);
 }
 
 void PianoKeybdCustom::changeController(int numController, int value)
@@ -147,31 +151,33 @@ void PianoKeybdCustom::changeController(int numController, int value)
     }
 }
 
-void PianoKeybdCustom::setKeyboardType(KeyboardType type)
+void PianoKeybdCustom::keyPressEvent(QKeyEvent * event)
 {
-    switch(type)
+    if (event->modifiers() & Qt::ControlModifier)
     {
-    case KEYBOARD_5_OCTAVES:
-        this->setMaximumWidth(330);
-        this->setMinimumWidth(330);
-        this->setNumOctaves(6);
-        this->setBaseOctave(3);
-        this->setMaxNote(96);
-        break;
-    case KEYBOARD_6_OCTAVES:
-        this->setMaximumWidth(380);
-        this->setMinimumWidth(380);
-        this->setNumOctaves(7);
-        this->setBaseOctave(3);
-        this->setMaxNote(108);
-        break;
-    case KEYBOARD_128_NOTES:
-        this->setMaximumWidth(610);
-        this->setMinimumWidth(610);
-        this->setNumOctaves(11);
-        this->setBaseOctave(0);
-        this->setMaxNote(127);
-        break;
-    default: break;
+        int key = event->key();
+        if (key >= Qt::Key_1 && key <= Qt::Key_8)
+        {
+            int octave = key - Qt::Key_1;
+            set(PROPERTY_MAPPING_FIRST_NOTE, 12 * octave);
+            Config::getInstance()->setOctaveMap(octave);
+        }
     }
+    PianoKeybd::keyPressEvent(event);
+}
+
+void PianoKeybdCustom::setRangeAndRootKey(int rootKey, int noteMin, int noteMax)
+{
+    QColor colorWhite(255, 255, 255);
+    QColor colorBlack(0, 0, 0);
+    for (int i = noteMin; i <= noteMax; i++)
+    {
+        int note = i % 12;
+        if (note == 1 || note == 3 || note == 6 || note == 8 || note == 10)
+            customize(i, CUSTOMIZATION_TYPE_COLOR, colorBlack);
+        else
+            customize(i, CUSTOMIZATION_TYPE_COLOR, colorWhite);
+    }
+    if (rootKey != -1)
+        customize(rootKey, CUSTOMIZATION_TYPE_MARKER, MARKER_TYPE_DOT_YELLOW);
 }

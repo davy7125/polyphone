@@ -9,8 +9,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>432</width>
-    <height>292</height>
+    <width>441</width>
+    <height>289</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -28,7 +28,7 @@
     <number>6</number>
    </property>
    <property name="topMargin">
-    <number>12</number>
+    <number>9</number>
    </property>
    <property name="rightMargin">
     <number>6</number>
@@ -1462,103 +1462,184 @@
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="tabKeyboard">
+     <widget class="QWidget" name="tab">
       <attribute name="title">
        <string>Clavier</string>
       </attribute>
-      <layout class="QHBoxLayout" name="horizontalLayout_7">
+      <layout class="QGridLayout" name="gridLayout_8">
        <property name="margin">
         <number>6</number>
        </property>
-       <item>
-        <widget class="TableKey" name="tableKeyboardMap">
-         <property name="styleSheet">
-          <string notr="true">
-
-QTableWidget
-{
-	margin-right: -2px;
-}</string>
-         </property>
-         <property name="frameShape">
-          <enum>QFrame::StyledPanel</enum>
+       <item row="1" column="1">
+        <widget class="QLabel" name="label_3">
+         <property name="text">
+          <string>Premier Do</string>
          </property>
         </widget>
        </item>
-       <item>
-        <layout class="QVBoxLayout" name="verticalLayout_8">
+       <item row="1" column="2">
+        <widget class="QComboBox" name="comboDo">
+         <property name="currentIndex">
+          <number>0</number>
+         </property>
          <item>
-          <widget class="QPushButton" name="pushOctavePlus">
-           <property name="minimumSize">
-            <size>
-             <width>36</width>
-             <height>36</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>36</width>
-             <height>36</height>
-            </size>
-           </property>
-           <property name="text">
-            <string/>
-           </property>
-           <property name="icon">
-            <iconset resource="../ressources.qrc">
-             <normaloff>:/icones/octave_up</normaloff>:/icones/octave_up</iconset>
-           </property>
-           <property name="iconSize">
-            <size>
-             <width>32</width>
-             <height>32</height>
-            </size>
-           </property>
-          </widget>
+          <property name="text">
+           <string>0</string>
+          </property>
          </item>
          <item>
-          <widget class="QPushButton" name="pushOctaveMoins">
-           <property name="minimumSize">
-            <size>
-             <width>36</width>
-             <height>36</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>36</width>
-             <height>36</height>
-            </size>
-           </property>
-           <property name="text">
-            <string/>
-           </property>
-           <property name="icon">
-            <iconset resource="../ressources.qrc">
-             <normaloff>:/icones/octave_down</normaloff>:/icones/octave_down</iconset>
-           </property>
-           <property name="iconSize">
-            <size>
-             <width>32</width>
-             <height>32</height>
-            </size>
-           </property>
-          </widget>
+          <property name="text">
+           <string>12</string>
+          </property>
          </item>
          <item>
-          <spacer name="verticalSpacer_3">
-           <property name="orientation">
-            <enum>Qt::Vertical</enum>
-           </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>20</width>
-             <height>40</height>
-            </size>
-           </property>
-          </spacer>
+          <property name="text">
+           <string>24</string>
+          </property>
          </item>
-        </layout>
+         <item>
+          <property name="text">
+           <string>36</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>48</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>60</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>72</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>84</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <spacer name="horizontalSpacer_6">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="0" column="0" colspan="3">
+        <widget class="TableKey" name="tableKeyboardMap">
+         <property name="frameShape">
+          <enum>QFrame::StyledPanel</enum>
+         </property>
+         <property name="selectionMode">
+          <enum>QAbstractItemView::NoSelection</enum>
+         </property>
+         <property name="horizontalScrollMode">
+          <enum>QAbstractItemView::ScrollPerPixel</enum>
+         </property>
+         <attribute name="horizontalHeaderDefaultSectionSize">
+          <number>65</number>
+         </attribute>
+         <attribute name="verticalHeaderDefaultSectionSize">
+          <number>25</number>
+         </attribute>
+         <row>
+          <property name="text">
+           <string>Octave 1</string>
+          </property>
+         </row>
+         <row>
+          <property name="text">
+           <string>Octave 2</string>
+          </property>
+         </row>
+         <row>
+          <property name="text">
+           <string>Octave 3</string>
+          </property>
+         </row>
+         <row>
+          <property name="text">
+           <string>Octave 4</string>
+          </property>
+         </row>
+         <column>
+          <property name="text">
+           <string>Do</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>Do#</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>Ré</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>Ré#</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>Mi</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>Fa</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>Fa#</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>Sol</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>Sol#</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>La</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>La#</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>Si</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>Do</string>
+          </property>
+         </column>
+        </widget>
        </item>
       </layout>
      </widget>
@@ -1610,9 +1691,6 @@ QTableWidget
   <tabstop>pushResetToolbar</tabstop>
   <tabstop>listActions</tabstop>
   <tabstop>listToolbar</tabstop>
-  <tabstop>tableKeyboardMap</tabstop>
-  <tabstop>pushOctavePlus</tabstop>
-  <tabstop>pushOctaveMoins</tabstop>
   <tabstop>pushFermer</tabstop>
  </tabstops>
  <resources>

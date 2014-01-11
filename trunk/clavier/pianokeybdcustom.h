@@ -28,7 +28,6 @@
 #include "pianokeybd.h"
 #include "RtMidi.h"
 #include <QKeyEvent>
-#include <keymapper.h>
 
 // Evenements
 class NoteEvent : public QEvent
@@ -63,71 +62,19 @@ class PianoKeybdCustom : public PianoKeybd
 {
     Q_OBJECT
 public:
-    enum KeyboardType
-    {
-        KEYBOARD_5_OCTAVES,
-        KEYBOARD_6_OCTAVES,
-        KEYBOARD_128_NOTES
-    };
     PianoKeybdCustom(QWidget * parent);
     ~PianoKeybdCustom();
-    // Méthodes publiques
     QStringList getPortNames();
     void openMidiPort(int val);
     void changeKey(int key, int vel);
     void changeController(int numController, int value);
-    void setKeyboardType(KeyboardType type);
-    void setMapper(KeyMapper * mapper)
-    {
-        _mapper = mapper;
-    }
+    void setRangeAndRootKey(int rootKey, int noteMin, int noteMax);
 
 signals:
-    void keyChanged(int note, int vel);
     void sustainChanged(bool isOn);
     void volumeChanged(int value);
 
 protected:
-    void keyPressEvent(QKeyEvent *event)
-    {
-        if (event->isAutoRepeat())
-            event->ignore();
-        else
-        {
-            if (_mapper)
-            {
-                QString modifier = QString::null;
-                if (event->modifiers() & Qt::ShiftModifier)
-                    modifier += "Shift+";
-                QString key = QKeySequence(event->key()).toString();
-                int note = _mapper->getKey(QKeySequence(modifier + key));
-                if (note != -1)
-                    this->changeKey(note, 127);
-            }
-            event->accept();
-        }
-    }
-
-    void keyReleaseEvent(QKeyEvent *event)
-    {
-        if (event->isAutoRepeat())
-            event->ignore();
-        else
-        {
-            if (_mapper)
-            {
-                QString modifier = QString::null;
-                if (event->modifiers() & Qt::ShiftModifier)
-                    modifier += "Shift+";
-                QString key = QKeySequence(event->key()).toString();
-                int note = _mapper->getKey(QKeySequence(modifier + key));
-                if (note != -1)
-                    this->changeKey(note, 0);
-            }
-            event->accept();
-        }
-    }
-
     void customEvent(QEvent * event)
     {
         if (event->type() == QEvent::User)
@@ -143,10 +90,10 @@ protected:
             event->accept();
         }
     }
+    void keyPressEvent(QKeyEvent *event);
 
 private:
     RtMidiIn * midiin;
-    KeyMapper * _mapper;
 };
 
 
