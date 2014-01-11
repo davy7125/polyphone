@@ -124,7 +124,7 @@ void Page_Smpl::afficher()
         if (sampleRate != sf2->get(idTmp, champ_dwSampleRate).dwValue)
             sampleRate = -1;
         if (rootKey != sf2->get(idTmp, champ_byOriginalPitch).bValue)
-            rootKey = 0;
+            rootKey = -1;
         if (correction != sf2->get(idTmp, champ_chPitchCorrection).cValue)
             correction = 0;
         if (startLoop != sf2->get(idTmp, champ_dwStartLoop).dwValue)
@@ -136,6 +136,12 @@ void Page_Smpl::afficher()
         if (typeLink != sf2->get(idTmp, champ_sfSampleType).sfLinkValue)
             typeLink = linkInvalid;
     }
+
+    // Initialisation clavier
+    mainWindow->clearKeyboardCustomisation();
+    mainWindow->setRangeAndRootKey(rootKey, 0, 127);
+    if (rootKey == -1)
+        rootKey = 0;
 
     // Remplissage des informations
     ui->comboSampleRate->setCurrentIndex(ui->comboSampleRate->findText(QString::number(sampleRate)));
@@ -459,7 +465,7 @@ void Page_Smpl::setRootKey()
 
     sf2->prepareNewActions();
     Valeur val;
-    val.bValue = this->ui->spinRootKey->value();
+    val.bValue = ui->spinRootKey->value();
     for (unsigned int i = 0; i < tree->getSelectedItemsNumber(); i++)
     {
         EltID id = tree->getID(i);
@@ -486,6 +492,9 @@ void Page_Smpl::setRootKey()
 }
 void Page_Smpl::setRootKey(int val)
 {
+    mainWindow->clearKeyboardCustomisation();
+    mainWindow->setRangeAndRootKey(val, 0, 127);
+
     // Modif synth
     if (tree->getSelectedItemsNumber() == 1)
         synth->setRootKey(val);

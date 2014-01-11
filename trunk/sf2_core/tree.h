@@ -59,7 +59,7 @@ public:
     };
     explicit Tree(QWidget *parent = 0);
     ~Tree();
-    // Méthodes publiques
+
     void init(MainWindow *mainWindow, Pile_sf2 *sf2);
     void trier(int forme);
     void updateAtNextSelectionRequest();

@@ -467,6 +467,7 @@ EltID Tree::getID(unsigned int pos)
 void Tree::select(EltID id, bool refresh)
 {
     this->refresh = refresh;
+
     // Sélection et visibilité de id dans l'arborescence si présent
     unsigned int max = this->topLevelItemCount();
     QTreeWidgetItem *child = NULL;

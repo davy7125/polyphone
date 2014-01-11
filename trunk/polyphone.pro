@@ -98,6 +98,7 @@ SOURCES	+= main.cpp \
     clavier/pianokeybd.cpp \
     clavier/keylabel.cpp \
     clavier/pianokeybdcustom.cpp \
+    clavier/keyboardmap.cpp \
     synthetiseur/synth.cpp \
     synthetiseur/voice.cpp \
     synthetiseur/circularbuffer.cpp \
@@ -117,7 +118,6 @@ SOURCES	+= main.cpp \
     tools/dialog_celeste.cpp \
     tools/dialog_visualizer.cpp \
     tools/dialog_duplication.cpp \
-    clavier/keymapper.cpp \
     gui_divers/editkey.cpp \
     gui_divers/tablekey.cpp \
     tools/conversion_sfz.cpp \
@@ -126,7 +126,8 @@ SOURCES	+= main.cpp \
     sf2_core/duplicator.cpp \
     tools/import_sfz.cpp \
     gui_divers/spinboxkey.cpp \
-    gui_divers/spinboxrange.cpp
+    gui_divers/spinboxrange.cpp \
+    pages/tablewidget.cpp
 
 HEADERS  += mainwindow.h \
     sf2_core/sf2_types.h \
@@ -157,6 +158,7 @@ HEADERS  += mainwindow.h \
     clavier/keylabel.h \
     clavier/pianokeybd.h \
     clavier/pianokeybdcustom.h \
+    clavier/keyboardmap.h \
     synthetiseur/synth.h \
     synthetiseur/voice.h \
     synthetiseur/circularbuffer.h \
@@ -180,7 +182,6 @@ HEADERS  += mainwindow.h \
     tools/dialog_celeste.h \
     tools/dialog_visualizer.h \
     tools/dialog_duplication.h \
-    clavier/keymapper.h \
     gui_divers/editkey.h \
     gui_divers/tablekey.h \
     tools/conversion_sfz.h \
@@ -190,7 +191,8 @@ HEADERS  += mainwindow.h \
     tools/import_sfz.h \
     macapplication.h \
     gui_divers/spinboxkey.h \
-    gui_divers/spinboxrange.h
+    gui_divers/spinboxrange.h \
+    pages/tablewidget.h
 
 FORMS    += mainwindow.ui \
     gui_divers/config.ui \

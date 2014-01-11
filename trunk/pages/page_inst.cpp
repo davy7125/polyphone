@@ -45,7 +45,6 @@ Page_Inst::Page_Inst(QWidget *parent) :
     this->lienGen = elementInstSmplGen;
     this->lienMod = elementInstSmplMod;
     this->table = this->ui->tableInst;
-    connect(this->table, SIGNAL(set(int, int, bool)), this, SLOT(set(int, int, bool)));
     this->tableMod = this->ui->tableMod;
     this->spinAmount = this->ui->spinSource2;
     this->checkAbs = this->ui->checkAbs;

@@ -44,17 +44,16 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent, Qt::Window | Qt::W
     ui(new Ui::MainWindow),
     synth(NULL),
     audioDevice(NULL),
-    configuration(Config::getInstance(this)),
     help(this),
     about(this),
     dialList(this),
-    keyboard(NULL),
-    dialogMagneto(NULL), // doit être appelé après le premier appel au singleton Config
+    dialogMagneto(NULL),
     actionKeyboard(NULL),
     _currentKey(-1),
     _isSustainOn(false)
 {
     ui->setupUi(this);
+    configuration = Config::getInstance(this, ui->widgetKeyboard);
 #if QT_VERSION >= QT_VERSION_CHECK(4, 7, 0)
     ui->editSearch->setPlaceholderText(trUtf8("Rechercher..."));
 #endif
@@ -139,29 +138,22 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent, Qt::Window | Qt::W
     }
 
     // Clavier
-    this->keyboard = new PianoKeybdCustom(this);
-    QHBoxLayout * layout = (QHBoxLayout*)this->ui->ensembleKeyboard->layout();
-    layout->insertWidget(2, this->keyboard);
-    this->setKeyboardType(this->configuration->getKeyboardType());
-
-    // Déplacement dans la barre de menu
     this->ui->toolBar->setContentsMargins(0, 0, 0, 0);
     ui->toolBar->setFixedHeight(40);
     this->ui->ensembleKeyboard->setMaximumHeight(this->ui->toolBar->height() + 0);
-    this->keyboard->setMaximumHeight(this->ui->toolBar->height() + 0);
+    ui->widgetKeyboard->setMaximumHeight(this->ui->toolBar->height() + 0);
     this->ui->velocityButton->setMaximumHeight(this->ui->toolBar->height() + 0);
     actionKeyboard = this->ui->toolBar->addWidget(this->ui->ensembleKeyboard);
     this->showKeyboard(false);
     this->ui->velocityButton->setValue(this->configuration->getKeyboardVelocity());
 
     // Ouverture port midi et connexions
-    this->keyboard->openMidiPort(this->configuration->getNumPortMidi());
-    connect(this->keyboard, SIGNAL(keyChanged(int,int)), this, SLOT(noteChanged(int,int)));
-    connect(this->keyboard, SIGNAL(sustainChanged(bool)), this, SLOT(setSustain(bool)));
-    connect(this->keyboard, SIGNAL(volumeChanged(int)), this, SLOT(setVolume(int)));
-    connect(this->keyboard, SIGNAL(noteOn(int)), this, SLOT(noteOn(int)));
-    connect(this->keyboard, SIGNAL(noteOff(int)), this, SLOT(noteOff(int)));
-    connect(this->keyboard, SIGNAL(mouseOver(int)), this, SLOT(noteHover(int)));
+    ui->widgetKeyboard->openMidiPort(this->configuration->getNumPortMidi());
+    connect(ui->widgetKeyboard, SIGNAL(noteOn(int,int)), this, SLOT(noteChanged(int,int)));
+    connect(ui->widgetKeyboard, SIGNAL(sustainChanged(bool)), this, SLOT(setSustain(bool)));
+    connect(ui->widgetKeyboard, SIGNAL(volumeChanged(int)), this, SLOT(setVolume(int)));
+    connect(ui->widgetKeyboard, SIGNAL(noteOff(int)), this, SLOT(noteOff(int)));
+    connect(ui->widgetKeyboard, SIGNAL(mouseOver(int)), this, SLOT(noteHover(int)));
     connect(this->page_smpl, SIGNAL(noteChanged(int,int)), this, SLOT(noteChanged(int,int)));
 
     // Connexion changement de couleur
@@ -169,9 +161,6 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent, Qt::Window | Qt::W
 
     // Initialisation des actions dans les configurations
     this->configuration->setListeActions(this->getListeActions());
-
-    // Passage du mapper au clavier
-    this->keyboard->setMapper(this->configuration->getMapper());
 
     QDate date = QDate::currentDate();
     if (date.month() == 10 && date.day() == 31)
@@ -191,7 +180,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent, Qt::Window | Qt::W
         ui->dockWidget->setMinimumWidth(dockWidth);
     else
         ui->dockWidget->setMaximumWidth(dockWidth);
-    QTimer::singleShot(1, this, SLOT(returnToOldMaxMinSizes()));
+    QTimer::singleShot(1, this, SLOT(delayedInit()));
 }
 MainWindow::~MainWindow()
 {
@@ -210,15 +199,15 @@ MainWindow::~MainWindow()
     this->synthThread.wait(200);
     delete this->synth;
     delete this->audioDevice;
-    delete this->keyboard;
     Config::kill();
     delete ui;
 }
 
-void MainWindow::returnToOldMaxMinSizes()
+void MainWindow::delayedInit()
 {
     ui->dockWidget->setMinimumWidth(150);
     ui->dockWidget->setMaximumWidth(300);
+    this->setKeyboardType(this->configuration->getKeyboardType());
 }
 
 void MainWindow::closeEvent(QCloseEvent *event)
@@ -324,6 +313,14 @@ void MainWindow::resizeEvent(QResizeEvent *)
 
     this->setWindowTitle(titre);
 }
+
+void MainWindow::keyPressEvent(QKeyEvent * event)
+{
+    if (event->modifiers() & Qt::ControlModifier && event->key() == Qt::Key_K)
+        ui->widgetKeyboard->setFocus();
+    QMainWindow::keyPressEvent(event);
+}
+
 
 // Ouverture, fermeture, suppression
 void MainWindow::ouvrir()
@@ -616,38 +613,53 @@ void MainWindow::setKeyboardType0()     {this->setKeyboardType(0);}
 void MainWindow::setKeyboardType1()     {this->setKeyboardType(1);}
 void MainWindow::setKeyboardType2()     {this->setKeyboardType(2);}
 void MainWindow::setKeyboardType3()     {this->setKeyboardType(3);}
+void MainWindow::on_action88_notes_triggered() {this->setKeyboardType(4);}
 void MainWindow::setKeyboardType(int val)
 {
-    this->ui->actionAucun->blockSignals(true);
-    this->ui->action5_octaves->blockSignals(true);
-    this->ui->action6_octaves->blockSignals(true);
-    this->ui->action128_notes->blockSignals(true);
-    this->ui->actionAucun->setChecked(false);
-    this->ui->action5_octaves->setChecked(false);
-    this->ui->action6_octaves->setChecked(false);
-    this->ui->action128_notes->setChecked(false);
+    ui->actionAucun->blockSignals(true);
+    ui->action5_octaves->blockSignals(true);
+    ui->action6_octaves->blockSignals(true);
+    ui->action128_notes->blockSignals(true);
+    ui->action88_notes->blockSignals(true);
+    ui->actionAucun->setChecked(false);
+    ui->action5_octaves->setChecked(false);
+    ui->action6_octaves->setChecked(false);
+    ui->action128_notes->setChecked(false);
+    ui->action88_notes->setChecked(false);
     switch (val)
     {
     case 1:
         // Clavier 5 octaves
-        this->keyboard->setKeyboardType(PianoKeybdCustom::KEYBOARD_5_OCTAVES);
-        this->ui->action5_octaves->setChecked(true);
+        ui->widgetKeyboard->set(PianoKeybd::PROPERTY_KEY_MIN, 36);
+        ui->widgetKeyboard->set(PianoKeybd::PROPERTY_KEY_NUMBER, 61);
+        ui->action5_octaves->setChecked(true);
         if (ui->stackedWidget->currentWidget() == this->page_inst ||
                 ui->stackedWidget->currentWidget() == this->page_prst)
             this->showKeyboard(true);
         break;
     case 2:
         // Clavier 6 octaves
-        this->keyboard->setKeyboardType(PianoKeybdCustom::KEYBOARD_6_OCTAVES);
-        this->ui->action6_octaves->setChecked(true);
+        ui->widgetKeyboard->set(PianoKeybd::PROPERTY_KEY_MIN, 36);
+        ui->widgetKeyboard->set(PianoKeybd::PROPERTY_KEY_NUMBER, 73);
+        ui->action6_octaves->setChecked(true);
         if (ui->stackedWidget->currentWidget() == this->page_inst ||
                 ui->stackedWidget->currentWidget() == this->page_prst)
             this->showKeyboard(true);
         break;
     case 3:
         // Clavier 128 notes
-        this->keyboard->setKeyboardType(PianoKeybdCustom::KEYBOARD_128_NOTES);
-        this->ui->action128_notes->setChecked(true);
+        ui->widgetKeyboard->set(PianoKeybd::PROPERTY_KEY_MIN, 0);
+        ui->widgetKeyboard->set(PianoKeybd::PROPERTY_KEY_NUMBER, 128);
+        ui->action128_notes->setChecked(true);
+        if (ui->stackedWidget->currentWidget() == this->page_inst ||
+                ui->stackedWidget->currentWidget() == this->page_prst)
+            this->showKeyboard(true);
+        break;
+    case 4:
+        // Clavier 88 notes
+        ui->widgetKeyboard->set(PianoKeybd::PROPERTY_KEY_MIN, 21);
+        ui->widgetKeyboard->set(PianoKeybd::PROPERTY_KEY_NUMBER, 88);
+        ui->action88_notes->setChecked(true);
         if (ui->stackedWidget->currentWidget() == this->page_inst ||
                 ui->stackedWidget->currentWidget() == this->page_prst)
             this->showKeyboard(true);
@@ -658,10 +670,17 @@ void MainWindow::setKeyboardType(int val)
         this->showKeyboard(false);
         break;
     }
-    this->ui->actionAucun->blockSignals(false);
-    this->ui->action5_octaves->blockSignals(false);
-    this->ui->action6_octaves->blockSignals(false);
-    this->ui->action128_notes->blockSignals(false);
+
+    // Redimensionnement
+    int widthKeyboard = (int)((double)(ui->ensembleKeyboard->height()) * .87 * ui->widgetKeyboard->ratio()) + 12;
+    ui->widgetKeyboard->setFixedWidth(widthKeyboard);
+
+    ui->actionAucun->blockSignals(false);
+    ui->action5_octaves->blockSignals(false);
+    ui->action6_octaves->blockSignals(false);
+    ui->action128_notes->blockSignals(false);
+    ui->action88_notes->blockSignals(false);
+
     // Sauvegarde du paramètre
     this->configuration->setKeyboardType(val);
 }
@@ -791,6 +810,7 @@ void MainWindow::updateTitle()
 void MainWindow::updateActions()
 {
     // Un élément est cliqué dans l'arborescence
+    //clearKeyboardCustomisation();
     int nb;
     bool fichierUnique = 1;
     bool familleUnique = 1;
@@ -2263,7 +2283,7 @@ void MainWindow::setAudioEngine(int audioEngine, int bufferSize)
 }
 void MainWindow::showKeyboard(bool val)
 {
-    this->keyboard->setVisible(val);
+    ui->widgetKeyboard->setVisible(val);
     this->ui->velocityButton->setVisible(val);
     this->ui->labelNote->setVisible(val);
     this->ui->labelVelocite->setVisible(val);
@@ -2280,15 +2300,11 @@ void MainWindow::setVelocity(int val)
 }
 QStringList MainWindow::getListMidi()
 {
-    return this->keyboard->getPortNames();
+    return ui->widgetKeyboard->getPortNames();
 }
 void MainWindow::openMidiPort(int val)
 {
-    this->keyboard->openMidiPort(val);
-}
-void MainWindow::noteOn(int key)
-{
-    noteChanged(key, this->configuration->getKeyboardVelocity());
+    ui->widgetKeyboard->openMidiPort(val);
 }
 void MainWindow::noteOff(int key)   { noteChanged(key, 0); }
 void MainWindow::noteHover(int key)
@@ -2398,4 +2414,12 @@ void MainWindow::setSynthReverb(int level, int size, int width, int damping)
 void MainWindow::setSynthChorus(int level, int depth, int frequency)
 {
     this->synth->setChorus(level, depth, frequency);
+}
+void MainWindow::setRangeAndRootKey(int rootKey, int noteMin, int noteMax)
+{
+    ui->widgetKeyboard->setRangeAndRootKey(rootKey, noteMin, noteMax);
+}
+void MainWindow::clearKeyboardCustomisation()
+{
+    ui->widgetKeyboard->clearCustomization();
 }
