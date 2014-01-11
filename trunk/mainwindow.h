@@ -109,10 +109,12 @@ public:
     void dragAndDrop(EltID idDest, QList<EltID> idSources);
     void dragAndDrop(QString path, EltID idDest, int *replace = NULL);
     void noteNameChanged();
+    void setRangeAndRootKey(int rootKey, int noteMin, int noteMax);
+    void clearKeyboardCustomisation();
 
 public slots:
     void ouvrir(QString fileName);
-    void returnToOldMaxMinSizes();
+    void delayedInit();
     void supprimerElt();        // Suppression des éléments sélectionnés dans l'arbre
     void copier();              // Envoi du signal "copier"
     void coller();              // Envoi du signal "coller"
@@ -152,6 +154,7 @@ private slots:
     void setKeyboardType1();    // Clic sur clavier -> 5 octaves
     void setKeyboardType2();    // Clic sur clavier -> 6 octaves
     void setKeyboardType3();    // Clic sur clavier -> 128 notes
+    void on_action88_notes_triggered();
     void setVelocity(int val);  // Rotation du bouton vélocité
     void undo();                // Clic sur l'action "undo"
     void redo();                // Clic sur l'action "redo"
@@ -181,12 +184,12 @@ private slots:
     void on_action_Dissocier_les_samples_st_r_o_triggered();
     void on_actionExporter_pics_de_fr_quence_triggered();
 
-    void noteOn(int key);
     void noteOff(int key);
     void noteHover(int key);
     void setSustain(bool isOn);
     void setVolume(int vol);
     void noteChanged(int key, int vel);
+
 
 signals:
     void initAudio(int numDevice, int bufferSize);
@@ -207,7 +210,6 @@ private:
     DialogHelp help;
     DialogAbout about;
     DialogList dialList;
-    PianoKeybdCustom * keyboard;
     DialogMagnetophone dialogMagneto;
     QAction * actionKeyboard;
     QList<QAction *> actionSeparators;
@@ -231,6 +233,7 @@ private:
 protected:
     void closeEvent(QCloseEvent *event);
     void resizeEvent(QResizeEvent *);
+    void keyPressEvent(QKeyEvent *event);
 };
 
 #endif // MAINWINDOW_H

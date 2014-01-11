@@ -1,6 +1,7 @@
 /*
-    Virtual Piano Widget for Qt4
-    Copyright (C) 2008-2010, Pedro Lopez-Cabanillas <plcl@users.sf.net>
+    MIDI Virtual Piano Keyboard
+    Copyright (C) 2008-2014, Pedro Lopez-Cabanillas <plcl@users.sf.net>
+    Copyright (C) 2014,      Davy Triponney         <davy.triponney@gmail.com>
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -19,6 +20,24 @@
 #ifndef KEYBOARDMAP_H
 #define KEYBOARDMAP_H
 
-typedef QHash<int, int> KeyboardMap;
+#include "pianokeybd.h"
+#include <QMap>
 
-#endif // KEYBOARDMAP_H
+class KeyboardMap
+{
+public:
+    KeyboardMap();
+    void setMapping(PianoKeybd::Key key, int numOctave, QKeySequence sequence);
+    QKeySequence getMapping(PianoKeybd::Key key, int numOctave);
+    int getKey(QKeySequence sequence);
+    QList<QKeySequence> getSequences(int note);
+
+    void setFirstNote(int note) { _firstNote = note; }
+    int getFirstNote()          { return _firstNote; }
+
+private:
+    int _firstNote;
+    QMap<int, QMap<PianoKeybd::Key, QKeySequence> > _keyMap;
+};
+
+#endif /* KEYBOARDMAP_H */

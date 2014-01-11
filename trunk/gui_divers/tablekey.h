@@ -28,7 +28,7 @@
 #include <QTableWidget>
 #include <QSignalMapper>
 
-class KeyMapper;
+class PianoKeybdCustom;
 
 class TableKey : public QTableWidget
 {
@@ -36,22 +36,16 @@ class TableKey : public QTableWidget
 
 public:
     TableKey(QWidget * parent = NULL);
-    void setMapper(KeyMapper * mapper);
-    void setOctave(int octave);
+    void setKeyboard(PianoKeybdCustom * keyboard);
 
 signals:
-    void combinaisonChanged(int numKey, QString combinaison);
-
-protected:
-    void resizeEvent(QResizeEvent *);
+    void combinaisonChanged(int key, int octave, QString combinaison);
 
 private slots:
-    void rowChanged(int row);
+    void rowChanged(QString id);
 
 private:
-    KeyMapper * _mapper;
-    int _rootKey;
-    QString getName(int note);
+    PianoKeybdCustom * _keyboard;
     QSignalMapper * _signalMapper;
 };
 

@@ -1,6 +1,7 @@
 /*
-    Virtual Piano Widget for Qt4 
-    Copyright (C) 2008-2010, Pedro Lopez-Cabanillas <plcl@users.sf.net>
+    MIDI Virtual Piano Keyboard
+    Copyright (C) 2008-2014, Pedro Lopez-Cabanillas <plcl@users.sf.net>
+    Copyright (C) 2014,      Davy Triponney         <davy.triponney@gmail.com>
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -12,75 +13,192 @@
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
 
-    You should have received a copy of the GNU General Public License along 
+    You should have received a copy of the GNU General Public License along
     with this program; If not, see <http://www.gnu.org/licenses/>.
 */
 
 #ifndef PIANOKEYBD_H
 #define PIANOKEYBD_H
 
-#include "pianoscene.h"
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 0, 0)
 #include <QGraphicsView>
+
+class PianoScene;
+class KeyboardMap;
+
+#if defined(VPIANO_PLUGIN)
+#include <QtDesigner/QDesignerExportWidget>
 #else
-#include <QtGui/QGraphicsView>
+#define QDESIGNER_WIDGET_EXPORT
 #endif
 
-#include <QApplication>
-
-class PianoKeybd : public QGraphicsView
+class QDESIGNER_WIDGET_EXPORT PianoKeybd : public QGraphicsView
 {
     Q_OBJECT
 
+#if defined(VPIANO_PLUGIN)
+    Q_CLASSINFO("Author", "Pedro Lopez-Cabanillas <plcl@users.sf.net>")
+    Q_CLASSINFO("URL", "http://sourceforge.net/projects/vmpk")
+    Q_CLASSINFO("Version", "0.20")
+#endif
+
 public:
-    PianoKeybd(QWidget *parent = 0);
-    PianoKeybd(const int baseOctave, const int numOctaves, QWidget *parent = 0);
+    enum KeyboardProperty
+    {
+        PROPERTY_KEY_MIN,
+        PROPERTY_KEY_NUMBER,
+        PROPERTY_COLORATION_TYPE,
+        PROPERTY_COLOR_1,
+        PROPERTY_COLOR_2,
+        PROPERTY_COLOR_3,
+        PROPERTY_COLOR_4,
+        PROPERTY_COLOR_5,
+        PROPERTY_COLOR_6,
+        PROPERTY_COLOR_7,
+        PROPERTY_COLOR_8,
+        PROPERTY_COLOR_9,
+        PROPERTY_COLOR_10,
+        PROPERTY_COLOR_11,
+        PROPERTY_COLOR_12,
+        PROPERTY_COLOR_13,
+        PROPERTY_COLOR_14,
+        PROPERTY_COLOR_15,
+        PROPERTY_COLOR_16,
+        PROPERTY_COLOR_WHITE_KEYS,
+        PROPERTY_COLOR_BLACK_KEYS,
+        PROPERTY_COLOR_TEXT_WHITE_KEYS,
+        PROPERTY_COLOR_TEXT_BLACK_KEYS,
+        PROPERTY_ROTATION,
+        PROPERTY_TRANSPOSE,
+        PROPERTY_LABEL_TYPE,
+        PROPERTY_CUSTOM_LABELS,
+        PROPERTY_MIDDLE_C,
+        PROPERTY_LABEL_OCTAVE_INDICE,
+        PROPERTY_CHANNEL,
+        PROPERTY_VELOCITY,
+        PROPERTY_ENABLE_COMPUTER_KEYBOARD,
+        PROPERTY_ENABLE_MOUSE,
+        PROPERTY_ENABLE_TOUCH,
+        PROPERTY_MAPPING_FIRST_NOTE
+    };
+
+    enum CustomizationType
+    {
+        CUSTOMIZATION_TYPE_COLOR,
+        CUSTOMIZATION_TYPE_MARKER
+    };
+
+    enum ColorationType
+    {
+        COLORATION_TYPE_NONE,
+        COLORATION_TYPE_UNIQUE,
+        COLORATION_TYPE_DUAL,
+        COLORATION_TYPE_CHANNEL,
+        COLORATION_TYPE_DEGREE
+    };
+
+    enum LabelType
+    {
+        LABEL_TYPE_NONE,
+        LABEL_TYPE_KEY_NAME_WITH_SHARPS,
+        LABEL_TYPE_KEY_NAME_WITH_FLATS,
+        LABEL_TYPE_NUMBER,
+        LABEL_TYPE_OCTAVES,
+        LABEL_TYPE_MAPPING,
+        LABEL_TYPE_CUSTOM,
+        LABEL_TYPE_CUSTOM_WITH_OCTAVE_NUMBER
+    };
+
+    enum MarkerType
+    {
+        MARKER_TYPE_NONE,
+        MARKER_TYPE_DOT_WHITE,
+        MARKER_TYPE_DOT_RED,
+        MARKER_TYPE_DOT_BLUE,
+        MARKER_TYPE_DOT_YELLOW,
+        MARKER_TYPE_DOT_BLACK,
+        MARKER_TYPE_STAR_WHITE,
+        MARKER_TYPE_STAR_RED,
+        MARKER_TYPE_STAR_BLUE,
+        MARKER_TYPE_STAR_YELLOW,
+        MARKER_TYPE_STAR_BLACK,
+        MARKER_TYPE_ARROW_WHITE,
+        MARKER_TYPE_ARROW_RED,
+        MARKER_TYPE_ARROW_BLUE,
+        MARKER_TYPE_ARROW_YELLOW,
+        MARKER_TYPE_ARROW_BLACK,
+        MARKER_TYPE_CROSS_WHITE,
+        MARKER_TYPE_CROSS_RED,
+        MARKER_TYPE_CROSS_BLUE,
+        MARKER_TYPE_CROSS_YELLOW,
+        MARKER_TYPE_CROSS_BLACK
+    };
+
+    enum MiddleKey
+    {
+        MIDDLE_KEY_C3,
+        MIDDLE_KEY_C4,
+        MIDDLE_KEY_C5
+    };
+
+    enum Key
+    {
+        KEY_C_LEFT,
+        KEY_C_SHARP,
+        KEY_D,
+        KEY_D_SHARP,
+        KEY_E,
+        KEY_F,
+        KEY_F_SHARP,
+        KEY_G,
+        KEY_G_SHARP,
+        KEY_A,
+        KEY_A_SHARP,
+        KEY_B,
+        KEY_C_RIGHT
+    };
+
+    PianoKeybd(QWidget *parent = NULL, const int startKey = 36, const int numKeys = 61);
     virtual ~PianoKeybd();
 
-    int baseOctave() const { return m_scene->baseOctave(); }
-    int numOctaves() const { return m_scene->numOctaves(); }
-    void setBaseOctave(const int baseOctave) { m_scene->setBaseOctave(baseOctave); }
-    void setNumOctaves(const int numOctaves);
-    QSize sizeHint() const;
-    int getRotation() const { return m_rotation; }
-    void setRotation(int r);
-    QColor getKeyPressedColor() const { return m_scene->getKeyPressedColor(); }
-    void setKeyPressedColor(const QColor& c) { m_scene->setKeyPressedColor(c); }
-    void allKeysOff() { m_scene->allKeysOff(); }
-    void setPianoHandler(PianoHandler* handler) { m_scene->setPianoHandler(handler); }
-    int minNote() const { return m_scene->getMinNote(); }
-    void setMinNote(int n) { m_scene->setMinNote(n); }
-    int maxNote() const { return m_scene->getMaxNote(); }
-    void setMaxNote(int n) { m_scene->setMaxNote(n); }
-    int getTranspose() const { return m_scene->getTranspose(); }
-    void setTranspose(int t) { m_scene->setTranspose(t); }
-    bool showLabels() const { return m_scene->showLabels(); }
-    void setShowLabels(bool show) { m_scene->setShowLabels(show); }
-    bool useFlats() const { return m_scene->useFlats(); }
-    void setUseFlats(bool use) { m_scene->setUseFlats(use); }
-    void useCustomNoteNames(const QStringList& names) { m_scene->useCustomNoteNames(names); }
-    void useStandardNoteNames() { m_scene->useStandardNoteNames(); }
-    int getVelocity() { return m_scene->getVelocity(); }
-    void setVelocity(const int velocity) { m_scene->setVelocity(velocity); }
+    // Settings
+    void set(KeyboardProperty keyboardProperty, QVariant value);
+    QVariant get(KeyboardProperty keyboardProperty);
 
-public slots:
-    void showNoteOn( int midiNote, int vel = 0 );
-    void showNoteOff( int midiNote, int vel = 0 );
+    // Customization
+    void customize(int key, CustomizationType type, QVariant value);
+    void resetCustomization(int key, CustomizationType type);
+    void clearCustomization();
+
+    // Mapping
+    void setMapping(Key key, int numOctave, QKeySequence sequence);
+    QKeySequence getMapping(Key key, int numOctave);
+
+    QSize sizeHint() const;
+    double ratio() const;
 
 signals:
-    void noteOn( int midiNote );
-    void noteOff( int midiNote );
-    void mouseOver( int midiNote );
+    void noteOn(int midiNote, int vel);
+    void noteOff(int midiNote);
+    void mouseOver(int midiNote);
+
+public slots:
+    void inputNoteOn(int midiNote, int vel = -1, int channel = -1);
+    void inputNoteOff(int midiNote, int channel = -1);
 
 protected:
     void initialize();
-    void initScene(int base, int num, const QColor& c = QColor());
+    void initScene(int startKey, int numKeys);
     void resizeEvent(QResizeEvent *event);
 
 private:
+    void setRotation(int r);
+    void setStartKey(int key);
+    void setNumKeys(int numKeys);
+
     int m_rotation;
-    PianoScene *m_scene;
+    PianoScene * m_scene;
+    KeyboardMap * m_keyboardMap;
 };
 
 #endif // PIANOKEYBD_H

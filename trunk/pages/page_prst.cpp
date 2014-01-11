@@ -39,7 +39,6 @@ Page_Prst::Page_Prst(QWidget *parent) :
     this->lienGen = elementPrstInstGen;
     this->lienMod = elementPrstInstMod;
     this->table = this->ui->tablePrst;
-    connect(this->table, SIGNAL(set(int, int, bool)), this, SLOT(set(int, int, bool)));
     this->tableMod = this->ui->tableMod;
     this->spinAmount = this->ui->spinSource2;
     this->checkAbs = this->ui->checkAbs;

@@ -27,6 +27,7 @@
 
 #include "pile_sf2.h"
 #include "synth.h"
+#include "tablewidget.h"
 #include <QStackedWidget>
 #include <QTableWidget>
 #include <QComboBox>
@@ -36,7 +37,6 @@
 #include <QTextEdit>
 #include <QApplication>
 #include <QPushButton>
-#include <QStyledItemDelegate>
 
 class Config;
 
@@ -84,60 +84,6 @@ private:
     int limit(int iTmp, int minInst, int maxInst, int minPrst = 0, int maxPrst = 0);
 };
 
-
-
-class TableDelegate : public QStyledItemDelegate
-{
-    Q_OBJECT
-
-public:
-    TableDelegate(QTableWidget * table, QObject * parent = NULL): QStyledItemDelegate(parent),
-        _table(table)
-    {}
-
-protected:
-    QWidget * createEditor(QWidget *parent, const QStyleOptionViewItem &option, const QModelIndex &index) const;
-    void setEditorData(QWidget *editor, const QModelIndex &index) const;
-
-private:
-    QTableWidget * _table;
-};
-
-
-
-// Classe QTableWidget avec inclusion d'une ID
-class TableWidget : public QTableWidget
-{
-    Q_OBJECT
-
-public:
-    TableWidget(QWidget *parent = 0);
-    ~TableWidget();
-    void clear();
-    void efface();
-    void addColumn(int column, QString title);
-    void setID(EltID id, int colonne);
-    EltID getID(int colonne);
-    void setEnlighted(int colonne, bool isEnlighted);
-
-    // Association champ - ligne (méthodes virtuelles pures)
-    virtual Champ getChamp(int row) = 0;
-    virtual int getRow(WORD champ) = 0;
-    void setColumnCount(int columns);
-    void removeColumn(int column);
-
-private slots:
-    void emitSet(int ligne, int colonne, bool newAction);
-    void updateColors();
-
-signals:
-    void set(int ligne, int colonne, bool newAction);
-
-private:
-    QTimer *_timer;
-    QList<QColor> _listColors;
-};
-
 // Classe QTableWidget pour mod
 class TableWidgetMod : public QTableWidget
 {
@@ -151,67 +97,6 @@ public:
     void setID(EltID id, int row);
     EltID getID(int row);
     EltID getID();
-};
-
-class KeyPressCatcher : public QObject
-{
-    Q_OBJECT
-
-signals:
-    void set(int ligne, int row, bool newAction);
-
-public:
-    KeyPressCatcher(TableWidget *table) : QObject()
-    {
-        this->table = table;
-    }
-    ~KeyPressCatcher() {}
-    bool eventFilter(QObject* object,QEvent* event)
-    {
-        if (event->type() == QEvent::KeyPress)
-        {
-            QKeyEvent *keyEvent = dynamic_cast<QKeyEvent *>(event);
-            if (keyEvent->key() == Qt::Key_C && (keyEvent->modifiers() & Qt::ControlModifier))
-            {
-                if (this->table->selectedItems().count() == 1)
-                    QApplication::clipboard()->setText(this->table->selectedItems().takeFirst()->text());
-            }
-            else if (keyEvent->key() == Qt::Key_V && (keyEvent->modifiers() & Qt::ControlModifier))
-            {
-                if (this->table->selectedItems().count() == 1)
-                    this->table->selectedItems().takeFirst()->setText(QApplication::clipboard()->text());
-            }
-            else if (keyEvent->key() == Qt::Key_Backspace || keyEvent->key() == Qt::Key_Delete)
-            {
-                // Touche retour ou suppr (efface la cellule)
-                this->table->blockSignals(true);
-
-                // Retrait des éléments sélectionnés sur les lignes 0 à 3 inclus
-                QList<QTableWidgetItem *> listCell = this->table->selectedItems();
-                int nbElt = listCell.count();
-                for (int i = nbElt-1; i >= 0; i--)
-                {
-                    if (listCell.at(i)->row() < 4)
-                        listCell.removeAt(i);
-                }
-                if (listCell.count() == 0) return QObject::eventFilter(object, event);
-                listCell.at(0)->setText("");
-                emit(set(listCell.at(0)->row(),
-                         listCell.at(0)->column(),
-                         true));
-                for (int i = 1; i < listCell.count(); i++)
-                {
-                    listCell.at(i)->setText("");
-                    emit(set(listCell.at(i)->row(), listCell.at(i)->column(), false));
-                }
-                this->table->blockSignals(false);
-            }
-        }
-        // on laisse passer l'événement
-        return QObject::eventFilter(object, event);
-    }
-private:
-    TableWidget *table;
 };
 
 // Classe TableComboBox pour les formes de courbes
@@ -364,9 +249,8 @@ protected:
     QCheckBox *checkAbs;
     QPushButton *pushSupprimerMod;
     QPushButton *pushNouveauMod;
-    // Méthodes protégées
-    void selectNone(bool refresh = false);
-    void select(EltID id, bool refresh = false);
+
+    void select(EltID id);
     static void remplirComboSource(ComboBox *comboBox);
     int getDestIndex(int i);
     int getDestNumber(int i);
@@ -395,12 +279,13 @@ private:
     void resetChamp(bool &newAction, int colonne, Champ champ1, Champ champ2);
     void setOffset(bool &newAction, int ligne, int colonne, Champ champ1, Champ champ2);
     void set(int ligne, int colonne, bool &newAction, bool allowPropagation);
+    void customizeKeyboard();
 
     static QList<Modulator> _modulatorCopy;
     QList<int> _listKeyEnlighted;
 
 public slots:
-    void set(int ligne, int colonne, bool newAction = true);
+    void set(int ligne, int colonne);
     void setAmount();
     void setAbs();
     void selected();
