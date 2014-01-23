@@ -63,6 +63,9 @@
          <property name="title">
           <string>Entrées / sorties</string>
          </property>
+         <property name="flat">
+          <bool>true</bool>
+         </property>
          <layout class="QGridLayout" name="gridLayout_5" columnstretch="2,3">
           <property name="leftMargin">
            <number>0</number>
@@ -210,7 +213,10 @@
          <property name="title">
           <string>Divers</string>
          </property>
-         <layout class="QGridLayout" name="gridLayout_7" rowstretch="1,1" columnstretch="2,3">
+         <property name="flat">
+          <bool>true</bool>
+         </property>
+         <layout class="QGridLayout" name="gridLayout_7" rowstretch="1,1,0" columnstretch="2,3">
           <property name="leftMargin">
            <number>0</number>
           </property>
@@ -269,7 +275,7 @@
             </property>
            </widget>
           </item>
-          <item row="1" column="0">
+          <item row="2" column="0">
            <widget class="QLabel" name="label_2">
             <property name="font">
              <font>
@@ -282,7 +288,7 @@
             </property>
            </widget>
           </item>
-          <item row="1" column="1">
+          <item row="2" column="1">
            <widget class="QComboBox" name="comboRam">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
@@ -307,6 +313,13 @@
              </property>
             </item>
            </widget>
+          </item>
+          <item row="1" column="1">
+           <layout class="QFormLayout" name="formLayout">
+            <item row="0" column="0">
+             <layout class="QFormLayout" name="formLayout_2"/>
+            </item>
+           </layout>
           </item>
          </layout>
         </widget>
@@ -1083,6 +1096,9 @@
          <property name="title">
           <string>Options</string>
          </property>
+         <property name="flat">
+          <bool>true</bool>
+         </property>
          <layout class="QGridLayout" name="gridLayout_6" columnstretch="6,11">
           <property name="leftMargin">
            <number>0</number>
@@ -1484,42 +1500,42 @@
          </property>
          <item>
           <property name="text">
-           <string>0</string>
+           <string notr="true">0</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string>12</string>
+           <string notr="true">12</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string>24</string>
+           <string notr="true">24</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string>36</string>
+           <string notr="true">36</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string>48</string>
+           <string notr="true">48</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string>60</string>
+           <string notr="true">60</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string>72</string>
+           <string notr="true">72</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string>84</string>
+           <string notr="true">84</string>
           </property>
          </item>
         </widget>

@@ -127,10 +127,6 @@ Config::Config(QWidget *parent, PianoKeybdCustom *keyboard) : QDialog(parent),
     ui->comboKeyName->setCurrentIndex((int)this->nameMiddleC);
     if (this->keyboardType < 0 || this->keyboardType > 4)
         this->keyboardType = 1;
-    if (this->keyboardVelocity < 0)
-        this->keyboardVelocity = 0;
-    else if (this->keyboardVelocity > 127)
-        this->keyboardVelocity = 127;
     ui->comboRam->setVisible(false); // Temporaire : tout charger dans la ram n'apporte rien pour l'instant (sur linux)
     ui->label_2->setVisible(false);
     this->setColors();
@@ -269,11 +265,11 @@ void Config::setKeyboardType(int val)
         this->store();
     }
 }
-void Config::setKeyboardVelocity(int val)
+void Config::setKeyboardDocked(bool val)
 {
     if (this->loaded)
     {
-        this->keyboardVelocity = val;
+        this->keyboardDocked = val;
         this->store();
     }
 }
@@ -502,7 +498,7 @@ void Config::load()
     }
     this->wavRemoveBlank    = settings.value("wav_remove_blank", false).toBool();
     this->keyboardType      = settings.value("keyboard/type", 1).toInt();
-    this->keyboardVelocity  = settings.value("keyboard/velocity", 64).toInt();
+    this->keyboardDocked    = settings.value("keyboard/keyboard_in_toolbar", true).toBool();
     this->numPortMidi       = settings.value("midi/index_port", -1).toInt();
     this->synthGain         = settings.value("synth/gain", 0).toInt();
     this->revLevel          = settings.value("synth/rev_level", 0).toInt();
@@ -541,7 +537,7 @@ void Config::store()
     settings.setValue("wav_auto_loop",                  this->wavAutoLoop);
     settings.setValue("wav_remove_blank",               this->wavRemoveBlank);
     settings.setValue("keyboard/type",                  this->keyboardType);
-    settings.setValue("keyboard/velocity",              this->keyboardVelocity);
+    settings.setValue("keyboard/keyboard_in_toolbar",   this->keyboardDocked);
     settings.setValue("midi/index_port",                this->numPortMidi);
     settings.setValue("synth/gain",                     this->synthGain);
     settings.setValue("synth/rev_level",                this->revLevel);

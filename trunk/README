@@ -56,8 +56,8 @@ install_name_tool -change /System/Library/Frameworks/Jackmp.framework/Versions/A
 @executable_path/../Frameworks/Jackmp.framework/Versions/A/Jackmp 
 /Path/To/trunk/RELEASE/Polyphone.app/Contents/MacOS/Polyphone 
 
-If you want to provide a .dmg file, use
-/Path/To/Qt/5.2.0/clang_64/bin/macdeployqt /Path/To/trunk/RELEASE/Polyphone.app -dmg
+If you want to provide a .dmg file, drag the file Polyphone.app onto the icon of the application
+"Disk Utility".
 
 
 

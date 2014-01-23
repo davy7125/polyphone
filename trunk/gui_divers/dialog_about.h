@@ -26,7 +26,7 @@
 #define DIALOG_ABOUT_H
 
 #include <QDialog>
-#define VERSION "1.2.1 (Mac OS X)" // vers 1.3
+#define VERSION "(unreleased)" // vers 1.3
 
 namespace Ui {
 class DialogAbout;
