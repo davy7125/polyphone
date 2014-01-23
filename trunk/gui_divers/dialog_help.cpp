@@ -86,6 +86,7 @@ void DialogHelp::createUi()
     layout3->addWidget(_buttonRight);
     layout2->addLayout(layout3);
     _textBrowser = new QTextBrowser();
+    _textBrowser->setFont(this->font());
     layout2->addWidget(_textBrowser);
     _textBrowser->setOpenExternalLinks(true);
 

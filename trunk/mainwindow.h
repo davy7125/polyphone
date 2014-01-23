@@ -155,7 +155,7 @@ private slots:
     void setKeyboardType2();    // Clic sur clavier -> 6 octaves
     void setKeyboardType3();    // Clic sur clavier -> 128 notes
     void on_action88_notes_triggered();
-    void setVelocity(int val);  // Rotation du bouton vélocité
+    void on_actionDans_la_barre_d_outils_triggered();
     void undo();                // Clic sur l'action "undo"
     void redo();                // Clic sur l'action "redo"
     void sauvegarder();         // Clic sur l'action "sauvegarder"
@@ -191,6 +191,7 @@ private slots:
     void noteChanged(int key, int vel);
 
 
+
 signals:
     void initAudio(int numDevice, int bufferSize);
     void stopAudio();
@@ -215,6 +216,8 @@ private:
     QList<QAction *> actionSeparators;
     QString _title;
     int _currentKey;
+    QDialog _dialKeyboard;
+    QByteArray _geometryDialKeyboard;
 
     // Gestion sustain pedal
     QList<int> _listKeysToRelease;

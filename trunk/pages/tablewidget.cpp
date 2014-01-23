@@ -2,6 +2,7 @@
 #include "spinboxkey.h"
 #include "spinboxrange.h"
 #include "config.h"
+#include <QApplication>
 
 
 //////////////////////////////////////////// TABLE WIDGET ////////////////////////////////////////////
@@ -146,56 +147,9 @@ QWidget * TableDelegate::createEditor(QWidget *parent, const QStyleOptionViewIte
 {
     Q_UNUSED(option)
 
-    bool isNumeric = true;
-    bool isKey = false;
-    int nbDecimales = 0;
-    if (_table->rowCount() == 50)
-    {
-        // Table instrument
-        switch (index.row())
-        {
-        case 4:
-            isNumeric = false;
-            isKey = true;
-            break;
-        case 5:
-            isNumeric = false;
-            break;
-        case 6: case 7: case 14: case 19: case 27: case 37: case 42: case 43:
-            nbDecimales = 1;
-            break;
-        case 15: case 16: case 17: case 18: case 20:
-        case 23: case 24: case 25: case 26: case 28:
-        case 33: case 34: case 38: case 39:
-            nbDecimales = 3;
-            break;
-        case 9: case 44:
-            isKey = true;
-            break;
-        }
-    }
-    else
-    {
-        // Table preset
-        switch (index.row())
-        {
-        case 4:
-            isNumeric = false;
-            isKey = true;
-            break;
-        case 5:
-            isNumeric = false;
-            break;
-        case 6: case 7: case 12: case 17: case 25: case 35: case 39: case 40:
-            nbDecimales = 1;
-            break;
-        case 11: case 13: case 14: case 15: case 16: case 18:
-        case 21: case 22: case 23: case 24: case 26: case 31:
-        case 32: case 36: case 37:
-            nbDecimales = 3;
-            break;
-        }
-    }
+    bool isNumeric, isKey;
+    int nbDecimales;
+    getType(isNumeric, isKey, nbDecimales, index.row());
 
     QWidget * widget;
     QColor highlightColor = parent->palette().color(QPalette::Highlight);
@@ -213,7 +167,7 @@ QWidget * TableDelegate::createEditor(QWidget *parent, const QStyleOptionViewIte
         else if (nbDecimales == 0)
         {
             QSpinBox * spin = new QSpinBox(parent);
-            spin->setMinimum(-2147483648);
+            spin->setMinimum(-2147483647);
             spin->setMaximum(2147483647);
             spin->setStyleSheet("QSpinBox{ border: 3px solid " + highlightColor.name() + "; }"
                                 "QSpinBox::down-button{width:0px;} QSpinBox::up-button{width:0px;} ");
@@ -273,4 +227,74 @@ void TableDelegate::setEditorData(QWidget *editor, const QModelIndex &index) con
     }
     else
         QStyledItemDelegate::setEditorData(editor, index);
+}
+
+void TableDelegate::setModelData(QWidget *editor, QAbstractItemModel *model, const QModelIndex &index) const
+{
+    bool isNumeric, isKey;
+    int nbDecimales;
+    getType(isNumeric, isKey, nbDecimales, index.row());
+
+    if (nbDecimales > 0 && isNumeric)
+    {
+        QDoubleSpinBox * spin = (QDoubleSpinBox*)editor;
+        model->setData(index, QString::number(spin->value(), 'f', nbDecimales), Qt::EditRole);
+    }
+    else
+        QStyledItemDelegate::setModelData(editor, model, index);
+}
+
+void TableDelegate::getType(bool &isNumeric, bool &isKey, int &nbDecimales, int numRow) const
+{
+    isNumeric = true;
+    isKey = false;
+    nbDecimales = 0;
+
+    if (_table->rowCount() == 50)
+    {
+        // Table instrument
+        switch (numRow)
+        {
+        case 4:
+            isNumeric = false;
+            isKey = true;
+            break;
+        case 5:
+            isNumeric = false;
+            break;
+        case 6: case 7: case 14: case 19: case 27: case 37: case 42: case 43:
+            nbDecimales = 1;
+            break;
+        case 15: case 16: case 17: case 18: case 20:
+        case 23: case 24: case 25: case 26: case 28:
+        case 33: case 34: case 38: case 39:
+            nbDecimales = 3;
+            break;
+        case 9: case 44:
+            isKey = true;
+            break;
+        }
+    }
+    else
+    {
+        // Table preset
+        switch (numRow)
+        {
+        case 4:
+            isNumeric = false;
+            isKey = true;
+            break;
+        case 5:
+            isNumeric = false;
+            break;
+        case 6: case 7: case 12: case 17: case 25: case 35: case 39: case 40:
+            nbDecimales = 1;
+            break;
+        case 11: case 13: case 14: case 15: case 16: case 18:
+        case 21: case 22: case 23: case 24: case 26: case 31:
+        case 32: case 36: case 37:
+            nbDecimales = 3;
+            break;
+        }
+    }
 }

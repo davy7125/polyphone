@@ -140,25 +140,6 @@
          </property>
         </spacer>
        </item>
-       <item row="0" column="4" rowspan="2">
-        <widget class="QDial" name="velocityButton">
-         <property name="minimumSize">
-          <size>
-           <width>45</width>
-           <height>30</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>45</width>
-           <height>30</height>
-          </size>
-         </property>
-         <property name="maximum">
-          <number>127</number>
-         </property>
-        </widget>
-       </item>
        <item row="0" column="3" rowspan="2">
         <widget class="PianoKeybdCustom" name="widgetKeyboard" native="true"/>
        </item>
@@ -333,6 +314,8 @@
      <addaction name="action6_octaves"/>
      <addaction name="action88_notes"/>
      <addaction name="action128_notes"/>
+     <addaction name="separator"/>
+     <addaction name="actionDans_la_barre_d_outils"/>
     </widget>
     <addaction name="actionBarre_d_outils"/>
     <addaction name="actionSection_modulateurs"/>
@@ -1462,6 +1445,17 @@
     <string>&amp;88 notes (piano)</string>
    </property>
   </action>
+  <action name="actionDans_la_barre_d_outils">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Dans la &amp;barre d'outils</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
@@ -2320,22 +2314,6 @@
     <hint type="sourcelabel">
      <x>-1</x>
      <y>-1</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>457</x>
-     <y>214</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>velocityButton</sender>
-   <signal>valueChanged(int)</signal>
-   <receiver>MainWindow</receiver>
-   <slot>setVelocity(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>893</x>
-     <y>82</y>
     </hint>
     <hint type="destinationlabel">
      <x>457</x>

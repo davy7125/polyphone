@@ -50,6 +50,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent, Qt::Window | Qt::W
     dialogMagneto(NULL),
     actionKeyboard(NULL),
     _currentKey(-1),
+    _dialKeyboard(this, Qt::Tool | Qt::WindowStaysOnTopHint | Qt::WindowCloseButtonHint),
     _isSustainOn(false)
 {
     ui->setupUi(this);
@@ -102,7 +103,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent, Qt::Window | Qt::W
                          this->configuration->getSynthRevWidth(),
                          this->configuration->getSynthRevDamp());
 
-    // Création des widgets
+    // Création des pages
     page_sf2 = new Page_Sf2(this, ui->arborescence, ui->stackedWidget, this->sf2, this->synth);
     page_smpl = new Page_Smpl();
     page_inst = new Page_Inst();
@@ -127,25 +128,34 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent, Qt::Window | Qt::W
     // Préférences d'affichage
     if (!this->configuration->getAfficheToolBar())
     {
-        this->ui->actionBarre_d_outils->setChecked(0);
-        ui->toolBar->setVisible(0);
+        this->ui->actionBarre_d_outils->setChecked(false);
+        ui->toolBar->setVisible(false);
     }
     if (!this->configuration->getAfficheMod())
     {
-        this->ui->actionSection_modulateurs->setChecked(0);
-        this->page_inst->setModVisible(0);
-        this->page_prst->setModVisible(0);
+        this->ui->actionSection_modulateurs->setChecked(false);
+        this->page_inst->setModVisible(false);
+        this->page_prst->setModVisible(false);
     }
 
     // Clavier
-    this->ui->toolBar->setContentsMargins(0, 0, 0, 0);
+    _dialKeyboard.setWindowTitle(trUtf8("Clavier virtuel"));
+    connect(&_dialKeyboard, SIGNAL(finished(int)), ui->actionDans_la_barre_d_outils, SLOT(trigger()));
+    QVBoxLayout * layoutKeyboard = new QVBoxLayout();
+    layoutKeyboard->setContentsMargins(0, 0, 0, 0);
+    _dialKeyboard.setLayout(layoutKeyboard);
+    _geometryDialKeyboard = configuration->getKeyboardGeometry();
+    if (_geometryDialKeyboard.isEmpty())
+        _dialKeyboard.resize(600, 75);
+    else
+        _dialKeyboard.restoreGeometry(_geometryDialKeyboard);
     ui->toolBar->setFixedHeight(40);
-    this->ui->ensembleKeyboard->setMaximumHeight(this->ui->toolBar->height() + 0);
-    ui->widgetKeyboard->setMaximumHeight(this->ui->toolBar->height() + 0);
-    this->ui->velocityButton->setMaximumHeight(this->ui->toolBar->height() + 0);
-    actionKeyboard = this->ui->toolBar->addWidget(this->ui->ensembleKeyboard);
+    ui->toolBar->setContentsMargins(0, 0, 0, 0);
+    actionKeyboard = ui->toolBar->addWidget(ui->ensembleKeyboard);
     this->showKeyboard(false);
-    this->ui->velocityButton->setValue(this->configuration->getKeyboardVelocity());
+    ui->actionDans_la_barre_d_outils->blockSignals(true);
+    ui->actionDans_la_barre_d_outils->setChecked(configuration->getKeyboardDocked());
+    ui->actionDans_la_barre_d_outils->blockSignals(false);
 
     // Ouverture port midi et connexions
     ui->widgetKeyboard->openMidiPort(this->configuration->getNumPortMidi());
@@ -164,11 +174,11 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent, Qt::Window | Qt::W
 
     QDate date = QDate::currentDate();
     if (date.month() == 10 && date.day() == 31)
-        this->ui->label->setPixmap(QPixmap(":/logo/halloween"));
+        ui->label->setPixmap(QPixmap(":/logo/halloween"));
     else if (date.month() == 12 && (date.day() == 24 || date.day() == 25))
-        this->ui->label->setPixmap(QPixmap(":/logo/noel"));
+        ui->label->setPixmap(QPixmap(":/logo/noel"));
     else if (date.month() == 2 && date.day() == 14)
-        this->ui->label->setPixmap(QPixmap(":/logo/valentin"));
+        ui->label->setPixmap(QPixmap(":/logo/valentin"));
 
     // Initialisation objet Sound
     Sound::setParent(this);
@@ -207,7 +217,10 @@ void MainWindow::delayedInit()
 {
     ui->dockWidget->setMinimumWidth(150);
     ui->dockWidget->setMaximumWidth(300);
+
+    // Clavier
     this->setKeyboardType(this->configuration->getKeyboardType());
+    on_actionDans_la_barre_d_outils_triggered();
 }
 
 void MainWindow::closeEvent(QCloseEvent *event)
@@ -216,6 +229,9 @@ void MainWindow::closeEvent(QCloseEvent *event)
     configuration->setDockWidth(ui->dockWidget->width());
     configuration->setWindowGeometry(saveGeometry());
     configuration->setWindowState(saveState());
+    if (_dialKeyboard.isVisible())
+        _geometryDialKeyboard = _dialKeyboard.saveGeometry();
+    configuration->setKeyboardGeometry(_geometryDialKeyboard);
 
     // Nombre de fichiers non sauvegardés
     int nbFile = 0;
@@ -313,11 +329,14 @@ void MainWindow::resizeEvent(QResizeEvent *)
 
     this->setWindowTitle(titre);
 }
-
 void MainWindow::keyPressEvent(QKeyEvent * event)
 {
     if (event->modifiers() & Qt::ControlModifier && event->key() == Qt::Key_K)
+    {
+        if (_dialKeyboard.isVisible())
+            _dialKeyboard.activateWindow();
         ui->widgetKeyboard->setFocus();
+    }
     QMainWindow::keyPressEvent(event);
 }
 
@@ -609,10 +628,10 @@ void MainWindow::afficherSectionModulateurs()
         this->page_prst->setModVisible(0);
     }
 }
-void MainWindow::setKeyboardType0()     {this->setKeyboardType(0);}
-void MainWindow::setKeyboardType1()     {this->setKeyboardType(1);}
-void MainWindow::setKeyboardType2()     {this->setKeyboardType(2);}
-void MainWindow::setKeyboardType3()     {this->setKeyboardType(3);}
+void MainWindow::setKeyboardType0() {this->setKeyboardType(0);}
+void MainWindow::setKeyboardType1() {this->setKeyboardType(1);}
+void MainWindow::setKeyboardType2() {this->setKeyboardType(2);}
+void MainWindow::setKeyboardType3() {this->setKeyboardType(3);}
 void MainWindow::on_action88_notes_triggered() {this->setKeyboardType(4);}
 void MainWindow::setKeyboardType(int val)
 {
@@ -672,8 +691,11 @@ void MainWindow::setKeyboardType(int val)
     }
 
     // Redimensionnement
-    int widthKeyboard = (int)((double)(ui->ensembleKeyboard->height()) * .87 * ui->widgetKeyboard->ratio()) + 12;
-    ui->widgetKeyboard->setFixedWidth(widthKeyboard);
+    if (configuration->getKeyboardDocked())
+    {
+        int widthKeyboard = (int)((double)(ui->ensembleKeyboard->height()) * .87 * ui->widgetKeyboard->ratio()) + 12;
+        ui->widgetKeyboard->setFixedWidth(widthKeyboard);
+    }
 
     ui->actionAucun->blockSignals(false);
     ui->action5_octaves->blockSignals(false);
@@ -683,6 +705,44 @@ void MainWindow::setKeyboardType(int val)
 
     // Sauvegarde du paramètre
     this->configuration->setKeyboardType(val);
+}
+void MainWindow::on_actionDans_la_barre_d_outils_triggered()
+{
+    // Sauvegarde du paramètre
+    configuration->setKeyboardDocked(ui->actionDans_la_barre_d_outils->isChecked());
+    if (ui->actionDans_la_barre_d_outils->isChecked())
+    {
+        QGridLayout * layout = (QGridLayout*)ui->ensembleKeyboard->layout();
+        layout->addWidget(ui->widgetKeyboard, 0, 3, 2, 1);
+    }
+    else
+        _dialKeyboard.layout()->addWidget(ui->widgetKeyboard);
+    updateActions();
+}
+void MainWindow::showKeyboard(bool val)
+{
+    ui->widgetKeyboard->setVisible(val);
+    ui->labelNote->setVisible(val);
+    ui->labelVelocite->setVisible(val);
+    ui->label_2->setVisible(val);
+    ui->label_3->setVisible(val);
+    if (val && !configuration->getKeyboardDocked())
+    {
+        if (!_dialKeyboard.isVisible())
+        {
+            ui->widgetKeyboard->setMinimumWidth(0);
+            ui->widgetKeyboard->setMaximumWidth(100000);
+            _dialKeyboard.restoreGeometry(_geometryDialKeyboard);
+            _dialKeyboard.show();
+        }
+    }
+    else
+    {
+        _geometryDialKeyboard = _dialKeyboard.saveGeometry();
+        int widthKeyboard = (int)((double)(ui->ensembleKeyboard->height()) * .87 * ui->widgetKeyboard->ratio()) + 12;
+        ui->widgetKeyboard->setFixedWidth(widthKeyboard);
+        _dialKeyboard.hide();
+    }
 }
 void MainWindow::magnetophone()
 {
@@ -2281,23 +2341,6 @@ void MainWindow::setAudioEngine(int audioEngine, int bufferSize)
 {
     emit(initAudio(audioEngine, bufferSize));
 }
-void MainWindow::showKeyboard(bool val)
-{
-    ui->widgetKeyboard->setVisible(val);
-    this->ui->velocityButton->setVisible(val);
-    this->ui->labelNote->setVisible(val);
-    this->ui->labelVelocite->setVisible(val);
-    this->ui->label_2->setVisible(val);
-    this->ui->label_3->setVisible(val);
-}
-void MainWindow::setVelocity(int val)
-{
-    this->configuration->setKeyboardVelocity(val);
-    if (val > 0)
-        this->ui->labelVelocite->setText(QString("%1").arg(val));
-    else
-        this->ui->labelVelocite->setText("-");
-}
 QStringList MainWindow::getListMidi()
 {
     return ui->widgetKeyboard->getPortNames();
@@ -2368,9 +2411,6 @@ void MainWindow::noteChanged(int key, int vel)
         }
     }
 
-    int defaultVelocity = this->configuration->getKeyboardVelocity();
-    if (defaultVelocity > 0 && vel > 0)
-        vel = defaultVelocity;
     if (vel > 0 && key != -1)
     {
         this->ui->labelNote->setText(configuration->getKeyName(key));
@@ -2379,8 +2419,7 @@ void MainWindow::noteChanged(int key, int vel)
     else
     {
         this->ui->labelNote->setText("-");
-        if (defaultVelocity == 0)
-            this->ui->labelVelocite->setText("-");
+        this->ui->labelVelocite->setText("-");
     }
 
     // Lecture ?

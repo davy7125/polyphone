@@ -807,8 +807,7 @@ ParamListe::ParamListe(Pile_sf2 * sf2, ParamListe * paramPrst, EltID idInst)
     }
 
     // Fréquence par défaut si non défini
-    idInst.typeElement = elementInst;
-    if (!sf2->isSet(idInst, champ_freqModLFO))
+    if (!_listeChamps.contains(champ_freqModLFO))
     {
         if ((_listeChamps.contains(champ_modLfoToFilterFc) || _listeChamps.contains(champ_modLfoToPitch) ||
              _listeChamps.contains(champ_modLfoToVolume)) && !_listeChamps.contains(champ_freqModLFO))
@@ -817,7 +816,7 @@ ParamListe::ParamListe(Pile_sf2 * sf2, ParamListe * paramPrst, EltID idInst)
             _listeValeurs << getDefaultValue(champ_freqModLFO);
         }
     }
-    if (!sf2->isSet(idInst, champ_freqVibLFO))
+    if (!_listeChamps.contains(champ_freqVibLFO))
     {
         if (_listeChamps.contains(champ_vibLfoToPitch) && !_listeChamps.contains(champ_freqVibLFO))
         {
@@ -826,12 +825,21 @@ ParamListe::ParamListe(Pile_sf2 * sf2, ParamListe * paramPrst, EltID idInst)
         }
     }
 
+    // Fréquence de coupure par défaut si non défini
+    if ((_listeChamps.contains(champ_modEnvToFilterFc) || _listeChamps.contains(champ_initialFilterQ) ||
+         _listeChamps.contains(champ_modLfoToFilterFc)) && !_listeChamps.contains(champ_initialFilterFc))
+    {
+        _listeChamps << champ_initialFilterFc;
+        _listeValeurs << getDefaultValue(champ_initialFilterFc);
+    }
+
     // Limites
     for (int i = 0; i < _listeChamps.size(); i++)
         _listeValeurs[i] = limit(_listeValeurs.at(i), _listeChamps.at(i));
 
     // Correction volume si modLfoToVolume est actif
     double correction = 0;
+    idInst.typeElement = elementInst;
     if (_listeChamps.contains(champ_modLfoToVolume))
         correction = qAbs(_listeValeurs.at(_listeChamps.indexOf(champ_modLfoToVolume)));
     else if (sf2->isSet(idInst, champ_modLfoToVolume))

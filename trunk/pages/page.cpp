@@ -1427,13 +1427,10 @@ void PageTable::set(int ligne, int colonne)
     QList<QTableWidgetItem*> listItems = table->selectedItems();
     for (int i = 0; i < listItems.size(); i++)
     {
-        if (listItems.at(i)->text() != text)
-        {
-            table->blockSignals(true);
-            listItems[i]->setText(text);
-            table->blockSignals(false);
-            set(listItems.at(i)->row(), listItems.at(i)->column(), newAction, true);
-        }
+        table->blockSignals(true);
+        listItems[i]->setText(text);
+        table->blockSignals(false);
+        set(listItems.at(i)->row(), listItems.at(i)->column(), newAction, true);
     }
 
     Champ champ = table->getChamp(ligne);
