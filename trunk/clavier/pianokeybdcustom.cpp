@@ -25,6 +25,7 @@
 #include "pianokeybdcustom.h"
 #include "sf2_types.h"
 #include "config.h"
+#include <QApplication>
 
 // Callback des signaux midi
 void midiCallback(double deltatime, std::vector< unsigned char > *message, void *userData)

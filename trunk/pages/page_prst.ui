@@ -168,7 +168,7 @@
     <widget class="TableWidgetPrst" name="tablePrst">
      <property name="font">
       <font>
-       <pointsize>9</pointsize>
+       <pointsize>8</pointsize>
       </font>
      </property>
      <property name="frameShape">
@@ -202,7 +202,7 @@
       <number>18</number>
      </attribute>
      <attribute name="verticalHeaderDefaultSectionSize">
-      <number>19</number>
+      <number>20</number>
      </attribute>
      <attribute name="verticalHeaderMinimumSectionSize">
       <number>19</number>

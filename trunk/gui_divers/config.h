@@ -74,7 +74,7 @@ public:
     bool getWavAutoLoop()       {return wavAutoLoop;}
     bool getRemoveBlank()       {return wavRemoveBlank;}
     int  getKeyboardType()      {return keyboardType;}
-    int  getKeyboardVelocity()  {return keyboardVelocity;}
+    int  getKeyboardDocked()    {return keyboardDocked;}
     int  getNumPortMidi()       {return numPortMidi;}
     int  getAudioType()         {return audioType;}
     int  getSynthGain()         {return synthGain;}
@@ -588,6 +588,8 @@ public:
     QByteArray getWindowState()             { return settings.value("affichage/windowState", QByteArray()).toByteArray(); }
     void setDockWidth(int val)              { settings.setValue("affichage/dock_width", val); }
     int getDockWidth()                      { return settings.value("affichage/dock_width", 150).toInt(); }
+    void setKeyboardGeometry(QByteArray ba) { settings.setValue("affichage/keyboardGeometry", ba); }
+    QByteArray getKeyboardGeometry()        { return settings.value("affichage/keyboardGeometry", QByteArray()).toByteArray(); }
 
     // Export
     void setExportType(int val)             { settings.setValue("export/type", val); }
@@ -598,6 +600,10 @@ public:
     bool getExportPreset()                  { return settings.value("export/preset_prefix", true).toBool(); }
     bool getExportBank()                    { return settings.value("export/bank_directory", false).toBool(); }
     bool getExportGM()                      { return settings.value("export/gm_sort", false).toBool(); }
+
+    // Clavier
+    void setKeyboardType(int val);
+    void setKeyboardDocked(bool val);
 
     // Affichage de la fenêtre
     void show();
@@ -612,8 +618,6 @@ signals:
 public slots:
     void setAfficheMod(int val);
     void setAfficheToolBar(int val);
-    void setKeyboardType(int val);
-    void setKeyboardVelocity(int val);
 
 private slots:
     void setRam(int val);
@@ -666,7 +670,7 @@ private:
     bool wavAutoLoop;
     bool wavRemoveBlank;
     int keyboardType;
-    int keyboardVelocity;
+    bool keyboardDocked;
     int numPortMidi;
     int synthGain;
     int revLevel, revSize, revDamping, revWidth;

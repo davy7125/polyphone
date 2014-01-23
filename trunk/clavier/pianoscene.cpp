@@ -23,7 +23,7 @@
 #include <QGraphicsSceneMouseEvent>
 #include <QKeyEvent>
 #include <qmath.h>
-
+#include <QDebug>
 
 int PianoScene::MIN_NOTE = 0;
 int PianoScene::MAX_NOTE = 127;
@@ -115,7 +115,7 @@ void PianoScene::initConfiguration(PianoScene * previousScene)
         m_keyboardEnabled = true;
         m_mousePressed = false;
         m_channel = 0;
-        m_velocity = 100;
+        m_velocity = 127;
         m_colorationType = PianoKeybd::COLORATION_TYPE_UNIQUE;
         m_transpose = 0;
         m_labelType = PianoKeybd::LABEL_TYPE_NONE;
@@ -150,30 +150,30 @@ void PianoScene::initLabels()
 {
     m_names_s.clear();
     m_names_f.clear();
-    m_names_s << trUtf8("C")
-              << trUtf8("C#")
-              << trUtf8("D")
-              << trUtf8("D#")
-              << trUtf8("E")
-              << trUtf8("F")
-              << trUtf8("F#")
-              << trUtf8("G")
-              << trUtf8("G#")
-              << trUtf8("A")
-              << trUtf8("A#")
-              << trUtf8("B");
-    m_names_f << trUtf8("C")
-              << trUtf8("Db")
-              << trUtf8("D")
-              << trUtf8("Eb")
-              << trUtf8("E")
-              << trUtf8("F")
-              << trUtf8("Gb")
-              << trUtf8("G")
-              << trUtf8("Ab")
-              << trUtf8("A")
-              << trUtf8("Bb")
-              << trUtf8("B");
+    m_names_s << QString::fromUtf8("C")
+              << QString::fromUtf8("C#")
+              << QString::fromUtf8("D")
+              << QString::fromUtf8("D#")
+              << QString::fromUtf8("E")
+              << QString::fromUtf8("F")
+              << QString::fromUtf8("F#")
+              << QString::fromUtf8("G")
+              << QString::fromUtf8("G#")
+              << QString::fromUtf8("A")
+              << QString::fromUtf8("A#")
+              << QString::fromUtf8("B");
+    m_names_f << QString::fromUtf8("C")
+              << QString::fromUtf8("Db")
+              << QString::fromUtf8("D")
+              << QString::fromUtf8("Eb")
+              << QString::fromUtf8("E")
+              << QString::fromUtf8("F")
+              << QString::fromUtf8("Gb")
+              << QString::fromUtf8("G")
+              << QString::fromUtf8("Ab")
+              << QString::fromUtf8("A")
+              << QString::fromUtf8("Bb")
+              << QString::fromUtf8("B");
     while (m_names_custom.size() != 12)
         m_names_custom << "";
 }
@@ -251,25 +251,6 @@ void PianoScene::showKeyOn(PianoKey* key, int vel, int channel)
         channel = m_channel;
     if (vel >= 0)
     {
-        QColor color;
-        switch (m_colorationType)
-        {
-        case PianoKeybd::COLORATION_TYPE_UNIQUE:
-            color = m_palette.value(0);
-            break;
-        case PianoKeybd::COLORATION_TYPE_DUAL:
-            color = m_palette.value(key->isBlack());
-            break;
-        case PianoKeybd::COLORATION_TYPE_CHANNEL:
-            color = m_palette.value(channel % 16);
-            break;
-        case PianoKeybd::COLORATION_TYPE_DEGREE:
-            color = m_palette.value(key->getNote() % 12);
-            break;
-        default:
-            break;
-        }
-
         if (m_colorationType == PianoKeybd::COLORATION_TYPE_NONE)
         {
             if (key->isBlack())
@@ -278,7 +259,27 @@ void PianoScene::showKeyOn(PianoKey* key, int vel, int channel)
                 key->setPressedBrush(PianoKey::WHITE_BRUSH);
         }
         else
-            key->setPressedBrush(color.lighter(227 - vel));
+        {
+            QColor color;
+            switch (m_colorationType)
+            {
+            case PianoKeybd::COLORATION_TYPE_UNIQUE:
+                color = m_palette.value(0);
+                break;
+            case PianoKeybd::COLORATION_TYPE_DUAL:
+                color = m_palette.value(key->isBlack());
+                break;
+            case PianoKeybd::COLORATION_TYPE_CHANNEL:
+                color = m_palette.value(channel % 16);
+                break;
+            case PianoKeybd::COLORATION_TYPE_DEGREE:
+                color = m_palette.value(key->getNote() % 12);
+                break;
+            default:
+                break;
+            }
+            key->setPressedBrush(color.lighter(100 + 0.5 * (127 - vel)));
+        }
     }
     key->setPressed(true);
 }
@@ -364,6 +365,15 @@ PianoKey* PianoScene::getKeyForPos( const QPointF& p ) const
     return key;
 }
 
+double PianoScene::getPressureFromPos(const QPointF& p, bool isBlack) const
+{
+    double vel = p.y() / this->height();
+    if (isBlack)
+        vel /= .6;
+    vel /= .95;
+    return qMin(1., qMax(0., vel));
+}
+
 void PianoScene::mouseMoveEvent(QGraphicsSceneMouseEvent * mouseEvent)
 {
     if (m_mouseEnabled)
@@ -376,7 +386,7 @@ void PianoScene::mouseMoveEvent(QGraphicsSceneMouseEvent * mouseEvent)
                 keyOff(lastkey);
 
             if ((key != NULL) && !key->isPressed())
-                keyOn(key);
+                keyOn(key, getPressureFromPos(mouseEvent->scenePos(), key->isBlack()));
 
             mouseEvent->accept();
             return;
@@ -399,7 +409,7 @@ void PianoScene::mousePressEvent(QGraphicsSceneMouseEvent * mouseEvent)
         PianoKey* key = getKeyForPos(mouseEvent->scenePos());
         if (key != NULL && !key->isPressed())
         {
-            keyOn(key);
+            keyOn(key, getPressureFromPos(mouseEvent->scenePos(), key->isBlack()));
             m_mousePressed = true;
             mouseEvent->accept();
             return;
