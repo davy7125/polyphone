@@ -395,9 +395,10 @@ void PianoScene::mouseMoveEvent(QGraphicsSceneMouseEvent * mouseEvent)
         {
             PianoKey* key = getKeyForPos(mouseEvent->scenePos());
             if (key)
-                mouseOver(key->getNote() + m_transpose);
+                mouseOver(key->getNote() + m_transpose,
+                          m_velocity * getPressureFromPos(mouseEvent->scenePos(), key->isBlack()));
             else
-                mouseOver(-1);
+                mouseOver(-1, -1);
         }
     }
 }
@@ -526,7 +527,7 @@ bool PianoScene::event(QEvent *event)
         break;
     }
     case QEvent::Leave:
-        mouseOver(-1);
+        mouseOver(-1, -1);
         break;
     default:
         break;

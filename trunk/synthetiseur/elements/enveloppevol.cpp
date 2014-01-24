@@ -67,6 +67,7 @@ bool EnveloppeVol::applyEnveloppe(double * data, quint32 size, bool release, int
 {
     // Pour l'instant pas de mise à jour en temps réel des paramètres
     Q_UNUSED(voiceParam);
+
     // Application de l'enveloppe sur des données
     // renvoie 1 si la fin de la release est atteint
 
@@ -88,6 +89,7 @@ bool EnveloppeVol::applyEnveloppe(double * data, quint32 size, bool release, int
                 m_currentPhase = phase4decay;
         }
     }
+
     // Ajustement sustain level
     double levelSustain = 0;
     if (applyOn1)
