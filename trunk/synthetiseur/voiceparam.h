@@ -64,6 +64,7 @@ public:
     double reverb, chorus;
     // DIVERS
     int exclusiveClass, numPreset;
+
 private:
     enum ReadMethod
     {
@@ -73,13 +74,15 @@ private:
         readWord    // 16 bits unsigned
     };
     Pile_sf2 * m_sf2;
-    // Méthodes privées
+
     void add(VoiceParam *voiceParamTmp);
     static double d1200e2(qint32 val);
+
     // Initialisation, lecture
     void init(ElementType type, int numPreset = -1);
     void readSample(EltID id);
     void read(EltID id);
+
     // Limites
     void limit(EltID id);
     static double limit(double val, double min, double max);

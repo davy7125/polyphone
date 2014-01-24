@@ -41,6 +41,7 @@ Voice::Voice(QByteArray baData, DWORD smplRate, DWORD audioSmplRate, int note, i
     m_time(0),
     m_release(false),
     m_finished(false),
+    m_delayEnd(5),
     m_enveloppeVol(voiceParam, audioSmplRate, 0),
     m_enveloppeMod(voiceParam, audioSmplRate, 1),
     m_deltaPos(0),
@@ -125,8 +126,9 @@ void Voice::generateData(qint64 nbData)
         for (int i = 0; i < nbData; i++)
             modPitch[i + 1] = deltaPitchFixe
                     + (dataMod[i] * m_voiceParam->modEnvToPitch
-                    + modLfo[i] * m_voiceParam->modLfoToPitch
-                    + vibLfo[i] * m_voiceParam->vibLfoToPitch)/ 100;
+                       + modLfo[i] * m_voiceParam->modLfoToPitch
+                       + vibLfo[i] * m_voiceParam->vibLfoToPitch)/ 100;
+
         // Conversion en distance cumulée entre points
         modPitch[0] = m_deltaPos + 1;
         for (int i = 1; i <= nbData; i++)
@@ -158,7 +160,7 @@ void Voice::generateData(qint64 nbData)
         for (int i = 0; i < nbData; i++)
         {
             modFreq[i] = m_voiceParam->filterFreq * pow(2., (dataMod[i] * m_voiceParam->modEnvToFilterFc
-                    + modLfo[i] * m_voiceParam->modLfoToFilterFreq) / 1200);
+                                                             + modLfo[i] * m_voiceParam->modLfoToFilterFreq) / 1200);
             if (modFreq[i] > 20000)
                 modFreq[i] = 20000;
             else if (modFreq[i] < 20)
@@ -191,6 +193,7 @@ void Voice::generateData(qint64 nbData)
             data[i] *= pow(10., signe * (double)m_voiceParam->modLfoToVolume / 20. * valTmp);
         }
     }
+
     // Application de l'enveloppe de volume
     bool bRet2 = false;
     if (m_note < 0)
@@ -221,14 +224,16 @@ bool Voice::takeData(qint32 * data, qint64 nbRead)
             m_voiceParam->loopStart != m_voiceParam->loopEnd)
     {
         // Boucle
-        if (m_currentSmplPos >= m_voiceParam->loopEnd) m_currentSmplPos = m_voiceParam->loopStart;
+        if (m_currentSmplPos >= m_voiceParam->loopEnd)
+            m_currentSmplPos = m_voiceParam->loopStart;
         qint64 total = 0;
         while (nbRead - total > 0)
         {
             const qint64 chunk = qMin(m_voiceParam->loopEnd - m_currentSmplPos, nbRead - total);
             memcpy(&data[total], &dataSmpl[m_currentSmplPos], chunk * sizeof(qint32));
             m_currentSmplPos += chunk;
-            if (m_currentSmplPos >= m_voiceParam->loopEnd) m_currentSmplPos = m_voiceParam->loopStart;
+            if (m_currentSmplPos >= m_voiceParam->loopEnd)
+                m_currentSmplPos = m_voiceParam->loopStart;
             total += chunk;
         }
     }
@@ -241,7 +246,9 @@ bool Voice::takeData(qint32 * data, qint64 nbRead)
             for (int i = m_voiceParam->sampleEnd - m_currentSmplPos; i < nbRead; i++)
                 data[i] = 0;
             m_currentSmplPos = m_voiceParam->sampleEnd;
-            ok = false;
+            m_delayEnd--;
+            if (m_delayEnd < 0)
+                ok = false;
         }
         else
         {
@@ -315,6 +322,7 @@ void Voice::biQuadCoefficients(double &a0, double &a1, double &a2, double &b1, d
 Voice* Voice::readData(double * data1, double * data2, qint64 size)
 {
     Voice * voiceRet = NULL;
+
     // Récupération des données
     double data[size];
     qint64 nbRead = this->readData((char *)data, 8 * size) / 8;
@@ -323,8 +331,9 @@ Voice* Voice::readData(double * data1, double * data2, qint64 size)
         nbRead = -nbRead;
         voiceRet = this;
     }
-    if (nbRead != size)
-        qDebug() << "warning: synth asked" << size << "samples and got" << nbRead;
+    //    if (nbRead != size)
+    //        qDebug() << "warning: synth asked" << size << "samples and got" << nbRead;
+
     // Ajout en séparant les voix et application chorus
     double pan = (this->getVoiceParam()->pan + 50) * PI / 200.;    // Entre 0 et pi / 2
     double coef1 = sin(pan);

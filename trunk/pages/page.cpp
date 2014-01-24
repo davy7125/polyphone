@@ -505,8 +505,8 @@ QString Page::getGenName(WORD iVal, int type)
     case 33:
         switch (type)
         {
-        case 1: qStr = trUtf8("Vol env decay (s)"); break;
-        case 2: qStr = trUtf8("Vol env decay (×)"); break;
+        case 1: qStr = trUtf8("Vol env delay (s)"); break;
+        case 2: qStr = trUtf8("Vol env delay (×)"); break;
         default: qStr = "Volume envelope: delay"; break;
         }
         break;
@@ -537,8 +537,8 @@ QString Page::getGenName(WORD iVal, int type)
     case 37:
         switch (type)
         {
-        case 1: qStr = trUtf8("Vol env sustain (%)"); break;
-        case 2: qStr = trUtf8("Vol env sustain (%)"); break;
+        case 1: qStr = trUtf8("Vol env sustain (dB)"); break;
+        case 2: qStr = trUtf8("Vol env sustain (dB)"); break;
         default: qStr = "Volume envelope: sustain"; break;
         }
         break;

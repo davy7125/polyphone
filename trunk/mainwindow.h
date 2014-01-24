@@ -185,12 +185,10 @@ private slots:
     void on_actionExporter_pics_de_fr_quence_triggered();
 
     void noteOff(int key);
-    void noteHover(int key);
+    void noteHover(int key, int vel);
     void setSustain(bool isOn);
     void setVolume(int vol);
     void noteChanged(int key, int vel);
-
-
 
 signals:
     void initAudio(int numDevice, int bufferSize);

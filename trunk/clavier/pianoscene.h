@@ -88,7 +88,7 @@ public:
 signals:
     void noteOn(int n, int v);
     void noteOff(int n);
-    void mouseOver(int n);
+    void mouseOver(int n, int v);
 
 protected:
     void showKeyOn(PianoKey* key, int vel = -1, int channel = -1);

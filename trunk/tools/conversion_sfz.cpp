@@ -340,8 +340,8 @@ void ConversionSfz::writeElement(QTextStream &out, Champ champ, double value)
     case champ_pan:                     out << "pan=" << 2 * value << endl;                         break;
     case champ_initialAttenuation:      out << "volume=" << -value * DB_SF2_TO_SFZ << endl;         break;
     case champ_initialFilterQ:          out << "resonance=" << value << endl;                       break;
-    case champ_sustainModEnv:           out << "fileg_sustain=" << value << endl
-                                            << "pitcheg_sustain=" << value << endl;                 break;
+    case champ_sustainModEnv:           out << "fileg_sustain=" << 100. - value << endl
+                                            << "pitcheg_sustain=" << 100. - value << endl;          break;
     case champ_delayModEnv:             out << "pitcheg_delay=" << value << endl
                                             << "fileg_delay=" << value << endl;                     break;
     case champ_attackModEnv:            out << "pitcheg_attack=" << value << endl

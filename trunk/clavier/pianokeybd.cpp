@@ -46,7 +46,7 @@ void PianoKeybd::initScene(int startKey, int numKeys)
     delete oldScene;
     connect(m_scene, SIGNAL(noteOn(int,int)), SIGNAL(noteOn(int,int)));
     connect(m_scene, SIGNAL(noteOff(int)), SIGNAL(noteOff(int)));
-    connect(m_scene, SIGNAL(mouseOver(int)), SIGNAL(mouseOver(int)));
+    connect(m_scene, SIGNAL(mouseOver(int, int)), SIGNAL(mouseOver(int, int)));
     setScene(m_scene);
 }
 

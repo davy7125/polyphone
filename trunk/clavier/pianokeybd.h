@@ -180,7 +180,7 @@ public:
 signals:
     void noteOn(int midiNote, int vel);
     void noteOff(int midiNote);
-    void mouseOver(int midiNote);
+    void mouseOver(int midiNote, int vel);
 
 public slots:
     void inputNoteOn(int midiNote, int vel = -1, int channel = -1);

@@ -1550,11 +1550,12 @@ void Page_Smpl::lecteurFinished()
     // Réactivation outils sample
     if (this->qStackedWidget->currentWidget() == this)
         this->mainWindow->activeOutilsSmpl();
-    if (this->ui->pushLecture->isChecked())
+    if (ui->pushLecture->isChecked())
     {
-        this->ui->pushLecture->blockSignals(true);
-        this->ui->pushLecture->setChecked(false);
-        this->ui->pushLecture->blockSignals(false);
+        ui->pushLecture->blockSignals(true);
+        ui->pushLecture->setChecked(false);
+        ui->pushLecture->setText(trUtf8("Lecture"));
+        ui->pushLecture->blockSignals(false);
     }
     this->lectureEnCours = false;
     this->mainWindow->activeOutilsSmpl();
