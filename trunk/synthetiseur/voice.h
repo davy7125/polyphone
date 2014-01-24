@@ -63,6 +63,7 @@ protected slots:
 private:
     // Oscillateurs
     OscSinus m_sinusOsc, m_modLFO, m_vibLFO;
+
     // Données et paramètres
     QByteArray m_baData;
     DWORD m_smplRate, m_audioSmplRate;
@@ -70,22 +71,28 @@ private:
     int m_velocity;
     double m_gain;
     VoiceParam * m_voiceParam;
+
     // Lecture du sample
     qint64 m_currentSmplPos;
     double m_time;
     bool m_release;
     bool m_finished;
+    int m_delayEnd;
+
     // enveloppe
     EnveloppeVol m_enveloppeVol;
     EnveloppeVol m_enveloppeMod;
+
     // sauvegarde état pour le resampling
     double m_deltaPos;
     qint32 m_valPrec, m_valBase;
+
     // sauvegarde état pour filtre passe bas
     double m_x1, m_x2, m_y1, m_y2;
+
     // Effets
     Chorus m_chorus;
-    // Méthodes privées
+
     bool takeData(qint32 *data, qint64 nbRead);
     void biQuadCoefficients(double &a0, double &a1, double &a2, double &b1, double &b2,
                             double freq, double Q);

@@ -128,6 +128,12 @@ public:
         _intValue(0),
         _dblValue(valeur)
     {}
+    Parametre(OpCode opcode, QString valeur) :
+        _opcode(opcode),
+        _intValue(0),
+        _dblValue(0),
+        _strValue(valeur)
+    {}
     OpCode  getOpCode()      const       { return _opcode;   }
     int     getIntValue()    const       { return _intValue; }
     double  getDoubleValue() const       { return _dblValue; }
@@ -221,7 +227,7 @@ public:
         else
             _listeDivisions.last() << Parametre(opcode, valeur);
     }
-    void moveOpcodeInSamples(Parametre::OpCode opcode, bool isDouble = false);
+    void moveOpcodeInSamples(Parametre::OpCode opcode, QVariant::Type type);
     void checkSampleValid(QString path);
     void checkFilter();
     void simplifyAttenuation();

@@ -54,7 +54,7 @@ void Synth::play(int type, int idSf2, int idElt, int note, int velocity, VoicePa
         m_mutexVoices.lock();
         if (note == -1)
         {
-            // Arret lecture d'un sample
+            // Arrêt lecture d'un sample
             for (int i = m_listeVoix.size()-1; i >= 0; i--)
                 if (m_listeVoix.at(i)->getNote() < 0)
                     m_listeVoix.at(i)->release();
@@ -301,8 +301,10 @@ void Synth::generateData(qint64 nbData)
 {
     //// GENERATION DES DONNEES ////
     if (nbData <= 0) return;
+
     // Nombre de valeurs à ajouter
     nbData = 4 * nbData / m_format.sampleSize() + 1; // division par (nb voix * octets) et 0 interdit
+
     // Initialisation données à écrire
     double data1[nbData];
     double data2[nbData];
@@ -318,6 +320,7 @@ void Synth::generateData(qint64 nbData)
     double data1Tmp[nbData];
     double data2Tmp[nbData];
     double coef1, coef2;
+
     // Fusion des voix
     m_mutexVoices.lock();
     QList<Voice *> listeVoice;
@@ -335,10 +338,12 @@ void Synth::generateData(qint64 nbData)
             data2[j]    += coef2 * data2Tmp[j];
         }
     }
+
     // Suppression des voix terminées
     for (int i = 0; i < listeVoice.size(); i++)
         this->endVoice(listeVoice.at(i));
     m_mutexVoices.unlock();
+
     // Application réverbération et addition
     for (int i = 0; i < nbData; i++)
     {
@@ -369,6 +374,7 @@ void Synth::generateData(qint64 nbData)
             dataF1[2 * i]     = dataF1[i];
         }
         m_recordStream.writeRawData((char*)dataF1, nbData * 8);
+
         // Prise en compte de l'avance
         m_recordLength += nbData * 8;
         this->samplesRead(nbData);

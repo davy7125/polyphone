@@ -163,7 +163,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent, Qt::Window | Qt::W
     connect(ui->widgetKeyboard, SIGNAL(sustainChanged(bool)), this, SLOT(setSustain(bool)));
     connect(ui->widgetKeyboard, SIGNAL(volumeChanged(int)), this, SLOT(setVolume(int)));
     connect(ui->widgetKeyboard, SIGNAL(noteOff(int)), this, SLOT(noteOff(int)));
-    connect(ui->widgetKeyboard, SIGNAL(mouseOver(int)), this, SLOT(noteHover(int)));
+    connect(ui->widgetKeyboard, SIGNAL(mouseOver(int, int)), this, SLOT(noteHover(int, int)));
     connect(this->page_smpl, SIGNAL(noteChanged(int,int)), this, SLOT(noteChanged(int,int)));
 
     // Connexion changement de couleur
@@ -2350,14 +2350,20 @@ void MainWindow::openMidiPort(int val)
     ui->widgetKeyboard->openMidiPort(val);
 }
 void MainWindow::noteOff(int key)   { noteChanged(key, 0); }
-void MainWindow::noteHover(int key)
+void MainWindow::noteHover(int key, int vel)
 {
     if (_currentKey == -1)
     {
         if (key != -1)
-            this->ui->labelNote->setText(configuration->getKeyName(key));
+        {
+            ui->labelNote->setText(configuration->getKeyName(key));
+            ui->labelVelocite->setText(QString::number(vel));
+        }
         else
-            this->ui->labelNote->setText("-");
+        {
+            ui->labelNote->setText("-");
+            ui->labelVelocite->setText("-");
+        }
     }
 }
 void MainWindow::setSustain(bool isOn)

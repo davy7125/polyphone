@@ -60,6 +60,20 @@ void ImportSfz::import(QString fileName, int * numSf2)
                 }
             }
 
+            // Suppression des espaces de fin et des champs vides
+            length = list.size();
+            for (int i = length - 1; i >= 0; i--)
+            {
+                QString strTmp = list.at(i);
+                while (strTmp.endsWith(' '))
+                    strTmp.chop(1);
+
+                if (strTmp.isEmpty())
+                    list.removeAt(i);
+                else
+                    list[i] = strTmp;
+            }
+
             // Stockage
             for (int i = 0; i < list.size(); i++)
             {
@@ -85,7 +99,7 @@ void ImportSfz::import(QString fileName, int * numSf2)
 
         // Les samples doivent être valides
         // Les offsets doivent se trouver à côté des samples, pas dans les divisions globales
-        // Idem pan
+        // Idem pan, samples, off_by et group
         // On ne garde que les filtres supportés par le format sf2
         // Ajustement du volume des sons stéréo
         // Ajustement du volume si le modulation de volume est appliqué
@@ -95,12 +109,15 @@ void ImportSfz::import(QString fileName, int * numSf2)
         double ampliMax = 0;
         for (int i = 0; i < _listeEnsembles.size(); i++)
         {
+            _listeEnsembles[i].moveOpcodeInSamples(Parametre::op_sample, QVariant::String);
             _listeEnsembles[i].checkSampleValid(QFileInfo(fileName).path());
-            _listeEnsembles[i].moveOpcodeInSamples(Parametre::op_offset);
-            _listeEnsembles[i].moveOpcodeInSamples(Parametre::op_end);
-            _listeEnsembles[i].moveOpcodeInSamples(Parametre::op_loop_start);
-            _listeEnsembles[i].moveOpcodeInSamples(Parametre::op_loop_end);
-            _listeEnsembles[i].moveOpcodeInSamples(Parametre::op_pan, true);
+            _listeEnsembles[i].moveOpcodeInSamples(Parametre::op_offset, QVariant::Int);
+            _listeEnsembles[i].moveOpcodeInSamples(Parametre::op_end, QVariant::Int);
+            _listeEnsembles[i].moveOpcodeInSamples(Parametre::op_loop_start, QVariant::Int);
+            _listeEnsembles[i].moveOpcodeInSamples(Parametre::op_loop_end, QVariant::Int);
+            _listeEnsembles[i].moveOpcodeInSamples(Parametre::op_pan, QVariant::Double);
+            _listeEnsembles[i].moveOpcodeInSamples(Parametre::op_off_by, QVariant::Int);
+            _listeEnsembles[i].moveOpcodeInSamples(Parametre::op_exclusiveClass, QVariant::Int);
             _listeEnsembles[i].adjustStereoVolumeAndCorrection(QFileInfo(fileName).path());
             _listeEnsembles[i].adjustModulationVolume();
             _listeEnsembles[i].checkFilter();
@@ -225,7 +242,7 @@ void ImportSfz::import(QString fileName, int * numSf2)
                 _sf2->set(idPrstInst, champ_velRange, val, false);
             }
 
-            // Suppression des atténuations, corrections et type loop inutiles
+            // Suppression des atténuations, corrections, type loop et exclusive class inutiles
             if (!_sf2->isSet(idInst, champ_initialAttenuation))
             {
                 for (int i = 0; i < _sf2->count(idInstSmpl); i++)
@@ -252,6 +269,15 @@ void ImportSfz::import(QString fileName, int * numSf2)
                 idInstSmpl.indexElt2 = i;
                 if (_sf2->get(idInstSmpl, champ_sampleModes).wValue == typeLoop)
                     _sf2->reset(idInstSmpl, champ_sampleModes, false);
+            }
+            if (!_sf2->isSet(idInst, champ_exclusiveClass))
+            {
+                for (int i = 0; i < _sf2->count(idInstSmpl); i++)
+                {
+                    idInstSmpl.indexElt2 = i;
+                    if (_sf2->get(idInstSmpl, champ_exclusiveClass).wValue == 0)
+                        _sf2->reset(idInstSmpl, champ_exclusiveClass, false);
+                }
             }
 
             // Suppression keyrange et velocity range de la division globale de l'instrument
@@ -322,10 +348,11 @@ void ImportSfz::addOpcode(QString opcode, QString value)
 }
 
 
-void EnsembleGroupes::moveOpcodeInSamples(Parametre::OpCode opcode, bool isDouble)
+void EnsembleGroupes::moveOpcodeInSamples(Parametre::OpCode opcode, QVariant::Type type)
 {
-    if (isDouble)
+    switch (type)
     {
+    case QVariant::Double:
         if (_paramGlobaux.isDefined(opcode))
         {
             double value = _paramGlobaux.getDoubleValue(opcode);
@@ -335,9 +362,8 @@ void EnsembleGroupes::moveOpcodeInSamples(Parametre::OpCode opcode, bool isDoubl
                     _listeDivisions[i] << Parametre(opcode, value);
             }
         }
-    }
-    else
-    {
+        break;
+    case QVariant::Int:
         if (_paramGlobaux.isDefined(opcode))
         {
             int value = _paramGlobaux.getIntValue(opcode);
@@ -347,6 +373,20 @@ void EnsembleGroupes::moveOpcodeInSamples(Parametre::OpCode opcode, bool isDoubl
                     _listeDivisions[i] << Parametre(opcode, value);
             }
         }
+        break;
+    case QVariant::String:
+        if (_paramGlobaux.isDefined(opcode))
+        {
+            QString value = _paramGlobaux.getStrValue(opcode);
+            for (int i = 0; i < _listeDivisions.size(); i++)
+            {
+                if (!_listeDivisions.at(i).isDefined(opcode))
+                    _listeDivisions[i] << Parametre(opcode, value);
+            }
+        }
+        break;
+    default:
+        break;
     }
 }
 
@@ -995,7 +1035,7 @@ void GroupeParametres::decode(Pile_sf2 * sf2, EltID idElt) const
             sf2->set(idElt, champ_decayModEnv, val, false);
             break;
         case Parametre::op_pitcheg_sustain:
-            val.shValue = qRound(10. * _listeParam.at(i).getDoubleValue());
+            val.shValue = qRound(1000. - 10. * _listeParam.at(i).getDoubleValue());
             sf2->set(idElt, champ_sustainModEnv, val, false);
             break;
         case Parametre::op_pitcheg_release:
@@ -1082,7 +1122,7 @@ void GroupeParametres::decode(Pile_sf2 * sf2, EltID idElt) const
             }
             if (isDefined(Parametre::op_fileg_sustain))
             {
-                val.shValue = qRound(10. * getDoubleValue(Parametre::op_fileg_sustain));
+                val.shValue = qRound(1000. - 10. * getDoubleValue(Parametre::op_fileg_sustain));
                 sf2->set(idElt, champ_sustainModEnv, val, false);
             }
             if (isDefined(Parametre::op_fileg_release))
