@@ -37,38 +37,42 @@ class Synth;
 class AudioFormat
 {
 public:
-    void setChannelCount(qint32 value)  {m_channelCount = value;}
-    void setSampleRate(qint32 value)    {m_sampleRate = value;}
-    void setSampleSize(qint32 value)    {m_sampleSize = value;}
-    qint32 channelCount()               {return m_channelCount;}
-    qint32 sampleRate()                 {return m_sampleRate;}
-    qint32 sampleSize()                 {return m_sampleSize;}
+    void setChannelCount(qint32 value)  {_channelCount = value;}
+    void setSampleRate(qint32 value)    {_sampleRate = value;}
+    void setSampleSize(qint32 value)    {_sampleSize = value;}
+    qint32 channelCount()               {return _channelCount;}
+    qint32 sampleRate()                 {return _sampleRate;}
+    qint32 sampleSize()                 {return _sampleSize;}
+
 private:
-    qint32 m_channelCount;
-    qint32 m_sampleRate;
-    qint32 m_sampleSize;
+    qint32 _channelCount;
+    qint32 _sampleRate;
+    qint32 _sampleSize;
 };
 
 class AudioDevice : public QObject
 {
     Q_OBJECT
+
 public:
     AudioDevice(Synth *synth, QObject *parent = NULL);
     ~AudioDevice();
 
     // Accès aux ports et synthé pour Jack
-    jack_port_t * m_output_port_R;
-    jack_port_t * m_output_port_L;
-    Synth * m_synth;
+    jack_port_t * _output_port_R;
+    jack_port_t * _output_port_L;
+    Synth * _synth;
 
     // Accès au format audio
-    AudioFormat m_format;
+    AudioFormat _format;
 
 public slots:
     void initAudio(int numDevice, int bufferSize);
     void closeConnections();
+
 signals:
     void start();
+
 private:
     enum TypeConnection
     {
@@ -79,12 +83,14 @@ private:
     };
     void openJackConnection(int bufferSize);
     void openStandardConnection(int bufferSize, bool isAsio);
+
     // Serveur son, sortie standard ou asio
-    bool m_isStandardRunning;
-    PaStream * m_standardStream;
+    bool _isStandardRunning;
+    PaStream * _standardStream;
+
     // Serveur son, jack
-    jack_client_t * m_jack_client;
-    TypeConnection m_typeConnection;
+    jack_client_t * _jack_client;
+    TypeConnection _typeConnection;
 };
 
 #endif // AUDIODEVICE_H

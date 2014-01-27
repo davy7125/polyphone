@@ -26,7 +26,7 @@
 #include <QLineEdit>
 #include "config.h"
 
-QString SpinBoxRange::SEPARATOR = QString::fromUtf8("_");
+QString SpinBoxRange::SEPARATOR = QString::fromUtf8("-");
 int SpinBoxRange::MINI = 0;
 int SpinBoxRange::MAXI = 127;
 
@@ -76,13 +76,13 @@ void SpinBoxRange::stepBy(int steps)
     if (selection == -1)
     {
         QString txt = lineEdit()->text();
-        int posSeparator = txt.indexOf(SEPARATOR);
+        int posSeparator = txt.indexOf(QRegExp("[0-9]" + SEPARATOR)) + 1;
         lineEdit()->setSelection(0, posSeparator);
     }
     else if (selection == 1)
     {
         QString txt = lineEdit()->text();
-        int posSeparator = txt.indexOf(SEPARATOR);
+        int posSeparator = txt.indexOf(QRegExp("[0-9]" + SEPARATOR)) + 1;
         lineEdit()->setSelection(posSeparator + SEPARATOR.size(), txt.size() - posSeparator + SEPARATOR.size());
     }
 
@@ -155,8 +155,8 @@ SpinBoxRange::SpinboxSection SpinBoxRange::getCurrentSection() const
     int cursorPos = this->lineEdit()->cursorPosition();
     const QString str = lineEdit()->text();
 
-    int posSeparator = str.indexOf(SEPARATOR);
-    if (posSeparator == -1)
+    int posSeparator = str.indexOf(QRegExp("[0-9]" + SEPARATOR)) + 1;
+    if (posSeparator == 0)
         return SectionNone;
 
     if (cursorPos <= posSeparator)
@@ -186,11 +186,11 @@ void SpinBoxRange::updateValue()
 
 void SpinBoxRange::stringToRange(QString input, int &valMin, int &valMax, QValidator::State &state) const
 {
-    int posSeparator = input.indexOf(SEPARATOR);
+    int posSeparator = input.indexOf(QRegExp("[0-9]" + SEPARATOR)) + 1;
 
     bool ok = false;
     state = QValidator::Acceptable;
-    if (posSeparator != -1)
+    if (posSeparator != 0)
     {
         QString txtMin = input.left(posSeparator);
         QString txtMax = input.right(input.size() - posSeparator - SEPARATOR.size());
@@ -201,7 +201,7 @@ void SpinBoxRange::stringToRange(QString input, int &valMin, int &valMax, QValid
         {
             valMin = getValue(txtMin, ok);
             if (!ok)
-                state = QValidator::Invalid;
+                state = QValidator::Intermediate;
         }
 
         if (txtMax.isEmpty())
@@ -210,7 +210,7 @@ void SpinBoxRange::stringToRange(QString input, int &valMin, int &valMax, QValid
         {
             valMax = getValue(txtMax, ok);
             if (!ok)
-                state = QValidator::Invalid;
+                state = QValidator::Intermediate;
         }
 
         if (valMin > valMax)
@@ -233,7 +233,7 @@ void SpinBoxRange::stringToRange(QString input, int &valMin, int &valMax, QValid
             valMin = valUnique;
             valMax = valUnique;
             if (!ok)
-                state = QValidator::Invalid;
+                state = QValidator::Intermediate;
         }
     }
 }

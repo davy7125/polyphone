@@ -79,10 +79,10 @@ private slots:
     void setType(int index);
     void setLinkedSmpl(int index);
     void setRate(int index);
-    void setLoopEnabled(int val);
-    void setSinusEnabled(int val);
+    void on_checkLectureBoucle_stateChanged(int arg1);
+    void setSinusEnabled(bool val);
     void setGainSample(int val);
-    void setStereo(int val);
+    void setStereo(bool val);
     void selectionChanged();
     void updateColors();
 

@@ -56,13 +56,13 @@ char * Page::getTextValue(char * T, WORD champ, genAmountType genVal)
         if (genVal.ranges.byLo == genVal.ranges.byHi)
             sprintf(T, "%d", genVal.ranges.byLo);
         else
-            sprintf(T, "%d_%d", genVal.ranges.byLo, genVal.ranges.byHi);
+            sprintf(T, "%d-%d", genVal.ranges.byLo, genVal.ranges.byHi);
         break;
     case champ_keyRange:
         if (genVal.ranges.byLo == genVal.ranges.byHi)
             sprintf(T, "%s", Config::getInstance()->getKeyName(genVal.ranges.byLo).toStdString().c_str());
         else
-            sprintf(T, "%s_%s", Config::getInstance()->getKeyName(genVal.ranges.byLo).toStdString().c_str(),
+            sprintf(T, "%s-%s", Config::getInstance()->getKeyName(genVal.ranges.byLo).toStdString().c_str(),
                     Config::getInstance()->getKeyName(genVal.ranges.byHi).toStdString().c_str());
         break;
     case champ_initialAttenuation: case champ_pan: case champ_initialFilterQ:
@@ -682,9 +682,9 @@ genAmountType Page::getValue(QString texte, WORD champ, bool &ok)
     switch (champ)
     {
     case champ_keyRange: case champ_velRange: {
-        int posSeparator = texte.indexOf("_");
+        int posSeparator = texte.indexOf(QRegExp("[0-9]-")) + 1;
         QString txtLeft, txtRight;
-        if (posSeparator == -1)
+        if (posSeparator == 0)
             txtLeft = txtRight = texte;
         else
         {
@@ -859,6 +859,7 @@ void PageTable::afficher()
     int row, nbSmplInst, numCol;
     char T[20];char str[40];char str2[40];
     this->preparation = 1;
+
     // Destruction des cellules précédentes
     table->blockSignals(true);
     this->table->clear();

@@ -66,13 +66,6 @@ public:
     int exclusiveClass, numPreset;
 
 private:
-    enum ReadMethod
-    {
-        readChar,   // 8  bits signed
-        readByte,   // 8  bits unsigned
-        readShort,  // 16 bits signed
-        readWord    // 16 bits unsigned
-    };
     Pile_sf2 * m_sf2;
 
     void add(VoiceParam *voiceParamTmp);
