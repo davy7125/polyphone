@@ -33,7 +33,7 @@ OscSinus::OscSinus(qint32 sampleRate, double delay) :
 }
 
 // Générateur Gordon-Smith
-void OscSinus::getSinus(double * data, qint32 len, double freq)
+void OscSinus::getSinus(float * data, qint32 len, double freq)
 {
     // Attente
     qint64 total = qMin(_delayTime - _currentDelay, len);

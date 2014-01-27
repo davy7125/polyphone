@@ -156,6 +156,7 @@ private slots:
     void setKeyboardType3();    // Clic sur clavier -> 128 notes
     void on_action88_notes_triggered();
     void on_actionDans_la_barre_d_outils_triggered();
+    void on_action_Flottant_triggered();
     void undo();                // Clic sur l'action "undo"
     void redo();                // Clic sur l'action "redo"
     void sauvegarder();         // Clic sur l'action "sauvegarder"
@@ -204,7 +205,6 @@ private:
     Synth * synth;
     AudioDevice * audioDevice;
     QThread audioThread;
-    QThread synthThread;
     Config * configuration;
     DialogHelp help;
     DialogAbout about;

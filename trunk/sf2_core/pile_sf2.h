@@ -39,7 +39,7 @@ class Pile_sf2 : public QObject
 public:
     // METHODES PUBLIQUES DE LA CLASSE PILE_SF2
     Pile_sf2(Tree *tree, bool ram, QWidget * parent = NULL);
-    virtual ~Pile_sf2() {}
+    ~Pile_sf2();
 
     // Ajout / suppression des données
     int add(EltID id, bool storeAction = true);
@@ -117,6 +117,10 @@ private:
                 MOD *suivant;
                 // METHODES DE MOD
                 MOD();
+                ~MOD()
+                {
+                    delete this->suivant;
+                }
                 MOD *getElt(int pos);
                 int nombreElt();
                 void enleverMod(int index);
@@ -130,6 +134,10 @@ private:
                 GEN *suivant;
                 // METHODES DE GEN
                 GEN();
+                ~GEN()
+                {
+                    delete this->suivant;
+                }
                 GEN *getElt(int pos);
                 bool isSet(Champ champ);
                 GEN *setGen(Champ champ, Valeur value);
@@ -139,7 +147,13 @@ private:
                 int nombreElt();
             };
             // ATTRIBUTS DE BAG
-            BAG(); // Constructeur
+            BAG();
+            ~BAG()
+            {
+                delete suivant;
+                delete mod;
+                delete gen;
+            }
             MOD *mod;
             GEN *gen;
             QTreeWidgetItem *eltTree;
@@ -160,6 +174,10 @@ private:
         public:
             // ATTRIBUTS DE SMPL
             SMPL();
+            ~SMPL()
+            {
+                delete suivant;
+            }
             char Name[21];
             Sound son;
             WORD wSampleLink;
@@ -186,6 +204,11 @@ private:
             INST *suivant;
             // METHODES DE INST
             INST();
+            ~INST()
+            {
+                delete bag;
+                delete suivant;
+            }
             INST *getElt(int pos);
             int nombreElt();
             void decrementerSF2();
@@ -208,6 +231,11 @@ private:
             PRST *suivant;
             // METHODES DE PRST
             PRST();
+            ~PRST()
+            {
+                delete bag;
+                delete suivant;
+            }
             PRST *getElt(int pos);
             int nombreElt();
             void decrementerSF2();
@@ -247,6 +275,14 @@ private:
 
         // METHODES DE LA CLASSE SF2
         SF2(); // constructeur
+        ~SF2()
+        {
+            delete suivant;
+            delete smpl;
+            delete inst;
+            delete prst;
+        }
+
         SF2 *getElt(int pos);
         int nombreElt();
         void decrementerSF2();

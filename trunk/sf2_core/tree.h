@@ -41,10 +41,9 @@ public:
     class menuClicDroit
     {
     public :
-        // constructeur
         menuClicDroit(MainWindow *mainWindow);
+        ~menuClicDroit();
 
-        // attributs
         QAction *nouveauSample;
         QAction *nouvelInstrument;
         QAction *nouveauPreset;

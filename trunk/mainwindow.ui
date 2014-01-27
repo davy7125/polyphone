@@ -316,6 +316,7 @@
      <addaction name="action128_notes"/>
      <addaction name="separator"/>
      <addaction name="actionDans_la_barre_d_outils"/>
+     <addaction name="action_Flottant"/>
     </widget>
     <addaction name="actionBarre_d_outils"/>
     <addaction name="actionSection_modulateurs"/>
@@ -1454,6 +1455,14 @@
    </property>
    <property name="text">
     <string>Dans la &amp;barre d'outils</string>
+   </property>
+  </action>
+  <action name="action_Flottant">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>&amp;Flottant</string>
    </property>
   </action>
  </widget>

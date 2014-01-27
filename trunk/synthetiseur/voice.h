@@ -25,11 +25,7 @@
 #ifndef VOICE_H
 #define VOICE_H
 
-#define BUFFER_VOICE_SIZE     130000
-#define BUFFER_VOICE_AVANCE   5000
-
 #include "sound.h"
-#include "circularbuffer.h"
 #include "enveloppevol.h"
 #include "oscsinus.h"
 #include "Chorus.h"
@@ -37,7 +33,7 @@
 
 using namespace stk;
 
-class Voice : public CircularBuffer
+class Voice : public QObject
 {
     Q_OBJECT
 
@@ -46,56 +42,71 @@ public:
           int velocity, VoiceParam *voiceParam, QObject *parent = NULL);
     Voice(DWORD audioSmplRate, VoiceParam *voiceParam, QObject *parent = NULL);
     ~Voice();
-    qint64 readData(char *data, qint64 maxlen);
-    int getNote()                       {return m_note;}
-    VoiceParam * getVoiceParam()        {return m_voiceParam;}
+
+    int getNote()                       { return m_note; }
     void release(bool quick = false);
     void setGain(double gain);
     void setChorus(int level, int depth, int frequency);
-    Voice * readData(double * data1, double * data2, qint64 size);
+    bool isFinished() { return _isFinished; }
+
+    // Accès aux propriétés de voiceParam
+    double getPan();
+    int getExclusiveClass();
+    int getPresetNumber();
+    double getReverb();
+
+    // Modification des propriétés de voiceParam
+    void setPan(double val);
+    void setLoopMode(int val);
+    void setLoopStart(qint32 val);
+    void setLoopEnd(qint32 val);
+    void setFineTune(qint32 val);
+    void setRootKey(double val);
+
+    // Modification ADSR (pour le sinus)
+    void attackToMax();
+    void decayToMin();
+
+    // Génération de données
+    void generateData(float *dataL, float *dataR, qint64 len);
 
 signals:
     void currentPosChanged(int pos);
 
-protected slots:
-    void generateData(qint64 nbData = 0);
-
 private:
-    // Oscillateurs
-    OscSinus m_sinusOsc, m_modLFO, m_vibLFO;
+    // Oscillateurs, enveloppes et chorus
+    OscSinus _sinusOsc, _modLFO, _vibLFO;
+    EnveloppeVol _enveloppeVol, _enveloppeMod;
+    Chorus _chorus;
 
-    // Données et paramètres
-    QByteArray m_baData;
+    // Données son et paramètres
+    QByteArray _baData;
     DWORD m_smplRate, m_audioSmplRate;
     int m_note;
     int m_velocity;
     double m_gain;
-    VoiceParam * m_voiceParam;
+    VoiceParam * _voiceParam;
 
     // Lecture du sample
     qint64 m_currentSmplPos;
     double m_time;
     bool m_release;
-    bool m_finished;
-    int m_delayEnd;
+    int _delayEnd;
+    bool _isFinished;
 
-    // enveloppe
-    EnveloppeVol m_enveloppeVol;
-    EnveloppeVol m_enveloppeMod;
-
-    // sauvegarde état pour le resampling
+    // Sauvegarde état pour le resampling
     double m_deltaPos;
     qint32 m_valPrec, m_valBase;
 
-    // sauvegarde état pour filtre passe bas
+    // Sauvegarde état pour filtre passe bas
     double m_x1, m_x2, m_y1, m_y2;
-
-    // Effets
-    Chorus m_chorus;
 
     bool takeData(qint32 *data, qint64 nbRead);
     void biQuadCoefficients(double &a0, double &a1, double &a2, double &b1, double &b2,
                             double freq, double Q);
+
+    // protection des paramètres
+    QMutex _mutexParam;
 };
 
 #endif // VOICE_H

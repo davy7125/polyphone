@@ -1575,12 +1575,14 @@ void Page_Smpl::selectionChanged()
 }
 
 bool Page_Smpl::isPlaying() { return this->lectureEnCours; }
-void Page_Smpl::setLoopEnabled(int val)
+
+void Page_Smpl::on_checkLectureBoucle_stateChanged(int arg1)
 {
     // Modif synth
-    this->synth->setLoopEnabled(val);
+    this->synth->setLoopEnabled(arg1);
 }
-void Page_Smpl::setSinusEnabled(int val)
+
+void Page_Smpl::setSinusEnabled(bool val)
 {
     // Modif synth
     this->synth->setSinusEnabled(val);
@@ -1590,7 +1592,7 @@ void Page_Smpl::setGainSample(int val)
     // Modif synth
     this->synth->setGainSample(val);
 }
-void Page_Smpl::setStereo(int val)
+void Page_Smpl::setStereo(bool val)
 {
     // Modif synth
     this->synth->setStereo(val);

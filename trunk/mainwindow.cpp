@@ -71,8 +71,6 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent, Qt::Window | Qt::W
 
     // Initialisation du synthétiseur
     this->synth = new Synth(this->sf2);
-    this->synth->moveToThread(&this->synthThread);
-    this->synthThread.start();
 
     // Connexions du magnétophone avec le synthé
     this->dialogMagneto.setSynth(this->synth);
@@ -84,11 +82,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent, Qt::Window | Qt::W
     connect(this, SIGNAL(initAudio(int, int)), this->audioDevice, SLOT(initAudio(int, int)));
     connect(this, SIGNAL(stopAudio()), this->audioDevice, SLOT(closeConnections()), Qt::BlockingQueuedConnection);
     this->audioDevice->moveToThread(&this->audioThread);
-    this->audioThread.start();
-
-    // Priorité des thread
-    this->audioThread.setPriority(QThread::HighestPriority);
-    this->synthThread.setPriority(QThread::TimeCriticalPriority);
+    this->audioThread.start(QThread::TimeCriticalPriority);
 
     if (this->configuration->getAudioType() == 0)
         this->setAudioEngine(configuration->getAudioIndex(), configuration->getBufferSize());
@@ -153,9 +147,10 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent, Qt::Window | Qt::W
     ui->toolBar->setContentsMargins(0, 0, 0, 0);
     actionKeyboard = ui->toolBar->addWidget(ui->ensembleKeyboard);
     this->showKeyboard(false);
-    ui->actionDans_la_barre_d_outils->blockSignals(true);
-    ui->actionDans_la_barre_d_outils->setChecked(configuration->getKeyboardDocked());
-    ui->actionDans_la_barre_d_outils->blockSignals(false);
+    if (configuration->getKeyboardDocked())
+        this->on_actionDans_la_barre_d_outils_triggered();
+    else
+        this->on_action_Flottant_triggered();
 
     // Ouverture port midi et connexions
     ui->widgetKeyboard->openMidiPort(this->configuration->getNumPortMidi());
@@ -196,17 +191,15 @@ MainWindow::~MainWindow()
 {
     // Arrêt audio et fin du synthé
     this->stopAudio();
-    this->synth->interruption();
     delete this->sf2;
     delete this->page_inst;
     delete this->page_prst;
     delete this->page_sf2;
     delete this->page_smpl;
-    // Fin des threads (200 ms pour quitter)
+
+    // Fin du thread audio (200 ms pour quitter)
     this->audioThread.quit();
-    this->synthThread.quit();
     this->audioThread.wait(200);
-    this->synthThread.wait(200);
     delete this->synth;
     delete this->audioDevice;
     Config::kill();
@@ -220,7 +213,6 @@ void MainWindow::delayedInit()
 
     // Clavier
     this->setKeyboardType(this->configuration->getKeyboardType());
-    on_actionDans_la_barre_d_outils_triggered();
 }
 
 void MainWindow::closeEvent(QCloseEvent *event)
@@ -708,15 +700,33 @@ void MainWindow::setKeyboardType(int val)
 }
 void MainWindow::on_actionDans_la_barre_d_outils_triggered()
 {
+    ui->actionDans_la_barre_d_outils->blockSignals(true);
+    ui->actionDans_la_barre_d_outils->setChecked(true);
+    ui->actionDans_la_barre_d_outils->blockSignals(false);
+    ui->action_Flottant->blockSignals(true);
+    ui->action_Flottant->setChecked(false);
+    ui->action_Flottant->blockSignals(false);
+
     // Sauvegarde du paramètre
-    configuration->setKeyboardDocked(ui->actionDans_la_barre_d_outils->isChecked());
-    if (ui->actionDans_la_barre_d_outils->isChecked())
-    {
-        QGridLayout * layout = (QGridLayout*)ui->ensembleKeyboard->layout();
-        layout->addWidget(ui->widgetKeyboard, 0, 3, 2, 1);
-    }
-    else
-        _dialKeyboard.layout()->addWidget(ui->widgetKeyboard);
+    configuration->setKeyboardDocked(true);
+
+    QGridLayout * layout = (QGridLayout*)ui->ensembleKeyboard->layout();
+    layout->addWidget(ui->widgetKeyboard, 0, 3, 2, 1);
+    updateActions();
+}
+void MainWindow::on_action_Flottant_triggered()
+{
+    ui->action_Flottant->blockSignals(true);
+    ui->action_Flottant->setChecked(true);
+    ui->action_Flottant->blockSignals(false);
+    ui->actionDans_la_barre_d_outils->blockSignals(true);
+    ui->actionDans_la_barre_d_outils->setChecked(false);
+    ui->actionDans_la_barre_d_outils->blockSignals(false);
+
+    // Sauvegarde du paramètre
+    configuration->setKeyboardDocked(false);
+
+    _dialKeyboard.layout()->addWidget(ui->widgetKeyboard);
     updateActions();
 }
 void MainWindow::showKeyboard(bool val)

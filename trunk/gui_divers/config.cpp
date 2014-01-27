@@ -65,10 +65,10 @@ Config::Config(QWidget *parent, PianoKeybdCustom *keyboard) : QDialog(parent),
     this->load();
 
     // initialisation des élements
-    if (this->ram)
-        ui->comboRam->setCurrentIndex(1);
-    else
-        ui->comboRam->setCurrentIndex(0);
+//    if (this->ram)
+//        ui->comboRam->setCurrentIndex(1);
+//    else
+//        ui->comboRam->setCurrentIndex(0);
     // liste des sorties audio
     this->ui->comboAudioOuput->addItem("-");
     this->ui->comboAudioOuput->addItem(trUtf8("Défaut"));

@@ -25,38 +25,136 @@
 #ifndef CIRCULARBUFFER_H
 #define CIRCULARBUFFER_H
 
-#include <QIODevice>
 #include <QMutex>
+#include <QObject>
 
-class CircularBuffer : public QIODevice
+class CircularBuffer : public QObject
 {
     Q_OBJECT
 
 public:
-    CircularBuffer(quint32 bufferSize, quint32 avanceBuffer, QObject * parent = NULL);
+    CircularBuffer(int minBuffer, int maxBuffer, QObject *parent = NULL);
     ~CircularBuffer();
-    qint64 readData(char *data, qint64 maxlen);
-    qint64 readData(char *data1, char *data2, qint64 maxlen);
+
+    void addData(float *dataL, float *dataR, float *dataRevL, float *dataRevR, int maxlen)
+    {
+        int total = 0;
+        _mutexData.lockInline();
+        int writeLen = qMin(maxlen, _currentLengthAvailable);
+        while (writeLen - total > 0)
+        {
+            const int chunk = qMin((_bufferSize - _posLecture), writeLen - total);
+            for (int i = 0; i < chunk; i++)
+            {
+                dataL   [total + i] += _dataL   [_posLecture + i];
+                dataR   [total + i] += _dataR   [_posLecture + i];
+                dataRevL[total + i] += _dataRevL[_posLecture + i];
+                dataRevR[total + i] += _dataRevR[_posLecture + i];
+            }
+            _posLecture = (_posLecture + chunk) % _bufferSize;
+            total += chunk;
+        }
+        for (int i = total; i < maxlen; i++)
+            dataL[i] = dataR[i] = dataRevL[i] = dataRevR[i] = 0;
+
+        _currentLengthAvailable -= total;
+
+        bool unlockLoop = (_currentLengthAvailable < _minBuffer);
+
+        if (total != maxlen && _maxBuffer < _maxTailleBuffer)
+        {
+            // Augmentation du buffer
+            _minBuffer += 128;
+            _maxBuffer += 128;
+        }
+
+        _mutexData.unlockInline();
+
+        if (unlockLoop)
+            _mutexSynchro.unlockInline();
+    }
+
+    void stop();
+    bool isInterrupted();   // Interruption demandée
+    bool isFinished();      // Boucle terminée
+    bool isDataUnlocked()
+    {
+        bool bRet(_mutexData.tryLockInline());
+        if (bRet)
+            _mutexData.unlockInline();
+        return bRet;
+    }
+
+    QThread * getThread() { return _thread; }
+
+public slots:
+    void start()
+    {
+        _mutexData.lock();
+        int avance = _maxBuffer - _minBuffer;
+        _mutexData.unlock();
+
+        // Surveillance du buffer après chaque lecture
+        while (!isInterrupted())
+        {
+            // Génération de données
+            generateData(_dataTmpL, _dataTmpR, _dataTmpRevL, _dataTmpRevR, avance);
+            writeData(_dataTmpL, _dataTmpR, _dataTmpRevL, _dataTmpRevR, avance);
+            _mutexSynchro.lockInline();
+        }
+        _mutexInterrupt.lockInline();
+        _isFinished = true;
+        _mutexInterrupt.unlockInline();
+    }
 
 protected:
-    qint64 writeData(const char *data, qint64 len);
-    qint64 writeData(const char *data1, const char *data2, qint64 len);
-    using QIODevice::bytesAvailable;
-    virtual qint64 bytesAvailable();
-    qint64 dataNeeded();
-    void reinit();
-    virtual void generateData(qint64 nbData = 0) = 0;
+    virtual void generateData(float *dataL, float *dataR, float *dataRevL, float *dataRevR, int len) = 0;
 
 private:
+    void writeData(const float *dataL, const float *dataR, float *dataRevL, float *dataRevR, int &len)
+    {
+        int total = 0;
+        _mutexData.lockInline();
+
+        // Quantité qu'il aurait fallu écrire
+        int newLen = _maxBuffer - _currentLengthAvailable;
+        if (newLen < _maxBuffer - _minBuffer)
+            newLen = _maxBuffer - _minBuffer;
+
+        while (len - total > 0)
+        {
+            const int chunk = qMin(_bufferSize - _posEcriture, len - total);
+            memcpy(&_dataL   [_posEcriture], &dataL   [total], 4 * chunk);
+            memcpy(&_dataR   [_posEcriture], &dataR   [total], 4 * chunk);
+            memcpy(&_dataRevL[_posEcriture], &dataRevL[total], 4 * chunk);
+            memcpy(&_dataRevR[_posEcriture], &dataRevR[total], 4 * chunk);
+            _posEcriture += chunk;
+            if (_posEcriture >= _bufferSize)
+                _posEcriture = 0;
+            total += chunk;
+        }
+        _currentLengthAvailable += len;
+        _mutexData.unlockInline();
+
+        // Mise à jour avance
+        len = newLen;
+    }
+
     // Buffer et positions
-    char * m_data;
-    char * m_data2;
-    quint32 m_bufferSize;
-    qint64 m_avance;
-    qint64 m_posEcriture, m_posLecture;
-    qint64 m_currentBufferLength;
+    float * _dataL, * _dataR, * _dataRevL, * _dataRevR;
+    float * _dataTmpL, * _dataTmpR, * _dataTmpRevL, * _dataTmpRevR;
+    int _minBuffer, _maxBuffer, _maxTailleBuffer, _bufferSize;
+    int _posEcriture, _posLecture;
+    int _currentLengthAvailable;
+
+    // Gestion interruption
+    bool _interrupted, _isFinished;
+
     // Protection des ressources
-    QMutex m_mutex;
+    QMutex _mutexData, _mutexInterrupt, _mutexSynchro;
+
+    // Thread du buffer
+    QThread * _thread;
 };
 
 #endif // CIRCULARBUFFER_H

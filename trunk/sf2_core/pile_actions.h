@@ -40,7 +40,7 @@ public:
         actionModifierToDefault = 4,
         actionNulle = 5
     } ActionType;
-    // DEFINITION DE LA CLASSE PUBLIQUE ACTION
+
     class Action
     {
     public:
@@ -63,6 +63,19 @@ public:
     };
     // METHODES PUBLIQUES DE LA CLASSE PILE D'ACTION
     Pile_actions(); // constructeur
+    ~Pile_actions()
+    {
+        Maillon * pile = this->redoAction;
+        if (pile != NULL)
+        {
+            while (pile->redoAction != NULL)
+            {
+                pile = pile->redoAction;
+            }
+            delete pile;
+        }
+    }
+
     void nouvelleAction();
     void add(Action *action);
     void cleanActions();
@@ -77,6 +90,7 @@ public:
     Action *getEltRedo(int pos);
     void supprimerUndo(int pos);
     void supprimerRedo(int pos);
+
     // Ajustement de la numérotation
     void decrementer(EltID id);
 private:
@@ -93,6 +107,7 @@ private:
             Edition *suivant;
             // Méthodes
             Edition();
+            ~Edition() { delete suivant; }
             Edition *remove(int indexSf2);
             double getEdition(int indexSf2);
             int nombreElt();
@@ -103,7 +118,14 @@ private:
         Maillon *redoAction;
         Maillon *undoAction;
         // METHODES PUBLIQUES DE LA CLASSE MAILLON
-        Maillon(); // constructeur
+        Maillon();
+        ~Maillon()
+        {
+            delete edition;
+            delete undoAction;
+            delete listeAction;
+        }
+
         int nombreEltUndo();
         int nombreEltRedo();
         Maillon *getEltUndo(int pos);

@@ -61,7 +61,7 @@ EnveloppeVol::EnveloppeVol(VoiceParam * voiceParam, quint32 sampleRate, bool isM
     }
 }
 
-bool EnveloppeVol::applyEnveloppe(double * data, quint32 size, bool release, int note,
+bool EnveloppeVol::applyEnveloppe(float * data, quint32 size, bool release, int note,
                                   int velocity, VoiceParam * voiceParam,
                                   double gain, bool applyOn1)
 {
@@ -95,12 +95,12 @@ bool EnveloppeVol::applyEnveloppe(double * data, quint32 size, bool release, int
     if (applyOn1)
         levelSustain = 1. - m_levelSustain / 100; // %
     else
-        levelSustain = pow(10, -m_levelSustain / 20); // dB
+        levelSustain = qPow(10, -m_levelSustain / 20); // dB
 
     // Ajustement hold time et volume
-    quint32 timeHold = m_timeHold * pow(2, m_noteToHold * (60 - note));
-    quint32 timeDecay = m_timeDecay * pow(2, m_noteToDecay * (60 - note));
-    double volume = pow(10, (m_volume + gain) / 50); // normalement division par 10
+    quint32 timeHold = m_timeHold * fastPow2(m_noteToHold * (60 - note));
+    quint32 timeDecay = m_timeDecay * fastPow2(m_noteToDecay * (60 - note));
+    double volume = qPow(10, (m_volume + gain) / 50); // normalement division par 10
     if (m_fixedVelocity != -1)
         volume *= (double)(m_fixedVelocity * m_fixedVelocity) / 16129;
     else
@@ -210,7 +210,7 @@ bool EnveloppeVol::applyEnveloppe(double * data, quint32 size, bool release, int
             if (applyOn1)
             {
                 // Décroissance exponentielle
-                coef = pow(0.001 / (1. - levelSustain + 0.001), 1. / timeDecay);
+                coef = qPow(0.001 / (1. - levelSustain + 0.001), 1. / timeDecay);
                 val2 = (m_precValue - levelSustain) * coef + levelSustain;
                 for (quint32 i = 0; i < duree; i++)
                 {
@@ -221,7 +221,7 @@ bool EnveloppeVol::applyEnveloppe(double * data, quint32 size, bool release, int
             else
             {
                 // Décroissance exponentielle
-                coef = pow(0.00001585 / (1. - levelSustain + 0.00001585), 1. / timeDecay);
+                coef = qPow(0.00001585 / (1. - levelSustain + 0.00001585), 1. / timeDecay);
                 val2 = (m_precValue - levelSustain) * coef + levelSustain;
                 for (quint32 i = 0; i < duree; i++)
                 {
@@ -274,7 +274,7 @@ bool EnveloppeVol::applyEnveloppe(double * data, quint32 size, bool release, int
             else
             {
                 // Décroissance exponentielle
-                coef = pow(0.00001585, 1. / m_timeRelease);
+                coef = qPow(0.00001585, 1. / m_timeRelease);
                 val2 = m_precValue * coef;
                 for (quint32 i = 0; i < duree; i++)
                 {
@@ -304,5 +304,19 @@ void EnveloppeVol::quickRelease()
     // Arrêt par classe exclusive : release très courte
     m_timeRelease = 0.02 * m_sampleRate;
     m_currentPhase = phase6release;
+    m_currentSmpl = 0;
+}
+
+void EnveloppeVol::decayToMin()
+{
+    m_currentPhase = phase4decay;
+    m_levelSustain = 100;
+    m_currentSmpl = 0;
+}
+
+void EnveloppeVol::attackToMax()
+{
+    m_currentPhase = phase2attack;
+    m_levelSustain = 0;
     m_currentSmpl = 0;
 }

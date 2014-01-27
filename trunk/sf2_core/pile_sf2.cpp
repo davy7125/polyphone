@@ -33,9 +33,14 @@ Pile_sf2::Pile_sf2(Tree *tree, bool ram, QWidget *parent)
 {
     this->sf2 = NULL;
     this->tree = tree;
-    this->pileActions = new Pile_actions;
+    this->pileActions = new Pile_actions();
     this->CONFIG_RAM = ram;
     this->parent = parent;
+}
+Pile_sf2::~Pile_sf2()
+{
+    delete this->sf2;
+    delete pileActions;
 }
 Pile_sf2::SF2::SF2()
 {
@@ -63,6 +68,9 @@ Pile_sf2::SF2::SF2()
     this->fileName = "";
     this->hidden = 0;
     this->numEdition = 0;
+    this->smpl = NULL;
+    this->inst = NULL;
+    this->prst = NULL;
 }
 Pile_sf2::SF2::SMPL::SMPL()
 {
@@ -110,7 +118,7 @@ Pile_sf2::SF2::BAG::GEN::GEN()
 ///////////////////////// METHODES PUBLIQUES /////////////////////////
 
 // Ajout / suppression des données
-void Pile_sf2::remove(EltID id, int *message) {this->remove(id, 0, 1, message);}
+void Pile_sf2::remove(EltID id, int *message) { this->remove(id, 0, 1, message); }
 
 // Accès / modification des propriétés
 bool Pile_sf2::isSet(EltID id, Champ champ)
@@ -890,7 +898,7 @@ int Pile_sf2::add(EltID id, bool storeAction)
     case elementSf2:{
         // Création d'un nouvel SF2
         storeAction = false; // pas de retour possible
-        SF2 *sf2 = new SF2;
+        SF2 *sf2 = new SF2();
         sf2->suivant = NULL;
         sf2->smpl = NULL;
         sf2->inst = NULL;
@@ -1247,6 +1255,7 @@ int Pile_sf2::remove(EltID id, bool permanently, bool storeAction, int *message)
             }
             // Suppression du sf2
             SF2 *tmp = this->sf2->getElt(id.indexSf2)->suivant;
+            this->sf2->getElt(id.indexSf2)->suivant = NULL;
             delete this->sf2->getElt(id.indexSf2);
             if (id.indexSf2 == 0) this->sf2 = tmp;
             else this->sf2->getElt(id.indexSf2-1)->suivant = tmp;
@@ -1338,6 +1347,7 @@ int Pile_sf2::remove(EltID id, bool permanently, bool storeAction, int *message)
                 delete this->sf2->getElt(id.indexSf2)->smpl->getElt(id.indexElt)->eltTree;
             // Suppression du sample
             SF2::SMPL *tmp = this->sf2->getElt(id.indexSf2)->smpl->getElt(id.indexElt)->suivant;
+            this->sf2->getElt(id.indexSf2)->smpl->getElt(id.indexElt)->suivant = NULL;
             delete this->sf2->getElt(id.indexSf2)->smpl->getElt(id.indexElt);
             if (id.indexElt == 0) this->sf2->getElt(id.indexSf2)->smpl = tmp;
             else this->sf2->getElt(id.indexSf2)->smpl->getElt(id.indexElt-1)->suivant = tmp;
@@ -1423,6 +1433,7 @@ int Pile_sf2::remove(EltID id, bool permanently, bool storeAction, int *message)
                 delete this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt)->eltTree;
             // Suppression de l'instrument
             SF2::INST *tmp = this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt)->suivant;
+            this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt)->suivant = NULL;
             delete this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt);
             if (id.indexElt == 0) this->sf2->getElt(id.indexSf2)->inst = tmp;
             else this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt-1)->suivant = tmp;
@@ -1469,13 +1480,14 @@ int Pile_sf2::remove(EltID id, bool permanently, bool storeAction, int *message)
             // Ajustement de la numérotation
             this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt)->decrementerPRST();
             // Suppression des gens
-            this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt)->bagGlobal.gen = \
+            this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt)->bagGlobal.gen =
                 this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt)->bagGlobal.gen->supprGenAndStore(id, storeAction, this);
             // Suppression de l'élément graphique
             if (tree)
                 delete this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt)->eltTree;
             // Suppression du preset
             SF2::PRST *tmp = this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt)->suivant;
+            this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt)->suivant = NULL;
             delete this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt);
             if (id.indexElt == 0) this->sf2->getElt(id.indexSf2)->prst = tmp;
             else this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt-1)->suivant = tmp;
@@ -1521,6 +1533,7 @@ int Pile_sf2::remove(EltID id, bool permanently, bool storeAction, int *message)
                 delete this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt)->bag->getElt(id.indexElt2)->eltTree;
             // Suppression du sample lié à l'instrument
             SF2::BAG *tmp = this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt)->bag->getElt(id.indexElt2)->suivant;
+            this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt)->bag->getElt(id.indexElt2)->suivant = NULL;
             delete this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt)->bag->getElt(id.indexElt2);
             if (id.indexElt2 == 0) this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt)->bag = tmp;
             else this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt)->bag->getElt(id.indexElt2-1)->suivant = tmp;
@@ -1566,6 +1579,7 @@ int Pile_sf2::remove(EltID id, bool permanently, bool storeAction, int *message)
                 delete this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt)->bag->getElt(id.indexElt2)->eltTree;
             // Suppression de l'instrument lié au preset
             SF2::BAG *tmp = this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt)->bag->getElt(id.indexElt2)->suivant;
+            this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt)->bag->getElt(id.indexElt2)->suivant = NULL;
             delete this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt)->bag->getElt(id.indexElt2);
             if (id.indexElt2 == 0) this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt)->bag = tmp;
             else this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt)->bag->getElt(id.indexElt2-1)->suivant = tmp;
@@ -1624,8 +1638,11 @@ int Pile_sf2::remove(EltID id, bool permanently, bool storeAction, int *message)
             }
             // suppression du mod
             SF2::BAG::MOD *tmp = bag->mod->getElt(id.indexMod);
-            if (id.indexMod == 0) bag->mod = bag->mod->suivant;
-            else bag->mod->getElt(id.indexMod-1)->suivant = tmp->suivant;
+            if (id.indexMod == 0)
+                bag->mod = bag->mod->suivant;
+            else
+                bag->mod->getElt(id.indexMod-1)->suivant = tmp->suivant;
+            bag->mod->getElt(id.indexMod)->suivant = NULL;
             delete tmp;
         }
         else
@@ -2288,6 +2305,7 @@ Pile_sf2::SF2::BAG::GEN * Pile_sf2::SF2::BAG::GEN::resetGen(Champ champ)
         if (this->sfGenOper == champ)
         {
             GEN *genTmp = this->suivant;
+            this->suivant = NULL;
             delete this;
             return genTmp->resetGen(champ);
         }
@@ -2315,6 +2333,7 @@ Pile_sf2::SF2::BAG::GEN * Pile_sf2::SF2::BAG::GEN::supprGenAndStore(EltID id, in
         // Destruction gen
         genTmp2 = genTmp;
         genTmp = genTmp->suivant;
+        genTmp2->suivant = NULL;
         delete genTmp2;
     }
     return genTmp;

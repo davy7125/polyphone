@@ -130,6 +130,10 @@ public:
         this->setModel(model);
         view->resizeColumnsToContents();
     }
+    ~TableComboBox()
+    {
+        delete this->model();
+    }
 
     bool eventFilter(QObject* object, QEvent* event)
     {

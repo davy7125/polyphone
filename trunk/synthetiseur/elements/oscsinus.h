@@ -31,7 +31,7 @@ class OscSinus
 {
 public:
     OscSinus(qint32 sampleRate, double delay = 0);
-    void getSinus(double *data, qint32 len, double freq);
+    void getSinus(float *data, qint32 len, double freq);
 
 private:
     // Attributs privés
