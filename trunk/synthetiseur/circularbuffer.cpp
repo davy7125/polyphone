@@ -23,126 +23,64 @@
 ***************************************************************************/
 
 #include "circularbuffer.h"
+#include <QThread>
 
-CircularBuffer::CircularBuffer(quint32 bufferSize, quint32 avanceBuffer, QObject *parent) :
-    QIODevice(parent),
-    m_data(NULL),
-    m_data2(NULL),
-    m_bufferSize(bufferSize),
-    m_avance(avanceBuffer)
+CircularBuffer::CircularBuffer(int minBuffer, int maxBuffer, QObject * parent) : QObject(parent),
+    _minBuffer(minBuffer),
+    _maxBuffer(maxBuffer),
+    _maxTailleBuffer(2 * maxBuffer),
+    _bufferSize(4 * maxBuffer),
+    _posEcriture(0),
+    _posLecture(0),
+    _currentLengthAvailable(0),
+    _interrupted(false),
+    _isFinished(false),
+    _thread(new QThread())
 {
-    this->reinit();
-    if (m_bufferSize)
-    {
-        m_data = new char [m_bufferSize];
-        m_data2 = new char [m_bufferSize];
-        for (unsigned int i = 0; i < m_bufferSize; i++)
-        {
-            m_data[i] = 0;
-            m_data2[i] = 0;
-        }
-    }
-    this->open(QIODevice::ReadOnly);
+    // Initialisation des buffers
+    _dataL       = new float [_bufferSize];
+    _dataR       = new float [_bufferSize];
+    _dataTmpL    = new float [_bufferSize];
+    _dataTmpR    = new float [_bufferSize];
+    _dataRevL    = new float [_bufferSize];
+    _dataRevR    = new float [_bufferSize];
+    _dataTmpRevL = new float [_bufferSize];
+    _dataTmpRevR = new float [_bufferSize];
 }
+
 CircularBuffer::~CircularBuffer()
 {
-    delete [] m_data;
-    delete [] m_data2;
+    delete [] _dataL;
+    delete [] _dataR;
+    delete [] _dataTmpL;
+    delete [] _dataTmpR;
+    delete [] _dataRevL;
+    delete [] _dataRevR;
+    delete [] _dataTmpRevL;
+    delete [] _dataTmpRevR;
 }
 
-qint64 CircularBuffer::readData(char *data, qint64 maxlen)
+bool CircularBuffer::isInterrupted()
 {
-    m_mutex.lock();
-    qint64 writeLen = qMin(maxlen, m_currentBufferLength);
-    qint64 total = 0;
-    while (writeLen - total > 0)
-    {
-        const qint64 chunk = qMin((m_bufferSize - m_posLecture), writeLen - total);
-        memcpy(&data[total], &m_data[m_posLecture], chunk);
-        m_posLecture = (m_posLecture + chunk) % m_bufferSize;
-        total += chunk;
-    }
-    m_currentBufferLength -= total;
-    m_mutex.unlock();
-    return total;
+    _mutexInterrupt.lockInline();
+    bool bRet = _interrupted;
+    _mutexInterrupt.unlockInline();
+    return bRet;
 }
 
-qint64 CircularBuffer::readData(char *data1, char *data2, qint64 maxlen)
+void CircularBuffer::stop()
 {
-    m_mutex.lock();
-    qint64 writeLen = qMin(maxlen, m_currentBufferLength);
-    qint64 total = 0;
-    while (writeLen - total > 0)
-    {
-        const qint64 chunk = qMin((m_bufferSize - m_posLecture), writeLen - total);
-        memcpy(&data1[total], &m_data[m_posLecture], chunk);
-        memcpy(&data2[total], &m_data2[m_posLecture], chunk);
-        m_posLecture = (m_posLecture + chunk) % m_bufferSize;
-        total += chunk;
-    }
-    m_currentBufferLength -= total;
-    m_mutex.unlock();
-    return total;
+    _mutexInterrupt.lockInline();
+    _interrupted = true;
+    _mutexInterrupt.unlockInline();
+    _mutexSynchro.tryLockInline();
+    _mutexSynchro.unlockInline();
 }
 
-qint64 CircularBuffer::writeData(const char *data, qint64 len)
+bool CircularBuffer::isFinished()
 {
-    m_mutex.lock();
-    qint64 total = 0;
-    while (len - total > 0)
-    {
-        const qint64 chunk = qMin(m_bufferSize - m_posEcriture, len - total);
-        memcpy(&m_data[m_posEcriture], &data[total], chunk);
-        m_posEcriture += chunk;
-        if (m_posEcriture >= m_bufferSize) m_posEcriture = 0;
-        total += chunk;
-    }
-    m_currentBufferLength += len;
-    m_mutex.unlock();
-    return len;
-}
-
-qint64 CircularBuffer::writeData(const char *data1, const char *data2, qint64 len)
-{
-    m_mutex.lock();
-    qint64 total = 0;
-    while (len - total > 0)
-    {
-        const qint64 chunk = qMin(m_bufferSize - m_posEcriture, len - total);
-        memcpy(&m_data[m_posEcriture], &data1[total], chunk);
-        memcpy(&m_data2[m_posEcriture], &data2[total], chunk);
-        m_posEcriture += chunk;
-        if (m_posEcriture >= m_bufferSize) m_posEcriture = 0;
-        total += chunk;
-    }
-    m_currentBufferLength += len;
-    m_mutex.unlock();
-    return len;
-}
-
-qint64 CircularBuffer::bytesAvailable()
-{
-    m_mutex.lock();
-    qint64 valRet = m_currentBufferLength;
-    m_mutex.unlock();
-    return valRet;
-}
-
-qint64 CircularBuffer::dataNeeded()
-{
-    m_mutex.lock();
-    qint64 valRet = qMax(m_avance - m_currentBufferLength, 0LL);
-    m_mutex.unlock();
-    return valRet;
-}
-
-void CircularBuffer::reinit()
-{
-    m_mutex.lock();
-    m_posEcriture = 0;
-    m_posLecture = 0;
-    m_currentBufferLength = 0;
-    this->close();
-    this->open(QIODevice::ReadOnly);
-    m_mutex.unlock();
+    _mutexInterrupt.lockInline();
+    bool bRet = _isFinished;
+    _mutexInterrupt.unlockInline();
+    return bRet;
 }

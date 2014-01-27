@@ -1370,22 +1370,6 @@
    </hints>
   </connection>
   <connection>
-   <sender>checkLectureBoucle</sender>
-   <signal>stateChanged(int)</signal>
-   <receiver>Page_Smpl</receiver>
-   <slot>setLoopEnabled(int)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>495</x>
-     <y>543</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>491</x>
-     <y>295</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
    <sender>pushEgalRestore</sender>
    <signal>clicked()</signal>
    <receiver>Page_Smpl</receiver>
@@ -1482,34 +1466,34 @@
    </hints>
   </connection>
   <connection>
-   <sender>checkLectureSinus</sender>
-   <signal>stateChanged(int)</signal>
+   <sender>checkLectureLien</sender>
+   <signal>clicked(bool)</signal>
    <receiver>Page_Smpl</receiver>
-   <slot>setSinusEnabled(int)</slot>
+   <slot>setStereo(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>575</x>
-     <y>567</y>
+     <x>493</x>
+     <y>283</y>
     </hint>
     <hint type="destinationlabel">
-     <x>491</x>
-     <y>295</y>
+     <x>408</x>
+     <y>164</y>
     </hint>
    </hints>
   </connection>
   <connection>
-   <sender>checkLectureLien</sender>
-   <signal>stateChanged(int)</signal>
+   <sender>checkLectureSinus</sender>
+   <signal>clicked(bool)</signal>
    <receiver>Page_Smpl</receiver>
-   <slot>setStereo(int)</slot>
+   <slot>setSinusEnabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>575</x>
-     <y>543</y>
+     <x>491</x>
+     <y>309</y>
     </hint>
     <hint type="destinationlabel">
-     <x>491</x>
-     <y>295</y>
+     <x>408</x>
+     <y>164</y>
     </hint>
    </hints>
   </connection>
@@ -1529,13 +1513,12 @@
   <slot>initEQ()</slot>
   <slot>bouclage()</slot>
   <slot>applyEQ()</slot>
-  <slot>setLoopEnabled(int)</slot>
-  <slot>setSinusEnabled(int)</slot>
+  <slot>setSinusEnabled(bool)</slot>
   <slot>setGainSample(int)</slot>
-  <slot>setStereo(int)</slot>
   <slot>setStartLoop(int)</slot>
   <slot>setEndLoop(int)</slot>
   <slot>setRootKey(int)</slot>
   <slot>setTune(int)</slot>
+  <slot>setStereo(bool)</slot>
  </slots>
 </ui>

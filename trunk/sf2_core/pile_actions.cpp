@@ -49,6 +49,7 @@ Pile_actions::Action::Action()
 
 Pile_actions::Action::~Action()
 {
+    delete this->suivant;
 }
 
 // METHODES PUBLIQUES
@@ -204,34 +205,30 @@ void Pile_actions::supprimerUndo(int pos)
 {
     Maillon *tmp = this->undoAction->getEltUndo(pos);
     if (!tmp) return;
+
     // Redirections
     if (tmp == this->undoAction) this->undoAction = this->undoAction->undoAction;
     if (tmp->undoAction) tmp->undoAction->redoAction = tmp->redoAction;
     if (tmp->redoAction) tmp->redoAction->undoAction = tmp->undoAction;
-    // Suppression des actions
-    for (int i = tmp->listeAction->nombreElt()-1; i >= 0; i--)
-        delete tmp->listeAction->getElt(i);
-    // Suppression des éditions
-    for (int i = tmp->edition->nombreElt()-1; i >= 0; i--)
-        delete tmp->edition->getElt(i);
+
     // Suppression du maillon
+    tmp->undoAction = NULL;
+    tmp->redoAction = NULL;
     delete tmp;
 }
 void Pile_actions::supprimerRedo(int pos)
 {
     Maillon *tmp = this->redoAction->getEltRedo(pos);
     if (!tmp) return;
+
     // Redirections
     if (tmp == this->redoAction) this->redoAction = this->redoAction->redoAction;
     if (tmp->redoAction) tmp->redoAction->undoAction = tmp->undoAction;
     if (tmp->undoAction) tmp->undoAction->redoAction = tmp->redoAction;
-    // Suppression des actions
-    for (int i = tmp->listeAction->nombreElt()-1; i >= 0; i--)
-        delete tmp->listeAction->getElt(i);
-    // Suppression des éditions
-    for (int i = tmp->edition->nombreElt()-1; i >= 0; i--)
-        delete tmp->edition->getElt(i);
+
     // Suppression du maillon
+    tmp->undoAction = NULL;
+    tmp->redoAction = NULL;
     delete tmp;
 }
 void Pile_actions::decrementer(EltID id)
@@ -262,7 +259,8 @@ void Pile_actions::decrementer(EltID id)
             action = actionSuivante;
         }
         // Décrémentation des éditions
-        if (id.typeElement == elementSf2) maillon->edition = maillon->edition->remove(id.indexSf2);
+        if (id.typeElement == elementSf2)
+            maillon->edition = maillon->edition->remove(id.indexSf2);
         maillon = maillon->undoAction;
     }
     // Parcours de tous les redo
@@ -289,7 +287,8 @@ void Pile_actions::decrementer(EltID id)
             action = actionSuivante;
         }
         // Décrémentation des éditions
-        if (id.typeElement == elementSf2) maillon->edition = maillon->edition->remove(id.indexSf2);
+        if (id.typeElement == elementSf2)
+            maillon->edition = maillon->edition->remove(id.indexSf2);
         maillon = maillon->redoAction;
     }
 }
@@ -346,7 +345,7 @@ Pile_actions::Action * Pile_actions::Action::decrementer(EltID id)
                 // décrémentation de l'indice des samples
                 if (this->id.indexElt > id.indexElt) this->id.indexElt--;
                 // décrémentation de l'indice des liens vers les samples (stéréo)
-                if ((this->typeAction == actionModifier || this->typeAction == actionModifierFromDefault || \
+                if ((this->typeAction == actionModifier || this->typeAction == actionModifierFromDefault ||
                     this->typeAction == actionModifierToDefault) && this->champ == champ_wSampleLink)
                 {
                     if (this->vNewValue.wValue > id.indexElt) this->vNewValue.wValue--;
@@ -356,7 +355,7 @@ Pile_actions::Action * Pile_actions::Action::decrementer(EltID id)
             else if (this->id.typeElement == elementInstSmpl || this->id.typeElement == elementInstSmplMod)
             {
                 // décrémentation de l'indice des samples liés aux instruments
-                if ((this->typeAction == actionModifier || this->typeAction == actionModifierFromDefault || \
+                if ((this->typeAction == actionModifier || this->typeAction == actionModifierFromDefault ||
                     this->typeAction == actionModifierToDefault) && this->champ == champ_sampleID)
                 {
                     if (this->vNewValue.wValue > id.indexElt) this->vNewValue.wValue--;
@@ -368,7 +367,7 @@ Pile_actions::Action * Pile_actions::Action::decrementer(EltID id)
     case elementInst: // indexElt
         if (this->id.indexSf2 == id.indexSf2)
         {
-            if (this->id.typeElement == elementInst || this->id.typeElement == elementInstMod || \
+            if (this->id.typeElement == elementInst || this->id.typeElement == elementInstMod ||
                     this->id.typeElement == elementInstSmpl || this->id.typeElement == elementInstSmplMod)
             {
                 // décrémentation de l'indice de inst, instmod, instsmpl et instsmplmod
@@ -377,7 +376,7 @@ Pile_actions::Action * Pile_actions::Action::decrementer(EltID id)
             else if (this->id.typeElement == elementPrstInst || this->id.typeElement == elementPrstInstMod)
             {
                 // décrémentation de l'indice des instruments liés aux presets
-                if ((this->typeAction == actionModifier || this->typeAction == actionModifierFromDefault || \
+                if ((this->typeAction == actionModifier || this->typeAction == actionModifierFromDefault ||
                     this->typeAction == actionModifierToDefault) && this->champ == champ_instrument)
                 {
                     if (this->vNewValue.wValue > id.indexElt) this->vNewValue.wValue--;
@@ -389,7 +388,7 @@ Pile_actions::Action * Pile_actions::Action::decrementer(EltID id)
     case elementPrst: // indexElt
         if (this->id.indexSf2 == id.indexSf2)
         {
-            if (this->id.typeElement == elementPrst || this->id.typeElement == elementPrstMod || \
+            if (this->id.typeElement == elementPrst || this->id.typeElement == elementPrstMod ||
                     this->id.typeElement == elementPrstInst || this->id.typeElement == elementPrstInstMod)
             {
                 // décrémentation de l'indice de prst, prstmod, prstinst, prstinstmod
@@ -418,7 +417,7 @@ Pile_actions::Action * Pile_actions::Action::decrementer(EltID id)
         }
         break;
     case elementInstMod: case elementPrstMod: case elementInstSmplMod: case elementPrstInstMod:
-        if (this->id.indexSf2 == id.indexSf2 && this->id.indexElt == id.indexElt \
+        if (this->id.indexSf2 == id.indexSf2 && this->id.indexElt == id.indexElt
                 && this->id.typeElement == id.typeElement)
         {
             // décrémentation Mod
@@ -454,6 +453,7 @@ Pile_actions::Maillon::Edition * Pile_actions::Maillon::Edition::remove(int inde
         else if (this->indexSf2 == indexSf2)
         {
             Edition *editedTmp = this->suivant;
+            this->suivant = NULL;
             delete this;
             return editedTmp->remove(indexSf2);
         }

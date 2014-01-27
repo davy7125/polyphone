@@ -25,24 +25,19 @@
 #ifndef SYNTH_H
 #define SYNTH_H
 
-
-#define BUFFER_SYNTH_SIZE     60000
-#define BUFFER_SYNTH_AVANCE   22000
-
 #include "pile_sf2.h"
-#include "voice.h"
+#include "soundengine.h"
 #include "audiodevice.h"
 
-class Synth : public CircularBuffer
+class Synth : public QObject
 {
     Q_OBJECT
 
 public:
-    Synth(Pile_sf2 * sf2, QObject *parent = NULL);
+    Synth(Pile_sf2 * sf2, QWidget *parent = NULL);
     ~Synth();
 
     // Exécution par mainWindow (thread 1)
-    void interruption();
     void play(int type, int idSf2, int idElt, int note, int velocity,
               VoiceParam * voiceParamTmp = NULL);
     void stop();
@@ -52,12 +47,12 @@ public:
 
     // Paramètres de lecture de samples
     void setGainSample(int gain);
-    void setStereo(int isStereo, bool withMutex = true);
+    void setStereo(bool isStereo);
     void setStartLoop(int startLoop, bool repercute);
     void setEndLoop(int endLoop, bool repercute);
-    void setLoopEnabled(int isEnabled);
+    void setLoopEnabled(bool isEnabled);
     void setRootKey(int rootKey);
-    void setSinusEnabled(int isEnabled, bool withMutex = true);
+    void setSinusEnabled(bool isEnabled);
     void setPitchCorrection(int correction, bool repercute);
 
     // Gestion de l'enregistrement
@@ -65,14 +60,48 @@ public:
     void endRecord();
     void pause(bool isOn);
 
-    // Exécution par le serveur audio (thread 3)
-    using CircularBuffer::readData;
-    virtual qint64 readData(char *data1, char *data2, qint64 maxlen);
-    void setFormat(AudioFormat format);
+    // Exécution par le serveur audio (thread 2)
+    void readData(float *data1, float *data2, qint64 maxlen)
+    {
+        for (int i = 0; i < maxlen; i++)
+            data1[i] = data2[i] = _fTmpSumRev1[i] = _fTmpSumRev2[i] = 0;
 
-public slots:
-    // Exécution par synth (thread 2)
-    void start();
+        // Fusion des sound engines
+        for (int i = 0; i < _soundEngines.size(); i++)
+            if (_soundEngines.at(i)->isDataUnlocked())
+                _soundEngines.at(i)->addData(data1, data2, _fTmpSumRev1, _fTmpSumRev2, maxlen);
+
+        // Application réverbération et addition
+        for (int i = 0; i < maxlen; i++)
+        {
+            data1[i] += _reverb.tick(_fTmpSumRev1[i], _fTmpSumRev2[i]);
+            data2[i] += _reverb.lastOut(1);
+        }
+
+        // Clipping
+        clip(data1, data2, maxlen);
+
+        // Enregistrement dans un fichier si demandé
+        m_mutexRecord.lock();
+        if (m_recordFile && m_isRecording)
+        {
+            // Entrelacement et écriture
+            float dataWav[2 * maxlen];
+            for (int i = 0; i < maxlen; i++)
+            {
+                dataWav[2 * i + 1] = data1[i];
+                dataWav[2 * i]     = data2[i];
+            }
+            m_recordStream.writeRawData((char*)dataWav, maxlen * 8);
+
+            // Prise en compte de l'avance
+            m_recordLength += maxlen * 8;
+            this->samplesRead(maxlen);
+        }
+        m_mutexRecord.unlock();
+    }
+
+    void setFormat(AudioFormat format);
 
 signals:
     void currentPosChanged(int pos);
@@ -81,44 +110,83 @@ signals:
     void samplesRead(int number);
 
 protected slots:
-    void generateData(qint64 nbData = 0);
     void emitCurrentPosChanged(int pos);
 
 private:
-    void clip(double * data1, double * data2, qint64 size);
-    void endVoice(Voice * voice);
-    bool getInterrupt();
+    void clip(float *data1, float *data2, qint64 size)
+    {
+        // Recherche valeur maxi
+        float dMax = 0;
+        qint32 pos = -1;
+        float dTmp;
+        for (qint32 i = 0; i < size; i++)
+        {
+            dTmp = qAbs(data1[i]);
+            if (dTmp > dMax)
+            {
+                dMax = dTmp;
+                pos = i;
+            }
+            dTmp = qAbs(data2[i]);
+            if (dTmp > dMax)
+            {
+                dMax = dTmp;
+                pos = i;
+            }
+        }
+        if (dMax > .99)
+        {
+            float coef = .99 / dMax;
+            for (int i = 0; i < pos; i++)
+            {
+                dTmp = (float)(pos - i) / pos * m_clipCoef
+                        + (float)i / pos * coef;
+                data1[i] *= dTmp;
+                data2[i] *= dTmp;
+            }
+            m_clipCoef = coef;
+            for (int i = pos; i < size; i++)
+            {
+                data1[i] *= coef;
+                data2[i] *= coef;
+            }
+        }
+    }
 
     // Pointeur vers les données
     Pile_sf2 * m_sf2;
-    // Liste des voix
-    QList<Voice *> m_listeVoix, m_listeVoixTmp;
+
+    // Liste des sound engines, voix temporaires (pour exclusive class)
+    QList<SoundEngine *> _soundEngines;
+    QList<Voice *> _listVoixTmp;
+
     // Format audio
     AudioFormat m_format;
+
     // Paramètre global
     double m_gain;
+
     // Paramètres lecture sample
-    int m_gainSmpl;
     bool m_isStereo;
     bool m_isLoopEnabled;
     bool m_isSinusEnabled;
+
     // Effets
     int m_choLevel, m_choDepth, m_choFrequency;
-    FreeVerb m_reverb;
+    FreeVerb _reverb;
+    QMutex _mutexReverb;
+
     // Etat clipping
     double m_clipCoef;
-    // Protection des données et déclenchement de la génération de données
-    QMutex m_mutexInterrupt;
-    QMutex m_mutexVoices;
-    QMutex m_mutexCompleted;
-    // Interruption de la boucle
-    bool m_interrupt;
+
     // Gestion de l'enregistrement
     QFile * m_recordFile;
     QDataStream m_recordStream;
     bool m_isRecording;
     quint32 m_recordLength;
     QMutex m_mutexRecord;
+
+    float * _fTmpSumRev1, * _fTmpSumRev2;
 };
 
 

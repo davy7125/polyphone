@@ -127,7 +127,8 @@ SOURCES	+= main.cpp \
     tools/import_sfz.cpp \
     gui_divers/spinboxkey.cpp \
     gui_divers/spinboxrange.cpp \
-    pages/tablewidget.cpp
+    pages/tablewidget.cpp \
+    synthetiseur/soundengine.cpp
 
 HEADERS  += mainwindow.h \
     sf2_core/sf2_types.h \
@@ -192,7 +193,8 @@ HEADERS  += mainwindow.h \
     macapplication.h \
     gui_divers/spinboxkey.h \
     gui_divers/spinboxrange.h \
-    pages/tablewidget.h
+    pages/tablewidget.h \
+    synthetiseur/soundengine.h
 
 FORMS    += mainwindow.ui \
     gui_divers/config.ui \

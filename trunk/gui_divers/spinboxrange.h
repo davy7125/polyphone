@@ -43,6 +43,8 @@ public:
     int getValMax();
     void setText(QString text);
 
+    static QString SEPARATOR;
+
 public slots:
     virtual void clear();
 
@@ -67,7 +69,6 @@ private:
     };
     SpinboxSection getCurrentSection() const;
     void stringToRange(QString input, int &valMin, int &valMax, QValidator::State &state) const;
-    static QString SEPARATOR;
     static int MINI;
     static int MAXI;
     int _valMin, _valMax;

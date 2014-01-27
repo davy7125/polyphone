@@ -32,9 +32,23 @@ class EnveloppeVol
 {
 public:
     EnveloppeVol(VoiceParam * voiceParam, quint32 sampleRate, bool isMod);
-    bool applyEnveloppe(double *data, quint32 size, bool release, int note, int velocity, VoiceParam * voiceParam,
+    bool applyEnveloppe(float *data, quint32 size, bool release, int note, int velocity, VoiceParam * voiceParam,
                         double gain, bool applyOn1 = false);
     void quickRelease();
+    void decayToMin();
+    void attackToMax();
+
+    static float fastPow2(float p)
+    {
+        float offset = (p < 0) ? 1.0f : 0.0f;
+        float clipp = (p < -126) ? -126.0f : p;
+        int w = clipp;
+        float z = clipp - w + offset;
+        union { quint32 i; float f; } v =
+        { static_cast<quint32> ( (1 << 23) * (clipp + 121.2740575f + 27.7280233f / (4.84252568f - z) - 1.49012907f * z) ) };
+        return v.f;
+    }
+
 private:
     enum EnveloppePhase
     {
@@ -60,6 +74,7 @@ private:
     double m_levelSustain;
     quint32 m_timeRelease;
     double m_noteToHold, m_noteToDecay;
+
     // Volume
     double m_volume;
     int m_fixedVelocity;

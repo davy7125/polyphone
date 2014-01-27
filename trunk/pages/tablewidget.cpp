@@ -213,7 +213,7 @@ void TableDelegate::setEditorData(QWidget *editor, const QModelIndex &index) con
     {
         SpinBoxRange * spin = (SpinBoxRange *)editor;
         if (index.data().isNull())
-            spin->setText("0_127");
+            spin->setText("0" + SpinBoxRange::SEPARATOR + "127");
         else
             spin->setText(index.data().toString());
     }

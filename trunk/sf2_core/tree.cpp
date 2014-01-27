@@ -98,6 +98,11 @@ Tree::menuClicDroit::menuClicDroit(MainWindow *mainWindow)
     this->menu->addAction(this->fermer);
 }
 
+Tree::menuClicDroit::~menuClicDroit()
+{
+    delete this->menu;
+}
+
 // Méthodes publiques
 
 void Tree::init(MainWindow *mainWindow, Pile_sf2 * sf2)

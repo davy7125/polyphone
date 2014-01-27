@@ -14,7 +14,7 @@ class TableWidget : public QTableWidget
 
 public:
     TableWidget(QWidget *parent = 0);
-    ~TableWidget() {}
+    ~TableWidget() { delete this->itemDelegate(); }
     void clear();
     void addColumn(int column, QString title);
     void setID(EltID id, int colonne);

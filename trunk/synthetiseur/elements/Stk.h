@@ -70,7 +70,7 @@ namespace stk {
 // following user-definable floating-point type.  You
 // can change this to "float" if you prefer or perhaps
 // a "long double" in the future.
-typedef double StkFloat;
+typedef float StkFloat;
 
 //! STK error handling class.
 /*!
