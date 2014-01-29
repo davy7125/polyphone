@@ -152,6 +152,7 @@ void ImportSfz::import(QString fileName, int * numSf2)
             idSf2.indexSf2 = *numSf2;
             _sf2->set(idSf2, champ_name, QObject::trUtf8("Import sfz"), false);
         }
+        _sf2->set(idSf2, champ_ICMT, QObject::trUtf8("Sf2 importé depuis un fichier sfz par Polyphone"), false);
         _sf2->closestAvailablePreset(idSf2, numBank, numPreset);
 
         // Création d'un preset
@@ -1062,7 +1063,7 @@ void GroupeParametres::decode(Pile_sf2 * sf2, EltID idElt) const
             sf2->set(idElt, champ_freqModLFO, val, false);
             break;
         case Parametre::op_modLFOtoVolume:
-            val.shValue = qRound(10. * _listeParam.at(i).getDoubleValue() / DB_SF2_TO_SFZ);
+            val.shValue = qRound(10. * _listeParam.at(i).getDoubleValue());
             sf2->set(idElt, champ_modLfoToVolume, val, false);
             break;
         default:
@@ -1201,17 +1202,17 @@ Parametre::Parametre(QString opcode, QString valeur) :
     else if (opcode == "key")
     {
         _opcode = op_key;
-        _intValue = Config::getInstance()->getKeyNum(valeurLow);
+        _intValue = Config::getInstance()->getKeyNum(valeurLow, true);
     }
     else if (opcode == "lokey")
     {
         _opcode = op_keyMin;
-        _intValue = Config::getInstance()->getKeyNum(valeurLow);
+        _intValue = Config::getInstance()->getKeyNum(valeurLow, true);
     }
     else if (opcode == "hikey")
     {
         _opcode = op_keyMax;
-        _intValue = Config::getInstance()->getKeyNum(valeurLow);
+        _intValue = Config::getInstance()->getKeyNum(valeurLow, true);
     }
     else if (opcode == "lovel")
     {
@@ -1226,7 +1227,7 @@ Parametre::Parametre(QString opcode, QString valeur) :
     else if (opcode == "pitch_keycenter")
     {
         _opcode = op_rootKey;
-        _intValue = Config::getInstance()->getKeyNum(valeurLow);
+        _intValue = Config::getInstance()->getKeyNum(valeurLow, true);
     }
     else if (opcode == "group")
     {

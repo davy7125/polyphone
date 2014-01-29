@@ -1029,6 +1029,7 @@ void Page_Smpl::bouclage()
     if (preparation) return;
     sf2->prepareNewActions();
     EltID id;
+
     // Calcul du nombre d'étapes
     int nbEtapes = 0;
     for (unsigned int i = 0; i < this->tree->getSelectedItemsNumber(); i++)
@@ -1042,12 +1043,14 @@ void Page_Smpl::bouclage()
     }
     if (nbEtapes == 0)
         return;
+
     // Ouverture d'une barre de progression
     QString textProgress = trUtf8("Traitement ");
     QProgressDialog progress("", trUtf8("Annuler"), 0, nbEtapes, this);
     progress.setWindowModality(Qt::WindowModal);
     progress.setFixedWidth(350);
     progress.show();
+    QStringList samplesNotLooped;
     for (unsigned int i = 0; i < this->tree->getSelectedItemsNumber(); i++)
     {
         id = this->tree->getID(i);
@@ -1058,11 +1061,13 @@ void Page_Smpl::bouclage()
                 QString name = this->sf2->getQstr(id, champ_name);
                 progress.setLabelText(textProgress + name);
                 QApplication::processEvents();
+
                 // Récupération des données, échantillonnage, startloop et endloop
                 QByteArray baData = this->sf2->getData(id, champ_sampleDataFull24);
                 DWORD dwSmplRate = this->sf2->get(id, champ_dwSampleRate).dwValue;
                 qint32 startLoop = this->sf2->get(id, champ_dwStartLoop).dwValue;
                 qint32 endLoop = this->sf2->get(id, champ_dwEndLoop).dwValue;
+
                 // Bouclage
                 baData = Sound::bouclage(baData, dwSmplRate, startLoop, endLoop, 24);
                 if (!baData.isEmpty())
@@ -1077,6 +1082,8 @@ void Page_Smpl::bouclage()
                     val.dwValue = baData.size() / 3;
                     this->sf2->set(id, champ_dwLength, val);
                 }
+                else
+                    samplesNotLooped << sf2->getQstr(id, champ_name);
                 if (!progress.wasCanceled())
                     progress.setValue(progress.value() + 1);
                 else
@@ -1089,6 +1096,22 @@ void Page_Smpl::bouclage()
             }
         }
     }
+    if (!samplesNotLooped.isEmpty())
+    {
+        QString txt;
+        if (samplesNotLooped.size() == 1)
+            txt = trUtf8("L'échantillon « ") + samplesNotLooped.first() + trUtf8(" » n'a pas pu être bouclé.") + "<br/>";
+        else
+        {
+            txt = trUtf8("Les échantillons suivants n'ont pas pu être bouclés :") + "<ul>";
+            for (int i = 0; i < samplesNotLooped.size(); i++)
+                txt += "<li>" + samplesNotLooped.at(i) + "</li>";
+            txt += "</ul>";
+        }
+        txt += trUtf8("Causes possibles : trop court ou trop turbulent.");
+        QMessageBox::warning(this, trUtf8("Attention"), txt);
+    }
+
     // Actualisation
     this->mainWindow->updateDo();
     this->afficher();

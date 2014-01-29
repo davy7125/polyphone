@@ -88,8 +88,8 @@ public:
     QList<QColor> getColors()   {return colorList;}
     bool getRepercussionStereo(){return modifStereo;}
     NameMiddleC getNameMiddleC(){return nameMiddleC;}
-    QString getKeyName(int keyNum, bool forceTexte = false, bool with0 = false);
-    int getKeyNum(QString keyName);
+    QString getKeyName(int keyNum, bool forceTexte = false, bool with0 = false, bool forceC4 = false);
+    int getKeyNum(QString keyName, bool forceC4 = false);
 
     // Accès aux paramètres des outils
     int    getTools_s_sifflements_debut()   { return settings.value("tools/sample/sifflements_debut", 8000).toInt(); }
