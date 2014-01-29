@@ -871,7 +871,7 @@ void Config::on_comboKeyName_currentIndexChanged(int index)
     }
 }
 
-QString Config::getKeyName(int keyNum, bool forceTexte, bool with0)
+QString Config::getKeyName(int keyNum, bool forceTexte, bool with0, bool forceC4)
 {
     if (this->nameMiddleC == middleC_60 && !forceTexte)
     {
@@ -905,16 +905,16 @@ QString Config::getKeyName(int keyNum, bool forceTexte, bool with0)
     case 11: keyName = "B";  break;
     }
     int numOctave = (keyNum + 3) / 12 - 1;
-    if (nameMiddleC == middleC_C3)
+    if (nameMiddleC == middleC_C3 && !forceC4)
         numOctave -= 1;
-    else if (nameMiddleC == middleC_C5)
+    else if (nameMiddleC == middleC_C5 && !forceC4)
         numOctave += 1;
     keyName += QString::number(numOctave);
 
     return keyName;
 }
 
-int Config::getKeyNum(QString keyName)
+int Config::getKeyNum(QString keyName, bool forceC4)
 {
     keyName = keyName.toLower();
     int note = keyName.toInt();
@@ -949,9 +949,9 @@ int Config::getKeyNum(QString keyName)
         else
             note += (octave - 4) * 12;
 
-        if (this->nameMiddleC == middleC_C3)
+        if (this->nameMiddleC == middleC_C3 && !forceC4)
             note += 12;
-        else if (this->nameMiddleC == middleC_C5)
+        else if (this->nameMiddleC == middleC_C5 && !forceC4)
             note -= 12;
     }
     return note;
