@@ -108,7 +108,8 @@ Just an advice: take your time!
 
 ######### 4. Submitting your work ##################################################################
 
-Once you are done (or bothered!), send the .ts file you were editing to "info@polyphone.fr". A new version including your translation will be returned to you so that you will be able to test it.
+Once you are done (or bothered!), send the .ts file you were editing to "info@polyphone.fr".
+A new version including your translation will be returned to you so that you will be able to test it.
 
 You may also want to build yourself Polyphone if you cannot wait:
  - in Qt Linguist, go to "file" -> "Release As..." and select the corresponding .qm file in 

@@ -25,6 +25,7 @@
 #include "conversion_sfz.h"
 #include "pile_sf2.h"
 #include <QFile>
+#include "config.h"
 
 
 ConversionSfz::ConversionSfz(Pile_sf2 *sf2) :
@@ -362,11 +363,11 @@ void ConversionSfz::writeElement(QTextStream &out, Champ champ, double value)
                                             << "fillfo_delay=" << value << endl;                    break;
     case champ_freqModLFO:              out << "amplfo_freq=" << value << endl
                                             << "fillfo_freq=" << value << endl;                     break;
-    case champ_modLfoToVolume:          out << "amplfo_depth=" << value * DB_SF2_TO_SFZ << endl;    break;
+    case champ_modLfoToVolume:          out << "amplfo_depth=" << value << endl;                    break;
     case champ_modLfoToFilterFc:        out << "fillfo_depth=" << value << endl;                    break;
 
     case champ_modLfoToPitch:           /* IMPOSSIBLE !!! */                                        break;
-    case champ_keynum:                  out << "pitch_keycenter=" << qRound(value) << endl
+    case champ_keynum: out << "pitch_keycenter=" << Config::getInstance()->getKeyName(qRound(value), false, false, true) << endl
                                             << "pitch_keytrack=0" << endl;                          break;
     case champ_reverbEffectsSend:       out << "effect1=" << value << endl;                         break;
     case champ_chorusEffectsSend:       out << "effect2=" << value << endl;                         break;
@@ -378,7 +379,8 @@ void ConversionSfz::writeElement(QTextStream &out, Champ champ, double value)
     case champ_keynumToVolEnvHold:      out << "ampeg_holdcc133=" << value << v2 << endl;           break;
     case champ_keynumToVolEnvDecay:     out << "ampeg_decaycc133=" << value << v2 << endl;          break;
     case champ_releaseVolEnv:           out << "ampeg_release=" << value << endl;                   break;
-    case champ_overridingRootKey:       out << "pitch_keycenter=" << qRound(value) << endl;         break;
+    case champ_overridingRootKey:       out << "pitch_keycenter=" <<
+                             Config::getInstance()->getKeyName(qRound(value), false, false, true) << endl;         break;
     case champ_delayVibLFO:             out << "pitchlfo_delay=" << value << endl;                  break;
     case champ_freqVibLFO:              out << "pitchlfo_freq=" << value << endl;                   break;
     case champ_vibLfoToPitch:           out << "pitchlfo_depth=" << qRound(value) << endl;          break;
@@ -394,8 +396,8 @@ void ConversionSfz::writeElement(QTextStream &out, Champ champ, double value)
             << "cutoff="   << qRound(value) << endl;
         break;
     case champ_keyRange:{
-        int lokey = qRound(value / 1000.);
-        int hikey = qRound(value - 1000. * lokey);
+        QString lokey = Config::getInstance()->getKeyName(qRound(value / 1000.), false, false, true);
+        QString hikey = Config::getInstance()->getKeyName(qRound(value - 1000. * qRound(value / 1000.)), false, false, true);
         out << "lokey=" << lokey << " hikey=" << hikey << endl;
         }break;
     case champ_velRange:{
@@ -806,6 +808,13 @@ ParamListe::ParamListe(Pile_sf2 * sf2, ParamListe * paramPrst, EltID idInst)
         }
     }
 
+    // Attaque par défaut si non défini
+    if (idInst.typeElement == elementInst && !_listeChamps.contains(champ_attackVolEnv))
+    {
+        _listeChamps << champ_attackVolEnv;
+        _listeValeurs << 0.001;
+    }
+
     // Fréquence par défaut si non défini
     if (!_listeChamps.contains(champ_freqModLFO))
     {
@@ -851,7 +860,7 @@ ParamListe::ParamListe(Pile_sf2 * sf2, ParamListe * paramPrst, EltID idInst)
         else
         {
             _listeChamps << champ_initialAttenuation;
-            _listeValeurs << correction;
+            _listeValeurs << correction / DB_SF2_TO_SFZ;
         }
     }
 
