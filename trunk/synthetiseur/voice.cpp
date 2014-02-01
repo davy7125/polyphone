@@ -37,6 +37,7 @@ Voice::Voice(QByteArray baData, DWORD smplRate, DWORD audioSmplRate, int note, i
     m_audioSmplRate(audioSmplRate),
     m_note(note),
     m_velocity(velocity),
+    m_gain(0),
     _voiceParam(voiceParam),
     m_currentSmplPos(voiceParam->sampleStart),
     m_time(0),
@@ -84,6 +85,7 @@ Voice::~Voice()
 void Voice::generateData(float *dataL, float *dataR, qint64 len)
 {
     _mutexParam.lock();
+
     bool endSample = false;
     double gainLowPassFilter = 0;
     if (m_note == -3)

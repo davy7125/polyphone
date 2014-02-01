@@ -26,13 +26,13 @@
 #include "sound.h"
 #include <QMessageBox>
 
-DWORD freadSize(QFile &fi)
+DWORD freadSize(QDataStream * stream)
 {
     unsigned char b0, b1, b2, b3;
-    if (fi.read((char*)&b3, 1) != 1 || \
-        fi.read((char*)&b2, 1) != 1 || \
-        fi.read((char*)&b1, 1) != 1 || \
-        fi.read((char*)&b0, 1) != 1)
+    if (stream->readRawData((char*)&b3, 1) != 1 ||
+        stream->readRawData((char*)&b2, 1) != 1 ||
+        stream->readRawData((char*)&b1, 1) != 1 ||
+        stream->readRawData((char*)&b0, 1) != 1)
     {
         return 0;
     }

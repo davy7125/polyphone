@@ -59,15 +59,23 @@ int main(int argc, char *argv[])
     MainWindow w;
     w.show();
 
-    // Ouverture des fichiers sf2 passés en argument
+    // Ouverture des fichiers passés en argument
     QStringList listeArg = QCoreApplication::arguments();
-    int replace = 0;
+    int numSf2 = -1;
     for (int i = 1; i < listeArg.size(); i++)
-        w.dragAndDrop(listeArg.at(i), EltID(elementUnknown, -1, -1, -1, -1), &replace);
+    {
+        QString extension = QFileInfo(listeArg.at(i)).suffix().toLower();
+        if (extension == "sf2" || extension == "sfark" || extension == "sfz")
+            w.dragAndDrop(listeArg.at(i), EltID(elementUnknown, -1, -1, -1, -1), &numSf2);
+    }
 
 #ifdef Q_OS_MACX
     for (int i = 0; i < listPathMac.size(); i++)
-        w.dragAndDrop(listPathMac.at(i), EltID(elementUnknown, -1, -1, -1, -1), &replace);
+    {
+        QString extension = QFileInfo(listPathMac.at(i)).suffix().toLower();
+        if (extension == "sf2" || extension == "sfark" || extension == "sfz")
+            w.dragAndDrop(listPathMac.at(i), EltID(elementUnknown, -1, -1, -1, -1), &numSf2);
+    }
     a.stopAppending();
     QObject::connect(&a, SIGNAL(openFile(QString)), &w, SLOT(ouvrir(QString)));
 #endif

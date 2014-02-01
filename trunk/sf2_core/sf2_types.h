@@ -315,7 +315,7 @@ typedef union
 // Définition des méthodes
 
 // LECTURE
-DWORD freadSize(QFile &fi);
+DWORD freadSize(QDataStream *stream);
 DWORD readDWORD(const char *chaine, int pos);
 WORD readWORD(const char *chaine, int pos);
 BYTE readBYTE(const char *chaine, int pos);

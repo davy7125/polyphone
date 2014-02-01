@@ -40,7 +40,9 @@ public:
     {
         int total = 0;
         _mutexData.lockInline();
+
         int writeLen = qMin(maxlen, _currentLengthAvailable);
+
         while (writeLen - total > 0)
         {
             const int chunk = qMin((_bufferSize - _posLecture), writeLen - total);
@@ -59,19 +61,13 @@ public:
 
         _currentLengthAvailable -= total;
 
-        bool unlockLoop = (_currentLengthAvailable < _minBuffer);
-
-        if (total != maxlen && _maxBuffer < _maxTailleBuffer)
+        if (_currentLengthAvailable <= _minBuffer)
         {
-            // Augmentation du buffer
-            _minBuffer += 128;
-            _maxBuffer += 128;
+            _mutexSynchro.tryLockInline();
+            _mutexSynchro.unlockInline();
         }
 
         _mutexData.unlockInline();
-
-        if (unlockLoop)
-            _mutexSynchro.unlockInline();
     }
 
     void stop();
@@ -116,7 +112,7 @@ private:
         int total = 0;
         _mutexData.lockInline();
 
-        // Quantité qu'il aurait fallu écrire
+        // Quantité qu'il aurait fallu écrire (mise à jour pour la fois suivante)
         int newLen = _maxBuffer - _currentLengthAvailable;
         if (newLen < _maxBuffer - _minBuffer)
             newLen = _maxBuffer - _minBuffer;

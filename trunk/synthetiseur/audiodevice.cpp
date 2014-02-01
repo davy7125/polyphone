@@ -33,12 +33,15 @@ int standardProcess(const void* inputBuffer, void* outputBuffer,
     Q_UNUSED(inputBuffer);
     Q_UNUSED(timeInfo);
     Q_UNUSED(statusFlags);
+
     // Récupération de l'instance de AudioDevice
     AudioDevice * instance = static_cast<AudioDevice*>(userData);
     float** outputs = (float**)outputBuffer;
+
     // Envoi de données
     if (instance->_format.channelCount() == 2)
         instance->_synth->readData(outputs[1], outputs[0], framesPerBuffer);
+
     return 0;
 }
 

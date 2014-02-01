@@ -56,6 +56,7 @@ public:
     void transposer();
     void sifflements();
     bool isPlaying();
+    void pushPlayPause();
 
     void getPeakFrequencies(EltID id, QList<double> &frequencies, QList<double> &factors, QList<int> &keys, QList<int> &corrections);
 
@@ -186,8 +187,8 @@ public:
                 QMouseEvent* mouseEvent = static_cast<QMouseEvent*>(event);
                 this->zoom(mouseEvent->pos());
                 // Ligne de zoom
-                this->setZoomLine(xInit, yInit, \
-                                  this->xAxis2->pixelToCoord(mouseEvent->x()), \
+                this->setZoomLine(xInit, yInit,
+                                  this->xAxis2->pixelToCoord(mouseEvent->x()),
                                   this->yAxis2->pixelToCoord(mouseEvent->y()));
             }
             else if (dragFlag)
