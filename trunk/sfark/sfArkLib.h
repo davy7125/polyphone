@@ -67,4 +67,4 @@ extern void sfkl_DisplayNotes(const char *NotesText, const char *NotesFileName);
 
 // Functions in sfArkLib for use by Application...
 extern unsigned short	sfkl_GetVersion(void);
-extern int 		sfkl_Decode(const char *InFileName, QDataStream &outStream);
+extern int 		sfkl_Decode(QDataStream &inStream, QDataStream &outStream);

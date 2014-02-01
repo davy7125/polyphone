@@ -1642,7 +1642,8 @@ int Pile_sf2::remove(EltID id, bool permanently, bool storeAction, int *message)
                 bag->mod = bag->mod->suivant;
             else
                 bag->mod->getElt(id.indexMod-1)->suivant = tmp->suivant;
-            bag->mod->getElt(id.indexMod)->suivant = NULL;
+            if (bag->mod->getElt(id.indexMod))
+                bag->mod->getElt(id.indexMod)->suivant = NULL;
             delete tmp;
         }
         else

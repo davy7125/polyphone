@@ -601,7 +601,6 @@ int ProcessNextBlock(BLOCK_DATA *Blk)
 // ==============================================================
 int	EndProcess(int ErrorNum)
 {
-    CloseInputFile();
     return ErrorNum;
 }
 
@@ -674,9 +673,12 @@ bool	ExtractTextFile(BLOCK_DATA *Blk, ULONG FileType)
 
 // ==============================================================
 
-int Decode(const char *InFileName, QDataStream &outStream)
+//int Decode(const char *InFileName, QDataStream &outStream)
+int Decode(QDataStream &inStream, QDataStream &outStream)
 {
+    setInputFileHandle(&inStream);
     setOutputFileHandle(&outStream);
+
     int	NumLoops;			// Number of loops before screen update etc.
 
     BLOCK_DATA	Blk;
@@ -712,11 +714,8 @@ int Decode(const char *InFileName, QDataStream &outStream)
     LPCinit();							// Init LPC
     GlobalErrorFlag = SFARKLIB_SUCCESS;
 
-    // Open input (.sfArk) file and read the header...
-    OpenInputFile(InFileName);
-    if (GlobalErrorFlag)  return EndProcess(GlobalErrorFlag);				// Something went wrong?
+    // Read the header...
     ReadHeader(FileHeader, Zbuf1, ZBUF_SIZE);
-
     if (GlobalErrorFlag)  return EndProcess(GlobalErrorFlag);				// Something went wrong?
 
     if ((FileHeader->Flags & FLAGS_License) != 0)		// License file exists?

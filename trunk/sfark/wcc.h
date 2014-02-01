@@ -184,14 +184,11 @@ extern AWORD	InputDiff(AWORD PrevValue);
 extern short	GetNBits(short w);
 
 // sfArkLib_File (or supplied by SDL.cpp)...
+extern void setInputFileHandle(QDataStream * stream);
 extern void setOutputFileHandle(QDataStream * stream);
-extern void	OpenInputFile(const char *FileName);
 extern int	ReadInputFile(BYTE *Buf, int NumberOfBytesToRead);
 extern int	WriteOutputFile(const BYTE *Buf, int NumberOfBytesToWrite);
 extern bool	SetInputFilePosition(int NewPos);
-//extern bool	SetOutputFilePosition(int NewPos);
-extern void	CloseInputFile(void);
-extern void	CloseOutputFile(void);
 
 // sfArkLib_LPC...
 extern void	LPCinit(void);

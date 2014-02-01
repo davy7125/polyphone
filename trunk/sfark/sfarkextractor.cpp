@@ -14,7 +14,6 @@ void sfkl_DisplayNotes(const char *NotesFilePath, const char* OutFileName)      
 {
     Q_UNUSED(OutFileName)
     Q_UNUSED(NotesFilePath)
-//    qDebug() << "Notes text file extracted to: " << NotesFilePath;
 }
 
 bool sfkl_GetLicenseAgreement(const char *LicenseText, const char *OutFileName)
@@ -37,21 +36,29 @@ void sfkl_msg(const char *MessageText, int Flags)
 void sfkl_UpdateProgress(int ProgressPercent)
 {
     Q_UNUSED(ProgressPercent)
-//    qDebug() << "avancement extraction sfark" << ProgressPercent;
 }
 
 // Extraction des données et chargement sf2
 void SfArkExtractor::extract(QString fileName)
 {
+    // Ouverture du fichier
+    QFile fileSfArk(fileName);
+    if (!fileSfArk.open(QIODevice::ReadOnly))
+        return;
+    QDataStream streamIn(&fileSfArk);
+
     // Stockage des données converties
     QByteArray convertedData;
     QDataStream streamOut(&convertedData, QIODevice::WriteOnly);
 
     // Décodage
-    sfkl_Decode(fileName.toStdString().c_str(), streamOut);
+    sfkl_Decode(streamIn, streamOut);
+
+    // Fermeture fichier sfArk
+    fileSfArk.close();
 
     // Création sf2
-    QDataStream streamIn(&convertedData, QIODevice::ReadOnly);
+    QDataStream streamSf2(&convertedData, QIODevice::ReadOnly);
     int indexSf2 = -1;
-    _sf2->ouvrir("", &streamIn, indexSf2, true);
+    _sf2->ouvrir("", &streamSf2, indexSf2, true);
 }
