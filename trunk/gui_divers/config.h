@@ -48,8 +48,8 @@ public:
         typeFichierSf2,
         typeFichierSample,
         typeFichierEnregistrement,
+        typeFichierSoundfont,
         typeFichierExport,
-        typeFichierImport,
         typeFichierFrequences
     };
 

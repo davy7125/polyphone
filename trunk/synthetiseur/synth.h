@@ -72,11 +72,13 @@ public:
                 _soundEngines.at(i)->addData(data1, data2, _fTmpSumRev1, _fTmpSumRev2, maxlen);
 
         // Application réverbération et addition
+        _mutexReverb.lock();
         for (int i = 0; i < maxlen; i++)
         {
             data1[i] += _reverb.tick(_fTmpSumRev1[i], _fTmpSumRev2[i]);
             data2[i] += _reverb.lastOut(1);
         }
+        _mutexReverb.unlock();
 
         // Clipping
         clip(data1, data2, maxlen);
@@ -134,6 +136,7 @@ private:
                 pos = i;
             }
         }
+
         if (dMax > .99)
         {
             float coef = .99 / dMax;
@@ -165,11 +168,6 @@ private:
 
     // Paramètre global
     double m_gain;
-
-    // Paramètres lecture sample
-    bool m_isStereo;
-    bool m_isLoopEnabled;
-    bool m_isSinusEnabled;
 
     // Effets
     int m_choLevel, m_choDepth, m_choFrequency;

@@ -30,6 +30,7 @@
 #include "dialog_export.h"
 #include "duplicator.h"
 #include "import_sfz.h"
+#include "sfarkextractor.h"
 #include <QFileDialog>
 #include <QInputDialog>
 #if QT_VERSION >= QT_VERSION_CHECK(5, 0, 0)
@@ -318,7 +319,9 @@ void MainWindow::resizeEvent(QResizeEvent *)
         else
             titre = titreLong;
     }
-
+#ifdef SHOW_ID_ERROR
+    titre += " (DEBUG)";
+#endif
     this->setWindowTitle(titre);
 }
 void MainWindow::keyPressEvent(QKeyEvent * event)
@@ -331,34 +334,79 @@ void MainWindow::keyPressEvent(QKeyEvent * event)
     }
     QMainWindow::keyPressEvent(event);
 }
-
+void MainWindow::spaceKeyPressedInTree()
+{
+    if (ui->stackedWidget->currentWidget() == page_smpl)
+        page_smpl->pushPlayPause();
+}
 
 // Ouverture, fermeture, suppression
 void MainWindow::ouvrir()
 {
-    // Chargement d'un fichier .sf2
-    QString fileName = QFileDialog::getOpenFileName(this, trUtf8("Ouvrir une soundfont"),
-                                                    Config::getInstance()->getLastDirectory(Config::typeFichierSf2),
-                                                    trUtf8("Fichier .sf2 (*.sf2)"));
-    if (fileName.isNull()) return;
-    ouvrir(fileName);
+    // Ouverture de fichiers
+    QStringList strList = QFileDialog::getOpenFileNames(this, trUtf8("Ouverture de fichiers"),
+                                                        Config::getInstance()->getLastDirectory(Config::typeFichierSoundfont),
+                                                        trUtf8("Soundfonts (*.sf2 *.sfz *.sfArk);;"
+                                                               "Fichiers .sf2 (*.sf2);;"
+                                                               "Fichiers .sfz (*.sfz);;"
+                                                               "Archives .sfArk (*.sfArk)"));
+    if (strList.isEmpty())
+        return;
+
+    Config::getInstance()->addFile(Config::typeFichierSoundfont, strList.first());
+
+    this->sf2->prepareNewActions();
+    int numSf2 = -1;
+    while (!strList.isEmpty())
+        this->dragAndDrop(strList.takeFirst(), EltID(elementUnknown, -1, -1, -1, -1), &numSf2);
+    updateDo();
+    updateActions();
+    this->ui->arborescence->searchTree(this->ui->editSearch->text());
 }
-void MainWindow::ouvrirFichier1() {ouvrir(this->configuration->getLastFile(Config::typeFichierSf2, 0));}
-void MainWindow::ouvrirFichier2() {ouvrir(this->configuration->getLastFile(Config::typeFichierSf2, 1));}
-void MainWindow::ouvrirFichier3() {ouvrir(this->configuration->getLastFile(Config::typeFichierSf2, 2));}
-void MainWindow::ouvrirFichier4() {ouvrir(this->configuration->getLastFile(Config::typeFichierSf2, 3));}
-void MainWindow::ouvrirFichier5() {ouvrir(this->configuration->getLastFile(Config::typeFichierSf2, 4));}
+void MainWindow::ouvrirFichier1()
+{
+    this->sf2->prepareNewActions();
+    ouvrir(this->configuration->getLastFile(Config::typeFichierSf2, 0));
+    updateDo();
+    updateActions();
+}
+void MainWindow::ouvrirFichier2()
+{
+    this->sf2->prepareNewActions();
+    ouvrir(this->configuration->getLastFile(Config::typeFichierSf2, 1));
+    updateDo();
+    updateActions();
+}
+void MainWindow::ouvrirFichier3()
+{
+    this->sf2->prepareNewActions();
+    ouvrir(this->configuration->getLastFile(Config::typeFichierSf2, 2));
+    updateDo();
+    updateActions();
+}
+void MainWindow::ouvrirFichier4()
+{
+    this->sf2->prepareNewActions();
+    ouvrir(this->configuration->getLastFile(Config::typeFichierSf2, 3));
+    updateDo();
+    updateActions();
+}
+void MainWindow::ouvrirFichier5()
+{
+    this->sf2->prepareNewActions();
+    ouvrir(this->configuration->getLastFile(Config::typeFichierSf2, 4));
+    updateDo();
+    updateActions();
+}
 void MainWindow::ouvrir(QString fileName)
 {
     // Chargement d'un fichier .sf2
-    this->sf2->prepareNewActions();
     switch (this->sf2->ouvrir(fileName))
     {
     case 0:
         // le chargement s'est bien déroulé
         this->configuration->addFile(Config::typeFichierSf2, fileName);
         updateFavoriteFiles();
-        updateDo();
         ui->arborescence->clearSelection();
         this->ui->arborescence->searchTree(this->ui->editSearch->text());
         updateActions();
@@ -1282,15 +1330,14 @@ void MainWindow::dragAndDrop(EltID idDest, QList<EltID> idSources)
         duplicator.copy(idSources.at(i), idDest);
     updateActions();
 }
-void MainWindow::dragAndDrop(QString path, EltID idDest, int * replace)
+void MainWindow::dragAndDrop(QString path, EltID idDest, int * arg)
 {
-#ifdef PA_USE_ASIO // Si windows
-    if (path.left(1).compare("/") == 0)
-        path = path.right(path.length() - 1);
-#endif
     if (path.left(7).compare("file://") == 0)
         path = path.right(path.length() - 7);
-
+#ifdef Q_OS_WIN
+    if (path.left(1).compare("/") == 0)
+        path = path.remove(0, 1);
+#endif
     // prepareNewActions() et updateDo() faits à l'extérieur
     QFileInfo fileInfo(path);
     QString extension = fileInfo.suffix().toLower();
@@ -1303,18 +1350,24 @@ void MainWindow::dragAndDrop(QString path, EltID idDest, int * replace)
     {
         // Import sfz
         int valueTmp = -1;
-        if (replace == NULL)
-            replace = &valueTmp;
+        if (arg == NULL)
+            arg = &valueTmp;
         ImportSfz import(this->sf2);
-        import.import(path, replace);
+        import.import(path, arg);
     }
     else if (extension.compare("wav") == 0 && idDest.typeElement != elementUnknown && idDest.indexSf2 != -1)
     {
         // Chargement d'un son wav
         int valueTmp = 0;
-        if (replace == NULL)
-            replace = &valueTmp;
-        importerSmpl(path, idDest, replace);
+        if (arg == NULL)
+            arg = &valueTmp;
+        importerSmpl(path, idDest, arg);
+    }
+    else if (extension.compare("sfark") == 0)
+    {
+        // Extraction sfArk
+        SfArkExtractor sfArkExtractor(this->sf2);
+        sfArkExtractor.extract(path);
     }
 }
 void MainWindow::importerSmpl()
@@ -1628,25 +1681,6 @@ void MainWindow::exporter()
     connect(dial, SIGNAL(accepted(QList<EltID>,QString,int,bool,bool,bool)),
             this, SLOT(exporter(QList<EltID>,QString,int,bool,bool,bool)));
     dial->show();
-}
-void MainWindow::importer()
-{
-    // Affichage dialogue
-    QStringList strList = QFileDialog::getOpenFileNames(this, trUtf8("Importer une soundfont"),
-                                                        Config::getInstance()->getLastDirectory(Config::typeFichierImport),
-                                                        trUtf8("Fichier .sfz (*.sfz)"));
-    if (strList.isEmpty())
-        return;
-
-    Config::getInstance()->addFile(Config::typeFichierImport, strList.first());
-
-    this->sf2->prepareNewActions();
-    int numSf2 = -1;
-    while (!strList.isEmpty())
-        this->dragAndDrop(strList.takeFirst(), EltID(elementUnknown, -1, -1, -1, -1), &numSf2);
-    updateDo();
-    updateActions();
-    this->ui->arborescence->searchTree(this->ui->editSearch->text());
 }
 void MainWindow::exporter(QList<EltID> listID, QString dir, int format, bool presetPrefix, bool bankDir, bool gmSort)
 {

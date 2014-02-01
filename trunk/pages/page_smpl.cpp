@@ -1516,6 +1516,7 @@ void Page_Smpl::lecture()
     {
         ui->pushLecture->setText(trUtf8("Arrêt"));
         this->noteChanged(-1, 127);
+
         // Désactivations
         this->ui->comboLink->setEnabled(false);
         this->ui->comboType->setEnabled(false);
@@ -1598,6 +1599,12 @@ void Page_Smpl::selectionChanged()
 }
 
 bool Page_Smpl::isPlaying() { return this->lectureEnCours; }
+
+void Page_Smpl::pushPlayPause()
+{
+    ui->pushLecture->toggle();
+    this->lecture();
+}
 
 void Page_Smpl::on_checkLectureBoucle_stateChanged(int arg1)
 {

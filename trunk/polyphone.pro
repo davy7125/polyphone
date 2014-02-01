@@ -8,7 +8,7 @@ QT       += core gui printsupport svg
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 # Option for developers ONLY
-#DEFINES += SHOW_ID_ERROR
+DEFINES += SHOW_ID_ERROR
 
 TARGET = Polyphone
 TEMPLATE = app
@@ -31,14 +31,16 @@ CONFIG(debug, debug|release){
 win32{
     DEFINES += __WINDOWS_MM__ PA_USE_ASIO
     INCLUDEPATH += lib/win/
-    LIBS += -Llib/win -lportaudio -ljack \
+    LIBS += -Llib/win -lportaudio -ljack -lzlib1 \
             -lwinmm libole32
     HEADERS  += lib/win/jack.h \
         lib/win/weakmacros.h \
         lib/win/types.h \
         lib/win/transport.h \
         lib/win/systemdeps.h \
-        lib/win/session.h
+        lib/win/session.h \
+        lib/win/zlib.h \
+        lib/win/zconf.h
     RC_FILE = polyphone.rc
 }
 unix:!macx{
@@ -67,6 +69,7 @@ INCLUDEPATH += gui_divers \
     synthetiseur \
     synthetiseur/elements \
     lib \
+    sfark \
     .
 
 SOURCES	+= main.cpp \
@@ -128,7 +131,15 @@ SOURCES	+= main.cpp \
     gui_divers/spinboxkey.cpp \
     gui_divers/spinboxrange.cpp \
     pages/tablewidget.cpp \
-    synthetiseur/soundengine.cpp
+    synthetiseur/soundengine.cpp \
+    sfark/sfklZip.cpp \
+    sfark/sfklString.cpp \
+    sfark/sfklLPC.cpp \
+    sfark/sfklFile.cpp \
+    sfark/sfklDiff.cpp \
+    sfark/sfklCrunch.cpp \
+    sfark/sfklCoding.cpp \
+    sfark/sfarkextractor.cpp
 
 HEADERS  += mainwindow.h \
     sf2_core/sf2_types.h \
@@ -194,7 +205,10 @@ HEADERS  += mainwindow.h \
     gui_divers/spinboxkey.h \
     gui_divers/spinboxrange.h \
     pages/tablewidget.h \
-    synthetiseur/soundengine.h
+    synthetiseur/soundengine.h \
+    sfark/wcc.h \
+    sfark/sfArkLib.h \
+    sfark/sfarkextractor.h
 
 FORMS    += mainwindow.ui \
     gui_divers/config.ui \

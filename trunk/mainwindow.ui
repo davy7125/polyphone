@@ -198,7 +198,6 @@
     <addaction name="actionEnregistrer_sous"/>
     <addaction name="separator"/>
     <addaction name="actionImporter"/>
-    <addaction name="actionI_mporter_soundfont"/>
     <addaction name="actionExporter"/>
     <addaction name="actionExporter_en_tant_qu_sfz"/>
     <addaction name="separator"/>
@@ -2474,22 +2473,6 @@
     </hint>
    </hints>
   </connection>
-  <connection>
-   <sender>actionI_mporter_soundfont</sender>
-   <signal>triggered()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>importer()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>-1</x>
-     <y>-1</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>184</x>
-     <y>201</y>
-    </hint>
-   </hints>
-  </connection>
  </connections>
  <slots>
   <slot>ouvrir()</slot>
@@ -2545,6 +2528,5 @@
   <slot>showToolBarManager()</slot>
   <slot>visualize()</slot>
   <slot>exporter()</slot>
-  <slot>importer()</slot>
  </slots>
 </ui>

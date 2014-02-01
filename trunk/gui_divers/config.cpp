@@ -54,7 +54,6 @@ Config::Config(QWidget *parent, PianoKeybdCustom *keyboard) : QDialog(parent),
 #ifdef Q_OS_MAC
     ui->groupBox->layout()->setMargin(10);
 #endif
-
     for (int i = 0; i < 5; i++)
         listFiles.append("");
 
@@ -73,7 +72,7 @@ Config::Config(QWidget *parent, PianoKeybdCustom *keyboard) : QDialog(parent),
     this->ui->comboAudioOuput->addItem("-");
     this->ui->comboAudioOuput->addItem(trUtf8("Défaut"));
 
-#ifdef PA_USE_ASIO
+#ifdef Q_OS_WIN
     bool isAsioEnabled = true;
 #else
     bool isAsioEnabled = false;
@@ -296,7 +295,7 @@ void Config::addFile(TypeFichier typeFichier, QString filePath)
     case typeFichierExport:
         exportFile = filePath;
         break;
-    case typeFichierImport:
+    case typeFichierSoundfont:
         importFile = filePath;
         break;
     case typeFichierFrequences:
@@ -339,7 +338,7 @@ QString Config::getLastFile(TypeFichier typeFichier, int num)
     case typeFichierExport:
         lastFile = exportFile;
         break;
-    case typeFichierImport:
+    case typeFichierSoundfont:
         lastFile = importFile;
         break;
     case typeFichierFrequences:

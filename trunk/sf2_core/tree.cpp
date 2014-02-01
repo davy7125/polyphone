@@ -726,6 +726,10 @@ void Tree::keyPressEvent(QKeyEvent *event)
             mainWindow->dragAndDrop(this->getID(0), this->idList);
         mainWindow->updateDo();
     }
+    else if (event->key() == Qt::Key_Space)
+    {
+        mainWindow->spaceKeyPressedInTree();
+    }
     else
         QTreeWidget::keyPressEvent(event);
 }

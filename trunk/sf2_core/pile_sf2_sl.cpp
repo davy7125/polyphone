@@ -64,8 +64,18 @@ int Pile_sf2::ouvrir(QString fileName)
     switch (getFileType(fileName))
     {
     case fileSf2:
-        return this->ouvrirSf2(fileName);
-        break;
+    {
+        QFile fi(fileName);
+        if (!fi.open(QIODevice::ReadOnly))
+            return 3;
+        QDataStream stream(&fi);
+        int indexSf2 = -1;
+        int valRet = this->ouvrir(fileName, &stream, indexSf2);
+        fi.close();
+        if (valRet == 0)
+            this->storeEdition(indexSf2);
+        return valRet;
+    }break;
     case fileUnknown:
         return 1;
     }
@@ -117,126 +127,101 @@ Pile_sf2::FileType Pile_sf2::getFileType(QString fileName)
         return fileUnknown;
 }
 
-int Pile_sf2::ouvrirSf2(QString fileName)
+int Pile_sf2::ouvrir(QString fileName, QDataStream * stream, int &indexSf2, bool copySamples)
 {
-    // Chargement d'un fichier .sf2
-    QFile fi(fileName);
-    if (!fi.open(QIODevice::ReadOnly)) return 3;
     //////////////////////////// CHARGEMENT ////////////////////////////////////////
     char buffer[65536];
     char bloc[5];
     qint64 taille, taille_info, taille_sdta, taille_pdta;
+
     /////////////////////////   ENTETE   //////////////////////
     // RIFF
-    if (fi.read(bloc, 4) != 4)
-    {
-        fi.close();
+    if (stream->readRawData(bloc, 4) != 4)
         return 4;
-    }
+
     bloc[4]='\0';
     if (strcmp("RIFF",bloc))
-    {
-        fi.close();
         return 5;
-    }
+
     // Taille totale du fichier - 8 octets
-    taille = freadSize(fi);
+    taille = freadSize(stream);
     if (taille == 0)
-    {
-        fi.close();
         return 5;
-    }
+
     // Bloc 'sfbk'
-    if (fi.read(bloc, 4) != 4)
-    {
-        fi.close();
+    if (stream->readRawData(bloc, 4) != 4)
         return 4;
-    }
+
     bloc[4]='\0';
     if (strcmp("sfbk",bloc))
-    {
-        fi.close();
         return 5;
-    }
+
     /////////////////////////   INFO   //////////////////////
     // Bloc 'LIST'
-    if (fi.read(bloc, 4) != 4)
-    {
-        fi.close();
+    if (stream->readRawData(bloc, 4) != 4)
         return 5;
-    }
+
     bloc[4]='\0';
     if (strcmp("LIST",bloc))
-    {
-        fi.close();
         return 5;
-    }
+
     // Taille de la partie INFO
-    taille_info = freadSize(fi);
+    taille_info = freadSize(stream);
     // limite en taille
     if (taille_info == 0)
-    {
-        fi.close();
         return 5;
-    }
+
     if (taille_info > 10000000)
-    {
-        fi.close();
         return 5;
-    }
+
     // EXTRACTION DES DONNEES DU BLOC INFO
     char *bloc_info = (char *)malloc((taille_info+1));
-    if (fi.read(bloc_info, taille_info) != taille_info)
+    if (stream->readRawData(bloc_info, taille_info) != taille_info)
     {
         free(bloc_info);
-        fi.close();
         return 4;
     }
+
     /////////////////////////   SDTA   //////////////////////
     // Bloc 'LIST'
-    if (fi.read(bloc, 4) != 4)
+    if (stream->readRawData(bloc, 4) != 4)
     {
         free(bloc_info);
-        fi.close();
         return 4;
     }
     bloc[4]='\0';
     if (strcmp("LIST",bloc))
     {
         free(bloc_info);
-        fi.close();
         return 5;
     }
+
     // Taille de la partie sdta
-    taille_sdta = freadSize(fi);
+    taille_sdta = freadSize(stream);
     // limite en taille
     if (taille_sdta == 0)
     {
         free(bloc_info);
-        fi.close();
         return 5;
     }
     // mot sdta
-    if (fi.read(bloc, 4) != 4)
+    if (stream->readRawData(bloc, 4) != 4)
     {
         free(bloc_info);
-        fi.close();
         return 4;
     }
     bloc[4]='\0';
     if (strcmp("sdta",bloc))
     {
         free(bloc_info);
-        fi.close();
         return 5;
     }
     DWORD taille_smpl, taille_sm24;
     DWORD wSmpl, wSm24;
     // Blocs SMPL et SM24
-    if (fi.read(bloc, 4) != 4)
+    if (stream->readRawData(bloc, 4) != 4)
     {
         free(bloc_info);
-        fi.close();
         return 4;
     }
     if (strcmp("smpl", bloc))
@@ -246,37 +231,40 @@ int Pile_sf2::ouvrirSf2(QString fileName)
         taille_sm24 = 0;
         wSmpl = 20 + taille_info + 12;
         wSm24 = 0;
-        fi.seek(fi.pos() + taille_smpl - 4); // en avant de taille_smpl - 4
+        stream->skipRawData(taille_smpl - 4);
+        //fi.seek(fi.pos() + taille_smpl - 4); // en avant de taille_smpl - 4
     }
     else
     {
         // présence d'un sous-bloc smpl
         // taille du bloc smpl
-        taille_smpl = freadSize(fi);
+        taille_smpl = freadSize(stream);
         wSmpl = 20 + taille_info + 20;
-        fi.seek(fi.pos() + taille_smpl); // en avant de taille_smpl
+        stream->skipRawData(taille_smpl);
+        //fi.seek(fi.pos() + taille_smpl); // en avant de taille_smpl
         // bloc sm24 ?
-        if (fi.read(bloc, 4) != 4)
+        if (stream->readRawData(bloc, 4) != 4)
         {
             free(bloc_info);
-            fi.close();
             return 4;
         }
         if (strcmp("sm24",bloc))
         {
             // Pas de bloc sm24, en arrière de 4
-            fi.seek(fi.pos() - 4);
+            QIODevice * fi = stream->device();
+            fi->seek(fi->pos() - 4);
             taille_sm24 = 0;
             wSm24 = 0;
         }
         else
         {
             // présence d'un bloc sm24
-            taille_sm24 = freadSize(fi);
+            taille_sm24 = freadSize(stream);
             if (taille_sm24 == taille_smpl/2 + ((taille_smpl/2) % 2))
             {
                 wSm24 = 20 + taille_info + 20 + taille_sm24 + 8;
-                fi.seek(fi.pos() + taille_sm24); // en avant de taille_sm24
+                stream->skipRawData(taille_sm24);
+                //fi.seek(fi.pos() + taille_sm24); // en avant de taille_sm24
             }
             else
             {
@@ -285,51 +273,47 @@ int Pile_sf2::ouvrirSf2(QString fileName)
                                      QObject::trUtf8("Fichier corrompu : utilisation des échantillons en qualité 16 bits."));
                 taille_sm24 = 0;
                 wSm24 = 0;
-                fi.seek(fi.pos() + taille_sm24); // en avant de taille_sm24
+                stream->skipRawData(taille_sm24);
+                //fi.seek(fi.pos() + taille_sm24); // en avant de taille_sm24
             }
         }
     }
 
     /////////////////////////   PDTA   //////////////////////
     // Bloc 'LIST'
-    if (fi.read(bloc, 4) != 4)
+    if (stream->readRawData(bloc, 4) != 4)
     {
         free(bloc_info);
-        fi.close();
         return 4;
     }
     bloc[4]='\0';
     if (strcmp("LIST",bloc))
     {
         free(bloc_info);
-        fi.close();
         return 5;
     }
     // Taille de la partie pdta
-    taille_pdta = freadSize(fi);
+    taille_pdta = freadSize(stream);
     // limite en taille
     if (taille_pdta == 0)
     {
         free(bloc_info);
-        fi.close();
         return 5;
     }
     if (taille_pdta > 10000000)
     {
         free(bloc_info);
-        fi.close();
         return 5;
     }
     // EXTRACTION DES DONNEES DU BLOC PDTA
     char *bloc_pdta = (char *)malloc((taille_pdta+1));
-    if (fi.read(bloc_pdta, taille_pdta) != taille_pdta)
+    if (stream->readRawData(bloc_pdta, taille_pdta) != taille_pdta)
     {
         free(bloc_info);
         free(bloc_pdta);
-        fi.close();
         return 4;
     }
-    fi.close();
+
     /////////////////////////   VERIFICATION GLOBALE   //////////////////////
     // Vérification de l'entete des 3 blocs
     if (bloc_info[0]!='I' || bloc_info[1]!='N' || bloc_info[2]!='F' || bloc_info[3]!='O' || \
@@ -609,20 +593,24 @@ int Pile_sf2::ouvrirSf2(QString fileName)
     free(bloc_pdta);
     // Création d'un nouvel SF2
     EltID id(elementSf2, -1, 0, 0, 0);
-    int indexSf2 = this->add(id, false); // Nouvelle action
+    indexSf2 = this->add(id, false); // Nouvelle action
     EltID idSf2(elementSf2, indexSf2, 0, 0, 0);
     Valeur value;
     this->set(idSf2, champ_filename, fileName, false);
+
     ////////////////////   EXTRACTION DES CHAMPS DANS LE BLOC SHDR  ////////////////////
     id.typeElement = elementSmpl;
     id.indexSf2 = indexSf2;
     id.indexElt = -1;
     DWORD temp1;
     pos = 0;
-    for (unsigned int i = 0; i < taille/46-1; i++)
+    for (unsigned int i = 0; i < taille / 46 - 1; i++)
     {
         id.indexElt = this->add(id, false);
+        this->set(id, champ_filename, fileName, false);
         this->set(id, champ_name, QString(readdata(buffer, bloc_pdta_shdr, pos, 20)).trimmed(), false);
+
+        // Configuration d'un sample
         value.bValue = readBYTE(bloc_pdta_shdr, pos+40);
         this->set(id, champ_byOriginalPitch, value, false);
         value.cValue = bloc_pdta_shdr[pos+41];
@@ -632,13 +620,13 @@ int Pile_sf2::ouvrirSf2(QString fileName)
         value.sfLinkValue = readSFSL(bloc_pdta_shdr, pos+44);
         this->set(id, champ_sfSampleType, value, false);
         temp1 = readDWORD(bloc_pdta_shdr, pos+20);
-        // Configuration d'un sample
-        this->set(id, champ_filename, fileName, false);
+
+        // Nombre de canaux, échantillonnage, début / fin de boucle
         value.wValue = 1;
         this->set(id, champ_wChannel, value, false);
         value.dwValue = readDWORD(bloc_pdta_shdr, pos+36);
         this->set(id, champ_dwSampleRate, value, false);
-        if (readDWORD(bloc_pdta_shdr, pos+24)*2 > taille_smpl || \
+        if (readDWORD(bloc_pdta_shdr, pos+24)*2 > taille_smpl ||
                 (wSm24 && (readWORD(bloc_pdta_shdr, pos+24) > taille_sm24)))
         {
             // Sample non valide
@@ -675,7 +663,27 @@ int Pile_sf2::ouvrirSf2(QString fileName)
             value.dwValue = readDWORD(bloc_pdta_shdr, pos+32) - temp1;
             this->set(id, champ_dwEndLoop, value, false);
         }
-        if (CONFIG_RAM)
+
+        // Récupération des données
+        if (copySamples)
+        {
+            // Remplissage des champ smpl et smpl24 à partir des données
+            DWORD length = get(id, champ_dwLength).dwValue;
+            QIODevice * fi = stream->device();
+            fi->seek(get(id, champ_dwStart16).dwValue);
+            QByteArray baData;
+            baData.resize(2 * length);
+            stream->readRawData(baData.data(), length * 2);
+            this->set(id, champ_sampleData16, baData, false);
+            if (wSm24)
+            {
+                fi->seek(get(id, champ_dwStart24).dwValue);
+                baData.resize(length);
+                stream->readRawData(baData.data(), length);
+                this->set(id, champ_sampleData24, baData, false);
+            }
+        }
+        else if (CONFIG_RAM)
         {
             // Chargement dans la ram
             value.wValue = 1;
@@ -938,7 +946,6 @@ int Pile_sf2::ouvrirSf2(QString fileName)
     free(bloc_pdta_pbag);
     free(bloc_pdta_pmod);
     free(bloc_pdta_pgen);
-    this->storeEdition(indexSf2);
     return 0;
 }
 
