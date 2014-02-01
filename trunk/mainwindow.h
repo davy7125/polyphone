@@ -107,10 +107,11 @@ public:
     void setSynthChorus(int level, int depth, int frequency);
     void setListeActions(QList<QAction *> listeActions);
     void dragAndDrop(EltID idDest, QList<EltID> idSources);
-    void dragAndDrop(QString path, EltID idDest, int *replace = NULL);
+    void dragAndDrop(QString path, EltID idDest, int *arg = NULL);
     void noteNameChanged();
     void setRangeAndRootKey(int rootKey, int noteMin, int noteMax);
     void clearKeyboardCustomisation();
+    void spaceKeyPressedInTree();
 
 public slots:
     void ouvrir(QString fileName);
@@ -138,7 +139,6 @@ private slots:
     void exporter();            // Export d'un ou plusieurs preset(s)
     void exporter(QList<EltID> listID, QString dir, int format,
                   bool presetPrefix, bool bankDir, bool gmSort);
-    void importer();            // Import de soundfont non sf2
     void nouvelInstrument();    // Création d'un instrument
     void nouveauPreset();       // Création d'un preset
     void associer();            // Association InstSmpl et PrstInst

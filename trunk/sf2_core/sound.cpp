@@ -44,7 +44,8 @@ Sound::Sound(QString filename, bool tryFindRootkey)
     _info.dwNote = 0;
     _info.iCent = 0;
     _info.wBpsFile = 0;
-    this->setFileName(filename, tryFindRootkey);
+    if (!filename.isEmpty())
+        this->setFileName(filename, tryFindRootkey);
 }
 Sound::~Sound() {}
 

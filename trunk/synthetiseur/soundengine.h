@@ -25,8 +25,8 @@
 #ifndef SOUNDENGINE_H
 #define SOUNDENGINE_H
 
-#define BUFFER_ENGINE_MIN_DATA   500
-#define BUFFER_ENGINE_MAX_DATA   1500
+#define BUFFER_ENGINE_MIN_DATA   1024
+#define BUFFER_ENGINE_MAX_DATA   2048
 
 #include "circularbuffer.h"
 #include "voice.h"
@@ -38,9 +38,9 @@ class SoundEngine : public CircularBuffer
 public:
     SoundEngine(QObject *parent = NULL);
     virtual ~SoundEngine();
-    bool isEmpty();
 
     static void addVoice(Voice * voice, QList<Voice *> friends = QList<Voice*>());
+    static void addVoices(QList<Voice *> voices);
     static void stopAllVoices();
     static void releaseNote(int numNote);
     static void setGain(double gain);
@@ -58,18 +58,15 @@ signals:
     void readFinished();
 
 protected:
+    // Thread du buffer circulaire
     void generateData(float *dataL, float *dataR, float *dataRevL, float *dataRevR, int len)
     {
         // Initialisation des données
         for (int i = 0; i < len; i++)
-        {
-            dataL[i] = 0;
-            dataR[i] = 0;
-            dataRevL[i] = 0;
-            dataRevR[i] = 0;
-        }
+            dataL[i] = dataR[i] = dataRevL[i] = dataRevR[i] = 0;
 
-        _mutexVoices.lock();
+        _mutexVoices.lockInline();
+
         int nbVoices = _listVoices.size();
         for (int i = nbVoices - 1; i >= 0; i--)
         {
@@ -95,14 +92,16 @@ protected:
                 delete _listVoices.takeAt(i);
             }
         }
-        _mutexVoices.unlock();
+        _mutexVoices.unlockInline();
     }
 
 private:
     static void closeAll(int exclusiveClass, int numPreset, QList<Voice *> friends);
-    void closeAllInstance(int exclusiveClass, int numPreset, QList<Voice*> friends);
+
     int getNbVoices();
+    void closeAllInstance(int exclusiveClass, int numPreset, QList<Voice*> friends);
     void addVoiceInstance(Voice * voice);
+    void addVoicesInstance(QList<Voice *> voices);
     void stopAllVoicesInstance();
     void releaseNoteInstance(int numNote);
     void setGainInstance(double gain);
@@ -121,7 +120,7 @@ private:
     float * _dataTmpL, * _dataTmpR;
 
     static int _gainSmpl;
-    static bool _isStereo;
+    static bool _isStereo, _isSinusEnabled, _isLoopEnabled;
     static QList<SoundEngine*> _listInstances;
 };
 

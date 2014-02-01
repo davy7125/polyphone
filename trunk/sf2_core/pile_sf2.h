@@ -70,6 +70,7 @@ public:
     // Chargement / sauvegarde / nouveau
     void nouveau(QString name);
     int ouvrir(QString fileName);
+    int ouvrir(QString fileName, QDataStream *stream, int &indexSf2, bool copySamples = false);
     int sauvegarder(int indexSf2, QString fileName);
     bool isEdited(int indexSf2);
 
@@ -334,8 +335,6 @@ private:
     int remove(EltID id, bool permanently, bool storeAction, int *message = NULL);
     // Type de fichier
     static FileType getFileType(QString fileName);
-    // Chargement
-    int ouvrirSf2(QString fileName);
     // Gestion de la sauvegarde
     int sauvegarderSf2(int indexSf2, QString fileName);
     void storeEdition(int indexSf2);

@@ -29,9 +29,6 @@
 Synth::Synth(Pile_sf2 *sf2, QWidget * parent) : QObject(parent),
     m_sf2(sf2),
     m_gain(0),
-    m_isStereo(false),
-    m_isLoopEnabled(false),
-    m_isSinusEnabled(false),
     m_choLevel(0), m_choDepth(0), m_choFrequency(0),
     m_clipCoef(1),
     m_recordFile(NULL),
@@ -95,7 +92,6 @@ void Synth::play(int type, int idSf2, int idElt, int note, int velocity, VoicePa
             EltID idSmpl(elementSmpl, idSf2, idElt, 0, 0);
             VoiceParam * voiceParam1 = new VoiceParam(m_sf2, idSmpl);
             voiceParam1->volReleaseTime = 0.2;
-            voiceParam1->loopMode = this->m_isLoopEnabled;
             Voice *voiceTmp1 = NULL;
             Voice *voiceTmp2 = NULL;
 
@@ -107,7 +103,6 @@ void Synth::play(int type, int idSf2, int idElt, int note, int velocity, VoicePa
                 EltID idSmpl2(elementSmpl, idSf2, m_sf2->get(idSmpl, champ_wSampleLink).wValue, 0, 0);
                 VoiceParam * voiceParam2 = new VoiceParam(m_sf2, idSmpl2);
                 voiceParam2->volReleaseTime = 0.2;
-                voiceParam2->loopMode = this->m_isLoopEnabled;
 
                 // Balance
                 if (typeLien == leftSample || typeLien == RomLeftSample)
@@ -132,6 +127,7 @@ void Synth::play(int type, int idSf2, int idElt, int note, int velocity, VoicePa
             voiceTmp1 = new Voice(m_sf2->getData(idSmpl, champ_sampleData32),
                                   m_sf2->get(idSmpl, champ_dwSampleRate).dwValue,
                                   m_format.sampleRate(), -1, 127, voiceParam1);
+            voiceTmp1->setChorus(0, 0, 0);
             connect(voiceTmp1, SIGNAL(currentPosChanged(int)), this, SLOT(emitCurrentPosChanged(int)));
 
             // Création sinus
@@ -140,19 +136,14 @@ void Synth::play(int type, int idSf2, int idElt, int note, int velocity, VoicePa
             voiceParam3->volDecayTime = 0.2;
             voiceParam3->volReleaseTime = 0.2;
             Voice *voiceTmp3 = new Voice(m_format.sampleRate(), voiceParam3);
-
-            // Initialisation chorus
-            voiceTmp1->setChorus(0, 0, 0);
             voiceTmp3->setChorus(0, 0, 0);
 
             // Ajout des voix dans la liste
-            SoundEngine::addVoice(voiceTmp1);
+            QList<Voice *> listVoices;
+            listVoices << voiceTmp1 << voiceTmp3;
             if (voiceTmp2)
-                SoundEngine::addVoice(voiceTmp2);
-            SoundEngine::addVoice(voiceTmp3);
-
-            this->setStereo(m_isStereo);
-            this->setSinusEnabled(m_isSinusEnabled);
+                listVoices << voiceTmp2;
+            SoundEngine::addVoices(listVoices);
         }
         else
         {
@@ -169,7 +160,7 @@ void Synth::play(int type, int idSf2, int idElt, int note, int velocity, VoicePa
 
             // Initialisation chorus et gain
             voiceTmp->setChorus(m_choLevel, m_choDepth, m_choFrequency);
-            voiceTmp->setGain(this->m_gain);
+            voiceTmp->setGain(m_gain);
 
             // Ajout de la voix
             _listVoixTmp << voiceTmp;
@@ -345,19 +336,16 @@ void Synth::setGainSample(int gain)
 void Synth::setStereo(bool isStereo)
 {
     // Modification lecture mono ou stereo
-    m_isStereo = isStereo;
     SoundEngine::setStereo(isStereo);
 }
 void Synth::setLoopEnabled(bool isEnabled)
 {
     // Modification lecture en boucle ou non
-    m_isLoopEnabled = isEnabled;
     SoundEngine::setLoopEnabled(isEnabled);
 }
 void Synth::setSinusEnabled(bool isEnabled)
 {
     // Modification lecture avec sinus non
-    m_isSinusEnabled = isEnabled;
     SoundEngine::setSinusEnabled(isEnabled);
 }
 void Synth::setStartLoop(int startLoop, bool repercute)
