@@ -88,13 +88,12 @@ public:
         if (m_recordFile && m_isRecording)
         {
             // Entrelacement et écriture
-            float dataWav[2 * maxlen];
             for (int i = 0; i < maxlen; i++)
             {
-                dataWav[2 * i + 1] = data1[i];
-                dataWav[2 * i]     = data2[i];
+                _dataWav[2 * i + 1] = data1[i];
+                _dataWav[2 * i]     = data2[i];
             }
-            m_recordStream.writeRawData((char*)dataWav, maxlen * 8);
+            m_recordStream.writeRawData((char*)_dataWav, maxlen * 8);
 
             // Prise en compte de l'avance
             m_recordLength += maxlen * 8;
@@ -184,7 +183,7 @@ private:
     quint32 m_recordLength;
     QMutex m_mutexRecord;
 
-    float * _fTmpSumRev1, * _fTmpSumRev2;
+    float * _fTmpSumRev1, * _fTmpSumRev2, * _dataWav;
 };
 
 

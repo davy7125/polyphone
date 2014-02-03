@@ -30,7 +30,7 @@ Future sfArk versions will allow Notes and License files to be of other types th
 look at the file extenson in order to decide how to handle it.
 */
 
-#include <QDataStream>
+#include <QtCore/qdatastream.h>
  
 // Some max sizes...
 #define	SFARKLIB_MAX_FILENAME	256				// Longest filename handled (or directory name)
@@ -40,31 +40,25 @@ look at the file extenson in order to decide how to handle it.
 // Flags used with msg() function...
 #define	SFARKLIB_MSG_SameLine	(1 << 0)	// Overwrite previous message
 #define	SFARKLIB_MSG_AppendLine	(1 << 1)	// Append to previous message
-#define	SFARKLIB_MSG_PopUp	(1 << 2)	// Should "pop up" a dialogue (usually an error message)
+#define	SFARKLIB_MSG_PopUp      (1 << 2)	// Should "pop up" a dialogue (usually an error message)
 
 // Error codes...
-#define SFARKLIB_SUCCESS		 0	// No error
-#define	SFARKLIB_ERR_INIT		-1	// Failed to initialise
-#define	SFARKLIB_ERR_MALLOC		-2	// Failed to allocate memory
+#define SFARKLIB_SUCCESS             0	// No error
+#define	SFARKLIB_ERR_INIT           -1	// Failed to initialise
+#define	SFARKLIB_ERR_MALLOC         -2	// Failed to allocate memory
 #define	SFARKLIB_ERR_SIGNATURE		-3	// header does not contain "sfArk" signature
 #define	SFARKLIB_ERR_HEADERCHECK	-4	// sfArk file has a corrupt header
 #define	SFARKLIB_ERR_INCOMPATIBLE	-5	// sfArk file is incompatible (i.e. not sfArk V2.x)
 #define	SFARKLIB_ERR_UNSUPPORTED	-6	// sfArk file uses unsupported feature
 #define	SFARKLIB_ERR_CORRUPT		-7	// got invalid compressed data (file is corrupted)
 #define	SFARKLIB_ERR_FILECHECK		-8	// file checksum failed (file is corrupted)
-#define	SFARKLIB_ERR_FILEIO		-9	// File i/o error
-#define	SFARKLIB_ERR_LICENSE		-10 	// License included not agreed by user
-#define	SFARKLIB_ERR_OTHER		-11 	// Other error (currently unused)
+#define	SFARKLIB_ERR_FILEIO         -9	// File i/o error
+#define	SFARKLIB_ERR_LICENSE		-10 // License included not agreed by user
+#define	SFARKLIB_ERR_OTHER          -11 // Other error (currently unused)
 																	
 // Future SfArkLib versions may include additional further error codes,
 // so, any other negative value is "unknown error"
 
-// Callback functions needed by sfArkLib (must be supplied by Application) ...
-extern void sfkl_msg(const char *MessageText, int Flags);	// Message display function
-extern void sfkl_UpdateProgress(int ProgressPercent);		// Progress indication
-extern bool sfkl_GetLicenseAgreement(const char *LicenseText, const char *LicenseFileName); // Display/confirm license
-extern void sfkl_DisplayNotes(const char *NotesText, const char *NotesFileName);	// Display notes text file
-
 // Functions in sfArkLib for use by Application...
-extern unsigned short	sfkl_GetVersion(void);
-extern int 		sfkl_Decode(QDataStream &inStream, QDataStream &outStream);
+extern unsigned short 	sfkl_GetVersion(void);
+extern int sfkl_Decode(QDataStream &inStream, QDataStream &outStream);

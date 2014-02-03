@@ -116,11 +116,11 @@ SFModulator readSFModulator(const char *chaine, int pos)
     b1 = chaine[pos];
     b0 = chaine[pos+1];
     SFModulator MonSFMod;
-    MonSFMod.Type = (int) b0>>2;
-    MonSFMod.P = bool((b0>>1) & 1);
+    MonSFMod.Type = (int) b0 >> 2;
+    MonSFMod.P = bool((b0 >> 1) & 1);
     MonSFMod.D = bool(b0 & 1);
-    MonSFMod.CC = bool(b1>>7);
-    MonSFMod.Index = WORD(b1 & 0b1111111);
+    MonSFMod.CC = bool(b1 >> 7);
+    MonSFMod.Index = WORD(b1 & 0x7F);
     return MonSFMod;
 }
 SFTransform readSFTransform(const char *chaine, int pos)
@@ -197,28 +197,29 @@ void MESSAGE(char * text)
 }
 void MESSAGE(EltID id)
 {
-    char type[20];
-    char str[200];
+    QString type;
     switch (id.typeElement)
     {
-    case elementSf2: strcpy(type, "SF2"); break;
-    case elementSmpl: strcpy(type, "SMPL"); break;
-    case elementInst: strcpy(type, "INST"); break;
-    case elementPrst: strcpy(type, "PRST"); break;
-    case elementInstSmpl: strcpy(type, "InstSmpl"); break;
-    case elementPrstInst: strcpy(type, "PrstInst"); break;
-    case elementInstMod: strcpy(type, "InstMod"); break;
-    case elementPrstMod: strcpy(type, "PrstMod"); break;
-    case elementInstSmplMod: strcpy(type, "InstSmplMod"); break;
-    case elementPrstInstMod: strcpy(type, "PrstInstMod"); break;
-    case elementInstGen: strcpy(type, "InstGen"); break;
-    case elementPrstGen: strcpy(type, "PrstGen"); break;
-    case elementInstSmplGen: strcpy(type, "InstSmplGen"); break;
-    case elementPrstInstGen: strcpy(type, "PrstInstGen"); break;
-    case elementUnknown: strcpy(type, "Unknown"); break;
-    default: strcpy(type, "erreur"); break;
+    case elementSf2: type = "SF2"; break;
+    case elementSmpl: type = "SMPL"; break;
+    case elementInst: type = "INST"; break;
+    case elementPrst: type = "PRST"; break;
+    case elementInstSmpl: type = "InstSmpl"; break;
+    case elementPrstInst: type = "PrstInst"; break;
+    case elementInstMod: type = "InstMod"; break;
+    case elementPrstMod: type = "PrstMod"; break;
+    case elementInstSmplMod: type = "InstSmplMod"; break;
+    case elementPrstInstMod: type = "PrstInstMod"; break;
+    case elementInstGen: type = "InstGen"; break;
+    case elementPrstGen: type = "PrstGen"; break;
+    case elementInstSmplGen: type = "InstSmplGen"; break;
+    case elementPrstInstGen: type = "PrstInstGen"; break;
+    case elementUnknown: type = "Unknown"; break;
+    default: type = "erreur"; break;
     }
-    sprintf(str, "ID\ntype %s\nsf2  %d\nElt  %d\nElt2 %d\nMod  %d", type, id.indexSf2, id.indexElt, id.indexElt2, id.indexMod);
+    QString str = "ID\ntype " + type + "\nsf2  " + QString::number(id.indexSf2) +
+            "\nElt  " + QString::number(id.indexElt) + "\nElt2 " + QString::number(id.indexElt2) +
+            "\nMod  " + QString::number(id.indexMod);
     QMessageBox::information(NULL, "pour info", str);
 }
 void MESSAGE(SFModulator sfMod)

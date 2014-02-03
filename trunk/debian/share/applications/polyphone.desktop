@@ -1,8 +1,8 @@
 [Desktop Entry]
 Name=Polyphone
 Name[fr]=Polyphone
-Comment=edit .sf2 files
-Comment[fr]=édite des fichiers .sf2
+Comment=edit soundfont
+Comment[fr]=édite des soundfonts
 TryExec=polyphone
 Exec=polyphone %F
 Icon=polyphone
@@ -10,5 +10,5 @@ StartupNotify=true
 Terminal=false
 Type=Application
 Categories=Application;AudioVideo;Audio;Midi;Music
-Keywords=sf2;soundfonts;editor;instruments
+Keywords=sf2;sfz;sfArk;soundfonts;editor;instruments
 MimeType=audio/x-soundfont;

@@ -107,7 +107,6 @@ public:
     void setSynthChorus(int level, int depth, int frequency);
     void setListeActions(QList<QAction *> listeActions);
     void dragAndDrop(EltID idDest, QList<EltID> idSources);
-    void dragAndDrop(QString path, EltID idDest, int *arg = NULL);
     void noteNameChanged();
     void setRangeAndRootKey(int rootKey, int noteMin, int noteMax);
     void clearKeyboardCustomisation();
@@ -115,6 +114,7 @@ public:
 
 public slots:
     void ouvrir(QString fileName);
+    void dragAndDrop(QString path, EltID idDest = EltID(elementUnknown, -1, -1, -1, -1), int *arg = NULL);
     void delayedInit();
     void supprimerElt();        // Suppression des éléments sélectionnés dans l'arbre
     void copier();              // Envoi du signal "copier"

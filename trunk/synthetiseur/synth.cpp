@@ -46,8 +46,9 @@ Synth::Synth(Pile_sf2 *sf2, QWidget * parent) : QObject(parent),
         _soundEngines << soundEngine;
     }
 
-    _fTmpSumRev1 = new float [4 * BUFFER_ENGINE_MAX_DATA];
-    _fTmpSumRev2 = new float [4 * BUFFER_ENGINE_MAX_DATA];
+    _fTmpSumRev1 = new float [2 * BUFFER_ENGINE_MAX_DATA];
+    _fTmpSumRev2 = new float [2 * BUFFER_ENGINE_MAX_DATA];
+    _dataWav = new float[4 * BUFFER_ENGINE_MAX_DATA];
 }
 
 Synth::~Synth()
@@ -71,6 +72,7 @@ Synth::~Synth()
 
     delete [] _fTmpSumRev1;
     delete [] _fTmpSumRev2;
+    delete [] _dataWav;
 }
 
 // signal de lecture ou de fin

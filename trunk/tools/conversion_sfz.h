@@ -47,7 +47,7 @@ private:
     QList<double> _listeValeurs;
 
     double getValue(Champ champ, genAmountType amount, bool isPrst);
-    double d1200e2(qint32 val) { return exp2((double)val / 1200.); }
+    double d1200e2(qint32 val) { return qPow(2., (double)val / 1200.); }
     double limit(double val, Champ champ);
     void load(Pile_sf2 *sf2, EltID id);
     void getGlobalValue(Pile_sf2 * sf2, EltID id, Champ champ);
