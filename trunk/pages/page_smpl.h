@@ -73,6 +73,7 @@ private slots:
     void setStartLoop(int val);
     void setEndLoop();
     void setEndLoop(int val);
+    void on_pushFullLength_clicked();
     void setRootKey();
     void setRootKey(int val);
     void setTune();
