@@ -458,6 +458,87 @@ void Page_Smpl::setEndLoop(int val)
         this->synth->setEndLoop(val, id2.indexElt != -1);
     }
 }
+void Page_Smpl::on_pushFullLength_clicked()
+{
+    sf2->prepareNewActions();
+    Valeur val;
+
+    DWORD displayedEndLoop = 0;
+    bool firstValue = true;
+    bool triggersMessage = false;
+
+    for (unsigned int i = 0; i < tree->getSelectedItemsNumber(); i++)
+    {
+        EltID id = tree->getID(i);
+        if (!this->sf2->get(id, champ_hidden).bValue)
+        {
+            // Début de la boucle à 0
+            val.dwValue = 0;
+            if (sf2->get(id, champ_dwStartLoop).dwValue != 0)
+                sf2->set(id, champ_dwStartLoop, val);
+
+            // Fin de la boucle correspondant à la fin de l'échantillon
+            DWORD length = sf2->get(id, champ_dwLength).dwValue;
+            val.dwValue = length;
+            if (sf2->get(id, champ_dwEndLoop).dwValue != length)
+                sf2->set(id, champ_dwEndLoop, val);
+
+            if (firstValue)
+            {
+                firstValue = false;
+                displayedEndLoop = length;
+            }
+            else if (displayedEndLoop != length)
+            {
+                displayedEndLoop = 0;
+                triggersMessage = true;
+            }
+
+            // Sample associé ?
+            EltID id2 = getRepercussionID(i);
+            if (id2.indexElt != -1)
+            {
+                if (!this->sf2->get(id2, champ_hidden).bValue)
+                {
+                    // Début de la boucle à 0
+                    val.dwValue = 0;
+                    if (sf2->get(id2, champ_dwStartLoop).dwValue != 0)
+                        sf2->set(id2, champ_dwStartLoop, val);
+
+                    // Fin de la boucle correspondant à la fin de l'échantillon
+                    length = sf2->get(id2, champ_dwLength).dwValue;
+                    val.dwValue = length;
+                    if (sf2->get(id2, champ_dwEndLoop).dwValue != length)
+                        sf2->set(id2, champ_dwEndLoop, val);
+                }
+            }
+        }
+    }
+
+    ui->spinStartLoop->setValue(0);
+    ui->spinStartLoop->setMaximum(displayedEndLoop);
+    ui->spinEndLoop->setValue(displayedEndLoop);
+    ui->spinEndLoop->setMinimum(0);
+
+    // Mise à jour fenêtre et graphe Fourier
+    if (ui->spinEndLoop->value() == ui->spinStartLoop->value())
+    {
+        ui->checkLectureBoucle->setEnabled(false);
+        ui->checkLectureBoucle->setChecked(false);
+    }
+    else
+    {
+        ui->checkLectureBoucle->setEnabled(tree->getSelectedItemsNumber() == 1);
+        ui->checkLectureBoucle->setChecked(true);
+    }
+    this->mainWindow->updateDo();
+    if (tree->getSelectedItemsNumber() == 1)
+        ui->grapheFourier->setPos(ui->spinStartLoop->value(), ui->spinEndLoop->value());
+
+    if (triggersMessage)
+        QMessageBox::information(this, trUtf8("Information"),
+                                 trUtf8("Modification appliquée avec succès aux différents échantillons"));
+}
 void Page_Smpl::setRootKey()
 {
     if (preparation)

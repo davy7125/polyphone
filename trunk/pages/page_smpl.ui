@@ -756,13 +756,6 @@
            <property name="spacing">
             <number>3</number>
            </property>
-           <item row="2" column="0">
-            <widget class="QLabel" name="label_3">
-             <property name="text">
-              <string>Note de base</string>
-             </property>
-            </widget>
-           </item>
            <item row="1" column="0">
             <widget class="QLabel" name="label_2">
              <property name="text">
@@ -770,21 +763,7 @@
              </property>
             </widget>
            </item>
-           <item row="0" column="0">
-            <widget class="QLabel" name="label">
-             <property name="text">
-              <string>Taille</string>
-             </property>
-            </widget>
-           </item>
-           <item row="5" column="0">
-            <widget class="QLabel" name="label_7">
-             <property name="text">
-              <string>Type</string>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="1">
+           <item row="1" column="2">
             <widget class="QSpinBox" name="spinStartLoop">
              <property name="minimumSize">
               <size>
@@ -800,28 +779,7 @@
              </property>
             </widget>
            </item>
-           <item row="4" column="0">
-            <widget class="QLabel" name="label_6">
-             <property name="text">
-              <string>Echantillonnage</string>
-             </property>
-            </widget>
-           </item>
-           <item row="6" column="0">
-            <widget class="QLabel" name="label_5">
-             <property name="text">
-              <string>Lien</string>
-             </property>
-            </widget>
-           </item>
-           <item row="3" column="0">
-            <widget class="QLabel" name="label_4">
-             <property name="text">
-              <string>Correction (centième)</string>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="2">
+           <item row="1" column="3">
             <widget class="QSpinBox" name="spinEndLoop">
              <property name="minimumSize">
               <size>
@@ -837,21 +795,21 @@
              </property>
             </widget>
            </item>
-           <item row="0" column="1" colspan="2">
+           <item row="0" column="2" colspan="2">
             <widget class="QLabel" name="labelTaille">
              <property name="text">
               <string notr="true">TextLabel</string>
              </property>
             </widget>
            </item>
-           <item row="2" column="1" colspan="2">
+           <item row="2" column="2" colspan="2">
             <widget class="SpinBoxKey" name="spinRootKey">
              <property name="maximum">
               <number>127</number>
              </property>
             </widget>
            </item>
-           <item row="3" column="1" colspan="2">
+           <item row="3" column="2" colspan="2">
             <widget class="QSpinBox" name="spinTune">
              <property name="minimum">
               <number>-100</number>
@@ -861,7 +819,7 @@
              </property>
             </widget>
            </item>
-           <item row="4" column="1" colspan="2">
+           <item row="4" column="2" colspan="2">
             <widget class="QComboBox" name="comboSampleRate">
              <item>
               <property name="text">
@@ -900,11 +858,73 @@
              </item>
             </widget>
            </item>
-           <item row="5" column="1" colspan="2">
+           <item row="5" column="2" colspan="2">
             <widget class="QComboBox" name="comboType"/>
            </item>
-           <item row="6" column="1" colspan="2">
+           <item row="6" column="2" colspan="2">
             <widget class="QComboBox" name="comboLink"/>
+           </item>
+           <item row="1" column="1">
+            <widget class="QPushButton" name="pushFullLength">
+             <property name="maximumSize">
+              <size>
+               <width>34</width>
+               <height>19</height>
+              </size>
+             </property>
+             <property name="toolTip">
+              <string>Utilise la longueur totale de l'échantillon comme boucle</string>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+             <property name="icon">
+              <iconset resource="../ressources.qrc">
+               <normaloff>:/icones/double-arrow</normaloff>:/icones/double-arrow</iconset>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="0" colspan="2">
+            <widget class="QLabel" name="label">
+             <property name="text">
+              <string>Taille</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="0" colspan="2">
+            <widget class="QLabel" name="label_3">
+             <property name="text">
+              <string>Note de base</string>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="0" colspan="2">
+            <widget class="QLabel" name="label_4">
+             <property name="text">
+              <string>Correction (centième)</string>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="0" colspan="2">
+            <widget class="QLabel" name="label_6">
+             <property name="text">
+              <string>Echantillonnage</string>
+             </property>
+            </widget>
+           </item>
+           <item row="5" column="0" colspan="2">
+            <widget class="QLabel" name="label_7">
+             <property name="text">
+              <string>Type</string>
+             </property>
+            </widget>
+           </item>
+           <item row="6" column="0" colspan="2">
+            <widget class="QLabel" name="label_5">
+             <property name="text">
+              <string>Lien</string>
+             </property>
+            </widget>
            </item>
           </layout>
          </item>
@@ -1140,7 +1160,9 @@
   <tabstop>pushEgalRestore</tabstop>
   <tabstop>pushEgaliser</tabstop>
  </tabstops>
- <resources/>
+ <resources>
+  <include location="../ressources.qrc"/>
+ </resources>
  <connections>
   <connection>
    <sender>spinTune</sender>
