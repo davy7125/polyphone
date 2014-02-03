@@ -101,7 +101,6 @@ private:
     int getNbVoices();
     void closeAllInstance(int exclusiveClass, int numPreset, QList<Voice*> friends);
     void addVoiceInstance(Voice * voice);
-    void addVoicesInstance(QList<Voice *> voices);
     void stopAllVoicesInstance();
     void releaseNoteInstance(int numNote);
     void setGainInstance(double gain);
