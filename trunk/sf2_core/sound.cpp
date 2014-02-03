@@ -2058,15 +2058,18 @@ QByteArray Sound::bouclage(QByteArray baData, DWORD dwSmplRate, qint32 &loopStar
     if (wBps != 32)
         baData = bpsConversion(baData, wBps, 32);
     qint32 * data = (qint32 *)baData.data();
+
     // Recherche du régime permament
     qint32 posStart = loopStart;
     if (posStart == loopEnd || loopEnd - posStart < (signed)dwSmplRate)
         regimePermanent(baData, dwSmplRate, 32, posStart, loopEnd);
     if (loopEnd - posStart < (signed)dwSmplRate)
         return QByteArray();
+
     // Extraction du segment B de 0.05s   la fin du régime permanent
     qint32 longueurSegmentB = 0.05 * dwSmplRate;
     QByteArray segmentB = baData.mid(4 * (loopEnd - longueurSegmentB), 4 * longueurSegmentB);
+
     // Calcul des corrélations
     qint32 nbCor = (loopEnd - posStart) / 2 - 2 * longueurSegmentB;
     QByteArray baCorrelations;
@@ -2074,13 +2077,17 @@ QByteArray Sound::bouclage(QByteArray baData, DWORD dwSmplRate, qint32 &loopStar
     qint32 * correlations = (qint32 *)baCorrelations.data();
     for (int i = 0; i < nbCor; i++)
         correlations[i] = correlation(segmentB, baData.mid(4 * (i + longueurSegmentB + posStart), 4 * longueurSegmentB), 32);
+
     // Recherche des meilleures corrélations (pour l'instant : utilisation de la 1ère uniquement)
     quint32 * meilleuresCorrel = findMax(baCorrelations, 32, 1, 0.9);
+
     // calcul de posStartLoop
     qint32 posStartLoop = 2 * longueurSegmentB + meilleuresCorrel[0] + posStart;
+
     // Longueur du crossfade pour bouclage (augmente avec l'incohérence)
     qint32 longueurBouclage = qMin(meilleuresCorrel[0] + 2 * longueurSegmentB,
                                    (quint32)floor(dwSmplRate*4*(double)(2147483647-baCorrelations[meilleuresCorrel[0]])/2147483647));
+
     // Détermination des coefficients pour crossfade
     double * cr1 = new double[longueurBouclage];
     double * cr2 = new double[longueurBouclage];
@@ -2089,6 +2096,7 @@ QByteArray Sound::bouclage(QByteArray baData, DWORD dwSmplRate, qint32 &loopStar
         cr1[i] = (double)i/(longueurBouclage-1);
         cr2[i] = 1.0 - cr1[i];
     }
+
     // Bouclage
     for (int i = 0; i < longueurBouclage; i++)
     {
@@ -2096,10 +2104,12 @@ QByteArray Sound::bouclage(QByteArray baData, DWORD dwSmplRate, qint32 &loopStar
                 cr2[i] * data[loopEnd - longueurBouclage + i] +
                 cr1[i] * data[posStartLoop - longueurBouclage + i];
     }
+
     delete [] cr1;
     delete [] cr2;
     baData = baData.left(loopEnd * 4);
     data = (qint32*)baData.data();
+
     // Ajout de 8 valeurs
     QByteArray baTmp;
     baTmp.resize(4*8);
@@ -2107,6 +2117,7 @@ QByteArray Sound::bouclage(QByteArray baData, DWORD dwSmplRate, qint32 &loopStar
     for (int i = 0; i < 8; i++)
         dataTmp[i] = data[posStartLoop+i];
     baData.append(baTmp);
+
     // Modification de loopStart et renvoi des données
     loopStart = posStartLoop;
     if (wBps != 32)

@@ -78,6 +78,7 @@
         <file alias="unlink">ressources/unlink.png</file>
         <file alias="external_link.gif">ressources/external_link.gif</file>
         <file alias="csv">ressources/csv.png</file>
+        <file alias="double-arrow">ressources/double-arrow.png</file>
     </qresource>
     <qresource prefix="/aide">
         <file alias="page0.png">ressources/doc/page 0.png</file>
