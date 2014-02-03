@@ -218,7 +218,7 @@ void Synth::play(int type, int idSf2, int idElt, int note, int velocity, VoicePa
                     velMin = defaultVelRange.byLo;
                     velMax = defaultVelRange.byHi;
                 }
-                if (keyMin <= note     && keyMax >= note &&
+                if (keyMin <= note && keyMax >= note &&
                         velMin <= velocity && velMax >= velocity)
                 {
                     // Récupération des paramètres et lecture du sample associé

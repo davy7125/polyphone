@@ -325,7 +325,7 @@ void PianoScene::keyOn(PianoKey* key, qreal pressure)
     if (pressure < 0)
         vel = m_velocity;
     else
-        vel = m_velocity * pressure;
+        vel = pressure;
     triggerNoteOn(key->getNote(), vel);
     showKeyOn(key, vel);
 }
@@ -365,13 +365,13 @@ PianoKey* PianoScene::getKeyForPos( const QPointF& p ) const
     return key;
 }
 
-double PianoScene::getPressureFromPos(const QPointF& p, bool isBlack) const
+int PianoScene::getPressureFromPos(const QPointF& p, bool isBlack) const
 {
     double vel = p.y() / this->height();
     if (isBlack)
         vel /= .6;
     vel /= .95;
-    return qMin(1., qMax(0., vel));
+    return 127 * qMin(1., qMax(0., vel));
 }
 
 void PianoScene::mouseMoveEvent(QGraphicsSceneMouseEvent * mouseEvent)
@@ -396,7 +396,7 @@ void PianoScene::mouseMoveEvent(QGraphicsSceneMouseEvent * mouseEvent)
             PianoKey* key = getKeyForPos(mouseEvent->scenePos());
             if (key)
                 mouseOver(key->getNote() + m_transpose,
-                          m_velocity * getPressureFromPos(mouseEvent->scenePos(), key->isBlack()));
+                          getPressureFromPos(mouseEvent->scenePos(), key->isBlack()));
             else
                 mouseOver(-1, -1);
         }

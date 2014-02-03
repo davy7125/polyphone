@@ -110,7 +110,7 @@ signals:
     void sampleRateChanged(qint32 sampleRate);
     void samplesRead(int number);
 
-protected slots:
+private slots:
     void emitCurrentPosChanged(int pos);
 
 private:

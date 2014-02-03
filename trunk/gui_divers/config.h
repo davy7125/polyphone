@@ -88,6 +88,7 @@ public:
     QList<QColor> getColors()   {return colorList;}
     bool getRepercussionStereo(){return modifStereo;}
     NameMiddleC getNameMiddleC(){return nameMiddleC;}
+    int  getDefaultVelocity()   {return _velocity;}
     QString getKeyName(int keyNum, bool forceTexte = false, bool with0 = false, bool forceC4 = false);
     int getKeyNum(QString keyName, bool forceC4 = false);
 
@@ -652,6 +653,7 @@ private slots:
     void on_comboBufferSize_activated(int index);
     void on_comboKeyName_currentIndexChanged(int index);
     void on_comboDo_currentIndexChanged(int index);
+    void on_spinDefaultVelocity_editingFinished();
 
 private:
     QSettings settings;
@@ -675,6 +677,7 @@ private:
     int synthGain;
     int revLevel, revSize, revDamping, revWidth;
     int choLevel, choDepth, choFrequency;
+    int _velocity;
     QList<QColor> colorList;
     QList<QAction *> actionList;
     QByteArray actionListToolbar;

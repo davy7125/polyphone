@@ -124,6 +124,7 @@ Config::Config(QWidget *parent, PianoKeybdCustom *keyboard) : QDialog(parent),
     ui->dialChoFrequence->setValue(this->choFrequency);
     ui->checkRepercussionStereo->setChecked(this->modifStereo);
     ui->comboKeyName->setCurrentIndex((int)this->nameMiddleC);
+    ui->spinDefaultVelocity->setValue(_velocity);
     if (this->keyboardType < 0 || this->keyboardType > 4)
         this->keyboardType = 1;
     ui->comboRam->setVisible(false); // Temporaire : tout charger dans la ram n'apporte rien pour l'instant (sur linux)
@@ -144,6 +145,9 @@ Config::Config(QWidget *parent, PianoKeybdCustom *keyboard) : QDialog(parent),
     this->ui->tableKeyboardMap->setKeyboard(_keyboard);
     connect(ui->tableKeyboardMap, SIGNAL(combinaisonChanged(int,int,QString)), this, SLOT(combinaisonChanged(int,int,QString)));
     renameComboDo();
+
+    // Vélocité par défaut du clavier
+    _keyboard->set(PianoKeybd::PROPERTY_VELOCITY, _velocity);
 
     this->loaded = true;
 }
@@ -283,6 +287,7 @@ void Config::setNumPortMidi(int val)
 }
 void Config::addFile(TypeFichier typeFichier, QString filePath)
 {
+    filePath = filePath.replace("\\", "/");
     // Modification des fichiers récemment ouverts
     switch (typeFichier)
     {
@@ -516,6 +521,7 @@ void Config::load()
                     << settings.value("colors/graph_timecursor", QColor(255, 255, 255)).toString();
     this->modifStereo       = settings.value("stereo_modification", false).toBool();
     this->nameMiddleC       = (NameMiddleC)settings.value("name_middle_c", 0).toInt();
+    this->_velocity         = settings.value("keyboard/velocity", 127).toInt();
 }
 void Config::store()
 {
@@ -554,6 +560,7 @@ void Config::store()
     settings.setValue("colors/graph_timecursor",        this->colorList.at(5).name());
     settings.setValue("stereo_modification",            this->modifStereo);
     settings.setValue("name_middle_c",                  (int)this->nameMiddleC);
+    settings.setValue("keyboard/velocity",              this->_velocity);
 }
 
 void Config::setColors()
@@ -975,4 +982,14 @@ void Config::renameComboDo()
     int nbElement = ui->comboDo->count();
     for (int i = 0; i < nbElement; i++)
         ui->comboDo->setItemText(i, getKeyName(12 * i));
+}
+
+void Config::on_spinDefaultVelocity_editingFinished()
+{
+    if (this->loaded)
+    {
+        this->_velocity = ui->spinDefaultVelocity->value();
+        this->store();
+        _keyboard->set(PianoKeybd::PROPERTY_VELOCITY, _velocity);
+    }
 }

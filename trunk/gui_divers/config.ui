@@ -10,7 +10,7 @@
     <x>0</x>
     <y>0</y>
     <width>441</width>
-    <height>264</height>
+    <height>289</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -46,20 +46,11 @@
        <string>Général</string>
       </attribute>
       <layout class="QGridLayout" name="gridLayout_2">
-       <property name="leftMargin">
-        <number>6</number>
-       </property>
-       <property name="topMargin">
-        <number>6</number>
-       </property>
-       <property name="rightMargin">
-        <number>6</number>
-       </property>
-       <property name="bottomMargin">
-        <number>6</number>
-       </property>
        <property name="verticalSpacing">
         <number>3</number>
+       </property>
+       <property name="margin">
+        <number>6</number>
        </property>
        <item row="1" column="0" colspan="3">
         <widget class="QGroupBox" name="groupBox_5">
@@ -333,16 +324,7 @@
        <string>Synthétiseur</string>
       </attribute>
       <layout class="QHBoxLayout" name="horizontalLayout_3">
-       <property name="leftMargin">
-        <number>6</number>
-       </property>
-       <property name="topMargin">
-        <number>6</number>
-       </property>
-       <property name="rightMargin">
-        <number>6</number>
-       </property>
-       <property name="bottomMargin">
+       <property name="margin">
         <number>6</number>
        </property>
        <item>
@@ -1219,16 +1201,7 @@
        <string>Barre d'outils</string>
       </attribute>
       <layout class="QHBoxLayout" name="horizontalLayout_2">
-       <property name="leftMargin">
-        <number>6</number>
-       </property>
-       <property name="topMargin">
-        <number>6</number>
-       </property>
-       <property name="rightMargin">
-        <number>6</number>
-       </property>
-       <property name="bottomMargin">
+       <property name="margin">
         <number>6</number>
        </property>
        <item>
@@ -1498,91 +1471,15 @@
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="tab">
+     <widget class="QWidget" name="tabMapping">
       <attribute name="title">
        <string>Clavier</string>
       </attribute>
       <layout class="QGridLayout" name="gridLayout_8">
-       <property name="leftMargin">
+       <property name="margin">
         <number>6</number>
        </property>
-       <property name="topMargin">
-        <number>6</number>
-       </property>
-       <property name="rightMargin">
-        <number>6</number>
-       </property>
-       <property name="bottomMargin">
-        <number>6</number>
-       </property>
-       <item row="1" column="1">
-        <widget class="QLabel" name="label_3">
-         <property name="text">
-          <string>Premier Do</string>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="2">
-        <widget class="QComboBox" name="comboDo">
-         <property name="currentIndex">
-          <number>0</number>
-         </property>
-         <item>
-          <property name="text">
-           <string notr="true">0</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string notr="true">12</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string notr="true">24</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string notr="true">36</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string notr="true">48</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string notr="true">60</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string notr="true">72</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string notr="true">84</string>
-          </property>
-         </item>
-        </widget>
-       </item>
-       <item row="1" column="0">
-        <spacer name="horizontalSpacer_6">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>40</width>
-           <height>20</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item row="0" column="0" colspan="3">
+       <item row="0" column="0" colspan="9">
         <widget class="TableKey" name="tableKeyboardMap">
          <property name="frameShape">
           <enum>QFrame::StyledPanel</enum>
@@ -1684,6 +1581,90 @@
            <string>Do</string>
           </property>
          </column>
+        </widget>
+       </item>
+       <item row="1" column="5">
+        <spacer name="horizontalSpacer_6">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="1" column="7">
+        <widget class="QLabel" name="label_20">
+         <property name="text">
+          <string>Vélocité par défaut</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="8">
+        <widget class="QSpinBox" name="spinDefaultVelocity">
+         <property name="maximum">
+          <number>127</number>
+         </property>
+         <property name="value">
+          <number>127</number>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QLabel" name="label_3">
+         <property name="text">
+          <string>Premier Do</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="2">
+        <widget class="QComboBox" name="comboDo">
+         <property name="currentIndex">
+          <number>0</number>
+         </property>
+         <item>
+          <property name="text">
+           <string notr="true">0</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string notr="true">12</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string notr="true">24</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string notr="true">36</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string notr="true">48</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string notr="true">60</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string notr="true">72</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string notr="true">84</string>
+          </property>
+         </item>
         </widget>
        </item>
       </layout>

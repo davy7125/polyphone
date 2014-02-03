@@ -61,6 +61,7 @@ void SoundEngine::addVoice(Voice * voice, QList<Voice*> friends)
     if (exclusiveClass != 0)
         closeAll(exclusiveClass, voice->getPresetNumber(), friends);
 
+    // Recherche du soundengine le moins surchargé
     int index = -1;
     int minVoiceNumber = -1;
     for (int i = 0; i < _listInstances.size(); i++)
@@ -76,27 +77,23 @@ void SoundEngine::addVoice(Voice * voice, QList<Voice*> friends)
         _listInstances.at(index)->addVoiceInstance(voice);
 }
 
+// Ajout de voix pour l'écoute d'un sample (1 ou 2 canaux + sinus)
 void SoundEngine::addVoices(QList<Voice *> voices)
 {
-    // Ajout de voix pour l'écoute d'un sample
-    int index = -1;
-    int minVoiceNumber = -1;
-    for (int i = 0; i < _listInstances.size(); i++)
+    int nbInstances = _listInstances.size();
+    for (int i = 0; i < voices.size(); i++)
     {
-        int nbVoices = _listInstances.at(i)->getNbVoices();
-        if (minVoiceNumber == -1 || nbVoices < minVoiceNumber)
+        if (voices.at(i)->getNote() == -3)
         {
-            index = i;
-            minVoiceNumber = nbVoices;
+            if (_isSinusEnabled)
+                voices.at(i)->attackToMax();
+            else
+                voices.at(i)->decayToMin();
         }
-    }
-    if (index != -1)
-    {
-        for (int i = 0; i < voices.size(); i++)
+        else
             voices.at(i)->setLoopMode(_isLoopEnabled);
-        _listInstances.at(index)->addVoicesInstance(voices);
-        _listInstances.at(index)->setSinusEnabledInstance(_isSinusEnabled);
-        _listInstances.at(index)->setStereoInstance(_isStereo);
+        _listInstances.at(i % nbInstances)->addVoiceInstance(voices.at(i));
+        _listInstances.at(i % nbInstances)->setStereoInstance(_isStereo);
     }
 }
 
@@ -104,13 +101,6 @@ void SoundEngine::addVoiceInstance(Voice * voice)
 {
     _mutexVoices.lock();
     _listVoices << voice;
-    _mutexVoices.unlock();
-}
-
-void SoundEngine::addVoicesInstance(QList<Voice *> voices)
-{
-    _mutexVoices.lock();
-    _listVoices << voices;
     _mutexVoices.unlock();
 }
 
