@@ -2432,8 +2432,9 @@ void MainWindow::setVolume(int vol)
 }
 void MainWindow::noteChanged(int key, int vel)
 {
+    // Note hover
     if (vel == 0)
-         _currentKey = -1;
+        _currentKey = -1;
     else
         _currentKey = key;
 
@@ -2444,9 +2445,12 @@ void MainWindow::noteChanged(int key, int vel)
         return;
     }
 
-    // Mise en évidence de la ou des éléments liés étant en train de jouer
-    this->page_inst->enlightColumn(key, vel != 0);
-    this->page_prst->enlightColumn(key, vel != 0);
+    if (key != -1)
+    {
+        // Mise en évidence de la ou des éléments liés étant en train de jouer
+        this->page_inst->enlightColumn(key, vel != 0);
+        this->page_prst->enlightColumn(key, vel != 0);
+    }
 
     if (vel)
     {

@@ -60,8 +60,6 @@ Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 
 #if defined(WIN32) && !defined(__CYGWIN__) && !defined(GNU_WIN32)
 
-    #include <windows.h>
-
     #ifdef _MSC_VER     /* Microsoft compiler */
         #define __inline__ inline
         #if (!defined(int8_t) && !defined(_STDINT_H))
@@ -72,8 +70,8 @@ Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
             typedef unsigned short uint16_t;
             typedef long int32_t;
             typedef unsigned long uint32_t;
-            typedef LONGLONG int64_t;
-            typedef ULONGLONG uint64_t;
+            typedef __int64 int64_t;
+            typedef unsigned __int64 uint64_t;
         #endif
     #elif __MINGW32__   /* MINGW */
         #include <stdint.h>
@@ -89,7 +87,7 @@ Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
          *  to make jack API independent of different thread implementations,
          *  we define jack_native_thread_t to HANDLE here.
          */
-        typedef HANDLE jack_native_thread_t;
+        typedef void * jack_native_thread_t;
     #else
         #ifdef PTHREAD_WIN32            // Added by JE - 10-10-2011
             #include <ptw32/pthread.h>  // Makes sure we #include the ptw32 version !

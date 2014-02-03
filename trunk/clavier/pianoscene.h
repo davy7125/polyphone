@@ -96,7 +96,7 @@ protected:
     void keyOn(PianoKey* key, qreal pressure = -1);
     void keyOff(PianoKey* key);
     PianoKey* getKeyForPos(const QPointF& p) const;
-    double getPressureFromPos(const QPointF& p, bool isBlack) const;
+    int getPressureFromPos(const QPointF& p, bool isBlack) const;
     QString noteName(int note);
     void mouseMoveEvent(QGraphicsSceneMouseEvent * mouseEvent);
     void mousePressEvent(QGraphicsSceneMouseEvent * mouseEvent);
