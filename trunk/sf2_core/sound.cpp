@@ -1180,7 +1180,7 @@ QByteArray Sound::resampleMono(QByteArray baData, double echInit, qint32 echFina
     // Calcul des points par interpolation à bande limitée
     double pos, delta;
     qint32 pos1, pos2;
-    double sincCoef[1 + 2 * nbPoints];
+    double * sincCoef = new double[1 + 2 * nbPoints];
     double valMax = 0;
     for (qint32 i = 0; i < sizeFinal; i++)
     {
@@ -1206,6 +1206,7 @@ QByteArray Sound::resampleMono(QByteArray baData, double echInit, qint32 echFina
 
         valMax = qMax(valMax, qAbs(dataRet[i]));
     }
+    delete [] sincCoef;
 
     // Passage qint32 et limitation si besoin
     QByteArray baRet;
@@ -1330,7 +1331,7 @@ QByteArray Sound::bandFilter(QByteArray baData, WORD wBps, double dwSmplRate, do
         delete [] fc_sortie_fft;
         // Prise en compte du facteur d'echelle
         for (unsigned long i = 0; i < size; i++)
-            cpxData[i].real() /= size;
+            cpxData[i].real(cpxData[i].real() / size);
         // Retour en QByteArray
         QByteArray baRet;
         baRet = fromComplexToBa(cpxData, (long int)baData.size() * 8 / wBps, wBps);
@@ -1365,7 +1366,7 @@ QByteArray Sound::EQ(QByteArray baData, DWORD dwSmplRate, WORD wBps, int i1, int
     delete [] fc_sortie_fft;
     // Prise en compte du facteur d'echelle
     for (unsigned long i = 0; i < size; i++)
-        cpxData[i].real() /= size;
+        cpxData[i].real(cpxData[i].real() / size);
     // Retour en QByteArray
     QByteArray baRet;
     baRet = fromComplexToBa(cpxData, baData.size() * 8 / wBps, wBps);
@@ -1381,8 +1382,8 @@ Complex * Sound::FFT(Complex * x, int N)
     int k;
     for (k = 0; k != N; ++k)
     {
-        twiddles[k].real() = cos(-2.0*PI*k/N);
-        twiddles[k].imag() = sin(-2.0*PI*k/N);
+        twiddles[k].real(cos(-2.0*PI*k/N));
+        twiddles[k].imag(sin(-2.0*PI*k/N));
     }
     FFT_calculate(x, N, out, scratch, twiddles);
     delete [] twiddles;
@@ -1397,8 +1398,8 @@ Complex * Sound::IFFT(Complex * x, int N)
     int k;
     for (k = 0; k != N; ++k)
     {
-        twiddles[k].real() = cos(2.0*PI*k/N);
-        twiddles[k].imag() = sin(2.0*PI*k/N);
+        twiddles[k].real(cos(2.0*PI*k/N));
+        twiddles[k].imag(sin(2.0*PI*k/N));
     }
     FFT_calculate(x, N, out, scratch, twiddles);
     delete [] twiddles;
@@ -1840,21 +1841,21 @@ Complex * Sound::fromBaToComplex(QByteArray baData, WORD wBps, long unsigned int
     {
         qint16 * data = (qint16 *)baData.data();
         // Nombre de données (puissance de 2 la plus proche)
-        int nb = ceil(log2(baData.size()/2));
+        int nb = ceil(qLn(baData.size()/2) / 0.69314718056 /* ln(2) */);
         size = 1;
         for (int i = 0; i < nb; i++) size *= 2;
         // Remplissage
         cpxData = new Complex[size];
         for (int i = 0; i < baData.size()/2; i++)
         {
-            cpxData[i].real() = data[i];
-            cpxData[i].imag() = 0;
+            cpxData[i].real(data[i]);
+            cpxData[i].imag(0);
         }
         // On complète avec des 0
         for (unsigned int i = baData.size()/2; i < size; i++)
         {
-            cpxData[i].real() = 0;
-            cpxData[i].imag() = 0;
+            cpxData[i].real(0);
+            cpxData[i].imag(0);
         }
     }
     else
@@ -1864,21 +1865,21 @@ Complex * Sound::fromBaToComplex(QByteArray baData, WORD wBps, long unsigned int
             baData = bpsConversion(baData, 24, 32);
         qint32 * data = (qint32 *)baData.data();
         // Nombre de données (puissance de 2 la plus proche)
-        int nb = ceil(log2(baData.size()/4));
+        int nb = ceil(qLn(baData.size()/4) / 0.69314718056 /* ln(2) */);
         size = 1;
         for (int i = 0; i < nb; i++) size *= 2;
         // Remplissage
         cpxData = new Complex[size];
         for (int i = 0; i < baData.size()/4; i++)
         {
-            cpxData[i].real() = data[i];
-            cpxData[i].imag() = 0;
+            cpxData[i].real(data[i]);
+            cpxData[i].imag(0);
         }
         // On complète avec des 0
         for (unsigned int i = baData.size()/4; i < size; i++)
         {
-            cpxData[i].real() = 0;
-            cpxData[i].imag() = 0;
+            cpxData[i].real(0);
+            cpxData[i].imag(0);
         }
     }
     return cpxData;
@@ -2170,7 +2171,7 @@ QByteArray Sound::sifflements(QByteArray baData, DWORD dwSmplRate, WORD wBps, do
     delete [] fc_sortie_fft;
     // Prise en compte du facteur d'echelle
     for (unsigned long i = 0; i < size; i++)
-        cpxData[i].real() /= size;
+        cpxData[i].real(cpxData[i].real() / size);
     // Retour en QByteArray
     QByteArray baRet = fromComplexToBa(cpxData, (long int)baData.size() * 8 / 32, 32);
     delete [] cpxData;
@@ -2316,10 +2317,10 @@ void Sound::FFT_calculate(Complex * x, long N /* must be a power of 2 */,
                 /* twiddle *D to get dre and dim */
                 double dre = D->real() * tre - D->imag() * tim;
                 double dim = D->real() * tim + D->imag() * tre;
-                Xp->real() = E->real() + dre;
-                Xp->imag() = E->imag() + dim;
-                Xp2->real() = E->real() - dre;
-                Xp2->imag() = E->imag() - dim;
+                Xp->real(E->real() + dre);
+                Xp->imag(E->imag() + dim);
+                Xp2->real(E->real() - dre);
+                Xp2->imag(E->imag() - dim);
                 ++Xp;
                 ++Xp2;
                 ++E;

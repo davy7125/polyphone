@@ -1367,7 +1367,9 @@ void MainWindow::dragAndDrop(QString path, EltID idDest, int * arg)
     {
         // Extraction sfArk
         SfArkExtractor sfArkExtractor(this->sf2);
-        sfArkExtractor.extract(path);
+        if (!sfArkExtractor.extract(path))
+            QMessageBox::warning(this, trUtf8("Attention"),
+                                 trUtf8("Une erreur est survenue lors de l'import du fichier ") + path);
     }
 }
 void MainWindow::importerSmpl()

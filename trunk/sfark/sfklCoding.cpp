@@ -257,20 +257,20 @@ int ReadHeader(V2_FILEHEADER *FileHeader, BYTE *fbuf, int bufsize)
         ; 							// Fall through to below (everything else is an error)
     else if (SeemsV1)					// Seems to be a sfArkV1 file
     {
-        sprintf(MsgTxt, "This file was created with sfArk V1, and this program only handles sfArk V2+ files.  Unfortunately sfArk V1 uses a proprietary compression algorithm for the non-audio metadata, so we cannot really support that. You might try running the Windows sfArk program from http://melodymachine.com/sfark.htm under Wine.");
-        msg(MsgTxt, MSG_PopUp);
+        //sprintf(MsgTxt, "This file was created with sfArk V1, and this program only handles sfArk V2+ files.  Unfortunately sfArk V1 uses a proprietary compression algorithm for the non-audio metadata, so we cannot really support that. You might try running the Windows sfArk program from http://melodymachine.com/sfark.htm under Wine.");
+        //msg(MsgTxt, MSG_PopUp);
         return (GlobalErrorFlag = SFARKLIB_ERR_INCOMPATIBLE);
     }
     else if (SigFound)					// Apparently a corrupt sfArk file (well, it had "sfArk" in it!)
     {
-        sprintf(MsgTxt, "File Header fails checksum!%s", CorruptedMsg);
-        msg(MsgTxt, MSG_PopUp);
+        //sprintf(MsgTxt, "File Header fails checksum!%s", CorruptedMsg);
+        //msg(MsgTxt, MSG_PopUp);
         return (GlobalErrorFlag = SFARKLIB_ERR_HEADERCHECK);
     }
     else							// Either very corrupted, or not a sfArk file
     {
-        sprintf(MsgTxt, "This does not appear to be a sfArk file!");
-        msg(MsgTxt, MSG_PopUp);
+        //sprintf(MsgTxt, "This does not appear to be a sfArk file!");
+        //msg(MsgTxt, MSG_PopUp);
         return (GlobalErrorFlag = SFARKLIB_ERR_SIGNATURE);
     }
 
@@ -283,9 +283,9 @@ int ReadHeader(V2_FILEHEADER *FileHeader, BYTE *fbuf, int bufsize)
     // Check for compatible version...
     if (FileHeader->ProgVersionNeeded > ProgVersionMaj)
     {
-        sprintf(MsgTxt, "You need %s version %2.1f (or higher) to decompress this file (your version is %s) %s",
-                ProgName, (float)FileHeader->ProgVersionNeeded/10, ProgVersion, UpgradeMsg);
-        msg(MsgTxt, MSG_PopUp);
+//        sprintf(MsgTxt, "You need %s version %2.1f (or higher) to decompress this file (your version is %s) %s",
+//                ProgName, (float)FileHeader->ProgVersionNeeded/10, ProgVersion, UpgradeMsg);
+        //msg(MsgTxt, MSG_PopUp);
         return (GlobalErrorFlag = SFARKLIB_ERR_INCOMPATIBLE);
     }
 
@@ -294,10 +294,10 @@ int ReadHeader(V2_FILEHEADER *FileHeader, BYTE *fbuf, int bufsize)
     float fCreatedByVersion = (float) atof(CreatedByVersion);
     if (fCreatedByVersion > fProgVersion)
     {
-        sprintf(MsgTxt, "This file was created with %s %s.  Your version of %s (%s) can uncompress this file, "
-                "but you might like to obtain the latest version.  %s",
-                CreatedByProg, CreatedByVersion, ProgName, ProgVersion, UpgradeMsg);
-        msg(MsgTxt, MSG_PopUp);
+//        sprintf(MsgTxt, "This file was created with %s %s.  Your version of %s (%s) can uncompress this file, "
+//                "but you might like to obtain the latest version.  %s",
+//                CreatedByProg, CreatedByVersion, ProgName, ProgVersion, UpgradeMsg);
+        //msg(MsgTxt, MSG_PopUp);
     }
 
     SetInputFilePosition(HdrOffset + HeaderLen);	// re-wind file to start of post-header data
@@ -310,8 +310,8 @@ bool InvalidEncodeCount(int EncodeCount, int MaxLoops)
 {
     if (EncodeCount < 0  ||  EncodeCount > MaxLoops)	// EncodeCount out of range?
     {
-        sprintf(MsgTxt, "ERROR - Invalid EncodeCount (apparently %d) %s", EncodeCount, CorruptedMsg);
-        msg(MsgTxt, MSG_PopUp);
+        //sprintf(MsgTxt, "ERROR - Invalid EncodeCount (apparently %d) %s", EncodeCount, CorruptedMsg);
+        //msg(MsgTxt, MSG_PopUp);
         return true;
     }
     else
@@ -328,8 +328,8 @@ int DecompressTurbo(BLOCK_DATA *Blk, USHORT NumWords)
     int UnCrunchResult = UnCrunchWin(Blk->SrcBuf, NumWords, 8*OPTWINSIZE);
     if (UnCrunchResult < 0)
     {
-        sprintf(MsgTxt, "ERROR - UnCrunchWin returned: %d %s", UnCrunchResult, CorruptedMsg);
-        msg(MsgTxt, MSG_PopUp);
+        //sprintf(MsgTxt, "ERROR - UnCrunchWin returned: %d %s", UnCrunchResult, CorruptedMsg);
+        //msg(MsgTxt, MSG_PopUp);
         return (GlobalErrorFlag = SFARKLIB_ERR_CORRUPT);
     }
 
@@ -381,8 +381,8 @@ bool CheckShift(short *ShiftVal, USHORT NumWords, short *PrevShift, short *PrevU
             // Update all ShiftVal[] data prior to change...
             if (ChangePos > MaxShifts)										// Corrupt data?
             {
-                sprintf(MsgTxt, "ERROR - Invalid Shift ChangePos (apparently %d) %s", ChangePos, CorruptedMsg);
-                msg(MsgTxt, MSG_PopUp);
+                //sprintf(MsgTxt, "ERROR - Invalid Shift ChangePos (apparently %d) %s", ChangePos, CorruptedMsg);
+                //msg(MsgTxt, MSG_PopUp);
                 GlobalErrorFlag = SFARKLIB_ERR_CORRUPT;
                 return false;
             }
@@ -440,10 +440,10 @@ int DecompressFast(BLOCK_DATA *Blk, USHORT NumWords)
     }
 
     // Read the file and unpack the bitstream into buffer at Buf1p...
-    if (int UnCrunchResult = UnCrunchWin(Blk->SrcBuf, NumWords, OPTWINSIZE) < 0)		// failed?
+    if (UnCrunchWin(Blk->SrcBuf, NumWords, OPTWINSIZE) < 0)		// failed?
     {
-        sprintf(MsgTxt, "ERROR - UnCrunchWin returned: %d %s", UnCrunchResult, CorruptedMsg);
-        msg(MsgTxt, MSG_PopUp);
+        //sprintf(MsgTxt, "ERROR - UnCrunchWin returned: %d %s", UnCrunchResult, CorruptedMsg);
+        //msg(MsgTxt, MSG_PopUp);
         return(GlobalErrorFlag = SFARKLIB_ERR_CORRUPT);
     }
 
@@ -549,8 +549,8 @@ int ProcessNextBlock(BLOCK_DATA *Blk)
         //printf("Reading PRE/POST AUDIO block, compressed %ld bytes\n", n);
         if (n > ZBUF_SIZE)	// Check for valid block length
         {
-            sprintf(MsgTxt, "ERROR - Invalid length for Non-audio Block (apparently %d bytes) %s", n, CorruptedMsg);
-            msg(MsgTxt, MSG_PopUp);
+            //sprintf(MsgTxt, "ERROR - Invalid length for Non-audio Block (apparently %d bytes) %s", n, CorruptedMsg);
+            //msg(MsgTxt, MSG_PopUp);
             return (GlobalErrorFlag = SFARKLIB_ERR_CORRUPT);
         }
 
@@ -777,9 +777,9 @@ int Decode(QDataStream &inStream, QDataStream &outStream)
     }
     default:
     {
-        sprintf(MsgTxt, "Unknown Compression Method: %d%s", FileHeader->CompMethod, CorruptedMsg);
+        //sprintf(MsgTxt, "Unknown Compression Method: %d%s", FileHeader->CompMethod, CorruptedMsg);
         GlobalErrorFlag = SFARKLIB_ERR_INCOMPATIBLE;
-        msg(MsgTxt, MSG_PopUp);
+        //msg(MsgTxt, MSG_PopUp);
         return EndProcess(GlobalErrorFlag);
     }
     }
@@ -790,7 +790,7 @@ int Decode(QDataStream &inStream, QDataStream &outStream)
     ULONG ProgressUpdateInterval = Blk.FileHeader.OriginalSize / 100; // Calculate progress update
     ULONG NextProgressUpdate = ProgressUpdateInterval;
     int ProgressPercent = 0;
-    UpdateProgress(0);
+    //UpdateProgress(0);
 
     //int BlockNum = 0;
     for (Blk.FileSection = PRE_AUDIO; Blk.FileSection != FINISHED; )
@@ -802,7 +802,8 @@ int Decode(QDataStream &inStream, QDataStream &outStream)
 
             while (Blk.TotBytesWritten >= NextProgressUpdate)  	// Further 1% done since last UpdateProgress?
             {
-                UpdateProgress(++ProgressPercent);
+                //UpdateProgress(++ProgressPercent);
+                ++ProgressPercent;
                 NextProgressUpdate += ProgressUpdateInterval;
             }
             if (GlobalErrorFlag)  return EndProcess(GlobalErrorFlag);
@@ -811,21 +812,21 @@ int Decode(QDataStream &inStream, QDataStream &outStream)
         if (GlobalErrorFlag)  return EndProcess(GlobalErrorFlag);
     }
 
-    if (ProgressPercent != 100)  UpdateProgress(100);
+    //if (ProgressPercent != 100)  UpdateProgress(100);
 
     // Check the CheckSum...
     if (Blk.FileCheck != FileHeader->FileCheck)
     {
         sprintf(MsgTxt, "CheckSum Fail!%s",CorruptedMsg);
-        msg(MsgTxt, MSG_PopUp);
+        //msg(MsgTxt, MSG_PopUp);
         //sprintf(MsgTxt, "Calc check %lx", Blk.FileCheck);
         //msg(MsgTxt, MSG_PopUp);
         GlobalErrorFlag = SFARKLIB_ERR_FILECHECK;
         return EndProcess(GlobalErrorFlag);
     }
 
-    sprintf(MsgTxt, "Created sf2 (%ld kb) successfully.", Blk.TotBytesWritten/1024);
-    msg(MsgTxt, 0);
+    //sprintf(MsgTxt, "Created sf2 (%ld kb) successfully.", Blk.TotBytesWritten/1024);
+    //msg(MsgTxt, 0);
     
     return EndProcess(GlobalErrorFlag);
 }

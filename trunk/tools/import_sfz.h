@@ -209,8 +209,8 @@ public:
 private:
     QList<Parametre> _listeParam;
     static QStringList getFullPath(QString base, QStringList directories);
-    static double log2m1200(double value) { return 1200. * log2(value); }
-    static double d1200e2(int value) { return exp2(value / 1200.); }
+    static double log2m1200(double value) { return 1200. * qLn(value) / 0.69314718056 /* ln(2) */; }
+    static double d1200e2(int value) { return qPow(2., value / 1200.); }
     static void addSeconds(double value, Champ champ, Pile_sf2 * sf2, EltID id);
 };
 

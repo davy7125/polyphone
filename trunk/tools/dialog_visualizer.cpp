@@ -214,22 +214,22 @@ double DialogVisualizer::getValue(EltID id, Champ champ)
 
     case champ_initialFilterFc:
         if (_isPrst)
-            dRet = exp2((double)genVal.shAmount/1200);
+            dRet = qPow(2., (double)genVal.shAmount/1200);
         else
-            dRet = exp2((double)genVal.shAmount/1200) * 8.176;
+            dRet = qPow(2., (double)genVal.shAmount/1200) * 8.176;
         break;
 
     case champ_freqModLFO: case champ_freqVibLFO:
         if (_isPrst)
-            dRet = exp2((double)genVal.shAmount/1200);
+            dRet = qPow(2., (double)genVal.shAmount/1200);
         else
-            dRet = exp2((double)genVal.shAmount/1200) * 8.176;
+            dRet = qPow(2., (double)genVal.shAmount/1200) * 8.176;
         break;
 
     case champ_delayModEnv: case champ_attackModEnv: case champ_holdModEnv: case champ_decayModEnv: case champ_releaseModEnv:
     case champ_delayVolEnv: case champ_attackVolEnv: case champ_holdVolEnv: case champ_decayVolEnv: case champ_releaseVolEnv:
     case champ_delayModLFO: case champ_delayVibLFO:
-        dRet = exp2((double)genVal.shAmount/1200);
+        dRet = qPow(2., (double)genVal.shAmount/1200);
         break;
 
     default: break;

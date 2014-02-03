@@ -7,12 +7,19 @@
 	<key>CFBundleDocumentTypes</key>
 	<array>
 		<dict>
-			<key>CFBundleTypeIconFile</key>         		<string>polyphoneFile.icns</string>
-			<key>CFBundleTypeOSTypes</key>			<array>  				<string>SF2 </string>
+			<key>CFBundleTypeIconFile</key>
+         		<string>polyphoneFile.icns</string>
+			<key>CFBundleTypeOSTypes</key>
+			<array>
+  				<string>SF2</string>
+  				<string>SFZ</string>
+  				<string>SFARK</string>
 			</array>
 			<key>CFBundleTypeExtensions</key>
 			<array>
 				<string>sf2</string>
+				<string>sfz</string>
+				<string>sfArk</string>
 			</array>
 			<key>CFBundleTypeName</key>
 			<string>Soundfont</string>

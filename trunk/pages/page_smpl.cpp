@@ -2213,7 +2213,7 @@ void GraphiqueFourier::setPos(qint32 posStart, qint32 posEnd, QList<double> &fre
     freq = (double)((double)posMaxFFT[numeroPic] * (double)dwSmplRate) / (double)(size - 1);
 
     // Numéro de la note correspondant à cette fréquence
-    double note3 = 12 * log2(freq) - 36.3763;
+    double note3 = 12 * qLn(freq) / 0.69314718056 - 36.3763;
 
     // note la plus proche
     int note = qRound(note3);
@@ -2241,7 +2241,7 @@ void GraphiqueFourier::setPos(qint32 posStart, qint32 posEnd, QList<double> &fre
                 frequencies << freq;
                 qStr3 += QString::number(freq, 'f', 2) + " Hz\n";
                 // note la plus proche
-                double note = 12 * log2(freq) - 36.3763;
+                double note = 12 * qLn(freq) / 0.69314718056 - 36.3763;
                 if (note < 0) note = 0;
                 else if (note > 128) note = 128;
                 int note2 = qRound(note);

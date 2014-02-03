@@ -10,7 +10,7 @@
     <x>0</x>
     <y>0</y>
     <width>441</width>
-    <height>289</height>
+    <height>264</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -46,11 +46,20 @@
        <string>Général</string>
       </attribute>
       <layout class="QGridLayout" name="gridLayout_2">
+       <property name="leftMargin">
+        <number>6</number>
+       </property>
+       <property name="topMargin">
+        <number>6</number>
+       </property>
+       <property name="rightMargin">
+        <number>6</number>
+       </property>
+       <property name="bottomMargin">
+        <number>6</number>
+       </property>
        <property name="verticalSpacing">
         <number>3</number>
-       </property>
-       <property name="margin">
-        <number>6</number>
        </property>
        <item row="1" column="0" colspan="3">
         <widget class="QGroupBox" name="groupBox_5">
@@ -216,7 +225,7 @@
          <property name="flat">
           <bool>true</bool>
          </property>
-         <layout class="QGridLayout" name="gridLayout_7" rowstretch="1,1,0" columnstretch="2,3">
+         <layout class="QGridLayout" name="gridLayout_7" rowstretch="1,0" columnstretch="2,0">
           <property name="leftMargin">
            <number>0</number>
           </property>
@@ -232,6 +241,19 @@
           <property name="spacing">
            <number>3</number>
           </property>
+          <item row="0" column="0">
+           <widget class="QLabel" name="label_22">
+            <property name="font">
+             <font>
+              <weight>50</weight>
+              <bold>false</bold>
+             </font>
+            </property>
+            <property name="text">
+             <string>Nom des notes</string>
+            </property>
+           </widget>
+          </item>
           <item row="0" column="1">
            <widget class="QComboBox" name="comboKeyName">
             <property name="font">
@@ -262,20 +284,7 @@
             </item>
            </widget>
           </item>
-          <item row="0" column="0">
-           <widget class="QLabel" name="label_22">
-            <property name="font">
-             <font>
-              <weight>50</weight>
-              <bold>false</bold>
-             </font>
-            </property>
-            <property name="text">
-             <string>Nom des notes</string>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="0">
+          <item row="1" column="0">
            <widget class="QLabel" name="label_2">
             <property name="font">
              <font>
@@ -288,7 +297,7 @@
             </property>
            </widget>
           </item>
-          <item row="2" column="1">
+          <item row="1" column="1">
            <widget class="QComboBox" name="comboRam">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
@@ -314,13 +323,6 @@
             </item>
            </widget>
           </item>
-          <item row="1" column="1">
-           <layout class="QFormLayout" name="formLayout">
-            <item row="0" column="0">
-             <layout class="QFormLayout" name="formLayout_2"/>
-            </item>
-           </layout>
-          </item>
          </layout>
         </widget>
        </item>
@@ -331,7 +333,16 @@
        <string>Synthétiseur</string>
       </attribute>
       <layout class="QHBoxLayout" name="horizontalLayout_3">
-       <property name="margin">
+       <property name="leftMargin">
+        <number>6</number>
+       </property>
+       <property name="topMargin">
+        <number>6</number>
+       </property>
+       <property name="rightMargin">
+        <number>6</number>
+       </property>
+       <property name="bottomMargin">
         <number>6</number>
        </property>
        <item>
@@ -1208,7 +1219,16 @@
        <string>Barre d'outils</string>
       </attribute>
       <layout class="QHBoxLayout" name="horizontalLayout_2">
-       <property name="margin">
+       <property name="leftMargin">
+        <number>6</number>
+       </property>
+       <property name="topMargin">
+        <number>6</number>
+       </property>
+       <property name="rightMargin">
+        <number>6</number>
+       </property>
+       <property name="bottomMargin">
         <number>6</number>
        </property>
        <item>
@@ -1483,7 +1503,16 @@
        <string>Clavier</string>
       </attribute>
       <layout class="QGridLayout" name="gridLayout_8">
-       <property name="margin">
+       <property name="leftMargin">
+        <number>6</number>
+       </property>
+       <property name="topMargin">
+        <number>6</number>
+       </property>
+       <property name="rightMargin">
+        <number>6</number>
+       </property>
+       <property name="bottomMargin">
         <number>6</number>
        </property>
        <item row="1" column="1">

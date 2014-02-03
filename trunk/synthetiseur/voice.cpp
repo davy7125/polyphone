@@ -95,30 +95,32 @@ void Voice::generateData(float *dataL, float *dataR, qint64 len)
     }
     else
     {
+        // Construction des tableaux
+        float * dataMod = new float[len];
+        float * modLfo = new float[len];
+        float * vibLfo = new float[len];
+        float * modPitch = new float[len+1];
+        double * modFreq = new double[len];
+
         /// ENVELOPPE DE MODULATION ///
-        float dataMod[len];
         _enveloppeMod.applyEnveloppe(dataMod, len, m_release, m_note, 127, _voiceParam, 0, true);
 
         /// LFOs ///
-        float modLfo[len];
         _modLFO.getSinus(modLfo, len, _voiceParam->modLfoFreq);
-        float vibLfo[len];
         _vibLFO.getSinus(vibLfo, len, _voiceParam->vibLfoFreq);
 
         // MODULATION DU PITCH
         float deltaPitchFixe = 0;
         if (m_note < 0)
-            deltaPitchFixe = -12 * log2((double)m_audioSmplRate / m_smplRate) +
+            deltaPitchFixe = -12. * qLn((double)m_audioSmplRate / m_smplRate) / 0.69314718056 +
                     _voiceParam->getPitchDifference(_voiceParam->rootkey);
         else
-            deltaPitchFixe = -12 * log2((double)m_audioSmplRate / m_smplRate) +
+            deltaPitchFixe = -12. * qLn((double)m_audioSmplRate / m_smplRate) / 0.69314718056 +
                     _voiceParam->getPitchDifference(this->m_note);
-        float modPitch[len+1];
         for (int i = 0; i < len; i++)
-            modPitch[i + 1] = deltaPitchFixe
-                    + (dataMod[i] * _voiceParam->modEnvToPitch
+            modPitch[i + 1] = deltaPitchFixe + (dataMod[i] * _voiceParam->modEnvToPitch
                        + modLfo[i] * _voiceParam->modLfoToPitch
-                       + vibLfo[i] * _voiceParam->vibLfoToPitch)/ 100;
+                       + vibLfo[i] * _voiceParam->vibLfoToPitch) / 100;
 
         // Conversion en distance cumulée entre points
         modPitch[0] = m_deltaPos + 1;
@@ -129,7 +131,7 @@ void Voice::generateData(float *dataL, float *dataR, qint64 len)
 
         // Constitution des données
         int nbDataTmp = ceil(modPitch[len]) - 1;
-        qint32 dataTmp[nbDataTmp + 2];
+        qint32 * dataTmp = new qint32[nbDataTmp + 2];
         dataTmp[0] = m_valPrec;
         dataTmp[1] = m_valBase;
         endSample = takeData(&dataTmp[2], nbDataTmp);
@@ -145,9 +147,9 @@ void Voice::generateData(float *dataL, float *dataR, qint64 len)
             pos -= floor(pos);
             dataL[i] = ((1. - pos) * val1 + pos * val2) / 2147483648LL; // Passage en double de -1 à 1
         }
+        delete [] dataTmp;
 
         // FILTRE PASSE-BAS
-        double modFreq[len];
         for (int i = 0; i < len; i++)
         {
             modFreq[i] = _voiceParam->filterFreq * EnveloppeVol::fastPow2((dataMod[i] * _voiceParam->modEnvToFilterFc +
@@ -183,6 +185,13 @@ void Voice::generateData(float *dataL, float *dataR, qint64 len)
             valTmp = qMax(signe * modLfo[i], 0.f);
             dataL[i] *= qPow(10., signe * (double)_voiceParam->modLfoToVolume / 20. * valTmp);
         }
+
+        // Destruction des tableaux
+        delete [] dataMod;
+        delete [] modLfo;
+        delete [] vibLfo;
+        delete [] modPitch;
+        delete [] modFreq;
     }
 
     // Application de l'enveloppe de volume

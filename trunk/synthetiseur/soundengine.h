@@ -65,7 +65,7 @@ protected:
         for (int i = 0; i < len; i++)
             dataL[i] = dataR[i] = dataRevL[i] = dataRevR[i] = 0;
 
-        _mutexVoices.lockInline();
+        _mutexVoices.lock();
 
         int nbVoices = _listVoices.size();
         for (int i = nbVoices - 1; i >= 0; i--)
@@ -92,7 +92,7 @@ protected:
                 delete _listVoices.takeAt(i);
             }
         }
-        _mutexVoices.unlockInline();
+        _mutexVoices.unlock();
     }
 
 private:

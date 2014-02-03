@@ -383,12 +383,12 @@ void GraphSpace::setData(QVector<double> x, QVector<int> y)
 
     // Longueur max tuyau
     _yLength.resize(_yKey.size());
-    double freq = exp2((_yKey.first() + 36.3763) / 12);
+    double freq = qPow(2., (_yKey.first() + 36.3763) / 12);
     double l = 172 / freq; // en mètres pour un tuyau ouvert
     for (int i = 0; i < _yKey.size(); i++)
     {
         // Longueur tuyau
-        freq = exp2((_yKey.at(i) + 36.3763) / 12);
+        freq = qPow(2., (_yKey.at(i) + 36.3763) / 12);
         _yLength[i] = 172 / freq / l;
     }
 

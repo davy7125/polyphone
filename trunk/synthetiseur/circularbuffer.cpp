@@ -62,25 +62,25 @@ CircularBuffer::~CircularBuffer()
 
 bool CircularBuffer::isInterrupted()
 {
-    _mutexInterrupt.lockInline();
+    _mutexInterrupt.lock();
     bool bRet = _interrupted;
-    _mutexInterrupt.unlockInline();
+    _mutexInterrupt.unlock();
     return bRet;
 }
 
 void CircularBuffer::stop()
 {
-    _mutexInterrupt.lockInline();
+    _mutexInterrupt.lock();
     _interrupted = true;
-    _mutexInterrupt.unlockInline();
-    _mutexSynchro.tryLockInline();
-    _mutexSynchro.unlockInline();
+    _mutexInterrupt.unlock();
+    _mutexSynchro.tryLock();
+    _mutexSynchro.unlock();
 }
 
 bool CircularBuffer::isFinished()
 {
-    _mutexInterrupt.lockInline();
+    _mutexInterrupt.lock();
     bool bRet = _isFinished;
-    _mutexInterrupt.unlockInline();
+    _mutexInterrupt.unlock();
     return bRet;
 }
