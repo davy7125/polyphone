@@ -94,22 +94,22 @@ char * Page::getTextValue(char * T, WORD champ, genAmountType genVal)
 
     case champ_initialFilterFc:
         if (m_typePage == PAGE_PRST)
-            sprintf(T,"%.3f", exp2((double)genVal.shAmount/1200));
+            sprintf(T,"%.3f", qPow(2., (double)genVal.shAmount/1200));
         else
-            sprintf(T,"%.0f", exp2((double)genVal.shAmount/1200)*8.176);
+            sprintf(T,"%.0f", qPow(2., (double)genVal.shAmount/1200)*8.176);
         break;
 
     case champ_freqModLFO: case champ_freqVibLFO:
         if (m_typePage == PAGE_PRST)
-            sprintf(T,"%.3f", exp2((double)genVal.shAmount/1200));
+            sprintf(T,"%.3f", qPow(2., (double)genVal.shAmount/1200));
         else
-            sprintf(T,"%.3f", exp2((double)genVal.shAmount/1200)*8.176);
+            sprintf(T,"%.3f", qPow(2., (double)genVal.shAmount/1200)*8.176);
         break;
 
     case champ_delayModEnv: case champ_attackModEnv: case champ_holdModEnv: case champ_decayModEnv: case champ_releaseModEnv:
     case champ_delayVolEnv: case champ_attackVolEnv: case champ_holdVolEnv: case champ_decayVolEnv: case champ_releaseVolEnv:
     case champ_delayModLFO: case champ_delayVibLFO:
-        sprintf(T,"%.3f", exp2((double)genVal.shAmount/1200)); break;
+        sprintf(T,"%.3f", qPow(2., (double)genVal.shAmount/1200)); break;
 
     case champ_sfModDestOper:
         sprintf(T,"%d", genVal.wAmount);
@@ -746,9 +746,9 @@ genAmountType Page::getValue(QString texte, WORD champ, bool &ok)
         break;
     case champ_initialFilterFc:
         if (m_typePage == PAGE_PRST)
-            genAmount.shAmount = (WORD)limit(1200*log2(texte.toDouble(&ok)), 0, 0, -12000, 12000);
+            genAmount.shAmount = (WORD)limit(1200. * qLn(texte.toDouble(&ok)) / 0.69314718056, 0, 0, -12000, 12000);
         else
-            genAmount.shAmount = (WORD)limit(1200*log2(texte.toDouble(&ok)/8.176), 1500, 13500);
+            genAmount.shAmount = (WORD)limit(1200. * qLn(texte.toDouble(&ok)/8.176) / 0.69314718056, 1500, 13500);
         break;
     case champ_initialFilterQ: genAmount.shAmount = (WORD)limit(10*texte.toDouble(&ok), 0, 960, -960, 960);
         break;
@@ -761,14 +761,14 @@ genAmountType Page::getValue(QString texte, WORD champ, bool &ok)
     case champ_delayModEnv: case champ_holdModEnv:
     case champ_delayVolEnv: case champ_holdVolEnv:
     case champ_delayModLFO: case champ_delayVibLFO:
-        genAmount.shAmount = (short)limit(1200*log2(texte.toDouble(&ok)), -12000, 5000, -20000, 17000);
+        genAmount.shAmount = (short)limit(1200. * qLn(texte.toDouble(&ok)) / 0.69314718056, -12000, 5000, -20000, 17000);
         break;
     case champ_attackModEnv: case champ_decayModEnv: case champ_releaseModEnv:
     case champ_attackVolEnv: case champ_decayVolEnv: case champ_releaseVolEnv:
-        genAmount.shAmount = (short)limit(1200*log2(texte.toDouble(&ok)), -12000, 8000, -20000, 20000);
+        genAmount.shAmount = (short)limit(1200. * qLn(texte.toDouble(&ok)) / 0.69314718056, -12000, 8000, -20000, 20000);
         break;
     case champ_sustainModEnv:
-        genAmount.shAmount = (WORD)limit(10*texte.toDouble(&ok), 0, 1000, -1000, 1000);
+        genAmount.shAmount = (WORD)limit(10. * texte.toDouble(&ok), 0, 1000, -1000, 1000);
         break;
     case champ_keynumToModEnvHold: case champ_keynumToVolEnvHold:
     case champ_keynumToModEnvDecay: case champ_keynumToVolEnvDecay:
@@ -776,9 +776,9 @@ genAmountType Page::getValue(QString texte, WORD champ, bool &ok)
         break;
     case champ_freqModLFO: case champ_freqVibLFO:
         if (m_typePage == PAGE_PRST)
-            genAmount.shAmount = (short)limit(1200*log2(texte.toDouble(&ok)), 0, 0, -21000, 20500);
+            genAmount.shAmount = (short)limit(1200. * qLn(texte.toDouble(&ok)) / 0.69314718056, 0, 0, -21000, 20500);
         else
-            genAmount.shAmount = (short)limit(1200*log2(texte.toDouble(&ok)/8.176), -16000, 4500);
+            genAmount.shAmount = (short)limit(1200. * qLn(texte.toDouble(&ok)/8.176) / 0.69314718056, -16000, 4500);
         break;
     case champ_exclusiveClass: genAmount.wAmount = (WORD)limit(texte.toDouble(&ok), 1, 127);
         break;

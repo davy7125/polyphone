@@ -26,13 +26,13 @@
 class PianoScene;
 class KeyboardMap;
 
-#if defined(VPIANO_PLUGIN)
-#include <QtDesigner/QDesignerExportWidget>
-#else
-#define QDESIGNER_WIDGET_EXPORT
-#endif
+//#if defined(VPIANO_PLUGIN)
+//#include <QtDesigner/QDesignerExportWidget>
+//#else
+//#define QDESIGNER_WIDGET_EXPORT
+//#endif
 
-class QDESIGNER_WIDGET_EXPORT PianoKeybd : public QGraphicsView
+class /*QDESIGNER_WIDGET_EXPORT*/ PianoKeybd : public QGraphicsView
 {
     Q_OBJECT
 

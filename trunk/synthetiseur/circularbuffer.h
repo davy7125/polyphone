@@ -39,7 +39,7 @@ public:
     void addData(float *dataL, float *dataR, float *dataRevL, float *dataRevR, int maxlen)
     {
         int total = 0;
-        _mutexData.lockInline();
+        _mutexData.lock();
 
         int writeLen = qMin(maxlen, _currentLengthAvailable);
 
@@ -63,11 +63,11 @@ public:
 
         if (_currentLengthAvailable <= _minBuffer)
         {
-            _mutexSynchro.tryLockInline();
-            _mutexSynchro.unlockInline();
+            _mutexSynchro.tryLock();
+            _mutexSynchro.unlock();
         }
 
-        _mutexData.unlockInline();
+        _mutexData.unlock();
     }
 
     void stop();
@@ -75,9 +75,9 @@ public:
     bool isFinished();      // Boucle terminée
     bool isDataUnlocked()
     {
-        bool bRet(_mutexData.tryLockInline());
+        bool bRet(_mutexData.tryLock());
         if (bRet)
-            _mutexData.unlockInline();
+            _mutexData.unlock();
         return bRet;
     }
 
@@ -96,11 +96,11 @@ public slots:
             // Génération de données
             generateData(_dataTmpL, _dataTmpR, _dataTmpRevL, _dataTmpRevR, avance);
             writeData(_dataTmpL, _dataTmpR, _dataTmpRevL, _dataTmpRevR, avance);
-            _mutexSynchro.lockInline();
+            _mutexSynchro.lock();
         }
-        _mutexInterrupt.lockInline();
+        _mutexInterrupt.lock();
         _isFinished = true;
-        _mutexInterrupt.unlockInline();
+        _mutexInterrupt.unlock();
     }
 
 protected:
@@ -110,7 +110,7 @@ private:
     void writeData(const float *dataL, const float *dataR, float *dataRevL, float *dataRevR, int &len)
     {
         int total = 0;
-        _mutexData.lockInline();
+        _mutexData.lock();
 
         // Quantité qu'il aurait fallu écrire (mise à jour pour la fois suivante)
         int newLen = _maxBuffer - _currentLengthAvailable;
@@ -130,7 +130,7 @@ private:
             total += chunk;
         }
         _currentLengthAvailable += len;
-        _mutexData.unlockInline();
+        _mutexData.unlock();
 
         // Mise à jour avance
         len = newLen;

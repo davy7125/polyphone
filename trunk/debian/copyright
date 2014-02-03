@@ -13,6 +13,10 @@ Files: clavier/*
 Copyright: 2008-2010 Pedro Lopez-Cabanillas, plcl@users.sf.net
 License: GPL-3+
 
+Files: sfark/*
+Copyright: 1998-2000 Andy Inman, http://melodymachine.com
+License: GPL-3+
+
 Files: lib/*
 Copyright: 1999-2011 Ross Bencina, Phil Burk
 License: LGPL

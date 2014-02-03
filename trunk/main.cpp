@@ -77,7 +77,7 @@ int main(int argc, char *argv[])
             w.dragAndDrop(listPathMac.at(i), EltID(elementUnknown, -1, -1, -1, -1), &numSf2);
     }
     a.stopAppending();
-    QObject::connect(&a, SIGNAL(openFile(QString)), &w, SLOT(ouvrir(QString)));
+    QObject::connect(&a, SIGNAL(openFile(QString)), &w, SLOT(dragAndDrop(QString)));
 #endif
 
     return a.exec();

@@ -5,10 +5,9 @@
 #-------------------------------------------------
 
 QT       += core gui printsupport svg
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 # Option for developers ONLY
-DEFINES += SHOW_ID_ERROR
+#DEFINES += SHOW_ID_ERROR
 
 TARGET = Polyphone
 TEMPLATE = app
@@ -29,10 +28,9 @@ CONFIG(debug, debug|release){
 }
 
 win32{
-    DEFINES += __WINDOWS_MM__ PA_USE_ASIO
+    DEFINES += __WINDOWS_MM__
     INCLUDEPATH += lib/win/
-    LIBS += -Llib/win -lportaudio -ljack -lzlib1 \
-            -lwinmm libole32
+    LIBS += -Llib/win -lportaudio -ljack -lzlib1 -lwinmm libole32
     HEADERS  += lib/win/jack.h \
         lib/win/weakmacros.h \
         lib/win/types.h \
@@ -53,8 +51,8 @@ macx {
     DEFINES += __MACOSX_CORE__
     INCLUDEPATH += lib/mac/Jackmp.framework/Headers
     LIBS += -Llib/mac -lportaudio -F$$(PWD)lib/mac/ -framework Jackmp \
-    -framework CoreAudio -framework CoreMIDI -framework CoreFoundation \
-    -framework AudioUnit -framework AudioToolbox -framework Cocoa
+        -framework CoreAudio -framework CoreMIDI -framework CoreFoundation \
+        -framework AudioUnit -framework AudioToolbox -framework Cocoa -lz
     ICON = polyphone.icns
     QMAKE_INFO_PLIST = polyphone.plist
 }
@@ -132,14 +130,13 @@ SOURCES	+= main.cpp \
     gui_divers/spinboxrange.cpp \
     pages/tablewidget.cpp \
     synthetiseur/soundengine.cpp \
+    sfark/sfarkextractor.cpp \
     sfark/sfklZip.cpp \
-    sfark/sfklString.cpp \
     sfark/sfklLPC.cpp \
     sfark/sfklFile.cpp \
     sfark/sfklDiff.cpp \
     sfark/sfklCrunch.cpp \
-    sfark/sfklCoding.cpp \
-    sfark/sfarkextractor.cpp
+    sfark/sfklCoding.cpp
 
 HEADERS  += mainwindow.h \
     sf2_core/sf2_types.h \

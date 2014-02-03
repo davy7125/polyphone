@@ -192,14 +192,14 @@ void Page_Inst::desaccorder(double doHerz, double division)
             // Note moyenne
             double noteMoy = (double)(numBas + numHaut) / 2;
             // Calcul du désaccordage, passage en frequence
-            double freqMoy = exp2((noteMoy + 36.3763) / 12);
+            double freqMoy = qPow(2., (noteMoy + 36.3763) / 12);
             // Ajout du désaccordage
             // - octave ondulante : division par 2 de bps
             // - diminution désaccordage vers les graves
             // - accentuation désaccordage vers les aigus
-            double freqMod = freqMoy + 1.2 * exp2((noteMoy - 60)/30) * bps / 2;
+            double freqMod = freqMoy + 1.2 * qPow(2., (noteMoy - 60)/30) * bps / 2;
             // Retour en pitch
-            double noteMod = 12 * log2(freqMod) - 36.3763;
+            double noteMod = 12 * qLn(freqMod) / 0.69314718056 - 36.3763;
             // Décalage
             int decalage = ceil(100*(noteMod - noteMoy)-0.5);
             if (bps > 0)
@@ -594,7 +594,7 @@ void Page_Inst::release(double duree36, double division, double deTune)
             if (release < 0.001) release = 0.001;
             else if (release > 101.594) release = 101.594;
             // Valeur correspondante
-            short val = 1200 * log2(release);
+            short val = 1200 * qLn(release) / 0.69314718056;
             // Modification instSmpl
             Valeur valeur;
             if (this->sf2->get(id, champ_releaseVolEnv).shValue != val)
@@ -641,7 +641,7 @@ double Page_Inst::getOffset(int type1, int type2)
     // Calcul du multiple de la fréquence fondamentale
     double multiple = (double)(2 * type1 + 1) * pow(2.0f, type2-2);
     // Renvoi du nombre de demi-tons à ajouter à la fondamentale pour obtenir l'harmonique
-    return 12.0 * log2(multiple);
+    return 12. * qLn(multiple) / 0.69314718056;
 }
 EltID Page_Inst::closestSample(EltID idInst, double pitch, double &ecart, int cote, EltID &idInstSmpl)
 {

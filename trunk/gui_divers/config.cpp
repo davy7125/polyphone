@@ -99,7 +99,7 @@ Config::Config(QWidget *parent, PianoKeybdCustom *keyboard) : QDialog(parent),
         this->ui->comboAudioOuput->setCurrentIndex(nbItem - 1 - isAsioEnabled); // Jack
     else if (this->audioType == -3)
         this->ui->comboAudioOuput->setCurrentIndex(nbItem - 1); // Asio
-    int pos = log2(bufferSize) - 4;
+    int pos = qLn(bufferSize) / 0.69314718056 - 4;
     if (pos < 0)
         pos = 0;
     if (pos > ui->comboBufferSize->count() - 1)

@@ -23,55 +23,51 @@
 // The following are now defined in sfarklib.h ... redefined here for compatibility...
 #define	MAX_FILENAME	SFARKLIB_MAX_FILENAME
 #define	MAX_FILEPATH	SFARKLIB_MAX_FILEPATH
-#define	MAX_MSGTEXT	SFARKLIB_MAX_MSGTEXT
+#define	MAX_MSGTEXT     SFARKLIB_MAX_MSGTEXT
 #define	MSG_SameLine	SFARKLIB_MSG_SameLine
 #define	MSG_AppendLine	SFARKLIB_MSG_AppendLine
-#define	MSG_PopUp	SFARKLIB_MSG_PopUp
+#define	MSG_PopUp       SFARKLIB_MSG_PopUp
 
-#define	msg(a, b)		sfkl_msg(a, b)			// Message display function
-#define UpdateProgress(a)	sfkl_UpdateProgress(a)		// Progress indication
-#define GetLicenseAgreement(a, b) sfkl_GetLicenseAgreement(a, b)// Display/confirm license
-#define DisplayNotes(a, b)	sfkl_DisplayNotes(a, b)		// Display notes text file
 #define GetsfArkLibVersion(a)	sfkl_GetVersion(a)
-#define Decode(a, b)		sfkl_Decode(a, b)
+#define Decode(a, b)            sfkl_Decode(a, b)
 // ------------------------------------------------------------------------------------
 
 // -------- Global flags and data ----------
 #ifdef	SFARKLIB_GLOBAL		// Compiling main file?
     //bool	Aborted;
     int	GlobalErrorFlag;
-    const char ProgName[]		= "sfArkLib";
-    const char ProgVersion[]		= " 3.00";	// 5 characters xx.xx
+    const char ProgName[]               = "sfArkLib";
+    const char ProgVersion[]            = " 3.00";	// 5 characters xx.xx
     const unsigned char ProgVersionMaj 	= 30;		// 0-255 = V0 to V25.5xx, etc.
     const unsigned char ProgVersionMin 	= 00;		// 0-99  = Vx.x99, etc.
-    char	MsgTxt[MAX_MSGTEXT];				// Used with sprintf to build message									// Text buffer for msg()
-    unsigned SourceFileOffset = 0;			// Set non-zero by app for self-extraction
+    char	MsgTxt[MAX_MSGTEXT];                    // Used with sprintf to build message									// Text buffer for msg()
+    unsigned SourceFileOffset = 0;                  // Set non-zero by app for self-extraction
 #else	
     //extern	bool	Aborted;
     extern	int	GlobalErrorFlag;
     extern	char	*MsgTxt;
 
-    extern	const char *ProgName;				// e.g. "sfArkLib"
-    extern	const char *ProgVersion;			// e.g."2.10 "
-    extern	const unsigned char 	ProgVersionMaj;		// 00-255 = V25.5x, etc.
-    extern	const unsigned char 	ProgVersionMin;		// 00-99 = Vx.x99, etc.
-    extern	unsigned SourceFileOffset;			// Set non-zero by app for self-extraction
+    extern	const char *ProgName;                   // e.g. "sfArkLib"
+    extern	const char *ProgVersion;                // e.g."2.10 "
+    extern	const unsigned char 	ProgVersionMaj;	// 00-255 = V25.5x, etc.
+    extern	const unsigned char 	ProgVersionMin;	// 00-99 = Vx.x99, etc.
+    extern	unsigned SourceFileOffset;              // Set non-zero by app for self-extraction
 #endif
 
 // ----- typdefs -----
-typedef unsigned short		USHORT;
-typedef unsigned char		BYTE;
-typedef unsigned long		ULONG;
+typedef unsigned short          USHORT;
+typedef unsigned char           BYTE;
+typedef unsigned long           ULONG;
 //typedef int			bool;
 
-typedef short							AWORD;				// Audio word (i.e., 16-bit audio)
-typedef unsigned short		UAWORD;
-typedef long		 					LAWORD;				// "long" audio word i.e. 32 bits
+typedef short					AWORD;				// Audio word (i.e., 16-bit audio)
+typedef unsigned short          UAWORD;
+typedef long		 			LAWORD;				// "long" audio word i.e. 32 bits
 typedef unsigned long			ULAWORD;
 
 // Types used by Bit I/O (BIO) routines...
 typedef USHORT					BIOWORD;   
-typedef ULONG						BIOWORD2;
+typedef ULONG					BIOWORD2;
 
 // -------------------
 
@@ -146,9 +142,9 @@ typedef ULONG						BIOWORD2;
 // Quick "absolute value" for (much faster than using conditional) ...
 // if x is positive QUICKABS2(x) = abs(x) ... but...
 // if x is negative QUICKABS2(x) = abs(x)-1 -- wrong! but suits many of our purposes here!
-#define SIGN(x)      ( (((x)) >> (BIT_SIZEOF(x)-1)) & 1 )				// Fast!  Returns 0 for positive, 1 for negative
+#define SIGN(x)      ( (((x)) >> (BIT_SIZEOF(x)-1)) & 1 )			// Fast!  Returns 0 for positive, 1 for negative
 #define QUICKABS2(x) ( (x) ^ ( (x) >> (BIT_SIZEOF(x)-1) ) )			// Fast version (inaccurate for negative value)
-#define QUICKABS(x)  ( QUICKABS2(x) + SIGN(x) )									// Correct ABS value
+#define QUICKABS(x)  ( QUICKABS2(x) + SIGN(x) )						// Correct ABS value
 
 #endif
 
@@ -157,7 +153,7 @@ typedef ULONG						BIOWORD2;
 #define NSDIV(x, y)  (  (x) >> (y)  )
 
 // Fast division using Shift for Signed numbers
-#define SDIV(x, y)      ( ((x) >= 0)? (x) >> (y) : -((-(x)) >> (y)) )
+#define SDIV(x, y)   ( ((x) >= 0)? (x) >> (y) : -((-(x)) >> (y)) )
 
 // ------- Prototypes -------
 

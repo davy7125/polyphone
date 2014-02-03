@@ -23,83 +23,34 @@
 
 #include <stdio.h>
 #include <string.h>
-
 #include "wcc.h"
-
-#ifdef TARGET_WIN32
-// Windows32 target
-#define WIN32_LEAN_AND_MEAN		// Exclude rarely-used stuff from Windows headers
-#include "windows.h"
-#undef 	WIN32_LEAN_AND_MEAN
-
-#define	FILE_SHARE_NONE			0
-#define NO_SECURITY			((LPSECURITY_ATTRIBUTES) 0)
-#define NOT_OVERLAPPED			((LPOVERLAPPED) 0)
-#define	NO_TEMPLATE			((HANDLE) 0)
-
-#define GETLASTERROR()		(GetLastError())
-
-// Mac, Linux target
-#else
-
-#define INVALID_HANDLE_VALUE	(NULL)
-#define GETLASTERROR()		(-1)
-#endif
-
 
 // Static data to track current input and output file...
 QDataStream	* InputFileHandle = NULL;	// current input file handle
 QDataStream	* OutputFileHandle = NULL;	// ... output file handle
 
-// Local prototypes...
-int	ChkErr(const char *message, const char *filename);
-
 void setInputFileHandle(QDataStream * stream)
 {
     InputFileHandle = stream;
 }
+
 void setOutputFileHandle(QDataStream * stream)
 {
     OutputFileHandle = stream;
 }
 
-// =================================================================================
-
 int ReadInputFile(BYTE *Buf, int BytesToRead)
 {
     return InputFileHandle->readRawData((char *)Buf, BytesToRead);
 }
-// =================================================================================
 
 int WriteOutputFile(const BYTE *Buf, int BytesToWrite)
 {
     return OutputFileHandle->writeRawData((char *)Buf, BytesToWrite);
 }
 
-// =================================================================================
-
 bool SetInputFilePosition(int NewPos)
 {
     QIODevice * device = InputFileHandle->device();
     return device->seek(NewPos);
 }
-
-// =================================================================================
-
-int ChkErr(const char *ErrorMsg, const char *FileName)
-{
-    int		ErrCode;
-    char	ErrDesc[MAX_MSGTEXT];
-
-    if (~GlobalErrorFlag)		// Prevent multiple error messages
-    {
-        ErrCode = GETLASTERROR();
-        sprintf(ErrDesc, "OS ERROR %d - Failed to %s: %s", ErrCode, ErrorMsg, FileName);
-        msg(ErrDesc, MSG_PopUp);
-        GlobalErrorFlag = SFARKLIB_ERR_FILEIO;
-    }
-    return(GlobalErrorFlag);
-}
-
-// =================================================================================
-// eof
