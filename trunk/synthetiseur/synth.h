@@ -28,6 +28,7 @@
 #include "pile_sf2.h"
 #include "soundengine.h"
 #include "audiodevice.h"
+#include "calibrationsinus.h"
 
 class Synth : public QObject
 {
@@ -78,6 +79,9 @@ public:
             data2[i] += _reverb.lastOut(1);
         }
         _mutexReverb.unlock();
+
+        // Ajout sinus de calibration
+        _sinus.addData(data1, data2, maxlen);
 
         // Clipping
         clip(data1, data2, maxlen);
@@ -154,7 +158,8 @@ private:
         }
     }
 
-    void playSinus(EltID idSmpl);
+    CalibrationSinus _sinus;
+    bool _isSinusEnabled, _sampleRunning;
 
     // Pointeur vers les données
     Pile_sf2 * m_sf2;

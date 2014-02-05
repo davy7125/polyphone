@@ -27,7 +27,6 @@
 // Constructeur, destructeur
 Voice::Voice(QByteArray baData, DWORD smplRate, DWORD audioSmplRate, int note, int velocity,
              VoiceParam * voiceParam, QObject * parent) : QObject(parent),
-    _sinusOsc(audioSmplRate),
     _modLFO(audioSmplRate, voiceParam->modLfoDelay),
     _vibLFO(audioSmplRate, voiceParam->vibLfoDelay),
     _enveloppeVol(voiceParam, audioSmplRate, 0),
@@ -52,31 +51,6 @@ Voice::Voice(QByteArray baData, DWORD smplRate, DWORD audioSmplRate, int note, i
     takeData(&m_valBase, 1);
 }
 
-// Sinus
-Voice::Voice(DWORD audioSmplRate, VoiceParam *voiceParam, QObject *parent) : QObject(parent),
-    _sinusOsc(audioSmplRate),
-    _modLFO(audioSmplRate, voiceParam->modLfoDelay),
-    _vibLFO(audioSmplRate, voiceParam->vibLfoDelay),
-    _enveloppeVol(voiceParam, audioSmplRate, 0),
-    _enveloppeMod(voiceParam, audioSmplRate, 1),
-    m_smplRate(audioSmplRate),
-    m_audioSmplRate(audioSmplRate),
-    m_note(-3),
-    m_velocity(127),
-    _voiceParam(voiceParam),
-    m_currentSmplPos(0),
-    m_time(0),
-    m_release(false),
-    _delayEnd(5),
-    _isFinished(false),
-    m_deltaPos(0),
-    m_valPrec(0),
-    m_x1(0), m_x2(0), m_y1(0), m_y2(0)
-{
-    // Initialisation resampling
-    takeData(&m_valBase, 1);
-}
-
 Voice::~Voice()
 {
     delete _voiceParam;
@@ -88,111 +62,104 @@ void Voice::generateData(float *dataL, float *dataR, qint64 len)
 
     bool endSample = false;
     double gainLowPassFilter = 0;
-    if (m_note == -3)
-    {
-        // Génération d'un sinus
-        _sinusOsc.getSinus(dataL, len, 440.0 * EnveloppeVol::fastPow2((double)(_voiceParam->rootkey - 69.) / 12.));
-    }
+
+    // Construction des tableaux
+    float * dataMod = new float[len];
+    float * modLfo = new float[len];
+    float * vibLfo = new float[len];
+    float * modPitch = new float[len+1];
+    double * modFreq = new double[len];
+
+    /// ENVELOPPE DE MODULATION ///
+    _enveloppeMod.applyEnveloppe(dataMod, len, m_release, m_note, 127, _voiceParam, 0, true);
+
+    /// LFOs ///
+    _modLFO.getSinus(modLfo, len, _voiceParam->modLfoFreq);
+    _vibLFO.getSinus(vibLfo, len, _voiceParam->vibLfoFreq);
+
+    // MODULATION DU PITCH
+    float deltaPitchFixe = 0;
+    if (m_note < 0)
+        deltaPitchFixe = -12. * qLn((double)m_audioSmplRate / m_smplRate) / 0.69314718056 +
+                _voiceParam->getPitchDifference(_voiceParam->rootkey);
     else
+        deltaPitchFixe = -12. * qLn((double)m_audioSmplRate / m_smplRate) / 0.69314718056 +
+                _voiceParam->getPitchDifference(m_note);
+    for (int i = 0; i < len; i++)
+        modPitch[i + 1] = deltaPitchFixe + (dataMod[i] * _voiceParam->modEnvToPitch
+                                            + modLfo[i] * _voiceParam->modLfoToPitch
+                                            + vibLfo[i] * _voiceParam->vibLfoToPitch) / 100;
+
+    // Conversion en distance cumulée entre points
+    modPitch[0] = m_deltaPos + 1;
+    for (int i = 1; i <= len; i++)
+        modPitch[i] = qMin(qMax(0.001f, EnveloppeVol::fastPow2(modPitch[i] / 12)), 64.f) + modPitch[i-1];
+    m_deltaPos = modPitch[len];
+    m_deltaPos = m_deltaPos - ceil(m_deltaPos);
+
+    // Constitution des données
+    int nbDataTmp = ceil(modPitch[len]) - 1;
+    qint32 * dataTmp = new qint32[nbDataTmp + 2];
+    dataTmp[0] = m_valPrec;
+    dataTmp[1] = m_valBase;
+    endSample = takeData(&dataTmp[2], nbDataTmp);
+    m_valPrec = dataTmp[nbDataTmp];
+    m_valBase = dataTmp[nbDataTmp + 1];
+    double pos;
+    qint32 val1, val2;
+    for (int i = 0; i < len; i++)
     {
-        // Construction des tableaux
-        float * dataMod = new float[len];
-        float * modLfo = new float[len];
-        float * vibLfo = new float[len];
-        float * modPitch = new float[len+1];
-        double * modFreq = new double[len];
-
-        /// ENVELOPPE DE MODULATION ///
-        _enveloppeMod.applyEnveloppe(dataMod, len, m_release, m_note, 127, _voiceParam, 0, true);
-
-        /// LFOs ///
-        _modLFO.getSinus(modLfo, len, _voiceParam->modLfoFreq);
-        _vibLFO.getSinus(vibLfo, len, _voiceParam->vibLfoFreq);
-
-        // MODULATION DU PITCH
-        float deltaPitchFixe = 0;
-        if (m_note < 0)
-            deltaPitchFixe = -12. * qLn((double)m_audioSmplRate / m_smplRate) / 0.69314718056 +
-                    _voiceParam->getPitchDifference(_voiceParam->rootkey);
-        else
-            deltaPitchFixe = -12. * qLn((double)m_audioSmplRate / m_smplRate) / 0.69314718056 +
-                    _voiceParam->getPitchDifference(m_note);
-        for (int i = 0; i < len; i++)
-            modPitch[i + 1] = deltaPitchFixe + (dataMod[i] * _voiceParam->modEnvToPitch
-                       + modLfo[i] * _voiceParam->modLfoToPitch
-                       + vibLfo[i] * _voiceParam->vibLfoToPitch) / 100;
-
-        // Conversion en distance cumulée entre points
-        modPitch[0] = m_deltaPos + 1;
-        for (int i = 1; i <= len; i++)
-            modPitch[i] = qMin(qMax(0.001f, EnveloppeVol::fastPow2(modPitch[i] / 12)), 64.f) + modPitch[i-1];
-        m_deltaPos = modPitch[len];
-        m_deltaPos = m_deltaPos - ceil(m_deltaPos);
-
-        // Constitution des données
-        int nbDataTmp = ceil(modPitch[len]) - 1;
-        qint32 * dataTmp = new qint32[nbDataTmp + 2];
-        dataTmp[0] = m_valPrec;
-        dataTmp[1] = m_valBase;
-        endSample = takeData(&dataTmp[2], nbDataTmp);
-        m_valPrec = dataTmp[nbDataTmp];
-        m_valBase = dataTmp[nbDataTmp + 1];
-        double pos;
-        qint32 val1, val2;
-        for (int i = 0; i < len; i++)
-        {
-            pos = modPitch[i];
-            val1 = dataTmp[(int)floor(pos)];
-            val2 = dataTmp[(int)ceil(pos)];
-            pos -= floor(pos);
-            dataL[i] = ((1. - pos) * val1 + pos * val2) / 2147483648LL; // Passage en double de -1 à 1
-        }
-        delete [] dataTmp;
-
-        // FILTRE PASSE-BAS
-        for (int i = 0; i < len; i++)
-        {
-            modFreq[i] = _voiceParam->filterFreq * EnveloppeVol::fastPow2((dataMod[i] * _voiceParam->modEnvToFilterFc +
-                                                                           modLfo[i] * _voiceParam->modLfoToFilterFreq) / 1200);
-            if (modFreq[i] > 20000)
-                modFreq[i] = 20000;
-            else if (modFreq[i] < 20)
-                modFreq[i] = 20;
-        }
-        double a0, a1, a2, b1, b2, valTmp;
-        double filterQ = _voiceParam->filterQ - 3.01;
-        double q_lin = qPow(10, filterQ / 20.);
-        for (int i = 0; i < len; i++)
-        {
-            biQuadCoefficients(a0, a1, a2, b1, b2, modFreq[i], q_lin);
-            valTmp = a0 * dataL[i] + a1 * m_x1 + a2 * m_x2 - b1 * m_y1 - b2 * m_y2;
-            m_x2 = m_x1;
-            m_x1 = dataL[i];
-            m_y2 = m_y1;
-            m_y1 = valTmp;
-            dataL[i] = valTmp;
-        }
-        gainLowPassFilter = qMax(1.33 * filterQ, 0.);
-
-        // Modulation du volume, conversion des dB
-        int signe;
-        if (_voiceParam->modLfoToVolume < 0)
-            signe = 1;
-        else
-            signe = -1;
-        for (int i = 0; i < len; i++)
-        {
-            valTmp = qMax(signe * modLfo[i], 0.f);
-            dataL[i] *= qPow(10., signe * (double)_voiceParam->modLfoToVolume / 20. * valTmp);
-        }
-
-        // Destruction des tableaux
-        delete [] dataMod;
-        delete [] modLfo;
-        delete [] vibLfo;
-        delete [] modPitch;
-        delete [] modFreq;
+        pos = modPitch[i];
+        val1 = dataTmp[(int)floor(pos)];
+        val2 = dataTmp[(int)ceil(pos)];
+        pos -= floor(pos);
+        dataL[i] = ((1. - pos) * val1 + pos * val2) / 2147483648LL; // Passage en double de -1 à 1
     }
+    delete [] dataTmp;
+
+    // FILTRE PASSE-BAS
+    for (int i = 0; i < len; i++)
+    {
+        modFreq[i] = _voiceParam->filterFreq * EnveloppeVol::fastPow2((dataMod[i] * _voiceParam->modEnvToFilterFc +
+                                                                       modLfo[i] * _voiceParam->modLfoToFilterFreq) / 1200);
+        if (modFreq[i] > 20000)
+            modFreq[i] = 20000;
+        else if (modFreq[i] < 20)
+            modFreq[i] = 20;
+    }
+    double a0, a1, a2, b1, b2, valTmp;
+    double filterQ = _voiceParam->filterQ - 3.01;
+    double q_lin = qPow(10, filterQ / 20.);
+    for (int i = 0; i < len; i++)
+    {
+        biQuadCoefficients(a0, a1, a2, b1, b2, modFreq[i], q_lin);
+        valTmp = a0 * dataL[i] + a1 * m_x1 + a2 * m_x2 - b1 * m_y1 - b2 * m_y2;
+        m_x2 = m_x1;
+        m_x1 = dataL[i];
+        m_y2 = m_y1;
+        m_y1 = valTmp;
+        dataL[i] = valTmp;
+    }
+    gainLowPassFilter = qMax(1.33 * filterQ, 0.);
+
+    // Modulation du volume, conversion des dB
+    int signe;
+    if (_voiceParam->modLfoToVolume < 0)
+        signe = 1;
+    else
+        signe = -1;
+    for (int i = 0; i < len; i++)
+    {
+        valTmp = qMax(signe * modLfo[i], 0.f);
+        dataL[i] *= qPow(10., signe * (double)_voiceParam->modLfoToVolume / 20. * valTmp);
+    }
+
+    // Destruction des tableaux
+    delete [] dataMod;
+    delete [] modLfo;
+    delete [] vibLfo;
+    delete [] modPitch;
+    delete [] modFreq;
 
     // Application de l'enveloppe de volume
     bool bRet2 = false;
@@ -285,19 +252,6 @@ void Voice::setGain(double gain)
 {
     _mutexParam.lock();
     m_gain = gain;
-    _mutexParam.unlock();
-}
-void Voice::attackToMax()
-{
-    _mutexParam.lock();
-    _enveloppeVol.attackToMax();
-    _mutexParam.unlock();
-}
-
-void Voice::decayToMin()
-{
-    _mutexParam.lock();
-    _enveloppeVol.decayToMin();
     _mutexParam.unlock();
 }
 

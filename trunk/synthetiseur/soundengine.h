@@ -44,11 +44,9 @@ public:
     static void releaseNote(int numNote);
     static void setGain(double gain);
     static void setChorus(int level, int depth, int frequency);
-    static void setRootKey(int rootKey);
     static void setPitchCorrection(int correction, bool repercute);
     static void setStartLoop(int startLoop, bool repercute);
     static void setEndLoop(int endLoop, bool repercute);
-    static void setSinusEnabled(bool isEnabled);
     static void setLoopEnabled(bool isEnabled);
     static void setStereo(bool isStereo);
     static void setGainSample(int gain);
@@ -104,11 +102,9 @@ private:
     void releaseNoteInstance(int numNote);
     void setGainInstance(double gain);
     void setChorusInstance(int level, int depth, int frequency);
-    void setRootKeyInstance(int rootKey);
     void setPitchCorrectionInstance(int correction, bool repercute);
     void setStartLoopInstance(int startLoop, bool repercute);
     void setEndLoopInstance(int endLoop, bool repercute);
-    void setSinusEnabledInstance(bool isEnabled);
     void setLoopEnabledInstance(bool isEnabled);
     void setStereoInstance(bool isStereo);
     void setGainSampleInstance(int gain);
@@ -118,7 +114,7 @@ private:
     float * _dataTmpL, * _dataTmpR;
 
     static int _gainSmpl;
-    static bool _isStereo, _isSinusEnabled, _isLoopEnabled;
+    static bool _isStereo, _isLoopEnabled;
     static QList<SoundEngine*> _listInstances;
 };
 

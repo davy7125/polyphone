@@ -22,66 +22,40 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef ENVELOPPEVOL_H
-#define ENVELOPPEVOL_H
+#ifndef CALIBRATIONSINUS_H
+#define CALIBRATIONSINUS_H
 
-#include "voiceparam.h"
-#include "sf2_types.h"
+#include "oscsinus.h"
+#include <QMutex>
 
-class EnveloppeVol
+class CalibrationSinus
 {
 public:
-    EnveloppeVol(VoiceParam * voiceParam, quint32 sampleRate, bool isMod);
-    bool applyEnveloppe(float *data, quint32 size, bool release, int note, int velocity, VoiceParam * voiceParam,
-                        double gain, bool applyOn1 = false);
-    void quickRelease();
+    CalibrationSinus();
+    ~CalibrationSinus();
+    void setSampleRate(int sampleRate);
 
-    static float fastPow2(float p)
-    {
-        float offset = (p < 0) ? 1.0f : 0.0f;
-        float clipp = (p < -126) ? -126.0f : p;
-        int w = clipp;
-        float z = clipp - w + offset;
-        union { quint32 i; float f; } v =
-        { static_cast<quint32> ( (1 << 23) * (clipp + 121.2740575f + 27.7280233f / (4.84252568f - z) - 1.49012907f * z) ) };
-        return v.f;
-    }
+    // Configuration du sinus
+    void setPitch(int numNote);
+    void on();
+    void off();
+
+    // Génération de données
+    void addData(float * dataR, float * dataL, int len);
 
 private:
-    enum EnveloppePhase
-    {
-        phase1delay,
-        phase2attack,
-        phase3hold,
-        phase4decay,
-        phase5sustain,
-        phase6release,
-        phase7off
-    };
+    void initBuffer(int size);
 
-    // Etat du système
-    quint32 m_currentSmpl;
-    double m_precValue;
-    EnveloppePhase m_currentPhase;
+    OscSinus * _sinus;
+    double _freq, _currentFreq;
+    double _level, _currentLevel;
 
-    // Paramètres de l'enveloppe
-    quint32 m_timeDelay;
-    quint32 m_timeAttack;
-    quint32 m_timeHold;
-    quint32 m_timeDecay;
-    double m_levelSustain;
-    quint32 m_timeRelease;
-    double m_noteToHold, m_noteToDecay;
+    // Buffer de travail
+    float * _buf;
+    int _bufSize;
 
-    // Volume
-    double m_volume;
-    int m_fixedVelocity;
-
-    // Echantillonnage
-    quint32 m_sampleRate;
-
-    // Release autorisée ?
-    bool m_allowRelease;
+    // Protection accès multiples
+    QMutex _mutex;
 };
 
-#endif // ENVELOPPEVOL_H
+#endif // CALIBRATIONSINUS_H

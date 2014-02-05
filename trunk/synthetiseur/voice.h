@@ -40,7 +40,6 @@ class Voice : public QObject
 public:
     Voice(QByteArray baData, DWORD smplRate, DWORD audioSmplRate, int note,
           int velocity, VoiceParam *voiceParam, QObject *parent = NULL);
-    Voice(DWORD audioSmplRate, VoiceParam *voiceParam, QObject *parent = NULL);
     ~Voice();
 
     int getNote()                       { return m_note; }
@@ -63,10 +62,6 @@ public:
     void setFineTune(qint32 val);
     void setRootKey(double val);
 
-    // Modification ADSR (pour le sinus)
-    void attackToMax();
-    void decayToMin();
-
     // Génération de données
     void generateData(float *dataL, float *dataR, qint64 len);
 
@@ -75,7 +70,7 @@ signals:
 
 private:
     // Oscillateurs, enveloppes et chorus
-    OscSinus _sinusOsc, _modLFO, _vibLFO;
+    OscSinus _modLFO, _vibLFO;
     EnveloppeVol _enveloppeVol, _enveloppeMod;
     Chorus _chorus;
 
