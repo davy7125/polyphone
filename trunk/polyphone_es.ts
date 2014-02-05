@@ -232,93 +232,98 @@
         <translation>Teclado</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="1521"/>
+        <location filename="gui_divers/config.ui" line="1655"/>
         <source>Premier Do</source>
         <translation>Primero do</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="1604"/>
+        <location filename="gui_divers/config.ui" line="1537"/>
         <source>Octave 1</source>
         <translation>Octava 1</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="1609"/>
+        <location filename="gui_divers/config.ui" line="1542"/>
         <source>Octave 2</source>
         <translation>Octava 2</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="1614"/>
+        <location filename="gui_divers/config.ui" line="1547"/>
         <source>Octave 3</source>
         <translation>Octava 3</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="1619"/>
+        <location filename="gui_divers/config.ui" line="1552"/>
         <source>Octave 4</source>
         <translation>Octava 4</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="1624"/>
-        <location filename="gui_divers/config.ui" line="1684"/>
+        <location filename="gui_divers/config.ui" line="1557"/>
+        <location filename="gui_divers/config.ui" line="1617"/>
         <source>Do</source>
         <translation>Do</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="1629"/>
+        <location filename="gui_divers/config.ui" line="1562"/>
         <source>Do#</source>
         <translation>Do#</translation>
     </message>
     <message utf8="true">
-        <location filename="gui_divers/config.ui" line="1634"/>
+        <location filename="gui_divers/config.ui" line="1567"/>
         <source>Ré</source>
         <translation>Re</translation>
     </message>
     <message utf8="true">
-        <location filename="gui_divers/config.ui" line="1639"/>
+        <location filename="gui_divers/config.ui" line="1572"/>
         <source>Ré#</source>
         <translation>Re#</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="1644"/>
+        <location filename="gui_divers/config.ui" line="1577"/>
         <source>Mi</source>
         <translation>Mi</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="1649"/>
+        <location filename="gui_divers/config.ui" line="1582"/>
         <source>Fa</source>
         <translation>Fa</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="1654"/>
+        <location filename="gui_divers/config.ui" line="1587"/>
         <source>Fa#</source>
         <translation>Fa#</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="1659"/>
+        <location filename="gui_divers/config.ui" line="1592"/>
         <source>Sol</source>
         <translation>Sol</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="1664"/>
+        <location filename="gui_divers/config.ui" line="1597"/>
         <source>Sol#</source>
         <translation>Sol#</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="1669"/>
+        <location filename="gui_divers/config.ui" line="1602"/>
         <source>La</source>
         <translation>La</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="1674"/>
+        <location filename="gui_divers/config.ui" line="1607"/>
         <source>La#</source>
         <translation>La#</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="1679"/>
+        <location filename="gui_divers/config.ui" line="1612"/>
         <source>Si</source>
         <translation>Si</translation>
     </message>
+    <message utf8="true">
+        <location filename="gui_divers/config.ui" line="1638"/>
+        <source>Vélocité par défaut</source>
+        <translation>Velocidad por defecto</translation>
+    </message>
     <message>
-        <location filename="gui_divers/config.ui" line="1711"/>
+        <location filename="gui_divers/config.ui" line="1728"/>
         <source>Fermer</source>
         <translation>Cerrar</translation>
     </message>
@@ -328,309 +333,309 @@
         <translation>Por defecto</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.cpp" line="182"/>
+        <location filename="gui_divers/config.cpp" line="186"/>
         <source>Information</source>
         <translation>Información</translation>
     </message>
     <message utf8="true">
-        <location filename="gui_divers/config.cpp" line="183"/>
+        <location filename="gui_divers/config.cpp" line="187"/>
         <source>La modification sera prise en compte lors du prochain démarrage du logiciel.</source>
         <oldsource>La modification sera prise en compte lors du prochain dÃ©marrage du logiciel.</oldsource>
         <translation>La modificación será aplicada la próxima vez que inicie el programa.</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.cpp" line="573"/>
+        <location filename="gui_divers/config.cpp" line="579"/>
         <source>Couleur du fond</source>
         <translation>Color de fondo</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.cpp" line="583"/>
+        <location filename="gui_divers/config.cpp" line="589"/>
         <source>Couleur de l&apos;onde</source>
         <translation>Color de onda</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.cpp" line="593"/>
+        <location filename="gui_divers/config.cpp" line="599"/>
         <source>Couleur de la grille</source>
         <translation>Color de la cuadrícula</translation>
     </message>
     <message utf8="true">
-        <location filename="gui_divers/config.cpp" line="603"/>
+        <location filename="gui_divers/config.cpp" line="609"/>
         <source>Couleur du début de la boucle</source>
         <translation>Color de inicio de loop</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.cpp" line="613"/>
+        <location filename="gui_divers/config.cpp" line="619"/>
         <source>Couleur de la fin de la boucle</source>
         <translation>Color de fin de loop</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.cpp" line="623"/>
+        <location filename="gui_divers/config.cpp" line="629"/>
         <source>Couleur du curseur de lecture</source>
         <translation>Color del cursor de lectura</translation>
     </message>
     <message utf8="true">
-        <location filename="gui_divers/config.cpp" line="661"/>
-        <location filename="gui_divers/config.cpp" line="677"/>
+        <location filename="gui_divers/config.cpp" line="667"/>
+        <location filename="gui_divers/config.cpp" line="683"/>
         <source>---- séparateur ----</source>
         <translation>---- separador ----</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.h" line="498"/>
+        <location filename="gui_divers/config.h" line="499"/>
         <source>w</source>
         <translation>z</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.h" line="499"/>
+        <location filename="gui_divers/config.h" line="500"/>
         <source>s</source>
         <translation>s</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.h" line="500"/>
+        <location filename="gui_divers/config.h" line="501"/>
         <source>x</source>
         <translation>x</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.h" line="501"/>
+        <location filename="gui_divers/config.h" line="502"/>
         <source>d</source>
         <translation>d</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.h" line="502"/>
+        <location filename="gui_divers/config.h" line="503"/>
         <source>c</source>
         <translation>c</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.h" line="503"/>
+        <location filename="gui_divers/config.h" line="504"/>
         <source>v</source>
         <translation>v</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.h" line="504"/>
+        <location filename="gui_divers/config.h" line="505"/>
         <source>g</source>
         <translation>g</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.h" line="505"/>
+        <location filename="gui_divers/config.h" line="506"/>
         <source>b</source>
         <translation>b</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.h" line="506"/>
+        <location filename="gui_divers/config.h" line="507"/>
         <source>h</source>
         <translation>h</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.h" line="507"/>
+        <location filename="gui_divers/config.h" line="508"/>
         <source>n</source>
         <translation>n</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.h" line="508"/>
+        <location filename="gui_divers/config.h" line="509"/>
         <source>j</source>
         <translation>j</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.h" line="509"/>
+        <location filename="gui_divers/config.h" line="510"/>
         <source>,</source>
         <translation>m</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.h" line="510"/>
+        <location filename="gui_divers/config.h" line="511"/>
         <source>;</source>
         <translation>,</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.h" line="516"/>
+        <location filename="gui_divers/config.h" line="517"/>
         <source>a</source>
         <translation>q</translation>
     </message>
     <message utf8="true">
-        <location filename="gui_divers/config.h" line="517"/>
+        <location filename="gui_divers/config.h" line="518"/>
         <source>é</source>
         <translation>2</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.h" line="518"/>
+        <location filename="gui_divers/config.h" line="519"/>
         <source>z</source>
         <translation>w</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.h" line="519"/>
+        <location filename="gui_divers/config.h" line="520"/>
         <source>&quot;</source>
         <translation>3</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.h" line="520"/>
+        <location filename="gui_divers/config.h" line="521"/>
         <source>e</source>
         <translation>e</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.h" line="521"/>
+        <location filename="gui_divers/config.h" line="522"/>
         <source>r</source>
         <translation>r</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.h" line="522"/>
+        <location filename="gui_divers/config.h" line="523"/>
         <source>(</source>
         <translation>5</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.h" line="523"/>
+        <location filename="gui_divers/config.h" line="524"/>
         <source>t</source>
         <translation>t</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.h" line="524"/>
+        <location filename="gui_divers/config.h" line="525"/>
         <source>-</source>
         <translation>6</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.h" line="525"/>
+        <location filename="gui_divers/config.h" line="526"/>
         <source>y</source>
         <translation>y</translation>
     </message>
     <message utf8="true">
-        <location filename="gui_divers/config.h" line="526"/>
+        <location filename="gui_divers/config.h" line="527"/>
         <source>è</source>
         <translation>7</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.h" line="527"/>
+        <location filename="gui_divers/config.h" line="528"/>
         <source>u</source>
         <translation>u</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.h" line="528"/>
+        <location filename="gui_divers/config.h" line="529"/>
         <source>i</source>
         <translation>i</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.h" line="534"/>
+        <location filename="gui_divers/config.h" line="535"/>
         <source>Shift+w</source>
         <translation>Shift+z</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.h" line="535"/>
+        <location filename="gui_divers/config.h" line="536"/>
         <source>Shift+s</source>
         <translation>Shift+s</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.h" line="536"/>
+        <location filename="gui_divers/config.h" line="537"/>
         <source>Shift+x</source>
         <translation>Shift+x</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.h" line="537"/>
+        <location filename="gui_divers/config.h" line="538"/>
         <source>Shift+d</source>
         <translation>Shift+d</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.h" line="538"/>
+        <location filename="gui_divers/config.h" line="539"/>
         <source>Shift+c</source>
         <translation>Shift+c</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.h" line="539"/>
+        <location filename="gui_divers/config.h" line="540"/>
         <source>Shift+v</source>
         <translation>Shift+v</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.h" line="540"/>
+        <location filename="gui_divers/config.h" line="541"/>
         <source>Shift+g</source>
         <translation>Shift+g</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.h" line="541"/>
+        <location filename="gui_divers/config.h" line="542"/>
         <source>Shift+b</source>
         <translation>Shift+b</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.h" line="542"/>
+        <location filename="gui_divers/config.h" line="543"/>
         <source>Shift+h</source>
         <translation>Shift+h</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.h" line="543"/>
+        <location filename="gui_divers/config.h" line="544"/>
         <source>Shift+n</source>
         <translation>Shift+n</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.h" line="544"/>
+        <location filename="gui_divers/config.h" line="545"/>
         <source>Shift+j</source>
         <translation>Shift+j</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.h" line="545"/>
+        <location filename="gui_divers/config.h" line="546"/>
         <source>Shift+?</source>
         <translation>Shift+m</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.h" line="546"/>
+        <location filename="gui_divers/config.h" line="547"/>
         <source>Shift+.</source>
         <translation>Shift+;</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.h" line="552"/>
+        <location filename="gui_divers/config.h" line="553"/>
         <source>Shift+a</source>
         <translation>Shift+q</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.h" line="553"/>
+        <location filename="gui_divers/config.h" line="554"/>
         <source>Shift+2</source>
         <translation>Shift+&quot;</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.h" line="554"/>
+        <location filename="gui_divers/config.h" line="555"/>
         <source>Shift+z</source>
         <translation>Shift+w</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.h" line="555"/>
+        <location filename="gui_divers/config.h" line="556"/>
         <source>Shift+3</source>
         <translation>Shift+.</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.h" line="556"/>
+        <location filename="gui_divers/config.h" line="557"/>
         <source>Shift+e</source>
         <translation>Shift+e</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.h" line="557"/>
+        <location filename="gui_divers/config.h" line="558"/>
         <source>Shift+r</source>
         <translation>Shift+r</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.h" line="558"/>
+        <location filename="gui_divers/config.h" line="559"/>
         <source>Shift+5</source>
         <translation>Shift+%</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.h" line="559"/>
+        <location filename="gui_divers/config.h" line="560"/>
         <source>Shift+t</source>
         <translation>Shift+t</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.h" line="560"/>
+        <location filename="gui_divers/config.h" line="561"/>
         <source>Shift+6</source>
         <translation>Shift+&amp;</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.h" line="561"/>
+        <location filename="gui_divers/config.h" line="562"/>
         <source>Shift+y</source>
         <translation>Shift+y</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.h" line="562"/>
+        <location filename="gui_divers/config.h" line="563"/>
         <source>Shift+7</source>
         <translation>Shift+/</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.h" line="563"/>
+        <location filename="gui_divers/config.h" line="564"/>
         <source>Shift+u</source>
         <translation>Shift+u</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.h" line="564"/>
+        <location filename="gui_divers/config.h" line="565"/>
         <source>Shift+i</source>
         <translation>Shift+i</translation>
     </message>
@@ -3792,72 +3797,72 @@ Dividir el fichero en diferentes sf2 puede resolver el problema.</translation>
 <context>
     <name>Page_Smpl</name>
     <message utf8="true">
-        <location filename="pages/page_smpl.ui" line="167"/>
+        <location filename="pages/page_smpl.ui" line="185"/>
         <source>&lt;b&gt;Fréquences&lt;/b&gt;</source>
         <translation>&lt;b&gt;Frecuencias&lt;/b&gt;</translation>
     </message>
     <message utf8="true">
-        <location filename="pages/page_smpl.ui" line="700"/>
+        <location filename="pages/page_smpl.ui" line="718"/>
         <source>Réinitialiser</source>
         <translation>Reinicializar</translation>
     </message>
     <message>
-        <location filename="pages/page_smpl.ui" line="719"/>
+        <location filename="pages/page_smpl.ui" line="737"/>
         <source>Appliquer</source>
         <translation>Aplicar</translation>
     </message>
     <message utf8="true">
-        <location filename="pages/page_smpl.ui" line="738"/>
+        <location filename="pages/page_smpl.ui" line="756"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Égaliseur (±15 dB)&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Ecualizador (±15 dB)&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="pages/page_smpl.ui" line="897"/>
+        <location filename="pages/page_smpl.ui" line="924"/>
         <source>Note de base</source>
         <translation>Nota base</translation>
     </message>
     <message>
-        <location filename="pages/page_smpl.ui" line="762"/>
+        <location filename="pages/page_smpl.ui" line="789"/>
         <source>Boucle</source>
         <translation>Loop</translation>
     </message>
     <message>
-        <location filename="pages/page_smpl.ui" line="890"/>
+        <location filename="pages/page_smpl.ui" line="917"/>
         <source>Taille</source>
         <translation>Tamaño</translation>
     </message>
     <message>
-        <location filename="pages/page_smpl.ui" line="918"/>
+        <location filename="pages/page_smpl.ui" line="945"/>
         <source>Type</source>
         <translation>Tipo</translation>
     </message>
     <message>
-        <location filename="pages/page_smpl.ui" line="911"/>
+        <location filename="pages/page_smpl.ui" line="938"/>
         <source>Echantillonnage</source>
         <translation>Frecuencia de muestreo</translation>
     </message>
     <message>
-        <location filename="pages/page_smpl.ui" line="925"/>
+        <location filename="pages/page_smpl.ui" line="952"/>
         <source>Lien</source>
         <translation>Enlace</translation>
     </message>
     <message utf8="true">
-        <location filename="pages/page_smpl.ui" line="904"/>
+        <location filename="pages/page_smpl.ui" line="931"/>
         <source>Correction (centième)</source>
         <translation>Corrección (centésimas)</translation>
     </message>
     <message utf8="true">
-        <location filename="pages/page_smpl.ui" line="876"/>
+        <location filename="pages/page_smpl.ui" line="903"/>
         <source>Utilise la longueur totale de l&apos;échantillon comme boucle</source>
         <translation>Utilice toda la longitud de la muestra como loop</translation>
     </message>
     <message>
-        <location filename="pages/page_smpl.ui" line="949"/>
+        <location filename="pages/page_smpl.ui" line="976"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Informations&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Información&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="pages/page_smpl.ui" line="1015"/>
+        <location filename="pages/page_smpl.ui" line="1051"/>
         <location filename="pages/page_smpl.cpp" line="328"/>
         <location filename="pages/page_smpl.cpp" line="1624"/>
         <location filename="pages/page_smpl.cpp" line="1662"/>
@@ -3865,17 +3870,17 @@ Dividir el fichero en diferentes sf2 puede resolver el problema.</translation>
         <translation>Reproducir</translation>
     </message>
     <message>
-        <location filename="pages/page_smpl.ui" line="1031"/>
+        <location filename="pages/page_smpl.ui" line="1067"/>
         <source>sinus</source>
         <translation>seno</translation>
     </message>
     <message>
-        <location filename="pages/page_smpl.ui" line="1069"/>
+        <location filename="pages/page_smpl.ui" line="1105"/>
         <source>en boucle</source>
         <translation>loop</translation>
     </message>
     <message utf8="true">
-        <location filename="pages/page_smpl.ui" line="1082"/>
+        <location filename="pages/page_smpl.ui" line="1118"/>
         <source>stéréo</source>
         <translation>estéreo</translation>
     </message>
@@ -3934,17 +3939,17 @@ Dividir el fichero en diferentes sf2 puede resolver el problema.</translation>
     <message utf8="true">
         <location filename="pages/page_smpl.cpp" line="1184"/>
         <source>L&apos;échantillon « </source>
-        <translation>La muestra « </translation>
+        <translation>No se ha podido hacer loop en la muestra « </translation>
     </message>
     <message utf8="true">
         <location filename="pages/page_smpl.cpp" line="1184"/>
         <source> » n&apos;a pas pu être bouclé.</source>
-        <translation type="unfinished"> » no ha sido rizado.</translation>
+        <translation> ».</translation>
     </message>
     <message utf8="true">
         <location filename="pages/page_smpl.cpp" line="1187"/>
         <source>Les échantillons suivants n&apos;ont pas pu être bouclés :</source>
-        <translation type="unfinished">Las siguientes muestras no han sido rizado:</translation>
+        <translation>No se ha podido hacer loop en las siguientes muestras:</translation>
     </message>
     <message>
         <location filename="pages/page_smpl.cpp" line="1192"/>

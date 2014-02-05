@@ -40,7 +40,6 @@ public:
     virtual ~SoundEngine();
 
     static void addVoice(Voice * voice, QList<Voice *> friends = QList<Voice*>());
-    static void addVoices(QList<Voice *> voices);
     static void stopAllVoices();
     static void releaseNote(int numNote);
     static void setGain(double gain);
