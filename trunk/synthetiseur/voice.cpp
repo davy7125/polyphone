@@ -116,7 +116,7 @@ void Voice::generateData(float *dataL, float *dataR, qint64 len)
                     _voiceParam->getPitchDifference(_voiceParam->rootkey);
         else
             deltaPitchFixe = -12. * qLn((double)m_audioSmplRate / m_smplRate) / 0.69314718056 +
-                    _voiceParam->getPitchDifference(this->m_note);
+                    _voiceParam->getPitchDifference(m_note);
         for (int i = 0; i < len; i++)
             modPitch[i + 1] = deltaPitchFixe + (dataMod[i] * _voiceParam->modEnvToPitch
                        + modLfo[i] * _voiceParam->modLfoToPitch

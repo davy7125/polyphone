@@ -41,12 +41,12 @@ void LPCinit();
 
 // The following parameters determine the history sized used for LPC analysis (little impact on speed)
 // The history is the amount of prev
-#define HISTSIZE    (4*128/ZWINMIN)		// Multiple of number of ZWINs to use as history size (seems best value)
+#define HISTSIZE    (4)		// Multiple of number of ZWINs to use as history size (seems best value)
 
 typedef LAWORD  LPC_WORD;               // LPC_WORD must have (slightly) greater range than AWORD
 
 // There are compatibility issues in floating point calculations between Intel and Mac versions.  Not sure if this
-// is a compiler issue or a processor issue -- in short on Windows it seems that calculations performed on float 
+// is a compiler issue or a processor issue -- in short on Windows it seems that calculations performed on float
 // datatype get done in double precision.  So, we need to force the correct precision when used on Mac.
 // Better longterm solution is to force single precision for all calculations (for the compressor also) but
 // that would require a version update.
@@ -55,18 +55,9 @@ typedef double  LPC_FLOAT;
 #else	// Use single for datatypes, convert to double for calculations (works)
 typedef float  LPC_FLOAT;
 #endif
-typedef double	XPN;			// eXtra PrecisioN during calculations
-typedef float	LPN;			// Lower PrecisioN to store results of calculations
-
-long long leftShift(long long value, int nbShift)
-{
-    while (nbShift--)
-        value *= 2;
-    return value;
-}
 
 #define ISCALE_BITS     14                  	// Fixed scale seems to work fine in practice
-#define ISCALE          leftShift(1, ISCALE_BITS) /// (1 << ISCALE_BITS) was not working under Windows (for what reason ?!)
+#define ISCALE          (1 << ISCALE_BITS)
 
 #if REFINT == 1
 typedef long LPC_PRAM;
@@ -76,6 +67,10 @@ typedef LPC_FLOAT   LPC_PRAM;
 
 typedef LPC_FLOAT  LPC_CORR;
 typedef LPC_FLOAT  LPC_CORR2;    // Holds LPC_CORR*LPC_CORR
+
+double D(double value){ return value; }
+double D(float value) { return value; }
+double D(int value)   { return value; }
 
 // ======================================================================
 LPC_CORR schur(             // returns the minimum mean square error
@@ -105,11 +100,11 @@ LPC_CORR schur(             // returns the minimum mean square error
     for (i = 0;;)
     {
         // Calculate this iteration's reflection coefficient and error.
-        r = - (LPN) ((XPN)Gen1[0] / (XPN)error);
-        error = (LPN) ( (XPN)error  +  ((XPN)Gen1[0] * (XPN)r) );
+        r = - (D(Gen1[0]) / D(error));
+        error = ( D(error)  +  (D(Gen1[0]) * D(r)) );
 
 #if REFINT == 1
-        ref[i] = (LPC_PRAM) ( (LPN)((XPN)r * ISCALE)) ;    // Scale-up to avoid loss of precision
+        ref[i] = (LPC_PRAM) ( (D(r) * ISCALE)) ;    // Scale-up to avoid loss of precision
 #else
         ref[i] = r;
 #endif
@@ -119,13 +114,11 @@ LPC_CORR schur(             // returns the minimum mean square error
         // Update the generator matrix.
         for (m = 0; m < nc - i; m++)
         {
-            //        Gen1[m] = (XPN) Gen1[m + 1]  +  ((XPN) r * (XPN) Gen0[m]);
-            //        Gen0[m] = (XPN) Gen0[m]      +  ((XPN) r * (XPN) Gen1[m + 1]);
-            Gen1[m] = (LPN) ( (XPN) Gen1[m + 1]  +  ((XPN) r * (XPN) Gen0[m]) );
-            Gen0[m] = (LPN) ( (XPN) Gen0[m]      +  ((XPN) r * (XPN) Gen1[m + 1]) );
+            Gen1[m] = ( D(Gen1[m + 1])  +  (D(r) * D(Gen0[m])) );
+            Gen0[m] = ( D(Gen0[m])      +  (D(r) * D(Gen1[m + 1])) );
         }
     }
-    
+
     //    blk++;
     return error;
 }
@@ -145,17 +138,17 @@ void autocorrelation(int n, LPC_WORD const *ibuf, int nc, LPC_CORR *ac)
         LPC_CORR c = 0;
         LPC_FLOAT const *lbuf = buf + nc;          // Points to current sample + nc
 
-#define CI(I)  ( ((XPN)buf[I] * (XPN)lbuf[I]) )
+#define CI(I)  ( (D(buf[I]) * D(lbuf[I])) )
         //#define CI(I)  	(buf[I] * lbuf[I])
 
         int istop = n - nc - 15;                   // Process 16 steps at a time for speed...
         for (i = 0;  i < istop; i += 16)
-            c = (LPN) ((XPN) c 	+ CI(i+0) + CI(i+1) + CI(i+2) + CI(i+3) + CI(i+4) + CI(i+5) + CI(i+6) + CI(i+7)
-                       + CI(i+8) + CI(i+9) + CI(i+10)+ CI(i+11)+ CI(i+12)+ CI(i+13)+ CI(i+14)+ CI(i+15) );
+            c = ( D(c)     + CI(i+0) + CI(i+1) + CI(i+2) + CI(i+3) + CI(i+4) + CI(i+5) + CI(i+6) + CI(i+7)
+                  + CI(i+8) + CI(i+9) + CI(i+10)+ CI(i+11)+ CI(i+12)+ CI(i+13)+ CI(i+14)+ CI(i+15) );
 
         istop = n - nc;                    // Process any remainder, one step at a time...
         for (; i < istop; i++)
-            c = (LPN) ( (XPN) c  +  CI(i) );
+            c = ( D(c)  +  CI(i) );
 
         ac[nc] = c;
 #undef CI
@@ -187,21 +180,21 @@ void AddAC (LPC_WORD const *hbuf, LPC_WORD const *ibuf, int nc, LPC_CORR *ac)
 
         int istop;
 
-#define CI(I)  ( ((XPN)buf[I] * (XPN)lbuf[I]) )
+#define CI(I)  ( (D(buf[I]) * D(lbuf[I])) )
         //#define CI(I)  	(buf[I] * lbuf[I])
 
         istop = n - 15;                     // Process 16 steps at a time for speed...
         i = n - nc;
 
         for (;  i < istop; i += 16)
-            c = (LPN) ( (XPN) c 	+ CI(i+0) + CI(i+1) + CI(i+2) + CI(i+3) + CI(i+4) + CI(i+5) + CI(i+6) + CI(i+7)
-                        + CI(i+8) + CI(i+9) + CI(i+10)+ CI(i+11)+ CI(i+12)+ CI(i+13)+ CI(i+14)+ CI(i+15) );
+            c =  ( D(c)      + CI(i+0) + CI(i+1) + CI(i+2) + CI(i+3) + CI(i+4) + CI(i+5) + CI(i+6) + CI(i+7)
+                   + CI(i+8) + CI(i+9) + CI(i+10)+ CI(i+11)+ CI(i+12)+ CI(i+13)+ CI(i+14)+ CI(i+15) );
 
         istop = n;                    // Process any remainder, one step at a time...
         for (; i < istop; i++)
-            c = (LPN) ( (XPN) c  +  (XPN) CI(i) );
+            c = ( D(c)  +  D(CI(i)) );
 
-        ac[nc] = (LPN) ( (XPN) ac[nc] + (XPN) c );
+        ac[nc] = ( D(ac[nc]) + D(c) );
 #undef CI
     }
 }
@@ -230,23 +223,17 @@ static void LPCdecode(
         s = *in++;
 
 #if REFINT == 1   //22.4 8gm
-        // ------------------------------------------------------
-#define LPC_AN1(I)                                      \
-    s    -= SDIV(refp[I] * up[I], ISCALE_BITS);       \
-    up[I+1] = up[I] + SDIV(refp[I] * s, ISCALE_BITS); \
-    // ------------------------------------------------------
-
         LPC_PRAM const *refp = ref+nc-1;
         LPC_WORD *up = u+nc-1;
 
-        while(refp >= ref)
+        while (refp >= ref)
         {
-            LPC_AN1(0) ; LPC_AN1(-1); LPC_AN1(-2); LPC_AN1(-3);
-            LPC_AN1(-4); LPC_AN1(-5); LPC_AN1(-6); LPC_AN1(-7);
-            up -= 8; refp -= 8;
+            s    -= SDIV(refp[0] * up[0], ISCALE_BITS);
+            up[1] = up[0] + SDIV(refp[0] * s, ISCALE_BITS);
+            up--; refp--;
         }
 #undef LPC_AN1
-        
+
 #else
         for (i = nc; i--;)
         {
@@ -272,11 +259,7 @@ static void LPCdecode(
     }
 }
 
-
-// ======================================================================
-
 // UnLPC2() is called by UnLPC() -- process one LPCWIN sized chunk
-
 long UnLPC2(LPC_WORD *OutBuf, LPC_WORD *InBuf, short bufsize, short nc, ULONG *Flags)
 {
     static LPC_WORD HistBuf[PMAX*2];
@@ -311,13 +294,13 @@ long UnLPC2(LPC_WORD *OutBuf, LPC_WORD *InBuf, short bufsize, short nc, ULONG *F
     {
 #if HISTSIZE == 4
         for (k = 0; k < nc+1; k++)
-            ac[k] = (XPN)AcHist[0][k] + (XPN)AcHist[1][k] + (XPN)AcHist[2][k] + (XPN)AcHist[3][k];
+            ac[k] = D(AcHist[0][k]) + D(AcHist[1][k]) + D(AcHist[2][k]) + D(AcHist[3][k]);
 #else
         for (k = 0; k < nc+1; k++)
         {
             ac[k] = 0;
             for (int h = 0; h < HISTSIZE; h++)
-                ac[k] = (XPN)ac[k] + (XPN)AcHist[h][k];
+                ac[k] = D(ac[k]) + D(AcHist[h][k]);
         }
 #endif
 
@@ -346,13 +329,10 @@ long UnLPC2(LPC_WORD *OutBuf, LPC_WORD *InBuf, short bufsize, short nc, ULONG *F
     return 0;
 }
 
-// ======================================================================
-
 void LPCinit()
 {
     UnLPC2(LAW_NULL, LAW_NULL, 0, 0, (ULONG *)0);
 }
-// ======================================================================
 
 long UnLPC(AWORD *OutBuf, AWORD *InBuf, short bufsize, short nc, ULONG *Flags)
 {
@@ -363,7 +343,8 @@ long UnLPC(AWORD *OutBuf, AWORD *InBuf, short bufsize, short nc, ULONG *Flags)
     int i;
 
     // Copy 16 bit data to 32 bits...
-    while (inp < bufend)	*inp++ = *InBuf++;
+    while (inp < bufend)
+        *inp++ = *InBuf++;
 
     inp = lInBuf;
 
@@ -397,6 +378,3 @@ long UnLPC(AWORD *OutBuf, AWORD *InBuf, short bufsize, short nc, ULONG *Flags)
 
     return 0;
 }
-
-
-// ======================================================================

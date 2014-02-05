@@ -1,3 +1,5 @@
+#include <QDebug>
+
 // Definitions for sfArk / WaveComp
 // Copyright 1998-2000 Andy Inman
 // Contact via: http://netgenius.co.uk or http://melodymachine.com
@@ -130,10 +132,10 @@ typedef ULONG					BIOWORD2;
 #define MIN(x, y)       ( ( (x) < (y) )?  (x) : (y) )
 #define MAX(x, y)       ( ( (x) > (y) )?  (x) : (y) )
 #define NZSIGN(w)       ((w) != 0)          // Used to add 1 for SignBit if value is non-zero
-#define LOWBITS(w, n)   ( (w) & ((1 << (n))-1) )
+#define LOWBITS(w, n)   ( (w) & ((1 << n)-1) )
 
 
-#if 0   // Safer methods (use in case of compile compatibility problems, etc)...
+#if 1   // Safer methods (use in case of compile compatibility problems, etc)...
 #define SIGN(x)      ( ((x) >= 0) ? 0 : 1)
 #define QUICKABS(x)  ABS(x)
 #define QUICKABS2(x) ( ABS(x) - SIGN(x) )
@@ -150,10 +152,10 @@ typedef ULONG					BIOWORD2;
 
 // Fast division using Shift for Unsigned numbers (or where innacuracy isn't a problem)
 // Innacurate on negative odd numbers, e.g. NSDIV(-100, 1) gives -51 instead of -50.  (Use SDIV instead).
-#define NSDIV(x, y)  (  (x) >> (y)  )
+#define NSDIV(x, y)  (  x >> y  )
 
 // Fast division using Shift for Signed numbers
-#define SDIV(x, y)   ( ((x) >= 0)? (x) >> (y) : -((-(x)) >> (y)) )
+#define SDIV(x, y)   ( ((x) >= 0)? (x >> y) : -(-x >> y) )
 
 // ------- Prototypes -------
 
@@ -172,9 +174,8 @@ extern void	UnBufShift(AWORD *Buf, USHORT SizeOfBuf, short *Shifts);
 // sfArkLib_Crunch...
 extern long	UnCrunchWin(AWORD *Buf, USHORT BufSize, USHORT WinSize);
 extern void	BioDecompInit(void);
-extern void	BioDecompEnd(void);
 extern BIOWORD	BioRead(int NumberOfBits);
-extern bool	BioReadFlag(void);
+extern bool	BioReadFlag();
 extern long	BioReadBuf(BYTE *Buf, long BufSize);
 extern AWORD	InputDiff(AWORD PrevValue);
 extern short	GetNBits(short w);

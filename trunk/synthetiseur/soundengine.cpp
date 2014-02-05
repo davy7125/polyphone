@@ -56,10 +56,27 @@ int SoundEngine::getNbVoices()
 
 void SoundEngine::addVoice(Voice * voice, QList<Voice*> friends)
 {
-    // Exclusive class ?
-    int exclusiveClass = voice->getExclusiveClass();
-    if (exclusiveClass != 0)
-        closeAll(exclusiveClass, voice->getPresetNumber(), friends);
+    // Initialisation de la voix
+    int note = voice->getNote();
+    switch (note)
+    {
+    case -3:
+        closeAll(-3, -1, QList<Voice *>());
+        if (_isSinusEnabled)
+            voice->attackToMax();
+        else
+            voice->decayToMin();
+        break;
+    case -2: case -1:
+        closeAll(note, -1, QList<Voice *>());
+        voice->setLoopMode(_isLoopEnabled);
+        break;
+    default:
+        int exclusiveClass = voice->getExclusiveClass();
+        if (exclusiveClass != 0)
+            closeAll(exclusiveClass, voice->getPresetNumber(), friends);
+        break;
+    }
 
     // Recherche du soundengine le moins surchargé
     int index = -1;
@@ -75,26 +92,9 @@ void SoundEngine::addVoice(Voice * voice, QList<Voice*> friends)
     }
     if (index != -1)
         _listInstances.at(index)->addVoiceInstance(voice);
-}
 
-// Ajout de voix pour l'écoute d'un sample (1 ou 2 canaux + sinus)
-void SoundEngine::addVoices(QList<Voice *> voices)
-{
-    int nbInstances = _listInstances.size();
-    for (int i = 0; i < voices.size(); i++)
-    {
-        if (voices.at(i)->getNote() == -3)
-        {
-            if (_isSinusEnabled)
-                voices.at(i)->attackToMax();
-            else
-                voices.at(i)->decayToMin();
-        }
-        else
-            voices.at(i)->setLoopMode(_isLoopEnabled);
-        _listInstances.at(i % nbInstances)->addVoiceInstance(voices.at(i));
-        _listInstances.at(i % nbInstances)->setStereoInstance(_isStereo);
-    }
+    if (note == -2 || note == -1)
+        _listInstances.at(index)->setStereoInstance(_isStereo);
 }
 
 void SoundEngine::addVoiceInstance(Voice * voice)

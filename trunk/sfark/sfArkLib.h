@@ -38,9 +38,9 @@ look at the file extenson in order to decide how to handle it.
 #define	SFARKLIB_MAX_MSGTEXT	(SFARKLIB_MAX_FILEPATH + 1024)	// Longest message we might produce with sfkl_msg()
 
 // Flags used with msg() function...
-#define	SFARKLIB_MSG_SameLine	(1 << 0)	// Overwrite previous message
-#define	SFARKLIB_MSG_AppendLine	(1 << 1)	// Append to previous message
-#define	SFARKLIB_MSG_PopUp      (1 << 2)	// Should "pop up" a dialogue (usually an error message)
+#define	SFARKLIB_MSG_SameLine	(1)	// Overwrite previous message
+#define	SFARKLIB_MSG_AppendLine	(2)	// Append to previous message
+#define	SFARKLIB_MSG_PopUp      (4)	// Should "pop up" a dialogue (usually an error message)
 
 // Error codes...
 #define SFARKLIB_SUCCESS             0	// No error
