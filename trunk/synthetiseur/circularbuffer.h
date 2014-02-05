@@ -39,7 +39,8 @@ public:
     void addData(float *dataL, float *dataR, float *dataRevL, float *dataRevR, int maxlen)
     {
         int total = 0;
-        _mutexData.lock();
+        if (!_mutexData.tryLock())
+            return;
 
         int writeLen = qMin(maxlen, _currentLengthAvailable);
 
@@ -73,13 +74,6 @@ public:
     void stop();
     bool isInterrupted();   // Interruption demandée
     bool isFinished();      // Boucle terminée
-    bool isDataUnlocked()
-    {
-        bool bRet(_mutexData.tryLock());
-        if (bRet)
-            _mutexData.unlock();
-        return bRet;
-    }
 
     QThread * getThread() { return _thread; }
 

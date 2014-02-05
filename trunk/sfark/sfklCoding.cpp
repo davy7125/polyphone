@@ -103,8 +103,8 @@ typedef struct
 #define HEADER_MAX_OFFSET	(128*1024) 	// Maximum search extent: maximum expected size of "self-extractor" code.
 
 // FileHeader Flags...
-#define	FLAGS_Notes		(1 << 0)	// Notes file included
-#define	FLAGS_License		(1 << 1)	// License file included
+#define	FLAGS_Notes		(1)	// Notes file included
+#define	FLAGS_License	(2)	// License file included
 
 const char	LicenseExt[] = ".license.txt";		// File extension for license file
 const char	NotesExt[] = ".txt";			// File extension for notes file
@@ -321,6 +321,8 @@ bool InvalidEncodeCount(int EncodeCount, int MaxLoops)
 // ==============================================================
 int DecompressTurbo(BLOCK_DATA *Blk, USHORT NumWords)
 {
+    /// note : pas de passage ici ///
+
     int EncodeCount = InputDiff(Blk->PrevEncodeCount);
     if (InvalidEncodeCount(EncodeCount, Blk->MaxLoops))  return (GlobalErrorFlag = SFARKLIB_ERR_CORRUPT);
     Blk->PrevEncodeCount = EncodeCount;
@@ -500,7 +502,7 @@ int ProcessNextBlock(BLOCK_DATA *Blk)
 
     uint32_t	n, m;							// NB: Must be 32-bit integer
 
-#define	AWBYTES	(sizeof(AWORD))
+    int AWBYTES	= sizeof(AWORD);
     BYTE *zSrcBuf = (BYTE *) Blk->SrcBuf;
     BYTE *zDstBuf = (BYTE *) Blk->DstBuf;
 
@@ -771,7 +773,7 @@ int Decode(QDataStream &inStream, QDataStream &outStream)
         Blk.MaxLoops = 3;
         Blk.MaxBD4Loops = 0;
         Blk.ReadSize = 4096;
-        Blk.WinSize = OPTWINSIZE << 3;
+        Blk.WinSize = (OPTWINSIZE << 3);
         NumLoops = 400 * 4096 / Blk.ReadSize;
         break;
     }

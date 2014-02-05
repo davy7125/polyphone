@@ -68,8 +68,7 @@ public:
 
         // Fusion des sound engines
         for (int i = 0; i < _soundEngines.size(); i++)
-            if (_soundEngines.at(i)->isDataUnlocked())
-                _soundEngines.at(i)->addData(data1, data2, _fTmpSumRev1, _fTmpSumRev2, maxlen);
+            _soundEngines.at(i)->addData(data1, data2, _fTmpSumRev1, _fTmpSumRev2, maxlen);
 
         // Application réverbération et addition
         _mutexReverb.lock();
@@ -154,6 +153,8 @@ private:
             }
         }
     }
+
+    void playSinus(EltID idSmpl);
 
     // Pointeur vers les données
     Pile_sf2 * m_sf2;

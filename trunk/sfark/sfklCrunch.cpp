@@ -114,18 +114,13 @@ short  bioPfb;					// Previous "FixBits" value
 void BioDecompInit()
 {
     GetNBits(0);									// Initialise nb array
-    bioRemBits= 0;
-    bioBits	= 0;
-    bioP		= BIOBUFSIZE;
-    bioPfb	= 8;
+    bioRemBits = 0;
+    bioBits    = 0;
+    bioP	   = BIOBUFSIZE;
+    bioPfb	   = 8;
     return;
 }
-// =========================================================================
-void BioDecompEnd()
-{
-    return;
-}
-// =========================================================================
+
 BIOWORD BioRead(int n)
 // Read bits from input, return value
 {
@@ -134,7 +129,6 @@ BIOWORD BioRead(int n)
     return w;
 }
 
-// =========================================================================
 bool BioReadFlag(void)
 // Read single bit from input, return value as bool
 {
@@ -143,7 +137,6 @@ bool BioReadFlag(void)
     return (w != 0);
 }
 
-// =========================================================================
 long BioReadBuf(BYTE *buf, long n)
 // Read *bytes* to output, return number of BYTES
 {
@@ -159,7 +152,7 @@ long BioReadBuf(BYTE *buf, long n)
 
     return (bioP - SavebioP + bioWholeBlocks * BIOBUFSIZE) * sizeof(BIOWORD);
 }
-// =========================================================================
+
 AWORD	InputDiff(AWORD Prev)
 // Read a value from input as difference from Previous value, return new value
 {
@@ -173,8 +166,6 @@ AWORD	InputDiff(AWORD Prev)
     }
     return x + Prev;
 }
-
-// ==============================================================
 
 long UnCrunch(AWORD *UnCompBuf, USHORT bufsize)
 {
@@ -192,7 +183,7 @@ long UnCrunch(AWORD *UnCompBuf, USHORT bufsize)
             UAWORD grp, LoBits;
             INBITS(LoBits, FSbits);                       // Get LowBits & SignBit
             GRP_INBITS(grp);                              // Get group bits
-            *bp = ((grp << FixBits) | (LoBits>>1)) ^ -(LoBits&1);    // NB: -Sign gives 0 or 0xFFFF
+            *bp = ((grp << FixBits) | (LoBits >> 1)) ^ -(LoBits&1);    // NB: -Sign gives 0 or 0xFFFF
         } while (++bp < endp);
     }
     else if (FixBits == 14)       // Non-compressed block?
@@ -218,7 +209,6 @@ long UnCrunch(AWORD *UnCompBuf, USHORT bufsize)
     return 0;
 }
 
-// =========================================================================
 long UnCrunchWin(AWORD *buf, USHORT bufsize, USHORT winsize)
 {
     USHORT finalwinsize = bufsize % winsize;
@@ -239,7 +229,6 @@ long UnCrunchWin(AWORD *buf, USHORT bufsize, USHORT winsize)
     return bufsize;
 }
 
-// =========================================================================
 short GetNBits(short w)
 // Get the number of bits used by value w
 // e.g. w=000b, n=0
@@ -248,7 +237,6 @@ short GetNBits(short w)
 //      w=011b, n=2
 //      w=100b, n=3
 //      w=111b, n=3 etc.
-
 {
     // If not initialised (first time), build table in nb[] array...
     if (nb_init == 0)
@@ -267,5 +255,3 @@ short GetNBits(short w)
     }
     return nb[w];
 }
-
-// =========================================================================

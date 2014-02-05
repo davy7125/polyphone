@@ -36,12 +36,15 @@ Synth::Synth(Pile_sf2 *sf2, QWidget * parent) : QObject(parent),
 {
     // Création des sound engines
     int nbEngines = qMax(QThread::idealThreadCount() - 2, 1);
+
+    nbEngines = 1;
+
     for (int i = 0; i < nbEngines; i++)
     {
         SoundEngine * soundEngine = new SoundEngine();
         connect(soundEngine, SIGNAL(readFinished()), this, SIGNAL(readFinished()));
         soundEngine->moveToThread(soundEngine->getThread());
-        soundEngine->getThread()->start();
+        soundEngine->getThread()->start(QThread::TimeCriticalPriority);
         QMetaObject::invokeMethod(soundEngine, "start");
         _soundEngines << soundEngine;
     }
@@ -84,91 +87,68 @@ void Synth::play(int type, int idSf2, int idElt, int note, int velocity, VoicePa
         SoundEngine::releaseNote(note);
         return;
     }
+
     // Appui sur une note
     switch (type)
     {
-    case 0: // sample
+    case 0:{ // sample
+        EltID idSmpl(elementSmpl, idSf2, idElt, 0, 0);
+
+        // Récupération des paramètres
+        VoiceParam * voiceParam = new VoiceParam(m_sf2, idSmpl, voiceParamTmp);
+
+        if (note < 0)
+        {
+            // Temps de fin, exclusive class et balance
+            voiceParam->volReleaseTime = 0.2;
+            voiceParam->exclusiveClass = note;
+            SFSampleLink typeLien = m_sf2->get(idSmpl, champ_sfSampleType).sfLinkValue;
+            switch (typeLien)
+            {
+            case leftSample: case RomLeftSample:
+                voiceParam->pan = -50;
+                break;
+            case rightSample: case RomRightSample:
+                voiceParam->pan = 50;
+                break;
+            default:
+                break;
+            }
+        }
+
+        // Création voix
+        Voice * voiceTmp = new Voice(m_sf2->getData(idSmpl, champ_sampleData32),
+                                     m_sf2->get(idSmpl, champ_dwSampleRate).dwValue,
+                                     m_format.sampleRate(), note, velocity,
+                                     voiceParam);
+
+        // Initialisation chorus et gain
+        if (note < 0)
+            voiceTmp->setChorus(0, 0, 0);
+        else
+        {
+            voiceTmp->setChorus(m_choLevel, m_choDepth, m_choFrequency);
+            voiceTmp->setGain(m_gain);
+        }
+
+        // Ajout de la voix
+        _listVoixTmp << voiceTmp;
+        SoundEngine::addVoice(voiceTmp, _listVoixTmp);
+
         if (note == -1)
         {
-            // Lecture d'un sample, association possible
-            EltID idSmpl(elementSmpl, idSf2, idElt, 0, 0);
-            VoiceParam * voiceParam1 = new VoiceParam(m_sf2, idSmpl);
-            voiceParam1->volReleaseTime = 0.2;
-            Voice *voiceTmp1 = NULL;
-            Voice *voiceTmp2 = NULL;
+            // Avancement du graphique
+            connect(voiceTmp, SIGNAL(currentPosChanged(int)), this, SLOT(emitCurrentPosChanged(int)));
 
             // Lien ?
             SFSampleLink typeLien = m_sf2->get(idSmpl, champ_sfSampleType).sfLinkValue;
             if (typeLien != monoSample && typeLien != RomMonoSample)
-            {
-                // Smpl lié
-                EltID idSmpl2(elementSmpl, idSf2, m_sf2->get(idSmpl, champ_wSampleLink).wValue, 0, 0);
-                VoiceParam * voiceParam2 = new VoiceParam(m_sf2, idSmpl2);
-                voiceParam2->volReleaseTime = 0.2;
-
-                // Balance
-                if (typeLien == leftSample || typeLien == RomLeftSample)
-                {
-                    voiceParam1->pan = -50;
-                    voiceParam2->pan = 50;
-                }
-                else
-                {
-                    voiceParam1->pan = 50;
-                    voiceParam2->pan = -50;
-                }
-
-                // Création voix 2
-                voiceTmp2 = new Voice(m_sf2->getData(idSmpl2, champ_sampleData32),
-                                      m_sf2->get(idSmpl2, champ_dwSampleRate).dwValue,
-                                      m_format.sampleRate(), -2, 127, voiceParam2);
-                // Initialisation chorus
-                voiceTmp2->setChorus(0, 0, 0);
-            }
-            // Création voix 1
-            voiceTmp1 = new Voice(m_sf2->getData(idSmpl, champ_sampleData32),
-                                  m_sf2->get(idSmpl, champ_dwSampleRate).dwValue,
-                                  m_format.sampleRate(), -1, 127, voiceParam1);
-            voiceTmp1->setChorus(0, 0, 0);
-            connect(voiceTmp1, SIGNAL(currentPosChanged(int)), this, SLOT(emitCurrentPosChanged(int)));
+                this->play(0, idSf2, m_sf2->get(idSmpl, champ_wSampleLink).wValue, -2, 127);
 
             // Création sinus
-            VoiceParam *voiceParam3 = new VoiceParam(m_sf2, idSmpl);
-            voiceParam3->volAttackTime = 0.2;
-            voiceParam3->volDecayTime = 0.2;
-            voiceParam3->volReleaseTime = 0.2;
-            Voice *voiceTmp3 = new Voice(m_format.sampleRate(), voiceParam3);
-            voiceTmp3->setChorus(0, 0, 0);
-
-            // Ajout des voix dans la liste
-            QList<Voice *> listVoices;
-            listVoices << voiceTmp1 << voiceTmp3;
-            if (voiceTmp2)
-                listVoices << voiceTmp2;
-            SoundEngine::addVoices(listVoices);
+            playSinus(idSmpl);
         }
-        else
-        {
-            EltID idSmpl(elementSmpl, idSf2, idElt, 0, 0);
-
-            // Récupération des paramètres
-            VoiceParam * voiceParam = new VoiceParam(m_sf2, idSmpl, voiceParamTmp);
-
-            // Création voix
-            Voice * voiceTmp = new Voice(m_sf2->getData(idSmpl, champ_sampleData32),
-                                         m_sf2->get(idSmpl, champ_dwSampleRate).dwValue,
-                                         m_format.sampleRate(), note, velocity,
-                                         voiceParam);
-
-            // Initialisation chorus et gain
-            voiceTmp->setChorus(m_choLevel, m_choDepth, m_choFrequency);
-            voiceTmp->setGain(m_gain);
-
-            // Ajout de la voix
-            _listVoixTmp << voiceTmp;
-            SoundEngine::addVoice(voiceTmp, _listVoixTmp);
-        }
-        break;
+    }break;
     case 1:{ // instrument
         // Parcours de tous les samples liés
         EltID idInstSmpl(elementInstSmpl, idSf2, idElt, 0, 0);
@@ -298,6 +278,18 @@ void Synth::play(int type, int idSf2, int idElt, int note, int velocity, VoicePa
     // Réinitialisation de la liste temporaire de voix (utilisée pour exclusive class)
     if (!voiceParamTmp)
         _listVoixTmp.clear();
+}
+
+void Synth::playSinus(EltID idSmpl)
+{
+    VoiceParam *voiceParamSinus = new VoiceParam(m_sf2, idSmpl);
+    voiceParamSinus->volAttackTime = 0.2;
+    voiceParamSinus->volDecayTime = 0.2;
+    voiceParamSinus->volReleaseTime = 0.2;
+    voiceParamSinus->exclusiveClass = -3;
+    Voice *voiceSinus = new Voice(m_format.sampleRate(), voiceParamSinus);
+    voiceSinus->setChorus(0, 0, 0);
+    SoundEngine::addVoice(voiceSinus);
 }
 
 void Synth::stop()

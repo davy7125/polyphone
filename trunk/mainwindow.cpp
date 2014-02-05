@@ -83,7 +83,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent, Qt::Window | Qt::W
     connect(this, SIGNAL(initAudio(int, int)), this->audioDevice, SLOT(initAudio(int, int)));
     connect(this, SIGNAL(stopAudio()), this->audioDevice, SLOT(closeConnections()), Qt::BlockingQueuedConnection);
     this->audioDevice->moveToThread(&this->audioThread);
-    this->audioThread.start(QThread::TimeCriticalPriority);
+    this->audioThread.start(QThread::HighPriority);
 
     if (this->configuration->getAudioType() == 0)
         this->setAudioEngine(configuration->getAudioIndex(), configuration->getBufferSize());
@@ -2469,24 +2469,24 @@ void MainWindow::noteChanged(int key, int vel)
 
     if (vel > 0 && key != -1)
     {
-        this->ui->labelNote->setText(configuration->getKeyName(key));
-        this->ui->labelVelocite->setText(QString::number(vel));
+        ui->labelNote->setText(configuration->getKeyName(key));
+        ui->labelVelocite->setText(QString::number(vel));
     }
     else
     {
-        this->ui->labelNote->setText("-");
-        this->ui->labelVelocite->setText("-");
+        ui->labelNote->setText("-");
+        ui->labelVelocite->setText("-");
     }
 
     // Lecture ?
-    if (this->ui->arborescence->getSelectedItemsNumber())
+    if (ui->arborescence->getSelectedItemsNumber())
     {
-        EltID id = this->ui->arborescence->getID(0);
-        if (this->ui->arborescence->isSelectedItemsSf2Unique() && !this->sf2->get(id, champ_hidden).bValue)
+        EltID id = ui->arborescence->getID(0);
+        if (ui->arborescence->isSelectedItemsSf2Unique() && !this->sf2->get(id, champ_hidden).bValue)
         {
-            if (id.typeElement == elementSmpl && this->ui->arborescence->getSelectedItemsNumber() == 1)
+            if (id.typeElement == elementSmpl && ui->arborescence->getSelectedItemsNumber() == 1)
                 this->synth->play(0, id.indexSf2, id.indexElt, key, vel);
-            else if (this->ui->arborescence->isSelectedItemsFamilyUnique())
+            else if (ui->arborescence->isSelectedItemsFamilyUnique())
             {
                 if ((id.typeElement == elementInst || id.typeElement == elementInstSmpl) &&
                         this->ui->arborescence->isSelectedItemsFamilyUnique())
