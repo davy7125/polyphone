@@ -306,17 +306,3 @@ void EnveloppeVol::quickRelease()
     m_currentPhase = phase6release;
     m_currentSmpl = 0;
 }
-
-void EnveloppeVol::decayToMin()
-{
-    m_currentPhase = phase4decay;
-    m_levelSustain = 100;
-    m_currentSmpl = 0;
-}
-
-void EnveloppeVol::attackToMax()
-{
-    m_currentPhase = phase2attack;
-    m_levelSustain = 0;
-    m_currentSmpl = 0;
-}

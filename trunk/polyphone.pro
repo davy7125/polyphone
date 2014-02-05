@@ -136,7 +136,8 @@ SOURCES	+= main.cpp \
     sfark/sfklFile.cpp \
     sfark/sfklDiff.cpp \
     sfark/sfklCrunch.cpp \
-    sfark/sfklCoding.cpp
+    sfark/sfklCoding.cpp \
+    synthetiseur/elements/calibrationsinus.cpp
 
 HEADERS  += mainwindow.h \
     sf2_core/sf2_types.h \
@@ -205,7 +206,8 @@ HEADERS  += mainwindow.h \
     synthetiseur/soundengine.h \
     sfark/wcc.h \
     sfark/sfArkLib.h \
-    sfark/sfarkextractor.h
+    sfark/sfarkextractor.h \
+    synthetiseur/elements/calibrationsinus.h
 
 FORMS    += mainwindow.ui \
     gui_divers/config.ui \

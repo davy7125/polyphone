@@ -22,66 +22,80 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef ENVELOPPEVOL_H
-#define ENVELOPPEVOL_H
+#include "calibrationsinus.h"
 
-#include "voiceparam.h"
-#include "sf2_types.h"
-
-class EnveloppeVol
+CalibrationSinus::CalibrationSinus() :
+    _sinus(NULL),
+    _freq(440),
+    _currentFreq(440),
+    _level(0),
+    _currentLevel(0),
+    _buf(NULL)
 {
-public:
-    EnveloppeVol(VoiceParam * voiceParam, quint32 sampleRate, bool isMod);
-    bool applyEnveloppe(float *data, quint32 size, bool release, int note, int velocity, VoiceParam * voiceParam,
-                        double gain, bool applyOn1 = false);
-    void quickRelease();
+    initBuffer(1024);
+}
 
-    static float fastPow2(float p)
+CalibrationSinus::~CalibrationSinus()
+{
+    delete _sinus;
+    delete [] _buf;
+}
+
+void CalibrationSinus::initBuffer(int size)
+{
+    delete [] _buf;
+    _bufSize = size;
+    _buf = new float[_bufSize];
+}
+
+void CalibrationSinus::setSampleRate(int sampleRate)
+{
+    delete _sinus;
+    _sinus = new OscSinus(sampleRate);
+}
+
+void CalibrationSinus::setPitch(int numNote)
+{
+    _mutex.lock();
+    _freq = 440.0 * qPow(2., (double)(numNote - 69) / 12.);
+    _mutex.unlock();
+}
+
+void CalibrationSinus::on()
+{
+    _mutex.lock();
+    _level = 0.7;
+    _mutex.unlock();
+}
+
+void CalibrationSinus::off()
+{
+    _mutex.lock();
+    _level = 0;
+    _mutex.unlock();
+}
+
+void CalibrationSinus::addData(float * dataR, float * dataL, int len)
+{
+    if (!_sinus)
+        return;
+
+    if (len > _bufSize)
+        initBuffer(len);
+
+    if (!_mutex.tryLock(1)) // Impossible ici d'attendre
+        return;
+    double freq = _freq;
+    double level = _level;
+    _mutex.unlock();
+
+    // Génération et copie
+    _sinus->getSinus(_buf, len, freq);
+
+    for (int i = 0; i < len; i++)
     {
-        float offset = (p < 0) ? 1.0f : 0.0f;
-        float clipp = (p < -126) ? -126.0f : p;
-        int w = clipp;
-        float z = clipp - w + offset;
-        union { quint32 i; float f; } v =
-        { static_cast<quint32> ( (1 << 23) * (clipp + 121.2740575f + 27.7280233f / (4.84252568f - z) - 1.49012907f * z) ) };
-        return v.f;
+        (level > _currentLevel) ? _currentLevel += 0.0004 : _currentLevel -= 0.0004;
+        dataR[i] += _currentLevel * _buf[i];
+        dataL[i] += _currentLevel * _buf[i];
     }
-
-private:
-    enum EnveloppePhase
-    {
-        phase1delay,
-        phase2attack,
-        phase3hold,
-        phase4decay,
-        phase5sustain,
-        phase6release,
-        phase7off
-    };
-
-    // Etat du système
-    quint32 m_currentSmpl;
-    double m_precValue;
-    EnveloppePhase m_currentPhase;
-
-    // Paramètres de l'enveloppe
-    quint32 m_timeDelay;
-    quint32 m_timeAttack;
-    quint32 m_timeHold;
-    quint32 m_timeDecay;
-    double m_levelSustain;
-    quint32 m_timeRelease;
-    double m_noteToHold, m_noteToDecay;
-
-    // Volume
-    double m_volume;
-    int m_fixedVelocity;
-
-    // Echantillonnage
-    quint32 m_sampleRate;
-
-    // Release autorisée ?
-    bool m_allowRelease;
-};
-
-#endif // ENVELOPPEVOL_H
+}

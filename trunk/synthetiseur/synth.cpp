@@ -27,6 +27,8 @@
 
 // Constructeur, destructeur
 Synth::Synth(Pile_sf2 *sf2, QWidget * parent) : QObject(parent),
+    _isSinusEnabled(false),
+    _sampleRunning(false),
     m_sf2(sf2),
     m_gain(0),
     m_choLevel(0), m_choDepth(0), m_choFrequency(0),
@@ -36,9 +38,6 @@ Synth::Synth(Pile_sf2 *sf2, QWidget * parent) : QObject(parent),
 {
     // Création des sound engines
     int nbEngines = qMax(QThread::idealThreadCount() - 2, 1);
-
-    nbEngines = 1;
-
     for (int i = 0; i < nbEngines; i++)
     {
         SoundEngine * soundEngine = new SoundEngine();
@@ -85,6 +84,11 @@ void Synth::play(int type, int idSf2, int idElt, int note, int velocity, VoicePa
     {
         // Relachement d'une note
         SoundEngine::releaseNote(note);
+        if (note < 0)
+        {
+            _sampleRunning = false;
+            _sinus.off();
+        }
         return;
     }
 
@@ -145,8 +149,11 @@ void Synth::play(int type, int idSf2, int idElt, int note, int velocity, VoicePa
             if (typeLien != monoSample && typeLien != RomMonoSample)
                 this->play(0, idSf2, m_sf2->get(idSmpl, champ_wSampleLink).wValue, -2, 127);
 
-            // Création sinus
-            playSinus(idSmpl);
+            // Modification pitch du sinus
+            _sinus.setPitch(m_sf2->get(idSmpl, champ_byOriginalPitch).wValue);
+            if (_isSinusEnabled)
+                _sinus.on();
+            _sampleRunning = true;
         }
     }break;
     case 1:{ // instrument
@@ -211,7 +218,7 @@ void Synth::play(int type, int idSf2, int idElt, int note, int velocity, VoicePa
         }
     }break;
     case 2:{ // preset
-        // Parcours de tous les instruments lies
+        // Parcours de tous les instruments liés
         EltID idPrstInst(elementPrstInst, idSf2, idElt, 0, 0);
         EltID idPrst = idPrstInst;
         idPrst.typeElement = elementPrst;
@@ -280,18 +287,6 @@ void Synth::play(int type, int idSf2, int idElt, int note, int velocity, VoicePa
         _listVoixTmp.clear();
 }
 
-void Synth::playSinus(EltID idSmpl)
-{
-    VoiceParam *voiceParamSinus = new VoiceParam(m_sf2, idSmpl);
-    voiceParamSinus->volAttackTime = 0.2;
-    voiceParamSinus->volDecayTime = 0.2;
-    voiceParamSinus->volReleaseTime = 0.2;
-    voiceParamSinus->exclusiveClass = -3;
-    Voice *voiceSinus = new Voice(m_format.sampleRate(), voiceParamSinus);
-    voiceSinus->setChorus(0, 0, 0);
-    SoundEngine::addVoice(voiceSinus);
-}
-
 void Synth::stop()
 {
     // Arrêt demandé de toutes les voix
@@ -340,7 +335,16 @@ void Synth::setLoopEnabled(bool isEnabled)
 void Synth::setSinusEnabled(bool isEnabled)
 {
     // Modification lecture avec sinus non
-    SoundEngine::setSinusEnabled(isEnabled);
+    _isSinusEnabled = isEnabled;
+    if (isEnabled && _sampleRunning)
+        _sinus.on();
+    else
+        _sinus.off();
+}
+void Synth::setRootKey(int rootKey)
+{
+    // Modification pitch du sinus
+    _sinus.setPitch(rootKey);
 }
 void Synth::setStartLoop(int startLoop, bool repercute)
 {
@@ -357,11 +361,6 @@ void Synth::setPitchCorrection(int correction, bool repercute)
     // mise à jour voix -1 et -2 si répercussion
     SoundEngine::setPitchCorrection(correction, repercute);
 }
-void Synth::setRootKey(int rootKey)
-{
-    // mise à jour voix -3 (sinus)
-    SoundEngine::setRootKey(rootKey);
-}
 
 void Synth::emitCurrentPosChanged(int pos)
 {
@@ -372,9 +371,12 @@ void Synth::setFormat(AudioFormat format)
 {
     // Mutex inutile : pas de génération de données lors de l'appel à setFormat
     m_format = format;
+
     // Réinitialisation
     this->stop();
-    // Envoi signal de modification de l'échantillonnage
+
+    // Mise à jour échantillonnage
+    _sinus.setSampleRate(format.sampleRate());
     this->sampleRateChanged(format.sampleRate());
 }
 
