@@ -22,308 +22,298 @@
         <translation>General</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="296"/>
-        <source>Gestion RAM</source>
-        <translation>Gestión RAM</translation>
-    </message>
-    <message utf8="true">
-        <location filename="gui_divers/config.ui" line="316"/>
-        <source>Charger en mémoire lorsque nécessaire</source>
-        <translation>Cargar en memoria lo que sea necesario</translation>
-    </message>
-    <message utf8="true">
-        <location filename="gui_divers/config.ui" line="321"/>
-        <source>Tout charger en mémoire</source>
-        <translation>Cargar todo en memoria</translation>
-    </message>
-    <message>
-        <location filename="gui_divers/config.ui" line="148"/>
+        <location filename="gui_divers/config.ui" line="139"/>
         <source>Sortie audio</source>
         <translation>Salida de Audio</translation>
     </message>
     <message utf8="true">
-        <location filename="gui_divers/config.ui" line="194"/>
+        <location filename="gui_divers/config.ui" line="185"/>
         <source>Entrée midi</source>
         <translation>Entrada MIDI</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="1164"/>
+        <location filename="gui_divers/config.ui" line="1148"/>
         <source>Import fichiers wav</source>
         <translation>Importar archivos WAV</translation>
     </message>
     <message utf8="true">
-        <location filename="gui_divers/config.ui" line="1151"/>
+        <location filename="gui_divers/config.ui" line="1135"/>
         <source>ajuster à la boucle</source>
         <translation>recortar al loop</translation>
     </message>
     <message utf8="true">
-        <location filename="gui_divers/config.ui" line="1138"/>
+        <location filename="gui_divers/config.ui" line="1122"/>
         <source>enlever le blanc au départ</source>
         <translation>eliminar silencio al inicio</translation>
     </message>
     <message utf8="true">
-        <location filename="gui_divers/config.ui" line="1177"/>
+        <location filename="gui_divers/config.ui" line="1161"/>
         <source>répercuter les modifications</source>
         <oldsource>répercuter les modifications si stéréo</oldsource>
         <translation>enlazar las modificaciones</translation>
     </message>
     <message utf8="true">
-        <location filename="gui_divers/config.ui" line="1190"/>
+        <location filename="gui_divers/config.ui" line="1174"/>
         <source>Édition stéréo</source>
         <oldsource>Édition des samples</oldsource>
         <translation>Edición estéreo</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="171"/>
+        <location filename="gui_divers/config.ui" line="162"/>
         <source>Taille du tampon</source>
         <translation>Tamaño de búfer</translation>
     </message>
     <message utf8="true">
-        <location filename="gui_divers/config.ui" line="73"/>
+        <location filename="gui_divers/config.ui" line="64"/>
         <source>Entrées / sorties</source>
         <translation>Entrada / Salida</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="223"/>
+        <location filename="gui_divers/config.ui" line="214"/>
         <source>Divers</source>
         <translation>Vario</translation>
     </message>
     <message utf8="true">
-        <location filename="gui_divers/config.ui" line="267"/>
+        <location filename="gui_divers/config.ui" line="258"/>
         <source>Numérique (do central → 60)</source>
         <translation>Numérico (do central → 60)</translation>
     </message>
     <message utf8="true">
-        <location filename="gui_divers/config.ui" line="272"/>
+        <location filename="gui_divers/config.ui" line="263"/>
         <source>Texte (do central → C3)</source>
         <oldsource>Texte (do central → C3) </oldsource>
         <translation>Texto (do central → C3)</translation>
     </message>
     <message utf8="true">
-        <location filename="gui_divers/config.ui" line="277"/>
+        <location filename="gui_divers/config.ui" line="268"/>
         <source>Texte (do central → C4)</source>
         <translation>Texto (do central → C4)</translation>
     </message>
     <message utf8="true">
-        <location filename="gui_divers/config.ui" line="282"/>
+        <location filename="gui_divers/config.ui" line="273"/>
         <source>Texte (do central → C5)</source>
         <translation>Texto (do central → C5)</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="253"/>
+        <location filename="gui_divers/config.ui" line="244"/>
         <source>Nom des notes</source>
         <translation>Nombre de las notas</translation>
     </message>
     <message utf8="true">
-        <location filename="gui_divers/config.ui" line="333"/>
+        <location filename="gui_divers/config.ui" line="326"/>
         <source>Synthétiseur</source>
         <translation>Sintetizador</translation>
     </message>
     <message utf8="true">
-        <location filename="gui_divers/config.ui" line="365"/>
+        <location filename="gui_divers/config.ui" line="349"/>
         <source>Réverbération</source>
         <translation>Reverb</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="401"/>
-        <location filename="gui_divers/config.ui" line="559"/>
+        <location filename="gui_divers/config.ui" line="385"/>
+        <location filename="gui_divers/config.ui" line="543"/>
         <source>Niveau</source>
         <translation>Nivel</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="469"/>
+        <location filename="gui_divers/config.ui" line="453"/>
         <source>Profondeur</source>
         <translation>Profundidad</translation>
     </message>
     <message utf8="true">
-        <location filename="gui_divers/config.ui" line="485"/>
+        <location filename="gui_divers/config.ui" line="469"/>
         <source>Densité</source>
         <translation>Densidad</translation>
     </message>
     <message utf8="true">
-        <location filename="gui_divers/config.ui" line="501"/>
+        <location filename="gui_divers/config.ui" line="485"/>
         <source>Atténuation</source>
         <translation>Atenuación</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="526"/>
+        <location filename="gui_divers/config.ui" line="510"/>
         <source>Chorus</source>
         <translation>Chorus</translation>
     </message>
     <message utf8="true">
-        <location filename="gui_divers/config.ui" line="601"/>
+        <location filename="gui_divers/config.ui" line="585"/>
         <source>Fréquence</source>
         <translation>Frecuencia</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="617"/>
+        <location filename="gui_divers/config.ui" line="601"/>
         <source>Amplitude</source>
         <translation>Amplitud</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="662"/>
+        <location filename="gui_divers/config.ui" line="646"/>
         <source>Gain (dB)</source>
         <translation>Ganancia (dB)</translation>
     </message>
     <message utf8="true">
-        <location filename="gui_divers/config.ui" line="991"/>
+        <location filename="gui_divers/config.ui" line="975"/>
         <source>Arrière-plan</source>
         <translation>Fondo</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="1004"/>
+        <location filename="gui_divers/config.ui" line="988"/>
         <source>Onde</source>
         <translation>Onda</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="890"/>
+        <location filename="gui_divers/config.ui" line="874"/>
         <source>Grille</source>
         <translation>Cuadrícula</translation>
     </message>
     <message utf8="true">
-        <location filename="gui_divers/config.ui" line="1092"/>
+        <location filename="gui_divers/config.ui" line="1076"/>
         <source>Début de boucle</source>
         <translation>Inicio de loop</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="965"/>
+        <location filename="gui_divers/config.ui" line="949"/>
         <source>Fin de boucle</source>
         <translation>Fin de loop</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="978"/>
+        <location filename="gui_divers/config.ui" line="962"/>
         <source>Barre de lecture</source>
         <translation>Cursor de lectura</translation>
     </message>
     <message utf8="true">
-        <location filename="gui_divers/config.ui" line="813"/>
-        <location filename="gui_divers/config.ui" line="1484"/>
+        <location filename="gui_divers/config.ui" line="797"/>
+        <location filename="gui_divers/config.ui" line="1459"/>
         <source>Réinitialiser</source>
         <translation>Reiniciar</translation>
     </message>
     <message utf8="true">
-        <location filename="gui_divers/config.ui" line="716"/>
+        <location filename="gui_divers/config.ui" line="700"/>
         <source>Échantillons</source>
         <translation>Muestras</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="743"/>
+        <location filename="gui_divers/config.ui" line="727"/>
         <source>Couleurs du graphique</source>
         <translation>Colores del gráfico</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="1108"/>
+        <location filename="gui_divers/config.ui" line="1092"/>
         <source>Options</source>
         <translation>Opciones</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="1219"/>
+        <location filename="gui_divers/config.ui" line="1203"/>
         <source>Barre d&apos;outils</source>
         <translation>Barra de herramientas</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="1257"/>
+        <location filename="gui_divers/config.ui" line="1232"/>
         <source>Actions disponibles</source>
         <translation>Acciones disponibles</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="1503"/>
+        <location filename="gui_divers/config.ui" line="1478"/>
         <source>Clavier</source>
         <translation>Teclado</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="1655"/>
+        <location filename="gui_divers/config.ui" line="1621"/>
         <source>Premier Do</source>
         <translation>Primero do</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="1537"/>
+        <location filename="gui_divers/config.ui" line="1503"/>
         <source>Octave 1</source>
         <translation>Octava 1</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="1542"/>
+        <location filename="gui_divers/config.ui" line="287"/>
+        <source>Langue</source>
+        <translation>Idioma</translation>
+    </message>
+    <message>
+        <location filename="gui_divers/config.ui" line="1508"/>
         <source>Octave 2</source>
         <translation>Octava 2</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="1547"/>
+        <location filename="gui_divers/config.ui" line="1513"/>
         <source>Octave 3</source>
         <translation>Octava 3</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="1552"/>
+        <location filename="gui_divers/config.ui" line="1518"/>
         <source>Octave 4</source>
         <translation>Octava 4</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="1557"/>
-        <location filename="gui_divers/config.ui" line="1617"/>
+        <location filename="gui_divers/config.ui" line="1523"/>
+        <location filename="gui_divers/config.ui" line="1583"/>
         <source>Do</source>
         <translation>Do</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="1562"/>
+        <location filename="gui_divers/config.ui" line="1528"/>
         <source>Do#</source>
         <translation>Do#</translation>
     </message>
     <message utf8="true">
-        <location filename="gui_divers/config.ui" line="1567"/>
+        <location filename="gui_divers/config.ui" line="1533"/>
         <source>Ré</source>
         <translation>Re</translation>
     </message>
     <message utf8="true">
-        <location filename="gui_divers/config.ui" line="1572"/>
+        <location filename="gui_divers/config.ui" line="1538"/>
         <source>Ré#</source>
         <translation>Re#</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="1577"/>
+        <location filename="gui_divers/config.ui" line="1543"/>
         <source>Mi</source>
         <translation>Mi</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="1582"/>
+        <location filename="gui_divers/config.ui" line="1548"/>
         <source>Fa</source>
         <translation>Fa</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="1587"/>
+        <location filename="gui_divers/config.ui" line="1553"/>
         <source>Fa#</source>
         <translation>Fa#</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="1592"/>
+        <location filename="gui_divers/config.ui" line="1558"/>
         <source>Sol</source>
         <translation>Sol</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="1597"/>
+        <location filename="gui_divers/config.ui" line="1563"/>
         <source>Sol#</source>
         <translation>Sol#</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="1602"/>
+        <location filename="gui_divers/config.ui" line="1568"/>
         <source>La</source>
         <translation>La</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="1607"/>
+        <location filename="gui_divers/config.ui" line="1573"/>
         <source>La#</source>
         <translation>La#</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="1612"/>
+        <location filename="gui_divers/config.ui" line="1578"/>
         <source>Si</source>
         <translation>Si</translation>
     </message>
     <message utf8="true">
-        <location filename="gui_divers/config.ui" line="1638"/>
+        <location filename="gui_divers/config.ui" line="1604"/>
         <source>Vélocité par défaut</source>
         <translation>Velocidad por defecto</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="1728"/>
+        <location filename="gui_divers/config.ui" line="1694"/>
         <source>Fermer</source>
         <translation>Cerrar</translation>
     </message>
@@ -333,49 +323,51 @@
         <translation>Por defecto</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.cpp" line="186"/>
+        <location filename="gui_divers/config.cpp" line="187"/>
+        <location filename="gui_divers/config.cpp" line="1034"/>
         <source>Information</source>
         <translation>Información</translation>
     </message>
     <message utf8="true">
-        <location filename="gui_divers/config.cpp" line="187"/>
+        <location filename="gui_divers/config.cpp" line="188"/>
+        <location filename="gui_divers/config.cpp" line="1035"/>
         <source>La modification sera prise en compte lors du prochain démarrage du logiciel.</source>
         <oldsource>La modification sera prise en compte lors du prochain dÃ©marrage du logiciel.</oldsource>
         <translation>La modificación será aplicada la próxima vez que inicie el programa.</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.cpp" line="579"/>
+        <location filename="gui_divers/config.cpp" line="580"/>
         <source>Couleur du fond</source>
         <translation>Color de fondo</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.cpp" line="589"/>
+        <location filename="gui_divers/config.cpp" line="590"/>
         <source>Couleur de l&apos;onde</source>
         <translation>Color de onda</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.cpp" line="599"/>
+        <location filename="gui_divers/config.cpp" line="600"/>
         <source>Couleur de la grille</source>
         <translation>Color de la cuadrícula</translation>
     </message>
     <message utf8="true">
-        <location filename="gui_divers/config.cpp" line="609"/>
+        <location filename="gui_divers/config.cpp" line="610"/>
         <source>Couleur du début de la boucle</source>
         <translation>Color de inicio de loop</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.cpp" line="619"/>
+        <location filename="gui_divers/config.cpp" line="620"/>
         <source>Couleur de la fin de la boucle</source>
         <translation>Color de fin de loop</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.cpp" line="629"/>
+        <location filename="gui_divers/config.cpp" line="630"/>
         <source>Couleur du curseur de lecture</source>
         <translation>Color del cursor de lectura</translation>
     </message>
     <message utf8="true">
-        <location filename="gui_divers/config.cpp" line="667"/>
-        <location filename="gui_divers/config.cpp" line="683"/>
+        <location filename="gui_divers/config.cpp" line="668"/>
+        <location filename="gui_divers/config.cpp" line="684"/>
         <source>---- séparateur ----</source>
         <translation>---- separador ----</translation>
     </message>
@@ -766,322 +758,327 @@
 <context>
     <name>DialogHelp</name>
     <message>
-        <location filename="gui_divers/dialog_help.cpp" line="102"/>
+        <location filename="gui_divers/dialog_help.cpp" line="103"/>
         <source>aide</source>
         <translation>ayuda</translation>
     </message>
     <message utf8="true">
-        <location filename="gui_divers/dialog_help.cpp" line="108"/>
+        <location filename="gui_divers/dialog_help.cpp" line="109"/>
         <source>Présentation du logiciel</source>
         <translation>Descripción del software</translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_help.cpp" line="110"/>
+        <location filename="gui_divers/dialog_help.cpp" line="111"/>
         <source>Barre de menu</source>
         <translation>Barra de menús</translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_help.cpp" line="111"/>
+        <location filename="gui_divers/dialog_help.cpp" line="112"/>
         <source>Fichier</source>
         <translation>Archivo</translation>
     </message>
     <message utf8="true">
-        <location filename="gui_divers/dialog_help.cpp" line="112"/>
+        <location filename="gui_divers/dialog_help.cpp" line="113"/>
         <source>Édition</source>
         <translation>Editar</translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_help.cpp" line="113"/>
-        <location filename="gui_divers/dialog_help.cpp" line="142"/>
+        <location filename="gui_divers/dialog_help.cpp" line="114"/>
+        <location filename="gui_divers/dialog_help.cpp" line="143"/>
         <source>Outils</source>
         <translation>Herramientas</translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_help.cpp" line="114"/>
+        <location filename="gui_divers/dialog_help.cpp" line="115"/>
         <source>Affichage</source>
         <translation>Ver</translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_help.cpp" line="115"/>
+        <location filename="gui_divers/dialog_help.cpp" line="116"/>
         <source>Aide</source>
         <translation>Ayuda</translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_help.cpp" line="117"/>
-        <location filename="gui_divers/dialog_help.cpp" line="182"/>
+        <location filename="gui_divers/dialog_help.cpp" line="118"/>
+        <location filename="gui_divers/dialog_help.cpp" line="183"/>
         <source>Barre d&apos;outils</source>
         <translation>Barra de herramientas</translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_help.cpp" line="118"/>
+        <location filename="gui_divers/dialog_help.cpp" line="119"/>
         <source>Raccourcis</source>
         <translation>Atajos</translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_help.cpp" line="119"/>
+        <location filename="gui_divers/dialog_help.cpp" line="120"/>
         <source>Clavier virtuel</source>
         <translation>Teclado virtual</translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_help.cpp" line="121"/>
+        <location filename="gui_divers/dialog_help.cpp" line="122"/>
         <source>Arborescence</source>
         <translation>Vista de árbol</translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_help.cpp" line="122"/>
+        <location filename="gui_divers/dialog_help.cpp" line="123"/>
         <source>Structure</source>
         <translation>Estructura</translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_help.cpp" line="123"/>
+        <location filename="gui_divers/dialog_help.cpp" line="124"/>
         <source>Menu contextuel</source>
         <translation>Menú contextual</translation>
     </message>
     <message utf8="true">
-        <location filename="gui_divers/dialog_help.cpp" line="124"/>
+        <location filename="gui_divers/dialog_help.cpp" line="125"/>
         <source>Glisser / déposer</source>
         <translation>Arrastrar / soltar</translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_help.cpp" line="125"/>
+        <location filename="gui_divers/dialog_help.cpp" line="126"/>
         <source>Recherche</source>
         <translation>Buscar</translation>
     </message>
     <message utf8="true">
-        <location filename="gui_divers/dialog_help.cpp" line="127"/>
+        <location filename="gui_divers/dialog_help.cpp" line="128"/>
         <source>Pages d&apos;édition</source>
         <translation>Páginas de edición</translation>
     </message>
     <message utf8="true">
-        <location filename="gui_divers/dialog_help.cpp" line="128"/>
+        <location filename="gui_divers/dialog_help.cpp" line="129"/>
         <source>Informations générales</source>
         <translation>Información general</translation>
     </message>
     <message utf8="true">
-        <location filename="gui_divers/dialog_help.cpp" line="129"/>
+        <location filename="gui_divers/dialog_help.cpp" line="130"/>
         <source>Zone d&apos;édition</source>
         <translation>Área de edición</translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_help.cpp" line="130"/>
+        <location filename="gui_divers/dialog_help.cpp" line="131"/>
         <source>Zone d&apos;informations</source>
         <translation>Área de información</translation>
     </message>
     <message utf8="true">
-        <location filename="gui_divers/dialog_help.cpp" line="131"/>
-        <location filename="gui_divers/dialog_help.cpp" line="143"/>
-        <location filename="gui_divers/dialog_help.cpp" line="181"/>
+        <location filename="gui_divers/dialog_help.cpp" line="132"/>
+        <location filename="gui_divers/dialog_help.cpp" line="144"/>
+        <location filename="gui_divers/dialog_help.cpp" line="182"/>
         <source>Échantillons</source>
         <translation>Muestras</translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_help.cpp" line="132"/>
+        <location filename="gui_divers/dialog_help.cpp" line="133"/>
         <source>Graphique</source>
         <translation>Gráficos</translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_help.cpp" line="133"/>
+        <location filename="gui_divers/dialog_help.cpp" line="134"/>
         <source>Informations</source>
         <translation>Información</translation>
     </message>
     <message utf8="true">
-        <location filename="gui_divers/dialog_help.cpp" line="134"/>
+        <location filename="gui_divers/dialog_help.cpp" line="135"/>
         <source>Fréquences</source>
         <translation>Frecuencias</translation>
     </message>
     <message utf8="true">
-        <location filename="gui_divers/dialog_help.cpp" line="135"/>
+        <location filename="gui_divers/dialog_help.cpp" line="136"/>
         <source>Égaliseur</source>
         <translation>Ecualizador</translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_help.cpp" line="136"/>
+        <location filename="gui_divers/dialog_help.cpp" line="137"/>
         <source>Lecteur</source>
         <translation>Reproductor</translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_help.cpp" line="137"/>
-        <location filename="gui_divers/dialog_help.cpp" line="153"/>
+        <location filename="gui_divers/dialog_help.cpp" line="138"/>
+        <location filename="gui_divers/dialog_help.cpp" line="154"/>
         <source>Instruments</source>
         <translation>Instrumentos</translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_help.cpp" line="138"/>
+        <location filename="gui_divers/dialog_help.cpp" line="139"/>
         <source>Tableau</source>
         <translation>Tabla</translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_help.cpp" line="139"/>
+        <location filename="gui_divers/dialog_help.cpp" line="140"/>
         <source>Section modulateur</source>
         <translation>Sección de moduladores</translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_help.cpp" line="140"/>
-        <location filename="gui_divers/dialog_help.cpp" line="163"/>
+        <location filename="gui_divers/dialog_help.cpp" line="141"/>
+        <location filename="gui_divers/dialog_help.cpp" line="164"/>
         <source>Presets</source>
         <translation>Presets</translation>
     </message>
     <message utf8="true">
-        <location filename="gui_divers/dialog_help.cpp" line="144"/>
+        <location filename="gui_divers/dialog_help.cpp" line="145"/>
         <source>Ajuster à la fin de boucle</source>
         <translation>Recortar al final del loop</translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_help.cpp" line="145"/>
+        <location filename="gui_divers/dialog_help.cpp" line="146"/>
         <source>Bouclage automatique</source>
         <translation>Auto loop</translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_help.cpp" line="146"/>
+        <location filename="gui_divers/dialog_help.cpp" line="147"/>
         <source>Diminuer sifflements</source>
         <translation>Reducción de silbido</translation>
     </message>
     <message utf8="true">
-        <location filename="gui_divers/dialog_help.cpp" line="147"/>
+        <location filename="gui_divers/dialog_help.cpp" line="148"/>
         <source>Enlever blanc au départ</source>
         <translation>Eliminar silencio al inicio</translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_help.cpp" line="148"/>
+        <location filename="gui_divers/dialog_help.cpp" line="149"/>
         <source>Filtre &quot;mur de brique&quot;</source>
         <translation>Filtro &quot;pared de ladrillo&quot;</translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_help.cpp" line="149"/>
+        <location filename="gui_divers/dialog_help.cpp" line="150"/>
         <source>Normaliser volume</source>
         <translation>Normalizar volumen</translation>
     </message>
     <message utf8="true">
-        <location filename="gui_divers/dialog_help.cpp" line="150"/>
+        <location filename="gui_divers/dialog_help.cpp" line="151"/>
         <source>Réglage balance</source>
         <translation>Ajustar balance</translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_help.cpp" line="151"/>
+        <location filename="gui_divers/dialog_help.cpp" line="152"/>
         <source>Transposer</source>
         <translation>Transportar</translation>
     </message>
     <message utf8="true">
-        <location filename="gui_divers/dialog_help.cpp" line="154"/>
+        <location filename="gui_divers/dialog_help.cpp" line="155"/>
         <source>Création mixture</source>
         <translation>Creación de mixturas</translation>
     </message>
     <message utf8="true">
-        <location filename="gui_divers/dialog_help.cpp" line="155"/>
+        <location filename="gui_divers/dialog_help.cpp" line="156"/>
         <source>Accordage céleste</source>
         <translation>Afinación celeste</translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_help.cpp" line="156"/>
-        <location filename="gui_divers/dialog_help.cpp" line="164"/>
+        <location filename="gui_divers/dialog_help.cpp" line="157"/>
+        <location filename="gui_divers/dialog_help.cpp" line="165"/>
         <source>Duplication des divisions</source>
         <translation>Duplicación de las divisiones</translation>
     </message>
     <message utf8="true">
-        <location filename="gui_divers/dialog_help.cpp" line="157"/>
+        <location filename="gui_divers/dialog_help.cpp" line="158"/>
         <source>Élaboration release</source>
         <translation>Asignar valores de release</translation>
     </message>
     <message utf8="true">
-        <location filename="gui_divers/dialog_help.cpp" line="158"/>
-        <location filename="gui_divers/dialog_help.cpp" line="165"/>
+        <location filename="gui_divers/dialog_help.cpp" line="159"/>
+        <location filename="gui_divers/dialog_help.cpp" line="166"/>
         <source>Paramétrage global</source>
         <translation>Parámetros generales</translation>
     </message>
     <message utf8="true">
-        <location filename="gui_divers/dialog_help.cpp" line="159"/>
+        <location filename="gui_divers/dialog_help.cpp" line="160"/>
         <source>Répartition automatique</source>
         <translation>Distribución automática</translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_help.cpp" line="160"/>
-        <location filename="gui_divers/dialog_help.cpp" line="166"/>
+        <location filename="gui_divers/dialog_help.cpp" line="161"/>
+        <location filename="gui_divers/dialog_help.cpp" line="167"/>
         <source>Spatialisation du son</source>
         <translation>Espacialización del sonido</translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_help.cpp" line="161"/>
-        <location filename="gui_divers/dialog_help.cpp" line="167"/>
+        <location filename="gui_divers/dialog_help.cpp" line="162"/>
+        <location filename="gui_divers/dialog_help.cpp" line="168"/>
         <source>Visualiseur</source>
         <translation>Visualizador</translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_help.cpp" line="169"/>
+        <location filename="gui_divers/dialog_help.cpp" line="170"/>
         <source>Globaux</source>
         <translation>Global</translation>
     </message>
     <message utf8="true">
-        <location filename="gui_divers/dialog_help.cpp" line="170"/>
+        <location filename="gui_divers/dialog_help.cpp" line="171"/>
         <source>Association auto échantillons</source>
         <translation>Asociación automática de muestras</translation>
     </message>
     <message utf8="true">
-        <location filename="gui_divers/dialog_help.cpp" line="171"/>
+        <location filename="gui_divers/dialog_help.cpp" line="172"/>
         <source>Dissocier les échantillons stéréo</source>
         <translation>Dividir las muestras estéreo</translation>
     </message>
     <message utf8="true">
-        <location filename="gui_divers/dialog_help.cpp" line="172"/>
+        <location filename="gui_divers/dialog_help.cpp" line="173"/>
         <source>Enlever les éléments non utilisés</source>
         <translation>Eliminar elementos no utilizados</translation>
     </message>
     <message utf8="true">
-        <location filename="gui_divers/dialog_help.cpp" line="173"/>
+        <location filename="gui_divers/dialog_help.cpp" line="174"/>
         <source>Exporter pics de fréquence (.csv)</source>
         <translation>Exportación de picos de frecuencia (.csv)</translation>
     </message>
     <message utf8="true">
-        <location filename="gui_divers/dialog_help.cpp" line="174"/>
+        <location filename="gui_divers/dialog_help.cpp" line="175"/>
         <source>Régler atténuation minimale</source>
         <translation>Establecer atenuación mínima</translation>
     </message>
     <message utf8="true">
-        <location filename="gui_divers/dialog_help.cpp" line="176"/>
+        <location filename="gui_divers/dialog_help.cpp" line="177"/>
         <source>Magnétophone</source>
         <translation>Grabadora</translation>
     </message>
     <message utf8="true">
-        <location filename="gui_divers/dialog_help.cpp" line="178"/>
+        <location filename="gui_divers/dialog_help.cpp" line="179"/>
         <source>Préférences du logiciel</source>
         <translation>Preferencias de software</translation>
     </message>
     <message utf8="true">
-        <location filename="gui_divers/dialog_help.cpp" line="179"/>
+        <location filename="gui_divers/dialog_help.cpp" line="180"/>
         <source>Général</source>
         <translation>General</translation>
     </message>
     <message utf8="true">
-        <location filename="gui_divers/dialog_help.cpp" line="180"/>
+        <location filename="gui_divers/dialog_help.cpp" line="181"/>
         <source>Synthétiseur</source>
         <translation>Sintetizador</translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_help.cpp" line="183"/>
+        <location filename="gui_divers/dialog_help.cpp" line="184"/>
         <source>Clavier</source>
         <translation>Teclado</translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_help.cpp" line="185"/>
+        <location filename="gui_divers/dialog_help.cpp" line="186"/>
         <source>Annexes</source>
         <translation>Apéndices</translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_help.cpp" line="186"/>
+        <location filename="gui_divers/dialog_help.cpp" line="187"/>
+        <source>Tutoriel</source>
+        <translation>Tutorial</translation>
+    </message>
+    <message>
+        <location filename="gui_divers/dialog_help.cpp" line="188"/>
         <source>Soundfonts sf2</source>
         <translation>Soundfonts sf2</translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_help.cpp" line="187"/>
+        <location filename="gui_divers/dialog_help.cpp" line="189"/>
         <source>Import / export sfz</source>
         <translation>Importar / exportar sfz</translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_help.cpp" line="188"/>
+        <location filename="gui_divers/dialog_help.cpp" line="190"/>
         <source>Limitations du logiciel</source>
         <translation>Limitaciones del software</translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_help.cpp" line="203"/>
+        <location filename="gui_divers/dialog_help.cpp" line="205"/>
         <source>fr</source>
         <translatorcomment>will be &quot;es&quot; if a spanish translation of the documentation is done</translatorcomment>
         <translation>en</translation>
@@ -2150,50 +2147,40 @@ instrumento actual</translation>
         <source>Exporte une soundfont</source>
         <translation>Exportar una soundfont</translation>
     </message>
-    <message>
-        <location filename="mainwindow.ui" line="1404"/>
-        <source>I&amp;mporter soundfont...</source>
-        <translation>I&amp;mportar soundfont...</translation>
-    </message>
-    <message>
-        <location filename="mainwindow.ui" line="1407"/>
-        <source>Importe une soundfont</source>
-        <translation>Importar una soundfont</translation>
-    </message>
     <message utf8="true">
-        <location filename="mainwindow.ui" line="1419"/>
+        <location filename="mainwindow.ui" line="1407"/>
         <source>&amp;Dissocier les échantillons stéréo</source>
         <oldsource>&amp;Dissocier les samples stéréo</oldsource>
         <translation>&amp;Dividir las muestras estéreo</translation>
     </message>
     <message utf8="true">
-        <location filename="mainwindow.ui" line="1422"/>
+        <location filename="mainwindow.ui" line="1410"/>
         <source>Dissocie les échantillons stéréo</source>
         <oldsource>Dissocie les samples stéréo</oldsource>
         <translation>Dividir las muestras estéreo</translation>
     </message>
     <message utf8="true">
-        <location filename="mainwindow.ui" line="1434"/>
+        <location filename="mainwindow.ui" line="1422"/>
         <source>Exporter pics de &amp;fréquence (.csv)</source>
         <translation>Exportación de picos de &amp;frecuencia (.csv)</translation>
     </message>
     <message utf8="true">
-        <location filename="mainwindow.ui" line="1437"/>
+        <location filename="mainwindow.ui" line="1425"/>
         <source>Exporte les pics de fréquence des échantillons dans un fichier csv</source>
         <translation>Exporta los picos de frecuencia de las muestras en un archivo csv</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1445"/>
+        <location filename="mainwindow.ui" line="1433"/>
         <source>&amp;88 notes (piano)</source>
         <translation>&amp;88 notas (piano)</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1456"/>
+        <location filename="mainwindow.ui" line="1444"/>
         <source>Dans la &amp;barre d&apos;outils</source>
         <translation>En la &amp;barra de herramientas</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1464"/>
+        <location filename="mainwindow.ui" line="1452"/>
         <source>&amp;Flottant</source>
         <translation>&amp;Flotante</translation>
     </message>
@@ -3797,72 +3784,72 @@ Dividir el fichero en diferentes sf2 puede resolver el problema.</translation>
 <context>
     <name>Page_Smpl</name>
     <message utf8="true">
-        <location filename="pages/page_smpl.ui" line="185"/>
+        <location filename="pages/page_smpl.ui" line="167"/>
         <source>&lt;b&gt;Fréquences&lt;/b&gt;</source>
         <translation>&lt;b&gt;Frecuencias&lt;/b&gt;</translation>
     </message>
     <message utf8="true">
-        <location filename="pages/page_smpl.ui" line="718"/>
+        <location filename="pages/page_smpl.ui" line="700"/>
         <source>Réinitialiser</source>
         <translation>Reinicializar</translation>
     </message>
     <message>
-        <location filename="pages/page_smpl.ui" line="737"/>
+        <location filename="pages/page_smpl.ui" line="719"/>
         <source>Appliquer</source>
         <translation>Aplicar</translation>
     </message>
     <message utf8="true">
-        <location filename="pages/page_smpl.ui" line="756"/>
+        <location filename="pages/page_smpl.ui" line="738"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Égaliseur (±15 dB)&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Ecualizador (±15 dB)&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="pages/page_smpl.ui" line="924"/>
+        <location filename="pages/page_smpl.ui" line="903"/>
         <source>Note de base</source>
         <translation>Nota base</translation>
     </message>
     <message>
-        <location filename="pages/page_smpl.ui" line="789"/>
+        <location filename="pages/page_smpl.ui" line="762"/>
         <source>Boucle</source>
         <translation>Loop</translation>
     </message>
     <message>
-        <location filename="pages/page_smpl.ui" line="917"/>
+        <location filename="pages/page_smpl.ui" line="896"/>
         <source>Taille</source>
         <translation>Tamaño</translation>
     </message>
     <message>
-        <location filename="pages/page_smpl.ui" line="945"/>
+        <location filename="pages/page_smpl.ui" line="924"/>
         <source>Type</source>
         <translation>Tipo</translation>
     </message>
     <message>
-        <location filename="pages/page_smpl.ui" line="938"/>
+        <location filename="pages/page_smpl.ui" line="917"/>
         <source>Echantillonnage</source>
         <translation>Frecuencia de muestreo</translation>
     </message>
     <message>
-        <location filename="pages/page_smpl.ui" line="952"/>
+        <location filename="pages/page_smpl.ui" line="931"/>
         <source>Lien</source>
         <translation>Enlace</translation>
     </message>
     <message utf8="true">
-        <location filename="pages/page_smpl.ui" line="931"/>
+        <location filename="pages/page_smpl.ui" line="910"/>
         <source>Correction (centième)</source>
         <translation>Corrección (centésimas)</translation>
     </message>
     <message utf8="true">
-        <location filename="pages/page_smpl.ui" line="903"/>
+        <location filename="pages/page_smpl.ui" line="876"/>
         <source>Utilise la longueur totale de l&apos;échantillon comme boucle</source>
         <translation>Utilice toda la longitud de la muestra como loop</translation>
     </message>
     <message>
-        <location filename="pages/page_smpl.ui" line="976"/>
+        <location filename="pages/page_smpl.ui" line="955"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Informations&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Información&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="pages/page_smpl.ui" line="1051"/>
+        <location filename="pages/page_smpl.ui" line="1021"/>
         <location filename="pages/page_smpl.cpp" line="328"/>
         <location filename="pages/page_smpl.cpp" line="1624"/>
         <location filename="pages/page_smpl.cpp" line="1662"/>
@@ -3870,17 +3857,17 @@ Dividir el fichero en diferentes sf2 puede resolver el problema.</translation>
         <translation>Reproducir</translation>
     </message>
     <message>
-        <location filename="pages/page_smpl.ui" line="1067"/>
+        <location filename="pages/page_smpl.ui" line="1037"/>
         <source>sinus</source>
         <translation>seno</translation>
     </message>
     <message>
-        <location filename="pages/page_smpl.ui" line="1105"/>
+        <location filename="pages/page_smpl.ui" line="1075"/>
         <source>en boucle</source>
         <translation>loop</translation>
     </message>
     <message utf8="true">
-        <location filename="pages/page_smpl.ui" line="1118"/>
+        <location filename="pages/page_smpl.ui" line="1088"/>
         <source>stéréo</source>
         <translation>estéreo</translation>
     </message>
