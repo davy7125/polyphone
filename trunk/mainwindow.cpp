@@ -639,6 +639,7 @@ void MainWindow::showAbout()
 void MainWindow::showHelp()
 {
     this->help.show();
+    this->help.activateWindow();
 }
 void MainWindow::AfficherBarreOutils()
 {
@@ -847,7 +848,6 @@ QList<QAction *> MainWindow::getListeActions()
                 << ui->actionSommaire
                 << ui->action_Visualiseur
                 << ui->actionExporter_en_tant_qu_sfz
-                << ui->actionI_mporter_soundfont
                 << ui->action_Dissocier_les_samples_st_r_o
                 << ui->actionExporter_pics_de_fr_quence;
     return listeAction;

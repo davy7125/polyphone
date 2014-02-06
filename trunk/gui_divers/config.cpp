@@ -99,7 +99,7 @@ Config::Config(QWidget *parent, PianoKeybdCustom *keyboard) : QDialog(parent),
         this->ui->comboAudioOuput->setCurrentIndex(nbItem - 1 - isAsioEnabled); // Jack
     else if (this->audioType == -3)
         this->ui->comboAudioOuput->setCurrentIndex(nbItem - 1); // Asio
-    int pos = qLn(bufferSize) / 0.69314718056 - 4;
+    int pos = qRound(qLn(bufferSize) / 0.69314718056 - 4);
     if (pos < 0)
         pos = 0;
     if (pos > ui->comboBufferSize->count() - 1)
@@ -127,8 +127,8 @@ Config::Config(QWidget *parent, PianoKeybdCustom *keyboard) : QDialog(parent),
     ui->spinDefaultVelocity->setValue(_velocity);
     if (this->keyboardType < 0 || this->keyboardType > 4)
         this->keyboardType = 1;
-    ui->comboRam->setVisible(false); // Temporaire : tout charger dans la ram n'apporte rien pour l'instant (sur linux)
-    ui->label_2->setVisible(false);
+    //ui->comboRam->setVisible(false); // Temporaire : tout charger dans la ram n'apporte rien pour l'instant (sur linux)
+    //ui->label_2->setVisible(false);
     this->setColors();
 
     // Initialisation mappage
@@ -149,6 +149,7 @@ Config::Config(QWidget *parent, PianoKeybdCustom *keyboard) : QDialog(parent),
     // Vélocité par défaut du clavier
     _keyboard->set(PianoKeybd::PROPERTY_VELOCITY, _velocity);
 
+    initComboLanguage();
     this->loaded = true;
 }
 Config::~Config()
@@ -992,4 +993,44 @@ void Config::on_spinDefaultVelocity_editingFinished()
         this->store();
         _keyboard->set(PianoKeybd::PROPERTY_VELOCITY, _velocity);
     }
+}
+
+void Config::initComboLanguage()
+{
+    QString locale = QLocale::system().name().section('_', 0, 0);
+    locale = settings.value("language", locale).toString();
+    ui->comboLangue->blockSignals(true);
+    if (locale == "fr")
+        ui->comboLangue->setCurrentIndex(2);
+    else if (locale == "es")
+        ui->comboLangue->setCurrentIndex(1);
+    else
+        ui->comboLangue->setCurrentIndex(0);
+    ui->comboLangue->blockSignals(false);
+}
+
+void Config::on_comboLangue_currentIndexChanged(int index)
+{
+    switch (index)
+    {
+    case 0:
+        // Anglais
+        settings.setValue("language", "en");
+        break;
+    case 1:
+        // Espagnol
+        settings.setValue("language", "es");
+        break;
+    case 2:
+        // Français
+        settings.setValue("language", "fr");
+        break;
+    default:
+        // Anglais
+        settings.setValue("language", "en");
+        break;
+    }
+
+    QMessageBox::information(QApplication::activeWindow(), trUtf8("Information"),
+                             trUtf8("La modification sera prise en compte lors du prochain démarrage du logiciel."));
 }

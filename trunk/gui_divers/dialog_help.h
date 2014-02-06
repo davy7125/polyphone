@@ -46,6 +46,7 @@ private slots:
     void onTreeClicked(QTreeWidgetItem* item, QTreeWidgetItem*);
     void onPreviousClicked();
     void onNextClicked();
+    void verticalSliderMoved(int value);
 
 private:
     void createUi();
@@ -61,6 +62,8 @@ private:
     QPushButton * _buttonLeft, * _buttonRight;
 
     QStringList _urlPrevious, _urlNext;
+    QList<int> _posPrevious, _posNext;
+    int _valTmp;
 };
 
 #endif // DIALOG_HELP_H

@@ -25,10 +25,12 @@
 #include "dialog_help.h"
 #include <QHBoxLayout>
 #include <QHeaderView>
+#include <QScrollBar>
 
 DialogHelp::DialogHelp(QWidget *parent) :
     QDialog(parent, Qt::WindowCloseButtonHint | Qt::WindowMinMaxButtonsHint |
-            Qt::WindowSystemMenuHint | Qt::Window)
+            Qt::WindowSystemMenuHint | Qt::Window),
+    _valTmp(0)
 {
     // Création de l'interface et remplissage de l'arborescence
     createUi();
@@ -96,6 +98,7 @@ void DialogHelp::createUi()
     connect(_buttonLeft, SIGNAL(clicked()), this, SLOT(onPreviousClicked()));
     connect(_buttonRight, SIGNAL(clicked()), this, SLOT(onNextClicked()));
     connect(_textBrowser, SIGNAL(sourceChanged(QUrl)), this, SLOT(onTextSourceChanged(QUrl)));
+    connect(_textBrowser->verticalScrollBar(), SIGNAL(valueChanged(int)), this, SLOT(verticalSliderMoved(int)));
 
     // Redimensionnement et nom de la fenêtre
     this->resize(700, 400);
@@ -183,6 +186,10 @@ void DialogHelp::fillTree()
     createItem(trUtf8("Clavier"), "6-4", level1);
 
     level1 = createItem(trUtf8("Annexes"), "7");
+    level2 = createItem(trUtf8("Tutoriel"), "8", level1);
+    createItem(trUtf8("Préparation des échantillons"), "8-0", level2);
+    createItem(trUtf8("Création d'un instrument"), "8-1", level2);
+    createItem(trUtf8("Création d'un preset"), "8-2", level2);
     createItem(trUtf8("Soundfonts sf2"), "7-0", level1);
     createItem(trUtf8("Import / export sfz"), "7-1", level1);
     createItem(trUtf8("Limitations du logiciel"), "7-2", level1);
@@ -232,9 +239,14 @@ void DialogHelp::onTextSourceChanged(const QUrl &arg1, bool store)
     if (store)
     {
         _urlNext.clear();
+        _posNext.clear();
         _urlPrevious.insert(0, currentPage);
+        _posPrevious.insert(0, 0);
         while (_urlPrevious.size() > 51)
+        {
             _urlPrevious.removeLast();
+            _posPrevious.removeLast();
+        }
         updateNextPreviousStates();
     }
 }
@@ -260,10 +272,14 @@ void DialogHelp::onPreviousClicked()
 {
     if (_urlPrevious.size() > 1)
     {
+        _posPrevious.first() = _textBrowser->verticalScrollBar()->value();
         _urlNext.insert(0, _urlPrevious.takeFirst());
+        _posNext.insert(0, _posPrevious.takeFirst());
         _textBrowser->blockSignals(true);
+        int value = _posPrevious.first();
         _textBrowser->setSource(QUrl(_urlPrevious.first()));
         _textBrowser->blockSignals(false);
+        _textBrowser->verticalScrollBar()->setValue(value);
         onTextSourceChanged(_urlPrevious.first(), false);
         updateNextPreviousStates();
     }
@@ -273,12 +289,15 @@ void DialogHelp::onNextClicked()
 {
     if (!_urlNext.isEmpty())
     {
-        QString url = _urlNext.takeFirst();
+        _posPrevious.first() = _textBrowser->verticalScrollBar()->value();
+        _urlPrevious.insert(0, _urlNext.takeFirst());
+        _posPrevious.insert(0, _posNext.takeFirst());
         _textBrowser->blockSignals(true);
-        _textBrowser->setSource(QUrl(url));
+        int value = _posPrevious.first();
+        _textBrowser->setSource(QUrl(_urlPrevious.first()));
         _textBrowser->blockSignals(false);
-        onTextSourceChanged(url, false);
-        _urlPrevious.insert(0, url);
+        _textBrowser->verticalScrollBar()->setValue(value);
+        onTextSourceChanged(_urlPrevious.first(), false);
         updateNextPreviousStates();
     }
 }
@@ -287,4 +306,10 @@ void DialogHelp::updateNextPreviousStates()
 {
     _buttonLeft->setEnabled(_urlPrevious.size() > 1);
     _buttonRight->setEnabled(!_urlNext.isEmpty());
+}
+
+void DialogHelp::verticalSliderMoved(int value)
+{
+    _posPrevious.first() = _valTmp;
+    _valTmp = value;
 }
