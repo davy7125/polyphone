@@ -267,6 +267,15 @@
         <file alias="fourier en.png">ressources/doc/fourier en.png</file>
         <file alias="5-3-4en.html">ressources/doc/5-tools/3-global/5-3-4en.html</file>
         <file alias="5-3-4fr.html">ressources/doc/5-tools/3-global/5-3-4fr.html</file>
+        <file alias="loop_illustration.png">ressources/doc/loop_illustration.png</file>
+        <file alias="8-0en.html">ressources/doc/8-tutoriel/8-0en.html</file>
+        <file alias="8-0fr.html">ressources/doc/8-tutoriel/8-0fr.html</file>
+        <file alias="8-1en.html">ressources/doc/8-tutoriel/8-1en.html</file>
+        <file alias="8-1fr.html">ressources/doc/8-tutoriel/8-1fr.html</file>
+        <file alias="8-2en.html">ressources/doc/8-tutoriel/8-2en.html</file>
+        <file alias="8-2fr.html">ressources/doc/8-tutoriel/8-2fr.html</file>
+        <file alias="8en.html">ressources/doc/8-tutoriel/8en.html</file>
+        <file alias="8fr.html">ressources/doc/8-tutoriel/8fr.html</file>
     </qresource>
     <qresource prefix="/traductions">
         <file alias="polyphone_en.qm">ressources/traductions/polyphone_en.qm</file>

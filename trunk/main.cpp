@@ -23,6 +23,8 @@
 ***************************************************************************/
 
 #include <QApplication>
+#include <QSettings>
+
 #if QT_VERSION >= QT_VERSION_CHECK(5, 0, 0)
 #include <QDesktopWidget>
 #endif
@@ -50,6 +52,8 @@ int main(int argc, char *argv[])
     a.setApplicationName("Polyphone");
     a.setOrganizationName("polyphone");
     QString locale = QLocale::system().name().section('_', 0, 0);
+    QSettings settings;
+    locale = settings.value("language", locale).toString();
     if (locale.compare("es") == 0)
         a.installTranslator(&translatorES);
     else if (locale.compare("fr") != 0)

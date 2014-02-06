@@ -1395,18 +1395,6 @@
     <string>Exporte une soundfont</string>
    </property>
   </action>
-  <action name="actionI_mporter_soundfont">
-   <property name="icon">
-    <iconset resource="ressources.qrc">
-     <normaloff>:/icones/import</normaloff>:/icones/import</iconset>
-   </property>
-   <property name="text">
-    <string>I&amp;mporter soundfont...</string>
-   </property>
-   <property name="toolTip">
-    <string>Importe une soundfont</string>
-   </property>
-  </action>
   <action name="action_Dissocier_les_samples_st_r_o">
    <property name="enabled">
     <bool>false</bool>

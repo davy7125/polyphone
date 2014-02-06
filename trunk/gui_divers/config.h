@@ -654,6 +654,7 @@ private slots:
     void on_comboKeyName_currentIndexChanged(int index);
     void on_comboDo_currentIndexChanged(int index);
     void on_spinDefaultVelocity_editingFinished();
+    void on_comboLangue_currentIndexChanged(int index);
 
 private:
     QSettings settings;
@@ -697,6 +698,7 @@ private:
     void fillActions();
     QByteArray getDefaultListActions();
     void renameComboDo();
+    void initComboLanguage();
 };
 
 #endif // CONFIG_H
