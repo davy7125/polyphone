@@ -137,7 +137,9 @@ SOURCES	+= main.cpp \
     sfark/sfklDiff.cpp \
     sfark/sfklCrunch.cpp \
     sfark/sfklCoding.cpp \
-    synthetiseur/elements/calibrationsinus.cpp
+    synthetiseur/elements/calibrationsinus.cpp \
+    pages/graphique.cpp \
+    pages/graphiquefourier.cpp
 
 HEADERS  += mainwindow.h \
     sf2_core/sf2_types.h \
@@ -207,7 +209,9 @@ HEADERS  += mainwindow.h \
     sfark/wcc.h \
     sfark/sfArkLib.h \
     sfark/sfarkextractor.h \
-    synthetiseur/elements/calibrationsinus.h
+    synthetiseur/elements/calibrationsinus.h \
+    pages/graphique.h \
+    pages/graphiquefourier.h
 
 FORMS    += mainwindow.ui \
     gui_divers/config.ui \
