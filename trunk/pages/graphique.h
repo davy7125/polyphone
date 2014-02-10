@@ -22,78 +22,69 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef PAGE_SMPL_H
-#define PAGE_SMPL_H
+#ifndef GRAPHIQUE_H
+#define GRAPHIQUE_H
 
-#include <QWidget>
-#include "page.h"
+#include "qcustomplot.h"
+class QScrollBar;
+class QSpinBox;
 
-namespace Ui
-{
-    class Page_Smpl;
-}
 
-class Page_Smpl : public Page
+class Graphique : public QCustomPlot
 {
     Q_OBJECT
 public:
-    explicit Page_Smpl(QWidget * parent = 0);
-    ~Page_Smpl();
+    explicit Graphique(QWidget *parent = 0);
 
     // Méthodes publiques
-    void afficher();
-    void normalisation();
-    void enleveBlanc();
-    void enleveBlanc(EltID id);
-    void enleveFin();
-    void enleveFin(EltID id);
-    void bouclage();
-    void filtreMur();
-    void reglerBalance();
-    void transposer();
-    void sifflements();
-    bool isPlaying();
-    void pushPlayPause();
+    void clearAll();
+    void setData(QByteArray baData);
+    void linkSliderX(QScrollBar * qScrollX);
+    void linkSpinBoxes(QSpinBox * spinStart, QSpinBox * spinEnd);
+    void zoomDrag();
+    void updateStyle();
+    void displayMultipleSelection(bool isOn);
 
-    void getPeakFrequencies(EltID id, QList<double> &frequencies, QList<double> &factors, QList<int> &keys, QList<int> &corrections);
+public slots:
+    void setPosX(int posX);
+    void setStartLoop(int pos, bool replot = true);
+    void setEndLoop(int pos, bool replot = true);
+    void setCurrentSample(int pos);
 
 signals:
-    void noteChanged(int unused, int vel);
+    void startLoopChanged();
+    void endLoopChanged();
 
-private slots:
-    void lecture();
-    void lecteurFinished();
-    void applyEQ();
-    void initEQ();
-    void sifflements(int freq1, int freq2, double raideur);
-    void setStartLoop();
-    void setStartLoop(int val);
-    void setEndLoop();
-    void setEndLoop(int val);
-    void on_pushFullLength_clicked();
-    void setRootKey();
-    void setRootKey(int val);
-    void setTune();
-    void setTune(int val);
-    void setType(int index);
-    void setLinkedSmpl(int index);
-    void setRate(int index);
-    void on_checkLectureBoucle_stateChanged(int arg1);
-    void setSinusEnabled(bool val);
-    void setGainSample(int val);
-    void setStereo(bool val);
-    void selectionChanged();
-    void updateColors();
+protected:
+    void paintEvent(QPaintEvent *event);
+    void mousePressEvent(QMouseEvent *event);
+    void mouseReleaseEvent(QMouseEvent *event);
+    void mouseMoveEvent(QMouseEvent *event);
 
 private:
-    Ui::Page_Smpl *ui;
-    bool lectureEnCours;
-    int preventStop;
+    // Attributs privés
+    QPen penLecture;
+    double sizeX;
+    bool zoomFlag;
+    bool dragFlag;
+    bool modifiedFlag;
+    double xInit, yInit;
+    double zoomX, zoomY, posX, posY;
+    double zoomXinit, zoomYinit, posXinit, posYinit;
+    QPoint pointInit;
+    bool bFromExt;
+    QScrollBar * qScrollX;
+    QSpinBox * spinStart;
+    QSpinBox * spinEnd;
+    int m_currentPos;
+    bool filterEventEnabled;
+    QCPItemText * textMultipleSelection;
 
     // Méthodes privées
-    void setRateElt(EltID id, DWORD echFinal);
-    EltID getRepercussionID(int num = 0);
+    void zoom(QPoint point);
+    void drag(QPoint point);
+    void setZoomLine(double x1, double y1, double x2, double y2);
+    void plotOverlay();
 };
 
-
-#endif // PAGE_SMPL_H
+#endif // GRAPHIQUE_H

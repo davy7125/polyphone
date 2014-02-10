@@ -60,6 +60,7 @@ public:
     static void bpsConversion(char *cDest, const char *cFrom, qint32 size, WORD wBpsInit, WORD wBpsFinal, bool bigEndian = false);
     static QByteArray from2MonoTo1Stereo(QByteArray baData1, QByteArray baData2, WORD wBps, bool bigEndian = false);
     static Complex * fromBaToComplex(QByteArray baData, WORD wBps, unsigned long &size);
+    static Complex * fromBaToComplex(QVector<float> fData, unsigned long &size);
     static QByteArray fromComplexToBa(Complex * cpxData, int size, WORD wBps);
     static Complex * FFT(Complex * x, int N); // N must be a power of 2
     static Complex * IFFT(Complex * x, int N); // N must be a power of 2
@@ -67,12 +68,13 @@ public:
     static QByteArray multiplier(QByteArray baData, double dMult, WORD wBps, double &db);
     static QByteArray enleveBlanc(QByteArray baData, double seuil, WORD wBps, quint32 &pos);
     static void regimePermanent(QByteArray baData, DWORD dwSmplRate, WORD wBps, qint32 &posStart, qint32 &posEnd);
-    static QByteArray correlation(QByteArray baData, DWORD dwSmplRate, WORD wBps, qint32 fMin, qint32 fMax, qint32 &dMin);
-    static qint32 correlation(QByteArray baData1, QByteArray baData2, WORD wBps);
+    static void regimePermanent(QVector<float> fData, DWORD dwSmplRate, qint32 &posStart, qint32 &posEnd);
+    static QVector<float> correlation(const QVector<float> fData, DWORD dwSmplRate, qint32 fMin, qint32 fMax, qint32 &dMin);
+    static float correlation(QVector<float> fData1, QVector<float> fData2);
     static QByteArray bouclage(QByteArray baData, DWORD dwSmplRate, qint32 &loopStart, qint32 &loopEnd, WORD wBps);
     static QByteArray sifflements(QByteArray baData, DWORD dwSmplRate, WORD wBps, double fCut, double fMax, double raideur);
-    static quint32 * findMins(QByteArray baCorrel, WORD wBps, int nb, double minFrac = 0);
-    static quint32 * findMax(QByteArray baData, WORD wBps, int nb, double minFrac = 0);
+    static QList<int> findMins(QVector<float> vectData, int maxNb, double minFrac = 0);
+    static QList<quint32> findMax(QVector<float> vectData, int maxNb, double minFrac = 0);
     static qint32 max(QByteArray baData, WORD wBps);
     static double moyenneCarre(QByteArray baData, WORD wBps);
     static int lastLettersToRemove(QString str1, QString str2);
@@ -120,11 +122,10 @@ private:
             Complex * X, Complex * scratch, Complex * twiddles);
     static double moyenne(QByteArray baData, WORD wBps);
     static double gainEQ(double freq, int i1, int i2, int i3, int i4, int i5, int i6, int i7, int i8, int i9, int i10);
-    static qint32 mediane(QByteArray baData, WORD wBps);
+    static float mediane(QVector<float> data);
     static qint64 somme(QByteArray baData, WORD wBps);
     static qint64 sommeCarre(QByteArray baData, WORD wBps);
-    static void regimePermanent(QByteArray baData, DWORD dwSmplRate, WORD wBps, qint32 &posStart,
-                                qint32 &posEnd, int nbOK, double coef);
+    static void regimePermanent(QVector<float> data, DWORD dwSmplRate, qint32 &posStart, qint32 &posEnd, int nbOK, double coef);
     static double sinc(double x);
     static void KBDWindow(double* window, int size, double alpha);
     static double BesselI0(double x);

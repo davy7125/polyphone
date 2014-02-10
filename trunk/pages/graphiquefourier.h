@@ -22,78 +22,47 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef PAGE_SMPL_H
-#define PAGE_SMPL_H
+#ifndef GRAPHIQUEFOURIER_H
+#define GRAPHIQUEFOURIER_H
 
-#include <QWidget>
-#include "page.h"
+#include "qcustomplot.h"
+#include "sf2_types.h"
+class QMenu;
 
-namespace Ui
-{
-    class Page_Smpl;
-}
-
-class Page_Smpl : public Page
+class GraphiqueFourier : public QCustomPlot
 {
     Q_OBJECT
+
 public:
-    explicit Page_Smpl(QWidget * parent = 0);
-    ~Page_Smpl();
+    explicit GraphiqueFourier(QWidget *parent = 0);
+    ~GraphiqueFourier() {}
 
-    // Méthodes publiques
-    void afficher();
-    void normalisation();
-    void enleveBlanc();
-    void enleveBlanc(EltID id);
-    void enleveFin();
-    void enleveFin(EltID id);
-    void bouclage();
-    void filtreMur();
-    void reglerBalance();
-    void transposer();
-    void sifflements();
-    bool isPlaying();
-    void pushPlayPause();
+    void setBackgroundColor(QColor color);
+    void setData(QByteArray baData, DWORD dwSmplRate);
+    void setSampleName(QString name) { _name = name; }
+    void setPos(qint32 posStart, qint32 posEnd);
+    void setPos(qint32 posStart, qint32 posEnd, QList<double> &frequencies, QList<double> &factors,
+                QList<int> &pitch, QList<int> &corrections);
 
-    void getPeakFrequencies(EltID id, QList<double> &frequencies, QList<double> &factors, QList<int> &keys, QList<int> &corrections);
-
-signals:
-    void noteChanged(int unused, int vel);
+protected:
+    void resizeEvent(QResizeEvent *event);
+    void mousePressEvent(QMouseEvent *event);
 
 private slots:
-    void lecture();
-    void lecteurFinished();
-    void applyEQ();
-    void initEQ();
-    void sifflements(int freq1, int freq2, double raideur);
-    void setStartLoop();
-    void setStartLoop(int val);
-    void setEndLoop();
-    void setEndLoop(int val);
-    void on_pushFullLength_clicked();
-    void setRootKey();
-    void setRootKey(int val);
-    void setTune();
-    void setTune(int val);
-    void setType(int index);
-    void setLinkedSmpl(int index);
-    void setRate(int index);
-    void on_checkLectureBoucle_stateChanged(int arg1);
-    void setSinusEnabled(bool val);
-    void setGainSample(int val);
-    void setStereo(bool val);
-    void selectionChanged();
-    void updateColors();
+    void exportPng();
 
 private:
-    Ui::Page_Smpl *ui;
-    bool lectureEnCours;
-    int preventStop;
-
-    // Méthodes privées
-    void setRateElt(EltID id, DWORD echFinal);
-    EltID getRepercussionID(int num = 0);
+    QVector<float> _fData;
+    DWORD dwSmplRate;
+    QString _name;
+    QCPItemText * text1; // estimation
+    QCPItemText * text2; // intensité
+    QCPItemText * text3; // fréquence
+    QCPItemText * text4; // note
+    QCPItemText * text5; // correction
+    QMenu * _menu;
+    void resized();
+    void exportPng(QString fileName);
 };
 
-
-#endif // PAGE_SMPL_H
+#endif // GRAPHIQUEFOURIER_H
