@@ -1,11 +1,25 @@
-<p align="justify">Sf2 soundfonts are files edited by Polyphone. Each sf2 file comprises one or more musical virtual instruments, made of audio samples and a lot of parameters. Parameters define how the samples should be played throughout the keyboard, possibly modulated by predefined signals (<a href="qrc:/aide/4-2-1en.html">modulators</a>). Sf2 files are build according to a 3-level structure:
-<ul>
-	<li><a href="qrc:/aide/4-1en.html">samples</a>, coming from a trompet or a piano for instance,</li>
-	<li><a href="qrc:/aide/4-2en.html">instruments</a>, made of samples,</li>
-	<li><a href="qrc:/aide/4-3en.html">presets</a>, made of instruments.</li>
-</ul>
-Further to the definition and setting of these elements, a sf2 file contains also <a href="qrc:/aide/4-0en.html">general information</a> (the author, copyright or edit time for instance).</p>
+<p align="justify">From this step, it is considered that one or more samples are available for the creation of an instrument.</p>
 
-<p align="justify">Soundfonts are used by software synthesizers using wavetables, such as fluidsynth, these synthesizers being driven by MIDI signals. Sound production implies a sample reading taking into account every parameter entered in the soundfont.</p>
+<h3>Creating an instrument and adding samples</h3>
 
-<p align="justify">Further information on soundfonts may be found for example on <a href="http://en.wikipedia.org/wiki/SoundFont">Wikipedia<img src="qrc:/icones/external_link.gif" /></a>. The sf2 specifications are available <a href="http://www.polyphone.fr/download/sf_specifications_v2.04.pdf">here<img src="qrc:/icones/external_link.gif" /></a>.</p>
+<p align="justify">First of all, click on "New instrument" in the <a href="qrc:/aide/2-0en.html">toolbar</a> if the icon is present, or in the <a href="qrc:/aide/3-1en.html">contextual menu</a> of the tree on one of the elements of the soundfont being edited. A name has to be filled for our new instrument.</p>
+
+<p align="justify">Then add samples in the instrument using a "<a href="qrc:/aide/3-2en.html">drag & drop</a>" in the tree: divisions appear in the instrument.</p>
+
+<p align="justify">Note: when samples are created divisions are not copied but linked. There are no constraints on the number of divisions.</p>
+
+<h3>Disposition of divisions</h3>
+
+<p align="justify">Each division must then be positioned on the keyboard by changing the "Keyrange" in the table of the editing page of <a href="qrc:/aide/4-2en.html">instruments</a>. Generally, it is a good pratice to dimension the extent of the division with respect to the root key of the represented sample. The entire surface of the keyboard must be covered (eg, key 36 to key 96 for a classic synthesizer keyboard).</p>
+
+<p align="justify">The tool "<a href="qrc:/aide/5-1-5en.html">Automatic distribution</a>" automatically distributes the samples over the keyboard.</p>
+
+<h3>Setting the divisions</h3>
+
+<p align="justify">First of all if the samples are looped the value "1" must be entered in the global division for the "Loop" parameter.</p>
+
+<p align="justify">The global division, as its name suggests, allow you to enter a parameter for the entire instrument. A global parameter applies only to the divisions whose same parameter is not specified - ie  the parameters of the classical divisions take precedence over the settings of the global division.</p>
+
+<p align="justify">In the context of a simple tutorial no other parameters have to be edited for the instrument to be working. It is already possible to play with the <a href="qrc:/aide/2-1en.html">virtual keyboard</a>.</p>
+
+<p align="justify">However, to improve the instrument it is advisable to enter a value in "Vol env release (s)", which prevents the sound to stop abruptly as soon as the key is released. The other parameters are described in the the description of <a href="qrc:/aide/4-2-0en.html">tables</a>.</p>

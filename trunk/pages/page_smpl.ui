@@ -1118,7 +1118,7 @@
   <customwidget>
    <class>Graphique</class>
    <extends>QWidget</extends>
-   <header>page_smpl.h</header>
+   <header>graphique.h</header>
    <container>1</container>
    <slots>
     <signal>startLoopChanged()</signal>
@@ -1131,7 +1131,7 @@
   <customwidget>
    <class>GraphiqueFourier</class>
    <extends>QWidget</extends>
-   <header>page_smpl.h</header>
+   <header>graphiquefourier.h</header>
    <container>1</container>
   </customwidget>
   <customwidget>

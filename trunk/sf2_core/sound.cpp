@@ -1833,6 +1833,35 @@ QByteArray Sound::from2MonoTo1Stereo(QByteArray baData1, QByteArray baData2, WOR
     }
     return baRet;
 }
+
+Complex * Sound::fromBaToComplex(QVector<float> fData, long unsigned int &size)
+{
+    // Nombre de données (puissance de 2 la plus proche)
+    int nb = ceil(qLn(fData.size()) / 0.69314718056);
+    size = 1;
+    for (int i = 0; i < nb; i++)
+        size *= 2;
+
+    // Création et remplissage d'un tableau de complexes
+    Complex * cpxData = new Complex[size];
+
+    // Remplissage
+    for (int i = 0; i < fData.size(); i++)
+    {
+        cpxData[i].real(fData[i]);
+        cpxData[i].imag(0);
+    }
+
+    // On complète avec des 0
+    for (unsigned int i = fData.size(); i < size; i++)
+    {
+        cpxData[i].real(0);
+        cpxData[i].imag(0);
+    }
+
+    return cpxData;
+}
+
 Complex * Sound::fromBaToComplex(QByteArray baData, WORD wBps, long unsigned int &size)
 {
     Complex * cpxData;
@@ -1840,10 +1869,12 @@ Complex * Sound::fromBaToComplex(QByteArray baData, WORD wBps, long unsigned int
     if (wBps == 16)
     {
         qint16 * data = (qint16 *)baData.data();
+
         // Nombre de données (puissance de 2 la plus proche)
         int nb = ceil(qLn(baData.size()/2) / 0.69314718056 /* ln(2) */);
         size = 1;
         for (int i = 0; i < nb; i++) size *= 2;
+
         // Remplissage
         cpxData = new Complex[size];
         for (int i = 0; i < baData.size()/2; i++)
@@ -1851,6 +1882,7 @@ Complex * Sound::fromBaToComplex(QByteArray baData, WORD wBps, long unsigned int
             cpxData[i].real(data[i]);
             cpxData[i].imag(0);
         }
+
         // On complète avec des 0
         for (unsigned int i = baData.size()/2; i < size; i++)
         {
@@ -1864,10 +1896,12 @@ Complex * Sound::fromBaToComplex(QByteArray baData, WORD wBps, long unsigned int
         if (wBps == 24)
             baData = bpsConversion(baData, 24, 32);
         qint32 * data = (qint32 *)baData.data();
+
         // Nombre de données (puissance de 2 la plus proche)
         int nb = ceil(qLn(baData.size()/4) / 0.69314718056 /* ln(2) */);
         size = 1;
         for (int i = 0; i < nb; i++) size *= 2;
+
         // Remplissage
         cpxData = new Complex[size];
         for (int i = 0; i < baData.size()/4; i++)
@@ -1875,6 +1909,7 @@ Complex * Sound::fromBaToComplex(QByteArray baData, WORD wBps, long unsigned int
             cpxData[i].real(data[i]);
             cpxData[i].imag(0);
         }
+
         // On complète avec des 0
         for (unsigned int i = baData.size()/4; i < size; i++)
         {
@@ -1964,17 +1999,28 @@ QByteArray Sound::enleveBlanc(QByteArray baData, double seuil, WORD wBps, quint3
     // Conversion 32 bits si nécessaire
     if (wBps != 32)
         baData = bpsConversion(baData, wBps, 32);
+
     // Calcul de la moyenne des valeurs absolues
-    qint32 * data = (qint32 *)baData.data();
-    QByteArray baData2; baData2.resize(baData.size());
-    qint32 * data2 = (qint32 *)baData2.data();
-    for (int i = 0; i < baData.size()/4; i++) data2[i] = qAbs(data[i]);
-    qint32 median = mediane(baData2, 32);
-    // Calcul du nombre d'éléments   sauter
-    while ((signed)pos < baData.size()/4 - 1 && (data2[pos] < seuil * median)) pos++;
+    int size = baData.size() / 4;
+    QVector<float> fData;
+    fData.resize(size);
+
+    qint32 * iData = (qint32*)baData.data();
+    for (int i = 0; i < size; i++)
+        fData[i] = (float)iData[i];
+
+    for (int i = 0; i < size; i++)
+        fData[i] = qAbs(fData[i]);
+    float median = mediane(fData);
+
+    // Calcul du nombre d'éléments à sauter
+    while ((signed)pos < size - 1 && (iData[pos] < seuil * median))
+        pos++;
+
     // Saut
     if ((signed)pos < baData.size()/4 - 1)
         baData = baData.mid(pos * 4, baData.size() - 4 * pos);
+
     // Conversion format d'origine si nécessaie
     if (wBps != 32)
         baData = bpsConversion(baData, 32, wBps);
@@ -1986,16 +2032,29 @@ void Sound::regimePermanent(QByteArray baData, DWORD dwSmplRate, WORD wBps, qint
     if (wBps != 32)
         baData = bpsConversion(baData, wBps, 32);
     qint32 size = baData.size() / 4;
+
+    QVector<float> fData;
+    fData.resize(size);
+    qint32 * iData = (qint32*)baData.data();
+    for (int i = 0; i < size; i++)
+        fData[i] = (float)iData[i];
+
+    regimePermanent(fData, dwSmplRate, posStart, posEnd);
+}
+void Sound::regimePermanent(QVector<float> fData, DWORD dwSmplRate, qint32 &posStart, qint32 &posEnd)
+{
+    int size = fData.size();
+
     // Recherche fine
-    regimePermanent(baData, dwSmplRate, 32, posStart, posEnd, 10, 1.05);
-    if (posEnd - posStart < size/2)
+    regimePermanent(fData, dwSmplRate, posStart, posEnd, 10, 1.05);
+    if (posEnd - posStart < size / 2)
     {
         // Recherche grossière
-        regimePermanent(baData, dwSmplRate, 32, posStart, posEnd, 7, 1.2);
+        regimePermanent(fData, dwSmplRate, posStart, posEnd, 7, 1.2);
         if (posEnd - posStart < size / 2)
         {
             // Recherche très grossière
-            regimePermanent(baData, dwSmplRate, 32, posStart, posEnd, 4, 1.35);
+            regimePermanent(fData, dwSmplRate, posStart, posEnd, 4, 1.35);
             if (posEnd - posStart < size / 2)
             {
                 // moitié du milieu
@@ -2005,118 +2064,112 @@ void Sound::regimePermanent(QByteArray baData, DWORD dwSmplRate, WORD wBps, qint
         }
     }
 }
-QByteArray Sound::correlation(QByteArray baData, DWORD dwSmplRate, WORD wBps, qint32 fMin, qint32 fMax, qint32 &dMin)
+QVector<float> Sound::correlation(const QVector<float> fData, DWORD dwSmplRate, qint32 fMin, qint32 fMax, qint32 &dMin)
 {
-    if (wBps != 16)
-        baData = bpsConversion(baData, wBps, 16);
     // Décalage max (fréquence basse)
-    qint32 dMax = dwSmplRate / fMin;
+    qint32 dMax = qRound((double)dwSmplRate / fMin);
+    int size = fData.size();
+    if (dMax >= size / 2)
+        dMax = size / 2 - 1;
+
     // Décalage min (fréquence haute)
-    dMin = dwSmplRate / fMax;
+    dMin = qRound((double)dwSmplRate / fMax);
+
     // Calcul de la corrélation
-    QByteArray baCorrel;
-    baCorrel.resize(2*(dMax - dMin + 1));
-    qint16 * dataCorrel = (qint16 *)baCorrel.data();
-    const qint16 * data = (const qint16 *)baData.constData();
-    qint64 qTmp;
-    if (dMax >= baData.size() / 2)
-        baCorrel.fill(0);
-    else
+    QVector<float> vectCorrel;
+    vectCorrel.resize(dMax - dMin + 1);
+
+    double qTmp;
+    for (int i = dMin; i <= dMax; i++)
     {
-        for (int i = dMin; i <= dMax; i++)
-        {
-            // Ressemblance
-            qTmp = 0;
-            for (int j = 0; j < baData.size() / 2 - dMax; j++)
-                qTmp += (qint64)qAbs(data[j] - data[j+i]);
-            dataCorrel[i - dMin] = qTmp / (baData.size() / 2 - dMax);
-        }
+        // Mesure de la ressemblance
+        qTmp = 0;
+        for (int j = 0; j < size - dMax; j++)
+            qTmp += (double)qAbs(fData[j] - fData[j+i]);
+        vectCorrel[i - dMin] = (double)qTmp / (size - dMax);
     }
-    return baCorrel;
+
+    return vectCorrel;
 }
-qint32 Sound::correlation(QByteArray baData1, QByteArray baData2, WORD wBps)
+
+float Sound::correlation(QVector<float> fData1, QVector<float> fData2)
 {
-    if (baData1.size() != baData2.size() || baData1.size() == 0)
+    if (fData1.size() != fData2.size() || fData1.size() == 0)
         return 0;
-    if (wBps != 32)
-    {
-        baData1 = bpsConversion(baData1, wBps, 32);
-        baData2 = bpsConversion(baData2, wBps, 32);
-    }
-    qint32 * data1 = (qint32 *)baData1.data();
-    qint32 * data2 = (qint32 *)baData2.data();
-    quint64 somme = 0;
+
     // Mesure ressemblance
-    for (int i = 0; i <= baData1.size()/4; i++)
-        somme += qAbs(data1[i] - data2[i]);
+    double somme = 0;
+    for (int i = 0; i <= fData1.size(); i++)
+        somme += qAbs(fData1[i] - fData2[i]);
+
     // Normalisation et retour
-    somme /= baData1.size() / 4;
-    return 2147483647 - somme;
+    return somme / fData1.size();
 }
+
 QByteArray Sound::bouclage(QByteArray baData, DWORD dwSmplRate, qint32 &loopStart, qint32 &loopEnd, WORD wBps)
 {
     if (wBps != 32)
         baData = bpsConversion(baData, wBps, 32);
-    qint32 * data = (qint32 *)baData.data();
+
+    // Conversion en float
+    qint32 size = baData.size() / 4;
+    QVector<float> fData;
+    fData.resize(size);
+    qint32 * iData = (qint32*)baData.data();
+    for (int i = 0; i < size; i++)
+        fData[i] = (float)iData[i];
 
     // Recherche du régime permament
     qint32 posStart = loopStart;
     if (posStart == loopEnd || loopEnd - posStart < (signed)dwSmplRate)
-        regimePermanent(baData, dwSmplRate, 32, posStart, loopEnd);
+        regimePermanent(fData, dwSmplRate, posStart, loopEnd);
     if (loopEnd - posStart < (signed)dwSmplRate)
         return QByteArray();
 
-    // Extraction du segment B de 0.05s   la fin du régime permanent
+    // Extraction du segment B de 0.05s à la fin du régime permanent
     qint32 longueurSegmentB = 0.05 * dwSmplRate;
-    QByteArray segmentB = baData.mid(4 * (loopEnd - longueurSegmentB), 4 * longueurSegmentB);
+    QVector<float> segmentB = fData.mid((loopEnd - longueurSegmentB), longueurSegmentB);
 
     // Calcul des corrélations
     qint32 nbCor = (loopEnd - posStart) / 2 - 2 * longueurSegmentB;
-    QByteArray baCorrelations;
-    baCorrelations.resize(nbCor * 4);
-    qint32 * correlations = (qint32 *)baCorrelations.data();
+    QVector<float> vectCorrelations;
+    vectCorrelations.resize(nbCor);
     for (int i = 0; i < nbCor; i++)
-        correlations[i] = correlation(segmentB, baData.mid(4 * (i + longueurSegmentB + posStart), 4 * longueurSegmentB), 32);
+        vectCorrelations[i] = correlation(segmentB, fData.mid((i + longueurSegmentB + posStart), longueurSegmentB));
 
     // Recherche des meilleures corrélations (pour l'instant : utilisation de la 1ère uniquement)
-    quint32 * meilleuresCorrel = findMax(baCorrelations, 32, 1, 0.9);
+    QList<quint32> meilleuresCorrel = findMax(vectCorrelations, 1, 0.9);
+    if (meilleuresCorrel.isEmpty())
+        return QByteArray();
 
     // calcul de posStartLoop
     qint32 posStartLoop = 2 * longueurSegmentB + meilleuresCorrel[0] + posStart;
 
     // Longueur du crossfade pour bouclage (augmente avec l'incohérence)
-    qint32 longueurBouclage = qMin(meilleuresCorrel[0] + 2 * longueurSegmentB,
-                                   (quint32)floor(dwSmplRate*4*(double)(2147483647-baCorrelations[meilleuresCorrel[0]])/2147483647));
+    int longueurBouclage = qMin(meilleuresCorrel[0] + 2 * longueurSegmentB,
+                                (quint32)qRound(dwSmplRate*4*(double) (2147483647. - vectCorrelations[meilleuresCorrel[0]]) / 2147483647));
 
-    // Détermination des coefficients pour crossfade
-    double * cr1 = new double[longueurBouclage];
-    double * cr2 = new double[longueurBouclage];
-    for (int i = 0; i < longueurBouclage;i++)
-    {
-        cr1[i] = (double)i/(longueurBouclage-1);
-        cr2[i] = 1.0 - cr1[i];
-    }
-
-    // Bouclage
+    // Bouclage avec crossfade
     for (int i = 0; i < longueurBouclage; i++)
     {
-        data[loopEnd - longueurBouclage + i] =
-                cr2[i] * data[loopEnd - longueurBouclage + i] +
-                cr1[i] * data[posStartLoop - longueurBouclage + i];
+        double dTmp = (double)i/(longueurBouclage - 1);
+        iData[loopEnd - longueurBouclage + i] =
+                (1. - dTmp) * fData[loopEnd - longueurBouclage + i] +
+                dTmp * fData[posStartLoop - longueurBouclage + i];
+//        fData[loopEnd - longueurBouclage + i] =
+//                (1. - dTmp) * fData[loopEnd - longueurBouclage + i] +
+//                dTmp * fData[posStartLoop - longueurBouclage + i];
     }
 
-    delete [] cr1;
-    delete [] cr2;
-    baData = baData.left(loopEnd * 4);
-    data = (qint32*)baData.data();
-
-    // Ajout de 8 valeurs
+    // Récupération de 8 valeurs
     QByteArray baTmp;
     baTmp.resize(4*8);
     qint32 * dataTmp = (qint32 *)baTmp.data();
     for (int i = 0; i < 8; i++)
-        dataTmp[i] = data[posStartLoop+i];
-    baData.append(baTmp);
+        dataTmp[i] = fData[posStartLoop+i];
+
+    // Coupure et ajout de 8 valeurs
+    baData = baData.left(loopEnd).append(baTmp);
 
     // Modification de loopStart et renvoi des données
     loopStart = posStartLoop;
@@ -2192,92 +2245,65 @@ QByteArray Sound::sifflements(QByteArray baData, DWORD dwSmplRate, WORD wBps, do
     return baRet;
 }
 
-quint32 * Sound::findMins(QByteArray baCorrel, WORD wBps, int nb, double minFrac)
+QList<int> Sound::findMins(QVector<float> vectData, int maxNb, double minFrac)
 {
-    // recherche des pics
-    if (wBps != 32)
-        baCorrel = bpsConversion(baCorrel, wBps, 32);
     // Calcul mini maxi
-    qint32 * data = (qint32 *)baCorrel.data();
-    qint32 mini, maxi;
-    mini = data[0];
-    maxi = data[0];
-    for (qint32 i = 1; i < baCorrel.size() / 4; i++)
+    float mini = vectData[0], maxi = vectData[0];
+    for (qint32 i = 1; i < vectData.size(); i++)
     {
-        if (data[i] < mini) mini = data[i];
-        if (data[i] > maxi) maxi = data[i];
+        if (vectData[i] < mini)
+            mini = vectData[i];
+        if (vectData[i] > maxi)
+            maxi = vectData[i];
     }
+
     // Valeur à ne pas dépasser
-    qint32 valMax = maxi - minFrac * (maxi - mini);
-    // Recherche de l'indice des premiers grands pics
-    quint32 * indices = new quint32[nb];
-    qint32 i = 1;
-    int pos = 0;
-    while ((i < baCorrel.size() / 4 - 1) && pos < nb)
-    {
-        if (data[i-1] > data[i] && data[i+1] > data[i] && data[i] < valMax)
-        {
-            // Présence d'un pic
-            indices[pos] = i;
-            pos++;
-        }
-        i++;
-    }
-    // On complète par des 0
-    for (int i = pos; i < nb; i++)
-        indices[i] = 0;
-    return indices;
+    float valMax = maxi - minFrac * (maxi - mini);
+
+    // Recherche des indices de tous les creux
+    QMap<int, float> mapCreux;
+    for (int i = 1; i < vectData.size() - 1; i++)
+        if (vectData[i-1] > vectData[i] && vectData[i+1] > vectData[i] && vectData[i] < valMax)
+            mapCreux[i] = vectData[i];
+
+    // Sélection des plus petits creux
+    QList<float> listCreux = mapCreux.values();
+    qSort(listCreux);
+    QList<int> listRet;
+    for (int i = 0; i < qMin(maxNb, listCreux.size()); i++)
+        listRet << mapCreux.key(listCreux.at(i));
+
+    return listRet;
 }
-quint32 * Sound::findMax(QByteArray baData, WORD wBps, int nb, double minFrac)
+QList<quint32> Sound::findMax(QVector<float> vectData, int maxNb, double minFrac)
 {
-    // recherche des pics
-    if (wBps != 32)
-        baData = bpsConversion(baData, wBps, 32);
     // Calcul mini maxi
-    qint32 * data = (qint32 *)baData.data();
-    qint32 mini, maxi;
-    mini = data[0];
-    maxi = data[0];
-    for (qint32 i = 1; i < baData.size() / 4; i++)
+    float mini = vectData[0], maxi = vectData[0];
+    for (qint32 i = 1; i < vectData.size(); i++)
     {
-        if (data[i] < mini) mini = data[i];
-        if (data[i] > maxi) maxi = data[i];
+        if (vectData[i] < mini)
+            mini = vectData[i];
+        if (vectData[i] > maxi)
+            maxi = vectData[i];
     }
+
     // Valeur à dépasser
-    qint32 valMin = mini + minFrac * (maxi - mini);
-    // Recherche de l'indice des premiers grands pics
-    quint32 * indices = new quint32[nb];
-    qint32 * valeurs = new qint32[nb];
-    for (int i = 0; i < nb; i++)
-    {
-        indices[i] = 0;
-        valeurs[i] = 0;
-    }
-    int pos;
-    for (int i = 1; i < baData.size()/4 - 1; i++)
-    {
-        if (data[i-1] < data[i] && data[i+1] < data[i] && data[i] > valMin)
-        {
-            // Présence d'un pic
-            pos = 0;
-            while (valeurs[pos] > data[i] && pos < nb - 1) pos++;
-            if (valeurs[pos] > data[i]) pos++;
-            if (pos < nb)
-            {
-                // Insertion du pic
-                for (int j = nb - 2; j >= pos; j--)
-                {
-                    indices[j+1] = indices[j];
-                    valeurs[j+1] = valeurs[j];
-                }
-                indices[pos] = i;
-                valeurs[pos] = data[i];
-            }
-            i++;
-        }
-    }
-    delete [] valeurs;
-    return indices;
+    float valMin = mini + minFrac * (maxi - mini);
+
+    // Recherche des indices de tous les pics
+    QMap<int, float> mapPics;
+    for (int i = 1; i < vectData.size() - 1; i++)
+        if (vectData[i-1] < vectData[i] && vectData[i+1] < vectData[i] && vectData[i] > valMin)
+            mapPics[i] = vectData[i];
+
+    // Sélection des plus grands pics
+    QList<float> listPics = mapPics.values();
+    qSort(listPics);
+    QList<quint32> listRet;
+    for (int i = listPics.size() - 1; i >= qMax(0, listPics.size() - maxNb); i--)
+        listRet << (quint32)mapPics.key(listPics.at(i));
+
+    return listRet;
 }
 qint32 Sound::max(QByteArray baData, WORD wBps)
 {
@@ -2354,16 +2380,14 @@ double Sound::moyenneCarre(QByteArray baData, WORD wBps)
     //return sommeAbs(baData, wBps) / (baData.size() / (wBps/8));
     return (double)qSqrt(sommeCarre(baData, wBps)) / (baData.size() / (wBps/8));
 }
-qint32 Sound::mediane(QByteArray baData, WORD wBps)
+float Sound::mediane(QVector<float> data)
 {
-    if (wBps != 32)
-        baData = bpsConversion(baData, wBps, 32);
-    qint32 n = baData.size() / 4;
-    qint32 * arr = (qint32 *)baData.data();
-    qint32 low, high ;
+    float * arr = data.data();
+    qint32 n = data.size();
+    qint32 low, high;
     qint32 median;
     qint32 middle, ll, hh;
-    qint32 qTmp;
+    float qTmp;
     low = 0 ; high = n-1 ; median = (low + high) / 2;
     for (;;)
     {
@@ -2519,31 +2543,30 @@ double Sound::gainEQ(double freq, int i1, int i2, int i3, int i4, int i5, int i6
     // Conversion
     return pow(10.0, val / 20);
 }
-void Sound::regimePermanent(QByteArray baData, DWORD dwSmplRate, WORD wBps, qint32 &posStart, qint32 &posEnd, int nbOK, double coef)
+void Sound::regimePermanent(QVector<float> data, DWORD dwSmplRate, qint32 &posStart, qint32 &posEnd, int nbOK, double coef)
 {
-    if (wBps != 32)
-        baData = bpsConversion(baData, wBps, 32);
-
-    // Valeur absolue
-    qint32 *data = (qint32 *)baData.data();
-    for (int i = 0; i < baData.size() / 4; i++)
-        data[i] = qAbs(data[i]);
     // Calcul de la moyenne des valeurs absolues sur une période de 0.05 s à chaque 10ième de seconde
     qint32 sizePeriode = dwSmplRate / 10;
-    if (baData.size() < 4 * sizePeriode)
+    int len = data.size();
+    if (len < sizePeriode)
     {
         posStart = 0;
-        posEnd = baData.size() / 4;
+        posEnd = len - 1;
         return;
     }
-    qint32 nbValeurs = (baData.size() / 4 - sizePeriode) / (dwSmplRate/20);
-    QByteArray tableauMoyennes;
-    tableauMoyennes.resize(nbValeurs * 4);
-    data = (qint32 *)tableauMoyennes.data();
+    qint32 nbValeurs = (len - sizePeriode) / (dwSmplRate / 20);
+    QVector<float> tableauMoyennes;
+    tableauMoyennes.resize(nbValeurs);
     for (int i = 0; i < nbValeurs; i++)
-        data[i] = moyenne(baData.mid((dwSmplRate/20)*4*i, sizePeriode * 4), 32);
+    {
+        float valTmp = 0;
+        for (int j = 0; j < sizePeriode; j++)
+            valTmp += qAbs(data[(dwSmplRate / 20) * i + j]);
+        data[i] = valTmp / sizePeriode;
+    }
+
     // Calcul de la médiane des valeurs
-    qint32 median = mediane(tableauMoyennes, 32);
+    qint32 median = mediane(tableauMoyennes);
     posStart = 0;
     posEnd = nbValeurs - 1;
     int count = 0;
@@ -2566,6 +2589,7 @@ void Sound::regimePermanent(QByteArray baData, DWORD dwSmplRate, WORD wBps, qint
         posEnd--;
     }
     posEnd += count-2;
+
     // Conversion position
     posStart *= dwSmplRate / 20;
     posEnd *= dwSmplRate / 20;
