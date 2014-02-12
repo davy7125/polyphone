@@ -2099,7 +2099,7 @@ float Sound::correlation(QVector<float> fData1, QVector<float> fData2)
 
     // Mesure ressemblance
     double somme = 0;
-    for (int i = 0; i <= fData1.size(); i++)
+    for (int i = 0; i < fData1.size(); i++)
         somme += qAbs(fData1[i] - fData2[i]);
 
     // Normalisation et retour
@@ -2137,8 +2137,8 @@ QByteArray Sound::bouclage(QByteArray baData, DWORD dwSmplRate, qint32 &loopStar
     for (int i = 0; i < nbCor; i++)
         vectCorrelations[i] = correlation(segmentB, fData.mid((i + longueurSegmentB + posStart), longueurSegmentB));
 
-    // Recherche des meilleures corrélations (pour l'instant : utilisation de la 1ère uniquement)
-    QList<quint32> meilleuresCorrel = findMax(vectCorrelations, 1, 0.9);
+    // Recherche des meilleures corrélations
+    QList<int> meilleuresCorrel = findMins(vectCorrelations, 1, 0.9);
     if (meilleuresCorrel.isEmpty())
         return QByteArray();
 
@@ -2147,7 +2147,7 @@ QByteArray Sound::bouclage(QByteArray baData, DWORD dwSmplRate, qint32 &loopStar
 
     // Longueur du crossfade pour bouclage (augmente avec l'incohérence)
     int longueurBouclage = qMin(meilleuresCorrel[0] + 2 * longueurSegmentB,
-                                (quint32)qRound(dwSmplRate*4*(double) (2147483647. - vectCorrelations[meilleuresCorrel[0]]) / 2147483647));
+                                qRound(dwSmplRate * 4 * (double)(2147483647. - vectCorrelations[meilleuresCorrel[0]]) / 2147483647));
 
     // Bouclage avec crossfade
     for (int i = 0; i < longueurBouclage; i++)
@@ -2156,9 +2156,6 @@ QByteArray Sound::bouclage(QByteArray baData, DWORD dwSmplRate, qint32 &loopStar
         iData[loopEnd - longueurBouclage + i] =
                 (1. - dTmp) * fData[loopEnd - longueurBouclage + i] +
                 dTmp * fData[posStartLoop - longueurBouclage + i];
-//        fData[loopEnd - longueurBouclage + i] =
-//                (1. - dTmp) * fData[loopEnd - longueurBouclage + i] +
-//                dTmp * fData[posStartLoop - longueurBouclage + i];
     }
 
     // Récupération de 8 valeurs
@@ -2169,7 +2166,7 @@ QByteArray Sound::bouclage(QByteArray baData, DWORD dwSmplRate, qint32 &loopStar
         dataTmp[i] = fData[posStartLoop+i];
 
     // Coupure et ajout de 8 valeurs
-    baData = baData.left(loopEnd).append(baTmp);
+    baData = baData.left(loopEnd * 4).append(baTmp);
 
     // Modification de loopStart et renvoi des données
     loopStart = posStartLoop;

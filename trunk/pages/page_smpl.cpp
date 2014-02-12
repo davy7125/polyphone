@@ -1167,6 +1167,7 @@ void Page_Smpl::bouclage()
                 }
                 else
                     samplesNotLooped << sf2->getQstr(id, champ_name);
+
                 if (!progress.wasCanceled())
                     progress.setValue(progress.value() + 1);
                 else
@@ -1268,6 +1269,7 @@ void Page_Smpl::reglerBalance()
     if (preparation) return;
     this->sf2->prepareNewActions();
     EltID id;
+
     // Calcul du nombre d'étapes
     int nbEtapes = 0;
     for (unsigned int i = 0; i < this->tree->getSelectedItemsNumber(); i++)
@@ -1286,6 +1288,7 @@ void Page_Smpl::reglerBalance()
     }
     if (nbEtapes == 0)
         return;
+
     // Ouverture d'une barre de progression
     QString textProgress = trUtf8("Traitement ");
     QProgressDialog progress("", trUtf8("Annuler"), 0, nbEtapes, this);
@@ -1330,18 +1333,23 @@ void Page_Smpl::reglerBalance()
                     debut2 = this->sf2->get(id2, champ_dwStartLoop).dwValue;
                     fin2 = this->sf2->get(id2, champ_dwEndLoop).dwValue;
                 }
+
                 // Calcul des intensités
                 double intensite1 = Sound::moyenneCarre(baData1.mid(debut1*3, (fin1-debut1)*3), 24);
                 double intensite2 = Sound::moyenneCarre(baData2.mid(debut2*3, (fin2-debut2)*3), 24);
+
                 // Intensité moyenne
                 double intensiteMoy = sqrt(intensite1 * intensite2);
+
                 // Ajustement des données
                 double gain1, gain2;
                 baData1 = Sound::multiplier(baData1, intensiteMoy/intensite1, 24, gain1);
                 baData2 = Sound::multiplier(baData2, intensiteMoy/intensite2, 24, gain2);
+
                 // Stockage
                 this->sf2->set(id, champ_sampleDataFull24, baData1);
                 this->sf2->set(id2, champ_sampleDataFull24, baData2);
+
                 // Avancement barre de progression
                 if (!progress.wasCanceled())
                     progress.setValue(progress.value() + 1);

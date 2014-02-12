@@ -68,11 +68,6 @@
         <source>Entrées / sorties</source>
         <translation>Entrada / Salida</translation>
     </message>
-    <message>
-        <location filename="gui_divers/config.ui" line="226"/>
-        <source>Divers</source>
-        <translation>Vario</translation>
-    </message>
     <message utf8="true">
         <location filename="gui_divers/config.ui" line="282"/>
         <source>Numérique (do central → 60)</source>
@@ -225,6 +220,11 @@
         <location filename="gui_divers/config.ui" line="1527"/>
         <source>Octave 1</source>
         <translation>Octava 1</translation>
+    </message>
+    <message>
+        <location filename="gui_divers/config.ui" line="226"/>
+        <source>Interface</source>
+        <translation>Interfaz</translation>
     </message>
     <message>
         <location filename="gui_divers/config.ui" line="311"/>
@@ -1616,27 +1616,27 @@ instrumento actual</translation>
         <translation>Exportar gráficos</translation>
     </message>
     <message>
-        <location filename="pages/graphiquefourier.cpp" line="255"/>
+        <location filename="pages/graphiquefourier.cpp" line="318"/>
         <source>note</source>
         <translation>nota</translation>
     </message>
     <message>
-        <location filename="pages/graphiquefourier.cpp" line="256"/>
+        <location filename="pages/graphiquefourier.cpp" line="319"/>
         <source>correction</source>
         <translation>corrección</translation>
     </message>
     <message>
-        <location filename="pages/graphiquefourier.cpp" line="256"/>
+        <location filename="pages/graphiquefourier.cpp" line="319"/>
         <source>estimation</source>
         <translation>estimación</translation>
     </message>
     <message>
-        <location filename="pages/graphiquefourier.cpp" line="334"/>
+        <location filename="pages/graphiquefourier.cpp" line="391"/>
         <source>Exporter un graphique</source>
         <translation>Exportar un gráfico</translation>
     </message>
     <message>
-        <location filename="pages/graphiquefourier.cpp" line="335"/>
+        <location filename="pages/graphiquefourier.cpp" line="392"/>
         <source>Fichier .png (*.png)</source>
         <translation>Archivo .png (*.png)</translation>
     </message>
@@ -3866,8 +3866,8 @@ Dividir el fichero en diferentes sf2 puede resolver el problema.</translation>
     <message>
         <location filename="pages/page_smpl.ui" line="1021"/>
         <location filename="pages/page_smpl.cpp" line="330"/>
-        <location filename="pages/page_smpl.cpp" line="1626"/>
-        <location filename="pages/page_smpl.cpp" line="1664"/>
+        <location filename="pages/page_smpl.cpp" line="1633"/>
+        <location filename="pages/page_smpl.cpp" line="1671"/>
         <source>Lecture</source>
         <translation>Reproducir</translation>
     </message>
@@ -3939,42 +3939,42 @@ Dividir el fichero en diferentes sf2 puede resolver el problema.</translation>
         <translation>Cambio aplicado con éxito a las diferentes muestras</translation>
     </message>
     <message utf8="true">
-        <location filename="pages/page_smpl.cpp" line="1186"/>
+        <location filename="pages/page_smpl.cpp" line="1187"/>
         <source>L&apos;échantillon « </source>
         <translation>No se ha podido hacer loop en la muestra « </translation>
     </message>
     <message utf8="true">
-        <location filename="pages/page_smpl.cpp" line="1186"/>
+        <location filename="pages/page_smpl.cpp" line="1187"/>
         <source> » n&apos;a pas pu être bouclé.</source>
         <translation> ».</translation>
     </message>
     <message utf8="true">
-        <location filename="pages/page_smpl.cpp" line="1189"/>
+        <location filename="pages/page_smpl.cpp" line="1190"/>
         <source>Les échantillons suivants n&apos;ont pas pu être bouclés :</source>
         <translation>No se ha podido hacer loop en las siguientes muestras:</translation>
     </message>
     <message>
-        <location filename="pages/page_smpl.cpp" line="1194"/>
+        <location filename="pages/page_smpl.cpp" line="1195"/>
         <source>Causes possibles : trop court ou trop turbulent.</source>
         <translation>Posibles causas: muy corto o muy turbulento.</translation>
     </message>
     <message>
-        <location filename="pages/page_smpl.cpp" line="1195"/>
+        <location filename="pages/page_smpl.cpp" line="1196"/>
         <source>Attention</source>
         <translation>Atención</translation>
     </message>
     <message utf8="true">
-        <location filename="pages/page_smpl.cpp" line="1600"/>
+        <location filename="pages/page_smpl.cpp" line="1607"/>
         <source>Arrêt</source>
         <translation>Parada</translation>
     </message>
     <message utf8="true">
-        <location filename="pages/page_smpl.cpp" line="1209"/>
+        <location filename="pages/page_smpl.cpp" line="1210"/>
         <source>Fréquence de coupure :</source>
         <translation>Frecuencia de corte:</translation>
     </message>
     <message utf8="true">
-        <location filename="pages/page_smpl.cpp" line="1438"/>
+        <location filename="pages/page_smpl.cpp" line="1445"/>
         <source>Écart en demi-tons :</source>
         <translation>Cantidad en semitonos:</translation>
     </message>
@@ -3983,10 +3983,10 @@ Dividir el fichero en diferentes sf2 puede resolver el problema.</translation>
         <location filename="pages/page_smpl.cpp" line="981"/>
         <location filename="pages/page_smpl.cpp" line="1059"/>
         <location filename="pages/page_smpl.cpp" line="1131"/>
-        <location filename="pages/page_smpl.cpp" line="1229"/>
-        <location filename="pages/page_smpl.cpp" line="1290"/>
-        <location filename="pages/page_smpl.cpp" line="1396"/>
-        <location filename="pages/page_smpl.cpp" line="1460"/>
+        <location filename="pages/page_smpl.cpp" line="1230"/>
+        <location filename="pages/page_smpl.cpp" line="1293"/>
+        <location filename="pages/page_smpl.cpp" line="1403"/>
+        <location filename="pages/page_smpl.cpp" line="1467"/>
         <source>Traitement </source>
         <translation>Procesando </translation>
     </message>
@@ -4010,20 +4010,20 @@ Dividir el fichero en diferentes sf2 puede resolver el problema.</translation>
         <location filename="pages/page_smpl.cpp" line="982"/>
         <location filename="pages/page_smpl.cpp" line="1060"/>
         <location filename="pages/page_smpl.cpp" line="1132"/>
-        <location filename="pages/page_smpl.cpp" line="1230"/>
-        <location filename="pages/page_smpl.cpp" line="1291"/>
-        <location filename="pages/page_smpl.cpp" line="1397"/>
-        <location filename="pages/page_smpl.cpp" line="1461"/>
+        <location filename="pages/page_smpl.cpp" line="1231"/>
+        <location filename="pages/page_smpl.cpp" line="1294"/>
+        <location filename="pages/page_smpl.cpp" line="1404"/>
+        <location filename="pages/page_smpl.cpp" line="1468"/>
         <source>Annuler</source>
         <translation>Deshacer</translation>
     </message>
     <message>
-        <location filename="pages/page_smpl.cpp" line="1208"/>
+        <location filename="pages/page_smpl.cpp" line="1209"/>
         <source>Question</source>
         <translation>Pregunta</translation>
     </message>
     <message>
-        <location filename="pages/page_smpl.cpp" line="1437"/>
+        <location filename="pages/page_smpl.cpp" line="1444"/>
         <source>Transposition</source>
         <translation>Transporte</translation>
     </message>

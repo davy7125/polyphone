@@ -63,6 +63,7 @@ private:
     QMenu * _menu;
     void resized();
     void exportPng(QString fileName);
+    void dispFourier(QVector<float> vectFourier, float posMaxFourier);
 };
 
 #endif // GRAPHIQUEFOURIER_H
