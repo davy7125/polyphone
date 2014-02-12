@@ -752,7 +752,7 @@
           <number>4</number>
          </property>
          <item>
-          <layout class="QGridLayout" name="gridLayout_2">
+          <layout class="QGridLayout" name="gridLayout_2" columnminimumwidth="0,28,0,0">
            <property name="spacing">
             <number>3</number>
            </property>

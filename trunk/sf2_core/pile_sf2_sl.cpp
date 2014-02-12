@@ -608,7 +608,7 @@ int Pile_sf2::ouvrir(QString fileName, QDataStream * stream, int &indexSf2, bool
     {
         id.indexElt = this->add(id, false);
         this->set(id, champ_filename, fileName, false);
-        this->set(id, champ_name, QString(readdata(buffer, bloc_pdta_shdr, pos, 20)).trimmed(), false);
+        this->set(id, champ_name, QString::fromLatin1(readdata(buffer, bloc_pdta_shdr, pos, 20)).trimmed(), false);
 
         // Configuration d'un sample
         value.bValue = readBYTE(bloc_pdta_shdr, pos+40);
@@ -724,28 +724,28 @@ int Pile_sf2::ouvrir(QString fileName, QDataStream * stream, int &indexSf2, bool
             this->set(idSf2, champ_IFIL, val, false);
         }
         else if (!strcmp(bloc, "isng"))
-            this->set(idSf2, champ_ISNG, QString(readdata(buffer, bloc_info, pos, taille)).trimmed(), false);
+            this->set(idSf2, champ_ISNG, QString::fromLatin1(readdata(buffer, bloc_info, pos, taille)).trimmed(), false);
         else if (!strcmp(bloc, "INAM"))
-            this->set(idSf2, champ_name, QString(readdata(buffer, bloc_info, pos, taille)).trimmed(), false);
+            this->set(idSf2, champ_name, QString::fromLatin1(readdata(buffer, bloc_info, pos, taille)).trimmed(), false);
         else if (!strcmp(bloc, "irom"))
-            this->set(idSf2, champ_IROM, QString(readdata(buffer, bloc_info, pos, taille)).trimmed(), false);
+            this->set(idSf2, champ_IROM, QString::fromLatin1(readdata(buffer, bloc_info, pos, taille)).trimmed(), false);
         else if (!strcmp(bloc, "iver"))
         {
             val.sfVerValue = readSFVersionTag(bloc_info, pos);
             this->set(idSf2, champ_IVER, val, false);
         }
         else if (!strcmp(bloc, "ICRD"))
-            this->set(idSf2, champ_ICRD, QString(readdata(buffer, bloc_info, pos, taille)).trimmed(), false);
+            this->set(idSf2, champ_ICRD, QString::fromLatin1(readdata(buffer, bloc_info, pos, taille)).trimmed(), false);
         else if (!strcmp(bloc, "IENG"))
-            this->set(idSf2, champ_IENG, QString(readdata(buffer, bloc_info, pos, taille)).trimmed(), false);
+            this->set(idSf2, champ_IENG, QString::fromLatin1(readdata(buffer, bloc_info, pos, taille)).trimmed(), false);
         else if (!strcmp(bloc, "IPRD"))
-            this->set(idSf2, champ_IPRD, QString(readdata(buffer, bloc_info, pos, taille)).trimmed(), false);
+            this->set(idSf2, champ_IPRD, QString::fromLatin1(readdata(buffer, bloc_info, pos, taille)).trimmed(), false);
         else if (!strcmp(bloc, "ICOP"))
-            this->set(idSf2, champ_ICOP, QString(readdata(buffer, bloc_info, pos, taille)).trimmed(), false);
+            this->set(idSf2, champ_ICOP, QString::fromLatin1(readdata(buffer, bloc_info, pos, taille)).trimmed(), false);
         else if (!strcmp(bloc, "ICMT"))
-            this->set(idSf2, champ_ICMT, QString(readdata(buffer, bloc_info, pos, taille)).trimmed(), false);
+            this->set(idSf2, champ_ICMT, QString::fromLatin1(readdata(buffer, bloc_info, pos, taille)).trimmed(), false);
         else if (!strcmp(bloc, "ISFT"))
-            this->set(idSf2, champ_ISFT, QString(readdata(buffer, bloc_info, pos, taille)).trimmed(), false);
+            this->set(idSf2, champ_ISFT, QString::fromLatin1(readdata(buffer, bloc_info, pos, taille)).trimmed(), false);
 //        else
 //            QMessageBox::information(NULL, "Champ supplémentaire trouvé", bloc);
         pos = pos + taille;
@@ -768,7 +768,7 @@ int Pile_sf2::ouvrir(QString fileName, QDataStream * stream, int &indexSf2, bool
         l = 0;
         id.indexElt = this->add(id, false);
         id2.indexElt = id.indexElt;
-        this->set(id, champ_name, QString(readdata(buffer, bloc_pdta_inst, 22*i, 20)).trimmed(), false);
+        this->set(id, champ_name, QString::fromLatin1(readdata(buffer, bloc_pdta_inst, 22*i, 20)).trimmed(), false);
         // Indices des IBAG
         bagmin = readWORD(bloc_pdta_inst, 22 * i + 20);
         if (i < taille_p2/22 - 2)
@@ -857,7 +857,7 @@ int Pile_sf2::ouvrir(QString fileName, QDataStream * stream, int &indexSf2, bool
         l = 0;
         id.indexElt = this->add(id, false);
         id2.indexElt = id.indexElt;
-        this->set(id, champ_name, QString(readdata(buffer, bloc_pdta_phdr, 38*i, 20)).trimmed(), false);
+        this->set(id, champ_name, QString::fromLatin1(readdata(buffer, bloc_pdta_phdr, 38*i, 20)).trimmed(), false);
         value.wValue = readWORD(bloc_pdta_phdr, 38*i+20);
         this->set(id, champ_wPreset, value, false);
         value.wValue = readWORD(bloc_pdta_phdr, 38*i+22);
@@ -1227,7 +1227,7 @@ int Pile_sf2::sauvegarderSf2(int indexSf2, QString fileName)
     if (dwTmp != 0)
     {
         fi.write((char *)&dwTmp2, 4);
-        fi.write(this->getQstr(id, champ_ISNG).toStdString().c_str(), dwTmp);
+        fi.write(this->getQstr(id, champ_ISNG).toLatin1());
         charTmp = '\0';
         for (quint32 i = 0; i < dwTmp2-dwTmp; i++)
             fi.write(&charTmp, 1);
@@ -1247,7 +1247,7 @@ int Pile_sf2::sauvegarderSf2(int indexSf2, QString fileName)
     if (dwTmp != 0)
     {
         fi.write((char *)&dwTmp2, 4);
-        fi.write(this->getQstr(id, champ_name).toStdString().c_str(), dwTmp);
+        fi.write(this->getQstr(id, champ_name).toLatin1());
         charTmp = '\0';
         for (quint32 i = 0; i < dwTmp2-dwTmp; i++)
             fi.write(&charTmp, 1);
@@ -1269,7 +1269,7 @@ int Pile_sf2::sauvegarderSf2(int indexSf2, QString fileName)
         dwTmp2 = dwTmp + 2 - (dwTmp)%2;
         fi.write("irom", 4);
         fi.write((char *)&dwTmp2, 4);
-        fi.write(this->getQstr(id, champ_IROM).toStdString().c_str(), dwTmp);
+        fi.write(this->getQstr(id, champ_IROM).toLatin1());
         charTmp = '\0';
         for (quint32 i = 0; i < dwTmp2-dwTmp; i++)
             fi.write(&charTmp, 1);
@@ -1291,7 +1291,7 @@ int Pile_sf2::sauvegarderSf2(int indexSf2, QString fileName)
         dwTmp2 = dwTmp + 2 - (dwTmp)%2;
         fi.write("ICRD", 4);
         fi.write((char *)&dwTmp2, 4);
-        fi.write(this->getQstr(id, champ_ICRD).toStdString().c_str(), dwTmp);
+        fi.write(this->getQstr(id, champ_ICRD).toLatin1());
         charTmp = '\0';
         for (quint32 i = 0; i < dwTmp2-dwTmp; i++)
             fi.write(&charTmp, 1);
@@ -1304,7 +1304,7 @@ int Pile_sf2::sauvegarderSf2(int indexSf2, QString fileName)
         dwTmp2 = dwTmp + 2 - (dwTmp)%2;
         fi.write("IENG", 4);
         fi.write((char *)&dwTmp2, 4);
-        fi.write(this->getQstr(id, champ_IENG).toStdString().c_str(), dwTmp);
+        fi.write(this->getQstr(id, champ_IENG).toLatin1());
         charTmp = '\0';
         for (quint32 i = 0; i < dwTmp2-dwTmp; i++)
             fi.write(&charTmp, 1);
@@ -1317,7 +1317,7 @@ int Pile_sf2::sauvegarderSf2(int indexSf2, QString fileName)
         dwTmp2 = dwTmp + 2 - (dwTmp)%2;
         fi.write("IPRD", 4);
         fi.write((char *)&dwTmp2, 4);
-        fi.write(this->getQstr(id, champ_IPRD).toStdString().c_str(), dwTmp);
+        fi.write(this->getQstr(id, champ_IPRD).toLatin1());
         charTmp = '\0';
         for (quint32 i = 0; i < dwTmp2-dwTmp; i++)
             fi.write(&charTmp, 1);
@@ -1330,7 +1330,7 @@ int Pile_sf2::sauvegarderSf2(int indexSf2, QString fileName)
         dwTmp2 = dwTmp + 2 - (dwTmp)%2;
         fi.write("ICOP", 4);
         fi.write((char *)&dwTmp2, 4);
-        fi.write(this->getQstr(id, champ_ICOP).toStdString().c_str(), dwTmp);
+        fi.write(this->getQstr(id, champ_ICOP).toLatin1());
         charTmp = '\0';
         for (quint32 i = 0; i < dwTmp2-dwTmp; i++)
             fi.write(&charTmp, 1);
@@ -1343,7 +1343,7 @@ int Pile_sf2::sauvegarderSf2(int indexSf2, QString fileName)
         dwTmp2 = dwTmp + 2 - (dwTmp)%2;
         fi.write("ICMT", 4);
         fi.write((char *)&dwTmp2, 4);
-        fi.write(this->getQstr(id, champ_ICMT).toStdString().c_str(), dwTmp);
+        fi.write(this->getQstr(id, champ_ICMT).toLatin1());
         charTmp = '\0';
         for (quint32 i = 0; i < dwTmp2-dwTmp; i++)
             fi.write(&charTmp, 1);
@@ -1356,7 +1356,7 @@ int Pile_sf2::sauvegarderSf2(int indexSf2, QString fileName)
         dwTmp2 = dwTmp + 2 - (dwTmp)%2;
         fi.write("ISFT", 4);
         fi.write((char *)&dwTmp2, 4);
-        fi.write(this->getQstr(id, champ_ISFT).toStdString().c_str(), dwTmp);
+        fi.write(this->getQstr(id, champ_ISFT).toLatin1());
         charTmp = '\0';
         for (quint32 i = 0; i < dwTmp2-dwTmp; i++)
             fi.write(&charTmp, 1);
@@ -1507,7 +1507,7 @@ int Pile_sf2::sauvegarderSf2(int indexSf2, QString fileName)
             if (dwTmp > 20) dwTmp = 20;
             if (dwTmp != 0)
             {
-                fi.write(this->getQstr(id, champ_name).toStdString().c_str(), dwTmp);
+                fi.write(this->getQstr(id, champ_name).toLatin1());
                 charTmp = '\0';
                 for (quint32 i = 0; i < 20-dwTmp; i++)
                     fi.write(&charTmp, 1);
@@ -1829,7 +1829,7 @@ int Pile_sf2::sauvegarderSf2(int indexSf2, QString fileName)
             if (dwTmp > 20) dwTmp = 20;
             if (dwTmp != 0)
             {
-                fi.write(this->getQstr(id, champ_name).toStdString().c_str(), dwTmp);
+                fi.write(this->getQstr(id, champ_name).toLatin1());
                 charTmp = '\0';
                 for (quint32 iteration = 0; iteration < 20-dwTmp; iteration++)
                     fi.write(&charTmp, 1);
@@ -2130,7 +2130,7 @@ int Pile_sf2::sauvegarderSf2(int indexSf2, QString fileName)
             if (dwTmp > 20) dwTmp = 20;
             if (dwTmp != 0)
             {
-                fi.write(this->getQstr(id, champ_name).toStdString().c_str(), dwTmp);
+                fi.write(this->getQstr(id, champ_name).toLatin1());
                 charTmp = '\0';
                 for (quint32 iteration = 0; iteration < 20-dwTmp; iteration++)
                     fi.write(&charTmp, 1);

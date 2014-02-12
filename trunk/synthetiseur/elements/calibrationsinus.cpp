@@ -27,7 +27,6 @@
 CalibrationSinus::CalibrationSinus() :
     _sinus(NULL),
     _freq(440),
-    _currentFreq(440),
     _level(0),
     _currentLevel(0),
     _buf(NULL)
