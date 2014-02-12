@@ -923,8 +923,7 @@ int Pile_sf2::add(EltID id, bool storeAction)
         {
             // Ajout d'un élément graphique
             sf2->eltTree = new QTreeWidgetItem(this->tree);
-            char str[20];
-            sprintf(str,"%d", i);
+            QString str = QString::number(i);
             sf2->eltTree->setText(1, str);
             sf2->eltTree->setText(2, "R");
             QFont font = sf2->eltTree->font(0);
@@ -988,15 +987,12 @@ int Pile_sf2::add(EltID id, bool storeAction)
         if (tree)
         {
             // Ajout d'un élément graphique
-            char str[20];
             smpl->eltTree = new QTreeWidgetItem(sf2->eltTreeSmpl);
-            sprintf(str,"%d", id.indexSf2);
-            smpl->eltTree->setText(1, str);
+            smpl->eltTree->setText(1, QString::number(id.indexSf2));
             smpl->eltTree->setText(2, "smpl");
-            sprintf(str, "%d", i);
-            smpl->eltTree->setText(3, str);
+            smpl->eltTree->setText(3, QString::number(i));
             smpl->eltTree->setText(6, "0");
-            smpl->eltTree->setSizeHint(0, QSize(0,17));
+            smpl->eltTree->setSizeHint(0, QSize(0, 17));
             smpl->eltTree->setIcon(0, QIcon(":/icones/wave"));
         }
         }break;
@@ -1023,15 +1019,12 @@ int Pile_sf2::add(EltID id, bool storeAction)
         if (tree)
         {
             // Ajout d'un élément graphique
-            char str[20];
             inst->eltTree = new QTreeWidgetItem(sf2->eltTreeInst);
-            sprintf(str,"%d", id.indexSf2);
-            inst->eltTree->setText(1, str);
+            inst->eltTree->setText(1, QString::number(id.indexSf2));
             inst->eltTree->setText(2, "inst");
-            sprintf(str, "%d", i);
-            inst->eltTree->setText(3, str);
+            inst->eltTree->setText(3, QString::number(i));
             inst->eltTree->setText(6, "0");
-            inst->eltTree->setSizeHint(0, QSize(0,17));
+            inst->eltTree->setSizeHint(0, QSize(0, 17));
             inst->eltTree->setIcon(0, QIcon(":/icones/sound"));
         }
         }break;
@@ -1058,15 +1051,12 @@ int Pile_sf2::add(EltID id, bool storeAction)
         if (tree)
         {
             // Ajout d'un élément graphique
-            char str[20];
             prst->eltTree = new QTreeWidgetItem(sf2->eltTreePrst);
-            sprintf(str,"%d", id.indexSf2);
-            prst->eltTree->setText(1, str);
+            prst->eltTree->setText(1, QString::number(id.indexSf2));
             prst->eltTree->setText(2, "prst");
-            sprintf(str, "%d", i);
-            prst->eltTree->setText(3, str);
+            prst->eltTree->setText(3, QString::number(i));
             prst->eltTree->setText(6, "0");
-            prst->eltTree->setSizeHint(0, QSize(0,17));
+            prst->eltTree->setSizeHint(0, QSize(0, 17));
             prst->eltTree->setIcon(0, QIcon(":/icones/music"));
         }
         }break;
@@ -1093,17 +1083,13 @@ int Pile_sf2::add(EltID id, bool storeAction)
         if (tree)
         {
             // Ajout d'un élément graphique
-            char str[20];
             bag->eltTree = new QTreeWidgetItem(inst->eltTree);
-            sprintf(str,"%d", id.indexSf2);
-            bag->eltTree->setText(1, str);
+            bag->eltTree->setText(1, QString::number(id.indexSf2));
             bag->eltTree->setText(2, "IS");
-            sprintf(str, "%d", id.indexElt);
-            bag->eltTree->setText(3, str);
-            sprintf(str, "%d", i);
-            bag->eltTree->setText(4, str);
+            bag->eltTree->setText(3, QString::number(id.indexElt));
+            bag->eltTree->setText(4, QString::number(i));
             bag->eltTree->setText(6, "0");
-            bag->eltTree->setSizeHint(0, QSize(0,17));
+            bag->eltTree->setSizeHint(0, QSize(0, 17));
             bag->eltTree->setIcon(0, QIcon(":/icones/wave"));
         }
         }break;
@@ -1130,17 +1116,13 @@ int Pile_sf2::add(EltID id, bool storeAction)
         if (tree)
         {
             // Ajout d'un élément graphique
-            char str[20];
             bag->eltTree = new QTreeWidgetItem(prst->eltTree);
-            sprintf(str,"%d", id.indexSf2);
-            bag->eltTree->setText(1, str);
+            bag->eltTree->setText(1, QString::number(id.indexSf2));
             bag->eltTree->setText(2, "PI");
-            sprintf(str, "%d", id.indexElt);
-            bag->eltTree->setText(3, str);
-            sprintf(str, "%d", i);
-            bag->eltTree->setText(4, str);
+            bag->eltTree->setText(3, QString::number(id.indexElt));
+            bag->eltTree->setText(4, QString::number(i));
             bag->eltTree->setText(6, "0");
-            bag->eltTree->setSizeHint(0, QSize(0,17));
+            bag->eltTree->setSizeHint(0, QSize(0, 17));
             bag->eltTree->setIcon(0, QIcon(":/icones/sound"));
         }
         }break;
@@ -1918,9 +1900,9 @@ int Pile_sf2::set(EltID id, Champ champ, QString qStr, bool storeAction)
 {
     if (!this->isValide(id))
     {
+#ifdef SHOW_ID_ERROR
         MESSAGE(id);
         MESSAGE(qStr);
-#ifdef SHOW_ID_ERROR
         QMessageBox::warning(parent, "warning", "In Pile_sf2::set(QString), invalid ID.");
 #endif
         return 1;
