@@ -153,11 +153,13 @@ void GraphiqueFourier::setPos(qint32 posStart, qint32 posEnd, QList<double> &fre
     text3->setText("");
     text4->setText("");
     text5->setText("");
-    graph(0)->clearData();
-    replot();
 
     if (_fData.isEmpty())
+    {
+        graph(0)->clearData();
+        replot();
         return;
+    }
 
     // Détermination du régime permanent pour transformée de Fourier et corrélation (max 0.5 seconde)
     if (posStart == posEnd)
@@ -195,8 +197,21 @@ void GraphiqueFourier::setPos(qint32 posStart, qint32 posEnd, QList<double> &fre
     // Recherche des corrélations minimales (= plus grandes similitudes) et intensités fréquencielles maximales
     QList<int> posMinCor = Sound::findMins(vectCorrel, 20, 0.7);
     QList<quint32> posMaxFFT = Sound::findMax(vectFourier, 50, 0.05);
-    if (posMinCor.isEmpty() || posMaxFFT.isEmpty())
+    if (posMaxFFT.isEmpty())
+    {
+        graph(0)->clearData();
+        replot();
         return;
+    }
+
+    // Affichage transformée
+    this->dispFourier(vectFourier, posMaxFFT[0]);
+
+    if (posMinCor.isEmpty())
+    {
+        this->replot();
+        return;
+    }
 
     // Pour chaque minimum de corrélation (considéré comme la base), on cherche un pic de fréquence
     double freq = 0;
@@ -264,7 +279,7 @@ void GraphiqueFourier::setPos(qint32 posStart, qint32 posEnd, QList<double> &fre
 
                 // Ajustement des scores en fonction de la hauteur de note
                 double noteTmp = 12 * qLn(freqCorrel) / 0.69314718056 - 36.3763;
-                if (noteTmp < 40)
+                if (noteTmp < 40 || posEnd - posStart < 4096)
                     scoreFourier = 0;
                 else if (noteTmp < 90)
                 {
@@ -328,24 +343,25 @@ void GraphiqueFourier::setPos(qint32 posStart, qint32 posEnd, QList<double> &fre
     text3->setText(qStr3);
     text4->setText(qStr4);
     text5->setText(qStr5);
+    this->replot();
+}
 
-    // Initialisation du graphe
+void GraphiqueFourier::dispFourier(QVector<float> vectFourier, float posMaxFourier)
+{
     this->graph(0)->clearData();
-
-    // Ajout des données
     DWORD size_x = ((long int)vectFourier.size() * 40000) / this->dwSmplRate;
     QVector<double> x(size_x), y(size_x);
     for (unsigned long i = 0; i < size_x; i++)
     {
         x[i] = (double)i/(size_x - 1) * 20000; // Conversion Hz
-        if (i < (unsigned)vectFourier.size() && posMaxFFT[0] != 0)
-            y[i] = vectFourier[i] / vectFourier[posMaxFFT[0]]; // normalisation entre 0 et 1
+        if (i < (unsigned)vectFourier.size())
+            y[i] = vectFourier[i] / vectFourier[posMaxFourier]; // normalisation entre 0 et 1
         else
             y[i] = 0;
     }
     this->graph(0)->setData(x, y);
-    this->replot();
 }
+
 void GraphiqueFourier::resizeEvent(QResizeEvent * event)
 {
     // Repositionnement du texte

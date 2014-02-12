@@ -223,7 +223,7 @@
           </font>
          </property>
          <property name="title">
-          <string>Divers</string>
+          <string>Interface</string>
          </property>
          <property name="flat">
           <bool>true</bool>
