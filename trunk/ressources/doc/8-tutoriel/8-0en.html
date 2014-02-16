@@ -1,6 +1,6 @@
 <h3>Sample loading</h3>
 
-<p align="justify">The sample preparation begins by <b>loading</b> .wav files, using the action "Import samples" in the "<a href="qrc:/aide/1-0en.html">Files</a>" menu. They may be obtained:
+<p align="justify">The sample preparation begins by <b>loading</b> .wav files. To do this first select the "Samples" category in the <a href="qrc:/aide/3en.html">tree</a> and either select "Import samples" from the "<a href="qrc:/aide/1-0en.html">File</a>" menu, or right-click on the "Samples" category and select "New sample". Samples may be obtained:
 <ul>
 	<li>through Internet,</li>
 	<li>by recording a real musical instrument,</li>
@@ -10,26 +10,31 @@
 
 <h3>Sample looping</h3>
 
-<p align="justify">Next, a <b>loop</b> may be required in the sample. This is the case for example of a flute sound: the length of the sample can be only one second but we would like to make it last indefinitely. Two positions, the start and end of the loop, has to be found in the sound wave so that locally the wave can be superimposed. Here is the method:
+<p align="justify">Next, a <b>loop</b> may be required in the sample, if you would like it to sound longer than its normal length. An example of this would be if you only have a 1 second flute sample, but would like it to sound indefinitely. This can be done by manually or automatically assigning loop points (start + end) within the sample boundaries, so that the loop area can be repeated and thus make the sample play longer.  While you can assign loop points manually, using the "<a href="qrc:/aide/5-0-1en.html">Auto loop</a>" function to assign them automatically usually produces better results and is a lot faster.</p>
+
+<p align="justify">To assign loop points manually:
 <ul>
 	<li>click in the <a href="qrc:/aide/3en.html">tree</a> on the sample to be looped,</li>
-	<li>in the editing page of <a href="qrc:/aide/4-1en.html">samples</a>, arbitrarily position the start and end of the loop in the <a href="qrc:/aide/4-1-0en.html">graphic</a> if no loop is already defined,</li>
-	<li>authorize looping and start playback,</li>
-	<li>adjust the start and / or end of the loop until the transition between the two positions is not noticeable.</li>
+	<li>in the editing page of <a href="qrc:/aide/4-1en.html">samples</a>, arbitrarily position the start and end of the loop in the <a href="qrc:/aide/4-1-0en.html">graphic</a> (WAV display area) unless a loop is already defined. Use left-click for start and right-click for end. The right loop point should be entered first (since the left point it by default at the position 0 and that it's not possible to assign a right point before the left point).</li>
+	<li>press the "Play" button after having selected the loop function,</li>
+	<li>adjust the start and / or end of the loop, while the sample is playing, until the transition between the two positions is as smooth as possible.</li>
 </ul>
-If the looping process is tough, this <a href="qrc:/aide/5-0-1en.html">tool</a> may help.
+To assign loop points automatically, see the "<a href="qrc:/aide/5-0-1en.html">Auto loop</a>" function in the menu "Tools" &#8594; "Samples".
 </p>
+
+<p align="justify">Note: To hear looping in an instrument, you must enter a <b>1</b> in the "Loop playback" parameter row of either the Global or individual notes columns in the <a href="qrc:/aide/4-2-0en.html">Parameters Table</a>. <b>1</b> turns it On, <b>0</b> or a blank turns it Off.</p>
 
 <p align="center"><img src="qrc:/aide/loop_illustration.png" /></p>
 
 <h3>Sample tuning</h3>
 
-<p align="justify">Finally, a <b>tuning</b> has to be done. To do this, a calibration tool is available in the editing page of <a href="qrc:/aide/4-1en.html">samples</a>. For each sample the method is as follows:
+<p align="justify">Finally, a <b>tuning</b> has to be done. To do this, a calibration tool (Sinus) is available in the editing page of <a href="qrc:/aide/4-1en.html">samples</a>. For each sample the method is as follows:
 <ul>
-	<li>begin the playback (button "play"), if possible with loop,</li>
-	<li>add the sine calibration and adjust the volume to hear the two sounds as clearly as possible,</li>
-	<li>change the root key so that the two sounds best coincide,</li>
-	<li>adjust the correction to tune the sample with to root key (for this we must be attentive to the beating and make sure it is as slow as possible).</li>
+	<li>begin the playback (press the "play" button), if possible with loop function selected,</li>
+	<li>select the sinus function,</li>
+	<li>adjust the volume slider to hear the two sounds as clearly as possible,</li>
+	<li>change the Root key until the two sounds most closely match,</li>
+	<li>adjust the Correction (cents) to tune the sample to the Rootkey. To do this, pay attention to any beats that occur and make sure they are as slow as possible.</li>
 </ul>
 The <a href="qrc:/aide/4-1-2en.html">frequency</a> analysis can be a good indicator to start tuning.
 </p>

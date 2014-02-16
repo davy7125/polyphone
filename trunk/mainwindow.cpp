@@ -171,10 +171,12 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent, Qt::Window | Qt::W
     QDate date = QDate::currentDate();
     if (date.month() == 10 && date.day() == 31)
         ui->label->setPixmap(QPixmap(":/logo/halloween"));
-    else if (date.month() == 12 && (date.day() == 24 || date.day() == 25))
+    else if (date.month() == 12 && date.day() == 25)
         ui->label->setPixmap(QPixmap(":/logo/noel"));
     else if (date.month() == 2 && date.day() == 14)
         ui->label->setPixmap(QPixmap(":/logo/valentin"));
+    else if (date.month() == 6 && date.day() == 21)
+        ui->label->setPixmap(QPixmap(":/logo/musique"));
 
     // Initialisation objet Sound
     Sound::setParent(this);

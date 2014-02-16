@@ -212,6 +212,7 @@ private:
     static double log2m1200(double value) { return 1200. * qLn(value) / 0.69314718056 /* ln(2) */; }
     static double d1200e2(int value) { return qPow(2., value / 1200.); }
     static void addSeconds(double value, Champ champ, Pile_sf2 * sf2, EltID id);
+    void getKeynumValues(double &baseValue, int &keynum, Parametre::OpCode opCodeKeynum, Parametre::OpCode opCodeBase) const;
 };
 
 class EnsembleGroupes
@@ -227,6 +228,7 @@ public:
         else
             _listeDivisions.last() << Parametre(opcode, valeur);
     }
+    void moveKeynumInSamples(Parametre::OpCode opCodeKeynum, Parametre::OpCode opCodeBase);
     void moveOpcodeInSamples(Parametre::OpCode opcode, QVariant::Type type);
     void checkSampleValid(QString path);
     void checkFilter();
