@@ -367,8 +367,11 @@ void ConversionSfz::writeElement(QTextStream &out, Champ champ, double value)
     case champ_modLfoToFilterFc:        out << "fillfo_depth=" << value << endl;                    break;
 
     case champ_modLfoToPitch:           /* IMPOSSIBLE !!! */                                        break;
-    case champ_keynum: out << "pitch_keycenter=" << Config::getInstance()->getKeyName(qRound(value), false, false, true) << endl
-                                            << "pitch_keytrack=0" << endl;                          break;
+    case champ_keynum:
+        out << "pitch_keycenter="
+            << Config::getInstance()->getKeyName(qRound(value), false, false, true) << endl
+            << "pitch_keytrack=0" << endl;
+        break;
     case champ_reverbEffectsSend:       out << "effect1=" << value << endl;                         break;
     case champ_chorusEffectsSend:       out << "effect2=" << value << endl;                         break;
     case champ_delayVolEnv:             out << "ampeg_delay=" << value << endl;                     break;
@@ -379,8 +382,10 @@ void ConversionSfz::writeElement(QTextStream &out, Champ champ, double value)
     case champ_keynumToVolEnvHold:      out << "ampeg_holdcc133=" << value << v2 << endl;           break;
     case champ_keynumToVolEnvDecay:     out << "ampeg_decaycc133=" << value << v2 << endl;          break;
     case champ_releaseVolEnv:           out << "ampeg_release=" << value << endl;                   break;
-    case champ_overridingRootKey:       out << "pitch_keycenter=" <<
-                             Config::getInstance()->getKeyName(qRound(value), false, false, true) << endl;         break;
+    case champ_overridingRootKey:
+        out << "pitch_keycenter="
+            << Config::getInstance()->getKeyName(qRound(value), false, false, true) << endl;
+        break;
     case champ_delayVibLFO:             out << "pitchlfo_delay=" << value << endl;                  break;
     case champ_freqVibLFO:              out << "pitchlfo_freq=" << value << endl;                   break;
     case champ_vibLfoToPitch:           out << "pitchlfo_depth=" << qRound(value) << endl;          break;
@@ -738,6 +743,9 @@ ParamListe::ParamListe(Pile_sf2 * sf2, ParamListe * paramPrst, EltID idInst)
             _listeChamps.removeAt(indexKeynum);
             _listeValeurs.removeAt(indexKeynum);
         }
+
+        // Adaptation des keynum2...
+        adaptKeynum2();
     }
 
     // Fusion des 2 listes de paramètres
@@ -750,10 +758,8 @@ ParamListe::ParamListe(Pile_sf2 * sf2, ParamListe * paramPrst, EltID idInst)
     {
         // On fusionne uniquement avec les éléments présents
         for (int i = 0; i < paramPrst->_listeChamps.size(); i++)
-        {
             if (_listeChamps.contains(paramPrst->_listeChamps.at(i)))
                 fusion(paramPrst->_listeChamps.at(i), paramPrst->_listeValeurs.at(i));
-        }
     }
 
     // On tente d'éliminer le champ modLfoToPitch si vib LFO est disponible
@@ -871,6 +877,71 @@ ParamListe::ParamListe(Pile_sf2 * sf2, ParamListe * paramPrst, EltID idInst)
     prepend(champ_keyRange);
 }
 
+void ParamListe::adaptKeynum2()
+{
+    int minKey = 0, maxKey = 127;
+    if (_listeChamps.contains(champ_keyRange))
+    {
+        double keyRange = _listeValeurs.at(_listeChamps.indexOf(champ_keyRange));
+        minKey = qRound(keyRange / 1000);
+        maxKey = qRound(keyRange - 1000 * minKey);
+    }
+
+    adaptKeynum2(minKey, maxKey, champ_decayModEnv, champ_keynumToModEnvDecay);
+    adaptKeynum2(minKey, maxKey, champ_holdModEnv, champ_keynumToModEnvHold);
+    adaptKeynum2(minKey, maxKey, champ_decayVolEnv, champ_keynumToVolEnvDecay);
+    adaptKeynum2(minKey, maxKey, champ_holdVolEnv, champ_keynumToVolEnvHold);
+}
+void ParamListe::adaptKeynum2(int minKey, int maxKey, Champ champBase, Champ champKeynum)
+{
+    double valBase = 0.001;
+    double valMin, valMax;
+    double keyNum;
+
+    int indexKeynum = _listeChamps.indexOf(champKeynum);
+    if (indexKeynum != -1)
+    {
+        keyNum = _listeValeurs.at(indexKeynum);
+
+        int indexValBase = _listeChamps.indexOf(champBase);
+        if (indexValBase != -1)
+            valBase = _listeValeurs.at(indexValBase);
+
+        valMin = getValKeynum(valBase, minKey, keyNum);
+        valMax = getValKeynum(valBase, maxKey, keyNum);
+        if (minKey == maxKey)
+        {
+            if (indexValBase == -1)
+            {
+                _listeChamps << champBase;
+                _listeValeurs << valMin;
+            }
+            else
+                _listeValeurs[indexValBase] = valMin;
+            _listeValeurs.removeAt(indexKeynum);
+            _listeChamps.removeAt(indexKeynum);
+        }
+        else
+        {
+            keyNum = 127. * (valMin - valMax) / (double)(minKey - maxKey);
+            valBase = (valMax * minKey - valMin * maxKey) / (double)(minKey - maxKey);
+            _listeValeurs[indexKeynum] = keyNum;
+            if (indexValBase == -1)
+            {
+                _listeChamps << champBase;
+                _listeValeurs << valBase;
+            }
+            else
+                _listeValeurs[indexValBase] = valBase;
+        }
+    }
+}
+
+double ParamListe::getValKeynum(double valBase, int key, double keynum)
+{
+    return valBase * qPow(2., (60. - (double)key) * keynum / 1200.);
+}
+
 void ParamListe::prepend(Champ champ)
 {
     if (_listeChamps.indexOf(champ) != -1)
@@ -902,7 +973,11 @@ void ParamListe::load(Pile_sf2 * sf2, EltID id)
                         champ != champ_endAddrsOffset &&
                         champ != champ_endloopAddrsCoarseOffset &&
                         champ != champ_endloopAddrsOffset &&
-                        champ != champ_keynum))
+                        champ != champ_keynum &&
+                        champ != champ_keynumToModEnvDecay &&
+                        champ != champ_keynumToModEnvHold &&
+                        champ != champ_keynumToVolEnvDecay &&
+                        champ != champ_keynumToVolEnvHold))
             {
                 _listeChamps << champ;
                 _listeValeurs << getValue(champ, sf2->get(id, champ_sfGenAmount).genValue, isPrst);
@@ -926,6 +1001,24 @@ void ParamListe::load(Pile_sf2 * sf2, EltID id)
 
         // Chargement de la note fixe de la division globale
         getGlobalValue(sf2, id, champ_keynum);
+
+        // Chargement des keynum2... de la division globale, avec les valeurs modulées
+        getGlobalValue(sf2, id, champ_keynumToModEnvDecay);
+        if (_listeChamps.contains(champ_keynumToModEnvDecay))
+            if (_listeValeurs.at(_listeChamps.indexOf(champ_keynumToModEnvDecay)) != 0)
+                getGlobalValue(sf2, id, champ_decayModEnv);
+        getGlobalValue(sf2, id, champ_keynumToModEnvHold);
+        if (_listeChamps.contains(champ_keynumToModEnvHold))
+            if (_listeValeurs.at(_listeChamps.indexOf(champ_keynumToModEnvHold)) != 0)
+                getGlobalValue(sf2, id, champ_holdModEnv);
+        getGlobalValue(sf2, id, champ_keynumToVolEnvDecay);
+        if (_listeChamps.contains(champ_keynumToVolEnvDecay))
+            if (_listeValeurs.at(_listeChamps.indexOf(champ_keynumToVolEnvDecay)) != 0)
+                getGlobalValue(sf2, id, champ_decayVolEnv);
+        getGlobalValue(sf2, id, champ_keynumToVolEnvHold);
+        if (_listeChamps.contains(champ_keynumToVolEnvHold))
+            if (_listeValeurs.at(_listeChamps.indexOf(champ_keynumToVolEnvHold)) != 0)
+                getGlobalValue(sf2, id, champ_holdVolEnv);
     }
 }
 

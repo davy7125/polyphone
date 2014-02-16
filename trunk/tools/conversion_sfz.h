@@ -55,6 +55,9 @@ private:
     void fusion(Champ champ, double value);
     double getDefaultValue(Champ champ);
     void prepend(Champ champ);
+    void adaptKeynum2();
+    void adaptKeynum2(int minKey, int maxKey, Champ champBase, Champ champKeynum);
+    double getValKeynum(double valBase, int key, double keynum);
 };
 
 

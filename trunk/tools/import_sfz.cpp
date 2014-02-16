@@ -118,6 +118,12 @@ void ImportSfz::import(QString fileName, int * numSf2)
             _listeEnsembles[i].moveOpcodeInSamples(Parametre::op_pan, QVariant::Double);
             _listeEnsembles[i].moveOpcodeInSamples(Parametre::op_off_by, QVariant::Int);
             _listeEnsembles[i].moveOpcodeInSamples(Parametre::op_exclusiveClass, QVariant::Int);
+            _listeEnsembles[i].moveKeynumInSamples(Parametre::op_noteToVolEnvDecay, Parametre::op_ampeg_decay);
+            _listeEnsembles[i].moveKeynumInSamples(Parametre::op_noteToVolEnvHold, Parametre::op_ampeg_hold);
+            _listeEnsembles[i].moveKeynumInSamples(Parametre::op_noteToModEnvDecay, Parametre::op_pitcheg_decay);
+            _listeEnsembles[i].moveKeynumInSamples(Parametre::op_noteToModEnvHold, Parametre::op_pitcheg_hold);
+            _listeEnsembles[i].moveKeynumInSamples(Parametre::op_fileg_decaycc133, Parametre::op_fileg_decay);
+            _listeEnsembles[i].moveKeynumInSamples(Parametre::op_fileg_holdcc133, Parametre::op_fileg_hold);
             _listeEnsembles[i].adjustStereoVolumeAndCorrection(QFileInfo(fileName).path());
             _listeEnsembles[i].adjustModulationVolume();
             _listeEnsembles[i].checkFilter();
@@ -348,6 +354,25 @@ void ImportSfz::addOpcode(QString opcode, QString value)
         _listeEnsembles.last().addParam(opcode, value);
 }
 
+void EnsembleGroupes::moveKeynumInSamples(Parametre::OpCode opCodeKeynum, Parametre::OpCode opCodeBase)
+{
+    if (_paramGlobaux.isDefined(opCodeKeynum))
+    {
+        double valueKeynum = _paramGlobaux.getDoubleValue(opCodeKeynum);
+        double valueBase = 0.001;
+        if (_paramGlobaux.isDefined(opCodeBase))
+            valueBase = _paramGlobaux.getDoubleValue(opCodeBase);
+        for (int i = 0; i < _listeDivisions.size(); i++)
+        {
+            if (!_listeDivisions.at(i).isDefined(opCodeKeynum))
+                _listeDivisions[i] << Parametre(opCodeKeynum, valueKeynum);
+            if (!_listeDivisions.at(i).isDefined(opCodeBase))
+                _listeDivisions[i] << Parametre(opCodeBase, valueBase);
+        }
+
+        _paramGlobaux.removeOpCode(opCodeKeynum);
+    }
+}
 
 void EnsembleGroupes::moveOpcodeInSamples(Parametre::OpCode opcode, QVariant::Type type)
 {
@@ -964,12 +989,18 @@ void GroupeParametres::decode(Pile_sf2 * sf2, EltID idElt) const
             sf2->set(idElt, champ_attackVolEnv, val, false);
             break;
         case Parametre::op_ampeg_hold:
-            val.shValue = qRound(log2m1200(_listeParam.at(i).getDoubleValue()));
-            sf2->set(idElt, champ_holdVolEnv, val, false);
+            if (!isDefined(Parametre::op_noteToVolEnvHold))
+            {
+                val.shValue = qRound(log2m1200(_listeParam.at(i).getDoubleValue()));
+                sf2->set(idElt, champ_holdVolEnv, val, false);
+            }
             break;
         case Parametre::op_ampeg_decay:
-            val.shValue = qRound(log2m1200(_listeParam.at(i).getDoubleValue()));
-            sf2->set(idElt, champ_decayVolEnv, val, false);
+            if (!isDefined(Parametre::op_noteToVolEnvDecay))
+            {
+                val.shValue = qRound(log2m1200(_listeParam.at(i).getDoubleValue()));
+                sf2->set(idElt, champ_decayVolEnv, val, false);
+            }
             break;
         case Parametre::op_ampeg_sustain:
             dTmp = _listeParam.at(i).getDoubleValue();
@@ -984,13 +1015,25 @@ void GroupeParametres::decode(Pile_sf2 * sf2, EltID idElt) const
             sf2->set(idElt, champ_releaseVolEnv, val, false);
             break;
         case Parametre::op_noteToVolEnvHold:
-            val.shValue = _listeParam.at(i).getIntValue();
+        {
+            double baseValue = 0.001;
+            int keynum = 0;
+            getKeynumValues(baseValue, keynum, Parametre::op_noteToVolEnvHold, Parametre::op_ampeg_hold);
+            val.shValue = keynum;
             sf2->set(idElt, champ_keynumToVolEnvHold, val, false);
-            break;
+            val.shValue = qRound(log2m1200(baseValue));
+            sf2->set(idElt, champ_holdVolEnv, val, false);
+        }break;
         case Parametre::op_noteToVolEnvDecay:
-            val.shValue = _listeParam.at(i).getIntValue();
+        {
+            double baseValue = 0.001;
+            int keynum = 0;
+            getKeynumValues(baseValue, keynum, Parametre::op_noteToVolEnvDecay, Parametre::op_ampeg_decay);
+            val.shValue = keynum;
             sf2->set(idElt, champ_keynumToVolEnvDecay, val, false);
-            break;
+            val.shValue = qRound(log2m1200(baseValue));
+            sf2->set(idElt, champ_decayVolEnv, val, false);
+        }break;
         case Parametre::op_reverb:
             val.wValue = qRound(10. * _listeParam.at(i).getDoubleValue());
             sf2->set(idElt, champ_reverbEffectsSend, val, false);
@@ -1028,12 +1071,18 @@ void GroupeParametres::decode(Pile_sf2 * sf2, EltID idElt) const
             sf2->set(idElt, champ_attackModEnv, val, false);
             break;
         case Parametre::op_pitcheg_hold:
-            val.shValue = qRound(log2m1200(_listeParam.at(i).getDoubleValue()));
-            sf2->set(idElt, champ_holdModEnv, val, false);
+            if (!isDefined(Parametre::op_noteToModEnvHold))
+            {
+                val.shValue = qRound(log2m1200(_listeParam.at(i).getDoubleValue()));
+                sf2->set(idElt, champ_holdModEnv, val, false);
+            }
             break;
         case Parametre::op_pitcheg_decay:
-            val.shValue = qRound(log2m1200(_listeParam.at(i).getDoubleValue()));
-            sf2->set(idElt, champ_decayModEnv, val, false);
+            if (!isDefined(Parametre::op_noteToModEnvDecay))
+            {
+                val.shValue = qRound(log2m1200(_listeParam.at(i).getDoubleValue()));
+                sf2->set(idElt, champ_decayModEnv, val, false);
+            }
             break;
         case Parametre::op_pitcheg_sustain:
             val.shValue = qRound(1000. - 10. * _listeParam.at(i).getDoubleValue());
@@ -1048,13 +1097,25 @@ void GroupeParametres::decode(Pile_sf2 * sf2, EltID idElt) const
             sf2->set(idElt, champ_modEnvToPitch, val, false);
             break;
         case Parametre::op_noteToModEnvHold:
-            val.shValue = _listeParam.at(i).getIntValue();
+        {
+            double baseValue = 0.001;
+            int keynum = 0;
+            getKeynumValues(baseValue, keynum, Parametre::op_noteToModEnvHold, Parametre::op_pitcheg_hold);
+            val.shValue = keynum;
             sf2->set(idElt, champ_keynumToModEnvHold, val, false);
-            break;
+            val.shValue = qRound(log2m1200(baseValue));
+            sf2->set(idElt, champ_holdModEnv, val, false);
+        }break;
         case Parametre::op_noteToModEnvDecay:
-            val.shValue = _listeParam.at(i).getIntValue();
+        {
+            double baseValue = 0.001;
+            int keynum = 0;
+            getKeynumValues(baseValue, keynum, Parametre::op_noteToModEnvDecay, Parametre::op_pitcheg_decay);
+            val.shValue = keynum;
             sf2->set(idElt, champ_keynumToModEnvDecay, val, false);
-            break;
+            val.shValue = qRound(log2m1200(baseValue));
+            sf2->set(idElt, champ_decayModEnv, val, false);
+        }break;
         case Parametre::op_modLFOdelay:
             addSeconds(_listeParam.at(i).getDoubleValue(), champ_delayModLFO, sf2, idElt);
             break;
@@ -1095,8 +1156,8 @@ void GroupeParametres::decode(Pile_sf2 * sf2, EltID idElt) const
                 getDoubleValue(Parametre::op_fileg_decay) == getDoubleValue(Parametre::op_pitcheg_decay) &&
                 getDoubleValue(Parametre::op_fileg_sustain) == getDoubleValue(Parametre::op_pitcheg_sustain) &&
                 getDoubleValue(Parametre::op_fileg_release) == getDoubleValue(Parametre::op_pitcheg_release) &&
-                getIntValue(Parametre::op_fileg_holdcc133) == getIntValue(Parametre::op_noteToModEnvHold) &&
-                getIntValue(Parametre::op_fileg_decaycc133) == getIntValue(Parametre::op_noteToModEnvDecay))
+                getDoubleValue(Parametre::op_fileg_holdcc133) == getDoubleValue(Parametre::op_noteToModEnvHold) &&
+                getDoubleValue(Parametre::op_fileg_decaycc133) == getDoubleValue(Parametre::op_noteToModEnvDecay))
             {
                 val.shValue = getIntValue(Parametre::op_modEnvToFilter);
                 sf2->set(idElt, champ_modEnvToFilterFc, val, false);
@@ -1111,12 +1172,12 @@ void GroupeParametres::decode(Pile_sf2 * sf2, EltID idElt) const
                 val.shValue = qRound(log2m1200(getDoubleValue(Parametre::op_fileg_attack)));
                 sf2->set(idElt, champ_attackModEnv, val, false);
             }
-            if (isDefined(Parametre::op_fileg_hold))
+            if (isDefined(Parametre::op_fileg_hold) && !isDefined(Parametre::op_fileg_holdcc133))
             {
                 val.shValue = qRound(log2m1200(getDoubleValue(Parametre::op_fileg_hold)));
                 sf2->set(idElt, champ_holdModEnv, val, false);
             }
-            if (isDefined(Parametre::op_fileg_decay))
+            if (isDefined(Parametre::op_fileg_decay) && !isDefined(Parametre::op_fileg_decaycc133))
             {
                 val.shValue = qRound(log2m1200(getDoubleValue(Parametre::op_fileg_decay)));
                 sf2->set(idElt, champ_decayModEnv, val, false);
@@ -1133,13 +1194,23 @@ void GroupeParametres::decode(Pile_sf2 * sf2, EltID idElt) const
             }
             if (isDefined(Parametre::op_fileg_holdcc133))
             {
-                val.shValue = getIntValue(Parametre::op_fileg_holdcc133);
+                double baseValue = 0.001;
+                int keynum = 0;
+                getKeynumValues(baseValue, keynum, Parametre::op_fileg_holdcc133, Parametre::op_fileg_hold);
+                val.shValue = keynum;
                 sf2->set(idElt, champ_keynumToModEnvHold, val, false);
+                val.shValue = qRound(log2m1200(baseValue));
+                sf2->set(idElt, champ_holdModEnv, val, false);
             }
             if (isDefined(Parametre::op_fileg_decaycc133))
             {
-                val.shValue = getIntValue(Parametre::op_fileg_decaycc133);
+                double baseValue = 0.001;
+                int keynum = 0;
+                getKeynumValues(baseValue, keynum, Parametre::op_fileg_decaycc133, Parametre::op_fileg_decay);
+                val.shValue = keynum;
                 sf2->set(idElt, champ_keynumToModEnvDecay, val, false);
+                val.shValue = qRound(log2m1200(baseValue));
+                sf2->set(idElt, champ_decayModEnv, val, false);
             }
 
             val.shValue = getIntValue(Parametre::op_modEnvToFilter);
@@ -1172,6 +1243,41 @@ void GroupeParametres::decode(Pile_sf2 * sf2, EltID idElt) const
             val.shValue = getIntValue(Parametre::op_modLFOtoFilter);
             sf2->set(idElt, champ_modLfoToFilterFc, val, false);
         }
+    }
+}
+
+void GroupeParametres::getKeynumValues(double &baseValue, int &keynum,
+                                       Parametre::OpCode opCodeKeynum, Parametre::OpCode opCodeBase) const
+{
+    // Etendue de la division
+    int noteMin = 0;
+    int noteMax = 127;
+    if (isDefined(Parametre::op_key))
+        noteMin = noteMax = getIntValue(Parametre::op_key);
+    if (isDefined(Parametre::op_keyMin))
+        noteMin = getIntValue(Parametre::op_keyMin);
+    if (isDefined(Parametre::op_keyMax))
+        noteMax = getIntValue(Parametre::op_keyMax);
+
+    // Valeur de base du paramètre
+    double valBase = 0.001;
+    if (isDefined(opCodeBase))
+        valBase = getDoubleValue(opCodeBase);
+
+    // Valeur aux positions min et max
+    double valKeynum = getDoubleValue(opCodeKeynum);
+    double valMin = valBase + (double)noteMin / 127. * valKeynum;
+    double valMax = valBase + (double)noteMax / 127. * valKeynum;
+
+    if (noteMin == noteMax || valMax <= 0 || valMin <= 0)
+    {
+        baseValue = valMin;
+        keynum = 0;
+    }
+    else
+    {
+        keynum = qRound(1200. * log2(valMin / valMax) / (noteMax - noteMin));
+        baseValue = valMin * qPow(valMin / valMax, (double)(noteMin - 60) / (noteMax - noteMin));
     }
 }
 
@@ -1337,12 +1443,12 @@ Parametre::Parametre(QString opcode, QString valeur) :
     else if (opcode == "ampeg_holdcc133")
     {
         _opcode = op_noteToVolEnvHold;
-        _intValue = valeurLow.toInt();
+        _dblValue = valeurLow.toDouble();
     }
     else if (opcode == "ampeg_decaycc133")
     {
         _opcode = op_noteToVolEnvDecay;
-        _intValue = valeurLow.toInt();
+        _dblValue = valeurLow.toDouble();
     }
     else if (opcode == "effect1")
     {
@@ -1422,12 +1528,12 @@ Parametre::Parametre(QString opcode, QString valeur) :
     else if (opcode == "pitcheg_holdcc133")
     {
         _opcode = op_noteToModEnvHold;
-        _intValue = valeurLow.toInt();
+        _dblValue = valeurLow.toDouble();
     }
     else if (opcode == "pitcheg_decaycc133")
     {
         _opcode = op_noteToModEnvDecay;
-        _intValue = valeurLow.toInt();
+        _dblValue = valeurLow.toDouble();
     }
     else if (opcode == "amplfo_delay")
     {
@@ -1492,12 +1598,12 @@ Parametre::Parametre(QString opcode, QString valeur) :
     else if (opcode == "fileg_holdcc133")
     {
         _opcode = op_fileg_holdcc133;
-        _intValue = valeurLow.toInt();
+        _dblValue = valeurLow.toDouble();
     }
     else if (opcode == "fileg_decaycc133")
     {
         _opcode = op_fileg_decaycc133;
-        _intValue = valeurLow.toInt();
+        _dblValue = valeurLow.toDouble();
     }
     else if (opcode == "fillfo_delay")
     {

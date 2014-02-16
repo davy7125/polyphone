@@ -9,7 +9,7 @@ QT       += core gui printsupport svg
 # Option for developers ONLY
 #DEFINES += SHOW_ID_ERROR
 
-TARGET = Polyphone
+TARGET = polyphone
 TEMPLATE = app
 
 CONFIG(release, debug|release){
