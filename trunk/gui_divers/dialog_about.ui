@@ -177,8 +177,8 @@
   </layout>
  </widget>
  <tabstops>
-  <tabstop>pushCredit</tabstop>
   <tabstop>pushClose</tabstop>
+  <tabstop>pushCredit</tabstop>
  </tabstops>
  <resources>
   <include location="../ressources.qrc"/>

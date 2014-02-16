@@ -70,8 +70,6 @@
         <file alias="couper_blanc">ressources/couper_blanc.png</file>
         <file alias="couper_fin_boucle">ressources/couper_fin_boucle.png</file>
         <file alias="monitor">ressources/monitor.png</file>
-        <file alias="octave_down">ressources/octave_down.png</file>
-        <file alias="octave_up">ressources/octave_up.png</file>
         <file alias="export2">ressources/export2.png</file>
         <file alias="folder">ressources/folder.png</file>
         <file alias="import">ressources/import.png</file>
@@ -285,6 +283,7 @@
         <file alias="noel">ressources/logo_noel.png</file>
         <file alias="halloween">ressources/logo_halloween.png</file>
         <file alias="valentin">ressources/logo_valentin.png</file>
+        <file alias="musique">ressources/logo_fete_musique.png</file>
     </qresource>
     <qresource prefix="/style">
         <file alias="fondJaune.png">ressources/fondJaune.png</file>

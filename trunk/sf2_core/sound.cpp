@@ -1331,7 +1331,7 @@ QByteArray Sound::bandFilter(QByteArray baData, WORD wBps, double dwSmplRate, do
         delete [] fc_sortie_fft;
         // Prise en compte du facteur d'echelle
         for (unsigned long i = 0; i < size; i++)
-            cpxData[i].real(cpxData[i].real() / size);
+            cpxData[i].real() /= size;
         // Retour en QByteArray
         QByteArray baRet;
         baRet = fromComplexToBa(cpxData, (long int)baData.size() * 8 / wBps, wBps);
@@ -2121,9 +2121,9 @@ QByteArray Sound::bouclage(QByteArray baData, DWORD dwSmplRate, qint32 &loopStar
 
     // Recherche du régime permament
     qint32 posStart = loopStart;
-    if (posStart == loopEnd || loopEnd - posStart < (signed)dwSmplRate)
+    if (posStart == loopEnd || loopEnd - posStart < (signed)dwSmplRate / 2)
         regimePermanent(fData, dwSmplRate, posStart, loopEnd);
-    if (loopEnd - posStart < (signed)dwSmplRate)
+    if (loopEnd - posStart < (signed)dwSmplRate / 2)
         return QByteArray();
 
     // Extraction du segment B de 0.05s à la fin du régime permanent
