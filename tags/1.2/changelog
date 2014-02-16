@@ -20,7 +20,7 @@ polyphone (1.2) unstable; urgency=low
  * negative tune corrections were not exported correctly in wave files
  * using sample mode 3 (play sample to the end) now works
 
- -- Davy Triponney <davy.triponney@gmail.com>  Fri, 21 Dec 2013 00:10:09 +0100
+ -- Davy Triponney <davy.triponney@gmail.com>  Sat, 21 Dec 2013 00:10:09 +0100
 
 
 polyphone (1.1) UNRELEASED; urgency=low
