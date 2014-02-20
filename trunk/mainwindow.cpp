@@ -291,8 +291,11 @@ void MainWindow::closeEvent(QCloseEvent *event)
     }
     dialogMagneto.close();
 }
-void MainWindow::resizeEvent(QResizeEvent *)
+void MainWindow::resizeEvent(QResizeEvent * event)
 {
+    if (event)
+        QMainWindow::resizeEvent(event);
+
     QString titre;
     if (_title.isEmpty())
         titre = "Polyphone";

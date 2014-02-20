@@ -233,7 +233,7 @@ private:
 
 protected:
     void closeEvent(QCloseEvent *event);
-    void resizeEvent(QResizeEvent *);
+    void resizeEvent(QResizeEvent *event);
     void keyPressEvent(QKeyEvent *event);
 };
 

@@ -3,16 +3,21 @@
 <p align="justify">To assign loop points automatically:
 <ul>
 	<li>click in the <a href="qrc:/aide/3en.html">tree</a> on the sample to be looped,</li>
-	<li>in the editing page of <a href="qrc:/aide/4-1en.html">samples</a>, position the start and end of the loop in the graphic (WAV display area) to the same value if you want the tool automatically seeks a stable area, or position the start and end of the loop around a specific stable area (this can help the looping to be done),</li>
+	<li>in the editing page of <a href="qrc:/aide/4-1en.html">samples</a>:
+	<ul>
+		<li>position the start and end of the loop in the graphic (WAV display area) around a stable area, or</li>
+		<li>let the tool determine automatically a stable area by defining 0 as loop start and loop end,</li>
+	</ul>
+	</li>
 	<li>in the "Tools" menu select "Sample", "Auto loop",</li>
 	<li>press the Play button with the loop option checked,</li>
 	<li>if the loop points found are not suitable you can <a href="qrc:/aide/1-1en.html">undo</a> the operation, try repositioning them manually around a stable area and then use the "Auto loop" function again.</li>
 </ul>
 </p>
 
-<p align="justify">If the tool is unable to find loop points, a warning message will appear. This can happen if a sample is not long enough or is too turbulent. The minimum sample length for the "Auto Loop" function to work is 0.5 second, even if the sample is perfectly stable like a sine wave. For samples less than 0.5 second you can still try to find try to find loop points manually.</p>
+<p align="justify">If the tool is unable to find loop points, a warning message will appear. This can happen if a sample is not long enough or is too turbulent. The minimum sample length for the "Auto Loop" function to work is half a second, even if the sample is perfectly stable like a sine wave. If this condition is not respected you can still try to find try to find loop points manually.</p>
 
 <p align="justify"><b>Warning:</b> This tool modifies the original sample. Modifications can be undone via the "<a href="qrc:/aide/1-1en.html">undo</a>" function, but if the file is saved and Polyphone is closed there is no way to step back.</p>
 
-<p align="justify"><b>Note:</b> By default, the looping is disabled in an instrument. To hear it, you must enter a "1" in the Loop playback parameter row of either the Global or individual notes columns in the Parameters Table. "1" turns it On, "0" turns it Off. The value "3" turns the looping On and read the sample to the end after the key is released.
+<p align="justify"><b>Note:</b> By default, the looping is disabled in an instrument. To hear it, you must enter a "1" in the Loop playback parameter row of either the Global or individual notes columns in the Parameters Table. "1" turns it On, "0" turns it Off. The value "3" turns the looping On and the sample will play to the end after the key is released.
 </p>

@@ -45,6 +45,7 @@ public:
 private:
     QList<Champ> _listeChamps;
     QList<double> _listeValeurs;
+    static int _boucleGlobale;
 
     double getValue(Champ champ, genAmountType amount, bool isPrst);
     double d1200e2(qint32 val) { return qPow(2., (double)val / 1200.); }

@@ -627,6 +627,7 @@ QString ConversionSfz::getDrumCategory(int numPreset)
     return strRet;
 }
 
+int ParamListe::_boucleGlobale = -2;
 
 ParamListe::ParamListe(Pile_sf2 * sf2, EltID id)
 {
@@ -650,12 +651,49 @@ ParamListe::ParamListe(Pile_sf2 * sf2, ParamListe * paramPrst, EltID idInst)
         idInst.typeElement = elementInstGen;
         load(sf2, idInst);
 
-        // Pas de boucle si non défini
-        if (!_listeChamps.contains(champ_sampleModes))
+        // Toutes les divisions ont-elles le même paramètre de bouclage ?
+        idInst.typeElement = elementInstSmpl;
+        int nbInstSmpl = sf2->count(idInst);
+        _boucleGlobale = -2;
+        for (int i = 0; i < nbInstSmpl; i++)
         {
-            _listeChamps << champ_sampleModes;
-            _listeValeurs << 0;
+            idInst.indexElt2 = i;
+            if (!sf2->get(idInst, champ_hidden).bValue)
+            {
+                int valTmp = 0;
+                if (sf2->isSet(idInst, champ_sampleModes))
+                    valTmp = sf2->get(idInst, champ_sampleModes).wValue;
+                if (_boucleGlobale == -2)
+                    _boucleGlobale = valTmp;
+                else if (_boucleGlobale != valTmp)
+                    _boucleGlobale = -1;
+            }
         }
+
+        if (_boucleGlobale >= 0)
+        {
+            // Ajustement de la boucle globale
+            if (!_listeChamps.contains(champ_sampleModes))
+            {
+                _listeChamps << champ_sampleModes;
+                _listeValeurs << _boucleGlobale;
+            }
+            else
+                _listeValeurs[_listeChamps.indexOf(champ_sampleModes)] = _boucleGlobale;
+        }
+        else
+        {
+            // Pas de boucle si non défini
+            if (!_listeChamps.contains(champ_sampleModes))
+            {
+                _listeChamps << champ_sampleModes;
+                _listeValeurs << 0;
+                _boucleGlobale = 0;
+            }
+            else
+                _boucleGlobale = _listeValeurs.at(_listeChamps.indexOf(champ_sampleModes));
+        }
+
         idInst.typeElement = elementInst;
     }
     else if (idInst.typeElement == elementInstSmpl)
@@ -691,6 +729,17 @@ ParamListe::ParamListe(Pile_sf2 * sf2, ParamListe * paramPrst, EltID idInst)
         {
             _listeValeurs[_listeChamps.indexOf(champ_fineTune)] +=
                     sf2->get(idSmpl, champ_chPitchCorrection).cValue;
+        }
+
+        // Suppression sample mode si égal à la division globale
+        if (_listeChamps.contains(champ_sampleModes))
+        {
+            int index = _listeChamps.indexOf(champ_sampleModes);
+            if (_listeValeurs.at(index) == _boucleGlobale)
+            {
+                _listeChamps.removeAt(index);
+                _listeValeurs.removeAt(index);
+            }
         }
 
         // Adaptation des offsets
