@@ -333,6 +333,7 @@ Pile_actions::Action * Pile_actions::Action::decrementer(EltID id)
         else if (this->id.indexSf2 == id.indexSf2)
         {
             // Suppression d'un sf2 : suppression de toutes les actions correspondantes
+            this->suivant = NULL;
             delete this;
             return NULL;
         }

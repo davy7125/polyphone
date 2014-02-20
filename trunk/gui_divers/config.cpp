@@ -911,7 +911,7 @@ QString Config::getKeyName(int keyNum, bool forceTexte, bool with0, bool forceC4
     case 10: keyName = "A#"; break;
     case 11: keyName = "B";  break;
     }
-    int numOctave = (keyNum + 3) / 12 - 1;
+    int numOctave = (keyNum) / 12 - 1;
     if (nameMiddleC == middleC_C3 && !forceC4)
         numOctave -= 1;
     else if (nameMiddleC == middleC_C5 && !forceC4)
@@ -929,13 +929,13 @@ int Config::getKeyNum(QString keyName, bool forceC4)
     {
         switch (keyName.at(0).unicode())
         {
-        case 'a': note = 57; break;
-        case 'b': note = 59; break;
         case 'c': note = 60; break;
         case 'd': note = 62; break;
         case 'e': note = 64; break;
         case 'f': note = 65; break;
         case 'g': note = 67; break;
+        case 'a': note = 69; break;
+        case 'b': note = 71; break;
         default : return -1; break;
         }
         keyName = keyName.right(keyName.size() - 1);
