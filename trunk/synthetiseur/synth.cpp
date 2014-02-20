@@ -42,6 +42,7 @@ Synth::Synth(Pile_sf2 *sf2, QWidget * parent) : QObject(parent),
     {
         SoundEngine * soundEngine = new SoundEngine();
         connect(soundEngine, SIGNAL(readFinished()), this, SIGNAL(readFinished()));
+        connect(soundEngine, SIGNAL(readFinished()), this, SLOT(stopSinus()));
         soundEngine->moveToThread(soundEngine->getThread());
         soundEngine->getThread()->start(QThread::TimeCriticalPriority);
         QMetaObject::invokeMethod(soundEngine, "start");
@@ -142,7 +143,7 @@ void Synth::play(int type, int idSf2, int idElt, int note, int velocity, VoicePa
         if (note == -1)
         {
             // Avancement du graphique
-            connect(voiceTmp, SIGNAL(currentPosChanged(int)), this, SLOT(emitCurrentPosChanged(int)));
+            connect(voiceTmp, SIGNAL(currentPosChanged(int)), this, SIGNAL(currentPosChanged(int)));
 
             // Lien ?
             SFSampleLink typeLien = m_sf2->get(idSmpl, champ_sfSampleType).sfLinkValue;
@@ -362,9 +363,9 @@ void Synth::setPitchCorrection(int correction, bool repercute)
     SoundEngine::setPitchCorrection(correction, repercute);
 }
 
-void Synth::emitCurrentPosChanged(int pos)
+void Synth::stopSinus()
 {
-    this->currentPosChanged(pos);
+    _sinus.off();
 }
 
 void Synth::setFormat(AudioFormat format)

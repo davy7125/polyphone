@@ -1203,7 +1203,8 @@ int Pile_sf2::remove(EltID id, bool permanently, bool storeAction, int *message)
         {
             // propagation aux presets /!\ si temporaire, ne pas propager aux éléments déjà supprimés de manière temporaire
             id2.indexElt = i;
-            if (permanently || !this->get(id2, champ_hidden).bValue) this->remove(id2, permanently, storeAction, message);
+            if (permanently || !this->get(id2, champ_hidden).bValue)
+                this->remove(id2, permanently, storeAction, message);
         }
         id2.typeElement = elementInst;
         max = this->count(id2);
@@ -1211,7 +1212,8 @@ int Pile_sf2::remove(EltID id, bool permanently, bool storeAction, int *message)
         {
             // propagation aux instruments
             id2.indexElt = i;
-            if (permanently || !this->get(id2, champ_hidden).bValue) this->remove(id2, permanently, storeAction, message);
+            if (permanently || !this->get(id2, champ_hidden).bValue)
+                this->remove(id2, permanently, storeAction, message);
         }
         id2.typeElement = elementSmpl;
         max = this->count(id2);
@@ -1219,7 +1221,8 @@ int Pile_sf2::remove(EltID id, bool permanently, bool storeAction, int *message)
         {
             // propagation aux samples
             id2.indexElt = i;
-            if (permanently || !this->get(id2, champ_hidden).bValue) this->remove(id2, permanently, storeAction, message);
+            if (permanently || !this->get(id2, champ_hidden).bValue)
+                this->remove(id2, permanently, storeAction, message);
         }
         if (permanently)
         {
@@ -1958,6 +1961,7 @@ int Pile_sf2::set(EltID id, Champ champ, QString qStr, bool storeAction)
         }
         }break;
     case elementSmpl:{
+        qStr = qStr.trimmed();
         // Modification d'un sample
         SF2::SMPL *tmp = this->sf2->getElt(id.indexSf2)->smpl->getElt(id.indexElt);
         switch ((int)champ)
@@ -2005,6 +2009,7 @@ int Pile_sf2::set(EltID id, Champ champ, QString qStr, bool storeAction)
         }
         }break;
     case elementInst:{
+        qStr = qStr.trimmed();
         // Modification d'un instrument
         SF2::INST *tmp = this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt);
         switch ((int)champ)
@@ -2052,6 +2057,7 @@ int Pile_sf2::set(EltID id, Champ champ, QString qStr, bool storeAction)
         }
         }break;
     case elementPrst:{
+        qStr = qStr.trimmed();
         // Modification d'un preset
         SF2::PRST *tmp = this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt);
         switch ((int)champ)

@@ -114,7 +114,7 @@ signals:
     void samplesRead(int number);
 
 private slots:
-    void emitCurrentPosChanged(int pos);
+    void stopSinus();
 
 private:
     void clip(float *data1, float *data2, qint64 size)
