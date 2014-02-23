@@ -231,8 +231,7 @@ int Pile_sf2::ouvrir(QString fileName, QDataStream * stream, int &indexSf2, bool
         taille_sm24 = 0;
         wSmpl = 20 + taille_info + 12;
         wSm24 = 0;
-        stream->skipRawData(taille_smpl - 4);
-        //fi.seek(fi.pos() + taille_smpl - 4); // en avant de taille_smpl - 4
+        stream->skipRawData(taille_smpl - 4); // en avant de taille_smpl - 4
     }
     else
     {
@@ -240,8 +239,7 @@ int Pile_sf2::ouvrir(QString fileName, QDataStream * stream, int &indexSf2, bool
         // taille du bloc smpl
         taille_smpl = freadSize(stream);
         wSmpl = 20 + taille_info + 20;
-        stream->skipRawData(taille_smpl);
-        //fi.seek(fi.pos() + taille_smpl); // en avant de taille_smpl
+        stream->skipRawData(taille_smpl); // en avant de taille_smpl
         // bloc sm24 ?
         if (stream->readRawData(bloc, 4) != 4)
         {
@@ -263,8 +261,7 @@ int Pile_sf2::ouvrir(QString fileName, QDataStream * stream, int &indexSf2, bool
             if (taille_sm24 == taille_smpl/2 + ((taille_smpl/2) % 2))
             {
                 wSm24 = 20 + taille_info + 20 + taille_sm24 + 8;
-                stream->skipRawData(taille_sm24);
-                //fi.seek(fi.pos() + taille_sm24); // en avant de taille_sm24
+                stream->skipRawData(taille_sm24); // en avant de taille_sm24
             }
             else
             {
@@ -273,8 +270,7 @@ int Pile_sf2::ouvrir(QString fileName, QDataStream * stream, int &indexSf2, bool
                                      QObject::trUtf8("Fichier corrompu : utilisation des échantillons en qualité 16 bits."));
                 taille_sm24 = 0;
                 wSm24 = 0;
-                stream->skipRawData(taille_sm24);
-                //fi.seek(fi.pos() + taille_sm24); // en avant de taille_sm24
+                stream->skipRawData(taille_sm24); // en avant de taille_sm24
             }
         }
     }
