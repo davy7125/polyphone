@@ -84,6 +84,7 @@ public slots:
 private:
     Ui::Page_Sf2 *ui;
     void compte();
+    QList<int> getListNotHidden(EltID id);
 };
 
 #endif // PAGE_SF2_H

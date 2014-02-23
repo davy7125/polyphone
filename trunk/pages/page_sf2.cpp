@@ -54,8 +54,10 @@ void Page_Sf2::afficher()
     id.indexMod = 0;
     // Eléments non utilisés
     this->compte();
+
     // Mode 24 bits ?
     ui->check_24bits->setChecked(this->sf2->get(id, champ_wBpsSave).wValue == 24);
+
     // Informations
     QString txt;
 #ifndef Q_OS_MAC
@@ -261,153 +263,124 @@ void Page_Sf2::compte()
     }
 }
 
+QList<int> Page_Sf2::getListNotHidden(EltID id)
+{
+    QList<int> listElt;
+    int iTmp = sf2->count(id);
+    for (int i = 0; i < iTmp; i++)
+    {
+        id.indexElt = i;
+        if (!sf2->get(id, champ_hidden).bValue)
+            listElt << i;
+    }
+    return listElt;
+}
+
 void Page_Sf2::compte(int &unusedSmpl, int &unusedInst, int &usedSmpl, int &usedInst, int &usedPrst, int &instGen, int &prstGen)
 {
-    unusedSmpl = 0;
-    unusedInst = 0;
-    usedSmpl = 0;
-    usedInst = 0;
-    usedPrst = 0;
-    instGen = 0;
-    prstGen = 0;
-    if (this->tree->getSelectedItemsNumber() == 0) return;
-    if (!this->tree->isSelectedItemsSf2Unique()) return;
+    // Etablissement de la liste des samples, instruments et presets
+    // Préparation de la liste des samples et instruments utilisés
     EltID id = this->tree->getID(0);
-    EltID id2 = this->tree->getID(0);
-    // Compte des samples, instruments et presets utilisés et non utilisés
     id.typeElement = elementSmpl;
-    int nbSmpl = sf2->count(id);
+    QList<int> listSmpl = getListNotHidden(id);
+    QList<int> listUsedSmpl;
+
     id.typeElement = elementInst;
-    int nbInst = sf2->count(id);
+    QList<int> listInst = getListNotHidden(id);
+    QList<int> listUsedInst;
+
     id.typeElement = elementPrst;
-    int nbPrst = sf2->count(id);
-    bool smplUsed, instUsed;
-    int nbPrstInst, nbInstSmpl;
-    // Nombre de samples non utilisés
-    for (int i = 0; i < nbSmpl; i++)
+    QList<int> listPrst = getListNotHidden(id);
+
+    // Nombre de presets
+    usedPrst = listPrst.size();
+
+    // Nombre de gen dans les preset
+    // En passant on met de côté les instruments utilisés
+    prstGen = 0;
+    int iTmp;
+    foreach (int elementId, listPrst)
     {
-        // le sample ne doit pas être masqué
-        id.typeElement = elementSmpl;
-        id.indexElt = i;
-        if (!sf2->get(id, champ_hidden).bValue)
+        id.indexElt = elementId;
+        id.typeElement = elementPrstGen;
+        prstGen += sf2->count(id);
+
+        id.typeElement = elementPrstInst;
+        int nbPrstInst = sf2->count(id);
+        for (int i = 0; i < nbPrstInst; i++)
         {
-            smplUsed = 0;
-            // on regarde chaque instrument
-            for (int j = 0; j < nbInst; j++)
+            id.indexElt2 = i;
+            if (!sf2->get(id, champ_hidden).bValue)
             {
-                // l'instrument ne doit pas être masqué
-                id.typeElement = elementInst;
-                id.indexElt = j;
-                if (!sf2->get(id, champ_hidden).bValue)
+                id.typeElement = elementPrstInstGen;
+                prstGen += sf2->count(id);
+                id.typeElement = elementPrstInst;
+
+                iTmp = sf2->get(id, champ_instrument).wValue;
+                if (listInst.contains(iTmp))
                 {
-                    // on regarde les InstSmpl
-                    id.typeElement = elementInstSmpl;
-                    id.indexElt = j;
-                    nbInstSmpl = sf2->count(id);
-                    for (int l = 0; l < nbInstSmpl; l++)
-                    {
-                        id.indexElt2 = l;
-                        if (!sf2->get(id, champ_hidden).bValue)
-                            if (sf2->get(id, champ_sampleID).wValue == i) smplUsed = true;
-                    }
+                    listInst.removeOne(iTmp);
+                    listUsedInst << iTmp;
                 }
             }
-            if (!smplUsed) unusedSmpl++;
         }
     }
 
-    // Nombre d'instruments non utilisés
-    for (int i = 0; i < nbInst; i++)
+
+    // Nombre de Gen dans les instruments utilisés
+    // En passant on met de côté les samples utilisés
+    instGen = 0;
+    foreach (int elementId, listUsedInst)
     {
-        // l'instrument ne doit pas être masqué
-        id.typeElement = elementInst;
-        id.indexElt = i;
-        if (!sf2->get(id, champ_hidden).bValue)
+        id.indexElt = elementId;
+        id.typeElement = elementInstGen;
+        instGen += sf2->count(id);
+
+        id.typeElement = elementInstSmpl;
+        int nbInstSmpl = sf2->count(id);
+        for (int i = 0; i < nbInstSmpl; i++)
         {
-            instUsed = 0;
-            // on regarde chaque preset
-            for (int j = 0; j < nbPrst; j++)
+            id.indexElt2 = i;
+            if (!sf2->get(id, champ_hidden).bValue)
             {
-                // le preset ne doit pas être masqué
-                id.typeElement = elementPrst;
-                id.indexElt = j;
-                if (!sf2->get(id, champ_hidden).bValue)
+                id.typeElement = elementInstSmplGen;
+                instGen += sf2->count(id);
+                id.typeElement = elementInstSmpl;
+
+                iTmp = sf2->get(id, champ_sampleID).wValue;
+                if (listSmpl.contains(iTmp))
                 {
-                    // on regarde les PrstInst
-                    id.typeElement = elementPrstInst;
-                    id.indexElt = j;
-                    nbPrstInst = sf2->count(id);
-                    for (int l = 0; l < nbPrstInst; l++)
-                    {
-                        id.indexElt2 = l;
-                        if (!sf2->get(id, champ_hidden).bValue)
-                            if (sf2->get(id, champ_instrument).wValue == i) instUsed = true;
-                    }
+                    listSmpl.removeOne(iTmp);
+                    listUsedSmpl << iTmp;
                 }
             }
-            if (!instUsed) unusedInst++;
         }
     }
 
-    // Nombre de smpl, inst, prst et gen
-    for (int i = 0; i < nbSmpl; i++)
+    // Nombre de Gen dans les instruments non utilisés
+    foreach (int elementId, listInst)
     {
-        // le sample ne doit pas être masqué
-        id.typeElement = elementSmpl;
-        id.indexElt = i;
-        if (!sf2->get(id, champ_hidden).bValue)
+        id.indexElt = elementId;
+        id.typeElement = elementInstGen;
+        instGen += sf2->count(id);
+
+        id.typeElement = elementInstSmpl;
+        int nbInstSmpl = sf2->count(id);
+        for (int i = 0; i < nbInstSmpl; i++)
         {
-            usedSmpl++;
-        }
-    }
-    for (int i = 0; i < nbInst; i++)
-    {
-        // l'instrument ne doit pas être masqué
-        id.typeElement = elementInst;
-        id.indexElt = i;
-        id2.indexElt = i;
-        if (!sf2->get(id, champ_hidden).bValue)
-        {
-            usedInst++;
-            // Inst Gen
-            id2.typeElement = elementInstGen;
-            instGen += sf2->count(id2);
-            id2.typeElement = elementInstSmpl;
-            for (int j = 0; j < sf2->count(id2); j++)
+            id.indexElt2 = i;
+            if (!sf2->get(id, champ_hidden).bValue)
             {
-                id2.indexElt2 = j;
-                if (!sf2->get(id2, champ_hidden).bValue)
-                {
-                    id2.typeElement = elementInstSmplGen;
-                    instGen += sf2->count(id2);
-                    id2.typeElement = elementInstSmpl;
-                }
+                id.typeElement = elementInstSmplGen;
+                instGen += sf2->count(id);
+                id.typeElement = elementInstSmpl;
             }
         }
     }
-    for (int i = 0; i < nbPrst; i++)
-    {
-        // le preset ne doit pas être masqué
-        id.typeElement = elementPrst;
-        id.indexElt = i;
-        id2.indexElt = i;
-        if (!sf2->get(id, champ_hidden).bValue)
-        {
-            usedPrst++;
-            // Inst Gen
-            id2.typeElement = elementPrstGen;
-            prstGen += sf2->count(id2);
-            id2.typeElement = elementPrstInst;
-            for (int j = 0; j < sf2->count(id2); j++)
-            {
-                id2.indexElt2 = j;
-                if (!sf2->get(id2, champ_hidden).bValue)
-                {
-                    id2.typeElement = elementPrstInstGen;
-                    prstGen += sf2->count(id2);
-                    id2.typeElement = elementPrstInst;
-                }
-            }
-        }
-    }
+
+    // Nombre de samples et instruments utilisés / non utilisés
+    unusedSmpl = listSmpl.size();
+    unusedInst = listInst.size();
+    usedSmpl = listUsedSmpl.size();
+    usedInst = listUsedInst.size();
 }
