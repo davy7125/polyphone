@@ -777,6 +777,9 @@
                <height>16777215</height>
               </size>
              </property>
+             <property name="correctionMode">
+              <enum>QAbstractSpinBox::CorrectToNearestValue</enum>
+             </property>
             </widget>
            </item>
            <item row="1" column="3">
@@ -793,6 +796,9 @@
                <height>16777215</height>
               </size>
              </property>
+             <property name="correctionMode">
+              <enum>QAbstractSpinBox::CorrectToNearestValue</enum>
+             </property>
             </widget>
            </item>
            <item row="0" column="2" colspan="2">
@@ -804,6 +810,9 @@
            </item>
            <item row="2" column="2" colspan="2">
             <widget class="SpinBoxKey" name="spinRootKey">
+             <property name="correctionMode">
+              <enum>QAbstractSpinBox::CorrectToNearestValue</enum>
+             </property>
              <property name="maximum">
               <number>127</number>
              </property>
@@ -811,6 +820,9 @@
            </item>
            <item row="3" column="2" colspan="2">
             <widget class="QSpinBox" name="spinTune">
+             <property name="correctionMode">
+              <enum>QAbstractSpinBox::CorrectToNearestValue</enum>
+             </property>
              <property name="minimum">
               <number>-100</number>
              </property>

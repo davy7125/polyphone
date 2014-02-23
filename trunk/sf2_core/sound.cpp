@@ -2121,9 +2121,9 @@ QByteArray Sound::bouclage(QByteArray baData, DWORD dwSmplRate, qint32 &loopStar
 
     // Recherche du régime permament
     qint32 posStart = loopStart;
-    if (posStart == loopEnd || loopEnd - posStart < (signed)dwSmplRate / 2)
+    if (posStart == loopEnd || loopEnd - posStart < (signed)dwSmplRate / 4)
         regimePermanent(fData, dwSmplRate, posStart, loopEnd);
-    if (loopEnd - posStart < (signed)dwSmplRate / 2)
+    if (loopEnd - posStart < (signed)dwSmplRate / 4)
         return QByteArray();
 
     // Extraction du segment B de 0.05s à la fin du régime permanent
