@@ -51,8 +51,8 @@ public:
     QString getQstr(EltID id, Champ champ);
     Sound getSon(EltID id);
     QByteArray getData(EltID id, Champ champ);
-    int set(EltID id, Champ champ, Valeur value, bool storeAction = true);
-    int set(EltID id, Champ champ, QString qStr, bool storeAction = true);
+    int set(EltID id, Champ champ, Valeur value, bool storeAction = true, bool sort = true);
+    int set(EltID id, Champ champ, QString qStr, bool storeAction = true, bool sort = true);
     int set(EltID id, Champ champ, QByteArray data, bool storeAction = true);
     int reset(EltID id, Champ champ, bool storeAction = true);
 

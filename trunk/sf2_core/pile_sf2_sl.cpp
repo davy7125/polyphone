@@ -595,16 +595,18 @@ int Pile_sf2::ouvrir(QString fileName, QDataStream * stream, int &indexSf2, bool
     this->set(idSf2, champ_filename, fileName, false);
 
     ////////////////////   EXTRACTION DES CHAMPS DANS LE BLOC SHDR  ////////////////////
+
     id.typeElement = elementSmpl;
     id.indexSf2 = indexSf2;
     id.indexElt = -1;
     DWORD temp1;
     pos = 0;
+
     for (unsigned int i = 0; i < taille / 46 - 1; i++)
     {
         id.indexElt = this->add(id, false);
         this->set(id, champ_filename, fileName, false);
-        this->set(id, champ_name, QString::fromLatin1(readdata(buffer, bloc_pdta_shdr, pos, 20)).trimmed(), false);
+        this->set(id, champ_name, QString::fromLatin1(readdata(buffer, bloc_pdta_shdr, pos, 20)).trimmed(), false, i == taille / 46 - 2);
 
         // Configuration d'un sample
         value.bValue = readBYTE(bloc_pdta_shdr, pos+40);
@@ -687,6 +689,7 @@ int Pile_sf2::ouvrir(QString fileName, QDataStream * stream, int &indexSf2, bool
         }
         pos = pos + 46;
     }
+
     // Mode 16 ou 24 bits au chargement
     id.typeElement = elementSf2;
     if (wSm24)
@@ -702,6 +705,7 @@ int Pile_sf2::ouvrir(QString fileName, QDataStream * stream, int &indexSf2, bool
         this->set(id, champ_wBpsSave, value, false);
     }
     free(bloc_pdta_shdr);
+
     /////////////////////////   EXTRACTION DES CHAMPS DANS LE BLOC INFO   //////////////////////
     Valeur val;
     pos = 4;
@@ -742,14 +746,15 @@ int Pile_sf2::ouvrir(QString fileName, QDataStream * stream, int &indexSf2, bool
             this->set(idSf2, champ_ICMT, QString::fromLatin1(readdata(buffer, bloc_info, pos, taille)).trimmed(), false);
         else if (!strcmp(bloc, "ISFT"))
             this->set(idSf2, champ_ISFT, QString::fromLatin1(readdata(buffer, bloc_info, pos, taille)).trimmed(), false);
-//        else
-//            QMessageBox::information(NULL, "Champ supplémentaire trouvé", bloc);
+
         pos = pos + taille;
     }
     if (this->getQstr(idSf2, champ_name).isEmpty())
         this->set(idSf2, champ_name, trUtf8("sans titre"), false);
     free(bloc_info);
+
     /////////////////////////   EXTRACTION DES CHAMPS DANS LES BLOCS INST, IBAG, IMOD, IGEN   //////////////////////
+
     EltID id2;
     id.typeElement = elementInst;
     id.indexSf2 = indexSf2;
@@ -759,18 +764,21 @@ int Pile_sf2::ouvrir(QString fileName, QDataStream * stream, int &indexSf2, bool
     int l;
     int global;
     // Remplissage de la sous-classe INST
-    for (unsigned int i = 0; i < taille_p2/22 - 1; i++)
+    for (unsigned int i = 0; i < taille_p2 / 22 - 1; i++)
     {
         l = 0;
         id.indexElt = this->add(id, false);
         id2.indexElt = id.indexElt;
-        this->set(id, champ_name, QString::fromLatin1(readdata(buffer, bloc_pdta_inst, 22*i, 20)).trimmed(), false);
+        this->set(id, champ_name, QString::fromLatin1(readdata(buffer, bloc_pdta_inst, 22*i, 20)).trimmed(), false,
+                  i == taille_p2 / 22 - 2);
+
         // Indices des IBAG
         bagmin = readWORD(bloc_pdta_inst, 22 * i + 20);
         if (i < taille_p2/22 - 2)
             bagmax = readWORD(bloc_pdta_inst, 22 * (i+1) + 20);
         else
             bagmax = taille_b2/4 - 1;
+
         // Constitution de la liste des IBAG
         for (unsigned int j = bagmin; j < bagmax; j++)
         {
@@ -784,28 +792,34 @@ int Pile_sf2::ouvrir(QString fileName, QDataStream * stream, int &indexSf2, bool
             }
             else
             {
-                modmax = taille_m2/10 - 1;
-                genmax = taille_g2/4 - 1;
+                modmax = taille_m2 / 10 - 1;
+                genmax = taille_g2 / 4 - 1;
             }
+
             // Bag global ?
             global = 1;
             for (unsigned int k = genmin; k < genmax; k++)
-                {if (readSFGenerator(bloc_pdta_igen, 4*k) == champ_sampleID) global = 0;}
+                if (readSFGenerator(bloc_pdta_igen, 4*k) == champ_sampleID)
+                    global = 0;
             id2.indexElt2 = -1;
+
             // Constitution de la liste des IGEN
-            if (global) id2.typeElement = elementInst;
+            if (global)
+                id2.typeElement = elementInst;
             else
             {
                 // ajout d'un sample à l'instrument
                 id2.typeElement = elementInstSmpl;
                 id2.indexElt2 = this->add(id2, false);
             }
+
             // Modification des propriétés
             for (unsigned int k = genmin; k < genmax; k++)
             {
                 value.genValue = readGenAmountType(bloc_pdta_igen, 4*k+2);
-                this->set(id2, readSFGenerator(bloc_pdta_igen, 4*k), value, false);
+                this->set(id2, readSFGenerator(bloc_pdta_igen, 4*k), value, false, (signed)j == bagmax - 1);
             }
+
             // Constitution de la liste des IMOD
             for (unsigned int k = modmin; k < modmax; k++)
             {
@@ -848,12 +862,13 @@ int Pile_sf2::ouvrir(QString fileName, QDataStream * stream, int &indexSf2, bool
     id.typeElement = elementPrst;
     id.indexSf2 = indexSf2;
     id.indexElt = -1;
-    for (unsigned int i = 0; i < taille_p/38 - 1; i++)
+    for (unsigned int i = 0; i < taille_p / 38 - 1; i++)
     {
         l = 0;
         id.indexElt = this->add(id, false);
         id2.indexElt = id.indexElt;
-        this->set(id, champ_name, QString::fromLatin1(readdata(buffer, bloc_pdta_phdr, 38*i, 20)).trimmed(), false);
+        this->set(id, champ_name, QString::fromLatin1(readdata(buffer, bloc_pdta_phdr, 38*i, 20)).trimmed(), false,
+                  i == taille_p / 38 - 2);
         value.wValue = readWORD(bloc_pdta_phdr, 38*i+20);
         this->set(id, champ_wPreset, value, false);
         value.wValue = readWORD(bloc_pdta_phdr, 38*i+22);
@@ -889,7 +904,8 @@ int Pile_sf2::ouvrir(QString fileName, QDataStream * stream, int &indexSf2, bool
             // Bag global ?
             global = 1;
             for (unsigned int k = genmin; k < genmax; k++)
-                {if (readSFGenerator(bloc_pdta_pgen, 4*k) == champ_instrument) global = 0;}
+                if (readSFGenerator(bloc_pdta_pgen, 4*k) == champ_instrument)
+                    global = 0;
             // Constitution de la liste des PGEN
             id2.indexElt2 = -1;
             if (global) id2.typeElement = elementPrst;
@@ -903,7 +919,7 @@ int Pile_sf2::ouvrir(QString fileName, QDataStream * stream, int &indexSf2, bool
             for (unsigned int k = genmin; k < genmax; k++)
             {
                 value.genValue = readGenAmountType(bloc_pdta_pgen, 4*k+2);
-                this->set(id2, readSFGenerator(bloc_pdta_pgen, 4*k), value, false);
+                this->set(id2, readSFGenerator(bloc_pdta_pgen, 4*k), value, false, (signed)j == bagmax - 1);
             }
             // Constitution de la liste des PMOD
             for (unsigned int k = modmin; k < modmax; k++)
@@ -942,6 +958,7 @@ int Pile_sf2::ouvrir(QString fileName, QDataStream * stream, int &indexSf2, bool
     free(bloc_pdta_pbag);
     free(bloc_pdta_pmod);
     free(bloc_pdta_pgen);
+
     return 0;
 }
 
