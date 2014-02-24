@@ -1648,7 +1648,7 @@ int Pile_sf2::remove(EltID id, bool permanently, bool storeAction, int *message)
     }
     return 0;
 }
-int Pile_sf2::set(EltID id, Champ champ, Valeur value, bool storeAction)
+int Pile_sf2::set(EltID id, Champ champ, Valeur value, bool storeAction, bool sort)
 {
     if (champ == champ_hidden)
     {
@@ -1783,7 +1783,8 @@ int Pile_sf2::set(EltID id, Champ champ, Valeur value, bool storeAction)
             sprintf(chaine, "%s:%s %s", num1, num2, tmp->Name);
             tmp->eltTree->setText(0, chaine);
             tmp->eltTree->setText(5, chaine);
-            this->sf2->getElt(id.indexSf2)->eltTreePrst->sortChildren(5, Qt::AscendingOrder);
+            if (sort)
+                this->sf2->getElt(id.indexSf2)->eltTreePrst->sortChildren(5, Qt::AscendingOrder);
         }
         }break;
     case elementInstSmpl:{
@@ -1803,7 +1804,8 @@ int Pile_sf2::set(EltID id, Champ champ, Valeur value, bool storeAction)
             sprintf(str, "%.3d", this->get(id, champ_keyRange).rValue.byLo);
             QString qStr2 = QString(str);
             tmp->eltTree->setText(5, qStr2.append(qStr));
-            this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt)->eltTree->sortChildren(5, Qt::AscendingOrder);
+            if (sort)
+                this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt)->eltTree->sortChildren(5, Qt::AscendingOrder);
         }
         else if (champ == champ_keyRange && tree)
         {
@@ -1814,7 +1816,8 @@ int Pile_sf2::set(EltID id, Champ champ, Valeur value, bool storeAction)
             EltID id2(elementSmpl, id.indexSf2, this->get(id, champ_sampleID).wValue, 0, 0);
             qStr.append(this->getQstr(id2, champ_name));
             tmp->eltTree->setText(5, qStr);
-            this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt)->eltTree->sortChildren(5, Qt::AscendingOrder);
+            if (sort)
+                this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt)->eltTree->sortChildren(5, Qt::AscendingOrder);
         }
         }break;
     case elementPrstInst:{
@@ -1823,7 +1826,7 @@ int Pile_sf2::set(EltID id, Champ champ, Valeur value, bool storeAction)
         if (!tmp->gen->isSet(champ)) defaultValue = 1;
         oldValue = tmp->gen->getGen(champ);
         tmp->gen = tmp->gen->setGen(champ, value);
-        if (champ == champ_instrument  && tree)
+        if (champ == champ_instrument && tree)
         {
             // Nom de l'instrument lié
             EltID id2(elementInst, id.indexSf2, value.wValue, 0, 0);
@@ -1834,7 +1837,8 @@ int Pile_sf2::set(EltID id, Champ champ, Valeur value, bool storeAction)
             sprintf(str, "%.3d", this->get(id, champ_keyRange).rValue.byLo);
             QString qStr2 = QString(str);
             tmp->eltTree->setText(5, qStr2.append(qStr));
-            this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt)->eltTree->sortChildren(5, Qt::AscendingOrder);
+            if (sort)
+                this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt)->eltTree->sortChildren(5, Qt::AscendingOrder);
         }
         else if (champ == champ_keyRange && tree)
         {
@@ -1845,7 +1849,8 @@ int Pile_sf2::set(EltID id, Champ champ, Valeur value, bool storeAction)
             EltID id2(elementInst, id.indexSf2, this->get(id, champ_instrument).wValue, 0, 0);
             qStr.append(this->getQstr(id2, champ_name));
             tmp->eltTree->setText(5, qStr);
-            this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt)->eltTree->sortChildren(5, Qt::AscendingOrder);
+            if (sort)
+                this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt)->eltTree->sortChildren(5, Qt::AscendingOrder);
         }
         }break;
     case elementInstMod: case elementPrstMod: case elementInstSmplMod: case elementPrstInstMod:{
@@ -1899,7 +1904,7 @@ int Pile_sf2::set(EltID id, Champ champ, Valeur value, bool storeAction)
     }
     return 0;
 }
-int Pile_sf2::set(EltID id, Champ champ, QString qStr, bool storeAction)
+int Pile_sf2::set(EltID id, Champ champ, QString qStr, bool storeAction, bool sort)
 {
     if (!this->isValide(id))
     {
@@ -1999,7 +2004,8 @@ int Pile_sf2::set(EltID id, Champ champ, QString qStr, bool storeAction)
                         }
                     }
                 }
-                this->sf2->getElt(id.indexSf2)->eltTreeSmpl->sortChildren(5, Qt::AscendingOrder);
+                if (sort)
+                    this->sf2->getElt(id.indexSf2)->eltTreeSmpl->sortChildren(5, Qt::AscendingOrder);
             }
             };break;
         case champ_filename:
@@ -2051,7 +2057,8 @@ int Pile_sf2::set(EltID id, Champ champ, QString qStr, bool storeAction)
                         }
                     }
                 }
-                this->sf2->getElt(id.indexSf2)->eltTreeInst->sortChildren(5, Qt::AscendingOrder);
+                if (sort)
+                    this->sf2->getElt(id.indexSf2)->eltTreeInst->sortChildren(5, Qt::AscendingOrder);
             }
             break;
         }
@@ -2074,7 +2081,8 @@ int Pile_sf2::set(EltID id, Champ champ, QString qStr, bool storeAction)
                 sprintf(chaine, "%.3d:%.3d %s", tmp->wBank, tmp->wPreset, tmp->Name);
                 tmp->eltTree->setText(0, chaine);
                 tmp->eltTree->setText(5, chaine);
-                this->sf2->getElt(id.indexSf2)->eltTreePrst->sortChildren(5, Qt::AscendingOrder);
+                if (sort)
+                    this->sf2->getElt(id.indexSf2)->eltTreePrst->sortChildren(5, Qt::AscendingOrder);
             }
             break;
         }
@@ -2623,22 +2631,16 @@ bool Pile_sf2::isValide(EltID id, bool acceptHidden)
 {
     int i;
     SF2 *sf2Tmp;
-    if (id.typeElement != elementSf2 && id.typeElement != elementRootSmpl && id.typeElement != elementRootInst \
-         && id.typeElement != elementRootPrst && id.typeElement != elementSmpl && id.typeElement != elementInst \
-         && id.typeElement != elementPrst && id.typeElement != elementInstSmpl && id.typeElement != elementPrstInst \
-         && id.typeElement != elementInstMod && id.typeElement != elementPrstMod \
-         && id.typeElement != elementInstGen && id.typeElement != elementPrstGen \
-         && id.typeElement != elementInstSmplGen && id.typeElement != elementPrstInstGen \
-         && id.typeElement != elementInstSmplMod && id.typeElement != elementPrstInstMod)
+    if (id.typeElement < elementSf2 || id.typeElement > elementPrstInstGen)
         return 0;
-//    if (id.indexElt < -1 || id.indexElt2 < -1 || id.indexMod < -1 || id.indexSf2 < -1)
-//        return 0;
-    if ((id.typeElement == elementSf2 || id.typeElement == elementRootSmpl || id.typeElement == elementRootInst \
+
+    if ((id.typeElement == elementSf2 || id.typeElement == elementRootSmpl || id.typeElement == elementRootInst
          || id.typeElement == elementRootPrst) && id.indexSf2 == -1) return 1;
+
     // Vérification qu'indexSf2 est correct
     i = 0;
     sf2Tmp = this->sf2;
-    while (i < id.indexSf2 && sf2Tmp != NULL)
+    while (i < id.indexSf2 && sf2Tmp)
     {
         sf2Tmp = sf2Tmp->suivant;
         i++;
@@ -2646,13 +2648,14 @@ bool Pile_sf2::isValide(EltID id, bool acceptHidden)
     if (!sf2Tmp) return 0;
     if (sf2Tmp->hidden && !acceptHidden) return 0;
     if ((id.typeElement == elementSmpl || id.typeElement == elementInst || id.typeElement == elementPrst) && id.indexElt == -1) return 1;
+
     // Vérification qu'indexElt est correct
     if (id.typeElement == elementSmpl)
     {
         i = 0;
         SF2::SMPL *smpl;
         smpl = sf2Tmp->smpl;
-        while (i < id.indexElt && smpl != NULL)
+        while (i < id.indexElt && smpl)
         {
             smpl = smpl->suivant;
             i++;
@@ -2660,13 +2663,13 @@ bool Pile_sf2::isValide(EltID id, bool acceptHidden)
         if (!smpl) return 0;
         if (smpl->hidden && !acceptHidden) return 0;
     }
-    else if (id.typeElement == elementInst || id.typeElement == elementInstSmpl || \
-             id.typeElement == elementInstMod || id.typeElement == elementInstSmplMod || \
+    else if (id.typeElement == elementInst || id.typeElement == elementInstSmpl ||
+             id.typeElement == elementInstMod || id.typeElement == elementInstSmplMod ||
              id.typeElement == elementInstGen || id.typeElement == elementInstSmplGen)
     {
         i = 0;
         SF2::INST *inst = sf2Tmp->inst;
-        while (i < id.indexElt && inst != NULL)
+        while (i < id.indexElt && inst)
         {
             inst = inst->suivant;
             i++;
@@ -2680,7 +2683,7 @@ bool Pile_sf2::isValide(EltID id, bool acceptHidden)
             i = 0;
             SF2::BAG *bag;
             bag = inst->bag;
-            while (i < id.indexElt2 && bag != NULL)
+            while (i < id.indexElt2 && bag)
             {
                 bag = bag->suivant;
                 i++;
@@ -2696,7 +2699,7 @@ bool Pile_sf2::isValide(EltID id, bool acceptHidden)
                 {
                     SF2::BAG::MOD *mod;
                     mod = bag->mod;
-                    while (i < id.indexMod && mod != NULL)
+                    while (i < id.indexMod && mod)
                     {
                         mod = mod->suivant;
                         i++;
@@ -2708,7 +2711,7 @@ bool Pile_sf2::isValide(EltID id, bool acceptHidden)
                 {
                     SF2::BAG::GEN *gen;
                     gen = bag->gen;
-                    while (i < id.indexMod && gen != NULL)
+                    while (i < id.indexMod && gen)
                     {
                         gen = gen->suivant;
                         i++;
@@ -2726,7 +2729,7 @@ bool Pile_sf2::isValide(EltID id, bool acceptHidden)
             {
                 SF2::BAG::MOD *mod;
                 mod = inst->bagGlobal.mod;
-                while (i < id.indexMod && mod != NULL)
+                while (i < id.indexMod && mod)
                 {
                     mod = mod->suivant;
                     i++;
@@ -2738,7 +2741,7 @@ bool Pile_sf2::isValide(EltID id, bool acceptHidden)
             {
                 SF2::BAG::GEN *gen;
                 gen = inst->bagGlobal.gen;
-                while (i < id.indexMod && gen != NULL)
+                while (i < id.indexMod && gen)
                 {
                     gen = gen->suivant;
                     i++;
@@ -2747,14 +2750,14 @@ bool Pile_sf2::isValide(EltID id, bool acceptHidden)
             }
         }
     }
-    else if (id.typeElement == elementPrst || id.typeElement == elementPrstInst || \
-             id.typeElement == elementPrstMod || id.typeElement == elementPrstInstMod || \
+    else if (id.typeElement == elementPrst || id.typeElement == elementPrstInst ||
+             id.typeElement == elementPrstMod || id.typeElement == elementPrstInstMod ||
              id.typeElement == elementPrstGen || id.typeElement == elementPrstInstGen)
     {
         i = 0;
         SF2::PRST *prst;
         prst = sf2Tmp->prst;
-        while (i < id.indexElt && prst != NULL)
+        while (i < id.indexElt && prst)
         {
             prst = prst->suivant;
             i++;
@@ -2768,7 +2771,7 @@ bool Pile_sf2::isValide(EltID id, bool acceptHidden)
             i = 0;
             SF2::BAG *bag;
             bag = prst->bag;
-            while (i < id.indexElt2 && bag != NULL)
+            while (i < id.indexElt2 && bag)
             {
                 bag = bag->suivant;
                 i++;
@@ -2814,7 +2817,7 @@ bool Pile_sf2::isValide(EltID id, bool acceptHidden)
             {
                 SF2::BAG::MOD *mod;
                 mod = prst->bagGlobal.mod;
-                while (i < id.indexMod && mod != NULL)
+                while (i < id.indexMod && mod)
                 {
                     mod = mod->suivant;
                     i++;
@@ -2826,7 +2829,7 @@ bool Pile_sf2::isValide(EltID id, bool acceptHidden)
             {
                 SF2::BAG::GEN *gen;
                 gen = prst->bagGlobal.gen;
-                while (i < id.indexMod && gen != NULL)
+                while (i < id.indexMod && gen)
                 {
                     gen = gen->suivant;
                     i++;

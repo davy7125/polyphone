@@ -160,7 +160,7 @@ void ConversionSfz::exportPrst(QString dir, EltID id, bool presetPrefix)
                 for (int j = 0; j < listInstSmpl.count(); j++)
                 {
                     idInst = listInstSmpl.at(j);
-                    if (!listProcessedInstSmpl.contains(idInst))
+                    if (!listProcessedInstSmpl.contains(idInst) && isIncluded(paramPrst, idInst))
                     {
                         ParamListe * paramInstSmpl = new ParamListe(_sf2, paramPrst, idInst);
                         EltID idSmpl = idInst;
@@ -626,6 +626,44 @@ QString ConversionSfz::getDrumCategory(int numPreset)
 
     return strRet;
 }
+
+
+bool ConversionSfz::isIncluded(ParamListe * paramPrst, EltID idInstSmpl)
+{
+    // Etendues de la division globale
+    int prstMinKey = 0, prstMaxKey = 127, prstMinVel = 0, prstMaxVel = 127;
+    int index = paramPrst->findChamp(champ_keyRange);
+    if (index != -1)
+    {
+        prstMinKey = qRound(paramPrst->getValeur(index) / 1000);
+        prstMaxKey = qRound(paramPrst->getValeur(index) - prstMinKey * 1000);
+    }
+    index = paramPrst->findChamp(champ_velRange);
+    if (index != -1)
+    {
+        prstMinVel = qRound(paramPrst->getValeur(index) / 1000);
+        prstMaxVel = qRound(paramPrst->getValeur(index) - prstMinVel * 1000);
+    }
+
+    // Etendues de la division de l'instrument
+    int instMinKey = 0, instMaxKey = 127, instMinVel = 0, instMaxVel = 127;
+    if (_sf2->isSet(idInstSmpl, champ_keyRange))
+    {
+        rangesType range = _sf2->get(idInstSmpl, champ_keyRange).rValue;
+        instMinKey = range.byLo;
+        instMaxKey = range.byHi;
+    }
+    if (_sf2->isSet(idInstSmpl, champ_velRange))
+    {
+        rangesType range = _sf2->get(idInstSmpl, champ_velRange).rValue;
+        instMinVel = range.byLo;
+        instMaxVel = range.byHi;
+    }
+
+    return instMinKey <= prstMaxKey && instMaxKey >= prstMinKey &&
+            instMinVel <= prstMaxVel && instMaxVel >= prstMinVel;
+}
+
 
 int ParamListe::_boucleGlobale = -2;
 
