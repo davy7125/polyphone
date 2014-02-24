@@ -83,6 +83,7 @@ private:
     void writeGroup(QFile * fichierSfz, ParamListe * listeParam, bool isPercKit);
     void writeRegion(QFile * fichierSfz, ParamListe * listeParam, QString pathSample, bool ignorePan);
     void writeElement(QTextStream &out, Champ champ, double value);
+    bool isIncluded(ParamListe * paramPrst, EltID idInstSmpl);
     static double dbToPercent(double dB) { return 100. * pow(10, -dB / 20); }
     static QString escapeStr(QString str);
     static int lastLettersToRemove(QString str1, QString str2);

@@ -88,6 +88,9 @@ void CalibrationSinus::addData(float * dataR, float * dataL, int len)
     double level = _level;
     _mutex.unlock();
 
+    if (level == 0 && _currentLevel <= 0.0004)
+        return;
+
     // Génération et copie
     _sinus->getSinus(_buf, len, freq);
 
