@@ -54,6 +54,7 @@ DialogAbout::DialogAbout(QWidget *parent) :
     _credit.addContributor("Steve Clarke", "stevertyu@yahoo.com");
     _credit.addTranslator("Davy Triponney", "info@polyphone.fr");
     _credit.addTranslator("F.J. Martínez Murcia", "fjesusmartinez@ugr.es");
+    _credit.addTranslator("Steve Clarke", "stevertyu@yahoo.com");
     ui->textBrowser->setHtml(_credit.getText());
 }
 

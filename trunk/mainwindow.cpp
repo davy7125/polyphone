@@ -933,12 +933,11 @@ void MainWindow::updateTitle()
 void MainWindow::updateActions()
 {
     // Un élément est cliqué dans l'arborescence
-    //clearKeyboardCustomisation();
     int nb;
     bool fichierUnique = 1;
     bool familleUnique = 1;
     bool typeUnique = 1;
-    ElementType type;
+    ElementType type = elementUnknown;
     EltID id;
     // Modification du titre
     updateTitle();
@@ -2495,7 +2494,67 @@ void MainWindow::noteChanged(int key, int vel)
             {
                 if ((id.typeElement == elementInst || id.typeElement == elementInstSmpl) &&
                         this->ui->arborescence->isSelectedItemsFamilyUnique())
+                {
+                    // Mise en évidence des étendues concernées
+                    if (vel)
+                    {
+                        EltID idInst = id;
+                        idInst.typeElement = elementInst;
+                        rangesType defaultKeyRange, defaultVelRange;
+                        if (sf2->isSet(idInst, champ_keyRange))
+                            defaultKeyRange = sf2->get(idInst, champ_keyRange).rValue;
+                        else
+                        {
+                            defaultKeyRange.byLo = 0;
+                            defaultKeyRange.byHi = 127;
+                        }
+                        if (sf2->isSet(idInst, champ_velRange))
+                            defaultVelRange = sf2->get(idInst, champ_velRange).rValue;
+                        else
+                        {
+                            defaultVelRange.byLo = 0;
+                            defaultVelRange.byHi = 127;
+                        }
+
+                        EltID idInstSmpl = id;
+                        idInstSmpl.typeElement = elementInstSmpl;
+                        int nbElt = sf2->count(idInstSmpl);
+                        for (int i = 0; i < nbElt; i++)
+                        {
+                            idInstSmpl.indexElt2 = i;
+                            if (!sf2->get(idInstSmpl, champ_hidden).bValue)
+                            {
+                                int keyMin, keyMax, velMin, velMax;
+                                if (sf2->isSet(idInstSmpl, champ_keyRange))
+                                {
+                                    rangesType rangeTmp = sf2->get(idInstSmpl, champ_keyRange).rValue;
+                                    keyMin = rangeTmp.byLo;
+                                    keyMax = rangeTmp.byHi;
+                                }
+                                else
+                                {
+                                    keyMin = defaultKeyRange.byLo;
+                                    keyMax = defaultKeyRange.byHi;
+                                }
+                                if (sf2->isSet(idInstSmpl, champ_velRange))
+                                {
+                                    rangesType rangeTmp = sf2->get(idInstSmpl, champ_velRange).rValue;
+                                    velMin = rangeTmp.byLo;
+                                    velMax = rangeTmp.byHi;
+                                }
+                                else
+                                {
+                                    velMin = defaultVelRange.byLo;
+                                    velMax = defaultVelRange.byHi;
+                                }
+                                if (keyMin <= key && keyMax >= key && velMin <= vel && velMax >= vel)
+                                    ui->widgetKeyboard->setCurrentRange(key, keyMin, keyMax);
+                            }
+                        }
+                    }
+
                     this->synth->play(1, id.indexSf2, id.indexElt, key, vel);
+                }
                 else if ((id.typeElement == elementPrst || id.typeElement == elementPrstInst) &&
                          this->ui->arborescence->isSelectedItemsFamilyUnique())
                     this->synth->play(2, id.indexSf2, id.indexElt, key, vel);

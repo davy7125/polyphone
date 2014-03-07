@@ -69,6 +69,8 @@ public:
     void changeKey(int key, int vel);
     void changeController(int numController, int value);
     void setRangeAndRootKey(int rootKey, int noteMin, int noteMax);
+    void clearCustomization();
+    void setCurrentRange(int note, int noteMin, int noteMax);
 
 signals:
     void sustainChanged(bool isOn);
@@ -92,8 +94,17 @@ protected:
     }
     void keyPressEvent(QKeyEvent *event);
 
+private slots:
+    void setKey(int num, int vel);
+    void setKeyOff(int num);
+
 private:
     RtMidiIn * midiin;
+    QList<int> _currentRange;
+    int _rootKey;
+    QMap<int, QList<int> > _mapPressed;
+
+    void updateRanges();
 };
 
 

@@ -44,7 +44,7 @@ win32{
 unix:!macx{
     DEFINES += __LINUX_ALSASEQ__
     CONFIG += link_pkgconfig
-    PKGCONFIG += alsa jack portaudio-2.0
+    PKGCONFIG += alsa jack portaudio-2.0 zlib
     INCLUDEPATH += /usr/include/jack
 }
 macx {
