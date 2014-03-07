@@ -61,9 +61,10 @@ void midiCallback(double deltatime, std::vector< unsigned char > *message, void 
         QApplication::postEvent(instance, ev);
 }
 
-// Constructeur, destructeur
+// Constructeur, destructeur_noteOnRange
 PianoKeybdCustom::PianoKeybdCustom(QWidget *parent) : PianoKeybd(parent),
-    midiin(NULL)
+    midiin(NULL),
+    _rootKey(-1)
 {
     // Couleurs et style
     set(PROPERTY_COLOR_BLACK_KEYS, QColor(130, 130, 130));
@@ -93,6 +94,9 @@ PianoKeybdCustom::PianoKeybdCustom(QWidget *parent) : PianoKeybd(parent),
         midiin->ignoreTypes(false, false, false);
         this->midiin->setCallback(&midiCallback, this);
     }
+
+    connect(this, SIGNAL(noteOn(int,int)), this, SLOT(setKey(int,int)));
+    connect(this, SIGNAL(noteOff(int)), this, SLOT(setKeyOff(int)));
 }
 PianoKeybdCustom::~PianoKeybdCustom()
 {
@@ -169,16 +173,104 @@ void PianoKeybdCustom::keyPressEvent(QKeyEvent * event)
 
 void PianoKeybdCustom::setRangeAndRootKey(int rootKey, int noteMin, int noteMax)
 {
+    // Mémorisation de l'étendue
+    for (int i = noteMin; i <= noteMax; i++)
+        _currentRange << i;
+
+    // Mémorisation de la note de base
+    _rootKey = rootKey;
+
+    // Mise à jour du clavier
+    updateRanges();
+}
+
+void PianoKeybdCustom::clearCustomization()
+{
+    _rootKey = -1;
+    _currentRange.clear();
+    updateRanges();
+}
+
+void PianoKeybdCustom::setKey(int num, int vel)
+{
+    if (vel > 0)
+        _mapPressed.insert(num, QList<int>());
+    else
+        _mapPressed.remove(num);
+    updateRanges();
+}
+
+void PianoKeybdCustom::setKeyOff(int num)
+{
+    _mapPressed.remove(num);
+    updateRanges();
+}
+
+void PianoKeybdCustom::setCurrentRange(int note, int noteMin, int noteMax)
+{
+    for (int i = noteMin; i <= noteMax; i++)
+        if (!_mapPressed[note].contains(i))
+            _mapPressed[note] << i;
+    updateRanges();
+}
+
+void PianoKeybdCustom::updateRanges()
+{
+    // Réinitialisation des décorations
+    PianoKeybd::clearCustomization();
+
+    // Liste des notes appuyées
+    QList<int> notePressed = _mapPressed.keys();
+
+    // Etendues des rangées
+    QList<int> noteRanges;
+    foreach (QList<int> values, _mapPressed.values())
+    {
+        foreach (int key, values)
+            if (!noteRanges.contains(key))
+                noteRanges << key;
+    }
+
+    // Etendue de la section courante
+    QList<int> noteCurrentRange = _currentRange;
+
+    // Les notes appuyées ne doivent pas être modifiées
+    foreach (int key, notePressed)
+    {
+        noteRanges.removeAll(key);
+        noteCurrentRange.removeAll(key);
+    }
+
+    // Priorité sur les étendues des rangées plutôt que la section courante
+    foreach (int key, noteRanges)
+        noteCurrentRange.removeAll(key);
+
+
+    // Dessin de l'étendue courante
     QColor colorWhite(255, 255, 255);
     QColor colorBlack(0, 0, 0);
-    for (int i = noteMin; i <= noteMax; i++)
+    foreach (int key, noteCurrentRange)
     {
-        int note = i % 12;
+        int note = key % 12;
         if (note == 1 || note == 3 || note == 6 || note == 8 || note == 10)
-            customize(i, CUSTOMIZATION_TYPE_COLOR, colorBlack);
+            customize(key, CUSTOMIZATION_TYPE_COLOR, colorBlack);
         else
-            customize(i, CUSTOMIZATION_TYPE_COLOR, colorWhite);
+            customize(key, CUSTOMIZATION_TYPE_COLOR, colorWhite);
     }
-    if (rootKey != -1)
-        customize(rootKey, CUSTOMIZATION_TYPE_MARKER, MARKER_TYPE_DOT_YELLOW);
+
+    // Dessin de la note de base courante
+    if (_rootKey != -1)
+        customize(_rootKey, CUSTOMIZATION_TYPE_MARKER, MARKER_TYPE_DOT_YELLOW);
+
+    // Dessin des étendues
+    QColor colorWhite2(255, 255, 180);
+    QColor colorBlack2(140, 140, 0);
+    foreach (int key, noteRanges)
+    {
+        int note = key % 12;
+        if (note == 1 || note == 3 || note == 6 || note == 8 || note == 10)
+            customize(key, CUSTOMIZATION_TYPE_COLOR, colorBlack2);
+        else
+            customize(key, CUSTOMIZATION_TYPE_COLOR, colorWhite2);
+    }
 }

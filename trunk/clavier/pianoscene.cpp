@@ -23,7 +23,6 @@
 #include <QGraphicsSceneMouseEvent>
 #include <QKeyEvent>
 #include <qmath.h>
-#include <QDebug>
 
 int PianoScene::MIN_NOTE = 0;
 int PianoScene::MAX_NOTE = 127;
@@ -658,8 +657,6 @@ void PianoScene::refreshKeys()
             key->setMarker(m_markers.value(key->getNote()));
         else
             key->setMarker(PianoKeybd::MARKER_TYPE_NONE);
-
-        key->setPressed(false);
     }
 
     invalidate();

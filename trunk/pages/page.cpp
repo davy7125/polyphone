@@ -1009,6 +1009,7 @@ void PageTable::afficher()
                         this->table->item(row, numCol)->setText(getTextValue(T, champTmp, genValTmp));
                 }
             }
+
             if (offsetStart && this->table->getRow(champ_startAddrsOffset) > -1)
             {
                 row = this->table->getRow(champ_startAddrsOffset);
