@@ -49,7 +49,7 @@ private:
     void keyPressEvent(QKeyEvent *e)
     {
         int key = e->key();
-        if (this->toPlainText().size() < 255 || key == Qt::Key_Backspace || key == Qt::Key_Delete ||
+        if (this->toPlainText().size() < 65536 || key == Qt::Key_Backspace || key == Qt::Key_Delete ||
                 key == Qt::Key_Left || key == Qt::Key_Up || key == Qt::Key_Right ||
                 key == Qt::Key_Down || key == Qt::Key_PageUp || key == Qt::Key_PageDown ||
                 key == Qt::Key_Home || key == Qt::Key_End)
