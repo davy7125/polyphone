@@ -416,7 +416,7 @@ Sound Pile_sf2::getSon(EltID id)
 }
 QString Pile_sf2::getQstr(EltID id, Champ champ)
 {
-    if (!this->isValide(id, 0))
+    if (!this->isValide(id, false))
     {
 #ifdef SHOW_ID_ERROR
         QMessageBox::warning(parent, "warning", "In Pile_sf2::getQstr, invalid ID.");
