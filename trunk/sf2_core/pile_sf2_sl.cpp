@@ -1038,7 +1038,7 @@ int Pile_sf2::sauvegarderSf2(int indexSf2, QString fileName)
     dwTmp = this->getQstr(id, champ_ICMT).length();
     if (dwTmp > 0)
     {
-        if (dwTmp > 65535) dwTmp = 65535;
+        if (dwTmp > 65536) dwTmp = 65536;
         dwTmp2 = dwTmp + 2 - (dwTmp)%2;
         taille_info += dwTmp2 + 8;
     }
@@ -1352,7 +1352,7 @@ int Pile_sf2::sauvegarderSf2(int indexSf2, QString fileName)
     dwTmp = this->getQstr(id, champ_ICMT).length(); // commentaires, champ optionnel
     if (dwTmp > 0)
     {
-        if (dwTmp > 65535) dwTmp = 65535;
+        if (dwTmp > 65536) dwTmp = 65536;
         dwTmp2 = dwTmp + 2 - (dwTmp)%2;
         fi.write("ICMT", 4);
         fi.write((char *)&dwTmp2, 4);
