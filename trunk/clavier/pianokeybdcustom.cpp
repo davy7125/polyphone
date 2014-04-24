@@ -245,7 +245,6 @@ void PianoKeybdCustom::updateRanges()
     foreach (int key, noteRanges)
         noteCurrentRange.removeAll(key);
 
-
     // Dessin de l'étendue courante
     QColor colorWhite(255, 255, 255);
     QColor colorBlack(0, 0, 0);
@@ -261,6 +260,8 @@ void PianoKeybdCustom::updateRanges()
     // Dessin de la note de base courante
     if (_rootKey != -1)
         customize(_rootKey, CUSTOMIZATION_TYPE_MARKER, MARKER_TYPE_DOT_YELLOW);
+    else
+        customize(60, CUSTOMIZATION_TYPE_MARKER, MARKER_TYPE_DOT_BLACK);
 
     // Dessin des étendues
     QColor colorWhite2(255, 255, 180);
