@@ -901,38 +901,35 @@ ParamListe::ParamListe(Pile_sf2 * sf2, ParamListe * paramPrst, EltID idInst)
         }
     }
 
-    // Attaque par défaut si non défini
-    if (idInst.typeElement == elementInst && !_listeChamps.contains(champ_attackVolEnv))
-    {
-        _listeChamps << champ_attackVolEnv;
-        _listeValeurs << 0.001;
-    }
 
-    // Fréquence par défaut si non défini
-    if (!_listeChamps.contains(champ_freqModLFO))
+    // Valeurs par défaut
+    if (idInst.typeElement == elementInst)
     {
-        if ((_listeChamps.contains(champ_modLfoToFilterFc) || _listeChamps.contains(champ_modLfoToPitch) ||
-             _listeChamps.contains(champ_modLfoToVolume)) && !_listeChamps.contains(champ_freqModLFO))
+        // Attaque par défaut si non définie
+        if (!_listeChamps.contains(champ_attackVolEnv))
+        {
+            _listeChamps << champ_attackVolEnv;
+            _listeValeurs << getDefaultValue(champ_attackVolEnv);
+        }
+
+        // Fréquences par défaut si non définies
+        if (!_listeChamps.contains(champ_freqModLFO))
         {
             _listeChamps << champ_freqModLFO;
             _listeValeurs << getDefaultValue(champ_freqModLFO);
         }
-    }
-    if (!_listeChamps.contains(champ_freqVibLFO))
-    {
-        if (_listeChamps.contains(champ_vibLfoToPitch) && !_listeChamps.contains(champ_freqVibLFO))
+        if (!_listeChamps.contains(champ_freqVibLFO))
         {
             _listeChamps << champ_freqVibLFO;
             _listeValeurs << getDefaultValue(champ_freqVibLFO);
         }
-    }
 
-    // Fréquence de coupure par défaut si non défini
-    if ((_listeChamps.contains(champ_modEnvToFilterFc) || _listeChamps.contains(champ_initialFilterQ) ||
-         _listeChamps.contains(champ_modLfoToFilterFc)) && !_listeChamps.contains(champ_initialFilterFc))
-    {
-        _listeChamps << champ_initialFilterFc;
-        _listeValeurs << getDefaultValue(champ_initialFilterFc);
+        // Fréquence de coupure par défaut si non définie
+        if (!_listeChamps.contains(champ_initialFilterFc))
+        {
+            _listeChamps << champ_initialFilterFc;
+            _listeValeurs << getDefaultValue(champ_initialFilterFc);
+        }
     }
 
     // Limites
