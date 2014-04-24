@@ -115,7 +115,7 @@ void ImportSfz::import(QString fileName, int * numSf2)
             _listeEnsembles[i].moveOpcodeInSamples(Parametre::op_end, QVariant::Int);
             _listeEnsembles[i].moveOpcodeInSamples(Parametre::op_loop_start, QVariant::Int);
             _listeEnsembles[i].moveOpcodeInSamples(Parametre::op_loop_end, QVariant::Int);
-            _listeEnsembles[i].moveOpcodeInSamples(Parametre::op_loop_mode, QVariant::Int);
+            _listeEnsembles[i].moveOpcodeInSamples(Parametre::op_loop_mode, QVariant::String);
             _listeEnsembles[i].moveOpcodeInSamples(Parametre::op_pan, QVariant::Double);
             _listeEnsembles[i].moveOpcodeInSamples(Parametre::op_off_by, QVariant::Int);
             _listeEnsembles[i].moveOpcodeInSamples(Parametre::op_exclusiveClass, QVariant::Int);
