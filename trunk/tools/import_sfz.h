@@ -230,6 +230,8 @@ public:
     }
     void moveKeynumInSamples(Parametre::OpCode opCodeKeynum, Parametre::OpCode opCodeBase);
     void moveOpcodeInSamples(Parametre::OpCode opcode, QVariant::Type type);
+    void moveModInSamples();
+    void moveModInSamples(QList<Parametre::OpCode> opCodeList);
     void checkSampleValid(QString path);
     void checkFilter();
     void simplifyAttenuation();

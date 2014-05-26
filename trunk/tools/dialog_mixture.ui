@@ -400,6 +400,26 @@
             <string>dix-neuvième</string>
            </property>
           </item>
+          <item>
+           <property name="text">
+            <string>vingt-et-unième</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>vingt-troisième</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>vingt-cinquième</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>vingt-septième</string>
+           </property>
+          </item>
          </widget>
         </item>
         <item row="4" column="1" colspan="3">

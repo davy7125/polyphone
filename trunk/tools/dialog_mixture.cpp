@@ -399,6 +399,46 @@ QString DialogMixture::getText(int type1, int type2)
         case 4: text = "2/19'"; break;
         }
         break;
+    case 10: // vingt-et-unièmes
+        switch (type2)
+        {
+        case 0: text = "1' 11/21"; break;
+        case 1: text = "16/21'"; break;
+        case 2: text = "8/21'"; break;
+        case 3: text = "4/21'"; break;
+        case 4: text = "2/21'"; break;
+        }
+        break;
+    case 11: // vingt-troisièmes
+        switch (type2)
+        {
+        case 0: text = "1' 9/23"; break;
+        case 1: text = "16/23'"; break;
+        case 2: text = "8/23'"; break;
+        case 3: text = "4/23'"; break;
+        case 4: text = "2/23'"; break;
+        }
+        break;
+    case 12: // vingt-cinquièmes
+        switch (type2)
+        {
+        case 0: text = "1' 7/25"; break;
+        case 1: text = "16/25'"; break;
+        case 2: text = "8/25'"; break;
+        case 3: text = "4/25'"; break;
+        case 4: text = "2/25'"; break;
+        }
+        break;
+    case 13: // vingt-septièmes
+        switch (type2)
+        {
+        case 0: text = "1' 5/27"; break;
+        case 1: text = "16/27'"; break;
+        case 2: text = "8/27'"; break;
+        case 3: text = "4/27'"; break;
+        case 4: text = "2/27'"; break;
+        }
+        break;
     }
     return text;
 }
@@ -407,49 +447,21 @@ void DialogMixture::dispType2(int index)
     // Reset du combobox 2
     this->ui->comboType2->blockSignals(true);
     this->ui->comboType2->clear();
-    switch (index)
-    {
-    case 0: // octaves
-        for (int i = 0; i < 10; i++)
-            this->ui->comboType2->addItem(getText(index, i));
-        break;
-    case 1: // quintes
-        for (int i = 0; i < 8; i++)
-            this->ui->comboType2->addItem(getText(index, i));
-        break;
-    case 2: // tierces
-        for (int i = 0; i < 7; i++)
-            this->ui->comboType2->addItem(getText(index, i));
-        break;
-    case 3: // septièmes
-        for (int i = 0; i < 7; i++)
-            this->ui->comboType2->addItem(getText(index, i));
-        break;
-    case 4: // neuvièmes
-        for (int i = 0; i < 6; i++)
-            this->ui->comboType2->addItem(getText(index, i));
-        break;
-    case 5: // onzièmes
-        for (int i = 0; i < 6; i++)
-            this->ui->comboType2->addItem(getText(index, i));
-        break;
-    case 6: // treizièmes
-        for (int i = 0; i < 6; i++)
-            this->ui->comboType2->addItem(getText(index, i));
-        break;
-    case 7: // quinzièmes
-        for (int i = 0; i < 6; i++)
-            this->ui->comboType2->addItem(getText(index, i));
-        break;
-    case 8: // dix-septièmes
-        for (int i = 0; i < 5; i++)
-            this->ui->comboType2->addItem(getText(index, i));
-        break;
-    case 9: // dix-neuvièmes
-        for (int i = 0; i < 5; i++)
-            this->ui->comboType2->addItem(getText(index, i));
-        break;
-    }
+    int nbItem = 0;
+    if (index == 0)
+        nbItem = 10;
+    else if (index == 1)
+        nbItem = 8;
+    else if (index  < 4)
+        nbItem = 7;
+    else if (index < 8)
+        nbItem = 6;
+    else
+        nbItem = 5;
+
+    for (int i = 0; i < nbItem; i++)
+        this->ui->comboType2->addItem(getText(index, i));
+
     this->ui->comboType2->blockSignals(false);
 }
 
