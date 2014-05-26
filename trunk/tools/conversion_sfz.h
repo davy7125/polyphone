@@ -58,6 +58,7 @@ private:
     void prepend(Champ champ);
     void adaptKeynum2();
     void adaptKeynum2(int minKey, int maxKey, Champ champBase, Champ champKeynum);
+    void adaptLfo(Pile_sf2 *sf2, EltID idInstSmpl);
     double getValKeynum(double valBase, int key, double keynum);
 };
 

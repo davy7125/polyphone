@@ -119,6 +119,7 @@ void ImportSfz::import(QString fileName, int * numSf2)
             _listeEnsembles[i].moveOpcodeInSamples(Parametre::op_pan, QVariant::Double);
             _listeEnsembles[i].moveOpcodeInSamples(Parametre::op_off_by, QVariant::Int);
             _listeEnsembles[i].moveOpcodeInSamples(Parametre::op_exclusiveClass, QVariant::Int);
+            _listeEnsembles[i].moveModInSamples();
             _listeEnsembles[i].moveKeynumInSamples(Parametre::op_noteToVolEnvDecay, Parametre::op_ampeg_decay);
             _listeEnsembles[i].moveKeynumInSamples(Parametre::op_noteToVolEnvHold, Parametre::op_ampeg_hold);
             _listeEnsembles[i].moveKeynumInSamples(Parametre::op_noteToModEnvDecay, Parametre::op_pitcheg_decay);
@@ -384,10 +385,8 @@ void EnsembleGroupes::moveOpcodeInSamples(Parametre::OpCode opcode, QVariant::Ty
         {
             double value = _paramGlobaux.getDoubleValue(opcode);
             for (int i = 0; i < _listeDivisions.size(); i++)
-            {
                 if (!_listeDivisions.at(i).isDefined(opcode))
                     _listeDivisions[i] << Parametre(opcode, value);
-            }
         }
         break;
     case QVariant::Int:
@@ -395,10 +394,8 @@ void EnsembleGroupes::moveOpcodeInSamples(Parametre::OpCode opcode, QVariant::Ty
         {
             int value = _paramGlobaux.getIntValue(opcode);
             for (int i = 0; i < _listeDivisions.size(); i++)
-            {
                 if (!_listeDivisions.at(i).isDefined(opcode))
                     _listeDivisions[i] << Parametre(opcode, value);
-            }
         }
         break;
     case QVariant::String:
@@ -406,14 +403,74 @@ void EnsembleGroupes::moveOpcodeInSamples(Parametre::OpCode opcode, QVariant::Ty
         {
             QString value = _paramGlobaux.getStrValue(opcode);
             for (int i = 0; i < _listeDivisions.size(); i++)
-            {
                 if (!_listeDivisions.at(i).isDefined(opcode))
                     _listeDivisions[i] << Parametre(opcode, value);
-            }
         }
         break;
     default:
         break;
+    }
+}
+
+void EnsembleGroupes::moveModInSamples()
+{
+    QList<Parametre::OpCode> listTmp;
+    listTmp << Parametre::op_modEnvToTon
+            << Parametre::op_pitcheg_attack
+            << Parametre::op_pitcheg_decay
+            << Parametre::op_pitcheg_delay
+            << Parametre::op_pitcheg_hold
+            << Parametre::op_pitcheg_release
+            << Parametre::op_pitcheg_sustain;
+    moveModInSamples(listTmp);
+
+    listTmp.clear();
+    listTmp << Parametre::op_modEnvToFilter
+            << Parametre::op_fileg_attack
+            << Parametre::op_fileg_decay
+            << Parametre::op_fileg_delay
+            << Parametre::op_fileg_hold
+            << Parametre::op_fileg_release
+            << Parametre::op_fileg_sustain;
+    moveModInSamples(listTmp);
+
+    listTmp.clear();
+    listTmp << Parametre::op_modLFOtoVolume
+            << Parametre::op_modLFOdelay
+            << Parametre::op_modLFOfreq;
+    moveModInSamples(listTmp);
+
+    listTmp.clear();
+    listTmp << Parametre::op_modLFOtoFilter
+            << Parametre::op_filLFOdelay
+            << Parametre::op_filLFOfreq;
+    moveModInSamples(listTmp);
+}
+
+void EnsembleGroupes::moveModInSamples(QList<Parametre::OpCode> opCodeList)
+{
+    for (int i = 0; i < _listeDivisions.size(); i++)
+    {
+        for (int j = 0; j < opCodeList.size(); j++)
+        {
+            Parametre::OpCode opCode = opCodeList.at(j);
+            if (!_listeDivisions.at(i).isDefined(opCode) && _paramGlobaux.isDefined(opCode))
+            {
+                // On regarde si d'autres opcodes associés sont présents
+                bool isPresent = false;
+                for (int k = 0; k < opCodeList.size(); k++)
+                    if (k != j)
+                        isPresent |= _listeDivisions.at(i).isDefined(opCodeList.at(k));
+                if (isPresent)
+                {
+                    if (opCode == Parametre::op_modEnvToTon || opCode == Parametre::op_modEnvToFilter ||
+                            opCode == Parametre::op_modLFOtoVolume || opCode == Parametre::op_modLFOtoFilter)
+                        _listeDivisions[i] << Parametre(opCode, _paramGlobaux.getIntValue(opCode));
+                    else
+                        _listeDivisions[i] << Parametre(opCode, _paramGlobaux.getDoubleValue(opCode));
+                }
+            }
+        }
     }
 }
 
@@ -625,7 +682,6 @@ void EnsembleGroupes::decode(Pile_sf2 * sf2, EltID idInst, QString pathSfz)
         }
     }
 }
-
 
 QList<int> GroupeParametres::getSampleIndex(Pile_sf2 *sf2, EltID idElt, QString pathSfz) const
 {
