@@ -7,7 +7,7 @@
 QT       += core gui printsupport svg
 
 # Option for developers ONLY
-#DEFINES += SHOW_ID_ERROR
+DEFINES += SHOW_ID_ERROR
 
 TARGET = polyphone
 TEMPLATE = app

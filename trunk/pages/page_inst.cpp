@@ -333,6 +333,7 @@ void Page_Inst::mixture(QList<QList<int> > listeParam, QString nomInst, bool bou
 {
     // Création d'une mixture
     this->sf2->prepareNewActions();
+
     // Nombre d'étapes
     int nbEtapes = 0;
     for (int i = 0; i < listeParam.length(); i++)
@@ -342,6 +343,7 @@ void Page_Inst::mixture(QList<QList<int> > listeParam, QString nomInst, bool bou
     }
     if (!stereo)
         nbEtapes /= 2;
+
     // Ouverture d'une barre de progression
     QString textProgress = trUtf8("Création ");
     QProgressDialog progress("", trUtf8("Annuler"), 0, nbEtapes, this);
@@ -354,9 +356,11 @@ void Page_Inst::mixture(QList<QList<int> > listeParam, QString nomInst, bool bou
     idInst.typeElement = elementInst;
     EltID idSmpl;
     QByteArray baData;
+
     // Création d'un nouvel instrument
     EltID idNewInst = idInst;
     idNewInst.indexElt = this->sf2->add(idNewInst);
+
     // Configuration instrument
     if (nomInst.isEmpty())
         nomInst = trUtf8("sans nom");
@@ -369,16 +373,19 @@ void Page_Inst::mixture(QList<QList<int> > listeParam, QString nomInst, bool bou
     }
     EltID idInstSmpl = idNewInst;
     idInstSmpl.typeElement = elementInstSmpl;
+
     // Création de samples et ajout dans l'instrument
     for (int numDiv = 0; numDiv < listeParam.length(); numDiv++)
     {
         QList<int> listRangs = listeParam.at(numDiv);
+
         // Etendue de note
         int noteStart2 = qMin(listRangs[0], listRangs[1]);
         int noteEnd = qMax(listRangs[0], listRangs[1]);
         int noteStart = noteStart2 + (noteEnd - noteStart2) % freq;
         listRangs.takeAt(0);
         listRangs.takeAt(0);
+
         // Pour chaque note
         for (int note = noteStart; note <= noteEnd; note += freq)
         {
@@ -405,6 +412,7 @@ void Page_Inst::mixture(QList<QList<int> > listeParam, QString nomInst, bool bou
                 QApplication::processEvents();
                 baData.resize(dureeSmpl*fEch*4);
                 baData.fill(0);
+
                 // Calcul de l'atténuation mini de tous les rangs
                 double attMini = 1000000;
                 for (int numRang = 0; numRang < listRangs.length()/2; numRang++)
@@ -419,6 +427,7 @@ void Page_Inst::mixture(QList<QList<int> > listeParam, QString nomInst, bool bou
                     if (attenuation < attMini)
                         attMini = attenuation;
                 }
+
                 // Pour chaque rang
                 for (int numRang = 0; numRang < listRangs.length()/2; numRang++)
                 {
@@ -430,6 +439,7 @@ void Page_Inst::mixture(QList<QList<int> > listeParam, QString nomInst, bool bou
                         this->mainWindow->updateDo();
                         return;
                     }
+
                     // Calcul de la note à ajouter à la mixture
                     double noteTmp = (double)note + getOffset(listRangs.at(2*numRang), listRangs.at(2*numRang+1));
                     if (noteTmp <= 120)
@@ -469,6 +479,7 @@ void Page_Inst::mixture(QList<QList<int> > listeParam, QString nomInst, bool bou
                 }
                 qint32 loopStart = 0;
                 qint32 loopEnd = 0;
+
                 // Bouclage du sample
                 if (bouclage)
                 {
@@ -484,14 +495,17 @@ void Page_Inst::mixture(QList<QList<int> > listeParam, QString nomInst, bool bou
                         return;
                     }
                 }
+
                 // Création d'un nouveau sample
                 idSmpl.indexElt = this->sf2->add(idSmpl);
+
                 // Ajout des données
                 this->sf2->set(idSmpl, champ_sampleData16, Sound::bpsConversion(baData, 32, 16));
                 EltID idSf2 = idSmpl;
                 idSf2.typeElement = elementSf2;
                 if (this->sf2->get(idSf2, champ_wBpsSave).wValue == 24)
                     this->sf2->set(idSmpl, champ_sampleData24, Sound::bpsConversion(baData, 32, 824));
+
                 // Configuration
                 Valeur value;
                 value.dwValue = baData.length() / 4;
@@ -527,8 +541,10 @@ void Page_Inst::mixture(QList<QList<int> > listeParam, QString nomInst, bool bou
                     value.wValue = idSmpl.indexElt;
                     this->sf2->set(idLink, champ_wSampleLink, value);
                 }
+
                 // Ajout du sample dans l'instrument
                 idInstSmpl.indexElt2 = this->sf2->add(idInstSmpl);
+
                 // Configuration
                 value.wValue = idSmpl.indexElt;
                 this->sf2->set(idInstSmpl, champ_sampleID, value);
@@ -556,6 +572,7 @@ void Page_Inst::mixture(QList<QList<int> > listeParam, QString nomInst, bool bou
             }
         }
     }
+
     // Actualisation
     this->mainWindow->updateDo();
 }
@@ -631,6 +648,7 @@ void Page_Inst::release(double duree36, double division, double deTune)
             }
         }
     }
+
     // Actualisation
     this->mainWindow->updateDo();
     this->afficher();
@@ -639,10 +657,12 @@ void Page_Inst::release(double duree36, double division, double deTune)
 double Page_Inst::getOffset(int type1, int type2)
 {
     // Calcul du multiple de la fréquence fondamentale
-    double multiple = (double)(2 * type1 + 1) * pow(2.0f, type2-2);
+    double multiple = (double)(2 * type1 + 1) * pow(2.0f, type2 - 2);
+
     // Renvoi du nombre de demi-tons à ajouter à la fondamentale pour obtenir l'harmonique
     return 12. * qLn(multiple) / 0.69314718056;
 }
+
 EltID Page_Inst::closestSample(EltID idInst, double pitch, double &ecart, int cote, EltID &idInstSmpl)
 {
     // Recherche du sample le plus proche de pitch dans l'instrument idInst

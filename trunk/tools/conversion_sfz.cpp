@@ -689,22 +689,28 @@ ParamListe::ParamListe(Pile_sf2 * sf2, ParamListe * paramPrst, EltID idInst)
         idInst.typeElement = elementInstGen;
         load(sf2, idInst);
 
-        // Toutes les divisions ont-elles le même paramètre de bouclage ?
-        idInst.typeElement = elementInstSmpl;
-        int nbInstSmpl = sf2->count(idInst);
-        _boucleGlobale = -2;
-        for (int i = 0; i < nbInstSmpl; i++)
+        idInst.typeElement = elementInst;
+        if (sf2->isSet(idInst, champ_sampleModes))
+            _boucleGlobale = sf2->get(idInst, champ_sampleModes).wValue;
+        else
         {
-            idInst.indexElt2 = i;
-            if (!sf2->get(idInst, champ_hidden).bValue)
+            // Toutes les divisions ont-elles le même paramètre de bouclage ?
+            idInst.typeElement = elementInstSmpl;
+            int nbInstSmpl = sf2->count(idInst);
+            _boucleGlobale = -2;
+            for (int i = 0; i < nbInstSmpl; i++)
             {
-                int valTmp = 0;
-                if (sf2->isSet(idInst, champ_sampleModes))
-                    valTmp = sf2->get(idInst, champ_sampleModes).wValue;
-                if (_boucleGlobale == -2)
-                    _boucleGlobale = valTmp;
-                else if (_boucleGlobale != valTmp)
-                    _boucleGlobale = -1;
+                idInst.indexElt2 = i;
+                if (!sf2->get(idInst, champ_hidden).bValue)
+                {
+                    int valTmp = 0;
+                    if (sf2->isSet(idInst, champ_sampleModes))
+                        valTmp = sf2->get(idInst, champ_sampleModes).wValue;
+                    if (_boucleGlobale == -2)
+                        _boucleGlobale = valTmp;
+                    else if (_boucleGlobale != valTmp)
+                        _boucleGlobale = -1;
+                }
             }
         }
 
@@ -731,8 +737,6 @@ ParamListe::ParamListe(Pile_sf2 * sf2, ParamListe * paramPrst, EltID idInst)
             else
                 _boucleGlobale = _listeValeurs.at(_listeChamps.indexOf(champ_sampleModes));
         }
-
-        idInst.typeElement = elementInst;
     }
     else if (idInst.typeElement == elementInstSmpl)
     {
@@ -748,8 +752,13 @@ ParamListe::ParamListe(Pile_sf2 * sf2, ParamListe * paramPrst, EltID idInst)
 
         if (!_listeChamps.contains(champ_overridingRootKey))
         {
-            _listeChamps << champ_overridingRootKey;
-            _listeValeurs << sf2->get(idSmpl, champ_byOriginalPitch).bValue;
+            EltID instGlob = idInst;
+            instGlob.typeElement = elementInst;
+            if (!sf2->isSet(instGlob, champ_overridingRootKey))
+            {
+                _listeChamps << champ_overridingRootKey;
+                _listeValeurs << sf2->get(idSmpl, champ_byOriginalPitch).bValue;
+            }
         }
 
         if (!_listeChamps.contains(champ_fineTune))
@@ -833,6 +842,9 @@ ParamListe::ParamListe(Pile_sf2 * sf2, ParamListe * paramPrst, EltID idInst)
 
         // Adaptation des keynum2...
         adaptKeynum2();
+
+        // Adaptation LFO
+        adaptLfo(sf2, idInst);
     }
 
     // Fusion des 2 listes de paramètres
@@ -900,7 +912,6 @@ ParamListe::ParamListe(Pile_sf2 * sf2, ParamListe * paramPrst, EltID idInst)
             }
         }
     }
-
 
     // Valeurs par défaut
     if (idInst.typeElement == elementInst)
@@ -1019,6 +1030,65 @@ void ParamListe::adaptKeynum2(int minKey, int maxKey, Champ champBase, Champ cha
                 _listeValeurs[indexValBase] = valBase;
         }
     }
+}
+
+void ParamListe::adaptLfo(Pile_sf2 * sf2, EltID idInstSmpl)
+{
+    // On se trouve dans une division d'un instrument
+    EltID idInst = idInstSmpl;
+    idInst.typeElement = elementInst;
+
+    // Reprise des valeurs de la division globale
+    if (_listeChamps.contains(champ_modLfoToPitch) || _listeChamps.contains(champ_modLfoToFilterFc) ||
+            _listeChamps.contains(champ_modLfoToVolume) || _listeChamps.contains(champ_delayModLFO) ||
+            _listeChamps.contains(champ_freqModLFO))
+    {
+        if (!_listeChamps.contains(champ_delayModLFO) && sf2->isSet(idInst, champ_delayModLFO))
+        {
+            _listeChamps << champ_delayModLFO;
+            _listeValeurs << d1200e2(sf2->get(idInst, champ_delayModLFO).genValue.shAmount);
+        }
+        if (!_listeChamps.contains(champ_freqModLFO) && sf2->isSet(idInst, champ_freqModLFO))
+        {
+            _listeChamps << champ_freqModLFO;
+            _listeValeurs << d1200e2(sf2->get(idInst, champ_freqModLFO).genValue.shAmount) * 8.176;
+        }
+        if (!_listeChamps.contains(champ_modLfoToPitch) && sf2->isSet(idInst, champ_modLfoToPitch))
+        {
+            _listeChamps << champ_modLfoToPitch;
+            _listeValeurs << sf2->get(idInst, champ_modLfoToPitch).genValue.shAmount;
+        }
+        if (!_listeChamps.contains(champ_modLfoToFilterFc) && sf2->isSet(idInst, champ_modLfoToFilterFc))
+        {
+            _listeChamps << champ_modLfoToFilterFc;
+            _listeValeurs << sf2->get(idInst, champ_modLfoToFilterFc).genValue.shAmount;
+        }
+        if (!_listeChamps.contains(champ_modLfoToVolume) && sf2->isSet(idInst, champ_modLfoToVolume))
+        {
+            _listeChamps << champ_modLfoToVolume;
+            _listeValeurs << (double)(sf2->get(idInst, champ_modLfoToVolume).genValue.shAmount) / 10.;
+        }
+    }
+    if (_listeChamps.contains(champ_vibLfoToPitch) || _listeChamps.contains(champ_delayVibLFO) ||
+            _listeChamps.contains(champ_freqVibLFO))
+    {
+        if (!_listeChamps.contains(champ_delayVibLFO) && sf2->isSet(idInst, champ_delayVibLFO))
+        {
+            _listeChamps << champ_delayVibLFO;
+            _listeValeurs << d1200e2(sf2->get(idInst, champ_delayVibLFO).genValue.shAmount);
+        }
+        if (!_listeChamps.contains(champ_freqVibLFO) && sf2->isSet(idInst, champ_freqVibLFO))
+        {
+            _listeChamps << champ_freqVibLFO;
+            _listeValeurs << d1200e2(sf2->get(idInst, champ_freqVibLFO).genValue.shAmount) * 8.176;
+        }
+        if (!_listeChamps.contains(champ_vibLfoToPitch) && sf2->isSet(idInst, champ_vibLfoToPitch))
+        {
+            _listeChamps << champ_vibLfoToPitch;
+            _listeValeurs << sf2->get(idInst, champ_vibLfoToPitch).genValue.shAmount;
+        }
+    }
+
 }
 
 double ParamListe::getValKeynum(double valBase, int key, double keynum)
@@ -1312,16 +1382,16 @@ double ParamListe::limit(double val, Champ champ)
         min = -50;      max = 50;
         break;
     case champ_initialAttenuation: case champ_sustainVolEnv: case champ_sustainModEnv:
-        min = 0;      max = 144;
+        min = 0;        max = 144;
         break;
     case champ_reverbEffectsSend: case champ_chorusEffectsSend:
-        min = 0;      max = 100;
+        min = 0;        max = 100;
         break;
     case champ_scaleTuning:
-        min = 0;      max = 1200;
+        min = 0;        max = 1200;
         break;
     case champ_initialFilterFc:
-        min = 18;      max = 19914;
+        min = 18;       max = 19914;
         break;
     case champ_initialFilterQ:
         min = 0;      max = 96;
