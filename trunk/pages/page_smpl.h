@@ -54,7 +54,6 @@ public:
     void sifflements();
     bool isPlaying();
     void pushPlayPause();
-
     void getPeakFrequencies(EltID id, QList<double> &frequencies, QList<double> &factors, QList<int> &keys, QList<int> &corrections);
 
 signals:
@@ -84,6 +83,7 @@ private slots:
     void setStereo(bool val);
     void selectionChanged();
     void updateColors();
+    void on_pushAutoTune_clicked();
 
 private:
     Ui::Page_Smpl *ui;
@@ -93,6 +93,7 @@ private:
     // Méthodes privées
     void setRateElt(EltID id, DWORD echFinal);
     EltID getRepercussionID(int num = 0);
+    void autoTune(EltID id, int &pitch, int &correction);
 };
 
 

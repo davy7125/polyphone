@@ -40,9 +40,10 @@ public:
     void setBackgroundColor(QColor color);
     void setData(QByteArray baData, DWORD dwSmplRate);
     void setSampleName(QString name) { _name = name; }
-    void setPos(qint32 posStart, qint32 posEnd);
+    void setPos(qint32 posStart, qint32 posEnd, bool withReplot = true);
     void setPos(qint32 posStart, qint32 posEnd, QList<double> &frequencies, QList<double> &factors,
-                QList<int> &pitch, QList<int> &corrections);
+                QList<int> &pitch, QList<int> &corrections, bool withReplot);
+    void getEstimation(int &pitch, int &correction);
 
 protected:
     void resizeEvent(QResizeEvent *event);
@@ -61,6 +62,8 @@ private:
     QCPItemText * text4; // note
     QCPItemText * text5; // correction
     QMenu * _menu;
+    int _note, _correction;
+
     void resized();
     void exportPng(QString fileName);
     void dispFourier(QVector<float> vectFourier, float posMaxFourier);
