@@ -101,7 +101,7 @@ private slots:
 private:
     RtMidiIn * midiin;
     QList<int> _currentRange;
-    int _rootKey;
+    QList<int> _rootKeys;
     QMap<int, QList<int> > _mapPressed;
 
     void updateRanges();

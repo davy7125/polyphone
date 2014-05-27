@@ -139,14 +139,14 @@ void GraphiqueFourier::setData(QByteArray baData, DWORD dwSmplRate)
 
     this->dwSmplRate = dwSmplRate;
 }
-void GraphiqueFourier::setPos(qint32 posStart, qint32 posEnd)
+void GraphiqueFourier::setPos(qint32 posStart, qint32 posEnd, bool withReplot)
 {
     QList<double> freq, factor;
     QList<int> pitch, corrections;
-    setPos(posStart, posEnd, freq, factor, pitch, corrections);
+    setPos(posStart, posEnd, freq, factor, pitch, corrections, withReplot);
 }
 void GraphiqueFourier::setPos(qint32 posStart, qint32 posEnd, QList<double> &frequencies, QList<double> &factors,
-                              QList<int> &pitch, QList<int> &corrections)
+                              QList<int> &pitch, QList<int> &corrections, bool withReplot)
 {
     text1->setText("");
     text2->setText("");
@@ -317,6 +317,9 @@ void GraphiqueFourier::setPos(qint32 posStart, qint32 posEnd, QList<double> &fre
     {
         qStr1 = trUtf8("note") + " " + Config::getInstance()->getKeyName(note) + ", " +
                 trUtf8("correction") + " " + QString::number(correction) + " (" + trUtf8("estimation") + ")";
+        _note = note;
+        _correction = correction;
+
         for (int i = 0; i < qMin(10, posMaxFFT.size()); i++)
         {
             // intensité
@@ -338,12 +341,20 @@ void GraphiqueFourier::setPos(qint32 posStart, qint32 posEnd, QList<double> &fre
             corrections << correction;
         }
     }
+    else
+    {
+        _note = -1;
+        _correction = 0;
+    }
+
     text1->setText(qStr1);
     text2->setText(qStr2);
     text3->setText(qStr3);
     text4->setText(qStr4);
     text5->setText(qStr5);
-    this->replot();
+
+    if (withReplot)
+        this->replot();
 }
 
 void GraphiqueFourier::dispFourier(QVector<float> vectFourier, float posMaxFourier)
@@ -443,4 +454,10 @@ void GraphiqueFourier::exportPng(QString fileName)
 
     // Redimensionnement
     this->setMinimumSize(minSize);
+}
+
+void GraphiqueFourier::getEstimation(int &pitch, int &correction)
+{
+    pitch = _note;
+    correction = _correction;
 }

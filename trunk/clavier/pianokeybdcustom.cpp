@@ -63,8 +63,7 @@ void midiCallback(double deltatime, std::vector< unsigned char > *message, void 
 
 // Constructeur, destructeur_noteOnRange
 PianoKeybdCustom::PianoKeybdCustom(QWidget *parent) : PianoKeybd(parent),
-    midiin(NULL),
-    _rootKey(-1)
+    midiin(NULL)
 {
     // Couleurs et style
     set(PROPERTY_COLOR_BLACK_KEYS, QColor(130, 130, 130));
@@ -175,10 +174,12 @@ void PianoKeybdCustom::setRangeAndRootKey(int rootKey, int noteMin, int noteMax)
 {
     // Mémorisation de l'étendue
     for (int i = noteMin; i <= noteMax; i++)
-        _currentRange << i;
+        if (!_currentRange.contains(i))
+            _currentRange << i;
 
     // Mémorisation de la note de base
-    _rootKey = rootKey;
+    if (!_rootKeys.contains(rootKey) && rootKey != -1)
+        _rootKeys << rootKey;
 
     // Mise à jour du clavier
     updateRanges();
@@ -186,7 +187,7 @@ void PianoKeybdCustom::setRangeAndRootKey(int rootKey, int noteMin, int noteMax)
 
 void PianoKeybdCustom::clearCustomization()
 {
-    _rootKey = -1;
+    _rootKeys.clear();
     _currentRange.clear();
     updateRanges();
 }
@@ -257,11 +258,10 @@ void PianoKeybdCustom::updateRanges()
             customize(key, CUSTOMIZATION_TYPE_COLOR, colorWhite);
     }
 
-    // Dessin de la note de base courante
-    if (_rootKey != -1)
-        customize(_rootKey, CUSTOMIZATION_TYPE_MARKER, MARKER_TYPE_DOT_YELLOW);
-    else
-        customize(60, CUSTOMIZATION_TYPE_MARKER, MARKER_TYPE_DOT_BLACK);
+    // Dessin des notes de base
+    customize(60, CUSTOMIZATION_TYPE_MARKER, MARKER_TYPE_DOT_BLACK);
+    foreach (int rootKey, _rootKeys)
+        customize(rootKey, CUSTOMIZATION_TYPE_MARKER, MARKER_TYPE_DOT_YELLOW);
 
     // Dessin des étendues
     QColor colorWhite2(255, 255, 180);

@@ -333,6 +333,7 @@ void Page_Smpl::afficher()
     this->qStackedWidget->setCurrentWidget(this); // prend du temps
     preparation = false;
 }
+
 void Page_Smpl::updateColors()
 {
     this->ui->graphe->updateStyle();
@@ -384,6 +385,7 @@ void Page_Smpl::setStartLoop()
     if (tree->getSelectedItemsNumber() == 1)
         ui->grapheFourier->setPos(ui->spinStartLoop->value(), ui->spinEndLoop->value());
 }
+
 void Page_Smpl::setStartLoop(int val)
 {
     if (tree->getSelectedItemsNumber() == 1)
@@ -399,6 +401,7 @@ void Page_Smpl::setStartLoop(int val)
         this->synth->setStartLoop(val, id2.indexElt != -1);
     }
 }
+
 void Page_Smpl::setEndLoop()
 {
     if (preparation)
@@ -445,6 +448,7 @@ void Page_Smpl::setEndLoop()
     if (tree->getSelectedItemsNumber() == 1)
         ui->grapheFourier->setPos(ui->spinStartLoop->value(), ui->spinEndLoop->value());
 }
+
 void Page_Smpl::setEndLoop(int val)
 {
     if (tree->getSelectedItemsNumber() == 1)
@@ -460,6 +464,7 @@ void Page_Smpl::setEndLoop(int val)
         this->synth->setEndLoop(val, id2.indexElt != -1);
     }
 }
+
 void Page_Smpl::on_pushFullLength_clicked()
 {
     sf2->prepareNewActions();
@@ -541,6 +546,7 @@ void Page_Smpl::on_pushFullLength_clicked()
         QMessageBox::information(this, trUtf8("Information"),
                                  trUtf8("Modification appliquée avec succès aux différents échantillons"));
 }
+
 void Page_Smpl::setRootKey()
 {
     if (preparation)
@@ -573,6 +579,7 @@ void Page_Smpl::setRootKey()
     // Mise à jour fenêtre
     this->mainWindow->updateDo();
 }
+
 void Page_Smpl::setRootKey(int val)
 {
     mainWindow->clearKeyboardCustomisation();
@@ -582,6 +589,7 @@ void Page_Smpl::setRootKey(int val)
     if (tree->getSelectedItemsNumber() == 1)
         synth->setRootKey(val);
 }
+
 void Page_Smpl::setTune()
 {
     if (preparation)
@@ -614,12 +622,14 @@ void Page_Smpl::setTune()
     // Mise à jour fenêtre
     this->mainWindow->updateDo();
 }
+
 void Page_Smpl::setTune(int val)
 {
     // Modif synth
     if (tree->getSelectedItemsNumber() == 1)
         this->synth->setPitchCorrection(val, getRepercussionID().indexElt != -1);
 }
+
 void Page_Smpl::setType(int index)
 {
     if (preparation) return;
@@ -690,6 +700,7 @@ void Page_Smpl::setType(int index)
     this->preparation = false;
     this->mainWindow->updateDo();
 }
+
 void Page_Smpl::setLinkedSmpl(int index)
 {
     if (preparation) return;
@@ -832,6 +843,7 @@ void Page_Smpl::setLinkedSmpl(int index)
     this->preparation = false;
     this->mainWindow->updateDo();
 }
+
 void Page_Smpl::setRate(int index)
 {
     Q_UNUSED(index);
@@ -866,6 +878,7 @@ void Page_Smpl::setRate(int index)
     this->mainWindow->updateDo();
     this->afficher();
 }
+
 void Page_Smpl::setRateElt(EltID id, DWORD echFinal)
 {
     // Modification échantillonnage
@@ -889,6 +902,7 @@ void Page_Smpl::setRateElt(EltID id, DWORD echFinal)
     val.dwValue = dwTmp;
     sf2->set(id, champ_dwEndLoop, val);
 }
+
 EltID Page_Smpl::getRepercussionID(int num)
 {
     EltID id = tree->getID(num);
@@ -959,6 +973,7 @@ void Page_Smpl::normalisation()
     this->mainWindow->updateDo();
     this->afficher();
 }
+
 void Page_Smpl::enleveBlanc()
 {
     if (preparation) return;
@@ -1010,6 +1025,7 @@ void Page_Smpl::enleveBlanc()
     this->mainWindow->updateDo();
     this->afficher();
 }
+
 void Page_Smpl::enleveBlanc(EltID id)
 {
     quint32 pos = 0;
@@ -1034,6 +1050,7 @@ void Page_Smpl::enleveBlanc(EltID id)
         this->sf2->set(id, champ_dwEndLoop, val);
     }
 }
+
 void Page_Smpl::enleveFin()
 {
     if (preparation) return;
@@ -1088,6 +1105,7 @@ void Page_Smpl::enleveFin()
     this->mainWindow->updateDo();
     this->afficher();
 }
+
 void Page_Smpl::enleveFin(EltID id)
 {
     QByteArray baData = this->sf2->getData(id, champ_sampleDataFull24);
@@ -1107,6 +1125,7 @@ void Page_Smpl::enleveFin(EltID id)
         this->sf2->set(id, champ_dwLength, val);
     }
 }
+
 void Page_Smpl::bouclage()
 {
     if (preparation) return;
@@ -1200,6 +1219,7 @@ void Page_Smpl::bouclage()
     this->mainWindow->updateDo();
     this->afficher();
 }
+
 void Page_Smpl::filtreMur()
 {
     if (preparation) return;
@@ -1264,6 +1284,7 @@ void Page_Smpl::filtreMur()
     this->mainWindow->updateDo();
     this->afficher();
 }
+
 void Page_Smpl::reglerBalance()
 {
     if (preparation) return;
@@ -1367,6 +1388,7 @@ void Page_Smpl::reglerBalance()
     this->mainWindow->updateDo();
     this->afficher();
 }
+
 void Page_Smpl::sifflements()
 {
     if (preparation) return;
@@ -1376,6 +1398,7 @@ void Page_Smpl::sifflements()
                   SLOT(sifflements(int,int,double)));
     dialogSifflements->show();
 }
+
 void Page_Smpl::sifflements(int freq1, int freq2, double raideur)
 {
     // Sauvegarde des valeurs
@@ -1435,6 +1458,7 @@ void Page_Smpl::sifflements(int freq1, int freq2, double raideur)
     this->mainWindow->updateDo();
     this->afficher();
 }
+
 void Page_Smpl::transposer()
 {
     if (preparation) return;
@@ -1585,6 +1609,7 @@ void Page_Smpl::applyEQ()
     mainWindow->updateDo();
     afficher();
 }
+
 void Page_Smpl::initEQ()
 {
     ui->verticalSlider_1->setValue(0);
@@ -1635,6 +1660,7 @@ void Page_Smpl::lecture()
         this->noteChanged(-1, 0);
     }
 }
+
 void Page_Smpl::lecteurFinished()
 {
     if (preventStop)
@@ -1674,6 +1700,7 @@ void Page_Smpl::lecteurFinished()
     this->lectureEnCours = false;
     this->mainWindow->activeOutilsSmpl();
 }
+
 void Page_Smpl::selectionChanged()
 {
     if (this->lectureEnCours)
@@ -1728,6 +1755,92 @@ void Page_Smpl::getPeakFrequencies(EltID id, QList<double> &frequencies, QList<d
     keys.clear();
     corrections.clear();
     graphTmp.setPos(sf2->get(id, champ_dwStartLoop).dwValue, sf2->get(id, champ_dwEndLoop).dwValue,
-                    frequencies, factors, keys, corrections);
+                    frequencies, factors, keys, corrections, false);
 }
 
+void Page_Smpl::on_pushAutoTune_clicked()
+{
+    sf2->prepareNewActions();
+
+
+    int displayedPitch = -1000, displayedCorrection = -1000;
+    bool firstValue = true;
+    bool triggersMessage = false;
+
+    QList<int> listeSamplesProcessed;
+    for (unsigned int i = 0; i < tree->getSelectedItemsNumber(); i++)
+    {
+        EltID id = tree->getID(i);
+        if (!this->sf2->get(id, champ_hidden).bValue && !listeSamplesProcessed.contains(id.indexElt))
+        {
+            listeSamplesProcessed << id.indexElt;
+
+            // Modification pitch / correction
+            int pitch, correction;
+            autoTune(id, pitch, correction);
+
+            if (firstValue)
+            {
+                firstValue = false;
+                displayedPitch = pitch;
+                displayedCorrection = correction;
+            }
+            else if (displayedPitch != pitch || displayedCorrection != correction)
+                triggersMessage = true;
+
+            // Sample associé ?
+            EltID id2 = getRepercussionID(i);
+            if (id2.indexElt != -1)
+            {
+                if (!this->sf2->get(id2, champ_hidden).bValue && !listeSamplesProcessed.contains(id2.indexElt))
+                {
+                    listeSamplesProcessed << id2.indexElt;
+
+                    // Modification pitch / correction
+                    autoTune(id2, pitch, correction);
+                    if (displayedPitch != pitch || displayedCorrection != correction)
+                        triggersMessage = true;
+                }
+            }
+        }
+    }
+
+    // Mise à jour interface
+    this->mainWindow->updateDo();
+    this->afficher();
+
+    if (triggersMessage)
+        QMessageBox::information(this, trUtf8("Information"),
+                                 trUtf8("Modification appliquée avec succès aux différents échantillons"));
+}
+
+void Page_Smpl::autoTune(EltID id, int &pitch, int &correction)
+{
+    // Récupération des données
+    QByteArray baData = this->sf2->getData(id, champ_sampleData16);
+    DWORD sampleRate = sf2->get(id, champ_dwSampleRate).dwValue;
+    DWORD startLoop = sf2->get(id, champ_dwStartLoop).dwValue;
+    DWORD endLoop = sf2->get(id, champ_dwEndLoop).dwValue;
+
+    // Remplissage du graphique Fourier
+    ui->grapheFourier->setData(baData, sampleRate);
+    ui->grapheFourier->setPos(startLoop, endLoop, false);
+
+    // Hauteur de note et correction
+    ui->grapheFourier->getEstimation(pitch, correction);
+
+    if (pitch != -1)
+    {
+        // Modification du pitch et de la correction
+        Valeur val;
+        val.wValue = pitch;
+        sf2->set(id, champ_byOriginalPitch, val);
+        val.wValue = correction;
+        sf2->set(id, champ_chPitchCorrection, val);
+    }
+    else
+    {
+        pitch = sf2->get(id, champ_byOriginalPitch).wValue;
+        correction = sf2->get(id, champ_chPitchCorrection).wValue;
+    }
+}

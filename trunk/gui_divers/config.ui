@@ -279,22 +279,37 @@
             </property>
             <item>
              <property name="text">
-              <string>Numérique (do central → 60)</string>
+              <string>Do central → 60, puis 61</string>
              </property>
             </item>
             <item>
              <property name="text">
-              <string>Texte (do central → C3)</string>
+              <string>Do central → C3, puis C♯3</string>
              </property>
             </item>
             <item>
              <property name="text">
-              <string>Texte (do central → C4)</string>
+              <string>Do central → C3, puis D♭3</string>
              </property>
             </item>
             <item>
              <property name="text">
-              <string>Texte (do central → C5)</string>
+              <string>Do central → C4, puis C♯4</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Do central → C4, puis D♭4</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Do central → C5, puis C♯5</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Do central → C5, puis D♭5</string>
              </property>
             </item>
            </widget>

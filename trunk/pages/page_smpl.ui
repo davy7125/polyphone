@@ -909,13 +909,6 @@
              </property>
             </widget>
            </item>
-           <item row="2" column="0" colspan="2">
-            <widget class="QLabel" name="label_3">
-             <property name="text">
-              <string>Note de base</string>
-             </property>
-            </widget>
-           </item>
            <item row="3" column="0" colspan="2">
             <widget class="QLabel" name="label_4">
              <property name="text">
@@ -941,6 +934,39 @@
             <widget class="QLabel" name="label_5">
              <property name="text">
               <string>Lien</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="0">
+            <widget class="QLabel" name="label_3">
+             <property name="text">
+              <string>Note de base</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="1">
+            <widget class="QPushButton" name="pushAutoTune">
+             <property name="maximumSize">
+              <size>
+               <width>28</width>
+               <height>19</height>
+              </size>
+             </property>
+             <property name="toolTip">
+              <string>Utilise l'estimation de la note comme valeur</string>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+             <property name="icon">
+              <iconset resource="../ressources.qrc">
+               <normaloff>:/icones/auto</normaloff>:/icones/auto</iconset>
+             </property>
+             <property name="iconSize">
+              <size>
+               <width>16</width>
+               <height>16</height>
+              </size>
              </property>
             </widget>
            </item>
