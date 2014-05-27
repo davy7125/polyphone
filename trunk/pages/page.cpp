@@ -2066,80 +2066,78 @@ void PageTable::selected()
 void PageTable::customizeKeyboard()
 {
     mainWindow->clearKeyboardCustomisation();
-    QList<QTableWidgetItem*> listItems = table->selectedItems();
-    int nbCol = table->columnCount();
-    for (int i = 0; i < nbCol; i++)
-        if (table->item(1, i)->isSelected())
-            listItems << table->item(1, i); // row 1 is hidden
-    if (!listItems.isEmpty())
-    {
-        for (int i = 0; i < listItems.count(); i++)
-        {
-            int colonne = listItems.at(i)->column();
-            EltID id = this->table->getID(colonne);
-            if (id.typeElement == elementInstSmpl || id.typeElement == elementPrstInst)
-            {
-                int rootKey = -1;
-                if (id.typeElement == elementInstSmpl)
-                {
-                    if (sf2->isSet(id, champ_overridingRootKey))
-                        rootKey = sf2->get(id, champ_overridingRootKey).wValue;
-                    else
-                    {
-                        EltID idSmpl = id;
-                        idSmpl.typeElement = elementSmpl;
-                        idSmpl.indexElt = sf2->get(id, champ_sampleID).wValue;
-                        rootKey = sf2->get(idSmpl, champ_byOriginalPitch).wValue;
-                    }
-                }
 
-                rangesType keyRange;
-                keyRange.byLo = 0;
-                keyRange.byHi = 127;
+    QList<int> selectedColumns;
+    QList<QTableWidgetItem*> listSelectedItems = table->selectedItems();
+    foreach (QTableWidgetItem * item, listSelectedItems)
+        if (!selectedColumns.contains(item->column()))
+            selectedColumns << item->column();
+
+    foreach (int colonne, selectedColumns)
+    {
+        EltID id = this->table->getID(colonne);
+        if (id.typeElement == elementInstSmpl || id.typeElement == elementPrstInst)
+        {
+            int rootKey = -1;
+            if (id.typeElement == elementInstSmpl)
+            {
+                if (sf2->isSet(id, champ_overridingRootKey))
+                    rootKey = sf2->get(id, champ_overridingRootKey).wValue;
+                else
+                {
+                    EltID idSmpl = id;
+                    idSmpl.typeElement = elementSmpl;
+                    idSmpl.indexElt = sf2->get(id, champ_sampleID).wValue;
+                    rootKey = sf2->get(idSmpl, champ_byOriginalPitch).wValue;
+                }
+            }
+
+            rangesType keyRange;
+            keyRange.byLo = 0;
+            keyRange.byHi = 127;
+            if (sf2->isSet(id, champ_keyRange))
+                keyRange = sf2->get(id, champ_keyRange).rValue;
+            else
+            {
+                if (id.typeElement == elementInstSmpl)
+                    id.typeElement = elementInst;
+                else
+                    id.typeElement = elementPrst;
                 if (sf2->isSet(id, champ_keyRange))
                     keyRange = sf2->get(id, champ_keyRange).rValue;
-                else
+            }
+            mainWindow->setRangeAndRootKey(rootKey, keyRange.byLo, keyRange.byHi);
+        }
+        else if (id.typeElement == elementInst || id.typeElement == elementPrst)
+        {
+            rangesType defaultKeyRange;
+            if (sf2->isSet(id, champ_keyRange))
+                defaultKeyRange = sf2->get(id, champ_keyRange).rValue;
+            else
+            {
+                defaultKeyRange.byLo = 0;
+                defaultKeyRange.byHi = 127;
+            }
+            if (id.typeElement == elementInst)
+                id.typeElement = elementInstSmpl;
+            else
+                id.typeElement = elementPrstInst;
+            int nbInstSmpl = sf2->count(id);
+            for (int i = 0; i < nbInstSmpl; i++)
+            {
+                id.indexElt2 = i;
+                if (!sf2->get(id, champ_hidden).bValue)
                 {
-                    if (id.typeElement == elementInstSmpl)
-                        id.typeElement = elementInst;
-                    else
-                        id.typeElement = elementPrst;
+                    rangesType keyRange;
                     if (sf2->isSet(id, champ_keyRange))
                         keyRange = sf2->get(id, champ_keyRange).rValue;
-                }
-                mainWindow->setRangeAndRootKey(rootKey, keyRange.byLo, keyRange.byHi);
-            }
-            else if (id.typeElement == elementInst || id.typeElement == elementPrst)
-            {
-                rangesType defaultKeyRange;
-                if (sf2->isSet(id, champ_keyRange))
-                    defaultKeyRange = sf2->get(id, champ_keyRange).rValue;
-                else
-                {
-                    defaultKeyRange.byLo = 0;
-                    defaultKeyRange.byHi = 127;
-                }
-                if (id.typeElement == elementInst)
-                    id.typeElement = elementInstSmpl;
-                else
-                    id.typeElement = elementPrstInst;
-                int nbInstSmpl = sf2->count(id);
-                for (int i = 0; i < nbInstSmpl; i++)
-                {
-                    id.indexElt2 = i;
-                    if (!sf2->get(id, champ_hidden).bValue)
-                    {
-                        rangesType keyRange;
-                        if (sf2->isSet(id, champ_keyRange))
-                            keyRange = sf2->get(id, champ_keyRange).rValue;
-                        else
-                            keyRange = defaultKeyRange;
-                        mainWindow->setRangeAndRootKey(-1, keyRange.byLo, keyRange.byHi);
-                    }
+                    else
+                        keyRange = defaultKeyRange;
+                    mainWindow->setRangeAndRootKey(-1, keyRange.byLo, keyRange.byHi);
                 }
             }
         }
-    }   
+    }
 }
 
 void PageTable::addAvailableReceiverMod(ComboBox *combo, EltID id)

@@ -56,9 +56,12 @@ public:
     enum NameMiddleC
     {
         middleC_60,
-        middleC_C3,
-        middleC_C4,
-        middleC_C5
+        middleC_C3_with_sharps,
+        middleC_C3_with_flats,
+        middleC_C4_with_sharps,
+        middleC_C4_with_flats,
+        middleC_C5_with_sharps,
+        middleC_C5_with_flats
     };
 
     static Config * getInstance(QWidget *parent = NULL, PianoKeybdCustom *keyboard = NULL);

@@ -1,5 +1,5 @@
 <h3>Presentation</h3>
-<p align="justify">The table allows the view and editing of the overall configuration of an instrument. A change of a parameter in the "global" division applies to all division, except for divisions whose same parameter is already specified.</p>
+<p align="justify">The table allows the viewing and editing of the overall configuration of an instrument. A change of a parameter in the "global" division applies to all divisions, except for divisions whose same parameter is already specified.</p>
 
 <p align="justify">The editable parameters are:
 <ul>
@@ -19,31 +19,31 @@
 	0 indicates a sound reproduced with no loop, 1 indicates a sound which loops continuously, 3 indicates a sound which loops for the duration of key depression and then proceeds to play the remainder of the sample.
 	</li>
 	<li><b>Rootkey</b><br />
-	Allows you to overwrite the rootkey of a sample to hear a different note from that normally used.
+	Allows you to change the normal rootkey of a sample to a different note from that usually used.
 	</li>
 	<li><b>Tuning</b><br />
 	Change the tuning in semitones and cents of semitones. Changing "scale" plays on the difference between two consecutive notes.
 	</li>
 	<li><b>Filter</b><br />
-	Apply or not a low-pass filter, by specifying the cutoff frequency and the resonance.
+	Apply a low-pass filter, by specifying the cutoff frequency and the resonance.
 	</li>
 	<li><b>Volume envelope</b><br />
-	Change the volume envelope, and possibly its evolution with the note.
+	Change the volume envelope, and possibly how it changes with the note.
 	</li>
 	<li><b>Modulation</b><br />
-	Set a modulation (envelope, delay, frequency, changes with the note) and its effect on the tone, filter, volume.
+	Set a modulation (envelope, delay, frequency, changes with the note) and its effect on the tone, filter and volume.
 	</li>
 	<li><b>Vibrato</b><br />
-	Set a vibrato (time, frequency) and its effect on the tone
+	Set a vibrato (time, frequency) and its effect on the tone.
 	</li>
 	<li><b>Exclusive class</b><br />
-	This parameter defines exclusive classes, assigning a set of sounds the same value different from 0. When an exclusive class is defined, any note triggered from one of the sounds of the exclusive class ends all the sounds of the class. The scope of an exclusive class is the preset in which the class is defined (a sound triggered in an instrument may ends a sound of another instrument if the two instruments are in the same preset). This effect can be used for percussions like a cymbal.
+	This parameter can define one or more exclusive classes, by assigning a set of sounds within a class, the same parameter value other than 0. When an exclusive class is defined, any note triggered from one of the sounds of the exclusive class ends all the other sounds of the same class. The scope of an exclusive class is the preset in which the class is defined (a sound triggered in an instrument will end a sound of another instrument if the two instruments are in the same preset). This effect can be used for percussion instruments like a cymbal. Basically playing one note automatically terminates another in the same group.
 	</li>
 	<li><b>Chorus and reverb</b><br />
 	Indicates the intensity of chorus and reverb effects. The effects are configurable in the software <a href="qrc:/aide/6-1en.html">settings</a>.
 	</li>
 	<li><b>Fixed key and velocity</b><br />
-	Can freezes the key and velocity on the keyrange specified by the linked sample.
+	Can freeze the key and velocity on the keyrange specified by the linked sample.
 	</li>
 	<li><b>Offsets</b><br />
 	Changes the positions of the start and end of a sound during playback, as well as the start and end of the loop.
@@ -51,7 +51,7 @@
 </ul>
 
 <h3>Editing facilities in the table</h3>
-To facilitate and speed up editing in a table, the following features have been implemented:
+To facilitate and speed up editing in the table, the following features have been implemented:
 <ul>
 	<li>the mouse wheel may be used to change a value (the cell has to be in edit mode first),</li>
 	<li>a multiple selection, followed by the editing of the last cell, will edit all cells simultaneously,</li>

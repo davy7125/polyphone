@@ -896,25 +896,47 @@ QString Config::getKeyName(int keyNum, bool forceTexte, bool with0, bool forceC4
     }
 
     QString keyName;
-    switch (keyNum % 12)
+    if (nameMiddleC == middleC_C3_with_flats || nameMiddleC == middleC_C4_with_flats || nameMiddleC == middleC_C5_with_flats)
     {
-    case 0:  keyName = "C";  break;
-    case 1:  keyName = "C#"; break;
-    case 2:  keyName = "D";  break;
-    case 3:  keyName = "D#"; break;
-    case 4:  keyName = "E";  break;
-    case 5:  keyName = "F";  break;
-    case 6:  keyName = "F#"; break;
-    case 7:  keyName = "G";  break;
-    case 8:  keyName = "G#"; break;
-    case 9:  keyName = "A";  break;
-    case 10: keyName = "A#"; break;
-    case 11: keyName = "B";  break;
+        switch (keyNum % 12)
+        {
+        case 0:  keyName = "C";  break;
+        case 1:  keyName = "Db"; break;
+        case 2:  keyName = "D";  break;
+        case 3:  keyName = "Eb"; break;
+        case 4:  keyName = "E";  break;
+        case 5:  keyName = "F";  break;
+        case 6:  keyName = "Gb"; break;
+        case 7:  keyName = "G";  break;
+        case 8:  keyName = "Ab"; break;
+        case 9:  keyName = "A";  break;
+        case 10: keyName = "Bb"; break;
+        case 11: keyName = "B";  break;
+        }
     }
+    else
+    {
+        switch (keyNum % 12)
+        {
+        case 0:  keyName = "C";  break;
+        case 1:  keyName = "C#"; break;
+        case 2:  keyName = "D";  break;
+        case 3:  keyName = "D#"; break;
+        case 4:  keyName = "E";  break;
+        case 5:  keyName = "F";  break;
+        case 6:  keyName = "F#"; break;
+        case 7:  keyName = "G";  break;
+        case 8:  keyName = "G#"; break;
+        case 9:  keyName = "A";  break;
+        case 10: keyName = "A#"; break;
+        case 11: keyName = "B";  break;
+        }
+    }
+
     int numOctave = (keyNum) / 12 - 1;
-    if (nameMiddleC == middleC_C3 && !forceC4)
+    if ((nameMiddleC == middleC_C3_with_flats || nameMiddleC == middleC_C3_with_sharps) && !forceC4)
         numOctave -= 1;
-    else if (nameMiddleC == middleC_C5 && !forceC4)
+    else if ((nameMiddleC == middleC_C5_with_flats || nameMiddleC == middleC_C5_with_sharps) && !forceC4)
         numOctave += 1;
     keyName += QString::number(numOctave);
 
@@ -939,26 +961,29 @@ int Config::getKeyNum(QString keyName, bool forceC4)
         default : return -1; break;
         }
         keyName = keyName.right(keyName.size() - 1);
-        if (keyName.at(0).unicode() == '#')
+        if (keyName.at(0).unicode() == '#' || keyName.at(0) == QString::fromUtf8("♯").at(0))
         {
             note++;
             keyName = keyName.right(keyName.size() - 1);
         }
-        else if (keyName.at(0).unicode() == 'b')
+        else if (keyName.at(0).unicode() == 'b' || keyName.at(0) == QString::fromUtf8("♭").at(0))
         {
             note --;
             keyName = keyName.right(keyName.size() - 1);
         }
 
-        int octave = keyName.toInt();
-        if ((octave == 0 && keyName != "0") || keyName.isEmpty())
-            return -1;
-        else
-            note += (octave - 4) * 12;
+        if (!keyName.isEmpty())
+        {
+            int octave = keyName.toInt();
+            if ((octave == 0 && keyName != "0"))
+                return -1;
+            else
+                note += (octave - 4) * 12;
+        }
 
-        if (this->nameMiddleC == middleC_C3 && !forceC4)
+        if ((nameMiddleC == middleC_C3_with_flats || nameMiddleC == middleC_C3_with_sharps) && !forceC4)
             note += 12;
-        else if (this->nameMiddleC == middleC_C5 && !forceC4)
+        else if ((nameMiddleC == middleC_C5_with_flats || nameMiddleC == middleC_C5_with_sharps) && !forceC4)
             note -= 12;
     }
     return note;
