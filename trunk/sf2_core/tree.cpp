@@ -745,11 +745,19 @@ void Tree::dropEvent(QDropEvent *event)
 
     if (event->mimeData()->hasUrls() && event->source() == NULL)
     {
+        int numSf2 = -1;
+        int commandCopy = 0;
         for (int i = 0; i < event->mimeData()->urls().count(); i++)
         {
             QString path = QUrl::fromPercentEncoding(event->mimeData()->urls().at(i).toEncoded());
             if (!path.isEmpty())
-                mainWindow->dragAndDrop(path, getItemID(itemAt(event->pos())));
+            {
+                QString extension = path.split(".").last().toLower();
+                if (extension == "sfz")
+                    mainWindow->dragAndDrop(path, getItemID(itemAt(event->pos())), &numSf2);
+                else if (extension == "wav")
+                    mainWindow->dragAndDrop(path, getItemID(itemAt(event->pos())), &commandCopy);
+            }
         }
     }
     else

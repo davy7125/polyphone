@@ -280,7 +280,7 @@ void Duplicator::copySmpl(EltID idSource, EltID idDest)
         }
 
         // Remplacement ?
-        if (_copieSmpl != REMPLACER_TOUT && _copieSmpl != IGNORER_TOUT && (index != -1))
+        if (_copieSmpl != REMPLACER_TOUT && _copieSmpl != IGNORER_TOUT && index != -1)
             _copieSmpl = openDialog(QObject::trUtf8("L'échantillon « ") + nom.left(20).toUtf8() +
                                     QObject::trUtf8(" » existe déjà.<br />Que faire ?"));
     }
