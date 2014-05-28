@@ -268,7 +268,7 @@ void PianoKeybdCustom::updateRanges()
     // Dessin des notes de base
     customize(60, CUSTOMIZATION_TYPE_MARKER, MARKER_TYPE_DOT_BLACK);
     foreach (int rootKey, _rootKeys)
-        customize(rootKey, CUSTOMIZATION_TYPE_MARKER, MARKER_TYPE_DOT_YELLOW);
+        customize(rootKey, CUSTOMIZATION_TYPE_MARKER, MARKER_TYPE_DOT_RED);
 
     // Dessin des étendues
     foreach (int key, noteRanges)

@@ -167,7 +167,7 @@ QColor PianoKey::getFillColor(PianoKeybd::MarkerType type)
     case PianoKeybd::MARKER_TYPE_CROSS_RED:
     case PianoKeybd::MARKER_TYPE_DOT_RED:
     case PianoKeybd::MARKER_TYPE_STAR_RED:
-        color = QColor(255, 0, 0);
+        color = QColor(255, 160, 0);
         break;
     case PianoKeybd::MARKER_TYPE_ARROW_YELLOW:
     case PianoKeybd::MARKER_TYPE_CROSS_YELLOW:
