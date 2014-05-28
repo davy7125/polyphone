@@ -746,9 +746,9 @@ genAmountType Page::getValue(QString texte, WORD champ, bool &ok)
         break;
     case champ_initialFilterFc:
         if (m_typePage == PAGE_PRST)
-            genAmount.shAmount = (WORD)limit(1200. * qLn(texte.toDouble(&ok)) / 0.69314718056, 0, 0, -12000, 12000);
+            genAmount.shAmount = (WORD)limit(1200. * qLn(texte.toDouble(&ok)) / 0.69314718056, 0, 0, -21000, 21000);
         else
-            genAmount.shAmount = (WORD)limit(1200. * qLn(texte.toDouble(&ok)/8.176) / 0.69314718056, 1500, 13500);
+            genAmount.shAmount = (WORD)limit(1200. * qLn(texte.toDouble(&ok) / 8.176) / 0.69314718056, 1500, 13500);
         break;
     case champ_initialFilterQ: genAmount.shAmount = (WORD)limit(10*texte.toDouble(&ok), 0, 960, -960, 960);
         break;
@@ -761,11 +761,11 @@ genAmountType Page::getValue(QString texte, WORD champ, bool &ok)
     case champ_delayModEnv: case champ_holdModEnv:
     case champ_delayVolEnv: case champ_holdVolEnv:
     case champ_delayModLFO: case champ_delayVibLFO:
-        genAmount.shAmount = (short)limit(1200. * qLn(texte.toDouble(&ok)) / 0.69314718056, -12000, 5000, -20000, 17000);
+        genAmount.shAmount = (short)limit(1200. * qLn(texte.toDouble(&ok)) / 0.69314718056, -12000, 5000, -21000, 21000);
         break;
     case champ_attackModEnv: case champ_decayModEnv: case champ_releaseModEnv:
     case champ_attackVolEnv: case champ_decayVolEnv: case champ_releaseVolEnv:
-        genAmount.shAmount = (short)limit(1200. * qLn(texte.toDouble(&ok)) / 0.69314718056, -12000, 8000, -20000, 20000);
+        genAmount.shAmount = (short)limit(1200. * qLn(texte.toDouble(&ok)) / 0.69314718056, -12000, 8000, -21000, 21000);
         break;
     case champ_sustainModEnv:
         genAmount.shAmount = (WORD)limit(10. * texte.toDouble(&ok), 0, 1000, -1000, 1000);
@@ -776,7 +776,7 @@ genAmountType Page::getValue(QString texte, WORD champ, bool &ok)
         break;
     case champ_freqModLFO: case champ_freqVibLFO:
         if (m_typePage == PAGE_PRST)
-            genAmount.shAmount = (short)limit(1200. * qLn(texte.toDouble(&ok)) / 0.69314718056, 0, 0, -21000, 20500);
+            genAmount.shAmount = (short)limit(1200. * qLn(texte.toDouble(&ok)) / 0.69314718056, 0, 0, -21000, 21000);
         else
             genAmount.shAmount = (short)limit(1200. * qLn(texte.toDouble(&ok)/8.176) / 0.69314718056, -16000, 4500);
         break;
@@ -2073,6 +2073,11 @@ void PageTable::customizeKeyboard()
         if (!selectedColumns.contains(item->column()))
             selectedColumns << item->column();
 
+    // Si aucune colonne n'est sélectionnée, on affiche toutes les étendues
+    if (selectedColumns.isEmpty())
+        selectedColumns << 0;
+
+    // Affichage des étendues et rootkeys des divisions sélectionnées
     foreach (int colonne, selectedColumns)
     {
         EltID id = this->table->getID(colonne);

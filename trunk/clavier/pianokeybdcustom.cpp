@@ -27,6 +27,15 @@
 #include "config.h"
 #include <QApplication>
 
+// Définition des couleurs du clavier
+QColor PianoKeybdCustom::COLOR_PRESSED          = QColor(  0,   0, 255);    // Bleu
+QColor PianoKeybdCustom::COLOR_BLACK_ENABLED    = QColor(  0,   0,   0);    // Noir
+QColor PianoKeybdCustom::COLOR_WHITE_ENABLED    = QColor(255, 255, 255);    // Blanc
+QColor PianoKeybdCustom::COLOR_BLACK_DISABLED   = QColor(200, 200, 200);    // Gris moyen
+QColor PianoKeybdCustom::COLOR_WHITE_DISABLED   = QColor(200, 200, 200);    // Gris moyen
+QColor PianoKeybdCustom::COLOR_BLACK_RANGE      = QColor(200, 200,   0);    // Jaune foncé
+QColor PianoKeybdCustom::COLOR_WHITE_RANGE      = QColor(255, 255,  50);    // Jaune clair
+
 // Callback des signaux midi
 void midiCallback(double deltatime, std::vector< unsigned char > *message, void *userData)
 {
@@ -66,9 +75,9 @@ PianoKeybdCustom::PianoKeybdCustom(QWidget *parent) : PianoKeybd(parent),
     midiin(NULL)
 {
     // Couleurs et style
-    set(PROPERTY_COLOR_BLACK_KEYS, QColor(130, 130, 130));
-    set(PROPERTY_COLOR_WHITE_KEYS, QColor(230, 230, 230));
-    set(PROPERTY_COLOR_1, QColor(50, 80, 255));
+    set(PROPERTY_COLOR_BLACK_KEYS, COLOR_BLACK_DISABLED);
+    set(PROPERTY_COLOR_WHITE_KEYS, COLOR_WHITE_DISABLED);
+    set(PROPERTY_COLOR_1, COLOR_PRESSED);
     setFrameStyle(0);
 
     // Connexion midi
@@ -247,15 +256,13 @@ void PianoKeybdCustom::updateRanges()
         noteCurrentRange.removeAll(key);
 
     // Dessin de l'étendue courante
-    QColor colorWhite(255, 255, 255);
-    QColor colorBlack(0, 0, 0);
     foreach (int key, noteCurrentRange)
     {
         int note = key % 12;
         if (note == 1 || note == 3 || note == 6 || note == 8 || note == 10)
-            customize(key, CUSTOMIZATION_TYPE_COLOR, colorBlack);
+            customize(key, CUSTOMIZATION_TYPE_COLOR, COLOR_BLACK_ENABLED);
         else
-            customize(key, CUSTOMIZATION_TYPE_COLOR, colorWhite);
+            customize(key, CUSTOMIZATION_TYPE_COLOR, COLOR_WHITE_ENABLED);
     }
 
     // Dessin des notes de base
@@ -264,14 +271,12 @@ void PianoKeybdCustom::updateRanges()
         customize(rootKey, CUSTOMIZATION_TYPE_MARKER, MARKER_TYPE_DOT_YELLOW);
 
     // Dessin des étendues
-    QColor colorWhite2(255, 255, 180);
-    QColor colorBlack2(140, 140, 0);
     foreach (int key, noteRanges)
     {
         int note = key % 12;
         if (note == 1 || note == 3 || note == 6 || note == 8 || note == 10)
-            customize(key, CUSTOMIZATION_TYPE_COLOR, colorBlack2);
+            customize(key, CUSTOMIZATION_TYPE_COLOR, COLOR_BLACK_RANGE);
         else
-            customize(key, CUSTOMIZATION_TYPE_COLOR, colorWhite2);
+            customize(key, CUSTOMIZATION_TYPE_COLOR, COLOR_WHITE_RANGE);
     }
 }
