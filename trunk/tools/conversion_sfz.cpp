@@ -845,6 +845,18 @@ ParamListe::ParamListe(Pile_sf2 * sf2, ParamListe * paramPrst, EltID idInst)
 
         // Adaptation LFO
         adaptLfo(sf2, idInst);
+
+        // Atténuation du volume si défini uniquement dans la division globale
+        if (!_listeChamps.contains(champ_initialAttenuation))
+        {
+            EltID instGlob = idInst;
+            instGlob.typeElement = elementInst;
+            if (sf2->isSet(instGlob, champ_initialAttenuation))
+            {
+                _listeChamps << champ_initialAttenuation;
+                _listeValeurs << getValue(champ_initialAttenuation, sf2->get(instGlob, champ_initialAttenuation).genValue, false);
+            }
+        }
     }
 
     // Fusion des 2 listes de paramètres
@@ -1046,27 +1058,27 @@ void ParamListe::adaptLfo(Pile_sf2 * sf2, EltID idInstSmpl)
         if (!_listeChamps.contains(champ_delayModLFO) && sf2->isSet(idInst, champ_delayModLFO))
         {
             _listeChamps << champ_delayModLFO;
-            _listeValeurs << d1200e2(sf2->get(idInst, champ_delayModLFO).genValue.shAmount);
+            _listeValeurs << getValue(champ_delayModLFO, sf2->get(idInst, champ_delayModLFO).genValue, false);
         }
         if (!_listeChamps.contains(champ_freqModLFO) && sf2->isSet(idInst, champ_freqModLFO))
         {
             _listeChamps << champ_freqModLFO;
-            _listeValeurs << d1200e2(sf2->get(idInst, champ_freqModLFO).genValue.shAmount) * 8.176;
+            _listeValeurs << getValue(champ_freqModLFO, sf2->get(idInst, champ_freqModLFO).genValue, false);
         }
         if (!_listeChamps.contains(champ_modLfoToPitch) && sf2->isSet(idInst, champ_modLfoToPitch))
         {
             _listeChamps << champ_modLfoToPitch;
-            _listeValeurs << sf2->get(idInst, champ_modLfoToPitch).genValue.shAmount;
+            _listeValeurs << getValue(champ_modLfoToPitch, sf2->get(idInst, champ_modLfoToPitch).genValue, false);
         }
         if (!_listeChamps.contains(champ_modLfoToFilterFc) && sf2->isSet(idInst, champ_modLfoToFilterFc))
         {
             _listeChamps << champ_modLfoToFilterFc;
-            _listeValeurs << sf2->get(idInst, champ_modLfoToFilterFc).genValue.shAmount;
+            _listeValeurs << getValue(champ_modLfoToFilterFc, sf2->get(idInst, champ_modLfoToFilterFc).genValue, false);
         }
         if (!_listeChamps.contains(champ_modLfoToVolume) && sf2->isSet(idInst, champ_modLfoToVolume))
         {
             _listeChamps << champ_modLfoToVolume;
-            _listeValeurs << (double)(sf2->get(idInst, champ_modLfoToVolume).genValue.shAmount) / 10.;
+            _listeValeurs << getValue(champ_modLfoToVolume, sf2->get(idInst, champ_modLfoToVolume).genValue, false);
         }
     }
     if (_listeChamps.contains(champ_vibLfoToPitch) || _listeChamps.contains(champ_delayVibLFO) ||
@@ -1075,20 +1087,19 @@ void ParamListe::adaptLfo(Pile_sf2 * sf2, EltID idInstSmpl)
         if (!_listeChamps.contains(champ_delayVibLFO) && sf2->isSet(idInst, champ_delayVibLFO))
         {
             _listeChamps << champ_delayVibLFO;
-            _listeValeurs << d1200e2(sf2->get(idInst, champ_delayVibLFO).genValue.shAmount);
+            _listeValeurs << getValue(champ_delayVibLFO, sf2->get(idInst, champ_delayVibLFO).genValue, false);
         }
         if (!_listeChamps.contains(champ_freqVibLFO) && sf2->isSet(idInst, champ_freqVibLFO))
         {
             _listeChamps << champ_freqVibLFO;
-            _listeValeurs << d1200e2(sf2->get(idInst, champ_freqVibLFO).genValue.shAmount) * 8.176;
+            _listeValeurs << getValue(champ_freqVibLFO, sf2->get(idInst, champ_freqVibLFO).genValue, false);
         }
         if (!_listeChamps.contains(champ_vibLfoToPitch) && sf2->isSet(idInst, champ_vibLfoToPitch))
         {
             _listeChamps << champ_vibLfoToPitch;
-            _listeValeurs << sf2->get(idInst, champ_vibLfoToPitch).genValue.shAmount;
+            _listeValeurs << getValue(champ_vibLfoToPitch, sf2->get(idInst, champ_vibLfoToPitch).genValue, false);
         }
     }
-
 }
 
 double ParamListe::getValKeynum(double valBase, int key, double keynum)
