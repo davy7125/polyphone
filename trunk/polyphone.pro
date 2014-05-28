@@ -48,6 +48,7 @@ unix:!macx{
     INCLUDEPATH += /usr/include/jack
 }
 macx {
+    QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.6
     DEFINES += __MACOSX_CORE__
     INCLUDEPATH += lib/mac/Jackmp.framework/Headers
     LIBS += -Llib/mac -lportaudio -F$$(PWD)lib/mac/ -framework Jackmp \
