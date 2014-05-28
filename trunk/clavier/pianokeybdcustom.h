@@ -103,6 +103,13 @@ private:
     QList<int> _currentRange;
     QList<int> _rootKeys;
     QMap<int, QList<int> > _mapPressed;
+    static QColor COLOR_PRESSED;
+    static QColor COLOR_BLACK_ENABLED;
+    static QColor COLOR_WHITE_ENABLED;
+    static QColor COLOR_BLACK_DISABLED;
+    static QColor COLOR_WHITE_DISABLED;
+    static QColor COLOR_BLACK_RANGE;
+    static QColor COLOR_WHITE_RANGE;
 
     void updateRanges();
 };
