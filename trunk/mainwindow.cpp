@@ -1476,12 +1476,12 @@ void MainWindow::importerSmpl(QString path, EltID id, int * replace)
             msgBox.setDefaultButton(QMessageBox::YesAll);
             switch (msgBox.exec())
             {
-            case QMessageBox::NoAll: *replace = 4; break;
-            case QMessageBox::No: *replace = 3; break;
-            case QMessageBox::YesAll: *replace = 2; break;
-            case QMessageBox::Yes: *replace = 1; break;
-            case QMessageBox::Save: *replace = 0; break;
-            case QMessageBox::SaveAll: *replace = -1; break;
+            case QMessageBox::NoAll:    *replace =  4; break;
+            case QMessageBox::No:       *replace =  3; break;
+            case QMessageBox::YesAll:   *replace =  2; break;
+            case QMessageBox::Yes:      *replace =  1; break;
+            case QMessageBox::Save:     *replace =  0; break;
+            case QMessageBox::SaveAll:  *replace = -1; break;
             }
         }
     }
