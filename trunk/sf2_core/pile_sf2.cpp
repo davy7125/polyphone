@@ -922,7 +922,7 @@ int Pile_sf2::add(EltID id, bool storeAction)
         if (tree)
         {
             // Ajout d'un élément graphique
-            sf2->eltTree = new QTreeWidgetItem(this->tree);
+            sf2->eltTree = new TreeWidgetItem(this->tree);
             QString str = QString::number(i);
             sf2->eltTree->setText(1, str);
             sf2->eltTree->setText(2, "R");
@@ -987,7 +987,7 @@ int Pile_sf2::add(EltID id, bool storeAction)
         if (tree)
         {
             // Ajout d'un élément graphique
-            smpl->eltTree = new QTreeWidgetItem(sf2->eltTreeSmpl);
+            smpl->eltTree = new TreeWidgetItem(sf2->eltTreeSmpl);
             smpl->eltTree->setText(1, QString::number(id.indexSf2));
             smpl->eltTree->setText(2, "smpl");
             smpl->eltTree->setText(3, QString::number(i));
@@ -1019,7 +1019,7 @@ int Pile_sf2::add(EltID id, bool storeAction)
         if (tree)
         {
             // Ajout d'un élément graphique
-            inst->eltTree = new QTreeWidgetItem(sf2->eltTreeInst);
+            inst->eltTree = new TreeWidgetItem(sf2->eltTreeInst);
             inst->eltTree->setText(1, QString::number(id.indexSf2));
             inst->eltTree->setText(2, "inst");
             inst->eltTree->setText(3, QString::number(i));
@@ -1051,7 +1051,7 @@ int Pile_sf2::add(EltID id, bool storeAction)
         if (tree)
         {
             // Ajout d'un élément graphique
-            prst->eltTree = new QTreeWidgetItem(sf2->eltTreePrst);
+            prst->eltTree = new TreeWidgetItem(sf2->eltTreePrst);
             prst->eltTree->setText(1, QString::number(id.indexSf2));
             prst->eltTree->setText(2, "prst");
             prst->eltTree->setText(3, QString::number(i));
@@ -1083,7 +1083,7 @@ int Pile_sf2::add(EltID id, bool storeAction)
         if (tree)
         {
             // Ajout d'un élément graphique
-            bag->eltTree = new QTreeWidgetItem(inst->eltTree);
+            bag->eltTree = new TreeWidgetItem(inst->eltTree);
             bag->eltTree->setText(1, QString::number(id.indexSf2));
             bag->eltTree->setText(2, "IS");
             bag->eltTree->setText(3, QString::number(id.indexElt));
@@ -1116,7 +1116,7 @@ int Pile_sf2::add(EltID id, bool storeAction)
         if (tree)
         {
             // Ajout d'un élément graphique
-            bag->eltTree = new QTreeWidgetItem(prst->eltTree);
+            bag->eltTree = new TreeWidgetItem(prst->eltTree);
             bag->eltTree->setText(1, QString::number(id.indexSf2));
             bag->eltTree->setText(2, "PI");
             bag->eltTree->setText(3, QString::number(id.indexElt));
