@@ -26,7 +26,7 @@
 #define PAGE_INST_H
 
 #include <QWidget>
-#include "page.h"
+#include "pagetable.h"
 
 namespace Ui {
 class Page_Inst;

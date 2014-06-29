@@ -140,7 +140,10 @@ SOURCES	+= main.cpp \
     sfark/sfklCoding.cpp \
     synthetiseur/elements/calibrationsinus.cpp \
     pages/graphique.cpp \
-    pages/graphiquefourier.cpp
+    pages/graphiquefourier.cpp \
+    pages/tablewidgetmod.cpp \
+    pages/pagetable.cpp \
+    sf2_core/treewidgetitem.cpp
 
 HEADERS  += mainwindow.h \
     sf2_core/sf2_types.h \
@@ -212,7 +215,10 @@ HEADERS  += mainwindow.h \
     sfark/sfarkextractor.h \
     synthetiseur/elements/calibrationsinus.h \
     pages/graphique.h \
-    pages/graphiquefourier.h
+    pages/graphiquefourier.h \
+    pages/tablewidgetmod.h \
+    pages/pagetable.h \
+    sf2_core/treewidgetitem.h
 
 FORMS    += mainwindow.ui \
     gui_divers/config.ui \
