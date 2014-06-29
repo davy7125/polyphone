@@ -22,65 +22,26 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef PAGE_PRST_H
-#define PAGE_PRST_H
+#ifndef TABLEWIDGETMOD_H
+#define TABLEWIDGETMOD_H
 
-#include <QWidget>
-#include "pagetable.h"
+#include <QTableWidget>
+#include "sf2_types.h"
 
-namespace Ui
-{
-    class Page_Prst;
-}
-
-
-class SpinBox; // Déclaration anticipée
-
-class Page_Prst : public PageTable
+// Classe QTableWidget pour mod
+class TableWidgetMod : public QTableWidget
 {
     Q_OBJECT
+
 public:
-    explicit Page_Prst(QWidget *parent = 0);
-    ~Page_Prst();
-    void setModVisible(bool visible);
-    void afficher();
-    void spinUpDown(int steps, SpinBox *spin);
+    explicit TableWidgetMod(QWidget *parent = 0) : QTableWidget(parent) {}
+    ~TableWidgetMod() {}
 
-public slots:
-    void setBank();
-    void setPreset();
-
-private:
-    Ui::Page_Prst *ui;
+    void clear();
+    void addRow(int row);
+    void setID(EltID id, int row);
+    EltID getID(int row);
+    EltID getID();
 };
 
-// Classe TableWidget pour presets
-class TableWidgetPrst : public TableWidget
-{
-    Q_OBJECT
-public:
-    // Constructeur
-    TableWidgetPrst(QWidget *parent = 0);
-    ~TableWidgetPrst();
-    // Association champ - ligne
-    Champ getChamp(int row);
-    int getRow(WORD champ);
-};
-
-
-// SpinBox
-class SpinBox : public QSpinBox
-{
-    Q_OBJECT
-public:
-    // Constructeur
-    SpinBox(QWidget *parent = 0) : QSpinBox(parent) {}
-    // Initialisation du sf2
-    void init(Page_Prst *page) {this->page = page;}
-public slots:
-    virtual void stepBy(int steps) {this->page->spinUpDown(steps, this);}
-private:
-    Page_Prst *page;
-};
-
-#endif // PAGE_PRST_H
+#endif // TABLEWIDGETMOD_H

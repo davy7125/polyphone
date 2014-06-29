@@ -107,6 +107,7 @@ Config::Config(QWidget *parent, PianoKeybdCustom *keyboard) : QDialog(parent),
     this->ui->comboBufferSize->setCurrentIndex(pos);
     this->ui->checkBoucle->setChecked(this->wavAutoLoop);
     this->ui->checkBlanc->setChecked(this->wavRemoveBlank);
+    this->ui->checkRowSameWidth->setChecked(this->sameWidthTable);
 
     // Paramètres synthétiseur
     if (this->synthGain < -50)
@@ -523,6 +524,7 @@ void Config::load()
     this->modifStereo       = settings.value("stereo_modification", false).toBool();
     this->nameMiddleC       = (NameMiddleC)settings.value("name_middle_c", 0).toInt();
     this->_velocity         = settings.value("keyboard/velocity", 127).toInt();
+    this->sameWidthTable    = settings.value("affichage/same_width_table", false).toBool();
 }
 void Config::store()
 {
@@ -562,6 +564,7 @@ void Config::store()
     settings.setValue("stereo_modification",            this->modifStereo);
     settings.setValue("name_middle_c",                  (int)this->nameMiddleC);
     settings.setValue("keyboard/velocity",              this->_velocity);
+    settings.setValue("affichage/same_width_table",     this->sameWidthTable);
 }
 
 void Config::setColors()
@@ -1058,4 +1061,13 @@ void Config::on_comboLangue_currentIndexChanged(int index)
 
     QMessageBox::information(QApplication::activeWindow(), trUtf8("Information"),
                              trUtf8("La modification sera prise en compte lors du prochain démarrage du logiciel."));
+}
+
+void Config::on_checkRowSameWidth_clicked()
+{
+    if (this->loaded)
+    {
+        this->sameWidthTable = ui->checkRowSameWidth->isChecked();
+        this->store();
+    }
 }

@@ -88,6 +88,7 @@ public:
     int  getSynthChoLevel()     {return choLevel;}
     int  getSynthChoDepth()     {return choDepth;}
     int  getSynthChoFrequency() {return choFrequency;}
+    bool getSameWidthTable()    {return sameWidthTable;}
     QList<QColor> getColors()   {return colorList;}
     bool getRepercussionStereo(){return modifStereo;}
     NameMiddleC getNameMiddleC(){return nameMiddleC;}
@@ -659,6 +660,8 @@ private slots:
     void on_spinDefaultVelocity_editingFinished();
     void on_comboLangue_currentIndexChanged(int index);
 
+    void on_checkRowSameWidth_clicked();
+
 private:
     QSettings settings;
     Ui::Config * ui;
@@ -688,6 +691,7 @@ private:
     bool modifStereo;
     int bufferSize;
     NameMiddleC nameMiddleC;
+    bool sameWidthTable;
 
     // Autres
     bool loaded;
