@@ -29,6 +29,7 @@
 #include "pile_actions.h"
 #include "sound.h"
 #include "tree.h"
+#include "treewidgetitem.h"
 #include <string>
 using std::string;
 
