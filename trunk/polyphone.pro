@@ -12,6 +12,8 @@ QT       += core gui printsupport svg
 TARGET = polyphone
 TEMPLATE = app
 
+QMAKE_CXXFLAGS += -mfpmath=387
+
 CONFIG(release, debug|release){
     DESTDIR = RELEASE
     OBJECTS_DIR = RELEASE/.obj
@@ -37,8 +39,8 @@ win32{
         lib/win/transport.h \
         lib/win/systemdeps.h \
         lib/win/session.h \
-        lib/win/zlib.h \
-        lib/win/zconf.h
+        lib/win/zconf.h \
+        lib/win/zlib.h
     RC_FILE = polyphone.rc
 }
 unix:!macx{
@@ -131,19 +133,22 @@ SOURCES	+= main.cpp \
     gui_divers/spinboxrange.cpp \
     pages/tablewidget.cpp \
     synthetiseur/soundengine.cpp \
-    sfark/sfarkextractor.cpp \
+    synthetiseur/elements/calibrationsinus.cpp \
+    pages/graphique.cpp \
+    pages/graphiquefourier.cpp \
+    pages/tablewidgetmod.cpp \
+    pages/pagetable.cpp \
+    sf2_core/treewidgetitem.cpp \
+    sfark/sfarkglobal.cpp \
+    sfark/sfarkfilemanager.cpp \
     sfark/sfklZip.cpp \
     sfark/sfklLPC.cpp \
     sfark/sfklFile.cpp \
     sfark/sfklDiff.cpp \
     sfark/sfklCrunch.cpp \
     sfark/sfklCoding.cpp \
-    synthetiseur/elements/calibrationsinus.cpp \
-    pages/graphique.cpp \
-    pages/graphiquefourier.cpp \
-    pages/tablewidgetmod.cpp \
-    pages/pagetable.cpp \
-    sf2_core/treewidgetitem.cpp
+    sfark/sfarkextractor_v1.cpp \
+    sfark/sfarkextractor.cpp
 
 HEADERS  += mainwindow.h \
     sf2_core/sf2_types.h \
@@ -210,15 +215,18 @@ HEADERS  += mainwindow.h \
     gui_divers/spinboxrange.h \
     pages/tablewidget.h \
     synthetiseur/soundengine.h \
-    sfark/wcc.h \
-    sfark/sfArkLib.h \
-    sfark/sfarkextractor.h \
     synthetiseur/elements/calibrationsinus.h \
     pages/graphique.h \
     pages/graphiquefourier.h \
     pages/tablewidgetmod.h \
     pages/pagetable.h \
-    sf2_core/treewidgetitem.h
+    sf2_core/treewidgetitem.h \
+    sfark/sfarkglobal.h \
+    sfark/sfarkfilemanager.h \
+    sfark/wcc.h \
+    sfark/sfArkLib.h \
+    sfark/sfarkextractor_v1.h \
+    sfark/sfarkextractor.h
 
 FORMS    += mainwindow.ui \
     gui_divers/config.ui \

@@ -1,3 +1,5 @@
+#include <QDebug>
+
 // Definitions for sfArk / WaveComp
 // Copyright 1998-2000 Andy Inman
 // Contact via: http://netgenius.co.uk or http://melodymachine.com
