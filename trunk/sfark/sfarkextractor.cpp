@@ -1,4 +1,5 @@
 #include "sfarkextractor.h"
+#include "sfarkextractor_v1.h"
 #include <QFileInfo>
 #include <QDataStream>
 #include "sfArkLib.h"
@@ -33,6 +34,12 @@ bool SfArkExtractor::extract(QString fileName)
         QDataStream streamSf2(&convertedData, QIODevice::ReadOnly);
         int indexSf2 = -1;
         ret = _sf2->ouvrir("", &streamSf2, indexSf2, true);
+    }
+    else
+    {
+        // Tentative d'ouverture avec 2ème librairie
+        SfArkExtractorV1 extractorV1(_sf2);
+        ret = !extractorV1.extract(fileName);
     }
 
     return (ret == 0);
