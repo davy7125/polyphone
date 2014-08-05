@@ -252,6 +252,7 @@ void MainWindow::closeEvent(QCloseEvent *event)
     {
         QMessageBox msgBox(this);
         msgBox.setIcon(QMessageBox::Warning);
+        msgBox.setWindowTitle(trUtf8("Attention"));
         msgBox.setText(trUtf8("<b>Sauvegarder avant de quitter ?</b>"));
         if (nbFile > 1)
         {
@@ -366,8 +367,8 @@ void MainWindow::ouvrir()
         this->dragAndDrop(strList.takeFirst(), EltID(elementUnknown, -1, -1, -1, -1), &numSf2);
     updateDo();
     updateActions();
-    this->ui->arborescence->searchTree(this->ui->editSearch->text());
 }
+
 void MainWindow::ouvrirFichier1()
 {
     this->sf2->prepareNewActions();
@@ -375,6 +376,7 @@ void MainWindow::ouvrirFichier1()
     updateDo();
     updateActions();
 }
+
 void MainWindow::ouvrirFichier2()
 {
     this->sf2->prepareNewActions();
@@ -382,6 +384,7 @@ void MainWindow::ouvrirFichier2()
     updateDo();
     updateActions();
 }
+
 void MainWindow::ouvrirFichier3()
 {
     this->sf2->prepareNewActions();
@@ -389,6 +392,7 @@ void MainWindow::ouvrirFichier3()
     updateDo();
     updateActions();
 }
+
 void MainWindow::ouvrirFichier4()
 {
     this->sf2->prepareNewActions();
@@ -396,6 +400,7 @@ void MainWindow::ouvrirFichier4()
     updateDo();
     updateActions();
 }
+
 void MainWindow::ouvrirFichier5()
 {
     this->sf2->prepareNewActions();
@@ -403,6 +408,7 @@ void MainWindow::ouvrirFichier5()
     updateDo();
     updateActions();
 }
+
 void MainWindow::ouvrir(QString fileName)
 {
     // Chargement d'un fichier .sf2
@@ -412,32 +418,28 @@ void MainWindow::ouvrir(QString fileName)
         // le chargement s'est bien déroulé
         this->configuration->addFile(Config::typeFichierSf2, fileName);
         updateFavoriteFiles();
-        ui->arborescence->clearSelection();
-        this->ui->arborescence->searchTree(this->ui->editSearch->text());
         updateActions();
         break;
     case 1:
         QMessageBox::warning(this, trUtf8("Attention"), trUtf8("Format inconnu."));
-        updateDo();
         break;
     case 2:
         QMessageBox::warning(this, trUtf8("Attention"), trUtf8("Le fichier est déjà chargé."));
-        updateDo();
         break;
     case 3:
         QMessageBox::warning(this, trUtf8("Attention"), trUtf8("Impossible d'ouvrir le fichier."));
-        updateDo();
         break;
     case 4:
         QMessageBox::warning(this, trUtf8("Attention"), trUtf8("Lecture impossible."));
-        updateDo();
         break;
     case 5: case 6:
         QMessageBox::warning(this, trUtf8("Attention"), trUtf8("Le fichier est corrompu."));
-        updateDo();
         break;
     }
+
+    updateDo();
 }
+
 void MainWindow::nouveau()
 {
     bool ok;
@@ -447,11 +449,10 @@ void MainWindow::nouveau()
         sf2->prepareNewActions();
         sf2->nouveau(name.left(20));
         updateDo();
-        ui->arborescence->clearSelection();
-        this->ui->arborescence->searchTree(this->ui->editSearch->text());
         updateActions();
     }
 }
+
 void MainWindow::Fermer()
 {
     // Fermeture SF2
@@ -469,6 +470,7 @@ void MainWindow::Fermer()
         msgBox.setText(qStr);
         qStr = trUtf8("Le fichier « ") + sf2->getQstr(id,champ_name) + trUtf8(" » a été modifié.");
         msgBox.setInformativeText(qStr);
+        msgBox.setWindowTitle(trUtf8("Attention"));
         msgBox.setStandardButtons(QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel);
         msgBox.button(QMessageBox::Save)->setText(trUtf8("&Enregistrer"));
         msgBox.button(QMessageBox::Cancel)->setText(trUtf8("&Annuler"));
@@ -477,7 +479,9 @@ void MainWindow::Fermer()
         msgBox.setDefaultButton(QMessageBox::Save);
         ret = msgBox.exec();
     }
-    else ret = QMessageBox::Discard;
+    else
+        ret = QMessageBox::Discard;
+
     switch (ret)
     {
     case QMessageBox::Cancel: return;
@@ -488,23 +492,35 @@ void MainWindow::Fermer()
         // Reprise id si modif
         id = ui->arborescence->getID(0);
         id.typeElement = elementSf2;
+        EltID elementSuivant = ui->arborescence->getNextID(true);
         this->ui->arborescence->selectNone();
         sf2->remove(id);
+        this->ui->arborescence->select(elementSuivant, true);
         updateActions();
         updateDo();
-        this->page_inst->clearTable();
-        this->page_prst->clearTable();
     }break;
     }
 }
+
 void MainWindow::supprimerElt()
 {
     // Suppression d'un ou plusieurs éléments dans l'arborescence
-    int nb = ui->arborescence->getSelectedItemsNumber() - 1;
-    if (nb >= 0) sf2->prepareNewActions();
+    int nb = ui->arborescence->getSelectedItemsNumber();
+    if (nb <= 0)
+        return;
+
+    sf2->prepareNewActions();
+
+    // 1er élément à supprimer
+    EltID elementToSelect = ui->arborescence->getElementToSelectAfterDeletion();
+
     int message = 1;
-    for (int i = nb; i >=0; i--)
+    for (int i = nb - 1; i >= 0; i--)
         sf2->remove(ui->arborescence->getID(i), &message);
+
+    if (elementToSelect.typeElement != elementUnknown)
+        ui->arborescence->select(elementToSelect, true);
+
     updateActions();
     updateDo();
 }
@@ -620,7 +636,6 @@ void MainWindow::undo()
     sf2->undo();
     updateActions();
     updateDo();
-    this->ui->arborescence->searchTree(this->ui->editSearch->text());
 }
 void MainWindow::redo()
 {
@@ -628,7 +643,6 @@ void MainWindow::redo()
     sf2->redo();
     updateActions();
     updateDo();
-    this->ui->arborescence->searchTree(this->ui->editSearch->text());
 }
 
 // Fenetres / affichage
@@ -1265,7 +1279,6 @@ void MainWindow::renommer()
                 sf2->set(ID, champ_name, text);
                 updateDo();
                 updateActions();
-                this->ui->arborescence->searchTree(this->ui->editSearch->text());
             }
         }
     }
@@ -1324,7 +1337,6 @@ void MainWindow::renommerEnMasse(QString name, int modificationType)
     }
     updateDo();
     updateActions();
-    this->ui->arborescence->searchTree(this->ui->editSearch->text());
 }
 void MainWindow::dragAndDrop(EltID idDest, QList<EltID> idSources)
 {
@@ -1358,6 +1370,12 @@ void MainWindow::dragAndDrop(QString path, EltID idDest, int * arg)
             arg = &valueTmp;
         ImportSfz import(this->sf2);
         import.import(path, arg);
+
+        // Sélection
+        EltID id(elementSf2, *arg, -1, -1, -1);
+        ui->arborescence->clearSelection();
+        ui->arborescence->select(id, true);
+        this->updateActions();
     }
     else if (extension.compare("wav") == 0 && idDest.typeElement != elementUnknown && idDest.indexSf2 != -1)
     {
@@ -1374,6 +1392,7 @@ void MainWindow::dragAndDrop(QString path, EltID idDest, int * arg)
         if (!sfArkExtractor.extract(path))
             QMessageBox::warning(this, trUtf8("Attention"),
                                  trUtf8("Une erreur est survenue lors de l'import du fichier ") + path);
+        this->updateActions();
     }
 }
 void MainWindow::importerSmpl()
@@ -1399,10 +1418,12 @@ void MainWindow::importerSmpl()
     EltID id = this->ui->arborescence->getID(0);
     int replace = 0;
     while (!strList.isEmpty())
+    {
+        this->ui->arborescence->clearSelection();
         this->dragAndDrop(strList.takeAt(0), id, &replace);
+    }
     updateDo();
     updateActions();
-    this->ui->arborescence->searchTree(this->ui->editSearch->text());
 }
 void MainWindow::importerSmpl(QString path, EltID id, int * replace)
 {
@@ -1567,6 +1588,8 @@ void MainWindow::importerSmpl(QString path, EltID id, int * replace)
             // Ajustement automatique à la boucle ?
             if (this->configuration->getWavAutoLoop())
                 this->page_smpl->enleveFin(id);
+
+            this->ui->arborescence->select(id, true);
         }
 
         // Chargement dans la ram
@@ -1759,8 +1782,7 @@ void MainWindow::nouvelInstrument()
         this->sf2->set(id, champ_name, name.left(20));
         updateDo();
         ui->arborescence->clearSelection();
-        this->ui->arborescence->searchTree(this->ui->editSearch->text());
-        updateActions();
+        ui->arborescence->select(id, true);
     }
 }
 void MainWindow::nouveauPreset()
@@ -1799,8 +1821,8 @@ void MainWindow::nouveauPreset()
         val.wValue = nBank;
         this->sf2->set(id, champ_wBank, val);
         updateDo();
-        this->ui->arborescence->searchTree(this->ui->editSearch->text());
-        updateActions();
+        ui->arborescence->clearSelection();
+        ui->arborescence->select(id, true);
     }
 }
 void MainWindow::associer()
@@ -1900,7 +1922,6 @@ void MainWindow::associer(EltID idDest)
         }
     }
     updateDo();
-    this->ui->arborescence->searchTree(this->ui->editSearch->text());
     updateActions();
 }
 void MainWindow::remplacer()
@@ -1928,12 +1949,12 @@ void MainWindow::remplacer(EltID idSrc)
         champ = champ_sampleID;
     else
         champ = champ_instrument;
+
     // Remplacement d'un sample ou instrument lié
     Valeur val;
     val.wValue = idSrc.indexElt;
     this->sf2->set(idDest, champ, val);
     updateDo();
-    this->ui->arborescence->searchTree(this->ui->editSearch->text());
     updateActions();
 }
 
@@ -1964,10 +1985,8 @@ void MainWindow::supprimer()
     QWidget* focused = QApplication::focusWidget();
     if( focused != 0 )
     {
-        QApplication::postEvent(focused,
-                                new QKeyEvent(QEvent::KeyPress, Qt::Key_Delete, 0));
-        QApplication::postEvent(focused,
-                                new QKeyEvent(QEvent::KeyRelease, Qt::Key_Delete, 0));
+        QApplication::postEvent(focused, new QKeyEvent(QEvent::KeyPress, Qt::Key_Delete, 0));
+        QApplication::postEvent(focused, new QKeyEvent(QEvent::KeyRelease, Qt::Key_Delete, 0));
     }
 }
 

@@ -27,11 +27,8 @@
 
 #include "qtreewidget.h"
 #include "sf2_types.h"
-#include <string>
-using std::string;
 
 class Pile_sf2;
-
 class MainWindow;
 
 class Tree : public QTreeWidget
@@ -67,11 +64,13 @@ public:
     bool isSelectedItemsSf2Unique();
     bool isSelectedItemsFamilyUnique();
     EltID getID(unsigned int pos);
+    EltID getNextID(bool closeFile);
     void selectNone(bool refresh = false);
     void select(EltID id, bool refresh = false);
     void desactiveSuppression();
     void activeSuppression();
     void clearPastedID();
+    EltID getElementToSelectAfterDeletion();
 
 public slots:
     void collapse() {this->trier(1);}       // Clic sur "enrouler"
@@ -86,6 +85,7 @@ protected:
     virtual void keyPressEvent(QKeyEvent *event);
     virtual void dragEnterEvent(QDragEnterEvent * event);
     virtual void dropEvent(QDropEvent *event);
+    virtual void mousePressEvent(QMouseEvent *event);
 
     QStringList mimeTypes() const
     {
@@ -117,6 +117,11 @@ private:
     void displayInstrument(int idSf2, int index, bool repercuteSmpl = true, bool repercutePrst = true);
     void displayPreset(int idSf2, int index, bool repercute = true);
     void displayElement(EltID id);
+    EltID getNextSample();
+    EltID getNextInst();
+    EltID getNextInstSmpl(int numInst);
+    EltID getNextPrst();
+    EltID getNextPrstInst(int numPrst);
 };
 
 #endif // TREE_H

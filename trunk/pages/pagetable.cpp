@@ -326,11 +326,6 @@ void PageTable::afficher()
     this->table->verticalScrollBar()->setValue(posV);
 }
 
-void PageTable::clearTable()
-{
-    this->table->setColumnCount(0);
-}
-
 void PageTable::afficheMod(EltID id, int selectedRow)
 {
     QString qStr;
