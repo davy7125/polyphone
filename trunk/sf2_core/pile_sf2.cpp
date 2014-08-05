@@ -1426,7 +1426,7 @@ int Pile_sf2::remove(EltID id, bool permanently, bool storeAction, int *message)
         else
         {
             // Suppression des gens
-            this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt)->bagGlobal.gen = \
+            this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt)->bagGlobal.gen =
                 this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt)->bagGlobal.gen->supprGenAndStore(id, storeAction, this);
             if (tree)
             {
@@ -1480,7 +1480,7 @@ int Pile_sf2::remove(EltID id, bool permanently, bool storeAction, int *message)
         else
         {
             // Suppression des gens
-            this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt)->bagGlobal.gen = \
+            this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt)->bagGlobal.gen =
                 this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt)->bagGlobal.gen->supprGenAndStore(id, storeAction, this);
             if (tree)
             {
@@ -1511,7 +1511,7 @@ int Pile_sf2::remove(EltID id, bool permanently, bool storeAction, int *message)
             // Ajustement de la numérotation
             this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt)->bag->getElt(id.indexElt2)->decrementerBAG();
             // Suppression des gens
-            this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt)->bag->getElt(id.indexElt2)->gen = \
+            this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt)->bag->getElt(id.indexElt2)->gen =
                 this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt)->bag->getElt(id.indexElt2)->gen->supprGenAndStore(id, storeAction, this);
             // Suppression des éléments graphiques
             if (tree)
@@ -1526,7 +1526,7 @@ int Pile_sf2::remove(EltID id, bool permanently, bool storeAction, int *message)
         else
         {
             // Suppression des gens
-            this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt)->bag->getElt(id.indexElt2)->gen = \
+            this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt)->bag->getElt(id.indexElt2)->gen =
                 this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt)->bag->getElt(id.indexElt2)->gen->supprGenAndStore(id, storeAction, this);
             if (tree)
             {
@@ -1557,7 +1557,7 @@ int Pile_sf2::remove(EltID id, bool permanently, bool storeAction, int *message)
             // Ajustement de la numérotation
             this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt)->bag->getElt(id.indexElt2)->decrementerBAG();
             // Suppression des gens
-            this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt)->bag->getElt(id.indexElt2)->gen = \
+            this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt)->bag->getElt(id.indexElt2)->gen =
                 this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt)->bag->getElt(id.indexElt2)->gen->supprGenAndStore(id, storeAction, this);
             // Suppression des éléments graphiques
             if (tree)
@@ -1572,7 +1572,7 @@ int Pile_sf2::remove(EltID id, bool permanently, bool storeAction, int *message)
         else
         {
             // Suppression des gens
-            this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt)->bag->getElt(id.indexElt2)->gen = \
+            this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt)->bag->getElt(id.indexElt2)->gen =
                 this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt)->bag->getElt(id.indexElt2)->gen->supprGenAndStore(id, storeAction, this);
             if (tree)
             {

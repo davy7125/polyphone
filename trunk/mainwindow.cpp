@@ -518,7 +518,7 @@ void MainWindow::supprimerElt()
     for (int i = nb - 1; i >= 0; i--)
         sf2->remove(ui->arborescence->getID(i), &message);
 
-    if (elementToSelect.typeElement != elementUnknown)
+    if (message == 1 && elementToSelect.typeElement != elementUnknown)
         ui->arborescence->select(elementToSelect, true);
 
     updateActions();
