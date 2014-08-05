@@ -35,6 +35,13 @@ void Pile_sf2::nouveau(QString name)
     this->sf2->getElt(id.indexSf2)->numEdition = this->pileActions->getEdition(id.indexSf2)-1;
     // Modification du nom
     this->set(id, champ_name, name, false);
+
+    // Sélection dans l'arborescence
+    if (tree)
+    {
+        tree->clearSelection();
+        tree->select(id, true);
+    }
 }
 
 int Pile_sf2::ouvrir(QString fileName)
@@ -958,6 +965,13 @@ int Pile_sf2::ouvrir(QString fileName, QDataStream * stream, int &indexSf2, bool
     free(bloc_pdta_pbag);
     free(bloc_pdta_pmod);
     free(bloc_pdta_pgen);
+
+    id.typeElement = elementSf2;
+    if (tree)
+    {
+        tree->clearSelection();
+        tree->select(id, true);
+    }
 
     return 0;
 }

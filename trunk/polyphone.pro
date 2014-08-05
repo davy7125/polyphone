@@ -12,8 +12,6 @@ QT       += core gui printsupport svg
 TARGET = polyphone
 TEMPLATE = app
 
-QMAKE_CXXFLAGS += -mfpmath=387
-
 CONFIG(release, debug|release){
     DESTDIR = RELEASE
     OBJECTS_DIR = RELEASE/.obj
