@@ -46,7 +46,7 @@
 	<key>CFBundleSignature</key>
 	<string>pphn</string>
 	<key>LSMinimumSystemVersion</key>
-	<string>10.8</string>
+	<string>10.6</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
 	<key>NSServices</key>
