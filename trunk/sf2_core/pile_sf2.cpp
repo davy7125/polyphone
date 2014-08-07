@@ -1780,7 +1780,7 @@ int Pile_sf2::set(EltID id, Champ champ, Valeur value, bool storeAction, bool so
             sprintf(num1, "%.3d", i);
             i = tmp->wPreset;
             sprintf(num2, "%.3d", i);
-            sprintf(chaine, "%s:%s %s", num1, num2, tmp->Name);
+            sprintf(chaine, "%s:%s %s", num1, num2, tmp->Name.toStdString().c_str());
             tmp->eltTree->setText(0, chaine);
             tmp->eltTree->setText(5, chaine);
             if (sort)
@@ -1975,7 +1975,7 @@ int Pile_sf2::set(EltID id, Champ champ, QString qStr, bool storeAction, bool so
             // Modification du nom d'un sample
             qOldStr = tmp->Name;
             qStr = qStr.left(20);
-            strcpy(tmp->Name, qStr.toStdString().c_str());
+            tmp->Name = qStr;
             if (tree)
             {
                 // Modification de l'élément graphique
@@ -2024,7 +2024,7 @@ int Pile_sf2::set(EltID id, Champ champ, QString qStr, bool storeAction, bool so
             // Modification du nom d'un instrument
             qOldStr = tmp->Name;
             qStr = qStr.left(20);
-            strcpy(tmp->Name, qStr.toStdString().c_str());
+            tmp->Name = qStr;
             if (tree)
             {
                 // Modification de l'élément graphique
@@ -2073,12 +2073,12 @@ int Pile_sf2::set(EltID id, Champ champ, QString qStr, bool storeAction, bool so
             // Modification du nom d'un preset
             qOldStr = tmp->Name;
             qStr = qStr.left(20);
-            strcpy(tmp->Name, qStr.toStdString().c_str());
+            tmp->Name = qStr;
             if (tree)
             {
                 // Modification de l'élément graphique
                 char chaine[30];
-                sprintf(chaine, "%.3d:%.3d %s", tmp->wBank, tmp->wPreset, tmp->Name);
+                sprintf(chaine, "%.3d:%.3d %s", tmp->wBank, tmp->wPreset, tmp->Name.toStdString().c_str());
                 tmp->eltTree->setText(0, chaine);
                 tmp->eltTree->setText(5, chaine);
                 if (sort)

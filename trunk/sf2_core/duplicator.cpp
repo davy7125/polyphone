@@ -43,7 +43,8 @@ void Duplicator::copy(EltID idSource, EltID idDest)
     if (idDest.typeElement != elementSf2 && idDest.typeElement != elementInst &&
             idDest.typeElement != elementInstSmpl && idDest.typeElement != elementRootInst &&
             idDest.typeElement != elementPrst && idDest.typeElement != elementPrstInst &&
-            idDest.typeElement != elementRootPrst && idDest.typeElement != elementRootSmpl) return;
+            idDest.typeElement != elementRootPrst && idDest.typeElement != elementRootSmpl &&
+            idDest.typeElement != elementSmpl) return;
 
     if (_source == _destination && idSource.indexSf2 == idDest.indexSf2)
     {
@@ -295,6 +296,10 @@ void Duplicator::copySmpl(EltID idSource, EltID idDest)
         idDest.indexElt = _destination->add(idDest);
     }
 
+    // Adaptation éventuelle du nom
+    if (_copieSmpl == DUPLIQUER || _copieSmpl == DUPLIQUER_TOUT)
+        nom = adaptName(nom, idDest);
+
     if (index == -1 || (_copieSmpl != IGNORER && _copieSmpl != IGNORER_TOUT))
     {
         // Configuration du sample
@@ -310,7 +315,7 @@ void Duplicator::copySmpl(EltID idSource, EltID idDest)
         _destination->set(idDest, champ_sfSampleType,       _source->get(idSource, champ_sfSampleType));
         _destination->set(idDest, champ_byOriginalPitch,    _source->get(idSource, champ_byOriginalPitch));
         _destination->set(idDest, champ_chPitchCorrection,  _source->get(idSource, champ_chPitchCorrection));
-        _destination->set(idDest, champ_name,               _source->getQstr(idSource, champ_name).left(20));
+        _destination->set(idDest, champ_name,               nom);
 
         // Lien
         if (_source->get(idSource, champ_sfSampleType).wValue != RomMonoSample &&
@@ -437,6 +442,10 @@ void Duplicator::copyInst(EltID idSource, EltID idDest)
         idDest.indexElt = _destination->add(idDest);
     }
 
+    // Adaptation éventuelle du nom
+    if (_copieInst == DUPLIQUER || _copieInst == DUPLIQUER_TOUT)
+        nom = adaptName(nom, idDest);
+
     // Modification de l'instrument
     if (index == -1 || (_copieInst != IGNORER && _copieInst != IGNORER_TOUT))
     {
@@ -555,6 +564,10 @@ void Duplicator::copyPrst(EltID idSource, EltID idDest)
             _destination->set(idDest, champ_wPreset, val);
         }
     }
+
+    // Adaptation éventuelle du nom
+    if (_copiePrst == DUPLIQUER || _copiePrst == DUPLIQUER_TOUT)
+        nom = adaptName(nom, idDest);
 
     // Modification du preset
     if (idDest.indexElt != -1 && (index == -1 || (_copiePrst != IGNORER && _copiePrst != IGNORER_TOUT)))
@@ -826,4 +839,36 @@ bool Duplicator::isGlobalEmpty(EltID id)
     isEmpty = isEmpty && _destination->count(id, false) == 0;
 
     return isEmpty;
+}
+
+QString Duplicator::adaptName(QString nom, EltID idDest)
+{
+    QStringList listName;
+    int nbElt = _destination->count(idDest);
+    for (int j = 0; j < nbElt; j++)
+    {
+        idDest.indexElt = j;
+        if (!_destination->get(idDest, champ_hidden).bValue)
+            listName << _destination->getQstr(idDest, champ_name);
+    }
+
+    int suffixNumber = 0;
+    while (listName.contains(getName(nom, 20, suffixNumber), Qt::CaseInsensitive) && suffixNumber < 100)
+    {
+        suffixNumber++;
+    }
+    nom = getName(nom, 20, suffixNumber);
+
+    return nom;
+}
+
+QString Duplicator::getName(QString name, int maxCharacters, int suffixNumber)
+{
+    if (suffixNumber == 0)
+        return name.left(maxCharacters);
+    QString suffix = QString::number(suffixNumber);
+    int suffixSize = suffix.length();
+    if (suffixSize > 3 || maxCharacters < suffixSize + 1)
+        return name.left(maxCharacters);
+    return name.left(maxCharacters - suffixSize - 1) + "-" + suffix;
 }
