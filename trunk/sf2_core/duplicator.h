@@ -77,6 +77,8 @@ private:
     EtatMessage openDialog(QString question);
     void reset(EltID idDest);
     bool isGlobalEmpty(EltID id);
+    QString adaptName(QString nom, EltID idDest);
+    static QString getName(QString name, int maxCharacters, int suffixNumber);
 };
 
 #endif // DUPLICATOR_H

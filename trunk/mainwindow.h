@@ -230,6 +230,7 @@ private:
     void setKeyboardType(int val);
     void showKeyboard(bool val);
     QList<QAction *> getListeActions();
+    static QString getName(QString name, int maxCharacters, int suffixNumber);
 
 protected:
     void closeEvent(QCloseEvent *event);

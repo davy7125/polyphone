@@ -725,19 +725,42 @@ QList<int> GroupeParametres::getSampleIndex(Pile_sf2 *sf2, EltID idElt, QString 
     Sound son(fileName, false);
     int nChannels = son.get(champ_wChannels);
     QString nom = QFileInfo(fileName).completeBaseName();
+    QString nom2 = nom;
+
+    // Adaptation du nom, éventuellement
+    int suffixNumber = 0;
+    if (nChannels == 2)
+    {
+        while ((names.contains(getName(nom, 20, suffixNumber, "L"), Qt::CaseInsensitive) ||
+                names.contains(getName(nom, 20, suffixNumber, "R"), Qt::CaseInsensitive)) &&
+               suffixNumber < 100)
+        {
+            suffixNumber++;
+        }
+        nom2 = getName(nom, 20, suffixNumber, "L");
+        nom = getName(nom, 20, suffixNumber, "R");
+    }
+    else
+    {
+        while (names.contains(getName(nom, 20, suffixNumber), Qt::CaseInsensitive) && suffixNumber < 100)
+        {
+            suffixNumber++;
+        }
+        nom = getName(nom, 20, suffixNumber);
+    }
 
     // Création d'un nouveau sample
     Valeur val;
-    for (int i = 0; i < nChannels; i++)
+    for (int numChannel = 0; numChannel < nChannels; numChannel++)
     {
         idElt.indexElt = sf2->add(idElt, false);
         sampleIndex << idElt.indexElt;
         if (nChannels == 2)
         {
-            if (i == 0)
+            if (numChannel == 0)
             {
                 // Gauche
-                sf2->set(idElt, champ_name, nom.left(19).append("L"), false);
+                sf2->set(idElt, champ_name, nom2, false);
                 val.wValue = idElt.indexElt + 1;
                 sf2->set(idElt, champ_wSampleLink, val, false);
                 val.sfLinkValue = leftSample;
@@ -746,7 +769,7 @@ QList<int> GroupeParametres::getSampleIndex(Pile_sf2 *sf2, EltID idElt, QString 
             else
             {
                 // Droite
-                sf2->set(idElt, champ_name, nom.left(19).append("R"), false);
+                sf2->set(idElt, champ_name, nom, false);
                 val.wValue = idElt.indexElt - 1;
                 sf2->set(idElt, champ_wSampleLink, val, false);
                 val.sfLinkValue = rightSample;
@@ -755,7 +778,7 @@ QList<int> GroupeParametres::getSampleIndex(Pile_sf2 *sf2, EltID idElt, QString 
         }
         else
         {
-            sf2->set(idElt, champ_name, QString(nom.left(20)), false);
+            sf2->set(idElt, champ_name, nom, false);
             val.wValue = 0;
             sf2->set(idElt, champ_wSampleLink, val, false);
             val.sfLinkValue = monoSample;
@@ -766,7 +789,7 @@ QList<int> GroupeParametres::getSampleIndex(Pile_sf2 *sf2, EltID idElt, QString 
         sf2->set(idElt, champ_dwStart16, val, false);
         val.dwValue = son.get(champ_dwStart24);
         sf2->set(idElt, champ_dwStart24, val, false);
-        val.wValue = i;
+        val.wValue = numChannel;
         sf2->set(idElt, champ_wChannel, val, false);
         val.dwValue = son.get(champ_dwLength);
         sf2->set(idElt, champ_dwLength, val, false);
@@ -1689,4 +1712,27 @@ Parametre::Parametre(QString opcode, QString valeur) :
     }
     else
         qDebug() << "non pris en charge: " + opcode + " (" + valeur + ")";
+}
+
+
+QString GroupeParametres::getName(QString name, int maxCharacters, int suffixNumber, QString suffix)
+{
+    int suffixSize = suffix.size();
+
+    // Cas où la taille du suffix est supérieure au nombre de caractères max
+    if (suffixSize > maxCharacters)
+        return name.left(maxCharacters);
+
+    // Cas où un numéro n'est pas nécessaire
+    if (suffixNumber == 0)
+        return name.left(maxCharacters - suffixSize) + suffix;
+
+    QString suffixNum = QString::number(suffixNumber);
+    int suffixNumSize = suffixNum.length() + 1;
+
+    // Cas où le suffix numérique est trop grand
+    if (suffixNumSize > 3 || maxCharacters - suffixSize < suffixNumSize)
+        return name.left(maxCharacters - suffixSize) + suffix;
+
+    return name.left(maxCharacters - suffixNumSize - suffixSize) + suffix + "-" + suffixNum;
 }

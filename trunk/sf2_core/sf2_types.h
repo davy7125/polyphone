@@ -82,12 +82,6 @@ public:
         this->indexMod = 0;
     }
 
-    ElementType typeElement;
-    int indexSf2;
-    int indexElt;
-    int indexElt2;
-    int indexMod;
-
     bool operator==(const EltID &other)
     {
         bool ok = true;
@@ -118,6 +112,39 @@ public:
         }
         return ok;
     }
+
+    QString toString()
+    {
+        QString type;
+        switch (typeElement)
+        {
+        case elementSf2: type = "SF2"; break;
+        case elementSmpl: type = "SMPL"; break;
+        case elementInst: type = "INST"; break;
+        case elementPrst: type = "PRST"; break;
+        case elementInstSmpl: type = "InstSmpl"; break;
+        case elementPrstInst: type = "PrstInst"; break;
+        case elementInstMod: type = "InstMod"; break;
+        case elementPrstMod: type = "PrstMod"; break;
+        case elementInstSmplMod: type = "InstSmplMod"; break;
+        case elementPrstInstMod: type = "PrstInstMod"; break;
+        case elementInstGen: type = "InstGen"; break;
+        case elementPrstGen: type = "PrstGen"; break;
+        case elementInstSmplGen: type = "InstSmplGen"; break;
+        case elementPrstInstGen: type = "PrstInstGen"; break;
+        case elementUnknown: type = "Unknown"; break;
+        default: type = "erreur"; break;
+        }
+        return "ID\ntype " + type + "\nsf2  " + QString::number(indexSf2) +
+                "\nElt  " + QString::number(indexElt) + "\nElt2 " + QString::number(indexElt2) +
+                "\nMod  " + QString::number(indexMod);
+    }
+
+    ElementType typeElement;
+    int indexSf2;
+    int indexElt;
+    int indexElt2;
+    int indexMod;
 };
 
 typedef struct sfVersionTag

@@ -213,6 +213,7 @@ private:
     static double d1200e2(int value) { return qPow(2., value / 1200.); }
     static void addSeconds(double value, Champ champ, Pile_sf2 * sf2, EltID id);
     void getKeynumValues(double &baseValue, int &keynum, Parametre::OpCode opCodeKeynum, Parametre::OpCode opCodeBase) const;
+    static QString getName(QString name, int maxCharacters, int suffixNumber, QString suffix = "");
 };
 
 class EnsembleGroupes
