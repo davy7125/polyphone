@@ -1506,6 +1506,40 @@ void MainWindow::importerSmpl(QString path, EltID id, int * replace)
             }
         }
     }
+
+    // Ajustement du nom, s'il est déjà utilisé
+    if (*replace == 0 || *replace == -1)
+    {
+        QStringList listSampleName;
+        int nbSmpl = this->sf2->count(id);
+        for (int j = 0; j < nbSmpl; j++)
+        {
+            id.indexElt = j;
+            if (!this->sf2->get(id, champ_hidden).bValue)
+                listSampleName << this->sf2->getQstr(id, champ_name);
+        }
+
+        int suffixNumber = 0;
+        if (nChannels == 1)
+        {
+            while (listSampleName.contains(getName(nom, 20, suffixNumber), Qt::CaseInsensitive) && suffixNumber < 100)
+            {
+                suffixNumber++;
+            }
+            nom = getName(nom, 20, suffixNumber);
+        }
+        else
+        {
+            while ((listSampleName.contains(getName(nom, 19, suffixNumber) + "L", Qt::CaseInsensitive) ||
+                    listSampleName.contains(getName(nom, 19, suffixNumber) + "R", Qt::CaseInsensitive)) &&
+                   suffixNumber < 100)
+            {
+                suffixNumber++;
+            }
+            nom = getName(nom, 19, suffixNumber);
+        }
+    }
+
     for (int j = 0; j < nChannels; j++)
     {
         if (*replace < 3 || (nChannels == 2 && j == 0 && indexL == -1) ||
@@ -1567,6 +1601,7 @@ void MainWindow::importerSmpl(QString path, EltID id, int * replace)
                 val.dwValue = son->get(champ_dwStart24);
                 this->sf2->set(id, champ_dwStart24, val);
             }
+
             // Configuration du sample
             val.wValue = j;
             this->sf2->set(id, champ_wChannel, val);
@@ -1582,9 +1617,11 @@ void MainWindow::importerSmpl(QString path, EltID id, int * replace)
             this->sf2->set(id, champ_byOriginalPitch, val);
             val.cValue = (char)son->get(champ_chPitchCorrection);
             this->sf2->set(id, champ_chPitchCorrection, val);
+
             // Retrait automatique du blanc au départ ?
             if (this->configuration->getRemoveBlank())
                 this->page_smpl->enleveBlanc(id);
+
             // Ajustement automatique à la boucle ?
             if (this->configuration->getWavAutoLoop())
                 this->page_smpl->enleveFin(id);
@@ -1600,6 +1637,16 @@ void MainWindow::importerSmpl(QString path, EltID id, int * replace)
         }
     }
     delete son;
+}
+QString MainWindow::getName(QString name, int maxCharacters, int suffixNumber)
+{
+    if (suffixNumber == 0)
+        return name.left(maxCharacters);
+    QString suffix = QString::number(suffixNumber);
+    int suffixSize = suffix.length();
+    if (suffixSize > 3 || maxCharacters < suffixSize + 1)
+        return name.left(maxCharacters);
+    return name.left(maxCharacters - suffixSize - 1) + "-" + suffix;
 }
 void MainWindow::exporterSmpl()
 {

@@ -180,7 +180,7 @@ private:
             {
                 delete suivant;
             }
-            char Name[21];
+            QString Name;
             Sound son;
             WORD wSampleLink;
             SFSampleLink sfSampleType;
@@ -198,7 +198,7 @@ private:
         {
         public:
             // ATTRIBUTS DE INST
-            char Name[21];
+            QString Name;
             BAG *bag;
             BAG bagGlobal;
             QTreeWidgetItem *eltTree;
@@ -220,7 +220,7 @@ private:
         {
         public:
             // ATTRIBUTS DE PRST
-            char Name[21];
+            QString Name;
             WORD wPreset;
             WORD wBank;
             DWORD dwLibrary;
