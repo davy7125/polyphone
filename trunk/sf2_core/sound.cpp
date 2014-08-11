@@ -2077,6 +2077,8 @@ QVector<float> Sound::correlation(const QVector<float> fData, DWORD dwSmplRate, 
 
     // Calcul de la corrélation
     QVector<float> vectCorrel;
+    if (dMax - dMin + 1 <= 0)
+        return vectCorrel;
     vectCorrel.resize(dMax - dMin + 1);
 
     double qTmp;
@@ -2244,6 +2246,9 @@ QByteArray Sound::sifflements(QByteArray baData, DWORD dwSmplRate, WORD wBps, do
 
 QList<int> Sound::findMins(QVector<float> vectData, int maxNb, double minFrac)
 {
+    if (vectData.isEmpty())
+        return QList<int>();
+
     // Calcul mini maxi
     float mini = vectData[0], maxi = vectData[0];
     for (qint32 i = 1; i < vectData.size(); i++)
@@ -2274,6 +2279,9 @@ QList<int> Sound::findMins(QVector<float> vectData, int maxNb, double minFrac)
 }
 QList<quint32> Sound::findMax(QVector<float> vectData, int maxNb, double minFrac)
 {
+    if (vectData.isEmpty())
+        return QList<quint32>();
+
     // Calcul mini maxi
     float mini = vectData[0], maxi = vectData[0];
     for (qint32 i = 1; i < vectData.size(); i++)
