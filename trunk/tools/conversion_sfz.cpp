@@ -712,6 +712,7 @@ ParamListe::ParamListe(Pile_sf2 * sf2, ParamListe * paramPrst, EltID idInst)
                         _boucleGlobale = -1;
                 }
             }
+            idInst.typeElement = elementInst;
         }
 
         if (_boucleGlobale >= 0)
