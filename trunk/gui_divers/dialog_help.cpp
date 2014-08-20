@@ -161,6 +161,7 @@ void DialogHelp::fillTree()
     createItem(trUtf8("Paramétrage global"), "5-1-4", level2);
     createItem(trUtf8("Répartition automatique"), "5-1-5", level2);
     createItem(trUtf8("Spatialisation du son"), "5-1-6", level2);
+    createItem(trUtf8("Transposition"), "5-1-8", level2);
     createItem(trUtf8("Visualiseur"), "5-1-7", level2);
 
     level2 = createItem(trUtf8("Presets"), "5-2", level1);

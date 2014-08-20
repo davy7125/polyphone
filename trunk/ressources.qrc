@@ -78,6 +78,7 @@
         <file alias="csv">ressources/csv.png</file>
         <file alias="double-arrow">ressources/double-arrow.png</file>
         <file alias="auto">ressources/auto.png</file>
+        <file alias="transposer_inst">ressources/transposer_inst.png</file>
     </qresource>
     <qresource prefix="/aide">
         <file alias="page0.png">ressources/doc/page 0.png</file>
@@ -275,6 +276,8 @@
         <file alias="8-2fr.html">ressources/doc/8-tutoriel/8-2fr.html</file>
         <file alias="8en.html">ressources/doc/8-tutoriel/8en.html</file>
         <file alias="8fr.html">ressources/doc/8-tutoriel/8fr.html</file>
+        <file alias="5-1-8en.html">ressources/doc/5-tools/1-instruments/5-1-8en.html</file>
+        <file alias="5-1-8fr.html">ressources/doc/5-tools/1-instruments/5-1-8fr.html</file>
     </qresource>
     <qresource prefix="/traductions">
         <file alias="polyphone_en.qm">ressources/traductions/polyphone_en.qm</file>

@@ -44,6 +44,7 @@ public:
     void repartitionAuto();
     void mixture();
     void release();
+    void transposer();
 
 private slots:
     void mixture(QList<QList<int> > listeParam, QString nomInst, bool bouclage, int freq, bool stereo);
