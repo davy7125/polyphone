@@ -868,7 +868,8 @@ QList<QAction *> MainWindow::getListeActions()
                 << ui->action_Visualiseur
                 << ui->actionExporter_en_tant_qu_sfz
                 << ui->action_Dissocier_les_samples_st_r_o
-                << ui->actionExporter_pics_de_fr_quence;
+                << ui->actionExporter_pics_de_fr_quence
+                << ui->action_Transposer;
     return listeAction;
 }
 void MainWindow::setListeActions(QList<QAction *> listeActions)
@@ -2073,6 +2074,10 @@ void MainWindow::spatialisation()
         this->page_inst->spatialisation();
     else if (type == elementPrst || type == elementPrstInst)
         this->page_prst->spatialisation();
+}
+void MainWindow::on_action_Transposer_triggered()
+{
+    this->page_inst->transposer();
 }
 void MainWindow::visualize()
 {

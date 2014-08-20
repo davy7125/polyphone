@@ -280,6 +280,7 @@
      <addaction name="action_Param_trage_global"/>
      <addaction name="action_R_partition_automatique"/>
      <addaction name="actionSpacialisation_du_son"/>
+     <addaction name="action_Transposer"/>
      <addaction name="action_Visualiseur"/>
     </widget>
     <widget class="QMenu" name="menuPreset">
@@ -1450,6 +1451,21 @@
    </property>
    <property name="text">
     <string>&amp;Flottant</string>
+   </property>
+  </action>
+  <action name="action_Transposer">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="ressources.qrc">
+     <normaloff>:/icones/transposer_inst</normaloff>:/icones/transposer_inst</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Transposition...</string>
+   </property>
+   <property name="toolTip">
+    <string>Transpose tous les échantillons d'un instrument</string>
    </property>
   </action>
  </widget>
