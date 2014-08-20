@@ -1,3 +1,10 @@
+polyphone (1.5) unstable; urgency=low
+
+ * transposition tool
+
+ -- Davy Triponney <davy.triponney@gmail.com>  Thu, 7 Aug 2014 18:55:20 +0100
+
+
 polyphone (1.4) unstable; urgency=low
 
  * faster loading step and count of used / unused elements
@@ -17,7 +24,7 @@ polyphone (1.4) unstable; urgency=low
  * (fix) the commands "replace all", "ignore all", "duplicate all" are now memorized
  * (fix) bug when editing an element hidden by the filter in the tree
 
--- Davy Triponney <davy.triponney@gmail.com>  Thu, 7 Aug 2014 18:55:20 +0100
+ -- Davy Triponney <davy.triponney@gmail.com>  Thu, 7 Aug 2014 18:55:20 +0100
 
 
 polyphone (1.3) UNRELEASED; urgency=low

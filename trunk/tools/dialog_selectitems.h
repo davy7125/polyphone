@@ -37,7 +37,7 @@ class DialogSelectItems : public QDialog
     Q_OBJECT
     
 public:
-    explicit DialogSelectItems(EltID id, QList<EltID> listChecked, Pile_sf2 *sf2, QWidget *parent = 0);
+    DialogSelectItems(EltID id, QList<EltID> listChecked, Pile_sf2 *sf2, QWidget *parent = 0);
     ~DialogSelectItems();
 
 private slots:

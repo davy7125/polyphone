@@ -38,8 +38,10 @@ DialogParamGlobal::DialogParamGlobal(Pile_sf2 *sf2, EltID id, QWidget *parent) :
     // Initialisation liste des champs
     QList<Champ> listeDesChamps;
     listeDesChamps << champ_initialAttenuation
-                   << champ_pan
-                   << champ_coarseTune
+                   << champ_pan;
+    if (id.typeElement == elementInst || id.typeElement == elementInstSmpl)
+        listeDesChamps << champ_overridingRootKey;
+    listeDesChamps << champ_coarseTune
                    << champ_fineTune
                    << champ_scaleTuning
                    << champ_initialFilterFc
