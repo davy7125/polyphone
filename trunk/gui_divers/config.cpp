@@ -130,7 +130,7 @@ Config::Config(QWidget *parent, PianoKeybdCustom *keyboard) : QDialog(parent),
         this->keyboardType = 1;
     //ui->comboRam->setVisible(false); // Temporaire : tout charger dans la ram n'apporte rien pour l'instant (sur linux)
     //ui->label_2->setVisible(false);
-    this->setColors();
+    QTimer::singleShot(1, this, SLOT(setColors())); // trick that fixes a bug which appeared with Qt5
 
     // Initialisation mappage
     octaveMapping = this->getOctaveMap();
@@ -1028,7 +1028,9 @@ void Config::initComboLanguage()
     QString locale = QLocale::system().name().section('_', 0, 0);
     locale = settings.value("language", locale).toString();
     ui->comboLangue->blockSignals(true);
-    if (locale == "fr")
+    if (locale == "it")
+        ui->comboLangue->setCurrentIndex(3);
+    else if (locale == "fr")
         ui->comboLangue->setCurrentIndex(2);
     else if (locale == "es")
         ui->comboLangue->setCurrentIndex(1);
@@ -1052,6 +1054,10 @@ void Config::on_comboLangue_currentIndexChanged(int index)
     case 2:
         // Français
         settings.setValue("language", "fr");
+        break;
+    case 3:
+        // Italy
+        settings.setValue("language", "it");
         break;
     default:
         // Anglais

@@ -26,7 +26,7 @@
 #define DIALOG_ABOUT_H
 
 #include <QDialog>
-#define VERSION "1.4"
+#define VERSION "1.5"
 
 namespace Ui {
 class DialogAbout;
