@@ -1714,7 +1714,6 @@ Parametre::Parametre(QString opcode, QString valeur) :
         qDebug() << "non pris en charge: " + opcode + " (" + valeur + ")";
 }
 
-
 QString GroupeParametres::getName(QString name, int maxCharacters, int suffixNumber, QString suffix)
 {
     int suffixSize = suffix.size();
