@@ -635,7 +635,7 @@ void Sound::getInfoSoundWav(bool tryFindRootkey)
 }
 void Sound::getInfoSoundWav(QByteArray baData, bool tryFindRootkey)
 {
-    int taille, taille2, pos;
+    int taille, pos;
     if (strcmp("RIFF", baData.left(4)))
     {
         QMessageBox::warning(_parent, QObject::trUtf8("Attention"), QObject::trUtf8("Le fichier est corrompu."));
@@ -658,13 +658,17 @@ void Sound::getInfoSoundWav(QByteArray baData, bool tryFindRootkey)
     bool rootKeyOk = false;
     while (pos < baData.size()-8)
     {
-        if (!strcmp("fmt ", baData.mid(pos, 4)))
+        QString section = baData.mid(pos, 4);
+        pos += 4;
+        int sectionSize = readDWORD(baData, pos);
+        if (sectionSize % 2 != 0)
+            sectionSize++;
+        pos += 4;
+
+        if (section == "fmt ")
         {
-            pos += 4;
             // informations concernant le signal audio
-            taille2 = readDWORD(baData, pos);
-            pos += 4;
-            if (taille2 < 16 || taille2 > 40)
+            if (sectionSize < 16 || sectionSize > 40)
             {
                 QMessageBox::warning(_parent, QObject::trUtf8("Attention"), QObject::trUtf8("Le fichier est corrompu."));
                 return;
@@ -676,15 +680,11 @@ void Sound::getInfoSoundWav(QByteArray baData, bool tryFindRootkey)
             if (_info.wBpsFile < 16)
                 QMessageBox::warning(_parent, QObject::trUtf8("Attention"),
                                      QObject::trUtf8("Résolution insuffisante"));
-            pos += taille2;
         }
-        else if (!strcmp("smpl", baData.mid(pos, 4)))
+        else if (section == "smpl")
         {
-            pos += 4;
-            taille2 = readDWORD(baData, pos);
-            pos += 4;
             // informations sur le sample
-            if (taille2 >= 36)
+            if (sectionSize >= 36)
             {
                 // numéro note
                 _info.dwNote = readDWORD(baData, pos + 12);
@@ -696,32 +696,23 @@ void Sound::getInfoSoundWav(QByteArray baData, bool tryFindRootkey)
                 _info.iCent = (int)readDWORD(baData, pos + 16);
                 _info.iCent = qRound((double)_info.iCent / 2147483648. * 50.);
             }
-            if (taille2 >= 60)
+            if (sectionSize >= 60)
             {
                 // boucle
                 _info.dwStartLoop = readDWORD(baData, pos + 44);
                 _info.dwEndLoop = readDWORD(baData, pos + 48) + 1;
             }
-            pos += taille2;
         }
-        else if (!strcmp("data", baData.mid(pos, 4)))
+        else if (section == "data")
         {
-            pos += 4;
-            taille2 = readDWORD(baData, pos);
-            pos += 4;
-            if (taille2 == 0) taille2 = baData.size() - pos;
+            if (sectionSize == 0) sectionSize = baData.size() - pos;
             _info.dwStart = pos;
             if (_info.wBpsFile != 0 && _info.wChannels != 0)
-                _info.dwLength = qMin(taille2, baData.size() - pos) / (_info.wBpsFile * _info.wChannels / 8);
-            pos += taille2;
+                _info.dwLength = qMin(sectionSize, baData.size() - pos) / (_info.wBpsFile * _info.wChannels / 8);
         }
-        else
-        {
-            pos += 4;
-            // On saute la section
-            taille2 = readDWORD(baData, pos);
-            pos += taille2 + 4;
-        }
+
+        // Mise à jour de la position
+        pos += sectionSize;
     }
     if (!rootKeyOk && tryFindRootkey)
         determineRootKey();
@@ -1382,8 +1373,8 @@ Complex * Sound::FFT(Complex * x, int N)
     int k;
     for (k = 0; k != N; ++k)
     {
-        twiddles[k].real() = cos(-2.0*PI*k/N);
-        twiddles[k].imag() = sin(-2.0*PI*k/N);
+        twiddles[k].real() = cos(-2.0 * M_PI * k / N);
+        twiddles[k].imag() = sin(-2.0 * M_PI * k / N);
     }
     FFT_calculate(x, N, out, scratch, twiddles);
     delete [] twiddles;
@@ -1398,8 +1389,8 @@ Complex * Sound::IFFT(Complex * x, int N)
     int k;
     for (k = 0; k != N; ++k)
     {
-        twiddles[k].real() = cos(2.0*PI*k/N);
-        twiddles[k].imag() = sin(2.0*PI*k/N);
+        twiddles[k].real() = cos(2.0 * M_PI * k / N);
+        twiddles[k].imag() = sin(2.0 * M_PI * k / N);
     }
     FFT_calculate(x, N, out, scratch, twiddles);
     delete [] twiddles;
@@ -2643,7 +2634,7 @@ void Sound::KBDWindow(double* window, int size, double alpha)
     }
 
     // need to add one more value to the nomalization factor at size/2:
-    sumvalue += BesselI0(PI * alpha * sqrt(1. - pow(4.0*(size/2) / size-1., 2)));
+    sumvalue += BesselI0(M_PI * alpha * sqrt(1. - pow(4.0*(size/2) / size-1., 2)));
 
     // normalize the window and fill in the righthand side of the window:
     for (i = 0; i < size/2; i++)
