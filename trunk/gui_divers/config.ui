@@ -9,8 +9,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>450</width>
-    <height>288</height>
+    <width>470</width>
+    <height>315</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -46,7 +46,16 @@
        <string>Général</string>
       </attribute>
       <layout class="QGridLayout" name="gridLayout_2">
-       <property name="margin">
+       <property name="leftMargin">
+        <number>6</number>
+       </property>
+       <property name="topMargin">
+        <number>6</number>
+       </property>
+       <property name="rightMargin">
+        <number>6</number>
+       </property>
+       <property name="bottomMargin">
         <number>6</number>
        </property>
        <property name="verticalSpacing">
@@ -215,6 +224,11 @@
             <item>
              <property name="text">
               <string notr="true">Français</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string notr="true">Italiano</string>
              </property>
             </item>
            </widget>
@@ -391,7 +405,16 @@
        <string>Synthétiseur</string>
       </attribute>
       <layout class="QHBoxLayout" name="horizontalLayout_3">
-       <property name="margin">
+       <property name="leftMargin">
+        <number>6</number>
+       </property>
+       <property name="topMargin">
+        <number>6</number>
+       </property>
+       <property name="rightMargin">
+        <number>6</number>
+       </property>
+       <property name="bottomMargin">
         <number>6</number>
        </property>
        <item>
@@ -1280,7 +1303,16 @@
        <string>Barre d'outils</string>
       </attribute>
       <layout class="QHBoxLayout" name="horizontalLayout_2">
-       <property name="margin">
+       <property name="leftMargin">
+        <number>6</number>
+       </property>
+       <property name="topMargin">
+        <number>6</number>
+       </property>
+       <property name="rightMargin">
+        <number>6</number>
+       </property>
+       <property name="bottomMargin">
         <number>6</number>
        </property>
        <item>
@@ -1555,7 +1587,16 @@
        <string>Clavier</string>
       </attribute>
       <layout class="QGridLayout" name="gridLayout_8">
-       <property name="margin">
+       <property name="leftMargin">
+        <number>6</number>
+       </property>
+       <property name="topMargin">
+        <number>6</number>
+       </property>
+       <property name="rightMargin">
+        <number>6</number>
+       </property>
+       <property name="bottomMargin">
         <number>6</number>
        </property>
        <item row="0" column="0" colspan="9">
