@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>700</width>
-    <height>456</height>
+    <width>607</width>
+    <height>385</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -435,7 +435,7 @@
      <property name="frameShadow">
       <enum>QFrame::Raised</enum>
      </property>
-     <layout class="QGridLayout" name="gridLayout_2" rowstretch="1,2,1,0" columnstretch="100,1,1,1,1,1,1" columnminimumwidth="0,0,0,24,24,0,0">
+     <layout class="QGridLayout" name="gridLayout_2" rowstretch="1,0,0,0" columnstretch="100,0,0,0,0,0,0">
       <property name="leftMargin">
        <number>0</number>
       </property>
@@ -454,6 +454,74 @@
       <property name="verticalSpacing">
        <number>2</number>
       </property>
+      <item row="0" column="3">
+       <widget class="QPushButton" name="pushNouveauMod">
+        <property name="minimumSize">
+         <size>
+          <width>24</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>24</width>
+          <height>24</height>
+         </size>
+        </property>
+        <property name="toolTip">
+         <string>Ajoute un modulateur</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset resource="../ressources.qrc">
+          <normaloff>:/icones/add</normaloff>:/icones/add</iconset>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="2">
+       <spacer name="horizontalSpacer">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>10</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item row="0" column="0">
+       <widget class="QLabel" name="label">
+        <property name="font">
+         <font>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>Modulateurs</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="2">
+       <spacer name="verticalSpacer">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+        <property name="sizeType">
+         <enum>QSizePolicy::Fixed</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>20</width>
+          <height>0</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
       <item row="0" column="4">
        <widget class="QPushButton" name="pushSupprimerMod">
         <property name="minimumSize">
@@ -477,6 +545,32 @@
         <property name="icon">
          <iconset resource="../ressources.qrc">
           <normaloff>:/icones/remove</normaloff>:/icones/remove</iconset>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="6">
+       <widget class="QPushButton" name="pushPasteMod">
+        <property name="maximumSize">
+         <size>
+          <width>24</width>
+          <height>24</height>
+         </size>
+        </property>
+        <property name="toolTip">
+         <string>Colle les modulateurs copiés</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset resource="../ressources.qrc">
+          <normaloff>:/icones/paste</normaloff>:/icones/paste</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>22</width>
+          <height>22</height>
+         </size>
         </property>
        </widget>
       </item>
@@ -632,51 +726,12 @@
         </layout>
        </widget>
       </item>
-      <item row="0" column="2">
-       <spacer name="horizontalSpacer">
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>10</width>
-          <height>20</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item row="0" column="6">
-       <widget class="QPushButton" name="pushPasteMod">
-        <property name="maximumSize">
-         <size>
-          <width>24</width>
-          <height>24</height>
-         </size>
-        </property>
-        <property name="toolTip">
-         <string>Colle les modulateurs copiés</string>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-        <property name="icon">
-         <iconset resource="../ressources.qrc">
-          <normaloff>:/icones/paste</normaloff>:/icones/paste</iconset>
-        </property>
-        <property name="iconSize">
-         <size>
-          <width>22</width>
-          <height>22</height>
-         </size>
-        </property>
-       </widget>
-      </item>
       <item row="3" column="2" colspan="5">
        <widget class="QGroupBox" name="groupBox">
         <property name="title">
          <string>Destination</string>
         </property>
-        <layout class="QGridLayout" name="gridLayout_5">
+        <layout class="QGridLayout" name="gridLayout">
          <property name="leftMargin">
           <number>0</number>
          </property>
@@ -688,9 +743,6 @@
          </property>
          <property name="bottomMargin">
           <number>0</number>
-         </property>
-         <property name="horizontalSpacing">
-          <number>6</number>
          </property>
          <property name="verticalSpacing">
           <number>2</number>
@@ -733,45 +785,6 @@
         </layout>
        </widget>
       </item>
-      <item row="0" column="0">
-       <widget class="QLabel" name="label">
-        <property name="font">
-         <font>
-          <weight>75</weight>
-          <bold>true</bold>
-         </font>
-        </property>
-        <property name="text">
-         <string>Modulateurs</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="3">
-       <widget class="QPushButton" name="pushNouveauMod">
-        <property name="minimumSize">
-         <size>
-          <width>24</width>
-          <height>0</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>24</width>
-          <height>24</height>
-         </size>
-        </property>
-        <property name="toolTip">
-         <string>Ajoute un modulateur</string>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-        <property name="icon">
-         <iconset resource="../ressources.qrc">
-          <normaloff>:/icones/add</normaloff>:/icones/add</iconset>
-        </property>
-       </widget>
-      </item>
       <item row="0" column="5">
        <widget class="QPushButton" name="pushCopyMod">
         <property name="maximumSize">
@@ -797,22 +810,6 @@
          </size>
         </property>
        </widget>
-      </item>
-      <item row="1" column="2">
-       <spacer name="verticalSpacer">
-        <property name="orientation">
-         <enum>Qt::Vertical</enum>
-        </property>
-        <property name="sizeType">
-         <enum>QSizePolicy::Fixed</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>20</width>
-          <height>0</height>
-         </size>
-        </property>
-       </spacer>
       </item>
       <item row="1" column="0" rowspan="3" colspan="2">
        <widget class="TableWidgetMod" name="tableMod">

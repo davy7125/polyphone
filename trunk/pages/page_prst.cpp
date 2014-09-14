@@ -25,10 +25,12 @@
 #include "page_prst.h"
 #include "ui_page_prst.h"
 #include "mainwindow.h"
+#include <QMenu>
 
 // Constructeur, destructeur
 Page_Prst::Page_Prst(QWidget *parent) :
-    PageTable(PAGE_PRST, parent),  ui(new Ui::Page_Prst)
+    PageTable(PAGE_PRST, parent),
+    ui(new Ui::Page_Prst)
 {
     ui->setupUi(this);
     this->contenant = elementPrst;
@@ -38,17 +40,18 @@ Page_Prst::Page_Prst(QWidget *parent) :
     this->lien = elementPrstInst;
     this->lienGen = elementPrstInstGen;
     this->lienMod = elementPrstInstMod;
-    this->table = this->ui->tablePrst;
-    this->tableMod = this->ui->tableMod;
-    this->spinAmount = this->ui->spinSource2;
-    this->checkAbs = this->ui->checkAbs;
-    this->pushNouveauMod = this->ui->pushNouveauMod;
-    this->pushSupprimerMod = this->ui->pushSupprimerMod;
-    this->comboSource1Courbe = this->ui->comboCourbeSource1;
-    this->comboSource2Courbe = this->ui->comboCourbeSource2;
-    this->comboSource1 = this->ui->comboSource1;
-    this->comboSource2 = this->ui->comboSource2;
-    this->comboDestination = this->ui->comboDestination;
+    this->table = ui->tablePrst;
+    this->tableMod = ui->tableMod;
+    this->spinAmount = ui->spinSource2;
+    this->checkAbs = ui->checkAbs;
+    this->pushNouveauMod = ui->pushNouveauMod;
+    this->pushSupprimerMod = ui->pushSupprimerMod;
+    this->comboSource1Courbe = ui->comboCourbeSource1;
+    this->comboSource2Courbe = ui->comboCourbeSource2;
+    this->comboSource1 = ui->comboSource1;
+    this->comboSource2 = ui->comboSource2;
+    this->comboDestination = ui->comboDestination;
+    _pushCopyMod = ui->pushCopyMod;
 
     // Remplissage de comboDestination
     for (int i = 0; i < 35; i++)
@@ -62,6 +65,11 @@ Page_Prst::Page_Prst(QWidget *parent) :
     // Initialisation spinBoxes
     this->ui->spinBank->init(this);
     this->ui->spinPreset->init(this);
+
+    // Initialisation menu de copie de modulateurs
+    _menu = new QMenu();
+    _menu->addAction(trUtf8("Copier l'ensemble des modulateurs"), this, SLOT(copyMod()));
+    _menu->addAction(trUtf8("Appliquer les modulateurs à tous les presets"), this, SLOT(duplicateMod()));
 
 #ifdef Q_OS_MAC
     this->table->setStyleSheet("QHeaderView::section:horizontal{padding: 4px 10px 4px 10px;}");
@@ -81,7 +89,7 @@ void Page_Prst::setModVisible(bool visible)
 void Page_Prst::afficher()
 {
     PageTable::afficher();
-    EltID id = this->tree->getID(0);
+    EltID id = this->tree->getFirstID();
     id.typeElement = elementPrst;
     this->preparation = 1;
     this->ui->spinBank->setValue(this->sf2->get(id, champ_wBank).wValue);
@@ -92,11 +100,9 @@ void Page_Prst::afficher()
 
 // TableWidgetPrst
 TableWidgetPrst::TableWidgetPrst(QWidget *parent) : TableWidget(parent)
-{
-}
+{}
 TableWidgetPrst::~TableWidgetPrst()
-{
-}
+{}
 
 int TableWidgetPrst::getRow(WORD champ)
 {
@@ -192,7 +198,7 @@ Champ TableWidgetPrst::getChamp(int row)
 
 void Page_Prst::spinUpDown(int steps, SpinBox *spin)
 {
-    EltID id = this->tree->getID(0);
+    EltID id = this->tree->getFirstID();
     id.typeElement = elementPrst;
     int increment;
     if (steps > 0)
@@ -232,7 +238,7 @@ void Page_Prst::setBank()
     if (this->preparation) return;
     this->preparation = 1;
     // Comparaison avec valeur précédente
-    EltID id = this->tree->getID(0);
+    EltID id = this->tree->getFirstID();
     id.typeElement = elementPrst;
     int initVal = this->ui->spinBank->value();
     if (this->sf2->get(id, champ_wBank).wValue != initVal)
@@ -269,7 +275,7 @@ void Page_Prst::setBank()
             val.wValue = initVal;
             this->sf2->prepareNewActions();
             // Reprise de l'identificateur si modification
-            id = this->tree->getID(0);
+            id = this->tree->getFirstID();
             id.typeElement = elementPrst;
             this->sf2->set(id, champ_wBank, val);
             this->mainWindow->updateDo();
@@ -288,7 +294,7 @@ void Page_Prst::setPreset()
     if (this->preparation) return;
     this->preparation = 1;
     // Comparaison avec valeur précédente
-    EltID id = this->tree->getID(0);
+    EltID id = this->tree->getFirstID();
     id.typeElement = elementPrst;
     int initVal = this->ui->spinPreset->value();
     if (this->sf2->get(id, champ_wPreset).wValue != initVal)
@@ -304,7 +310,7 @@ void Page_Prst::setPreset()
             val.wValue = initVal;
             this->sf2->prepareNewActions();
             // Reprise de l'identificateur si modification
-            id = this->tree->getID(0);
+            id = this->tree->getFirstID();
             id.typeElement = elementPrst;
             this->sf2->set(id, champ_wPreset, val);
             this->mainWindow->updateDo();
