@@ -345,7 +345,7 @@ void Tree::clicTree()
     bool fichierUnique = 1;
     bool familleUnique = 1;
     bool typeUnique = 1;
-    ElementType type;
+    ElementType type = elementUnknown;
     EltID id;
 
     // Caractéristiques de la sélection
@@ -359,12 +359,13 @@ void Tree::clicTree()
     else
     {
         // Au moins un élément est sélectionné
-        id = this->getID(0);
+        id = this->getFirstID();
         type = id.typeElement;
         fichierUnique = this->isSelectedItemsSf2Unique();
         typeUnique = this->isSelectedItemsTypeUnique();
         familleUnique = this->isSelectedItemsFamilyUnique();
     }
+
     if (fichierUnique)
     {
         // Actions possibles : fermer, nouveau sample, instrument, preset
@@ -434,6 +435,7 @@ void Tree::clicTree()
         menuArborescence->renommer->setEnabled(false);
         menuArborescence->remplacer->setEnabled(false);
     }
+
     // Activation, désactivation des actions de MainWindow
     this->mainWindow->updateActions();
 }
@@ -468,10 +470,17 @@ unsigned int Tree::getSelectedItemsNumber() {if (this->updateNext) updateSelecti
 bool Tree::isSelectedItemsTypeUnique() {if (this->updateNext) updateSelectionInfo(); return infoIsSelectedItemsTypeUnique;}
 bool Tree::isSelectedItemsSf2Unique() {if (this->updateNext) updateSelectionInfo(); return this->infoIsSelectedItemsSf2Unique;}
 bool Tree::isSelectedItemsFamilyUnique() {if (this->updateNext) updateSelectionInfo(); return this->infoIsSelectedItemsFamilyUnique;}
-EltID Tree::getID(unsigned int pos)
+EltID Tree::getFirstID()
 {
-    QTreeWidgetItem *Elt = this->selectedItem(pos);
-    return this->getItemID(Elt);
+    return this->getItemID(this->selectedItem(0));
+}
+QList<EltID> Tree::getAllIDs()
+{
+    QList<EltID> listRet;
+    QList<QTreeWidgetItem *> items = this->selectedItems();
+    foreach (QTreeWidgetItem * item, items)
+        listRet << this->getItemID(item);
+    return listRet;
 }
 
 EltID Tree::getNextID(bool closeFile)
@@ -498,7 +507,7 @@ EltID Tree::getNextID(bool closeFile)
         if (listSf2.size() >= 2)
         {
             // Sf2 sélectionné actuellement
-            EltID idCurrentSf2 = getID(0);
+            EltID idCurrentSf2 = getFirstID();
             idCurrentSf2.typeElement = elementSf2;
 
             // Prochain sf2
@@ -754,25 +763,17 @@ EltID Tree::getElementToSelectAfterDeletion()
     // Liste des éléments sélectionnés (ne doit pas être vide)
     QList<QTreeWidgetItem *> listSelectedItems = this->selectedItems();
     if (listSelectedItems.isEmpty())
-    {
-        qDebug() << "selection vide";
         return EltID();
-    }
 
     // Vérification que le parent est le même pour tous les éléments
     QTreeWidgetItem * itemParent = listSelectedItems.first()->parent();
     if (!itemParent)
-    {
-        qDebug() << "pas de parent";
         return EltID();
-    }
+
     foreach (QTreeWidgetItem * item, listSelectedItems)
     {
         if (item->parent() != itemParent)
-        {
-            qDebug() << "pas le meme parent";
             return EltID();
-        }
     }
 
     // Récupération de la liste des enfants
@@ -789,9 +790,6 @@ EltID Tree::getElementToSelectAfterDeletion()
     // Suppression de toutes les occurences des éléments sélectionnés dans la 1ère liste
     foreach (QTreeWidgetItem * item, listSelectedItems)
         listDebut.removeAll(item);
-
-    if (listDebut.isEmpty())
-        qDebug() << "liste debut vide";
 
     // Détermination de l'élément à sélectionner
     QTreeWidgetItem * itemToSelect = itemParent;
@@ -829,8 +827,7 @@ void Tree::keyPressEvent(QKeyEvent *event)
                 mainWindow->updateDo();
 
                 // Copie des éléments
-                for (int i = 0; i < nbElt; i++)
-                    this->idList << this->getID(i);
+                this->idList = this->getAllIDs();
             }
         }
     }
@@ -838,7 +835,7 @@ void Tree::keyPressEvent(QKeyEvent *event)
     {
         mainWindow->prepareNewAction();
         if (this->getSelectedItemsNumber() == 1 && this->idList.size())
-            mainWindow->dragAndDrop(this->getID(0), this->idList);
+            mainWindow->dragAndDrop(this->getFirstID(), this->idList);
         mainWindow->updateDo();
     }
     else if (event->key() == Qt::Key_Space)
@@ -886,10 +883,7 @@ void Tree::dropEvent(QDropEvent *event)
         EltID idDest = this->getItemID(this->itemAt(event->pos()));
 
         // Constitution de la liste des éléments à copier / lier
-        int nbElt = this->selectedItems().count();
-        QList<EltID> liste;
-        for (int i = 0; i < nbElt; i++)
-            liste << this->getID(i);
+        QList<EltID> liste = this->getAllIDs();
 
         mainWindow->dragAndDrop(idDest, liste);
     }
