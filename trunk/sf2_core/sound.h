@@ -30,7 +30,7 @@
 using namespace std;
 typedef complex<double> Complex;
 
-#define PI  3.1415926535897932
+
 
 class Sound
 {
@@ -78,6 +78,7 @@ public:
     static qint32 max(QByteArray baData, WORD wBps);
     static double moyenneCarre(QByteArray baData, WORD wBps);
     static int lastLettersToRemove(QString str1, QString str2);
+
 private:
     // Structure de données pour informations sur un sample
     typedef struct infoSound
