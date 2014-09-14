@@ -1,7 +1,7 @@
 /***************************************************************************
 **                                                                        **
 **  Polyphone, a soundfont editor                                         **
-**  Copyright (C) 2013-2014 Davy Triponney                                **
+**  Copyright (C) 2014 Davy Triponney                                     **
 **                                                                        **
 **  This program is free software: you can redistribute it and/or modify  **
 **  it under the terms of the GNU General Public License as published by  **
@@ -24,15 +24,16 @@
 
 #include "sfarkfilemanager.h"
 
+#include <QFile>
+#include <QDataStream>
+
 int SfArkFileManager::_maxFileHandler = 0;
 
 SfArkFileManager::SfArkFileManager()
-{
-}
+{}
 
 SfArkFileManager::~SfArkFileManager()
 {
-    // Destruction des tous les éléments
     QList<int> keys = _mapDataStream.keys();
     foreach (int key, keys)
         delete _mapDataStream.take(key);
@@ -51,7 +52,7 @@ SfArkFileManager::~SfArkFileManager()
 }
 
 // Return file handler if success, otherwise -1
-int SfArkFileManager::openReadOnly(QString name)
+int SfArkFileManager::openReadOnly(const char * name)
 {
     int handler = _maxFileHandler;
     if (_mapName.contains(name))
@@ -81,7 +82,7 @@ int SfArkFileManager::openReadOnly(QString name)
 }
 
 // Return file handler
-int SfArkFileManager::create(QString name)
+int SfArkFileManager::create(const char *name)
 {
     int handler = _maxFileHandler;
     if (_mapName.contains(name))
@@ -152,14 +153,18 @@ int SfArkFileManager::write(int fileHandler, const char *ptr, unsigned int count
     return -1;
 }
 
-QByteArray * SfArkFileManager::retrieveData(QString name)
+char * SfArkFileManager::retrieveData(const char *name, int &size)
 {
-    QByteArray * ret = NULL;
+    char * ret = NULL;
     if (_mapName.contains(name))
     {
         int handle = _mapName.value(name);
         if (_mapByteArray.contains(handle))
-            ret = _mapByteArray.value(handle);
+        {
+            QByteArray * data = _mapByteArray.value(handle);
+            ret = data->data();
+            size = data->size();
+        }
     }
     return ret;
 }
