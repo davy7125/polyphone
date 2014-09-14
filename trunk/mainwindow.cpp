@@ -71,7 +71,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent, Qt::Window | Qt::W
     connect(this->sf2, SIGNAL(updateTable(int,int,int,int)), this, SLOT(updateTable(int,int,int,int)));
 
     // Initialisation du synthétiseur
-    this->synth = new Synth(this->sf2);
+    this->synth = new Synth(this->sf2, 2 * configuration->getBufferSize());
 
     // Connexions du magnétophone avec le synthé
     this->dialogMagneto.setSynth(this->synth);
@@ -182,13 +182,15 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent, Qt::Window | Qt::W
     Sound::setParent(this);
 
     // Bug QT: restauration de la largeur d'un QDockWidget si fenêtre maximisée
-    QApplication::processEvents();
     int dockWidth = configuration->getDockWidth();
     if (ui->dockWidget->width() < dockWidth)
         ui->dockWidget->setMinimumWidth(dockWidth);
     else
         ui->dockWidget->setMaximumWidth(dockWidth);
     QTimer::singleShot(1, this, SLOT(delayedInit()));
+
+    ui->actionA_propos->setMenuRole(QAction::AboutRole);
+    ui->actionPr_f_rences->setMenuRole(QAction::PreferencesRole);
 }
 MainWindow::~MainWindow()
 {
@@ -459,7 +461,7 @@ void MainWindow::Fermer()
     if (ui->arborescence->getSelectedItemsNumber() == 0) return;
     if (!ui->arborescence->isSelectedItemsSf2Unique()) return;
     int ret;
-    EltID id = ui->arborescence->getID(0);
+    EltID id = ui->arborescence->getFirstID();
     id.typeElement = elementSf2;
     if (sf2->isEdited(id.indexSf2))
     {
@@ -490,7 +492,7 @@ void MainWindow::Fermer()
     case QMessageBox::Discard:{
         sf2->prepareNewActions();
         // Reprise id si modif
-        id = ui->arborescence->getID(0);
+        id = ui->arborescence->getFirstID();
         id.typeElement = elementSf2;
         EltID elementSuivant = ui->arborescence->getNextID(true);
         this->ui->arborescence->selectNone();
@@ -510,13 +512,14 @@ void MainWindow::supprimerElt()
         return;
 
     sf2->prepareNewActions();
+    QList<EltID> listID = ui->arborescence->getAllIDs();
 
     // 1er élément à supprimer
     EltID elementToSelect = ui->arborescence->getElementToSelectAfterDeletion();
 
     int message = 1;
-    for (int i = nb - 1; i >= 0; i--)
-        sf2->remove(ui->arborescence->getID(i), &message);
+    foreach (EltID id, listID)
+        sf2->remove(id, &message);
 
     if (message == 1 && elementToSelect.typeElement != elementUnknown)
         ui->arborescence->select(elementToSelect, true);
@@ -531,14 +534,14 @@ void MainWindow::sauvegarder()
     // Sauvegarde d'un SF2 (appel de l'interface)
     if (ui->arborescence->getSelectedItemsNumber() == 0) return;
     if (!ui->arborescence->isSelectedItemsSf2Unique()) return;
-    EltID id = ui->arborescence->getID(0);
+    EltID id = ui->arborescence->getFirstID();
     sauvegarder(id.indexSf2, 0);
 }
 void MainWindow::sauvegarderSous()
 {
     if (ui->arborescence->getSelectedItemsNumber() == 0) return;
     if (!ui->arborescence->isSelectedItemsSf2Unique()) return;
-    EltID id = ui->arborescence->getID(0);
+    EltID id = ui->arborescence->getFirstID();
     sauvegarder(id.indexSf2, 1);
 }
 int  MainWindow::sauvegarder(int indexSf2, bool saveAs)
@@ -869,7 +872,8 @@ QList<QAction *> MainWindow::getListeActions()
                 << ui->actionExporter_en_tant_qu_sfz
                 << ui->action_Dissocier_les_samples_st_r_o
                 << ui->actionExporter_pics_de_fr_quence
-                << ui->action_Transposer;
+                << ui->action_Transposer
+                << ui->actionEnlever_tous_les_modulateurs;
     return listeAction;
 }
 void MainWindow::setListeActions(QList<QAction *> listeActions)
@@ -921,7 +925,7 @@ void MainWindow::updateTitle()
     if (nb > 0)
     {
         // Au moins un élément est sélectionné
-        id.indexSf2 = ui->arborescence->getID(0).indexSf2;
+        id.indexSf2 = ui->arborescence->getFirstID().indexSf2;
         fichierUnique = ui->arborescence->isSelectedItemsSf2Unique();
     }
     if (fichierUnique)
@@ -956,6 +960,7 @@ void MainWindow::updateActions()
     EltID id;
     // Modification du titre
     updateTitle();
+
     // Caractéristiques de la sélection
     // Nombre d'éléments sélectionnés
     nb = ui->arborescence->getSelectedItemsNumber();
@@ -970,11 +975,12 @@ void MainWindow::updateActions()
     else
     {
         // Au moins un élément est sélectionné
-        id = ui->arborescence->getID(0);
+        id = ui->arborescence->getFirstID();
         type = id.typeElement;
         fichierUnique = ui->arborescence->isSelectedItemsSf2Unique();
         typeUnique = ui->arborescence->isSelectedItemsTypeUnique();
         familleUnique = ui->arborescence->isSelectedItemsFamilyUnique();
+
         // Affichage partie droite
         if (typeUnique && fichierUnique && id.typeElement == elementSmpl)
         {
@@ -1034,32 +1040,32 @@ void MainWindow::updateActions()
                            || type == elementSmpl || type == elementInst || type == elementPrst)
                 && !this->page_smpl->isPlaying())
         {
-            ui->action_Supprimer->setEnabled(1);
-            ui->actionCopier->setEnabled(1);
+            ui->action_Supprimer->setEnabled(true);
+            ui->actionCopier->setEnabled(true);
         }
         else
         {
-            ui->action_Supprimer->setEnabled(0);
-            ui->actionCopier->setEnabled(0);
+            ui->action_Supprimer->setEnabled(false);
+            ui->actionCopier->setEnabled(false);
         }
 
         // Renommer
-        if (nb == 1 && typeUnique && (type == elementSmpl || type == elementInst || type == elementPrst || type == elementSf2))
+        if (!typeUnique || (type != elementSmpl && type != elementInst && type != elementPrst && type != elementSf2))
         {
             ui->actionRenommer->setText(trUtf8("&Renommer"));
-            ui->actionRenommer->setEnabled(1);
+            ui->actionRenommer->setEnabled(false);
         }
         else
         {
-            if (nb > 1 && typeUnique && type == elementSmpl)
+            if (nb == 1)
             {
-                ui->actionRenommer->setText(trUtf8("&Renommer en masse"));
+                ui->actionRenommer->setText(trUtf8("&Renommer"));
                 ui->actionRenommer->setEnabled(true);
             }
             else
             {
-                ui->actionRenommer->setText(trUtf8("&Renommer"));
-                ui->actionRenommer->setEnabled(false);
+                ui->actionRenommer->setText(trUtf8("&Renommer en masse"));
+                ui->actionRenommer->setEnabled(true);
             }
         }
 
@@ -1166,7 +1172,7 @@ void MainWindow::activeOutilsSmpl()
         this->ui->arborescence->clicTree();
         return;
     }
-    EltID ID = ui->arborescence->getID(0);
+    EltID ID = ui->arborescence->getFirstID();
     ElementType type = ID.typeElement;
     if (type != elementSmpl)
     {
@@ -1229,6 +1235,7 @@ void MainWindow::updateTable(int type, int sf2, int elt, int elt2)
         // Mise à jour table preset
         this->page_prst->updateId(id);
     }
+
     // Annulation des ID copiés dans l'arborescence
     this->ui->arborescence->clearPastedID();
 }
@@ -1254,57 +1261,64 @@ void MainWindow::renommer()
     // Nb d'éléments sélectionnés
     int nb = ui->arborescence->getSelectedItemsNumber();
     if (nb == 0) return;
-    EltID ID = ui->arborescence->getID(0);
+    EltID ID = ui->arborescence->getFirstID();
     ElementType type = ID.typeElement;
-    if ((nb > 1 && type == elementSmpl) || (nb == 1 && (type == elementSmpl || type == elementInst || type == elementPrst || type == elementSf2)))
+
+    if (type != elementSf2 && type != elementSmpl && type != elementInst && type != elementPrst)
+        return;
+
+    if (nb > 1)
     {
-        if (nb > 1)
+        DialogRename * dial = new DialogRename(sf2->getQstr(ID, champ_name), type == elementSmpl, this);
+        dial->setAttribute(Qt::WA_DeleteOnClose);
+        connect(dial, SIGNAL(updateNames(int, QString, QString, int, int)),
+                this, SLOT(renommerEnMasse(int, QString, QString, int, int)));
+        dial->show();
+    }
+    else
+    {
+        QString msg;
+        if (type == elementSmpl) msg = trUtf8("Nom de l'échantillon (max 20 caractères) :");
+        else if (type == elementInst) msg = trUtf8("Nom de l'instrument (max 20 caractères) :");
+        else if (type == elementPrst) msg = trUtf8("Nom du preset (max 20 caractères) :");
+        else if (type == elementSf2) msg = trUtf8("Nom du SF2 (max 255 caractères) :");
+        QString text = QInputDialog::getText(this, trUtf8("Question"), msg, QLineEdit::Normal, sf2->getQstr(ID, champ_name), &ok);
+        if (ok && !text.isEmpty())
         {
-            DialogRename * dial = new DialogRename(sf2->getQstr(ID, champ_name), this);
-            dial->setAttribute(Qt::WA_DeleteOnClose);
-            connect(dial, SIGNAL(updateNames(QString,int)), this, SLOT(renommerEnMasse(QString,int)));
-            dial->show();
-        }
-        else
-        {
-            QString msg;
-            if (type == elementSmpl) msg = trUtf8("Nom de l'échantillon (max 20 caractères) :");
-            else if (type == elementInst) msg = trUtf8("Nom de l'instrument (max 20 caractères) :");
-            else if (type == elementPrst) msg = trUtf8("Nom du preset (max 20 caractères) :");
-            else if (type == elementSf2) msg = trUtf8("Nom du SF2 (max 255 caractères) :");
-            QString text = QInputDialog::getText(this, trUtf8("Question"), msg, QLineEdit::Normal, sf2->getQstr(ID, champ_name), &ok);
-            if (ok && !text.isEmpty())
-            {
-                sf2->prepareNewActions();
-                ID = ui->arborescence->getID(0);
-                sf2->set(ID, champ_name, text);
-                updateDo();
-                updateActions();
-            }
+            sf2->prepareNewActions();
+            ID = ui->arborescence->getFirstID();
+            sf2->set(ID, champ_name, text);
+            updateDo();
+            updateActions();
         }
     }
 }
-void MainWindow::renommerEnMasse(QString name, int modificationType)
+void MainWindow::renommerEnMasse(int renameType, QString text1, QString text2, int val1, int val2)
 {
-    // Renommage de masse
-    if (name.isEmpty())
-        return;
-    sf2->prepareNewActions();
+    if (renameType == 4)
+    {
+        if (val1 == val2)
+            return;
+    }
+    else
+    {
+        if (text1.isEmpty())
+            return;
+    }
 
-    QList<EltID> listID;
-    for (unsigned int i = 0; i < ui->arborescence->getSelectedItemsNumber(); i++)
-        listID << ui->arborescence->getID(i);
+    sf2->prepareNewActions();
+    QList<EltID> listID = ui->arborescence->getAllIDs();
 
     for (int i = 0; i < listID.size(); i++)
     {
         EltID ID = listID.at(i);
 
         // Détermination du nom
-        QString newName;
-        switch (modificationType)
+        QString newName = sf2->getQstr(ID, champ_name);
+        switch (renameType)
         {
         case 0:{
-            // Suffix
+            // Remplacement avec note en suffixe
             QString suffix = " " + Config::getInstance()->getKeyName(sf2->get(ID, champ_byOriginalPitch).bValue, false, true);
             SFSampleLink pos = sf2->get(ID, champ_sfSampleType).sfLinkValue;
             if (pos == rightSample || pos == RomRightSample)
@@ -1312,30 +1326,40 @@ void MainWindow::renommerEnMasse(QString name, int modificationType)
             else if (pos == leftSample || pos == RomLeftSample)
                 suffix += 'L';
 
-            newName = name.left(20 - suffix.size()) + suffix;
+            newName = text1.left(20 - suffix.size()) + suffix;
         }break;
         case 1:
-            // Remplacement du nom, ajout incrément
-            name = name.left(17);
-            char str2[20];
-            sprintf(str2,"%.2d", (i+1)%100);
-            newName = name + "-" + str2;
+            // Remplacement avec index en suffixe
+            if ((i+1) % 100 < 10)
+                newName = text1.left(17) + "-0" + QString::number((i+1) % 100);
+            else
+                newName = text1.left(17) + "-" + QString::number((i+1) % 100);
             break;
         case 2:
-            // Ajout d'un préfixe
-            newName = name + sf2->getQstr(ID, champ_name);
+            // Remplacement d'une chaîne de caractère
+            newName.replace(text1, text2, Qt::CaseInsensitive);
             break;
         case 3:
-            // Ajout d'un suffixe
-            newName = sf2->getQstr(ID, champ_name) + name;
+            // Insertion d'une chaîne de caractère
+            if (val1 > newName.size())
+                val1 = newName.size();
+            newName.insert(val1, text1);
+            break;
+        case 4:
+            // Suppression d'une étendue
+            if (val2 > val1)
+                newName.remove(val1, val2 - val1);
+            else
+                newName.remove(val2, val1 - val2);
             break;
         }
+
         newName = newName.left(20);
 
-        if (strcmp(sf2->getQstr(ID, champ_name).toLower().toStdString().c_str(),
-                   newName.toLower().toStdString().c_str()) != 0)
+        if (sf2->getQstr(ID, champ_name).compare(newName, Qt::CaseInsensitive))
             sf2->set(ID, champ_name, newName);
     }
+
     updateDo();
     updateActions();
 }
@@ -1389,10 +1413,23 @@ void MainWindow::dragAndDrop(QString path, EltID idDest, int * arg)
     else if (extension.compare("sfark") == 0)
     {
         // Extraction sfArk
-        SfArkExtractor sfArkExtractor(this->sf2);
-        if (!sfArkExtractor.extract(path))
+        SfArkExtractor sfArkExtractor(path.toStdString().c_str());
+        bool ok = false;
+        int size = 0;
+        char * rawData = NULL;
+        SfArkExtractor::SfArkError error = sfArkExtractor.extract(rawData, size);
+        if (error == SfArkExtractor::SFARKERR_OK || error == SfArkExtractor::SFARKERR_CHKSUM)
+        {
+            QByteArray data(rawData, size);
+            QDataStream streamSf2(&data, QIODevice::ReadOnly);
+            int indexSf2 = -1;
+            ok = (sf2->ouvrir("", &streamSf2, indexSf2, true) == 0);
+        }
+
+        if (!ok)
             QMessageBox::warning(this, trUtf8("Attention"),
                                  trUtf8("Une erreur est survenue lors de l'import du fichier ") + path);
+
         this->updateActions();
     }
 }
@@ -1416,7 +1453,7 @@ void MainWindow::importerSmpl()
         return;
 
     this->sf2->prepareNewActions();
-    EltID id = this->ui->arborescence->getID(0);
+    EltID id = this->ui->arborescence->getFirstID();
     int replace = 0;
     while (!strList.isEmpty())
     {
@@ -1651,28 +1688,30 @@ QString MainWindow::getName(QString name, int maxCharacters, int suffixNumber)
 }
 void MainWindow::exporterSmpl()
 {
-    int nbElt = ui->arborescence->getSelectedItemsNumber();
+    QList<EltID> listIDs = ui->arborescence->getAllIDs();
+    int nbElt = listIDs.size();
     if (nbElt == 0) return;
     QString qDir = QFileDialog::getExistingDirectory(this, trUtf8("Choisir un répertoire de destination"),
                                                      Config::getInstance()->getLastDirectory(Config::typeFichierSample));
     if (qDir.isEmpty()) return;
     qDir.append(QDir::separator());
     QFile file;
-    EltID id = this->ui->arborescence->getID(0);
+    EltID id = this->ui->arborescence->getFirstID();
     id.typeElement = elementSmpl;
+
     // Initialisation des états d'exportation des samples
     int nbSmpl = this->sf2->count(id);
     int * status = new int[nbSmpl];
     for (int i = 0; i < nbSmpl; i++)
         status[i] = 0;
+
     // Exportation pour chaque sample
     int sampleID = -1;
     int sampleID2 = -1;
     QString qStr, qStr2;
     EltID id2;
-    for (int i = 0; i < nbElt; i++)
+    foreach (EltID id, listIDs)
     {
-        id = this->ui->arborescence->getID(i);
         id2 = id;
         if (id.typeElement == elementSmpl)
             sampleID = id.indexElt;
@@ -1754,7 +1793,7 @@ void MainWindow::exporter()
     if (nbElt == 0)
         return;
 
-    DialogExport * dial = new DialogExport(sf2, ui->arborescence->getID(0), this);
+    DialogExport * dial = new DialogExport(sf2, ui->arborescence->getFirstID(), this);
     connect(dial, SIGNAL(accepted(QList<EltID>,QString,int,bool,bool,bool)),
             this, SLOT(exporter(QList<EltID>,QString,int,bool,bool,bool)));
     dial->show();
@@ -1817,14 +1856,14 @@ void MainWindow::nouvelInstrument()
 {
     int nb = ui->arborescence->getSelectedItemsNumber();
     if (nb == 0) return;
-    EltID id = ui->arborescence->getID(0);
+    EltID id = ui->arborescence->getFirstID();
     bool ok;
     QString name = QInputDialog::getText(this, QString::fromUtf8(" "), trUtf8("Nom du nouvel instrument :"), QLineEdit::Normal, "", &ok);
     if (ok && !name.isEmpty())
     {
         sf2->prepareNewActions();
         // Reprise ID si modif
-        id = ui->arborescence->getID(0);
+        id = ui->arborescence->getFirstID();
         id.typeElement = elementInst;
         id.indexElt = this->sf2->add(id);
         this->sf2->set(id, champ_name, name.left(20));
@@ -1837,7 +1876,7 @@ void MainWindow::nouveauPreset()
 {
     int nb = ui->arborescence->getSelectedItemsNumber();
     if (nb == 0) return;
-    EltID id = ui->arborescence->getID(0);
+    EltID id = ui->arborescence->getFirstID();
     // Vérification qu'un preset est disponible
     int nPreset = -1;
     int nBank = -1;
@@ -1860,7 +1899,7 @@ void MainWindow::nouveauPreset()
         Valeur val;
         sf2->prepareNewActions();
         // Reprise de l'identificateur si modification
-        id = ui->arborescence->getID(0);
+        id = ui->arborescence->getFirstID();
         id.typeElement = elementPrst;
         id.indexElt = this->sf2->add(id);
         this->sf2->set(id, champ_name, name.left(20));
@@ -1877,7 +1916,7 @@ void MainWindow::associer()
 {
     if (!ui->arborescence->getSelectedItemsNumber())
         return;
-    EltID id = ui->arborescence->getID(0);
+    EltID id = ui->arborescence->getFirstID();
     this->sf2->prepareNewActions();
     this->dialList.showDialog(id, DialogList::MODE_ASSOCIATION);
 }
@@ -1902,14 +1941,11 @@ void MainWindow::associer(EltID idDest)
     }
     sf2->prepareNewActions();
     Valeur val;
-    EltID idSrc;
+
     // Liste des éléments sources
-    QList<EltID> listeSrc;
-    for (int i = 0; i < nb; i++)
-        listeSrc << this->ui->arborescence->getID(i);
-    for (int i = 0; i < nb; i++)
+    QList<EltID> listeSrc = ui->arborescence->getAllIDs();
+    foreach (EltID idSrc, listeSrc)
     {
-        idSrc = listeSrc.at(i);
         // Création élément lié
         idDest.indexElt2 = this->sf2->add(idDest);
         // Association de idSrc vers idDest
@@ -1976,7 +2012,7 @@ void MainWindow::remplacer()
 {
     int nb = ui->arborescence->getSelectedItemsNumber();
     if (nb != 1) return;
-    EltID id = ui->arborescence->getID(0);
+    EltID id = ui->arborescence->getFirstID();
     this->sf2->prepareNewActions();
     this->dialList.showDialog(id, DialogList::MODE_REMPLACEMENT);
 }
@@ -1988,7 +2024,7 @@ void MainWindow::remplacer(EltID idSrc)
         updateDo();
         return;
     }
-    EltID idDest = this->ui->arborescence->getID(0);
+    EltID idDest = this->ui->arborescence->getFirstID();
     if (idDest.typeElement != elementInstSmpl && idDest.typeElement != elementPrstInst)
         return;
     sf2->prepareNewActions();
@@ -2051,7 +2087,7 @@ void MainWindow::desaccorder()      {this->page_inst->desaccorder();}
 void MainWindow::duplication()
 {
     if (ui->arborescence->getSelectedItemsNumber() == 0) return;
-    ElementType type = ui->arborescence->getID(0).typeElement;
+    ElementType type = ui->arborescence->getFirstID().typeElement;
     if (type == elementInst || type == elementInstSmpl)
         this->page_inst->duplication();
     else if (type == elementPrst || type == elementPrstInst)
@@ -2060,7 +2096,7 @@ void MainWindow::duplication()
 void MainWindow::paramGlobal()
 {
     if (ui->arborescence->getSelectedItemsNumber() == 0) return;
-    ElementType type = ui->arborescence->getID(0).typeElement;
+    ElementType type = ui->arborescence->getFirstID().typeElement;
     if (type == elementInst || type == elementInstSmpl)
         this->page_inst->paramGlobal();
     else if (type == elementPrst || type == elementPrstInst)
@@ -2069,7 +2105,7 @@ void MainWindow::paramGlobal()
 void MainWindow::spatialisation()
 {
     if (ui->arborescence->getSelectedItemsNumber() == 0) return;
-    ElementType type = ui->arborescence->getID(0).typeElement;
+    ElementType type = ui->arborescence->getFirstID().typeElement;
     if (type == elementInst || type == elementInstSmpl)
         this->page_inst->spatialisation();
     else if (type == elementPrst || type == elementPrstInst)
@@ -2082,7 +2118,7 @@ void MainWindow::on_action_Transposer_triggered()
 void MainWindow::visualize()
 {
     if (ui->arborescence->getSelectedItemsNumber() == 0) return;
-    ElementType type = ui->arborescence->getID(0).typeElement;
+    ElementType type = ui->arborescence->getFirstID().typeElement;
     if (type == elementInst || type == elementInstSmpl)
         this->page_inst->visualize();
     else if (type == elementPrst || type == elementPrstInst)
@@ -2097,7 +2133,7 @@ void MainWindow::purger()
     if (ui->arborescence->getSelectedItemsNumber() == 0) return;
     if (!ui->arborescence->isSelectedItemsSf2Unique()) return;
     sf2->prepareNewActions();
-    EltID id = ui->arborescence->getID(0);
+    EltID id = ui->arborescence->getFirstID();
     // Nombre de samples et instruments non utilisés
     int unusedSmpl = 0;
     int unusedInst = 0;
@@ -2215,7 +2251,7 @@ void MainWindow::attenuationMini()
     if (!ok) return;
     conf->setTools_2_attenuation_dB(rep);
     // Calcul de l'atténuation minimale actuelle
-    EltID id = this->ui->arborescence->getID(0);
+    EltID id = this->ui->arborescence->getFirstID();
     id.typeElement = elementInst;
     EltID id2 = id;
     id2.typeElement = elementInstSmpl;
@@ -2251,7 +2287,7 @@ void MainWindow::attenuationMini()
     Valeur val;
     this->sf2->prepareNewActions();
     // Reprise des identificateurs si modification
-    id = this->ui->arborescence->getID(0);
+    id = this->ui->arborescence->getFirstID();
     id.typeElement = elementInst;
     id2 = id;
     id2.typeElement = elementInstSmpl;
@@ -2287,7 +2323,7 @@ void MainWindow::associationAutoSmpl()
     // Association automatique des samples
     // Condition : même nom sauf pour la dernière lettre (R ou L)
     this->sf2->prepareNewActions();
-    EltID id = this->ui->arborescence->getID(0);
+    EltID id = this->ui->arborescence->getFirstID();
     id.typeElement = elementSmpl;
     // Constitution listes de noms et indices
     QList<EltID> listID;
@@ -2368,7 +2404,7 @@ void MainWindow::associationAutoSmpl()
 void MainWindow::on_action_Dissocier_les_samples_st_r_o_triggered()
 {
     this->sf2->prepareNewActions();
-    EltID id = this->ui->arborescence->getID(0);
+    EltID id = this->ui->arborescence->getFirstID();
     id.typeElement = elementSmpl;
     for (int i = 0; i < sf2->count(id); i++)
     {
@@ -2402,7 +2438,7 @@ void MainWindow::on_action_Dissocier_les_samples_st_r_o_triggered()
 }
 void MainWindow::on_actionExporter_pics_de_fr_quence_triggered()
 {
-    EltID id = this->ui->arborescence->getID(0);
+    EltID id = this->ui->arborescence->getFirstID();
     id.typeElement = elementSf2;
     QString defaultFile = configuration->getLastDirectory(Config::typeFichierFrequences) + "/" +
             sf2->getQstr(id, champ_name).replace(QRegExp(QString::fromUtf8("[`~*|:<>«»?/{}\"\\\\]")), "_") + ".csv";
@@ -2427,7 +2463,7 @@ void MainWindow::exporterFrequences(QString fileName)
            << trUtf8("Facteur") << "\"" << sep << "\"" << trUtf8("Fréquence") << "\"" << sep << "\""
            << trUtf8("Note") << "\"" << sep << "\"" << trUtf8("Correction") << "\"";
 
-    EltID id = this->ui->arborescence->getID(0);
+    EltID id = this->ui->arborescence->getFirstID();
     id.typeElement = elementSmpl;
     QString nomSmpl;
     QList<double> listeFrequences, listeFacteurs;
@@ -2457,9 +2493,96 @@ void MainWindow::exporterFrequences(QString fileName)
     file.close();
 }
 
+void MainWindow::on_actionEnlever_tous_les_modulateurs_triggered()
+{
+    this->sf2->prepareNewActions();
+    EltID id = this->ui->arborescence->getFirstID();
+
+    int count = 0;
+
+    // Suppression des modulateurs liés aux instruments
+    id.typeElement = elementInst;
+    count += deleteMods(id);
+
+    // Suppression des modulateurs liés aux presets
+    id.typeElement = elementPrst;
+    count += deleteMods(id);
+
+    if (count == 0)
+        QMessageBox::warning(this, trUtf8("Attention"), trUtf8("Le fichier ne contient aucun modulateur."));
+    else if (count == 1)
+        QMessageBox::information(this, trUtf8("Information"), trUtf8("1 modulateur a été supprimé."));
+    else
+        QMessageBox::information(this, trUtf8("Information"), QString::number(count) + " " +
+                                 trUtf8("modulateurs ont été supprimés."));
+    updateDo();
+    updateActions();
+}
+
+int MainWindow::deleteMods(EltID id)
+{
+    int count = 0;
+
+    for (int i = 0; i < sf2->count(id); i++)
+    {
+        id.indexElt = i;
+        if (!sf2->get(id, champ_hidden).bValue)
+        {
+            // Modulateurs globaux
+            EltID idMod = id;
+            if (id.typeElement == elementInst)
+                idMod.typeElement = elementInstMod;
+            else
+                idMod.typeElement = elementPrstMod;
+            for (int j = 0; j < sf2->count(idMod); j++)
+            {
+                idMod.indexMod = j;
+                if (!sf2->get(idMod, champ_hidden).bValue)
+                {
+                    sf2->remove(idMod);
+                    count++;
+                }
+            }
+
+            // Modulateurs de chaque division
+            EltID idSub = id;
+            if (id.typeElement == elementInst)
+                idSub.typeElement = elementInstSmpl;
+            else
+                idSub.typeElement = elementPrstInst;
+            for (int j = 0; j < sf2->count(idSub); j++)
+            {
+                idSub.indexElt2 = j;
+                if (!sf2->get(idSub, champ_hidden).bValue)
+                {
+                    idMod = idSub;
+                    if (id.typeElement == elementInst)
+                        idMod.typeElement = elementInstSmplMod;
+                    else
+                        idMod.typeElement = elementPrstInstMod;
+                    for (int k = 0; k < sf2->count(idMod); k++)
+                    {
+                        idMod.indexMod = k;
+                        if (!sf2->get(idMod, champ_hidden).bValue)
+                        {
+                            sf2->remove(idMod);
+                            count++;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    return count;
+}
+
+
 // Gestion du clavier virtuel / du son
 void MainWindow::setAudioEngine(int audioEngine, int bufferSize)
 {
+    synth->stop();
+    this->synth->setBufferSize(2 * bufferSize);
     emit(initAudio(audioEngine, bufferSize));
 }
 QStringList MainWindow::getListMidi()
@@ -2556,7 +2679,7 @@ void MainWindow::noteChanged(int key, int vel)
     // Lecture ?
     if (ui->arborescence->getSelectedItemsNumber())
     {
-        EltID id = ui->arborescence->getID(0);
+        EltID id = ui->arborescence->getFirstID();
         if (ui->arborescence->isSelectedItemsSf2Unique() && !this->sf2->get(id, champ_hidden).bValue)
         {
             if (id.typeElement == elementSmpl && ui->arborescence->getSelectedItemsNumber() == 1)

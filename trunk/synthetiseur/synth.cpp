@@ -26,7 +26,7 @@
 
 
 // Constructeur, destructeur
-Synth::Synth(Pile_sf2 *sf2, QWidget * parent) : QObject(parent),
+Synth::Synth(Pile_sf2 *sf2, int bufferSize) : QObject(NULL),
     _isSinusEnabled(false),
     _sampleRunning(false),
     m_sf2(sf2),
@@ -34,27 +34,34 @@ Synth::Synth(Pile_sf2 *sf2, QWidget * parent) : QObject(parent),
     m_choLevel(0), m_choDepth(0), m_choFrequency(0),
     m_clipCoef(1),
     m_recordFile(NULL),
-    m_isRecording(true)
+    m_isRecording(true),
+    _fTmpSumRev1(NULL),
+    _fTmpSumRev2(NULL),
+    _dataWav(NULL),
+    _bufferSize(bufferSize)
 {
-    // Création des sound engines
-    int nbEngines = qMax(QThread::idealThreadCount() - 2, 1);
-    for (int i = 0; i < nbEngines; i++)
-    {
-        SoundEngine * soundEngine = new SoundEngine();
-        connect(soundEngine, SIGNAL(readFinished()), this, SIGNAL(readFinished()));
-        connect(soundEngine, SIGNAL(readFinished()), this, SLOT(stopSinus()));
-        soundEngine->moveToThread(soundEngine->getThread());
-        soundEngine->getThread()->start(QThread::TimeCriticalPriority);
-        QMetaObject::invokeMethod(soundEngine, "start");
-        _soundEngines << soundEngine;
-    }
-
-    _fTmpSumRev1 = new float [2 * BUFFER_ENGINE_MAX_DATA];
-    _fTmpSumRev2 = new float [2 * BUFFER_ENGINE_MAX_DATA];
-    _dataWav = new float[4 * BUFFER_ENGINE_MAX_DATA];
+    // Création des buffers et sound engines
+    createSoundEnginesAndBuffers();
 }
 
 Synth::~Synth()
+{
+    destroySoundEnginesAndBuffers();
+}
+
+void Synth::setBufferSize(int bufferSize)
+{
+    if (_bufferSize == bufferSize)
+        return;
+
+    _bufferSize = bufferSize;
+    _mutexSynchro.lock();
+    destroySoundEnginesAndBuffers();
+    createSoundEnginesAndBuffers();
+    _mutexSynchro.unlock();
+}
+
+void Synth::destroySoundEnginesAndBuffers()
 {
     // Arrêt des soundEngines
     for (int i = 0; i < _soundEngines.size(); i++)
@@ -62,12 +69,12 @@ Synth::~Synth()
 
     // Arrêt des threads
     for (int i = 0; i < _soundEngines.size(); i++)
-        _soundEngines.at(i)->getThread()->quit();
+        _soundEngines.at(i)->thread()->quit();
 
     // Suppression des sound engines et des threads
     while (_soundEngines.size())
     {
-        QThread * thread = _soundEngines.last()->getThread();
+        QThread * thread = _soundEngines.last()->thread();
         thread->wait(50);
         delete _soundEngines.takeLast();
         delete thread;
@@ -78,8 +85,40 @@ Synth::~Synth()
     delete [] _dataWav;
 }
 
+void Synth::createSoundEnginesAndBuffers()
+{
+    _fTmpSumRev1 = new float [4 * _bufferSize];
+    _fTmpSumRev2 = new float [4 * _bufferSize];
+    _dataWav = new float[8 * _bufferSize];
+
+    int nbEngines = qMax(QThread::idealThreadCount() - 2, 1);
+    for (int i = 0; i < nbEngines; i++)
+    {
+        SoundEngine * soundEngine = new SoundEngine(_bufferSize);
+        connect(soundEngine, SIGNAL(readFinished()), this, SIGNAL(readFinished()));
+        connect(soundEngine, SIGNAL(readFinished()), this, SLOT(stopSinus()));
+        soundEngine->moveToThread(new QThread());
+        soundEngine->thread()->start(QThread::TimeCriticalPriority);
+        QMetaObject::invokeMethod(soundEngine, "start");
+        _soundEngines << soundEngine;
+    }
+}
+
 // signal de lecture ou de fin
 void Synth::play(int type, int idSf2, int idElt, int note, int velocity, VoiceParam * voiceParamTmp)
+{
+    play_sub(type, idSf2, idElt, note, velocity, voiceParamTmp);
+
+    if(velocity > 0)
+    {
+        // Synchronize new voices
+        _mutexSynchro.lock();
+        SoundEngine::syncNewVoices();
+        _mutexSynchro.unlock();
+    }
+}
+
+void Synth::play_sub(int type, int idSf2, int idElt, int note, int velocity, VoiceParam * voiceParamTmp)
 {
     if (velocity == 0)
     {
@@ -211,7 +250,7 @@ void Synth::play(int type, int idSf2, int idElt, int note, int velocity, VoicePa
                 {
                     // Récupération des paramètres et lecture du sample associé
                     VoiceParam * voiceParam = new VoiceParam(m_sf2, idInstSmpl, voiceParamTmp);
-                    this->play(0, idSf2, m_sf2->get(idInstSmpl, champ_sampleID).wValue,
+                    this->play_sub(0, idSf2, m_sf2->get(idInstSmpl, champ_sampleID).wValue,
                                note, velocity, voiceParam);
                     delete voiceParam;
                 }
@@ -272,7 +311,7 @@ void Synth::play(int type, int idSf2, int idElt, int note, int velocity, VoicePa
                 {
                     // Récupération des paramètres et lecture de l'instrument associé
                     VoiceParam * voiceParam = new VoiceParam(m_sf2, idPrstInst);
-                    this->play(1, idSf2, m_sf2->get(idPrstInst, champ_instrument).wValue,
+                    this->play_sub(1, idSf2, m_sf2->get(idPrstInst, champ_instrument).wValue,
                                note, velocity, voiceParam);
                     delete voiceParam;
                 }
@@ -436,6 +475,7 @@ void Synth::startNewRecord(QString fileName)
     }
     m_mutexRecord.unlock();
 }
+
 void Synth::endRecord()
 {
     m_mutexRecord.lock();
@@ -457,6 +497,7 @@ void Synth::endRecord()
     }
     m_mutexRecord.unlock();
 }
+
 void Synth::pause(bool isOn)
 {
     m_mutexRecord.lock();

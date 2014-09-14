@@ -31,11 +31,11 @@ int SoundEngine::_gainSmpl = 0;
 bool SoundEngine::_isStereo = false;
 bool SoundEngine::_isLoopEnabled = true;
 
-SoundEngine::SoundEngine(QObject *parent) : CircularBuffer(BUFFER_ENGINE_MIN_DATA, BUFFER_ENGINE_MAX_DATA, parent)
+SoundEngine::SoundEngine(int bufferSize) : CircularBuffer(bufferSize, 2 * bufferSize)
 {
     _listInstances << this;
-    _dataTmpL = new float [4 * BUFFER_ENGINE_MAX_DATA];
-    _dataTmpR = new float [4 * BUFFER_ENGINE_MAX_DATA];
+    _dataTmpL = new float [8 * bufferSize];
+    _dataTmpR = new float [8 * bufferSize];
 }
 
 SoundEngine::~SoundEngine()
@@ -109,15 +109,79 @@ void SoundEngine::stopAllVoicesInstance()
     _mutexVoices.unlock();
 }
 
+void SoundEngine::syncNewVoices()
+{
+    foreach (SoundEngine * engine, _listInstances)
+        engine->_mutexBuffer.lock();
+        
+    foreach (SoundEngine * engine, _listInstances)
+        engine->_mutexData.lock();
+        
+    foreach (SoundEngine * engine, _listInstances)
+        engine->_mutexVoices.lock();
+
+    // Current data length available in all buffers
+    QList<int> dataAvailable;
+    int maxDataLength = 0;
+    for (int i = 0; i < _listInstances.size(); i++)
+    {
+        int iTmp = _listInstances.at(i)->currentLengthAvailable();
+        if (iTmp > maxDataLength)
+            maxDataLength = iTmp;
+        dataAvailable << iTmp;
+    }
+
+    // Synchronization of all new voices based on the greatest buffer length
+    for (int i = 0; i < _listInstances.size(); i++)
+        _listInstances.at(i)->syncNewVoicesInstance(maxDataLength - dataAvailable.at(i));
+
+    foreach (SoundEngine * engine, _listInstances)
+        engine->_mutexVoices.unlock();
+    
+    foreach (SoundEngine * engine, _listInstances)
+        engine->_mutexData.unlock();
+    
+    foreach (SoundEngine * engine, _listInstances)
+        engine->_mutexBuffer.unlock();
+}
+
+void SoundEngine::syncNewVoicesInstance(int delay)
+{
+    int nbVoices = _listVoices.size();
+    for (int i = nbVoices - 1; i >= 0; i--)
+    {
+        // Check for started voice
+        if(!_listVoices.at(i)->isRunning())
+            _listVoices.at(i)->runVoice(delay);
+    }
+}
+
 void SoundEngine::releaseNote(int numNote)
 {
+    foreach (SoundEngine * engine, _listInstances)
+        engine->_mutexBuffer.lock();
+        
+    foreach (SoundEngine * engine, _listInstances)
+        engine->_mutexData.lock();
+        
+    foreach (SoundEngine * engine, _listInstances)
+        engine->_mutexVoices.lock();
+    
     for (int i = 0; i < _listInstances.size(); i++)
         _listInstances.at(i)->releaseNoteInstance(numNote);
+        
+    foreach (SoundEngine * engine, _listInstances)
+        engine->_mutexVoices.unlock();
+    
+    foreach (SoundEngine * engine, _listInstances)
+        engine->_mutexData.unlock();
+    
+    foreach (SoundEngine * engine, _listInstances)
+        engine->_mutexBuffer.unlock();
 }
 
 void SoundEngine::releaseNoteInstance(int numNote)
 {
-    _mutexVoices.lock();
     if (numNote == -1)
     {
         // Arrêt lecture d'un sample
@@ -131,7 +195,6 @@ void SoundEngine::releaseNoteInstance(int numNote)
             if (_listVoices.at(i)->getNote() == numNote)
                 _listVoices.at(i)->release();
     }
-    _mutexVoices.unlock();
 }
 
 void SoundEngine::setGain(double gain)

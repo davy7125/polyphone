@@ -133,7 +133,7 @@ private slots:
     void Fermer();              // Clic sur l'action "fermer"
 
     void renommer();            // Renommer un ou plusieurs éléments dans l'arborescence
-    void renommerEnMasse(QString name, int modificationType);
+    void renommerEnMasse(int renameType, QString text1, QString text2, int val1, int val2);
     void importerSmpl();        // Import d'un sample
     void exporterSmpl();        // Export d'un sample
     void exporter();            // Export d'un ou plusieurs preset(s)
@@ -192,6 +192,8 @@ private slots:
     void setVolume(int vol);
     void noteChanged(int key, int vel);
 
+    void on_actionEnlever_tous_les_modulateurs_triggered();
+
 signals:
     void initAudio(int numDevice, int bufferSize);
     void stopAudio();
@@ -232,6 +234,7 @@ private:
     void showKeyboard(bool val);
     QList<QAction *> getListeActions();
     static QString getName(QString name, int maxCharacters, int suffixNumber);
+    int deleteMods(EltID id);
 
 protected:
     void closeEvent(QCloseEvent *event);

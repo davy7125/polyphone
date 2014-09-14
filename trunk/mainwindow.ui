@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>608</width>
+    <width>546</width>
     <height>337</height>
    </rect>
   </property>
@@ -28,7 +28,16 @@
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QGridLayout" name="gridLayout">
-    <property name="margin">
+    <property name="leftMargin">
+     <number>0</number>
+    </property>
+    <property name="topMargin">
+     <number>0</number>
+    </property>
+    <property name="rightMargin">
+     <number>0</number>
+    </property>
+    <property name="bottomMargin">
      <number>0</number>
     </property>
     <property name="horizontalSpacing">
@@ -37,7 +46,16 @@
     <item row="0" column="0">
      <widget class="QWidget" name="ensembleKeyboard" native="true">
       <layout class="QGridLayout" name="gridLayout_4">
-       <property name="margin">
+       <property name="leftMargin">
+        <number>0</number>
+       </property>
+       <property name="topMargin">
+        <number>0</number>
+       </property>
+       <property name="rightMargin">
+        <number>0</number>
+       </property>
+       <property name="bottomMargin">
         <number>0</number>
        </property>
        <item row="0" column="1">
@@ -180,7 +198,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>608</width>
+     <width>546</width>
      <height>23</height>
     </rect>
    </property>
@@ -255,7 +273,7 @@
     </widget>
     <widget class="QMenu" name="menuDivers">
      <property name="enabled">
-      <bool>false</bool>
+      <bool>true</bool>
      </property>
      <property name="title">
       <string>&amp;Global</string>
@@ -263,6 +281,7 @@
      <addaction name="action_Association_auto_samples"/>
      <addaction name="action_Dissocier_les_samples_st_r_o"/>
      <addaction name="action_Enlever_les_l_ments_non_utilis_s"/>
+     <addaction name="actionEnlever_tous_les_modulateurs"/>
      <addaction name="actionExporter_pics_de_fr_quence"/>
      <addaction name="actionR_gler_att_nuation_minimale"/>
     </widget>
@@ -307,7 +326,7 @@
     </property>
     <widget class="QMenu" name="menuClavier">
      <property name="title">
-      <string>Clavier</string>
+      <string>&amp;Clavier</string>
      </property>
      <addaction name="actionAucun"/>
      <addaction name="action5_octaves"/>
@@ -381,7 +400,16 @@
      <property name="spacing">
       <number>0</number>
      </property>
-     <property name="margin">
+     <property name="leftMargin">
+      <number>0</number>
+     </property>
+     <property name="topMargin">
+      <number>0</number>
+     </property>
+     <property name="rightMargin">
+      <number>0</number>
+     </property>
+     <property name="bottomMargin">
       <number>0</number>
      </property>
      <item>
@@ -454,7 +482,16 @@
          <property name="spacing">
           <number>2</number>
          </property>
-         <property name="margin">
+         <property name="leftMargin">
+          <number>2</number>
+         </property>
+         <property name="topMargin">
+          <number>2</number>
+         </property>
+         <property name="rightMargin">
+          <number>2</number>
+         </property>
+         <property name="bottomMargin">
           <number>2</number>
          </property>
          <item>
@@ -1466,6 +1503,15 @@
    </property>
    <property name="toolTip">
     <string>Transpose tous les échantillons d'un instrument</string>
+   </property>
+  </action>
+  <action name="actionEnlever_tous_les_modulateurs">
+   <property name="icon">
+    <iconset resource="ressources.qrc">
+     <normaloff>:/icones/modulator</normaloff>:/icones/modulator</iconset>
+   </property>
+   <property name="text">
+    <string>Enlever tous les &amp;modulateurs</string>
    </property>
   </action>
  </widget>

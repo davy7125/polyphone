@@ -33,7 +33,7 @@ class CircularBuffer : public QObject
     Q_OBJECT
 
 public:
-    CircularBuffer(int minBuffer, int maxBuffer, QObject *parent = NULL);
+    CircularBuffer(int minBuffer, int maxBuffer);
     ~CircularBuffer();
 
     void addData(float *dataL, float *dataR, float *dataRevL, float *dataRevR, int maxlen)
@@ -71,11 +71,14 @@ public:
         _mutexData.unlock();
     }
 
+    int currentLengthAvailable()
+    {
+        return _currentLengthAvailable;
+    }
+
     void stop();
     bool isInterrupted();   // Interruption demandée
     bool isFinished();      // Boucle terminée
-
-    QThread * getThread() { return _thread; }
 
 public slots:
     void start()
@@ -88,18 +91,23 @@ public slots:
         while (!isInterrupted())
         {
             // Génération de données
+            _mutexBuffer.lock();
             generateData(_dataTmpL, _dataTmpR, _dataTmpRevL, _dataTmpRevR, avance);
             writeData(_dataTmpL, _dataTmpR, _dataTmpRevL, _dataTmpRevR, avance);
+            _mutexBuffer.unlock();
             _mutexSynchro.lock();
         }
         _mutexInterrupt.lock();
         _isFinished = true;
         _mutexInterrupt.unlock();
+        _mutexSynchro.tryLock();
+        _mutexSynchro.unlock();
     }
 
 protected:
     virtual void generateData(float *dataL, float *dataR, float *dataRevL, float *dataRevR, int len) = 0;
-
+    QMutex _mutexData, _mutexBuffer;
+    
 private:
     void writeData(const float *dataL, const float *dataR, float *dataRevL, float *dataRevR, int &len)
     {
@@ -141,10 +149,7 @@ private:
     bool _interrupted, _isFinished;
 
     // Protection des ressources
-    QMutex _mutexData, _mutexInterrupt, _mutexSynchro;
-
-    // Thread du buffer
-    QThread * _thread;
+    QMutex _mutexInterrupt, _mutexSynchro;
 };
 
 #endif // CIRCULARBUFFER_H
