@@ -190,6 +190,8 @@ protected:
     QCheckBox *checkAbs;
     QPushButton *pushSupprimerMod;
     QPushButton *pushNouveauMod;
+    QMenu * _menu;
+    QPushButton * _pushCopyMod;
 
     void select(EltID id);
     static void remplirComboSource(ComboBox *comboBox);
@@ -210,7 +212,7 @@ private:
         qint32 index;
     };
 
-    void afficheMod(EltID id, int selectedRow = -1);
+    void afficheMod(EltID id, int selectedIndex = -1);
     static void addAvailableReceiverMod(ComboBox *combo, EltID id);
     static void addAvailableSenderMod(ComboBox *combo, EltID id);
     int getAssociatedMod(EltID id);
@@ -221,6 +223,8 @@ private:
     void setOffset(bool &newAction, int ligne, int colonne, Champ champ1, Champ champ2);
     void set(int ligne, int colonne, bool &newAction, bool allowPropagation);
     void customizeKeyboard();
+    void pasteMod(EltID id, QList<Modulator> modulators);
+    QList<Modulator> getModList(EltID id);
 
     static QList<Modulator> _modulatorCopy;
     QList<int> _listKeyEnlighted;
@@ -242,6 +246,7 @@ public slots:
 protected slots:
     void copyMod();
     void pasteMod();
+    void duplicateMod();
 
 private slots:
     void paramGlobal(QVector<double> dValues, QList<EltID> listElt, int typeModif, int champ, int velMin, int velMax);
