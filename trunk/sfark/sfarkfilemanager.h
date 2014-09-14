@@ -1,7 +1,7 @@
 /***************************************************************************
 **                                                                        **
 **  Polyphone, a soundfont editor                                         **
-**  Copyright (C) 2013-2014 Davy Triponney                                **
+**  Copyright (C) 2014 Davy Triponney                                     **
 **                                                                        **
 **  This program is free software: you can redistribute it and/or modify  **
 **  it under the terms of the GNU General Public License as published by  **
@@ -26,8 +26,7 @@
 #define SFARKFILEMANAGER_H
 
 #include <QMap>
-#include <QFile>
-#include <QDataStream>
+class QFile;
 
 class SfArkFileManager
 {
@@ -36,10 +35,10 @@ public:
     ~SfArkFileManager();
 
     // Return file handler if success, otherwise -1
-    int openReadOnly(QString name);
+    int openReadOnly(const char *name);
 
     // Return file handler
-    int create(QString name);
+    int create(const char * name);
 
     // Return true if success, otherwise false
     void close(int fileHandler);
@@ -53,7 +52,7 @@ public:
     // Return the number of bytes written, -1 otherwise
     int write(int fileHandler, const char * ptr, unsigned int count);
 
-    QByteArray *retrieveData(QString name);
+    char * retrieveData(const char * name, int &size);
 
 private:
     QMap<QString, int> _mapName;
