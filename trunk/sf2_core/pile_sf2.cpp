@@ -26,6 +26,8 @@
 #include "tree.h"
 #include <QMessageBox>
 
+#define UNDO_NUMBER 50
+
 bool Pile_sf2::CONFIG_RAM = 0;
 
 // CONSTRUCTEURS
@@ -72,48 +74,41 @@ Pile_sf2::SF2::SF2()
     this->inst = NULL;
     this->prst = NULL;
 }
-Pile_sf2::SF2::SMPL::SMPL()
-{
-    this->suivant = NULL;
-    this->eltTree = NULL;
-    this->hidden = 0;
-}
-Pile_sf2::SF2::INST::INST()
-{
-    this->suivant = NULL;
-    this->bag = NULL;
-    this->eltTree = NULL;
-    this->hidden = 0;
-}
-Pile_sf2::SF2::PRST::PRST()
-{
-    this->suivant = NULL;
-    this->bag = NULL;
-    this->eltTree = NULL;
-    this->wBank = 0;
-    this->wPreset = 0;
-    this->dwGenre = 0;
-    this->dwLibrary = 0;
-    this->dwMorphology = 0;
-    this->hidden = 0;
-}
-Pile_sf2::SF2::BAG::BAG()
-{
-    this->mod = NULL;
-    this->gen = NULL;
-    this->eltTree = NULL;
-    this->suivant = NULL;
-    this->hidden = 0;
-}
-Pile_sf2::SF2::BAG::MOD::MOD()
-{
-    this->suivant = NULL;
-    this->hidden = 0;
-}
-Pile_sf2::SF2::BAG::GEN::GEN()
-{
-    this->suivant = NULL;
-}
+Pile_sf2::SF2::SMPL::SMPL() :
+    eltTree(NULL),
+    hidden(false),
+    suivant(NULL)
+{}
+Pile_sf2::SF2::INST::INST() :
+    bag(NULL),
+    eltTree(NULL),
+    hidden(false),
+    suivant(NULL)
+{}
+Pile_sf2::SF2::PRST::PRST() :
+    wPreset(0),
+    wBank(0),
+    dwLibrary(0),
+    dwGenre(0),
+    dwMorphology(0),
+    bag(NULL),
+    eltTree(NULL),
+    hidden(false),
+    suivant(NULL)
+{}
+Pile_sf2::SF2::BAG::BAG() :
+    mod(NULL),
+    gen(NULL),
+    eltTree(NULL),
+    hidden(false),
+    suivant(NULL)
+{}
+Pile_sf2::SF2::BAG::MOD::MOD() :
+    hidden(false),
+    suivant(NULL)
+{}
+Pile_sf2::SF2::BAG::GEN::GEN() : suivant(NULL)
+{}
 
 ///////////////////////// METHODES PUBLIQUES /////////////////////////
 
@@ -711,7 +706,7 @@ void Pile_sf2::prepareNewActions()
             if (action->typeAction == Pile_actions::actionCreer)
             {
                 // Suppression définitive de l'élément anciennement créé puis supprimé
-                this->remove(action->id, 1, 0);
+                this->remove(action->id, true, false);
                 // Mise à jour tableau
                 emit(updateTable((int)action->id.typeElement, action->id.indexSf2,
                                  action->id.indexElt, action->id.indexElt2));
@@ -721,8 +716,8 @@ void Pile_sf2::prepareNewActions()
         // Suppression de la liste d'actions
         this->pileActions->supprimerRedo(i);
     }
-    // suppression définitive des undo après le 50ème
-    for (int i = this->pileActions->nombreEltUndo()-1; i >= 49; i--)
+    // suppression définitive des undo après un certain nombre
+    for (int i = this->pileActions->nombreEltUndo()-1; i >= UNDO_NUMBER - 1; i--)
     {
         // Parcours des actions en sens inverse
         action = this->pileActions->getEltUndo(i);
@@ -733,7 +728,7 @@ void Pile_sf2::prepareNewActions()
             {
                 // Suppression définitive d'un élément supprimé depuis longtemps
                 int message = 1;
-                this->remove(actionTmp->id, 1, 0, &message);
+                this->remove(actionTmp->id, true, false, &message);
                 // Mise à jour tableau
                 emit(updateTable((int)actionTmp->id.typeElement, actionTmp->id.indexSf2,
                                  actionTmp->id.indexElt, actionTmp->id.indexElt2));
@@ -1622,19 +1617,18 @@ int Pile_sf2::remove(EltID id, bool permanently, bool storeAction, int *message)
                     bag->mod->getElt(iVal-32768)->sfModSrcOper.Index = 0;
             }
             // suppression du mod
-            SF2::BAG::MOD *tmp = bag->mod->getElt(id.indexMod);
+            SF2::BAG::MOD * tmp = bag->mod->getElt(id.indexMod)->suivant;
+            bag->mod->getElt(id.indexMod)->suivant = NULL;
+            delete bag->mod->getElt(id.indexMod);
             if (id.indexMod == 0)
-                bag->mod = bag->mod->suivant;
+                bag->mod = tmp;
             else
-                bag->mod->getElt(id.indexMod-1)->suivant = tmp->suivant;
-            if (bag->mod->getElt(id.indexMod))
-                bag->mod->getElt(id.indexMod)->suivant = NULL;
-            delete tmp;
+                bag->mod->getElt(id.indexMod - 1)->suivant = tmp;
         }
         else
         {
             // masquage du mod
-            bag->mod->getElt(id.indexMod)->hidden = 1;
+            bag->mod->getElt(id.indexMod)->hidden = true;
         }
         }break;
     }
@@ -2632,10 +2626,11 @@ bool Pile_sf2::isValide(EltID id, bool acceptHidden)
     int i;
     SF2 *sf2Tmp;
     if (id.typeElement < elementSf2 || id.typeElement > elementPrstInstGen)
-        return 0;
+        return false;
 
-    if ((id.typeElement == elementSf2 || id.typeElement == elementRootSmpl || id.typeElement == elementRootInst
-         || id.typeElement == elementRootPrst) && id.indexSf2 == -1) return 1;
+    if (id.indexSf2 < 0)
+        return (id.typeElement == elementSf2 || id.typeElement == elementRootSmpl || id.typeElement == elementRootInst
+             || id.typeElement == elementRootPrst);
 
     // Vérification qu'indexSf2 est correct
     i = 0;
@@ -2645,9 +2640,11 @@ bool Pile_sf2::isValide(EltID id, bool acceptHidden)
         sf2Tmp = sf2Tmp->suivant;
         i++;
     }
-    if (!sf2Tmp) return 0;
-    if (sf2Tmp->hidden && !acceptHidden) return 0;
-    if ((id.typeElement == elementSmpl || id.typeElement == elementInst || id.typeElement == elementPrst) && id.indexElt == -1) return 1;
+    if (!sf2Tmp) return false;
+    if (sf2Tmp->hidden && !acceptHidden) return false;
+    if (id.indexElt < 0 && id.typeElement != elementSf2 && id.typeElement != elementRootInst &&
+            id.typeElement != elementRootSmpl && id.typeElement != elementRootPrst)
+        return (id.typeElement == elementSmpl || id.typeElement == elementInst || id.typeElement == elementPrst);
 
     // Vérification qu'indexElt est correct
     if (id.typeElement == elementSmpl)
@@ -2660,8 +2657,8 @@ bool Pile_sf2::isValide(EltID id, bool acceptHidden)
             smpl = smpl->suivant;
             i++;
         }
-        if (!smpl) return 0;
-        if (smpl->hidden && !acceptHidden) return 0;
+        if (!smpl) return false;
+        if (smpl->hidden && !acceptHidden) return false;
     }
     else if (id.typeElement == elementInst || id.typeElement == elementInstSmpl ||
              id.typeElement == elementInstMod || id.typeElement == elementInstSmplMod ||
@@ -2674,79 +2671,76 @@ bool Pile_sf2::isValide(EltID id, bool acceptHidden)
             inst = inst->suivant;
             i++;
         }
-        if (!inst) return 0;
-        if (inst->hidden && !acceptHidden) return 0;
+        if (!inst) return false;
+        if (inst->hidden && !acceptHidden) return false;
         if (id.typeElement == elementInstSmpl || id.typeElement == elementInstSmplMod || id.typeElement == elementInstSmplGen)
         {
-            if (id.indexElt2 == -1) return 1;
+            if (id.indexElt2 < 0 && id.typeElement != elementInstSmplMod && id.typeElement != elementInstSmplGen)
+                return (id.typeElement == elementInstSmpl);
+
             // Vérification qu'indexElt2 est correct
             i = 0;
-            SF2::BAG *bag;
-            bag = inst->bag;
+            SF2::BAG *bag = inst->bag;
             while (i < id.indexElt2 && bag)
             {
                 bag = bag->suivant;
                 i++;
             }
-            if (!bag) return 0;
-            if (bag->hidden && !acceptHidden) return 0;
+            if (!bag) return false;
+            if (bag->hidden && !acceptHidden) return false;
             if (id.typeElement == elementInstSmplMod || id.typeElement == elementInstSmplGen)
             {
-                if (id.indexMod == -1) return 1;
+                if (id.indexMod < 0) return true;
                 // Vérification qu'indexMod est correct
                 i = 0;
                 if (id.typeElement == elementInstSmplMod)
                 {
-                    SF2::BAG::MOD *mod;
-                    mod = bag->mod;
+                    SF2::BAG::MOD *mod = bag->mod;
                     while (i < id.indexMod && mod)
                     {
                         mod = mod->suivant;
                         i++;
                     }
-                    if (!mod) return 0;
-                    if (mod->hidden && !acceptHidden) return 0;
+                    if (!mod) return false;
+                    if (mod->hidden && !acceptHidden) return false;
                 }
                 else
                 {
-                    SF2::BAG::GEN *gen;
-                    gen = bag->gen;
+                    SF2::BAG::GEN *gen = bag->gen;
                     while (i < id.indexMod && gen)
                     {
                         gen = gen->suivant;
                         i++;
                     }
-                    if (!gen) return 0;
+                    if (!gen) return false;
                 }
             }
         }
         else if (id.typeElement == elementInstMod || id.typeElement == elementInstGen)
         {
-            if (id.indexMod == -1) return 1;
+            if (id.indexMod < 0) return true;
             // Vérification qu'indexMod est correct
             i = 0;
             if (id.typeElement == elementInstMod)
             {
-                SF2::BAG::MOD *mod;
-                mod = inst->bagGlobal.mod;
+                SF2::BAG::MOD *mod = inst->bagGlobal.mod;
                 while (i < id.indexMod && mod)
                 {
                     mod = mod->suivant;
                     i++;
                 }
-                if (!mod) return 0;
-                if (mod->hidden && !acceptHidden) return 0;
+                if (!mod) return false;
+                if (mod->hidden && !acceptHidden) return false;
             }
             else
             {
-                SF2::BAG::GEN *gen;
-                gen = inst->bagGlobal.gen;
+                SF2::BAG::GEN *gen = inst->bagGlobal.gen;
                 while (i < id.indexMod && gen)
                 {
                     gen = gen->suivant;
                     i++;
                 }
-                if (!gen) return 0;
+                if (!gen) return false;
             }
         }
     }
@@ -2762,83 +2756,80 @@ bool Pile_sf2::isValide(EltID id, bool acceptHidden)
             prst = prst->suivant;
             i++;
         }
-        if (!prst) return 0;
-        if (prst->hidden && !acceptHidden) return 0;
+        if (!prst) return false;
+        if (prst->hidden && !acceptHidden) return false;
         if (id.typeElement == elementPrstInst || id.typeElement == elementPrstInstMod || id.typeElement == elementPrstInstGen)
         {
-            if (id.indexElt2 == -1) return 1;
+            if (id.indexElt2 < 0 && id.typeElement != elementPrstInstMod && id.typeElement != elementPrstInstGen)
+                return (id.typeElement == elementPrstInst);
+
             // Vérification qu'indexElt2 est correct
             i = 0;
-            SF2::BAG *bag;
-            bag = prst->bag;
+            SF2::BAG *bag = prst->bag;
             while (i < id.indexElt2 && bag)
             {
                 bag = bag->suivant;
                 i++;
             }
-            if (!bag) return 0;
-            if (bag->hidden && !acceptHidden) return 0;
+            if (!bag) return false;
+            if (bag->hidden && !acceptHidden) return false;
             if (id.typeElement == elementPrstInstMod || id.typeElement == elementPrstInstGen)
             {
-                if (id.indexMod == -1) return 1;
+                if (id.indexMod < 0) return true;
                 // Vérification qu'indexMod est correct
                 i = 0;
                 if (id.typeElement == elementPrstInstMod)
                 {
-                    SF2::BAG::MOD *mod;
-                    mod = bag->mod;
-                    while (i < id.indexMod && mod != NULL)
+                    SF2::BAG::MOD *mod = bag->mod;
+                    while (i < id.indexMod && mod)
                     {
                         mod = mod->suivant;
                         i++;
                     }
-                    if (!mod) return 0;
-                    if (mod->hidden && !acceptHidden) return 0;
+                    if (!mod) return false;
+                    if (mod->hidden && !acceptHidden) return false;
                 }
                 else
                 {
-                    SF2::BAG::GEN *gen;
-                    gen = bag->gen;
-                    while (i < id.indexMod && gen != NULL)
+                    SF2::BAG::GEN *gen = bag->gen;
+                    while (i < id.indexMod && gen)
                     {
                         gen = gen->suivant;
                         i++;
                     }
-                    if (!gen) return 0;
+                    if (!gen) return false;
                 }
             }
         }
         else if (id.typeElement == elementPrstMod || id.typeElement == elementPrstGen)
         {
-            if (id.indexMod == -1) return 1;
+            if (id.indexMod < 0) return true;
             // Vérification qu'indexMod est correct
             i = 0;
             if (id.typeElement == elementPrstMod)
             {
-                SF2::BAG::MOD *mod;
-                mod = prst->bagGlobal.mod;
+                SF2::BAG::MOD *mod = prst->bagGlobal.mod;
                 while (i < id.indexMod && mod)
                 {
                     mod = mod->suivant;
                     i++;
                 }
-                if (!mod) return 0;
-                if (mod->hidden && !acceptHidden) return 0;
+                if (!mod) return false;
+                if (mod->hidden && !acceptHidden) return false;
             }
             else
             {
-                SF2::BAG::GEN *gen;
-                gen = prst->bagGlobal.gen;
+                SF2::BAG::GEN *gen = prst->bagGlobal.gen;
                 while (i < id.indexMod && gen)
                 {
                     gen = gen->suivant;
                     i++;
                 }
-                if (!gen) return 0;
+                if (!gen) return false;
             }
         }
     }
-    return 1;
+    return true;
 }
 
 void Pile_sf2::firstAvailablePresetBank(EltID id, int &nBank, int &nPreset)

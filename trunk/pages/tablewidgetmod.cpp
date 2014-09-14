@@ -44,42 +44,38 @@ void TableWidgetMod::addRow(int row)
 
 void TableWidgetMod::setID(EltID id, int row)
 {
-    char T[20];
+    QString str;
     switch(id.typeElement)
     {
-    case elementInstMod: case elementInst: strcpy(T, "Inst"); break;
-    case elementInstSmplMod: case elementInstSmpl: strcpy(T, "InstSmpl"); break;
-    case elementPrstMod: case elementPrst: strcpy(T, "Prst"); break;
-    case elementPrstInstMod: case elementPrstInst: strcpy(T, "PrstInst"); break;
+    case elementInstMod: case elementInst:          str = "Inst";       break;
+    case elementInstSmplMod: case elementInstSmpl:  str = "InstSmpl";   break;
+    case elementPrstMod: case elementPrst:          str = "Prst";       break;
+    case elementPrstInstMod: case elementPrstInst:  str = "PrstInst";   break;
     default: break;
     }
-    this->item(row, 0)->setText(T);
-    sprintf(T, "%d", id.indexSf2);
-    this->item(row, 1)->setText(T);
-    sprintf(T, "%d", id.indexElt);
-    this->item(row, 2)->setText(T);
-    sprintf(T, "%d", id.indexElt2);
-    this->item(row, 3)->setText(T);
-    sprintf(T, "%d", id.indexMod);
-    this->item(row, 4)->setText(T);
+    this->item(row, 0)->setText(str);
+    this->item(row, 1)->setText(QString::number(id.indexSf2));
+    this->item(row, 2)->setText(QString::number(id.indexElt));
+    this->item(row, 3)->setText(QString::number(id.indexElt2));
+    this->item(row, 4)->setText(QString::number(id.indexMod));
 }
 
 EltID TableWidgetMod::getID(int row)
 {
     EltID id;
-    if (strcmp(this->item(row, 0)->text().toStdString().c_str(), "Inst") == 0)
+    if (this->item(row, 0)->text() == "Inst")
         id.typeElement = elementInstMod;
-    else if (strcmp(this->item(row, 0)->text().toStdString().c_str(), "InstSmpl") == 0)
+    else if (this->item(row, 0)->text() == "InstSmpl")
         id.typeElement = elementInstSmplMod;
-    else if (strcmp(this->item(row, 0)->text().toStdString().c_str(), "Prst") == 0)
+    else if (this->item(row, 0)->text() == "Prst")
         id.typeElement = elementPrstMod;
-    else if (strcmp(this->item(row, 0)->text().toStdString().c_str(), "PrstInst") == 0)
+    else if (this->item(row, 0)->text() == "PrstInst")
         id.typeElement = elementPrstInstMod;
 
-    sscanf(this->item(row, 1)->text().toStdString().c_str(), "%d", &id.indexSf2);
-    sscanf(this->item(row, 2)->text().toStdString().c_str(), "%d", &id.indexElt);
-    sscanf(this->item(row, 3)->text().toStdString().c_str(), "%d", &id.indexElt2);
-    sscanf(this->item(row, 4)->text().toStdString().c_str(), "%d", &id.indexMod);
+    id.indexSf2 = this->item(row, 1)->text().toInt();
+    id.indexElt = this->item(row, 2)->text().toInt();
+    id.indexElt2 = this->item(row, 3)->text().toInt();
+    id.indexMod = this->item(row, 4)->text().toInt();
 
     return id;
 }
@@ -87,7 +83,7 @@ EltID TableWidgetMod::getID(int row)
 EltID TableWidgetMod::getID()
 {
     EltID id(elementUnknown, 0, 0, 0, 0);
-    if (this->selectedItems().count())
-        id = getID(this->selectedItems().at(0)->row());
+    if (this->currentRow() != -1)
+        id = getID(this->currentRow());
     return id;
 }

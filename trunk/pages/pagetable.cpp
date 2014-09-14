@@ -31,16 +31,15 @@
 
 QList<PageTable::Modulator> PageTable::_modulatorCopy;
 
-PageTable::PageTable(TypePage typePage, QWidget *parent) : Page(typePage, parent)
-{
-    this->table = NULL;
-    this->tableMod = NULL;
-}
+PageTable::PageTable(TypePage typePage, QWidget *parent) : Page(typePage, parent),
+    table(NULL),
+    tableMod(NULL)
+{}
 
 void PageTable::afficher()
 {
     int posV = this->table->verticalScrollBar()->value();
-    EltID id = this->tree->getID(0);
+    EltID id = this->tree->getFirstID();
     EltID ori = id;
     EltID id2 = id;
     EltID id3 = id;
@@ -326,8 +325,21 @@ void PageTable::afficher()
     this->table->verticalScrollBar()->setValue(posV);
 }
 
-void PageTable::afficheMod(EltID id, int selectedRow)
+void PageTable::afficheMod(EltID id, int selectedIndex)
 {
+    if (id.typeElement == elementPrst || id.typeElement == elementInst)
+    {
+        _pushCopyMod->setMenu(_menu);
+        _pushCopyMod->setStyleSheet("QPushButton { text-align: left; }");
+        _pushCopyMod->setMaximumWidth(38);
+    }
+    else
+    {
+        _pushCopyMod->setMenu(NULL);
+        _pushCopyMod->setStyleSheet("");
+        _pushCopyMod->setMaximumWidth(24);
+    }
+
     QString qStr;
     genAmountType genValTmp;
     SFModulator sfModTmp;
@@ -395,11 +407,11 @@ void PageTable::afficheMod(EltID id, int selectedRow)
     }
     for (int i = 0; i < 5; i++)
         this->tableMod->hideColumn(i);
-    if (selectedRow > -1)
+    if (selectedIndex > -1)
     {
         for (int i = 0; i < this->tableMod->rowCount(); i++)
         {
-            if (this->tableMod->getID(i).indexMod == selectedRow)
+            if (this->tableMod->getID(i).indexMod == selectedIndex)
                 this->tableMod->selectRow(i);
         }
     }
@@ -538,8 +550,11 @@ void PageTable::updateId(EltID id)
             }
         }
     }
+
     // Affichage mod
-    this->afficheMod(this->table->getID(0), this->tableMod->currentRow());
+    int currentRow = this->tableMod->currentRow();
+    this->afficheMod(this->table->getID(0));
+    this->tableMod->selectRow(currentRow);
 }
 
 void PageTable::resetChamp(bool &newAction, int colonne, Champ champ1, Champ champ2)
@@ -809,7 +824,11 @@ void PageTable::setAmount()
                 id.typeElement = this->lien;
             this->sf2->set(id2, champ_modAmount, val);
             if (this->tableMod->selectedItems().count())
-                this->afficheMod(id, this->tableMod->selectedItems().takeFirst()->row());
+            {
+                int currentRow = this->tableMod->selectedItems().takeFirst()->row();
+                this->afficheMod(id);
+                this->tableMod->selectRow(currentRow);
+            }
             else
                 this->afficheMod(id);
             this->mainWindow->updateDo();
@@ -848,7 +867,11 @@ void PageTable::setAbs()
                 id.typeElement = this->lien;
             this->sf2->set(id2, champ_sfModTransOper, val);
             if (this->tableMod->selectedItems().count())
-                this->afficheMod(id, this->tableMod->selectedItems().takeFirst()->row());
+            {
+                int currentRow = this->tableMod->selectedItems().takeFirst()->row();
+                this->afficheMod(id);
+                this->tableMod->selectRow(currentRow);
+            }
             else
                 this->afficheMod(id);
             this->mainWindow->updateDo();
@@ -890,7 +913,11 @@ void PageTable::setSourceType(int row, int column)
                 id.typeElement = this->lien;
             this->sf2->set(id2, champ_sfModSrcOper, val);
             if (this->tableMod->selectedItems().count())
-                this->afficheMod(id, this->tableMod->selectedItems().takeFirst()->row());
+            {
+                int currentRow = this->tableMod->selectedItems().takeFirst()->row();
+                this->afficheMod(id);
+                this->tableMod->selectRow(currentRow);
+            }
             else
                 this->afficheMod(id);
             this->mainWindow->updateDo();
@@ -932,7 +959,11 @@ void PageTable::setSourceAmountType(int row, int column)
                 id.typeElement = this->lien;
             this->sf2->set(id2, champ_sfModAmtSrcOper, val);
             if (this->tableMod->selectedItems().count())
-                this->afficheMod(id, this->tableMod->selectedItems().takeFirst()->row());
+            {
+                int currentRow = this->tableMod->selectedItems().takeFirst()->row();
+                this->afficheMod(id);
+                this->tableMod->selectRow(currentRow);
+            }
             else
                 this->afficheMod(id);
             this->mainWindow->updateDo();
@@ -1006,7 +1037,11 @@ void PageTable::setDest(int index)
             val.sfGenValue = (Champ)index;
             this->sf2->set(id2, champ_sfModDestOper, val);
             if (this->tableMod->selectedItems().count())
-                this->afficheMod(id, this->tableMod->selectedItems().takeFirst()->row());
+            {
+                int currentRow = this->tableMod->selectedItems().takeFirst()->row();
+                this->afficheMod(id);
+                this->tableMod->selectRow(currentRow);
+            }
             else
                 this->afficheMod(id);
             this->mainWindow->updateDo();
@@ -1066,7 +1101,11 @@ void PageTable::setSource(int index)
                 val.sfModValue.CC = CC;
                 this->sf2->set(id2, champ_sfModSrcOper, val);
                 if (this->tableMod->selectedItems().count())
-                    this->afficheMod(id, this->tableMod->selectedItems().takeFirst()->row());
+                {
+                    int currentRow = this->tableMod->selectedItems().takeFirst()->row();
+                    this->afficheMod(id);
+                    this->tableMod->selectRow(currentRow);
+                }
                 else
                     this->afficheMod(id);
                 this->mainWindow->updateDo();
@@ -1110,7 +1149,11 @@ void PageTable::setSource(int index)
                 val.sfModValue.CC = CC;
                 this->sf2->set(id2, champ_sfModSrcOper, val);
                 if (this->tableMod->selectedItems().count())
-                    this->afficheMod(id, this->tableMod->selectedItems().takeFirst()->row());
+                {
+                    int currentRow = this->tableMod->selectedItems().takeFirst()->row();
+                    this->afficheMod(id);
+                    this->tableMod->selectRow(currentRow);
+                }
                 else
                     this->afficheMod(id);
                 this->mainWindow->updateDo();
@@ -1157,7 +1200,11 @@ void PageTable::setSource(int index)
                     val.sfModValue.CC = CC;
                     this->sf2->set(id2, champ_sfModSrcOper, val);
                     if (this->tableMod->selectedItems().count())
-                        this->afficheMod(id, this->tableMod->selectedItems().takeFirst()->row());
+                    {
+                        int currentRow = this->tableMod->selectedItems().takeFirst()->row();
+                        this->afficheMod(id);
+                        this->tableMod->selectRow(currentRow);
+                    }
                     else
                         this->afficheMod(id);
                     this->mainWindow->updateDo();
@@ -1200,7 +1247,11 @@ void PageTable::setSource2(int index)
             val.sfModValue.CC = CC;
             this->sf2->set(id2, champ_sfModAmtSrcOper, val);
             if (this->tableMod->selectedItems().count())
-                this->afficheMod(id, this->tableMod->selectedItems().takeFirst()->row());
+            {
+                int currentRow = this->tableMod->selectedItems().takeFirst()->row();
+                this->afficheMod(id);
+                this->tableMod->selectRow(currentRow);
+            }
             else
                 this->afficheMod(id);
             this->mainWindow->updateDo();
@@ -1213,8 +1264,9 @@ void PageTable::reselect()
 {
     this->table->clearSelection();
     this->table->setSelectionMode(QAbstractItemView::MultiSelection);
-    for (unsigned int i = 0; i < this->tree->getSelectedItemsNumber(); i++)
-        this->select(this->tree->getID(i));
+    QList<EltID> listID = this->tree->getAllIDs();
+    foreach (EltID id, listID)
+        this->select(id);
     this->table->setSelectionMode(QAbstractItemView::ExtendedSelection);
     customizeKeyboard();
 }
@@ -1506,12 +1558,17 @@ int PageTable::getAssociatedMod(EltID id)
 
 void PageTable::supprimerMod()
 {
+    int rowToSelect  = tableMod->currentRow();
+    int nbRow = tableMod->rowCount();
+
     this->sf2->prepareNewActions();
+
     // Suppression mod
     EltID id = this->tableMod->getID();
-    if (id.typeElement != elementInstMod && id.typeElement != elementInstSmplMod && \
+    if (id.typeElement != elementInstMod && id.typeElement != elementInstSmplMod &&
             id.typeElement != elementPrstMod && id.typeElement != elementPrstInstMod)
         return;
+
     // Liens vers le mod ?
     int iVal = -1;
     Valeur val;
@@ -1527,6 +1584,7 @@ void PageTable::supprimerMod()
             this->sf2->set(id2, champ_sfModDestOper, val);
         }
     } while (iVal != -1);
+
     // Le mod est-il lié ?
     if (this->sf2->get(id, champ_sfModDestOper).wValue >= 32768)
     {
@@ -1540,21 +1598,27 @@ void PageTable::supprimerMod()
         }
     }
     this->sf2->remove(id);
-    this->afficheMod(this->tree->getID(0));
     this->mainWindow->updateDo();
+
+    if (rowToSelect >= nbRow - 1)
+        rowToSelect--;
+    this->afficheMod(this->tree->getFirstID());
+    this->tableMod->selectRow(rowToSelect);
 }
 
 void PageTable::nouveauMod()
 {
     this->sf2->prepareNewActions();
+
     // Création nouveau mod
-    EltID id = this->tree->getID(0);
+    EltID id = this->tree->getFirstID();
     if (id.typeElement == elementInst) id.typeElement = elementInstMod;
     else if (id.typeElement == elementPrst) id.typeElement = elementPrstMod;
     else if (id.typeElement == elementInstSmpl) id.typeElement = elementInstSmplMod;
     else if (id.typeElement == elementPrstInst) id.typeElement = elementPrstInstMod;
     else return;
     id.indexMod = this->sf2->add(id);
+
     // initialisation
     Valeur val;
     val.sfGenValue = (Champ)0;
@@ -1571,7 +1635,7 @@ void PageTable::nouveauMod()
     if (id.typeElement == elementPrstMod || id.typeElement == elementPrstInstMod)
         val.sfGenValue = (Champ)52;
     this->sf2->set(id, champ_sfModDestOper, val);
-    this->afficheMod(this->tree->getID(0), id.indexMod);
+    this->afficheMod(this->tree->getFirstID(), id.indexMod);
     this->mainWindow->updateDo();
 }
 
@@ -1580,13 +1644,20 @@ void PageTable::copyMod()
     // Sauvegarde des mods
     if (this->tree->getSelectedItemsNumber() != 1)
         return;
-    EltID id = this->tree->getID(0);
+    EltID id = this->tree->getFirstID();
     if (id.typeElement == elementInst) id.typeElement = elementInstMod;
     else if (id.typeElement == elementPrst) id.typeElement = elementPrstMod;
     else if (id.typeElement == elementInstSmpl) id.typeElement = elementInstSmplMod;
     else if (id.typeElement == elementPrstInst) id.typeElement = elementPrstInstMod;
     else return;
-    _modulatorCopy.clear();
+
+    _modulatorCopy = getModList(id);
+}
+
+QList<PageTable::Modulator> PageTable::getModList(EltID id)
+{
+    QList<Modulator> listRet;
+
     for (int i = 0; i < this->sf2->count(id); i++)
     {
         id.indexMod = i;
@@ -1599,9 +1670,11 @@ void PageTable::copyMod()
             modTmp.modAmtSrcOper = this->sf2->get(id, champ_sfModAmtSrcOper).sfModValue;
             modTmp.modTransOper = this->sf2->get(id, champ_sfModTransOper).sfTransValue;
             modTmp.index = i;
-            _modulatorCopy.append(modTmp);
+            listRet << modTmp;
         }
     }
+
+    return listRet;
 }
 
 void PageTable::pasteMod()
@@ -1609,19 +1682,29 @@ void PageTable::pasteMod()
     if (this->tree->getSelectedItemsNumber() != 1)
         return;
     this->sf2->prepareNewActions();
-    EltID id = this->tree->getID(0);
+    EltID id = this->tree->getFirstID();
+
+    pasteMod(id, _modulatorCopy);
+
+    this->afficheMod(this->tree->getFirstID());
+    this->mainWindow->updateDo();
+}
+
+void PageTable::pasteMod(EltID id, QList<Modulator> modulators)
+{
     if (id.typeElement == elementInst) id.typeElement = elementInstMod;
     else if (id.typeElement == elementPrst) id.typeElement = elementPrstMod;
     else if (id.typeElement == elementInstSmpl) id.typeElement = elementInstSmplMod;
     else if (id.typeElement == elementPrstInst) id.typeElement = elementPrstInstMod;
     else return;
+
     if (id.typeElement == elementPrstMod || id.typeElement == elementPrstInstMod)
     {
         // Vérification que toutes les destinations sont possibles
         Champ champTmp;
-        for (int i = 0; i < _modulatorCopy.size(); i++)
+        for (int i = 0; i < modulators.size(); i++)
         {
-            champTmp = _modulatorCopy[i].modDestOper;
+            champTmp = modulators[i].modDestOper;
             QString warnQStr = trUtf8("Action impossible : ");
             if (champTmp == champ_startAddrsOffset ||
                     champTmp == champ_startAddrsCoarseOffset ||
@@ -1647,6 +1730,7 @@ void PageTable::pasteMod()
             }
         }
     }
+
     // Suppression des mods existants
     int nbElt = this->sf2->count(id);
     for (int i = nbElt - 1; i >= 0; i--)
@@ -1655,17 +1739,19 @@ void PageTable::pasteMod()
         if (!this->sf2->get(id, champ_hidden).bValue)
             this->sf2->remove(id);
     }
+
     // Création de nouveaux mods
     QList<int> listIndex;
-    for (int i = 0; i < _modulatorCopy.size(); i++)
+    for (int i = 0; i < modulators.size(); i++)
         listIndex.append(this->sf2->add(id));
+
     // Copie des configurations des mods sauvegardés
     Valeur valTmp;
     Modulator modTmp;
-    for (int i = 0; i < _modulatorCopy.size(); i++)
+    for (int i = 0; i < modulators.size(); i++)
     {
         id.indexMod = listIndex.at(i);
-        modTmp = _modulatorCopy.at(i);
+        modTmp = modulators.at(i);
         valTmp.sfModValue = modTmp.modSrcOper;
         this->sf2->set(id, champ_sfModSrcOper, valTmp);
         if (modTmp.modDestOper >= 32768)
@@ -1673,9 +1759,9 @@ void PageTable::pasteMod()
             // Lien vers un autre modulateur
             int link = modTmp.modDestOper - 32768;
             int pos = -1;
-            for (int j = 0; j < _modulatorCopy.size(); j++)
+            for (int j = 0; j < modulators.size(); j++)
             {
-                if (_modulatorCopy[j].index == link)
+                if (modulators[j].index == link)
                     pos = j;
             }
             if (pos != i && pos > -1)
@@ -1693,7 +1779,35 @@ void PageTable::pasteMod()
         valTmp.sfTransValue = modTmp.modTransOper;
         this->sf2->set(id, champ_sfModTransOper, valTmp);
     }
-    this->afficheMod(this->tree->getID(0), -1);
+}
+
+void PageTable::duplicateMod()
+{
+    // Duplication des mods dans tous les autres instruments ou presets
+    if (this->tree->getSelectedItemsNumber() != 1)
+        return;
+    EltID id = this->tree->getFirstID();
+    if (id.typeElement != elementInst && id.typeElement != elementPrst)
+        return;
+
+    EltID idMod = id;
+    if (idMod.typeElement == elementInst)
+        idMod.typeElement = elementInstMod;
+    else
+        idMod.typeElement = elementPrstMod;
+
+    // Copie des mods
+    QList<Modulator> modulators = getModList(idMod);
+
+    // Remplacements
+    int currentIndex = id.indexElt;
+    for (int i = 0; i < sf2->count(id); i++)
+    {
+        id.indexElt = i;
+        if (i != currentIndex && !sf2->get(id, champ_hidden).bValue)
+            pasteMod(id, modulators);
+    }
+
     this->mainWindow->updateDo();
 }
 
@@ -2082,7 +2196,7 @@ int PageTable::limit(int iVal, Champ champ, EltID id)
 void PageTable::paramGlobal()
 {
     this->sf2->prepareNewActions();
-    EltID id = this->tree->getID(0);
+    EltID id = this->tree->getFirstID();
     if (m_typePage == PAGE_INST)
         id.typeElement = elementInstSmpl;
     else
@@ -2212,7 +2326,7 @@ void PageTable::paramGlobal(QVector<double> dValues, QList<EltID> listElt, int t
 
 void PageTable::duplication()
 {
-    EltID id = this->tree->getID(0);
+    EltID id = this->tree->getFirstID();
     if (m_typePage == PAGE_INST)
     {
         id.typeElement = elementInstSmpl;
@@ -2241,7 +2355,7 @@ void PageTable::duplication()
 void PageTable::duplication(QVector<int> listeVelocites, bool duplicKey, bool duplicVel)
 {
     this->sf2->prepareNewActions();
-    EltID id = this->tree->getID(0);
+    EltID id = this->tree->getFirstID();
     if (m_typePage == PAGE_INST)
         id.typeElement = elementInstSmpl;
     else
@@ -2514,7 +2628,7 @@ void PageTable::duplication(EltID id, QVector<int> listeVelocite)
 
 void PageTable::spatialisation()
 {
-    EltID id = this->tree->getID(0);
+    EltID id = this->tree->getFirstID();
     if (m_typePage == PAGE_INST)
     {
         id.typeElement = elementInstSmpl;
@@ -2572,7 +2686,7 @@ void PageTable::spatialisation(QMap<int, double> mapPan)
     QList<EltID> list1;
     QList<genAmountType> listRange;
     QList<EltID> list2;
-    EltID id = this->tree->getID(0);
+    EltID id = this->tree->getFirstID();
     genAmountType amount;
     bool found;
     int pos;
@@ -2732,7 +2846,7 @@ void PageTable::spatialisation(QMap<int, double> mapPan)
 
 void PageTable::visualize()
 {
-    EltID id = this->tree->getID(0);
+    EltID id = this->tree->getFirstID();
     if (m_typePage == PAGE_INST)
         id.typeElement = elementInstSmpl;
     else
