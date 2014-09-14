@@ -52,9 +52,11 @@ DialogAbout::DialogAbout(QWidget *parent) :
     _credit.addContributor("Michael Schyllberg", "michael.schyllberg@bredband.net");
     _credit.addContributor("Paul Stratman", "pcstratman@gmail.com");
     _credit.addContributor("Steve Clarke", "stevertyu@yahoo.com");
+    _credit.addContributor("Andrea Celani", "acelani74@gmail.com");
     _credit.addTranslator("Davy Triponney", "info@polyphone.fr");
     _credit.addTranslator("F.J. Martínez Murcia", "fjesusmartinez@ugr.es");
     _credit.addTranslator("Steve Clarke", "stevertyu@yahoo.com");
+    _credit.addTranslator("Andrea Celani", "acelani74@gmail.com");
     ui->textBrowser->setHtml(_credit.getText());
 }
 

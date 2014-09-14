@@ -661,8 +661,8 @@ private slots:
     void on_comboDo_currentIndexChanged(int index);
     void on_spinDefaultVelocity_editingFinished();
     void on_comboLangue_currentIndexChanged(int index);
-
     void on_checkRowSameWidth_clicked();
+    void setColors();
 
 private:
     QSettings settings;
@@ -703,7 +703,6 @@ private:
     Config(QWidget *parent, PianoKeybdCustom *keyboard);
     void load();
     void store();
-    void setColors();
     void fillActions();
     QByteArray getDefaultListActions();
     void renameComboDo();
