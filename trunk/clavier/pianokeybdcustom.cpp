@@ -84,17 +84,18 @@ PianoKeybdCustom::PianoKeybdCustom(QWidget *parent) : PianoKeybd(parent),
     try
     {
 #if defined(__LINUX_ALSASEQ__)
-        this->midiin = new RtMidiInAlsa("Polyphone");
+        this->midiin = new RtMidiIn(RtMidi::LINUX_ALSA, "Polyphone");
 #endif
 #if defined(__WINDOWS_MM__)
-        this->midiin = new RtMidiInWinMM("Polyphone");
+        this->midiin = new RtMidiIn(RtMidi::WINDOWS_MM, "Polyphone");
 #endif
 #if defined(__MACOSX_CORE__)
-        this->midiin = new RtMidiInCoreMidi("Polyphone");
+        this->midiin = new RtMidiIn(RtMidi::MACOSX_CORE, "Polyphone");
 #endif
     }
-    catch (RtError &error)
+    catch (std::exception &error)
     {
+        Q_UNUSED(error)
         this->midiin = NULL;
     }
     if (this->midiin)
@@ -132,8 +133,9 @@ void PianoKeybdCustom::openMidiPort(int val)
             {
                 this->midiin->openPort(val);
             }
-            catch (RtError &error)
+            catch (std::exception &error)
             {
+                Q_UNUSED(error)
             }
         }
     }
