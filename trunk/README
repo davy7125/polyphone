@@ -6,10 +6,13 @@
 ######### 1. Prerequisite ##########################################################################
 
 The following libraries are required (the name may vary depending on your system):
- - qt        (libqt4-dev / qt4-devel)
- - alsa      (libasound2-dev / alsa-lib-devel)
- - jack      (libjack-jack2-dev / jack-audio-connection-kit-devel)
- - portaudio (portaudio19-dev / portaudio-devel)
+ - qt          (libqt4-dev / qt4-devel)
+ - alsa        (libasound2-dev / alsa-lib-devel)
+ - jack        (libjack-jack2-dev / jack-audio-connection-kit-devel)
+ - portaudio   (portaudio19-dev / portaudio-devel)
+ - rtmidi      (librtmidi-dev)
+ - stk         (libstk0-dev)
+ - qcustomplot (libqcustomplot-dev)
 Use your package manager to install them: synaptic, yum,...
 
 

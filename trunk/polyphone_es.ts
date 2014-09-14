@@ -11,354 +11,354 @@
 </context>
 <context>
     <name>Config</name>
-    <message utf8="true">
+    <message>
         <location filename="gui_divers/config.ui" line="17"/>
         <source>Préférences</source>
         <translation>Preferencias</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="gui_divers/config.ui" line="46"/>
         <source>Général</source>
         <translation>General</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="315"/>
+        <location filename="gui_divers/config.ui" line="329"/>
         <source>Sortie audio</source>
         <translation>Salida de Audio</translation>
     </message>
-    <message utf8="true">
-        <location filename="gui_divers/config.ui" line="367"/>
+    <message>
+        <location filename="gui_divers/config.ui" line="381"/>
         <source>Entrée midi</source>
         <translation>Entrada MIDI</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="1225"/>
+        <location filename="gui_divers/config.ui" line="1248"/>
         <source>Import fichiers wav</source>
         <translation>Importar archivos WAV</translation>
     </message>
-    <message utf8="true">
-        <location filename="gui_divers/config.ui" line="1212"/>
+    <message>
+        <location filename="gui_divers/config.ui" line="1235"/>
         <source>ajuster à la boucle</source>
         <translation>recortar al loop</translation>
     </message>
-    <message utf8="true">
-        <location filename="gui_divers/config.ui" line="1199"/>
+    <message>
+        <location filename="gui_divers/config.ui" line="1222"/>
         <source>enlever le blanc au départ</source>
         <translation>eliminar silencio al inicio</translation>
     </message>
-    <message utf8="true">
-        <location filename="gui_divers/config.ui" line="1238"/>
+    <message>
+        <location filename="gui_divers/config.ui" line="1261"/>
         <source>répercuter les modifications</source>
         <oldsource>répercuter les modifications si stéréo</oldsource>
         <translation>enlazar las modificaciones</translation>
     </message>
-    <message utf8="true">
-        <location filename="gui_divers/config.ui" line="1251"/>
+    <message>
+        <location filename="gui_divers/config.ui" line="1274"/>
         <source>Édition stéréo</source>
         <oldsource>Édition des samples</oldsource>
         <translation>Edición estéreo</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="344"/>
+        <location filename="gui_divers/config.ui" line="358"/>
         <source>Taille du tampon</source>
         <translation>Tamaño de búfer</translation>
     </message>
-    <message utf8="true">
-        <location filename="gui_divers/config.ui" line="234"/>
+    <message>
+        <location filename="gui_divers/config.ui" line="248"/>
         <source>Entrées / sorties</source>
         <translation>Entrada / Salida</translation>
     </message>
-    <message utf8="true">
-        <location filename="gui_divers/config.ui" line="101"/>
+    <message>
+        <location filename="gui_divers/config.ui" line="110"/>
         <source>Do central → 60, puis 61</source>
         <oldsource>Numérique (do central → 60)</oldsource>
         <translation>Do central → 60, luego 61</translation>
     </message>
-    <message utf8="true">
-        <location filename="gui_divers/config.ui" line="106"/>
+    <message>
+        <location filename="gui_divers/config.ui" line="115"/>
         <source>Do central → C3, puis C♯3</source>
         <oldsource>Texte (do central → C3)</oldsource>
         <translation>Do central → C3, luego C♯3</translation>
     </message>
-    <message utf8="true">
-        <location filename="gui_divers/config.ui" line="111"/>
+    <message>
+        <location filename="gui_divers/config.ui" line="120"/>
         <source>Do central → C3, puis D♭3</source>
         <oldsource>Texte (do central → C4)</oldsource>
         <translation>Do central → C3, luego D♭3</translation>
     </message>
-    <message utf8="true">
-        <location filename="gui_divers/config.ui" line="116"/>
+    <message>
+        <location filename="gui_divers/config.ui" line="125"/>
         <source>Do central → C4, puis C♯4</source>
         <oldsource>Texte (do central → C5)</oldsource>
         <translation>Do central → C4, luego C♯4</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="151"/>
+        <location filename="gui_divers/config.ui" line="160"/>
         <source>Nom des notes</source>
         <translation>Nombre de las notas</translation>
     </message>
-    <message utf8="true">
-        <location filename="gui_divers/config.ui" line="391"/>
+    <message>
+        <location filename="gui_divers/config.ui" line="405"/>
         <source>Synthétiseur</source>
         <translation>Sintetizador</translation>
     </message>
-    <message utf8="true">
-        <location filename="gui_divers/config.ui" line="414"/>
+    <message>
+        <location filename="gui_divers/config.ui" line="437"/>
         <source>Réverbération</source>
         <translation>Reverb</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="450"/>
-        <location filename="gui_divers/config.ui" line="608"/>
+        <location filename="gui_divers/config.ui" line="473"/>
+        <location filename="gui_divers/config.ui" line="631"/>
         <source>Niveau</source>
         <translation>Nivel</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="518"/>
+        <location filename="gui_divers/config.ui" line="541"/>
         <source>Profondeur</source>
         <translation>Profundidad</translation>
     </message>
-    <message utf8="true">
-        <location filename="gui_divers/config.ui" line="534"/>
+    <message>
+        <location filename="gui_divers/config.ui" line="557"/>
         <source>Densité</source>
         <translation>Densidad</translation>
     </message>
-    <message utf8="true">
-        <location filename="gui_divers/config.ui" line="550"/>
+    <message>
+        <location filename="gui_divers/config.ui" line="573"/>
         <source>Atténuation</source>
         <translation>Atenuación</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="575"/>
+        <location filename="gui_divers/config.ui" line="598"/>
         <source>Chorus</source>
         <translation>Chorus</translation>
     </message>
-    <message utf8="true">
-        <location filename="gui_divers/config.ui" line="650"/>
+    <message>
+        <location filename="gui_divers/config.ui" line="673"/>
         <source>Fréquence</source>
         <translation>Frecuencia</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="666"/>
+        <location filename="gui_divers/config.ui" line="689"/>
         <source>Amplitude</source>
         <translation>Amplitud</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="711"/>
+        <location filename="gui_divers/config.ui" line="734"/>
         <source>Gain (dB)</source>
         <translation>Ganancia (dB)</translation>
     </message>
-    <message utf8="true">
-        <location filename="gui_divers/config.ui" line="1078"/>
+    <message>
+        <location filename="gui_divers/config.ui" line="1101"/>
         <source>Arrière-plan</source>
         <translation>Fondo</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="1153"/>
+        <location filename="gui_divers/config.ui" line="1176"/>
         <source>Onde</source>
         <translation>Onda</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="1034"/>
+        <location filename="gui_divers/config.ui" line="1057"/>
         <source>Grille</source>
         <translation>Cuadrícula</translation>
     </message>
-    <message utf8="true">
-        <location filename="gui_divers/config.ui" line="990"/>
+    <message>
+        <location filename="gui_divers/config.ui" line="1013"/>
         <source>Début de boucle</source>
         <translation>Inicio de loop</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="838"/>
+        <location filename="gui_divers/config.ui" line="861"/>
         <source>Fin de boucle</source>
         <translation>Fin de loop</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="946"/>
+        <location filename="gui_divers/config.ui" line="969"/>
         <source>Barre de lecture</source>
         <translation>Cursor de lectura</translation>
     </message>
-    <message utf8="true">
-        <location filename="gui_divers/config.ui" line="857"/>
-        <location filename="gui_divers/config.ui" line="1536"/>
+    <message>
+        <location filename="gui_divers/config.ui" line="880"/>
+        <location filename="gui_divers/config.ui" line="1568"/>
         <source>Réinitialiser</source>
         <translation>Reiniciar</translation>
     </message>
-    <message utf8="true">
-        <location filename="gui_divers/config.ui" line="765"/>
+    <message>
+        <location filename="gui_divers/config.ui" line="788"/>
         <source>Échantillons</source>
         <translation>Muestras</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="792"/>
+        <location filename="gui_divers/config.ui" line="815"/>
         <source>Couleurs du graphique</source>
         <translation>Colores del gráfico</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="1169"/>
+        <location filename="gui_divers/config.ui" line="1192"/>
         <source>Options</source>
         <translation>Opciones</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="1280"/>
+        <location filename="gui_divers/config.ui" line="1303"/>
         <source>Barre d&apos;outils</source>
         <translation>Barra de herramientas</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="1309"/>
+        <location filename="gui_divers/config.ui" line="1341"/>
         <source>Actions disponibles</source>
         <translation>Acciones disponibles</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="1555"/>
+        <location filename="gui_divers/config.ui" line="1587"/>
         <source>Clavier</source>
         <translation>Teclado</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="1698"/>
+        <location filename="gui_divers/config.ui" line="1739"/>
         <source>Premier Do</source>
         <translation>Primero do</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="1580"/>
+        <location filename="gui_divers/config.ui" line="1621"/>
         <source>Octave 1</source>
         <translation>Octava 1</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="64"/>
+        <location filename="gui_divers/config.ui" line="73"/>
         <source>Interface</source>
         <translation>Interfaz</translation>
     </message>
-    <message utf8="true">
-        <location filename="gui_divers/config.ui" line="121"/>
+    <message>
+        <location filename="gui_divers/config.ui" line="130"/>
         <source>Do central → C4, puis D♭4</source>
         <translation>Do central → C4, luego D♭4</translation>
     </message>
-    <message utf8="true">
-        <location filename="gui_divers/config.ui" line="126"/>
+    <message>
+        <location filename="gui_divers/config.ui" line="135"/>
         <source>Do central → C5, puis C♯5</source>
         <translation>Do central → C5, luego C♯5</translation>
     </message>
-    <message utf8="true">
-        <location filename="gui_divers/config.ui" line="131"/>
+    <message>
+        <location filename="gui_divers/config.ui" line="140"/>
         <source>Do central → C5, puis D♭5</source>
         <translation>Do central → C5, luego D♭5</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="164"/>
+        <location filename="gui_divers/config.ui" line="173"/>
         <source>fixe</source>
         <translation>fijado</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="177"/>
+        <location filename="gui_divers/config.ui" line="186"/>
         <source>Largeur des colonnes</source>
         <translation>Ancho de columna</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="190"/>
+        <location filename="gui_divers/config.ui" line="199"/>
         <source>Langue</source>
         <translation>Idioma</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="1585"/>
+        <location filename="gui_divers/config.ui" line="1626"/>
         <source>Octave 2</source>
         <translation>Octava 2</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="1590"/>
+        <location filename="gui_divers/config.ui" line="1631"/>
         <source>Octave 3</source>
         <translation>Octava 3</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="1595"/>
+        <location filename="gui_divers/config.ui" line="1636"/>
         <source>Octave 4</source>
         <translation>Octava 4</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="1600"/>
-        <location filename="gui_divers/config.ui" line="1660"/>
+        <location filename="gui_divers/config.ui" line="1641"/>
+        <location filename="gui_divers/config.ui" line="1701"/>
         <source>Do</source>
         <translation>Do</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="1605"/>
+        <location filename="gui_divers/config.ui" line="1646"/>
         <source>Do#</source>
         <translation>Do#</translation>
     </message>
-    <message utf8="true">
-        <location filename="gui_divers/config.ui" line="1610"/>
+    <message>
+        <location filename="gui_divers/config.ui" line="1651"/>
         <source>Ré</source>
         <translation>Re</translation>
     </message>
-    <message utf8="true">
-        <location filename="gui_divers/config.ui" line="1615"/>
+    <message>
+        <location filename="gui_divers/config.ui" line="1656"/>
         <source>Ré#</source>
         <translation>Re#</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="1620"/>
+        <location filename="gui_divers/config.ui" line="1661"/>
         <source>Mi</source>
         <translation>Mi</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="1625"/>
+        <location filename="gui_divers/config.ui" line="1666"/>
         <source>Fa</source>
         <translation>Fa</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="1630"/>
+        <location filename="gui_divers/config.ui" line="1671"/>
         <source>Fa#</source>
         <translation>Fa#</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="1635"/>
+        <location filename="gui_divers/config.ui" line="1676"/>
         <source>Sol</source>
         <translation>Sol</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="1640"/>
+        <location filename="gui_divers/config.ui" line="1681"/>
         <source>Sol#</source>
         <translation>Sol#</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="1645"/>
+        <location filename="gui_divers/config.ui" line="1686"/>
         <source>La</source>
         <translation>La</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="1650"/>
+        <location filename="gui_divers/config.ui" line="1691"/>
         <source>La#</source>
         <translation>La#</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="1655"/>
+        <location filename="gui_divers/config.ui" line="1696"/>
         <source>Si</source>
         <translation>Si</translation>
     </message>
-    <message utf8="true">
-        <location filename="gui_divers/config.ui" line="1681"/>
+    <message>
+        <location filename="gui_divers/config.ui" line="1722"/>
         <source>Vélocité par défaut</source>
         <translation>Velocidad por defecto</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="1771"/>
+        <location filename="gui_divers/config.ui" line="1812"/>
         <source>Fermer</source>
         <translation>Cerrar</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="gui_divers/config.cpp" line="73"/>
         <source>Défaut</source>
         <translation>Por defecto</translation>
     </message>
     <message>
         <location filename="gui_divers/config.cpp" line="188"/>
-        <location filename="gui_divers/config.cpp" line="1062"/>
+        <location filename="gui_divers/config.cpp" line="1068"/>
         <source>Information</source>
         <translation>Información</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="gui_divers/config.cpp" line="189"/>
-        <location filename="gui_divers/config.cpp" line="1063"/>
+        <location filename="gui_divers/config.cpp" line="1069"/>
         <source>La modification sera prise en compte lors du prochain démarrage du logiciel.</source>
         <oldsource>La modification sera prise en compte lors du prochain dÃ©marrage du logiciel.</oldsource>
         <translation>La modificación será aplicada la próxima vez que inicie el programa.</translation>
@@ -378,7 +378,7 @@
         <source>Couleur de la grille</source>
         <translation>Color de la cuadrícula</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="gui_divers/config.cpp" line="613"/>
         <source>Couleur du début de la boucle</source>
         <translation>Color de inicio de loop</translation>
@@ -393,7 +393,7 @@
         <source>Couleur du curseur de lecture</source>
         <translation>Color del cursor de lectura</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="gui_divers/config.cpp" line="671"/>
         <location filename="gui_divers/config.cpp" line="687"/>
         <source>---- séparateur ----</source>
@@ -469,7 +469,7 @@
         <source>a</source>
         <translation>q</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="gui_divers/config.h" line="524"/>
         <source>é</source>
         <translation>2</translation>
@@ -514,7 +514,7 @@
         <source>y</source>
         <translation>y</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="gui_divers/config.h" line="533"/>
         <source>è</source>
         <translation>7</translation>
@@ -667,7 +667,7 @@
         <source>A propos</source>
         <translation>Acerca de</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="gui_divers/dialog_about.ui" line="148"/>
         <source>Crédits</source>
         <translation>Créditos</translation>
@@ -685,7 +685,7 @@
 </context>
 <context>
     <name>DialogCeleste</name>
-    <message utf8="true">
+    <message>
         <location filename="tools/dialog_celeste.ui" line="17"/>
         <source>Accordage céleste</source>
         <translation>Afinación celeste</translation>
@@ -695,12 +695,12 @@
         <source>Nombre de battements par secondes au do 4 (note 60)</source>
         <translation>Número de pulsos por segundo en Do4 (nota 60)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="tools/dialog_celeste.ui" line="47"/>
         <source>Le signe définit le sens du désaccordage.</source>
         <translation>El signo define la dirección de la desafinación.</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="tools/dialog_celeste.ui" line="70"/>
         <source>Division à l&apos;octave suivante</source>
         <translation>División a la siguiente octava</translation>
@@ -723,7 +723,7 @@
         <source>Une division pour chaque note</source>
         <translation>Una división por nota</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="tools/dialog_duplication.ui" line="124"/>
         <source>Une division pour chaque étendue de vélocité</source>
         <translation>Una división por cada región de velocidad</translation>
@@ -742,7 +742,7 @@
         <source>Tout cocher</source>
         <translation>Seleccionar todo</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="gui_divers/dialog_export.ui" line="54"/>
         <source>Tout décocher</source>
         <translation>Deseleccionar todo</translation>
@@ -757,17 +757,17 @@
         <source>Format</source>
         <translation>Formato</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="gui_divers/dialog_export.ui" line="135"/>
         <source>numéro de preset en préfixe</source>
         <translation>Número de preset en prefijo</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="gui_divers/dialog_export.ui" line="142"/>
         <source>un répertoire par banque</source>
         <translation>Una carpeta por banco</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="gui_divers/dialog_export.ui" line="149"/>
         <source>classement général midi</source>
         <translation>Clasificación general MIDI</translation>
@@ -777,7 +777,7 @@
         <source>Annuler</source>
         <translation>Deshacer</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="gui_divers/dialog_export.cpp" line="90"/>
         <source>Choisir un répertoire de destination</source>
         <translation>Elija un directorio de destino</translation>
@@ -790,7 +790,7 @@
         <source>aide</source>
         <translation>ayuda</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="gui_divers/dialog_help.cpp" line="111"/>
         <source>Présentation du logiciel</source>
         <translation>Descripción del software</translation>
@@ -805,7 +805,7 @@
         <source>Fichier</source>
         <translation>Archivo</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="gui_divers/dialog_help.cpp" line="115"/>
         <source>Édition</source>
         <translation>Editar</translation>
@@ -828,7 +828,7 @@
     </message>
     <message>
         <location filename="gui_divers/dialog_help.cpp" line="120"/>
-        <location filename="gui_divers/dialog_help.cpp" line="186"/>
+        <location filename="gui_divers/dialog_help.cpp" line="187"/>
         <source>Barre d&apos;outils</source>
         <translation>Barra de herramientas</translation>
     </message>
@@ -857,7 +857,7 @@
         <source>Menu contextuel</source>
         <translation>Menú contextual</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="gui_divers/dialog_help.cpp" line="127"/>
         <source>Glisser / déposer</source>
         <translation>Arrastrar / soltar</translation>
@@ -867,17 +867,17 @@
         <source>Recherche</source>
         <translation>Buscar</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="gui_divers/dialog_help.cpp" line="130"/>
         <source>Pages d&apos;édition</source>
         <translation>Páginas de edición</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="gui_divers/dialog_help.cpp" line="131"/>
         <source>Informations générales</source>
         <translation>Información general</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="gui_divers/dialog_help.cpp" line="132"/>
         <source>Zone d&apos;édition</source>
         <translation>Área de edición</translation>
@@ -887,10 +887,10 @@
         <source>Zone d&apos;informations</source>
         <translation>Área de información</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="gui_divers/dialog_help.cpp" line="134"/>
         <location filename="gui_divers/dialog_help.cpp" line="146"/>
-        <location filename="gui_divers/dialog_help.cpp" line="185"/>
+        <location filename="gui_divers/dialog_help.cpp" line="186"/>
         <source>Échantillons</source>
         <translation>Muestras</translation>
     </message>
@@ -904,12 +904,12 @@
         <source>Informations</source>
         <translation>Información</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="gui_divers/dialog_help.cpp" line="137"/>
         <source>Fréquences</source>
         <translation>Frecuencias</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="gui_divers/dialog_help.cpp" line="138"/>
         <source>Égaliseur</source>
         <translation>Ecualizador</translation>
@@ -941,7 +941,7 @@
         <source>Presets</source>
         <translation>Presets</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="gui_divers/dialog_help.cpp" line="147"/>
         <source>Ajuster à la fin de boucle</source>
         <translation>Recortar al final del loop</translation>
@@ -956,7 +956,7 @@
         <source>Diminuer sifflements</source>
         <translation>Reducción de silbido</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="gui_divers/dialog_help.cpp" line="150"/>
         <source>Enlever blanc au départ</source>
         <translation>Eliminar silencio al inicio</translation>
@@ -971,7 +971,7 @@
         <source>Normaliser volume</source>
         <translation>Normalizar volumen</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="gui_divers/dialog_help.cpp" line="153"/>
         <source>Réglage balance</source>
         <translation>Ajustar balance</translation>
@@ -981,12 +981,12 @@
         <source>Transposer</source>
         <translation>Transportar</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="gui_divers/dialog_help.cpp" line="157"/>
         <source>Création mixture</source>
         <translation>Creación de mixturas</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="gui_divers/dialog_help.cpp" line="158"/>
         <source>Accordage céleste</source>
         <translation>Afinación celeste</translation>
@@ -997,18 +997,18 @@
         <source>Duplication des divisions</source>
         <translation>Duplicación de las divisiones</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="gui_divers/dialog_help.cpp" line="160"/>
         <source>Élaboration release</source>
         <translation>Asignar valores de release</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="gui_divers/dialog_help.cpp" line="161"/>
         <location filename="gui_divers/dialog_help.cpp" line="169"/>
         <source>Paramétrage global</source>
         <translation>Parámetros generales</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="gui_divers/dialog_help.cpp" line="162"/>
         <source>Répartition automatique</source>
         <translation>Distribución automática</translation>
@@ -1035,98 +1035,103 @@
         <source>Globaux</source>
         <translation>Global</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="gui_divers/dialog_help.cpp" line="174"/>
         <source>Association auto échantillons</source>
         <translation>Asociación automática de muestras</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="gui_divers/dialog_help.cpp" line="175"/>
         <source>Dissocier les échantillons stéréo</source>
         <translation>Dividir las muestras estéreo</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="gui_divers/dialog_help.cpp" line="176"/>
         <source>Enlever les éléments non utilisés</source>
         <translation>Eliminar elementos no utilizados</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="gui_divers/dialog_help.cpp" line="177"/>
+        <source>Enlever tous les modulateurs</source>
+        <translation>Retire todos los moduladores</translation>
+    </message>
+    <message>
+        <location filename="gui_divers/dialog_help.cpp" line="178"/>
         <source>Exporter pics de fréquence (.csv)</source>
         <translation>Exportación de picos de frecuencia (.csv)</translation>
     </message>
-    <message utf8="true">
-        <location filename="gui_divers/dialog_help.cpp" line="178"/>
+    <message>
+        <location filename="gui_divers/dialog_help.cpp" line="179"/>
         <source>Régler atténuation minimale</source>
         <translation>Establecer atenuación mínima</translation>
     </message>
-    <message utf8="true">
-        <location filename="gui_divers/dialog_help.cpp" line="180"/>
+    <message>
+        <location filename="gui_divers/dialog_help.cpp" line="181"/>
         <source>Magnétophone</source>
         <translation>Grabadora</translation>
     </message>
-    <message utf8="true">
-        <location filename="gui_divers/dialog_help.cpp" line="182"/>
+    <message>
+        <location filename="gui_divers/dialog_help.cpp" line="183"/>
         <source>Préférences du logiciel</source>
         <translation>Preferencias de software</translation>
     </message>
-    <message utf8="true">
-        <location filename="gui_divers/dialog_help.cpp" line="183"/>
+    <message>
+        <location filename="gui_divers/dialog_help.cpp" line="184"/>
         <source>Général</source>
         <translation>General</translation>
     </message>
-    <message utf8="true">
-        <location filename="gui_divers/dialog_help.cpp" line="184"/>
+    <message>
+        <location filename="gui_divers/dialog_help.cpp" line="185"/>
         <source>Synthétiseur</source>
         <translation>Sintetizador</translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_help.cpp" line="187"/>
+        <location filename="gui_divers/dialog_help.cpp" line="188"/>
         <source>Clavier</source>
         <translation>Teclado</translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_help.cpp" line="189"/>
+        <location filename="gui_divers/dialog_help.cpp" line="190"/>
         <source>Annexes</source>
         <translation>Apéndices</translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_help.cpp" line="190"/>
+        <location filename="gui_divers/dialog_help.cpp" line="191"/>
         <source>Tutoriel</source>
         <translation>Tutorial</translation>
     </message>
-    <message utf8="true">
-        <location filename="gui_divers/dialog_help.cpp" line="191"/>
+    <message>
+        <location filename="gui_divers/dialog_help.cpp" line="192"/>
         <source>Préparation des échantillons</source>
         <translation>Preparación de las muestras</translation>
     </message>
-    <message utf8="true">
-        <location filename="gui_divers/dialog_help.cpp" line="192"/>
+    <message>
+        <location filename="gui_divers/dialog_help.cpp" line="193"/>
         <source>Création d&apos;un instrument</source>
         <translation>Crear un instrumento</translation>
     </message>
-    <message utf8="true">
-        <location filename="gui_divers/dialog_help.cpp" line="193"/>
+    <message>
+        <location filename="gui_divers/dialog_help.cpp" line="194"/>
         <source>Création d&apos;un preset</source>
         <translation>Crear un preset</translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_help.cpp" line="194"/>
+        <location filename="gui_divers/dialog_help.cpp" line="195"/>
         <source>Soundfonts sf2</source>
         <translation>Soundfonts sf2</translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_help.cpp" line="195"/>
+        <location filename="gui_divers/dialog_help.cpp" line="196"/>
         <source>Import / export sfz</source>
         <translation>Importar / exportar sfz</translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_help.cpp" line="196"/>
+        <location filename="gui_divers/dialog_help.cpp" line="197"/>
         <source>Limitations du logiciel</source>
         <translation>Limitaciones del software</translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_help.cpp" line="211"/>
+        <location filename="gui_divers/dialog_help.cpp" line="212"/>
         <source>fr</source>
         <translatorcomment>will be &quot;es&quot; if a spanish translation of the documentation is done</translatorcomment>
         <translation>en</translation>
@@ -1134,7 +1139,7 @@
 </context>
 <context>
     <name>DialogList</name>
-    <message utf8="true">
+    <message>
         <location filename="gui_divers/dialog_list.cpp" line="53"/>
         <source>Liste des échantillons</source>
         <oldsource>Liste des samples</oldsource>
@@ -1153,7 +1158,7 @@
 </context>
 <context>
     <name>DialogMagnetophone</name>
-    <message utf8="true">
+    <message>
         <location filename="tools/dialog_magnetophone.ui" line="14"/>
         <source>Magnétophone</source>
         <translation>Grabadora</translation>
@@ -1177,7 +1182,7 @@
 </context>
 <context>
     <name>DialogMixture</name>
-    <message utf8="true">
+    <message>
         <location filename="tools/dialog_mixture.ui" line="17"/>
         <source>Création mixture</source>
         <translation>Creación de mixturas</translation>
@@ -1187,12 +1192,12 @@
         <source>Nom de la mixture :</source>
         <translation>Nombre de la mixtura:</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="tools/dialog_mixture.ui" line="48"/>
         <source>Création de son :</source>
         <translation>Creación de muestra:</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="tools/dialog_mixture.ui" line="56"/>
         <source>à chaque note</source>
         <translation>en cada nota</translation>
@@ -1212,7 +1217,7 @@
         <source>Bouclage</source>
         <translation>Auto loop</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="tools/dialog_mixture.ui" line="84"/>
         <source>Stéréo</source>
         <translation>Estéreo</translation>
@@ -1252,57 +1257,57 @@
         <source>tierce</source>
         <translation>tercera</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="tools/dialog_mixture.ui" line="370"/>
         <source>septième</source>
         <translation>séptima</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="tools/dialog_mixture.ui" line="375"/>
         <source>neuvième</source>
         <translation>novena</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="tools/dialog_mixture.ui" line="380"/>
         <source>onzième</source>
         <translation>oncena</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="tools/dialog_mixture.ui" line="385"/>
         <source>treizième</source>
         <translation>trecena</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="tools/dialog_mixture.ui" line="390"/>
         <source>quinzième</source>
         <translation>quincena</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="tools/dialog_mixture.ui" line="395"/>
         <source>dix-septième</source>
         <translation>decimoséptima</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="tools/dialog_mixture.ui" line="400"/>
         <source>dix-neuvième</source>
         <translation>decimonovena</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="tools/dialog_mixture.ui" line="405"/>
         <source>vingt-et-unième</source>
         <translation>vigésima primera</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="tools/dialog_mixture.ui" line="410"/>
         <source>vingt-troisième</source>
         <translation>vigésima tercera</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="tools/dialog_mixture.ui" line="415"/>
         <source>vingt-cinquième</source>
         <translation>vigésima quinta</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="tools/dialog_mixture.ui" line="420"/>
         <source>vingt-septième</source>
         <translation>vigésima séptima</translation>
@@ -1315,7 +1320,7 @@
 </context>
 <context>
     <name>DialogParamGlobal</name>
-    <message utf8="true">
+    <message>
         <location filename="tools/dialog_paramglobal.ui" line="17"/>
         <source>Paramétrage global</source>
         <translation>Parámetros generales</translation>
@@ -1340,7 +1345,7 @@
         <source>Modification</source>
         <translation>Modificación</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="tools/dialog_paramglobal.ui" line="116"/>
         <source>Paramètre</source>
         <translation>Parámetro</translation>
@@ -1350,12 +1355,12 @@
         <source>Manuel</source>
         <translation>Manual</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="tools/dialog_paramglobal.ui" line="167"/>
         <source>Linéaire ascendant</source>
         <translation>Lineal ascendente</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="tools/dialog_paramglobal.ui" line="172"/>
         <source>Linéaire descendant</source>
         <translation>Lineal descendente</translation>
@@ -1370,7 +1375,7 @@
         <source>Exponentiel descendant</source>
         <translation>Exponencial descendente</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="tools/dialog_paramglobal.ui" line="187"/>
         <source>Aléatoire</source>
         <translation>Aleatorio</translation>
@@ -1390,17 +1395,17 @@
         <source>Remplacement</source>
         <translation>Reemplazar</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="tools/dialog_paramglobal.ui" line="95"/>
         <source>Appliquer à l&apos;étendue de vélocité</source>
         <translation>Aplicar a un rango de velocidad</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="tools/dialog_paramglobal.ui" line="229"/>
         <source>Appliquer à d&apos;autres instruments...</source>
         <translation>Aplicar a otros instrumentos...</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="tools/dialog_paramglobal.cpp" line="81"/>
         <source>Appliquer à d&apos;autres presets...</source>
         <translation>Aplicar a otros presets...</translation>
@@ -1410,7 +1415,7 @@
         <source>Raideur</source>
         <translation>Curvatura</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="tools/dialog_paramglobal.cpp" line="141"/>
         <source>Répartition</source>
         <translation>Distribución</translation>
@@ -1418,27 +1423,27 @@
 </context>
 <context>
     <name>DialogRelease</name>
-    <message utf8="true">
+    <message>
         <location filename="tools/dialog_release.ui" line="17"/>
         <source>Élaboration release</source>
         <translation>Asignar valores de release</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="tools/dialog_release.ui" line="52"/>
         <source>Durée release au do 2 (note 36)</source>
         <translation>Duración del release en do 2 (nota 36)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="tools/dialog_release.ui" line="59"/>
         <source>Division à l&apos;octave suivante</source>
         <translation>División a la siguiente octava</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="tools/dialog_release.ui" line="105"/>
         <source>Désaccordage provoqué (demi-tons)</source>
         <translation>Desafinación causada (semitonos)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="tools/dialog_release.cpp" line="38"/>
         <source>Durée release (note </source>
         <translation>Duración del release (nota </translation>
@@ -1451,46 +1456,88 @@
         <source>Renommage de masse</source>
         <translation>Renombrado masivo</translation>
     </message>
-    <message utf8="true">
-        <location filename="gui_divers/dialog_rename.ui" line="36"/>
+    <message>
+        <location filename="gui_divers/dialog_rename.ui" line="53"/>
+        <source>Remplacer une chaîne de caractères</source>
+        <translation>Reemplazar caracteres</translation>
+    </message>
+    <message>
+        <location filename="gui_divers/dialog_rename.ui" line="58"/>
+        <source>Insérer après une position</source>
+        <translation>Insertar después de la posición</translation>
+    </message>
+    <message>
+        <location filename="gui_divers/dialog_rename.ui" line="63"/>
+        <source>Supprimer une étendue</source>
+        <translation>Eliminar intervalo de caracteres</translation>
+    </message>
+    <message>
+        <location filename="gui_divers/dialog_rename.ui" line="98"/>
+        <location filename="gui_divers/dialog_rename.cpp" line="99"/>
+        <source>Position</source>
+        <translation>Posición</translation>
+    </message>
+    <message>
+        <location filename="gui_divers/dialog_rename.ui" line="128"/>
         <source>Nom des échantillons (20 caractères au total) :</source>
         <oldsource>Nom des samples (20 caractères au total) :</oldsource>
         <translation>Nombre de las muestras (20 caracteres en total):</translation>
     </message>
-    <message utf8="true">
-        <location filename="gui_divers/dialog_rename.ui" line="50"/>
+    <message>
+        <location filename="gui_divers/dialog_rename.ui" line="145"/>
+        <source>Nouvelle chaîne de caractères :</source>
+        <translation>Nueva string:</translation>
+    </message>
+    <message>
+        <location filename="gui_divers/dialog_rename.ui" line="43"/>
         <source>Écraser nom existant avec nom de la note en suffixe</source>
         <translation>Reemplazar el nombre actual con el nombre de la nota como sufijo</translation>
     </message>
-    <message utf8="true">
-        <location filename="gui_divers/dialog_rename.ui" line="60"/>
+    <message>
+        <location filename="gui_divers/dialog_rename.ui" line="48"/>
         <source>Écraser nom existant avec incrément en suffixe</source>
         <translation>Reemplazar el nombre actual con el incremento como sufijo</translation>
     </message>
-    <message utf8="true">
-        <location filename="gui_divers/dialog_rename.ui" line="67"/>
-        <source>Préfixe au nom existant</source>
-        <translation>Prefijo al nombre actual</translation>
+    <message>
+        <location filename="gui_divers/dialog_rename.cpp" line="65"/>
+        <location filename="gui_divers/dialog_rename.cpp" line="76"/>
+        <source>Nouveau nom :</source>
+        <translation>Nuevo nombre:</translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_rename.ui" line="74"/>
-        <source>Suffixe au nom existant</source>
-        <translation>Sufijo al nombre actual</translation>
+        <location filename="gui_divers/dialog_rename.cpp" line="87"/>
+        <source>Trouver :</source>
+        <translation>Buscar:</translation>
+    </message>
+    <message>
+        <location filename="gui_divers/dialog_rename.cpp" line="90"/>
+        <source>Et remplacer par :</source>
+        <translation>Y reemplazar por:</translation>
+    </message>
+    <message>
+        <location filename="gui_divers/dialog_rename.cpp" line="100"/>
+        <source>Texte à insérer :</source>
+        <translation>Texto para insertar:</translation>
+    </message>
+    <message>
+        <location filename="gui_divers/dialog_rename.cpp" line="111"/>
+        <source>Étendue</source>
+        <translation>Rango</translation>
     </message>
 </context>
 <context>
     <name>DialogSelectItems</name>
-    <message utf8="true">
+    <message>
         <location filename="tools/dialog_selectitems.ui" line="17"/>
         <source>Sélection</source>
         <translation>Selección</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="tools/dialog_selectitems.ui" line="41"/>
         <source>Tout sélectionner</source>
         <translation>Seleccionar todo</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="tools/dialog_selectitems.ui" line="33"/>
         <source>Sélectionner
 instrument courant</source>
@@ -1505,7 +1552,7 @@ instrumento actual</translation>
         <source>Diminuer sifflements</source>
         <translation>Reducción de silbido</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="tools/dialog_sifflements.ui" line="87"/>
         <source>Début de la coupure (Hz)</source>
         <translation>Inicio del corte (Hz)</translation>
@@ -1568,7 +1615,7 @@ instrumento actual</translation>
         <source>Creux</source>
         <translation>Valle</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="tools/dialog_space.ui" line="78"/>
         <source>Aléatoire</source>
         <translation>Aleatorio</translation>
@@ -1596,12 +1643,12 @@ instrumento actual</translation>
         <source>Visualisation</source>
         <translation>Visualización</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="tools/dialog_visualizer.ui" line="123"/>
         <source>échelle log</source>
         <translation>Escala logarítmica</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="tools/dialog_visualizer.ui" line="145"/>
         <source>Légende</source>
         <translation>Leyenda</translation>
@@ -1611,12 +1658,12 @@ instrumento actual</translation>
         <source>Valeur moyenne par note</source>
         <translation>Valor medio por nota</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="tools/dialog_visualizer.ui" line="176"/>
         <source>Paramètres par défaut</source>
         <translation>Parámetros por defecto</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="tools/dialog_visualizer.ui" line="189"/>
         <source>Paramètres définis</source>
         <translation>Parámetros definidos</translation>
@@ -1645,7 +1692,7 @@ instrumento actual</translation>
 </context>
 <context>
     <name>Graphique</name>
-    <message utf8="true">
+    <message>
         <location filename="pages/graphique.cpp" line="82"/>
         <source>Sélection multiple</source>
         <translation>Selección múltiple</translation>
@@ -1653,12 +1700,12 @@ instrumento actual</translation>
 </context>
 <context>
     <name>GraphiqueFourier</name>
-    <message utf8="true">
+    <message>
         <location filename="pages/graphiquefourier.cpp" line="47"/>
         <source>Fréquence (Hz)</source>
         <translation>Frecuencia (Hz)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="pages/graphiquefourier.cpp" line="62"/>
         <source>Intensité</source>
         <translation>Intensidad</translation>
@@ -1697,649 +1744,654 @@ instrumento actual</translation>
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="mainwindow.ui" line="192"/>
+        <location filename="mainwindow.ui" line="210"/>
         <source>&amp;Fichier</source>
         <translation>&amp;Archivo</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="215"/>
+        <location filename="mainwindow.ui" line="233"/>
         <source>&amp;Aide</source>
         <translation>A&amp;yuda</translation>
     </message>
-    <message utf8="true">
-        <location filename="mainwindow.ui" line="223"/>
+    <message>
+        <location filename="mainwindow.ui" line="241"/>
         <source>&amp;Édition</source>
         <translation>&amp;Editar</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="238"/>
+        <location filename="mainwindow.ui" line="256"/>
         <source>&amp;Outils</source>
         <translation>&amp;Herramientas</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="261"/>
+        <location filename="mainwindow.ui" line="279"/>
         <source>&amp;Global</source>
         <translation>&amp;Global</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="274"/>
+        <location filename="mainwindow.ui" line="293"/>
         <source>&amp;Instrument</source>
         <translation>&amp;Instrumento</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="291"/>
+        <location filename="mainwindow.ui" line="310"/>
         <source>&amp;Preset</source>
         <translation>&amp;Preset</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="306"/>
+        <location filename="mainwindow.ui" line="325"/>
         <source>A&amp;ffichage</source>
         <translation>&amp;Ver</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="310"/>
-        <source>Clavier</source>
-        <translation>Teclado</translation>
-    </message>
-    <message>
-        <location filename="mainwindow.ui" line="333"/>
+        <location filename="mainwindow.ui" line="352"/>
         <source>Barre d&apos;outils</source>
         <translation>Barra de herramientas</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="374"/>
+        <location filename="mainwindow.ui" line="393"/>
         <source>Arborescence</source>
         <translation>Vista de árbol</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="469"/>
+        <location filename="mainwindow.ui" line="506"/>
         <source>Enroule l&apos;arborescence</source>
         <translation>Contraer la vista de árbol</translation>
     </message>
-    <message utf8="true">
-        <location filename="mainwindow.ui" line="495"/>
+    <message>
+        <location filename="mainwindow.ui" line="532"/>
         <source>Déroule l&apos;arborescence</source>
         <translation>Expandir la vista de árbol</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="534"/>
+        <location filename="mainwindow.ui" line="571"/>
         <source>Efface la recherche</source>
         <translation>Borrar la búsqueda</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="561"/>
+        <location filename="mainwindow.ui" line="598"/>
         <source>&amp;Ouvrir...</source>
         <translation>&amp;Abrir...</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="564"/>
+        <location filename="mainwindow.ui" line="601"/>
         <source>Ouvre un fichier</source>
         <translation>Abrir un archivo</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="576"/>
+        <location filename="mainwindow.ui" line="613"/>
         <source>&amp;Quitter</source>
         <translation>&amp;Salir</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="588"/>
+        <location filename="mainwindow.ui" line="625"/>
         <source>&amp;Manuel</source>
         <translation>&amp;Manual</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="600"/>
+        <location filename="mainwindow.ui" line="637"/>
         <source>&amp;A propos</source>
         <translation>&amp;Acerca de</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="612"/>
+        <location filename="mainwindow.ui" line="649"/>
         <location filename="mainwindow.cpp" line="268"/>
         <location filename="mainwindow.cpp" line="475"/>
         <source>&amp;Enregistrer</source>
         <translation>&amp;Guardar</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="615"/>
+        <location filename="mainwindow.ui" line="652"/>
         <source>Enregistre le fichier actuel</source>
         <translation>Guardar el archivo actual</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="630"/>
+        <location filename="mainwindow.ui" line="667"/>
         <source>Enregistrer &amp;sous...</source>
         <translation>Guardar &amp;como...</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="633"/>
+        <location filename="mainwindow.ui" line="670"/>
         <source>Enregistre sous un autre fichier</source>
         <translation>Guardar en otro archivo</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="645"/>
+        <location filename="mainwindow.ui" line="682"/>
         <source>&amp;Nouveau...</source>
         <translation>&amp;Nuevo...</translation>
     </message>
-    <message utf8="true">
-        <location filename="mainwindow.ui" line="648"/>
+    <message>
+        <location filename="mainwindow.ui" line="685"/>
         <source>Crée un nouveau fichier</source>
         <translation>Crear un archivo nuevo</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="663"/>
+        <location filename="mainwindow.ui" line="700"/>
         <source>&amp;Annuler</source>
         <comment>1</comment>
         <translation>&amp;Deshacer</translation>
     </message>
-    <message utf8="true">
-        <location filename="mainwindow.ui" line="666"/>
+    <message>
+        <location filename="mainwindow.ui" line="703"/>
         <source>Annule la dernière action</source>
         <translation>Deshacer la última acción</translation>
     </message>
-    <message utf8="true">
-        <location filename="mainwindow.ui" line="681"/>
+    <message>
+        <location filename="mainwindow.ui" line="718"/>
         <source>Ré&amp;tablir</source>
         <translation>&amp;Rehacer</translation>
     </message>
-    <message utf8="true">
-        <location filename="mainwindow.ui" line="684"/>
+    <message>
+        <location filename="mainwindow.ui" line="721"/>
         <source>Refait la dernière action annulée</source>
         <translation>Rehacer la última acción deshecha</translation>
     </message>
-    <message utf8="true">
-        <location filename="mainwindow.ui" line="696"/>
+    <message>
+        <location filename="mainwindow.ui" line="733"/>
         <source>&amp;Préférences</source>
         <translation>Pre&amp;ferencias</translation>
     </message>
-    <message utf8="true">
-        <location filename="mainwindow.ui" line="699"/>
+    <message>
+        <location filename="mainwindow.ui" line="736"/>
         <source>Ouvre les préférences</source>
         <translation>Abrir las preferencias</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="710"/>
+        <location filename="mainwindow.ui" line="747"/>
         <source>&amp;Barre d&apos;outils</source>
         <translation>&amp;Barra de herramientas</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="713"/>
+        <location filename="mainwindow.ui" line="750"/>
         <source>Afficher / masque la barre d&apos;outils</source>
         <translation>Mostrar / ocultar la barra de herramientas</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="725"/>
+        <location filename="mainwindow.ui" line="762"/>
         <source>&amp;Fermer le fichier</source>
         <translation>&amp;Cerrar el archivo</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="728"/>
+        <location filename="mainwindow.ui" line="765"/>
         <source>Ferme le fichier</source>
         <translation>Cerrar el archivo</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="743"/>
+        <location filename="mainwindow.ui" line="780"/>
         <source>&amp;Copier</source>
         <translation>&amp;Copiar</translation>
     </message>
-    <message utf8="true">
-        <location filename="mainwindow.ui" line="746"/>
+    <message>
+        <location filename="mainwindow.ui" line="783"/>
         <source>Copie un élément</source>
         <translation>Copiar un elemento</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="764"/>
+        <location filename="mainwindow.ui" line="801"/>
         <source>C&amp;oller</source>
         <translation>&amp;Pegar</translation>
     </message>
-    <message utf8="true">
-        <location filename="mainwindow.ui" line="767"/>
+    <message>
+        <location filename="mainwindow.ui" line="804"/>
         <source>Colle un élément</source>
         <translation>Pegar un elemento</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="785"/>
+        <location filename="mainwindow.ui" line="822"/>
         <source>&amp;Supprimer</source>
         <translation>&amp;Eliminar</translation>
     </message>
-    <message utf8="true">
-        <location filename="mainwindow.ui" line="788"/>
+    <message>
+        <location filename="mainwindow.ui" line="825"/>
         <source>Supprime un élément</source>
         <translation>Eliminar un elemento</translation>
     </message>
-    <message utf8="true">
-        <location filename="mainwindow.ui" line="806"/>
+    <message>
+        <location filename="mainwindow.ui" line="843"/>
         <source>&amp;Enlever les éléments non utilisés</source>
         <translation>&amp;Eliminar elementos no utilizados</translation>
     </message>
-    <message utf8="true">
-        <location filename="mainwindow.ui" line="809"/>
+    <message>
+        <location filename="mainwindow.ui" line="846"/>
         <source>Enlève les échantillons et instruments non utilisés</source>
         <oldsource>Enlève les samples et instruments non utilisés</oldsource>
         <translation>Elimina las muestras e instrumentos no utilizados</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="821"/>
-        <location filename="mainwindow.cpp" line="1049"/>
-        <location filename="mainwindow.cpp" line="1061"/>
+        <location filename="mainwindow.ui" line="858"/>
+        <location filename="mainwindow.cpp" line="1050"/>
+        <location filename="mainwindow.cpp" line="1057"/>
         <source>&amp;Renommer</source>
         <translation>Re&amp;nombrar</translation>
     </message>
-    <message utf8="true">
-        <location filename="mainwindow.ui" line="824"/>
+    <message>
+        <location filename="mainwindow.ui" line="861"/>
         <source>Renomme un ou plusieurs élément(s)</source>
         <translation>Renombrar uno o más elementos</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="835"/>
+        <location filename="mainwindow.ui" line="872"/>
         <source>fichier 1</source>
         <translation>archivo 1</translation>
     </message>
-    <message utf8="true">
-        <location filename="mainwindow.ui" line="841"/>
-        <location filename="mainwindow.ui" line="858"/>
-        <location filename="mainwindow.ui" line="875"/>
-        <location filename="mainwindow.ui" line="892"/>
-        <location filename="mainwindow.ui" line="909"/>
+    <message>
+        <location filename="mainwindow.ui" line="878"/>
+        <location filename="mainwindow.ui" line="895"/>
+        <location filename="mainwindow.ui" line="912"/>
+        <location filename="mainwindow.ui" line="929"/>
+        <location filename="mainwindow.ui" line="946"/>
         <source>Ouvre un fichier récent</source>
         <translation>Abrir un archivo reciente</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="852"/>
+        <location filename="mainwindow.ui" line="889"/>
         <source>fichier 2</source>
         <translation>archivo 2</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="869"/>
+        <location filename="mainwindow.ui" line="906"/>
         <source>fichier 3</source>
         <translation>archivo 3</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="886"/>
+        <location filename="mainwindow.ui" line="923"/>
         <source>fichier 4</source>
         <translation>archivo 4</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="903"/>
+        <location filename="mainwindow.ui" line="940"/>
         <source>fichier 5</source>
         <translation>archivo 5</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="923"/>
+        <location filename="mainwindow.ui" line="960"/>
         <source>&amp;Section modulateurs</source>
         <translation>&amp;Sección de moduladores</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="926"/>
+        <location filename="mainwindow.ui" line="963"/>
         <source>Affiche la section modulateurs</source>
         <translation>Mostrar la sección moduladores</translation>
     </message>
-    <message utf8="true">
-        <location filename="mainwindow.ui" line="938"/>
+    <message>
+        <location filename="mainwindow.ui" line="975"/>
         <source>&amp;Importer des échantillons...</source>
         <oldsource>&amp;Importer des sons...</oldsource>
         <translation>&amp;Importar muestras...</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="941"/>
+        <location filename="mainwindow.ui" line="978"/>
         <source>Importe un fichier audio</source>
         <translation>Importar un archivo de audio</translation>
     </message>
-    <message utf8="true">
-        <location filename="mainwindow.ui" line="953"/>
+    <message>
+        <location filename="mainwindow.ui" line="990"/>
         <source>E&amp;xporter des échantillons...</source>
         <oldsource>E&amp;xporter des sons...</oldsource>
         <translation>E&amp;xportar las muestras...</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="956"/>
+        <location filename="mainwindow.ui" line="993"/>
         <source>Exporte au format wav</source>
         <translation>Exportar a wav</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="968"/>
+        <location filename="mainwindow.ui" line="1005"/>
         <source>Nouvel instrument</source>
         <translation>Nuevo instrumento</translation>
     </message>
-    <message utf8="true">
-        <location filename="mainwindow.ui" line="971"/>
+    <message>
+        <location filename="mainwindow.ui" line="1008"/>
         <source>Crée un nouvel instrument</source>
         <translation>Crear un nuevo instrumento</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="983"/>
+        <location filename="mainwindow.ui" line="1020"/>
         <source>Nouveau preset</source>
         <translation>Nuevo preset</translation>
     </message>
-    <message utf8="true">
-        <location filename="mainwindow.ui" line="986"/>
+    <message>
+        <location filename="mainwindow.ui" line="1023"/>
         <source>Crée un nouveau preset</source>
         <translation>Crear un nuevo preset</translation>
     </message>
-    <message utf8="true">
-        <location filename="mainwindow.ui" line="998"/>
+    <message>
+        <location filename="mainwindow.ui" line="1035"/>
         <source>&amp;Enlever blanc au départ</source>
         <translation>&amp;Eliminar silencio al inicio</translation>
     </message>
-    <message utf8="true">
-        <location filename="mainwindow.ui" line="1001"/>
+    <message>
+        <location filename="mainwindow.ui" line="1038"/>
         <source>Enleve le blanc au début d&apos;un échantillon</source>
         <oldsource>Enleve le blanc au début d&apos;un sample</oldsource>
         <translation>Elimina el silencio al inicio de una muestra</translation>
     </message>
-    <message utf8="true">
-        <location filename="mainwindow.ui" line="1013"/>
+    <message>
+        <location filename="mainwindow.ui" line="1050"/>
         <source>&amp;Ajuster à la fin de boucle</source>
         <translation>Re&amp;cortar al final del loop</translation>
     </message>
-    <message utf8="true">
-        <location filename="mainwindow.ui" line="1016"/>
+    <message>
+        <location filename="mainwindow.ui" line="1053"/>
         <source>Ajuste l&apos;échantillon à sa fin de boucle</source>
         <oldsource>Ajuste le sample à sa fin de boucle</oldsource>
         <translation>Recorta la muestra al final del loop</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1028"/>
+        <location filename="mainwindow.ui" line="1065"/>
         <source>&amp;Normaliser volume</source>
         <translation>&amp;Normalizar volumen</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1031"/>
+        <location filename="mainwindow.ui" line="1068"/>
         <source>Normalise le volume</source>
         <translation>Normalizar volumen</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1043"/>
+        <location filename="mainwindow.ui" line="1080"/>
         <source>&amp;Bouclage automatique</source>
         <translation>Auto &amp;loop</translation>
     </message>
-    <message utf8="true">
-        <location filename="mainwindow.ui" line="1046"/>
+    <message>
+        <location filename="mainwindow.ui" line="1083"/>
         <source>Boucle automatiquement l&apos;échantillon</source>
         <oldsource>Boucle automatiquement le sample</oldsource>
         <translation>Crear loop automáticamente con la muestra</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1058"/>
+        <location filename="mainwindow.ui" line="1095"/>
         <source>&amp;Filtre &quot;mur de brique&quot;...</source>
         <translation>&amp;Filtro &quot;pared de ladrillo&quot;...</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1061"/>
+        <location filename="mainwindow.ui" line="1098"/>
         <source>Applique un filtre &quot;mur de brique&quot;</source>
         <translation>Aplicar un filtro &quot;pared de ladrillo&quot;</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1073"/>
+        <location filename="mainwindow.ui" line="1110"/>
         <source>&amp;Transposer...</source>
         <translation>&amp;Transportar...</translation>
     </message>
-    <message utf8="true">
-        <location filename="mainwindow.ui" line="1076"/>
+    <message>
+        <location filename="mainwindow.ui" line="1113"/>
         <source>Transpose l&apos;échantillon</source>
         <oldsource>Transpose le sample</oldsource>
         <translation>Transportar la muestra</translation>
     </message>
-    <message utf8="true">
-        <location filename="mainwindow.ui" line="1088"/>
+    <message>
+        <location filename="mainwindow.ui" line="1125"/>
         <source>&amp;Régler atténuation minimale...</source>
         <translation>Establecer atenuación &amp;mínima...</translation>
     </message>
-    <message utf8="true">
-        <location filename="mainwindow.ui" line="1091"/>
+    <message>
+        <location filename="mainwindow.ui" line="1128"/>
         <source>Régle l&apos;atténuation minimale</source>
         <translation>Establecer atenuación mínima</translation>
     </message>
-    <message utf8="true">
-        <location filename="mainwindow.ui" line="1103"/>
+    <message>
+        <location filename="mainwindow.ui" line="1140"/>
         <source>&amp;Accordage céleste...</source>
         <translation>&amp;Afinación celeste...</translation>
     </message>
-    <message utf8="true">
-        <location filename="mainwindow.ui" line="1106"/>
+    <message>
+        <location filename="mainwindow.ui" line="1143"/>
         <source>Accorde les sons pour créer des battements</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1118"/>
-        <location filename="mainwindow.ui" line="1378"/>
+        <location filename="mainwindow.ui" line="1155"/>
+        <location filename="mainwindow.ui" line="1415"/>
         <source>&amp;Spatialisation du son...</source>
         <translation>&amp;Espacialización del sonido...</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1121"/>
-        <location filename="mainwindow.ui" line="1381"/>
+        <location filename="mainwindow.ui" line="1158"/>
+        <location filename="mainwindow.ui" line="1418"/>
         <source>Dispose les sons dans l&apos;espace</source>
         <translation>Distribuir las muestras en el espacio</translation>
     </message>
-    <message utf8="true">
-        <location filename="mainwindow.ui" line="1133"/>
+    <message>
+        <location filename="mainwindow.ui" line="1170"/>
         <source>&amp;Répartition automatique</source>
         <translation>D&amp;istribución automática</translation>
     </message>
-    <message utf8="true">
-        <location filename="mainwindow.ui" line="1136"/>
+    <message>
+        <location filename="mainwindow.ui" line="1173"/>
         <source>Répartit automatiquement les sons sur le clavier</source>
         <translation>Distribuir automáticamente los sonidos en el teclado</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1148"/>
-        <location filename="mainwindow.ui" line="1273"/>
+        <location filename="mainwindow.ui" line="1185"/>
+        <location filename="mainwindow.ui" line="1310"/>
         <source>&amp;Duplication des divisions...</source>
         <oldsource>D&amp;uplication des divisions...</oldsource>
         <translation>&amp;Duplicación de las divisiones...</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1151"/>
+        <location filename="mainwindow.ui" line="1188"/>
         <source>Duplication des divisions...</source>
         <translation>Duplicación de las divisiones...</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1154"/>
-        <location filename="mainwindow.ui" line="1279"/>
+        <location filename="mainwindow.ui" line="1191"/>
+        <location filename="mainwindow.ui" line="1316"/>
         <source>Duplique les divisions</source>
         <translation>Duplicar las divisiones</translation>
     </message>
-    <message utf8="true">
-        <location filename="mainwindow.ui" line="1166"/>
-        <location filename="mainwindow.ui" line="1306"/>
+    <message>
+        <location filename="mainwindow.ui" line="1203"/>
+        <location filename="mainwindow.ui" line="1343"/>
         <source>&amp;Paramétrage global...</source>
         <translation>&amp;Parámetros generales...</translation>
     </message>
-    <message utf8="true">
-        <location filename="mainwindow.ui" line="1169"/>
-        <location filename="mainwindow.ui" line="1309"/>
+    <message>
+        <location filename="mainwindow.ui" line="1206"/>
+        <location filename="mainwindow.ui" line="1346"/>
         <source>Paramètre toutes les divisions simultanément</source>
         <translation>Aplicar a todas las divisiones simultáneamente</translation>
     </message>
-    <message utf8="true">
-        <location filename="mainwindow.ui" line="1181"/>
+    <message>
+        <location filename="mainwindow.ui" line="1218"/>
         <source>&amp;Réglage balance</source>
         <translation>&amp;Ajustar balance</translation>
     </message>
-    <message utf8="true">
-        <location filename="mainwindow.ui" line="1184"/>
+    <message>
+        <location filename="mainwindow.ui" line="1221"/>
         <source>Règle la balance de l&apos;échantillon</source>
         <oldsource>Règle la balance du sample</oldsource>
         <translation>Ajusta el balance de la muestra</translation>
     </message>
-    <message utf8="true">
-        <location filename="mainwindow.ui" line="1196"/>
+    <message>
+        <location filename="mainwindow.ui" line="1233"/>
         <source>&amp;Création mixture...</source>
         <translation>&amp;Creación de mixturas...</translation>
     </message>
-    <message utf8="true">
-        <location filename="mainwindow.ui" line="1199"/>
+    <message>
+        <location filename="mainwindow.ui" line="1236"/>
         <source>Crée une mixture</source>
         <translation>Crear una mixtura</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1211"/>
+        <location filename="mainwindow.ui" line="1248"/>
         <source>&amp;Diminuer sifflements...</source>
         <translation>&amp;Reducción de silbido...</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1214"/>
+        <location filename="mainwindow.ui" line="1251"/>
         <source>Diminue les sifflements</source>
         <translation>Reducción de silbido</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1225"/>
+        <location filename="mainwindow.ui" line="1262"/>
         <source>&amp;5 octaves</source>
         <translation>&amp;5 octavas</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1228"/>
+        <location filename="mainwindow.ui" line="1265"/>
         <source>affiche un clavier de 5 octaves</source>
         <translation>mostrar un teclado de 5 octavas</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1236"/>
+        <location filename="mainwindow.ui" line="1273"/>
         <source>&amp;6 octaves</source>
         <translation>&amp;6 octavas</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1239"/>
+        <location filename="mainwindow.ui" line="1276"/>
         <source>affiche un clavier de 6 octaves</source>
         <translation>mostrar un teclado de 6 octavas</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1247"/>
+        <location filename="mainwindow.ui" line="1284"/>
         <source>&amp;128 notes (complet)</source>
         <translation>&amp;128 notas (completo)</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1393"/>
+        <location filename="mainwindow.ui" line="1430"/>
         <source>Exporter sound&amp;font...</source>
         <translation>Exportar sound&amp;font...</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1396"/>
+        <location filename="mainwindow.ui" line="1433"/>
         <source>Exporte une soundfont</source>
         <translation>Exportar una soundfont</translation>
     </message>
-    <message utf8="true">
-        <location filename="mainwindow.ui" line="1408"/>
+    <message>
+        <location filename="mainwindow.ui" line="1445"/>
         <source>&amp;Dissocier les échantillons stéréo</source>
         <oldsource>&amp;Dissocier les samples stéréo</oldsource>
         <translation>&amp;Dividir las muestras estéreo</translation>
     </message>
-    <message utf8="true">
-        <location filename="mainwindow.ui" line="1411"/>
+    <message>
+        <location filename="mainwindow.ui" line="1448"/>
         <source>Dissocie les échantillons stéréo</source>
         <oldsource>Dissocie les samples stéréo</oldsource>
         <translation>Dividir las muestras estéreo</translation>
     </message>
-    <message utf8="true">
-        <location filename="mainwindow.ui" line="1423"/>
+    <message>
+        <location filename="mainwindow.ui" line="1460"/>
         <source>Exporter pics de &amp;fréquence (.csv)</source>
         <translation>Exportación de picos de &amp;frecuencia (.csv)</translation>
     </message>
-    <message utf8="true">
-        <location filename="mainwindow.ui" line="1426"/>
+    <message>
+        <location filename="mainwindow.ui" line="1463"/>
         <source>Exporte les pics de fréquence des échantillons dans un fichier csv</source>
         <translation>Exporta los picos de frecuencia de las muestras en un archivo csv</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1434"/>
+        <location filename="mainwindow.ui" line="1471"/>
         <source>&amp;88 notes (piano)</source>
         <translation>&amp;88 notas (piano)</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1445"/>
+        <location filename="mainwindow.ui" line="1482"/>
         <source>Dans la &amp;barre d&apos;outils</source>
         <translation>En la &amp;barra de herramientas</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1453"/>
+        <location filename="mainwindow.ui" line="1490"/>
         <source>&amp;Flottant</source>
         <translation>&amp;Flotante</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1465"/>
+        <location filename="mainwindow.ui" line="1502"/>
         <source>&amp;Transposition...</source>
         <translation>&amp;Transposición...</translation>
     </message>
-    <message utf8="true">
-        <location filename="mainwindow.ui" line="1468"/>
+    <message>
+        <location filename="mainwindow.ui" line="1505"/>
         <source>Transpose tous les échantillons d&apos;un instrument</source>
         <translation>Transportar todas las muestras de un instrumento</translation>
     </message>
-    <message utf8="true">
-        <location filename="mainwindow.ui" line="120"/>
+    <message>
+        <location filename="mainwindow.ui" line="1514"/>
+        <source>Enlever tous les &amp;modulateurs</source>
+        <translation>&amp;Retire todos los moduladores</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="138"/>
         <source>Vél.</source>
         <translation>Vel.</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="51"/>
-        <location filename="mainwindow.cpp" line="2428"/>
+        <location filename="mainwindow.ui" line="69"/>
+        <location filename="mainwindow.cpp" line="2449"/>
         <source>Note</source>
         <translation>Nota</translation>
     </message>
-    <message utf8="true">
-        <location filename="mainwindow.ui" line="245"/>
+    <message>
+        <location filename="mainwindow.ui" line="263"/>
         <source>&amp;Échantillon</source>
         <translation>&amp;Muestra</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1250"/>
+        <location filename="mainwindow.ui" line="329"/>
+        <source>&amp;Clavier</source>
+        <translation>&amp;Teclado</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="1287"/>
         <source>affiche un clavier de 128 notes</source>
         <translation>mostrar un teclado de 128 notas</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1258"/>
+        <location filename="mainwindow.ui" line="1295"/>
         <source>&amp;Aucun</source>
         <translation>&amp;Ninguno</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1261"/>
+        <location filename="mainwindow.ui" line="1298"/>
         <source>n&apos;affiche aucun clavier</source>
         <translation>no mostrar ningún teclado</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1276"/>
+        <location filename="mainwindow.ui" line="1313"/>
         <source>Duplication des divisions</source>
         <translation>Duplicación de las divisiones</translation>
     </message>
-    <message utf8="true">
-        <location filename="mainwindow.ui" line="1291"/>
+    <message>
+        <location filename="mainwindow.ui" line="1328"/>
         <source>&amp;Élaboration release...</source>
         <translation>Asignar valores de &amp;release...</translation>
     </message>
-    <message utf8="true">
-        <location filename="mainwindow.ui" line="1294"/>
+    <message>
+        <location filename="mainwindow.ui" line="1331"/>
         <source>Crée automatiquement une release pour tous les sons liés</source>
         <translation>Crear automáticamente un valor de release para todos los sonidos asociados</translation>
     </message>
-    <message utf8="true">
-        <location filename="mainwindow.ui" line="1321"/>
+    <message>
+        <location filename="mainwindow.ui" line="1358"/>
         <source>&amp;Association auto échantillons</source>
         <oldsource>&amp;Association auto samples</oldsource>
         <translation>&amp;Asociación automática de muestras</translation>
     </message>
-    <message utf8="true">
-        <location filename="mainwindow.ui" line="1324"/>
+    <message>
+        <location filename="mainwindow.ui" line="1361"/>
         <source>Associe automatiquement les échantillons G/D</source>
         <oldsource>Associe automatiquement les samples G/D</oldsource>
         <translation>Asociar automáticamente las muestras L/R</translation>
     </message>
-    <message utf8="true">
-        <location filename="mainwindow.ui" line="1333"/>
+    <message>
+        <location filename="mainwindow.ui" line="1370"/>
         <source>&amp;Magnétophone</source>
         <oldsource>Magnétophone</oldsource>
         <translation>Gra&amp;badora</translation>
     </message>
-    <message utf8="true">
-        <location filename="mainwindow.ui" line="1336"/>
+    <message>
+        <location filename="mainwindow.ui" line="1373"/>
         <source>Affiche le magnétophone</source>
         <translation>Mostrar la grabadora</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1348"/>
-        <location filename="mainwindow.ui" line="1363"/>
+        <location filename="mainwindow.ui" line="1385"/>
+        <location filename="mainwindow.ui" line="1400"/>
         <source>&amp;Visualiseur</source>
         <translation>&amp;Visualizador</translation>
     </message>
-    <message utf8="true">
-        <location filename="mainwindow.ui" line="1351"/>
-        <location filename="mainwindow.ui" line="1366"/>
+    <message>
+        <location filename="mainwindow.ui" line="1388"/>
+        <location filename="mainwindow.ui" line="1403"/>
         <source>Visualise dans un graphique les paramètres utilisés</source>
         <translation>Muestra en un gráfico los parámetros utilizados</translation>
     </message>
@@ -2389,8 +2441,9 @@ instrumento actual</translation>
         <location filename="mainwindow.cpp" line="622"/>
         <location filename="mainwindow.cpp" line="625"/>
         <location filename="mainwindow.cpp" line="628"/>
-        <location filename="mainwindow.cpp" line="1394"/>
-        <location filename="mainwindow.cpp" line="1847"/>
+        <location filename="mainwindow.cpp" line="1415"/>
+        <location filename="mainwindow.cpp" line="1868"/>
+        <location filename="mainwindow.cpp" line="2497"/>
         <source>Attention</source>
         <translation>Atención</translation>
     </message>
@@ -2444,22 +2497,22 @@ instrumento actual</translation>
         <source>&amp;Non</source>
         <translation>&amp;No</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="mainwindow.cpp" line="576"/>
         <source>&lt;b&gt;Trop de paramètres dans les instruments et les presets.&lt;/b&gt;</source>
         <translation>&lt;b&gt; Demasiados parámetros en los instrumentos y presets.&lt;/b&gt;</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="mainwindow.cpp" line="578"/>
         <source>&lt;b&gt;Trop de paramètres dans les instruments.&lt;/b&gt;</source>
         <translation>&lt;b&gt;Demasiados parámetros en los instrumentos.&lt;/b&gt;</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="mainwindow.cpp" line="580"/>
         <source>&lt;b&gt;Trop de paramètres dans les presets.&lt;/b&gt;</source>
         <translation>&lt;b&gt;Demasiados parámetros en los presets&lt;/b&gt;</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="mainwindow.cpp" line="582"/>
         <source>Certains synthétiseurs ne prennent pas en compte les paramètres au delà du 65536ème.
 Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
@@ -2471,7 +2524,7 @@ Dividir el fichero en diferentes sf2 puede resolver el problema.</translation>
         <source>&amp;Sauvegarder</source>
         <translation>&amp;Guardar</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="mainwindow.cpp" line="587"/>
         <source>Sauvegarder, &amp;désactiver ce message</source>
         <translation>Guardar, &amp;desactivar este mensaje</translation>
@@ -2488,70 +2541,91 @@ Dividir el fichero en diferentes sf2 puede resolver el problema.</translation>
         <translation>Extensión desconocida.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1395"/>
+        <location filename="mainwindow.cpp" line="1416"/>
         <source>Une erreur est survenue lors de l&apos;import du fichier </source>
         <translation>Error al importar el archivo </translation>
     </message>
-    <message utf8="true">
-        <location filename="mainwindow.cpp" line="2409"/>
+    <message>
+        <location filename="mainwindow.cpp" line="2430"/>
         <source>Exporter les pics de fréquence</source>
         <translation>Exportar los picos de frecuencia</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2410"/>
+        <location filename="mainwindow.cpp" line="2431"/>
         <source>Fichier .csv (*.csv)</source>
         <translation>Archivo .csv (*.csv)</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2424"/>
+        <location filename="mainwindow.cpp" line="2445"/>
         <source>;</source>
         <translatorcomment>column separator in csv file</translatorcomment>
         <translation>;</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2426"/>
+        <location filename="mainwindow.cpp" line="2447"/>
         <source>Echantillon</source>
         <translation>Muestra</translation>
     </message>
-    <message utf8="true">
-        <location filename="mainwindow.cpp" line="2426"/>
+    <message>
+        <location filename="mainwindow.cpp" line="2447"/>
         <source>Numéro de pic</source>
         <translation>Número de pico</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2427"/>
+        <location filename="mainwindow.cpp" line="2448"/>
         <source>Facteur</source>
         <translation>Factor</translation>
     </message>
-    <message utf8="true">
-        <location filename="mainwindow.cpp" line="2427"/>
+    <message>
+        <location filename="mainwindow.cpp" line="2448"/>
         <source>Fréquence</source>
         <translation>Frecuencia</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2428"/>
+        <location filename="mainwindow.cpp" line="2449"/>
         <source>Correction</source>
         <translation>Corrección</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2450"/>
-        <location filename="mainwindow.cpp" line="2451"/>
+        <location filename="mainwindow.cpp" line="2471"/>
+        <location filename="mainwindow.cpp" line="2472"/>
         <source>,</source>
         <translatorcomment>decimal separator</translatorcomment>
         <translation>,</translation>
     </message>
-    <message utf8="true">
+    <message>
+        <location filename="mainwindow.cpp" line="2497"/>
+        <source>Le fichier ne contient aucun modulateur.</source>
+        <translation>El archivo no contiene moduladores.</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="2499"/>
+        <location filename="mainwindow.cpp" line="2501"/>
+        <source>Information</source>
+        <translation>Información</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="2499"/>
+        <source>1 modulateur a été supprimé.</source>
+        <translation>1 modulador ha sido eliminado.</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="2502"/>
+        <source>modulateurs ont été supprimés.</source>
+        <translation>moduladores han sido eliminados.</translation>
+    </message>
+    <message>
         <location filename="mainwindow.cpp" line="259"/>
         <source>Les fichiers suivants ont été modifiés :&lt;br/&gt; - </source>
         <translation>Los siguientes ficheros se han modificado:&lt;br/&gt; - </translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="mainwindow.cpp" line="264"/>
         <location filename="mainwindow.cpp" line="471"/>
         <source>Le fichier « </source>
         <translation>El archivo « </translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="mainwindow.cpp" line="264"/>
         <location filename="mainwindow.cpp" line="471"/>
         <source> » a été modifié.</source>
@@ -2562,22 +2636,22 @@ Dividir el fichero en diferentes sf2 puede resolver el problema.</translation>
         <source>Format inconnu.</source>
         <translation>Formato desconocido.</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="mainwindow.cpp" line="427"/>
         <source>Le fichier est déjà chargé.</source>
         <translation>Ya se ha cargado el archivo.</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="mainwindow.cpp" line="556"/>
         <source>&lt;b&gt;Perte de résolution </source>
         <translation>&lt;b&gt;Pérdida de resolución </translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="mainwindow.cpp" line="557"/>
         <source>La qualité des samples sera abaissée suite à cette opération. Continuer ?</source>
         <translation>La calidad de las muestras se degradará tras esta operación. ¿Continuar?</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="mainwindow.cpp" line="625"/>
         <source>Fichier déjà ouvert, impossible de sauvegarder.</source>
         <translation>No se puede guardar, el archivo todavía está abierto.</translation>
@@ -2588,140 +2662,140 @@ Dividir el fichero en diferentes sf2 puede resolver el problema.</translation>
         <translation>No se puede guardar el archivo.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1056"/>
+        <location filename="mainwindow.cpp" line="1062"/>
         <source>&amp;Renommer en masse</source>
         <translation>&amp;Renombrado masivo</translation>
     </message>
-    <message utf8="true">
-        <location filename="mainwindow.cpp" line="1463"/>
+    <message>
+        <location filename="mainwindow.cpp" line="1484"/>
         <source>L » existe déjà.&lt;br /&gt;Que faire ?</source>
         <translation>L » ya existe.&lt;br /&gt;¿Qué hacer?</translation>
     </message>
-    <message utf8="true">
-        <location filename="mainwindow.cpp" line="1469"/>
+    <message>
+        <location filename="mainwindow.cpp" line="1490"/>
         <source>R » existe déjà.&lt;br /&gt;Que faire ?</source>
         <translation>R » ya existe.&lt;br /&gt;¿Qué hacer?</translation>
     </message>
-    <message utf8="true">
-        <location filename="mainwindow.cpp" line="1478"/>
+    <message>
+        <location filename="mainwindow.cpp" line="1499"/>
         <source> » existe déjà.&lt;br /&gt;Que faire ?</source>
         <translation> » ya existe.&lt;br /&gt;¿Qué hacer?</translation>
     </message>
-    <message utf8="true">
-        <location filename="mainwindow.cpp" line="2194"/>
+    <message>
+        <location filename="mainwindow.cpp" line="2215"/>
         <source> échantillon et </source>
         <translation> muestra y </translation>
     </message>
-    <message utf8="true">
-        <location filename="mainwindow.cpp" line="2196"/>
+    <message>
+        <location filename="mainwindow.cpp" line="2217"/>
         <source> échantillons et </source>
         <translation> muestras y </translation>
     </message>
-    <message utf8="true">
-        <location filename="mainwindow.cpp" line="2212"/>
+    <message>
+        <location filename="mainwindow.cpp" line="2233"/>
         <source>Atténuation minimale (dB) :</source>
         <translation>Atenuación mínima (dB):</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1275"/>
-        <location filename="mainwindow.cpp" line="2211"/>
+        <location filename="mainwindow.cpp" line="1280"/>
+        <location filename="mainwindow.cpp" line="2232"/>
         <source>Question</source>
         <translation>Pregunta</translation>
     </message>
-    <message utf8="true">
-        <location filename="mainwindow.cpp" line="1271"/>
+    <message>
+        <location filename="mainwindow.cpp" line="1276"/>
         <source>Nom de l&apos;échantillon (max 20 caractères) :</source>
         <translation>Nombre de la muestra (20 caracteres en total):</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1492"/>
+        <location filename="mainwindow.cpp" line="1513"/>
         <source>&amp;Remplacer</source>
         <translation>&amp;Reemplazar</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1493"/>
+        <location filename="mainwindow.cpp" line="1514"/>
         <source>R&amp;emplacer tout</source>
         <translation>R&amp;eemplazar todo</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1494"/>
+        <location filename="mainwindow.cpp" line="1515"/>
         <source>&amp;Dupliquer</source>
         <translation>&amp;Duplicar</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1495"/>
+        <location filename="mainwindow.cpp" line="1516"/>
         <source>D&amp;upliquer tout</source>
         <translation>D&amp;uplicar todo</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1496"/>
+        <location filename="mainwindow.cpp" line="1517"/>
         <source>&amp;Ignorer</source>
         <translation>&amp;Ignorar</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1497"/>
+        <location filename="mainwindow.cpp" line="1518"/>
         <source>I&amp;gnorer tout</source>
         <translation>I&amp;gnorar todo</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1847"/>
+        <location filename="mainwindow.cpp" line="1868"/>
         <source>Aucun preset n&apos;est disponible.</source>
         <translation>No hay presets disponibles.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1412"/>
+        <location filename="mainwindow.cpp" line="1433"/>
         <source>Importer un fichier audio</source>
         <translation>Importar un archivo de audio</translation>
     </message>
-    <message utf8="true">
-        <location filename="mainwindow.cpp" line="1272"/>
+    <message>
+        <location filename="mainwindow.cpp" line="1277"/>
         <source>Nom de l&apos;instrument (max 20 caractères) :</source>
         <translation>Nombre del instrumento (max 20 caracteres):</translation>
     </message>
-    <message utf8="true">
-        <location filename="mainwindow.cpp" line="1273"/>
+    <message>
+        <location filename="mainwindow.cpp" line="1278"/>
         <source>Nom du preset (max 20 caractères) :</source>
         <translation>Nombre del preset (max 20 caracteres):</translation>
     </message>
-    <message utf8="true">
-        <location filename="mainwindow.cpp" line="1274"/>
+    <message>
+        <location filename="mainwindow.cpp" line="1279"/>
         <source>Nom du SF2 (max 255 caractères) :</source>
         <translation>Nombre del SF2 (max 255 caracteres):</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1414"/>
+        <location filename="mainwindow.cpp" line="1435"/>
         <source>Fichier .wav (*.wav)</source>
         <translation>Archivo .wav (*.wav)</translation>
     </message>
-    <message utf8="true">
-        <location filename="mainwindow.cpp" line="1462"/>
-        <location filename="mainwindow.cpp" line="1468"/>
-        <location filename="mainwindow.cpp" line="1477"/>
+    <message>
+        <location filename="mainwindow.cpp" line="1483"/>
+        <location filename="mainwindow.cpp" line="1489"/>
+        <location filename="mainwindow.cpp" line="1498"/>
         <source>L&apos;échantillon « </source>
         <translation>La muestra « </translation>
     </message>
-    <message utf8="true">
-        <location filename="mainwindow.cpp" line="1656"/>
+    <message>
+        <location filename="mainwindow.cpp" line="1677"/>
         <source>Choisir un répertoire de destination</source>
         <translation>Elija un directorio de destino</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1822"/>
+        <location filename="mainwindow.cpp" line="1843"/>
         <source>Nom du nouvel instrument :</source>
         <translation>Nombre del nuevo instrumento:</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1857"/>
+        <location filename="mainwindow.cpp" line="1878"/>
         <source>Nom du nouveau preset :</source>
         <translation>Nombre del nuevo preset:</translation>
     </message>
-    <message utf8="true">
-        <location filename="mainwindow.cpp" line="2198"/>
+    <message>
+        <location filename="mainwindow.cpp" line="2219"/>
         <source> instrument ont été supprimés.</source>
         <translation> instrumento han sido eliminados.</translation>
     </message>
-    <message utf8="true">
-        <location filename="mainwindow.cpp" line="2200"/>
+    <message>
+        <location filename="mainwindow.cpp" line="2221"/>
         <source> instruments ont été supprimés.</source>
         <translation> instrumentos han sido eliminados.</translation>
     </message>
@@ -2733,20 +2807,20 @@ Dividir el fichero en diferentes sf2 puede resolver el problema.</translation>
         <source>, valeur absolue</source>
         <translation>, valor absoluto</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="pages/page.cpp" line="271"/>
         <location filename="pages/page.cpp" line="303"/>
         <location filename="pages/page.cpp" line="583"/>
         <source>Offset début échantillon</source>
         <translation>Desfase de inicio de muestra</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="pages/page.cpp" line="279"/>
         <location filename="pages/page.cpp" line="367"/>
         <source>Offset fin échantillon</source>
         <translation>Desfase de fin de muestra</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="pages/page.cpp" line="287"/>
         <source>Offset début boucle</source>
         <translation>Desfase de inicio de loop</translation>
@@ -2757,53 +2831,53 @@ Dividir el fichero en diferentes sf2 puede resolver el problema.</translation>
         <source>Offset fin boucle</source>
         <translation>Desfase de fin de loop</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="pages/page.cpp" line="311"/>
         <location filename="pages/page.cpp" line="312"/>
         <source>Mod LFO → ton (c)</source>
         <translation>Mod LFO → ton (c)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="pages/page.cpp" line="319"/>
         <location filename="pages/page.cpp" line="320"/>
         <source>Vib LFO → ton (c)</source>
         <translation>Vib LFO → ton (c)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="pages/page.cpp" line="327"/>
         <location filename="pages/page.cpp" line="328"/>
         <source>Mod env → ton (c)</source>
         <translation>Mod env → ton (c)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="pages/page.cpp" line="335"/>
         <source>Filtre, fréquence (Hz)</source>
         <translation>Filtro, freq (Hz)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="pages/page.cpp" line="336"/>
         <source>Filtre, fréquence (×)</source>
         <translation>Filtro, freq (×)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="pages/page.cpp" line="343"/>
         <location filename="pages/page.cpp" line="344"/>
         <source>Filtre, résonance (dB)</source>
         <translation>Filtro, resonance (dB)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="pages/page.cpp" line="351"/>
         <location filename="pages/page.cpp" line="352"/>
         <source>Mod LFO → filtre (c)</source>
         <translation>Mod LFO → filtre (c)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="pages/page.cpp" line="359"/>
         <location filename="pages/page.cpp" line="360"/>
         <source>Mod env → filtre (c)</source>
         <translation>Mod env → filtro (c)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="pages/page.cpp" line="375"/>
         <location filename="pages/page.cpp" line="376"/>
         <source>Mod LFO → volume (dB)</source>
@@ -2815,7 +2889,7 @@ Dividir el fichero en diferentes sf2 puede resolver el problema.</translation>
         <source>Chorus (%)</source>
         <translation>Chorus (%)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="pages/page.cpp" line="391"/>
         <location filename="pages/page.cpp" line="392"/>
         <source>Réverbération (%)</source>
@@ -2836,7 +2910,7 @@ Dividir el fichero en diferentes sf2 puede resolver el problema.</translation>
         <source>Mod LFO delay (s)</source>
         <translation>Mod LFO delay (s)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="pages/page.cpp" line="408"/>
         <source>Mod LFO delay (×)</source>
         <translation>Mod LFO delay (×)</translation>
@@ -2846,7 +2920,7 @@ Dividir el fichero en diferentes sf2 puede resolver el problema.</translation>
         <source>Mod LFO freq (Hz)</source>
         <translation>Mod LFO freq (Hz)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="pages/page.cpp" line="416"/>
         <source>Mod LFO freq (×)</source>
         <translation>Mod LFO freq (×)</translation>
@@ -2856,7 +2930,7 @@ Dividir el fichero en diferentes sf2 puede resolver el problema.</translation>
         <source>Vib LFO delay (s)</source>
         <translation>Vib LFO delay (s)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="pages/page.cpp" line="424"/>
         <source>Vib LFO delay (×)</source>
         <translation>Vib LFO delay (×)</translation>
@@ -2866,7 +2940,7 @@ Dividir el fichero en diferentes sf2 puede resolver el problema.</translation>
         <source>Vib LFO freq (Hz)</source>
         <translation>Vib LFO freq (Hz)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="pages/page.cpp" line="432"/>
         <source>Vib LFO freq (×)</source>
         <translation>Vib LFO freq (×)</translation>
@@ -2876,7 +2950,7 @@ Dividir el fichero en diferentes sf2 puede resolver el problema.</translation>
         <source>Mod env delay (s)</source>
         <translation>Mod env delay (s)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="pages/page.cpp" line="440"/>
         <source>Mod env delay (×)</source>
         <translation>Mod env delay (×)</translation>
@@ -2886,7 +2960,7 @@ Dividir el fichero en diferentes sf2 puede resolver el problema.</translation>
         <source>Mod env attack (s)</source>
         <translation>Mod env attack (s)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="pages/page.cpp" line="448"/>
         <source>Mod env attack (×)</source>
         <translation>Mod env attack (×)</translation>
@@ -2896,7 +2970,7 @@ Dividir el fichero en diferentes sf2 puede resolver el problema.</translation>
         <source>Mod env hold (s)</source>
         <translation>Mod env hold (s)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="pages/page.cpp" line="456"/>
         <source>Mod env hold (×)</source>
         <translation>Mod env hold (×)</translation>
@@ -2906,7 +2980,7 @@ Dividir el fichero en diferentes sf2 puede resolver el problema.</translation>
         <source>Mod env decay (s)</source>
         <translation>Mod env decay (s)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="pages/page.cpp" line="464"/>
         <source>Mod env decay (×)</source>
         <translation>Mod env decay (×)</translation>
@@ -2922,18 +2996,18 @@ Dividir el fichero en diferentes sf2 puede resolver el problema.</translation>
         <source>Mod env release (s)</source>
         <translation>Mod env release (s)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="pages/page.cpp" line="480"/>
         <source>Mod env release (×)</source>
         <translation>Mod env release (×)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="pages/page.cpp" line="487"/>
         <location filename="pages/page.cpp" line="488"/>
         <source>Note → Mod env hold (c)</source>
         <translation>Nota → Mod env hold (c)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="pages/page.cpp" line="495"/>
         <location filename="pages/page.cpp" line="496"/>
         <source>Note → Mod env decay (c)</source>
@@ -2944,7 +3018,7 @@ Dividir el fichero en diferentes sf2 puede resolver el problema.</translation>
         <source>Vol env delay (s)</source>
         <translation>Vol env delay (s)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="pages/page.cpp" line="504"/>
         <source>Vol env delay (×)</source>
         <translation>Vol env delay (×)</translation>
@@ -2954,7 +3028,7 @@ Dividir el fichero en diferentes sf2 puede resolver el problema.</translation>
         <source>Vol env decay (s)</source>
         <translation>Vol env decay (s)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="pages/page.cpp" line="528"/>
         <source>Vol env decay (×)</source>
         <translation>Vol env decay (×)</translation>
@@ -2964,7 +3038,7 @@ Dividir el fichero en diferentes sf2 puede resolver el problema.</translation>
         <source>Vol env attack (s)</source>
         <translation>Vol env attack (s)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="pages/page.cpp" line="512"/>
         <source>Vol env attack (×)</source>
         <translation>Vol env attack (×)</translation>
@@ -2974,7 +3048,7 @@ Dividir el fichero en diferentes sf2 puede resolver el problema.</translation>
         <source>Vol env hold (s)</source>
         <translation>Vol env hold (s)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="pages/page.cpp" line="520"/>
         <source>Vol env hold (×)</source>
         <translation>Vol env hold (×)</translation>
@@ -2991,30 +3065,30 @@ Dividir el fichero en diferentes sf2 puede resolver el problema.</translation>
         <source>Vol env release (s)</source>
         <translation>Vol env release (s)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="pages/page.cpp" line="544"/>
         <source>Vol env release (×)</source>
         <translation>Vol env release (×)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="pages/page.cpp" line="551"/>
         <location filename="pages/page.cpp" line="552"/>
         <source>Note → Vol env hold (c)</source>
         <translation>Nota → Vol env hold (c)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="pages/page.cpp" line="559"/>
         <location filename="pages/page.cpp" line="560"/>
         <source>Note → Vol env decay (c)</source>
         <translation>Nota → Vol env decay (c)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="pages/page.cpp" line="567"/>
         <location filename="pages/page.cpp" line="568"/>
         <source>Étendue note</source>
         <translation>Rango de notas</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="pages/page.cpp" line="575"/>
         <location filename="pages/page.cpp" line="576"/>
         <source>Étendue vélocité</source>
@@ -3025,12 +3099,12 @@ Dividir el fichero en diferentes sf2 puede resolver el problema.</translation>
         <source>Note fixe</source>
         <translation>Nota fija</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="pages/page.cpp" line="599"/>
         <source>Vélocité fixe</source>
         <translation>Velocidad fija</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="pages/page.cpp" line="607"/>
         <location filename="pages/page.cpp" line="608"/>
         <source>Atténuation (dB)</source>
@@ -3042,7 +3116,7 @@ Dividir el fichero en diferentes sf2 puede resolver el problema.</translation>
         <source>Accordage (demi-tons)</source>
         <translation>Afinación (semitonos)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="pages/page.cpp" line="631"/>
         <location filename="pages/page.cpp" line="632"/>
         <source>Accordage (centièmes)</source>
@@ -3073,81 +3147,81 @@ Dividir el fichero en diferentes sf2 puede resolver el problema.</translation>
 <context>
     <name>PageTable</name>
     <message>
-        <location filename="pages/pagetable.cpp" line="64"/>
+        <location filename="pages/pagetable.cpp" line="63"/>
         <source>Global</source>
         <translation>Global</translation>
     </message>
     <message>
-        <location filename="pages/pagetable.cpp" line="364"/>
-        <location filename="pages/pagetable.cpp" line="386"/>
-        <location filename="pages/pagetable.cpp" line="1406"/>
-        <location filename="pages/pagetable.cpp" line="1476"/>
+        <location filename="pages/pagetable.cpp" line="376"/>
+        <location filename="pages/pagetable.cpp" line="398"/>
+        <location filename="pages/pagetable.cpp" line="1457"/>
+        <location filename="pages/pagetable.cpp" line="1527"/>
         <source>Modulateur</source>
         <translation>Modulador</translation>
     </message>
     <message>
-        <location filename="pages/pagetable.cpp" line="368"/>
+        <location filename="pages/pagetable.cpp" line="380"/>
         <source>Lien (invalide)</source>
         <translation>Enlace (no válido)</translation>
     </message>
     <message>
-        <location filename="pages/pagetable.cpp" line="1625"/>
+        <location filename="pages/pagetable.cpp" line="1707"/>
         <source>Action impossible : </source>
         <translation>Acción imposible: </translation>
     </message>
     <message>
-        <location filename="pages/pagetable.cpp" line="1635"/>
-        <location filename="pages/pagetable.cpp" line="1644"/>
-        <location filename="pages/pagetable.cpp" line="2112"/>
-        <location filename="pages/pagetable.cpp" line="2114"/>
-        <location filename="pages/pagetable.cpp" line="2121"/>
-        <location filename="pages/pagetable.cpp" line="2123"/>
-        <location filename="pages/pagetable.cpp" line="2221"/>
-        <location filename="pages/pagetable.cpp" line="2230"/>
-        <location filename="pages/pagetable.cpp" line="2523"/>
-        <location filename="pages/pagetable.cpp" line="2532"/>
-        <location filename="pages/pagetable.cpp" line="2763"/>
-        <location filename="pages/pagetable.cpp" line="2765"/>
-        <location filename="pages/pagetable.cpp" line="2771"/>
-        <location filename="pages/pagetable.cpp" line="2773"/>
+        <location filename="pages/pagetable.cpp" line="1717"/>
+        <location filename="pages/pagetable.cpp" line="1726"/>
+        <location filename="pages/pagetable.cpp" line="2225"/>
+        <location filename="pages/pagetable.cpp" line="2227"/>
+        <location filename="pages/pagetable.cpp" line="2234"/>
+        <location filename="pages/pagetable.cpp" line="2236"/>
+        <location filename="pages/pagetable.cpp" line="2334"/>
+        <location filename="pages/pagetable.cpp" line="2343"/>
+        <location filename="pages/pagetable.cpp" line="2636"/>
+        <location filename="pages/pagetable.cpp" line="2645"/>
+        <location filename="pages/pagetable.cpp" line="2876"/>
+        <location filename="pages/pagetable.cpp" line="2878"/>
+        <location filename="pages/pagetable.cpp" line="2884"/>
+        <location filename="pages/pagetable.cpp" line="2886"/>
         <source>Attention</source>
         <translation>Atención</translation>
     </message>
-    <message utf8="true">
-        <location filename="pages/pagetable.cpp" line="1636"/>
+    <message>
+        <location filename="pages/pagetable.cpp" line="1718"/>
         <source>les offsets ne peuvent être modulés dans un preset.</source>
         <translation>los offsets no se pueden modular en un preset.</translation>
     </message>
-    <message utf8="true">
-        <location filename="pages/pagetable.cpp" line="1645"/>
+    <message>
+        <location filename="pages/pagetable.cpp" line="1727"/>
         <source>&quot; ne peut être modulé dans un preset.</source>
         <translation>&quot; no se puede modular en un preset.</translation>
     </message>
     <message>
-        <location filename="pages/pagetable.cpp" line="2112"/>
-        <location filename="pages/pagetable.cpp" line="2221"/>
-        <location filename="pages/pagetable.cpp" line="2523"/>
-        <location filename="pages/pagetable.cpp" line="2763"/>
+        <location filename="pages/pagetable.cpp" line="2225"/>
+        <location filename="pages/pagetable.cpp" line="2334"/>
+        <location filename="pages/pagetable.cpp" line="2636"/>
+        <location filename="pages/pagetable.cpp" line="2876"/>
         <source>L&apos;instrument doit contenir des sons.</source>
         <translation>El instrumento debe contener muestras.</translation>
     </message>
     <message>
-        <location filename="pages/pagetable.cpp" line="2114"/>
-        <location filename="pages/pagetable.cpp" line="2230"/>
-        <location filename="pages/pagetable.cpp" line="2532"/>
-        <location filename="pages/pagetable.cpp" line="2765"/>
+        <location filename="pages/pagetable.cpp" line="2227"/>
+        <location filename="pages/pagetable.cpp" line="2343"/>
+        <location filename="pages/pagetable.cpp" line="2645"/>
+        <location filename="pages/pagetable.cpp" line="2878"/>
         <source>Le preset doit contenir des instruments.</source>
         <translation>El preset debe contener instrumentos.</translation>
     </message>
-    <message utf8="true">
-        <location filename="pages/pagetable.cpp" line="2121"/>
-        <location filename="pages/pagetable.cpp" line="2771"/>
+    <message>
+        <location filename="pages/pagetable.cpp" line="2234"/>
+        <location filename="pages/pagetable.cpp" line="2884"/>
         <source>Aucune étendue de notes spécifiée pour l&apos;instrument.</source>
         <translation>No se ha especificado una extensión de notas para el instrumento.</translation>
     </message>
-    <message utf8="true">
-        <location filename="pages/pagetable.cpp" line="2123"/>
-        <location filename="pages/pagetable.cpp" line="2773"/>
+    <message>
+        <location filename="pages/pagetable.cpp" line="2236"/>
+        <location filename="pages/pagetable.cpp" line="2886"/>
         <source>Aucune étendue de notes spécifiée pour le preset.</source>
         <translation>No se ha especificado una extensión de notas para el preset.</translation>
     </message>
@@ -3159,12 +3233,12 @@ Dividir el fichero en diferentes sf2 puede resolver el problema.</translation>
         <source>Etendue note</source>
         <translation>Rango de notas</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="pages/page_inst.ui" line="178"/>
         <source>Etendue vélocité</source>
         <translation>Rango de velocidad</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="pages/page_inst.ui" line="183"/>
         <source>Atténuation (dB)</source>
         <translation>Atenuación (dB)</translation>
@@ -3189,7 +3263,7 @@ Dividir el fichero en diferentes sf2 puede resolver el problema.</translation>
         <source>Accordage (demi-tons)</source>
         <translation>Afinación (semitonos)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="pages/page_inst.ui" line="208"/>
         <source>Accordage (centièmes)</source>
         <translation>Afinación (centésimas)</translation>
@@ -3199,12 +3273,12 @@ Dividir el fichero en diferentes sf2 puede resolver el problema.</translation>
         <source>Accordage (scale)</source>
         <translation>Afinación (escala)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="pages/page_inst.ui" line="218"/>
         <source>Filtre, fréquence (Hz)</source>
         <translation>Filtro, freq (Hz)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="pages/page_inst.ui" line="229"/>
         <source>Filtre, résonance (dB)</source>
         <translation>Filtro, resonance (dB)</translation>
@@ -3239,12 +3313,12 @@ Dividir el fichero en diferentes sf2 puede resolver el problema.</translation>
         <source>Vol env release (s)</source>
         <translation>Vol env release (s)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="pages/page_inst.ui" line="264"/>
         <source>Note → Vol env hold (c)</source>
         <translation>Nota → Vol env hold (c)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="pages/page_inst.ui" line="269"/>
         <source>Note → Vol env decay (c)</source>
         <translation>Nota → Vol env decay (c)</translation>
@@ -3279,22 +3353,22 @@ Dividir el fichero en diferentes sf2 puede resolver el problema.</translation>
         <source>Mod env release (s)</source>
         <translation>Mod env release (s)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="pages/page_inst.ui" line="304"/>
         <source>Mod env → ton (c)</source>
         <translation>Mod env → ton (c)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="pages/page_inst.ui" line="309"/>
         <source>Mod env → filtre (c)</source>
         <translation>Mod env → filtro (c)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="pages/page_inst.ui" line="314"/>
         <source>Note → Mod env hold (c)</source>
         <translation>Nota → Mod env hold (c)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="pages/page_inst.ui" line="319"/>
         <source>Note → Mod env decay (c)</source>
         <translation>Nota → Mod env decay (c)</translation>
@@ -3309,17 +3383,17 @@ Dividir el fichero en diferentes sf2 puede resolver el problema.</translation>
         <source>Mod LFO freq (Hz)</source>
         <translation>Mod LFO freq (Hz)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="pages/page_inst.ui" line="334"/>
         <source>Mod LFO → ton (c)</source>
         <translation>Mod LFO → ton (c)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="pages/page_inst.ui" line="339"/>
         <source>Mod LFO → filtre (c)</source>
         <translation>Mod LFO → filtre (c)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="pages/page_inst.ui" line="344"/>
         <source>Mod LFO → volume (dB)</source>
         <translation>Mod LFO → volumen (dB)</translation>
@@ -3334,7 +3408,7 @@ Dividir el fichero en diferentes sf2 puede resolver el problema.</translation>
         <source>Vib LFO freq (Hz)</source>
         <translation>Vib LFO freq (Hz)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="pages/page_inst.ui" line="359"/>
         <source>Vib LFO → ton (c)</source>
         <translation>Vib LFO → ton (c)</translation>
@@ -3349,7 +3423,7 @@ Dividir el fichero en diferentes sf2 puede resolver el problema.</translation>
         <source>Chorus (%)</source>
         <translation>Chorus (%)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="pages/page_inst.ui" line="374"/>
         <source>Réverbération (%)</source>
         <translation>Reverberación (%)</translation>
@@ -3359,24 +3433,24 @@ Dividir el fichero en diferentes sf2 puede resolver el problema.</translation>
         <source>Note fixe</source>
         <translation>Nota fija</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="pages/page_inst.ui" line="384"/>
         <source>Vélocité fixe</source>
         <translation>Velocidad fija</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="pages/page_inst.ui" line="389"/>
         <source>Offset début échantillon</source>
         <oldsource>Offset début sample</oldsource>
         <translation>Desfase de inicio de muestra</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="pages/page_inst.ui" line="394"/>
         <source>Offset fin échantillon</source>
         <oldsource>Offset fin sample</oldsource>
         <translation>Desfase de fin de muestra</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="pages/page_inst.ui" line="399"/>
         <source>Offset début boucle</source>
         <translation>Desfase de inicio de loop</translation>
@@ -3392,113 +3466,123 @@ Dividir el fichero en diferentes sf2 puede resolver el problema.</translation>
         <translation>Global</translation>
     </message>
     <message>
-        <location filename="pages/page_inst.ui" line="472"/>
+        <location filename="pages/page_inst.ui" line="540"/>
         <source>Supprime un modulateur</source>
         <translation>Eliminar un modulador</translation>
     </message>
-    <message utf8="true">
-        <location filename="pages/page_inst.ui" line="657"/>
+    <message>
+        <location filename="pages/page_inst.ui" line="560"/>
         <source>Colle les modulateurs copiés</source>
         <translation>Pegar los moduladores copiados</translation>
     </message>
     <message>
-        <location filename="pages/page_inst.ui" line="745"/>
+        <location filename="pages/page_inst.ui" line="505"/>
         <source>Modulateurs</source>
         <translation>Moduladores</translation>
     </message>
     <message>
-        <location filename="pages/page_inst.ui" line="764"/>
+        <location filename="pages/page_inst.ui" line="472"/>
         <source>Ajoute un modulateur</source>
         <translation>Añadir un modulador</translation>
     </message>
     <message>
-        <location filename="pages/page_inst.ui" line="784"/>
+        <location filename="pages/page_inst.ui" line="797"/>
         <source>Copie l&apos;ensemble des modulateurs</source>
         <translation>Copiar todos los moduladores</translation>
     </message>
     <message>
-        <location filename="pages/page_inst.ui" line="912"/>
+        <location filename="pages/page_inst.ui" line="909"/>
         <source>Source</source>
         <translation>Origen</translation>
     </message>
-    <message utf8="true">
-        <location filename="pages/page_inst.ui" line="923"/>
+    <message>
+        <location filename="pages/page_inst.ui" line="920"/>
         <source>Quantité</source>
         <translation>Cantidad</translation>
     </message>
     <message>
-        <location filename="pages/page_inst.ui" line="677"/>
-        <location filename="pages/page_inst.ui" line="934"/>
+        <location filename="pages/page_inst.ui" line="732"/>
+        <location filename="pages/page_inst.ui" line="931"/>
         <source>Destination</source>
         <translation>Destino</translation>
     </message>
-    <message utf8="true">
-        <location filename="pages/page_inst.ui" line="486"/>
+    <message>
+        <location filename="pages/page_inst.ui" line="580"/>
         <source>Source / Quantité</source>
         <translation>Origen / Cantidad</translation>
     </message>
     <message>
-        <location filename="pages/page_inst.ui" line="729"/>
+        <location filename="pages/page_inst.ui" line="781"/>
         <source>Valeur abs.</source>
         <translation>Valor abs.</translation>
     </message>
-    <message utf8="true">
-        <location filename="pages/page_inst.cpp" line="124"/>
+    <message>
+        <location filename="pages/page_inst.cpp" line="72"/>
+        <source>Copier l&apos;ensemble des modulateurs</source>
+        <translation>Copiar todos los moduladores</translation>
+    </message>
+    <message>
+        <location filename="pages/page_inst.cpp" line="73"/>
+        <source>Appliquer les modulateurs à tous les instruments</source>
+        <translation>Aplicar moduladores a todos los instrumentos</translation>
+    </message>
+    <message>
+        <location filename="pages/page_inst.cpp" line="131"/>
         <source>&lt;b&gt;Instrument lié à aucun preset.&lt;/b&gt;</source>
         <oldsource>&lt;b&gt;Instrument liÃ© au preset : &lt;/b&gt;</oldsource>
         <translation>&lt;b&gt;Instrumento no ligado a ningún preset.&lt;/b&gt;</translation>
     </message>
-    <message utf8="true">
-        <location filename="pages/page_inst.cpp" line="126"/>
+    <message>
+        <location filename="pages/page_inst.cpp" line="133"/>
         <source>&lt;b&gt;Instrument lié au preset : &lt;/b&gt;</source>
         <oldsource>&lt;b&gt;Instrument liÃ© aux presets : &lt;/b&gt;</oldsource>
         <translation>&lt;b&gt;Instrumento ligado al preset: &lt;/b&gt;</translation>
     </message>
-    <message utf8="true">
-        <location filename="pages/page_inst.cpp" line="128"/>
+    <message>
+        <location filename="pages/page_inst.cpp" line="135"/>
         <source>&lt;b&gt;Instrument lié aux presets : &lt;/b&gt;</source>
         <translation>&lt;b&gt;Instrumento ligado a los presets: &lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="pages/page_inst.cpp" line="139"/>
-        <location filename="pages/page_inst.cpp" line="234"/>
-        <location filename="pages/page_inst.cpp" line="323"/>
-        <location filename="pages/page_inst.cpp" line="585"/>
-        <location filename="pages/page_inst.cpp" line="664"/>
+        <location filename="pages/page_inst.cpp" line="146"/>
+        <location filename="pages/page_inst.cpp" line="241"/>
+        <location filename="pages/page_inst.cpp" line="330"/>
+        <location filename="pages/page_inst.cpp" line="592"/>
+        <location filename="pages/page_inst.cpp" line="671"/>
         <source>Attention</source>
         <translation>Atención</translation>
     </message>
     <message>
-        <location filename="pages/page_inst.cpp" line="139"/>
-        <location filename="pages/page_inst.cpp" line="234"/>
-        <location filename="pages/page_inst.cpp" line="323"/>
-        <location filename="pages/page_inst.cpp" line="585"/>
-        <location filename="pages/page_inst.cpp" line="664"/>
+        <location filename="pages/page_inst.cpp" line="146"/>
+        <location filename="pages/page_inst.cpp" line="241"/>
+        <location filename="pages/page_inst.cpp" line="330"/>
+        <location filename="pages/page_inst.cpp" line="592"/>
+        <location filename="pages/page_inst.cpp" line="671"/>
         <source>L&apos;instrument doit contenir des sons.</source>
         <translation>El instrumento debe contener muestras.</translation>
     </message>
-    <message utf8="true">
-        <location filename="pages/page_inst.cpp" line="348"/>
+    <message>
+        <location filename="pages/page_inst.cpp" line="355"/>
         <source>Création </source>
         <translation>Creación </translation>
     </message>
     <message>
-        <location filename="pages/page_inst.cpp" line="349"/>
+        <location filename="pages/page_inst.cpp" line="356"/>
         <source>Annuler</source>
         <translation>Deshacer</translation>
     </message>
     <message>
-        <location filename="pages/page_inst.cpp" line="366"/>
+        <location filename="pages/page_inst.cpp" line="373"/>
         <source>sans nom</source>
         <translation>sin nombre</translation>
     </message>
     <message>
-        <location filename="pages/page_inst.cpp" line="671"/>
+        <location filename="pages/page_inst.cpp" line="678"/>
         <source>Transposition</source>
         <translation>Transposición</translation>
     </message>
-    <message utf8="true">
-        <location filename="pages/page_inst.cpp" line="672"/>
+    <message>
+        <location filename="pages/page_inst.cpp" line="679"/>
         <source>Écart en demi-tons :</source>
         <translation>Cambio en semitonos:</translation>
     </message>
@@ -3525,12 +3609,12 @@ Dividir el fichero en diferentes sf2 puede resolver el problema.</translation>
         <source>Etendue note</source>
         <translation>Rango de notas</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="pages/page_prst.ui" line="237"/>
         <source>Etendue vélocité</source>
         <translation>Rango de velocidad</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="pages/page_prst.ui" line="242"/>
         <source>Atténuation (dB)</source>
         <translation>Atenuación (dB)</translation>
@@ -3545,7 +3629,7 @@ Dividir el fichero en diferentes sf2 puede resolver el problema.</translation>
         <source>Accordage (demi-tons)</source>
         <translation>Afinación (semitonos)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="pages/page_prst.ui" line="257"/>
         <source>Accordage (centièmes)</source>
         <translation>Afinación (centésimas)</translation>
@@ -3555,32 +3639,32 @@ Dividir el fichero en diferentes sf2 puede resolver el problema.</translation>
         <source>Accordage (scale)</source>
         <translation>Afinación (escala)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="pages/page_prst.ui" line="267"/>
         <source>Filtre, fréquence (×)</source>
         <translation>Filtro, freq (×)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="pages/page_prst.ui" line="278"/>
         <source>Filtre, résonance (dB)</source>
         <translation>Filtro, resonance (dB)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="pages/page_prst.ui" line="283"/>
         <source>Vol env delay (×)</source>
         <translation>Vol env delay (×)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="pages/page_prst.ui" line="288"/>
         <source>Vol env attack (×)</source>
         <translation>Vol env attack (×)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="pages/page_prst.ui" line="293"/>
         <source>Vol env hold (×)</source>
         <translation>Vol env hold (×)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="pages/page_prst.ui" line="298"/>
         <source>Vol env decay (×)</source>
         <translation>Vol env decay (×)</translation>
@@ -3590,37 +3674,37 @@ Dividir el fichero en diferentes sf2 puede resolver el problema.</translation>
         <source>Vol env sustain (dB)</source>
         <translation>Vol env sustain (dB)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="pages/page_prst.ui" line="308"/>
         <source>Vol env release (×)</source>
         <translation>Vol env release (×)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="pages/page_prst.ui" line="313"/>
         <source>Note → Vol env hold (c)</source>
         <translation>Nota → Vol env hold (c)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="pages/page_prst.ui" line="318"/>
         <source>Note → Vol env decay (c)</source>
         <translation>Nota → Vol env decay (c)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="pages/page_prst.ui" line="323"/>
         <source>Mod env delay (×)</source>
         <translation>Mod env delay (×)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="pages/page_prst.ui" line="328"/>
         <source>Mod env attack (×)</source>
         <translation>Mod env attack (×)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="pages/page_prst.ui" line="333"/>
         <source>Mod env hold (×)</source>
         <translation>Mod env hold (×)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="pages/page_prst.ui" line="338"/>
         <source>Mod env decay (×)</source>
         <translation>Mod env decay (×)</translation>
@@ -3630,67 +3714,67 @@ Dividir el fichero en diferentes sf2 puede resolver el problema.</translation>
         <source>Mod env sustain (%)</source>
         <translation>Mod env sustain (%)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="pages/page_prst.ui" line="348"/>
         <source>Mod env release (×)</source>
         <translation>Mod env release (×)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="pages/page_prst.ui" line="353"/>
         <source>Mod env → ton (c)</source>
         <translation>Mod env → ton (c)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="pages/page_prst.ui" line="358"/>
         <source>Mod env → filtre (c)</source>
         <translation>Mod env → filtro (c)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="pages/page_prst.ui" line="363"/>
         <source>Note → Mod env hold (c)</source>
         <translation>Nota → Mod env hold (c)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="pages/page_prst.ui" line="368"/>
         <source>Note → Mod env decay (c)</source>
         <translation>Nota → Mod env decay (c)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="pages/page_prst.ui" line="373"/>
         <source>Mod LFO delay (×)</source>
         <translation>Mod LFO delay (×)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="pages/page_prst.ui" line="378"/>
         <source>Mod LFO freq (×)</source>
         <translation>Mod LFO freq (×)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="pages/page_prst.ui" line="383"/>
         <source>Mod LFO → ton (c)</source>
         <translation>Mod LFO → ton (c)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="pages/page_prst.ui" line="388"/>
         <source>Mod LFO → filtre (c)</source>
         <translation>Mod LFO → filtre (c)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="pages/page_prst.ui" line="393"/>
         <source>Mod LFO → volume (dB)</source>
         <translation>Mod LFO → volumen (dB)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="pages/page_prst.ui" line="398"/>
         <source>Vib LFO delay (×)</source>
         <translation>Vib LFO delay (×)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="pages/page_prst.ui" line="403"/>
         <source>Vib LFO freq (×)</source>
         <translation>Vib LFO freq (×)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="pages/page_prst.ui" line="408"/>
         <source>Vib LFO → ton (c)</source>
         <translation>Vib LFO → ton (c)</translation>
@@ -3700,7 +3784,7 @@ Dividir el fichero en diferentes sf2 puede resolver el problema.</translation>
         <source>Chorus (%)</source>
         <translation>Chorus (%)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="pages/page_prst.ui" line="418"/>
         <source>Réverbération (%)</source>
         <translation>Reverberación (%)</translation>
@@ -3710,56 +3794,66 @@ Dividir el fichero en diferentes sf2 puede resolver el problema.</translation>
         <source>Global</source>
         <translation>Global</translation>
     </message>
-    <message utf8="true">
-        <location filename="pages/page_prst.ui" line="474"/>
+    <message>
+        <location filename="pages/page_prst.ui" line="915"/>
         <source>Colle les modulateurs copiés</source>
         <translation>Pegar los moduladores copiados</translation>
     </message>
     <message>
-        <location filename="pages/page_prst.ui" line="653"/>
+        <location filename="pages/page_prst.ui" line="569"/>
         <source>Copie l&apos;ensemble des modulateurs</source>
         <translation>Copiar todos los moduladores</translation>
     </message>
     <message>
-        <location filename="pages/page_prst.ui" line="685"/>
+        <location filename="pages/page_prst.ui" line="533"/>
         <source>Ajoute un modulateur</source>
         <translation>Añadir un modulador</translation>
     </message>
     <message>
-        <location filename="pages/page_prst.ui" line="727"/>
+        <location filename="pages/page_prst.ui" line="767"/>
         <source>Supprime un modulateur</source>
         <translation>Eliminar un modulador</translation>
     </message>
     <message>
-        <location filename="pages/page_prst.ui" line="803"/>
+        <location filename="pages/page_prst.ui" line="595"/>
         <source>Modulateurs</source>
         <translation>Moduladores</translation>
     </message>
     <message>
-        <location filename="pages/page_prst.ui" line="902"/>
+        <location filename="pages/page_prst.ui" line="873"/>
         <source>Source</source>
         <translation>Origen</translation>
     </message>
-    <message utf8="true">
-        <location filename="pages/page_prst.ui" line="913"/>
+    <message>
+        <location filename="pages/page_prst.ui" line="884"/>
         <source>Quantité</source>
         <translation>Cantidad</translation>
     </message>
     <message>
-        <location filename="pages/page_prst.ui" line="741"/>
-        <location filename="pages/page_prst.ui" line="924"/>
+        <location filename="pages/page_prst.ui" line="468"/>
+        <location filename="pages/page_prst.ui" line="895"/>
         <source>Destination</source>
         <translation>Destino</translation>
     </message>
-    <message utf8="true">
-        <location filename="pages/page_prst.ui" line="500"/>
+    <message>
+        <location filename="pages/page_prst.ui" line="608"/>
         <source>Source / Quantité</source>
         <translation>Origen / Cantidad</translation>
     </message>
     <message>
-        <location filename="pages/page_prst.ui" line="787"/>
+        <location filename="pages/page_prst.ui" line="511"/>
         <source>Valeur abs.</source>
         <translation>Valor abs.</translation>
+    </message>
+    <message>
+        <location filename="pages/page_prst.cpp" line="71"/>
+        <source>Copier l&apos;ensemble des modulateurs</source>
+        <translation>Copiar todos los moduladores</translation>
+    </message>
+    <message>
+        <location filename="pages/page_prst.cpp" line="72"/>
+        <source>Appliquer les modulateurs à tous les presets</source>
+        <translation>Aplicar moduladores a todos los presets</translation>
     </message>
 </context>
 <context>
@@ -3804,7 +3898,7 @@ Dividir el fichero en diferentes sf2 puede resolver el problema.</translation>
         <source>Produit</source>
         <translation>Producto</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="pages/page_sf2.ui" line="135"/>
         <source>Échantillons</source>
         <translation>Muestras</translation>
@@ -3824,18 +3918,18 @@ Dividir el fichero en diferentes sf2 puede resolver el problema.</translation>
         <source>Nombre d&apos;instruments</source>
         <translation>Número de instrumentos</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="pages/page_sf2.ui" line="227"/>
         <source>Nombre d&apos;échantillons</source>
         <oldsource>Nombre de samples</oldsource>
         <translation>Número de muestras</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="pages/page_sf2.ui" line="234"/>
         <source>Nombre de paramètres (instruments)</source>
         <translation>Número de parámetros (instrumentos)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="pages/page_sf2.ui" line="254"/>
         <source>Nombre de paramètres (presets)</source>
         <translation>Número de parámetros (presets)</translation>
@@ -3855,18 +3949,18 @@ Dividir el fichero en diferentes sf2 puede resolver el problema.</translation>
         <source>Sound engine</source>
         <translation>Sound engine</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="pages/page_sf2.ui" line="353"/>
         <source>Logiciel(s) d&apos;édition</source>
         <translation>Software(s) de edición</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="pages/page_sf2.cpp" line="216"/>
         <location filename="pages/page_sf2.cpp" line="231"/>
         <source> (inutilisés : </source>
         <translation> (no utilizados: </translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="pages/page_sf2.cpp" line="219"/>
         <location filename="pages/page_sf2.cpp" line="234"/>
         <source> (inutilisé : </source>
@@ -3875,12 +3969,12 @@ Dividir el fichero en diferentes sf2 puede resolver el problema.</translation>
 </context>
 <context>
     <name>Page_Smpl</name>
-    <message utf8="true">
+    <message>
         <location filename="pages/page_smpl.ui" line="167"/>
         <source>&lt;b&gt;Fréquences&lt;/b&gt;</source>
         <translation>&lt;b&gt;Frecuencias&lt;/b&gt;</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="pages/page_smpl.ui" line="700"/>
         <source>Réinitialiser</source>
         <translation>Reinicializar</translation>
@@ -3890,7 +3984,7 @@ Dividir el fichero en diferentes sf2 puede resolver el problema.</translation>
         <source>Appliquer</source>
         <translation>Aplicar</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="pages/page_smpl.ui" line="738"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Égaliseur (±15 dB)&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Ecualizador (±15 dB)&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
@@ -3925,12 +4019,12 @@ Dividir el fichero en diferentes sf2 puede resolver el problema.</translation>
         <source>Lien</source>
         <translation>Enlace</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="pages/page_smpl.ui" line="915"/>
         <source>Correction (centième)</source>
         <translation>Corrección (centésimas)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="pages/page_smpl.ui" line="888"/>
         <source>Utilise la longueur totale de l&apos;échantillon comme boucle</source>
         <translation>Utilice toda la longitud de la muestra como loop</translation>
@@ -3963,7 +4057,7 @@ Dividir el fichero en diferentes sf2 puede resolver el problema.</translation>
         <source>en boucle</source>
         <translation>loop</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="pages/page_smpl.ui" line="1126"/>
         <source>stéréo</source>
         <translation>estéreo</translation>
@@ -3973,7 +4067,7 @@ Dividir el fichero en diferentes sf2 puede resolver el problema.</translation>
         <source>Informations</source>
         <translation>Información</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="pages/page_smpl.cpp" line="94"/>
         <source>Égaliseur (±15 dB)</source>
         <translation>Ecualizador (±15 dB)</translation>
@@ -4016,23 +4110,23 @@ Dividir el fichero en diferentes sf2 puede resolver el problema.</translation>
         <source>Information</source>
         <translation>Información</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="pages/page_smpl.cpp" line="547"/>
         <location filename="pages/page_smpl.cpp" line="1814"/>
         <source>Modification appliquée avec succès aux différents échantillons</source>
         <translation>Cambio aplicado con éxito a las diferentes muestras</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="pages/page_smpl.cpp" line="1206"/>
         <source>L&apos;échantillon « </source>
         <translation>No se ha podido hacer loop en la muestra « </translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="pages/page_smpl.cpp" line="1206"/>
         <source> » n&apos;a pas pu être bouclé.</source>
         <translation> ».</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="pages/page_smpl.cpp" line="1209"/>
         <source>Les échantillons suivants n&apos;ont pas pu être bouclés :</source>
         <translation>No se ha podido hacer loop en las siguientes muestras:</translation>
@@ -4047,17 +4141,17 @@ Dividir el fichero en diferentes sf2 puede resolver el problema.</translation>
         <source>Attention</source>
         <translation>Atención</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="pages/page_smpl.cpp" line="1632"/>
         <source>Arrêt</source>
         <translation>Parada</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="pages/page_smpl.cpp" line="1230"/>
         <source>Fréquence de coupure :</source>
         <translation>Frecuencia de corte:</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="pages/page_smpl.cpp" line="1469"/>
         <source>Écart en demi-tons :</source>
         <translation>Cantidad en semitonos:</translation>
@@ -4074,17 +4168,17 @@ Dividir el fichero en diferentes sf2 puede resolver el problema.</translation>
         <source>Traitement </source>
         <translation>Procesando </translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="pages/page_smpl.cpp" line="321"/>
         <source>&lt;b&gt;Échantillon lié à aucun instrument.&lt;/b&gt;</source>
         <translation>&lt;b&gt;Muestra no ligada a ningún instrumento.&lt;/b&gt;</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="pages/page_smpl.cpp" line="323"/>
         <source>&lt;b&gt;Échantillon lié à l&apos;instrument : &lt;/b&gt;</source>
         <translation>&lt;b&gt;Muestra ligada al instrumento: &lt;/b&gt;</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="pages/page_smpl.cpp" line="325"/>
         <source>&lt;b&gt;Échantillon lié aux instruments : &lt;/b&gt;</source>
         <translation>&lt;b&gt;Muestra ligada a los instrumentos: &lt;/b&gt;</translation>
@@ -4122,12 +4216,12 @@ Dividir el fichero en diferentes sf2 puede resolver el problema.</translation>
 </context>
 <context>
     <name>QObject</name>
-    <message utf8="true">
+    <message>
         <location filename="sf2_core/duplicator.cpp" line="246"/>
         <source>&lt;b&gt;Des paramètres globaux sont déjà renseignés.&lt;/b&gt;</source>
         <translation>&lt;b&gt;Los parámetros globales ya han sido asignados.&lt;/b&gt;</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="sf2_core/duplicator.cpp" line="247"/>
         <source>La division globale ne sera pas recopiée.</source>
         <translation>La división global no se copiará.</translation>
@@ -4137,41 +4231,41 @@ Dividir el fichero en diferentes sf2 puede resolver el problema.</translation>
         <source>&amp;Ok</source>
         <translation>&amp;Ok</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="sf2_core/duplicator.cpp" line="250"/>
         <source>Ok, &amp;désactiver ce message</source>
         <translation>Ok, &amp;desactivar este mensaje</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="sf2_core/duplicator.cpp" line="285"/>
         <source>L&apos;échantillon « </source>
         <translation>La muestra « </translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="sf2_core/duplicator.cpp" line="286"/>
         <source> » existe déjà.&lt;br /&gt;Que faire ?</source>
         <translation> » ya existe. &lt;br /&gt;¿Qué hacer?</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="sf2_core/duplicator.cpp" line="427"/>
         <source>L&apos;instrument « </source>
         <translation>El instrumento « </translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="sf2_core/duplicator.cpp" line="428"/>
         <location filename="sf2_core/duplicator.cpp" line="528"/>
         <source> » existe déjà.&lt;br /&gt;Souhaitez-vous le remplacer ?</source>
         <translation> » ya existe. &lt;br /&gt;¿Desea reemplazarlo?</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="sf2_core/duplicator.cpp" line="527"/>
         <source>Le preset « </source>
         <translation>El preset « </translation>
     </message>
     <message>
         <location filename="sf2_core/duplicator.cpp" line="550"/>
-        <location filename="sf2_core/pile_sf2.cpp" line="1292"/>
-        <location filename="sf2_core/pile_sf2.cpp" line="1382"/>
+        <location filename="sf2_core/pile_sf2.cpp" line="1287"/>
+        <location filename="sf2_core/pile_sf2.cpp" line="1377"/>
         <location filename="sf2_core/pile_sf2_sl.cpp" line="276"/>
         <location filename="sf2_core/sound.cpp" line="104"/>
         <location filename="sf2_core/sound.cpp" line="156"/>
@@ -4182,8 +4276,8 @@ Dividir el fichero en diferentes sf2 puede resolver el problema.</translation>
         <location filename="sf2_core/sound.cpp" line="641"/>
         <location filename="sf2_core/sound.cpp" line="648"/>
         <location filename="sf2_core/sound.cpp" line="654"/>
-        <location filename="sf2_core/sound.cpp" line="669"/>
-        <location filename="sf2_core/sound.cpp" line="677"/>
+        <location filename="sf2_core/sound.cpp" line="673"/>
+        <location filename="sf2_core/sound.cpp" line="681"/>
         <source>Attention</source>
         <translation>Atención</translation>
     </message>
@@ -4222,32 +4316,32 @@ Dividir el fichero en diferentes sf2 puede resolver el problema.</translation>
         <source>I&amp;gnorer tout</source>
         <translation>I&amp;gnorar todo</translation>
     </message>
-    <message utf8="true">
-        <location filename="sf2_core/pile_sf2.cpp" line="937"/>
+    <message>
+        <location filename="sf2_core/pile_sf2.cpp" line="932"/>
         <source>Échantillons</source>
         <translation>Muestras</translation>
     </message>
     <message>
-        <location filename="sf2_core/pile_sf2.cpp" line="945"/>
+        <location filename="sf2_core/pile_sf2.cpp" line="940"/>
         <source>Instruments</source>
         <translation>Instrumentos</translation>
     </message>
     <message>
-        <location filename="sf2_core/pile_sf2.cpp" line="952"/>
+        <location filename="sf2_core/pile_sf2.cpp" line="947"/>
         <source>Presets</source>
         <translation>Presets</translation>
     </message>
-    <message utf8="true">
-        <location filename="sf2_core/pile_sf2.cpp" line="1293"/>
+    <message>
+        <location filename="sf2_core/pile_sf2.cpp" line="1288"/>
         <source>Impossible de supprimer un échantillon s&apos;il est utilisé par un instrument.</source>
         <translation>No se puede eliminar una muestra si ésta está siendo utilizada por un instrumento.</translation>
     </message>
-    <message utf8="true">
-        <location filename="sf2_core/pile_sf2.cpp" line="1383"/>
+    <message>
+        <location filename="sf2_core/pile_sf2.cpp" line="1378"/>
         <source>Impossible de supprimer un instrument s&apos;il est utilisé par un preset.</source>
         <translation>No se puede eliminar un instrumento si éste está siendo utilizado por un preset.</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="sf2_core/pile_sf2_sl.cpp" line="277"/>
         <source>Fichier corrompu : utilisation des échantillons en qualité 16 bits.</source>
         <oldsource>Fichier corrompu : utilisation des samples en qualité 16 bits.</oldsource>
@@ -4266,8 +4360,8 @@ Dividir el fichero en diferentes sf2 puede resolver el problema.</translation>
         <source>Erreur dans Sound::getData.</source>
         <translation>Error en Sound::getData.</translation>
     </message>
-    <message utf8="true">
-        <location filename="sf2_core/sound.cpp" line="678"/>
+    <message>
+        <location filename="sf2_core/sound.cpp" line="682"/>
         <source>Résolution insuffisante</source>
         <translation>Resolución insuficiente</translation>
     </message>
@@ -4280,7 +4374,7 @@ Dividir el fichero en diferentes sf2 puede resolver el problema.</translation>
         <location filename="sf2_core/sound.cpp" line="641"/>
         <location filename="sf2_core/sound.cpp" line="648"/>
         <location filename="sf2_core/sound.cpp" line="654"/>
-        <location filename="sf2_core/sound.cpp" line="669"/>
+        <location filename="sf2_core/sound.cpp" line="673"/>
         <source>Le fichier est corrompu.</source>
         <translation>El archivo está corrupto.</translation>
     </message>
@@ -4290,7 +4384,7 @@ Dividir el fichero en diferentes sf2 puede resolver el problema.</translation>
         <source>sans nom</source>
         <translation>sin nombre</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="tools/conversion_sfz.cpp" line="289"/>
         <source>// Sfz exporté depuis un sf2 par Polyphone</source>
         <translation>// Sfz exportado desde un sf2 por Polyphone</translation>
@@ -4366,27 +4460,27 @@ Dividir el fichero en diferentes sf2 puede resolver el problema.</translation>
         <source>Cuivres</source>
         <translation>Viento metal</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="tools/conversion_sfz.cpp" line="569"/>
         <source>Instrument à anches</source>
         <translation>Viento madera</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="tools/conversion_sfz.cpp" line="571"/>
         <source>Flûtes</source>
         <translation>Flautas</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="tools/conversion_sfz.cpp" line="573"/>
         <source>Synthétiseur solo</source>
         <translation>Sintetizador lead</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="tools/conversion_sfz.cpp" line="575"/>
         <source>Nappes de synthétiseur</source>
         <translation>Pads</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="tools/conversion_sfz.cpp" line="577"/>
         <source>Effets de synthétiseur</source>
         <translation>Efectos de sintetizador</translation>
@@ -4411,18 +4505,18 @@ Dividir el fichero en diferentes sf2 puede resolver el problema.</translation>
         <source>Kits de percussion</source>
         <translation>Kits de percusión</translation>
     </message>
-    <message utf8="true">
-        <location filename="gui_divers/dialog_about.cpp" line="100"/>
+    <message>
+        <location filename="gui_divers/dialog_about.cpp" line="102"/>
         <source>Créé par </source>
         <translation>Creado por </translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_about.cpp" line="101"/>
+        <location filename="gui_divers/dialog_about.cpp" line="103"/>
         <source>Contributeurs </source>
         <translation>Colaboradores </translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_about.cpp" line="102"/>
+        <location filename="gui_divers/dialog_about.cpp" line="104"/>
         <source>Traduit par </source>
         <translation>Traducido por </translation>
     </message>
@@ -4431,7 +4525,7 @@ Dividir el fichero en diferentes sf2 puede resolver el problema.</translation>
         <source>Import sfz</source>
         <translation>Importar sfz</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="tools/import_sfz.cpp" line="163"/>
         <source>Sf2 importé depuis un fichier sfz par Polyphone</source>
         <translation>Sf2 importado desde un sfz por Polyphone</translation>
@@ -4439,7 +4533,7 @@ Dividir el fichero en diferentes sf2 puede resolver el problema.</translation>
 </context>
 <context>
     <name>Tree</name>
-    <message utf8="true">
+    <message>
         <location filename="sf2_core/tree.cpp" line="52"/>
         <source>Nouvel échantillon...</source>
         <translation>Nueva muestra...</translation>
@@ -4454,7 +4548,7 @@ Dividir el fichero en diferentes sf2 puede resolver el problema.</translation>
         <source>Nouveau preset...</source>
         <translation>Nuevo preset...</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="sf2_core/tree.cpp" line="64"/>
         <source>Associer à...</source>
         <translation>Asociar a...</translation>
