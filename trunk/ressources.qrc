@@ -79,6 +79,7 @@
         <file alias="double-arrow">ressources/double-arrow.png</file>
         <file alias="auto">ressources/auto.png</file>
         <file alias="transposer_inst">ressources/transposer_inst.png</file>
+        <file alias="modulator">ressources/modulator.png</file>
     </qresource>
     <qresource prefix="/aide">
         <file alias="page0.png">ressources/doc/page 0.png</file>
@@ -278,10 +279,13 @@
         <file alias="8fr.html">ressources/doc/8-tutoriel/8fr.html</file>
         <file alias="5-1-8en.html">ressources/doc/5-tools/1-instruments/5-1-8en.html</file>
         <file alias="5-1-8fr.html">ressources/doc/5-tools/1-instruments/5-1-8fr.html</file>
+        <file alias="5-3-5en.html">ressources/doc/5-tools/3-global/5-3-5en.html</file>
+        <file alias="5-3-5fr.html">ressources/doc/5-tools/3-global/5-3-5fr.html</file>
     </qresource>
     <qresource prefix="/traductions">
         <file alias="polyphone_en.qm">ressources/traductions/polyphone_en.qm</file>
         <file alias="polyphone_es.qm">ressources/traductions/polyphone_es.qm</file>
+        <file alias="polyphone_it.qm">ressources/traductions/polyphone_it.qm</file>
     </qresource>
     <qresource prefix="/logo">
         <file alias="noel">ressources/logo_noel.png</file>

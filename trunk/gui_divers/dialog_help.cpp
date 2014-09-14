@@ -174,6 +174,7 @@ void DialogHelp::fillTree()
     createItem(trUtf8("Association auto échantillons"), "5-3-0", level2);
     createItem(trUtf8("Dissocier les échantillons stéréo"), "5-3-1", level2);
     createItem(trUtf8("Enlever les éléments non utilisés"), "5-3-2", level2);
+    createItem(trUtf8("Enlever tous les modulateurs"), "5-3-5", level2);
     createItem(trUtf8("Exporter pics de fréquence (.csv)"), "5-3-4", level2);
     createItem(trUtf8("Régler atténuation minimale"), "5-3-3", level2);
 

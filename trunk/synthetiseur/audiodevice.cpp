@@ -77,8 +77,8 @@ AudioDevice::~AudioDevice()
 
 void AudioDevice::initAudio(int numDevice, int bufferSize)
 {
-    //  0 : défaut
-    // -1 : arrêt
+    //  0 : default
+    // -1 : none
     // -2 : jack
     // -3 : asio
 
