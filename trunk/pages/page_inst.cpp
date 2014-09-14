@@ -30,11 +30,12 @@
 #include "dialog_celeste.h"
 #include <QProgressDialog>
 #include <QInputDialog>
-
+#include <QMenu>
 
 // Constructeur, destructeur
 Page_Inst::Page_Inst(QWidget *parent) :
-    PageTable(PAGE_INST, parent), ui(new Ui::Page_Inst)
+    PageTable(PAGE_INST, parent),
+    ui(new Ui::Page_Inst)
 {
     ui->setupUi(this);
     this->contenant = elementInst;
@@ -44,17 +45,18 @@ Page_Inst::Page_Inst(QWidget *parent) :
     this->lien = elementInstSmpl;
     this->lienGen = elementInstSmplGen;
     this->lienMod = elementInstSmplMod;
-    this->table = this->ui->tableInst;
-    this->tableMod = this->ui->tableMod;
-    this->spinAmount = this->ui->spinSource2;
-    this->checkAbs = this->ui->checkAbs;
-    this->pushNouveauMod = this->ui->pushNouveauMod;
-    this->pushSupprimerMod = this->ui->pushSupprimerMod;
-    this->comboSource1Courbe = this->ui->comboCourbeSource1;
-    this->comboSource2Courbe = this->ui->comboCourbeSource2;
-    this->comboSource1 = this->ui->comboSource1;
-    this->comboSource2 = this->ui->comboSource2;
-    this->comboDestination = this->ui->comboDestination;
+    this->table = ui->tableInst;
+    this->tableMod = ui->tableMod;
+    this->spinAmount = ui->spinSource2;
+    this->checkAbs = ui->checkAbs;
+    this->pushNouveauMod = ui->pushNouveauMod;
+    this->pushSupprimerMod = ui->pushSupprimerMod;
+    this->comboSource1Courbe = ui->comboCourbeSource1;
+    this->comboSource2Courbe = ui->comboCourbeSource2;
+    this->comboSource1 = ui->comboSource1;
+    this->comboSource2 = ui->comboSource2;
+    this->comboDestination = ui->comboDestination;
+    _pushCopyMod = ui->pushCopyMod;
 
     // Remplissage de comboDestination
     for (int i = 0; i < 48; i++)
@@ -64,6 +66,11 @@ Page_Inst::Page_Inst(QWidget *parent) :
     // Remplissage des combosources
     this->remplirComboSource(this->comboSource1);
     this->remplirComboSource(this->comboSource2);
+
+    // Initialisation menu de copie de modulateurs
+    _menu = new QMenu();
+    _menu->addAction(trUtf8("Copier l'ensemble des modulateurs"), this, SLOT(copyMod()));
+    _menu->addAction(trUtf8("Appliquer les modulateurs à tous les instruments"), this, SLOT(duplicateMod()));
 
 #ifdef Q_OS_MAC
     this->table->setStyleSheet("QHeaderView::section:horizontal{padding: 4px 10px 4px 10px;}");
@@ -83,7 +90,7 @@ void Page_Inst::setModVisible(bool visible)
 void Page_Inst::afficher()
 {
     PageTable::afficher();
-    EltID id = this->tree->getID(0);
+    EltID id = this->tree->getFirstID();
     id.typeElement = elementInst;
     // Liste des presets qui utilisent l'instrument
     int nbPrst = 0;
@@ -132,7 +139,7 @@ void Page_Inst::afficher()
 // Outils instrument
 void Page_Inst::desaccorder()
 {
-    EltID id = this->tree->getID(0);
+    EltID id = this->tree->getFirstID();
     id.typeElement = elementInstSmpl;
     if (this->sf2->count(id, false) == 0)
     {
@@ -149,7 +156,7 @@ void Page_Inst::desaccorder(double doHerz, double division)
 {
     this->sf2->prepareNewActions();
     // Reprise de l'identificateur si modification
-    EltID id = this->tree->getID(0);
+    EltID id = this->tree->getFirstID();
     // Modification pour chaque sample lié
     id.typeElement = elementInstSmpl;
     for (int i = 0; i < this->sf2->count(id); i++)
@@ -227,7 +234,7 @@ void Page_Inst::desaccorder(double doHerz, double division)
 }
 void Page_Inst::repartitionAuto()
 {
-    EltID id = this->tree->getID(0);
+    EltID id = this->tree->getFirstID();
     id.typeElement = elementInstSmpl;
     if (this->sf2->count(id, false) == 0)
     {
@@ -237,7 +244,7 @@ void Page_Inst::repartitionAuto()
     // Répartition automatique des notes sur le clavier
     this->sf2->prepareNewActions();
     // Reprise de l'identificateur si modification
-    id = this->tree->getID(0);
+    id = this->tree->getFirstID();
     // Liste des samples liés avec note de base
     QList<EltID> listID;
     QList<int> listNote;
@@ -316,7 +323,7 @@ void Page_Inst::repartitionAuto()
 
 void Page_Inst::mixture()
 {
-    EltID idInst = this->tree->getID(0);
+    EltID idInst = this->tree->getFirstID();
     idInst.typeElement = elementInstSmpl;
     if (this->sf2->count(idInst, false) == 0)
     {
@@ -352,7 +359,7 @@ void Page_Inst::mixture(QList<QList<int> > listeParam, QString nomInst, bool bou
     progress.show();
     double dureeSmpl = 7;
     qint32 fEch = 48000;
-    EltID idInst = this->tree->getID(0);
+    EltID idInst = this->tree->getFirstID();
     idInst.typeElement = elementInst;
     EltID idSmpl;
     QByteArray baData;
@@ -578,7 +585,7 @@ void Page_Inst::mixture(QList<QList<int> > listeParam, QString nomInst, bool bou
 }
 void Page_Inst::release()
 {
-    EltID idInst = this->tree->getID(0);
+    EltID idInst = this->tree->getFirstID();
     idInst.typeElement = elementInstSmpl;
     if (this->sf2->count(idInst, false) == 0)
     {
@@ -596,7 +603,7 @@ void Page_Inst::release(double duree36, double division, double deTune)
     this->sf2->prepareNewActions();
 
     // Reprise de l'identificateur si modification
-    EltID id = this->tree->getID(0);
+    EltID id = this->tree->getFirstID();
 
     // Modification pour chaque sample lié
     id.typeElement = elementInstSmpl;
@@ -657,7 +664,7 @@ void Page_Inst::release(double duree36, double division, double deTune)
 }
 void Page_Inst::transposer()
 {
-    EltID id = this->tree->getID(0);
+    EltID id = this->tree->getFirstID();
     id.typeElement = elementInstSmpl;
     if (this->sf2->count(id, false) == 0)
     {
@@ -678,7 +685,7 @@ void Page_Inst::transposer()
     sf2->prepareNewActions();
 
     // Reprise de l'identificateur si modification
-    id = this->tree->getID(0);
+    id = this->tree->getFirstID();
 
     // Nombre de tons
     int nbTons = qRound(rep);
