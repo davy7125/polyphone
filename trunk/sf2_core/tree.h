@@ -63,7 +63,8 @@ public:
     bool isSelectedItemsTypeUnique();
     bool isSelectedItemsSf2Unique();
     bool isSelectedItemsFamilyUnique();
-    EltID getID(unsigned int pos);
+    EltID getFirstID();
+    QList<EltID> getAllIDs();
     EltID getNextID(bool closeFile);
     void selectNone(bool refresh = false);
     void select(EltID id, bool refresh = false);

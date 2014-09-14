@@ -92,7 +92,7 @@ private:
 
     // Méthodes privées
     void setRateElt(EltID id, DWORD echFinal);
-    EltID getRepercussionID(int num = 0);
+    EltID getRepercussionID(EltID id);
     void autoTune(EltID id, int &pitch, int &correction);
 };
 
