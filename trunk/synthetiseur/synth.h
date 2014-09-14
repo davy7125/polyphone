@@ -35,16 +35,19 @@ class Synth : public QObject
     Q_OBJECT
 
 public:
-    Synth(Pile_sf2 * sf2, QWidget *parent = NULL);
+    Synth(Pile_sf2 * sf2, int bufferSize);
     ~Synth();
 
     // Exécution par mainWindow (thread 1)
     void play(int type, int idSf2, int idElt, int note, int velocity,
               VoiceParam * voiceParamTmp = NULL);
+    void play_sub(int type, int idSf2, int idElt, int note, int velocity,
+                  VoiceParam * voiceParamTmp = NULL);
     void stop();
     void setGain(double gain);
     void setReverb(int level, int size, int width, int damping);
     void setChorus(int level, int depth, int frequency);
+    void setBufferSize(int bufferSize);
 
     // Paramètres de lecture de samples
     void setGainSample(int gain);
@@ -68,8 +71,10 @@ public:
             data1[i] = data2[i] = _fTmpSumRev1[i] = _fTmpSumRev2[i] = 0;
 
         // Fusion des sound engines
+        _mutexSynchro.lock();
         for (int i = 0; i < _soundEngines.size(); i++)
             _soundEngines.at(i)->addData(data1, data2, _fTmpSumRev1, _fTmpSumRev2, maxlen);
+        _mutexSynchro.unlock();
 
         // Application réverbération et addition
         _mutexReverb.lock();
@@ -117,6 +122,9 @@ private slots:
     void stopSinus();
 
 private:
+    void destroySoundEnginesAndBuffers();
+    void createSoundEnginesAndBuffers();
+
     void clip(float *data1, float *data2, qint64 size)
     {
         // Recherche valeur maxi
@@ -176,8 +184,8 @@ private:
 
     // Effets
     int m_choLevel, m_choDepth, m_choFrequency;
-    FreeVerb _reverb;
-    QMutex _mutexReverb;
+    stk::FreeVerb _reverb;
+    QMutex _mutexReverb, _mutexSynchro;
 
     // Etat clipping
     double m_clipCoef;
@@ -190,6 +198,7 @@ private:
     QMutex m_mutexRecord;
 
     float * _fTmpSumRev1, * _fTmpSumRev2, * _dataWav;
+    int _bufferSize;
 };
 
 

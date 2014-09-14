@@ -25,9 +25,6 @@
 #ifndef SOUNDENGINE_H
 #define SOUNDENGINE_H
 
-#define BUFFER_ENGINE_MIN_DATA   1024
-#define BUFFER_ENGINE_MAX_DATA   2048
-
 #include "circularbuffer.h"
 #include "voice.h"
 
@@ -36,11 +33,12 @@ class SoundEngine : public CircularBuffer
     Q_OBJECT
 
 public:
-    SoundEngine(QObject *parent = NULL);
+    SoundEngine(int bufferSize);
     virtual ~SoundEngine();
 
     static void addVoice(Voice * voice, QList<Voice *> friends = QList<Voice*>());
     static void stopAllVoices();
+    static void syncNewVoices();
     static void releaseNote(int numNote);
     static void setGain(double gain);
     static void setChorus(int level, int depth, int frequency);
@@ -67,26 +65,30 @@ protected:
         int nbVoices = _listVoices.size();
         for (int i = nbVoices - 1; i >= 0; i--)
         {
-            // Récupération des données
-            _listVoices.at(i)->generateData(_dataTmpL, _dataTmpR, len);
-            float coef1 = _listVoices.at(i)->getReverb() / 100.;
-            float coef2 = 1. - coef1;
-
-            // Fusion
-            for (int j = 0; j < len; j++)
+            // Check for started voice (synchronization)
+            if(_listVoices.at(i)->isRunning())
             {
-                dataL   [j] += coef2 * _dataTmpL[j];
-                dataR   [j] += coef2 * _dataTmpR[j];
-                dataRevL[j] += coef1 * _dataTmpL[j];
-                dataRevR[j] += coef1 * _dataTmpR[j];
-            }
+                // Récupération des données
+                _listVoices.at(i)->generateData(_dataTmpL, _dataTmpR, len);
+                float coef1 = _listVoices.at(i)->getReverb() / 100.;
+                float coef2 = 1. - coef1;
 
-            // Voix terminée ?
-            if (_listVoices.at(i)->isFinished())
-            {
-                if (_listVoices.at(i)->getNote() == -1)
-                    emit(readFinished());
-                delete _listVoices.takeAt(i);
+                // Fusion
+                for (int j = 0; j < len; j++)
+                {
+                    dataL   [j] += coef2 * _dataTmpL[j];
+                    dataR   [j] += coef2 * _dataTmpR[j];
+                    dataRevL[j] += coef1 * _dataTmpL[j];
+                    dataRevR[j] += coef1 * _dataTmpR[j];
+                }
+
+                // Voix terminée ?
+                if (_listVoices.at(i)->isFinished())
+                {
+                    if (_listVoices.at(i)->getNote() == -1)
+                        emit(readFinished());
+                    delete _listVoices.takeAt(i);
+                }
             }
         }
         _mutexVoices.unlock();
@@ -99,6 +101,7 @@ private:
     void closeAllInstance(int exclusiveClass, int numPreset, QList<Voice*> friends);
     void addVoiceInstance(Voice * voice);
     void stopAllVoicesInstance();
+    void syncNewVoicesInstance(int delay);
     void releaseNoteInstance(int numNote);
     void setGainInstance(double gain);
     void setChorusInstance(int level, int depth, int frequency);

@@ -23,9 +23,8 @@
 ***************************************************************************/
 
 #include "circularbuffer.h"
-#include <QThread>
 
-CircularBuffer::CircularBuffer(int minBuffer, int maxBuffer, QObject * parent) : QObject(parent),
+CircularBuffer::CircularBuffer(int minBuffer, int maxBuffer) : QObject(NULL),
     _minBuffer(minBuffer),
     _maxBuffer(maxBuffer),
     _maxTailleBuffer(2 * maxBuffer),
@@ -34,8 +33,7 @@ CircularBuffer::CircularBuffer(int minBuffer, int maxBuffer, QObject * parent) :
     _posLecture(0),
     _currentLengthAvailable(0),
     _interrupted(false),
-    _isFinished(false),
-    _thread(new QThread())
+    _isFinished(false)
 {
     // Initialisation des buffers
     _dataL       = new float [_bufferSize];

@@ -31,8 +31,6 @@
 #include "Chorus.h"
 #include "FreeVerb.h"
 
-using namespace stk;
-
 class Voice : public QObject
 {
     Q_OBJECT
@@ -47,6 +45,8 @@ public:
     void setGain(double gain);
     void setChorus(int level, int depth, int frequency);
     bool isFinished() { return _isFinished; }
+    bool isRunning() { return _isRunning; }
+    void runVoice(int delay) { _isRunning = true; _delayStart = delay; }
 
     // Accès aux propriétés de voiceParam
     double getPan();
@@ -72,7 +72,7 @@ private:
     // Oscillateurs, enveloppes et chorus
     OscSinus _modLFO, _vibLFO;
     EnveloppeVol _enveloppeVol, _enveloppeMod;
-    Chorus _chorus;
+    stk::Chorus _chorus;
 
     // Données son et paramètres
     QByteArray _baData;
@@ -86,8 +86,9 @@ private:
     qint64 m_currentSmplPos;
     double m_time;
     bool m_release;
-    int _delayEnd;
+    int _delayEnd, _delayStart;
     bool _isFinished;
+    bool _isRunning;
 
     // Sauvegarde état pour le resampling
     double m_deltaPos;

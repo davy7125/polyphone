@@ -42,7 +42,9 @@ Voice::Voice(QByteArray baData, DWORD smplRate, DWORD audioSmplRate, int note, i
     m_time(0),
     m_release(false),
     _delayEnd(10),
+    _delayStart(0),
     _isFinished(false),
+    _isRunning(false),
     m_deltaPos(0),
     m_valPrec(0),
     m_x1(0), m_x2(0), m_y1(0), m_y2(0)
@@ -58,6 +60,19 @@ Voice::~Voice()
 
 void Voice::generateData(float *dataL, float *dataR, qint64 len)
 {
+    // Synchronization delay
+    int nbNullValues = qMin(len, (qint64)_delayStart);
+    for (int i = 0; i < nbNullValues; i++)
+    {
+        dataL[i] = 0;
+        dataR[i] = 0;
+    }
+    _delayStart -= nbNullValues;
+    len -= nbNullValues;
+    if (len == 0) return;
+    dataL = &dataL[nbNullValues];
+    dataR = &dataR[nbNullValues];
+
     _mutexParam.lock();
 
     bool endSample = false;
@@ -180,7 +195,7 @@ void Voice::generateData(float *dataL, float *dataR, qint64 len)
 
     //// APPLICATION BALANCE ET CHORUS ////
 
-    double pan = (_voiceParam->pan + 50) * PI / 200.;    // Entre 0 et pi / 2
+    double pan = (_voiceParam->pan + 50) * M_PI / 200.;    // Entre 0 et pi / 2
     float coef1 = sin(pan);
     float coef2 = cos(pan);
     for (quint32 i = 0; i < len; i++)
@@ -188,7 +203,11 @@ void Voice::generateData(float *dataL, float *dataR, qint64 len)
         dataL[i] = coef1 * _chorus.tick(dataL[i]);
         dataR[i] = coef2 * _chorus.lastOut(1);
     }
+
     _mutexParam.unlock();
+
+    dataL = &dataL[-nbNullValues];
+    dataR = &dataR[-nbNullValues];
 }
 
 bool Voice::takeData(qint32 * data, qint64 nbRead)
@@ -233,6 +252,7 @@ bool Voice::takeData(qint32 * data, qint64 nbRead)
             m_currentSmplPos += nbRead;
         }
     }
+
     return endSample;
 }
 
@@ -268,7 +288,7 @@ void Voice::biQuadCoefficients(double &a0, double &a1, double &a2, double &b1, d
                                double freq, double Q)
 {
     // Calcul des coefficients d'une structure bi-quad pour un passe-bas
-    double theta = 2. * PI * freq / m_audioSmplRate;
+    double theta = 2. * M_PI * freq / m_audioSmplRate;
 
     if (Q == 0)
     {

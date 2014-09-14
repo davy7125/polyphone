@@ -36,17 +36,19 @@ class DialogRename : public QDialog
     Q_OBJECT
     
 public:
-    explicit DialogRename(QString defaultValue, QWidget *parent = 0);
+    DialogRename(QString defaultValue, bool isSample, QWidget *parent = 0);
     ~DialogRename();
     
 signals:
-    void updateNames(QString name, int modificationType);
+    void updateNames(int renameType, QString text1, QString text2, int val1, int val2);
 
 private slots:
     virtual void accept();
+    void on_comboBox_currentIndexChanged(int index);
 
 private:
     Ui::DialogRename *ui;
+    bool _isSample;
 };
 
 #endif // DIALOG_RENAME_H
