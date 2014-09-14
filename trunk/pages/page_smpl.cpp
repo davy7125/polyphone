@@ -109,8 +109,10 @@ void Page_Smpl::afficher()
     preparation = true;
 
     // Valeurs à afficher
-    int nombreElements = tree->getSelectedItemsNumber();
-    EltID id = tree->getID(0);
+    QList<EltID> ids = tree->getAllIDs();
+    int nombreElements = ids.size();
+
+    EltID id = ids.takeFirst();
     DWORD sampleRate = sf2->get(id, champ_dwSampleRate).dwValue;
     int rootKey = sf2->get(id, champ_byOriginalPitch).bValue;
     int correction = sf2->get(id, champ_chPitchCorrection).cValue;
@@ -118,10 +120,9 @@ void Page_Smpl::afficher()
     DWORD endLoop = sf2->get(id, champ_dwEndLoop).dwValue;
     DWORD length = sf2->get(id, champ_dwLength).dwValue;
     SFSampleLink typeLink = sf2->get(id, champ_sfSampleType).sfLinkValue;
-
-    for (int i = 1; i < nombreElements; i++)
+    while (!ids.isEmpty())
     {
-        EltID idTmp = tree->getID(i);
+        EltID idTmp = ids.takeFirst();
 
         if (sampleRate != sf2->get(idTmp, champ_dwSampleRate).dwValue)
             sampleRate = -1;
@@ -133,8 +134,7 @@ void Page_Smpl::afficher()
             startLoop = 0;
         if (endLoop != sf2->get(idTmp, champ_dwEndLoop).dwValue)
             endLoop = 0;
-        if (length > sf2->get(idTmp, champ_dwLength).dwValue)
-            length = sf2->get(idTmp, champ_dwLength).dwValue;
+        length = qMin(length, sf2->get(idTmp, champ_dwLength).dwValue);
         if (typeLink != sf2->get(idTmp, champ_sfSampleType).sfLinkValue)
             typeLink = linkInvalid;
     }
@@ -212,7 +212,6 @@ void Page_Smpl::afficher()
     ui->checkLectureSinus->setEnabled(nombreElements == 1);
     ui->pushLecture->setEnabled(nombreElements == 1);
     ui->sliderLectureVolume->setEnabled(nombreElements == 1);
-
 
     // Type et lien
     EltID id2 = id;
@@ -348,16 +347,16 @@ void Page_Smpl::setStartLoop()
     Valeur val;
     val.dwValue = ui->spinStartLoop->value();
     ui->spinEndLoop->setMinimum(val.dwValue);
-    for (unsigned int i = 0; i < tree->getSelectedItemsNumber(); i++)
+    QList<EltID> listID = tree->getAllIDs();
+    foreach (EltID id, listID)
     {
-        EltID id = tree->getID(i);
         if (!this->sf2->get(id, champ_hidden).bValue)
         {
             if (sf2->get(id, champ_dwStartLoop).dwValue != val.dwValue)
                 sf2->set(id, champ_dwStartLoop, val);
 
             // Sample associé ?
-            EltID id2 = getRepercussionID(i);
+            EltID id2 = getRepercussionID(id);
             if (id2.indexElt != -1)
             {
                 if (!this->sf2->get(id2, champ_hidden).bValue)
@@ -390,7 +389,7 @@ void Page_Smpl::setStartLoop(int val)
 {
     if (tree->getSelectedItemsNumber() == 1)
     {
-        EltID id2 = getRepercussionID();
+        EltID id2 = getRepercussionID(tree->getFirstID());
         if (id2.indexElt != -1)
         {
             if ((unsigned)ui->spinStartLoop->value() > sf2->get(id2, champ_dwLength).dwValue)
@@ -411,16 +410,16 @@ void Page_Smpl::setEndLoop()
     Valeur val;
     val.dwValue = this->ui->spinEndLoop->value();
     ui->spinStartLoop->setMaximum(val.dwValue);
-    for (unsigned int i = 0; i < tree->getSelectedItemsNumber(); i++)
+    QList<EltID> listID = tree->getAllIDs();
+    foreach (EltID id, listID)
     {
-        EltID id = this->tree->getID(i);
         if (!this->sf2->get(id, champ_hidden).bValue)
         {
             if (sf2->get(id, champ_dwEndLoop).dwValue != val.dwValue)
                 sf2->set(id, champ_dwEndLoop, val);
 
             // Sample associé ?
-            EltID id2 = getRepercussionID(i);
+            EltID id2 = getRepercussionID(id);
             if (id2.indexElt != -1)
             {
                 if (!this->sf2->get(id2, champ_hidden).bValue)
@@ -453,7 +452,7 @@ void Page_Smpl::setEndLoop(int val)
 {
     if (tree->getSelectedItemsNumber() == 1)
     {
-        EltID id2 = getRepercussionID();
+        EltID id2 = getRepercussionID(tree->getFirstID());
         if (id2.indexElt != -1)
         {
             if ((unsigned)ui->spinEndLoop->value() >= sf2->get(id2, champ_dwLength).dwValue)
@@ -474,9 +473,9 @@ void Page_Smpl::on_pushFullLength_clicked()
     bool firstValue = true;
     bool triggersMessage = false;
 
-    for (unsigned int i = 0; i < tree->getSelectedItemsNumber(); i++)
+    QList<EltID> listID = tree->getAllIDs();
+    foreach (EltID id, listID)
     {
-        EltID id = tree->getID(i);
         if (!this->sf2->get(id, champ_hidden).bValue)
         {
             // Début de la boucle à 0
@@ -502,7 +501,7 @@ void Page_Smpl::on_pushFullLength_clicked()
             }
 
             // Sample associé ?
-            EltID id2 = getRepercussionID(i);
+            EltID id2 = getRepercussionID(id);
             if (id2.indexElt != -1)
             {
                 if (!this->sf2->get(id2, champ_hidden).bValue)
@@ -555,16 +554,16 @@ void Page_Smpl::setRootKey()
     sf2->prepareNewActions();
     Valeur val;
     val.bValue = ui->spinRootKey->value();
-    for (unsigned int i = 0; i < tree->getSelectedItemsNumber(); i++)
+    QList<EltID> listID = tree->getAllIDs();
+    foreach (EltID id, listID)
     {
-        EltID id = tree->getID(i);
         if (!this->sf2->get(id, champ_hidden).bValue)
         {
             if (sf2->get(id, champ_byOriginalPitch).bValue != val.bValue)
                 sf2->set(id, champ_byOriginalPitch, val);
 
             // Sample associé ?
-            EltID id2 = getRepercussionID(i);
+            EltID id2 = getRepercussionID(id);
             if (id2.indexElt != -1)
             {
                 if (!this->sf2->get(id2, champ_hidden).bValue)
@@ -598,16 +597,16 @@ void Page_Smpl::setTune()
     sf2->prepareNewActions();
     Valeur val;
     val.cValue = ui->spinTune->value();
-    for (unsigned int i = 0; i < tree->getSelectedItemsNumber(); i++)
+    QList<EltID> listID = tree->getAllIDs();
+    foreach (EltID id, listID)
     {
-        EltID id = this->tree->getID(i);
         if (!this->sf2->get(id, champ_hidden).bValue)
         {
             if (sf2->get(id, champ_chPitchCorrection).cValue != val.cValue)
                 sf2->set(id, champ_chPitchCorrection, val);
 
             // Sample associé ?
-            EltID id2 = getRepercussionID(i);
+            EltID id2 = getRepercussionID(id);
             if (id2.indexElt != -1)
             {
                 if (!this->sf2->get(id2, champ_hidden).bValue)
@@ -627,13 +626,13 @@ void Page_Smpl::setTune(int val)
 {
     // Modif synth
     if (tree->getSelectedItemsNumber() == 1)
-        this->synth->setPitchCorrection(val, getRepercussionID().indexElt != -1);
+        this->synth->setPitchCorrection(val, getRepercussionID(tree->getFirstID()).indexElt != -1);
 }
 
 void Page_Smpl::setType(int index)
 {
     if (preparation) return;
-    EltID id = this->tree->getID(0);
+    EltID id = this->tree->getFirstID();
     // Ancien et nouveau types
     SFSampleLink ancienType = this->sf2->get(id, champ_sfSampleType).sfLinkValue;
     SFSampleLink nouveauType = monoSample;
@@ -651,7 +650,7 @@ void Page_Smpl::setType(int index)
     if (ancienType == nouveauType) return;
     sf2->prepareNewActions();
     // Reprise de l'adresse si modification
-    id = this->tree->getID(0);
+    id = this->tree->getFirstID();
     this->preparation = true;
     // Modification du type du sample
     Valeur val;
@@ -704,7 +703,7 @@ void Page_Smpl::setType(int index)
 void Page_Smpl::setLinkedSmpl(int index)
 {
     if (preparation) return;
-    EltID id = this->tree->getID(0);
+    EltID id = this->tree->getFirstID();
     // Ancien et nouveau samples liés
     EltID idLinkedOld = id;
     SFSampleLink type = sf2->get(id, champ_sfSampleType).sfLinkValue;
@@ -737,7 +736,7 @@ void Page_Smpl::setLinkedSmpl(int index)
     if (idLinkedNew.indexElt == idLinkedOld.indexElt) return;
     sf2->prepareNewActions();
     // Reprise des adresses si modification
-    id = this->tree->getID(0);
+    id = this->tree->getFirstID();
     type = sf2->get(id, champ_sfSampleType).sfLinkValue;
     if (type != monoSample && type != RomMonoSample)
         idLinkedOld.indexElt = this->sf2->get(id, champ_wSampleLink).wValue;
@@ -852,9 +851,9 @@ void Page_Smpl::setRate(int index)
 
     sf2->prepareNewActions();
     DWORD echFinal = ui->comboSampleRate->currentText().toInt();
-    for (unsigned int i = 0; i < tree->getSelectedItemsNumber(); i++)
+    QList<EltID> listID = tree->getAllIDs();
+    foreach (EltID id, listID)
     {
-        EltID id = this->tree->getID(i);
         if (!this->sf2->get(id, champ_hidden).bValue)
         {
             DWORD echInit = sf2->get(id, champ_dwSampleRate).dwValue;
@@ -862,7 +861,7 @@ void Page_Smpl::setRate(int index)
                 setRateElt(id, echFinal);
 
             // Sample associé ?
-            EltID id2 = getRepercussionID(i);
+            EltID id2 = getRepercussionID(id);
             if (id2.indexElt != -1)
             {
                 if (!this->sf2->get(id2, champ_hidden).bValue)
@@ -903,9 +902,8 @@ void Page_Smpl::setRateElt(EltID id, DWORD echFinal)
     sf2->set(id, champ_dwEndLoop, val);
 }
 
-EltID Page_Smpl::getRepercussionID(int num)
+EltID Page_Smpl::getRepercussionID(EltID id)
 {
-    EltID id = tree->getID(num);
     EltID id2 = id;
 
     // Recherche du sample associé, le cas échéant et si la répercussion est activée
@@ -922,12 +920,12 @@ void Page_Smpl::normalisation()
 {
     if (preparation) return;
     sf2->prepareNewActions();
-    EltID id;
+
     // Calcul du nombre d'étapes
     int nbEtapes = 0;
-    for (unsigned int i = 0; i < this->tree->getSelectedItemsNumber(); i++)
+    QList<EltID> listID = tree->getAllIDs();
+    foreach (EltID id, listID)
     {
-        id = this->tree->getID(i);
         if (id.typeElement == elementSmpl)
         {
             if (!this->sf2->get(id, champ_hidden).bValue)
@@ -942,9 +940,9 @@ void Page_Smpl::normalisation()
     progress.setWindowModality(Qt::WindowModal);
     progress.setFixedWidth(350);
     progress.show();
-    for (unsigned int i = 0; i < this->tree->getSelectedItemsNumber(); i++)
+
+    foreach (EltID id, listID)
     {
-        id = this->tree->getID(i);
         if (id.typeElement == elementSmpl)
         {
             if (!this->sf2->get(id, champ_hidden).bValue)
@@ -978,12 +976,12 @@ void Page_Smpl::enleveBlanc()
 {
     if (preparation) return;
     sf2->prepareNewActions();
-    EltID id;
+
     // Calcul du nombre d'étapes
     int nbEtapes = 0;
-    for (unsigned int i = 0; i < this->tree->getSelectedItemsNumber(); i++)
+    QList<EltID> listID = tree->getAllIDs();
+    foreach (EltID id, listID)
     {
-        id = this->tree->getID(i);
         if (id.typeElement == elementSmpl)
         {
             if (!this->sf2->get(id, champ_hidden).bValue)
@@ -992,15 +990,15 @@ void Page_Smpl::enleveBlanc()
     }
     if (nbEtapes == 0)
         return;
+
     // Ouverture d'une barre de progression
     QString textProgress = trUtf8("Traitement ");
     QProgressDialog progress("", trUtf8("Annuler"), 0, nbEtapes, this);
     progress.setWindowModality(Qt::WindowModal);
     progress.setFixedWidth(350);
     progress.show();
-    for (unsigned int i = 0; i < this->tree->getSelectedItemsNumber(); i++)
+    foreach (EltID id, listID)
     {
-        id = this->tree->getID(i);
         if (id.typeElement == elementSmpl)
         {
             if (!this->sf2->get(id, champ_hidden).bValue)
@@ -1056,13 +1054,11 @@ void Page_Smpl::enleveFin()
     if (preparation) return;
     sf2->prepareNewActions();
 
-    EltID id;
-
     // Calcul du nombre d'étapes
     int nbEtapes = 0;
-    for (unsigned int i = 0; i < this->tree->getSelectedItemsNumber(); i++)
+    QList<EltID> listID = tree->getAllIDs();
+    foreach (EltID id, listID)
     {
-        id = this->tree->getID(i);
         if (id.typeElement == elementSmpl)
         {
             if (!this->sf2->get(id, champ_hidden).bValue)
@@ -1078,9 +1074,8 @@ void Page_Smpl::enleveFin()
     progress.setWindowModality(Qt::WindowModal);
     progress.setFixedWidth(350);
     progress.show();
-    for (unsigned int i = 0; i < this->tree->getSelectedItemsNumber(); i++)
+    foreach (EltID id, listID)
     {
-        id = this->tree->getID(i);
         if (id.typeElement == elementSmpl)
         {
             if (!this->sf2->get(id, champ_hidden).bValue)
@@ -1130,13 +1125,12 @@ void Page_Smpl::bouclage()
 {
     if (preparation) return;
     sf2->prepareNewActions();
-    EltID id;
 
     // Calcul du nombre d'étapes
     int nbEtapes = 0;
-    for (unsigned int i = 0; i < this->tree->getSelectedItemsNumber(); i++)
+    QList<EltID> listID = tree->getAllIDs();
+    foreach (EltID id, listID)
     {
-        id = this->tree->getID(i);
         if (id.typeElement == elementSmpl)
         {
             if (!this->sf2->get(id, champ_hidden).bValue)
@@ -1153,9 +1147,8 @@ void Page_Smpl::bouclage()
     progress.setFixedWidth(350);
     progress.show();
     QStringList samplesNotLooped;
-    for (unsigned int i = 0; i < this->tree->getSelectedItemsNumber(); i++)
+    foreach (EltID id, listID)
     {
-        id = this->tree->getID(i);
         if (id.typeElement == elementSmpl)
         {
             if (!this->sf2->get(id, champ_hidden).bValue)
@@ -1232,12 +1225,12 @@ void Page_Smpl::filtreMur()
     if (!ok) return;
     conf->setTools_s_mur_coupure(rep);
     sf2->prepareNewActions();
-    EltID id;
+
     // Calcul du nombre d'étapes
     int nbEtapes = 0;
-    for (unsigned int i = 0; i < this->tree->getSelectedItemsNumber(); i++)
+    QList<EltID> listID = tree->getAllIDs();
+    foreach (EltID id, listID)
     {
-        id = this->tree->getID(i);
         if (id.typeElement == elementSmpl)
         {
             if (!this->sf2->get(id, champ_hidden).bValue)
@@ -1246,15 +1239,15 @@ void Page_Smpl::filtreMur()
     }
     if (nbEtapes == 0)
         return;
+
     // Ouverture d'une barre de progression
     QString textProgress = trUtf8("Traitement ");
     QProgressDialog progress("", trUtf8("Annuler"), 0, nbEtapes, this);
     progress.setWindowModality(Qt::WindowModal);
     progress.setFixedWidth(350);
     progress.show();
-    for (unsigned int i = 0; i < this->tree->getSelectedItemsNumber(); i++)
+    foreach (EltID id, listID)
     {
-        id = this->tree->getID(i);
         if (id.typeElement == elementSmpl)
         {
             if (!this->sf2->get(id, champ_hidden).bValue)
@@ -1289,13 +1282,12 @@ void Page_Smpl::reglerBalance()
 {
     if (preparation) return;
     this->sf2->prepareNewActions();
-    EltID id;
 
     // Calcul du nombre d'étapes
     int nbEtapes = 0;
-    for (unsigned int i = 0; i < this->tree->getSelectedItemsNumber(); i++)
+    QList<EltID> listID = tree->getAllIDs();
+    foreach (EltID id, listID)
     {
-        id = this->tree->getID(i);
         if (id.typeElement == elementSmpl)
         {
             if (!this->sf2->get(id, champ_hidden).bValue)
@@ -1316,9 +1308,8 @@ void Page_Smpl::reglerBalance()
     progress.setWindowModality(Qt::WindowModal);
     progress.setFixedWidth(350);
     progress.show();
-    for (unsigned int i = 0; i < this->tree->getSelectedItemsNumber(); i++)
+    foreach (EltID id, listID)
     {
-        id = this->tree->getID(i);
         if (id.typeElement == elementSmpl && !this->sf2->get(id, champ_hidden).bValue)
         {
             // Sample lié ?
@@ -1408,12 +1399,12 @@ void Page_Smpl::sifflements(int freq1, int freq2, double raideur)
     conf->setTools_s_sifflements_raideur(raideur);
     // Elimination des sifflements
     this->sf2->prepareNewActions();
-    EltID id;
+
     // Calcul du nombre d'étapes
     int nbEtapes = 0;
-    for (unsigned int i = 0; i < this->tree->getSelectedItemsNumber(); i++)
+    QList<EltID> listID = tree->getAllIDs();
+    foreach (EltID id, listID)
     {
-        id = this->tree->getID(i);
         if (id.typeElement == elementSmpl)
         {
             if (!this->sf2->get(id, champ_hidden).bValue)
@@ -1422,15 +1413,15 @@ void Page_Smpl::sifflements(int freq1, int freq2, double raideur)
     }
     if (nbEtapes == 0)
         return;
+
     // Ouverture d'une barre de progression
     QString textProgress = trUtf8("Traitement ");
     QProgressDialog progress("", trUtf8("Annuler"), 0, nbEtapes, this);
     progress.setWindowModality(Qt::WindowModal);
     progress.setFixedWidth(350);
     progress.show();
-    for (unsigned int i = 0; i < this->tree->getSelectedItemsNumber(); i++)
+    foreach (EltID id, listID)
     {
-        id = this->tree->getID(i);
         if (id.typeElement == elementSmpl)
         {
             if (!this->sf2->get(id, champ_hidden).bValue)
@@ -1473,12 +1464,11 @@ void Page_Smpl::transposer()
     conf->setTools_s_transpo_ton(rep);
     sf2->prepareNewActions();
 
-    EltID id;
     // Calcul du nombre d'étapes
     int nbEtapes = 0;
-    for (unsigned int i = 0; i < this->tree->getSelectedItemsNumber(); i++)
+    QList<EltID> listID = tree->getAllIDs();
+    foreach (EltID id, listID)
     {
-        id = this->tree->getID(i);
         if (id.typeElement == elementSmpl)
         {
             if (!this->sf2->get(id, champ_hidden).bValue)
@@ -1487,15 +1477,15 @@ void Page_Smpl::transposer()
     }
     if (nbEtapes == 0)
         return;
+
     // Ouverture d'une barre de progression
     QString textProgress = trUtf8("Traitement ");
     QProgressDialog progress("", trUtf8("Annuler"), 0, nbEtapes, this);
     progress.setWindowModality(Qt::WindowModal);
     progress.setFixedWidth(350);
     progress.show();
-    for (unsigned int i = 0; i < this->tree->getSelectedItemsNumber(); i++)
+    foreach (EltID id, listID)
     {
-        id = this->tree->getID(i);
         if (id.typeElement == elementSmpl)
         {
             if (!this->sf2->get(id, champ_hidden).bValue)
@@ -1559,13 +1549,13 @@ void Page_Smpl::applyEQ()
         return;
 
     sf2->prepareNewActions();
-    QList<EltID> listeID;
-    for (unsigned int i = 0; i < tree->getSelectedItemsNumber(); i++)
+    QList<EltID> listprocessedID;
+    QList<EltID> listID = tree->getAllIDs();
+    foreach (EltID id, listID)
     {
-        EltID id = this->tree->getID(i);
-        if (!sf2->get(id, champ_hidden).bValue && !listeID.contains(id))
+        if (!sf2->get(id, champ_hidden).bValue && !listprocessedID.contains(id))
         {
-            listeID << id;
+            listprocessedID << id;
             QByteArray baData = sf2->getData(id, champ_sampleDataFull24);
             baData = Sound::EQ(baData, sf2->get(id, champ_dwSampleRate).dwValue, 24,
                                ui->verticalSlider_1->value(),
@@ -1581,12 +1571,12 @@ void Page_Smpl::applyEQ()
             sf2->set(id, champ_sampleDataFull24, baData);
 
             // Sample associé ?
-            EltID id2 = getRepercussionID(i);
+            EltID id2 = getRepercussionID(id);
             if (id2.indexElt != -1)
             {
-                if (!sf2->get(id2, champ_hidden).bValue && !listeID.contains(id2))
+                if (!sf2->get(id2, champ_hidden).bValue && !listprocessedID.contains(id2))
                 {
-                    listeID << id2;
+                    listprocessedID << id2;
                     QByteArray baData = sf2->getData(id2, champ_sampleDataFull24);
                     baData = Sound::EQ(baData, sf2->get(id2, champ_dwSampleRate).dwValue, 24,
                                        ui->verticalSlider_1->value(),
@@ -1768,9 +1758,9 @@ void Page_Smpl::on_pushAutoTune_clicked()
     bool triggersMessage = false;
 
     QList<int> listeSamplesProcessed;
-    for (unsigned int i = 0; i < tree->getSelectedItemsNumber(); i++)
+    QList<EltID> listID = tree->getAllIDs();
+    foreach (EltID id, listID)
     {
-        EltID id = tree->getID(i);
         if (!this->sf2->get(id, champ_hidden).bValue && !listeSamplesProcessed.contains(id.indexElt))
         {
             listeSamplesProcessed << id.indexElt;
@@ -1789,7 +1779,7 @@ void Page_Smpl::on_pushAutoTune_clicked()
                 triggersMessage = true;
 
             // Sample associé ?
-            EltID id2 = getRepercussionID(i);
+            EltID id2 = getRepercussionID(id);
             if (id2.indexElt != -1)
             {
                 if (!this->sf2->get(id2, champ_hidden).bValue && !listeSamplesProcessed.contains(id2.indexElt))

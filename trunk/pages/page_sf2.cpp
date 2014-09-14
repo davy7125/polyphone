@@ -47,7 +47,7 @@ void Page_Sf2::afficher()
 {
     // Préparation de l'affichage
     preparation = 1;
-    EltID id = this->tree->getID(0);
+    EltID id = this->tree->getFirstID();
     id.typeElement = elementSf2;
     id.indexElt = 0;
     id.indexElt2 = 0;
@@ -98,7 +98,7 @@ void Page_Sf2::set24bits(int checked)
     sf2->prepareNewActions();
 
     // Configuration d'un SF2 : mode 16 ou 24 bits
-    EltID id = this->tree->getID(0);
+    EltID id = this->tree->getFirstID();
     id.typeElement = elementSf2;
     Valeur valTmp;
     if (checked == 2)
@@ -112,12 +112,12 @@ void Page_Sf2::set24bits(int checked)
 void Page_Sf2::setName()
 {
     if (preparation) return;
-    EltID id = this->tree->getID(0);
+    EltID id = this->tree->getFirstID();
     id.typeElement = elementSf2;
     if (id.indexSf2 == -1 || ui->lineEdit_name->text().compare(this->sf2->getQstr(id, champ_name)) == 0) return;
     sf2->prepareNewActions();
     // Reprise de l'identificateur si modification
-    id = this->tree->getID(0);
+    id = this->tree->getFirstID();
     id.typeElement = elementSf2;
     this->sf2->set(id, champ_name, ui->lineEdit_name->text());
     this->mainWindow->updateDo();
@@ -125,12 +125,12 @@ void Page_Sf2::setName()
 void Page_Sf2::setCopyright()
 {
     if (preparation) return;
-    EltID id = this->tree->getID(0);
+    EltID id = this->tree->getFirstID();
     id.typeElement = elementSf2;
     if (id.indexSf2 == -1 || ui->lineEdit_copyright->text().compare(this->sf2->getQstr(id, champ_ICOP)) == 0) return;
     sf2->prepareNewActions();
     // Reprise de l'identificateur si modification
-    id = this->tree->getID(0);
+    id = this->tree->getFirstID();
     id.typeElement = elementSf2;
     this->sf2->set(id, champ_ICOP, ui->lineEdit_copyright->text());
     this->mainWindow->updateDo();
@@ -138,12 +138,12 @@ void Page_Sf2::setCopyright()
 void Page_Sf2::setAuthor()
 {
     if (preparation) return;
-    EltID id = this->tree->getID(0);
+    EltID id = this->tree->getFirstID();
     id.typeElement = elementSf2;
     if (id.indexSf2 == -1 || ui->lineEdit_author->text().compare(this->sf2->getQstr(id, champ_IENG)) == 0) return;
     sf2->prepareNewActions();
     // Reprise de l'identificateur si modification
-    id = this->tree->getID(0);
+    id = this->tree->getFirstID();
     id.typeElement = elementSf2;
     this->sf2->set(id, champ_IENG, ui->lineEdit_author->text());
     this->mainWindow->updateDo();
@@ -151,12 +151,12 @@ void Page_Sf2::setAuthor()
 void Page_Sf2::setDate()
 {
     if (preparation) return;
-    EltID id = this->tree->getID(0);
+    EltID id = this->tree->getFirstID();
     id.typeElement = elementSf2;
     if (id.indexSf2 == -1 || ui->lineEdit_date->text().compare(this->sf2->getQstr(id, champ_ICRD)) == 0) return;
     sf2->prepareNewActions();
     // Reprise de l'identificateur si modification
-    id = this->tree->getID(0);
+    id = this->tree->getFirstID();
     id.typeElement = elementSf2;
     this->sf2->set(id, champ_ICRD, ui->lineEdit_date->text());
     this->mainWindow->updateDo();
@@ -164,12 +164,12 @@ void Page_Sf2::setDate()
 void Page_Sf2::setProduct()
 {
     if (preparation) return;
-    EltID id = this->tree->getID(0);
+    EltID id = this->tree->getFirstID();
     id.typeElement = elementSf2;
     if (id.indexSf2 == -1 || ui->lineEdit_product->text().compare(this->sf2->getQstr(id, champ_IPRD)) == 0) return;
     sf2->prepareNewActions();
     // Reprise de l'identificateur si modification
-    id = this->tree->getID(0);
+    id = this->tree->getFirstID();
     id.typeElement = elementSf2;
     this->sf2->set(id, champ_IPRD, ui->lineEdit_product->text());
     this->mainWindow->updateDo();
@@ -179,12 +179,12 @@ void Page_Sf2::setCommentaire()
     if (preparation) return;
     if (ui->textEdit_Com->toPlainText().size() > 65536)
         ui->textEdit_Com->setPlainText(ui->textEdit_Com->toPlainText().left(65536));
-    EltID id = this->tree->getID(0);
+    EltID id = this->tree->getFirstID();
     id.typeElement = elementSf2;
     if (id.indexSf2 == -1 || ui->textEdit_Com->toPlainText().compare(this->sf2->getQstr(id, champ_ICMT)) == 0) return;
     sf2->prepareNewActions();
     // Reprise de l'identificateur si modification
-    id = this->tree->getID(0);
+    id = this->tree->getFirstID();
     id.typeElement = elementSf2;
     this->sf2->set(id, champ_ICMT, ui->textEdit_Com->toPlainText());
     this->mainWindow->updateDo();
@@ -280,7 +280,7 @@ void Page_Sf2::compte(int &unusedSmpl, int &unusedInst, int &usedSmpl, int &used
 {
     // Etablissement de la liste des samples, instruments et presets
     // Préparation de la liste des samples et instruments utilisés
-    EltID id = this->tree->getID(0);
+    EltID id = this->tree->getFirstID();
     id.typeElement = elementSmpl;
     QList<int> listSmpl = getListNotHidden(id);
     QList<int> listUsedSmpl;
