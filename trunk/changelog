@@ -1,11 +1,18 @@
 polyphone (1.5) unstable; urgency=low
 
+ * italian translation
  * transposition tool
+ * more options when renaming several elements
+ * tool to remove all modulators
+ * function to apply modulators of a global division to all instruments or presets
+ * (fix) bug when reading some wav files
+ * (fix) sample synchronization in synth
+ * (fix) bug when editing modulators
 
  -- Davy Triponney <davy.triponney@gmail.com>  Thu, 7 Aug 2014 18:55:20 +0100
 
 
-polyphone (1.4) unstable; urgency=low
+polyphone (1.4) UNRELEASED; urgency=low
 
  * faster loading step and count of used / unused elements
  * the key range of the key pressed is displayed at the instrument level
@@ -153,10 +160,10 @@ polyphone (0.6) UNRELEASED; urgency=low
 
 polyphone (0.5) UNRELEASED; urgency=low
 
-  * added synth features (reverb, chorus),
-  * global setting tool improvements (visualisation of octaves, random generation changing the distribution, graphical interactions),
-  * lowered latency for default audio engine,
-  * fixed a bug with asio,
+  * added synth features (reverb, chorus)
+  * global setting tool improvements (visualisation of octaves, random generation changing the distribution, graphical interactions)
+  * lowered latency for default audio engine
+  * fixed a bug with asio
   * automatic sample association left-right for samples whose names only differ by the last letter R/L
 
  -- Davy Triponney <davy.triponney@gmail.com>  Wed, 20 Mar 2013 23:37:11 +0100
