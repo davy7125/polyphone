@@ -36,7 +36,7 @@ class DialogRename : public QDialog
     Q_OBJECT
     
 public:
-    DialogRename(QString defaultValue, bool isSample, QWidget *parent = 0);
+    DialogRename(bool isSample, QWidget *parent = 0);
     ~DialogRename();
     
 signals:

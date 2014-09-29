@@ -9,9 +9,15 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>341</width>
-    <height>183</height>
+    <width>308</width>
+    <height>173</height>
    </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
   </property>
   <property name="windowTitle">
    <string>Renommage de masse</string>
@@ -65,23 +71,6 @@
      </item>
     </widget>
    </item>
-   <item row="7" column="1" colspan="2">
-    <widget class="QDialogButtonBox" name="buttonBox">
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
-     </property>
-     <property name="standardButtons">
-      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
-     </property>
-    </widget>
-   </item>
-   <item row="5" column="0" colspan="3">
-    <widget class="QLineEdit" name="lineText2">
-     <property name="maxLength">
-      <number>20</number>
-     </property>
-    </widget>
-   </item>
    <item row="1" column="2">
     <widget class="QSpinBox" name="spinPos2">
      <property name="maximum">
@@ -106,43 +95,47 @@
      </property>
     </widget>
    </item>
-   <item row="6" column="1">
-    <spacer name="verticalSpacer">
+   <item row="7" column="1" colspan="2">
+    <widget class="QDialogButtonBox" name="buttonBox">
      <property name="orientation">
-      <enum>Qt::Vertical</enum>
+      <enum>Qt::Horizontal</enum>
      </property>
-     <property name="sizeHint" stdset="0">
-      <size>
-       <width>20</width>
-       <height>40</height>
-      </size>
+     <property name="standardButtons">
+      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
      </property>
-    </spacer>
+    </widget>
    </item>
-   <item row="2" column="0" colspan="3">
+   <item row="4" column="0">
+    <widget class="QLabel" name="labelString2">
+     <property name="toolTip">
+      <string notr="true"/>
+     </property>
+     <property name="text">
+      <string>Nouveau</string>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="0">
     <widget class="QLabel" name="labelString1">
      <property name="toolTip">
       <string notr="true"/>
      </property>
      <property name="text">
-      <string>Nom des échantillons (20 caractères au total) :</string>
+      <string>Ancien</string>
      </property>
     </widget>
    </item>
-   <item row="3" column="0" colspan="3">
+   <item row="3" column="1" colspan="2">
     <widget class="QLineEdit" name="lineText1">
      <property name="maxLength">
       <number>20</number>
      </property>
     </widget>
    </item>
-   <item row="4" column="0" colspan="3">
-    <widget class="QLabel" name="labelString2">
-     <property name="toolTip">
-      <string notr="true"/>
-     </property>
-     <property name="text">
-      <string>Nouvelle chaîne de caractères :</string>
+   <item row="4" column="1" colspan="2">
+    <widget class="QLineEdit" name="lineText2">
+     <property name="maxLength">
+      <number>20</number>
      </property>
     </widget>
    </item>

@@ -608,6 +608,18 @@ public:
     bool getExportBank()                    { return settings.value("export/bank_directory", false).toBool(); }
     bool getExportGM()                      { return settings.value("export/gm_sort", false).toBool(); }
 
+    // Bulk rename
+    int getBulkRenameOption()               { return settings.value("bulk_rename/option", 0).toInt(); }
+    void setBulkRenameOption(int option)    { settings.setValue("bulk_rename/option", option); }
+    QString getBulkRenameText1()            { return settings.value("bulk_rename/text_1", "").toString(); }
+    QString getBulkRenameText2()            { return settings.value("bulk_rename/text_2", "").toString(); }
+    void setBulkRenameText1(QString str)    { settings.setValue("bulk_rename/text_1", str); }
+    void setBulkRenameText2(QString str)    { settings.setValue("bulk_rename/text_2", str); }
+    int getBulkRenameInt1()                 { return settings.value("bulk_rename/int_1", 0).toInt(); }
+    int getBulkRenameInt2()                 { return settings.value("bulk_rename/int_2", 0).toInt(); }
+    void setBulkRenameInt1(int val)         { settings.setValue("bulk_rename/int_1", val); }
+    void setBulkRenameInt2(int val)         { settings.setValue("bulk_rename/int_2", val); }
+
     // Clavier
     void setKeyboardType(int val);
     void setKeyboardDocked(bool val);

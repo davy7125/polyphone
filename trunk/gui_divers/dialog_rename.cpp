@@ -25,17 +25,27 @@
 
 #include "dialog_rename.h"
 #include "ui_dialog_rename.h"
+#include "config.h"
 
-DialogRename::DialogRename(QString defaultValue, bool isSample, QWidget *parent) :
+DialogRename::DialogRename(bool isSample, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::DialogRename),
     _isSample(isSample)
 {
     ui->setupUi(this);
+    ui->comboBox->blockSignals(true);
+    ui->comboBox->setCurrentIndex(Config::getInstance()->getBulkRenameOption());
+    ui->comboBox->blockSignals(false);
     if (!_isSample)
         ui->comboBox->removeItem(0);
-    on_comboBox_currentIndexChanged(0);
-    this->ui->lineText1->setText(defaultValue);
+
+    ui->lineText1->setText(Config::getInstance()->getBulkRenameText1());
+    ui->lineText2->setText(Config::getInstance()->getBulkRenameText2());
+    ui->spinPos1->setValue(Config::getInstance()->getBulkRenameInt1());
+    ui->spinPos2->setValue(Config::getInstance()->getBulkRenameInt2());
+
+    on_comboBox_currentIndexChanged(ui->comboBox->currentIndex());
+
     this->ui->lineText1->selectAll();
     this->ui->lineText1->setFocus();
 }
@@ -50,6 +60,14 @@ void DialogRename::accept()
     int type = ui->comboBox->currentIndex() + !_isSample;
     this->updateNames(type, ui->lineText1->text(), ui->lineText2->text(),
                       ui->spinPos1->value(), ui->spinPos2->value());
+
+    // Mémorisation des paramètres
+    Config::getInstance()->setBulkRenameOption(ui->comboBox->currentIndex() + !_isSample);
+    Config::getInstance()->setBulkRenameInt1(ui->spinPos1->value());
+    Config::getInstance()->setBulkRenameInt2(ui->spinPos2->value());
+    Config::getInstance()->setBulkRenameText1(ui->lineText1->text());
+    Config::getInstance()->setBulkRenameText2(ui->lineText2->text());
+
     QDialog::accept();
 }
 
@@ -117,4 +135,6 @@ void DialogRename::on_comboBox_currentIndexChanged(int index)
     default:
         break;
     }
+
+    this->adjustSize();
 }
