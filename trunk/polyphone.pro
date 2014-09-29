@@ -94,7 +94,7 @@ contains(DEFINES, USE_LOCAL_LIBRARIES) {
         lib/stk/DelayL.cpp \
         lib/qcustomplot/qcustomplot.cpp
     INCLUDEPATH += lib/rtmidi \
-        lib/stk
+        lib/stk \
         lib/qcustomplot
 } else {
     PKGCONFIG += rtmidi

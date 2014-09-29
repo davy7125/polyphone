@@ -1269,7 +1269,7 @@ void MainWindow::renommer()
 
     if (nb > 1)
     {
-        DialogRename * dial = new DialogRename(sf2->getQstr(ID, champ_name), type == elementSmpl, this);
+        DialogRename * dial = new DialogRename(type == elementSmpl, this);
         dial->setAttribute(Qt::WA_DeleteOnClose);
         connect(dial, SIGNAL(updateNames(int, QString, QString, int, int)),
                 this, SLOT(renommerEnMasse(int, QString, QString, int, int)));
