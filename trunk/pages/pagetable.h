@@ -2,6 +2,7 @@
 **                                                                        **
 **  Polyphone, a soundfont editor                                         **
 **  Copyright (C) 2013-2014 Davy Triponney                                **
+**                2014      Andrea Celani                                 **
 **                                                                        **
 **  This program is free software: you can redistribute it and/or modify  **
 **  it under the terms of the GNU General Public License as published by  **
@@ -219,18 +220,16 @@ private:
     int limit(int iVal, Champ champ, EltID id);
     void duplication(EltID id);
     void duplication(EltID id, QVector<int> listeVelocite);
-    void resetChamp(bool &newAction, int colonne, Champ champ1, Champ champ2);
-    void setOffset(bool &newAction, int ligne, int colonne, Champ champ1, Champ champ2);
-    void set(int ligne, int colonne, bool &newAction, bool allowPropagation);
+    void resetChamp(int colonne, Champ champ1, Champ champ2);
+    void setOffset(int ligne, int colonne, Champ champ1, Champ champ2);
     void customizeKeyboard();
     void pasteMod(EltID id, QList<Modulator> modulators);
     QList<Modulator> getModList(EltID id);
-
     static QList<Modulator> _modulatorCopy;
     QList<int> _listKeyEnlighted;
 
 public slots:
-    void set(int ligne, int colonne);
+    void set(int ligne, int colonne, bool allowPropagation = true);
     void setAmount();
     void setAbs();
     void selected();
@@ -247,6 +246,8 @@ protected slots:
     void copyMod();
     void pasteMod();
     void duplicateMod();
+    void actionBegin();
+    void actionFinished();
 
 private slots:
     void paramGlobal(QVector<double> dValues, QList<EltID> listElt, int typeModif, int champ, int velMin, int velMax);

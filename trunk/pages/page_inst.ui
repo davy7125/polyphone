@@ -124,6 +124,9 @@
      <property name="dragDropOverwriteMode">
       <bool>false</bool>
      </property>
+     <property name="selectionMode">
+      <enum>QAbstractItemView::ExtendedSelection</enum>
+     </property>
      <property name="textElideMode">
       <enum>Qt::ElideRight</enum>
      </property>

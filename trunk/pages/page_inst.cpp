@@ -78,6 +78,9 @@ Page_Inst::Page_Inst(QWidget *parent) :
     font.setPixelSize(10);
     this->table->setFont(font);
 #endif
+
+    connect(this->table, SIGNAL(actionBegin()), this, SLOT(actionBegin()));
+    connect(this->table, SIGNAL(actionFinished()), this, SLOT(actionFinished()));
 }
 Page_Inst::~Page_Inst()
 {
