@@ -26,6 +26,7 @@
 #include "sfarkextractor.h"
 #include "sfarkglobal.h"
 #include "zlib.h"
+#include "stdint.h"
 
 static const unsigned char SfArkId[] = {'.','s','f','A','r','k'};
 
