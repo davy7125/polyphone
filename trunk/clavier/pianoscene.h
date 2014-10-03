@@ -1,7 +1,8 @@
 /*
     MIDI Virtual Piano Keyboard
     Copyright (C) 2008-2014, Pedro Lopez-Cabanillas <plcl@users.sf.net>
-    Copyright (C) 2014,      Davy Triponney         <davy.triponney@gmail.com>
+                  2014,      Davy Triponney         <davy.triponney@gmail.com>
+                  2014,      Andrea Celani          <acelani74@gmail.com>
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -74,12 +75,12 @@ public:
     int numKeys() const { return m_numKeys; }
     int startKey() const { return m_startKey; }
     void allKeysOff();
-    void keyOn( const int note );
-    void keyOff( const int note );
+    void keyNoteOn( const int note , const int velo);
+    void keyNoteOff( const int note);
     bool getRawKeyboardMode() const { return m_rawkbd; }
     void setRawKeyboardMode(const bool b);
     int getVelocity() { return m_velocity; }
-    void setVelocity(const int velocity) { m_velocity = velocity; }
+    void setVelocity(const int velocity) { m_velocity = m_lastVelocity = velocity; }
     int getChannel() const { return m_channel; }
     void setChannel(const int channel) { m_channel = channel; }
 
@@ -93,8 +94,9 @@ signals:
 protected:
     void showKeyOn(PianoKey* key, int vel = -1, int channel = -1);
     void showKeyOff( PianoKey* key );
-    void keyOn(PianoKey* key, qreal pressure = -1);
+    void keyOn(PianoKey* key, qreal pressure);
     void keyOff(PianoKey* key);
+    int getKeyVelocity();
     PianoKey* getKeyForPos(const QPointF& p) const;
     int getPressureFromPos(const QPointF& p, bool isBlack) const;
     QString noteName(int note);
@@ -127,6 +129,13 @@ private:
     bool m_touchEnabled;
     bool m_mousePressed;
     int m_velocity;
+    int m_lastVelocity;
+    bool m_autoVelocity;
+    int m_lastNote;
+    int m_lastNoteUp;
+    int m_lastNoteDown;
+    int m_lastNoteLeft;
+    int m_lastNoteRight;
     int m_channel;
     PianoKeybd::LabelType m_labelType;
     PianoKeybd::MiddleKey m_middleC;
