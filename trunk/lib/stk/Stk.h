@@ -1,7 +1,8 @@
 #ifndef STK_STK_H
 #define STK_STK_H
 
-#include <string>
+//#include <string> // bug with mingw32
+#include <cstring>
 #include <iostream>
 #include <sstream>
 #include <vector>
