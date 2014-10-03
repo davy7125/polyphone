@@ -2,6 +2,7 @@
 **                                                                        **
 **  Polyphone, a soundfont editor                                         **
 **  Copyright (C) 2013-2014 Davy Triponney                                **
+**                2014      Andrea Celani                                 **
 **                                                                        **
 **  This program is free software: you can redistribute it and/or modify  **
 **  it under the terms of the GNU General Public License as published by  **
@@ -147,21 +148,176 @@ void TableWidget::keyPressEvent(QKeyEvent *event)
 {
     if (event->key() == Qt::Key_C && (event->modifiers() & Qt::ControlModifier))
     {
-        if (selectedItems().count() == 1)
-            QApplication::clipboard()->setText(selectedItems().first()->text());
+        if (selectedItems().isEmpty())
+        {
+            // no items selected
+            QApplication::clipboard()->setText("");
+        }
+        else
+        {
+            // Selected items
+            // They may not be contiguous !
+            QModelIndexList indexes = selectionModel()->selectedIndexes();
+
+            // Rows before 4 are for identifiers
+            int indexNumber = indexes.size();
+            for (int i = indexNumber - 1; i >= 0; i--)
+                if (indexes.at(i).row() < 4)
+                    indexes.removeAt(i);
+
+            QMap<int, QMap<int, QString> > mapText;
+            foreach (QModelIndex index, indexes)
+            {
+                QString text = model()->data(index).toString();
+                // "!" stands for "erase", empty cell in the selection
+                if (text.isEmpty())
+                    text = "!";
+                mapText[index.row()][index.column()] = text;
+            }
+
+            int minRow = mapText.keys().first();
+            int maxRow = mapText.keys().last();
+
+            int minCol = -1;
+            int maxCol = -1;
+            QMap<int, QString> mapTmp;
+            foreach (mapTmp, mapText.values())
+            {
+                int minColTmp = mapTmp.keys().first();
+                int maxColTmp = mapTmp.keys().last();
+                if (minCol == -1)
+                    minCol = minColTmp;
+                else
+                    minCol = qMin(minCol, minColTmp);
+                if (maxCol == -1)
+                    maxCol = maxColTmp;
+                else
+                    maxCol = qMax(maxCol, maxColTmp);
+            }
+
+            QString selected_text;
+            for (int numRow = minRow; numRow <= maxRow; numRow++)
+            {
+                if (numRow != minRow)
+                    selected_text += "\n";
+
+                for (int numCol = minCol; numCol <= maxCol; numCol++)
+                {
+                    if (numCol != minCol)
+                        selected_text += "\t";
+
+                    QString text = mapText[numRow][numCol];
+                    // "?" stands for "no change", this cell was not present in the selection
+                    if (text.isEmpty())
+                        text = "?";
+                    selected_text += text;
+                }
+            }
+
+            QApplication::clipboard()->setText(selected_text);
+        }
     }
     else if (event->key() == Qt::Key_V && (event->modifiers() & Qt::ControlModifier))
     {
         if (!selectedItems().isEmpty())
-            selectedItems().first()->setText(QApplication::clipboard()->text());
+        {
+            emit(actionBegin());
+
+            QString selected_text = qApp->clipboard()->text();
+            QStringList cells = selected_text.split(QRegExp("[\n\t]"));
+
+            int cellrows = selected_text.count('\n') + 1;
+            int cellcols = cells.size() / cellrows;
+            if (cells.size() != cellrows * cellcols)
+            {
+                // error, uneven number of columns, probably bad data
+                QMessageBox::critical(this, tr("Error"),
+                                      tr("Invalid clipboard data, unable to perform paste operation."));
+                return;
+            }
+
+            // Paste from the top left corner of the selected items
+            QModelIndexList indexes = selectionModel()->selectedIndexes();
+            int minRow = -1;
+            int minCol = -1;
+            foreach (QModelIndex modelIndex, indexes)
+            {
+                if (minRow == -1)
+                    minRow = modelIndex.row();
+                else
+                    minRow = qMin(minRow, modelIndex.row());
+                if (minCol == -1)
+                    minCol = modelIndex.column();
+                else
+                    minCol = qMin(minCol, modelIndex.column());
+            }
+
+            // First rows are identifiers, no paste here
+            if (minRow < 4)
+                minRow = 4;
+
+            for (int indRow = 0; indRow < cellrows; indRow++)
+            {
+                for (int indCol = 0; indCol < cellcols; indCol++)
+                {
+                    const QModelIndex idx = model()->index(indRow + minRow, indCol + minCol);
+                    QString text = cells.takeFirst();
+                    if (text != "?")
+                    {
+                        if (text == "!")
+                            text = "";
+                        model()->setData(idx, text.replace(",", "."), Qt::EditRole);
+                    }
+                }
+            }
+
+            emit(actionFinished());
+        }
     }
     else if (event->key() == Qt::Key_Backspace || event->key() == Qt::Key_Delete)
     {
         // Touche retour ou suppr (efface la cellule)
         if (!selectedItems().isEmpty())
-            selectedItems().first()->setText("");
+        {
+            emit(actionBegin());
+            QList<QTableWidgetItem*> listItems = selectedItems();
+            foreach (QTableWidgetItem * item, listItems)
+            {
+                item->setText("");
+            }
+            emit(actionFinished());
+        }
     }
-    QTableWidget::keyPressEvent(event);
+    else
+    {
+        QTableWidget::keyPressEvent(event);
+    }
+}
+
+void TableWidget::commitData(QWidget *editor)
+{
+    emit(actionBegin());
+    QTableWidget::commitData(editor);
+    
+    QVariant value = model()->data(currentIndex(), Qt::EditRole);
+    int curRow = currentIndex().row();
+    int curCol = currentIndex().column();
+    QItemSelectionRange isr;
+    Q_FOREACH (isr, selectionModel()->selection())
+    {
+        for (int rows = isr.top(); rows <= isr.bottom(); rows++)
+        {
+            for (int cols = isr.left(); cols <= isr.right(); cols++)
+            {
+                if (!(curRow == rows && curCol == cols))
+                {
+                    const QModelIndex idx = model()->index(rows, cols);
+                    model()->setData(idx, value, Qt::EditRole);
+                }
+            }
+        }
+    }
+    emit(actionFinished());
 }
 
 
@@ -185,7 +341,7 @@ QWidget * TableDelegate::createEditor(QWidget *parent, const QStyleOptionViewIte
             spin->setMinimum(0);
             spin->setMaximum(127);
             spin->setStyleSheet("SpinBoxKey{ border: 3px solid " + highlightColor.name() + "; }"
-                                "SpinBoxKey::down-button{width:0px;} SpinBoxKey::up-button{width:0px;} ");
+                                                                                           "SpinBoxKey::down-button{width:0px;} SpinBoxKey::up-button{width:0px;} ");
             widget = spin;
         }
         else if (nbDecimales == 0)
@@ -194,7 +350,7 @@ QWidget * TableDelegate::createEditor(QWidget *parent, const QStyleOptionViewIte
             spin->setMinimum(-2147483647);
             spin->setMaximum(2147483647);
             spin->setStyleSheet("QSpinBox{ border: 3px solid " + highlightColor.name() + "; }"
-                                "QSpinBox::down-button{width:0px;} QSpinBox::up-button{width:0px;} ");
+                                                                                         "QSpinBox::down-button{width:0px;} QSpinBox::up-button{width:0px;} ");
             widget = spin;
         }
         else
@@ -204,7 +360,7 @@ QWidget * TableDelegate::createEditor(QWidget *parent, const QStyleOptionViewIte
             spin->setMaximum(1000000);
             spin->setSingleStep(.1);
             spin->setStyleSheet("QDoubleSpinBox{ border: 3px solid " + highlightColor.name() + "; }"
-                                "QDoubleSpinBox::down-button{width:0px;} QDoubleSpinBox::up-button{width:0px;} ");
+                                                                                               "QDoubleSpinBox::down-button{width:0px;} QDoubleSpinBox::up-button{width:0px;} ");
             spin->setDecimals(nbDecimales);
             widget = spin;
         }
@@ -218,7 +374,7 @@ QWidget * TableDelegate::createEditor(QWidget *parent, const QStyleOptionViewIte
         else
             spin = new SpinBoxVelocityRange(parent);
         spin->setStyleSheet("SpinBoxRange{ border: 3px solid " + highlightColor.name() + "; }"
-                            "SpinBoxRange::down-button{width:0px;} SpinBoxRange::up-button{width:0px;} ");
+                                                                                         "SpinBoxRange::down-button{width:0px;} SpinBoxRange::up-button{width:0px;} ");
         widget = spin;
     }
 

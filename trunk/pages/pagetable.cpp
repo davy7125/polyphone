@@ -2,6 +2,7 @@
 **                                                                        **
 **  Polyphone, a soundfont editor                                         **
 **  Copyright (C) 2013-2014 Davy Triponney                                **
+**                2014      Andrea Celani                                 **
 **                                                                        **
 **  This program is free software: you can redistribute it and/or modify  **
 **  it under the terms of the GNU General Public License as published by  **
@@ -34,7 +35,8 @@ QList<PageTable::Modulator> PageTable::_modulatorCopy;
 PageTable::PageTable(TypePage typePage, QWidget *parent) : Page(typePage, parent),
     table(NULL),
     tableMod(NULL)
-{}
+{
+}
 
 void PageTable::afficher()
 {
@@ -557,7 +559,7 @@ void PageTable::updateId(EltID id)
     this->tableMod->selectRow(currentRow);
 }
 
-void PageTable::resetChamp(bool &newAction, int colonne, Champ champ1, Champ champ2)
+void PageTable::resetChamp(int colonne, Champ champ1, Champ champ2)
 {
     EltID id = table->getID(colonne);
     bool ok = sf2->isSet(id, champ1);
@@ -567,20 +569,14 @@ void PageTable::resetChamp(bool &newAction, int colonne, Champ champ1, Champ cha
     if (ok)
     {
         // On efface la donnée
-        if (newAction)
-            sf2->prepareNewActions();
         id = table->getID(colonne);
         sf2->reset(id, champ1);
         if (champ2 != champ_unknown)
             sf2->reset(id, champ2);
-        newAction = false;
-
-        // Mise à jour fenêtre
-        mainWindow->updateDo();
     }
 }
 
-void PageTable::setOffset(bool &newAction, int ligne, int colonne, Champ champ1, Champ champ2)
+void PageTable::setOffset(int ligne, int colonne, Champ champ1, Champ champ2)
 {
     EltID id = this->table->getID(colonne);
     bool ok;
@@ -598,18 +594,12 @@ void PageTable::setOffset(bool &newAction, int ligne, int colonne, Champ champ1,
                 genAmount2.shAmount != this->sf2->get(id, champ2).shValue)
         {
             // Modification du sf2
-            if (newAction)
-                this->sf2->prepareNewActions();
             id = this->table->getID(colonne);
             Valeur value;
             value.genValue = genAmount;
             this->sf2->set(id, champ1, value);
             value.genValue = genAmount2;
             this->sf2->set(id, champ2, value);
-            newAction = false;
-
-            // Mise à jour fenêtre
-            this->mainWindow->updateDo();
         }
         // Mise à jour de la valeur dans la cellule
         int offset = this->sf2->get(id, champ1).genValue.shAmount +
@@ -630,30 +620,25 @@ void PageTable::setOffset(bool &newAction, int ligne, int colonne, Champ champ1,
     }
 }
 
-void PageTable::set(int ligne, int colonne)
+void PageTable::actionBegin()
+{
+    if (this->preparation)
+        return;
+    this->sf2->prepareNewActions();
+}
+
+void PageTable::actionFinished()
+{
+    if (this->preparation)
+        return;
+    this->mainWindow->updateDo();
+}
+
+void PageTable::set(int ligne, int colonne, bool allowPropagation)
 {
     if (this->preparation)
         return;
 
-    // Modification de toutes les cellules sélectionnées
-    QString text = table->item(ligne, colonne)->text();
-    bool newAction = true;
-    QList<QTableWidgetItem*> listItems = table->selectedItems();
-    for (int i = 0; i < listItems.size(); i++)
-    {
-        table->blockSignals(true);
-        listItems[i]->setText(text);
-        table->blockSignals(false);
-        set(listItems.at(i)->row(), listItems.at(i)->column(), newAction, true);
-    }
-
-    Champ champ = table->getChamp(ligne);
-    if (champ == champ_overridingRootKey || champ == champ_keyRange)
-        customizeKeyboard();
-}
-
-void PageTable::set(int ligne, int colonne, bool &newAction, bool allowPropagation)
-{
     // modification d'un élément du tableau
     Champ champ = this->table->getChamp(ligne);
     if (champ == champ_unknown)
@@ -709,7 +694,7 @@ void PageTable::set(int ligne, int colonne, bool &newAction, bool allowPropagati
                 table->blockSignals(true);
                 table->item(ligne, numCol2)->setText(table->item(ligne, colonne)->text());
                 table->blockSignals(false);
-                set(ligne, numCol2, newAction, false);
+                set(ligne, numCol2, false);
             }
         }
     }
@@ -720,19 +705,19 @@ void PageTable::set(int ligne, int colonne, bool &newAction, bool allowPropagati
         switch ((int)champ)
         {
         case champ_startAddrsOffset:
-            resetChamp(newAction, colonne, champ_startAddrsOffset, champ_startAddrsCoarseOffset);
+            resetChamp(colonne, champ_startAddrsOffset, champ_startAddrsCoarseOffset);
             break;
         case champ_endAddrsOffset:
-            resetChamp(newAction, colonne, champ_endAddrsOffset, champ_endAddrsCoarseOffset);
+            resetChamp(colonne, champ_endAddrsOffset, champ_endAddrsCoarseOffset);
             break;
         case champ_startloopAddrsOffset:
-            resetChamp(newAction, colonne, champ_startloopAddrsOffset, champ_startloopAddrsCoarseOffset);
+            resetChamp(colonne, champ_startloopAddrsOffset, champ_startloopAddrsCoarseOffset);
             break;
         case champ_endloopAddrsOffset:
-            resetChamp(newAction, colonne, champ_endloopAddrsOffset, champ_endloopAddrsCoarseOffset);
+            resetChamp(colonne, champ_endloopAddrsOffset, champ_endloopAddrsCoarseOffset);
             break;
         default:
-            resetChamp(newAction, colonne, champ, champ_unknown);
+            resetChamp(colonne, champ, champ_unknown);
         }
     }
     else
@@ -741,16 +726,16 @@ void PageTable::set(int ligne, int colonne, bool &newAction, bool allowPropagati
         switch ((int)champ)
         {
         case champ_startAddrsOffset:
-            setOffset(newAction, ligne, colonne, champ_startAddrsOffset, champ_startAddrsCoarseOffset);
+            setOffset(ligne, colonne, champ_startAddrsOffset, champ_startAddrsCoarseOffset);
             break;
         case champ_endAddrsOffset:
-            setOffset(newAction, ligne, colonne, champ_endAddrsOffset, champ_endAddrsCoarseOffset);
+            setOffset(ligne, colonne, champ_endAddrsOffset, champ_endAddrsCoarseOffset);
             break;
         case champ_startloopAddrsOffset:
-            setOffset(newAction, ligne, colonne, champ_startloopAddrsOffset, champ_startloopAddrsCoarseOffset);
+            setOffset(ligne, colonne, champ_startloopAddrsOffset, champ_startloopAddrsCoarseOffset);
             break;
         case champ_endloopAddrsOffset:
-            setOffset(newAction, ligne, colonne, champ_endloopAddrsOffset, champ_endloopAddrsCoarseOffset);
+            setOffset(ligne, colonne, champ_endloopAddrsOffset, champ_endloopAddrsCoarseOffset);
             break;
         default:{
             QString texte = this->table->item(ligne, colonne)->text().left(9);
@@ -764,16 +749,10 @@ void PageTable::set(int ligne, int colonne, bool &newAction, bool allowPropagati
                 if (genAmount.wAmount != this->sf2->get(id, champ).wValue || !this->sf2->isSet(id, champ))
                 {
                     // Modification du sf2
-                    if (newAction)
-                        this->sf2->prepareNewActions();
                     id = this->table->getID(colonne);
                     Valeur value;
                     value.genValue = genAmount;
                     this->sf2->set(id, champ, value);
-                    newAction = false;
-
-                    // Mise à jour fenêtre
-                    mainWindow->updateDo();
                 }
                 // Mise à jour de la valeur dans la cellule
                 table->item(ligne, colonne)->setText(getTextValue(T, champ, genAmount));
@@ -795,6 +774,9 @@ void PageTable::set(int ligne, int colonne, bool &newAction, bool allowPropagati
     // Mise à jour partie mod (car entre 2 des mods peuvent être définitivement détruits, et les index peuvent être mis à jour)
     id = this->table->getID(colonne);
     this->afficheMod(id);
+
+    if (champ == champ_overridingRootKey || champ == champ_keyRange)
+        customizeKeyboard();
 }
 
 void PageTable::setAmount()

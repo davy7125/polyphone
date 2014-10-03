@@ -2,6 +2,7 @@
 **                                                                        **
 **  Polyphone, a soundfont editor                                         **
 **  Copyright (C) 2013-2014 Davy Triponney                                **
+**                2014      Andrea Celani                                 **
 **                                                                        **
 **  This program is free software: you can redistribute it and/or modify  **
 **  it under the terms of the GNU General Public License as published by  **
@@ -51,8 +52,15 @@ public:
     void setColumnCount(int columns);
     void removeColumn(int column);
 
+signals:
+    void actionBegin();
+    void actionFinished();
+
 protected:
     void keyPressEvent(QKeyEvent *event);
+
+protected slots:
+    virtual void commitData(QWidget *editor);
 
 private slots:
     void updateColors();
