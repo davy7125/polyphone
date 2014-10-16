@@ -174,7 +174,8 @@ SOURCES	+= main.cpp \
     synthetiseur/elements/enveloppevol.cpp \
     synthetiseur/elements/oscsinus.cpp \
     sfark/sfarkglobal.cpp \
-    sfark/sfarkfilemanager.cpp
+    sfark/sfarkfilemanager.cpp \
+    gui_divers/dialogselection.cpp
 
 HEADERS  += mainwindow.h \
     sf2_core/sf2_types.h \
@@ -235,7 +236,8 @@ HEADERS  += mainwindow.h \
     macapplication.h \
     sfark/sfarkglobal.h \
     sfark/sfarkfilemanager.h \
-    sfark/sfarkextractor.h
+    sfark/sfarkextractor.h \
+    gui_divers/dialogselection.h
 
 FORMS    += mainwindow.ui \
     gui_divers/config.ui \
@@ -256,7 +258,8 @@ FORMS    += mainwindow.ui \
     tools/dialog_magnetophone.ui \
     tools/dialog_celeste.ui \
     tools/dialog_visualizer.ui \
-    tools/dialog_duplication.ui
+    tools/dialog_duplication.ui \
+    gui_divers/dialogselection.ui
 
 # Special compiler for sfark extractor
 SOURCES_M387 = sfark/sfarkextractor.cpp

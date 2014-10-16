@@ -29,6 +29,7 @@
 #include "dialog_visualizer.h"
 #include "dialog_space.h"
 #include "dialog_duplication.h"
+#include "dialogselection.h"
 
 QList<PageTable::Modulator> PageTable::_modulatorCopy;
 
@@ -329,11 +330,13 @@ void PageTable::afficher()
 
 void PageTable::afficheMod(EltID id, int selectedIndex)
 {
+    // Affichage du menu ou non
     if (id.typeElement == elementPrst || id.typeElement == elementInst)
     {
         _pushCopyMod->setMenu(_menu);
         _pushCopyMod->setStyleSheet("QPushButton { text-align: left; }");
         _pushCopyMod->setMaximumWidth(38);
+        _pushCopyMod->setToolTip("");
     }
     else
     {
@@ -360,8 +363,7 @@ void PageTable::afficheMod(EltID id, int selectedIndex)
         if (!this->sf2->get(id, champ_hidden).bValue)
         {
             // Ajout d'un modulateur
-            this->tableMod->addRow(numLigne);
-            this->tableMod->setID(id, numLigne);
+            this->tableMod->addRow(numLigne, id);
             this->tableMod->item(numLigne, 5)->setText(getTextValue(T, champ_indexMod, id.indexMod));
 
             sfModTmp = this->sf2->get(id, champ_sfModSrcOper).sfModValue;
@@ -412,10 +414,8 @@ void PageTable::afficheMod(EltID id, int selectedIndex)
     if (selectedIndex > -1)
     {
         for (int i = 0; i < this->tableMod->rowCount(); i++)
-        {
             if (this->tableMod->getID(i).indexMod == selectedIndex)
                 this->tableMod->selectRow(i);
-        }
     }
     this->tableMod->resizeColumnToContents(5);
     this->tableMod->resizeColumnToContents(6);
@@ -426,30 +426,57 @@ void PageTable::afficheMod(EltID id, int selectedIndex)
 
 void PageTable::afficheEditMod()
 {
-    // Bouton nouveau
-    if (this->tree->getSelectedItemsNumber() == 1)
-        this->pushNouveauMod->setEnabled(true);
-    else
-        this->pushNouveauMod->setEnabled(false);
-    EltID id = this->tableMod->getID();
-    int iTmp;
-    WORD wTmp;
-    bool bTmp;
-    SFModulator sfMod;
-    if (id.typeElement != elementUnknown)
+    if (_pushCopyMod->menu())
     {
+        _pushCopyMod->setToolTip(trUtf8("Copier / dupliquer des modulateurs"));
+        if (this->tableMod->getSelectedIDs().isEmpty())
+        {
+            _menu->actions()[0]->setText(trUtf8("Dupliquer les modulateurs vers..."));
+            _menu->actions()[1]->setText(trUtf8("Copier l'ensemble des modulateurs"));
+        }
+        else
+        {
+            _menu->actions()[0]->setText(trUtf8("Dupliquer la sélection vers..."));
+            _menu->actions()[1]->setText(trUtf8("Copier les modulateurs sélectionnés"));
+        }
+    }
+    else
+    {
+        if (this->tableMod->getSelectedIDs().isEmpty())
+            _pushCopyMod->setToolTip(trUtf8("Copier l'ensemble des modulateurs"));
+        else
+            _pushCopyMod->setToolTip(trUtf8("Copier les modulateurs sélectionnés"));
+    }
+
+    // Only one selected division ?
+    bool singleDivision = true;
+    if (this->tree->getSelectedItemsNumber() != 1)
+    {
+        singleDivision = false;
+        this->tableMod->clear();
+    }
+    this->pushNouveauMod->setEnabled(singleDivision);
+
+    QList<EltID> selectedModIDs = this->tableMod->getSelectedIDs();
+    this->pushSupprimerMod->setEnabled(singleDivision && !selectedModIDs.isEmpty());
+    if (singleDivision && selectedModIDs.size() == 1)
+    {
+        EltID id = selectedModIDs.first();
+        int iTmp;
+        WORD wTmp;
+        bool bTmp;
+        SFModulator sfMod;
+
         this->spinAmount->setValue(this->sf2->get(id, champ_modAmount).shValue);
         this->spinAmount->setEnabled(true);
         this->checkAbs->setChecked(this->sf2->get(id, champ_sfModTransOper).wValue == 2);
         this->checkAbs->setEnabled(true);
-        this->pushSupprimerMod->setEnabled(true);
         sfMod = this->sf2->get(id, champ_sfModSrcOper).sfModValue;
         iTmp = sfMod.D + 2*sfMod.P + 4*sfMod.Type;
         this->comboSource1Courbe->setEnabled(true);
         this->comboSource1Courbe->setCurrentIndex(iTmp/4);
         this->comboSource1Courbe->setModelColumn(iTmp%4);
-        this->comboSource1Courbe->setCurrentIndex(iTmp/4); // pour forcer l'initialisation
-        this->comboSource1Courbe->setModelColumn(iTmp%4);
+
         // COMBOBOX SOURCE 1
         this->comboSource1->removeItemsAfterLim();
         addAvailableSenderMod(this->comboSource1, id);
@@ -470,8 +497,7 @@ void PageTable::afficheEditMod()
         this->comboSource2Courbe->setEnabled(true);
         this->comboSource2Courbe->setCurrentIndex(iTmp/4);
         this->comboSource2Courbe->setModelColumn(iTmp%4);
-        this->comboSource2Courbe->setCurrentIndex(iTmp/4); // pour forcer l'initialisation
-        this->comboSource2Courbe->setModelColumn(iTmp%4);
+
         // COMBOBOX SOURCE 2
         // Sélection et activation
         wTmp = sfMod.Index;
@@ -492,7 +518,6 @@ void PageTable::afficheEditMod()
         this->spinAmount->setEnabled(false);
         this->checkAbs->setChecked(false);
         this->checkAbs->setEnabled(false);
-        this->pushSupprimerMod->setEnabled(false);
         this->comboSource1Courbe->setCurrentIndex(0);
         this->comboSource1Courbe->setModelColumn(0);
         this->comboSource1Courbe->setEnabled(false);
@@ -1546,44 +1571,47 @@ void PageTable::supprimerMod()
     this->sf2->prepareNewActions();
 
     // Suppression mod
-    EltID id = this->tableMod->getID();
-    if (id.typeElement != elementInstMod && id.typeElement != elementInstSmplMod &&
-            id.typeElement != elementPrstMod && id.typeElement != elementPrstInstMod)
+    QList<EltID> listIDs = this->tableMod->getSelectedIDs();
+    if (listIDs.isEmpty())
         return;
 
-    // Liens vers le mod ?
-    int iVal = -1;
-    Valeur val;
-    EltID id2 = id;
-    do
+    foreach (EltID id, listIDs)
     {
-        iVal = getAssociatedMod(id);
-        if (iVal != -1)
+        // Liens vers le mod ?
+        int iVal = -1;
+        Valeur val;
+        EltID id2 = id;
+        do
         {
-            // Suppression du lien
-            val.sfGenValue = (Champ)0;
-            id2.indexMod = iVal;
-            this->sf2->set(id2, champ_sfModDestOper, val);
-        }
-    } while (iVal != -1);
+            iVal = getAssociatedMod(id);
+            if (iVal != -1)
+            {
+                // Suppression du lien
+                val.sfGenValue = (Champ)0;
+                id2.indexMod = iVal;
+                this->sf2->set(id2, champ_sfModDestOper, val);
+            }
+        } while (iVal != -1);
 
-    // Le mod est-il lié ?
-    if (this->sf2->get(id, champ_sfModDestOper).wValue >= 32768)
-    {
-        id2.indexMod = this->sf2->get(id, champ_sfModDestOper).wValue - 32768;
-        if (id2.indexMod < this->sf2->count(id))
+        // Le mod est-il lié ?
+        if (this->sf2->get(id, champ_sfModDestOper).wValue >= 32768)
         {
-            val.sfModValue = this->sf2->get(id2, champ_sfModSrcOper).sfModValue;
-            val.sfModValue.CC = 0;
-            val.sfModValue.Index = 0;
-            this->sf2->set(id2, champ_sfModSrcOper, val);
+            id2.indexMod = this->sf2->get(id, champ_sfModDestOper).wValue - 32768;
+            if (id2.indexMod < this->sf2->count(id))
+            {
+                val.sfModValue = this->sf2->get(id2, champ_sfModSrcOper).sfModValue;
+                val.sfModValue.CC = 0;
+                val.sfModValue.Index = 0;
+                this->sf2->set(id2, champ_sfModSrcOper, val);
+            }
         }
+        this->sf2->remove(id);
     }
-    this->sf2->remove(id);
+
     this->mainWindow->updateDo();
 
-    if (rowToSelect >= nbRow - 1)
-        rowToSelect--;
+    if (rowToSelect >= nbRow - listIDs.size())
+        rowToSelect = nbRow - listIDs.size() - 1;
     this->afficheMod(this->tree->getFirstID());
     this->tableMod->selectRow(rowToSelect);
 }
@@ -1640,19 +1668,88 @@ QList<PageTable::Modulator> PageTable::getModList(EltID id)
 {
     QList<Modulator> listRet;
 
-    for (int i = 0; i < this->sf2->count(id); i++)
+    QList<EltID> listSelectedMods = tableMod->getSelectedIDs();
+    if (listSelectedMods.isEmpty())
     {
-        id.indexMod = i;
-        if (!this->sf2->get(id, champ_hidden).bValue)
+        // All modulators are copied
+        for (int i = 0; i < this->sf2->count(id); i++)
         {
-            Modulator modTmp;
-            modTmp.modSrcOper = this->sf2->get(id, champ_sfModSrcOper).sfModValue;
-            modTmp.modDestOper = this->sf2->get(id, champ_sfModDestOper).sfGenValue;
-            modTmp.modAmount = this->sf2->get(id, champ_modAmount).shValue;
-            modTmp.modAmtSrcOper = this->sf2->get(id, champ_sfModAmtSrcOper).sfModValue;
-            modTmp.modTransOper = this->sf2->get(id, champ_sfModTransOper).sfTransValue;
-            modTmp.index = i;
-            listRet << modTmp;
+            id.indexMod = i;
+            if (!this->sf2->get(id, champ_hidden).bValue)
+            {
+                Modulator modTmp;
+                modTmp.modSrcOper = this->sf2->get(id, champ_sfModSrcOper).sfModValue;
+                modTmp.modDestOper = this->sf2->get(id, champ_sfModDestOper).sfGenValue;
+                modTmp.modAmount = this->sf2->get(id, champ_modAmount).shValue;
+                modTmp.modAmtSrcOper = this->sf2->get(id, champ_sfModAmtSrcOper).sfModValue;
+                modTmp.modTransOper = this->sf2->get(id, champ_sfModTransOper).sfTransValue;
+                modTmp.index = id.indexMod;
+                listRet << modTmp;
+            }
+        }
+    }
+    else
+    {
+        foreach (EltID id, listSelectedMods)
+        {
+            if (!this->sf2->get(id, champ_hidden).bValue)
+            {
+                Modulator modTmp;
+                modTmp.modSrcOper = this->sf2->get(id, champ_sfModSrcOper).sfModValue;
+                modTmp.modDestOper = this->sf2->get(id, champ_sfModDestOper).sfGenValue;
+                modTmp.modAmount = this->sf2->get(id, champ_modAmount).shValue;
+                modTmp.modAmtSrcOper = this->sf2->get(id, champ_sfModAmtSrcOper).sfModValue;
+                modTmp.modTransOper = this->sf2->get(id, champ_sfModTransOper).sfTransValue;
+                modTmp.index = id.indexMod;
+                listRet << modTmp;
+            }
+        }
+    }
+
+    // Liste de tous les index
+    QList<int> listIndex;
+    foreach (Modulator mod, listRet)
+        if (!listIndex.contains(mod.index))
+            listIndex << mod.index;
+
+    for (int i = 0; i < listRet.size(); i++)
+    {
+        Modulator mod = listRet.at(i);
+
+        if (mod.modDestOper >= 32768)
+        {
+            // Les liens cassés disparaissent
+            int link = mod.modDestOper - 32768;
+            if (listIndex.contains(link))
+                mod.modDestOper = (Champ)(32768 + listIndex.indexOf(link));
+            else
+                mod.modDestOper = champ_fineTune;
+        }
+
+        // Les index commencent à 0
+        mod.index = listIndex.indexOf(mod.index);
+
+        listRet[i] = mod;
+    }
+
+    for (int i = 0; i < listRet.size(); i++)
+    {
+        Modulator mod = listRet.at(i);
+        if (mod.modSrcOper.Index == 127 && mod.modSrcOper.CC == 0)
+        {
+            // On cherche le lien
+            bool found = false;
+            for (int j = 0; j < listRet.size(); j++)
+            {
+                if (i != j && listRet.at(j).modDestOper == 32768 + i)
+                        found = true;
+            }
+
+            if (!found)
+            {
+                mod.modSrcOper.Index = 0;
+                listRet[i] = mod;
+            }
         }
     }
 
@@ -1713,13 +1810,15 @@ void PageTable::pasteMod(EltID id, QList<Modulator> modulators)
         }
     }
 
-    // Suppression des mods existants
-    int nbElt = this->sf2->count(id);
-    for (int i = nbElt - 1; i >= 0; i--)
+    // Index minimal des mods à copier
+    int offsetIndex = this->sf2->count(id);
+    for (int i = 0; i < modulators.size(); i++)
     {
-        id.indexMod = i;
-        if (!this->sf2->get(id, champ_hidden).bValue)
-            this->sf2->remove(id);
+        Modulator mod = modulators.at(i);
+        mod.index += offsetIndex;
+        if (mod.modDestOper >= 32768)
+            mod.modDestOper = (Champ)(mod.modDestOper + offsetIndex);
+        modulators[i] = mod;
     }
 
     // Création de nouveaux mods
@@ -1736,23 +1835,7 @@ void PageTable::pasteMod(EltID id, QList<Modulator> modulators)
         modTmp = modulators.at(i);
         valTmp.sfModValue = modTmp.modSrcOper;
         this->sf2->set(id, champ_sfModSrcOper, valTmp);
-        if (modTmp.modDestOper >= 32768)
-        {
-            // Lien vers un autre modulateur
-            int link = modTmp.modDestOper - 32768;
-            int pos = -1;
-            for (int j = 0; j < modulators.size(); j++)
-            {
-                if (modulators[j].index == link)
-                    pos = j;
-            }
-            if (pos != i && pos > -1)
-                valTmp.sfGenValue = (Champ)(32768 + listIndex.at(pos));
-            else
-                valTmp.sfGenValue = (Champ)0;
-        }
-        else
-            valTmp.sfGenValue = modTmp.modDestOper;
+        valTmp.sfGenValue = modTmp.modDestOper;
         this->sf2->set(id, champ_sfModDestOper, valTmp);
         valTmp.shValue = modTmp.modAmount;
         this->sf2->set(id, champ_modAmount, valTmp);
@@ -1765,7 +1848,20 @@ void PageTable::pasteMod(EltID id, QList<Modulator> modulators)
 
 void PageTable::duplicateMod()
 {
-    // Duplication des mods dans tous les autres instruments ou presets
+    // Duplication des mods sélectionnés dans tous les autres instruments ou presets
+    if (this->tree->getSelectedItemsNumber() != 1)
+        return;
+    EltID id = this->tree->getFirstID();
+    if (id.typeElement != elementInst && id.typeElement != elementPrst)
+        return;
+
+    DialogSelection * dial = new DialogSelection(sf2, id, this);
+    connect(dial, SIGNAL(listChosen(QList<int>)), this, SLOT(duplicateMod(QList<int>)));
+    dial->show();
+}
+
+void PageTable::duplicateMod(QList<int> listIndex)
+{
     if (this->tree->getSelectedItemsNumber() != 1)
         return;
     EltID id = this->tree->getFirstID();
@@ -1781,12 +1877,11 @@ void PageTable::duplicateMod()
     // Copie des mods
     QList<Modulator> modulators = getModList(idMod);
 
-    // Remplacements
-    int currentIndex = id.indexElt;
-    for (int i = 0; i < sf2->count(id); i++)
+    this->sf2->prepareNewActions();
+    foreach (int numElement, listIndex)
     {
-        id.indexElt = i;
-        if (i != currentIndex && !sf2->get(id, champ_hidden).bValue)
+        id.indexElt = numElement;
+        if (!sf2->get(id, champ_hidden).bValue)
             pasteMod(id, modulators);
     }
 

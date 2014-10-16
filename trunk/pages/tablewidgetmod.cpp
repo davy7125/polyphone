@@ -32,7 +32,7 @@ void TableWidgetMod::clear()
     this->setRowCount(0);
 }
 
-void TableWidgetMod::addRow(int row)
+void TableWidgetMod::addRow(int row, EltID id)
 {
     // Ajout d'une ligne
     this->insertRow(row);
@@ -40,12 +40,9 @@ void TableWidgetMod::addRow(int row)
     // Création d'éléments
     for (int i = 0; i < this->columnCount(); i++)
         this->setItem(row, i, new QTableWidgetItem);
-}
 
-void TableWidgetMod::setID(EltID id, int row)
-{
     QString str;
-    switch(id.typeElement)
+    switch (id.typeElement)
     {
     case elementInstMod: case elementInst:          str = "Inst";       break;
     case elementInstSmplMod: case elementInstSmpl:  str = "InstSmpl";   break;
@@ -53,6 +50,7 @@ void TableWidgetMod::setID(EltID id, int row)
     case elementPrstInstMod: case elementPrstInst:  str = "PrstInst";   break;
     default: break;
     }
+
     this->item(row, 0)->setText(str);
     this->item(row, 1)->setText(QString::number(id.indexSf2));
     this->item(row, 2)->setText(QString::number(id.indexElt));
@@ -83,7 +81,29 @@ EltID TableWidgetMod::getID(int row)
 EltID TableWidgetMod::getID()
 {
     EltID id(elementUnknown, 0, 0, 0, 0);
-    if (this->currentRow() != -1)
+    if (this->currentRow() != -1 && this->selectedItems().count() == 4) // because 4 visible columns
         id = getID(this->currentRow());
     return id;
+}
+
+QList<EltID> TableWidgetMod::getSelectedIDs()
+{
+    QMap <int, EltID> mapID;
+    foreach (QTableWidgetItem * item, this->selectedItems())
+    {
+        int row = item->row();
+        if (!mapID.keys().contains(row))
+            mapID[row] = getID(row);
+    }
+    return mapID.values();
+}
+
+void TableWidgetMod::keyPressEvent(QKeyEvent * event)
+{
+    if (event->key() == Qt::Key_Delete)
+        emit(deleteModPressed());
+    else if (event->key() == Qt::Key_C && (event->modifiers() & Qt::ControlModifier))
+        emit(copyAsked());
+    else if (event->key() == Qt::Key_V && (event->modifiers() & Qt::ControlModifier))
+        emit(pasteAsked());
 }

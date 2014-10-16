@@ -48,7 +48,7 @@ public:
 
     explicit DialogList(QWidget *parent = 0);
     ~DialogList();
-    // méthodes
+
     void init(MainWindow *window, Pile_sf2 *sf2) {this->window = window; this->sf2 = sf2;}
     void showDialog(EltID idSrc, ModeListDialog mode);
 
