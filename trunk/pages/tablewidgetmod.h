@@ -38,10 +38,18 @@ public:
     ~TableWidgetMod() {}
 
     void clear();
-    void addRow(int row);
-    void setID(EltID id, int row);
+    void addRow(int row, EltID id);
     EltID getID(int row);
     EltID getID();
+    QList<EltID> getSelectedIDs();
+
+protected:
+    virtual void keyPressEvent(QKeyEvent * event);
+
+signals:
+    void deleteModPressed();
+    void copyAsked();
+    void pasteAsked();
 };
 
 #endif // TABLEWIDGETMOD_H

@@ -438,7 +438,7 @@
      <property name="frameShadow">
       <enum>QFrame::Raised</enum>
      </property>
-     <layout class="QGridLayout" name="gridLayout_2" rowstretch="1,0,0,0" columnstretch="100,0,0,0,0,0,0">
+     <layout class="QGridLayout" name="gridLayout_2" rowstretch="1,0,0,0" columnstretch="100,0,0,0,0,0,0,0">
       <property name="leftMargin">
        <number>0</number>
       </property>
@@ -551,33 +551,7 @@
         </property>
        </widget>
       </item>
-      <item row="0" column="6">
-       <widget class="QPushButton" name="pushPasteMod">
-        <property name="maximumSize">
-         <size>
-          <width>24</width>
-          <height>24</height>
-         </size>
-        </property>
-        <property name="toolTip">
-         <string>Colle les modulateurs copiés</string>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-        <property name="icon">
-         <iconset resource="../ressources.qrc">
-          <normaloff>:/icones/paste</normaloff>:/icones/paste</iconset>
-        </property>
-        <property name="iconSize">
-         <size>
-          <width>22</width>
-          <height>22</height>
-         </size>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="2" colspan="5">
+      <item row="2" column="2" colspan="6">
        <widget class="QGroupBox" name="groupBox_3">
         <property name="title">
          <string>Source / Quantité</string>
@@ -729,7 +703,7 @@
         </layout>
        </widget>
       </item>
-      <item row="3" column="2" colspan="5">
+      <item row="3" column="2" colspan="6">
        <widget class="QGroupBox" name="groupBox">
         <property name="title">
          <string>Destination</string>
@@ -797,7 +771,7 @@
          </size>
         </property>
         <property name="toolTip">
-         <string>Copie l'ensemble des modulateurs</string>
+         <string>Copie les modulateurs</string>
         </property>
         <property name="text">
          <string/>
@@ -839,7 +813,7 @@
          <bool>false</bool>
         </property>
         <property name="selectionMode">
-         <enum>QAbstractItemView::SingleSelection</enum>
+         <enum>QAbstractItemView::ExtendedSelection</enum>
         </property>
         <property name="selectionBehavior">
          <enum>QAbstractItemView::SelectRows</enum>
@@ -942,6 +916,26 @@
         </column>
        </widget>
       </item>
+      <item row="0" column="6">
+       <widget class="QPushButton" name="pushPasteMod">
+        <property name="maximumSize">
+         <size>
+          <width>24</width>
+          <height>24</height>
+         </size>
+        </property>
+        <property name="toolTip">
+         <string>Colle les modulateurs copiés</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset resource="../ressources.qrc">
+          <normaloff>:/icones/paste</normaloff>:/icones/paste</iconset>
+        </property>
+       </widget>
+      </item>
      </layout>
     </widget>
    </item>
@@ -952,6 +946,11 @@
    <class>TableWidgetMod</class>
    <extends>QTableWidget</extends>
    <header>page.h</header>
+   <slots>
+    <signal>deleteModPressed()</signal>
+    <signal>copyAsked()</signal>
+    <signal>pasteAsked()</signal>
+   </slots>
   </customwidget>
   <customwidget>
    <class>TableComboBox</class>
@@ -1192,18 +1191,66 @@
    </hints>
   </connection>
   <connection>
+   <sender>tableMod</sender>
+   <signal>deleteModPressed()</signal>
+   <receiver>Page_Inst</receiver>
+   <slot>supprimerMod()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>192</x>
+     <y>315</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>303</x>
+     <y>192</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
    <sender>pushPasteMod</sender>
    <signal>clicked()</signal>
    <receiver>Page_Inst</receiver>
    <slot>pasteMod()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>667</x>
-     <y>197</y>
+     <x>582</x>
+     <y>237</y>
     </hint>
     <hint type="destinationlabel">
-     <x>349</x>
-     <y>167</y>
+     <x>303</x>
+     <y>192</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>tableMod</sender>
+   <signal>copyAsked()</signal>
+   <receiver>Page_Inst</receiver>
+   <slot>copyMod()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>192</x>
+     <y>315</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>303</x>
+     <y>192</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>tableMod</sender>
+   <signal>pasteAsked()</signal>
+   <receiver>Page_Inst</receiver>
+   <slot>pasteMod()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>192</x>
+     <y>315</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>303</x>
+     <y>192</y>
     </hint>
    </hints>
   </connection>
