@@ -161,7 +161,6 @@ class PageTable : public Page
 
 public:
     PageTable(TypePage typePage, QWidget *parent = 0);
-    // Méthodes publiques
     void afficher();
     void reselect();
     void updateId(EltID id);
@@ -246,6 +245,7 @@ protected slots:
     void copyMod();
     void pasteMod();
     void duplicateMod();
+    void duplicateMod(QList<int> listIndex);
     void actionBegin();
     void actionFinished();
 

@@ -69,8 +69,8 @@ Page_Inst::Page_Inst(QWidget *parent) :
 
     // Initialisation menu de copie de modulateurs
     _menu = new QMenu();
-    _menu->addAction(trUtf8("Copier l'ensemble des modulateurs"), this, SLOT(copyMod()));
-    _menu->addAction(trUtf8("Appliquer les modulateurs à tous les instruments"), this, SLOT(duplicateMod()));
+    _menu->addAction("", this, SLOT(duplicateMod()));
+    _menu->addAction("", this, SLOT(copyMod()));
 
 #ifdef Q_OS_MAC
     this->table->setStyleSheet("QHeaderView::section:horizontal{padding: 4px 10px 4px 10px;}");
