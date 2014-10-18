@@ -341,7 +341,7 @@ QWidget * TableDelegate::createEditor(QWidget *parent, const QStyleOptionViewIte
             spin->setMinimum(0);
             spin->setMaximum(127);
             spin->setStyleSheet("SpinBoxKey{ border: 3px solid " + highlightColor.name() + "; }"
-                                                                                           "SpinBoxKey::down-button{width:0px;} SpinBoxKey::up-button{width:0px;} ");
+                                "SpinBoxKey::down-button{width:0px;} SpinBoxKey::up-button{width:0px;} ");
             widget = spin;
         }
         else if (nbDecimales == 0)
@@ -350,7 +350,7 @@ QWidget * TableDelegate::createEditor(QWidget *parent, const QStyleOptionViewIte
             spin->setMinimum(-2147483647);
             spin->setMaximum(2147483647);
             spin->setStyleSheet("QSpinBox{ border: 3px solid " + highlightColor.name() + "; }"
-                                                                                         "QSpinBox::down-button{width:0px;} QSpinBox::up-button{width:0px;} ");
+                                "QSpinBox::down-button{width:0px;} QSpinBox::up-button{width:0px;} ");
             widget = spin;
         }
         else
@@ -360,7 +360,7 @@ QWidget * TableDelegate::createEditor(QWidget *parent, const QStyleOptionViewIte
             spin->setMaximum(1000000);
             spin->setSingleStep(.1);
             spin->setStyleSheet("QDoubleSpinBox{ border: 3px solid " + highlightColor.name() + "; }"
-                                                                                               "QDoubleSpinBox::down-button{width:0px;} QDoubleSpinBox::up-button{width:0px;} ");
+                                "QDoubleSpinBox::down-button{width:0px;} QDoubleSpinBox::up-button{width:0px;} ");
             spin->setDecimals(nbDecimales);
             widget = spin;
         }
@@ -374,7 +374,7 @@ QWidget * TableDelegate::createEditor(QWidget *parent, const QStyleOptionViewIte
         else
             spin = new SpinBoxVelocityRange(parent);
         spin->setStyleSheet("SpinBoxRange{ border: 3px solid " + highlightColor.name() + "; }"
-                                                                                         "SpinBoxRange::down-button{width:0px;} SpinBoxRange::up-button{width:0px;} ");
+                            "SpinBoxRange::down-button{width:0px;} SpinBoxRange::up-button{width:0px;} ");
         widget = spin;
     }
 
@@ -389,7 +389,11 @@ QWidget * TableDelegate::createEditor(QWidget *parent, const QStyleOptionViewIte
 
 void TableDelegate::setEditorData(QWidget *editor, const QModelIndex &index) const
 {
-    if (index.row() == 4 || index.row() == 5)
+    bool isNumeric, isKey;
+    int nbDecimales;
+    getType(isNumeric, isKey, nbDecimales, index.row());
+
+    if (!isNumeric)
     {
         SpinBoxRange * spin = (SpinBoxRange *)editor;
         if (index.data().isNull())
@@ -397,7 +401,7 @@ void TableDelegate::setEditorData(QWidget *editor, const QModelIndex &index) con
         else
             spin->setText(index.data().toString());
     }
-    else if (_table->rowCount() == 50 && (index.row() == 9 || index.row() == 44))
+    else if (isKey)
     {
         SpinBoxKey * spin = (SpinBoxKey *)editor;
         if (index.data().isNull())
@@ -405,8 +409,18 @@ void TableDelegate::setEditorData(QWidget *editor, const QModelIndex &index) con
         else
             spin->setValue(Config::getInstance()->getKeyNum(index.data().toString()));
     }
+    else if (nbDecimales > 0)
+    {
+        QDoubleSpinBox * spin = (QDoubleSpinBox *)editor;
+        if (!index.data().isNull())
+            spin->setValue(index.data().toString().replace(",", ".").toDouble());
+    }
     else
-        QStyledItemDelegate::setEditorData(editor, index);
+    {
+        QSpinBox * spin = (QSpinBox *)editor;
+        if (!index.data().isNull())
+            spin->setValue(index.data().toString().toInt());
+    }
 }
 
 void TableDelegate::setModelData(QWidget *editor, QAbstractItemModel *model, const QModelIndex &index) const
