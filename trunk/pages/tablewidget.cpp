@@ -231,8 +231,7 @@ void TableWidget::keyPressEvent(QKeyEvent *event)
             if (cells.size() != cellrows * cellcols)
             {
                 // error, uneven number of columns, probably bad data
-                QMessageBox::critical(this, tr("Error"),
-                                      tr("Invalid clipboard data, unable to perform paste operation."));
+                QMessageBox::critical(this, "Error", "Invalid clipboard data, unable to perform paste operation.");
                 return;
             }
 

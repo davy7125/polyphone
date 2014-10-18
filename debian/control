@@ -10,7 +10,10 @@ Build-Depends:
  libjack-jackd2-dev,
  portaudio19-dev,
  libqt4-dev (>= 4:4.6.3),
- zlib1g-dev
+ zlib1g-dev,
+ librtmidi-dev,
+ libstk0-dev,
+ libqcustomplot-dev
 Standards-Version: 3.9.5
 Homepage: http://www.polyphone.fr
 
