@@ -2367,7 +2367,8 @@ void PageTable::paramGlobal(QVector<double> dValues, QList<EltID> listElt, int t
                 }
                 if (velMin2 >= velMin && velMax2 <= velMax)
                 {
-                    amount = QString(getTextValue(T, (Champ)champ, this->sf2->get(id, (Champ)champ).genValue)).toDouble();
+                    amount = QString(getTextValue(T, (Champ)champ, this->sf2->get(id, (Champ)champ).genValue))
+                            .replace(",", ".").toDouble();
 
                     // Calcul de la modification
                     pos = (double)(this->sf2->get(id, champ_keyRange).rValue.byLo +
