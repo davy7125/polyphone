@@ -948,8 +948,8 @@ QString Config::getKeyName(int keyNum, bool forceTexte, bool with0, bool forceC4
 
 int Config::getKeyNum(QString keyName, bool forceC4)
 {
-    keyName = keyName.toLower();
-    int note = keyName.toInt();
+    keyName = keyName.replace(",", ".").toLower();
+    int note = qRound(keyName.toDouble());
     if (note == 0 && keyName != "0" && keyName.size() >= 2)
     {
         switch (keyName.at(0).unicode())

@@ -253,7 +253,7 @@ QString SpinBoxVelocityRange::getText(int value) const
 
 int SpinBoxVelocityRange::getValue(QString &text, bool &ok) const
 {
-    return text.toInt(&ok);
+    return qRound(text.replace(",", ".").toDouble(&ok));
 }
 
 QString SpinBoxKeyRange::getText(int value) const
