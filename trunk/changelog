@@ -4,7 +4,10 @@ polyphone (1.5) unstable; urgency=low
  * transposition tool
  * more options when renaming several elements
  * tool to remove all modulators
- * function to apply modulators of a global division to all instruments or presets
+ * improved copy / paste functions in tables
+ * improved copy / paste functions for modulators
+ * arrows may be used to play the adjacent key or velocity
+ * faster selection of multiple elements in the tree
  * (fix) bug when reading some wav files
  * (fix) sample synchronization in synth
  * (fix) bug when editing modulators

@@ -111,7 +111,7 @@
       <string notr="true"/>
      </property>
      <property name="text">
-      <string>Nouveau</string>
+      <string notr="true">Nouveau</string>
      </property>
     </widget>
    </item>
@@ -121,7 +121,7 @@
       <string notr="true"/>
      </property>
      <property name="text">
-      <string>Ancien</string>
+      <string notr="true">Ancien</string>
      </property>
     </widget>
    </item>
