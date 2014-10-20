@@ -12,7 +12,7 @@ polyphone (1.5) unstable; urgency=low
  * (fix) sample synchronization in synth
  * (fix) bug when editing modulators
 
- -- Davy Triponney <davy.triponney@gmail.com>  Thu, 7 Aug 2014 18:55:20 +0100
+ -- Davy Triponney <davy.triponney@gmail.com>  Mon, 20 Oct 2014 18:37:28 +0100
 
 
 polyphone (1.4) UNRELEASED; urgency=low

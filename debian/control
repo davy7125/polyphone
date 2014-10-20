@@ -14,7 +14,7 @@ Build-Depends:
  librtmidi-dev,
  libstk0-dev,
  libqcustomplot-dev
-Standards-Version: 3.9.5
+Standards-Version: 3.9.6
 Homepage: http://www.polyphone.fr
 
 Package: polyphone
