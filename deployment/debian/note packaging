@@ -1,17 +1,27 @@
-mettre à jour le changelog dans le dossier debian des sources
-mettre à jour le changelog dans le dossier debian/share/doc/polyphone
-(le décompresser puis compresser avec la commande gzip -9 changelog)
+1. mettre à jour le changelog dans les dossier "debian" et "trunk"
 
-sortir les binaires windows du dossier source (dossiers lib/win et lib/mac)
-renommer le dossier source en fonction de la version du paquet
-exemple : polyphone-1.5
-créer une archive s'appelant polyphone_1.5.orig.tar.gz du dossier source
+2. sortir le dossier lib de "trunk"
 
-lancer la commande suivante à la racine du dossier source
-dpkg-buildpackage -k0x87EC1CFA
+3. renommer le dossier trunk en fonction de la version du paquet
+   exemple : "polyphone-1.5"
 
-remonter d'un niveau et vérifier qu'il n'y a pas d'erreur dans le paquet
-lintian polyphone_1.5-1_amd64.changes
+4. créer une archive de ce dossier s'appelant "polyphone_1.5.orig.tar.gz"
+
+5. inclure le dossier debian dans "trunk" renommé
+
+6. lancer la commande suivante dans le dossier "trunk" renommé
+   dpkg-buildpackage -k0x87EC1CFA
+
+7. remonter d'un niveau et vérifier qu'il n'y a pas d'erreur dans le paquet
+   lintian polyphone_1.5-1_amd64.changes
+   
+8. nettoyer le répertoire debian:
+   - dossier "polyphone"
+   - files
+   - polyphone.debhelper.log
+   - polyphone.postinst.debhelper
+   - polyphone.postrm.debhelper
+   - polyphone.substvars
 
 envoi :
 dput mentors polyphone_1.5-1_amd64.changes
