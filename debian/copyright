@@ -7,7 +7,7 @@ License:    GPL-3+
 
 Files:      clavier/*
 Copyright:  2008-2014 Pedro Lopez-Cabanillas, plcl@users.sf.net
-Copyright:  2013-2014 Davy Triponney, davy.triponney@gmail.com
+            2013-2014 Davy Triponney, davy.triponney@gmail.com
 License:    GPL-3+
 
 Files:      sfark/*
@@ -27,5 +27,9 @@ License: GPL-3+
  GNU General Public License for more details.
  .
  You should have received a copy of the GNU General Public License
- along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ along with this program. If not, see <http://www.gnu.org/licenses/>.
+ .
+ On Debian systems, the full text of the GNU General Public
+ License version 3 can be found in the file
+ `/usr/share/common-licenses/GPL-3'.
 
