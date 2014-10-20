@@ -1,0 +1,29 @@
+mettre à jour le changelog dans le dossier debian des sources
+mettre à jour le changelog dans le dossier debian/share/doc/polyphone
+(le décompresser puis compresser avec la commande gzip -9 changelog)
+
+sortir les binaires windows du dossier source (dossiers lib/win et lib/mac)
+renommer le dossier source en fonction de la version du paquet
+exemple : polyphone-1.5
+créer une archive s'appelant polyphone_1.5.orig.tar.gz du dossier source
+
+lancer la commande suivante à la racine du dossier source
+dpkg-buildpackage -k0x87EC1CFA
+
+remonter d'un niveau et vérifier qu'il n'y a pas d'erreur dans le paquet
+lintian polyphone_1.5-1_amd64.changes
+
+envoi :
+dput mentors polyphone_1.5-1_amd64.changes
+
+
+
+//////////////////////////////////////
+// ANNEXE : GESTION DES PERMISSIONS //
+//////////////////////////////////////
+
+// lecture écriture pour l'utilisateur et lecture pour les autres
+// exécution toujours possible pour les dossiers
+// https://library.linode.com/linux-tools/common-commands/chmod
+chmod -R 644 trunk/
+find . -type d -exec chmod 766 '{}' \;
