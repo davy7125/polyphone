@@ -446,7 +446,7 @@
      <property name="frameShadow">
       <enum>QFrame::Raised</enum>
      </property>
-     <layout class="QGridLayout" name="gridLayout" rowstretch="1,0,0,0" columnstretch="100,0,0,0,0,0,0,0">
+     <layout class="QGridLayout" name="gridLayout" rowstretch="1,0,0,0" columnstretch="100,0,0">
       <property name="leftMargin">
        <number>0</number>
       </property>
@@ -465,7 +465,7 @@
       <property name="verticalSpacing">
        <number>2</number>
       </property>
-      <item row="1" column="0" rowspan="3" colspan="2">
+      <item row="1" column="0" rowspan="3">
        <widget class="TableWidgetMod" name="tableMod">
         <property name="font">
          <font>
@@ -593,7 +593,175 @@
         </column>
        </widget>
       </item>
-      <item row="2" column="2" colspan="6">
+      <item row="0" column="2">
+       <layout class="QHBoxLayout" name="horizontalLayout_2">
+        <item>
+         <widget class="QPushButton" name="pushNouveauMod">
+          <property name="minimumSize">
+           <size>
+            <width>24</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>24</width>
+            <height>24</height>
+           </size>
+          </property>
+          <property name="toolTip">
+           <string>Ajoute un modulateur</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset resource="../ressources.qrc">
+            <normaloff>:/icones/add</normaloff>:/icones/add</iconset>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pushSupprimerMod">
+          <property name="minimumSize">
+           <size>
+            <width>24</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>24</width>
+            <height>24</height>
+           </size>
+          </property>
+          <property name="toolTip">
+           <string>Supprime un modulateur</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset resource="../ressources.qrc">
+            <normaloff>:/icones/remove</normaloff>:/icones/remove</iconset>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pushCopyMod">
+          <property name="maximumSize">
+           <size>
+            <width>24</width>
+            <height>24</height>
+           </size>
+          </property>
+          <property name="toolTip">
+           <string>Copie les modulateurs</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset resource="../ressources.qrc">
+            <normaloff>:/icones/copy</normaloff>:/icones/copy</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>22</width>
+            <height>22</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pushPasteMod">
+          <property name="maximumSize">
+           <size>
+            <width>24</width>
+            <height>24</height>
+           </size>
+          </property>
+          <property name="toolTip">
+           <string>Colle les modulateurs copiés</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset resource="../ressources.qrc">
+            <normaloff>:/icones/paste</normaloff>:/icones/paste</iconset>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item row="3" column="1" colspan="2">
+       <widget class="QGroupBox" name="groupBox_2">
+        <property name="title">
+         <string>Destination</string>
+        </property>
+        <layout class="QGridLayout" name="gridLayout_3">
+         <property name="leftMargin">
+          <number>0</number>
+         </property>
+         <property name="topMargin">
+          <number>3</number>
+         </property>
+         <property name="rightMargin">
+          <number>0</number>
+         </property>
+         <property name="bottomMargin">
+          <number>0</number>
+         </property>
+         <property name="verticalSpacing">
+          <number>2</number>
+         </property>
+         <item row="0" column="0">
+          <widget class="ComboBox" name="comboDestination">
+           <property name="maximumSize">
+            <size>
+             <width>170</width>
+             <height>27</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <weight>50</weight>
+             <bold>false</bold>
+            </font>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1">
+          <widget class="QCheckBox" name="checkAbs">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="text">
+            <string>Valeur abs.</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item row="0" column="0">
+       <widget class="QLabel" name="label">
+        <property name="font">
+         <font>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>Modulateurs</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1" colspan="2">
        <widget class="QGroupBox" name="groupBox_4">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
@@ -730,7 +898,7 @@
         </layout>
        </widget>
       </item>
-      <item row="1" column="2">
+      <item row="1" column="1">
        <spacer name="verticalSpacer">
         <property name="orientation">
          <enum>Qt::Vertical</enum>
@@ -746,33 +914,7 @@
         </property>
        </spacer>
       </item>
-      <item row="0" column="4">
-       <widget class="QPushButton" name="pushSupprimerMod">
-        <property name="minimumSize">
-         <size>
-          <width>24</width>
-          <height>0</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>24</width>
-          <height>24</height>
-         </size>
-        </property>
-        <property name="toolTip">
-         <string>Supprime un modulateur</string>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-        <property name="icon">
-         <iconset resource="../ressources.qrc">
-          <normaloff>:/icones/remove</normaloff>:/icones/remove</iconset>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="2">
+      <item row="0" column="1">
        <spacer name="horizontalSpacer_2">
         <property name="orientation">
          <enum>Qt::Horizontal</enum>
@@ -787,144 +929,6 @@
          </size>
         </property>
        </spacer>
-      </item>
-      <item row="0" column="3">
-       <widget class="QPushButton" name="pushNouveauMod">
-        <property name="minimumSize">
-         <size>
-          <width>24</width>
-          <height>0</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>24</width>
-          <height>24</height>
-         </size>
-        </property>
-        <property name="toolTip">
-         <string>Ajoute un modulateur</string>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-        <property name="icon">
-         <iconset resource="../ressources.qrc">
-          <normaloff>:/icones/add</normaloff>:/icones/add</iconset>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="5">
-       <widget class="QPushButton" name="pushCopyMod">
-        <property name="maximumSize">
-         <size>
-          <width>24</width>
-          <height>24</height>
-         </size>
-        </property>
-        <property name="toolTip">
-         <string>Copie les modulateurs</string>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-        <property name="icon">
-         <iconset resource="../ressources.qrc">
-          <normaloff>:/icones/copy</normaloff>:/icones/copy</iconset>
-        </property>
-        <property name="iconSize">
-         <size>
-          <width>22</width>
-          <height>22</height>
-         </size>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="0">
-       <widget class="QLabel" name="label">
-        <property name="font">
-         <font>
-          <weight>75</weight>
-          <bold>true</bold>
-         </font>
-        </property>
-        <property name="text">
-         <string>Modulateurs</string>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="2" colspan="6">
-       <widget class="QGroupBox" name="groupBox_2">
-        <property name="title">
-         <string>Destination</string>
-        </property>
-        <layout class="QGridLayout" name="gridLayout_3">
-         <property name="leftMargin">
-          <number>0</number>
-         </property>
-         <property name="topMargin">
-          <number>3</number>
-         </property>
-         <property name="rightMargin">
-          <number>0</number>
-         </property>
-         <property name="bottomMargin">
-          <number>0</number>
-         </property>
-         <property name="verticalSpacing">
-          <number>2</number>
-         </property>
-         <item row="0" column="0">
-          <widget class="ComboBox" name="comboDestination">
-           <property name="maximumSize">
-            <size>
-             <width>170</width>
-             <height>27</height>
-            </size>
-           </property>
-           <property name="font">
-            <font>
-             <weight>50</weight>
-             <bold>false</bold>
-            </font>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="1">
-          <widget class="QCheckBox" name="checkAbs">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="text">
-            <string>Valeur abs.</string>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </widget>
-      </item>
-      <item row="0" column="6">
-       <widget class="QPushButton" name="pushPasteMod">
-        <property name="maximumSize">
-         <size>
-          <width>24</width>
-          <height>24</height>
-         </size>
-        </property>
-        <property name="toolTip">
-         <string>Colle les modulateurs copiés</string>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-        <property name="icon">
-         <iconset resource="../ressources.qrc">
-          <normaloff>:/icones/paste</normaloff>:/icones/paste</iconset>
-        </property>
-       </widget>
       </item>
      </layout>
     </widget>
