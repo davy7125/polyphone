@@ -1,6 +1,0 @@
-polyphone (1.5-1) unstable; urgency=low
-
-  * Initial debian release (Closes: Bug#714454)
-
- -- Davy Triponney <davy.triponney@gmail.com>  Mon, 20 Oct 2014 18:44:52 +0100
-
