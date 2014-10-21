@@ -1,6 +1,8 @@
 1. mettre à jour le changelog dans les dossier "debian" et "trunk"
 
-2. sortir le dossier lib de "trunk"
+2. sortir le dossier lib de "trunk", ou
+2. modifier .pro pour utiliser les librairies locales et ajuster le fichier control
+   (enlever les références à librtmidi-dev, libstk0-dev et libqcustomplot-dev)
 
 3. renommer le dossier trunk en fonction de la version du paquet
    exemple : "polyphone-1.5"
