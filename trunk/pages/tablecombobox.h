@@ -23,71 +23,67 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef TABLEWIDGET_H
-#define TABLEWIDGET_H
+#ifndef TABLECOMBOBOX_H
+#define TABLECOMBOBOX_H
 
-#include <QTableWidget>
-#include <QStyledItemDelegate>
-#include <QTimer>
-#include "pile_sf2.h"
+#include <QComboBox>
+#include <QTableView>
+#include <QStandardItemModel>
+#include <QHeaderView>
+#include <QMouseEvent>
 
-
-// Classe QTableWidget avec inclusion d'une ID + effet bleu sur l'entête
-class TableWidget : public QTableWidget
+// Classe TableComboBox pour les formes de courbes
+class TableComboBox : public QComboBox
 {
     Q_OBJECT
 
 public:
-    TableWidget(QWidget *parent = 0);
-    ~TableWidget() { delete this->itemDelegate(); }
-    void clear();
-    void addColumn(int column, QString title);
-    void setID(EltID id, int colonne);
-    EltID getID(int colonne);
-    void setEnlighted(int colonne, bool isEnlighted);
+    TableComboBox(QWidget* parent = 0) : QComboBox(parent)
+    {
+        // Nouvelle vue
+        QTableView * view = new QTableView();
+        view->viewport()->installEventFilter(this);
+        view->horizontalHeader()->setVisible(false);
+        view->verticalHeader()->setVisible(false);
+        view->setShowGrid(false);
+        view->setFixedSize(28*4, 30*4);
+        this->setView(view);
 
-    // Association champ - ligne (méthodes virtuelles pures)
-    virtual Champ getChamp(int row) = 0;
-    virtual int getRow(WORD champ) = 0;
-    void setColumnCount(int columns);
-    void removeColumn(int column);
+        // Préparation du modèle
+        QStandardItemModel * model = new QStandardItemModel();
+        model->setColumnCount(4);
+        model->setRowCount(4);
+        for (int i = 0; i < 4; i++)
+        {
+            for (int j = 0; j < 4; j++)
+                model->setItem(i, j, new QStandardItem(
+                                   QIcon(QString(":/icones/courbe%1").arg(4*j+i+1, 2, 10, QChar('0'))),
+                                   ""));
+        }
+        this->setModel(model);
+        view->resizeColumnsToContents();
+    }
+
+    ~TableComboBox()
+    {
+        delete this->model();
+    }
+
+    bool eventFilter(QObject* object, QEvent* event)
+    {
+        if (event->type() == QEvent::MouseButtonPress && object == view()->viewport())
+        {
+            QMouseEvent* mouseEvent = static_cast<QMouseEvent*>(event);
+            view()->indexAt(mouseEvent->pos());
+            this->setCurrentIndex(view()->currentIndex().row());
+            this->setModelColumn(view()->currentIndex().column());
+            emit(clicked(view()->currentIndex().row(), view()->currentIndex().column()));
+        }
+        return false;
+    }
 
 signals:
-    void actionBegin();
-    void actionFinished();
-
-protected:
-    void keyPressEvent(QKeyEvent *event);
-
-protected slots:
-    virtual void commitData(QWidget *editor);
-
-private slots:
-    void updateColors();
-
-private:
-    QTimer *_timer;
-    QList<QColor> _listColors;
+    void clicked(int row, int column);
 };
 
-// Redéfinition des éditeurs au sein de la table
-class TableDelegate : public QStyledItemDelegate
-{
-    Q_OBJECT
-
-public:
-    TableDelegate(QTableWidget * table, QObject * parent = NULL): QStyledItemDelegate(parent),
-        _table(table)
-    {}
-
-protected:
-    QWidget * createEditor(QWidget *parent, const QStyleOptionViewItem &option, const QModelIndex &index) const;
-    void setEditorData(QWidget *editor, const QModelIndex &index) const;
-    void setModelData(QWidget *editor, QAbstractItemModel *model, const QModelIndex &index) const;
-
-private:
-    void getType(bool &isNumeric, bool &isKey, int &nbDecimales, int numRow) const;
-    QTableWidget * _table;
-};
-
-#endif // TABLEWIDGET_H
+#endif // TABLECOMBOBOX_H

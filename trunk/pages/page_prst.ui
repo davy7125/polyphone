@@ -949,7 +949,7 @@
   <customwidget>
    <class>TableComboBox</class>
    <extends>QComboBox</extends>
-   <header>page.h</header>
+   <header>tablecombobox.h</header>
    <slots>
     <signal>clicked(int,int)</signal>
     <signal>editingFinished()</signal>
@@ -958,7 +958,7 @@
   <customwidget>
    <class>ComboBox</class>
    <extends>QComboBox</extends>
-   <header>page.h</header>
+   <header>combobox.h</header>
    <slots>
     <signal>clicked(int)</signal>
    </slots>
