@@ -1272,10 +1272,12 @@ void PageTable::reselect()
     this->table->clearSelection();
     this->table->setSelectionMode(QAbstractItemView::MultiSelection);
     QList<EltID> listID = this->tree->getAllIDs();
+    this->table->setRowHidden(0, false); // Selection will be on a visible row
     foreach (EltID id, listID)
         this->select(id);
     this->table->setSelectionMode(QAbstractItemView::ExtendedSelection);
     customizeKeyboard();
+    this->table->setRowHidden(0, true); // It's now hidden again
 }
 
 void PageTable::select(EltID id)
@@ -1290,7 +1292,7 @@ void PageTable::select(EltID id)
                 (id.indexElt2 == id2.indexElt2 || id.typeElement == elementInst || id.typeElement == elementPrst))
         {
             table->blockSignals(true);
-            this->table->item(1, i)->setSelected(true);
+            this->table->item(0, i)->setSelected(true);
             table->blockSignals(false);
             max = this->table->horizontalScrollBar()->maximum();
             if (max / this->table->columnCount() > 62)

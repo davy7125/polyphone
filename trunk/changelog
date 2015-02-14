@@ -1,4 +1,9 @@
-polyphone (1.5) unstable; urgency=low
+polyphone (1.6) unstable; urgency=low
+ * (fix) selection in the tree now updates the virtual keyboard
+ * (fix) small bug when a new value is inserted in the table
+
+
+polyphone (1.5) UNRELEASED; urgency=low
 
  * italian translation
  * transposition tool
