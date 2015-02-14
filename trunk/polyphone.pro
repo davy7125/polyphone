@@ -237,7 +237,9 @@ HEADERS  += mainwindow.h \
     sfark/sfarkglobal.h \
     sfark/sfarkfilemanager.h \
     sfark/sfarkextractor.h \
-    gui_divers/dialogselection.h
+    gui_divers/dialogselection.h \
+    pages/combobox.h \
+    pages/tablecombobox.h
 
 FORMS    += mainwindow.ui \
     gui_divers/config.ui \

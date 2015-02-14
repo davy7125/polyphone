@@ -413,12 +413,16 @@ void TableDelegate::setEditorData(QWidget *editor, const QModelIndex &index) con
         QDoubleSpinBox * spin = (QDoubleSpinBox *)editor;
         if (!index.data().isNull())
             spin->setValue(index.data().toString().replace(",", ".").toDouble());
+        else
+            spin->setValue(0);
     }
     else
     {
         QSpinBox * spin = (QSpinBox *)editor;
         if (!index.data().isNull())
             spin->setValue(index.data().toString().toInt());
+        else
+            spin->setValue(0);
     }
 }
 
