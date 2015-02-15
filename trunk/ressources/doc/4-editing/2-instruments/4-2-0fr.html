@@ -10,13 +10,15 @@
 	Etendue de vélocité sur laquelle le son sera entendu. Il est possible de définir plusieurs sons pour la même note, avec des étendues de vélocités différentes (pour distinguer plusieurs nuances d'une touche de piano par exemple).
 	</li>
 	<li><b>Atténuation</b><br />
-	Atténuation s'appliquant au son.
+	Atténuation s'appliquant au son en décibel.<br />
+Note: le format sf2 ne permet pas à cette valeur d'être négative, aucune amplification n'est donc possible.
 	</li>
 	<li><b>Balance</b><br />
 	Balance s'appliquant au son, pour l'entendre plus à gauche ou plus à droite en stéréo.
 	</li>
 	<li><b>Lecture en boucle</b><br />
-	0 indique que le son est reproduit sans boucle, 1 indique que le son boucle continuellement, 3 indique que le son boucle pendant le temps de l'appui sur la touche puis se termine par le reste de l'échantillon.
+	«&#160;0&#160;» indique que le son est reproduit sans boucle, «&#160;1&#160;» indique que le son boucle continuellement, «&#160;3&#160;» indique que le son boucle pendant le temps de l'appui sur la touche puis se termine par le reste de l'échantillon.<br />
+Note: le format sf2 n'a pas prévu de mode de lecture spécial pour déclencher un son sur le relâchement d'une note. L'une des manières de réaliser ce comportement est de doubler chaque échantillon avec un échantillon contenant une courte boucle silencieuse suivi du son à émettre sur le relâchement. L'échantillon ajouté devra être lu avec le paramètre de lecture en boucle «&#160;3&#160;».
 	</li>
 	<li><b>Note de base</b><br />
 	Permet de modifier la note de base d'un son, pour l'entendre à une note différente de celle qui lui était normalement destinée.

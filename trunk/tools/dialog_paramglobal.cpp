@@ -76,6 +76,7 @@ DialogParamGlobal::DialogParamGlobal(Pile_sf2 *sf2, EltID id, QWidget *parent) :
                    << champ_reverbEffectsSend;
 
     ui->setupUi(this);
+    this->setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint);
     if (id.typeElement == elementPrst || id.typeElement == elementPrstInst)
     {
         this->ui->pushApplyToOthers->setText(trUtf8("Appliquer à d'autres presets..."));

@@ -72,6 +72,7 @@ DialogVisualizer::DialogVisualizer(Pile_sf2 *sf2, EltID id, QWidget *parent) :
                    << champ_reverbEffectsSend;
 
     ui->setupUi(this);
+    this->setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint);
     _isPrst = id.typeElement == elementPrst || id.typeElement == elementPrstInst;
 
     Config * conf = Config::getInstance();
