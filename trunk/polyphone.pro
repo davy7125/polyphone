@@ -59,11 +59,12 @@ unix:!macx{
 }
 macx {
     QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.6
+    QMAKE_MAC_SDK = macosx10.9
     DEFINES += __MACOSX_CORE__ USE_LOCAL_LIBRARIES
     INCLUDEPATH += lib/mac/Jackmp.framework/Headers \
         lib
     HEADERS += lib/portaudio.h
-    LIBS += -Llib/mac -lportaudio -F$$(PWD)lib/mac/ -framework Jackmp \
+    LIBS += -L$$PWD/lib/mac -lportaudio -F$$PWD/lib/mac/ -framework Jackmp \
         -framework CoreAudio -framework CoreMIDI -framework CoreFoundation \
         -framework AudioUnit -framework AudioToolbox -framework Cocoa -lz
     ICON = polyphone.icns
