@@ -39,7 +39,7 @@ class DialogExport : public QDialog
     Q_OBJECT
     
 public:
-    explicit DialogExport(Pile_sf2 * sf2, EltID idSf2, QWidget *parent = 0);
+    DialogExport(Pile_sf2 * sf2, EltID idSf2, QWidget *parent = 0);
     ~DialogExport();
     
 private slots:
@@ -48,7 +48,6 @@ private slots:
     void on_pushFolder_clicked();
     void on_pushAnnuler_clicked();
     void on_pushExport_clicked();
-
     void on_comboFormat_currentIndexChanged(int index);
 
 signals:

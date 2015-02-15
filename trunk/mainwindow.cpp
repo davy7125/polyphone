@@ -55,6 +55,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent, Qt::Window | Qt::W
     _isSustainOn(false)
 {
     ui->setupUi(this);
+    this->setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint);
     configuration = Config::getInstance(this, ui->widgetKeyboard);
 #if QT_VERSION >= QT_VERSION_CHECK(4, 7, 0)
     ui->editSearch->setPlaceholderText(trUtf8("Rechercher..."));
@@ -1858,7 +1859,7 @@ void MainWindow::nouvelInstrument()
     if (nb == 0) return;
     EltID id = ui->arborescence->getFirstID();
     bool ok;
-    QString name = QInputDialog::getText(this, QString::fromUtf8(" "), trUtf8("Nom du nouvel instrument :"), QLineEdit::Normal, "", &ok);
+    QString name = QInputDialog::getText(this, trUtf8("Créer un nouvel instrument"), trUtf8("Nom du nouvel instrument :"), QLineEdit::Normal, "", &ok);
     if (ok && !name.isEmpty())
     {
         sf2->prepareNewActions();
@@ -1893,7 +1894,7 @@ void MainWindow::nouveauPreset()
         id.typeElement = elementInst;
         text = this->sf2->getQstr(id, champ_name);
     }
-    QString name = QInputDialog::getText(this, " ", trUtf8("Nom du nouveau preset :"), QLineEdit::Normal, text, &ok);
+    QString name = QInputDialog::getText(this, trUtf8("Créer un nouveau preset"), trUtf8("Nom du nouveau preset :"), QLineEdit::Normal, text, &ok);
     if (ok && !name.isEmpty())
     {
         Valeur val;

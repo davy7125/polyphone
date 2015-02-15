@@ -33,6 +33,7 @@ DialogMixture::DialogMixture(QWidget *parent) :
     ui(new Ui::DialogMixture)
 {
     ui->setupUi(this);
+    this->setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint);
 
     // Chargement des valeurs
     Config * conf = Config::getInstance();

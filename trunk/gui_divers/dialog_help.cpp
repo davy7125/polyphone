@@ -103,6 +103,9 @@ void DialogHelp::createUi()
     // Redimensionnement et nom de la fenêtre
     this->resize(700, 400);
     this->setWindowTitle("Polyphone - " + trUtf8("aide"));
+
+    // Boutons de la fenêtre
+    this->setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint);
 }
 
 void DialogHelp::fillTree()

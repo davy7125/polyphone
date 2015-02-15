@@ -35,6 +35,7 @@ DialogExport::DialogExport(Pile_sf2 *sf2, EltID idSf2, QWidget *parent) :
 {
     ui->setupUi(this);
     this->setAttribute(Qt::WA_DeleteOnClose, true);
+    this->setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint);
 
     // Remplissage de la liste
     idSf2.typeElement = elementPrst;
