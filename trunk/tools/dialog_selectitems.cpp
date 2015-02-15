@@ -31,6 +31,7 @@ DialogSelectItems::DialogSelectItems(EltID id, QList<EltID> listChecked, Pile_sf
     _sf2(sf2)
 {
     ui->setupUi(this);
+    this->setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint);
     if (id.typeElement == elementInstSmpl)
         id.typeElement = elementInst;
     else if (id.typeElement == elementPrstInst)

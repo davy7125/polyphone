@@ -1,4 +1,6 @@
 polyphone (1.6) unstable; urgency=low
+
+ * (fix) removed useless help buttons in dialogs, which was visible on mac
  * (fix) selection in the tree now updates the virtual keyboard
  * (fix) small bug when a new value is inserted in the table
 

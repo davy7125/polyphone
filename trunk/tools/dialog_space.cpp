@@ -35,6 +35,7 @@ DialogSpace::DialogSpace(bool isPrst, int noteMin, int noteMax, QWidget *parent)
     _noteMax(noteMax)
 {
     ui->setupUi(this);
+    this->setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint);
     Config * conf = Config::getInstance();
     ui->comboMotif->blockSignals(true);
     ui->comboMotif->setCurrentIndex(conf->getTools_i_space_motif(isPrst));

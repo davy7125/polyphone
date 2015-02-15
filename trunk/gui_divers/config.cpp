@@ -50,6 +50,7 @@ Config::Config(QWidget *parent, PianoKeybdCustom *keyboard) : QDialog(parent),
     _keyboard(keyboard)
 {
     ui->setupUi(this);
+    this->setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint);
 
 #ifdef Q_OS_MAC
     ui->groupBox->layout()->setMargin(10);

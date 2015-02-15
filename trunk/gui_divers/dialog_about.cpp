@@ -31,6 +31,7 @@ DialogAbout::DialogAbout(QWidget *parent) :
     ui(new Ui::DialogAbout)
 {
     ui->setupUi(this);
+    this->setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint);
     ui->labelNomVersion->setText("Polyphone " + QString(VERSION));
 
     // Description

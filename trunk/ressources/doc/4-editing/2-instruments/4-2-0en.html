@@ -10,13 +10,15 @@
 	Velocity range for which the sound will be heard. It is possible to set different sounds for the same note, with different velocity ranges (to distinguish different nuances of a piano key for example).
 	</li>
 	<li><b>Attenuation</b><br />
-	Attenuation applied to sample.
+	Attenuation in decibel applied to the sample.<br />
+Note: the sf2 format doesn't allow this value to be negative, no amplification is thus possible.
 	</li>
 	<li><b>Pan</b><br />
 	Balance applied to the sound, to hear it to the left or to the right in stereo.
 	</li>
 	<li><b>Loop playback</b><br />
-	0 indicates a sound reproduced with no loop, 1 indicates a sound which loops continuously, 3 indicates a sound which loops for the duration of key depression and then proceeds to play the remainder of the sample.
+	"0" indicates a sound reproduced with no loop, "1" indicates a sound which loops continuously, "3" indicates a sound which loops for the duration of key depression and then proceeds to play the remainder of the sample.<br />
+Note: the sf2 format had no plans for a special playback mode which triggers a sample when a key is released. One way to achieve this behavior is to double each sample with a sample containing a short silent loop followed by the sound to emit on the release. The added sample will be read with the playback parameter "3".
 	</li>
 	<li><b>Rootkey</b><br />
 	Allows you to change the normal rootkey of a sample to a different note from that usually used.

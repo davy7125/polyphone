@@ -31,6 +31,7 @@ DialogCeleste::DialogCeleste(QWidget *parent) :
     ui(new Ui::DialogCeleste)
 {
     ui->setupUi(this);
+    this->setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint);
     Config * conf = Config::getInstance();
     ui->doubleSpinHerz->setValue(conf->getTools_i_celeste_herzDo());
     ui->doubleSpinDiv->setValue(conf->getTools_i_celeste_division());
