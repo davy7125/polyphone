@@ -71,7 +71,6 @@ PianoScene::PianoScene (const int startKey, const int numKeys, PianoScene *previ
     m_startKey(startKey),
     m_minNote(0),
     m_maxNote(127),
-    m_rawkbd(false),
     m_ratio((double)width() / (double)height())
 {
     // Initialisation
@@ -113,6 +112,7 @@ void PianoScene::initConfiguration(PianoScene * previousScene)
         m_lastNoteDown = previousScene->m_lastNoteDown;
         m_lastNoteLeft = previousScene->m_lastNoteLeft;
         m_lastNoteRight = previousScene->m_lastNoteRight;
+        m_currentArrow = previousScene->m_currentArrow;
     }
     else
     {
@@ -123,8 +123,8 @@ void PianoScene::initConfiguration(PianoScene * previousScene)
         m_mousePressed = false;
         m_channel = 0;
         m_velocity = 127;
-        m_lastVelocity= 127;
-        m_lastNote= 48;
+        m_lastVelocity = 127;
+        m_lastNote = 48;
         m_autoVelocity = true;
         m_colorationType = PianoKeybd::COLORATION_TYPE_UNIQUE;
         m_transpose = 0;
@@ -158,6 +158,7 @@ void PianoScene::initConfiguration(PianoScene * previousScene)
         m_lastNoteDown = 48;
         m_lastNoteLeft = 48;
         m_lastNoteRight = 48;
+        m_currentArrow = 0;
     }
 }
 
@@ -260,8 +261,8 @@ QSize PianoScene::sizeHint() const
 
 void PianoScene::showKeyOn(PianoKey* key, int vel, int channel)
 {
-//    if (vel == -1)
-//        vel = m_velocity;
+    //    if (vel == -1)
+    //        vel = m_velocity;
     if (channel == -1)
         channel = m_channel;
     if (vel >= 0)
@@ -310,7 +311,7 @@ void PianoScene::showNoteOn(const int note, int vel, int channel)
 {
     int n = note - m_transpose;
     if ((note >= m_minNote) && (note <= m_maxNote) && m_keys.contains(n))
-            showKeyOn(m_keys.value(n), vel, channel);
+        showKeyOn(m_keys.value(n), vel, channel);
 }
 
 void PianoScene::showNoteOff(const int note, int channel)
@@ -328,8 +329,8 @@ void PianoScene::triggerNoteOn(const int note, const int vel)
     if ((n >= m_minNote) && (n <= m_maxNote))
         emit noteOn(n, vel);
     
-    m_lastVelocity= vel;
-    m_lastNote= note;
+    m_lastVelocity = vel;
+    m_lastNote = note;
 }
 
 void PianoScene::triggerNoteOff( const int note )
@@ -346,7 +347,7 @@ int PianoScene::getKeyVelocity()
         vel = m_lastVelocity;
     }else{
         vel = m_velocity;
-    } 
+    }
     return vel;
 }
 
@@ -462,50 +463,49 @@ void PianoScene::mouseReleaseEvent(QGraphicsSceneMouseEvent * mouseEvent)
 
 void PianoScene::keyPressEvent(QKeyEvent * keyEvent)
 {
-    if ( m_keyboardEnabled)
+    if (m_keyboardEnabled)
     {
-        if (keyEvent->key() == Qt::Key_Up){
-            if(m_lastVelocity<127){
-                m_lastNoteUp = m_lastNote;
-                keyNoteOn(m_lastNoteUp, m_lastVelocity+1);
-            }else{
-                m_lastNoteUp = m_lastNote;
-                keyNoteOn(m_lastNoteUp, 127);
-            }
-        }else if(keyEvent->key() == Qt::Key_Down){
-            if(m_lastVelocity>1){
-                m_lastNoteDown = m_lastNote;
-                keyNoteOn(m_lastNoteDown, m_lastVelocity-1);
-            }else{
-                m_lastNoteDown = m_lastNote;
-                keyNoteOn(m_lastNoteDown, 1);
-            }
-        }else if (keyEvent->key() == Qt::Key_Right){
-            if(m_lastNote<127){
-                m_lastNoteRight = m_lastNote+1;
-                keyNoteOn(m_lastNoteRight, m_lastVelocity);
-            }else{
-                m_lastNoteRight = 127;
-                keyNoteOn(m_lastNoteRight, m_lastVelocity);
-            }
-        }else if(keyEvent->key() == Qt::Key_Left){
-            if(m_lastNote>0){
-                m_lastNoteLeft = m_lastNote-1;
-                keyNoteOn(m_lastNoteLeft, m_lastVelocity);
-            }else{
-                m_lastNoteLeft = 0;
-                keyNoteOn(m_lastNoteLeft, m_lastVelocity); 
-            }
-        }else if ( !m_rawkbd && !keyEvent->isAutoRepeat() ) // ignore auto-repeats
+        if (!keyEvent->isAutoRepeat()) // ignore auto-repeats
         {
-            QString modifier;
-            if (keyEvent->modifiers() & Qt::ShiftModifier)
-                modifier = "Shift+";
-            QString key = QKeySequence(keyEvent->key()).toString();
-            QKeySequence(modifier + key);
-            int note = m_keybdMap->getKey(QKeySequence(modifier + key));
-            if (note > -1)
-                keyNoteOn(note, getKeyVelocity());
+            if (keyEvent->key() == Qt::Key_Up && m_currentArrow == 0)
+            {
+                int modif = keyEvent->modifiers() & Qt::ShiftModifier ? 10 : 1;
+                m_lastNoteUp = m_lastNote;
+                keyNoteOn(m_lastNoteUp, qMin(127, m_lastVelocity + modif));
+                m_currentArrow = 1;
+            }
+            else if (keyEvent->key() == Qt::Key_Down && m_currentArrow == 0)
+            {
+                int modif = keyEvent->modifiers() & Qt::ShiftModifier ? 10 : 1;
+                m_lastNoteDown = m_lastNote;
+                keyNoteOn(m_lastNoteDown, qMax(1, m_lastVelocity - modif));
+                m_currentArrow = 2;
+            }
+            else if (keyEvent->key() == Qt::Key_Right && m_currentArrow == 0)
+            {
+                int modif = keyEvent->modifiers() & Qt::ShiftModifier ? 6 : 1;
+                m_lastNoteRight = qMin(127, m_lastNote + modif);
+                keyNoteOn(m_lastNoteRight, m_lastVelocity);
+                m_currentArrow = 3;
+            }
+            else if (keyEvent->key() == Qt::Key_Left && m_currentArrow == 0)
+            {
+                int modif = keyEvent->modifiers() & Qt::ShiftModifier ? 6 : 1;
+                m_lastNoteLeft = qMax(0, m_lastNote - modif);
+                keyNoteOn(m_lastNoteLeft, m_lastVelocity);
+                m_currentArrow = 4;
+            }
+            else
+            {
+                QString modifier;
+                if (keyEvent->modifiers() & Qt::ShiftModifier)
+                    modifier = "Shift+";
+                QString key = QKeySequence(keyEvent->key()).toString();
+                QKeySequence(modifier + key);
+                int note = m_keybdMap->getKey(QKeySequence(modifier + key));
+                if (note > -1)
+                    keyNoteOn(note, getKeyVelocity());
+            }
         }
         keyEvent->accept();
         return;
@@ -517,24 +517,39 @@ void PianoScene::keyReleaseEvent(QKeyEvent * keyEvent)
 {
     if (m_keyboardEnabled)
     {
-        if (keyEvent->key() == Qt::Key_Up){
-            keyNoteOff(m_lastNoteUp);
-        }else if(keyEvent->key() == Qt::Key_Down){
-            keyNoteOff(m_lastNoteDown);
-        }else if (keyEvent->key() == Qt::Key_Right){
-            keyNoteOff(m_lastNoteRight);
-        }else if(keyEvent->key() == Qt::Key_Left){
-            keyNoteOff(m_lastNoteLeft);
-        }else if ( !m_rawkbd && !keyEvent->isAutoRepeat() ) // ignore auto-repeats
+        if (!keyEvent->isAutoRepeat()) // ignore auto-repeats
         {
-            QString modifier;
-            if (keyEvent->modifiers() & Qt::ShiftModifier)
-                modifier = "Shift+";
-            QString key = QKeySequence(keyEvent->key()).toString();
-            QKeySequence(modifier + key);
-            int note = m_keybdMap->getKey(QKeySequence(modifier + key));
-            if (note > -1)
-                keyNoteOff(note);
+            if (keyEvent->key() == Qt::Key_Up && m_currentArrow == 1)
+            {
+                keyNoteOff(m_lastNoteUp);
+                m_currentArrow = 0;
+            }
+            else if (keyEvent->key() == Qt::Key_Down && m_currentArrow == 2)
+            {
+                keyNoteOff(m_lastNoteDown);
+                m_currentArrow = 0;
+            }
+            else if (keyEvent->key() == Qt::Key_Right && m_currentArrow == 3)
+            {
+                keyNoteOff(m_lastNoteRight);
+                m_currentArrow = 0;
+            }
+            else if(keyEvent->key() == Qt::Key_Left && m_currentArrow == 4)
+            {
+                keyNoteOff(m_lastNoteLeft);
+                m_currentArrow = 0;
+            }
+            else
+            {
+                QString modifier;
+                if (keyEvent->modifiers() & Qt::ShiftModifier)
+                    modifier = "Shift+";
+                QString key = QKeySequence(keyEvent->key()).toString();
+                QKeySequence(modifier + key);
+                int note = m_keybdMap->getKey(QKeySequence(modifier + key));
+                if (note > -1)
+                    keyNoteOff(note);
+            }
         }
         keyEvent->accept();
         return;
@@ -562,28 +577,28 @@ bool PianoScene::event(QEvent *event)
                 case Qt::TouchPointStationary:
                     continue;
                 case Qt::TouchPointReleased: {
-                        PianoKey* key = getKeyForPos(touchPoint.scenePos());
-                        if (key != NULL && key->isPressed())
-                            keyOff(key);
-                        break;
-                    }
+                    PianoKey* key = getKeyForPos(touchPoint.scenePos());
+                    if (key != NULL && key->isPressed())
+                        keyOff(key);
+                    break;
+                }
                 case Qt::TouchPointPressed: {
-                        PianoKey* key = getKeyForPos(touchPoint.scenePos());
-                        if (key != NULL && !key->isPressed()) {
-                            keyOn(key, touchPoint.pressure());
-                            key->ensureVisible();
-                        }
-                        break;
+                    PianoKey* key = getKeyForPos(touchPoint.scenePos());
+                    if (key != NULL && !key->isPressed()) {
+                        keyOn(key, touchPoint.pressure());
+                        key->ensureVisible();
                     }
+                    break;
+                }
                 case Qt::TouchPointMoved: {
-                        PianoKey* key = getKeyForPos(touchPoint.scenePos());
-                        PianoKey* lastkey = getKeyForPos(touchPoint.lastScenePos());
-                        if ((lastkey != NULL) && (lastkey != key) && lastkey->isPressed())
-                            keyOff(lastkey);
-                        if ((key != NULL) && !key->isPressed())
-                            keyOn(key, touchPoint.pressure());
-                        break;
-                    }
+                    PianoKey* key = getKeyForPos(touchPoint.scenePos());
+                    PianoKey* lastkey = getKeyForPos(touchPoint.lastScenePos());
+                    if ((lastkey != NULL) && (lastkey != key) && lastkey->isPressed())
+                        keyOff(lastkey);
+                    if ((key != NULL) && !key->isPressed())
+                        keyOn(key, touchPoint.pressure());
+                    break;
+                }
                 default:
                     break;
                 }
@@ -774,12 +789,6 @@ void PianoScene::setTranspose(const int transpose)
         m_transpose = transpose;
         refreshLabels();
     }
-}
-
-void PianoScene::setRawKeyboardMode(bool b)
-{
-    if (m_rawkbd != b)
-        m_rawkbd = b;
 }
 
 void PianoScene::setKeyboardEnabled(const bool enable)
