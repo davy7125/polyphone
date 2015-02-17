@@ -34,7 +34,6 @@ PianoKeybd::PianoKeybd(QWidget *parent, const int startKey, const int numKeys) :
 
 PianoKeybd::~PianoKeybd()
 {
-    m_scene->setRawKeyboardMode(false);
     delete m_scene;
     delete m_keyboardMap;
 }

@@ -77,8 +77,6 @@ public:
     void allKeysOff();
     void keyNoteOn( const int note , const int velo);
     void keyNoteOff( const int note);
-    bool getRawKeyboardMode() const { return m_rawkbd; }
-    void setRawKeyboardMode(const bool b);
     int getVelocity() { return m_velocity; }
     void setVelocity(const int velocity) { m_velocity = m_lastVelocity = velocity; }
     int getChannel() const { return m_channel; }
@@ -123,7 +121,6 @@ private:
     int m_minNote;
     int m_maxNote;
     int m_transpose;
-    bool m_rawkbd;
     bool m_keyboardEnabled;
     bool m_mouseEnabled;
     bool m_touchEnabled;
@@ -136,6 +133,7 @@ private:
     int m_lastNoteDown;
     int m_lastNoteLeft;
     int m_lastNoteRight;
+    int m_currentArrow;
     int m_channel;
     PianoKeybd::LabelType m_labelType;
     PianoKeybd::MiddleKey m_middleC;
