@@ -1737,8 +1737,8 @@ void MainWindow::exporterSmpl()
                     id2.typeElement = elementSmpl;
 
                     // Nom du fichier
-                    QString nom1 = sf2->getQstr(id, champ_name);
-                    QString nom2 = sf2->getQstr(id2, champ_name);
+                    QString nom1 = sf2->getQstr(id, champ_name).replace(QRegExp("[:<>\"/\\\\\\*\\?\\|]"), "_");
+                    QString nom2 = sf2->getQstr(id2, champ_name).replace(QRegExp("[:<>\"/\\\\\\*\\?\\|]"), "_");
                     int nb = Sound::lastLettersToRemove(nom1, nom2);
                     qStr.append(nom1.left(nom1.size() - nb));
 
@@ -1759,7 +1759,7 @@ void MainWindow::exporterSmpl()
                 {
                     sampleID2 = -1;
                     // Nom du fichier
-                    qStr.append(this->sf2->getQstr(id, champ_name));
+                    qStr.append(this->sf2->getQstr(id, champ_name).replace(QRegExp("[:<>\"/\\\\\\*\\?\\|]"), "_"));
                     // Mise à jour des états d'exporations
                     status[sampleID] = 1;
                 }
@@ -1777,6 +1777,8 @@ void MainWindow::exporterSmpl()
                         file.setFileName(qStr2.append(QString("-%1.wav").arg(indice)));
                     } while (file.exists());
                 }
+                qStr2 = qStr2;
+
                 // Exportation
                 if (sampleID2 == -1)
                     Sound::exporter(qStr2, this->sf2->getSon(id));
@@ -1815,7 +1817,7 @@ void MainWindow::exporter(QList<EltID> listID, QString dir, int format, bool pre
         // Copie des infos
         EltID idSf2Source = listID.at(0);
         idSf2Source.typeElement = elementSf2;
-        QString name = sf2->getQstr(idSf2Source, champ_name);
+        QString name = sf2->getQstr(idSf2Source, champ_name).replace(QRegExp("[:<>\"/\\\\\\*\\?\\|]"), "_");
         newSf2.set(idDest, champ_name, name);
         newSf2.set(idDest, champ_ISNG, sf2->getQstr(idSf2Source, champ_ISNG));
         newSf2.set(idDest, champ_IROM, sf2->getQstr(idSf2Source, champ_IROM));

@@ -3,6 +3,7 @@ polyphone (1.6) unstable; urgency=low
  * In the virtual keyboard, using "shift" with an arrow allows a quicker move
  * (fix) repetition is ignored when using arrow keys in the virtual keyboard
  * (fix) removed useless help buttons in dialogs, which was visible on mac
+ * (fix) forbidden characters are replaced by "_" when exporting files
  * (fix) selection in the tree now updates the virtual keyboard
  * (fix) small bug when a new value is inserted in the table
 
