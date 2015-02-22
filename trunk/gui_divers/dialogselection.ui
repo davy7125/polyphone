@@ -3,7 +3,7 @@
  <class>DialogSelection</class>
  <widget class="QDialog" name="DialogSelection">
   <property name="windowModality">
-   <enum>Qt::WindowModal</enum>
+   <enum>Qt::ApplicationModal</enum>
   </property>
   <property name="geometry">
    <rect>

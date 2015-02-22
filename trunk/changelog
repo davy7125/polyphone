@@ -1,11 +1,15 @@
 polyphone (1.6) unstable; urgency=low
 
- * In the virtual keyboard, using "shift" with an arrow allows a quicker move
+ * Possibility to export presets from different soundfonts to one sf2
+ * Export of samples from different soundfonts is allowed
+ * In the virtual keyboard, using "shift" with an arrow makes a quicker move
  * (fix) repetition is ignored when using arrow keys in the virtual keyboard
- * (fix) removed useless help buttons in dialogs, which was visible on mac
+ * (fix) "0" was not selected when a new value is inserted in the table
  * (fix) forbidden characters are replaced by "_" when exporting files
  * (fix) selection in the tree now updates the virtual keyboard
- * (fix) small bug when a new value is inserted in the table
+ * (fix) GUI fix for mac
+
+ -- Davy Triponney <davy.triponney@gmail.com>  XXX, XX Mar 2015 11:15:10 +0100
 
 
 polyphone (1.5) UNRELEASED; urgency=low
@@ -129,7 +133,7 @@ polyphone (0.9) UNRELEASED; urgency=low
   * added spatializer in the preset level
   * fixed minor bugs related to copy/paste or drag & drop in the tree
 
- -- Davy Triponney <davy.triponney@gmail.com>  Tue, 21 Jul 2013 13:31:25 +0100
+ -- Davy Triponney <davy.triponney@gmail.com>  Tue, 20 Aug 2013 15:08:47 +0100
 
 
 polyphone (0.8) UNRELEASED; urgency=low

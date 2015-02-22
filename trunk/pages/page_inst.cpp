@@ -77,6 +77,7 @@ Page_Inst::Page_Inst(QWidget *parent) :
     QFont font = this->table->font();
     font.setPixelSize(10);
     this->table->setFont(font);
+    ui->horizontalLayout_2->setSpacing(15);
 #endif
 
     connect(this->table, SIGNAL(actionBegin()), this, SLOT(actionBegin()));
