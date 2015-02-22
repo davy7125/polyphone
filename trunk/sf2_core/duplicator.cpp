@@ -36,6 +36,19 @@ Duplicator::Duplicator(Pile_sf2 *source, Pile_sf2 *destination, QWidget * parent
     _presetFull(false),
     _displayWarningGlobal(Config::getInstance()->getActivationWarning_GlobalNotOverwritten())
 {
+    // Initial counts
+    EltID id = EltID(elementSf2, -1, -1, -1, -1);
+    int nbSf2 = _destination->count(id);
+    for (int indexSf2 = 0; indexSf2 < nbSf2; indexSf2++)
+    {
+        id.indexSf2 = indexSf2;
+        id.typeElement = elementSmpl;
+        _initialSmplCount << destination->count(id);
+        id.typeElement = elementInst;
+        _initialInstCount << destination->count(id);
+        id.typeElement = elementPrst;
+        _initialPrstCount << destination->count(id);
+    }
 }
 
 void Duplicator::copy(EltID idSource, EltID idDest)
@@ -264,13 +277,13 @@ void Duplicator::copyGlobal(EltID idSource, EltID idDest)
 // idDest   : indexSf2 différent ou provenant d'un autre fichier
 void Duplicator::copySmpl(EltID idSource, EltID idDest)
 {
-    // Recherche si un sample du même nom existe déjà
+    // Recherche si un sample du même nom existe déjà dans les éléments initiaux
     idDest.typeElement = elementSmpl;
     QString nom = _source->getQstr(idSource, champ_name);
     int index = -1;
     if (_copieSmpl != DUPLIQUER_TOUT)
     {
-        for (int j = 0; j < _destination->count(idDest); j++)
+        for (int j = 0; j < _initialSmplCount[idDest.indexSf2]; j++)
         {
             idDest.indexElt = j;
             if (!_destination->get(idDest, champ_hidden).bValue)
@@ -405,14 +418,14 @@ void Duplicator::copyInst(EltID idSource, EltID idDest)
         }
     }
 
-    // Recherche si un instrument du même nom existe déjà
+    // Recherche si un instrument du même nom existe déjà dans les éléments initiaux
     idSource.typeElement = elementInst;
     idDest.typeElement = elementInst;
     QString nom = _source->getQstr(idSource, champ_name);
     int index = -1;
     if (_copieInst != DUPLIQUER_TOUT)
     {
-        for (int j = 0; j < _destination->count(idDest); j++)
+        for (int j = 0; j < _initialInstCount[idDest.indexSf2]; j++)
         {
             idDest.indexElt = j;
             if (!_destination->get(idDest, champ_hidden).bValue)
@@ -505,14 +518,14 @@ void Duplicator::copyPrst(EltID idSource, EltID idDest)
         }
     }
 
-    // Recherche si un preset du même nom existe déjà
+    // Recherche si un preset du même nom existe déjà dans les éléments initiaux
     idSource.typeElement = elementPrst;
     idDest.typeElement = elementPrst;
     QString nom = _source->getQstr(idSource, champ_name);
     int index = -1;
     if (_copiePrst != DUPLIQUER_TOUT)
     {
-        for (int j = 0; j < _destination->count(idDest); j++)
+        for (int j = 0; j < _initialPrstCount[idDest.indexSf2]; j++)
         {
             idDest.indexElt = j;
             if (!_destination->get(idDest, champ_hidden).bValue)
@@ -844,7 +857,13 @@ bool Duplicator::isGlobalEmpty(EltID id)
 QString Duplicator::adaptName(QString nom, EltID idDest)
 {
     QStringList listName;
-    int nbElt = _destination->count(idDest);
+    int nbElt = 0;
+    if (idDest.typeElement == elementSmpl)
+        nbElt = _initialSmplCount[idDest.indexSf2];
+    else if (idDest.typeElement == elementInst)
+        nbElt = _initialInstCount[idDest.indexSf2];
+    else if (idDest.typeElement == elementPrst)
+        nbElt = _initialPrstCount[idDest.indexSf2];
     for (int j = 0; j < nbElt; j++)
     {
         idDest.indexElt = j;

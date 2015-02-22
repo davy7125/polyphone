@@ -28,35 +28,43 @@
 #include "config.h"
 #include <QFileDialog>
 
-DialogExport::DialogExport(Pile_sf2 *sf2, EltID idSf2, QWidget *parent) :
+DialogExport::DialogExport(Pile_sf2 *sf2, QList<EltID> listSf2, QWidget *parent) :
     QDialog(parent),
-    ui(new Ui::DialogExport),
-    _initialID(idSf2)
+    ui(new Ui::DialogExport)
 {
     ui->setupUi(this);
     this->setAttribute(Qt::WA_DeleteOnClose, true);
     this->setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint);
 
     // Remplissage de la liste
-    idSf2.typeElement = elementPrst;
-    char T[40];
-    for (int i = 0; i < sf2->count(idSf2); i++)
+    foreach (EltID id, listSf2)
     {
-        idSf2.indexElt = i;
-        if (!sf2->get(idSf2, champ_hidden).bValue)
-        {
-            sprintf(T, "%.3d:%.3d %s", sf2->get(idSf2, champ_wBank).wValue,
-                    sf2->get(idSf2, champ_wPreset).wValue,
-                    sf2->getQstr(idSf2, champ_name).toStdString().c_str());
-            QListWidgetItem * item = new QListWidgetItem(T);
-            item->setCheckState(Qt::Checked);
-            item->setData(Qt::UserRole, i);
-            ui->listPresets->addItem(item);
-        }
-    }
+        id.typeElement = elementSf2;
+        QTreeWidgetItem * rootItem = new QTreeWidgetItem(QStringList(sf2->getQstr(id, champ_name)));
+        ui->listPresets->addTopLevelItem(rootItem);
 
-    // Tri
-    ui->listPresets->sortItems();
+        id.typeElement = elementPrst;
+        int nbPrst = sf2->count(id);
+        for (int i = 0; i < nbPrst; i++)
+        {
+            id.indexElt = i;
+            if (!sf2->get(id, champ_hidden).bValue)
+            {
+                QTreeWidgetItem * item = new QTreeWidgetItem(
+                            QStringList() << QString("%1:%2   %3").arg(QString::number(sf2->get(id, champ_wBank).wValue), 3, QChar('0'))
+                            .arg(QString::number(sf2->get(id, champ_wPreset).wValue), 3, QChar('0'))
+                            .arg(sf2->getQstr(id, champ_name)));
+                item->setCheckState(0, Qt::Checked);
+                item->setData(0, Qt::UserRole, QPoint(id.indexSf2, id.indexElt));
+                rootItem->addChild(item);
+                rootItem->setExpanded(true);
+            }
+        }
+
+        // Tri
+        rootItem->sortChildren(0, Qt::AscendingOrder);
+    }
+    ui->listPresets->resizeColumnToContents(0);
 
     ui->comboFormat->setCurrentIndex(Config::getInstance()->getExportType());
     on_comboFormat_currentIndexChanged(ui->comboFormat->currentIndex());
@@ -75,15 +83,27 @@ DialogExport::~DialogExport()
 void DialogExport::on_pushTick_clicked()
 {
     // Tout sélectionner
-    for (int i = 0; i < ui->listPresets->count(); i++)
-        ui->listPresets->item(i)->setCheckState(Qt::Checked);
+    int nbTopLevelItems = ui->listPresets->topLevelItemCount();
+    for (int i = 0; i < nbTopLevelItems; i++)
+    {
+        QTreeWidgetItem * rootItem = ui->listPresets->topLevelItem(i);
+        int nbItems = rootItem->childCount();
+        for (int j = 0; j < nbItems; j++)
+            rootItem->child(j)->setCheckState(0, Qt::Checked);
+    }
 }
 
 void DialogExport::on_pushUntick_clicked()
 {
     // Tout décocher
-    for (int i = 0; i < ui->listPresets->count(); i++)
-        ui->listPresets->item(i)->setCheckState(Qt::Unchecked);
+    int nbTopLevelItems = ui->listPresets->topLevelItemCount();
+    for (int i = 0; i < nbTopLevelItems; i++)
+    {
+        QTreeWidgetItem * rootItem = ui->listPresets->topLevelItem(i);
+        int nbItems = rootItem->childCount();
+        for (int j = 0; j < nbItems; j++)
+            rootItem->child(j)->setCheckState(0, Qt::Unchecked);
+    }
 }
 
 void DialogExport::on_pushFolder_clicked()
@@ -103,23 +123,64 @@ void DialogExport::on_pushExport_clicked()
 {
     // Sauvegarde des paramètres
     Config::getInstance()->setExportType(ui->comboFormat->currentIndex());
-    if (QDir(ui->lineFolder->text()).exists())
+    if (!ui->lineFolder->text().isEmpty() && QDir(ui->lineFolder->text()).exists())
         Config::getInstance()->addFile(Config::typeFichierExport, ui->lineFolder->text() + "/soundfont.sfz");
     else
-        QDialog::close();
-
-    // Création liste ID
-    QList<EltID> listID;
-    EltID id = _initialID;
-    id.typeElement = elementPrst;
-    for (int i = 0; i < ui->listPresets->count(); i++)
     {
-        QListWidgetItem *checkBoxItem = ui->listPresets->item(i);
-        if (checkBoxItem->checkState() == Qt::Checked)
+        QMessageBox::warning(this, trUtf8("Attention"), trUtf8("Le répertoire n'est pas valide."));
+        return;
+    }
+
+    // Création liste des presets à exporter et comptage
+    int numberOfSoundfonts = 0;
+    int maxNumberOfPresets = 0;
+    QList<QList<EltID> > listID;
+    int nbRootItems = ui->listPresets->topLevelItemCount();
+    for (int i = 0; i < nbRootItems; i++)
+    {
+        int numberOfPresets = 0;
+        QList<EltID> subListID;
+        QTreeWidgetItem * rootItem = ui->listPresets->topLevelItem(i);
+        int nbItems = rootItem->childCount();
+        for (int j = 0; j < nbItems; j++)
         {
-            id.indexElt = checkBoxItem->data(Qt::UserRole).toInt();
-            listID.append(id);
+            QTreeWidgetItem * item = rootItem->child(j);
+            if (item->checkState(0) == Qt::Checked)
+            {
+                numberOfPresets++;
+                QPoint dataPoint = item->data(0, Qt::UserRole).toPoint();
+                subListID << EltID(elementPrst, dataPoint.x(), dataPoint.y(), 0, 0);
+            }
         }
+
+        if (numberOfPresets > 0)
+        {
+            listID << subListID;
+            numberOfSoundfonts++;
+            if (numberOfPresets > maxNumberOfPresets)
+                maxNumberOfPresets = numberOfPresets;
+        }
+    }
+
+    if (numberOfSoundfonts > 1)
+    {
+        if (maxNumberOfPresets > 127)
+        {
+            QMessageBox::warning(this, trUtf8("Attention"), trUtf8("Dans le cas où plusieurs soundfonts sont exportées, "
+                                                                   "le nombre maximal de presets par soundfont est de 127."));
+            return;
+        }
+        else if (numberOfSoundfonts > 127)
+        {
+            QMessageBox::warning(this, trUtf8("Attention"), trUtf8("Le nombre maximal de soundfonts à exporter est de 127."));
+            return;
+        }
+    }
+
+    if (maxNumberOfPresets == 0)
+    {
+        QMessageBox::warning(this, trUtf8("Attention"), trUtf8("Au moins un preset doit être sélectionné."));
+        return;
     }
 
     Config::getInstance()->setExportPreset(ui->checkPreset->isChecked());

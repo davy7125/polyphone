@@ -3,14 +3,14 @@
  <class>DialogSifflements</class>
  <widget class="QDialog" name="DialogSifflements">
   <property name="windowModality">
-   <enum>Qt::WindowModal</enum>
+   <enum>Qt::ApplicationModal</enum>
   </property>
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
     <width>249</width>
-    <height>138</height>
+    <height>144</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -21,7 +21,16 @@
     <normaloff>:/icones/icon</normaloff>:/icones/icon</iconset>
   </property>
   <layout class="QGridLayout" name="gridLayout">
-   <property name="margin">
+   <property name="leftMargin">
+    <number>6</number>
+   </property>
+   <property name="topMargin">
+    <number>6</number>
+   </property>
+   <property name="rightMargin">
+    <number>6</number>
+   </property>
+   <property name="bottomMargin">
     <number>6</number>
    </property>
    <property name="spacing">

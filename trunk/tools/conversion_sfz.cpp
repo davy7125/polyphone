@@ -107,8 +107,6 @@ void ConversionSfz::convert(QString dir, QList<EltID> listID, bool presetPrefix,
 
         exportPrst(sourceDir, listID.at(i), presetPrefix);
     }
-
-    return;
 }
 
 void ConversionSfz::exportPrst(QString dir, EltID id, bool presetPrefix)

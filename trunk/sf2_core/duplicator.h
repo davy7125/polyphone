@@ -60,6 +60,9 @@ private:
     EtatMessage _copieSmpl, _copieInst, _copiePrst;
     bool _presetFull, _displayWarningGlobal;
 
+    // Initial sample, instrument and preset counts
+    QList<int> _initialSmplCount, _initialInstCount, _initialPrstCount;
+
     // DEPLACEMENT DANS UN MEME SF2 //
     void linkSmpl(EltID idSource, EltID idDest);
     void linkInst(EltID idSource, EltID idDest);

@@ -3,7 +3,7 @@
  <class>DialogSpace</class>
  <widget class="QDialog" name="DialogSpace">
   <property name="windowModality">
-   <enum>Qt::WindowModal</enum>
+   <enum>Qt::ApplicationModal</enum>
   </property>
   <property name="geometry">
    <rect>
@@ -24,7 +24,16 @@
    <bool>true</bool>
   </property>
   <layout class="QGridLayout" name="gridLayout_2" columnstretch="100,0,0,0">
-   <property name="margin">
+   <property name="leftMargin">
+    <number>6</number>
+   </property>
+   <property name="topMargin">
+    <number>6</number>
+   </property>
+   <property name="rightMargin">
+    <number>6</number>
+   </property>
+   <property name="bottomMargin">
     <number>6</number>
    </property>
    <property name="spacing">
@@ -186,7 +195,16 @@
       <enum>QFrame::Sunken</enum>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_4">
-      <property name="margin">
+      <property name="leftMargin">
+       <number>0</number>
+      </property>
+      <property name="topMargin">
+       <number>0</number>
+      </property>
+      <property name="rightMargin">
+       <number>0</number>
+      </property>
+      <property name="bottomMargin">
        <number>0</number>
       </property>
       <item>
