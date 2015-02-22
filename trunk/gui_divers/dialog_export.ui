@@ -3,7 +3,7 @@
  <class>DialogExport</class>
  <widget class="QDialog" name="DialogExport">
   <property name="windowModality">
-   <enum>Qt::WindowModal</enum>
+   <enum>Qt::ApplicationModal</enum>
   </property>
   <property name="geometry">
    <rect>
@@ -58,13 +58,18 @@
     </layout>
    </item>
    <item>
-    <widget class="QListWidget" name="listPresets">
-     <property name="editTriggers">
-      <set>QAbstractItemView::NoEditTriggers</set>
-     </property>
-     <property name="alternatingRowColors">
-      <bool>true</bool>
-     </property>
+    <widget class="QTreeWidget" name="listPresets">
+     <attribute name="headerVisible">
+      <bool>false</bool>
+     </attribute>
+     <attribute name="headerDefaultSectionSize">
+      <number>120</number>
+     </attribute>
+     <column>
+      <property name="text">
+       <string notr="true">1</string>
+      </property>
+     </column>
     </widget>
    </item>
    <item>
@@ -188,7 +193,6 @@
  <tabstops>
   <tabstop>pushTick</tabstop>
   <tabstop>pushUntick</tabstop>
-  <tabstop>listPresets</tabstop>
   <tabstop>lineFolder</tabstop>
   <tabstop>comboFormat</tabstop>
   <tabstop>pushAnnuler</tabstop>

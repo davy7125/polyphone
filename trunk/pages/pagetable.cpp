@@ -335,7 +335,11 @@ void PageTable::afficheMod(EltID id, int selectedIndex)
     {
         _pushCopyMod->setMenu(_menu);
         _pushCopyMod->setStyleSheet("QPushButton { text-align: left; }");
+#ifdef Q_OS_MAC
+        _pushCopyMod->setMaximumWidth(43);
+#else
         _pushCopyMod->setMaximumWidth(38);
+#endif
         _pushCopyMod->setToolTip("");
     }
     else

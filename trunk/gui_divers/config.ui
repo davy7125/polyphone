@@ -3,14 +3,14 @@
  <class>Config</class>
  <widget class="QDialog" name="Config">
   <property name="windowModality">
-   <enum>Qt::WindowModal</enum>
+   <enum>Qt::ApplicationModal</enum>
   </property>
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
     <width>470</width>
-    <height>268</height>
+    <height>315</height>
    </rect>
   </property>
   <property name="windowTitle">

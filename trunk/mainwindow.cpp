@@ -954,9 +954,9 @@ void MainWindow::updateActions()
 {
     // Un élément est cliqué dans l'arborescence
     int nb;
-    bool fichierUnique = 1;
-    bool familleUnique = 1;
-    bool typeUnique = 1;
+    bool fichierUnique = true;
+    bool familleUnique = true;
+    bool typeUnique = true;
     ElementType type = elementUnknown;
     EltID id;
     // Modification du titre
@@ -972,6 +972,9 @@ void MainWindow::updateActions()
 
         // Affichage page logiciel
         ui->stackedWidget->setCurrentWidget(ui->page_Soft);
+
+        // Export soundfont
+        ui->actionExporter_en_tant_qu_sfz->setEnabled(false);
     }
     else
     {
@@ -1021,18 +1024,22 @@ void MainWindow::updateActions()
                 ui->stackedWidget->setCurrentWidget(ui->page_Soft);
             this->showKeyboard(false);
         }
+
+        // Export soundfonts and samples
+        ui->actionExporter_en_tant_qu_sfz->setEnabled(true);
+        ui->actionExporter->setEnabled(typeUnique &&
+                                       (id.typeElement == elementSmpl || id.typeElement == elementInstSmpl));
     }
 
     // ACTIVATION, DESACTIVATION DES COMMANDES
     if (fichierUnique)
     {
-        // Actions possibles : fermer, importer, coller, enregistrer sous, exporter sfz
+        // Actions possibles : fermer, importer, coller, enregistrer sous
         // Nouveau sample, instrument, preset
         ui->actionFermer_le_fichier->setEnabled(true);
         ui->actionImporter->setEnabled(true);
         ui->actionColler->setEnabled(true);
         ui->actionEnregistrer_sous->setEnabled(true);
-        ui->actionExporter_en_tant_qu_sfz->setEnabled(true);
         ui->actionNouveau_preset->setEnabled(true);
         ui->actionNouvel_instrument->setEnabled(true);
 
@@ -1070,12 +1077,6 @@ void MainWindow::updateActions()
             }
         }
 
-        // Action exporter
-        if ((typeUnique && type == elementSmpl) || (familleUnique && type == elementInstSmpl))
-            ui->actionExporter->setEnabled(true);
-        else
-            ui->actionExporter->setEnabled(false);
-
         // Outils
         this->enableActionSample(typeUnique && type == elementSmpl && !this->page_smpl->isPlaying());
         this->enableActionInstrument((type == elementInst || type == elementInstSmpl) && familleUnique);
@@ -1106,23 +1107,27 @@ void MainWindow::updateActions()
     else
     {
         // Action impossible : fermer
-        ui->actionFermer_le_fichier->setEnabled(0);
+        ui->actionFermer_le_fichier->setEnabled(false);
+
         // Action impossible : copier, coller, supprimer
-        ui->actionCopier->setEnabled(0);
-        ui->actionColler->setEnabled(0);
-        ui->action_Supprimer->setEnabled(0);
-        // Actions importer, exporter
-        ui->actionImporter->setEnabled(0);
-        ui->actionExporter->setEnabled(0);
-        // Actions enregistrer sous, exporter en sfz
-        ui->actionEnregistrer_sous->setEnabled(0);
-        ui->actionExporter_en_tant_qu_sfz->setEnabled(0);
+        ui->actionCopier->setEnabled(false);
+        ui->actionColler->setEnabled(false);
+        ui->action_Supprimer->setEnabled(false);
+
+        // Actions importer des échantillons
+        ui->actionImporter->setEnabled(false);
+
+        // Actions enregistrer sous
+        ui->actionEnregistrer_sous->setEnabled(false);
+
         // Nouveau sample, instrument, preset
-        ui->actionNouveau_preset->setEnabled(0);
-        ui->actionNouvel_instrument->setEnabled(0);
+        ui->actionNouveau_preset->setEnabled(false);
+        ui->actionNouvel_instrument->setEnabled(false);
+
         // Renommer, clavier, ...
-        ui->actionRenommer->setEnabled(0);
+        ui->actionRenommer->setEnabled(false);
         this->showKeyboard(false);
+
         // Outils
         this->enableActionSample(false);
         this->enableActionInstrument(false);
@@ -1690,29 +1695,23 @@ QString MainWindow::getName(QString name, int maxCharacters, int suffixNumber)
 void MainWindow::exporterSmpl()
 {
     QList<EltID> listIDs = ui->arborescence->getAllIDs();
-    int nbElt = listIDs.size();
-    if (nbElt == 0) return;
+    if (listIDs.isEmpty()) return;
     QString qDir = QFileDialog::getExistingDirectory(this, trUtf8("Choisir un répertoire de destination"),
                                                      Config::getInstance()->getLastDirectory(Config::typeFichierSample));
     if (qDir.isEmpty()) return;
-    qDir.append(QDir::separator());
-    QFile file;
-    EltID id = this->ui->arborescence->getFirstID();
-    id.typeElement = elementSmpl;
+    qDir += "/";
 
-    // Initialisation des états d'exportation des samples
-    int nbSmpl = this->sf2->count(id);
-    int * status = new int[nbSmpl];
-    for (int i = 0; i < nbSmpl; i++)
-        status[i] = 0;
+    // Mémorisation des samples exportés
+    QList<EltID> exportedSamples;
 
     // Exportation pour chaque sample
     int sampleID = -1;
     int sampleID2 = -1;
-    QString qStr, qStr2;
+    QString qStr;
     EltID id2;
     foreach (EltID id, listIDs)
     {
+        // Find EltID of the sample
         id2 = id;
         if (id.typeElement == elementSmpl)
             sampleID = id.indexElt;
@@ -1720,15 +1719,17 @@ void MainWindow::exporterSmpl()
             sampleID = this->sf2->get(id, champ_sampleID).wValue;
         else
             sampleID = -1;
+        id.typeElement = elementSmpl;
+        id.indexElt = sampleID;
+
         if (sampleID != -1)
         {
             // Vérification que le sample n'a pas déjà été exporté
-            if (status[sampleID] == 0)
+            if (!exportedSamples.contains(id))
             {
                 qStr = qDir;
+
                 // Stéréo ?
-                id.typeElement = elementSmpl;
-                id.indexElt = sampleID;
                 if (this->sf2->get(id, champ_sfSampleType).wValue != monoSample &&
                         this->sf2->get(id, champ_sfSampleType).wValue != RomMonoSample)
                 {
@@ -1737,10 +1738,10 @@ void MainWindow::exporterSmpl()
                     id2.typeElement = elementSmpl;
 
                     // Nom du fichier
-                    QString nom1 = sf2->getQstr(id, champ_name).replace(QRegExp("[:<>\"/\\\\\\*\\?\\|]"), "_");
-                    QString nom2 = sf2->getQstr(id2, champ_name).replace(QRegExp("[:<>\"/\\\\\\*\\?\\|]"), "_");
+                    QString nom1 = sf2->getQstr(id, champ_name);
+                    QString nom2 = sf2->getQstr(id2, champ_name);
                     int nb = Sound::lastLettersToRemove(nom1, nom2);
-                    qStr.append(nom1.left(nom1.size() - nb));
+                    qStr.append(nom1.left(nom1.size() - nb).replace(QRegExp("[:<>\"/\\\\\\*\\?\\|]"), "_"));
 
                     if (this->sf2->get(id, champ_sfSampleType).wValue == rightSample &&
                             this->sf2->get(id, champ_sfSampleType).wValue != RomRightSample)
@@ -1751,44 +1752,39 @@ void MainWindow::exporterSmpl()
                         id2 = idTmp;
                     }
 
-                    // Mise à jour des états d'exportations
-                    status[sampleID] = 1;
-                    status[sampleID2] = 1;
+                    // Mémorisation de l'export
+                    exportedSamples << id << id2;
                 }
                 else
                 {
                     sampleID2 = -1;
+
                     // Nom du fichier
                     qStr.append(this->sf2->getQstr(id, champ_name).replace(QRegExp("[:<>\"/\\\\\\*\\?\\|]"), "_"));
-                    // Mise à jour des états d'exporations
-                    status[sampleID] = 1;
+
+                    // Mémorisation de l'export
+                    exportedSamples << id;
                 }
+
                 // Nom pour l'exportation
-                qStr2 = qStr;
-                file.setFileName(qStr2.append(".wav"));
-                if (file.exists())
+                if (QFile::exists(qStr + ".wav"))
                 {
                     // Modification du nom
-                    int indice = 0;
-                    do
-                    {
+                    int indice = 1;
+                    while (QFile::exists(qStr + "-" + QString::number(indice) + ".wav"))
                         indice++;
-                        qStr2 = qStr;
-                        file.setFileName(qStr2.append(QString("-%1.wav").arg(indice)));
-                    } while (file.exists());
+                    qStr += "-" + QString::number(indice);
                 }
-                qStr2 = qStr2;
 
                 // Exportation
                 if (sampleID2 == -1)
-                    Sound::exporter(qStr2, this->sf2->getSon(id));
+                    Sound::exporter(qStr + ".wav", this->sf2->getSon(id));
                 else
-                    Sound::exporter(qStr2, this->sf2->getSon(id), this->sf2->getSon(id2));
-                Config::getInstance()->addFile(Config::typeFichierSample, qStr2);
+                    Sound::exporter(qStr + ".wav", this->sf2->getSon(id), this->sf2->getSon(id2));
+                Config::getInstance()->addFile(Config::typeFichierSample, qStr + ".wav");
             }
         }
     }
-    delete [] status;
 }
 void MainWindow::exporter()
 {
@@ -1796,16 +1792,26 @@ void MainWindow::exporter()
     if (nbElt == 0)
         return;
 
-    DialogExport * dial = new DialogExport(sf2, ui->arborescence->getFirstID(), this);
-    connect(dial, SIGNAL(accepted(QList<EltID>,QString,int,bool,bool,bool)),
-            this, SLOT(exporter(QList<EltID>,QString,int,bool,bool,bool)));
+    // List of sf2
+    QList<EltID> selectedElements = ui->arborescence->getAllIDs();
+    QList<EltID> listSf2;
+    for (int i = 0; i < selectedElements.size(); i++)
+    {
+        int present = false;
+        for (int j = 0; j < listSf2.size(); j++)
+            if (listSf2[j].indexSf2 == selectedElements[i].indexSf2)
+                present = true;
+        if (!present)
+            listSf2 << selectedElements[i];
+    }
+
+    DialogExport * dial = new DialogExport(sf2, listSf2, this);
+    connect(dial, SIGNAL(accepted(QList<QList<EltID> >,QString,int,bool,bool,bool)),
+            this, SLOT(exporter(QList<QList<EltID> >,QString,int,bool,bool,bool)));
     dial->show();
 }
-void MainWindow::exporter(QList<EltID> listID, QString dir, int format, bool presetPrefix, bool bankDir, bool gmSort)
+void MainWindow::exporter(QList<QList<EltID> > listID, QString dir, int format, bool presetPrefix, bool bankDir, bool gmSort)
 {
-    if (dir.isEmpty() || !QDir(dir).exists() || listID.isEmpty())
-        return;
-
     switch (format)
     {
     case 0:{
@@ -1814,26 +1820,71 @@ void MainWindow::exporter(QList<EltID> listID, QString dir, int format, bool pre
         EltID idDest(elementSf2, 0, 0, 0, 0);
         idDest.indexSf2 = newSf2.add(idDest);
 
-        // Copie des infos
-        EltID idSf2Source = listID.at(0);
-        idSf2Source.typeElement = elementSf2;
-        QString name = sf2->getQstr(idSf2Source, champ_name).replace(QRegExp("[:<>\"/\\\\\\*\\?\\|]"), "_");
+        // Infos du nouvel sf2
+        QString name, comment;
+        if (listID.size() == 1)
+        {
+            EltID idSf2Source = listID.first().first();
+            idSf2Source.typeElement = elementSf2;
+            name = sf2->getQstr(idSf2Source, champ_name);
+            comment = sf2->getQstr(idSf2Source, champ_ICMT);
+            newSf2.set(idDest, champ_ISNG, sf2->getQstr(idSf2Source, champ_ISNG));
+            newSf2.set(idDest, champ_IROM, sf2->getQstr(idSf2Source, champ_IROM));
+            newSf2.set(idDest, champ_ICRD, sf2->getQstr(idSf2Source, champ_ICRD));
+            newSf2.set(idDest, champ_IENG, sf2->getQstr(idSf2Source, champ_IENG));
+            newSf2.set(idDest, champ_IPRD, sf2->getQstr(idSf2Source, champ_IPRD));
+            newSf2.set(idDest, champ_ICOP, sf2->getQstr(idSf2Source, champ_ICOP));
+            newSf2.set(idDest, champ_ISFT, sf2->getQstr(idSf2Source, champ_ISFT));
+        }
+        else
+        {
+            name = "soundfont";
+            comment = trUtf8("Fusion des soundfonts :");
+            foreach (QList<EltID> subList, listID)
+            {
+                EltID idSf2Source = subList.first();
+                idSf2Source.typeElement = elementSf2;
+                comment += "\n - " + sf2->getQstr(idSf2Source, champ_name);
+            }
+        }
         newSf2.set(idDest, champ_name, name);
-        newSf2.set(idDest, champ_ISNG, sf2->getQstr(idSf2Source, champ_ISNG));
-        newSf2.set(idDest, champ_IROM, sf2->getQstr(idSf2Source, champ_IROM));
-        newSf2.set(idDest, champ_ICRD, sf2->getQstr(idSf2Source, champ_ICRD));
-        newSf2.set(idDest, champ_IENG, sf2->getQstr(idSf2Source, champ_IENG));
-        newSf2.set(idDest, champ_IPRD, sf2->getQstr(idSf2Source, champ_IPRD));
-        newSf2.set(idDest, champ_ICOP, sf2->getQstr(idSf2Source, champ_ICOP));
-        newSf2.set(idDest, champ_ICMT, sf2->getQstr(idSf2Source, champ_ICMT));
-        newSf2.set(idDest, champ_ISFT, sf2->getQstr(idSf2Source, champ_ISFT));
+        newSf2.set(idDest, champ_ICMT, comment);
 
         // Ajout des presets
         Duplicator duplicator(this->sf2, &newSf2, this);
-        for (int i = 0; i < listID.size(); i++)
-            duplicator.copy(listID.at(i), idDest);
+        for (int nbBank = 0; nbBank < listID.size(); nbBank++)
+        {
+            QList<EltID> subList = listID[nbBank];
+            for (int nbPreset = 0; nbPreset < subList.size(); nbPreset++)
+            {
+                EltID id = subList[nbPreset];
+
+                if (listID.size() == 1)
+                {
+                    duplicator.copy(id, idDest);
+                }
+                else
+                {
+                    int originalBank = sf2->get(id, champ_wBank).wValue;
+                    int originalPreset = sf2->get(id, champ_wPreset).wValue;
+                    Valeur value;
+                    value.wValue = nbBank;
+                    sf2->set(id, champ_wBank, value, false);
+                    value.wValue = nbPreset;
+                    sf2->set(id, champ_wPreset, value, false);
+
+                    duplicator.copy(id, idDest);
+
+                    value.wValue = originalBank;
+                    sf2->set(id, champ_wBank, value, false);
+                    value.wValue = originalPreset;
+                    sf2->set(id, champ_wPreset, value, false);
+                }
+            }
+        }
 
         // Détermination du nom de fichier
+        name = name.replace(QRegExp("[:<>\"/\\\\\\*\\?\\|]"), "_");
         QFile fichier(dir + "/" + name + ".sf2");
         if (fichier.exists())
         {
@@ -1849,7 +1900,8 @@ void MainWindow::exporter(QList<EltID> listID, QString dir, int format, bool pre
         }break;
     case 1:
         // Export sfz
-        ConversionSfz(sf2).convert(dir, listID, presetPrefix, bankDir, gmSort);
+        foreach (QList<EltID> sublist, listID)
+            ConversionSfz(sf2).convert(dir, sublist, presetPrefix, bankDir, gmSort);
         break;
     default:
         break;

@@ -39,7 +39,7 @@ class DialogExport : public QDialog
     Q_OBJECT
     
 public:
-    DialogExport(Pile_sf2 * sf2, EltID idSf2, QWidget *parent = 0);
+    DialogExport(Pile_sf2 * sf2, QList<EltID> listSf2, QWidget *parent = 0);
     ~DialogExport();
     
 private slots:
@@ -51,12 +51,11 @@ private slots:
     void on_comboFormat_currentIndexChanged(int index);
 
 signals:
-    void accepted(QList<EltID> listID, QString dir, int format,
+    void accepted(QList<QList<EltID> > listID, QString dir, int format,
                   bool presetPrefix, bool bankDir, bool gmSort);
 
 private:
     Ui::DialogExport *ui;
-    EltID _initialID;
 };
 
 #endif // DIALOG_EXPORT_H
