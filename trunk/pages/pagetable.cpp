@@ -30,6 +30,7 @@
 #include "dialog_space.h"
 #include "dialog_duplication.h"
 #include "dialogselection.h"
+#include "rangeeditor.h"
 
 QList<PageTable::Modulator> PageTable::_modulatorCopy;
 
@@ -40,6 +41,18 @@ PageTable::PageTable(TypePage typePage, QWidget *parent) : Page(typePage, parent
 }
 
 void PageTable::afficher()
+{
+    // Prepare page
+    if (_pushRangeMode->isChecked())
+        afficheRange();
+    else
+        afficheTable();
+
+    // Switch page
+    this->qStackedWidget->setCurrentWidget(this);
+}
+
+void PageTable::afficheTable()
 {
     int posV = this->table->verticalScrollBar()->value();
     EltID id = this->tree->getFirstID();
@@ -321,11 +334,16 @@ void PageTable::afficher()
 
     ///////////////////// REMPLISSAGE DES MODS //////////////////////////
     this->afficheMod(ori);
-    // Fin de la préparation et basculement de l'affichage
+
+    // Fin de la préparation
     this->preparation = 0;
     this->reselect();
-    this->qStackedWidget->setCurrentWidget(this);
     this->table->verticalScrollBar()->setValue(posV);
+}
+
+void PageTable::afficheRange()
+{
+    _rangeEditor->display(this->tree->getFirstID());
 }
 
 void PageTable::afficheMod(EltID id, int selectedIndex)

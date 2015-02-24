@@ -22,59 +22,35 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef PAGE_INST_H
-#define PAGE_INST_H
+#include "rectangleitem.h"
+#include <QApplication>
+#include <QGraphicsScene>
 
-#include <QWidget>
-#include "pagetable.h"
-
-namespace Ui {
-class Page_Inst;
+RectangleItem::RectangleItem(const QRectF &rect, QGraphicsItem *parent) :
+    QGraphicsRectItem(rect, parent)
+{
+    this->setFlag(QGraphicsItem::ItemIsSelectable);
+    this->setFlag(QGraphicsItem::ItemIsMovable);
+    this->setFlag(QGraphicsItem::ItemSendsGeometryChanges);
 }
 
-class Page_Inst : public PageTable
+QVariant RectangleItem::itemChange(GraphicsItemChange change, const QVariant &value)
 {
-    Q_OBJECT
-public:
-    explicit Page_Inst(QWidget *parent = 0);
-    ~Page_Inst();
-    void setModVisible(bool visible);
-    void afficher();
-    void desaccorder();
-    void repartitionAuto();
-    void mixture();
-    void release();
-    void transposer();
+    if (change == ItemPositionChange && scene())
+    {
+        // Offset made by integers
+        QPointF offset = value.toPointF();
+        offset.setX(qRound(offset.x()));
+        offset.setY(qRound(offset.y()));
 
-private slots:
-    void mixture(QList<QList<int> > listeParam, QString nomInst, bool bouclage, int freq, bool stereo);
-    void release(double duree36, double division, double deTune);
-    void desaccorder(double doHerz, double division);
+        // Keep item in scene rect
+        offset.setX(qMax(offset.x(), scene()->sceneRect().left() - rect().left()));
+        offset.setX(qMin(offset.x(), scene()->sceneRect().right() - rect().right()));
+        offset.setY(qMax(offset.y(), scene()->sceneRect().top() - rect().top()));
+        offset.setY(qMin(offset.y(), scene()->sceneRect().bottom() - rect().bottom()));
 
-    void on_pushRangeMode_clicked();
+        return offset;
+    }
 
-private:
-    Ui::Page_Inst *ui;
-
-    // Outils
-    static double getOffset(int type1, int type2);
-    static EltID closestSample(EltID idInst, double pitch, double &ecart, int cote, EltID &idInstSmpl);
-    static QByteArray getSampleData(EltID idSmpl, qint32 nbRead);
-    static QByteArray addSampleData(QByteArray baData1, QByteArray baData2, double mult);
-};
-
-// Classe TableWidget pour instruments
-class TableWidgetInst : public TableWidget
-{
-    Q_OBJECT
-public:
-    // Constructeur
-    TableWidgetInst(QWidget *parent = 0);
-    ~TableWidgetInst();
-
-    // Association champ - ligne
-    Champ getChamp(int row);
-    int getRow(WORD champ);
-};
-
-#endif // PAGE_INST_H
+    return QGraphicsItem::itemChange(change, value);
+}

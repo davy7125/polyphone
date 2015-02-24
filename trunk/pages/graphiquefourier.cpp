@@ -88,28 +88,28 @@ GraphiqueFourier::GraphiqueFourier(QWidget * parent) : QCustomPlot(parent),
     text2->position->setType(QCPItemPosition::ptAxisRectRatio);
     text2->setPositionAlignment(Qt::AlignRight|Qt::AlignTop);
     text2->setTextAlignment(Qt::AlignRight);
-    text2->setFont(QFont(font().family(), 8));
+    text2->setFont(QFont(font().family(), 7));
     text2->setColor(QColor(0, 0, 0, 75));
     this->addItem(text2);
     text3 = new QCPItemText(this);
     text3->position->setType(QCPItemPosition::ptAxisRectRatio);
     text3->setPositionAlignment(Qt::AlignRight|Qt::AlignTop);
     text3->setTextAlignment(Qt::AlignRight);
-    text3->setFont(QFont(font().family(), 8));
+    text3->setFont(QFont(font().family(), 7));
     text3->setColor(QColor(0, 0, 150, 150));
     this->addItem(text3);
     text4 = new QCPItemText(this);
     text4->position->setType(QCPItemPosition::ptAxisRectRatio);
     text4->setPositionAlignment(Qt::AlignRight|Qt::AlignTop);
     text4->setTextAlignment(Qt::AlignRight);
-    text4->setFont(QFont(font().family(), 8));
+    text4->setFont(QFont(font().family(), 7));
     text4->setColor(QColor(0, 0, 150, 150));
     this->addItem(text4);
     text5 = new QCPItemText(this);
     text5->position->setType(QCPItemPosition::ptAxisRectRatio);
     text5->setPositionAlignment(Qt::AlignRight|Qt::AlignTop);
     text5->setTextAlignment(Qt::AlignRight);
-    text5->setFont(QFont(font().family(), 8));
+    text5->setFont(QFont(font().family(), 7));
     text5->setColor(QColor(0, 0, 150, 150));
     this->addItem(text5);
 
@@ -377,7 +377,7 @@ void GraphiqueFourier::resizeEvent(QResizeEvent * event)
 {
     // Repositionnement du texte
     QSize size = this->size();
-    double y = 1.0 + (double)(14.0 - size.height()) / size.height();
+    double y = 1.0 + (double)(17.0 - size.height()) / size.height();
     text2->position->setCoords((double)(size.width() - 108) / size.width(), y);
     text3->position->setCoords((double)(size.width() - 45) / size.width(), y);
     text4->position->setCoords((double)(size.width() - 20) / size.width(), y);
