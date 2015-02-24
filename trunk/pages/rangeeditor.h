@@ -22,59 +22,45 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef PAGE_INST_H
-#define PAGE_INST_H
+#ifndef RANGEEDITOR_H
+#define RANGEEDITOR_H
 
 #include <QWidget>
-#include "pagetable.h"
+#include "pile_sf2.h"
+#include "mainwindow.h"
 
 namespace Ui {
-class Page_Inst;
+class RangeEditor;
 }
 
-class Page_Inst : public PageTable
+class RangeEditor : public QGraphicsView
 {
     Q_OBJECT
+
 public:
-    explicit Page_Inst(QWidget *parent = 0);
-    ~Page_Inst();
-    void setModVisible(bool visible);
-    void afficher();
-    void desaccorder();
-    void repartitionAuto();
-    void mixture();
-    void release();
-    void transposer();
+    explicit RangeEditor(QWidget *parent = 0);
+    ~RangeEditor();
 
-private slots:
-    void mixture(QList<QList<int> > listeParam, QString nomInst, bool bouclage, int freq, bool stereo);
-    void release(double duree36, double division, double deTune);
-    void desaccorder(double doHerz, double division);
+    void init(Pile_sf2 * sf2, MainWindow * mainWindow)
+    {
+        _sf2 = sf2;
+        _mainWindow = mainWindow;
+    }
 
-    void on_pushRangeMode_clicked();
+    void display(EltID id);
+
+protected:
+    void resizeEvent(QResizeEvent * event);
 
 private:
-    Ui::Page_Inst *ui;
+    void initGridAndAxes();
+    void display(QList<QRectF> rectangles);
 
-    // Outils
-    static double getOffset(int type1, int type2);
-    static EltID closestSample(EltID idInst, double pitch, double &ecart, int cote, EltID &idInstSmpl);
-    static QByteArray getSampleData(EltID idSmpl, qint32 nbRead);
-    static QByteArray addSampleData(QByteArray baData1, QByteArray baData2, double mult);
+    Ui::RangeEditor *ui;
+    Pile_sf2 * _sf2;
+    MainWindow * _mainWindow;
+    QGraphicsScene * _scene;
+    QList<QGraphicsRectItem *> _rectangles;
 };
 
-// Classe TableWidget pour instruments
-class TableWidgetInst : public TableWidget
-{
-    Q_OBJECT
-public:
-    // Constructeur
-    TableWidgetInst(QWidget *parent = 0);
-    ~TableWidgetInst();
-
-    // Association champ - ligne
-    Champ getChamp(int row);
-    int getRow(WORD champ);
-};
-
-#endif // PAGE_INST_H
+#endif // RANGEEDITOR_H

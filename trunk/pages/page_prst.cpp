@@ -1,4 +1,4 @@
-/***************************************************************************
+﻿/***************************************************************************
 **                                                                        **
 **  Polyphone, a soundfont editor                                         **
 **  Copyright (C) 2013-2014 Davy Triponney                                **
@@ -51,7 +51,9 @@ Page_Prst::Page_Prst(QWidget *parent) :
     this->comboSource1 = ui->comboSource1;
     this->comboSource2 = ui->comboSource2;
     this->comboDestination = ui->comboDestination;
-    _pushCopyMod = ui->pushCopyMod;
+    this->_pushCopyMod = ui->pushCopyMod;
+    this->_pushRangeMode = ui->pushRangeMode;
+    this->_rangeEditor = ui->rangeEditor;
 
     // Remplissage de comboDestination
     for (int i = 0; i < 35; i++)
@@ -70,6 +72,9 @@ Page_Prst::Page_Prst(QWidget *parent) :
     _menu = new QMenu();
     _menu->addAction("", this, SLOT(duplicateMod()));
     _menu->addAction("", this, SLOT(copyMod()));
+
+    // Initialisation édition étendues
+    ui->rangeEditor->init(sf2, mainWindow);
 
 #ifdef Q_OS_MAC
     this->table->setStyleSheet("QHeaderView::section:horizontal{padding: 4px 10px 4px 10px;}");
@@ -326,4 +331,13 @@ void Page_Prst::setPreset()
         }
     }
     this->preparation = 0;
+}
+
+void Page_Prst::on_pushRangeMode_clicked()
+{
+    if (ui->pushRangeMode->isChecked())
+        ui->stackedWidget->setCurrentIndex(1);
+    else
+        ui->stackedWidget->setCurrentIndex(0);
+    PageTable::afficher();
 }

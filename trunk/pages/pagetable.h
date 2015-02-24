@@ -29,7 +29,7 @@
 #include "page.h"
 #include "combobox.h"
 #include "tablecombobox.h"
-
+class RangeEditor;
 
 // Spécialisation de page pour inst et prst
 class PageTable : public Page
@@ -69,6 +69,8 @@ protected:
     QPushButton *pushNouveauMod;
     QMenu * _menu;
     QPushButton * _pushCopyMod;
+    QPushButton * _pushRangeMode;
+    RangeEditor * _rangeEditor;
 
     void select(EltID id);
     static void remplirComboSource(ComboBox *comboBox);
@@ -89,6 +91,8 @@ private:
         qint32 index;
     };
 
+    void afficheTable();
+    void afficheRange();
     void afficheMod(EltID id, int selectedIndex = -1);
     static void addAvailableReceiverMod(ComboBox *combo, EltID id);
     static void addAvailableSenderMod(ComboBox *combo, EltID id);
@@ -100,6 +104,7 @@ private:
     void setOffset(int ligne, int colonne, Champ champ1, Champ champ2);
     void customizeKeyboard();
     void pasteMod(EltID id, QList<Modulator> modulators);
+
     QList<Modulator> getModList(EltID id);
     static QList<Modulator> _modulatorCopy;
     QList<int> _listKeyEnlighted;

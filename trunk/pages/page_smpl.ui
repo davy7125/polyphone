@@ -229,6 +229,9 @@
                <verstretch>0</verstretch>
               </sizepolicy>
              </property>
+             <property name="toolTip">
+              <string notr="true">8000 Hz</string>
+             </property>
              <property name="minimum">
               <number>-15</number>
              </property>
@@ -305,6 +308,9 @@
                <verstretch>0</verstretch>
               </sizepolicy>
              </property>
+             <property name="toolTip">
+              <string notr="true">64 Hz</string>
+             </property>
              <property name="minimum">
               <number>-15</number>
              </property>
@@ -332,6 +338,9 @@
                <horstretch>0</horstretch>
                <verstretch>0</verstretch>
               </sizepolicy>
+             </property>
+             <property name="toolTip">
+              <string notr="true">125 Hz</string>
              </property>
              <property name="minimum">
               <number>-15</number>
@@ -363,6 +372,9 @@
                <horstretch>0</horstretch>
                <verstretch>0</verstretch>
               </sizepolicy>
+             </property>
+             <property name="toolTip">
+              <string notr="true">250 Hz</string>
              </property>
              <property name="minimum">
               <number>-15</number>
@@ -424,6 +436,9 @@
                <verstretch>0</verstretch>
               </sizepolicy>
              </property>
+             <property name="toolTip">
+              <string notr="true">32 Hz</string>
+             </property>
              <property name="minimum">
               <number>-15</number>
              </property>
@@ -468,6 +483,9 @@
                <verstretch>0</verstretch>
               </sizepolicy>
              </property>
+             <property name="toolTip">
+              <string notr="true">2000 Hz</string>
+             </property>
              <property name="minimum">
               <number>-15</number>
              </property>
@@ -495,6 +513,9 @@
                <horstretch>0</horstretch>
                <verstretch>0</verstretch>
               </sizepolicy>
+             </property>
+             <property name="toolTip">
+              <string notr="true">4000 Hz</string>
              </property>
              <property name="minimum">
               <number>-15</number>
@@ -540,6 +561,9 @@
                <verstretch>0</verstretch>
               </sizepolicy>
              </property>
+             <property name="toolTip">
+              <string notr="true">500 Hz</string>
+             </property>
              <property name="minimum">
               <number>-15</number>
              </property>
@@ -567,6 +591,9 @@
                <horstretch>0</horstretch>
                <verstretch>0</verstretch>
               </sizepolicy>
+             </property>
+             <property name="toolTip">
+              <string notr="true">1000 Hz</string>
              </property>
              <property name="minimum">
               <number>-15</number>
@@ -627,6 +654,9 @@
                <horstretch>0</horstretch>
                <verstretch>0</verstretch>
               </sizepolicy>
+             </property>
+             <property name="toolTip">
+              <string notr="true">16000 Hz</string>
              </property>
              <property name="minimum">
               <number>-15</number>

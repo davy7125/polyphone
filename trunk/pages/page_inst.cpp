@@ -56,7 +56,9 @@ Page_Inst::Page_Inst(QWidget *parent) :
     this->comboSource1 = ui->comboSource1;
     this->comboSource2 = ui->comboSource2;
     this->comboDestination = ui->comboDestination;
-    _pushCopyMod = ui->pushCopyMod;
+    this->_pushCopyMod = ui->pushCopyMod;
+    this->_pushRangeMode = ui->pushRangeMode;
+    this->_rangeEditor = ui->rangeEditor;
 
     // Remplissage de comboDestination
     for (int i = 0; i < 48; i++)
@@ -71,6 +73,9 @@ Page_Inst::Page_Inst(QWidget *parent) :
     _menu = new QMenu();
     _menu->addAction("", this, SLOT(duplicateMod()));
     _menu->addAction("", this, SLOT(copyMod()));
+
+    // Initialisation édition étendues
+    ui->rangeEditor->init(sf2, mainWindow);
 
 #ifdef Q_OS_MAC
     this->table->setStyleSheet("QHeaderView::section:horizontal{padding: 4px 10px 4px 10px;}");
@@ -94,6 +99,7 @@ void Page_Inst::setModVisible(bool visible)
 void Page_Inst::afficher()
 {
     PageTable::afficher();
+
     EltID id = this->tree->getFirstID();
     id.typeElement = elementInst;
     // Liste des presets qui utilisent l'instrument
@@ -943,6 +949,15 @@ QByteArray Page_Inst::addSampleData(QByteArray baData1, QByteArray baData2, doub
     for (int i = 0; i < qMin(baData1.size(), baData2.size())/4; i++)
         data1[i] += mult * data2[i];
     return baData1;
+}
+
+void Page_Inst::on_pushRangeMode_clicked()
+{
+    if (ui->pushRangeMode->isChecked())
+        ui->stackedWidget->setCurrentIndex(1);
+    else
+        ui->stackedWidget->setCurrentIndex(0);
+    PageTable::afficher();
 }
 
 // TableWidgetInst
