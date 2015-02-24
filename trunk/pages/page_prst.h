@@ -50,6 +50,9 @@ public slots:
     void setBank();
     void setPreset();
 
+private slots:
+    void on_pushRangeMode_clicked();
+
 private:
     Ui::Page_Prst *ui;
 };

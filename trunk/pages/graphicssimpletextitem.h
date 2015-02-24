@@ -22,59 +22,51 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef PAGE_INST_H
-#define PAGE_INST_H
+#ifndef GRAPHICSSIMPLETEXTITEM_H
+#define GRAPHICSSIMPLETEXTITEM_H
 
-#include <QWidget>
-#include "pagetable.h"
+#include <QGraphicsSimpleTextItem>
 
-namespace Ui {
-class Page_Inst;
-}
-
-class Page_Inst : public PageTable
+// QGraphicsSimpleTextItem with alignment and ignoring transformations
+class GraphicsSimpleTextItem : public QGraphicsSimpleTextItem
 {
-    Q_OBJECT
 public:
-    explicit Page_Inst(QWidget *parent = 0);
-    ~Page_Inst();
-    void setModVisible(bool visible);
-    void afficher();
-    void desaccorder();
-    void repartitionAuto();
-    void mixture();
-    void release();
-    void transposer();
+    GraphicsSimpleTextItem(int alignment, QGraphicsItem* parent = 0) : QGraphicsSimpleTextItem(parent),
+        _alignment(alignment)
+    {
+        this->setFlag(QGraphicsItem::ItemIgnoresTransformations);
+    }
 
-private slots:
-    void mixture(QList<QList<int> > listeParam, QString nomInst, bool bouclage, int freq, bool stereo);
-    void release(double duree36, double division, double deTune);
-    void desaccorder(double doHerz, double division);
-
-    void on_pushRangeMode_clicked();
-
+    QRectF boundingRect() const
+    {
+        QRectF br = QGraphicsSimpleTextItem::boundingRect();
+        return br.translated(dx(br), dy(br));
+    }
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem * option, QWidget * widget = 0)
+    {
+        painter->translate(dx(boundingRect()), dy(boundingRect()));
+        QGraphicsSimpleTextItem::paint(painter, option, widget);
+    }
 private:
-    Ui::Page_Inst *ui;
+    qreal dx(QRectF br) const
+    {
+        if (_alignment & Qt::AlignHCenter)
+            return -br.width()/2;
+        else if (_alignment & Qt::AlignRight)
+            return -br.width();
+        return 0;
+    }
 
-    // Outils
-    static double getOffset(int type1, int type2);
-    static EltID closestSample(EltID idInst, double pitch, double &ecart, int cote, EltID &idInstSmpl);
-    static QByteArray getSampleData(EltID idSmpl, qint32 nbRead);
-    static QByteArray addSampleData(QByteArray baData1, QByteArray baData2, double mult);
+    qreal dy(QRectF br) const
+    {
+        if (_alignment & Qt::AlignVCenter)
+            return -br.height()/2;
+        else if (_alignment & Qt::AlignBottom)
+            return -br.height();
+        return 0;
+    }
+
+    int _alignment;
 };
 
-// Classe TableWidget pour instruments
-class TableWidgetInst : public TableWidget
-{
-    Q_OBJECT
-public:
-    // Constructeur
-    TableWidgetInst(QWidget *parent = 0);
-    ~TableWidgetInst();
-
-    // Association champ - ligne
-    Champ getChamp(int row);
-    int getRow(WORD champ);
-};
-
-#endif // PAGE_INST_H
+#endif // GRAPHICSSIMPLETEXTITEM_H

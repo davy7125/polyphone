@@ -22,59 +22,20 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef PAGE_INST_H
-#define PAGE_INST_H
+#ifndef RECTANGLEITEM_H
+#define RECTANGLEITEM_H
 
-#include <QWidget>
-#include "pagetable.h"
+#include <QGraphicsRectItem>
 
-namespace Ui {
-class Page_Inst;
-}
-
-class Page_Inst : public PageTable
+class RectangleItem : public QGraphicsRectItem
 {
-    Q_OBJECT
 public:
-    explicit Page_Inst(QWidget *parent = 0);
-    ~Page_Inst();
-    void setModVisible(bool visible);
-    void afficher();
-    void desaccorder();
-    void repartitionAuto();
-    void mixture();
-    void release();
-    void transposer();
+    explicit RectangleItem(const QRectF &rect, QGraphicsItem *parent = 0);
 
-private slots:
-    void mixture(QList<QList<int> > listeParam, QString nomInst, bool bouclage, int freq, bool stereo);
-    void release(double duree36, double division, double deTune);
-    void desaccorder(double doHerz, double division);
+protected:
+    QVariant itemChange(GraphicsItemChange change,
+                        const QVariant &value);
 
-    void on_pushRangeMode_clicked();
-
-private:
-    Ui::Page_Inst *ui;
-
-    // Outils
-    static double getOffset(int type1, int type2);
-    static EltID closestSample(EltID idInst, double pitch, double &ecart, int cote, EltID &idInstSmpl);
-    static QByteArray getSampleData(EltID idSmpl, qint32 nbRead);
-    static QByteArray addSampleData(QByteArray baData1, QByteArray baData2, double mult);
 };
 
-// Classe TableWidget pour instruments
-class TableWidgetInst : public TableWidget
-{
-    Q_OBJECT
-public:
-    // Constructeur
-    TableWidgetInst(QWidget *parent = 0);
-    ~TableWidgetInst();
-
-    // Association champ - ligne
-    Champ getChamp(int row);
-    int getRow(WORD champ);
-};
-
-#endif // PAGE_INST_H
+#endif // RECTANGLEITEM_H
