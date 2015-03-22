@@ -30,7 +30,7 @@
 #include "dialog_space.h"
 #include "dialog_duplication.h"
 #include "dialogselection.h"
-#include "rangeeditor.h"
+#include "graphicsviewrange.h"
 
 QList<PageTable::Modulator> PageTable::_modulatorCopy;
 

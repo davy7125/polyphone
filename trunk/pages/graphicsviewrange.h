@@ -22,24 +22,19 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef RANGEEDITOR_H
-#define RANGEEDITOR_H
+#ifndef GRAPHICSVIEWRANGE_H
+#define GRAPHICSVIEWRANGE_H
 
-#include <QWidget>
+#include <QGraphicsView>
 #include "pile_sf2.h"
 #include "mainwindow.h"
+class GraphicsSimpleTextItem;
 
-namespace Ui {
-class RangeEditor;
-}
-
-class RangeEditor : public QGraphicsView
+class GraphicsViewRange : public QGraphicsView
 {
-    Q_OBJECT
-
 public:
-    explicit RangeEditor(QWidget *parent = 0);
-    ~RangeEditor();
+    explicit GraphicsViewRange(QWidget *parent = 0);
+    ~GraphicsViewRange();
 
     void init(Pile_sf2 * sf2, MainWindow * mainWindow)
     {
@@ -51,16 +46,38 @@ public:
 
 protected:
     void resizeEvent(QResizeEvent * event);
+    void mousePressEvent(QMouseEvent *event);
+    void mouseReleaseEvent(QMouseEvent *event);
+    void mouseMoveEvent(QMouseEvent *event);
 
 private:
     void initGridAndAxes();
     void display(QList<QRectF> rectangles);
 
-    Ui::RangeEditor *ui;
     Pile_sf2 * _sf2;
     MainWindow * _mainWindow;
     QGraphicsScene * _scene;
     QList<QGraphicsRectItem *> _rectangles;
+    QList<GraphicsSimpleTextItem *> _leftLabels, _bottomLabels;
+
+    // Drag & zoom
+    enum MouseMode
+    {
+        MOUSE_MODE_NONE,
+        MOUSE_MODE_DRAG,
+        MOUSE_MODE_ZOOM
+    };
+    MouseMode _mouseMode;
+    double _xInit, _yInit;
+    double _zoomX, _zoomY, _posX, _posY;
+    double _zoomXinit, _zoomYinit, _posXinit, _posYinit;
+    QRectF _displayedRect;
+    void zoom(QPoint point);
+    void drag(QPoint point);
+    void zoomDrag();
+    void setZoomLine(double x1, double y1, double x2, double y2);
+    double normalizeX(int xPixel);
+    double normalizeY(int yPixel);
 };
 
-#endif // RANGEEDITOR_H
+#endif // GRAPHICSVIEWRANGE_H

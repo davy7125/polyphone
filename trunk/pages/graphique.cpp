@@ -316,11 +316,13 @@ void Graphique::drag(QPoint point)
     // Décalage
     double decX = this->xAxis2->pixelToCoord(point.x()) - this->xInit;
     double decY = this->yAxis2->pixelToCoord(point.y()) - this->yInit;
+
     // Modification posX et posY
     if (zoomXinit > 1)
         posX = posXinit - decX / (zoomXinit - 1);
     if (zoomYinit > 1)
         posY = posYinit - decY / (zoomYinit - 1);
+
     // Mise à jour
     this->zoomDrag();
 }
@@ -455,7 +457,7 @@ void Graphique::mouseMoveEvent(QMouseEvent *event)
         if (!modifiedFlag)
         {
             modifiedFlag = true;
-            this->setCursor(Qt::ArrowCursor);
+            this->setCursor(Qt::SizeAllCursor);
         }
         this->zoom(event->pos());
 
@@ -469,7 +471,7 @@ void Graphique::mouseMoveEvent(QMouseEvent *event)
         if (!modifiedFlag)
         {
             modifiedFlag = true;
-            this->setCursor(Qt::SizeAllCursor);
+            this->setCursor(Qt::ClosedHandCursor);
         }
         this->drag(event->pos());
     }

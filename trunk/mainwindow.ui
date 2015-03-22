@@ -340,6 +340,8 @@
     <addaction name="actionBarre_d_outils"/>
     <addaction name="actionSection_modulateurs"/>
     <addaction name="menuClavier"/>
+    <addaction name="separator"/>
+    <addaction name="actionPlein_cran"/>
    </widget>
    <addaction name="menuFichier"/>
    <addaction name="menuEdition"/>
@@ -1514,6 +1516,17 @@
     <string>Enlever tous les &amp;modulateurs</string>
    </property>
   </action>
+  <action name="actionPlein_cran">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>&amp;Plein écran</string>
+   </property>
+   <property name="shortcut">
+    <string notr="true">F11</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
@@ -2523,6 +2536,22 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>actionPlein_cran</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>onPleinEcranTriggered()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>272</x>
+     <y>168</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>ouvrir()</slot>
@@ -2578,5 +2607,6 @@
   <slot>showToolBarManager()</slot>
   <slot>visualize()</slot>
   <slot>exporter()</slot>
+  <slot>onPleinEcranTriggered()</slot>
  </slots>
 </ui>

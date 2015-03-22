@@ -432,7 +432,7 @@ void Page_Inst::mixture(QList<QList<int> > listeParam, QString nomInst, bool bou
 
                 // Calcul de l'atténuation mini de tous les rangs
                 double attMini = 1000000;
-                for (int numRang = 0; numRang < listRangs.length()/2; numRang++)
+                for (int numRang = 0; numRang < listRangs.length() / 2; numRang++)
                 {
                     double noteTmp = (double)note + getOffset(listRangs.at(2*numRang), listRangs.at(2*numRang+1));
                     double ecart;
@@ -458,7 +458,7 @@ void Page_Inst::mixture(QList<QList<int> > listeParam, QString nomInst, bool bou
                     }
 
                     // Calcul de la note à ajouter à la mixture
-                    double noteTmp = (double)note + getOffset(listRangs.at(2*numRang), listRangs.at(2*numRang+1));
+                    double noteTmp = (double)note + getOffset(listRangs.at(2 * numRang), listRangs.at(2 * numRang + 1));
                     if (noteTmp <= 120)
                     {
                         // Sample le plus proche et écart associé
@@ -668,6 +668,13 @@ void Page_Inst::release(double duree36, double division, double deTune)
         }
     }
 
+    // Simplification
+    this->sf2->simplify(id, champ_fineTune);
+    this->sf2->simplify(id, champ_coarseTune);
+    this->sf2->simplify(id, champ_modEnvToPitch);
+    this->sf2->simplify(id, champ_releaseModEnv);
+    this->sf2->simplify(id, champ_releaseVolEnv);
+
     // Actualisation
     this->mainWindow->updateDo();
     this->afficher();
@@ -776,6 +783,10 @@ void Page_Inst::transposer()
         }
     }
 
+    // Simplification
+    this->sf2->simplify(id, champ_fineTune);
+    this->sf2->simplify(id, champ_coarseTune);
+
     // Actualisation
     this->mainWindow->updateDo();
     this->afficher();
@@ -784,7 +795,7 @@ void Page_Inst::transposer()
 double Page_Inst::getOffset(int type1, int type2)
 {
     // Calcul du multiple de la fréquence fondamentale
-    double multiple = (double)(2 * type1 + 1) * pow(2.0f, type2 - 2);
+    double multiple = (double)(2 * type1 + 1) * pow(2.0f, type2 - 3);
 
     // Renvoi du nombre de demi-tons à ajouter à la fondamentale pour obtenir l'harmonique
     return 12. * qLn(multiple) / 0.69314718056;

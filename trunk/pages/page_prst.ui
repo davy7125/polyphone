@@ -182,7 +182,7 @@
          </size>
         </property>
         <property name="focusPolicy">
-         <enum>Qt::TabFocus</enum>
+         <enum>Qt::NoFocus</enum>
         </property>
         <property name="text">
          <string>Éditer étendues</string>
@@ -990,7 +990,7 @@
         <number>0</number>
        </property>
        <item row="0" column="0">
-        <widget class="RangeEditor" name="rangeEditor" native="true"/>
+        <widget class="GraphicsViewRange" name="rangeEditor" native="true"/>
        </item>
       </layout>
      </widget>
@@ -999,6 +999,12 @@
   </layout>
  </widget>
  <customwidgets>
+  <customwidget>
+   <class>GraphicsViewRange</class>
+   <extends>QWidget</extends>
+   <header>graphicsviewrange.h</header>
+   <container>1</container>
+  </customwidget>
   <customwidget>
    <class>TableWidgetMod</class>
    <extends>QTableWidget</extends>
@@ -1035,12 +1041,6 @@
    <class>SpinBox</class>
    <extends>QSpinBox</extends>
    <header>page_prst.h</header>
-  </customwidget>
-  <customwidget>
-   <class>RangeEditor</class>
-   <extends>QWidget</extends>
-   <header>rangeeditor.h</header>
-   <container>1</container>
   </customwidget>
  </customwidgets>
  <tabstops>

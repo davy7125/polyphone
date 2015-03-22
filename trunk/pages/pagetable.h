@@ -29,7 +29,7 @@
 #include "page.h"
 #include "combobox.h"
 #include "tablecombobox.h"
-class RangeEditor;
+class GraphicsViewRange;
 
 // Spécialisation de page pour inst et prst
 class PageTable : public Page
@@ -70,7 +70,7 @@ protected:
     QMenu * _menu;
     QPushButton * _pushCopyMod;
     QPushButton * _pushRangeMode;
-    RangeEditor * _rangeEditor;
+    GraphicsViewRange * _rangeEditor;
 
     void select(EltID id);
     static void remplirComboSource(ComboBox *comboBox);
