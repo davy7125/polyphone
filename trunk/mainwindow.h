@@ -185,6 +185,7 @@ private slots:
     void magnetophone();        // affichage du magnétophone
     void on_action_Dissocier_les_samples_st_r_o_triggered();
     void on_actionExporter_pics_de_fr_quence_triggered();
+    void onPleinEcranTriggered();
 
     void noteOff(int key);
     void noteHover(int key, int vel);

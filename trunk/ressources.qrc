@@ -80,6 +80,8 @@
         <file alias="auto">ressources/auto.png</file>
         <file alias="transposer_inst">ressources/transposer_inst.png</file>
         <file alias="modulator">ressources/modulator.png</file>
+        <file alias="zoom_in">ressources/zoom_in.png</file>
+        <file alias="zoom_out">ressources/zoom_out.png</file>
     </qresource>
     <qresource prefix="/aide">
         <file alias="page0.png">ressources/doc/page 0.png</file>

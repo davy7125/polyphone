@@ -60,6 +60,7 @@ private slots:
 private:
     Ui::DialogMixture *ui;
     QList<QList<int> > listeParam;
+
     // Méthodes privées
     void dispDiv();
     void dispRang(int numDiv = -1);

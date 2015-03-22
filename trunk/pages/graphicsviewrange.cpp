@@ -22,22 +22,23 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#include "rangeeditor.h"
-#include "ui_rangeeditor.h"
+#include "graphicsviewrange.h"
 #include "config.h"
 #include "graphicssimpletextitem.h"
 #include "rectangleitem.h"
 
-RangeEditor::RangeEditor(QWidget *parent) :
-    QGraphicsView(parent),
-    ui(new Ui::RangeEditor),
-    _scene(new QGraphicsScene(-0.5, -0.5, 128, 128))
+GraphicsViewRange::GraphicsViewRange(QWidget *parent) : QGraphicsView(parent),
+    _scene(new QGraphicsScene(-0.5, -0.5, 128, 128)),
+    _mouseMode(MOUSE_MODE_NONE),
+    _zoomX(1),
+    _zoomY(1),
+    _posX(0.5),
+    _posY(0.5),
+    _displayedRect(-0.5, -0.5, 128, 128)
 {
-    ui->setupUi(this);
-
     // Configuration
-    this->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    this->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    this->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
+    this->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
     this->setRenderHint(QPainter::Antialiasing, true);
 
     // Preparation graphique
@@ -45,12 +46,9 @@ RangeEditor::RangeEditor(QWidget *parent) :
     this->initGridAndAxes();
 }
 
-RangeEditor::~RangeEditor()
-{
-    delete ui;
-}
+GraphicsViewRange::~GraphicsViewRange() {}
 
-void RangeEditor::initGridAndAxes()
+void GraphicsViewRange::initGridAndAxes()
 {
     QColor lineColor(220, 220, 220);
     QColor textColor(80, 80, 80);
@@ -67,6 +65,7 @@ void RangeEditor::initGridAndAxes()
         text->setBrush(textColor);
         text->setText(Config::getInstance()->getKeyName(note));
         text->setPos(note, 127.5);
+        _bottomLabels << text;
     }
 
     // Horizontal lines
@@ -80,11 +79,12 @@ void RangeEditor::initGridAndAxes()
         GraphicsSimpleTextItem * text = new GraphicsSimpleTextItem(Qt::AlignLeft + Qt::AlignVCenter, line);
         text->setBrush(textColor);
         text->setText(QString::number(vel));
-        text->setPos(-0.5, 127 - vel);
+        text->setPos(-0.5, 127.5 - vel);
+        _leftLabels << text;
     }
 }
 
-void RangeEditor::display(EltID id)
+void GraphicsViewRange::display(EltID id)
 {
     QList<QRectF> listRect;
     if (id.typeElement == elementInst)
@@ -119,7 +119,7 @@ void RangeEditor::display(EltID id)
     display(listRect);
 }
 
-void RangeEditor::display(QList<QRectF> rectangles)
+void GraphicsViewRange::display(QList<QRectF> rectangles)
 {
     // Style
     QPen penRectangle(QColor(250, 0, 0, 120), 1);
@@ -142,8 +142,156 @@ void RangeEditor::display(QList<QRectF> rectangles)
     }
 }
 
-void RangeEditor::resizeEvent(QResizeEvent * event)
+void GraphicsViewRange::resizeEvent(QResizeEvent * event)
 {
-    fitInView(_scene->sceneRect());
+    fitInView(_displayedRect);
     QGraphicsView::resizeEvent(event);
+}
+
+void GraphicsViewRange::mousePressEvent(QMouseEvent *event)
+{
+    if (_mouseMode != MOUSE_MODE_NONE)
+        return;
+
+    // Enregistrement situation
+    _xInit = normalizeX(event->x());
+    _yInit = normalizeY(event->y());
+    _zoomXinit = _zoomX;
+    _zoomYinit = _zoomY;
+    _posXinit = _posX;
+    _posYinit = _posY;
+    if (event->button() == Qt::LeftButton)
+        _mouseMode = MOUSE_MODE_DRAG;
+    else if (event->button() == Qt::RightButton)
+        _mouseMode = MOUSE_MODE_ZOOM;
+}
+
+
+void GraphicsViewRange::mouseReleaseEvent(QMouseEvent *event)
+{
+    if (event->button() == Qt::LeftButton)
+    {
+        if (_mouseMode == MOUSE_MODE_DRAG)
+        {
+            _mouseMode = MOUSE_MODE_NONE;
+            this->setCursor(Qt::ArrowCursor);
+        }
+    }
+    else if (event->button() == Qt::RightButton)
+    {
+        if (_mouseMode == MOUSE_MODE_ZOOM)
+        {
+            _mouseMode = MOUSE_MODE_NONE;
+            this->setZoomLine(-1, 0, 0, 0);
+            this->setCursor(Qt::ArrowCursor);
+        }
+    }
+}
+
+void GraphicsViewRange::mouseMoveEvent(QMouseEvent *event)
+{
+    switch (_mouseMode)
+    {
+    case MOUSE_MODE_ZOOM:
+        this->setCursor(Qt::SizeAllCursor);
+        this->setZoomLine(_xInit, _yInit, normalizeX(event->x()), normalizeY(event->y()));
+        this->zoom(event->pos());
+        break;
+    case MOUSE_MODE_DRAG:
+        this->setCursor(Qt::ClosedHandCursor);
+        this->drag(event->pos());
+        break;
+    default:
+        break;
+    }
+}
+
+void GraphicsViewRange::drag(QPoint point)
+{
+    // Décalage
+    double decX = normalizeX(point.x()) - _xInit;
+    double decY = normalizeY(point.y()) - _yInit;
+
+    // Modification posX et posY
+    if (_zoomXinit > 1)
+        _posX = _posXinit - decX / (_zoomXinit - 1);
+    if (_zoomYinit > 1)
+        _posY = _posYinit - decY / (_zoomYinit - 1);
+
+    // Mise à jour
+    this->zoomDrag();
+}
+
+void GraphicsViewRange::zoom(QPoint point)
+{
+    // Décalage
+    double decX = normalizeX(point.x()) - _xInit;
+    double decY = _yInit - normalizeY(point.y());
+
+    // Modification zoom & drag
+    _zoomX = _zoomXinit * pow(2, 10.0 * decX);
+    _zoomY = _zoomYinit * pow(2, 10.0 * decY);
+
+    // Ajustement posX et posY
+    if (_zoomX > 1)
+        _posX = (_zoomX * _posXinit * (_zoomXinit - 1) +
+                 _xInit * (_zoomX - _zoomXinit)) / (_zoomXinit * (_zoomX - 1));
+    if (_zoomY > 1)
+        _posY = (_zoomY * _posYinit * (_zoomYinit - 1) +
+                 _yInit * (_zoomY - _zoomYinit)) / (_zoomYinit * (_zoomY - 1));
+
+    // Mise à jour
+    this->zoomDrag();
+}
+
+void GraphicsViewRange::zoomDrag()
+{
+    // Bornes des paramètres d'affichage
+    if (_zoomX < 1)
+        _zoomX = 1;
+    else if (_zoomX > 8)
+        _zoomX = 8;
+    if (_zoomY < 1)
+        _zoomY = 1;
+    else if (_zoomY > 8)
+        _zoomY = 8;
+    if (_posX < 0)
+        _posX = 0;
+    else if (_posX > 1)
+        _posX = 1;
+    if (_posY < 0)
+        _posY = 0;
+    else if (_posY > 1)
+        _posY = 1;
+
+    // Application du drag et zoom
+    double etendueX = _scene->width() / _zoomX;
+    double offsetX = (_scene->width() - etendueX) * _posX - 0.5;
+    double etendueY = _scene->height() / _zoomY;
+    double offsetY = (_scene->height() - etendueY) * _posY - 0.5;
+    _displayedRect.setRect(offsetX, offsetY, etendueX, etendueY);
+
+    // Déplacement des valeurs des axes
+    foreach (GraphicsSimpleTextItem * label, _leftLabels)
+        label->setX(offsetX);
+    foreach (GraphicsSimpleTextItem * label, _bottomLabels)
+        label->setY(offsetY + etendueY);
+
+    // Mise à jour
+    this->fitInView(_displayedRect);
+}
+
+void GraphicsViewRange::setZoomLine(double x1, double y1, double x2, double y2)
+{
+
+}
+
+double GraphicsViewRange::normalizeX(int xPixel)
+{
+    return (double)xPixel / this->width();
+}
+
+double GraphicsViewRange::normalizeY(int yPixel)
+{
+    return (double)yPixel / this->height();
 }
