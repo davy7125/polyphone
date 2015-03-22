@@ -2224,6 +2224,55 @@ int Pile_sf2::reset(EltID id, Champ champ, bool storeAction)
     return 1;
 }
 
+void Pile_sf2::simplify(EltID id, Champ champ)
+{
+    EltID idElement = id;
+    if (id.typeElement == elementInst || id.typeElement == elementInstSmpl)
+    {
+        idElement.typeElement = elementInstSmpl;
+        id.typeElement = elementInst;
+    }
+    else if (id.typeElement == elementPrst || id.typeElement == elementPrstInst)
+    {
+        idElement.typeElement = elementPrstInst;
+        id.typeElement = elementPrst;
+    }
+    else return;
+
+    bool firstValue = true;
+    Valeur valeur;
+
+    for (int i = 0; i < this->count(idElement); i++)
+    {
+        idElement.indexElt2 = i;
+        if (!this->get(idElement, champ_hidden).bValue)
+        {
+            if (this->isSet(idElement, champ))
+            {
+                if (firstValue)
+                {
+                    valeur = this->get(idElement, champ);
+                    firstValue = false;
+                }
+                else if (valeur.dwValue != this->get(idElement, champ).dwValue)
+                    return;
+            }
+            else return;
+        }
+    }
+
+    if (!firstValue)
+    {
+        for (int i = 0; i < this->count(idElement); i++)
+        {
+            idElement.indexElt2 = i;
+            if (!this->get(idElement, champ_hidden).bValue)
+                this->reset(idElement, champ);
+        }
+        this->set(id, champ, valeur);
+    }
+}
+
 bool Pile_sf2::SF2::BAG::GEN::isSet(Champ champ)
 {
     bool resultat = 0;

@@ -56,6 +56,7 @@ public:
     int set(EltID id, Champ champ, QString qStr, bool storeAction = true, bool sort = true);
     int set(EltID id, Champ champ, QByteArray data, bool storeAction = true);
     int reset(EltID id, Champ champ, bool storeAction = true);
+    void simplify(EltID id, Champ champ);
 
     // Nombre de freres de id (id compris)
     int count(EltID id, bool withHidden = true);

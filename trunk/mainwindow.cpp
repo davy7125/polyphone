@@ -64,6 +64,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent, Qt::Window | Qt::W
     this->setMaximumSize(QApplication::desktop()->size());
     restoreGeometry(configuration->getWindowGeometry());
     restoreState(configuration->getWindowState());
+    ui->actionPlein_cran->setChecked(this->windowState() & Qt::WindowFullScreen);
 
     // Initialisation de l'objet pile sf2
     this->sf2 = new Pile_sf2(ui->arborescence, this->configuration->getRam(), this);
@@ -545,7 +546,7 @@ void MainWindow::sauvegarderSous()
     EltID id = ui->arborescence->getFirstID();
     sauvegarder(id.indexSf2, 1);
 }
-int  MainWindow::sauvegarder(int indexSf2, bool saveAs)
+int MainWindow::sauvegarder(int indexSf2, bool saveAs)
 {
     this->sf2->prepareNewActions();
     EltID id(elementSf2, indexSf2, 0, 0, 0);
@@ -825,6 +826,10 @@ void MainWindow::showKeyboard(bool val)
         ui->widgetKeyboard->setFixedWidth(widthKeyboard);
         _dialKeyboard.hide();
     }
+}
+void MainWindow::onPleinEcranTriggered()
+{
+    this->setWindowState(this->windowState() ^ Qt::WindowFullScreen);
 }
 void MainWindow::magnetophone()
 {
