@@ -1380,6 +1380,7 @@ Parametre::Parametre(QString opcode, QString valeur) :
     _dblValue(0.)
 {
     QString valeurLow = valeur.toLower();
+    opcode = opcode.remove('_');
     if (opcode == "sample")
     {
         _opcode = op_sample;
@@ -1410,7 +1411,7 @@ Parametre::Parametre(QString opcode, QString valeur) :
         _opcode = op_velMax;
         _intValue = valeurLow.toInt();
     }
-    else if (opcode == "pitch_keycenter")
+    else if (opcode == "pitchkeycenter")
     {
         _opcode = op_rootKey;
         _intValue = Config::getInstance()->getKeyNum(valeurLow, true);
@@ -1420,7 +1421,7 @@ Parametre::Parametre(QString opcode, QString valeur) :
         _opcode = op_exclusiveClass;
         _intValue = valeurLow.toInt();
     }
-    else if (opcode == "off_by" || opcode == "offby")
+    else if (opcode == "offby")
     {
         _opcode = op_off_by;
         _intValue = valeurLow.toInt();
@@ -1450,17 +1451,17 @@ Parametre::Parametre(QString opcode, QString valeur) :
         _opcode = op_end;
         _intValue = valeurLow.toInt() + 1;
     }
-    else if (opcode == "loop_start")
+    else if (opcode == "loopstart")
     {
         _opcode = op_loop_start;
         _intValue = valeurLow.toInt();
     }
-    else if (opcode == "loop_end")
+    else if (opcode == "loopend")
     {
         _opcode = op_loop_end;
         _intValue = valeurLow.toInt() + 1;
     }
-    else if (opcode == "loop_mode")
+    else if (opcode == "loopmode")
     {
         _opcode = op_loop_mode;
         _strValue = valeurLow;
@@ -1485,47 +1486,47 @@ Parametre::Parametre(QString opcode, QString valeur) :
         _opcode = op_volume;
         _dblValue = valeurLow.toDouble();
     }
-    else if (opcode == "pitch_keytrack")
+    else if (opcode == "pitchkeytrack")
     {
         _opcode = op_tuningScale;
         _intValue = valeurLow.toInt();
     }
-    else if (opcode == "ampeg_delay")
+    else if (opcode == "ampegdelay")
     {
         _opcode = op_ampeg_delay;
         _dblValue = valeurLow.toDouble();
     }
-    else if (opcode == "ampeg_attack")
+    else if (opcode == "ampegattack")
     {
         _opcode = op_ampeg_attack;
         _dblValue = valeurLow.toDouble();
     }
-    else if (opcode == "ampeg_hold")
+    else if (opcode == "ampeghold")
     {
         _opcode = op_ampeg_hold;
         _dblValue = valeurLow.toDouble();
     }
-    else if (opcode == "ampeg_decay")
+    else if (opcode == "ampegdecay")
     {
         _opcode = op_ampeg_decay;
         _dblValue = valeurLow.toDouble();
     }
-    else if (opcode == "ampeg_sustain")
+    else if (opcode == "ampegsustain")
     {
         _opcode = op_ampeg_sustain;
         _dblValue = valeurLow.toDouble();
     }
-    else if (opcode == "ampeg_release")
+    else if (opcode == "ampegrelease")
     {
         _opcode = op_ampeg_release;
         _dblValue = valeurLow.toDouble();
     }
-    else if (opcode == "ampeg_holdcc133")
+    else if (opcode == "ampegholdcc133")
     {
         _opcode = op_noteToVolEnvHold;
         _dblValue = valeurLow.toDouble();
     }
-    else if (opcode == "ampeg_decaycc133")
+    else if (opcode == "ampegdecaycc133")
     {
         _opcode = op_noteToVolEnvDecay;
         _dblValue = valeurLow.toDouble();
@@ -1540,7 +1541,7 @@ Parametre::Parametre(QString opcode, QString valeur) :
         _opcode = op_chorus;
         _dblValue = valeurLow.toDouble();
     }
-    else if (opcode == "fil_type")
+    else if (opcode == "filtype")
     {
         _opcode = op_filterType;
         _strValue = valeurLow;
@@ -1555,147 +1556,147 @@ Parametre::Parametre(QString opcode, QString valeur) :
         _opcode = op_filterQ;
         _dblValue = valeurLow.toDouble();
     }
-    else if (opcode == "pitchlfo_delay")
+    else if (opcode == "pitchlfodelay")
     {
         _opcode = op_vibLFOdelay;
         _dblValue = valeurLow.toDouble();
     }
-    else if (opcode == "pitchlfo_freq")
+    else if (opcode == "pitchlfofreq")
     {
         _opcode = op_vibLFOfreq;
         _dblValue = valeurLow.toDouble();
     }
-    else if (opcode == "pitchlfo_depth")
+    else if (opcode == "pitchlfodepth")
     {
         _opcode = op_vibLFOtoTon;
         _intValue = valeurLow.toInt();
     }
-    else if (opcode == "pitcheg_delay")
+    else if (opcode == "pitchegdelay")
     {
         _opcode = op_pitcheg_delay;
         _dblValue = valeurLow.toDouble();
     }
-    else if (opcode == "pitcheg_attack")
+    else if (opcode == "pitchegattack")
     {
         _opcode = op_pitcheg_attack;
         _dblValue = valeurLow.toDouble();
     }
-    else if (opcode == "pitcheg_hold")
+    else if (opcode == "pitcheghold")
     {
         _opcode = op_pitcheg_hold;
         _dblValue = valeurLow.toDouble();
     }
-    else if (opcode == "pitcheg_decay")
+    else if (opcode == "pitchegdecay")
     {
         _opcode = op_pitcheg_decay;
         _dblValue = valeurLow.toDouble();
     }
-    else if (opcode == "pitcheg_sustain")
+    else if (opcode == "pitchegsustain")
     {
         _opcode = op_pitcheg_sustain;
         _dblValue = valeurLow.toDouble();
     }
-    else if (opcode == "pitcheg_release")
+    else if (opcode == "pitchegrelease")
     {
         _opcode = op_pitcheg_release;
         _dblValue = valeurLow.toDouble();
     }
-    else if (opcode == "pitcheg_depth")
+    else if (opcode == "pitchegdepth")
     {
         _opcode = op_modEnvToTon;
         _intValue = valeurLow.toInt();
     }
-    else if (opcode == "pitcheg_holdcc133")
+    else if (opcode == "pitchegholdcc133")
     {
         _opcode = op_noteToModEnvHold;
         _dblValue = valeurLow.toDouble();
     }
-    else if (opcode == "pitcheg_decaycc133")
+    else if (opcode == "pitchegdecaycc133")
     {
         _opcode = op_noteToModEnvDecay;
         _dblValue = valeurLow.toDouble();
     }
-    else if (opcode == "amplfo_delay")
+    else if (opcode == "amplfodelay")
     {
         _opcode = op_modLFOdelay;
         _dblValue = valeurLow.toDouble();
     }
-    else if (opcode == "amplfo_freq")
+    else if (opcode == "amplfofreq")
     {
         _opcode = op_modLFOfreq;
         _dblValue = valeurLow.toDouble();
     }
-    else if (opcode == "amplfo_depth")
+    else if (opcode == "amplfodepth")
     {
         _opcode = op_modLFOtoVolume;
         _dblValue = valeurLow.toDouble();
     }
-    else if (opcode == "amp_velcurve_1")
+    else if (opcode == "ampvelcurve1")
     {
         _opcode = op_amp_velcurve_1;
         _dblValue = valeurLow.toDouble();
     }
-    else if (opcode == "amp_velcurve_127")
+    else if (opcode == "ampvelcurve127")
     {
         _opcode = op_amp_velcurve_127;
         _dblValue = valeurLow.toDouble();
     }
-    else if (opcode == "fileg_delay")
+    else if (opcode == "filegdelay")
     {
         _opcode = op_fileg_delay;
         _dblValue = valeurLow.toDouble();
     }
-    else if (opcode == "fileg_attack")
+    else if (opcode == "filegattack")
     {
         _opcode = op_fileg_attack;
         _dblValue = valeurLow.toDouble();
     }
-    else if (opcode == "fileg_hold")
+    else if (opcode == "fileghold")
     {
         _opcode = op_fileg_hold;
         _dblValue = valeurLow.toDouble();
     }
-    else if (opcode == "fileg_decay")
+    else if (opcode == "filegdecay")
     {
         _opcode = op_fileg_decay;
         _dblValue = valeurLow.toDouble();
     }
-    else if (opcode == "fileg_sustain")
+    else if (opcode == "filegsustain")
     {
         _opcode = op_fileg_sustain;
         _dblValue = valeurLow.toDouble();
     }
-    else if (opcode == "fileg_release")
+    else if (opcode == "filegrelease")
     {
         _opcode = op_fileg_release;
         _dblValue = valeurLow.toDouble();
     }
-    else if (opcode == "fileg_depth")
+    else if (opcode == "filegdepth")
     {
         _opcode = op_modEnvToFilter;
         _intValue = valeurLow.toInt();
     }
-    else if (opcode == "fileg_holdcc133")
+    else if (opcode == "filegholdcc133")
     {
         _opcode = op_fileg_holdcc133;
         _dblValue = valeurLow.toDouble();
     }
-    else if (opcode == "fileg_decaycc133")
+    else if (opcode == "filegdecaycc133")
     {
         _opcode = op_fileg_decaycc133;
         _dblValue = valeurLow.toDouble();
     }
-    else if (opcode == "fillfo_delay")
+    else if (opcode == "fillfodelay")
     {
         _opcode = op_filLFOdelay;
         _dblValue = valeurLow.toDouble();
     }
-    else if (opcode == "fillfo_freq")
+    else if (opcode == "fillfofreq")
     {
         _opcode = op_filLFOfreq;
         _dblValue = valeurLow.toDouble();
     }
-    else if (opcode == "fillfo_depth")
+    else if (opcode == "fillfodepth")
     {
         _opcode = op_modLFOtoFilter;
         _intValue = valeurLow.toInt();

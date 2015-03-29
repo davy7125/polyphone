@@ -1,15 +1,17 @@
 polyphone (1.6) unstable; urgency=low
 
+ * Full screen mode
  * Possibility to export presets from different soundfonts to one sf2
  * Export of samples from different soundfonts is allowed
  * In the virtual keyboard, using "shift" with an arrow makes a quicker move
- * Mutations available for 64' resultant (organ mixture creation tool)
- * Option to move keyrange or not (transposition tool for instrument)
- * Full screen mode
+ * Option to move keyrange or not in the transposition tool for instruments
+ * Mutations available for 64' resultant in the organ mixture creation tool
+ * Tolerance for opcodes comprising no underscore (sfz opcodes v1)
  * (fix) repetition is ignored when using arrow keys in the virtual keyboard
  * (fix) "0" was not selected when a new value is inserted in the table
- * (fix) forbidden characters are replaced by "_" when exporting files
+ * (fix) forbidden characters are replaced by an underscore when exporting files
  * (fix) selection in the tree now updates the virtual keyboard
+ * (fix) copy / paste of elements
  * (fix) GUI fix for mac
 
  -- Davy Triponney <davy.triponney@gmail.com>  XXX, XX Mar 2015 11:15:10 +0100
