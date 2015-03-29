@@ -504,6 +504,9 @@ void MainWindow::Fermer()
         updateDo();
     }break;
     }
+
+    // Remove pasted IDs
+    this->ui->arborescence->clearPastedID();
 }
 
 void MainWindow::supprimerElt()
