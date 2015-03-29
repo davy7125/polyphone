@@ -489,13 +489,13 @@ void Duplicator::copyInst(EltID idSource, EltID idDest)
                 copyMod(idSource, idDest);
             }
         }
-
-        // Enregistrement de l'élément copié, avec sa correspondance
         idSource.typeElement = elementInst;
         idDest.typeElement = elementInst;
-        _listCopy << idSource;
-        _listPaste << idDest;
     }
+
+    // Enregistrement de l'élément copié, avec sa correspondance
+    _listCopy << idSource;
+    _listPaste << idDest;
 }
 
 // Copie d'un preset dans un autre sf2
@@ -594,7 +594,7 @@ void Duplicator::copyPrst(EltID idSource, EltID idDest)
         // Mod globaux
         copyMod(idSource, idDest);
 
-        // Copie des PrstIsnt
+        // Copie des PrstInst
         idSource.typeElement = elementPrstInst;
         idDest.typeElement = elementPrstInst;
         for (int i = 0; i < _source->count(idSource); i++)
@@ -612,13 +612,13 @@ void Duplicator::copyPrst(EltID idSource, EltID idDest)
                 copyMod(idSource, idDest);
             }
         }
-
-        // Enregistrement de l'élément copié, avec sa correspondance
         idSource.typeElement = elementPrst;
         idDest.typeElement = elementPrst;
-        _listCopy << idSource;
-        _listPaste << idDest;
     }
+
+    // Enregistrement de l'élément copié, avec sa correspondance
+    _listCopy << idSource;
+    _listPaste << idDest;
 }
 
 
