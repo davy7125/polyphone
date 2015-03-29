@@ -28,6 +28,7 @@
 #include "dialog_mixture.h"
 #include "dialog_release.h"
 #include "dialog_celeste.h"
+#include "dialog_transposition.h"
 #include <QProgressDialog>
 #include <QInputDialog>
 #include <QMenu>
@@ -341,7 +342,6 @@ void Page_Inst::mixture()
         return;
     }
     DialogMixture * dialogMixture = new DialogMixture(this);
-    dialogMixture->setAttribute(Qt::WA_DeleteOnClose, true);
     this->connect(dialogMixture, SIGNAL(accepted(QList<QList<int> >, QString, bool, int, bool)),
                   SLOT(mixture(QList<QList<int> >, QString, bool, int, bool)));
     dialogMixture->show();
@@ -690,64 +690,71 @@ void Page_Inst::transposer()
     }
 
     // Ecart en demi-tons
-    bool ok;
-    Config * conf = Config::getInstance();
-    double rep = QInputDialog::getDouble(this, trUtf8("Transposition"),
-                                         trUtf8("Écart en demi-tons :"),
-                                         conf->getTools_i_transpo_ton(), -36, 36, 2,
-                                         &ok);
-    if (!ok) return;
+    DialogTransposition * dialog = new DialogTransposition(this);
+    this->connect(dialog, SIGNAL(accepted(double, bool)),
+                  SLOT(transposer(double, bool)));
+    dialog->show();
+}
 
-    conf->setTools_i_transpo_ton(rep);
+void Page_Inst::transposer(double ton, bool adaptKeyRange)
+{
     sf2->prepareNewActions();
 
     // Reprise de l'identificateur si modification
-    id = this->tree->getFirstID();
+    EltID idInstSmpl = this->tree->getFirstID();
+    EltID idInst = idInstSmpl;
+    idInstSmpl.typeElement = elementInstSmpl;
+    idInst.typeElement = elementInst;
 
     // Nombre de tons
-    int nbTons = qRound(rep);
+    int nbTons = qRound(ton);
 
     // Correction
-    int correction = 100. * (rep - nbTons);
+    int correction = qRound(100. * (ton - nbTons));
 
     // Modification pour chaque sample lié
-    id.typeElement = elementInstSmpl;
-    for (int i = 0; i < this->sf2->count(id); i++)
+    for (int i = 0; i < this->sf2->count(idInstSmpl); i++)
     {
-        id.indexElt2 = i;
-        if (!this->sf2->get(id, champ_hidden).bValue)
+        idInstSmpl.indexElt2 = i;
+        if (!this->sf2->get(idInstSmpl, champ_hidden).bValue)
         {
-            // Etendue
-            int noteInf = this->sf2->get(id, champ_keyRange).rValue.byLo;
-            int noteSup = this->sf2->get(id, champ_keyRange).rValue.byHi;
-
-            // Déplacement de l'étendue
-            noteInf -= nbTons;
-            noteSup -= nbTons;
-
-            // Ajustement
-            if (noteInf < 0)
-                noteInf = 0;
-            else if (noteInf > 127)
-                noteInf = 127;
-            if (noteSup < 0)
-                noteSup = 0;
-            else if (noteSup > 127)
-                noteSup = 127;
-
-            // Enregistrement de la nouvelle étendue
             Valeur valeur;
-            valeur.rValue.byLo = noteInf;
-            valeur.rValue.byHi = noteSup;
-            this->sf2->set(id, champ_keyRange, valeur);
+
+            // Etendue
+            if (adaptKeyRange)
+            {
+                int noteInf = this->sf2->get(idInstSmpl, champ_keyRange).rValue.byLo;
+                int noteSup = this->sf2->get(idInstSmpl, champ_keyRange).rValue.byHi;
+
+                // Déplacement de l'étendue
+                noteInf -= nbTons;
+                noteSup -= nbTons;
+
+                // Ajustement
+                if (noteInf < 0)
+                    noteInf = 0;
+                else if (noteInf > 127)
+                    noteInf = 127;
+                if (noteSup < 0)
+                    noteSup = 0;
+                else if (noteSup > 127)
+                    noteSup = 127;
+
+                // Enregistrement de la nouvelle étendue
+                valeur.rValue.byLo = noteInf;
+                valeur.rValue.byHi = noteSup;
+                this->sf2->set(idInstSmpl, champ_keyRange, valeur);
+            }
 
             // Note de base
-            EltID idSmpl = id;
+            EltID idSmpl = idInstSmpl;
             idSmpl.typeElement = elementSmpl;
-            idSmpl.indexElt = this->sf2->get(id, champ_sampleID).wValue;
+            idSmpl.indexElt = this->sf2->get(idInstSmpl, champ_sampleID).wValue;
             int rootKey = this->sf2->get(idSmpl, champ_byOriginalPitch).bValue;
-            if (this->sf2->isSet(id, champ_overridingRootKey))
-                rootKey = this->sf2->get(id, champ_overridingRootKey).wValue;
+            if (this->sf2->isSet(idInst, champ_overridingRootKey))
+                rootKey = this->sf2->get(idInst, champ_overridingRootKey).wValue;
+            if (this->sf2->isSet(idInstSmpl, champ_overridingRootKey))
+                rootKey = this->sf2->get(idInstSmpl, champ_overridingRootKey).wValue;
 
             // Modification rootkey et enregistrement
             rootKey -= nbTons;
@@ -756,11 +763,19 @@ void Page_Inst::transposer()
             else if (rootKey > 127)
                 rootKey = 127;
             valeur.wValue = rootKey;
-            this->sf2->set(id, champ_overridingRootKey, valeur);
+            this->sf2->set(idInstSmpl, champ_overridingRootKey, valeur);
 
             // Correction
-            int fineTune = this->sf2->get(id, champ_fineTune).shValue;
-            int coarseTune = this->sf2->get(id, champ_coarseTune).shValue;
+            int fineTune = 0;
+            if (this->sf2->isSet(idInst, champ_fineTune))
+                fineTune = this->sf2->get(idInst, champ_fineTune).wValue;
+            if (this->sf2->isSet(idInstSmpl, champ_fineTune))
+                fineTune = this->sf2->get(idInstSmpl, champ_fineTune).wValue;
+            int coarseTune = 0;
+            if (this->sf2->isSet(idInst, champ_coarseTune))
+                coarseTune = this->sf2->get(idInst, champ_coarseTune).wValue;
+            if (this->sf2->isSet(idInstSmpl, champ_coarseTune))
+                coarseTune = this->sf2->get(idInstSmpl, champ_coarseTune).wValue;
 
             // Modification de la correction
             fineTune += correction;
@@ -777,15 +792,15 @@ void Page_Inst::transposer()
 
             // Enregistrement de la nouvelle correction
             valeur.shValue = fineTune;
-            this->sf2->set(id, champ_fineTune, valeur);
+            this->sf2->set(idInstSmpl, champ_fineTune, valeur);
             valeur.shValue = coarseTune;
-            this->sf2->set(id, champ_coarseTune, valeur);
+            this->sf2->set(idInstSmpl, champ_coarseTune, valeur);
         }
     }
 
     // Simplification
-    this->sf2->simplify(id, champ_fineTune);
-    this->sf2->simplify(id, champ_coarseTune);
+    this->sf2->simplify(idInstSmpl, champ_fineTune);
+    this->sf2->simplify(idInstSmpl, champ_coarseTune);
 
     // Actualisation
     this->mainWindow->updateDo();

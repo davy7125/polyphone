@@ -34,6 +34,7 @@ DialogMixture::DialogMixture(QWidget *parent) :
 {
     ui->setupUi(this);
     this->setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint);
+    this->setAttribute(Qt::WA_DeleteOnClose, true);
 
     // Chargement des valeurs
     Config * conf = Config::getInstance();
