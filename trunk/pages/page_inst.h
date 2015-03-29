@@ -50,6 +50,7 @@ private slots:
     void mixture(QList<QList<int> > listeParam, QString nomInst, bool bouclage, int freq, bool stereo);
     void release(double duree36, double division, double deTune);
     void desaccorder(double doHerz, double division);
+    void transposer(double ton, bool adaptKeyRange);
 
     void on_pushRangeMode_clicked();
 
