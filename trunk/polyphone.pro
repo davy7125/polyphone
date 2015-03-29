@@ -178,7 +178,8 @@ SOURCES	+= main.cpp \
     sfark/sfarkfilemanager.cpp \
     gui_divers/dialogselection.cpp \
     pages/rectangleitem.cpp \
-    pages/graphicsviewrange.cpp
+    pages/graphicsviewrange.cpp \
+    tools/dialog_transposition.cpp
 
 HEADERS  += mainwindow.h \
     sf2_core/sf2_types.h \
@@ -245,7 +246,8 @@ HEADERS  += mainwindow.h \
     pages/tablecombobox.h \
     pages/graphicssimpletextitem.h \
     pages/rectangleitem.h \
-    pages/graphicsviewrange.h
+    pages/graphicsviewrange.h \
+    tools/dialog_transposition.h
 
 FORMS    += mainwindow.ui \
     gui_divers/config.ui \
@@ -267,7 +269,8 @@ FORMS    += mainwindow.ui \
     tools/dialog_celeste.ui \
     tools/dialog_visualizer.ui \
     tools/dialog_duplication.ui \
-    gui_divers/dialogselection.ui
+    gui_divers/dialogselection.ui \
+    tools/dialog_transposition.ui
 
 # Special compiler for sfark extractor
 SOURCES_M387 = sfark/sfarkextractor.cpp

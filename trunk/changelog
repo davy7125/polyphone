@@ -4,6 +4,7 @@ polyphone (1.6) unstable; urgency=low
  * Export of samples from different soundfonts is allowed
  * In the virtual keyboard, using "shift" with an arrow makes a quicker move
  * Mutations available for 64' resultant (organ mixture creation tool)
+ * Option to move keyrange or not (transposition tool for instrument)
  * Full screen mode
  * (fix) repetition is ignored when using arrow keys in the virtual keyboard
  * (fix) "0" was not selected when a new value is inserted in the table

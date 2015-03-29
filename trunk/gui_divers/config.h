@@ -103,6 +103,7 @@ public:
     double getTools_s_mur_coupure()         { return settings.value("tools/sample/mur_coupure", 15000.).toDouble(); }
     double getTools_s_transpo_ton()         { return settings.value("tools/sample/transposition_ton", 12.).toDouble(); }
     double getTools_i_transpo_ton()         { return settings.value("tools/instrument/transposition_ton", 12.).toDouble(); }
+    bool   getTools_i_transpo_keyrange()     { return settings.value("tools/instrument/transposition_keyrange", true).toBool(); }
     double getTools_i_release_dureeDo()     { return settings.value("tools/instrument/release_durationC", 0.3).toDouble(); }
     double getTools_i_release_division()    { return settings.value("tools/instrument/release_division", 2.).toDouble(); }
     double getTools_i_release_desaccordage(){ return settings.value("tools/instrument/release_desaccordage", 0.).toDouble(); }
@@ -296,6 +297,7 @@ public:
     void setTools_s_mur_coupure(double val)         { settings.setValue("tools/sample/mur_coupure", val); }
     void setTools_s_transpo_ton(double val)         { settings.setValue("tools/sample/transposition_ton", val); }
     void setTools_i_transpo_ton(double val)         { settings.setValue("tools/instrument/transposition_ton", val); }
+    void setTools_i_transpo_keyrange(bool val)       { settings.setValue("tools/instrument/transposition_keyrange", val); }
     void setTools_i_release_dureeDo(double val)     { settings.setValue("tools/instrument/release_durationC", val); }
     void setTools_i_release_division(double val)    { settings.setValue("tools/instrument/release_division", val); }
     void setTools_i_release_desaccordage(double val){ settings.setValue("tools/instrument/release_desaccordage", val); }
