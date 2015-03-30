@@ -19,8 +19,8 @@ signals:
     void accepted(double shift, bool adaptKeyRange);
 
 private slots:
-    void on_pushCancel_clicked();
-    void on_pushOk_clicked();
+    void on_buttonBox_accepted();
+    void on_buttonBox_rejected();
 
 private:
     Ui::DialogTransposition *ui;

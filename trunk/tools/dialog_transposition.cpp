@@ -21,12 +21,7 @@ DialogTransposition::~DialogTransposition()
     delete ui;
 }
 
-void DialogTransposition::on_pushCancel_clicked()
-{
-    this->close();
-}
-
-void DialogTransposition::on_pushOk_clicked()
+void DialogTransposition::on_buttonBox_accepted()
 {
     // Save configuration
     Config * conf = Config::getInstance();
@@ -35,5 +30,10 @@ void DialogTransposition::on_pushOk_clicked()
 
     // Emit signal and quit
     accepted(ui->spinTon->value(), ui->checkKeyRange->isChecked());
+    this->close();
+}
+
+void DialogTransposition::on_buttonBox_rejected()
+{
     this->close();
 }

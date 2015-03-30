@@ -283,6 +283,8 @@
         <file alias="5-1-8fr.html">ressources/doc/5-tools/1-instruments/5-1-8fr.html</file>
         <file alias="5-3-5en.html">ressources/doc/5-tools/3-global/5-3-5en.html</file>
         <file alias="5-3-5fr.html">ressources/doc/5-tools/3-global/5-3-5fr.html</file>
+        <file alias="outil8.png">ressources/doc/outil8.png</file>
+        <file alias="outil8 en.png">ressources/doc/outil8 en.png</file>
     </qresource>
     <qresource prefix="/traductions">
         <file alias="polyphone_en.qm">ressources/traductions/polyphone_en.qm</file>
