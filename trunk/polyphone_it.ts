@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="it_IT">
+<TS version="2.1" language="it_IT">
 <context>
     <name>ComboBox</name>
     <message>
@@ -402,263 +402,263 @@
         <translation>---- separatore ----</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.h" line="505"/>
+        <location filename="gui_divers/config.h" line="507"/>
         <source>w</source>
         <translatorcomment>default mapping of the keyboard</translatorcomment>
         <translation>z</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.h" line="506"/>
+        <location filename="gui_divers/config.h" line="508"/>
         <source>s</source>
         <translation>s</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.h" line="507"/>
+        <location filename="gui_divers/config.h" line="509"/>
         <source>x</source>
         <translation>x</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.h" line="508"/>
+        <location filename="gui_divers/config.h" line="510"/>
         <source>d</source>
         <translation>d</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.h" line="509"/>
+        <location filename="gui_divers/config.h" line="511"/>
         <source>c</source>
         <translation>c</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.h" line="510"/>
+        <location filename="gui_divers/config.h" line="512"/>
         <source>v</source>
         <translation>v</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.h" line="511"/>
+        <location filename="gui_divers/config.h" line="513"/>
         <source>g</source>
         <translation>g</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.h" line="512"/>
+        <location filename="gui_divers/config.h" line="514"/>
         <source>b</source>
         <translation>b</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.h" line="513"/>
+        <location filename="gui_divers/config.h" line="515"/>
         <source>h</source>
         <translation>h</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.h" line="514"/>
+        <location filename="gui_divers/config.h" line="516"/>
         <source>n</source>
         <translation>n</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.h" line="515"/>
+        <location filename="gui_divers/config.h" line="517"/>
         <source>j</source>
         <translation>j</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.h" line="516"/>
+        <location filename="gui_divers/config.h" line="518"/>
         <source>,</source>
         <translation>m</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.h" line="517"/>
+        <location filename="gui_divers/config.h" line="519"/>
         <source>;</source>
         <translation>,</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.h" line="523"/>
+        <location filename="gui_divers/config.h" line="525"/>
         <source>a</source>
         <translation>q</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.h" line="524"/>
+        <location filename="gui_divers/config.h" line="526"/>
         <source>é</source>
         <translation>2</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.h" line="525"/>
+        <location filename="gui_divers/config.h" line="527"/>
         <source>z</source>
         <translation>w</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.h" line="526"/>
+        <location filename="gui_divers/config.h" line="528"/>
         <source>&quot;</source>
         <translation>3</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.h" line="527"/>
+        <location filename="gui_divers/config.h" line="529"/>
         <source>e</source>
         <translation>e</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.h" line="528"/>
+        <location filename="gui_divers/config.h" line="530"/>
         <source>r</source>
         <translation>r</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.h" line="529"/>
+        <location filename="gui_divers/config.h" line="531"/>
         <source>(</source>
         <translation>5</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.h" line="530"/>
+        <location filename="gui_divers/config.h" line="532"/>
         <source>t</source>
         <translation>t</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.h" line="531"/>
+        <location filename="gui_divers/config.h" line="533"/>
         <source>-</source>
         <translation>6</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.h" line="532"/>
+        <location filename="gui_divers/config.h" line="534"/>
         <source>y</source>
         <translation>y</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.h" line="533"/>
+        <location filename="gui_divers/config.h" line="535"/>
         <source>è</source>
         <translation>7</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.h" line="534"/>
+        <location filename="gui_divers/config.h" line="536"/>
         <source>u</source>
         <translation>u</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.h" line="535"/>
+        <location filename="gui_divers/config.h" line="537"/>
         <source>i</source>
         <translation>i</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.h" line="541"/>
+        <location filename="gui_divers/config.h" line="543"/>
         <source>Shift+w</source>
         <translation>Shift+z</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.h" line="542"/>
+        <location filename="gui_divers/config.h" line="544"/>
         <source>Shift+s</source>
         <translation>Shift+s</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.h" line="543"/>
+        <location filename="gui_divers/config.h" line="545"/>
         <source>Shift+x</source>
         <translation>Shift+x</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.h" line="544"/>
+        <location filename="gui_divers/config.h" line="546"/>
         <source>Shift+d</source>
         <translation>Shift+d</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.h" line="545"/>
+        <location filename="gui_divers/config.h" line="547"/>
         <source>Shift+c</source>
         <translation>Shift+c</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.h" line="546"/>
+        <location filename="gui_divers/config.h" line="548"/>
         <source>Shift+v</source>
         <translation>Shift+v</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.h" line="547"/>
+        <location filename="gui_divers/config.h" line="549"/>
         <source>Shift+g</source>
         <translation>Shift+g</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.h" line="548"/>
+        <location filename="gui_divers/config.h" line="550"/>
         <source>Shift+b</source>
         <translation>Shift+b</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.h" line="549"/>
+        <location filename="gui_divers/config.h" line="551"/>
         <source>Shift+h</source>
         <translation>Shift+h</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.h" line="550"/>
+        <location filename="gui_divers/config.h" line="552"/>
         <source>Shift+n</source>
         <translation>Shift+n</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.h" line="551"/>
+        <location filename="gui_divers/config.h" line="553"/>
         <source>Shift+j</source>
         <translation>Shift+j</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.h" line="552"/>
+        <location filename="gui_divers/config.h" line="554"/>
         <source>Shift+?</source>
         <translation>Shift+m</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.h" line="553"/>
+        <location filename="gui_divers/config.h" line="555"/>
         <source>Shift+.</source>
         <translation>Shift+&lt;</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.h" line="559"/>
+        <location filename="gui_divers/config.h" line="561"/>
         <source>Shift+a</source>
         <translation>Shift+q</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.h" line="560"/>
+        <location filename="gui_divers/config.h" line="562"/>
         <source>Shift+2</source>
         <translation>Shift+@</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.h" line="561"/>
+        <location filename="gui_divers/config.h" line="563"/>
         <source>Shift+z</source>
         <translation>Shift+w</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.h" line="562"/>
+        <location filename="gui_divers/config.h" line="564"/>
         <source>Shift+3</source>
         <translation>Shift+#</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.h" line="563"/>
+        <location filename="gui_divers/config.h" line="565"/>
         <source>Shift+e</source>
         <translation>Shift+e</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.h" line="564"/>
+        <location filename="gui_divers/config.h" line="566"/>
         <source>Shift+r</source>
         <translation>Shift+r</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.h" line="565"/>
+        <location filename="gui_divers/config.h" line="567"/>
         <source>Shift+5</source>
         <translation>Shift+%</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.h" line="566"/>
+        <location filename="gui_divers/config.h" line="568"/>
         <source>Shift+t</source>
         <translation>Shift+t</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.h" line="567"/>
+        <location filename="gui_divers/config.h" line="569"/>
         <source>Shift+6</source>
         <translation>Shift+^</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.h" line="568"/>
+        <location filename="gui_divers/config.h" line="570"/>
         <source>Shift+y</source>
         <translation>Shift+y</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.h" line="569"/>
+        <location filename="gui_divers/config.h" line="571"/>
         <source>Shift+7</source>
         <translation>Shift+&amp;</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.h" line="570"/>
+        <location filename="gui_divers/config.h" line="572"/>
         <source>Shift+u</source>
         <translation>Shift+u</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.h" line="571"/>
+        <location filename="gui_divers/config.h" line="573"/>
         <source>Shift+i</source>
         <translation>Shift+i</translation>
     </message>
@@ -1346,7 +1346,7 @@
         <translation>ventisettesima</translation>
     </message>
     <message>
-        <location filename="tools/dialog_mixture.cpp" line="252"/>
+        <location filename="tools/dialog_mixture.cpp" line="253"/>
         <source>sans nom</source>
         <translation>senza nome</translation>
     </message>
@@ -1679,6 +1679,32 @@ instrument courant</source>
     </message>
 </context>
 <context>
+    <name>DialogTransposition</name>
+    <message>
+        <location filename="tools/dialog_transposition.ui" line="17"/>
+        <source>Transposition</source>
+        <translation>Transposizione</translation>
+    </message>
+    <message>
+        <location filename="tools/dialog_transposition.ui" line="44"/>
+        <source>Écart en demi-tons</source>
+        <translation>Differenza in semitoni</translation>
+    </message>
+    <message>
+        <source>Annuler</source>
+        <translation type="vanished">Annulla</translation>
+    </message>
+    <message>
+        <source>Ok</source>
+        <translation type="vanished">Ok</translation>
+    </message>
+    <message>
+        <location filename="tools/dialog_transposition.ui" line="27"/>
+        <source>Adapter l&apos;étendue de notes</source>
+        <translation type="unfinished">Adattare keyrange</translation>
+    </message>
+</context>
+<context>
     <name>DialogVisualizer</name>
     <message>
         <location filename="tools/dialog_visualizer.ui" line="17"/>
@@ -1909,7 +1935,7 @@ instrument courant</source>
     <message>
         <location filename="mainwindow.cpp" line="273"/>
         <location filename="mainwindow.cpp" line="480"/>
-        <location filename="mainwindow.cpp" line="593"/>
+        <location filename="mainwindow.cpp" line="596"/>
         <source>&amp;Annuler</source>
         <translation>&amp;Annulla</translation>
     </message>
@@ -2018,8 +2044,8 @@ instrument courant</source>
     </message>
     <message>
         <location filename="mainwindow.ui" line="860"/>
-        <location filename="mainwindow.cpp" line="1068"/>
-        <location filename="mainwindow.cpp" line="1075"/>
+        <location filename="mainwindow.cpp" line="1071"/>
+        <location filename="mainwindow.cpp" line="1078"/>
         <source>&amp;Renommer</source>
         <translation>&amp;Rinomina</translation>
     </message>
@@ -2315,7 +2341,7 @@ instrument courant</source>
     </message>
     <message>
         <location filename="mainwindow.ui" line="69"/>
-        <location filename="mainwindow.cpp" line="2524"/>
+        <location filename="mainwindow.cpp" line="2527"/>
         <source>Note</source>
         <translation>Nota</translation>
     </message>
@@ -2472,8 +2498,8 @@ instrument courant</source>
         <translation>&amp;Esci senza salvare</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="607"/>
-        <location filename="mainwindow.cpp" line="611"/>
+        <location filename="mainwindow.cpp" line="610"/>
+        <location filename="mainwindow.cpp" line="614"/>
         <source>Fichier .sf2 (*.sf2)</source>
         <translation>.sf2 file (*.sf2)</translation>
     </message>
@@ -2485,12 +2511,12 @@ instrument courant</source>
         <location filename="mainwindow.cpp" line="437"/>
         <location filename="mainwindow.cpp" line="440"/>
         <location filename="mainwindow.cpp" line="477"/>
-        <location filename="mainwindow.cpp" line="627"/>
         <location filename="mainwindow.cpp" line="630"/>
         <location filename="mainwindow.cpp" line="633"/>
-        <location filename="mainwindow.cpp" line="1441"/>
-        <location filename="mainwindow.cpp" line="1946"/>
-        <location filename="mainwindow.cpp" line="2572"/>
+        <location filename="mainwindow.cpp" line="636"/>
+        <location filename="mainwindow.cpp" line="1444"/>
+        <location filename="mainwindow.cpp" line="1949"/>
+        <location filename="mainwindow.cpp" line="2575"/>
         <source>Attention</source>
         <translation>Attenzione</translation>
     </message>
@@ -2520,42 +2546,42 @@ instrument courant</source>
         <translation>&amp;Chiudi senza salvare </translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1293"/>
+        <location filename="mainwindow.cpp" line="1296"/>
         <source>Nom de l&apos;instrument (max 20 caractères) :</source>
         <translation>Nome dello strumento (massimo 20 caratteri):</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1294"/>
+        <location filename="mainwindow.cpp" line="1297"/>
         <source>Nom du preset (max 20 caractères) :</source>
         <translation>Nome del presets (massimo 20 caratteri):</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1295"/>
+        <location filename="mainwindow.cpp" line="1298"/>
         <source>Nom du SF2 (max 255 caractères) :</source>
         <translation>Nome del SF2 (massimo 255 caratteri):</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1511"/>
+        <location filename="mainwindow.cpp" line="1514"/>
         <source>L » existe déjà.&lt;br /&gt;Que faire ?</source>
         <translation>L&quot; esiste già.&lt;br/&gt;Sostituisci?</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1517"/>
+        <location filename="mainwindow.cpp" line="1520"/>
         <source>R » existe déjà.&lt;br /&gt;Que faire ?</source>
         <translation>R&quot; esiste già.&lt;br/&gt;Sostituisci?</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1526"/>
+        <location filename="mainwindow.cpp" line="1529"/>
         <source> » existe déjà.&lt;br /&gt;Que faire ?</source>
         <translation>&quot; esiste già.&lt;br/&gt;Sostituisci?</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2308"/>
+        <location filename="mainwindow.cpp" line="2311"/>
         <source>Atténuation minimale (dB) :</source>
         <translation>Attenuazione minima (dB):</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="561"/>
+        <location filename="mainwindow.cpp" line="564"/>
         <source> bits&lt;/b&gt;</source>
         <translation> bits&lt;/b&gt;</translation>
     </message>
@@ -2600,223 +2626,223 @@ instrument courant</source>
         <translation>soundfonts (*.sf2 *.sfz *.sfArk);;sf2 files (*.sf2);;sfz files (*.sfz);;sfArk archives (*.sfArk)</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="564"/>
+        <location filename="mainwindow.cpp" line="567"/>
         <source>&amp;Oui</source>
         <translation>&amp;Si</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="565"/>
+        <location filename="mainwindow.cpp" line="568"/>
         <source>&amp;Non</source>
         <translation>&amp;No</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="581"/>
+        <location filename="mainwindow.cpp" line="584"/>
         <source>&lt;b&gt;Trop de paramètres dans les instruments et les presets.&lt;/b&gt;</source>
         <translation>&lt;b&gt;Troppi parametri definiti negli strumenti e nei presets.&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="583"/>
+        <location filename="mainwindow.cpp" line="586"/>
         <source>&lt;b&gt;Trop de paramètres dans les instruments.&lt;/b&gt;</source>
         <translation>&lt;b&gt;Troppi parametri definiti negli strumenti.&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="585"/>
+        <location filename="mainwindow.cpp" line="588"/>
         <source>&lt;b&gt;Trop de paramètres dans les presets.&lt;/b&gt;</source>
         <translation>&lt;b&gt;Troppi parametri definiti nei presets.&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="587"/>
+        <location filename="mainwindow.cpp" line="590"/>
         <source>Certains synthétiseurs ne prennent pas en compte les paramètres au delà du 65536ème.
 Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
         <translation>Alcuni sintetizzatori non tengono in considerazione i parametri al sopra del 65536-mo.
 Dividere il file in più SF2 può risolvere il problema.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="591"/>
+        <location filename="mainwindow.cpp" line="594"/>
         <source>&amp;Sauvegarder</source>
         <translation>&amp;Salva</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="592"/>
+        <location filename="mainwindow.cpp" line="595"/>
         <source>Sauvegarder, &amp;désactiver ce message</source>
         <translation>Salva, &amp;disabilita questo messaggio</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="607"/>
         <location filename="mainwindow.cpp" line="610"/>
+        <location filename="mainwindow.cpp" line="613"/>
         <source>Sauvegarder une soundfont</source>
         <translation>Salva un soundfont</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="627"/>
+        <location filename="mainwindow.cpp" line="630"/>
         <source>Extension inconnue.</source>
         <translation>Estensione sconoscita.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="633"/>
+        <location filename="mainwindow.cpp" line="636"/>
         <source>Impossible d&apos;enregistrer le fichier.</source>
         <translation>Impossibile salvare il file.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1080"/>
+        <location filename="mainwindow.cpp" line="1083"/>
         <source>&amp;Renommer en masse</source>
         <translation>&amp;Rinomina il gruppo</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1292"/>
+        <location filename="mainwindow.cpp" line="1295"/>
         <source>Nom de l&apos;échantillon (max 20 caractères) :</source>
         <oldsource>Nom du sample (max 20 caractères) :</oldsource>
         <translation>Nome del campione (massimo 20 caratteri):</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1296"/>
-        <location filename="mainwindow.cpp" line="2307"/>
+        <location filename="mainwindow.cpp" line="1299"/>
+        <location filename="mainwindow.cpp" line="2310"/>
         <source>Question</source>
         <translation>Domanda</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1442"/>
+        <location filename="mainwindow.cpp" line="1445"/>
         <source>Une erreur est survenue lors de l&apos;import du fichier </source>
         <translation>Un errore è occorso durante l&apos;importazione del file </translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1510"/>
-        <location filename="mainwindow.cpp" line="1516"/>
-        <location filename="mainwindow.cpp" line="1525"/>
+        <location filename="mainwindow.cpp" line="1513"/>
+        <location filename="mainwindow.cpp" line="1519"/>
+        <location filename="mainwindow.cpp" line="1528"/>
         <source>L&apos;échantillon « </source>
         <translation>Il campione &quot;</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1540"/>
+        <location filename="mainwindow.cpp" line="1543"/>
         <source>&amp;Remplacer</source>
         <translation>&amp;Sostituisci</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1541"/>
+        <location filename="mainwindow.cpp" line="1544"/>
         <source>R&amp;emplacer tout</source>
         <translation>S&amp;ostituisci tutti</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1542"/>
+        <location filename="mainwindow.cpp" line="1545"/>
         <source>&amp;Dupliquer</source>
         <translation>&amp;Duplica</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1543"/>
+        <location filename="mainwindow.cpp" line="1546"/>
         <source>D&amp;upliquer tout</source>
         <translation>D&amp;uplica tutti</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1544"/>
+        <location filename="mainwindow.cpp" line="1547"/>
         <source>&amp;Ignorer</source>
         <translation>&amp;Ignora</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1545"/>
+        <location filename="mainwindow.cpp" line="1548"/>
         <source>I&amp;gnorer tout</source>
         <translation>I&amp;gnora tutti</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1847"/>
+        <location filename="mainwindow.cpp" line="1850"/>
         <source>Fusion des soundfonts :</source>
         <translation>Unisci soundfonts:</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1921"/>
+        <location filename="mainwindow.cpp" line="1924"/>
         <source>Créer un nouvel instrument</source>
         <translation>Crea un nuovo strumento</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1946"/>
+        <location filename="mainwindow.cpp" line="1949"/>
         <source>Aucun preset n&apos;est disponible.</source>
         <translation>Nessun preset disponibile.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1956"/>
+        <location filename="mainwindow.cpp" line="1959"/>
         <source>Créer un nouveau preset</source>
         <translation>Crea un nuovo preset</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2290"/>
+        <location filename="mainwindow.cpp" line="2293"/>
         <source> échantillon et </source>
         <translation> campione e </translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2292"/>
+        <location filename="mainwindow.cpp" line="2295"/>
         <source> échantillons et </source>
         <translation> campioni e </translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2505"/>
+        <location filename="mainwindow.cpp" line="2508"/>
         <source>Exporter les pics de fréquence</source>
         <translation>Esporta i picchi di frequenza</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2506"/>
+        <location filename="mainwindow.cpp" line="2509"/>
         <source>Fichier .csv (*.csv)</source>
         <translation>Csv file (*.csv)</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2520"/>
+        <location filename="mainwindow.cpp" line="2523"/>
         <source>;</source>
         <translatorcomment>column separator symbol in csv files</translatorcomment>
         <translation>,</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2522"/>
+        <location filename="mainwindow.cpp" line="2525"/>
         <source>Echantillon</source>
         <translation>Campione</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2522"/>
+        <location filename="mainwindow.cpp" line="2525"/>
         <source>Numéro de pic</source>
         <translation>Numero di picco</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2523"/>
+        <location filename="mainwindow.cpp" line="2526"/>
         <source>Facteur</source>
         <translation>Fattore</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2523"/>
+        <location filename="mainwindow.cpp" line="2526"/>
         <source>Fréquence</source>
         <translation>Frequenza</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2524"/>
+        <location filename="mainwindow.cpp" line="2527"/>
         <source>Correction</source>
         <translation>Correzione</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2546"/>
-        <location filename="mainwindow.cpp" line="2547"/>
+        <location filename="mainwindow.cpp" line="2549"/>
+        <location filename="mainwindow.cpp" line="2550"/>
         <source>,</source>
         <translatorcomment>decimal separator</translatorcomment>
         <translation>.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2572"/>
+        <location filename="mainwindow.cpp" line="2575"/>
         <source>Le fichier ne contient aucun modulateur.</source>
         <translation>Il soundfont non contiene alcun modulatore.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2574"/>
-        <location filename="mainwindow.cpp" line="2576"/>
+        <location filename="mainwindow.cpp" line="2577"/>
+        <location filename="mainwindow.cpp" line="2579"/>
         <source>Information</source>
         <translation>Informazione</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2574"/>
+        <location filename="mainwindow.cpp" line="2577"/>
         <source>1 modulateur a été supprimé.</source>
         <translation>1 modulatore è stato cancellato.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2577"/>
+        <location filename="mainwindow.cpp" line="2580"/>
         <source>modulateurs ont été supprimés.</source>
         <translation>modulatori sono stati cancellati.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1460"/>
+        <location filename="mainwindow.cpp" line="1463"/>
         <source>Importer un fichier audio</source>
         <translation>Importa un file audio</translation>
     </message>
@@ -2831,49 +2857,49 @@ Dividere il file in più SF2 può risolvere il problema.</translation>
         <translation>Il file è già caricato.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="561"/>
+        <location filename="mainwindow.cpp" line="564"/>
         <source>&lt;b&gt;Perte de résolution </source>
         <translation>&lt;b&gt;Perdita di risoluzione </translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="562"/>
+        <location filename="mainwindow.cpp" line="565"/>
         <source>La qualité des samples sera abaissée suite à cette opération. Continuer ?</source>
         <translation>La qualità dei campioni verrà ridotta dopo questa operazione. Proseguire?</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="630"/>
+        <location filename="mainwindow.cpp" line="633"/>
         <source>Fichier déjà ouvert, impossible de sauvegarder.</source>
         <translation>File già aperto, impossibile salvare.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1462"/>
+        <location filename="mainwindow.cpp" line="1465"/>
         <source>Fichier .wav (*.wav)</source>
         <oldsource>Fichier .wav (*.wav);</oldsource>
         <translation>Wav file (*.wav)</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1704"/>
+        <location filename="mainwindow.cpp" line="1707"/>
         <source>Choisir un répertoire de destination</source>
         <translation>Scegli la cartella di destinazione</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1921"/>
+        <location filename="mainwindow.cpp" line="1924"/>
         <source>Nom du nouvel instrument :</source>
         <translation>Nome del nuovo strumento:</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1956"/>
+        <location filename="mainwindow.cpp" line="1959"/>
         <source>Nom du nouveau preset :</source>
         <translation>Nome del nuovo preset:</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2294"/>
+        <location filename="mainwindow.cpp" line="2297"/>
         <source> instrument ont été supprimés.</source>
         <translatorcomment>instrument: singular</translatorcomment>
         <translation> strumento è stato eliminato.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2296"/>
+        <location filename="mainwindow.cpp" line="2299"/>
         <source> instruments ont été supprimés.</source>
         <translatorcomment>instrument: plural</translatorcomment>
         <translation> strumenti sono stati eliminati.</translation>
@@ -3635,36 +3661,36 @@ Dividere il file in più SF2 può risolvere il problema.</translation>
         <translation>Valore assoluto</translation>
     </message>
     <message>
-        <location filename="pages/page_inst.cpp" line="141"/>
+        <location filename="pages/page_inst.cpp" line="142"/>
         <source>&lt;b&gt;Instrument lié à aucun preset.&lt;/b&gt;</source>
         <oldsource>&lt;b&gt;Instrument liÃ© Ã  aucun preset.&lt;/b&gt;</oldsource>
         <translation>&lt;b&gt;Strumento non collegato a nessun preset.&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="pages/page_inst.cpp" line="143"/>
+        <location filename="pages/page_inst.cpp" line="144"/>
         <source>&lt;b&gt;Instrument lié au preset : &lt;/b&gt;</source>
         <oldsource>&lt;b&gt;Instrument liÃ© au preset : &lt;/b&gt;</oldsource>
         <translation>&lt;b&gt;Strumento collegato al preset: &lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="pages/page_inst.cpp" line="145"/>
+        <location filename="pages/page_inst.cpp" line="146"/>
         <source>&lt;b&gt;Instrument lié aux presets : &lt;/b&gt;</source>
         <oldsource>&lt;b&gt;Instrument liÃ© aux presets : &lt;/b&gt;</oldsource>
         <translation>&lt;b&gt;Strumento collegato ai presets: &lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="pages/page_inst.cpp" line="156"/>
-        <location filename="pages/page_inst.cpp" line="251"/>
-        <location filename="pages/page_inst.cpp" line="340"/>
+        <location filename="pages/page_inst.cpp" line="157"/>
+        <location filename="pages/page_inst.cpp" line="252"/>
+        <location filename="pages/page_inst.cpp" line="341"/>
         <location filename="pages/page_inst.cpp" line="602"/>
         <location filename="pages/page_inst.cpp" line="688"/>
         <source>Attention</source>
         <translation>Attenzione</translation>
     </message>
     <message>
-        <location filename="pages/page_inst.cpp" line="156"/>
-        <location filename="pages/page_inst.cpp" line="251"/>
-        <location filename="pages/page_inst.cpp" line="340"/>
+        <location filename="pages/page_inst.cpp" line="157"/>
+        <location filename="pages/page_inst.cpp" line="252"/>
+        <location filename="pages/page_inst.cpp" line="341"/>
         <location filename="pages/page_inst.cpp" line="602"/>
         <location filename="pages/page_inst.cpp" line="688"/>
         <source>L&apos;instrument doit contenir des sons.</source>
@@ -3686,14 +3712,12 @@ Dividere il file in più SF2 può risolvere il problema.</translation>
         <translation>senza nome</translation>
     </message>
     <message>
-        <location filename="pages/page_inst.cpp" line="695"/>
         <source>Transposition</source>
-        <translation>Transposizione</translation>
+        <translation type="vanished">Transposizione</translation>
     </message>
     <message>
-        <location filename="pages/page_inst.cpp" line="696"/>
         <source>Écart en demi-tons :</source>
-        <translation>Differenza in semitoni:</translation>
+        <translation type="vanished">Differenza in semitoni:</translation>
     </message>
 </context>
 <context>
