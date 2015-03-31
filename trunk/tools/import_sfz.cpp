@@ -410,6 +410,7 @@ void EnsembleGroupes::moveOpcodeInSamples(Parametre::OpCode opcode, QVariant::Ty
     default:
         break;
     }
+    _paramGlobaux.removeOpCode(opcode);
 }
 
 void EnsembleGroupes::moveModInSamples()
