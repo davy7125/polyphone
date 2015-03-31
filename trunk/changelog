@@ -13,6 +13,7 @@ polyphone (1.6) unstable; urgency=low
  * (fix) selection in the tree now updates the virtual keyboard
  * (fix) copy / paste of elements
  * (fix) GUI fix for mac
+ * (fix) loop_mode one-shot caused sometimes a wrong envelop release in the sfz import
 
  -- Davy Triponney <davy.triponney@gmail.com>  XXX, XX Mar 2015 11:15:10 +0100
 
