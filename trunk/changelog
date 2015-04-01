@@ -1,7 +1,8 @@
 polyphone (1.6) unstable; urgency=low
 
  * Full screen mode
- * Possibility to export presets from different soundfonts to one sf2
+ * Visibility of all soundfonts or just a specific soundfont in the tree
+ * Possibility to merge presets from different soundfonts to one sf2 via the export
  * Export of samples from different soundfonts is allowed
  * In the virtual keyboard, using "shift" with an arrow makes a quicker move
  * Option to move keyrange or not in the transposition tool for instruments
