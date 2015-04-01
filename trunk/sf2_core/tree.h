@@ -30,6 +30,7 @@
 
 class Pile_sf2;
 class MainWindow;
+class QComboBox;
 
 class Tree : public QTreeWidget
 {
@@ -56,7 +57,7 @@ public:
     explicit Tree(QWidget *parent = 0);
     ~Tree();
 
-    void init(MainWindow *mainWindow, Pile_sf2 *sf2);
+    void init(MainWindow *mainWindow, Pile_sf2 *sf2, QComboBox * comboSf2);
     void trier(int forme);
     void updateAtNextSelectionRequest();
     unsigned int getSelectedItemsNumber();
@@ -72,12 +73,16 @@ public:
     void activeSuppression();
     void clearPastedID();
     EltID getElementToSelectAfterDeletion();
+    void addSf2InComboBox(int numSf2);
+    void removeSf2FromComboBox(int numSf2);
+    void renameSf2InComboBox(int numSf2, QString name);
 
 public slots:
     void collapse() {this->trier(1);}       // Clic sur "enrouler"
     void searchTree(QString qStr);          // Lors d'une modification du champ recherche
     void clicTree();                        // Modification de la sélection dans l'arborescence
     void clicTreeRight();                   // Clic droit dans l'arborescence
+    void comboSf2IndexChanged(int index);
 
 signals:
     void dropped(EltID dest, EltID src, int temps, int *msg, QByteArray *ba1, QByteArray *ba2);
@@ -107,7 +112,10 @@ private:
     bool infoIsSelectedItemsSf2Unique;
     bool infoIsSelectedItemsFamilyUnique;
     Pile_sf2 * _sf2;
+    QComboBox * _comboSf2;
     QList<EltID> _displayedElements;
+    QString _searchedText;
+    int _displayedSf2;
 
     // Méthodes privées
     void updateSelectionInfo();
@@ -123,6 +131,7 @@ private:
     EltID getNextInstSmpl(int numInst);
     EltID getNextPrst();
     EltID getNextPrstInst(int numPrst);
+    void searchTree(QString qStr, int displayedSf2);
 };
 
 #endif // TREE_H

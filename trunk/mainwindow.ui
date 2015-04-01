@@ -370,7 +370,7 @@
    <property name="minimumSize">
     <size>
      <width>150</width>
-     <height>149</height>
+     <height>165</height>
     </size>
    </property>
    <property name="maximumSize">
@@ -422,6 +422,16 @@
        <property name="topMargin">
         <number>0</number>
        </property>
+       <property name="bottomMargin">
+        <number>2</number>
+       </property>
+       <item>
+        <widget class="QComboBox" name="comboSf2">
+         <property name="focusPolicy">
+          <enum>Qt::NoFocus</enum>
+         </property>
+        </widget>
+       </item>
        <item>
         <widget class="Tree" name="arborescence">
          <property name="font">
@@ -488,20 +498,20 @@
           <number>2</number>
          </property>
          <property name="topMargin">
-          <number>2</number>
+          <number>3</number>
          </property>
          <property name="rightMargin">
           <number>2</number>
          </property>
          <property name="bottomMargin">
-          <number>2</number>
+          <number>1</number>
          </property>
          <item>
           <widget class="QPushButton" name="push_enrouler">
            <property name="maximumSize">
             <size>
-             <width>30</width>
-             <height>16777215</height>
+             <width>24</width>
+             <height>24</height>
             </size>
            </property>
            <property name="toolTip">
@@ -526,8 +536,8 @@
           <widget class="QPushButton" name="push_derouler">
            <property name="maximumSize">
             <size>
-             <width>30</width>
-             <height>16777215</height>
+             <width>24</width>
+             <height>24</height>
             </size>
            </property>
            <property name="toolTip">
@@ -547,6 +557,12 @@
          </item>
          <item>
           <widget class="QLineEdit" name="editSearch">
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>24</height>
+            </size>
+           </property>
            <property name="font">
             <font>
              <weight>50</weight>
@@ -565,8 +581,8 @@
           <widget class="QPushButton" name="push_nosearch">
            <property name="maximumSize">
             <size>
-             <width>30</width>
-             <height>16777215</height>
+             <width>24</width>
+             <height>24</height>
             </size>
            </property>
            <property name="toolTip">

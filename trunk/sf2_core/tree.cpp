@@ -26,6 +26,7 @@
 #include "mainwindow.h"
 #include <QMenu>
 #include <QAction>
+#include <QComboBox>
 #include "pile_sf2.h"
 
 Tree::Tree(QWidget *parent) : QTreeWidget(parent),
@@ -37,7 +38,9 @@ Tree::Tree(QWidget *parent) : QTreeWidget(parent),
     infoIsSelectedItemsTypeUnique(false),
     infoIsSelectedItemsSf2Unique(false),
     infoIsSelectedItemsFamilyUnique(false),
-    _sf2(NULL)
+    _sf2(NULL),
+    _searchedText(""),
+    _displayedSf2(-1)
 {}
 
 Tree::~Tree()
@@ -103,10 +106,13 @@ Tree::menuClicDroit::~menuClicDroit()
     delete this->menu;
 }
 
-void Tree::init(MainWindow *mainWindow, Pile_sf2 * sf2)
+void Tree::init(MainWindow *mainWindow, Pile_sf2 * sf2, QComboBox * comboSf2)
 {
     this->mainWindow = mainWindow;
-    this->_sf2 = sf2;
+    _sf2 = sf2;
+    _comboSf2 = comboSf2;
+    this->connect(_comboSf2, SIGNAL(currentIndexChanged(int)), SLOT(comboSf2IndexChanged(int)));
+    _comboSf2->addItem(trUtf8("Tout afficher"), -1);
 
     // Création menu contextuel
     this->menuArborescence = new menuClicDroit(mainWindow);
@@ -139,7 +145,77 @@ void Tree::trier(int forme)
     }
 }
 
+void Tree::addSf2InComboBox(int numSf2)
+{
+    _comboSf2->addItem("", numSf2);
+    if (_comboSf2->currentData().toInt() != -1)
+        _comboSf2->setCurrentIndex(_comboSf2->count() - 1);
+}
+
+void Tree::removeSf2FromComboBox(int numSf2)
+{
+    int indexToRemove = -1;
+    for (int i = 0; i < _comboSf2->count(); i++)
+    {
+        int iData = _comboSf2->itemData(i).toInt();
+        if (iData == numSf2)
+            indexToRemove = i;
+        else if (iData > numSf2)
+            _comboSf2->setItemData(i, iData - 1);
+    }
+    if (_comboSf2->currentIndex() == indexToRemove)
+        _comboSf2->setCurrentIndex(0);
+    _comboSf2->removeItem(indexToRemove);
+}
+
+void Tree::renameSf2InComboBox(int numSf2, QString name)
+{
+    int currentData = _comboSf2->currentData().toInt();
+    _comboSf2->blockSignals(true);
+    _comboSf2->removeItem(0);
+    for (int i = 0; i < _comboSf2->count(); i++)
+    {
+        if (_comboSf2->itemData(i).toInt() == numSf2)
+        {
+            _comboSf2->setItemText(i, name);
+            break;
+        }
+    }
+    _comboSf2->model()->sort(0);
+    _comboSf2->insertItem(0, trUtf8("Tout afficher"), -1);
+    _comboSf2->blockSignals(false);
+
+    if (currentData == -1)
+        _comboSf2->setCurrentIndex(0);
+    else
+    {
+        for (int i = 0; i < _comboSf2->count(); i++)
+        {
+            if (_comboSf2->itemData(i).toInt() == currentData)
+            {
+                _comboSf2->setCurrentIndex(i);
+                return;
+            }
+        }
+    }
+}
+
+void Tree::comboSf2IndexChanged(int index)
+{
+    if (index >= 0)
+        _displayedSf2 = _comboSf2->itemData(index).toInt();
+    else
+        _displayedSf2 = -1;
+    searchTree(_searchedText, _displayedSf2);
+}
+
 void Tree::searchTree(QString qStr)
+{
+    _searchedText = qStr;
+    searchTree(_searchedText, _displayedSf2);
+}
+
+void Tree::searchTree(QString qStr, int displayedSf2)
 {
     qStr = qStr.toLower();
     unsigned int max = this->topLevelItemCount();
@@ -152,6 +228,7 @@ void Tree::searchTree(QString qStr)
     for (unsigned int i = 0; i < max; i ++)
     {
         child = this->topLevelItem(i);
+        child->setHidden(false);
         max2 = child->childCount();
 
         // Niveau 1: en-têtes "échantillons", "instruments", "presets"
@@ -166,34 +243,43 @@ void Tree::searchTree(QString qStr)
             }
         }
     }
-    if (isDisplayed)
-        return;
 
     for (unsigned int i = 0; i < max; i ++)
     {
         child = this->topLevelItem(i);
-        max2 = child->childCount();
 
-        // Niveau 1: en-têtes "échantillons", "instruments", "presets"
-        for (unsigned int j = 0; j < max2; j++)
+        if (displayedSf2 == -1 || child->text(1).toInt() == displayedSf2)
         {
-            // Niveau 2: sample, instrument ou preset
-            for (int k = 0; k < child->child(j)->childCount(); k++)
+            if (!isDisplayed)
             {
-                QTreeWidgetItem * item = child->child(j)->child(k);
-                if (item->text(6) == "0") // Si l'élément n'est pas masqué par une suppression non définitive
+                max2 = child->childCount();
+
+                // Niveau 1: en-têtes "échantillons", "instruments", "presets"
+                for (unsigned int j = 0; j < max2; j++)
                 {
-                    if (item->text(0).toLower().indexOf(qStr) != -1 || item->isSelected())
+                    // Niveau 2: sample, instrument ou preset
+                    for (int k = 0; k < child->child(j)->childCount(); k++)
                     {
-                        if (item->text(2) == "smpl")
-                            displaySample(item->text(1).toInt(), item->text(3).toInt());
-                        else if (item->text(2) == "inst")
-                            displayInstrument(item->text(1).toInt(), item->text(3).toInt());
-                        else if (item->text(2) == "prst")
-                            displayPreset(item->text(1).toInt(), item->text(3).toInt());
+                        QTreeWidgetItem * item = child->child(j)->child(k);
+                        if (item->text(6) == "0") // Si l'élément n'est pas masqué par une suppression non définitive
+                        {
+                            if (item->text(0).toLower().indexOf(qStr) != -1 || item->isSelected())
+                            {
+                                if (item->text(2) == "smpl")
+                                    displaySample(item->text(1).toInt(), item->text(3).toInt());
+                                else if (item->text(2) == "inst")
+                                    displayInstrument(item->text(1).toInt(), item->text(3).toInt());
+                                else if (item->text(2) == "prst")
+                                    displayPreset(item->text(1).toInt(), item->text(3).toInt());
+                            }
+                        }
                     }
                 }
             }
+        }
+        else
+        {
+            child->setHidden(true);
         }
     }
 }
