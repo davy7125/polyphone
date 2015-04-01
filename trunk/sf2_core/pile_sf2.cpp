@@ -927,6 +927,7 @@ int Pile_sf2::add(EltID id, bool storeAction)
             sf2->eltTree->setFont(0, font);
             sf2->eltTree->setSizeHint(0, QSize(0,30));
             sf2->eltTree->setIcon(0, QIcon(":/icones/document"));
+
             // Conteneurs pour samples, instruments et presets
             sf2->eltTreeSmpl = new QTreeWidgetItem(sf2->eltTree);
             sf2->eltTreeSmpl->setText(0, QObject::trUtf8("Échantillons"));
@@ -950,6 +951,8 @@ int Pile_sf2::add(EltID id, bool storeAction)
             sf2->eltTreePrst->setText(5, "c");
             sf2->eltTreePrst->setSizeHint(0, QSize(0,23));
             sf2->eltTreePrst->setFont(0, font);
+
+            this->tree->addSf2InComboBox(id.indexSf2);
             this->tree->trier(1);
         }
 
@@ -1198,8 +1201,7 @@ int Pile_sf2::remove(EltID id, bool permanently, bool storeAction, int *message)
         {
             // propagation aux presets /!\ si temporaire, ne pas propager aux éléments déjà supprimés de manière temporaire
             id2.indexElt = i;
-            if (permanently || !this->get(id2, champ_hidden).bValue)
-                this->remove(id2, permanently, storeAction, message);
+            this->remove(id2, true, storeAction, message);
         }
         id2.typeElement = elementInst;
         max = this->count(id2);
@@ -1207,8 +1209,7 @@ int Pile_sf2::remove(EltID id, bool permanently, bool storeAction, int *message)
         {
             // propagation aux instruments
             id2.indexElt = i;
-            if (permanently || !this->get(id2, champ_hidden).bValue)
-                this->remove(id2, permanently, storeAction, message);
+            this->remove(id2, true, storeAction, message);
         }
         id2.typeElement = elementSmpl;
         max = this->count(id2);
@@ -1216,45 +1217,36 @@ int Pile_sf2::remove(EltID id, bool permanently, bool storeAction, int *message)
         {
             // propagation aux samples
             id2.indexElt = i;
-            if (permanently || !this->get(id2, champ_hidden).bValue)
-                this->remove(id2, permanently, storeAction, message);
+            this->remove(id2, true, storeAction, message);
         }
-        if (permanently)
-        {
-            // Ajustement de la numérotation dans les actions
-            this->pileActions->decrementer(id);
-            // Ajustement de la numérotation
-            this->sf2->getElt(id.indexSf2)->decrementerSF2();
-            if (tree)
-            {
-                // Suppression des éléments graphiques
-                delete this->sf2->getElt(id.indexSf2)->eltTreePrst;
-                delete this->sf2->getElt(id.indexSf2)->eltTreeInst;
-                delete this->sf2->getElt(id.indexSf2)->eltTreeSmpl;
-                delete this->sf2->getElt(id.indexSf2)->eltTree;
-            }
-            // Suppression du sf2
-            SF2 *tmp = this->sf2->getElt(id.indexSf2)->suivant;
-            this->sf2->getElt(id.indexSf2)->suivant = NULL;
-            delete this->sf2->getElt(id.indexSf2);
-            if (id.indexSf2 == 0) this->sf2 = tmp;
-            else this->sf2->getElt(id.indexSf2-1)->suivant = tmp;
-        }
-        else
-        {
-            if (tree)
-            {
-                // Masquage des éléments graphiques
-                this->sf2->getElt(id.indexSf2)->eltTreePrst->setHidden(1);
-                this->sf2->getElt(id.indexSf2)->eltTreeInst->setHidden(1);
-                this->sf2->getElt(id.indexSf2)->eltTreeSmpl->setHidden(1);
-                this->sf2->getElt(id.indexSf2)->eltTree->setHidden(1);
-            }
-            // Masquage du sf2
-            this->sf2->getElt(id.indexSf2)->hidden = 1;
-        }
+
+        // Ajustement de la numérotation dans les actions
+        this->pileActions->decrementer(id);
+
+        // Ajustement de la numérotation
+        this->sf2->getElt(id.indexSf2)->decrementerSF2();
         if (tree)
+        {
+            // Suppression des éléments graphiques
+            delete this->sf2->getElt(id.indexSf2)->eltTreePrst;
+            delete this->sf2->getElt(id.indexSf2)->eltTreeInst;
+            delete this->sf2->getElt(id.indexSf2)->eltTreeSmpl;
+            delete this->sf2->getElt(id.indexSf2)->eltTree;
+        }
+        // Suppression du sf2
+        SF2 *tmp = this->sf2->getElt(id.indexSf2)->suivant;
+        this->sf2->getElt(id.indexSf2)->suivant = NULL;
+        delete this->sf2->getElt(id.indexSf2);
+        if (id.indexSf2 == 0)
+            this->sf2 = tmp;
+        else
+            this->sf2->getElt(id.indexSf2-1)->suivant = tmp;
+
+        if (tree)
+        {
+            this->tree->removeSf2FromComboBox(id.indexSf2);
             this->tree->updateAtNextSelectionRequest();
+        }
         }break;
     case elementSmpl:{
         // suppression d'un sample
@@ -1927,6 +1919,7 @@ int Pile_sf2::set(EltID id, Champ champ, QString qStr, bool storeAction, bool so
                 // Modification de l'élément graphique
                 tmp->eltTree->setText(0, qStr);
                 tmp->eltTree->setText(5, qStr);
+                this->tree->renameSf2InComboBox(id.indexSf2, qStr);
                 this->tree->trier(0);
             }
             break;

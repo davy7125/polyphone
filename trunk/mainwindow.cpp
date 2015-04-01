@@ -110,8 +110,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent, Qt::Window | Qt::W
     ui->stackedWidget->addWidget(page_inst);
     ui->stackedWidget->addWidget(page_prst);
 
-    // Initialisation arbre (passage de l'adresse de mainWindow)
-    ui->arborescence->init(this, sf2);
+    // Initialisation arbre (passage de l'adresse de mainWindow et du combobox)
+    ui->arborescence->init(this, sf2, ui->comboSf2);
 
     // Initialisation dialog liste (pointeur vers les sf2 et mainWindow)
     this->dialList.init(this, this->sf2);
