@@ -148,7 +148,7 @@ void Tree::trier(int forme)
 void Tree::addSf2InComboBox(int numSf2)
 {
     _comboSf2->addItem("", numSf2);
-    if (_comboSf2->currentData().toInt() != -1)
+    if (_comboSf2->itemData(_comboSf2->currentIndex()).toInt() != -1)
         _comboSf2->setCurrentIndex(_comboSf2->count() - 1);
 }
 
@@ -170,7 +170,7 @@ void Tree::removeSf2FromComboBox(int numSf2)
 
 void Tree::renameSf2InComboBox(int numSf2, QString name)
 {
-    int currentData = _comboSf2->currentData().toInt();
+    int currentData = _comboSf2->itemData(_comboSf2->currentIndex()).toInt();
     _comboSf2->blockSignals(true);
     _comboSf2->removeItem(0);
     for (int i = 0; i < _comboSf2->count(); i++)
