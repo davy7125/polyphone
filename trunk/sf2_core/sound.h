@@ -31,7 +31,6 @@ using namespace std;
 typedef complex<double> Complex;
 
 
-
 class Sound
 {
 public:
