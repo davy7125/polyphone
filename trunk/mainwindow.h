@@ -101,7 +101,7 @@ public:
     bool isPlaying();
     QStringList getListMidi();
     void openMidiPort(int val);
-    void setAudioEngine(int audioEngine, int bufferSize);
+    void setAudioDevice(int audioDevice, int index, int bufferSize);
     void setSynthGain(int val);
     void setSynthReverb(int level, int size, int width, int damping);
     void setSynthChorus(int level, int depth, int frequency);
@@ -194,9 +194,10 @@ private slots:
     void noteChanged(int key, int vel);
 
     void on_actionEnlever_tous_les_modulateurs_triggered();
+    void onAudioConnectionDone();
 
 signals:
-    void initAudio(int numDevice, int bufferSize);
+    void initAudio(int numDevice, int numIndex, int bufferSize);
     void stopAudio();
     void play(int type, int idSf2, int idElt, int note, int velocity);
 

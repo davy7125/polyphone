@@ -65,21 +65,17 @@ void Page_Sf2::afficher()
 #endif
     txt += this->sf2->getQstr(id, champ_filename);
     ui->label_filename->setText(txt);
-    char T[20];
-    if (this->sf2->get(id, champ_IFIL).sfVerValue.wMinor < 10)
-        sprintf(T, "%d.0%d", this->sf2->get(id, champ_IFIL).sfVerValue.wMajor, this->sf2->get(id, champ_IFIL).sfVerValue.wMinor);
-    else
-        sprintf(T, "%d.%d", this->sf2->get(id, champ_IFIL).sfVerValue.wMajor, this->sf2->get(id, champ_IFIL).sfVerValue.wMinor);
-    ui->label_sfVersion->setText(T);
+    ui->label_sfVersion->setText(QString("%1.%2")
+                                 .arg(this->sf2->get(id, champ_IFIL).sfVerValue.wMajor)
+                                 .arg(this->sf2->get(id, champ_IFIL).sfVerValue.wMinor, 2, 10, QChar('0')));
     ui->label_soundEngine->setText(this->sf2->getQstr(id, champ_ISNG));
-    if (this->sf2->get(id, champ_IVER).sfVerValue.wMinor < 10)
-        sprintf(T, "%d.0%d", this->sf2->get(id, champ_IVER).sfVerValue.wMajor, this->sf2->get(id, champ_IVER).sfVerValue.wMinor);
-    else
-        sprintf(T, "%d.%d", this->sf2->get(id, champ_IVER).sfVerValue.wMajor, this->sf2->get(id, champ_IVER).sfVerValue.wMinor);
+    txt = QString("%1.%2")
+            .arg(this->sf2->get(id, champ_IVER).sfVerValue.wMajor)
+            .arg(this->sf2->get(id, champ_IVER).sfVerValue.wMinor, 2, 10, QChar('0'));
     if (this->sf2->getQstr(id, champ_IROM).isEmpty())
-        ui->label_romVersion->setText(QString("- (version ").append(T).append(")"));
+        ui->label_romVersion->setText("- (version " + txt + ")");
     else
-        ui->label_romVersion->setText(this->sf2->getQstr(id, champ_IROM).append(" (version ").append(T).append(")"));
+        ui->label_romVersion->setText(this->sf2->getQstr(id, champ_IROM) + " (version " + txt + ")");
     ui->label_software->setText(this->sf2->getQstr(id, champ_ISFT));
     ui->lineEdit_name->setText(this->sf2->getQstr(id, champ_name));
     ui->lineEdit_copyright->setText(this->sf2->getQstr(id, champ_ICOP));
