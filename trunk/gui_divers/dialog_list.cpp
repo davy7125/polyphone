@@ -75,13 +75,10 @@ void DialogList::showDialog(EltID idSrc, ModeListDialog mode)
         if (!this->sf2->get(id, champ_hidden).bValue)
         {
             if (id.typeElement == elementPrst)
-            {
-                char T[40];
-                sprintf(T, "%.3d:%.3d %s", this->sf2->get(id, champ_wBank).wValue,
-                        this->sf2->get(id, champ_wPreset).wValue,
-                        this->sf2->getQstr(id, champ_name).toStdString().c_str());
-                item = new ListWidgetItem(T);
-            }
+                item = new ListWidgetItem(QString("%1:%2 %3")
+                                          .arg(this->sf2->get(id, champ_wBank).wValue, 3, 10, QChar('0'))
+                                          .arg(this->sf2->get(id, champ_wPreset).wValue, 3, 10, QChar('0'))
+                                          .arg(this->sf2->getQstr(id, champ_name)));
             else
                 item = new ListWidgetItem(this->sf2->getQstr(id, champ_name));
             item->id = id;

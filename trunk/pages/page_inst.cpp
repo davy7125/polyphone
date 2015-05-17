@@ -414,8 +414,7 @@ void Page_Inst::mixture(QList<QList<int> > listeParam, QString nomInst, bool bou
                     name = nomInst.left(15);
                 else
                     name = nomInst.left(16);
-                char str2[20];
-                sprintf(str2,"%.3d", note);
+                QString str2 = QString("%1").arg(note, 3, 10, QChar('0'));
                 if (stereo)
                 {
                     if (cote == 0)
