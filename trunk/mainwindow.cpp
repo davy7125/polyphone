@@ -44,7 +44,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent, Qt::Window | Qt::W
                                                       Qt::CustomizeWindowHint),
     ui(new Ui::MainWindow),
     synth(NULL),
-    audioDevice(NULL),
+    audioDevice(new AudioDevice()),
     help(this),
     about(this),
     dialList(this),
@@ -56,7 +56,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent, Qt::Window | Qt::W
 {
     ui->setupUi(this);
     this->setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint);
-    configuration = Config::getInstance(this, ui->widgetKeyboard);
+    configuration = Config::getInstance(ui->widgetKeyboard, audioDevice, this);
 #if QT_VERSION >= QT_VERSION_CHECK(4, 7, 0)
     ui->editSearch->setPlaceholderText(trUtf8("Rechercher..."));
 #endif
@@ -81,16 +81,14 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent, Qt::Window | Qt::W
     connect(this->synth, SIGNAL(samplesRead(int)), &dialogMagneto, SLOT(avanceSamples(int)));
 
     // Initialisation de la sortie audio
-    this->audioDevice = new AudioDevice(this->synth);
-    connect(this, SIGNAL(initAudio(int, int)), this->audioDevice, SLOT(initAudio(int, int)));
+    this->audioDevice->initSynth(this->synth);
+    connect(this, SIGNAL(initAudio(int, int, int)), this->audioDevice, SLOT(initAudio(int, int, int)));
     connect(this, SIGNAL(stopAudio()), this->audioDevice, SLOT(closeConnections()), Qt::BlockingQueuedConnection);
+    connect(this->audioDevice, SIGNAL(connectionDone()), this, SLOT(onAudioConnectionDone()));
     this->audioDevice->moveToThread(&this->audioThread);
     this->audioThread.start(QThread::HighPriority);
 
-    if (this->configuration->getAudioType() == 0)
-        this->setAudioEngine(configuration->getAudioIndex(), configuration->getBufferSize());
-    else
-        this->setAudioEngine(configuration->getAudioType(), configuration->getBufferSize());
+    this->setAudioDevice(configuration->getAudioType(), configuration->getAudioIndex(), configuration->getBufferSize());
     this->setSynthGain(this->configuration->getSynthGain());
     this->setSynthChorus(this->configuration->getSynthChoLevel(),
                          this->configuration->getSynthChoDepth(),
@@ -559,9 +557,10 @@ int MainWindow::sauvegarder(int indexSf2, bool saveAs)
         int ret = QMessageBox::Save;
         QMessageBox msgBox(this);
         msgBox.setIcon(QMessageBox::Warning);
-        char T[20];
-        sprintf(T,"%d &#8658; %d", sf2->get(id, champ_wBpsInit).wValue, sf2->get(id, champ_wBpsSave).wValue);
-        msgBox.setText( trUtf8("<b>Perte de résolution ") + QString(T) + trUtf8(" bits</b>"));
+        msgBox.setText(trUtf8("<b>Perte de résolution ") +
+                       QString::number(sf2->get(id, champ_wBpsInit).wValue) + " &#8658; " +
+                       QString::number(sf2->get(id, champ_wBpsSave).wValue) +
+                       trUtf8(" bits</b>"));
         msgBox.setInformativeText(trUtf8("La qualité des samples sera abaissée suite à cette opération. Continuer ?"));
         msgBox.setStandardButtons(QMessageBox::Cancel | QMessageBox::Save);
         msgBox.button(QMessageBox::Save)->setText(trUtf8("&Oui"));
@@ -2642,11 +2641,15 @@ int MainWindow::deleteMods(EltID id)
 
 
 // Gestion du clavier virtuel / du son
-void MainWindow::setAudioEngine(int audioEngine, int bufferSize)
+void MainWindow::setAudioDevice(int audioDevice, int index, int bufferSize)
 {
     synth->stop();
     this->synth->setBufferSize(2 * bufferSize);
-    emit(initAudio(audioEngine, bufferSize));
+    emit(initAudio(audioDevice, index, bufferSize));
+}
+void MainWindow::onAudioConnectionDone()
+{
+    Config::getInstance()->storeAudioConfig();
 }
 QStringList MainWindow::getListMidi()
 {

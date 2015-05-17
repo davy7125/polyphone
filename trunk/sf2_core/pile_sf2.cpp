@@ -1761,14 +1761,12 @@ int Pile_sf2::set(EltID id, Champ champ, Valeur value, bool storeAction, bool so
         if ((champ == champ_wPreset || champ == champ_wBank) && tree)
         {
             // Modification de l'élément graphique
-            char num1[4], num2[4], chaine[30];
-            unsigned int i = tmp->wBank;
-            sprintf(num1, "%.3d", i);
-            i = tmp->wPreset;
-            sprintf(num2, "%.3d", i);
-            sprintf(chaine, "%s:%s %s", num1, num2, tmp->Name.toStdString().c_str());
-            tmp->eltTree->setText(0, chaine);
-            tmp->eltTree->setText(5, chaine);
+            QString text = QString("%1:%2 %3")
+                    .arg(tmp->wBank, 3, 10, QChar('0'))
+                    .arg(tmp->wPreset, 3, 10, QChar('0'))
+                    .arg(tmp->Name);
+            tmp->eltTree->setText(0, text);
+            tmp->eltTree->setText(5, text);
             if (sort)
                 this->sf2->getElt(id.indexSf2)->eltTreePrst->sortChildren(5, Qt::AscendingOrder);
         }

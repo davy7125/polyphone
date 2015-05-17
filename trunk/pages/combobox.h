@@ -51,8 +51,6 @@ public:
             if (index >= this->limite)
             {
                 // index du modulateur pointé
-                char T[20];
-                strcpy(T, this->itemText(index).toStdString().c_str());
                 index = this->itemText(index).split("#").last().toInt();
                 index += 32767; // 32768 - 1
             }

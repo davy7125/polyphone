@@ -348,7 +348,7 @@ int Pile_sf2::ouvrir(QString fileName, QDataStream * stream, int &indexSf2, bool
     }
     DWORD taille_p = readDWORD(bloc_pdta, pos);
     pos = pos + 4;
-    if (!taille_p%38) // Doit être un multiple de 38
+    if (taille_p % 38 != 0) // Doit être un multiple de 38
     {
         free(bloc_info);
         free(bloc_pdta);
@@ -369,7 +369,7 @@ int Pile_sf2::ouvrir(QString fileName, QDataStream * stream, int &indexSf2, bool
     }
     DWORD taille_b = readDWORD(bloc_pdta, pos);
     pos = pos + 4;
-    if (!taille_b%4) // Doit être un multiple de 4
+    if (taille_b % 4 != 0) // Doit être un multiple de 4
     {
         free(bloc_info);
         free(bloc_pdta);
@@ -392,7 +392,7 @@ int Pile_sf2::ouvrir(QString fileName, QDataStream * stream, int &indexSf2, bool
     }
     DWORD taille_m = readDWORD(bloc_pdta, pos);
     pos = pos + 4;
-    if (!taille_m%10) // Doit être un multiple de 10
+    if (taille_m % 10 != 0) // Doit être un multiple de 10
     {
         free(bloc_info);
         free(bloc_pdta);
@@ -418,7 +418,7 @@ int Pile_sf2::ouvrir(QString fileName, QDataStream * stream, int &indexSf2, bool
     }
     DWORD taille_g = readDWORD(bloc_pdta, pos);
     pos = pos + 4;
-    if (!taille_g%4) // Doit être un multiple de 4
+    if (taille_g % 4 != 0) // Doit être un multiple de 4
     {
         free(bloc_info);
         free(bloc_pdta);
@@ -447,7 +447,7 @@ int Pile_sf2::ouvrir(QString fileName, QDataStream * stream, int &indexSf2, bool
     }
     DWORD taille_p2 = readDWORD(bloc_pdta, pos);
     pos = pos + 4;
-    if (!taille_p2%22) // Doit être un multiple de 22
+    if (taille_p2 % 22 != 0) // Doit être un multiple de 22
     {
         free(bloc_info);
         free(bloc_pdta);
@@ -477,7 +477,7 @@ int Pile_sf2::ouvrir(QString fileName, QDataStream * stream, int &indexSf2, bool
 
     DWORD taille_b2 = readDWORD(bloc_pdta, pos);
     pos = pos + 4;
-    if (!taille_b2%4) // Doit être un multiple de 4
+    if (taille_b2 % 4 != 0) // Doit être un multiple de 4
     {
         free(bloc_info);
         free(bloc_pdta);
@@ -508,7 +508,7 @@ int Pile_sf2::ouvrir(QString fileName, QDataStream * stream, int &indexSf2, bool
     }
     DWORD taille_m2 = readDWORD(bloc_pdta, pos);
     pos = pos + 4;
-    if (!taille_m2%10) // Doit être un multiple de 10
+    if (taille_m2 % 10 != 0) // Doit être un multiple de 10
     {
         free(bloc_info);
         free(bloc_pdta);
@@ -541,7 +541,7 @@ int Pile_sf2::ouvrir(QString fileName, QDataStream * stream, int &indexSf2, bool
     }
     DWORD taille_g2 = readDWORD(bloc_pdta, pos);
     pos = pos + 4;
-    if (!taille_g2%4) // Doit être un multiple de 4
+    if (taille_g2 % 4 != 0) // Doit être un multiple de 4
     {
         free(bloc_info);
         free(bloc_pdta);
@@ -576,7 +576,7 @@ int Pile_sf2::ouvrir(QString fileName, QDataStream * stream, int &indexSf2, bool
     }
     taille = readDWORD(bloc_pdta, pos);
     pos = pos + 4;
-    if (!taille%46) // Doit être un multiple de 46
+    if (taille % 46 != 0) // Doit être un multiple de 46
     {
         free(bloc_info);
         free(bloc_pdta);
@@ -1076,7 +1076,7 @@ int Pile_sf2::sauvegarderSf2(int indexSf2, QString fileName)
     {
         // Sauvegarde 24 bits
         char T[20];
-        sprintf(T,"%lu", taille_smpl);
+        sprintf(T, "%lu", taille_smpl);
         taille_sm24 = (taille_smpl - 12) / 2 + 8;
         taille_sm24 += taille_sm24 % 2; // chiffre pair
     }

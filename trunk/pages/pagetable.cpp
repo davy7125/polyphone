@@ -421,8 +421,7 @@ void PageTable::afficheMod(EltID id, int selectedIndex)
             if (genValTmp.wAmount > 99)
             {
                 // lien vers modulateur
-                sprintf(T, "%s: #%d", trUtf8("Modulateur").toStdString().c_str(), genValTmp.wAmount - 32767);
-                qStr = T;
+                qStr = trUtf8("Modulateur") + ": #" + QString::number(genValTmp.wAmount - 32767);
             }
             else qStr = getGenName(genValTmp.wAmount);
             genValTmp = this->sf2->get(id, champ_sfModTransOper).genValue;
@@ -1448,7 +1447,6 @@ void PageTable::addAvailableReceiverMod(ComboBox *combo, EltID id)
     WORD wTmp;
     int compte;
     bool stop, found;
-    char T[20];
     int nbMod = sf2->count(id);
     for (int i = 0; i < nbMod; i++)
     {
@@ -1486,8 +1484,7 @@ void PageTable::addAvailableReceiverMod(ComboBox *combo, EltID id)
             if (!found)
             {
                 // id2 peut recevoir les signaux de id
-                sprintf(T, "%s: #%d", trUtf8("Modulateur").toStdString().c_str(), id2.indexMod+1);
-                combo->addItem(T);
+                combo->addItem(trUtf8("Modulateur") + ": #" + QString::number(id2.indexMod + 1));
             }
         }
     }
@@ -1506,7 +1503,6 @@ void PageTable::addAvailableSenderMod(ComboBox *combo, EltID id)
     SFModulator sfMod;
     int compte, indModSender;
     bool stop, found;
-    char T[20];
     int nbMod = sf2->count(id);
     for (int i = 0; i < nbMod; i++)
     {
@@ -1556,8 +1552,7 @@ void PageTable::addAvailableSenderMod(ComboBox *combo, EltID id)
             if (!found)
             {
                 // id2 peut envoyer des signaux à id
-                sprintf(T, "%s: #%d", trUtf8("Modulateur").toStdString().c_str(), id2.indexMod+1);
-                combo->addItem(T);
+                combo->addItem(trUtf8("Modulateur") + ": #" + QString::number(id2.indexMod + 1));
             }
         }
     }
@@ -2178,7 +2173,7 @@ int PageTable::limit(int iVal, Champ champ, EltID id)
         {
             id2.typeElement = elementSmpl;
             id2.indexElt = this->sf2->get(id, champ_sampleID).wValue;
-            limInf = -this->sf2->get(id2, champ_dwLength).dwValue;
+            limInf = - (int)this->sf2->get(id2, champ_dwLength).dwValue;
         }
         else
         {
@@ -2189,7 +2184,7 @@ int PageTable::limit(int iVal, Champ champ, EltID id)
                 id3.indexElt2 = i;
                 id2.indexElt = this->sf2->get(id3, champ_sampleID).wValue;
                 if (i == 0 || -(signed)this->sf2->get(id2, champ_dwLength).dwValue > limInf)
-                    limInf = -this->sf2->get(id2, champ_dwLength).dwValue;
+                    limInf = - (int)this->sf2->get(id2, champ_dwLength).dwValue;
             }
         }
         if (ret < limInf) ret = limInf;
@@ -2203,7 +2198,7 @@ int PageTable::limit(int iVal, Champ champ, EltID id)
         {
             id2.typeElement = elementSmpl;
             id2.indexElt = this->sf2->get(id, champ_sampleID).wValue;
-            limInf = -this->sf2->get(id2, champ_dwStartLoop).dwValue;
+            limInf = - (int)this->sf2->get(id2, champ_dwStartLoop).dwValue;
         }
         else
         {
@@ -2214,7 +2209,7 @@ int PageTable::limit(int iVal, Champ champ, EltID id)
                 id3.indexElt2 = i;
                 id2.indexElt = this->sf2->get(id3, champ_sampleID).wValue;
                 if (i == 0 || -(signed)this->sf2->get(id2, champ_dwStartLoop).dwValue > limInf)
-                    limInf = -this->sf2->get(id2, champ_dwStartLoop).dwValue;
+                    limInf = - (int)this->sf2->get(id2, champ_dwStartLoop).dwValue;
             }
         }
         if (ret < limInf) ret = limInf;
@@ -2250,7 +2245,7 @@ int PageTable::limit(int iVal, Champ champ, EltID id)
         {
             id2.typeElement = elementSmpl;
             id2.indexElt = this->sf2->get(id, champ_sampleID).wValue;
-            limInf = -this->sf2->get(id2, champ_dwEndLoop).dwValue;
+            limInf = - (int)this->sf2->get(id2, champ_dwEndLoop).dwValue;
         }
         else
         {
@@ -2261,7 +2256,7 @@ int PageTable::limit(int iVal, Champ champ, EltID id)
                 id3.indexElt2 = i;
                 id2.indexElt = this->sf2->get(id3, champ_sampleID).wValue;
                 if (i == 0 || -(signed)this->sf2->get(id2, champ_dwEndLoop).dwValue > limInf)
-                    limInf = -this->sf2->get(id2, champ_dwEndLoop).dwValue;
+                    limInf = - (int)this->sf2->get(id2, champ_dwEndLoop).dwValue;
             }
         }
         if (ret < limInf) ret = limInf;

@@ -167,25 +167,16 @@ SfVersionTag create_Version(WORD wMajor, WORD wMinor)
 
 QString decrementerQstr(QString chaine)
 {
-    int num;
-    sscanf(chaine.toStdString().c_str(), "%d", &num);
-    num--;
-    char str[20];
-    sprintf(str, "%d", num);
-    return QString(str);
+    return QString::number(chaine.toInt() - 1);
 }
 
 void MESSAGE(int iVal)
 {
-    char T[20];
-    sprintf(T, "%d", iVal);
-    QMessageBox::information(NULL, "pour info", T);
+    QMessageBox::information(NULL, "pour info", QString::number(iVal));
 }
 void MESSAGE(double dVal)
 {
-    char T[40];
-    sprintf(T, "%f", dVal);
-    QMessageBox::information(NULL, "pour info", T);
+    QMessageBox::information(NULL, "pour info", QString::number(dVal));
 }
 void MESSAGE(QString qStr)
 {
@@ -201,7 +192,9 @@ void MESSAGE(EltID id)
 }
 void MESSAGE(SFModulator sfMod)
 {
-    char str[200];
-    sprintf(str, "Type: %d\nDirection: %d\nPolarité: %d\nCC: %d\nIndex: %d", sfMod.Type, sfMod.D, sfMod.P, sfMod.CC, sfMod.Index);
-    QMessageBox::information(NULL, "pour info", QString::fromUtf8(str));
+    QMessageBox::information(NULL, "pour info", "Type: " + QString::number(sfMod.Type) +
+                             "\nDirection: " + QString::number(sfMod.D) +
+                             "\nPolarité: " + QString::number(sfMod.P) +
+                             "\nCC: " + QString::number(sfMod.CC) +
+                             "\nIndex: " + QString::number(sfMod.Index));
 }
