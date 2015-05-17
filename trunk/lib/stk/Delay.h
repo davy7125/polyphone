@@ -17,7 +17,7 @@ namespace stk {
     A non-interpolating delay line is typically used in fixed
     delay-length applications, such as for reverberation.
 
-    by Perry R. Cook and Gary P. Scavone, 1995-2012.
+    by Perry R. Cook and Gary P. Scavone, 1995--2014.
 */
 /***************************************************/
 
@@ -37,7 +37,7 @@ public:
   ~Delay();
 
   //! Get the maximum delay-line length.
-  unsigned long getMaximumDelay( void ) { return (unsigned long)(inputs_.size() - 1); }
+  unsigned long getMaximumDelay( void ) { return inputs_.size() - 1; };
 
   //! Set the maximum delay-line length.
   /*!

@@ -7,7 +7,7 @@
 # Option for developers ONLY
 #DEFINES += SHOW_ID_ERROR
 
-# Use of local copies of RtMidi, Stk and QCustomplot libraries
+# Use local copies of RtMidi, Stk and QCustomplot libraries
 # (this is forced to true for Windows or Mac OS X)
 #DEFINES += USE_LOCAL_LIBRARIES
 
@@ -16,7 +16,6 @@ QT       += core gui printsupport svg
 
 TARGET = polyphone
 TEMPLATE = app
-
 
 CONFIG(release, debug|release){
     DESTDIR = RELEASE
@@ -33,23 +32,19 @@ CONFIG(debug, debug|release){
     UI_DIR = DEBUG/.ui
 }
 
-
 win32{
     DEFINES += __WINDOWS_MM__ USE_LOCAL_LIBRARIES
-    INCLUDEPATH += lib/win/ \
-        lib
-    LIBS += -Llib/win -lportaudio -ljack -lzlib1 -lwinmm libole32
-    HEADERS  += lib/win/jack.h \
-        lib/win/weakmacros.h \
-        lib/win/types.h \
-        lib/win/transport.h \
-        lib/win/systemdeps.h \
-        lib/win/session.h \
-        lib/win/zconf.h \
+    INCLUDEPATH += lib/win/ lib
+    HEADERS  += lib/win/zconf.h \
         lib/win/zlib.h \
         lib/portaudio.h
-        
     RC_FILE = polyphone.rc
+
+    !contains(QMAKE_TARGET.arch, x86_64) {
+        LIBS += -Llib/win/32bits -lportaudio_x86 -lzlib1 -lwinmm
+    } else {
+        LIBS += -Llib/win/64bits -lportaudio_x64 -lzlib1 -lwinmm
+    }
 }
 unix:!macx{
     DEFINES += __LINUX_ALSASEQ__
@@ -273,22 +268,20 @@ FORMS    += mainwindow.ui \
     tools/dialog_transposition.ui
 
 # Special compiler for sfark extractor
-SOURCES_M387 = sfark/sfarkextractor.cpp
-m387.name = nooptimize
-m387.input = SOURCES_M387
-m387.dependency_type = TYPE_C
-m387.variable_out = OBJECTS
-m387.output = ${QMAKE_VAR_OBJECTS_DIR}${QMAKE_FILE_IN_BASE}$${first(QMAKE_EXT_OBJ)}
+SPECIAL_SOURCE = sfark/sfarkextractor.cpp
+ExtraCompiler.input = SPECIAL_SOURCE
+ExtraCompiler.variable_out = OBJECTS
+ExtraCompiler.output = ${QMAKE_VAR_OBJECTS_DIR}${QMAKE_FILE_IN_BASE}$${QMAKE_EXT_OBJ}
 win32{
-    m387.commands = $${QMAKE_CXX} $(CXXFLAGS) -mfpmath=387 $(INCPATH) -c ${QMAKE_FILE_IN} -o ${QMAKE_FILE_OUT}
+    ExtraCompiler.commands = $${QMAKE_CXX} $(CXXFLAGS) -arch:IA32 -D_CRT_SECURE_NO_WARNINGS $(INCPATH) -c ${QMAKE_FILE_IN} -Fo${QMAKE_FILE_OUT}
 }
 unix:!macx{
-    m387.commands = $${QMAKE_CXX} $(CXXFLAGS) -mfpmath=387 $(INCPATH) -c ${QMAKE_FILE_IN} -o ${QMAKE_FILE_OUT}
+    ExtraCompiler.commands = $${QMAKE_CXX} -fPIC -mfpmath=387 $(INCPATH) -c ${QMAKE_FILE_IN} -o ${QMAKE_FILE_OUT}
 }
 macx {
-    m387.commands = $${QMAKE_CXX} $(CXXFLAGS) -mno-sse $(INCPATH) -c ${QMAKE_FILE_IN} -o ${QMAKE_FILE_OUT}
+    ExtraCompiler.commands = $${QMAKE_CXX} $(CXXFLAGS) -mno-sse $(INCPATH) -c ${QMAKE_FILE_IN} -o ${QMAKE_FILE_OUT}
 }
-QMAKE_EXTRA_COMPILERS += m387
+QMAKE_EXTRA_COMPILERS += ExtraCompiler
 
 RESOURCES += ressources.qrc \
     clavier/pianokeybd.qrc

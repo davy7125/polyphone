@@ -10,7 +10,7 @@
     A non-interpolating delay line is typically used in fixed
     delay-length applications, such as for reverberation.
 
-    by Perry R. Cook and Gary P. Scavone, 1995-2012.
+    by Perry R. Cook and Gary P. Scavone, 1995--2014.
 */
 /***************************************************/
 
@@ -61,19 +61,19 @@ void Delay :: setDelay( unsigned long delay )
 StkFloat Delay :: energy( void ) const
 {
   unsigned long i;
-  register StkFloat e = 0;
+  StkFloat e = 0;
   if ( inPoint_ >= outPoint_ ) {
     for ( i=outPoint_; i<inPoint_; i++ ) {
-      register StkFloat t = inputs_[i];
+      StkFloat t = inputs_[i];
       e += t*t;
     }
   } else {
     for ( i=outPoint_; i<inputs_.size(); i++ ) {
-      register StkFloat t = inputs_[i];
+      StkFloat t = inputs_[i];
       e += t*t;
     }
     for ( i=0; i<inPoint_; i++ ) {
-      register StkFloat t = inputs_[i];
+      StkFloat t = inputs_[i];
       e += t*t;
     }
   }
