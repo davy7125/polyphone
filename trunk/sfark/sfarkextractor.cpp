@@ -28,7 +28,7 @@
 #include "zlib.h"
 #include "stdint.h"
 
-static const unsigned char SfArkId[] = {'.','s','f','A','r','k'};
+static const char * SfArkId = ".sfArk";
 
 SfArkExtractor::SfArkExtractor(const char * fileName) :
     _sfArkInfo(new SfArkInfo)
@@ -180,7 +180,7 @@ void SfArkExtractor::schur(unsigned int dataSize, qint32 * dest)
 
             sum2 = -floatArray[0] / sum;
             sum = floatArray[0] * sum2 + sum;
-            dest[j] = (int32_t)(sum2 * 16384.0);
+            dest[j] = (qint32)(sum2 * 16384.0);
             if (++j >= dataSize) break;
             for (i = 0; i < dataSize - j; ++i)
             {
@@ -331,7 +331,7 @@ void SfArkExtractor::lpcUnpack(unsigned int dataSizeInWords, quint32 maskVal)
                 }
                 else
                 {
-                    int32_t		intArray[128];
+                    qint32		intArray[128];
 
                     schur(frameSize, &intArray[0]);
                     lpcDecode(&intArray[0], frameSize, numFrames, &src[i], &dest[i]);
@@ -359,7 +359,7 @@ void SfArkExtractor::lpcUnpack(unsigned int dataSizeInWords, quint32 maskVal)
             }
         }
         else
-            memcpy(dest, src, cntToDo * sizeof(int16_t));
+            memcpy(dest, src, cntToDo * sizeof(qint16));
 
         src += dataSizeInWords;
         dest += dataSizeInWords;
@@ -834,26 +834,26 @@ fastOut:	return result;
 
     // If LPC compression is also used, we first read a 32-bit mask, later passed to lpcUnpack
     {
-    quint32	lpcMask = 0;
+        quint32	lpcMask = 0;
 
-    if (_sfArkInfo->CompressType != 5)
-    {
-        if (bitReadFlag())
+        if (_sfArkInfo->CompressType != 5)
         {
-            quint32	temp4;
+            if (bitReadFlag())
+            {
+                quint32	temp4;
 
-            temp4 = bitRead(16);
-            lpcMask = (bitRead(16) << 16) | temp4;
+                temp4 = bitRead(16);
+                lpcMask = (bitRead(16) << 16) | temp4;
+            }
         }
-    }
 
-    if ((result = unpackBitData(dataSizeInWords)) < 0) goto fastOut;
+        if ((result = unpackBitData(dataSizeInWords)) < 0) goto fastOut;
 
-    if (_sfArkInfo->CompressType != 5)
-    {
-        lpcUnpack(dataSizeInWords, lpcMask);
-        goto swap;
-    }
+        if (_sfArkInfo->CompressType != 5)
+        {
+            lpcUnpack(dataSizeInWords, lpcMask);
+            goto swap;
+        }
     }
 
     while (encodeCnt--)
@@ -876,7 +876,7 @@ swap:	tempptr = _sfArkInfo->WorkBuffer1;
         _sfArkInfo->WorkBuffer2 = (unsigned char *)tempptr;
     }
 
-    if (shiftFlag) applyShift((int16_t *)_sfArkInfo->WorkBuffer1, dataSizeInWords, &shiftArray[0]);
+    if (shiftFlag) applyShift((qint16 *)_sfArkInfo->WorkBuffer1, dataSizeInWords, &shiftArray[0]);
 
     addToChksum(dataSizeInWords);
     }
@@ -1874,7 +1874,7 @@ hdr:		result = SFARKERR_BADHDR;
         if ((unsigned int)result != slop) goto hdr;
 
         // The Lspack entry we want has a filename that ends in ".sfArk$1" or ".sfArk$2"
-        if (headerSize > 8 && !memcmp(&fileHdrStartPtr[headerSize + 100 - 8], &SfArkId[0], sizeof(SfArkId)))
+        if (headerSize > 8 && !memcmp(&fileHdrStartPtr[headerSize + 100 - 8], &SfArkId[0], strlen((const char *)SfArkId)))
         {
             _sfArkInfo->FileUncompSize = get_ulong(fileHdrStartPtr + 22);
             _sfArkInfo->FileChksum = get_ulong(fileHdrStartPtr + 14);
@@ -2229,32 +2229,21 @@ int SfArkExtractor::SfarkBeginExtract(const void * sfontName)
             switch (_sfArkInfo->CompressType)
             {
             case 4:
-            {
                 _sfArkInfo->v2.Unpack2EncodeLimit = 3;
                 // _sfArkInfo->v2.Unpack3EncodeLimit = 0;
                 break;
-            }
-
             case 5:
-            {
                 _sfArkInfo->v2.Unpack2EncodeLimit = _sfArkInfo->v2.Unpack3EncodeLimit = 20;
                 _sfArkInfo->v2.NumShortsInLpcBlock = 1024;
                 break;
-            }
-
             case 6:
-            {
                 _sfArkInfo->v2.Unpack2EncodeLimit = _sfArkInfo->v2.Unpack3EncodeLimit = 3;
                 _sfArkInfo->v2.NumShortsInLpcFrame = 8;
                 break;
-            }
-
             case 7:
-            {
                 _sfArkInfo->v2.Unpack2EncodeLimit = 3;
                 _sfArkInfo->v2.Unpack3EncodeLimit = 5;
                 _sfArkInfo->v2.NumShortsInLpcFrame = 128;
-            }
             }
         }
 
@@ -2325,7 +2314,7 @@ bad2:			result = SFARKERR_NOID;
         }
 
         // Is the ID where we expect it?
-        if (!memcmp(fileHdrStartPtr + 26, &SfArkId[1], sizeof(SfArkId) - 1))
+        if (!memcmp(fileHdrStartPtr + 26, &SfArkId[1], strlen((const char *)SfArkId) - 1))
         {
             // Move header to buffer start so it's DWORD aligned. Some CPUs need this, if we access a DWORD field
             if (fileHdrStartPtr != _sfArkInfo->WorkBuffer1)
@@ -2382,7 +2371,7 @@ bad2:			result = SFARKERR_NOID;
                     memmove(fileHdrStartPtr + 42, fileHdrStartPtr + 40, headerSize);
 
                     // The Lspack entry we want has a filename that ends in ".sfArk$1" or ".sfArk$2"
-                    if (headerSize > 8 && !memcmp(&fileHdrStartPtr[headerSize + 42 - 8], &SfArkId[0], sizeof(SfArkId)))
+                    if (headerSize > 8 && !memcmp(&fileHdrStartPtr[headerSize + 42 - 8], &SfArkId[0], strlen((const char *)SfArkId)))
                     {
                         fileHdrStartPtr[0] = fileHdrStartPtr[headerSize + 42 - 1];	// save whether part 1 or 2
                         headerSize -= 8;
