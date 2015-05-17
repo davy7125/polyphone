@@ -32,10 +32,10 @@
 
 Config * Config::_instance = NULL;
 
-Config * Config::getInstance(QWidget * parent, PianoKeybdCustom * keyboard)
+Config * Config::getInstance(PianoKeybdCustom * keyboard, AudioDevice * audioDevice, QWidget * parent)
 {
     if (_instance == NULL)
-        _instance = new Config(parent, keyboard);
+        _instance = new Config(parent, keyboard, audioDevice);
     return _instance;
 }
 
@@ -44,7 +44,7 @@ void Config::kill()
     delete _instance;
 }
 
-Config::Config(QWidget *parent, PianoKeybdCustom *keyboard) : QDialog(parent),
+Config::Config(QWidget *parent, PianoKeybdCustom *keyboard, AudioDevice * audioDevice) : QDialog(parent),
     settings(this),
     ui(new Ui::Config),
     _keyboard(keyboard)
@@ -64,42 +64,61 @@ Config::Config(QWidget *parent, PianoKeybdCustom *keyboard) : QDialog(parent),
     this->loaded = false;
     this->load();
 
-    // initialisation des élements
 //    if (this->ram)
 //        ui->comboRam->setCurrentIndex(1);
 //    else
 //        ui->comboRam->setCurrentIndex(0);
-    // liste des sorties audio
-    this->ui->comboAudioOuput->addItem("-");
-    this->ui->comboAudioOuput->addItem(trUtf8("Défaut"));
 
-#ifdef Q_OS_WIN
-    bool isAsioEnabled = true;
-#else
-    bool isAsioEnabled = false;
-#endif
-    this->ui->comboAudioOuput->addItem("Jack");
-    if (isAsioEnabled)
-        this->ui->comboAudioOuput->addItem("Asio");
-    int nbItem = this->ui->comboAudioOuput->count();
-    if (this->audioType == 0)
+    // Liste des sorties audio
+    QList<HostInfo> hostInfos = audioDevice->getHostInfo();
+    bool configFound = false;
+    int comboboxIndex = 0;
+    int comboboxDefaultIndex = 0;
+    for (int i = 0; i < hostInfos.size(); i++)
     {
-        if (this->audioIndex < nbItem - 2 - isAsioEnabled && this->audioIndex >= 0)
-            this->ui->comboAudioOuput->setCurrentIndex(this->audioIndex+1);
+        if (hostInfos[i]._index < 0)
+        {
+            ui->comboAudioOuput->addItem(hostInfos[i]._name, QString::number(hostInfos[i]._index) + "#-1");
+            if (hostInfos[i]._index == _audioType)
+            {
+                configFound = true;
+                comboboxIndex = ui->comboAudioOuput->count() - 1;
+            }
+        }
         else
         {
-            if (nbItem > 2 + isAsioEnabled)
-                this->ui->comboAudioOuput->setCurrentIndex(1);
-            else
-                this->ui->comboAudioOuput->setCurrentIndex(0);
+            for (int j = 0; j < hostInfos[i]._devices.size(); j++)
+            {
+                QString suffix = "";
+                ui->comboAudioOuput->addItem(hostInfos[i]._name + ": " +
+                                             hostInfos[i]._devices[j]._name + suffix,
+                                             QString::number(hostInfos[i]._index) + "#" +
+                                             QString::number(hostInfos[i]._devices[j]._index));
+                if (hostInfos[i]._devices[j]._isDefault)
+                {
+//                    ui->comboAudioOuput->setItemData(ui->comboAudioOuput->count() - 1,
+//                                                     QColor(0, 0, 200),
+//                                                     Qt::ForegroundRole);
+                    if (hostInfos[i]._isDefault)
+                        comboboxDefaultIndex = ui->comboAudioOuput->count() - 1;
+                }
+                if (!configFound && hostInfos[i]._index == _audioType)
+                {
+                    if (hostInfos[i]._devices[j]._index == _audioIndex)
+                    {
+                        configFound = true;
+                        comboboxIndex = ui->comboAudioOuput->count() - 1;
+                    }
+                    else if (hostInfos[i]._devices[j]._isDefault)
+                        comboboxIndex = ui->comboAudioOuput->count() - 1;
+                }
+            }
         }
     }
-    else if (this->audioType == -1)
-        this->ui->comboAudioOuput->setCurrentIndex(0);
-    else if (this->audioType == -2)
-        this->ui->comboAudioOuput->setCurrentIndex(nbItem - 1 - isAsioEnabled); // Jack
-    else if (this->audioType == -3)
-        this->ui->comboAudioOuput->setCurrentIndex(nbItem - 1); // Asio
+    if (!configFound)
+        comboboxIndex = comboboxDefaultIndex;
+    this->ui->comboAudioOuput->setCurrentIndex(comboboxIndex);
+
     int pos = qRound(qLn(bufferSize) / 0.69314718056 - 4);
     if (pos < 0)
         pos = 0;
@@ -209,33 +228,11 @@ void Config::setAfficheToolBar(int val)
 }
 void Config::setAudioOutput(int index)
 {
+    Q_UNUSED(index)
     if (this->loaded)
     {
-        if (!this->ui->comboAudioOuput->itemText(index).compare("-"))
-        {
-            this->audioIndex = 0;
-            this->audioType = -1;
-            this->mainWindow->setAudioEngine(-1, bufferSize);
-        }
-        else if (!this->ui->comboAudioOuput->itemText(index).compare("Jack"))
-        {
-            this->audioIndex = 0;
-            this->audioType = -2;
-            this->mainWindow->setAudioEngine(-2, bufferSize);
-        }
-        else if (!this->ui->comboAudioOuput->itemText(index).compare("Asio"))
-        {
-            this->audioIndex = 0;
-            this->audioType = -3;
-            this->mainWindow->setAudioEngine(-3, bufferSize);
-        }
-        else
-        {
-            this->audioIndex = index-1;
-            this->audioType = 0;
-            this->mainWindow->setAudioEngine(index-1, bufferSize);
-        }
-        this->store();
+        this->mainWindow->setAudioDevice(getAudioType(), getAudioIndex(), bufferSize);
+        //this->store();
     }
 }
 void Config::on_comboBufferSize_activated(int index)
@@ -494,9 +491,9 @@ void Config::load()
     // Chargement des autres paramètres
     this->afficheToolBar    = settings.value("affichage/tool_bar", true).toBool();
     this->afficheMod        = settings.value("affichage/section_modulateur", true).toBool();
-    this->audioIndex        = settings.value("audio/index", 0).toInt();
+    this->_audioIndex        = settings.value("audio/index", 0).toInt();
     this->bufferSize        = settings.value("audio/buffer_size", 512).toInt();
-    this->audioType         = settings.value("audio/type", 0).toInt();
+    this->_audioType         = settings.value("audio/type", 0).toInt();
     this->wavAutoLoop       = settings.value("wav_auto_loop", false).toBool();
     if (settings.contains("wav_remove_bank"))
     {
@@ -540,9 +537,9 @@ void Config::store()
     settings.setValue("recent_file/file_4",             listFiles.at(4));
     settings.setValue("affichage/tool_bar",             this->afficheToolBar);
     settings.setValue("affichage/section_modulateur",   this->afficheMod);
-    settings.setValue("audio/index",                    this->audioIndex);
+    settings.setValue("audio/index",                    this->_audioIndex);
     settings.setValue("audio/buffer_size",              this->bufferSize);
-    settings.setValue("audio/type",                     this->audioType);
+    settings.setValue("audio/type",                     this->_audioType);
     settings.setValue("wav_auto_loop",                  this->wavAutoLoop);
     settings.setValue("wav_remove_blank",               this->wavRemoveBlank);
     settings.setValue("keyboard/type",                  this->keyboardType);
@@ -1077,4 +1074,31 @@ void Config::on_checkRowSameWidth_clicked()
         this->sameWidthTable = ui->checkRowSameWidth->isChecked();
         this->store();
     }
+}
+
+int Config::getAudioType()
+{
+    QString str = ui->comboAudioOuput->itemData(ui->comboAudioOuput->currentIndex()).toString();
+    QStringList listStr = str.split("#");
+    if (listStr.size() >= 1)
+        return listStr[0].toInt();
+    else
+        return 0;
+}
+
+int Config::getAudioIndex()
+{
+    QString str = ui->comboAudioOuput->itemData(ui->comboAudioOuput->currentIndex()).toString();
+    QStringList listStr = str.split("#");
+    if (listStr.size() >= 2)
+        return listStr[1].toInt();
+    else
+        return 0;
+}
+
+void Config::storeAudioConfig()
+{
+    _audioType = getAudioType();
+    _audioIndex = getAudioIndex();
+    store();
 }

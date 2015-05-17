@@ -26,11 +26,11 @@
 #define AUDIODEVICE_H
 
 #include <QObject>
-#include "jack.h"
-#include <session.h>
-#include "portaudio.h"
 
 class Synth;
+typedef void PaStream;
+typedef struct _jack_port jack_port_t;
+typedef struct _jack_client jack_client_t;
 
 #define SAMPLE_RATE           44100
 
@@ -50,13 +50,45 @@ private:
     qint32 _sampleSize;
 };
 
+class HostInfo
+{
+public:
+    class DeviceInfo
+    {
+    public:
+        DeviceInfo(QString name, int index, bool isDefault) :
+            _name(name),
+            _index(index),
+            _isDefault(isDefault)
+        {}
+
+        QString _name;
+        int _index;
+        bool _isDefault;
+    };
+
+    HostInfo(QString name, int index) :
+        _name(name),
+        _index(index),
+        _isDefault(false)
+    {}
+
+    QString _name;
+    int _index;
+    bool _isDefault;
+    QList<DeviceInfo> _devices;
+};
+
 class AudioDevice : public QObject
 {
     Q_OBJECT
 
 public:
-    AudioDevice(Synth *synth, QObject *parent = NULL);
+    AudioDevice(QObject *parent = NULL);
+    void initSynth(Synth * synth) { _synth = synth; }
     ~AudioDevice();
+
+    QList<HostInfo> getHostInfo();
 
     // Accès aux ports et synthé pour Jack
     jack_port_t * _output_port_R;
@@ -67,22 +99,19 @@ public:
     AudioFormat _format;
 
 public slots:
-    void initAudio(int numDevice, int bufferSize);
+    void initAudio(int numDevice, int numIndex, int bufferSize);
     void closeConnections();
 
 signals:
     void start();
+    void connectionDone();
+    void connectionDefault();
+    void connectionProblem();
 
 private:
-    enum TypeConnection
-    {
-        CONNECTION_NONE,
-        CONNECTION_JACK,
-        CONNECTION_ASIO,
-        CONNECTION_STANDARD
-    };
+    void openDefaultConnection(int bufferSize);
     void openJackConnection(int bufferSize);
-    void openStandardConnection(int bufferSize, bool isAsio);
+    void openStandardConnection(int numDevice, int numIndex, int bufferSize);
 
     // Serveur son, sortie standard ou asio
     bool _isStandardRunning;
@@ -90,7 +119,8 @@ private:
 
     // Serveur son, jack
     jack_client_t * _jack_client;
-    TypeConnection _typeConnection;
+
+    bool _initialized;
 };
 
 #endif // AUDIODEVICE_H

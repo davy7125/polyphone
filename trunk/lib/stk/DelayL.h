@@ -20,7 +20,7 @@ namespace stk {
     delay setting.  The use of higher order Lagrange interpolators can
     typically improve (minimize) this attenuation characteristic.
 
-    by Perry R. Cook and Gary P. Scavone, 1995-2012.
+    by Perry R. Cook and Gary P. Scavone, 1995--2014.
 */
 /***************************************************/
 
@@ -40,7 +40,7 @@ public:
   ~DelayL();
 
   //! Get the maximum delay-line length.
-  unsigned long getMaximumDelay( void ) { return (unsigned long)(inputs_.size() - 1); }
+  unsigned long getMaximumDelay( void ) { return inputs_.size() - 1; };
 
   //! Set the maximum delay-line length.
   /*!
