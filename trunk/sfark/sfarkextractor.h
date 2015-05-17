@@ -23,6 +23,8 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
+/* Warning: this file has to be compiled with no SSE and no optimization ! */
+
 #ifndef SFARKEXTRACTORV1_H
 #define SFARKEXTRACTORV1_H
 
