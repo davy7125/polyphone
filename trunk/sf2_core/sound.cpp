@@ -1322,7 +1322,7 @@ QByteArray Sound::bandFilter(QByteArray baData, WORD wBps, double dwSmplRate, do
         delete [] fc_sortie_fft;
         // Prise en compte du facteur d'echelle
         for (unsigned long i = 0; i < size; i++)
-            cpxData[i].real() /= size;
+            cpxData[i].real(cpxData[i].real() / size);
         // Retour en QByteArray
         QByteArray baRet;
         baRet = fromComplexToBa(cpxData, (long int)baData.size() * 8 / wBps, wBps);
@@ -1357,7 +1357,7 @@ QByteArray Sound::EQ(QByteArray baData, DWORD dwSmplRate, WORD wBps, int i1, int
     delete [] fc_sortie_fft;
     // Prise en compte du facteur d'echelle
     for (unsigned long i = 0; i < size; i++)
-        cpxData[i].real() /= size;
+        cpxData[i].real(cpxData[i].real() / size);
     // Retour en QByteArray
     QByteArray baRet;
     baRet = fromComplexToBa(cpxData, baData.size() * 8 / wBps, wBps);
@@ -1373,8 +1373,8 @@ Complex * Sound::FFT(Complex * x, int N)
     int k;
     for (k = 0; k != N; ++k)
     {
-        twiddles[k].real() = cos(-2.0 * M_PI * k / N);
-        twiddles[k].imag() = sin(-2.0 * M_PI * k / N);
+        twiddles[k].real(cos(-2.0 * M_PI * k / N));
+        twiddles[k].imag(sin(-2.0 * M_PI * k / N));
     }
     FFT_calculate(x, N, out, scratch, twiddles);
     delete [] twiddles;
@@ -1389,8 +1389,8 @@ Complex * Sound::IFFT(Complex * x, int N)
     int k;
     for (k = 0; k != N; ++k)
     {
-        twiddles[k].real() = cos(2.0 * M_PI * k / N);
-        twiddles[k].imag() = sin(2.0 * M_PI * k / N);
+        twiddles[k].real(cos(2.0 * M_PI * k / N));
+        twiddles[k].imag(sin(2.0 * M_PI * k / N));
     }
     FFT_calculate(x, N, out, scratch, twiddles);
     delete [] twiddles;
@@ -1839,15 +1839,15 @@ Complex * Sound::fromBaToComplex(QVector<float> fData, long unsigned int &size)
     // Remplissage
     for (int i = 0; i < fData.size(); i++)
     {
-        cpxData[i].real() = fData[i];
-        cpxData[i].imag() = 0;
+        cpxData[i].real(fData[i]);
+        cpxData[i].imag(0);
     }
 
     // On complète avec des 0
     for (unsigned int i = fData.size(); i < size; i++)
     {
-        cpxData[i].real() = 0;
-        cpxData[i].imag() = 0;
+        cpxData[i].real(0);
+        cpxData[i].imag(0);
     }
 
     return cpxData;
@@ -1870,15 +1870,15 @@ Complex * Sound::fromBaToComplex(QByteArray baData, WORD wBps, long unsigned int
         cpxData = new Complex[size];
         for (int i = 0; i < baData.size()/2; i++)
         {
-            cpxData[i].real() = data[i];
-            cpxData[i].imag() = 0;
+            cpxData[i].real(data[i]);
+            cpxData[i].imag(0);
         }
 
         // On complète avec des 0
         for (unsigned int i = baData.size()/2; i < size; i++)
         {
-            cpxData[i].real() = 0;
-            cpxData[i].imag() = 0;
+            cpxData[i].real(0);
+            cpxData[i].imag(0);
         }
     }
     else
@@ -1897,15 +1897,15 @@ Complex * Sound::fromBaToComplex(QByteArray baData, WORD wBps, long unsigned int
         cpxData = new Complex[size];
         for (int i = 0; i < baData.size()/4; i++)
         {
-            cpxData[i].real() = data[i];
-            cpxData[i].imag() = 0;
+            cpxData[i].real(data[i]);
+            cpxData[i].imag(0);
         }
 
         // On complète avec des 0
         for (unsigned int i = baData.size()/4; i < size; i++)
         {
-            cpxData[i].real() = 0;
-            cpxData[i].imag() = 0;
+            cpxData[i].real(0);
+            cpxData[i].imag(0);
         }
     }
     return cpxData;
@@ -2225,7 +2225,7 @@ QByteArray Sound::sifflements(QByteArray baData, DWORD dwSmplRate, WORD wBps, do
     delete [] fc_sortie_fft;
     // Prise en compte du facteur d'echelle
     for (unsigned long i = 0; i < size; i++)
-        cpxData[i].real() /= size;
+        cpxData[i].real(cpxData[i].real() / size);
     // Retour en QByteArray
     QByteArray baRet = fromComplexToBa(cpxData, (long int)baData.size() * 8 / 32, 32);
     delete [] cpxData;
@@ -2350,10 +2350,10 @@ void Sound::FFT_calculate(Complex * x, long N /* must be a power of 2 */,
                 /* twiddle *D to get dre and dim */
                 double dre = D->real() * tre - D->imag() * tim;
                 double dim = D->real() * tim + D->imag() * tre;
-                Xp->real() = E->real() + dre;
-                Xp->imag() = E->imag() + dim;
-                Xp2->real() = E->real() - dre;
-                Xp2->imag() = E->imag() - dim;
+                Xp->real(E->real() + dre);
+                Xp->imag(E->imag() + dim);
+                Xp2->real(E->real() - dre);
+                Xp2->imag(E->imag() - dim);
                 ++Xp;
                 ++Xp2;
                 ++E;
