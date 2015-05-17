@@ -37,6 +37,7 @@ namespace Ui
 }
 
 class MainWindow;
+class AudioDevice;
 
 class Config : public QDialog
 {
@@ -64,13 +65,14 @@ public:
         middleC_C5_with_flats
     };
 
-    static Config * getInstance(QWidget *parent = NULL, PianoKeybdCustom *keyboard = NULL);
+    static Config * getInstance(PianoKeybdCustom *keyboard = NULL, AudioDevice *audioDevice = NULL, QWidget *parent = NULL);
     static void kill();
     ~Config();
 
     // accesseurs
     bool getRam()               {return false/*ram*/;}
-    int  getAudioIndex()        {return audioIndex;}
+    int  getAudioType();
+    int  getAudioIndex();
     int  getBufferSize()        {return bufferSize;}
     bool getAfficheMod()        {return afficheMod;}
     bool getAfficheToolBar()    {return afficheToolBar;}
@@ -79,7 +81,6 @@ public:
     int  getKeyboardType()      {return keyboardType;}
     int  getKeyboardDocked()    {return keyboardDocked;}
     int  getNumPortMidi()       {return numPortMidi;}
-    int  getAudioType()         {return audioType;}
     int  getSynthGain()         {return synthGain;}
     int  getSynthRevLevel()     {return revLevel;}
     int  getSynthRevSize()      {return revSize;}
@@ -633,6 +634,8 @@ public:
     void setListeActions(QList<QAction *> actions);
     void setVolume(int val);
 
+    void storeAudioConfig();
+
 signals:
     void colorsChanged();
 
@@ -688,8 +691,8 @@ private:
     QStringList listFiles;
     QString recordFile, sampleFile, exportFile, importFile, pngFile;
     bool ram;
-    int audioType;
-    int audioIndex;
+    int _audioType;
+    int _audioIndex;
     bool afficheMod;
     bool afficheToolBar;
     bool wavAutoLoop;
@@ -714,7 +717,7 @@ private:
     PianoKeybdCustom * _keyboard;
     int octaveMapping;
 
-    Config(QWidget *parent, PianoKeybdCustom *keyboard);
+    Config(QWidget *parent, PianoKeybdCustom *keyboard, AudioDevice *audioDevice);
     void load();
     void store();
     void fillActions();

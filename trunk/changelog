@@ -8,6 +8,8 @@ polyphone (1.6) unstable; urgency=low
  * Option to move keyrange or not in the transposition tool for instruments
  * Mutations available for 64' resultant in the organ mixture creation tool
  * Tolerance for opcodes comprising no underscore (sfz opcodes v1)
+ * Several libraries updated (including portaudio, stk)
+ * (fix) sfArk import generated noise
  * (fix) repetition is ignored when using arrow keys in the virtual keyboard
  * (fix) "0" was not selected when a new value is inserted in the table
  * (fix) forbidden characters are replaced by an underscore when exporting files
@@ -16,7 +18,7 @@ polyphone (1.6) unstable; urgency=low
  * (fix) GUI fix for mac
  * (fix) loop_mode one-shot caused sometimes a wrong envelop release in the sfz import
 
- -- Davy Triponney <davy.triponney@gmail.com>  XXX, XX Mar 2015 11:15:10 +0100
+ -- Davy Triponney <davy.triponney@gmail.com>  XXX, XX May 2015 11:15:10 +0100
 
 
 polyphone (1.5) UNRELEASED; urgency=low
