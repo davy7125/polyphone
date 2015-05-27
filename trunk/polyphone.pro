@@ -13,18 +13,17 @@
 
 
 QT       += core gui printsupport svg
-
 TARGET = polyphone
 TEMPLATE = app
 
-CONFIG(release, debug|release){
+CONFIG(release, debug|release) {
     DESTDIR = RELEASE
     OBJECTS_DIR = RELEASE/.obj
     MOC_DIR = RELEASE/.moc
     RCC_DIR = RELEASE/.rcc
     UI_DIR = RELEASE/.ui
 }
-CONFIG(debug, debug|release){
+CONFIG(debug, debug|release) {
     DESTDIR = DEBUG
     OBJECTS_DIR = DEBUG/.obj
     MOC_DIR = DEBUG/.moc
@@ -46,7 +45,7 @@ win32{
         LIBS += -Llib/win/64bits -lportaudio_x64 -lzlib1 -lwinmm
     }
 }
-unix:!macx{
+unix:!macx {
     DEFINES += __LINUX_ALSASEQ__
     CONFIG += link_pkgconfig
     PKGCONFIG += alsa jack portaudio-2.0 zlib
@@ -174,7 +173,8 @@ SOURCES	+= main.cpp \
     gui_divers/dialogselection.cpp \
     pages/rectangleitem.cpp \
     pages/graphicsviewrange.cpp \
-    tools/dialog_transposition.cpp
+    tools/dialog_transposition.cpp \
+    sfark/sfarkextractor.cpp
 
 HEADERS  += mainwindow.h \
     sf2_core/sf2_types.h \
@@ -235,14 +235,15 @@ HEADERS  += mainwindow.h \
     macapplication.h \
     sfark/sfarkglobal.h \
     sfark/sfarkfilemanager.h \
-    sfark/sfarkextractor.h \
     gui_divers/dialogselection.h \
     pages/combobox.h \
     pages/tablecombobox.h \
     pages/graphicssimpletextitem.h \
     pages/rectangleitem.h \
     pages/graphicsviewrange.h \
-    tools/dialog_transposition.h
+    tools/dialog_transposition.h \
+    sfark/sfarkextractor1.h \
+    sfark/sfarkextractor.h
 
 FORMS    += mainwindow.ui \
     gui_divers/config.ui \
@@ -267,19 +268,34 @@ FORMS    += mainwindow.ui \
     gui_divers/dialogselection.ui \
     tools/dialog_transposition.ui
 
+# SfArkLib
+DEFINES += __LITTLE_ENDIAN__
+INCLUDEPATH += lib/sfarklib
+HEADERS += lib/sfarklib/sfArkLib.h \
+    lib/sfarklib/wcc.h \
+    sfark/sfarkextractor2.h \
+    sfark/abstractextractor.h
+
 # Special compiler for sfark extractor
-SPECIAL_SOURCE = sfark/sfarkextractor.cpp
+SPECIAL_SOURCE = sfark/sfarkextractor1.cpp \
+    lib/sfarklib/sfklCoding.cpp \
+    lib/sfarklib/sfklCrunch.cpp \
+    lib/sfarklib/sfklDiff.cpp \
+    lib/sfarklib/sfklLPC.cpp \
+    lib/sfarklib/sfklZip.cpp \
+    sfark/sfarkextractor2.cpp \
+    sfark/abstractextractor.cpp
 ExtraCompiler.input = SPECIAL_SOURCE
 ExtraCompiler.variable_out = OBJECTS
 ExtraCompiler.output = ${QMAKE_VAR_OBJECTS_DIR}${QMAKE_FILE_IN_BASE}$${QMAKE_EXT_OBJ}
-win32{
-    ExtraCompiler.commands = $${QMAKE_CXX} $(CXXFLAGS) -arch:IA32 -D_CRT_SECURE_NO_WARNINGS $(INCPATH) -c ${QMAKE_FILE_IN} -Fo${QMAKE_FILE_OUT}
+win32 {
+    ExtraCompiler.commands = $${QMAKE_CXX} -D__LITTLE_ENDIAN__ -MD -arch:IA32 -D_CRT_SECURE_NO_WARNINGS $(INCPATH) -c ${QMAKE_FILE_IN} -Fo${QMAKE_FILE_OUT}
 }
-unix:!macx{
-    ExtraCompiler.commands = $${QMAKE_CXX} -fPIC -mfpmath=387 $(INCPATH) -c ${QMAKE_FILE_IN} -o ${QMAKE_FILE_OUT}
+unix:!macx {
+    ExtraCompiler.commands = $${QMAKE_CXX} -fPIC -D__LITTLE_ENDIAN__ -mfpmath=387 $(INCPATH) -c ${QMAKE_FILE_IN} -o ${QMAKE_FILE_OUT}
 }
 macx {
-    ExtraCompiler.commands = $${QMAKE_CXX} $(CXXFLAGS) -mno-sse $(INCPATH) -c ${QMAKE_FILE_IN} -o ${QMAKE_FILE_OUT}
+    ExtraCompiler.commands = $${QMAKE_CXX} $(CXXFLAGS) -D__LITTLE_ENDIAN__ -mno-sse -mfpmath=387 $(INCPATH) -c ${QMAKE_FILE_IN} -o ${QMAKE_FILE_OUT}
 }
 QMAKE_EXTRA_COMPILERS += ExtraCompiler
 
