@@ -23,6 +23,8 @@
 
 #include <jack/systemdeps.h>
 
+typedef uint64_t jack_uuid_t;
+
 typedef int32_t jack_shmsize_t;
 
 /**
@@ -369,7 +371,7 @@ typedef int (*JackSampleRateCallback)(jack_nframes_t nframes, void *arg);
  * @param register non-zero if the port is being registered,
  *                     zero if the port is being unregistered
  */
-typedef void (*JackPortRegistrationCallback)(jack_port_id_t port, int register, void *arg);
+typedef void (*JackPortRegistrationCallback)(jack_port_id_t port, int /* register */, void *arg);
 
 /**
  * Prototype for the client supplied function that is called
@@ -380,7 +382,7 @@ typedef void (*JackPortRegistrationCallback)(jack_port_id_t port, int register, 
  *                     zero if the client is being unregistered
  * @param arg pointer to a client supplied structure
  */
-typedef void (*JackClientRegistrationCallback)(const char* name, int register, void *arg);
+typedef void (*JackClientRegistrationCallback)(const char* name, int /* register */, void *arg);
 
 /**
  * Prototype for the client supplied function that is called
