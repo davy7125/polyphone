@@ -26,9 +26,24 @@
 #define SOUND_H
 
 #include "sf2_types.h"
-#include <complex>
-using namespace std;
-typedef complex<double> Complex;
+
+class Complex
+{
+public:
+    void imag(double value) { _imag = value; }
+    void real(double value) { _real = value; }
+    double imag() { return _imag; }
+    double real() { return _real; }
+
+    Complex operator *= (const double factor)
+    {
+        _real *= factor;
+        _imag *= factor;
+        return *this;
+    }
+private:
+    double _real, _imag;
+};
 
 
 class Sound
