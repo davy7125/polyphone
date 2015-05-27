@@ -1,4 +1,0 @@
-Compilation portaudio Windows
-http://forum.openframeworks.cc/index.php?topic=6869.0;wap2
-./configure --with-winapi=asio,wmme --with-asiodir="c:/Users/Davy/Desktop/trunk/synthetiseur/.../asiosdk2"
-pb dll.a : http://dev.exiv2.org/boards/3/topics/377
