@@ -22,28 +22,23 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef SFARKEXTRACTOR_H
-#define SFARKEXTRACTOR_H
+#ifndef ABSTRACTEXTRACTOR_H
+#define ABSTRACTEXTRACTOR_H
 
-#include "abstractextractor.h"
+#include "sfarkfilemanager.h"
+#include <QObject>
 
-class QWidget;
-
-class SfArkExtractor : public AbstractExtractor
+// Interface shared by the 2 extractors
+class AbstractExtractor: public QObject
 {
     Q_OBJECT
 
 public:
-    SfArkExtractor(const char * fileName, QWidget * parent);
-    virtual ~SfArkExtractor();
-    virtual void extract();
-    virtual bool getData(char *&data, qint32 &size);
-
-private:
-    AbstractExtractor * _extractor;
-    QWidget * _parent;
-
-    void extract2();
+    AbstractExtractor() {}
+    virtual ~AbstractExtractor();
+    virtual void extract() = 0;
+    virtual bool getData(char *&data, qint32 &size) = 0;
 };
 
-#endif // SFARKEXTRACTOR_H
+#endif // ABSTRACTEXTRACTOR_H
+

@@ -1,7 +1,7 @@
 /***************************************************************************
 **                                                                        **
 **  Polyphone, a soundfont editor                                         **
-**  Copyright (C) 2014 Davy Triponney                                     **
+**  Copyright (C) 2014-2015 Davy Triponney                                **
 **                                                                        **
 **  This program is free software: you can redistribute it and/or modify  **
 **  it under the terms of the GNU General Public License as published by  **
@@ -34,27 +34,14 @@ SfArkFileManager::SfArkFileManager()
 
 SfArkFileManager::~SfArkFileManager()
 {
-    QList<int> keys = _mapDataStream.keys();
-    foreach (int key, keys)
-        delete _mapDataStream.take(key);
-
-    keys = _mapByteArray.keys();
-    foreach (int key, keys)
-        delete _mapByteArray.take(key);
-
-    keys = _mapFile.keys();
-    foreach (int key, keys)
-    {
-        QFile * file = _mapFile.take(key);
-        file->close();
-        delete file;
-    }
+    clearFiles();
 }
 
 // Return file handler if success, otherwise -1
 int SfArkFileManager::openReadOnly(const char * name)
 {
     int handler = _maxFileHandler;
+
     if (_mapName.contains(name))
         handler = _mapName.value(name);
     else
@@ -167,4 +154,27 @@ char * SfArkFileManager::retrieveData(const char *name, int &size)
         }
     }
     return ret;
+}
+
+void SfArkFileManager::clearFiles()
+{
+    _maxFileHandler = 0;
+
+    _mapName.clear();
+
+    QList<int> keys = _mapDataStream.keys();
+    foreach (int key, keys)
+        delete _mapDataStream.take(key);
+
+    keys = _mapByteArray.keys();
+    foreach (int key, keys)
+        delete _mapByteArray.take(key);
+
+    keys = _mapFile.keys();
+    foreach (int key, keys)
+    {
+        QFile * file = _mapFile.take(key);
+        file->close();
+        delete file;
+    }
 }

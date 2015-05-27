@@ -22,28 +22,6 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef SFARKEXTRACTOR_H
-#define SFARKEXTRACTOR_H
-
 #include "abstractextractor.h"
 
-class QWidget;
-
-class SfArkExtractor : public AbstractExtractor
-{
-    Q_OBJECT
-
-public:
-    SfArkExtractor(const char * fileName, QWidget * parent);
-    virtual ~SfArkExtractor();
-    virtual void extract();
-    virtual bool getData(char *&data, qint32 &size);
-
-private:
-    AbstractExtractor * _extractor;
-    QWidget * _parent;
-
-    void extract2();
-};
-
-#endif // SFARKEXTRACTOR_H
+AbstractExtractor::~AbstractExtractor() {}
