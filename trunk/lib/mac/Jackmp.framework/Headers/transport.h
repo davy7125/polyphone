@@ -25,10 +25,8 @@
 extern "C" {
 #endif
 
-//#include <jack/types.h>
-//#include <jack/weakmacros.h>
-#include <types.h>
-#include <weakmacros.h>
+#include "types.h"
+#include "weakmacros.h"
 
 /**
  * @defgroup TransportControl Transport and Timebase control
