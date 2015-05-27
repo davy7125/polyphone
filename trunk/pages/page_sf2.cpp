@@ -377,6 +377,6 @@ void Page_Sf2::compte(int &unusedSmpl, int &unusedInst, int &usedSmpl, int &used
     // Nombre de samples et instruments utilisés / non utilisés
     unusedSmpl = listSmpl.size();
     unusedInst = listInst.size();
-    usedSmpl = listUsedSmpl.size();
-    usedInst = listUsedInst.size();
+    usedSmpl = listUsedSmpl.size() + listSmpl.size();
+    usedInst = listUsedInst.size() + listInst.size();
 }

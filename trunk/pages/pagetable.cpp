@@ -1735,7 +1735,7 @@ QList<PageTable::Modulator> PageTable::getModList(EltID id)
     {
         Modulator mod = listRet.at(i);
 
-        if (mod.modDestOper >= 32768)
+        if ((int)mod.modDestOper >= 32768)
         {
             // Les liens cassés disparaissent
             int link = mod.modDestOper - 32768;
@@ -1835,7 +1835,7 @@ void PageTable::pasteMod(EltID id, QList<Modulator> modulators)
     {
         Modulator mod = modulators.at(i);
         mod.index += offsetIndex;
-        if (mod.modDestOper >= 32768)
+        if ((int)mod.modDestOper >= 32768)
             mod.modDestOper = (Champ)(mod.modDestOper + offsetIndex);
         modulators[i] = mod;
     }

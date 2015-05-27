@@ -2500,7 +2500,7 @@ void Pile_sf2::SF2::BAG::MOD::enleverMod(int index)
 {
     // suppression de la référence à index
     // décrémentation des références supérieures
-    if (this->sfModDestOper >= 32768)
+    if ((int)this->sfModDestOper >= 32768)
     {
         // mode "link"
         if (this->sfModDestOper - 32768 == index)
