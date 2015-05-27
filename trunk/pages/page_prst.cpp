@@ -86,6 +86,8 @@ Page_Prst::Page_Prst(QWidget *parent) :
 
     connect(this->table, SIGNAL(actionBegin()), this, SLOT(actionBegin()));
     connect(this->table, SIGNAL(actionFinished()), this, SLOT(actionFinished()));
+
+    _pushRangeMode->hide();
 }
 Page_Prst::~Page_Prst()
 {
