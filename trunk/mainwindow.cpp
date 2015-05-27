@@ -60,6 +60,9 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent, Qt::Window | Qt::W
 #if QT_VERSION >= QT_VERSION_CHECK(4, 7, 0)
     ui->editSearch->setPlaceholderText(trUtf8("Rechercher..."));
 #endif
+#ifdef Q_OS_MAC
+    ui->verticalLayout_3->setSpacing(4);
+#endif
     // Taille max de l'application et restauration de l'état de la fenêtre
     this->setMaximumSize(QApplication::desktop()->size());
     restoreGeometry(configuration->getWindowGeometry());
@@ -1426,12 +1429,12 @@ void MainWindow::dragAndDrop(QString path, EltID idDest, int * arg)
     else if (extension.compare("sfark") == 0)
     {
         // Extraction sfArk
-        SfArkExtractor sfArkExtractor(path.toStdString().c_str());
+        SfArkExtractor sfArkExtractor(path.toStdString().c_str(), this);
         bool ok = false;
         int size = 0;
         char * rawData = NULL;
-        SfArkExtractor::SfArkError error = sfArkExtractor.extract(rawData, size);
-        if (error == SfArkExtractor::SFARKERR_OK || error == SfArkExtractor::SFARKERR_CHKSUM)
+        sfArkExtractor.extract();
+        if (sfArkExtractor.getData(rawData, size))
         {
             QByteArray data(rawData, size);
             QDataStream streamSf2(&data, QIODevice::ReadOnly);
@@ -1440,8 +1443,7 @@ void MainWindow::dragAndDrop(QString path, EltID idDest, int * arg)
         }
 
         if (!ok)
-            QMessageBox::warning(this, trUtf8("Attention"),
-                                 trUtf8("Une erreur est survenue lors de l'import du fichier ") + path);
+            QMessageBox::warning(this, trUtf8("Attention"), trUtf8("Une erreur est survenue lors de l'import du fichier ") + path);
 
         this->updateActions();
     }

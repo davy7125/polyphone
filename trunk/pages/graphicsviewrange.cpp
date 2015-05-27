@@ -283,7 +283,10 @@ void GraphicsViewRange::zoomDrag()
 
 void GraphicsViewRange::setZoomLine(double x1, double y1, double x2, double y2)
 {
-
+    Q_UNUSED(x1)
+    Q_UNUSED(y1)
+    Q_UNUSED(x2)
+    Q_UNUSED(y2)
 }
 
 double GraphicsViewRange::normalizeX(int xPixel)

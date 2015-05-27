@@ -426,14 +426,14 @@ Pile_actions::Action * Pile_actions::Action::decrementer(EltID id)
             // Ajustement des index
             if (this->champ == champ_sfModDestOper)
             {
-                if (this->vOldValue.sfGenValue >= 32768)
+                if ((int)this->vOldValue.sfGenValue >= 32768)
                 {
                     if (this->vOldValue.sfGenValue - 32768 == this->id.indexMod)
                         this->vOldValue.sfGenValue = (Champ)0;
                     else if (this->vOldValue.sfGenValue - 32768 > this->id.indexMod)
                         this->vOldValue.sfGenValue = (Champ)(this->vOldValue.sfGenValue - 1);
                 }
-                if (this->vNewValue.sfGenValue >= 32768)
+                if ((int)this->vNewValue.sfGenValue >= 32768)
                 {
                     if (this->vNewValue.sfGenValue - 32768 == this->id.indexMod)
                         this->vNewValue.sfGenValue = (Champ)0;
