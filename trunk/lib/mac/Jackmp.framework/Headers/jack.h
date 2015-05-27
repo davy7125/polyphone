@@ -26,12 +26,9 @@ extern "C"
 {
 #endif
 
-//#include <jack/systemdeps.h>
-//#include <jack/types.h>
-//#include <jack/transport.h>
-#include <systemdeps.h>
-#include <types.h>
-#include <transport.h>
+#include "systemdeps.h"
+#include "types.h"
+#include "transport.h"
 
 /**
  * Note: More documentation can be found in jack/types.h.
@@ -49,8 +46,7 @@ extern "C"
      * <jack/weakjack.h> before jack.h.
      *************************************************************/
 
-//#include <jack/weakmacros.h>
-#include <weakmacros.h>
+#include "weakmacros.h"
 
 /**
  * Call this function to get version of the JACK, in form of several numbers
@@ -150,6 +146,29 @@ int jack_client_name_size (void) JACK_OPTIONAL_WEAK_EXPORT;
  * name will differ from the @a client_name requested.
  */
 char * jack_get_client_name (jack_client_t *client) JACK_OPTIONAL_WEAK_EXPORT;
+
+/**
+ * Get the session ID for a client name.
+ *
+ * The session manager needs this to reassociate a client name to the session_id.
+ *
+ * The caller is responsible for calling jack_free(3) on any non-NULL
+ * returned value.
+ */
+char *jack_get_uuid_for_client_name (jack_client_t *client,
+                                     const char    *client_name) JACK_WEAK_EXPORT;
+
+/**
+ * Get the client name for a session_id.
+ *
+ * In order to snapshot the graph connections, the session manager needs to map
+ * session_ids to client names.
+ *
+ * The caller is responsible for calling jack_free(3) on any non-NULL
+ * returned value.
+ */
+char *jack_get_client_name_by_uuid (jack_client_t *client,
+                                    const char    *client_uuid ) JACK_WEAK_EXPORT;
 
 /**
  * Load an internal client into the Jack server.
@@ -753,6 +772,13 @@ int jack_port_unregister (jack_client_t *client, jack_port_t *port) JACK_OPTIONA
  * Port buffers have to be retrieved in each callback for proper functionning.
  */
 void * jack_port_get_buffer (jack_port_t *port, jack_nframes_t) JACK_OPTIONAL_WEAK_EXPORT;
+
+/**
+ * @return the UUID of the jack_port_t
+ *
+ * @see jack_uuid_to_string() to convert into a string representation
+ */
+jack_uuid_t jack_port_uuid (const jack_port_t *port) JACK_OPTIONAL_WEAK_EXPORT;
 
 /**
  * @return the full name of the jack_port_t (including the @a
