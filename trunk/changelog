@@ -5,7 +5,7 @@ polyphone (1.6) unstable; urgency=low
  * Possibility to merge presets from different soundfonts to one sf2 via the export
  * Export of samples from different soundfonts is allowed
  * In the virtual keyboard, using "shift" with an arrow makes a quicker move
- * Option to move keyrange or not in the transposition tool for instruments
+ * Option to move (or not) keyrange in the transposition tool for instruments
  * Mutations available for 64' resultant in the organ mixture creation tool
  * Tolerance for opcodes comprising no underscore (sfz opcodes v1)
  * Several libraries updated (including portaudio, stk)
@@ -18,7 +18,7 @@ polyphone (1.6) unstable; urgency=low
  * (fix) GUI fix for mac
  * (fix) loop_mode one-shot caused sometimes a wrong envelop release in the sfz import
 
- -- Davy Triponney <davy.triponney@gmail.com>  XXX, XX May 2015 11:15:10 +0100
+ -- Davy Triponney <davy.triponney@gmail.com>  Wednesday, 27 May 2015 20:11:10 +0100
 
 
 polyphone (1.5) UNRELEASED; urgency=low
