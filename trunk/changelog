@@ -18,7 +18,7 @@ polyphone (1.6) unstable; urgency=low
  * (fix) GUI fix for mac
  * (fix) loop_mode one-shot caused sometimes a wrong envelop release in the sfz import
 
- -- Davy Triponney <davy.triponney@gmail.com>  Wednesday, 27 May 2015 20:11:10 +0100
+ -- Davy Triponney <davy.triponney@gmail.com>  Wed, 27 May 2015 20:11:10 +0100
 
 
 polyphone (1.5) UNRELEASED; urgency=low
