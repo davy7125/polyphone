@@ -1,0 +1,11 @@
+ * compilation zlib 32 et 64 bits
+
+rename c:\SDKs\zlib-1.2.8 c:\SDKs\zlib-1.2.8-x64
+cd c:\SDKs\zlib-1.2.8-x64
+"c:\program files (x86)\microsoft visual studio 12.0\vc\vcvarsall.bat" x64
+nmake -f win32/Makefile.msc AS=ml64 LOC="-DASMV -DASMINF -I." OBJA="inffasx64.obj gvmat64.obj inffas8664.obj"
+
+rename c:\SDKs\zlib-1.2.8 c:\SDKs\zlib-1.2.8-x86
+cd c:\SDKs\zlib-1.2.8-x86
+"c:\program files (x86)\microsoft visual studio 12.0\vc\vcvarsall.bat" x86
+nmake -f win32/Makefile.msc LOC="-DASMV -DASMINF" OBJA="inffas32.obj match686.obj"
