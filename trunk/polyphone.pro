@@ -41,8 +41,10 @@ win32{
 
     !contains(QMAKE_TARGET.arch, x86_64) {
         LIBS += -Llib/win/32bits -lportaudio_x86 -lzlib1 -lwinmm
+        QMAKE_LFLAGS_WINDOWS = /SUBSYSTEM:WINDOWS,5.01
     } else {
         LIBS += -Llib/win/64bits -lportaudio_x64 -lzlib1 -lwinmm
+        QMAKE_LFLAGS_WINDOWS = /SUBSYSTEM:WINDOWS,5.02
     }
 }
 unix:!macx {
