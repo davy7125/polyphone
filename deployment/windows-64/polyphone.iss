@@ -5,21 +5,23 @@
 ; NOTE: The value of AppId uniquely identifies this application.
 ; Do not use the same AppId value in installers for other applications.
 ; (To generate a new GUID, click Tools | Generate GUID inside the IDE.)
-AppId={{B0A96B4A-783D-4090-89D6-0B66C8D71B42}
+AppId={{83549E04-CB44-4E12-85B6-9FBBA3B0FE65}
 AppName=Polyphone
-AppVersion=1.5
-AppPublisher=
+AppVersion=1.6
+AppPublisher=Davy Triponney
 AppPublisherURL=http://www.polyphone.fr/
 AppSupportURL=http://www.polyphone.fr/
 AppUpdatesURL=http://www.polyphone.fr/
 ChangesAssociations=yes
-DefaultDirName={pf}\Polyphone
+DefaultDirName={pf64}\Polyphone
 DefaultGroupName=Polyphone
 LicenseFile=license.txt
-OutputBaseFilename=polyphone-1.5-setup
+OutputBaseFilename=Polyphone_v1.6_win64  
 SetupIconFile=polyphone.ico
 Compression=lzma
 SolidCompression=yes
+ArchitecturesAllowed=x64
+ArchitecturesInstallIn64BitMode=x64
 
 [Languages]
 Name: "english"; MessagesFile: "compiler:Default.isl"
@@ -32,20 +34,17 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 
 [Files]
 Source: "polyphone.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "lib\icudt52.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "lib\icuin52.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "lib\icuuc52.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "lib\libgcc_s_dw2-1.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "lib\libjack.dll"; DestDir: "{app}"; Flags: ignoreversion 
-Source: "lib\libstdc++-6.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "lib\libwinpthread-1.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "lib\mingwm10.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "lib\icudt53.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "lib\icuin53.dll"; DestDir: "{app}"; Flags: ignoreversion    
+Source: "lib\icuuc53.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "lib\portaudio_x64.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "lib\Qt5Core.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "lib\Qt5Gui.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "lib\Qt5PrintSupport.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "lib\Qt5Svg.dll"; DestDir: "{app}"; Flags: ignoreversion   
 Source: "lib\Qt5Widgets.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "lib\zlib1.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "lib\zlib1.dll"; DestDir: "{app}"; Flags: ignoreversion   
+Source: "lib\msvcp120.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "lib\msvcr120.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "lib\qwindows.dll"; DestDir: "{app}\platforms"; Flags: ignoreversion
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
