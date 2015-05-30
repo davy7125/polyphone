@@ -67,7 +67,7 @@ macx {
     QMAKE_INFO_PLIST = polyphone.plist
 }
 
-# location of RtMidi, Stk and QCustomplot
+# Location of RtMidi, Stk and QCustomplot
 contains(DEFINES, USE_LOCAL_LIBRARIES) {
     HEADERS += lib/rtmidi/RtMidi.h \
         lib/stk/Stk.h \
@@ -270,7 +270,15 @@ FORMS    += mainwindow.ui \
     gui_divers/dialogselection.ui \
     tools/dialog_transposition.ui
 
-# SfArkLib
+RESOURCES += ressources.qrc \
+    clavier/pianokeybd.qrc
+
+TRANSLATIONS = polyphone_en.ts \
+    polyphone_es.ts \
+    polyphone_it.ts
+
+
+# SfArk extraction (what a mess!)
 DEFINES += __LITTLE_ENDIAN__
 INCLUDEPATH += lib/sfarklib
 HEADERS += lib/sfarklib/sfArkLib.h \
@@ -278,15 +286,25 @@ HEADERS += lib/sfarklib/sfArkLib.h \
     sfark/sfarkextractor2.h \
     sfark/abstractextractor.h
 
-# Special compiler for sfark extractor
-SPECIAL_SOURCE = sfark/sfarkextractor1.cpp \
-    lib/sfarklib/sfklCoding.cpp \
-    lib/sfarklib/sfklCrunch.cpp \
-    lib/sfarklib/sfklDiff.cpp \
-    lib/sfarklib/sfklLPC.cpp \
-    lib/sfarklib/sfklZip.cpp \
-    sfark/sfarkextractor2.cpp \
-    sfark/abstractextractor.cpp
+SPECIAL_SOURCE = sfark/sfarkextractor1.cpp
+macx {
+    SOURCES += sfark/sfarkextractor2.cpp \
+        sfark/abstractextractor.cpp \
+        lib/sfarklib/sfklZip.cpp \
+        lib/sfarklib/sfklLPC.cpp \
+        lib/sfarklib/sfklDiff.cpp \
+        lib/sfarklib/sfklCrunch.cpp \
+        lib/sfarklib/sfklCoding.cpp
+} else {
+    SPECIAL_SOURCE += sfark/sfarkextractor2.cpp \
+        sfark/abstractextractor.cpp \
+        lib/sfarklib/sfklZip.cpp \
+        lib/sfarklib/sfklLPC.cpp \
+        lib/sfarklib/sfklDiff.cpp \
+        lib/sfarklib/sfklCrunch.cpp \
+        lib/sfarklib/sfklCoding.cpp
+}
+
 ExtraCompiler.input = SPECIAL_SOURCE
 ExtraCompiler.variable_out = OBJECTS
 ExtraCompiler.output = ${QMAKE_VAR_OBJECTS_DIR}${QMAKE_FILE_IN_BASE}$${QMAKE_EXT_OBJ}
@@ -300,10 +318,3 @@ macx {
     ExtraCompiler.commands = $${QMAKE_CXX} $(CXXFLAGS) -D__LITTLE_ENDIAN__ -mno-sse -mfpmath=387 $(INCPATH) -c ${QMAKE_FILE_IN} -o ${QMAKE_FILE_OUT}
 }
 QMAKE_EXTRA_COMPILERS += ExtraCompiler
-
-RESOURCES += ressources.qrc \
-    clavier/pianokeybd.qrc
-
-TRANSLATIONS = polyphone_en.ts \
-    polyphone_es.ts \
-    polyphone_it.ts
