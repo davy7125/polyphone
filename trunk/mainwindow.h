@@ -209,7 +209,6 @@ private:
     Pile_sf2 * sf2;
     Synth * synth;
     AudioDevice * audioDevice;
-    QThread audioThread;
     Config * configuration;
     DialogHelp help;
     DialogAbout about;
