@@ -62,7 +62,6 @@ protected:
     void mouseMoveEvent(QMouseEvent *event);
 
 private:
-    // Attributs privés
     QPen penLecture;
     double sizeX;
     bool zoomFlag;
@@ -79,6 +78,7 @@ private:
     int m_currentPos;
     bool filterEventEnabled;
     QCPItemText * textMultipleSelection;
+    QTime _lastUpdate;
 
     // Méthodes privées
     void zoom(QPoint point);
