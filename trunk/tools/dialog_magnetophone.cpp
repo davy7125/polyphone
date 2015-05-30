@@ -33,15 +33,12 @@
 #include "synth.h"
 
 DialogMagnetophone::DialogMagnetophone(QWidget *parent) :
-    QWidget(parent),
+    QDialog(parent),
     ui(new Ui::DialogMagnetophone),
     _sampleRate(0)
 {
     ui->setupUi(this);
-    this->setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint);
-
-    // Initialisation
-    this->setWindowFlags(Qt::Tool | Qt::WindowStaysOnTopHint | Qt::WindowCloseButtonHint);
+    this->setWindowFlags(Qt::Tool | Qt::WindowStaysOnTopHint | Qt::CustomizeWindowHint | Qt::WindowCloseButtonHint);
     this->initGui();
 }
 

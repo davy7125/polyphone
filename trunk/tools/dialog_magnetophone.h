@@ -25,7 +25,7 @@
 #ifndef DIALOG_MAGNETOPHONE_H
 #define DIALOG_MAGNETOPHONE_H
 
-#include <QWidget>
+#include <QDialog>
 
 namespace Ui {
 class DialogMagnetophone;
@@ -33,7 +33,7 @@ class DialogMagnetophone;
 
 class Synth;
 
-class DialogMagnetophone : public QWidget
+class DialogMagnetophone : public QDialog
 {
     Q_OBJECT
     
