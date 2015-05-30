@@ -32,10 +32,10 @@ CircularBuffer::CircularBuffer(int minBuffer, int maxBuffer) : QObject(NULL),
     _bufferSize(4 * maxBuffer),
     _posEcriture(0),
     _posLecture(0),
-    _currentLengthAvailable(0),
-    _interrupted(false),
-    _isFinished(false)
+    _currentLengthAvailable(0)
 {
+    _interrupted.store(0);
+
     // Initialisation des buffers
     _dataL       = new float [_bufferSize];
     _dataR       = new float [_bufferSize];
@@ -59,27 +59,9 @@ CircularBuffer::~CircularBuffer()
     delete [] _dataTmpRevR;
 }
 
-bool CircularBuffer::isInterrupted()
-{
-    _mutexInterrupt.lock();
-    bool bRet = _interrupted;
-    _mutexInterrupt.unlock();
-    return bRet;
-}
-
 void CircularBuffer::stop()
 {
-    _mutexInterrupt.lock();
-    _interrupted = true;
-    _mutexInterrupt.unlock();
+    _interrupted.store(1);
     _mutexSynchro.tryLock();
     _mutexSynchro.unlock();
-}
-
-bool CircularBuffer::isFinished()
-{
-    _mutexInterrupt.lock();
-    bool bRet = _isFinished;
-    _mutexInterrupt.unlock();
-    return bRet;
 }

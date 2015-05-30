@@ -73,7 +73,7 @@ public:
     bool getRam()               {return false/*ram*/;}
     int  getAudioType();
     int  getAudioIndex();
-    int  getBufferSize()        {return bufferSize;}
+    int  getBufferSize()        {return _bufferSize;}
     bool getAfficheMod()        {return afficheMod;}
     bool getAfficheToolBar()    {return afficheToolBar;}
     bool getWavAutoLoop()       {return wavAutoLoop;}
@@ -104,7 +104,7 @@ public:
     double getTools_s_mur_coupure()         { return settings.value("tools/sample/mur_coupure", 15000.).toDouble(); }
     double getTools_s_transpo_ton()         { return settings.value("tools/sample/transposition_ton", 12.).toDouble(); }
     double getTools_i_transpo_ton()         { return settings.value("tools/instrument/transposition_ton", 12.).toDouble(); }
-    bool   getTools_i_transpo_keyrange()     { return settings.value("tools/instrument/transposition_keyrange", true).toBool(); }
+    bool   getTools_i_transpo_keyrange()    { return settings.value("tools/instrument/transposition_keyrange", true).toBool(); }
     double getTools_i_release_dureeDo()     { return settings.value("tools/instrument/release_durationC", 0.3).toDouble(); }
     double getTools_i_release_division()    { return settings.value("tools/instrument/release_division", 2.).toDouble(); }
     double getTools_i_release_desaccordage(){ return settings.value("tools/instrument/release_desaccordage", 0.).toDouble(); }
@@ -708,7 +708,7 @@ private:
     QList<QAction *> actionList;
     QByteArray actionListToolbar;
     bool modifStereo;
-    int bufferSize;
+    int _bufferSize;
     NameMiddleC nameMiddleC;
     bool sameWidthTable;
 

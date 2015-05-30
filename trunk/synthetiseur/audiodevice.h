@@ -103,7 +103,6 @@ public slots:
     void closeConnections();
 
 signals:
-    void start();
     void connectionDone();
     void connectionDefault();
     void connectionProblem();
