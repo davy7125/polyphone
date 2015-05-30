@@ -41,7 +41,7 @@
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent, Qt::Window | Qt::WindowCloseButtonHint |
                                                       Qt::WindowMaximizeButtonHint | Qt::WindowMinimizeButtonHint |
                                                       Qt::WindowSystemMenuHint | Qt::WindowTitleHint |
-                                                      Qt::CustomizeWindowHint),
+                                                      Qt::CustomizeWindowHint | Qt::WindowFullscreenButtonHint),
     ui(new Ui::MainWindow),
     synth(NULL),
     audioDevice(new AudioDevice()),
@@ -86,10 +86,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent, Qt::Window | Qt::W
     // Initialisation de la sortie audio
     this->audioDevice->initSynth(this->synth);
     connect(this, SIGNAL(initAudio(int, int, int)), this->audioDevice, SLOT(initAudio(int, int, int)));
-    connect(this, SIGNAL(stopAudio()), this->audioDevice, SLOT(closeConnections()), Qt::BlockingQueuedConnection);
+    connect(this, SIGNAL(stopAudio()), this->audioDevice, SLOT(closeConnections()));
     connect(this->audioDevice, SIGNAL(connectionDone()), this, SLOT(onAudioConnectionDone()));
-    this->audioDevice->moveToThread(&this->audioThread);
-    this->audioThread.start(QThread::HighPriority);
 
     this->setAudioDevice(configuration->getAudioType(), configuration->getAudioIndex(), configuration->getBufferSize());
     this->setSynthGain(this->configuration->getSynthGain());
@@ -204,10 +202,6 @@ MainWindow::~MainWindow()
     delete this->page_prst;
     delete this->page_sf2;
     delete this->page_smpl;
-
-    // Fin du thread audio (200 ms pour quitter)
-    this->audioThread.quit();
-    this->audioThread.wait(200);
     delete this->synth;
     delete this->audioDevice;
     Config::kill();
