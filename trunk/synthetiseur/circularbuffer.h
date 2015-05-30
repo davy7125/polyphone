@@ -78,8 +78,6 @@ public:
     }
 
     void stop();
-    bool isInterrupted();   // Interruption demandée
-    bool isFinished();      // Boucle terminée
 
 public slots:
     void start()
@@ -89,7 +87,7 @@ public slots:
         _mutexData.unlock();
 
         // Surveillance du buffer après chaque lecture
-        while (!isInterrupted())
+        while (_interrupted.load() == 0)
         {
             // Génération de données
             _mutexBuffer.lock();
@@ -98,9 +96,7 @@ public slots:
             _mutexBuffer.unlock();
             _mutexSynchro.lock();
         }
-        _mutexInterrupt.lock();
-        _isFinished = true;
-        _mutexInterrupt.unlock();
+
         _mutexSynchro.tryLock();
         _mutexSynchro.unlock();
     }
@@ -147,10 +143,10 @@ private:
     int _currentLengthAvailable;
 
     // Gestion interruption
-    bool _interrupted, _isFinished;
+    QAtomicInt _interrupted;
 
     // Protection des ressources
-    QMutex _mutexInterrupt, _mutexSynchro;
+    QMutex _mutexSynchro;
 };
 
 #endif // CIRCULARBUFFER_H

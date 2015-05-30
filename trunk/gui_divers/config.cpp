@@ -119,7 +119,7 @@ Config::Config(QWidget *parent, PianoKeybdCustom *keyboard, AudioDevice * audioD
         comboboxIndex = comboboxDefaultIndex;
     this->ui->comboAudioOuput->setCurrentIndex(comboboxIndex);
 
-    int pos = qRound(qLn(bufferSize) / 0.69314718056 - 4);
+    int pos = qRound(qLn(_bufferSize) / 0.69314718056 - 4);
     if (pos < 0)
         pos = 0;
     if (pos > ui->comboBufferSize->count() - 1)
@@ -186,6 +186,7 @@ void Config::show()
     QStringList listMidi = this->mainWindow->getListMidi();
     this->ui->comboMidiInput->addItem("-");
     this->ui->comboMidiInput->addItems(listMidi);
+
     // Sélection
     if (this->ui->comboMidiInput->count() > this->numPortMidi + 1)
         this->ui->comboMidiInput->setCurrentIndex(this->numPortMidi + 1);
@@ -231,8 +232,9 @@ void Config::setAudioOutput(int index)
     Q_UNUSED(index)
     if (this->loaded)
     {
-        this->mainWindow->setAudioDevice(getAudioType(), getAudioIndex(), bufferSize);
-        //this->store();
+        this->mainWindow->setAudioDevice(getAudioType(), getAudioIndex(), _bufferSize);
+        if (getAudioIndex() == 0)
+            storeAudioConfig();
     }
 }
 void Config::on_comboBufferSize_activated(int index)
@@ -240,8 +242,10 @@ void Config::on_comboBufferSize_activated(int index)
     // Modification de la taille du buffer
     if (this->loaded)
     {
-        bufferSize = pow(2.0f, index + 4);
+        _bufferSize = pow(2.0f, index + 4);
         setAudioOutput(ui->comboAudioOuput->currentIndex());
+        if (getAudioIndex() == 0)
+            storeAudioConfig();
     }
 }
 void Config::setWavAutoLoop(bool checked)
@@ -492,7 +496,7 @@ void Config::load()
     this->afficheToolBar    = settings.value("affichage/tool_bar", true).toBool();
     this->afficheMod        = settings.value("affichage/section_modulateur", true).toBool();
     this->_audioIndex        = settings.value("audio/index", 0).toInt();
-    this->bufferSize        = settings.value("audio/buffer_size", 512).toInt();
+    this->_bufferSize        = settings.value("audio/buffer_size", 512).toInt();
     this->_audioType         = settings.value("audio/type", 0).toInt();
     this->wavAutoLoop       = settings.value("wav_auto_loop", false).toBool();
     if (settings.contains("wav_remove_bank"))
@@ -537,9 +541,6 @@ void Config::store()
     settings.setValue("recent_file/file_4",             listFiles.at(4));
     settings.setValue("affichage/tool_bar",             this->afficheToolBar);
     settings.setValue("affichage/section_modulateur",   this->afficheMod);
-    settings.setValue("audio/index",                    this->_audioIndex);
-    settings.setValue("audio/buffer_size",              this->bufferSize);
-    settings.setValue("audio/type",                     this->_audioType);
     settings.setValue("wav_auto_loop",                  this->wavAutoLoop);
     settings.setValue("wav_remove_blank",               this->wavRemoveBlank);
     settings.setValue("keyboard/type",                  this->keyboardType);
@@ -1100,5 +1101,8 @@ void Config::storeAudioConfig()
 {
     _audioType = getAudioType();
     _audioIndex = getAudioIndex();
-    store();
+
+    settings.setValue("audio/index",                    this->_audioIndex);
+    settings.setValue("audio/buffer_size",              this->_bufferSize);
+    settings.setValue("audio/type",                     this->_audioType);
 }
