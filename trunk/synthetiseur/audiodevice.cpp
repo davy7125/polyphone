@@ -160,7 +160,7 @@ QList<HostInfo> AudioDevice::getHostInfo()
 
 void AudioDevice::initAudio(int numDevice, int numIndex, int bufferSize)
 {
-    // >0 : standard
+    // ≥0 : standard
     // -1 : none
     // -2 : jack
 
@@ -307,9 +307,8 @@ void AudioDevice::openJackConnection(int bufferSize)
         }
     }
 
-    // Envoi du format au synthé et activation
+    // Envoi du format au synthé
     _synth->setFormat(_format);
-    emit(start());
 
     // Activation du serveur et connexion du port de sortie avec les hauts parleurs
     if (jack_activate(_jack_client))
@@ -372,9 +371,8 @@ void AudioDevice::openStandardConnection(int numDevice, int numIndex, int buffer
                                 standardProcess,    // callback
                                 this);              // instance d'audiodevice
 
-    // Envoi du format au synthé et activation
+    // Envoi du format au synthé
     _synth->setFormat(_format);
-    emit(start());
 
     // Début du son
     if (err == paNoError)
@@ -396,11 +394,12 @@ void AudioDevice::closeConnections()
 {
     if (_isStandardRunning)
     {
-        Pa_AbortStream(_standardStream);
+        Pa_StopStream(_standardStream);
         Pa_CloseStream(_standardStream);
         _isStandardRunning = false;
         _standardStream = NULL;
     }
+
 #ifndef Q_OS_WIN
     if (_jack_client)
     {
