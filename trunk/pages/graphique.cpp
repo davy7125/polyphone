@@ -84,6 +84,9 @@ Graphique::Graphique(QWidget * parent) : QCustomPlot(parent),
 
     // Paramétrage des couleurs
     this->updateStyle();
+
+    // Start update timer
+    _lastUpdate.start();
 }
 
 // Méthodes publiques
@@ -224,6 +227,10 @@ void Graphique::setEndLoop(int pos, bool replot)
 }
 void Graphique::setCurrentSample(int pos)
 {
+    if (_lastUpdate.elapsed() < 16)
+        return;
+    _lastUpdate.restart();
+
     m_currentPos = this->xAxis->coordToPixel(pos);
     this->repaint();
     this->update();
