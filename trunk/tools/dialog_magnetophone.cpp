@@ -87,6 +87,7 @@ void DialogMagnetophone::closeEvent(QCloseEvent *)
 
 void DialogMagnetophone::on_pushRecord_toggled(bool checked)
 {
+    ui->pushPlayPause->setEnabled(checked);
     if (checked)
     {
         // Nom de fichier
