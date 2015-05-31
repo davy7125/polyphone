@@ -41,7 +41,11 @@
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent, Qt::Window | Qt::WindowCloseButtonHint |
                                                       Qt::WindowMaximizeButtonHint | Qt::WindowMinimizeButtonHint |
                                                       Qt::WindowSystemMenuHint | Qt::WindowTitleHint |
-                                                      Qt::CustomizeWindowHint | Qt::WindowFullscreenButtonHint),
+                                                      Qt::CustomizeWindowHint
+#if QT_VERSION >= QT_VERSION_CHECK(5, 0, 0)
+                                                      | Qt::WindowFullscreenButtonHint
+#endif
+                                                      ),
     ui(new Ui::MainWindow),
     synth(NULL),
     audioDevice(new AudioDevice()),

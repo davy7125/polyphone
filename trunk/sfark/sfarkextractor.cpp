@@ -28,7 +28,12 @@
 
 #include <QProgressDialog>
 #include <QFutureWatcher>
+
+#if QT_VERSION >= QT_VERSION_CHECK(5, 0, 0)
 #include <QtConcurrent/QtConcurrentRun>
+#else
+#include <QtConcurrentRun>
+#endif
 
 SfArkExtractor::SfArkExtractor(const char * fileName, QWidget *parent) : AbstractExtractor(),
     _extractor(NULL),
