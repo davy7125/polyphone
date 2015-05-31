@@ -87,7 +87,7 @@ public slots:
         _mutexData.unlock();
 
         // Surveillance du buffer après chaque lecture
-        while (_interrupted.load() == 0)
+        while (_interrupted == 0)
         {
             // Génération de données
             _mutexBuffer.lock();
