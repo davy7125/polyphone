@@ -34,7 +34,7 @@ CircularBuffer::CircularBuffer(int minBuffer, int maxBuffer) : QObject(NULL),
     _posLecture(0),
     _currentLengthAvailable(0)
 {
-    _interrupted.store(0);
+    _interrupted = 0;
 
     // Initialisation des buffers
     _dataL       = new float [_bufferSize];
@@ -61,7 +61,7 @@ CircularBuffer::~CircularBuffer()
 
 void CircularBuffer::stop()
 {
-    _interrupted.store(1);
+    _interrupted = 1;
     _mutexSynchro.tryLock();
     _mutexSynchro.unlock();
 }
