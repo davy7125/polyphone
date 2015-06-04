@@ -67,7 +67,7 @@ protected:
         for (int i = nbVoices - 1; i >= 0; i--)
         {
             // Check for started voice (synchronization)
-            if(_listVoices.at(i)->isRunning())
+            if (_listVoices.at(i)->isRunning())
             {
                 // Récupération des données
                 _listVoices.at(i)->generateData(_dataTmpL, _dataTmpR, len);
