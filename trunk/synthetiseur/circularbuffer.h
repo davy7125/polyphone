@@ -37,115 +37,33 @@ public:
     CircularBuffer(int minBuffer, int maxBuffer);
     ~CircularBuffer();
 
-    void addData(float *dataL, float *dataR, float *dataRevL, float *dataRevR, int maxlen)
-    {
-        int total = 0;
-        if (!_mutexData.tryLock())
-            return;
-
-        int writeLen = qMin(maxlen, _currentLengthAvailable);
-
-        while (writeLen - total > 0)
-        {
-            const int chunk = qMin((_bufferSize - _posLecture), writeLen - total);
-            for (int i = 0; i < chunk; i++)
-            {
-                dataL   [total + i] += _dataL   [_posLecture + i];
-                dataR   [total + i] += _dataR   [_posLecture + i];
-                dataRevL[total + i] += _dataRevL[_posLecture + i];
-                dataRevR[total + i] += _dataRevR[_posLecture + i];
-            }
-            _posLecture = (_posLecture + chunk) % _bufferSize;
-            total += chunk;
-        }
-        for (int i = total; i < maxlen; i++)
-            dataL[i] = dataR[i] = dataRevL[i] = dataRevR[i] = 0;
-
-        _currentLengthAvailable -= total;
-
-        if (_currentLengthAvailable <= _minBuffer)
-        {
-            _mutexSynchro.tryLock();
-            _mutexSynchro.unlock();
-        }
-
-        _mutexData.unlock();
-    }
-
-    int currentLengthAvailable()
-    {
-        return _currentLengthAvailable;
-    }
-
+    void addData(float *dataL, float *dataR, float *dataRevL, float *dataRevR, int maxlen);
+    int currentLengthAvailable() { return _currentLengthAvailable; }
     void stop();
 
 public slots:
-    void start()
-    {
-        _mutexData.lock();
-        int avance = _maxBuffer - _minBuffer;
-        _mutexData.unlock();
-
-        // Surveillance du buffer après chaque lecture
-        while (_interrupted == 0)
-        {
-            // Génération de données
-            _mutexBuffer.lock();
-            generateData(_dataTmpL, _dataTmpR, _dataTmpRevL, _dataTmpRevR, avance);
-            writeData(_dataTmpL, _dataTmpR, _dataTmpRevL, _dataTmpRevR, avance);
-            _mutexBuffer.unlock();
-            _mutexSynchro.lock();
-        }
-
-        _mutexSynchro.tryLock();
-        _mutexSynchro.unlock();
-    }
+    void start();
 
 protected:
     virtual void generateData(float *dataL, float *dataR, float *dataRevL, float *dataRevR, int len) = 0;
-    QMutex _mutexData, _mutexBuffer;
+    QMutex _mutexBuffer;
     
 private:
-    void writeData(const float *dataL, const float *dataR, float *dataRevL, float *dataRevR, int &len)
-    {
-        int total = 0;
-        _mutexData.lock();
-
-        // Quantité qu'il aurait fallu écrire (mise à jour pour la fois suivante)
-        int newLen = _maxBuffer - _currentLengthAvailable;
-        if (newLen < _maxBuffer - _minBuffer)
-            newLen = _maxBuffer - _minBuffer;
-
-        while (len - total > 0)
-        {
-            const int chunk = qMin(_bufferSize - _posEcriture, len - total);
-            memcpy(&_dataL   [_posEcriture], &dataL   [total], 4 * chunk);
-            memcpy(&_dataR   [_posEcriture], &dataR   [total], 4 * chunk);
-            memcpy(&_dataRevL[_posEcriture], &dataRevL[total], 4 * chunk);
-            memcpy(&_dataRevR[_posEcriture], &dataRevR[total], 4 * chunk);
-            _posEcriture += chunk;
-            if (_posEcriture >= _bufferSize)
-                _posEcriture = 0;
-            total += chunk;
-        }
-        _currentLengthAvailable += len;
-        _mutexData.unlock();
-
-        // Mise à jour avance
-        len = newLen;
-    }
+    // Sound engine thread => write data in the buffer
+    // "len" contains at the end the data length that should have been written to meet the buffer requirements
+    void writeData(const float *dataL, const float *dataR, float *dataRevL, float *dataRevR, int &len);
 
     // Buffer et positions
     float * _dataL, * _dataR, * _dataRevL, * _dataRevR;
     float * _dataTmpL, * _dataTmpR, * _dataTmpRevL, * _dataTmpRevR;
-    int _minBuffer, _maxBuffer, _maxTailleBuffer, _bufferSize;
+    int _minBuffer, _maxBuffer, _bufferSize;
     int _posEcriture, _posLecture;
-    int _currentLengthAvailable;
+    QAtomicInt _currentLengthAvailable;
 
     // Gestion interruption
     QAtomicInt _interrupted;
 
-    // Protection des ressources
+    // Synchronisation
     QMutex _mutexSynchro;
 };
 
