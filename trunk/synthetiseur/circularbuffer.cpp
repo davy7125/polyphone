@@ -28,13 +28,12 @@
 CircularBuffer::CircularBuffer(int minBuffer, int maxBuffer) : QObject(NULL),
     _minBuffer(minBuffer),
     _maxBuffer(maxBuffer),
-    _maxTailleBuffer(2 * maxBuffer),
     _bufferSize(4 * maxBuffer),
     _posEcriture(0),
     _posLecture(0),
-    _currentLengthAvailable(0)
+    _currentLengthAvailable(0),
+    _interrupted(0)
 {
-    _interrupted = 0;
 
     // Initialisation des buffers
     _dataL       = new float [_bufferSize];
@@ -64,4 +63,78 @@ void CircularBuffer::stop()
     _interrupted = 1;
     _mutexSynchro.tryLock();
     _mutexSynchro.unlock();
+}
+
+void CircularBuffer::start()
+{
+    int avance = _maxBuffer - _minBuffer;
+
+    // Surveillance du buffer après chaque lecture
+    while (_interrupted == 0)
+    {
+        // Génération de données
+        _mutexBuffer.lock();
+        generateData(_dataTmpL, _dataTmpR, _dataTmpRevL, _dataTmpRevR, avance);
+        writeData(_dataTmpL, _dataTmpR, _dataTmpRevL, _dataTmpRevR, avance);
+        _mutexBuffer.unlock();
+        _mutexSynchro.lock();
+    }
+
+    _mutexSynchro.tryLock();
+    _mutexSynchro.unlock();
+}
+
+// Sound engine thread => write data in the buffer
+// "len" contains at the end the data length that should have been written to meet the buffer requirements
+void CircularBuffer::writeData(const float *dataL, const float *dataR, float *dataRevL, float *dataRevR, int &len)
+{
+    int total = 0;
+    while (len - total > 0)
+    {
+        const int chunk = qMin(_bufferSize - _posEcriture, len - total);
+        memcpy(&_dataL   [_posEcriture], &dataL   [total], 4 * chunk);
+        memcpy(&_dataR   [_posEcriture], &dataR   [total], 4 * chunk);
+        memcpy(&_dataRevL[_posEcriture], &dataRevL[total], 4 * chunk);
+        memcpy(&_dataRevR[_posEcriture], &dataRevR[total], 4 * chunk);
+        _posEcriture += chunk;
+        if (_posEcriture >= _bufferSize)
+            _posEcriture = 0;
+        total += chunk;
+    }
+
+    // Quantité qu'il aurait fallu écrire (mise à jour pour la fois suivante)
+    len = _maxBuffer - _currentLengthAvailable;
+    if (len < _maxBuffer - _minBuffer)
+        len = _maxBuffer - _minBuffer;
+
+    // Mise à jour avance
+    _currentLengthAvailable.fetchAndAddAcquire(total);
+}
+
+// Read data (audio thread)
+void CircularBuffer::addData(float *dataL, float *dataR, float *dataRevL, float *dataRevR, int maxlen)
+{
+    int writeLen = qMin(maxlen, _currentLengthAvailable.load());
+    int total = 0;
+    while (writeLen - total > 0)
+    {
+        const int chunk = qMin((_bufferSize - _posLecture), writeLen - total);
+        for (int i = 0; i < chunk; i++)
+        {
+            dataL   [total + i] += _dataL   [_posLecture + i];
+            dataR   [total + i] += _dataR   [_posLecture + i];
+            dataRevL[total + i] += _dataRevL[_posLecture + i];
+            dataRevR[total + i] += _dataRevR[_posLecture + i];
+        }
+        _posLecture = (_posLecture + chunk) % _bufferSize;
+        total += chunk;
+    }
+    for (int i = total; i < maxlen; i++)
+        dataL[i] = dataR[i] = dataRevL[i] = dataRevR[i] = 0;
+
+    if (_currentLengthAvailable.fetchAndAddAcquire(-total) - total <= _minBuffer)
+    {
+        _mutexSynchro.tryLock();
+        _mutexSynchro.unlock();
+    }
 }

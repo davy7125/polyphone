@@ -116,9 +116,6 @@ void SoundEngine::syncNewVoices()
         engine->_mutexBuffer.lock();
         
     foreach (SoundEngine * engine, _listInstances)
-        engine->_mutexData.lock();
-        
-    foreach (SoundEngine * engine, _listInstances)
         engine->_mutexVoices.lock();
 
     // Current data length available in all buffers
@@ -140,9 +137,6 @@ void SoundEngine::syncNewVoices()
         engine->_mutexVoices.unlock();
     
     foreach (SoundEngine * engine, _listInstances)
-        engine->_mutexData.unlock();
-    
-    foreach (SoundEngine * engine, _listInstances)
         engine->_mutexBuffer.unlock();
 }
 
@@ -152,7 +146,7 @@ void SoundEngine::syncNewVoicesInstance(int delay)
     for (int i = nbVoices - 1; i >= 0; i--)
     {
         // Check for started voice
-        if(!_listVoices.at(i)->isRunning())
+        if (!_listVoices.at(i)->isRunning())
             _listVoices.at(i)->runVoice(delay);
     }
 }
@@ -163,9 +157,6 @@ void SoundEngine::releaseNote(int numNote)
         engine->_mutexBuffer.lock();
         
     foreach (SoundEngine * engine, _listInstances)
-        engine->_mutexData.lock();
-        
-    foreach (SoundEngine * engine, _listInstances)
         engine->_mutexVoices.lock();
     
     for (int i = 0; i < _listInstances.size(); i++)
@@ -173,9 +164,6 @@ void SoundEngine::releaseNote(int numNote)
         
     foreach (SoundEngine * engine, _listInstances)
         engine->_mutexVoices.unlock();
-    
-    foreach (SoundEngine * engine, _listInstances)
-        engine->_mutexData.unlock();
     
     foreach (SoundEngine * engine, _listInstances)
         engine->_mutexBuffer.unlock();

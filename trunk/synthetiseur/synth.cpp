@@ -110,7 +110,7 @@ void Synth::play(int type, int idSf2, int idElt, int note, int velocity, VoicePa
 {
     play_sub(type, idSf2, idElt, note, velocity, voiceParamTmp);
 
-    if(velocity > 0)
+    if (velocity > 0)
     {
         // Synchronize new voices
         _mutexSynchro.lock();
