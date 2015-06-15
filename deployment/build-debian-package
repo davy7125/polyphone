@@ -1,0 +1,33 @@
+#!/bin/bash
+
+if [ -z "$1" ]
+then
+  echo "Usage: build-debian-package VERSION"
+  exit $E_NOARGS
+fi
+
+# Rename folder trunk
+cd ..
+mv trunk polyphone-$1
+
+# Create archive
+tar -zcvf polyphone_$1.orig.tar.gz polyphone-$1
+
+# Copy debian directory in trunk
+cp -r deployment/debian polyphone-$1
+
+# Build package
+cd polyphone-$1
+dpkg-buildpackage
+cd ..
+
+# Revert rename
+mv polyphone-$1 trunk
+
+# Delete directories
+rm -r trunk/debian
+rm -r trunk/RELEASE
+rm trunk/Makefile
+rm polyphone_$1-1.debian.tar.xz
+rm polyphone_$1-1.dsc
+rm polyphone_1.6-1_amd64.changes
