@@ -976,7 +976,7 @@ void MainWindow::updateActions()
     if (nb == 0)
     {
         // Rien n'est sélectionné
-        fichierUnique = 0;
+        fichierUnique = false;
 
         // Affichage page logiciel
         ui->stackedWidget->setCurrentWidget(ui->page_Soft);
@@ -1052,9 +1052,9 @@ void MainWindow::updateActions()
         ui->actionNouvel_instrument->setEnabled(true);
 
         // Supprimer, copier
-        if (typeUnique && (((type == elementInstSmpl || type == elementPrstInst) && familleUnique)
-                           || type == elementSmpl || type == elementInst || type == elementPrst)
-                && !this->page_smpl->isPlaying())
+        if (typeUnique && (((type == elementInstSmpl || type == elementPrstInst) && familleUnique) ||
+                           type == elementSmpl || type == elementInst || type == elementPrst) &&
+                !this->page_smpl->isPlaying())
         {
             ui->action_Supprimer->setEnabled(true);
             ui->actionCopier->setEnabled(true);
@@ -1087,30 +1087,19 @@ void MainWindow::updateActions()
 
         // Outils
         this->enableActionSample(typeUnique && type == elementSmpl && !this->page_smpl->isPlaying());
-        this->enableActionInstrument((type == elementInst || type == elementInstSmpl) && familleUnique);
-        this->enableActionPreset((type == elementPrst || type == elementPrstInst) && familleUnique);
+        this->enableActionInstrument((typeUnique && type == elementInst) ||
+                                     (familleUnique && (type == elementInst || type == elementInstSmpl)));
+        this->enableActionPreset((typeUnique && type == elementPrst) ||
+                                 (familleUnique && (type == elementPrst || type == elementPrstInst)));
         this->enableActionSf2(true);
 
         // Particularité 1 : "enlever éléments non utilisés" doit être désactivé si la lecture est en cours
-        if (!this->page_smpl->isPlaying())
-            ui->action_Enlever_les_l_ments_non_utilis_s->setEnabled(true);
-        else
-            ui->action_Enlever_les_l_ments_non_utilis_s->setEnabled(false);
+        ui->action_Enlever_les_l_ments_non_utilis_s->setEnabled(!this->page_smpl->isPlaying());
 
-        // Particularité 2 : "duplication", "paramétrage globale", "visualiseur" et "spatialiseur" sont communs aux
-        // instruments et aux presets -> pas de désactivation si l'une des 2 conditions est remplie
-        if (familleUnique && (type == elementInst || type == elementInstSmpl ||
-                              type == elementPrst || type == elementPrstInst))
-        {
-            ui->actionDuplication_des_divisions->setEnabled(true);
-            ui->actionD_uplication_des_divisions->setEnabled(true);
-            ui->action_Param_trage_global->setEnabled(true);
-            ui->action_Param_trage_global_2->setEnabled(true);
-            ui->action_Visualiseur->setEnabled(true);
-            ui->action_Visualiseur_2->setEnabled(true);
-            ui->actionSpacialisation_du_son->setEnabled(true);
-            ui->actionSpatialisation_du_son->setEnabled(true);
-        }
+        // Particularité 2: visualiseurs et mixtures désactivés si plusieurs instruments / presets sont sélectionnés
+        ui->action_Visualiseur->setEnabled(typeUnique && familleUnique);
+        ui->action_Visualiseur_2->setEnabled(typeUnique && familleUnique);
+        ui->action_Cr_ation_mutation_mixture->setEnabled(typeUnique && familleUnique);
     }
     else
     {

@@ -47,10 +47,14 @@ public:
     void transposer();
 
 private slots:
+    void desaccorder(double doHerz, double division);
+    void desaccorder(EltID id, double doHerz, double division);
+    void repartitionAuto(EltID id);
     void mixture(QList<QList<int> > listeParam, QString nomInst, bool bouclage, int freq, bool stereo);
     void release(double duree36, double division, double deTune);
-    void desaccorder(double doHerz, double division);
+    void release(EltID id, double duree36, double division, double deTune);
     void transposer(double ton, bool adaptKeyRange);
+    void transposer(EltID idInstSmpl, double ton, bool adaptKeyRange);
 
     void on_pushRangeMode_clicked();
 

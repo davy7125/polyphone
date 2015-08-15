@@ -79,6 +79,9 @@ protected:
     WORD getSrcIndex(WORD wVal, bool bVal);
     WORD getSrcNumber(WORD wVal, bool &CC);
 
+    /// Get all inst or prst (removing redundant entries)
+    QList<EltID> getUniqueInstOrPrst(bool errorIfKeyRangeMissing, bool &error);
+
 private:
     class Modulator
     {
@@ -104,8 +107,8 @@ private:
     void setOffset(int ligne, int colonne, Champ champ1, Champ champ2);
     void customizeKeyboard();
     void pasteMod(EltID id, QList<Modulator> modulators);
-
     QList<Modulator> getModList(EltID id);
+
     static QList<Modulator> _modulatorCopy;
     QList<int> _listKeyEnlighted;
 
@@ -132,8 +135,9 @@ protected slots:
     void actionFinished();
 
 private slots:
-    void paramGlobal(QVector<double> dValues, QList<EltID> listElt, int typeModif, int champ, int velMin, int velMax);
+    void paramGlobal(QVector<double> dValues, int typeModif, int champ, int velMin, int velMax);
     void spatialisation(QMap<int, double> mapPan);
+    void spatialisation(QMap<int, double> mapPan, EltID id);
     void duplication(QVector<int> listeVelocites, bool duplicKey, bool duplicVel);
 };
 

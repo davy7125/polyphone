@@ -10,7 +10,7 @@
     <x>0</x>
     <y>0</y>
     <width>703</width>
-    <height>303</height>
+    <height>321</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -41,6 +41,82 @@
      <property name="spacing">
       <number>6</number>
      </property>
+     <item row="2" column="2" colspan="3">
+      <widget class="QDoubleSpinBox" name="doubleSpinMin">
+       <property name="minimum">
+        <double>-20000.000000000000000</double>
+       </property>
+       <property name="maximum">
+        <double>20000.000000000000000</double>
+       </property>
+       <property name="value">
+        <double>0.000000000000000</double>
+       </property>
+      </widget>
+     </item>
+     <item row="7" column="3">
+      <widget class="QSpinBox" name="spinVelMin">
+       <property name="maximum">
+        <number>127</number>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="1">
+      <widget class="QLabel" name="label_3">
+       <property name="text">
+        <string>Minimum</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="QLabel" name="label">
+       <property name="text">
+        <string>Motif</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="2" colspan="3">
+      <widget class="QDoubleSpinBox" name="doubleSpinRaideur">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="minimum">
+        <double>0.000000000000000</double>
+       </property>
+       <property name="maximum">
+        <double>100.000000000000000</double>
+       </property>
+       <property name="value">
+        <double>50.000000000000000</double>
+       </property>
+      </widget>
+     </item>
+     <item row="9" column="1" colspan="4">
+      <widget class="QDialogButtonBox" name="buttonBox">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="standardButtons">
+        <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+       </property>
+      </widget>
+     </item>
+     <item row="8" column="1">
+      <spacer name="verticalSpacer">
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Fixed</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>10</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
      <item row="5" column="2" colspan="3">
       <widget class="QComboBox" name="comboValeur"/>
      </item>
@@ -103,10 +179,10 @@
        </property>
       </widget>
      </item>
-     <item row="7" column="4">
-      <widget class="QSpinBox" name="spinVelMax">
-       <property name="maximum">
-        <number>127</number>
+     <item row="3" column="1">
+      <widget class="QLabel" name="label_2">
+       <property name="text">
+        <string>Maximum</string>
        </property>
       </widget>
      </item>
@@ -117,14 +193,14 @@
        </property>
       </widget>
      </item>
-     <item row="3" column="1">
-      <widget class="QLabel" name="label_2">
-       <property name="text">
-        <string>Maximum</string>
+     <item row="7" column="4">
+      <widget class="QSpinBox" name="spinVelMax">
+       <property name="maximum">
+        <number>127</number>
        </property>
       </widget>
      </item>
-     <item row="0" column="0" rowspan="11">
+     <item row="0" column="0" rowspan="10">
       <widget class="QFrame" name="frame_1">
        <property name="frameShape">
         <enum>QFrame::StyledPanel</enum>
@@ -146,10 +222,16 @@
          <number>0</number>
         </property>
         <item>
-         <widget class="GraphParamGlobal" name="graphParamGlobal" native="true">
-         </widget>
+         <widget class="GraphParamGlobal" name="graphParamGlobal" native="true"/>
         </item>
        </layout>
+      </widget>
+     </item>
+     <item row="4" column="1">
+      <widget class="QLabel" name="label_4">
+       <property name="text">
+        <string>Modification</string>
+       </property>
       </widget>
      </item>
      <item row="0" column="2" colspan="3">
@@ -188,96 +270,6 @@
         </property>
        </item>
       </widget>
-     </item>
-     <item row="7" column="3">
-      <widget class="QSpinBox" name="spinVelMin">
-       <property name="maximum">
-        <number>127</number>
-       </property>
-      </widget>
-     </item>
-     <item row="4" column="1">
-      <widget class="QLabel" name="label_4">
-       <property name="text">
-        <string>Modification</string>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="2" colspan="3">
-      <widget class="QDoubleSpinBox" name="doubleSpinMin">
-       <property name="minimum">
-        <double>-20000.000000000000000</double>
-       </property>
-       <property name="maximum">
-        <double>20000.000000000000000</double>
-       </property>
-       <property name="value">
-        <double>0.000000000000000</double>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="1">
-      <widget class="QLabel" name="label_3">
-       <property name="text">
-        <string>Minimum</string>
-       </property>
-      </widget>
-     </item>
-     <item row="8" column="1" colspan="4">
-      <widget class="QPushButton" name="pushApplyToOthers">
-       <property name="text">
-        <string>Appliquer à d'autres instruments...</string>
-       </property>
-      </widget>
-     </item>
-     <item row="10" column="1" colspan="4">
-      <widget class="QDialogButtonBox" name="buttonBox">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="standardButtons">
-        <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="1">
-      <widget class="QLabel" name="label">
-       <property name="text">
-        <string>Motif</string>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="2" colspan="3">
-      <widget class="QDoubleSpinBox" name="doubleSpinRaideur">
-       <property name="enabled">
-        <bool>false</bool>
-       </property>
-       <property name="minimum">
-        <double>0.000000000000000</double>
-       </property>
-       <property name="maximum">
-        <double>100.000000000000000</double>
-       </property>
-       <property name="value">
-        <double>50.000000000000000</double>
-       </property>
-      </widget>
-     </item>
-     <item row="9" column="1">
-      <spacer name="verticalSpacer">
-       <property name="orientation">
-        <enum>Qt::Vertical</enum>
-       </property>
-       <property name="sizeType">
-        <enum>QSizePolicy::Fixed</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>20</width>
-         <height>10</height>
-        </size>
-       </property>
-      </spacer>
      </item>
     </layout>
    </item>
@@ -352,22 +344,6 @@
     <hint type="sourcelabel">
      <x>463</x>
      <y>53</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>279</x>
-     <y>116</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>pushApplyToOthers</sender>
-   <signal>clicked()</signal>
-   <receiver>DialogParamGlobal</receiver>
-   <slot>applyToOthers()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>110</x>
-     <y>209</y>
     </hint>
     <hint type="destinationlabel">
      <x>279</x>
