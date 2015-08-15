@@ -2291,70 +2291,38 @@ int PageTable::limit(int iVal, Champ champ, EltID id)
 
 void PageTable::paramGlobal()
 {
-    this->sf2->prepareNewActions();
-    EltID id = this->tree->getFirstID();
-    if (m_typePage == PAGE_INST)
-        id.typeElement = elementInstSmpl;
-    else
-        id.typeElement = elementPrstInst;
-    // Vérification que l'élément possède au moins un élément lié, avec un keyrange valide
-    int nbElt = 0;
-    int posMin = 128;
-    int posMax = 0;
-    for (int i = 0; i < this->sf2->count(id); i++)
-    {
-        id.indexElt2 = i;
-        if (!this->sf2->get(id, champ_hidden).bValue)
-        {
-            nbElt++;
-            if (this->sf2->isSet(id, champ_keyRange))
-            {
-                if (this->sf2->get(id, champ_keyRange).rValue.byLo < posMin)
-                    posMin = this->sf2->get(id, champ_keyRange).rValue.byLo;
-                if (this->sf2->get(id, champ_keyRange).rValue.byHi > posMax)
-                    posMax = this->sf2->get(id, champ_keyRange).rValue.byHi;
-            }
-        }
-    }
-    if (nbElt == 0)
-    {
-        if (m_typePage == PAGE_INST)
-            QMessageBox::warning(this, trUtf8("Attention"), trUtf8("L'instrument doit contenir des sons."));
-        else
-            QMessageBox::warning(this, trUtf8("Attention"), trUtf8("Le preset doit contenir des instruments."));
-        this->mainWindow->updateDo();
+    bool error;
+    QList<EltID> ids = this->getUniqueInstOrPrst(true, error);
+    if (ids.isEmpty() || error)
         return;
-    }
-    if (posMin > posMax)
-    {
-        if (m_typePage == PAGE_INST)
-            QMessageBox::warning(this, trUtf8("Attention"), trUtf8("Aucune étendue de notes spécifiée pour l'instrument."));
-        else
-            QMessageBox::warning(this, trUtf8("Attention"), trUtf8("Aucune étendue de notes spécifiée pour le preset."));
-        this->mainWindow->updateDo();
-        return;
-    }
-    DialogParamGlobal * dialogParam = new DialogParamGlobal(this->sf2, id, this);
+
+    DialogParamGlobal * dialogParam = new DialogParamGlobal(this->sf2, m_typePage == PAGE_PRST, this);
     dialogParam->setAttribute(Qt::WA_DeleteOnClose, true);
-    this->connect(dialogParam, SIGNAL(accepted(QVector<double>,QList<EltID>,int,int,int,int)),
-                  SLOT(paramGlobal(QVector<double>,QList<EltID>,int,int,int,int)));
+    this->connect(dialogParam, SIGNAL(accepted(QVector<double>,int,int,int,int)),
+                  SLOT(paramGlobal(QVector<double>,int,int,int,int)));
     dialogParam->show();
 }
 
-void PageTable::paramGlobal(QVector<double> dValues, QList<EltID> listElt, int typeModif, int champ, int velMin, int velMax)
+void PageTable::paramGlobal(QVector<double> dValues, int typeModif, int champ, int velMin, int velMax)
 {
-    // Modification de tous les éléments
-    EltID id;
+    this->sf2->prepareNewActions();
+
+    bool error;
+    QList<EltID> ids = this->getUniqueInstOrPrst(true, error);
+    if (error)
+        return;
+
     if (velMin > velMax)
     {
         int tmp = velMin;
         velMin = velMax;
         velMax = tmp;
     }
-    for (int numID = 0; numID < listElt.size(); numID++)
+
+    // Modification de tous les éléments
+    foreach (EltID id, ids)
     {
         // Pos min et max sur le clavier
-        id = listElt.at(numID);
         if (id.typeElement == elementInst || id.typeElement == elementInstSmpl)
             id.typeElement = elementInstSmpl;
         else
@@ -2423,25 +2391,11 @@ void PageTable::paramGlobal(QVector<double> dValues, QList<EltID> listElt, int t
 
 void PageTable::duplication()
 {
-    EltID id = this->tree->getFirstID();
-    if (m_typePage == PAGE_INST)
-    {
-        id.typeElement = elementInstSmpl;
-        if (this->sf2->count(id, false) == 0)
-        {
-            QMessageBox::warning(this, trUtf8("Attention"), trUtf8("L'instrument doit contenir des sons."));
-            return;
-        }
-    }
-    else
-    {
-        id.typeElement = elementPrstInst;
-        if (this->sf2->count(id, false) == 0)
-        {
-            QMessageBox::warning(this, trUtf8("Attention"), trUtf8("Le preset doit contenir des instruments."));
-            return;
-        }
-    }
+    bool error;
+    QList<EltID> ids = this->getUniqueInstOrPrst(false, error);
+    if (ids.isEmpty() || error)
+        return;
+
     DialogDuplication * dialogDuplication = new DialogDuplication(m_typePage == PAGE_PRST, this);
     dialogDuplication->setAttribute(Qt::WA_DeleteOnClose, true);
     this->connect(dialogDuplication, SIGNAL(accepted(QVector<int>,bool,bool)),
@@ -2452,33 +2406,41 @@ void PageTable::duplication()
 void PageTable::duplication(QVector<int> listeVelocites, bool duplicKey, bool duplicVel)
 {
     this->sf2->prepareNewActions();
-    EltID id = this->tree->getFirstID();
-    if (m_typePage == PAGE_INST)
-        id.typeElement = elementInstSmpl;
-    else
-        id.typeElement = elementPrstInst;
 
-    // Duplication pour chaque note
-    if (duplicKey)
+    bool error;
+    QList<EltID> ids = this->getUniqueInstOrPrst(false, error);
+    if (error)
+        return;
+
+    foreach (EltID id, ids)
     {
-        int nbElementsLies = this->sf2->count(id);
-        for (int i = 0; i < nbElementsLies; i++)
+        if (m_typePage == PAGE_INST)
+            id.typeElement = elementInstSmpl;
+        else
+            id.typeElement = elementPrstInst;
+
+        // Duplication pour chaque note
+        if (duplicKey)
         {
-            id.indexElt2 = i;
-            if (!this->sf2->get(id, champ_hidden).bValue)
-                this->duplication(id);
+            int nbElementsLies = this->sf2->count(id);
+            for (int i = 0; i < nbElementsLies; i++)
+            {
+                id.indexElt2 = i;
+                if (!this->sf2->get(id, champ_hidden).bValue)
+                    this->duplication(id);
+            }
         }
-    }
 
-    // Duplication pour chaque velocityRange
-    if (duplicVel)
-    {
-        int nbElementsLies = this->sf2->count(id);
-        for (int i = 0; i < nbElementsLies; i++)
+        // Duplication pour chaque velocityRange
+        if (duplicVel)
         {
-            id.indexElt2 = i;
-            if (!this->sf2->get(id, champ_hidden).bValue)
-                this->duplication(id, listeVelocites);
+            int nbElementsLies = this->sf2->count(id);
+            for (int i = 0; i < nbElementsLies; i++)
+            {
+                id.indexElt2 = i;
+                if (!this->sf2->get(id, champ_hidden).bValue)
+                    this->duplication(id, listeVelocites);
+            }
         }
     }
 
@@ -2725,44 +2687,33 @@ void PageTable::duplication(EltID id, QVector<int> listeVelocite)
 
 void PageTable::spatialisation()
 {
-    EltID id = this->tree->getFirstID();
-    if (m_typePage == PAGE_INST)
-    {
-        id.typeElement = elementInstSmpl;
-        if (this->sf2->count(id, false) == 0)
-        {
-            QMessageBox::warning(this, trUtf8("Attention"), trUtf8("L'instrument doit contenir des sons."));
-            return;
-        }
-    }
-    else
-    {
-        id.typeElement = elementPrstInst;
-        if (this->sf2->count(id, false) == 0)
-        {
-            QMessageBox::warning(this, trUtf8("Attention"), trUtf8("Le preset doit contenir des instruments."));
-            return;
-        }
-    }
+    bool error;
+    QList<EltID> ids = this->getUniqueInstOrPrst(true, error);
+    if (ids.isEmpty() || error)
+        return;
 
     // Détermination note min, note max
     int noteMin = 127;
     int noteMax = 0;
-    genAmountType amount;
-    for (int i = 0; i < this->sf2->count(id); i++)
+    foreach (EltID id, ids)
     {
-        id.indexElt2 = i;
-        if (!this->sf2->get(id, champ_hidden).bValue)
+        if (m_typePage == PAGE_INST)
+            id.typeElement = elementInstSmpl;
+        else
+            id.typeElement = elementPrstInst;
+
+        for (int i = 0; i < this->sf2->count(id); i++)
         {
-            if (this->sf2->isSet(id, champ_keyRange))
-                amount = this->sf2->get(id, champ_keyRange).genValue;
-            else
+            id.indexElt2 = i;
+            if (!this->sf2->get(id, champ_hidden).bValue)
             {
-                amount.ranges.byLo = 0;
-                amount.ranges.byHi = 127;
+                if (this->sf2->isSet(id, champ_keyRange))
+                {
+                    genAmountType amount = this->sf2->get(id, champ_keyRange).genValue;
+                    if (amount.ranges.byLo < noteMin) noteMin = amount.ranges.byLo;
+                    if (amount.ranges.byHi > noteMax) noteMax = amount.ranges.byHi;
+                }
             }
-            if (amount.ranges.byLo < noteMin) noteMin = amount.ranges.byLo;
-            if (amount.ranges.byHi > noteMax) noteMax = amount.ranges.byHi;
         }
     }
 
@@ -2776,6 +2727,28 @@ void PageTable::spatialisation(QMap<int, double> mapPan)
 {
     this->sf2->prepareNewActions();
 
+    bool error;
+    QList<EltID> ids = this->getUniqueInstOrPrst(true, error);
+    if (error)
+        return;
+
+    foreach (EltID id, ids)
+    {
+        if (m_typePage == PAGE_PRST)
+            id.typeElement = elementPrstInst;
+        else
+            id.typeElement = elementInstSmpl;
+        if (this->sf2->count(id, false) > 0)
+            spatialisation(mapPan, id);
+    }
+
+    // Actualisation
+    this->mainWindow->updateDo();
+    this->afficher();
+}
+
+void PageTable::spatialisation(QMap<int, double> mapPan, EltID id)
+{
     // Sauvegarde des valeurs
     bool isPrst = (m_typePage == PAGE_PRST);
 
@@ -2783,7 +2756,6 @@ void PageTable::spatialisation(QMap<int, double> mapPan)
     QList<EltID> list1;
     QList<genAmountType> listRange;
     QList<EltID> list2;
-    EltID id = this->tree->getFirstID();
     genAmountType amount;
     bool found;
     int pos;
@@ -2936,9 +2908,74 @@ void PageTable::spatialisation(QMap<int, double> mapPan)
             }
         }
     }
-    // Actualisation
-    this->mainWindow->updateDo();
-    this->afficher();
+}
+
+QList<EltID> PageTable::getUniqueInstOrPrst(bool errorIfKeyRangeMissing, bool &error)
+{
+    QList<EltID> ids = this->tree->getAllIDs();
+    QList<EltID> idsRet;
+
+    bool withDivision = true;
+    bool allDivWithKeyrange = true;
+
+    foreach (EltID id, ids)
+    {
+        if (id.typeElement == elementPrstInst)
+            id.typeElement = elementPrst;
+        else if (id.typeElement == elementInstSmpl)
+            id.typeElement = elementInst;
+
+        bool found = false;
+        foreach (EltID idTmp, idsRet)
+        {
+            if (idTmp == id)
+            {
+                found = true;
+                break;
+            }
+        }
+
+        if (!found)
+        {
+            idsRet << id;
+
+            // Test if divisions inside
+            EltID idTmp = id;
+            if (idTmp.typeElement == elementPrst)
+                idTmp.typeElement = elementPrstInst;
+            else if (idTmp.typeElement == elementInst)
+                idTmp.typeElement = elementInstSmpl;
+            withDivision &= (this->sf2->count(idTmp, false) > 0);
+
+            // Test if all keyranges are present
+            for (int i = 0; i < this->sf2->count(idTmp); i++)
+            {
+                idTmp.indexElt2 = i;
+                if (!this->sf2->get(idTmp, champ_hidden).bValue)
+                    allDivWithKeyrange &= this->sf2->isSet(idTmp, champ_keyRange);
+            }
+        }
+    }
+
+    if (!withDivision)
+    {
+        if (m_typePage == PAGE_INST)
+            QMessageBox::warning(this, trUtf8("Attention"),
+                                 trUtf8("Un instrument ne contenant aucun sample n'est pas compatible avec cet outil."));
+        else
+            QMessageBox::warning(this, trUtf8("Attention"),
+                                 trUtf8("Un preset ne contenant aucun instrument n'est pas compatible avec cet outil."));
+        error = true;
+    }
+    else if (errorIfKeyRangeMissing && !allDivWithKeyrange)
+    {
+        QMessageBox::warning(this, trUtf8("Attention"), trUtf8("L'étendue de notes de toutes les divisions doit être spécifiée."));
+        error = true;
+    }
+    else
+        error = false;
+
+    return idsRet;
 }
 
 void PageTable::visualize()

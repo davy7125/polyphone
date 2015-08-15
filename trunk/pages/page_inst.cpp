@@ -152,24 +152,37 @@ void Page_Inst::afficher()
 // Outils instrument
 void Page_Inst::desaccorder()
 {
-    EltID id = this->tree->getFirstID();
-    id.typeElement = elementInstSmpl;
-    if (this->sf2->count(id, false) == 0)
-    {
-        QMessageBox::warning(this, trUtf8("Attention"), trUtf8("L'instrument doit contenir des sons."));
+    bool error;
+    QList<EltID> ids = this->getUniqueInstOrPrst(true, error);
+    if (ids.isEmpty() || error)
         return;
-    }
+
     DialogCeleste * dialogCeleste = new DialogCeleste(this);
     dialogCeleste->setAttribute(Qt::WA_DeleteOnClose, true);
     this->connect(dialogCeleste, SIGNAL(accepted(double,double)),
                   SLOT(desaccorder(double, double)));
     dialogCeleste->show();
 }
+
 void Page_Inst::desaccorder(double doHerz, double division)
 {
     this->sf2->prepareNewActions();
-    // Reprise de l'identificateur si modification
-    EltID id = this->tree->getFirstID();
+
+    bool error;
+    QList<EltID> ids = this->getUniqueInstOrPrst(true, error);
+    if (ids.isEmpty() || error)
+        return;
+
+    foreach (EltID id, ids)
+        desaccorder(id, doHerz, division);
+
+    // Actualisation
+    this->mainWindow->updateDo();
+    this->afficher();
+}
+
+void Page_Inst::desaccorder(EltID id, double doHerz, double division)
+{
     // Modification pour chaque sample lié
     id.typeElement = elementInstSmpl;
     for (int i = 0; i < this->sf2->count(id); i++)
@@ -241,23 +254,27 @@ void Page_Inst::desaccorder(double doHerz, double division)
             }
         }
     }
+}
+
+void Page_Inst::repartitionAuto()
+{
+    bool error;
+    QList<EltID> ids = this->getUniqueInstOrPrst(false, error);
+    if (ids.isEmpty() || error)
+        return;
+
+    this->sf2->prepareNewActions();
+    ids = this->getUniqueInstOrPrst(false, error);
+    foreach (EltID id, ids)
+        repartitionAuto(id);
+
     // Actualisation
     this->mainWindow->updateDo();
     this->afficher();
 }
-void Page_Inst::repartitionAuto()
+
+void Page_Inst::repartitionAuto(EltID id)
 {
-    EltID id = this->tree->getFirstID();
-    id.typeElement = elementInstSmpl;
-    if (this->sf2->count(id, false) == 0)
-    {
-        QMessageBox::warning(this, trUtf8("Attention"), trUtf8("L'instrument doit contenir des sons."));
-        return;
-    }
-    // Répartition automatique des notes sur le clavier
-    this->sf2->prepareNewActions();
-    // Reprise de l'identificateur si modification
-    id = this->tree->getFirstID();
     // Liste des samples liés avec note de base
     QList<EltID> listID;
     QList<int> listNote;
@@ -329,9 +346,6 @@ void Page_Inst::repartitionAuto()
             this->sf2->get(listID.at(i), champ_keyRange).rValue.byHi != val.rValue.byHi)
             this->sf2->set(listID.at(i), champ_keyRange, val);
     }
-    // Actualisation
-    this->mainWindow->updateDo();
-    this->afficher();
 }
 
 void Page_Inst::mixture()
@@ -348,6 +362,7 @@ void Page_Inst::mixture()
                   SLOT(mixture(QList<QList<int> >, QString, bool, int, bool)));
     dialogMixture->show();
 }
+
 void Page_Inst::mixture(QList<QList<int> > listeParam, QString nomInst, bool bouclage, int freq, bool stereo)
 {
     // Création d'une mixture
@@ -594,28 +609,40 @@ void Page_Inst::mixture(QList<QList<int> > listeParam, QString nomInst, bool bou
     // Actualisation
     this->mainWindow->updateDo();
 }
+
 void Page_Inst::release()
 {
-    EltID idInst = this->tree->getFirstID();
-    idInst.typeElement = elementInstSmpl;
-    if (this->sf2->count(idInst, false) == 0)
-    {
-        QMessageBox::warning(this, trUtf8("Attention"), trUtf8("L'instrument doit contenir des sons."));
+    bool error;
+    QList<EltID> ids = this->getUniqueInstOrPrst(true, error);
+    if (ids.isEmpty() || error)
         return;
-    }
+
     DialogRelease * dialogRelease = new DialogRelease(this);
     dialogRelease->setAttribute(Qt::WA_DeleteOnClose, true);
     this->connect(dialogRelease, SIGNAL(accepted(double, double, double)),
                   SLOT(release(double, double, double)));
     dialogRelease->show();
 }
+
 void Page_Inst::release(double duree36, double division, double deTune)
 {
     this->sf2->prepareNewActions();
 
-    // Reprise de l'identificateur si modification
-    EltID id = this->tree->getFirstID();
+    bool error;
+    QList<EltID> ids = this->getUniqueInstOrPrst(true, error);
+    if (ids.isEmpty() || error)
+        return;
 
+    foreach (EltID id, ids)
+        release(id, duree36, division, deTune);
+
+    // Actualisation
+    this->mainWindow->updateDo();
+    this->afficher();
+}
+
+void Page_Inst::release(EltID id, double duree36, double division, double deTune)
+{
     // Modification pour chaque sample lié
     id.typeElement = elementInstSmpl;
     for (int i = 0; i < this->sf2->count(id); i++)
@@ -675,25 +702,17 @@ void Page_Inst::release(double duree36, double division, double deTune)
     this->sf2->simplify(id, champ_modEnvToPitch);
     this->sf2->simplify(id, champ_releaseModEnv);
     this->sf2->simplify(id, champ_releaseVolEnv);
-
-    // Actualisation
-    this->mainWindow->updateDo();
-    this->afficher();
 }
+
 void Page_Inst::transposer()
 {
-    EltID id = this->tree->getFirstID();
-    id.typeElement = elementInstSmpl;
-    if (this->sf2->count(id, false) == 0)
-    {
-        QMessageBox::warning(this, trUtf8("Attention"), trUtf8("L'instrument doit contenir des sons."));
+    bool error;
+    QList<EltID> ids = this->getUniqueInstOrPrst(true, error);
+    if (ids.isEmpty() || error)
         return;
-    }
 
-    // Ecart en demi-tons
     DialogTransposition * dialog = new DialogTransposition(this);
-    this->connect(dialog, SIGNAL(accepted(double, bool)),
-                  SLOT(transposer(double, bool)));
+    this->connect(dialog, SIGNAL(accepted(double, bool)), SLOT(transposer(double, bool)));
     dialog->show();
 }
 
@@ -701,8 +720,21 @@ void Page_Inst::transposer(double ton, bool adaptKeyRange)
 {
     sf2->prepareNewActions();
 
-    // Reprise de l'identificateur si modification
-    EltID idInstSmpl = this->tree->getFirstID();
+    bool error;
+    QList<EltID> ids = this->getUniqueInstOrPrst(true, error);
+    if (ids.isEmpty() || error)
+        return;
+
+    foreach (EltID id, ids)
+        transposer(id, ton, adaptKeyRange);
+
+    // Actualisation
+    this->mainWindow->updateDo();
+    this->afficher();
+}
+
+void Page_Inst::transposer(EltID idInstSmpl, double ton, bool adaptKeyRange)
+{
     EltID idInst = idInstSmpl;
     idInstSmpl.typeElement = elementInstSmpl;
     idInst.typeElement = elementInst;
@@ -802,10 +834,6 @@ void Page_Inst::transposer(double ton, bool adaptKeyRange)
     // Simplification
     this->sf2->simplify(idInstSmpl, champ_fineTune);
     this->sf2->simplify(idInstSmpl, champ_coarseTune);
-
-    // Actualisation
-    this->mainWindow->updateDo();
-    this->afficher();
 }
 
 double Page_Inst::getOffset(int type1, int type2)
@@ -931,6 +959,7 @@ EltID Page_Inst::closestSample(EltID idInst, double pitch, double &ecart, int co
     }
     return idSmplRet;
 }
+
 QByteArray Page_Inst::getSampleData(EltID idSmpl, qint32 nbRead)
 {
     // Récupération de données provenant d'un sample, en prenant en compte la boucle
@@ -968,6 +997,7 @@ QByteArray Page_Inst::getSampleData(EltID idSmpl, qint32 nbRead)
     }
     return baDataRet;
 }
+
 QByteArray Page_Inst::addSampleData(QByteArray baData1, QByteArray baData2, double mult)
 {
     // Ajout de baData2 multiplié par mult dans baData1
@@ -988,12 +1018,9 @@ void Page_Inst::on_pushRangeMode_clicked()
 }
 
 // TableWidgetInst
-TableWidgetInst::TableWidgetInst(QWidget *parent) : TableWidget(parent)
-{
-}
-TableWidgetInst::~TableWidgetInst()
-{
-}
+TableWidgetInst::TableWidgetInst(QWidget *parent) : TableWidget(parent) {}
+
+TableWidgetInst::~TableWidgetInst() {}
 
 int TableWidgetInst::getRow(WORD champ)
 {
@@ -1049,6 +1076,7 @@ int TableWidgetInst::getRow(WORD champ)
     }
     return row;
 }
+
 Champ TableWidgetInst::getChamp(int row)
 {
     Champ champ = champ_unknown;

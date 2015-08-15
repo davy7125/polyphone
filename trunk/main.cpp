@@ -37,10 +37,11 @@
 int main(int argc, char *argv[])
 {
     // Traduction si nécessaire
-    QTranslator translatorEN, translatorES, translatorIT;
+    QTranslator translatorEN, translatorES, translatorIT, translatorSR;
     translatorEN.load(":/traductions/polyphone_en"); // Should stand before QApplication
     translatorES.load(":/traductions/polyphone_es");
     translatorIT.load(":/traductions/polyphone_it");
+    translatorSR.load(":/traductions/polyphone_sr");
 
 #ifdef Q_OS_MACX
     QStringList listPathMac;
@@ -59,6 +60,8 @@ int main(int argc, char *argv[])
         a.installTranslator(&translatorES);
     else if (locale.compare("it") == 0)
         a.installTranslator(&translatorIT);
+    else if (locale.compare("sr") == 0)
+        a.installTranslator(&translatorSR);
     else if (locale.compare("fr") != 0)
         a.installTranslator(&translatorEN);
 

@@ -76,14 +76,14 @@ For those willing to see Polyphone in their own language.
 
 All you need to translate Polyphone is Qt Linguist.
 This software can be found via synaptic (for debian or ubuntu) or at this page for Windows users:
-https://code.google.com/p/traders-home-task-ng/downloads/detail?name=qt-linguist-setup-4.8.4.exe
+https://github.com/thurask/Qt-Linguist/releases/download/20150629/linguist.exe
 
 
 ######### 2. Opening the translation files #########################################################
 
 With Qt Linguist, open the .ts file you want to edit. This file is located in the root folder of 
 the sources. For example, open polyphone_es.ts for a spanish translation.
-If the translation file is not present yet, ask the developer --> "info@polyphone.fr"
+If the translation file is not present yet, ask the developer to create one --> "info@polyphone.fr"
 
 Polyphone's native language is French. If you want to translate from another language (from English 
 for instance), once you have opened your .ts file go to "file" -> "Open Read-Only" and select 

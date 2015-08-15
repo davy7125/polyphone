@@ -24,22 +24,21 @@
 
 #include "dialog_paramglobal.h"
 #include "ui_dialog_paramglobal.h"
-#include "dialog_selectitems.h"
 #include "config.h"
 #include "page.h"
 
 // Constructeur, destructeur
-DialogParamGlobal::DialogParamGlobal(Pile_sf2 *sf2, EltID id, QWidget *parent) :
+DialogParamGlobal::DialogParamGlobal(Pile_sf2 *sf2, bool isPrst, QWidget *parent) :
     QDialog(parent),
     _sf2(sf2),
     ui(new Ui::DialogParamGlobal),
-    _initialID(id)
+    _isPrst(isPrst)
 {
     // Initialisation liste des champs
     QList<Champ> listeDesChamps;
     listeDesChamps << champ_initialAttenuation
                    << champ_pan;
-    if (id.typeElement == elementInst || id.typeElement == elementInstSmpl)
+    if (!_isPrst)
         listeDesChamps << champ_overridingRootKey;
     listeDesChamps << champ_coarseTune
                    << champ_fineTune
@@ -77,13 +76,6 @@ DialogParamGlobal::DialogParamGlobal(Pile_sf2 *sf2, EltID id, QWidget *parent) :
 
     ui->setupUi(this);
     this->setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint);
-    if (id.typeElement == elementPrst || id.typeElement == elementPrstInst)
-    {
-        this->ui->pushApplyToOthers->setText(trUtf8("Appliquer à d'autres presets..."));
-        _isPrst = true;
-    }
-    else
-        _isPrst = false;
     Config * conf = Config::getInstance();
     ui->comboValeur->blockSignals(true);
     for (int i = 0; i < listeDesChamps.size(); i++)
@@ -112,9 +104,6 @@ DialogParamGlobal::DialogParamGlobal(Pile_sf2 *sf2, EltID id, QWidget *parent) :
                                     conf->getTools_global_maxi(_isPrst));
     ui->spinVelMin->setValue(qMin(conf->getTools_global_miniVel(_isPrst), conf->getTools_global_maxiVel(_isPrst)));
     ui->spinVelMax->setValue(qMax(conf->getTools_global_maxiVel(_isPrst), conf->getTools_global_miniVel(_isPrst)));
-
-    // Initialisation id
-    _listElt.append(id);
 
     // Dessin
     this->indexMotifChanged(this->ui->comboMotif->currentIndex());
@@ -176,30 +165,18 @@ void DialogParamGlobal::accept()
     conf->setTools_global_maxiX(_isPrst, this->ui->graphParamGlobal->getXmax());
     conf->setTools_global_miniVel(_isPrst, this->ui->spinVelMin->value());
     conf->setTools_global_maxiVel(_isPrst, this->ui->spinVelMax->value());
+
     // Récupération et mise en forme des modificateurs
     QVector<double> dValues = this->ui->graphParamGlobal->getValues();
     double dMin = this->ui->doubleSpinMin->value();
     double dMax = this->ui->doubleSpinMax->value();
     for (int i = 0; i < dValues.size(); i++)
         dValues[i] = dValues.at(i) * (dMax - dMin) + dMin;
-    emit(accepted(dValues, _listElt, this->ui->comboModif->currentIndex(),
+    emit(accepted(dValues, this->ui->comboModif->currentIndex(),
                   this->ui->comboValeur->itemData(this->ui->comboValeur->currentIndex()).toInt(),
                   this->ui->spinVelMin->value(),
                   this->ui->spinVelMax->value()));
     QDialog::accept();
-}
-void DialogParamGlobal::applyToOthers()
-{
-    // Affichage liste d'éléments
-    DialogSelectItems * dialogSelect = new DialogSelectItems(_initialID, _listElt, _sf2, this);
-    dialogSelect->setAttribute(Qt::WA_DeleteOnClose, true);
-    this->connect(dialogSelect, SIGNAL(accepted(QList<EltID>)),
-                  SLOT(eltChanged(QList<EltID>)));
-    dialogSelect->show();
-}
-void DialogParamGlobal::eltChanged(QList<EltID> listElt)
-{
-    _listElt = listElt;
 }
 
 /////////////////////////////////////////////////////
