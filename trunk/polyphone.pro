@@ -148,7 +148,6 @@ SOURCES	+= main.cpp \
     tools/dialog_mixture.cpp \
     tools/dialog_sifflements.cpp \
     tools/dialog_release.cpp \
-    tools/dialog_selectitems.cpp \
     tools/dialog_magnetophone.cpp \
     tools/dialog_celeste.cpp \
     tools/dialog_visualizer.cpp \
@@ -211,7 +210,6 @@ HEADERS  += mainwindow.h \
     tools/dialog_mixture.h \
     tools/dialog_sifflements.h \
     tools/dialog_release.h \
-    tools/dialog_selectitems.h \
     tools/dialog_magnetophone.h \
     tools/dialog_celeste.h \
     tools/dialog_visualizer.h \
@@ -262,7 +260,6 @@ FORMS    += mainwindow.ui \
     tools/dialog_mixture.ui \
     tools/dialog_sifflements.ui \
     tools/dialog_release.ui \
-    tools/dialog_selectitems.ui \
     tools/dialog_magnetophone.ui \
     tools/dialog_celeste.ui \
     tools/dialog_visualizer.ui \
@@ -275,7 +272,8 @@ RESOURCES += ressources.qrc \
 
 TRANSLATIONS = polyphone_en.ts \
     polyphone_es.ts \
-    polyphone_it.ts
+    polyphone_it.ts \
+    polyphone_sr.ts
 
 
 # SfArk extraction (what a mess!)

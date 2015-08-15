@@ -39,7 +39,7 @@ class DialogParamGlobal : public QDialog
     Q_OBJECT
     
 public:
-    explicit DialogParamGlobal(Pile_sf2 *sf2, EltID id, QWidget *parent = 0);
+    DialogParamGlobal(Pile_sf2 *sf2, bool isPrst, QWidget *parent = 0);
     ~DialogParamGlobal();
 
 private slots:
@@ -48,17 +48,13 @@ private slots:
     void raideurChanged(double value);  // Action sur spinBox raideur
     void minChanged(double value);      // Action sur spinBox min
     void maxChanged(double value);      // Action sur spinBox max
-    void applyToOthers();
-    void eltChanged(QList<EltID> listElt);
 
 signals:
-    void accepted(QVector<double> dValues, QList<EltID> listElt, int typeModif, int param,
-                  int minVel, int maxVel);
+    void accepted(QVector<double> dValues, int typeModif, int param, int minVel, int maxVel);
 
 private:
     Pile_sf2 * _sf2;
     Ui::DialogParamGlobal *ui;
-    QList<EltID> _listElt;
     EltID _initialID;
     bool _isPrst;
 };
@@ -137,6 +133,7 @@ private:
     QCPItemText * labelCoord;
     int previousX;
     double previousY;
+
     // Méthodes privées
     void mousePressed(QPoint pos);
     void mouseRightPressed(QPoint pos);
