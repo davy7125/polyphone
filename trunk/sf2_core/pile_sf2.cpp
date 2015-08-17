@@ -2905,7 +2905,7 @@ void Pile_sf2::firstAvailablePresetBank(EltID id, int &nBank, int &nPreset)
     }
     while (nBank == -2);
 }
-int Pile_sf2::closestAvailablePreset(EltID id, WORD wBank, WORD wPreset)
+int Pile_sf2::closestAvailablePreset(EltID id, quint16 wBank, quint16 wPreset)
 {
     int initVal = wPreset;
     int delta = 0;
@@ -2929,7 +2929,7 @@ int Pile_sf2::closestAvailablePreset(EltID id, WORD wBank, WORD wPreset)
     else
         return -1;
 }
-bool Pile_sf2::isAvailable(EltID id, WORD wBank, WORD wPreset)
+bool Pile_sf2::isAvailable(EltID id, quint16 wBank, quint16 wPreset)
 {
     id.typeElement = elementPrst;
     for (int i = 0; i < this->count(id); i++)

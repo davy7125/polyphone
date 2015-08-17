@@ -38,7 +38,7 @@ public:
     ~GraphiqueFourier() {}
 
     void setBackgroundColor(QColor color);
-    void setData(QByteArray baData, DWORD dwSmplRate);
+    void setData(QByteArray baData, quint32 dwSmplRate);
     void setSampleName(QString name) { _name = name; }
     void setPos(qint32 posStart, qint32 posEnd, bool withReplot = true);
     void setPos(qint32 posStart, qint32 posEnd, QList<double> &frequencies, QList<double> &factors,
@@ -54,7 +54,7 @@ private slots:
 
 private:
     QVector<float> _fData;
-    DWORD dwSmplRate;
+    quint32 dwSmplRate;
     QString _name;
     QCPItemText * text1; // estimation
     QCPItemText * text2; // intensité

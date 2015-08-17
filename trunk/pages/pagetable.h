@@ -76,11 +76,11 @@ protected:
     static void remplirComboSource(ComboBox *comboBox);
     int getDestIndex(int i);
     int getDestNumber(int i);
-    WORD getSrcIndex(WORD wVal, bool bVal);
-    WORD getSrcNumber(WORD wVal, bool &CC);
+    quint16 getSrcIndex(quint16 wVal, bool bVal);
+    quint16 getSrcNumber(quint16 wVal, bool &CC);
 
     /// Get all inst or prst (removing redundant entries)
-    QList<EltID> getUniqueInstOrPrst(bool errorIfKeyRangeMissing, bool &error);
+    QList<EltID> getUniqueInstOrPrst(bool &error, bool errorIfNoDivision = false, bool errorIfKeyRangeMissing = false);
 
 private:
     class Modulator
@@ -95,6 +95,9 @@ private:
     };
 
     void afficheTable();
+    void addGlobal(EltID id, bool multiGlobal);
+    void addDivisions(EltID id);
+    void formatTable(bool multiGlobal);
     void afficheRange();
     void afficheMod(EltID id, int selectedIndex = -1);
     static void addAvailableReceiverMod(ComboBox *combo, EltID id);

@@ -223,8 +223,8 @@ int Pile_sf2::ouvrir(QString fileName, QDataStream * stream, int &indexSf2, bool
         free(bloc_info);
         return 5;
     }
-    DWORD taille_smpl, taille_sm24;
-    DWORD wSmpl, wSm24;
+    quint32 taille_smpl, taille_sm24;
+    quint32 wSmpl, wSm24;
     // Blocs SMPL et SM24
     if (stream->readRawData(bloc, 4) != 4)
     {
@@ -346,7 +346,7 @@ int Pile_sf2::ouvrir(QString fileName, QDataStream * stream, int &indexSf2, bool
         free(bloc_pdta);
         return 5;
     }
-    DWORD taille_p = readDWORD(bloc_pdta, pos);
+    quint32 taille_p = readDWORD(bloc_pdta, pos);
     pos = pos + 4;
     if (taille_p % 38 != 0) // Doit être un multiple de 38
     {
@@ -367,7 +367,7 @@ int Pile_sf2::ouvrir(QString fileName, QDataStream * stream, int &indexSf2, bool
         free(bloc_pdta_phdr);
         return 5;
     }
-    DWORD taille_b = readDWORD(bloc_pdta, pos);
+    quint32 taille_b = readDWORD(bloc_pdta, pos);
     pos = pos + 4;
     if (taille_b % 4 != 0) // Doit être un multiple de 4
     {
@@ -390,7 +390,7 @@ int Pile_sf2::ouvrir(QString fileName, QDataStream * stream, int &indexSf2, bool
         free(bloc_pdta_pbag);
         return 5;
     }
-    DWORD taille_m = readDWORD(bloc_pdta, pos);
+    quint32 taille_m = readDWORD(bloc_pdta, pos);
     pos = pos + 4;
     if (taille_m % 10 != 0) // Doit être un multiple de 10
     {
@@ -416,7 +416,7 @@ int Pile_sf2::ouvrir(QString fileName, QDataStream * stream, int &indexSf2, bool
         free(bloc_pdta_pmod);
         return 5;
     }
-    DWORD taille_g = readDWORD(bloc_pdta, pos);
+    quint32 taille_g = readDWORD(bloc_pdta, pos);
     pos = pos + 4;
     if (taille_g % 4 != 0) // Doit être un multiple de 4
     {
@@ -445,7 +445,7 @@ int Pile_sf2::ouvrir(QString fileName, QDataStream * stream, int &indexSf2, bool
         free(bloc_pdta_pgen);
         return 5;
     }
-    DWORD taille_p2 = readDWORD(bloc_pdta, pos);
+    quint32 taille_p2 = readDWORD(bloc_pdta, pos);
     pos = pos + 4;
     if (taille_p2 % 22 != 0) // Doit être un multiple de 22
     {
@@ -475,7 +475,7 @@ int Pile_sf2::ouvrir(QString fileName, QDataStream * stream, int &indexSf2, bool
         return 5;
     }
 
-    DWORD taille_b2 = readDWORD(bloc_pdta, pos);
+    quint32 taille_b2 = readDWORD(bloc_pdta, pos);
     pos = pos + 4;
     if (taille_b2 % 4 != 0) // Doit être un multiple de 4
     {
@@ -506,7 +506,7 @@ int Pile_sf2::ouvrir(QString fileName, QDataStream * stream, int &indexSf2, bool
         free(bloc_pdta_ibag);
         return 5;
     }
-    DWORD taille_m2 = readDWORD(bloc_pdta, pos);
+    quint32 taille_m2 = readDWORD(bloc_pdta, pos);
     pos = pos + 4;
     if (taille_m2 % 10 != 0) // Doit être un multiple de 10
     {
@@ -539,7 +539,7 @@ int Pile_sf2::ouvrir(QString fileName, QDataStream * stream, int &indexSf2, bool
         free(bloc_pdta_imod);
         return 5;
     }
-    DWORD taille_g2 = readDWORD(bloc_pdta, pos);
+    quint32 taille_g2 = readDWORD(bloc_pdta, pos);
     pos = pos + 4;
     if (taille_g2 % 4 != 0) // Doit être un multiple de 4
     {
@@ -606,7 +606,7 @@ int Pile_sf2::ouvrir(QString fileName, QDataStream * stream, int &indexSf2, bool
     id.typeElement = elementSmpl;
     id.indexSf2 = indexSf2;
     id.indexElt = -1;
-    DWORD temp1;
+    quint32 temp1;
     pos = 0;
 
     for (unsigned int i = 0; i < taille / 46 - 1; i++)
@@ -616,7 +616,7 @@ int Pile_sf2::ouvrir(QString fileName, QDataStream * stream, int &indexSf2, bool
         this->set(id, champ_name, QString::fromLatin1(readdata(buffer, bloc_pdta_shdr, pos, 20)).trimmed(), false, i == taille / 46 - 2);
 
         // Configuration d'un sample
-        value.bValue = readBYTE(bloc_pdta_shdr, pos+40);
+        value.bValue = readQUINT8(bloc_pdta_shdr, pos+40);
         this->set(id, champ_byOriginalPitch, value, false);
         value.cValue = bloc_pdta_shdr[pos+41];
         this->set(id, champ_chPitchCorrection, value, false);
@@ -673,7 +673,7 @@ int Pile_sf2::ouvrir(QString fileName, QDataStream * stream, int &indexSf2, bool
         if (copySamples)
         {
             // Remplissage des champ smpl et smpl24 à partir des données
-            DWORD length = get(id, champ_dwLength).dwValue;
+            quint32 length = get(id, champ_dwLength).dwValue;
             QIODevice * fi = stream->device();
             fi->seek(get(id, champ_dwStart16).dwValue);
             QByteArray baData;
@@ -767,7 +767,7 @@ int Pile_sf2::ouvrir(QString fileName, QDataStream * stream, int &indexSf2, bool
     id.indexSf2 = indexSf2;
     id.indexElt = -1;
     id2.indexSf2 = indexSf2;
-    WORD bagmin, bagmax, modmin, modmax, genmin, genmax;
+    quint16 bagmin, bagmax, modmin, modmax, genmin, genmax;
     int l;
     int global;
     // Remplissage de la sous-classe INST
@@ -981,9 +981,9 @@ int Pile_sf2::sauvegarderSf2(int indexSf2, QString fileName)
     EltID id(elementSf2, indexSf2, 0, 0, 0);
     // Préparation de la sauvegarde
     sfVersionTag sfVersionTmp;
-    DWORD dwTmp, dwTmp2;
-    WORD wTmp;
-    BYTE byTmp;
+    quint32 dwTmp, dwTmp2;
+    quint16 wTmp;
+    quint8 byTmp;
     char charTmp;
     char tcharTmp[20];
     Valeur valTmp;
@@ -992,7 +992,7 @@ int Pile_sf2::sauvegarderSf2(int indexSf2, QString fileName)
 
     //////////////////// TAILLES DES BLOCS ////////////////////
 
-    DWORD taille_fichier, taille_info, taille_smpl, taille_pdta,
+    quint32 taille_fichier, taille_info, taille_smpl, taille_pdta,
             taille_phdr, taille_pbag, taille_pmod, taille_pgen,
             taille_inst, taille_ibag, taille_imod, taille_igen,
             taille_shdr, taille_sm24;
@@ -1076,7 +1076,7 @@ int Pile_sf2::sauvegarderSf2(int indexSf2, QString fileName)
     {
         // Sauvegarde 24 bits
         char T[20];
-        sprintf(T, "%lu", taille_smpl);
+        sprintf(T, "%u", taille_smpl);
         taille_sm24 = (taille_smpl - 12) / 2 + 8;
         taille_sm24 += taille_sm24 % 2; // chiffre pair
     }
@@ -1098,6 +1098,7 @@ int Pile_sf2::sauvegarderSf2(int indexSf2, QString fileName)
     taille_pbag = 4;
     taille_pmod = 10;
     taille_pgen = 4;
+
     // pour chaque preset
     for (int i = 0; i < this->count(id); i++)
     {
@@ -1197,8 +1198,8 @@ int Pile_sf2::sauvegarderSf2(int indexSf2, QString fileName)
             taille_shdr += 46;
     }
 
-    taille_pdta = taille_phdr + taille_pbag + taille_pmod + taille_pgen + \
-            taille_inst + taille_ibag + taille_imod + taille_igen + \
+    taille_pdta = taille_phdr + taille_pbag + taille_pmod + taille_pgen +
+            taille_inst + taille_ibag + taille_imod + taille_igen +
             taille_shdr + 19*4;
 
     taille_fichier = taille_info + taille_smpl + taille_sm24 + taille_pdta + 7*4;

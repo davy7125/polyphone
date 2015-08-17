@@ -967,6 +967,7 @@ void MainWindow::updateActions()
     bool typeUnique = true;
     ElementType type = elementUnknown;
     EltID id;
+
     // Modification du titre
     updateTitle();
 
@@ -1003,14 +1004,15 @@ void MainWindow::updateActions()
             else
                 this->showKeyboard(false);
         }
-        else if (fichierUnique && familleUnique)
+        else if (fichierUnique && (familleUnique ||
+                                   (typeUnique && (id.typeElement == elementInst || id.typeElement == elementPrst))))
         {
             if (id.typeElement == elementInst || id.typeElement == elementInstSmpl)
             {
                 // Affichage page Inst
                 page_inst->afficher();
                 if (this->configuration->getKeyboardType())
-                    this->showKeyboard(true);
+                    this->showKeyboard(familleUnique);
                 else
                     this->showKeyboard(false);
             }
@@ -1019,7 +1021,7 @@ void MainWindow::updateActions()
                 // Affichage page Prst
                 page_prst->afficher();
                 if (this->configuration->getKeyboardType())
-                    this->showKeyboard(true);
+                    this->showKeyboard(familleUnique);
                 else
                     this->showKeyboard(false);
             }
@@ -1027,7 +1029,12 @@ void MainWindow::updateActions()
         else
         {
             if (fichierUnique)
-                page_sf2->afficher();
+            {
+                if (id.typeElement == elementSf2)
+                    page_sf2->afficher();
+                else
+                    ui->stackedWidget->setCurrentWidget(ui->page_Soft);
+            }
             else
                 ui->stackedWidget->setCurrentWidget(ui->page_Soft);
             this->showKeyboard(false);
@@ -1653,7 +1660,7 @@ void MainWindow::importerSmpl(QString path, EltID id, int * replace)
             this->sf2->set(id, champ_dwStartLoop, val);
             val.dwValue = son->get(champ_dwEndLoop);
             this->sf2->set(id, champ_dwEndLoop, val);
-            val.bValue = (BYTE)son->get(champ_byOriginalPitch);
+            val.bValue = (quint8)son->get(champ_byOriginalPitch);
             this->sf2->set(id, champ_byOriginalPitch, val);
             val.cValue = (char)son->get(champ_chPitchCorrection);
             this->sf2->set(id, champ_chPitchCorrection, val);

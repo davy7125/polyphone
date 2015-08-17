@@ -99,7 +99,7 @@ void OpenOutputFile(const char *FileName)
         ChkErr("create", false);
 }
 
-int WriteOutputFile(const BYTE *Buf, int BytesToWrite)
+int WriteOutputFile(const quint8 *Buf, int BytesToWrite)
 {
     if (SfArkExtractor2::_fileManager.write(OutputFileHandle, (char *)Buf, BytesToWrite) != BytesToWrite)
     {
@@ -178,7 +178,7 @@ void OpenInputFile(const char *FileName)
     //    ChkErr("open", true);
 }
 
-int ReadInputFile(BYTE *Buf, int BytesToRead)
+int ReadInputFile(quint8 *Buf, int BytesToRead)
 {
     int	BytesRead;
 

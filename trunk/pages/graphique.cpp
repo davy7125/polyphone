@@ -156,7 +156,7 @@ void Graphique::clearAll()
 void Graphique::setData(QByteArray baData)
 {
     // Ajout des données
-    DWORD size_x = baData.size() / 2;
+    quint32 size_x = baData.size() / 2;
     this->sizeX = ((double)size_x + 1);
     qint16 * data = (qint16 *)baData.data();
     QVector<double> x(size_x), y(size_x);
