@@ -800,7 +800,7 @@ QList<int> GroupeParametres::getSampleIndex(Pile_sf2 *sf2, EltID idElt, QString 
         sf2->set(idElt, champ_dwStartLoop, val, false);
         val.dwValue = son.get(champ_dwEndLoop);
         sf2->set(idElt, champ_dwEndLoop, val, false);
-        val.bValue = (BYTE)son.get(champ_byOriginalPitch);
+        val.bValue = (quint8)son.get(champ_byOriginalPitch);
         sf2->set(idElt, champ_byOriginalPitch, val, false);
         val.cValue = (char)son.get(champ_chPitchCorrection);
         sf2->set(idElt, champ_chPitchCorrection, val, false);

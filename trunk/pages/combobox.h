@@ -67,7 +67,7 @@ public:
             this->removeItem(i);
     }
 
-    void selectIndex(WORD index, WORD numChamp)
+    void selectIndex(quint16 index, quint16 numChamp)
     {
         if (index > 99)
         {
@@ -86,7 +86,7 @@ public:
         }
     }
 
-    void selectIndex(WORD index)
+    void selectIndex(quint16 index)
     {
         this->setCurrentIndex(index);
     }

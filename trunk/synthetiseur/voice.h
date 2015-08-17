@@ -36,7 +36,7 @@ class Voice : public QObject
     Q_OBJECT
 
 public:
-    Voice(QByteArray baData, DWORD smplRate, DWORD audioSmplRate, int note,
+    Voice(QByteArray baData, quint32 smplRate, quint32 audioSmplRate, int note,
           int velocity, VoiceParam *voiceParam, QObject *parent = NULL);
     ~Voice();
 
@@ -76,7 +76,7 @@ private:
 
     // Données son et paramètres
     QByteArray _baData;
-    DWORD m_smplRate, m_audioSmplRate;
+    quint32 m_smplRate, m_audioSmplRate;
     int m_note;
     int m_velocity;
     double m_gain;

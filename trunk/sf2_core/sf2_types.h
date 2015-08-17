@@ -35,11 +35,6 @@
 // Déclaration anticipée
 typedef struct infoSound InfoSound;
 
-// Définition des types
-typedef unsigned char BYTE;     // 1 octet
-typedef unsigned short WORD;    // 2 octets
-typedef unsigned long DWORD;    // 4 octets
-
 typedef enum
 {
     elementUnknown = -1,
@@ -149,8 +144,8 @@ public:
 
 typedef struct sfVersionTag
 {
-    WORD wMajor;
-    WORD wMinor;
+    quint16 wMajor;
+    quint16 wMinor;
 }SfVersionTag;
 
 typedef enum
@@ -289,7 +284,7 @@ typedef enum
 
 typedef struct sfmodulator
 {
-    WORD
+    quint16
         Type  : 6, // 6 bits pour le type
         P     : 1, // Polarité
         D     : 1, // Direction
@@ -305,28 +300,30 @@ typedef enum
 
 typedef struct
 {
-    BYTE byLo;
-    BYTE byHi;
+    quint8 byLo;
+    quint8 byHi;
 } rangesType;
 
 typedef union
 {
     rangesType ranges;
     short shAmount;
-    WORD wAmount;
+    quint16 wAmount;
 } genAmountType;
 
 typedef union
 {
     // Valeurs non signées
-    BYTE bValue;
-    WORD wValue;
-    DWORD dwValue;
+    quint8 bValue;
+    quint16 wValue;
+    quint32 dwValue;
+
     // Valeurs signées
     char cValue;
     short shValue;
     long lValue;
     double dValue;
+
     // Tableaux
     rangesType rValue;
     SFModulator sfModValue;
@@ -335,6 +332,7 @@ typedef union
     SFSampleLink sfLinkValue;
     Champ sfGenValue;
     SFTransform sfTransValue;
+
     // Pointeur
     char *ptCharValue;
 }Valeur;
@@ -342,10 +340,10 @@ typedef union
 // Définition des méthodes
 
 // LECTURE
-DWORD freadSize(QDataStream *stream);
-DWORD readDWORD(const char *chaine, int pos);
-WORD readWORD(const char *chaine, int pos);
-BYTE readBYTE(const char *chaine, int pos);
+quint32 freadSize(QDataStream *stream);
+quint32 readDWORD(const char *chaine, int pos);
+quint16 readWORD(const char *chaine, int pos);
+quint8 readQUINT8(const char *chaine, int pos);
 short readSHORT(const char *chaine, int pos);
 SFSampleLink readSFSL(const char *chaine, int pos);
 Champ readSFGenerator(const char *chaine, int pos);
@@ -357,7 +355,7 @@ void readbloc(char *bloc, const char * bloc_data, int pos);
 char * readdata(char *data, const char *bloc_data, int pos, int length);
 
 // CREATION D'ELEMENTS
-SfVersionTag create_Version(WORD wMajor, WORD wMinor);
+SfVersionTag create_Version(quint16 wMajor, quint16 wMinor);
 
 // DIVERS
 QString decrementerQstr(QString chaine);

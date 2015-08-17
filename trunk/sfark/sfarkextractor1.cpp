@@ -2333,7 +2333,7 @@ bad2:			result = SFARKERR_NOID;
         // Is the ID where we expect it?
         if (!memcmp(fileHdrStartPtr + 26, &SfArkId[1], strlen((const char *)SfArkId) - 1))
         {
-            // Move header to buffer start so it's DWORD aligned. Some CPUs need this, if we access a DWORD field
+            // Move header to buffer start so it's quint32 aligned. Some CPUs need this, if we access a quint32 field
             if (fileHdrStartPtr != _sfArkInfo->WorkBuffer1)
             {
                 memmove(_sfArkInfo->WorkBuffer1, fileHdrStartPtr, bytesToProcess);

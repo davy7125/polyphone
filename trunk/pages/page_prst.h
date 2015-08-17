@@ -67,7 +67,7 @@ public:
     ~TableWidgetPrst();
     // Association champ - ligne
     Champ getChamp(int row);
-    int getRow(WORD champ);
+    int getRow(quint16 champ);
 };
 
 
