@@ -100,22 +100,35 @@ void Page_Prst::setModVisible(bool visible)
 void Page_Prst::afficher()
 {
     PageTable::afficher();
-    EltID id = this->tree->getFirstID();
-    id.typeElement = elementPrst;
-    this->preparation = 1;
-    this->ui->spinBank->setValue(this->sf2->get(id, champ_wBank).wValue);
-    this->ui->spinPreset->setValue(this->sf2->get(id, champ_wPreset).wValue);
-    ui->labelPercussion->setVisible(sf2->get(id, champ_wBank).wValue == 128);
-    this->preparation = 0;
+
+    bool error;
+    QList<EltID> ids = this->getUniqueInstOrPrst(error, false, false);
+
+    this->preparation = true;
+    if (ids.count() > 1)
+    {
+        ui->horizontalFrame->setEnabled(false);
+        ui->frameModulator->setEnabled(false);
+    }
+    else if (!ids.isEmpty())
+    {
+        ui->horizontalFrame->setEnabled(true);
+        ui->frameModulator->setEnabled(true);
+        EltID id = ids.first();
+        id.typeElement = elementPrst;
+        this->ui->spinBank->setValue(this->sf2->get(id, champ_wBank).wValue);
+        this->ui->spinPreset->setValue(this->sf2->get(id, champ_wPreset).wValue);
+        ui->labelPercussion->setVisible(sf2->get(id, champ_wBank).wValue == 128);
+    }
+    this->preparation = false;
 }
 
 // TableWidgetPrst
-TableWidgetPrst::TableWidgetPrst(QWidget *parent) : TableWidget(parent)
-{}
-TableWidgetPrst::~TableWidgetPrst()
-{}
+TableWidgetPrst::TableWidgetPrst(QWidget *parent) : TableWidget(parent) {}
 
-int TableWidgetPrst::getRow(WORD champ)
+TableWidgetPrst::~TableWidgetPrst() {}
+
+int TableWidgetPrst::getRow(quint16 champ)
 {
     int row = -1;
     switch (champ)
@@ -241,9 +254,11 @@ void Page_Prst::spinUpDown(int steps, SpinBox *spin)
     } while (!valPossible && valInit + nbIncrement * increment < 128 \
              && valInit + nbIncrement * increment > -1);
     valInit += (nbIncrement-1) * increment;
+
     // modification de la valeur
     if (valPossible) spin->setValue(valInit);
 }
+
 void Page_Prst::setBank()
 {
     if (this->preparation) return;
@@ -300,10 +315,12 @@ void Page_Prst::setBank()
     this->preparation = 0;
     ui->labelPercussion->setVisible(ui->spinBank->value() == 128);
 }
+
 void Page_Prst::setPreset()
 {
     if (this->preparation) return;
     this->preparation = 1;
+
     // Comparaison avec valeur précédente
     EltID id = this->tree->getFirstID();
     id.typeElement = elementPrst;
@@ -316,10 +333,12 @@ void Page_Prst::setPreset()
         if (initVal >= 0 && initVal != nPreset)
         {
             this->ui->spinPreset->setValue(initVal);
+
             // Sauvegarde
             Valeur val;
             val.wValue = initVal;
             this->sf2->prepareNewActions();
+
             // Reprise de l'identificateur si modification
             id = this->tree->getFirstID();
             id.typeElement = elementPrst;

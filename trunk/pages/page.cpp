@@ -39,7 +39,7 @@ Pile_sf2 * Page::sf2 = NULL;
 Synth * Page::synth = NULL;
 
 // Méthodes publiques
-char * Page::getTextValue(char * T, WORD champ, genAmountType genVal)
+char * Page::getTextValue(char * T, quint16 champ, genAmountType genVal)
 {
     switch (champ)
     {
@@ -123,7 +123,7 @@ char * Page::getTextValue(char * T, WORD champ, genAmountType genVal)
     return T;
 }
 
-char * Page::getTextValue(char * T, WORD champ, int iVal)
+char * Page::getTextValue(char * T, quint16 champ, int iVal)
 {
     switch (champ)
     {
@@ -144,7 +144,7 @@ char * Page::getTextValue(char * T, WORD champ, int iVal)
     return T;
 }
 
-char * Page::getTextValue(char * T, WORD champ, SFModulator sfModVal)
+char * Page::getTextValue(char * T, quint16 champ, SFModulator sfModVal)
 {
     switch (champ)
     {
@@ -158,7 +158,7 @@ char * Page::getTextValue(char * T, WORD champ, SFModulator sfModVal)
     return T;
 }
 
-QString Page::getIndexName(WORD iVal, int CC)
+QString Page::getIndexName(quint16 iVal, int CC)
 {
     char T[20];
     QString qStr = "";
@@ -260,7 +260,7 @@ QString Page::getIndexName(WORD iVal, int CC)
     return qStr;
 }
 
-QString Page::getGenName(WORD iVal, int type)
+QString Page::getGenName(quint16 iVal, int type)
 {
     QString qStr = "";
     switch (iVal)
@@ -670,7 +670,7 @@ QString Page::getGenName(WORD iVal, int type)
     return qStr;
 }
 
-genAmountType Page::getValue(QString texte, WORD champ, bool &ok)
+genAmountType Page::getValue(QString texte, quint16 champ, bool &ok)
 {
     genAmountType genAmount;
     int iTmp;
@@ -720,33 +720,33 @@ genAmountType Page::getValue(QString texte, WORD champ, bool &ok)
         genAmount.ranges.byHi = limit(val2, 0, 127, 0, 127);
     }; break;
     case champ_initialAttenuation: case champ_sustainVolEnv:
-        genAmount.shAmount = (WORD)limit(10*texte.toDouble(&ok), 0, 1440, -1440, 1440);
+        genAmount.shAmount = (quint16)limit(10*texte.toDouble(&ok), 0, 1440, -1440, 1440);
         break;
     case champ_pan: genAmount.shAmount = (short)limit(10*texte.toDouble(&ok), -500, 500, -1000, 1000);
         break;
     case champ_sampleModes:
         iTmp = texte.toDouble(&ok);
         if (iTmp != 0 && iTmp != 1 && iTmp != 3) iTmp = 0;
-        genAmount.wAmount = (WORD)iTmp;
+        genAmount.wAmount = (quint16)iTmp;
         break;
     case champ_overridingRootKey: case champ_keynum:{
         int keyNum = Config::getInstance()->getKeyNum(texte);
         ok = (keyNum >= 0);
-        genAmount.wAmount = (WORD)limit(keyNum, 0, 127);
+        genAmount.wAmount = (quint16)limit(keyNum, 0, 127);
     }break;
     case champ_coarseTune: genAmount.shAmount = (short)limit(texte.toDouble(&ok), -120, 120, -240, 240);
         break;
     case champ_fineTune: genAmount.shAmount = (short)limit(texte.toDouble(&ok), -99, 99, -198, 198);
         break;
-    case champ_scaleTuning: genAmount.shAmount = (WORD)limit(texte.toDouble(&ok), 0, 1200, -1200, 1200);
+    case champ_scaleTuning: genAmount.shAmount = (quint16)limit(texte.toDouble(&ok), 0, 1200, -1200, 1200);
         break;
     case champ_initialFilterFc:
         if (m_typePage == PAGE_PRST)
-            genAmount.shAmount = (WORD)limit(1200. * qLn(texte.toDouble(&ok)) / 0.69314718056, 0, 0, -21000, 21000);
+            genAmount.shAmount = (quint16)limit(1200. * qLn(texte.toDouble(&ok)) / 0.69314718056, 0, 0, -21000, 21000);
         else
-            genAmount.shAmount = (WORD)limit(1200. * qLn(texte.toDouble(&ok) / 8.176) / 0.69314718056, 1500, 13500);
+            genAmount.shAmount = (quint16)limit(1200. * qLn(texte.toDouble(&ok) / 8.176) / 0.69314718056, 1500, 13500);
         break;
-    case champ_initialFilterQ: genAmount.shAmount = (WORD)limit(10*texte.toDouble(&ok), 0, 960, -960, 960);
+    case champ_initialFilterQ: genAmount.shAmount = (quint16)limit(10*texte.toDouble(&ok), 0, 960, -960, 960);
         break;
     case champ_modEnvToPitch: case champ_modLfoToPitch: case champ_vibLfoToPitch:
     case champ_modLfoToFilterFc: case champ_modEnvToFilterFc:
@@ -764,7 +764,7 @@ genAmountType Page::getValue(QString texte, WORD champ, bool &ok)
         genAmount.shAmount = (short)limit(1200. * qLn(texte.toDouble(&ok)) / 0.69314718056, -12000, 8000, -21000, 21000);
         break;
     case champ_sustainModEnv:
-        genAmount.shAmount = (WORD)limit(10. * texte.toDouble(&ok), 0, 1000, -1000, 1000);
+        genAmount.shAmount = (quint16)limit(10. * texte.toDouble(&ok), 0, 1000, -1000, 1000);
         break;
     case champ_keynumToModEnvHold: case champ_keynumToVolEnvHold:
     case champ_keynumToModEnvDecay: case champ_keynumToVolEnvDecay:
@@ -776,12 +776,12 @@ genAmountType Page::getValue(QString texte, WORD champ, bool &ok)
         else
             genAmount.shAmount = (short)limit(1200. * qLn(texte.toDouble(&ok)/8.176) / 0.69314718056, -16000, 4500);
         break;
-    case champ_exclusiveClass: genAmount.wAmount = (WORD)limit(texte.toDouble(&ok), 1, 127);
+    case champ_exclusiveClass: genAmount.wAmount = (quint16)limit(texte.toDouble(&ok), 1, 127);
         break;
     case champ_chorusEffectsSend: case champ_reverbEffectsSend:
-        genAmount.shAmount = (WORD)limit(10*texte.toDouble(&ok), 0, 1000, -1000, 1000);
+        genAmount.shAmount = (quint16)limit(10*texte.toDouble(&ok), 0, 1000, -1000, 1000);
         break;
-    case champ_velocity: genAmount.wAmount = (WORD)limit(texte.toDouble(&ok), 1, 127);
+    case champ_velocity: genAmount.wAmount = (quint16)limit(texte.toDouble(&ok), 1, 127);
         break;
     case champ_startAddrsOffset: case champ_startloopAddrsOffset:
     case champ_endAddrsOffset: case champ_endloopAddrsOffset:

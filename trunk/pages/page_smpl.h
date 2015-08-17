@@ -91,7 +91,7 @@ private:
     int preventStop;
 
     // Méthodes privées
-    void setRateElt(EltID id, DWORD echFinal);
+    void setRateElt(EltID id, quint32 echFinal);
     EltID getRepercussionID(EltID id);
     void autoTune(EltID id, int &pitch, int &correction);
 };

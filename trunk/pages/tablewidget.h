@@ -48,7 +48,7 @@ public:
 
     // Association champ - ligne (méthodes virtuelles pures)
     virtual Champ getChamp(int row) = 0;
-    virtual int getRow(WORD champ) = 0;
+    virtual int getRow(quint16 champ) = 0;
     void setColumnCount(int columns);
     void removeColumn(int column);
 

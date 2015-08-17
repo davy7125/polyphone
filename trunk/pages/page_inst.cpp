@@ -105,6 +105,7 @@ void Page_Inst::afficher()
 
     EltID id = this->tree->getFirstID();
     id.typeElement = elementInst;
+
     // Liste des presets qui utilisent l'instrument
     int nbPrst = 0;
     bool isFound;
@@ -114,11 +115,13 @@ void Page_Inst::afficher()
     id2.typeElement = elementPrst;
     EltID id3 = id;
     id3.typeElement = elementPrstInst;
+
     // Parcours de tous les presets
     for (int i = 0; i < this->sf2->count(id2); i++)
     {
         id2.indexElt = i;
         id3.indexElt = i;
+
         // Parcours de tous les instruments liés au preset
         isFound = false;
         j = 0;
@@ -153,7 +156,7 @@ void Page_Inst::afficher()
 void Page_Inst::desaccorder()
 {
     bool error;
-    QList<EltID> ids = this->getUniqueInstOrPrst(true, error);
+    QList<EltID> ids = this->getUniqueInstOrPrst(error, true, true);
     if (ids.isEmpty() || error)
         return;
 
@@ -169,7 +172,7 @@ void Page_Inst::desaccorder(double doHerz, double division)
     this->sf2->prepareNewActions();
 
     bool error;
-    QList<EltID> ids = this->getUniqueInstOrPrst(true, error);
+    QList<EltID> ids = this->getUniqueInstOrPrst(error, true, true);
     if (ids.isEmpty() || error)
         return;
 
@@ -178,7 +181,7 @@ void Page_Inst::desaccorder(double doHerz, double division)
 
     // Actualisation
     this->mainWindow->updateDo();
-    this->afficher();
+    this->mainWindow->updateActions();
 }
 
 void Page_Inst::desaccorder(EltID id, double doHerz, double division)
@@ -259,18 +262,18 @@ void Page_Inst::desaccorder(EltID id, double doHerz, double division)
 void Page_Inst::repartitionAuto()
 {
     bool error;
-    QList<EltID> ids = this->getUniqueInstOrPrst(false, error);
+    QList<EltID> ids = this->getUniqueInstOrPrst(error, true, false);
     if (ids.isEmpty() || error)
         return;
 
     this->sf2->prepareNewActions();
-    ids = this->getUniqueInstOrPrst(false, error);
+    ids = this->getUniqueInstOrPrst(error, true, false);
     foreach (EltID id, ids)
         repartitionAuto(id);
 
     // Actualisation
     this->mainWindow->updateDo();
-    this->afficher();
+    this->mainWindow->updateActions();
 }
 
 void Page_Inst::repartitionAuto(EltID id)
@@ -613,7 +616,7 @@ void Page_Inst::mixture(QList<QList<int> > listeParam, QString nomInst, bool bou
 void Page_Inst::release()
 {
     bool error;
-    QList<EltID> ids = this->getUniqueInstOrPrst(true, error);
+    QList<EltID> ids = this->getUniqueInstOrPrst(error, true, true);
     if (ids.isEmpty() || error)
         return;
 
@@ -629,7 +632,7 @@ void Page_Inst::release(double duree36, double division, double deTune)
     this->sf2->prepareNewActions();
 
     bool error;
-    QList<EltID> ids = this->getUniqueInstOrPrst(true, error);
+    QList<EltID> ids = this->getUniqueInstOrPrst(error, true, true);
     if (ids.isEmpty() || error)
         return;
 
@@ -638,7 +641,7 @@ void Page_Inst::release(double duree36, double division, double deTune)
 
     // Actualisation
     this->mainWindow->updateDo();
-    this->afficher();
+    this->mainWindow->updateActions();
 }
 
 void Page_Inst::release(EltID id, double duree36, double division, double deTune)
@@ -707,7 +710,7 @@ void Page_Inst::release(EltID id, double duree36, double division, double deTune
 void Page_Inst::transposer()
 {
     bool error;
-    QList<EltID> ids = this->getUniqueInstOrPrst(true, error);
+    QList<EltID> ids = this->getUniqueInstOrPrst(error, true, true);
     if (ids.isEmpty() || error)
         return;
 
@@ -721,7 +724,7 @@ void Page_Inst::transposer(double ton, bool adaptKeyRange)
     sf2->prepareNewActions();
 
     bool error;
-    QList<EltID> ids = this->getUniqueInstOrPrst(true, error);
+    QList<EltID> ids = this->getUniqueInstOrPrst(error, true, true);
     if (ids.isEmpty() || error)
         return;
 
@@ -730,7 +733,7 @@ void Page_Inst::transposer(double ton, bool adaptKeyRange)
 
     // Actualisation
     this->mainWindow->updateDo();
-    this->afficher();
+    this->mainWindow->updateActions();
 }
 
 void Page_Inst::transposer(EltID idInstSmpl, double ton, bool adaptKeyRange)
@@ -1022,7 +1025,7 @@ TableWidgetInst::TableWidgetInst(QWidget *parent) : TableWidget(parent) {}
 
 TableWidgetInst::~TableWidgetInst() {}
 
-int TableWidgetInst::getRow(WORD champ)
+int TableWidgetInst::getRow(quint16 champ)
 {
     int row = -1;
     switch (champ)

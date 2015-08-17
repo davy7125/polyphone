@@ -53,7 +53,7 @@ Sound::~Sound() {}
 //////////////////////////   METHODES PUBLIQUES   //////////////////////////
 ////////////////////////////////////////////////////////////////////////////
 
-QByteArray Sound::getData(WORD wBps)
+QByteArray Sound::getData(quint16 wBps)
 {
     // Copie des données dans data, résolution wBps
     // wBps = 16 : chargement smpl, 16 bits de poids fort
@@ -89,7 +89,7 @@ QByteArray Sound::getData(WORD wBps)
                     baRet = getDataWav(fi, 1);
                     break;
                 case fileCustom1:{
-                    typedef QByteArray (*GetDataSound)(QFile*, WORD, InfoSound);
+                    typedef QByteArray (*GetDataSound)(QFile*, quint16, InfoSound);
                     GetDataSound getDataSound = (GetDataSound) QLibrary::resolve(QCoreApplication::applicationDirPath() + "/extension_lecture",
                                                                              "getDataSound");
                     if (getDataSound)
@@ -141,7 +141,7 @@ QByteArray Sound::getData(WORD wBps)
                     baRet = getDataWav(fi, 2);
                     break;
                 case fileCustom1:{
-                    typedef QByteArray (*GetDataSound)(QFile*, WORD, InfoSound);
+                    typedef QByteArray (*GetDataSound)(QFile*, quint16, InfoSound);
                     GetDataSound getDataSound = (GetDataSound) QLibrary::resolve(QCoreApplication::applicationDirPath() + "/extension_lecture",
                                                                              "getDataSound");
                     if (getDataSound)
@@ -214,7 +214,7 @@ QByteArray Sound::getData(WORD wBps)
                     baRet = getDataWav(fi, 3);
                     break;
                 case fileCustom1:{
-                    typedef QByteArray (*GetDataSound)(QFile*, WORD, InfoSound);
+                    typedef QByteArray (*GetDataSound)(QFile*, quint16, InfoSound);
                     GetDataSound getDataSound = (GetDataSound) QLibrary::resolve(QCoreApplication::applicationDirPath() + "/extension_lecture",
                                                                              "getDataSound");
                     if (getDataSound)
@@ -289,7 +289,7 @@ QByteArray Sound::getData(WORD wBps)
                     baRet = getDataWav(fi, 4);
                     break;
                 case fileCustom1:{
-                    typedef QByteArray (*GetDataSound)(QFile*, WORD, InfoSound);
+                    typedef QByteArray (*GetDataSound)(QFile*, quint16, InfoSound);
                     GetDataSound getDataSound = (GetDataSound) QLibrary::resolve(QCoreApplication::applicationDirPath() + "/extension_lecture",
                                                                              "getDataSound");
                     if (getDataSound)
@@ -314,9 +314,9 @@ QByteArray Sound::getData(WORD wBps)
     }
     return baRet;
 }
-DWORD Sound::get(Champ champ)
+quint32 Sound::get(Champ champ)
 {
-    DWORD result = 0;
+    quint32 result = 0;
     switch (champ)
     {
     case champ_dwStart16:
@@ -359,7 +359,7 @@ DWORD Sound::get(Champ champ)
 }
 QString Sound::getFileName() {return this->fileName;}
 
-void Sound::setData(QByteArray data, WORD wBps)
+void Sound::setData(QByteArray data, quint16 wBps)
 {
     if (wBps == 8)
     {
@@ -461,7 +461,7 @@ void Sound::setRam(bool ram)
 void Sound::exporter(QString fileName, Sound son)
 {
     // Exportation d'un sample mono au format wav
-    WORD wBps = son._info.wBpsFile;
+    quint16 wBps = son._info.wBpsFile;
     if (wBps > 16)
         wBps = 24;
     else
@@ -754,7 +754,7 @@ void Sound::determineRootKey()
         _info.dwNote = note;
 }
 
-QByteArray Sound::getDataSf2(QFile * fi, WORD byte)
+QByteArray Sound::getDataSf2(QFile * fi, quint16 byte)
 {
     QByteArray baRet;
     // Fichier sf2
@@ -803,7 +803,7 @@ QByteArray Sound::getDataSf2(QFile * fi, WORD byte)
             baTmp.resize(_info.dwLength*2);
             baTmp = fi->read(_info.dwLength*2);
             const char * dataTmp = baTmp.constData();
-            for (DWORD i = 0; i < _info.dwLength; i++)
+            for (quint32 i = 0; i < _info.dwLength; i++)
             {
                 data[3*i+1] = dataTmp[2*i];
                 data[3*i+2] = dataTmp[2*i+1];
@@ -815,13 +815,13 @@ QByteArray Sound::getDataSf2(QFile * fi, WORD byte)
                 baTmp.resize(_info.dwLength);
                 baTmp = fi->read(_info.dwLength);
                 dataTmp = baTmp.constData();
-                for (DWORD i = 0; i < _info.dwLength; i++)
+                for (quint32 i = 0; i < _info.dwLength; i++)
                     data[3*i] = dataTmp[i];
             }
             else
             {
                 // Remplissage de 0
-                for (DWORD i = 0; i < _info.dwLength; i++)
+                for (quint32 i = 0; i < _info.dwLength; i++)
                     data[3*i] = 0;
             }
         }
@@ -844,7 +844,7 @@ QByteArray Sound::getDataSf2(QFile * fi, WORD byte)
             baTmp.resize(_info.dwLength*2);
             baTmp = fi->read(_info.dwLength*2);
             const char * dataTmp = baTmp.constData();
-            for (DWORD i = 0; i < _info.dwLength; i++)
+            for (quint32 i = 0; i < _info.dwLength; i++)
             {
                 data[4*i+2] = dataTmp[2*i];
                 data[4*i+3] = dataTmp[2*i+1];
@@ -856,17 +856,17 @@ QByteArray Sound::getDataSf2(QFile * fi, WORD byte)
                 baTmp.resize(_info.dwLength);
                 baTmp = fi->read(_info.dwLength);
                 dataTmp = baTmp.constData();
-                for (DWORD i = 0; i < _info.dwLength; i++)
+                for (quint32 i = 0; i < _info.dwLength; i++)
                     data[4*i+1] = dataTmp[i];
             }
             else
             {
                 // Remplissage de 0
-                for (DWORD i = 0; i < _info.dwLength; i++)
+                for (quint32 i = 0; i < _info.dwLength; i++)
                     data[4*i+1] = 0;
             }
             // Partie 32 bits
-            for (DWORD i = 0; i < _info.dwLength; i++)
+            for (quint32 i = 0; i < _info.dwLength; i++)
                 data[4*i] = 0;
         }
         else
@@ -878,7 +878,7 @@ QByteArray Sound::getDataSf2(QFile * fi, WORD byte)
     }
     return baRet;
 }
-QByteArray Sound::getDataWav(QFile * fi, WORD byte)
+QByteArray Sound::getDataWav(QFile * fi, quint16 byte)
 {
     // Fichier wav
     int byte_fichier = _info.wBpsFile / 8;
@@ -888,7 +888,7 @@ QByteArray Sound::getDataWav(QFile * fi, WORD byte)
     QByteArray baTmp = fi->read(_info.dwLength * byte_fichier * _info.wChannels);
     return this->getDataWav(baTmp, byte);
 }
-QByteArray Sound::getDataWav(QByteArray baData, WORD byte)
+QByteArray Sound::getDataWav(QByteArray baData, quint16 byte)
 {
     // Fichier wav
     QByteArray baRet;
@@ -916,7 +916,7 @@ QByteArray Sound::getDataWav(QByteArray baData, WORD byte)
         else
         {
             a = byte_fichier - 3;
-            for (DWORD i = 0; i < _info.dwLength; i++)
+            for (quint32 i = 0; i < _info.dwLength; i++)
                 data[i] = dataTmp[a + b * i];
         }
         break;
@@ -925,7 +925,7 @@ QByteArray Sound::getDataWav(QByteArray baData, WORD byte)
         if (byte_fichier < 2)
         {
             // Résolution insuffisante
-            for (DWORD i = 0; i < _info.dwLength; i++)
+            for (quint32 i = 0; i < _info.dwLength; i++)
             {
                 data[byte*i] = 0;
                 data[byte*i+1] = dataTmp[b * i];
@@ -934,7 +934,7 @@ QByteArray Sound::getDataWav(QByteArray baData, WORD byte)
         else
         {
             a = byte_fichier - byte;
-            for (DWORD i = 0; i < _info.dwLength; i++)
+            for (quint32 i = 0; i < _info.dwLength; i++)
             {
                 data[byte*i] = dataTmp[a + b * i];
                 data[byte*i+1] = dataTmp[1 + a + b * i];
@@ -945,7 +945,7 @@ QByteArray Sound::getDataWav(QByteArray baData, WORD byte)
         // 24 bits
         if (byte_fichier == 1)
         {
-            for (DWORD i = 0; i < _info.dwLength; i++)
+            for (quint32 i = 0; i < _info.dwLength; i++)
             {
                 data[byte*i] = 0;
                 data[byte*i+1] = 0;
@@ -954,7 +954,7 @@ QByteArray Sound::getDataWav(QByteArray baData, WORD byte)
         }
         else if (byte_fichier == 2)
         {
-            for (DWORD i = 0; i < _info.dwLength; i++)
+            for (quint32 i = 0; i < _info.dwLength; i++)
             {
                 data[byte*i] = 0;
                 data[byte*i+1] = dataTmp[b * i];
@@ -964,7 +964,7 @@ QByteArray Sound::getDataWav(QByteArray baData, WORD byte)
         else
         {
             a = byte_fichier - byte;
-            for (DWORD i = 0; i < _info.dwLength; i++)
+            for (quint32 i = 0; i < _info.dwLength; i++)
             {
                 data[byte*i] = dataTmp[a + b * i];
                 data[byte*i+1] = dataTmp[1 + a + b * i];
@@ -976,7 +976,7 @@ QByteArray Sound::getDataWav(QByteArray baData, WORD byte)
         // 32 bits
         if (byte_fichier == 1)
         {
-            for (DWORD i = 0; i < _info.dwLength; i++)
+            for (quint32 i = 0; i < _info.dwLength; i++)
             {
                 data[byte*i] = 0;
                 data[byte*i+1] = 0;
@@ -986,7 +986,7 @@ QByteArray Sound::getDataWav(QByteArray baData, WORD byte)
         }
         else if (byte_fichier == 2)
         {
-            for (DWORD i = 0; i < _info.dwLength; i++)
+            for (quint32 i = 0; i < _info.dwLength; i++)
             {
                 data[byte*i] = 0;
                 data[byte*i+1] = 0;
@@ -996,7 +996,7 @@ QByteArray Sound::getDataWav(QByteArray baData, WORD byte)
         }
         else if (byte_fichier == 3)
         {
-            for (DWORD i = 0; i < _info.dwLength; i++)
+            for (quint32 i = 0; i < _info.dwLength; i++)
             {
                 data[byte*i] = 0;
                 data[byte*i+1] = dataTmp[b * i];
@@ -1007,7 +1007,7 @@ QByteArray Sound::getDataWav(QByteArray baData, WORD byte)
         else
         {
             a = byte_fichier - byte;
-            for (DWORD i = 0; i < _info.dwLength; i++)
+            for (quint32 i = 0; i < _info.dwLength; i++)
             {
                 data[byte*i] = dataTmp[a + b * i];
                 data[byte*i+1] = dataTmp[1 + a + b * i];
@@ -1080,14 +1080,14 @@ void Sound::exporter(QString fileName, QByteArray baData, InfoSound info)
     // Note et correction
     if (info.iCent > 50)
     {
-        dwTemp = qMin((DWORD)127, info.dwNote + 1);
+        dwTemp = qMin((quint32)127, info.dwNote + 1);
         out << dwTemp;
         dwTemp = qRound(((double)(info.iCent - 50) / 50.) * 2147483648.);
         out << dwTemp;
     }
     else if (info.iCent < -50)
     {
-        dwTemp = qMax((DWORD)0, info.dwNote - 1);
+        dwTemp = qMax((quint32)0, info.dwNote - 1);
         out << dwTemp;
         dwTemp = qRound(((double)(info.iCent + 50) / 50.) * 2147483648.);
         out << dwTemp;
@@ -1141,7 +1141,7 @@ void Sound::exporter(QString fileName, QByteArray baData, InfoSound info)
 //////////////////////////       UTILITAIRES      //////////////////////////
 ////////////////////////////////////////////////////////////////////////////
 
-QByteArray Sound::resampleMono(QByteArray baData, double echInit, qint32 echFinal, WORD wBps)
+QByteArray Sound::resampleMono(QByteArray baData, double echInit, qint32 echFinal, quint16 wBps)
 {
     // Paramètres
     double alpha = 3;
@@ -1219,7 +1219,7 @@ QByteArray Sound::resampleMono(QByteArray baData, double echInit, qint32 echFina
     baRet = bpsConversion(baRet, 32, wBps);
     return baRet;
 }
-QByteArray Sound::bandFilter(QByteArray baData, WORD wBps, double dwSmplRate, double fBas, double fHaut, int ordre)
+QByteArray Sound::bandFilter(QByteArray baData, quint16 wBps, double dwSmplRate, double fBas, double fHaut, int ordre)
 {
     /******************************************************************************
      ***********************    passe_bande_frequentiel    ************************
@@ -1332,7 +1332,7 @@ QByteArray Sound::bandFilter(QByteArray baData, WORD wBps, double dwSmplRate, do
     return baData;
 }
 
-QByteArray Sound::EQ(QByteArray baData, DWORD dwSmplRate, WORD wBps, int i1, int i2, int i3, int i4, int i5,
+QByteArray Sound::EQ(QByteArray baData, quint32 dwSmplRate, quint16 wBps, int i1, int i2, int i3, int i4, int i5,
                          int i6, int i7, int i8, int i9, int i10)
 {
     unsigned long size;
@@ -1397,7 +1397,7 @@ Complex * Sound::IFFT(Complex * x, int N)
     delete [] scratch;
     return out;
 }
-void Sound::bpsConversion(char *cDest, const char *cFrom, qint32 size, WORD wBpsInit, WORD wBpsFinal, bool bigEndian)
+void Sound::bpsConversion(char *cDest, const char *cFrom, qint32 size, quint16 wBpsInit, quint16 wBpsFinal, bool bigEndian)
 {
     // Conversion entre formats 32, 24 et 16 bits
     // Particularité : demander format 824 bits renvoie les 8 bits de poids faible
@@ -1686,7 +1686,7 @@ void Sound::bpsConversion(char *cDest, const char *cFrom, qint32 size, WORD wBps
         break;
     }
 }
-QByteArray Sound::bpsConversion(QByteArray baData, WORD wBpsInit, WORD wBpsFinal, bool bigEndian)
+QByteArray Sound::bpsConversion(QByteArray baData, quint16 wBpsInit, quint16 wBpsFinal, bool bigEndian)
 {
     // Conversion entre formats 32, 24 et 16 bits
     // Particularité : demander format 824 bits renvoie les 8 bits de poids faible
@@ -1718,7 +1718,7 @@ QByteArray Sound::bpsConversion(QByteArray baData, WORD wBpsInit, WORD wBpsFinal
     bpsConversion(cDest, cFrom, size, wBpsInit, wBpsFinal, bigEndian);
     return baRet;
 }
-QByteArray Sound::from2MonoTo1Stereo(QByteArray baData1, QByteArray baData2, WORD wBps, bool bigEndian)
+QByteArray Sound::from2MonoTo1Stereo(QByteArray baData1, QByteArray baData2, quint16 wBps, bool bigEndian)
 {
     int size;
     // Si tailles différentes, on complète le petit avec des 0
@@ -1853,7 +1853,7 @@ Complex * Sound::fromBaToComplex(QVector<float> fData, long unsigned int &size)
     return cpxData;
 }
 
-Complex * Sound::fromBaToComplex(QByteArray baData, WORD wBps, long unsigned int &size)
+Complex * Sound::fromBaToComplex(QByteArray baData, quint16 wBps, long unsigned int &size)
 {
     Complex * cpxData;
     // Création et remplissage d'un tableau de complexes
@@ -1910,7 +1910,7 @@ Complex * Sound::fromBaToComplex(QByteArray baData, WORD wBps, long unsigned int
     }
     return cpxData;
 }
-QByteArray Sound::fromComplexToBa(Complex * cpxData, int size, WORD wBps)
+QByteArray Sound::fromComplexToBa(Complex * cpxData, int size, quint16 wBps)
 {
     QByteArray baData;
     if (wBps == 16)
@@ -1951,7 +1951,7 @@ QByteArray Sound::fromComplexToBa(Complex * cpxData, int size, WORD wBps)
     return baData;
 }
 
-QByteArray Sound::normaliser(QByteArray baData, double dVal, WORD wBps, double &db)
+QByteArray Sound::normaliser(QByteArray baData, double dVal, quint16 wBps, double &db)
 {
     // Conversion 32 bits si nécessaire
     if (wBps != 32)
@@ -1970,7 +1970,7 @@ QByteArray Sound::normaliser(QByteArray baData, double dVal, WORD wBps, double &
         baData = bpsConversion(baData, 32, wBps);
     return baData;
 }
-QByteArray Sound::multiplier(QByteArray baData, double dMult, WORD wBps, double &db)
+QByteArray Sound::multiplier(QByteArray baData, double dMult, quint16 wBps, double &db)
 {
     // Conversion 32 bits si nécessaire
     if (wBps != 32)
@@ -1985,7 +1985,7 @@ QByteArray Sound::multiplier(QByteArray baData, double dMult, WORD wBps, double 
         baData = bpsConversion(baData, 32, wBps);
     return baData;
 }
-QByteArray Sound::enleveBlanc(QByteArray baData, double seuil, WORD wBps, quint32 &pos)
+QByteArray Sound::enleveBlanc(QByteArray baData, double seuil, quint16 wBps, quint32 &pos)
 {
     // Conversion 32 bits si nécessaire
     if (wBps != 32)
@@ -2017,7 +2017,7 @@ QByteArray Sound::enleveBlanc(QByteArray baData, double seuil, WORD wBps, quint3
         baData = bpsConversion(baData, 32, wBps);
     return baData;
 }
-void Sound::regimePermanent(QByteArray baData, DWORD dwSmplRate, WORD wBps, qint32 &posStart, qint32 &posEnd)
+void Sound::regimePermanent(QByteArray baData, quint32 dwSmplRate, quint16 wBps, qint32 &posStart, qint32 &posEnd)
 {
     // Recherche d'un régiment permanent (sans attaque ni release)
     if (wBps != 32)
@@ -2032,7 +2032,7 @@ void Sound::regimePermanent(QByteArray baData, DWORD dwSmplRate, WORD wBps, qint
 
     regimePermanent(fData, dwSmplRate, posStart, posEnd);
 }
-void Sound::regimePermanent(QVector<float> fData, DWORD dwSmplRate, qint32 &posStart, qint32 &posEnd)
+void Sound::regimePermanent(QVector<float> fData, quint32 dwSmplRate, qint32 &posStart, qint32 &posEnd)
 {
     int size = fData.size();
 
@@ -2055,7 +2055,7 @@ void Sound::regimePermanent(QVector<float> fData, DWORD dwSmplRate, qint32 &posS
         }
     }
 }
-QVector<float> Sound::correlation(const QVector<float> fData, DWORD dwSmplRate, qint32 fMin, qint32 fMax, qint32 &dMin)
+QVector<float> Sound::correlation(const QVector<float> fData, quint32 dwSmplRate, qint32 fMin, qint32 fMax, qint32 &dMin)
 {
     // Décalage max (fréquence basse)
     qint32 dMax = qRound((double)dwSmplRate / fMin);
@@ -2099,7 +2099,7 @@ float Sound::correlation(QVector<float> fData1, QVector<float> fData2)
     return somme / fData1.size();
 }
 
-QByteArray Sound::bouclage(QByteArray baData, DWORD dwSmplRate, qint32 &loopStart, qint32 &loopEnd, WORD wBps)
+QByteArray Sound::bouclage(QByteArray baData, quint32 dwSmplRate, qint32 &loopStart, qint32 &loopEnd, quint16 wBps)
 {
     if (wBps != 32)
         baData = bpsConversion(baData, wBps, 32);
@@ -2167,7 +2167,7 @@ QByteArray Sound::bouclage(QByteArray baData, DWORD dwSmplRate, qint32 &loopStar
         baData = bpsConversion(baData, 32, wBps);
     return baData;
 }
-QByteArray Sound::sifflements(QByteArray baData, DWORD dwSmplRate, WORD wBps, double fCut, double fMax, double raideur)
+QByteArray Sound::sifflements(QByteArray baData, quint32 dwSmplRate, quint16 wBps, double fCut, double fMax, double raideur)
 {
     // Conversion 32 bits si nécessaire
     if (wBps != 32)
@@ -2301,7 +2301,7 @@ QList<quint32> Sound::findMax(QVector<float> vectData, int maxNb, double minFrac
 
     return listRet;
 }
-qint32 Sound::max(QByteArray baData, WORD wBps)
+qint32 Sound::max(QByteArray baData, quint16 wBps)
 {
     if (wBps != 32)
         baData = bpsConversion(baData, wBps, 32);
@@ -2364,14 +2364,14 @@ void Sound::FFT_calculate(Complex * x, long N /* must be a power of 2 */,
         evenIteration = !evenIteration;
     }
 }
-double Sound::moyenne(QByteArray baData, WORD wBps)
+double Sound::moyenne(QByteArray baData, quint16 wBps)
 {
     if (baData.size())
         return somme(baData, wBps) / (baData.size() / (wBps/8));
     else
         return 0;
 }
-double Sound::moyenneCarre(QByteArray baData, WORD wBps)
+double Sound::moyenneCarre(QByteArray baData, quint16 wBps)
 {
     //return sommeAbs(baData, wBps) / (baData.size() / (wBps/8));
     return (double)qSqrt(sommeCarre(baData, wBps)) / (baData.size() / (wBps/8));
@@ -2448,7 +2448,7 @@ float Sound::mediane(QVector<float> data)
             high = hh - 1;
     }
 }
-qint64 Sound::somme(QByteArray baData, WORD wBps)
+qint64 Sound::somme(QByteArray baData, quint16 wBps)
 {
     if (wBps != 32)
         baData = bpsConversion(baData, wBps, 32);
@@ -2459,7 +2459,7 @@ qint64 Sound::somme(QByteArray baData, WORD wBps)
         valeur += arr[i];
     return valeur;
 }
-qint64 Sound::sommeCarre(QByteArray baData, WORD wBps)
+qint64 Sound::sommeCarre(QByteArray baData, quint16 wBps)
 {
     if (wBps != 32)
         baData = bpsConversion(baData, wBps, 32);
@@ -2539,7 +2539,7 @@ double Sound::gainEQ(double freq, int i1, int i2, int i3, int i4, int i5, int i6
     // Conversion
     return pow(10.0, val / 20);
 }
-void Sound::regimePermanent(QVector<float> data, DWORD dwSmplRate, qint32 &posStart, qint32 &posEnd, int nbOK, double coef)
+void Sound::regimePermanent(QVector<float> data, quint32 dwSmplRate, qint32 &posStart, qint32 &posEnd, int nbOK, double coef)
 {
     // Calcul de la moyenne des valeurs absolues sur une période de 0.05 s à chaque 10ième de seconde
     qint32 sizePeriode = dwSmplRate / 10;

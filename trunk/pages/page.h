@@ -64,7 +64,7 @@ public:
     Page(TypePage typePage, QWidget *parent = 0);
 
     virtual void afficher() = 0;
-    static QString getGenName(WORD iVal, int type = 0);
+    static QString getGenName(quint16 iVal, int type = 0);
 
 protected:
     bool preparation;
@@ -75,11 +75,11 @@ protected:
     static Synth * synth;
     TypePage m_typePage;
 
-    char * getTextValue(char * T, WORD champ, genAmountType genVal);
-    static char * getTextValue(char * T, WORD champ, int iVal);
-    static char * getTextValue(char * T, WORD champ, SFModulator sfModVal);
-    static QString getIndexName(WORD iVal, int CC);
-    genAmountType getValue(QString texte, WORD champ, bool &ok);
+    char * getTextValue(char * T, quint16 champ, genAmountType genVal);
+    static char * getTextValue(char * T, quint16 champ, int iVal);
+    static char * getTextValue(char * T, quint16 champ, SFModulator sfModVal);
+    static QString getIndexName(quint16 iVal, int CC);
+    genAmountType getValue(QString texte, quint16 champ, bool &ok);
 
 private:
     // Méthodes privées

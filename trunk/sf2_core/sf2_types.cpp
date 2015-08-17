@@ -26,7 +26,7 @@
 #include "sound.h"
 #include <QMessageBox>
 
-DWORD freadSize(QDataStream * stream)
+quint32 freadSize(QDataStream * stream)
 {
     unsigned char b0, b1, b2, b3;
     if (stream->readRawData((char*)&b3, 1) != 1 ||
@@ -38,10 +38,10 @@ DWORD freadSize(QDataStream * stream)
     }
     // Assuming file is little-endian.
     // for big endian, swap the order to b3...b0
-    return (((DWORD) b0) << 24) | (((DWORD) b1) << 16) | (((DWORD) b2) << 8) | b3;
+    return (((quint32) b0) << 24) | (((quint32) b1) << 16) | (((quint32) b2) << 8) | b3;
 }
 
-DWORD readDWORD(const char *chaine, int pos)
+quint32 readDWORD(const char *chaine, int pos)
 {
     unsigned char b0, b1, b2, b3;
     b3 = chaine[pos];
@@ -50,16 +50,16 @@ DWORD readDWORD(const char *chaine, int pos)
     b0 = chaine[pos+3];
     // Assuming file is little-endian.
     // for big endian, swap the order to b3...b0
-    return (((DWORD) b0) << 24) | (((DWORD) b1) << 16) | (((DWORD) b2) << 8) | b3;
+    return (((quint32) b0) << 24) | (((quint32) b1) << 16) | (((quint32) b2) << 8) | b3;
 }
-WORD readWORD(const char *chaine, int pos)
+quint16 readWORD(const char *chaine, int pos)
 {
     unsigned char b0, b1;
     b1 = chaine[pos];
     b0 = chaine[pos+1];
     // Assuming file is little-endian.
     // for big endian, swap the order to b1...b0
-    return (((WORD) b0) << 8) | b1;
+    return (((quint16) b0) << 8) | b1;
 }
 SfVersionTag readSFVersionTag(const char *chaine, int pos)
 {
@@ -69,15 +69,15 @@ SfVersionTag readSFVersionTag(const char *chaine, int pos)
     b0 = chaine[pos+1];
     // Assuming file is little-endian.
     // for big endian, swap the order to b1...b0
-    Version.wMajor = (((WORD) b0) << 8) | b1;
+    Version.wMajor = (((quint16) b0) << 8) | b1;
     b1 = chaine[pos+2];
     b0 = chaine[pos+3];
     // Assuming file is little-endian.
     // for big endian, swap the order to b1...b0
-    Version.wMinor = (((WORD) b0) << 8) | b1;
+    Version.wMinor = (((quint16) b0) << 8) | b1;
     return Version;
 }
-BYTE readBYTE(const char *chaine, int pos)
+quint8 readQUINT8(const char *chaine, int pos)
 {
     unsigned char b0;
     b0 = chaine[pos];
@@ -120,7 +120,7 @@ SFModulator readSFModulator(const char *chaine, int pos)
     MonSFMod.P = bool((b0 >> 1) & 1);
     MonSFMod.D = bool(b0 & 1);
     MonSFMod.CC = bool(b1 >> 7);
-    MonSFMod.Index = WORD(b1 & 0x7F);
+    MonSFMod.Index = quint16(b1 & 0x7F);
     return MonSFMod;
 }
 SFTransform readSFTransform(const char *chaine, int pos)
@@ -140,7 +140,7 @@ genAmountType readGenAmountType(const char *chaine, int pos)
     b0 = chaine[pos+1];
     // Assuming file is little-endian.
     // for big endian, swap the order to b1...b0
-    MyAmount.wAmount = (((WORD) b0) << 8) | b1;
+    MyAmount.wAmount = (((quint16) b0) << 8) | b1;
     return MyAmount;
 }
 void readbloc(char *bloc, const char * bloc_data, int pos)
@@ -157,7 +157,7 @@ char *readdata(char *data, const char * bloc_data, int pos, int length)
     return data;
 }
 
-SfVersionTag create_Version(WORD wMajor, WORD wMinor)
+SfVersionTag create_Version(quint16 wMajor, quint16 wMinor)
 {
     SfVersionTag Version;
     Version.wMajor = wMajor;

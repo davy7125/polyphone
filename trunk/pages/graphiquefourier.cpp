@@ -129,7 +129,7 @@ void GraphiqueFourier::setBackgroundColor(QColor color)
     // Modification de la couleur de fond
     this->setBackground(color);
 }
-void GraphiqueFourier::setData(QByteArray baData, DWORD dwSmplRate)
+void GraphiqueFourier::setData(QByteArray baData, quint32 dwSmplRate)
 {
     int length = baData.size() / 2;
     _fData.resize(length);
@@ -360,7 +360,7 @@ void GraphiqueFourier::setPos(qint32 posStart, qint32 posEnd, QList<double> &fre
 void GraphiqueFourier::dispFourier(QVector<float> vectFourier, float posMaxFourier)
 {
     this->graph(0)->clearData();
-    DWORD size_x = ((long int)vectFourier.size() * 40000) / this->dwSmplRate;
+    quint32 size_x = ((long int)vectFourier.size() * 40000) / this->dwSmplRate;
     QVector<double> x(size_x), y(size_x);
     for (unsigned long i = 0; i < size_x; i++)
     {

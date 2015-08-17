@@ -79,7 +79,7 @@ public:
 
     // Association champ - ligne
     Champ getChamp(int row);
-    int getRow(WORD champ);
+    int getRow(quint16 champ);
 };
 
 #endif // PAGE_INST_H

@@ -113,12 +113,12 @@ void Page_Smpl::afficher()
     int nombreElements = ids.size();
 
     EltID id = ids.takeFirst();
-    DWORD sampleRate = sf2->get(id, champ_dwSampleRate).dwValue;
+    quint32 sampleRate = sf2->get(id, champ_dwSampleRate).dwValue;
     int rootKey = sf2->get(id, champ_byOriginalPitch).bValue;
     int correction = sf2->get(id, champ_chPitchCorrection).cValue;
-    DWORD startLoop = sf2->get(id, champ_dwStartLoop).dwValue;
-    DWORD endLoop = sf2->get(id, champ_dwEndLoop).dwValue;
-    DWORD length = sf2->get(id, champ_dwLength).dwValue;
+    quint32 startLoop = sf2->get(id, champ_dwStartLoop).dwValue;
+    quint32 endLoop = sf2->get(id, champ_dwEndLoop).dwValue;
+    quint32 length = sf2->get(id, champ_dwLength).dwValue;
     SFSampleLink typeLink = sf2->get(id, champ_sfSampleType).sfLinkValue;
     while (!ids.isEmpty())
     {
@@ -469,7 +469,7 @@ void Page_Smpl::on_pushFullLength_clicked()
     sf2->prepareNewActions();
     Valeur val;
 
-    DWORD displayedEndLoop = 0;
+    quint32 displayedEndLoop = 0;
     bool firstValue = true;
     bool triggersMessage = false;
 
@@ -484,7 +484,7 @@ void Page_Smpl::on_pushFullLength_clicked()
                 sf2->set(id, champ_dwStartLoop, val);
 
             // Fin de la boucle correspondant à la fin de l'échantillon - 1
-            DWORD length = sf2->get(id, champ_dwLength).dwValue - 1;
+            quint32 length = sf2->get(id, champ_dwLength).dwValue - 1;
             val.dwValue = length;
             if (sf2->get(id, champ_dwEndLoop).dwValue != length)
                 sf2->set(id, champ_dwEndLoop, val);
@@ -850,13 +850,13 @@ void Page_Smpl::setRate(int index)
         return;
 
     sf2->prepareNewActions();
-    DWORD echFinal = ui->comboSampleRate->currentText().toInt();
+    quint32 echFinal = ui->comboSampleRate->currentText().toInt();
     QList<EltID> listID = tree->getAllIDs();
     foreach (EltID id, listID)
     {
         if (!this->sf2->get(id, champ_hidden).bValue)
         {
-            DWORD echInit = sf2->get(id, champ_dwSampleRate).dwValue;
+            quint32 echInit = sf2->get(id, champ_dwSampleRate).dwValue;
             if (echInit != echFinal)
                 setRateElt(id, echFinal);
 
@@ -878,10 +878,10 @@ void Page_Smpl::setRate(int index)
     this->afficher();
 }
 
-void Page_Smpl::setRateElt(EltID id, DWORD echFinal)
+void Page_Smpl::setRateElt(EltID id, quint32 echFinal)
 {
     // Modification échantillonnage
-    DWORD echInit = sf2->get(id, champ_dwSampleRate).dwValue;
+    quint32 echInit = sf2->get(id, champ_dwSampleRate).dwValue;
     QByteArray baData = sf2->getData(id, champ_sampleDataFull24);
     baData = Sound::resampleMono(baData, echInit, echFinal, 24);
     sf2->set(id, champ_sampleDataFull24, baData);
@@ -892,7 +892,7 @@ void Page_Smpl::setRateElt(EltID id, DWORD echFinal)
     // Ajustement de length, startLoop, endLoop
     val.dwValue = baData.size()/3;
     sf2->set(id, champ_dwLength, val);
-    DWORD dwTmp = this->sf2->get(id, champ_dwStartLoop).dwValue;
+    quint32 dwTmp = this->sf2->get(id, champ_dwStartLoop).dwValue;
     dwTmp = ((quint64)dwTmp * (quint64)echFinal) / (quint64)echInit;
     val.dwValue = dwTmp;
     sf2->set(id, champ_dwStartLoop, val);
@@ -1159,7 +1159,7 @@ void Page_Smpl::bouclage()
 
                 // Récupération des données, échantillonnage, startloop et endloop
                 QByteArray baData = this->sf2->getData(id, champ_sampleDataFull24);
-                DWORD dwSmplRate = this->sf2->get(id, champ_dwSampleRate).dwValue;
+                quint32 dwSmplRate = this->sf2->get(id, champ_dwSampleRate).dwValue;
                 qint32 startLoop = this->sf2->get(id, champ_dwStartLoop).dwValue;
                 qint32 endLoop = this->sf2->get(id, champ_dwEndLoop).dwValue;
 
@@ -1257,7 +1257,7 @@ void Page_Smpl::filtreMur()
                 QApplication::processEvents();
                 // Récupération des données et de l'échantillonnage
                 QByteArray baData = this->sf2->getData(id, champ_sampleDataFull24);
-                DWORD dwSmplRate = this->sf2->get(id, champ_dwSampleRate).dwValue;
+                quint32 dwSmplRate = this->sf2->get(id, champ_dwSampleRate).dwValue;
                 // Filtre passe bas
                 baData = Sound::bandFilter(baData, 24, dwSmplRate, rep, 0, -1);
                 this->sf2->set(id, champ_sampleDataFull24, baData);
@@ -1430,7 +1430,7 @@ void Page_Smpl::sifflements(int freq1, int freq2, double raideur)
                 progress.setLabelText(textProgress + name);
                 QApplication::processEvents();
                 QByteArray baData = this->sf2->getData(id, champ_sampleDataFull24);
-                DWORD dwSmplRate = this->sf2->get(id, champ_dwSampleRate).dwValue;
+                quint32 dwSmplRate = this->sf2->get(id, champ_dwSampleRate).dwValue;
                 baData = Sound::sifflements(baData, dwSmplRate, 24, freq1, freq2, raideur);
                 this->sf2->set(id, champ_sampleDataFull24, baData);
                 if (!progress.wasCanceled())
@@ -1495,7 +1495,7 @@ void Page_Smpl::transposer()
                 QApplication::processEvents();
                 // Récupération des données et de l'échantillonnage
                 QByteArray baData = this->sf2->getData(id, champ_sampleDataFull24);
-                DWORD echFinal = this->sf2->get(id, champ_dwSampleRate).dwValue;
+                quint32 echFinal = this->sf2->get(id, champ_dwSampleRate).dwValue;
                 // Calcul de l'échantillonnage fictif de départ
                 double echInit = (double)echFinal * pow(2, rep/12);
                 // Rééchantillonnage
@@ -1505,7 +1505,7 @@ void Page_Smpl::transposer()
                 Valeur val;
                 val.dwValue = baData.size()/3;
                 this->sf2->set(id, champ_dwLength, val);
-                DWORD dwTmp = this->sf2->get(id, champ_dwStartLoop).dwValue;
+                quint32 dwTmp = this->sf2->get(id, champ_dwStartLoop).dwValue;
                 dwTmp = ((qint64)dwTmp * (qint64)echFinal) / echInit;
                 val.dwValue = dwTmp;
                 this->sf2->set(id, champ_dwStartLoop, val);
@@ -1808,9 +1808,9 @@ void Page_Smpl::autoTune(EltID id, int &pitch, int &correction)
 {
     // Récupération des données
     QByteArray baData = this->sf2->getData(id, champ_sampleData16);
-    DWORD sampleRate = sf2->get(id, champ_dwSampleRate).dwValue;
-    DWORD startLoop = sf2->get(id, champ_dwStartLoop).dwValue;
-    DWORD endLoop = sf2->get(id, champ_dwEndLoop).dwValue;
+    quint32 sampleRate = sf2->get(id, champ_dwSampleRate).dwValue;
+    quint32 startLoop = sf2->get(id, champ_dwStartLoop).dwValue;
+    quint32 endLoop = sf2->get(id, champ_dwEndLoop).dwValue;
 
     // Remplissage du graphique Fourier
     ui->grapheFourier->setData(baData, sampleRate);

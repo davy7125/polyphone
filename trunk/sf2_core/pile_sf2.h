@@ -25,13 +25,10 @@
 #ifndef PILE_SF2_H
 #define PILE_SF2_H
 
-#include <stdlib.h>
 #include "pile_actions.h"
 #include "sound.h"
 #include "tree.h"
 #include "treewidgetitem.h"
-#include <string>
-using std::string;
 
 class Pile_sf2 : public QObject
 {
@@ -84,8 +81,8 @@ public:
 
     // Disponibilité de bank / preset
     void firstAvailablePresetBank(EltID id, int &nBank, int &nPreset);
-    int closestAvailablePreset(EltID id, WORD wBank, WORD wPreset);
-    bool isAvailable(EltID id, WORD wBank, WORD wPreset);
+    int closestAvailablePreset(EltID id, quint16 wBank, quint16 wPreset);
+    bool isAvailable(EltID id, quint16 wBank, quint16 wPreset);
 
 signals:
     void updateTable(int type, int sf2, int elt, int elt2);
@@ -118,6 +115,7 @@ private:
                 int index;
                 bool hidden;
                 MOD *suivant;
+
                 // METHODES DE MOD
                 MOD();
                 ~MOD()
@@ -128,6 +126,7 @@ private:
                 int nombreElt();
                 void enleverMod(int index);
             };
+
             class GEN
             {
             public:
@@ -135,6 +134,7 @@ private:
                 Champ sfGenOper;
                 genAmountType genAmount;
                 GEN *suivant;
+
                 // METHODES DE GEN
                 GEN();
                 ~GEN()
@@ -149,6 +149,7 @@ private:
                 Valeur getGen(Champ champ);
                 int nombreElt();
             };
+
             // ATTRIBUTS DE BAG
             BAG();
             ~BAG()
@@ -162,6 +163,7 @@ private:
             QTreeWidgetItem *eltTree;
             bool hidden;
             BAG *suivant;
+
             // METHODES DE BAG
             BAG *getElt(int pos);
             int nombreElt();
@@ -183,11 +185,12 @@ private:
             }
             QString Name;
             Sound son;
-            WORD wSampleLink;
+            quint16 wSampleLink;
             SFSampleLink sfSampleType;
             QTreeWidgetItem *eltTree;
             bool hidden;
             SMPL *suivant;
+
             // METHODES DE SMPL
             SMPL *getElt(int pos);
             int nombreElt();
@@ -195,6 +198,7 @@ private:
             void decrementerSMPL();
             void decrementerLinkSMPL(int indexSmpl);
         };
+
         class INST
         {
         public:
@@ -217,21 +221,23 @@ private:
             void decrementerSF2();
             void decrementerINST();
         };
+
         class PRST
         {
         public:
             // ATTRIBUTS DE PRST
             QString Name;
-            WORD wPreset;
-            WORD wBank;
-            DWORD dwLibrary;
-            DWORD dwGenre;
-            DWORD dwMorphology;
+            quint16 wPreset;
+            quint16 wBank;
+            quint32 dwLibrary;
+            quint32 dwGenre;
+            quint32 dwMorphology;
             BAG *bag;
             BAG bagGlobal;
             QTreeWidgetItem *eltTree;
             bool hidden;
             PRST *suivant;
+
             // METHODES DE PRST
             PRST();
             ~PRST()
@@ -260,10 +266,12 @@ private:
         QString ICMT; // Comments on the Bank                         e.g. “This is a comment”                           /!\  65,535 bits maxi
         QString ISFT; // SoundFont tools used                         e.g. “:Preditor 2.00a:Vienna SF Studio 2.0:”
         QString fileName;   // nom du fichier
+
         // SMPL INST ET PRST
         SMPL *smpl;
         INST *inst;
         PRST *prst;
+
         // Elements graphiques
         QTreeWidgetItem *eltTree;
         QTreeWidgetItem *eltTreeSmpl;
@@ -273,8 +281,8 @@ private:
         double numEdition;  // numéro de l'édition sauvegardée
         bool hidden;        // fichier supprimé ou non (avant suppression définitive)
         SF2 *suivant;       // fichier sf2 suivant
-        WORD wBpsInit;      // résolution sample à l'ouverture du fichier (16, 24 ou 0 si nouveau)
-        WORD wBpsSave;      // résolution souhaitée lors d'une sauvegarde (16 ou 24)
+        quint16 wBpsInit;      // résolution sample à l'ouverture du fichier (16, 24 ou 0 si nouveau)
+        quint16 wBpsSave;      // résolution souhaitée lors d'une sauvegarde (16 ou 24)
 
         // METHODES DE LA CLASSE SF2
         SF2(); // constructeur
@@ -302,6 +310,7 @@ private:
         int nbElt;
         int *listHidden;
     };
+
     class ConvertSmpl
     {
     public:
@@ -312,6 +321,7 @@ private:
         int nbElt;
         int *listHidden;
     };
+
     class ConvertInst
     {
     public:
@@ -333,10 +343,13 @@ private:
     // METHODES PRIVEES DE LA CLASSE PILE_SF2
     // Affiche l'élément id
     int display(EltID id);
+
     // Supprime ou masque l'élément id. Si l'élément est utilisé par un autre : erreur
     int remove(EltID id, bool permanently, bool storeAction, int *message = NULL);
+
     // Type de fichier
     static FileType getFileType(QString fileName);
+
     // Gestion de la sauvegarde
     int sauvegarderSf2(int indexSf2, QString fileName);
     void storeEdition(int indexSf2);

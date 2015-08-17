@@ -25,7 +25,7 @@
 #include "voice.h"
 
 // Constructeur, destructeur
-Voice::Voice(QByteArray baData, DWORD smplRate, DWORD audioSmplRate, int note, int velocity,
+Voice::Voice(QByteArray baData, quint32 smplRate, quint32 audioSmplRate, int note, int velocity,
              VoiceParam * voiceParam, QObject * parent) : QObject(parent),
     _modLFO(audioSmplRate, voiceParam->modLfoDelay),
     _vibLFO(audioSmplRate, voiceParam->vibLfoDelay),

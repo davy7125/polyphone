@@ -55,28 +55,62 @@ void PageTable::afficher()
 void PageTable::afficheTable()
 {
     int posV = this->table->verticalScrollBar()->value();
-    EltID id = this->tree->getFirstID();
-    EltID ori = id;
-    EltID id2 = id;
-    EltID id3 = id;
-    WORD champTmp;
-    genAmountType genValTmp;
-    QString qStr;
-    int offsetStart = 0;
-    int offsetEnd = 0;
-    int offsetStartLoop = 0;
-    int offsetEndLoop = 0;
-    int row, nbSmplInst, numCol;
-    char T[20];char str[40];char str2[40];
-    this->preparation = 1;
+    this->preparation = true;
 
     // Destruction des cellules précédentes
     table->blockSignals(true);
     this->table->clear();
     table->blockSignals(false);
 
-    ////// AFFICHAGE DES PARAMETRES GLOBAUX //////
-    this->table->addColumn(0, trUtf8("Global"));
+    bool error;
+    QList<EltID> ids = getUniqueInstOrPrst(error, false, false);
+
+    if (!ids.isEmpty())
+    {
+        ////// AFFICHAGE DES PARAMETRES GLOBAUX //////
+        foreach (EltID id, ids)
+            addGlobal(id, ids.count() > 1);
+
+        ////// AFFICHAGE DES PARAMETRES PAR ELEMENT LIÉ //////
+        if (ids.count() == 1)
+            addDivisions(ids.first());
+
+        ////// MISE EN FORME DE LA TABLE (couleurs, alignement) //////
+        formatTable(ids.count() > 1);
+
+        ///////////////////// REMPLISSAGE DES MODS //////////////////////////
+        if (ids.count() == 1)
+            this->afficheMod(ids.first());
+    }
+
+    // Fin de la préparation
+    this->preparation = false;
+    this->reselect();
+    this->table->verticalScrollBar()->setValue(posV);
+}
+
+void PageTable::addGlobal(EltID id, bool multiGlobal)
+{
+    quint16 champTmp;
+    genAmountType genValTmp;
+    int offsetStart = 0;
+    int offsetEnd = 0;
+    int offsetStartLoop = 0;
+    int offsetEndLoop = 0;
+    int row;
+    char T[20];
+
+    QString qStr;
+    if (multiGlobal)
+    {
+        qStr = this->sf2->getQstr(id, champ_name).left(10);
+        qStr.append("\n");
+        qStr.append(this->sf2->getQstr(id, champ_name).mid(10).left(10));
+    }
+    else
+        qStr = trUtf8("Global");
+
+    this->table->addColumn(0, qStr);
     id.typeElement = this->contenantGen;
     id.indexElt2 = 0;
     for (int i = 0; i < this->sf2->count(id); i++)
@@ -137,20 +171,31 @@ void PageTable::afficheTable()
         this->table->item(row, 0)->setText(getTextValue(T, champ_endloopAddrsOffset, offsetEndLoop));
     }
     this->table->setID(id, 0);
+}
 
-    ////// AFFICHAGE DES PARAMETRES PAR ELEMENT LIÉ //////
-    nbSmplInst = 0;
+void PageTable::addDivisions(EltID id)
+{
+    quint16 champTmp;
+    genAmountType genValTmp;
+    char T[20]; char str[40]; char str2[40];
+    int row;
+    EltID id2 = id;
+    EltID id3 = id;
+    int nbSmplInst = 0;
     id.typeElement = this->lien;
     id2.typeElement = this->lienGen;
     id3.typeElement = this->contenu;
+
     for (int i = 0; i < this->sf2->count(id); i++)
     {
         id.indexElt2 = i;
         if (!this->sf2->get(id, champ_hidden).bValue)
         {
             id2.indexElt2 = i;
+
             // Ajout d'un élément lié
-            numCol = 1;
+            int numCol = 1;
+
             // Détermination de la colonne
             Champ cElementLie;
             if (this->contenant == elementInst)
@@ -162,10 +207,10 @@ void PageTable::afficheTable()
             sprintf(str, "%.03d%.03d%s", this->sf2->get(id, champ_keyRange).rValue.byLo,
                     this->sf2->get(id, champ_velRange).rValue.byLo,
                     this->sf2->getQstr(id3, champ_name).toStdString().c_str());
-            qStr = this->sf2->getQstr(id3, champ_name).left(10);
+            QString qStr = this->sf2->getQstr(id3, champ_name).left(10);
             qStr.append("\n");
             qStr.append(this->sf2->getQstr(id3, champ_name).mid(10).left(10));
-            for (int j = 1; j < nbSmplInst+1; j++)
+            for (int j = 1; j < nbSmplInst + 1; j++)
             {
                 // note et vélocité basses de la colonne et prise en compte du nom de l'élément lié
                 id3.indexElt = this->sf2->get(this->table->getID(j), cElementLie).wValue;
@@ -177,10 +222,10 @@ void PageTable::afficheTable()
             }
 
             nbSmplInst++;
-            offsetStart = 0;
-            offsetEnd = 0;
-            offsetStartLoop = 0;
-            offsetEndLoop = 0;
+            int offsetStart = 0;
+            int offsetEnd = 0;
+            int offsetStartLoop = 0;
+            int offsetEndLoop = 0;
             this->table->addColumn(numCol, qStr);
             for (int j = 0; j < this->sf2->count(id2); j++)
             {
@@ -244,32 +289,39 @@ void PageTable::afficheTable()
         }
     }
 
-    ////// MISE EN FORME DE LA TABLE (couleurs, alignement) //////
+}
+
+void PageTable::formatTable(bool multiGlobal)
+{
     QBrush brush1(QPixmap(":/style/fond.png"));
     QBrush brush2(QPixmap(":/style/fondJaune.png"));
     if (this->contenant == elementInst)
     {
-        for (int j = 0; j < this->table->rowCount(); j++)
+        if (!multiGlobal)
         {
-            if (j < 9)
-                this->table->item(j, 0)->setBackground(brush1);
-            else if (j < 13)
-                this->table->item(j, 0)->setBackground(brush2);
-            else if (j < 15)
-                this->table->item(j, 0)->setBackground(brush1);
-            else if (j < 23)
-                this->table->item(j, 0)->setBackground(brush2);
-            else if (j < 33)
-                this->table->item(j, 0)->setBackground(brush1);
-            else if (j < 41)
-                this->table->item(j, 0)->setBackground(brush2);
-            else if (j < 46)
-                this->table->item(j, 0)->setBackground(brush1);
-            else
-                this->table->item(j, 0)->setBackground(brush2);
-            this->table->item(j, 0)->setTextAlignment(0x0082);
+            for (int j = 0; j < this->table->rowCount(); j++)
+            {
+                if (j < 9)
+                    this->table->item(j, 0)->setBackground(brush1);
+                else if (j < 13)
+                    this->table->item(j, 0)->setBackground(brush2);
+                else if (j < 15)
+                    this->table->item(j, 0)->setBackground(brush1);
+                else if (j < 23)
+                    this->table->item(j, 0)->setBackground(brush2);
+                else if (j < 33)
+                    this->table->item(j, 0)->setBackground(brush1);
+                else if (j < 41)
+                    this->table->item(j, 0)->setBackground(brush2);
+                else if (j < 46)
+                    this->table->item(j, 0)->setBackground(brush1);
+                else
+                    this->table->item(j, 0)->setBackground(brush2);
+                this->table->item(j, 0)->setTextAlignment(Qt::AlignVCenter | Qt::AlignRight);
+            }
         }
-        for (int i = 1; i < this->table->columnCount(); i++)
+
+        for (int i = multiGlobal ? 0 : 1; i < this->table->columnCount(); i++)
         {
             for (int j = 0; j < this->table->rowCount(); j++)
             {
@@ -285,7 +337,7 @@ void PageTable::afficheTable()
                 else if (j < 46) {}
                 else
                     this->table->item(j, i)->setBackgroundColor(QColor(255, 255, 200));
-                this->table->item(j, i)->setTextAlignment(0x0082);
+                this->table->item(j, i)->setTextAlignment(Qt::AlignVCenter | Qt::AlignRight);
             }
         }
     }
@@ -307,7 +359,7 @@ void PageTable::afficheTable()
                 this->table->item(j, 0)->setBackground(brush2);
             else
                 this->table->item(j, 0)->setBackground(brush1);
-            this->table->item(j, 0)->setTextAlignment(0x0082);
+            this->table->item(j, 0)->setTextAlignment(Qt::AlignVCenter | Qt::AlignRight);
         }
         for (int i = 1; i < this->table->columnCount(); i++)
         {
@@ -322,7 +374,7 @@ void PageTable::afficheTable()
                 else if (j < 31) {}
                 else if (j < 39)
                     this->table->item(j, i)->setBackgroundColor(QColor(255, 255, 200));
-                this->table->item(j, i)->setTextAlignment(0x0082);
+                this->table->item(j, i)->setTextAlignment(Qt::AlignVCenter | Qt::AlignRight);
             }
         }
     }
@@ -331,14 +383,6 @@ void PageTable::afficheTable()
 
     if (!Config::getInstance()->getSameWidthTable())
         this->table->resizeColumnsToContents();
-
-    ///////////////////// REMPLISSAGE DES MODS //////////////////////////
-    this->afficheMod(ori);
-
-    // Fin de la préparation
-    this->preparation = 0;
-    this->reselect();
-    this->table->verticalScrollBar()->setValue(posV);
 }
 
 void PageTable::afficheRange()
@@ -484,7 +528,7 @@ void PageTable::afficheEditMod()
     {
         EltID id = selectedModIDs.first();
         int iTmp;
-        WORD wTmp;
+        quint16 wTmp;
         bool bTmp;
         SFModulator sfMod;
 
@@ -1444,7 +1488,7 @@ void PageTable::addAvailableReceiverMod(ComboBox *combo, EltID id)
     // Parcours des mods autour de id
     EltID id2 = id;
     EltID id3 = id;
-    WORD wTmp;
+    quint16 wTmp;
     int compte;
     bool stop, found;
     int nbMod = sf2->count(id);
@@ -1499,7 +1543,7 @@ void PageTable::addAvailableSenderMod(ComboBox *combo, EltID id)
     EltID id2 = id;
     EltID id3 = id;
     EltID id4 = id;
-    WORD wTmp;
+    quint16 wTmp;
     SFModulator sfMod;
     int compte, indModSender;
     bool stop, found;
@@ -1923,11 +1967,11 @@ void PageTable::remplirComboSource(ComboBox *comboBox)
     comboBox->setLimite(89);
 }
 
-WORD PageTable::getSrcNumber(WORD wVal, bool &CC)
+quint16 PageTable::getSrcNumber(quint16 wVal, bool &CC)
 {
     if (wVal < 7) CC = false;
     else CC = true;
-    WORD wRet = 0;
+    quint16 wRet = 0;
     switch (wVal)
     {
     case 0: wRet = 0; break;
@@ -2024,9 +2068,9 @@ WORD PageTable::getSrcNumber(WORD wVal, bool &CC)
     return wRet;
 }
 
-WORD PageTable::getSrcIndex(WORD wVal, bool bVal)
+quint16 PageTable::getSrcIndex(quint16 wVal, bool bVal)
 {
-    WORD wRet = 0;
+    quint16 wRet = 0;
     if (bVal)
     {
         switch (wVal)
@@ -2292,7 +2336,7 @@ int PageTable::limit(int iVal, Champ champ, EltID id)
 void PageTable::paramGlobal()
 {
     bool error;
-    QList<EltID> ids = this->getUniqueInstOrPrst(true, error);
+    QList<EltID> ids = this->getUniqueInstOrPrst(error, true, true);
     if (ids.isEmpty() || error)
         return;
 
@@ -2308,7 +2352,7 @@ void PageTable::paramGlobal(QVector<double> dValues, int typeModif, int champ, i
     this->sf2->prepareNewActions();
 
     bool error;
-    QList<EltID> ids = this->getUniqueInstOrPrst(true, error);
+    QList<EltID> ids = this->getUniqueInstOrPrst(error, true, true);
     if (error)
         return;
 
@@ -2384,15 +2428,16 @@ void PageTable::paramGlobal(QVector<double> dValues, int typeModif, int champ, i
             }
         }
     }
+
     // Actualisation
     this->mainWindow->updateDo();
-    this->afficher();
+    this->mainWindow->updateActions();
 }
 
 void PageTable::duplication()
 {
     bool error;
-    QList<EltID> ids = this->getUniqueInstOrPrst(false, error);
+    QList<EltID> ids = this->getUniqueInstOrPrst(error, true, false);
     if (ids.isEmpty() || error)
         return;
 
@@ -2408,7 +2453,7 @@ void PageTable::duplication(QVector<int> listeVelocites, bool duplicKey, bool du
     this->sf2->prepareNewActions();
 
     bool error;
-    QList<EltID> ids = this->getUniqueInstOrPrst(false, error);
+    QList<EltID> ids = this->getUniqueInstOrPrst(error, true, false);
     if (error)
         return;
 
@@ -2446,7 +2491,7 @@ void PageTable::duplication(QVector<int> listeVelocites, bool duplicKey, bool du
 
     // Actualisation
     this->mainWindow->updateDo();
-    this->afficher();
+    this->mainWindow->updateActions();
 }
 
 void PageTable::duplication(EltID id)
@@ -2688,7 +2733,7 @@ void PageTable::duplication(EltID id, QVector<int> listeVelocite)
 void PageTable::spatialisation()
 {
     bool error;
-    QList<EltID> ids = this->getUniqueInstOrPrst(true, error);
+    QList<EltID> ids = this->getUniqueInstOrPrst(error, true, true);
     if (ids.isEmpty() || error)
         return;
 
@@ -2728,7 +2773,7 @@ void PageTable::spatialisation(QMap<int, double> mapPan)
     this->sf2->prepareNewActions();
 
     bool error;
-    QList<EltID> ids = this->getUniqueInstOrPrst(true, error);
+    QList<EltID> ids = this->getUniqueInstOrPrst(error, true, true);
     if (error)
         return;
 
@@ -2744,7 +2789,7 @@ void PageTable::spatialisation(QMap<int, double> mapPan)
 
     // Actualisation
     this->mainWindow->updateDo();
-    this->afficher();
+    this->mainWindow->updateActions();
 }
 
 void PageTable::spatialisation(QMap<int, double> mapPan, EltID id)
@@ -2910,7 +2955,7 @@ void PageTable::spatialisation(QMap<int, double> mapPan, EltID id)
     }
 }
 
-QList<EltID> PageTable::getUniqueInstOrPrst(bool errorIfKeyRangeMissing, bool &error)
+QList<EltID> PageTable::getUniqueInstOrPrst(bool &error, bool errorIfNoDivision, bool errorIfKeyRangeMissing)
 {
     QList<EltID> ids = this->tree->getAllIDs();
     QList<EltID> idsRet;
@@ -2957,7 +3002,7 @@ QList<EltID> PageTable::getUniqueInstOrPrst(bool errorIfKeyRangeMissing, bool &e
         }
     }
 
-    if (!withDivision)
+    if (errorIfNoDivision && !withDivision)
     {
         if (m_typePage == PAGE_INST)
             QMessageBox::warning(this, trUtf8("Attention"),
