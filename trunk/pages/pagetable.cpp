@@ -81,6 +81,8 @@ void PageTable::afficheTable()
         ///////////////////// REMPLISSAGE DES MODS //////////////////////////
         if (ids.count() == 1)
             this->afficheMod(ids.first());
+        else
+            afficheEditMod();
     }
 
     // Fin de la préparation
@@ -521,6 +523,7 @@ void PageTable::afficheEditMod()
         this->tableMod->clear();
     }
     this->pushNouveauMod->setEnabled(singleDivision);
+    this->_pushCopyMod->setEnabled(singleDivision);
 
     QList<EltID> selectedModIDs = this->tableMod->getSelectedIDs();
     this->pushSupprimerMod->setEnabled(singleDivision && !selectedModIDs.isEmpty());
@@ -537,14 +540,15 @@ void PageTable::afficheEditMod()
         this->checkAbs->setChecked(this->sf2->get(id, champ_sfModTransOper).wValue == 2);
         this->checkAbs->setEnabled(true);
         sfMod = this->sf2->get(id, champ_sfModSrcOper).sfModValue;
-        iTmp = sfMod.D + 2*sfMod.P + 4*sfMod.Type;
+        iTmp = sfMod.D + 2 * sfMod.P + 4 * sfMod.Type;
         this->comboSource1Courbe->setEnabled(true);
-        this->comboSource1Courbe->setCurrentIndex(iTmp/4);
-        this->comboSource1Courbe->setModelColumn(iTmp%4);
+        this->comboSource1Courbe->setCurrentIndex(iTmp / 4);
+        this->comboSource1Courbe->setModelColumn(iTmp % 4);
 
         // COMBOBOX SOURCE 1
         this->comboSource1->removeItemsAfterLim();
         addAvailableSenderMod(this->comboSource1, id);
+
         // Sélection et activation
         wTmp = sfMod.Index;
         bTmp = sfMod.CC;
@@ -558,10 +562,10 @@ void PageTable::afficheEditMod()
         else this->comboSource1->selectIndex(this->getSrcIndex(wTmp, bTmp));
         this->comboSource1->setEnabled(true);
         sfMod = this->sf2->get(id, champ_sfModAmtSrcOper).sfModValue;
-        iTmp = sfMod.D + 2*sfMod.P + 4*sfMod.Type;
+        iTmp = sfMod.D + 2 * sfMod.P + 4 * sfMod.Type;
         this->comboSource2Courbe->setEnabled(true);
-        this->comboSource2Courbe->setCurrentIndex(iTmp/4);
-        this->comboSource2Courbe->setModelColumn(iTmp%4);
+        this->comboSource2Courbe->setCurrentIndex(iTmp / 4);
+        this->comboSource2Courbe->setModelColumn(iTmp % 4);
 
         // COMBOBOX SOURCE 2
         // Sélection et activation
@@ -569,9 +573,11 @@ void PageTable::afficheEditMod()
         bTmp = sfMod.CC;
         this->comboSource2->selectIndex(this->getSrcIndex(wTmp, bTmp));
         this->comboSource2->setEnabled(true);
+
         // COMBOBOX DESTINATION
         this->comboDestination->removeItemsAfterLim();
         addAvailableReceiverMod(this->comboDestination, id);
+
         // Sélection et activation
         wTmp = this->sf2->get(id, champ_sfModDestOper).wValue;
         this->comboDestination->selectIndex(this->getDestIndex(wTmp), wTmp);
@@ -1821,14 +1827,17 @@ QList<PageTable::Modulator> PageTable::getModList(EltID id)
 
 void PageTable::pasteMod()
 {
-    if (this->tree->getSelectedItemsNumber() != 1)
-        return;
     this->sf2->prepareNewActions();
-    EltID id = this->tree->getFirstID();
 
-    pasteMod(id, _modulatorCopy);
+    QList<EltID> ids = this->tree->getAllIDs();
+    foreach (EltID id, ids)
+        pasteMod(id, _modulatorCopy);
 
-    this->afficheMod(this->tree->getFirstID());
+    if (ids.count() == 1)
+        this->afficheMod(this->tree->getFirstID());
+    else
+        this->afficheEditMod();
+
     this->mainWindow->updateDo();
 }
 
