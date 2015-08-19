@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="es_ES">
+<TS version="2.0" language="es_ES">
 <context>
     <name>ComboBox</name>
     <message>
@@ -673,9 +673,14 @@
         <translation>Cerrar</translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_about.cpp" line="48"/>
+        <location filename="gui_divers/dialog_about.cpp" line="49"/>
         <source>Site internet de Polyphone</source>
         <translation>Página web de Polyphone</translation>
+    </message>
+    <message>
+        <location filename="gui_divers/dialog_about.cpp" line="52"/>
+        <source>Faire un don</source>
+        <translation>Donar</translation>
     </message>
 </context>
 <context>
@@ -1349,97 +1354,87 @@
         <translation>Parámetros generales</translation>
     </message>
     <message>
-        <location filename="tools/dialog_paramglobal.ui" line="246"/>
+        <location filename="tools/dialog_paramglobal.ui" line="74"/>
         <source>Motif</source>
         <translation>Patrón</translation>
     </message>
     <message>
-        <location filename="tools/dialog_paramglobal.ui" line="222"/>
+        <location filename="tools/dialog_paramglobal.ui" line="67"/>
         <source>Minimum</source>
         <translation>Mínimo</translation>
     </message>
     <message>
-        <location filename="tools/dialog_paramglobal.ui" line="123"/>
+        <location filename="tools/dialog_paramglobal.ui" line="185"/>
         <source>Maximum</source>
         <translation>Máximo</translation>
     </message>
     <message>
-        <location filename="tools/dialog_paramglobal.ui" line="202"/>
+        <location filename="tools/dialog_paramglobal.ui" line="233"/>
         <source>Modification</source>
         <translation>Modificación</translation>
     </message>
     <message>
-        <location filename="tools/dialog_paramglobal.ui" line="116"/>
+        <location filename="tools/dialog_paramglobal.ui" line="192"/>
         <source>Paramètre</source>
         <translation>Parámetro</translation>
     </message>
     <message>
-        <location filename="tools/dialog_paramglobal.ui" line="162"/>
+        <location filename="tools/dialog_paramglobal.ui" line="244"/>
         <source>Manuel</source>
         <translation>Manual</translation>
     </message>
     <message>
-        <location filename="tools/dialog_paramglobal.ui" line="167"/>
+        <location filename="tools/dialog_paramglobal.ui" line="249"/>
         <source>Linéaire ascendant</source>
         <translation>Lineal ascendente</translation>
     </message>
     <message>
-        <location filename="tools/dialog_paramglobal.ui" line="172"/>
+        <location filename="tools/dialog_paramglobal.ui" line="254"/>
         <source>Linéaire descendant</source>
         <translation>Lineal descendente</translation>
     </message>
     <message>
-        <location filename="tools/dialog_paramglobal.ui" line="177"/>
+        <location filename="tools/dialog_paramglobal.ui" line="259"/>
         <source>Exponentiel ascendant</source>
         <translation>Exponencial ascendente</translation>
     </message>
     <message>
-        <location filename="tools/dialog_paramglobal.ui" line="182"/>
+        <location filename="tools/dialog_paramglobal.ui" line="264"/>
         <source>Exponentiel descendant</source>
         <translation>Exponencial descendente</translation>
     </message>
     <message>
-        <location filename="tools/dialog_paramglobal.ui" line="187"/>
+        <location filename="tools/dialog_paramglobal.ui" line="269"/>
         <source>Aléatoire</source>
         <translation>Aleatorio</translation>
     </message>
     <message>
-        <location filename="tools/dialog_paramglobal.ui" line="51"/>
+        <location filename="tools/dialog_paramglobal.ui" line="127"/>
         <source>Ajout</source>
         <translation>Añadir</translation>
     </message>
     <message>
-        <location filename="tools/dialog_paramglobal.ui" line="56"/>
+        <location filename="tools/dialog_paramglobal.ui" line="132"/>
         <source>Multiplication</source>
         <translation>Multiplicar</translation>
     </message>
     <message>
-        <location filename="tools/dialog_paramglobal.ui" line="61"/>
+        <location filename="tools/dialog_paramglobal.ui" line="137"/>
         <source>Remplacement</source>
         <translation>Reemplazar</translation>
     </message>
     <message>
-        <location filename="tools/dialog_paramglobal.ui" line="95"/>
+        <location filename="tools/dialog_paramglobal.ui" line="171"/>
         <source>Appliquer à l&apos;étendue de vélocité</source>
         <translation>Aplicar a un rango de velocidad</translation>
     </message>
     <message>
-        <location filename="tools/dialog_paramglobal.ui" line="229"/>
-        <source>Appliquer à d&apos;autres instruments...</source>
-        <translation>Aplicar a otros instrumentos...</translation>
-    </message>
-    <message>
-        <location filename="tools/dialog_paramglobal.cpp" line="82"/>
-        <source>Appliquer à d&apos;autres presets...</source>
-        <translation>Aplicar a otros presets...</translation>
-    </message>
-    <message>
-        <location filename="tools/dialog_paramglobal.cpp" line="137"/>
+        <location filename="tools/dialog_paramglobal.cpp" line="126"/>
         <source>Raideur</source>
         <translation>Curvatura</translation>
     </message>
     <message>
-        <location filename="tools/dialog_paramglobal.cpp" line="142"/>
+        <location filename="tools/dialog_paramglobal.cpp" line="131"/>
         <source>Répartition</source>
         <translation>Distribución</translation>
     </message>
@@ -1535,26 +1530,6 @@
         <location filename="gui_divers/dialog_rename.cpp" line="130"/>
         <source>Étendue</source>
         <translation>Rango</translation>
-    </message>
-</context>
-<context>
-    <name>DialogSelectItems</name>
-    <message>
-        <location filename="tools/dialog_selectitems.ui" line="17"/>
-        <source>Sélection</source>
-        <translation>Selección</translation>
-    </message>
-    <message>
-        <location filename="tools/dialog_selectitems.ui" line="50"/>
-        <source>Tout sélectionner</source>
-        <translation>Seleccionar todo</translation>
-    </message>
-    <message>
-        <location filename="tools/dialog_selectitems.ui" line="42"/>
-        <source>Sélectionner
-instrument courant</source>
-        <translation>Seleccionar
-instrumento actual</translation>
     </message>
 </context>
 <context>
@@ -2013,8 +1988,8 @@ instrumento actual</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="879"/>
-        <location filename="mainwindow.cpp" line="1071"/>
         <location filename="mainwindow.cpp" line="1078"/>
+        <location filename="mainwindow.cpp" line="1085"/>
         <source>&amp;Renommer</source>
         <translation>Re&amp;nombrar</translation>
     </message>
@@ -2375,7 +2350,7 @@ instrumento actual</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="69"/>
-        <location filename="mainwindow.cpp" line="2526"/>
+        <location filename="mainwindow.cpp" line="2522"/>
         <source>Note</source>
         <translation>Nota</translation>
     </message>
@@ -2500,9 +2475,9 @@ instrumento actual</translation>
         <location filename="mainwindow.cpp" line="630"/>
         <location filename="mainwindow.cpp" line="633"/>
         <location filename="mainwindow.cpp" line="636"/>
-        <location filename="mainwindow.cpp" line="1444"/>
-        <location filename="mainwindow.cpp" line="1948"/>
-        <location filename="mainwindow.cpp" line="2574"/>
+        <location filename="mainwindow.cpp" line="1440"/>
+        <location filename="mainwindow.cpp" line="1944"/>
+        <location filename="mainwindow.cpp" line="2570"/>
         <source>Attention</source>
         <translation>Atención</translation>
     </message>
@@ -2600,91 +2575,91 @@ Dividir el fichero en diferentes sf2 puede resolver el problema.</translation>
         <translation>Extensión desconocida.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1444"/>
+        <location filename="mainwindow.cpp" line="1440"/>
         <source>Une erreur est survenue lors de l&apos;import du fichier </source>
         <translation>Error al importar el archivo </translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1849"/>
+        <location filename="mainwindow.cpp" line="1845"/>
         <source>Fusion des soundfonts :</source>
         <translation>Combinar soundfonts:</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1923"/>
+        <location filename="mainwindow.cpp" line="1919"/>
         <source>Créer un nouvel instrument</source>
         <translation>Crear un nuevo instrumento</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1958"/>
+        <location filename="mainwindow.cpp" line="1954"/>
         <source>Créer un nouveau preset</source>
         <translation>Crear un nuevo preset</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2507"/>
+        <location filename="mainwindow.cpp" line="2503"/>
         <source>Exporter les pics de fréquence</source>
         <translation>Exportar los picos de frecuencia</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2508"/>
+        <location filename="mainwindow.cpp" line="2504"/>
         <source>Fichier .csv (*.csv)</source>
         <translation>Archivo .csv (*.csv)</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2522"/>
+        <location filename="mainwindow.cpp" line="2518"/>
         <source>;</source>
         <translatorcomment>column separator in csv file</translatorcomment>
         <translation>;</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2524"/>
+        <location filename="mainwindow.cpp" line="2520"/>
         <source>Echantillon</source>
         <translation>Muestra</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2524"/>
+        <location filename="mainwindow.cpp" line="2520"/>
         <source>Numéro de pic</source>
         <translation>Número de pico</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2525"/>
+        <location filename="mainwindow.cpp" line="2521"/>
         <source>Facteur</source>
         <translation>Factor</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2525"/>
+        <location filename="mainwindow.cpp" line="2521"/>
         <source>Fréquence</source>
         <translation>Frecuencia</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2526"/>
+        <location filename="mainwindow.cpp" line="2522"/>
         <source>Correction</source>
         <translation>Corrección</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2548"/>
-        <location filename="mainwindow.cpp" line="2549"/>
+        <location filename="mainwindow.cpp" line="2544"/>
+        <location filename="mainwindow.cpp" line="2545"/>
         <source>,</source>
         <translatorcomment>decimal separator</translatorcomment>
         <translation>,</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2574"/>
+        <location filename="mainwindow.cpp" line="2570"/>
         <source>Le fichier ne contient aucun modulateur.</source>
         <translation>El archivo no contiene moduladores.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2576"/>
-        <location filename="mainwindow.cpp" line="2578"/>
+        <location filename="mainwindow.cpp" line="2572"/>
+        <location filename="mainwindow.cpp" line="2574"/>
         <source>Information</source>
         <translation>Información</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2576"/>
+        <location filename="mainwindow.cpp" line="2572"/>
         <source>1 modulateur a été supprimé.</source>
         <translation>1 modulador ha sido eliminado.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2579"/>
+        <location filename="mainwindow.cpp" line="2575"/>
         <source>modulateurs ont été supprimés.</source>
         <translation>moduladores han sido eliminados.</translation>
     </message>
@@ -2736,140 +2711,140 @@ Dividir el fichero en diferentes sf2 puede resolver el problema.</translation>
         <translation>No se puede guardar el archivo.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1083"/>
+        <location filename="mainwindow.cpp" line="1090"/>
         <source>&amp;Renommer en masse</source>
         <translation>&amp;Renombrado masivo</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1513"/>
+        <location filename="mainwindow.cpp" line="1509"/>
         <source>L » existe déjà.&lt;br /&gt;Que faire ?</source>
         <translation>L » ya existe.&lt;br /&gt;¿Qué hacer?</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1519"/>
+        <location filename="mainwindow.cpp" line="1515"/>
         <source>R » existe déjà.&lt;br /&gt;Que faire ?</source>
         <translation>R » ya existe.&lt;br /&gt;¿Qué hacer?</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1528"/>
+        <location filename="mainwindow.cpp" line="1524"/>
         <source> » existe déjà.&lt;br /&gt;Que faire ?</source>
         <translation> » ya existe.&lt;br /&gt;¿Qué hacer?</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2292"/>
+        <location filename="mainwindow.cpp" line="2288"/>
         <source> échantillon et </source>
         <translation> muestra y </translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2294"/>
+        <location filename="mainwindow.cpp" line="2290"/>
         <source> échantillons et </source>
         <translation> muestras y </translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2310"/>
+        <location filename="mainwindow.cpp" line="2306"/>
         <source>Atténuation minimale (dB) :</source>
         <translation>Atenuación mínima (dB):</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1299"/>
-        <location filename="mainwindow.cpp" line="2309"/>
+        <location filename="mainwindow.cpp" line="1295"/>
+        <location filename="mainwindow.cpp" line="2305"/>
         <source>Question</source>
         <translation>Pregunta</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1295"/>
+        <location filename="mainwindow.cpp" line="1291"/>
         <source>Nom de l&apos;échantillon (max 20 caractères) :</source>
         <translation>Nombre de la muestra (20 caracteres en total):</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1542"/>
+        <location filename="mainwindow.cpp" line="1538"/>
         <source>&amp;Remplacer</source>
         <translation>&amp;Reemplazar</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1543"/>
+        <location filename="mainwindow.cpp" line="1539"/>
         <source>R&amp;emplacer tout</source>
         <translation>R&amp;eemplazar todo</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1544"/>
+        <location filename="mainwindow.cpp" line="1540"/>
         <source>&amp;Dupliquer</source>
         <translation>&amp;Duplicar</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1545"/>
+        <location filename="mainwindow.cpp" line="1541"/>
         <source>D&amp;upliquer tout</source>
         <translation>D&amp;uplicar todo</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1546"/>
+        <location filename="mainwindow.cpp" line="1542"/>
         <source>&amp;Ignorer</source>
         <translation>&amp;Ignorar</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1547"/>
+        <location filename="mainwindow.cpp" line="1543"/>
         <source>I&amp;gnorer tout</source>
         <translation>I&amp;gnorar todo</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1948"/>
+        <location filename="mainwindow.cpp" line="1944"/>
         <source>Aucun preset n&apos;est disponible.</source>
         <translation>No hay presets disponibles.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1462"/>
+        <location filename="mainwindow.cpp" line="1458"/>
         <source>Importer un fichier audio</source>
         <translation>Importar un archivo de audio</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1296"/>
+        <location filename="mainwindow.cpp" line="1292"/>
         <source>Nom de l&apos;instrument (max 20 caractères) :</source>
         <translation>Nombre del instrumento (max 20 caracteres):</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1297"/>
+        <location filename="mainwindow.cpp" line="1293"/>
         <source>Nom du preset (max 20 caractères) :</source>
         <translation>Nombre del preset (max 20 caracteres):</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1298"/>
+        <location filename="mainwindow.cpp" line="1294"/>
         <source>Nom du SF2 (max 255 caractères) :</source>
         <translation>Nombre del SF2 (max 255 caracteres):</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1464"/>
+        <location filename="mainwindow.cpp" line="1460"/>
         <source>Fichier .wav (*.wav)</source>
         <translation>Archivo .wav (*.wav)</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1512"/>
-        <location filename="mainwindow.cpp" line="1518"/>
-        <location filename="mainwindow.cpp" line="1527"/>
+        <location filename="mainwindow.cpp" line="1508"/>
+        <location filename="mainwindow.cpp" line="1514"/>
+        <location filename="mainwindow.cpp" line="1523"/>
         <source>L&apos;échantillon « </source>
         <translation>La muestra « </translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1706"/>
+        <location filename="mainwindow.cpp" line="1702"/>
         <source>Choisir un répertoire de destination</source>
         <translation>Elija un directorio de destino</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1923"/>
+        <location filename="mainwindow.cpp" line="1919"/>
         <source>Nom du nouvel instrument :</source>
         <translation>Nombre del nuevo instrumento:</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1958"/>
+        <location filename="mainwindow.cpp" line="1954"/>
         <source>Nom du nouveau preset :</source>
         <translation>Nombre del nuevo preset:</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2296"/>
+        <location filename="mainwindow.cpp" line="2292"/>
         <source> instrument ont été supprimés.</source>
         <translation> instrumento han sido eliminados.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2298"/>
+        <location filename="mainwindow.cpp" line="2294"/>
         <source> instruments ont été supprimés.</source>
         <translation> instrumentos han sido eliminados.</translation>
     </message>
@@ -3221,108 +3196,110 @@ Dividir el fichero en diferentes sf2 puede resolver el problema.</translation>
 <context>
     <name>PageTable</name>
     <message>
-        <location filename="pages/pagetable.cpp" line="79"/>
+        <location filename="pages/pagetable.cpp" line="113"/>
         <source>Global</source>
         <translation>Global</translation>
     </message>
     <message>
-        <location filename="pages/pagetable.cpp" line="402"/>
-        <location filename="pages/pagetable.cpp" line="424"/>
-        <location filename="pages/pagetable.cpp" line="1487"/>
-        <location filename="pages/pagetable.cpp" line="1555"/>
+        <location filename="pages/pagetable.cpp" line="448"/>
+        <location filename="pages/pagetable.cpp" line="470"/>
+        <location filename="pages/pagetable.cpp" line="1537"/>
+        <location filename="pages/pagetable.cpp" line="1605"/>
         <source>Modulateur</source>
         <translation>Modulador</translation>
     </message>
     <message>
-        <location filename="pages/pagetable.cpp" line="406"/>
+        <location filename="pages/pagetable.cpp" line="452"/>
         <source>Lien (invalide)</source>
         <translation>Enlace (no válido)</translation>
     </message>
     <message>
-        <location filename="pages/pagetable.cpp" line="452"/>
+        <location filename="pages/pagetable.cpp" line="498"/>
         <source>Copier / dupliquer des modulateurs</source>
         <translation>Copiar / duplicar moduladores</translation>
     </message>
     <message>
-        <location filename="pages/pagetable.cpp" line="455"/>
+        <location filename="pages/pagetable.cpp" line="501"/>
         <source>Dupliquer les modulateurs vers...</source>
         <translation>Duplicar moduladores hacia...</translation>
     </message>
     <message>
-        <location filename="pages/pagetable.cpp" line="456"/>
-        <location filename="pages/pagetable.cpp" line="467"/>
+        <location filename="pages/pagetable.cpp" line="502"/>
+        <location filename="pages/pagetable.cpp" line="513"/>
         <source>Copier l&apos;ensemble des modulateurs</source>
         <translation>Copiar todos los moduladores</translation>
     </message>
     <message>
-        <location filename="pages/pagetable.cpp" line="460"/>
+        <location filename="pages/pagetable.cpp" line="506"/>
         <source>Dupliquer la sélection vers...</source>
         <translation>Duplicar selección hacia...</translation>
     </message>
     <message>
-        <location filename="pages/pagetable.cpp" line="461"/>
-        <location filename="pages/pagetable.cpp" line="469"/>
+        <location filename="pages/pagetable.cpp" line="507"/>
+        <location filename="pages/pagetable.cpp" line="515"/>
         <source>Copier les modulateurs sélectionnés</source>
         <translation>Copiar moduladores seleccionados</translation>
     </message>
     <message>
-        <location filename="pages/pagetable.cpp" line="1806"/>
+        <location filename="pages/pagetable.cpp" line="1859"/>
         <source>Action impossible : </source>
         <translation>Acción imposible: </translation>
     </message>
     <message>
-        <location filename="pages/pagetable.cpp" line="1816"/>
-        <location filename="pages/pagetable.cpp" line="1825"/>
-        <location filename="pages/pagetable.cpp" line="2322"/>
-        <location filename="pages/pagetable.cpp" line="2324"/>
-        <location filename="pages/pagetable.cpp" line="2331"/>
-        <location filename="pages/pagetable.cpp" line="2333"/>
-        <location filename="pages/pagetable.cpp" line="2432"/>
-        <location filename="pages/pagetable.cpp" line="2441"/>
-        <location filename="pages/pagetable.cpp" line="2734"/>
-        <location filename="pages/pagetable.cpp" line="2743"/>
-        <location filename="pages/pagetable.cpp" line="2974"/>
-        <location filename="pages/pagetable.cpp" line="2976"/>
-        <location filename="pages/pagetable.cpp" line="2982"/>
-        <location filename="pages/pagetable.cpp" line="2984"/>
+        <location filename="pages/pagetable.cpp" line="1869"/>
+        <location filename="pages/pagetable.cpp" line="1878"/>
+        <location filename="pages/pagetable.cpp" line="3017"/>
+        <location filename="pages/pagetable.cpp" line="3020"/>
+        <location filename="pages/pagetable.cpp" line="3026"/>
+        <location filename="pages/pagetable.cpp" line="3065"/>
+        <location filename="pages/pagetable.cpp" line="3067"/>
+        <location filename="pages/pagetable.cpp" line="3073"/>
+        <location filename="pages/pagetable.cpp" line="3075"/>
         <source>Attention</source>
         <translation>Atención</translation>
     </message>
     <message>
-        <location filename="pages/pagetable.cpp" line="1817"/>
+        <location filename="pages/pagetable.cpp" line="1870"/>
         <source>les offsets ne peuvent être modulés dans un preset.</source>
         <translation>los offsets no se pueden modular en un preset.</translation>
     </message>
     <message>
-        <location filename="pages/pagetable.cpp" line="1826"/>
+        <location filename="pages/pagetable.cpp" line="1879"/>
         <source>&quot; ne peut être modulé dans un preset.</source>
         <translation>&quot; no se puede modular en un preset.</translation>
     </message>
     <message>
-        <location filename="pages/pagetable.cpp" line="2322"/>
-        <location filename="pages/pagetable.cpp" line="2432"/>
-        <location filename="pages/pagetable.cpp" line="2734"/>
-        <location filename="pages/pagetable.cpp" line="2974"/>
+        <location filename="pages/pagetable.cpp" line="3018"/>
+        <source>Un instrument ne contenant aucun sample n&apos;est pas compatible avec cet outil.</source>
+        <translation type="unfinished">Un instrumento que no contiene muestra no es compatible con esta acción.</translation>
+    </message>
+    <message>
+        <location filename="pages/pagetable.cpp" line="3021"/>
+        <source>Un preset ne contenant aucun instrument n&apos;est pas compatible avec cet outil.</source>
+        <translation type="unfinished">Un preset que no contiene ningún instrumento no es compatible con esta acción.</translation>
+    </message>
+    <message>
+        <location filename="pages/pagetable.cpp" line="3026"/>
+        <source>L&apos;étendue de notes de toutes les divisions doit être spécifiée.</source>
+        <translation type="unfinished">Las extensiones de notas de todas las divisiones se deben especificar.</translation>
+    </message>
+    <message>
+        <location filename="pages/pagetable.cpp" line="3065"/>
         <source>L&apos;instrument doit contenir des sons.</source>
         <translation>El instrumento debe contener muestras.</translation>
     </message>
     <message>
-        <location filename="pages/pagetable.cpp" line="2324"/>
-        <location filename="pages/pagetable.cpp" line="2441"/>
-        <location filename="pages/pagetable.cpp" line="2743"/>
-        <location filename="pages/pagetable.cpp" line="2976"/>
+        <location filename="pages/pagetable.cpp" line="3067"/>
         <source>Le preset doit contenir des instruments.</source>
         <translation>El preset debe contener instrumentos.</translation>
     </message>
     <message>
-        <location filename="pages/pagetable.cpp" line="2331"/>
-        <location filename="pages/pagetable.cpp" line="2982"/>
+        <location filename="pages/pagetable.cpp" line="3073"/>
         <source>Aucune étendue de notes spécifiée pour l&apos;instrument.</source>
         <translation>No se ha especificado una extensión de notas para el instrumento.</translation>
     </message>
     <message>
-        <location filename="pages/pagetable.cpp" line="2333"/>
-        <location filename="pages/pagetable.cpp" line="2984"/>
+        <location filename="pages/pagetable.cpp" line="3075"/>
         <source>Aucune étendue de notes spécifiée pour le preset.</source>
         <translation>No se ha especificado una extensión de notas para el preset.</translation>
     </message>
@@ -3623,52 +3600,44 @@ Dividir el fichero en diferentes sf2 puede resolver el problema.</translation>
         <translation>Valor abs.</translation>
     </message>
     <message>
-        <location filename="pages/page_inst.cpp" line="144"/>
+        <location filename="pages/page_inst.cpp" line="147"/>
         <source>&lt;b&gt;Instrument lié à aucun preset.&lt;/b&gt;</source>
         <oldsource>&lt;b&gt;Instrument liÃ© au preset : &lt;/b&gt;</oldsource>
         <translation>&lt;b&gt;Instrumento no ligado a ningún preset.&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="pages/page_inst.cpp" line="146"/>
+        <location filename="pages/page_inst.cpp" line="149"/>
         <source>&lt;b&gt;Instrument lié au preset : &lt;/b&gt;</source>
         <oldsource>&lt;b&gt;Instrument liÃ© aux presets : &lt;/b&gt;</oldsource>
         <translation>&lt;b&gt;Instrumento ligado al preset: &lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="pages/page_inst.cpp" line="148"/>
+        <location filename="pages/page_inst.cpp" line="151"/>
         <source>&lt;b&gt;Instrument lié aux presets : &lt;/b&gt;</source>
         <translation>&lt;b&gt;Instrumento ligado a los presets: &lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="pages/page_inst.cpp" line="159"/>
-        <location filename="pages/page_inst.cpp" line="254"/>
-        <location filename="pages/page_inst.cpp" line="343"/>
-        <location filename="pages/page_inst.cpp" line="603"/>
-        <location filename="pages/page_inst.cpp" line="689"/>
+        <location filename="pages/page_inst.cpp" line="360"/>
         <source>Attention</source>
         <translation>Atención</translation>
     </message>
     <message>
-        <location filename="pages/page_inst.cpp" line="159"/>
-        <location filename="pages/page_inst.cpp" line="254"/>
-        <location filename="pages/page_inst.cpp" line="343"/>
-        <location filename="pages/page_inst.cpp" line="603"/>
-        <location filename="pages/page_inst.cpp" line="689"/>
+        <location filename="pages/page_inst.cpp" line="360"/>
         <source>L&apos;instrument doit contenir des sons.</source>
         <translation>El instrumento debe contener muestras.</translation>
     </message>
     <message>
-        <location filename="pages/page_inst.cpp" line="367"/>
+        <location filename="pages/page_inst.cpp" line="385"/>
         <source>Création </source>
         <translation>Creación </translation>
     </message>
     <message>
-        <location filename="pages/page_inst.cpp" line="368"/>
+        <location filename="pages/page_inst.cpp" line="386"/>
         <source>Annuler</source>
         <translation>Deshacer</translation>
     </message>
     <message>
-        <location filename="pages/page_inst.cpp" line="385"/>
+        <location filename="pages/page_inst.cpp" line="403"/>
         <source>sans nom</source>
         <translation>sin nombre</translation>
     </message>
@@ -4587,17 +4556,17 @@ Dividir el fichero en diferentes sf2 puede resolver el problema.</translation>
         <translation>Kits de percusión</translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_about.cpp" line="103"/>
+        <location filename="gui_divers/dialog_about.cpp" line="108"/>
         <source>Créé par </source>
         <translation>Creado por </translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_about.cpp" line="104"/>
+        <location filename="gui_divers/dialog_about.cpp" line="109"/>
         <source>Contributeurs </source>
         <translation>Colaboradores </translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_about.cpp" line="105"/>
+        <location filename="gui_divers/dialog_about.cpp" line="110"/>
         <source>Traduit par </source>
         <translation>Traducido por </translation>
     </message>

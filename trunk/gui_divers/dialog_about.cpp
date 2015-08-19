@@ -42,10 +42,15 @@ DialogAbout::DialogAbout(QWidget *parent) :
         url += "index.php?lang=fr&amp;page=home";
     if (QDate::currentDate().year() > 2013)
         annee += "-" + QString::number(QDate::currentDate().year());
+    QString urlDonation = "https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=ESBLSGPJ7P938&lc=US&item_name=Polyphone&currency_code=EUR&amount=5";
     ui->labelDescription->setText(QString::fromUtf8("<html><head/><body><p align='center'>Copyright © ") + annee +
                                   " Davy Triponney<br/><br/><a href='" + url +
                                   "'><span style=' text-decoration: underline; color:#0000ff;'>" +
-                                  trUtf8("Site internet de Polyphone") + "</span></a></p></body></html>");
+                                  trUtf8("Site internet de Polyphone") + "</span></a>" +
+                                  "<br/><br/><a href='" + urlDonation +
+                                  "'><span style=' text-decoration: underline; color:#0000ff;'>" +
+                                  trUtf8("Faire un don") + "</span></a>" +
+                                  "</p></body></html>");
 
     // Crédit
     _credit.addCreator("Davy Triponney", "info@polyphone.fr");
