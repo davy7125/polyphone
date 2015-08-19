@@ -1,4 +1,13 @@
-polyphone (1.6) unstable; urgency=low
+polyphone (1.7) unstable; urgency=low
+
+ * pasting modulators is allowed for several divisions
+ * tools are allowed for several instruments or presets
+ * selecting several instruments or presets shows the editing table for all global divisions
+
+ -- Davy Triponney <davy.triponney@gmail.com>  Wed, 27 Sep 2015 20:51:55 +0100
+
+
+polyphone (1.6) UNRELEASED; urgency=low
 
  * Full screen mode
  * Visibility of all soundfonts or just a specific soundfont in the tree
