@@ -11,6 +11,14 @@
 # (this is forced to true for Windows or Mac OS X)
 #DEFINES += USE_LOCAL_LIBRARIES
 
+# List to complete if other translations are wished
+# Format: polyphone_XX.ts where XX is the language code
+TRANSLATIONS = polyphone_en.ts \
+    polyphone_es.ts \
+    polyphone_it.ts \
+    polyphone_sr.ts \
+    polyphone_de.ts
+
 
 QT       += core gui printsupport svg
 TARGET = polyphone
@@ -175,7 +183,8 @@ SOURCES	+= main.cpp \
     pages/rectangleitem.cpp \
     pages/graphicsviewrange.cpp \
     tools/dialog_transposition.cpp \
-    sfark/sfarkextractor.cpp
+    sfark/sfarkextractor.cpp \
+    gui_divers/translationsystem.cpp
 
 HEADERS  += mainwindow.h \
     sf2_core/sf2_types.h \
@@ -243,7 +252,8 @@ HEADERS  += mainwindow.h \
     pages/graphicsviewrange.h \
     tools/dialog_transposition.h \
     sfark/sfarkextractor1.h \
-    sfark/sfarkextractor.h
+    sfark/sfarkextractor.h \
+    gui_divers/translationsystem.h
 
 FORMS    += mainwindow.ui \
     gui_divers/config.ui \
@@ -269,11 +279,6 @@ FORMS    += mainwindow.ui \
 
 RESOURCES += ressources.qrc \
     clavier/pianokeybd.qrc
-
-TRANSLATIONS = polyphone_en.ts \
-    polyphone_es.ts \
-    polyphone_it.ts \
-    polyphone_sr.ts
 
 
 # SfArk extraction (what a mess!)

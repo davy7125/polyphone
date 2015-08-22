@@ -209,28 +209,8 @@
              </font>
             </property>
             <property name="currentIndex">
-             <number>0</number>
+             <number>-1</number>
             </property>
-            <item>
-             <property name="text">
-              <string notr="true">English</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string notr="true">Español</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string notr="true">Français</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string notr="true">Italiano</string>
-             </property>
-            </item>
            </widget>
           </item>
          </layout>

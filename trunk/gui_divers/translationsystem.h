@@ -2,6 +2,7 @@
 **                                                                        **
 **  Polyphone, a soundfont editor                                         **
 **  Copyright (C) 2013-2015 Davy Triponney                                **
+**                2014      Andrea Celani                                 **
 **                                                                        **
 **  This program is free software: you can redistribute it and/or modify  **
 **  it under the terms of the GNU General Public License as published by  **
@@ -22,57 +23,35 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#include <QApplication>
-#include <QSettings>
+#ifndef TRANSLATIONSYSTEM_H
+#define TRANSLATIONSYSTEM_H
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 0, 0)
-#include <QDesktopWidget>
-#endif
-#include "mainwindow.h"
-#include "translationsystem.h"
+#include <QString>
+#include <QMap>
+class QApplication;
+class QTranslator;
 
-#ifdef Q_OS_MAC
-#include "macapplication.h"
-#endif
-
-int main(int argc, char *argv[])
+class TranslationSystem
 {
-#ifdef Q_OS_MACX
-    QStringList listPathMac;
-    MacApplication a(argc, argv, &listPathMac);
-#else
-    QApplication a(argc, argv);
-#endif
+public:
+    /// Translate the application according to the default locale or the overwritten local in QSettings
+    static void translate(QApplication * a);
 
-    // Nom de l'application
-    a.setApplicationName("Polyphone");
-    a.setOrganizationName("polyphone");
-    TranslationSystem::translate(&a);
+    /// Get all languages, key is two letters (fr, en, ...), value is the language native name
+    static QMap<QString, QString> getLanguages();
 
-    // Affichage fenêtre
-    MainWindow w;
-    w.show();
+private:
+    // Singleton
+    TranslationSystem();
+    ~TranslationSystem();
+    static TranslationSystem * getInstance();
+    static TranslationSystem * _instance;
 
-    // Ouverture des fichiers passés en argument
-    QStringList listeArg = QCoreApplication::arguments();
-    int numSf2 = -1;
-    for (int i = 1; i < listeArg.size(); i++)
-    {
-        QString extension = QFileInfo(listeArg.at(i)).suffix().toLower();
-        if (extension == "sf2" || extension == "sfark" || extension == "sfz")
-            w.dragAndDrop(listeArg.at(i), EltID(elementUnknown, -1, -1, -1, -1), &numSf2);
-    }
+    void addTranslation(QString languageName, QString locale);
+    static const QString DEFAULT_LANGUAGE;
+    static const QString RESOURCE_PATH;
+    QTranslator * _translator;
+    QMap<QString, QString> _languages;
+};
 
-#ifdef Q_OS_MACX
-    for (int i = 0; i < listPathMac.size(); i++)
-    {
-        QString extension = QFileInfo(listPathMac.at(i)).suffix().toLower();
-        if (extension == "sf2" || extension == "sfark" || extension == "sfz")
-            w.dragAndDrop(listPathMac.at(i), EltID(elementUnknown, -1, -1, -1, -1), &numSf2);
-    }
-    a.stopAppending();
-    QObject::connect(&a, SIGNAL(openFile(QString)), &w, SLOT(dragAndDrop(QString)));
-#endif
-
-    return a.exec();
-}
+#endif // TRANSLATIONSYSTEM_H
