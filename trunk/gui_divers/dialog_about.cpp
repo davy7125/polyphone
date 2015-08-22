@@ -54,15 +54,17 @@ DialogAbout::DialogAbout(QWidget *parent) :
 
     // Crédit
     _credit.addCreator("Davy Triponney", "info@polyphone.fr");
+    _credit.addContributor("Andrea Celani", "acelani74@gmail.com");
     _credit.addContributor("Kinwie", "kinwie@yahoo.com");
     _credit.addContributor("Michael Schyllberg", "michael.schyllberg@bredband.net");
     _credit.addContributor("Paul Stratman", "pcstratman@gmail.com");
     _credit.addContributor("Steve Clarke", "stevertyu@yahoo.com");
-    _credit.addContributor("Andrea Celani", "acelani74@gmail.com");
-    _credit.addTranslator("Davy Triponney", "info@polyphone.fr");
-    _credit.addTranslator("F.J. Martínez Murcia", "fjesusmartinez@ugr.es");
-    _credit.addTranslator("Steve Clarke", "stevertyu@yahoo.com");
     _credit.addTranslator("Andrea Celani", "acelani74@gmail.com");
+    _credit.addTranslator("Davy Triponney", "info@polyphone.fr");
+    _credit.addTranslator("Erwan Berté", "erwanberte@laposte.net");
+    _credit.addTranslator("F.J. Martínez Murcia", "fjesusmartinez@ugr.es");
+    _credit.addTranslator("Jay Alexander Fleming", "tito.nehru.naser@gmail.com");
+    _credit.addTranslator("Steve Clarke", "stevertyu@yahoo.com");
     ui->textBrowser->setHtml(_credit.getText());
 }
 

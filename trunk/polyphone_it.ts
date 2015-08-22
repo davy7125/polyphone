@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="it_IT">
+<TS version="2.1" language="it_IT">
 <context>
     <name>ComboBox</name>
     <message>
@@ -17,7 +17,7 @@
         <translation>Preferenze</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="329"/>
+        <location filename="gui_divers/config.ui" line="309"/>
         <source>Sortie audio</source>
         <translation>Uscita audio</translation>
     </message>
@@ -27,40 +27,40 @@
         <translation>Generale</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="381"/>
+        <location filename="gui_divers/config.ui" line="361"/>
         <source>Entrée midi</source>
         <translation>Ingresso midi</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="1235"/>
+        <location filename="gui_divers/config.ui" line="1215"/>
         <source>ajuster à la boucle</source>
         <translation>aggiusta il loop</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="1222"/>
+        <location filename="gui_divers/config.ui" line="1202"/>
         <source>enlever le blanc au départ</source>
         <translation>rimuovi il silenzio all&apos;inizio</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="1261"/>
+        <location filename="gui_divers/config.ui" line="1241"/>
         <source>répercuter les modifications</source>
         <oldsource>répercuter les modifications si stéréo</oldsource>
         <translation>cambia il collegamento ai campioni</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="1274"/>
+        <location filename="gui_divers/config.ui" line="1254"/>
         <source>Édition stéréo</source>
         <oldsource>Édition des samples</oldsource>
         <translation>Modifica Stereo</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="358"/>
+        <location filename="gui_divers/config.ui" line="338"/>
         <source>Taille du tampon</source>
         <oldsource>Taille tampon</oldsource>
         <translation>Dimensione memoria</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="248"/>
+        <location filename="gui_divers/config.ui" line="228"/>
         <source>Entrées / sorties</source>
         <translation>Ingresso / Uscita</translation>
     </message>
@@ -94,135 +94,135 @@
         <translation>Nomi delle note</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="405"/>
+        <location filename="gui_divers/config.ui" line="385"/>
         <source>Synthétiseur</source>
         <translation>Sintetizzatore</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="437"/>
+        <location filename="gui_divers/config.ui" line="417"/>
         <source>Réverbération</source>
         <oldsource>Reverbération</oldsource>
         <translation>Reverbero</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="473"/>
-        <location filename="gui_divers/config.ui" line="631"/>
+        <location filename="gui_divers/config.ui" line="453"/>
+        <location filename="gui_divers/config.ui" line="611"/>
         <source>Niveau</source>
         <translation>Livello</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="541"/>
+        <location filename="gui_divers/config.ui" line="521"/>
         <source>Profondeur</source>
         <translation>Profondità</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="557"/>
+        <location filename="gui_divers/config.ui" line="537"/>
         <source>Densité</source>
         <translation>Densità</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="573"/>
+        <location filename="gui_divers/config.ui" line="553"/>
         <source>Atténuation</source>
         <translation>Attenuazione</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="598"/>
+        <location filename="gui_divers/config.ui" line="578"/>
         <source>Chorus</source>
         <translation>Chorus</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="673"/>
+        <location filename="gui_divers/config.ui" line="653"/>
         <source>Fréquence</source>
         <translation>Frequenza</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="689"/>
+        <location filename="gui_divers/config.ui" line="669"/>
         <source>Amplitude</source>
         <translation>Profondità</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="1101"/>
+        <location filename="gui_divers/config.ui" line="1081"/>
         <source>Arrière-plan</source>
         <translation>Sfondo</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="1176"/>
+        <location filename="gui_divers/config.ui" line="1156"/>
         <source>Onde</source>
         <translation>Forma d&apos;Onda</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="1057"/>
+        <location filename="gui_divers/config.ui" line="1037"/>
         <source>Grille</source>
         <translation>Griglia</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="1013"/>
+        <location filename="gui_divers/config.ui" line="993"/>
         <source>Début de boucle</source>
         <translation>Inizio del loop</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="861"/>
+        <location filename="gui_divers/config.ui" line="841"/>
         <source>Fin de boucle</source>
         <translation>Fine del loop</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="969"/>
+        <location filename="gui_divers/config.ui" line="949"/>
         <source>Barre de lecture</source>
         <translation>Cursore del play</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="880"/>
-        <location filename="gui_divers/config.ui" line="1568"/>
+        <location filename="gui_divers/config.ui" line="860"/>
+        <location filename="gui_divers/config.ui" line="1548"/>
         <source>Réinitialiser</source>
         <translation>Reimposta</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="788"/>
+        <location filename="gui_divers/config.ui" line="768"/>
         <source>Échantillons</source>
         <translation>Campioni</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="815"/>
+        <location filename="gui_divers/config.ui" line="795"/>
         <source>Couleurs du graphique</source>
         <translation>Colori del grafico</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="1192"/>
+        <location filename="gui_divers/config.ui" line="1172"/>
         <source>Options</source>
         <translation>Opzioni</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="1303"/>
+        <location filename="gui_divers/config.ui" line="1283"/>
         <source>Barre d&apos;outils</source>
         <translation>Toolbar</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="1341"/>
+        <location filename="gui_divers/config.ui" line="1321"/>
         <source>Actions disponibles</source>
         <translation>Azioni Disponibili</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="1587"/>
+        <location filename="gui_divers/config.ui" line="1567"/>
         <source>Clavier</source>
         <translation>Tastiera</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="734"/>
+        <location filename="gui_divers/config.ui" line="714"/>
         <source>Gain (dB)</source>
         <translation>Guadagno (dB)</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="1248"/>
+        <location filename="gui_divers/config.ui" line="1228"/>
         <source>Import fichiers wav</source>
         <translation>Importazione file wav</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="1739"/>
+        <location filename="gui_divers/config.ui" line="1719"/>
         <source>Premier Do</source>
         <translation>Primo Do</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="1621"/>
+        <location filename="gui_divers/config.ui" line="1601"/>
         <source>Octave 1</source>
         <translation>Ottava 1</translation>
     </message>
@@ -262,137 +262,137 @@
         <translation>Linguaggio</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="1626"/>
+        <location filename="gui_divers/config.ui" line="1606"/>
         <source>Octave 2</source>
         <translation>Ottava 2</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="1631"/>
+        <location filename="gui_divers/config.ui" line="1611"/>
         <source>Octave 3</source>
         <translation>Ottava 3</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="1636"/>
+        <location filename="gui_divers/config.ui" line="1616"/>
         <source>Octave 4</source>
         <translation>Ottava 4</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="1641"/>
-        <location filename="gui_divers/config.ui" line="1701"/>
+        <location filename="gui_divers/config.ui" line="1621"/>
+        <location filename="gui_divers/config.ui" line="1681"/>
         <source>Do</source>
         <translation>Do</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="1646"/>
+        <location filename="gui_divers/config.ui" line="1626"/>
         <source>Do#</source>
         <translation>Do#</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="1651"/>
+        <location filename="gui_divers/config.ui" line="1631"/>
         <source>Ré</source>
         <translation>Re</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="1656"/>
+        <location filename="gui_divers/config.ui" line="1636"/>
         <source>Ré#</source>
         <translation>Re#</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="1661"/>
+        <location filename="gui_divers/config.ui" line="1641"/>
         <source>Mi</source>
         <translation>Mi</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="1666"/>
+        <location filename="gui_divers/config.ui" line="1646"/>
         <source>Fa</source>
         <translation>Fa</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="1671"/>
+        <location filename="gui_divers/config.ui" line="1651"/>
         <source>Fa#</source>
         <translation>Fa#</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="1676"/>
+        <location filename="gui_divers/config.ui" line="1656"/>
         <source>Sol</source>
         <translation>Sol</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="1681"/>
+        <location filename="gui_divers/config.ui" line="1661"/>
         <source>Sol#</source>
         <translation>Sol#</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="1686"/>
+        <location filename="gui_divers/config.ui" line="1666"/>
         <source>La</source>
         <translation>La</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="1691"/>
+        <location filename="gui_divers/config.ui" line="1671"/>
         <source>La#</source>
         <translation>La#</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="1696"/>
+        <location filename="gui_divers/config.ui" line="1676"/>
         <source>Si</source>
         <translation>Si</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="1722"/>
+        <location filename="gui_divers/config.ui" line="1702"/>
         <source>Vélocité par défaut</source>
         <translation>Dinamica di base</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.ui" line="1812"/>
+        <location filename="gui_divers/config.ui" line="1792"/>
         <source>Fermer</source>
         <translation>Chiudi</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.cpp" line="209"/>
-        <location filename="gui_divers/config.cpp" line="1067"/>
+        <location filename="gui_divers/config.cpp" line="210"/>
+        <location filename="gui_divers/config.cpp" line="1071"/>
         <source>Information</source>
         <translation>Informazione</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.cpp" line="210"/>
-        <location filename="gui_divers/config.cpp" line="1068"/>
+        <location filename="gui_divers/config.cpp" line="211"/>
+        <location filename="gui_divers/config.cpp" line="1072"/>
         <source>La modification sera prise en compte lors du prochain démarrage du logiciel.</source>
         <oldsource>La modification sera prise en compte lors du prochain dÃ©marrage du logiciel.</oldsource>
         <translation>Le modifiche saranno applicate durante il prossimo riavvio del software.</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.cpp" line="582"/>
+        <location filename="gui_divers/config.cpp" line="583"/>
         <source>Couleur du fond</source>
         <translation>Colore dello sfondo</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.cpp" line="592"/>
+        <location filename="gui_divers/config.cpp" line="593"/>
         <source>Couleur de l&apos;onde</source>
         <translation>Colore della forma d&apos;onda</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.cpp" line="602"/>
+        <location filename="gui_divers/config.cpp" line="603"/>
         <source>Couleur de la grille</source>
         <translation>Colore della griglia</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.cpp" line="612"/>
+        <location filename="gui_divers/config.cpp" line="613"/>
         <source>Couleur du début de la boucle</source>
         <translation>Colore dell&apos;inizio del loop</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.cpp" line="622"/>
+        <location filename="gui_divers/config.cpp" line="623"/>
         <source>Couleur de la fin de la boucle</source>
         <translation>Colore della fine del loop</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.cpp" line="632"/>
+        <location filename="gui_divers/config.cpp" line="633"/>
         <source>Couleur du curseur de lecture</source>
         <translation>Colore del cursore di play</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.cpp" line="670"/>
-        <location filename="gui_divers/config.cpp" line="686"/>
+        <location filename="gui_divers/config.cpp" line="671"/>
+        <location filename="gui_divers/config.cpp" line="687"/>
         <source>---- séparateur ----</source>
         <translation>---- separatore ----</translation>
     </message>
@@ -4621,18 +4621,18 @@ Dividere il file in più SF2 può risolvere il problema.</translation>
         <translation>Kit di percussioni</translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_about.cpp" line="108"/>
+        <location filename="gui_divers/dialog_about.cpp" line="110"/>
         <source>Créé par </source>
         <translatorcomment>mind the final space</translatorcomment>
         <translation>Creato da </translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_about.cpp" line="109"/>
+        <location filename="gui_divers/dialog_about.cpp" line="111"/>
         <source>Contributeurs </source>
         <translation>Contributi </translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_about.cpp" line="110"/>
+        <location filename="gui_divers/dialog_about.cpp" line="112"/>
         <source>Traduit par </source>
         <translation>Tradotto da </translation>
     </message>

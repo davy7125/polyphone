@@ -287,9 +287,11 @@
         <file alias="outil8 en.png">ressources/doc/outil8 en.png</file>
     </qresource>
     <qresource prefix="/traductions">
-        <file alias="polyphone_en.qm">ressources/traductions/polyphone_en.qm</file>
-        <file alias="polyphone_es.qm">ressources/traductions/polyphone_es.qm</file>
-        <file alias="polyphone_it.qm">ressources/traductions/polyphone_it.qm</file>
+        <file>ressources/traductions/polyphone_en.qm</file>
+        <file>ressources/traductions/polyphone_es.qm</file>
+        <file>ressources/traductions/polyphone_it.qm</file>
+        <file>ressources/traductions/polyphone_sr.qm</file>
+        <file>ressources/traductions/polyphone_de.qm</file>
     </qresource>
     <qresource prefix="/logo">
         <file alias="noel">ressources/logo_noel.png</file>
