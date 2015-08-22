@@ -29,6 +29,7 @@
 #include "ui_config.h"
 #include "mainwindow.h"
 #include "portaudio.h"
+#include "translationsystem.h"
 
 Config * Config::_instance = NULL;
 
@@ -1022,48 +1023,51 @@ void Config::on_spinDefaultVelocity_editingFinished()
     }
 }
 
+bool caseInsensitiveLessThan(const QString &s1, const QString &s2) { return s1.toLower() < s2.toLower(); }
 void Config::initComboLanguage()
 {
+    // Load the different languages
+    ui->comboLangue->blockSignals(true);
+    QMap<QString, QString> languages = TranslationSystem::getLanguages();
+    QStringList languageNames = languages.values();
+    qSort(languageNames.begin(), languageNames.end(), caseInsensitiveLessThan);
+
+    foreach (QString languageName, languageNames)
+        ui->comboLangue->addItem(languageName, languages.key(languageName));
+
+    // Selection of the current language
     QString locale = QLocale::system().name().section('_', 0, 0);
     locale = settings.value("language", locale).toString();
-    ui->comboLangue->blockSignals(true);
-    if (locale == "it")
-        ui->comboLangue->setCurrentIndex(3);
-    else if (locale == "fr")
-        ui->comboLangue->setCurrentIndex(2);
-    else if (locale == "es")
-        ui->comboLangue->setCurrentIndex(1);
-    else
-        ui->comboLangue->setCurrentIndex(0);
+    bool found = false;
+    for (int i = 0; i < ui->comboLangue->count(); i++)
+    {
+        if (ui->comboLangue->itemData(i).toString() == locale)
+        {
+            found = true;
+            ui->comboLangue->setCurrentIndex(i);
+            break;
+        }
+    }
+
+    // If not found, english is the default
+    if (!found)
+    {
+        for (int i = 0; i < ui->comboLangue->count(); i++)
+        {
+            if (ui->comboLangue->itemData(i).toString() == "en")
+            {
+                ui->comboLangue->setCurrentIndex(i);
+                break;
+            }
+        }
+    }
+
     ui->comboLangue->blockSignals(false);
 }
 
 void Config::on_comboLangue_currentIndexChanged(int index)
 {
-    switch (index)
-    {
-    case 0:
-        // Anglais
-        settings.setValue("language", "en");
-        break;
-    case 1:
-        // Espagnol
-        settings.setValue("language", "es");
-        break;
-    case 2:
-        // Français
-        settings.setValue("language", "fr");
-        break;
-    case 3:
-        // Italy
-        settings.setValue("language", "it");
-        break;
-    default:
-        // Anglais
-        settings.setValue("language", "en");
-        break;
-    }
-
+    settings.setValue("language", ui->comboLangue->itemData(index).toString());
     QMessageBox::information(QApplication::activeWindow(), trUtf8("Information"),
                              trUtf8("La modification sera prise en compte lors du prochain démarrage du logiciel."));
 }

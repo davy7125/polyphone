@@ -114,7 +114,7 @@ void CircularBuffer::writeData(const float *dataL, const float *dataR, float *da
 // Read data (audio thread)
 void CircularBuffer::addData(float *dataL, float *dataR, float *dataRevL, float *dataRevR, int maxlen)
 {
-    int writeLen = qMin(maxlen, _currentLengthAvailable.load());
+    int writeLen = qMin(maxlen, (int)_currentLengthAvailable);
     int total = 0;
     while (writeLen - total > 0)
     {
