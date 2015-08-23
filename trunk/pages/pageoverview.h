@@ -22,66 +22,38 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef PAGE_H
-#define PAGE_H
+#ifndef PAGEOVERVIEW_H
+#define PAGEOVERVIEW_H
 
-#include "pile_sf2.h"
-#include "synth.h"
-#include <QStackedWidget>
-#include <QTableWidget>
-#include <QComboBox>
-#include <QHeaderView>
-#include <QSpinBox>
-#include <QCheckBox>
-#include <QTextEdit>
-#include <QApplication>
-#include <QPushButton>
+#include <QWidget>
+#include "page.h"
 
-class Config;
-
-namespace Ui
-{
-    class Page;
-    class PageTable;
-    class TableComboBox;
-    class ComboBox;
+namespace Ui {
+class PageOverview;
 }
 
-class Page : public QWidget
+class PageOverview : public Page
 {
     Q_OBJECT
 
 public:
-    enum TypePage
-    {
-        PAGE_SF2,
-        PAGE_SMPL,
-        PAGE_INST,
-        PAGE_PRST
-    };
-    Page(TypePage typePage, QWidget *parent = 0);
+    PageOverview(TypePage typePage, ElementType typeElement, QWidget *parent = 0);
+    ~PageOverview();
 
-    virtual void afficher() = 0;
-    static QString getGenName(quint16 iVal, int type = 0);
+    void afficher();
 
 protected:
-    bool preparation;
-    static MainWindow *mainWindow;
-    static Tree *tree;
-    static QStackedWidget *qStackedWidget;
-    static Pile_sf2 *sf2;
-    static Synth * synth;
-    TypePage m_typePage;
+    virtual QString getTitle() = 0;
+    virtual QStringList getHorizontalHeader() = 0;
+    virtual void prepare(EltID id) = 0;
+    virtual QStringList getInformation(EltID id) = 0;
 
-    char * getTextValue(char * T, quint16 champ, genAmountType genVal);
-    static char * getTextValue(char * T, quint16 champ, int iVal);
-    static char * getTextValue(char * T, quint16 champ, SFModulator sfModVal);
-    static QString getIndexName(quint16 iVal, int CC);
-    genAmountType getValue(QString texte, quint16 champ, bool &ok);
+    QString getRange(EltID id, Champ champ);
 
 private:
-    // Méthodes privées
-    int limit(int iTmp, int minInst, int maxInst, int minPrst = 0, int maxPrst = 0);
+    Ui::PageOverview *ui;
+    ElementType _typeElement;
+    QString fillInformation(EltID id, int row);
 };
 
-#endif // PAGE_H
+#endif // PAGEOVERVIEW_H
