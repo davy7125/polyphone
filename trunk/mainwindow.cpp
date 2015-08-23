@@ -108,10 +108,16 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent, Qt::Window | Qt::W
     page_smpl = new Page_Smpl();
     page_inst = new Page_Inst();
     page_prst = new Page_Prst();
+    _pageOverviewSmpl = new PageOverviewSmpl();
+    _pageOverviewInst = new PageOverviewInst();
+    _pageOverviewPrst = new PageOverviewPrst();
     ui->stackedWidget->addWidget(page_sf2);
     ui->stackedWidget->addWidget(page_smpl);
     ui->stackedWidget->addWidget(page_inst);
     ui->stackedWidget->addWidget(page_prst);
+    ui->stackedWidget->addWidget(_pageOverviewSmpl);
+    ui->stackedWidget->addWidget(_pageOverviewInst);
+    ui->stackedWidget->addWidget(_pageOverviewPrst);
 
     // Initialisation arbre (passage de l'adresse de mainWindow et du combobox)
     ui->arborescence->init(this, sf2, ui->comboSf2);
@@ -206,6 +212,9 @@ MainWindow::~MainWindow()
     delete this->page_prst;
     delete this->page_sf2;
     delete this->page_smpl;
+    delete _pageOverviewSmpl;
+    delete _pageOverviewInst;
+    delete _pageOverviewPrst;
     delete this->synth;
     delete this->audioDevice;
     Config::kill();
@@ -300,9 +309,11 @@ void MainWindow::resizeEvent(QResizeEvent * event)
     if (event)
         QMainWindow::resizeEvent(event);
 
+    QString polyphoneName = trUtf8("Polyphone");
+
     QString titre;
     if (_title.isEmpty())
-        titre = "Polyphone";
+        titre = polyphoneName;
     else
     {
         QString path = _title;
@@ -318,8 +329,8 @@ void MainWindow::resizeEvent(QResizeEvent * event)
         path = fileInfo.path();
         if (path.indexOf(QDir::homePath()) == 0)
             path = "~" + path.right(path.size() - QDir::homePath().size());
-        QString titreCourt = titre + fileInfo.fileName() + " - Polyphone";
-        QString titreLong = titre + fileInfo.fileName() + " (" + path + ") - Polyphone";
+        QString titreCourt = titre + fileInfo.fileName() + " - " + polyphoneName;
+        QString titreLong = titre + fileInfo.fileName() + " (" + path + ") - " + polyphoneName;
 
         QFont font = QApplication::font("QWorkspaceTitleBar");
         QFontMetrics fm(font);
@@ -672,28 +683,28 @@ void MainWindow::AfficherBarreOutils()
 {
     if (ui->actionBarre_d_outils->isChecked())
     {
-        this->configuration->setAfficheToolBar(1);
-        ui->toolBar->setVisible(1);
+        this->configuration->setAfficheToolBar(true);
+        ui->toolBar->setVisible(true);
     }
     else
     {
-        this->configuration->setAfficheToolBar(0);
-        ui->toolBar->setVisible(0);
+        this->configuration->setAfficheToolBar(false);
+        ui->toolBar->setVisible(false);
     }
 }
 void MainWindow::afficherSectionModulateurs()
 {
     if (ui->actionSection_modulateurs->isChecked())
     {
-        this->configuration->setAfficheMod(1);
-        this->page_inst->setModVisible(1);
-        this->page_prst->setModVisible(1);
+        this->configuration->setAfficheMod(true);
+        this->page_inst->setModVisible(true);
+        this->page_prst->setModVisible(true);
     }
     else
     {
-        this->configuration->setAfficheMod(0);
-        this->page_inst->setModVisible(0);
-        this->page_prst->setModVisible(0);
+        this->configuration->setAfficheMod(false);
+        this->page_inst->setModVisible(false);
+        this->page_prst->setModVisible(false);
     }
 }
 void MainWindow::setKeyboardType0() {this->setKeyboardType(0);}
@@ -925,6 +936,7 @@ void MainWindow::updateDo()
     else ui->actionR_tablir->setEnabled(0);
     updateTitle();
 }
+
 void MainWindow::updateTitle()
 {
     // Nombre d'éléments sélectionnés
@@ -1030,8 +1042,27 @@ void MainWindow::updateActions()
         {
             if (fichierUnique)
             {
-                if (id.typeElement == elementSf2)
-                    page_sf2->afficher();
+                if (typeUnique)
+                {
+                    switch (id.typeElement)
+                    {
+                    case elementSf2:
+                        page_sf2->afficher();
+                        break;
+                    case elementRootSmpl:
+                        _pageOverviewSmpl->afficher();
+                        break;
+                    case elementRootInst:
+                        _pageOverviewInst->afficher();
+                        break;
+                    case elementRootPrst:
+                        _pageOverviewPrst->afficher();
+                        break;
+                    default:
+                        ui->stackedWidget->setCurrentWidget(ui->page_Soft);
+                        break;
+                    }
+                }
                 else
                     ui->stackedWidget->setCurrentWidget(ui->page_Soft);
             }
@@ -1107,6 +1138,17 @@ void MainWindow::updateActions()
         ui->action_Visualiseur->setEnabled(typeUnique && familleUnique);
         ui->action_Visualiseur_2->setEnabled(typeUnique && familleUnique);
         ui->action_Cr_ation_mutation_mixture->setEnabled(typeUnique && familleUnique);
+
+        // Particularité 3: paramétrage global, répartition automatique et duplication des divisions sont communs pour inst et prst
+        ui->action_Param_trage_global->setEnabled((typeUnique && (type == elementInst || type == elementPrst)) ||
+                                                  (familleUnique && (type == elementInst || type == elementInstSmpl ||
+                                                                     type == elementPrst || type == elementPrstInst)));
+        ui->action_R_partition_automatique->setEnabled((typeUnique && (type == elementInst || type == elementPrst)) ||
+                                                       (familleUnique && (type == elementInst || type == elementInstSmpl ||
+                                                                          type == elementPrst || type == elementPrstInst)));
+        ui->actionD_uplication_des_divisions->setEnabled((typeUnique && (type == elementInst || type == elementPrst)) ||
+                                                         (familleUnique && (type == elementInst || type == elementInstSmpl ||
+                                                                            type == elementPrst || type == elementPrstInst)));
     }
     else
     {
@@ -1256,12 +1298,13 @@ void MainWindow::prepareNewAction()
 
 void MainWindow::noteNameChanged()
 {
-    if (this->ui->stackedWidget->currentWidget() == this->page_smpl)
-        this->page_smpl->afficher();
-    else if (this->ui->stackedWidget->currentWidget() == this->page_inst)
-        this->page_inst->afficher();
-    else if (this->ui->stackedWidget->currentWidget() == this->page_prst)
-        this->page_prst->afficher();
+    QWidget * widget = ui->stackedWidget->currentWidget();
+    if (widget == this->page_smpl || widget == this->page_inst || widget == this->page_prst ||
+            widget == _pageOverviewSmpl || widget == _pageOverviewInst || widget == _pageOverviewPrst)
+    {
+        Page * page = (Page *)ui->stackedWidget->currentWidget();
+        page->afficher();
+    }
 }
 
 // Modifications
@@ -2454,6 +2497,7 @@ void MainWindow::associationAutoSmpl()
                 indice++;
         }
     }
+
     // Mise à jour
     this->updateDo();
     if (ui->stackedWidget->currentWidget() == this->page_smpl)
@@ -2508,6 +2552,7 @@ void MainWindow::on_actionExporter_pics_de_fr_quence_triggered()
         exporterFrequences(fileName);
     }
 }
+
 void MainWindow::exporterFrequences(QString fileName)
 {
     // Création fichier csv

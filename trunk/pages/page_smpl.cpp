@@ -149,12 +149,12 @@ void Page_Smpl::afficher()
     ui->comboSampleRate->setCurrentIndex(ui->comboSampleRate->findText(QString::number(sampleRate)));
     if (nombreElements == 1)
         ui->labelTaille->setText(QString::number(length) + " - " +
-                                 QString::number((double)length / sampleRate, 'f', 3) + "s");
+                                 QString::number((double)length / sampleRate, 'f', 3) + trUtf8("s", "unit for seconds"));
     else
     {
         if (sampleRate > 0)
             ui->labelTaille->setText(trUtf8("(min) ") + QString::number(length) + " - " +
-                                     QString::number((double)length / sampleRate, 'f', 3) + "s");
+                                     QString::number((double)length / sampleRate, 'f', 3) + trUtf8("s", "unit for seconds"));
         else
             ui->labelTaille->setText(trUtf8("(min) ") + QString::number(length));
     }

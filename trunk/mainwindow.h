@@ -41,6 +41,9 @@
 #include "page_smpl.h"
 #include "page_inst.h"
 #include "page_prst.h"
+#include "pageoverviewsmpl.h"
+#include "pageoverviewinst.h"
+#include "pageoverviewprst.h"
 #include "audiodevice.h"
 #include "synth.h"
 #include "pianokeybdcustom.h"
@@ -206,6 +209,9 @@ private:
     Page_Smpl * page_smpl;
     Page_Inst * page_inst;
     Page_Prst * page_prst;
+    PageOverviewSmpl * _pageOverviewSmpl;
+    PageOverviewInst * _pageOverviewInst;
+    PageOverviewPrst * _pageOverviewPrst;
     Pile_sf2 * sf2;
     Synth * synth;
     AudioDevice * audioDevice;

@@ -299,6 +299,7 @@ void PageTable::formatTable(bool multiGlobal)
     QBrush brush2(QPixmap(":/style/fondJaune.png"));
     if (this->contenant == elementInst)
     {
+        // First column with a hatching pattern
         if (!multiGlobal)
         {
             for (int j = 0; j < this->table->rowCount(); j++)
@@ -323,6 +324,7 @@ void PageTable::formatTable(bool multiGlobal)
             }
         }
 
+        // Yellow rows
         for (int i = multiGlobal ? 0 : 1; i < this->table->columnCount(); i++)
         {
             for (int j = 0; j < this->table->rowCount(); j++)
@@ -345,25 +347,31 @@ void PageTable::formatTable(bool multiGlobal)
     }
     else
     {
-        for (int j = 0; j < this->table->rowCount(); j++)
+        // First column with a hatching pattern
+        if (!multiGlobal)
         {
-            if (j < 8)
-                this->table->item(j, 0)->setBackground(brush1);
-            else if (j < 11)
-                this->table->item(j, 0)->setBackground(brush2);
-            else if (j < 13)
-                this->table->item(j, 0)->setBackground(brush1);
-            else if (j < 21)
-                this->table->item(j, 0)->setBackground(brush2);
-            else if (j < 31)
-                this->table->item(j, 0)->setBackground(brush1);
-            else if (j < 39)
-                this->table->item(j, 0)->setBackground(brush2);
-            else
-                this->table->item(j, 0)->setBackground(brush1);
-            this->table->item(j, 0)->setTextAlignment(Qt::AlignVCenter | Qt::AlignRight);
+            for (int j = 0; j < this->table->rowCount(); j++)
+            {
+                if (j < 8)
+                    this->table->item(j, 0)->setBackground(brush1);
+                else if (j < 11)
+                    this->table->item(j, 0)->setBackground(brush2);
+                else if (j < 13)
+                    this->table->item(j, 0)->setBackground(brush1);
+                else if (j < 21)
+                    this->table->item(j, 0)->setBackground(brush2);
+                else if (j < 31)
+                    this->table->item(j, 0)->setBackground(brush1);
+                else if (j < 39)
+                    this->table->item(j, 0)->setBackground(brush2);
+                else
+                    this->table->item(j, 0)->setBackground(brush1);
+                this->table->item(j, 0)->setTextAlignment(Qt::AlignVCenter | Qt::AlignRight);
+            }
         }
-        for (int i = 1; i < this->table->columnCount(); i++)
+
+        // Yellow rows
+        for (int i = multiGlobal ? 0 : 1; i < this->table->columnCount(); i++)
         {
             for (int j = 0; j < this->table->rowCount(); j++)
             {

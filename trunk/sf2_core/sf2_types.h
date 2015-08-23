@@ -254,7 +254,7 @@ typedef enum
     champ_modAmount = 148,
     champ_sfModAmtSrcOper = 149,
     champ_sfModTransOper = 150,
-    champ_hidden = 151,                 // Divers
+    champ_hidden = 151,                 // Divers (hidden means that the element is deleted but undo is possible)
     champ_indexMod = 152,
     champ_sfGenOper = 153,
     champ_sfGenAmount = 154,

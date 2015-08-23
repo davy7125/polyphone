@@ -29,6 +29,8 @@
 #include "page.h"
 #include "combobox.h"
 #include "tablecombobox.h"
+#include "tablewidget.h"
+#include "tablewidgetmod.h"
 class GraphicsViewRange;
 
 // Spécialisation de page pour inst et prst
