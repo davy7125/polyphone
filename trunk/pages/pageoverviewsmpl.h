@@ -22,66 +22,32 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef PAGE_H
-#define PAGE_H
+#ifndef PAGEOVERVIEWSMPL_H
+#define PAGEOVERVIEWSMPL_H
 
-#include "pile_sf2.h"
-#include "synth.h"
-#include <QStackedWidget>
-#include <QTableWidget>
-#include <QComboBox>
-#include <QHeaderView>
-#include <QSpinBox>
-#include <QCheckBox>
-#include <QTextEdit>
-#include <QApplication>
-#include <QPushButton>
+#include "pageoverview.h"
 
-class Config;
-
-namespace Ui
+class PageOverviewSmpl : public PageOverview
 {
-    class Page;
-    class PageTable;
-    class TableComboBox;
-    class ComboBox;
-}
-
-class Page : public QWidget
-{
-    Q_OBJECT
-
 public:
-    enum TypePage
-    {
-        PAGE_SF2,
-        PAGE_SMPL,
-        PAGE_INST,
-        PAGE_PRST
-    };
-    Page(TypePage typePage, QWidget *parent = 0);
-
-    virtual void afficher() = 0;
-    static QString getGenName(quint16 iVal, int type = 0);
+    PageOverviewSmpl(QWidget * parent = NULL);
 
 protected:
-    bool preparation;
-    static MainWindow *mainWindow;
-    static Tree *tree;
-    static QStackedWidget *qStackedWidget;
-    static Pile_sf2 *sf2;
-    static Synth * synth;
-    TypePage m_typePage;
-
-    char * getTextValue(char * T, quint16 champ, genAmountType genVal);
-    static char * getTextValue(char * T, quint16 champ, int iVal);
-    static char * getTextValue(char * T, quint16 champ, SFModulator sfModVal);
-    static QString getIndexName(quint16 iVal, int CC);
-    genAmountType getValue(QString texte, quint16 champ, bool &ok);
+    QString getTitle();
+    QStringList getHorizontalHeader();
+    void prepare(EltID id);
+    QStringList getInformation(EltID id);
 
 private:
-    // Méthodes privées
-    int limit(int iTmp, int minInst, int maxInst, int minPrst = 0, int maxPrst = 0);
+    QString isUsed(EltID id);
+    QString totalLength(EltID id);
+    QString loopLength(EltID id);
+    QString rootKey(EltID id);
+    QString correction(EltID id);
+    QString type(EltID id);
+    QString link(EltID id);
+
+    QList<int> _usedSmpl;
 };
 
-#endif // PAGE_H
+#endif // PAGEOVERVIEWSMPL_H

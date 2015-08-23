@@ -64,13 +64,13 @@
         <property name="minimumSize">
          <size>
           <width>0</width>
-          <height>20</height>
+          <height>19</height>
          </size>
         </property>
         <property name="maximumSize">
          <size>
           <width>16777215</width>
-          <height>20</height>
+          <height>19</height>
          </size>
         </property>
         <property name="font">
@@ -108,13 +108,13 @@
         <property name="minimumSize">
          <size>
           <width>60</width>
-          <height>20</height>
+          <height>19</height>
          </size>
         </property>
         <property name="maximumSize">
          <size>
           <width>100</width>
-          <height>20</height>
+          <height>19</height>
          </size>
         </property>
         <property name="font">
@@ -240,7 +240,7 @@
           <enum>QAbstractItemView::ExtendedSelection</enum>
          </property>
          <property name="textElideMode">
-          <enum>Qt::ElideRight</enum>
+          <enum>Qt::ElideMiddle</enum>
          </property>
          <property name="horizontalScrollMode">
           <enum>QAbstractItemView::ScrollPerPixel</enum>

@@ -22,66 +22,32 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef PAGE_H
-#define PAGE_H
+#ifndef PAGEOVERVIEWPRST_H
+#define PAGEOVERVIEWPRST_H
 
-#include "pile_sf2.h"
-#include "synth.h"
-#include <QStackedWidget>
-#include <QTableWidget>
-#include <QComboBox>
-#include <QHeaderView>
-#include <QSpinBox>
-#include <QCheckBox>
-#include <QTextEdit>
-#include <QApplication>
-#include <QPushButton>
+#include "pageoverview.h"
 
-class Config;
-
-namespace Ui
+class PageOverviewPrst : public PageOverview
 {
-    class Page;
-    class PageTable;
-    class TableComboBox;
-    class ComboBox;
-}
-
-class Page : public QWidget
-{
-    Q_OBJECT
-
 public:
-    enum TypePage
-    {
-        PAGE_SF2,
-        PAGE_SMPL,
-        PAGE_INST,
-        PAGE_PRST
-    };
-    Page(TypePage typePage, QWidget *parent = 0);
-
-    virtual void afficher() = 0;
-    static QString getGenName(quint16 iVal, int type = 0);
+    PageOverviewPrst(QWidget * parent = NULL);
 
 protected:
-    bool preparation;
-    static MainWindow *mainWindow;
-    static Tree *tree;
-    static QStackedWidget *qStackedWidget;
-    static Pile_sf2 *sf2;
-    static Synth * synth;
-    TypePage m_typePage;
-
-    char * getTextValue(char * T, quint16 champ, genAmountType genVal);
-    static char * getTextValue(char * T, quint16 champ, int iVal);
-    static char * getTextValue(char * T, quint16 champ, SFModulator sfModVal);
-    static QString getIndexName(quint16 iVal, int CC);
-    genAmountType getValue(QString texte, quint16 champ, bool &ok);
+    QString getTitle();
+    QStringList getHorizontalHeader();
+    void prepare(EltID id) { Q_UNUSED(id) }
+    QStringList getInformation(EltID id);
 
 private:
-    // Méthodes privées
-    int limit(int iTmp, int minInst, int maxInst, int minPrst = 0, int maxPrst = 0);
+    QString getBankAndPreset(EltID id);
+    QString getSampleNumber(EltID id);
+    QString getParameterNumber(EltID id);
+    QString getModulatorNumber(EltID id);
+    QString getKeyRange(EltID id);
+    QString getVelocityRange(EltID id);
+    QString getAttenuation(EltID id);
+    QString getChorus(EltID id);
+    QString getReverb(EltID id);
 };
 
-#endif // PAGE_H
+#endif // PAGEOVERVIEWPRST_H

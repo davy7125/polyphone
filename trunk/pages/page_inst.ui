@@ -91,6 +91,9 @@
         <property name="text">
          <string notr="true">TextLabel</string>
         </property>
+        <property name="alignment">
+         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+        </property>
         <property name="textInteractionFlags">
          <set>Qt::NoTextInteraction</set>
         </property>
@@ -175,7 +178,7 @@
           <enum>QAbstractItemView::ExtendedSelection</enum>
          </property>
          <property name="textElideMode">
-          <enum>Qt::ElideRight</enum>
+          <enum>Qt::ElideMiddle</enum>
          </property>
          <property name="horizontalScrollMode">
           <enum>QAbstractItemView::ScrollPerPixel</enum>

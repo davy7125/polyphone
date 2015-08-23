@@ -184,7 +184,11 @@ SOURCES	+= main.cpp \
     pages/graphicsviewrange.cpp \
     tools/dialog_transposition.cpp \
     sfark/sfarkextractor.cpp \
-    gui_divers/translationsystem.cpp
+    gui_divers/translationsystem.cpp \
+    pages/pageoverview.cpp \
+    pages/pageoverviewsmpl.cpp \
+    pages/pageoverviewinst.cpp \
+    pages/pageoverviewprst.cpp
 
 HEADERS  += mainwindow.h \
     sf2_core/sf2_types.h \
@@ -253,7 +257,11 @@ HEADERS  += mainwindow.h \
     tools/dialog_transposition.h \
     sfark/sfarkextractor1.h \
     sfark/sfarkextractor.h \
-    gui_divers/translationsystem.h
+    gui_divers/translationsystem.h \
+    pages/pageoverview.h \
+    pages/pageoverviewsmpl.h \
+    pages/pageoverviewinst.h \
+    pages/pageoverviewprst.h
 
 FORMS    += mainwindow.ui \
     gui_divers/config.ui \
@@ -275,7 +283,8 @@ FORMS    += mainwindow.ui \
     tools/dialog_visualizer.ui \
     tools/dialog_duplication.ui \
     gui_divers/dialogselection.ui \
-    tools/dialog_transposition.ui
+    tools/dialog_transposition.ui \
+    pages/pageoverview.ui
 
 RESOURCES += ressources.qrc \
     clavier/pianokeybd.qrc
