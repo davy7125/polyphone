@@ -29,6 +29,8 @@
 
 class PageOverviewSmpl : public PageOverview
 {
+    Q_OBJECT
+
 public:
     PageOverviewSmpl(QWidget * parent = NULL);
 

@@ -29,6 +29,8 @@
 
 class PageOverviewPrst : public PageOverview
 {
+    Q_OBJECT
+
 public:
     PageOverviewPrst(QWidget * parent = NULL);
 

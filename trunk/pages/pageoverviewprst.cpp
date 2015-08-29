@@ -43,7 +43,7 @@ QStringList PageOverviewPrst::getHorizontalHeader()
             << trUtf8("Étendue totale (vélocité)")
             << trUtf8("Atténuation")
             << trUtf8("Chorus")
-            << trUtf8("Reverbération");
+            << trUtf8("Réverbération");
     return hHeader;
 }
 

@@ -1,11 +1,12 @@
 [Desktop Entry]
 Name=Polyphone
-Name[fr]=Polyphone
 Name[sr]=Полифон
 Name[ru]=Полифон
 Comment=soundfont editor
-Comment[fr]=éditeur de soundfonts
-Comment[en]=soundfont editor
+Comment[en]=Soundfont editor
+Comment[es]=Editor de soundfonts
+Comment[fr]=Éditeur de soundfonts
+Comment[it]=Editore de soundfonts
 Comment[sr]=Уређивач звукотека (звучних фонтова)
 TryExec=polyphone
 Exec=polyphone %F
@@ -14,5 +15,5 @@ StartupNotify=true
 Terminal=false
 Type=Application
 Categories=Application;AudioVideo;Audio;Midi;Music
-Keywords=sf2;sfz;sfArk;soundfonts;editor;instrument
+Keywords=sf2;sfz;sfArk;soundfonts;editor;instrument;audio;sound;sampler
 MimeType=audio/x-soundfont;
