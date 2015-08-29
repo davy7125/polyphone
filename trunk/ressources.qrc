@@ -285,6 +285,14 @@
         <file alias="5-3-5fr.html">ressources/doc/5-tools/3-global/5-3-5fr.html</file>
         <file alias="outil8.png">ressources/doc/outil8.png</file>
         <file alias="outil8 en.png">ressources/doc/outil8 en.png</file>
+        <file alias="9-0en.html">ressources/doc/9-overview/9-0en.html</file>
+        <file alias="9-0fr.html">ressources/doc/9-overview/9-0fr.html</file>
+        <file alias="9-1en.html">ressources/doc/9-overview/9-1en.html</file>
+        <file alias="9-1fr.html">ressources/doc/9-overview/9-1fr.html</file>
+        <file alias="9-2en.html">ressources/doc/9-overview/9-2en.html</file>
+        <file alias="9-2fr.html">ressources/doc/9-overview/9-2fr.html</file>
+        <file alias="9en.html">ressources/doc/9-overview/9en.html</file>
+        <file alias="9fr.html">ressources/doc/9-overview/9fr.html</file>
     </qresource>
     <qresource prefix="/traductions">
         <file>ressources/traductions/polyphone_en.qm</file>

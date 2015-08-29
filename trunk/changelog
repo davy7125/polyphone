@@ -1,23 +1,25 @@
 polyphone (1.7) unstable; urgency=low
 
- * pasting modulators is allowed for several divisions
- * tools are allowed for several instruments or presets
+ * german and serbian translations
  * selecting several instruments or presets shows the editing table for all global divisions
+ * selecting "Samples", "Instruments" or "Presets" in the tree shows an overview page
+ * tools are allowed when several instruments or presets are selected in the tree
+ * pasting modulators is allowed for several divisions
 
  -- Davy Triponney <davy.triponney@gmail.com>  Wed, 27 Sep 2015 20:51:55 +0100
 
 
 polyphone (1.6) UNRELEASED; urgency=low
 
- * Full screen mode
- * Visibility of all soundfonts or just a specific soundfont in the tree
- * Possibility to merge presets from different soundfonts to one sf2 via the export
- * Export of samples from different soundfonts is allowed
- * In the virtual keyboard, using "shift" with an arrow makes a quicker move
- * Option to move (or not) keyrange in the transposition tool for instruments
- * Mutations available for 64' resultant in the organ mixture creation tool
- * Tolerance for opcodes comprising no underscore (sfz opcodes v1)
- * Several libraries updated (including portaudio, stk)
+ * full screen mode
+ * visibility of all soundfonts or just a specific soundfont in the tree
+ * possibility to merge presets from different soundfonts to one sf2 via the export
+ * export of samples from different soundfonts is allowed
+ * in the virtual keyboard, using "shift" with an arrow makes a quicker move
+ * option to move (or not) keyrange in the transposition tool for instruments
+ * mutations available for 64' resultant in the organ mixture creation tool
+ * tolerance for opcodes comprising no underscore (sfz opcodes v1)
+ * several libraries updated (including portaudio, stk)
  * (fix) sfArk import generated noise
  * (fix) repetition is ignored when using arrow keys in the virtual keyboard
  * (fix) "0" was not selected when a new value is inserted in the table
@@ -241,6 +243,6 @@ polyphone (0.2) UNRELEASED; urgency=low
 
 polyphone (0.1) UNRELEASED; urgency=low
 
-  * Initial release
+  * initial release
 
  -- Davy Triponney <davy.triponney@gmail.com>  Tue, 1 Jan 2013 13:51:43 +0200

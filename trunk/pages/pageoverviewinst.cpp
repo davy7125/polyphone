@@ -44,7 +44,7 @@ QStringList PageOverviewInst::getHorizontalHeader()
             << trUtf8("Atténuation")
             << trUtf8("Lecture en boucle")
             << trUtf8("Chorus")
-            << trUtf8("Reverbération");
+            << trUtf8("Réverbération");
     return hHeader;
 }
 

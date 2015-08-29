@@ -1,66 +1,67 @@
-<h3>Présentation</h3>
-<p align="justify">Le tableau permet la visualisation globale et l'édition du paramétrage d'un instrument. Une modification d'un paramètre dans «&#160;global&#160;» s'appliquera à toutes les divisions d'un instrument, exceptées les divisions dont le même paramètre est déjà renseigné.</p>
+<meta charset=UTF-8" />
+<h3>PrÃ©sentation</h3>
+<p align="justify">Le tableau permet la visualisation globale et l'Ã©dition du paramÃ©trage d'un instrument. Une modification d'un paramÃ¨tre dans Â«&#160;global&#160;Â» s'appliquera Ã  toutes les divisions d'un instrument, exceptÃ©es les divisions dont le mÃªme paramÃ¨tre est dÃ©jÃ  renseignÃ©.</p>
 
-<p align="justify">Les paramètres modifiables sont&#160;:
+<p align="justify">Les paramÃ¨tres modifiables sont&#160;:
 <ul>
 	<li><b>Etendue note</b><br />
 	Etendue du clavier sur laquelle le son sera entendu.
 	</li>
-	<li><b>Etendue vélocité</b><br />
-	Etendue de vélocité sur laquelle le son sera entendu. Il est possible de définir plusieurs sons pour la même note, avec des étendues de vélocités différentes (pour distinguer plusieurs nuances d'une touche de piano par exemple).
+	<li><b>Etendue vÃ©locitÃ©</b><br />
+	Etendue de vÃ©locitÃ© sur laquelle le son sera entendu. Il est possible de dÃ©finir plusieurs sons pour la mÃªme note, avec des Ã©tendues de vÃ©locitÃ©s diffÃ©rentes (pour distinguer plusieurs nuances d'une touche de piano par exemple).
 	</li>
-	<li><b>Atténuation</b><br />
-	Atténuation s'appliquant au son en décibel.<br />
-Note: le format sf2 ne permet pas à cette valeur d'être négative, aucune amplification n'est donc possible.
+	<li><b>AttÃ©nuation</b><br />
+	AttÃ©nuation s'appliquant au son en dÃ©cibel.<br />
+Note: le format sf2 ne permet pas Ã  cette valeur d'Ãªtre nÃ©gative, aucune amplification n'est donc possible.
 	</li>
 	<li><b>Balance</b><br />
-	Balance s'appliquant au son, pour l'entendre plus à gauche ou plus à droite en stéréo.
+	Balance s'appliquant au son, pour l'entendre plus Ã  gauche ou plus Ã  droite en stÃ©rÃ©o.
 	</li>
 	<li><b>Lecture en boucle</b><br />
-	«&#160;0&#160;» indique que le son est reproduit sans boucle, «&#160;1&#160;» indique que le son boucle continuellement, «&#160;3&#160;» indique que le son boucle pendant le temps de l'appui sur la touche puis se termine par le reste de l'échantillon.<br />
-Note: le format sf2 n'a pas prévu de mode de lecture spécial pour déclencher un son sur le relâchement d'une note. L'une des manières de réaliser ce comportement est de doubler chaque échantillon avec un échantillon contenant une courte boucle silencieuse suivi du son à émettre sur le relâchement. L'échantillon ajouté devra être lu avec le paramètre de lecture en boucle «&#160;3&#160;».
+	Â«&#160;0&#160;Â» indique que le son est reproduit sans boucle, Â«&#160;1&#160;Â» indique que le son boucle continuellement, Â«&#160;3&#160;Â» indique que le son boucle pendant le temps de l'appui sur la touche puis se termine par le reste de l'Ã©chantillon.<br />
+Note: le format sf2 n'a pas prÃ©vu de mode de lecture spÃ©cial pour dÃ©clencher un son sur le relÃ¢chement d'une note. L'une des maniÃ¨res de rÃ©aliser ce comportement est de doubler chaque Ã©chantillon avec un Ã©chantillon contenant une courte boucle silencieuse suivi du son Ã  Ã©mettre sur le relÃ¢chement. L'Ã©chantillon ajoutÃ© devra Ãªtre lu avec le paramÃ¨tre de lecture en boucle Â«&#160;3&#160;Â».
 	</li>
 	<li><b>Note de base</b><br />
-	Permet de modifier la note de base d'un son, pour l'entendre à une note différente de celle qui lui était normalement destinée.
+	Permet de modifier la note de base d'un son, pour l'entendre Ã  une note diffÃ©rente de celle qui lui Ã©tait normalement destinÃ©e.
 	</li>
 	<li><b>Accordage</b><br />
-	Modifie l'accordage en demi-tons et centièmes de demi-tons. Modifier «&#160;scale&#160;» joue sur l'écart entre deux notes consécutives.
+	Modifie l'accordage en demi-tons et centiÃ¨mes de demi-tons. Modifier Â«&#160;scale&#160;Â» joue sur l'Ã©cart entre deux notes consÃ©cutives.
 	</li>
 	<li><b>Filtre</b><br />
-	Applique ou non un filtre passe-bas en précisant la fréquence de coupure et la résonance.
+	Applique ou non un filtre passe-bas en prÃ©cisant la frÃ©quence de coupure et la rÃ©sonance.
 	</li>
 	<li><b>Enveloppe de volume</b><br />
-	Modifie l'enveloppe du volume, et éventuellement son évolution avec la note.
+	Modifie l'enveloppe du volume, et Ã©ventuellement son Ã©volution avec la note.
 	</li>
 	<li><b>Modulation</b><br />
-	Permet de paramétrer une modulation (enveloppe, délai, fréquence, évolution avec la note) et son effet sur le ton, le filtre, le volume.
+	Permet de paramÃ©trer une modulation (enveloppe, dÃ©lai, frÃ©quence, Ã©volution avec la note) et son effet sur le ton, le filtre, le volume.
 	</li>
 	<li><b>Vibrato</b><br />
-	Permet de paramétrer un vibrato (délai, fréquence) et son effet sur le ton.
+	Permet de paramÃ©trer un vibrato (dÃ©lai, frÃ©quence) et son effet sur le ton.
 	</li>
 	<li><b>Classe exclusive</b><br />
-	Ce paramètre permet de définir des classes exclusives, en assignant à un ensemble de sons liés une même valeur différente de 0. Lorsqu'une classe exclusive est définie, n'importe quel début de note parmi l'un des sons de la classe exclusive termine l'ensemble des sons de la classe. La portée d'une classe exclusive est le preset dans lequel la classe est définie (un son initié dans un instrument peut ainsi terminer un son d'un autre instrument si les deux instruments sont dans le même preset). Cet effet peut être utilisé pour des percussions comme une cymbale.
+	Ce paramÃ¨tre permet de dÃ©finir des classes exclusives, en assignant Ã  un ensemble de sons liÃ©s une mÃªme valeur diffÃ©rente de 0. Lorsqu'une classe exclusive est dÃ©finie, n'importe quel dÃ©but de note parmi l'un des sons de la classe exclusive termine l'ensemble des sons de la classe. La portÃ©e d'une classe exclusive est le preset dans lequel la classe est dÃ©finie (un son initiÃ© dans un instrument peut ainsi terminer un son d'un autre instrument si les deux instruments sont dans le mÃªme preset). Cet effet peut Ãªtre utilisÃ© pour des percussions comme une cymbale.
 	</li>
-	<li><b>Chorus et réverbération</b><br />
-	Indique l'intensité des effets chorus et réverbération. Les effets sont paramétrables dans les <a href="qrc:/aide/6-1fr.html">préférences</a> du logiciel.
+	<li><b>Chorus et rÃ©verbÃ©ration</b><br />
+	Indique l'intensitÃ© des effets chorus et rÃ©verbÃ©ration. Les effets sont paramÃ©trables dans les <a href="qrc:/aide/6-1fr.html">prÃ©fÃ©rences</a> du logiciel.
 	</li>
-	<li><b>Note et vélocité fixes</b><br />
-	Permet de figer la note et la vélocité sur l'étendue de note précisée par la division.
+	<li><b>Note et vÃ©locitÃ© fixes</b><br />
+	Permet de figer la note et la vÃ©locitÃ© sur l'Ã©tendue de note prÃ©cisÃ©e par la division.
 	</li>
 	<li><b>Offsets</b><br />
-	Modifie les positions de début et fin d'un son pendant la lecture, ainsi que le début et la fin de la boucle. L'unité d'un offset est en samples (nombre de valeurs). Elle est aussi utilisée au niveau des <a href="qrc:/aide/4-1-1fr.html">échantillons</a> pour définir la longueur totale d'un échantillon ainsi que le début et la fin d'une boucle.
+	Modifie les positions de dÃ©but et fin d'un son pendant la lecture, ainsi que le dÃ©but et la fin de la boucle. L'unitÃ© d'un offset est en samples (nombre de valeurs). Elle est aussi utilisÃ©e au niveau des <a href="qrc:/aide/4-1-1fr.html">Ã©chantillons</a> pour dÃ©finir la longueur totale d'un Ã©chantillon ainsi que le dÃ©but et la fin d'une boucle.
 	</li>
 </ul>
 
-<h3>Facilités d'édition dans le tableau</h3>
-Pour faciliter et accélérer l'édition dans un tableau, les fonctionnalités suivantes ont été implémentées&#160;:
+<h3>FacilitÃ©s d'Ã©dition dans le tableau</h3>
+Pour faciliter et accÃ©lÃ©rer l'Ã©dition dans un tableau, les fonctionnalitÃ©s suivantes ont Ã©tÃ© implÃ©mentÃ©es&#160;:
 <ul>
-	<li>la molette de la souris peut être utilisée pour modifier une valeur (la case doit au préalable être en mode édition),</li>
-	<li>une sélection multiple, suivie de l'édition de la dernière cellule, entraînera l'édition de toutes les cellules en même temps,</li>
-	<li>les touches «&#160;effacer&#160;» et «&#160;suppr&#160;» suppriment le contenu d'une ou plusieurs cellules,</li>
-	<li>les échantillons stéréo peuvent être édités simultanément si l'option est cochée dans les <a href="qrc:/aide/6-2fr.html">préférences</a> du logiciel,</li>
-	<li>le nom des notes peut être numérique ou littéral (C3, C4 ou C5 étant le do central) selon l'option choisie dans les <a href="qrc:/aide/6-0fr.html">préférences</a>,</li>
-	<li>copier / coller un ensemble de cases (pas forcément adjacentes) peut se faire via Ctrl+C / Ctrl+V.</li>
+	<li>la molette de la souris peut Ãªtre utilisÃ©e pour modifier une valeur (la case doit au prÃ©alable Ãªtre en mode Ã©dition),</li>
+	<li>une sÃ©lection multiple, suivie de l'Ã©dition de la derniÃ¨re cellule, entraÃ®nera l'Ã©dition de toutes les cellules en mÃªme temps,</li>
+	<li>les touches Â«&#160;effacer&#160;Â» et Â«&#160;suppr&#160;Â» suppriment le contenu d'une ou plusieurs cellules,</li>
+	<li>les Ã©chantillons stÃ©rÃ©o peuvent Ãªtre Ã©ditÃ©s simultanÃ©ment si l'option est cochÃ©e dans les <a href="qrc:/aide/6-2fr.html">prÃ©fÃ©rences</a> du logiciel,</li>
+	<li>le nom des notes peut Ãªtre numÃ©rique ou littÃ©ral (C3, C4 ou C5 Ã©tant le do central) selon l'option choisie dans les <a href="qrc:/aide/6-0fr.html">prÃ©fÃ©rences</a>,</li>
+	<li>copier / coller un ensemble de cases (pas forcÃ©ment adjacentes) peut se faire via Ctrl+C / Ctrl+V.</li>
 </ul>
-Ne pas oublier les <a href="qrc:/aide/5-1fr.html">outils</a> à disposition&#160;! Notamment l'outil de <a href="qrc:/aide/5-1-4fr.html">paramétrage global</a>.
+Ne pas oublier les <a href="qrc:/aide/5-1fr.html">outils</a> Ã  disposition&#160;! Notamment l'outil de <a href="qrc:/aide/5-1-4fr.html">paramÃ©trage global</a>.
 </p>
