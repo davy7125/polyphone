@@ -102,7 +102,7 @@ void DialogHelp::createUi()
 
     // Redimensionnement et nom de la fenêtre
     this->resize(700, 400);
-    this->setWindowTitle("Polyphone - " + trUtf8("aide"));
+    this->setWindowTitle(trUtf8("Polyphone") + " - " + trUtf8("aide"));
 
     // Boutons de la fenêtre
     this->setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint);
@@ -144,6 +144,11 @@ void DialogHelp::fillTree()
     createItem(trUtf8("Tableau"), "4-2-0", level2);
     createItem(trUtf8("Section modulateur"), "4-2-1", level2);
     createItem(trUtf8("Presets"), "4-3", level1);
+
+    level1 = createItem(trUtf8("Pages d'aperçu"), "9");
+    createItem(trUtf8("Échantillons"), "9-0", level1);
+    createItem(trUtf8("Instruments"), "9-1", level1);
+    createItem(trUtf8("Presets"), "9-2", level1);
 
     level1 = createItem(trUtf8("Outils"), "5");
     level2 = createItem(trUtf8("Échantillons"), "5-0", level1);

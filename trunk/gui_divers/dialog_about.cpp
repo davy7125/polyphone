@@ -32,7 +32,7 @@ DialogAbout::DialogAbout(QWidget *parent) :
 {
     ui->setupUi(this);
     this->setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint);
-    ui->labelNomVersion->setText("Polyphone " + QString(VERSION));
+    ui->labelNomVersion->setText(trUtf8("Polyphone") + " " + QString(VERSION));
 
     // Description
     QString annee = "2013";
@@ -43,8 +43,8 @@ DialogAbout::DialogAbout(QWidget *parent) :
     if (QDate::currentDate().year() > 2013)
         annee += "-" + QString::number(QDate::currentDate().year());
     QString urlDonation = "https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=ESBLSGPJ7P938&lc=US&item_name=Polyphone&currency_code=EUR&amount=5";
-    ui->labelDescription->setText(QString::fromUtf8("<html><head/><body><p align='center'>Copyright © ") + annee +
-                                  " Davy Triponney<br/><br/><a href='" + url +
+    ui->labelDescription->setText("<html><head/><body><p align='center'>" + trUtf8("Copyright") + QString::fromUtf8(" © ") + annee +
+                                  " " + trUtf8("Davy Triponney", "this is my name") + "<br/><br/><a href='" + url +
                                   "'><span style=' text-decoration: underline; color:#0000ff;'>" +
                                   trUtf8("Site internet de Polyphone") + "</span></a>" +
                                   "<br/><br/><a href='" + urlDonation +
@@ -53,18 +53,18 @@ DialogAbout::DialogAbout(QWidget *parent) :
                                   "</p></body></html>");
 
     // Crédit
-    _credit.addCreator("Davy Triponney", "info@polyphone.fr");
-    _credit.addContributor("Andrea Celani", "acelani74@gmail.com");
-    _credit.addContributor("Kinwie", "kinwie@yahoo.com");
-    _credit.addContributor("Michael Schyllberg", "michael.schyllberg@bredband.net");
-    _credit.addContributor("Paul Stratman", "pcstratman@gmail.com");
-    _credit.addContributor("Steve Clarke", "stevertyu@yahoo.com");
-    _credit.addTranslator("Andrea Celani", "acelani74@gmail.com");
-    _credit.addTranslator("Davy Triponney", "info@polyphone.fr");
-    _credit.addTranslator("Erwan Berté", "erwanberte@laposte.net");
-    _credit.addTranslator("F.J. Martínez Murcia", "fjesusmartinez@ugr.es");
-    _credit.addTranslator("Jay Alexander Fleming", "tito.nehru.naser@gmail.com");
-    _credit.addTranslator("Steve Clarke", "stevertyu@yahoo.com");
+    _credit.addCreator(trUtf8("Davy Triponney"), "info@polyphone.fr");
+    _credit.addContributor(trUtf8("Andrea Celani"), "acelani74@gmail.com");
+    _credit.addContributor(trUtf8("Kinwie"), "kinwie@yahoo.com");
+    _credit.addContributor(trUtf8("Michael Schyllberg"), "michael.schyllberg@bredband.net");
+    _credit.addContributor(trUtf8("Paul Stratman"), "pcstratman@gmail.com");
+    _credit.addContributor(trUtf8("Steve Clarke"), "stevertyu@yahoo.com");
+    _credit.addTranslator(trUtf8("Andrea Celani"), "acelani74@gmail.com");
+    _credit.addTranslator(trUtf8("Davy Triponney"), "info@polyphone.fr");
+    _credit.addTranslator(trUtf8("Erwan Berté"), "erwanberte@laposte.net");
+    _credit.addTranslator(trUtf8("F.J. Martínez Murcia"), "fjesusmartinez@ugr.es");
+    _credit.addTranslator(trUtf8("Jay Alexander Fleming"), "tito.nehru.naser@gmail.com");
+    _credit.addTranslator(trUtf8("Steve Clarke"), "stevertyu@yahoo.com");
     ui->textBrowser->setHtml(_credit.getText());
 }
 

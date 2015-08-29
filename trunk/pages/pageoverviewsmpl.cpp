@@ -129,13 +129,13 @@ QString PageOverviewSmpl::type(EltID id)
         type = trUtf8("Mono", "opposite to stereo");
         break;
     case rightSample: case RomRightSample:
-        type = trUtf8("Stereo droit");
+        type = trUtf8("Stéréo droit");
         break;
     case leftSample: case RomLeftSample:
-        type = trUtf8("Stereo gauche");
+        type = trUtf8("Stéréo gauche");
         break;
     case linkedSample: case RomLinkedSample:
-        type = trUtf8("Stereo non défini");
+        type = trUtf8("Stéréo non défini");
         break;
     }
 

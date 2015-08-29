@@ -328,7 +328,7 @@ void GraphiqueFourier::setPos(qint32 posStart, qint32 posEnd, QList<double> &fre
             // fréquence
             double freq = (double)(posMaxFFT[i] * dwSmplRate) / (size - 1);
             frequencies << freq;
-            qStr3 += QString::number(freq, 'f', 2) + " Hz\n";
+            qStr3 += QString::number(freq, 'f', 2) + " " + trUtf8("Hz", "unit for Herz") + "\n";
             // note la plus proche
             double note = 12 * qLn(freq) / 0.69314718056 - 36.3763;
             if (note < 0) note = 0;
