@@ -293,6 +293,12 @@
         <file alias="9-2fr.html">ressources/doc/9-overview/9-2fr.html</file>
         <file alias="9en.html">ressources/doc/9-overview/9en.html</file>
         <file alias="9fr.html">ressources/doc/9-overview/9fr.html</file>
+        <file alias="page5.png">ressources/doc/page 5.png</file>
+        <file alias="page5 en.png">ressources/doc/page 5 en.png</file>
+        <file alias="page6.png">ressources/doc/page 6.png</file>
+        <file alias="page6 en.png">ressources/doc/page 6 en.png</file>
+        <file alias="page7.png">ressources/doc/page 7.png</file>
+        <file alias="page7 en.png">ressources/doc/page 7 en.png</file>
     </qresource>
     <qresource prefix="/traductions">
         <file>ressources/traductions/polyphone_en.qm</file>
