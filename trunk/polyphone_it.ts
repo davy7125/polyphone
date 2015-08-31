@@ -866,17 +866,17 @@
     <message>
         <location filename="gui_divers/dialog_export.cpp" line="169"/>
         <source>Dans le cas où plusieurs soundfonts sont exportées, le nombre maximal de presets par soundfont est de 127.</source>
-        <translation type="unfinished">Nel caso in cui vengono esportati alcuni soundfonts, il numero massimo di preset per soundfont è 127.</translation>
+        <translation>Nel caso in cui vengono esportati alcuni soundfonts, il numero massimo di preset per soundfont è 127.</translation>
     </message>
     <message>
         <location filename="gui_divers/dialog_export.cpp" line="175"/>
         <source>Le nombre maximal de soundfonts à exporter est de 127.</source>
-        <translation type="unfinished">Il numero massimo di preset di esportazione è 127.</translation>
+        <translation>Il numero massimo di soudfont da esportare è 127.</translation>
     </message>
     <message>
         <location filename="gui_divers/dialog_export.cpp" line="182"/>
         <source>Au moins un preset doit être sélectionné.</source>
-        <translation type="unfinished">Almeno un preset deve essere selezionato.</translation>
+        <translation>Almeno un preset deve essere selezionato.</translation>
     </message>
 </context>
 <context>
@@ -1048,7 +1048,7 @@
     <message>
         <location filename="gui_divers/dialog_help.cpp" line="148"/>
         <source>Pages d&apos;aperçu</source>
-        <translation type="unfinished"></translation>
+        <translation>Presentazione</translation>
     </message>
     <message>
         <location filename="gui_divers/dialog_help.cpp" line="155"/>
@@ -1741,7 +1741,7 @@
     <message>
         <location filename="tools/dialog_transposition.ui" line="27"/>
         <source>Adapter l&apos;étendue de notes</source>
-        <translation type="unfinished">Adattare keyrange</translation>
+        <translation>Adatta l&apos;intervallo delle note</translation>
     </message>
 </context>
 <context>
@@ -2308,7 +2308,7 @@
     <message>
         <location filename="mainwindow.ui" line="1535"/>
         <source>Enlever tous les &amp;modulateurs</source>
-        <translation>Rimuovi tutti i modulatori</translation>
+        <translation>Rimuovi tutti i &amp;modulatori</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="1543"/>
@@ -2869,7 +2869,7 @@ Dividere il file in più SF2 può risolvere il problema.</translation>
         <location filename="mainwindow.cpp" line="2589"/>
         <location filename="mainwindow.cpp" line="2590"/>
         <source>,</source>
-        <translatorcomment>decimal separator</translatorcomment>
+        <translatorcomment>separatore decimale</translatorcomment>
         <translation>.</translation>
     </message>
     <message>
@@ -3334,12 +3334,12 @@ Dividere il file in più SF2 può risolvere il problema.</translation>
     <message>
         <location filename="pages/pageoverviewinst.cpp" line="42"/>
         <source>Étendue totale (note)</source>
-        <translation type="unfinished"></translation>
+        <translation>Massimo intervallo di note</translation>
     </message>
     <message>
         <location filename="pages/pageoverviewinst.cpp" line="43"/>
         <source>Étendue totale (vélocité)</source>
-        <translation type="unfinished"></translation>
+        <translation>Massimo intervallo di velocità</translation>
     </message>
     <message>
         <location filename="pages/pageoverviewinst.cpp" line="44"/>
@@ -3349,7 +3349,7 @@ Dividere il file in più SF2 può risolvere il problema.</translation>
     <message>
         <location filename="pages/pageoverviewinst.cpp" line="45"/>
         <source>Lecture en boucle</source>
-        <translation type="unfinished">Loop playback</translation>
+        <translation>Loop playback</translation>
     </message>
     <message>
         <location filename="pages/pageoverviewinst.cpp" line="46"/>
@@ -3377,12 +3377,12 @@ Dividere il file in più SF2 può risolvere il problema.</translation>
     <message>
         <location filename="pages/pageoverviewinst.cpp" line="283"/>
         <source>oui, jusqu&apos;à la fin</source>
-        <translation type="unfinished"></translation>
+        <translation>si, fino alla fine</translation>
     </message>
     <message>
         <location filename="pages/pageoverviewinst.cpp" line="289"/>
         <source>plusieurs modes</source>
-        <translation type="unfinished"></translation>
+        <translation>diversi modi</translation>
     </message>
 </context>
 <context>
@@ -3395,7 +3395,7 @@ Dividere il file in più SF2 può risolvere il problema.</translation>
     <message>
         <location filename="pages/pageoverviewprst.cpp" line="38"/>
         <source>Banque - Preset</source>
-        <translation type="unfinished"></translation>
+        <translation>Banco - Preset</translation>
     </message>
     <message>
         <location filename="pages/pageoverviewprst.cpp" line="39"/>
@@ -3415,12 +3415,12 @@ Dividere il file in più SF2 può risolvere il problema.</translation>
     <message>
         <location filename="pages/pageoverviewprst.cpp" line="42"/>
         <source>Étendue totale (note)</source>
-        <translation type="unfinished"></translation>
+        <translation>Massimo intervallo di note</translation>
     </message>
     <message>
         <location filename="pages/pageoverviewprst.cpp" line="43"/>
         <source>Étendue totale (vélocité)</source>
-        <translation type="unfinished"></translation>
+        <translation>Massimo intervallo di velocità</translation>
     </message>
     <message>
         <location filename="pages/pageoverviewprst.cpp" line="44"/>
@@ -3454,12 +3454,12 @@ Dividere il file in più SF2 può risolvere il problema.</translation>
     <message>
         <location filename="pages/pageoverviewsmpl.cpp" line="38"/>
         <source>Durée totale</source>
-        <translation type="unfinished"></translation>
+        <translation>Durata Totale</translation>
     </message>
     <message>
         <location filename="pages/pageoverviewsmpl.cpp" line="39"/>
         <source>Durée de la boucle</source>
-        <translation type="unfinished"></translation>
+        <translation>Durata del Loop</translation>
     </message>
     <message>
         <location filename="pages/pageoverviewsmpl.cpp" line="40"/>
@@ -3474,12 +3474,12 @@ Dividere il file in più SF2 può risolvere il problema.</translation>
     <message>
         <location filename="pages/pageoverviewsmpl.cpp" line="42"/>
         <source>Type d&apos;échantillon</source>
-        <translation type="unfinished"></translation>
+        <translation>Tipo di campione</translation>
     </message>
     <message>
         <location filename="pages/pageoverviewsmpl.cpp" line="43"/>
         <source>Échantillon lié</source>
-        <translation type="unfinished"></translation>
+        <translation>Campione Collegato</translation>
     </message>
     <message>
         <location filename="pages/pageoverviewsmpl.cpp" line="88"/>
@@ -3501,7 +3501,7 @@ Dividere il file in più SF2 può risolvere il problema.</translation>
     <message>
         <location filename="pages/pageoverviewsmpl.cpp" line="126"/>
         <source>Lien invalide</source>
-        <translation type="unfinished"></translation>
+        <translation>Collegamento non valido</translation>
     </message>
     <message>
         <location filename="pages/pageoverviewsmpl.cpp" line="129"/>
@@ -3513,19 +3513,19 @@ Dividere il file in più SF2 può risolvere il problema.</translation>
         <location filename="pages/pageoverviewsmpl.cpp" line="132"/>
         <source>Stéréo droit</source>
         <oldsource>Stereo droit</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Stereo destro</translation>
     </message>
     <message>
         <location filename="pages/pageoverviewsmpl.cpp" line="135"/>
         <source>Stéréo gauche</source>
         <oldsource>Stereo gauche</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Stereo sinistro</translation>
     </message>
     <message>
         <location filename="pages/pageoverviewsmpl.cpp" line="138"/>
         <source>Stéréo non défini</source>
         <oldsource>Stereo non défini</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Stereo non definito</translation>
     </message>
     <message>
         <location filename="pages/pageoverviewsmpl.cpp" line="158"/>
@@ -3611,17 +3611,17 @@ Dividere il file in più SF2 può risolvere il problema.</translation>
     <message>
         <location filename="pages/pagetable.cpp" line="3026"/>
         <source>Un instrument ne contenant aucun sample n&apos;est pas compatible avec cet outil.</source>
-        <translation type="unfinished">Uno strumento che non contiene campione non è compatibile con questa azione.</translation>
+        <translation>Uno strumento che non contiene campioni non è compatibile con questa azione.</translation>
     </message>
     <message>
         <location filename="pages/pagetable.cpp" line="3029"/>
         <source>Un preset ne contenant aucun instrument n&apos;est pas compatible avec cet outil.</source>
-        <translation type="unfinished">Un preset che non contiene strumenti non è compatibile con questa azione.</translation>
+        <translation>Un preset che non contiene strumenti non è compatibile con questa azione.</translation>
     </message>
     <message>
         <location filename="pages/pagetable.cpp" line="3034"/>
         <source>L&apos;étendue de notes de toutes les divisions doit être spécifiée.</source>
-        <translation type="unfinished">Le gruppo di note di tutte le divisioni devono essere specificati.</translation>
+        <translation>L&apos;intervallo di note di tutte le divisioni deve essere specificato.</translation>
     </message>
     <message>
         <location filename="pages/pagetable.cpp" line="3073"/>
@@ -4806,7 +4806,7 @@ Dividere il file in più SF2 può risolvere il problema.</translation>
     <message>
         <location filename="sf2_core/sound.cpp" line="628"/>
         <source>Impossible d&apos;ouvrir le fichier</source>
-        <translation>Impossibile aprire il file.</translation>
+        <translation>Impossibile aprire il file</translation>
     </message>
     <message>
         <location filename="sf2_core/sound.cpp" line="641"/>
@@ -5002,7 +5002,7 @@ Dividere il file in più SF2 può risolvere il problema.</translation>
     <message>
         <location filename="sf2_core/tree.cpp" line="55"/>
         <source>Nouvel échantillon...</source>
-        <translation>Nuovo &amp;campione...</translation>
+        <translation>Nuovo campione...</translation>
     </message>
     <message>
         <location filename="sf2_core/tree.cpp" line="76"/>
