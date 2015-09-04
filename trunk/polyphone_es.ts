@@ -862,17 +862,17 @@
     <message>
         <location filename="gui_divers/dialog_export.cpp" line="169"/>
         <source>Dans le cas où plusieurs soundfonts sont exportées, le nombre maximal de presets par soundfont est de 127.</source>
-        <translation type="unfinished">En el caso en que se exportan varias soundfonts, el número máximo de presets por soundfont es 127.</translation>
+        <translation>En caso de exportar varias soundfonts el número máxmo de presets por soundfont es 127.</translation>
     </message>
     <message>
         <location filename="gui_divers/dialog_export.cpp" line="175"/>
         <source>Le nombre maximal de soundfonts à exporter est de 127.</source>
-        <translation type="unfinished">El máximo número de preset a la exportación es de 127.</translation>
+        <translation>El número máximo de soundfonts a exportar es 127.</translation>
     </message>
     <message>
         <location filename="gui_divers/dialog_export.cpp" line="182"/>
         <source>Au moins un preset doit être sélectionné.</source>
-        <translation type="unfinished">Al menos un preset tiene que ser seleccionado.</translation>
+        <translation>Al menos un preset tiene que ser seleccionado.</translation>
     </message>
 </context>
 <context>
@@ -1044,7 +1044,7 @@
     <message>
         <location filename="gui_divers/dialog_help.cpp" line="148"/>
         <source>Pages d&apos;aperçu</source>
-        <translation type="unfinished"></translation>
+        <translation>Páginas de resumen</translation>
     </message>
     <message>
         <location filename="gui_divers/dialog_help.cpp" line="155"/>
@@ -1734,7 +1734,7 @@
     <message>
         <location filename="tools/dialog_transposition.ui" line="27"/>
         <source>Adapter l&apos;étendue de notes</source>
-        <translation type="unfinished">Adaptar keyrange</translation>
+        <translation>Adaptar rango de notas</translation>
     </message>
 </context>
 <context>
@@ -3312,22 +3312,22 @@ Dividir el fichero en diferentes sf2 puede resolver el problema.</translation>
     <message>
         <location filename="pages/pageoverviewinst.cpp" line="42"/>
         <source>Étendue totale (note)</source>
-        <translation type="unfinished"></translation>
+        <translation>Máximo rango de notas</translation>
     </message>
     <message>
         <location filename="pages/pageoverviewinst.cpp" line="43"/>
         <source>Étendue totale (vélocité)</source>
-        <translation type="unfinished"></translation>
+        <translation>Máximo rango de velocidad</translation>
     </message>
     <message>
         <location filename="pages/pageoverviewinst.cpp" line="44"/>
         <source>Atténuation</source>
-        <translation type="unfinished">Atenuación</translation>
+        <translation>Atenuación</translation>
     </message>
     <message>
         <location filename="pages/pageoverviewinst.cpp" line="45"/>
         <source>Lecture en boucle</source>
-        <translation type="unfinished">Reproducción en loop</translation>
+        <translation>Reproducción en loop</translation>
     </message>
     <message>
         <location filename="pages/pageoverviewinst.cpp" line="46"/>
@@ -3355,12 +3355,12 @@ Dividir el fichero en diferentes sf2 puede resolver el problema.</translation>
     <message>
         <location filename="pages/pageoverviewinst.cpp" line="283"/>
         <source>oui, jusqu&apos;à la fin</source>
-        <translation type="unfinished"></translation>
+        <translation>sí, hasta el final</translation>
     </message>
     <message>
         <location filename="pages/pageoverviewinst.cpp" line="289"/>
         <source>plusieurs modes</source>
-        <translation type="unfinished"></translation>
+        <translation>varios modos</translation>
     </message>
 </context>
 <context>
@@ -3368,17 +3368,17 @@ Dividir el fichero en diferentes sf2 puede resolver el problema.</translation>
     <message>
         <location filename="pages/pageoverviewprst.cpp" line="32"/>
         <source>Liste des presets</source>
-        <translation type="unfinished">Lista de presets</translation>
+        <translation>Lista de presets</translation>
     </message>
     <message>
         <location filename="pages/pageoverviewprst.cpp" line="38"/>
         <source>Banque - Preset</source>
-        <translation type="unfinished"></translation>
+        <translation>Banco - Preset</translation>
     </message>
     <message>
         <location filename="pages/pageoverviewprst.cpp" line="39"/>
         <source>Nombre d&apos;instruments</source>
-        <translation type="unfinished">Número de instrumentos</translation>
+        <translation>Número de instrumentos</translation>
     </message>
     <message>
         <location filename="pages/pageoverviewprst.cpp" line="40"/>
@@ -3393,12 +3393,12 @@ Dividir el fichero en diferentes sf2 puede resolver el problema.</translation>
     <message>
         <location filename="pages/pageoverviewprst.cpp" line="42"/>
         <source>Étendue totale (note)</source>
-        <translation type="unfinished"></translation>
+        <translation>Máximo rango de notas</translation>
     </message>
     <message>
         <location filename="pages/pageoverviewprst.cpp" line="43"/>
         <source>Étendue totale (vélocité)</source>
-        <translation type="unfinished"></translation>
+        <translation>Máximo rango de velocidad</translation>
     </message>
     <message>
         <location filename="pages/pageoverviewprst.cpp" line="44"/>
@@ -3432,12 +3432,12 @@ Dividir el fichero en diferentes sf2 puede resolver el problema.</translation>
     <message>
         <location filename="pages/pageoverviewsmpl.cpp" line="38"/>
         <source>Durée totale</source>
-        <translation type="unfinished"></translation>
+        <translation>Duración total</translation>
     </message>
     <message>
         <location filename="pages/pageoverviewsmpl.cpp" line="39"/>
         <source>Durée de la boucle</source>
-        <translation type="unfinished"></translation>
+        <translation>Duración de loop</translation>
     </message>
     <message>
         <location filename="pages/pageoverviewsmpl.cpp" line="40"/>
@@ -3452,12 +3452,12 @@ Dividir el fichero en diferentes sf2 puede resolver el problema.</translation>
     <message>
         <location filename="pages/pageoverviewsmpl.cpp" line="42"/>
         <source>Type d&apos;échantillon</source>
-        <translation type="unfinished"></translation>
+        <translation>Tipo de muestra</translation>
     </message>
     <message>
         <location filename="pages/pageoverviewsmpl.cpp" line="43"/>
         <source>Échantillon lié</source>
-        <translation type="unfinished"></translation>
+        <translation>Muestra enlazada</translation>
     </message>
     <message>
         <location filename="pages/pageoverviewsmpl.cpp" line="88"/>
@@ -3479,7 +3479,7 @@ Dividir el fichero en diferentes sf2 puede resolver el problema.</translation>
     <message>
         <location filename="pages/pageoverviewsmpl.cpp" line="126"/>
         <source>Lien invalide</source>
-        <translation type="unfinished"></translation>
+        <translation>Enlace no válido</translation>
     </message>
     <message>
         <location filename="pages/pageoverviewsmpl.cpp" line="129"/>
@@ -3491,19 +3491,19 @@ Dividir el fichero en diferentes sf2 puede resolver el problema.</translation>
         <location filename="pages/pageoverviewsmpl.cpp" line="132"/>
         <source>Stéréo droit</source>
         <oldsource>Stereo droit</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Estéreo derecha</translation>
     </message>
     <message>
         <location filename="pages/pageoverviewsmpl.cpp" line="135"/>
         <source>Stéréo gauche</source>
         <oldsource>Stereo gauche</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Estéreo izquerda</translation>
     </message>
     <message>
         <location filename="pages/pageoverviewsmpl.cpp" line="138"/>
         <source>Stéréo non défini</source>
         <oldsource>Stereo non défini</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Estéreo no definido</translation>
     </message>
     <message>
         <location filename="pages/pageoverviewsmpl.cpp" line="158"/>
@@ -3589,17 +3589,17 @@ Dividir el fichero en diferentes sf2 puede resolver el problema.</translation>
     <message>
         <location filename="pages/pagetable.cpp" line="3026"/>
         <source>Un instrument ne contenant aucun sample n&apos;est pas compatible avec cet outil.</source>
-        <translation type="unfinished">Un instrumento que no contiene muestra no es compatible con esta acción.</translation>
+        <translation>Un instrumento que no contiene muestras es incompatible con esta acción.</translation>
     </message>
     <message>
         <location filename="pages/pagetable.cpp" line="3029"/>
         <source>Un preset ne contenant aucun instrument n&apos;est pas compatible avec cet outil.</source>
-        <translation type="unfinished">Un preset que no contiene ningún instrumento no es compatible con esta acción.</translation>
+        <translation>Un preset que no contiene ningún instrumento es incompatible con esta acción.</translation>
     </message>
     <message>
         <location filename="pages/pagetable.cpp" line="3034"/>
         <source>L&apos;étendue de notes de toutes les divisions doit être spécifiée.</source>
-        <translation type="unfinished">Las extensiones de notas de todas las divisiones se deben especificar.</translation>
+        <translation>El rango de notas de todas las divisiones debe ser especificado.</translation>
     </message>
     <message>
         <location filename="pages/pagetable.cpp" line="3073"/>

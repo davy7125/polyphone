@@ -286,7 +286,7 @@ QString PageOverviewInst::getLoop(EltID id)
         return "?";
     }
     else
-        return trUtf8("plusieurs modes");
+        return trUtf8("plusieurs modes", "speaking about loop modes");
 }
 
 QString PageOverviewInst::getChorus(EltID id)
