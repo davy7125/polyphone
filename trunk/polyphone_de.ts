@@ -14,102 +14,102 @@
     <message>
         <location filename="gui_divers/config.ui" line="17"/>
         <source>Préférences</source>
-        <translation type="unfinished"></translation>
+        <translation>Einstellungen</translation>
     </message>
     <message>
         <location filename="gui_divers/config.ui" line="46"/>
         <source>Général</source>
-        <translation type="unfinished"></translation>
+        <translation>Generell</translation>
     </message>
     <message>
         <location filename="gui_divers/config.ui" line="73"/>
         <source>Interface</source>
-        <translation type="unfinished"></translation>
+        <translation>Grafische Vorstellung </translation>
     </message>
     <message>
         <location filename="gui_divers/config.ui" line="110"/>
         <source>Do central → 60, puis 61</source>
-        <translation type="unfinished"></translation>
+        <translation>Mitte C → 60, dann 61</translation>
     </message>
     <message>
         <location filename="gui_divers/config.ui" line="115"/>
         <source>Do central → C3, puis C♯3</source>
-        <translation type="unfinished"></translation>
+        <translation>Mitte C → C3, dann C♯3</translation>
     </message>
     <message>
         <location filename="gui_divers/config.ui" line="120"/>
         <source>Do central → C3, puis D♭3</source>
-        <translation type="unfinished"></translation>
+        <translation>Mitte C → C3, dann D♭3</translation>
     </message>
     <message>
         <location filename="gui_divers/config.ui" line="125"/>
         <source>Do central → C4, puis C♯4</source>
-        <translation type="unfinished"></translation>
+        <translation>Mitte C → C4, dann C♯4</translation>
     </message>
     <message>
         <location filename="gui_divers/config.ui" line="130"/>
         <source>Do central → C4, puis D♭4</source>
-        <translation type="unfinished"></translation>
+        <translation>Mitte C → C4, dann D♭4</translation>
     </message>
     <message>
         <location filename="gui_divers/config.ui" line="135"/>
         <source>Do central → C5, puis C♯5</source>
-        <translation type="unfinished"></translation>
+        <translation>Mitte C → C5, dann C♯5</translation>
     </message>
     <message>
         <location filename="gui_divers/config.ui" line="140"/>
         <source>Do central → C5, puis D♭5</source>
-        <translation type="unfinished"></translation>
+        <translation>Mitte C → C5, dann D♭5</translation>
     </message>
     <message>
         <location filename="gui_divers/config.ui" line="160"/>
         <source>Nom des notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Notenname</translation>
     </message>
     <message>
         <location filename="gui_divers/config.ui" line="173"/>
         <source>fixe</source>
-        <translation type="unfinished"></translation>
+        <translation>fest</translation>
     </message>
     <message>
         <location filename="gui_divers/config.ui" line="186"/>
         <source>Largeur des colonnes</source>
-        <translation type="unfinished"></translation>
+        <translation>Spaltenbreite</translation>
     </message>
     <message>
         <location filename="gui_divers/config.ui" line="199"/>
         <source>Langue</source>
-        <translation type="unfinished"></translation>
+        <translation>Sprache</translation>
     </message>
     <message>
         <location filename="gui_divers/config.ui" line="228"/>
         <source>Entrées / sorties</source>
-        <translation type="unfinished"></translation>
+        <translation>Eingang / Ausgang</translation>
     </message>
     <message>
         <location filename="gui_divers/config.ui" line="309"/>
         <source>Sortie audio</source>
-        <translation type="unfinished"></translation>
+        <translation>Audioausgang</translation>
     </message>
     <message>
         <location filename="gui_divers/config.ui" line="338"/>
         <source>Taille du tampon</source>
-        <translation type="unfinished"></translation>
+        <translation>Pufferlänge</translation>
     </message>
     <message>
         <location filename="gui_divers/config.ui" line="361"/>
         <source>Entrée midi</source>
-        <translation type="unfinished"></translation>
+        <translation>Midi-Eingang</translation>
     </message>
     <message>
         <location filename="gui_divers/config.ui" line="385"/>
         <source>Synthétiseur</source>
-        <translation type="unfinished"></translation>
+        <translation>Tonerzeugung</translation>
     </message>
     <message>
         <location filename="gui_divers/config.ui" line="417"/>
         <source>Réverbération</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Halleffekt</translation>
     </message>
     <message>
         <location filename="gui_divers/config.ui" line="453"/>
@@ -140,12 +140,12 @@
     <message>
         <location filename="gui_divers/config.ui" line="653"/>
         <source>Fréquence</source>
-        <translation type="unfinished"></translation>
+        <translation>Frequenz</translation>
     </message>
     <message>
         <location filename="gui_divers/config.ui" line="669"/>
         <source>Amplitude</source>
-        <translation type="unfinished"></translation>
+        <translation>Breite</translation>
     </message>
     <message>
         <location filename="gui_divers/config.ui" line="714"/>
@@ -160,7 +160,7 @@
     <message>
         <location filename="gui_divers/config.ui" line="795"/>
         <source>Couleurs du graphique</source>
-        <translation type="unfinished"></translation>
+        <translation>Grafikfarben</translation>
     </message>
     <message>
         <location filename="gui_divers/config.ui" line="841"/>
@@ -191,17 +191,17 @@
     <message>
         <location filename="gui_divers/config.ui" line="1081"/>
         <source>Arrière-plan</source>
-        <translation type="unfinished"></translation>
+        <translation>Hintergrund</translation>
     </message>
     <message>
         <location filename="gui_divers/config.ui" line="1156"/>
         <source>Onde</source>
-        <translation type="unfinished"></translation>
+        <translation>Welle</translation>
     </message>
     <message>
         <location filename="gui_divers/config.ui" line="1172"/>
         <source>Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Optionen</translation>
     </message>
     <message>
         <location filename="gui_divers/config.ui" line="1202"/>
@@ -241,88 +241,88 @@
     <message>
         <location filename="gui_divers/config.ui" line="1567"/>
         <source>Clavier</source>
-        <translation type="unfinished"></translation>
+        <translation>Tastatur</translation>
     </message>
     <message>
         <location filename="gui_divers/config.ui" line="1601"/>
         <source>Octave 1</source>
-        <translation type="unfinished"></translation>
+        <translation>Oktave 1</translation>
     </message>
     <message>
         <location filename="gui_divers/config.ui" line="1606"/>
         <source>Octave 2</source>
-        <translation type="unfinished"></translation>
+        <translation>Oktave 2</translation>
     </message>
     <message>
         <location filename="gui_divers/config.ui" line="1611"/>
         <source>Octave 3</source>
-        <translation type="unfinished"></translation>
+        <translation>Oktave 3</translation>
     </message>
     <message>
         <location filename="gui_divers/config.ui" line="1616"/>
         <source>Octave 4</source>
-        <translation type="unfinished"></translation>
+        <translation>Oktave 4</translation>
     </message>
     <message>
         <location filename="gui_divers/config.ui" line="1621"/>
         <location filename="gui_divers/config.ui" line="1681"/>
         <source>Do</source>
-        <translation type="unfinished"></translation>
+        <translation>C</translation>
     </message>
     <message>
         <location filename="gui_divers/config.ui" line="1626"/>
         <source>Do#</source>
-        <translation type="unfinished"></translation>
+        <translation>C♯</translation>
     </message>
     <message>
         <location filename="gui_divers/config.ui" line="1631"/>
         <source>Ré</source>
-        <translation type="unfinished"></translation>
+        <translation>D</translation>
     </message>
     <message>
         <location filename="gui_divers/config.ui" line="1636"/>
         <source>Ré#</source>
-        <translation type="unfinished"></translation>
+        <translation>D♯</translation>
     </message>
     <message>
         <location filename="gui_divers/config.ui" line="1641"/>
         <source>Mi</source>
-        <translation type="unfinished"></translation>
+        <translation>E</translation>
     </message>
     <message>
         <location filename="gui_divers/config.ui" line="1646"/>
         <source>Fa</source>
-        <translation type="unfinished"></translation>
+        <translation>F</translation>
     </message>
     <message>
         <location filename="gui_divers/config.ui" line="1651"/>
         <source>Fa#</source>
-        <translation type="unfinished"></translation>
+        <translation>F♯</translation>
     </message>
     <message>
         <location filename="gui_divers/config.ui" line="1656"/>
         <source>Sol</source>
-        <translation type="unfinished"></translation>
+        <translation>G</translation>
     </message>
     <message>
         <location filename="gui_divers/config.ui" line="1661"/>
         <source>Sol#</source>
-        <translation type="unfinished"></translation>
+        <translation>G♯</translation>
     </message>
     <message>
         <location filename="gui_divers/config.ui" line="1666"/>
         <source>La</source>
-        <translation type="unfinished"></translation>
+        <translation>A</translation>
     </message>
     <message>
         <location filename="gui_divers/config.ui" line="1671"/>
         <source>La#</source>
-        <translation type="unfinished"></translation>
+        <translation>A♯</translation>
     </message>
     <message>
         <location filename="gui_divers/config.ui" line="1676"/>
         <source>Si</source>
-        <translation type="unfinished"></translation>
+        <translation>B</translation>
     </message>
     <message>
         <location filename="gui_divers/config.ui" line="1702"/>
@@ -332,34 +332,34 @@
     <message>
         <location filename="gui_divers/config.ui" line="1719"/>
         <source>Premier Do</source>
-        <translation type="unfinished"></translation>
+        <translation>Erstes C</translation>
     </message>
     <message>
         <location filename="gui_divers/config.ui" line="1792"/>
         <source>Fermer</source>
-        <translation type="unfinished"></translation>
+        <translation>Schließen</translation>
     </message>
     <message>
         <location filename="gui_divers/config.cpp" line="210"/>
         <location filename="gui_divers/config.cpp" line="1071"/>
         <source>Information</source>
-        <translation type="unfinished"></translation>
+        <translation>Information</translation>
     </message>
     <message>
         <location filename="gui_divers/config.cpp" line="211"/>
         <location filename="gui_divers/config.cpp" line="1072"/>
         <source>La modification sera prise en compte lors du prochain démarrage du logiciel.</source>
-        <translation type="unfinished"></translation>
+        <translation>Die Änderung wird bei der nächsten Öffnung der Software in Betracht genommen werden.</translation>
     </message>
     <message>
         <location filename="gui_divers/config.cpp" line="583"/>
         <source>Couleur du fond</source>
-        <translation type="unfinished"></translation>
+        <translation>Hintergrundfarbe</translation>
     </message>
     <message>
         <location filename="gui_divers/config.cpp" line="593"/>
         <source>Couleur de l&apos;onde</source>
-        <translation type="unfinished"></translation>
+        <translation>Wellenfarbe</translation>
     </message>
     <message>
         <location filename="gui_divers/config.cpp" line="603"/>
@@ -385,7 +385,7 @@
         <location filename="gui_divers/config.cpp" line="671"/>
         <location filename="gui_divers/config.cpp" line="687"/>
         <source>---- séparateur ----</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">-</translation>
     </message>
     <message>
         <location filename="gui_divers/config.h" line="508"/>
@@ -663,7 +663,7 @@
     <message>
         <location filename="gui_divers/dialog_about.ui" line="198"/>
         <source>Fermer</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Schließen</translation>
     </message>
     <message>
         <location filename="gui_divers/dialog_about.cpp" line="35"/>
@@ -773,12 +773,12 @@
     <message>
         <location filename="tools/dialog_duplication.ui" line="17"/>
         <source>Duplication des divisions</source>
-        <translation type="unfinished"></translation>
+        <translation>Aufteilungenvervielfältigung</translation>
     </message>
     <message>
         <location filename="tools/dialog_duplication.ui" line="65"/>
         <source>Une division pour chaque note</source>
-        <translation type="unfinished"></translation>
+        <translation>Eine Aufteilung für jede Note</translation>
     </message>
     <message>
         <location filename="tools/dialog_duplication.ui" line="124"/>
@@ -832,7 +832,7 @@
     <message>
         <location filename="gui_divers/dialog_export.ui" line="165"/>
         <source>Annuler</source>
-        <translation type="unfinished"></translation>
+        <translation>Stornieren</translation>
     </message>
     <message>
         <location filename="gui_divers/dialog_export.cpp" line="111"/>
@@ -845,7 +845,7 @@
         <location filename="gui_divers/dialog_export.cpp" line="175"/>
         <location filename="gui_divers/dialog_export.cpp" line="182"/>
         <source>Attention</source>
-        <translation type="unfinished"></translation>
+        <translation>Vorsicht</translation>
     </message>
     <message>
         <location filename="gui_divers/dialog_export.cpp" line="130"/>
@@ -1093,7 +1093,7 @@
         <location filename="gui_divers/dialog_help.cpp" line="167"/>
         <location filename="gui_divers/dialog_help.cpp" line="176"/>
         <source>Duplication des divisions</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Aufteilungenvervielfältigung</translation>
     </message>
     <message>
         <location filename="gui_divers/dialog_help.cpp" line="168"/>
@@ -1166,7 +1166,7 @@
     <message>
         <location filename="gui_divers/dialog_help.cpp" line="189"/>
         <source>Magnétophone</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Rekorder</translation>
     </message>
     <message>
         <location filename="gui_divers/dialog_help.cpp" line="191"/>
@@ -1176,17 +1176,17 @@
     <message>
         <location filename="gui_divers/dialog_help.cpp" line="192"/>
         <source>Général</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Generell</translation>
     </message>
     <message>
         <location filename="gui_divers/dialog_help.cpp" line="193"/>
         <source>Synthétiseur</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Tonerzeugung</translation>
     </message>
     <message>
         <location filename="gui_divers/dialog_help.cpp" line="196"/>
         <source>Clavier</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Tastatur</translation>
     </message>
     <message>
         <location filename="gui_divers/dialog_help.cpp" line="198"/>
@@ -1239,17 +1239,17 @@
     <message>
         <location filename="gui_divers/dialog_list.cpp" line="54"/>
         <source>Liste des échantillons</source>
-        <translation type="unfinished"></translation>
+        <translation>Sampleliste</translation>
     </message>
     <message>
         <location filename="gui_divers/dialog_list.cpp" line="59"/>
         <source>Liste des instruments</source>
-        <translation type="unfinished"></translation>
+        <translation>Instrumenteliste</translation>
     </message>
     <message>
         <location filename="gui_divers/dialog_list.cpp" line="64"/>
         <source>Liste des presets</source>
-        <translation type="unfinished"></translation>
+        <translation>Presetliste</translation>
     </message>
 </context>
 <context>
@@ -1257,23 +1257,23 @@
     <message>
         <location filename="tools/dialog_magnetophone.ui" line="26"/>
         <source>Magnétophone</source>
-        <translation type="unfinished"></translation>
+        <translation>Rekorder</translation>
     </message>
     <message>
         <location filename="tools/dialog_magnetophone.cpp" line="95"/>
         <source>Sauvegarder un enregistrement</source>
-        <translation type="unfinished"></translation>
+        <translation>Eine Aufnahme speichern</translation>
     </message>
     <message>
         <location filename="tools/dialog_magnetophone.cpp" line="96"/>
         <source>Fichier .wav (*.wav)</source>
-        <translation type="unfinished"></translation>
+        <translation>.wav Datei (*.wav)</translation>
     </message>
     <message>
         <location filename="tools/dialog_magnetophone.cpp" line="161"/>
         <location filename="tools/dialog_magnetophone.cpp" line="163"/>
         <source>enregistrement</source>
-        <translation type="unfinished"></translation>
+        <translation>Aufnahme</translation>
     </message>
 </context>
 <context>
@@ -1621,7 +1621,7 @@
     <message>
         <location filename="gui_divers/dialogselection.ui" line="46"/>
         <source>Annuler</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Stornieren</translation>
     </message>
 </context>
 <context>
@@ -2380,7 +2380,7 @@
     <message>
         <location filename="mainwindow.ui" line="1334"/>
         <source>Duplication des divisions</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Aufteilungenvervielfältigung</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="1349"/>
@@ -2514,7 +2514,7 @@
         <location filename="mainwindow.cpp" line="1987"/>
         <location filename="mainwindow.cpp" line="2615"/>
         <source>Attention</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Vorsicht</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="268"/>
@@ -2729,7 +2729,7 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
     <message>
         <location filename="mainwindow.cpp" line="1503"/>
         <source>Fichier .wav (*.wav)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">.wav Datei (*.wav)</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1551"/>
@@ -2876,7 +2876,7 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
     <message>
         <location filename="mainwindow.cpp" line="2566"/>
         <source>Fréquence</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Frequenz</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="2567"/>
@@ -2898,7 +2898,7 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
         <location filename="mainwindow.cpp" line="2617"/>
         <location filename="mainwindow.cpp" line="2619"/>
         <source>Information</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Information</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="2617"/>
@@ -3259,7 +3259,7 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
     <message>
         <location filename="pages/pageoverviewinst.cpp" line="32"/>
         <source>Liste des instruments</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Instrumenteliste</translation>
     </message>
     <message>
         <location filename="pages/pageoverviewinst.cpp" line="38"/>
@@ -3310,7 +3310,7 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
         <location filename="pages/pageoverviewinst.cpp" line="47"/>
         <source>Réverbération</source>
         <oldsource>Reverbération</oldsource>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Halleffekt</translation>
     </message>
     <message>
         <location filename="pages/pageoverviewinst.cpp" line="95"/>
@@ -3340,7 +3340,7 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
     <message>
         <location filename="pages/pageoverviewprst.cpp" line="32"/>
         <source>Liste des presets</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Presetliste</translation>
     </message>
     <message>
         <location filename="pages/pageoverviewprst.cpp" line="38"/>
@@ -3386,7 +3386,7 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
         <location filename="pages/pageoverviewprst.cpp" line="46"/>
         <source>Réverbération</source>
         <oldsource>Reverbération</oldsource>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Halleffekt</translation>
     </message>
 </context>
 <context>
@@ -3394,7 +3394,7 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
     <message>
         <location filename="pages/pageoverviewsmpl.cpp" line="31"/>
         <source>Liste des échantillons</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Sampleliste</translation>
     </message>
     <message>
         <location filename="pages/pageoverviewsmpl.cpp" line="37"/>
@@ -3546,7 +3546,7 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
         <location filename="pages/pagetable.cpp" line="3081"/>
         <location filename="pages/pagetable.cpp" line="3083"/>
         <source>Attention</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Vorsicht</translation>
     </message>
     <message>
         <location filename="pages/pagetable.cpp" line="1878"/>
@@ -3905,7 +3905,7 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
     <message>
         <location filename="pages/page_inst.cpp" line="360"/>
         <source>Attention</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Vorsicht</translation>
     </message>
     <message>
         <location filename="pages/page_inst.cpp" line="360"/>
@@ -3920,7 +3920,7 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
     <message>
         <location filename="pages/page_inst.cpp" line="386"/>
         <source>Annuler</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Stornieren</translation>
     </message>
     <message>
         <location filename="pages/page_inst.cpp" line="403"/>
@@ -4465,7 +4465,7 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
         <location filename="pages/page_smpl.cpp" line="545"/>
         <location filename="pages/page_smpl.cpp" line="1803"/>
         <source>Information</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Information</translation>
     </message>
     <message>
         <location filename="pages/page_smpl.cpp" line="546"/>
@@ -4495,7 +4495,7 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
         <location filename="pages/page_smpl.cpp" line="1419"/>
         <location filename="pages/page_smpl.cpp" line="1483"/>
         <source>Annuler</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Stornieren</translation>
     </message>
     <message>
         <location filename="pages/page_smpl.cpp" line="1199"/>
@@ -4520,7 +4520,7 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
     <message>
         <location filename="pages/page_smpl.cpp" line="1208"/>
         <source>Attention</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Vorsicht</translation>
     </message>
     <message>
         <location filename="pages/page_smpl.cpp" line="1222"/>
@@ -4636,7 +4636,7 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
         <location filename="sf2_core/sound.cpp" line="673"/>
         <location filename="sf2_core/sound.cpp" line="681"/>
         <source>Attention</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Vorsicht</translation>
     </message>
     <message>
         <location filename="sf2_core/duplicator.cpp" line="564"/>
@@ -4882,65 +4882,65 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
     <message>
         <location filename="sf2_core/tree.cpp" line="55"/>
         <source>Nouvel échantillon...</source>
-        <translation type="unfinished"></translation>
+        <translation>Neues Sample...</translation>
     </message>
     <message>
         <location filename="sf2_core/tree.cpp" line="58"/>
         <source>Nouvel instrument...</source>
-        <translation type="unfinished"></translation>
+        <translation>Neues Instrument...</translation>
     </message>
     <message>
         <location filename="sf2_core/tree.cpp" line="61"/>
         <source>Nouveau preset...</source>
-        <translation type="unfinished"></translation>
+        <translation>Neues Preset...</translation>
     </message>
     <message>
         <location filename="sf2_core/tree.cpp" line="67"/>
         <source>Associer à...</source>
-        <translation type="unfinished"></translation>
+        <translation>Binden zu...</translation>
     </message>
     <message>
         <location filename="sf2_core/tree.cpp" line="70"/>
         <source>Remplacer par...</source>
-        <translation type="unfinished"></translation>
+        <translation>Ersetzen durch...</translation>
     </message>
     <message>
         <location filename="sf2_core/tree.cpp" line="76"/>
         <source>Copier</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopieren</translation>
     </message>
     <message>
         <location filename="sf2_core/tree.cpp" line="80"/>
         <source>Coller</source>
-        <translation type="unfinished"></translation>
+        <translation>Einfügen</translation>
     </message>
     <message>
         <location filename="sf2_core/tree.cpp" line="84"/>
         <source>Supprimer</source>
-        <translation type="unfinished"></translation>
+        <translation>Löschen</translation>
     </message>
     <message>
         <location filename="sf2_core/tree.cpp" line="91"/>
         <source>Renommer...</source>
-        <translation type="unfinished"></translation>
+        <translation>Umbenennen...</translation>
     </message>
     <message>
         <location filename="sf2_core/tree.cpp" line="98"/>
         <source>Fermer le fichier</source>
-        <translation type="unfinished"></translation>
+        <translation>Die Datei schließen</translation>
     </message>
     <message>
         <location filename="sf2_core/tree.cpp" line="115"/>
         <location filename="sf2_core/tree.cpp" line="185"/>
         <source>Tout afficher</source>
-        <translation type="unfinished"></translation>
+        <translation>Alles markieren</translation>
     </message>
     <message>
         <location filename="sf2_core/tree.cpp" line="494"/>
         <location filename="sf2_core/tree.cpp" line="506"/>
         <location filename="sf2_core/tree.cpp" line="520"/>
         <source>&amp;Renommer...</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Umbenennen...</translation>
     </message>
     <message>
         <location filename="sf2_core/tree.cpp" line="501"/>
