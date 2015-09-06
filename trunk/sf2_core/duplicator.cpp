@@ -353,10 +353,10 @@ void Duplicator::copySmpl(EltID idSource, EltID idDest)
                     val.sfLinkValue = linkedSample;
                     break;
                 case rightSample:
-                    val.sfLinkValue = rightSample;
+                    val.sfLinkValue = leftSample;
                     break;
                 case leftSample:
-                    val.sfLinkValue = leftSample;
+                    val.sfLinkValue = rightSample;
                     break;
                 case RomLinkedSample:
                     val.sfLinkValue = RomLinkedSample;
