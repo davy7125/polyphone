@@ -293,6 +293,7 @@ void Config::setNumPortMidi(int val)
 void Config::addFile(TypeFichier typeFichier, QString filePath)
 {
     filePath = filePath.replace("\\", "/");
+
     // Modification des fichiers récemment ouverts
     switch (typeFichier)
     {
@@ -330,6 +331,7 @@ void Config::addFile(TypeFichier typeFichier, QString filePath)
     }
     this->store();
 }
+
 QString Config::getLastFile(TypeFichier typeFichier, int num)
 {
     QString lastFile;
@@ -358,6 +360,7 @@ QString Config::getLastFile(TypeFichier typeFichier, int num)
 
     return lastFile;
 }
+
 QString Config::getLastDirectory(TypeFichier typeFichier)
 {
     QString lastDir = getLastFile(typeFichier);
@@ -402,6 +405,7 @@ void Config::on_dialRevNiveau_valueChanged(int value)
         this->mainWindow->setSynthReverb(revLevel, revSize, revWidth, revDamping);
     }
 }
+
 void Config::on_dialRevProfondeur_valueChanged(int value)
 {
     if (this->loaded)
@@ -411,6 +415,7 @@ void Config::on_dialRevProfondeur_valueChanged(int value)
         this->mainWindow->setSynthReverb(revLevel, revSize, revWidth, revDamping);
     }
 }
+
 void Config::on_dialRevDensite_valueChanged(int value)
 {
     if (this->loaded)
@@ -420,6 +425,7 @@ void Config::on_dialRevDensite_valueChanged(int value)
         this->mainWindow->setSynthReverb(revLevel, revSize, revWidth, revDamping);
     }
 }
+
 void Config::on_dialRevAttenuation_valueChanged(int value)
 {
     if (this->loaded)
@@ -429,6 +435,7 @@ void Config::on_dialRevAttenuation_valueChanged(int value)
         this->mainWindow->setSynthReverb(revLevel, revSize, revWidth, revDamping);
     }
 }
+
 void Config::on_dialChoNiveau_valueChanged(int value)
 {
     if (this->loaded)
@@ -438,6 +445,7 @@ void Config::on_dialChoNiveau_valueChanged(int value)
         this->mainWindow->setSynthChorus(choLevel, choDepth, choFrequency);
     }
 }
+
 void Config::on_dialChoAmplitude_valueChanged(int value)
 {
     if (this->loaded)
@@ -447,6 +455,7 @@ void Config::on_dialChoAmplitude_valueChanged(int value)
         this->mainWindow->setSynthChorus(choLevel, choDepth, choFrequency);
     }
 }
+
 void Config::on_dialChoFrequence_valueChanged(int value)
 {
     if (this->loaded)
@@ -456,6 +465,7 @@ void Config::on_dialChoFrequence_valueChanged(int value)
         this->mainWindow->setSynthChorus(choLevel, choDepth, choFrequency);
     }
 }
+
 void Config::on_checkRepercussionStereo_clicked()
 {
     if (this->loaded)
@@ -529,6 +539,7 @@ void Config::load()
     this->_velocity         = settings.value("keyboard/velocity", 127).toInt();
     this->sameWidthTable    = settings.value("affichage/same_width_table", false).toBool();
 }
+
 void Config::store()
 {
     settings.setValue("recent_file/record",             this->recordFile);
@@ -578,6 +589,7 @@ void Config::setColors()
     this->ui->pushColorPlay->setStyleSheet(styleStart + this->colorList.at(5).name() + ";}");
     this->colorsChanged();
 }
+
 void Config::on_pushColorBackground_clicked()
 {
     QColor color = QColorDialog::getColor(this->colorList.at(0), this, trUtf8("Couleur du fond"));
@@ -588,6 +600,7 @@ void Config::on_pushColorBackground_clicked()
         this->setColors();
     }
 }
+
 void Config::on_pushColorForeground_clicked()
 {
     QColor color = QColorDialog::getColor(this->colorList.at(1), this, trUtf8("Couleur de l'onde"));
@@ -598,6 +611,7 @@ void Config::on_pushColorForeground_clicked()
         this->setColors();
     }
 }
+
 void Config::on_pushColorGrid_clicked()
 {
     QColor color = QColorDialog::getColor(this->colorList.at(2), this, trUtf8("Couleur de la grille"));
@@ -608,6 +622,7 @@ void Config::on_pushColorGrid_clicked()
         this->setColors();
     }
 }
+
 void Config::on_pushColorStartloop_clicked()
 {
     QColor color = QColorDialog::getColor(this->colorList.at(3), this, trUtf8("Couleur du début de la boucle"));
@@ -618,6 +633,7 @@ void Config::on_pushColorStartloop_clicked()
         this->setColors();
     }
 }
+
 void Config::on_pushColorEndloop_clicked()
 {
     QColor color = QColorDialog::getColor(this->colorList.at(4), this, trUtf8("Couleur de la fin de la boucle"));
@@ -628,6 +644,7 @@ void Config::on_pushColorEndloop_clicked()
         this->setColors();
     }
 }
+
 void Config::on_pushColorPlay_clicked()
 {
     QColor color = QColorDialog::getColor(this->colorList.at(5), this, trUtf8("Couleur du curseur de lecture"));
@@ -638,6 +655,7 @@ void Config::on_pushColorPlay_clicked()
         this->setColors();
     }
 }
+
 void Config::on_pushColorRestore_clicked()
 {
     this->colorList.clear();
@@ -653,6 +671,7 @@ void Config::setListeActions(QList<QAction *> actions)
     actionListToolbar = settings.value("affichage/actions", this->getDefaultListActions()).toByteArray();
     this->fillActions();
 }
+
 void Config::fillActions()
 {
     // Liste des actions disponibles
@@ -718,6 +737,7 @@ void Config::fillActions()
         mainWindow->setListeActions(liste);
     }
 }
+
 void Config::on_pushUp_clicked()
 {
     if (this->ui->listToolbar->currentRow() > 0)
@@ -733,6 +753,7 @@ void Config::on_pushUp_clicked()
         }
     }
 }
+
 void Config::on_pushDown_clicked()
 {
     if (this->ui->listToolbar->currentRow() != -1 &&
@@ -749,6 +770,7 @@ void Config::on_pushDown_clicked()
         }
     }
 }
+
 void Config::on_pushRight_clicked()
 {
     int index = this->ui->listActions->currentRow();
@@ -764,6 +786,7 @@ void Config::on_pushRight_clicked()
         }
     }
 }
+
 void Config::on_pushLeft_clicked()
 {
     int index = this->ui->listToolbar->currentRow();
@@ -779,11 +802,13 @@ void Config::on_pushLeft_clicked()
         }
     }
 }
+
 void Config::on_pushResetToolbar_clicked()
 {
     this->actionListToolbar = this->getDefaultListActions();
     this->fillActions();
 }
+
 void Config::on_listToolbar_itemSelectionChanged()
 {
     QList<QListWidgetItem *> listItems = this->ui->listToolbar->selectedItems();
@@ -809,10 +834,12 @@ void Config::on_listToolbar_itemSelectionChanged()
         this->ui->pushDown->setEnabled(false);
     }
 }
+
 void Config::on_listActions_itemSelectionChanged()
 {
     this->ui->pushRight->setEnabled(this->ui->listActions->selectedItems().count());
 }
+
 QByteArray Config::getDefaultListActions()
 {
     QByteArray baData;
@@ -1023,7 +1050,11 @@ void Config::on_spinDefaultVelocity_editingFinished()
     }
 }
 
-bool caseInsensitiveLessThan(const QString &s1, const QString &s2) { return s1.toLower() < s2.toLower(); }
+bool caseInsensitiveLessThan(const QString &s1, const QString &s2)
+{
+    return s1.toLower() < s2.toLower();
+}
+
 void Config::initComboLanguage()
 {
     // Load the different languages

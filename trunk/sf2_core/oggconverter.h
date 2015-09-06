@@ -22,57 +22,24 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#include <QApplication>
-#include <QSettings>
+#ifndef OGGCONVERTER_H
+#define OGGCONVERTER_H
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 0, 0)
-#include <QDesktopWidget>
-#endif
-#include "mainwindow.h"
-#include "translationsystem.h"
+#include<QByteArray>
 
-#ifdef Q_OS_MAC
-#include "macapplication.h"
-#endif
-
-int main(int argc, char *argv[])
+class OggConverter
 {
-#ifdef Q_OS_MACX
-    QStringList listPathMac;
-    MacApplication a(argc, argv, &listPathMac);
-#else
-    QApplication a(argc, argv);
-#endif
-
-    // Nom de l'application
-    a.setApplicationName("Polyphone");
-    a.setOrganizationName("polyphone");
-    TranslationSystem::translate(&a);
-
-    // Affichage fenêtre
-    MainWindow w;
-    w.show();
-
-    // Ouverture des fichiers passés en argument
-    QStringList listeArg = QCoreApplication::arguments();
-    int numSf2 = -1;
-    for (int i = 1; i < listeArg.size(); i++)
+public:
+    OggConverter(QByteArray array);
+    QByteArray GetDecodedData()
     {
-        QString extension = QFileInfo(listeArg.at(i)).suffix().toLower();
-        if (extension == "sf2" || extension == "sf3" || extension == "sfark" || extension == "sfz")
-            w.dragAndDrop(listeArg.at(i), EltID(elementUnknown, -1, -1, -1, -1), &numSf2);
+        convert();
+        return _decodedData;
     }
 
-#ifdef Q_OS_MACX
-    for (int i = 0; i < listPathMac.size(); i++)
-    {
-        QString extension = QFileInfo(listPathMac.at(i)).suffix().toLower();
-        if (extension == "sf2" || extension == "sf3" || extension == "sfark" || extension == "sfz")
-            w.dragAndDrop(listPathMac.at(i), EltID(elementUnknown, -1, -1, -1, -1), &numSf2);
-    }
-    a.stopAppending();
-    QObject::connect(&a, SIGNAL(openFile(QString)), &w, SLOT(dragAndDrop(QString)));
-#endif
+private:
+    void convert();
+    QByteArray _decodedData;
+};
 
-    return a.exec();
-}
+#endif // OGGCONVERTER_H

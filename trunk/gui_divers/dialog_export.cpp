@@ -195,7 +195,7 @@ void DialogExport::on_pushExport_clicked()
 
 void DialogExport::on_comboFormat_currentIndexChanged(int index)
 {
-    ui->checkBank->setVisible(index == 1);
-    ui->checkGM->setVisible(index == 1);
-    ui->checkPreset->setVisible(index == 1);
+    ui->checkBank->setVisible(index == 2);
+    ui->checkGM->setVisible(index == 2);
+    ui->checkPreset->setVisible(index == 2);
 }

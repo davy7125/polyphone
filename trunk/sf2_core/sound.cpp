@@ -548,7 +548,7 @@ Sound::FileType Sound::getFileType()
     if (myFunction)
         extCustom = myFunction();
 
-    if (ext.compare("sf2") == 0)
+    if (ext.compare("sf2") == 0 || ext.compare("sf3") == 0)
         return fileSf2;
     else if (ext.compare("wav") == 0)
         return fileWav;
@@ -608,6 +608,7 @@ void Sound::getInfoSound(bool tryFindRootkey)
         _info.wBpsFile = 0;
     }
 }
+
 void Sound::getInfoSoundWav(bool tryFindRootkey)
 {
     // Caractéristiques d'un fichier wav
@@ -633,6 +634,7 @@ void Sound::getInfoSoundWav(bool tryFindRootkey)
     fi.close();
     this->getInfoSoundWav(baData, tryFindRootkey);
 }
+
 void Sound::getInfoSoundWav(QByteArray baData, bool tryFindRootkey)
 {
     int taille, pos;
@@ -757,11 +759,13 @@ void Sound::determineRootKey()
 QByteArray Sound::getDataSf2(QFile * fi, quint16 byte)
 {
     QByteArray baRet;
+
     // Fichier sf2
     switch (byte)
     {
     case 1:
         baRet.resize(_info.dwLength);
+
         // Chargement 8 bits poids faible
         if (_info.wBpsFile >= 24 && _info.dwLength)
         {
@@ -777,6 +781,7 @@ QByteArray Sound::getDataSf2(QFile * fi, quint16 byte)
         break;
     case 2:
         baRet.resize(_info.dwLength*2);
+
         // Chargement 16 bits poids fort
         if (_info.dwLength)
         {
@@ -792,6 +797,7 @@ QByteArray Sound::getDataSf2(QFile * fi, quint16 byte)
         break;
     case 3:
         baRet.resize(_info.dwLength*3);
+
         // Chargement des 24 bits
         if (_info.dwLength)
         {
@@ -833,6 +839,7 @@ QByteArray Sound::getDataSf2(QFile * fi, quint16 byte)
         break;
     case 4:
         baRet.resize(_info.dwLength*4);
+
         // Chargement des 24 bits
         if (_info.dwLength)
         {
@@ -882,12 +889,15 @@ QByteArray Sound::getDataWav(QFile * fi, quint16 byte)
 {
     // Fichier wav
     int byte_fichier = _info.wBpsFile / 8;
+
     // Saut de l'entête + positionnement sur le canal
     fi->seek(_info.dwStart + _info.wChannel * byte_fichier);
+
     // Lecture des données
     QByteArray baTmp = fi->read(_info.dwLength * byte_fichier * _info.wChannels);
     return this->getDataWav(baTmp, byte);
 }
+
 QByteArray Sound::getDataWav(QByteArray baData, quint16 byte)
 {
     // Fichier wav
@@ -906,6 +916,7 @@ QByteArray Sound::getDataWav(QByteArray baData, quint16 byte)
     }
     const char * dataTmp = baData.constData();
     b = _info.wChannels * byte_fichier;
+
     // remplissage data
     switch (byte)
     {
@@ -1686,6 +1697,7 @@ void Sound::bpsConversion(char *cDest, const char *cFrom, qint32 size, quint16 w
         break;
     }
 }
+
 QByteArray Sound::bpsConversion(QByteArray baData, quint16 wBpsInit, quint16 wBpsFinal, bool bigEndian)
 {
     // Conversion entre formats 32, 24 et 16 bits
@@ -1718,6 +1730,7 @@ QByteArray Sound::bpsConversion(QByteArray baData, quint16 wBpsInit, quint16 wBp
     bpsConversion(cDest, cFrom, size, wBpsInit, wBpsFinal, bigEndian);
     return baRet;
 }
+
 QByteArray Sound::from2MonoTo1Stereo(QByteArray baData1, QByteArray baData2, quint16 wBps, bool bigEndian)
 {
     int size;
@@ -1910,6 +1923,7 @@ Complex * Sound::fromBaToComplex(QByteArray baData, quint16 wBps, long unsigned 
     }
     return cpxData;
 }
+
 QByteArray Sound::fromComplexToBa(Complex * cpxData, int size, quint16 wBps)
 {
     QByteArray baData;
@@ -1970,6 +1984,7 @@ QByteArray Sound::normaliser(QByteArray baData, double dVal, quint16 wBps, doubl
         baData = bpsConversion(baData, 32, wBps);
     return baData;
 }
+
 QByteArray Sound::multiplier(QByteArray baData, double dMult, quint16 wBps, double &db)
 {
     // Conversion 32 bits si nécessaire
@@ -1985,6 +2000,7 @@ QByteArray Sound::multiplier(QByteArray baData, double dMult, quint16 wBps, doub
         baData = bpsConversion(baData, 32, wBps);
     return baData;
 }
+
 QByteArray Sound::enleveBlanc(QByteArray baData, double seuil, quint16 wBps, quint32 &pos)
 {
     // Conversion 32 bits si nécessaire
@@ -2017,6 +2033,7 @@ QByteArray Sound::enleveBlanc(QByteArray baData, double seuil, quint16 wBps, qui
         baData = bpsConversion(baData, 32, wBps);
     return baData;
 }
+
 void Sound::regimePermanent(QByteArray baData, quint32 dwSmplRate, quint16 wBps, qint32 &posStart, qint32 &posEnd)
 {
     // Recherche d'un régiment permanent (sans attaque ni release)
@@ -2032,6 +2049,7 @@ void Sound::regimePermanent(QByteArray baData, quint32 dwSmplRate, quint16 wBps,
 
     regimePermanent(fData, dwSmplRate, posStart, posEnd);
 }
+
 void Sound::regimePermanent(QVector<float> fData, quint32 dwSmplRate, qint32 &posStart, qint32 &posEnd)
 {
     int size = fData.size();
@@ -2055,6 +2073,7 @@ void Sound::regimePermanent(QVector<float> fData, quint32 dwSmplRate, qint32 &po
         }
     }
 }
+
 QVector<float> Sound::correlation(const QVector<float> fData, quint32 dwSmplRate, qint32 fMin, qint32 fMax, qint32 &dMin)
 {
     // Décalage max (fréquence basse)
@@ -2167,6 +2186,7 @@ QByteArray Sound::bouclage(QByteArray baData, quint32 dwSmplRate, qint32 &loopSt
         baData = bpsConversion(baData, 32, wBps);
     return baData;
 }
+
 QByteArray Sound::sifflements(QByteArray baData, quint32 dwSmplRate, quint16 wBps, double fCut, double fMax, double raideur)
 {
     // Conversion 32 bits si nécessaire
@@ -2268,6 +2288,7 @@ QList<int> Sound::findMins(QVector<float> vectData, int maxNb, double minFrac)
 
     return listRet;
 }
+
 QList<quint32> Sound::findMax(QVector<float> vectData, int maxNb, double minFrac)
 {
     if (vectData.isEmpty())
@@ -2301,6 +2322,7 @@ QList<quint32> Sound::findMax(QVector<float> vectData, int maxNb, double minFrac
 
     return listRet;
 }
+
 qint32 Sound::max(QByteArray baData, quint16 wBps)
 {
     if (wBps != 32)
@@ -2364,6 +2386,7 @@ void Sound::FFT_calculate(Complex * x, long N /* must be a power of 2 */,
         evenIteration = !evenIteration;
     }
 }
+
 double Sound::moyenne(QByteArray baData, quint16 wBps)
 {
     if (baData.size())
@@ -2371,11 +2394,13 @@ double Sound::moyenne(QByteArray baData, quint16 wBps)
     else
         return 0;
 }
+
 double Sound::moyenneCarre(QByteArray baData, quint16 wBps)
 {
     //return sommeAbs(baData, wBps) / (baData.size() / (wBps/8));
     return (double)qSqrt(sommeCarre(baData, wBps)) / (baData.size() / (wBps/8));
 }
+
 float Sound::mediane(QVector<float> data)
 {
     float * arr = data.data();
@@ -2448,6 +2473,7 @@ float Sound::mediane(QVector<float> data)
             high = hh - 1;
     }
 }
+
 qint64 Sound::somme(QByteArray baData, quint16 wBps)
 {
     if (wBps != 32)
@@ -2459,6 +2485,7 @@ qint64 Sound::somme(QByteArray baData, quint16 wBps)
         valeur += arr[i];
     return valeur;
 }
+
 qint64 Sound::sommeCarre(QByteArray baData, quint16 wBps)
 {
     if (wBps != 32)
@@ -2539,6 +2566,7 @@ double Sound::gainEQ(double freq, int i1, int i2, int i3, int i4, int i5, int i6
     // Conversion
     return pow(10.0, val / 20);
 }
+
 void Sound::regimePermanent(QVector<float> data, quint32 dwSmplRate, qint32 &posStart, qint32 &posEnd, int nbOK, double coef)
 {
     // Calcul de la moyenne des valeurs absolues sur une période de 0.05 s à chaque 10ième de seconde

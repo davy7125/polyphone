@@ -41,24 +41,31 @@ CONFIG(debug, debug|release) {
 
 win32{
     DEFINES += __WINDOWS_MM__ USE_LOCAL_LIBRARIES
-    INCLUDEPATH += lib/win/ lib
+    INCLUDEPATH += lib \
+        lib/win/ \
+        lib/ogg_vorbis
     HEADERS  += lib/win/zconf.h \
         lib/win/zlib.h \
-        lib/portaudio.h
+        lib/portaudio.h \
+        lib/ogg_vorbis/ogg/ogg.h \
+        lib/ogg_vorbis/ogg/os_types.h \
+        lib/ogg_vorbis/vorbis/codec.h \
+        lib/ogg_vorbis/vorbis/vorbisenc.h \
+        lib/ogg_vorbis/vorbis/vorbisfile.h
     RC_FILE = polyphone.rc
 
     !contains(QMAKE_TARGET.arch, x86_64) {
-        LIBS += -Llib/win/32bits -lportaudio_x86 -lzlib1 -lwinmm
+        LIBS += -Llib/win/32bits -lportaudio_x86 -lzlib1 -lwinmm -llibogg -llibvorbis -llibvorbisfile
         QMAKE_LFLAGS_WINDOWS = /SUBSYSTEM:WINDOWS,5.01
     } else {
-        LIBS += -Llib/win/64bits -lportaudio_x64 -lzlib1 -lwinmm
+        LIBS += -Llib/win/64bits -lportaudio_x64 -lzlib1 -lwinmm -llibogg -llibvorbis -llibvorbisfile
         QMAKE_LFLAGS_WINDOWS = /SUBSYSTEM:WINDOWS,5.02
     }
 }
 unix:!macx {
     DEFINES += __LINUX_ALSASEQ__
     CONFIG += link_pkgconfig
-    PKGCONFIG += alsa jack portaudio-2.0 zlib
+    PKGCONFIG += alsa jack portaudio-2.0 zlib ogg vorbis vorbisfile vorbisenc
     INCLUDEPATH += /usr/include/jack
 }
 macx {
@@ -66,8 +73,14 @@ macx {
     QMAKE_MAC_SDK = macosx10.9
     DEFINES += __MACOSX_CORE__ USE_LOCAL_LIBRARIES
     INCLUDEPATH += lib/mac/Jackmp.framework/Headers \
-        lib
-    HEADERS += lib/portaudio.h
+        lib \
+        lib/ogg_vorbis
+    HEADERS += lib/portaudio.h \
+        lib/ogg_vorbis/ogg/ogg.h \
+        lib/ogg_vorbis/ogg/os_types.h \
+        lib/ogg_vorbis/vorbis/codec.h \
+        lib/ogg_vorbis/vorbis/vorbisenc.h \
+        lib/ogg_vorbis/vorbis/vorbisfile.h
     LIBS += -L$$PWD/lib/mac -lportaudio -F$$PWD/lib/mac/ -framework Jackmp \
         -framework CoreAudio -framework CoreMIDI -framework CoreFoundation \
         -framework AudioUnit -framework AudioToolbox -framework Cocoa -lz
@@ -108,7 +121,6 @@ contains(DEFINES, USE_LOCAL_LIBRARIES) {
         /usr/include/qcustomplot
 }
 
-
 INCLUDEPATH += gui_divers \
     pages \
     qcustomplot \
@@ -119,6 +131,7 @@ INCLUDEPATH += gui_divers \
     synthetiseur \
     synthetiseur/elements \
     sfark \
+    lib/sf3 \
     .
 
 SOURCES	+= main.cpp \
@@ -188,7 +201,9 @@ SOURCES	+= main.cpp \
     pages/pageoverview.cpp \
     pages/pageoverviewsmpl.cpp \
     pages/pageoverviewinst.cpp \
-    pages/pageoverviewprst.cpp
+    pages/pageoverviewprst.cpp \
+    lib/sf3/sfont.cpp \
+    sf2_core/oggconverter.cpp
 
 HEADERS  += mainwindow.h \
     sf2_core/sf2_types.h \
@@ -261,7 +276,9 @@ HEADERS  += mainwindow.h \
     pages/pageoverview.h \
     pages/pageoverviewsmpl.h \
     pages/pageoverviewinst.h \
-    pages/pageoverviewprst.h
+    pages/pageoverviewprst.h \
+    lib/sf3/sfont.h \
+    sf2_core/oggconverter.h
 
 FORMS    += mainwindow.ui \
     gui_divers/config.ui \

@@ -201,6 +201,7 @@ void DialogHelp::fillTree()
     createItem(trUtf8("Création d'un instrument"), "8-1", level2);
     createItem(trUtf8("Création d'un preset"), "8-2", level2);
     createItem(trUtf8("Soundfonts sf2"), "7-0", level1);
+    createItem(trUtf8("Soundfonts sf3"), "7-3", level1);
     createItem(trUtf8("Import / export sfz"), "7-1", level1);
     createItem(trUtf8("Limitations du logiciel"), "7-2", level1);
 

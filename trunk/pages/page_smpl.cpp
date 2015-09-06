@@ -116,8 +116,12 @@ void Page_Smpl::afficher()
     quint32 sampleRate = sf2->get(id, champ_dwSampleRate).dwValue;
     int rootKey = sf2->get(id, champ_byOriginalPitch).bValue;
     int correction = sf2->get(id, champ_chPitchCorrection).cValue;
-    quint32 startLoop = sf2->get(id, champ_dwStartLoop).dwValue;
-    quint32 endLoop = sf2->get(id, champ_dwEndLoop).dwValue;
+    int startLoop = sf2->get(id, champ_dwStartLoop).dwValue;
+    if (startLoop < 0)
+        startLoop = 0;
+    int endLoop = sf2->get(id, champ_dwEndLoop).dwValue;
+    if (endLoop < 0)
+        endLoop = 0;
     quint32 length = sf2->get(id, champ_dwLength).dwValue;
     SFSampleLink typeLink = sf2->get(id, champ_sfSampleType).sfLinkValue;
     while (!ids.isEmpty())
@@ -130,9 +134,9 @@ void Page_Smpl::afficher()
             rootKey = -1;
         if (correction != sf2->get(idTmp, champ_chPitchCorrection).cValue)
             correction = 0;
-        if (startLoop != sf2->get(idTmp, champ_dwStartLoop).dwValue)
+        if (startLoop != (int)sf2->get(idTmp, champ_dwStartLoop).dwValue)
             startLoop = 0;
-        if (endLoop != sf2->get(idTmp, champ_dwEndLoop).dwValue)
+        if (endLoop != (int)sf2->get(idTmp, champ_dwEndLoop).dwValue)
             endLoop = 0;
         length = qMin(length, sf2->get(idTmp, champ_dwLength).dwValue);
         if (typeLink != sf2->get(idTmp, champ_sfSampleType).sfLinkValue)
