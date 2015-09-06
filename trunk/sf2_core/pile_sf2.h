@@ -70,7 +70,7 @@ public:
     void nouveau(QString name);
     int ouvrir(QString fileName);
     int ouvrir(QString fileName, QDataStream *stream, int &indexSf2, bool copySamples = false);
-    int sauvegarder(int indexSf2, QString fileName);
+    int save(int indexSf2, QString fileName);
     bool isEdited(int indexSf2);
 
     // Récupération d'une liste de champs et de valeurs contenues dans les bags de l'élément id
@@ -92,7 +92,8 @@ private:
     typedef enum
     {
         fileUnknown = 0,
-        fileSf2 = 1
+        fileSf2 = 1,
+        fileSf3 = 2
     }FileType;
 
     // DEFINITION DE LA SOUS-CLASSE SF2
@@ -277,6 +278,7 @@ private:
         QTreeWidgetItem *eltTreeSmpl;
         QTreeWidgetItem *eltTreeInst;
         QTreeWidgetItem *eltTreePrst;
+
         // Autres
         double numEdition;  // numéro de l'édition sauvegardée
         bool hidden;        // fichier supprimé ou non (avant suppression définitive)

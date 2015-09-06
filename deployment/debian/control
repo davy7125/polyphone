@@ -13,7 +13,9 @@ Build-Depends:
  zlib1g-dev,
  librtmidi-dev,
  libstk0-dev,
- libqcustomplot-dev
+ libqcustomplot-dev,
+ libogg-dev,
+ libvorbis-dev
 Standards-Version: 3.9.6
 Homepage: http://www.polyphone.fr
 
@@ -34,16 +36,15 @@ Description: soundfont editor
  making it possible to handle a large amount of data.
  .
  Main features:
-  - support of sf2 format v2.01 and v2.04,
-  - support for 24 bits samples,
+  - support of sf2 format v2.01 and v2.04 (with 24-bit samples),
+  - import from sfz, sfArk, sf3,
+  - export as sfz, sf3,
   - support for jack and asio audio servers,
-  - analysis of frequency peaks and estimation of sample pitch,
-  - automatic loop of samples, with steady state detection and use of a
- crossfade,
   - simultaneous editing of parameters,
   - specific tools for musical instrument creation,
+  - automatic detection of the sample pitch and correction,
+  - automatic loop of samples,
   - a recorder, for the record of what is played in a .wav file,
   - built-in synthesizer, using a virtual keyboard or midi signals,
   - built-in user manual,
-  - sfz import / export,
-  - sfArk import (v1 and v2).
+  - available in several languages.

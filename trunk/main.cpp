@@ -59,7 +59,7 @@ int main(int argc, char *argv[])
     for (int i = 1; i < listeArg.size(); i++)
     {
         QString extension = QFileInfo(listeArg.at(i)).suffix().toLower();
-        if (extension == "sf2" || extension == "sfark" || extension == "sfz")
+        if (extension == "sf2" || extension == "sf3" || extension == "sfark" || extension == "sfz")
             w.dragAndDrop(listeArg.at(i), EltID(elementUnknown, -1, -1, -1, -1), &numSf2);
     }
 
@@ -67,7 +67,7 @@ int main(int argc, char *argv[])
     for (int i = 0; i < listPathMac.size(); i++)
     {
         QString extension = QFileInfo(listPathMac.at(i)).suffix().toLower();
-        if (extension == "sf2" || extension == "sfark" || extension == "sfz")
+        if (extension == "sf2" || extension == "sf3" || extension == "sfark" || extension == "sfz")
             w.dragAndDrop(listPathMac.at(i), EltID(elementUnknown, -1, -1, -1, -1), &numSf2);
     }
     a.stopAppending();

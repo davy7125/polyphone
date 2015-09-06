@@ -299,6 +299,8 @@
         <file alias="page6 en.png">ressources/doc/page 6 en.png</file>
         <file alias="page7.png">ressources/doc/page 7.png</file>
         <file alias="page7 en.png">ressources/doc/page 7 en.png</file>
+        <file alias="7-3en.html">ressources/doc/7-annexes/7-3en.html</file>
+        <file alias="7-3fr.html">ressources/doc/7-annexes/7-3fr.html</file>
     </qresource>
     <qresource prefix="/traductions">
         <file>ressources/traductions/polyphone_en.qm</file>

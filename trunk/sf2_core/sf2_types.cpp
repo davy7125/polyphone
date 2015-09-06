@@ -95,7 +95,7 @@ short readSHORT(const char *chaine, int pos)
 SFSampleLink readSFSL(const char *chaine, int pos)
 {
     unsigned char b0, b1;
-    b1 = chaine[pos];
+    b1 = chaine[pos] & 0xEF; // Remove sf3 flag if any
     b0 = chaine[pos+1];
     // Assuming file is little-endian.
     // for big endian, swap the order to b1...b0

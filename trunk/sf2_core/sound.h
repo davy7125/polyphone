@@ -49,12 +49,10 @@ private:
 class Sound
 {
 public:
-
-    // constructeur, destructeur
     Sound(QString filename = "", bool tryFindRootkey = true);
     ~Sound();
 
-    // méthodes publiques
+    // Méthodes publiques
     static void setParent(QWidget * parent) { _parent = parent; }
     QByteArray getData(quint16 wBps);
     quint32 get(Champ champ);
@@ -65,7 +63,8 @@ public:
     void setRam(bool ram);
     static void exporter(QString fileName, Sound son);
     static void exporter(QString fileName, Sound son1, Sound son2);
-    // utilitaires
+
+    // Utilitaires
     static QByteArray resampleMono(QByteArray data, double echInit, qint32 echFinal, quint16 wBps);
     static QByteArray bandFilter(QByteArray baData, quint16 wBps, double dwSmplRate, double fBas, double fHaut, int ordre);
     static QByteArray EQ(QByteArray baData, quint32 dwSmplRate, quint16 wBps, int i1, int i2, int i3, int i4, int i5,
@@ -109,7 +108,8 @@ private:
         quint32 dwNote;
         quint16 wChannel;
         int iCent;
-    }InfoSound;
+    } InfoSound;
+
     // Type de fichier
     typedef enum
     {
@@ -117,12 +117,14 @@ private:
         fileSf2,
         fileWav,
         fileCustom1
-    }FileType;
+    } FileType;
+
     // Attributs privés
     QString fileName;
     InfoSound _info;
     QByteArray smpl;
     QByteArray sm24;
+
     // Méthodes privées
     FileType getFileType();
     void getInfoSound(bool tryFindRootkey);
