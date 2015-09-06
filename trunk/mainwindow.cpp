@@ -56,6 +56,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent, Qt::Window | Qt::W
     actionKeyboard(NULL),
     _currentKey(-1),
     _dialKeyboard(this, Qt::Tool | Qt::WindowStaysOnTopHint | Qt::WindowCloseButtonHint),
+    _progressDialog(trUtf8("Operation en cours..."), trUtf8("Annuler"), 0, 0, this),
     _isSustainOn(false)
 {
     ui->setupUi(this);
@@ -202,7 +203,12 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent, Qt::Window | Qt::W
 
     ui->actionA_propos->setMenuRole(QAction::AboutRole);
     ui->actionPr_f_rences->setMenuRole(QAction::PreferencesRole);
+
+    _progressDialog.setWindowModality(Qt::WindowModal);
+    _progressDialog.setCancelButton(NULL);
+    connect(&_futureWatcher, SIGNAL (finished()), this, SLOT (futureFinished()));
 }
+
 MainWindow::~MainWindow()
 {
     // Arrêt audio et fin du synthé
@@ -325,19 +331,24 @@ void MainWindow::resizeEvent(QResizeEvent * event)
         else
             titre = "";
 
-        QFileInfo fileInfo(path);
-        path = fileInfo.path();
-        if (path.indexOf(QDir::homePath()) == 0)
-            path = "~" + path.right(path.size() - QDir::homePath().size());
-        QString titreCourt = titre + fileInfo.fileName() + " - " + polyphoneName;
-        QString titreLong = titre + fileInfo.fileName() + " (" + path + ") - " + polyphoneName;
-
-        QFont font = QApplication::font("QWorkspaceTitleBar");
-        QFontMetrics fm(font);
-        if (fm.width(titreLong) > this->width() - 100)
-            titre = titreCourt;
+        if (path.length() == 0)
+            titre = "* - " + polyphoneName;
         else
-            titre = titreLong;
+        {
+            QFileInfo fileInfo(path);
+            path = fileInfo.path();
+            if (path.indexOf(QDir::homePath()) == 0)
+                path = "~" + path.right(path.size() - QDir::homePath().size());
+            QString titreCourt = titre + fileInfo.fileName() + " - " + polyphoneName;
+            QString titreLong = titre + fileInfo.fileName() + " (" + path + ") - " + polyphoneName;
+
+            QFont font = QApplication::font("QWorkspaceTitleBar");
+            QFontMetrics fm(font);
+            if (fm.width(titreLong) > this->width() - 100)
+                titre = titreCourt;
+            else
+                titre = titreLong;
+        }
     }
 #ifdef SHOW_ID_ERROR
     titre += " (DEBUG)";
@@ -364,12 +375,23 @@ void MainWindow::spaceKeyPressedInTree()
 void MainWindow::ouvrir()
 {
     // Ouverture de fichiers
+#ifdef WIN32
     QStringList strList = QFileDialog::getOpenFileNames(this, trUtf8("Ouverture de fichiers"),
                                                         Config::getInstance()->getLastDirectory(Config::typeFichierSoundfont),
-                                                        trUtf8("Soundfonts (*.sf2 *.sfz *.sfArk);;"
-                                                               "Fichiers .sf2 (*.sf2);;"
-                                                               "Fichiers .sfz (*.sfz);;"
-                                                               "Archives .sfArk (*.sfArk)"));
+                                                        trUtf8("Soundfonts") + " (*.sf2 *.sf3 *.sfz *.sfArk);;" +
+                                                        trUtf8("Fichiers .sf2") + " (*.sf2);;" +
+                                                        trUtf8("Fichiers .sf3") + " (*.sf3);;" +
+                                                        trUtf8("Fichiers .sfz") + " (*.sfz);;" +
+                                                        trUtf8("Archives .sfArk") + " (*.sfArk)");
+#else
+    QStringList strList = QFileDialog::getOpenFileNames(this, trUtf8("Ouverture de fichiers"),
+                                                        Config::getInstance()->getLastDirectory(Config::typeFichierSoundfont),
+                                                        trUtf8("Soundfonts") + " (*.[sS][fF][23zZ] *.[sS][fF][aA][rR][kK]);;" +
+                                                        trUtf8("Fichiers .sf2") + " (*.[sS][fF]2);;" +
+                                                        trUtf8("Fichiers .sf3") + " (*.[sS][fF]3);;" +
+                                                        trUtf8("Fichiers .sfz") + " (*.[sS][fF][zZ]);;" +
+                                                        trUtf8("Archives .sfArk") + " (*.[sS][fF][aA][rR][kK])");
+#endif
     if (strList.isEmpty())
         return;
 
@@ -425,12 +447,13 @@ void MainWindow::ouvrirFichier5()
 
 void MainWindow::ouvrir(QString fileName)
 {
-    // Chargement d'un fichier .sf2
+    // Chargement d'un fichier .sf2 ou .sf3
     switch (this->sf2->ouvrir(fileName))
     {
     case 0:
         // le chargement s'est bien déroulé
-        this->configuration->addFile(Config::typeFichierSf2, fileName);
+        if (fileName.endsWith("2"))
+            this->configuration->addFile(Config::typeFichierSf2, fileName);
         updateFavoriteFiles();
         updateActions();
         break;
@@ -626,7 +649,7 @@ int MainWindow::sauvegarder(int indexSf2, bool saveAs)
         if (fileName.isNull()) return 1;
     }
     else fileName = sf2->getQstr(id, champ_filename);
-    switch (this->sf2->sauvegarder(indexSf2, fileName))
+    switch (this->sf2->save(indexSf2, fileName))
     {
     case 0:
         // sauvegarde ok
@@ -1416,6 +1439,7 @@ void MainWindow::renommerEnMasse(int renameType, QString text1, QString text2, i
     updateDo();
     updateActions();
 }
+
 void MainWindow::dragAndDrop(EltID idDest, QList<EltID> idSources)
 {
     // prepareNewActions() et updateDo() faits à l'extérieur
@@ -1424,6 +1448,7 @@ void MainWindow::dragAndDrop(EltID idDest, QList<EltID> idSources)
         duplicator.copy(idSources.at(i), idDest);
     updateActions();
 }
+
 void MainWindow::dragAndDrop(QString path, EltID idDest, int * arg)
 {
     if (path.left(7).compare("file://") == 0)
@@ -1432,12 +1457,13 @@ void MainWindow::dragAndDrop(QString path, EltID idDest, int * arg)
     if (path.left(1).compare("/") == 0)
         path = path.remove(0, 1);
 #endif
+
     // prepareNewActions() et updateDo() faits à l'extérieur
     QFileInfo fileInfo(path);
     QString extension = fileInfo.suffix().toLower();
-    if (extension.compare("sf2") == 0)
+    if (extension.compare("sf2") == 0 || extension.compare("sf3") == 0)
     {
-        // Ouverture d'un fichier sf2
+        // Ouverture d'un fichier sf2 ou sf3
         this->ouvrir(path);
     }
     else if (extension.compare("sfz") == 0)
@@ -1485,6 +1511,7 @@ void MainWindow::dragAndDrop(QString path, EltID idDest, int * arg)
         this->updateActions();
     }
 }
+
 void MainWindow::importerSmpl()
 {
     if (ui->arborescence->getSelectedItemsNumber() == 0) return;
@@ -1498,9 +1525,16 @@ void MainWindow::importerSmpl()
         ext = myFunction();
 
     // Affichage dialogue
+#ifdef WIN32
     QStringList strList = QFileDialog::getOpenFileNames(this, trUtf8("Importer un fichier audio"),
                                                         Config::getInstance()->getLastDirectory(Config::typeFichierSample),
-                                                        trUtf8("Fichier .wav (*.wav)") + ext);
+                                                        trUtf8("Fichier .wav") + " (*.wav)" + ext);
+#else
+    QStringList strList = QFileDialog::getOpenFileNames(this, trUtf8("Importer un fichier audio"),
+                                                        Config::getInstance()->getLastDirectory(Config::typeFichierSample),
+                                                        trUtf8("Fichier .wav") + " (*.[wW][aA][vV])" + ext);
+#endif
+
     if (strList.count() == 0)
         return;
 
@@ -1515,6 +1549,7 @@ void MainWindow::importerSmpl()
     updateDo();
     updateActions();
 }
+
 void MainWindow::importerSmpl(QString path, EltID id, int * replace)
 {
     id.typeElement = elementSmpl;
@@ -1856,12 +1891,28 @@ void MainWindow::exporter()
             this, SLOT(exporter(QList<QList<EltID> >,QString,int,bool,bool,bool)));
     dial->show();
 }
+
 void MainWindow::exporter(QList<QList<EltID> > listID, QString dir, int format, bool presetPrefix, bool bankDir, bool gmSort)
 {
+    int flags = presetPrefix + bankDir * 0x02 + gmSort * 0x04;
+
+    _progressDialog.show();
+
+    QFuture<void> future = QtConcurrent::run(this, &MainWindow::exporter2, listID, dir, format, flags);
+    _futureWatcher.setFuture(future);
+}
+
+void MainWindow::exporter2(QList<QList<EltID> > listID, QString dir, int format, int flags)
+{
+    // Flags
+    bool presetPrefix = ((flags & 0x01) != 0);
+    bool bankDir = ((flags & 0x02) != 0);
+    bool gmSort = ((flags & 0x04) != 0);
+
     switch (format)
     {
-    case 0:{
-        // Export sf2, création d'un nouvel sf2 indépendant
+    case 0: case 1: {
+        // Export sf2 ou sf3, création d'un nouvel sf2 indépendant
         Pile_sf2 newSf2(NULL, false, NULL);
         EltID idDest(elementSf2, 0, 0, 0, 0);
         idDest.indexSf2 = newSf2.add(idDest);
@@ -1931,20 +1982,22 @@ void MainWindow::exporter(QList<QList<EltID> > listID, QString dir, int format, 
 
         // Détermination du nom de fichier
         name = name.replace(QRegExp("[:<>\"/\\\\\\*\\?\\|]"), "_");
-        QFile fichier(dir + "/" + name + ".sf2");
+
+        QString extension = (format == 0 ? ".sf2" : ".sf3");
+        QFile fichier(dir + "/" + name + extension);
         if (fichier.exists())
         {
             int i = 1;
-            while (QFile(dir + "/" + name + "-" + QString::number(i) + ".sf2").exists())
+            while (QFile(dir + "/" + name + "-" + QString::number(i) + extension).exists())
                 i++;
             name += "-" + QString::number(i);
         }
-        name = dir + "/" + name + ".sf2";
+        name = dir + "/" + name + extension;
 
         // Sauvegarde
-        newSf2.sauvegarder(idDest.indexSf2, name);
+        newSf2.save(idDest.indexSf2, name);
         }break;
-    case 1:
+    case 2:
         // Export sfz
         foreach (QList<EltID> sublist, listID)
             ConversionSfz(sf2).convert(dir, sublist, presetPrefix, bankDir, gmSort);
@@ -1953,6 +2006,12 @@ void MainWindow::exporter(QList<QList<EltID> > listID, QString dir, int format, 
         break;
     }
 }
+
+void MainWindow::futureFinished()
+{
+    _progressDialog.hide();
+}
+
 void MainWindow::nouvelInstrument()
 {
     int nb = ui->arborescence->getSelectedItemsNumber();

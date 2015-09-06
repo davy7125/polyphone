@@ -24,6 +24,8 @@
 
 #include "pile_sf2.h"
 #include <QMessageBox>
+#include "oggconverter.h"
+#include "sfont.h"
 
 //////////// SF2 : SAVE / LOAD ////////////
 
@@ -31,8 +33,10 @@ void Pile_sf2::nouveau(QString name)
 {
     EltID id(elementSf2, -1, 0, 0, 0);
     id.indexSf2 = this->add(id);
+
     // Initialisation de l'édition
-    this->sf2->getElt(id.indexSf2)->numEdition = this->pileActions->getEdition(id.indexSf2)-1;
+    this->sf2->getElt(id.indexSf2)->numEdition = this->pileActions->getEdition(id.indexSf2) - 1;
+
     // Modification du nom
     this->set(id, champ_name, name, false);
 
@@ -68,9 +72,10 @@ int Pile_sf2::ouvrir(QString fileName)
     }
     if (!ok) return 2;
 
-    switch (getFileType(fileName))
+    FileType type = getFileType(fileName);
+    switch (type)
     {
-    case fileSf2:
+    case fileSf2: case fileSf3:
     {
         QFile fi(fileName);
         if (!fi.open(QIODevice::ReadOnly))
@@ -79,7 +84,7 @@ int Pile_sf2::ouvrir(QString fileName)
         int indexSf2 = -1;
         int valRet = this->ouvrir(fileName, &stream, indexSf2);
         fi.close();
-        if (valRet == 0)
+        if (valRet == 0 && type == fileSf2)
             this->storeEdition(indexSf2);
         return valRet;
     }break;
@@ -89,7 +94,7 @@ int Pile_sf2::ouvrir(QString fileName)
     return 1;
 }
 
-int Pile_sf2::sauvegarder(int indexSf2, QString fileName)
+int Pile_sf2::save(int indexSf2, QString fileName)
 {
     // Sauvegarde d'un fichier soundfont
     // Valeur retour :
@@ -99,27 +104,66 @@ int Pile_sf2::sauvegarder(int indexSf2, QString fileName)
     // 3: impossible d'enregistrer le fichier
 
     // Vérification qu'une autre soundfont ne s'appelle pas fileName
-    bool ok = 1;
+    int ret = 0;
     EltID id(elementSf2, -1, 0, 0, 0);
     for (int i = 0; i < this->count(id); i++)
     {
         id.indexSf2 = i;
         if (!this->get(id, champ_hidden).bValue && i != indexSf2)
             if (QString::compare(this->getQstr(id, champ_filename), fileName, Qt::CaseSensitive) == 0)
-                ok = 0;
+                ret = 2;
     }
-    if (!ok) return 2;
 
-    switch (getFileType(fileName))
+    if (ret == 0)
     {
-    case fileSf2:
-        return this->sauvegarderSf2(indexSf2, fileName);
-        break;
-    case fileUnknown:
-        return 1;
-        break;
+        switch (getFileType(fileName))
+        {
+        case fileSf2:
+            ret = this->sauvegarderSf2(indexSf2, fileName);
+            break;
+        case fileSf3: {
+            // Temporary file
+            QString fileNameSf2 = fileName.left(fileName.length() - 4) + "_tmp.sf2";
+            if (QFile(fileNameSf2).exists()) {
+                int index = 2;
+                QString left = fileNameSf2.left(fileNameSf2.length() - 8);
+                while (QFile(left + "-" + QString::number(index) + "_tmp.sf2").exists())
+                    index++;
+                fileNameSf2 = left + "-" + QString::number(index) + "_tmp.sf2";
+            }
+
+            // Save sf2 first
+            if (this->sauvegarderSf2(indexSf2, fileNameSf2) == 0)
+            {
+                // Then create sf3
+                SfConvert::SoundFont sf(fileNameSf2);
+                if (sf.read())
+                {
+                    QFile fo(fileName);
+                    if (fo.open(QIODevice::WriteOnly))
+                    {
+                        sf.write(&fo);
+                        fo.close();
+                    }
+                    else
+                        ret = 3;
+                }
+                else
+                    ret = 3;
+            }
+            else
+                ret = 3;
+
+            // Delete the sf2 temporary file
+            QFile::remove(fileNameSf2);
+        } break;
+        case fileUnknown: default:
+            ret = 1;
+            break;
+        }
     }
-    return 1;
+
+    return ret;
 }
 
 //////////// METHODES PRIVEES ////////////
@@ -130,12 +174,16 @@ Pile_sf2::FileType Pile_sf2::getFileType(QString fileName)
     QString ext = fileInfo.suffix().toLower();
     if (ext.compare("sf2") == 0)
         return fileSf2;
+    else if (ext.compare("sf3") == 0)
+        return fileSf3;
     else
         return fileUnknown;
 }
 
 int Pile_sf2::ouvrir(QString fileName, QDataStream * stream, int &indexSf2, bool copySamples)
 {
+    bool isSf3 = fileName.endsWith('3');
+
     //////////////////////////// CHARGEMENT ////////////////////////////////////////
     char buffer[65536];
     char bloc[5];
@@ -174,6 +222,7 @@ int Pile_sf2::ouvrir(QString fileName, QDataStream * stream, int &indexSf2, bool
 
     // Taille de la partie INFO
     taille_info = freadSize(stream);
+
     // limite en taille
     if (taille_info == 0)
         return 5;
@@ -205,12 +254,14 @@ int Pile_sf2::ouvrir(QString fileName, QDataStream * stream, int &indexSf2, bool
 
     // Taille de la partie sdta
     taille_sdta = freadSize(stream);
+
     // limite en taille
     if (taille_sdta == 0)
     {
         free(bloc_info);
         return 5;
     }
+
     // mot sdta
     if (stream->readRawData(bloc, 4) != 4)
     {
@@ -225,6 +276,7 @@ int Pile_sf2::ouvrir(QString fileName, QDataStream * stream, int &indexSf2, bool
     }
     quint32 taille_smpl, taille_sm24;
     quint32 wSmpl, wSm24;
+
     // Blocs SMPL et SM24
     if (stream->readRawData(bloc, 4) != 4)
     {
@@ -247,6 +299,7 @@ int Pile_sf2::ouvrir(QString fileName, QDataStream * stream, int &indexSf2, bool
         taille_smpl = freadSize(stream);
         wSmpl = 20 + taille_info + 20;
         stream->skipRawData(taille_smpl); // en avant de taille_smpl
+
         // bloc sm24 ?
         if (stream->readRawData(bloc, 4) != 4)
         {
@@ -290,13 +343,15 @@ int Pile_sf2::ouvrir(QString fileName, QDataStream * stream, int &indexSf2, bool
         return 4;
     }
     bloc[4]='\0';
-    if (strcmp("LIST",bloc))
+    if (strcmp("LIST", bloc))
     {
         free(bloc_info);
         return 5;
     }
+
     // Taille de la partie pdta
     taille_pdta = freadSize(stream);
+
     // limite en taille
     if (taille_pdta == 0)
     {
@@ -308,6 +363,7 @@ int Pile_sf2::ouvrir(QString fileName, QDataStream * stream, int &indexSf2, bool
         free(bloc_info);
         return 5;
     }
+
     // EXTRACTION DES DONNEES DU BLOC PDTA
     char *bloc_pdta = (char *)malloc((taille_pdta+1));
     if (stream->readRawData(bloc_pdta, taille_pdta) != taille_pdta)
@@ -326,6 +382,7 @@ int Pile_sf2::ouvrir(QString fileName, QDataStream * stream, int &indexSf2, bool
         free(bloc_pdta);
         return 5;
     }
+
     // Vérification des tailles
     if ((taille_info + taille_sdta + taille_pdta + 28) != taille)
     {
@@ -336,6 +393,7 @@ int Pile_sf2::ouvrir(QString fileName, QDataStream * stream, int &indexSf2, bool
 
     /////////////////////////   SEPARATION DES CHAMPS DANS LE BLOC PDTA   //////////////////////
     unsigned int pos = 4;
+
     // Séparation des champs PHDR, PBAG, PMOD, PGEN
     /////// PHDR
     readbloc(bloc, bloc_pdta, pos);
@@ -357,6 +415,7 @@ int Pile_sf2::ouvrir(QString fileName, QDataStream * stream, int &indexSf2, bool
     char *bloc_pdta_phdr = (char *)malloc((taille_p+1));
     bloc_pdta_phdr = readdata(bloc_pdta_phdr, bloc_pdta, pos, taille_p);
     pos = pos + taille_p;
+
     /////// PBAG
     readbloc(bloc, bloc_pdta, pos);
     pos = pos + 4;
@@ -379,6 +438,7 @@ int Pile_sf2::ouvrir(QString fileName, QDataStream * stream, int &indexSf2, bool
     char *bloc_pdta_pbag = (char *)malloc((taille_b+1));
     bloc_pdta_pbag = readdata(bloc_pdta_pbag, bloc_pdta, pos, taille_b);
     pos = pos + taille_b;
+
     /////// PMOD
     readbloc(bloc, bloc_pdta, pos);
     pos = pos + 4;
@@ -460,6 +520,7 @@ int Pile_sf2::ouvrir(QString fileName, QDataStream * stream, int &indexSf2, bool
     char *bloc_pdta_inst = (char *)malloc((taille_p2+1));
     bloc_pdta_inst = readdata(bloc_pdta_inst, bloc_pdta, pos, taille_p2);
     pos = pos + taille_p2;
+
     /////// IBAG
     readbloc(bloc, bloc_pdta, pos);
     pos = pos + 4;
@@ -491,6 +552,7 @@ int Pile_sf2::ouvrir(QString fileName, QDataStream * stream, int &indexSf2, bool
     char *bloc_pdta_ibag = (char *)malloc((taille_b2+1));
     bloc_pdta_ibag = readdata(bloc_pdta_ibag, bloc_pdta, pos, taille_b2);
     pos = pos + taille_b2;
+
     /////// IMOD
     readbloc(bloc, bloc_pdta, pos);
     pos = pos + 4;
@@ -523,6 +585,7 @@ int Pile_sf2::ouvrir(QString fileName, QDataStream * stream, int &indexSf2, bool
     char *bloc_pdta_imod = (char *)malloc((taille_m2+1));
     bloc_pdta_imod = readdata(bloc_pdta_imod, bloc_pdta, pos, taille_m2);
     pos = pos + taille_m2;
+
     /////// IGEN
     readbloc(bloc, bloc_pdta, pos);
     pos = pos + 4;
@@ -557,6 +620,7 @@ int Pile_sf2::ouvrir(QString fileName, QDataStream * stream, int &indexSf2, bool
     char *bloc_pdta_igen = (char *)malloc((taille_g2+1));
     bloc_pdta_igen = readdata(bloc_pdta_igen, bloc_pdta, pos, taille_g2);
     pos = pos + taille_g2;
+
     /////// SHDR
     readbloc(bloc, bloc_pdta, pos);
     pos = pos + 4;
@@ -592,14 +656,18 @@ int Pile_sf2::ouvrir(QString fileName, QDataStream * stream, int &indexSf2, bool
     }
     char *bloc_pdta_shdr = (char *)malloc((taille+1));
     bloc_pdta_shdr = readdata(bloc_pdta_shdr, bloc_pdta, pos, taille);
+
     // Fin de la séparation des blocs de pdta
     free(bloc_pdta);
+
     // Création d'un nouvel SF2
     EltID id(elementSf2, -1, 0, 0, 0);
     indexSf2 = this->add(id, false); // Nouvelle action
     EltID idSf2(elementSf2, indexSf2, 0, 0, 0);
     Valeur value;
-    this->set(idSf2, champ_filename, fileName, false);
+
+    if (fileName.endsWith('2'))
+        this->set(idSf2, champ_filename, fileName, false);
 
     ////////////////////   EXTRACTION DES CHAMPS DANS LE BLOC SHDR  ////////////////////
 
@@ -624,14 +692,14 @@ int Pile_sf2::ouvrir(QString fileName, QDataStream * stream, int &indexSf2, bool
         this->set(id, champ_wSampleLink, value, false);
         value.sfLinkValue = readSFSL(bloc_pdta_shdr, pos+44);
         this->set(id, champ_sfSampleType, value, false);
-        temp1 = readDWORD(bloc_pdta_shdr, pos+20);
+        temp1 = readDWORD(bloc_pdta_shdr, pos+20); // Start of the sample in the data bloc
 
         // Nombre de canaux, échantillonnage, début / fin de boucle
         value.wValue = 1;
         this->set(id, champ_wChannel, value, false);
         value.dwValue = readDWORD(bloc_pdta_shdr, pos+36);
         this->set(id, champ_dwSampleRate, value, false);
-        if (readDWORD(bloc_pdta_shdr, pos+24)*2 > taille_smpl ||
+        if (readDWORD(bloc_pdta_shdr, pos+24) * (isSf3 ? 1: 2) > taille_smpl ||
                 (wSm24 && (readWORD(bloc_pdta_shdr, pos+24) > taille_sm24)))
         {
             // Sample non valide
@@ -645,13 +713,13 @@ int Pile_sf2::ouvrir(QString fileName, QDataStream * stream, int &indexSf2, bool
         }
         else
         {
-            value.dwValue = readDWORD(bloc_pdta_shdr, pos+24) - temp1;
+            value.dwValue = readDWORD(bloc_pdta_shdr, pos+24) - temp1; // End of the sample in the data bloc
             this->set(id, champ_dwLength, value, false);
-            value.dwValue = temp1*2 + wSmpl;
+            value.dwValue = temp1 * (isSf3 ? 1: 2) + wSmpl;
             this->set(id, champ_dwStart16, value, false);
             if (wSm24)
             {
-                value.dwValue = temp1*2 + wSm24;
+                value.dwValue = temp1 * 2 + wSm24;
                 this->set(id, champ_dwStart24, value, false);
                 value.wValue = 24;
                 this->set(id, champ_bpsFile, value, false);
@@ -663,22 +731,38 @@ int Pile_sf2::ouvrir(QString fileName, QDataStream * stream, int &indexSf2, bool
                 value.wValue = 16;
                 this->set(id, champ_bpsFile, value, false);
             }
-            value.dwValue = readDWORD(bloc_pdta_shdr, pos+28) - temp1;
+
+            value.dwValue = readDWORD(bloc_pdta_shdr, pos + 28) - (isSf3 ? 0 : temp1); // Start of the loop in the data bloc
             this->set(id, champ_dwStartLoop, value, false);
-            value.dwValue = readDWORD(bloc_pdta_shdr, pos+32) - temp1;
+            value.dwValue = readDWORD(bloc_pdta_shdr, pos + 32) - (isSf3 ? 0 : temp1); // End of the loop in the data bloc
             this->set(id, champ_dwEndLoop, value, false);
         }
 
         // Récupération des données
-        if (copySamples)
+        if (copySamples || isSf3)
         {
             // Remplissage des champ smpl et smpl24 à partir des données
             quint32 length = get(id, champ_dwLength).dwValue;
             QIODevice * fi = stream->device();
             fi->seek(get(id, champ_dwStart16).dwValue);
             QByteArray baData;
-            baData.resize(2 * length);
-            stream->readRawData(baData.data(), length * 2);
+            if (isSf3)
+            {
+                QByteArray arrayTmp;
+                arrayTmp.resize(length);
+                stream->readRawData(arrayTmp.data(), length);
+
+                OggConverter oggConverter(arrayTmp);
+                baData = oggConverter.GetDecodedData();
+
+                value.dwValue = baData.size() / 2;
+                this->set(id, champ_dwLength, value, false);
+            }
+            else
+            {
+                baData.resize(2 * length);
+                stream->readRawData(baData.data(), 2 * length);
+            }
             this->set(id, champ_sampleData16, baData, false);
             if (wSm24)
             {
@@ -694,6 +778,7 @@ int Pile_sf2::ouvrir(QString fileName, QDataStream * stream, int &indexSf2, bool
             value.wValue = 1;
             this->set(id, champ_ram, value, false);
         }
+
         pos = pos + 46;
     }
 
@@ -770,6 +855,7 @@ int Pile_sf2::ouvrir(QString fileName, QDataStream * stream, int &indexSf2, bool
     quint16 bagmin, bagmax, modmin, modmax, genmin, genmax;
     int l;
     int global;
+
     // Remplissage de la sous-classe INST
     for (unsigned int i = 0; i < taille_p2 / 22 - 1; i++)
     {
@@ -979,6 +1065,7 @@ int Pile_sf2::ouvrir(QString fileName, QDataStream * stream, int &indexSf2, bool
 int Pile_sf2::sauvegarderSf2(int indexSf2, QString fileName)
 {
     EltID id(elementSf2, indexSf2, 0, 0, 0);
+
     // Préparation de la sauvegarde
     sfVersionTag sfVersionTmp;
     quint32 dwTmp, dwTmp2;
@@ -987,6 +1074,7 @@ int Pile_sf2::sauvegarderSf2(int indexSf2, QString fileName)
     char charTmp;
     char tcharTmp[20];
     Valeur valTmp;
+
     // Modification du logiciel d'édition
     this->set(id, champ_ISFT, QString("Polyphone"), 0);
 
@@ -1150,6 +1238,7 @@ int Pile_sf2::sauvegarderSf2(int indexSf2, QString fileName)
     taille_ibag = 4;
     taille_imod = 10;
     taille_igen = 4;
+
     // pour chaque instrument
     for (int i = 0; i < this->count(id); i++)
     {
@@ -1215,17 +1304,23 @@ int Pile_sf2::sauvegarderSf2(int indexSf2, QString fileName)
     sfVersionTmp.wMajor = 2;
     sfVersionTmp.wMinor = 4;
     valTmp.sfVerValue = sfVersionTmp;
+
     // Mise à jour de la version
     id.typeElement = elementSf2;
     this->set(id, champ_IFIL, valTmp, false);
+
     // Sauvegarde sous le nom fileName
     QFile fi(fileName);
-    if (!fi.open(QIODevice::WriteOnly)) return 3; // ouvre et écrase
+    if (!fi.open(QIODevice::WriteOnly))
+        return 3; // ouvre et écrase
+
     // entête
     fi.write("RIFF", 4);
+
     // taille du fichier -8 octets
     fi.write((char *)&taille_fichier, 4);
     fi.write("sfbk", 4);
+
     /////////////////////////////////////// BLOC INFO ///////////////////////////////////////
     fi.write("LIST", 4);
     fi.write((char *)&taille_info, 4);
@@ -1389,6 +1484,7 @@ int Pile_sf2::sauvegarderSf2(int indexSf2, QString fileName)
         for (quint32 i = 0; i < dwTmp2-dwTmp; i++)
             fi.write(&charTmp, 1);
     }
+
     /////////////////////////////////////// BLOC SDTA ///////////////////////////////////////
 
     fi.write("LIST", 4);
@@ -1410,11 +1506,13 @@ int Pile_sf2::sauvegarderSf2(int indexSf2, QString fileName)
             dwTmp = 2 * this->get(id2, champ_dwLength).dwValue;
             baData = this->getData(id2, champ_sampleData16);
             fi.write(baData.data(), dwTmp);
+
             // ajout de 46 zeros (sample de 2 valeurs)
             charTmp = '\0';
             for (int i = 0; i < 46 * 2; i++)
                 fi.write(&charTmp, 1);
             dwTmp += 92;
+
             // Mise à jour des champs fileName, dwStart
             if (this->get(id2, champ_dwStart16).dwValue != dwTmp2)
             {
@@ -1459,6 +1557,7 @@ int Pile_sf2::sauvegarderSf2(int indexSf2, QString fileName)
                 dwTmp2 += dwTmp;
             }
         }
+
         // 0 de fin
         if (dwTmp2 % 2)
         {
@@ -1466,6 +1565,7 @@ int Pile_sf2::sauvegarderSf2(int indexSf2, QString fileName)
             fi.write(&charTmp, sizeof(char));
         }
     }
+
     // Mise à jour wBpsFile
     if (this->get(id, champ_wBpsSave).wValue == 24)
     {
@@ -1497,6 +1597,7 @@ int Pile_sf2::sauvegarderSf2(int indexSf2, QString fileName)
             }
         }
     }
+
     // Libération de la RAM
     if (!CONFIG_RAM)
     {
@@ -1520,6 +1621,7 @@ int Pile_sf2::sauvegarderSf2(int indexSf2, QString fileName)
     fi.write("pdta", 4);
     fi.write("phdr", 4);
     fi.write((char *)&taille_phdr, 4);
+
     // un bloc phdr par preset
     id.typeElement = elementPrst;
     id2.typeElement = elementPrstInst;
@@ -1591,6 +1693,7 @@ int Pile_sf2::sauvegarderSf2(int indexSf2, QString fileName)
     id2.typeElement = elementPrstInst;
     nGen = 0;
     nMod = 0;
+
     // pour chaque preset
     for (int i = 0; i < this->count(id); i++)
     {
@@ -1599,6 +1702,7 @@ int Pile_sf2::sauvegarderSf2(int indexSf2, QString fileName)
         {
             id2.indexElt = i;
             id3.indexElt = i;
+
             // bag global
             wTmp = nGen;
             fi.write((char *)&wTmp, 2);
@@ -1613,6 +1717,7 @@ int Pile_sf2::sauvegarderSf2(int indexSf2, QString fileName)
                 if (!this->get(id2, champ_hidden).bValue)
                     nMod++;
             }
+
             // un bag par instrument lié
             id2.typeElement = elementPrstInst;
             for (int j = 0; j < this->count(id2); j++)
@@ -1638,6 +1743,7 @@ int Pile_sf2::sauvegarderSf2(int indexSf2, QString fileName)
             }
         }
     }
+
     // bag de fin
     wTmp = nGen;
     fi.write((char *)&wTmp, 2);
@@ -1650,6 +1756,7 @@ int Pile_sf2::sauvegarderSf2(int indexSf2, QString fileName)
     id2.typeElement = elementPrstInst;
     SFModulator sfTmp;
     ConvertMod *converterMod = NULL;
+
     // pour chaque preset
     for (int i = 0; i < this->count(id); i++)
     {
@@ -1658,6 +1765,7 @@ int Pile_sf2::sauvegarderSf2(int indexSf2, QString fileName)
         {
             id2.indexElt = i;
             id3.indexElt = i;
+
             // mods du bag global
             id3.typeElement = elementPrstMod;
             converterMod = new ConvertMod(this, id3);
@@ -1686,6 +1794,7 @@ int Pile_sf2::sauvegarderSf2(int indexSf2, QString fileName)
                 }
             }
             delete converterMod;
+
             // pour chaque instrument associé
             for (int j = 0; j < this->count(id2); j++)
             {
@@ -1695,6 +1804,7 @@ int Pile_sf2::sauvegarderSf2(int indexSf2, QString fileName)
                     id3.indexElt2 = j;
                     id3.typeElement = elementPrstInstMod;
                     converterMod = new ConvertMod(this, id3);
+
                     // mods associés aux instruments
                     for (int k = 0; k < this->count(id3); k++)
                     {
@@ -1725,6 +1835,7 @@ int Pile_sf2::sauvegarderSf2(int indexSf2, QString fileName)
             }
         }
     }
+
     // mod de fin
     charTmp = '\0';
     for (quint32 i = 0; i < 10; i++)
@@ -1736,6 +1847,7 @@ int Pile_sf2::sauvegarderSf2(int indexSf2, QString fileName)
     id.typeElement = elementPrst;
     id2.typeElement = elementPrstInst;
     ConvertInst *converterInst = new ConvertInst(this, id.indexSf2);
+
     // pour chaque preset
     for (int i = 0; i < this->count(id); i++)
     {
@@ -1745,6 +1857,7 @@ int Pile_sf2::sauvegarderSf2(int indexSf2, QString fileName)
             id2.indexElt = i;
             id3.indexElt = i;
             id3.typeElement = elementPrstGen;
+
             // gens du bag global
             // - 1er gen : keyrange si présent
             // - 2ème gen : velocity si présent
@@ -1782,6 +1895,7 @@ int Pile_sf2::sauvegarderSf2(int indexSf2, QString fileName)
                 }
             }
             id3.typeElement = elementPrstInstGen;
+
             // pour chaque instrument associé
             for (int j = 0; j < this->count(id2); j++)
             {
@@ -1789,6 +1903,7 @@ int Pile_sf2::sauvegarderSf2(int indexSf2, QString fileName)
                 if (!this->get(id2, champ_hidden).bValue)
                 {
                     id3.indexElt2 = j;
+
                     // gens associés aux instruments
                     // - 1er gen : keyrange si présent
                     // - 2ème gen : velocity si présent
@@ -1835,6 +1950,7 @@ int Pile_sf2::sauvegarderSf2(int indexSf2, QString fileName)
         }
     }
     delete converterInst;
+
     // gen de fin
     charTmp = '\0';
     for (quint32 i = 0; i < 4; i++)
@@ -1842,6 +1958,7 @@ int Pile_sf2::sauvegarderSf2(int indexSf2, QString fileName)
 
     fi.write("inst", 4);
     fi.write((char *)&taille_inst, 4);
+
     // un bloc inst par instrument
     id.typeElement = elementInst;
     id2.typeElement = elementInstSmpl;
@@ -1852,6 +1969,7 @@ int Pile_sf2::sauvegarderSf2(int indexSf2, QString fileName)
         if (!this->get(id, champ_hidden).bValue)
         {
             id2.indexElt = i;
+
             // Name
             dwTmp = this->getQstr(id, champ_name).length();
             if (dwTmp > 20) dwTmp = 20;
@@ -1870,6 +1988,7 @@ int Pile_sf2::sauvegarderSf2(int indexSf2, QString fileName)
                 for (quint32 iteration = 0; iteration < 20-dwTmp; iteration++)
                     fi.write(&charTmp, 1);
             }
+
             // wInstBagNdx
             wTmp = nBag;
             fi.write((char *)&wTmp, 2);
@@ -1882,11 +2001,13 @@ int Pile_sf2::sauvegarderSf2(int indexSf2, QString fileName)
             }
         }
     }
+
     // inst de fin
     fi.write("EOI", 3);
     charTmp = '\0';
     for (quint32 iteration = 0; iteration < 17; iteration++)
         fi.write(&charTmp, 1);
+
     // index bag de fin
     wTmp = nBag;
     fi.write((char *)&wTmp, 2);
@@ -1897,6 +2018,7 @@ int Pile_sf2::sauvegarderSf2(int indexSf2, QString fileName)
     id2.typeElement = elementInstSmpl;
     nGen = 0;
     nMod = 0;
+
     // pour chaque instrument
     for (int i = 0; i < this->count(id); i++)
     {
@@ -1905,6 +2027,7 @@ int Pile_sf2::sauvegarderSf2(int indexSf2, QString fileName)
         {
             id2.indexElt = i;
             id3.indexElt = i;
+
             // bag global
             wTmp = nGen;
             fi.write((char *)&wTmp, 2);
@@ -1919,6 +2042,7 @@ int Pile_sf2::sauvegarderSf2(int indexSf2, QString fileName)
                 if (!this->get(id2, champ_hidden).bValue)
                     nMod++;
             }
+
             // un bag par instrument lié
             id2.typeElement = elementInstSmpl;
             for (int j = 0; j < this->count(id2); j++)
@@ -1944,6 +2068,7 @@ int Pile_sf2::sauvegarderSf2(int indexSf2, QString fileName)
             }
         }
     }
+
     // bag de fin
     wTmp = nGen;
     fi.write((char *)&wTmp, 2);
@@ -1954,6 +2079,7 @@ int Pile_sf2::sauvegarderSf2(int indexSf2, QString fileName)
     fi.write((char *)&taille_imod, 4);
     id.typeElement = elementInst;
     id2.typeElement = elementInstSmpl;
+
     // pour chaque instrument
     for (int i = 0; i < this->count(id); i++)
     {
@@ -1962,6 +2088,7 @@ int Pile_sf2::sauvegarderSf2(int indexSf2, QString fileName)
         {
             id2.indexElt = i;
             id3.indexElt = i;
+
             // mods du bag global
             id3.typeElement = elementInstMod;
             converterMod = new ConvertMod(this, id3);
@@ -1990,6 +2117,7 @@ int Pile_sf2::sauvegarderSf2(int indexSf2, QString fileName)
                 }
             }
             delete converterMod;
+
             // pour chaque sample associé
             for (int j = 0; j < this->count(id2); j++)
             {
@@ -1999,6 +2127,7 @@ int Pile_sf2::sauvegarderSf2(int indexSf2, QString fileName)
                     id3.indexElt2 = j;
                     id3.typeElement = elementInstSmplMod;
                     converterMod = new ConvertMod(this, id3);
+
                     // mods associés aux samples
                     for (int k = 0; k < this->count(id3); k++)
                     {
@@ -2029,6 +2158,7 @@ int Pile_sf2::sauvegarderSf2(int indexSf2, QString fileName)
             }
         }
     }
+
     // mod de fin
     charTmp = '\0';
     for (quint32 iteration = 0; iteration < 10; iteration++)
@@ -2039,6 +2169,7 @@ int Pile_sf2::sauvegarderSf2(int indexSf2, QString fileName)
     id.typeElement = elementInst;
     id2.typeElement = elementInstSmpl;
     ConvertSmpl *converterSmpl = new ConvertSmpl(this, id.indexSf2);
+
     // pour chaque instrument
     for (int i = 0; i < this->count(id); i++)
     {
@@ -2048,6 +2179,7 @@ int Pile_sf2::sauvegarderSf2(int indexSf2, QString fileName)
             id2.indexElt = i;
             id3.indexElt = i;
             id3.typeElement = elementInstGen;
+
             // gens du bag global
             // - 1er gen : keyrange si présent
             // - 2ème gen : velocity si présent
@@ -2085,6 +2217,7 @@ int Pile_sf2::sauvegarderSf2(int indexSf2, QString fileName)
                 }
             }
             id3.typeElement = elementInstSmplGen;
+
             // pour chaque sample associé
             for (int j = 0; j < this->count(id2); j++)
             {
@@ -2092,6 +2225,7 @@ int Pile_sf2::sauvegarderSf2(int indexSf2, QString fileName)
                 if (!this->get(id2, champ_hidden).bValue)
                 {
                     id3.indexElt2 = j;
+
                     // gens associés aux samples
                     // - 1er gen : keyrange si présent
                     // - 2ème gen : velocity si présent
@@ -2137,6 +2271,7 @@ int Pile_sf2::sauvegarderSf2(int indexSf2, QString fileName)
             }
         }
     }
+
     // gen de fin
     charTmp = '\0';
     for (quint32 iteration = 0; iteration < 4; iteration++)
@@ -2144,6 +2279,7 @@ int Pile_sf2::sauvegarderSf2(int indexSf2, QString fileName)
 
     fi.write("shdr", 4);
     fi.write((char *)&taille_shdr, 4);
+
     // un bloc shdr par sample
     id.typeElement = elementSmpl;
     nBag = 0;
@@ -2202,13 +2338,16 @@ int Pile_sf2::sauvegarderSf2(int indexSf2, QString fileName)
         }
     }
     delete converterSmpl;
+
     // shdr de fin
     fi.write("EOS", 3);
     charTmp = '\0';
     for (quint32 iteration = 0; iteration < 43; iteration++)
         fi.write(&charTmp, 1);
+
     // Fermeture du fichier
     fi.close();
+
     // Sauvegarde de fileName, wBpsInit
     id.typeElement = elementSf2;
     this->set(id, champ_filename, fileName, false);
@@ -2267,6 +2406,7 @@ int Pile_sf2::ConvertMod::calculDestIndex(int destIndex)
     else
         return 32768 + pos - nbHidden;
 }
+
 // Conversion du numéro de sample lié
 Pile_sf2::ConvertSmpl::ConvertSmpl(Pile_sf2 *sf2, int indexSf2)
 {
@@ -2283,10 +2423,12 @@ Pile_sf2::ConvertSmpl::ConvertSmpl(Pile_sf2 *sf2, int indexSf2)
     for (int i = pos; i < this->nbElt; i++)
         this->listHidden[i] = -1;
 }
+
 Pile_sf2::ConvertSmpl::~ConvertSmpl()
 {
     delete this->listHidden;
 }
+
 int Pile_sf2::ConvertSmpl::calculIndex(int index)
 {
     bool hidden = false;
@@ -2307,6 +2449,7 @@ int Pile_sf2::ConvertSmpl::calculIndex(int index)
     else
         return pos - nbHidden;
 }
+
 // Conversion du numéro d'instrument lié
 Pile_sf2::ConvertInst::ConvertInst(Pile_sf2 *sf2, int indexSf2)
 {
@@ -2323,10 +2466,12 @@ Pile_sf2::ConvertInst::ConvertInst(Pile_sf2 *sf2, int indexSf2)
     for (int i = pos; i < this->nbElt; i++)
         this->listHidden[i] = -1;
 }
+
 Pile_sf2::ConvertInst::~ConvertInst()
 {
     delete this->listHidden;
 }
+
 int Pile_sf2::ConvertInst::calculIndex(int index)
 {
     bool hidden = false;

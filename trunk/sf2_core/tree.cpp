@@ -955,7 +955,7 @@ void Tree::dropEvent(QDropEvent *event)
             if (!path.isEmpty())
             {
                 QString extension = path.split(".").last().toLower();
-                if (extension == "sfz" || extension == "sf2" || extension == "sfark")
+                if (extension == "sfz" || extension == "sf2"  || extension == "sf3" || extension == "sfark")
                     mainWindow->dragAndDrop(path, getItemID(itemAt(event->pos())), &numSf2);
                 else if (extension == "wav")
                     mainWindow->dragAndDrop(path, getItemID(itemAt(event->pos())), &commandCopy);

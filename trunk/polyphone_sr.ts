@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="sr_RS">
+<TS version="2.0" language="sr_RS">
 <context>
     <name>ComboBox</name>
     <message>
@@ -150,7 +150,7 @@
     <message>
         <location filename="gui_divers/config.ui" line="714"/>
         <source>Gain (dB)</source>
-        <translation>Појачање (дБ)</translation>
+        <translation>Појачање (dB)</translation>
     </message>
     <message>
         <location filename="gui_divers/config.ui" line="768"/>
@@ -221,7 +221,7 @@
     <message>
         <location filename="gui_divers/config.ui" line="1241"/>
         <source>répercuter les modifications</source>
-        <translation>промени повезани узорак</translation>
+        <translation>мењај и повезани узорак</translation>
     </message>
     <message>
         <location filename="gui_divers/config.ui" line="1254"/>
@@ -341,55 +341,56 @@
     </message>
     <message>
         <location filename="gui_divers/config.cpp" line="210"/>
-        <location filename="gui_divers/config.cpp" line="1071"/>
+        <location filename="gui_divers/config.cpp" line="1102"/>
         <source>Information</source>
         <translation>Подаци</translation>
     </message>
     <message>
         <location filename="gui_divers/config.cpp" line="211"/>
-        <location filename="gui_divers/config.cpp" line="1072"/>
+        <location filename="gui_divers/config.cpp" line="1103"/>
         <source>La modification sera prise en compte lors du prochain démarrage du logiciel.</source>
         <translation>Ова измена биће примењена по поновном покретању програма.</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.cpp" line="583"/>
+        <location filename="gui_divers/config.cpp" line="595"/>
         <source>Couleur du fond</source>
         <translation>Боја позадине</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.cpp" line="593"/>
+        <location filename="gui_divers/config.cpp" line="606"/>
         <source>Couleur de l&apos;onde</source>
         <translation>Боја таласног облика</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.cpp" line="603"/>
+        <location filename="gui_divers/config.cpp" line="617"/>
         <source>Couleur de la grille</source>
         <translation>Боја помоћне мреже</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.cpp" line="613"/>
+        <location filename="gui_divers/config.cpp" line="628"/>
         <source>Couleur du début de la boucle</source>
         <translation>Боја за означавање почетка вртње (дела који се понавља)</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.cpp" line="623"/>
+        <location filename="gui_divers/config.cpp" line="639"/>
         <source>Couleur de la fin de la boucle</source>
         <translation>Боја за означавање краја вртње (дела који се понавља)</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.cpp" line="633"/>
+        <location filename="gui_divers/config.cpp" line="650"/>
         <source>Couleur du curseur de lecture</source>
         <translation>Боја за означавање показивача пуштања (репродукције)</translation>
     </message>
     <message>
-        <location filename="gui_divers/config.cpp" line="671"/>
-        <location filename="gui_divers/config.cpp" line="687"/>
+        <location filename="gui_divers/config.cpp" line="690"/>
+        <location filename="gui_divers/config.cpp" line="706"/>
         <source>---- séparateur ----</source>
         <translation>---- раздвајач ----</translation>
     </message>
     <message>
         <location filename="gui_divers/config.h" line="508"/>
         <source>w</source>
+        <translatorcomment>default mapping of the keyboard</translatorcomment>
         <translation>ж</translation>
     </message>
     <message>
@@ -673,13 +674,13 @@
     <message>
         <location filename="gui_divers/dialog_about.cpp" line="46"/>
         <source>Copyright</source>
-        <translation type="unfinished">Права творца</translation>
+        <translation>Права творца</translation>
     </message>
     <message>
         <location filename="gui_divers/dialog_about.cpp" line="47"/>
         <source>Davy Triponney</source>
         <comment>this is my name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Дејви Трипони (Davy Triponney)</translation>
     </message>
     <message>
         <location filename="gui_divers/dialog_about.cpp" line="49"/>
@@ -695,49 +696,49 @@
         <location filename="gui_divers/dialog_about.cpp" line="56"/>
         <location filename="gui_divers/dialog_about.cpp" line="63"/>
         <source>Davy Triponney</source>
-        <translation type="unfinished"></translation>
+        <translation>Дејви Трипони (Davy Triponney)</translation>
     </message>
     <message>
         <location filename="gui_divers/dialog_about.cpp" line="57"/>
         <location filename="gui_divers/dialog_about.cpp" line="62"/>
         <source>Andrea Celani</source>
-        <translation type="unfinished"></translation>
+        <translation>Андреа Челани (Andrea Celani)</translation>
     </message>
     <message>
         <location filename="gui_divers/dialog_about.cpp" line="58"/>
         <source>Kinwie</source>
-        <translation type="unfinished"></translation>
+        <translation>Кинви (Kinwie)</translation>
     </message>
     <message>
         <location filename="gui_divers/dialog_about.cpp" line="59"/>
         <source>Michael Schyllberg</source>
-        <translation type="unfinished"></translation>
+        <translation>Мајкл Шилберг (Michael Schyllberg)</translation>
     </message>
     <message>
         <location filename="gui_divers/dialog_about.cpp" line="60"/>
         <source>Paul Stratman</source>
-        <translation type="unfinished"></translation>
+        <translation>Пол Стратман (Paul Stratman)</translation>
     </message>
     <message>
         <location filename="gui_divers/dialog_about.cpp" line="61"/>
         <location filename="gui_divers/dialog_about.cpp" line="67"/>
         <source>Steve Clarke</source>
-        <translation type="unfinished"></translation>
+        <translation>Стив Кларк (Steve Clarke)</translation>
     </message>
     <message>
         <location filename="gui_divers/dialog_about.cpp" line="64"/>
         <source>Erwan Berté</source>
-        <translation type="unfinished"></translation>
+        <translation>Ерван Берте (Erwan Berté)</translation>
     </message>
     <message>
         <location filename="gui_divers/dialog_about.cpp" line="65"/>
         <source>F.J. Martínez Murcia</source>
-        <translation type="unfinished"></translation>
+        <translation>Ф.Ј. Мартинез Мурција (F.J. Martínez Murcia)</translation>
     </message>
     <message>
         <location filename="gui_divers/dialog_about.cpp" line="66"/>
         <source>Jay Alexander Fleming</source>
-        <translation type="unfinished"></translation>
+        <translation>Џеј Александар Флеминг (Jay Alexander Fleming)</translation>
     </message>
 </context>
 <context>
@@ -760,7 +761,7 @@
     <message>
         <location filename="tools/dialog_celeste.ui" line="79"/>
         <source>Division à l&apos;octave suivante</source>
-        <translation>Парче до наредне октаве</translation>
+        <translation>Део до наредне октаве</translation>
     </message>
     <message>
         <location filename="tools/dialog_celeste.cpp" line="39"/>
@@ -773,24 +774,24 @@
     <message>
         <location filename="tools/dialog_duplication.ui" line="17"/>
         <source>Duplication des divisions</source>
-        <translation>Удвостручавање парчади</translation>
+        <translation>Удвостручавање делова</translation>
     </message>
     <message>
         <location filename="tools/dialog_duplication.ui" line="65"/>
         <source>Une division pour chaque note</source>
-        <translation>Једно парче за сваку ноту</translation>
+        <translation>Један део за сваку ноту</translation>
     </message>
     <message>
         <location filename="tools/dialog_duplication.ui" line="124"/>
         <source>Une division pour chaque étendue de vélocité</source>
-        <translation>Једно парче за сваки опсег јачине удара</translation>
+        <translation>Један део за сваки опсег јачине удара</translation>
     </message>
 </context>
 <context>
     <name>DialogExport</name>
     <message>
         <location filename="gui_divers/dialog_export.ui" line="17"/>
-        <location filename="gui_divers/dialog_export.ui" line="185"/>
+        <location filename="gui_divers/dialog_export.ui" line="190"/>
         <source>Exporter</source>
         <translation>Извези</translation>
     </message>
@@ -810,27 +811,27 @@
         <translation>Место</translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_export.ui" line="130"/>
+        <location filename="gui_divers/dialog_export.ui" line="135"/>
         <source>Format</source>
         <translation>Врста</translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_export.ui" line="140"/>
+        <location filename="gui_divers/dialog_export.ui" line="145"/>
         <source>numéro de preset en préfixe</source>
         <translation>број поставке као предложак</translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_export.ui" line="147"/>
+        <location filename="gui_divers/dialog_export.ui" line="152"/>
         <source>un répertoire par banque</source>
         <translation>један директоријум по банци</translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_export.ui" line="154"/>
+        <location filename="gui_divers/dialog_export.ui" line="159"/>
         <source>classement général midi</source>
         <translation>Џенерал-миди распоред</translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_export.ui" line="165"/>
+        <location filename="gui_divers/dialog_export.ui" line="170"/>
         <source>Annuler</source>
         <translation>Поништи</translation>
     </message>
@@ -935,7 +936,7 @@
     <message>
         <location filename="gui_divers/dialog_help.cpp" line="127"/>
         <source>Arborescence</source>
-        <translation>Стабло директоријума</translation>
+        <translation>Разгранато</translation>
     </message>
     <message>
         <location filename="gui_divers/dialog_help.cpp" line="128"/>
@@ -1037,7 +1038,7 @@
     <message>
         <location filename="gui_divers/dialog_help.cpp" line="148"/>
         <source>Pages d&apos;aperçu</source>
-        <translation type="unfinished"></translation>
+        <translation>Преглед страница</translation>
     </message>
     <message>
         <location filename="gui_divers/dialog_help.cpp" line="155"/>
@@ -1093,7 +1094,7 @@
         <location filename="gui_divers/dialog_help.cpp" line="167"/>
         <location filename="gui_divers/dialog_help.cpp" line="176"/>
         <source>Duplication des divisions</source>
-        <translation>Удвостручавање парчади</translation>
+        <translation>Удвостручавање делова</translation>
     </message>
     <message>
         <location filename="gui_divers/dialog_help.cpp" line="168"/>
@@ -1196,7 +1197,7 @@
     <message>
         <location filename="gui_divers/dialog_help.cpp" line="199"/>
         <source>Tutoriel</source>
-        <translation>Упутство</translation>
+        <translation>Приручник</translation>
     </message>
     <message>
         <location filename="gui_divers/dialog_help.cpp" line="200"/>
@@ -1220,16 +1221,21 @@
     </message>
     <message>
         <location filename="gui_divers/dialog_help.cpp" line="204"/>
+        <source>Soundfonts sf3</source>
+        <translation>Сф3-звукотеке</translation>
+    </message>
+    <message>
+        <location filename="gui_divers/dialog_help.cpp" line="205"/>
         <source>Import / export sfz</source>
         <translation>Сфз — увоз/извоз</translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_help.cpp" line="205"/>
+        <location filename="gui_divers/dialog_help.cpp" line="206"/>
         <source>Limitations du logiciel</source>
         <translation>Ограничења програма</translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_help.cpp" line="220"/>
+        <location filename="gui_divers/dialog_help.cpp" line="221"/>
         <source>fr</source>
         <translation>sr</translation>
     </message>
@@ -1281,6 +1287,7 @@
     <message>
         <location filename="tools/dialog_mixture.ui" line="17"/>
         <source>Création mixture</source>
+        <translatorcomment>Mixture = organ stop made of a combinaison of harmonics</translatorcomment>
         <translation>Стварање микстуре</translation>
     </message>
     <message>
@@ -1321,7 +1328,7 @@
     <message>
         <location filename="tools/dialog_mixture.ui" line="98"/>
         <source>Divisions</source>
-        <translation>Парчад</translation>
+        <translation>Делови</translation>
     </message>
     <message>
         <location filename="tools/dialog_mixture.ui" line="251"/>
@@ -1522,7 +1529,7 @@
     <message>
         <location filename="tools/dialog_release.ui" line="68"/>
         <source>Division à l&apos;octave suivante</source>
-        <translation>Парче до наредне октаве</translation>
+        <translation>Део до наредне октаве</translation>
     </message>
     <message>
         <location filename="tools/dialog_release.ui" line="114"/>
@@ -1634,7 +1641,7 @@
     <message>
         <location filename="tools/dialog_sifflements.ui" line="72"/>
         <source>Fin de la coupure (Hz)</source>
-        <translation>Исеци изнад (Хц)</translation>
+        <translation>Исеци изнад (Hz)</translation>
     </message>
     <message>
         <location filename="tools/dialog_sifflements.ui" line="79"/>
@@ -1644,7 +1651,7 @@
     <message>
         <location filename="tools/dialog_sifflements.ui" line="96"/>
         <source>Début de la coupure (Hz)</source>
-        <translation>Исеци испод (Хц)</translation>
+        <translation>Исеци испод (Hz)</translation>
     </message>
 </context>
 <context>
@@ -1657,7 +1664,7 @@
     <message>
         <location filename="tools/dialog_space.ui" line="45"/>
         <source>Nombre divisions</source>
-        <translation>Број парчади</translation>
+        <translation>Број делова</translation>
     </message>
     <message>
         <location filename="tools/dialog_space.ui" line="52"/>
@@ -1702,6 +1709,7 @@
     <message>
         <location filename="tools/dialog_space.ui" line="148"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Motif&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translatorcomment>Only &quot;Pattern&quot; has to be translated</translatorcomment>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Мустра&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
@@ -1771,11 +1779,13 @@
     <message>
         <location filename="tools/dialog_space.cpp" line="349"/>
         <source>G</source>
+        <translatorcomment>почетно слово од &quot;Леви&quot;</translatorcomment>
         <translation>Л</translation>
     </message>
     <message>
         <location filename="tools/dialog_space.cpp" line="358"/>
         <source>D</source>
+        <translatorcomment>почетно слово од &quot;Десни&quot;</translatorcomment>
         <translation>Д</translation>
     </message>
 </context>
@@ -1800,7 +1810,7 @@
     <message>
         <location filename="pages/graphiquefourier.cpp" line="47"/>
         <source>Fréquence (Hz)</source>
-        <translation>Учестаност (Хц)</translation>
+        <translation>Учестаност (Hz)</translation>
     </message>
     <message>
         <location filename="pages/graphiquefourier.cpp" line="62"/>
@@ -1825,13 +1835,13 @@
     <message>
         <location filename="pages/graphiquefourier.cpp" line="319"/>
         <source>estimation</source>
-        <translation>процењивање</translation>
+        <translation>прорачунато</translation>
     </message>
     <message>
         <location filename="pages/graphiquefourier.cpp" line="331"/>
         <source>Hz</source>
         <comment>unit for Herz</comment>
-        <translation type="unfinished"></translation>
+        <translation>Hz</translation>
     </message>
     <message>
         <location filename="pages/graphiquefourier.cpp" line="402"/>
@@ -1848,7 +1858,7 @@
     <name>MainWindow</name>
     <message>
         <location filename="mainwindow.ui" line="69"/>
-        <location filename="mainwindow.cpp" line="2567"/>
+        <location filename="mainwindow.cpp" line="2626"/>
         <source>Note</source>
         <translation>Нота</translation>
     </message>
@@ -1860,6 +1870,7 @@
     <message>
         <location filename="mainwindow.ui" line="210"/>
         <source>&amp;Fichier</source>
+        <translatorcomment>Put the character &quot;&amp;&quot; to access an element in a menu via Alt + the following letter.</translatorcomment>
         <translation>&amp;Датотека</translation>
     </message>
     <message>
@@ -1915,17 +1926,17 @@
     <message>
         <location filename="mainwindow.ui" line="395"/>
         <source>Arborescence</source>
-        <translation>Стабло директоријума</translation>
+        <translation>Разгранато</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="521"/>
         <source>Enroule l&apos;arborescence</source>
-        <translation>Скупи гране стабла</translation>
+        <translation>Скупи гране</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="547"/>
         <source>Déroule l&apos;arborescence</source>
-        <translation>Рашири гране стабла</translation>
+        <translation>Рашири гране</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="592"/>
@@ -1959,8 +1970,8 @@
     </message>
     <message>
         <location filename="mainwindow.ui" line="670"/>
-        <location filename="mainwindow.cpp" line="280"/>
-        <location filename="mainwindow.cpp" line="489"/>
+        <location filename="mainwindow.cpp" line="286"/>
+        <location filename="mainwindow.cpp" line="512"/>
         <source>&amp;Enregistrer</source>
         <translation>&amp;Сачувај</translation>
     </message>
@@ -1993,7 +2004,8 @@
         <location filename="mainwindow.ui" line="721"/>
         <source>&amp;Annuler</source>
         <comment>1</comment>
-        <translation>&amp;Поништи</translation>
+        <translatorcomment>Undo an action</translatorcomment>
+        <translation>&amp;Опозови</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="724"/>
@@ -2082,8 +2094,8 @@
     </message>
     <message>
         <location filename="mainwindow.ui" line="879"/>
-        <location filename="mainwindow.cpp" line="1109"/>
-        <location filename="mainwindow.cpp" line="1116"/>
+        <location filename="mainwindow.cpp" line="1132"/>
+        <location filename="mainwindow.cpp" line="1139"/>
         <source>&amp;Renommer</source>
         <translation>П&amp;реименуј</translation>
     </message>
@@ -2282,18 +2294,18 @@
         <location filename="mainwindow.ui" line="1206"/>
         <location filename="mainwindow.ui" line="1331"/>
         <source>&amp;Duplication des divisions...</source>
-        <translation>&amp;Удвостручавање парчади...</translation>
+        <translation>&amp;Удвостручавање делова...</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="1209"/>
         <source>Duplication des divisions...</source>
-        <translation>Удвостручавање парчади...</translation>
+        <translation>Удвостручавање делова...</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="1212"/>
         <location filename="mainwindow.ui" line="1337"/>
         <source>Duplique les divisions</source>
-        <translation>Удвостручи ову парчад</translation>
+        <translation>Удвостручи ове делове</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="1224"/>
@@ -2305,7 +2317,7 @@
         <location filename="mainwindow.ui" line="1227"/>
         <location filename="mainwindow.ui" line="1367"/>
         <source>Paramètre toutes les divisions simultanément</source>
-        <translation>Једновремено постави сву парчад</translation>
+        <translation>Једновремено постави све делове</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="1239"/>
@@ -2380,7 +2392,7 @@
     <message>
         <location filename="mainwindow.ui" line="1334"/>
         <source>Duplication des divisions</source>
-        <translation>Удвостручавање парчади</translation>
+        <translation>Удвостручавање делова</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="1349"/>
@@ -2490,424 +2502,467 @@
         <translation>На &amp;целом екрану</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="65"/>
+        <location filename="mainwindow.cpp" line="66"/>
         <source>Rechercher...</source>
         <translation>Пронађи...</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="148"/>
+        <location filename="mainwindow.cpp" line="149"/>
         <source>Clavier virtuel</source>
         <translation>Патворена клавијатура</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="267"/>
-        <location filename="mainwindow.cpp" line="438"/>
-        <location filename="mainwindow.cpp" line="441"/>
-        <location filename="mainwindow.cpp" line="444"/>
-        <location filename="mainwindow.cpp" line="447"/>
-        <location filename="mainwindow.cpp" line="450"/>
-        <location filename="mainwindow.cpp" line="487"/>
-        <location filename="mainwindow.cpp" line="641"/>
-        <location filename="mainwindow.cpp" line="644"/>
-        <location filename="mainwindow.cpp" line="647"/>
-        <location filename="mainwindow.cpp" line="1483"/>
-        <location filename="mainwindow.cpp" line="1987"/>
-        <location filename="mainwindow.cpp" line="2615"/>
+        <location filename="mainwindow.cpp" line="273"/>
+        <location filename="mainwindow.cpp" line="461"/>
+        <location filename="mainwindow.cpp" line="464"/>
+        <location filename="mainwindow.cpp" line="467"/>
+        <location filename="mainwindow.cpp" line="470"/>
+        <location filename="mainwindow.cpp" line="473"/>
+        <location filename="mainwindow.cpp" line="510"/>
+        <location filename="mainwindow.cpp" line="664"/>
+        <location filename="mainwindow.cpp" line="667"/>
+        <location filename="mainwindow.cpp" line="670"/>
+        <location filename="mainwindow.cpp" line="1509"/>
+        <location filename="mainwindow.cpp" line="2046"/>
+        <location filename="mainwindow.cpp" line="2674"/>
         <source>Attention</source>
         <translation>Упозорење</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="268"/>
-        <location filename="mainwindow.cpp" line="483"/>
+        <location filename="mainwindow.cpp" line="274"/>
+        <location filename="mainwindow.cpp" line="506"/>
         <source>&lt;b&gt;Sauvegarder avant de quitter ?&lt;/b&gt;</source>
         <translation>&lt;b&gt;Да ли да сачувам измене пре изласка?&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="271"/>
+        <location filename="mainwindow.cpp" line="277"/>
         <source>Les fichiers suivants ont été modifiés :&lt;br/&gt; - </source>
         <translation>Ове датотеке су измењене:&lt;br/&gt; - </translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="276"/>
-        <location filename="mainwindow.cpp" line="485"/>
+        <location filename="mainwindow.cpp" line="282"/>
+        <location filename="mainwindow.cpp" line="508"/>
         <source>Le fichier « </source>
         <translation>Датотека „</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="276"/>
-        <location filename="mainwindow.cpp" line="485"/>
+        <location filename="mainwindow.cpp" line="282"/>
+        <location filename="mainwindow.cpp" line="508"/>
         <source> » a été modifié.</source>
         <translation>« је измењена.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="281"/>
-        <location filename="mainwindow.cpp" line="490"/>
-        <location filename="mainwindow.cpp" line="607"/>
+        <location filename="mainwindow.cpp" line="287"/>
+        <location filename="mainwindow.cpp" line="513"/>
+        <location filename="mainwindow.cpp" line="630"/>
         <source>&amp;Annuler</source>
         <translation>&amp;Поништи</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="282"/>
+        <location filename="mainwindow.cpp" line="288"/>
         <source>&amp;Quitter sans enregistrer</source>
         <translation>&amp;Изађи не сачувавши</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="17"/>
-        <location filename="mainwindow.cpp" line="312"/>
+        <location filename="mainwindow.cpp" line="318"/>
         <source>Polyphone</source>
         <translation>Полифон</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="367"/>
+        <location filename="mainwindow.cpp" line="379"/>
+        <location filename="mainwindow.cpp" line="387"/>
         <source>Ouverture de fichiers</source>
         <translation>Отварање датотека</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="369"/>
-        <source>Soundfonts (*.sf2 *.sfz *.sfArk);;Fichiers .sf2 (*.sf2);;Fichiers .sfz (*.sfz);;Archives .sfArk (*.sfArk)</source>
-        <translation>звукотеке (*.sf2 *.sfz *.sfArk);;сф2-звукотеке (*.sf2);;сфз-звукотеке (*.sfz);;сфарк-архиве (*.sfArk)</translation>
+        <location filename="mainwindow.cpp" line="59"/>
+        <source>Operation en cours...</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="438"/>
+        <location filename="mainwindow.cpp" line="59"/>
+        <source>Annuler</source>
+        <translation type="unfinished">Поништи</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="381"/>
+        <location filename="mainwindow.cpp" line="389"/>
+        <source>Soundfonts</source>
+        <translation type="unfinished">Звукотеке</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="382"/>
+        <location filename="mainwindow.cpp" line="390"/>
+        <source>Fichiers .sf2</source>
+        <translation type="unfinished">Сф2-звукотека</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="383"/>
+        <location filename="mainwindow.cpp" line="391"/>
+        <source>Fichiers .sf3</source>
+        <translation type="unfinished">Сф3-звукотека</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="384"/>
+        <location filename="mainwindow.cpp" line="392"/>
+        <source>Fichiers .sfz</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="385"/>
+        <location filename="mainwindow.cpp" line="393"/>
+        <source>Archives .sfArk</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="461"/>
         <source>Format inconnu.</source>
         <translation>Врста није позната.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="441"/>
+        <location filename="mainwindow.cpp" line="464"/>
         <source>Le fichier est déjà chargé.</source>
         <translation>Датотека је већ учитана.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="444"/>
+        <location filename="mainwindow.cpp" line="467"/>
         <source>Impossible d&apos;ouvrir le fichier.</source>
         <translation>Не могу да отворим ову датотеку.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="447"/>
+        <location filename="mainwindow.cpp" line="470"/>
         <source>Lecture impossible.</source>
         <translation>Не могу да пустим ову датотеку.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="450"/>
+        <location filename="mainwindow.cpp" line="473"/>
         <source>Le fichier est corrompu.</source>
         <translation>Датотека је оштећена.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="460"/>
+        <location filename="mainwindow.cpp" line="483"/>
         <source>Nom de la nouvelle soundfont :</source>
         <translation>Назив нове звукотеке:</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="491"/>
+        <location filename="mainwindow.cpp" line="514"/>
         <source>&amp;Fermer sans enregistrer</source>
         <translation>&amp;Затвори не сачувавши </translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="572"/>
+        <location filename="mainwindow.cpp" line="595"/>
         <source>&lt;b&gt;Perte de résolution </source>
         <translation>&lt;b&gt;Губитак резолуције </translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="575"/>
+        <location filename="mainwindow.cpp" line="598"/>
         <source> bits&lt;/b&gt;</source>
         <translation> bits&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="576"/>
+        <location filename="mainwindow.cpp" line="599"/>
         <source>La qualité des samples sera abaissée suite à cette opération. Continuer ?</source>
         <translation>Овим ће се умањити каквоћа узорка. Желите ли да ово урадим?</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="578"/>
+        <location filename="mainwindow.cpp" line="601"/>
         <source>&amp;Oui</source>
         <translation>&amp;Да</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="579"/>
+        <location filename="mainwindow.cpp" line="602"/>
         <source>&amp;Non</source>
         <translation>&amp;Не</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="595"/>
+        <location filename="mainwindow.cpp" line="618"/>
         <source>&lt;b&gt;Trop de paramètres dans les instruments et les presets.&lt;/b&gt;</source>
         <translation>&lt;b&gt;Превише постављених параметара и за инструменте, и за поставке.&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="597"/>
+        <location filename="mainwindow.cpp" line="620"/>
         <source>&lt;b&gt;Trop de paramètres dans les instruments.&lt;/b&gt;</source>
         <translation>&lt;b&gt;Превише постављених параметара за инструменте.&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="599"/>
+        <location filename="mainwindow.cpp" line="622"/>
         <source>&lt;b&gt;Trop de paramètres dans les presets.&lt;/b&gt;</source>
         <translation>&lt;b&gt;Превише постављених параметара за поставке.&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="601"/>
+        <location filename="mainwindow.cpp" line="624"/>
         <source>Certains synthétiseurs ne prennent pas en compte les paramètres au delà du 65536ème.
 Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
         <translation>
 Неки синтесајзери занемарују параметре иза „65536th“. Раздвајање датотеке у неколико Сф2-звукотека може да реши проблем.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="605"/>
+        <location filename="mainwindow.cpp" line="628"/>
         <source>&amp;Sauvegarder</source>
         <translation>&amp;Сачувај</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="606"/>
+        <location filename="mainwindow.cpp" line="629"/>
         <source>Sauvegarder, &amp;désactiver ce message</source>
         <translation>Сачувај, &amp;онемогући ову поруку</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="621"/>
-        <location filename="mainwindow.cpp" line="624"/>
+        <location filename="mainwindow.cpp" line="644"/>
+        <location filename="mainwindow.cpp" line="647"/>
         <source>Sauvegarder une soundfont</source>
         <translation>Сачувај звукотеку</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="621"/>
-        <location filename="mainwindow.cpp" line="625"/>
+        <location filename="mainwindow.cpp" line="644"/>
+        <location filename="mainwindow.cpp" line="648"/>
         <source>Fichier .sf2 (*.sf2)</source>
         <translation>Сф2-звукотека (*.sf2)</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="641"/>
+        <location filename="mainwindow.cpp" line="664"/>
         <source>Extension inconnue.</source>
         <translation>Непозната врста датотеке.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="644"/>
+        <location filename="mainwindow.cpp" line="667"/>
         <source>Fichier déjà ouvert, impossible de sauvegarder.</source>
         <translation>Датотека је већ отворена — не могу да је сачувам.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="647"/>
+        <location filename="mainwindow.cpp" line="670"/>
         <source>Impossible d&apos;enregistrer le fichier.</source>
         <translation>Не могу да сачувам ову датотеку.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1121"/>
+        <location filename="mainwindow.cpp" line="1144"/>
         <source>&amp;Renommer en masse</source>
         <translation>Скупно п&amp;реименовање</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1334"/>
+        <location filename="mainwindow.cpp" line="1357"/>
         <source>Nom de l&apos;échantillon (max 20 caractères) :</source>
         <translation>Назив узорка (до 20 знакова):</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1335"/>
+        <location filename="mainwindow.cpp" line="1358"/>
         <source>Nom de l&apos;instrument (max 20 caractères) :</source>
         <translation>Назив инструмента (до 20 знакова):</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1336"/>
+        <location filename="mainwindow.cpp" line="1359"/>
         <source>Nom du preset (max 20 caractères) :</source>
         <translation>Назив поставке (до 20 знакова):</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1337"/>
+        <location filename="mainwindow.cpp" line="1360"/>
         <source>Nom du SF2 (max 255 caractères) :</source>
         <translation>Назив звукотеке (до 255 знакова):</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1338"/>
-        <location filename="mainwindow.cpp" line="2348"/>
+        <location filename="mainwindow.cpp" line="1361"/>
+        <location filename="mainwindow.cpp" line="2407"/>
         <source>Question</source>
         <translation>Питање</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1483"/>
+        <location filename="mainwindow.cpp" line="1509"/>
         <source>Une erreur est survenue lors de l&apos;import du fichier </source>
         <translation>При увожењу датотеке догодила се грешка</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1501"/>
+        <location filename="mainwindow.cpp" line="1529"/>
+        <location filename="mainwindow.cpp" line="1533"/>
         <source>Importer un fichier audio</source>
         <translation>Увоз звучне датотеке</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1503"/>
-        <source>Fichier .wav (*.wav)</source>
-        <translation>Вав-датотека (*.wav)</translation>
+        <location filename="mainwindow.cpp" line="1531"/>
+        <location filename="mainwindow.cpp" line="1535"/>
+        <source>Fichier .wav</source>
+        <oldsource>Fichier .wav (*.wav)</oldsource>
+        <translation type="unfinished">Вав-датотека (*.wav)</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1551"/>
-        <location filename="mainwindow.cpp" line="1557"/>
-        <location filename="mainwindow.cpp" line="1566"/>
+        <location filename="mainwindow.cpp" line="1586"/>
+        <location filename="mainwindow.cpp" line="1592"/>
+        <location filename="mainwindow.cpp" line="1601"/>
         <source>L&apos;échantillon « </source>
         <translation>Узорак „</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1552"/>
+        <location filename="mainwindow.cpp" line="1587"/>
         <source>L » existe déjà.&lt;br /&gt;Que faire ?</source>
         <translation>Л“ већ постоји.&lt;br/&gt;Да ли да га заменим?</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1558"/>
+        <location filename="mainwindow.cpp" line="1593"/>
         <source>R » existe déjà.&lt;br /&gt;Que faire ?</source>
         <translation>Д“ већ постоји.&lt;br/&gt;Да ли да га заменим?</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1567"/>
+        <location filename="mainwindow.cpp" line="1602"/>
         <source> » existe déjà.&lt;br /&gt;Que faire ?</source>
         <translation>“ већ постоји.&lt;br/&gt;Да ли да га заменим?</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1581"/>
+        <location filename="mainwindow.cpp" line="1616"/>
         <source>&amp;Remplacer</source>
         <translation>За&amp;мени</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1582"/>
+        <location filename="mainwindow.cpp" line="1617"/>
         <source>R&amp;emplacer tout</source>
         <translation>Замени св&amp;е</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1583"/>
+        <location filename="mainwindow.cpp" line="1618"/>
         <source>&amp;Dupliquer</source>
         <translation>У&amp;двостручи</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1584"/>
+        <location filename="mainwindow.cpp" line="1619"/>
         <source>D&amp;upliquer tout</source>
         <translation>&amp;Удвостручи све</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1585"/>
+        <location filename="mainwindow.cpp" line="1620"/>
         <source>&amp;Ignorer</source>
         <translation>Занемар&amp;и</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1586"/>
+        <location filename="mainwindow.cpp" line="1621"/>
         <source>I&amp;gnorer tout</source>
         <translation>Занемари с&amp;ве</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1745"/>
+        <location filename="mainwindow.cpp" line="1780"/>
         <source>Choisir un répertoire de destination</source>
         <translation>Одаберите одредишни директоријум</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1888"/>
+        <location filename="mainwindow.cpp" line="1939"/>
         <source>Fusion des soundfonts :</source>
         <translation>Сједини звукотеке:</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1962"/>
+        <location filename="mainwindow.cpp" line="2021"/>
         <source>Créer un nouvel instrument</source>
         <translation>Створи нов инструменат</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1962"/>
+        <location filename="mainwindow.cpp" line="2021"/>
         <source>Nom du nouvel instrument :</source>
         <translation>Назив новог инструмента: </translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1987"/>
+        <location filename="mainwindow.cpp" line="2046"/>
         <source>Aucun preset n&apos;est disponible.</source>
         <translation>Нема доступне поставке.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1997"/>
+        <location filename="mainwindow.cpp" line="2056"/>
         <source>Créer un nouveau preset</source>
         <translation>Створи нову поставку</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1997"/>
+        <location filename="mainwindow.cpp" line="2056"/>
         <source>Nom du nouveau preset :</source>
         <translation>Назив нове поставке: </translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2331"/>
+        <location filename="mainwindow.cpp" line="2390"/>
         <source> échantillon et </source>
         <translation> узорак и </translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2333"/>
+        <location filename="mainwindow.cpp" line="2392"/>
         <source> échantillons et </source>
         <translation> узорци и </translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2335"/>
+        <location filename="mainwindow.cpp" line="2394"/>
         <source> instrument ont été supprimés.</source>
+        <translatorcomment>instrument: једнина</translatorcomment>
         <translation> инструменат је уклоњен.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2337"/>
+        <location filename="mainwindow.cpp" line="2396"/>
         <source> instruments ont été supprimés.</source>
+        <translatorcomment>instrument: множина</translatorcomment>
         <translation> инструменат(а) је уклоњено.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2349"/>
+        <location filename="mainwindow.cpp" line="2408"/>
         <source>Atténuation minimale (dB) :</source>
-        <translation>Најмање пригушење (дБ): </translation>
+        <translation>Најмање пригушење (dB): </translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2547"/>
+        <location filename="mainwindow.cpp" line="2606"/>
         <source>Exporter les pics de fréquence</source>
         <translation>Извези вршне учестаности</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2548"/>
+        <location filename="mainwindow.cpp" line="2607"/>
         <source>Fichier .csv (*.csv)</source>
         <translation>Цсв-датотека (*.csv)</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2563"/>
+        <location filename="mainwindow.cpp" line="2622"/>
         <source>;</source>
+        <translatorcomment>знак који ће да се употребљава као раздвајач колона у Цсв-датотекама</translatorcomment>
         <translation>;</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2565"/>
+        <location filename="mainwindow.cpp" line="2624"/>
         <source>Echantillon</source>
         <translation>Узорак</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2565"/>
+        <location filename="mainwindow.cpp" line="2624"/>
         <source>Numéro de pic</source>
         <translation>Број шиљка</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2566"/>
+        <location filename="mainwindow.cpp" line="2625"/>
         <source>Facteur</source>
         <translation>Чинилац</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2566"/>
+        <location filename="mainwindow.cpp" line="2625"/>
         <source>Fréquence</source>
         <translation>Учестаност</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2567"/>
+        <location filename="mainwindow.cpp" line="2626"/>
         <source>Correction</source>
         <translation>Поправка</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2589"/>
-        <location filename="mainwindow.cpp" line="2590"/>
+        <location filename="mainwindow.cpp" line="2648"/>
+        <location filename="mainwindow.cpp" line="2649"/>
         <source>,</source>
+        <translatorcomment>децимални раздвајач</translatorcomment>
         <translation>,</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2615"/>
+        <location filename="mainwindow.cpp" line="2674"/>
         <source>Le fichier ne contient aucun modulateur.</source>
         <translation>Звукотека не садржи модулаторе.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2617"/>
-        <location filename="mainwindow.cpp" line="2619"/>
+        <location filename="mainwindow.cpp" line="2676"/>
+        <location filename="mainwindow.cpp" line="2678"/>
         <source>Information</source>
         <translation>Подаци</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2617"/>
+        <location filename="mainwindow.cpp" line="2676"/>
         <source>1 modulateur a été supprimé.</source>
         <translation>1 модулатор је уклоњен.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2620"/>
+        <location filename="mainwindow.cpp" line="2679"/>
         <source>modulateurs ont été supprimés.</source>
         <translation>модулатора је уклоњено.</translation>
     </message>
@@ -2964,7 +3019,7 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
     <message>
         <location filename="pages/page.cpp" line="335"/>
         <source>Filtre, fréquence (Hz)</source>
-        <translation>Филтар, учестаност (Хц)</translation>
+        <translation>Филтар, учестаност (Hz)</translation>
     </message>
     <message>
         <location filename="pages/page.cpp" line="336"/>
@@ -2975,7 +3030,7 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
         <location filename="pages/page.cpp" line="343"/>
         <location filename="pages/page.cpp" line="344"/>
         <source>Filtre, résonance (dB)</source>
-        <translation>Филтар, резонанса (дБ)</translation>
+        <translation>Филтар, резонанса (dB)</translation>
     </message>
     <message>
         <location filename="pages/page.cpp" line="351"/>
@@ -2993,7 +3048,7 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
         <location filename="pages/page.cpp" line="375"/>
         <location filename="pages/page.cpp" line="376"/>
         <source>Mod LFO → volume (dB)</source>
-        <translation>»Mod LFO« → гласноћа (дБ)</translation>
+        <translation>»Mod LFO« → гласноћа (dB)</translation>
     </message>
     <message>
         <location filename="pages/page.cpp" line="383"/>
@@ -3020,6 +3075,7 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
     <message>
         <location filename="pages/page.cpp" line="407"/>
         <source>Mod LFO delay (s)</source>
+        <translatorcomment>енглески изрази могу да се задрже...</translatorcomment>
         <translation>»Mod LFO« кашњење (s)</translation>
     </message>
     <message>
@@ -3030,7 +3086,7 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
     <message>
         <location filename="pages/page.cpp" line="415"/>
         <source>Mod LFO freq (Hz)</source>
-        <translation>»Mod LFO« учестаност (Хц)</translation>
+        <translation>»Mod LFO« учестаност (Hz)</translation>
     </message>
     <message>
         <location filename="pages/page.cpp" line="416"/>
@@ -3050,7 +3106,7 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
     <message>
         <location filename="pages/page.cpp" line="431"/>
         <source>Vib LFO freq (Hz)</source>
-        <translation>»Vib LFO« учестаност (Хц)</translation>
+        <translation>»Vib LFO« учестаност (Hz)</translation>
     </message>
     <message>
         <location filename="pages/page.cpp" line="432"/>
@@ -3169,7 +3225,7 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
         <location filename="pages/page.cpp" line="535"/>
         <location filename="pages/page.cpp" line="536"/>
         <source>Vol env sustain (dB)</source>
-        <translation>»Vol env« задршка (дБ)</translation>
+        <translation>»Vol env« задршка (dB)</translation>
     </message>
     <message>
         <location filename="pages/page.cpp" line="543"/>
@@ -3219,7 +3275,7 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
         <location filename="pages/page.cpp" line="607"/>
         <location filename="pages/page.cpp" line="608"/>
         <source>Atténuation (dB)</source>
-        <translation>Пригушење (дБ)</translation>
+        <translation>Пригушење (dB)</translation>
     </message>
     <message>
         <location filename="pages/page.cpp" line="623"/>
@@ -3260,42 +3316,42 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
     <message>
         <location filename="pages/pageoverviewinst.cpp" line="32"/>
         <source>Liste des instruments</source>
-        <translation type="unfinished">Списак инструмената</translation>
+        <translation>Списак инструмената</translation>
     </message>
     <message>
         <location filename="pages/pageoverviewinst.cpp" line="38"/>
         <source>Utilisé</source>
-        <translation type="unfinished"></translation>
+        <translation>Употребљен</translation>
     </message>
     <message>
         <location filename="pages/pageoverviewinst.cpp" line="39"/>
         <source>Nombre d&apos;échantillons</source>
-        <translation type="unfinished">Број узорака</translation>
+        <translation>Број узорака</translation>
     </message>
     <message>
         <location filename="pages/pageoverviewinst.cpp" line="40"/>
         <source>Nombre de paramètres</source>
-        <translation type="unfinished"></translation>
+        <translation>Број параметара</translation>
     </message>
     <message>
         <location filename="pages/pageoverviewinst.cpp" line="41"/>
         <source>Nombre de modulateurs</source>
-        <translation type="unfinished"></translation>
+        <translation>Број модулатора</translation>
     </message>
     <message>
         <location filename="pages/pageoverviewinst.cpp" line="42"/>
         <source>Étendue totale (note)</source>
-        <translation type="unfinished"></translation>
+        <translation>Свеукупни нотни опсег</translation>
     </message>
     <message>
         <location filename="pages/pageoverviewinst.cpp" line="43"/>
         <source>Étendue totale (vélocité)</source>
-        <translation type="unfinished"></translation>
+        <translation>Свеукупни опсег јачине удара</translation>
     </message>
     <message>
         <location filename="pages/pageoverviewinst.cpp" line="44"/>
         <source>Atténuation</source>
-        <translation type="unfinished">Пригушење</translation>
+        <translation>Пригушење</translation>
     </message>
     <message>
         <location filename="pages/pageoverviewinst.cpp" line="45"/>
@@ -3305,34 +3361,36 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
     <message>
         <location filename="pages/pageoverviewinst.cpp" line="46"/>
         <source>Chorus</source>
-        <translation type="unfinished">Хорус</translation>
+        <translation>Хорус</translation>
     </message>
     <message>
         <location filename="pages/pageoverviewinst.cpp" line="47"/>
         <source>Réverbération</source>
-        <translation type="unfinished">Јека</translation>
+        <translation>Јека</translation>
     </message>
     <message>
         <location filename="pages/pageoverviewinst.cpp" line="95"/>
         <location filename="pages/pageoverviewinst.cpp" line="281"/>
         <source>oui</source>
-        <translation type="unfinished"></translation>
+        <translation>да</translation>
     </message>
     <message>
         <location filename="pages/pageoverviewinst.cpp" line="95"/>
         <location filename="pages/pageoverviewinst.cpp" line="279"/>
         <source>non</source>
-        <translation type="unfinished"></translation>
+        <translation>не</translation>
     </message>
     <message>
         <location filename="pages/pageoverviewinst.cpp" line="283"/>
         <source>oui, jusqu&apos;à la fin</source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>овде се мисли на начин вртње (понављања)</translatorcomment>
+        <translation>да, до краја</translation>
     </message>
     <message>
         <location filename="pages/pageoverviewinst.cpp" line="289"/>
         <source>plusieurs modes</source>
-        <translation type="unfinished"></translation>
+        <comment>speaking about loop modes</comment>
+        <translation type="unfinished">неколико начина</translation>
     </message>
 </context>
 <context>
@@ -3340,52 +3398,52 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
     <message>
         <location filename="pages/pageoverviewprst.cpp" line="32"/>
         <source>Liste des presets</source>
-        <translation type="unfinished">Списак поставки</translation>
+        <translation>Списак поставки</translation>
     </message>
     <message>
         <location filename="pages/pageoverviewprst.cpp" line="38"/>
         <source>Banque - Preset</source>
-        <translation type="unfinished"></translation>
+        <translation>Банка — Поставка</translation>
     </message>
     <message>
         <location filename="pages/pageoverviewprst.cpp" line="39"/>
         <source>Nombre d&apos;instruments</source>
-        <translation type="unfinished">Број инструмената</translation>
+        <translation>Број инструмената</translation>
     </message>
     <message>
         <location filename="pages/pageoverviewprst.cpp" line="40"/>
         <source>Nombre de paramètres</source>
-        <translation type="unfinished"></translation>
+        <translation>Број параметара</translation>
     </message>
     <message>
         <location filename="pages/pageoverviewprst.cpp" line="41"/>
         <source>Nombre de modulateurs</source>
-        <translation type="unfinished"></translation>
+        <translation>Број модулатора</translation>
     </message>
     <message>
         <location filename="pages/pageoverviewprst.cpp" line="42"/>
         <source>Étendue totale (note)</source>
-        <translation type="unfinished"></translation>
+        <translation>Свеукупни нотни опсег</translation>
     </message>
     <message>
         <location filename="pages/pageoverviewprst.cpp" line="43"/>
         <source>Étendue totale (vélocité)</source>
-        <translation type="unfinished"></translation>
+        <translation>Свеукупни опсег јачине удара</translation>
     </message>
     <message>
         <location filename="pages/pageoverviewprst.cpp" line="44"/>
         <source>Atténuation</source>
-        <translation type="unfinished">Пригушење</translation>
+        <translation>Пригушење</translation>
     </message>
     <message>
         <location filename="pages/pageoverviewprst.cpp" line="45"/>
         <source>Chorus</source>
-        <translation type="unfinished">Хорус</translation>
+        <translation>Хорус</translation>
     </message>
     <message>
         <location filename="pages/pageoverviewprst.cpp" line="46"/>
         <source>Réverbération</source>
-        <translation type="unfinished">Јека</translation>
+        <translation>Јека</translation>
     </message>
 </context>
 <context>
@@ -3393,93 +3451,93 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
     <message>
         <location filename="pages/pageoverviewsmpl.cpp" line="31"/>
         <source>Liste des échantillons</source>
-        <translation type="unfinished">Списак узорака</translation>
+        <translation>Списак узорака</translation>
     </message>
     <message>
         <location filename="pages/pageoverviewsmpl.cpp" line="37"/>
         <source>Utilisé</source>
-        <translation type="unfinished"></translation>
+        <translation>Употребљен</translation>
     </message>
     <message>
         <location filename="pages/pageoverviewsmpl.cpp" line="38"/>
         <source>Durée totale</source>
-        <translation type="unfinished"></translation>
+        <translation>Укупно трајање</translation>
     </message>
     <message>
         <location filename="pages/pageoverviewsmpl.cpp" line="39"/>
         <source>Durée de la boucle</source>
-        <translation type="unfinished"></translation>
+        <translation>Трајање вртње</translation>
     </message>
     <message>
         <location filename="pages/pageoverviewsmpl.cpp" line="40"/>
         <source>Note de base</source>
-        <translation type="unfinished">Основна нота</translation>
+        <translation>Основна нота</translation>
     </message>
     <message>
         <location filename="pages/pageoverviewsmpl.cpp" line="41"/>
         <source>Correction</source>
-        <translation type="unfinished">Поправка</translation>
+        <translation>Поправка</translation>
     </message>
     <message>
         <location filename="pages/pageoverviewsmpl.cpp" line="42"/>
         <source>Type d&apos;échantillon</source>
-        <translation type="unfinished"></translation>
+        <translation>Врста узорка</translation>
     </message>
     <message>
         <location filename="pages/pageoverviewsmpl.cpp" line="43"/>
         <source>Échantillon lié</source>
-        <translation type="unfinished"></translation>
+        <translation>Повезан узорак</translation>
     </message>
     <message>
         <location filename="pages/pageoverviewsmpl.cpp" line="88"/>
         <source>oui</source>
-        <translation type="unfinished"></translation>
+        <translation>да</translation>
     </message>
     <message>
         <location filename="pages/pageoverviewsmpl.cpp" line="88"/>
         <source>non</source>
-        <translation type="unfinished"></translation>
+        <translation>не</translation>
     </message>
     <message>
         <location filename="pages/pageoverviewsmpl.cpp" line="95"/>
         <location filename="pages/pageoverviewsmpl.cpp" line="104"/>
         <source>s</source>
         <comment>unit for seconds</comment>
-        <translation type="unfinished">с</translation>
+        <translation>s</translation>
     </message>
     <message>
         <location filename="pages/pageoverviewsmpl.cpp" line="126"/>
         <source>Lien invalide</source>
-        <translation type="unfinished"></translation>
+        <translation>Веза (неваљала)</translation>
     </message>
     <message>
         <location filename="pages/pageoverviewsmpl.cpp" line="129"/>
         <source>Mono</source>
         <comment>opposite to stereo</comment>
-        <translation type="unfinished"></translation>
+        <translation>Моно</translation>
     </message>
     <message>
         <location filename="pages/pageoverviewsmpl.cpp" line="132"/>
         <source>Stéréo droit</source>
         <oldsource>Stereo droit</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Стерео — Десно</translation>
     </message>
     <message>
         <location filename="pages/pageoverviewsmpl.cpp" line="135"/>
         <source>Stéréo gauche</source>
         <oldsource>Stereo gauche</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Стерео — Лево</translation>
     </message>
     <message>
         <location filename="pages/pageoverviewsmpl.cpp" line="138"/>
         <source>Stéréo non défini</source>
         <oldsource>Stereo non défini</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Стерео — Неодређено</translation>
     </message>
     <message>
         <location filename="pages/pageoverviewsmpl.cpp" line="158"/>
         <source>non valide</source>
-        <translation type="unfinished"></translation>
+        <translation>није вањано</translation>
     </message>
 </context>
 <context>
@@ -3570,7 +3628,7 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
     <message>
         <location filename="pages/pagetable.cpp" line="3034"/>
         <source>L&apos;étendue de notes de toutes les divisions doit être spécifiée.</source>
-        <translation>Мора да се наведе тонски опсег свих парчади.</translation>
+        <translation>Мора да се наведе нотни опсег свих делова.</translation>
     </message>
     <message>
         <location filename="pages/pagetable.cpp" line="3073"/>
@@ -3585,12 +3643,12 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
     <message>
         <location filename="pages/pagetable.cpp" line="3081"/>
         <source>Aucune étendue de notes spécifiée pour l&apos;instrument.</source>
-        <translation>Није постављен тонски опсег инструмента.</translation>
+        <translation>Није постављен нотни опсег инструмента.</translation>
     </message>
     <message>
         <location filename="pages/pagetable.cpp" line="3083"/>
         <source>Aucune étendue de notes spécifiée pour le preset.</source>
-        <translation>Није постављен тонски опсег за поставку.</translation>
+        <translation>Није постављен нотни опсег за поставку.</translation>
     </message>
 </context>
 <context>
@@ -3613,7 +3671,7 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
     <message>
         <location filename="pages/page_inst.ui" line="236"/>
         <source>Atténuation (dB)</source>
-        <translation>Пригушење (дБ)</translation>
+        <translation>Пригушење (dB)</translation>
     </message>
     <message>
         <location filename="pages/page_inst.ui" line="241"/>
@@ -3648,12 +3706,12 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
     <message>
         <location filename="pages/page_inst.ui" line="271"/>
         <source>Filtre, fréquence (Hz)</source>
-        <translation>Филтар, учестаност (Хц)</translation>
+        <translation>Филтар, учестаност (Hz)</translation>
     </message>
     <message>
         <location filename="pages/page_inst.ui" line="282"/>
         <source>Filtre, résonance (dB)</source>
-        <translation>Филтар, резонанса (дБ)</translation>
+        <translation>Филтар, резонанса (dB)</translation>
     </message>
     <message>
         <location filename="pages/page_inst.ui" line="287"/>
@@ -3678,7 +3736,7 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
     <message>
         <location filename="pages/page_inst.ui" line="307"/>
         <source>Vol env sustain (dB)</source>
-        <translation type="unfinished">»Vol env« задршка (дБ)</translation>
+        <translation type="unfinished">»Vol env« задршка (dB)</translation>
     </message>
     <message>
         <location filename="pages/page_inst.ui" line="312"/>
@@ -3753,7 +3811,7 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
     <message>
         <location filename="pages/page_inst.ui" line="382"/>
         <source>Mod LFO freq (Hz)</source>
-        <translation type="unfinished">»Mod LFO« учестаност (Хц)</translation>
+        <translation type="unfinished">»Mod LFO« учестаност (Hz)</translation>
     </message>
     <message>
         <location filename="pages/page_inst.ui" line="387"/>
@@ -3768,7 +3826,7 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
     <message>
         <location filename="pages/page_inst.ui" line="397"/>
         <source>Mod LFO → volume (dB)</source>
-        <translation type="unfinished">»Mod LFO« → гласноћа (дБ)</translation>
+        <translation type="unfinished">»Mod LFO« → гласноћа (dB)</translation>
     </message>
     <message>
         <location filename="pages/page_inst.ui" line="402"/>
@@ -3778,7 +3836,7 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
     <message>
         <location filename="pages/page_inst.ui" line="407"/>
         <source>Vib LFO freq (Hz)</source>
-        <translation type="unfinished">»Vib LFO« учестаност (Хц)</translation>
+        <translation type="unfinished">»Vib LFO« учестаност (Hz)</translation>
     </message>
     <message>
         <location filename="pages/page_inst.ui" line="412"/>
@@ -3889,17 +3947,17 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
     <message>
         <location filename="pages/page_inst.cpp" line="147"/>
         <source>&lt;b&gt;Instrument lié à aucun preset.&lt;/b&gt;</source>
-        <translation>&lt;b&gt;Инструменат није везан за било коју поставку.&lt;/b&gt;</translation>
+        <translation>&lt;b&gt;Овај инструменат није везан за било коју поставку.&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="pages/page_inst.cpp" line="149"/>
         <source>&lt;b&gt;Instrument lié au preset : &lt;/b&gt;</source>
-        <translation>&lt;b&gt;Инструменат је везан за поставку: &lt;/b&gt;</translation>
+        <translation>&lt;b&gt;Овај инструменат је везан за поставку: &lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="pages/page_inst.cpp" line="151"/>
         <source>&lt;b&gt;Instrument lié aux presets : &lt;/b&gt;</source>
-        <translation>&lt;b&gt;Инструменат је везан за поставке: &lt;/b&gt;</translation>
+        <translation>&lt;b&gt;Овај инструменат је везан за поставке: &lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="pages/page_inst.cpp" line="360"/>
@@ -3962,7 +4020,7 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
     <message>
         <location filename="pages/page_prst.ui" line="298"/>
         <source>Atténuation (dB)</source>
-        <translation>Пригушење (дБ)</translation>
+        <translation>Пригушење (dB)</translation>
     </message>
     <message>
         <location filename="pages/page_prst.ui" line="303"/>
@@ -3992,7 +4050,7 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
     <message>
         <location filename="pages/page_prst.ui" line="334"/>
         <source>Filtre, résonance (dB)</source>
-        <translation>Филтар, резонанса (дБ)</translation>
+        <translation>Филтар, резонанса (dB)</translation>
     </message>
     <message>
         <location filename="pages/page_prst.ui" line="339"/>
@@ -4017,7 +4075,7 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
     <message>
         <location filename="pages/page_prst.ui" line="359"/>
         <source>Vol env sustain (dB)</source>
-        <translation type="unfinished">»Vol env« задршка (дБ)</translation>
+        <translation type="unfinished">»Vol env« задршка (dB)</translation>
     </message>
     <message>
         <location filename="pages/page_prst.ui" line="364"/>
@@ -4107,7 +4165,7 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
     <message>
         <location filename="pages/page_prst.ui" line="449"/>
         <source>Mod LFO → volume (dB)</source>
-        <translation type="unfinished">»Mod LFO« → гласноћа (дБ)</translation>
+        <translation type="unfinished">»Mod LFO« → гласноћа (dB)</translation>
     </message>
     <message>
         <location filename="pages/page_prst.ui" line="454"/>
@@ -4231,7 +4289,7 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
     <message>
         <location filename="pages/page_sf2.ui" line="131"/>
         <source>Produit</source>
-        <translation>Дело</translation>
+        <translation>Намена</translation>
     </message>
     <message>
         <location filename="pages/page_sf2.ui" line="147"/>
@@ -4271,7 +4329,7 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
     <message>
         <location filename="pages/page_sf2.ui" line="292"/>
         <source>Nombre de presets</source>
-        <translation>Број поставке</translation>
+        <translation>Број поставки</translation>
     </message>
     <message>
         <location filename="pages/page_sf2.ui" line="325"/>
@@ -4292,13 +4350,15 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
         <location filename="pages/page_sf2.cpp" line="212"/>
         <location filename="pages/page_sf2.cpp" line="227"/>
         <source> (inutilisés : </source>
-        <translation> (неупотребљено: </translation>
+        <translatorcomment>множина</translatorcomment>
+        <translation> (ван употребе: </translation>
     </message>
     <message>
         <location filename="pages/page_sf2.cpp" line="215"/>
         <location filename="pages/page_sf2.cpp" line="230"/>
         <source> (inutilisé : </source>
-        <translation> (неупотребљен: </translation>
+        <translatorcomment>једнина</translatorcomment>
+        <translation> (ван употребе: </translation>
     </message>
 </context>
 <context>
@@ -4321,7 +4381,7 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
     <message>
         <location filename="pages/page_smpl.ui" line="786"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Égaliseur (±15 dB)&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Еквилајзер (±15 дБ)&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Еквилајзер (±15 dB)&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="pages/page_smpl.ui" line="819"/>
@@ -4331,7 +4391,7 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
     <message>
         <location filename="pages/page_smpl.ui" line="945"/>
         <source>Utilise la longueur totale de l&apos;échantillon comme boucle</source>
-        <translation>Употреби узорак у пуном трајању у петљи</translation>
+        <translation>Употреби узорак за пуно трајање вртње</translation>
     </message>
     <message>
         <location filename="pages/page_smpl.ui" line="965"/>
@@ -4366,7 +4426,7 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
     <message>
         <location filename="pages/page_smpl.ui" line="1013"/>
         <source>Utilise l&apos;estimation de la note comme valeur</source>
-        <translation>Употреби процењену висину тона и исправку као вредности</translation>
+        <translation>Узми за вредности прорачунате висину тона и исправку</translation>
     </message>
     <message>
         <location filename="pages/page_smpl.ui" line="1050"/>
@@ -4375,9 +4435,9 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
     </message>
     <message>
         <location filename="pages/page_smpl.ui" line="1125"/>
-        <location filename="pages/page_smpl.cpp" line="329"/>
-        <location filename="pages/page_smpl.cpp" line="1648"/>
-        <location filename="pages/page_smpl.cpp" line="1687"/>
+        <location filename="pages/page_smpl.cpp" line="333"/>
+        <location filename="pages/page_smpl.cpp" line="1652"/>
+        <location filename="pages/page_smpl.cpp" line="1691"/>
         <source>Lecture</source>
         <translation>Пусти</translation>
     </message>
@@ -4404,145 +4464,145 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
     <message>
         <location filename="pages/page_smpl.cpp" line="94"/>
         <source>Égaliseur (±15 dB)</source>
-        <translation>Еквилајзер (±15 дБ)</translation>
-    </message>
-    <message>
-        <location filename="pages/page_smpl.cpp" line="152"/>
-        <location filename="pages/page_smpl.cpp" line="157"/>
-        <source>s</source>
-        <comment>unit for seconds</comment>
-        <translation type="unfinished">с</translation>
+        <translation>Еквилајзер (±15 dB)</translation>
     </message>
     <message>
         <location filename="pages/page_smpl.cpp" line="156"/>
-        <location filename="pages/page_smpl.cpp" line="159"/>
+        <location filename="pages/page_smpl.cpp" line="161"/>
+        <source>s</source>
+        <comment>unit for seconds</comment>
+        <translation>s</translation>
+    </message>
+    <message>
+        <location filename="pages/page_smpl.cpp" line="160"/>
+        <location filename="pages/page_smpl.cpp" line="163"/>
         <source>(min) </source>
         <translation>(мин)</translation>
     </message>
     <message>
-        <location filename="pages/page_smpl.cpp" line="239"/>
-        <location filename="pages/page_smpl.cpp" line="676"/>
-        <location filename="pages/page_smpl.cpp" line="813"/>
-        <location filename="pages/page_smpl.cpp" line="837"/>
+        <location filename="pages/page_smpl.cpp" line="243"/>
+        <location filename="pages/page_smpl.cpp" line="680"/>
+        <location filename="pages/page_smpl.cpp" line="817"/>
+        <location filename="pages/page_smpl.cpp" line="841"/>
         <source>mono</source>
         <translation>моно</translation>
     </message>
     <message>
-        <location filename="pages/page_smpl.cpp" line="249"/>
-        <location filename="pages/page_smpl.cpp" line="814"/>
+        <location filename="pages/page_smpl.cpp" line="253"/>
+        <location filename="pages/page_smpl.cpp" line="818"/>
         <source>droit</source>
         <translation>десно</translation>
     </message>
     <message>
-        <location filename="pages/page_smpl.cpp" line="250"/>
-        <location filename="pages/page_smpl.cpp" line="815"/>
+        <location filename="pages/page_smpl.cpp" line="254"/>
+        <location filename="pages/page_smpl.cpp" line="819"/>
         <source>gauche</source>
         <translation>лево</translation>
     </message>
     <message>
-        <location filename="pages/page_smpl.cpp" line="251"/>
-        <location filename="pages/page_smpl.cpp" line="816"/>
+        <location filename="pages/page_smpl.cpp" line="255"/>
+        <location filename="pages/page_smpl.cpp" line="820"/>
         <source>lien</source>
         <translation>веза</translation>
     </message>
     <message>
-        <location filename="pages/page_smpl.cpp" line="320"/>
-        <source>&lt;b&gt;Échantillon lié à aucun instrument.&lt;/b&gt;</source>
-        <translation>&lt;b&gt;Узорак није везан за било који инструменат.&lt;/b&gt;</translation>
-    </message>
-    <message>
-        <location filename="pages/page_smpl.cpp" line="322"/>
-        <source>&lt;b&gt;Échantillon lié à l&apos;instrument : &lt;/b&gt;</source>
-        <translation>&lt;b&gt;Узорак је везан за овај инструменат: &lt;/b&gt;</translation>
-    </message>
-    <message>
         <location filename="pages/page_smpl.cpp" line="324"/>
-        <source>&lt;b&gt;Échantillon lié aux instruments : &lt;/b&gt;</source>
-        <translation>&lt;b&gt;Узорак је везан за ове инструменте: &lt;/b&gt;</translation>
+        <source>&lt;b&gt;Échantillon lié à aucun instrument.&lt;/b&gt;</source>
+        <translation>&lt;b&gt;Овај узорак није везан за било који инструменат.&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="pages/page_smpl.cpp" line="545"/>
-        <location filename="pages/page_smpl.cpp" line="1803"/>
+        <location filename="pages/page_smpl.cpp" line="326"/>
+        <source>&lt;b&gt;Échantillon lié à l&apos;instrument : &lt;/b&gt;</source>
+        <translation>&lt;b&gt;Овај узорак је везан за инструменат: &lt;/b&gt;</translation>
+    </message>
+    <message>
+        <location filename="pages/page_smpl.cpp" line="328"/>
+        <source>&lt;b&gt;Échantillon lié aux instruments : &lt;/b&gt;</source>
+        <translation>&lt;b&gt;Овај узорак је везан за инструменте: &lt;/b&gt;</translation>
+    </message>
+    <message>
+        <location filename="pages/page_smpl.cpp" line="549"/>
+        <location filename="pages/page_smpl.cpp" line="1807"/>
         <source>Information</source>
         <translation>Подаци</translation>
     </message>
     <message>
-        <location filename="pages/page_smpl.cpp" line="546"/>
-        <location filename="pages/page_smpl.cpp" line="1804"/>
+        <location filename="pages/page_smpl.cpp" line="550"/>
+        <location filename="pages/page_smpl.cpp" line="1808"/>
         <source>Modification appliquée avec succès aux différents échantillons</source>
         <translation>Успешно су примењене измене на различитим узорцима</translation>
     </message>
     <message>
-        <location filename="pages/page_smpl.cpp" line="938"/>
-        <location filename="pages/page_smpl.cpp" line="995"/>
-        <location filename="pages/page_smpl.cpp" line="1072"/>
-        <location filename="pages/page_smpl.cpp" line="1144"/>
-        <location filename="pages/page_smpl.cpp" line="1244"/>
-        <location filename="pages/page_smpl.cpp" line="1306"/>
-        <location filename="pages/page_smpl.cpp" line="1418"/>
-        <location filename="pages/page_smpl.cpp" line="1482"/>
+        <location filename="pages/page_smpl.cpp" line="942"/>
+        <location filename="pages/page_smpl.cpp" line="999"/>
+        <location filename="pages/page_smpl.cpp" line="1076"/>
+        <location filename="pages/page_smpl.cpp" line="1148"/>
+        <location filename="pages/page_smpl.cpp" line="1248"/>
+        <location filename="pages/page_smpl.cpp" line="1310"/>
+        <location filename="pages/page_smpl.cpp" line="1422"/>
+        <location filename="pages/page_smpl.cpp" line="1486"/>
         <source>Traitement </source>
         <translation>Обрада  </translation>
     </message>
     <message>
-        <location filename="pages/page_smpl.cpp" line="939"/>
-        <location filename="pages/page_smpl.cpp" line="996"/>
-        <location filename="pages/page_smpl.cpp" line="1073"/>
-        <location filename="pages/page_smpl.cpp" line="1145"/>
-        <location filename="pages/page_smpl.cpp" line="1245"/>
-        <location filename="pages/page_smpl.cpp" line="1307"/>
-        <location filename="pages/page_smpl.cpp" line="1419"/>
-        <location filename="pages/page_smpl.cpp" line="1483"/>
+        <location filename="pages/page_smpl.cpp" line="943"/>
+        <location filename="pages/page_smpl.cpp" line="1000"/>
+        <location filename="pages/page_smpl.cpp" line="1077"/>
+        <location filename="pages/page_smpl.cpp" line="1149"/>
+        <location filename="pages/page_smpl.cpp" line="1249"/>
+        <location filename="pages/page_smpl.cpp" line="1311"/>
+        <location filename="pages/page_smpl.cpp" line="1423"/>
+        <location filename="pages/page_smpl.cpp" line="1487"/>
         <source>Annuler</source>
         <translation>Поништи</translation>
     </message>
     <message>
-        <location filename="pages/page_smpl.cpp" line="1199"/>
+        <location filename="pages/page_smpl.cpp" line="1203"/>
         <source>L&apos;échantillon « </source>
         <translation>Узорак „</translation>
     </message>
     <message>
-        <location filename="pages/page_smpl.cpp" line="1199"/>
+        <location filename="pages/page_smpl.cpp" line="1203"/>
         <source> » n&apos;a pas pu être bouclé.</source>
         <translation>“ не може да се понавља (врти).</translation>
     </message>
     <message>
-        <location filename="pages/page_smpl.cpp" line="1202"/>
+        <location filename="pages/page_smpl.cpp" line="1206"/>
         <source>Les échantillons suivants n&apos;ont pas pu être bouclés :</source>
         <translation>Ови узорци не могу да се понављају (врте):</translation>
     </message>
     <message>
-        <location filename="pages/page_smpl.cpp" line="1207"/>
+        <location filename="pages/page_smpl.cpp" line="1211"/>
         <source>Causes possibles : trop court ou trop turbulent.</source>
         <translation>Могући узроци: прекратак или несталан.</translation>
     </message>
     <message>
-        <location filename="pages/page_smpl.cpp" line="1208"/>
+        <location filename="pages/page_smpl.cpp" line="1212"/>
         <source>Attention</source>
         <translation>Упозорење</translation>
     </message>
     <message>
-        <location filename="pages/page_smpl.cpp" line="1222"/>
+        <location filename="pages/page_smpl.cpp" line="1226"/>
         <source>Question</source>
         <translation>Питање</translation>
     </message>
     <message>
-        <location filename="pages/page_smpl.cpp" line="1223"/>
+        <location filename="pages/page_smpl.cpp" line="1227"/>
         <source>Fréquence de coupure :</source>
         <translation>Гранична учестаност:</translation>
     </message>
     <message>
-        <location filename="pages/page_smpl.cpp" line="1459"/>
+        <location filename="pages/page_smpl.cpp" line="1463"/>
         <source>Transposition</source>
         <translation>Транспозиција</translation>
     </message>
     <message>
-        <location filename="pages/page_smpl.cpp" line="1460"/>
+        <location filename="pages/page_smpl.cpp" line="1464"/>
         <source>Écart en demi-tons :</source>
         <translation>Полутонско подешавање:</translation>
     </message>
     <message>
-        <location filename="pages/page_smpl.cpp" line="1622"/>
+        <location filename="pages/page_smpl.cpp" line="1626"/>
         <source>Arrêt</source>
         <translation>Заустави</translation>
     </message>
@@ -4550,7 +4610,7 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
 <context>
     <name>Pile_sf2</name>
     <message>
-        <location filename="sf2_core/pile_sf2_sl.cpp" line="760"/>
+        <location filename="sf2_core/pile_sf2_sl.cpp" line="845"/>
         <source>sans titre</source>
         <translation>без наслова</translation>
     </message>
@@ -4560,17 +4620,18 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
     <message>
         <location filename="gui_divers/dialog_about.cpp" line="110"/>
         <source>Créé par </source>
-        <translation>Створио</translation>
+        <translatorcomment>пазите на празнину на крају</translatorcomment>
+        <translation>Творац </translation>
     </message>
     <message>
         <location filename="gui_divers/dialog_about.cpp" line="111"/>
         <source>Contributeurs </source>
-        <translation>Сарадници</translation>
+        <translation>Сарадници </translation>
     </message>
     <message>
         <location filename="gui_divers/dialog_about.cpp" line="112"/>
         <source>Traduit par </source>
-        <translation>Локализовао</translation>
+        <translation>Преводиоци </translation>
     </message>
     <message>
         <location filename="sf2_core/duplicator.cpp" line="259"/>
@@ -4580,7 +4641,7 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
     <message>
         <location filename="sf2_core/duplicator.cpp" line="260"/>
         <source>La division globale ne sera pas recopiée.</source>
-        <translation type="unfinished">Укупно парче неће бити умножено.</translation>
+        <translation type="unfinished">Укупни део неће бити умножен.</translation>
     </message>
     <message>
         <location filename="sf2_core/duplicator.cpp" line="262"/>
@@ -4622,18 +4683,18 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
         <location filename="sf2_core/duplicator.cpp" line="563"/>
         <location filename="sf2_core/pile_sf2.cpp" line="1279"/>
         <location filename="sf2_core/pile_sf2.cpp" line="1369"/>
-        <location filename="sf2_core/pile_sf2_sl.cpp" line="276"/>
+        <location filename="sf2_core/pile_sf2_sl.cpp" line="329"/>
         <location filename="sf2_core/sound.cpp" line="104"/>
         <location filename="sf2_core/sound.cpp" line="156"/>
         <location filename="sf2_core/sound.cpp" line="229"/>
         <location filename="sf2_core/sound.cpp" line="304"/>
         <location filename="sf2_core/sound.cpp" line="313"/>
-        <location filename="sf2_core/sound.cpp" line="627"/>
-        <location filename="sf2_core/sound.cpp" line="641"/>
-        <location filename="sf2_core/sound.cpp" line="648"/>
-        <location filename="sf2_core/sound.cpp" line="654"/>
-        <location filename="sf2_core/sound.cpp" line="673"/>
-        <location filename="sf2_core/sound.cpp" line="681"/>
+        <location filename="sf2_core/sound.cpp" line="628"/>
+        <location filename="sf2_core/sound.cpp" line="643"/>
+        <location filename="sf2_core/sound.cpp" line="650"/>
+        <location filename="sf2_core/sound.cpp" line="656"/>
+        <location filename="sf2_core/sound.cpp" line="675"/>
+        <location filename="sf2_core/sound.cpp" line="683"/>
         <source>Attention</source>
         <translation>Упозорење</translation>
     </message>
@@ -4698,7 +4759,7 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
         <translation>Не могу да уклоним инструменат употребљен у другој поставци.</translation>
     </message>
     <message>
-        <location filename="sf2_core/pile_sf2_sl.cpp" line="277"/>
+        <location filename="sf2_core/pile_sf2_sl.cpp" line="330"/>
         <source>Fichier corrompu : utilisation des échantillons en qualité 16 bits.</source>
         <translation>Оштећена датотека: употреба 16-битних узорака.</translation>
     </message>
@@ -4716,20 +4777,20 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
         <translation>Грешка код „Sound::getData“.</translation>
     </message>
     <message>
-        <location filename="sf2_core/sound.cpp" line="628"/>
+        <location filename="sf2_core/sound.cpp" line="629"/>
         <source>Impossible d&apos;ouvrir le fichier</source>
         <translation>Не могу да отворим ову датотеку</translation>
     </message>
     <message>
-        <location filename="sf2_core/sound.cpp" line="641"/>
-        <location filename="sf2_core/sound.cpp" line="648"/>
-        <location filename="sf2_core/sound.cpp" line="654"/>
-        <location filename="sf2_core/sound.cpp" line="673"/>
+        <location filename="sf2_core/sound.cpp" line="643"/>
+        <location filename="sf2_core/sound.cpp" line="650"/>
+        <location filename="sf2_core/sound.cpp" line="656"/>
+        <location filename="sf2_core/sound.cpp" line="675"/>
         <source>Le fichier est corrompu.</source>
         <translation>Датотека је оштећена.</translation>
     </message>
     <message>
-        <location filename="sf2_core/sound.cpp" line="682"/>
+        <location filename="sf2_core/sound.cpp" line="684"/>
         <source>Résolution insuffisante</source>
         <translation>Недовољна резолуција</translation>
     </message>
@@ -4752,12 +4813,13 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
     <message>
         <location filename="tools/conversion_sfz.cpp" line="288"/>
         <source>// Nom         : </source>
-        <translation>// Назив:</translation>
+        <translatorcomment>пребројте празнине тако да су знаци &quot;:&quot; усправно поравњати</translatorcomment>
+        <translation>// Назив       : </translation>
     </message>
     <message>
         <location filename="tools/conversion_sfz.cpp" line="289"/>
         <source>// Auteur      : </source>
-        <translation>// Творац:</translation>
+        <translation>// Творац      : </translation>
     </message>
     <message>
         <location filename="tools/conversion_sfz.cpp" line="290"/>
@@ -4767,12 +4829,12 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
     <message>
         <location filename="tools/conversion_sfz.cpp" line="291"/>
         <source>// Date        : </source>
-        <translation>// Датум:</translation>
+        <translation>// Датум       : </translation>
     </message>
     <message>
         <location filename="tools/conversion_sfz.cpp" line="292"/>
         <source>// Commentaire : </source>
-        <translation>// Примедба:</translation>
+        <translation>// Примедба    : </translation>
     </message>
     <message>
         <location filename="tools/conversion_sfz.cpp" line="548"/>
@@ -4873,7 +4935,7 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
     <message>
         <location filename="tools/import_sfz.cpp" line="163"/>
         <source>Sf2 importé depuis un fichier sfz par Polyphone</source>
-        <translation>Sf2 imported from sfz by Polyphone</translation>
+        <translation>Сф2 који је из Сфз-датотеке издвојио Полифон</translation>
     </message>
 </context>
 <context>

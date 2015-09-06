@@ -5,6 +5,8 @@ polyphone (1.7) unstable; urgency=low
  * selecting "Samples", "Instruments" or "Presets" in the tree shows an overview page
  * tools are allowed when several instruments or presets are selected in the tree
  * pasting modulators is allowed for several divisions
+ * sf3 import / export
+ * (fix) left / right attributes were lost after duplicating linked samples
 
  -- Davy Triponney <davy.triponney@gmail.com>  Wed, 27 Sep 2015 20:51:55 +0100
 

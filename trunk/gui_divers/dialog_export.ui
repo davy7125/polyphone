@@ -119,6 +119,11 @@
        </item>
        <item>
         <property name="text">
+         <string notr="true">.sf3</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
          <string notr="true">.sfz</string>
         </property>
        </item>

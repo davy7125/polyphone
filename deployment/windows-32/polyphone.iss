@@ -24,7 +24,7 @@ Type: files; Name: "{app}\platforms\qwindows.dll"
 ; (To generate a new GUID, click Tools | Generate GUID inside the IDE.)
 AppId={{B0A96B4A-783D-4090-89D6-0B66C8D71B42}
 AppName=Polyphone
-AppVersion=1.6
+AppVersion=1.7
 AppPublisher=Davy Triponney
 AppPublisherURL=http://www.polyphone.fr/
 AppSupportURL=http://www.polyphone.fr/
@@ -33,7 +33,7 @@ ChangesAssociations=yes
 DefaultDirName={pf}\Polyphone
 DefaultGroupName=Polyphone
 LicenseFile=license.txt
-OutputBaseFilename=Polyphone_v1.6_win32
+OutputBaseFilename=Polyphone_v1.7_win32
 SetupIconFile=polyphone.ico
 Compression=lzma
 SolidCompression=yes
@@ -41,6 +41,7 @@ SolidCompression=yes
 [Languages]
 Name: "english"; MessagesFile: "compiler:Default.isl"
 Name: "french";  MessagesFile: "compiler:Languages\French.isl" 
+Name: "german";  MessagesFile: "compiler:Languages\German.isl" 
 Name: "italian"; MessagesFile: "compiler:Languages\Italian.isl"
 Name: "spanish"; MessagesFile: "compiler:Languages\Spanish.isl"
 
@@ -52,6 +53,9 @@ Source: "polyphone.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "lib\icudt53.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "lib\icuin53.dll"; DestDir: "{app}"; Flags: ignoreversion    
 Source: "lib\icuuc53.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "lib\libogg.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "lib\libvorbis.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "lib\libvorbisfile.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "lib\portaudio_x86.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "lib\Qt5Core.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "lib\Qt5Gui.dll"; DestDir: "{app}"; Flags: ignoreversion
@@ -67,8 +71,9 @@ Source: "lib\qwindows.dll"; DestDir: "{app}\platforms"; Flags: ignoreversion
 Name: "{group}\Polyphone"; Filename: "{app}\polyphone.exe"
 Name: "{commondesktop}\Polyphone"; Filename: "{app}\polyphone.exe"; Tasks: desktopicon
 
-[Registry]
+[Registry] 
 Root: HKCR; Subkey: ".sf2"; ValueType: string; ValueName: ""; ValueData: "PolyphoneFile"; Flags: uninsdeletevalue
+Root: HKCR; Subkey: ".sf3"; ValueType: string; ValueName: ""; ValueData: "PolyphoneFile"; Flags: uninsdeletevalue
 Root: HKCR; Subkey: ".sfz"; ValueType: string; ValueName: ""; ValueData: "PolyphoneFile"; Flags: uninsdeletevalue
 Root: HKCR; Subkey: ".sfArk"; ValueType: string; ValueName: ""; ValueData: "PolyphoneFile"; Flags: uninsdeletevalue 
 Root: HKCR; Subkey: "PolyphoneFile"; ValueType: string; ValueName: ""; ValueData: "soundfont"; Flags: uninsdeletekey 

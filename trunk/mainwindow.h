@@ -28,6 +28,8 @@
 
 #include <QMainWindow>
 #include <QDockWidget>
+#include <QtConcurrent/QtConcurrent>
+#include <QProgressDialog>
 #include <QDir>
 #include <QEvent>
 #include <stdlib.h>
@@ -142,6 +144,7 @@ private slots:
     void exporter();            // Export d'un ou plusieurs preset(s)
     void exporter(QList<QList<EltID> > listID, QString dir, int format,
                   bool presetPrefix, bool bankDir, bool gmSort);
+    void exporter2(QList<QList<EltID> > listID, QString dir, int format, int flags);
     void nouvelInstrument();    // Création d'un instrument
     void nouveauPreset();       // Création d'un preset
     void associer();            // Association InstSmpl et PrstInst
@@ -198,6 +201,7 @@ private slots:
 
     void on_actionEnlever_tous_les_modulateurs_triggered();
     void onAudioConnectionDone();
+    void futureFinished();
 
 signals:
     void initAudio(int numDevice, int numIndex, int bufferSize);
@@ -226,6 +230,8 @@ private:
     int _currentKey;
     QDialog _dialKeyboard;
     QByteArray _geometryDialKeyboard;
+    QFutureWatcher<void> _futureWatcher;
+    QProgressDialog _progressDialog;
 
     // Gestion sustain pedal
     QList<int> _listKeysToRelease;

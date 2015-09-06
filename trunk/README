@@ -13,6 +13,9 @@ The following libraries are required (the name may vary depending on your system
  - rtmidi      (librtmidi-dev)
  - stk         (libstk0-dev)
  - qcustomplot (libqcustomplot-dev)
+ - vorbis      (libvorbis-dev)
+ - ogg         (libogg-dev)
+
 Use your package manager to install them: synaptic, yum,...
 
 
