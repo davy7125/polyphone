@@ -110,7 +110,7 @@ private:
     void duplication(EltID id, QVector<int> listeVelocite);
     void resetChamp(int colonne, Champ champ1, Champ champ2);
     void setOffset(int ligne, int colonne, Champ champ1, Champ champ2);
-    void customizeKeyboard();
+    void customizeKeyboard(bool withAllDivisions = false);
     void pasteMod(EltID id, QList<Modulator> modulators);
     QList<Modulator> getModList(EltID id);
 
@@ -138,6 +138,7 @@ protected slots:
     void duplicateMod(QList<int> listIndex);
     void actionBegin();
     void actionFinished();
+    void updateKeyboard();
 
 private slots:
     void paramGlobal(QVector<double> dValues, int typeModif, int champ, int velMin, int velMax);

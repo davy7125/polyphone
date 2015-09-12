@@ -88,8 +88,7 @@ Page_Inst::Page_Inst(QWidget *parent) :
 
     connect(this->table, SIGNAL(actionBegin()), this, SLOT(actionBegin()));
     connect(this->table, SIGNAL(actionFinished()), this, SLOT(actionFinished()));
-
-    _pushRangeMode->hide();
+    connect(ui->rangeEditor, SIGNAL(updateKeyboard()), this, SLOT(updateKeyboard()));
 }
 Page_Inst::~Page_Inst()
 {

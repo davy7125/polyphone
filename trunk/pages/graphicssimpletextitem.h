@@ -42,27 +42,31 @@ public:
         QRectF br = QGraphicsSimpleTextItem::boundingRect();
         return br.translated(dx(br), dy(br));
     }
+
     void paint(QPainter *painter, const QStyleOptionGraphicsItem * option, QWidget * widget = 0)
     {
         painter->translate(dx(boundingRect()), dy(boundingRect()));
         QGraphicsSimpleTextItem::paint(painter, option, widget);
     }
+
 private:
     qreal dx(QRectF br) const
     {
+        double width = br.width();
         if (_alignment & Qt::AlignHCenter)
-            return -br.width()/2;
+            return -width / 2;
         else if (_alignment & Qt::AlignRight)
-            return -br.width();
+            return -width;
         return 0;
     }
 
     qreal dy(QRectF br) const
     {
+        double height = br.height() - 3;
         if (_alignment & Qt::AlignVCenter)
-            return -br.height()/2;
+            return -height / 2;
         else if (_alignment & Qt::AlignBottom)
-            return -br.height();
+            return -height;
         return 0;
     }
 

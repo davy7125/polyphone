@@ -55,7 +55,6 @@ private slots:
     void release(EltID id, double duree36, double division, double deTune);
     void transposer(double ton, bool adaptKeyRange);
     void transposer(EltID idInstSmpl, double ton, bool adaptKeyRange);
-
     void on_pushRangeMode_clicked();
 
 private:

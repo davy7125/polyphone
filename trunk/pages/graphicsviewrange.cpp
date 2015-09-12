@@ -25,10 +25,17 @@
 #include "graphicsviewrange.h"
 #include "config.h"
 #include "graphicssimpletextitem.h"
-#include "rectangleitem.h"
+#include "graphicsrectangleitem.h"
+#include "graphicslegenditem.h"
+#include "mainwindow.h"
+#include <QScrollBar>
 
 GraphicsViewRange::GraphicsViewRange(QWidget *parent) : QGraphicsView(parent),
     _scene(new QGraphicsScene(-0.5, -0.5, 128, 128)),
+    _legendItem(NULL),
+    _dontRememberScroll(false),
+    _buttonPressed(Qt::NoButton),
+    _moveOccured(false),
     _mouseMode(MOUSE_MODE_NONE),
     _zoomX(1),
     _zoomY(1),
@@ -40,18 +47,29 @@ GraphicsViewRange::GraphicsViewRange(QWidget *parent) : QGraphicsView(parent),
     this->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
     this->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
     this->setRenderHint(QPainter::Antialiasing, true);
+    this->setMouseTracking(true);
 
     // Preparation graphique
     this->setScene(_scene);
     this->initGridAndAxes();
 }
 
-GraphicsViewRange::~GraphicsViewRange() {}
+GraphicsViewRange::~GraphicsViewRange()
+{
+    _currentRectangles.clear();
+    while (!_rectangles.isEmpty())
+        delete _rectangles.takeFirst();
+    while (!_leftLabels.isEmpty())
+        delete _leftLabels.takeFirst();
+    while (!_bottomLabels.isEmpty())
+        delete _bottomLabels.takeFirst();
+    delete _legendItem;
+}
 
 void GraphicsViewRange::initGridAndAxes()
 {
     QColor lineColor(220, 220, 220);
-    QColor textColor(80, 80, 80);
+    QColor textColor(100, 100, 100);
 
     // Vertical lines
     QPen penVerticalLines(lineColor, 1);
@@ -60,8 +78,10 @@ void GraphicsViewRange::initGridAndAxes()
     {
         QGraphicsLineItem * line = new QGraphicsLineItem(note, -0.5, note, 127.5);
         line->setPen(penVerticalLines);
+        line->setZValue(0);
         _scene->addItem(line);
         GraphicsSimpleTextItem * text = new GraphicsSimpleTextItem(Qt::AlignHCenter + Qt::AlignBottom, line);
+        text->setZValue(0);
         text->setBrush(textColor);
         text->setText(Config::getInstance()->getKeyName(note));
         text->setPos(note, 127.5);
@@ -75,135 +95,274 @@ void GraphicsViewRange::initGridAndAxes()
     {
         QGraphicsLineItem * line = new QGraphicsLineItem(-0.5, 127 - vel, 127.5, 127 - vel);
         line->setPen(penHorizontalLines);
+        line->setZValue(0);
         _scene->addItem(line);
         GraphicsSimpleTextItem * text = new GraphicsSimpleTextItem(Qt::AlignLeft + Qt::AlignVCenter, line);
+        text->setZValue(0);
         text->setBrush(textColor);
         text->setText(QString::number(vel));
         text->setPos(-0.5, 127.5 - vel);
         _leftLabels << text;
     }
+
+    // Legend
+    _legendItem = new GraphicsLegendItem(this->font().family());
+    _scene->addItem(_legendItem);
+    _legendItem->setZValue(50);
+}
+
+void GraphicsViewRange::updateLabels()
+{
+    // Current rect
+    QRectF rect = getCurrentRect();
+
+    // Update the position of the axis labels (they stay to the left and bottom)
+    foreach (GraphicsSimpleTextItem * label, _leftLabels)
+        label->setX(qMax(-0.5, rect.x()));
+    foreach (GraphicsSimpleTextItem * label, _bottomLabels)
+        label->setY(qMin(127.5, rect.y() + rect.height()));
+
+    // Update the position of the legend (it stays in a corner)
+    if (_legendItem->isLeft())
+        _legendItem->setX(35. * rect.width() / this->width() + qMax(-0.5, rect.x()));
+    else
+        _legendItem->setX(qMin(127.5, rect.x() + rect.width()) - 5. * rect.width() / this->width());
+    _legendItem->setY(5. * rect.height() / this->height() + qMax(-0.5, rect.y()));
+}
+
+void GraphicsViewRange::init(Pile_sf2 * sf2, MainWindow * mainWindow)
+{
+    _sf2 = sf2;
+    _mainWindow = mainWindow;
+    GraphicsRectangleItem::init(sf2);
+    GraphicsLegendItem::initSf2(sf2);
 }
 
 void GraphicsViewRange::display(EltID id)
 {
-    QList<QRectF> listRect;
+    // Clear previous rectangles
+    while (!_rectangles.isEmpty())
+    {
+        _scene->removeItem(_rectangles.first());
+        delete _rectangles.takeFirst();
+    }
+    _currentRectangles.clear();
+
+    // Add new ones
     if (id.typeElement == elementInst)
         id.typeElement = elementInstSmpl;
     else if (id.typeElement == elementPrst)
         id.typeElement = elementPrstInst;
-
     int count = _sf2->count(id);
     for (int i = 0; i < count; i++)
     {
         id.indexElt2 = i;
         if (!_sf2->get(id, champ_hidden).bValue)
         {
-            int minKey = 0, maxKey = 127;
-            int minVel = 0, maxVel = 127;
-            if (_sf2->isSet(id, champ_keyRange))
-            {
-                rangesType range = _sf2->get(id, champ_keyRange).rValue;
-                minKey = range.byLo;
-                maxKey = range.byHi;
-            }
-            if (_sf2->isSet(id, champ_velRange))
-            {
-                rangesType range = _sf2->get(id, champ_velRange).rValue;
-                minVel = range.byLo;
-                maxVel = range.byHi;
-            }
-            listRect << QRectF(-0.5 + minKey, 126.5 - maxVel, maxKey - minKey + 1, maxVel - minVel + 1);
+            GraphicsRectangleItem * item = new GraphicsRectangleItem(id);
+            item->setZValue(20);
+            _scene->addItem(item);
+            _rectangles << item;
         }
     }
 
-    display(listRect);
-}
-
-void GraphicsViewRange::display(QList<QRectF> rectangles)
-{
-    // Style
-    QPen penRectangle(QColor(250, 0, 0, 120), 1);
-    penRectangle.setCosmetic(true);
-    QBrush brushRectangle(QColor(250, 0, 0, 60));
-
-    // Clear previous rectangles
-    foreach (QGraphicsRectItem * item, _rectangles)
-        _scene->removeItem(item);
-    _rectangles.clear();
-
-    // Add new rectangles
-    foreach (QRectF rectangle, rectangles)
-    {
-        RectangleItem * item = new RectangleItem(rectangle);
-        _scene->addItem(item);
-        _rectangles << item;
-        item->setPen(penRectangle);
-        item->setBrush(brushRectangle);
-    }
+    updateLabels();
 }
 
 void GraphicsViewRange::resizeEvent(QResizeEvent * event)
 {
-    fitInView(_displayedRect);
+    _dontRememberScroll = true;
     QGraphicsView::resizeEvent(event);
+    fitInView(_displayedRect);
+    _dontRememberScroll = false;
 }
 
 void GraphicsViewRange::mousePressEvent(QMouseEvent *event)
 {
-    if (_mouseMode != MOUSE_MODE_NONE)
+    if (_mouseMode != MOUSE_MODE_NONE || _buttonPressed != Qt::NoButton)
         return;
 
-    // Enregistrement situation
+    // Update current position
+    double deltaX = 128 - _displayedRect.width();
+    if (deltaX == 0)
+        _posX = 0.5;
+    else
+        _posX = (_displayedRect.left() + 0.5) / deltaX;
+    double deltaY = 128 - _displayedRect.height();
+    if (deltaY == 0)
+        _posY = 0.5;
+    else
+        _posY = (_displayedRect.top() + 0.5) / deltaY;
+
+    // Remember situation
     _xInit = normalizeX(event->x());
     _yInit = normalizeY(event->y());
     _zoomXinit = _zoomX;
     _zoomYinit = _zoomY;
     _posXinit = _posX;
     _posYinit = _posY;
-    if (event->button() == Qt::LeftButton)
-        _mouseMode = MOUSE_MODE_DRAG;
-    else if (event->button() == Qt::RightButton)
-        _mouseMode = MOUSE_MODE_ZOOM;
-}
 
+    _moveOccured = false;
+    _buttonPressed = event->button();
+}
 
 void GraphicsViewRange::mouseReleaseEvent(QMouseEvent *event)
 {
-    if (event->button() == Qt::LeftButton)
+    if (_buttonPressed != event->button())
+        return;
+
+    if (!_currentRectangles.isEmpty())
     {
-        if (_mouseMode == MOUSE_MODE_DRAG)
+        if (_moveOccured)
         {
-            _mouseMode = MOUSE_MODE_NONE;
-            this->setCursor(Qt::ArrowCursor);
+            /// Save the changes
+            _sf2->prepareNewActions(false); // False because we can't the id again at this stage, if some old actions delete items
+            foreach (GraphicsRectangleItem * item, _currentRectangles)
+                item->saveChanges();
+            _mainWindow->updateDo();
+
+            updateKeyboard();
+        }
+        else
+        {
+            /// Search other rectangles to select
+
+            // Rectangles under the mouse
+            QList<GraphicsRectangleItem *> rectanglesUnderMouse;
+            foreach (GraphicsRectangleItem * item, _rectangles)
+                if (item->contains(this->mapToScene(event->pos())))
+                    rectanglesUnderMouse << item;
+
+            // Sort them by pairs
+            QList<QList<GraphicsRectangleItem*> > pairs;
+            while (!rectanglesUnderMouse.isEmpty())
+            {
+                QList<GraphicsRectangleItem*> listTmp;
+                listTmp << rectanglesUnderMouse.takeFirst();
+                EltID idBrother = listTmp[0]->findBrother();
+                foreach (GraphicsRectangleItem* item, rectanglesUnderMouse)
+                {
+                    if (*item == idBrother)
+                    {
+                        listTmp << item;
+                        rectanglesUnderMouse.removeOne(item);
+                        break;
+                    }
+                }
+                pairs << listTmp;
+            }
+
+            // Current index of the pair
+            int index = -1;
+            for (int i = 0; i < pairs.count(); i++)
+                if (pairs[i].contains(_currentRectangles.first()))
+                    index = i;
+
+            setCurrentRectangles(pairs[(index + 1) % pairs.count()]);
         }
     }
-    else if (event->button() == Qt::RightButton)
-    {
-        if (_mouseMode == MOUSE_MODE_ZOOM)
-        {
-            _mouseMode = MOUSE_MODE_NONE;
-            this->setZoomLine(-1, 0, 0, 0);
-            this->setCursor(Qt::ArrowCursor);
-        }
-    }
+
+    this->setZoomLine(-1, 0, 0, 0);
+    this->setCursor(Qt::ArrowCursor);
+    _mouseMode = MOUSE_MODE_NONE;
+    _buttonPressed = Qt::NoButton;
 }
 
 void GraphicsViewRange::mouseMoveEvent(QMouseEvent *event)
 {
-    switch (_mouseMode)
+    _moveOccured = true;
+
+    switch (_buttonPressed)
     {
-    case MOUSE_MODE_ZOOM:
+    case Qt::LeftButton:
+        this->setCursor(Qt::ClosedHandCursor);
+        if (_currentRectangles.isEmpty())
+            this->drag(event->pos());
+        else
+        {
+            foreach (GraphicsRectangleItem * item, _currentRectangles)
+            {
+                QPointF pointInit = this->mapToScene(_xInit * this->width(), _yInit * this->height());
+                QPointF pointFinal = this->mapToScene(event->pos());
+                item->computeNewRange(pointInit, pointFinal);
+            }
+            viewport()->update();
+        }
+        break;
+    case Qt::RightButton:
         this->setCursor(Qt::SizeAllCursor);
         this->setZoomLine(_xInit, _yInit, normalizeX(event->x()), normalizeY(event->y()));
         this->zoom(event->pos());
         break;
-    case MOUSE_MODE_DRAG:
-        this->setCursor(Qt::ClosedHandCursor);
-        this->drag(event->pos());
-        break;
-    default:
-        break;
+    case Qt::NoButton: default: {
+        // Section of the legend
+        bool isLeft = (event->pos().x() > this->width() / 2);
+        if (_legendItem->isLeft() != isLeft)
+        {
+            _legendItem->setLeft(isLeft);
+            updateLabels();
+        }
+
+        // Rectangles under the mouse
+        QList<GraphicsRectangleItem *> rectanglesUnderMouse;
+        foreach (GraphicsRectangleItem * item, _rectangles)
+            if (item->contains(this->mapToScene(event->pos())))
+                rectanglesUnderMouse << item;
+
+        // Current selection already within the rectangles?
+        bool alreadySelected = !_currentRectangles.isEmpty();
+        foreach (GraphicsRectangleItem * item, _currentRectangles)
+            alreadySelected &= rectanglesUnderMouse.contains(item);
+
+        if (!alreadySelected)
+        {
+            QList<GraphicsRectangleItem*> rectanglesToSelect;
+
+            if (!rectanglesUnderMouse.isEmpty())
+            {
+                // Select the first element with its brother if any
+                rectanglesToSelect << rectanglesUnderMouse.first();
+                EltID idBrother = rectanglesToSelect[0]->findBrother();
+                if (idBrother.typeElement == elementInstSmpl)
+                {
+                    foreach (GraphicsRectangleItem * item, rectanglesUnderMouse)
+                        if (*item == idBrother)
+                            rectanglesToSelect << item;
+                }
+            }
+
+            setCurrentRectangles(rectanglesToSelect);
+        }
     }
+    }
+}
+
+void GraphicsViewRange::wheelEvent(QWheelEvent * event)
+{
+    if (_buttonPressed == Qt::NoButton)
+        QGraphicsView::wheelEvent(event);
+}
+
+void GraphicsViewRange::scrollContentsBy(int dx, int dy)
+{
+    QGraphicsView::scrollContentsBy(dx, dy);
+    if (_dontRememberScroll)
+        return;
+
+    // Update the displayed rect
+    _displayedRect = getCurrentRect();
+
+    // Limits
+    if (_displayedRect.left() < -0.5)
+        _displayedRect.setLeft(-0.5);
+    if (_displayedRect.right() > 127.5)
+        _displayedRect.setRight(127.5);
+    if (_displayedRect.top() < -0.5)
+        _displayedRect.setTop(-0.5);
+    if (_displayedRect.bottom() > 127.5)
+        _displayedRect.setBottom(127.5);
+
+    updateLabels();
 }
 
 void GraphicsViewRange::drag(QPoint point)
@@ -271,14 +430,11 @@ void GraphicsViewRange::zoomDrag()
     double offsetY = (_scene->height() - etendueY) * _posY - 0.5;
     _displayedRect.setRect(offsetX, offsetY, etendueX, etendueY);
 
-    // Déplacement des valeurs des axes
-    foreach (GraphicsSimpleTextItem * label, _leftLabels)
-        label->setX(offsetX);
-    foreach (GraphicsSimpleTextItem * label, _bottomLabels)
-        label->setY(offsetY + etendueY);
-
     // Mise à jour
+    _dontRememberScroll = true;
     this->fitInView(_displayedRect);
+    _dontRememberScroll = false;
+    updateLabels();
 }
 
 void GraphicsViewRange::setZoomLine(double x1, double y1, double x2, double y2)
@@ -289,6 +445,28 @@ void GraphicsViewRange::setZoomLine(double x1, double y1, double x2, double y2)
     Q_UNUSED(y2)
 }
 
+void GraphicsViewRange::setCurrentRectangles(QList<GraphicsRectangleItem*> rectanglesToSelect)
+{
+    // Update the colors
+    foreach (GraphicsRectangleItem * item, _currentRectangles)
+        if (!rectanglesToSelect.contains(item))
+            item->setHover(false);
+    foreach (GraphicsRectangleItem * item, rectanglesToSelect)
+        if (!_currentRectangles.contains(item))
+            item->setHover(true);
+
+    // Remember the current rectangles
+    _currentRectangles = rectanglesToSelect;
+
+    // Update legend text
+    QList<EltID> ids;
+    foreach (GraphicsRectangleItem * item, _currentRectangles)
+        ids << item->getID();
+    _legendItem->setIds(ids);
+
+    viewport()->update();
+}
+
 double GraphicsViewRange::normalizeX(int xPixel)
 {
     return (double)xPixel / this->width();
@@ -297,4 +475,12 @@ double GraphicsViewRange::normalizeX(int xPixel)
 double GraphicsViewRange::normalizeY(int yPixel)
 {
     return (double)yPixel / this->height();
+}
+
+QRectF GraphicsViewRange::getCurrentRect()
+{
+    QPointF tl(horizontalScrollBar()->value(), verticalScrollBar()->value());
+    QPointF br = tl + viewport()->rect().bottomRight();
+    QMatrix mat = matrix().inverted();
+    return mat.mapRect(QRectF(tl,br));
 }
