@@ -44,7 +44,10 @@ void PageTable::afficher()
 {
     // Prepare page
     if (_pushRangeMode->isChecked())
+    {
+        updateKeyboard();
         afficheRange();
+    }
     else
         afficheTable();
 
@@ -1412,7 +1415,12 @@ void PageTable::selected()
     this->tree->blockSignals(false);
 }
 
-void PageTable::customizeKeyboard()
+void PageTable::updateKeyboard()
+{
+    customizeKeyboard(true);
+}
+
+void PageTable::customizeKeyboard(bool withAllDivisions)
 {
     mainWindow->clearKeyboardCustomisation();
 
@@ -1423,8 +1431,11 @@ void PageTable::customizeKeyboard()
             selectedColumns << item->column();
 
     // Si aucune colonne n'est sélectionnée, on affiche toutes les étendues
-    if (selectedColumns.isEmpty())
+    if (withAllDivisions || selectedColumns.isEmpty())
+    {
+        selectedColumns.clear();
         selectedColumns << 0;
+    }
 
     // Affichage des étendues et rootkeys des divisions sélectionnées
     foreach (int colonne, selectedColumns)

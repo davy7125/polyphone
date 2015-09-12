@@ -29,44 +29,59 @@
 #include "pile_sf2.h"
 #include "mainwindow.h"
 class GraphicsSimpleTextItem;
+class GraphicsRectangleItem;
+class GraphicsLegendItem;
 
 class GraphicsViewRange : public QGraphicsView
 {
+    Q_OBJECT
+
 public:
     explicit GraphicsViewRange(QWidget *parent = 0);
     ~GraphicsViewRange();
 
-    void init(Pile_sf2 * sf2, MainWindow * mainWindow)
-    {
-        _sf2 = sf2;
-        _mainWindow = mainWindow;
-    }
-
+    void init(Pile_sf2 * sf2, MainWindow * mainWindow);
     void display(EltID id);
+
+signals:
+    void updateKeyboard();
 
 protected:
     void resizeEvent(QResizeEvent * event);
     void mousePressEvent(QMouseEvent *event);
     void mouseReleaseEvent(QMouseEvent *event);
     void mouseMoveEvent(QMouseEvent *event);
+    void wheelEvent(QWheelEvent * event);
+    void mouseDoubleClickEvent(QMouseEvent *) {}
+    void scrollContentsBy(int dx, int dy);
 
 private:
     void initGridAndAxes();
-    void display(QList<QRectF> rectangles);
+    void updateLabels();
+    void setCurrentRectangles(QList<GraphicsRectangleItem*> rectanglesToSelect);
+    QRectF getCurrentRect();
 
     Pile_sf2 * _sf2;
     MainWindow * _mainWindow;
     QGraphicsScene * _scene;
-    QList<QGraphicsRectItem *> _rectangles;
+    QList<GraphicsRectangleItem *> _rectangles;
+    QList<GraphicsRectangleItem *> _currentRectangles;
     QList<GraphicsSimpleTextItem *> _leftLabels, _bottomLabels;
+    GraphicsLegendItem * _legendItem;
+    bool _dontRememberScroll;
 
     // Drag & zoom
     enum MouseMode
     {
         MOUSE_MODE_NONE,
-        MOUSE_MODE_DRAG,
-        MOUSE_MODE_ZOOM
+        MOUSE_MODE_MOVE_RECTANGLE,
+        MOUSE_MODE_MOVE_RIGHT,
+        MOUSE_MODE_MOVE_LEFT,
+        MOUSE_MODE_MOVE_TOP,
+        MOUSE_MODE_MOVE_BOTTOM
     };
+    Qt::MouseButton _buttonPressed;
+    bool _moveOccured;
     MouseMode _mouseMode;
     double _xInit, _yInit;
     double _zoomX, _zoomY, _posX, _posY;

@@ -26,7 +26,7 @@
 #include "tree.h"
 #include <QMessageBox>
 
-#define UNDO_NUMBER 50
+#define UNDO_NUMBER 100
 
 bool Pile_sf2::CONFIG_RAM = 0;
 
@@ -693,7 +693,7 @@ int Pile_sf2::count(EltID id, bool withHidden)
 }
 
 // Gestionnaire d'actions
-void Pile_sf2::prepareNewActions()
+void Pile_sf2::limitPreviousActions()
 {
     // suppression définitive des redo
     Pile_actions::Action *action;
@@ -744,6 +744,13 @@ void Pile_sf2::prepareNewActions()
         // Suppression de la liste d'actions
         this->pileActions->supprimerUndo(i);
     }
+}
+
+void Pile_sf2::prepareNewActions(bool removeOldActions)
+{
+    if (removeOldActions)
+        limitPreviousActions();
+
     // Nouvelle action
     this->pileActions->nouvelleAction();
 }
