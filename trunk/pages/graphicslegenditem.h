@@ -22,20 +22,42 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef RECTANGLEITEM_H
-#define RECTANGLEITEM_H
+#ifndef GRAPHICSLEGENDITEM_H
+#define GRAPHICSLEGENDITEM_H
 
-#include <QGraphicsRectItem>
+#include <QGraphicsItem>
+#include <QBrush>
+#include <QFont>
+#include "pile_sf2.h"
 
-class RectangleItem : public QGraphicsRectItem
+class GraphicsLegendItem : public QGraphicsItem
 {
 public:
-    explicit RectangleItem(const QRectF &rect, QGraphicsItem *parent = 0);
+    GraphicsLegendItem(QString fontFamily, QGraphicsItem *parent = NULL);
+    static void initSf2(Pile_sf2 * sf2) { s_sf2 = sf2; }
+    ~GraphicsLegendItem();
 
-protected:
-    QVariant itemChange(GraphicsItemChange change,
-                        const QVariant &value);
+    void setIds(QList<EltID> ids);
+    void setLeft(bool isLeft);
+    bool isLeft();
 
+    QRectF boundingRect() const;
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem * option, QWidget * widget = NULL);
+
+private:
+    static Pile_sf2 * s_sf2;
+    static const int s_border;
+    static const QBrush s_foregroundBrush;
+    static const QPen s_borderPen;
+    static const QPen s_textPen;
+
+    const QFont _font;
+    QStringList _text;
+    int _alignment;
+
+    QSizeF getTextSize() const;
+    qreal dx(QSizeF size) const;
+    qreal dy(QSizeF size) const;
 };
 
-#endif // RECTANGLEITEM_H
+#endif // GRAPHICSLEGENDITEM_H

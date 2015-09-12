@@ -193,7 +193,6 @@ SOURCES	+= main.cpp \
     sfark/sfarkglobal.cpp \
     sfark/sfarkfilemanager.cpp \
     gui_divers/dialogselection.cpp \
-    pages/rectangleitem.cpp \
     pages/graphicsviewrange.cpp \
     tools/dialog_transposition.cpp \
     sfark/sfarkextractor.cpp \
@@ -203,7 +202,9 @@ SOURCES	+= main.cpp \
     pages/pageoverviewinst.cpp \
     pages/pageoverviewprst.cpp \
     lib/sf3/sfont.cpp \
-    sf2_core/oggconverter.cpp
+    sf2_core/oggconverter.cpp \
+    pages/graphicslegenditem.cpp \
+    pages/graphicsrectangleitem.cpp
 
 HEADERS  += mainwindow.h \
     sf2_core/sf2_types.h \
@@ -267,7 +268,6 @@ HEADERS  += mainwindow.h \
     pages/combobox.h \
     pages/tablecombobox.h \
     pages/graphicssimpletextitem.h \
-    pages/rectangleitem.h \
     pages/graphicsviewrange.h \
     tools/dialog_transposition.h \
     sfark/sfarkextractor1.h \
@@ -278,7 +278,9 @@ HEADERS  += mainwindow.h \
     pages/pageoverviewinst.h \
     pages/pageoverviewprst.h \
     lib/sf3/sfont.h \
-    sf2_core/oggconverter.h
+    sf2_core/oggconverter.h \
+    pages/graphicslegenditem.h \
+    pages/graphicsrectangleitem.h
 
 FORMS    += mainwindow.ui \
     gui_divers/config.ui \

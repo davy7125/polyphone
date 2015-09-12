@@ -59,7 +59,7 @@ public:
     int count(EltID id, bool withHidden = true);
 
     // Gestionnaire d'actions
-    void prepareNewActions();
+    void prepareNewActions(bool removeOldActions = true);
     void cleanActions();
     bool isUndoable();
     bool isRedoable();
@@ -348,6 +348,9 @@ private:
 
     // Supprime ou masque l'élément id. Si l'élément est utilisé par un autre : erreur
     int remove(EltID id, bool permanently, bool storeAction, int *message = NULL);
+
+    // Remove very old actions
+    void limitPreviousActions();
 
     // Type de fichier
     static FileType getFileType(QString fileName);

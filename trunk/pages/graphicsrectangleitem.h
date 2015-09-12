@@ -22,35 +22,44 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#include "rectangleitem.h"
-#include <QApplication>
-#include <QGraphicsScene>
+#ifndef RECTANGLEITEM_H
+#define RECTANGLEITEM_H
 
-RectangleItem::RectangleItem(const QRectF &rect, QGraphicsItem *parent) :
-    QGraphicsRectItem(rect, parent)
+#include <QGraphicsRectItem>
+#include "pile_sf2.h"
+
+class GraphicsRectangleItem : public QGraphicsRectItem
 {
-    this->setFlag(QGraphicsItem::ItemIsSelectable);
-    this->setFlag(QGraphicsItem::ItemIsMovable);
-    this->setFlag(QGraphicsItem::ItemSendsGeometryChanges);
-}
+public:
+    GraphicsRectangleItem(EltID id, QGraphicsItem *parent = 0);
+    static void init(Pile_sf2 * sf2) { s_sf2 = sf2; }
 
-QVariant RectangleItem::itemChange(GraphicsItemChange change, const QVariant &value)
-{
-    if (change == ItemPositionChange && scene())
-    {
-        // Offset made by integers
-        QPointF offset = value.toPointF();
-        offset.setX(qRound(offset.x()));
-        offset.setY(qRound(offset.y()));
+    EltID getID() { return _id; }
+    EltID findBrother();
+    void setHover(bool isHovered);
+    bool contains(const QPointF &point) const;
+    void computeNewRange(const QPointF &pointInit, const QPointF &pointFinal);
+    void saveChanges();
 
-        // Keep item in scene rect
-        offset.setX(qMax(offset.x(), scene()->sceneRect().left() - rect().left()));
-        offset.setX(qMin(offset.x(), scene()->sceneRect().right() - rect().right()));
-        offset.setY(qMax(offset.y(), scene()->sceneRect().top() - rect().top()));
-        offset.setY(qMin(offset.y(), scene()->sceneRect().bottom() - rect().bottom()));
+    bool operator==(const GraphicsRectangleItem& other) { return (_id == other._id); }
+    bool operator==(const EltID &id) { return _id == id; }
 
-        return offset;
-    }
+protected:
+    QVariant itemChange(GraphicsItemChange change, const QVariant &value);
 
-    return QGraphicsItem::itemChange(change, value);
-}
+private:
+    static QPen s_penRectangle;
+    static QBrush s_brushRectangle;
+    static QBrush s_brushRectangleHovered;
+    static Pile_sf2 * s_sf2;
+
+    EltID _id;
+    int _minKeyInit, _maxKeyInit, _minVelInit, _maxVelInit;
+    int _minKey, _maxKey, _minVel, _maxVel;
+
+    QRectF getRectInit(EltID id);
+    QRectF getRect();
+    int limit(int value);
+};
+
+#endif // RECTANGLEITEM_H
