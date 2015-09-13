@@ -483,3 +483,9 @@ void Graphique::mouseMoveEvent(QMouseEvent *event)
         this->drag(event->pos());
     }
 }
+
+void Graphique::wheelEvent(QWheelEvent *event)
+{
+    if (!dragFlag && !zoomFlag)
+        qScrollX->setValue(qScrollX->value() - 0.05 * event->angleDelta().x());
+}
