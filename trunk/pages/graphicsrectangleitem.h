@@ -40,6 +40,7 @@ public:
 
     QRectF getRectF() const;
     void paint(QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget = NULL);
+    bool contains(const QPointF &point) const;
 
     void computeNewRange(const QPointF &pointInit, const QPointF &pointFinal);
     void saveChanges();
