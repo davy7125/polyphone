@@ -36,13 +36,13 @@ QStringList PageOverviewInst::getHorizontalHeader()
 {
     QStringList hHeader;
     hHeader << trUtf8("Utilisé")
-            << trUtf8("Nombre d'échantillons")
-            << trUtf8("Nombre de paramètres")
-            << trUtf8("Nombre de modulateurs")
-            << trUtf8("Étendue totale (note)")
-            << trUtf8("Étendue totale (vélocité)")
+            << trUtf8("Nombre\nd'échantillons")
+            << trUtf8("Nombre de\nparamètres")
+            << trUtf8("Nombre de\nmodulateurs")
+            << trUtf8("Étendue totale\n(note)")
+            << trUtf8("Étendue totale\n(vélocité)")
             << trUtf8("Atténuation")
-            << trUtf8("Lecture en boucle")
+            << trUtf8("Lecture\nen boucle")
             << trUtf8("Chorus")
             << trUtf8("Réverbération");
     return hHeader;

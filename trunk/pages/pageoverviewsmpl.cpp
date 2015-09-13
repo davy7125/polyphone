@@ -36,12 +36,12 @@ QStringList PageOverviewSmpl::getHorizontalHeader()
 {
     QStringList hHeader;
     hHeader << trUtf8("Utilisé")
-            << trUtf8("Durée totale")
-            << trUtf8("Durée de la boucle")
-            << trUtf8("Note de base")
+            << trUtf8("Durée\ntotale")
+            << trUtf8("Durée de\nla boucle")
+            << trUtf8("Note\nde base")
             << trUtf8("Correction")
-            << trUtf8("Type d'échantillon")
-            << trUtf8("Échantillon lié");
+            << trUtf8("Type\nd'échantillon")
+            << trUtf8("Échantillon\nlié");
     return hHeader;
 }
 

@@ -55,7 +55,7 @@
     </widget>
    </item>
    <item row="1" column="0">
-    <widget class="QTableWidget" name="table">
+    <widget class="TablePageOverview" name="table">
      <property name="font">
       <font>
        <pointsize>8</pointsize>
@@ -91,11 +91,11 @@
      <attribute name="horizontalHeaderDefaultSectionSize">
       <number>110</number>
      </attribute>
-     <attribute name="horizontalHeaderMinimumSectionSize">
-      <number>18</number>
-     </attribute>
      <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
       <bool>true</bool>
+     </attribute>
+     <attribute name="verticalHeaderVisible">
+      <bool>false</bool>
      </attribute>
      <attribute name="verticalHeaderDefaultSectionSize">
       <number>20</number>
@@ -107,6 +107,13 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>TablePageOverview</class>
+   <extends>QTableWidget</extends>
+   <header>tablepageoverview.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>
