@@ -82,6 +82,7 @@ protected:
 protected slots:
     void updateMainwindow();
     void playKey(int key, int velocity);
+    void selectInTree(QList<EltID> ids);
 
 private:
     // Méthodes privées

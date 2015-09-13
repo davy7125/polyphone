@@ -41,6 +41,7 @@ public:
     ~PageOverview();
 
     void afficher();
+    //virtual void sortItems(int column, Qt::SortOrder order);
 
 protected:
     virtual QString getTitle() = 0;
@@ -49,6 +50,9 @@ protected:
     virtual QStringList getInformation(EltID id) = 0;
 
     QString getRange(EltID id, Champ champ);
+
+private slots:
+    void on_table_cellDoubleClicked(int row, int column);
 
 private:
     Ui::PageOverview *ui;

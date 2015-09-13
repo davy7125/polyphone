@@ -370,6 +370,7 @@ void PianoScene::keyNoteOn(const int note , const int velo)
         keyOn(m_keys.value(note), velo);
     else
         triggerNoteOn(note, velo);
+    // If the key is not displayed the velocity is replaced?!
     //triggerNoteOn(note, getKeyVelocity());
 }
 

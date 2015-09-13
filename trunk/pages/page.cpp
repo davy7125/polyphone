@@ -834,3 +834,13 @@ void Page::playKey(int key, int velocity)
 {
     _mainWindow->triggerNote(key, velocity);
 }
+
+void Page::selectInTree(QList<EltID> ids)
+{
+    bool previousBlockState = this->_tree->blockSignals(true);
+    this->_tree->selectNone();
+    foreach (EltID id, ids)
+        this->_tree->select(id);
+    this->_tree->updateAtNextSelectionRequest();
+    this->_tree->blockSignals(previousBlockState);
+}

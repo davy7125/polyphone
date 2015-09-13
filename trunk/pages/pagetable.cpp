@@ -1411,16 +1411,6 @@ void PageTable::selected()
     this->_tree->blockSignals(false);
 }
 
-void PageTable::selectInTree(QList<EltID> ids)
-{
-    bool previousBlockState = this->_tree->blockSignals(true);
-    this->_tree->selectNone();
-    foreach (EltID id, ids)
-        this->_tree->select(id);
-    this->_tree->updateAtNextSelectionRequest();
-    this->_tree->blockSignals(previousBlockState);
-}
-
 void PageTable::updateKeyboard()
 {
     customizeKeyboard(true);
