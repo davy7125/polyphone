@@ -274,44 +274,49 @@ void GraphicsViewRange::mouseReleaseEvent(QMouseEvent *event)
             _keyTriggered = -1;
         }
     }
-    if (!_currentRectangles.isEmpty())
+    else
     {
-        if (_moveOccured)
+        if (!_currentRectangles.isEmpty())
         {
-            /// Save the changes
-            _sf2->prepareNewActions(false); // False because we can't the id again at this stage, if some old actions delete items
-            foreach (GraphicsRectangleItem * item, _currentRectangles)
-                item->saveChanges();
-            divisionUpdated();
-            updateKeyboard();
+            if (_moveOccured)
+            {
+                /// Save the changes
+                _sf2->prepareNewActions(false); // False because we can't the id again at this stage, if some old actions delete items
+                foreach (GraphicsRectangleItem * item, _currentRectangles)
+                    item->saveChanges();
+                divisionUpdated();
+                updateKeyboard();
+            }
+
+            // Current rectangles under the mouse
+            QList<QList<GraphicsRectangleItem*> > pairs = getRectanglesUnderMouse(event->pos());
+
+            if (pairs.count() == 0)
+                setCurrentRectangles(QList<GraphicsRectangleItem*>(), event->pos(), 0, 0);
+            else
+            {
+                // Current index of the pair
+                int index = -1;
+                for (int i = 0; i < pairs.count(); i++)
+                    if (pairs[i].contains(_currentRectangles.first()))
+                        index = i;
+
+                // Next index?
+                if (!_moveOccured || index == -1)
+                    index = (index + 1) % pairs.count();
+
+                // Display selection
+                setCurrentRectangles(pairs[index], event->pos(), index, pairs.count());
+            }
         }
-
-        // Current rectangles under the mouse
-        QList<QList<GraphicsRectangleItem*> > pairs = getRectanglesUnderMouse(event->pos());
-
-        if (pairs.count() == 0)
-            setCurrentRectangles(QList<GraphicsRectangleItem*>(), event->pos(), 0, 0);
         else
-        {
-            // Current index of the pair
-            int index = -1;
-            for (int i = 0; i < pairs.count(); i++)
-                if (pairs[i].contains(_currentRectangles.first()))
-                    index = i;
+            this->setCursor(Qt::ArrowCursor);
 
-            // Next index?
-            if (!_moveOccured || index == -1)
-                index = (index + 1) % pairs.count();
-
-            // Display selection
-            setCurrentRectangles(pairs[index], event->pos(), index, pairs.count());
-        }
+        _legendItem2->setNewValues(-1, 0, 0, 0);
+        this->setZoomLine(-1, 0, 0, 0);
+        _buttonPressed = Qt::NoButton;
     }
 
-    _legendItem2->setNewValues(-1, 0, 0, 0);
-    this->setZoomLine(-1, 0, 0, 0);
-    this->setCursor(Qt::ArrowCursor);
-    _buttonPressed = Qt::NoButton;
     viewport()->update();
 }
 
@@ -540,8 +545,27 @@ void GraphicsViewRange::setCurrentRectangles(QList<GraphicsRectangleItem*> recta
     foreach (GraphicsRectangleItem * item, _currentRectangles)
         if (!rectanglesToSelect.contains(item))
             item->setHover(false);
+
+    GraphicsRectangleItem::EditingMode editingMode = GraphicsRectangleItem::NONE;
     foreach (GraphicsRectangleItem * item, rectanglesToSelect)
-        item->setHover(true, point);
+        editingMode = item->setHover(true, point);
+
+    // Cursor
+    switch (editingMode)
+    {
+    case GraphicsRectangleItem::NONE:
+        this->setCursor(Qt::ArrowCursor);
+        break;
+    case GraphicsRectangleItem::MOVE_ALL:
+        this->setCursor(Qt::SizeAllCursor);
+        break;
+    case GraphicsRectangleItem::MOVE_RIGHT: case GraphicsRectangleItem::MOVE_LEFT:
+        this->setCursor(Qt::SizeHorCursor);
+        break;
+    case GraphicsRectangleItem::MOVE_TOP: case GraphicsRectangleItem::MOVE_BOTTOM:
+        this->setCursor(Qt::SizeVerCursor);
+        break;
+    }
 
     // Remember the current rectangles
     _currentRectangles = rectanglesToSelect;
