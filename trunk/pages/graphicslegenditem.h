@@ -37,7 +37,7 @@ public:
     static void initSf2(Pile_sf2 * sf2) { s_sf2 = sf2; }
     ~GraphicsLegendItem();
 
-    void setIds(QList<EltID> ids);
+    void setIds(QList<EltID> ids, int selectionIndex, int selectionNumber);
     void setLeft(bool isLeft);
     bool isLeft();
 
@@ -52,7 +52,10 @@ private:
     static const QPen s_textPen;
 
     const QFont _font;
+    const QFont _smallFont;
     QStringList _text;
+    int _selectionIndex;
+    int _selectionNumber;
     int _alignment;
 
     QSizeF getTextSize() const;

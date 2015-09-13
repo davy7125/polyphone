@@ -96,6 +96,13 @@ QRectF GraphicsRectangleItem::getRectF() const
                   (float)_maxKey - (float)_minKey + 1, (float)_maxVel - (float)_minVel + 1);
 }
 
+bool GraphicsRectangleItem::contains(const QPointF &point) const
+{
+    QRectF rectF = getRectF();
+    return rectF.left() <= point.x() && point.x() < rectF.right() &&
+            rectF.top() < point.y() && point.y() < rectF.bottom();
+}
+
 void GraphicsRectangleItem::paint(QPainter *painter, const QStyleOptionGraphicsItem * option, QWidget * widget)
 {
     // Draw base rectangle with a background color and a thin border

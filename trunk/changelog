@@ -1,6 +1,7 @@
 polyphone (1.7) unstable; urgency=low
 
  * german and serbian translations
+ * range editor
  * selecting several instruments or presets shows the editing table for all global divisions
  * selecting "Samples", "Instruments" or "Presets" in the tree shows an overview page
  * tools are allowed when several instruments or presets are selected in the tree

@@ -157,12 +157,12 @@ void GraphicsViewRange::updateLabels()
     viewport()->update();
 }
 
-void GraphicsViewRange::updateLegend()
+void GraphicsViewRange::updateLegend(int selectionIndex, int selectionNumber)
 {
     QList<EltID> ids;
     foreach (GraphicsRectangleItem * item, _currentRectangles)
         ids << item->getID();
-    _legendItem->setIds(ids);
+    _legendItem->setIds(ids, selectionIndex, selectionNumber);
 }
 
 void GraphicsViewRange::init(Pile_sf2 * sf2)
@@ -277,44 +277,27 @@ void GraphicsViewRange::mouseReleaseEvent(QMouseEvent *event)
                 item->saveChanges();
             divisionUpdated();
             updateKeyboard();
-            updateLegend();
         }
+
+        // Current rectangles under the mouse
+        QList<QList<GraphicsRectangleItem*> > pairs = getRectanglesUnderMouse(event->pos());
+
+        if (pairs.count() == 0)
+            setCurrentRectangles(QList<GraphicsRectangleItem*>(), event->pos(), 0, 0);
         else
         {
-            /// Search other rectangles to select
-
-            // Rectangles under the mouse
-            QList<GraphicsRectangleItem *> rectanglesUnderMouse;
-            foreach (GraphicsRectangleItem * item, _rectangles)
-                if (item->contains(this->mapToScene(event->pos())))
-                    rectanglesUnderMouse << item;
-
-            // Sort them by pairs
-            QList<QList<GraphicsRectangleItem*> > pairs;
-            while (!rectanglesUnderMouse.isEmpty())
-            {
-                QList<GraphicsRectangleItem*> listTmp;
-                listTmp << rectanglesUnderMouse.takeFirst();
-                EltID idBrother = listTmp[0]->findBrother();
-                foreach (GraphicsRectangleItem* item, rectanglesUnderMouse)
-                {
-                    if (*item == idBrother)
-                    {
-                        listTmp << item;
-                        rectanglesUnderMouse.removeOne(item);
-                        break;
-                    }
-                }
-                pairs << listTmp;
-            }
-
             // Current index of the pair
             int index = -1;
             for (int i = 0; i < pairs.count(); i++)
                 if (pairs[i].contains(_currentRectangles.first()))
                     index = i;
 
-            setCurrentRectangles(pairs[(index + 1) % pairs.count()], event->pos());
+            // Next index?
+            if (!_moveOccured || index == -1)
+                index = (index + 1) % pairs.count();
+
+            // Display selection
+            setCurrentRectangles(pairs[index], event->pos(), index, pairs.count());
         }
     }
 
@@ -360,36 +343,30 @@ void GraphicsViewRange::mouseMoveEvent(QMouseEvent *event)
         }
 
         // Rectangles under the mouse
-        QList<GraphicsRectangleItem *> rectanglesUnderMouse;
-        foreach (GraphicsRectangleItem * item, _rectangles)
-            if (item->contains(this->mapToScene(event->pos())))
-                rectanglesUnderMouse << item;
-
-        // Current selection already within the rectangles?
-        bool alreadySelected = !_currentRectangles.isEmpty();
-        foreach (GraphicsRectangleItem * item, _currentRectangles)
-            alreadySelected &= rectanglesUnderMouse.contains(item);
+        QList<QList<GraphicsRectangleItem *> > pairs = getRectanglesUnderMouse(event->pos());
 
         QList<GraphicsRectangleItem*> rectanglesToSelect;
-        if (alreadySelected)
-            rectanglesToSelect = _currentRectangles;
-        else
+        int selectionIndex = 0;
+        int selectionNumber = pairs.count();
+        if (selectionNumber > 0)
         {
-            if (!rectanglesUnderMouse.isEmpty())
+            // Current selection already within the rectangles?
+            for (int i = 0; i < pairs.count(); i++)
             {
-                // Select the first element with its brother if any
-                rectanglesToSelect << rectanglesUnderMouse.first();
-                EltID idBrother = rectanglesToSelect[0]->findBrother();
-                if (idBrother.typeElement == elementInstSmpl)
+                bool ok = !pairs[i].isEmpty();
+                foreach (GraphicsRectangleItem * item, _currentRectangles)
+                    ok &= pairs[i].contains(item);
+                if (ok)
                 {
-                    foreach (GraphicsRectangleItem * item, rectanglesUnderMouse)
-                        if (*item == idBrother)
-                            rectanglesToSelect << item;
+                    selectionIndex = i;
+                    break;
                 }
             }
+
+            rectanglesToSelect = pairs[selectionIndex];
         }
 
-        setCurrentRectangles(rectanglesToSelect, event->pos());
+        setCurrentRectangles(rectanglesToSelect, event->pos(), selectionIndex, selectionNumber);
     }
     }
 }
@@ -512,7 +489,38 @@ void GraphicsViewRange::setZoomLine(double x1Norm, double y1Norm, double x2Norm,
     }
 }
 
-void GraphicsViewRange::setCurrentRectangles(QList<GraphicsRectangleItem*> rectanglesToSelect, const QPoint &point)
+QList<QList<GraphicsRectangleItem*> > GraphicsViewRange::getRectanglesUnderMouse(QPoint mousePos)
+{
+    // Rectangles under the mouse
+    QList<GraphicsRectangleItem *> rectanglesUnderMouse;
+    foreach (GraphicsRectangleItem * item, _rectangles)
+        if (item->contains(this->mapToScene(mousePos)))
+            rectanglesUnderMouse << item;
+
+    // Sort them by pairs
+    QList<QList<GraphicsRectangleItem*> > pairs;
+    while (!rectanglesUnderMouse.isEmpty())
+    {
+        QList<GraphicsRectangleItem*> listTmp;
+        listTmp << rectanglesUnderMouse.takeFirst();
+        EltID idBrother = listTmp[0]->findBrother();
+        foreach (GraphicsRectangleItem* item, rectanglesUnderMouse)
+        {
+            if (*item == idBrother)
+            {
+                listTmp << item;
+                rectanglesUnderMouse.removeOne(item);
+                break;
+            }
+        }
+        pairs << listTmp;
+    }
+
+    return pairs;
+}
+
+void GraphicsViewRange::setCurrentRectangles(QList<GraphicsRectangleItem*> rectanglesToSelect, const QPoint &point,
+                                             int selectionIndex, int selectionNumber)
 {
     // Update the colors
     foreach (GraphicsRectangleItem * item, _currentRectangles)
@@ -525,7 +533,7 @@ void GraphicsViewRange::setCurrentRectangles(QList<GraphicsRectangleItem*> recta
     _currentRectangles = rectanglesToSelect;
 
     // Update legend text
-    updateLegend();
+    updateLegend(selectionIndex, selectionNumber);
 
     viewport()->update();
 }
