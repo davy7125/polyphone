@@ -28,7 +28,7 @@
 
 QPen   GraphicsRectangleItem::s_penBorderThin         = QPen  (QColor(100, 170, 140, 180), 1);
 QPen   GraphicsRectangleItem::s_penBorderFat          = QPen  (QColor(100, 170, 140, 255), 3);
-QBrush GraphicsRectangleItem::s_brushRectangle        = QBrush(QColor( 70, 220, 100,  50));
+QBrush GraphicsRectangleItem::s_brushRectangle        = QBrush(QColor(  0, 200, 100,  60));
 QBrush GraphicsRectangleItem::s_brushRectangleHovered = QBrush(QColor( 70, 255, 100, 120));
 Pile_sf2 * GraphicsRectangleItem::s_sf2 = NULL;
 
@@ -102,7 +102,7 @@ bool GraphicsRectangleItem::contains(const QPointF &point) const
     return rectF.left() <= point.x() && point.x() < rectF.right() &&
             rectF.top() < point.y() && point.y() < rectF.bottom();
 }
-#include <QApplication>
+
 void GraphicsRectangleItem::paint(QPainter *painter, const QStyleOptionGraphicsItem * option, QWidget * widget)
 {
     // Draw base rectangle with a background color and a thin border
