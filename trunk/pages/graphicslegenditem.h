@@ -35,7 +35,6 @@ class GraphicsLegendItem : public QGraphicsItem
 public:
     GraphicsLegendItem(QString fontFamily, QGraphicsItem *parent = NULL);
     static void initSf2(Pile_sf2 * sf2) { s_sf2 = sf2; }
-    ~GraphicsLegendItem();
 
     void setIds(QList<EltID> ids, int selectionIndex, int selectionNumber);
     void setLeft(bool isLeft);
