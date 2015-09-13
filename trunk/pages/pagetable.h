@@ -139,6 +139,7 @@ protected slots:
     void actionBegin();
     void actionFinished();
     void updateKeyboard();
+    void selectInTree(QList<EltID> ids);
 
 private slots:
     void paramGlobal(QVector<double> dValues, int typeModif, int champ, int velMin, int velMax);

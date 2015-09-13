@@ -51,6 +51,7 @@ signals:
     void updateKeyboard();
     void keyTriggered(int key, int velocity);
     void divisionUpdated();
+    void divisionsSelected(QList<EltID> divisions);
 
 protected:
     void resizeEvent(QResizeEvent * event);

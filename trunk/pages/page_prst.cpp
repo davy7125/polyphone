@@ -89,6 +89,7 @@ Page_Prst::Page_Prst(QWidget *parent) :
     connect(ui->rangeEditor, SIGNAL(updateKeyboard()), this, SLOT(updateKeyboard()));
     connect(ui->rangeEditor, SIGNAL(divisionUpdated()), this, SLOT(updateMainwindow()));
     connect(ui->rangeEditor, SIGNAL(keyTriggered(int,int)), this, SLOT(playKey(int, int)));
+    connect(ui->rangeEditor, SIGNAL(divisionsSelected(QList<EltID>)), this, SLOT(selectInTree(QList<EltID>)));
 }
 Page_Prst::~Page_Prst()
 {

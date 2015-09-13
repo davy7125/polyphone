@@ -255,6 +255,14 @@ void GraphicsViewRange::mousePressEvent(QMouseEvent *event)
         _zoomYinit = _zoomY;
         _posXinit = _posX;
         _posYinit = _posY;
+
+        if (event->button() == Qt::LeftButton)
+        {
+            QList<EltID> ids;
+            foreach (GraphicsRectangleItem * item, _currentRectangles)
+                ids << item->getID();
+            divisionsSelected(ids);
+        }
     }
 
     _moveOccured = false;
@@ -314,9 +322,9 @@ void GraphicsViewRange::mouseReleaseEvent(QMouseEvent *event)
 
         _legendItem2->setNewValues(-1, 0, 0, 0);
         this->setZoomLine(-1, 0, 0, 0);
-        _buttonPressed = Qt::NoButton;
     }
 
+    _buttonPressed = Qt::NoButton;
     viewport()->update();
 }
 

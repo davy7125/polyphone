@@ -29,18 +29,24 @@
 #include <QBrush>
 #include <QPen>
 
-class GraphicsKey : public QGraphicsItem
+class GraphicsKey : public QObject, public QGraphicsItem
 {
+    Q_OBJECT
+
 public:
     GraphicsKey(QGraphicsItem *parent = NULL);
 
     QRectF boundingRect() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem * option, QWidget * widget = NULL);
 
+private slots:
+    void updateColor();
+
 private:
-    static const int RADIUS;
-    static const QBrush BRUSH;
-    static const QPen PEN;
+    static const int s_radius;
+
+    QColor _colorBrush;
+    QColor _colorPen;
 };
 
 #endif // GRAPHICSKEY_H
