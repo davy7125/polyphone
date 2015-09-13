@@ -31,6 +31,7 @@
 class GraphicsSimpleTextItem;
 class GraphicsRectangleItem;
 class GraphicsLegendItem;
+class GraphicsLegendItem2;
 class GraphicsZoomLine;
 class GraphicsKey;
 
@@ -63,7 +64,6 @@ protected:
 private:
     void initItems();
     void updateLabels();
-    void updateLegend(int selectionIndex, int selectionNumber);
     QList<QList<GraphicsRectangleItem*> > getRectanglesUnderMouse(QPoint mousePos);
     void setCurrentRectangles(QList<GraphicsRectangleItem*> rectanglesToSelect, const QPoint &point, int selectionIndex, int selectionNumber);
     QRectF getCurrentRect();
@@ -76,6 +76,7 @@ private:
     QList<GraphicsRectangleItem *> _currentRectangles;
     QList<GraphicsSimpleTextItem *> _leftLabels, _bottomLabels;
     GraphicsLegendItem * _legendItem;
+    GraphicsLegendItem2 * _legendItem2;
     GraphicsZoomLine * _zoomLine;
     QMap<int, GraphicsKey*> _mapGraphicsKeys;
 

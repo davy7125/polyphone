@@ -48,6 +48,11 @@ public:
     bool operator==(const GraphicsRectangleItem& other) { return (_id == other._id); }
     bool operator==(const EltID &id) { return _id == id; }
 
+    int currentMinKey() { return _minKey; }
+    int currentMaxKey() { return _maxKey; }
+    int currentMinVel() { return _minVel; }
+    int currentMaxVel() { return _maxVel; }
+
 private:
     enum EditingMode
     {

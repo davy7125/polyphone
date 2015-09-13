@@ -39,8 +39,6 @@ GraphicsLegendItem::GraphicsLegendItem(QString fontFamily, QGraphicsItem * paren
     setLeft(true);
 }
 
-GraphicsLegendItem::~GraphicsLegendItem() {}
-
 void GraphicsLegendItem::setLeft(bool isLeft)
 {
     if (isLeft)
@@ -62,6 +60,14 @@ void GraphicsLegendItem::setIds(QList<EltID> ids, int selectionIndex, int select
     _text.clear();
     if (!ids.isEmpty())
     {
+        // First id and global division
+        EltID id = ids.first();
+        EltID idGlobal = id;
+        if (idGlobal.typeElement == elementInstSmpl)
+            idGlobal.typeElement = elementInst;
+        else
+            idGlobal.typeElement = elementPrst;
+
         // Name of the divisions
         foreach (EltID id, ids)
         {
@@ -79,26 +85,43 @@ void GraphicsLegendItem::setIds(QList<EltID> ids, int selectionIndex, int select
             _text << s_sf2->getQstr(idLink, champ_name);
         }
 
-        // Key and velocity range
-        EltID id = ids.first();
+        // Key range
+        int minKey = 0;
+        int maxKey = 127;
         if (s_sf2->isSet(id, champ_keyRange))
         {
             rangesType range = s_sf2->get(id, champ_keyRange).rValue;
-            _text << QObject::trUtf8("Étendue note :") + " " +
-                     Config::getInstance()->getKeyName(range.byLo) + " - " +
-                     Config::getInstance()->getKeyName(range.byHi);
+            minKey = range.byLo;
+            maxKey = range.byHi;
         }
-        else
-            _text << QObject::trUtf8("Étendue note :") + " -";
+        else if (s_sf2->isSet(idGlobal, champ_keyRange))
+        {
+            rangesType range = s_sf2->get(idGlobal, champ_keyRange).rValue;
+            minKey = range.byLo;
+            maxKey = range.byHi;
+        }
+        _text << QObject::trUtf8("Étendue note :") + " " +
+                 Config::getInstance()->getKeyName(minKey) + " - " +
+                 Config::getInstance()->getKeyName(maxKey);
+
+        // Velocity range
+        int minVel = 0;
+        int maxVel = 127;
         if (s_sf2->isSet(id, champ_velRange))
         {
             rangesType range = s_sf2->get(id, champ_velRange).rValue;
-            _text << QObject::trUtf8("Étendue vélocité :") + " " +
-                     QString::number(range.byLo) + " - " +
-                     QString::number(range.byHi);
+            minVel = range.byLo;
+            maxVel = range.byHi;
         }
-        else
-            _text << QObject::trUtf8("Étendue vélocité :") + " -" ;
+        else if (s_sf2->isSet(idGlobal, champ_velRange))
+        {
+            rangesType range = s_sf2->get(idGlobal, champ_velRange).rValue;
+            minVel = range.byLo;
+            maxVel = range.byHi;
+        }
+        _text << QObject::trUtf8("Étendue vélocité :") + " " +
+                 QString::number(minVel) + " - " +
+                 QString::number(maxVel);
     }
 }
 

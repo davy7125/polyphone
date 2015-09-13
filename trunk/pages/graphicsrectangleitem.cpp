@@ -28,7 +28,7 @@
 
 QPen   GraphicsRectangleItem::s_penBorderThin         = QPen  (QColor(100, 170, 140, 180), 1);
 QPen   GraphicsRectangleItem::s_penBorderFat          = QPen  (QColor(100, 170, 140, 255), 3);
-QBrush GraphicsRectangleItem::s_brushRectangle        = QBrush(QColor( 70, 180, 100,  50));
+QBrush GraphicsRectangleItem::s_brushRectangle        = QBrush(QColor( 70, 220, 100,  50));
 QBrush GraphicsRectangleItem::s_brushRectangleHovered = QBrush(QColor( 70, 255, 100, 120));
 Pile_sf2 * GraphicsRectangleItem::s_sf2 = NULL;
 

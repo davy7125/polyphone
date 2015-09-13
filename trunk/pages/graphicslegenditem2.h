@@ -22,24 +22,40 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef GRAPHICSZOOMLINE_H
-#define GRAPHICSZOOMLINE_H
+#ifndef GRAPHICSLEGENDITEM2_H
+#define GRAPHICSLEGENDITEM2_H
 
 #include <QGraphicsItem>
-#include <QPen>
+#include <QBrush>
+#include <QFont>
 
-class GraphicsZoomLine : public QGraphicsItem
+class GraphicsLegendItem2 : public QGraphicsItem
 {
 public:
-    GraphicsZoomLine(QGraphicsItem *parent = NULL);
+    GraphicsLegendItem2(QString fontFamily, QGraphicsItem *parent = NULL);
 
-    void setSize(double x, double y);
+    void setNewValues(int minKey, int maxKey, int minVel, int maxVel);
+    void setLeft(bool isLeft);
+    void setOffsetY(double offsetY) { _offsetY = offsetY; }
+    bool isLeft();
+
     QRectF boundingRect() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem * option, QWidget * widget = NULL);
 
 private:
-    double _x, _y;
-    static const QPen s_penLine;
+    static const int s_border;
+    static const QBrush s_foregroundBrush;
+    static const QPen s_borderPen;
+    static const QPen s_textPen;
+
+    const QFont _font;
+    QStringList _text;
+    int _alignment;
+    double _offsetY;
+
+    QSizeF getTextSize() const;
+    qreal dx(QSizeF size) const;
+    qreal dy(QSizeF size) const;
 };
 
-#endif // GRAPHICSZOOMLINE_H
+#endif // GRAPHICSLEGENDITEM2_H
