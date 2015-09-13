@@ -32,7 +32,8 @@ const QPen   GraphicsLegendItem::s_borderPen       = QPen(QColor(100, 120, 180, 
 const QPen   GraphicsLegendItem::s_textPen         = QPen(QColor(50, 70, 100), 1, Qt::SolidLine);
 
 GraphicsLegendItem::GraphicsLegendItem(QString fontFamily, QGraphicsItem * parent) : QGraphicsItem(parent),
-    _font(fontFamily, 8)
+    _font(fontFamily, 8),
+    _smallFont(fontFamily, 6)
 {
     this->setFlag(QGraphicsItem::ItemIgnoresTransformations);
     setLeft(true);
@@ -53,8 +54,11 @@ bool GraphicsLegendItem::isLeft()
     return (_alignment & Qt::AlignLeft) != 0;
 }
 
-void GraphicsLegendItem::setIds(QList<EltID> ids)
+void GraphicsLegendItem::setIds(QList<EltID> ids, int selectionIndex, int selectionNumber)
 {
+    _selectionIndex = selectionIndex;
+    _selectionNumber = selectionNumber;
+
     _text.clear();
     if (!ids.isEmpty())
     {
@@ -125,8 +129,15 @@ void GraphicsLegendItem::paint(QPainter *painter, const QStyleOptionGraphicsItem
     painter->setFont(_font);
     QFontMetrics fm(_font);
     for (int i = 0; i < _text.count(); i++)
-    {
         painter->drawText(QPoint(s_border, fm.height() * (i + 1)), _text.at(i));
+
+    if (_selectionNumber > 1)
+    {
+        painter->setFont(_smallFont);
+        QString text = QString::number(_selectionIndex + 1) + " / " + QString::number(_selectionNumber);
+        double posY = fm.height() * (_text.count() + 1) + 3;
+        double posX = 0.5 * (size.width() - QFontMetrics(_smallFont).width(text));
+        painter->drawText(QPointF(posX, posY), text);
     }
 }
 
@@ -142,6 +153,9 @@ QSizeF GraphicsLegendItem::getTextSize() const
     foreach (QString line, _text)
         width = qMax(width, fm.width(line));
     width += 2 * s_border;
+
+    if (_selectionNumber > 1)
+        height += fm.height();
 
     return QSizeF(width, height);
 }

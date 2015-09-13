@@ -63,8 +63,9 @@ protected:
 private:
     void initItems();
     void updateLabels();
-    void updateLegend();
-    void setCurrentRectangles(QList<GraphicsRectangleItem*> rectanglesToSelect, const QPoint &point);
+    void updateLegend(int selectionIndex, int selectionNumber);
+    QList<QList<GraphicsRectangleItem*> > getRectanglesUnderMouse(QPoint mousePos);
+    void setCurrentRectangles(QList<GraphicsRectangleItem*> rectanglesToSelect, const QPoint &point, int selectionIndex, int selectionNumber);
     QRectF getCurrentRect();
 
     Pile_sf2 * _sf2;
