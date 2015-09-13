@@ -177,6 +177,8 @@ public:
     QSize sizeHint() const;
     double ratio() const;
 
+    void triggerNote(int key, int velocity);
+
 signals:
     void noteOn(int midiNote, int vel);
     void noteOff(int midiNote);

@@ -65,8 +65,8 @@ class Page_Sf2 : public Page
 {
     Q_OBJECT
 public:
-    explicit Page_Sf2(MainWindow *mainWindow, Tree *tree, QStackedWidget *qStackedWidget,
-                      Pile_sf2 * sf2, Synth * synth, QWidget *parent = 0);
+    explicit Page_Sf2(MainWindow *_mainWindow, Tree *_tree, QStackedWidget *_qStackedWidget,
+                      Pile_sf2 * _sf2, Synth * _synth, QWidget *parent = 0);
     ~Page_Sf2();
     void afficher();
     void compte(int &unusedSmpl, int &unusedInst, int &usedSmpl, int &usedInst, int &usedPrst, int &instGen, int &prstGen);

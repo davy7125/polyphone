@@ -355,6 +355,7 @@ void MainWindow::resizeEvent(QResizeEvent * event)
 #endif
     this->setWindowTitle(titre);
 }
+
 void MainWindow::keyPressEvent(QKeyEvent * event)
 {
     if (event->modifiers() & Qt::ControlModifier && event->key() == Qt::Key_K)
@@ -365,6 +366,12 @@ void MainWindow::keyPressEvent(QKeyEvent * event)
     }
     QMainWindow::keyPressEvent(event);
 }
+
+void MainWindow::triggerNote(int key, int velocity)
+{
+    ui->widgetKeyboard->triggerNote(key, velocity);
+}
+
 void MainWindow::spaceKeyPressedInTree()
 {
     if (ui->stackedWidget->currentWidget() == page_smpl)
@@ -2747,19 +2754,27 @@ void MainWindow::setAudioDevice(int audioDevice, int index, int bufferSize)
     this->synth->setBufferSize(2 * bufferSize);
     emit(initAudio(audioDevice, index, bufferSize));
 }
+
 void MainWindow::onAudioConnectionDone()
 {
     Config::getInstance()->storeAudioConfig();
 }
+
 QStringList MainWindow::getListMidi()
 {
     return ui->widgetKeyboard->getPortNames();
 }
+
 void MainWindow::openMidiPort(int val)
 {
     ui->widgetKeyboard->openMidiPort(val);
 }
-void MainWindow::noteOff(int key)   { noteChanged(key, 0); }
+
+void MainWindow::noteOff(int key)
+{
+    noteChanged(key, 0);
+}
+
 void MainWindow::noteHover(int key, int vel)
 {
     if (_currentKey == -1)
@@ -2788,12 +2803,14 @@ void MainWindow::setSustain(bool isOn)
         }
     }
 }
+
 void MainWindow::setVolume(int vol)
 {
     vol = (double)vol / 127. * 101. - 50.5;
     configuration->setVolume(vol);
     setSynthGain(vol);
 }
+
 void MainWindow::noteChanged(int key, int vel)
 {
     // Note hover
@@ -2812,8 +2829,8 @@ void MainWindow::noteChanged(int key, int vel)
     if (key != -1)
     {
         // Mise en évidence de la ou des éléments liés étant en train de jouer
-        this->page_inst->enlightColumn(key, vel != 0);
-        this->page_prst->enlightColumn(key, vel != 0);
+        this->page_inst->keyPlayed(key, vel);
+        this->page_prst->keyPlayed(key, vel);
     }
 
     if (vel)
@@ -2922,22 +2939,27 @@ void MainWindow::noteChanged(int key, int vel)
         }
     }
 }
+
 void MainWindow::setSynthGain(int val)
 {
     this->synth->setGain(val);
 }
+
 void MainWindow::setSynthReverb(int level, int size, int width, int damping)
 {
     this->synth->setReverb(level, size, width, damping);
 }
+
 void MainWindow::setSynthChorus(int level, int depth, int frequency)
 {
     this->synth->setChorus(level, depth, frequency);
 }
+
 void MainWindow::setRangeAndRootKey(int rootKey, int noteMin, int noteMax)
 {
     ui->widgetKeyboard->setRangeAndRootKey(rootKey, noteMin, noteMax);
 }
+
 void MainWindow::clearKeyboardCustomisation()
 {
     ui->widgetKeyboard->clearCustomization();

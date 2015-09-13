@@ -51,20 +51,20 @@ void PageOverviewSmpl::prepare(EltID id)
     _usedSmpl.clear();
 
     id.typeElement = elementInst;
-    int nbElt = sf2->count(id);
+    int nbElt = _sf2->count(id);
     for (int i = 0; i < nbElt; i++)
     {
         id.indexElt = i;
-        if (!sf2->get(id, champ_hidden).bValue)
+        if (!_sf2->get(id, champ_hidden).bValue)
         {
             EltID idSubElt = id;
             idSubElt.typeElement = elementInstSmpl;
-            int nbSubElt = sf2->count(idSubElt);
+            int nbSubElt = _sf2->count(idSubElt);
             for (int j = 0; j < nbSubElt; j++)
             {
                 idSubElt.indexElt2 = j;
-                if (!sf2->get(idSubElt, champ_hidden).bValue)
-                    _usedSmpl << sf2->get(idSubElt, champ_sampleID).wValue;
+                if (!_sf2->get(idSubElt, champ_hidden).bValue)
+                    _usedSmpl << _sf2->get(idSubElt, champ_sampleID).wValue;
             }
         }
     }
@@ -91,16 +91,16 @@ QString PageOverviewSmpl::isUsed(EltID id)
 
 QString PageOverviewSmpl::totalLength(EltID id)
 {
-    quint32 length = sf2->get(id, champ_dwLength).dwValue;
-    quint32 sampleRate = sf2->get(id, champ_dwSampleRate).dwValue;
+    quint32 length = _sf2->get(id, champ_dwLength).dwValue;
+    quint32 sampleRate = _sf2->get(id, champ_dwSampleRate).dwValue;
     return QString::number((double)length / sampleRate, 'f', 3) + trUtf8("s", "unit for seconds");
 }
 
 QString PageOverviewSmpl::loopLength(EltID id)
 {
-    quint32 startLoop = sf2->get(id, champ_dwStartLoop).dwValue;
-    quint32 endLoop = sf2->get(id, champ_dwEndLoop).dwValue;
-    quint32 sampleRate = sf2->get(id, champ_dwSampleRate).dwValue;
+    quint32 startLoop = _sf2->get(id, champ_dwStartLoop).dwValue;
+    quint32 endLoop = _sf2->get(id, champ_dwEndLoop).dwValue;
+    quint32 sampleRate = _sf2->get(id, champ_dwSampleRate).dwValue;
     if (startLoop != endLoop)
         return QString::number((double)(endLoop - startLoop) / sampleRate, 'f', 3) + trUtf8("s", "unit for seconds");
     else
@@ -109,19 +109,19 @@ QString PageOverviewSmpl::loopLength(EltID id)
 
 QString PageOverviewSmpl::rootKey(EltID id)
 {
-    return Config::getInstance()->getKeyName(sf2->get(id, champ_byOriginalPitch).bValue);
+    return Config::getInstance()->getKeyName(_sf2->get(id, champ_byOriginalPitch).bValue);
 }
 
 QString PageOverviewSmpl::correction(EltID id)
 {
-    return QString::number(sf2->get(id, champ_chPitchCorrection).cValue);
+    return QString::number(_sf2->get(id, champ_chPitchCorrection).cValue);
 }
 
 QString PageOverviewSmpl::type(EltID id)
 {
     QString type;
 
-    switch (sf2->get(id, champ_sfSampleType).sfLinkValue)
+    switch (_sf2->get(id, champ_sfSampleType).sfLinkValue)
     {
     case linkInvalid:
         type = trUtf8("Lien invalide");
@@ -145,16 +145,16 @@ QString PageOverviewSmpl::type(EltID id)
 
 QString PageOverviewSmpl::link(EltID id)
 {
-    SFSampleLink type = sf2->get(id, champ_sfSampleType).sfLinkValue;
+    SFSampleLink type = _sf2->get(id, champ_sfSampleType).sfLinkValue;
 
     if (type == monoSample || type == RomMonoSample)
         return "-";
     else
     {
         EltID id2 = id;
-        id2.indexElt = sf2->get(id, champ_wSampleLink).wValue;
-        if (sf2->isValide(id2))
-            return sf2->getQstr(id2, champ_name);
+        id2.indexElt = _sf2->get(id, champ_wSampleLink).wValue;
+        if (_sf2->isValide(id2))
+            return _sf2->getQstr(id2, champ_name);
         else
             return trUtf8("non valide");
     }

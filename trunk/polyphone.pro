@@ -205,7 +205,8 @@ SOURCES	+= main.cpp \
     sf2_core/oggconverter.cpp \
     pages/graphicslegenditem.cpp \
     pages/graphicsrectangleitem.cpp \
-    pages/graphicszoomline.cpp
+    pages/graphicszoomline.cpp \
+    pages/graphicskey.cpp
 
 HEADERS  += mainwindow.h \
     sf2_core/sf2_types.h \
@@ -282,7 +283,8 @@ HEADERS  += mainwindow.h \
     sf2_core/oggconverter.h \
     pages/graphicslegenditem.h \
     pages/graphicsrectangleitem.h \
-    pages/graphicszoomline.h
+    pages/graphicszoomline.h \
+    pages/graphicskey.h
 
 FORMS    += mainwindow.ui \
     gui_divers/config.ui \

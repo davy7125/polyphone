@@ -301,3 +301,11 @@ QKeySequence PianoKeybd::getMapping(Key key, int numOctave)
 {
     return m_keyboardMap->getMapping(key, numOctave);
 }
+
+void PianoKeybd::triggerNote(int key, int velocity)
+{
+    if (velocity > 0)
+        m_scene->keyNoteOn(key, velocity);
+    else
+        m_scene->keyNoteOff(key);
+}
