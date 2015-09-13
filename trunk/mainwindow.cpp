@@ -68,6 +68,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent, Qt::Window | Qt::W
 #ifdef Q_OS_MAC
     ui->verticalLayout_3->setSpacing(4);
 #endif
+
     // Taille max de l'application et restauration de l'état de la fenêtre
     this->setMaximumSize(QApplication::desktop()->size());
     restoreGeometry(configuration->getWindowGeometry());
@@ -582,6 +583,7 @@ void MainWindow::sauvegarder()
     EltID id = ui->arborescence->getFirstID();
     sauvegarder(id.indexSf2, 0);
 }
+
 void MainWindow::sauvegarderSous()
 {
     if (ui->arborescence->getSelectedItemsNumber() == 0) return;
@@ -589,6 +591,7 @@ void MainWindow::sauvegarderSous()
     EltID id = ui->arborescence->getFirstID();
     sauvegarder(id.indexSf2, 1);
 }
+
 int MainWindow::sauvegarder(int indexSf2, bool saveAs)
 {
     this->sf2->prepareNewActions();
@@ -679,6 +682,7 @@ int MainWindow::sauvegarder(int indexSf2, bool saveAs)
     }
     return 1;
 }
+
 void MainWindow::undo()
 {
     this->ui->arborescence->clearPastedID();
@@ -686,6 +690,7 @@ void MainWindow::undo()
     updateActions();
     updateDo();
 }
+
 void MainWindow::redo()
 {
     this->ui->arborescence->clearPastedID();
@@ -959,6 +964,7 @@ void MainWindow::updateDo()
 {
     // Suppressions des listes d'actions vides
     sf2->cleanActions();
+
     // Affichage undo / redo et titre
     if (sf2->isUndoable()) ui->actionAnnuler->setEnabled(1);
     else ui->actionAnnuler->setEnabled(0);

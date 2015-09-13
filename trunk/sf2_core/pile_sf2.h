@@ -349,8 +349,8 @@ private:
     // Supprime ou masque l'élément id. Si l'élément est utilisé par un autre : erreur
     int remove(EltID id, bool permanently, bool storeAction, int *message = NULL);
 
-    // Remove very old actions
-    void limitPreviousActions();
+    // Remove very old actions and previous actions that have been erased
+    void releaseActions(bool withVeryOldActions);
 
     // Type de fichier
     static FileType getFileType(QString fileName);

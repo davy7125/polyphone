@@ -693,7 +693,7 @@ int Pile_sf2::count(EltID id, bool withHidden)
 }
 
 // Gestionnaire d'actions
-void Pile_sf2::limitPreviousActions()
+void Pile_sf2::releaseActions(bool withVeryOldActions)
 {
     // suppression définitive des redo
     Pile_actions::Action *action;
@@ -707,6 +707,7 @@ void Pile_sf2::limitPreviousActions()
             {
                 // Suppression définitive de l'élément anciennement créé puis supprimé
                 this->remove(action->id, true, false);
+
                 // Mise à jour tableau
                 emit(updateTable((int)action->id.typeElement, action->id.indexSf2,
                                  action->id.indexElt, action->id.indexElt2));
@@ -716,47 +717,56 @@ void Pile_sf2::limitPreviousActions()
         // Suppression de la liste d'actions
         this->pileActions->supprimerRedo(i);
     }
-    // suppression définitive des undo après un certain nombre
-    for (int i = this->pileActions->nombreEltUndo()-1; i >= UNDO_NUMBER - 1; i--)
+
+    if (withVeryOldActions)
     {
-        // Parcours des actions en sens inverse
-        action = this->pileActions->getEltUndo(i);
-        for (int j = action->nombreElt() - 1; j >= 0; j--)
+        // suppression définitive des undo après un certain nombre
+        for (int i = this->pileActions->nombreEltUndo()-1; i >= UNDO_NUMBER - 1; i--)
         {
-            Pile_actions::Action * actionTmp = action->getElt(j);
-            if (actionTmp->typeAction == Pile_actions::actionSupprimer)
+            // Parcours des actions en sens inverse
+            action = this->pileActions->getEltUndo(i);
+            for (int j = action->nombreElt() - 1; j >= 0; j--)
             {
-                // Suppression définitive d'un élément supprimé depuis longtemps
-                int message = 1;
-                this->remove(actionTmp->id, true, false, &message);
-                // Mise à jour tableau
-                emit(updateTable((int)actionTmp->id.typeElement, actionTmp->id.indexSf2,
-                                 actionTmp->id.indexElt, actionTmp->id.indexElt2));
+                Pile_actions::Action * actionTmp = action->getElt(j);
+                if (actionTmp->typeAction == Pile_actions::actionSupprimer)
+                {
+                    // Suppression définitive d'un élément supprimé depuis longtemps
+                    int message = 1;
+                    this->remove(actionTmp->id, true, false, &message);
+
+                    // Mise à jour tableau
+                    emit(updateTable((int)actionTmp->id.typeElement, actionTmp->id.indexSf2,
+                                     actionTmp->id.indexElt, actionTmp->id.indexElt2));
+                }
             }
+
+            // Modification de l'édition du sf2 s'il n'a jamais été sauvegardé
+            action = this->pileActions->getEltUndo(i);
+            if (action)
+            {
+                if (this->sf2->getElt(action->id.indexSf2)->numEdition == -1)
+                    this->sf2->getElt(action->id.indexSf2)->numEdition = -2;
+            }
+            // Suppression de la liste d'actions
+            this->pileActions->supprimerUndo(i);
         }
-        // Modification de l'édition du sf2 s'il n'a jamais été sauvegardé
-        action = this->pileActions->getEltUndo(i);
-        if (action)
-        {
-            if (this->sf2->getElt(action->id.indexSf2)->numEdition == -1)
-                this->sf2->getElt(action->id.indexSf2)->numEdition = -2;
-        }
-        // Suppression de la liste d'actions
-        this->pileActions->supprimerUndo(i);
     }
 }
 
 void Pile_sf2::prepareNewActions(bool removeOldActions)
 {
-    if (removeOldActions)
-        limitPreviousActions();
+    releaseActions(removeOldActions);
 
     // Nouvelle action
     this->pileActions->nouvelleAction();
 }
+
 void Pile_sf2::cleanActions() {this->pileActions->cleanActions();}
+
 bool Pile_sf2::isUndoable() {return this->pileActions->isUndoable();}
+
 bool Pile_sf2::isRedoable() {return this->pileActions->isRedoable();}
+
 void Pile_sf2::undo()
 {
     Pile_actions::Action *action = this->pileActions->undo();

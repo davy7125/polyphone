@@ -164,6 +164,7 @@ void Pile_actions::cleanActions()
     }
     while (trouve);
 }
+
 double Pile_actions::getEdition(int indexSf2)
 {
     if (this->undoAction) return this->undoAction->edition->getEdition(indexSf2);
