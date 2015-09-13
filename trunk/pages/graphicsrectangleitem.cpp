@@ -182,7 +182,7 @@ EltID GraphicsRectangleItem::findBrother()
                 }
             }
 
-            // Application de la modification
+            // Return the brother if there is only one (no ambiguity)
             if (numBrothers == 1)
                 return idBrother;
             else
@@ -217,25 +217,31 @@ void GraphicsRectangleItem::saveChanges()
         idGlobal.typeElement = elementPrst;
 
     // Store the key range
-    if (_minKey == 0 && _maxKey == 127 && !s_sf2->isSet(idGlobal, champ_keyRange))
-        s_sf2->reset(_id, champ_keyRange);
-    else
+    if (_minKey != _minKeyInit || _maxKey != _maxKeyInit)
     {
-        Valeur value;
-        value.rValue.byLo = _minKey;
-        value.rValue.byHi = _maxKey;
-        s_sf2->set(_id, champ_keyRange, value);
+        if (_minKey == 0 && _maxKey == 127 && !s_sf2->isSet(idGlobal, champ_keyRange))
+            s_sf2->reset(_id, champ_keyRange);
+        else
+        {
+            Valeur value;
+            value.rValue.byLo = _minKey;
+            value.rValue.byHi = _maxKey;
+            s_sf2->set(_id, champ_keyRange, value);
+        }
     }
 
     // Store the velocity range
-    if (_minVel == 0 && _maxVel == 127 && !s_sf2->isSet(idGlobal, champ_velRange))
-        s_sf2->reset(_id, champ_velRange);
-    else
+    if (_minVel != _minVelInit || _maxVel != _maxVelInit)
     {
-        Valeur value;
-        value.rValue.byLo = _minVel;
-        value.rValue.byHi = _maxVel;
-        s_sf2->set(_id, champ_velRange, value);
+        if (_minVel == 0 && _maxVel == 127 && !s_sf2->isSet(idGlobal, champ_velRange))
+            s_sf2->reset(_id, champ_velRange);
+        else
+        {
+            Valeur value;
+            value.rValue.byLo = _minVel;
+            value.rValue.byHi = _maxVel;
+            s_sf2->set(_id, champ_velRange, value);
+        }
     }
 
     _minKeyInit = _minKey;

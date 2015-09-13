@@ -27,21 +27,27 @@
 #include "graphicssimpletextitem.h"
 #include "graphicsrectangleitem.h"
 #include "graphicslegenditem.h"
+#include "graphicszoomline.h"
 #include "mainwindow.h"
 #include <QScrollBar>
 
+const double GraphicsViewRange::WIDTH = 128.0;
+const double GraphicsViewRange::MARGIN = 0.5;
+const double GraphicsViewRange::OFFSET = -0.5;
+
 GraphicsViewRange::GraphicsViewRange(QWidget *parent) : QGraphicsView(parent),
-    _scene(new QGraphicsScene(-0.5, -0.5, 128, 128)),
+    _scene(new QGraphicsScene(OFFSET - MARGIN, OFFSET - MARGIN, WIDTH + 2 * MARGIN, WIDTH + 2 * MARGIN)),
     _legendItem(NULL),
+    _zoomLine(NULL),
     _dontRememberScroll(false),
     _buttonPressed(Qt::NoButton),
     _moveOccured(false),
     _mouseMode(MOUSE_MODE_NONE),
-    _zoomX(1),
-    _zoomY(1),
+    _zoomX(1.),
+    _zoomY(1.),
     _posX(0.5),
     _posY(0.5),
-    _displayedRect(-0.5, -0.5, 128, 128)
+    _displayedRect(OFFSET, OFFSET, WIDTH, WIDTH)
 {
     // Configuration
     this->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
@@ -49,9 +55,9 @@ GraphicsViewRange::GraphicsViewRange(QWidget *parent) : QGraphicsView(parent),
     this->setRenderHint(QPainter::Antialiasing, true);
     this->setMouseTracking(true);
 
-    // Preparation graphique
+    // Preparation of the graphics
     this->setScene(_scene);
-    this->initGridAndAxes();
+    this->initItems();
 }
 
 GraphicsViewRange::~GraphicsViewRange()
@@ -64,9 +70,10 @@ GraphicsViewRange::~GraphicsViewRange()
     while (!_bottomLabels.isEmpty())
         delete _bottomLabels.takeFirst();
     delete _legendItem;
+    delete _zoomLine;
 }
 
-void GraphicsViewRange::initGridAndAxes()
+void GraphicsViewRange::initItems()
 {
     QColor lineColor(220, 220, 220);
     QColor textColor(100, 100, 100);
@@ -76,7 +83,7 @@ void GraphicsViewRange::initGridAndAxes()
     penVerticalLines.setCosmetic(true);
     for (int note = 12; note <= 120; note += 12)
     {
-        QGraphicsLineItem * line = new QGraphicsLineItem(note, -0.5, note, 127.5);
+        QGraphicsLineItem * line = new QGraphicsLineItem(note, OFFSET - MARGIN, note, OFFSET + WIDTH + MARGIN);
         line->setPen(penVerticalLines);
         line->setZValue(0);
         _scene->addItem(line);
@@ -84,7 +91,7 @@ void GraphicsViewRange::initGridAndAxes()
         text->setZValue(0);
         text->setBrush(textColor);
         text->setText(Config::getInstance()->getKeyName(note));
-        text->setPos(note, 127.5);
+        text->setPos(note, OFFSET + WIDTH);
         _bottomLabels << text;
     }
 
@@ -93,7 +100,7 @@ void GraphicsViewRange::initGridAndAxes()
     penHorizontalLines.setCosmetic(true);
     for (int vel = 10; vel <= 120; vel += 10)
     {
-        QGraphicsLineItem * line = new QGraphicsLineItem(-0.5, 127 - vel, 127.5, 127 - vel);
+        QGraphicsLineItem * line = new QGraphicsLineItem(OFFSET - MARGIN, 127 - vel, OFFSET + WIDTH + MARGIN, 127 - vel);
         line->setPen(penHorizontalLines);
         line->setZValue(0);
         _scene->addItem(line);
@@ -101,7 +108,7 @@ void GraphicsViewRange::initGridAndAxes()
         text->setZValue(0);
         text->setBrush(textColor);
         text->setText(QString::number(vel));
-        text->setPos(-0.5, 127.5 - vel);
+        text->setPos(OFFSET, OFFSET + WIDTH - vel);
         _leftLabels << text;
     }
 
@@ -109,6 +116,11 @@ void GraphicsViewRange::initGridAndAxes()
     _legendItem = new GraphicsLegendItem(this->font().family());
     _scene->addItem(_legendItem);
     _legendItem->setZValue(50);
+
+    // Zoomline
+    _zoomLine = new GraphicsZoomLine();
+    _scene->addItem(_zoomLine);
+    _zoomLine->setZValue(40);
 }
 
 void GraphicsViewRange::updateLabels()
@@ -118,16 +130,18 @@ void GraphicsViewRange::updateLabels()
 
     // Update the position of the axis labels (they stay to the left and bottom)
     foreach (GraphicsSimpleTextItem * label, _leftLabels)
-        label->setX(qMax(-0.5, rect.x()));
+        label->setX(qMax(OFFSET, rect.x()));
     foreach (GraphicsSimpleTextItem * label, _bottomLabels)
-        label->setY(qMin(127.5, rect.y() + rect.height()));
+        label->setY(qMin(WIDTH + OFFSET, rect.y() + rect.height()));
 
     // Update the position of the legend (it stays in a corner)
     if (_legendItem->isLeft())
-        _legendItem->setX(35. * rect.width() / this->width() + qMax(-0.5, rect.x()));
+        _legendItem->setX(35. * rect.width() / this->width() + qMax(OFFSET, rect.x()));
     else
-        _legendItem->setX(qMin(127.5, rect.x() + rect.width()) - 5. * rect.width() / this->width());
-    _legendItem->setY(5. * rect.height() / this->height() + qMax(-0.5, rect.y()));
+        _legendItem->setX(qMin(WIDTH + OFFSET, rect.x() + rect.width()) - 5. * rect.width() / this->width());
+    _legendItem->setY(5. * rect.height() / this->height() + qMax(OFFSET, rect.y()));
+
+    viewport()->update();
 }
 
 void GraphicsViewRange::init(Pile_sf2 * sf2, MainWindow * mainWindow)
@@ -183,16 +197,16 @@ void GraphicsViewRange::mousePressEvent(QMouseEvent *event)
         return;
 
     // Update current position
-    double deltaX = 128 - _displayedRect.width();
+    double deltaX = WIDTH - _displayedRect.width();
     if (deltaX == 0)
         _posX = 0.5;
     else
-        _posX = (_displayedRect.left() + 0.5) / deltaX;
-    double deltaY = 128 - _displayedRect.height();
+        _posX = (_displayedRect.left() - OFFSET) / deltaX;
+    double deltaY = WIDTH - _displayedRect.height();
     if (deltaY == 0)
         _posY = 0.5;
     else
-        _posY = (_displayedRect.top() + 0.5) / deltaY;
+        _posY = (_displayedRect.top() - OFFSET) / deltaY;
 
     // Remember situation
     _xInit = normalizeX(event->x());
@@ -266,6 +280,7 @@ void GraphicsViewRange::mouseReleaseEvent(QMouseEvent *event)
     this->setCursor(Qt::ArrowCursor);
     _mouseMode = MOUSE_MODE_NONE;
     _buttonPressed = Qt::NoButton;
+    viewport()->update();
 }
 
 void GraphicsViewRange::mouseMoveEvent(QMouseEvent *event)
@@ -353,14 +368,14 @@ void GraphicsViewRange::scrollContentsBy(int dx, int dy)
     _displayedRect = getCurrentRect();
 
     // Limits
-    if (_displayedRect.left() < -0.5)
-        _displayedRect.setLeft(-0.5);
-    if (_displayedRect.right() > 127.5)
-        _displayedRect.setRight(127.5);
-    if (_displayedRect.top() < -0.5)
-        _displayedRect.setTop(-0.5);
-    if (_displayedRect.bottom() > 127.5)
-        _displayedRect.setBottom(127.5);
+    if (_displayedRect.left() < OFFSET)
+        _displayedRect.setLeft(OFFSET);
+    if (_displayedRect.right() > WIDTH + OFFSET)
+        _displayedRect.setRight(WIDTH + OFFSET);
+    if (_displayedRect.top() < OFFSET)
+        _displayedRect.setTop(OFFSET);
+    if (_displayedRect.bottom() > WIDTH + OFFSET)
+        _displayedRect.setBottom(WIDTH + OFFSET);
 
     updateLabels();
 }
@@ -424,10 +439,10 @@ void GraphicsViewRange::zoomDrag()
         _posY = 1;
 
     // Application du drag et zoom
-    double etendueX = _scene->width() / _zoomX;
-    double offsetX = (_scene->width() - etendueX) * _posX - 0.5;
-    double etendueY = _scene->height() / _zoomY;
-    double offsetY = (_scene->height() - etendueY) * _posY - 0.5;
+    double etendueX = WIDTH / _zoomX;
+    double offsetX = (WIDTH - etendueX) * _posX + OFFSET;
+    double etendueY = WIDTH / _zoomY;
+    double offsetY = (WIDTH - etendueY) * _posY + OFFSET;
     _displayedRect.setRect(offsetX, offsetY, etendueX, etendueY);
 
     // Mise à jour
@@ -437,12 +452,22 @@ void GraphicsViewRange::zoomDrag()
     updateLabels();
 }
 
-void GraphicsViewRange::setZoomLine(double x1, double y1, double x2, double y2)
+void GraphicsViewRange::setZoomLine(double x1Norm, double y1Norm, double x2Norm, double y2Norm)
 {
-    Q_UNUSED(x1)
-    Q_UNUSED(y1)
-    Q_UNUSED(x2)
-    Q_UNUSED(y2)
+    if (x1Norm < 0)
+        _zoomLine->setSize(0, 0);
+    else
+    {
+        QRectF rect = getCurrentRect();
+
+        // Initial position
+        _zoomLine->setPos(rect.left() + x1Norm * rect.width(),
+                          rect.top() + y1Norm * rect.height());
+
+        // Size
+        _zoomLine->setSize((x2Norm - x1Norm) * this->width(),
+                           (y2Norm - y1Norm) * this->height());
+    }
 }
 
 void GraphicsViewRange::setCurrentRectangles(QList<GraphicsRectangleItem*> rectanglesToSelect)
