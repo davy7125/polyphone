@@ -27,6 +27,7 @@
 #include "graphicssimpletextitem.h"
 #include "graphicsrectangleitem.h"
 #include "graphicslegenditem.h"
+#include "graphicslegenditem2.h"
 #include "graphicszoomline.h"
 #include "graphicskey.h"
 #include "mainwindow.h"
@@ -44,12 +45,13 @@ const QColor GraphicsViewRange::TEXT_COLOR = QColor(100, 100, 100);
 //  51: selected rectangles
 //  80: play marker
 // 100: axis values
-// 120: legend
+// 120: legends
 // 150: zoom line
 
 GraphicsViewRange::GraphicsViewRange(QWidget *parent) : QGraphicsView(parent),
     _scene(new QGraphicsScene(OFFSET - MARGIN, OFFSET - MARGIN, WIDTH + 2 * MARGIN, WIDTH + 2 * MARGIN)),
     _legendItem(NULL),
+    _legendItem2(NULL),
     _zoomLine(NULL),
     _dontRememberScroll(false),
     _keyTriggered(-1),
@@ -82,6 +84,7 @@ GraphicsViewRange::~GraphicsViewRange()
     while (!_bottomLabels.isEmpty())
         delete _bottomLabels.takeFirst();
     delete _legendItem;
+    delete _legendItem2;
     delete _zoomLine;
     while (!_mapGraphicsKeys.isEmpty())
         delete _mapGraphicsKeys.take(_mapGraphicsKeys.firstKey());
@@ -125,10 +128,13 @@ void GraphicsViewRange::initItems()
         _leftLabels << text;
     }
 
-    // Legend
+    // Legends
     _legendItem = new GraphicsLegendItem(this->font().family());
     _scene->addItem(_legendItem);
     _legendItem->setZValue(120);
+    _legendItem2 = new GraphicsLegendItem2(this->font().family());
+    _scene->addItem(_legendItem2);
+    _legendItem2->setZValue(120);
 
     // Zoomline
     _zoomLine = new GraphicsZoomLine();
@@ -149,20 +155,21 @@ void GraphicsViewRange::updateLabels()
 
     // Update the position of the legend (it stays in a corner)
     if (_legendItem->isLeft())
-        _legendItem->setX(35. * rect.width() / this->width() + qMax(OFFSET, rect.x()));
+    {
+        double posX = 35. * rect.width() / this->width() + qMax(OFFSET, rect.x());
+        _legendItem->setX(posX);
+        _legendItem2->setX(posX);
+    }
     else
-        _legendItem->setX(qMin(WIDTH + OFFSET, rect.x() + rect.width()) - 5. * rect.width() / this->width());
+    {
+        double posX = qMin(WIDTH + OFFSET, rect.x() + rect.width()) - 5. * rect.width() / this->width();
+        _legendItem->setX(posX);
+        _legendItem2->setX(posX);
+    }
     _legendItem->setY(5. * rect.height() / this->height() + qMax(OFFSET, rect.y()));
+    _legendItem2->setY(13. * rect.height() / this->height() + qMax(OFFSET, rect.y()));
 
     viewport()->update();
-}
-
-void GraphicsViewRange::updateLegend(int selectionIndex, int selectionNumber)
-{
-    QList<EltID> ids;
-    foreach (GraphicsRectangleItem * item, _currentRectangles)
-        ids << item->getID();
-    _legendItem->setIds(ids, selectionIndex, selectionNumber);
 }
 
 void GraphicsViewRange::init(Pile_sf2 * sf2)
@@ -301,6 +308,7 @@ void GraphicsViewRange::mouseReleaseEvent(QMouseEvent *event)
         }
     }
 
+    _legendItem2->setNewValues(-1, 0, 0, 0);
     this->setZoomLine(-1, 0, 0, 0);
     this->setCursor(Qt::ArrowCursor);
     _buttonPressed = Qt::NoButton;
@@ -325,6 +333,8 @@ void GraphicsViewRange::mouseMoveEvent(QMouseEvent *event)
                 QPointF pointFinal = this->mapToScene(event->pos());
                 item->computeNewRange(pointInit, pointFinal);
             }
+            _legendItem2->setNewValues(_currentRectangles[0]->currentMinKey(), _currentRectangles[0]->currentMaxKey(),
+                    _currentRectangles[0]->currentMinVel(), _currentRectangles[0]->currentMaxVel());
             viewport()->update();
         }
         break;
@@ -339,6 +349,7 @@ void GraphicsViewRange::mouseMoveEvent(QMouseEvent *event)
         if (_legendItem->isLeft() != isLeft)
         {
             _legendItem->setLeft(isLeft);
+            _legendItem2->setLeft(isLeft);
             updateLabels();
         }
 
@@ -367,6 +378,9 @@ void GraphicsViewRange::mouseMoveEvent(QMouseEvent *event)
         }
 
         setCurrentRectangles(rectanglesToSelect, event->pos(), selectionIndex, selectionNumber);
+
+        // Offset and location of the second legend
+        _legendItem2->setOffsetY(_legendItem->boundingRect().bottom());
     }
     }
 }
@@ -533,7 +547,10 @@ void GraphicsViewRange::setCurrentRectangles(QList<GraphicsRectangleItem*> recta
     _currentRectangles = rectanglesToSelect;
 
     // Update legend text
-    updateLegend(selectionIndex, selectionNumber);
+    QList<EltID> ids;
+    foreach (GraphicsRectangleItem * item, _currentRectangles)
+        ids << item->getID();
+    _legendItem->setIds(ids, selectionIndex, selectionNumber);
 
     viewport()->update();
 }
