@@ -102,7 +102,7 @@ bool GraphicsRectangleItem::contains(const QPointF &point) const
     return rectF.left() <= point.x() && point.x() < rectF.right() &&
             rectF.top() < point.y() && point.y() < rectF.bottom();
 }
-
+#include <QApplication>
 void GraphicsRectangleItem::paint(QPainter *painter, const QStyleOptionGraphicsItem * option, QWidget * widget)
 {
     // Draw base rectangle with a background color and a thin border
@@ -197,7 +197,7 @@ GraphicsRectangleItem::EditingMode GraphicsRectangleItem::getEditingMode(const Q
     return mode;
 }
 
-void GraphicsRectangleItem::setHover(bool isHovered, const QPoint &point)
+GraphicsRectangleItem::EditingMode GraphicsRectangleItem::setHover(bool isHovered, const QPoint &point)
 {
     if (isHovered)
     {
@@ -209,6 +209,8 @@ void GraphicsRectangleItem::setHover(bool isHovered, const QPoint &point)
         _editingMode = NONE;
         this->setZValue(50);
     }
+
+    return _editingMode;
 }
 
 EltID GraphicsRectangleItem::findBrother()

@@ -31,12 +31,22 @@
 class GraphicsRectangleItem : public QGraphicsRectItem
 {
 public:
+    enum EditingMode
+    {
+        NONE,
+        MOVE_ALL,
+        MOVE_RIGHT,
+        MOVE_LEFT,
+        MOVE_TOP,
+        MOVE_BOTTOM
+    };
+
     GraphicsRectangleItem(EltID id, QGraphicsItem *parent = 0);
     static void init(Pile_sf2 * sf2) { s_sf2 = sf2; }
 
     EltID getID() { return _id; }
     EltID findBrother();
-    void setHover(bool isHovered, const QPoint &point = QPoint());
+    EditingMode setHover(bool isHovered, const QPoint &point = QPoint());
 
     QRectF getRectF() const;
     void paint(QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget = NULL);
@@ -54,15 +64,6 @@ public:
     int currentMaxVel() { return _maxVel; }
 
 private:
-    enum EditingMode
-    {
-        NONE,
-        MOVE_ALL,
-        MOVE_RIGHT,
-        MOVE_LEFT,
-        MOVE_TOP,
-        MOVE_BOTTOM
-    };
 
     static QPen s_penBorderThin;
     static QPen s_penBorderFat;
