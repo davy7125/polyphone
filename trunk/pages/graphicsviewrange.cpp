@@ -28,18 +28,31 @@
 #include "graphicsrectangleitem.h"
 #include "graphicslegenditem.h"
 #include "graphicszoomline.h"
+#include "graphicskey.h"
 #include "mainwindow.h"
 #include <QScrollBar>
 
 const double GraphicsViewRange::WIDTH = 128.0;
 const double GraphicsViewRange::MARGIN = 0.5;
 const double GraphicsViewRange::OFFSET = -0.5;
+const QColor GraphicsViewRange::LINE_COLOR = QColor(220, 220, 220);
+const QColor GraphicsViewRange::TEXT_COLOR = QColor(100, 100, 100);
+
+// Z values (all GraphicsItem being at the top level)
+//   0: grid
+//  50: non selected rectangles
+//  51: selected rectangles
+//  80: play marker
+// 100: axis values
+// 120: legend
+// 150: zoom line
 
 GraphicsViewRange::GraphicsViewRange(QWidget *parent) : QGraphicsView(parent),
     _scene(new QGraphicsScene(OFFSET - MARGIN, OFFSET - MARGIN, WIDTH + 2 * MARGIN, WIDTH + 2 * MARGIN)),
     _legendItem(NULL),
     _zoomLine(NULL),
     _dontRememberScroll(false),
+    _keyTriggered(-1),
     _buttonPressed(Qt::NoButton),
     _moveOccured(false),
     _mouseMode(MOUSE_MODE_NONE),
@@ -71,42 +84,43 @@ GraphicsViewRange::~GraphicsViewRange()
         delete _bottomLabels.takeFirst();
     delete _legendItem;
     delete _zoomLine;
+    while (!_mapGraphicsKeys.isEmpty())
+        delete _mapGraphicsKeys.take(_mapGraphicsKeys.firstKey());
 }
 
 void GraphicsViewRange::initItems()
 {
-    QColor lineColor(220, 220, 220);
-    QColor textColor(100, 100, 100);
-
     // Vertical lines
-    QPen penVerticalLines(lineColor, 1);
+    QPen penVerticalLines(LINE_COLOR, 1);
     penVerticalLines.setCosmetic(true);
     for (int note = 12; note <= 120; note += 12)
     {
         QGraphicsLineItem * line = new QGraphicsLineItem(note, OFFSET - MARGIN, note, OFFSET + WIDTH + MARGIN);
+        _scene->addItem(line);
         line->setPen(penVerticalLines);
         line->setZValue(0);
-        _scene->addItem(line);
-        GraphicsSimpleTextItem * text = new GraphicsSimpleTextItem(Qt::AlignHCenter + Qt::AlignBottom, line);
-        text->setZValue(0);
-        text->setBrush(textColor);
+        GraphicsSimpleTextItem * text = new GraphicsSimpleTextItem(Qt::AlignHCenter + Qt::AlignBottom);
+        _scene->addItem(text);
+        text->setZValue(100);
+        text->setBrush(TEXT_COLOR);
         text->setText(Config::getInstance()->getKeyName(note));
         text->setPos(note, OFFSET + WIDTH);
         _bottomLabels << text;
     }
 
     // Horizontal lines
-    QPen penHorizontalLines(lineColor, 1, Qt::DotLine);
+    QPen penHorizontalLines(LINE_COLOR, 1, Qt::DotLine);
     penHorizontalLines.setCosmetic(true);
     for (int vel = 10; vel <= 120; vel += 10)
     {
         QGraphicsLineItem * line = new QGraphicsLineItem(OFFSET - MARGIN, 127 - vel, OFFSET + WIDTH + MARGIN, 127 - vel);
+        _scene->addItem(line);
         line->setPen(penHorizontalLines);
         line->setZValue(0);
-        _scene->addItem(line);
-        GraphicsSimpleTextItem * text = new GraphicsSimpleTextItem(Qt::AlignLeft + Qt::AlignVCenter, line);
-        text->setZValue(0);
-        text->setBrush(textColor);
+        GraphicsSimpleTextItem * text = new GraphicsSimpleTextItem(Qt::AlignLeft + Qt::AlignVCenter);
+        _scene->addItem(text);
+        text->setZValue(100);
+        text->setBrush(TEXT_COLOR);
         text->setText(QString::number(vel));
         text->setPos(OFFSET, OFFSET + WIDTH - vel);
         _leftLabels << text;
@@ -115,12 +129,12 @@ void GraphicsViewRange::initItems()
     // Legend
     _legendItem = new GraphicsLegendItem(this->font().family());
     _scene->addItem(_legendItem);
-    _legendItem->setZValue(50);
+    _legendItem->setZValue(120);
 
     // Zoomline
     _zoomLine = new GraphicsZoomLine();
     _scene->addItem(_zoomLine);
-    _zoomLine->setZValue(40);
+    _zoomLine->setZValue(150);
 }
 
 void GraphicsViewRange::updateLabels()
@@ -144,10 +158,9 @@ void GraphicsViewRange::updateLabels()
     viewport()->update();
 }
 
-void GraphicsViewRange::init(Pile_sf2 * sf2, MainWindow * mainWindow)
+void GraphicsViewRange::init(Pile_sf2 * sf2)
 {
     _sf2 = sf2;
-    _mainWindow = mainWindow;
     GraphicsRectangleItem::init(sf2);
     GraphicsLegendItem::initSf2(sf2);
 }
@@ -174,7 +187,7 @@ void GraphicsViewRange::display(EltID id)
         if (!_sf2->get(id, champ_hidden).bValue)
         {
             GraphicsRectangleItem * item = new GraphicsRectangleItem(id);
-            item->setZValue(20);
+            item->setZValue(50);
             _scene->addItem(item);
             _rectangles << item;
         }
@@ -196,25 +209,39 @@ void GraphicsViewRange::mousePressEvent(QMouseEvent *event)
     if (_mouseMode != MOUSE_MODE_NONE || _buttonPressed != Qt::NoButton)
         return;
 
-    // Update current position
-    double deltaX = WIDTH - _displayedRect.width();
-    if (deltaX == 0)
-        _posX = 0.5;
-    else
-        _posX = (_displayedRect.left() - OFFSET) / deltaX;
-    double deltaY = WIDTH - _displayedRect.height();
-    if (deltaY == 0)
-        _posY = 0.5;
-    else
-        _posY = (_displayedRect.top() - OFFSET) / deltaY;
+    if (event->button() == Qt::MiddleButton)
+    {
+        QPointF p = this->mapToScene(event->pos());
+        int key = qRound(p.x());
+        int velocity = 127 - qRound(p.y());
+        if (velocity > 0)
+        {
+            keyTriggered(key, velocity);
+            _keyTriggered = key;
+        }
+    }
+    else if (event->button() == Qt::LeftButton || event->button() == Qt::RightButton)
+    {
+        // Update current position
+        double deltaX = WIDTH - _displayedRect.width();
+        if (deltaX == 0)
+            _posX = 0.5;
+        else
+            _posX = (_displayedRect.left() - OFFSET) / deltaX;
+        double deltaY = WIDTH - _displayedRect.height();
+        if (deltaY == 0)
+            _posY = 0.5;
+        else
+            _posY = (_displayedRect.top() - OFFSET) / deltaY;
 
-    // Remember situation
-    _xInit = normalizeX(event->x());
-    _yInit = normalizeY(event->y());
-    _zoomXinit = _zoomX;
-    _zoomYinit = _zoomY;
-    _posXinit = _posX;
-    _posYinit = _posY;
+        // Remember situation
+        _xInit = normalizeX(event->x());
+        _yInit = normalizeY(event->y());
+        _zoomXinit = _zoomX;
+        _zoomYinit = _zoomY;
+        _posXinit = _posX;
+        _posYinit = _posY;
+    }
 
     _moveOccured = false;
     _buttonPressed = event->button();
@@ -225,6 +252,14 @@ void GraphicsViewRange::mouseReleaseEvent(QMouseEvent *event)
     if (_buttonPressed != event->button())
         return;
 
+    if (event->button() == Qt::MiddleButton)
+    {
+        if (_keyTriggered != -1)
+        {
+            keyTriggered(_keyTriggered, 0);
+            _keyTriggered = -1;
+        }
+    }
     if (!_currentRectangles.isEmpty())
     {
         if (_moveOccured)
@@ -233,7 +268,7 @@ void GraphicsViewRange::mouseReleaseEvent(QMouseEvent *event)
             _sf2->prepareNewActions(false); // False because we can't the id again at this stage, if some old actions delete items
             foreach (GraphicsRectangleItem * item, _currentRectangles)
                 item->saveChanges();
-            _mainWindow->updateDo();
+            divisionUpdated();
 
             updateKeyboard();
         }
@@ -508,4 +543,21 @@ QRectF GraphicsViewRange::getCurrentRect()
     QPointF br = tl + viewport()->rect().bottomRight();
     QMatrix mat = matrix().inverted();
     return mat.mapRect(QRectF(tl,br));
+}
+
+void GraphicsViewRange::playKey(int key, int velocity)
+{
+    if (velocity == 0 && _mapGraphicsKeys[key] != NULL)
+    {
+        // A key is removed
+        delete _mapGraphicsKeys.take(key);
+    }
+    else if (velocity > 0 && _mapGraphicsKeys[key] == NULL)
+    {
+        // A key is added
+        _mapGraphicsKeys[key] = new GraphicsKey();
+        _scene->addItem(_mapGraphicsKeys[key]);
+        _mapGraphicsKeys[key]->setPos(QPoint(key, 127 - velocity));
+        _mapGraphicsKeys[key]->setZValue(80);
+    }
 }

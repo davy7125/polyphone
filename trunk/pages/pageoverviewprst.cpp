@@ -65,13 +65,13 @@ QStringList PageOverviewPrst::getInformation(EltID id)
 
 QString PageOverviewPrst::getBankAndPreset(EltID id)
 {
-    return QString::number(sf2->get(id, champ_wBank).wValue) + " - " + QString::number(sf2->get(id, champ_wPreset).wValue);
+    return QString::number(_sf2->get(id, champ_wBank).wValue) + " - " + QString::number(_sf2->get(id, champ_wPreset).wValue);
 }
 
 QString PageOverviewPrst::getSampleNumber(EltID id)
 {
     id.typeElement = elementPrstInst;
-    return QString::number(sf2->count(id, false));
+    return QString::number(_sf2->count(id, false));
 }
 
 QString PageOverviewPrst::getParameterNumber(EltID id)
@@ -80,19 +80,19 @@ QString PageOverviewPrst::getParameterNumber(EltID id)
 
     // Parameters for the global division
     id.typeElement = elementPrstGen;
-    count += sf2->count(id);
+    count += _sf2->count(id);
 
     // Parameters for the instrument divisions
     id.typeElement = elementPrstInst;
-    int nbElt = sf2->count(id);
+    int nbElt = _sf2->count(id);
     for (int i = 0; i < nbElt; i++)
     {
         id.indexElt2 = i;
-        if (!sf2->get(id, champ_hidden).bValue)
+        if (!_sf2->get(id, champ_hidden).bValue)
         {
             EltID idGen = id;
             idGen.typeElement = elementPrstInstGen;
-            count += sf2->count(idGen);
+            count += _sf2->count(idGen);
         }
     }
 
@@ -105,19 +105,19 @@ QString PageOverviewPrst::getModulatorNumber(EltID id)
 
     // Modulators for the global division
     id.typeElement = elementPrstMod;
-    count += sf2->count(id);
+    count += _sf2->count(id);
 
     // Modulators for the instrument divisions
     id.typeElement = elementPrstInst;
-    int nbElt = sf2->count(id);
+    int nbElt = _sf2->count(id);
     for (int i = 0; i < nbElt; i++)
     {
         id.indexElt2 = i;
-        if (!sf2->get(id, champ_hidden).bValue)
+        if (!_sf2->get(id, champ_hidden).bValue)
         {
             EltID idMod = id;
             idMod.typeElement = elementPrstInstMod;
-            count += sf2->count(idMod);
+            count += _sf2->count(idMod);
         }
     }
 
@@ -129,9 +129,9 @@ QString PageOverviewPrst::getKeyRange(EltID id)
     // Global keyrange
     int globalMin = 0;
     int globalMax = 127;
-    if (sf2->isSet(id, champ_keyRange))
+    if (_sf2->isSet(id, champ_keyRange))
     {
-        rangesType range = sf2->get(id, champ_keyRange).rValue;
+        rangesType range = _sf2->get(id, champ_keyRange).rValue;
         globalMin = range.byLo;
         globalMax = range.byHi;
     }
@@ -140,15 +140,15 @@ QString PageOverviewPrst::getKeyRange(EltID id)
     int min = 127;
     int max = 0;
     id.typeElement = elementPrstInst;
-    int nbElt = sf2->count(id);
+    int nbElt = _sf2->count(id);
     for (int i = 0; i < nbElt; i++)
     {
         id.indexElt2 = i;
-        if (!sf2->get(id, champ_hidden).bValue)
+        if (!_sf2->get(id, champ_hidden).bValue)
         {
-            if (sf2->isSet(id, champ_keyRange))
+            if (_sf2->isSet(id, champ_keyRange))
             {
-                rangesType range = sf2->get(id, champ_keyRange).rValue;
+                rangesType range = _sf2->get(id, champ_keyRange).rValue;
                 min = qMin(min, (int)range.byLo);
                 max = qMax(max, (int)range.byHi);
             }
@@ -173,9 +173,9 @@ QString PageOverviewPrst::getVelocityRange(EltID id)
     // Global velocity range
     int globalMin = 0;
     int globalMax = 127;
-    if (sf2->isSet(id, champ_velocity))
+    if (_sf2->isSet(id, champ_velocity))
     {
-        rangesType range = sf2->get(id, champ_velocity).rValue;
+        rangesType range = _sf2->get(id, champ_velocity).rValue;
         globalMin = range.byLo;
         globalMax = range.byHi;
     }
@@ -184,15 +184,15 @@ QString PageOverviewPrst::getVelocityRange(EltID id)
     int min = 127;
     int max = 0;
     id.typeElement = elementPrstInst;
-    int nbElt = sf2->count(id);
+    int nbElt = _sf2->count(id);
     for (int i = 0; i < nbElt; i++)
     {
         id.indexElt2 = i;
-        if (!sf2->get(id, champ_hidden).bValue)
+        if (!_sf2->get(id, champ_hidden).bValue)
         {
-            if (sf2->isSet(id, champ_velocity))
+            if (_sf2->isSet(id, champ_velocity))
             {
-                rangesType range = sf2->get(id, champ_velocity).rValue;
+                rangesType range = _sf2->get(id, champ_velocity).rValue;
                 min = qMin(min, (int)range.byLo);
                 max = qMax(max, (int)range.byHi);
             }

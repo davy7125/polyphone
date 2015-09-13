@@ -75,7 +75,7 @@ public:
     int numKeys() const { return m_numKeys; }
     int startKey() const { return m_startKey; }
     void allKeysOff();
-    void keyNoteOn( const int note , const int velo);
+    void keyNoteOn( const int note, const int velo);
     void keyNoteOff( const int note);
     int getVelocity() { return m_velocity; }
     void setVelocity(const int velocity) { m_velocity = m_lastVelocity = velocity; }

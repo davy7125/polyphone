@@ -298,8 +298,8 @@ void PianoScene::showKeyOn(PianoKey* key, int vel, int channel)
         }
     }
     key->setPressed(true);
-    m_lastVelocity= vel;
-    m_lastNote= key->getNote();
+    m_lastVelocity = vel;
+    m_lastNote = key->getNote();
 }
 
 void PianoScene::showKeyOff(PianoKey* key)

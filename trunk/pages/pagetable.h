@@ -47,7 +47,7 @@ public:
     void duplication();
     void spatialisation();
     void visualize();
-    void enlightColumn(int key, bool isEnlighted);
+    void keyPlayed(int key, int velocity);
 
 protected:
     // Attributs protégés

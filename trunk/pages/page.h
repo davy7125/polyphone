@@ -65,19 +65,23 @@ public:
     static QString getGenName(quint16 iVal, int type = 0);
 
 protected:
-    bool preparation;
-    static MainWindow *mainWindow;
-    static Tree *tree;
-    static QStackedWidget *qStackedWidget;
-    static Pile_sf2 *sf2;
-    static Synth * synth;
-    TypePage m_typePage;
+    bool _preparation;
+    static MainWindow *_mainWindow;
+    static Tree *_tree;
+    static QStackedWidget *_qStackedWidget;
+    static Pile_sf2 *_sf2;
+    static Synth * _synth;
+    TypePage _typePage;
 
     char * getTextValue(char * T, quint16 champ, genAmountType genVal);
     static char * getTextValue(char * T, quint16 champ, int iVal);
     static char * getTextValue(char * T, quint16 champ, SFModulator sfModVal);
     static QString getIndexName(quint16 iVal, int CC);
     genAmountType getValue(QString texte, quint16 champ, bool &ok);
+
+protected slots:
+    void updateMainwindow();
+    void playKey(int key, int velocity);
 
 private:
     // Méthodes privées

@@ -29,7 +29,7 @@
 
 QPen GraphicsRectangleItem::s_penRectangle = QPen(QColor(100, 170, 140, 255), 1);
 QBrush GraphicsRectangleItem::s_brushRectangle = QBrush(QColor(70, 180, 100, 50));
-QBrush GraphicsRectangleItem::s_brushRectangleHovered = QBrush(QColor(0, 250, 70, 60));
+QBrush GraphicsRectangleItem::s_brushRectangleHovered = QBrush(QColor(70, 255, 100, 120));
 Pile_sf2 * GraphicsRectangleItem::s_sf2 = NULL;
 
 GraphicsRectangleItem::GraphicsRectangleItem(EltID id, QGraphicsItem *parent) :
@@ -132,9 +132,15 @@ bool GraphicsRectangleItem::contains(const QPointF &point) const
 void GraphicsRectangleItem::setHover(bool isHovered)
 {
     if (isHovered)
+    {
         this->setBrush(s_brushRectangleHovered);
+        this->setZValue(51);
+    }
     else
+    {
         this->setBrush(s_brushRectangle);
+        this->setZValue(50);
+    }
 }
 
 EltID GraphicsRectangleItem::findBrother()
