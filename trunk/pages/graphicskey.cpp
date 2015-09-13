@@ -24,19 +24,21 @@
 
 #include "graphicskey.h"
 #include <QPainter>
+#include <QTimer>
 
-const int GraphicsKey::RADIUS = 5;
-const QBrush GraphicsKey::BRUSH = QBrush(QColor(220, 30, 30));
-const QPen GraphicsKey::PEN = QPen(QColor(50, 10, 10));
+const int GraphicsKey::s_radius = 5;
 
-GraphicsKey::GraphicsKey(QGraphicsItem *parent) : QGraphicsItem(parent)
+GraphicsKey::GraphicsKey(QGraphicsItem *parent) : QObject(NULL), QGraphicsItem(parent),
+    _colorBrush(220, 30, 30, 4),
+    _colorPen(50, 10, 10, 4)
 {
     this->setFlag(QGraphicsItem::ItemIgnoresTransformations);
+    QTimer::singleShot(30, this, SLOT(updateColor()));
 }
 
 QRectF GraphicsKey::boundingRect() const
 {
-    return QRectF(-RADIUS, -RADIUS, 2 * RADIUS, 2 * RADIUS);
+    return QRectF(-s_radius, -s_radius, 2 * s_radius, 2 * s_radius);
 }
 
 void GraphicsKey::paint(QPainter *painter, const QStyleOptionGraphicsItem * option, QWidget * widget)
@@ -44,7 +46,18 @@ void GraphicsKey::paint(QPainter *painter, const QStyleOptionGraphicsItem * opti
     Q_UNUSED(option)
     Q_UNUSED(widget)
 
-    painter->setBrush(BRUSH);
-    painter->setPen(PEN);
+    painter->setBrush(QBrush(_colorBrush));
+    painter->setPen(QPen(_colorPen));
     painter->drawEllipse(boundingRect());
+}
+
+void GraphicsKey::updateColor()
+{
+    _colorBrush.setAlpha(qMin(255., 5 + 1.2 * _colorBrush.alpha()));
+    _colorPen.setAlpha(qMin(255., 5 + 1.2 * _colorPen.alpha()));
+
+    if (_colorBrush.alpha() < 255)
+        QTimer::singleShot(30, this, SLOT(updateColor()));
+
+    this->update();
 }

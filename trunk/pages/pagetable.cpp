@@ -1396,23 +1396,29 @@ void PageTable::selected()
     int compte = listItems.count();
     if (compte)
     {
-        this->_tree->selectNone();
-        int colonne;
+        QList<EltID> ids;
         for (int i = 0; i < compte; i++)
-        {
-            colonne = listItems.at(i)->column();
-            this->_tree->select(this->table->getID(colonne));
-        }
-        this->_tree->updateAtNextSelectionRequest();
+            ids << this->table->getID(listItems.at(i)->column());
+        selectInTree(ids);
 
         // Mise à jour des informations sur les mods
         this->_preparation = true;
-        colonne = listItems.last()->column();
+        int colonne = listItems.last()->column();
         this->afficheMod(this->table->getID(colonne));
         this->_preparation = false;
     }
     customizeKeyboard();
     this->_tree->blockSignals(false);
+}
+
+void PageTable::selectInTree(QList<EltID> ids)
+{
+    bool previousBlockState = this->_tree->blockSignals(true);
+    this->_tree->selectNone();
+    foreach (EltID id, ids)
+        this->_tree->select(id);
+    this->_tree->updateAtNextSelectionRequest();
+    this->_tree->blockSignals(previousBlockState);
 }
 
 void PageTable::updateKeyboard()

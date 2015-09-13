@@ -369,7 +369,8 @@ void PianoScene::keyNoteOn(const int note , const int velo)
     if (m_keys.contains(note))
         keyOn(m_keys.value(note), velo);
     else
-        triggerNoteOn(note, getKeyVelocity());
+        triggerNoteOn(note, velo);
+    //triggerNoteOn(note, getKeyVelocity());
 }
 
 void PianoScene::keyNoteOff(const int note)
