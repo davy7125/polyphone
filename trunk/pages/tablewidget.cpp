@@ -38,6 +38,7 @@ TableWidget::TableWidget(QWidget *parent) : QTableWidget(parent)
     _timer = new QTimer(this);
     connect(_timer, SIGNAL(timeout()), this, SLOT(updateColors()));
 }
+
 void TableWidget::clear()
 {
     for (int i = 0; i < this->columnCount(); i++)
@@ -47,6 +48,7 @@ void TableWidget::clear()
     }
     this->setColumnCount(0);
 }
+
 void TableWidget::addColumn(int column, QString title)
 {
     this->insertColumn(column);
@@ -57,6 +59,7 @@ void TableWidget::addColumn(int column, QString title)
     // Ajout d'un élément couleur
     _listColors.insert(column, QColor(0, 0, 0));
 }
+
 void TableWidget::setID(EltID id, int colonne)
 {
     QString str;
@@ -73,6 +76,7 @@ void TableWidget::setID(EltID id, int colonne)
     this->item(2, colonne)->setText(QString::number(id.indexElt));
     this->item(3, colonne)->setText(QString::number(id.indexElt2));
 }
+
 EltID TableWidget::getID(int colonne)
 {
     EltID id(elementUnknown, 0, 0, 0, 0);
@@ -92,6 +96,7 @@ EltID TableWidget::getID(int colonne)
     }
     return id;
 }
+
 void TableWidget::setEnlighted(int colonne, bool isEnlighted)
 {
     if (colonne >= this->columnCount())
@@ -104,6 +109,7 @@ void TableWidget::setEnlighted(int colonne, bool isEnlighted)
 
     _timer->start(30);
 }
+
 void TableWidget::updateColors()
 {
     int minChange = 40;
@@ -131,6 +137,7 @@ void TableWidget::updateColors()
     if (toutPareil)
         _timer->stop();
 }
+
 void TableWidget::setColumnCount(int columns)
 {
     QTableWidget::setColumnCount(columns);
@@ -138,6 +145,7 @@ void TableWidget::setColumnCount(int columns)
     for (int i = 0; i < columns; i++)
         _listColors << QColor(0, 0, 0);
 }
+
 void TableWidget::removeColumn(int column)
 {
     QTableWidget::removeColumn(column);

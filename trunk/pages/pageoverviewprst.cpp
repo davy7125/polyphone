@@ -35,12 +35,12 @@ QString PageOverviewPrst::getTitle()
 QStringList PageOverviewPrst::getHorizontalHeader()
 {
     QStringList hHeader;
-    hHeader << trUtf8("Banque - Preset")
-            << trUtf8("Nombre d'instruments")
-            << trUtf8("Nombre de paramètres")
-            << trUtf8("Nombre de modulateurs")
-            << trUtf8("Étendue totale (note)")
-            << trUtf8("Étendue totale (vélocité)")
+    hHeader << trUtf8("Banque\nPreset")
+            << trUtf8("Nombre\nd'instruments")
+            << trUtf8("Nombre de\nparamètres")
+            << trUtf8("Nombre de\nmodulateurs")
+            << trUtf8("Étendue totale\n(note)")
+            << trUtf8("Étendue totale\n(vélocité)")
             << trUtf8("Atténuation")
             << trUtf8("Chorus")
             << trUtf8("Réverbération");

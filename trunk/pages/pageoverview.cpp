@@ -45,10 +45,14 @@ void PageOverview::afficher()
 
     // Clear the table
     ui->table->clear();
+    ui->table->reset();
+    ui->table->setColumnCount(0);
+    ui->table->setRowCount(0);
 
     // Number of columns (first is for sorting), header
     QStringList hHeader = getHorizontalHeader();
-    hHeader.prepend("name");
+    hHeader.prepend(trUtf8("Nom"));
+    hHeader.prepend("id");
     ui->table->setColumnCount(hHeader.count());
     ui->table->setHorizontalHeaderLabels(hHeader);
     ui->table->setColumnHidden(0, true);
@@ -70,23 +74,20 @@ void PageOverview::afficher()
         if (!_sf2->get(id, champ_hidden).bValue)
         {
             QString name = fillInformation(id, row);
-            ui->table->setItem(row, 0, new QTableWidgetItem(name));
+            QString idStr = QString::number(id.typeElement) + ":" +
+                    QString::number(id.indexSf2) + ":" +
+                    QString::number(id.indexElt);
+            ui->table->setItem(row, 0, new QTableWidgetItem(idStr));
+            ui->table->setItem(row, 1, new QTableWidgetItem(name));
             row++;
         }
     }
 
     // Vertical header
-    ui->table->sortByColumn(0, Qt::AscendingOrder);
-    QStringList vHeader;
-    for (int i = 0; i < nbElts; i++)
-        vHeader << ui->table->item(i, 0)->text();
-    ui->table->setVerticalHeaderLabels(vHeader);
+    ui->table->sortByColumn(1, Qt::AscendingOrder);
 
-    // Format
-    ui->table->resizeColumnsToContents();
-    for (int i = 1; i < nbElts; i = i + 2)
-        for (int j = 1; j < hHeader.count(); j++)
-            ui->table->item(i, j)->setBackgroundColor(QColor(255, 255, 200));
+    // Colors
+    ui->table->colorRows();
 
     // Switch page
     this->_qStackedWidget->setCurrentWidget(this);
@@ -100,7 +101,7 @@ QString PageOverview::fillInformation(EltID id, int row)
     {
         QTableWidgetItem * item = new QTableWidgetItem(info[i]);
         item->setTextAlignment(Qt::AlignHCenter | Qt::AlignCenter);
-        ui->table->setItem(row, i + 1, item);
+        ui->table->setItem(row, i + 2, item);
     }
 
     // Return the name
@@ -144,4 +145,15 @@ QString PageOverview::getRange(EltID id, Champ champ)
         return QString::number((double)min / 10, 'f', 1);
     else
         return QString::number((double)min / 10, 'f', 1) + " - " + QString::number((double)max / 10, 'f', 1);
+}
+
+void PageOverview::on_table_cellDoubleClicked(int row, int column)
+{
+    Q_UNUSED(column)
+
+    QString idStr = ui->table->item(row, 0)->text();
+    QStringList listTmp = idStr.split(':');
+    EltID id((ElementType)listTmp[0].toInt(), listTmp[1].toInt(), listTmp[2].toInt(), 0, 0);
+    _tree->selectNone();
+    _tree->select(id, true);
 }

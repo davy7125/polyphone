@@ -207,7 +207,8 @@ SOURCES	+= main.cpp \
     pages/graphicsrectangleitem.cpp \
     pages/graphicszoomline.cpp \
     pages/graphicskey.cpp \
-    pages/graphicslegenditem2.cpp
+    pages/graphicslegenditem2.cpp \
+    pages/tablepageoverview.cpp
 
 HEADERS  += mainwindow.h \
     sf2_core/sf2_types.h \
@@ -286,7 +287,8 @@ HEADERS  += mainwindow.h \
     pages/graphicsrectangleitem.h \
     pages/graphicszoomline.h \
     pages/graphicskey.h \
-    pages/graphicslegenditem2.h
+    pages/graphicslegenditem2.h \
+    pages/tablepageoverview.h
 
 FORMS    += mainwindow.ui \
     gui_divers/config.ui \
