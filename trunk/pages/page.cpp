@@ -25,20 +25,19 @@
 #include "page.h"
 #include "pile_sf2.h"
 #include "config.h"
+#include "mainwindow.h"
 
 Page::Page(TypePage typePage, QWidget *parent) : QWidget(parent),
-    preparation(false),
-    m_typePage(typePage)
+    _preparation(false),
+    _typePage(typePage)
 {}
 
-// Initialisation des variables statiques
-MainWindow * Page::mainWindow = NULL;
-Tree * Page::tree = NULL;
-QStackedWidget * Page::qStackedWidget = NULL;
-Pile_sf2 * Page::sf2 = NULL;
-Synth * Page::synth = NULL;
+MainWindow * Page::_mainWindow = NULL;
+Tree * Page::_tree = NULL;
+QStackedWidget * Page::_qStackedWidget = NULL;
+Pile_sf2 * Page::_sf2 = NULL;
+Synth * Page::_synth = NULL;
 
-// Méthodes publiques
 char * Page::getTextValue(char * T, quint16 champ, genAmountType genVal)
 {
     switch (champ)
@@ -84,14 +83,14 @@ char * Page::getTextValue(char * T, quint16 champ, genAmountType genVal)
         break;
 
     case champ_initialFilterFc:
-        if (m_typePage == PAGE_PRST)
+        if (_typePage == PAGE_PRST)
             sprintf(T,"%.3f", qPow(2., (double)genVal.shAmount/1200));
         else
             sprintf(T,"%.0f", qPow(2., (double)genVal.shAmount/1200)*8.176);
         break;
 
     case champ_freqModLFO: case champ_freqVibLFO:
-        if (m_typePage == PAGE_PRST)
+        if (_typePage == PAGE_PRST)
             sprintf(T,"%.3f", qPow(2., (double)genVal.shAmount/1200));
         else
             sprintf(T,"%.3f", qPow(2., (double)genVal.shAmount/1200)*8.176);
@@ -741,7 +740,7 @@ genAmountType Page::getValue(QString texte, quint16 champ, bool &ok)
     case champ_scaleTuning: genAmount.shAmount = (quint16)limit(texte.toDouble(&ok), 0, 1200, -1200, 1200);
         break;
     case champ_initialFilterFc:
-        if (m_typePage == PAGE_PRST)
+        if (_typePage == PAGE_PRST)
             genAmount.shAmount = (quint16)limit(1200. * qLn(texte.toDouble(&ok)) / 0.69314718056, 0, 0, -21000, 21000);
         else
             genAmount.shAmount = (quint16)limit(1200. * qLn(texte.toDouble(&ok) / 8.176) / 0.69314718056, 1500, 13500);
@@ -771,7 +770,7 @@ genAmountType Page::getValue(QString texte, quint16 champ, bool &ok)
         genAmount.shAmount = (short)limit(texte.toDouble(&ok), -1200, 1200, -2400, 2400);
         break;
     case champ_freqModLFO: case champ_freqVibLFO:
-        if (m_typePage == PAGE_PRST)
+        if (_typePage == PAGE_PRST)
             genAmount.shAmount = (short)limit(1200. * qLn(texte.toDouble(&ok)) / 0.69314718056, 0, 0, -21000, 21000);
         else
             genAmount.shAmount = (short)limit(1200. * qLn(texte.toDouble(&ok)/8.176) / 0.69314718056, -16000, 4500);
@@ -802,11 +801,10 @@ genAmountType Page::getValue(QString texte, quint16 champ, bool &ok)
     return genAmount;
 }
 
-// Méthodes privées
 int Page::limit(int iTmp, int minInst, int maxInst, int minPrst, int maxPrst)
 {
     int valRet = 0;
-    if (m_typePage == PAGE_PRST)
+    if (_typePage == PAGE_PRST)
     {
         if (iTmp < minPrst)
             valRet = minPrst;
@@ -825,4 +823,14 @@ int Page::limit(int iTmp, int minInst, int maxInst, int minPrst, int maxPrst)
             valRet = iTmp;
     }
     return valRet;
+}
+
+void Page::updateMainwindow()
+{
+    _mainWindow->updateDo();
+}
+
+void Page::playKey(int key, int velocity)
+{
+    _mainWindow->triggerNote(key, velocity);
 }

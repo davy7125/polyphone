@@ -29,7 +29,7 @@
 #include "RtMidi.h"
 #include <QKeyEvent>
 
-// Evenements
+// Events
 class NoteEvent : public QEvent
 {
 public:
@@ -43,6 +43,7 @@ protected:
     unsigned char m_note;
     unsigned char m_velocity;
 };
+
 class ControllerEvent : public QEvent
 {
 public:

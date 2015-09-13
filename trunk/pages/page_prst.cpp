@@ -74,7 +74,7 @@ Page_Prst::Page_Prst(QWidget *parent) :
     _menu->addAction("", this, SLOT(copyMod()));
 
     // Initialisation édition étendues
-    ui->rangeEditor->init(sf2, mainWindow);
+    ui->rangeEditor->init(_sf2);
 
 #ifdef Q_OS_MAC
     this->table->setStyleSheet("QHeaderView::section:horizontal{padding: 4px 10px 4px 10px;}");
@@ -87,6 +87,8 @@ Page_Prst::Page_Prst(QWidget *parent) :
     connect(this->table, SIGNAL(actionBegin()), this, SLOT(actionBegin()));
     connect(this->table, SIGNAL(actionFinished()), this, SLOT(actionFinished()));
     connect(ui->rangeEditor, SIGNAL(updateKeyboard()), this, SLOT(updateKeyboard()));
+    connect(ui->rangeEditor, SIGNAL(divisionUpdated()), this, SLOT(updateMainwindow()));
+    connect(ui->rangeEditor, SIGNAL(keyTriggered(int,int)), this, SLOT(playKey(int, int)));
 }
 Page_Prst::~Page_Prst()
 {
@@ -103,7 +105,7 @@ void Page_Prst::afficher()
     bool error;
     QList<EltID> ids = this->getUniqueInstOrPrst(error, false, false);
 
-    this->preparation = true;
+    this->_preparation = true;
     if (ids.count() > 1)
     {
         ui->horizontalFrame->setEnabled(false);
@@ -115,11 +117,11 @@ void Page_Prst::afficher()
         ui->frameModulator->setEnabled(true);
         EltID id = ids.first();
         id.typeElement = elementPrst;
-        this->ui->spinBank->setValue(this->sf2->get(id, champ_wBank).wValue);
-        this->ui->spinPreset->setValue(this->sf2->get(id, champ_wPreset).wValue);
-        ui->labelPercussion->setVisible(sf2->get(id, champ_wBank).wValue == 128);
+        this->ui->spinBank->setValue(this->_sf2->get(id, champ_wBank).wValue);
+        this->ui->spinPreset->setValue(this->_sf2->get(id, champ_wPreset).wValue);
+        ui->labelPercussion->setVisible(_sf2->get(id, champ_wBank).wValue == 128);
     }
-    this->preparation = false;
+    this->_preparation = false;
 }
 
 // TableWidgetPrst
@@ -221,7 +223,7 @@ Champ TableWidgetPrst::getChamp(int row)
 
 void Page_Prst::spinUpDown(int steps, SpinBox *spin)
 {
-    EltID id = this->tree->getFirstID();
+    EltID id = this->_tree->getFirstID();
     id.typeElement = elementPrst;
     int increment;
     if (steps > 0)
@@ -240,15 +242,15 @@ void Page_Prst::spinUpDown(int steps, SpinBox *spin)
         {
             // le numéro de banque est modifié, numéro de preset reste fixe
             wBank = valInit + nbIncrement * increment;
-            bTmp = (this->sf2->get(id, champ_wBank).wValue == wBank);
+            bTmp = (this->_sf2->get(id, champ_wBank).wValue == wBank);
         }
         else
         {
             // le numéro de preset est modifié, numéro de banque reste fixe
             wPreset = valInit + nbIncrement * increment;
-            bTmp = (this->sf2->get(id, champ_wPreset).wValue == wPreset);
+            bTmp = (this->_sf2->get(id, champ_wPreset).wValue == wPreset);
         }
-        valPossible = sf2->isAvailable(id, wBank, wPreset) || bTmp;
+        valPossible = _sf2->isAvailable(id, wBank, wPreset) || bTmp;
         nbIncrement++;
     } while (!valPossible && valInit + nbIncrement * increment < 128 \
              && valInit + nbIncrement * increment > -1);
@@ -260,17 +262,17 @@ void Page_Prst::spinUpDown(int steps, SpinBox *spin)
 
 void Page_Prst::setBank()
 {
-    if (this->preparation) return;
-    this->preparation = 1;
+    if (this->_preparation) return;
+    this->_preparation = 1;
     // Comparaison avec valeur précédente
-    EltID id = this->tree->getFirstID();
+    EltID id = this->_tree->getFirstID();
     id.typeElement = elementPrst;
     int initVal = this->ui->spinBank->value();
-    if (this->sf2->get(id, champ_wBank).wValue != initVal)
+    if (this->_sf2->get(id, champ_wBank).wValue != initVal)
     {
         // Valeur possible ?
-        int nBank = this->sf2->get(id, champ_wBank).wValue;
-        int nPreset = this->sf2->get(id, champ_wPreset).wValue;
+        int nBank = this->_sf2->get(id, champ_wBank).wValue;
+        int nPreset = this->_sf2->get(id, champ_wPreset).wValue;
         int delta = 0;
         int sens = 0;
         do
@@ -279,14 +281,14 @@ void Page_Prst::setBank()
             {
                 if (initVal + delta == nBank)
                     sens = 2;
-                else if (sf2->isAvailable(id, initVal + delta, nPreset))
+                else if (_sf2->isAvailable(id, initVal + delta, nPreset))
                     sens = 1;
             }
             if (initVal - delta > -1 && sens == 0)
             {
                 if (initVal - delta == nBank)
                     sens = -2;
-                else if (sf2->isAvailable(id, initVal - delta, nPreset))
+                else if (_sf2->isAvailable(id, initVal - delta, nPreset))
                     sens = -1;
             }
             delta++;
@@ -298,12 +300,12 @@ void Page_Prst::setBank()
             // Sauvegarde
             Valeur val;
             val.wValue = initVal;
-            this->sf2->prepareNewActions();
+            this->_sf2->prepareNewActions();
             // Reprise de l'identificateur si modification
-            id = this->tree->getFirstID();
+            id = this->_tree->getFirstID();
             id.typeElement = elementPrst;
-            this->sf2->set(id, champ_wBank, val);
-            this->mainWindow->updateDo();
+            this->_sf2->set(id, champ_wBank, val);
+            this->_mainWindow->updateDo();
         }
         else
         {
@@ -311,24 +313,24 @@ void Page_Prst::setBank()
             this->ui->spinBank->setValue(nBank);
         }
     }
-    this->preparation = 0;
+    this->_preparation = 0;
     ui->labelPercussion->setVisible(ui->spinBank->value() == 128);
 }
 
 void Page_Prst::setPreset()
 {
-    if (this->preparation) return;
-    this->preparation = 1;
+    if (this->_preparation) return;
+    this->_preparation = 1;
 
     // Comparaison avec valeur précédente
-    EltID id = this->tree->getFirstID();
+    EltID id = this->_tree->getFirstID();
     id.typeElement = elementPrst;
     int initVal = this->ui->spinPreset->value();
-    if (this->sf2->get(id, champ_wPreset).wValue != initVal)
+    if (this->_sf2->get(id, champ_wPreset).wValue != initVal)
     {
         // Valeur possible ?
-        initVal = sf2->closestAvailablePreset(id, this->sf2->get(id, champ_wBank).wValue, initVal);
-        int nPreset = this->sf2->get(id, champ_wPreset).wValue;
+        initVal = _sf2->closestAvailablePreset(id, this->_sf2->get(id, champ_wBank).wValue, initVal);
+        int nPreset = this->_sf2->get(id, champ_wPreset).wValue;
         if (initVal >= 0 && initVal != nPreset)
         {
             this->ui->spinPreset->setValue(initVal);
@@ -336,13 +338,13 @@ void Page_Prst::setPreset()
             // Sauvegarde
             Valeur val;
             val.wValue = initVal;
-            this->sf2->prepareNewActions();
+            this->_sf2->prepareNewActions();
 
             // Reprise de l'identificateur si modification
-            id = this->tree->getFirstID();
+            id = this->_tree->getFirstID();
             id.typeElement = elementPrst;
-            this->sf2->set(id, champ_wPreset, val);
-            this->mainWindow->updateDo();
+            this->_sf2->set(id, champ_wPreset, val);
+            this->_mainWindow->updateDo();
         }
         else
         {
@@ -350,7 +352,7 @@ void Page_Prst::setPreset()
             this->ui->spinPreset->setValue(nPreset);
         }
     }
-    this->preparation = 0;
+    this->_preparation = 0;
 }
 
 void Page_Prst::on_pushRangeMode_clicked()

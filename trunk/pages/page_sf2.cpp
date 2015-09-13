@@ -31,11 +31,11 @@ Page_Sf2::Page_Sf2(MainWindow * mainWindow, Tree * tree, QStackedWidget * qStack
     Page(PAGE_SF2, parent), ui(new Ui::Page_Sf2)
 {
     ui->setupUi(this);
-    this->mainWindow = mainWindow;
-    this->tree = tree;
-    this->qStackedWidget = qStackedWidget;
-    this->sf2 = sf2;
-    this->synth = synth;
+    this->_mainWindow = mainWindow;
+    this->_tree = tree;
+    this->_qStackedWidget = qStackedWidget;
+    this->_sf2 = sf2;
+    this->_synth = synth;
 }
 
 Page_Sf2::~Page_Sf2()
@@ -46,8 +46,8 @@ Page_Sf2::~Page_Sf2()
 void Page_Sf2::afficher()
 {
     // Préparation de l'affichage
-    preparation = 1;
-    EltID id = this->tree->getFirstID();
+    _preparation = 1;
+    EltID id = this->_tree->getFirstID();
     id.typeElement = elementSf2;
     id.indexElt = 0;
     id.indexElt2 = 0;
@@ -56,134 +56,134 @@ void Page_Sf2::afficher()
     this->compte();
 
     // Mode 24 bits ?
-    ui->check_24bits->setChecked(this->sf2->get(id, champ_wBpsSave).wValue == 24);
+    ui->check_24bits->setChecked(this->_sf2->get(id, champ_wBpsSave).wValue == 24);
 
     // Informations
     QString txt;
 #ifndef Q_OS_MAC
     txt = " "; // Sinon le premier "/" n'est pas visible entièrement
 #endif
-    txt += this->sf2->getQstr(id, champ_filename);
+    txt += this->_sf2->getQstr(id, champ_filename);
     ui->label_filename->setText(txt);
     ui->label_sfVersion->setText(QString("%1.%2")
-                                 .arg(this->sf2->get(id, champ_IFIL).sfVerValue.wMajor)
-                                 .arg(this->sf2->get(id, champ_IFIL).sfVerValue.wMinor, 2, 10, QChar('0')));
-    ui->label_soundEngine->setText(this->sf2->getQstr(id, champ_ISNG));
+                                 .arg(this->_sf2->get(id, champ_IFIL).sfVerValue.wMajor)
+                                 .arg(this->_sf2->get(id, champ_IFIL).sfVerValue.wMinor, 2, 10, QChar('0')));
+    ui->label_soundEngine->setText(this->_sf2->getQstr(id, champ_ISNG));
     txt = QString("%1.%2")
-            .arg(this->sf2->get(id, champ_IVER).sfVerValue.wMajor)
-            .arg(this->sf2->get(id, champ_IVER).sfVerValue.wMinor, 2, 10, QChar('0'));
-    if (this->sf2->getQstr(id, champ_IROM).isEmpty())
+            .arg(this->_sf2->get(id, champ_IVER).sfVerValue.wMajor)
+            .arg(this->_sf2->get(id, champ_IVER).sfVerValue.wMinor, 2, 10, QChar('0'));
+    if (this->_sf2->getQstr(id, champ_IROM).isEmpty())
         ui->label_romVersion->setText("- (version " + txt + ")");
     else
-        ui->label_romVersion->setText(this->sf2->getQstr(id, champ_IROM) + " (version " + txt + ")");
-    ui->label_software->setText(this->sf2->getQstr(id, champ_ISFT));
-    ui->lineEdit_name->setText(this->sf2->getQstr(id, champ_name));
-    ui->lineEdit_copyright->setText(this->sf2->getQstr(id, champ_ICOP));
-    ui->lineEdit_author->setText(this->sf2->getQstr(id, champ_IENG));
-    ui->lineEdit_date->setText(this->sf2->getQstr(id, champ_ICRD));
-    ui->lineEdit_product->setText(this->sf2->getQstr(id, champ_IPRD));
-    ui->textEdit_Com->setPlainText(this->sf2->getQstr(id, champ_ICMT));
+        ui->label_romVersion->setText(this->_sf2->getQstr(id, champ_IROM) + " (version " + txt + ")");
+    ui->label_software->setText(this->_sf2->getQstr(id, champ_ISFT));
+    ui->lineEdit_name->setText(this->_sf2->getQstr(id, champ_name));
+    ui->lineEdit_copyright->setText(this->_sf2->getQstr(id, champ_ICOP));
+    ui->lineEdit_author->setText(this->_sf2->getQstr(id, champ_IENG));
+    ui->lineEdit_date->setText(this->_sf2->getQstr(id, champ_ICRD));
+    ui->lineEdit_product->setText(this->_sf2->getQstr(id, champ_IPRD));
+    ui->textEdit_Com->setPlainText(this->_sf2->getQstr(id, champ_ICMT));
     // Basculement de l'affichage
-    this->qStackedWidget->setCurrentWidget(this);
-    preparation = 0;
+    this->_qStackedWidget->setCurrentWidget(this);
+    _preparation = 0;
 }
 
 void Page_Sf2::set24bits(int checked)
 {
-    if (preparation) return;
-    sf2->prepareNewActions();
+    if (_preparation) return;
+    _sf2->prepareNewActions();
 
     // Configuration d'un SF2 : mode 16 ou 24 bits
-    EltID id = this->tree->getFirstID();
+    EltID id = this->_tree->getFirstID();
     id.typeElement = elementSf2;
     Valeur valTmp;
     if (checked == 2)
         valTmp.wValue = 24;
     else
         valTmp.wValue = 16;
-    this->sf2->set(id, champ_wBpsSave, valTmp);
-    this->mainWindow->updateDo();
+    this->_sf2->set(id, champ_wBpsSave, valTmp);
+    this->_mainWindow->updateDo();
 }
 
 void Page_Sf2::setName()
 {
-    if (preparation) return;
-    EltID id = this->tree->getFirstID();
+    if (_preparation) return;
+    EltID id = this->_tree->getFirstID();
     id.typeElement = elementSf2;
-    if (id.indexSf2 == -1 || ui->lineEdit_name->text().compare(this->sf2->getQstr(id, champ_name)) == 0) return;
-    sf2->prepareNewActions();
+    if (id.indexSf2 == -1 || ui->lineEdit_name->text().compare(this->_sf2->getQstr(id, champ_name)) == 0) return;
+    _sf2->prepareNewActions();
     // Reprise de l'identificateur si modification
-    id = this->tree->getFirstID();
+    id = this->_tree->getFirstID();
     id.typeElement = elementSf2;
-    this->sf2->set(id, champ_name, ui->lineEdit_name->text());
-    this->mainWindow->updateDo();
+    this->_sf2->set(id, champ_name, ui->lineEdit_name->text());
+    this->_mainWindow->updateDo();
 }
 void Page_Sf2::setCopyright()
 {
-    if (preparation) return;
-    EltID id = this->tree->getFirstID();
+    if (_preparation) return;
+    EltID id = this->_tree->getFirstID();
     id.typeElement = elementSf2;
-    if (id.indexSf2 == -1 || ui->lineEdit_copyright->text().compare(this->sf2->getQstr(id, champ_ICOP)) == 0) return;
-    sf2->prepareNewActions();
+    if (id.indexSf2 == -1 || ui->lineEdit_copyright->text().compare(this->_sf2->getQstr(id, champ_ICOP)) == 0) return;
+    _sf2->prepareNewActions();
     // Reprise de l'identificateur si modification
-    id = this->tree->getFirstID();
+    id = this->_tree->getFirstID();
     id.typeElement = elementSf2;
-    this->sf2->set(id, champ_ICOP, ui->lineEdit_copyright->text());
-    this->mainWindow->updateDo();
+    this->_sf2->set(id, champ_ICOP, ui->lineEdit_copyright->text());
+    this->_mainWindow->updateDo();
 }
 void Page_Sf2::setAuthor()
 {
-    if (preparation) return;
-    EltID id = this->tree->getFirstID();
+    if (_preparation) return;
+    EltID id = this->_tree->getFirstID();
     id.typeElement = elementSf2;
-    if (id.indexSf2 == -1 || ui->lineEdit_author->text().compare(this->sf2->getQstr(id, champ_IENG)) == 0) return;
-    sf2->prepareNewActions();
+    if (id.indexSf2 == -1 || ui->lineEdit_author->text().compare(this->_sf2->getQstr(id, champ_IENG)) == 0) return;
+    _sf2->prepareNewActions();
     // Reprise de l'identificateur si modification
-    id = this->tree->getFirstID();
+    id = this->_tree->getFirstID();
     id.typeElement = elementSf2;
-    this->sf2->set(id, champ_IENG, ui->lineEdit_author->text());
-    this->mainWindow->updateDo();
+    this->_sf2->set(id, champ_IENG, ui->lineEdit_author->text());
+    this->_mainWindow->updateDo();
 }
 void Page_Sf2::setDate()
 {
-    if (preparation) return;
-    EltID id = this->tree->getFirstID();
+    if (_preparation) return;
+    EltID id = this->_tree->getFirstID();
     id.typeElement = elementSf2;
-    if (id.indexSf2 == -1 || ui->lineEdit_date->text().compare(this->sf2->getQstr(id, champ_ICRD)) == 0) return;
-    sf2->prepareNewActions();
+    if (id.indexSf2 == -1 || ui->lineEdit_date->text().compare(this->_sf2->getQstr(id, champ_ICRD)) == 0) return;
+    _sf2->prepareNewActions();
     // Reprise de l'identificateur si modification
-    id = this->tree->getFirstID();
+    id = this->_tree->getFirstID();
     id.typeElement = elementSf2;
-    this->sf2->set(id, champ_ICRD, ui->lineEdit_date->text());
-    this->mainWindow->updateDo();
+    this->_sf2->set(id, champ_ICRD, ui->lineEdit_date->text());
+    this->_mainWindow->updateDo();
 }
 void Page_Sf2::setProduct()
 {
-    if (preparation) return;
-    EltID id = this->tree->getFirstID();
+    if (_preparation) return;
+    EltID id = this->_tree->getFirstID();
     id.typeElement = elementSf2;
-    if (id.indexSf2 == -1 || ui->lineEdit_product->text().compare(this->sf2->getQstr(id, champ_IPRD)) == 0) return;
-    sf2->prepareNewActions();
+    if (id.indexSf2 == -1 || ui->lineEdit_product->text().compare(this->_sf2->getQstr(id, champ_IPRD)) == 0) return;
+    _sf2->prepareNewActions();
     // Reprise de l'identificateur si modification
-    id = this->tree->getFirstID();
+    id = this->_tree->getFirstID();
     id.typeElement = elementSf2;
-    this->sf2->set(id, champ_IPRD, ui->lineEdit_product->text());
-    this->mainWindow->updateDo();
+    this->_sf2->set(id, champ_IPRD, ui->lineEdit_product->text());
+    this->_mainWindow->updateDo();
 }
 void Page_Sf2::setCommentaire()
 {
-    if (preparation) return;
+    if (_preparation) return;
     if (ui->textEdit_Com->toPlainText().size() > 65536)
         ui->textEdit_Com->setPlainText(ui->textEdit_Com->toPlainText().left(65536));
-    EltID id = this->tree->getFirstID();
+    EltID id = this->_tree->getFirstID();
     id.typeElement = elementSf2;
-    if (id.indexSf2 == -1 || ui->textEdit_Com->toPlainText().compare(this->sf2->getQstr(id, champ_ICMT)) == 0) return;
-    sf2->prepareNewActions();
+    if (id.indexSf2 == -1 || ui->textEdit_Com->toPlainText().compare(this->_sf2->getQstr(id, champ_ICMT)) == 0) return;
+    _sf2->prepareNewActions();
     // Reprise de l'identificateur si modification
-    id = this->tree->getFirstID();
+    id = this->_tree->getFirstID();
     id.typeElement = elementSf2;
-    this->sf2->set(id, champ_ICMT, ui->textEdit_Com->toPlainText());
-    this->mainWindow->updateDo();
+    this->_sf2->set(id, champ_ICMT, ui->textEdit_Com->toPlainText());
+    this->_mainWindow->updateDo();
 }
 
 void Page_Sf2::setNow()
@@ -197,8 +197,8 @@ void Page_Sf2::setNow()
 
 void Page_Sf2::compte()
 {
-    if (this->tree->getSelectedItemsNumber() == 0) return;
-    if (!this->tree->isSelectedItemsSf2Unique()) return;
+    if (this->_tree->getSelectedItemsNumber() == 0) return;
+    if (!this->_tree->isSelectedItemsSf2Unique()) return;
 
     // Compte des samples, instruments et presets utilisés et non utilisés
     int unusedSmpl, unusedInst, usedSmpl, usedInst, usedPrst, instGen, prstGen;
@@ -262,11 +262,11 @@ void Page_Sf2::compte()
 QList<int> Page_Sf2::getListNotHidden(EltID id)
 {
     QList<int> listElt;
-    int iTmp = sf2->count(id);
+    int iTmp = _sf2->count(id);
     for (int i = 0; i < iTmp; i++)
     {
         id.indexElt = i;
-        if (!sf2->get(id, champ_hidden).bValue)
+        if (!_sf2->get(id, champ_hidden).bValue)
             listElt << i;
     }
     return listElt;
@@ -276,7 +276,7 @@ void Page_Sf2::compte(int &unusedSmpl, int &unusedInst, int &usedSmpl, int &used
 {
     // Etablissement de la liste des samples, instruments et presets
     // Préparation de la liste des samples et instruments utilisés
-    EltID id = this->tree->getFirstID();
+    EltID id = this->_tree->getFirstID();
     id.typeElement = elementSmpl;
     QList<int> listSmpl = getListNotHidden(id);
     QList<int> listUsedSmpl;
@@ -299,20 +299,20 @@ void Page_Sf2::compte(int &unusedSmpl, int &unusedInst, int &usedSmpl, int &used
     {
         id.indexElt = elementId;
         id.typeElement = elementPrstGen;
-        prstGen += sf2->count(id);
+        prstGen += _sf2->count(id);
 
         id.typeElement = elementPrstInst;
-        int nbPrstInst = sf2->count(id);
+        int nbPrstInst = _sf2->count(id);
         for (int i = 0; i < nbPrstInst; i++)
         {
             id.indexElt2 = i;
-            if (!sf2->get(id, champ_hidden).bValue)
+            if (!_sf2->get(id, champ_hidden).bValue)
             {
                 id.typeElement = elementPrstInstGen;
-                prstGen += sf2->count(id);
+                prstGen += _sf2->count(id);
                 id.typeElement = elementPrstInst;
 
-                iTmp = sf2->get(id, champ_instrument).wValue;
+                iTmp = _sf2->get(id, champ_instrument).wValue;
                 if (listInst.contains(iTmp))
                 {
                     listInst.removeOne(iTmp);
@@ -330,20 +330,20 @@ void Page_Sf2::compte(int &unusedSmpl, int &unusedInst, int &usedSmpl, int &used
     {
         id.indexElt = elementId;
         id.typeElement = elementInstGen;
-        instGen += sf2->count(id);
+        instGen += _sf2->count(id);
 
         id.typeElement = elementInstSmpl;
-        int nbInstSmpl = sf2->count(id);
+        int nbInstSmpl = _sf2->count(id);
         for (int i = 0; i < nbInstSmpl; i++)
         {
             id.indexElt2 = i;
-            if (!sf2->get(id, champ_hidden).bValue)
+            if (!_sf2->get(id, champ_hidden).bValue)
             {
                 id.typeElement = elementInstSmplGen;
-                instGen += sf2->count(id);
+                instGen += _sf2->count(id);
                 id.typeElement = elementInstSmpl;
 
-                iTmp = sf2->get(id, champ_sampleID).wValue;
+                iTmp = _sf2->get(id, champ_sampleID).wValue;
                 if (listSmpl.contains(iTmp))
                 {
                     listSmpl.removeOne(iTmp);
@@ -358,17 +358,17 @@ void Page_Sf2::compte(int &unusedSmpl, int &unusedInst, int &usedSmpl, int &used
     {
         id.indexElt = elementId;
         id.typeElement = elementInstGen;
-        instGen += sf2->count(id);
+        instGen += _sf2->count(id);
 
         id.typeElement = elementInstSmpl;
-        int nbInstSmpl = sf2->count(id);
+        int nbInstSmpl = _sf2->count(id);
         for (int i = 0; i < nbInstSmpl; i++)
         {
             id.indexElt2 = i;
-            if (!sf2->get(id, champ_hidden).bValue)
+            if (!_sf2->get(id, champ_hidden).bValue)
             {
                 id.typeElement = elementInstSmplGen;
-                instGen += sf2->count(id);
+                instGen += _sf2->count(id);
                 id.typeElement = elementInstSmpl;
             }
         }

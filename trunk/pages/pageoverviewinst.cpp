@@ -54,20 +54,20 @@ void PageOverviewInst::prepare(EltID id)
     _usedInst.clear();
 
     id.typeElement = elementPrst;
-    int nbElt = sf2->count(id);
+    int nbElt = _sf2->count(id);
     for (int i = 0; i < nbElt; i++)
     {
         id.indexElt = i;
-        if (!sf2->get(id, champ_hidden).bValue)
+        if (!_sf2->get(id, champ_hidden).bValue)
         {
             EltID idSubElt = id;
             idSubElt.typeElement = elementPrstInst;
-            int nbSubElt = sf2->count(idSubElt);
+            int nbSubElt = _sf2->count(idSubElt);
             for (int j = 0; j < nbSubElt; j++)
             {
                 idSubElt.indexElt2 = j;
-                if (!sf2->get(idSubElt, champ_hidden).bValue)
-                    _usedInst << sf2->get(idSubElt, champ_instrument).wValue;
+                if (!_sf2->get(idSubElt, champ_hidden).bValue)
+                    _usedInst << _sf2->get(idSubElt, champ_instrument).wValue;
             }
         }
     }
@@ -98,7 +98,7 @@ QString PageOverviewInst::isUsed(EltID id)
 QString PageOverviewInst::getSampleNumber(EltID id)
 {
     id.typeElement = elementInstSmpl;
-    return QString::number(sf2->count(id, false));
+    return QString::number(_sf2->count(id, false));
 }
 
 QString PageOverviewInst::getParameterNumber(EltID id)
@@ -107,19 +107,19 @@ QString PageOverviewInst::getParameterNumber(EltID id)
 
     // Parameters for the global division
     id.typeElement = elementInstGen;
-    count += sf2->count(id);
+    count += _sf2->count(id);
 
     // Parameters for the sample divisions
     id.typeElement = elementInstSmpl;
-    int nbElt = sf2->count(id);
+    int nbElt = _sf2->count(id);
     for (int i = 0; i < nbElt; i++)
     {
         id.indexElt2 = i;
-        if (!sf2->get(id, champ_hidden).bValue)
+        if (!_sf2->get(id, champ_hidden).bValue)
         {
             EltID idGen = id;
             idGen.typeElement = elementInstSmplGen;
-            count += sf2->count(idGen);
+            count += _sf2->count(idGen);
         }
     }
 
@@ -132,19 +132,19 @@ QString PageOverviewInst::getModulatorNumber(EltID id)
 
     // Modulators for the global division
     id.typeElement = elementInstMod;
-    count += sf2->count(id);
+    count += _sf2->count(id);
 
     // Modulators for the sample divisions
     id.typeElement = elementInstSmpl;
-    int nbElt = sf2->count(id);
+    int nbElt = _sf2->count(id);
     for (int i = 0; i < nbElt; i++)
     {
         id.indexElt2 = i;
-        if (!sf2->get(id, champ_hidden).bValue)
+        if (!_sf2->get(id, champ_hidden).bValue)
         {
             EltID idMod = id;
             idMod.typeElement = elementInstSmplMod;
-            count += sf2->count(idMod);
+            count += _sf2->count(idMod);
         }
     }
 
@@ -156,9 +156,9 @@ QString PageOverviewInst::getKeyRange(EltID id)
     // Global keyrange
     int globalMin = 0;
     int globalMax = 127;
-    if (sf2->isSet(id, champ_keyRange))
+    if (_sf2->isSet(id, champ_keyRange))
     {
-        rangesType range = sf2->get(id, champ_keyRange).rValue;
+        rangesType range = _sf2->get(id, champ_keyRange).rValue;
         globalMin = range.byLo;
         globalMax = range.byHi;
     }
@@ -167,15 +167,15 @@ QString PageOverviewInst::getKeyRange(EltID id)
     int min = 127;
     int max = 0;
     id.typeElement = elementInstSmpl;
-    int nbElt = sf2->count(id);
+    int nbElt = _sf2->count(id);
     for (int i = 0; i < nbElt; i++)
     {
         id.indexElt2 = i;
-        if (!sf2->get(id, champ_hidden).bValue)
+        if (!_sf2->get(id, champ_hidden).bValue)
         {
-            if (sf2->isSet(id, champ_keyRange))
+            if (_sf2->isSet(id, champ_keyRange))
             {
-                rangesType range = sf2->get(id, champ_keyRange).rValue;
+                rangesType range = _sf2->get(id, champ_keyRange).rValue;
                 min = qMin(min, (int)range.byLo);
                 max = qMax(max, (int)range.byHi);
             }
@@ -200,9 +200,9 @@ QString PageOverviewInst::getVelocityRange(EltID id)
     // Global velocity range
     int globalMin = 0;
     int globalMax = 127;
-    if (sf2->isSet(id, champ_velocity))
+    if (_sf2->isSet(id, champ_velocity))
     {
-        rangesType range = sf2->get(id, champ_velocity).rValue;
+        rangesType range = _sf2->get(id, champ_velocity).rValue;
         globalMin = range.byLo;
         globalMax = range.byHi;
     }
@@ -211,15 +211,15 @@ QString PageOverviewInst::getVelocityRange(EltID id)
     int min = 127;
     int max = 0;
     id.typeElement = elementInstSmpl;
-    int nbElt = sf2->count(id);
+    int nbElt = _sf2->count(id);
     for (int i = 0; i < nbElt; i++)
     {
         id.indexElt2 = i;
-        if (!sf2->get(id, champ_hidden).bValue)
+        if (!_sf2->get(id, champ_hidden).bValue)
         {
-            if (sf2->isSet(id, champ_velocity))
+            if (_sf2->isSet(id, champ_velocity))
             {
-                rangesType range = sf2->get(id, champ_velocity).rValue;
+                rangesType range = _sf2->get(id, champ_velocity).rValue;
                 min = qMin(min, (int)range.byLo);
                 max = qMax(max, (int)range.byHi);
             }
@@ -248,21 +248,21 @@ QString PageOverviewInst::getLoop(EltID id)
 {
     // Global value
     int globalValue = 0;
-    if (sf2->isSet(id, champ_sampleModes))
-        globalValue = sf2->get(id, champ_sampleModes).wValue;
+    if (_sf2->isSet(id, champ_sampleModes))
+        globalValue = _sf2->get(id, champ_sampleModes).wValue;
 
     // Attenuation per division
     QList<int> modes;
     id.typeElement = elementInstSmpl;
-    int nbElt = sf2->count(id);
+    int nbElt = _sf2->count(id);
     for (int i = 0; i < nbElt; i++)
     {
         id.indexElt2 = i;
-        if (!sf2->get(id, champ_hidden).bValue)
+        if (!_sf2->get(id, champ_hidden).bValue)
         {
             int value = globalValue;
-            if (sf2->isSet(id, champ_sampleModes))
-                value = sf2->get(id, champ_sampleModes).wValue;
+            if (_sf2->isSet(id, champ_sampleModes))
+                value = _sf2->get(id, champ_sampleModes).wValue;
 
             if (!modes.contains(value))
                 modes << value;

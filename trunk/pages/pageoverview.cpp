@@ -54,20 +54,20 @@ void PageOverview::afficher()
     ui->table->setColumnHidden(0, true);
 
     // Number of rows
-    EltID id = this->tree->getFirstID();
+    EltID id = this->_tree->getFirstID();
     id.typeElement = _typeElement;
-    ui->table->setRowCount(sf2->count(id, false));
+    ui->table->setRowCount(_sf2->count(id, false));
 
     // Preparation (if needed by the overview page)
     this->prepare(id);
 
     // Fill each row, retrieving the name in the same time
-    int nbElts = sf2->count(id);
+    int nbElts = _sf2->count(id);
     int row = 0;
     for (int i = 0; i < nbElts; i++)
     {
         id.indexElt = i;
-        if (!sf2->get(id, champ_hidden).bValue)
+        if (!_sf2->get(id, champ_hidden).bValue)
         {
             QString name = fillInformation(id, row);
             ui->table->setItem(row, 0, new QTableWidgetItem(name));
@@ -89,7 +89,7 @@ void PageOverview::afficher()
             ui->table->item(i, j)->setBackgroundColor(QColor(255, 255, 200));
 
     // Switch page
-    this->qStackedWidget->setCurrentWidget(this);
+    this->_qStackedWidget->setCurrentWidget(this);
 }
 
 QString PageOverview::fillInformation(EltID id, int row)
@@ -104,15 +104,15 @@ QString PageOverview::fillInformation(EltID id, int row)
     }
 
     // Return the name
-    return sf2->getQstr(id, champ_name);
+    return _sf2->getQstr(id, champ_name);
 }
 
 QString PageOverview::getRange(EltID id, Champ champ)
 {
     // Global value
     int globalValue = 0;
-    if (sf2->isSet(id, champ))
-        globalValue = sf2->get(id, champ).shValue;
+    if (_sf2->isSet(id, champ))
+        globalValue = _sf2->get(id, champ).shValue;
 
     // Attenuation per division
     int min = -1;
@@ -121,15 +121,15 @@ QString PageOverview::getRange(EltID id, Champ champ)
         id.typeElement = elementInstSmpl;
     else
         id.typeElement = elementPrstInst;
-    int nbElt = sf2->count(id);
+    int nbElt = _sf2->count(id);
     for (int i = 0; i < nbElt; i++)
     {
         id.indexElt2 = i;
-        if (!sf2->get(id, champ_hidden).bValue)
+        if (!_sf2->get(id, champ_hidden).bValue)
         {
             int value = globalValue;
-            if (sf2->isSet(id, champ))
-                value = sf2->get(id, champ).shValue;
+            if (_sf2->isSet(id, champ))
+                value = _sf2->get(id, champ).shValue;
 
             if (min == -1 || min > value)
                 min = value;

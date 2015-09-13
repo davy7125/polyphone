@@ -91,7 +91,6 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
-    // Méthodes publiques
     void prepareNewAction();
     void updateDo();
     void updateActions();
@@ -116,6 +115,7 @@ public:
     void setRangeAndRootKey(int rootKey, int noteMin, int noteMax);
     void clearKeyboardCustomisation();
     void spaceKeyPressedInTree();
+    void triggerNote(int key, int velocity);
 
 public slots:
     void ouvrir(QString fileName);

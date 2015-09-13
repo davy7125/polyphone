@@ -32,6 +32,7 @@ class GraphicsSimpleTextItem;
 class GraphicsRectangleItem;
 class GraphicsLegendItem;
 class GraphicsZoomLine;
+class GraphicsKey;
 
 class GraphicsViewRange : public QGraphicsView
 {
@@ -41,11 +42,14 @@ public:
     explicit GraphicsViewRange(QWidget *parent = 0);
     ~GraphicsViewRange();
 
-    void init(Pile_sf2 * sf2, MainWindow * mainWindow);
+    void init(Pile_sf2 * sf2);
     void display(EltID id);
+    void playKey(int key, int velocity);
 
 signals:
     void updateKeyboard();
+    void keyTriggered(int key, int velocity);
+    void divisionUpdated();
 
 protected:
     void resizeEvent(QResizeEvent * event);
@@ -63,14 +67,19 @@ private:
     QRectF getCurrentRect();
 
     Pile_sf2 * _sf2;
-    MainWindow * _mainWindow;
+
+    // Graphics items
     QGraphicsScene * _scene;
     QList<GraphicsRectangleItem *> _rectangles;
     QList<GraphicsRectangleItem *> _currentRectangles;
     QList<GraphicsSimpleTextItem *> _leftLabels, _bottomLabels;
     GraphicsLegendItem * _legendItem;
     GraphicsZoomLine * _zoomLine;
+    QMap<int, GraphicsKey*> _mapGraphicsKeys;
+
+    // Various
     bool _dontRememberScroll;
+    int _keyTriggered;
 
     // Drag & zoom
     enum MouseMode
@@ -99,6 +108,8 @@ private:
     static const double WIDTH;
     static const double MARGIN;
     static const double OFFSET;
+    static const QColor LINE_COLOR;
+    static const QColor TEXT_COLOR;
 };
 
 #endif // GRAPHICSVIEWRANGE_H
