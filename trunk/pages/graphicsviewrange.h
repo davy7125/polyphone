@@ -31,6 +31,7 @@
 class GraphicsSimpleTextItem;
 class GraphicsRectangleItem;
 class GraphicsLegendItem;
+class GraphicsZoomLine;
 
 class GraphicsViewRange : public QGraphicsView
 {
@@ -56,7 +57,7 @@ protected:
     void scrollContentsBy(int dx, int dy);
 
 private:
-    void initGridAndAxes();
+    void initItems();
     void updateLabels();
     void setCurrentRectangles(QList<GraphicsRectangleItem*> rectanglesToSelect);
     QRectF getCurrentRect();
@@ -68,6 +69,7 @@ private:
     QList<GraphicsRectangleItem *> _currentRectangles;
     QList<GraphicsSimpleTextItem *> _leftLabels, _bottomLabels;
     GraphicsLegendItem * _legendItem;
+    GraphicsZoomLine * _zoomLine;
     bool _dontRememberScroll;
 
     // Drag & zoom
@@ -90,9 +92,13 @@ private:
     void zoom(QPoint point);
     void drag(QPoint point);
     void zoomDrag();
-    void setZoomLine(double x1, double y1, double x2, double y2);
+    void setZoomLine(double x1Norm, double y1Norm, double x2Norm, double y2Norm);
     double normalizeX(int xPixel);
     double normalizeY(int yPixel);
+
+    static const double WIDTH;
+    static const double MARGIN;
+    static const double OFFSET;
 };
 
 #endif // GRAPHICSVIEWRANGE_H
