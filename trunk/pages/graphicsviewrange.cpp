@@ -55,7 +55,6 @@ GraphicsViewRange::GraphicsViewRange(QWidget *parent) : QGraphicsView(parent),
     _keyTriggered(-1),
     _buttonPressed(Qt::NoButton),
     _moveOccured(false),
-    _mouseMode(MOUSE_MODE_NONE),
     _zoomX(1.),
     _zoomY(1.),
     _posX(0.5),
@@ -158,6 +157,14 @@ void GraphicsViewRange::updateLabels()
     viewport()->update();
 }
 
+void GraphicsViewRange::updateLegend()
+{
+    QList<EltID> ids;
+    foreach (GraphicsRectangleItem * item, _currentRectangles)
+        ids << item->getID();
+    _legendItem->setIds(ids);
+}
+
 void GraphicsViewRange::init(Pile_sf2 * sf2)
 {
     _sf2 = sf2;
@@ -206,7 +213,7 @@ void GraphicsViewRange::resizeEvent(QResizeEvent * event)
 
 void GraphicsViewRange::mousePressEvent(QMouseEvent *event)
 {
-    if (_mouseMode != MOUSE_MODE_NONE || _buttonPressed != Qt::NoButton)
+    if (_buttonPressed != Qt::NoButton)
         return;
 
     if (event->button() == Qt::MiddleButton)
@@ -269,8 +276,8 @@ void GraphicsViewRange::mouseReleaseEvent(QMouseEvent *event)
             foreach (GraphicsRectangleItem * item, _currentRectangles)
                 item->saveChanges();
             divisionUpdated();
-
             updateKeyboard();
+            updateLegend();
         }
         else
         {
@@ -307,13 +314,12 @@ void GraphicsViewRange::mouseReleaseEvent(QMouseEvent *event)
                 if (pairs[i].contains(_currentRectangles.first()))
                     index = i;
 
-            setCurrentRectangles(pairs[(index + 1) % pairs.count()]);
+            setCurrentRectangles(pairs[(index + 1) % pairs.count()], event->pos());
         }
     }
 
     this->setZoomLine(-1, 0, 0, 0);
     this->setCursor(Qt::ArrowCursor);
-    _mouseMode = MOUSE_MODE_NONE;
     _buttonPressed = Qt::NoButton;
     viewport()->update();
 }
@@ -364,10 +370,11 @@ void GraphicsViewRange::mouseMoveEvent(QMouseEvent *event)
         foreach (GraphicsRectangleItem * item, _currentRectangles)
             alreadySelected &= rectanglesUnderMouse.contains(item);
 
-        if (!alreadySelected)
+        QList<GraphicsRectangleItem*> rectanglesToSelect;
+        if (alreadySelected)
+            rectanglesToSelect = _currentRectangles;
+        else
         {
-            QList<GraphicsRectangleItem*> rectanglesToSelect;
-
             if (!rectanglesUnderMouse.isEmpty())
             {
                 // Select the first element with its brother if any
@@ -380,9 +387,9 @@ void GraphicsViewRange::mouseMoveEvent(QMouseEvent *event)
                             rectanglesToSelect << item;
                 }
             }
-
-            setCurrentRectangles(rectanglesToSelect);
         }
+
+        setCurrentRectangles(rectanglesToSelect, event->pos());
     }
     }
 }
@@ -505,24 +512,20 @@ void GraphicsViewRange::setZoomLine(double x1Norm, double y1Norm, double x2Norm,
     }
 }
 
-void GraphicsViewRange::setCurrentRectangles(QList<GraphicsRectangleItem*> rectanglesToSelect)
+void GraphicsViewRange::setCurrentRectangles(QList<GraphicsRectangleItem*> rectanglesToSelect, const QPoint &point)
 {
     // Update the colors
     foreach (GraphicsRectangleItem * item, _currentRectangles)
         if (!rectanglesToSelect.contains(item))
             item->setHover(false);
     foreach (GraphicsRectangleItem * item, rectanglesToSelect)
-        if (!_currentRectangles.contains(item))
-            item->setHover(true);
+        item->setHover(true, point);
 
     // Remember the current rectangles
     _currentRectangles = rectanglesToSelect;
 
     // Update legend text
-    QList<EltID> ids;
-    foreach (GraphicsRectangleItem * item, _currentRectangles)
-        ids << item->getID();
-    _legendItem->setIds(ids);
+    updateLegend();
 
     viewport()->update();
 }

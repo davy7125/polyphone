@@ -63,7 +63,8 @@ protected:
 private:
     void initItems();
     void updateLabels();
-    void setCurrentRectangles(QList<GraphicsRectangleItem*> rectanglesToSelect);
+    void updateLegend();
+    void setCurrentRectangles(QList<GraphicsRectangleItem*> rectanglesToSelect, const QPoint &point);
     QRectF getCurrentRect();
 
     Pile_sf2 * _sf2;
@@ -82,18 +83,8 @@ private:
     int _keyTriggered;
 
     // Drag & zoom
-    enum MouseMode
-    {
-        MOUSE_MODE_NONE,
-        MOUSE_MODE_MOVE_RECTANGLE,
-        MOUSE_MODE_MOVE_RIGHT,
-        MOUSE_MODE_MOVE_LEFT,
-        MOUSE_MODE_MOVE_TOP,
-        MOUSE_MODE_MOVE_BOTTOM
-    };
     Qt::MouseButton _buttonPressed;
     bool _moveOccured;
-    MouseMode _mouseMode;
     double _xInit, _yInit;
     double _zoomX, _zoomY, _posX, _posY;
     double _zoomXinit, _zoomYinit, _posXinit, _posYinit;

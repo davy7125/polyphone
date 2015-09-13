@@ -25,7 +25,7 @@
 #ifndef RECTANGLEITEM_H
 #define RECTANGLEITEM_H
 
-#include <QGraphicsRectItem>
+#include <QGraphicsItem>
 #include "pile_sf2.h"
 
 class GraphicsRectangleItem : public QGraphicsRectItem
@@ -36,19 +36,30 @@ public:
 
     EltID getID() { return _id; }
     EltID findBrother();
-    void setHover(bool isHovered);
-    bool contains(const QPointF &point) const;
+    void setHover(bool isHovered, const QPoint &point = QPoint());
+
+    QRectF getRectF() const;
+    void paint(QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget = NULL);
+
     void computeNewRange(const QPointF &pointInit, const QPointF &pointFinal);
     void saveChanges();
 
     bool operator==(const GraphicsRectangleItem& other) { return (_id == other._id); }
     bool operator==(const EltID &id) { return _id == id; }
 
-protected:
-    QVariant itemChange(GraphicsItemChange change, const QVariant &value);
-
 private:
-    static QPen s_penRectangle;
+    enum EditingMode
+    {
+        NONE,
+        MOVE_ALL,
+        MOVE_RIGHT,
+        MOVE_LEFT,
+        MOVE_TOP,
+        MOVE_BOTTOM
+    };
+
+    static QPen s_penBorderThin;
+    static QPen s_penBorderFat;
     static QBrush s_brushRectangle;
     static QBrush s_brushRectangleHovered;
     static Pile_sf2 * s_sf2;
@@ -56,10 +67,11 @@ private:
     EltID _id;
     int _minKeyInit, _maxKeyInit, _minVelInit, _maxVelInit;
     int _minKey, _maxKey, _minVel, _maxVel;
+    EditingMode _editingMode;
 
-    QRectF getRectInit(EltID id);
-    QRectF getRect();
-    int limit(int value);
+    void initialize(EltID id);
+    EditingMode getEditingMode(const QPoint &point);
+    int limit(int value, int min, int max);
 };
 
 #endif // RECTANGLEITEM_H

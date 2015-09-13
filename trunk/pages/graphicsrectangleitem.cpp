@@ -23,50 +23,27 @@
 ***************************************************************************/
 
 #include "graphicsrectangleitem.h"
-#include <QApplication>
 #include <QGraphicsScene>
 #include "config.h"
 
-QPen GraphicsRectangleItem::s_penRectangle = QPen(QColor(100, 170, 140, 255), 1);
-QBrush GraphicsRectangleItem::s_brushRectangle = QBrush(QColor(70, 180, 100, 50));
-QBrush GraphicsRectangleItem::s_brushRectangleHovered = QBrush(QColor(70, 255, 100, 120));
+QPen   GraphicsRectangleItem::s_penBorderThin         = QPen  (QColor(100, 170, 140, 180), 1);
+QPen   GraphicsRectangleItem::s_penBorderFat          = QPen  (QColor(100, 170, 140, 255), 3);
+QBrush GraphicsRectangleItem::s_brushRectangle        = QBrush(QColor( 70, 180, 100,  50));
+QBrush GraphicsRectangleItem::s_brushRectangleHovered = QBrush(QColor( 70, 255, 100, 120));
 Pile_sf2 * GraphicsRectangleItem::s_sf2 = NULL;
 
-GraphicsRectangleItem::GraphicsRectangleItem(EltID id, QGraphicsItem *parent) :
-    QGraphicsRectItem(getRectInit(id), parent),
-    _id(id)
+GraphicsRectangleItem::GraphicsRectangleItem(EltID id, QGraphicsItem *parent) : QGraphicsRectItem(parent),
+    _id(id),
+    _editingMode(NONE)
 {
-    s_penRectangle.setCosmetic(true);
-    this->setPen(s_penRectangle);
-    this->setBrush(s_brushRectangle);
+    initialize(id);
+    s_penBorderThin.setCosmetic(true);
+    s_penBorderFat.setCosmetic(true);
 
-    this->setFlag(QGraphicsItem::ItemIsSelectable);
-    this->setFlag(QGraphicsItem::ItemIsMovable);
-    this->setFlag(QGraphicsItem::ItemSendsGeometryChanges);
+    this->setRect(getRectF());
 }
 
-QVariant GraphicsRectangleItem::itemChange(GraphicsItemChange change, const QVariant &value)
-{
-    if (change == ItemPositionChange && scene())
-    {
-        // Offset made by integers
-        QPointF offset = value.toPointF();
-        offset.setX(qRound(offset.x()));
-        offset.setY(qRound(offset.y()));
-
-        // Keep item in scene rect
-        offset.setX(qMax(offset.x(), scene()->sceneRect().left() - rect().left()));
-        offset.setX(qMin(offset.x(), scene()->sceneRect().right() - rect().right()));
-        offset.setY(qMax(offset.y(), scene()->sceneRect().top() - rect().top()));
-        offset.setY(qMin(offset.y(), scene()->sceneRect().bottom() - rect().bottom()));
-
-        return offset;
-    }
-
-    return QGraphicsItem::itemChange(change, value);
-}
-
-QRectF GraphicsRectangleItem::getRectInit(EltID id)
+void GraphicsRectangleItem::initialize(EltID id)
 {
     // Default values
     _minKey = 0, _maxKey = 127;
@@ -111,34 +88,118 @@ QRectF GraphicsRectangleItem::getRectInit(EltID id)
     _maxKeyInit = _maxKey;
     _minVelInit = _minVel;
     _maxVelInit = _maxVel;
-
-    return getRect();
 }
 
-QRectF GraphicsRectangleItem::getRect()
+QRectF GraphicsRectangleItem::getRectF() const
 {
     return QRectF((float)_minKey - 0.5, 126.5 - (float)_maxVel,
                   (float)_maxKey - (float)_minKey + 1, (float)_maxVel - (float)_minVel + 1);
 }
 
-bool GraphicsRectangleItem::contains(const QPointF &point) const
+void GraphicsRectangleItem::paint(QPainter *painter, const QStyleOptionGraphicsItem * option, QWidget * widget)
 {
-    return (float)_minKey - 0.5 < point.x() &&
-            point.x() < (float)_maxKey + 0.5 &&
-            126.5 - (float)_maxVel < point.y() &&
-            point.y() < 127.5 - (float)_minVel;
+    // Draw base rectangle with a background color and a thin border
+    if (_editingMode == NONE)
+        this->setBrush(s_brushRectangle);
+    else
+        this->setBrush(s_brushRectangleHovered);
+    this->setPen(s_penBorderThin);
+    QGraphicsRectItem::paint(painter, option, widget);
+
+    QRectF rectF = this->rect();
+    switch (_editingMode)
+    {
+    case NONE:
+        // Nothing else
+        break;
+    case MOVE_ALL:
+        painter->setPen(s_penBorderFat);
+        painter->drawLine(rectF.topRight(), rectF.bottomRight());
+        painter->drawLine(rectF.topLeft(), rectF.bottomLeft());
+        painter->drawLine(rectF.topLeft(), rectF.topRight());
+        painter->drawLine(rectF.bottomLeft(), rectF.bottomRight());
+        break;
+    case MOVE_RIGHT:
+        painter->setPen(s_penBorderFat);
+        painter->drawLine(rectF.topRight(), rectF.bottomRight());
+        break;
+    case MOVE_LEFT:
+        painter->setPen(s_penBorderFat);
+        painter->drawLine(rectF.topLeft(), rectF.bottomLeft());
+        break;
+    case MOVE_TOP:
+        painter->setPen(s_penBorderFat);
+        painter->drawLine(rectF.topLeft(), rectF.topRight());
+        break;
+    case MOVE_BOTTOM:
+        painter->setPen(s_penBorderFat);
+        painter->drawLine(rectF.bottomLeft(), rectF.bottomRight());
+        break;
+    }
 }
 
-void GraphicsRectangleItem::setHover(bool isHovered)
+GraphicsRectangleItem::EditingMode GraphicsRectangleItem::getEditingMode(const QPoint &point)
+{
+    /*    _____________
+     *    |\         /|     The central area is for a global move
+     *    | \ _____ / |
+     *    |  |     |  |     The other areas have a constant width and only move a side of the rectangle
+     *    |  |     |  |     Width = 30% of the minimal size (width or length), maximum 10 pixels
+     *    |  |     |  |
+     *    |  |     |  |     Top or bottom have the priority in case of a conflict with right or left
+     *    |  |     |  |
+     *    |  |     |  |
+     *    |  |_____|  |
+     *    | /       \ |
+     *    |/_________\|
+     */
+
+    // Size in pixels
+    QRectF rectF = getRectF();
+    QGraphicsView *view = scene()->views().first();
+    QPoint topLeftPx = view->mapFromScene(rectF.topLeft());
+    QPoint bottomRightPx = view->mapFromScene(rectF.bottomRight());
+
+    // Width of the external areas
+    int width = qMin(0.3 * qMin(bottomRightPx.x() - topLeftPx.x(), bottomRightPx.y() - topLeftPx.y()), 10.);
+
+    // Minimal distance from a border
+    EditingMode mode = MOVE_TOP;
+    int minDist = point.y() - topLeftPx.y();
+    if (bottomRightPx.y() - point.y() < minDist)
+    {
+        minDist = bottomRightPx.y() - point.y();
+        mode = MOVE_BOTTOM;
+    }
+    if (point.x() - topLeftPx.x() < minDist)
+    {
+        minDist = point.x() - topLeftPx.x();
+        mode = MOVE_LEFT;
+    }
+    if (bottomRightPx.x() - point.x() < minDist)
+    {
+        minDist = bottomRightPx.x() - point.x();
+        mode = MOVE_RIGHT;
+    }
+
+    if (minDist < 0)
+        mode = NONE;
+    else if (minDist > width)
+        mode = MOVE_ALL;
+
+    return mode;
+}
+
+void GraphicsRectangleItem::setHover(bool isHovered, const QPoint &point)
 {
     if (isHovered)
     {
-        this->setBrush(s_brushRectangleHovered);
+        _editingMode = getEditingMode(point);
         this->setZValue(51);
     }
     else
     {
-        this->setBrush(s_brushRectangle);
+        _editingMode = NONE;
         this->setZValue(50);
     }
 }
@@ -206,12 +267,35 @@ void GraphicsRectangleItem::computeNewRange(const QPointF &pointInit, const QPoi
     // Move
     int nKey = qRound(pointFinal.x() - pointInit.x());
     int nVel = qRound(pointInit.y() - pointFinal.y());
-    _minKey = limit(_minKeyInit + nKey);
-    _maxKey = limit(_maxKeyInit + nKey);
-    _minVel = limit(_minVelInit + nVel);
-    _maxVel = limit(_maxVelInit + nVel);
 
-    this->setRect(getRect());
+    if (_editingMode != NONE)
+    {
+        switch (_editingMode)
+        {
+        case MOVE_ALL:
+            _minKey = limit(_minKeyInit + nKey, 0, 127);
+            _maxKey = limit(_maxKeyInit + nKey, 0, 127);
+            _minVel = limit(_minVelInit + nVel, 0, 127);
+            _maxVel = limit(_maxVelInit + nVel, 0, 127);
+            break;
+        case MOVE_RIGHT:
+            _maxKey = limit(_maxKeyInit + nKey, _minKey, 127);
+            break;
+        case MOVE_LEFT:
+            _minKey = limit(_minKeyInit + nKey, 0, _maxKey);
+            break;
+        case MOVE_TOP:
+            _maxVel = limit(_maxVelInit + nVel, _minVel, 127);
+            break;
+        case MOVE_BOTTOM:
+            _minVel = limit(_minVelInit + nVel, 0, _maxVel);
+            break;
+        default:
+            break;
+        }
+    }
+
+    this->setRect(getRectF());
 }
 
 void GraphicsRectangleItem::saveChanges()
@@ -257,12 +341,12 @@ void GraphicsRectangleItem::saveChanges()
 }
 
 
-int GraphicsRectangleItem::limit(int value)
+int GraphicsRectangleItem::limit(int value, int min, int max)
 {
-    if (value < 0)
-        return 0;
-    else if (value > 127)
-        return 127;
+    if (value < min)
+        return min;
+    else if (value > max)
+        return max;
     else
         return value;
 }
