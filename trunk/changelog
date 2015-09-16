@@ -8,6 +8,7 @@ polyphone (1.7) unstable; urgency=low
  * pasting modulators is allowed for several divisions
  * sf3 import / export
  * wheel event support in the sample graphics
+ * loop modes in the instrument table are displayed with graphical elements
  * (fix) left / right attributes were lost after duplicating linked samples
 
  -- Davy Triponney <davy.triponney@gmail.com>  Wed, 27 Sep 2015 20:51:55 +0100

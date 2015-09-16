@@ -82,6 +82,9 @@
         <file alias="modulator">ressources/modulator.png</file>
         <file alias="zoom_in">ressources/zoom_in.png</file>
         <file alias="zoom_out">ressources/zoom_out.png</file>
+        <file alias="loop_off.png">ressources/loop_off.png</file>
+        <file alias="loop_on.png">ressources/loop_on.png</file>
+        <file alias="loop_on_end.png">ressources/loop_on_end.png</file>
     </qresource>
     <qresource prefix="/aide">
         <file alias="page0.png">ressources/doc/page 0.png</file>

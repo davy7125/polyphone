@@ -108,9 +108,9 @@ void PageTable::addGlobal(EltID id, bool multiGlobal)
     QString qStr;
     if (multiGlobal)
     {
-        qStr = this->_sf2->getQstr(id, champ_name).left(10);
+        qStr = _sf2->getQstr(id, champ_name).left(10);
         qStr.append("\n");
-        qStr.append(this->_sf2->getQstr(id, champ_name).mid(10).left(10));
+        qStr.append(_sf2->getQstr(id, champ_name).mid(10).left(10));
     }
     else
         qStr = trUtf8("Global");
@@ -118,11 +118,11 @@ void PageTable::addGlobal(EltID id, bool multiGlobal)
     this->table->addColumn(0, qStr);
     id.typeElement = this->contenantGen;
     id.indexElt2 = 0;
-    for (int i = 0; i < this->_sf2->count(id); i++)
+    for (int i = 0; i < _sf2->count(id); i++)
     {
         id.indexMod = i;
-        champTmp = this->_sf2->get(id, champ_sfGenOper).wValue;
-        genValTmp = this->_sf2->get(id, champ_sfGenAmount).genValue;
+        champTmp = _sf2->get(id, champ_sfGenOper).wValue;
+        genValTmp = _sf2->get(id, champ_sfGenAmount).genValue;
         switch (champTmp)
         {
         case champ_startAddrsOffset:
@@ -152,7 +152,12 @@ void PageTable::addGlobal(EltID id, bool multiGlobal)
         default:
             row = this->table->getRow(champTmp);
             if (row > -1)
-                this->table->item(row, 0)->setText(getTextValue(T, champTmp, genValTmp));
+            {
+                if (champTmp == champ_sampleModes)
+                    this->table->setLoopModeImage(row, 0, genValTmp.wAmount);
+                else
+                    this->table->item(row, 0)->setText(getTextValue(T, champTmp, genValTmp));
+            }
         }
     }
     if (offsetStart && this->table->getRow(champ_startAddrsOffset) > -1)
@@ -191,10 +196,10 @@ void PageTable::addDivisions(EltID id)
     id2.typeElement = this->lienGen;
     id3.typeElement = this->contenu;
 
-    for (int i = 0; i < this->_sf2->count(id); i++)
+    for (int i = 0; i < _sf2->count(id); i++)
     {
         id.indexElt2 = i;
-        if (!this->_sf2->get(id, champ_hidden).bValue)
+        if (!_sf2->get(id, champ_hidden).bValue)
         {
             id2.indexElt2 = i;
 
@@ -208,20 +213,20 @@ void PageTable::addDivisions(EltID id)
             else
                 cElementLie = champ_instrument;
 
-            id3.indexElt = this->_sf2->get(id, cElementLie).wValue;
-            sprintf(str, "%.03d%.03d%s", this->_sf2->get(id, champ_keyRange).rValue.byLo,
-                    this->_sf2->get(id, champ_velRange).rValue.byLo,
-                    this->_sf2->getQstr(id3, champ_name).toStdString().c_str());
-            QString qStr = this->_sf2->getQstr(id3, champ_name).left(10);
+            id3.indexElt = _sf2->get(id, cElementLie).wValue;
+            sprintf(str, "%.03d%.03d%s", _sf2->get(id, champ_keyRange).rValue.byLo,
+                    _sf2->get(id, champ_velRange).rValue.byLo,
+                    _sf2->getQstr(id3, champ_name).toStdString().c_str());
+            QString qStr = _sf2->getQstr(id3, champ_name).left(10);
             qStr.append("\n");
-            qStr.append(this->_sf2->getQstr(id3, champ_name).mid(10).left(10));
+            qStr.append(_sf2->getQstr(id3, champ_name).mid(10).left(10));
             for (int j = 1; j < nbSmplInst + 1; j++)
             {
                 // note et vélocité basses de la colonne et prise en compte du nom de l'élément lié
-                id3.indexElt = this->_sf2->get(this->table->getID(j), cElementLie).wValue;
-                sprintf(str2, "%.03d%.03d%s", this->_sf2->get(this->table->getID(j), champ_keyRange).rValue.byLo,
-                        this->_sf2->get(this->table->getID(j), champ_velRange).rValue.byLo,
-                        this->_sf2->getQstr(id3, champ_name).toStdString().c_str());
+                id3.indexElt = _sf2->get(this->table->getID(j), cElementLie).wValue;
+                sprintf(str2, "%.03d%.03d%s", _sf2->get(this->table->getID(j), champ_keyRange).rValue.byLo,
+                        _sf2->get(this->table->getID(j), champ_velRange).rValue.byLo,
+                        _sf2->getQstr(id3, champ_name).toStdString().c_str());
                 if (strcmp(str, str2) > 0)
                     numCol++;
             }
@@ -232,11 +237,11 @@ void PageTable::addDivisions(EltID id)
             int offsetStartLoop = 0;
             int offsetEndLoop = 0;
             this->table->addColumn(numCol, qStr);
-            for (int j = 0; j < this->_sf2->count(id2); j++)
+            for (int j = 0; j < _sf2->count(id2); j++)
             {
                 id2.indexMod = j;
-                champTmp = this->_sf2->get(id2, champ_sfGenOper).wValue;
-                genValTmp = this->_sf2->get(id2, champ_sfGenAmount).genValue;
+                champTmp = _sf2->get(id2, champ_sfGenOper).wValue;
+                genValTmp = _sf2->get(id2, champ_sfGenAmount).genValue;
                 switch (champTmp)
                 {
                 case champ_startAddrsOffset:
@@ -266,7 +271,12 @@ void PageTable::addDivisions(EltID id)
                 default:
                     row = this->table->getRow(champTmp);
                     if (row > -1)
-                        this->table->item(row, numCol)->setText(getTextValue(T, champTmp, genValTmp));
+                    {
+                        if (champTmp == champ_sampleModes)
+                            this->table->setLoopModeImage(row, numCol, genValTmp.wAmount);
+                        else
+                            this->table->item(row, numCol)->setText(getTextValue(T, champTmp, genValTmp));
+                    }
                 }
             }
 
@@ -436,16 +446,16 @@ void PageTable::afficheMod(EltID id, int selectedIndex)
     int iVal;
     QIcon icon;
     int numLigne = 0;
-    for (int i = 0; i < this->_sf2->count(id); i++)
+    for (int i = 0; i < _sf2->count(id); i++)
     {
         id.indexMod = i;
-        if (!this->_sf2->get(id, champ_hidden).bValue)
+        if (!_sf2->get(id, champ_hidden).bValue)
         {
             // Ajout d'un modulateur
             this->tableMod->addRow(numLigne, id);
             this->tableMod->item(numLigne, 5)->setText(getTextValue(T, champ_indexMod, id.indexMod));
 
-            sfModTmp = this->_sf2->get(id, champ_sfModSrcOper).sfModValue;
+            sfModTmp = _sf2->get(id, champ_sfModSrcOper).sfModValue;
             iVal = 4*sfModTmp.D + 8*sfModTmp.P + sfModTmp.Type + 1;
             sprintf(T, ":/icones/courbe%.2d", iVal);
             icon = QIcon(T);
@@ -464,24 +474,24 @@ void PageTable::afficheMod(EltID id, int selectedIndex)
             }
             else qStr = getIndexName(sfModTmp.Index, sfModTmp.CC);
             this->tableMod->item(numLigne, 6)->setText(qStr);
-            sfModTmp = this->_sf2->get(id, champ_sfModAmtSrcOper).sfModValue;
+            sfModTmp = _sf2->get(id, champ_sfModAmtSrcOper).sfModValue;
             iVal = 4*sfModTmp.D + 8*sfModTmp.P + sfModTmp.Type + 1;
             sprintf(T, ":/icones/courbe%.2d", iVal);
             icon = QIcon(T);
             this->tableMod->item(numLigne, 7)->setIcon(icon);
             qStr = getIndexName(sfModTmp.Index, sfModTmp.CC);
-            genValTmp = this->_sf2->get(id, champ_modAmount).genValue;
+            genValTmp = _sf2->get(id, champ_modAmount).genValue;
             qStr.append(QString::fromUtf8(" × ")).append(getTextValue(T, champ_modAmount, genValTmp));
             this->tableMod->item(numLigne, 7)->setText(qStr);
             this->spinAmount->setValue(genValTmp.shAmount);
-            genValTmp = this->_sf2->get(id, champ_sfModDestOper).genValue;
+            genValTmp = _sf2->get(id, champ_sfModDestOper).genValue;
             if (genValTmp.wAmount > 99)
             {
                 // lien vers modulateur
                 qStr = trUtf8("Modulateur") + ": #" + QString::number(genValTmp.wAmount - 32767);
             }
             else qStr = getGenName(genValTmp.wAmount);
-            genValTmp = this->_sf2->get(id, champ_sfModTransOper).genValue;
+            genValTmp = _sf2->get(id, champ_sfModTransOper).genValue;
             qStr.append(getTextValue(T, champ_sfModTransOper, genValTmp));
             this->tableMod->item(numLigne, 8)->setText(qStr);
             numLigne++;
@@ -546,11 +556,11 @@ void PageTable::afficheEditMod()
         bool bTmp;
         SFModulator sfMod;
 
-        this->spinAmount->setValue(this->_sf2->get(id, champ_modAmount).shValue);
+        this->spinAmount->setValue(_sf2->get(id, champ_modAmount).shValue);
         this->spinAmount->setEnabled(true);
-        this->checkAbs->setChecked(this->_sf2->get(id, champ_sfModTransOper).wValue == 2);
+        this->checkAbs->setChecked(_sf2->get(id, champ_sfModTransOper).wValue == 2);
         this->checkAbs->setEnabled(true);
-        sfMod = this->_sf2->get(id, champ_sfModSrcOper).sfModValue;
+        sfMod = _sf2->get(id, champ_sfModSrcOper).sfModValue;
         iTmp = sfMod.D + 2 * sfMod.P + 4 * sfMod.Type;
         this->comboSource1Courbe->setEnabled(true);
         this->comboSource1Courbe->setCurrentIndex(iTmp / 4);
@@ -572,7 +582,7 @@ void PageTable::afficheEditMod()
         }
         else this->comboSource1->selectIndex(this->getSrcIndex(wTmp, bTmp));
         this->comboSource1->setEnabled(true);
-        sfMod = this->_sf2->get(id, champ_sfModAmtSrcOper).sfModValue;
+        sfMod = _sf2->get(id, champ_sfModAmtSrcOper).sfModValue;
         iTmp = sfMod.D + 2 * sfMod.P + 4 * sfMod.Type;
         this->comboSource2Courbe->setEnabled(true);
         this->comboSource2Courbe->setCurrentIndex(iTmp / 4);
@@ -590,7 +600,7 @@ void PageTable::afficheEditMod()
         addAvailableReceiverMod(this->comboDestination, id);
 
         // Sélection et activation
-        wTmp = this->_sf2->get(id, champ_sfModDestOper).wValue;
+        wTmp = _sf2->get(id, champ_sfModDestOper).wValue;
         this->comboDestination->selectIndex(this->getDestIndex(wTmp), wTmp);
         this->comboDestination->setEnabled(true);
     }
@@ -697,29 +707,29 @@ void PageTable::setOffset(int ligne, int colonne, Champ champ1, Champ champ2)
         int iVal = limit(32768 * genAmount2.shAmount + genAmount.shAmount, champ1, id);
         genAmount2.shAmount = iVal / 32768;
         genAmount.shAmount = iVal % 32768;
-        if (genAmount.shAmount != this->_sf2->get(id, champ1).shValue ||
-                genAmount2.shAmount != this->_sf2->get(id, champ2).shValue)
+        if (genAmount.shAmount != _sf2->get(id, champ1).shValue ||
+                genAmount2.shAmount != _sf2->get(id, champ2).shValue)
         {
             // Modification du sf2
             id = this->table->getID(colonne);
             Valeur value;
             value.genValue = genAmount;
-            this->_sf2->set(id, champ1, value);
+            _sf2->set(id, champ1, value);
             value.genValue = genAmount2;
-            this->_sf2->set(id, champ2, value);
+            _sf2->set(id, champ2, value);
         }
         // Mise à jour de la valeur dans la cellule
-        int offset = this->_sf2->get(id, champ1).genValue.shAmount +
-                32768 * this->_sf2->get(id, champ2).genValue.shAmount;
+        int offset = _sf2->get(id, champ1).genValue.shAmount +
+                32768 * _sf2->get(id, champ2).genValue.shAmount;
         this->table->item(ligne, colonne)->setText(getTextValue(T, champ1, offset));
     }
     else
     {
         // Restauration valeur précédente
-        if (this->_sf2->isSet(id, champ1) || this->_sf2->isSet(id, champ2))
+        if (_sf2->isSet(id, champ1) || _sf2->isSet(id, champ2))
         {
-            int offset = this->_sf2->get(id, champ1).genValue.shAmount +
-                    32768 * this->_sf2->get(id, champ2).genValue.shAmount;
+            int offset = _sf2->get(id, champ1).genValue.shAmount +
+                    32768 * _sf2->get(id, champ2).genValue.shAmount;
             this->table->item(ligne, colonne)->setText(getTextValue(T, champ1, offset));
         }
         else
@@ -731,7 +741,7 @@ void PageTable::actionBegin()
 {
     if (this->_preparation)
         return;
-    this->_sf2->prepareNewActions();
+    _sf2->prepareNewActions();
 }
 
 void PageTable::actionFinished()
@@ -746,7 +756,7 @@ void PageTable::set(int ligne, int colonne, bool allowPropagation)
     if (this->_preparation)
         return;
 
-    // modification d'un élément du tableau
+    // Modification d'un élément du tableau
     Champ champ = this->table->getChamp(ligne);
     if (champ == champ_unknown)
         return;
@@ -799,82 +809,113 @@ void PageTable::set(int ligne, int colonne, bool allowPropagation)
             if (numCol2 != -1 && ok)
             {
                 table->blockSignals(true);
-                table->item(ligne, numCol2)->setText(table->item(ligne, colonne)->text());
+
+                if (champ == champ_sampleModes)
+                {
+                    table->item(ligne, numCol2)->setData(Qt::DecorationRole, table->item(ligne, colonne)->data(Qt::DecorationRole));
+                    table->item(ligne, numCol2)->setData(Qt::UserRole, table->item(ligne, colonne)->data(Qt::UserRole));
+                }
+                else
+                    table->item(ligne, numCol2)->setText(table->item(ligne, colonne)->text());
                 table->blockSignals(false);
                 set(ligne, numCol2, false);
             }
         }
     }
 
-    if (table->item(ligne, colonne)->text().isEmpty())
+    if (champ == champ_sampleModes)
     {
-        // Effacement d'un paramètre ?
-        switch ((int)champ)
-        {
-        case champ_startAddrsOffset:
-            resetChamp(colonne, champ_startAddrsOffset, champ_startAddrsCoarseOffset);
-            break;
-        case champ_endAddrsOffset:
-            resetChamp(colonne, champ_endAddrsOffset, champ_endAddrsCoarseOffset);
-            break;
-        case champ_startloopAddrsOffset:
-            resetChamp(colonne, champ_startloopAddrsOffset, champ_startloopAddrsCoarseOffset);
-            break;
-        case champ_endloopAddrsOffset:
-            resetChamp(colonne, champ_endloopAddrsOffset, champ_endloopAddrsCoarseOffset);
-            break;
-        default:
+        // Effacement du champ?
+        if (table->item(ligne, colonne)->data(Qt::UserRole).isNull())
             resetChamp(colonne, champ, champ_unknown);
+        else
+        {
+            EltID id = this->table->getID(colonne);
+            genAmountType genAmount;
+            genAmount.wAmount = table->item(ligne, colonne)->data(Qt::UserRole).toInt();
+
+            // Modification champ
+            if (genAmount.wAmount != _sf2->get(id, champ).wValue || !_sf2->isSet(id, champ))
+            {
+                // Modification du sf2
+                Valeur value;
+                value.genValue = genAmount;
+                _sf2->set(id, champ, value);
+            }
         }
     }
     else
     {
-        _preparation = 1;
-        switch ((int)champ)
+        if (table->item(ligne, colonne)->text().isEmpty())
         {
-        case champ_startAddrsOffset:
-            setOffset(ligne, colonne, champ_startAddrsOffset, champ_startAddrsCoarseOffset);
-            break;
-        case champ_endAddrsOffset:
-            setOffset(ligne, colonne, champ_endAddrsOffset, champ_endAddrsCoarseOffset);
-            break;
-        case champ_startloopAddrsOffset:
-            setOffset(ligne, colonne, champ_startloopAddrsOffset, champ_startloopAddrsCoarseOffset);
-            break;
-        case champ_endloopAddrsOffset:
-            setOffset(ligne, colonne, champ_endloopAddrsOffset, champ_endloopAddrsCoarseOffset);
-            break;
-        default:{
-            QString texte = this->table->item(ligne, colonne)->text().left(9);
-            bool ok;
-            char T[20];
-            EltID id = this->table->getID(colonne);
-            genAmountType genAmount = getValue(texte, champ, ok);
-            if (ok)
+            // Effacement d'un paramètre ?
+            switch ((int)champ)
             {
-                // Modification champ
-                if (genAmount.wAmount != this->_sf2->get(id, champ).wValue || !this->_sf2->isSet(id, champ))
+            case champ_startAddrsOffset:
+                resetChamp(colonne, champ_startAddrsOffset, champ_startAddrsCoarseOffset);
+                break;
+            case champ_endAddrsOffset:
+                resetChamp(colonne, champ_endAddrsOffset, champ_endAddrsCoarseOffset);
+                break;
+            case champ_startloopAddrsOffset:
+                resetChamp(colonne, champ_startloopAddrsOffset, champ_startloopAddrsCoarseOffset);
+                break;
+            case champ_endloopAddrsOffset:
+                resetChamp(colonne, champ_endloopAddrsOffset, champ_endloopAddrsCoarseOffset);
+                break;
+            default:
+                resetChamp(colonne, champ, champ_unknown);
+            }
+        }
+        else
+        {
+            _preparation = 1;
+            switch ((int)champ)
+            {
+            case champ_startAddrsOffset:
+                setOffset(ligne, colonne, champ_startAddrsOffset, champ_startAddrsCoarseOffset);
+                break;
+            case champ_endAddrsOffset:
+                setOffset(ligne, colonne, champ_endAddrsOffset, champ_endAddrsCoarseOffset);
+                break;
+            case champ_startloopAddrsOffset:
+                setOffset(ligne, colonne, champ_startloopAddrsOffset, champ_startloopAddrsCoarseOffset);
+                break;
+            case champ_endloopAddrsOffset:
+                setOffset(ligne, colonne, champ_endloopAddrsOffset, champ_endloopAddrsCoarseOffset);
+                break;
+            default:{
+                QString texte = this->table->item(ligne, colonne)->text().left(9);
+                bool ok;
+                char T[20];
+                EltID id = this->table->getID(colonne);
+                genAmountType genAmount = getValue(texte, champ, ok);
+                if (ok)
                 {
-                    // Modification du sf2
-                    id = this->table->getID(colonne);
-                    Valeur value;
-                    value.genValue = genAmount;
-                    this->_sf2->set(id, champ, value);
+                    // Modification champ
+                    if (genAmount.wAmount != _sf2->get(id, champ).wValue || !_sf2->isSet(id, champ))
+                    {
+                        // Modification du sf2
+                        Valeur value;
+                        value.genValue = genAmount;
+                        _sf2->set(id, champ, value);
+                    }
+                    // Mise à jour de la valeur dans la cellule
+                    table->item(ligne, colonne)->setText(getTextValue(T, champ, genAmount));
                 }
-                // Mise à jour de la valeur dans la cellule
-                table->item(ligne, colonne)->setText(getTextValue(T, champ, genAmount));
+                else
+                {
+                    // Restauration valeur précédente
+                    if (_sf2->isSet(id, champ))
+                        this->table->item(ligne, colonne)->setText(getTextValue(T, champ, _sf2->get(id, champ).genValue));
+                    else this->table->item(ligne, colonne)->setText("");
+                }
             }
-            else
-            {
-                // Restauration valeur précédente
-                if (this->_sf2->isSet(id, champ))
-                    this->table->item(ligne, colonne)->setText(getTextValue(T, champ, this->_sf2->get(id, champ).genValue));
-                else this->table->item(ligne, colonne)->setText("");
             }
+            _preparation = 0;
         }
-        }
-        _preparation = 0;
     }
+
     if (!Config::getInstance()->getSameWidthTable())
         this->table->resizeColumnsToContents();
 
@@ -901,9 +942,9 @@ void PageTable::setAmount()
     if (id2.typeElement != elementUnknown)
     {
         // Comparaison avec valeur précédente
-        if (this->_sf2->get(id2, champ_modAmount).shValue != val.shValue)
+        if (_sf2->get(id2, champ_modAmount).shValue != val.shValue)
         {
-            this->_sf2->prepareNewActions();
+            _sf2->prepareNewActions();
             // Reprise des identificateurs si modification
             id = this->tableMod->getID();
             id2 = id;
@@ -911,7 +952,7 @@ void PageTable::setAmount()
                 id.typeElement = this->contenant;
             else
                 id.typeElement = this->lien;
-            this->_sf2->set(id2, champ_modAmount, val);
+            _sf2->set(id2, champ_modAmount, val);
             if (this->tableMod->selectedItems().count())
             {
                 int currentRow = this->tableMod->selectedItems().takeFirst()->row();
@@ -944,9 +985,9 @@ void PageTable::setAbs()
     if (id2.typeElement != elementUnknown)
     {
         // Comparaison avec valeur précédente
-        if (this->_sf2->get(id2, champ_sfModTransOper).wValue != val.wValue)
+        if (_sf2->get(id2, champ_sfModTransOper).wValue != val.wValue)
         {
-            this->_sf2->prepareNewActions();
+            _sf2->prepareNewActions();
             // Reprise des identificateurs si modification
             id = this->tableMod->getID();
             id2 = id;
@@ -954,7 +995,7 @@ void PageTable::setAbs()
                 id.typeElement = this->contenant;
             else
                 id.typeElement = this->lien;
-            this->_sf2->set(id2, champ_sfModTransOper, val);
+            _sf2->set(id2, champ_sfModTransOper, val);
             if (this->tableMod->selectedItems().count())
             {
                 int currentRow = this->tableMod->selectedItems().takeFirst()->row();
@@ -986,13 +1027,13 @@ void PageTable::setSourceType(int row, int column)
     if (id2.typeElement != elementUnknown)
     {
         // Comparaison avec valeur précédente
-        val.sfModValue = this->_sf2->get(id2, champ_sfModSrcOper).sfModValue;
+        val.sfModValue = _sf2->get(id2, champ_sfModSrcOper).sfModValue;
         if (val.sfModValue.D != D || val.sfModValue.P != P || val.sfModValue.Type != type)
         {
             val.sfModValue.D = D;
             val.sfModValue.P = P;
             val.sfModValue.Type = type;
-            this->_sf2->prepareNewActions();
+            _sf2->prepareNewActions();
             // Reprise des identificateurs si modification
             id = this->tableMod->getID();
             id2 = id;
@@ -1000,7 +1041,7 @@ void PageTable::setSourceType(int row, int column)
                 id.typeElement = this->contenant;
             else
                 id.typeElement = this->lien;
-            this->_sf2->set(id2, champ_sfModSrcOper, val);
+            _sf2->set(id2, champ_sfModSrcOper, val);
             if (this->tableMod->selectedItems().count())
             {
                 int currentRow = this->tableMod->selectedItems().takeFirst()->row();
@@ -1032,13 +1073,13 @@ void PageTable::setSourceAmountType(int row, int column)
     if (id2.typeElement != elementUnknown)
     {
         // Comparaison avec valeur précédente
-        val.sfModValue = this->_sf2->get(id2, champ_sfModAmtSrcOper).sfModValue;
+        val.sfModValue = _sf2->get(id2, champ_sfModAmtSrcOper).sfModValue;
         if (val.sfModValue.D != D || val.sfModValue.P != P || val.sfModValue.Type != type)
         {
             val.sfModValue.D = D;
             val.sfModValue.P = P;
             val.sfModValue.Type = type;
-            this->_sf2->prepareNewActions();
+            _sf2->prepareNewActions();
             // Reprise des identificateurs si modification
             id = this->tableMod->getID();
             id2 = id;
@@ -1046,7 +1087,7 @@ void PageTable::setSourceAmountType(int row, int column)
                 id.typeElement = this->contenant;
             else
                 id.typeElement = this->lien;
-            this->_sf2->set(id2, champ_sfModAmtSrcOper, val);
+            _sf2->set(id2, champ_sfModAmtSrcOper, val);
             if (this->tableMod->selectedItems().count())
             {
                 int currentRow = this->tableMod->selectedItems().takeFirst()->row();
@@ -1076,10 +1117,10 @@ void PageTable::setDest(int index)
     if (id2.typeElement != elementUnknown)
     {
         // Comparaison avec valeur précédente
-        val.sfGenValue = this->_sf2->get(id2, champ_sfModDestOper).sfGenValue;
+        val.sfGenValue = _sf2->get(id2, champ_sfModDestOper).sfGenValue;
         if (val.sfGenValue != (Champ)index)
         {
-            this->_sf2->prepareNewActions();
+            _sf2->prepareNewActions();
             // Reprise des identificateurs si modification
             id = this->tableMod->getID();
             id2 = id;
@@ -1092,17 +1133,17 @@ void PageTable::setDest(int index)
             {
                 EltID id3 = id2;
                 id3.indexMod = val.wValue - 32768;
-                if (id3.indexMod < this->_sf2->count(id2))
+                if (id3.indexMod < _sf2->count(id2))
                 {
                     Valeur val2;
-                    val2.sfModValue = this->_sf2->get(id3, champ_sfModSrcOper).sfModValue;
+                    val2.sfModValue = _sf2->get(id3, champ_sfModSrcOper).sfModValue;
                     val2.sfModValue.CC = 0;
                     val2.sfModValue.Index = 0;
-                    this->_sf2->set(id3, champ_sfModSrcOper, val2);
+                    _sf2->set(id3, champ_sfModSrcOper, val2);
                 }
             }
             // Lien ?
-            if (index >= 32768 && this->_sf2->count(id2) > index - 32768)
+            if (index >= 32768 && _sf2->count(id2) > index - 32768)
             {
                 EltID id3 = id2;
                 id3.indexMod = index - 32768;
@@ -1115,16 +1156,16 @@ void PageTable::setDest(int index)
                     if (id4.indexMod != -1)
                     {
                         val2.sfGenValue = (Champ)0;
-                        this->_sf2->set(id4, champ_sfModDestOper, val2);
+                        _sf2->set(id4, champ_sfModDestOper, val2);
                     }
                 } while (id4.indexMod != -1);
-                val2.sfModValue = this->_sf2->get(id3, champ_sfModSrcOper).sfModValue;
+                val2.sfModValue = _sf2->get(id3, champ_sfModSrcOper).sfModValue;
                 val2.sfModValue.Index = 127;
                 val2.sfModValue.CC = 0;
-                this->_sf2->set(id3, champ_sfModSrcOper, val2);
+                _sf2->set(id3, champ_sfModSrcOper, val2);
             }
             val.sfGenValue = (Champ)index;
-            this->_sf2->set(id2, champ_sfModDestOper, val);
+            _sf2->set(id2, champ_sfModDestOper, val);
             if (this->tableMod->selectedItems().count())
             {
                 int currentRow = this->tableMod->selectedItems().takeFirst()->row();
@@ -1156,13 +1197,13 @@ void PageTable::setSource(int index)
     if (id2.typeElement != elementUnknown)
     {
         // Comparaison avec valeur précédente
-        val.sfModValue = this->_sf2->get(id2, champ_sfModSrcOper).sfModValue;
+        val.sfModValue = _sf2->get(id2, champ_sfModSrcOper).sfModValue;
         if (index < 32768)
         {
             if (val.sfModValue.Index != index || val.sfModValue.CC != CC)
             {
                 // modification, pas de lien
-                this->_sf2->prepareNewActions();
+                _sf2->prepareNewActions();
                 // Reprise des identificateurs si modification
                 id = this->tableMod->getID();
                 id2 = id;
@@ -1182,13 +1223,13 @@ void PageTable::setSource(int index)
                         if (id3.indexMod != -1)
                         {
                             val2.wValue = 0;
-                            this->_sf2->set(id3, champ_sfModDestOper, val2);
+                            _sf2->set(id3, champ_sfModDestOper, val2);
                         }
                     } while (id3.indexMod != -1);
                 }
                 val.sfModValue.Index = index;
                 val.sfModValue.CC = CC;
-                this->_sf2->set(id2, champ_sfModSrcOper, val);
+                _sf2->set(id2, champ_sfModSrcOper, val);
                 if (this->tableMod->selectedItems().count())
                 {
                     int currentRow = this->tableMod->selectedItems().takeFirst()->row();
@@ -1202,7 +1243,7 @@ void PageTable::setSource(int index)
         }
         else
         {
-            this->_sf2->prepareNewActions();
+            _sf2->prepareNewActions();
             // Reprise des identificateurs si modification
             id = this->tableMod->getID();
             id2 = id;
@@ -1218,25 +1259,25 @@ void PageTable::setSource(int index)
                 id3.indexMod = index - 32768;
                 // sender était-il lié à un autre mod ?
                 Valeur val2;
-                val2.wValue = this->_sf2->get(id3, champ_sfModDestOper).wValue;
+                val2.wValue = _sf2->get(id3, champ_sfModDestOper).wValue;
                 if (val2.wValue >= 32768)
                 {
                     // On enlève le lien précédent
                     EltID id4 = id2;
                     id4.indexMod = val2.wValue-32768;
-                    if (this->_sf2->count(id) > id4.indexMod)
+                    if (_sf2->count(id) > id4.indexMod)
                     {
-                        val2.sfModValue = this->_sf2->get(id4, champ_sfModSrcOper).sfModValue;
+                        val2.sfModValue = _sf2->get(id4, champ_sfModSrcOper).sfModValue;
                         val2.sfModValue.CC = 0;
                         val2.sfModValue.Index = 0;
-                        this->_sf2->set(id4, champ_sfModSrcOper, val2);
+                        _sf2->set(id4, champ_sfModSrcOper, val2);
                     }
                 }
                 val2.wValue = 32768 + id2.indexMod;
-                this->_sf2->set(id3, champ_sfModDestOper, val2);
+                _sf2->set(id3, champ_sfModDestOper, val2);
                 val.sfModValue.Index = 127;
                 val.sfModValue.CC = CC;
-                this->_sf2->set(id2, champ_sfModSrcOper, val);
+                _sf2->set(id2, champ_sfModSrcOper, val);
                 if (this->tableMod->selectedItems().count())
                 {
                     int currentRow = this->tableMod->selectedItems().takeFirst()->row();
@@ -1262,32 +1303,32 @@ void PageTable::setSource(int index)
                         if (id3.indexMod != -1)
                         {
                             val2.wValue = 0;
-                            this->_sf2->set(id3, champ_sfModDestOper, val2);
+                            _sf2->set(id3, champ_sfModDestOper, val2);
                         }
                     } while (id3.indexMod != -1);
                     // Modification sender
                     id3 = id2;
                     id3.indexMod = index - 32768;
                     // sender était-il lié à un autre mod ?
-                    val2.wValue = this->_sf2->get(id3, champ_sfModDestOper).wValue;
+                    val2.wValue = _sf2->get(id3, champ_sfModDestOper).wValue;
                     if (val2.wValue >= 32768)
                     {
                         // On enlève le lien précédent
                         EltID id4 = id2;
                         id4.indexMod = val2.wValue-32768;
-                        if (this->_sf2->count(id2) > id4.indexMod)
+                        if (_sf2->count(id2) > id4.indexMod)
                         {
-                            val2.sfModValue = this->_sf2->get(id4, champ_sfModSrcOper).sfModValue;
+                            val2.sfModValue = _sf2->get(id4, champ_sfModSrcOper).sfModValue;
                             val2.sfModValue.CC = 0;
                             val2.sfModValue.Index = 0;
-                            this->_sf2->set(id4, champ_sfModSrcOper, val2);
+                            _sf2->set(id4, champ_sfModSrcOper, val2);
                         }
                     }
                     val2.wValue = 32768 + id2.indexMod;
-                    this->_sf2->set(id3, champ_sfModDestOper, val2);
+                    _sf2->set(id3, champ_sfModDestOper, val2);
                     val.sfModValue.Index = 127;
                     val.sfModValue.CC = CC;
-                    this->_sf2->set(id2, champ_sfModSrcOper, val);
+                    _sf2->set(id2, champ_sfModSrcOper, val);
                     if (this->tableMod->selectedItems().count())
                     {
                         int currentRow = this->tableMod->selectedItems().takeFirst()->row();
@@ -1320,11 +1361,11 @@ void PageTable::setSource2(int index)
     if (id2.typeElement != elementUnknown)
     {
         // Comparaison avec valeur précédente
-        val.sfModValue = this->_sf2->get(id2, champ_sfModAmtSrcOper).sfModValue;
+        val.sfModValue = _sf2->get(id2, champ_sfModAmtSrcOper).sfModValue;
         if (val.sfModValue.Index != index || val.sfModValue.CC != CC)
         {
             // modification
-            this->_sf2->prepareNewActions();
+            _sf2->prepareNewActions();
             // Reprise des identificateurs si modification
             id = this->tableMod->getID();
             id2 = id;
@@ -1334,7 +1375,7 @@ void PageTable::setSource2(int index)
                 id.typeElement = this->lien;
             val.sfModValue.Index = index;
             val.sfModValue.CC = CC;
-            this->_sf2->set(id2, champ_sfModAmtSrcOper, val);
+            _sf2->set(id2, champ_sfModAmtSrcOper, val);
             if (this->tableMod->selectedItems().count())
             {
                 int currentRow = this->tableMod->selectedItems().takeFirst()->row();
@@ -1630,12 +1671,12 @@ int PageTable::getAssociatedMod(EltID id)
         return -1;
     int iVal = -1;
     EltID id2 = id;
-    for (int j = 0; j < this->_sf2->count(id); j++)
+    for (int j = 0; j < _sf2->count(id); j++)
     {
         id2.indexMod = j;
-        if (id2.indexMod != id.indexMod  && !this->_sf2->get(id2, champ_hidden).bValue)
+        if (id2.indexMod != id.indexMod  && !_sf2->get(id2, champ_hidden).bValue)
         {
-            if (this->_sf2->get(id2, champ_sfModDestOper).wValue == 32768 + id.indexMod)
+            if (_sf2->get(id2, champ_sfModDestOper).wValue == 32768 + id.indexMod)
                 iVal = j;
         }
     }
@@ -1652,7 +1693,7 @@ void PageTable::supprimerMod()
     int rowToSelect  = tableMod->currentRow();
     int nbRow = tableMod->rowCount();
 
-    this->_sf2->prepareNewActions();
+    _sf2->prepareNewActions();
 
     // Suppression mod
     QList<EltID> listIDs = this->tableMod->getSelectedIDs();
@@ -1673,23 +1714,23 @@ void PageTable::supprimerMod()
                 // Suppression du lien
                 val.sfGenValue = (Champ)0;
                 id2.indexMod = iVal;
-                this->_sf2->set(id2, champ_sfModDestOper, val);
+                _sf2->set(id2, champ_sfModDestOper, val);
             }
         } while (iVal != -1);
 
         // Le mod est-il lié ?
-        if (this->_sf2->get(id, champ_sfModDestOper).wValue >= 32768)
+        if (_sf2->get(id, champ_sfModDestOper).wValue >= 32768)
         {
-            id2.indexMod = this->_sf2->get(id, champ_sfModDestOper).wValue - 32768;
-            if (id2.indexMod < this->_sf2->count(id))
+            id2.indexMod = _sf2->get(id, champ_sfModDestOper).wValue - 32768;
+            if (id2.indexMod < _sf2->count(id))
             {
-                val.sfModValue = this->_sf2->get(id2, champ_sfModSrcOper).sfModValue;
+                val.sfModValue = _sf2->get(id2, champ_sfModSrcOper).sfModValue;
                 val.sfModValue.CC = 0;
                 val.sfModValue.Index = 0;
-                this->_sf2->set(id2, champ_sfModSrcOper, val);
+                _sf2->set(id2, champ_sfModSrcOper, val);
             }
         }
-        this->_sf2->remove(id);
+        _sf2->remove(id);
     }
 
     this->_mainWindow->updateDo();
@@ -1702,7 +1743,7 @@ void PageTable::supprimerMod()
 
 void PageTable::nouveauMod()
 {
-    this->_sf2->prepareNewActions();
+    _sf2->prepareNewActions();
 
     // Création nouveau mod
     EltID id = this->_tree->getFirstID();
@@ -1711,24 +1752,24 @@ void PageTable::nouveauMod()
     else if (id.typeElement == elementInstSmpl) id.typeElement = elementInstSmplMod;
     else if (id.typeElement == elementPrstInst) id.typeElement = elementPrstInstMod;
     else return;
-    id.indexMod = this->_sf2->add(id);
+    id.indexMod = _sf2->add(id);
 
     // initialisation
     Valeur val;
     val.sfGenValue = (Champ)0;
     val.wValue = 0;
-    this->_sf2->set(id, champ_modAmount, val);
-    this->_sf2->set(id, champ_sfModTransOper, val);
+    _sf2->set(id, champ_modAmount, val);
+    _sf2->set(id, champ_sfModTransOper, val);
     val.sfModValue.CC = 0;
     val.sfModValue.D = 0;
     val.sfModValue.Index = 0;
     val.sfModValue.P = 0;
     val.sfModValue.Type = 0;
-    this->_sf2->set(id, champ_sfModSrcOper, val);
-    this->_sf2->set(id, champ_sfModAmtSrcOper, val);
+    _sf2->set(id, champ_sfModSrcOper, val);
+    _sf2->set(id, champ_sfModAmtSrcOper, val);
     if (id.typeElement == elementPrstMod || id.typeElement == elementPrstInstMod)
         val.sfGenValue = (Champ)52;
-    this->_sf2->set(id, champ_sfModDestOper, val);
+    _sf2->set(id, champ_sfModDestOper, val);
     this->afficheMod(this->_tree->getFirstID(), id.indexMod);
     this->_mainWindow->updateDo();
 }
@@ -1756,17 +1797,17 @@ QList<PageTable::Modulator> PageTable::getModList(EltID id)
     if (listSelectedMods.isEmpty())
     {
         // All modulators are copied
-        for (int i = 0; i < this->_sf2->count(id); i++)
+        for (int i = 0; i < _sf2->count(id); i++)
         {
             id.indexMod = i;
-            if (!this->_sf2->get(id, champ_hidden).bValue)
+            if (!_sf2->get(id, champ_hidden).bValue)
             {
                 Modulator modTmp;
-                modTmp.modSrcOper = this->_sf2->get(id, champ_sfModSrcOper).sfModValue;
-                modTmp.modDestOper = this->_sf2->get(id, champ_sfModDestOper).sfGenValue;
-                modTmp.modAmount = this->_sf2->get(id, champ_modAmount).shValue;
-                modTmp.modAmtSrcOper = this->_sf2->get(id, champ_sfModAmtSrcOper).sfModValue;
-                modTmp.modTransOper = this->_sf2->get(id, champ_sfModTransOper).sfTransValue;
+                modTmp.modSrcOper = _sf2->get(id, champ_sfModSrcOper).sfModValue;
+                modTmp.modDestOper = _sf2->get(id, champ_sfModDestOper).sfGenValue;
+                modTmp.modAmount = _sf2->get(id, champ_modAmount).shValue;
+                modTmp.modAmtSrcOper = _sf2->get(id, champ_sfModAmtSrcOper).sfModValue;
+                modTmp.modTransOper = _sf2->get(id, champ_sfModTransOper).sfTransValue;
                 modTmp.index = id.indexMod;
                 listRet << modTmp;
             }
@@ -1776,14 +1817,14 @@ QList<PageTable::Modulator> PageTable::getModList(EltID id)
     {
         foreach (EltID id, listSelectedMods)
         {
-            if (!this->_sf2->get(id, champ_hidden).bValue)
+            if (!_sf2->get(id, champ_hidden).bValue)
             {
                 Modulator modTmp;
-                modTmp.modSrcOper = this->_sf2->get(id, champ_sfModSrcOper).sfModValue;
-                modTmp.modDestOper = this->_sf2->get(id, champ_sfModDestOper).sfGenValue;
-                modTmp.modAmount = this->_sf2->get(id, champ_modAmount).shValue;
-                modTmp.modAmtSrcOper = this->_sf2->get(id, champ_sfModAmtSrcOper).sfModValue;
-                modTmp.modTransOper = this->_sf2->get(id, champ_sfModTransOper).sfTransValue;
+                modTmp.modSrcOper = _sf2->get(id, champ_sfModSrcOper).sfModValue;
+                modTmp.modDestOper = _sf2->get(id, champ_sfModDestOper).sfGenValue;
+                modTmp.modAmount = _sf2->get(id, champ_modAmount).shValue;
+                modTmp.modAmtSrcOper = _sf2->get(id, champ_sfModAmtSrcOper).sfModValue;
+                modTmp.modTransOper = _sf2->get(id, champ_sfModTransOper).sfTransValue;
                 modTmp.index = id.indexMod;
                 listRet << modTmp;
             }
@@ -1842,7 +1883,7 @@ QList<PageTable::Modulator> PageTable::getModList(EltID id)
 
 void PageTable::pasteMod()
 {
-    this->_sf2->prepareNewActions();
+    _sf2->prepareNewActions();
 
     QList<EltID> ids = this->_tree->getAllIDs();
     foreach (EltID id, ids)
@@ -1898,7 +1939,7 @@ void PageTable::pasteMod(EltID id, QList<Modulator> modulators)
     }
 
     // Index minimal des mods à copier
-    int offsetIndex = this->_sf2->count(id);
+    int offsetIndex = _sf2->count(id);
     for (int i = 0; i < modulators.size(); i++)
     {
         Modulator mod = modulators.at(i);
@@ -1911,7 +1952,7 @@ void PageTable::pasteMod(EltID id, QList<Modulator> modulators)
     // Création de nouveaux mods
     QList<int> listIndex;
     for (int i = 0; i < modulators.size(); i++)
-        listIndex.append(this->_sf2->add(id));
+        listIndex.append(_sf2->add(id));
 
     // Copie des configurations des mods sauvegardés
     Valeur valTmp;
@@ -1921,15 +1962,15 @@ void PageTable::pasteMod(EltID id, QList<Modulator> modulators)
         id.indexMod = listIndex.at(i);
         modTmp = modulators.at(i);
         valTmp.sfModValue = modTmp.modSrcOper;
-        this->_sf2->set(id, champ_sfModSrcOper, valTmp);
+        _sf2->set(id, champ_sfModSrcOper, valTmp);
         valTmp.sfGenValue = modTmp.modDestOper;
-        this->_sf2->set(id, champ_sfModDestOper, valTmp);
+        _sf2->set(id, champ_sfModDestOper, valTmp);
         valTmp.shValue = modTmp.modAmount;
-        this->_sf2->set(id, champ_modAmount, valTmp);
+        _sf2->set(id, champ_modAmount, valTmp);
         valTmp.sfModValue = modTmp.modAmtSrcOper;
-        this->_sf2->set(id, champ_sfModAmtSrcOper, valTmp);
+        _sf2->set(id, champ_sfModAmtSrcOper, valTmp);
         valTmp.sfTransValue = modTmp.modTransOper;
-        this->_sf2->set(id, champ_sfModTransOper, valTmp);
+        _sf2->set(id, champ_sfModTransOper, valTmp);
     }
 }
 
@@ -1964,7 +2005,7 @@ void PageTable::duplicateMod(QList<int> listIndex)
     // Copie des mods
     QList<Modulator> modulators = getModList(idMod);
 
-    this->_sf2->prepareNewActions();
+    _sf2->prepareNewActions();
     foreach (int numElement, listIndex)
     {
         id.indexElt = numElement;
@@ -2217,19 +2258,19 @@ int PageTable::limit(int iVal, Champ champ, EltID id)
         if (id.typeElement == elementInstSmpl)
         {
             id2.typeElement = elementSmpl;
-            id2.indexElt = this->_sf2->get(id, champ_sampleID).wValue;
-            limSup = this->_sf2->get(id2, champ_dwLength).dwValue;
+            id2.indexElt = _sf2->get(id, champ_sampleID).wValue;
+            limSup = _sf2->get(id2, champ_dwLength).dwValue;
         }
         else
         {
             id3.typeElement = elementInstSmpl;
             id2.typeElement = elementSmpl;
-            for (int i = 0; i < this->_sf2->count(id3); i++)
+            for (int i = 0; i < _sf2->count(id3); i++)
             {
                 id3.indexElt2 = i;
-                id2.indexElt = this->_sf2->get(id3, champ_sampleID).wValue;
-                if (i == 0 || this->_sf2->get(id2, champ_dwLength).dwValue < (unsigned)limSup)
-                    limSup = this->_sf2->get(id2, champ_dwLength).dwValue;
+                id2.indexElt = _sf2->get(id3, champ_sampleID).wValue;
+                if (i == 0 || _sf2->get(id2, champ_dwLength).dwValue < (unsigned)limSup)
+                    limSup = _sf2->get(id2, champ_dwLength).dwValue;
             }
         }
         if (ret > limSup) ret = limSup;
@@ -2240,19 +2281,19 @@ int PageTable::limit(int iVal, Champ champ, EltID id)
         if (id.typeElement == elementInstSmpl)
         {
             id2.typeElement = elementSmpl;
-            id2.indexElt = this->_sf2->get(id, champ_sampleID).wValue;
-            limInf = - (int)this->_sf2->get(id2, champ_dwLength).dwValue;
+            id2.indexElt = _sf2->get(id, champ_sampleID).wValue;
+            limInf = - (int)_sf2->get(id2, champ_dwLength).dwValue;
         }
         else
         {
             id3.typeElement = elementInstSmpl;
             id2.typeElement = elementSmpl;
-            for (int i = 0; i < this->_sf2->count(id3); i++)
+            for (int i = 0; i < _sf2->count(id3); i++)
             {
                 id3.indexElt2 = i;
-                id2.indexElt = this->_sf2->get(id3, champ_sampleID).wValue;
-                if (i == 0 || -(signed)this->_sf2->get(id2, champ_dwLength).dwValue > limInf)
-                    limInf = - (int)this->_sf2->get(id2, champ_dwLength).dwValue;
+                id2.indexElt = _sf2->get(id3, champ_sampleID).wValue;
+                if (i == 0 || -(signed)_sf2->get(id2, champ_dwLength).dwValue > limInf)
+                    limInf = - (int)_sf2->get(id2, champ_dwLength).dwValue;
             }
         }
         if (ret < limInf) ret = limInf;
@@ -2265,19 +2306,19 @@ int PageTable::limit(int iVal, Champ champ, EltID id)
         if (id.typeElement == elementInstSmpl)
         {
             id2.typeElement = elementSmpl;
-            id2.indexElt = this->_sf2->get(id, champ_sampleID).wValue;
-            limInf = - (int)this->_sf2->get(id2, champ_dwStartLoop).dwValue;
+            id2.indexElt = _sf2->get(id, champ_sampleID).wValue;
+            limInf = - (int)_sf2->get(id2, champ_dwStartLoop).dwValue;
         }
         else
         {
             id3.typeElement = elementInstSmpl;
             id2.typeElement = elementSmpl;
-            for (int i = 0; i < this->_sf2->count(id3); i++)
+            for (int i = 0; i < _sf2->count(id3); i++)
             {
                 id3.indexElt2 = i;
-                id2.indexElt = this->_sf2->get(id3, champ_sampleID).wValue;
-                if (i == 0 || -(signed)this->_sf2->get(id2, champ_dwStartLoop).dwValue > limInf)
-                    limInf = - (int)this->_sf2->get(id2, champ_dwStartLoop).dwValue;
+                id2.indexElt = _sf2->get(id3, champ_sampleID).wValue;
+                if (i == 0 || -(signed)_sf2->get(id2, champ_dwStartLoop).dwValue > limInf)
+                    limInf = - (int)_sf2->get(id2, champ_dwStartLoop).dwValue;
             }
         }
         if (ret < limInf) ret = limInf;
@@ -2286,22 +2327,22 @@ int PageTable::limit(int iVal, Champ champ, EltID id)
         if (id.typeElement == elementInstSmpl)
         {
             id2.typeElement = elementSmpl;
-            id2.indexElt = this->_sf2->get(id, champ_sampleID).wValue;
-            limSup = this->_sf2->get(id2, champ_dwLength).dwValue - this->_sf2->get(id2, champ_dwStartLoop).dwValue;
+            id2.indexElt = _sf2->get(id, champ_sampleID).wValue;
+            limSup = _sf2->get(id2, champ_dwLength).dwValue - _sf2->get(id2, champ_dwStartLoop).dwValue;
         }
         else
         {
             id3.typeElement = elementInstSmpl;
             id2.typeElement = elementSmpl;
-            for (int i = 0; i < this->_sf2->count(id3); i++)
+            for (int i = 0; i < _sf2->count(id3); i++)
             {
                 id3.indexElt2 = i;
-                id2.indexElt = this->_sf2->get(id3, champ_sampleID).wValue;
+                id2.indexElt = _sf2->get(id3, champ_sampleID).wValue;
                 if (i == 0 || \
-                        this->_sf2->get(id2, champ_dwLength).dwValue - \
-                        this->_sf2->get(id2, champ_dwStartLoop).dwValue < (unsigned)limSup)
-                    limSup = this->_sf2->get(id2, champ_dwLength).dwValue - \
-                            this->_sf2->get(id2, champ_dwStartLoop).dwValue;
+                        _sf2->get(id2, champ_dwLength).dwValue - \
+                        _sf2->get(id2, champ_dwStartLoop).dwValue < (unsigned)limSup)
+                    limSup = _sf2->get(id2, champ_dwLength).dwValue - \
+                            _sf2->get(id2, champ_dwStartLoop).dwValue;
             }
         }
         if (ret > limSup) ret = limSup;
@@ -2312,19 +2353,19 @@ int PageTable::limit(int iVal, Champ champ, EltID id)
         if (id.typeElement == elementInstSmpl)
         {
             id2.typeElement = elementSmpl;
-            id2.indexElt = this->_sf2->get(id, champ_sampleID).wValue;
-            limInf = - (int)this->_sf2->get(id2, champ_dwEndLoop).dwValue;
+            id2.indexElt = _sf2->get(id, champ_sampleID).wValue;
+            limInf = - (int)_sf2->get(id2, champ_dwEndLoop).dwValue;
         }
         else
         {
             id3.typeElement = elementInstSmpl;
             id2.typeElement = elementSmpl;
-            for (int i = 0; i < this->_sf2->count(id3); i++)
+            for (int i = 0; i < _sf2->count(id3); i++)
             {
                 id3.indexElt2 = i;
-                id2.indexElt = this->_sf2->get(id3, champ_sampleID).wValue;
-                if (i == 0 || -(signed)this->_sf2->get(id2, champ_dwEndLoop).dwValue > limInf)
-                    limInf = - (int)this->_sf2->get(id2, champ_dwEndLoop).dwValue;
+                id2.indexElt = _sf2->get(id3, champ_sampleID).wValue;
+                if (i == 0 || -(signed)_sf2->get(id2, champ_dwEndLoop).dwValue > limInf)
+                    limInf = - (int)_sf2->get(id2, champ_dwEndLoop).dwValue;
             }
         }
         if (ret < limInf) ret = limInf;
@@ -2333,22 +2374,22 @@ int PageTable::limit(int iVal, Champ champ, EltID id)
         if (id.typeElement == elementInstSmpl)
         {
             id2.typeElement = elementSmpl;
-            id2.indexElt = this->_sf2->get(id, champ_sampleID).wValue;
-            limSup = this->_sf2->get(id2, champ_dwLength).dwValue - this->_sf2->get(id2, champ_dwEndLoop).dwValue;
+            id2.indexElt = _sf2->get(id, champ_sampleID).wValue;
+            limSup = _sf2->get(id2, champ_dwLength).dwValue - _sf2->get(id2, champ_dwEndLoop).dwValue;
         }
         else
         {
             id3.typeElement = elementInstSmpl;
             id2.typeElement = elementSmpl;
-            for (int i = 0; i < this->_sf2->count(id3); i++)
+            for (int i = 0; i < _sf2->count(id3); i++)
             {
                 id3.indexElt2 = i;
-                id2.indexElt = this->_sf2->get(id3, champ_sampleID).wValue;
+                id2.indexElt = _sf2->get(id3, champ_sampleID).wValue;
                 if (i == 0 || \
-                        this->_sf2->get(id2, champ_dwLength).dwValue - \
-                        this->_sf2->get(id2, champ_dwEndLoop).dwValue < (unsigned)limSup)
-                    limSup = this->_sf2->get(id2, champ_dwLength).dwValue - \
-                            this->_sf2->get(id2, champ_dwEndLoop).dwValue;
+                        _sf2->get(id2, champ_dwLength).dwValue - \
+                        _sf2->get(id2, champ_dwEndLoop).dwValue < (unsigned)limSup)
+                    limSup = _sf2->get(id2, champ_dwLength).dwValue - \
+                            _sf2->get(id2, champ_dwEndLoop).dwValue;
             }
         }
         if (ret > limSup) ret = limSup;
@@ -2364,7 +2405,7 @@ void PageTable::paramGlobal()
     if (ids.isEmpty() || error)
         return;
 
-    DialogParamGlobal * dialogParam = new DialogParamGlobal(this->_sf2, _typePage == PAGE_PRST, this);
+    DialogParamGlobal * dialogParam = new DialogParamGlobal(_sf2, _typePage == PAGE_PRST, this);
     dialogParam->setAttribute(Qt::WA_DeleteOnClose, true);
     this->connect(dialogParam, SIGNAL(accepted(QVector<double>,int,int,int,int)),
                   SLOT(paramGlobal(QVector<double>,int,int,int,int)));
@@ -2373,7 +2414,7 @@ void PageTable::paramGlobal()
 
 void PageTable::paramGlobal(QVector<double> dValues, int typeModif, int champ, int velMin, int velMax)
 {
-    this->_sf2->prepareNewActions();
+    _sf2->prepareNewActions();
 
     bool error;
     QList<EltID> ids = this->getUniqueInstOrPrst(error, true, true);
@@ -2402,17 +2443,17 @@ void PageTable::paramGlobal(QVector<double> dValues, int typeModif, int champ, i
         char T[30];
         bool ok;
         Valeur value;
-        for (int i = 0; i < this->_sf2->count(id); i++)
+        for (int i = 0; i < _sf2->count(id); i++)
         {
             id.indexElt2 = i;
-            if (!this->_sf2->get(id, champ_hidden).bValue)
+            if (!_sf2->get(id, champ_hidden).bValue)
             {
                 int velMin2 = 0;
                 int velMax2 = 127;
-                if (this->_sf2->isSet(id, champ_velRange))
+                if (_sf2->isSet(id, champ_velRange))
                 {
-                    velMin2 = this->_sf2->get(id, champ_velRange).rValue.byLo;
-                    velMax2 = this->_sf2->get(id, champ_velRange).rValue.byHi;
+                    velMin2 = _sf2->get(id, champ_velRange).rValue.byLo;
+                    velMax2 = _sf2->get(id, champ_velRange).rValue.byHi;
                 }
                 if (velMin2 > velMax2)
                 {
@@ -2422,12 +2463,12 @@ void PageTable::paramGlobal(QVector<double> dValues, int typeModif, int champ, i
                 }
                 if (velMin2 >= velMin && velMax2 <= velMax)
                 {
-                    amount = QString(getTextValue(T, (Champ)champ, this->_sf2->get(id, (Champ)champ).genValue))
+                    amount = QString(getTextValue(T, (Champ)champ, _sf2->get(id, (Champ)champ).genValue))
                             .replace(",", ".").toDouble();
 
                     // Calcul de la modification
-                    pos = (double)(this->_sf2->get(id, champ_keyRange).rValue.byLo +
-                                   this->_sf2->get(id, champ_keyRange).rValue.byHi) / 2 * dValues.size() / 127. + 0.5;
+                    pos = (double)(_sf2->get(id, champ_keyRange).rValue.byLo +
+                                   _sf2->get(id, champ_keyRange).rValue.byHi) / 2 * dValues.size() / 127. + 0.5;
                     if (pos < 0)
                         pos = 0;
                     else if (pos >= dValues.size())
@@ -2447,7 +2488,7 @@ void PageTable::paramGlobal(QVector<double> dValues, int typeModif, int champ, i
                         break;
                     }
                     value.genValue = getValue(QString::number(amount), (Champ)champ, ok);
-                    this->_sf2->set(id, (Champ)champ, value);
+                    _sf2->set(id, (Champ)champ, value);
                 }
             }
         }
@@ -2474,7 +2515,7 @@ void PageTable::duplication()
 
 void PageTable::duplication(QVector<int> listeVelocites, bool duplicKey, bool duplicVel)
 {
-    this->_sf2->prepareNewActions();
+    _sf2->prepareNewActions();
 
     bool error;
     QList<EltID> ids = this->getUniqueInstOrPrst(error, true, false);
@@ -2491,11 +2532,11 @@ void PageTable::duplication(QVector<int> listeVelocites, bool duplicKey, bool du
         // Duplication pour chaque note
         if (duplicKey)
         {
-            int nbElementsLies = this->_sf2->count(id);
+            int nbElementsLies = _sf2->count(id);
             for (int i = 0; i < nbElementsLies; i++)
             {
                 id.indexElt2 = i;
-                if (!this->_sf2->get(id, champ_hidden).bValue)
+                if (!_sf2->get(id, champ_hidden).bValue)
                     this->duplication(id);
             }
         }
@@ -2503,11 +2544,11 @@ void PageTable::duplication(QVector<int> listeVelocites, bool duplicKey, bool du
         // Duplication pour chaque velocityRange
         if (duplicVel)
         {
-            int nbElementsLies = this->_sf2->count(id);
+            int nbElementsLies = _sf2->count(id);
             for (int i = 0; i < nbElementsLies; i++)
             {
                 id.indexElt2 = i;
-                if (!this->_sf2->get(id, champ_hidden).bValue)
+                if (!_sf2->get(id, champ_hidden).bValue)
                     this->duplication(id, listeVelocites);
             }
         }
@@ -2523,10 +2564,10 @@ void PageTable::duplication(EltID id)
     // Etendue du sample sur le clavier
     int numBas = 0;
     int numHaut = 127;
-    if (this->_sf2->isSet(id, champ_keyRange))
+    if (_sf2->isSet(id, champ_keyRange))
     {
-        numBas = this->_sf2->get(id, champ_keyRange).rValue.byLo;
-        numHaut = this->_sf2->get(id, champ_keyRange).rValue.byHi;
+        numBas = _sf2->get(id, champ_keyRange).rValue.byLo;
+        numHaut = _sf2->get(id, champ_keyRange).rValue.byHi;
         if (numBas > numHaut)
         {
             int temp = numBas;
@@ -2540,7 +2581,7 @@ void PageTable::duplication(EltID id)
         Valeur val;
         val.rValue.byLo = numBas;
         val.rValue.byHi = numBas;
-        this->_sf2->set(id, champ_keyRange, val);
+        _sf2->set(id, champ_keyRange, val);
         // Création de divisions identiques pour les autres notes
         EltID id2 = id;
         for (int i = numBas+1; i <= numHaut; i++)
@@ -2549,7 +2590,7 @@ void PageTable::duplication(EltID id)
             {
                 id.typeElement = elementInstSmpl;
                 id2.typeElement = elementInstSmpl;
-                id2.indexElt2 = this->_sf2->add(id);
+                id2.indexElt2 = _sf2->add(id);
                 // Recopiage des gens
                 id.typeElement = elementInstSmplGen;
             }
@@ -2557,20 +2598,20 @@ void PageTable::duplication(EltID id)
             {
                 id.typeElement = elementPrstInst;
                 id2.typeElement = elementPrstInst;
-                id2.indexElt2 = this->_sf2->add(id);
+                id2.indexElt2 = _sf2->add(id);
                 // Recopiage des gens
                 id.typeElement = elementPrstInstGen;
             }
-            for (int j = 0; j < this->_sf2->count(id); j++)
+            for (int j = 0; j < _sf2->count(id); j++)
             {
                 id.indexMod = j;
-                this->_sf2->set(id2, (Champ)this->_sf2->get(id, champ_sfGenOper).wValue,
-                               this->_sf2->get(id, champ_sfGenAmount));
+                _sf2->set(id2, (Champ)_sf2->get(id, champ_sfGenOper).wValue,
+                               _sf2->get(id, champ_sfGenAmount));
             }
             // Modification keyrange
             val.rValue.byLo = i;
             val.rValue.byHi = i;
-            this->_sf2->set(id2, champ_keyRange, val);
+            _sf2->set(id2, champ_keyRange, val);
             // Recopiage des mods
             if (_typePage == PAGE_INST)
             {
@@ -2582,15 +2623,15 @@ void PageTable::duplication(EltID id)
                 id.typeElement = elementPrstInstMod;
                 id2.typeElement = elementPrstInstMod;
             }
-            for (int j = 0; j < this->_sf2->count(id); j++)
+            for (int j = 0; j < _sf2->count(id); j++)
             {
                 id.indexMod = j;
-                id2.indexMod = this->_sf2->add(id2);
-                this->_sf2->set(id2, champ_modAmount, this->_sf2->get(id, champ_modAmount));
-                this->_sf2->set(id2, champ_sfModSrcOper, this->_sf2->get(id, champ_sfModSrcOper));
-                this->_sf2->set(id2, champ_sfModAmtSrcOper, this->_sf2->get(id, champ_sfModAmtSrcOper));
-                this->_sf2->set(id2, champ_sfModDestOper, this->_sf2->get(id, champ_sfModDestOper));
-                this->_sf2->set(id2, champ_sfModTransOper, this->_sf2->get(id, champ_sfModTransOper));
+                id2.indexMod = _sf2->add(id2);
+                _sf2->set(id2, champ_modAmount, _sf2->get(id, champ_modAmount));
+                _sf2->set(id2, champ_sfModSrcOper, _sf2->get(id, champ_sfModSrcOper));
+                _sf2->set(id2, champ_sfModAmtSrcOper, _sf2->get(id, champ_sfModAmtSrcOper));
+                _sf2->set(id2, champ_sfModDestOper, _sf2->get(id, champ_sfModDestOper));
+                _sf2->set(id2, champ_sfModTransOper, _sf2->get(id, champ_sfModTransOper));
             }
         }
     }
@@ -2604,17 +2645,17 @@ void PageTable::duplication(EltID id, QVector<int> listeVelocite)
     // Element lié
     int idLinked;
     if (_typePage == PAGE_INST)
-        idLinked = this->_sf2->get(id, champ_sampleID).wValue;
+        idLinked = _sf2->get(id, champ_sampleID).wValue;
     else
-        idLinked = this->_sf2->get(id, champ_instrument).wValue;
+        idLinked = _sf2->get(id, champ_instrument).wValue;
 
     // Keyrange
     int noteMin = 0;
     int noteMax = 127;
-    if (this->_sf2->isSet(id, champ_keyRange))
+    if (_sf2->isSet(id, champ_keyRange))
     {
-        noteMin = this->_sf2->get(id, champ_keyRange).rValue.byLo;
-        noteMax = this->_sf2->get(id, champ_keyRange).rValue.byHi;
+        noteMin = _sf2->get(id, champ_keyRange).rValue.byLo;
+        noteMax = _sf2->get(id, champ_keyRange).rValue.byHi;
         if (noteMin > noteMax)
         {
             int tmp = noteMin;
@@ -2626,19 +2667,19 @@ void PageTable::duplication(EltID id, QVector<int> listeVelocite)
     // On scanne tous les éléments liés pour savoir si des étendues sont déjà présentes
     bool selfOk = false;
     int indexSelf = id.indexElt2;
-    int nbElementsLies = this->_sf2->count(id);
+    int nbElementsLies = _sf2->count(id);
     for (int i = 0; i < nbElementsLies; i++)
     {
         id.indexElt2 = i;
-        if (!this->_sf2->get(id, champ_hidden).bValue)
+        if (!_sf2->get(id, champ_hidden).bValue)
         {
             // Keyrange
             int noteMin2 = 0;
             int noteMax2 = 127;
-            if (this->_sf2->isSet(id, champ_keyRange))
+            if (_sf2->isSet(id, champ_keyRange))
             {
-                noteMin2 = this->_sf2->get(id, champ_keyRange).rValue.byLo;
-                noteMax2 = this->_sf2->get(id, champ_keyRange).rValue.byHi;
+                noteMin2 = _sf2->get(id, champ_keyRange).rValue.byLo;
+                noteMax2 = _sf2->get(id, champ_keyRange).rValue.byHi;
                 if (noteMin2 > noteMax2)
                 {
                     int tmp = noteMin2;
@@ -2648,18 +2689,18 @@ void PageTable::duplication(EltID id, QVector<int> listeVelocite)
             }
             int idLinked2;
             if (_typePage == PAGE_INST)
-                idLinked2 = this->_sf2->get(id, champ_sampleID).wValue;
+                idLinked2 = _sf2->get(id, champ_sampleID).wValue;
             else
-                idLinked2 = this->_sf2->get(id, champ_instrument).wValue;
+                idLinked2 = _sf2->get(id, champ_instrument).wValue;
 
             if (noteMin == noteMin2 && noteMax == noteMax2 && idLinked == idLinked2)
             {
                 int velMin2 = 0;
                 int velMax2 = 127;
-                if (this->_sf2->isSet(id, champ_keyRange))
+                if (_sf2->isSet(id, champ_keyRange))
                 {
-                    velMin2 = this->_sf2->get(id, champ_velRange).rValue.byLo;
-                    velMax2 = this->_sf2->get(id, champ_velRange).rValue.byHi;
+                    velMin2 = _sf2->get(id, champ_velRange).rValue.byLo;
+                    velMax2 = _sf2->get(id, champ_velRange).rValue.byHi;
                     if (velMin2 > velMax2)
                     {
                         int tmp = velMin2;
@@ -2696,7 +2737,7 @@ void PageTable::duplication(EltID id, QVector<int> listeVelocite)
             Valeur val;
             val.rValue.byLo = qMin(listeVelocite.at(2 * pos), listeVelocite.at(2 * pos + 1));
             val.rValue.byHi = qMax(listeVelocite.at(2 * pos), listeVelocite.at(2 * pos + 1));
-            this->_sf2->set(id, champ_velRange, val);
+            _sf2->set(id, champ_velRange, val);
         }
 
         while (rangeOk.indexOf(false) != -1)
@@ -2707,18 +2748,18 @@ void PageTable::duplication(EltID id, QVector<int> listeVelocite)
             else
                 id.typeElement = elementPrstInst;
             EltID id2 = id;
-            id2.indexElt2 = this->_sf2->add(id);
+            id2.indexElt2 = _sf2->add(id);
 
             // Recopiage des gens
             if (_typePage == PAGE_INST)
                 id.typeElement = elementInstSmplGen;
             else
                 id.typeElement = elementPrstInstGen;
-            for (int j = 0; j < this->_sf2->count(id); j++)
+            for (int j = 0; j < _sf2->count(id); j++)
             {
                 id.indexMod = j;
-                this->_sf2->set(id2, (Champ)this->_sf2->get(id, champ_sfGenOper).wValue,
-                               this->_sf2->get(id, champ_sfGenAmount));
+                _sf2->set(id2, (Champ)_sf2->get(id, champ_sfGenOper).wValue,
+                               _sf2->get(id, champ_sfGenAmount));
             }
 
             // Modification étendue de vélocité
@@ -2727,7 +2768,7 @@ void PageTable::duplication(EltID id, QVector<int> listeVelocite)
             Valeur val;
             val.rValue.byLo = qMin(listeVelocite.at(2 * pos), listeVelocite.at(2 * pos + 1));
             val.rValue.byHi = qMax(listeVelocite.at(2 * pos), listeVelocite.at(2 * pos + 1));
-            this->_sf2->set(id2, champ_velRange, val);
+            _sf2->set(id2, champ_velRange, val);
 
             // Recopiage des mods
             if (_typePage == PAGE_INST)
@@ -2740,15 +2781,15 @@ void PageTable::duplication(EltID id, QVector<int> listeVelocite)
                 id.typeElement = elementPrstInstMod;
                 id2.typeElement = elementPrstInstMod;
             }
-            for (int j = 0; j < this->_sf2->count(id); j++)
+            for (int j = 0; j < _sf2->count(id); j++)
             {
                 id.indexMod = j;
-                id2.indexMod = this->_sf2->add(id2);
-                this->_sf2->set(id2, champ_modAmount, this->_sf2->get(id, champ_modAmount));
-                this->_sf2->set(id2, champ_sfModSrcOper, this->_sf2->get(id, champ_sfModSrcOper));
-                this->_sf2->set(id2, champ_sfModAmtSrcOper, this->_sf2->get(id, champ_sfModAmtSrcOper));
-                this->_sf2->set(id2, champ_sfModDestOper, this->_sf2->get(id, champ_sfModDestOper));
-                this->_sf2->set(id2, champ_sfModTransOper, this->_sf2->get(id, champ_sfModTransOper));
+                id2.indexMod = _sf2->add(id2);
+                _sf2->set(id2, champ_modAmount, _sf2->get(id, champ_modAmount));
+                _sf2->set(id2, champ_sfModSrcOper, _sf2->get(id, champ_sfModSrcOper));
+                _sf2->set(id2, champ_sfModAmtSrcOper, _sf2->get(id, champ_sfModAmtSrcOper));
+                _sf2->set(id2, champ_sfModDestOper, _sf2->get(id, champ_sfModDestOper));
+                _sf2->set(id2, champ_sfModTransOper, _sf2->get(id, champ_sfModTransOper));
             }
         }
     }
@@ -2771,14 +2812,14 @@ void PageTable::spatialisation()
         else
             id.typeElement = elementPrstInst;
 
-        for (int i = 0; i < this->_sf2->count(id); i++)
+        for (int i = 0; i < _sf2->count(id); i++)
         {
             id.indexElt2 = i;
-            if (!this->_sf2->get(id, champ_hidden).bValue)
+            if (!_sf2->get(id, champ_hidden).bValue)
             {
-                if (this->_sf2->isSet(id, champ_keyRange))
+                if (_sf2->isSet(id, champ_keyRange))
                 {
-                    genAmountType amount = this->_sf2->get(id, champ_keyRange).genValue;
+                    genAmountType amount = _sf2->get(id, champ_keyRange).genValue;
                     if (amount.ranges.byLo < noteMin) noteMin = amount.ranges.byLo;
                     if (amount.ranges.byHi > noteMax) noteMax = amount.ranges.byHi;
                 }
@@ -2794,7 +2835,7 @@ void PageTable::spatialisation()
 
 void PageTable::spatialisation(QMap<int, double> mapPan)
 {
-    this->_sf2->prepareNewActions();
+    _sf2->prepareNewActions();
 
     bool error;
     QList<EltID> ids = this->getUniqueInstOrPrst(error, true, true);
@@ -2807,7 +2848,7 @@ void PageTable::spatialisation(QMap<int, double> mapPan)
             id.typeElement = elementPrstInst;
         else
             id.typeElement = elementInstSmpl;
-        if (this->_sf2->count(id, false) > 0)
+        if (_sf2->count(id, false) > 0)
             spatialisation(mapPan, id);
     }
 
@@ -2834,13 +2875,13 @@ void PageTable::spatialisation(QMap<int, double> mapPan, EltID id)
         id.typeElement = elementPrstInst;
     else
         id.typeElement = elementInstSmpl;
-    for (int i = 0; i < this->_sf2->count(id); i++)
+    for (int i = 0; i < _sf2->count(id); i++)
     {
         id.indexElt2 = i;
-        if (!this->_sf2->get(id, champ_hidden).bValue)
+        if (!_sf2->get(id, champ_hidden).bValue)
         {
-            if (this->_sf2->isSet(id, champ_keyRange))
-                amount = this->_sf2->get(id, champ_keyRange).genValue;
+            if (_sf2->isSet(id, champ_keyRange))
+                amount = _sf2->get(id, champ_keyRange).genValue;
             else
             {
                 amount.ranges.byLo = 0;
@@ -2862,15 +2903,15 @@ void PageTable::spatialisation(QMap<int, double> mapPan, EltID id)
                     {
                         // Les samples sont-ils liés ?
                         EltID idSmpl1 = id;
-                        idSmpl1.indexElt = this->_sf2->get(id, champ_sampleID).wValue;
+                        idSmpl1.indexElt = _sf2->get(id, champ_sampleID).wValue;
                         idSmpl1.typeElement = elementSmpl;
                         EltID idSmpl2 = list1.at(pos);
-                        idSmpl2.indexElt = this->_sf2->get(idSmpl2, champ_sampleID).wValue;
+                        idSmpl2.indexElt = _sf2->get(idSmpl2, champ_sampleID).wValue;
                         idSmpl2.typeElement = elementSmpl;
-                        if (idSmpl1.indexElt == this->_sf2->get(idSmpl2, champ_wSampleLink).wValue)
+                        if (idSmpl1.indexElt == _sf2->get(idSmpl2, champ_wSampleLink).wValue)
                         {
-                            SFSampleLink type1 = this->_sf2->get(idSmpl1, champ_sfSampleType).sfLinkValue;
-                            SFSampleLink type2 = this->_sf2->get(idSmpl2, champ_sfSampleType).sfLinkValue;
+                            SFSampleLink type1 = _sf2->get(idSmpl1, champ_sfSampleType).sfLinkValue;
+                            SFSampleLink type2 = _sf2->get(idSmpl2, champ_sfSampleType).sfLinkValue;
                             if (((type1 == rightSample || type1 == RomRightSample) && (type2 == leftSample || type2 == RomLeftSample)) ||
                                     ((type1 == leftSample || type1 == RomLeftSample) && (type2 == rightSample || type2 == RomRightSample)))
                                 found = true;
@@ -2914,7 +2955,7 @@ void PageTable::spatialisation(QMap<int, double> mapPan, EltID id)
         {
             // pas de lien
             val.genValue.shAmount = 1000 * pan - 500;
-            this->_sf2->set(list1.at(i), champ_pan, val);
+            _sf2->set(list1.at(i), champ_pan, val);
         }
         else
         {
@@ -2922,14 +2963,14 @@ void PageTable::spatialisation(QMap<int, double> mapPan, EltID id)
             sampleG = 0;
             // Sample correspondant 1
             id2 = list1.at(i);
-            id2.indexElt = this->_sf2->get(id2, champ_sampleID).wValue;
+            id2.indexElt = _sf2->get(id2, champ_sampleID).wValue;
             id2.typeElement = elementSmpl;
-            SFSampleLink type1 = this->_sf2->get(id2, champ_sfSampleType).sfLinkValue;
+            SFSampleLink type1 = _sf2->get(id2, champ_sfSampleType).sfLinkValue;
             // Sample correspondant 2
             id3 = list2.at(i);
-            id3.indexElt = this->_sf2->get(id3, champ_sampleID).wValue;
+            id3.indexElt = _sf2->get(id3, champ_sampleID).wValue;
             id3.typeElement = elementSmpl;
-            SFSampleLink type2 = this->_sf2->get(id3, champ_sfSampleType).sfLinkValue;
+            SFSampleLink type2 = _sf2->get(id3, champ_sfSampleType).sfLinkValue;
             if ((type1 == leftSample || type1 == RomLeftSample) &&
                     type2 != leftSample && type2 != RomLeftSample)
             {
@@ -2942,11 +2983,11 @@ void PageTable::spatialisation(QMap<int, double> mapPan, EltID id)
             }
             else
             {
-                if (this->_sf2->get(list1.at(i), champ_pan).shValue <
-                        this->_sf2->get(list2.at(i), champ_pan).shValue)
+                if (_sf2->get(list1.at(i), champ_pan).shValue <
+                        _sf2->get(list2.at(i), champ_pan).shValue)
                     sampleG = 0;
-                else if (this->_sf2->get(list1.at(i), champ_pan).shValue >
-                         this->_sf2->get(list2.at(i), champ_pan).shValue)
+                else if (_sf2->get(list1.at(i), champ_pan).shValue >
+                         _sf2->get(list2.at(i), champ_pan).shValue)
                     sampleG = 1;
             }
             if (sampleG == 0)
@@ -2961,19 +3002,19 @@ void PageTable::spatialisation(QMap<int, double> mapPan, EltID id)
             {
                 // Gauche
                 val.genValue.shAmount = -500;
-                this->_sf2->set(list1.at(i), champ_pan, val);
+                _sf2->set(list1.at(i), champ_pan, val);
                 // Droite
                 val.genValue.shAmount = 2000 * pan - 500;
-                this->_sf2->set(list2.at(i), champ_pan, val);
+                _sf2->set(list2.at(i), champ_pan, val);
             }
             else
             {
                 // Gauche
                 val.genValue.shAmount = 2000 * pan - 1500;
-                this->_sf2->set(list1.at(i), champ_pan, val);
+                _sf2->set(list1.at(i), champ_pan, val);
                 // Droite
                 val.genValue.shAmount = 500;
-                this->_sf2->set(list2.at(i), champ_pan, val);
+                _sf2->set(list2.at(i), champ_pan, val);
             }
         }
     }
@@ -3014,14 +3055,14 @@ QList<EltID> PageTable::getUniqueInstOrPrst(bool &error, bool errorIfNoDivision,
                 idTmp.typeElement = elementPrstInst;
             else if (idTmp.typeElement == elementInst)
                 idTmp.typeElement = elementInstSmpl;
-            withDivision &= (this->_sf2->count(idTmp, false) > 0);
+            withDivision &= (_sf2->count(idTmp, false) > 0);
 
             // Test if all keyranges are present
-            for (int i = 0; i < this->_sf2->count(idTmp); i++)
+            for (int i = 0; i < _sf2->count(idTmp); i++)
             {
                 idTmp.indexElt2 = i;
-                if (!this->_sf2->get(idTmp, champ_hidden).bValue)
-                    allDivWithKeyrange &= this->_sf2->isSet(idTmp, champ_keyRange);
+                if (!_sf2->get(idTmp, champ_hidden).bValue)
+                    allDivWithKeyrange &= _sf2->isSet(idTmp, champ_keyRange);
             }
         }
     }
@@ -3059,18 +3100,18 @@ void PageTable::visualize()
     int nbElt = 0;
     int posMin = 128;
     int posMax = 0;
-    for (int i = 0; i < this->_sf2->count(id); i++)
+    for (int i = 0; i < _sf2->count(id); i++)
     {
         id.indexElt2 = i;
-        if (!this->_sf2->get(id, champ_hidden).bValue)
+        if (!_sf2->get(id, champ_hidden).bValue)
         {
             nbElt++;
-            if (this->_sf2->isSet(id, champ_keyRange))
+            if (_sf2->isSet(id, champ_keyRange))
             {
-                if (this->_sf2->get(id, champ_keyRange).rValue.byLo < posMin)
-                    posMin = this->_sf2->get(id, champ_keyRange).rValue.byLo;
-                if (this->_sf2->get(id, champ_keyRange).rValue.byHi > posMax)
-                    posMax = this->_sf2->get(id, champ_keyRange).rValue.byHi;
+                if (_sf2->get(id, champ_keyRange).rValue.byLo < posMin)
+                    posMin = _sf2->get(id, champ_keyRange).rValue.byLo;
+                if (_sf2->get(id, champ_keyRange).rValue.byHi > posMax)
+                    posMax = _sf2->get(id, champ_keyRange).rValue.byHi;
             }
         }
     }
@@ -3090,7 +3131,7 @@ void PageTable::visualize()
             QMessageBox::warning(this, trUtf8("Attention"), trUtf8("Aucune étendue de notes spécifiée pour le preset."));
         return;
     }
-    DialogVisualizer * dialogVisu = new DialogVisualizer(this->_sf2, id, this);
+    DialogVisualizer * dialogVisu = new DialogVisualizer(_sf2, id, this);
     dialogVisu->setAttribute(Qt::WA_DeleteOnClose, true);
     dialogVisu->show();
 }
@@ -3314,11 +3355,11 @@ void PageTable::keyPlayed(int key, int velocity)
         if (_sf2->isValide(id))
         {
             bool enlighted = false;
-            if (!this->_sf2->get(id, champ_hidden).bValue)
+            if (!_sf2->get(id, champ_hidden).bValue)
             {
-                int key1 = this->_sf2->get(id, champ_keyRange).rValue.byLo;
-                int key2 = this->_sf2->get(id, champ_keyRange).rValue.byHi;
-                if (!this->_sf2->isSet(id, champ_keyRange))
+                int key1 = _sf2->get(id, champ_keyRange).rValue.byLo;
+                int key2 = _sf2->get(id, champ_keyRange).rValue.byHi;
+                if (!_sf2->isSet(id, champ_keyRange))
                 {
                     key1 = 0;
                     key2 = 128;

@@ -1670,6 +1670,7 @@ int Pile_sf2::set(EltID id, Champ champ, Valeur value, bool storeAction, bool so
     Valeur oldValue;
     oldValue.wValue = 0;
     int defaultValue = 0;
+
     // Type d'élément à modifier
     switch ((int)id.typeElement)
     {
