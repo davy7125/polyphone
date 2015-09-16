@@ -208,7 +208,9 @@ SOURCES	+= main.cpp \
     pages/graphicszoomline.cpp \
     pages/graphicskey.cpp \
     pages/graphicslegenditem2.cpp \
-    pages/tablepageoverview.cpp
+    pages/tablepageoverview.cpp \
+    gui_divers/comboboxloopmode.cpp \
+    pages/tabledelegate.cpp
 
 HEADERS  += mainwindow.h \
     sf2_core/sf2_types.h \
@@ -288,7 +290,9 @@ HEADERS  += mainwindow.h \
     pages/graphicszoomline.h \
     pages/graphicskey.h \
     pages/graphicslegenditem2.h \
-    pages/tablepageoverview.h
+    pages/tablepageoverview.h \
+    gui_divers/comboboxloopmode.h \
+    pages/tabledelegate.h
 
 FORMS    += mainwindow.ui \
     gui_divers/config.ui \

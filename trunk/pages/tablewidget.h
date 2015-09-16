@@ -27,7 +27,6 @@
 #define TABLEWIDGET_H
 
 #include <QTableWidget>
-#include <QStyledItemDelegate>
 #include <QTimer>
 #include "pile_sf2.h"
 
@@ -45,12 +44,16 @@ public:
     void setID(EltID id, int colonne);
     EltID getID(int colonne);
     void setEnlighted(int colonne, bool isEnlighted);
+    void setColumnCount(int columns);
+    void removeColumn(int column);
+
+    // Set the image corresponding to the loop mode value
+    // -1 will remove the image
+    void setLoopModeImage(int row, int column, int loopModeValue);
 
     // Association champ - ligne (méthodes virtuelles pures)
     virtual Champ getChamp(int row) = 0;
     virtual int getRow(quint16 champ) = 0;
-    void setColumnCount(int columns);
-    void removeColumn(int column);
 
 signals:
     void actionBegin();
@@ -60,6 +63,7 @@ protected:
     void keyPressEvent(QKeyEvent *event);
 
 protected slots:
+    // Function reimplemented to fill all selected cells in the same time
     virtual void commitData(QWidget *editor);
 
 private slots:
@@ -68,26 +72,6 @@ private slots:
 private:
     QTimer *_timer;
     QList<QColor> _listColors;
-};
-
-// Redéfinition des éditeurs au sein de la table
-class TableDelegate : public QStyledItemDelegate
-{
-    Q_OBJECT
-
-public:
-    TableDelegate(QTableWidget * table, QObject * parent = NULL): QStyledItemDelegate(parent),
-        _table(table)
-    {}
-
-protected:
-    QWidget * createEditor(QWidget *parent, const QStyleOptionViewItem &option, const QModelIndex &index) const;
-    void setEditorData(QWidget *editor, const QModelIndex &index) const;
-    void setModelData(QWidget *editor, QAbstractItemModel *model, const QModelIndex &index) const;
-
-private:
-    void getType(bool &isNumeric, bool &isKey, int &nbDecimales, int numRow) const;
-    QTableWidget * _table;
 };
 
 #endif // TABLEWIDGET_H
