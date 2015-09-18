@@ -23,6 +23,7 @@
 ***************************************************************************/
 
 #include "calibrationsinus.h"
+#include "qmath.h"
 
 CalibrationSinus::CalibrationSinus() :
     _sinus(NULL),

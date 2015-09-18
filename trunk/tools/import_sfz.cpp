@@ -22,6 +22,10 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
+#include <QTextStream>
+#include <QFileInfo>
+#include <QDir>
+#include <QDebug>
 #include "import_sfz.h"
 #include "pile_sf2.h"
 #include "config.h"

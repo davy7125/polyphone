@@ -23,7 +23,8 @@
 ***************************************************************************/
 
 #include "pile_sf2.h"
-#include <QMessageBox>
+#include <QFile>
+#include <QFileInfo>
 #include "oggconverter.h"
 #include "sfont.h"
 
@@ -48,13 +49,14 @@ void Pile_sf2::nouveau(QString name)
     }
 }
 
-int Pile_sf2::ouvrir(QString fileName)
+int Pile_sf2::open(QString fileName)
 {
     // ouverture d'un fichier soundfont
     // Valeur retour :
+    // -1 : QMessageBox::warning(NULL, "Attention", "Fichier corrompu : utilisation des échantillons en qualité 16 bits.");
     // 0: ok
     // 1: format inconnu
-    // 2: QMessageBox::warning(NULL, "Attention", QString::fromUtf8("Le fichier est déjà chargé."));
+    // 2: QMessageBox::warning(NULL, "Attention", "Le fichier est déjà chargé."));
     // 3: QMessageBox::warning(NULL, "Attention", "Impossible d'ouvrir le fichier.");
     // 4: QMessageBox::warning(NULL, "Attention", "Lecture impossible.");
     // 5: QMessageBox::warning(NULL, "Attention", "Le fichier est corrompu.");
@@ -82,9 +84,9 @@ int Pile_sf2::ouvrir(QString fileName)
             return 3;
         QDataStream stream(&fi);
         int indexSf2 = -1;
-        int valRet = this->ouvrir(fileName, &stream, indexSf2);
+        int valRet = this->open(fileName, &stream, indexSf2);
         fi.close();
-        if (valRet == 0 && type == fileSf2)
+        if (valRet <= 0 && type == fileSf2)
             this->storeEdition(indexSf2);
         return valRet;
     }break;
@@ -180,8 +182,10 @@ Pile_sf2::FileType Pile_sf2::getFileType(QString fileName)
         return fileUnknown;
 }
 
-int Pile_sf2::ouvrir(QString fileName, QDataStream * stream, int &indexSf2, bool copySamples)
+int Pile_sf2::open(QString fileName, QDataStream * stream, int &indexSf2, bool copySamples)
 {
+    int openResult = 0;
+
     bool isSf3 = fileName.endsWith('3');
 
     //////////////////////////// CHARGEMENT ////////////////////////////////////////
@@ -326,8 +330,7 @@ int Pile_sf2::ouvrir(QString fileName, QDataStream * stream, int &indexSf2, bool
             else
             {
                 // on ignore le bloc sm24
-                QMessageBox::warning(parent, QObject::trUtf8("Attention"),
-                                     QObject::trUtf8("Fichier corrompu : utilisation des échantillons en qualité 16 bits."));
+                openResult = -1; // For a warning
                 taille_sm24 = 0;
                 wSm24 = 0;
                 stream->skipRawData(taille_sm24); // en avant de taille_sm24
@@ -1059,7 +1062,7 @@ int Pile_sf2::ouvrir(QString fileName, QDataStream * stream, int &indexSf2, bool
         tree->select(id, true);
     }
 
-    return 0;
+    return openResult;
 }
 
 int Pile_sf2::sauvegarderSf2(int indexSf2, QString fileName)

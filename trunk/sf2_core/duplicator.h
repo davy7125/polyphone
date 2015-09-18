@@ -26,6 +26,7 @@
 #define DUPLICATOR_H
 
 #include "sf2_types.h"
+#include <QList>
 
 class QWidget;
 class Pile_sf2;

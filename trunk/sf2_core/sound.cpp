@@ -25,6 +25,11 @@
 #include "sound.h"
 #include <QMessageBox>
 #include "config.h"
+#include <QLibrary>
+#include <QCoreApplication>
+#include <QFileInfo>
+#include "qmath.h"
+#include <QFile>
 
 QWidget * Sound::_parent = NULL;
 

@@ -4,9 +4,6 @@
 #
 #-------------------------------------------------
 
-# Option for developers ONLY
-#DEFINES += SHOW_ID_ERROR
-
 # Use local copies of RtMidi, Stk and QCustomplot libraries
 # (this is forced to true for Windows or Mac OS X)
 #DEFINES += USE_LOCAL_LIBRARIES
@@ -210,7 +207,8 @@ SOURCES	+= main.cpp \
     pages/graphicslegenditem2.cpp \
     pages/tablepageoverview.cpp \
     gui_divers/comboboxloopmode.cpp \
-    pages/tabledelegate.cpp
+    pages/tabledelegate.cpp \
+    options.cpp
 
 HEADERS  += mainwindow.h \
     sf2_core/sf2_types.h \
@@ -292,7 +290,8 @@ HEADERS  += mainwindow.h \
     pages/graphicslegenditem2.h \
     pages/tablepageoverview.h \
     gui_divers/comboboxloopmode.h \
-    pages/tabledelegate.h
+    pages/tabledelegate.h \
+    options.h
 
 FORMS    += mainwindow.ui \
     gui_divers/config.ui \

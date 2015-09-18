@@ -76,7 +76,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent, Qt::Window | Qt::W
     ui->actionPlein_cran->setChecked(this->windowState() & Qt::WindowFullScreen);
 
     // Initialisation de l'objet pile sf2
-    this->sf2 = new Pile_sf2(ui->arborescence, this->configuration->getRam(), this);
+    this->sf2 = new Pile_sf2(ui->arborescence, this->configuration->getRam());
 
     // Connexion avec mise à jour table
     connect(this->sf2, SIGNAL(updateTable(int,int,int,int)), this, SLOT(updateTable(int,int,int,int)));
@@ -351,9 +351,7 @@ void MainWindow::resizeEvent(QResizeEvent * event)
                 titre = titreLong;
         }
     }
-#ifdef SHOW_ID_ERROR
-    titre += " (DEBUG)";
-#endif
+
     this->setWindowTitle(titre);
 }
 
@@ -456,8 +454,11 @@ void MainWindow::ouvrirFichier5()
 void MainWindow::ouvrir(QString fileName)
 {
     // Chargement d'un fichier .sf2 ou .sf3
-    switch (this->sf2->ouvrir(fileName))
+    switch (this->sf2->open(fileName))
     {
+    case -1: // Warning and continue with 0
+        QMessageBox::warning(this, QObject::trUtf8("Attention"),
+                             trUtf8("Fichier corrompu : utilisation des échantillons en qualité 16 bits."));
     case 0:
         // le chargement s'est bien déroulé
         if (fileName.endsWith("2"))
@@ -566,6 +567,13 @@ void MainWindow::supprimerElt()
     int message = 1;
     foreach (EltID id, listID)
         sf2->remove(id, &message);
+
+    if (message % 2 == 0)
+        QMessageBox::warning(this, trUtf8("Attention"),
+                             trUtf8("Impossible de supprimer un échantillon s'il est utilisé par un instrument."));
+    if (message % 3 == 0)
+        QMessageBox::warning(this, trUtf8("Attention"),
+                             trUtf8("Impossible de supprimer un instrument s'il est utilisé par un preset."));
 
     if (message == 1 && elementToSelect.typeElement != elementUnknown)
         ui->arborescence->select(elementToSelect, true);
@@ -1515,7 +1523,7 @@ void MainWindow::dragAndDrop(QString path, EltID idDest, int * arg)
             QByteArray data(rawData, size);
             QDataStream streamSf2(&data, QIODevice::ReadOnly);
             int indexSf2 = -1;
-            ok = (sf2->ouvrir("", &streamSf2, indexSf2, true) == 0);
+            ok = (sf2->open("", &streamSf2, indexSf2, true) <= 0);
         }
 
         if (!ok)
@@ -1926,7 +1934,7 @@ void MainWindow::exporter2(QList<QList<EltID> > listID, QString dir, int format,
     {
     case 0: case 1: {
         // Export sf2 ou sf3, création d'un nouvel sf2 indépendant
-        Pile_sf2 newSf2(NULL, false, NULL);
+        Pile_sf2 newSf2(NULL, false);
         EltID idDest(elementSf2, 0, 0, 0, 0);
         idDest.indexSf2 = newSf2.add(idDest);
 
@@ -2307,6 +2315,7 @@ void MainWindow::purger()
     if (!ui->arborescence->isSelectedItemsSf2Unique()) return;
     sf2->prepareNewActions();
     EltID id = ui->arborescence->getFirstID();
+
     // Nombre de samples et instruments non utilisés
     int unusedSmpl = 0;
     int unusedInst = 0;
@@ -2318,6 +2327,7 @@ void MainWindow::purger()
     int nbPrst = sf2->count(id);
     bool smplUsed, instUsed;
     int nbPrstInst, nbInstSmpl;
+
     // Suppression des instruments
     for (int i = 0; i < nbInst; i++)
     {

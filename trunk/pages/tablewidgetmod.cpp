@@ -23,6 +23,7 @@
 ***************************************************************************/
 
 #include "tablewidgetmod.h"
+#include <QKeyEvent>
 
 void TableWidgetMod::clear()
 {

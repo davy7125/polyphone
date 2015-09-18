@@ -27,10 +27,13 @@
 
 #include <QString>
 #include <QList>
+#include <QMap>
+#include <QTextStream>
+#include "qmath.h"
 #include "sf2_types.h"
 
 class Pile_sf2;
-
+class QFile;
 
 class ParamListe
 {

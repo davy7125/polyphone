@@ -24,20 +24,18 @@
 
 #include "pile_sf2.h"
 #include "tree.h"
-#include <QMessageBox>
 
 #define UNDO_NUMBER 100
 
 bool Pile_sf2::CONFIG_RAM = 0;
 
 // CONSTRUCTEURS
-Pile_sf2::Pile_sf2(Tree *tree, bool ram, QWidget *parent)
+Pile_sf2::Pile_sf2(Tree *tree, bool ram)
 {
     this->sf2 = NULL;
     this->tree = tree;
     this->pileActions = new Pile_actions();
     this->CONFIG_RAM = ram;
-    this->parent = parent;
 }
 Pile_sf2::~Pile_sf2()
 {
@@ -120,12 +118,8 @@ bool Pile_sf2::isSet(EltID id, Champ champ)
 {
     bool value = false;
     if (!this->isValide(id, champ == champ_hidden))
-    {
-#ifdef SHOW_ID_ERROR
-        QMessageBox::warning(parent, "warning", "In Pile_sf2::isSet, invalid ID");
-#endif
         return value;
-    }
+
     // Type d'élément à analyser
     switch ((int)id.typeElement)
     {
@@ -215,12 +209,8 @@ Valeur Pile_sf2::get(EltID id, Champ champ)
     Valeur value;
     value.bValue = 0;
     if (!this->isValide(id, champ == champ_hidden))
-    {
-#ifdef SHOW_ID_ERROR
-        QMessageBox::warning(parent, "warning", "In Pile_sf2::get, invalid ID");
-#endif
         return value;
-    }
+
     // Type d'élément à analyser
     switch ((int)id.typeElement)
     {
@@ -399,12 +389,8 @@ Sound Pile_sf2::getSon(EltID id)
 {
     Sound son;
     if (!this->isValide(id, 0))
-    {
-#ifdef SHOW_ID_ERROR
-        QMessageBox::warning(parent, "warning", "In Pile_sf2::getSon, invalid ID.");
-#endif
         return son;
-    }
+
     if (id.typeElement == elementSmpl)
         return this->sf2->getElt(id.indexSf2)->smpl->getElt(id.indexElt)->son;
     else return son;
@@ -412,12 +398,8 @@ Sound Pile_sf2::getSon(EltID id)
 QString Pile_sf2::getQstr(EltID id, Champ champ)
 {
     if (!this->isValide(id, false))
-    {
-#ifdef SHOW_ID_ERROR
-        QMessageBox::warning(parent, "warning", "In Pile_sf2::getQstr, invalid ID.");
-#endif
         return "";
-    }
+
     // Type d'élément à analyser
     switch ((int)id.typeElement)
     {
@@ -483,12 +465,8 @@ QString Pile_sf2::getQstr(EltID id, Champ champ)
 QByteArray Pile_sf2::getData(EltID id, Champ champ)
 {
     if (!this->isValide(id, 0))
-    {
-#ifdef SHOW_ID_ERROR
-        QMessageBox::warning(parent, "warning", "In Pile_sf2::getData, invalid ID.");
-#endif
-        return NULL;
-    }
+        return QByteArray();
+
     // Type d'élément à analyser
     switch ((int)id.typeElement)
     {
@@ -532,12 +510,8 @@ int Pile_sf2::count(EltID id, bool withHidden)
         id.indexMod = -1;
     }
     if (!this->isValide(id, 1))
-    {
-#ifdef SHOW_ID_ERROR
-        QMessageBox::warning(parent, "warning", "In Pile_sf2::count, invalid ID.");
-#endif
         return -1;
-    }
+
     int i = 0;
     // Type d'élément à compter
     switch ((int)id.typeElement)
@@ -852,12 +826,8 @@ bool Pile_sf2::isEdited(int indexSf2) {return this->pileActions->getEdition(inde
 void Pile_sf2::getListeBags(EltID id, QList<Champ> &listeChamps, QList<genAmountType> &listeValeurs)
 {
     if (!this->isValide(id))
-    {
-#ifdef SHOW_ID_ERROR
-        QMessageBox::warning(parent, "warning", "In Pile_sf2::getListeBags, invalid ID.");
-#endif
         return;
-    }
+
     SF2::BAG::GEN * gen = NULL;
     switch (id.typeElement)
     {
@@ -897,12 +867,8 @@ int Pile_sf2::add(EltID id, bool storeAction)
         id.indexElt2 = -1;
     else id.indexMod = -1;
     if (!this->isValide(id))
-    {
-#ifdef SHOW_ID_ERROR
-        QMessageBox::warning(parent, "warning", "In Pile_sf2::add, invalid ID.");
-#endif
         return -1;
-    }
+
     int i = -1;
     // Type d'élément à ajouter
     switch ((int)id.typeElement)
@@ -1195,15 +1161,12 @@ int Pile_sf2::add(EltID id, bool storeAction)
     }
     return i;
 }
+
 int Pile_sf2::remove(EltID id, bool permanently, bool storeAction, int *message)
 {
     if (!this->isValide(id, permanently)) // Les ID masqués sont acceptés pour une suppression définitive
-    {
-#ifdef SHOW_ID_ERROR
-        QMessageBox::warning(parent, "warning", "In Pile_sf2::remove, invalid ID.");
-#endif
         return 1;
-    }
+
     // Type d'élément à supprimer
     switch ((int)id.typeElement)
     {
@@ -1292,11 +1255,7 @@ int Pile_sf2::remove(EltID id, bool permanently, bool storeAction, int *message)
         if (resultat)
         {
             if (*message %2 != 0 || !message)
-            {
-                QMessageBox::warning(parent, QObject::trUtf8("Attention"),
-                                     QObject::trUtf8("Impossible de supprimer un échantillon s'il est utilisé par un instrument."));
                 *message *= 2;
-            }
             return 1;
         }
         // sample lié ?
@@ -1382,11 +1341,7 @@ int Pile_sf2::remove(EltID id, bool permanently, bool storeAction, int *message)
         if (resultat)
         {
             if (*message %3 != 0 || !message)
-            {
-                QMessageBox::warning(parent, QObject::trUtf8("Attention"),
-                                     QObject::trUtf8("Impossible de supprimer un instrument s'il est utilisé par un preset."));
                 (*message) = *message * 3;
-            }
             return 1;
         }
         // Propagation aux samples liés
@@ -1651,22 +1606,15 @@ int Pile_sf2::remove(EltID id, bool permanently, bool storeAction, int *message)
     }
     return 0;
 }
+
 int Pile_sf2::set(EltID id, Champ champ, Valeur value, bool storeAction, bool sort)
 {
     if (champ == champ_hidden)
-    {
-#ifdef SHOW_ID_ERROR
-        QMessageBox::warning(parent, "warning", "Set hidden cannot be made in function set!");
-#endif
         return 1;
-    }
+
     if (!this->isValide(id) && champ != champ_ram)
-    {
-#ifdef SHOW_ID_ERROR
-        QMessageBox::warning(parent, "warning", "In Pile_sf2::set(value), invalid ID.");
-#endif
         return 1;
-    }
+
     Valeur oldValue;
     oldValue.wValue = 0;
     int defaultValue = 0;
@@ -1909,14 +1857,8 @@ int Pile_sf2::set(EltID id, Champ champ, Valeur value, bool storeAction, bool so
 int Pile_sf2::set(EltID id, Champ champ, QString qStr, bool storeAction, bool sort)
 {
     if (!this->isValide(id))
-    {
-#ifdef SHOW_ID_ERROR
-        MESSAGE(id);
-        MESSAGE(qStr);
-        QMessageBox::warning(parent, "warning", "In Pile_sf2::set(QString), invalid ID.");
-#endif
         return 1;
-    }
+
     QString qOldStr = "";
     // Type d'élément à modifier
     switch ((int)id.typeElement)
@@ -2107,12 +2049,8 @@ int Pile_sf2::set(EltID id, Champ champ, QString qStr, bool storeAction, bool so
 int Pile_sf2::set(EltID id, Champ champ, QByteArray data, bool storeAction)
 {
     if (!this->isValide(id))
-    {
-#ifdef SHOW_ID_ERROR
-        QMessageBox::warning(parent, "warning", "In Pile_sf2::set(data), invalid ID.");
-#endif
         return 1;
-    }
+
     QByteArray oldData;
     oldData.clear();
     // Type d'élément à modifier
@@ -2167,12 +2105,8 @@ int Pile_sf2::set(EltID id, Champ champ, QByteArray data, bool storeAction)
 int Pile_sf2::reset(EltID id, Champ champ, bool storeAction)
 {
     if (!this->isValide(id))
-    {
-#ifdef SHOW_ID_ERROR
-        QMessageBox::warning(parent, "warning", "In Pile_sf2::reset, invalid ID.");
-#endif
         return 0;
-    }
+
     Valeur oldValue;
     // Type d'élément à modifier
     switch ((int)id.typeElement)
@@ -2534,12 +2468,8 @@ void Pile_sf2::SF2::BAG::MOD::enleverMod(int index)
 int Pile_sf2::display(EltID id)
 {
     if (!this->isValide(id, 1))
-    {
-#ifdef SHOW_ID_ERROR
-        QMessageBox::warning(parent, "warning", "In Pile_sf2::display, invalid ID");
-#endif
         return 1;
-    }
+
     // Type d'élément à afficher (suite à une suppression non définitive)
     switch ((int)id.typeElement)
     {

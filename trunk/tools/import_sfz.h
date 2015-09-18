@@ -27,7 +27,9 @@
 
 #include <QList>
 #include <QString>
+#include <QVariant>
 #include "sf2_types.h"
+#include "qmath.h"
 
 class Pile_sf2;
 

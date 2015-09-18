@@ -22,6 +22,7 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
+#include <QDebug>
 #include "audiodevice.h"
 #include "synth.h"
 #include "portaudio.h"
