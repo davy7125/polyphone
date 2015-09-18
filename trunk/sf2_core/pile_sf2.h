@@ -36,7 +36,7 @@ class Pile_sf2 : public QObject
 
 public:
     // METHODES PUBLIQUES DE LA CLASSE PILE_SF2
-    Pile_sf2(Tree *tree, bool ram, QWidget * parent = NULL);
+    Pile_sf2(Tree *tree, bool ram);
     ~Pile_sf2();
 
     // Ajout / suppression des données
@@ -68,8 +68,8 @@ public:
 
     // Chargement / sauvegarde / nouveau
     void nouveau(QString name);
-    int ouvrir(QString fileName);
-    int ouvrir(QString fileName, QDataStream *stream, int &indexSf2, bool copySamples = false);
+    int open(QString fileName);
+    int open(QString fileName, QDataStream *stream, int &indexSf2, bool copySamples = false);
     int save(int indexSf2, QString fileName);
     bool isEdited(int indexSf2);
 
@@ -340,7 +340,6 @@ private:
     Tree *tree;
     Pile_actions *pileActions;
     bool static CONFIG_RAM;
-    QWidget * parent;
 
     // METHODES PRIVEES DE LA CLASSE PILE_SF2
     // Affiche l'élément id

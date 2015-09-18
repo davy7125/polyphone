@@ -24,6 +24,8 @@
 ***************************************************************************/
 
 #include "synth.h"
+#include <QThread>
+#include <QFile>
 
 
 // Constructeur, destructeur

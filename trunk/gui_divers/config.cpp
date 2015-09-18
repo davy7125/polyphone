@@ -71,7 +71,7 @@ Config::Config(QWidget *parent, PianoKeybdCustom *keyboard, AudioDevice * audioD
 //        ui->comboRam->setCurrentIndex(0);
 
     // Liste des sorties audio
-    QList<HostInfo> hostInfos = audioDevice->getHostInfo();
+    QList<HostInfo> hostInfos = (audioDevice != NULL ? audioDevice->getHostInfo() : QList<HostInfo>());
     bool configFound = false;
     int comboboxIndex = 0;
     int comboboxDefaultIndex = 0;
@@ -154,22 +154,25 @@ Config::Config(QWidget *parent, PianoKeybdCustom *keyboard, AudioDevice * audioD
     QTimer::singleShot(1, this, SLOT(setColors())); // trick that fixes a bug which appeared with Qt5
 
     // Initialisation mappage
-    octaveMapping = this->getOctaveMap();
-    if (octaveMapping >= ui->comboDo->count())
-        octaveMapping = 3;
-    ui->comboDo->setCurrentIndex(octaveMapping);
-    _keyboard->set(PianoKeybd::PROPERTY_MAPPING_FIRST_NOTE, 12 * octaveMapping);
-    for (int i = 0; i < 4; i++)
+    if (_keyboard != NULL)
     {
-        for (int j = 0; j < 13; j++)
-            _keyboard->setMapping((PianoKeybd::Key)j, i, QKeySequence::fromString(getKeyMapped(i, (PianoKeybd::Key)j)));
-    }
-    this->ui->tableKeyboardMap->setKeyboard(_keyboard);
-    connect(ui->tableKeyboardMap, SIGNAL(combinaisonChanged(int,int,QString)), this, SLOT(combinaisonChanged(int,int,QString)));
-    renameComboDo();
+        octaveMapping = this->getOctaveMap();
+        if (octaveMapping >= ui->comboDo->count())
+            octaveMapping = 3;
+        ui->comboDo->setCurrentIndex(octaveMapping);
+        _keyboard->set(PianoKeybd::PROPERTY_MAPPING_FIRST_NOTE, 12 * octaveMapping);
+        for (int i = 0; i < 4; i++)
+        {
+            for (int j = 0; j < 13; j++)
+                _keyboard->setMapping((PianoKeybd::Key)j, i, QKeySequence::fromString(getKeyMapped(i, (PianoKeybd::Key)j)));
+        }
+        this->ui->tableKeyboardMap->setKeyboard(_keyboard);
+        connect(ui->tableKeyboardMap, SIGNAL(combinaisonChanged(int,int,QString)), this, SLOT(combinaisonChanged(int,int,QString)));
+        renameComboDo();
 
-    // Vélocité par défaut du clavier
-    _keyboard->set(PianoKeybd::PROPERTY_VELOCITY, _velocity);
+        // Vélocité par défaut du clavier
+        _keyboard->set(PianoKeybd::PROPERTY_VELOCITY, _velocity);
+    }
 
     initComboLanguage();
     this->loaded = true;

@@ -27,6 +27,9 @@
 
 #include "sf2_types.h"
 
+class QFile;
+class QWidget;
+
 class Complex
 {
 public:

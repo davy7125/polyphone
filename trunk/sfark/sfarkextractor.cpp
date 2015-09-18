@@ -56,25 +56,27 @@ SfArkExtractor::~SfArkExtractor()
 
 void SfArkExtractor::extract()
 {
-    QProgressDialog dialog(_parent);
-    dialog.setLabelText(QObject::trUtf8("Extraction en cours..."));
-    dialog.setCancelButtonText(QString());
-    dialog.setRange(0, 0);
-    dialog.setWindowFlags(dialog.windowFlags() & ~Qt::WindowContextHelpButtonHint);
+    if (_parent != NULL)
+    {
+        QProgressDialog dialog(_parent);
+        dialog.setLabelText(QObject::trUtf8("Extraction en cours..."));
+        dialog.setCancelButtonText(QString());
+        dialog.setRange(0, 0);
+        dialog.setWindowFlags(dialog.windowFlags() & ~Qt::WindowContextHelpButtonHint);
 
-    QFutureWatcher<void> watcher;
-    QObject::connect(&watcher, SIGNAL(finished()), &dialog, SLOT(reset()));
-    watcher.setFuture(QtConcurrent::run(this, &SfArkExtractor::extract2));
+        QFutureWatcher<void> watcher;
+        QObject::connect(&watcher, SIGNAL(finished()), &dialog, SLOT(reset()));
+        watcher.setFuture(QtConcurrent::run(this, &SfArkExtractor::extract2));
 
-    dialog.exec();
+        dialog.exec();
+    }
+    else
+        extract2();
 }
 
 bool SfArkExtractor::getData(char *&data, qint32 &size)
 {
-    if (_extractor)
-        return _extractor->getData(data, size);
-    else
-        return false;
+    return _extractor->getData(data, size);
 }
 
 void SfArkExtractor::extract2()

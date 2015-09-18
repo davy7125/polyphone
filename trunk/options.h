@@ -22,71 +22,78 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef PAGE_SF2_H
-#define PAGE_SF2_H
+#ifndef OPTIONS_H
+#define OPTIONS_H
 
-#include <QWidget>
-#include <QFocusEvent>
-#include <QKeyEvent>
-#include "page.h"
+#include <QStringList>
 
-namespace Ui {
-class Page_Sf2;
-}
-
-// Création d'un signal editingFinished() pour qTextEdit
-class TextEdit : public QTextEdit
+class Options
 {
-    Q_OBJECT
 public:
-    TextEdit(QWidget *parent=0) : QTextEdit(parent) {}
+    enum Mode
+    {
+        MODE_GUI = 0,
+        MODE_CONVERSION_TO_SF2 = 1,
+        MODE_CONVERSION_TO_SF3 = 2,
+        MODE_CONVERSION_TO_SFZ = 3
+    };
+
+    Options(int argc, char *argv[]);
+
+    /// Get all files that will be open (or the file to be converted)
+    QStringList getInputFiles() { return _inputFiles; }
+
+    /// Return the output file name (in case of a conversion)
+    QString getOutputFile() { return _outputFile; }
+
+    /// Return the full path of the output file
+    QString getOutputFileFullPath();
+
+    /// Return the output file (in case of a conversion)
+    QString getOutputDirectory() { return _outputDirectory; }
+
+    /// Return true if polyphone is used as a command line to convert
+    Mode mode() { return _mode; }
+
+    /// Sfz option: preset number as prefix
+    bool sfzPresetPrefix() { return _sfzPresetPrefix; }
+
+    /// Sfz option: one directory per bank during the export
+    bool sfzOneDirPerBank() { return _sfzOneDirPerBank; }
+
+    /// Sfz option: use general midi classement
+    bool sfzGeneralMidi() { return _sfzGeneralMidi; }
+
+    /// Return true in case of bad arguments
+    bool error() { return _error; }
 
 private:
-    void focusOutEvent(QFocusEvent *e)
+    enum ProcessingState
     {
-        if (e->lostFocus())
-            emit(editingFinished());
-        QTextEdit::focusOutEvent(e);
-    }
-    void keyPressEvent(QKeyEvent *e)
-    {
-        int key = e->key();
-        if (this->toPlainText().size() < 65536 || key == Qt::Key_Backspace || key == Qt::Key_Delete ||
-                key == Qt::Key_Left || key == Qt::Key_Up || key == Qt::Key_Right ||
-                key == Qt::Key_Down || key == Qt::Key_PageUp || key == Qt::Key_PageDown ||
-                key == Qt::Key_Home || key == Qt::Key_End)
-            QTextEdit::keyPressEvent(e);
-    }
+        STATE_INPUT_FILE,
+        STATE_OUTPUT_FILE,
+        STATE_OUTPUT_DIRECTORY,
+        STATE_SFZ_OPTIONS,
+        STATE_NONE
+    };
 
-signals:
-    void editingFinished();
+    void processType1(QString arg);
+    void processType2(QString arg);
+    void checkErrors();
+    void postTreatment();
+
+    ProcessingState _currentState;
+    QStringList _inputFiles;
+    QString _outputFile, _outputDirectory;
+    Mode _mode;
+    bool _error;
+
+    // Sfz options
+    bool _sfzPresetPrefix;
+    bool _sfzOneDirPerBank;
+    bool _sfzGeneralMidi;
+
+    QString _appPath;
 };
 
-
-class Page_Sf2 : public Page
-{
-    Q_OBJECT
-public:
-    explicit Page_Sf2(MainWindow *_mainWindow, Tree *_tree, QStackedWidget *_qStackedWidget,
-                      Pile_sf2 * _sf2, Synth * _synth, QWidget *parent = 0);
-    ~Page_Sf2();
-    void afficher();
-    void compte(int &unusedSmpl, int &unusedInst, int &usedSmpl, int &usedInst, int &usedPrst, int &instGen, int &prstGen);
-
-public slots:
-        void set24bits(int checked);
-        void setName();
-        void setCopyright();
-        void setAuthor();
-        void setDate();
-        void setProduct();
-        void setCommentaire();
-        void setNow();
-
-private:
-    Ui::Page_Sf2 *ui;
-    void compte();
-    QList<int> getListNotHidden(EltID id);
-};
-
-#endif // PAGE_SF2_H
+#endif // OPTIONS_H

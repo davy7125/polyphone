@@ -25,6 +25,7 @@
 #ifndef VOICE_H
 #define VOICE_H
 
+#include <QMutex>
 #include "sound.h"
 #include "enveloppevol.h"
 #include "oscsinus.h"

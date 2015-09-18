@@ -23,6 +23,8 @@
 ***************************************************************************/
 
 #include "oscsinus.h"
+#include "qmath.h"
+
 
 OscSinus::OscSinus(qint32 sampleRate, double delay) :
     _sampleRate(sampleRate),

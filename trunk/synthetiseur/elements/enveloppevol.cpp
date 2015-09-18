@@ -23,6 +23,8 @@
 ***************************************************************************/
 
 #include "enveloppevol.h"
+#include "qmath.h"
+
 
 EnveloppeVol::EnveloppeVol(VoiceParam * voiceParam, quint32 sampleRate, bool isMod) :
     m_currentSmpl(0),
