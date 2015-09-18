@@ -23,7 +23,13 @@
 ***************************************************************************/
 
 #include <QApplication>
+#include <QFileInfo>
 #include <QSettings>
+#include "pile_sf2.h"
+#include "conversion_sfz.h"
+#include "import_sfz.h"
+#include "sfarkextractor.h"
+#include "options.h"
 
 #if QT_VERSION >= QT_VERSION_CHECK(5, 0, 0)
 #include <QDesktopWidget>
@@ -35,15 +41,8 @@
 #include "macapplication.h"
 #endif
 
-int main(int argc, char *argv[])
+int launchApplication(Options &options, QApplication &a)
 {
-#ifdef Q_OS_MACX
-    QStringList listPathMac;
-    MacApplication a(argc, argv, &listPathMac);
-#else
-    QApplication a(argc, argv);
-#endif
-
     // Nom de l'application
     a.setApplicationName("Polyphone");
     a.setOrganizationName("polyphone");
@@ -54,14 +53,10 @@ int main(int argc, char *argv[])
     w.show();
 
     // Ouverture des fichiers passés en argument
-    QStringList listeArg = QCoreApplication::arguments();
+    QStringList inputFiles = options.getInputFiles();
     int numSf2 = -1;
-    for (int i = 1; i < listeArg.size(); i++)
-    {
-        QString extension = QFileInfo(listeArg.at(i)).suffix().toLower();
-        if (extension == "sf2" || extension == "sf3" || extension == "sfark" || extension == "sfz")
-            w.dragAndDrop(listeArg.at(i), EltID(elementUnknown, -1, -1, -1, -1), &numSf2);
-    }
+    foreach (QString file, inputFiles)
+        w.dragAndDrop(file, EltID(elementUnknown, -1, -1, -1, -1), &numSf2);
 
 #ifdef Q_OS_MACX
     for (int i = 0; i < listPathMac.size(); i++)
@@ -75,4 +70,143 @@ int main(int argc, char *argv[])
 #endif
 
     return a.exec();
+}
+
+// Error codes
+// 1: input file does not exist, or output file already exists
+// 2: bad extension
+// 3: cannot open the input file (corrupted are not accessible)
+// 4: cannot save the output file (internal problem or write access denied)
+int convert(Options &options)
+{
+    QFileInfo inputFile(options.getInputFiles()[0]);
+    QFileInfo outputFile(options.getOutputFileFullPath());
+    if (!inputFile.exists())
+    {
+        qWarning() << "The file" << inputFile.filePath() << "does not exist.";
+        return 1;
+    }
+    if (outputFile.exists() && options.mode() != Options::MODE_CONVERSION_TO_SFZ)
+    {
+        qWarning() << "The file" << outputFile.filePath() << "already exists.";
+        return 1;
+    }
+
+    // Load inputfile
+    Pile_sf2 sf2(NULL, false);
+    QString inputExtension = inputFile.suffix().toLower();
+    qDebug() << "Loading file" << inputFile.filePath() << "...";
+    if (inputExtension == "sf2" || inputExtension == "sf3")
+    {
+        if (sf2.open(inputFile.filePath()) > 0)
+        {
+            qWarning() << "... failed.";
+            return 3;
+        }
+    }
+    else if (inputExtension == "sfz")
+    {
+        ImportSfz importSfz(&sf2);
+        int num;
+        importSfz.import(inputFile.filePath(), &num);
+    }
+    else if (inputExtension == "sfark")
+    {
+        bool ok = false;
+
+        SfArkExtractor sfArkExtractor(inputFile.filePath().toStdString().c_str(), NULL);
+        sfArkExtractor.extract();
+        int size = 0;
+        char * rawData = NULL;
+        if (sfArkExtractor.getData(rawData, size))
+        {
+            QByteArray data(rawData, size);
+            QDataStream streamSf2(&data, QIODevice::ReadOnly);
+            int indexSf2 = -1;
+            ok = (sf2.open("", &streamSf2, indexSf2, true) <= 0);
+        }
+
+        if (!ok)
+        {
+            qWarning() << "... failed.";
+            return 3;
+        }
+    }
+    else
+    {
+        qWarning() << "... failed.";
+        return 2;
+    }
+    qWarning() << "... done.";
+
+    // Save in outputfile
+    switch (options.mode())
+    {
+    case Options::MODE_CONVERSION_TO_SF2: case Options::MODE_CONVERSION_TO_SF3:
+        qDebug() << "Saving file" << outputFile.filePath() << "...";
+        if (sf2.save(0, outputFile.filePath()) != 0)
+        {
+            qWarning() << "... failed.";
+            return 4;
+        }
+        break;
+    case Options::MODE_CONVERSION_TO_SFZ: {
+        qDebug() << "Exporting in directory" << options.getOutputDirectory() << "...";
+
+        // Preset number
+        EltID id = EltID(elementPrst, 0, -1, 0, 0);
+        int presetNumber = sf2.count(id);
+
+        // Preset list
+        QList<EltID> presets;
+        for (int i = 0; i < presetNumber; i++)
+        {
+            EltID idTmp = id;
+            idTmp.indexElt = i;
+            presets << idTmp;
+        }
+
+        // Conversion sfz
+        ConversionSfz conversionSfz(&sf2);
+        conversionSfz.convert(options.getOutputDirectory(), presets,
+                              options.sfzPresetPrefix(), options.sfzOneDirPerBank(), options.sfzGeneralMidi());
+
+    } break;
+    default:
+        qWarning() << "... failed.";
+        return 2;
+    }
+
+    qWarning() << "... done.";
+    return 0;
+}
+
+int main(int argc, char *argv[])
+{
+#ifdef Q_OS_MACX
+    QStringList listPathMac;
+    MacApplication a(argc, argv, &listPathMac);
+#else
+    QApplication a(argc, argv);
+#endif
+
+    Options options(argc, argv);
+
+    int valRet = 0;
+
+    if (options.error())
+    {
+        // Show usage
+        qDebug() << "bad arguments";
+        /// TODO
+    }
+    else
+    {
+        if (options.mode() == Options::MODE_GUI)
+            valRet = launchApplication(options, a);
+        else
+            valRet = convert(options);
+    }
+
+    return valRet;
 }

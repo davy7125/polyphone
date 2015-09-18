@@ -24,7 +24,7 @@
 
 #include "sf2_types.h"
 #include "sound.h"
-#include <QMessageBox>
+#include <QDataStream>
 
 quint32 freadSize(QDataStream * stream)
 {
@@ -168,33 +168,4 @@ SfVersionTag create_Version(quint16 wMajor, quint16 wMinor)
 QString decrementerQstr(QString chaine)
 {
     return QString::number(chaine.toInt() - 1);
-}
-
-void MESSAGE(int iVal)
-{
-    QMessageBox::information(NULL, "pour info", QString::number(iVal));
-}
-void MESSAGE(double dVal)
-{
-    QMessageBox::information(NULL, "pour info", QString::number(dVal));
-}
-void MESSAGE(QString qStr)
-{
-    QMessageBox::information(NULL, "pour info", qStr);
-}
-void MESSAGE(char * text)
-{
-    QMessageBox::information(NULL, "pour info", QString::fromUtf8(text));
-}
-void MESSAGE(EltID id)
-{
-    QMessageBox::information(NULL, "pour info", id.toString());
-}
-void MESSAGE(SFModulator sfMod)
-{
-    QMessageBox::information(NULL, "pour info", "Type: " + QString::number(sfMod.Type) +
-                             "\nDirection: " + QString::number(sfMod.D) +
-                             "\nPolarité: " + QString::number(sfMod.P) +
-                             "\nCC: " + QString::number(sfMod.CC) +
-                             "\nIndex: " + QString::number(sfMod.Index));
 }

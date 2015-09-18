@@ -23,6 +23,7 @@
 ***************************************************************************/
 
 #include "voiceparam.h"
+#include "qmath.h"
 
 // Chargement des paramètres
 VoiceParam::VoiceParam(Pile_sf2 *sf2, EltID id, VoiceParam *voiceParamTmp) :

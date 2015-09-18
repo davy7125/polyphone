@@ -25,8 +25,10 @@
 #include "conversion_sfz.h"
 #include "pile_sf2.h"
 #include <QFile>
+#include <QFileInfo>
+#include <QDir>
+#include <QDate>
 #include "config.h"
-
 
 ConversionSfz::ConversionSfz(Pile_sf2 *sf2) :
     _sf2(sf2)
@@ -234,7 +236,6 @@ void ConversionSfz::exportPrst(QString dir, EltID id, bool presetPrefix)
                                         if (isEqual)
                                             index = k;
                                     }
-
                                 }
                                 if (index != -1)
                                 {
@@ -245,13 +246,11 @@ void ConversionSfz::exportPrst(QString dir, EltID id, bool presetPrefix)
                             else
                                 enableStereo = false;
                         }
-
                         writeRegion(&fichierSfz, paramInstSmpl, getLink(idSmpl, enableStereo), ignorePan);
                         delete paramInstSmpl;
                         listProcessedInstSmpl << idInst;
                     }
                 }
-
                 delete paramPrst;
             }
         }
@@ -310,10 +309,12 @@ void ConversionSfz::writeRegion(QFile * fichierSfz, ParamListe * listeParam, QSt
 
     // Ecriture de paramètres spécifique à une région
     QTextStream out(fichierSfz);
+
     out << endl << "<region>" << endl
         << "sample=" << pathSample.replace("/", "\\") << endl;
     if (ignorePan && listeParam->findChamp(champ_initialAttenuation) == -1)
         writeElement(out, champ_initialAttenuation, -deltaVolumeIfIgnorePan / DB_SF2_TO_SFZ);
+
     for (int i = 0; i < listeParam->size(); i++)
     {
         if (ignorePan && listeParam->getChamp(i) == champ_initialAttenuation)

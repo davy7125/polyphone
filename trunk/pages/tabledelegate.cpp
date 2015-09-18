@@ -5,7 +5,6 @@
 #include "config.h"
 #include <QTableWidget>
 #include <QApplication>
-#include <QDebug>
 
 const char * TableDelegate::DECO_PROPERTY = "deco";
 

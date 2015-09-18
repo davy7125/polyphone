@@ -23,6 +23,7 @@
 ***************************************************************************/
 
 #include "voice.h"
+#include "qmath.h"
 
 // Constructeur, destructeur
 Voice::Voice(QByteArray baData, quint32 smplRate, quint32 audioSmplRate, int note, int velocity,

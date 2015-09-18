@@ -26,7 +26,8 @@
 #include "tablewidget.h"
 #include "tabledelegate.h"
 #include <QApplication>
-#include <QDebug>
+#include <QKeyEvent>
+#include <QClipboard>
 
 TableWidget::TableWidget(QWidget *parent) : QTableWidget(parent)
 {

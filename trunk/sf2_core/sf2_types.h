@@ -25,9 +25,8 @@
 #ifndef SF2_TYPES_H
 #define SF2_TYPES_H
 
-
+#include <QString>
 #include <stdio.h>
-#include <QtGui>
 
 #define DB_SF2_TO_SFZ 0.397
 
@@ -359,12 +358,6 @@ SfVersionTag create_Version(quint16 wMajor, quint16 wMinor);
 
 // DIVERS
 QString decrementerQstr(QString chaine);
-void MESSAGE(int iVal);
-void MESSAGE(double dVal);
-void MESSAGE(QString qStr);
-void MESSAGE(char * text);
-void MESSAGE(EltID id);
-void MESSAGE(SFModulator sfMod);
 
 
 #endif // SF2_TYPES_H

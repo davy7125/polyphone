@@ -10,6 +10,9 @@ class ComboBoxLoopMode : public QComboBox
 public:
     explicit ComboBoxLoopMode(QWidget *parent = 0);
 
+protected:
+    void showEvent(QShowEvent * event);
+    void hidePopup();
 };
 
 class ComboView : public QListView
