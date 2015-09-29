@@ -26,6 +26,7 @@
 #include "pile_sf2.h"
 #include "config.h"
 #include "mainwindow.h"
+#include <qmath.h>
 
 Page::Page(TypePage typePage, QWidget *parent) : QWidget(parent),
     _preparation(false),

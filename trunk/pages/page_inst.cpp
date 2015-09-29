@@ -32,6 +32,7 @@
 #include <QProgressDialog>
 #include <QInputDialog>
 #include <QMenu>
+#include <qmath.h>
 
 // Constructeur, destructeur
 Page_Inst::Page_Inst(QWidget *parent) :

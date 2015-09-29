@@ -25,11 +25,13 @@
 #include <QFileInfo>
 #include <QDir>
 #include <QColorDialog>
+#include <QDesktopServices>
 #include "config.h"
 #include "ui_config.h"
 #include "mainwindow.h"
 #include "portaudio.h"
 #include "translationsystem.h"
+#include <qmath.h>
 
 Config * Config::_instance = NULL;
 

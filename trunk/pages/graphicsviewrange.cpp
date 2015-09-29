@@ -87,7 +87,7 @@ GraphicsViewRange::~GraphicsViewRange()
     delete _legendItem2;
     delete _zoomLine;
     while (!_mapGraphicsKeys.isEmpty())
-        delete _mapGraphicsKeys.take(_mapGraphicsKeys.firstKey());
+        delete _mapGraphicsKeys.take(_mapGraphicsKeys.keys().first());
 }
 
 void GraphicsViewRange::initItems()
@@ -379,7 +379,7 @@ void GraphicsViewRange::mouseMoveEvent(QMouseEvent *event)
             {
                 bool ok = !pairs[i].isEmpty();
                 foreach (GraphicsRectangleItem * item, _currentRectangles)
-                    ok &= pairs[i].contains(item);
+                    ok &= (bool)pairs[i].contains(item);
                 if (ok)
                 {
                     selectionIndex = i;
