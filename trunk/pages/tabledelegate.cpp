@@ -156,9 +156,11 @@ void TableDelegate::setModelData(QWidget *editor, QAbstractItemModel *model, con
     if (isLoop)
     {
         QComboBox * combobox = (QComboBox *)editor;
-        model->setData(index, combobox->currentData().toInt(), Qt::UserRole);
 
-        switch (combobox->currentData().toInt())
+        int currentData = combobox->itemData(combobox->currentIndex(), Qt::UserRole).toInt();
+        model->setData(index, currentData, Qt::UserRole);
+
+        switch (currentData)
         {
         case 0:
             model->setData(index, QImage(":/icones/loop_off.png"), Qt::DecorationRole);
@@ -182,7 +184,7 @@ void TableDelegate::setModelData(QWidget *editor, QAbstractItemModel *model, con
     else
         QStyledItemDelegate::setModelData(editor, model, index);
 }
-
+#if QT_VERSION >= QT_VERSION_CHECK(5, 0, 0)
 void TableDelegate::destroyEditor(QWidget * editor, const QModelIndex & index) const
 {
     bool isNumeric, isKey, isLoop;
@@ -200,7 +202,7 @@ void TableDelegate::destroyEditor(QWidget * editor, const QModelIndex & index) c
 
     QStyledItemDelegate::destroyEditor(editor, index);
 }
-
+#endif
 void TableDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const
 {
     bool isNumeric, isKey, isLoop;

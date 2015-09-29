@@ -33,9 +33,9 @@
 #include "sfarkextractor.h"
 #include <QFileDialog>
 #include <QInputDialog>
-#if QT_VERSION >= QT_VERSION_CHECK(5, 0, 0)
+#include <QDate>
+#include <QLibrary>
 #include <QDesktopWidget>
-#endif
 
 // Constructeurs, destructeurs
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent, Qt::Window | Qt::WindowCloseButtonHint |

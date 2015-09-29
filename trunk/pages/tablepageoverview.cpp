@@ -4,7 +4,12 @@
 TablePageOverview::TablePageOverview(QWidget *parent) : QTableWidget(parent)
 {
     connect(this->horizontalHeader(), SIGNAL(sectionClicked(int)), this, SLOT(onSort(int)));
+
+#if QT_VERSION >= QT_VERSION_CHECK(5, 0, 0)
     this->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
+#else
+    this->horizontalHeader()->setResizeMode(QHeaderView::ResizeToContents);
+#endif
 
     // Horizontal header in bold
     this->horizontalHeader()->setHighlightSections(false);

@@ -487,5 +487,9 @@ void Graphique::mouseMoveEvent(QMouseEvent *event)
 void Graphique::wheelEvent(QWheelEvent *event)
 {
     if (!dragFlag && !zoomFlag)
+#if QT_VERSION >= QT_VERSION_CHECK(5, 0, 0)
         qScrollX->setValue(qScrollX->value() - 0.05 * event->angleDelta().x());
+#else
+        qScrollX->setValue(qScrollX->value() - 0.05 * event->delta());
+#endif
 }
