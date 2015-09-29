@@ -28,7 +28,14 @@
 
 #include <QMainWindow>
 #include <QDockWidget>
+
+#if QT_VERSION >= QT_VERSION_CHECK(5, 0, 0)
 #include <QtConcurrent/QtConcurrent>
+#else
+#include <QFutureWatcher>
+#include <QtConcurrentRun>
+#endif
+
 #include <QProgressDialog>
 #include <QDir>
 #include <QEvent>

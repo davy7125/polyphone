@@ -25,6 +25,8 @@
 #include "graphiquefourier.h"
 #include "sound.h"
 #include "config.h"
+#include <QMenu>
+#include <QFileDialog>
 
 GraphiqueFourier::GraphiqueFourier(QWidget * parent) : QCustomPlot(parent),
     _menu(NULL)

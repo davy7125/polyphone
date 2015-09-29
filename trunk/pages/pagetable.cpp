@@ -31,6 +31,8 @@
 #include "dialog_duplication.h"
 #include "dialogselection.h"
 #include "graphicsviewrange.h"
+#include <QScrollBar>
+#include <QMenu>
 
 QList<PageTable::Modulator> PageTable::_modulatorCopy;
 
