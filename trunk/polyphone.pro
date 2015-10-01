@@ -6,7 +6,10 @@
 
 # Use local copies of RtMidi, Stk and QCustomplot libraries
 # (this is forced to true for Windows or Mac OS X)
-#DEFINES += USE_LOCAL_LIBRARIES
+# Uncomment a line if your distribution doesn't come with some of the following libraries
+#DEFINES += USE_LOCAL_RTMIDI
+#DEFINES += USE_LOCAL_STK
+#DEFINES += USE_LOCAL_QCUSTOMPLOT
 
 # List to complete if other translations are wished
 # Format: polyphone_XX.ts where XX is the language code
@@ -37,7 +40,7 @@ CONFIG(debug, debug|release) {
 }
 
 win32{
-    DEFINES += __WINDOWS_MM__ USE_LOCAL_LIBRARIES
+    DEFINES += __WINDOWS_MM__ USE_LOCAL_RTMIDI USE_LOCAL_STK USE_LOCAL_QCUSTOMPLOT
     INCLUDEPATH += lib \
         lib/win/ \
         lib/ogg_vorbis
@@ -68,7 +71,7 @@ unix:!macx {
 macx {
     QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.6
     QMAKE_MAC_SDK = macosx10.9
-    DEFINES += __MACOSX_CORE__ USE_LOCAL_LIBRARIES
+    DEFINES += __MACOSX_CORE__ USE_LOCAL_RTMIDI USE_LOCAL_STK USE_LOCAL_QCUSTOMPLOT
     INCLUDEPATH += lib/mac/Jackmp.framework/Headers \
         lib \
         lib/ogg_vorbis
@@ -85,10 +88,18 @@ macx {
     QMAKE_INFO_PLIST = polyphone.plist
 }
 
-# Location of RtMidi, Stk and QCustomplot
-contains(DEFINES, USE_LOCAL_LIBRARIES) {
-    HEADERS += lib/rtmidi/RtMidi.h \
-        lib/stk/Stk.h \
+# Location of RtMidi
+contains(DEFINES, USE_LOCAL_RTMIDI) {
+    HEADERS += lib/rtmidi/RtMidi.h
+    SOURCES += lib/rtmidi/RtMidi.cpp
+    INCLUDEPATH += lib/rtmidi
+} else {
+    PKGCONFIG += rtmidi
+}
+
+# Location of Stk
+contains(DEFINES, USE_LOCAL_STK) {
+    HEADERS += lib/stk/Stk.h \
         lib/stk/SineWave.h \
         lib/stk/OnePole.h \
         lib/stk/Generator.h \
@@ -97,25 +108,28 @@ contains(DEFINES, USE_LOCAL_LIBRARIES) {
         lib/stk/Delay.h \
         lib/stk/Chorus.h \
         lib/stk/FreeVerb.h \
-        lib/stk/DelayL.h \
-        lib/qcustomplot/qcustomplot.h
-    SOURCES += lib/rtmidi/RtMidi.cpp \
-        lib/stk/Stk.cpp \
+        lib/stk/DelayL.h
+    SOURCES += lib/stk/Stk.cpp \
         lib/stk/SineWave.cpp \
         lib/stk/OnePole.cpp \
         lib/stk/Delay.cpp \
         lib/stk/Chorus.cpp \
         lib/stk/FreeVerb.cpp \
-        lib/stk/DelayL.cpp \
-        lib/qcustomplot/qcustomplot.cpp
-    INCLUDEPATH += lib/rtmidi \
-        lib/stk \
-        lib/qcustomplot
+        lib/stk/DelayL.cpp
+    INCLUDEPATH += lib/stk
 } else {
-    PKGCONFIG += rtmidi
-    LIBS += -lstk -lqcustomplot
-    INCLUDEPATH += /usr/include/stk \
-        /usr/include/qcustomplot
+    LIBS += -lstk
+    INCLUDEPATH += /usr/include/stk
+}
+
+# Location of QCustomplot
+contains(DEFINES, USE_LOCAL_QCUSTOMPLOT) {
+    HEADERS += lib/qcustomplot/qcustomplot.h
+    SOURCES += lib/qcustomplot/qcustomplot.cpp
+    INCLUDEPATH += lib/qcustomplot
+} else {
+    LIBS += -lqcustomplot
+    INCLUDEPATH += /usr/include/qcustomplot
 }
 
 INCLUDEPATH += gui_divers \
