@@ -381,7 +381,7 @@ void MainWindow::spaceKeyPressedInTree()
 void MainWindow::ouvrir()
 {
     // Ouverture de fichiers
-#ifdef WIN32
+//#ifdef WIN32
     QStringList strList = QFileDialog::getOpenFileNames(this, trUtf8("Ouverture de fichiers"),
                                                         Config::getInstance()->getLastDirectory(Config::typeFichierSoundfont),
                                                         trUtf8("Soundfonts") + " (*.sf2 *.sf3 *.sfz *.sfArk);;" +
@@ -389,15 +389,15 @@ void MainWindow::ouvrir()
                                                         trUtf8("Fichiers .sf3") + " (*.sf3);;" +
                                                         trUtf8("Fichiers .sfz") + " (*.sfz);;" +
                                                         trUtf8("Archives .sfArk") + " (*.sfArk)");
-#else
-    QStringList strList = QFileDialog::getOpenFileNames(this, trUtf8("Ouverture de fichiers"),
-                                                        Config::getInstance()->getLastDirectory(Config::typeFichierSoundfont),
-                                                        trUtf8("Soundfonts") + " (*.[sS][fF][23zZ] *.[sS][fF][aA][rR][kK]);;" +
-                                                        trUtf8("Fichiers .sf2") + " (*.[sS][fF]2);;" +
-                                                        trUtf8("Fichiers .sf3") + " (*.[sS][fF]3);;" +
-                                                        trUtf8("Fichiers .sfz") + " (*.[sS][fF][zZ]);;" +
-                                                        trUtf8("Archives .sfArk") + " (*.[sS][fF][aA][rR][kK])");
-#endif
+//#else
+//    QStringList strList = QFileDialog::getOpenFileNames(this, trUtf8("Ouverture de fichiers"),
+//                                                        Config::getInstance()->getLastDirectory(Config::typeFichierSoundfont),
+//                                                        trUtf8("Soundfonts") + " (*.[sS][fF][23zZ] *.[sS][fF][aA][rR][kK]);;" +
+//                                                        trUtf8("Fichiers .sf2") + " (*.[sS][fF]2);;" +
+//                                                        trUtf8("Fichiers .sf3") + " (*.[sS][fF]3);;" +
+//                                                        trUtf8("Fichiers .sfz") + " (*.[sS][fF][zZ]);;" +
+//                                                        trUtf8("Archives .sfArk") + " (*.[sS][fF][aA][rR][kK])");
+//#endif
     if (strList.isEmpty())
         return;
 
@@ -1546,15 +1546,15 @@ void MainWindow::importerSmpl()
         ext = myFunction();
 
     // Affichage dialogue
-#ifdef WIN32
+//#ifdef WIN32
     QStringList strList = QFileDialog::getOpenFileNames(this, trUtf8("Importer un fichier audio"),
                                                         Config::getInstance()->getLastDirectory(Config::typeFichierSample),
                                                         trUtf8("Fichier .wav") + " (*.wav)" + ext);
-#else
-    QStringList strList = QFileDialog::getOpenFileNames(this, trUtf8("Importer un fichier audio"),
-                                                        Config::getInstance()->getLastDirectory(Config::typeFichierSample),
-                                                        trUtf8("Fichier .wav") + " (*.[wW][aA][vV])" + ext);
-#endif
+//#else
+//    QStringList strList = QFileDialog::getOpenFileNames(this, trUtf8("Importer un fichier audio"),
+//                                                        Config::getInstance()->getLastDirectory(Config::typeFichierSample),
+//                                                        trUtf8("Fichier .wav") + " (*.[wW][aA][vV])" + ext);
+//#endif
 
     if (strList.count() == 0)
         return;
