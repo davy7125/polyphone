@@ -119,7 +119,7 @@ QString PageOverviewInst::getParameterNumber(EltID id)
         {
             EltID idGen = id;
             idGen.typeElement = elementInstSmplGen;
-            count += _sf2->count(idGen);
+            count += _sf2->count(idGen) - 1; // sample gen is ignored
         }
     }
 
