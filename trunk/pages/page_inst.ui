@@ -100,13 +100,20 @@
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="pushRangeMode">
-        <property name="maximumSize">
+       <spacer name="horizontalSpacer_2">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
          <size>
-          <width>100</width>
-          <height>16777215</height>
+          <width>40</width>
+          <height>20</height>
          </size>
         </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pushRangeMode">
         <property name="focusPolicy">
          <enum>Qt::NoFocus</enum>
         </property>
