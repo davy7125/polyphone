@@ -92,7 +92,7 @@ QString PageOverviewPrst::getParameterNumber(EltID id)
         {
             EltID idGen = id;
             idGen.typeElement = elementPrstInstGen;
-            count += _sf2->count(idGen);
+            count += _sf2->count(idGen) - 1; // instrument gen is ignored
         }
     }
 
