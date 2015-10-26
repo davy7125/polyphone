@@ -40,6 +40,7 @@ Page_Inst::Page_Inst(QWidget *parent) :
     ui(new Ui::Page_Inst)
 {
     ui->setupUi(this);
+    ui->tableInst->verticalHeader()->setDefaultSectionSize(QFontMetrics(ui->tableInst->font()).height() + 6);
     this->contenant = elementInst;
     this->contenantGen = elementInstGen;
     this->contenantMod = elementInstMod;
