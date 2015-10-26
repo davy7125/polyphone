@@ -142,6 +142,7 @@ void DialogHelp::fillTree()
     createItem(trUtf8("Lecteur"), "4-1-4", level2);
     level2 = createItem(trUtf8("Instruments"), "4-2", level1);
     createItem(trUtf8("Tableau"), "4-2-0", level2);
+    createItem(trUtf8("Éditeur d'étendues"), "4-2-2", level2);
     createItem(trUtf8("Section modulateur"), "4-2-1", level2);
     createItem(trUtf8("Presets"), "4-3", level1);
 

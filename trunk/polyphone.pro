@@ -7,9 +7,9 @@
 # Use local copies of RtMidi, Stk and QCustomplot libraries
 # (this is forced to true for Windows or Mac OS X)
 # Uncomment a line if your distribution doesn't come with some of the following libraries
-#DEFINES += USE_LOCAL_RTMIDI
+DEFINES += USE_LOCAL_RTMIDI
 #DEFINES += USE_LOCAL_STK
-#DEFINES += USE_LOCAL_QCUSTOMPLOT
+DEFINES += USE_LOCAL_QCUSTOMPLOT
 
 # List to complete if other translations are wished
 # Format: polyphone_XX.ts where XX is the language code
