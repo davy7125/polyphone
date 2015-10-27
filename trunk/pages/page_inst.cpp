@@ -107,53 +107,67 @@ void Page_Inst::afficher()
 {
     PageTable::afficher();
 
-    EltID id = this->_tree->getFirstID();
-    id.typeElement = elementInst;
-
-    // Liste des presets qui utilisent l'instrument
-    int nbPrst = 0;
-    bool isFound;
-    int j;
-    QString qStr = "";
-    EltID id2 = id;
-    id2.typeElement = elementPrst;
-    EltID id3 = id;
-    id3.typeElement = elementPrstInst;
-
-    // Parcours de tous les presets
-    for (int i = 0; i < this->_sf2->count(id2); i++)
+    bool error;
+    QList<EltID> ids = this->getUniqueInstOrPrst(error, false, false);
+    if (ids.count() > 1)
     {
-        id2.indexElt = i;
-        id3.indexElt = i;
+        ui->pushRangeMode->setChecked(false);
+        ui->pushRangeMode->setEnabled(false);
+        ui->stackedWidget->setCurrentIndex(0);
 
-        // Parcours de tous les instruments liés au preset
-        isFound = false;
-        j = 0;
-        while(j < this->_sf2->count(id3) && !isFound)
-        {
-            id3.indexElt2 = j;
-            if (!this->_sf2->get(id3, champ_hidden).bValue)
-            {
-                if (this->_sf2->get(id3, champ_instrument).wValue == id.indexElt)
-                {
-                    // Ajout d'un preset
-                    if (nbPrst)
-                        qStr.append(", ");
-                    qStr.append(this->_sf2->getQstr(id2, champ_name).toStdString().c_str());
-                    nbPrst++;
-                    isFound = true;
-                }
-            }
-            j++;
-        }
+        this->ui->labelPrst->setText("");
     }
-    if (nbPrst == 0)
-        qStr = trUtf8("<b>Instrument lié à aucun preset.</b>");
-    else if (nbPrst == 1)
-        qStr.prepend(trUtf8("<b>Instrument lié au preset : </b>"));
     else
-        qStr.prepend(trUtf8("<b>Instrument lié aux presets : </b>"));
-    this->ui->labelPrst->setText(qStr);
+    {
+        ui->pushRangeMode->setEnabled(true);
+
+        // Liste des presets qui utilisent l'instrument
+        EltID id = this->_tree->getFirstID();
+        id.typeElement = elementInst;
+        int nbPrst = 0;
+        bool isFound;
+        int j;
+        QString qStr = "";
+        EltID id2 = id;
+        id2.typeElement = elementPrst;
+        EltID id3 = id;
+        id3.typeElement = elementPrstInst;
+
+        // Parcours de tous les presets
+        for (int i = 0; i < this->_sf2->count(id2); i++)
+        {
+            id2.indexElt = i;
+            id3.indexElt = i;
+
+            // Parcours de tous les instruments liés au preset
+            isFound = false;
+            j = 0;
+            while(j < this->_sf2->count(id3) && !isFound)
+            {
+                id3.indexElt2 = j;
+                if (!this->_sf2->get(id3, champ_hidden).bValue)
+                {
+                    if (this->_sf2->get(id3, champ_instrument).wValue == id.indexElt)
+                    {
+                        // Ajout d'un preset
+                        if (nbPrst)
+                            qStr.append(", ");
+                        qStr.append(this->_sf2->getQstr(id2, champ_name).toStdString().c_str());
+                        nbPrst++;
+                        isFound = true;
+                    }
+                }
+                j++;
+            }
+        }
+        if (nbPrst == 0)
+            qStr = trUtf8("<b>Instrument lié à aucun preset.</b>");
+        else if (nbPrst == 1)
+            qStr.prepend(trUtf8("<b>Instrument lié au preset : </b>"));
+        else
+            qStr.prepend(trUtf8("<b>Instrument lié aux presets : </b>"));
+        this->ui->labelPrst->setText(qStr);
+    }
 }
 
 // Outils instrument

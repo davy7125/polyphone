@@ -53,6 +53,7 @@ void Page_Sf2::afficher()
     id.indexElt = 0;
     id.indexElt2 = 0;
     id.indexMod = 0;
+
     // Eléments non utilisés
     this->compte();
 

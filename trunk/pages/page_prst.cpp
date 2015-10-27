@@ -112,9 +112,13 @@ void Page_Prst::afficher()
     {
         ui->horizontalFrame->setEnabled(false);
         ui->frameModulator->setEnabled(false);
+        ui->pushRangeMode->setChecked(false);
+        ui->pushRangeMode->setEnabled(false);
+        ui->stackedWidget->setCurrentIndex(0);
     }
     else if (!ids.isEmpty())
     {
+        ui->pushRangeMode->setEnabled(true);
         ui->horizontalFrame->setEnabled(true);
         ui->frameModulator->setEnabled(true);
         EltID id = ids.first();
