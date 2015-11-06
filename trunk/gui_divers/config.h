@@ -601,6 +601,10 @@ public:
     void setKeyboardGeometry(QByteArray ba) { settings.setValue("affichage/keyboardGeometry", ba); }
     QByteArray getKeyboardGeometry()        { return settings.value("affichage/keyboardGeometry", QByteArray()).toByteArray(); }
 
+    // Last version installed
+    double getLastVersionInstalled() { return settings.value("last_version_installed", 0).toDouble(); }
+    double setLastVersionInstalled(double version) { settings.setValue("last_version_installed", version); }
+
     // Export
     void setExportType(int val)             { settings.setValue("export/type", val); }
     void setExportPreset(bool val)          { settings.setValue("export/preset_prefix", val); }

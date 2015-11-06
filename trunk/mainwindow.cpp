@@ -31,6 +31,7 @@
 #include "duplicator.h"
 #include "import_sfz.h"
 #include "sfarkextractor.h"
+#include "dialogchangelog.h"
 #include <QFileDialog>
 #include <QInputDialog>
 #include <QDate>
@@ -235,6 +236,14 @@ void MainWindow::delayedInit()
 
     // Clavier
     this->setKeyboardType(this->configuration->getKeyboardType());
+
+    // Dialog changelog
+    if (configuration->getLastVersionInstalled() != VERSION && FINAL)
+    {
+        DialogChangeLog * dialog = new DialogChangeLog(this);
+        dialog->show();
+        configuration->setLastVersionInstalled(VERSION);
+    }
 }
 
 void MainWindow::closeEvent(QCloseEvent *event)
