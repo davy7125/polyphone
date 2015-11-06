@@ -7,9 +7,13 @@
 # Use local copies of RtMidi, Stk and QCustomplot libraries
 # (this is forced to true for Windows or Mac OS X)
 # Uncomment a line if your distribution doesn't come with some of the following libraries
-DEFINES += USE_LOCAL_RTMIDI
+#DEFINES += USE_LOCAL_RTMIDI
 #DEFINES += USE_LOCAL_STK
-DEFINES += USE_LOCAL_QCUSTOMPLOT
+#DEFINES += USE_LOCAL_QCUSTOMPLOT
+
+# Polyphone version
+DEFINES += VERSION=1.7
+DEFINES += FINAL=true
 
 # List to complete if other translations are wished
 # Format: polyphone_XX.ts where XX is the language code
@@ -222,7 +226,8 @@ SOURCES	+= main.cpp \
     pages/tablepageoverview.cpp \
     gui_divers/comboboxloopmode.cpp \
     pages/tabledelegate.cpp \
-    options.cpp
+    options.cpp \
+    gui_divers/dialogchangelog.cpp
 
 HEADERS  += mainwindow.h \
     sf2_core/sf2_types.h \
@@ -305,7 +310,8 @@ HEADERS  += mainwindow.h \
     pages/tablepageoverview.h \
     gui_divers/comboboxloopmode.h \
     pages/tabledelegate.h \
-    options.h
+    options.h \
+    gui_divers/dialogchangelog.h
 
 FORMS    += mainwindow.ui \
     gui_divers/config.ui \
@@ -328,7 +334,8 @@ FORMS    += mainwindow.ui \
     tools/dialog_duplication.ui \
     gui_divers/dialogselection.ui \
     tools/dialog_transposition.ui \
-    pages/pageoverview.ui
+    pages/pageoverview.ui \
+    gui_divers/dialogchangelog.ui
 
 RESOURCES += ressources.qrc \
     clavier/pianokeybd.qrc

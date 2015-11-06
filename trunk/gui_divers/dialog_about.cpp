@@ -32,7 +32,8 @@ DialogAbout::DialogAbout(QWidget *parent) :
 {
     ui->setupUi(this);
     this->setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint);
-    ui->labelNomVersion->setText(trUtf8("Polyphone") + " " + QString(VERSION));
+    ui->labelNomVersion->setText(trUtf8("Polyphone") + " " + QString::number(VERSION) +
+                                 (FINAL ? "" : " unreleased"));
 
     // Description
     QString annee = "2013";
@@ -42,7 +43,7 @@ DialogAbout::DialogAbout(QWidget *parent) :
         url += "index.php?lang=fr&amp;page=home";
     if (QDate::currentDate().year() > 2013)
         annee += "-" + QString::number(QDate::currentDate().year());
-    QString urlDonation = "https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=ESBLSGPJ7P938&lc=US&item_name=Polyphone&currency_code=EUR&amount=5";
+    QString urlDonation = "https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=ESBLSGPJ7P938&lc=US&item_name=Polyphone&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donate_LG%2egif%3aNonHosted";
     ui->labelDescription->setText("<html><head/><body><p align='center'>" + trUtf8("Copyright") + QString::fromUtf8(" © ") + annee +
                                   " " + trUtf8("Davy Triponney", "this is my name") + "<br/><br/><a href='" + url +
                                   "'><span style=' text-decoration: underline; color:#0000ff;'>" +

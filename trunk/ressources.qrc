@@ -314,7 +314,6 @@
         <file>ressources/traductions/polyphone_es.qm</file>
         <file>ressources/traductions/polyphone_it.qm</file>
         <file>ressources/traductions/polyphone_sr.qm</file>
-        <file>ressources/traductions/polyphone_de.qm</file>
     </qresource>
     <qresource prefix="/logo">
         <file alias="noel">ressources/logo_noel.png</file>
@@ -325,5 +324,8 @@
     <qresource prefix="/style">
         <file alias="fondJaune.png">ressources/fondJaune.png</file>
         <file alias="fond.png">ressources/fond.png</file>
+    </qresource>
+    <qresource prefix="/misc">
+        <file>changelog</file>
     </qresource>
 </RCC>

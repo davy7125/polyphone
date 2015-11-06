@@ -1,123 +1,124 @@
 polyphone (1.7) unstable; urgency=low
 
- * serbian translation
- * range editor
- * selecting several instruments or presets shows the editing table for all global divisions
- * selecting "Samples", "Instruments" or "Presets" in the tree shows an overview page
- * tools are allowed when several instruments or presets are selected in the tree
- * pasting modulators is allowed for several divisions
- * sf3 import / export
- * wheel event support in the sample graphics
- * loop modes in the instrument table are displayed with graphical elements
- * (fix) left / right attributes were lost after duplicating linked samples
+  * (new) convenient view to graphically edit key and velocity ranges
+  * (new) overview pages showing a configuration summary of all samples, instruments or presets
+  * (new) sf3 import / export
+  * (new) serbian translation
+  * (improvement) simultaneous editing of multiple global divisions
+  * (improvement) tools are allowed when several instruments or presets are selected in the tree
+  * (improvement) pasting modulators is allowed for several divisions
+  * (improvement) wheel event support in the sample graphics
+  * (improvement) loop modes in the instrument table are displayed with graphical elements
+  * (fix) the "left / right" attribute was lost in duplicated samples
+  * (fix) minor graphical interface issues
 
  -- Davy Triponney <davy.triponney@gmail.com>  Wed, 27 Sep 2015 20:51:55 +0100
 
 
 polyphone (1.6) UNRELEASED; urgency=low
 
- * full screen mode
- * visibility of all soundfonts or just a specific soundfont in the tree
- * possibility to merge presets from different soundfonts to one sf2 via the export
- * export of samples from different soundfonts is allowed
- * in the virtual keyboard, using "shift" with an arrow makes a quicker move
- * option to move (or not) keyrange in the transposition tool for instruments
- * mutations available for 64' resultant in the organ mixture creation tool
- * tolerance for opcodes comprising no underscore (sfz opcodes v1)
- * several libraries updated (including portaudio, stk)
- * (fix) sfArk import generated noise
- * (fix) repetition is ignored when using arrow keys in the virtual keyboard
- * (fix) "0" was not selected when a new value is inserted in the table
- * (fix) forbidden characters are replaced by an underscore when exporting files
- * (fix) selection in the tree now updates the virtual keyboard
- * (fix) copy / paste of elements
- * (fix) GUI fix for mac
- * (fix) loop_mode one-shot caused sometimes a wrong envelop release in the sfz import
+  * full screen mode
+  * visibility of all soundfonts or just a specific soundfont in the tree
+  * possibility to merge presets from different soundfonts to one sf2 via the export
+  * export of samples from different soundfonts is allowed
+  * in the virtual keyboard, using "shift" with an arrow makes a quicker move
+  * option to move (or not) keyrange in the transposition tool for instruments
+  * mutations available for 64' resultant in the organ mixture creation tool
+  * tolerance for opcodes comprising no underscore (sfz opcodes v1)
+  * several libraries updated (including portaudio, stk)
+  * (fix) sfArk import generated noise
+  * (fix) repetition is ignored when using arrow keys in the virtual keyboard
+  * (fix) "0" was not selected when a new value is inserted in the table
+  * (fix) forbidden characters are replaced by an underscore when exporting files
+  * (fix) selection in the tree now updates the virtual keyboard
+  * (fix) copy / paste of elements
+  * (fix) GUI fix for mac
+  * (fix) loop_mode one-shot caused sometimes a wrong envelop release in the sfz import
 
  -- Davy Triponney <davy.triponney@gmail.com>  Wed, 27 May 2015 20:11:10 +0100
 
 
 polyphone (1.5) UNRELEASED; urgency=low
 
- * italian translation
- * transposition tool
- * more options when renaming several elements
- * tool to remove all modulators
- * improved copy / paste functions in tables
- * improved copy / paste functions for modulators
- * arrows may be used to play the adjacent key or velocity
- * faster selection of multiple elements in the tree
- * (fix) bug when reading some wav files
- * (fix) sample synchronization in synth
- * (fix) bug when editing modulators
+  * italian translation
+  * transposition tool
+  * more options when renaming several elements
+  * tool to remove all modulators
+  * improved copy / paste functions in tables
+  * improved copy / paste functions for modulators
+  * arrows may be used to play the adjacent key or velocity
+  * faster selection of multiple elements in the tree
+  * (fix) bug when reading some wav files
+  * (fix) sample synchronization in synth
+  * (fix) bug when editing modulators
 
  -- Davy Triponney <davy.triponney@gmail.com>  Mon, 20 Oct 2014 18:37:28 +0100
 
 
 polyphone (1.4) UNRELEASED; urgency=low
 
- * faster loading step and count of used / unused elements
- * the key range of the key pressed is displayed at the instrument level
- * middle C is emphasized on the keyboard
- * key names can include sharps or flats
- * button to assign the estimated pitch / correction at the sample level
- * mutations added in the mixture creation tools
- * column width may be fixed in instrument and preset tables
- * name of samples, instruments and presets may be adapted in case of duplicate
- * natural order sorting of items in the tree
- * focus policies in the tree improved
- * support for Mac OS X 10.6 and 10.7
- * support for sfArk v1 files
- * (fix) sfz export / import
- * (fix) comments can now be 65536 characters long
- * (fix) the commands "replace all", "ignore all", "duplicate all" are now memorized
- * (fix) bug when editing an element hidden by the filter in the tree
+  * faster loading step and count of used / unused elements
+  * the key range of the key pressed is displayed at the instrument level
+  * middle C is emphasized on the keyboard
+  * key names can include sharps or flats
+  * button to assign the estimated pitch / correction at the sample level
+  * mutations added in the mixture creation tools
+  * column width may be fixed in instrument and preset tables
+  * name of samples, instruments and presets may be adapted in case of duplicate
+  * natural order sorting of items in the tree
+  * focus policies in the tree improved
+  * support for Mac OS X 10.6 and 10.7
+  * support for sfArk v1 files
+  * (fix) sfz export / import
+  * (fix) comments can now be 65536 characters long
+  * (fix) the commands "replace all", "ignore all", "duplicate all" are now memorized
+  * (fix) bug when editing an element hidden by the filter in the tree
 
  -- Davy Triponney <davy.triponney@gmail.com>  Thu, 7 Aug 2014 18:55:20 +0100
 
 
 polyphone (1.3) UNRELEASED; urgency=low
 
- * latency decreased and polyphony increased in the sound engine
- * support for sfArk soundfont archives
- * use of notation C, D, E, F, ... or numerical values for keynames
- * quicker operations in tables
- * piano keyboard type (88 keys) added
- * keyrange and rootkey displayed on the virtual keyboard
- * ctrl+K focuses on the virtual keyboard to play with
- * use of ctrl+1, ctrl+2, ctrl+3... ctrl+8 to change the computer keyboard octave
- * the virtual keyboard is floatable
- * button applying the full length of the sample as loop at the sample level
- * possibility to manually change the language
- * pitch detection improved
- * small tutorial added in the documentation
- * fixed a bug when using the autoloop tool in Windows XP
- * fixed small issues in sfz / sf2 conversion
+  * latency decreased and polyphony increased in the sound engine
+  * support for sfArk soundfont archives
+  * use of notation C, D, E, F, ... or numerical values for keynames
+  * quicker operations in tables
+  * piano keyboard type (88 keys) added
+  * keyrange and rootkey displayed on the virtual keyboard
+  * ctrl+K focuses on the virtual keyboard to play with
+  * use of ctrl+1, ctrl+2, ctrl+3... ctrl+8 to change the computer keyboard octave
+  * the virtual keyboard is floatable
+  * button applying the full length of the sample as loop at the sample level
+  * possibility to manually change the language
+  * pitch detection improved
+  * small tutorial added in the documentation
+  * fixed a bug when using the autoloop tool in Windows XP
+  * fixed small issues in sfz / sf2 conversion
 
  -- Davy Triponney <davy.triponney@gmail.com>  Sun, 16 Feb 2014 19:19:52 +0100
 
 
 polyphone (1.2) UNRELEASED; urgency=low
 
- * spanish translation
- * sfz import
- * sfz export improvement
- * simultaneous editing of samples
- * simultaneous editing of stereo sample in the instrument table
- * simultaneous editing of cells in tables
- * mouse wheel to increase a parameter value in the table
- * copy / paste available in the tree right-click menu
- * selection of the presets to export when exporting a soundfont
- * drop of wav, sf2 or sfz files in the tree
- * the interface is adapted for screen resolution as low as 800*600
- * stereo splitter tool
- * "space" key controls the button "play" at the sample level
- * spatialization tool improvement
- * documentation reshaped
- * peak frequency export (graph + csv file)
- * fixed a bug when importing a sample and replacing an existing one
- * negative tune corrections were not exported correctly in wave files
- * using sample mode 3 (play sample to the end) now works
+  * spanish translation
+  * sfz import
+  * sfz export improvement
+  * simultaneous editing of samples
+  * simultaneous editing of stereo sample in the instrument table
+  * simultaneous editing of cells in tables
+  * mouse wheel to increase a parameter value in the table
+  * copy / paste available in the tree right-click menu
+  * selection of the presets to export when exporting a soundfont
+  * drop of wav, sf2 or sfz files in the tree
+  * the interface is adapted for screen resolution as low as 800*600
+  * stereo splitter tool
+  * "space" key controls the button "play" at the sample level
+  * spatialization tool improvement
+  * documentation reshaped
+  * peak frequency export (graph + csv file)
+  * fixed a bug when importing a sample and replacing an existing one
+  * negative tune corrections were not exported correctly in wave files
+  * using sample mode 3 (play sample to the end) now works
 
  -- Davy Triponney <davy.triponney@gmail.com>  Sat, 21 Dec 2013 00:10:09 +0100
 
