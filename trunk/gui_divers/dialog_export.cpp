@@ -66,13 +66,21 @@ DialogExport::DialogExport(Pile_sf2 *sf2, QList<EltID> listSf2, QWidget *parent)
     }
     ui->listPresets->resizeColumnToContents(0);
 
-    ui->comboFormat->setCurrentIndex(Config::getInstance()->getExportType());
-    on_comboFormat_currentIndexChanged(ui->comboFormat->currentIndex());
+    int exportType = Config::getInstance()->getExportType();
+    if (exportType < 0 || exportType >= ui->comboFormat->count())
+        exportType = 0;
+    ui->comboFormat->setCurrentIndex(exportType);
+    on_comboFormat_currentIndexChanged(exportType);
     ui->lineFolder->setText(Config::getInstance()->getLastDirectory(Config::typeFichierExport));
 
     ui->checkBank->setChecked(Config::getInstance()->getExportBank());
     ui->checkPreset->setChecked(Config::getInstance()->getExportPreset());
     ui->checkGM->setChecked(Config::getInstance()->getExportGM());
+
+    int exportQuality = Config::getInstance()->getExportQuality();
+    if (exportQuality < 0 || exportQuality >= ui->comboQuality->count())
+        exportQuality = 0;
+    ui->comboQuality->setCurrentIndex(exportQuality);
 }
 
 DialogExport::~DialogExport()
@@ -186,15 +194,21 @@ void DialogExport::on_pushExport_clicked()
     Config::getInstance()->setExportPreset(ui->checkPreset->isChecked());
     Config::getInstance()->setExportBank(ui->checkBank->isChecked());
     Config::getInstance()->setExportGM(ui->checkGM->isChecked());
+    Config::getInstance()->setExportQuality(ui->comboQuality->currentIndex());
 
     emit(accepted(listID, ui->lineFolder->text(), ui->comboFormat->currentIndex(),
                   ui->checkPreset->isChecked(), ui->checkBank->isChecked(),
-                  ui->checkGM->isChecked()));
+                  ui->checkGM->isChecked(), ui->comboQuality->currentIndex()));
     QDialog::accept();
 }
 
 void DialogExport::on_comboFormat_currentIndexChanged(int index)
 {
+    // Options for sf3
+    ui->labelQuality->setVisible(index == 1);
+    ui->comboQuality->setVisible(index == 1);
+
+    // Options for sfz
     ui->checkBank->setVisible(index == 2);
     ui->checkGM->setVisible(index == 2);
     ui->checkPreset->setVisible(index == 2);

@@ -218,7 +218,7 @@ class SoundFont {
     void writeInstrument(int zoneIdx, const Instrument* instrument);
 
     void writeIfil();
-    void writeSmpl();
+    void writeSmpl(int quality);
     void writePhdr();
     void writeBag(const char* fourcc, QList<Zone*>* zones);
     void writeMod(const char* fourcc, const QList<Zone*>* zones);
@@ -226,14 +226,14 @@ class SoundFont {
     void writeInst();
     void writeShdr();
 
-    int writeCompressedSample(Sample* s);
+    int writeCompressedSample(Sample* s, int quality);
     bool writeCSample(Sample*, int idx);
 
 public:
     SoundFont(const QString& s);
     ~SoundFont();
     bool read();
-    bool write(QFile * f);
+    bool write(QFile * f, int quality);
 };
 }
 

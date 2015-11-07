@@ -1917,22 +1917,22 @@ void MainWindow::exporter()
     }
 
     DialogExport * dial = new DialogExport(sf2, listSf2, this);
-    connect(dial, SIGNAL(accepted(QList<QList<EltID> >,QString,int,bool,bool,bool)),
-            this, SLOT(exporter(QList<QList<EltID> >,QString,int,bool,bool,bool)));
+    connect(dial, SIGNAL(accepted(QList<QList<EltID> >,QString,int,bool,bool,bool,int)),
+            this, SLOT(exporter(QList<QList<EltID> >,QString,int,bool,bool,bool,int)));
     dial->show();
 }
 
-void MainWindow::exporter(QList<QList<EltID> > listID, QString dir, int format, bool presetPrefix, bool bankDir, bool gmSort)
+void MainWindow::exporter(QList<QList<EltID> > listID, QString dir, int format, bool presetPrefix, bool bankDir, bool gmSort, int quality)
 {
     int flags = presetPrefix + bankDir * 0x02 + gmSort * 0x04;
 
     _progressDialog.show();
 
-    QFuture<void> future = QtConcurrent::run(this, &MainWindow::exporter2, listID, dir, format, flags);
+    QFuture<void> future = QtConcurrent::run(this, &MainWindow::exporter2, listID, dir, format, flags, quality);
     _futureWatcher.setFuture(future);
 }
 
-void MainWindow::exporter2(QList<QList<EltID> > listID, QString dir, int format, int flags)
+void MainWindow::exporter2(QList<QList<EltID> > listID, QString dir, int format, int flags, int quality)
 {
     // Flags
     bool presetPrefix = ((flags & 0x01) != 0);
@@ -2025,7 +2025,7 @@ void MainWindow::exporter2(QList<QList<EltID> > listID, QString dir, int format,
         name = dir + "/" + name + extension;
 
         // Sauvegarde
-        newSf2.save(idDest.indexSf2, name);
+        newSf2.save(idDest.indexSf2, name, quality);
         }break;
     case 2:
         // Export sfz

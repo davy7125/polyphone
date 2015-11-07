@@ -70,7 +70,7 @@ public:
     void nouveau(QString name);
     int open(QString fileName);
     int open(QString fileName, QDataStream *stream, int &indexSf2, bool copySamples = false);
-    int save(int indexSf2, QString fileName);
+    int save(int indexSf2, QString fileName, int quality = 1);
     bool isEdited(int indexSf2);
 
     // Récupération d'une liste de champs et de valeurs contenues dans les bags de l'élément id

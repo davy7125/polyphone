@@ -793,32 +793,32 @@
         <translation>&amp;Ok</translation>
     </message>
     <message>
-        <location filename="gui_divers/dialogchangelog.cpp" line="15"/>
+        <location filename="gui_divers/dialogchangelog.cpp" line="39"/>
         <source>Merci d&apos;avoir installé</source>
         <translation>Gracias por haber instalado</translation>
     </message>
     <message>
-        <location filename="gui_divers/dialogchangelog.cpp" line="16"/>
+        <location filename="gui_divers/dialogchangelog.cpp" line="40"/>
         <source>Polyphone</source>
         <translation>Polyphone</translation>
     </message>
     <message>
-        <location filename="gui_divers/dialogchangelog.cpp" line="16"/>
+        <location filename="gui_divers/dialogchangelog.cpp" line="40"/>
         <source>version</source>
         <translation>versión</translation>
     </message>
     <message>
-        <location filename="gui_divers/dialogchangelog.cpp" line="54"/>
+        <location filename="gui_divers/dialogchangelog.cpp" line="78"/>
         <source>Ce qu&apos;il y a de nouveau</source>
         <translation>Novedad</translation>
     </message>
     <message>
-        <location filename="gui_divers/dialogchangelog.cpp" line="57"/>
+        <location filename="gui_divers/dialogchangelog.cpp" line="81"/>
         <source>Ce qui est amélioré</source>
         <translation>Mejora</translation>
     </message>
     <message>
-        <location filename="gui_divers/dialogchangelog.cpp" line="60"/>
+        <location filename="gui_divers/dialogchangelog.cpp" line="84"/>
         <source>Ce qui est résolu</source>
         <translation>Resolución</translation>
     </message>
@@ -845,7 +845,7 @@
     <name>DialogExport</name>
     <message>
         <location filename="gui_divers/dialog_export.ui" line="17"/>
-        <location filename="gui_divers/dialog_export.ui" line="190"/>
+        <location filename="gui_divers/dialog_export.ui" line="219"/>
         <source>Exporter</source>
         <translation>Exportar</translation>
     </message>
@@ -870,7 +870,7 @@
         <translation>Formato</translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_export.ui" line="145"/>
+        <location filename="gui_divers/dialog_export.ui" line="159"/>
         <source>numéro de preset en préfixe</source>
         <translation>Número de preset en prefijo</translation>
     </message>
@@ -880,45 +880,65 @@
         <translation>Una carpeta por banco</translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_export.ui" line="159"/>
+        <location filename="gui_divers/dialog_export.ui" line="145"/>
         <source>classement général midi</source>
         <translation>Clasificación general MIDI</translation>
     </message>
     <message>
         <location filename="gui_divers/dialog_export.ui" line="170"/>
+        <source>Haute</source>
+        <translation>Alta</translation>
+    </message>
+    <message>
+        <location filename="gui_divers/dialog_export.ui" line="175"/>
+        <source>Moyenne</source>
+        <translation>Media</translation>
+    </message>
+    <message>
+        <location filename="gui_divers/dialog_export.ui" line="180"/>
+        <source>Basse</source>
+        <translation>Baja</translation>
+    </message>
+    <message>
+        <location filename="gui_divers/dialog_export.ui" line="188"/>
+        <source>Qualité</source>
+        <translation>Calidad</translation>
+    </message>
+    <message>
+        <location filename="gui_divers/dialog_export.ui" line="199"/>
         <source>Annuler</source>
         <translation>Deshacer</translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_export.cpp" line="111"/>
+        <location filename="gui_divers/dialog_export.cpp" line="119"/>
         <source>Choisir un répertoire de destination</source>
         <translation>Elija un directorio de destino</translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_export.cpp" line="130"/>
-        <location filename="gui_divers/dialog_export.cpp" line="169"/>
-        <location filename="gui_divers/dialog_export.cpp" line="175"/>
-        <location filename="gui_divers/dialog_export.cpp" line="182"/>
+        <location filename="gui_divers/dialog_export.cpp" line="138"/>
+        <location filename="gui_divers/dialog_export.cpp" line="177"/>
+        <location filename="gui_divers/dialog_export.cpp" line="183"/>
+        <location filename="gui_divers/dialog_export.cpp" line="190"/>
         <source>Attention</source>
         <translation>Atención</translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_export.cpp" line="130"/>
+        <location filename="gui_divers/dialog_export.cpp" line="138"/>
         <source>Le répertoire n&apos;est pas valide.</source>
         <translation>Directorio no válido.</translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_export.cpp" line="169"/>
+        <location filename="gui_divers/dialog_export.cpp" line="177"/>
         <source>Dans le cas où plusieurs soundfonts sont exportées, le nombre maximal de presets par soundfont est de 127.</source>
         <translation>En caso de exportar varias soundfonts el número máxmo de presets por soundfont es 127.</translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_export.cpp" line="175"/>
+        <location filename="gui_divers/dialog_export.cpp" line="183"/>
         <source>Le nombre maximal de soundfonts à exporter est de 127.</source>
         <translation>El número máximo de soundfonts a exportar es 127.</translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_export.cpp" line="182"/>
+        <location filename="gui_divers/dialog_export.cpp" line="190"/>
         <source>Au moins un preset doit être sélectionné.</source>
         <translation>Al menos un preset tiene que ser seleccionado.</translation>
     </message>
@@ -4746,7 +4766,7 @@ enlazada</translation>
 <context>
     <name>Pile_sf2</name>
     <message>
-        <location filename="sf2_core/pile_sf2_sl.cpp" line="848"/>
+        <location filename="sf2_core/pile_sf2_sl.cpp" line="850"/>
         <source>sans titre</source>
         <translation>sin título</translation>
     </message>
