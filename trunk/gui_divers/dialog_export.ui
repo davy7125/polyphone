@@ -139,10 +139,10 @@
      <item row="0" column="1">
       <widget class="QLineEdit" name="lineFolder"/>
      </item>
-     <item row="2" column="1" colspan="2">
-      <widget class="QCheckBox" name="checkPreset">
+     <item row="4" column="1" colspan="2">
+      <widget class="QCheckBox" name="checkGM">
        <property name="text">
-        <string>numéro de preset en préfixe</string>
+        <string>classement général midi</string>
        </property>
       </widget>
      </item>
@@ -153,10 +153,39 @@
        </property>
       </widget>
      </item>
-     <item row="4" column="1" colspan="2">
-      <widget class="QCheckBox" name="checkGM">
+     <item row="2" column="1" colspan="2">
+      <widget class="QCheckBox" name="checkPreset">
        <property name="text">
-        <string>classement général midi</string>
+        <string>numéro de preset en préfixe</string>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="1" colspan="2">
+      <widget class="QComboBox" name="comboQuality">
+       <property name="currentIndex">
+        <number>1</number>
+       </property>
+       <item>
+        <property name="text">
+         <string>Haute</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Moyenne</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Basse</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+     <item row="5" column="0">
+      <widget class="QLabel" name="labelQuality">
+       <property name="text">
+        <string>Qualité</string>
        </property>
       </widget>
      </item>

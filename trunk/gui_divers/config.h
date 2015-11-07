@@ -603,17 +603,19 @@ public:
 
     // Last version installed
     double getLastVersionInstalled() { return settings.value("last_version_installed", 0).toDouble(); }
-    double setLastVersionInstalled(double version) { settings.setValue("last_version_installed", version); }
+    void setLastVersionInstalled(double version) { settings.setValue("last_version_installed", version); }
 
     // Export
     void setExportType(int val)             { settings.setValue("export/type", val); }
     void setExportPreset(bool val)          { settings.setValue("export/preset_prefix", val); }
     void setExportBank(bool val)            { settings.setValue("export/bank_directory", val); }
     void setExportGM(bool val)              { settings.setValue("export/gm_sort", val); }
+    void setExportQuality(int val)          { settings.setValue("export/quality", val); }
     int  getExportType()                    { return settings.value("export/type", 0).toInt(); }
     bool getExportPreset()                  { return settings.value("export/preset_prefix", true).toBool(); }
     bool getExportBank()                    { return settings.value("export/bank_directory", false).toBool(); }
     bool getExportGM()                      { return settings.value("export/gm_sort", false).toBool(); }
+    int  getExportQuality()                 { return settings.value("export/quality", 1).toInt(); }
 
     // Bulk rename
     int getBulkRenameOption()               { return settings.value("bulk_rename/option", 0).toInt(); }

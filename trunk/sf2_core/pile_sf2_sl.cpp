@@ -96,7 +96,9 @@ int Pile_sf2::open(QString fileName)
     return 1;
 }
 
-int Pile_sf2::save(int indexSf2, QString fileName)
+/// Save as sf2 or sf3
+/// If sf3, quality is 0 = high, 1 = middle, 2 = low (default is 1)
+int Pile_sf2::save(int indexSf2, QString fileName, int quality)
 {
     // Sauvegarde d'un fichier soundfont
     // Valeur retour :
@@ -144,7 +146,7 @@ int Pile_sf2::save(int indexSf2, QString fileName)
                     QFile fo(fileName);
                     if (fo.open(QIODevice::WriteOnly))
                     {
-                        sf.write(&fo);
+                        sf.write(&fo, quality);
                         fo.close();
                     }
                     else

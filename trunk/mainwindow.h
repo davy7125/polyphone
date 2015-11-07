@@ -150,8 +150,8 @@ private slots:
     void exporterSmpl();        // Export d'un sample
     void exporter();            // Export d'un ou plusieurs preset(s)
     void exporter(QList<QList<EltID> > listID, QString dir, int format,
-                  bool presetPrefix, bool bankDir, bool gmSort);
-    void exporter2(QList<QList<EltID> > listID, QString dir, int format, int flags);
+                  bool presetPrefix, bool bankDir, bool gmSort, int quality);
+    void exporter2(QList<QList<EltID> > listID, QString dir, int format, int flags, int quality);
     void nouvelInstrument();    // Création d'un instrument
     void nouveauPreset();       // Création d'un preset
     void associer();            // Association InstSmpl et PrstInst
