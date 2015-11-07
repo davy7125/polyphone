@@ -612,7 +612,7 @@ void SoundFont::readShdr(int size)
 //   write
 //---------------------------------------------------------
 
-bool SoundFont::write(QFile *f)
+bool SoundFont::write(QFile *f, int quality)
 {
     _file = f;
     qint64 riffLenPos;
@@ -655,7 +655,7 @@ bool SoundFont::write(QFile *f)
         listLenPos = _file->pos();
         writeDword(0);
         _file->write("sdta", 4);
-        writeSmpl();
+        writeSmpl(quality);
         pos = _file->pos();
         _file->seek(listLenPos);
         writeDword(pos - listLenPos - 4);
@@ -741,7 +741,7 @@ void SoundFont::writeIfil()
 //   writeSmpl
 //---------------------------------------------------------
 
-void SoundFont::writeSmpl()
+void SoundFont::writeSmpl(int quality)
 {
     write("smpl", 4);
 
@@ -753,7 +753,7 @@ void SoundFont::writeSmpl()
         foreach (Sample* s, _samples)
         {
             s->sampletype |= 0x10; // Sf3 flag added
-            int len = writeCompressedSample(s);
+            int len = writeCompressedSample(s, quality);
             s->start = sampleLen;
             sampleLen += len;
             s->end = sampleLen;
@@ -989,7 +989,7 @@ void SoundFont::writeSample(const Sample* s)
 //   writeCompressedSample
 //---------------------------------------------------------
 
-int SoundFont::writeCompressedSample(Sample* s)
+int SoundFont::writeCompressedSample(Sample* s, int quality)
 {
     QFile f(_path);
     if (!f.open(QIODevice::ReadOnly)) {
@@ -1012,7 +1012,15 @@ int SoundFont::writeCompressedSample(Sample* s)
     vorbis_comment   vc;
 
     vorbis_info_init(&vi);
-    int ret = vorbis_encode_init_vbr(&vi, 1, s->samplerate, 0.3f);
+
+    float qualityF = 1.0f;
+    switch (quality) {
+    case 0: qualityF = 1.0f; break; // High quality
+    case 1: qualityF = 0.6f; break; // Medium quality
+    case 2: qualityF = 0.2f; break; // Low quality
+    }
+
+    int ret = vorbis_encode_init_vbr(&vi, 1, s->samplerate, qualityF);
     if (ret) {
         fprintf(stderr, "vorbis init failed\n");
         return false;

@@ -52,7 +52,7 @@ private slots:
 
 signals:
     void accepted(QList<QList<EltID> > listID, QString dir, int format,
-                  bool presetPrefix, bool bankDir, bool gmSort);
+                  bool presetPrefix, bool bankDir, bool gmSort, int quality);
 
 private:
     Ui::DialogExport *ui;
