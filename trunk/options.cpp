@@ -32,6 +32,7 @@ Options::Options(int argc, char *argv[]) :
     _currentState(STATE_INPUT_FILE), // By default args are input files
     _mode(MODE_GUI),
     _error(false),
+    _sf3Quality(1),
     _sfzPresetPrefix(false),
     _sfzOneDirPerBank(false),
     _sfzGeneralMidi(false)
@@ -40,7 +41,7 @@ Options::Options(int argc, char *argv[]) :
 
     // Convert into QStringList
     QStringList args;
-    for (int i = 1; i < argc; i++) // The first argument is rejected
+    for (int i = 1; i < argc; i++) // The first argument is rejected (executable path)
         args << QString(argv[i]);
 
     // Argument processing
@@ -95,8 +96,8 @@ void Options::processType1(QString arg)
     case 'o':
         _currentState = STATE_OUTPUT_FILE;
         break;
-    case 'z':
-        _currentState = STATE_SFZ_OPTIONS;
+    case 'c':
+        _currentState = STATE_CONFIG;
         break;
     default:
         _error = true;
@@ -119,21 +120,42 @@ void Options::processType2(QString arg)
         _outputFile = arg;
         _currentState = STATE_NONE; // no more output
         break;
-    case STATE_SFZ_OPTIONS:
-        if (arg.count() == 3)
+    case STATE_CONFIG:
+        if (_mode == MODE_CONVERSION_TO_SFZ)
         {
-            if (arg[0] == '0' || arg[0] == '1')
-                _sfzPresetPrefix = (arg[0] == '1');
+            if (arg.count() == 3)
+            {
+                if (arg[0] == '0' || arg[0] == '1')
+                    _sfzPresetPrefix = (arg[0] == '1');
+                else
+                    _error = true;
+
+                if (arg[1] == '0' || arg[1] == '1')
+                    _sfzOneDirPerBank = (arg[1] == '1');
+                else
+                    _error = true;
+
+                if (arg[2] == '0' || arg[2] == '1')
+                    _sfzGeneralMidi = (arg[2] == '1');
+                else
+                    _error = true;
+            }
             else
                 _error = true;
-
-            if (arg[1] == '0' || arg[1] == '1')
-                _sfzOneDirPerBank = (arg[1] == '1');
-            else
-                _error = true;
-
-            if (arg[2] == '0' || arg[2] == '1')
-                _sfzGeneralMidi = (arg[2] == '1');
+        }
+        else if (_mode == MODE_CONVERSION_TO_SF3)
+        {
+            if (arg.count() == 1)
+            {
+                if (arg[0] == '0')
+                    _sf3Quality = 0;
+                else if (arg[0] == '1')
+                    _sf3Quality = 1;
+                else if (arg[0] == '2')
+                    _sf3Quality = 2;
+                else
+                    _error = true;
+            }
             else
                 _error = true;
         }
@@ -183,9 +205,9 @@ void Options::checkErrors()
 void Options::postTreatment()
 {
     // Complete the path of input files
-    for (int i = 0; i < _inputFiles.count(); i++)
-        if (_inputFiles[i][0] != '/')
-            _inputFiles[i] = _appPath + "/" + _inputFiles[i];
+//    for (int i = 0; i < _inputFiles.count(); i++)
+//        if (_inputFiles[i][0] != '/')
+//            _inputFiles[i] = _appPath + "/" + _inputFiles[i];
 
     if (_mode != MODE_GUI && _outputDirectory == "")
     {

@@ -31,7 +31,7 @@ DialogSifflements::DialogSifflements(QWidget *parent) :
     ui(new Ui::DialogSifflements)
 {
     ui->setupUi(this);
-    this->setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint);
+    this->setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint | Qt::Tool);
     Config * conf = Config::getInstance();
     ui->spinFreq1->setValue(conf->getTools_s_sifflements_debut());
     ui->spinFreq2->setValue(conf->getTools_s_sifflements_fin());

@@ -40,7 +40,6 @@ Page_Inst::Page_Inst(QWidget *parent) :
     ui(new Ui::Page_Inst)
 {
     ui->setupUi(this);
-    ui->tableInst->verticalHeader()->setDefaultSectionSize(QFontMetrics(ui->tableInst->font()).height() + 6);
     this->contenant = elementInst;
     this->contenantGen = elementInstGen;
     this->contenantMod = elementInstMod;
@@ -87,6 +86,7 @@ Page_Inst::Page_Inst(QWidget *parent) :
     this->table->setFont(font);
     ui->horizontalLayout_2->setSpacing(15);
 #endif
+    ui->tableInst->verticalHeader()->setDefaultSectionSize(QFontMetrics(ui->tableInst->font()).height() + 8);
 
     connect(this->table, SIGNAL(actionBegin()), this, SLOT(actionBegin()));
     connect(this->table, SIGNAL(actionFinished()), this, SLOT(actionFinished()));

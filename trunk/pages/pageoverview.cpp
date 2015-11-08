@@ -31,6 +31,14 @@ PageOverview::PageOverview(TypePage typePage, ElementType typeElement, QWidget *
     _typeElement(typeElement)
 {
     ui->setupUi(this);
+
+#ifdef Q_OS_MAC
+    ui->table->setStyleSheet("QHeaderView::section:horizontal{padding: 4px 10px 4px 10px;}");
+    QFont font = ui->table->font();
+    font.setPixelSize(10);
+    ui->table->setFont(font);
+#endif
+    ui->table->verticalHeader()->setDefaultSectionSize(QFontMetrics(ui->table->font()).height() + 8);
 }
 
 PageOverview::~PageOverview()
