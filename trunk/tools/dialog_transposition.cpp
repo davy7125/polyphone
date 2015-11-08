@@ -7,7 +7,7 @@ DialogTransposition::DialogTransposition(QWidget *parent) :
     ui(new Ui::DialogTransposition)
 {
     ui->setupUi(this);
-    this->setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint);
+    this->setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint | Qt::Tool);
     this->setAttribute(Qt::WA_DeleteOnClose, true);
 
     // Load last configuration

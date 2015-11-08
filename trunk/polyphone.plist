@@ -12,12 +12,14 @@
 			<key>CFBundleTypeOSTypes</key>
 			<array>
   				<string>SF2</string>
+  				<string>SF3</string>
   				<string>SFZ</string>
   				<string>SFARK</string>
 			</array>
 			<key>CFBundleTypeExtensions</key>
 			<array>
 				<string>sf2</string>
+				<string>sf3</string>
 				<string>sfz</string>
 				<string>sfArk</string>
 			</array>

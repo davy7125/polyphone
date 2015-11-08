@@ -89,10 +89,16 @@
       </item>
       <item>
        <widget class="SpinBox" name="spinBank">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>19</height>
+         </size>
+        </property>
         <property name="maximumSize">
          <size>
-          <width>60</width>
-          <height>27</height>
+          <width>16777215</width>
+          <height>19</height>
          </size>
         </property>
         <property name="accelerated">
@@ -133,10 +139,16 @@
       </item>
       <item>
        <widget class="SpinBox" name="spinPreset">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>19</height>
+         </size>
+        </property>
         <property name="maximumSize">
          <size>
           <width>60</width>
-          <height>27</height>
+          <height>19</height>
          </size>
         </property>
         <property name="accelerated">
@@ -824,7 +836,7 @@
                </property>
                <property name="maximumSize">
                 <size>
-                 <width>50</width>
+                 <width>53</width>
                  <height>27</height>
                 </size>
                </property>
@@ -868,7 +880,7 @@
                </property>
                <property name="maximumSize">
                 <size>
-                 <width>50</width>
+                 <width>53</width>
                  <height>27</height>
                 </size>
                </property>

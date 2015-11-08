@@ -1015,9 +1015,9 @@ int SoundFont::writeCompressedSample(Sample* s, int quality)
 
     float qualityF = 1.0f;
     switch (quality) {
-    case 0: qualityF = 1.0f; break; // High quality
+    case 0: qualityF = 0.2f; break; // Low quality
     case 1: qualityF = 0.6f; break; // Medium quality
-    case 2: qualityF = 0.2f; break; // Low quality
+    case 2: qualityF = 1.0f; break; // High quality
     }
 
     int ret = vorbis_encode_init_vbr(&vi, 1, s->samplerate, qualityF);

@@ -34,6 +34,7 @@ DialogChangeLog::DialogChangeLog(QWidget *parent) :
 {
     ui->setupUi(this);
     this->setAttribute(Qt::WA_DeleteOnClose);
+    this->setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint | Qt::Tool);
 
     // Version
     ui->labelTitle->setText(trUtf8("Merci d'avoir installé") + "\n" +

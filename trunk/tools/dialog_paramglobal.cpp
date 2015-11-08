@@ -75,7 +75,7 @@ DialogParamGlobal::DialogParamGlobal(Pile_sf2 *sf2, bool isPrst, QWidget *parent
                    << champ_reverbEffectsSend;
 
     ui->setupUi(this);
-    this->setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint);
+    this->setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint | Qt::Tool);
     Config * conf = Config::getInstance();
     ui->comboValeur->blockSignals(true);
     for (int i = 0; i < listeDesChamps.size(); i++)
