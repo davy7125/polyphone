@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# First adapt debian/changelog so that the version and date are correct
+# Then run this script by opening a terminal in this current directory
+# For version 1.7 write "build-debian-package 1.7"
+
 if [ -z "$1" ]
 then
   echo "Usage: build-debian-package VERSION"
@@ -30,4 +34,4 @@ rm -r trunk/RELEASE
 rm trunk/Makefile
 rm polyphone_$1-1.debian.tar.xz
 rm polyphone_$1-1.dsc
-rm polyphone_1.6-1_amd64.changes
+rm polyphone_$1-1_amd64.changes
