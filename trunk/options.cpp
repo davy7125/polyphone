@@ -32,6 +32,7 @@ Options::Options(int argc, char *argv[]) :
     _currentState(STATE_INPUT_FILE), // By default args are input files
     _mode(MODE_GUI),
     _error(false),
+    _help(false),
     _sf3Quality(1),
     _sfzPresetPrefix(false),
     _sfzOneDirPerBank(false),
@@ -98,6 +99,9 @@ void Options::processType1(QString arg)
         break;
     case 'c':
         _currentState = STATE_CONFIG;
+        break;
+    case 'h':
+        _help = true;
         break;
     default:
         _error = true;
@@ -187,15 +191,7 @@ void Options::checkErrors()
         if (_outputDirectory != "" || _outputFile != "")
             _error = true;
         break;
-    case MODE_CONVERSION_TO_SF2:
-        if (_inputFiles.count() != 1 || QFileInfo(_outputFile).suffix().toLower() != "sf2")
-            _error = true;
-        break;
-    case MODE_CONVERSION_TO_SF3:
-        if (_inputFiles.count() != 1 || QFileInfo(_outputFile).suffix().toLower() != "sf3")
-            _error = true;
-        break;
-    case MODE_CONVERSION_TO_SFZ:
+    case MODE_CONVERSION_TO_SF2: case MODE_CONVERSION_TO_SF3: case MODE_CONVERSION_TO_SFZ:
         if (_inputFiles.count() != 1)
             _error = true;
         break;
@@ -204,15 +200,15 @@ void Options::checkErrors()
 
 void Options::postTreatment()
 {
-    // Complete the path of input files
-//    for (int i = 0; i < _inputFiles.count(); i++)
-//        if (_inputFiles[i][0] != '/')
-//            _inputFiles[i] = _appPath + "/" + _inputFiles[i];
-
-    if (_mode != MODE_GUI && _outputDirectory == "")
+    if (_mode != MODE_GUI)
     {
-        // The output directory is the same than those containing the input file
-        _outputDirectory = QFileInfo(_inputFiles[0]).dir().path();
+        // By default, the output directory is the same than the input file directory
+        if (_outputDirectory == "")
+            _outputDirectory = QFileInfo(_inputFiles[0]).dir().absolutePath();
+
+        // By default, the output file name is the same than the input file name
+        if (_outputFile == "")
+            _outputFile = QFileInfo(_inputFiles[0]).baseName();
     }
 }
 
@@ -221,5 +217,23 @@ QString Options::getOutputFileFullPath()
     QString strTmp = _outputDirectory;
     if (!strTmp.endsWith('/'))
         strTmp += '/';
-    return strTmp + _outputFile;
+
+    // Extension
+    QString extension = "";
+    switch (_mode)
+    {
+    case MODE_CONVERSION_TO_SF2:
+        extension = ".sf2";
+        break;
+    case MODE_CONVERSION_TO_SF3:
+        extension = ".sf3";
+        break;
+    case MODE_CONVERSION_TO_SFZ:
+        extension = ".sfz";
+        break;
+    default:
+        break;
+    }
+
+    return strTmp + _outputFile + extension;
 }

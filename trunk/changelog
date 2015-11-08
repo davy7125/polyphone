@@ -4,6 +4,7 @@ polyphone (1.7) unstable; urgency=low
   * (new) overview pages showing a configuration summary of all samples, instruments or presets
   * (new) sf3 import / export
   * (new) serbian translation
+  * (new) command line for conversions between sf2, sf3, sfz and sfArk
   * (improvement) simultaneous editing of multiple global divisions
   * (improvement) tools are allowed when several instruments or presets are selected in the tree
   * (improvement) pasting modulators is allowed for several divisions
