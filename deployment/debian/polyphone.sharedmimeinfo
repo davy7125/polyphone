@@ -14,6 +14,10 @@
     <glob pattern="*.sfz"/>
   </mime-type>
   <mime-type type="audio/x-soundfont">
+    <comment>Compressed SoundFont sf3</comment>
+    <glob pattern="*.sf3"/>
+  </mime-type>
+  <mime-type type="audio/x-soundfont">
     <comment>SoundFont archive sfArk</comment>
     <glob pattern="*.sfArk"/>
   </mime-type>
