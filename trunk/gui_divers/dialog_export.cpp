@@ -34,7 +34,7 @@ DialogExport::DialogExport(Pile_sf2 *sf2, QList<EltID> listSf2, QWidget *parent)
 {
     ui->setupUi(this);
     this->setAttribute(Qt::WA_DeleteOnClose, true);
-    this->setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint | Qt::Tool);
+    this->setWindowFlags((windowFlags() & ~Qt::WindowContextHelpButtonHint) | Qt::Tool);
 
     // Remplissage de la liste
     foreach (EltID id, listSf2)

@@ -74,6 +74,11 @@ int convert(Options &options)
 {
     QFileInfo inputFile(options.getInputFiles()[0]);
     QFileInfo outputFile(options.getOutputFileFullPath());
+    if (!QDir(options.getOutputDirectory()).exists())
+    {
+        qWarning() << "The directory" << options.getOutputDirectory() << "does not exist.";
+        return 1;
+    }
     if (!inputFile.exists())
     {
         qWarning() << "The file" << inputFile.filePath() << "does not exist.";
@@ -93,15 +98,17 @@ int convert(Options &options)
     {
         if (sf2.open(inputFile.filePath()) > 0)
         {
-            qWarning() << "... failed.";
+            qWarning() << "fail";
             return 3;
         }
     }
     else if (inputExtension == "sfz")
     {
         ImportSfz importSfz(&sf2);
-        int num;
+        int num = -1;
+        qDebug() << "conversion sfz" <<  inputFile.filePath();
         importSfz.import(inputFile.filePath(), &num);
+        qDebug() << "import ok" << num;
     }
     else if (inputExtension == "sfark")
     {
@@ -121,16 +128,16 @@ int convert(Options &options)
 
         if (!ok)
         {
-            qWarning() << "... failed.";
+            qWarning() << "fail";
             return 3;
         }
     }
     else
     {
-        qWarning() << "... failed.";
+        qWarning() << "fail";
         return 2;
     }
-    qWarning() << "... done.";
+    qWarning() << "done";
 
     // Save in outputfile
     switch (options.mode())
@@ -139,7 +146,7 @@ int convert(Options &options)
         qDebug() << "Saving file" << outputFile.filePath() << "...";
         if (sf2.save(0, outputFile.filePath(), options.quality()) != 0)
         {
-            qWarning() << "... failed.";
+            qWarning() << "fail";
             return 4;
         }
         break;
@@ -161,16 +168,16 @@ int convert(Options &options)
 
         // Conversion sfz
         ConversionSfz conversionSfz(&sf2);
-        conversionSfz.convert(options.getOutputDirectory(), presets,
+        conversionSfz.convert(QDir(options.getOutputDirectory()).absolutePath(), presets,
                               options.sfzPresetPrefix(), options.sfzOneDirPerBank(), options.sfzGeneralMidi());
 
     } break;
     default:
-        qWarning() << "... failed.";
+        qWarning() << "fail";
         return 2;
     }
 
-    qWarning() << "... done.";
+    qWarning() << "done";
     return 0;
 }
 
@@ -189,8 +196,7 @@ int main(int argc, char *argv[])
     if (options.error())
     {
         // Show usage
-        qDebug() << "bad arguments";
-        /// TODO
+        qDebug() << "write \"man polyphone\" to show usage";
     }
     else
     {

@@ -54,7 +54,9 @@ void ConversionSfz::convert(QString dir, QList<EltID> listID, bool presetPrefix,
         rootDir += "-" + QString::number(i);
     }
     rootDir = dir + "/" + rootDir;
-    QDir(rootDir).mkdir(rootDir);
+
+    if (!QDir(rootDir).mkdir(rootDir))
+        return;
 
     // Plusieurs banques sont utilisées ?
     int numBankUnique = -1;
