@@ -70,6 +70,9 @@ public:
     /// Return true in case of bad arguments
     bool error() { return _error; }
 
+    /// If true, display help
+    bool help() { return _help; }
+
 private:
     enum ProcessingState
     {
@@ -89,7 +92,7 @@ private:
     QStringList _inputFiles;
     QString _outputFile, _outputDirectory;
     Mode _mode;
-    bool _error;
+    bool _error, _help;
 
     // Sf3 option
     int _sf3Quality;
