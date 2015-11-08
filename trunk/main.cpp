@@ -59,13 +59,6 @@ int launchApplication(Options &options, QApplication &a)
         w.dragAndDrop(file, EltID(elementUnknown, -1, -1, -1, -1), &numSf2);
 
 #ifdef Q_OS_MACX
-    for (int i = 0; i < listPathMac.size(); i++)
-    {
-        QString extension = QFileInfo(listPathMac.at(i)).suffix().toLower();
-        if (extension == "sf2" || extension == "sf3" || extension == "sfark" || extension == "sfz")
-            w.dragAndDrop(listPathMac.at(i), EltID(elementUnknown, -1, -1, -1, -1), &numSf2);
-    }
-    a.stopAppending();
     QObject::connect(&a, SIGNAL(openFile(QString)), &w, SLOT(dragAndDrop(QString)));
 #endif
 
@@ -144,7 +137,7 @@ int convert(Options &options)
     {
     case Options::MODE_CONVERSION_TO_SF2: case Options::MODE_CONVERSION_TO_SF3:
         qDebug() << "Saving file" << outputFile.filePath() << "...";
-        if (sf2.save(0, outputFile.filePath()) != 0)
+        if (sf2.save(0, outputFile.filePath(), options.quality()) != 0)
         {
             qWarning() << "... failed.";
             return 4;
@@ -184,8 +177,7 @@ int convert(Options &options)
 int main(int argc, char *argv[])
 {
 #ifdef Q_OS_MACX
-    QStringList listPathMac;
-    MacApplication a(argc, argv, &listPathMac);
+    MacApplication a(argc, argv);
 #else
     QApplication a(argc, argv);
 #endif

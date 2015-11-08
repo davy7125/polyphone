@@ -52,7 +52,7 @@ public:
     /// Return the output file (in case of a conversion)
     QString getOutputDirectory() { return _outputDirectory; }
 
-    /// Return true if polyphone is used as a command line to convert
+    /// Return the mode describing how the executable will be used
     Mode mode() { return _mode; }
 
     /// Sfz option: preset number as prefix
@@ -64,6 +64,9 @@ public:
     /// Sfz option: use general midi classement
     bool sfzGeneralMidi() { return _sfzGeneralMidi; }
 
+    /// Return the compression quality for sf3 conversion (0 is high, 1 is medium, 2 is high);
+    int quality()  { return _sf3Quality; }
+
     /// Return true in case of bad arguments
     bool error() { return _error; }
 
@@ -73,7 +76,7 @@ private:
         STATE_INPUT_FILE,
         STATE_OUTPUT_FILE,
         STATE_OUTPUT_DIRECTORY,
-        STATE_SFZ_OPTIONS,
+        STATE_CONFIG,
         STATE_NONE
     };
 
@@ -87,6 +90,9 @@ private:
     QString _outputFile, _outputDirectory;
     Mode _mode;
     bool _error;
+
+    // Sf3 option
+    int _sf3Quality;
 
     // Sfz options
     bool _sfzPresetPrefix;

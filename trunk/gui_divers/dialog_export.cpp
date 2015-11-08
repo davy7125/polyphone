@@ -34,7 +34,7 @@ DialogExport::DialogExport(Pile_sf2 *sf2, QList<EltID> listSf2, QWidget *parent)
 {
     ui->setupUi(this);
     this->setAttribute(Qt::WA_DeleteOnClose, true);
-    this->setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint);
+    this->setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint | Qt::Tool);
 
     // Remplissage de la liste
     foreach (EltID id, listSf2)
@@ -79,8 +79,8 @@ DialogExport::DialogExport(Pile_sf2 *sf2, QList<EltID> listSf2, QWidget *parent)
 
     int exportQuality = Config::getInstance()->getExportQuality();
     if (exportQuality < 0 || exportQuality >= ui->comboQuality->count())
-        exportQuality = 0;
-    ui->comboQuality->setCurrentIndex(exportQuality);
+        exportQuality = 1;
+    ui->comboQuality->setCurrentIndex(2 - exportQuality);
 }
 
 DialogExport::~DialogExport()
@@ -194,11 +194,11 @@ void DialogExport::on_pushExport_clicked()
     Config::getInstance()->setExportPreset(ui->checkPreset->isChecked());
     Config::getInstance()->setExportBank(ui->checkBank->isChecked());
     Config::getInstance()->setExportGM(ui->checkGM->isChecked());
-    Config::getInstance()->setExportQuality(ui->comboQuality->currentIndex());
+    Config::getInstance()->setExportQuality(2 - ui->comboQuality->currentIndex());
 
     emit(accepted(listID, ui->lineFolder->text(), ui->comboFormat->currentIndex(),
                   ui->checkPreset->isChecked(), ui->checkBank->isChecked(),
-                  ui->checkGM->isChecked(), ui->comboQuality->currentIndex()));
+                  ui->checkGM->isChecked(), 2 - ui->comboQuality->currentIndex()));
     QDialog::accept();
 }
 

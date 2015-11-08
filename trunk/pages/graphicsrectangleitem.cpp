@@ -233,7 +233,7 @@ EltID GraphicsRectangleItem::findBrother()
             rangesType velRange = s_sf2->get(_id, champ_velRange).rValue;
 
             // Search the brother
-            bool numBrothers = 0;
+            int numBrothers = 0;
             EltID idBrother = _id;
             EltID id2 = _id;
             for (int i = 0; i < s_sf2->count(_id); i++)

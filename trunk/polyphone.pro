@@ -85,7 +85,7 @@ macx {
         lib/ogg_vorbis/vorbis/codec.h \
         lib/ogg_vorbis/vorbis/vorbisenc.h \
         lib/ogg_vorbis/vorbis/vorbisfile.h
-    LIBS += -L$$PWD/lib/mac -lportaudio -F$$PWD/lib/mac/ -framework Jackmp \
+    LIBS += -L$$PWD/lib/mac -lportaudio -logg -lvorbis -F$$PWD/lib/mac/ -framework Jackmp \
         -framework CoreAudio -framework CoreMIDI -framework CoreFoundation \
         -framework AudioUnit -framework AudioToolbox -framework Cocoa -lz
     ICON = polyphone.icns

@@ -138,22 +138,6 @@
      </property>
     </spacer>
    </item>
-   <item row="2" column="1">
-    <spacer name="horizontalSpacer_2">
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
-     </property>
-     <property name="sizeType">
-      <enum>QSizePolicy::Fixed</enum>
-     </property>
-     <property name="sizeHint" stdset="0">
-      <size>
-       <width>6</width>
-       <height>20</height>
-      </size>
-     </property>
-    </spacer>
-   </item>
    <item row="3" column="1" colspan="4">
     <widget class="QSpinBox" name="spinMinVel">
      <property name="maximum">

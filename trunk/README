@@ -50,7 +50,7 @@ Build the project, a bundle should appear in the directory "RELEASE".
 
 ######### 3. Complete the bundle ###################################################################
 
-Run the following command to include libraries / frameworks inside the bundle (adjust the path
+Run the following command to include libraries and frameworks inside the bundle (adjust the path
 first!):
 /Path/To/Qt/5.2.0/clang_64/bin/macdeployqt /Path/To/trunk/RELEASE/Polyphone.app
 

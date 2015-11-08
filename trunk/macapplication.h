@@ -34,14 +34,9 @@ class MacApplication: public QApplication
 {
     Q_OBJECT
 public:
-    MacApplication(int &argc, char **argv, QStringList * listPathMac, int flags = ApplicationFlags) :
-        QApplication(argc, argv, flags),
-        _listPathMac(listPathMac)
+    MacApplication(int &argc, char **argv, int flags = ApplicationFlags) :
+        QApplication(argc, argv, flags)
     {}
-    void stopAppending()
-    {
-        _listPathMac = NULL;
-    }
 
 signals:
     void openFile(QString path);
@@ -52,16 +47,11 @@ protected:
         if (event->type() == QEvent::FileOpen)
         {
             QString path = static_cast<QFileOpenEvent*>(event)->file();
-            if (_listPathMac)
-                _listPathMac->append(path);
             emit(openFile(path));
             return true;
         }
         return QApplication::event(event);
     }
-
-private:
-    QStringList * _listPathMac;
 };
 
 

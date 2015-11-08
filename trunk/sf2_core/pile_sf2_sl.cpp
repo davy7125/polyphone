@@ -97,7 +97,7 @@ int Pile_sf2::open(QString fileName)
 }
 
 /// Save as sf2 or sf3
-/// If sf3, quality is 0 = high, 1 = middle, 2 = low (default is 1)
+/// If sf3, quality is 0 = low, 1 = middle, 2 = high (default is 1)
 int Pile_sf2::save(int indexSf2, QString fileName, int quality)
 {
     // Sauvegarde d'un fichier soundfont
