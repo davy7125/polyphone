@@ -25,7 +25,6 @@
 #include "options.h"
 #include <QFileInfo>
 #include <QDir>
-#include <QDebug>
 #include <QCoreApplication>
 
 Options::Options(int argc, char *argv[]) :
@@ -43,7 +42,11 @@ Options::Options(int argc, char *argv[]) :
     // Convert into QStringList
     QStringList args;
     for (int i = 1; i < argc; i++) // The first argument is rejected (executable path)
+#ifdef Q_OS_WIN
+        args << QString::fromLatin1(argv[i]);
+#else
         args << QString(argv[i]);
+#endif
 
     // Argument processing
     foreach (QString arg, args)
