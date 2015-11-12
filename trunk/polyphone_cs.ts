@@ -703,7 +703,7 @@
     <message>
         <location filename="gui_divers/dialog_about.cpp" line="53"/>
         <source>Faire un don</source>
-        <translation type="unfinished"></translation>
+        <translation>Darovat</translation>
     </message>
     <message>
         <location filename="gui_divers/dialog_about.cpp" line="57"/>
@@ -741,7 +741,7 @@
     <message>
         <location filename="gui_divers/dialog_about.cpp" line="65"/>
         <source>Erwan Berté</source>
-        <translation type="unfinished"></translation>
+        <translation>Erwan Berté</translation>
     </message>
     <message>
         <location filename="gui_divers/dialog_about.cpp" line="66"/>
@@ -788,22 +788,22 @@
     <message>
         <location filename="gui_divers/dialogchangelog.ui" line="17"/>
         <source>Bienvenue</source>
-        <translation type="unfinished"></translation>
+        <translation>Přivítání</translation>
     </message>
     <message>
         <location filename="gui_divers/dialogchangelog.ui" line="84"/>
         <source>Faire un &amp;don</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Darovat</translation>
     </message>
     <message>
         <location filename="gui_divers/dialogchangelog.ui" line="104"/>
         <source>&amp;Ok</source>
-        <translation type="unfinished">&amp;OK</translation>
+        <translation>&amp;OK</translation>
     </message>
     <message>
         <location filename="gui_divers/dialogchangelog.cpp" line="40"/>
         <source>Merci d&apos;avoir installé</source>
-        <translation type="unfinished"></translation>
+        <translation>Poděkování za instalaci</translation>
     </message>
     <message>
         <location filename="gui_divers/dialogchangelog.cpp" line="41"/>
@@ -813,22 +813,22 @@
     <message>
         <location filename="gui_divers/dialogchangelog.cpp" line="41"/>
         <source>version</source>
-        <translation type="unfinished"></translation>
+        <translation>verze</translation>
     </message>
     <message>
         <location filename="gui_divers/dialogchangelog.cpp" line="79"/>
         <source>Ce qu&apos;il y a de nouveau</source>
-        <translation type="unfinished"></translation>
+        <translation>Novinky</translation>
     </message>
     <message>
         <location filename="gui_divers/dialogchangelog.cpp" line="82"/>
         <source>Ce qui est amélioré</source>
-        <translation type="unfinished"></translation>
+        <translation>Vylepšení</translation>
     </message>
     <message>
         <location filename="gui_divers/dialogchangelog.cpp" line="85"/>
         <source>Ce qui est résolu</source>
-        <translation type="unfinished"></translation>
+        <translation>Vyřešeno</translation>
     </message>
 </context>
 <context>
@@ -895,22 +895,22 @@
     <message>
         <location filename="gui_divers/dialog_export.ui" line="170"/>
         <source>Haute</source>
-        <translation type="unfinished"></translation>
+        <translation>Vysoká</translation>
     </message>
     <message>
         <location filename="gui_divers/dialog_export.ui" line="175"/>
         <source>Moyenne</source>
-        <translation type="unfinished"></translation>
+        <translation>Průměrná</translation>
     </message>
     <message>
         <location filename="gui_divers/dialog_export.ui" line="180"/>
         <source>Basse</source>
-        <translation type="unfinished"></translation>
+        <translation>Nízká</translation>
     </message>
     <message>
         <location filename="gui_divers/dialog_export.ui" line="188"/>
         <source>Qualité</source>
-        <translation type="unfinished"></translation>
+        <translation>Jakost</translation>
     </message>
     <message>
         <location filename="gui_divers/dialog_export.ui" line="199"/>
@@ -1108,7 +1108,7 @@
     <message>
         <location filename="gui_divers/dialog_help.cpp" line="145"/>
         <source>Éditeur d&apos;étendues</source>
-        <translation type="unfinished"></translation>
+        <translation>Upravit rozsahy</translation>
     </message>
     <message>
         <location filename="gui_divers/dialog_help.cpp" line="146"/>
@@ -1125,7 +1125,7 @@
     <message>
         <location filename="gui_divers/dialog_help.cpp" line="149"/>
         <source>Pages d&apos;aperçu</source>
-        <translation type="unfinished"></translation>
+        <translation>Strany s celkovým obrazem</translation>
     </message>
     <message>
         <location filename="gui_divers/dialog_help.cpp" line="156"/>
@@ -2691,42 +2691,42 @@ instrument courant</source>
     <message>
         <location filename="mainwindow.cpp" line="60"/>
         <source>Operation en cours...</source>
-        <translation type="unfinished"></translation>
+        <translation>Probíhá operace...</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="60"/>
         <source>Annuler</source>
-        <translation type="unfinished">Zrušit</translation>
+        <translation>Zrušit</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="396"/>
         <source>Soundfonts</source>
-        <translation type="unfinished"></translation>
+        <translation>Zvukové banky</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="397"/>
         <source>Fichiers .sf2</source>
-        <translation type="unfinished"></translation>
+        <translation>Soubory .sf2</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="398"/>
         <source>Fichiers .sf3</source>
-        <translation type="unfinished"></translation>
+        <translation>Soubory .sf3</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="399"/>
         <source>Fichiers .sfz</source>
-        <translation type="unfinished"></translation>
+        <translation>Soubory .sfz</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="400"/>
         <source>Archives .sfArk</source>
-        <translation type="unfinished"></translation>
+        <translation>Archivy .sfArk</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="470"/>
         <source>Fichier corrompu : utilisation des échantillons en qualité 16 bits.</source>
-        <translation type="unfinished">Poškozený soubor: používání vzorků o jakosti 16 bitů.</translation>
+        <translation>Poškozený soubor: používání vzorků o jakosti 16 bitů.</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="485"/>
@@ -2756,12 +2756,12 @@ instrument courant</source>
     <message>
         <location filename="mainwindow.cpp" line="582"/>
         <source>Impossible de supprimer un échantillon s&apos;il est utilisé par un instrument.</source>
-        <translation type="unfinished">Nelze smazat vzorek používaný jiným nástrojem.</translation>
+        <translation>Nelze smazat vzorek používaný jiným nástrojem.</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="585"/>
         <source>Impossible de supprimer un instrument s&apos;il est utilisé par un preset.</source>
-        <translation type="unfinished">Nelze smazat nástroj používaný jiným přednastavením.</translation>
+        <translation>Nelze smazat nástroj používaný jiným přednastavením.</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1388"/>
@@ -2925,7 +2925,7 @@ Rozdělení souboru na několik sf2 může potíže vyřešit.</translation>
     <message>
         <location filename="mainwindow.cpp" line="1561"/>
         <source>Fichier .wav</source>
-        <translation type="unfinished"></translation>
+        <translation>Soubor .wav</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1616"/>
@@ -3486,86 +3486,93 @@ Rozdělení souboru na několik sf2 může potíže vyřešit.</translation>
     <message>
         <location filename="pages/pageoverviewinst.cpp" line="32"/>
         <source>Liste des instruments</source>
-        <translation type="unfinished">Seznam nástrojů</translation>
+        <translation>Seznam nástrojů</translation>
     </message>
     <message>
         <location filename="pages/pageoverviewinst.cpp" line="38"/>
         <source>Utilisé</source>
-        <translation type="unfinished"></translation>
+        <translation>Používáno</translation>
     </message>
     <message>
         <location filename="pages/pageoverviewinst.cpp" line="39"/>
         <source>Nombre
 d&apos;échantillons</source>
-        <translation type="unfinished"></translation>
+        <translation>Počet
+vzorků</translation>
     </message>
     <message>
         <location filename="pages/pageoverviewinst.cpp" line="40"/>
         <source>Nombre de
 paramètres</source>
-        <translation type="unfinished"></translation>
+        <translation>Počet
+parametrů</translation>
     </message>
     <message>
         <location filename="pages/pageoverviewinst.cpp" line="41"/>
         <source>Nombre de
 modulateurs</source>
-        <translation type="unfinished"></translation>
+        <translation>Počet
+modulátorů</translation>
     </message>
     <message>
         <location filename="pages/pageoverviewinst.cpp" line="42"/>
         <source>Étendue totale
 (note)</source>
-        <translation type="unfinished"></translation>
+        <translation>Celkový rozsah
+(nota)</translation>
     </message>
     <message>
         <location filename="pages/pageoverviewinst.cpp" line="43"/>
         <source>Étendue totale
 (vélocité)</source>
-        <translation type="unfinished"></translation>
+        <translation>Celkový rozsah
+(dynamika)</translation>
     </message>
     <message>
         <location filename="pages/pageoverviewinst.cpp" line="44"/>
         <source>Atténuation</source>
-        <translation type="unfinished">Ztlumení</translation>
+        <translation>Ztlumení</translation>
     </message>
     <message>
         <location filename="pages/pageoverviewinst.cpp" line="45"/>
         <source>Lecture
 en boucle</source>
-        <translation type="unfinished"></translation>
+        <translation>Přehrávání
+ve smyčce</translation>
     </message>
     <message>
         <location filename="pages/pageoverviewinst.cpp" line="46"/>
         <source>Chorus</source>
-        <translation type="unfinished">Sbor (chorus)</translation>
+        <translation>Sbor
+(chorus)</translation>
     </message>
     <message>
         <location filename="pages/pageoverviewinst.cpp" line="47"/>
         <source>Réverbération</source>
-        <translation type="unfinished">Dozvuk</translation>
+        <translation>Dozvuk</translation>
     </message>
     <message>
         <location filename="pages/pageoverviewinst.cpp" line="95"/>
         <location filename="pages/pageoverviewinst.cpp" line="281"/>
         <source>oui</source>
-        <translation>ano</translation>
+        <translation>Ano</translation>
     </message>
     <message>
         <location filename="pages/pageoverviewinst.cpp" line="95"/>
         <location filename="pages/pageoverviewinst.cpp" line="279"/>
         <source>non</source>
-        <translation>ne</translation>
+        <translation>Ne</translation>
     </message>
     <message>
         <location filename="pages/pageoverviewinst.cpp" line="283"/>
         <source>oui, jusqu&apos;à la fin</source>
-        <translation type="unfinished"></translation>
+        <translation>Ano, až po konec</translation>
     </message>
     <message>
         <location filename="pages/pageoverviewinst.cpp" line="289"/>
         <source>plusieurs modes</source>
         <comment>speaking about loop modes</comment>
-        <translation type="unfinished"></translation>
+        <translation>Několik režimů</translation>
     </message>
 </context>
 <context>
@@ -3573,58 +3580,65 @@ en boucle</source>
     <message>
         <location filename="pages/pageoverviewprst.cpp" line="32"/>
         <source>Liste des presets</source>
-        <translation type="unfinished">Seznam přednastavení</translation>
+        <translation>Seznam přednastavení</translation>
     </message>
     <message>
         <location filename="pages/pageoverviewprst.cpp" line="38"/>
         <source>Banque
 Preset</source>
-        <translation type="unfinished"></translation>
+        <translation>Banka
+přednastavení</translation>
     </message>
     <message>
         <location filename="pages/pageoverviewprst.cpp" line="39"/>
         <source>Nombre
 d&apos;instruments</source>
-        <translation type="unfinished"></translation>
+        <translation>Počet
+nástrojů</translation>
     </message>
     <message>
         <location filename="pages/pageoverviewprst.cpp" line="40"/>
         <source>Nombre de
 paramètres</source>
-        <translation type="unfinished"></translation>
+        <translation>Počet
+parametrů</translation>
     </message>
     <message>
         <location filename="pages/pageoverviewprst.cpp" line="41"/>
         <source>Nombre de
 modulateurs</source>
-        <translation type="unfinished"></translation>
+        <translation>Počet
+modulátorů</translation>
     </message>
     <message>
         <location filename="pages/pageoverviewprst.cpp" line="42"/>
         <source>Étendue totale
 (note)</source>
-        <translation type="unfinished"></translation>
+        <translation>Celkový rozsah
+(nota)</translation>
     </message>
     <message>
         <location filename="pages/pageoverviewprst.cpp" line="43"/>
         <source>Étendue totale
 (vélocité)</source>
-        <translation type="unfinished"></translation>
+        <translation>Celkový rozsah
+(dynamika)</translation>
     </message>
     <message>
         <location filename="pages/pageoverviewprst.cpp" line="44"/>
         <source>Atténuation</source>
-        <translation type="unfinished">Ztlumení</translation>
+        <translation>Ztlumení</translation>
     </message>
     <message>
         <location filename="pages/pageoverviewprst.cpp" line="45"/>
         <source>Chorus</source>
-        <translation type="unfinished">Sbor (chorus)</translation>
+        <translation>Sbor
+(chorus)</translation>
     </message>
     <message>
         <location filename="pages/pageoverviewprst.cpp" line="46"/>
         <source>Réverbération</source>
-        <translation type="unfinished">Dozvuk</translation>
+        <translation>Dozvuk</translation>
     </message>
 </context>
 <context>
@@ -3632,57 +3646,62 @@ modulateurs</source>
     <message>
         <location filename="pages/pageoverviewsmpl.cpp" line="32"/>
         <source>Liste des échantillons</source>
-        <translation type="unfinished">Seznam vzorků</translation>
+        <translation>Seznam vzorků</translation>
     </message>
     <message>
         <location filename="pages/pageoverviewsmpl.cpp" line="38"/>
         <source>Utilisé</source>
-        <translation type="unfinished"></translation>
+        <translation>Používáno</translation>
     </message>
     <message>
         <location filename="pages/pageoverviewsmpl.cpp" line="39"/>
         <source>Durée
 totale</source>
-        <translation type="unfinished"></translation>
+        <translation>Celková
+doba trvání</translation>
     </message>
     <message>
         <location filename="pages/pageoverviewsmpl.cpp" line="40"/>
         <source>Durée de
 la boucle</source>
-        <translation type="unfinished"></translation>
+        <translation>Doba trvání
+smyčky</translation>
     </message>
     <message>
         <location filename="pages/pageoverviewsmpl.cpp" line="41"/>
         <source>Note
 de base</source>
-        <translation type="unfinished"></translation>
+        <translation>Základní
+nota</translation>
     </message>
     <message>
         <location filename="pages/pageoverviewsmpl.cpp" line="42"/>
         <source>Correction</source>
-        <translation type="unfinished">Oprava</translation>
+        <translation>Oprava</translation>
     </message>
     <message>
         <location filename="pages/pageoverviewsmpl.cpp" line="43"/>
         <source>Type
 d&apos;échantillon</source>
-        <translation type="unfinished"></translation>
+        <translation>Typ
+vzorku</translation>
     </message>
     <message>
         <location filename="pages/pageoverviewsmpl.cpp" line="44"/>
         <source>Échantillon
 lié</source>
-        <translation type="unfinished"></translation>
+        <translation>Vzorek
+spojen</translation>
     </message>
     <message>
         <location filename="pages/pageoverviewsmpl.cpp" line="89"/>
         <source>oui</source>
-        <translation>ano</translation>
+        <translation>Ano</translation>
     </message>
     <message>
         <location filename="pages/pageoverviewsmpl.cpp" line="89"/>
         <source>non</source>
-        <translation>ne</translation>
+        <translation>Ne</translation>
     </message>
     <message>
         <location filename="pages/pageoverviewsmpl.cpp" line="96"/>
@@ -3694,7 +3713,7 @@ lié</source>
     <message>
         <location filename="pages/pageoverviewsmpl.cpp" line="127"/>
         <source>Lien invalide</source>
-        <translation type="unfinished"></translation>
+        <translation>Neplatné spojení</translation>
     </message>
     <message>
         <location filename="pages/pageoverviewsmpl.cpp" line="130"/>
@@ -3705,22 +3724,22 @@ lié</source>
     <message>
         <location filename="pages/pageoverviewsmpl.cpp" line="133"/>
         <source>Stéréo droit</source>
-        <translation type="unfinished"></translation>
+        <translation>Stereo pravý</translation>
     </message>
     <message>
         <location filename="pages/pageoverviewsmpl.cpp" line="136"/>
         <source>Stéréo gauche</source>
-        <translation type="unfinished"></translation>
+        <translation>Stereo levý</translation>
     </message>
     <message>
         <location filename="pages/pageoverviewsmpl.cpp" line="139"/>
         <source>Stéréo non défini</source>
-        <translation type="unfinished"></translation>
+        <translation>Stereo nestanoveno</translation>
     </message>
     <message>
         <location filename="pages/pageoverviewsmpl.cpp" line="159"/>
         <source>non valide</source>
-        <translation type="unfinished"></translation>
+        <translation>Neplatné</translation>
     </message>
 </context>
 <context>
@@ -3801,17 +3820,17 @@ lié</source>
     <message>
         <location filename="pages/pagetable.cpp" line="3076"/>
         <source>Un instrument ne contenant aucun sample n&apos;est pas compatible avec cet outil.</source>
-        <translation type="unfinished"></translation>
+        <translation>Jeden nástroj neobsahující žádný vzorek není slučitelný s tímto nástrojem.</translation>
     </message>
     <message>
         <location filename="pages/pagetable.cpp" line="3079"/>
         <source>Un preset ne contenant aucun instrument n&apos;est pas compatible avec cet outil.</source>
-        <translation type="unfinished"></translation>
+        <translation>Jedno přednastavení neobsahující žádný nástroj není slučitelný s tímto nástrojem.</translation>
     </message>
     <message>
         <location filename="pages/pagetable.cpp" line="3084"/>
         <source>L&apos;étendue de notes de toutes les divisions doit être spécifiée.</source>
-        <translation type="unfinished"></translation>
+        <translation>Je třeba stanovit rozsah not všech dělení.</translation>
     </message>
     <message>
         <location filename="pages/pagetable.cpp" line="3123"/>
@@ -4806,7 +4825,7 @@ lié</source>
         <location filename="pages/page_smpl.cpp" line="161"/>
         <source>s</source>
         <comment>unit for seconds</comment>
-        <translation type="unfinished">s</translation>
+        <translation>s</translation>
     </message>
     <message>
         <location filename="pages/page_smpl.cpp" line="943"/>
@@ -5173,13 +5192,13 @@ lié</source>
         <location filename="pages/graphicslegenditem.cpp" line="103"/>
         <location filename="pages/graphicslegenditem2.cpp" line="61"/>
         <source>Étendue note :</source>
-        <translation type="unfinished"></translation>
+        <translation>Rozsah not:</translation>
     </message>
     <message>
         <location filename="pages/graphicslegenditem.cpp" line="122"/>
         <location filename="pages/graphicslegenditem2.cpp" line="64"/>
         <source>Étendue vélocité :</source>
-        <translation type="unfinished"></translation>
+        <translation>Rozsah dynamiky:</translation>
     </message>
 </context>
 <context>
