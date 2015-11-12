@@ -21,7 +21,8 @@ TRANSLATIONS = polyphone_en.ts \
     polyphone_es.ts \
     polyphone_it.ts \
     polyphone_sr.ts \
-    polyphone_de.ts
+    polyphone_de.ts \
+    polyphone_cs.ts
 
 
 QT       += core gui printsupport svg
