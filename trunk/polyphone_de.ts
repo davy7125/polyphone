@@ -786,32 +786,32 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="gui_divers/dialogchangelog.cpp" line="39"/>
+        <location filename="gui_divers/dialogchangelog.cpp" line="40"/>
         <source>Merci d&apos;avoir installé</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="gui_divers/dialogchangelog.cpp" line="40"/>
+        <location filename="gui_divers/dialogchangelog.cpp" line="41"/>
         <source>Polyphone</source>
         <translation type="unfinished">Polyphone</translation>
     </message>
     <message>
-        <location filename="gui_divers/dialogchangelog.cpp" line="40"/>
+        <location filename="gui_divers/dialogchangelog.cpp" line="41"/>
         <source>version</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="gui_divers/dialogchangelog.cpp" line="78"/>
+        <location filename="gui_divers/dialogchangelog.cpp" line="79"/>
         <source>Ce qu&apos;il y a de nouveau</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="gui_divers/dialogchangelog.cpp" line="81"/>
+        <location filename="gui_divers/dialogchangelog.cpp" line="82"/>
         <source>Ce qui est amélioré</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="gui_divers/dialogchangelog.cpp" line="84"/>
+        <location filename="gui_divers/dialogchangelog.cpp" line="85"/>
         <source>Ce qui est résolu</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1500,77 +1500,77 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="tools/dialog_paramglobal.ui" line="67"/>
+        <location filename="tools/dialog_paramglobal.ui" line="42"/>
         <source>Minimum</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="tools/dialog_paramglobal.ui" line="74"/>
+        <location filename="tools/dialog_paramglobal.ui" line="181"/>
         <source>Motif</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="tools/dialog_paramglobal.ui" line="127"/>
+        <location filename="tools/dialog_paramglobal.ui" line="82"/>
         <source>Ajout</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="tools/dialog_paramglobal.ui" line="132"/>
+        <location filename="tools/dialog_paramglobal.ui" line="87"/>
         <source>Multiplication</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="tools/dialog_paramglobal.ui" line="137"/>
+        <location filename="tools/dialog_paramglobal.ui" line="92"/>
         <source>Remplacement</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="tools/dialog_paramglobal.ui" line="171"/>
+        <location filename="tools/dialog_paramglobal.ui" line="188"/>
         <source>Appliquer à l&apos;étendue de vélocité</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="tools/dialog_paramglobal.ui" line="185"/>
+        <location filename="tools/dialog_paramglobal.ui" line="137"/>
         <source>Maximum</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="tools/dialog_paramglobal.ui" line="192"/>
+        <location filename="tools/dialog_paramglobal.ui" line="110"/>
         <source>Paramètre</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="tools/dialog_paramglobal.ui" line="233"/>
+        <location filename="tools/dialog_paramglobal.ui" line="209"/>
         <source>Modification</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="tools/dialog_paramglobal.ui" line="244"/>
+        <location filename="tools/dialog_paramglobal.ui" line="148"/>
         <source>Manuel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="tools/dialog_paramglobal.ui" line="249"/>
+        <location filename="tools/dialog_paramglobal.ui" line="153"/>
         <source>Linéaire ascendant</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="tools/dialog_paramglobal.ui" line="254"/>
+        <location filename="tools/dialog_paramglobal.ui" line="158"/>
         <source>Linéaire descendant</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="tools/dialog_paramglobal.ui" line="259"/>
+        <location filename="tools/dialog_paramglobal.ui" line="163"/>
         <source>Exponentiel ascendant</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="tools/dialog_paramglobal.ui" line="264"/>
+        <location filename="tools/dialog_paramglobal.ui" line="168"/>
         <source>Exponentiel descendant</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="tools/dialog_paramglobal.ui" line="269"/>
+        <location filename="tools/dialog_paramglobal.ui" line="173"/>
         <source>Aléatoire</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1829,17 +1829,17 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="tools/dialog_visualizer.ui" line="199"/>
+        <location filename="tools/dialog_visualizer.ui" line="260"/>
         <source>Valeur moyenne par note</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="tools/dialog_visualizer.ui" line="212"/>
+        <location filename="tools/dialog_visualizer.ui" line="231"/>
         <source>Paramètres par défaut</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="tools/dialog_visualizer.ui" line="225"/>
+        <location filename="tools/dialog_visualizer.ui" line="273"/>
         <source>Paramètres définis</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3383,7 +3383,7 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
 <context>
     <name>PageOverview</name>
     <message>
-        <location filename="pages/pageoverview.cpp" line="54"/>
+        <location filename="pages/pageoverview.cpp" line="62"/>
         <source>Nom</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4102,258 +4102,258 @@ lié</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="pages/page_prst.ui" line="127"/>
+        <location filename="pages/page_prst.ui" line="133"/>
         <source>Preset</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="pages/page_prst.ui" line="166"/>
+        <location filename="pages/page_prst.ui" line="178"/>
         <source>(percussion)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="pages/page_prst.ui" line="176"/>
+        <location filename="pages/page_prst.ui" line="188"/>
         <source>Éditer étendues</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="pages/page_prst.ui" line="276"/>
+        <location filename="pages/page_prst.ui" line="288"/>
         <source>Etendue note</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="pages/page_prst.ui" line="281"/>
+        <location filename="pages/page_prst.ui" line="293"/>
         <source>Etendue vélocité</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="pages/page_prst.ui" line="286"/>
+        <location filename="pages/page_prst.ui" line="298"/>
         <source>Atténuation (dB)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="pages/page_prst.ui" line="291"/>
+        <location filename="pages/page_prst.ui" line="303"/>
         <source>Balance [-100;100]</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="pages/page_prst.ui" line="296"/>
+        <location filename="pages/page_prst.ui" line="308"/>
         <source>Accordage (demi-tons)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="pages/page_prst.ui" line="301"/>
+        <location filename="pages/page_prst.ui" line="313"/>
         <source>Accordage (centièmes)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="pages/page_prst.ui" line="306"/>
+        <location filename="pages/page_prst.ui" line="318"/>
         <source>Accordage (scale)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="pages/page_prst.ui" line="311"/>
+        <location filename="pages/page_prst.ui" line="323"/>
         <source>Filtre, fréquence (×)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="pages/page_prst.ui" line="322"/>
+        <location filename="pages/page_prst.ui" line="334"/>
         <source>Filtre, résonance (dB)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="pages/page_prst.ui" line="327"/>
+        <location filename="pages/page_prst.ui" line="339"/>
         <source>Vol env delay (×)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="pages/page_prst.ui" line="332"/>
+        <location filename="pages/page_prst.ui" line="344"/>
         <source>Vol env attack (×)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="pages/page_prst.ui" line="337"/>
+        <location filename="pages/page_prst.ui" line="349"/>
         <source>Vol env hold (×)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="pages/page_prst.ui" line="342"/>
+        <location filename="pages/page_prst.ui" line="354"/>
         <source>Vol env decay (×)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="pages/page_prst.ui" line="347"/>
+        <location filename="pages/page_prst.ui" line="359"/>
         <source>Vol env sustain (dB)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="pages/page_prst.ui" line="352"/>
+        <location filename="pages/page_prst.ui" line="364"/>
         <source>Vol env release (×)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="pages/page_prst.ui" line="357"/>
+        <location filename="pages/page_prst.ui" line="369"/>
         <source>Note → Vol env hold (c)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="pages/page_prst.ui" line="362"/>
+        <location filename="pages/page_prst.ui" line="374"/>
         <source>Note → Vol env decay (c)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="pages/page_prst.ui" line="367"/>
+        <location filename="pages/page_prst.ui" line="379"/>
         <source>Mod env delay (×)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="pages/page_prst.ui" line="372"/>
+        <location filename="pages/page_prst.ui" line="384"/>
         <source>Mod env attack (×)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="pages/page_prst.ui" line="377"/>
+        <location filename="pages/page_prst.ui" line="389"/>
         <source>Mod env hold (×)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="pages/page_prst.ui" line="382"/>
+        <location filename="pages/page_prst.ui" line="394"/>
         <source>Mod env decay (×)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="pages/page_prst.ui" line="387"/>
+        <location filename="pages/page_prst.ui" line="399"/>
         <source>Mod env sustain (%)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="pages/page_prst.ui" line="392"/>
+        <location filename="pages/page_prst.ui" line="404"/>
         <source>Mod env release (×)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="pages/page_prst.ui" line="397"/>
+        <location filename="pages/page_prst.ui" line="409"/>
         <source>Mod env → ton (c)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="pages/page_prst.ui" line="402"/>
+        <location filename="pages/page_prst.ui" line="414"/>
         <source>Mod env → filtre (c)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="pages/page_prst.ui" line="407"/>
+        <location filename="pages/page_prst.ui" line="419"/>
         <source>Note → Mod env hold (c)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="pages/page_prst.ui" line="412"/>
+        <location filename="pages/page_prst.ui" line="424"/>
         <source>Note → Mod env decay (c)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="pages/page_prst.ui" line="417"/>
+        <location filename="pages/page_prst.ui" line="429"/>
         <source>Mod LFO delay (×)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="pages/page_prst.ui" line="422"/>
+        <location filename="pages/page_prst.ui" line="434"/>
         <source>Mod LFO freq (×)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="pages/page_prst.ui" line="427"/>
+        <location filename="pages/page_prst.ui" line="439"/>
         <source>Mod LFO → ton (c)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="pages/page_prst.ui" line="432"/>
+        <location filename="pages/page_prst.ui" line="444"/>
         <source>Mod LFO → filtre (c)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="pages/page_prst.ui" line="437"/>
+        <location filename="pages/page_prst.ui" line="449"/>
         <source>Mod LFO → volume (dB)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="pages/page_prst.ui" line="442"/>
+        <location filename="pages/page_prst.ui" line="454"/>
         <source>Vib LFO delay (×)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="pages/page_prst.ui" line="447"/>
+        <location filename="pages/page_prst.ui" line="459"/>
         <source>Vib LFO freq (×)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="pages/page_prst.ui" line="452"/>
+        <location filename="pages/page_prst.ui" line="464"/>
         <source>Vib LFO → ton (c)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="pages/page_prst.ui" line="457"/>
+        <location filename="pages/page_prst.ui" line="469"/>
         <source>Chorus (%)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="pages/page_prst.ui" line="462"/>
+        <location filename="pages/page_prst.ui" line="474"/>
         <source>Réverbération (%)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="pages/page_prst.ui" line="467"/>
+        <location filename="pages/page_prst.ui" line="479"/>
         <source>Global</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="pages/page_prst.ui" line="515"/>
+        <location filename="pages/page_prst.ui" line="527"/>
         <source>Modulateurs</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="pages/page_prst.ui" line="552"/>
+        <location filename="pages/page_prst.ui" line="564"/>
         <source>Ajoute un modulateur</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="pages/page_prst.ui" line="578"/>
+        <location filename="pages/page_prst.ui" line="590"/>
         <source>Supprime un modulateur</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="pages/page_prst.ui" line="598"/>
+        <location filename="pages/page_prst.ui" line="610"/>
         <source>Copie les modulateurs</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="pages/page_prst.ui" line="624"/>
+        <location filename="pages/page_prst.ui" line="636"/>
         <source>Colle les modulateurs copiés</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="pages/page_prst.ui" line="738"/>
+        <location filename="pages/page_prst.ui" line="750"/>
         <source>Source</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="pages/page_prst.ui" line="749"/>
+        <location filename="pages/page_prst.ui" line="761"/>
         <source>Quantité</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="pages/page_prst.ui" line="760"/>
-        <location filename="pages/page_prst.ui" line="911"/>
+        <location filename="pages/page_prst.ui" line="772"/>
+        <location filename="pages/page_prst.ui" line="923"/>
         <source>Destination</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="pages/page_prst.ui" line="780"/>
+        <location filename="pages/page_prst.ui" line="792"/>
         <source>Source / Quantité</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="pages/page_prst.ui" line="954"/>
+        <location filename="pages/page_prst.ui" line="966"/>
         <source>Valeur abs.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4889,129 +4889,129 @@ lié</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="tools/conversion_sfz.cpp" line="266"/>
+        <location filename="tools/conversion_sfz.cpp" line="268"/>
         <location filename="tools/import_sfz.cpp" line="335"/>
         <source>sans nom</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="tools/conversion_sfz.cpp" line="286"/>
+        <location filename="tools/conversion_sfz.cpp" line="288"/>
         <source>// Sfz exporté depuis un sf2 par Polyphone</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="tools/conversion_sfz.cpp" line="287"/>
+        <location filename="tools/conversion_sfz.cpp" line="289"/>
         <source>// Nom         : </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="tools/conversion_sfz.cpp" line="288"/>
+        <location filename="tools/conversion_sfz.cpp" line="290"/>
         <source>// Auteur      : </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="tools/conversion_sfz.cpp" line="289"/>
+        <location filename="tools/conversion_sfz.cpp" line="291"/>
         <source>// Copyright   : </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="tools/conversion_sfz.cpp" line="290"/>
+        <location filename="tools/conversion_sfz.cpp" line="292"/>
         <source>// Date        : </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="tools/conversion_sfz.cpp" line="291"/>
+        <location filename="tools/conversion_sfz.cpp" line="293"/>
         <source>// Commentaire : </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="tools/conversion_sfz.cpp" line="549"/>
-        <location filename="tools/conversion_sfz.cpp" line="591"/>
+        <location filename="tools/conversion_sfz.cpp" line="551"/>
+        <location filename="tools/conversion_sfz.cpp" line="593"/>
         <source>autre</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="tools/conversion_sfz.cpp" line="552"/>
+        <location filename="tools/conversion_sfz.cpp" line="554"/>
         <source>Piano</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="tools/conversion_sfz.cpp" line="554"/>
+        <location filename="tools/conversion_sfz.cpp" line="556"/>
         <source>Percussions chromatiques</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="tools/conversion_sfz.cpp" line="556"/>
+        <location filename="tools/conversion_sfz.cpp" line="558"/>
         <source>Orgues</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="tools/conversion_sfz.cpp" line="558"/>
+        <location filename="tools/conversion_sfz.cpp" line="560"/>
         <source>Guitares</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="tools/conversion_sfz.cpp" line="560"/>
+        <location filename="tools/conversion_sfz.cpp" line="562"/>
         <source>Basses</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="tools/conversion_sfz.cpp" line="562"/>
+        <location filename="tools/conversion_sfz.cpp" line="564"/>
         <source>Cordes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="tools/conversion_sfz.cpp" line="564"/>
+        <location filename="tools/conversion_sfz.cpp" line="566"/>
         <source>Orchestre</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="tools/conversion_sfz.cpp" line="566"/>
+        <location filename="tools/conversion_sfz.cpp" line="568"/>
         <source>Cuivres</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="tools/conversion_sfz.cpp" line="568"/>
+        <location filename="tools/conversion_sfz.cpp" line="570"/>
         <source>Instrument à anches</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="tools/conversion_sfz.cpp" line="570"/>
+        <location filename="tools/conversion_sfz.cpp" line="572"/>
         <source>Flûtes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="tools/conversion_sfz.cpp" line="572"/>
+        <location filename="tools/conversion_sfz.cpp" line="574"/>
         <source>Synthétiseur solo</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="tools/conversion_sfz.cpp" line="574"/>
+        <location filename="tools/conversion_sfz.cpp" line="576"/>
         <source>Nappes de synthétiseur</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="tools/conversion_sfz.cpp" line="576"/>
+        <location filename="tools/conversion_sfz.cpp" line="578"/>
         <source>Effets de synthétiseur</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="tools/conversion_sfz.cpp" line="578"/>
+        <location filename="tools/conversion_sfz.cpp" line="580"/>
         <source>Instruments ethniques</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="tools/conversion_sfz.cpp" line="580"/>
+        <location filename="tools/conversion_sfz.cpp" line="582"/>
         <source>Percussions</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="tools/conversion_sfz.cpp" line="582"/>
+        <location filename="tools/conversion_sfz.cpp" line="584"/>
         <source>Effets sonores</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="tools/conversion_sfz.cpp" line="584"/>
+        <location filename="tools/conversion_sfz.cpp" line="586"/>
         <source>Kits de percussion</source>
         <translation type="unfinished"></translation>
     </message>
