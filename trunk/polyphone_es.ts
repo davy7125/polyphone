@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="es_ES">
+<TS version="2.0" language="es_ES">
 <context>
     <name>ComboBox</name>
     <message>
@@ -2557,8 +2557,8 @@
     </message>
     <message>
         <location filename="mainwindow.ui" line="1379"/>
-        <source>&amp;Association auto échantillons</source>
-        <oldsource>&amp;Association auto samples</oldsource>
+        <source>&amp;Associer les échantillons stéréo</source>
+        <oldsource>&amp;Association auto échantillons</oldsource>
         <translation>&amp;Asociación automática de muestras</translation>
     </message>
     <message>

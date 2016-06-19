@@ -1376,7 +1376,7 @@
      <normaloff>:/icones/link</normaloff>:/icones/link</iconset>
    </property>
    <property name="text">
-    <string>&amp;Association auto échantillons</string>
+    <string>&amp;Associer les échantillons stéréo</string>
    </property>
    <property name="toolTip">
     <string>Associe automatiquement les échantillons G/D</string>
