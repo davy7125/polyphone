@@ -2472,7 +2472,8 @@
     </message>
     <message>
         <location filename="mainwindow.ui" line="1379"/>
-        <source>&amp;Association auto échantillons</source>
+        <source>&amp;Associer les échantillons stéréo</source>
+        <oldsource>&amp;Association auto échantillons</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
