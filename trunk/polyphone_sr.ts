@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="sr_RS">
+<TS version="2.0" language="sr_RS">
 <context>
     <name>ComboBox</name>
     <message>
@@ -2479,7 +2479,8 @@
     </message>
     <message>
         <location filename="mainwindow.ui" line="1379"/>
-        <source>&amp;Association auto échantillons</source>
+        <source>&amp;Associer les échantillons stéréo</source>
+        <oldsource>&amp;Association auto échantillons</oldsource>
         <translation>&amp;Повежи све стерео узорке</translation>
     </message>
     <message>
@@ -2652,7 +2653,7 @@
     <message>
         <location filename="mainwindow.cpp" line="60"/>
         <source>Operation en cours...</source>
-        <translation type="unfinished"></translation>
+        <translation>У току...</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="60"/>
