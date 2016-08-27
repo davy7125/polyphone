@@ -36,13 +36,8 @@ DialogAbout::DialogAbout(QWidget *parent) :
                                  (FINAL ? "" : " unreleased"));
 
     // Description
-    QString annee = "2013";
-    QString url = "http://www.polyphone.fr/";
-    QString locale = QLocale::system().name().section('_', 0, 0);
-    if (locale.compare("fr") == 0)
-        url += "index.php?lang=fr&amp;page=home";
-    if (QDate::currentDate().year() > 2013)
-        annee += "-" + QString::number(QDate::currentDate().year());
+    QString annee = "2013 -" + QString::number(QDate::currentDate().year());
+    QString url = trUtf8("http://polyphone-soundfonts.com/fr");
     QString urlDonation = "https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=ESBLSGPJ7P938&lc=US&item_name=Polyphone&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donate_LG%2egif%3aNonHosted";
     ui->labelDescription->setText("<html><head/><body><p align='center'>" + trUtf8("Copyright") + QString::fromUtf8(" © ") + annee +
                                   " " + trUtf8("Davy Triponney", "this is my name") + "<br/><br/><a href='" + url +
@@ -62,7 +57,6 @@ DialogAbout::DialogAbout(QWidget *parent) :
     _credit.addContributor(trUtf8("Steve Clarke"), "stevertyu@yahoo.com");
     _credit.addTranslator(trUtf8("Andrea Celani"), "acelani74@gmail.com");
     _credit.addTranslator(trUtf8("Davy Triponney"), "info@polyphone.fr");
-    _credit.addTranslator(trUtf8("Erwan Berté"), "erwanberte@laposte.net");
     _credit.addTranslator(trUtf8("F.J. Martínez Murcia"), "fjesusmartinez@ugr.es");
     _credit.addTranslator(trUtf8("Jay Alexander Fleming"), "tito.nehru.naser@gmail.com");
     _credit.addTranslator(trUtf8("Steve Clarke"), "stevertyu@yahoo.com");
