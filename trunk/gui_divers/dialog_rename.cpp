@@ -33,7 +33,7 @@ DialogRename::DialogRename(bool isSample, QWidget *parent) :
     _isSample(isSample)
 {
     ui->setupUi(this);
-    this->setWindowFlags((windowFlags() & ~Qt::WindowContextHelpButtonHint) | Qt::Tool);
+    this->setWindowFlags((windowFlags() & ~Qt::WindowContextHelpButtonHint));
     ui->comboBox->blockSignals(true);
     ui->comboBox->setCurrentIndex(Config::getInstance()->getBulkRenameOption());
     ui->comboBox->blockSignals(false);

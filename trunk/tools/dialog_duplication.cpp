@@ -33,7 +33,7 @@ DialogDuplication::DialogDuplication(bool isPrst, QWidget *parent) :
     _isPrst(isPrst)
 {
     ui->setupUi(this);
-    this->setWindowFlags((windowFlags() & ~Qt::WindowContextHelpButtonHint) | Qt::Tool);
+    this->setWindowFlags((windowFlags() & ~Qt::WindowContextHelpButtonHint));
 
     // Chargement des valeurs
     Config * conf = Config::getInstance();
