@@ -233,6 +233,7 @@
      <string>&amp;Aide</string>
     </property>
     <addaction name="actionSommaire"/>
+    <addaction name="action_Forum"/>
     <addaction name="separator"/>
     <addaction name="actionA_propos"/>
    </widget>
@@ -643,7 +644,7 @@
      <normaloff>:/icones/help</normaloff>:/icones/help</iconset>
    </property>
    <property name="text">
-    <string>&amp;Manuel</string>
+    <string>&amp;Manuel en ligne</string>
    </property>
    <property name="shortcut">
     <string notr="true">F1</string>
@@ -1544,6 +1545,15 @@
    </property>
    <property name="shortcut">
     <string notr="true">F11</string>
+   </property>
+  </action>
+  <action name="action_Forum">
+   <property name="icon">
+    <iconset resource="ressources.qrc">
+     <normaloff>:/icones/forum.png</normaloff>:/icones/forum.png</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Forum</string>
    </property>
   </action>
  </widget>

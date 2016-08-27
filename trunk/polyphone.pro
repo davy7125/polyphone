@@ -162,7 +162,6 @@ SOURCES	+= main.cpp \
     sf2_core/treewidgetitem.cpp \
     gui_divers/config.cpp \
     gui_divers/dialog_list.cpp \
-    gui_divers/dialog_help.cpp \
     gui_divers/dialog_rename.cpp \
     gui_divers/editkey.cpp \
     gui_divers/tablekey.cpp \
@@ -240,7 +239,6 @@ HEADERS  += mainwindow.h \
     sf2_core/treewidgetitem.h \
     gui_divers/config.h \
     gui_divers/dialog_list.h \
-    gui_divers/dialog_help.h \
     gui_divers/dialog_rename.h \
     gui_divers/editkey.h \
     gui_divers/tablekey.h \

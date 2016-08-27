@@ -672,71 +672,71 @@
         <translation>Полифон</translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_about.cpp" line="47"/>
+        <location filename="gui_divers/dialog_about.cpp" line="40"/>
+        <source>http://polyphone-soundfonts.com/fr</source>
+        <translation>http://polyphone-soundfonts.com/en</translation>
+    </message>
+    <message>
+        <location filename="gui_divers/dialog_about.cpp" line="42"/>
         <source>Copyright</source>
         <translation>Права творца</translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_about.cpp" line="48"/>
+        <location filename="gui_divers/dialog_about.cpp" line="43"/>
         <source>Davy Triponney</source>
         <comment>this is my name</comment>
         <translation>Дејви Трипони (Davy Triponney)</translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_about.cpp" line="50"/>
+        <location filename="gui_divers/dialog_about.cpp" line="45"/>
         <source>Site internet de Polyphone</source>
         <translation>Веб-страна програма</translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_about.cpp" line="53"/>
+        <location filename="gui_divers/dialog_about.cpp" line="48"/>
         <source>Faire un don</source>
         <translation>Приложите</translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_about.cpp" line="57"/>
-        <location filename="gui_divers/dialog_about.cpp" line="64"/>
+        <location filename="gui_divers/dialog_about.cpp" line="52"/>
+        <location filename="gui_divers/dialog_about.cpp" line="59"/>
         <source>Davy Triponney</source>
         <translation>Дејви Трипони (Davy Triponney)</translation>
     </message>
     <message>
+        <location filename="gui_divers/dialog_about.cpp" line="53"/>
         <location filename="gui_divers/dialog_about.cpp" line="58"/>
-        <location filename="gui_divers/dialog_about.cpp" line="63"/>
         <source>Andrea Celani</source>
         <translation>Андреа Челани (Andrea Celani)</translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_about.cpp" line="59"/>
+        <location filename="gui_divers/dialog_about.cpp" line="54"/>
         <source>Kinwie</source>
         <translation>Кинви (Kinwie)</translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_about.cpp" line="60"/>
+        <location filename="gui_divers/dialog_about.cpp" line="55"/>
         <source>Michael Schyllberg</source>
         <translation>Мајкл Шилберг (Michael Schyllberg)</translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_about.cpp" line="61"/>
+        <location filename="gui_divers/dialog_about.cpp" line="56"/>
         <source>Paul Stratman</source>
         <translation>Пол Стратман (Paul Stratman)</translation>
     </message>
     <message>
+        <location filename="gui_divers/dialog_about.cpp" line="57"/>
         <location filename="gui_divers/dialog_about.cpp" line="62"/>
-        <location filename="gui_divers/dialog_about.cpp" line="68"/>
         <source>Steve Clarke</source>
         <translation>Стив Кларк (Steve Clarke)</translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_about.cpp" line="65"/>
-        <source>Erwan Berté</source>
-        <translation>Ерван Берте (Erwan Berté)</translation>
-    </message>
-    <message>
-        <location filename="gui_divers/dialog_about.cpp" line="66"/>
+        <location filename="gui_divers/dialog_about.cpp" line="60"/>
         <source>F.J. Martínez Murcia</source>
         <translation>Ф.Ј. Мартинез Мурција (F.J. Martínez Murcia)</translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_about.cpp" line="67"/>
+        <location filename="gui_divers/dialog_about.cpp" line="61"/>
         <source>Jay Alexander Fleming</source>
         <translation>Џеј Александар Флеминг (Jay Alexander Fleming)</translation>
     </message>
@@ -935,382 +935,6 @@
         <location filename="gui_divers/dialog_export.cpp" line="190"/>
         <source>Au moins un preset doit être sélectionné.</source>
         <translation>Морате одабрати бар једну поставку.</translation>
-    </message>
-</context>
-<context>
-    <name>DialogHelp</name>
-    <message>
-        <location filename="gui_divers/dialog_help.cpp" line="105"/>
-        <source>aide</source>
-        <translation>Помоћ</translation>
-    </message>
-    <message>
-        <location filename="gui_divers/dialog_help.cpp" line="105"/>
-        <source>Polyphone</source>
-        <translation>Полифон</translation>
-    </message>
-    <message>
-        <location filename="gui_divers/dialog_help.cpp" line="114"/>
-        <source>Présentation du logiciel</source>
-        <translation>Представљање програма</translation>
-    </message>
-    <message>
-        <location filename="gui_divers/dialog_help.cpp" line="116"/>
-        <source>Barre de menu</source>
-        <translation>Трака изборника</translation>
-    </message>
-    <message>
-        <location filename="gui_divers/dialog_help.cpp" line="117"/>
-        <source>Fichier</source>
-        <translation>Датотека</translation>
-    </message>
-    <message>
-        <location filename="gui_divers/dialog_help.cpp" line="118"/>
-        <source>Édition</source>
-        <translation>Уреди</translation>
-    </message>
-    <message>
-        <location filename="gui_divers/dialog_help.cpp" line="119"/>
-        <location filename="gui_divers/dialog_help.cpp" line="154"/>
-        <source>Outils</source>
-        <translation>Алати</translation>
-    </message>
-    <message>
-        <location filename="gui_divers/dialog_help.cpp" line="120"/>
-        <source>Affichage</source>
-        <translation>Преглед</translation>
-    </message>
-    <message>
-        <location filename="gui_divers/dialog_help.cpp" line="121"/>
-        <source>Aide</source>
-        <translation>Помоћ</translation>
-    </message>
-    <message>
-        <location filename="gui_divers/dialog_help.cpp" line="123"/>
-        <location filename="gui_divers/dialog_help.cpp" line="196"/>
-        <source>Barre d&apos;outils</source>
-        <translation>Алатница</translation>
-    </message>
-    <message>
-        <location filename="gui_divers/dialog_help.cpp" line="124"/>
-        <source>Raccourcis</source>
-        <translation>Пречице</translation>
-    </message>
-    <message>
-        <location filename="gui_divers/dialog_help.cpp" line="125"/>
-        <source>Clavier virtuel</source>
-        <translation>Патворена клавијатура</translation>
-    </message>
-    <message>
-        <location filename="gui_divers/dialog_help.cpp" line="127"/>
-        <source>Arborescence</source>
-        <translation>Разгранато</translation>
-    </message>
-    <message>
-        <location filename="gui_divers/dialog_help.cpp" line="128"/>
-        <source>Structure</source>
-        <translation>Састав</translation>
-    </message>
-    <message>
-        <location filename="gui_divers/dialog_help.cpp" line="129"/>
-        <source>Menu contextuel</source>
-        <translation>Односни изборник</translation>
-    </message>
-    <message>
-        <location filename="gui_divers/dialog_help.cpp" line="130"/>
-        <source>Glisser / déposer</source>
-        <translation>Превуци и пусти</translation>
-    </message>
-    <message>
-        <location filename="gui_divers/dialog_help.cpp" line="131"/>
-        <source>Recherche</source>
-        <translation>Пронађи</translation>
-    </message>
-    <message>
-        <location filename="gui_divers/dialog_help.cpp" line="133"/>
-        <source>Pages d&apos;édition</source>
-        <translation>Уређивање страна</translation>
-    </message>
-    <message>
-        <location filename="gui_divers/dialog_help.cpp" line="134"/>
-        <source>Informations générales</source>
-        <translation>Општи подаци</translation>
-    </message>
-    <message>
-        <location filename="gui_divers/dialog_help.cpp" line="135"/>
-        <source>Zone d&apos;édition</source>
-        <translation>Уређивање поља</translation>
-    </message>
-    <message>
-        <location filename="gui_divers/dialog_help.cpp" line="136"/>
-        <source>Zone d&apos;informations</source>
-        <translation>Поље са подацима</translation>
-    </message>
-    <message>
-        <location filename="gui_divers/dialog_help.cpp" line="137"/>
-        <location filename="gui_divers/dialog_help.cpp" line="150"/>
-        <location filename="gui_divers/dialog_help.cpp" line="155"/>
-        <location filename="gui_divers/dialog_help.cpp" line="195"/>
-        <source>Échantillons</source>
-        <translation>Узорци</translation>
-    </message>
-    <message>
-        <location filename="gui_divers/dialog_help.cpp" line="138"/>
-        <source>Graphique</source>
-        <translation>Графикон</translation>
-    </message>
-    <message>
-        <location filename="gui_divers/dialog_help.cpp" line="139"/>
-        <source>Informations</source>
-        <translation>Подаци</translation>
-    </message>
-    <message>
-        <location filename="gui_divers/dialog_help.cpp" line="140"/>
-        <source>Fréquences</source>
-        <translation>Учестаности</translation>
-    </message>
-    <message>
-        <location filename="gui_divers/dialog_help.cpp" line="141"/>
-        <source>Égaliseur</source>
-        <translation>Еквилајзер</translation>
-    </message>
-    <message>
-        <location filename="gui_divers/dialog_help.cpp" line="142"/>
-        <source>Lecteur</source>
-        <translation>Свирач</translation>
-    </message>
-    <message>
-        <location filename="gui_divers/dialog_help.cpp" line="143"/>
-        <location filename="gui_divers/dialog_help.cpp" line="151"/>
-        <location filename="gui_divers/dialog_help.cpp" line="165"/>
-        <source>Instruments</source>
-        <translation>Инструменти</translation>
-    </message>
-    <message>
-        <location filename="gui_divers/dialog_help.cpp" line="144"/>
-        <source>Tableau</source>
-        <translation>Табела</translation>
-    </message>
-    <message>
-        <location filename="gui_divers/dialog_help.cpp" line="145"/>
-        <source>Éditeur d&apos;étendues</source>
-        <translation>Уредник опсеге</translation>
-    </message>
-    <message>
-        <location filename="gui_divers/dialog_help.cpp" line="146"/>
-        <source>Section modulateur</source>
-        <translation>Модулаторски одељак</translation>
-    </message>
-    <message>
-        <location filename="gui_divers/dialog_help.cpp" line="147"/>
-        <location filename="gui_divers/dialog_help.cpp" line="152"/>
-        <location filename="gui_divers/dialog_help.cpp" line="176"/>
-        <source>Presets</source>
-        <translation>Поставке</translation>
-    </message>
-    <message>
-        <location filename="gui_divers/dialog_help.cpp" line="149"/>
-        <source>Pages d&apos;aperçu</source>
-        <translation>Преглед страница</translation>
-    </message>
-    <message>
-        <location filename="gui_divers/dialog_help.cpp" line="156"/>
-        <source>Ajuster à la fin de boucle</source>
-        <translation>Орежи према крају вртње</translation>
-    </message>
-    <message>
-        <location filename="gui_divers/dialog_help.cpp" line="157"/>
-        <source>Bouclage automatique</source>
-        <translation>Сам врти</translation>
-    </message>
-    <message>
-        <location filename="gui_divers/dialog_help.cpp" line="158"/>
-        <source>Diminuer sifflements</source>
-        <translation>Умањи звиждања</translation>
-    </message>
-    <message>
-        <location filename="gui_divers/dialog_help.cpp" line="159"/>
-        <source>Enlever blanc au départ</source>
-        <translation>Уклони почетну празнину</translation>
-    </message>
-    <message>
-        <location filename="gui_divers/dialog_help.cpp" line="160"/>
-        <source>Filtre &quot;mur de brique&quot;</source>
-        <translation>„Савршен“ правоугаоуни филтер</translation>
-    </message>
-    <message>
-        <location filename="gui_divers/dialog_help.cpp" line="161"/>
-        <source>Normaliser volume</source>
-        <translation>Уједначи гласноћу</translation>
-    </message>
-    <message>
-        <location filename="gui_divers/dialog_help.cpp" line="162"/>
-        <source>Réglage balance</source>
-        <translation>Панорамисање</translation>
-    </message>
-    <message>
-        <location filename="gui_divers/dialog_help.cpp" line="163"/>
-        <source>Transposer</source>
-        <translation>Транспонуј</translation>
-    </message>
-    <message>
-        <location filename="gui_divers/dialog_help.cpp" line="166"/>
-        <source>Création mixture</source>
-        <translation>Стварање микстуре</translation>
-    </message>
-    <message>
-        <location filename="gui_divers/dialog_help.cpp" line="167"/>
-        <source>Accordage céleste</source>
-        <translation>Челеста-угађање</translation>
-    </message>
-    <message>
-        <location filename="gui_divers/dialog_help.cpp" line="168"/>
-        <location filename="gui_divers/dialog_help.cpp" line="177"/>
-        <source>Duplication des divisions</source>
-        <translation>Удвостручавање делова</translation>
-    </message>
-    <message>
-        <location filename="gui_divers/dialog_help.cpp" line="169"/>
-        <source>Élaboration release</source>
-        <translation>Стишавалац</translation>
-    </message>
-    <message>
-        <location filename="gui_divers/dialog_help.cpp" line="170"/>
-        <location filename="gui_divers/dialog_help.cpp" line="178"/>
-        <source>Paramétrage global</source>
-        <translation>Општа подешавања</translation>
-    </message>
-    <message>
-        <location filename="gui_divers/dialog_help.cpp" line="171"/>
-        <source>Répartition automatique</source>
-        <translation>Самораздел</translation>
-    </message>
-    <message>
-        <location filename="gui_divers/dialog_help.cpp" line="172"/>
-        <location filename="gui_divers/dialog_help.cpp" line="179"/>
-        <source>Spatialisation du son</source>
-        <translation>Простирање звука</translation>
-    </message>
-    <message>
-        <location filename="gui_divers/dialog_help.cpp" line="173"/>
-        <source>Transposition</source>
-        <translation>Транспозиција</translation>
-    </message>
-    <message>
-        <location filename="gui_divers/dialog_help.cpp" line="174"/>
-        <location filename="gui_divers/dialog_help.cpp" line="180"/>
-        <source>Visualiseur</source>
-        <translation>Приказивач</translation>
-    </message>
-    <message>
-        <location filename="gui_divers/dialog_help.cpp" line="182"/>
-        <source>Globaux</source>
-        <translation>Опште</translation>
-    </message>
-    <message>
-        <location filename="gui_divers/dialog_help.cpp" line="183"/>
-        <source>Association auto échantillons</source>
-        <translation>Повежи све стерео-узорке</translation>
-    </message>
-    <message>
-        <location filename="gui_divers/dialog_help.cpp" line="184"/>
-        <source>Dissocier les échantillons stéréo</source>
-        <translation>Одвоји све стерео-узорке</translation>
-    </message>
-    <message>
-        <location filename="gui_divers/dialog_help.cpp" line="185"/>
-        <source>Enlever les éléments non utilisés</source>
-        <translation>Уклони неупотребљене елементе</translation>
-    </message>
-    <message>
-        <location filename="gui_divers/dialog_help.cpp" line="186"/>
-        <source>Enlever tous les modulateurs</source>
-        <translation>Уклони све модулаторе</translation>
-    </message>
-    <message>
-        <location filename="gui_divers/dialog_help.cpp" line="187"/>
-        <source>Exporter pics de fréquence (.csv)</source>
-        <translation>Извоз вршне учестаности (csv)</translation>
-    </message>
-    <message>
-        <location filename="gui_divers/dialog_help.cpp" line="188"/>
-        <source>Régler atténuation minimale</source>
-        <translation>Прилагоди најмање пригушење</translation>
-    </message>
-    <message>
-        <location filename="gui_divers/dialog_help.cpp" line="190"/>
-        <source>Magnétophone</source>
-        <translation>Магнетофон (снимач)</translation>
-    </message>
-    <message>
-        <location filename="gui_divers/dialog_help.cpp" line="192"/>
-        <source>Préférences du logiciel</source>
-        <translation>Подешавања програма</translation>
-    </message>
-    <message>
-        <location filename="gui_divers/dialog_help.cpp" line="193"/>
-        <source>Général</source>
-        <translation>Опште</translation>
-    </message>
-    <message>
-        <location filename="gui_divers/dialog_help.cpp" line="194"/>
-        <source>Synthétiseur</source>
-        <translation>Синтесајзер</translation>
-    </message>
-    <message>
-        <location filename="gui_divers/dialog_help.cpp" line="197"/>
-        <source>Clavier</source>
-        <translation>Клавијатура</translation>
-    </message>
-    <message>
-        <location filename="gui_divers/dialog_help.cpp" line="199"/>
-        <source>Annexes</source>
-        <translation>Додаци</translation>
-    </message>
-    <message>
-        <location filename="gui_divers/dialog_help.cpp" line="200"/>
-        <source>Tutoriel</source>
-        <translation>Приручник</translation>
-    </message>
-    <message>
-        <location filename="gui_divers/dialog_help.cpp" line="201"/>
-        <source>Préparation des échantillons</source>
-        <translation>Припрема узорака</translation>
-    </message>
-    <message>
-        <location filename="gui_divers/dialog_help.cpp" line="202"/>
-        <source>Création d&apos;un instrument</source>
-        <translation>Стварање инструмента</translation>
-    </message>
-    <message>
-        <location filename="gui_divers/dialog_help.cpp" line="203"/>
-        <source>Création d&apos;un preset</source>
-        <translation>Стварање поставке</translation>
-    </message>
-    <message>
-        <location filename="gui_divers/dialog_help.cpp" line="204"/>
-        <source>Soundfonts sf2</source>
-        <translation>Сф2-звукотеке</translation>
-    </message>
-    <message>
-        <location filename="gui_divers/dialog_help.cpp" line="205"/>
-        <source>Soundfonts sf3</source>
-        <translation>Сф3-звукотеке</translation>
-    </message>
-    <message>
-        <location filename="gui_divers/dialog_help.cpp" line="206"/>
-        <source>Import / export sfz</source>
-        <translation>Сфз — увоз/извоз</translation>
-    </message>
-    <message>
-        <location filename="gui_divers/dialog_help.cpp" line="207"/>
-        <source>Limitations du logiciel</source>
-        <translation>Ограничења програма</translation>
-    </message>
-    <message>
-        <location filename="gui_divers/dialog_help.cpp" line="222"/>
-        <source>fr</source>
-        <translation>sr</translation>
     </message>
 </context>
 <context>
@@ -1931,7 +1555,7 @@
     <name>MainWindow</name>
     <message>
         <location filename="mainwindow.ui" line="69"/>
-        <location filename="mainwindow.cpp" line="2658"/>
+        <location filename="mainwindow.cpp" line="2663"/>
         <source>Note</source>
         <translation>Нота</translation>
     </message>
@@ -1952,628 +1576,634 @@
         <translation>&amp;Помоћ</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="241"/>
+        <location filename="mainwindow.ui" line="242"/>
         <source>&amp;Édition</source>
         <translation>&amp;Уреди</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="256"/>
+        <location filename="mainwindow.ui" line="257"/>
         <source>&amp;Outils</source>
         <translation>&amp;Алати</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="263"/>
+        <location filename="mainwindow.ui" line="264"/>
         <source>&amp;Échantillon</source>
         <translation>&amp;Узорак</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="279"/>
+        <location filename="mainwindow.ui" line="280"/>
         <source>&amp;Global</source>
         <translation>&amp;Опште</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="293"/>
+        <location filename="mainwindow.ui" line="294"/>
         <source>&amp;Instrument</source>
         <translation>&amp;Инструменат</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="310"/>
+        <location filename="mainwindow.ui" line="311"/>
         <source>&amp;Preset</source>
         <translation>&amp;Поставка</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="325"/>
+        <location filename="mainwindow.ui" line="326"/>
         <source>A&amp;ffichage</source>
         <translation>П&amp;реглед</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="329"/>
+        <location filename="mainwindow.ui" line="330"/>
         <source>&amp;Clavier</source>
         <translation>&amp;Клавијатура</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="354"/>
+        <location filename="mainwindow.ui" line="355"/>
         <source>Barre d&apos;outils</source>
         <translation>Алатница</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="395"/>
+        <location filename="mainwindow.ui" line="396"/>
         <source>Arborescence</source>
         <translation>Разгранато</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="521"/>
+        <location filename="mainwindow.ui" line="522"/>
         <source>Enroule l&apos;arborescence</source>
         <translation>Скупи гране</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="547"/>
+        <location filename="mainwindow.ui" line="548"/>
         <source>Déroule l&apos;arborescence</source>
         <translation>Рашири гране</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="592"/>
+        <location filename="mainwindow.ui" line="593"/>
         <source>Efface la recherche</source>
         <translation>Очисти пронађено</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="619"/>
+        <location filename="mainwindow.ui" line="620"/>
         <source>&amp;Ouvrir...</source>
         <translation>&amp;Отвори...</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="622"/>
+        <location filename="mainwindow.ui" line="623"/>
         <source>Ouvre un fichier</source>
         <translation>Отвори датотеку</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="634"/>
+        <location filename="mainwindow.ui" line="635"/>
         <source>&amp;Quitter</source>
         <translation>&amp;Изађи</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="646"/>
-        <source>&amp;Manuel</source>
+        <location filename="mainwindow.ui" line="647"/>
+        <source>&amp;Manuel en ligne</source>
+        <oldsource>&amp;Manuel</oldsource>
         <translation>&amp;Упутство за употребу</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="658"/>
+        <location filename="mainwindow.ui" line="659"/>
         <source>&amp;A propos</source>
         <translation>&amp;О програму</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="670"/>
+        <location filename="mainwindow.ui" line="671"/>
         <location filename="mainwindow.cpp" line="296"/>
         <location filename="mainwindow.cpp" line="530"/>
         <source>&amp;Enregistrer</source>
         <translation>&amp;Сачувај</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="673"/>
+        <location filename="mainwindow.ui" line="674"/>
         <source>Enregistre le fichier actuel</source>
         <translation>Сачувај текућу датотеку</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="688"/>
+        <location filename="mainwindow.ui" line="689"/>
         <source>Enregistrer &amp;sous...</source>
         <translation>Сачувај &amp;као...</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="691"/>
+        <location filename="mainwindow.ui" line="692"/>
         <source>Enregistre sous un autre fichier</source>
         <translation>Чува у другој датотеци</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="703"/>
+        <location filename="mainwindow.ui" line="704"/>
         <source>&amp;Nouveau...</source>
         <translation>&amp;Нова...</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="706"/>
+        <location filename="mainwindow.ui" line="707"/>
         <source>Crée un nouveau fichier</source>
         <translation>Створи нову датотеку</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="721"/>
+        <location filename="mainwindow.ui" line="722"/>
         <source>&amp;Annuler</source>
         <comment>1</comment>
         <translatorcomment>Undo an action</translatorcomment>
         <translation>&amp;Опозови</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="724"/>
+        <location filename="mainwindow.ui" line="725"/>
         <source>Annule la dernière action</source>
         <translation>Опозови последњу радњу</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="739"/>
+        <location filename="mainwindow.ui" line="740"/>
         <source>Ré&amp;tablir</source>
         <translation>&amp;Понови</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="742"/>
+        <location filename="mainwindow.ui" line="743"/>
         <source>Refait la dernière action annulée</source>
         <translation>Поништи опозив последње радње</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="754"/>
+        <location filename="mainwindow.ui" line="755"/>
         <source>&amp;Préférences</source>
         <translation>Поде&amp;шавања</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="757"/>
+        <location filename="mainwindow.ui" line="758"/>
         <source>Ouvre les préférences</source>
         <translation>Отвара прозор са подешавањима</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="768"/>
+        <location filename="mainwindow.ui" line="769"/>
         <source>&amp;Barre d&apos;outils</source>
         <translation>&amp;Алатница</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="771"/>
+        <location filename="mainwindow.ui" line="772"/>
         <source>Afficher / masque la barre d&apos;outils</source>
         <translation>Приказује/Скрива траку са алатима</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="783"/>
+        <location filename="mainwindow.ui" line="784"/>
         <source>&amp;Fermer le fichier</source>
         <translation>&amp;Затвори датотеку</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="786"/>
+        <location filename="mainwindow.ui" line="787"/>
         <source>Ferme le fichier</source>
         <translation>Затвори текућу датотеку</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="801"/>
+        <location filename="mainwindow.ui" line="802"/>
         <source>&amp;Copier</source>
         <translation>&amp;Умножи</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="804"/>
+        <location filename="mainwindow.ui" line="805"/>
         <source>Copie un élément</source>
         <translation>Умножава неки елеменат</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="822"/>
+        <location filename="mainwindow.ui" line="823"/>
         <source>C&amp;oller</source>
         <translation>У&amp;баци</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="825"/>
+        <location filename="mainwindow.ui" line="826"/>
         <source>Colle un élément</source>
         <translation>Убацује, умеће неки елеменат</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="843"/>
+        <location filename="mainwindow.ui" line="844"/>
         <source>&amp;Supprimer</source>
         <translation>Обри&amp;ши</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="846"/>
+        <location filename="mainwindow.ui" line="847"/>
         <source>Supprime un élément</source>
         <translation>Уклони елеменат</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="864"/>
+        <location filename="mainwindow.ui" line="865"/>
         <source>&amp;Enlever les éléments non utilisés</source>
         <translation>Уклони &amp;непотребне елементе</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="867"/>
+        <location filename="mainwindow.ui" line="868"/>
         <source>Enlève les échantillons et instruments non utilisés</source>
         <translation>Уклања неупотребљене узорке и инструменте</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="879"/>
-        <location filename="mainwindow.cpp" line="1162"/>
-        <location filename="mainwindow.cpp" line="1169"/>
+        <location filename="mainwindow.ui" line="880"/>
+        <location filename="mainwindow.cpp" line="1167"/>
+        <location filename="mainwindow.cpp" line="1174"/>
         <source>&amp;Renommer</source>
         <translation>П&amp;реименуј</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="882"/>
+        <location filename="mainwindow.ui" line="883"/>
         <source>Renomme un ou plusieurs élément(s)</source>
         <translation>Мења назив једног или више елемената</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="893"/>
+        <location filename="mainwindow.ui" line="894"/>
         <source>fichier 1</source>
         <translation>датотека 1</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="899"/>
-        <location filename="mainwindow.ui" line="916"/>
-        <location filename="mainwindow.ui" line="933"/>
-        <location filename="mainwindow.ui" line="950"/>
-        <location filename="mainwindow.ui" line="967"/>
+        <location filename="mainwindow.ui" line="900"/>
+        <location filename="mainwindow.ui" line="917"/>
+        <location filename="mainwindow.ui" line="934"/>
+        <location filename="mainwindow.ui" line="951"/>
+        <location filename="mainwindow.ui" line="968"/>
         <source>Ouvre un fichier récent</source>
         <translation>Отвара скоро употребљивану датотеку</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="910"/>
+        <location filename="mainwindow.ui" line="911"/>
         <source>fichier 2</source>
         <translation>датотека 2</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="927"/>
+        <location filename="mainwindow.ui" line="928"/>
         <source>fichier 3</source>
         <translation>датотека 3</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="944"/>
+        <location filename="mainwindow.ui" line="945"/>
         <source>fichier 4</source>
         <translation>датотека 4</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="961"/>
+        <location filename="mainwindow.ui" line="962"/>
         <source>fichier 5</source>
         <translation>датотека 5</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="981"/>
+        <location filename="mainwindow.ui" line="982"/>
         <source>&amp;Section modulateurs</source>
         <translation>&amp;Модулаторски одељак</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="984"/>
+        <location filename="mainwindow.ui" line="985"/>
         <source>Affiche la section modulateurs</source>
         <translation>Прикажи модулаторски одељак</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="996"/>
+        <location filename="mainwindow.ui" line="997"/>
         <source>&amp;Importer des échantillons...</source>
         <translation>&amp;Увези узорке...</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="999"/>
+        <location filename="mainwindow.ui" line="1000"/>
         <source>Importe un fichier audio</source>
         <translation>Увези звучну датотеку</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1011"/>
+        <location filename="mainwindow.ui" line="1012"/>
         <source>E&amp;xporter des échantillons...</source>
         <translation>Из&amp;вези узорке...</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1014"/>
+        <location filename="mainwindow.ui" line="1015"/>
         <source>Exporte au format wav</source>
         <translation>Извоз у вав-датотеку</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1026"/>
+        <location filename="mainwindow.ui" line="1027"/>
         <source>Nouvel instrument</source>
         <translation>Нов инструменат</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1029"/>
+        <location filename="mainwindow.ui" line="1030"/>
         <source>Crée un nouvel instrument</source>
         <translation>Створи нов инструменат</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1041"/>
+        <location filename="mainwindow.ui" line="1042"/>
         <source>Nouveau preset</source>
         <translation>Нова поставка</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1044"/>
+        <location filename="mainwindow.ui" line="1045"/>
         <source>Crée un nouveau preset</source>
         <translation>Створи нову поставку</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1056"/>
+        <location filename="mainwindow.ui" line="1057"/>
         <source>&amp;Enlever blanc au départ</source>
         <translation>&amp;Уклони почетну празнину</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1059"/>
+        <location filename="mainwindow.ui" line="1060"/>
         <source>Enleve le blanc au début d&apos;un échantillon</source>
         <translation>Уклони празнине на почетку узорка</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1071"/>
+        <location filename="mainwindow.ui" line="1072"/>
         <source>&amp;Ajuster à la fin de boucle</source>
         <translation>&amp;Опсеци до краја вртње</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1074"/>
+        <location filename="mainwindow.ui" line="1075"/>
         <source>Ajuste l&apos;échantillon à sa fin de boucle</source>
         <translation>Исеци узорак на крају његове вртње</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1086"/>
+        <location filename="mainwindow.ui" line="1087"/>
         <source>&amp;Normaliser volume</source>
         <translation>У&amp;једначи гласноћу</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1089"/>
+        <location filename="mainwindow.ui" line="1090"/>
         <source>Normalise le volume</source>
         <translation>Уједначавање гласноће</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1101"/>
+        <location filename="mainwindow.ui" line="1102"/>
         <source>&amp;Bouclage automatique</source>
         <translation>&amp;Самовртња</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1104"/>
+        <location filename="mainwindow.ui" line="1105"/>
         <source>Boucle automatiquement l&apos;échantillon</source>
         <translation>Самовртња узорка</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1116"/>
+        <location filename="mainwindow.ui" line="1117"/>
         <source>&amp;Filtre &quot;mur de brique&quot;...</source>
         <translation type="unfinished">„Савршен“ правоугаоуни &amp;филтер...</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1119"/>
+        <location filename="mainwindow.ui" line="1120"/>
         <source>Applique un filtre &quot;mur de brique&quot;</source>
         <translation type="unfinished">Примени „савршен“ правоугаони филтер</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1131"/>
+        <location filename="mainwindow.ui" line="1132"/>
         <source>&amp;Transposer...</source>
         <translation>&amp;Транспонуј...</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1134"/>
+        <location filename="mainwindow.ui" line="1135"/>
         <source>Transpose l&apos;échantillon</source>
         <translation>Транспонуј узорак</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1146"/>
+        <location filename="mainwindow.ui" line="1147"/>
         <source>&amp;Régler atténuation minimale...</source>
         <translation>Прилагоди најмање при&amp;гушење...</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1149"/>
+        <location filename="mainwindow.ui" line="1150"/>
         <source>Régle l&apos;atténuation minimale</source>
         <translation>Прилагоди најмање пригушење</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1161"/>
+        <location filename="mainwindow.ui" line="1162"/>
         <source>&amp;Accordage céleste...</source>
         <translation>&amp;Челеста-угађање...</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1164"/>
+        <location filename="mainwindow.ui" line="1165"/>
         <source>Accorde les sons pour créer des battements</source>
         <translation type="unfinished">Угоди звук за стварање битова</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1176"/>
-        <location filename="mainwindow.ui" line="1436"/>
+        <location filename="mainwindow.ui" line="1177"/>
+        <location filename="mainwindow.ui" line="1437"/>
         <source>&amp;Spatialisation du son...</source>
         <translation>Про&amp;стирање звука...</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1179"/>
-        <location filename="mainwindow.ui" line="1439"/>
+        <location filename="mainwindow.ui" line="1180"/>
+        <location filename="mainwindow.ui" line="1440"/>
         <source>Dispose les sons dans l&apos;espace</source>
         <translation>Просторни размештај узорака</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1191"/>
+        <location filename="mainwindow.ui" line="1192"/>
         <source>&amp;Répartition automatique</source>
         <translation>Самораз&amp;дел</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1194"/>
+        <location filename="mainwindow.ui" line="1195"/>
         <source>Répartit automatiquement les sons sur le clavier</source>
         <translation>Самораздел узорака на клвијатури</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1206"/>
-        <location filename="mainwindow.ui" line="1331"/>
+        <location filename="mainwindow.ui" line="1207"/>
+        <location filename="mainwindow.ui" line="1332"/>
         <source>&amp;Duplication des divisions...</source>
         <translation>&amp;Удвостручавање делова...</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1209"/>
+        <location filename="mainwindow.ui" line="1210"/>
         <source>Duplication des divisions...</source>
         <translation>Удвостручавање делова...</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1212"/>
-        <location filename="mainwindow.ui" line="1337"/>
+        <location filename="mainwindow.ui" line="1213"/>
+        <location filename="mainwindow.ui" line="1338"/>
         <source>Duplique les divisions</source>
         <translation>Удвостручи ове делове</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1224"/>
-        <location filename="mainwindow.ui" line="1364"/>
+        <location filename="mainwindow.ui" line="1225"/>
+        <location filename="mainwindow.ui" line="1365"/>
         <source>&amp;Paramétrage global...</source>
         <translation>&amp;Општа подешавања...</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1227"/>
-        <location filename="mainwindow.ui" line="1367"/>
+        <location filename="mainwindow.ui" line="1228"/>
+        <location filename="mainwindow.ui" line="1368"/>
         <source>Paramètre toutes les divisions simultanément</source>
         <translation>Једновремено постави све делове</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1239"/>
+        <location filename="mainwindow.ui" line="1240"/>
         <source>&amp;Réglage balance</source>
         <translation>&amp;Панорамисање</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1242"/>
+        <location filename="mainwindow.ui" line="1243"/>
         <source>Règle la balance de l&apos;échantillon</source>
         <translation>Панорамски постави узорак</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1254"/>
+        <location filename="mainwindow.ui" line="1255"/>
         <source>&amp;Création mixture...</source>
         <translation>&amp;Стварање микстуре...</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1257"/>
+        <location filename="mainwindow.ui" line="1258"/>
         <source>Crée une mixture</source>
         <translation>Створи микстуру</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1269"/>
+        <location filename="mainwindow.ui" line="1270"/>
         <source>&amp;Diminuer sifflements...</source>
         <translation>Умањи &amp;звиждања...</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1272"/>
+        <location filename="mainwindow.ui" line="1273"/>
         <source>Diminue les sifflements</source>
         <translation>Умањење звиждања</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1283"/>
+        <location filename="mainwindow.ui" line="1284"/>
         <source>&amp;5 octaves</source>
         <translation>&amp;5 октава</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1286"/>
+        <location filename="mainwindow.ui" line="1287"/>
         <source>affiche un clavier de 5 octaves</source>
         <translation>Прикажи 5-октавну клавијатуру</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1294"/>
+        <location filename="mainwindow.ui" line="1295"/>
         <source>&amp;6 octaves</source>
         <translation>&amp;6 октава</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1297"/>
+        <location filename="mainwindow.ui" line="1298"/>
         <source>affiche un clavier de 6 octaves</source>
         <translation>Прикажи 6-октавну клавијатуру</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1305"/>
+        <location filename="mainwindow.ui" line="1306"/>
         <source>&amp;128 notes (complet)</source>
         <translation>&amp;128 нота (потпуно)</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1308"/>
+        <location filename="mainwindow.ui" line="1309"/>
         <source>affiche un clavier de 128 notes</source>
         <translation>Прикажи клавијатуру са 128 дирки</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1316"/>
+        <location filename="mainwindow.ui" line="1317"/>
         <source>&amp;Aucun</source>
         <translation>&amp;Ништа</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1319"/>
+        <location filename="mainwindow.ui" line="1320"/>
         <source>n&apos;affiche aucun clavier</source>
         <translation>Прикажи без клавијатуре</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1334"/>
+        <location filename="mainwindow.ui" line="1335"/>
         <source>Duplication des divisions</source>
         <translation>Удвостручавање делова</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1349"/>
+        <location filename="mainwindow.ui" line="1350"/>
         <source>&amp;Élaboration release...</source>
         <translation>&amp;Стишавалац...</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1352"/>
+        <location filename="mainwindow.ui" line="1353"/>
         <source>Crée automatiquement une release pour tous les sons liés</source>
         <translation>Сам створи стишавање свих повезаних звукова</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1379"/>
+        <location filename="mainwindow.ui" line="1380"/>
         <source>&amp;Associer les échantillons stéréo</source>
         <oldsource>&amp;Association auto échantillons</oldsource>
         <translation>&amp;Повежи све стерео узорке</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1382"/>
+        <location filename="mainwindow.ui" line="1383"/>
         <source>Associe automatiquement les échantillons G/D</source>
         <translation>Према њиховом називу, сам повежи узорке »Л« или »Д«</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1391"/>
+        <location filename="mainwindow.ui" line="1392"/>
         <source>&amp;Magnétophone</source>
         <translation>&amp;Снимач</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1394"/>
+        <location filename="mainwindow.ui" line="1395"/>
         <source>Affiche le magnétophone</source>
         <translation>Прикажи снимач</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1406"/>
-        <location filename="mainwindow.ui" line="1421"/>
+        <location filename="mainwindow.ui" line="1407"/>
+        <location filename="mainwindow.ui" line="1422"/>
         <source>&amp;Visualiseur</source>
         <translation>&amp;Приказивач</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1409"/>
-        <location filename="mainwindow.ui" line="1424"/>
+        <location filename="mainwindow.ui" line="1410"/>
+        <location filename="mainwindow.ui" line="1425"/>
         <source>Visualise dans un graphique les paramètres utilisés</source>
         <translation>Приказивање употребљених параметара графиконом</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1451"/>
+        <location filename="mainwindow.ui" line="1452"/>
         <source>Exporter sound&amp;font...</source>
         <translation>Извези &amp;звукотеку...</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1454"/>
+        <location filename="mainwindow.ui" line="1455"/>
         <source>Exporte une soundfont</source>
         <translation>Извези звукотеку</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1466"/>
+        <location filename="mainwindow.ui" line="1467"/>
         <source>&amp;Dissocier les échantillons stéréo</source>
         <translation>&amp;Одвоји све стерео узорке</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1469"/>
+        <location filename="mainwindow.ui" line="1470"/>
         <source>Dissocie les échantillons stéréo</source>
         <translation>Раздвајање свих стерео-узорака</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1481"/>
+        <location filename="mainwindow.ui" line="1482"/>
         <source>Exporter pics de &amp;fréquence (.csv)</source>
         <translation>Извоз вр&amp;шних учестаности (csv)</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1484"/>
+        <location filename="mainwindow.ui" line="1485"/>
         <source>Exporte les pics de fréquence des échantillons dans un fichier csv</source>
         <translation>Извоз вршних учестаности свих узорака у цсв-датотеку</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1492"/>
+        <location filename="mainwindow.ui" line="1493"/>
         <source>&amp;88 notes (piano)</source>
         <translation>&amp;88 нота (клавир)</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1503"/>
+        <location filename="mainwindow.ui" line="1504"/>
         <source>Dans la &amp;barre d&apos;outils</source>
         <translation>У &amp;алатници</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1511"/>
+        <location filename="mainwindow.ui" line="1512"/>
         <source>&amp;Flottant</source>
         <translation>&amp;Лебдећа</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1523"/>
+        <location filename="mainwindow.ui" line="1524"/>
         <source>&amp;Transposition...</source>
         <translation>&amp;Транспозиција...</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1526"/>
+        <location filename="mainwindow.ui" line="1527"/>
         <source>Transpose tous les échantillons d&apos;un instrument</source>
         <translation>Транспонуј сваки узорак једног инструмента</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1535"/>
+        <location filename="mainwindow.ui" line="1536"/>
         <source>Enlever tous les &amp;modulateurs</source>
         <translation>Уклони све &amp;модулаторе</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1543"/>
+        <location filename="mainwindow.ui" line="1544"/>
         <source>&amp;Plein écran</source>
         <translation>На &amp;целом екрану</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="1556"/>
+        <source>&amp;Forum</source>
+        <translation>&amp;форум</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="67"/>
@@ -2598,9 +2228,9 @@
         <location filename="mainwindow.cpp" line="691"/>
         <location filename="mainwindow.cpp" line="694"/>
         <location filename="mainwindow.cpp" line="697"/>
-        <location filename="mainwindow.cpp" line="1539"/>
-        <location filename="mainwindow.cpp" line="2076"/>
-        <location filename="mainwindow.cpp" line="2706"/>
+        <location filename="mainwindow.cpp" line="1544"/>
+        <location filename="mainwindow.cpp" line="2081"/>
+        <location filename="mainwindow.cpp" line="2711"/>
         <source>Attention</source>
         <translation>Упозорење</translation>
     </message>
@@ -2658,37 +2288,37 @@
     <message>
         <location filename="mainwindow.cpp" line="60"/>
         <source>Annuler</source>
-        <translation type="unfinished">Поништи</translation>
+        <translation>Поништи</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="396"/>
         <source>Soundfonts</source>
-        <translation type="unfinished">Звукотеке</translation>
+        <translation>Звукотеке</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="397"/>
         <source>Fichiers .sf2</source>
-        <translation type="unfinished">Сф2-звукотека</translation>
+        <translation>Сф2-звукотека</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="398"/>
         <source>Fichiers .sf3</source>
-        <translation type="unfinished">Сф3-звукотека</translation>
+        <translation>Сф3-звукотека</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="399"/>
         <source>Fichiers .sfz</source>
-        <translation type="unfinished">СфЗ-звукотека</translation>
+        <translation>СфЗ-звукотека</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="400"/>
         <source>Archives .sfArk</source>
-        <translation type="unfinished"></translation>
+        <translation>Архива .сфАрк</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="470"/>
         <source>Fichier corrompu : utilisation des échantillons en qualité 16 bits.</source>
-        <translation type="unfinished">Оштећена датотека: употреба 16-битних узорака.</translation>
+        <translation>Оштећена датотека: употреба 16-битних узорака.</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="479"/>
@@ -2820,232 +2450,242 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
         <translation>Не могу да сачувам ову датотеку.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1174"/>
+        <location filename="mainwindow.cpp" line="732"/>
+        <source>http://polyphone-soundfonts.com/fr/documentation</source>
+        <translation>http://polyphone-soundfonts.com/en/documentation</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="737"/>
+        <source>http://polyphone-soundfonts.com/fr/forum</source>
+        <translation>http://polyphone-soundfonts.com/en/forum</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="1179"/>
         <source>&amp;Renommer en masse</source>
         <translation>Скупно п&amp;реименовање</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1387"/>
+        <location filename="mainwindow.cpp" line="1392"/>
         <source>Nom de l&apos;échantillon (max 20 caractères) :</source>
         <translation>Назив узорка (до 20 знакова):</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1388"/>
+        <location filename="mainwindow.cpp" line="1393"/>
         <source>Nom de l&apos;instrument (max 20 caractères) :</source>
         <translation>Назив инструмента (до 20 знакова):</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1389"/>
+        <location filename="mainwindow.cpp" line="1394"/>
         <source>Nom du preset (max 20 caractères) :</source>
         <translation>Назив поставке (до 20 знакова):</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1390"/>
+        <location filename="mainwindow.cpp" line="1395"/>
         <source>Nom du SF2 (max 255 caractères) :</source>
         <translation>Назив звукотеке (до 255 знакова):</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1391"/>
-        <location filename="mainwindow.cpp" line="2439"/>
+        <location filename="mainwindow.cpp" line="1396"/>
+        <location filename="mainwindow.cpp" line="2444"/>
         <source>Question</source>
         <translation>Питање</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1539"/>
+        <location filename="mainwindow.cpp" line="1544"/>
         <source>Une erreur est survenue lors de l&apos;import du fichier </source>
         <translation>При увожењу датотеке догодила се грешка</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1559"/>
+        <location filename="mainwindow.cpp" line="1564"/>
         <source>Importer un fichier audio</source>
         <translation>Увоз звучне датотеке</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1561"/>
+        <location filename="mainwindow.cpp" line="1566"/>
         <source>Fichier .wav</source>
         <oldsource>Fichier .wav (*.wav)</oldsource>
-        <translation type="unfinished">Вав-датотека (*.wav)</translation>
+        <translation>Вав-датотека (*.wav)</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1616"/>
-        <location filename="mainwindow.cpp" line="1622"/>
-        <location filename="mainwindow.cpp" line="1631"/>
+        <location filename="mainwindow.cpp" line="1621"/>
+        <location filename="mainwindow.cpp" line="1627"/>
+        <location filename="mainwindow.cpp" line="1636"/>
         <source>L&apos;échantillon « </source>
         <translation>Узорак „</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1617"/>
+        <location filename="mainwindow.cpp" line="1622"/>
         <source>L » existe déjà.&lt;br /&gt;Que faire ?</source>
         <translation>Л“ већ постоји.&lt;br/&gt;Да ли да га заменим?</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1623"/>
+        <location filename="mainwindow.cpp" line="1628"/>
         <source>R » existe déjà.&lt;br /&gt;Que faire ?</source>
         <translation>Д“ већ постоји.&lt;br/&gt;Да ли да га заменим?</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1632"/>
+        <location filename="mainwindow.cpp" line="1637"/>
         <source> » existe déjà.&lt;br /&gt;Que faire ?</source>
         <translation>“ већ постоји.&lt;br/&gt;Да ли да га заменим?</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1646"/>
+        <location filename="mainwindow.cpp" line="1651"/>
         <source>&amp;Remplacer</source>
         <translation>За&amp;мени</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1647"/>
+        <location filename="mainwindow.cpp" line="1652"/>
         <source>R&amp;emplacer tout</source>
         <translation>Замени св&amp;е</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1648"/>
+        <location filename="mainwindow.cpp" line="1653"/>
         <source>&amp;Dupliquer</source>
         <translation>У&amp;двостручи</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1649"/>
+        <location filename="mainwindow.cpp" line="1654"/>
         <source>D&amp;upliquer tout</source>
         <translation>&amp;Удвостручи све</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1650"/>
+        <location filename="mainwindow.cpp" line="1655"/>
         <source>&amp;Ignorer</source>
         <translation>Занемар&amp;и</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1651"/>
+        <location filename="mainwindow.cpp" line="1656"/>
         <source>I&amp;gnorer tout</source>
         <translation>Занемари с&amp;ве</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1810"/>
+        <location filename="mainwindow.cpp" line="1815"/>
         <source>Choisir un répertoire de destination</source>
         <translation>Одаберите одредишни директоријум</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1969"/>
+        <location filename="mainwindow.cpp" line="1974"/>
         <source>Fusion des soundfonts :</source>
         <translation>Сједини звукотеке:</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2051"/>
+        <location filename="mainwindow.cpp" line="2056"/>
         <source>Créer un nouvel instrument</source>
         <translation>Створи нов инструменат</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2051"/>
+        <location filename="mainwindow.cpp" line="2056"/>
         <source>Nom du nouvel instrument :</source>
         <translation>Назив новог инструмента: </translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2076"/>
+        <location filename="mainwindow.cpp" line="2081"/>
         <source>Aucun preset n&apos;est disponible.</source>
         <translation>Нема доступне поставке.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2086"/>
+        <location filename="mainwindow.cpp" line="2091"/>
         <source>Créer un nouveau preset</source>
         <translation>Створи нову поставку</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2086"/>
+        <location filename="mainwindow.cpp" line="2091"/>
         <source>Nom du nouveau preset :</source>
         <translation>Назив нове поставке: </translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2422"/>
+        <location filename="mainwindow.cpp" line="2427"/>
         <source> échantillon et </source>
         <translation> узорак и </translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2424"/>
+        <location filename="mainwindow.cpp" line="2429"/>
         <source> échantillons et </source>
         <translation> узорци и </translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2426"/>
+        <location filename="mainwindow.cpp" line="2431"/>
         <source> instrument ont été supprimés.</source>
         <translatorcomment>instrument: једнина</translatorcomment>
         <translation> инструменат је уклоњен.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2428"/>
+        <location filename="mainwindow.cpp" line="2433"/>
         <source> instruments ont été supprimés.</source>
         <translatorcomment>instrument: множина</translatorcomment>
         <translation> инструменат(а) је уклоњено.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2440"/>
+        <location filename="mainwindow.cpp" line="2445"/>
         <source>Atténuation minimale (dB) :</source>
         <translation>Најмање пригушење (dB): </translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2638"/>
+        <location filename="mainwindow.cpp" line="2643"/>
         <source>Exporter les pics de fréquence</source>
         <translation>Извези вршне учестаности</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2639"/>
+        <location filename="mainwindow.cpp" line="2644"/>
         <source>Fichier .csv (*.csv)</source>
         <translation>Цсв-датотека (*.csv)</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2654"/>
+        <location filename="mainwindow.cpp" line="2659"/>
         <source>;</source>
         <translatorcomment>знак који ће да се употребљава као раздвајач колона у Цсв-датотекама</translatorcomment>
         <translation>;</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2656"/>
+        <location filename="mainwindow.cpp" line="2661"/>
         <source>Echantillon</source>
         <translation>Узорак</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2656"/>
+        <location filename="mainwindow.cpp" line="2661"/>
         <source>Numéro de pic</source>
         <translation>Број шиљка</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2657"/>
+        <location filename="mainwindow.cpp" line="2662"/>
         <source>Facteur</source>
         <translation>Чинилац</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2657"/>
+        <location filename="mainwindow.cpp" line="2662"/>
         <source>Fréquence</source>
         <translation>Учестаност</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2658"/>
+        <location filename="mainwindow.cpp" line="2663"/>
         <source>Correction</source>
         <translation>Поправка</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2680"/>
-        <location filename="mainwindow.cpp" line="2681"/>
+        <location filename="mainwindow.cpp" line="2685"/>
+        <location filename="mainwindow.cpp" line="2686"/>
         <source>,</source>
         <translatorcomment>децимални раздвајач</translatorcomment>
         <translation>,</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2706"/>
+        <location filename="mainwindow.cpp" line="2711"/>
         <source>Le fichier ne contient aucun modulateur.</source>
         <translation>Звукотека не садржи модулаторе.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2708"/>
-        <location filename="mainwindow.cpp" line="2710"/>
+        <location filename="mainwindow.cpp" line="2713"/>
+        <location filename="mainwindow.cpp" line="2715"/>
         <source>Information</source>
         <translation>Подаци</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2708"/>
+        <location filename="mainwindow.cpp" line="2713"/>
         <source>1 modulateur a été supprimé.</source>
         <translation>1 модулатор је уклоњен.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2711"/>
+        <location filename="mainwindow.cpp" line="2716"/>
         <source>modulateurs ont été supprimés.</source>
         <translation>модулатора је уклоњено.</translation>
     </message>
@@ -3499,7 +3139,7 @@ en boucle</source>
         <location filename="pages/pageoverviewinst.cpp" line="289"/>
         <source>plusieurs modes</source>
         <comment>speaking about loop modes</comment>
-        <translation type="unfinished">неколико начина</translation>
+        <translation>неколико начина</translation>
     </message>
 </context>
 <context>
@@ -3746,7 +3386,7 @@ lié</source>
     <message>
         <location filename="pages/pagetable.cpp" line="1928"/>
         <source>les offsets ne peuvent être modulés dans un preset.</source>
-        <translation type="unfinished">помаци не могу да се модулирају у поставку.</translation>
+        <translation>помаци не могу да се модулирају у поставку.</translation>
     </message>
     <message>
         <location filename="pages/pagetable.cpp" line="1937"/>
@@ -4756,18 +4396,18 @@ lié</source>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="gui_divers/dialog_about.cpp" line="111"/>
+        <location filename="gui_divers/dialog_about.cpp" line="105"/>
         <source>Créé par </source>
         <translatorcomment>пазите на празнину на крају</translatorcomment>
         <translation>Творац </translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_about.cpp" line="112"/>
+        <location filename="gui_divers/dialog_about.cpp" line="106"/>
         <source>Contributeurs </source>
         <translation>Сарадници </translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_about.cpp" line="113"/>
+        <location filename="gui_divers/dialog_about.cpp" line="107"/>
         <source>Traduit par </source>
         <translation>Преводиоци </translation>
     </message>
@@ -4779,7 +4419,7 @@ lié</source>
     <message>
         <location filename="sf2_core/duplicator.cpp" line="260"/>
         <source>La division globale ne sera pas recopiée.</source>
-        <translation type="unfinished">Укупни део неће бити умножен.</translation>
+        <translation>Укупни део неће бити умножен.</translation>
     </message>
     <message>
         <location filename="sf2_core/duplicator.cpp" line="262"/>
