@@ -2619,7 +2619,7 @@
     <message>
         <location filename="mainwindow.cpp" line="298"/>
         <source>&amp;Quitter sans enregistrer</source>
-        <translation>&amp;Close without saving</translation>
+        <translation>Do&amp;n&apos;t save</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="671"/>
