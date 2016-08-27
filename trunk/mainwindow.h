@@ -44,7 +44,6 @@
 #include "pile_sf2.h"
 #include "config.h"
 #include "dialog_list.h"
-#include "dialog_help.h"
 #include "dialog_about.h"
 #include "page_sf2.h"
 #include "page_smpl.h"
@@ -210,6 +209,8 @@ private slots:
     void onAudioConnectionDone();
     void futureFinished();
 
+    void on_action_Forum_triggered();
+
 signals:
     void initAudio(int numDevice, int numIndex, int bufferSize);
     void stopAudio();
@@ -227,7 +228,6 @@ private:
     Synth * synth;
     AudioDevice * audioDevice;
     Config * configuration;
-    DialogHelp help;
     DialogAbout about;
     DialogList dialList;
     DialogMagnetophone dialogMagneto;

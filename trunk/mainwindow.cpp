@@ -37,6 +37,7 @@
 #include <QDate>
 #include <QLibrary>
 #include <QDesktopWidget>
+#include <QDesktopServices>
 
 // Constructeurs, destructeurs
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent, Qt::Window | Qt::WindowCloseButtonHint |
@@ -50,7 +51,6 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent, Qt::Window | Qt::W
     ui(new Ui::MainWindow),
     synth(NULL),
     audioDevice(new AudioDevice()),
-    help(this),
     about(this),
     dialList(this),
     dialogMagneto(NULL),
@@ -728,8 +728,13 @@ void MainWindow::showAbout()
 }
 void MainWindow::showHelp()
 {
-    this->help.show();
-    this->help.activateWindow();
+    // Open online documentation
+    QDesktopServices::openUrl(trUtf8("http://polyphone-soundfonts.com/fr/documentation"));
+}
+void MainWindow::on_action_Forum_triggered()
+{
+    // Open online forum
+    QDesktopServices::openUrl(trUtf8("http://polyphone-soundfonts.com/fr/forum"));
 }
 void MainWindow::AfficherBarreOutils()
 {
