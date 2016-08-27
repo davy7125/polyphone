@@ -8,7 +8,7 @@ DialogSelection::DialogSelection(Pile_sf2 *sf2, EltID id, QWidget *parent) :
 {
     ui->setupUi(this);
     this->setAttribute(Qt::WA_DeleteOnClose, true);
-    this->setWindowFlags((windowFlags() & ~Qt::WindowContextHelpButtonHint) | Qt::Tool);
+    this->setWindowFlags((windowFlags() & ~Qt::WindowContextHelpButtonHint));
 
     // Remplissage de la liste
     char T[40];
