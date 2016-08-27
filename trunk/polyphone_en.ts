@@ -2334,7 +2334,7 @@
     <message>
         <location filename="mainwindow.cpp" line="532"/>
         <source>&amp;Fermer sans enregistrer</source>
-        <translation>&amp;Close without saving </translation>
+        <translation>Do&amp;n't save</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1393"/>

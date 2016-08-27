@@ -31,7 +31,7 @@ DialogRelease::DialogRelease(QWidget *parent) :
     ui(new Ui::DialogRelease)
 {
     ui->setupUi(this);
-    this->setWindowFlags((windowFlags() & ~Qt::WindowContextHelpButtonHint) | Qt::Tool);
+    this->setWindowFlags((windowFlags() & ~Qt::WindowContextHelpButtonHint));
     Config * conf = Config::getInstance();
     ui->doubleDuree36->setValue(conf->getTools_i_release_dureeDo());
     ui->doubleDivision->setValue(conf->getTools_i_release_division());
