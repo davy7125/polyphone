@@ -23,19 +23,24 @@
 ***************************************************************************/
 
 #include "graphicslegenditem2.h"
-#include <QPen>
 #include <QPainter>
-#include "config.h"
+#include <QApplication>
+#include <QPalette>
+#include "keynamemanager.h"
 
-const int    GraphicsLegendItem2::s_border          = 5;
-const QBrush GraphicsLegendItem2::s_foregroundBrush = QBrush(QColor(255, 220, 200, 255));
-const QPen   GraphicsLegendItem2::s_borderPen       = QPen(QColor(180, 120, 100, 255), 1, Qt::SolidLine);
-const QPen   GraphicsLegendItem2::s_textPen         = QPen(QColor(100, 70, 50), 1, Qt::SolidLine);
+const int    GraphicsLegendItem2::s_border = 5;
 
 GraphicsLegendItem2::GraphicsLegendItem2(QString fontFamily, QGraphicsItem *parent) : QGraphicsItem(parent),
     _font(fontFamily, 8),
     _offsetY(0)
 {
+    // Colors
+    QColor color = QApplication::palette().color(QPalette::BrightText);
+    _borderPen = QPen(color, 1, Qt::SolidLine);
+    color.setAlpha(200);
+    _foregroundBrush = QBrush(color);
+    _textPen         = QPen(QApplication::palette().color(QPalette::HighlightedText), 1, Qt::SolidLine);
+
     this->setFlag(QGraphicsItem::ItemIgnoresTransformations);
     setLeft(true);
 }
@@ -59,8 +64,8 @@ void GraphicsLegendItem2::setNewValues(int minKey, int maxKey, int minVel, int m
     if (minKey != -1)
     {
         _text << QObject::trUtf8("Étendue note :") + " " +
-                 Config::getInstance()->getKeyName(minKey) + " - " +
-                 Config::getInstance()->getKeyName(maxKey)
+                 KeyNameManager::getInstance()->getKeyName(minKey) + " - " +
+                 KeyNameManager::getInstance()->getKeyName(maxKey)
               << QObject::trUtf8("Étendue vélocité :") + " " +
                  QString::number(minVel) + " - " +
                  QString::number(maxVel);
@@ -84,12 +89,12 @@ void GraphicsLegendItem2::paint(QPainter *painter, const QStyleOptionGraphicsIte
     painter->translate(dx(size), dy(size));
 
     // Paint foreground and border
-    painter->setBrush(s_foregroundBrush);
-    painter->setPen(s_borderPen);
+    painter->setBrush(_foregroundBrush);
+    painter->setPen(_borderPen);
     painter->drawRect(QRectF(QPoint(0, 0), size));
 
     // Paint text
-    painter->setPen(s_textPen);
+    painter->setPen(_textPen);
     painter->setFont(_font);
     QFontMetrics fm(_font);
     for (int i = 0; i < _text.count(); i++)

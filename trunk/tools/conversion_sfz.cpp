@@ -28,7 +28,7 @@
 #include <QFileInfo>
 #include <QDir>
 #include <QDate>
-#include "config.h"
+#include "keynamemanager.h"
 
 ConversionSfz::ConversionSfz(Pile_sf2 *sf2) :
     _sf2(sf2)
@@ -39,7 +39,7 @@ void ConversionSfz::convert(QString dir, QList<EltID> listID, bool presetPrefix,
     if (listID.isEmpty())
         return;
 
-    // Création d'un répertoire
+    // Create a directory
     EltID idSF2 = listID.at(0);
     idSF2.typeElement = elementSf2;
     QString rootDir = QFileInfo(_sf2->getQstr(idSF2, champ_filename)).baseName();
@@ -370,7 +370,7 @@ void ConversionSfz::writeElement(QTextStream &out, Champ champ, double value)
     case champ_modLfoToPitch:           /* IMPOSSIBLE !!! */                                        break;
     case champ_keynum:
         out << "pitch_keycenter="
-            << Config::getInstance()->getKeyName(qRound(value), false, false, true) << endl
+            << KeyNameManager::getInstance()->getKeyName(qRound(value), false, false, true) << endl
             << "pitch_keytrack=0" << endl;
         break;
     case champ_reverbEffectsSend:       out << "effect1=" << value << endl;                         break;
@@ -385,7 +385,7 @@ void ConversionSfz::writeElement(QTextStream &out, Champ champ, double value)
     case champ_releaseVolEnv:           out << "ampeg_release=" << value << endl;                   break;
     case champ_overridingRootKey:
         out << "pitch_keycenter="
-            << Config::getInstance()->getKeyName(qRound(value), false, false, true) << endl;
+            << KeyNameManager::getInstance()->getKeyName(qRound(value), false, false, true) << endl;
         break;
     case champ_delayVibLFO:             out << "pitchlfo_delay=" << value << endl;                  break;
     case champ_freqVibLFO:              out << "pitchlfo_freq=" << value << endl;                   break;
@@ -402,8 +402,8 @@ void ConversionSfz::writeElement(QTextStream &out, Champ champ, double value)
             << "cutoff="   << qRound(value) << endl;
         break;
     case champ_keyRange:{
-        QString lokey = Config::getInstance()->getKeyName(qRound(value / 1000.), false, false, true);
-        QString hikey = Config::getInstance()->getKeyName(qRound(value - 1000. * qRound(value / 1000.)), false, false, true);
+        QString lokey = KeyNameManager::getInstance()->getKeyName(qRound(value / 1000.), false, false, true);
+        QString hikey = KeyNameManager::getInstance()->getKeyName(qRound(value - 1000. * qRound(value / 1000.)), false, false, true);
         out << "lokey=" << lokey << " hikey=" << hikey << endl;
         }break;
     case champ_velRange:{

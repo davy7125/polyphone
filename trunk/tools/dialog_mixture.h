@@ -41,8 +41,7 @@ public:
     ~DialogMixture();
 
 signals:
-    void accepted(QList<QList<int> > listeParam, QString nom,
-                  bool bouclage, int freq, bool stereo);
+    void accepted(QList<QList<int> > _listeParam, QString nom, bool bouclage, int freq, bool stereo);
 
 private slots:
     void accept();
@@ -59,9 +58,10 @@ private slots:
 
 private:
     Ui::DialogMixture *ui;
-    QList<QList<int> > listeParam;
+    QList<QList<int> > _listeParam;
 
-    // Méthodes privées
+    QList<QList<int> > getStoredRanks();
+    void storeRanks(QList<QList<int> > val);
     void dispDiv();
     void dispRang(int numDiv = -1);
     static QString getText(int type1, int type2);

@@ -43,6 +43,7 @@
 #include <stdio.h>
 #include "pile_sf2.h"
 #include "config.h"
+#include "confmanager.h"
 #include "dialog_list.h"
 #include "dialog_about.h"
 #include "page_sf2.h"
@@ -113,8 +114,7 @@ public:
     void openMidiPort(int val);
     void setAudioDevice(int audioDevice, int index, int bufferSize);
     void setSynthGain(int val);
-    void setSynthReverb(int level, int size, int width, int damping);
-    void setSynthChorus(int level, int depth, int frequency);
+    void updateSynthChoRev();
     void setListeActions(QList<QAction *> listeActions);
     void dragAndDrop(EltID idDest, QList<EltID> idSources);
     void noteNameChanged();

@@ -56,6 +56,8 @@ private:
     QVector<int> _listeVelocites;
 
     void dispVel();
+    QVector<int> getStoredVelocites();
+    void storeVelocities(QVector<int> val);
 };
 
 #endif // DIALOG_DUPLICATION_H

@@ -58,9 +58,9 @@ Page_Inst::Page_Inst(QWidget *parent) :
     this->comboSource1 = ui->comboSource1;
     this->comboSource2 = ui->comboSource2;
     this->comboDestination = ui->comboDestination;
-    this->_pushCopyMod = ui->pushCopyMod;
-    this->_pushRangeMode = ui->pushRangeMode;
-    this->_rangeEditor = ui->rangeEditor;
+    _pushCopyMod = ui->pushCopyMod;
+    _pushRangeMode = ui->pushRangeMode;
+    _rangeEditor = ui->rangeEditor;
 
     // Remplissage de comboDestination
     for (int i = 0; i < 48; i++)
@@ -101,7 +101,7 @@ Page_Inst::~Page_Inst()
 }
 void Page_Inst::setModVisible(bool visible)
 {
-    this->ui->frameModulator->setVisible(visible);
+    ui->frameModulator->setVisible(visible);
 }
 void Page_Inst::afficher()
 {
@@ -115,14 +115,14 @@ void Page_Inst::afficher()
         ui->pushRangeMode->setEnabled(false);
         ui->stackedWidget->setCurrentIndex(0);
 
-        this->ui->labelPrst->setText("");
+        ui->labelPrst->setText("");
     }
     else
     {
         ui->pushRangeMode->setEnabled(true);
 
         // Liste des presets qui utilisent l'instrument
-        EltID id = this->_tree->getFirstID();
+        EltID id = _tree->getFirstID();
         id.typeElement = elementInst;
         int nbPrst = 0;
         bool isFound;
@@ -134,7 +134,7 @@ void Page_Inst::afficher()
         id3.typeElement = elementPrstInst;
 
         // Parcours de tous les presets
-        for (int i = 0; i < this->_sf2->count(id2); i++)
+        for (int i = 0; i < _sf2->count(id2); i++)
         {
             id2.indexElt = i;
             id3.indexElt = i;
@@ -142,17 +142,17 @@ void Page_Inst::afficher()
             // Parcours de tous les instruments liés au preset
             isFound = false;
             j = 0;
-            while(j < this->_sf2->count(id3) && !isFound)
+            while(j < _sf2->count(id3) && !isFound)
             {
                 id3.indexElt2 = j;
-                if (!this->_sf2->get(id3, champ_hidden).bValue)
+                if (!_sf2->get(id3, champ_hidden).bValue)
                 {
-                    if (this->_sf2->get(id3, champ_instrument).wValue == id.indexElt)
+                    if (_sf2->get(id3, champ_instrument).wValue == id.indexElt)
                     {
                         // Ajout d'un preset
                         if (nbPrst)
                             qStr.append(", ");
-                        qStr.append(this->_sf2->getQstr(id2, champ_name).toStdString().c_str());
+                        qStr.append(_sf2->getQstr(id2, champ_name).toStdString().c_str());
                         nbPrst++;
                         isFound = true;
                     }
@@ -166,7 +166,7 @@ void Page_Inst::afficher()
             qStr.prepend(trUtf8("<b>Instrument lié au preset : </b>"));
         else
             qStr.prepend(trUtf8("<b>Instrument lié aux presets : </b>"));
-        this->ui->labelPrst->setText(qStr);
+        ui->labelPrst->setText(qStr);
     }
 }
 
@@ -187,7 +187,7 @@ void Page_Inst::desaccorder()
 
 void Page_Inst::desaccorder(double doHerz, double division)
 {
-    this->_sf2->prepareNewActions();
+    _sf2->prepareNewActions();
 
     bool error;
     QList<EltID> ids = this->getUniqueInstOrPrst(error, true, true);
@@ -198,46 +198,46 @@ void Page_Inst::desaccorder(double doHerz, double division)
         desaccorder(id, doHerz, division);
 
     // Actualisation
-    this->_mainWindow->updateDo();
-    this->_mainWindow->updateActions();
+    _mainWindow->updateDo();
+    _mainWindow->updateActions();
 }
 
 void Page_Inst::desaccorder(EltID id, double doHerz, double division)
 {
     // Modification pour chaque sample lié
     id.typeElement = elementInstSmpl;
-    for (int i = 0; i < this->_sf2->count(id); i++)
+    for (int i = 0; i < _sf2->count(id); i++)
     {
         id.indexElt2 = i;
-        if (!this->_sf2->get(id, champ_hidden).bValue)
+        if (!_sf2->get(id, champ_hidden).bValue)
         {
             // Sample lié
             EltID id2 = id;
             id2.typeElement = elementSmpl;
-            id2.indexElt = this->_sf2->get(id, champ_sampleID).genValue.wAmount;
+            id2.indexElt = _sf2->get(id, champ_sampleID).genValue.wAmount;
             // Numéro de la note du sample
-            int numNoteSmpl = this->_sf2->get(id2, champ_byOriginalPitch).bValue;
+            int numNoteSmpl = _sf2->get(id2, champ_byOriginalPitch).bValue;
             // Note de base sur le clavier correspondant à numNoteSmpl;
             int numBase = numNoteSmpl;
-            if (this->_sf2->isSet(id, champ_overridingRootKey))
-                numBase = this->_sf2->get(id, champ_overridingRootKey).wValue;
+            if (_sf2->isSet(id, champ_overridingRootKey))
+                numBase = _sf2->get(id, champ_overridingRootKey).wValue;
             // Etendue du sample sur le clavier
             int numBas = 0;
             int numHaut = 0;
             // Intervalle joué par le sample
-            if (this->_sf2->isSet(id, champ_keynum))
+            if (_sf2->isSet(id, champ_keynum))
             {
-                numBas = numNoteSmpl + this->_sf2->get(id, champ_keynum).wValue - numBase;
+                numBas = numNoteSmpl + _sf2->get(id, champ_keynum).wValue - numBase;
                 numHaut = numBas;
             }
             else
             {
-                numBas = numNoteSmpl + this->_sf2->get(id, champ_keyRange).rValue.byLo - numBase;
-                numHaut = numNoteSmpl + this->_sf2->get(id, champ_keyRange).rValue.byHi - numBase;
+                numBas = numNoteSmpl + _sf2->get(id, champ_keyRange).rValue.byLo - numBase;
+                numHaut = numNoteSmpl + _sf2->get(id, champ_keyRange).rValue.byHi - numBase;
             }
             // Fréquence des battements
-            double keyMoy = (double)(this->_sf2->get(id, champ_keyRange).rValue.byHi +
-                                     this->_sf2->get(id, champ_keyRange).rValue.byLo) / 2.;
+            double keyMoy = (double)(_sf2->get(id, champ_keyRange).rValue.byHi +
+                                     _sf2->get(id, champ_keyRange).rValue.byLo) / 2.;
             double bps = doHerz * qPow(division, (60. - keyMoy) / 12.);
             if (bps < -30)
                 bps = -30;
@@ -267,11 +267,11 @@ void Page_Inst::desaccorder(EltID id, double doHerz, double division)
                 else if (decalage > -1) decalage = -1;
             }
             // Modification instSmpl
-            if (this->_sf2->get(id, champ_fineTune).shValue != decalage)
+            if (_sf2->get(id, champ_fineTune).shValue != decalage)
             {
                 Valeur val;
                 val.shValue = decalage;
-                this->_sf2->set(id, champ_fineTune, val);
+                _sf2->set(id, champ_fineTune, val);
             }
         }
     }
@@ -284,14 +284,14 @@ void Page_Inst::repartitionAuto()
     if (ids.isEmpty() || error)
         return;
 
-    this->_sf2->prepareNewActions();
+    _sf2->prepareNewActions();
     ids = this->getUniqueInstOrPrst(error, true, false);
     foreach (EltID id, ids)
         repartitionAuto(id);
 
     // Actualisation
-    this->_mainWindow->updateDo();
-    this->_mainWindow->updateActions();
+    _mainWindow->updateDo();
+    _mainWindow->updateActions();
 }
 
 void Page_Inst::repartitionAuto(EltID id)
@@ -301,19 +301,19 @@ void Page_Inst::repartitionAuto(EltID id)
     QList<int> listNote;
     int notePrecedente, note, noteSuivante;
     id.typeElement = elementInstSmpl;
-    for (int i = 0; i < this->_sf2->count(id); i++)
+    for (int i = 0; i < _sf2->count(id); i++)
     {
         id.indexElt2 = i;
-        if (!this->_sf2->get(id, champ_hidden).bValue)
+        if (!_sf2->get(id, champ_hidden).bValue)
         {
-            if (this->_sf2->isSet(id, champ_overridingRootKey))
-                note = this->_sf2->get(id, champ_overridingRootKey).wValue;
+            if (_sf2->isSet(id, champ_overridingRootKey))
+                note = _sf2->get(id, champ_overridingRootKey).wValue;
             else
             {
                 EltID id2 = id;
                 id2.typeElement = elementSmpl;
-                id2.indexElt = this->_sf2->get(id, champ_sampleID).wValue;
-                note = this->_sf2->get(id2, champ_byOriginalPitch).bValue;
+                id2.indexElt = _sf2->get(id, champ_sampleID).wValue;
+                note = _sf2->get(id2, champ_byOriginalPitch).bValue;
             }
             // Insertion triée
             int pos = 0;
@@ -363,17 +363,17 @@ void Page_Inst::repartitionAuto(EltID id)
             notePrecedente = note;
         }
         // Modification
-        if (this->_sf2->get(listID.at(i), champ_keyRange).rValue.byLo != val.rValue.byLo ||
-            this->_sf2->get(listID.at(i), champ_keyRange).rValue.byHi != val.rValue.byHi)
-            this->_sf2->set(listID.at(i), champ_keyRange, val);
+        if (_sf2->get(listID.at(i), champ_keyRange).rValue.byLo != val.rValue.byLo ||
+            _sf2->get(listID.at(i), champ_keyRange).rValue.byHi != val.rValue.byHi)
+            _sf2->set(listID.at(i), champ_keyRange, val);
     }
 }
 
 void Page_Inst::mixture()
 {
-    EltID idInst = this->_tree->getFirstID();
+    EltID idInst = _tree->getFirstID();
     idInst.typeElement = elementInstSmpl;
-    if (this->_sf2->count(idInst, false) == 0)
+    if (_sf2->count(idInst, false) == 0)
     {
         QMessageBox::warning(this, trUtf8("Attention"), trUtf8("L'instrument doit contenir des sons."));
         return;
@@ -387,7 +387,7 @@ void Page_Inst::mixture()
 void Page_Inst::mixture(QList<QList<int> > listeParam, QString nomInst, bool bouclage, int freq, bool stereo)
 {
     // Création d'une mixture
-    this->_sf2->prepareNewActions();
+    _sf2->prepareNewActions();
 
     // Nombre d'étapes
     int nbEtapes = 0;
@@ -407,24 +407,24 @@ void Page_Inst::mixture(QList<QList<int> > listeParam, QString nomInst, bool bou
     progress.show();
     double dureeSmpl = 7;
     qint32 fEch = 48000;
-    EltID idInst = this->_tree->getFirstID();
+    EltID idInst = _tree->getFirstID();
     idInst.typeElement = elementInst;
     EltID idSmpl;
     QByteArray baData;
 
     // Création d'un nouvel instrument
     EltID idNewInst = idInst;
-    idNewInst.indexElt = this->_sf2->add(idNewInst);
+    idNewInst.indexElt = _sf2->add(idNewInst);
 
     // Configuration instrument
     if (nomInst.isEmpty())
         nomInst = trUtf8("sans nom");
-    this->_sf2->set(idNewInst, champ_name, nomInst.left(20));
+    _sf2->set(idNewInst, champ_name, nomInst.left(20));
     if (bouclage)
     {
         Valeur value;
         value.wValue = 1;
-        this->_sf2->set(idNewInst, champ_sampleModes, value);
+        _sf2->set(idNewInst, champ_sampleModes, value);
     }
     EltID idInstSmpl = idNewInst;
     idInstSmpl.typeElement = elementInstSmpl;
@@ -490,7 +490,7 @@ void Page_Inst::mixture(QList<QList<int> > listeParam, QString nomInst, bool bou
                     else
                     {
                         // Actualisation et retour
-                        this->_mainWindow->updateDo();
+                        _mainWindow->updateDo();
                         return;
                     }
 
@@ -507,7 +507,7 @@ void Page_Inst::mixture(QList<QList<int> > listeParam, QString nomInst, bool bou
 //                               sf2->get(idInstSmplTmp, champ_keyRange).rValue.byLo,
 //                               sf2->get(idInstSmplTmp, champ_keyRange).rValue.byHi);
                         // Fréquence d'échantillonnage initiale fictive (pour accordage)
-                        double fEchInit = (double)this->_sf2->get(idSmpl, champ_dwSampleRate).dwValue * pow(2, ecart/12.0);
+                        double fEchInit = (double)_sf2->get(idSmpl, champ_dwSampleRate).dwValue * pow(2, ecart/12.0);
                         // Récupération du son
                         QByteArray baDataTmp = getSampleData(idSmpl, dureeSmpl * fEchInit);
                         // Prise en compte atténuation en dB
@@ -528,7 +528,7 @@ void Page_Inst::mixture(QList<QList<int> > listeParam, QString nomInst, bool bou
                 else
                 {
                     // Actualisation et retour
-                    this->_mainWindow->updateDo();
+                    _mainWindow->updateDo();
                     return;
                 }
                 qint32 loopStart = 0;
@@ -545,36 +545,36 @@ void Page_Inst::mixture(QList<QList<int> > listeParam, QString nomInst, bool bou
                     else
                     {
                         // Actualisation et retour
-                        this->_mainWindow->updateDo();
+                        _mainWindow->updateDo();
                         return;
                     }
                 }
 
                 // Création d'un nouveau sample
-                idSmpl.indexElt = this->_sf2->add(idSmpl);
+                idSmpl.indexElt = _sf2->add(idSmpl);
 
                 // Ajout des données
-                this->_sf2->set(idSmpl, champ_sampleData16, Sound::bpsConversion(baData, 32, 16));
+                _sf2->set(idSmpl, champ_sampleData16, Sound::bpsConversion(baData, 32, 16));
                 EltID idSf2 = idSmpl;
                 idSf2.typeElement = elementSf2;
-                if (this->_sf2->get(idSf2, champ_wBpsSave).wValue == 24)
-                    this->_sf2->set(idSmpl, champ_sampleData24, Sound::bpsConversion(baData, 32, 824));
+                if (_sf2->get(idSf2, champ_wBpsSave).wValue == 24)
+                    _sf2->set(idSmpl, champ_sampleData24, Sound::bpsConversion(baData, 32, 824));
 
                 // Configuration
                 Valeur value;
                 value.dwValue = baData.length() / 4;
-                this->_sf2->set(idSmpl, champ_dwLength, value);
+                _sf2->set(idSmpl, champ_dwLength, value);
                 value.dwValue = fEch;
-                this->_sf2->set(idSmpl, champ_dwSampleRate, value);
+                _sf2->set(idSmpl, champ_dwSampleRate, value);
                 value.wValue = note;
-                this->_sf2->set(idSmpl, champ_byOriginalPitch, value);
+                _sf2->set(idSmpl, champ_byOriginalPitch, value);
                 value.cValue = 0;
-                this->_sf2->set(idSmpl, champ_chPitchCorrection, value);
+                _sf2->set(idSmpl, champ_chPitchCorrection, value);
                 value.dwValue = loopStart;
-                this->_sf2->set(idSmpl, champ_dwStartLoop, value);
+                _sf2->set(idSmpl, champ_dwStartLoop, value);
                 value.dwValue = loopEnd;
-                this->_sf2->set(idSmpl, champ_dwEndLoop, value);
-                this->_sf2->set(idSmpl, champ_name, name);
+                _sf2->set(idSmpl, champ_dwEndLoop, value);
+                _sf2->set(idSmpl, champ_name, name);
                 // Lien
                 if (stereo)
                 {
@@ -585,26 +585,26 @@ void Page_Inst::mixture(QList<QList<int> > listeParam, QString nomInst, bool bou
                 }
                 else
                     value.sfLinkValue = monoSample;
-                this->_sf2->set(idSmpl, champ_sfSampleType, value);
+                _sf2->set(idSmpl, champ_sfSampleType, value);
                 if (cote == 1)
                 {
                     EltID idLink = idSmpl;
                     idLink.indexElt = idSmpl.indexElt - 1;
                     value.wValue = idLink.indexElt;
-                    this->_sf2->set(idSmpl, champ_wSampleLink, value);
+                    _sf2->set(idSmpl, champ_wSampleLink, value);
                     value.wValue = idSmpl.indexElt;
-                    this->_sf2->set(idLink, champ_wSampleLink, value);
+                    _sf2->set(idLink, champ_wSampleLink, value);
                 }
 
                 // Ajout du sample dans l'instrument
-                idInstSmpl.indexElt2 = this->_sf2->add(idInstSmpl);
+                idInstSmpl.indexElt2 = _sf2->add(idInstSmpl);
 
                 // Configuration
                 value.wValue = idSmpl.indexElt;
-                this->_sf2->set(idInstSmpl, champ_sampleID, value);
+                _sf2->set(idInstSmpl, champ_sampleID, value);
                 value.rValue.byLo = qMax(noteStart2, note-freq+1);
                 value.rValue.byHi = note;
-                this->_sf2->set(idInstSmpl, champ_keyRange, value);
+                _sf2->set(idInstSmpl, champ_keyRange, value);
                 if (stereo)
                 {
                     if (cote == 0)
@@ -614,13 +614,13 @@ void Page_Inst::mixture(QList<QList<int> > listeParam, QString nomInst, bool bou
                 }
                 else
                     value.shValue = 0;
-                this->_sf2->set(idInstSmpl, champ_pan, value);
+                _sf2->set(idInstSmpl, champ_pan, value);
                 value.wValue = attMini * 10;
-                this->_sf2->set(idInstSmpl, champ_initialAttenuation, value);
+                _sf2->set(idInstSmpl, champ_initialAttenuation, value);
                 if (progress.wasCanceled())
                 {
                     // Actualisation et retour
-                    this->_mainWindow->updateDo();
+                    _mainWindow->updateDo();
                     return;
                 }
             }
@@ -628,7 +628,7 @@ void Page_Inst::mixture(QList<QList<int> > listeParam, QString nomInst, bool bou
     }
 
     // Actualisation
-    this->_mainWindow->updateDo();
+    _mainWindow->updateDo();
 }
 
 void Page_Inst::release()
@@ -647,7 +647,7 @@ void Page_Inst::release()
 
 void Page_Inst::release(double duree36, double division, double deTune)
 {
-    this->_sf2->prepareNewActions();
+    _sf2->prepareNewActions();
 
     bool error;
     QList<EltID> ids = this->getUniqueInstOrPrst(error, true, true);
@@ -658,22 +658,22 @@ void Page_Inst::release(double duree36, double division, double deTune)
         release(id, duree36, division, deTune);
 
     // Actualisation
-    this->_mainWindow->updateDo();
-    this->_mainWindow->updateActions();
+    _mainWindow->updateDo();
+    _mainWindow->updateActions();
 }
 
 void Page_Inst::release(EltID id, double duree36, double division, double deTune)
 {
     // Modification pour chaque sample lié
     id.typeElement = elementInstSmpl;
-    for (int i = 0; i < this->_sf2->count(id); i++)
+    for (int i = 0; i < _sf2->count(id); i++)
     {
         id.indexElt2 = i;
-        if (!this->_sf2->get(id, champ_hidden).bValue)
+        if (!_sf2->get(id, champ_hidden).bValue)
         {
             // Note moyenne
-            double noteMoy = (double)(this->_sf2->get(id, champ_keyRange).rValue.byHi +
-                    this->_sf2->get(id, champ_keyRange).rValue.byLo) / 2;
+            double noteMoy = (double)(_sf2->get(id, champ_keyRange).rValue.byHi +
+                    _sf2->get(id, champ_keyRange).rValue.byLo) / 2;
             // Calcul durée release
             double release = pow(division, ((36. - noteMoy) / 12.)) * duree36;
             if (release < 0.001) release = 0.001;
@@ -682,47 +682,47 @@ void Page_Inst::release(EltID id, double duree36, double division, double deTune
             short val = 1200 * qLn(release) / 0.69314718056;
             // Modification instSmpl
             Valeur valeur;
-            if (this->_sf2->get(id, champ_releaseVolEnv).shValue != val)
+            if (_sf2->get(id, champ_releaseVolEnv).shValue != val)
             {
                 valeur.shValue = val;
-                this->_sf2->set(id, champ_releaseVolEnv, valeur);
+                _sf2->set(id, champ_releaseVolEnv, valeur);
             }
             if (deTune != 0)
             {
                 // Release de l'enveloppe de modulation
-                if (this->_sf2->get(id, champ_releaseModEnv).shValue != val)
+                if (_sf2->get(id, champ_releaseModEnv).shValue != val)
                 {
                     valeur.shValue = val;
-                    this->_sf2->set(id, champ_releaseModEnv, valeur);
+                    _sf2->set(id, champ_releaseModEnv, valeur);
                 }
-                if (this->_sf2->get(id, champ_modEnvToPitch).shValue != -(int)100*deTune)
+                if (_sf2->get(id, champ_modEnvToPitch).shValue != -(int)100*deTune)
                 {
                     valeur.shValue = -(int)100*deTune;
-                    this->_sf2->set(id, champ_modEnvToPitch, valeur);
+                    _sf2->set(id, champ_modEnvToPitch, valeur);
                 }
                 // Hauteur de l'effet
                 int tuningCoarse = floor(deTune);
                 int tuningFine = 100*(deTune - tuningCoarse);
-                valeur.shValue = this->_sf2->get(id, champ_coarseTune).shValue + tuningCoarse;
+                valeur.shValue = _sf2->get(id, champ_coarseTune).shValue + tuningCoarse;
                 if (valeur.shValue != 0)
-                    this->_sf2->set(id, champ_coarseTune, valeur);
+                    _sf2->set(id, champ_coarseTune, valeur);
                 else
-                    this->_sf2->reset(id, champ_coarseTune);
-                valeur.shValue = this->_sf2->get(id, champ_fineTune).shValue + tuningFine;
+                    _sf2->reset(id, champ_coarseTune);
+                valeur.shValue = _sf2->get(id, champ_fineTune).shValue + tuningFine;
                 if (valeur.shValue != 0)
-                    this->_sf2->set(id, champ_fineTune, valeur);
+                    _sf2->set(id, champ_fineTune, valeur);
                 else
-                    this->_sf2->reset(id, champ_fineTune);
+                    _sf2->reset(id, champ_fineTune);
             }
         }
     }
 
     // Simplification
-    this->_sf2->simplify(id, champ_fineTune);
-    this->_sf2->simplify(id, champ_coarseTune);
-    this->_sf2->simplify(id, champ_modEnvToPitch);
-    this->_sf2->simplify(id, champ_releaseModEnv);
-    this->_sf2->simplify(id, champ_releaseVolEnv);
+    _sf2->simplify(id, champ_fineTune);
+    _sf2->simplify(id, champ_coarseTune);
+    _sf2->simplify(id, champ_modEnvToPitch);
+    _sf2->simplify(id, champ_releaseModEnv);
+    _sf2->simplify(id, champ_releaseVolEnv);
 }
 
 void Page_Inst::transposer()
@@ -750,8 +750,8 @@ void Page_Inst::transposer(double ton, bool adaptKeyRange)
         transposer(id, ton, adaptKeyRange);
 
     // Actualisation
-    this->_mainWindow->updateDo();
-    this->_mainWindow->updateActions();
+    _mainWindow->updateDo();
+    _mainWindow->updateActions();
 }
 
 void Page_Inst::transposer(EltID idInstSmpl, double ton, bool adaptKeyRange)
@@ -767,18 +767,18 @@ void Page_Inst::transposer(EltID idInstSmpl, double ton, bool adaptKeyRange)
     int correction = qRound(100. * (ton - nbTons));
 
     // Modification pour chaque sample lié
-    for (int i = 0; i < this->_sf2->count(idInstSmpl); i++)
+    for (int i = 0; i < _sf2->count(idInstSmpl); i++)
     {
         idInstSmpl.indexElt2 = i;
-        if (!this->_sf2->get(idInstSmpl, champ_hidden).bValue)
+        if (!_sf2->get(idInstSmpl, champ_hidden).bValue)
         {
             Valeur valeur;
 
             // Etendue
             if (adaptKeyRange)
             {
-                int noteInf = this->_sf2->get(idInstSmpl, champ_keyRange).rValue.byLo;
-                int noteSup = this->_sf2->get(idInstSmpl, champ_keyRange).rValue.byHi;
+                int noteInf = _sf2->get(idInstSmpl, champ_keyRange).rValue.byLo;
+                int noteSup = _sf2->get(idInstSmpl, champ_keyRange).rValue.byHi;
 
                 // Déplacement de l'étendue
                 noteInf -= nbTons;
@@ -797,18 +797,18 @@ void Page_Inst::transposer(EltID idInstSmpl, double ton, bool adaptKeyRange)
                 // Enregistrement de la nouvelle étendue
                 valeur.rValue.byLo = noteInf;
                 valeur.rValue.byHi = noteSup;
-                this->_sf2->set(idInstSmpl, champ_keyRange, valeur);
+                _sf2->set(idInstSmpl, champ_keyRange, valeur);
             }
 
             // Note de base
             EltID idSmpl = idInstSmpl;
             idSmpl.typeElement = elementSmpl;
-            idSmpl.indexElt = this->_sf2->get(idInstSmpl, champ_sampleID).wValue;
-            int rootKey = this->_sf2->get(idSmpl, champ_byOriginalPitch).bValue;
-            if (this->_sf2->isSet(idInst, champ_overridingRootKey))
-                rootKey = this->_sf2->get(idInst, champ_overridingRootKey).wValue;
-            if (this->_sf2->isSet(idInstSmpl, champ_overridingRootKey))
-                rootKey = this->_sf2->get(idInstSmpl, champ_overridingRootKey).wValue;
+            idSmpl.indexElt = _sf2->get(idInstSmpl, champ_sampleID).wValue;
+            int rootKey = _sf2->get(idSmpl, champ_byOriginalPitch).bValue;
+            if (_sf2->isSet(idInst, champ_overridingRootKey))
+                rootKey = _sf2->get(idInst, champ_overridingRootKey).wValue;
+            if (_sf2->isSet(idInstSmpl, champ_overridingRootKey))
+                rootKey = _sf2->get(idInstSmpl, champ_overridingRootKey).wValue;
 
             // Modification rootkey et enregistrement
             rootKey -= nbTons;
@@ -817,19 +817,19 @@ void Page_Inst::transposer(EltID idInstSmpl, double ton, bool adaptKeyRange)
             else if (rootKey > 127)
                 rootKey = 127;
             valeur.wValue = rootKey;
-            this->_sf2->set(idInstSmpl, champ_overridingRootKey, valeur);
+            _sf2->set(idInstSmpl, champ_overridingRootKey, valeur);
 
             // Correction
             int fineTune = 0;
-            if (this->_sf2->isSet(idInst, champ_fineTune))
-                fineTune = this->_sf2->get(idInst, champ_fineTune).wValue;
-            if (this->_sf2->isSet(idInstSmpl, champ_fineTune))
-                fineTune = this->_sf2->get(idInstSmpl, champ_fineTune).wValue;
+            if (_sf2->isSet(idInst, champ_fineTune))
+                fineTune = _sf2->get(idInst, champ_fineTune).wValue;
+            if (_sf2->isSet(idInstSmpl, champ_fineTune))
+                fineTune = _sf2->get(idInstSmpl, champ_fineTune).wValue;
             int coarseTune = 0;
-            if (this->_sf2->isSet(idInst, champ_coarseTune))
-                coarseTune = this->_sf2->get(idInst, champ_coarseTune).wValue;
-            if (this->_sf2->isSet(idInstSmpl, champ_coarseTune))
-                coarseTune = this->_sf2->get(idInstSmpl, champ_coarseTune).wValue;
+            if (_sf2->isSet(idInst, champ_coarseTune))
+                coarseTune = _sf2->get(idInst, champ_coarseTune).wValue;
+            if (_sf2->isSet(idInstSmpl, champ_coarseTune))
+                coarseTune = _sf2->get(idInstSmpl, champ_coarseTune).wValue;
 
             // Modification de la correction
             fineTune += correction;
@@ -846,15 +846,15 @@ void Page_Inst::transposer(EltID idInstSmpl, double ton, bool adaptKeyRange)
 
             // Enregistrement de la nouvelle correction
             valeur.shValue = fineTune;
-            this->_sf2->set(idInstSmpl, champ_fineTune, valeur);
+            _sf2->set(idInstSmpl, champ_fineTune, valeur);
             valeur.shValue = coarseTune;
-            this->_sf2->set(idInstSmpl, champ_coarseTune, valeur);
+            _sf2->set(idInstSmpl, champ_coarseTune, valeur);
         }
     }
 
     // Simplification
-    this->_sf2->simplify(idInstSmpl, champ_fineTune);
-    this->_sf2->simplify(idInstSmpl, champ_coarseTune);
+    _sf2->simplify(idInstSmpl, champ_fineTune);
+    _sf2->simplify(idInstSmpl, champ_coarseTune);
 }
 
 double Page_Inst::getOffset(int type1, int type2)

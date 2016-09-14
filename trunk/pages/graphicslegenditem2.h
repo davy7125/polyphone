@@ -28,6 +28,7 @@
 #include <QGraphicsItem>
 #include <QBrush>
 #include <QFont>
+#include <QPen>
 
 class GraphicsLegendItem2 : public QGraphicsItem
 {
@@ -44,9 +45,9 @@ public:
 
 private:
     static const int s_border;
-    static const QBrush s_foregroundBrush;
-    static const QPen s_borderPen;
-    static const QPen s_textPen;
+    QBrush _foregroundBrush;
+    QPen _borderPen;
+    QPen _textPen;
 
     const QFont _font;
     QStringList _text;

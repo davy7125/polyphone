@@ -25,13 +25,19 @@
 #include "graphicskey.h"
 #include <QPainter>
 #include <QTimer>
+#include <QApplication>
+#include <QPalette>
 
 const int GraphicsKey::s_radius = 5;
 
-GraphicsKey::GraphicsKey(QGraphicsItem *parent) : QObject(NULL), QGraphicsItem(parent),
-    _colorBrush(220, 30, 30, 4),
-    _colorPen(50, 10, 10, 4)
+GraphicsKey::GraphicsKey(QGraphicsItem *parent) : QObject(NULL), QGraphicsItem(parent)
 {
+    // Colors
+    QColor color = QApplication::palette().color(QPalette::NoRole);
+    color.setAlpha(4);
+    _colorBrush = color;
+    _colorPen = color.dark();
+
     this->setFlag(QGraphicsItem::ItemIgnoresTransformations);
     QTimer::singleShot(30, this, SLOT(updateColor()));
 }

@@ -41,10 +41,12 @@ DialogAbout::DialogAbout(QWidget *parent) :
     QString urlDonation = "https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=ESBLSGPJ7P938&lc=US&item_name=Polyphone&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donate_LG%2egif%3aNonHosted";
     ui->labelDescription->setText("<html><head/><body><p align='center'>" + trUtf8("Copyright") + QString::fromUtf8(" © ") + annee +
                                   " " + trUtf8("Davy Triponney", "this is my name") + "<br/><br/><a href='" + url +
-                                  "'><span style=' text-decoration: underline; color:#0000ff;'>" +
+                                  "'><span style=' text-decoration: underline; color:" +
+                                  this->palette().color(QPalette::Link).name() + ";'>" +
                                   trUtf8("Site internet de Polyphone") + "</span></a>" +
                                   "<br/><br/><a href='" + urlDonation +
-                                  "'><span style=' text-decoration: underline; color:#0000ff;'>" +
+                                  "'><span style=' text-decoration: underline; color:" +
+                                  this->palette().color(QPalette::Link).name() + ";'>" +
                                   trUtf8("Faire un don") + "</span></a>" +
                                   "</p></body></html>");
 
@@ -127,7 +129,8 @@ QString Credit::getFormattedName(QString name, QString email)
 {
     QString text = "<p>";
     if (email.size())
-        text += "<a href='mailto:" + email + "'><span style='font-size:9pt; text-decoration: underline; color:#0000ff;'>" +
+        text += "<a href='mailto:" + email + "'><span style='font-size:9pt; text-decoration: underline; color:" +
+                QApplication::palette().color(QPalette::Link).name() + ";'>" +
                 QString::fromUtf8(name.toStdString().c_str()) + "</span></a>";
     else
         text += "<span style='font-size:9pt;'>" + QString::fromUtf8(name.toStdString().c_str()) + "</span>";

@@ -26,6 +26,7 @@
 #define RECTANGLEITEM_H
 
 #include <QGraphicsItem>
+#include <QPen>
 #include "pile_sf2.h"
 
 class GraphicsRectangleItem : public QGraphicsRectItem
@@ -65,10 +66,10 @@ public:
 
 private:
 
-    static QPen s_penBorderThin;
-    static QPen s_penBorderFat;
-    static QBrush s_brushRectangle;
-    static QBrush s_brushRectangleHovered;
+    QPen _penBorderThin;
+    QPen _penBorderFat;
+    QBrush _brushRectangle;
+    QBrush _brushRectangleHovered;
     static Pile_sf2 * s_sf2;
 
     EltID _id;

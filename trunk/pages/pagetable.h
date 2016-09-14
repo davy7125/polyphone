@@ -100,6 +100,7 @@ private:
     void addGlobal(EltID id, bool multiGlobal);
     void addDivisions(EltID id);
     void formatTable(bool multiGlobal);
+    QPixmap getPixMap(QColor backgroundColor, QColor dotColor);
     void afficheRange();
     void afficheMod(EltID id, int selectedIndex = -1);
     static void addAvailableReceiverMod(ComboBox *combo, EltID id);

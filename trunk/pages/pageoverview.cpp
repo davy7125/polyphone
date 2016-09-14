@@ -66,7 +66,7 @@ void PageOverview::afficher()
     ui->table->setColumnHidden(0, true);
 
     // Number of rows
-    EltID id = this->_tree->getFirstID();
+    EltID id = _tree->getFirstID();
     id.typeElement = _typeElement;
     ui->table->setRowCount(_sf2->count(id, false));
 
@@ -98,7 +98,7 @@ void PageOverview::afficher()
     ui->table->colorRows();
 
     // Switch page
-    this->_qStackedWidget->setCurrentWidget(this);
+    _qStackedWidget->setCurrentWidget(this);
 }
 
 QString PageOverview::fillInformation(EltID id, int row)

@@ -24,7 +24,9 @@
 
 #include "graphiquefourier.h"
 #include "sound.h"
-#include "config.h"
+#include "confmanager.h"
+#include "keynamemanager.h"
+#include "recentfilemanager.h"
 #include <QMenu>
 #include <QFileDialog>
 
@@ -34,7 +36,9 @@ GraphiqueFourier::GraphiqueFourier(QWidget * parent) : QCustomPlot(parent),
     // Configuration du graphe
     this->addGraph();
     QPen graphPen;
-    graphPen.setColor(QColor(45, 45, 45));
+    QColor color = this->palette().color(QPalette::WindowText);
+    color.setAlpha(150);
+    graphPen.setColor(color);
     graphPen.setWidthF(1);
     this->graph(0)->setPen(graphPen);
 
@@ -84,35 +88,36 @@ GraphiqueFourier::GraphiqueFourier(QWidget * parent) : QCustomPlot(parent),
     text1->position->setCoords(1.0, 0);
     text1->setTextAlignment(Qt::AlignRight);
     text1->setFont(QFont(font().family(), 8, QFont::Bold));
-    text1->setColor(QColor(0, 0, 0, 180));
+    text1->setColor(color);
     this->addItem(text1);
     text2 = new QCPItemText(this);
     text2->position->setType(QCPItemPosition::ptAxisRectRatio);
     text2->setPositionAlignment(Qt::AlignRight|Qt::AlignTop);
     text2->setTextAlignment(Qt::AlignRight);
     text2->setFont(QFont(font().family(), 7));
-    text2->setColor(QColor(0, 0, 0, 75));
+    color.setAlpha(75);
+    text2->setColor(color);
     this->addItem(text2);
     text3 = new QCPItemText(this);
     text3->position->setType(QCPItemPosition::ptAxisRectRatio);
     text3->setPositionAlignment(Qt::AlignRight|Qt::AlignTop);
     text3->setTextAlignment(Qt::AlignRight);
     text3->setFont(QFont(font().family(), 7));
-    text3->setColor(QColor(0, 0, 150, 150));
+    text3->setColor(this->palette().color(QPalette::Highlight));
     this->addItem(text3);
     text4 = new QCPItemText(this);
     text4->position->setType(QCPItemPosition::ptAxisRectRatio);
     text4->setPositionAlignment(Qt::AlignRight|Qt::AlignTop);
     text4->setTextAlignment(Qt::AlignRight);
     text4->setFont(QFont(font().family(), 7));
-    text4->setColor(QColor(0, 0, 150, 150));
+    text4->setColor(this->palette().color(QPalette::Highlight));
     this->addItem(text4);
     text5 = new QCPItemText(this);
     text5->position->setType(QCPItemPosition::ptAxisRectRatio);
     text5->setPositionAlignment(Qt::AlignRight|Qt::AlignTop);
     text5->setTextAlignment(Qt::AlignRight);
     text5->setFont(QFont(font().family(), 7));
-    text5->setColor(QColor(0, 0, 150, 150));
+    text5->setColor(this->palette().color(QPalette::Highlight));
     this->addItem(text5);
 
     // Préparation du menu contextuel
@@ -317,7 +322,7 @@ void GraphiqueFourier::setPos(qint32 posStart, qint32 posEnd, QList<double> &fre
     QString qStr5 = "";
     if (note >= 0 && note <= 128)
     {
-        qStr1 = trUtf8("note") + " " + Config::getInstance()->getKeyName(note) + ", " +
+        qStr1 = trUtf8("note") + " " + KeyNameManager::getInstance()->getKeyName(note) + ", " +
                 trUtf8("correction") + " " + QString::number(correction) + " (" + trUtf8("estimation") + ")";
         _note = note;
         _correction = correction;
@@ -337,7 +342,7 @@ void GraphiqueFourier::setPos(qint32 posStart, qint32 posEnd, QList<double> &fre
             else if (note > 128) note = 128;
             int note2 = qRound(note);
             int correction = qRound(((double)note2 - note) * 100.);
-            qStr4 += Config::getInstance()->getKeyName(note2) + "\n";
+            qStr4 += KeyNameManager::getInstance()->getKeyName(note2) + "\n";
             qStr5 += QString::number(correction) + "\n";
             pitch << note2;
             corrections << correction;
@@ -397,15 +402,13 @@ void GraphiqueFourier::mousePressEvent(QMouseEvent *event)
 }
 void GraphiqueFourier::exportPng()
 {
-    Config * conf = Config::getInstance();
-
-    QString defaultFile = conf->getLastDirectory(Config::typeFichierFrequences) + "/" +
+    QString defaultFile = RecentFileManager::getInstance()->getLastDirectory(RecentFileManager::FILE_TYPE_FREQUENCIES) + "/" +
             _name.replace(QRegExp(QString::fromUtf8("[`~*|:<>«»?/{}\"\\\\]")), "_") + ".png";
     QString fileName = QFileDialog::getSaveFileName(this, trUtf8("Exporter un graphique"),
                                                     defaultFile, trUtf8("Fichier .png (*.png)"));
     if (!fileName.isEmpty())
     {
-        conf->addFile(Config::typeFichierFrequences, fileName);
+        RecentFileManager::getInstance()->addRecentFile(RecentFileManager::FILE_TYPE_FREQUENCIES, fileName);
         exportPng(fileName);
     }
 }
@@ -450,7 +453,7 @@ void GraphiqueFourier::exportPng(QString fileName)
     this->axisRect()->setAutoMargins(QCP::msNone);
     this->axisRect()->setMargins(QMargins(0, 0, 0, 0));
     this->plotLayout()->remove(title);
-    graphPen.setColor(QColor(45, 45, 45));
+    graphPen.setColor(this->palette().color(QPalette::WindowText));
     graphPen.setWidthF(1);
     this->graph(0)->setPen(graphPen);
 

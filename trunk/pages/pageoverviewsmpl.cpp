@@ -23,7 +23,7 @@
 ***************************************************************************/
 
 #include "pageoverviewsmpl.h"
-#include "config.h"
+#include "keynamemanager.h"
 
 PageOverviewSmpl::PageOverviewSmpl(QWidget * parent) : PageOverview(PAGE_SMPL, elementSmpl, parent) {}
 
@@ -109,7 +109,7 @@ QString PageOverviewSmpl::loopLength(EltID id)
 
 QString PageOverviewSmpl::rootKey(EltID id)
 {
-    return Config::getInstance()->getKeyName(_sf2->get(id, champ_byOriginalPitch).bValue);
+    return KeyNameManager::getInstance()->getKeyName(_sf2->get(id, champ_byOriginalPitch).bValue);
 }
 
 QString PageOverviewSmpl::correction(EltID id)

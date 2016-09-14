@@ -43,7 +43,6 @@ public:
     
 private slots:
     void on_comboParameter_currentIndexChanged(int index);
-
     void on_checkLog_stateChanged(int arg1);
 
 private:

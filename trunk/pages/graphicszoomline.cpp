@@ -24,13 +24,16 @@
 
 #include "graphicszoomline.h"
 #include <QPainter>
-
-const QPen GraphicsZoomLine::s_penLine = QPen(QColor(220, 30, 30), 2, Qt::DotLine);
+#include <QApplication>
+#include <QPalette>
 
 GraphicsZoomLine::GraphicsZoomLine(QGraphicsItem *parent)  : QGraphicsItem(parent),
     _x(0),
     _y(0)
 {
+    // Pen
+    _penLine = QPen(QApplication::palette().color(QPalette::BrightText), 2, Qt::DotLine);
+
     this->setFlag(QGraphicsItem::ItemIgnoresTransformations);
 }
 
@@ -52,7 +55,7 @@ void GraphicsZoomLine::paint(QPainter *painter, const QStyleOptionGraphicsItem *
 
     if (_x != 0 || _y != 0)
     {
-        painter->setPen(s_penLine);
+        painter->setPen(_penLine);
         painter->drawLine(QPointF(0, 0), QPointF(_x, _y));
     }
 }

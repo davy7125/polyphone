@@ -31,6 +31,7 @@
 #include <QStandardItemModel>
 #include <QHeaderView>
 #include <QMouseEvent>
+#include "thememanager.h"
 
 // Classe TableComboBox pour les formes de courbes
 class TableComboBox : public QComboBox
@@ -53,12 +54,18 @@ public:
         QStandardItemModel * model = new QStandardItemModel();
         model->setColumnCount(4);
         model->setRowCount(4);
+        bool isDark = ThemeManager::getInstance()->isDark(ThemeManager::LIST_BACKGROUND, ThemeManager::LIST_TEXT);
         for (int i = 0; i < 4; i++)
         {
             for (int j = 0; j < 4; j++)
-                model->setItem(i, j, new QStandardItem(
-                                   QIcon(QString(":/icones/courbe%1").arg(4*j+i+1, 2, 10, QChar('0'))),
-                                   ""));
+            {
+                if (isDark)
+                    model->setItem(i, j, new QStandardItem(
+                                       QIcon(QString(":/icones/courbe%1_w").arg(4*j+i+1, 2, 10, QChar('0'))), ""));
+                else
+                    model->setItem(i, j, new QStandardItem(
+                                       QIcon(QString(":/icones/courbe%1").arg(4*j+i+1, 2, 10, QChar('0'))), ""));
+            }
         }
         this->setModel(model);
         view->resizeColumnsToContents();

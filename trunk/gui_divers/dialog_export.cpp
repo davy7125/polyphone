@@ -25,18 +25,21 @@
 #include "dialog_export.h"
 #include "ui_dialog_export.h"
 #include "pile_sf2.h"
-#include "config.h"
+#include "confmanager.h"
+#include "recentfilemanager.h"
 #include <QFileDialog>
+#include <QMessageBox>
 
 DialogExport::DialogExport(Pile_sf2 *sf2, QList<EltID> listSf2, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::DialogExport)
 {
+    // Preparation of the interface
     ui->setupUi(this);
     this->setAttribute(Qt::WA_DeleteOnClose, true);
     this->setWindowFlags((windowFlags() & ~Qt::WindowContextHelpButtonHint));
 
-    // Remplissage de la liste
+    // Populate the list
     foreach (EltID id, listSf2)
     {
         id.typeElement = elementSf2;
@@ -66,18 +69,18 @@ DialogExport::DialogExport(Pile_sf2 *sf2, QList<EltID> listSf2, QWidget *parent)
     }
     ui->listPresets->resizeColumnToContents(0);
 
-    int exportType = Config::getInstance()->getExportType();
+    int exportType = ConfManager::getInstance()->getValue(ConfManager::SECTION_EXPORT, "type", 0).toInt();
     if (exportType < 0 || exportType >= ui->comboFormat->count())
         exportType = 0;
     ui->comboFormat->setCurrentIndex(exportType);
     on_comboFormat_currentIndexChanged(exportType);
-    ui->lineFolder->setText(Config::getInstance()->getLastDirectory(Config::typeFichierExport));
+    ui->lineFolder->setText(RecentFileManager::getInstance()->getLastDirectory(RecentFileManager::FILE_TYPE_EXPORT));
 
-    ui->checkBank->setChecked(Config::getInstance()->getExportBank());
-    ui->checkPreset->setChecked(Config::getInstance()->getExportPreset());
-    ui->checkGM->setChecked(Config::getInstance()->getExportGM());
+    ui->checkBank->setChecked(ConfManager::getInstance()->getValue(ConfManager::SECTION_EXPORT, "bank_directory", false).toBool());
+    ui->checkPreset->setChecked(ConfManager::getInstance()->getValue(ConfManager::SECTION_EXPORT, "preset_prefix", true).toBool());
+    ui->checkGM->setChecked(ConfManager::getInstance()->getValue(ConfManager::SECTION_EXPORT, "gm_sort", false).toBool());
 
-    int exportQuality = Config::getInstance()->getExportQuality();
+    int exportQuality = ConfManager::getInstance()->getValue(ConfManager::SECTION_EXPORT, "quality", 1).toInt();
     if (exportQuality < 0 || exportQuality >= ui->comboQuality->count())
         exportQuality = 1;
     ui->comboQuality->setCurrentIndex(2 - exportQuality);
@@ -130,9 +133,9 @@ void DialogExport::on_pushAnnuler_clicked()
 void DialogExport::on_pushExport_clicked()
 {
     // Sauvegarde des paramètres
-    Config::getInstance()->setExportType(ui->comboFormat->currentIndex());
+    ConfManager::getInstance()->setValue(ConfManager::SECTION_EXPORT, "typ", ui->comboFormat->currentIndex());
     if (!ui->lineFolder->text().isEmpty() && QDir(ui->lineFolder->text()).exists())
-        Config::getInstance()->addFile(Config::typeFichierExport, ui->lineFolder->text() + "/soundfont.sfz");
+        RecentFileManager::getInstance()->addRecentFile(RecentFileManager::FILE_TYPE_EXPORT, ui->lineFolder->text() + "/soundfont.sfz");
     else
     {
         QMessageBox::warning(this, trUtf8("Attention"), trUtf8("Le répertoire n'est pas valide."));
@@ -191,10 +194,10 @@ void DialogExport::on_pushExport_clicked()
         return;
     }
 
-    Config::getInstance()->setExportPreset(ui->checkPreset->isChecked());
-    Config::getInstance()->setExportBank(ui->checkBank->isChecked());
-    Config::getInstance()->setExportGM(ui->checkGM->isChecked());
-    Config::getInstance()->setExportQuality(2 - ui->comboQuality->currentIndex());
+    ConfManager::getInstance()->setValue(ConfManager::SECTION_EXPORT, "preset_prefix", ui->checkPreset->isChecked());
+    ConfManager::getInstance()->setValue(ConfManager::SECTION_EXPORT, "bank_directory", ui->checkBank->isChecked());
+    ConfManager::getInstance()->setValue(ConfManager::SECTION_EXPORT, "gm_sort", ui->checkGM->isChecked());
+    ConfManager::getInstance()->setValue(ConfManager::SECTION_EXPORT, "quality", 2 - ui->comboQuality->currentIndex());
 
     emit(accepted(listID, ui->lineFolder->text(), ui->comboFormat->currentIndex(),
                   ui->checkPreset->isChecked(), ui->checkBank->isChecked(),

@@ -86,6 +86,25 @@
         <file alias="loop_on.png">ressources/loop_on.png</file>
         <file alias="loop_on_end.png">ressources/loop_on_end.png</file>
         <file alias="forum.png">ressources/forum.png</file>
+        <file alias="courbe01_w">ressources/courbe01_w.png</file>
+        <file alias="courbe02_w">ressources/courbe02_w.png</file>
+        <file alias="courbe03_w">ressources/courbe03_w.png</file>
+        <file alias="courbe04_w">ressources/courbe04_w.png</file>
+        <file alias="courbe05_w">ressources/courbe05_w.png</file>
+        <file alias="courbe06_w">ressources/courbe06_w.png</file>
+        <file alias="courbe07_w">ressources/courbe07_w.png</file>
+        <file alias="courbe08_w">ressources/courbe08_w.png</file>
+        <file alias="courbe09_w">ressources/courbe09_w.png</file>
+        <file alias="courbe10_w">ressources/courbe10_w.png</file>
+        <file alias="courbe11_w">ressources/courbe11_w.png</file>
+        <file alias="courbe12_w">ressources/courbe12_w.png</file>
+        <file alias="courbe13_w">ressources/courbe13_w.png</file>
+        <file alias="courbe14_w">ressources/courbe14_w.png</file>
+        <file alias="courbe15_w">ressources/courbe15_w.png</file>
+        <file alias="courbe16_w">ressources/courbe16_w.png</file>
+        <file alias="loop_off_w.png">ressources/loop_off_w.png</file>
+        <file alias="loop_on_end_w.png">ressources/loop_on_end_w.png</file>
+        <file alias="loop_on_w.png">ressources/loop_on_w.png</file>
     </qresource>
     <qresource prefix="/traductions">
         <file>ressources/traductions/polyphone_en.qm</file>
@@ -99,10 +118,6 @@
         <file alias="halloween">ressources/logo_halloween.png</file>
         <file alias="valentin">ressources/logo_valentin.png</file>
         <file alias="musique">ressources/logo_fete_musique.png</file>
-    </qresource>
-    <qresource prefix="/style">
-        <file alias="fondJaune.png">ressources/fondJaune.png</file>
-        <file alias="fond.png">ressources/fond.png</file>
     </qresource>
     <qresource prefix="/misc">
         <file>changelog</file>
