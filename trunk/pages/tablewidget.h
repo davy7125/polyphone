@@ -31,7 +31,7 @@
 #include "pile_sf2.h"
 
 
-// Classe QTableWidget avec inclusion d'une ID + effet bleu sur l'entête
+// QTableWidget an id by column, double click triggers an event and blue effect on the header
 class TableWidget : public QTableWidget
 {
     Q_OBJECT
@@ -58,6 +58,7 @@ public:
 signals:
     void actionBegin();
     void actionFinished();
+    void openElement(EltID id);
 
 protected:
     void keyPressEvent(QKeyEvent *event);
@@ -65,6 +66,7 @@ protected:
 protected slots:
     // Function reimplemented to fill all selected cells in the same time
     virtual void commitData(QWidget *editor);
+    void onSectionDoubleClicked(int index);
 
 private slots:
     void updateColors();
