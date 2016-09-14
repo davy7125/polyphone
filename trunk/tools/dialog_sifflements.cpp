@@ -24,18 +24,20 @@
 
 #include "dialog_sifflements.h"
 #include "ui_dialog_sifflements.h"
-#include "config.h"
+#include "confmanager.h"
 
 DialogSifflements::DialogSifflements(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::DialogSifflements)
 {
+    // Preparation of the interface
     ui->setupUi(this);
     this->setWindowFlags((windowFlags() & ~Qt::WindowContextHelpButtonHint));
-    Config * conf = Config::getInstance();
-    ui->spinFreq1->setValue(conf->getTools_s_sifflements_debut());
-    ui->spinFreq2->setValue(conf->getTools_s_sifflements_fin());
-    ui->doubleSpinRaideur->setValue(conf->getTools_s_sifflements_raideur());
+
+    // Recall previous values
+    ui->spinFreq1->setValue(ConfManager::getInstance()->getToolValue(ConfManager::TOOL_TYPE_SAMPLE, "sifflements", "debut", 8000).toInt());
+    ui->spinFreq2->setValue(ConfManager::getInstance()->getToolValue(ConfManager::TOOL_TYPE_SAMPLE, "sifflements", "fin", 20000).toInt());
+    ui->doubleSpinRaideur->setValue(ConfManager::getInstance()->getToolValue(ConfManager::TOOL_TYPE_SAMPLE, "sifflements", "raideur", 5.).toDouble());
 }
 
 DialogSifflements::~DialogSifflements()
@@ -45,8 +47,14 @@ DialogSifflements::~DialogSifflements()
 
 void DialogSifflements::accept()
 {
-    emit(this->accepted(this->ui->spinFreq1->value(),
-                        this->ui->spinFreq2->value(),
-                        this->ui->doubleSpinRaideur->value()));
+    // Save current values
+    ConfManager::getInstance()->setToolValue(ConfManager::TOOL_TYPE_SAMPLE, "sifflements", "debut", ui->spinFreq1->value());
+    ConfManager::getInstance()->setToolValue(ConfManager::TOOL_TYPE_SAMPLE, "sifflements", "fin", ui->spinFreq2->value());
+    ConfManager::getInstance()->setToolValue(ConfManager::TOOL_TYPE_SAMPLE, "sifflements", "raideur", ui->doubleSpinRaideur->value());
+
+    // Send accepted signal and close the window
+    emit(this->accepted(ui->spinFreq1->value(),
+                        ui->spinFreq2->value(),
+                        ui->doubleSpinRaideur->value()));
     QDialog::accept();
 }

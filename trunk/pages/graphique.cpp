@@ -27,6 +27,7 @@
 #include "sf2_types.h"
 #include <QScrollBar>
 #include <QSpinBox>
+#include <thememanager.h>
 
 Graphique::Graphique(QWidget * parent) : QCustomPlot(parent),
     zoomFlag(false),
@@ -92,54 +93,78 @@ Graphique::Graphique(QWidget * parent) : QCustomPlot(parent),
 // Méthodes publiques
 void Graphique::updateStyle()
 {
-    QList<QColor> colors = Config::getInstance()->getColors();
-    if (colors.size() != 6)
-        return;
-    // Couleur de fond
-    this->setBackground(colors.at(0));
+    // Couleurs
+    QColor backgroundColor;
+    QColor textColor;
+    QColor redColor;
+    QColor greenColor;
+    if (ThemeManager::getInstance()->isDark(ThemeManager::LIST_BACKGROUND, ThemeManager::LIST_TEXT))
+    {
+        backgroundColor = this->palette().color(QPalette::Base);
+        textColor = this->palette().color(QPalette::Text);
+        redColor = this->palette().color(QPalette::BrightText);
+        greenColor = this->palette().color(QPalette::NoRole);
+    }
+    else
+    {
+        backgroundColor = this->palette().color(QPalette::Text);
+        textColor = this->palette().color(QPalette::Base);
+        redColor = this->palette().color(QPalette::BrightText).lighter();
+        greenColor = this->palette().color(QPalette::NoRole).lighter();
+    }
+
+    this->setBackground(backgroundColor);
     QPen graphPen;
-    graphPen.setColor(colors.at(0));
+    graphPen.setColor(backgroundColor);
     this->yAxis->setBasePen(graphPen);
+
     // Couleur de l'onde
-    graphPen.setColor(colors.at(1));
+    graphPen.setColor(this->palette().color(QPalette::Highlight));
     graphPen.setWidthF(1);
     this->graph(0)->setPen(graphPen);
+
     // Couleur début de boucle
-    graphPen.setColor(colors.at(3));
+    graphPen.setColor(greenColor);
     graphPen.setWidthF(2);
     this->graph(1)->setPen(graphPen);
+
     // Couleur fin de boucle
-    graphPen.setColor(colors.at(4));
+    graphPen.setColor(redColor);
     graphPen.setWidthF(2);
     this->graph(2)->setPen(graphPen);
+
     // Ligne de zoom
-    graphPen.setColor(colors.at(5));
+    graphPen.setColor(redColor);
     graphPen.setWidthF(1);
     graphPen.setStyle(Qt::DashLine);
     this->graph(3)->setPen(graphPen);
+
     // Overlay
-    QColor colorTmp = colors.at(3);
-    colorTmp.setAlpha(175);
+    QColor colorTmp = greenColor;
+    colorTmp.setAlpha(180);
     graphPen.setColor(colorTmp);
     graphPen.setWidth(2);
     graphPen.setStyle(Qt::DotLine);
     this->graph(4)->setPen(graphPen);
-    colorTmp = colors.at(4);
-    colorTmp.setAlpha(175);
+    colorTmp = redColor;
+    colorTmp.setAlpha(180);
     graphPen.setColor(colorTmp);
     this->graph(5)->setPen(graphPen);
+
     // Couleur de la grille
-    graphPen.setColor(colors.at(2));
+    textColor.setAlpha(40);
+    graphPen.setColor(textColor);
     graphPen.setWidthF(1);
     this->yAxis->grid()->setZeroLinePen(graphPen);
     graphPen.setStyle(Qt::DotLine);
     this->yAxis->grid()->setPen(graphPen);
+
     // Curseur de lecture et message (sélection multiple)
-    penLecture.setColor(colors.at(5));
+    textColor.setAlpha(255);
+    penLecture.setColor(textColor);
     penLecture.setWidthF(1);
-    colorTmp = colors.at(5);
-    colorTmp.setAlpha(180);
-    textMultipleSelection->setColor(colorTmp);
+    textColor.setAlpha(180);
+    textMultipleSelection->setColor(textColor);
 
     this->replot();
 }
@@ -275,6 +300,7 @@ void Graphique::zoomDrag()
     double etendueY = 2. / zoomY;
     double offsetY = (2. - etendueY) * posY - 1;
     this->yAxis->setRange(offsetY, offsetY + etendueY);
+
     // Mise à jour
     this->replot();
     if (!bFromExt && qScrollX)

@@ -33,6 +33,7 @@
 #include <QFileDialog>
 #include "graphique.h"
 #include "graphiquefourier.h"
+#include "confmanager.h"
 
 Page_Smpl::Page_Smpl(QWidget *parent) :
     Page(PAGE_SMPL, parent),
@@ -43,16 +44,16 @@ Page_Smpl::Page_Smpl(QWidget *parent) :
     ui->setupUi(this);
 
     // Initialisation du graphique
-    this->ui->graphe->linkSliderX(this->ui->sliderGraphe);
-    this->ui->graphe->linkSpinBoxes(this->ui->spinStartLoop, this->ui->spinEndLoop);
+    ui->graphe->linkSliderX(ui->sliderGraphe);
+    ui->graphe->linkSpinBoxes(ui->spinStartLoop, ui->spinEndLoop);
 
     // Connexions
-    this->ui->graphe->connect(this->_synth, SIGNAL(currentPosChanged(int)), SLOT(setCurrentSample(int)));
-    this->connect(this->_synth, SIGNAL(readFinished()), SLOT(lecteurFinished()));
-    connect(this->_tree, SIGNAL(itemSelectionChanged()), this, SLOT(selectionChanged()));
+    ui->graphe->connect(_synth, SIGNAL(currentPosChanged(int)), SLOT(setCurrentSample(int)));
+    this->connect(_synth, SIGNAL(readFinished()), SLOT(lecteurFinished()));
+    connect(_tree, SIGNAL(itemSelectionChanged()), this, SLOT(selectionChanged()));
 
     // Couleur de fond du graphe Fourier
-    this->ui->grapheFourier->setBackgroundColor(this->palette().background().color());
+    ui->grapheFourier->setBackgroundColor(this->palette().background().color());
 
     // Adaptation petits écrans
     if (QApplication::desktop()->width() <= 800)
@@ -186,7 +187,7 @@ void Page_Smpl::afficher()
     else
     {
         ui->graphe->displayMultipleSelection(false);
-        QByteArray baData = this->_sf2->getData(id, champ_sampleData16);
+        QByteArray baData = _sf2->getData(id, champ_sampleData16);
         ui->graphe->setData(baData); // prend du temps
         ui->graphe->setStartLoop(startLoop, false);
         ui->graphe->setEndLoop(endLoop, false);
@@ -219,19 +220,19 @@ void Page_Smpl::afficher()
 
     // Type et lien
     EltID id2 = id;
-    this->ui->comboLink->clear();
-    this->ui->comboType->clear();
+    ui->comboLink->clear();
+    ui->comboType->clear();
 
     // Liens possibles
     if (nombreElements == 1)
     {
-        for (int i = 0; i < this->_sf2->count(id2); i++)
+        for (int i = 0; i < _sf2->count(id2); i++)
         {
             if (i != id.indexElt)
             {
                 id2.indexElt = i;
-                if (!this->_sf2->get(id2, champ_hidden).bValue)
-                    this->ui->comboLink->addItem(this->_sf2->getQstr(id2, champ_name));
+                if (!_sf2->get(id2, champ_hidden).bValue)
+                    ui->comboLink->addItem(_sf2->getQstr(id2, champ_name));
             }
         }
     }
@@ -240,19 +241,19 @@ void Page_Smpl::afficher()
     ui->comboLink->setEnabled(nombreElements == 1 && !lectureEnCours);
 
     // Types possibles et sélections
-    this->ui->comboType->addItem(trUtf8("mono"));
+    ui->comboType->addItem(trUtf8("mono"));
     if (typeLink == monoSample || typeLink == RomMonoSample)
     {
-        this->ui->comboType->setCurrentIndex(0);
-        this->ui->comboLink->setCurrentIndex(0);
-        this->ui->checkLectureLien->setEnabled(false);
-        this->ui->checkLectureLien->setChecked(false);
+        ui->comboType->setCurrentIndex(0);
+        ui->comboLink->setCurrentIndex(0);
+        ui->checkLectureLien->setEnabled(false);
+        ui->checkLectureLien->setChecked(false);
     }
     else
     {
-        this->ui->comboType->addItem(trUtf8("droit"));
-        this->ui->comboType->addItem(trUtf8("gauche"));
-        this->ui->comboType->addItem(trUtf8("lien"));
+        ui->comboType->addItem(trUtf8("droit"));
+        ui->comboType->addItem(trUtf8("gauche"));
+        ui->comboType->addItem(trUtf8("lien"));
         switch (typeLink)
         {
         case rightSample: case RomRightSample:
@@ -269,7 +270,7 @@ void Page_Smpl::afficher()
         }
         if (nombreElements == 1)
         {
-            id2.indexElt = this->_sf2->get(id, champ_wSampleLink).wValue;
+            id2.indexElt = _sf2->get(id, champ_wSampleLink).wValue;
             ui->comboLink->setCurrentIndex(ui->comboLink->findText(_sf2->getQstr(id2, champ_name)));
         }
         else
@@ -281,7 +282,7 @@ void Page_Smpl::afficher()
 
     // Liste des instruments qui utilisent le sample
     if (nombreElements > 1)
-        this->ui->labelInst->setText("-");
+        ui->labelInst->setText("-");
     else
     {
         int nbInst = 0;
@@ -294,7 +295,7 @@ void Page_Smpl::afficher()
         id3.typeElement = elementInstSmpl;
 
         // Parcours de tous les instruments
-        for (int i = 0; i < this->_sf2->count(id2); i++)
+        for (int i = 0; i < _sf2->count(id2); i++)
         {
             id2.indexElt = i;
             id3.indexElt = i;
@@ -302,17 +303,17 @@ void Page_Smpl::afficher()
             // Parcours de tous les samples liés à l'instrument
             isFound = false;
             j = 0;
-            while(j < this->_sf2->count(id3) && !isFound)
+            while(j < _sf2->count(id3) && !isFound)
             {
                 id3.indexElt2 = j;
-                if (!this->_sf2->get(id3, champ_hidden).bValue)
+                if (!_sf2->get(id3, champ_hidden).bValue)
                 {
-                    if (this->_sf2->get(id3, champ_sampleID).wValue == id.indexElt)
+                    if (_sf2->get(id3, champ_sampleID).wValue == id.indexElt)
                     {
                         // Ajout d'un instrument
                         if (nbInst)
                             qStr.append(", ");
-                        qStr.append(this->_sf2->getQstr(id2, champ_name).toStdString().c_str());
+                        qStr.append(_sf2->getQstr(id2, champ_name).toStdString().c_str());
                         nbInst++;
                         isFound = true;
                     }
@@ -326,20 +327,15 @@ void Page_Smpl::afficher()
             qStr.prepend(trUtf8("<b>Échantillon lié à l'instrument : </b>"));
         else
             qStr.prepend(trUtf8("<b>Échantillon lié aux instruments : </b>"));
-        this->ui->labelInst->setText(qStr);
+        ui->labelInst->setText(qStr);
     }
 
     if (!ui->pushLecture->isChecked())
         ui->pushLecture->setText(trUtf8("Lecture"));
 
     // Basculement affichage
-    this->_qStackedWidget->setCurrentWidget(this); // prend du temps
+    _qStackedWidget->setCurrentWidget(this); // prend du temps
     _preparation = false;
-}
-
-void Page_Smpl::updateColors()
-{
-    this->ui->graphe->updateStyle();
 }
 
 void Page_Smpl::setStartLoop()
@@ -354,7 +350,7 @@ void Page_Smpl::setStartLoop()
     QList<EltID> listID = _tree->getAllIDs();
     foreach (EltID id, listID)
     {
-        if (!this->_sf2->get(id, champ_hidden).bValue)
+        if (!_sf2->get(id, champ_hidden).bValue)
         {
             if (_sf2->get(id, champ_dwStartLoop).dwValue != val.dwValue)
                 _sf2->set(id, champ_dwStartLoop, val);
@@ -363,7 +359,7 @@ void Page_Smpl::setStartLoop()
             EltID id2 = getRepercussionID(id);
             if (id2.indexElt != -1)
             {
-                if (!this->_sf2->get(id2, champ_hidden).bValue)
+                if (!_sf2->get(id2, champ_hidden).bValue)
                 {
                     if (val.dwValue != _sf2->get(id2, champ_dwStartLoop).dwValue &&
                             val.dwValue <= _sf2->get(id2, champ_dwLength).dwValue)
@@ -384,7 +380,7 @@ void Page_Smpl::setStartLoop()
         ui->checkLectureBoucle->setEnabled(_tree->getSelectedItemsNumber() == 1);
         ui->checkLectureBoucle->setChecked(true);
     }
-    this->_mainWindow->updateDo();
+    _mainWindow->updateDo();
     if (_tree->getSelectedItemsNumber() == 1)
         ui->grapheFourier->setPos(ui->spinStartLoop->value(), ui->spinEndLoop->value());
 }
@@ -401,7 +397,7 @@ void Page_Smpl::setStartLoop(int val)
         }
 
         // Modif synth
-        this->_synth->setStartLoop(val, id2.indexElt != -1);
+        _synth->setStartLoop(val, id2.indexElt != -1);
     }
 }
 
@@ -412,12 +408,12 @@ void Page_Smpl::setEndLoop()
 
     _sf2->prepareNewActions();
     Valeur val;
-    val.dwValue = this->ui->spinEndLoop->value();
+    val.dwValue = ui->spinEndLoop->value();
     ui->spinStartLoop->setMaximum(val.dwValue);
     QList<EltID> listID = _tree->getAllIDs();
     foreach (EltID id, listID)
     {
-        if (!this->_sf2->get(id, champ_hidden).bValue)
+        if (!_sf2->get(id, champ_hidden).bValue)
         {
             if (_sf2->get(id, champ_dwEndLoop).dwValue != val.dwValue)
                 _sf2->set(id, champ_dwEndLoop, val);
@@ -426,7 +422,7 @@ void Page_Smpl::setEndLoop()
             EltID id2 = getRepercussionID(id);
             if (id2.indexElt != -1)
             {
-                if (!this->_sf2->get(id2, champ_hidden).bValue)
+                if (!_sf2->get(id2, champ_hidden).bValue)
                 {
                     if (val.dwValue != _sf2->get(id2, champ_dwEndLoop).dwValue &&
                             val.dwValue <= _sf2->get(id2, champ_dwLength).dwValue)
@@ -464,7 +460,7 @@ void Page_Smpl::setEndLoop(int val)
         }
 
         // Modif synth
-        this->_synth->setEndLoop(val, id2.indexElt != -1);
+        _synth->setEndLoop(val, id2.indexElt != -1);
     }
 }
 
@@ -480,7 +476,7 @@ void Page_Smpl::on_pushFullLength_clicked()
     QList<EltID> listID = _tree->getAllIDs();
     foreach (EltID id, listID)
     {
-        if (!this->_sf2->get(id, champ_hidden).bValue)
+        if (!_sf2->get(id, champ_hidden).bValue)
         {
             // Début de la boucle à 0
             val.dwValue = 0;
@@ -508,7 +504,7 @@ void Page_Smpl::on_pushFullLength_clicked()
             EltID id2 = getRepercussionID(id);
             if (id2.indexElt != -1)
             {
-                if (!this->_sf2->get(id2, champ_hidden).bValue)
+                if (!_sf2->get(id2, champ_hidden).bValue)
                 {
                     // Début de la boucle à 0
                     val.dwValue = 0;
@@ -541,7 +537,7 @@ void Page_Smpl::on_pushFullLength_clicked()
         ui->checkLectureBoucle->setEnabled(_tree->getSelectedItemsNumber() == 1);
         ui->checkLectureBoucle->setChecked(true);
     }
-    this->_mainWindow->updateDo();
+    _mainWindow->updateDo();
     if (_tree->getSelectedItemsNumber() == 1)
         ui->grapheFourier->setPos(ui->spinStartLoop->value(), ui->spinEndLoop->value());
 
@@ -561,7 +557,7 @@ void Page_Smpl::setRootKey()
     QList<EltID> listID = _tree->getAllIDs();
     foreach (EltID id, listID)
     {
-        if (!this->_sf2->get(id, champ_hidden).bValue)
+        if (!_sf2->get(id, champ_hidden).bValue)
         {
             if (_sf2->get(id, champ_byOriginalPitch).bValue != val.bValue)
                 _sf2->set(id, champ_byOriginalPitch, val);
@@ -570,7 +566,7 @@ void Page_Smpl::setRootKey()
             EltID id2 = getRepercussionID(id);
             if (id2.indexElt != -1)
             {
-                if (!this->_sf2->get(id2, champ_hidden).bValue)
+                if (!_sf2->get(id2, champ_hidden).bValue)
                 {
                     if (val.bValue != _sf2->get(id2, champ_byOriginalPitch).bValue)
                         _sf2->set(id2, champ_byOriginalPitch, val);
@@ -580,7 +576,7 @@ void Page_Smpl::setRootKey()
     }
 
     // Mise à jour fenêtre
-    this->_mainWindow->updateDo();
+    _mainWindow->updateDo();
 }
 
 void Page_Smpl::setRootKey(int val)
@@ -604,7 +600,7 @@ void Page_Smpl::setTune()
     QList<EltID> listID = _tree->getAllIDs();
     foreach (EltID id, listID)
     {
-        if (!this->_sf2->get(id, champ_hidden).bValue)
+        if (!_sf2->get(id, champ_hidden).bValue)
         {
             if (_sf2->get(id, champ_chPitchCorrection).cValue != val.cValue)
                 _sf2->set(id, champ_chPitchCorrection, val);
@@ -613,7 +609,7 @@ void Page_Smpl::setTune()
             EltID id2 = getRepercussionID(id);
             if (id2.indexElt != -1)
             {
-                if (!this->_sf2->get(id2, champ_hidden).bValue)
+                if (!_sf2->get(id2, champ_hidden).bValue)
                 {
                     if (val.cValue != _sf2->get(id2, champ_chPitchCorrection).bValue)
                         _sf2->set(id2, champ_chPitchCorrection, val);
@@ -623,22 +619,22 @@ void Page_Smpl::setTune()
     }
 
     // Mise à jour fenêtre
-    this->_mainWindow->updateDo();
+    _mainWindow->updateDo();
 }
 
 void Page_Smpl::setTune(int val)
 {
     // Modif synth
     if (_tree->getSelectedItemsNumber() == 1)
-        this->_synth->setPitchCorrection(val, getRepercussionID(_tree->getFirstID()).indexElt != -1);
+        _synth->setPitchCorrection(val, getRepercussionID(_tree->getFirstID()).indexElt != -1);
 }
 
 void Page_Smpl::setType(int index)
 {
     if (_preparation) return;
-    EltID id = this->_tree->getFirstID();
+    EltID id = _tree->getFirstID();
     // Ancien et nouveau types
-    SFSampleLink ancienType = this->_sf2->get(id, champ_sfSampleType).sfLinkValue;
+    SFSampleLink ancienType = _sf2->get(id, champ_sfSampleType).sfLinkValue;
     SFSampleLink nouveauType = monoSample;
     switch (index)
     {
@@ -654,65 +650,65 @@ void Page_Smpl::setType(int index)
     if (ancienType == nouveauType) return;
     _sf2->prepareNewActions();
     // Reprise de l'adresse si modification
-    id = this->_tree->getFirstID();
-    this->_preparation = true;
+    id = _tree->getFirstID();
+    _preparation = true;
     // Modification du type du sample
     Valeur val;
     val.sfLinkValue = nouveauType;
-    this->_sf2->set(id, champ_sfSampleType, val);
+    _sf2->set(id, champ_sfSampleType, val);
     if (ancienType != monoSample)
     {
         // Sample lié
         EltID id2 = id;
-        id2.indexElt = this->_sf2->get(id, champ_wSampleLink).wValue;
+        id2.indexElt = _sf2->get(id, champ_wSampleLink).wValue;
         switch (nouveauType)
         {
         case monoSample:
             // Suppression du lien vers le sample
             val.wValue = 0;
-            this->_sf2->set(id, champ_wSampleLink, val);
+            _sf2->set(id, champ_wSampleLink, val);
             // Suppression du lien du sample anciennement lié
-            this->_sf2->set(id2, champ_wSampleLink, val);
+            _sf2->set(id2, champ_wSampleLink, val);
             val.sfLinkValue = monoSample;
-            this->_sf2->set(id2, champ_sfSampleType, val);
+            _sf2->set(id2, champ_sfSampleType, val);
             // Mise à jour combobox
-            this->ui->comboType->clear();
-            this->ui->comboType->addItem(trUtf8("mono"));
-            this->ui->comboLink->setCurrentIndex(0);
-            this->ui->checkLectureLien->setEnabled(false);
-            this->ui->checkLectureLien->setChecked(false);
+            ui->comboType->clear();
+            ui->comboType->addItem(trUtf8("mono"));
+            ui->comboLink->setCurrentIndex(0);
+            ui->checkLectureLien->setEnabled(false);
+            ui->checkLectureLien->setChecked(false);
             break;
         case rightSample:
             val.sfLinkValue = leftSample;
-            this->_sf2->set(id2, champ_sfSampleType, val);
-            this->ui->checkLectureLien->setEnabled(true);
+            _sf2->set(id2, champ_sfSampleType, val);
+            ui->checkLectureLien->setEnabled(true);
             break;
         case leftSample:
             val.sfLinkValue = rightSample;
-            this->_sf2->set(id2, champ_sfSampleType, val);
-            this->ui->checkLectureLien->setEnabled(true);
+            _sf2->set(id2, champ_sfSampleType, val);
+            ui->checkLectureLien->setEnabled(true);
             break;
         case linkedSample:
             val.sfLinkValue = linkedSample;
-            this->_sf2->set(id2, champ_sfSampleType, val);
-            this->ui->checkLectureLien->setEnabled(true);
+            _sf2->set(id2, champ_sfSampleType, val);
+            ui->checkLectureLien->setEnabled(true);
             break;
         default: break;
         }
     }
-    this->_preparation = false;
-    this->_mainWindow->updateDo();
+    _preparation = false;
+    _mainWindow->updateDo();
 }
 
 void Page_Smpl::setLinkedSmpl(int index)
 {
     if (_preparation) return;
-    EltID id = this->_tree->getFirstID();
+    EltID id = _tree->getFirstID();
     // Ancien et nouveau samples liés
     EltID idLinkedOld = id;
     SFSampleLink type = _sf2->get(id, champ_sfSampleType).sfLinkValue;
     if (type != monoSample && type != RomMonoSample)
-        idLinkedOld.indexElt = this->_sf2->get(id, champ_wSampleLink).wValue;
+        idLinkedOld.indexElt = _sf2->get(id, champ_wSampleLink).wValue;
     else
         idLinkedOld.indexElt = -1; // Pas de lien initialement
     EltID idLinkedNew = id;
@@ -720,16 +716,16 @@ void Page_Smpl::setLinkedSmpl(int index)
     if (index > 0)
     {
         // Recherche à partir du nom
-        QString qStr = this->ui->comboLink->itemText(index);
+        QString qStr = ui->comboLink->itemText(index);
         int pos = 0;
-        int nbSmpl = this->_sf2->count(id);
+        int nbSmpl = _sf2->count(id);
         EltID id2 = id;
         while (idLinkedNew.indexElt == -1 && pos < nbSmpl)
         {
             id2.indexElt = pos;
-            if (!this->_sf2->get(id2, champ_hidden).bValue)
+            if (!_sf2->get(id2, champ_hidden).bValue)
             {
-                if (!this->_sf2->getQstr(id2, champ_name).compare(qStr) && pos != id.indexElt)
+                if (!_sf2->getQstr(id2, champ_name).compare(qStr) && pos != id.indexElt)
                     idLinkedNew.indexElt = pos;
             }
             pos++;
@@ -740,10 +736,10 @@ void Page_Smpl::setLinkedSmpl(int index)
     if (idLinkedNew.indexElt == idLinkedOld.indexElt) return;
     _sf2->prepareNewActions();
     // Reprise des adresses si modification
-    id = this->_tree->getFirstID();
+    id = _tree->getFirstID();
     type = _sf2->get(id, champ_sfSampleType).sfLinkValue;
     if (type != monoSample && type != RomMonoSample)
-        idLinkedOld.indexElt = this->_sf2->get(id, champ_wSampleLink).wValue;
+        idLinkedOld.indexElt = _sf2->get(id, champ_wSampleLink).wValue;
     else
         idLinkedOld.indexElt = -1; // Pas de lien initialement
     idLinkedNew = id;
@@ -751,31 +747,31 @@ void Page_Smpl::setLinkedSmpl(int index)
     if (index > 0)
     {
         // Recherche à partir du nom
-        QString qStr = this->ui->comboLink->itemText(index);
+        QString qStr = ui->comboLink->itemText(index);
         int pos = 0;
-        int nbSmpl = this->_sf2->count(id);
+        int nbSmpl = _sf2->count(id);
         EltID id2 = id;
         while (idLinkedNew.indexElt == -1 && pos < nbSmpl)
         {
             id2.indexElt = pos;
-            if (!this->_sf2->get(id2, champ_hidden).bValue)
+            if (!_sf2->get(id2, champ_hidden).bValue)
             {
-                if (!this->_sf2->getQstr(id2, champ_name).compare(qStr) && pos != id.indexElt)
+                if (!_sf2->getQstr(id2, champ_name).compare(qStr) && pos != id.indexElt)
                     idLinkedNew.indexElt = pos;
             }
             pos++;
         }
         if (idLinkedNew.indexElt < 0) return;
     }
-    this->_preparation = true;
+    _preparation = true;
     // Suppression du lien du sample anciennement lié, le cas échéant
     Valeur val;
     if (idLinkedOld.indexElt > -1)
     {
         val.sfLinkValue = monoSample;
-        this->_sf2->set(idLinkedOld, champ_sfSampleType, val);
+        _sf2->set(idLinkedOld, champ_sfSampleType, val);
         val.wValue = 0;
-        this->_sf2->set(idLinkedOld, champ_wSampleLink, val);
+        _sf2->set(idLinkedOld, champ_wSampleLink, val);
     }
     // Nouveau sample à lier ?
     if (idLinkedNew.indexElt > -1)
@@ -786,20 +782,20 @@ void Page_Smpl::setLinkedSmpl(int index)
         {
             // On délie le sample lié au sample que l'on veut lier
             EltID id2 = id;
-            id2.indexElt = this->_sf2->get(idLinkedNew, champ_wSampleLink).wValue;
+            id2.indexElt = _sf2->get(idLinkedNew, champ_wSampleLink).wValue;
             val.wValue = 0;
-            this->_sf2->set(id2, champ_wSampleLink, val);
+            _sf2->set(id2, champ_wSampleLink, val);
             val.sfLinkValue = monoSample;
-            this->_sf2->set(id2, champ_sfSampleType, val);
+            _sf2->set(id2, champ_sfSampleType, val);
         }
 
         // Lien vers le nouveau sample
         val.wValue = idLinkedNew.indexElt;
-        this->_sf2->set(id, champ_wSampleLink, val);
+        _sf2->set(id, champ_wSampleLink, val);
 
         // Lien du nouveau sample lié
         val.wValue = id.indexElt;
-        this->_sf2->set(idLinkedNew, champ_wSampleLink, val);
+        _sf2->set(idLinkedNew, champ_wSampleLink, val);
 
         // Restauration des types de liens
         bool keepTypeLink = (type == rightSample && typeLinkedNew == leftSample) ||
@@ -809,42 +805,42 @@ void Page_Smpl::setLinkedSmpl(int index)
         if (!keepTypeLink)
         {
             val.sfLinkValue = linkedSample;
-            this->_sf2->set(id, champ_sfSampleType, val);
-            this->_sf2->set(idLinkedNew, champ_sfSampleType, val);
+            _sf2->set(id, champ_sfSampleType, val);
+            _sf2->set(idLinkedNew, champ_sfSampleType, val);
 
             // Mise à jour combobox
-            this->ui->comboType->clear();
-            this->ui->comboType->addItem(trUtf8("mono"));
-            this->ui->comboType->addItem(trUtf8("droit"));
-            this->ui->comboType->addItem(trUtf8("gauche"));
-            this->ui->comboType->addItem(trUtf8("lien"));
-            this->ui->comboType->setCurrentIndex(3);
+            ui->comboType->clear();
+            ui->comboType->addItem(trUtf8("mono"));
+            ui->comboType->addItem(trUtf8("droit"));
+            ui->comboType->addItem(trUtf8("gauche"));
+            ui->comboType->addItem(trUtf8("lien"));
+            ui->comboType->setCurrentIndex(3);
         }
 
         // Ajustement rootKey et tune du sample lié
-        val = this->_sf2->get(id, champ_byOriginalPitch);
-        this->_sf2->set(idLinkedNew, champ_byOriginalPitch, val);
-        val = this->_sf2->get(id, champ_chPitchCorrection);
-        this->_sf2->set(idLinkedNew, champ_chPitchCorrection, val);
+        val = _sf2->get(id, champ_byOriginalPitch);
+        _sf2->set(idLinkedNew, champ_byOriginalPitch, val);
+        val = _sf2->get(id, champ_chPitchCorrection);
+        _sf2->set(idLinkedNew, champ_chPitchCorrection, val);
 
-        this->ui->checkLectureLien->setEnabled(true);
+        ui->checkLectureLien->setEnabled(true);
     }
     else
     {
         // Plus de lien
         val.wValue = 0;
-        this->_sf2->set(id, champ_wSampleLink, val);
+        _sf2->set(id, champ_wSampleLink, val);
         val.sfLinkValue = monoSample;
-        this->_sf2->set(id, champ_sfSampleType, val);
+        _sf2->set(id, champ_sfSampleType, val);
         // Mise à jour combobox
-        this->ui->comboType->clear();
-        this->ui->comboType->addItem(trUtf8("mono"));
-        this->ui->comboLink->setCurrentIndex(0);
-        this->ui->checkLectureLien->setEnabled(false);
-        this->ui->checkLectureLien->setChecked(false);
+        ui->comboType->clear();
+        ui->comboType->addItem(trUtf8("mono"));
+        ui->comboLink->setCurrentIndex(0);
+        ui->checkLectureLien->setEnabled(false);
+        ui->checkLectureLien->setChecked(false);
     }
-    this->_preparation = false;
-    this->_mainWindow->updateDo();
+    _preparation = false;
+    _mainWindow->updateDo();
 }
 
 void Page_Smpl::setRate(int index)
@@ -858,7 +854,7 @@ void Page_Smpl::setRate(int index)
     QList<EltID> listID = _tree->getAllIDs();
     foreach (EltID id, listID)
     {
-        if (!this->_sf2->get(id, champ_hidden).bValue)
+        if (!_sf2->get(id, champ_hidden).bValue)
         {
             quint32 echInit = _sf2->get(id, champ_dwSampleRate).dwValue;
             if (echInit != echFinal)
@@ -868,7 +864,7 @@ void Page_Smpl::setRate(int index)
             EltID id2 = getRepercussionID(id);
             if (id2.indexElt != -1)
             {
-                if (!this->_sf2->get(id2, champ_hidden).bValue)
+                if (!_sf2->get(id2, champ_hidden).bValue)
                 {
                     if (echFinal != _sf2->get(id2, champ_dwSampleRate).dwValue)
                         setRateElt(id2, echFinal);
@@ -878,7 +874,7 @@ void Page_Smpl::setRate(int index)
     }
 
     // Actualisation
-    this->_mainWindow->updateDo();
+    _mainWindow->updateDo();
     this->afficher();
 }
 
@@ -896,7 +892,7 @@ void Page_Smpl::setRateElt(EltID id, quint32 echFinal)
     // Ajustement de length, startLoop, endLoop
     val.dwValue = baData.size()/3;
     _sf2->set(id, champ_dwLength, val);
-    quint32 dwTmp = this->_sf2->get(id, champ_dwStartLoop).dwValue;
+    quint32 dwTmp = _sf2->get(id, champ_dwStartLoop).dwValue;
     dwTmp = ((quint64)dwTmp * (quint64)echFinal) / (quint64)echInit;
     val.dwValue = dwTmp;
     _sf2->set(id, champ_dwStartLoop, val);
@@ -912,7 +908,8 @@ EltID Page_Smpl::getRepercussionID(EltID id)
 
     // Recherche du sample associé, le cas échéant et si la répercussion est activée
     SFSampleLink typeLien = _sf2->get(id, champ_sfSampleType).sfLinkValue;
-    if (typeLien != monoSample && typeLien != RomMonoSample && Config::getInstance()->getRepercussionStereo())
+    if (typeLien != monoSample && typeLien != RomMonoSample &&
+            ConfManager::getInstance()->getValue(ConfManager::SECTION_NONE, "stereo_modification", false).toBool())
         id2.indexElt = _sf2->get(id, champ_wSampleLink).wValue;
     else
         id2.indexElt = -1;
@@ -932,7 +929,7 @@ void Page_Smpl::normalisation()
     {
         if (id.typeElement == elementSmpl)
         {
-            if (!this->_sf2->get(id, champ_hidden).bValue)
+            if (!_sf2->get(id, champ_hidden).bValue)
                 nbEtapes++;
         }
     }
@@ -949,22 +946,22 @@ void Page_Smpl::normalisation()
     {
         if (id.typeElement == elementSmpl)
         {
-            if (!this->_sf2->get(id, champ_hidden).bValue)
+            if (!_sf2->get(id, champ_hidden).bValue)
             {
-                QString name = this->_sf2->getQstr(id, champ_name);
+                QString name = _sf2->getQstr(id, champ_name);
                 progress.setLabelText(textProgress + name);
                 QApplication::processEvents();
                 double db = 0;
-                QByteArray baData = this->_sf2->getData(id, champ_sampleDataFull24);
+                QByteArray baData = _sf2->getData(id, champ_sampleDataFull24);
                 baData = Sound::normaliser(baData, 0.9, 24, db);
                 if (db != 0)
-                    this->_sf2->set(id, champ_sampleDataFull24, baData);
+                    _sf2->set(id, champ_sampleDataFull24, baData);
                 if (!progress.wasCanceled())
                     progress.setValue(progress.value() + 1);
                 else
                 {
                     // Mise à jour et sortie
-                    this->_mainWindow->updateDo();
+                    _mainWindow->updateDo();
                     this->afficher();
                     return;
                 }
@@ -972,7 +969,7 @@ void Page_Smpl::normalisation()
         }
     }
     // Actualisation
-    this->_mainWindow->updateDo();
+    _mainWindow->updateDo();
     this->afficher();
 }
 
@@ -988,7 +985,7 @@ void Page_Smpl::enleveBlanc()
     {
         if (id.typeElement == elementSmpl)
         {
-            if (!this->_sf2->get(id, champ_hidden).bValue)
+            if (!_sf2->get(id, champ_hidden).bValue)
                 nbEtapes++;
         }
     }
@@ -1005,9 +1002,9 @@ void Page_Smpl::enleveBlanc()
     {
         if (id.typeElement == elementSmpl)
         {
-            if (!this->_sf2->get(id, champ_hidden).bValue)
+            if (!_sf2->get(id, champ_hidden).bValue)
             {
-                QString name = this->_sf2->getQstr(id, champ_name);
+                QString name = _sf2->getQstr(id, champ_name);
                 progress.setLabelText(textProgress + name);
                 QApplication::processEvents();
                 this->enleveBlanc(id);
@@ -1016,7 +1013,7 @@ void Page_Smpl::enleveBlanc()
                 else
                 {
                     // Mise à jour et sortie
-                    this->_mainWindow->updateDo();
+                    _mainWindow->updateDo();
                     this->afficher();
                     return;
                 }
@@ -1024,32 +1021,32 @@ void Page_Smpl::enleveBlanc()
         }
     }
     // Actualisation
-    this->_mainWindow->updateDo();
+    _mainWindow->updateDo();
     this->afficher();
 }
 
 void Page_Smpl::enleveBlanc(EltID id)
 {
     quint32 pos = 0;
-    QByteArray baData = this->_sf2->getData(id, champ_sampleDataFull24);
+    QByteArray baData = _sf2->getData(id, champ_sampleDataFull24);
     baData = Sound::enleveBlanc(baData, 0.001, 24, pos);
     if (pos != 0)
     {
-        this->_sf2->set(id, champ_sampleDataFull24, baData);
+        _sf2->set(id, champ_sampleDataFull24, baData);
         // Mise à jour length, startloop, endLoop
         Valeur val;
         val.dwValue = baData.size()/3;
-        this->_sf2->set(id, champ_dwLength, val);
-        if (this->_sf2->get(id, champ_dwStartLoop).dwValue > pos)
-            val.dwValue = this->_sf2->get(id, champ_dwStartLoop).dwValue - pos;
+        _sf2->set(id, champ_dwLength, val);
+        if (_sf2->get(id, champ_dwStartLoop).dwValue > pos)
+            val.dwValue = _sf2->get(id, champ_dwStartLoop).dwValue - pos;
         else
             val.dwValue = 0;
-        this->_sf2->set(id, champ_dwStartLoop, val);
-        if (this->_sf2->get(id, champ_dwEndLoop).dwValue > pos)
-            val.dwValue = this->_sf2->get(id, champ_dwEndLoop).dwValue - pos;
+        _sf2->set(id, champ_dwStartLoop, val);
+        if (_sf2->get(id, champ_dwEndLoop).dwValue > pos)
+            val.dwValue = _sf2->get(id, champ_dwEndLoop).dwValue - pos;
         else
             val.dwValue = 0;
-        this->_sf2->set(id, champ_dwEndLoop, val);
+        _sf2->set(id, champ_dwEndLoop, val);
     }
 }
 
@@ -1065,7 +1062,7 @@ void Page_Smpl::enleveFin()
     {
         if (id.typeElement == elementSmpl)
         {
-            if (!this->_sf2->get(id, champ_hidden).bValue)
+            if (!_sf2->get(id, champ_hidden).bValue)
                 nbEtapes++;
         }
     }
@@ -1082,9 +1079,9 @@ void Page_Smpl::enleveFin()
     {
         if (id.typeElement == elementSmpl)
         {
-            if (!this->_sf2->get(id, champ_hidden).bValue)
+            if (!_sf2->get(id, champ_hidden).bValue)
             {
-                QString name = this->_sf2->getQstr(id, champ_name);
+                QString name = _sf2->getQstr(id, champ_name);
                 progress.setLabelText(textProgress + name);
                 QApplication::processEvents();
                 this->enleveFin(id);
@@ -1093,7 +1090,7 @@ void Page_Smpl::enleveFin()
                 else
                 {
                     // Mise à jour et sortie
-                    this->_mainWindow->updateDo();
+                    _mainWindow->updateDo();
                     this->afficher();
                     return;
                 }
@@ -1101,27 +1098,27 @@ void Page_Smpl::enleveFin()
         }
     }
     // Actualisation
-    this->_mainWindow->updateDo();
+    _mainWindow->updateDo();
     this->afficher();
 }
 
 void Page_Smpl::enleveFin(EltID id)
 {
-    QByteArray baData = this->_sf2->getData(id, champ_sampleDataFull24);
+    QByteArray baData = _sf2->getData(id, champ_sampleDataFull24);
     // Nombre de valeurs à enlever
     qint32 size = baData.size() / 3;
-    qint32 endLoop = this->_sf2->get(id, champ_dwEndLoop).dwValue;
+    qint32 endLoop = _sf2->get(id, champ_dwEndLoop).dwValue;
     if (endLoop == 0) return;
     if (endLoop < size - 8)
     {
         qint32 pos = size - (8 + endLoop);
         // Rognage
         baData = baData.left(baData.size() - 3 * pos);
-        this->_sf2->set(id, champ_sampleDataFull24, baData);
+        _sf2->set(id, champ_sampleDataFull24, baData);
         // Mise à jour length
         Valeur val;
         val.dwValue = baData.size() / 3;
-        this->_sf2->set(id, champ_dwLength, val);
+        _sf2->set(id, champ_dwLength, val);
     }
 }
 
@@ -1137,7 +1134,7 @@ void Page_Smpl::bouclage()
     {
         if (id.typeElement == elementSmpl)
         {
-            if (!this->_sf2->get(id, champ_hidden).bValue)
+            if (!_sf2->get(id, champ_hidden).bValue)
                 nbEtapes++;
         }
     }
@@ -1155,31 +1152,31 @@ void Page_Smpl::bouclage()
     {
         if (id.typeElement == elementSmpl)
         {
-            if (!this->_sf2->get(id, champ_hidden).bValue)
+            if (!_sf2->get(id, champ_hidden).bValue)
             {
-                QString name = this->_sf2->getQstr(id, champ_name);
+                QString name = _sf2->getQstr(id, champ_name);
                 progress.setLabelText(textProgress + name);
                 QApplication::processEvents();
 
                 // Récupération des données, échantillonnage, startloop et endloop
-                QByteArray baData = this->_sf2->getData(id, champ_sampleDataFull24);
-                quint32 dwSmplRate = this->_sf2->get(id, champ_dwSampleRate).dwValue;
-                qint32 startLoop = this->_sf2->get(id, champ_dwStartLoop).dwValue;
-                qint32 endLoop = this->_sf2->get(id, champ_dwEndLoop).dwValue;
+                QByteArray baData = _sf2->getData(id, champ_sampleDataFull24);
+                quint32 dwSmplRate = _sf2->get(id, champ_dwSampleRate).dwValue;
+                qint32 startLoop = _sf2->get(id, champ_dwStartLoop).dwValue;
+                qint32 endLoop = _sf2->get(id, champ_dwEndLoop).dwValue;
 
                 // Bouclage
                 baData = Sound::bouclage(baData, dwSmplRate, startLoop, endLoop, 24);
                 if (!baData.isEmpty())
                 {
                     // Modification des données, de length, startloop et endloop
-                    this->_sf2->set(id, champ_sampleDataFull24, baData);
+                    _sf2->set(id, champ_sampleDataFull24, baData);
                     Valeur val;
                     val.dwValue = startLoop;
-                    this->_sf2->set(id, champ_dwStartLoop, val);
+                    _sf2->set(id, champ_dwStartLoop, val);
                     val.dwValue = endLoop;
-                    this->_sf2->set(id, champ_dwEndLoop, val);
+                    _sf2->set(id, champ_dwEndLoop, val);
                     val.dwValue = baData.size() / 3;
-                    this->_sf2->set(id, champ_dwLength, val);
+                    _sf2->set(id, champ_dwLength, val);
                 }
                 else
                     samplesNotLooped << _sf2->getQstr(id, champ_name);
@@ -1189,7 +1186,7 @@ void Page_Smpl::bouclage()
                 else
                 {
                     // Mise à jour et sortie
-                    this->_mainWindow->updateDo();
+                    _mainWindow->updateDo();
                     this->afficher();
                     return;
                 }
@@ -1213,31 +1210,33 @@ void Page_Smpl::bouclage()
     }
 
     // Actualisation
-    this->_mainWindow->updateDo();
+    _mainWindow->updateDo();
     this->afficher();
 }
 
 void Page_Smpl::filtreMur()
 {
     if (_preparation) return;
-    // Fréquence de filtre
+
+    // Filter frequency
     bool ok;
-    Config * conf = Config::getInstance();
-    double rep = QInputDialog::getDouble(this, trUtf8("Question"),
-                                         trUtf8("Fréquence de coupure :"),
-                                         conf->getTools_s_mur_coupure(), 20, 96000, 2, &ok);
+    double rep = QInputDialog::getDouble(
+                this, trUtf8("Question"),
+                trUtf8("Fréquence de coupure :"),
+                ConfManager::getInstance()->getToolValue(ConfManager::TOOL_TYPE_SAMPLE, "mur", "coupure", 15000.).toDouble(),
+                20, 96000, 2, &ok);
     if (!ok) return;
-    conf->setTools_s_mur_coupure(rep);
+    ConfManager::getInstance()->setToolValue(ConfManager::TOOL_TYPE_SAMPLE, "mur", "coupure", rep);
     _sf2->prepareNewActions();
 
-    // Calcul du nombre d'étapes
+    // Compute number of steps
     int nbEtapes = 0;
     QList<EltID> listID = _tree->getAllIDs();
     foreach (EltID id, listID)
     {
         if (id.typeElement == elementSmpl)
         {
-            if (!this->_sf2->get(id, champ_hidden).bValue)
+            if (!_sf2->get(id, champ_hidden).bValue)
                 nbEtapes++;
         }
     }
@@ -1254,23 +1253,23 @@ void Page_Smpl::filtreMur()
     {
         if (id.typeElement == elementSmpl)
         {
-            if (!this->_sf2->get(id, champ_hidden).bValue)
+            if (!_sf2->get(id, champ_hidden).bValue)
             {
-                QString name = this->_sf2->getQstr(id, champ_name);
+                QString name = _sf2->getQstr(id, champ_name);
                 progress.setLabelText(textProgress + name);
                 QApplication::processEvents();
                 // Récupération des données et de l'échantillonnage
-                QByteArray baData = this->_sf2->getData(id, champ_sampleDataFull24);
-                quint32 dwSmplRate = this->_sf2->get(id, champ_dwSampleRate).dwValue;
+                QByteArray baData = _sf2->getData(id, champ_sampleDataFull24);
+                quint32 dwSmplRate = _sf2->get(id, champ_dwSampleRate).dwValue;
                 // Filtre passe bas
                 baData = Sound::bandFilter(baData, 24, dwSmplRate, rep, 0, -1);
-                this->_sf2->set(id, champ_sampleDataFull24, baData);
+                _sf2->set(id, champ_sampleDataFull24, baData);
                 if (!progress.wasCanceled())
                     progress.setValue(progress.value() + 1);
                 else
                 {
                     // Mise à jour et sortie
-                    this->_mainWindow->updateDo();
+                    _mainWindow->updateDo();
                     this->afficher();
                     return;
                 }
@@ -1278,14 +1277,14 @@ void Page_Smpl::filtreMur()
         }
     }
     // Actualisation
-    this->_mainWindow->updateDo();
+    _mainWindow->updateDo();
     this->afficher();
 }
 
 void Page_Smpl::reglerBalance()
 {
     if (_preparation) return;
-    this->_sf2->prepareNewActions();
+    _sf2->prepareNewActions();
 
     // Calcul du nombre d'étapes
     int nbEtapes = 0;
@@ -1294,10 +1293,10 @@ void Page_Smpl::reglerBalance()
     {
         if (id.typeElement == elementSmpl)
         {
-            if (!this->_sf2->get(id, champ_hidden).bValue)
+            if (!_sf2->get(id, champ_hidden).bValue)
             {
                 // Sample lié ?
-                SFSampleLink typeLien = this->_sf2->get(id, champ_sfSampleType).sfLinkValue;
+                SFSampleLink typeLien = _sf2->get(id, champ_sfSampleType).sfLinkValue;
                 if (typeLien != monoSample && typeLien != RomMonoSample)
                     nbEtapes++;
             }
@@ -1314,40 +1313,40 @@ void Page_Smpl::reglerBalance()
     progress.show();
     foreach (EltID id, listID)
     {
-        if (id.typeElement == elementSmpl && !this->_sf2->get(id, champ_hidden).bValue)
+        if (id.typeElement == elementSmpl && !_sf2->get(id, champ_hidden).bValue)
         {
             // Sample lié ?
-            SFSampleLink typeLien = this->_sf2->get(id, champ_sfSampleType).sfLinkValue;
+            SFSampleLink typeLien = _sf2->get(id, champ_sfSampleType).sfLinkValue;
             if (typeLien != monoSample && typeLien != RomMonoSample)
             {
-                QString name = this->_sf2->getQstr(id, champ_name);
+                QString name = _sf2->getQstr(id, champ_name);
                 progress.setLabelText(textProgress + name);
                 QApplication::processEvents();
                 EltID id2 = id;
-                id2.indexElt = this->_sf2->get(id, champ_wSampleLink).wValue;
+                id2.indexElt = _sf2->get(id, champ_wSampleLink).wValue;
 
                 // Récupération des données des samples
-                QByteArray baData1 = this->_sf2->getData(id, champ_sampleDataFull24);
-                QByteArray baData2 = this->_sf2->getData(id2, champ_sampleDataFull24);
+                QByteArray baData1 = _sf2->getData(id, champ_sampleDataFull24);
+                QByteArray baData2 = _sf2->getData(id2, champ_sampleDataFull24);
 
                 // Régimes permanents
                 qint32 debut1, debut2, fin1, fin2;
-                if (this->_sf2->get(id, champ_dwStartLoop).dwValue == this->_sf2->get(id, champ_dwEndLoop).dwValue)
-                    Sound::regimePermanent(baData1, this->_sf2->get(id, champ_dwSampleRate).dwValue, 24, debut1, fin1);
+                if (_sf2->get(id, champ_dwStartLoop).dwValue == _sf2->get(id, champ_dwEndLoop).dwValue)
+                    Sound::regimePermanent(baData1, _sf2->get(id, champ_dwSampleRate).dwValue, 24, debut1, fin1);
                 else
                 {
-                    debut1 = this->_sf2->get(id, champ_dwStartLoop).dwValue;
-                    fin1 = this->_sf2->get(id, champ_dwEndLoop).dwValue;
+                    debut1 = _sf2->get(id, champ_dwStartLoop).dwValue;
+                    fin1 = _sf2->get(id, champ_dwEndLoop).dwValue;
                 }
-                if (this->_sf2->get(id2, champ_dwStartLoop).dwValue == this->_sf2->get(id2, champ_dwEndLoop).dwValue)
+                if (_sf2->get(id2, champ_dwStartLoop).dwValue == _sf2->get(id2, champ_dwEndLoop).dwValue)
                 {
-                    Sound::regimePermanent(baData2, this->_sf2->get(id2, champ_dwSampleRate).dwValue,
+                    Sound::regimePermanent(baData2, _sf2->get(id2, champ_dwSampleRate).dwValue,
                                            24, debut2, fin2);
                 }
                 else
                 {
-                    debut2 = this->_sf2->get(id2, champ_dwStartLoop).dwValue;
-                    fin2 = this->_sf2->get(id2, champ_dwEndLoop).dwValue;
+                    debut2 = _sf2->get(id2, champ_dwStartLoop).dwValue;
+                    fin2 = _sf2->get(id2, champ_dwEndLoop).dwValue;
                 }
 
                 // Calcul des intensités
@@ -1363,8 +1362,8 @@ void Page_Smpl::reglerBalance()
                 baData2 = Sound::multiplier(baData2, intensiteMoy/intensite2, 24, gain2);
 
                 // Stockage
-                this->_sf2->set(id, champ_sampleDataFull24, baData1);
-                this->_sf2->set(id2, champ_sampleDataFull24, baData2);
+                _sf2->set(id, champ_sampleDataFull24, baData1);
+                _sf2->set(id2, champ_sampleDataFull24, baData2);
 
                 // Avancement barre de progression
                 if (!progress.wasCanceled())
@@ -1372,7 +1371,7 @@ void Page_Smpl::reglerBalance()
                 else
                 {
                     // Mise à jour et sortie
-                    this->_mainWindow->updateDo();
+                    _mainWindow->updateDo();
                     this->afficher();
                     return;
                 }
@@ -1380,7 +1379,7 @@ void Page_Smpl::reglerBalance()
         }
     }
     // Actualisation
-    this->_mainWindow->updateDo();
+    _mainWindow->updateDo();
     this->afficher();
 }
 
@@ -1396,76 +1395,7 @@ void Page_Smpl::sifflements()
 
 void Page_Smpl::sifflements(int freq1, int freq2, double raideur)
 {
-    // Sauvegarde des valeurs
-    Config * conf = Config::getInstance();
-    conf->setTools_s_sifflements_debut(freq1);
-    conf->setTools_s_sifflements_fin(freq2);
-    conf->setTools_s_sifflements_raideur(raideur);
     // Elimination des sifflements
-    this->_sf2->prepareNewActions();
-
-    // Calcul du nombre d'étapes
-    int nbEtapes = 0;
-    QList<EltID> listID = _tree->getAllIDs();
-    foreach (EltID id, listID)
-    {
-        if (id.typeElement == elementSmpl)
-        {
-            if (!this->_sf2->get(id, champ_hidden).bValue)
-                nbEtapes++;
-        }
-    }
-    if (nbEtapes == 0)
-        return;
-
-    // Ouverture d'une barre de progression
-    QString textProgress = trUtf8("Traitement ");
-    QProgressDialog progress("", trUtf8("Annuler"), 0, nbEtapes, this);
-    progress.setWindowModality(Qt::WindowModal);
-    progress.setFixedWidth(350);
-    progress.show();
-    foreach (EltID id, listID)
-    {
-        if (id.typeElement == elementSmpl)
-        {
-            if (!this->_sf2->get(id, champ_hidden).bValue)
-            {
-                QString name = this->_sf2->getQstr(id, champ_name);
-                progress.setLabelText(textProgress + name);
-                QApplication::processEvents();
-                QByteArray baData = this->_sf2->getData(id, champ_sampleDataFull24);
-                quint32 dwSmplRate = this->_sf2->get(id, champ_dwSampleRate).dwValue;
-                baData = Sound::sifflements(baData, dwSmplRate, 24, freq1, freq2, raideur);
-                this->_sf2->set(id, champ_sampleDataFull24, baData);
-                if (!progress.wasCanceled())
-                    progress.setValue(progress.value() + 1);
-                else
-                {
-                    // Mise à jour et sortie
-                    this->_mainWindow->updateDo();
-                    this->afficher();
-                    return;
-                }
-            }
-        }
-    }
-    // Mise à jour
-    this->_mainWindow->updateDo();
-    this->afficher();
-}
-
-void Page_Smpl::transposer()
-{
-    if (_preparation) return;
-    // Ecart en demi-tons
-    bool ok;
-    Config * conf = Config::getInstance();
-    double rep = QInputDialog::getDouble(this, trUtf8("Transposition"),
-                                         trUtf8("Écart en demi-tons :"),
-                                         conf->getTools_s_transpo_ton(), -36, 36, 2,
-                                         &ok);
-    if (!ok) return;
-    conf->setTools_s_transpo_ton(rep);
     _sf2->prepareNewActions();
 
     // Calcul du nombre d'étapes
@@ -1475,7 +1405,7 @@ void Page_Smpl::transposer()
     {
         if (id.typeElement == elementSmpl)
         {
-            if (!this->_sf2->get(id, champ_hidden).bValue)
+            if (!_sf2->get(id, champ_hidden).bValue)
                 nbEtapes++;
         }
     }
@@ -1492,37 +1422,103 @@ void Page_Smpl::transposer()
     {
         if (id.typeElement == elementSmpl)
         {
-            if (!this->_sf2->get(id, champ_hidden).bValue)
+            if (!_sf2->get(id, champ_hidden).bValue)
             {
-                QString name = this->_sf2->getQstr(id, champ_name);
+                QString name = _sf2->getQstr(id, champ_name);
                 progress.setLabelText(textProgress + name);
                 QApplication::processEvents();
-                // Récupération des données et de l'échantillonnage
-                QByteArray baData = this->_sf2->getData(id, champ_sampleDataFull24);
-                quint32 echFinal = this->_sf2->get(id, champ_dwSampleRate).dwValue;
-                // Calcul de l'échantillonnage fictif de départ
-                double echInit = (double)echFinal * pow(2, rep/12);
-                // Rééchantillonnage
-                baData = Sound::resampleMono(baData, echInit, echFinal, 24);
-                this->_sf2->set(id, champ_sampleDataFull24, baData);
-                // Ajustement de length, startLoop, endLoop
-                Valeur val;
-                val.dwValue = baData.size()/3;
-                this->_sf2->set(id, champ_dwLength, val);
-                quint32 dwTmp = this->_sf2->get(id, champ_dwStartLoop).dwValue;
-                dwTmp = ((qint64)dwTmp * (qint64)echFinal) / echInit;
-                val.dwValue = dwTmp;
-                this->_sf2->set(id, champ_dwStartLoop, val);
-                dwTmp = this->_sf2->get(id, champ_dwEndLoop).dwValue;
-                dwTmp = ((qint64)dwTmp * (qint64)echFinal) / echInit;
-                val.dwValue = dwTmp;
-                this->_sf2->set(id, champ_dwEndLoop, val);
+                QByteArray baData = _sf2->getData(id, champ_sampleDataFull24);
+                quint32 dwSmplRate = _sf2->get(id, champ_dwSampleRate).dwValue;
+                baData = Sound::sifflements(baData, dwSmplRate, 24, freq1, freq2, raideur);
+                _sf2->set(id, champ_sampleDataFull24, baData);
                 if (!progress.wasCanceled())
                     progress.setValue(progress.value() + 1);
                 else
                 {
                     // Mise à jour et sortie
-                    this->_mainWindow->updateDo();
+                    _mainWindow->updateDo();
+                    this->afficher();
+                    return;
+                }
+            }
+        }
+    }
+    // Mise à jour
+    _mainWindow->updateDo();
+    this->afficher();
+}
+
+void Page_Smpl::transposer()
+{
+    if (_preparation) return;
+
+    // Shift in semi-tones
+    bool ok;
+    double rep = QInputDialog::getDouble(
+                this, trUtf8("Transposition"),
+                trUtf8("Écart en demi-tons :"),
+                ConfManager::getInstance()->getToolValue(ConfManager::TOOL_TYPE_SAMPLE, "transposition", "ton", 12.).toDouble(),
+                -36, 36, 2, &ok);
+
+    if (!ok) return;
+    ConfManager::getInstance()->setToolValue(ConfManager::TOOL_TYPE_SAMPLE, "transposition", "ton", rep);
+    _sf2->prepareNewActions();
+
+    // Compute how many steps
+    int nbEtapes = 0;
+    QList<EltID> listID = _tree->getAllIDs();
+    foreach (EltID id, listID)
+    {
+        if (id.typeElement == elementSmpl)
+        {
+            if (!_sf2->get(id, champ_hidden).bValue)
+                nbEtapes++;
+        }
+    }
+    if (nbEtapes == 0)
+        return;
+
+    // Ouverture d'une barre de progression
+    QString textProgress = trUtf8("Traitement ");
+    QProgressDialog progress("", trUtf8("Annuler"), 0, nbEtapes, this);
+    progress.setWindowModality(Qt::WindowModal);
+    progress.setFixedWidth(350);
+    progress.show();
+    foreach (EltID id, listID)
+    {
+        if (id.typeElement == elementSmpl)
+        {
+            if (!_sf2->get(id, champ_hidden).bValue)
+            {
+                QString name = _sf2->getQstr(id, champ_name);
+                progress.setLabelText(textProgress + name);
+                QApplication::processEvents();
+                // Récupération des données et de l'échantillonnage
+                QByteArray baData = _sf2->getData(id, champ_sampleDataFull24);
+                quint32 echFinal = _sf2->get(id, champ_dwSampleRate).dwValue;
+                // Calcul de l'échantillonnage fictif de départ
+                double echInit = (double)echFinal * pow(2, rep/12);
+                // Rééchantillonnage
+                baData = Sound::resampleMono(baData, echInit, echFinal, 24);
+                _sf2->set(id, champ_sampleDataFull24, baData);
+                // Ajustement de length, startLoop, endLoop
+                Valeur val;
+                val.dwValue = baData.size()/3;
+                _sf2->set(id, champ_dwLength, val);
+                quint32 dwTmp = _sf2->get(id, champ_dwStartLoop).dwValue;
+                dwTmp = ((qint64)dwTmp * (qint64)echFinal) / echInit;
+                val.dwValue = dwTmp;
+                _sf2->set(id, champ_dwStartLoop, val);
+                dwTmp = _sf2->get(id, champ_dwEndLoop).dwValue;
+                dwTmp = ((qint64)dwTmp * (qint64)echFinal) / echInit;
+                val.dwValue = dwTmp;
+                _sf2->set(id, champ_dwEndLoop, val);
+                if (!progress.wasCanceled())
+                    progress.setValue(progress.value() + 1);
+                else
+                {
+                    // Mise à jour et sortie
+                    _mainWindow->updateDo();
                     this->afficher();
                     return;
                 }
@@ -1530,7 +1526,7 @@ void Page_Smpl::transposer()
         }
     }
     // Actualisation
-    this->_mainWindow->updateDo();
+    _mainWindow->updateDo();
     this->afficher();
 }
 
@@ -1621,30 +1617,30 @@ void Page_Smpl::initEQ()
 // Lecture
 void Page_Smpl::lecture()
 {
-    if (this->ui->pushLecture->isChecked())
+    if (ui->pushLecture->isChecked())
     {
         ui->pushLecture->setText(trUtf8("Arrêt"));
         this->noteChanged(-1, 127);
 
         // Désactivations
-        this->ui->comboLink->setEnabled(false);
-        this->ui->comboType->setEnabled(false);
-        this->ui->comboSampleRate->setEnabled(false);
-        this->ui->verticalSlider_1->setEnabled(false);
-        this->ui->verticalSlider_2->setEnabled(false);
-        this->ui->verticalSlider_3->setEnabled(false);
-        this->ui->verticalSlider_4->setEnabled(false);
-        this->ui->verticalSlider_5->setEnabled(false);
-        this->ui->verticalSlider_6->setEnabled(false);
-        this->ui->verticalSlider_7->setEnabled(false);
-        this->ui->verticalSlider_8->setEnabled(false);
-        this->ui->verticalSlider_9->setEnabled(false);
-        this->ui->verticalSlider_10->setEnabled(false);
-        this->ui->pushEgaliser->setEnabled(false);
-        this->ui->pushEgalRestore->setEnabled(false);
+        ui->comboLink->setEnabled(false);
+        ui->comboType->setEnabled(false);
+        ui->comboSampleRate->setEnabled(false);
+        ui->verticalSlider_1->setEnabled(false);
+        ui->verticalSlider_2->setEnabled(false);
+        ui->verticalSlider_3->setEnabled(false);
+        ui->verticalSlider_4->setEnabled(false);
+        ui->verticalSlider_5->setEnabled(false);
+        ui->verticalSlider_6->setEnabled(false);
+        ui->verticalSlider_7->setEnabled(false);
+        ui->verticalSlider_8->setEnabled(false);
+        ui->verticalSlider_9->setEnabled(false);
+        ui->verticalSlider_10->setEnabled(false);
+        ui->pushEgaliser->setEnabled(false);
+        ui->pushEgalRestore->setEnabled(false);
 
         // Désactivation outils sample
-        this->_mainWindow->desactiveOutilsSmpl();
+        _mainWindow->desactiveOutilsSmpl();
         this->lectureEnCours = true;
     }
     else
@@ -1663,7 +1659,7 @@ void Page_Smpl::lecteurFinished()
         return;
     }
 
-    this->ui->graphe->setCurrentSample(0);
+    ui->graphe->setCurrentSample(0);
     // Réinitialisation des boutons
     ui->comboLink->setEnabled(true);
     ui->comboType->setEnabled(true);
@@ -1682,8 +1678,8 @@ void Page_Smpl::lecteurFinished()
     ui->pushEgalRestore->setEnabled(true);
 
     // Réactivation outils sample
-    if (this->_qStackedWidget->currentWidget() == this)
-        this->_mainWindow->activeOutilsSmpl();
+    if (_qStackedWidget->currentWidget() == this)
+        _mainWindow->activeOutilsSmpl();
     if (ui->pushLecture->isChecked())
     {
         ui->pushLecture->blockSignals(true);
@@ -1692,7 +1688,7 @@ void Page_Smpl::lecteurFinished()
         ui->pushLecture->blockSignals(false);
     }
     this->lectureEnCours = false;
-    this->_mainWindow->activeOutilsSmpl();
+    _mainWindow->activeOutilsSmpl();
 }
 
 void Page_Smpl::selectionChanged()
@@ -1720,23 +1716,23 @@ void Page_Smpl::pushPlayPause()
 void Page_Smpl::on_checkLectureBoucle_stateChanged(int arg1)
 {
     // Modif synth
-    this->_synth->setLoopEnabled(arg1);
+    _synth->setLoopEnabled(arg1);
 }
 
 void Page_Smpl::setSinusEnabled(bool val)
 {
     // Modif synth
-    this->_synth->setSinusEnabled(val);
+    _synth->setSinusEnabled(val);
 }
 void Page_Smpl::setGainSample(int val)
 {
     // Modif synth
-    this->_synth->setGainSample(val);
+    _synth->setGainSample(val);
 }
 void Page_Smpl::setStereo(bool val)
 {
     // Modif synth
-    this->_synth->setStereo(val);
+    _synth->setStereo(val);
 }
 
 void Page_Smpl::getPeakFrequencies(EltID id, QList<double> &frequencies, QList<double> &factors,
@@ -1765,7 +1761,7 @@ void Page_Smpl::on_pushAutoTune_clicked()
     QList<EltID> listID = _tree->getAllIDs();
     foreach (EltID id, listID)
     {
-        if (!this->_sf2->get(id, champ_hidden).bValue && !listeSamplesProcessed.contains(id.indexElt))
+        if (!_sf2->get(id, champ_hidden).bValue && !listeSamplesProcessed.contains(id.indexElt))
         {
             listeSamplesProcessed << id.indexElt;
 
@@ -1786,7 +1782,7 @@ void Page_Smpl::on_pushAutoTune_clicked()
             EltID id2 = getRepercussionID(id);
             if (id2.indexElt != -1)
             {
-                if (!this->_sf2->get(id2, champ_hidden).bValue && !listeSamplesProcessed.contains(id2.indexElt))
+                if (!_sf2->get(id2, champ_hidden).bValue && !listeSamplesProcessed.contains(id2.indexElt))
                 {
                     listeSamplesProcessed << id2.indexElt;
 
@@ -1800,7 +1796,7 @@ void Page_Smpl::on_pushAutoTune_clicked()
     }
 
     // Mise à jour interface
-    this->_mainWindow->updateDo();
+    _mainWindow->updateDo();
     this->afficher();
 
     if (triggersMessage)
@@ -1811,7 +1807,7 @@ void Page_Smpl::on_pushAutoTune_clicked()
 void Page_Smpl::autoTune(EltID id, int &pitch, int &correction)
 {
     // Récupération des données
-    QByteArray baData = this->_sf2->getData(id, champ_sampleData16);
+    QByteArray baData = _sf2->getData(id, champ_sampleData16);
     quint32 sampleRate = _sf2->get(id, champ_dwSampleRate).dwValue;
     quint32 startLoop = _sf2->get(id, champ_dwStartLoop).dwValue;
     quint32 endLoop = _sf2->get(id, champ_dwEndLoop).dwValue;

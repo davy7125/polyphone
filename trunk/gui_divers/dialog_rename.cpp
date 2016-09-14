@@ -25,7 +25,7 @@
 
 #include "dialog_rename.h"
 #include "ui_dialog_rename.h"
-#include "config.h"
+#include "confmanager.h"
 
 DialogRename::DialogRename(bool isSample, QWidget *parent) :
     QDialog(parent),
@@ -35,20 +35,20 @@ DialogRename::DialogRename(bool isSample, QWidget *parent) :
     ui->setupUi(this);
     this->setWindowFlags((windowFlags() & ~Qt::WindowContextHelpButtonHint));
     ui->comboBox->blockSignals(true);
-    ui->comboBox->setCurrentIndex(Config::getInstance()->getBulkRenameOption());
+    ui->comboBox->setCurrentIndex(ConfManager::getInstance()->getValue(ConfManager::SECTION_BULK_RENAME, "option", 0).toInt());
     ui->comboBox->blockSignals(false);
     if (!_isSample)
         ui->comboBox->removeItem(0);
 
-    ui->lineText1->setText(Config::getInstance()->getBulkRenameText1());
-    ui->lineText2->setText(Config::getInstance()->getBulkRenameText2());
-    ui->spinPos1->setValue(Config::getInstance()->getBulkRenameInt1());
-    ui->spinPos2->setValue(Config::getInstance()->getBulkRenameInt2());
+    ui->lineText1->setText(ConfManager::getInstance()->getValue(ConfManager::SECTION_BULK_RENAME, "text_1", "").toString());
+    ui->lineText2->setText(ConfManager::getInstance()->getValue(ConfManager::SECTION_BULK_RENAME, "text_2", "").toString());
+    ui->spinPos1->setValue(ConfManager::getInstance()->getValue(ConfManager::SECTION_BULK_RENAME, "int_1", 0).toInt());
+    ui->spinPos2->setValue(ConfManager::getInstance()->getValue(ConfManager::SECTION_BULK_RENAME, "int_2", 0).toInt());
 
     on_comboBox_currentIndexChanged(ui->comboBox->currentIndex());
 
-    this->ui->lineText1->selectAll();
-    this->ui->lineText1->setFocus();
+    ui->lineText1->selectAll();
+    ui->lineText1->setFocus();
 }
 
 DialogRename::~DialogRename()
@@ -63,11 +63,11 @@ void DialogRename::accept()
                       ui->spinPos1->value(), ui->spinPos2->value());
 
     // Mémorisation des paramètres
-    Config::getInstance()->setBulkRenameOption(ui->comboBox->currentIndex() + !_isSample);
-    Config::getInstance()->setBulkRenameInt1(ui->spinPos1->value());
-    Config::getInstance()->setBulkRenameInt2(ui->spinPos2->value());
-    Config::getInstance()->setBulkRenameText1(ui->lineText1->text());
-    Config::getInstance()->setBulkRenameText2(ui->lineText2->text());
+    ConfManager::getInstance()->setValue(ConfManager::SECTION_BULK_RENAME, "option", ui->comboBox->currentIndex() + !_isSample);
+    ConfManager::getInstance()->setValue(ConfManager::SECTION_BULK_RENAME, "int_1", ui->spinPos1->value());
+    ConfManager::getInstance()->setValue(ConfManager::SECTION_BULK_RENAME, "int_2", ui->spinPos2->value());
+    ConfManager::getInstance()->setValue(ConfManager::SECTION_BULK_RENAME, "text_1", ui->lineText1->text());
+    ConfManager::getInstance()->setValue(ConfManager::SECTION_BULK_RENAME, "text_2", ui->lineText2->text());
 
     QDialog::accept();
 }

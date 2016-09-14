@@ -38,10 +38,13 @@ class DialogSifflements : public QDialog
 public:
     explicit DialogSifflements(QWidget *parent = 0);
     ~DialogSifflements();
+
 private slots:
     void accept();
+
 signals:
     void accepted(int freq1, int freq2, double raideur);
+
 private:
     Ui::DialogSifflements *ui;
 };

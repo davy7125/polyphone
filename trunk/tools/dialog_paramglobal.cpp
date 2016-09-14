@@ -24,7 +24,8 @@
 
 #include "dialog_paramglobal.h"
 #include "ui_dialog_paramglobal.h"
-#include "config.h"
+#include "confmanager.h"
+#include "keynamemanager.h"
 #include "page.h"
 
 // Constructeur, destructeur
@@ -76,106 +77,168 @@ DialogParamGlobal::DialogParamGlobal(Pile_sf2 *sf2, bool isPrst, QWidget *parent
 
     ui->setupUi(this);
     this->setWindowFlags((windowFlags() & ~Qt::WindowContextHelpButtonHint));
-    Config * conf = Config::getInstance();
     ui->comboValeur->blockSignals(true);
     for (int i = 0; i < listeDesChamps.size(); i++)
     {
         ui->comboValeur->addItem(Page::getGenName(listeDesChamps.at(i), 1 + _isPrst));
         ui->comboValeur->setItemData(i, (int)listeDesChamps.at(i));
     }
-    ui->comboValeur->setCurrentIndex(conf->getTools_global_parametre(_isPrst));
+
+    ui->comboValeur->setCurrentIndex(ConfManager::getInstance()->getToolValue(
+                                         _isPrst ? ConfManager::TOOL_TYPE_PRESET : ConfManager::TOOL_TYPE_INSTRUMENT,
+                                         "global", "parametre", 0).toInt());
     ui->comboValeur->blockSignals(false);
     ui->comboMotif->blockSignals(true);
-    ui->comboMotif->setCurrentIndex(conf->getTools_global_motif(_isPrst));
+    ui->comboMotif->setCurrentIndex(ConfManager::getInstance()->getToolValue(
+                                        _isPrst ? ConfManager::TOOL_TYPE_PRESET : ConfManager::TOOL_TYPE_INSTRUMENT,
+                                        "global", "motif", 0).toInt());
     ui->comboMotif->blockSignals(false);
     ui->doubleSpinRaideur->blockSignals(true);
-    ui->doubleSpinRaideur->setValue(conf->getTools_global_raideur(_isPrst));
+    ui->doubleSpinRaideur->setValue(ConfManager::getInstance()->getToolValue(
+                                        _isPrst ? ConfManager::TOOL_TYPE_PRESET : ConfManager::TOOL_TYPE_INSTRUMENT,
+                                        "global", "raideur", 50.).toDouble());
     ui->doubleSpinRaideur->blockSignals(false);
     ui->doubleSpinMin->blockSignals(true);
-    ui->doubleSpinMin->setValue(conf->getTools_global_mini(_isPrst));
+    ui->doubleSpinMin->setValue(ConfManager::getInstance()->getToolValue(
+                                    _isPrst ? ConfManager::TOOL_TYPE_PRESET : ConfManager::TOOL_TYPE_INSTRUMENT,
+                                    "global", "mini", 0.).toDouble());
     ui->doubleSpinMin->blockSignals(false);
     ui->doubleSpinMax->blockSignals(true);
-    ui->doubleSpinMax->setValue(conf->getTools_global_maxi(_isPrst));
+    ui->doubleSpinMax->setValue(ConfManager::getInstance()->getToolValue(
+                                    _isPrst ? ConfManager::TOOL_TYPE_PRESET : ConfManager::TOOL_TYPE_INSTRUMENT,
+                                    "global", "maxi", 0.).toDouble());
     ui->doubleSpinMax->blockSignals(false);
     ui->comboModif->blockSignals(true);
-    ui->comboModif->setCurrentIndex(conf->getTools_global_modification(_isPrst));
+    ui->comboModif->setCurrentIndex(ConfManager::getInstance()->getToolValue(
+                                        _isPrst ? ConfManager::TOOL_TYPE_PRESET : ConfManager::TOOL_TYPE_INSTRUMENT,
+                                        "global", "modification", 0).toInt());
     ui->comboModif->blockSignals(false);
-    ui->graphParamGlobal->setMinMax(conf->getTools_global_mini(_isPrst),
-                                    conf->getTools_global_maxi(_isPrst));
-    ui->spinVelMin->setValue(qMin(conf->getTools_global_miniVel(_isPrst), conf->getTools_global_maxiVel(_isPrst)));
-    ui->spinVelMax->setValue(qMax(conf->getTools_global_maxiVel(_isPrst), conf->getTools_global_miniVel(_isPrst)));
+    ui->graphParamGlobal->setMinMax(ConfManager::getInstance()->getToolValue(
+                                        _isPrst ? ConfManager::TOOL_TYPE_PRESET : ConfManager::TOOL_TYPE_INSTRUMENT,
+                                        "global", "mini", 0.).toDouble(),
+                                    ConfManager::getInstance()->getToolValue(
+                                        _isPrst ? ConfManager::TOOL_TYPE_PRESET : ConfManager::TOOL_TYPE_INSTRUMENT,
+                                        "global", "maxi", 1.).toDouble());
+    ui->spinVelMin->setValue(qMin(ConfManager::getInstance()->getToolValue(
+                                      _isPrst ? ConfManager::TOOL_TYPE_PRESET : ConfManager::TOOL_TYPE_INSTRUMENT,
+                                      "global", "miniVel", 0).toInt(),
+                                  ConfManager::getInstance()->getToolValue(
+                                      _isPrst ? ConfManager::TOOL_TYPE_PRESET : ConfManager::TOOL_TYPE_INSTRUMENT,
+                                      "global", "maxiVel", 127).toInt()));
+    ui->spinVelMax->setValue(qMax(ConfManager::getInstance()->getToolValue(
+                                      _isPrst ? ConfManager::TOOL_TYPE_PRESET : ConfManager::TOOL_TYPE_INSTRUMENT,
+                                      "global", "miniVel", 0).toInt(),
+                                  ConfManager::getInstance()->getToolValue(
+                                      _isPrst ? ConfManager::TOOL_TYPE_PRESET : ConfManager::TOOL_TYPE_INSTRUMENT,
+                                      "global", "maxiVel", 127).toInt()));
 
     // Dessin
-    this->indexMotifChanged(this->ui->comboMotif->currentIndex());
-    ui->graphParamGlobal->setMinMaxX(conf->getTools_global_miniX(_isPrst),
-                                     conf->getTools_global_maxiX(_isPrst));
-    this->ui->graphParamGlobal->setValues(conf->getTools_global_courbe(_isPrst));
+    this->indexMotifChanged(ui->comboMotif->currentIndex());
+    ui->graphParamGlobal->setMinMaxX(ConfManager::getInstance()->getToolValue(
+                                         _isPrst ? ConfManager::TOOL_TYPE_PRESET : ConfManager::TOOL_TYPE_INSTRUMENT,
+                                         "global", "miniX", 0).toInt(),
+                                     ConfManager::getInstance()->getToolValue(
+                                         _isPrst ? ConfManager::TOOL_TYPE_PRESET : ConfManager::TOOL_TYPE_INSTRUMENT,
+                                         "global", "maxiX", 140).toInt());
+    ui->graphParamGlobal->setValues(getStoredCurve());
 
     // Zone du clavier
-    ui->graphParamGlobal->setEtendueClavier(conf->getKeyboardType());
+    ui->graphParamGlobal->setEtendueClavier(ConfManager::getInstance()->getValue(ConfManager::SECTION_KEYBOARD, "type", 0).toInt());
 }
 DialogParamGlobal::~DialogParamGlobal()
 {
     delete ui;
 }
 
+QVector<double> DialogParamGlobal::getStoredCurve()
+{
+    QList<QVariant> listTmp = ConfManager::getInstance()->getToolValue(
+                _isPrst ? ConfManager::TOOL_TYPE_PRESET : ConfManager::TOOL_TYPE_INSTRUMENT,
+                "global", "courbe", QList<QVariant>()).toList();
+    QVector<double> vectRet;
+    vectRet.resize(listTmp.size());
+    for (int i = 0; i < listTmp.size(); i++)
+        vectRet[i] = listTmp.at(i).toDouble();
+    return vectRet;
+}
+
+void DialogParamGlobal::storeCurve(QVector<double> val)
+{
+    QVariantList listTmp;
+    for (int i = 0; i < val.size(); i++)
+        listTmp << val.at(i);
+    ConfManager::getInstance()->setToolValue(
+                _isPrst ? ConfManager::TOOL_TYPE_PRESET : ConfManager::TOOL_TYPE_INSTRUMENT,
+                "global", "courbe", listTmp);
+}
+
 void DialogParamGlobal::indexMotifChanged(int index)
 {
     if (index == 3 || index == 4)
     {
-        this->ui->label_6->setText(trUtf8("Raideur"));
-        this->ui->doubleSpinRaideur->setEnabled(true);
+        ui->label_6->setText(trUtf8("Raideur"));
+        ui->doubleSpinRaideur->setEnabled(true);
     }
     else if (index == 5)
     {
-        this->ui->label_6->setText(trUtf8("Répartition"));
-        this->ui->doubleSpinRaideur->setEnabled(true);
+        ui->label_6->setText(trUtf8("Répartition"));
+        ui->doubleSpinRaideur->setEnabled(true);
     }
     else
     {
-        this->ui->label_6->setText("-");
-        this->ui->doubleSpinRaideur->setEnabled(false);
+        ui->label_6->setText("-");
+        ui->doubleSpinRaideur->setEnabled(false);
     }
-    this->ui->graphParamGlobal->indexMotifChanged(index);
+    ui->graphParamGlobal->indexMotifChanged(index);
 }
 void DialogParamGlobal::raideurChanged(double value)
 {
-    this->ui->graphParamGlobal->raideurChanged(value);
+    ui->graphParamGlobal->raideurChanged(value);
 }
 void DialogParamGlobal::minChanged(double value)
 {
-    this->ui->graphParamGlobal->setMinMax(value, this->ui->doubleSpinMax->value());
+    ui->graphParamGlobal->setMinMax(value, ui->doubleSpinMax->value());
 }
 void DialogParamGlobal::maxChanged(double value)
 {
-    this->ui->graphParamGlobal->setMinMax(this->ui->doubleSpinMin->value(), value);
+    ui->graphParamGlobal->setMinMax(ui->doubleSpinMin->value(), value);
 }
 void DialogParamGlobal::accept()
 {
     // Sauvegarde des paramètres
-    Config * conf = Config::getInstance();
-    conf->setTools_global_courbe(_isPrst, this->ui->graphParamGlobal->getValues());
-    conf->setTools_global_motif(_isPrst, this->ui->comboMotif->currentIndex());
-    conf->setTools_global_raideur(_isPrst, this->ui->doubleSpinRaideur->value());
-    conf->setTools_global_mini(_isPrst, this->ui->doubleSpinMin->value());
-    conf->setTools_global_maxi(_isPrst, this->ui->doubleSpinMax->value());
-    conf->setTools_global_modification(_isPrst, this->ui->comboModif->currentIndex());
-    conf->setTools_global_parametre(_isPrst, this->ui->comboValeur->currentIndex());
-    conf->setTools_global_miniX(_isPrst, this->ui->graphParamGlobal->getXmin());
-    conf->setTools_global_maxiX(_isPrst, this->ui->graphParamGlobal->getXmax());
-    conf->setTools_global_miniVel(_isPrst, this->ui->spinVelMin->value());
-    conf->setTools_global_maxiVel(_isPrst, this->ui->spinVelMax->value());
+    storeCurve(ui->graphParamGlobal->getValues());
+
+    ConfManager::getInstance()->setToolValue(_isPrst ? ConfManager::TOOL_TYPE_PRESET : ConfManager::TOOL_TYPE_INSTRUMENT,
+                                             "global", "motif", ui->comboMotif->currentIndex());
+    ConfManager::getInstance()->setToolValue(_isPrst ? ConfManager::TOOL_TYPE_PRESET : ConfManager::TOOL_TYPE_INSTRUMENT,
+                                             "global", "raideur", ui->doubleSpinRaideur->value());
+    ConfManager::getInstance()->setToolValue(_isPrst ? ConfManager::TOOL_TYPE_PRESET : ConfManager::TOOL_TYPE_INSTRUMENT,
+                                             "global", "mini", ui->doubleSpinMin->value());
+    ConfManager::getInstance()->setToolValue(_isPrst ? ConfManager::TOOL_TYPE_PRESET : ConfManager::TOOL_TYPE_INSTRUMENT,
+                                             "global", "maxi", ui->doubleSpinMax->value());
+    ConfManager::getInstance()->setToolValue(_isPrst ? ConfManager::TOOL_TYPE_PRESET : ConfManager::TOOL_TYPE_INSTRUMENT,
+                                             "global", "modification", ui->comboModif->currentIndex());
+    ConfManager::getInstance()->setToolValue(_isPrst ? ConfManager::TOOL_TYPE_PRESET : ConfManager::TOOL_TYPE_INSTRUMENT,
+                                             "global", "parametre", ui->comboValeur->currentIndex());
+    ConfManager::getInstance()->setToolValue(_isPrst ? ConfManager::TOOL_TYPE_PRESET : ConfManager::TOOL_TYPE_INSTRUMENT,
+                                             "global", "miniX", ui->graphParamGlobal->getXmin());
+    ConfManager::getInstance()->setToolValue(_isPrst ? ConfManager::TOOL_TYPE_PRESET : ConfManager::TOOL_TYPE_INSTRUMENT,
+                                             "global", "maxiX", ui->graphParamGlobal->getXmax());
+    ConfManager::getInstance()->setToolValue(_isPrst ? ConfManager::TOOL_TYPE_PRESET : ConfManager::TOOL_TYPE_INSTRUMENT,
+                                             "global", "miniVel", ui->spinVelMin->value());
+    ConfManager::getInstance()->setToolValue(_isPrst ? ConfManager::TOOL_TYPE_PRESET : ConfManager::TOOL_TYPE_INSTRUMENT,
+                                             "global", "maxiVel", ui->spinVelMax->value());
 
     // Récupération et mise en forme des modificateurs
-    QVector<double> dValues = this->ui->graphParamGlobal->getValues();
-    double dMin = this->ui->doubleSpinMin->value();
-    double dMax = this->ui->doubleSpinMax->value();
+    QVector<double> dValues = ui->graphParamGlobal->getValues();
+    double dMin = ui->doubleSpinMin->value();
+    double dMax = ui->doubleSpinMax->value();
     for (int i = 0; i < dValues.size(); i++)
         dValues[i] = dValues.at(i) * (dMax - dMin) + dMin;
-    emit(accepted(dValues, this->ui->comboModif->currentIndex(),
-                  this->ui->comboValeur->itemData(this->ui->comboValeur->currentIndex()).toInt(),
-                  this->ui->spinVelMin->value(),
-                  this->ui->spinVelMax->value()));
+    emit(accepted(dValues, ui->comboModif->currentIndex(),
+                  ui->comboValeur->itemData(ui->comboValeur->currentIndex()).toInt(),
+                  ui->spinVelMin->value(),
+                  ui->spinVelMax->value()));
     QDialog::accept();
 }
 
@@ -194,10 +257,14 @@ GraphParamGlobal::GraphParamGlobal(QWidget * parent) : QCustomPlot(parent),
     labelCoord(NULL),
     previousX(-1)
 {
+    this->setBackground(this->palette().color(QPalette::Base));
+
     // Layer pour la position des octaves
     this->addGraph();
     QPen graphPen;
-    graphPen.setColor(QColor(0, 0, 0, 40));
+    QColor color = this->palette().color(QPalette::Text);
+    color.setAlpha(40);
+    graphPen.setColor(color);
     graphPen.setWidth(1);
     this->graph(0)->setPen(graphPen);
     this->graph(0)->setLineStyle(QCPGraph::lsLine);
@@ -206,6 +273,7 @@ GraphParamGlobal::GraphParamGlobal(QWidget * parent) : QCustomPlot(parent),
     y.resize(20);
     y[0] = y[3] = y[4] = y[7] = y[8] = y[11] = y[12] = y[15] = y[16] = y[19] =  2;
     y[1] = y[2] = y[5] = y[6] = y[9] = y[10] = y[13] = y[14] = y[17] = y[18] = -1;
+    color.setAlpha(180);
     for (int i = 0; i < 10; i++)
     {
         int note = 12 * (i + 1);
@@ -216,9 +284,9 @@ GraphParamGlobal::GraphParamGlobal(QWidget * parent) : QCustomPlot(parent),
         textLabel->setPositionAlignment(Qt::AlignBottom|Qt::AlignHCenter);
         textLabel->position->setType(QCPItemPosition::ptPlotCoords);
         textLabel->position->setCoords(pos, 0);
-        textLabel->setText(Config::getInstance()->getKeyName(note));
+        textLabel->setText(KeyNameManager::getInstance()->getKeyName(note));
         textLabel->setFont(QFont(font().family(), 8));
-        textLabel->setColor(QColor(40, 40, 40));
+        textLabel->setColor(color);
     }
     this->graph(0)->setData(x, y);
 
@@ -232,14 +300,16 @@ GraphParamGlobal::GraphParamGlobal(QWidget * parent) : QCustomPlot(parent),
     graphPen.setWidth(0);
     this->graph(1)->setPen(graphPen);
     this->graph(1)->setData(x, y);
-    this->graph(1)->setBrush(QBrush(QColor(255, 255, 0, 30)));
+    color = this->palette().color(QPalette::Highlight);
+    color.setAlpha(60);
+    this->graph(1)->setBrush(QBrush(color));
     this->addGraph();
     this->graph(2)->setPen(graphPen);
     this->graph(1)->setChannelFillGraph(this->graph(2));
 
     // Layer des valeurs
     this->addGraph();
-    graphPen.setColor(QColor(100, 130, 250));
+    graphPen.setColor(this->palette().color(QPalette::Highlight));
     graphPen.setWidth(2);
     this->graph(3)->setPen(graphPen);
     this->graph(3)->setLineStyle(QCPGraph::lsNone);
@@ -249,7 +319,7 @@ GraphParamGlobal::GraphParamGlobal(QWidget * parent) : QCustomPlot(parent),
 
     // Layer aperçu valeurs
     this->addGraph();
-    graphPen.setColor(QColor(0, 0, 0));
+    graphPen.setColor(this->palette().color(QPalette::Text));
     graphPen.setWidth(1);
     this->graph(4)->setPen(graphPen);
     this->graph(4)->setScatterStyle(QCPScatterStyle::ssPlus);
@@ -260,7 +330,7 @@ GraphParamGlobal::GraphParamGlobal(QWidget * parent) : QCustomPlot(parent),
     QFont fontLabel = QFont(font().family(), 9);
     fontLabel.setBold(true);
     labelCoord->setFont(fontLabel);
-    labelCoord->setColor(QColor(0, 0, 0));
+    labelCoord->setColor(this->palette().color(QPalette::Text));
 
     // Axes
     this->xAxis->setRange(0, this->nbPoints);
@@ -491,13 +561,13 @@ void GraphParamGlobal::writeMotif()
         double alpha = 1.0 / (pow(baseExp, this->xMax - this->xMin) - 1.0);
         for (int i = this->xMin; i < this->xMax; i++)
             this->dValues[i] = alpha * (pow(baseExp, i - this->xMin) - 1.0);
-        }break;
+    }break;
     case FORME_EXP_DESC:{
         double baseExp = 1. + 1.0 / (101.0 - this->raideurExp);
         double alpha = 1.0 / (pow(baseExp, this->xMin - this->xMax) - 1.0);
         for (int i = this->xMin; i < this->xMax; i++)
             this->dValues[i] = 1.0 - alpha * (pow(baseExp, this->xMin - i) - 1.0);
-        }break;
+    }break;
     case FORME_ALEATOIRE:
         for (int i = 0; i < this->nbPoints; i++)
         {
@@ -578,7 +648,7 @@ void GraphParamGlobal::afficheCoord(double x, double y)
             labelCoord->setPositionAlignment(Qt::AlignTop    | Qt::AlignHCenter);
         else
             labelCoord->setPositionAlignment(Qt::AlignBottom | Qt::AlignHCenter);
-        labelCoord->setText(Config::getInstance()->getKeyName(qRound((double)x * 128. / this->nbPoints)) + ":" +
+        labelCoord->setText(KeyNameManager::getInstance()->getKeyName(qRound((double)x * 128. / this->nbPoints)) + ":" +
                             QString::number(yMin + (yMax - yMin) * y, 'f', 2));
         // Ajustement position
         QFontMetrics fm(labelCoord->font());

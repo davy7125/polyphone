@@ -23,7 +23,7 @@
 ***************************************************************************/
 
 #include "graphicsviewrange.h"
-#include "config.h"
+#include "keynamemanager.h"
 #include "graphicssimpletextitem.h"
 #include "graphicsrectangleitem.h"
 #include "graphicslegenditem.h"
@@ -36,8 +36,6 @@
 const double GraphicsViewRange::WIDTH = 128.0;
 const double GraphicsViewRange::MARGIN = 0.5;
 const double GraphicsViewRange::OFFSET = -0.5;
-const QColor GraphicsViewRange::LINE_COLOR = QColor(220, 220, 220);
-const QColor GraphicsViewRange::TEXT_COLOR = QColor(100, 100, 100);
 
 // Z values (all GraphicsItem being at the top level)
 //   0: grid
@@ -63,6 +61,13 @@ GraphicsViewRange::GraphicsViewRange(QWidget *parent) : QGraphicsView(parent),
     _posY(0.5),
     _displayedRect(OFFSET, OFFSET, WIDTH, WIDTH)
 {
+    // Colors
+    QColor color = this->palette().color(QPalette::Text);
+    color.setAlpha(180);
+    _textColor = color;
+    color.setAlpha(40);
+    _lineColor = color;
+
     // Configuration
     this->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
     this->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
@@ -93,7 +98,7 @@ GraphicsViewRange::~GraphicsViewRange()
 void GraphicsViewRange::initItems()
 {
     // Vertical lines
-    QPen penVerticalLines(LINE_COLOR, 1);
+    QPen penVerticalLines(_lineColor, 1);
     penVerticalLines.setCosmetic(true);
     for (int note = 12; note <= 120; note += 12)
     {
@@ -104,14 +109,14 @@ void GraphicsViewRange::initItems()
         GraphicsSimpleTextItem * text = new GraphicsSimpleTextItem(Qt::AlignHCenter + Qt::AlignBottom);
         _scene->addItem(text);
         text->setZValue(100);
-        text->setBrush(TEXT_COLOR);
-        text->setText(Config::getInstance()->getKeyName(note));
+        text->setBrush(_textColor);
+        text->setText(KeyNameManager::getInstance()->getKeyName(note));
         text->setPos(note, OFFSET + WIDTH);
         _bottomLabels << text;
     }
 
     // Horizontal lines
-    QPen penHorizontalLines(LINE_COLOR, 1, Qt::DotLine);
+    QPen penHorizontalLines(_lineColor, 1, Qt::DotLine);
     penHorizontalLines.setCosmetic(true);
     for (int vel = 10; vel <= 120; vel += 10)
     {
@@ -122,7 +127,7 @@ void GraphicsViewRange::initItems()
         GraphicsSimpleTextItem * text = new GraphicsSimpleTextItem(Qt::AlignLeft + Qt::AlignVCenter);
         _scene->addItem(text);
         text->setZValue(100);
-        text->setBrush(TEXT_COLOR);
+        text->setBrush(_textColor);
         text->setText(QString::number(vel));
         text->setPos(OFFSET, OFFSET + WIDTH - vel);
         _leftLabels << text;

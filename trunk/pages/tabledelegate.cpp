@@ -2,9 +2,11 @@
 #include "spinboxkey.h"
 #include "spinboxrange.h"
 #include "comboboxloopmode.h"
-#include "config.h"
+#include "keynamemanager.h"
+#include "thememanager.h"
 #include <QTableWidget>
 #include <QApplication>
+#include <QPainter>
 
 const char * TableDelegate::DECO_PROPERTY = "deco";
 
@@ -127,7 +129,7 @@ void TableDelegate::setEditorData(QWidget *editor, const QModelIndex &index) con
         if (index.data().isNull())
             spin->setValue(60); // Default value
         else
-            spin->setValue(Config::getInstance()->getKeyNum(index.data().toString()));
+            spin->setValue(KeyNameManager::getInstance()->getKeyNum(index.data().toString()));
     }
     else if (nbDecimales > 0)
     {
@@ -160,18 +162,28 @@ void TableDelegate::setModelData(QWidget *editor, QAbstractItemModel *model, con
         int currentData = combobox->itemData(combobox->currentIndex(), Qt::UserRole).toInt();
         model->setData(index, currentData, Qt::UserRole);
 
+        bool isDark = ThemeManager::getInstance()->isDark(ThemeManager::LIST_BACKGROUND, ThemeManager::LIST_TEXT);
         switch (currentData)
         {
         case 0:
-            model->setData(index, QImage(":/icones/loop_off.png"), Qt::DecorationRole);
+            if (isDark)
+                model->setData(index, QImage(":/icones/loop_off_w.png"), Qt::DecorationRole);
+            else
+                model->setData(index, QImage(":/icones/loop_off.png"), Qt::DecorationRole);
             editor->setProperty(DECO_PROPERTY, QVariant());
             break;
         case 1:
-            model->setData(index, QImage(":/icones/loop_on.png"), Qt::DecorationRole);
+            if (isDark)
+                model->setData(index, QImage(":/icones/loop_on_w.png"), Qt::DecorationRole);
+            else
+                model->setData(index, QImage(":/icones/loop_on.png"), Qt::DecorationRole);
             editor->setProperty(DECO_PROPERTY, QVariant());
             break;
         case 3:
-            model->setData(index, QImage(":/icones/loop_on_end.png"), Qt::DecorationRole);
+            if (isDark)
+                model->setData(index, QImage(":/icones/loop_on_end_w.png"), Qt::DecorationRole);
+            else
+                model->setData(index, QImage(":/icones/loop_on_end.png"), Qt::DecorationRole);
             editor->setProperty(DECO_PROPERTY, QVariant());
             break;
         }

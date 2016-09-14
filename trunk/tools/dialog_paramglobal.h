@@ -53,6 +53,9 @@ signals:
     void accepted(QVector<double> dValues, int typeModif, int param, int minVel, int maxVel);
 
 private:
+    QVector<double> getStoredCurve();
+    void storeCurve(QVector<double> val);
+
     Pile_sf2 * _sf2;
     Ui::DialogParamGlobal *ui;
     EltID _initialID;

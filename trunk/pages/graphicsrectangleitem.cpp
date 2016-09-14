@@ -24,21 +24,29 @@
 
 #include "graphicsrectangleitem.h"
 #include <QGraphicsScene>
+#include <QApplication>
 #include "config.h"
 
-QPen   GraphicsRectangleItem::s_penBorderThin         = QPen  (QColor(100, 170, 140, 180), 1);
-QPen   GraphicsRectangleItem::s_penBorderFat          = QPen  (QColor(100, 170, 140, 255), 3);
-QBrush GraphicsRectangleItem::s_brushRectangle        = QBrush(QColor(  0, 200, 100,  60));
-QBrush GraphicsRectangleItem::s_brushRectangleHovered = QBrush(QColor( 70, 255, 100, 120));
 Pile_sf2 * GraphicsRectangleItem::s_sf2 = NULL;
 
 GraphicsRectangleItem::GraphicsRectangleItem(EltID id, QGraphicsItem *parent) : QGraphicsRectItem(parent),
     _id(id),
     _editingMode(NONE)
 {
+    // Initialize pens and brushes
+    QColor color = QApplication::palette().color(QPalette::Highlight);
+    color.setAlpha(180);
+    _penBorderThin = QPen(color, 1);
+    color.setAlpha(255);
+    _penBorderFat = QPen(color, 3);
+    color.setAlpha(60);
+    _brushRectangle = QBrush(color);
+    color.setAlpha(120);
+    _brushRectangleHovered = QBrush(color);
+
     initialize(id);
-    s_penBorderThin.setCosmetic(true);
-    s_penBorderFat.setCosmetic(true);
+    _penBorderThin.setCosmetic(true);
+    _penBorderFat.setCosmetic(true);
 
     this->setRect(getRectF());
 }
@@ -107,10 +115,10 @@ void GraphicsRectangleItem::paint(QPainter *painter, const QStyleOptionGraphicsI
 {
     // Draw base rectangle with a background color and a thin border
     if (_editingMode == NONE)
-        this->setBrush(s_brushRectangle);
+        this->setBrush(_brushRectangle);
     else
-        this->setBrush(s_brushRectangleHovered);
-    this->setPen(s_penBorderThin);
+        this->setBrush(_brushRectangleHovered);
+    this->setPen(_penBorderThin);
     QGraphicsRectItem::paint(painter, option, widget);
 
     QRectF rectF = this->rect();
@@ -120,26 +128,26 @@ void GraphicsRectangleItem::paint(QPainter *painter, const QStyleOptionGraphicsI
         // Nothing else
         break;
     case MOVE_ALL:
-        painter->setPen(s_penBorderFat);
+        painter->setPen(_penBorderFat);
         painter->drawLine(rectF.topRight(), rectF.bottomRight());
         painter->drawLine(rectF.topLeft(), rectF.bottomLeft());
         painter->drawLine(rectF.topLeft(), rectF.topRight());
         painter->drawLine(rectF.bottomLeft(), rectF.bottomRight());
         break;
     case MOVE_RIGHT:
-        painter->setPen(s_penBorderFat);
+        painter->setPen(_penBorderFat);
         painter->drawLine(rectF.topRight(), rectF.bottomRight());
         break;
     case MOVE_LEFT:
-        painter->setPen(s_penBorderFat);
+        painter->setPen(_penBorderFat);
         painter->drawLine(rectF.topLeft(), rectF.bottomLeft());
         break;
     case MOVE_TOP:
-        painter->setPen(s_penBorderFat);
+        painter->setPen(_penBorderFat);
         painter->drawLine(rectF.topLeft(), rectF.topRight());
         break;
     case MOVE_BOTTOM:
-        painter->setPen(s_penBorderFat);
+        painter->setPen(_penBorderFat);
         painter->drawLine(rectF.bottomLeft(), rectF.bottomRight());
         break;
     }
@@ -215,7 +223,8 @@ GraphicsRectangleItem::EditingMode GraphicsRectangleItem::setHover(bool isHovere
 
 EltID GraphicsRectangleItem::findBrother()
 {
-    if (Config::getInstance()->getRepercussionStereo() && _id.typeElement == elementInstSmpl)
+    if (ConfManager::getInstance()->getValue(ConfManager::SECTION_NONE, "stereo_modification", false).toBool() &&
+            _id.typeElement == elementInstSmpl)
     {
         // Sample linked to the division
         EltID idSmpl = _id;

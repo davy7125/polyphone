@@ -29,7 +29,7 @@
 #include <QDir>
 #include <QDesktopServices>
 #include <QFileDialog>
-#include "config.h"
+#include "recentfilemanager.h"
 #include "synth.h"
 
 DialogMagnetophone::DialogMagnetophone(QWidget *parent) :
@@ -90,7 +90,7 @@ void DialogMagnetophone::on_pushRecord_toggled(bool checked)
     ui->pushPlayPause->setEnabled(checked);
     if (checked)
     {
-        // Nom de fichier
+        // File name
         QString defaultPath = this->getDefaultPath();
         defaultPath = QFileDialog::getSaveFileName(this, trUtf8("Sauvegarder un enregistrement"),
                                                    defaultPath, trUtf8("Fichier .wav (*.wav)"));
@@ -98,8 +98,9 @@ void DialogMagnetophone::on_pushRecord_toggled(bool checked)
         {
             if (defaultPath.right(4).toLower() != ".wav")
                 defaultPath.append(".wav");
-            Config::getInstance()->addFile(Config::typeFichierEnregistrement, defaultPath);
-            // Début de l'enregistrement
+            RecentFileManager::getInstance()->addRecentFile(RecentFileManager::FILE_TYPE_RECORD, defaultPath);
+
+            // Begin the record
             ui->pushPlayPause->setIcon(QIcon(":/icones/pause"));
             _isPause = false;
             _synth->startNewRecord(defaultPath);
@@ -134,7 +135,7 @@ void DialogMagnetophone::on_pushPlayPause_clicked()
 
 QString DialogMagnetophone::getDefaultPath()
 {
-    QString defaultPath = Config::getInstance()->getLastFile(Config::typeFichierEnregistrement);
+    QString defaultPath = RecentFileManager::getInstance()->getLastFile(RecentFileManager::FILE_TYPE_RECORD);
     QFileInfo info(defaultPath);
     if (info.dir().exists() && defaultPath.size())
     {
@@ -144,7 +145,8 @@ QString DialogMagnetophone::getDefaultPath()
             name = exp.cap(1);
         else
             name = name.left(name.size() - 4);
-        // Recherche du premier nom disponible pour un nouveau fichier
+
+        // Find the first available name for a new file
         QString folderName = info.dir().path();
         if (QFile(folderName + "/" + name + ".wav").exists())
         {

@@ -24,7 +24,8 @@
 
 #include "dialog_space.h"
 #include "ui_dialog_space.h"
-#include "config.h"
+#include "confmanager.h"
+#include "keynamemanager.h"
 
 // Constructeur, destructeur
 DialogSpace::DialogSpace(bool isPrst, int noteMin, int noteMax, QWidget *parent) :
@@ -34,29 +35,45 @@ DialogSpace::DialogSpace(bool isPrst, int noteMin, int noteMax, QWidget *parent)
     _noteMin(noteMin),
     _noteMax(noteMax)
 {
+    // Prepare the interface
     ui->setupUi(this);
     this->setWindowFlags((windowFlags() & ~Qt::WindowContextHelpButtonHint));
-    Config * conf = Config::getInstance();
+
+    // Recall parameters
     ui->comboMotif->blockSignals(true);
-    ui->comboMotif->setCurrentIndex(conf->getTools_i_space_motif(isPrst));
+    ui->comboMotif->setCurrentIndex(ConfManager::getInstance()->getToolValue(
+                                        _isPrst ? ConfManager::TOOL_TYPE_PRESET : ConfManager::TOOL_TYPE_INSTRUMENT,
+                                        "space", "motif", 0).toInt());
     ui->comboMotif->blockSignals(false);
     ui->spinNbDivision->blockSignals(true);
-    ui->spinNbDivision->setValue(conf->getTools_i_space_divisions(isPrst));
+    ui->spinNbDivision->setValue(ConfManager::getInstance()->getToolValue(
+                                     _isPrst ? ConfManager::TOOL_TYPE_PRESET : ConfManager::TOOL_TYPE_INSTRUMENT,
+                                     "space", "divisions", 1).toInt());
     ui->spinNbDivision->blockSignals(false);
     ui->spinEtalement->blockSignals(true);
-    ui->spinEtalement->setValue(conf->getTools_i_space_etalement(isPrst));
+    ui->spinEtalement->setValue(ConfManager::getInstance()->getToolValue(
+                                    _isPrst ? ConfManager::TOOL_TYPE_PRESET : ConfManager::TOOL_TYPE_INSTRUMENT,
+                                    "space", "etalement", 100).toInt());
     ui->spinEtalement->blockSignals(false);
     ui->spinOccupation->blockSignals(true);
-    ui->spinOccupation->setValue(conf->getTools_i_space_occupation(isPrst));
+    ui->spinOccupation->setValue(ConfManager::getInstance()->getToolValue(
+                                     _isPrst ? ConfManager::TOOL_TYPE_PRESET : ConfManager::TOOL_TYPE_INSTRUMENT,
+                                     "space", "occupation", 100).toInt());
     ui->spinOccupation->blockSignals(false);
     ui->spinOffset->blockSignals(true);
-    ui->spinOffset->setValue(conf->getTools_i_space_offset(isPrst));
+    ui->spinOffset->setValue(ConfManager::getInstance()->getToolValue(
+                                 _isPrst ? ConfManager::TOOL_TYPE_PRESET : ConfManager::TOOL_TYPE_INSTRUMENT,
+                                 "space", "offset", 50).toInt());
     ui->spinOffset->blockSignals(false);
     ui->checkSens->blockSignals(true);
-    ui->checkSens->setChecked(conf->getTools_i_space_renversement1(isPrst));
+    ui->checkSens->setChecked(ConfManager::getInstance()->getToolValue(
+                                  _isPrst ? ConfManager::TOOL_TYPE_PRESET : ConfManager::TOOL_TYPE_INSTRUMENT,
+                                  "space", "renversement1", false).toBool());
     ui->checkSens->blockSignals(false);
     ui->checkSens2->blockSignals(true);
-    ui->checkSens2->setChecked(conf->getTools_i_space_renversement2(isPrst));
+    ui->checkSens2->setChecked(ConfManager::getInstance()->getToolValue(
+                                   _isPrst ? ConfManager::TOOL_TYPE_PRESET : ConfManager::TOOL_TYPE_INSTRUMENT,
+                                   "space", "renversement2", false).toBool());
     ui->checkSens2->blockSignals(false);
 
     // Activation des renversements et remplissage du graphique
@@ -70,14 +87,21 @@ DialogSpace::~DialogSpace()
 
 void DialogSpace::accept()
 {
-    Config * conf = Config::getInstance();
-    conf->setTools_space_motif(_isPrst, ui->comboMotif->currentIndex());
-    conf->setTools_space_divisions(_isPrst, ui->spinNbDivision->value());
-    conf->setTools_space_etalement(_isPrst, ui->spinEtalement->value());
-    conf->setTools_space_occupation(_isPrst, ui->spinOccupation->value());
-    conf->setTools_space_offset(_isPrst, ui->spinOffset->value());
-    conf->setTools_space_renversement1(_isPrst, ui->checkSens->isChecked());
-    conf->setTools_space_renversement2(_isPrst, ui->checkSens2->isChecked());
+    // Save configuration
+    ConfManager::getInstance()->setToolValue(_isPrst ? ConfManager::TOOL_TYPE_PRESET : ConfManager::TOOL_TYPE_INSTRUMENT,
+                                             "space", "motif", ui->comboMotif->currentIndex());
+    ConfManager::getInstance()->setToolValue(_isPrst ? ConfManager::TOOL_TYPE_PRESET : ConfManager::TOOL_TYPE_INSTRUMENT,
+                                             "space", "divisions", ui->spinNbDivision->value());
+    ConfManager::getInstance()->setToolValue(_isPrst ? ConfManager::TOOL_TYPE_PRESET : ConfManager::TOOL_TYPE_INSTRUMENT,
+                                             "space", "etalement", ui->spinEtalement->value());
+    ConfManager::getInstance()->setToolValue(_isPrst ? ConfManager::TOOL_TYPE_PRESET : ConfManager::TOOL_TYPE_INSTRUMENT,
+                                             "space", "occupation", ui->spinOccupation->value());
+    ConfManager::getInstance()->setToolValue(_isPrst ? ConfManager::TOOL_TYPE_PRESET : ConfManager::TOOL_TYPE_INSTRUMENT,
+                                             "space", "offset", ui->spinOffset->value());
+    ConfManager::getInstance()->setToolValue(_isPrst ? ConfManager::TOOL_TYPE_PRESET : ConfManager::TOOL_TYPE_INSTRUMENT,
+                                             "space", "renversement1", ui->checkSens->isChecked());
+    ConfManager::getInstance()->setToolValue(_isPrst ? ConfManager::TOOL_TYPE_PRESET : ConfManager::TOOL_TYPE_INSTRUMENT,
+                                             "space", "renversement2", ui->checkSens2->isChecked());
 
     QVector<double> x;
     QVector<int> y;
@@ -305,11 +329,15 @@ double DialogSpace::getAxe(int note, int nbDiv, bool sens)
 
 GraphSpace::GraphSpace(QWidget * parent) : QCustomPlot(parent)
 {
+    this->setBackground(this->palette().color(QPalette::Base));
+
     // Couche déco
     this->addGraph();
     QPen graphPen;
     graphPen.setWidthF(1);
-    graphPen.setColor(QColor(0, 0, 0, 40));
+    QColor color = this->palette().color(QPalette::Text);
+    color.setAlpha(40);
+    graphPen.setColor(color);
     graphPen.setStyle(Qt::DashDotLine);
     graph(0)->setPen(graphPen);
     QVector<double> x, y;
@@ -319,7 +347,7 @@ GraphSpace::GraphSpace(QWidget * parent) : QCustomPlot(parent)
 
     // Couche données
     this->addGraph();
-    graphPen.setColor(QColor(100, 130, 250));
+    graphPen.setColor(this->palette().color(QPalette::Highlight));
     graphPen.setWidthF(2);
     graphPen.setStyle(Qt::SolidLine);
     this->graph(1)->setPen(graphPen);
@@ -345,7 +373,8 @@ GraphSpace::GraphSpace(QWidget * parent) : QCustomPlot(parent)
     text->setPositionAlignment(Qt::AlignLeft | Qt::AlignTop);
     text->setTextAlignment(Qt::AlignLeft);
     text->setFont(QFont(font().family(), 10, 100));
-    text->setColor(QColor(0, 0, 0, 75));
+    color.setAlpha(180);
+    text->setColor(color);
     text->setText(trUtf8("G"));
     this->addItem(text);
     text = new QCPItemText(this);
@@ -354,13 +383,14 @@ GraphSpace::GraphSpace(QWidget * parent) : QCustomPlot(parent)
     text->setPositionAlignment(Qt::AlignRight | Qt::AlignTop);
     text->setTextAlignment(Qt::AlignRight);
     text->setFont(QFont(font().family(), 10, 100));
-    text->setColor(QColor(0, 0, 0, 75));
+    text->setColor(color);
     text->setText(trUtf8("D"));
     this->addItem(text);
 
     // Layer aperçu valeurs
     this->addGraph();
-    graphPen.setColor(QColor(0, 0, 0));
+    color.setAlpha(255);
+    graphPen.setColor(color);
     graphPen.setWidth(1);
     this->graph(2)->setPen(graphPen);
     this->graph(2)->setScatterStyle(QCPScatterStyle::ssPlus);
@@ -371,7 +401,7 @@ GraphSpace::GraphSpace(QWidget * parent) : QCustomPlot(parent)
     QFont fontLabel = QFont(font().family(), 9);
     fontLabel.setBold(true);
     labelCoord->setFont(fontLabel);
-    labelCoord->setColor(QColor(0, 0, 0));
+    labelCoord->setColor(color);
 
     // Filtre sur les événements
     this->installEventFilter(this);
@@ -445,7 +475,7 @@ void GraphSpace::afficheCoord(double xPan, double yLength, int key)
             labelCoord->setPositionAlignment(Qt::AlignBottom | Qt::AlignHCenter);
         char T[20];
         sprintf(T, "%.3d: %.1f", key, xPan * 100 - 50);
-        labelCoord->setText(Config::getInstance()->getKeyName(key) + ":" +
+        labelCoord->setText(KeyNameManager::getInstance()->getKeyName(key) + ":" +
                             QString::number(xPan * 100 - 50, 'f', 1));
 
         // Ajustement position

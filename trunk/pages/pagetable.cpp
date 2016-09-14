@@ -25,6 +25,7 @@
 
 #include "pagetable.h"
 #include "mainwindow.h"
+#include "confmanager.h"
 #include "dialog_paramglobal.h"
 #include "dialog_visualizer.h"
 #include "dialog_space.h"
@@ -54,13 +55,13 @@ void PageTable::afficher()
         afficheTable();
 
     // Switch page
-    this->_qStackedWidget->setCurrentWidget(this);
+    _qStackedWidget->setCurrentWidget(this);
 }
 
 void PageTable::afficheTable()
 {
     int posV = this->table->verticalScrollBar()->value();
-    this->_preparation = true;
+    _preparation = true;
 
     // Destruction des cellules précédentes
     table->blockSignals(true);
@@ -91,7 +92,7 @@ void PageTable::afficheTable()
     }
 
     // Fin de la préparation
-    this->_preparation = false;
+    _preparation = false;
     this->reselect();
     this->table->verticalScrollBar()->setValue(posV);
 }
@@ -308,10 +309,25 @@ void PageTable::addDivisions(EltID id)
 
 }
 
+QPixmap PageTable::getPixMap(QColor backgroundColor, QColor dotColor)
+{
+      QPixmap pix(4, 4);
+      QPainter painter(&pix);
+      painter.fillRect(0, 0, 4, 4, backgroundColor);
+      painter.setPen(dotColor);
+      painter.drawPoint(3, 0);
+      painter.drawPoint(2, 1);
+      painter.drawPoint(1, 2);
+      painter.drawPoint(0, 3);
+      return pix;
+}
+
 void PageTable::formatTable(bool multiGlobal)
 {
-    QBrush brush1(QPixmap(":/style/fond.png"));
-    QBrush brush2(QPixmap(":/style/fondJaune.png"));
+    QColor color = this->palette().color(QPalette::Base);
+    QColor alternateColor = this->palette().color(QPalette::AlternateBase);
+    QBrush brush1(getPixMap(color, alternateColor));
+    QBrush brush2(getPixMap(alternateColor, color));
     if (this->contenant == elementInst)
     {
         // First column with a hatching pattern
@@ -346,16 +362,16 @@ void PageTable::formatTable(bool multiGlobal)
             {
                 if (j < 9) {}
                 else if (j < 13)
-                    this->table->item(j, i)->setBackgroundColor(QColor(255, 255, 200));
+                    this->table->item(j, i)->setBackgroundColor(alternateColor);
                 else if (j < 15) {}
                 else if (j < 23)
-                    this->table->item(j, i)->setBackgroundColor(QColor(255, 255, 200));
+                    this->table->item(j, i)->setBackgroundColor(alternateColor);
                 else if (j < 33) {}
                 else if (j < 41)
-                    this->table->item(j, i)->setBackgroundColor(QColor(255, 255, 200));
+                    this->table->item(j, i)->setBackgroundColor(alternateColor);
                 else if (j < 46) {}
                 else
-                    this->table->item(j, i)->setBackgroundColor(QColor(255, 255, 200));
+                    this->table->item(j, i)->setBackgroundColor(alternateColor);
                 this->table->item(j, i)->setTextAlignment(Qt::AlignVCenter | Qt::AlignRight);
             }
         }
@@ -392,27 +408,24 @@ void PageTable::formatTable(bool multiGlobal)
             {
                 if (j < 8) {}
                 else if (j < 11)
-                    this->table->item(j, i)->setBackgroundColor(QColor(255, 255, 200));
+                    this->table->item(j, i)->setBackgroundColor(alternateColor);
                 else if (j < 13) {}
                 else if (j < 21)
-                    this->table->item(j, i)->setBackgroundColor(QColor(255, 255, 200));
+                    this->table->item(j, i)->setBackgroundColor(alternateColor);
                 else if (j < 31) {}
                 else if (j < 39)
-                    this->table->item(j, i)->setBackgroundColor(QColor(255, 255, 200));
+                    this->table->item(j, i)->setBackgroundColor(alternateColor);
                 this->table->item(j, i)->setTextAlignment(Qt::AlignVCenter | Qt::AlignRight);
             }
         }
     }
     for (int i = 0; i < 4; i++)
         this->table->hideRow(i);
-
-    if (!Config::getInstance()->getSameWidthTable())
-        this->table->resizeColumnsToContents();
 }
 
 void PageTable::afficheRange()
 {
-    _rangeEditor->display(this->_tree->getFirstID());
+    _rangeEditor->display(_tree->getFirstID());
 }
 
 void PageTable::afficheMod(EltID id, int selectedIndex)
@@ -448,6 +461,7 @@ void PageTable::afficheMod(EltID id, int selectedIndex)
     int iVal;
     QIcon icon;
     int numLigne = 0;
+    bool isDark = ThemeManager::getInstance()->isDark(ThemeManager::LIST_BACKGROUND, ThemeManager::LIST_TEXT);
     for (int i = 0; i < _sf2->count(id); i++)
     {
         id.indexMod = i;
@@ -459,7 +473,10 @@ void PageTable::afficheMod(EltID id, int selectedIndex)
 
             sfModTmp = _sf2->get(id, champ_sfModSrcOper).sfModValue;
             iVal = 4*sfModTmp.D + 8*sfModTmp.P + sfModTmp.Type + 1;
-            sprintf(T, ":/icones/courbe%.2d", iVal);
+            if (isDark)
+                sprintf(T, ":/icones/courbe%.2d_w", iVal);
+            else
+                sprintf(T, ":/icones/courbe%.2d", iVal);
             icon = QIcon(T);
             this->tableMod->item(numLigne, 6)->setIcon(icon);
             if (sfModTmp.Index == 127 && sfModTmp.CC == 0)
@@ -478,7 +495,10 @@ void PageTable::afficheMod(EltID id, int selectedIndex)
             this->tableMod->item(numLigne, 6)->setText(qStr);
             sfModTmp = _sf2->get(id, champ_sfModAmtSrcOper).sfModValue;
             iVal = 4*sfModTmp.D + 8*sfModTmp.P + sfModTmp.Type + 1;
-            sprintf(T, ":/icones/courbe%.2d", iVal);
+            if (isDark)
+                sprintf(T, ":/icones/courbe%.2d_w", iVal);
+            else
+                sprintf(T, ":/icones/courbe%.2d", iVal);
             icon = QIcon(T);
             this->tableMod->item(numLigne, 7)->setIcon(icon);
             qStr = getIndexName(sfModTmp.Index, sfModTmp.CC);
@@ -540,13 +560,13 @@ void PageTable::afficheEditMod()
 
     // Only one selected division ?
     bool singleDivision = true;
-    if (this->_tree->getSelectedItemsNumber() != 1)
+    if (_tree->getSelectedItemsNumber() != 1)
     {
         singleDivision = false;
         this->tableMod->clear();
     }
     this->pushNouveauMod->setEnabled(singleDivision);
-    this->_pushCopyMod->setEnabled(singleDivision);
+    _pushCopyMod->setEnabled(singleDivision);
 
     QList<EltID> selectedModIDs = this->tableMod->getSelectedIDs();
     this->pushSupprimerMod->setEnabled(singleDivision && !selectedModIDs.isEmpty());
@@ -741,21 +761,21 @@ void PageTable::setOffset(int ligne, int colonne, Champ champ1, Champ champ2)
 
 void PageTable::actionBegin()
 {
-    if (this->_preparation)
+    if (_preparation)
         return;
     _sf2->prepareNewActions();
 }
 
 void PageTable::actionFinished()
 {
-    if (this->_preparation)
+    if (_preparation)
         return;
-    this->_mainWindow->updateDo();
+    _mainWindow->updateDo();
 }
 
 void PageTable::set(int ligne, int colonne, bool allowPropagation)
 {
-    if (this->_preparation)
+    if (_preparation)
         return;
 
     // Modification d'un élément du tableau
@@ -764,8 +784,8 @@ void PageTable::set(int ligne, int colonne, bool allowPropagation)
         return;
 
     EltID id = this->table->getID(colonne);
-    if (allowPropagation && Config::getInstance()->getRepercussionStereo() && id.typeElement == elementInstSmpl &&
-            champ != champ_pan)
+    if (allowPropagation && id.typeElement == elementInstSmpl && champ != champ_pan &&
+            ConfManager::getInstance()->getValue(ConfManager::SECTION_NONE, "stereo_modification", false).toBool())
     {
         // Répercussion des modifications sur le sample stéréo s'il est présent
         EltID idSmpl = id;
@@ -918,9 +938,6 @@ void PageTable::set(int ligne, int colonne, bool allowPropagation)
         }
     }
 
-    if (!Config::getInstance()->getSameWidthTable())
-        this->table->resizeColumnsToContents();
-
     // Mise à jour partie mod (car entre 2 des mods peuvent être définitivement détruits, et les index peuvent être mis à jour)
     id = this->table->getID(colonne);
     this->afficheMod(id);
@@ -931,8 +948,8 @@ void PageTable::set(int ligne, int colonne, bool allowPropagation)
 
 void PageTable::setAmount()
 {
-    if (this->_preparation) return;
-    this->_preparation = 1;
+    if (_preparation) return;
+    _preparation = 1;
     EltID id = this->tableMod->getID();
     EltID id2 = id;
     if (id2.typeElement == this->contenantMod)
@@ -963,16 +980,16 @@ void PageTable::setAmount()
             }
             else
                 this->afficheMod(id);
-            this->_mainWindow->updateDo();
+            _mainWindow->updateDo();
         }
     }
-    this->_preparation = 0;
+    _preparation = 0;
 }
 
 void PageTable::setAbs()
 {
-    if (this->_preparation) return;
-    this->_preparation = 1;
+    if (_preparation) return;
+    _preparation = 1;
     EltID id = this->tableMod->getID();
     EltID id2 = id;
     if (id2.typeElement == this->contenantMod)
@@ -1006,16 +1023,16 @@ void PageTable::setAbs()
             }
             else
                 this->afficheMod(id);
-            this->_mainWindow->updateDo();
+            _mainWindow->updateDo();
         }
     }
-    this->_preparation = 0;
+    _preparation = 0;
 }
 
 void PageTable::setSourceType(int row, int column)
 {
-    if (this->_preparation) return;
-    this->_preparation = 1;
+    if (_preparation) return;
+    _preparation = 1;
     EltID id = this->tableMod->getID();
     EltID id2 = id;
     if (id2.typeElement == this->contenantMod)
@@ -1052,16 +1069,16 @@ void PageTable::setSourceType(int row, int column)
             }
             else
                 this->afficheMod(id);
-            this->_mainWindow->updateDo();
+            _mainWindow->updateDo();
         }
     }
-    this->_preparation = 0;
+    _preparation = 0;
 }
 
 void PageTable::setSourceAmountType(int row, int column)
 {
-    if (this->_preparation) return;
-    this->_preparation = 1;
+    if (_preparation) return;
+    _preparation = 1;
     EltID id = this->tableMod->getID();
     EltID id2 = id;
     if (id2.typeElement == this->contenantMod)
@@ -1098,16 +1115,16 @@ void PageTable::setSourceAmountType(int row, int column)
             }
             else
                 this->afficheMod(id);
-            this->_mainWindow->updateDo();
+            _mainWindow->updateDo();
         }
     }
-    this->_preparation = 0;
+    _preparation = 0;
 }
 
 void PageTable::setDest(int index)
 {
-    if (this->_preparation) return;
-    this->_preparation = 1;
+    if (_preparation) return;
+    _preparation = 1;
     EltID id = this->tableMod->getID();
     EltID id2 = id;
     if (id2.typeElement == this->contenantMod)
@@ -1176,16 +1193,16 @@ void PageTable::setDest(int index)
             }
             else
                 this->afficheMod(id);
-            this->_mainWindow->updateDo();
+            _mainWindow->updateDo();
         }
     }
-    this->_preparation = 0;
+    _preparation = 0;
 }
 
 void PageTable::setSource(int index)
 {
-    if (this->_preparation) return;
-    this->_preparation = 1;
+    if (_preparation) return;
+    _preparation = 1;
     EltID id = this->tableMod->getID();
     EltID id2 = id;
     if (id2.typeElement == this->contenantMod)
@@ -1240,7 +1257,7 @@ void PageTable::setSource(int index)
                 }
                 else
                     this->afficheMod(id);
-                this->_mainWindow->updateDo();
+                _mainWindow->updateDo();
             }
         }
         else
@@ -1288,7 +1305,7 @@ void PageTable::setSource(int index)
                 }
                 else
                     this->afficheMod(id);
-                this->_mainWindow->updateDo();
+                _mainWindow->updateDo();
             }
             else
             {
@@ -1339,18 +1356,18 @@ void PageTable::setSource(int index)
                     }
                     else
                         this->afficheMod(id);
-                    this->_mainWindow->updateDo();
+                    _mainWindow->updateDo();
                 }
             }
         }
     }
-    this->_preparation = 0;
+    _preparation = 0;
 }
 
 void PageTable::setSource2(int index)
 {
-    if (this->_preparation) return;
-    this->_preparation = 1;
+    if (_preparation) return;
+    _preparation = 1;
     EltID id = this->tableMod->getID();
     EltID id2 = id;
     if (id2.typeElement == this->contenantMod)
@@ -1386,17 +1403,17 @@ void PageTable::setSource2(int index)
             }
             else
                 this->afficheMod(id);
-            this->_mainWindow->updateDo();
+            _mainWindow->updateDo();
         }
     }
-    this->_preparation = 0;
+    _preparation = 0;
 }
 
 void PageTable::reselect()
 {
     this->table->clearSelection();
     this->table->setSelectionMode(QAbstractItemView::MultiSelection);
-    QList<EltID> listID = this->_tree->getAllIDs();
+    QList<EltID> listID = _tree->getAllIDs();
     this->table->setRowHidden(0, false); // Selection will be on a visible row
     foreach (EltID id, listID)
         this->select(id);
@@ -1407,7 +1424,7 @@ void PageTable::reselect()
 
 void PageTable::select(EltID id)
 {
-    this->_preparation = true;
+    _preparation = true;
     EltID id2;
     int max;
     for (int i = 0; i < this->table->columnCount(); i++)
@@ -1426,15 +1443,15 @@ void PageTable::select(EltID id)
                 this->table->scrollToItem(this->table->item(10, i), QAbstractItemView::PositionAtCenter);
         }
     }
-    this->_preparation = false;
+    _preparation = false;
 }
 
 void PageTable::selected()
 {
-    if (this->_preparation) return;
+    if (_preparation) return;
 
     // Mise à jour de la sélection dans l'arborescence
-    this->_tree->blockSignals(true);
+    _tree->blockSignals(true);
     QList<QTableWidgetItem*> listItems = table->selectedItems();
     int compte = listItems.count();
     if (compte)
@@ -1445,13 +1462,13 @@ void PageTable::selected()
         selectInTree(ids);
 
         // Mise à jour des informations sur les mods
-        this->_preparation = true;
+        _preparation = true;
         int colonne = listItems.last()->column();
         this->afficheMod(this->table->getID(colonne));
-        this->_preparation = false;
+        _preparation = false;
     }
     customizeKeyboard();
-    this->_tree->blockSignals(false);
+    _tree->blockSignals(false);
 }
 
 void PageTable::updateKeyboard()
@@ -1735,11 +1752,11 @@ void PageTable::supprimerMod()
         _sf2->remove(id);
     }
 
-    this->_mainWindow->updateDo();
+    _mainWindow->updateDo();
 
     if (rowToSelect >= nbRow - listIDs.size())
         rowToSelect = nbRow - listIDs.size() - 1;
-    this->afficheMod(this->_tree->getFirstID());
+    this->afficheMod(_tree->getFirstID());
     this->tableMod->selectRow(rowToSelect);
 }
 
@@ -1748,7 +1765,7 @@ void PageTable::nouveauMod()
     _sf2->prepareNewActions();
 
     // Création nouveau mod
-    EltID id = this->_tree->getFirstID();
+    EltID id = _tree->getFirstID();
     if (id.typeElement == elementInst) id.typeElement = elementInstMod;
     else if (id.typeElement == elementPrst) id.typeElement = elementPrstMod;
     else if (id.typeElement == elementInstSmpl) id.typeElement = elementInstSmplMod;
@@ -1772,16 +1789,16 @@ void PageTable::nouveauMod()
     if (id.typeElement == elementPrstMod || id.typeElement == elementPrstInstMod)
         val.sfGenValue = (Champ)52;
     _sf2->set(id, champ_sfModDestOper, val);
-    this->afficheMod(this->_tree->getFirstID(), id.indexMod);
-    this->_mainWindow->updateDo();
+    this->afficheMod(_tree->getFirstID(), id.indexMod);
+    _mainWindow->updateDo();
 }
 
 void PageTable::copyMod()
 {
     // Sauvegarde des mods
-    if (this->_tree->getSelectedItemsNumber() != 1)
+    if (_tree->getSelectedItemsNumber() != 1)
         return;
-    EltID id = this->_tree->getFirstID();
+    EltID id = _tree->getFirstID();
     if (id.typeElement == elementInst) id.typeElement = elementInstMod;
     else if (id.typeElement == elementPrst) id.typeElement = elementPrstMod;
     else if (id.typeElement == elementInstSmpl) id.typeElement = elementInstSmplMod;
@@ -1887,16 +1904,16 @@ void PageTable::pasteMod()
 {
     _sf2->prepareNewActions();
 
-    QList<EltID> ids = this->_tree->getAllIDs();
+    QList<EltID> ids = _tree->getAllIDs();
     foreach (EltID id, ids)
         pasteMod(id, _modulatorCopy);
 
     if (ids.count() == 1)
-        this->afficheMod(this->_tree->getFirstID());
+        this->afficheMod(_tree->getFirstID());
     else
         this->afficheEditMod();
 
-    this->_mainWindow->updateDo();
+    _mainWindow->updateDo();
 }
 
 void PageTable::pasteMod(EltID id, QList<Modulator> modulators)
@@ -1979,9 +1996,9 @@ void PageTable::pasteMod(EltID id, QList<Modulator> modulators)
 void PageTable::duplicateMod()
 {
     // Duplication des mods sélectionnés dans tous les autres instruments ou presets
-    if (this->_tree->getSelectedItemsNumber() != 1)
+    if (_tree->getSelectedItemsNumber() != 1)
         return;
-    EltID id = this->_tree->getFirstID();
+    EltID id = _tree->getFirstID();
     if (id.typeElement != elementInst && id.typeElement != elementPrst)
         return;
 
@@ -1992,9 +2009,9 @@ void PageTable::duplicateMod()
 
 void PageTable::duplicateMod(QList<int> listIndex)
 {
-    if (this->_tree->getSelectedItemsNumber() != 1)
+    if (_tree->getSelectedItemsNumber() != 1)
         return;
-    EltID id = this->_tree->getFirstID();
+    EltID id = _tree->getFirstID();
     if (id.typeElement != elementInst && id.typeElement != elementPrst)
         return;
 
@@ -2015,7 +2032,7 @@ void PageTable::duplicateMod(QList<int> listIndex)
             pasteMod(id, modulators);
     }
 
-    this->_mainWindow->updateDo();
+    _mainWindow->updateDo();
 }
 
 void PageTable::remplirComboSource(ComboBox *comboBox)
@@ -2497,8 +2514,8 @@ void PageTable::paramGlobal(QVector<double> dValues, int typeModif, int champ, i
     }
 
     // Actualisation
-    this->_mainWindow->updateDo();
-    this->_mainWindow->updateActions();
+    _mainWindow->updateDo();
+    _mainWindow->updateActions();
 }
 
 void PageTable::duplication()
@@ -2557,8 +2574,8 @@ void PageTable::duplication(QVector<int> listeVelocites, bool duplicKey, bool du
     }
 
     // Actualisation
-    this->_mainWindow->updateDo();
-    this->_mainWindow->updateActions();
+    _mainWindow->updateDo();
+    _mainWindow->updateActions();
 }
 
 void PageTable::duplication(EltID id)
@@ -2855,8 +2872,8 @@ void PageTable::spatialisation(QMap<int, double> mapPan)
     }
 
     // Actualisation
-    this->_mainWindow->updateDo();
-    this->_mainWindow->updateActions();
+    _mainWindow->updateDo();
+    _mainWindow->updateActions();
 }
 
 void PageTable::spatialisation(QMap<int, double> mapPan, EltID id)
@@ -3024,7 +3041,7 @@ void PageTable::spatialisation(QMap<int, double> mapPan, EltID id)
 
 QList<EltID> PageTable::getUniqueInstOrPrst(bool &error, bool errorIfNoDivision, bool errorIfKeyRangeMissing)
 {
-    QList<EltID> ids = this->_tree->getAllIDs();
+    QList<EltID> ids = _tree->getAllIDs();
     QList<EltID> idsRet;
 
     bool withDivision = true;
@@ -3092,7 +3109,7 @@ QList<EltID> PageTable::getUniqueInstOrPrst(bool &error, bool errorIfNoDivision,
 
 void PageTable::visualize()
 {
-    EltID id = this->_tree->getFirstID();
+    EltID id = _tree->getFirstID();
     if (_typePage == PAGE_INST)
         id.typeElement = elementInstSmpl;
     else

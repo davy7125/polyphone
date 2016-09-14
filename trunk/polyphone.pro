@@ -138,6 +138,7 @@ contains(DEFINES, USE_LOCAL_QCUSTOMPLOT) {
 }
 
 INCLUDEPATH += gui_divers \
+    configuration \
     pages \
     qcustomplot \
     ressources \
@@ -160,7 +161,7 @@ SOURCES	+= main.cpp \
     sf2_core/pile_sf2_sl.cpp \
     sf2_core/duplicator.cpp \
     sf2_core/treewidgetitem.cpp \
-    gui_divers/config.cpp \
+    configuration/config.cpp \
     gui_divers/dialog_list.cpp \
     gui_divers/dialog_rename.cpp \
     gui_divers/editkey.cpp \
@@ -211,7 +212,6 @@ SOURCES	+= main.cpp \
     pages/graphicsviewrange.cpp \
     tools/dialog_transposition.cpp \
     sfark/sfarkextractor.cpp \
-    gui_divers/translationsystem.cpp \
     pages/pageoverview.cpp \
     pages/pageoverviewsmpl.cpp \
     pages/pageoverviewinst.cpp \
@@ -227,7 +227,12 @@ SOURCES	+= main.cpp \
     gui_divers/comboboxloopmode.cpp \
     pages/tabledelegate.cpp \
     options.cpp \
-    gui_divers/dialogchangelog.cpp
+    gui_divers/dialogchangelog.cpp \
+    configuration/thememanager.cpp \
+    configuration/confmanager.cpp \
+    configuration/recentfilemanager.cpp \
+    configuration/keynamemanager.cpp \
+    configuration/translationmanager.cpp
 
 HEADERS  += mainwindow.h \
     sf2_core/sf2_types.h \
@@ -237,7 +242,7 @@ HEADERS  += mainwindow.h \
     sf2_core/sound.h \
     sf2_core/duplicator.h \
     sf2_core/treewidgetitem.h \
-    gui_divers/config.h \
+    configuration/config.h \
     gui_divers/dialog_list.h \
     gui_divers/dialog_rename.h \
     gui_divers/editkey.h \
@@ -294,7 +299,6 @@ HEADERS  += mainwindow.h \
     tools/dialog_transposition.h \
     sfark/sfarkextractor1.h \
     sfark/sfarkextractor.h \
-    gui_divers/translationsystem.h \
     pages/pageoverview.h \
     pages/pageoverviewsmpl.h \
     pages/pageoverviewinst.h \
@@ -310,10 +314,15 @@ HEADERS  += mainwindow.h \
     gui_divers/comboboxloopmode.h \
     pages/tabledelegate.h \
     options.h \
-    gui_divers/dialogchangelog.h
+    gui_divers/dialogchangelog.h \
+    configuration/thememanager.h \
+    configuration/confmanager.h \
+    configuration/recentfilemanager.h \
+    configuration/keynamemanager.h \
+    configuration/translationmanager.h
 
 FORMS    += mainwindow.ui \
-    gui_divers/config.ui \
+    configuration/config.ui \
     gui_divers/dialog_list.ui \
     gui_divers/dialog_rename.ui \
     gui_divers/dialog_about.ui \

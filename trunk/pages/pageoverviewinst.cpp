@@ -23,7 +23,7 @@
 ***************************************************************************/
 
 #include "pageoverviewinst.h"
-#include "config.h"
+#include "keynamemanager.h"
 
 PageOverviewInst::PageOverviewInst(QWidget * parent) : PageOverview(PAGE_INST, elementInst, parent) {}
 
@@ -190,9 +190,9 @@ QString PageOverviewInst::getKeyRange(EltID id)
     if (min > max)
         return "?";
     else if (min == max)
-        return Config::getInstance()->getKeyName(min);
+        return KeyNameManager::getInstance()->getKeyName(min);
     else
-        return Config::getInstance()->getKeyName(min) + " - " + Config::getInstance()->getKeyName(max);
+        return KeyNameManager::getInstance()->getKeyName(min) + " - " + KeyNameManager::getInstance()->getKeyName(max);
 }
 
 QString PageOverviewInst::getVelocityRange(EltID id)

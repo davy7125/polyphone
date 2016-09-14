@@ -24,7 +24,7 @@
 
 #include "spinboxrange.h"
 #include <QLineEdit>
-#include "config.h"
+#include "keynamemanager.h"
 
 QString SpinBoxRange::SEPARATOR = QString::fromUtf8("-");
 int SpinBoxRange::MINI = 0;
@@ -258,12 +258,12 @@ int SpinBoxVelocityRange::getValue(QString &text, bool &ok) const
 
 QString SpinBoxKeyRange::getText(int value) const
 {
-    return Config::getInstance()->getKeyName(value);
+    return KeyNameManager::getInstance()->getKeyName(value);
 }
 
 int SpinBoxKeyRange::getValue(QString &text, bool &ok) const
 {
-    int key = Config::getInstance()->getKeyNum(text);
+    int key = KeyNameManager::getInstance()->getKeyNum(text);
     ok = (key != -1);
     return key;
 }

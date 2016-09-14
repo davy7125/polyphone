@@ -26,6 +26,7 @@
 #include "synth.h"
 #include <QThread>
 #include <QFile>
+#include "confmanager.h"
 
 
 // Constructeur, destructeur
@@ -342,24 +343,29 @@ void Synth::setGain(double gain)
     m_gain = gain;
     SoundEngine::setGain(gain);
 }
-void Synth::setReverb(int level, int size, int width, int damping)
+
+void Synth::updateChorusReverb()
 {
-    // Mise à jour de la réverbération
+    // Update chorus
+    m_choLevel = ConfManager::getInstance()->getValue(ConfManager::SECTION_SOUND_ENGINE, "cho_level", 0).toInt();
+    m_choDepth = ConfManager::getInstance()->getValue(ConfManager::SECTION_SOUND_ENGINE, "cho_depth", 0).toInt();
+    m_choFrequency = ConfManager::getInstance()->getValue(ConfManager::SECTION_SOUND_ENGINE, "cho_frequency", 0).toInt();
+    SoundEngine::setChorus(m_choLevel, m_choDepth, m_choFrequency);
+
+    // Update reverb
+    double revLevel = (double)ConfManager::getInstance()->getValue(ConfManager::SECTION_SOUND_ENGINE, "rev_level", 0).toInt() / 100.;
+    double revSize = (double)ConfManager::getInstance()->getValue(ConfManager::SECTION_SOUND_ENGINE, "rev_size", 0).toInt() / 100.;
+    double revWidth = (double)ConfManager::getInstance()->getValue(ConfManager::SECTION_SOUND_ENGINE, "rev_width", 0).toInt() / 100.;
+    double revDamping = (double)ConfManager::getInstance()->getValue(ConfManager::SECTION_SOUND_ENGINE, "rev_damping", 0).toInt() / 100.;
+
     _mutexReverb.lock();
-    _reverb.setEffectMix((double)level / 100.);
-    _reverb.setRoomSize((double)size / 100.);
-    _reverb.setWidth((double)width / 100.);
-    _reverb.setDamping((double)damping / 100.);
+    _reverb.setEffectMix(revLevel);
+    _reverb.setRoomSize(revSize);
+    _reverb.setWidth(revWidth);
+    _reverb.setDamping(revDamping);
     _mutexReverb.unlock();
 }
-void Synth::setChorus(int level, int depth, int frequency)
-{
-    // Mise à jour du chorus
-    m_choLevel = level;
-    m_choDepth = depth;
-    m_choFrequency = frequency;
-    SoundEngine::setChorus(level, depth, frequency);
-}
+
 void Synth::setGainSample(int gain)
 {
     // Modification du gain des samples

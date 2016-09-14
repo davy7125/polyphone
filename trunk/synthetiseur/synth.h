@@ -46,8 +46,7 @@ public:
                   VoiceParam * voiceParamTmp = NULL);
     void stop();
     void setGain(double gain);
-    void setReverb(int level, int size, int width, int damping);
-    void setChorus(int level, int depth, int frequency);
+    void updateChorusReverb();
     void setBufferSize(int bufferSize);
 
     // Paramètres de lecture de samples

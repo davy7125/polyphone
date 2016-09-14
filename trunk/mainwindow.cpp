@@ -32,6 +32,8 @@
 #include "import_sfz.h"
 #include "sfarkextractor.h"
 #include "dialogchangelog.h"
+#include "recentfilemanager.h"
+#include "keynamemanager.h"
 #include <QFileDialog>
 #include <QInputDialog>
 #include <QDate>
@@ -72,8 +74,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent, Qt::Window | Qt::W
 
     // Taille max de l'application et restauration de l'état de la fenêtre
     this->setMaximumSize(QApplication::desktop()->size());
-    restoreGeometry(configuration->getWindowGeometry());
-    restoreState(configuration->getWindowState());
+    restoreGeometry(ConfManager::getInstance()->getValue(ConfManager::SECTION_DISPLAY, "windowGeometry", QByteArray()).toByteArray());
+    restoreState(ConfManager::getInstance()->getValue(ConfManager::SECTION_DISPLAY, "windowState", QByteArray()).toByteArray());
     ui->actionPlein_cran->setChecked(this->windowState() & Qt::WindowFullScreen);
 
     // Initialisation de l'objet pile sf2
@@ -97,14 +99,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent, Qt::Window | Qt::W
     connect(this->audioDevice, SIGNAL(connectionDone()), this, SLOT(onAudioConnectionDone()));
 
     this->setAudioDevice(configuration->getAudioType(), configuration->getAudioIndex(), configuration->getBufferSize());
-    this->setSynthGain(this->configuration->getSynthGain());
-    this->setSynthChorus(this->configuration->getSynthChoLevel(),
-                         this->configuration->getSynthChoDepth(),
-                         this->configuration->getSynthChoFrequency());
-    this->setSynthReverb(this->configuration->getSynthRevLevel(),
-                         this->configuration->getSynthRevSize(),
-                         this->configuration->getSynthRevWidth(),
-                         this->configuration->getSynthRevDamp());
+    this->setSynthGain(ConfManager::getInstance()->getValue(ConfManager::SECTION_SOUND_ENGINE, "gain", 0).toInt());
+    this->updateSynthChoRev();
 
     // Création des pages
     page_sf2 = new Page_Sf2(this, ui->arborescence, ui->stackedWidget, this->sf2, this->synth);
@@ -135,14 +131,14 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent, Qt::Window | Qt::W
     ui->stackedWidget->setCurrentWidget(ui->page_Soft);
 
     // Préférences d'affichage
-    if (!this->configuration->getAfficheToolBar())
+    if (!ConfManager::getInstance()->getValue(ConfManager::SECTION_DISPLAY, "tool_bar", true).toBool())
     {
-        this->ui->actionBarre_d_outils->setChecked(false);
+        ui->actionBarre_d_outils->setChecked(false);
         ui->toolBar->setVisible(false);
     }
-    if (!this->configuration->getAfficheMod())
+    if (!ConfManager::getInstance()->getValue(ConfManager::SECTION_DISPLAY, "section_modulateur", true).toBool())
     {
-        this->ui->actionSection_modulateurs->setChecked(false);
+        ui->actionSection_modulateurs->setChecked(false);
         this->page_inst->setModVisible(false);
         this->page_prst->setModVisible(false);
     }
@@ -153,7 +149,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent, Qt::Window | Qt::W
     QVBoxLayout * layoutKeyboard = new QVBoxLayout();
     layoutKeyboard->setContentsMargins(0, 0, 0, 0);
     _dialKeyboard.setLayout(layoutKeyboard);
-    _geometryDialKeyboard = configuration->getKeyboardGeometry();
+    _geometryDialKeyboard = ConfManager::getInstance()->getValue(
+                ConfManager::SECTION_DISPLAY, "keyboardGeometry", QByteArray()).toByteArray();
     if (_geometryDialKeyboard.isEmpty())
         _dialKeyboard.resize(600, 75);
     else
@@ -162,22 +159,19 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent, Qt::Window | Qt::W
     ui->toolBar->setContentsMargins(0, 0, 0, 0);
     actionKeyboard = ui->toolBar->addWidget(ui->ensembleKeyboard);
     this->showKeyboard(false);
-    if (configuration->getKeyboardDocked())
+    if (ConfManager::getInstance()->getValue(ConfManager::SECTION_KEYBOARD, "keyboard_in_toolbar", true).toBool())
         this->on_actionDans_la_barre_d_outils_triggered();
     else
         this->on_action_Flottant_triggered();
 
     // Ouverture port midi et connexions
-    ui->widgetKeyboard->openMidiPort(this->configuration->getNumPortMidi());
+    ui->widgetKeyboard->openMidiPort(ConfManager::getInstance()->getValue(ConfManager::SECTION_MIDI, "index_port", -1).toInt());
     connect(ui->widgetKeyboard, SIGNAL(noteOn(int,int)), this, SLOT(noteChanged(int,int)));
     connect(ui->widgetKeyboard, SIGNAL(sustainChanged(bool)), this, SLOT(setSustain(bool)));
     connect(ui->widgetKeyboard, SIGNAL(volumeChanged(int)), this, SLOT(setVolume(int)));
     connect(ui->widgetKeyboard, SIGNAL(noteOff(int)), this, SLOT(noteOff(int)));
     connect(ui->widgetKeyboard, SIGNAL(mouseOver(int, int)), this, SLOT(noteHover(int, int)));
     connect(this->page_smpl, SIGNAL(noteChanged(int,int)), this, SLOT(noteChanged(int,int)));
-
-    // Connexion changement de couleur
-    connect(Config::getInstance(), SIGNAL(colorsChanged()), this->page_smpl, SLOT(updateColors()));
 
     // Initialisation des actions dans les configurations
     this->configuration->setListeActions(this->getListeActions());
@@ -196,7 +190,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent, Qt::Window | Qt::W
     Sound::setParent(this);
 
     // Bug QT: restauration de la largeur d'un QDockWidget si fenêtre maximisée
-    int dockWidth = configuration->getDockWidth();
+    int dockWidth = ConfManager::getInstance()->getValue(ConfManager::SECTION_DISPLAY, "dock_width", 150).toInt();
     if (ui->dockWidget->width() < dockWidth)
         ui->dockWidget->setMinimumWidth(dockWidth);
     else
@@ -235,26 +229,26 @@ void MainWindow::delayedInit()
     ui->dockWidget->setMaximumWidth(300);
 
     // Clavier
-    this->setKeyboardType(this->configuration->getKeyboardType());
+    this->setKeyboardType(ConfManager::getInstance()->getValue(ConfManager::SECTION_KEYBOARD, "type", 1).toInt());
 
     // Dialog changelog
-    if (configuration->getLastVersionInstalled() != VERSION && FINAL)
+    if (ConfManager::getInstance()->getValue(ConfManager::SECTION_NONE, "last_version_installed", 0.).toDouble() != VERSION && FINAL)
     {
         DialogChangeLog * dialog = new DialogChangeLog(this);
         dialog->show();
-        configuration->setLastVersionInstalled(VERSION);
+        ConfManager::getInstance()->setValue(ConfManager::SECTION_NONE, "last_version_installed", VERSION);
     }
 }
 
 void MainWindow::closeEvent(QCloseEvent *event)
 {
     // Sauvegarde de la géométrie
-    configuration->setDockWidth(ui->dockWidget->width());
-    configuration->setWindowGeometry(saveGeometry());
-    configuration->setWindowState(saveState());
+    ConfManager::getInstance()->setValue(ConfManager::SECTION_DISPLAY, "dock_width", ui->dockWidget->width());
+    ConfManager::getInstance()->setValue(ConfManager::SECTION_DISPLAY, "windowGeometry", saveGeometry());
+    ConfManager::getInstance()->setValue(ConfManager::SECTION_DISPLAY, "windowState", saveState());
     if (_dialKeyboard.isVisible())
         _geometryDialKeyboard = _dialKeyboard.saveGeometry();
-    configuration->setKeyboardGeometry(_geometryDialKeyboard);
+    ConfManager::getInstance()->setValue(ConfManager::SECTION_DISPLAY, "keyboardGeometry", _geometryDialKeyboard);
 
     // Nombre de fichiers non sauvegardés
     int nbFile = 0;
@@ -392,7 +386,7 @@ void MainWindow::ouvrir()
     // Ouverture de fichiers
 //#ifdef WIN32
     QStringList strList = QFileDialog::getOpenFileNames(this, trUtf8("Ouverture de fichiers"),
-                                                        Config::getInstance()->getLastDirectory(Config::typeFichierSoundfont),
+                                                        RecentFileManager::getInstance()->getLastDirectory(RecentFileManager::FILE_TYPE_SOUNDFONT),
                                                         trUtf8("Soundfonts") + " (*.sf2 *.sf3 *.sfz *.sfArk);;" +
                                                         trUtf8("Fichiers .sf2") + " (*.sf2);;" +
                                                         trUtf8("Fichiers .sf3") + " (*.sf3);;" +
@@ -410,7 +404,7 @@ void MainWindow::ouvrir()
     if (strList.isEmpty())
         return;
 
-    Config::getInstance()->addFile(Config::typeFichierSoundfont, strList.first());
+    RecentFileManager::getInstance()->addRecentFile(RecentFileManager::FILE_TYPE_SOUNDFONT, strList.first());
 
     this->sf2->prepareNewActions();
     int numSf2 = -1;
@@ -423,7 +417,7 @@ void MainWindow::ouvrir()
 void MainWindow::ouvrirFichier1()
 {
     this->sf2->prepareNewActions();
-    ouvrir(this->configuration->getLastFile(Config::typeFichierSf2, 0));
+    ouvrir(RecentFileManager::getInstance()->getLastFile(RecentFileManager::FILE_TYPE_SF2, 0));
     updateDo();
     updateActions();
 }
@@ -431,7 +425,7 @@ void MainWindow::ouvrirFichier1()
 void MainWindow::ouvrirFichier2()
 {
     this->sf2->prepareNewActions();
-    ouvrir(this->configuration->getLastFile(Config::typeFichierSf2, 1));
+    ouvrir(RecentFileManager::getInstance()->getLastFile(RecentFileManager::FILE_TYPE_SF2, 1));
     updateDo();
     updateActions();
 }
@@ -439,7 +433,7 @@ void MainWindow::ouvrirFichier2()
 void MainWindow::ouvrirFichier3()
 {
     this->sf2->prepareNewActions();
-    ouvrir(this->configuration->getLastFile(Config::typeFichierSf2, 2));
+    ouvrir(RecentFileManager::getInstance()->getLastFile(RecentFileManager::FILE_TYPE_SF2, 2));
     updateDo();
     updateActions();
 }
@@ -447,7 +441,7 @@ void MainWindow::ouvrirFichier3()
 void MainWindow::ouvrirFichier4()
 {
     this->sf2->prepareNewActions();
-    ouvrir(this->configuration->getLastFile(Config::typeFichierSf2, 3));
+    ouvrir(RecentFileManager::getInstance()->getLastFile(RecentFileManager::FILE_TYPE_SF2, 3));
     updateDo();
     updateActions();
 }
@@ -455,7 +449,7 @@ void MainWindow::ouvrirFichier4()
 void MainWindow::ouvrirFichier5()
 {
     this->sf2->prepareNewActions();
-    ouvrir(this->configuration->getLastFile(Config::typeFichierSf2, 4));
+    ouvrir(RecentFileManager::getInstance()->getLastFile(RecentFileManager::FILE_TYPE_SF2, 4));
     updateDo();
     updateActions();
 }
@@ -471,7 +465,7 @@ void MainWindow::ouvrir(QString fileName)
     case 0:
         // le chargement s'est bien déroulé
         if (fileName.endsWith("2"))
-            this->configuration->addFile(Config::typeFichierSf2, fileName);
+            RecentFileManager::getInstance()->addRecentFile(RecentFileManager::FILE_TYPE_SF2, fileName);;
         updateFavoriteFiles();
         updateActions();
         break;
@@ -548,16 +542,16 @@ void MainWindow::Fermer()
         id = ui->arborescence->getFirstID();
         id.typeElement = elementSf2;
         EltID elementSuivant = ui->arborescence->getNextID(true);
-        this->ui->arborescence->selectNone();
+        ui->arborescence->selectNone();
         sf2->remove(id);
-        this->ui->arborescence->select(elementSuivant, true);
+        ui->arborescence->select(elementSuivant, true);
         updateActions();
         updateDo();
     }break;
     }
 
     // Remove pasted IDs
-    this->ui->arborescence->clearPastedID();
+    ui->arborescence->clearPastedID();
 }
 
 void MainWindow::supprimerElt()
@@ -635,7 +629,8 @@ int MainWindow::sauvegarder(int indexSf2, bool saveAs)
     // Compte du nombre de générateurs utilisés
     int unusedSmpl, unusedInst, usedSmpl, usedInst, usedPrst, instGen, prstGen;
     this->page_sf2->compte(unusedSmpl, unusedInst, usedSmpl, usedInst, usedPrst, instGen, prstGen);
-    if ((instGen > 65536 || prstGen > 65536) && Config::getInstance()->getActivationSaveWarning_toManyGenerators())
+    if ((instGen > 65536 || prstGen > 65536) && ConfManager::getInstance()->getValue(ConfManager::SECTION_WARNINGS,
+                                                                                     "to_many_generators", true).toBool())
     {
         int ret = QMessageBox::Save;
         QMessageBox msgBox(this);
@@ -659,7 +654,7 @@ int MainWindow::sauvegarder(int indexSf2, bool saveAs)
         ret = msgBox.exec();
         if (ret == QMessageBox::Cancel) return 1;
         if (ret == QMessageBox::YesAll)
-            Config::getInstance()->setActivationSaveWarning_toManyGenerators(false);
+            ConfManager::getInstance()->setValue(ConfManager::SECTION_WARNINGS, "to_many_generators", false);
     }
 
     QString fileName;
@@ -667,7 +662,8 @@ int MainWindow::sauvegarder(int indexSf2, bool saveAs)
     {
         if (sf2->getQstr(id, champ_filename) == "")
         {
-            fileName = Config::getInstance()->getLastDirectory(Config::typeFichierSf2) + "/" + sf2->getQstr(id, champ_name) + ".sf2";
+            fileName = RecentFileManager::getInstance()->getLastDirectory(RecentFileManager::FILE_TYPE_SF2) +
+                    "/" + sf2->getQstr(id, champ_name) + ".sf2";
             fileName = QFileDialog::getSaveFileName(this, trUtf8("Sauvegarder une soundfont"), fileName, trUtf8("Fichier .sf2 (*.sf2)"));
         }
         else
@@ -681,7 +677,7 @@ int MainWindow::sauvegarder(int indexSf2, bool saveAs)
     case 0:
         // sauvegarde ok
         updateDo();
-        this->configuration->addFile(Config::typeFichierSf2, fileName);
+        RecentFileManager::getInstance()->addRecentFile(RecentFileManager::FILE_TYPE_SF2, fileName);
         updateFavoriteFiles();
         if (ui->stackedWidget->currentWidget() == this->page_sf2)
             this->page_sf2->afficher();
@@ -702,7 +698,7 @@ int MainWindow::sauvegarder(int indexSf2, bool saveAs)
 
 void MainWindow::undo()
 {
-    this->ui->arborescence->clearPastedID();
+    ui->arborescence->clearPastedID();
     sf2->undo();
     updateActions();
     updateDo();
@@ -710,7 +706,7 @@ void MainWindow::undo()
 
 void MainWindow::redo()
 {
-    this->ui->arborescence->clearPastedID();
+    ui->arborescence->clearPastedID();
     sf2->redo();
     updateActions();
     updateDo();
@@ -736,34 +732,22 @@ void MainWindow::on_action_Forum_triggered()
     // Open online forum
     QDesktopServices::openUrl(trUtf8("http://polyphone-soundfonts.com/fr/forum"));
 }
+
 void MainWindow::AfficherBarreOutils()
 {
-    if (ui->actionBarre_d_outils->isChecked())
-    {
-        this->configuration->setAfficheToolBar(true);
-        ui->toolBar->setVisible(true);
-    }
-    else
-    {
-        this->configuration->setAfficheToolBar(false);
-        ui->toolBar->setVisible(false);
-    }
+    bool display = ui->actionBarre_d_outils->isChecked();
+    ConfManager::getInstance()->setValue(ConfManager::SECTION_DISPLAY, "tool_bar", display);
+    ui->toolBar->setVisible(display);
 }
+
 void MainWindow::afficherSectionModulateurs()
 {
-    if (ui->actionSection_modulateurs->isChecked())
-    {
-        this->configuration->setAfficheMod(true);
-        this->page_inst->setModVisible(true);
-        this->page_prst->setModVisible(true);
-    }
-    else
-    {
-        this->configuration->setAfficheMod(false);
-        this->page_inst->setModVisible(false);
-        this->page_prst->setModVisible(false);
-    }
+    bool display = ui->actionSection_modulateurs->isChecked();
+    ConfManager::getInstance()->setValue(ConfManager::SECTION_DISPLAY, "section_modulateur", display);
+    this->page_inst->setModVisible(display);
+    this->page_prst->setModVisible(display);
 }
+
 void MainWindow::setKeyboardType0() {this->setKeyboardType(0);}
 void MainWindow::setKeyboardType1() {this->setKeyboardType(1);}
 void MainWindow::setKeyboardType2() {this->setKeyboardType(2);}
@@ -821,13 +805,13 @@ void MainWindow::setKeyboardType(int val)
         break;
     default:
         // Aucun clavier
-        this->ui->actionAucun->setChecked(true);
+        ui->actionAucun->setChecked(true);
         this->showKeyboard(false);
         break;
     }
 
     // Redimensionnement
-    if (configuration->getKeyboardDocked())
+    if (ConfManager::getInstance()->getValue(ConfManager::SECTION_KEYBOARD, "keyboard_in_toolbar", true).toBool())
     {
         int widthKeyboard = (int)((double)(ui->ensembleKeyboard->height()) * .87 * ui->widgetKeyboard->ratio()) + 12;
         ui->widgetKeyboard->setFixedWidth(widthKeyboard);
@@ -839,8 +823,8 @@ void MainWindow::setKeyboardType(int val)
     ui->action128_notes->blockSignals(false);
     ui->action88_notes->blockSignals(false);
 
-    // Sauvegarde du paramètre
-    this->configuration->setKeyboardType(val);
+    // Save the parameter
+    ConfManager::getInstance()->setValue(ConfManager::SECTION_KEYBOARD, "type", val);
 }
 void MainWindow::on_actionDans_la_barre_d_outils_triggered()
 {
@@ -851,8 +835,8 @@ void MainWindow::on_actionDans_la_barre_d_outils_triggered()
     ui->action_Flottant->setChecked(false);
     ui->action_Flottant->blockSignals(false);
 
-    // Sauvegarde du paramètre
-    configuration->setKeyboardDocked(true);
+    // Save the parameter
+    ConfManager::getInstance()->setValue(ConfManager::SECTION_KEYBOARD, "keyboard_in_toolbar", true);
 
     QGridLayout * layout = (QGridLayout*)ui->ensembleKeyboard->layout();
     layout->addWidget(ui->widgetKeyboard, 0, 3, 2, 1);
@@ -867,8 +851,8 @@ void MainWindow::on_action_Flottant_triggered()
     ui->actionDans_la_barre_d_outils->setChecked(false);
     ui->actionDans_la_barre_d_outils->blockSignals(false);
 
-    // Sauvegarde du paramètre
-    configuration->setKeyboardDocked(false);
+    // Save the parameter
+    ConfManager::getInstance()->setValue(ConfManager::SECTION_KEYBOARD, "keyboard_in_toolbar", false);
 
     _dialKeyboard.layout()->addWidget(ui->widgetKeyboard);
     updateActions();
@@ -880,7 +864,7 @@ void MainWindow::showKeyboard(bool val)
     ui->labelVelocite->setVisible(val);
     ui->label_2->setVisible(val);
     ui->label_3->setVisible(val);
-    if (val && !configuration->getKeyboardDocked())
+    if (val && !ConfManager::getInstance()->getValue(ConfManager::SECTION_KEYBOARD, "keyboard_in_toolbar", true).toBool())
     {
         if (!_dialKeyboard.isVisible())
         {
@@ -958,12 +942,12 @@ void MainWindow::setListeActions(QList<QAction *> listeActions)
     // On vide la barre d'outils
     QList<QAction *> actions = this->getListeActions();
     for (int i = 0; i < actions.size(); i++)
-        this->ui->toolBar->removeAction(actions.at(i));
-    this->ui->toolBar->removeAction(actionKeyboard);
+        ui->toolBar->removeAction(actions.at(i));
+    ui->toolBar->removeAction(actionKeyboard);
     int size = actionSeparators.size();
     for (int i = 0; i < size; i++)
     {
-        this->ui->toolBar->removeAction(actionSeparators.at(0));
+        ui->toolBar->removeAction(actionSeparators.at(0));
         delete actionSeparators.takeFirst();
     }
 
@@ -971,14 +955,14 @@ void MainWindow::setListeActions(QList<QAction *> listeActions)
     for (int i = 0; i < listeActions.size(); i++)
     {
         if (listeActions.at(i))
-            this->ui->toolBar->addAction(listeActions.at(i));
+            ui->toolBar->addAction(listeActions.at(i));
         else
         {
             // Ajout d'un séparateur
-            actionSeparators << this->ui->toolBar->addSeparator();
+            actionSeparators << ui->toolBar->addSeparator();
         }
     }
-    this->ui->toolBar->addAction(actionKeyboard);
+    ui->toolBar->addAction(actionKeyboard);
 }
 
 // Mise à jour
@@ -1069,7 +1053,7 @@ void MainWindow::updateActions()
         {
             // Affichage page Smpl
             page_smpl->afficher();
-            if (this->configuration->getKeyboardType() && nb == 1)
+            if (ConfManager::getInstance()->getValue(ConfManager::SECTION_KEYBOARD, "type", 1).toInt() > 0 && nb == 1)
                 this->showKeyboard(true);
             else
                 this->showKeyboard(false);
@@ -1081,7 +1065,7 @@ void MainWindow::updateActions()
             {
                 // Affichage page Inst
                 page_inst->afficher();
-                if (this->configuration->getKeyboardType())
+                if (ConfManager::getInstance()->getValue(ConfManager::SECTION_KEYBOARD, "type", 1).toInt() > 0)
                     this->showKeyboard(familleUnique);
                 else
                     this->showKeyboard(false);
@@ -1090,7 +1074,7 @@ void MainWindow::updateActions()
             {
                 // Affichage page Prst
                 page_prst->afficher();
-                if (this->configuration->getKeyboardType())
+                if (ConfManager::getInstance()->getValue(ConfManager::SECTION_KEYBOARD, "type", 1).toInt() > 0)
                     this->showKeyboard(familleUnique);
                 else
                     this->showKeyboard(false);
@@ -1267,10 +1251,10 @@ void MainWindow::enableActionSf2(bool isEnabled)
 void MainWindow::desactiveOutilsSmpl()
 {
     // Appel depuis pageSmpl
-    this->ui->action_Supprimer->setEnabled(0);
-    this->ui->menuSample->setEnabled(0);
-    this->ui->action_Enlever_les_l_ments_non_utilis_s->setEnabled(0);
-    this->ui->arborescence->desactiveSuppression();
+    ui->action_Supprimer->setEnabled(0);
+    ui->menuSample->setEnabled(0);
+    ui->action_Enlever_les_l_ments_non_utilis_s->setEnabled(0);
+    ui->arborescence->desactiveSuppression();
 }
 void MainWindow::activeOutilsSmpl()
 {
@@ -1279,7 +1263,7 @@ void MainWindow::activeOutilsSmpl()
     if (nb != 1)
     {
         this->updateActions();
-        this->ui->arborescence->clicTree();
+        ui->arborescence->clicTree();
         return;
     }
     EltID ID = ui->arborescence->getFirstID();
@@ -1287,13 +1271,13 @@ void MainWindow::activeOutilsSmpl()
     if (type != elementSmpl)
     {
         this->updateActions();
-        this->ui->arborescence->clicTree();
+        ui->arborescence->clicTree();
         return;
     }
-    this->ui->action_Supprimer->setEnabled(1);
-    this->ui->menuSample->setEnabled(1);
-    this->ui->action_Enlever_les_l_ments_non_utilis_s->setEnabled(1);
-    this->ui->arborescence->activeSuppression();
+    ui->action_Supprimer->setEnabled(1);
+    ui->menuSample->setEnabled(1);
+    ui->action_Enlever_les_l_ments_non_utilis_s->setEnabled(1);
+    ui->arborescence->activeSuppression();
 }
 bool MainWindow::isPlaying()
 {
@@ -1312,16 +1296,16 @@ void MainWindow::updateFavoriteFiles()
         case 3: qAct = ui->actionFichier_4; break;
         case 4: qAct = ui->actionFichier_5; break;
         }
-        if (!this->configuration->getLastFile(Config::typeFichierSf2, i).isEmpty())
+        if (!RecentFileManager::getInstance()->getLastFile(RecentFileManager::FILE_TYPE_SF2, i).isEmpty())
         {
-            qAct->setText(this->configuration->getLastFile(Config::typeFichierSf2, i));
-            qAct->setVisible(1);
-            qAct->setEnabled(1);
+            qAct->setText(RecentFileManager::getInstance()->getLastFile(RecentFileManager::FILE_TYPE_SF2, i));
+            qAct->setVisible(true);
+            qAct->setEnabled(true);
         }
         else
         {
-            qAct->setVisible(0);
-            qAct->setEnabled(0);
+            qAct->setVisible(false);
+            qAct->setEnabled(false);
         }
     }
 }
@@ -1329,7 +1313,7 @@ void MainWindow::updateTable(int type, int sf2, int elt, int elt2)
 {
     // Un élément a été supprimé définitivement, mise à jour des tables
     EltID id((ElementType)type, sf2, elt, elt2, 0);
-    if (this->ui->stackedWidget->currentWidget() == this->page_inst &&
+    if (ui->stackedWidget->currentWidget() == this->page_inst &&
             (id.typeElement == elementSf2 || id.typeElement == elementInst ||
              id.typeElement == elementInstSmpl ||
              id.typeElement == elementInstMod || id.typeElement == elementInstSmplMod))
@@ -1337,7 +1321,7 @@ void MainWindow::updateTable(int type, int sf2, int elt, int elt2)
         // Mise à jour table instrument
         this->page_inst->updateId(id);
     }
-    else if (this->ui->stackedWidget->currentWidget() == this->page_prst &&
+    else if (ui->stackedWidget->currentWidget() == this->page_prst &&
              (id.typeElement == elementSf2 || id.typeElement == elementPrst ||
               id.typeElement == elementPrstInst ||
               id.typeElement == elementPrstMod || id.typeElement == elementPrstInstMod))
@@ -1347,7 +1331,7 @@ void MainWindow::updateTable(int type, int sf2, int elt, int elt2)
     }
 
     // Annulation des ID copiés dans l'arborescence
-    this->ui->arborescence->clearPastedID();
+    ui->arborescence->clearPastedID();
 }
 void MainWindow::prepareNewAction()
 {
@@ -1430,7 +1414,7 @@ void MainWindow::renommerEnMasse(int renameType, QString text1, QString text2, i
         {
         case 0:{
             // Remplacement avec note en suffixe
-            QString suffix = " " + Config::getInstance()->getKeyName(sf2->get(ID, champ_byOriginalPitch).bValue, false, true);
+            QString suffix = " " + KeyNameManager::getInstance()->getKeyName(sf2->get(ID, champ_byOriginalPitch).bValue, false, true);
             SFSampleLink pos = sf2->get(ID, champ_sfSampleType).sfLinkValue;
             if (pos == rightSample || pos == RomRightSample)
                 suffix += 'R';
@@ -1562,7 +1546,7 @@ void MainWindow::importerSmpl()
     // Affichage dialogue
 //#ifdef WIN32
     QStringList strList = QFileDialog::getOpenFileNames(this, trUtf8("Importer un fichier audio"),
-                                                        Config::getInstance()->getLastDirectory(Config::typeFichierSample),
+                                                        RecentFileManager::getInstance()->getLastDirectory(RecentFileManager::FILE_TYPE_SAMPLE),
                                                         trUtf8("Fichier .wav") + " (*.wav)" + ext);
 //#else
 //    QStringList strList = QFileDialog::getOpenFileNames(this, trUtf8("Importer un fichier audio"),
@@ -1574,11 +1558,11 @@ void MainWindow::importerSmpl()
         return;
 
     this->sf2->prepareNewActions();
-    EltID id = this->ui->arborescence->getFirstID();
+    EltID id = ui->arborescence->getFirstID();
     int replace = 0;
     while (!strList.isEmpty())
     {
-        this->ui->arborescence->clearSelection();
+        ui->arborescence->clearSelection();
         this->dragAndDrop(strList.takeAt(0), id, &replace);
     }
     updateDo();
@@ -1591,7 +1575,7 @@ void MainWindow::importerSmpl(QString path, EltID id, int * replace)
     QString qStr, nom;
 
     qStr = path;
-    Config::getInstance()->addFile(Config::typeFichierSample, qStr);
+    RecentFileManager::getInstance()->addRecentFile(RecentFileManager::FILE_TYPE_SAMPLE, qStr);
     QFileInfo qFileInfo = qStr;
 
     // Récupération des informations d'un sample
@@ -1778,15 +1762,15 @@ void MainWindow::importerSmpl(QString path, EltID id, int * replace)
             val.cValue = (char)son->get(champ_chPitchCorrection);
             this->sf2->set(id, champ_chPitchCorrection, val);
 
-            // Retrait automatique du blanc au départ ?
-            if (this->configuration->getRemoveBlank())
+            // Automatically remove leading blank?
+            if (ConfManager::getInstance()->getValue(ConfManager::SECTION_NONE, "wav_remove_blank", false).toBool())
                 this->page_smpl->enleveBlanc(id);
 
-            // Ajustement automatique à la boucle ?
-            if (this->configuration->getWavAutoLoop())
+            // Automatically trim to loop?
+            if (ConfManager::getInstance()->getValue(ConfManager::SECTION_NONE, "wav_auto_loop", false).toBool())
                 this->page_smpl->enleveFin(id);
 
-            this->ui->arborescence->select(id, true);
+            ui->arborescence->select(id, true);
         }
 
         // Chargement dans la ram
@@ -1813,7 +1797,7 @@ void MainWindow::exporterSmpl()
     QList<EltID> listIDs = ui->arborescence->getAllIDs();
     if (listIDs.isEmpty()) return;
     QString qDir = QFileDialog::getExistingDirectory(this, trUtf8("Choisir un répertoire de destination"),
-                                                     Config::getInstance()->getLastDirectory(Config::typeFichierSample));
+                                                     RecentFileManager::getInstance()->getLastDirectory(RecentFileManager::FILE_TYPE_SAMPLE));
     if (qDir.isEmpty()) return;
     qDir += "/";
 
@@ -1897,7 +1881,7 @@ void MainWindow::exporterSmpl()
                     Sound::exporter(qStr + ".wav", this->sf2->getSon(id));
                 else
                     Sound::exporter(qStr + ".wav", this->sf2->getSon(id), this->sf2->getSon(id2));
-                Config::getInstance()->addFile(Config::typeFichierSample, qStr + ".wav");
+                RecentFileManager::getInstance()->addRecentFile(RecentFileManager::FILE_TYPE_SAMPLE, qStr + ".wav");
             }
         }
     }
@@ -2219,7 +2203,7 @@ void MainWindow::remplacer(EltID idSrc)
         updateDo();
         return;
     }
-    EltID idDest = this->ui->arborescence->getFirstID();
+    EltID idDest = ui->arborescence->getFirstID();
     if (idDest.typeElement != elementInstSmpl && idDest.typeElement != elementPrstInst)
         return;
     sf2->prepareNewActions();
@@ -2440,27 +2424,29 @@ void MainWindow::attenuationMini()
 {
     // Atténuation minimale souhaitée
     bool ok;
-    Config * conf = Config::getInstance();
     double rep = QInputDialog::getDouble(this, trUtf8("Question"),
                                          trUtf8("Atténuation minimale (dB) :"),
-                                         conf->getTools_2_attenuation_dB(), 0, 200, 2,
-                                         &ok);
+                                         ConfManager::getInstance()->getToolValue(
+                                             ConfManager::TOOL_TYPE_SF2, "attenuation", "dB", 5.).toDouble(),
+                                         0, 200, 2, &ok);
     if (!ok) return;
-    conf->setTools_2_attenuation_dB(rep);
+    ConfManager::getInstance()->setToolValue(ConfManager::TOOL_TYPE_SF2, "attenuation", "dB", rep);
+
     // Calcul de l'atténuation minimale actuelle
-    EltID id = this->ui->arborescence->getFirstID();
+    EltID id = ui->arborescence->getFirstID();
     id.typeElement = elementInst;
     EltID id2 = id;
     id2.typeElement = elementInstSmpl;
     qint32 attenuationMini = -1;
-    // Pour chaque instrument
+
+    // For each instrument
     for (int i = 0; i < this->sf2->count(id); i++)
     {
         id.indexElt = i;
         if (!this->sf2->get(id, champ_hidden).bValue)
         {
+            // For each sample linked
             id2.indexElt = i;
-            // Pour chaque sample lié
             for (int j = 0; j < this->sf2->count(id2); j++)
             {
                 id2.indexElt2 = j;
@@ -2477,25 +2463,29 @@ void MainWindow::attenuationMini()
             }
         }
     }
+
     // Décalage à effectuer
     double decalage = 10.0 * rep - attenuationMini;
     if (decalage == 0) return;
+
     // Application du décalage
     Valeur val;
     this->sf2->prepareNewActions();
+
     // Reprise des identificateurs si modification
-    id = this->ui->arborescence->getFirstID();
+    id = ui->arborescence->getFirstID();
     id.typeElement = elementInst;
     id2 = id;
     id2.typeElement = elementInstSmpl;
-    // Pour chaque instrument
+
+    // For each instrument
     for (int i = 0; i < this->sf2->count(id); i++)
     {
         id.indexElt = i;
         if (!this->sf2->get(id, champ_hidden).bValue)
         {
+            // For each sample linked
             id2.indexElt = i;
-            // Pour chaque sample lié
             for (int j = 0; j < this->sf2->count(id2); j++)
             {
                 id2.indexElt2 = j;
@@ -2510,7 +2500,8 @@ void MainWindow::attenuationMini()
             }
         }
     }
-    // Mise à jour
+
+    // Update interface
     this->updateDo();
     if (ui->stackedWidget->currentWidget() == this->page_inst)
         this->page_inst->afficher();
@@ -2520,7 +2511,7 @@ void MainWindow::associationAutoSmpl()
     // Association automatique des samples
     // Condition : même nom sauf pour la dernière lettre (R ou L)
     this->sf2->prepareNewActions();
-    EltID id = this->ui->arborescence->getFirstID();
+    EltID id = ui->arborescence->getFirstID();
     id.typeElement = elementSmpl;
     // Constitution listes de noms et indices
     QList<EltID> listID;
@@ -2602,7 +2593,7 @@ void MainWindow::associationAutoSmpl()
 void MainWindow::on_action_Dissocier_les_samples_st_r_o_triggered()
 {
     this->sf2->prepareNewActions();
-    EltID id = this->ui->arborescence->getFirstID();
+    EltID id = ui->arborescence->getFirstID();
     id.typeElement = elementSmpl;
     for (int i = 0; i < sf2->count(id); i++)
     {
@@ -2636,15 +2627,15 @@ void MainWindow::on_action_Dissocier_les_samples_st_r_o_triggered()
 }
 void MainWindow::on_actionExporter_pics_de_fr_quence_triggered()
 {
-    EltID id = this->ui->arborescence->getFirstID();
+    EltID id = ui->arborescence->getFirstID();
     id.typeElement = elementSf2;
-    QString defaultFile = configuration->getLastDirectory(Config::typeFichierFrequences) + "/" +
+    QString defaultFile = RecentFileManager::getInstance()->getLastDirectory(RecentFileManager::FILE_TYPE_FREQUENCIES) + "/" +
             sf2->getQstr(id, champ_name).replace(QRegExp(QString::fromUtf8("[`~*|:<>«»?/{}\"\\\\]")), "_") + ".csv";
     QString fileName = QFileDialog::getSaveFileName(this, trUtf8("Exporter les pics de fréquence"),
                                                     defaultFile, trUtf8("Fichier .csv (*.csv)"));
     if (!fileName.isEmpty())
     {
-        configuration->addFile(Config::typeFichierFrequences, fileName);
+        RecentFileManager::getInstance()->addRecentFile(RecentFileManager::FILE_TYPE_FREQUENCIES, fileName);
         exporterFrequences(fileName);
     }
 }
@@ -2662,7 +2653,7 @@ void MainWindow::exporterFrequences(QString fileName)
            << trUtf8("Facteur") << "\"" << sep << "\"" << trUtf8("Fréquence") << "\"" << sep << "\""
            << trUtf8("Note") << "\"" << sep << "\"" << trUtf8("Correction") << "\"";
 
-    EltID id = this->ui->arborescence->getFirstID();
+    EltID id = ui->arborescence->getFirstID();
     id.typeElement = elementSmpl;
     QString nomSmpl;
     QList<double> listeFrequences, listeFacteurs;
@@ -2684,7 +2675,7 @@ void MainWindow::exporterFrequences(QString fileName)
                 stream << j << sep;
                 stream << QString::number(listeFacteurs.at(j)).replace(".", trUtf8(",")) << sep;
                 stream << QString::number(listeFrequences.at(j)).replace(".", trUtf8(",")) << sep;
-                stream << Config::getInstance()->getKeyName(listeNotes.at(j)) << sep;
+                stream << KeyNameManager::getInstance()->getKeyName(listeNotes.at(j)) << sep;
                 stream << listeCorrections.at(j);
             }
         }
@@ -2695,7 +2686,7 @@ void MainWindow::exporterFrequences(QString fileName)
 void MainWindow::on_actionEnlever_tous_les_modulateurs_triggered()
 {
     this->sf2->prepareNewActions();
-    EltID id = this->ui->arborescence->getFirstID();
+    EltID id = ui->arborescence->getFirstID();
 
     int count = 0;
 
@@ -2811,7 +2802,7 @@ void MainWindow::noteHover(int key, int vel)
     {
         if (key != -1)
         {
-            ui->labelNote->setText(configuration->getKeyName(key));
+            ui->labelNote->setText(KeyNameManager::getInstance()->getKeyName(key));
             ui->labelVelocite->setText(QString::number(vel));
         }
         else
@@ -2880,7 +2871,7 @@ void MainWindow::noteChanged(int key, int vel)
 
     if (vel > 0 && key != -1)
     {
-        ui->labelNote->setText(configuration->getKeyName(key));
+        ui->labelNote->setText(KeyNameManager::getInstance()->getKeyName(key));
         ui->labelVelocite->setText(QString::number(vel));
     }
     else
@@ -2900,7 +2891,7 @@ void MainWindow::noteChanged(int key, int vel)
             else if (ui->arborescence->isSelectedItemsFamilyUnique())
             {
                 if ((id.typeElement == elementInst || id.typeElement == elementInstSmpl) &&
-                        this->ui->arborescence->isSelectedItemsFamilyUnique())
+                        ui->arborescence->isSelectedItemsFamilyUnique())
                 {
                     // Mise en évidence des étendues concernées
                     if (vel)
@@ -2963,7 +2954,7 @@ void MainWindow::noteChanged(int key, int vel)
                     this->synth->play(1, id.indexSf2, id.indexElt, key, vel);
                 }
                 else if ((id.typeElement == elementPrst || id.typeElement == elementPrstInst) &&
-                         this->ui->arborescence->isSelectedItemsFamilyUnique())
+                         ui->arborescence->isSelectedItemsFamilyUnique())
                     this->synth->play(2, id.indexSf2, id.indexElt, key, vel);
             }
         }
@@ -2975,14 +2966,9 @@ void MainWindow::setSynthGain(int val)
     this->synth->setGain(val);
 }
 
-void MainWindow::setSynthReverb(int level, int size, int width, int damping)
+void MainWindow::updateSynthChoRev()
 {
-    this->synth->setReverb(level, size, width, damping);
-}
-
-void MainWindow::setSynthChorus(int level, int depth, int frequency)
-{
-    this->synth->setChorus(level, depth, frequency);
+    this->synth->updateChorusReverb();
 }
 
 void MainWindow::setRangeAndRootKey(int rootKey, int noteMin, int noteMax)

@@ -264,7 +264,7 @@ void AudioDevice::openJackConnection(int bufferSize)
     jack_on_shutdown(_jack_client, jack_shutdown, 0);
 
     // Enregistrement fréquence d'échantillonnage
-    this->_format.setSampleRate((int)jack_get_sample_rate(_jack_client));
+    _format.setSampleRate((int)jack_get_sample_rate(_jack_client));
 
     // Modification taille buffer
     jack_set_buffer_size(_jack_client, bufferSize);

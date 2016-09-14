@@ -23,18 +23,18 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#include "translationsystem.h"
+#include "translationmanager.h"
 #include <QLocale>
 #include <QApplication>
 #include <QSettings>
 #include <QTranslator>
 #include <QDirIterator>
 
-TranslationSystem * TranslationSystem::_instance = NULL;
-const QString TranslationSystem::DEFAULT_LANGUAGE = "en"; // English is the default language;
-const QString TranslationSystem::RESOURCE_PATH = ":/traductions/ressources/traductions";
+TranslationManager * TranslationManager::_instance = NULL;
+const QString TranslationManager::DEFAULT_LANGUAGE = "en"; // English is the default language;
+const QString TranslationManager::RESOURCE_PATH = ":/traductions/ressources/traductions";
 
-TranslationSystem::TranslationSystem() :
+TranslationManager::TranslationManager() :
     _translator(new QTranslator())
 {
     // List of available languages (in code + in translation files)
@@ -50,25 +50,25 @@ TranslationSystem::TranslationSystem() :
     }
 }
 
-TranslationSystem::~TranslationSystem()
+TranslationManager::~TranslationManager()
 {
     delete _translator;
     _instance = NULL;
 }
 
-TranslationSystem * TranslationSystem::getInstance()
+TranslationManager * TranslationManager::getInstance()
 {
     if (!_instance)
-        _instance = new TranslationSystem();
+        _instance = new TranslationManager();
     return _instance;
 }
 
-void TranslationSystem::addTranslation(QString languageName, QString locale)
+void TranslationManager::addTranslation(QString languageName, QString locale)
 {
     _languages[locale] = languageName;
 }
 
-void TranslationSystem::translate(QApplication * a)
+void TranslationManager::translate(QApplication * a)
 {
     // Language used
     QSettings settings;
@@ -84,7 +84,7 @@ void TranslationSystem::translate(QApplication * a)
     }
 }
 
-QMap<QString, QString> TranslationSystem::getLanguages()
+QMap<QString, QString> TranslationManager::getLanguages()
 {
     return getInstance()->_languages;
 }
