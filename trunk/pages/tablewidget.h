@@ -72,6 +72,11 @@ private slots:
 private:
     QTimer *_timer;
     QList<QColor> _listColors;
+
+    void copy();
+    void paste();
+    void deleteCells();
+    void cut();
 };
 
 #endif // TABLEWIDGET_H
