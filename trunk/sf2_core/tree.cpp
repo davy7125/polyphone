@@ -983,3 +983,25 @@ void Tree::mousePressEvent(QMouseEvent *event)
     if (this->indexAt(event->pos()).isValid())
         QTreeWidget::mousePressEvent(event);
 }
+
+void Tree::mouseDoubleClickEvent(QMouseEvent *event)
+{
+    EltID id = this->getItemID(this->itemAt(event->pos()));
+    if (event->button() == Qt::LeftButton && (id.typeElement == elementInstSmpl || id.typeElement == elementPrstInst))
+    {
+        if (id.typeElement == elementInstSmpl)
+        {
+            id.indexElt = _sf2->get(id, champ_sampleID).wValue;
+            id.typeElement = elementSmpl;
+        }
+        else
+        {
+            id.indexElt =_sf2->get(id, champ_instrument).wValue;
+            id.typeElement = elementInst;
+        }
+
+        this->selectNone();
+        this->select(id, true);
+        this->scrollToItem(this->selectedItems()[0]);
+    }
+}

@@ -3394,3 +3394,25 @@ void PageTable::keyPlayed(int key, int velocity)
     // Visualization on the range editor
     _rangeEditor->playKey(key, velocity);
 }
+
+void PageTable::onOpenElement(EltID id)
+{
+    // Find the element represented by the division
+    if (id.typeElement == elementInstSmpl || id.typeElement == elementPrstInst)
+    {
+        if (id.typeElement == elementInstSmpl)
+        {
+            id.indexElt = _sf2->get(id, champ_sampleID).wValue;
+            id.typeElement = elementSmpl;
+        }
+        else
+        {
+            id.indexElt =_sf2->get(id, champ_instrument).wValue;
+            id.typeElement = elementInst;
+        }
+
+        _tree->selectNone();
+        _tree->select(id, true);
+        _tree->scrollToItem(_tree->selectedItems()[0]);
+    }
+}

@@ -35,6 +35,7 @@ TableWidget::TableWidget(QWidget *parent) : QTableWidget(parent)
     setItemDelegate(new TableDelegate(this));
     _timer = new QTimer(this);
     connect(_timer, SIGNAL(timeout()), this, SLOT(updateColors()));
+    connect((QObject*)this->horizontalHeader(), SIGNAL(sectionDoubleClicked(int)), this, SLOT(onSectionDoubleClicked(int)));
 }
 
 void TableWidget::clear()
@@ -54,7 +55,7 @@ void TableWidget::addColumn(int column, QString title)
         this->setItem(i, column, new QTableWidgetItem());
     this->setHorizontalHeaderItem(column, new QTableWidgetItem(title));
 
-    // Ajout d'un élément couleur
+    // Add a colored element
     QColor color = this->palette().color(QPalette::Text);
     _listColors.insert(column, color);
     this->horizontalHeaderItem(column)->setForeground(color);
@@ -420,4 +421,13 @@ void TableWidget::cut()
 {
     copy();
     deleteCells();
+}
+
+void TableWidget::onSectionDoubleClicked(int index)
+{
+    if (index != 0) // Global is rejected
+    {
+        EltID id = getID(index);
+        openElement(id);
+    }
 }

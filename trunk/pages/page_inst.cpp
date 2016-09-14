@@ -90,6 +90,7 @@ Page_Inst::Page_Inst(QWidget *parent) :
 
     connect(this->table, SIGNAL(actionBegin()), this, SLOT(actionBegin()));
     connect(this->table, SIGNAL(actionFinished()), this, SLOT(actionFinished()));
+    connect(this->table, SIGNAL(openElement(EltID)), this, SLOT(onOpenElement(EltID)));
     connect(ui->rangeEditor, SIGNAL(updateKeyboard()), this, SLOT(updateKeyboard()));
     connect(ui->rangeEditor, SIGNAL(divisionUpdated()), this, SLOT(updateMainwindow()));
     connect(ui->rangeEditor, SIGNAL(keyTriggered(int,int)), this, SLOT(playKey(int, int)));
