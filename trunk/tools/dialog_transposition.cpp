@@ -1,19 +1,21 @@
 #include "dialog_transposition.h"
 #include "ui_dialog_transposition.h"
-#include "config.h"
+#include "confmanager.h"
 
 DialogTransposition::DialogTransposition(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::DialogTransposition)
 {
+    // Prepare the interface
     ui->setupUi(this);
     this->setWindowFlags((windowFlags() & ~Qt::WindowContextHelpButtonHint));
     this->setAttribute(Qt::WA_DeleteOnClose, true);
 
-    // Load last configuration
-    Config * conf = Config::getInstance();
-    ui->spinTon->setValue(conf->getTools_i_transpo_ton());
-    ui->checkKeyRange->setChecked(conf->getTools_i_transpo_keyrange());
+    // Recall last configuration
+    ui->spinTon->setValue(ConfManager::getInstance()->getToolValue(
+                              ConfManager::TOOL_TYPE_INSTRUMENT, "transposition", "ton", 12.).toDouble());
+    ui->checkKeyRange->setChecked(ConfManager::getInstance()->getToolValue(
+                                      ConfManager::TOOL_TYPE_INSTRUMENT, "transposition", "keyrange", 12).toBool());
 }
 
 DialogTransposition::~DialogTransposition()
@@ -24,9 +26,10 @@ DialogTransposition::~DialogTransposition()
 void DialogTransposition::on_buttonBox_accepted()
 {
     // Save configuration
-    Config * conf = Config::getInstance();
-    conf->setTools_i_transpo_ton(ui->spinTon->value());
-    conf->setTools_i_transpo_keyrange(ui->checkKeyRange->isChecked());
+    ConfManager::getInstance()->setToolValue(
+                ConfManager::TOOL_TYPE_INSTRUMENT, "transposition", "ton", ui->spinTon->value());
+    ConfManager::getInstance()->setToolValue(
+                ConfManager::TOOL_TYPE_INSTRUMENT, "transposition", "keyrange", ui->checkKeyRange->isChecked());
 
     // Emit signal and quit
     accepted(ui->spinTon->value(), ui->checkKeyRange->isChecked());

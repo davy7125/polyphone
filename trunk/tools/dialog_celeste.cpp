@@ -24,20 +24,25 @@
 
 #include "dialog_celeste.h"
 #include "ui_dialog_celeste.h"
-#include "config.h"
+#include "confmanager.h"
+#include "keynamemanager.h"
 
 DialogCeleste::DialogCeleste(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::DialogCeleste)
 {
+    // Prepare the interface
     ui->setupUi(this);
     this->setWindowFlags((windowFlags() & ~Qt::WindowContextHelpButtonHint));
-    Config * conf = Config::getInstance();
-    ui->doubleSpinHerz->setValue(conf->getTools_i_celeste_herzDo());
-    ui->doubleSpinDiv->setValue(conf->getTools_i_celeste_division());
+
+    // Recall previous values
+    ui->doubleSpinHerz->setValue(ConfManager::getInstance()->getToolValue(
+                                     ConfManager::TOOL_TYPE_INSTRUMENT, "ondulation", "herz", 4.).toDouble());
+    ui->doubleSpinDiv->setValue(ConfManager::getInstance()->getToolValue(
+                                    ConfManager::TOOL_TYPE_INSTRUMENT, "ondulation", "division", 1.).toDouble());
 
     ui->label->setText(trUtf8("Nombre de battements par secondes (note ") +
-                       conf->getKeyName(60) + ")");
+                       KeyNameManager::getInstance()->getKeyName(60) + ")");
 }
 
 DialogCeleste::~DialogCeleste()
@@ -49,13 +54,11 @@ DialogCeleste::~DialogCeleste()
 
 void DialogCeleste::accept()
 {
-    // Sauvegarde des valeurs
-    Config * conf = Config::getInstance();
-    conf->setTools_i_celeste_herzDo(this->ui->doubleSpinHerz->value());
-    conf->setTools_i_celeste_division(this->ui->doubleSpinDiv->value());
+    // Save current parameters
+    ConfManager::getInstance()->setToolValue(ConfManager::TOOL_TYPE_INSTRUMENT, "ondulation", "herz", ui->doubleSpinHerz->value());
+    ConfManager::getInstance()->setToolValue(ConfManager::TOOL_TYPE_INSTRUMENT, "ondulation", "division", ui->doubleSpinDiv->value());
 
-    // Envoi des valeurs
-    this->accepted(this->ui->doubleSpinHerz->value(),
-                   this->ui->doubleSpinDiv->value());
+    // Send values
+    this->accepted(ui->doubleSpinHerz->value(), ui->doubleSpinDiv->value());
     QDialog::accept();
 }

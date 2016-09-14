@@ -82,7 +82,6 @@ private slots:
     void setGainSample(int val);
     void setStereo(bool val);
     void selectionChanged();
-    void updateColors();
     void on_pushAutoTune_clicked();
 
 private:

@@ -23,7 +23,7 @@
 ***************************************************************************/
 
 #include "spinboxkey.h"
-#include "config.h"
+#include "keynamemanager.h"
 
 SpinBoxKey::SpinBoxKey(QWidget *parent) :
     QSpinBox(parent)
@@ -36,7 +36,7 @@ SpinBoxKey::SpinBoxKey(QWidget *parent) :
 QValidator::State SpinBoxKey::validate(QString &input, int &pos) const
 {
     Q_UNUSED(pos);
-    int numKey = Config::getInstance()->getKeyNum(input);
+    int numKey = KeyNameManager::getInstance()->getKeyNum(input);
     if (numKey < 0 || numKey > 127)
         return QValidator::Invalid;
     return QValidator::Acceptable;
@@ -44,10 +44,10 @@ QValidator::State SpinBoxKey::validate(QString &input, int &pos) const
 
 int SpinBoxKey::valueFromText(const QString &text) const
 {
-    return Config::getInstance()->getKeyNum(text);
+    return KeyNameManager::getInstance()->getKeyNum(text);
 }
 
 QString SpinBoxKey::textFromValue(int val) const
 {
-    return Config::getInstance()->getKeyName(val);
+    return KeyNameManager::getInstance()->getKeyName(val);
 }

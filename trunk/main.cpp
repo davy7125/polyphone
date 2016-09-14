@@ -25,17 +25,19 @@
 #include <QApplication>
 #include <QFileInfo>
 #include <QSettings>
+#include <QStyleFactory>
 #include "pile_sf2.h"
 #include "conversion_sfz.h"
 #include "import_sfz.h"
 #include "sfarkextractor.h"
 #include "options.h"
+#include "thememanager.h"
 
 #if QT_VERSION >= QT_VERSION_CHECK(5, 0, 0)
 #include <QDesktopWidget>
 #endif
 #include "mainwindow.h"
-#include "translationsystem.h"
+#include "translationmanager.h"
 
 #ifdef Q_OS_MAC
 #include "macapplication.h"
@@ -43,16 +45,20 @@
 
 int launchApplication(Options &options, QApplication &a)
 {
-    // Nom de l'application
+    // Application style
+    QApplication::setStyle(QStyleFactory::create("Fusion"));
+    qApp->setPalette(ThemeManager::getInstance()->getPalette());
+
+    // Application name
     a.setApplicationName("Polyphone");
     a.setOrganizationName("polyphone");
-    TranslationSystem::translate(&a);
+    TranslationManager::translate(&a);
 
-    // Affichage fenêtre
+    // Display the main window
     MainWindow w;
     w.show();
 
-    // Ouverture des fichiers passés en argument
+    // Open files passed as argument
     QStringList inputFiles = options.getInputFiles();
     int numSf2 = -1;
     foreach (QString file, inputFiles)
@@ -65,11 +71,11 @@ int launchApplication(Options &options, QApplication &a)
     return a.exec();
 }
 
-// Error codes
-// 1: input file does not exist, or output file already exists
-// 2: bad extension
-// 3: cannot open the input file (corrupted are not accessible)
-// 4: cannot save the output file (internal problem or write access denied)
+/// Error codes
+/// 1: input file does not exist, or output file already exists
+/// 2: bad extension
+/// 3: cannot open the input file (corrupted are not accessible)
+/// 4: cannot save the output file (internal problem or write access denied)
 int convert(Options &options)
 {
     QFileInfo inputFile(options.getInputFiles()[0]);
@@ -90,7 +96,7 @@ int convert(Options &options)
         return 1;
     }
 
-    // Load inputfile
+    // Load input file
     Pile_sf2 sf2(NULL, false);
     QString inputExtension = inputFile.suffix().toLower();
     qDebug() << "Loading file" << inputFile.filePath() << "...";
@@ -139,7 +145,7 @@ int convert(Options &options)
     }
     qWarning() << "done";
 
-    // Save in outputfile
+    // Save in output file
     switch (options.mode())
     {
     case Options::MODE_CONVERSION_TO_SF2: case Options::MODE_CONVERSION_TO_SF3:

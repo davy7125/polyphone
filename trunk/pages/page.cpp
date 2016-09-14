@@ -24,7 +24,8 @@
 
 #include "page.h"
 #include "pile_sf2.h"
-#include "config.h"
+#include "confmanager.h"
+#include "keynamemanager.h"
 #include "mainwindow.h"
 #include <qmath.h>
 
@@ -51,10 +52,10 @@ char * Page::getTextValue(char * T, quint16 champ, genAmountType genVal)
         break;
     case champ_keyRange:
         if (genVal.ranges.byLo == genVal.ranges.byHi)
-            sprintf(T, "%s", Config::getInstance()->getKeyName(genVal.ranges.byLo).toStdString().c_str());
+            sprintf(T, "%s", KeyNameManager::getInstance()->getKeyName(genVal.ranges.byLo).toStdString().c_str());
         else
-            sprintf(T, "%s-%s", Config::getInstance()->getKeyName(genVal.ranges.byLo).toStdString().c_str(),
-                    Config::getInstance()->getKeyName(genVal.ranges.byHi).toStdString().c_str());
+            sprintf(T, "%s-%s", KeyNameManager::getInstance()->getKeyName(genVal.ranges.byLo).toStdString().c_str(),
+                    KeyNameManager::getInstance()->getKeyName(genVal.ranges.byHi).toStdString().c_str());
         break;
     case champ_initialAttenuation: case champ_pan: case champ_initialFilterQ:
     case champ_modLfoToVolume:
@@ -64,7 +65,7 @@ char * Page::getTextValue(char * T, quint16 champ, genAmountType genVal)
         break;
 
     case champ_keynum: case champ_overridingRootKey:
-        sprintf(T, "%s", Config::getInstance()->getKeyName(genVal.wAmount).toStdString().c_str());
+        sprintf(T, "%s", KeyNameManager::getInstance()->getKeyName(genVal.wAmount).toStdString().c_str());
         break;
 
     case champ_sampleModes: case champ_exclusiveClass: case champ_velocity:
@@ -699,8 +700,8 @@ genAmountType Page::getValue(QString texte, quint16 champ, bool &ok)
         }
         else
         {
-            val1 = Config::getInstance()->getKeyNum(txtLeft);
-            val2 = Config::getInstance()->getKeyNum(txtRight);
+            val1 = KeyNameManager::getInstance()->getKeyNum(txtLeft);
+            val2 = KeyNameManager::getInstance()->getKeyNum(txtRight);
             ok = (val1 != -1) && (val2 != -1);
         }
 
@@ -730,7 +731,7 @@ genAmountType Page::getValue(QString texte, quint16 champ, bool &ok)
         genAmount.wAmount = (quint16)iTmp;
         break;
     case champ_overridingRootKey: case champ_keynum:{
-        int keyNum = Config::getInstance()->getKeyNum(texte);
+        int keyNum = KeyNameManager::getInstance()->getKeyNum(texte);
         ok = (keyNum >= 0);
         genAmount.wAmount = (quint16)limit(keyNum, 0, 127);
     }break;
@@ -838,10 +839,10 @@ void Page::playKey(int key, int velocity)
 
 void Page::selectInTree(QList<EltID> ids)
 {
-    bool previousBlockState = this->_tree->blockSignals(true);
-    this->_tree->selectNone();
+    bool previousBlockState = _tree->blockSignals(true);
+    _tree->selectNone();
     foreach (EltID id, ids)
-        this->_tree->select(id);
-    this->_tree->updateAtNextSelectionRequest();
-    this->_tree->blockSignals(previousBlockState);
+        _tree->select(id);
+    _tree->updateAtNextSelectionRequest();
+    _tree->blockSignals(previousBlockState);
 }

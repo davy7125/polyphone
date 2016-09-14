@@ -39,7 +39,7 @@ public:
 
 private:
     double _x, _y;
-    static const QPen s_penLine;
+    QPen _penLine;
 };
 
 #endif // GRAPHICSZOOMLINE_H

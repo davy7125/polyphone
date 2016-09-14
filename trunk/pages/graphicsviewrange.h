@@ -102,8 +102,8 @@ private:
     static const double WIDTH;
     static const double MARGIN;
     static const double OFFSET;
-    static const QColor LINE_COLOR;
-    static const QColor TEXT_COLOR;
+    QColor _lineColor;
+    QColor _textColor;
 };
 
 #endif // GRAPHICSVIEWRANGE_H

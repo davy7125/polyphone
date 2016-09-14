@@ -24,7 +24,7 @@
 
 #include "dialog_duplication.h"
 #include "ui_dialog_duplication.h"
-#include "config.h"
+#include "confmanager.h"
 #include <stdio.h>
 
 DialogDuplication::DialogDuplication(bool isPrst, QWidget *parent) :
@@ -32,51 +32,80 @@ DialogDuplication::DialogDuplication(bool isPrst, QWidget *parent) :
     ui(new Ui::DialogDuplication),
     _isPrst(isPrst)
 {
+    // Preparation of the interface
     ui->setupUi(this);
     this->setWindowFlags((windowFlags() & ~Qt::WindowContextHelpButtonHint));
 
-    // Chargement des valeurs
-    Config * conf = Config::getInstance();
-    _listeVelocites = conf->getTools_duplication_velocites(_isPrst);
-    this->ui->checkForEachKey->setChecked(conf->getTools_duplication_duplicKey(_isPrst));
-    this->ui->checkForEachVelocityRange->setChecked(conf->getTools_duplication_duplicVel(_isPrst));
+    // Recall values
+    _listeVelocites = getStoredVelocites();
+    ui->checkForEachKey->setChecked(ConfManager::getInstance()->getToolValue(
+                                        _isPrst ? ConfManager::TOOL_TYPE_PRESET : ConfManager::TOOL_TYPE_INSTRUMENT,
+                                        "duplication", "duplicationKeys", true).toBool());
+    ui->checkForEachVelocityRange->setChecked(ConfManager::getInstance()->getToolValue(
+                                                  _isPrst ? ConfManager::TOOL_TYPE_PRESET : ConfManager::TOOL_TYPE_INSTRUMENT,
+                                                  "duplication", "duplicationVelocity", true).toBool());
     this->on_checkForEachVelocityRange_clicked();
     if (_listeVelocites.size() >= 2)
     {
-        this->ui->spinMinVel->blockSignals(true);
-        this->ui->spinMinVel->setValue(_listeVelocites.at(0));
-        this->ui->spinMinVel->blockSignals(false);
-        this->ui->spinMaxVel->blockSignals(true);
-        this->ui->spinMaxVel->setValue(_listeVelocites.at(1));
-        this->ui->spinMaxVel->blockSignals(false);
+        ui->spinMinVel->blockSignals(true);
+        ui->spinMinVel->setValue(_listeVelocites.at(0));
+        ui->spinMinVel->blockSignals(false);
+        ui->spinMaxVel->blockSignals(true);
+        ui->spinMaxVel->setValue(_listeVelocites.at(1));
+        ui->spinMaxVel->blockSignals(false);
     }
 
-    // Affichage des vélocités
+    // Display velocities
     this->dispVel();
+}
+
+QVector<int> DialogDuplication::getStoredVelocites()
+{
+    QList<QVariant> defaultList;
+    defaultList << 0 << 127;
+    QList<QVariant> listTmp = ConfManager::getInstance()->getToolValue(
+                _isPrst ? ConfManager::TOOL_TYPE_PRESET : ConfManager::TOOL_TYPE_INSTRUMENT,
+                "duplication", "velocities", defaultList).toList();
+    QVector<int> vectRet;
+    vectRet.resize(listTmp.size());
+    for (int i = 0; i < listTmp.size(); i++)
+        vectRet[i] = listTmp.at(i).toDouble();
+    return vectRet;
+}
+
+void DialogDuplication::storeVelocities(QVector<int> val)
+{
+    QVariantList listTmp;
+    for (int i = 0; i < val.size(); i++)
+        listTmp << val.at(i);
+    ConfManager::getInstance()->setToolValue(
+                _isPrst ? ConfManager::TOOL_TYPE_PRESET : ConfManager::TOOL_TYPE_INSTRUMENT,
+                "duplication", "velocities", listTmp);
 }
 
 void DialogDuplication::dispVel()
 {
-    // Effacement liste vélocités
-    this->ui->listVelocites->blockSignals(true);
-    int selectedIndex = this->ui->listVelocites->currentRow();
-    this->ui->listVelocites->clear();
+    // Clear velocity list
+    ui->listVelocites->blockSignals(true);
+    int selectedIndex = ui->listVelocites->currentRow();
+    ui->listVelocites->clear();
+
     // Remplissage
     int valMin, valMax;
-    for (int i = 0; i < this->_listeVelocites.size() / 2; i++)
+    for (int i = 0; i < _listeVelocites.size() / 2; i++)
     {
-        // Ajout élément
+        // Add an element
         valMin = qMin(_listeVelocites.at(2*i), _listeVelocites.at(2*i+1));
         valMax = qMax(_listeVelocites.at(2*i), _listeVelocites.at(2*i+1));
         char T[30];
         sprintf(T, "%d - %d", valMin, valMax);
-        this->ui->listVelocites->addItem(T);
+        ui->listVelocites->addItem(T);
     }
-    if (this->ui->listVelocites->count() > selectedIndex)
-        this->ui->listVelocites->setCurrentRow(selectedIndex);
-    else if (this->ui->listVelocites->count() > selectedIndex - 1)
-        this->ui->listVelocites->setCurrentRow(selectedIndex - 1);
-    this->ui->listVelocites->blockSignals(false);
+    if (ui->listVelocites->count() > selectedIndex)
+        ui->listVelocites->setCurrentRow(selectedIndex);
+    else if (ui->listVelocites->count() > selectedIndex - 1)
+        ui->listVelocites->setCurrentRow(selectedIndex - 1);
+    ui->listVelocites->blockSignals(false);
 }
 
 DialogDuplication::~DialogDuplication()
@@ -86,17 +115,17 @@ DialogDuplication::~DialogDuplication()
 
 void DialogDuplication::on_pushAdd_clicked()
 {
-    int minVel = qMin(this->ui->spinMinVel->value(), this->ui->spinMaxVel->value());
-    int maxVel = qMax(this->ui->spinMinVel->value(), this->ui->spinMaxVel->value());
+    int minVel = qMin(ui->spinMinVel->value(), ui->spinMaxVel->value());
+    int maxVel = qMax(ui->spinMinVel->value(), ui->spinMaxVel->value());
     _listeVelocites.append(minVel);
     _listeVelocites.append(maxVel);
     this->dispVel();
-    this->ui->listVelocites->setCurrentRow(this->ui->listVelocites->count()-1);
+    ui->listVelocites->setCurrentRow(ui->listVelocites->count()-1);
 }
 
 void DialogDuplication::on_pushRemove_clicked()
 {
-    int index = this->ui->listVelocites->currentRow();
+    int index = ui->listVelocites->currentRow();
     if (index >= 0 && _listeVelocites.size() > 2)
     {
         _listeVelocites.remove(index * 2, 2);
@@ -107,11 +136,11 @@ void DialogDuplication::on_pushRemove_clicked()
 void DialogDuplication::on_spinMinVel_valueChanged(int arg1)
 {
     Q_UNUSED(arg1);
-    int index = this->ui->listVelocites->currentRow();
+    int index = ui->listVelocites->currentRow();
     if (index >= 0)
     {
-        int minVel = qMin(this->ui->spinMinVel->value(), this->ui->spinMaxVel->value());
-        int maxVel = qMax(this->ui->spinMinVel->value(), this->ui->spinMaxVel->value());
+        int minVel = qMin(ui->spinMinVel->value(), ui->spinMaxVel->value());
+        int maxVel = qMax(ui->spinMinVel->value(), ui->spinMaxVel->value());
         _listeVelocites[index * 2] = minVel;
         _listeVelocites[index * 2 + 1] = maxVel;
         this->dispVel();
@@ -136,15 +165,16 @@ void DialogDuplication::on_checkForEachVelocityRange_clicked()
 
 void DialogDuplication::accept()
 {
-    // Sauvegarde des valeurs
-    Config * conf = Config::getInstance();
-    conf->setTools_duplication_velocites(_isPrst, _listeVelocites);
-    bool duplicKey = this->ui->checkForEachKey->isChecked();
-    bool duplicVel = this->ui->checkForEachVelocityRange->isChecked();
-    conf->setTools_duplication_duplicKey(_isPrst, duplicKey);
-    conf->setTools_duplication_duplicVel(_isPrst, duplicVel);
+    // Save values
+    storeVelocities(_listeVelocites);
+    bool duplicKey = ui->checkForEachKey->isChecked();
+    bool duplicVel = ui->checkForEachVelocityRange->isChecked();
+    ConfManager::getInstance()->setToolValue(_isPrst ? ConfManager::TOOL_TYPE_PRESET : ConfManager::TOOL_TYPE_INSTRUMENT,
+                                             "duplication", "duplicationKeys", duplicKey);
+    ConfManager::getInstance()->setToolValue(_isPrst ? ConfManager::TOOL_TYPE_PRESET : ConfManager::TOOL_TYPE_INSTRUMENT,
+                                             "duplication", "duplicationVelocity", duplicVel);
 
-    // Envoi des valeurs
+    // Send values
     if ((duplicKey || duplicVel) && _listeVelocites.size())
         emit(accepted(_listeVelocites, duplicKey, duplicVel));
     QDialog::accept();

@@ -24,7 +24,8 @@
 
 #include "dialog_visualizer.h"
 #include "ui_dialog_visualizer.h"
-#include "config.h"
+#include "confmanager.h"
+#include "keynamemanager.h"
 #include "page.h"
 
 DialogVisualizer::DialogVisualizer(Pile_sf2 *sf2, EltID id, QWidget *parent) :
@@ -33,7 +34,7 @@ DialogVisualizer::DialogVisualizer(Pile_sf2 *sf2, EltID id, QWidget *parent) :
     ui(new Ui::DialogVisualizer),
     _initialID(id)
 {
-    // Initialisation liste des champs
+    // Initialize fields
     QList<Champ> listeDesChamps;
     listeDesChamps << champ_initialAttenuation
                    << champ_pan
@@ -75,29 +76,33 @@ DialogVisualizer::DialogVisualizer(Pile_sf2 *sf2, EltID id, QWidget *parent) :
     this->setWindowFlags((windowFlags() & ~Qt::WindowContextHelpButtonHint));
     _isPrst = id.typeElement == elementPrst || id.typeElement == elementPrstInst;
 
-    Config * conf = Config::getInstance();
-
-    // Chargement de la dernière configuration
-    this->ui->comboParameter->blockSignals(true);
+    // Load last configuration
+    ui->comboParameter->blockSignals(true);
     for (int i = 0; i < listeDesChamps.size(); i++)
     {
         ui->comboParameter->addItem(Page::getGenName(listeDesChamps.at(i), 1 + _isPrst));
         ui->comboParameter->setItemData(i, (int)listeDesChamps.at(i));
     }
-    this->ui->comboParameter->setCurrentIndex(conf->getTools_visualizer_parameter(_isPrst));
-    this->ui->comboParameter->blockSignals(false);
-    this->ui->checkLog->blockSignals(true);
-    this->ui->checkLog->setChecked(conf->getTools_visualizer_logScale(_isPrst));
-    this->ui->checkLog->blockSignals(false);
+    ui->comboParameter->setCurrentIndex(ConfManager::getInstance()->getToolValue(
+                                            _isPrst ? ConfManager::TOOL_TYPE_PRESET : ConfManager::TOOL_TYPE_INSTRUMENT,
+                                            "visualizer", "parameter", 0).toInt());
+    ui->comboParameter->blockSignals(false);
+    ui->checkLog->blockSignals(true);
+    ui->checkLog->setChecked(ConfManager::getInstance()->getToolValue(
+                                 _isPrst ? ConfManager::TOOL_TYPE_PRESET : ConfManager::TOOL_TYPE_INSTRUMENT,
+                                 "visualizer", "logScale", false).toBool());
+    ui->checkLog->blockSignals(false);
 
-    // Dessin
-    this->on_checkLog_stateChanged(conf->getTools_visualizer_logScale(_isPrst));
+    // Draw
+    this->on_checkLog_stateChanged(ConfManager::getInstance()->getToolValue(
+                                       _isPrst ? ConfManager::TOOL_TYPE_PRESET : ConfManager::TOOL_TYPE_INSTRUMENT,
+                                       "visualizer", "logScale", false).toBool());
     this->on_comboParameter_currentIndexChanged(ui->comboParameter->currentIndex());
 
-    // Légendes
-    this->ui->widgetLegendDefined->plot(QCPScatterStyle::ssCross, QColor(100, 130, 250), 5, 2, false);
-    this->ui->widgetLegendDefault->plot(QCPScatterStyle::ssCross, QColor(100, 130, 250), 5, 1, false);
-    this->ui->widgetLegendMoyenne->plot(QCPScatterStyle::ssCircle, QColor(30, 250, 80), 7, 2, true);
+    // Legends
+    ui->widgetLegendDefined->plot(QCPScatterStyle::ssCross, this->palette().color(QPalette::Highlight), 5, 2, false);
+    ui->widgetLegendDefault->plot(QCPScatterStyle::ssCross, this->palette().color(QPalette::Highlight), 5, 1, false);
+    ui->widgetLegendMoyenne->plot(QCPScatterStyle::ssCircle, this->palette().color(QPalette::NoRole), 7, 2, true);
 }
 
 DialogVisualizer::~DialogVisualizer()
@@ -108,13 +113,14 @@ DialogVisualizer::~DialogVisualizer()
 void DialogVisualizer::on_comboParameter_currentIndexChanged(int index)
 {
     // Mémorisation du paramètre
-    Config::getInstance()->setTools_visualizer_parameter(_isPrst, index);
+    ConfManager::getInstance()->setToolValue(_isPrst ? ConfManager::TOOL_TYPE_PRESET : ConfManager::TOOL_TYPE_INSTRUMENT,
+                                             "visualizer", "parameter", index);
 
     // Création des données
     QVector<QList<double> > vectListPoints, vectListPointsDef;
     vectListPoints.resize(128);
     vectListPointsDef.resize(128);
-    Champ champ = (Champ)this->ui->comboParameter->itemData(index).toInt();
+    Champ champ = (Champ)ui->comboParameter->itemData(index).toInt();
 
     // Valeur par défaut
     EltID id = _initialID;
@@ -170,17 +176,18 @@ void DialogVisualizer::on_comboParameter_currentIndexChanged(int index)
     }
 
     // Envoi des données au graphique
-    this->ui->graphVisualizer->setData(vectListPoints, vectListPointsDef);
+    ui->graphVisualizer->setData(vectListPoints, vectListPointsDef);
 }
 
 void DialogVisualizer::on_checkLog_stateChanged(int arg1)
 {
     // Mémorisation du paramètre
-    Config::getInstance()->setTools_visualizer_logScale(_isPrst, arg1);
+    ConfManager::getInstance()->setToolValue(_isPrst ? ConfManager::TOOL_TYPE_PRESET : ConfManager::TOOL_TYPE_INSTRUMENT,
+                                             "visualizer", "logScale", arg1);
 
     // Modification de l'échelle
-    this->ui->graphVisualizer->setIsLog(arg1);
-    this->ui->graphVisualizer->setScale();
+    ui->graphVisualizer->setIsLog(arg1);
+    ui->graphVisualizer->setScale();
 }
 
 double DialogVisualizer::getValue(EltID id, Champ champ)
@@ -301,13 +308,18 @@ GraphVisualizer::GraphVisualizer(QWidget *parent) :
     QCustomPlot(parent),
     labelCoord(NULL)
 {
+    this->setBackground(this->palette().color(QPalette::Base));
+
     // Layer pour la position des octaves
     this->addGraph();
     QPen graphPen;
-    graphPen.setColor(QColor(0, 0, 0, 40));
+    QColor color = this->palette().color(QPalette::Text);
+    color.setAlpha(40);
+    graphPen.setColor(color);
     graphPen.setWidth(1);
     this->graph(0)->setPen(graphPen);
     this->graph(0)->setLineStyle(QCPGraph::lsLine);
+    color.setAlpha(180);
     for (int i = 0; i < 10; i++)
     {
         int note = 12 * (i + 1);
@@ -317,14 +329,14 @@ GraphVisualizer::GraphVisualizer(QWidget *parent) :
         textLabel->setPositionAlignment(Qt::AlignBottom|Qt::AlignHCenter);
         textLabel->position->setType(QCPItemPosition::ptPlotCoords);
         textLabel->position->setCoords(note, 0);
-        textLabel->setText(Config::getInstance()->getKeyName(note));
+        textLabel->setText(KeyNameManager::getInstance()->getKeyName(note));
         textLabel->setFont(QFont(font().family(), 8));
-        textLabel->setColor(QColor(40, 40, 40));
+        textLabel->setColor(color);
     }
 
     // Layer des moyennes
     this->addGraph();
-    graphPen.setColor(QColor(30, 250, 80));
+    graphPen.setColor(this->palette().color(QPalette::NoRole));
     graphPen.setWidth(2);
     this->graph(1)->setPen(graphPen);
     this->graph(1)->setLineStyle(QCPGraph::lsNone);
@@ -333,7 +345,7 @@ GraphVisualizer::GraphVisualizer(QWidget *parent) :
 
     // Layer des valeurs
     this->addGraph();
-    graphPen.setColor(QColor(100, 130, 250));
+    graphPen.setColor(this->palette().color(QPalette::Highlight));
     graphPen.setWidth(2);
     this->graph(2)->setPen(graphPen);
     this->graph(2)->setLineStyle(QCPGraph::lsNone);
@@ -342,7 +354,7 @@ GraphVisualizer::GraphVisualizer(QWidget *parent) :
 
     // Layer des valeurs par défaut
     this->addGraph();
-    graphPen.setColor(QColor(100, 130, 250));
+    graphPen.setColor(this->palette().color(QPalette::Highlight));
     graphPen.setWidth(1);
     this->graph(3)->setPen(graphPen);
     this->graph(3)->setLineStyle(QCPGraph::lsNone);
@@ -351,7 +363,8 @@ GraphVisualizer::GraphVisualizer(QWidget *parent) :
 
     // Layer aperçu valeurs
     this->addGraph();
-    graphPen.setColor(QColor(0, 0, 0));
+    color.setAlpha(255);
+    graphPen.setColor(color);
     graphPen.setWidth(1);
     this->graph(4)->setPen(graphPen);
     this->graph(4)->setScatterStyle(QCPScatterStyle::ssPlus);
@@ -362,7 +375,7 @@ GraphVisualizer::GraphVisualizer(QWidget *parent) :
     QFont fontLabel = QFont(font().family(), 9);
     fontLabel.setBold(true);
     labelCoord->setFont(fontLabel);
-    labelCoord->setColor(QColor(0, 0, 0));
+    labelCoord->setColor(color);
 
     // Message warning
     textWarning = new QCPItemText(this);
@@ -371,7 +384,7 @@ GraphVisualizer::GraphVisualizer(QWidget *parent) :
     textWarning->position->setType(QCPItemPosition::ptPlotCoords);
     textWarning->position->setCoords(0, 0);
     textWarning->setFont(QFont(font().family(), 10, 100));
-    textWarning->setColor(QColor(255, 0, 0));
+    textWarning->setColor(this->palette().color(QPalette::BrightText));
 
     // Axes
     this->xAxis->setVisible(false);
@@ -604,17 +617,18 @@ void GraphVisualizer::afficheCoord(double x, double y)
             labelCoord->setPositionAlignment(Qt::AlignBottom | Qt::AlignHCenter);
         char T[20];
         if (y == 0)
-            sprintf(T, "%s:%.0f", Config::getInstance()->getKeyName(qRound(x)).toStdString().c_str(), y);
+            sprintf(T, "%s:%.0f", KeyNameManager::getInstance()->getKeyName(qRound(x)).toStdString().c_str(), y);
         else if (y < 1)
-            sprintf(T, "%s:%.3f", Config::getInstance()->getKeyName(qRound(x)).toStdString().c_str(), y);
+            sprintf(T, "%s:%.3f", KeyNameManager::getInstance()->getKeyName(qRound(x)).toStdString().c_str(), y);
         else if (y < 10)
-            sprintf(T, "%s:%.2f", Config::getInstance()->getKeyName(qRound(x)).toStdString().c_str(), y);
+            sprintf(T, "%s:%.2f", KeyNameManager::getInstance()->getKeyName(qRound(x)).toStdString().c_str(), y);
         else if (y < 100)
-            sprintf(T, "%s:%.1f", Config::getInstance()->getKeyName(qRound(x)).toStdString().c_str(), y);
+            sprintf(T, "%s:%.1f", KeyNameManager::getInstance()->getKeyName(qRound(x)).toStdString().c_str(), y);
         else
-            sprintf(T, "%s:%.0f", Config::getInstance()->getKeyName(qRound(x)).toStdString().c_str(), y);
+            sprintf(T, "%s:%.0f", KeyNameManager::getInstance()->getKeyName(qRound(x)).toStdString().c_str(), y);
         labelCoord->setText(T);
-        // Ajustement position sur x
+
+        // Adjust the position on x
         QFontMetrics fm(labelCoord->font());
         double distX = this->xAxis->pixelToCoord(fm.width(labelCoord->text()) / 2 + 4) - xMin;
         if (x < xMin + distX)

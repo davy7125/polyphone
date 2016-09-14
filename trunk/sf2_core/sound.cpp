@@ -30,6 +30,7 @@
 #include <QFileInfo>
 #include "qmath.h"
 #include <QFile>
+#include "keynamemanager.h"
 
 QWidget * Sound::_parent = NULL;
 
@@ -732,7 +733,7 @@ void Sound::determineRootKey()
     for (int i = 0; i <= 127; i++)
     {
         // Nom de la note
-        QString nomNote = Config::getInstance()->getKeyName(i, true);
+        QString nomNote = KeyNameManager::getInstance()->getKeyName(i, true);
 
         // Recherche de la note dans le nom de fichier
         if (fileName.toUpper().contains(nomNote))

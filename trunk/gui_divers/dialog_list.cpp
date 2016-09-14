@@ -65,8 +65,8 @@ void DialogList::showDialog(EltID idSrc, ModeListDialog mode)
         element = elementPrst;
     }
     // Remplissage de la liste
-    this->ui->listWidget->clear();
-    this->ui->listWidget->scrollToTop();
+    ui->listWidget->clear();
+    ui->listWidget->scrollToTop();
     EltID id(element, idSrc.indexSf2, 0, 0, 0);
     ListWidgetItem *item;
     for (int i = 0; i < this->sf2->count(id); i++)
@@ -82,11 +82,11 @@ void DialogList::showDialog(EltID idSrc, ModeListDialog mode)
             else
                 item = new ListWidgetItem(this->sf2->getQstr(id, champ_name));
             item->id = id;
-            this->ui->listWidget->addItem(item);
+            ui->listWidget->addItem(item);
         }
     }
-    this->ui->listWidget->clearSelection();
-    this->ui->listWidget->sortItems();
+    ui->listWidget->clearSelection();
+    ui->listWidget->sortItems();
     // Affichage du dialogue
     this->setWindowModality(Qt::ApplicationModal);
     this->show();
@@ -95,9 +95,9 @@ void DialogList::showDialog(EltID idSrc, ModeListDialog mode)
 void DialogList::accept()
 {
     // élément sélectionné ?
-    if (this->ui->listWidget->selectedItems().count())
+    if (ui->listWidget->selectedItems().count())
     {
-        ListWidgetItem *item = dynamic_cast<ListWidgetItem *>(this->ui->listWidget->currentItem());
+        ListWidgetItem *item = dynamic_cast<ListWidgetItem *>(ui->listWidget->currentItem());
         // Association de MainWindow
         if (_mode == MODE_ASSOCIATION)
             this->window->associer(item->id);

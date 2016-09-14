@@ -24,7 +24,7 @@
 
 #include "duplicator.h"
 #include "mainwindow.h"
-#include "config.h"
+#include "confmanager.h"
 
 Duplicator::Duplicator(Pile_sf2 *source, Pile_sf2 *destination, QWidget * parent) :
     _parent(parent),
@@ -34,7 +34,7 @@ Duplicator::Duplicator(Pile_sf2 *source, Pile_sf2 *destination, QWidget * parent
     _copieInst(DUPLIQUER),
     _copiePrst(DUPLIQUER),
     _presetFull(false),
-    _displayWarningGlobal(Config::getInstance()->getActivationWarning_GlobalNotOverwritten())
+    _displayWarningGlobal(ConfManager::getInstance()->getValue(ConfManager::SECTION_WARNINGS, "global_not_overwritten", true).toBool())
 {
     // Initial counts
     EltID id = EltID(elementSf2, -1, -1, -1, -1);
@@ -263,7 +263,7 @@ void Duplicator::copyGlobal(EltID idSource, EltID idDest)
         msgBox.button(QMessageBox::YesAll)->setText(QObject::trUtf8("Ok, &désactiver ce message"));
         msgBox.setDefaultButton(QMessageBox::Yes);
         if (msgBox.exec() == QMessageBox::YesAll)
-            Config::getInstance()->setActivationWarning_GlobalNotOverwritten(false);
+            ConfManager::getInstance()->setValue(ConfManager::SECTION_WARNINGS, "global_not_overwritten", false);
     }
     _displayWarningGlobal = false;
 }

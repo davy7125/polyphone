@@ -2,7 +2,6 @@
 **                                                                        **
 **  Polyphone, a soundfont editor                                         **
 **  Copyright (C) 2013-2015 Davy Triponney                                **
-**                2014      Andrea Celani                                 **
 **                                                                        **
 **  This program is free software: you can redistribute it and/or modify  **
 **  it under the terms of the GNU General Public License as published by  **
@@ -23,35 +22,54 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef TRANSLATIONSYSTEM_H
-#define TRANSLATIONSYSTEM_H
+#ifndef RECENTFILEMANAGER_H
+#define RECENTFILEMANAGER_H
 
-#include <QString>
-#include <QMap>
-class QApplication;
-class QTranslator;
+#include <QStringList>
 
-class TranslationSystem
+class RecentFileManager
 {
 public:
-    /// Translate the application according to the default locale or the overwritten local in QSettings
-    static void translate(QApplication * a);
+    enum FileType
+    {
+        FILE_TYPE_SF2,
+        FILE_TYPE_SAMPLE,
+        FILE_TYPE_RECORD,
+        FILE_TYPE_SOUNDFONT,
+        FILE_TYPE_EXPORT,
+        FILE_TYPE_FREQUENCIES
+    };
 
-    /// Get all languages, key is two letters (fr, en, ...), value is the language native name
-    static QMap<QString, QString> getLanguages();
+    /// Get the instance
+    static RecentFileManager * getInstance()
+    {
+        if (_instance == NULL)
+            _instance = new RecentFileManager();
+        return _instance;
+    }
+
+    /// Destroy the singleton
+    void kill()
+    {
+        delete _instance;
+        _instance = NULL;
+    }
+
+    /// Get a recent file, possibly in a specific position (for sf2 only)
+    QString getLastFile(FileType fileType, int num=0);
+
+    /// Get the last directory for a specific type of file
+    QString getLastDirectory(FileType fileType);
+
+    /// Add a recent file
+    void addRecentFile(FileType fileType, QString filePath);
 
 private:
-    // Singleton
-    TranslationSystem();
-    ~TranslationSystem();
-    static TranslationSystem * getInstance();
-    static TranslationSystem * _instance;
+    RecentFileManager();
 
-    void addTranslation(QString languageName, QString locale);
-    static const QString DEFAULT_LANGUAGE;
-    static const QString RESOURCE_PATH;
-    QTranslator * _translator;
-    QMap<QString, QString> _languages;
+    static RecentFileManager * _instance;
+    QStringList _listFiles;
+    QString _recordFile, _sampleFile, _exportFile, _importFile, _pngFile;
 };
 
-#endif // TRANSLATIONSYSTEM_H
+#endif // RECENTFILEMANAGER_H

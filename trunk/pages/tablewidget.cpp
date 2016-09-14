@@ -25,6 +25,7 @@
 
 #include "tablewidget.h"
 #include "tabledelegate.h"
+#include "thememanager.h"
 #include <QApplication>
 #include <QKeyEvent>
 #include <QClipboard>
@@ -54,7 +55,9 @@ void TableWidget::addColumn(int column, QString title)
     this->setHorizontalHeaderItem(column, new QTableWidgetItem(title));
 
     // Ajout d'un élément couleur
-    _listColors.insert(column, QColor(0, 0, 0));
+    QColor color = this->palette().color(QPalette::Text);
+    _listColors.insert(column, color);
+    this->horizontalHeaderItem(column)->setForeground(color);
 }
 
 void TableWidget::setID(EltID id, int colonne)
@@ -99,10 +102,11 @@ void TableWidget::setEnlighted(int colonne, bool isEnlighted)
     if (colonne >= this->columnCount())
         return;
 
+    QPalette p = this->palette();
     if (isEnlighted)
-        _listColors[colonne] = QColor(70, 120, 210);
+        _listColors[colonne] = p.color(QPalette::Highlight);
     else
-        _listColors[colonne] = QColor(0, 0, 0);
+        _listColors[colonne] = p.color(QPalette::Text);
 
     _timer->start(30);
 }
@@ -139,8 +143,10 @@ void TableWidget::setColumnCount(int columns)
 {
     QTableWidget::setColumnCount(columns);
     _listColors.clear();
+    QPalette p = this->palette();
+    QColor color = p.color(QPalette::Text);
     for (int i = 0; i < columns; i++)
-        _listColors << QColor(0, 0, 0);
+        _listColors << color;
 }
 
 void TableWidget::removeColumn(int column)
@@ -353,21 +359,31 @@ void TableWidget::commitData(QWidget *editor)
 
 void TableWidget::setLoopModeImage(int row, int column, int loopModeValue)
 {
+    bool isDark = ThemeManager::getInstance()->isDark(ThemeManager::LIST_BACKGROUND, ThemeManager::LIST_TEXT);
     switch (loopModeValue)
     {
     case 0:
         // no loop
-        this->item(row, column)->setData(Qt::DecorationRole, QImage(":/icones/loop_off.png"));
+        if (isDark)
+            this->item(row, column)->setData(Qt::DecorationRole, QImage(":/icones/loop_off_w.png"));
+        else
+            this->item(row, column)->setData(Qt::DecorationRole, QImage(":/icones/loop_off.png"));
         this->item(row, column)->setData(Qt::UserRole, 0);
         break;
     case 1:
         // loop
-        this->item(row, column)->setData(Qt::DecorationRole, QImage(":/icones/loop_on.png"));
+        if (isDark)
+            this->item(row, column)->setData(Qt::DecorationRole, QImage(":/icones/loop_on_w.png"));
+        else
+            this->item(row, column)->setData(Qt::DecorationRole, QImage(":/icones/loop_on.png"));
         this->item(row, column)->setData(Qt::UserRole, 1);
         break;
     case 2:
         // loop + end
-        this->item(row, column)->setData(Qt::DecorationRole, QImage(":/icones/loop_on_end.png"));
+        if (isDark)
+            this->item(row, column)->setData(Qt::DecorationRole, QImage(":/icones/loop_on_end_w.png"));
+        else
+            this->item(row, column)->setData(Qt::DecorationRole, QImage(":/icones/loop_on_end.png"));
         this->item(row, column)->setData(Qt::UserRole, 3);
         break;
     default:

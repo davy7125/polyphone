@@ -28,7 +28,8 @@
 #include <QDebug>
 #include "import_sfz.h"
 #include "pile_sf2.h"
-#include "config.h"
+#include "confmanager.h"
+#include "keynamemanager.h"
 
 
 ImportSfz::ImportSfz(Pile_sf2 * sf2) :
@@ -810,7 +811,7 @@ QList<int> GroupeParametres::getSampleIndex(Pile_sf2 *sf2, EltID idElt, QString 
         sf2->set(idElt, champ_chPitchCorrection, val, false);
 
         // Chargement dans la ram
-        if (Config::getInstance()->getRam())
+        if (ConfManager::getInstance()->getValue(ConfManager::SECTION_NONE, "ram", false).toBool())
         {
             val.wValue = 1;
             sf2->set(idElt, champ_ram, val, false);
@@ -1394,17 +1395,17 @@ Parametre::Parametre(QString opcode, QString valeur) :
     else if (opcode == "key")
     {
         _opcode = op_key;
-        _intValue = Config::getInstance()->getKeyNum(valeurLow, true);
+        _intValue = KeyNameManager::getInstance()->getKeyNum(valeurLow, true);
     }
     else if (opcode == "lokey")
     {
         _opcode = op_keyMin;
-        _intValue = Config::getInstance()->getKeyNum(valeurLow, true);
+        _intValue = KeyNameManager::getInstance()->getKeyNum(valeurLow, true);
     }
     else if (opcode == "hikey")
     {
         _opcode = op_keyMax;
-        _intValue = Config::getInstance()->getKeyNum(valeurLow, true);
+        _intValue = KeyNameManager::getInstance()->getKeyNum(valeurLow, true);
     }
     else if (opcode == "lovel")
     {
@@ -1419,7 +1420,7 @@ Parametre::Parametre(QString opcode, QString valeur) :
     else if (opcode == "pitchkeycenter")
     {
         _opcode = op_rootKey;
-        _intValue = Config::getInstance()->getKeyNum(valeurLow, true);
+        _intValue = KeyNameManager::getInstance()->getKeyNum(valeurLow, true);
     }
     else if (opcode == "group")
     {
