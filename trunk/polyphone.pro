@@ -12,8 +12,8 @@
 #DEFINES += USE_LOCAL_QCUSTOMPLOT
 
 # Polyphone version
-DEFINES += VERSION=1.7
-DEFINES += FINAL=true
+DEFINES += VERSION=1.8
+DEFINES += FINAL=false
 
 # List to complete if other translations are wished
 # Format: polyphone_XX.ts where XX is the language code
