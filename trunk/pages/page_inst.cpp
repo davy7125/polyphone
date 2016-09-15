@@ -403,6 +403,7 @@ void Page_Inst::mixture(QList<QList<int> > listeParam, QString nomInst, bool bou
     // Ouverture d'une barre de progression
     QString textProgress = trUtf8("Création ");
     QProgressDialog progress("", trUtf8("Annuler"), 0, nbEtapes, this);
+    progress.setWindowFlags(progress.windowFlags() & ~Qt::WindowContextHelpButtonHint);
     progress.setWindowModality(Qt::WindowModal);
     progress.setFixedWidth(350);
     progress.show();

@@ -938,6 +938,7 @@ void Page_Smpl::normalisation()
     // Ouverture d'une barre de progression
     QString textProgress = trUtf8("Traitement ");
     QProgressDialog progress("", trUtf8("Annuler"), 0, nbEtapes, this);
+    progress.setWindowFlags(progress.windowFlags() & ~Qt::WindowContextHelpButtonHint);
     progress.setWindowModality(Qt::WindowModal);
     progress.setFixedWidth(350);
     progress.show();
@@ -995,6 +996,7 @@ void Page_Smpl::enleveBlanc()
     // Ouverture d'une barre de progression
     QString textProgress = trUtf8("Traitement ");
     QProgressDialog progress("", trUtf8("Annuler"), 0, nbEtapes, this);
+    progress.setWindowFlags(progress.windowFlags() & ~Qt::WindowContextHelpButtonHint);
     progress.setWindowModality(Qt::WindowModal);
     progress.setFixedWidth(350);
     progress.show();
@@ -1072,6 +1074,7 @@ void Page_Smpl::enleveFin()
     // Ouverture d'une barre de progression
     QString textProgress = trUtf8("Traitement ");
     QProgressDialog progress("", trUtf8("Annuler"), 0, nbEtapes, this);
+    progress.setWindowFlags(progress.windowFlags() & ~Qt::WindowContextHelpButtonHint);
     progress.setWindowModality(Qt::WindowModal);
     progress.setFixedWidth(350);
     progress.show();
@@ -1144,6 +1147,7 @@ void Page_Smpl::bouclage()
     // Ouverture d'une barre de progression
     QString textProgress = trUtf8("Traitement ");
     QProgressDialog progress("", trUtf8("Annuler"), 0, nbEtapes, this);
+    progress.setWindowFlags(progress.windowFlags() & ~Qt::WindowContextHelpButtonHint);
     progress.setWindowModality(Qt::WindowModal);
     progress.setFixedWidth(350);
     progress.show();
@@ -1246,6 +1250,7 @@ void Page_Smpl::filtreMur()
     // Ouverture d'une barre de progression
     QString textProgress = trUtf8("Traitement ");
     QProgressDialog progress("", trUtf8("Annuler"), 0, nbEtapes, this);
+    progress.setWindowFlags(progress.windowFlags() & ~Qt::WindowContextHelpButtonHint);
     progress.setWindowModality(Qt::WindowModal);
     progress.setFixedWidth(350);
     progress.show();
@@ -1308,6 +1313,7 @@ void Page_Smpl::reglerBalance()
     // Ouverture d'une barre de progression
     QString textProgress = trUtf8("Traitement ");
     QProgressDialog progress("", trUtf8("Annuler"), 0, nbEtapes, this);
+    progress.setWindowFlags(progress.windowFlags() & ~Qt::WindowContextHelpButtonHint);
     progress.setWindowModality(Qt::WindowModal);
     progress.setFixedWidth(350);
     progress.show();
@@ -1415,6 +1421,7 @@ void Page_Smpl::sifflements(int freq1, int freq2, double raideur)
     // Ouverture d'une barre de progression
     QString textProgress = trUtf8("Traitement ");
     QProgressDialog progress("", trUtf8("Annuler"), 0, nbEtapes, this);
+    progress.setWindowFlags(progress.windowFlags() & ~Qt::WindowContextHelpButtonHint);
     progress.setWindowModality(Qt::WindowModal);
     progress.setFixedWidth(350);
     progress.show();
@@ -1481,6 +1488,7 @@ void Page_Smpl::transposer()
     // Ouverture d'une barre de progression
     QString textProgress = trUtf8("Traitement ");
     QProgressDialog progress("", trUtf8("Annuler"), 0, nbEtapes, this);
+    progress.setWindowFlags(progress.windowFlags() & ~Qt::WindowContextHelpButtonHint);
     progress.setWindowModality(Qt::WindowModal);
     progress.setFixedWidth(350);
     progress.show();

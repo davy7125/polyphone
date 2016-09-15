@@ -202,6 +202,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent, Qt::Window | Qt::W
 
     _progressDialog.setWindowModality(Qt::WindowModal);
     _progressDialog.setCancelButton(NULL);
+    _progressDialog.setWindowFlags(_progressDialog.windowFlags() & ~Qt::WindowContextHelpButtonHint);
+    _progressDialog.reset();
     connect(&_futureWatcher, SIGNAL (finished()), this, SLOT (futureFinished()));
 }
 
@@ -384,7 +386,6 @@ void MainWindow::spaceKeyPressedInTree()
 void MainWindow::ouvrir()
 {
     // Ouverture de fichiers
-//#ifdef WIN32
     QStringList strList = QFileDialog::getOpenFileNames(this, trUtf8("Ouverture de fichiers"),
                                                         RecentFileManager::getInstance()->getLastDirectory(RecentFileManager::FILE_TYPE_SOUNDFONT),
                                                         trUtf8("Soundfonts") + " (*.sf2 *.sf3 *.sfz *.sfArk);;" +
@@ -392,15 +393,6 @@ void MainWindow::ouvrir()
                                                         trUtf8("Fichiers .sf3") + " (*.sf3);;" +
                                                         trUtf8("Fichiers .sfz") + " (*.sfz);;" +
                                                         trUtf8("Archives .sfArk") + " (*.sfArk)");
-//#else
-//    QStringList strList = QFileDialog::getOpenFileNames(this, trUtf8("Ouverture de fichiers"),
-//                                                        Config::getInstance()->getLastDirectory(Config::typeFichierSoundfont),
-//                                                        trUtf8("Soundfonts") + " (*.[sS][fF][23zZ] *.[sS][fF][aA][rR][kK]);;" +
-//                                                        trUtf8("Fichiers .sf2") + " (*.[sS][fF]2);;" +
-//                                                        trUtf8("Fichiers .sf3") + " (*.[sS][fF]3);;" +
-//                                                        trUtf8("Fichiers .sfz") + " (*.[sS][fF][zZ]);;" +
-//                                                        trUtf8("Archives .sfArk") + " (*.[sS][fF][aA][rR][kK])");
-//#endif
     if (strList.isEmpty())
         return;
 
