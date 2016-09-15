@@ -1,4 +1,18 @@
-polyphone (1.7) unstable; urgency=low
+polyphone (1.8) unstable; urgency=low
+
+  * (new) light and dark color themes
+  * (new) czech translation
+  * (new) links to the online manual & forum
+  * (improvement) using space or enter over a cell makes it editable
+  * (improvement) ctrl-x can be used in the table
+  * (improvement) double clicking on an instrument or preset division opens the corresponding sample or instrument
+  * (improvement) logo changed
+  * (fix) two alt-C hints were used in the close sf2 dialog 
+
+ -- Davy Triponney <davy.triponney@gmail.com>  Wed, 27 Sep 2016 20:51:55 +0100
+
+
+polyphone (1.7) UNRELEASED; urgency=low
 
   * (new) convenient view to graphically edit key and velocity ranges
   * (new) overview pages showing a configuration summary of all samples, instruments or presets
