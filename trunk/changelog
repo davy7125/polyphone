@@ -7,7 +7,8 @@ polyphone (1.8) unstable; urgency=low
   * (improvement) ctrl-x can be used in the table
   * (improvement) double clicking on an instrument or preset division opens the corresponding sample or instrument
   * (improvement) logo changed
-  * (fix) two alt-C hints were used in the close sf2 dialog 
+  * (fix) two alt-C hints were used in the close sf2 dialog
+  * (fix) a progress dialog was displayed when opening the software
 
  -- Davy Triponney <davy.triponney@gmail.com>  Wed, 27 Sep 2016 20:51:55 +0100
 
