@@ -530,6 +530,9 @@
           </item>
           <item row="0" column="1">
            <layout class="QHBoxLayout" name="horizontalLayout_2">
+            <property name="spacing">
+             <number>6</number>
+            </property>
             <item>
              <spacer name="horizontalSpacer_2">
               <property name="orientation">
@@ -793,16 +796,16 @@
             </property>
             <layout class="QGridLayout" name="gridLayout_2">
              <property name="leftMargin">
-              <number>0</number>
+              <number>2</number>
              </property>
              <property name="topMargin">
-              <number>3</number>
+              <number>2</number>
              </property>
              <property name="rightMargin">
-              <number>0</number>
+              <number>2</number>
              </property>
              <property name="bottomMargin">
-              <number>0</number>
+              <number>2</number>
              </property>
              <property name="horizontalSpacing">
               <number>6</number>
@@ -924,16 +927,16 @@
             </property>
             <layout class="QGridLayout" name="gridLayout_3">
              <property name="leftMargin">
-              <number>0</number>
+              <number>2</number>
              </property>
              <property name="topMargin">
-              <number>3</number>
+              <number>2</number>
              </property>
              <property name="rightMargin">
-              <number>0</number>
+              <number>2</number>
              </property>
              <property name="bottomMargin">
-              <number>0</number>
+              <number>2</number>
              </property>
              <property name="verticalSpacing">
               <number>2</number>

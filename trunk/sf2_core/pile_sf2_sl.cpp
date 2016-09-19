@@ -18,7 +18,7 @@
 **                                                                        **
 ****************************************************************************
 **           Author: Davy Triponney                                       **
-**  Website/Contact: http://www.polyphone.fr/                             **
+**  Website/Contact: http://polyphone-soundfonts.com                      **
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
@@ -27,29 +27,24 @@
 #include <QFileInfo>
 #include "oggconverter.h"
 #include "sfont.h"
+#include "confmanager.h"
 
 //////////// SF2 : SAVE / LOAD ////////////
 
-void Pile_sf2::nouveau(QString name)
+void Pile_sf2::nouveau(QString name, int &indexSf2)
 {
     EltID id(elementSf2, -1, 0, 0, 0);
-    id.indexSf2 = this->add(id);
+    indexSf2 = this->add(id);
+    id.indexSf2 = indexSf2;
 
     // Initialisation de l'édition
     this->sf2->getElt(id.indexSf2)->numEdition = this->pileActions->getEdition(id.indexSf2) - 1;
 
     // Modification du nom
     this->set(id, champ_name, name, false);
-
-    // Sélection dans l'arborescence
-    if (tree)
-    {
-        tree->clearSelection();
-        tree->select(id, true);
-    }
 }
 
-int Pile_sf2::open(QString fileName)
+int Pile_sf2::open(QString fileName, int &indexSf2)
 {
     // ouverture d'un fichier soundfont
     // Valeur retour :
@@ -83,7 +78,7 @@ int Pile_sf2::open(QString fileName)
         if (!fi.open(QIODevice::ReadOnly))
             return 3;
         QDataStream stream(&fi);
-        int indexSf2 = -1;
+        indexSf2 = -1;
         int valRet = this->open(fileName, &stream, indexSf2);
         fi.close();
         if (valRet <= 0 && type == fileSf2)
@@ -777,7 +772,7 @@ int Pile_sf2::open(QString fileName, QDataStream * stream, int &indexSf2, bool c
                 this->set(id, champ_sampleData24, baData, false);
             }
         }
-        else if (CONFIG_RAM)
+        else if (ConfManager::getInstance()->getValue(ConfManager::SECTION_NONE, "ram", false).toBool())
         {
             // Chargement dans la ram
             value.wValue = 1;
@@ -1056,13 +1051,6 @@ int Pile_sf2::open(QString fileName, QDataStream * stream, int &indexSf2, bool c
     free(bloc_pdta_pbag);
     free(bloc_pdta_pmod);
     free(bloc_pdta_pgen);
-
-    id.typeElement = elementSf2;
-    if (tree)
-    {
-        tree->clearSelection();
-        tree->select(id, true);
-    }
 
     return openResult;
 }
@@ -1604,7 +1592,7 @@ int Pile_sf2::sauvegarderSf2(int indexSf2, QString fileName)
     }
 
     // Libération de la RAM
-    if (!CONFIG_RAM)
+    if (!ConfManager::getInstance()->getValue(ConfManager::SECTION_NONE, "ram", false).toBool())
     {
         id.typeElement = elementSmpl;
         for (int i = 0; i < this->count(id); i++)

@@ -18,7 +18,7 @@
 **                                                                        **
 ****************************************************************************
 **           Author: Davy Triponney                                       **
-**  Website/Contact: http://www.polyphone.fr/                             **
+**  Website/Contact: http://polyphone-soundfonts.com                      **
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
@@ -843,6 +843,5 @@ void Page::selectInTree(QList<EltID> ids)
     _tree->selectNone();
     foreach (EltID id, ids)
         _tree->select(id);
-    _tree->updateAtNextSelectionRequest();
     _tree->blockSignals(previousBlockState);
 }

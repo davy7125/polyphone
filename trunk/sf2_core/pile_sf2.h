@@ -18,7 +18,7 @@
 **                                                                        **
 ****************************************************************************
 **           Author: Davy Triponney                                       **
-**  Website/Contact: http://www.polyphone.fr/                             **
+**  Website/Contact: http://polyphone-soundfonts.com                      **
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
@@ -36,7 +36,7 @@ class Pile_sf2 : public QObject
 
 public:
     // METHODES PUBLIQUES DE LA CLASSE PILE_SF2
-    Pile_sf2(Tree *tree, bool ram);
+    Pile_sf2();
     ~Pile_sf2();
 
     // Ajout / suppression des données
@@ -67,8 +67,8 @@ public:
     void redo();
 
     // Chargement / sauvegarde / nouveau
-    void nouveau(QString name);
-    int open(QString fileName);
+    void nouveau(QString name, int &indexSf2);
+    int open(QString fileName, int &indexSf2);
     int open(QString fileName, QDataStream *stream, int &indexSf2, bool copySamples = false);
     int save(int indexSf2, QString fileName, int quality = 1);
     bool isEdited(int indexSf2);
@@ -86,6 +86,12 @@ public:
 
 signals:
     void updateTable(int type, int sf2, int elt, int elt2);
+
+    void newElement(EltID id);
+    void hideElement(EltID id, bool isHidden);
+    void removeElement(EltID id);
+    void changeElementName(EltID id, QString name);
+    void changeElementOrder(EltID id, QString order, bool sort);
 
 private:
     // Type de fichier
@@ -161,18 +167,14 @@ private:
             }
             MOD *mod;
             GEN *gen;
-            QTreeWidgetItem *eltTree;
             bool hidden;
             BAG *suivant;
 
             // METHODES DE BAG
             BAG *getElt(int pos);
             int nombreElt();
-            void decrementerSF2();
             void decrementerSMPL(int indexSmpl);
             void decrementerINST(int indexInst);
-            void decrementerINST_PRST();
-            void decrementerBAG();
         };
 
         class SMPL
@@ -188,15 +190,12 @@ private:
             Sound son;
             quint16 wSampleLink;
             SFSampleLink sfSampleType;
-            QTreeWidgetItem *eltTree;
             bool hidden;
             SMPL *suivant;
 
             // METHODES DE SMPL
             SMPL *getElt(int pos);
             int nombreElt();
-            void decrementerSF2();
-            void decrementerSMPL();
             void decrementerLinkSMPL(int indexSmpl);
         };
 
@@ -207,7 +206,6 @@ private:
             QString Name;
             BAG *bag;
             BAG bagGlobal;
-            QTreeWidgetItem *eltTree;
             bool hidden;
             INST *suivant;
             // METHODES DE INST
@@ -219,8 +217,6 @@ private:
             }
             INST *getElt(int pos);
             int nombreElt();
-            void decrementerSF2();
-            void decrementerINST();
         };
 
         class PRST
@@ -235,7 +231,6 @@ private:
             quint32 dwMorphology;
             BAG *bag;
             BAG bagGlobal;
-            QTreeWidgetItem *eltTree;
             bool hidden;
             PRST *suivant;
 
@@ -248,8 +243,6 @@ private:
             }
             PRST *getElt(int pos);
             int nombreElt();
-            void decrementerSF2();
-            void decrementerPRST();
         };
 
         // ATTRIBUTS DE LA CLASSE SF2
@@ -273,12 +266,6 @@ private:
         INST *inst;
         PRST *prst;
 
-        // Elements graphiques
-        QTreeWidgetItem *eltTree;
-        QTreeWidgetItem *eltTreeSmpl;
-        QTreeWidgetItem *eltTreeInst;
-        QTreeWidgetItem *eltTreePrst;
-
         // Autres
         double numEdition;  // numéro de l'édition sauvegardée
         bool hidden;        // fichier supprimé ou non (avant suppression définitive)
@@ -298,7 +285,6 @@ private:
 
         SF2 *getElt(int pos);
         int nombreElt();
-        void decrementerSF2();
     };
 
     // Classes utilitaires
@@ -337,9 +323,7 @@ private:
 
     // ELEMENTS PRIVES DE LA CLASSE PILE_SF2
     SF2 *sf2;
-    Tree *tree;
     Pile_actions *pileActions;
-    bool static CONFIG_RAM;
 
     // METHODES PRIVEES DE LA CLASSE PILE_SF2
     // Affiche l'élément id

@@ -19,7 +19,7 @@
 **                                                                        **
 ****************************************************************************
 **           Author: Davy Triponney                                       **
-**  Website/Contact: http://www.polyphone.fr/                             **
+**  Website/Contact: http://polyphone-soundfonts.com                      **
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
@@ -176,7 +176,7 @@ void TableWidget::keyPressEvent(QKeyEvent *event)
     else if (event->key() == Qt::Key_Space || event->key() == Qt::Key_Return || event->key() == Qt::Key_Enter)
     {
         // Key enter or space: enter the cell
-        if (!selectedItems().isEmpty())
+        if (this->state() != QAbstractItemView::EditingState && !selectedItems().isEmpty())
         {
             QTableWidgetItem * item = selectedItems()[0];
             this->edit(this->model()->index(item->row(), item->column()));
@@ -276,7 +276,7 @@ void TableWidget::copy()
     else
     {
         // Selected items
-        // They may not be contiguous !
+        // They may not be contiguous!
         QModelIndexList indexes = selectionModel()->selectedIndexes();
 
         // Rows before 4 are for identifiers
@@ -425,9 +425,6 @@ void TableWidget::cut()
 
 void TableWidget::onSectionDoubleClicked(int index)
 {
-    if (index != 0) // Global is rejected
-    {
-        EltID id = getID(index);
-        openElement(id);
-    }
+    EltID id = getID(index);
+    openElement(id);
 }

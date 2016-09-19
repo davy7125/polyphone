@@ -19,7 +19,7 @@
 ****************************************************************************
 **          Authors: Davy Triponney                                       **
 **                   Werner Schweer (MuseScore)                           **
-**  Website/Contact: http://www.polyphone.fr/                             **
+**  Website/Contact: http://polyphone-soundfonts.com                      **
 **             Date: 05.09.2015                                           **
 ***************************************************************************/
 

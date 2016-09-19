@@ -18,7 +18,7 @@
 **                                                                        **
 ****************************************************************************
 **           Author: Davy Triponney                                       **
-**  Website/Contact: http://www.polyphone.fr/                             **
+**  Website/Contact: http://polyphone-soundfonts.com                      **
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
@@ -31,6 +31,7 @@
 class Pile_sf2;
 class MainWindow;
 class QComboBox;
+class TreeWidgetItem;
 
 class Tree : public QTreeWidget
 {
@@ -39,7 +40,7 @@ public:
     class menuClicDroit
     {
     public :
-        menuClicDroit(MainWindow *mainWindow);
+        menuClicDroit(MainWindow *_mainWindow);
         ~menuClicDroit();
 
         QAction *nouveauSample;
@@ -57,9 +58,7 @@ public:
     explicit Tree(QWidget *parent = 0);
     ~Tree();
 
-    void init(MainWindow *mainWindow, Pile_sf2 *sf2, QComboBox * comboSf2);
-    void trier(int forme);
-    void updateAtNextSelectionRequest();
+    void init(MainWindow * mainWindow, Pile_sf2 *sf2, QComboBox * comboSf2);
     unsigned int getSelectedItemsNumber();
     bool isSelectedItemsTypeUnique();
     bool isSelectedItemsSf2Unique();
@@ -67,15 +66,12 @@ public:
     EltID getFirstID();
     QList<EltID> getAllIDs();
     EltID getNextID(bool closeFile);
-    void selectNone(bool refresh = false);
-    void select(EltID id, bool refresh = false);
+    void selectNone(bool _refresh = false);
+    void select(EltID id, bool _refresh = false);
     void desactiveSuppression();
     void activeSuppression();
     void clearPastedID();
     EltID getElementToSelectAfterDeletion();
-    void addSf2InComboBox(int numSf2);
-    void removeSf2FromComboBox(int numSf2);
-    void renameSf2InComboBox(int numSf2, QString name);
 
 public slots:
     void collapse() {this->trier(1);}       // Clic sur "enrouler"
@@ -83,6 +79,13 @@ public slots:
     void clicTree();                        // Modification de la sélection dans l'arborescence
     void clicTreeRight();                   // Clic droit dans l'arborescence
     void comboSf2IndexChanged(int index);
+
+    // Update by the sf2 core
+    void newElement(EltID id);
+    void hideElement(EltID id, bool isHidden);
+    void changeElementName(EltID id, QString name);
+    void changeElementOrder(EltID id, QString order, bool sort);
+    void removeElement(EltID id);
 
 signals:
     void dropped(EltID dest, EltID src, int temps, int *msg, QByteArray *ba1, QByteArray *ba2);
@@ -103,15 +106,15 @@ protected:
 
 private:
     // Attributs privés
-    MainWindow *mainWindow;
-    menuClicDroit *menuArborescence;
-    bool refresh;
-    bool updateNext;
-    QList<EltID> idList;
-    unsigned int infoSelectedItemsNumber;
-    bool infoIsSelectedItemsTypeUnique;
-    bool infoIsSelectedItemsSf2Unique;
-    bool infoIsSelectedItemsFamilyUnique;
+    MainWindow *_mainWindow;
+    menuClicDroit *_treeMenu;
+    bool _refresh;
+    bool _updateSelectionInfo;
+    QList<EltID> _idList;
+    unsigned int _infoSelectedItemsNumber;
+    bool _infoIsSelectedItemsTypeUnique;
+    bool _infoIsSelectedItemsSf2Unique;
+    bool _infoIsSelectedItemsFamilyUnique;
     Pile_sf2 * _sf2;
     QComboBox * _comboSf2;
     QList<EltID> _displayedElements;
@@ -120,8 +123,7 @@ private:
 
     // Méthodes privées
     void updateSelectionInfo();
-    QTreeWidgetItem * selectedItem(unsigned int pos);
-    static EltID getItemID(QTreeWidgetItem *elt);
+    TreeWidgetItem *selectedItem(unsigned int pos);
     void supprimerElt();
     void displaySample(int idSf2, int index, bool repercute = true);
     void displayInstrument(int idSf2, int index, bool repercuteSmpl = true, bool repercutePrst = true);
@@ -133,6 +135,11 @@ private:
     EltID getNextPrst();
     EltID getNextPrstInst(int numPrst);
     void searchTree(QString qStr, int displayedSf2);
+    QList<TreeWidgetItem *> getEltsToId(EltID id, bool includeHidden = false);
+    void renameSf2InComboBox(int numSf2, QString name);
+    void addSf2InComboBox(int numSf2);
+    void removeSf2FromComboBox(int numSf2);
+    void trier(bool reinitCollapse);
 };
 
 #endif // TREE_H

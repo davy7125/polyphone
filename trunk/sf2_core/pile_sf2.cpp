@@ -18,7 +18,7 @@
 **                                                                        **
 ****************************************************************************
 **           Author: Davy Triponney                                       **
-**  Website/Contact: http://www.polyphone.fr/                             **
+**  Website/Contact: http://polyphone-soundfonts.com                      **
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
@@ -27,15 +27,11 @@
 
 #define UNDO_NUMBER 100
 
-bool Pile_sf2::CONFIG_RAM = 0;
-
 // CONSTRUCTEURS
-Pile_sf2::Pile_sf2(Tree *tree, bool ram)
+Pile_sf2::Pile_sf2()
 {
     this->sf2 = NULL;
-    this->tree = tree;
     this->pileActions = new Pile_actions();
-    this->CONFIG_RAM = ram;
 }
 Pile_sf2::~Pile_sf2()
 {
@@ -61,10 +57,6 @@ Pile_sf2::SF2::SF2()
     this->ICMT = "";
     this->ISFT = "";
     this->suivant = NULL;
-    this->eltTree = NULL;
-    this->eltTreeSmpl = NULL;
-    this->eltTreeInst = NULL;
-    this->eltTreePrst = NULL;
     this->fileName = "";
     this->hidden = 0;
     this->numEdition = 0;
@@ -73,13 +65,11 @@ Pile_sf2::SF2::SF2()
     this->prst = NULL;
 }
 Pile_sf2::SF2::SMPL::SMPL() :
-    eltTree(NULL),
     hidden(false),
     suivant(NULL)
 {}
 Pile_sf2::SF2::INST::INST() :
     bag(NULL),
-    eltTree(NULL),
     hidden(false),
     suivant(NULL)
 {}
@@ -90,14 +80,12 @@ Pile_sf2::SF2::PRST::PRST() :
     dwGenre(0),
     dwMorphology(0),
     bag(NULL),
-    eltTree(NULL),
     hidden(false),
     suivant(NULL)
 {}
 Pile_sf2::SF2::BAG::BAG() :
     mod(NULL),
     gen(NULL),
-    eltTree(NULL),
     hidden(false),
     suivant(NULL)
 {}
@@ -141,7 +129,7 @@ bool Pile_sf2::isSet(EltID id, Champ champ)
         default:
             value = tmp->bagGlobal.gen->isSet(champ);
         }
-        }break;
+    }break;
     case elementPrst:{
         // Analyse d'un preset
         SF2::PRST *tmp = this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt);
@@ -162,7 +150,7 @@ bool Pile_sf2::isSet(EltID id, Champ champ)
         default:
             value = tmp->bagGlobal.gen->isSet(champ);
         }
-        }break;
+    }break;
     case elementInstSmpl:{
         // Analyse d'un sample lié à un instrument
         SF2::BAG *tmp = this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt)->bag->getElt(id.indexElt2);
@@ -173,7 +161,7 @@ bool Pile_sf2::isSet(EltID id, Champ champ)
         default:
             value = tmp->gen->isSet(champ);
         }
-        }break;
+    }break;
     case elementPrstInst:{
         // Analyse d'un instrument lié à un preset
         SF2::BAG *tmp = this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt)->bag->getElt(id.indexElt2);
@@ -184,7 +172,7 @@ bool Pile_sf2::isSet(EltID id, Champ champ)
         default:
             value = tmp->gen->isSet(champ);
         }
-        }break;
+    }break;
     case elementInstMod:
         // Analyse d'un mod d'un instrument
         value = true; break;
@@ -230,7 +218,7 @@ Valeur Pile_sf2::get(EltID id, Champ champ)
         case champ_wBpsSave:
             value.wValue = tmp->wBpsSave; break;
         }
-        }break;
+    }break;
     case elementSmpl:{
         // Analyse d'un sample
         SF2::SMPL *tmp = this->sf2->getElt(id.indexSf2)->smpl->getElt(id.indexElt);
@@ -265,7 +253,7 @@ Valeur Pile_sf2::get(EltID id, Champ champ)
         case champ_hidden:
             value.bValue = tmp->hidden; break;
         }
-        }break;
+    }break;
     case elementInst:{
         // Analyse d'un instrument
         SF2::INST *tmp = this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt);
@@ -276,7 +264,7 @@ Valeur Pile_sf2::get(EltID id, Champ champ)
         default:
             value = tmp->bagGlobal.gen->getGen(champ);
         }
-        }break;
+    }break;
     case elementPrst:{
         // Analyse d'un preset
         SF2::PRST *tmp = this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt);
@@ -297,7 +285,7 @@ Valeur Pile_sf2::get(EltID id, Champ champ)
         default:
             value = tmp->bagGlobal.gen->getGen(champ);
         }
-        }break;
+    }break;
     case elementInstSmpl:{
         // Analyse d'un sample lié à un instrument
         SF2::BAG *tmp = this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt)->bag->getElt(id.indexElt2);
@@ -308,7 +296,7 @@ Valeur Pile_sf2::get(EltID id, Champ champ)
         default:
             value = tmp->gen->getGen(champ);
         }
-        }break;
+    }break;
     case elementPrstInst:{
         // Analyse d'un instrument lié à un preset
         SF2::BAG *tmp = this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt)->bag->getElt(id.indexElt2);
@@ -319,7 +307,7 @@ Valeur Pile_sf2::get(EltID id, Champ champ)
         default:
             value = tmp->gen->getGen(champ);
         }
-        }break;
+    }break;
     case elementInstMod: case elementPrstMod: case elementInstSmplMod: case elementPrstInstMod:{
         // Analyse d'un mod
         SF2::BAG::MOD *tmp = NULL;
@@ -355,7 +343,7 @@ Valeur Pile_sf2::get(EltID id, Champ champ)
         case champ_hidden:
             value.bValue = tmp->hidden; break;
         }
-        }break;
+    }break;
     case elementInstGen: case elementPrstGen: case elementInstSmplGen: case elementPrstInstGen:{
         // Analyse d'un gen
         SF2::BAG::GEN *tmp = NULL;
@@ -381,7 +369,7 @@ Valeur Pile_sf2::get(EltID id, Champ champ)
         case champ_sfGenAmount:
             value.genValue = tmp->genAmount; break;
         }
-        }break;
+    }break;
     }
     return value;
 }
@@ -429,7 +417,7 @@ QString Pile_sf2::getQstr(EltID id, Champ champ)
         case champ_filename:
             return tmp->fileName; break;
         }
-        }break;
+    }break;
     case elementSmpl:{
         // Analyse d'un sample
         SF2::SMPL *tmp = this->sf2->getElt(id.indexSf2)->smpl->getElt(id.indexElt);
@@ -440,7 +428,7 @@ QString Pile_sf2::getQstr(EltID id, Champ champ)
         case champ_filename:
             return tmp->son.getFileName(); break;
         }
-        }break;
+    }break;
     case elementInst:{
         // Analyse d'un instrument
         SF2::INST *tmp = this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt);
@@ -449,7 +437,7 @@ QString Pile_sf2::getQstr(EltID id, Champ champ)
         case champ_name:
             return tmp->Name; break;
         }
-        }break;
+    }break;
     case elementPrst:{
         // Analyse d'un preset
         SF2::PRST *tmp = this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt);
@@ -458,7 +446,7 @@ QString Pile_sf2::getQstr(EltID id, Champ champ)
         case champ_name:
             return tmp->Name; break;
         }
-        }break;
+    }break;
     }
     return "";
 }
@@ -487,7 +475,7 @@ QByteArray Pile_sf2::getData(EltID id, Champ champ)
             return tmp->son.getData(32);
             break;
         }
-        }break;
+    }break;
     }
     QByteArray baRet;
     return baRet;
@@ -526,7 +514,7 @@ int Pile_sf2::count(EltID id, bool withHidden)
             tmp = tmp->suivant;
         }
         return i;
-        }break;
+    }break;
     case elementSmpl:{
         // compte du nombre de samples
         SF2::SMPL *tmp = this->sf2->getElt(id.indexSf2)->smpl;
@@ -537,7 +525,7 @@ int Pile_sf2::count(EltID id, bool withHidden)
             tmp = tmp->suivant;
         }
         return i;
-        }break;
+    }break;
     case elementInst:{
         // compte du nombre d'instruments
         SF2::INST *tmp = this->sf2->getElt(id.indexSf2)->inst;
@@ -548,7 +536,7 @@ int Pile_sf2::count(EltID id, bool withHidden)
             tmp = tmp->suivant;
         }
         return i;
-        }break;
+    }break;
     case elementPrst:{
         // compte du nombre de presets
         SF2::PRST *tmp = this->sf2->getElt(id.indexSf2)->prst;
@@ -559,7 +547,7 @@ int Pile_sf2::count(EltID id, bool withHidden)
             tmp = tmp->suivant;
         }
         return i;
-        }break;
+    }break;
     case elementInstSmpl:{
         // compte du nombre de samples liés à un instrument
         SF2::BAG *tmp = this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt)->bag;
@@ -570,7 +558,7 @@ int Pile_sf2::count(EltID id, bool withHidden)
             tmp = tmp->suivant;
         }
         return i;
-        }break;
+    }break;
     case elementPrstInst:{
         // compte du nombre d'instruments liés à un preset
         SF2::BAG *tmp = this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt)->bag;
@@ -581,7 +569,7 @@ int Pile_sf2::count(EltID id, bool withHidden)
             tmp = tmp->suivant;
         }
         return i;
-        }break;
+    }break;
     case elementInstMod:{
         // compte du nombre de mods d'un instrument
         SF2::BAG::MOD *tmp = this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt)->bagGlobal.mod;
@@ -591,7 +579,7 @@ int Pile_sf2::count(EltID id, bool withHidden)
             tmp = tmp->suivant;
         }
         return i;
-        }break;
+    }break;
     case elementPrstMod:{
         // compte du nombre de mods d'un preset
         SF2::BAG::MOD *tmp = this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt)->bagGlobal.mod;
@@ -601,7 +589,7 @@ int Pile_sf2::count(EltID id, bool withHidden)
             tmp = tmp->suivant;
         }
         return i;
-        }break;
+    }break;
     case elementInstSmplMod:{
         // compte du nombre de mods d'un sample lié à un instrument
         SF2::BAG::MOD *tmp = this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt)->bag->getElt(id.indexElt2)->mod;
@@ -611,7 +599,7 @@ int Pile_sf2::count(EltID id, bool withHidden)
             tmp = tmp->suivant;
         }
         return i;
-        }break;
+    }break;
     case elementPrstInstMod:{
         // compte du nombre de mods d'un instrument lié à un preset
         SF2::BAG::MOD *tmp = this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt)->bag->getElt(id.indexElt2)->mod;
@@ -621,7 +609,7 @@ int Pile_sf2::count(EltID id, bool withHidden)
             tmp = tmp->suivant;
         }
         return i;
-        }break;
+    }break;
     case elementInstGen:{
         // compte du nombre de gens d'un instrument
         SF2::BAG::GEN *tmp = this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt)->bagGlobal.gen;
@@ -631,7 +619,7 @@ int Pile_sf2::count(EltID id, bool withHidden)
             tmp = tmp->suivant;
         }
         return i;
-        }break;
+    }break;
     case elementPrstGen:{
         // compte du nombre de gens d'un preset
         SF2::BAG::GEN *tmp = this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt)->bagGlobal.gen;
@@ -641,7 +629,7 @@ int Pile_sf2::count(EltID id, bool withHidden)
             tmp = tmp->suivant;
         }
         return i;
-        }break;
+    }break;
     case elementInstSmplGen:{
         // compte du nombre de gens d'un sample lié à un instrument
         SF2::BAG::GEN *tmp = this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt)->bag->getElt(id.indexElt2)->gen;
@@ -651,7 +639,7 @@ int Pile_sf2::count(EltID id, bool withHidden)
             tmp = tmp->suivant;
         }
         return i;
-        }break;
+    }break;
     case elementPrstInstGen:{
         // compte du nombre de gens d'un instrument lié à un preset
         SF2::BAG::GEN *tmp = this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt)->bag->getElt(id.indexElt2)->gen;
@@ -661,7 +649,7 @@ int Pile_sf2::count(EltID id, bool withHidden)
             tmp = tmp->suivant;
         }
         return i;
-        }break;
+    }break;
     }
     return -1;
 }
@@ -753,7 +741,7 @@ void Pile_sf2::undo()
             // Masquage de l'élément
             int message = 1;
             this->remove(action->id, 0, 0, &message);
-            }break;
+        }break;
         case Pile_actions::actionSupprimer:
             // Affichage de l'élément
             this->display(action->id);
@@ -798,7 +786,7 @@ void Pile_sf2::redo()
             // Masquage de l'élément
             int message = 1;
             this->remove(action->id, 0, 0, &message);
-            }break;
+        }break;
         case Pile_actions::actionModifier:
             // Réapplication de la nouvelle valeur
             if (action->champ >= 0 && action->champ < 164) this->set(action->id, action->champ, action->vNewValue, 0); // Valeur
@@ -897,54 +885,16 @@ int Pile_sf2::add(EltID id, bool storeAction)
             tmp->suivant = sf2;
         }
         id.indexSf2 = i;
-        if (tree)
-        {
-            // Ajout d'un élément graphique
-            sf2->eltTree = new TreeWidgetItem(this->tree);
-            QString str = QString::number(i);
-            sf2->eltTree->setText(1, str);
-            sf2->eltTree->setText(2, "R");
-            QFont font = sf2->eltTree->font(0);
-            font.setPointSize(15);
-            font.setBold(true);
-            sf2->eltTree->setFont(0, font);
-            sf2->eltTree->setSizeHint(0, QSize(0,30));
-            sf2->eltTree->setIcon(0, QIcon(":/icones/document"));
-
-            // Conteneurs pour samples, instruments et presets
-            sf2->eltTreeSmpl = new QTreeWidgetItem(sf2->eltTree);
-            sf2->eltTreeSmpl->setText(0, QObject::trUtf8("Échantillons"));
-            sf2->eltTreeSmpl->setText(1, str);
-            sf2->eltTreeSmpl->setText(2, "S");
-            sf2->eltTreeSmpl->setText(5, "a");
-            sf2->eltTreeSmpl->setSizeHint(0, QSize(0,23));
-            font.setPointSize(10);
-            sf2->eltTreeSmpl->setFont(0, font);
-            sf2->eltTreeInst = new QTreeWidgetItem(sf2->eltTree);
-            sf2->eltTreeInst->setText(0, QObject::trUtf8("Instruments"));
-            sf2->eltTreeInst->setText(1, str);
-            sf2->eltTreeInst->setText(2, "I");
-            sf2->eltTreeInst->setText(5, "b");
-            sf2->eltTreeInst->setSizeHint(0, QSize(0,23));
-            sf2->eltTreeInst->setFont(0, font);
-            sf2->eltTreePrst = new QTreeWidgetItem(sf2->eltTree);
-            sf2->eltTreePrst->setText(0, QObject::trUtf8("Presets"));
-            sf2->eltTreePrst->setText(1, str);
-            sf2->eltTreePrst->setText(2, "P");
-            sf2->eltTreePrst->setText(5, "c");
-            sf2->eltTreePrst->setSizeHint(0, QSize(0,23));
-            sf2->eltTreePrst->setFont(0, font);
-
-            this->tree->addSf2InComboBox(id.indexSf2);
-            this->tree->trier(1);
-        }
 
         // initialisation bps
         Valeur valTmp;
         valTmp.wValue = 16;
         this->set(id, champ_wBpsInit, valTmp, false);
         this->set(id, champ_wBpsSave, valTmp, false);
-        }break;
+
+        // Emit signal for a new element
+        emit(newElement(id));
+    }break;
     case elementSmpl:{
         // Création d'un nouveau sample
         SF2 *sf2 = this->sf2->getElt(id.indexSf2);
@@ -965,18 +915,10 @@ int Pile_sf2::add(EltID id, bool storeAction)
             tmp->suivant = smpl;
         }
         id.indexElt = i;
-        if (tree)
-        {
-            // Ajout d'un élément graphique
-            smpl->eltTree = new TreeWidgetItem(sf2->eltTreeSmpl);
-            smpl->eltTree->setText(1, QString::number(id.indexSf2));
-            smpl->eltTree->setText(2, "smpl");
-            smpl->eltTree->setText(3, QString::number(i));
-            smpl->eltTree->setText(6, "0");
-            smpl->eltTree->setSizeHint(0, QSize(0, 17));
-            smpl->eltTree->setIcon(0, QIcon(":/icones/wave"));
-        }
-        }break;
+
+        // Emit signal for a new element
+        emit(newElement(id));
+    }break;
     case elementInst:{
         // Création d'un nouvel instrument
         SF2 *sf2 = this->sf2->getElt(id.indexSf2);
@@ -997,18 +939,10 @@ int Pile_sf2::add(EltID id, bool storeAction)
             tmp->suivant = inst;
         }
         id.indexElt = i;
-        if (tree)
-        {
-            // Ajout d'un élément graphique
-            inst->eltTree = new TreeWidgetItem(sf2->eltTreeInst);
-            inst->eltTree->setText(1, QString::number(id.indexSf2));
-            inst->eltTree->setText(2, "inst");
-            inst->eltTree->setText(3, QString::number(i));
-            inst->eltTree->setText(6, "0");
-            inst->eltTree->setSizeHint(0, QSize(0, 17));
-            inst->eltTree->setIcon(0, QIcon(":/icones/sound"));
-        }
-        }break;
+
+        // Emit signal for a new element
+        emit(newElement(id));
+    }break;
     case elementPrst:{
         // Création d'un nouveau preset
         SF2 *sf2 = this->sf2->getElt(id.indexSf2);
@@ -1029,18 +963,10 @@ int Pile_sf2::add(EltID id, bool storeAction)
             tmp->suivant = prst;
         }
         id.indexElt = i;
-        if (tree)
-        {
-            // Ajout d'un élément graphique
-            prst->eltTree = new TreeWidgetItem(sf2->eltTreePrst);
-            prst->eltTree->setText(1, QString::number(id.indexSf2));
-            prst->eltTree->setText(2, "prst");
-            prst->eltTree->setText(3, QString::number(i));
-            prst->eltTree->setText(6, "0");
-            prst->eltTree->setSizeHint(0, QSize(0, 17));
-            prst->eltTree->setIcon(0, QIcon(":/icones/music"));
-        }
-        }break;
+
+        // Emit signal for a new element
+        emit(newElement(id));
+    }break;
     case elementInstSmpl:{
         // Ajout d'un nouveau sample pour un instrument
         SF2::INST *inst = this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt);
@@ -1061,19 +987,10 @@ int Pile_sf2::add(EltID id, bool storeAction)
             tmp->suivant = bag;
         }
         id.indexElt2 = i;
-        if (tree)
-        {
-            // Ajout d'un élément graphique
-            bag->eltTree = new TreeWidgetItem(inst->eltTree);
-            bag->eltTree->setText(1, QString::number(id.indexSf2));
-            bag->eltTree->setText(2, "IS");
-            bag->eltTree->setText(3, QString::number(id.indexElt));
-            bag->eltTree->setText(4, QString::number(i));
-            bag->eltTree->setText(6, "0");
-            bag->eltTree->setSizeHint(0, QSize(0, 17));
-            bag->eltTree->setIcon(0, QIcon(":/icones/wave"));
-        }
-        }break;
+
+        // Emit signal for a new element
+        emit(newElement(id));
+    }break;
     case elementPrstInst:{
         // Ajout d'un nouvel instrument pour un preset
         SF2::PRST *prst = this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt);
@@ -1094,19 +1011,10 @@ int Pile_sf2::add(EltID id, bool storeAction)
             tmp->suivant = bag;
         }
         id.indexElt2 = i;
-        if (tree)
-        {
-            // Ajout d'un élément graphique
-            bag->eltTree = new TreeWidgetItem(prst->eltTree);
-            bag->eltTree->setText(1, QString::number(id.indexSf2));
-            bag->eltTree->setText(2, "PI");
-            bag->eltTree->setText(3, QString::number(id.indexElt));
-            bag->eltTree->setText(4, QString::number(i));
-            bag->eltTree->setText(6, "0");
-            bag->eltTree->setSizeHint(0, QSize(0, 17));
-            bag->eltTree->setIcon(0, QIcon(":/icones/sound"));
-        }
-        }break;
+
+        // Emit signal for a new element
+        emit(newElement(id));
+    }break;
     case elementInstMod: case elementPrstMod: case elementInstSmplMod: case elementPrstInstMod:{
         // Ajout d'un nouveau mod
         SF2::BAG *bag = NULL;
@@ -1149,7 +1057,7 @@ int Pile_sf2::add(EltID id, bool storeAction)
         Valeur val;
         val.wValue = id.indexMod;
         this->set(id, champ_indexMod, val, 0);
-        }break;
+    }break;
     }
     // Création et stockage de l'action
     if (storeAction)
@@ -1203,16 +1111,6 @@ int Pile_sf2::remove(EltID id, bool permanently, bool storeAction, int *message)
         // Ajustement de la numérotation dans les actions
         this->pileActions->decrementer(id);
 
-        // Ajustement de la numérotation
-        this->sf2->getElt(id.indexSf2)->decrementerSF2();
-        if (tree)
-        {
-            // Suppression des éléments graphiques
-            delete this->sf2->getElt(id.indexSf2)->eltTreePrst;
-            delete this->sf2->getElt(id.indexSf2)->eltTreeInst;
-            delete this->sf2->getElt(id.indexSf2)->eltTreeSmpl;
-            delete this->sf2->getElt(id.indexSf2)->eltTree;
-        }
         // Suppression du sf2
         SF2 *tmp = this->sf2->getElt(id.indexSf2)->suivant;
         this->sf2->getElt(id.indexSf2)->suivant = NULL;
@@ -1222,12 +1120,8 @@ int Pile_sf2::remove(EltID id, bool permanently, bool storeAction, int *message)
         else
             this->sf2->getElt(id.indexSf2-1)->suivant = tmp;
 
-        if (tree)
-        {
-            this->tree->removeSf2FromComboBox(id.indexSf2);
-            this->tree->updateAtNextSelectionRequest();
-        }
-        }break;
+        emit(removeElement(id));
+    }break;
     case elementSmpl:{
         // suppression d'un sample
         // vérification qu'aucun instrument n'utilise le sample
@@ -1283,37 +1177,32 @@ int Pile_sf2::remove(EltID id, bool permanently, bool storeAction, int *message)
         {
             // Ajustement de la numérotation dans les actions
             this->pileActions->decrementer(id);
-            // Ajustement de la numérotation
-            this->sf2->getElt(id.indexSf2)->smpl->getElt(id.indexElt)->decrementerSMPL();
+
             // Décrémentation des samples liés aux instruments
             for (int i = 0; i < this->sf2->getElt(id.indexSf2)->inst->nombreElt(); i++)
                 this->sf2->getElt(id.indexSf2)->inst->getElt(i)->bag->decrementerSMPL(id.indexElt);
+
             // Décrémentation des samples liés par stéréo
             this->sf2->getElt(id.indexSf2)->smpl->decrementerLinkSMPL(id.indexElt);
-            // Suppression de l'élément graphique
-            if (tree)
-                delete this->sf2->getElt(id.indexSf2)->smpl->getElt(id.indexElt)->eltTree;
+
             // Suppression du sample
             SF2::SMPL *tmp = this->sf2->getElt(id.indexSf2)->smpl->getElt(id.indexElt)->suivant;
             this->sf2->getElt(id.indexSf2)->smpl->getElt(id.indexElt)->suivant = NULL;
             delete this->sf2->getElt(id.indexSf2)->smpl->getElt(id.indexElt);
-            if (id.indexElt == 0) this->sf2->getElt(id.indexSf2)->smpl = tmp;
-            else this->sf2->getElt(id.indexSf2)->smpl->getElt(id.indexElt-1)->suivant = tmp;
+            if (id.indexElt == 0)
+                this->sf2->getElt(id.indexSf2)->smpl = tmp;
+            else
+                this->sf2->getElt(id.indexSf2)->smpl->getElt(id.indexElt-1)->suivant = tmp;
+
+            emit(removeElement(id));
         }
         else
         {
-            if (tree)
-            {
-                // Masquage de l'élément graphique
-                this->sf2->getElt(id.indexSf2)->smpl->getElt(id.indexElt)->eltTree->setHidden(1);
-                this->sf2->getElt(id.indexSf2)->smpl->getElt(id.indexElt)->eltTree->setText(6, "1");
-            }
             // Masquage du sample
+            emit(hideElement(id, true));
             this->sf2->getElt(id.indexSf2)->smpl->getElt(id.indexElt)->hidden = 1;
         }
-        if (tree)
-            this->tree->updateAtNextSelectionRequest();
-        }break;
+    }break;
     case elementInst:{
         // suppression d'un instrument
         // vérification qu'aucun preset n'utilise l'instrument
@@ -1364,41 +1253,37 @@ int Pile_sf2::remove(EltID id, bool permanently, bool storeAction, int *message)
         {
             // Ajustement de la numérotation dans les actions
             this->pileActions->decrementer(id);
-            // Ajustement de la numérotation
-            this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt)->decrementerINST();
+
             // Décrémentation des instruments liés aux presets
             for (int i = 0; i < this->sf2->getElt(id.indexSf2)->prst->nombreElt(); i++)
                 this->sf2->getElt(id.indexSf2)->prst->getElt(i)->bag->decrementerINST(id.indexElt);
+
             // Suppression des gens
-            this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt)->bagGlobal.gen = \
-                this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt)->bagGlobal.gen->supprGenAndStore(id, storeAction, this);
-            // Suppression de l'élément graphique
-            if (tree)
-                delete this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt)->eltTree;
+            this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt)->bagGlobal.gen =
+                    this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt)->bagGlobal.gen->supprGenAndStore(id, storeAction, this);
+
             // Suppression de l'instrument
             SF2::INST *tmp = this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt)->suivant;
             this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt)->suivant = NULL;
             delete this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt);
-            if (id.indexElt == 0) this->sf2->getElt(id.indexSf2)->inst = tmp;
-            else this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt-1)->suivant = tmp;
+            if (id.indexElt == 0)
+                this->sf2->getElt(id.indexSf2)->inst = tmp;
+            else
+                this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt-1)->suivant = tmp;
+
+            emit(removeElement(id));
         }
         else
         {
             // Suppression des gens
             this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt)->bagGlobal.gen =
-                this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt)->bagGlobal.gen->supprGenAndStore(id, storeAction, this);
-            if (tree)
-            {
-                // Masquage de l'élément graphique
-                this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt)->eltTree->setHidden(1);
-                this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt)->eltTree->setText(6, "1");
-            }
+                    this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt)->bagGlobal.gen->supprGenAndStore(id, storeAction, this);
+
             // Masquage de l'instrument
+            emit(hideElement(id, true));
             this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt)->hidden = 1;
         }
-        if (tree)
-            this->tree->updateAtNextSelectionRequest();
-        }break;
+    }break;
     case elementPrst:{
         // suppression d'un preset
         EltID id2(elementPrstInst, id.indexSf2, id.indexElt, 0, 0);
@@ -1421,38 +1306,33 @@ int Pile_sf2::remove(EltID id, bool permanently, bool storeAction, int *message)
         {
             // Ajustement de la numérotation dans les actions
             this->pileActions->decrementer(id);
-            // Ajustement de la numérotation
-            this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt)->decrementerPRST();
+
             // Suppression des gens
             this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt)->bagGlobal.gen =
-                this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt)->bagGlobal.gen->supprGenAndStore(id, storeAction, this);
-            // Suppression de l'élément graphique
-            if (tree)
-                delete this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt)->eltTree;
+                    this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt)->bagGlobal.gen->supprGenAndStore(id, storeAction, this);
+
             // Suppression du preset
             SF2::PRST *tmp = this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt)->suivant;
             this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt)->suivant = NULL;
             delete this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt);
-            if (id.indexElt == 0) this->sf2->getElt(id.indexSf2)->prst = tmp;
-            else this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt-1)->suivant = tmp;
+            if (id.indexElt == 0)
+                this->sf2->getElt(id.indexSf2)->prst = tmp;
+            else
+                this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt-1)->suivant = tmp;
+
+            emit(removeElement(id));
         }
         else
         {
             // Suppression des gens
             this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt)->bagGlobal.gen =
-                this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt)->bagGlobal.gen->supprGenAndStore(id, storeAction, this);
-            if (tree)
-            {
-                // Masquage de l'élément graphique
-                this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt)->eltTree->setHidden(1);
-                this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt)->eltTree->setText(6, "1");
-            }
+                    this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt)->bagGlobal.gen->supprGenAndStore(id, storeAction, this);
+
             // Masquage du preset
+            emit(hideElement(id, true));
             this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt)->hidden = 1;
         }
-        if (tree)
-            this->tree->updateAtNextSelectionRequest();
-        }break;
+    }break;
     case elementInstSmpl:{
         // suppression d'un sample lié à un instrument
         EltID id2(elementInstSmplMod, id.indexSf2, id.indexElt, id.indexElt2, 0);
@@ -1467,38 +1347,33 @@ int Pile_sf2::remove(EltID id, bool permanently, bool storeAction, int *message)
         {
             // Ajustement de la numérotation dans les actions
             this->pileActions->decrementer(id);
-            // Ajustement de la numérotation
-            this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt)->bag->getElt(id.indexElt2)->decrementerBAG();
+
             // Suppression des gens
             this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt)->bag->getElt(id.indexElt2)->gen =
-                this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt)->bag->getElt(id.indexElt2)->gen->supprGenAndStore(id, storeAction, this);
-            // Suppression des éléments graphiques
-            if (tree)
-                delete this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt)->bag->getElt(id.indexElt2)->eltTree;
+                    this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt)->bag->getElt(id.indexElt2)->gen->supprGenAndStore(id, storeAction, this);
+
             // Suppression du sample lié à l'instrument
             SF2::BAG *tmp = this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt)->bag->getElt(id.indexElt2)->suivant;
             this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt)->bag->getElt(id.indexElt2)->suivant = NULL;
             delete this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt)->bag->getElt(id.indexElt2);
-            if (id.indexElt2 == 0) this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt)->bag = tmp;
-            else this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt)->bag->getElt(id.indexElt2-1)->suivant = tmp;
+            if (id.indexElt2 == 0)
+                this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt)->bag = tmp;
+            else
+                this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt)->bag->getElt(id.indexElt2-1)->suivant = tmp;
+
+            emit(removeElement(id));
         }
         else
         {
             // Suppression des gens
             this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt)->bag->getElt(id.indexElt2)->gen =
-                this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt)->bag->getElt(id.indexElt2)->gen->supprGenAndStore(id, storeAction, this);
-            if (tree)
-            {
-                // Masquage des éléments graphiques
-                this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt)->bag->getElt(id.indexElt2)->eltTree->setHidden(1);
-                this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt)->bag->getElt(id.indexElt2)->eltTree->setText(6, "1");
-            }
+                    this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt)->bag->getElt(id.indexElt2)->gen->supprGenAndStore(id, storeAction, this);
+
             // Masquage du sample lié à l'instrument
+            emit(hideElement(id, true));
             this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt)->bag->getElt(id.indexElt2)->hidden = 1;
         }
-        if (tree)
-            this->tree->updateAtNextSelectionRequest();
-        }break;
+    }break;
     case elementPrstInst:{
         // suppression d'un instrument lié à un preset
         EltID id2(elementPrstInstMod, id.indexSf2, id.indexElt, id.indexElt2, 0);
@@ -1513,38 +1388,33 @@ int Pile_sf2::remove(EltID id, bool permanently, bool storeAction, int *message)
         {
             // Ajustement de la numérotation dans les actions
             this->pileActions->decrementer(id);
-            // Ajustement de la numérotation
-            this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt)->bag->getElt(id.indexElt2)->decrementerBAG();
+
             // Suppression des gens
             this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt)->bag->getElt(id.indexElt2)->gen =
-                this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt)->bag->getElt(id.indexElt2)->gen->supprGenAndStore(id, storeAction, this);
-            // Suppression des éléments graphiques
-            if (tree)
-                delete this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt)->bag->getElt(id.indexElt2)->eltTree;
+                    this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt)->bag->getElt(id.indexElt2)->gen->supprGenAndStore(id, storeAction, this);
+
             // Suppression de l'instrument lié au preset
             SF2::BAG *tmp = this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt)->bag->getElt(id.indexElt2)->suivant;
             this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt)->bag->getElt(id.indexElt2)->suivant = NULL;
             delete this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt)->bag->getElt(id.indexElt2);
-            if (id.indexElt2 == 0) this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt)->bag = tmp;
-            else this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt)->bag->getElt(id.indexElt2-1)->suivant = tmp;
+            if (id.indexElt2 == 0)
+                this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt)->bag = tmp;
+            else
+                this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt)->bag->getElt(id.indexElt2-1)->suivant = tmp;
+
+            emit(removeElement(id));
         }
         else
         {
             // Suppression des gens
             this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt)->bag->getElt(id.indexElt2)->gen =
-                this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt)->bag->getElt(id.indexElt2)->gen->supprGenAndStore(id, storeAction, this);
-            if (tree)
-            {
-                // Masquage des éléments graphiques
-                this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt)->bag->getElt(id.indexElt2)->eltTree->setHidden(1);
-                this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt)->bag->getElt(id.indexElt2)->eltTree->setText(6, "1");
-            }
+                    this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt)->bag->getElt(id.indexElt2)->gen->supprGenAndStore(id, storeAction, this);
+
             // Masquage de l'instrument lié au preset
+            emit(hideElement(id, true));
             this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt)->bag->getElt(id.indexElt2)->hidden = 1;
         }
-        if (tree)
-            this->tree->updateAtNextSelectionRequest();
-        }break;
+    }break;
     case elementInstMod: case elementPrstMod: case elementInstSmplMod: case elementPrstInstMod:{
         // suppression d'un mod
         SF2::BAG *bag = NULL;
@@ -1570,13 +1440,15 @@ int Pile_sf2::remove(EltID id, bool permanently, bool storeAction, int *message)
         {
             // Ajustement de la numérotation dans les actions
             this->pileActions->decrementer(id);
+
             // ajustement de la numérotation
             bag->mod->enleverMod(id.indexMod);
+
             // Le mod pointe sur un autre ?
             int iVal = bag->mod->getElt(id.indexMod)->sfModDestOper;
             if (iVal >= 32768 && iVal - 32768 < this->count(id))
             {
-                if (bag->mod->getElt(iVal-32768)->sfModSrcOper.CC == 0 && \
+                if (bag->mod->getElt(iVal-32768)->sfModSrcOper.CC == 0 &&
                         bag->mod->getElt(iVal-32768)->sfModSrcOper.Index == 127)
                     bag->mod->getElt(iVal-32768)->sfModSrcOper.Index = 0;
             }
@@ -1594,7 +1466,7 @@ int Pile_sf2::remove(EltID id, bool permanently, bool storeAction, int *message)
             // masquage du mod
             bag->mod->getElt(id.indexMod)->hidden = true;
         }
-        }break;
+    }break;
     }
     // Création et stockage de l'action
     if (storeAction)
@@ -1640,7 +1512,7 @@ int Pile_sf2::set(EltID id, Champ champ, Valeur value, bool storeAction, bool so
             oldValue.wValue = tmp->wBpsSave;
             tmp->wBpsSave = value.wValue; break;
         }
-        }break;
+    }break;
     case elementSmpl:{
         // Modification d'un sample
         SF2::SMPL *tmp = this->sf2->getElt(id.indexSf2)->smpl->getElt(id.indexElt);
@@ -1691,14 +1563,14 @@ int Pile_sf2::set(EltID id, Champ champ, Valeur value, bool storeAction, bool so
             tmp->son.setRam(value.wValue);
             break;
         }
-        }break;
+    }break;
     case elementInst:{
         // Modification d'un instrument
         SF2::INST *tmp = this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt);
         if (!tmp->bagGlobal.gen->isSet(champ)) defaultValue = 1;
         oldValue = tmp->bagGlobal.gen->getGen(champ);
         tmp->bagGlobal.gen = tmp->bagGlobal.gen->setGen(champ, value);
-        }break;
+    }break;
     case elementPrst:{
         // Modification d'un preset
         SF2::PRST *tmp = this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt);
@@ -1724,85 +1596,55 @@ int Pile_sf2::set(EltID id, Champ champ, Valeur value, bool storeAction, bool so
             oldValue = tmp->bagGlobal.gen->getGen(champ);
             tmp->bagGlobal.gen = tmp->bagGlobal.gen->setGen(champ, value);
         }
-        if ((champ == champ_wPreset || champ == champ_wBank) && tree)
+        if (champ == champ_wPreset || champ == champ_wBank)
         {
-            // Modification de l'élément graphique
+            // Notification that the element display changed
             QString text = QString("%1:%2 %3")
                     .arg(tmp->wBank, 3, 10, QChar('0'))
                     .arg(tmp->wPreset, 3, 10, QChar('0'))
                     .arg(tmp->Name);
-            tmp->eltTree->setText(0, text);
-            tmp->eltTree->setText(5, text);
-            if (sort)
-                this->sf2->getElt(id.indexSf2)->eltTreePrst->sortChildren(5, Qt::AscendingOrder);
+            emit(changeElementName(id, text));
+            emit(changeElementOrder(id, text, sort));
         }
-        }break;
+    }break;
     case elementInstSmpl:{
-        // Modification d'un sample lié à un instrument
+        // Modification of a sample linked to an instrument
         SF2::BAG *tmp = this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt)->bag->getElt(id.indexElt2);
         if (!tmp->gen->isSet(champ)) defaultValue = 1;
         oldValue = tmp->gen->getGen(champ);
         tmp->gen = tmp->gen->setGen(champ, value);
-        if (champ == champ_sampleID && tree)
+
+        // Notifications
+        if (champ == champ_sampleID || champ == champ_keyRange || champ == champ_velRange)
         {
-            // Nom du sample lié
-            EltID id2(elementSmpl, id.indexSf2, value.wValue, 0, 0);
-            QString qStr = this->getQstr(id2, champ_name);
-            tmp->eltTree->setText(0, qStr);
-            // Modification élément graphique
-            char str[20];
-            sprintf(str, "%.3d", this->get(id, champ_keyRange).rValue.byLo);
-            QString qStr2 = QString(str);
-            tmp->eltTree->setText(5, qStr2.append(qStr));
-            if (sort)
-                this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt)->eltTree->sortChildren(5, Qt::AscendingOrder);
+            QString name = this->getQstr(EltID(elementSmpl, id.indexSf2, this->get(id, champ_sampleID).wValue, 0, 0), champ_name);
+            QString order = QString("%1:%2 %3")
+                    .arg(this->get(id, champ_keyRange).rValue.byLo, 3, 10, QChar('0'))
+                    .arg(this->get(id, champ_velRange).rValue.byLo, 3, 10, QChar('0'))
+                    .arg(name);
+            emit(changeElementName(id, name));
+            emit(changeElementOrder(id, order, sort));
         }
-        else if (champ == champ_keyRange && tree)
-        {
-            // Modification élément graphique
-            char str[20];
-            sprintf(str, "%.3d", value.rValue.byLo);
-            QString qStr = QString(str);
-            EltID id2(elementSmpl, id.indexSf2, this->get(id, champ_sampleID).wValue, 0, 0);
-            qStr.append(this->getQstr(id2, champ_name));
-            tmp->eltTree->setText(5, qStr);
-            if (sort)
-                this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt)->eltTree->sortChildren(5, Qt::AscendingOrder);
-        }
-        }break;
+    }break;
     case elementPrstInst:{
-        // Modification d'un instrument lié à un preset
+        // Modification of an instrument linked to a preset
         SF2::BAG *tmp = this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt)->bag->getElt(id.indexElt2);
         if (!tmp->gen->isSet(champ)) defaultValue = 1;
         oldValue = tmp->gen->getGen(champ);
         tmp->gen = tmp->gen->setGen(champ, value);
-        if (champ == champ_instrument && tree)
+
+        // Notifications
+        if (champ == champ_instrument || champ == champ_keyRange || champ == champ_velRange)
         {
-            // Nom de l'instrument lié
-            EltID id2(elementInst, id.indexSf2, value.wValue, 0, 0);
-            QString qStr = this->getQstr(id2, champ_name);
-            tmp->eltTree->setText(0, qStr);
-            // Modification élément graphique
-            char str[20];
-            sprintf(str, "%.3d", this->get(id, champ_keyRange).rValue.byLo);
-            QString qStr2 = QString(str);
-            tmp->eltTree->setText(5, qStr2.append(qStr));
-            if (sort)
-                this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt)->eltTree->sortChildren(5, Qt::AscendingOrder);
+            QString name = this->getQstr(EltID(elementInst, id.indexSf2, this->get(id, champ_instrument).wValue, 0, 0), champ_name);
+            QString order = QString("%1:%2 %3")
+                    .arg(this->get(id, champ_keyRange).rValue.byLo, 3, 10, QChar('0'))
+                    .arg(this->get(id, champ_velRange).rValue.byLo, 3, 10, QChar('0'))
+                    .arg(name);
+            emit(changeElementName(id, name));
+            emit(changeElementOrder(id, order, sort));
         }
-        else if (champ == champ_keyRange && tree)
-        {
-            // Modification élément graphique
-            char str[20];
-            sprintf(str, "%.3d", value.rValue.byLo);
-            QString qStr = QString(str);
-            EltID id2(elementInst, id.indexSf2, this->get(id, champ_instrument).wValue, 0, 0);
-            qStr.append(this->getQstr(id2, champ_name));
-            tmp->eltTree->setText(5, qStr);
-            if (sort)
-                this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt)->eltTree->sortChildren(5, Qt::AscendingOrder);
-        }
-        }break;
+    }break;
     case elementInstMod: case elementPrstMod: case elementInstSmplMod: case elementPrstInstMod:{
         // Modification d'un mod d'un instrument
         SF2::BAG::MOD *tmp = NULL;
@@ -1838,11 +1680,11 @@ int Pile_sf2::set(EltID id, Champ champ, Valeur value, bool storeAction, bool so
             oldValue.wValue = tmp->index;
             tmp->index = value.wValue; break;
         }
-        }break;
+    }break;
     }
     // Création et stockage de l'action
     if (storeAction)
-        {
+    {
         Pile_actions::Action *action = new Pile_actions::Action;
         if (defaultValue) action->typeAction = Pile_actions::actionModifierFromDefault;
         else action->typeAction = Pile_actions::actionModifier;
@@ -1860,11 +1702,11 @@ int Pile_sf2::set(EltID id, Champ champ, QString qStr, bool storeAction, bool so
         return 1;
 
     QString qOldStr = "";
-    // Type d'élément à modifier
+    // Type of element to edit
     switch ((int)id.typeElement)
     {
     case elementSf2:{
-        // Modification d'un SF2
+        // Editing of a sf2
         SF2 *tmp = this->sf2->getElt(id.indexSf2);
         switch ((int)champ)
         {
@@ -1872,14 +1714,10 @@ int Pile_sf2::set(EltID id, Champ champ, QString qStr, bool storeAction, bool so
             qOldStr = tmp->INAM;
             qStr = qStr.left(256);
             tmp->INAM = qStr;
-            if (tree)
-            {
-                // Modification de l'élément graphique
-                tmp->eltTree->setText(0, qStr);
-                tmp->eltTree->setText(5, qStr);
-                this->tree->renameSf2InComboBox(id.indexSf2, qStr);
-                this->tree->trier(0);
-            }
+
+            // Notify the name update
+            emit(changeElementName(id, qStr));
+            emit(changeElementOrder(id, qStr, true));
             break;
         case champ_ISNG:
             qOldStr = tmp->ISNG;
@@ -1907,58 +1745,64 @@ int Pile_sf2::set(EltID id, Champ champ, QString qStr, bool storeAction, bool so
             tmp->ISFT = qStr.left(255); break;
         case champ_filename:
             qOldStr = tmp->fileName;
-            tmp->fileName = qStr;break;
+            tmp->fileName = qStr; break;
         }
-        }break;
+    }break;
     case elementSmpl:{
+        // Editing of a sample
         qStr = qStr.trimmed();
-        // Modification d'un sample
         SF2::SMPL *tmp = this->sf2->getElt(id.indexSf2)->smpl->getElt(id.indexElt);
         switch ((int)champ)
         {
         case champ_name:{
-            // Modification du nom d'un sample
             qOldStr = tmp->Name;
             qStr = qStr.left(20);
             tmp->Name = qStr;
-            if (tree)
+
+            // Notify the name update for the sample
+            emit(changeElementName(id, qStr));
+            emit(changeElementOrder(id, qStr, sort));
+
+            // Notify the name change for all corresponding smpl inst
+            int indSmpl = id.indexElt;
+            EltID id2 = id;
+            id2.typeElement = elementInst;
+            int nbInst = this->count(id2);
+            int nbInstSmpl;
+            for (int i = 0; i < nbInst; i++)
             {
-                // Modification de l'élément graphique
-                tmp->eltTree->setText(0, qStr);
-                tmp->eltTree->setText(5, qStr);
-                // Modification des occurrences dans les instruments
-                int indSmpl = id.indexElt;
-                EltID id2 = id;
                 id2.typeElement = elementInst;
-                int nbInst = this->count(id2);
-                int nbInstSmpl;
-                for (int i = 0; i < nbInst; i++)
+                id2.indexElt = i;
+                if (!this->get(id2, champ_hidden).bValue)
                 {
-                    id2.typeElement = elementInst;
-                    id2.indexElt = i;
-                    if (!this->get(id2, champ_hidden).bValue)
+                    id2.typeElement = elementInstSmpl;
+                    nbInstSmpl = this->count(id2);
+                    for (int j = 0; j < nbInstSmpl; j++)
                     {
-                        id2.typeElement = elementInstSmpl;
-                        nbInstSmpl = this->count(id2);
-                        for (int j = 0; j < nbInstSmpl; j++)
+                        id2.indexElt2 = j;
+                        if (!this->get(id2, champ_hidden).bValue)
                         {
-                            id2.indexElt2 = j;
-                            if (!this->get(id2, champ_hidden).bValue)
-                                if (this->get(id2, champ_sampleID).wValue == indSmpl)
-                                    this->sf2->getElt(id2.indexSf2)->inst->getElt(id2.indexElt)->bag->getElt(id2.indexElt2)->eltTree->setText(0, qStr);
+                            if (this->get(id2, champ_sampleID).wValue == indSmpl)
+                            {
+                                emit(changeElementName(id2, qStr));
+
+                                QString order = QString("%1:%2 %3")
+                                        .arg(this->get(id2, champ_keyRange).rValue.byLo, 3, 10, QChar('0'))
+                                        .arg(this->get(id2, champ_velRange).rValue.byLo, 3, 10, QChar('0'))
+                                        .arg(qStr);
+                                emit(changeElementOrder(id2, order, true));
+                            }
                         }
                     }
                 }
-                if (sort)
-                    this->sf2->getElt(id.indexSf2)->eltTreeSmpl->sortChildren(5, Qt::AscendingOrder);
             }
-            };break;
+        };break;
         case champ_filename:
             qOldStr = tmp->son.getFileName();
             tmp->son.setFileName(qStr);
             break;
         }
-        }break;
+    }break;
     case elementInst:{
         qStr = qStr.trimmed();
         // Modification d'un instrument
@@ -1970,44 +1814,47 @@ int Pile_sf2::set(EltID id, Champ champ, QString qStr, bool storeAction, bool so
             qOldStr = tmp->Name;
             qStr = qStr.left(20);
             tmp->Name = qStr;
-            if (tree)
+
+            // Notify the name update for the instrument
+            emit(changeElementName(id, qStr));
+            emit(changeElementOrder(id, qStr, sort));
+
+            // Change the corresponding inst prst
+            int indInst = id.indexElt;
+            EltID id2 = id;
+            id2.typeElement = elementPrst;
+            int nbPrst = this->count(id2);
+            int nbPrstInst;
+            for (int i = 0; i < nbPrst; i++)
             {
-                // Modification de l'élément graphique
-                tmp->eltTree->setText(0, qStr);
-                tmp->eltTree->setText(5, qStr);
-                // Modification des occurrences dans les presets
-                int indInst = id.indexElt;
-                EltID id2 = id;
                 id2.typeElement = elementPrst;
-                int nbPrst = this->count(id2);
-                int nbPrstInst;
-                for (int i = 0; i < nbPrst; i++)
+                id2.indexElt = i;
+                if (!this->get(id2, champ_hidden).bValue)
                 {
-                    id2.typeElement = elementPrst;
-                    id2.indexElt = i;
-                    if (!this->get(id2, champ_hidden).bValue)
+                    id2.typeElement = elementPrstInst;
+                    nbPrstInst = this->count(id2);
+                    for (int j = 0; j < nbPrstInst; j++)
                     {
-                        id2.typeElement = elementPrstInst;
-                        nbPrstInst = this->count(id2);
-                        for (int j = 0; j < nbPrstInst; j++)
+                        id2.indexElt2 = j;
+                        if (!this->get(id2, champ_hidden).bValue)
                         {
-                            id2.indexElt2 = j;
-                            if (!this->get(id2, champ_hidden).bValue)
-                                if (this->get(id2, champ_instrument).wValue == indInst)
-                                {
-                                    this->sf2->getElt(id2.indexSf2)->prst->getElt(id2.indexElt)->bag->getElt(id2.indexElt2)->eltTree->setText(0, qStr);
-                                    this->sf2->getElt(id2.indexSf2)->prst->getElt(id2.indexElt)->bag->getElt(id2.indexElt2)->eltTree->setText(5, qStr);
-                                    this->sf2->getElt(id2.indexSf2)->prst->getElt(id2.indexElt)->eltTree->sortChildren(5, Qt::AscendingOrder);
-                                }
+                            if (this->get(id2, champ_instrument).wValue == indInst)
+                            {
+                                emit(changeElementName(id2, qStr));
+
+                                QString order = QString("%1:%2 %3")
+                                        .arg(this->get(id2, champ_keyRange).rValue.byLo, 3, 10, QChar('0'))
+                                        .arg(this->get(id2, champ_velRange).rValue.byLo, 3, 10, QChar('0'))
+                                        .arg(qStr);
+                                emit(changeElementOrder(id2, order, true));
+                            }
                         }
                     }
                 }
-                if (sort)
-                    this->sf2->getElt(id.indexSf2)->eltTreeInst->sortChildren(5, Qt::AscendingOrder);
             }
             break;
         }
-        }break;
+    }break;
     case elementPrst:{
         qStr = qStr.trimmed();
         // Modification d'un preset
@@ -2019,19 +1866,18 @@ int Pile_sf2::set(EltID id, Champ champ, QString qStr, bool storeAction, bool so
             qOldStr = tmp->Name;
             qStr = qStr.left(20);
             tmp->Name = qStr;
-            if (tree)
-            {
-                // Modification de l'élément graphique
-                char chaine[30];
-                sprintf(chaine, "%.3d:%.3d %s", tmp->wBank, tmp->wPreset, tmp->Name.toStdString().c_str());
-                tmp->eltTree->setText(0, chaine);
-                tmp->eltTree->setText(5, chaine);
-                if (sort)
-                    this->sf2->getElt(id.indexSf2)->eltTreePrst->sortChildren(5, Qt::AscendingOrder);
-            }
+
+            // Notify the name update for the preset
+            QString qStr = QString("%1:%2 %3")
+                    .arg(tmp->wBank, 3, 10, QChar('0'))
+                    .arg(tmp->wPreset, 3, 10, QChar('0'))
+                    .arg(tmp->Name);
+
+            emit(changeElementName(id, qStr));
+            emit(changeElementOrder(id, qStr, sort));
             break;
         }
-        }break;
+    }break;
     }
     // Création et stockage de l'action
     if (storeAction)
@@ -2076,7 +1922,7 @@ int Pile_sf2::set(EltID id, Champ champ, QByteArray data, bool storeAction)
             baData = Sound::bpsConversion(data, 24, 824);
             this->set(id, champ_sampleData24, baData, storeAction);
             storeAction = false;
-            }break;
+        }break;
         case champ_sampleData32:{
             // Modification 16 bits
             QByteArray baData = Sound::bpsConversion(data, 32, 16);
@@ -2085,7 +1931,7 @@ int Pile_sf2::set(EltID id, Champ champ, QByteArray data, bool storeAction)
             baData = Sound::bpsConversion(data, 32, 824);
             this->set(id, champ_sampleData24, baData, storeAction);
             storeAction = false;
-            }break;
+        }break;
         }
     }
     // Création et stockage de l'action
@@ -2117,42 +1963,54 @@ int Pile_sf2::reset(EltID id, Champ champ, bool storeAction)
         if (!tmp->bagGlobal.gen->isSet(champ)) return 0;
         oldValue = tmp->bagGlobal.gen->getGen(champ);
         tmp->bagGlobal.gen = tmp->bagGlobal.gen->resetGen(champ);
-        }break;
+    }break;
     case elementPrst:{
         // Remise à zéro d'une propriété d'un preset
         SF2::PRST *tmp = this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt);
         if (!tmp->bagGlobal.gen->isSet(champ)) return 0;
         oldValue = tmp->bagGlobal.gen->getGen(champ);
         tmp->bagGlobal.gen = tmp->bagGlobal.gen->resetGen(champ);
-        }break;
+    }break;
     case elementInstSmpl:{
         // Remise à zéro d'une propriété d'un sample lié à un instrument
         SF2::BAG *tmp = this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt)->bag->getElt(id.indexElt2);
         if (!tmp->gen->isSet(champ)) return 0;
         oldValue = tmp->gen->getGen(champ);
         tmp->gen = tmp->gen->resetGen(champ);
-        if (champ == champ_sampleID && tree)
-            tmp->eltTree->setText(0, "");
-        else if (champ == champ_keyRange && tree)
+
+        // Notifications
+        if (champ == champ_sampleID || champ == champ_keyRange || champ == champ_velRange)
         {
-            // Modification élément graphique
-            tmp->eltTree->setText(5, "");
-            this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt)->eltTree->sortChildren(5, Qt::AscendingOrder);
+            QString name = this->getQstr(EltID(elementSmpl, id.indexSf2, this->get(id, champ_sampleID).wValue, 0, 0), champ_name);
+            emit(changeElementName(id, name));
+
+            QString order = QString("%1:%2 %3")
+                    .arg(this->get(id, champ_keyRange).rValue.byLo, 3, 10, QChar('0'))
+                    .arg(this->get(id, champ_velRange).rValue.byLo, 3, 10, QChar('0'))
+                    .arg(name);
+            emit(changeElementOrder(id, order, true));
         }
-        }break;
+    }break;
     case elementPrstInst:{
         // Remise à zéro d'une propriété d'un instrument lié à un preset
         SF2::BAG *tmp = this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt)->bag->getElt(id.indexElt2);
         if (!tmp->gen->isSet(champ)) return 0;
         oldValue = tmp->gen->getGen(champ);
         tmp->gen = tmp->gen->resetGen(champ);
-        if (champ == champ_instrument && tree)
+
+        // Notifications
+        if (champ == champ_instrument || champ == champ_keyRange || champ == champ_velRange)
         {
-            tmp->eltTree->setText(0, "");
-            tmp->eltTree->setText(5, "");
-            this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt)->eltTree->sortChildren(5, Qt::AscendingOrder);
+            QString name = this->getQstr(EltID(elementSmpl, id.indexSf2, this->get(id, champ_sampleID).wValue, 0, 0), champ_name);
+            emit(changeElementName(id, name));
+
+            QString order = QString("%1:%2 %3")
+                    .arg(this->get(id, champ_keyRange).rValue.byLo, 3, 10, QChar('0'))
+                    .arg(this->get(id, champ_velRange).rValue.byLo, 3, 10, QChar('0'))
+                    .arg(name);
+            emit(changeElementOrder(id, order, true));
         }
-        }break;
+    }break;
     }
     // Création et stockage de l'action
     if (storeAction)
@@ -2322,62 +2180,6 @@ Pile_sf2::SF2::BAG::GEN * Pile_sf2::SF2::BAG::GEN::supprGenAndStore(EltID id, in
     return genTmp;
 }
 
-void Pile_sf2::SF2::decrementerSF2()
-{
-    if (this)
-    {
-        this->suivant->decrementerSF2();
-        this->inst->decrementerSF2();
-        this->prst->decrementerSF2();
-        this->smpl->decrementerSF2();
-        if (this->eltTreeInst) this->eltTreeInst->setText(1, decrementerQstr(this->eltTreeInst->text(1)));
-        if (this->eltTreeSmpl) this->eltTreeSmpl->setText(1, decrementerQstr(this->eltTreeSmpl->text(1)));
-        if (this->eltTreePrst) this->eltTreePrst->setText(1, decrementerQstr(this->eltTreePrst->text(1)));
-        if (this->eltTree) this->eltTree->setText(1, decrementerQstr(this->eltTree->text(1)));
-    }
-}
-void Pile_sf2::SF2::INST::decrementerSF2()
-{
-    if (this)
-    {
-        this->suivant->decrementerSF2();
-        this->bag->decrementerSF2();
-        if (this->eltTree) this->eltTree->setText(1, decrementerQstr(this->eltTree->text(1)));
-    }
-}
-void Pile_sf2::SF2::SMPL::decrementerSF2()
-{
-    if (this)
-    {
-        this->suivant->decrementerSF2();
-        if (this->eltTree) this->eltTree->setText(1, decrementerQstr(this->eltTree->text(1)));
-    }
-}
-void Pile_sf2::SF2::PRST::decrementerSF2()
-{
-    if (this)
-    {
-        this->suivant->decrementerSF2();
-        this->bag->decrementerSF2();
-        if (this->eltTree) this->eltTree->setText(1, decrementerQstr(this->eltTree->text(1)));
-    }
-}
-void Pile_sf2::SF2::BAG::decrementerSF2()
-{
-    if (this)
-    {
-        this->suivant->decrementerSF2();
-        if (this->eltTree) this->eltTree->setText(1, decrementerQstr(this->eltTree->text(1)));
-    }
-}
-void Pile_sf2::SF2::SMPL::decrementerSMPL()
-{
-    if (this)
-    {
-        this->suivant->decrementerSMPL();
-        if (this->eltTree) this->eltTree->setText(3, decrementerQstr(this->eltTree->text(3)));
-    }
-}
 void Pile_sf2::SF2::BAG::decrementerSMPL(int indexSmpl)
 {
     if (this)
@@ -2400,23 +2202,7 @@ void Pile_sf2::SF2::SMPL::decrementerLinkSMPL(int indexSmpl)
         if (this->wSampleLink >= indexSmpl) this->wSampleLink = this->wSampleLink - 1;
     }
 }
-void Pile_sf2::SF2::INST::decrementerINST()
-{
-    if (this)
-    {
-        this->suivant->decrementerINST();
-        this->bag->decrementerINST_PRST();
-        if (this->eltTree) this->eltTree->setText(3, decrementerQstr(this->eltTree->text(3)));
-    }
-}
-void Pile_sf2::SF2::BAG::decrementerINST_PRST()
-{
-    if (this)
-    {
-        this->suivant->decrementerINST_PRST();
-        if (this->eltTree) this->eltTree->setText(3, decrementerQstr(this->eltTree->text(3)));
-    }
-}
+
 void Pile_sf2::SF2::BAG::decrementerINST(int indexInst)
 {
     if (this)
@@ -2429,23 +2215,6 @@ void Pile_sf2::SF2::BAG::decrementerINST(int indexInst)
             value.wValue = n-1;
             this->gen->setGen(champ_instrument, value);
         }
-    }
-}
-void Pile_sf2::SF2::PRST::decrementerPRST()
-{
-    if (this)
-    {
-        this->suivant->decrementerPRST();
-        this->bag->decrementerINST_PRST();
-        if (this->eltTree) this->eltTree->setText(3, decrementerQstr(this->eltTree->text(3)));
-    }
-}
-void Pile_sf2::SF2::BAG::decrementerBAG()
-{
-    if (this)
-    {
-        this->suivant->decrementerBAG();
-        if (this->eltTree) this->eltTree->setText(4, decrementerQstr(this->eltTree->text(4)));
     }
 }
 void Pile_sf2::SF2::BAG::MOD::enleverMod(int index)
@@ -2477,84 +2246,58 @@ int Pile_sf2::display(EltID id)
         // affichage d'un SF2
         SF2 *tmp = this->sf2->getElt(id.indexSf2);
         tmp->hidden = 0;
-        if (tree)
-        {
-            tmp->eltTree->setHidden(0);
-            tmp->eltTreeSmpl->setHidden(0);
-            tmp->eltTreeInst->setHidden(0);
-            tmp->eltTreePrst->setHidden(0);
-        }
-        }break;
+        emit(hideElement(id, false));
+    }break;
     case elementSmpl:{
         // affichage d'un sample
         SF2::SMPL *tmp = this->sf2->getElt(id.indexSf2)->smpl->getElt(id.indexElt);
         tmp->hidden = 0;
-        if (tree)
-        {
-            tmp->eltTree->setHidden(0);
-            tmp->eltTree->setText(6, "0");
-        }
-        }break;
+        emit(hideElement(id, false));
+    }break;
     case elementInst:{
         // affichage d'un instrument
         SF2::INST *tmp = this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt);
         tmp->hidden = 0;
-        if (tree)
-        {
-            tmp->eltTree->setHidden(0);
-            tmp->eltTree->setText(6, "0");
-        }
-        }break;
+        emit(hideElement(id, false));
+    }break;
     case elementPrst:{
         // affichage d'un preset
         SF2::PRST *tmp = this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt);
         tmp->hidden = 0;
-        if (tree)
-        {
-            tmp->eltTree->setHidden(0);
-            tmp->eltTree->setText(6, "0");
-        }
-        }break;
+        emit(hideElement(id, false));
+    }break;
     case elementInstSmpl:{
         // affichage d'un sample lié à un instrument
         SF2::BAG *tmp = this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt)->bag->getElt(id.indexElt2);
         tmp->hidden = 0;
-        if (tree)
-        {
-            tmp->eltTree->setHidden(0);
-            tmp->eltTree->setText(6, "0");
-        }
-        }break;
+        emit(hideElement(id, false));
+    }break;
     case elementPrstInst:{
         // affichage d'un instrument lié à un preset
         SF2::BAG *tmp = this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt)->bag->getElt(id.indexElt2);
         tmp->hidden = 0;
-        if (tree)
-        {
-            tmp->eltTree->setHidden(0);
-            tmp->eltTree->setText(6, "0");
-        }
-        }break;
+        emit(hideElement(id, false));
+    }break;
     case elementInstMod:{
         // affichage d'un mod d'un instrument
         SF2::BAG::MOD *tmp = this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt)->bagGlobal.mod->getElt(id.indexMod);
         tmp->hidden = 0;
-        }break;
+    }break;
     case elementPrstMod:{
         // affichage d'un mod d'un preset
         SF2::BAG::MOD *tmp = this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt)->bagGlobal.mod->getElt(id.indexMod);
         tmp->hidden = 0;
-        }break;
+    }break;
     case elementInstSmplMod:{
         // affichage d'un mod d'un sample lié à un instrument
         SF2::BAG::MOD *tmp = this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt)->bag->getElt(id.indexElt2)->mod->getElt(id.indexMod);
         tmp->hidden = 0;
-        }break;
+    }break;
     case elementPrstInstMod:{
         // affichage d'un mod d'un instrument lié à un preset
         SF2::BAG::MOD *tmp = this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt)->bag->getElt(id.indexElt2)->mod->getElt(id.indexMod);
         tmp->hidden = 0;
-        }break;
+    }break;
     }
     return 0;
 }
@@ -2618,7 +2361,7 @@ bool Pile_sf2::isValide(EltID id, bool acceptHidden)
 
     if (id.indexSf2 < 0)
         return (id.typeElement == elementSf2 || id.typeElement == elementRootSmpl || id.typeElement == elementRootInst
-             || id.typeElement == elementRootPrst);
+                || id.typeElement == elementRootPrst);
 
     // Vérification qu'indexSf2 est correct
     i = 0;
@@ -2885,7 +2628,7 @@ bool Pile_sf2::isAvailable(EltID id, quint16 wBank, quint16 wPreset)
         id.indexElt = i;
         if (!this->get(id, champ_hidden).bValue)
         {
-            if (this->get(id, champ_wBank).wValue == wBank && \
+            if (this->get(id, champ_wBank).wValue == wBank &&
                     this->get(id, champ_wPreset).wValue == wPreset)
                 return false;
         }
