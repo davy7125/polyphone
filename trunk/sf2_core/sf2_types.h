@@ -18,7 +18,7 @@
 **                                                                        **
 ****************************************************************************
 **           Author: Davy Triponney                                       **
-**  Website/Contact: http://www.polyphone.fr/                             **
+**  Website/Contact: http://polyphone-soundfonts.com                      **
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
@@ -59,21 +59,66 @@ typedef enum
 class EltID
 {
 public:
-    EltID(ElementType elementType, int indexSf2, int indexElt, int indexElt2, int indexMod)
+    EltID(ElementType elementType, int indexSf2, int indexElt, int indexElt2, int indexMod) :
+        typeElement(elementType),
+        indexSf2(indexSf2),
+        indexElt(indexElt),
+        indexElt2(indexElt2),
+        indexMod(indexMod)
+    {}
+    EltID(EltID * other) :
+        typeElement(other->typeElement),
+        indexSf2(other->indexSf2),
+        indexElt(other->indexElt),
+        indexElt2(other->indexElt2),
+        indexMod(other->indexMod)
+    {}
+    EltID() :
+        typeElement(elementUnknown),
+        indexSf2(0),
+        indexElt(0),
+        indexElt2(0),
+        indexMod(0)
+    {}
+
+    EltID parent(bool includeRoot = false)
     {
-        this->typeElement = elementType;
-        this->indexSf2    = indexSf2;
-        this->indexElt    = indexElt;
-        this->indexElt2   = indexElt2;
-        this->indexMod    = indexMod;
-    }
-    EltID()
-    {
-        this->typeElement = elementUnknown;
-        this->indexSf2 = 0;
-        this->indexElt = 0;
-        this->indexElt2 = 0;
-        this->indexMod = 0;
+        EltID idParent(this);
+
+        switch (typeElement) {
+        case elementSmpl:
+            idParent.typeElement = (includeRoot ? elementRootSmpl : elementSf2);
+            break;
+        case elementInst:
+            idParent.typeElement = (includeRoot ? elementRootInst : elementSf2);
+            break;
+        case elementPrst:
+            idParent.typeElement = (includeRoot ? elementRootPrst : elementSf2);
+            break;
+        case elementInstSmpl: case elementInstMod: case elementInstGen:
+            idParent.typeElement = elementInst;
+            break;
+        case elementPrstInst: case elementPrstMod: case elementPrstGen:
+            idParent.typeElement = elementPrst;
+            break;
+        case elementRootSmpl:
+        case elementRootInst:
+        case elementRootPrst:
+            idParent.typeElement = elementSf2;
+            break;
+        case elementInstSmplMod: case elementInstSmplGen:
+            idParent.typeElement = elementInstSmpl;
+            break;
+        case elementPrstInstMod: case elementPrstInstGen:
+            idParent.typeElement = elementPrstInst;
+            break;
+        case elementSf2:
+        case elementUnknown:
+            idParent.typeElement = elementUnknown;
+            break;
+        }
+
+        return idParent;
     }
 
     bool operator==(const EltID &other)

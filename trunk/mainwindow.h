@@ -18,7 +18,7 @@
 **                                                                        **
 ****************************************************************************
 **           Author: Davy Triponney                                       **
-**  Website/Contact: http://www.polyphone.fr/                             **
+**  Website/Contact: http://polyphone-soundfonts.com                      **
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
@@ -135,6 +135,7 @@ private slots:
     void updateTable(int type, int sf2, int elt, int elt2);  // Mise à jour tables si suppression définitive d'un élément masqué
 
     void nouveau();             // Clic sur l'action "nouveau"
+    int ouvrir2(QString fileName);
     void ouvrir();              // Clic sur l'action "ouvrir"
     void ouvrirFichier1();      // Clic sur l'action "ouvrir fichier 1"
     void ouvrirFichier2();      // Clic sur l'action "ouvrir fichier 2"
@@ -150,7 +151,7 @@ private slots:
     void exporter();            // Export d'un ou plusieurs preset(s)
     void exporter(QList<QList<EltID> > listID, QString dir, int format,
                   bool presetPrefix, bool bankDir, bool gmSort, int quality);
-    void exporter2(QList<QList<EltID> > listID, QString dir, int format, int flags, int quality);
+    int exporter2(QList<QList<EltID> > listID, QString dir, int format, int flags, int quality);
     void nouvelInstrument();    // Création d'un instrument
     void nouveauPreset();       // Création d'un preset
     void associer();            // Association InstSmpl et PrstInst
@@ -237,7 +238,7 @@ private:
     int _currentKey;
     QDialog _dialKeyboard;
     QByteArray _geometryDialKeyboard;
-    QFutureWatcher<void> _futureWatcher;
+    QFutureWatcher<int> _futureWatcher;
     QProgressDialog _progressDialog;
 
     // Gestion sustain pedal

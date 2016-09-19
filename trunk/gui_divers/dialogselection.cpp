@@ -11,7 +11,7 @@ DialogSelection::DialogSelection(Pile_sf2 *sf2, EltID id, QWidget *parent) :
     this->setWindowFlags((windowFlags() & ~Qt::WindowContextHelpButtonHint));
 
     // Remplissage de la liste
-    char T[40];
+    QString qStr;
     int initIndex = id.indexElt;
     for (int i = 0; i < sf2->count(id); i++)
     {
@@ -21,12 +21,13 @@ DialogSelection::DialogSelection(Pile_sf2 *sf2, EltID id, QWidget *parent) :
             if (!sf2->get(id, champ_hidden).bValue)
             {
                 if (id.typeElement == elementInst)
-                    sprintf(T, "%s", sf2->getQstr(id, champ_name).toStdString().c_str());
+                    qStr = sf2->getQstr(id, champ_name);
                 else
-                    sprintf(T, "%.3d:%.3d %s", sf2->get(id, champ_wBank).wValue,
-                            sf2->get(id, champ_wPreset).wValue,
-                            sf2->getQstr(id, champ_name).toStdString().c_str());
-                QListWidgetItem * item = new QListWidgetItem(T);
+                    qStr = QString("%1:%2 %3")
+                            .arg(sf2->get(id, champ_wBank).wValue, 3, 10, QChar('0'))
+                            .arg(sf2->get(id, champ_wPreset).wValue, 3, 10, QChar('0'))
+                            .arg(sf2->getQstr(id, champ_name));
+                QListWidgetItem * item = new QListWidgetItem(qStr);
                 item->setCheckState(Qt::Checked);
                 item->setData(Qt::UserRole, i);
                 ui->listWidget->addItem(item);

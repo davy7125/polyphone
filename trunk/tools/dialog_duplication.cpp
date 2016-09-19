@@ -18,7 +18,7 @@
 **                                                                        **
 ****************************************************************************
 **           Author: Davy Triponney                                       **
-**  Website/Contact: http://www.polyphone.fr/                             **
+**  Website/Contact: http://polyphone-soundfonts.com                      **
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
@@ -97,9 +97,7 @@ void DialogDuplication::dispVel()
         // Add an element
         valMin = qMin(_listeVelocites.at(2*i), _listeVelocites.at(2*i+1));
         valMax = qMax(_listeVelocites.at(2*i), _listeVelocites.at(2*i+1));
-        char T[30];
-        sprintf(T, "%d - %d", valMin, valMax);
-        ui->listVelocites->addItem(T);
+        ui->listVelocites->addItem(QString::number(valMin) + " - " + QString::number(valMax));
     }
     if (ui->listVelocites->count() > selectedIndex)
         ui->listVelocites->setCurrentRow(selectedIndex);
