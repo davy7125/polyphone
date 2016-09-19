@@ -232,7 +232,8 @@ SOURCES	+= main.cpp \
     configuration/confmanager.cpp \
     configuration/recentfilemanager.cpp \
     configuration/keynamemanager.cpp \
-    configuration/translationmanager.cpp
+    configuration/translationmanager.cpp \
+    sf2_core/utils.cpp
 
 HEADERS  += mainwindow.h \
     sf2_core/sf2_types.h \
@@ -319,7 +320,8 @@ HEADERS  += mainwindow.h \
     configuration/confmanager.h \
     configuration/recentfilemanager.h \
     configuration/keynamemanager.h \
-    configuration/translationmanager.h
+    configuration/translationmanager.h \
+    sf2_core/utils.h
 
 FORMS    += mainwindow.ui \
     configuration/config.ui \

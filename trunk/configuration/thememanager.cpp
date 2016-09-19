@@ -18,7 +18,7 @@
 **                                                                        **
 ****************************************************************************
 **           Author: Davy Triponney                                       **
-**  Website/Contact: http://www.polyphone.fr/                             **
+**  Website/Contact: http://polyphone-soundfonts.com                      **
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
@@ -444,6 +444,32 @@ QList<ThemeManager::ColorTheme> ThemeManager::getThemes()
     theme7.setColor(HIGHLIGHTED_BACKGROUND, QColor(32, 187, 94));
     theme7.setColor(HIGHLIGHTED_TEXT, QColor(255, 255, 255));
     themes << theme7;
+
+    // Windows 10 theme
+    ColorTheme theme8 = ColorTheme(trUtf8("Windows 10"), 8);
+    theme8.setColor(WINDOW_BACKGROUND, QColor(255, 255, 255));
+    theme8.setColor(WINDOW_TEXT, QColor(60, 60, 60));
+    theme8.setColor(BUTTON_BACKGROUND, QColor(240, 240, 240));
+    theme8.setColor(BUTTON_TEXT, QColor(0, 0, 0));
+    theme8.setColor(LIST_BACKGROUND, QColor(245, 246, 247));
+    theme8.setColor(LIST_ALTERNATIVE_BACKGROUND, QColor(248, 248, 210));
+    theme8.setColor(LIST_TEXT, QColor(0, 0, 0));
+    theme8.setColor(HIGHLIGHTED_BACKGROUND, QColor(25, 121, 202));
+    theme8.setColor(HIGHLIGHTED_TEXT, QColor(255, 255, 255));
+    themes << theme8;
+
+    // Ubuntu theme
+    ColorTheme theme9 = ColorTheme(trUtf8("Ubuntu"), 9);
+    theme9.setColor(WINDOW_BACKGROUND, QColor(242, 241, 240));
+    theme9.setColor(WINDOW_TEXT, QColor(76, 76, 76));
+    theme9.setColor(BUTTON_BACKGROUND, QColor(248, 248, 248));
+    theme9.setColor(BUTTON_TEXT, QColor(76, 76, 76));
+    theme9.setColor(LIST_BACKGROUND, QColor(255, 255, 255));
+    theme9.setColor(LIST_ALTERNATIVE_BACKGROUND, QColor(247, 247, 247));
+    theme9.setColor(LIST_TEXT, QColor(76, 76, 76));
+    theme9.setColor(HIGHLIGHTED_BACKGROUND, QColor(240, 131, 87));
+    theme9.setColor(HIGHLIGHTED_TEXT, QColor(255, 255, 255));
+    themes << theme9;
 
     return themes;
 }

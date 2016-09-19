@@ -18,7 +18,7 @@
 **                                                                        **
 ****************************************************************************
 **           Author: Davy Triponney                                       **
-**  Website/Contact: http://www.polyphone.fr/                             **
+**  Website/Contact: http://polyphone-soundfonts.com                      **
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
@@ -59,7 +59,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent, Qt::Window | Qt::W
     actionKeyboard(NULL),
     _currentKey(-1),
     _dialKeyboard(this, Qt::Tool | Qt::WindowStaysOnTopHint | Qt::WindowCloseButtonHint),
-    _progressDialog(trUtf8("Operation en cours..."), trUtf8("Annuler"), 0, 0, this),
+    _progressDialog(trUtf8("Opération en cours..."), trUtf8("Annuler"), 0, 0, this),
     _isSustainOn(false)
 {
     ui->setupUi(this);
@@ -79,7 +79,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent, Qt::Window | Qt::W
     ui->actionPlein_cran->setChecked(this->windowState() & Qt::WindowFullScreen);
 
     // Initialisation de l'objet pile sf2
-    this->sf2 = new Pile_sf2(ui->arborescence, this->configuration->getRam());
+    this->sf2 = new Pile_sf2(); // linked with ui->arborescence
 
     // Connexion avec mise à jour table
     connect(this->sf2, SIGNAL(updateTable(int,int,int,int)), this, SLOT(updateTable(int,int,int,int)));
@@ -202,7 +202,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent, Qt::Window | Qt::W
 
     _progressDialog.setWindowModality(Qt::WindowModal);
     _progressDialog.setCancelButton(NULL);
-    _progressDialog.setWindowFlags(_progressDialog.windowFlags() & ~Qt::WindowContextHelpButtonHint);
+    _progressDialog.setWindowFlags(_progressDialog.windowFlags() & ~Qt::WindowContextHelpButtonHint & ~Qt::WindowCloseButtonHint);
     _progressDialog.reset();
     connect(&_futureWatcher, SIGNAL (finished()), this, SLOT (futureFinished()));
 }
@@ -449,36 +449,24 @@ void MainWindow::ouvrirFichier5()
 void MainWindow::ouvrir(QString fileName)
 {
     // Chargement d'un fichier .sf2 ou .sf3
-    switch (this->sf2->open(fileName))
-    {
-    case -1: // Warning and continue with 0
-        QMessageBox::warning(this, QObject::trUtf8("Attention"),
-                             trUtf8("Fichier corrompu : utilisation des échantillons en qualité 16 bits."));
-    case 0:
-        // le chargement s'est bien déroulé
-        if (fileName.endsWith("2"))
-            RecentFileManager::getInstance()->addRecentFile(RecentFileManager::FILE_TYPE_SF2, fileName);;
-        updateFavoriteFiles();
-        updateActions();
-        break;
-    case 1:
-        QMessageBox::warning(this, trUtf8("Attention"), trUtf8("Format inconnu."));
-        break;
-    case 2:
-        QMessageBox::warning(this, trUtf8("Attention"), trUtf8("Le fichier est déjà chargé."));
-        break;
-    case 3:
-        QMessageBox::warning(this, trUtf8("Attention"), trUtf8("Impossible d'ouvrir le fichier."));
-        break;
-    case 4:
-        QMessageBox::warning(this, trUtf8("Attention"), trUtf8("Lecture impossible."));
-        break;
-    case 5: case 6:
-        QMessageBox::warning(this, trUtf8("Attention"), trUtf8("Le fichier est corrompu."));
-        break;
-    }
+    _progressDialog.show();
+    QFuture<int> future = QtConcurrent::run(this, &MainWindow::ouvrir2, fileName);
+    _futureWatcher.setFuture(future);
+}
 
-    updateDo();
+int MainWindow::ouvrir2(QString fileName)
+{
+    int indexSf2;
+    int ret = this->sf2->open(fileName, indexSf2);
+    if (ret == 0 && fileName.endsWith("2"))
+        RecentFileManager::getInstance()->addRecentFile(RecentFileManager::FILE_TYPE_SF2, fileName);
+
+    if (indexSf2 != -1)
+    {
+        ui->arborescence->clearSelection();
+        ui->arborescence->select(EltID(elementSf2, indexSf2, 0, 0, 0), true);
+    }
+    return ret;
 }
 
 void MainWindow::nouveau()
@@ -488,7 +476,14 @@ void MainWindow::nouveau()
     if (ok && !name.isEmpty())
     {
         sf2->prepareNewActions();
-        sf2->nouveau(name.left(20));
+
+        int indexSf2;
+        sf2->nouveau(name.left(20), indexSf2);
+
+        // Sélection dans l'arborescence
+        ui->arborescence->clearSelection();
+        ui->arborescence->select(EltID(elementSf2, indexSf2, 0, 0, 0), true);
+
         updateDo();
         updateActions();
     }
@@ -1508,16 +1503,21 @@ void MainWindow::dragAndDrop(QString path, EltID idDest, int * arg)
         int size = 0;
         char * rawData = NULL;
         sfArkExtractor.extract();
+        int indexSf2 = -1;
         if (sfArkExtractor.getData(rawData, size))
         {
             QByteArray data(rawData, size);
             QDataStream streamSf2(&data, QIODevice::ReadOnly);
-            int indexSf2 = -1;
             ok = (sf2->open("", &streamSf2, indexSf2, true) <= 0);
         }
 
         if (!ok)
             QMessageBox::warning(this, trUtf8("Attention"), trUtf8("Une erreur est survenue lors de l'import du fichier ") + path);
+        else
+        {
+            ui->arborescence->clearSelection();
+            ui->arborescence->select(EltID(elementSf2, indexSf2, 0, 0, 0), true);
+        }
 
         this->updateActions();
     }
@@ -1909,11 +1909,11 @@ void MainWindow::exporter(QList<QList<EltID> > listID, QString dir, int format, 
 
     _progressDialog.show();
 
-    QFuture<void> future = QtConcurrent::run(this, &MainWindow::exporter2, listID, dir, format, flags, quality);
+    QFuture<int> future = QtConcurrent::run(this, &MainWindow::exporter2, listID, dir, format, flags, quality);
     _futureWatcher.setFuture(future);
 }
 
-void MainWindow::exporter2(QList<QList<EltID> > listID, QString dir, int format, int flags, int quality)
+int MainWindow::exporter2(QList<QList<EltID> > listID, QString dir, int format, int flags, int quality)
 {
     // Flags
     bool presetPrefix = ((flags & 0x01) != 0);
@@ -1924,7 +1924,7 @@ void MainWindow::exporter2(QList<QList<EltID> > listID, QString dir, int format,
     {
     case 0: case 1: {
         // Export sf2 ou sf3, création d'un nouvel sf2 indépendant
-        Pile_sf2 newSf2(NULL, false);
+        Pile_sf2 newSf2; // Not linked with tree
         EltID idDest(elementSf2, 0, 0, 0, 0);
         idDest.indexSf2 = newSf2.add(idDest);
 
@@ -2016,11 +2016,47 @@ void MainWindow::exporter2(QList<QList<EltID> > listID, QString dir, int format,
     default:
         break;
     }
+
+    return -10; // For QFuture
 }
 
 void MainWindow::futureFinished()
 {
     _progressDialog.hide();
+
+    int result = _futureWatcher.result();
+    if (result > -10)
+    {
+        // An sf2 has been just loaded
+        switch (result)
+        {
+        case -1: // Warning and continue with 0
+            QMessageBox::warning(this, QObject::trUtf8("Attention"),
+                                 trUtf8("Fichier corrompu : utilisation des échantillons en qualité 16 bits."));
+        case 0:
+            // Loading ok
+            updateFavoriteFiles();
+            updateActions();
+            break;
+        case 1:
+            QMessageBox::warning(this, trUtf8("Attention"), trUtf8("Format inconnu."));
+            break;
+        case 2:
+            QMessageBox::warning(this, trUtf8("Attention"), trUtf8("Le fichier est déjà chargé."));
+            break;
+        case 3:
+            QMessageBox::warning(this, trUtf8("Attention"), trUtf8("Impossible d'ouvrir le fichier."));
+            break;
+        case 4:
+            QMessageBox::warning(this, trUtf8("Attention"), trUtf8("Lecture impossible."));
+            break;
+        case 5: case 6:
+            QMessageBox::warning(this, trUtf8("Attention"), trUtf8("Le fichier est corrompu."));
+            break;
+        }
+
+        updateDo();
+    }
 }
 
 void MainWindow::nouvelInstrument()

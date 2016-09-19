@@ -18,7 +18,7 @@
 **                                                                        **
 ****************************************************************************
 **           Author: Davy Triponney                                       **
-**  Website/Contact: http://www.polyphone.fr/                             **
+**  Website/Contact: http://polyphone-soundfonts.com                      **
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
@@ -30,14 +30,14 @@
 #include "pile_sf2.h"
 
 Tree::Tree(QWidget *parent) : QTreeWidget(parent),
-    mainWindow(NULL),
-    menuArborescence(NULL),
-    refresh(true),
-    updateNext(true),
-    infoSelectedItemsNumber(0),
-    infoIsSelectedItemsTypeUnique(false),
-    infoIsSelectedItemsSf2Unique(false),
-    infoIsSelectedItemsFamilyUnique(false),
+    _mainWindow(NULL),
+    _treeMenu(NULL),
+    _refresh(true),
+    _updateSelectionInfo(true),
+    _infoSelectedItemsNumber(0),
+    _infoIsSelectedItemsTypeUnique(false),
+    _infoIsSelectedItemsSf2Unique(false),
+    _infoIsSelectedItemsFamilyUnique(false),
     _sf2(NULL),
     _searchedText(""),
     _displayedSf2(-1)
@@ -45,7 +45,7 @@ Tree::Tree(QWidget *parent) : QTreeWidget(parent),
 
 Tree::~Tree()
 {
-    delete this->menuArborescence;
+    delete this->_treeMenu;
 }
 
 Tree::menuClicDroit::menuClicDroit(MainWindow *mainWindow)
@@ -108,27 +108,37 @@ Tree::menuClicDroit::~menuClicDroit()
 
 void Tree::init(MainWindow *mainWindow, Pile_sf2 * sf2, QComboBox * comboSf2)
 {
-    this->mainWindow = mainWindow;
+    this->_mainWindow = mainWindow;
     _sf2 = sf2;
+
+    // Init combobox
     _comboSf2 = comboSf2;
     this->connect(_comboSf2, SIGNAL(currentIndexChanged(int)), SLOT(comboSf2IndexChanged(int)));
     _comboSf2->addItem(trUtf8("Tout afficher"), -1);
 
-    // Création menu contextuel
-    this->menuArborescence = new menuClicDroit(mainWindow);
+    // Connect the tree to the sf2 update
+    this->connect(_sf2, SIGNAL(newElement(EltID)), SLOT(newElement(EltID)));
+    this->connect(_sf2, SIGNAL(changeElementName(EltID,QString)), SLOT(changeElementName(EltID,QString)));
+    this->connect(_sf2, SIGNAL(changeElementOrder(EltID,QString,bool)), SLOT(changeElementOrder(EltID,QString,bool)));
+    this->connect(_sf2, SIGNAL(hideElement(EltID,bool)), this, SLOT(hideElement(EltID,bool)));
+    this->connect(_sf2, SIGNAL(removeElement(EltID)), SLOT(removeElement(EltID)));
+
+    // Create contextual menu
+    this->_treeMenu = new menuClicDroit(mainWindow);
 }
 
-void Tree::trier(int forme)
+void Tree::trier(bool reinitCollapse)
 {
-    // fichiers SF2 par ordre alphabétique
+    // Sort sf2 file in the alphabetical order
     int max = this->topLevelItemCount();
     QTreeWidgetItem *child;
-    this->sortItems(0, Qt::AscendingOrder); // colonne 5 ne fonctionne pas ?!
+    this->sortItems(0, Qt::AscendingOrder); // Column doesn't matter
     for (int i = 0; i < max; i ++)
-        this->topLevelItem(i)->sortChildren(5, Qt::AscendingOrder);
-    if (forme)
+        this->topLevelItem(i)->sortChildren(0, Qt::AscendingOrder);
+
+    if (reinitCollapse)
     {
-        // Mise en forme (expanded / collapsed)
+        // Expand first level only
         for (int i = 0; i < max; i++)
         {
             child = this->topLevelItem(i);
@@ -137,9 +147,7 @@ void Tree::trier(int forme)
             {
                 child->child(j)->setExpanded(0);
                 for (int k = 0; k < child->child(j)->childCount(); k++)
-                {
                     child->child(j)->child(k)->setExpanded(0);
-                }
             }
         }
     }
@@ -160,7 +168,7 @@ void Tree::removeSf2FromComboBox(int numSf2)
         int iData = _comboSf2->itemData(i).toInt();
         if (iData == numSf2)
             indexToRemove = i;
-        else if (iData > numSf2)
+        else if (iData > numSf2) // Decrement the id
             _comboSf2->setItemData(i, iData - 1);
     }
     if (_comboSf2->currentIndex() == indexToRemove)
@@ -206,6 +214,7 @@ void Tree::comboSf2IndexChanged(int index)
         _displayedSf2 = _comboSf2->itemData(index).toInt();
     else
         _displayedSf2 = -1;
+
     searchTree(_searchedText, _displayedSf2);
 }
 
@@ -220,14 +229,14 @@ void Tree::searchTree(QString qStr, int displayedSf2)
     qStr = qStr.toLower();
     unsigned int max = this->topLevelItemCount();
     unsigned int max2;
-    QTreeWidgetItem *child;
+    TreeWidgetItem *child;
 
     // Etat initial
     _displayedElements.clear();
     bool isDisplayed = qStr.isEmpty();
     for (unsigned int i = 0; i < max; i ++)
     {
-        child = this->topLevelItem(i);
+        child = (TreeWidgetItem *)this->topLevelItem(i);
         child->setHidden(false);
         max2 = child->childCount();
 
@@ -237,8 +246,8 @@ void Tree::searchTree(QString qStr, int displayedSf2)
             // Niveau 2: sample, instrument ou preset
             for (int k = 0; k < child->child(j)->childCount(); k++)
             {
-                QTreeWidgetItem * item = child->child(j)->child(k);
-                if (item->text(6) == "0") // Si l'élément n'est pas masqué par une suppression non définitive
+                TreeWidgetItem * item = (TreeWidgetItem *)child->child(j)->child(k);
+                if (!item->getEltHidden()) // Si l'élément n'est pas masqué par une suppression non définitive
                     item->setHidden(!isDisplayed);
             }
         }
@@ -246,9 +255,9 @@ void Tree::searchTree(QString qStr, int displayedSf2)
 
     for (unsigned int i = 0; i < max; i ++)
     {
-        child = this->topLevelItem(i);
+        child = (TreeWidgetItem *)this->topLevelItem(i);
 
-        if (displayedSf2 == -1 || child->text(1).toInt() == displayedSf2)
+        if (displayedSf2 == -1 || child->getEltID().indexSf2 == displayedSf2)
         {
             if (!isDisplayed)
             {
@@ -260,17 +269,17 @@ void Tree::searchTree(QString qStr, int displayedSf2)
                     // Niveau 2: sample, instrument ou preset
                     for (int k = 0; k < child->child(j)->childCount(); k++)
                     {
-                        QTreeWidgetItem * item = child->child(j)->child(k);
-                        if (item->text(6) == "0") // Si l'élément n'est pas masqué par une suppression non définitive
+                        TreeWidgetItem * item = (TreeWidgetItem *)child->child(j)->child(k);
+                        if (!item->getEltHidden()) // Si l'élément n'est pas masqué par une suppression non définitive
                         {
                             if (item->text(0).toLower().indexOf(qStr) != -1 || item->isSelected())
                             {
-                                if (item->text(2) == "smpl")
-                                    displaySample(item->text(1).toInt(), item->text(3).toInt());
-                                else if (item->text(2) == "inst")
-                                    displayInstrument(item->text(1).toInt(), item->text(3).toInt());
-                                else if (item->text(2) == "prst")
-                                    displayPreset(item->text(1).toInt(), item->text(3).toInt());
+                                if (item->getEltID().typeElement == elementSmpl)
+                                    displaySample(item->getEltID().indexSf2, item->getEltID().indexElt);
+                                else if (item->getEltID().typeElement == elementInst)
+                                    displayInstrument(item->getEltID().indexSf2, item->getEltID().indexElt);
+                                else if (item->getEltID().typeElement == elementPrst)
+                                    displayPreset(item->getEltID().indexSf2, item->getEltID().indexElt);
                             }
                         }
                     }
@@ -394,25 +403,25 @@ void Tree::displayElement(EltID id)
     _displayedElements << id;
 
     // Affichage
-    QTreeWidgetItem *child;
+    TreeWidgetItem *child;
 
     int max = this->topLevelItemCount();
     for (int i = 0; i < max; i++)
     {
-        child = this->topLevelItem(i);
-        if (child->text(1).toInt() == id.indexSf2)
+        child = (TreeWidgetItem *)this->topLevelItem(i);
+        if (child->getEltID().indexSf2 == id.indexSf2)
         {
             if (id.typeElement == elementSmpl)
-                child = child->child(0);
+                child = (TreeWidgetItem *)child->child(0);
             else if (id.typeElement == elementInst)
-                child = child->child(1);
+                child = (TreeWidgetItem *)child->child(1);
             else
-                child = child->child(2);
+                child = (TreeWidgetItem *)child->child(2);
             int numChilds = child->childCount();
             for (int j = 0; j < numChilds; j++)
             {
                 // Affichage de la sous-arborescence
-                if (child->child(j)->text(3).toInt() == id.indexElt)
+                if (((TreeWidgetItem *)child->child(j))->getEltID().indexElt == id.indexElt)
                     child->child(j)->setHidden(false);
             }
         }
@@ -424,7 +433,7 @@ void Tree::clicTree()
     // Informations concernant la sélection
     this->updateSelectionInfo();
     this->setDragDropMode(DragDrop);
-    if (!this->refresh) return;
+    if (!this->_refresh) return;
 
     // Activation, désactivation des actions de menuArborescence
     int nb;
@@ -455,75 +464,75 @@ void Tree::clicTree()
     if (fichierUnique)
     {
         // Actions possibles : fermer, nouveau sample, instrument, preset
-        menuArborescence->fermer->setEnabled(true);
-        menuArborescence->nouveauSample->setEnabled(true);
-        menuArborescence->nouvelInstrument->setEnabled(true);
-        menuArborescence->nouveauPreset->setEnabled(true);
+        _treeMenu->fermer->setEnabled(true);
+        _treeMenu->nouveauSample->setEnabled(true);
+        _treeMenu->nouvelInstrument->setEnabled(true);
+        _treeMenu->nouveauPreset->setEnabled(true);
 
         // Associer
         if (typeUnique && (type == elementSmpl || type == elementInst))
-            menuArborescence->associer->setEnabled(true);
+            _treeMenu->associer->setEnabled(true);
         else
-            menuArborescence->associer->setEnabled(false);
+            _treeMenu->associer->setEnabled(false);
 
         // Remplacer
         if (nb == 1 && (type == elementInstSmpl || type == elementPrstInst))
-            menuArborescence->remplacer->setEnabled(true);
+            _treeMenu->remplacer->setEnabled(true);
         else
-            menuArborescence->remplacer->setEnabled(false);
+            _treeMenu->remplacer->setEnabled(false);
 
         // Supprimer, copier, coller
         if (typeUnique && (((type == elementInstSmpl || type == elementPrstInst) && familleUnique)
                            || type == elementSmpl || type == elementInst || type == elementPrst)
-                       && !this->mainWindow->isPlaying())
+                && !this->_mainWindow->isPlaying())
         {
-            menuArborescence->supprimer->setEnabled(true);
-            menuArborescence->copier->setEnabled(true);
-            menuArborescence->coller->setEnabled(true);
+            _treeMenu->supprimer->setEnabled(true);
+            _treeMenu->copier->setEnabled(true);
+            _treeMenu->coller->setEnabled(true);
         }
         else
         {
-            menuArborescence->supprimer->setEnabled(false);
-            menuArborescence->copier->setEnabled(false);
-            menuArborescence->coller->setEnabled(false);
+            _treeMenu->supprimer->setEnabled(false);
+            _treeMenu->copier->setEnabled(false);
+            _treeMenu->coller->setEnabled(false);
         }
 
         // Renommer
         if (nb == 1 && typeUnique && (type == elementSmpl || type == elementInst || type == elementPrst || type == elementSf2))
         {
-            menuArborescence->renommer->setText(trUtf8("&Renommer..."));
-            menuArborescence->renommer->setEnabled(true);
+            _treeMenu->renommer->setText(trUtf8("&Renommer..."));
+            _treeMenu->renommer->setEnabled(true);
         }
         else
         {
             if (nb > 1 && typeUnique && type == elementSmpl)
             {
-                menuArborescence->renommer->setText(trUtf8("&Renommer en masse..."));
-                menuArborescence->renommer->setEnabled(1);
+                _treeMenu->renommer->setText(trUtf8("&Renommer en masse..."));
+                _treeMenu->renommer->setEnabled(1);
             }
             else
             {
-                menuArborescence->renommer->setText(trUtf8("&Renommer..."));
-                menuArborescence->renommer->setEnabled(false);
+                _treeMenu->renommer->setText(trUtf8("&Renommer..."));
+                _treeMenu->renommer->setEnabled(false);
             }
         }
     }
     else
     {
         // Aucune action possible
-        menuArborescence->fermer->setEnabled(false);
-        menuArborescence->nouveauSample->setEnabled(false);
-        menuArborescence->nouvelInstrument->setEnabled(false);
-        menuArborescence->nouveauPreset->setEnabled(false);
-        menuArborescence->associer->setEnabled(false);
-        menuArborescence->supprimer->setEnabled(false);
-        menuArborescence->renommer->setText(tr("&Renommer..."));
-        menuArborescence->renommer->setEnabled(false);
-        menuArborescence->remplacer->setEnabled(false);
+        _treeMenu->fermer->setEnabled(false);
+        _treeMenu->nouveauSample->setEnabled(false);
+        _treeMenu->nouvelInstrument->setEnabled(false);
+        _treeMenu->nouveauPreset->setEnabled(false);
+        _treeMenu->associer->setEnabled(false);
+        _treeMenu->supprimer->setEnabled(false);
+        _treeMenu->renommer->setText(tr("&Renommer..."));
+        _treeMenu->renommer->setEnabled(false);
+        _treeMenu->remplacer->setEnabled(false);
     }
 
     // Activation, désactivation des actions de MainWindow
-    this->mainWindow->updateActions();
+    this->_mainWindow->updateActions();
 }
 
 void Tree::clicTreeRight()
@@ -532,40 +541,39 @@ void Tree::clicTreeRight()
     if (this->selectedItems().count())
     {
         // Affichage du menu contextuel
-        this->menuArborescence->menu->exec(QCursor::pos());
+        this->_treeMenu->menu->exec(QCursor::pos());
     }
 }
 
 void Tree::desactiveSuppression()
 {
-    menuArborescence->supprimer->setEnabled(0);
+    _treeMenu->supprimer->setEnabled(0);
 }
 
 void Tree::activeSuppression()
 {
-    menuArborescence->supprimer->setEnabled(1);
+    _treeMenu->supprimer->setEnabled(1);
 }
 
 void Tree::clearPastedID()
 {
-    this->idList.clear();
+    this->_idList.clear();
 }
 
-void Tree::updateAtNextSelectionRequest() {this->updateNext = true;}
-unsigned int Tree::getSelectedItemsNumber() {if (this->updateNext) updateSelectionInfo(); return this->infoSelectedItemsNumber;}
-bool Tree::isSelectedItemsTypeUnique() {if (this->updateNext) updateSelectionInfo(); return infoIsSelectedItemsTypeUnique;}
-bool Tree::isSelectedItemsSf2Unique() {if (this->updateNext) updateSelectionInfo(); return this->infoIsSelectedItemsSf2Unique;}
-bool Tree::isSelectedItemsFamilyUnique() {if (this->updateNext) updateSelectionInfo(); return this->infoIsSelectedItemsFamilyUnique;}
+unsigned int Tree::getSelectedItemsNumber() {if (this->_updateSelectionInfo) updateSelectionInfo(); return this->_infoSelectedItemsNumber;}
+bool Tree::isSelectedItemsTypeUnique() {if (this->_updateSelectionInfo) updateSelectionInfo(); return _infoIsSelectedItemsTypeUnique;}
+bool Tree::isSelectedItemsSf2Unique() {if (this->_updateSelectionInfo) updateSelectionInfo(); return this->_infoIsSelectedItemsSf2Unique;}
+bool Tree::isSelectedItemsFamilyUnique() {if (this->_updateSelectionInfo) updateSelectionInfo(); return this->_infoIsSelectedItemsFamilyUnique;}
 EltID Tree::getFirstID()
 {
-    return this->getItemID(this->selectedItem(0));
+    return this->selectedItem(0)->getEltID();
 }
 QList<EltID> Tree::getAllIDs()
 {
     QList<EltID> listRet;
     QList<QTreeWidgetItem *> items = this->selectedItems();
     foreach (QTreeWidgetItem * item, items)
-        listRet << this->getItemID(item);
+        listRet << ((TreeWidgetItem *)item)->getEltID();
     return listRet;
 }
 
@@ -588,7 +596,7 @@ EltID Tree::getNextID(bool closeFile)
         QList<EltID> listSf2;
         int nbSf2 = this->topLevelItemCount();
         for (int i = 0; i < nbSf2; i++)
-            listSf2 << getItemID(this->topLevelItem(i));
+            listSf2 << ((TreeWidgetItem *)this->topLevelItem(i))->getEltID();
 
         if (listSf2.size() >= 2)
         {
@@ -620,141 +628,49 @@ EltID Tree::getNextID(bool closeFile)
 
 void Tree::select(EltID id, bool refresh)
 {
-    this->refresh = refresh;
+    this->_refresh = refresh;
 
-    // Sélection et visibilité de id dans l'arborescence si présent
-    unsigned int max = this->topLevelItemCount();
-    QTreeWidgetItem *child = NULL;
-    QTreeWidgetItem *child1 = NULL;
-    QTreeWidgetItem *child2 = NULL;
-    QTreeWidgetItem *child3 = NULL;
-
-    // Recherche du sf2
-    int iTmp = -1;
-    unsigned int i = 0;
-    while (i < max && id.indexSf2 != iTmp)
-    {
-        child = this->topLevelItem(i);
-        if (!child->isHidden())
-            iTmp = child->text(1).toInt();
-        i++;
+    QList<TreeWidgetItem*> treeItems = getEltsToId(id);
+    if (!treeItems.isEmpty()) {
+        for (int i = 0; i < treeItems.count() - 1; i++)
+            treeItems[i]->setExpanded(true);
+        treeItems.last()->setSelected(true);
     }
-    if (id.indexSf2 == iTmp)
-    {
-        // Sf2 trouvé
-        if (id.typeElement == elementSf2)
-        {
-            // Sélection
-            child->setSelected(true);
-            child->setExpanded(true);
-        }
-        else
-        {
-            if (id.typeElement == elementRootSmpl)
-            {
-                child->child(0)->setSelected(true);
-                child->child(0)->setExpanded(true);
-            }
-            else if (id.typeElement == elementRootInst)
-            {
-                child->child(1)->setSelected(true);
-                child->child(1)->setExpanded(true);
-            }
-            else if (id.typeElement == elementRootPrst)
-            {
-                child->child(2)->setSelected(true);
-                child->child(2)->setExpanded(true);
-            }
+    this->_updateSelectionInfo = true;
 
-            if (id.typeElement == elementSmpl)
-                child1 = child->child(0);
-            else if (id.typeElement == elementInst || id.typeElement == elementInstSmpl)
-                child1 = child->child(1);
-            else if (id.typeElement == elementPrst || id.typeElement == elementPrstInst)
-                child1 = child->child(2);
-            if (!child1)
-                return;
-
-            max = child1->childCount();
-            i = 0;
-            iTmp = -1;
-            while (i < max && id.indexElt != iTmp)
-            {
-                child2 = child1->child(i);
-                if (!child2->isHidden())
-                    iTmp = child2->text(3).toInt();
-                i++;
-            }
-            if (id.indexElt == iTmp)
-            {
-                // Elt trouvé
-                if (id.typeElement == elementSmpl || id.typeElement == elementInst || id.typeElement == elementPrst)
-                {
-                    // Sélection
-                    child2->setSelected(true);
-                    child1->setExpanded(true);
-                    child->setExpanded(true);
-                }
-                else
-                {
-                    max = child2->childCount();
-                    i = 0;
-                    iTmp = -1;
-                    while (i < max && id.indexElt2 != iTmp)
-                    {
-                        child3 = child2->child(i);
-                        if (!child3->isHidden())
-                            iTmp = child3->text(4).toInt();
-                        i++;
-                    }
-                    if (id.indexElt2 == iTmp)
-                    {
-                        // Elt2 trouvé
-                        if (id.typeElement == elementInstSmpl || id.typeElement == elementPrstInst)
-                        {
-                            // Sélection
-                            child3->setSelected(true);
-                            child2->setExpanded(true);
-                            child1->setExpanded(true);
-                            child->setExpanded(true);
-                        }
-                    }
-                }
-            }
-        }
-    }
-    this->refresh = true;
+    this->_refresh = true;
 }
 
 void Tree::selectNone(bool refresh)
 {
-    this->refresh = refresh;
+    this->_refresh = refresh;
     this->clearSelection();
-    this->refresh = true;
+    this->_updateSelectionInfo = true;
+    this->_refresh = true;
 }
 
 void Tree::updateSelectionInfo()
 {
-    this->updateNext = false;
-    this->infoIsSelectedItemsSf2Unique = true;
-    this->infoIsSelectedItemsTypeUnique = true;
-    this->infoIsSelectedItemsFamilyUnique = true;
-    this->infoSelectedItemsNumber = 0;
+    this->_updateSelectionInfo = false;
+    this->_infoIsSelectedItemsSf2Unique = true;
+    this->_infoIsSelectedItemsTypeUnique = true;
+    this->_infoIsSelectedItemsFamilyUnique = true;
+    this->_infoSelectedItemsNumber = 0;
     int indexSf2 = -1;
     int type = -1;
     int family = -1;
     bool isInst = true;
     bool isPrst = true;
     EltID id;
-    QTreeWidgetItem * itemTmp;
+    TreeWidgetItem * itemTmp;
     for (int i = 0; i < this->selectedItems().count(); i++)
     {
-        itemTmp = this->selectedItems().at(i);
+        itemTmp = (TreeWidgetItem *)this->selectedItems().at(i);
         if (!itemTmp->isHidden())
         {
-            id = this->getItemID(itemTmp);
-            this->infoSelectedItemsNumber++;
-            if (this->infoSelectedItemsNumber == 1)
+            id = itemTmp->getEltID();
+            this->_infoSelectedItemsNumber++;
+            if (this->_infoSelectedItemsNumber == 1)
             {
                 indexSf2 = id.indexSf2;
                 type = id.typeElement;
@@ -762,24 +678,24 @@ void Tree::updateSelectionInfo()
             }
             else
             {
-                this->infoIsSelectedItemsSf2Unique = this->infoIsSelectedItemsSf2Unique && (indexSf2 == id.indexSf2);
-                this->infoIsSelectedItemsTypeUnique = this->infoIsSelectedItemsTypeUnique && (type == id.typeElement);
-                this->infoIsSelectedItemsFamilyUnique = this->infoIsSelectedItemsFamilyUnique && (family == id.indexElt);
+                this->_infoIsSelectedItemsSf2Unique = this->_infoIsSelectedItemsSf2Unique && (indexSf2 == id.indexSf2);
+                this->_infoIsSelectedItemsTypeUnique = this->_infoIsSelectedItemsTypeUnique && (type == id.typeElement);
+                this->_infoIsSelectedItemsFamilyUnique = this->_infoIsSelectedItemsFamilyUnique && (family == id.indexElt);
             }
             isInst = isInst && (id.typeElement == elementInst || id.typeElement == elementInstSmpl);
             isPrst = isPrst && (id.typeElement == elementPrst || id.typeElement == elementPrstInst);
         }
     }
-    this->infoIsSelectedItemsFamilyUnique = this->infoIsSelectedItemsFamilyUnique && (isInst || isPrst);
-    if (!this->infoSelectedItemsNumber)
+    this->_infoIsSelectedItemsFamilyUnique = this->_infoIsSelectedItemsFamilyUnique && (isInst || isPrst);
+    if (!this->_infoSelectedItemsNumber)
     {
-        this->infoIsSelectedItemsSf2Unique = false;
-        this->infoIsSelectedItemsTypeUnique = false;
-        this->infoIsSelectedItemsFamilyUnique = false;
+        this->_infoIsSelectedItemsSf2Unique = false;
+        this->_infoIsSelectedItemsTypeUnique = false;
+        this->_infoIsSelectedItemsFamilyUnique = false;
     }
 }
 
-QTreeWidgetItem * Tree::selectedItem(unsigned int pos)
+TreeWidgetItem * Tree::selectedItem(unsigned int pos)
 {
     if (this->getSelectedItemsNumber() > pos)
     {
@@ -789,59 +705,16 @@ QTreeWidgetItem * Tree::selectedItem(unsigned int pos)
             while (this->selectedItems().at(i+nbHidden)->isHidden())
                 nbHidden++;
         }
-        return this->selectedItems().at(pos+nbHidden);
+        return (TreeWidgetItem *)this->selectedItems().at(pos+nbHidden);
     }
     else
         return NULL;
 }
 
-EltID Tree::getItemID(QTreeWidgetItem *elt)
-{
-    EltID ID(elementUnknown, -1, -1, -1, -1);
-    if (!elt) return ID;
-    int indexSf2, indexElt, indexElt2;
-
-    // Index Sf2, Elt et Elt2
-    indexSf2 = elt->text(1).toInt();
-    indexElt = elt->text(3).toInt();
-    indexElt2 = elt->text(4).toInt();
-
-    // Type
-    QString type = elt->text(2);
-
-    // Création de l'ID
-    if (type == "smpl") ID.typeElement = elementSmpl;
-    else if (type == "inst") ID.typeElement = elementInst;
-    else if (type == "prst") ID.typeElement = elementPrst;
-    else if (type == "IS") ID.typeElement = elementInstSmpl;
-    else if (type == "PI") ID.typeElement = elementPrstInst;
-    else if (type == "R") ID.typeElement = elementSf2;
-    else if (type == "S") ID.typeElement = elementRootSmpl;
-    else if (type == "I") ID.typeElement = elementRootInst;
-    else if (type == "P") ID.typeElement = elementRootPrst;
-    else ID.typeElement = elementUnknown;
-    ID.indexSf2 = indexSf2;
-    if (ID.typeElement == elementSmpl || ID.typeElement == elementInst || ID.typeElement == elementPrst
-            || ID.typeElement == elementInstSmpl || ID.typeElement == elementPrstInst)
-    {
-        ID.indexElt = indexElt;
-        if (ID.typeElement == elementInstSmpl || ID.typeElement == elementPrstInst)
-            ID.indexElt2 = indexElt2;
-        else
-            ID.indexElt2 = -2;
-    }
-    else
-    {
-        ID.indexElt = -2;
-        ID.indexElt2 = -2;
-    }
-    return ID;
-}
-
 void Tree::supprimerElt()
 {
-    if (this->menuArborescence->supprimer->isEnabled())
-        this->mainWindow->supprimerElt();
+    if (this->_treeMenu->supprimer->isEnabled())
+        this->_mainWindow->supprimerElt();
 }
 
 EltID Tree::getElementToSelectAfterDeletion()
@@ -852,7 +725,7 @@ EltID Tree::getElementToSelectAfterDeletion()
         return EltID();
 
     // Vérification que le parent est le même pour tous les éléments
-    QTreeWidgetItem * itemParent = listSelectedItems.first()->parent();
+    TreeWidgetItem * itemParent = (TreeWidgetItem *)listSelectedItems.first()->parent();
     if (!itemParent)
         return EltID();
 
@@ -878,14 +751,14 @@ EltID Tree::getElementToSelectAfterDeletion()
         listDebut.removeAll(item);
 
     // Détermination de l'élément à sélectionner
-    QTreeWidgetItem * itemToSelect = itemParent;
+    TreeWidgetItem * itemToSelect = itemParent;
     if (!listFin.isEmpty())
-        itemToSelect = listFin.first();
+        itemToSelect = (TreeWidgetItem *)listFin.first();
     else if (!listDebut.isEmpty())
-        itemToSelect = listDebut.last();
+        itemToSelect = (TreeWidgetItem *)listDebut.last();
 
     // Récupération de l'identifiant
-    return getItemID(itemToSelect);
+    return itemToSelect->getEltID();
 }
 
 
@@ -909,24 +782,24 @@ void Tree::keyPressEvent(QKeyEvent *event)
         {
             if (this->isSelectedItemsSf2Unique() && this->isSelectedItemsTypeUnique())
             {
-                mainWindow->prepareNewAction();
-                mainWindow->updateDo();
+                _mainWindow->prepareNewAction();
+                _mainWindow->updateDo();
 
                 // Copie des éléments
-                this->idList = this->getAllIDs();
+                this->_idList = this->getAllIDs();
             }
         }
     }
     else if (event->matches(QKeySequence::Paste))
     {
-        mainWindow->prepareNewAction();
-        if (this->getSelectedItemsNumber() == 1 && this->idList.size())
-            mainWindow->dragAndDrop(this->getFirstID(), this->idList);
-        mainWindow->updateDo();
+        _mainWindow->prepareNewAction();
+        if (this->getSelectedItemsNumber() == 1 && this->_idList.size())
+            _mainWindow->dragAndDrop(this->getFirstID(), this->_idList);
+        _mainWindow->updateDo();
     }
     else if (event->key() == Qt::Key_Space)
     {
-        mainWindow->spaceKeyPressedInTree();
+        _mainWindow->spaceKeyPressedInTree();
     }
     else
         QTreeWidget::keyPressEvent(event);
@@ -941,7 +814,7 @@ void Tree::dragEnterEvent(QDragEnterEvent * event)
 
 void Tree::dropEvent(QDropEvent *event)
 {
-    mainWindow->prepareNewAction();
+    _mainWindow->prepareNewAction();
 
     if (event->mimeData()->hasUrls() && event->source() == NULL)
     {
@@ -956,25 +829,25 @@ void Tree::dropEvent(QDropEvent *event)
             {
                 QString extension = path.split(".").last().toLower();
                 if (extension == "sfz" || extension == "sf2"  || extension == "sf3" || extension == "sfark")
-                    mainWindow->dragAndDrop(path, getItemID(itemAt(event->pos())), &numSf2);
+                    _mainWindow->dragAndDrop(path, ((TreeWidgetItem *)itemAt(event->pos()))->getEltID(), &numSf2);
                 else if (extension == "wav")
-                    mainWindow->dragAndDrop(path, getItemID(itemAt(event->pos())), &commandCopy);
+                    _mainWindow->dragAndDrop(path, ((TreeWidgetItem *)itemAt(event->pos()))->getEltID(), &commandCopy);
             }
         }
-        this->mainWindow->updateActions();
+        this->_mainWindow->updateActions();
     }
     else
     {
         // Destination
-        EltID idDest = this->getItemID(this->itemAt(event->pos()));
+        EltID idDest = ((TreeWidgetItem *)itemAt(event->pos()))->getEltID();
 
         // Constitution de la liste des éléments à copier / lier
         QList<EltID> liste = this->getAllIDs();
 
-        mainWindow->dragAndDrop(idDest, liste);
+        _mainWindow->dragAndDrop(idDest, liste);
     }
 
-    mainWindow->updateDo();
+    _mainWindow->updateDo();
 }
 
 void Tree::mousePressEvent(QMouseEvent *event)
@@ -986,7 +859,7 @@ void Tree::mousePressEvent(QMouseEvent *event)
 
 void Tree::mouseDoubleClickEvent(QMouseEvent *event)
 {
-    EltID id = this->getItemID(this->itemAt(event->pos()));
+    EltID id = ((TreeWidgetItem *)itemAt(event->pos()))->getEltID();
     if (event->button() == Qt::LeftButton && (id.typeElement == elementInstSmpl || id.typeElement == elementPrstInst))
     {
         if (id.typeElement == elementInstSmpl)
@@ -1004,4 +877,227 @@ void Tree::mouseDoubleClickEvent(QMouseEvent *event)
         this->select(id, true);
         this->scrollToItem(this->selectedItems()[0]);
     }
+}
+
+QList<TreeWidgetItem *> Tree::getEltsToId(EltID id, bool includeHidden)
+{
+    QList<TreeWidgetItem *> list;
+
+    // Find the sf2
+    unsigned int max = this->topLevelItemCount();
+    int iTmp = -1;
+    unsigned int i = 0;
+    TreeWidgetItem *child;
+    while (i < max && id.indexSf2 != iTmp)
+    {
+        child = (TreeWidgetItem*)this->topLevelItem(i);
+        if (!child->getEltHidden() || includeHidden)
+            iTmp = child->getEltID().indexSf2;
+        i++;
+    }
+    if (id.indexSf2 != iTmp) // No corresponding sf2
+        return QList<TreeWidgetItem *>();
+
+    // Sf2 found
+    list << child;
+    if (id.typeElement == elementSf2)
+        return list;
+
+    // We go deeper
+    if (id.typeElement == elementRootSmpl || id.typeElement == elementSmpl)
+        list << (TreeWidgetItem*)child->child(0);
+    else if (id.typeElement == elementRootInst || id.typeElement == elementInst || id.typeElement == elementInstSmpl)
+        list << (TreeWidgetItem*)child->child(1);
+    else if (id.typeElement == elementRootPrst || id.typeElement == elementPrst || id.typeElement == elementPrstInst)
+        list << (TreeWidgetItem*)child->child(2);
+    else
+        return QList<TreeWidgetItem *>(); // Bad element type
+
+    if (id.typeElement == elementRootSmpl || id.typeElement == elementRootInst || id.typeElement == elementRootPrst)
+        return list;
+
+    // We go deeper
+    max = list.last()->childCount();
+    i = 0;
+    iTmp = -1;
+    while (i < max && id.indexElt != iTmp)
+    {
+        child = (TreeWidgetItem*)list.last()->child(i);
+        if (!child->getEltHidden() || includeHidden)
+            iTmp = child->getEltID().indexElt;
+        i++;
+    }
+
+    if (id.indexElt != iTmp) // No corresponding smpl, inst or prst
+        return QList<TreeWidgetItem *>();
+
+    // Smpl, Inst or Prst found
+    list << child;
+    if (id.typeElement == elementSmpl || id.typeElement == elementInst || id.typeElement == elementPrst)
+        return list;
+
+    // We go deeper
+    max = list.last()->childCount();
+    i = 0;
+    iTmp = -1;
+    while (i < max && id.indexElt2 != iTmp)
+    {
+        child = (TreeWidgetItem*)list.last()->child(i);
+        if (!child->getEltHidden() || includeHidden)
+            iTmp = child->getEltID().indexElt2;
+        i++;
+    }
+
+    if (id.indexElt2 != iTmp) // No corresponding InstSmpl or PrstInst
+        return QList<TreeWidgetItem *>();
+
+    // InstSmpl or PrstInst found
+    list << child;
+    return list;
+}
+
+void Tree::newElement(EltID id)
+{
+    if (id.typeElement == elementSf2)
+    {
+        // Add a root element in the tree
+        TreeWidgetItem * elt = new TreeWidgetItem(this, id);
+
+        // Add the headers "smpl", "inst" and "prst" in the tree
+        id.typeElement = elementRootSmpl;
+        TreeWidgetItem * eltSmpl = new TreeWidgetItem(elt, id);
+        eltSmpl->setText(0, QObject::trUtf8("Échantillons"));
+        eltSmpl->setOrderedText("a");
+
+        id.typeElement = elementRootInst;
+        TreeWidgetItem * eltInst = new TreeWidgetItem(elt, id);
+        eltInst->setText(0, QObject::trUtf8("Instruments"));
+        eltInst->setOrderedText("b");
+
+        id.typeElement = elementRootPrst;
+        TreeWidgetItem * eltPrst = new TreeWidgetItem(elt, id);
+        eltPrst->setText(0, QObject::trUtf8("Presets"));
+        eltPrst->setOrderedText("c");
+
+        this->addSf2InComboBox(id.indexSf2);
+        this->trier(true);
+    }
+    else
+    {
+        // Add an element with a parent
+        QList<TreeWidgetItem*> treeItems = getEltsToId(id.parent(true));
+        if (!treeItems.isEmpty())
+            new TreeWidgetItem(treeItems.last(), id);
+    }
+}
+
+void Tree::hideElement(EltID id, bool isHidden)
+{
+    QList<TreeWidgetItem *> elements = getEltsToId(id, true);
+    if (!elements.isEmpty())
+    {
+        TreeWidgetItem * element = elements.last();
+        element->setEltHidden(isHidden);
+        if (id.typeElement == elementSf2)
+        {
+            // Headers smpl, inst and prst
+            ((TreeWidgetItem *)element->child(0))->setEltHidden(isHidden);
+            ((TreeWidgetItem *)element->child(1))->setEltHidden(isHidden);
+            ((TreeWidgetItem *)element->child(2))->setEltHidden(isHidden);
+        }
+    }
+
+    this->_updateSelectionInfo = true;
+}
+
+void Tree::changeElementName(EltID id, QString name)
+{
+    QList<TreeWidgetItem *> elements = getEltsToId(id);
+    if (!elements.isEmpty())
+    {
+        TreeWidgetItem * element = elements.last();
+        element->setText(0, name);
+
+        if (id.typeElement == elementSf2)
+            renameSf2InComboBox(id.indexSf2, name);
+    }
+}
+
+void Tree::changeElementOrder(EltID id, QString order, bool sort)
+{
+    QList<TreeWidgetItem *> elements = getEltsToId(id);
+    if (!elements.isEmpty())
+    {
+        TreeWidgetItem * element = elements.takeLast();
+        element->setOrderedText(order);
+        element->setText(0, order);
+        if (sort)
+        {
+            if (elements.count() > 0)
+                elements.last()->sortChildren(1, Qt::AscendingOrder); // Column doesn't matter
+            else
+                this->sortItems(1, Qt::AscendingOrder); // Column doesn't matter
+        }
+    }
+}
+
+void Tree::removeElement(EltID id)
+{
+    QList<TreeWidgetItem *> elements = getEltsToId(id, true);
+    if (elements.empty())
+        return;
+
+    // Delete the item
+    TreeWidgetItem * lastElement = elements.takeLast();
+    if (id.typeElement == elementSf2)
+    {
+        // Delete sample, instrument and preset headers
+        delete lastElement->child(2);
+        delete lastElement->child(1);
+        delete lastElement->child(0);
+
+        // Remove the sf2 from the combobox
+        this->removeSf2FromComboBox(id.indexSf2);
+    }
+    delete lastElement;
+
+    // Decrement the ids
+    switch (id.typeElement)
+    {
+    case elementSf2:
+        for (int i = 0; i < this->topLevelItemCount(); i++)
+        {
+            TreeWidgetItem * item = (TreeWidgetItem *)this->topLevelItem(i);
+            if (item->getEltID().indexSf2 > id.indexSf2)
+                item->decrementSf2();
+        }
+        break;
+    case elementSmpl: case elementInst: case elementPrst:
+        if (elements.count() > 0)
+        {
+            for (int i = 0; i < elements.last()->childCount(); i++)
+            {
+                TreeWidgetItem * item = (TreeWidgetItem *)elements.last()->child(i);
+                if (item->getEltID().indexElt > id.indexElt)
+                    item->decrementElement();
+            }
+        }
+        break;
+    case elementInstSmpl: case elementPrstInst:
+        if (elements.count() > 0)
+        {
+            for (int i = 0; i < elements.last()->childCount(); i++)
+            {
+                TreeWidgetItem * item = (TreeWidgetItem *)elements.last()->child(i);
+                if (item->getEltID().indexElt2 > id.indexElt2)
+                    item->decrementElement2();
+            }
+        }
+        break;
+    default:
+        // Nothing
+        break;
+    }
+
+    this->_updateSelectionInfo = true;
 }

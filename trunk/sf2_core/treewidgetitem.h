@@ -18,7 +18,7 @@
 **                                                                        **
 ****************************************************************************
 **           Author: Davy Triponney                                       **
-**  Website/Contact: http://www.polyphone.fr/                             **
+**  Website/Contact: http://polyphone-soundfonts.com                      **
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
@@ -26,16 +26,46 @@
 #define TREEWIDGETITEM_H
 
 #include <QTreeWidgetItem>
+#include "sf2_types.h"
 
 class TreeWidgetItem : public QTreeWidgetItem
 {
 public:
-    explicit TreeWidgetItem(QTreeWidgetItem *parent, int type = Type) : QTreeWidgetItem(parent, type) {}
-    explicit TreeWidgetItem(QTreeWidget *view, int type = Type) : QTreeWidgetItem(view, type) {}
+    /// Constructor for a root item
+    TreeWidgetItem(QTreeWidget *parent, EltID id);
+
+    /// Constructor of an item below another one
+    TreeWidgetItem(QTreeWidgetItem *parent, EltID id);
+
+    /// The element order is based on this string, not on the string displayed
+    void setOrderedText(QString orderedText) { _orderedText = orderedText; }
+
+    /// Get or set the hidden attribute of the element (non definitive removal)
+    void setEltHidden(bool isHidden) { _hidden = isHidden; this->setHidden(isHidden); }
+    bool getEltHidden() { return _hidden; }
+
+    /// Get the element id
+    EltID getEltID() { return _id; }
+
+    /// Decrement the sf2 index in the element and all childs recursively
+    void decrementSf2();
+
+    /// Decrement the element index (smpl, inst or prst) in the element and all childs recursively
+    void decrementElement();
+
+    /// Decrement the element2 (InstSmpl or PrstInst) index in the element
+    void decrementElement2();
 
 private:
-    bool operator < (const QTreeWidgetItem &other)const;
-    bool compareNames(const QString& s1,const QString& s2);
+    // Natural order
+    bool operator < (const QTreeWidgetItem &other) const;
+
+    /// Apply a style depending on the element type
+    void setStyle();
+
+    EltID _id;
+    QString _orderedText;
+    bool _hidden;
 };
 
 #endif // TREEWIDGETITEM_H

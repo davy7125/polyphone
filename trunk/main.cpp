@@ -18,7 +18,7 @@
 **                                                                        **
 ****************************************************************************
 **           Author: Davy Triponney                                       **
-**  Website/Contact: http://www.polyphone.fr/                             **
+**  Website/Contact: http://polyphone-soundfonts.com                      **
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
@@ -45,14 +45,18 @@
 
 int launchApplication(Options &options, QApplication &a)
 {
-    // Application style
-    QApplication::setStyle(QStyleFactory::create("Fusion"));
-    qApp->setPalette(ThemeManager::getInstance()->getPalette());
-
     // Application name
     a.setApplicationName("Polyphone");
     a.setOrganizationName("polyphone");
     TranslationManager::translate(&a);
+
+    // Application style
+    QApplication::setStyle(QStyleFactory::create("Fusion"));
+    qApp->setPalette(ThemeManager::getInstance()->getPalette());
+
+    // Additional types used in signals
+    qRegisterMetaType<EltID>("EltID");
+    qRegisterMetaType<QItemSelection>("QItemSelection");
 
     // Display the main window
     MainWindow w;
@@ -97,12 +101,13 @@ int convert(Options &options)
     }
 
     // Load input file
-    Pile_sf2 sf2(NULL, false);
+    Pile_sf2 sf2; // not linked with tree
     QString inputExtension = inputFile.suffix().toLower();
     qDebug() << "Loading file" << inputFile.filePath() << "...";
     if (inputExtension == "sf2" || inputExtension == "sf3")
     {
-        if (sf2.open(inputFile.filePath()) > 0)
+        int indexSf2;
+        if (sf2.open(inputFile.filePath(), indexSf2) > 0)
         {
             qWarning() << "fail";
             return 3;
@@ -196,7 +201,6 @@ int main(int argc, char *argv[])
 #endif
 
     Options options(argc, argv);
-
     int valRet = 0;
 
     if (options.error())

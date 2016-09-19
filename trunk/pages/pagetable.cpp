@@ -19,7 +19,7 @@
 **                                                                        **
 ****************************************************************************
 **           Author: Davy Triponney                                       **
-**  Website/Contact: http://www.polyphone.fr/                             **
+**  Website/Contact: http://polyphone-soundfonts.com                      **
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
@@ -32,6 +32,7 @@
 #include "dialog_duplication.h"
 #include "dialogselection.h"
 #include "graphicsviewrange.h"
+#include "utils.h"
 #include <QScrollBar>
 #include <QMenu>
 
@@ -190,8 +191,8 @@ void PageTable::addDivisions(EltID id)
 {
     quint16 champTmp;
     genAmountType genValTmp;
-    char T[20]; char str[40]; char str2[40];
     int row;
+    char T[40];
     EltID id2 = id;
     EltID id3 = id;
     int nbSmplInst = 0;
@@ -217,20 +218,21 @@ void PageTable::addDivisions(EltID id)
                 cElementLie = champ_instrument;
 
             id3.indexElt = _sf2->get(id, cElementLie).wValue;
-            sprintf(str, "%.03d%.03d%s", _sf2->get(id, champ_keyRange).rValue.byLo,
-                    _sf2->get(id, champ_velRange).rValue.byLo,
-                    _sf2->getQstr(id3, champ_name).toStdString().c_str());
-            QString qStr = _sf2->getQstr(id3, champ_name).left(10);
-            qStr.append("\n");
-            qStr.append(_sf2->getQstr(id3, champ_name).mid(10).left(10));
+
+            QString strOrder = QString("%1-%2-%3")
+                    .arg(_sf2->get(id, champ_keyRange).rValue.byLo, 3, 10, QChar('0'))
+                    .arg(_sf2->get(id, champ_velRange).rValue.byLo, 3, 10, QChar('0'))
+                    .arg(_sf2->getQstr(id3, champ_name));
+            QString qStr = _sf2->getQstr(id3, champ_name).left(10) + "\n" + _sf2->getQstr(id3, champ_name).mid(10).left(10);
             for (int j = 1; j < nbSmplInst + 1; j++)
             {
                 // note et vélocité basses de la colonne et prise en compte du nom de l'élément lié
                 id3.indexElt = _sf2->get(this->table->getID(j), cElementLie).wValue;
-                sprintf(str2, "%.03d%.03d%s", _sf2->get(this->table->getID(j), champ_keyRange).rValue.byLo,
-                        _sf2->get(this->table->getID(j), champ_velRange).rValue.byLo,
-                        _sf2->getQstr(id3, champ_name).toStdString().c_str());
-                if (strcmp(str, str2) > 0)
+                QString strOrder2 = QString("%1-%2-%3")
+                        .arg(_sf2->get(this->table->getID(j), champ_keyRange).rValue.byLo, 3, 10, QChar('0'))
+                        .arg(_sf2->get(this->table->getID(j), champ_velRange).rValue.byLo, 3, 10, QChar('0'))
+                        .arg(_sf2->getQstr(id3, champ_name));
+                if (Utils::naturalOrder(strOrder, strOrder2) > 0)
                     numCol++;
             }
 
@@ -847,7 +849,7 @@ void PageTable::set(int ligne, int colonne, bool allowPropagation)
 
     if (champ == champ_sampleModes)
     {
-        // Effacement du champ?
+        // Effacement du champ ?
         if (table->item(ligne, colonne)->data(Qt::UserRole).isNull())
             resetChamp(colonne, champ, champ_unknown);
         else
@@ -934,7 +936,7 @@ void PageTable::set(int ligne, int colonne, bool allowPropagation)
                 }
             }
             }
-            _preparation = 0;
+            _preparation = false;
         }
     }
 
@@ -3398,21 +3400,18 @@ void PageTable::keyPlayed(int key, int velocity)
 void PageTable::onOpenElement(EltID id)
 {
     // Find the element represented by the division
-    if (id.typeElement == elementInstSmpl || id.typeElement == elementPrstInst)
+    if (id.typeElement == elementInstSmpl)
     {
-        if (id.typeElement == elementInstSmpl)
-        {
-            id.indexElt = _sf2->get(id, champ_sampleID).wValue;
-            id.typeElement = elementSmpl;
-        }
-        else
-        {
-            id.indexElt =_sf2->get(id, champ_instrument).wValue;
-            id.typeElement = elementInst;
-        }
-
-        _tree->selectNone();
-        _tree->select(id, true);
-        _tree->scrollToItem(_tree->selectedItems()[0]);
+        id.indexElt = _sf2->get(id, champ_sampleID).wValue;
+        id.typeElement = elementSmpl;
     }
+    else if (id.typeElement == elementPrstInst)
+    {
+        id.indexElt =_sf2->get(id, champ_instrument).wValue;
+        id.typeElement = elementInst;
+    }
+
+    _tree->selectNone();
+    _tree->select(id, true);
+    _tree->scrollToItem(_tree->selectedItems()[0]);
 }

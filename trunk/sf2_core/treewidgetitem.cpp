@@ -18,83 +18,84 @@
 **                                                                        **
 ****************************************************************************
 **           Author: Davy Triponney                                       **
-**  Website/Contact: http://www.polyphone.fr/                             **
+**  Website/Contact: http://polyphone-soundfonts.com                      **
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
 #include "treewidgetitem.h"
+#include "utils.h"
 
-bool TreeWidgetItem::operator < (const QTreeWidgetItem &other)const
+TreeWidgetItem::TreeWidgetItem(QTreeWidgetItem *parent, EltID id) : QTreeWidgetItem(parent, Type),
+    _id(id),
+    _hidden(false)
 {
-    int column = treeWidget()->sortColumn();
+    setStyle();
+}
 
-    QString s1 = this->text(column).toLower();
-    QString s2 = other.text(column).toLower();
+TreeWidgetItem::TreeWidgetItem(QTreeWidget *parent, EltID id) : QTreeWidgetItem(parent, Type),
+    _id(id),
+    _hidden(false)
+{
+    setStyle();
+}
 
-    // ignore common prefix..
-    int i = 0;
-    while ((i < s1.length()) && (i < s2.length()) && (s1.at(i).toLower() == s2.at(i).toLower()))
-        ++i;
-    ++i;
+void TreeWidgetItem::setStyle()
+{
+    QFont font = this->font(0);
 
-    // something left to compare?
-    if ((i < s1.length()) && (i < s2.length()))
+    switch (_id.typeElement)
     {
-        // get number prefix from position i - doesnt matter from which string
-        int k = i-1;
-        // If not number return native comparator
-        if(!s1.at(k).isNumber() || !s2.at(k).isNumber())
-        {
-            //Two next lines
-            //E.g. 1_... < 12_...
-            if(s1.at(k).isNumber())
-                return false;
-            if(s2.at(k).isNumber())
-                return true;
-            return QString::compare(s1, s2, Qt::CaseSensitive) < 0;
-        }
-        QString n = "";
-        k--;
-        while ((k >= 0) && (s1.at(k).isNumber()))
-        {
-            n = s1.at(k)+n;
-            --k;
-        }
-        // get relevant/signficant number string for s1
-        k = i-1;
-        QString n1 = "";
-        while ((k < s1.length()) && (s1.at(k).isNumber()))
-        {
-            n1 += s1.at(k);
-            ++k;
-        }
-
-        // get relevant/signficant number string for s2
-        // Decrease by
-        k = i-1;
-        QString n2 = "";
-        while ((k < s2.length()) && (s2.at(k).isNumber()))
-        {
-            n2 += s2.at(k);
-            ++k;
-        }
-
-        // got two numbers to compare?
-        if (!n1.isEmpty() && !n2.isEmpty())
-            return (n+n1).toInt() < (n+n2).toInt();
-        else
-        {
-            // not a number has to win over a number.. number could have ended earlier... same prefix..
-            if (!n1.isEmpty())
-                return false;
-            if (!n2.isEmpty())
-                return true;
-            return s1.at(i) < s2.at(i);
-        }
-    }
-    else
-    {
-        // shortest string wins
-        return s1.length() < s2.length();
+    case elementSf2:
+        font.setPointSize(15);
+        font.setBold(true);
+        this->setFont(0, font);
+        this->setSizeHint(0, QSize(0,30));
+        this->setIcon(0, QIcon(":/icones/document"));
+        break;
+    case elementRootSmpl: case elementRootInst: case elementRootPrst:
+        font.setPointSize(10);
+        font.setBold(true);
+        this->setFont(0, font);
+        this->setSizeHint(0, QSize(0,23));
+        break;
+    case elementSmpl: case elementInstSmpl:
+        this->setSizeHint(0, QSize(0, 17));
+        this->setIcon(0, QIcon(":/icones/wave"));
+        break;
+    case elementInst: case elementPrstInst:
+        this->setSizeHint(0, QSize(0, 17));
+        this->setIcon(0, QIcon(":/icones/sound"));
+        break;
+    case elementPrst:
+        this->setSizeHint(0, QSize(0, 17));
+        this->setIcon(0, QIcon(":/icones/music"));
+        break;
+    default:
+        break;
     }
 }
+
+void TreeWidgetItem::decrementSf2()
+{
+    _id = EltID(_id.typeElement, _id.indexSf2 - 1, _id.indexElt, _id.indexElt2, _id.indexMod);
+    for (int i = 0; i < this->childCount(); i++)
+        ((TreeWidgetItem *)this->child(i))->decrementSf2();
+}
+
+void TreeWidgetItem::decrementElement()
+{
+    _id = EltID(_id.typeElement, _id.indexSf2, _id.indexElt - 1, _id.indexElt2, _id.indexMod);
+    for (int i = 0; i < this->childCount(); i++)
+        ((TreeWidgetItem *)this->child(i))->decrementElement();
+}
+
+void TreeWidgetItem::decrementElement2()
+{
+    _id = EltID(_id.typeElement, _id.indexSf2, _id.indexElt, _id.indexElt2 - 1, _id.indexMod);
+}
+
+bool TreeWidgetItem::operator < (const QTreeWidgetItem &other) const
+{
+    return Utils::naturalOrder(this->_orderedText, ((const TreeWidgetItem&)other)._orderedText) < 0;
+}
+
