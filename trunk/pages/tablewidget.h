@@ -29,7 +29,7 @@
 #include <QTableWidget>
 #include <QTimer>
 #include "pile_sf2.h"
-
+class TableDelegate;
 
 // QTableWidget an id by column, double click triggers an event and blue effect on the header
 class TableWidget : public QTableWidget
@@ -74,11 +74,11 @@ private slots:
 private:
     QTimer *_timer;
     QList<QColor> _listColors;
+    TableDelegate * _tableDelegate;
 
     void copy();
     void paste();
     void deleteCells();
-    void cut();
 };
 
 #endif // TABLEWIDGET_H

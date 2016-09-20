@@ -10,6 +10,7 @@ polyphone (1.8) unstable; urgency=low
   * (fix) two alt-C hints were used in the close sf2 dialog
   * (fix) a progress dialog was displayed when opening the software
   * (fix) natural order in the list and tables
+  * (fix) behaviour of the list in the "loop playback" row
 
  -- Davy Triponney <davy.triponney@gmail.com>  Wed, 27 Sep 2016 20:51:55 +0100
 
