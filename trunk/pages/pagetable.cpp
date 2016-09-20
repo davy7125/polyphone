@@ -313,15 +313,15 @@ void PageTable::addDivisions(EltID id)
 
 QPixmap PageTable::getPixMap(QColor backgroundColor, QColor dotColor)
 {
-      QPixmap pix(4, 4);
-      QPainter painter(&pix);
-      painter.fillRect(0, 0, 4, 4, backgroundColor);
-      painter.setPen(dotColor);
-      painter.drawPoint(3, 0);
-      painter.drawPoint(2, 1);
-      painter.drawPoint(1, 2);
-      painter.drawPoint(0, 3);
-      return pix;
+    QPixmap pix(4, 4);
+    QPainter painter(&pix);
+    painter.fillRect(0, 0, 4, 4, backgroundColor);
+    painter.setPen(dotColor);
+    painter.drawPoint(3, 0);
+    painter.drawPoint(2, 1);
+    painter.drawPoint(1, 2);
+    painter.drawPoint(0, 3);
+    return pix;
 }
 
 void PageTable::formatTable(bool multiGlobal)
@@ -1888,7 +1888,7 @@ QList<PageTable::Modulator> PageTable::getModList(EltID id)
             for (int j = 0; j < listRet.size(); j++)
             {
                 if (i != j && listRet.at(j).modDestOper == 32768 + i)
-                        found = true;
+                    found = true;
             }
 
             if (!found)
@@ -2627,7 +2627,7 @@ void PageTable::duplication(EltID id)
             {
                 id.indexMod = j;
                 _sf2->set(id2, (Champ)_sf2->get(id, champ_sfGenOper).wValue,
-                               _sf2->get(id, champ_sfGenAmount));
+                          _sf2->get(id, champ_sfGenAmount));
             }
             // Modification keyrange
             val.rValue.byLo = i;
@@ -2780,7 +2780,7 @@ void PageTable::duplication(EltID id, QVector<int> listeVelocite)
             {
                 id.indexMod = j;
                 _sf2->set(id2, (Champ)_sf2->get(id, champ_sfGenOper).wValue,
-                               _sf2->get(id, champ_sfGenAmount));
+                          _sf2->get(id, champ_sfGenAmount));
             }
 
             // Modification étendue de vélocité

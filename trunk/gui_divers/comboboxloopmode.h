@@ -7,16 +7,25 @@
 class ComboBoxLoopMode : public QComboBox
 {
     Q_OBJECT
+
 public:
     explicit ComboBoxLoopMode(QWidget *parent = 0);
 
 protected:
     void showEvent(QShowEvent * event);
     void hidePopup();
+
+private slots:
+    void onActivated(int index);
+
+private:
+    bool _ignoreFirstHide;
 };
 
 class ComboView : public QListView
 {
+    Q_OBJECT
+
 protected:
     QStyleOptionViewItem viewOptions() const
     {

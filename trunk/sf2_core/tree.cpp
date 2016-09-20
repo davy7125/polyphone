@@ -1030,7 +1030,6 @@ void Tree::changeElementOrder(EltID id, QString order, bool sort)
     {
         TreeWidgetItem * element = elements.takeLast();
         element->setOrderedText(order);
-        element->setText(0, order);
         if (sort)
         {
             if (elements.count() > 0)
