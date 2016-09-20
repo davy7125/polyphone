@@ -55,6 +55,8 @@ public:
     virtual Champ getChamp(int row) = 0;
     virtual int getRow(quint16 champ) = 0;
 
+    static QPixmap getPixMap(QColor backgroundColor, QColor dotColor);
+
 signals:
     void actionBegin();
     void actionFinished();
@@ -67,6 +69,7 @@ protected slots:
     // Function reimplemented to fill all selected cells in the same time
     virtual void commitData(QWidget *editor);
     void onSectionDoubleClicked(int index);
+    void onItemSelectionChanged();
 
 private slots:
     void updateColors();

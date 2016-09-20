@@ -311,25 +311,12 @@ void PageTable::addDivisions(EltID id)
 
 }
 
-QPixmap PageTable::getPixMap(QColor backgroundColor, QColor dotColor)
-{
-    QPixmap pix(4, 4);
-    QPainter painter(&pix);
-    painter.fillRect(0, 0, 4, 4, backgroundColor);
-    painter.setPen(dotColor);
-    painter.drawPoint(3, 0);
-    painter.drawPoint(2, 1);
-    painter.drawPoint(1, 2);
-    painter.drawPoint(0, 3);
-    return pix;
-}
-
 void PageTable::formatTable(bool multiGlobal)
 {
     QColor color = this->palette().color(QPalette::Base);
     QColor alternateColor = this->palette().color(QPalette::AlternateBase);
-    QBrush brush1(getPixMap(color, alternateColor));
-    QBrush brush2(getPixMap(alternateColor, color));
+    QBrush brush1(TableWidget::getPixMap(color, alternateColor));
+    QBrush brush2(TableWidget::getPixMap(alternateColor, color));
     if (this->contenant == elementInst)
     {
         // First column with a hatching pattern
