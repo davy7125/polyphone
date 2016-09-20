@@ -29,7 +29,7 @@
 #include <QApplication>
 #include <QKeyEvent>
 #include <QClipboard>
-#include <QDebug>
+#include <QPainter>
 
 TableWidget::TableWidget(QWidget *parent) : QTableWidget(parent)
 {
@@ -38,6 +38,7 @@ TableWidget::TableWidget(QWidget *parent) : QTableWidget(parent)
     _timer = new QTimer(this);
     connect(_timer, SIGNAL(timeout()), this, SLOT(updateColors()));
     connect((QObject*)this->horizontalHeader(), SIGNAL(sectionDoubleClicked(int)), this, SLOT(onSectionDoubleClicked(int)));
+    connect(this, SIGNAL(itemSelectionChanged()), this, SLOT(onItemSelectionChanged()));
 }
 
 void TableWidget::clear()
@@ -439,4 +440,34 @@ void TableWidget::onSectionDoubleClicked(int index)
 {
     EltID id = getID(index);
     openElement(id);
+}
+
+void TableWidget::onItemSelectionChanged()
+{
+    if (this->rowCount() == 50) // If instrument
+    {
+        // Problematic case: background color when the first loopmode cell is selected
+        if (this->item(8, 0)->isSelected())
+            this->item(8, 0)->setBackgroundColor(this->palette().color(QPalette::Highlight));
+        else if (this->item(8, 0)->backgroundColor() == this->palette().color(QPalette::Highlight))
+        {
+            QColor color = this->palette().color(QPalette::Base);
+            QColor alternateColor = this->palette().color(QPalette::AlternateBase);
+            QBrush brush(TableWidget::getPixMap(color, alternateColor));
+            this->item(8, 0)->setBackground(brush);
+        }
+    }
+}
+
+QPixmap TableWidget::getPixMap(QColor backgroundColor, QColor dotColor)
+{
+    QPixmap pix(4, 4);
+    QPainter painter(&pix);
+    painter.fillRect(0, 0, 4, 4, backgroundColor);
+    painter.setPen(dotColor);
+    painter.drawPoint(3, 0);
+    painter.drawPoint(2, 1);
+    painter.drawPoint(1, 2);
+    painter.drawPoint(0, 3);
+    return pix;
 }
