@@ -29,10 +29,12 @@
 #include <QApplication>
 #include <QKeyEvent>
 #include <QClipboard>
+#include <QDebug>
 
 TableWidget::TableWidget(QWidget *parent) : QTableWidget(parent)
 {
-    setItemDelegate(new TableDelegate(this));
+    _tableDelegate = new TableDelegate(this);
+    setItemDelegate(_tableDelegate);
     _timer = new QTimer(this);
     connect(_timer, SIGNAL(timeout()), this, SLOT(updateColors()));
     connect((QObject*)this->horizontalHeader(), SIGNAL(sectionDoubleClicked(int)), this, SLOT(onSectionDoubleClicked(int)));
@@ -41,10 +43,9 @@ TableWidget::TableWidget(QWidget *parent) : QTableWidget(parent)
 void TableWidget::clear()
 {
     for (int i = 0; i < this->columnCount(); i++)
-    {
         for (int j = 0; j < this->rowCount(); j++)
             delete this->item(j, i);
-    }
+
     this->setColumnCount(0);
 }
 
@@ -184,7 +185,23 @@ void TableWidget::keyPressEvent(QKeyEvent *event)
     }
     else if (event->key() == Qt::Key_X && (event->modifiers() & Qt::ControlModifier))
     {
-        cut();
+        copy();
+        deleteCells();
+    }
+    else if (event->key() == Qt::Key_Tab)
+    {
+        QModelIndex index = this->currentIndex();
+        bool editing = _tableDelegate->isEditing();
+
+        QTableWidget::keyPressEvent(event);
+
+        if (editing) {
+            // Otherwise the next cell is selected
+            this->setCurrentIndex(index);
+
+            // Otherwise we lose the focus if we use the mouse in the combobox
+            this->setFocus();
+        }
     }
     else
     {
@@ -201,7 +218,8 @@ void TableWidget::commitData(QWidget *editor)
     int curRow = currentIndex().row();
     int curCol = currentIndex().column();
     QItemSelectionRange isr;
-    Q_FOREACH (isr, selectionModel()->selection())
+
+    foreach (isr, selectionModel()->selection())
     {
         for (int rows = isr.top(); rows <= isr.bottom(); rows++)
         {
@@ -250,7 +268,7 @@ void TableWidget::setLoopModeImage(int row, int column, int loopModeValue)
             this->item(row, column)->setData(Qt::DecorationRole, QImage(":/icones/loop_on.png"));
         this->item(row, column)->setData(Qt::UserRole, 1);
         break;
-    case 2:
+    case 3:
         // loop + end
         if (isDark)
             this->item(row, column)->setData(Qt::DecorationRole, QImage(":/icones/loop_on_end_w.png"));
@@ -393,7 +411,7 @@ void TableWidget::paste()
                 {
                     bool ok;
                     int val = text.toInt(&ok);
-                    if (ok && (val == 0 || val == 1 || val == 3))
+                    if (ok && (val == -1 || val == 0 || val == 1 || val == 3))
                         setLoopModeImage(indRow + minRow, indCol + minCol, val);
                 }
                 else
@@ -415,12 +433,6 @@ void TableWidget::deleteCells()
         item->setData(Qt::UserRole, QVariant());
     }
     emit(actionFinished());
-}
-
-void TableWidget::cut()
-{
-    copy();
-    deleteCells();
 }
 
 void TableWidget::onSectionDoubleClicked(int index)

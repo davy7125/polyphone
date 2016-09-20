@@ -32,7 +32,6 @@ QWidget * TableDelegate::createEditor(QWidget *parent, const QStyleOptionViewIte
             model->blockSignals(false);
 
             QComboBox * combobox = new ComboBoxLoopMode(parent);
-            combobox->setStyleSheet("QComboBox{ border: 3px solid " + highlightColor.name() + "; }");
             combobox->setProperty(DECO_PROPERTY, previousDecoration);
             widget = combobox;
         }
@@ -68,7 +67,7 @@ QWidget * TableDelegate::createEditor(QWidget *parent, const QStyleOptionViewIte
     }
     else
     {
-        // Etendue
+        // Range
         SpinBoxRange * spin;
         if (isKey)
             spin = new SpinBoxKeyRange(parent);
@@ -105,6 +104,7 @@ void TableDelegate::setEditorData(QWidget *editor, const QModelIndex &index) con
     else if (isLoop)
     {
         QComboBox * combobox = (QComboBox *)editor;
+        combobox->blockSignals(true);
         if (index.data(Qt::UserRole).isNull())
             combobox->setCurrentIndex(0);
         else
@@ -122,6 +122,7 @@ void TableDelegate::setEditorData(QWidget *editor, const QModelIndex &index) con
                 break;
             }
         }
+        combobox->blockSignals(false);
     }
     else if (isKey)
     {
@@ -147,6 +148,8 @@ void TableDelegate::setEditorData(QWidget *editor, const QModelIndex &index) con
         else
             spin->setValue(0);
     }
+
+    _isEditing = true;
 }
 
 void TableDelegate::setModelData(QWidget *editor, QAbstractItemModel *model, const QModelIndex &index) const
@@ -159,33 +162,38 @@ void TableDelegate::setModelData(QWidget *editor, QAbstractItemModel *model, con
     {
         QComboBox * combobox = (QComboBox *)editor;
 
-        int currentData = combobox->itemData(combobox->currentIndex(), Qt::UserRole).toInt();
-        model->setData(index, currentData, Qt::UserRole);
-
-        bool isDark = ThemeManager::getInstance()->isDark(ThemeManager::LIST_BACKGROUND, ThemeManager::LIST_TEXT);
-        switch (currentData)
+        if (combobox->count() > 0)
         {
-        case 0:
-            if (isDark)
-                model->setData(index, QImage(":/icones/loop_off_w.png"), Qt::DecorationRole);
-            else
-                model->setData(index, QImage(":/icones/loop_off.png"), Qt::DecorationRole);
-            editor->setProperty(DECO_PROPERTY, QVariant());
-            break;
-        case 1:
-            if (isDark)
-                model->setData(index, QImage(":/icones/loop_on_w.png"), Qt::DecorationRole);
-            else
-                model->setData(index, QImage(":/icones/loop_on.png"), Qt::DecorationRole);
-            editor->setProperty(DECO_PROPERTY, QVariant());
-            break;
-        case 3:
-            if (isDark)
-                model->setData(index, QImage(":/icones/loop_on_end_w.png"), Qt::DecorationRole);
-            else
-                model->setData(index, QImage(":/icones/loop_on_end.png"), Qt::DecorationRole);
-            editor->setProperty(DECO_PROPERTY, QVariant());
-            break;
+            int currentData = combobox->itemData(combobox->currentIndex(), Qt::UserRole).toInt();
+            model->setData(index, currentData, Qt::UserRole);
+
+            bool isDark = ThemeManager::getInstance()->isDark(ThemeManager::LIST_BACKGROUND, ThemeManager::LIST_TEXT);
+            switch (currentData)
+            {
+            case 0:
+                if (isDark)
+                    model->setData(index, QImage(":/icones/loop_off_w.png"), Qt::DecorationRole);
+                else
+                    model->setData(index, QImage(":/icones/loop_off.png"), Qt::DecorationRole);
+                editor->setProperty(DECO_PROPERTY, QVariant());
+                break;
+            case 1:
+                if (isDark)
+                    model->setData(index, QImage(":/icones/loop_on_w.png"), Qt::DecorationRole);
+                else
+                    model->setData(index, QImage(":/icones/loop_on.png"), Qt::DecorationRole);
+                editor->setProperty(DECO_PROPERTY, QVariant());
+                break;
+            case 3:
+                if (isDark)
+                    model->setData(index, QImage(":/icones/loop_on_end_w.png"), Qt::DecorationRole);
+                else
+                    model->setData(index, QImage(":/icones/loop_on_end.png"), Qt::DecorationRole);
+                editor->setProperty(DECO_PROPERTY, QVariant());
+                break;
+            default:
+                break;
+            }
         }
     }
     else if (nbDecimales > 0 && isNumeric)
@@ -195,7 +203,10 @@ void TableDelegate::setModelData(QWidget *editor, QAbstractItemModel *model, con
     }
     else
         QStyledItemDelegate::setModelData(editor, model, index);
+
+    _isEditing = false;
 }
+
 #if QT_VERSION >= QT_VERSION_CHECK(5, 0, 0)
 void TableDelegate::destroyEditor(QWidget * editor, const QModelIndex & index) const
 {
@@ -215,6 +226,7 @@ void TableDelegate::destroyEditor(QWidget * editor, const QModelIndex & index) c
     QStyledItemDelegate::destroyEditor(editor, index);
 }
 #endif
+
 void TableDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const
 {
     bool isNumeric, isKey, isLoop;
@@ -223,7 +235,7 @@ void TableDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option,
 
     if (isLoop)
     {
-        // Fond
+        // Background
         QStyleOptionViewItemV4 opt(option);
         initStyleOption(&opt, index);
         painter->fillRect(option.rect, opt.backgroundBrush);

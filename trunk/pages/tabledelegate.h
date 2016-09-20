@@ -11,8 +11,11 @@ class TableDelegate : public QStyledItemDelegate
 
 public:
     TableDelegate(QTableWidget * table, QObject * parent = NULL): QStyledItemDelegate(parent),
-        _table(table)
+        _table(table),
+        _isEditing(false)
     {}
+
+    bool isEditing() { return _isEditing; }
 
 protected:
     QWidget * createEditor(QWidget *parent, const QStyleOptionViewItem &option, const QModelIndex &index) const;
@@ -28,6 +31,7 @@ private:
     QTableWidget * _table;
 
     static const char * DECO_PROPERTY;
+    mutable bool _isEditing;
 };
 
 #endif // TABLEDELEGATE_H
