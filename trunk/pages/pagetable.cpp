@@ -3360,7 +3360,7 @@ void PageTable::keyPlayed(int key, int velocity)
     for (int i = 1; i < this->table->columnCount(); i++)
     {
         EltID id = this->table->getID(i);
-        if (_sf2->isValide(id))
+        if (_sf2->isValid(id))
         {
             bool enlighted = false;
             if (!_sf2->get(id, champ_hidden).bValue)

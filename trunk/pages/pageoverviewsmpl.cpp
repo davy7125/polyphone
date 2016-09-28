@@ -153,7 +153,7 @@ QString PageOverviewSmpl::link(EltID id)
     {
         EltID id2 = id;
         id2.indexElt = _sf2->get(id, champ_wSampleLink).wValue;
-        if (_sf2->isValide(id2))
+        if (_sf2->isValid(id2))
             return _sf2->getQstr(id2, champ_name);
         else
             return trUtf8("non valide");

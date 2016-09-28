@@ -26,115 +26,121 @@
 #define PILE_ACTIONS_H
 
 #include "sf2_types.h"
+#include <QList>
 
-class Pile_actions
+
+class Action
 {
 public:
     // Catégorie d'action
     typedef enum
     {
-        actionSupprimer = 0,
-        actionCreer = 1,
-        actionModifier = 2,
-        actionModifierFromDefault = 3,
-        actionModifierToDefault = 4,
-        actionNulle = 5
+        TypeRemoval = 0,
+        TypeCreation = 1,
+        TypeUpdate = 2,
+        TypeChangeFromDefault = 3,
+        TypeChangeToDefault = 4,
+        TypeNull = 5
     } ActionType;
 
-    class Action
+    // Data
+    ActionType typeAction;
+    EltID id;
+    Champ champ;
+    QString qNewValue;
+    QString qOldValue;
+    Valeur vNewValue;
+    Valeur vOldValue;
+    QByteArray baNewValue;
+    QByteArray baOldValue;
+
+    /// Decrement the index
+    /// Return true if the action must be deleted
+    bool decrement(EltID id);
+};
+
+
+class ActionManager
+{
+public:
+    ActionManager() : _numEdition(0) {}
+    ~ActionManager()
     {
-    public:
-        ActionType typeAction;
-        EltID id;
-        Champ champ;
-        QString qNewValue;
-        QString qOldValue;
-        Valeur vNewValue;
-        Valeur vOldValue;
-        QByteArray baNewValue;
-        QByteArray baOldValue;
-        Action *suivant;
-        // METHODES PUBLIQUES DE LA CLASSE ACTION
-        Action();
-        ~Action();
-        int nombreElt();
-        Action *getElt(int pos);
-        Action *decrementer(EltID id);
-    };
-    // METHODES PUBLIQUES DE LA CLASSE PILE D'ACTION
-    Pile_actions(); // constructeur
-    ~Pile_actions()
-    {
-        Maillon * pile = this->redoAction;
-        if (pile != NULL)
-        {
-            while (pile->redoAction != NULL)
-            {
-                pile = pile->redoAction;
-            }
-            delete pile;
-        }
+        while (!_redoActions.isEmpty())
+            delete _redoActions.takeFirst();
     }
 
-    void nouvelleAction();
-    void add(Action *action);
-    void cleanActions();
-    double getEdition(int indexSf2);
-    bool isUndoable();
-    bool isRedoable();
-    Action *undo();
-    Action *redo();
-    int nombreEltUndo();
-    int nombreEltRedo();
-    Action *getEltUndo(int pos);
-    Action *getEltRedo(int pos);
-    void supprimerUndo(int pos);
-    void supprimerRedo(int pos);
+    /// Prepare a new action set
+    void newActionSet();
 
-    // Ajustement de la numérotation
-    void decrementer(EltID id);
+    /// Add an action in the last action set
+    void add(Action *action);
+
+
+    void cleanActions();
+
+    /// Get the last edition of an sf2
+    int getEdition(int indexSf2);
+
+    /// Perform an undo, get a list of actions to process
+    QList<Action *> undo();
+
+    /// Perform a redo, get a list of actions to process
+    QList<Action *> redo();
+
+    /// Number of possible "undo"
+    int countUndo() { return _undoActions.count(); }
+    bool isUndoable() { return countUndo() > 0; }
+
+    /// Number of possible "redo"
+    int countRedo() { return _redoActions.count(); }
+    bool isRedoable() { return countRedo() > 0; }
+
+    /// Get actions associated to an undo
+    QList<Action *> getUndoActions(int pos) { return _undoActions[pos]->_actions; }
+
+    /// Get actions associated to a redo
+    QList<Action *> getRedoActions(int pos) { return _redoActions[pos]->_actions; }
+
+    /// Delete an undo
+    void deleteUndo(int pos);
+
+    /// Delete a redo
+    void deleteRedo(int pos);
+
+    /// Adjust the ids
+    void decrement(EltID id);
+
 private:
-    // DEFINITION DE LA CLASSE PRIVEE MAILLON
-    class Maillon
+    // Action set contains a set of action and the edition number of the different sf2 when they were edited
+    class ActionSet
     {
     public:
-        // DEFINITION DE LA SOUS-CLASSE EDITION
-        class Edition
+        struct Edition
         {
-        public:
             int indexSf2;
             double numEdition;
-            Edition *suivant;
-            // Méthodes
-            Edition();
-            ~Edition() { delete suivant; }
-            Edition *remove(int indexSf2);
-            double getEdition(int indexSf2);
-            int nombreElt();
-            Edition *getElt(int pos);
         };
-        Action *listeAction;
-        Edition *edition;
-        Maillon *redoAction;
-        Maillon *undoAction;
-        // METHODES PUBLIQUES DE LA CLASSE MAILLON
-        Maillon();
-        ~Maillon()
+
+        ~ActionSet()
         {
-            delete edition;
-            delete undoAction;
-            delete listeAction;
+            while (!_actions.isEmpty())
+                delete _actions.takeFirst();
         }
 
-        int nombreEltUndo();
-        int nombreEltRedo();
-        Maillon *getEltUndo(int pos);
-        Maillon *getEltRedo(int pos);
+        /// Get the edition of an sf2
+        int getEdition(int indexSf2);
+
+        /// An sf2 has been definitely removed
+        void removeSf2(int indexSf2);
+
+        QList<Action *> _actions;
+        QList<Edition> _editions;
     };
-    // ELEMENTS CONSTITUANTS LA CLASSE PILE ACTIONS
-    Maillon *redoAction;
-    Maillon *undoAction;
-    int nbEdition;
+
+    QList<ActionSet *> _redoActions;
+    QList<ActionSet *> _undoActions;
+    int _numEdition;
 };
 
 #endif // PILE_ACTIONS_H
