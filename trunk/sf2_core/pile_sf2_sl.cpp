@@ -37,10 +37,10 @@ void Pile_sf2::nouveau(QString name, int &indexSf2)
     indexSf2 = this->add(id);
     id.indexSf2 = indexSf2;
 
-    // Initialisation de l'édition
-    this->sf2->getElt(id.indexSf2)->numEdition = this->pileActions->getEdition(id.indexSf2) - 1;
+    // Init the edition
+    _sf2[id.indexSf2]->_numEdition = this->_undoRedo->getEdition(id.indexSf2) - 1;
 
-    // Modification du nom
+    // Change the name
     this->set(id, champ_name, name, false);
 }
 
@@ -2355,27 +2355,27 @@ Pile_sf2::ConvertMod::ConvertMod(Pile_sf2 *sf2, EltID id)
     if (id.typeElement != elementInstMod && id.typeElement != elementPrstMod && \
             id.typeElement != elementInstSmplMod && id.typeElement != elementPrstInstMod)
     {
-        this->nbElt = 0;
-        this->listHidden = NULL;
+        this->_nbElt = 0;
+        this->_listHidden = NULL;
     }
     else
     {
-        this->nbElt = sf2->count(id);
-        this->listHidden = new int[this->nbElt];
+        this->_nbElt = sf2->count(id);
+        this->_listHidden = new int[this->_nbElt];
         int pos = 0;
-        for (int i = 0; i < this->nbElt; i++)
+        for (int i = 0; i < this->_nbElt; i++)
         {
             id.indexMod = i;
             if (sf2->get(id, champ_hidden).bValue)
-                this->listHidden[pos++] = i;
+                this->_listHidden[pos++] = i;
         }
-        for (int i = pos; i < this->nbElt; i++)
-            this->listHidden[i] = -1;
+        for (int i = pos; i < this->_nbElt; i++)
+            this->_listHidden[i] = -1;
     }
 }
 Pile_sf2::ConvertMod::~ConvertMod()
 {
-    delete this->listHidden;
+    delete this->_listHidden;
 }
 int Pile_sf2::ConvertMod::calculDestIndex(int destIndex)
 {
@@ -2384,13 +2384,13 @@ int Pile_sf2::ConvertMod::calculDestIndex(int destIndex)
     bool hidden = false;
     int pos = destIndex - 32768;
     int nbHidden = 0;
-    for (int i = 0; i < this->nbElt; i++)
+    for (int i = 0; i < this->_nbElt; i++)
     {
-        if (this->listHidden[i] != -1)
+        if (this->_listHidden[i] != -1)
         {
-            if (this->listHidden[i] < pos)
+            if (this->_listHidden[i] < pos)
                 nbHidden++;
-            else if (this->listHidden[i] == pos)
+            else if (this->_listHidden[i] == pos)
                 hidden = true;
         }
     }
@@ -2404,22 +2404,22 @@ int Pile_sf2::ConvertMod::calculDestIndex(int destIndex)
 Pile_sf2::ConvertSmpl::ConvertSmpl(Pile_sf2 *sf2, int indexSf2)
 {
     EltID id(elementSmpl, indexSf2, 0, 0, 0);
-    this->nbElt = sf2->count(id);
-    this->listHidden = new int[this->nbElt];
+    this->_nbElt = sf2->count(id);
+    this->_listHidden = new int[this->_nbElt];
     int pos = 0;
-    for (int i = 0; i < this->nbElt; i++)
+    for (int i = 0; i < this->_nbElt; i++)
     {
         id.indexElt = i;
         if (sf2->get(id, champ_hidden).bValue)
-            this->listHidden[pos++] = i;
+            this->_listHidden[pos++] = i;
     }
-    for (int i = pos; i < this->nbElt; i++)
-        this->listHidden[i] = -1;
+    for (int i = pos; i < this->_nbElt; i++)
+        this->_listHidden[i] = -1;
 }
 
 Pile_sf2::ConvertSmpl::~ConvertSmpl()
 {
-    delete this->listHidden;
+    delete this->_listHidden;
 }
 
 int Pile_sf2::ConvertSmpl::calculIndex(int index)
@@ -2427,13 +2427,13 @@ int Pile_sf2::ConvertSmpl::calculIndex(int index)
     bool hidden = false;
     int pos = index;
     int nbHidden = 0;
-    for (int i = 0; i < this->nbElt; i++)
+    for (int i = 0; i < this->_nbElt; i++)
     {
-        if (this->listHidden[i] != -1)
+        if (this->_listHidden[i] != -1)
         {
-            if (this->listHidden[i] < pos)
+            if (this->_listHidden[i] < pos)
                 nbHidden++;
-            else if (this->listHidden[i] == pos)
+            else if (this->_listHidden[i] == pos)
                 hidden = true;
         }
     }
@@ -2447,22 +2447,22 @@ int Pile_sf2::ConvertSmpl::calculIndex(int index)
 Pile_sf2::ConvertInst::ConvertInst(Pile_sf2 *sf2, int indexSf2)
 {
     EltID id(elementInst, indexSf2, 0, 0, 0);
-    this->nbElt = sf2->count(id);
-    this->listHidden = new int[this->nbElt];
+    this->_nbElt = sf2->count(id);
+    this->_listHidden = new int[this->_nbElt];
     int pos = 0;
-    for (int i = 0; i < this->nbElt; i++)
+    for (int i = 0; i < this->_nbElt; i++)
     {
         id.indexElt = i;
         if (sf2->get(id, champ_hidden).bValue)
-            this->listHidden[pos++] = i;
+            this->_listHidden[pos++] = i;
     }
-    for (int i = pos; i < this->nbElt; i++)
-        this->listHidden[i] = -1;
+    for (int i = pos; i < this->_nbElt; i++)
+        this->_listHidden[i] = -1;
 }
 
 Pile_sf2::ConvertInst::~ConvertInst()
 {
-    delete this->listHidden;
+    delete this->_listHidden;
 }
 
 int Pile_sf2::ConvertInst::calculIndex(int index)
@@ -2470,13 +2470,13 @@ int Pile_sf2::ConvertInst::calculIndex(int index)
     bool hidden = false;
     int pos = index;
     int nbHidden = 0;
-    for (int i = 0; i < this->nbElt; i++)
+    for (int i = 0; i < this->_nbElt; i++)
     {
-        if (this->listHidden[i] != -1)
+        if (this->_listHidden[i] != -1)
         {
-            if (this->listHidden[i] < pos)
+            if (this->_listHidden[i] < pos)
                 nbHidden++;
-            else if (this->listHidden[i] == pos)
+            else if (this->_listHidden[i] == pos)
                 hidden = true;
         }
     }

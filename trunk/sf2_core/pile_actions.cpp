@@ -24,319 +24,155 @@
 
 #include "pile_actions.h"
 
-Pile_actions::Pile_actions()
+void ActionManager::newActionSet()
 {
-    this->undoAction = NULL;
-    this->redoAction = NULL;
-    this->nbEdition = 0;
-}
-Pile_actions::Maillon::Maillon()
-{
-    this->redoAction = NULL;
-    this->undoAction = NULL;
-    this->listeAction = NULL;
-    this->edition = NULL;
-}
-Pile_actions::Maillon::Edition::Edition()
-{
-    this->suivant = NULL;
-    this->numEdition = 0;
-}
-Pile_actions::Action::Action()
-{
-    this->suivant = NULL;
-}
-
-Pile_actions::Action::~Action()
-{
-    delete this->suivant;
-}
-
-// METHODES PUBLIQUES
-void Pile_actions::nouvelleAction()
-{
-    // Création nouveau maillon
-    if (this->undoAction)
-        if (!this->undoAction->listeAction)
+    // Create a new ActionSet only if the last one is not empty
+    if (!_undoActions.isEmpty())
+        if (_undoActions[0]->_actions.isEmpty())
             return;
-    Maillon *maillon = new Maillon;
-    maillon->listeAction = NULL;
-    maillon->redoAction = this->redoAction;
-    maillon->undoAction = this->undoAction;
-    maillon->edition = NULL;
-    if (this->redoAction) this->redoAction->undoAction = maillon;
-    if (this->undoAction)
+
+    ActionSet *actionSet = new ActionSet();
+
+    // Copy previous edition if possible
+    if (!_undoActions.isEmpty())
+        foreach (ActionSet::Edition previousEdition, _undoActions[0]->_editions)
+            actionSet->_editions << previousEdition;
+
+    _undoActions.insert(0, actionSet);
+}
+
+void ActionManager::add(Action *action)
+{
+    // Create a new action set if necessary
+    if (_undoActions.isEmpty())
+        this->newActionSet();
+
+    // Insert the action
+    _undoActions[0]->_actions.insert(0, action);
+
+    // Update or create the sf2 edition
+    bool found = false;
+    for (int i = 0; i < _undoActions[0]->_editions.count(); i++)
     {
-        this->undoAction->redoAction = maillon;
-        // recopiage des éditions
-        Maillon::Edition *editionTmp = this->undoAction->edition;
-        Maillon::Edition *editionTmp2;
-        while (editionTmp)
+        if (_undoActions[0]->_editions[i].indexSf2 == action->id.indexSf2)
         {
-            editionTmp2 = maillon->edition;
-            maillon->edition = new Maillon::Edition;
-            maillon->edition->indexSf2 = editionTmp->indexSf2;
-            maillon->edition->numEdition = editionTmp->numEdition;
-            maillon->edition->suivant = editionTmp2;
-            editionTmp = editionTmp->suivant;
+            // Update the edition
+            _undoActions[0]->_editions[i].numEdition = ++_numEdition;
+            found = true;
+            break;
         }
     }
-    this->undoAction = maillon;
-}
-void Pile_actions::add(Action *action)
-{
-    // Empilement de l'action dans un maillon
-    if (!this->undoAction)
+
+    if (!found)
     {
-        // Création d'un nouveau maillon
-        this->nouvelleAction();
-    }
-    action->suivant = this->undoAction->listeAction;
-    this->undoAction->listeAction = action;
-    // gestion des éditions
-    Maillon::Edition *editionTmp = this->undoAction->edition;
-    if (editionTmp)
-    {
-        while (editionTmp->suivant && editionTmp->indexSf2 != action->id.indexSf2)
-            editionTmp = editionTmp->suivant;
-        if (editionTmp->indexSf2 != action->id.indexSf2)
-        {
-            // Ajout d'une édition
-            editionTmp->suivant = new Maillon::Edition;
-            editionTmp->suivant->indexSf2 = action->id.indexSf2;
-            editionTmp->suivant->numEdition = ++this->nbEdition;
-            editionTmp->suivant->suivant = NULL;
-        }
-        else
-        {
-            // Modification de l'édition
-            editionTmp->numEdition = ++this->nbEdition;
-        }
-    }
-    else
-    {
-        // Ajout d'une édition
-        this->undoAction->edition = new Maillon::Edition;
-        this->undoAction->edition->indexSf2 = action->id.indexSf2;
-        this->undoAction->edition->numEdition = ++this->nbEdition;
-        this->undoAction->edition->suivant = NULL;
+        // Create an edition
+        ActionSet::Edition edition;
+        edition.indexSf2 = action->id.indexSf2;
+        edition.numEdition = ++_numEdition;
+        _undoActions[0]->_editions << edition;
     }
 }
-void Pile_actions::cleanActions()
+
+void ActionManager::cleanActions()
 {
-    // Suppressions des listes d'actions vides
-    int i, trouve;
-    Maillon *tmp = NULL;
-    // Undo
-    do
+    // Delete empty undo
+    for (int i = _undoActions.count() - 1; i >= 0; i--)
+        if (_undoActions[i]->_actions.isEmpty())
+            delete _undoActions.takeAt(i);
+
+    // Delete empty redo
+    for (int i = _redoActions.count() - 1; i >= 0; i--)
+        if (_redoActions[i]->_actions.isEmpty())
+            delete _redoActions.takeAt(i);
+}
+
+int ActionManager::getEdition(int indexSf2)
+{
+    // Get the information from the first undo (this is the last action processed)
+    if (_undoActions.isEmpty())
+        return -1;
+
+    return _undoActions[0]->getEdition(indexSf2);
+}
+
+QList<Action *> ActionManager::undo()
+{
+    // Nothing to do if no undo possible
+    if (_undoActions.isEmpty())
+        return QList<Action *> ();
+
+    // An undo becomes a redo
+    _redoActions.insert(0, _undoActions.takeFirst());
+
+    // Return the actions of the first redo
+    return _redoActions[0]->_actions;
+}
+
+QList<Action *> ActionManager::redo()
+{
+    // Nothing to do if no redo possible
+    if (_redoActions.isEmpty())
+        return QList<Action *> ();
+
+    // A redo becomes a undo
+    _undoActions.insert(0, _redoActions.takeFirst());
+
+    // Return the actions of the first undo
+    return _undoActions[0]->_actions;
+}
+
+void ActionManager::deleteUndo(int pos)
+{
+    if (pos >= 0 && pos < _undoActions.count())
+        delete _undoActions.takeAt(pos);
+}
+
+void ActionManager::deleteRedo(int pos)
+{
+    if (pos >= 0 && pos < _redoActions.count())
+        delete _redoActions.takeAt(pos);
+}
+
+void ActionManager::decrement(EltID id)
+{
+    // Browse all undo
+    foreach (ActionSet * actionSet, _undoActions)
     {
-        trouve = 0;
-        tmp = this->undoAction;
-        i = -1;
-        while (tmp && !trouve)
-        {
-            i++;
-            if (!tmp->listeAction)
-            {
-                this->supprimerUndo(i);
-                trouve = 1;
-            }
-            tmp = tmp->undoAction;
-        }
-    }
-    while (trouve);
-    // Redo
-    do
-    {
-        trouve = 0;
-        tmp = this->redoAction;
-        i = -1;
-        while (tmp && !trouve)
-        {
-            i++;
-            if (!tmp->listeAction)
-            {
-                this->supprimerRedo(i);
-                trouve = 1;
-            }
-            tmp = tmp->redoAction;
-        }
-    }
-    while (trouve);
-}
+        // Browse all actions in reverse order and decrement / delete them
+        for (int i = actionSet->_actions.count() - 1; i >= 0; i--)
+           if (actionSet->_actions[i]->decrement(id))
+                delete actionSet->_actions.takeAt(i);
 
-double Pile_actions::getEdition(int indexSf2)
-{
-    if (this->undoAction) return this->undoAction->edition->getEdition(indexSf2);
-    else return -1;
-}
-
-bool Pile_actions::isUndoable() {return this->undoAction != NULL;}
-bool Pile_actions::isRedoable() {return this->redoAction != NULL;}
-Pile_actions::Action * Pile_actions::undo()
-{
-    // La file circule, un undo passe en redo
-    if (!this->undoAction) return NULL; // rien à faire
-    else
-    {
-        this->redoAction = this->undoAction;
-        this->undoAction = this->undoAction->undoAction;
-    }
-    // On retourne la liste d'actions du 1er redo
-    return this->redoAction->listeAction;
-}
-Pile_actions::Action * Pile_actions::redo()
-{
-    // La file circule, un redo passe en undo
-    if (!this->redoAction) return NULL; // rien à faire
-    else
-    {
-        this->undoAction = this->redoAction;
-        this->redoAction = this->redoAction->redoAction;
-    }
-    // On retourne la liste d'actions du 1er undo
-    return this->undoAction->listeAction;
-}
-int Pile_actions::nombreEltUndo() {return this->undoAction->nombreEltUndo();}
-int Pile_actions::nombreEltRedo() {return this->redoAction->nombreEltRedo();}
-Pile_actions::Action * Pile_actions::getEltUndo(int pos) {return this->undoAction->getEltUndo(pos)->listeAction;}
-Pile_actions::Action * Pile_actions::getEltRedo(int pos) {return this->redoAction->getEltRedo(pos)->listeAction;}
-
-void Pile_actions::supprimerUndo(int pos)
-{
-    Maillon *tmp = this->undoAction->getEltUndo(pos);
-    if (!tmp) return;
-
-    // Redirections
-    if (tmp == this->undoAction) this->undoAction = this->undoAction->undoAction;
-    if (tmp->undoAction) tmp->undoAction->redoAction = tmp->redoAction;
-    if (tmp->redoAction) tmp->redoAction->undoAction = tmp->undoAction;
-
-    // Suppression du maillon
-    tmp->undoAction = NULL;
-    tmp->redoAction = NULL;
-    delete tmp;
-}
-void Pile_actions::supprimerRedo(int pos)
-{
-    Maillon *tmp = this->redoAction->getEltRedo(pos);
-    if (!tmp) return;
-
-    // Redirections
-    if (tmp == this->redoAction) this->redoAction = this->redoAction->redoAction;
-    if (tmp->redoAction) tmp->redoAction->undoAction = tmp->undoAction;
-    if (tmp->undoAction) tmp->undoAction->redoAction = tmp->redoAction;
-
-    // Suppression du maillon
-    tmp->undoAction = NULL;
-    tmp->redoAction = NULL;
-    delete tmp;
-}
-void Pile_actions::decrementer(EltID id)
-{
-    Maillon *maillon;
-    Action *action, *actionPrecedente, *actionSuivante;
-    // Parcours de tous les undo
-    maillon = this->undoAction;
-    while (maillon)
-    {
-        action = maillon->listeAction;
-        actionPrecedente = NULL;
-        // Parcours de toutes les actions
-        while (action)
-        {
-            actionSuivante = action->suivant;
-            action = action->decrementer(id);
-            if (!action)
-            {
-                // Si l'action a été effacée (id égaux)
-                if (actionPrecedente)
-                    actionPrecedente->suivant = actionSuivante;
-                else
-                    maillon->listeAction = actionSuivante;
-            }
-            else
-                actionPrecedente = action;
-            action = actionSuivante;
-        }
-        // Décrémentation des éditions
+        // Decrement editions
         if (id.typeElement == elementSf2)
-            maillon->edition = maillon->edition->remove(id.indexSf2);
-        maillon = maillon->undoAction;
+            actionSet->removeSf2(id.indexSf2);
     }
-    // Parcours de tous les redo
-    maillon = this->redoAction;
-    while (maillon)
+
+    // Browse all redo
+    foreach (ActionSet * actionSet, _redoActions)
     {
-        action = maillon->listeAction;
-        actionPrecedente = NULL;
-        // Parcours de toutes les actions
-        while (action)
-        {
-            actionSuivante = action->suivant;
-            action = action->decrementer(id);
-            if (!action)
-            {
-                // Si l'action a été effacée (id égaux)
-                if (actionPrecedente)
-                    actionPrecedente->suivant = actionSuivante;
-                else
-                    maillon->listeAction = actionSuivante;
-            }
-            else
-                actionPrecedente = action;
-            action = actionSuivante;
-        }
-        // Décrémentation des éditions
+        // Browse all actions in reverse order and decrement / delete them
+        for (int i = actionSet->_actions.count() - 1; i >= 0; i--)
+           if (actionSet->_actions[i]->decrement(id))
+                delete actionSet->_actions.takeAt(i);
+
+        // Decrement editions
         if (id.typeElement == elementSf2)
-            maillon->edition = maillon->edition->remove(id.indexSf2);
-        maillon = maillon->redoAction;
+            actionSet->removeSf2(id.indexSf2);
     }
 }
 
-// METHODES PRIVEES
-int Pile_actions::Action::nombreElt(){
-    if (this) return 1 + this->suivant->nombreElt();
-    else return 0;}
-int Pile_actions::Maillon::Edition::nombreElt(){
-    if (this) return 1 + this->suivant->nombreElt();
-    else return 0;}
-int Pile_actions::Maillon::nombreEltUndo(){
-    if (this) return 1 + this->undoAction->nombreEltUndo();
-    else return 0;}
-int Pile_actions::Maillon::nombreEltRedo(){
-    if (this) return 1 + this->redoAction->nombreEltRedo();
-    else return 0;}
-Pile_actions::Action * Pile_actions::Action::getElt(int pos){
-    Action *tmp = this;
-    while (pos-- && tmp) tmp = tmp->suivant;
-    return tmp;}
-Pile_actions::Maillon::Edition * Pile_actions::Maillon::Edition::getElt(int pos){
-    Edition *tmp = this;
-    while (pos-- && tmp) tmp = tmp->suivant;
-    return tmp;}
-Pile_actions::Maillon * Pile_actions::Maillon::getEltUndo(int pos){
-    Maillon *tmp = this;
-    while (pos-- && tmp) tmp = tmp->undoAction;
-    return tmp;}
-Pile_actions::Maillon * Pile_actions::Maillon::getEltRedo(int pos){
-    Maillon *tmp = this;
-    while (pos-- && tmp) tmp = tmp->redoAction;
-    return tmp;}
-Pile_actions::Action * Pile_actions::Action::decrementer(EltID id)
+bool Action::decrement(EltID id)
 {
-    // Ajustement de la numérotation dans l'action
     switch ((int)id.typeElement)
     {
     case elementSf2: // indexSf2
-        // décrémentation de l'indice des sf2
+        // Decrement sf2
         if (this->id.indexSf2 > id.indexSf2) this->id.indexSf2--;
         else if (this->id.indexSf2 == id.indexSf2)
         {
-            // Suppression d'un sf2 : suppression de toutes les actions correspondantes
-            this->suivant = NULL;
-            delete this;
-            return NULL;
+            // Sf2 removal: delete all corresponding actions
+            return true;
         }
         break;
     case elementSmpl: // indexElt
@@ -344,11 +180,12 @@ Pile_actions::Action * Pile_actions::Action::decrementer(EltID id)
         {
             if (this->id.typeElement == elementSmpl)
             {
-                // décrémentation de l'indice des samples
+                // Decrement smpl
                 if (this->id.indexElt > id.indexElt) this->id.indexElt--;
-                // décrémentation de l'indice des liens vers les samples (stéréo)
-                if ((this->typeAction == actionModifier || this->typeAction == actionModifierFromDefault ||
-                    this->typeAction == actionModifierToDefault) && this->champ == champ_wSampleLink)
+
+                // Decrement linked samples (stéréo)
+                if ((this->typeAction == Action::TypeUpdate || this->typeAction == Action::TypeChangeFromDefault ||
+                    this->typeAction == Action::TypeChangeToDefault) && this->champ == champ_wSampleLink)
                 {
                     if (this->vNewValue.wValue > id.indexElt) this->vNewValue.wValue--;
                     if (this->vOldValue.wValue > id.indexElt) this->vOldValue.wValue--;
@@ -356,9 +193,9 @@ Pile_actions::Action * Pile_actions::Action::decrementer(EltID id)
             }
             else if (this->id.typeElement == elementInstSmpl || this->id.typeElement == elementInstSmplMod)
             {
-                // décrémentation de l'indice des samples liés aux instruments
-                if ((this->typeAction == actionModifier || this->typeAction == actionModifierFromDefault ||
-                    this->typeAction == actionModifierToDefault) && this->champ == champ_sampleID)
+                // Decrement instsmpl
+                if ((this->typeAction == Action::TypeUpdate || this->typeAction == Action::TypeChangeFromDefault ||
+                    this->typeAction == Action::TypeChangeToDefault) && this->champ == champ_sampleID)
                 {
                     if (this->vNewValue.wValue > id.indexElt) this->vNewValue.wValue--;
                     if (this->vOldValue.wValue > id.indexElt) this->vOldValue.wValue--;
@@ -372,14 +209,14 @@ Pile_actions::Action * Pile_actions::Action::decrementer(EltID id)
             if (this->id.typeElement == elementInst || this->id.typeElement == elementInstMod ||
                     this->id.typeElement == elementInstSmpl || this->id.typeElement == elementInstSmplMod)
             {
-                // décrémentation de l'indice de inst, instmod, instsmpl et instsmplmod
+                // Decrement inst, instmod, instsmpl et instsmplmod
                 if (this->id.indexElt > id.indexElt) this->id.indexElt--;
             }
             else if (this->id.typeElement == elementPrstInst || this->id.typeElement == elementPrstInstMod)
             {
-                // décrémentation de l'indice des instruments liés aux presets
-                if ((this->typeAction == actionModifier || this->typeAction == actionModifierFromDefault ||
-                    this->typeAction == actionModifierToDefault) && this->champ == champ_instrument)
+                // Decrement prstinst
+                if ((this->typeAction == Action::TypeUpdate || this->typeAction == Action::TypeChangeFromDefault ||
+                    this->typeAction == Action::TypeChangeToDefault) && this->champ == champ_instrument)
                 {
                     if (this->vNewValue.wValue > id.indexElt) this->vNewValue.wValue--;
                     if (this->vOldValue.wValue > id.indexElt) this->vOldValue.wValue--;
@@ -393,7 +230,7 @@ Pile_actions::Action * Pile_actions::Action::decrementer(EltID id)
             if (this->id.typeElement == elementPrst || this->id.typeElement == elementPrstMod ||
                     this->id.typeElement == elementPrstInst || this->id.typeElement == elementPrstInstMod)
             {
-                // décrémentation de l'indice de prst, prstmod, prstinst, prstinstmod
+                // Decrement prst, prstmod, prstinst, prstinstmod
                 if (this->id.indexElt > id.indexElt) this->id.indexElt--;
             }
         }
@@ -403,7 +240,7 @@ Pile_actions::Action * Pile_actions::Action::decrementer(EltID id)
         {
             if (this->id.typeElement == elementInstSmpl || this->id.typeElement == elementInstSmplMod)
             {
-                // décrémentation instsmpl, instsmplmod
+                // Decrement instsmpl, instsmplmod
                 if (this->id.indexElt2 > id.indexElt2) this->id.indexElt2--;
             }
         }
@@ -413,7 +250,7 @@ Pile_actions::Action * Pile_actions::Action::decrementer(EltID id)
         {
             if (this->id.typeElement == elementPrstInst || this->id.typeElement == elementPrstInstMod)
             {
-                // décrémentation prstinst, prstinstmod
+                // Decrementat prstinst, prstinstmod
                 if (this->id.indexElt2 > id.indexElt2) this->id.indexElt2--;
             }
         }
@@ -422,9 +259,10 @@ Pile_actions::Action * Pile_actions::Action::decrementer(EltID id)
         if (this->id.indexSf2 == id.indexSf2 && this->id.indexElt == id.indexElt
                 && this->id.typeElement == id.typeElement)
         {
-            // décrémentation Mod
+            // Decrement Mod
             if (this->id.indexMod > id.indexMod) this->id.indexMod--;
-            // Ajustement des index
+
+            // Adjust index
             if (this->champ == champ_sfModDestOper)
             {
                 if ((int)this->vOldValue.sfGenValue >= 32768)
@@ -445,30 +283,34 @@ Pile_actions::Action * Pile_actions::Action::decrementer(EltID id)
         }
         break;
     }
-    return this;
+
+    return false;
 }
-Pile_actions::Maillon::Edition * Pile_actions::Maillon::Edition::remove(int indexSf2)
+
+void ActionManager::ActionSet::removeSf2(int indexSf2)
 {
-    if (this)
+    // Decrement all sf2 > indexSf2
+    int indexToRemove = -1;
+    for (int i = 0; i < _editions.count(); i++)
     {
-        if (this->indexSf2 > indexSf2) this->indexSf2--;
-        else if (this->indexSf2 == indexSf2)
-        {
-            Edition *editedTmp = this->suivant;
-            this->suivant = NULL;
-            delete this;
-            return editedTmp->remove(indexSf2);
-        }
-        this->suivant = this->suivant->remove(indexSf2);
+        if (_editions[i].indexSf2 > indexSf2)
+            _editions[i].indexSf2--;
+        else if (_editions[i].indexSf2 == indexSf2)
+            indexToRemove = i;
     }
-    return this;
+
+    // Remove indexSf2
+    if (indexToRemove != -1)
+        _editions.removeAt(indexToRemove);
 }
-double Pile_actions::Maillon::Edition::getEdition(int indexSf2)
+
+int ActionManager::ActionSet::getEdition(int indexSf2)
 {
-    if (this)
-    {
-        if (this->indexSf2 == indexSf2) return this->numEdition;
-        else return this->suivant->getEdition(indexSf2);
-    }
-    else return -1;
+    // Try to find the edition number of indexSf2
+    foreach (Edition edition, _editions)
+        if (edition.indexSf2 == indexSf2)
+            return edition.numEdition;
+
+    // Default value
+    return -1;
 }
