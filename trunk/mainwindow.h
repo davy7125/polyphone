@@ -193,6 +193,7 @@ private slots:
     void visualize();           // outil instrument et preset, visualise les paramètres utilisés dans un graphique
     void on_action_Transposer_triggered();
     void attenuationMini();     // outil sf2, mise à jour de toutes les atténuations
+    void attenuationMini(double value, double valuePrst);
     void purger();              // outil sf2, suppression des éléments non utilisés
     void associationAutoSmpl(); // outil sf2, association auto gauche-droite des samples
     void magnetophone();        // affichage du magnétophone

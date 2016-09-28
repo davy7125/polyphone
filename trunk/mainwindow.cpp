@@ -26,6 +26,7 @@
 #include "ui_mainwindow.h"
 #include "sound.h"
 #include "dialog_rename.h"
+#include "dialog_attenuation.h"
 #include "conversion_sfz.h"
 #include "dialog_export.h"
 #include "duplicator.h"
@@ -2300,6 +2301,7 @@ void MainWindow::duplication()
     else if (type == elementPrst || type == elementPrstInst)
         this->page_prst->duplication();
 }
+
 void MainWindow::paramGlobal()
 {
     if (ui->arborescence->getSelectedItemsNumber() == 0) return;
@@ -2309,6 +2311,7 @@ void MainWindow::paramGlobal()
     else if (type == elementPrst || type == elementPrstInst)
         this->page_prst->paramGlobal();
 }
+
 void MainWindow::spatialisation()
 {
     if (ui->arborescence->getSelectedItemsNumber() == 0) return;
@@ -2318,10 +2321,12 @@ void MainWindow::spatialisation()
     else if (type == elementPrst || type == elementPrstInst)
         this->page_prst->spatialisation();
 }
+
 void MainWindow::on_action_Transposer_triggered()
 {
     this->page_inst->transposer();
 }
+
 void MainWindow::visualize()
 {
     if (ui->arborescence->getSelectedItemsNumber() == 0) return;
@@ -2448,31 +2453,27 @@ void MainWindow::purger()
     updateDo();
     updateActions();
 }
+
 void MainWindow::attenuationMini()
 {
-    // Atténuation minimale souhaitée
-    bool ok;
-    double rep = QInputDialog::getDouble(this, trUtf8("Question"),
-                                         trUtf8("Atténuation minimale (dB) :"),
-                                         ConfManager::getInstance()->getToolValue(
-                                             ConfManager::TOOL_TYPE_SF2, "attenuation", "dB", 5.).toDouble(),
-                                         0, 200, 2, &ok);
-    if (!ok) return;
-    ConfManager::getInstance()->setToolValue(ConfManager::TOOL_TYPE_SF2, "attenuation", "dB", rep);
-
-    // Calcul de l'atténuation minimale actuelle
     EltID id = ui->arborescence->getFirstID();
-    id.typeElement = elementInst;
     EltID id2 = id;
-    id2.typeElement = elementInstSmpl;
-    qint32 attenuationMini = -1;
 
-    // For each instrument
+    // Compute minimal and maximal attenuations for instruments
+    id.typeElement = elementInst;
+    id2.typeElement = elementInstSmpl;
+    int minAttenuation = 1440, maxAttenuation = 0;
+    bool instrumentFound = false;
     for (int i = 0; i < this->sf2->count(id); i++)
     {
         id.indexElt = i;
         if (!this->sf2->get(id, champ_hidden).bValue)
         {
+            instrumentFound = true;
+            int defaultAttenuation = 0;
+            if (this->sf2->isSet(id, champ_initialAttenuation))
+                defaultAttenuation = this->sf2->get(id, champ_initialAttenuation).shValue;
+
             // For each sample linked
             id2.indexElt = i;
             for (int j = 0; j < this->sf2->count(id2); j++)
@@ -2480,50 +2481,147 @@ void MainWindow::attenuationMini()
                 id2.indexElt2 = j;
                 if (!this->sf2->get(id2, champ_hidden).bValue)
                 {
+                    int value = defaultAttenuation;
                     if (this->sf2->isSet(id2, champ_initialAttenuation))
-                    {
-                        if (attenuationMini == -1 || this->sf2->get(id2, champ_initialAttenuation).shValue < attenuationMini)
-                            attenuationMini = this->sf2->get(id2, champ_initialAttenuation).shValue;
-                    }
-                    else
-                        attenuationMini = 0;
+                        value = this->sf2->get(id2, champ_initialAttenuation).shValue;
+
+                    if (value < minAttenuation)
+                        minAttenuation = value;
+                    if (value > maxAttenuation)
+                        maxAttenuation = value;
                 }
             }
         }
     }
 
-    // Décalage à effectuer
-    double decalage = 10.0 * rep - attenuationMini;
-    if (decalage == 0) return;
+    if (!instrumentFound) {
+        QMessageBox::warning(this, trUtf8("Attention"), trUtf8("Le fichier doit contenir au moins un instrument."));
+        return;
+    }
 
-    // Application du décalage
-    Valeur val;
-    this->sf2->prepareNewActions();
-
-    // Reprise des identificateurs si modification
-    id = ui->arborescence->getFirstID();
-    id.typeElement = elementInst;
-    id2 = id;
-    id2.typeElement = elementInstSmpl;
-
-    // For each instrument
+    // Compute minimal and maximal attenuations for presets
+    id.typeElement = elementPrst;
+    id2.typeElement = elementPrstInst;
+    int minAttenuationPrst = 1440, maxAttenuationPrst = -1440;
     for (int i = 0; i < this->sf2->count(id); i++)
     {
         id.indexElt = i;
         if (!this->sf2->get(id, champ_hidden).bValue)
         {
-            // For each sample linked
+            int defaultAttenuation = 0;
+            if (this->sf2->isSet(id, champ_initialAttenuation))
+                defaultAttenuation = this->sf2->get(id, champ_initialAttenuation).shValue;
+
+            // For each instrument linked
             id2.indexElt = i;
             for (int j = 0; j < this->sf2->count(id2); j++)
             {
                 id2.indexElt2 = j;
                 if (!this->sf2->get(id2, champ_hidden).bValue)
                 {
+                    int value = defaultAttenuation;
                     if (this->sf2->isSet(id2, champ_initialAttenuation))
-                        val.shValue = this->sf2->get(id2, champ_initialAttenuation).shValue + decalage;
-                    else
-                        val.shValue = decalage;
-                    this->sf2->set(id2, champ_initialAttenuation, val);
+                        value = this->sf2->get(id2, champ_initialAttenuation).shValue;
+
+                    if (value < minAttenuationPrst)
+                        minAttenuationPrst = value;
+                    if (value > maxAttenuationPrst)
+                        maxAttenuationPrst = value;
+                }
+            }
+        }
+    }
+
+    DialogAttenuation * dial = new DialogAttenuation(0.1 * minAttenuation, 0.1 * maxAttenuation,
+                                                     0.1 * minAttenuationPrst, 0.1 * maxAttenuationPrst, this);
+    dial->setAttribute(Qt::WA_DeleteOnClose);
+    connect(dial, SIGNAL(accepted(double, double)),
+            this, SLOT(attenuationMini(double, double)));
+    dial->show();
+}
+
+void MainWindow::attenuationMini(double value, double valuePrst)
+{
+    // Offsets
+    int offset = round(10.0 * value);
+    int offset2 = round(10.0 * valuePrst);
+    if (offset == 0 && offset2 == 0)
+        return;
+
+    // Apply the offset
+    Valeur val;
+    this->sf2->prepareNewActions();
+
+    EltID id = ui->arborescence->getFirstID();
+    EltID id2 = id;
+
+    // For each instrument
+    if (offset != 0)
+    {
+        id.typeElement = elementInst;
+        id2.typeElement = elementInstSmpl;
+        for (int i = 0; i < this->sf2->count(id); i++)
+        {
+            id.indexElt = i;
+            if (!this->sf2->get(id, champ_hidden).bValue)
+            {
+                bool defaultDefined = this->sf2->isSet(id, champ_initialAttenuation);
+                int defaultAttenuation = defaultDefined ? this->sf2->get(id, champ_initialAttenuation).shValue : 0;
+                if (defaultDefined || defaultAttenuation + offset != 0)
+                {
+                    val.shValue = defaultAttenuation + offset;
+                    this->sf2->set(id, champ_initialAttenuation, val);
+                }
+
+                // For each sample linked
+                id2.indexElt = i;
+                for (int j = 0; j < this->sf2->count(id2); j++)
+                {
+                    id2.indexElt2 = j;
+                    if (!this->sf2->get(id2, champ_hidden).bValue)
+                    {
+                        if (this->sf2->isSet(id2, champ_initialAttenuation))
+                        {
+                            val.shValue = this->sf2->get(id2, champ_initialAttenuation).shValue + offset;
+                            this->sf2->set(id2, champ_initialAttenuation, val);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    // For each preset
+    if (offset2 != 0)
+    {
+        id.typeElement = elementPrst;
+        id2.typeElement = elementPrstInst;
+        for (int i = 0; i < this->sf2->count(id); i++)
+        {
+            id.indexElt = i;
+            if (!this->sf2->get(id, champ_hidden).bValue)
+            {
+                bool defaultDefined = this->sf2->isSet(id, champ_initialAttenuation);
+                int defaultAttenuation = defaultDefined ? this->sf2->get(id, champ_initialAttenuation).shValue : 0;
+                if (defaultDefined || defaultAttenuation + offset2 != 0)
+                {
+                    val.shValue = defaultAttenuation + offset2;
+                    this->sf2->set(id, champ_initialAttenuation, val);
+                }
+
+                // For each instrument linked
+                id2.indexElt = i;
+                for (int j = 0; j < this->sf2->count(id2); j++)
+                {
+                    id2.indexElt2 = j;
+                    if (!this->sf2->get(id2, champ_hidden).bValue)
+                    {
+                        if (this->sf2->isSet(id2, champ_initialAttenuation))
+                        {
+                            val.shValue = this->sf2->get(id2, champ_initialAttenuation).shValue + offset2;
+                            this->sf2->set(id2, champ_initialAttenuation, val);
+                        }
+                    }
                 }
             }
         }
@@ -2533,7 +2631,10 @@ void MainWindow::attenuationMini()
     this->updateDo();
     if (ui->stackedWidget->currentWidget() == this->page_inst)
         this->page_inst->afficher();
+    else if (ui->stackedWidget->currentWidget() == this->page_prst)
+        this->page_prst->afficher();
 }
+
 void MainWindow::associationAutoSmpl()
 {
     // Association automatique des samples
@@ -2541,6 +2642,7 @@ void MainWindow::associationAutoSmpl()
     this->sf2->prepareNewActions();
     EltID id = ui->arborescence->getFirstID();
     id.typeElement = elementSmpl;
+
     // Constitution listes de noms et indices
     QList<EltID> listID;
     QStringList  listNom;
@@ -2566,6 +2668,7 @@ void MainWindow::associationAutoSmpl()
             }
         }
     }
+
     // Assemblage
     EltID currentID, idBis;
     bool currentSens;
@@ -2577,6 +2680,7 @@ void MainWindow::associationAutoSmpl()
         currentID = listID.takeLast();
         currentStr = listNom.takeLast();
         currentSens = listSens.takeLast();
+
         // Recherche d'une association
         indice = 0;
         isFound = false;
@@ -2587,6 +2691,7 @@ void MainWindow::associationAutoSmpl()
                 idBis = listID.takeAt(indice);
                 listNom.takeAt(indice);
                 listSens.takeAt(indice);
+
                 // Association idBis avec currentID
                 value.wValue = idBis.indexElt;
                 this->sf2->set(currentID, champ_wSampleLink, value);
