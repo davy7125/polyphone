@@ -29,6 +29,7 @@
 #include "sound.h"
 #include "tree.h"
 #include "treewidgetitem.h"
+#include <QList>
 
 class Pile_sf2 : public QObject
 {
@@ -77,7 +78,7 @@ public:
     void getListeBags(EltID id, QList<Champ> &listeChamps, QList<genAmountType> &listeValeurs);
 
     // Détermination de la validité d'un ID (en acceptant ou non les ID masqués, par défaut non)
-    bool isValide(EltID id, bool acceptHidden = 0);
+    bool isValid(EltID id, bool acceptHidden = false);
 
     // Disponibilité de bank / preset
     void firstAvailablePresetBank(EltID id, int &nBank, int &nPreset);
@@ -85,8 +86,7 @@ public:
     bool isAvailable(EltID id, quint16 wBank, quint16 wPreset);
 
 signals:
-    void updateTable(int type, int sf2, int elt, int elt2);
-
+    void updateTable(int type, int _sf2, int elt, int elt2);
     void newElement(EltID id);
     void hideElement(EltID id, bool isHidden);
     void removeElement(EltID id);
@@ -100,7 +100,7 @@ private:
         fileUnknown = 0,
         fileSf2 = 1,
         fileSf3 = 2
-    }FileType;
+    } FileType;
 
     // DEFINITION DE LA SOUS-CLASSE SF2
     class SF2
@@ -109,237 +109,187 @@ private:
         class BAG
         {
         public:
-            // DEFINITION DES SOUS-CLASSES DE BAG
             class MOD
             {
             public:
-                // ATTRIBUTS DE MOD
-                SFModulator sfModSrcOper;
-                Champ sfModDestOper;
-                short modAmount;
-                SFModulator sfModAmtSrcOper;
-                SFTransform sfModTransOper;
-                int index;
-                bool hidden;
-                MOD *suivant;
-
-                // METHODES DE MOD
-                MOD();
-                ~MOD()
-                {
-                    delete this->suivant;
-                }
-                MOD *getElt(int pos);
-                int nombreElt();
-                void enleverMod(int index);
+                MOD() : _hidden(false) {}
+                SFModulator _sfModSrcOper;
+                Champ _sfModDestOper;
+                short _modAmount;
+                SFModulator _sfModAmtSrcOper;
+                SFTransform _sfModTransOper;
+                int _index;
+                bool _hidden;
             };
 
-            class GEN
+            struct GEN
             {
-            public:
-                // ATTRIBUTS DE GEN
                 Champ sfGenOper;
                 genAmountType genAmount;
-                GEN *suivant;
-
-                // METHODES DE GEN
-                GEN();
-                ~GEN()
-                {
-                    delete this->suivant;
-                }
-                GEN *getElt(int pos);
-                bool isSet(Champ champ);
-                GEN *setGen(Champ champ, Valeur value);
-                GEN *resetGen(Champ champ);
-                GEN *supprGenAndStore(EltID id, int storeAction, Pile_sf2 *root);
-                Valeur getGen(Champ champ);
-                int nombreElt();
             };
 
-            // ATTRIBUTS DE BAG
             BAG();
-            ~BAG()
-            {
-                delete suivant;
-                delete mod;
-                delete gen;
-            }
-            MOD *mod;
-            GEN *gen;
-            bool hidden;
-            BAG *suivant;
+            QList<MOD> _mods;
+            QList<GEN> _gens;
+            bool _hidden;
 
-            // METHODES DE BAG
-            BAG *getElt(int pos);
-            int nombreElt();
-            void decrementerSMPL(int indexSmpl);
-            void decrementerINST(int indexInst);
+            bool isSet(Champ champ);
+            void enleverMod(int index);
+            void setGen(Champ champ, Valeur value);
+            void resetGen(Champ champ);
+            void supprGenAndStore(EltID id, int storeAction, Pile_sf2 *root);
+            Valeur getGen(Champ champ);
         };
 
         class SMPL
         {
         public:
-            // ATTRIBUTS DE SMPL
             SMPL();
-            ~SMPL()
-            {
-                delete suivant;
-            }
-            QString Name;
-            Sound son;
-            quint16 wSampleLink;
-            SFSampleLink sfSampleType;
-            bool hidden;
-            SMPL *suivant;
-
-            // METHODES DE SMPL
-            SMPL *getElt(int pos);
-            int nombreElt();
-            void decrementerLinkSMPL(int indexSmpl);
+            QString _name;
+            Sound _sound;
+            quint16 _wSampleLink;
+            SFSampleLink _sfSampleType;
+            bool _hidden;
         };
 
         class INST
         {
         public:
-            // ATTRIBUTS DE INST
-            QString Name;
-            BAG *bag;
-            BAG bagGlobal;
-            bool hidden;
-            INST *suivant;
-            // METHODES DE INST
+            QString _name;
+            QList<BAG *> _bags;
+            BAG _bagGlobal;
+            bool _hidden;
+
             INST();
             ~INST()
             {
-                delete bag;
-                delete suivant;
+                while (!_bags.isEmpty())
+                    delete _bags.takeFirst();
             }
-            INST *getElt(int pos);
-            int nombreElt();
+            void decrementerSMPL(int indexSmpl);
         };
 
         class PRST
         {
         public:
-            // ATTRIBUTS DE PRST
-            QString Name;
-            quint16 wPreset;
-            quint16 wBank;
-            quint32 dwLibrary;
-            quint32 dwGenre;
-            quint32 dwMorphology;
-            BAG *bag;
-            BAG bagGlobal;
-            bool hidden;
-            PRST *suivant;
+            QString _name;
+            quint16 _wPreset;
+            quint16 _wBank;
+            quint32 _dwLibrary;
+            quint32 _dwGenre;
+            quint32 _dwMorphology;
+            QList<BAG *> _bags;
+            BAG _bagGlobal;
+            bool _hidden;
 
-            // METHODES DE PRST
             PRST();
             ~PRST()
             {
-                delete bag;
-                delete suivant;
+                while (!_bags.isEmpty())
+                    delete _bags.takeFirst();
             }
-            PRST *getElt(int pos);
-            int nombreElt();
+            void decrementerINST(int indexInst);
         };
 
         // ATTRIBUTS DE LA CLASSE SF2
         // INFO
         // max 255 caractères sauf pour comments, terminés par 1 ou 2 terminateurs pour un nombre pair de bits
-        SfVersionTag IFIL; // version of the Sound Font RIFF file     e.g. 2.01                                MANDATORY
-        QString ISNG; // Target Sound Engine                          e.g. “EMU8000”                           MANDATORY
-        QString INAM; // Sound Font Bank Name                         e.g. “General MIDI”                      MANDATORY
-        QString IROM; // Sound ROM Name                               e.g. “1MGM”
-        SfVersionTag IVER; // Sound ROM Version                       e.g. 2.08
-        QString ICRD; // Date of Creation of the Bank                 e.g. “July 15, 1997”
-        QString IENG; // Sound Designers and Engineers for the Bank   e.g. “John Q. Sounddesigner”
-        QString IPRD; // Product for which the Bank was intended      e.g. “SBAWE64 Gold”
-        QString ICOP; // Copyright message                            e.g. “Copyright (c) 1997 E-mu Systems, Inc.”
-        QString ICMT; // Comments on the Bank                         e.g. “This is a comment”                           /!\  65,535 bits maxi
-        QString ISFT; // SoundFont tools used                         e.g. “:Preditor 2.00a:Vienna SF Studio 2.0:”
-        QString fileName;   // nom du fichier
+        SfVersionTag _IFIL; // version of the Sound Font RIFF file     e.g. 2.01                                MANDATORY
+        QString _ISNG; // Target Sound Engine                          e.g. “EMU8000”                           MANDATORY
+        QString _INAM; // Sound Font Bank Name                         e.g. “General MIDI”                      MANDATORY
+        QString _IROM; // Sound ROM Name                               e.g. “1MGM”
+        SfVersionTag _IVER; // Sound ROM Version                       e.g. 2.08
+        QString _ICRD; // Date of Creation of the Bank                 e.g. “July 15, 1997”
+        QString _IENG; // Sound Designers and Engineers for the Bank   e.g. “John Q. Sounddesigner”
+        QString _IPRD; // Product for which the Bank was intended      e.g. “SBAWE64 Gold”
+        QString _ICOP; // Copyright message                            e.g. “Copyright (c) 1997 E-mu Systems, Inc.”
+        QString _ICMT; // Comments on the Bank                         e.g. “This is a comment”                           /!\  65,535 bits maxi
+        QString _ISFT; // SoundFont tools used                         e.g. “:Preditor 2.00a:Vienna SF Studio 2.0:”
+        QString _fileName;   // nom du fichier
 
         // SMPL INST ET PRST
-        SMPL *smpl;
-        INST *inst;
-        PRST *prst;
+        QList<SMPL *> _smpl;
+        QList<INST *> _inst;
+        QList<PRST *> _prst;
 
         // Autres
-        double numEdition;  // numéro de l'édition sauvegardée
-        bool hidden;        // fichier supprimé ou non (avant suppression définitive)
-        SF2 *suivant;       // fichier sf2 suivant
-        quint16 wBpsInit;      // résolution sample à l'ouverture du fichier (16, 24 ou 0 si nouveau)
-        quint16 wBpsSave;      // résolution souhaitée lors d'une sauvegarde (16 ou 24)
+        double _numEdition;  // numéro de l'édition sauvegardée
+        bool _hidden;        // fichier supprimé ou non (avant suppression définitive)
+        quint16 _wBpsInit;   // résolution sample à l'ouverture du fichier (16, 24 ou 0 si nouveau)
+        quint16 _wBpsSave;   // résolution souhaitée lors d'une sauvegarde (16 ou 24)
 
         // METHODES DE LA CLASSE SF2
-        SF2(); // constructeur
+        SF2();
         ~SF2()
         {
-            delete suivant;
-            delete smpl;
-            delete inst;
-            delete prst;
+            while (!_smpl.isEmpty())
+                delete _smpl.takeFirst();
+            while (!_inst.isEmpty())
+                delete _inst.takeFirst();
+            while (!_prst.isEmpty())
+                delete _prst.takeFirst();
         }
-
-        SF2 *getElt(int pos);
-        int nombreElt();
+        void decrementerLinkSMPL(int indexSmpl);
     };
 
     // Classes utilitaires
     class ConvertMod
     {
     public:
-        ConvertMod(Pile_sf2 *sf2, EltID id);
+        ConvertMod(Pile_sf2 *_sf2, EltID id);
         ~ConvertMod();
         int calculDestIndex(int destIndex);
+
     private:
-        int nbElt;
-        int *listHidden;
+        int _nbElt;
+        int * _listHidden;
     };
 
     class ConvertSmpl
     {
     public:
-        ConvertSmpl(Pile_sf2 *sf2, int indexSf2);
+        ConvertSmpl(Pile_sf2 *_sf2, int indexSf2);
         ~ConvertSmpl();
         int calculIndex(int index);
+
     private:
-        int nbElt;
-        int *listHidden;
+        int _nbElt;
+        int * _listHidden;
     };
 
     class ConvertInst
     {
     public:
-        ConvertInst(Pile_sf2 *sf2, int indexSf2);
+        ConvertInst(Pile_sf2 *_sf2, int indexSf2);
         ~ConvertInst();
         int calculIndex(int index);
+
     private:
-        int nbElt;
-        int *listHidden;
+        int _nbElt;
+        int * _listHidden;
     };
 
     // ELEMENTS PRIVES DE LA CLASSE PILE_SF2
-    SF2 *sf2;
-    Pile_actions *pileActions;
+    QList<SF2 *> _sf2;
+    ActionManager *_undoRedo;
 
     // METHODES PRIVEES DE LA CLASSE PILE_SF2
-    // Affiche l'élément id
+    /// Affiche l'élément id
     int display(EltID id);
 
-    // Supprime ou masque l'élément id. Si l'élément est utilisé par un autre : erreur
+    /// Delete or hide the element id. Error if the element is used by another
     int remove(EltID id, bool permanently, bool storeAction, int *message = NULL);
 
-    // Remove very old actions and previous actions that have been erased
+    /// Remove very old actions and previous actions that have been erased
     void releaseActions(bool withVeryOldActions);
 
-    // Type de fichier
+    /// Type of file
     static FileType getFileType(QString fileName);
 
-    // Gestion de la sauvegarde
+    /// Save
     int sauvegarderSf2(int indexSf2, QString fileName);
+
+    /// Store the edition
     void storeEdition(int indexSf2);
 };
 

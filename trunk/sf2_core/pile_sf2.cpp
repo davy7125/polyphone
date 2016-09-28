@@ -30,70 +30,58 @@
 // CONSTRUCTEURS
 Pile_sf2::Pile_sf2()
 {
-    this->sf2 = NULL;
-    this->pileActions = new Pile_actions();
+    this->_undoRedo = new ActionManager();
 }
+
 Pile_sf2::~Pile_sf2()
 {
-    delete this->sf2;
-    delete pileActions;
+    while (!_sf2.isEmpty())
+        delete _sf2.takeFirst();
+    delete _undoRedo;
 }
+
 Pile_sf2::SF2::SF2()
 {
     SfVersionTag sfVersionTmp;
     sfVersionTmp.wMajor = 2;
     sfVersionTmp.wMinor = 4;
-    this->IFIL = sfVersionTmp;
+    this->_IFIL = sfVersionTmp;
     sfVersionTmp.wMajor = 0;
     sfVersionTmp.wMinor = 0;
-    this->IVER = sfVersionTmp;
-    this->ISNG = "EMU8000";
-    this->INAM = "";
-    this->IROM = "";
-    this->ICRD = "";
-    this->IENG = "";
-    this->IPRD = "";
-    this->ICOP = "";
-    this->ICMT = "";
-    this->ISFT = "";
-    this->suivant = NULL;
-    this->fileName = "";
-    this->hidden = 0;
-    this->numEdition = 0;
-    this->smpl = NULL;
-    this->inst = NULL;
-    this->prst = NULL;
+    this->_IVER = sfVersionTmp;
+    this->_ISNG = "EMU8000";
+    this->_INAM = "";
+    this->_IROM = "";
+    this->_ICRD = "";
+    this->_IENG = "";
+    this->_IPRD = "";
+    this->_ICOP = "";
+    this->_ICMT = "";
+    this->_ISFT = "";
+    this->_fileName = "";
+    this->_hidden = 0;
+    this->_numEdition = 0;
 }
+
 Pile_sf2::SF2::SMPL::SMPL() :
-    hidden(false),
-    suivant(NULL)
+    _hidden(false)
 {}
+
 Pile_sf2::SF2::INST::INST() :
-    bag(NULL),
-    hidden(false),
-    suivant(NULL)
+    _hidden(false)
 {}
+
 Pile_sf2::SF2::PRST::PRST() :
-    wPreset(0),
-    wBank(0),
-    dwLibrary(0),
-    dwGenre(0),
-    dwMorphology(0),
-    bag(NULL),
-    hidden(false),
-    suivant(NULL)
+    _wPreset(0),
+    _wBank(0),
+    _dwLibrary(0),
+    _dwGenre(0),
+    _dwMorphology(0),
+    _hidden(false)
 {}
+
 Pile_sf2::SF2::BAG::BAG() :
-    mod(NULL),
-    gen(NULL),
-    hidden(false),
-    suivant(NULL)
-{}
-Pile_sf2::SF2::BAG::MOD::MOD() :
-    hidden(false),
-    suivant(NULL)
-{}
-Pile_sf2::SF2::BAG::GEN::GEN() : suivant(NULL)
+    _hidden(false)
 {}
 
 ///////////////////////// METHODES PUBLIQUES /////////////////////////
@@ -105,7 +93,7 @@ void Pile_sf2::remove(EltID id, int *message) { this->remove(id, 0, 1, message);
 bool Pile_sf2::isSet(EltID id, Champ champ)
 {
     bool value = false;
-    if (!this->isValide(id, champ == champ_hidden))
+    if (!this->isValid(id, champ == champ_hidden))
         return value;
 
     // Type d'élément à analyser
@@ -121,18 +109,18 @@ bool Pile_sf2::isSet(EltID id, Champ champ)
         break;
     case elementInst:{
         // Analyse d'un instrument
-        SF2::INST *tmp = this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt);
+        SF2::INST *tmp = _sf2[id.indexSf2]->_inst[id.indexElt];
         switch ((int)champ)
         {
         case champ_hidden:
             value = true; break;
         default:
-            value = tmp->bagGlobal.gen->isSet(champ);
+            value = tmp->_bagGlobal.isSet(champ);
         }
     }break;
     case elementPrst:{
         // Analyse d'un preset
-        SF2::PRST *tmp = this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt);
+        SF2::PRST *tmp = _sf2[id.indexSf2]->_prst[id.indexElt];
         switch ((int)champ)
         {
         case champ_wPreset:
@@ -148,29 +136,29 @@ bool Pile_sf2::isSet(EltID id, Champ champ)
         case champ_hidden:
             value = true; break;
         default:
-            value = tmp->bagGlobal.gen->isSet(champ);
+            value = tmp->_bagGlobal.isSet(champ);
         }
     }break;
     case elementInstSmpl:{
         // Analyse d'un sample lié à un instrument
-        SF2::BAG *tmp = this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt)->bag->getElt(id.indexElt2);
+        SF2::BAG *tmp = _sf2[id.indexSf2]->_inst[id.indexElt]->_bags[id.indexElt2];
         switch ((int)champ)
         {
         case champ_hidden:
             value = true; break;
         default:
-            value = tmp->gen->isSet(champ);
+            value = tmp->isSet(champ);
         }
     }break;
     case elementPrstInst:{
         // Analyse d'un instrument lié à un preset
-        SF2::BAG *tmp = this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt)->bag->getElt(id.indexElt2);
+        SF2::BAG *tmp = _sf2[id.indexSf2]->_prst[id.indexElt]->_bags[id.indexElt2];
         switch ((int)champ)
         {
         case champ_hidden:
             value = true; break;
         default:
-            value = tmp->gen->isSet(champ);
+            value = tmp->isSet(champ);
         }
     }break;
     case elementInstMod:
@@ -192,11 +180,12 @@ bool Pile_sf2::isSet(EltID id, Champ champ)
     }
     return value;
 }
+
 Valeur Pile_sf2::get(EltID id, Champ champ)
 {
     Valeur value;
     value.bValue = 0;
-    if (!this->isValide(id, champ == champ_hidden))
+    if (!this->isValid(id, champ == champ_hidden))
         return value;
 
     // Type d'élément à analyser
@@ -204,108 +193,108 @@ Valeur Pile_sf2::get(EltID id, Champ champ)
     {
     case elementSf2:{
         // Analyse d'un SF2
-        SF2 *tmp = this->sf2->getElt(id.indexSf2);
+        SF2 *tmp = _sf2[id.indexSf2];
         switch ((int)champ)
         {
         case champ_IFIL:
-            value.sfVerValue = tmp->IFIL; break;
+            value.sfVerValue = tmp->_IFIL; break;
         case champ_IVER:
-            value.sfVerValue = tmp->IVER; break;
+            value.sfVerValue = tmp->_IVER; break;
         case champ_hidden:
-            value.bValue = tmp->hidden; break;
+            value.bValue = tmp->_hidden; break;
         case champ_wBpsInit:
-            value.wValue = tmp->wBpsInit; break;
+            value.wValue = tmp->_wBpsInit; break;
         case champ_wBpsSave:
-            value.wValue = tmp->wBpsSave; break;
+            value.wValue = tmp->_wBpsSave; break;
         }
     }break;
     case elementSmpl:{
         // Analyse d'un sample
-        SF2::SMPL *tmp = this->sf2->getElt(id.indexSf2)->smpl->getElt(id.indexElt);
+        SF2::SMPL *tmp = _sf2[id.indexSf2]->_smpl[id.indexElt];
         switch ((int)champ)
         {
         case champ_dwStart16:
-            value.dwValue = tmp->son.get(champ_dwStart16); break;
+            value.dwValue = tmp->_sound.get(champ_dwStart16); break;
         case champ_dwStart24:
-            value.dwValue = tmp->son.get(champ_dwStart24); break;
+            value.dwValue = tmp->_sound.get(champ_dwStart24); break;
         case champ_dwLength:
-            value.dwValue = tmp->son.get(champ_dwLength); break;
+            value.dwValue = tmp->_sound.get(champ_dwLength); break;
         case champ_dwStartLoop:
-            value.dwValue = tmp->son.get(champ_dwStartLoop); break;
+            value.dwValue = tmp->_sound.get(champ_dwStartLoop); break;
         case champ_dwEndLoop:
-            value.dwValue = tmp->son.get(champ_dwEndLoop); break;
+            value.dwValue = tmp->_sound.get(champ_dwEndLoop); break;
         case champ_dwSampleRate:
-            value.dwValue = tmp->son.get(champ_dwSampleRate); break;
+            value.dwValue = tmp->_sound.get(champ_dwSampleRate); break;
         case champ_bpsFile:
-            value.dwValue = tmp->son.get(champ_bpsFile); break;
+            value.dwValue = tmp->_sound.get(champ_bpsFile); break;
         case champ_wChannel:
-            value.dwValue = tmp->son.get(champ_wChannel); break;
+            value.dwValue = tmp->_sound.get(champ_wChannel); break;
         case champ_wChannels:
-            value.dwValue = tmp->son.get(champ_wChannels); break;
+            value.dwValue = tmp->_sound.get(champ_wChannels); break;
         case champ_byOriginalPitch:
-            value.bValue = tmp->son.get(champ_byOriginalPitch); break;
+            value.bValue = tmp->_sound.get(champ_byOriginalPitch); break;
         case champ_chPitchCorrection:
-            value.cValue = tmp->son.get(champ_chPitchCorrection); break;
+            value.cValue = tmp->_sound.get(champ_chPitchCorrection); break;
         case champ_wSampleLink:
-            value.wValue = tmp->wSampleLink; break;
+            value.wValue = tmp->_wSampleLink; break;
         case champ_sfSampleType:
-            value.sfLinkValue = tmp->sfSampleType; break;
+            value.sfLinkValue = tmp->_sfSampleType; break;
         case champ_hidden:
-            value.bValue = tmp->hidden; break;
+            value.bValue = tmp->_hidden; break;
         }
     }break;
     case elementInst:{
         // Analyse d'un instrument
-        SF2::INST *tmp = this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt);
+        SF2::INST *tmp = _sf2[id.indexSf2]->_inst[id.indexElt];
         switch ((int)champ)
         {
         case champ_hidden:
-            value.bValue = tmp->hidden; break;
+            value.bValue = tmp->_hidden; break;
         default:
-            value = tmp->bagGlobal.gen->getGen(champ);
+            value = tmp->_bagGlobal.getGen(champ);
         }
     }break;
     case elementPrst:{
         // Analyse d'un preset
-        SF2::PRST *tmp = this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt);
+        SF2::PRST *tmp = _sf2[id.indexSf2]->_prst[id.indexElt];
         switch ((int)champ)
         {
         case champ_wPreset:
-            value.wValue = tmp->wPreset; break;
+            value.wValue = tmp->_wPreset; break;
         case champ_wBank:
-            value.wValue = tmp->wBank; break;
+            value.wValue = tmp->_wBank; break;
         case champ_dwLibrary:
-            value.dwValue = tmp->dwLibrary; break;
+            value.dwValue = tmp->_dwLibrary; break;
         case champ_dwGenre:
-            value.dwValue = tmp->dwGenre; break;
+            value.dwValue = tmp->_dwGenre; break;
         case champ_dwMorphology:
-            value.dwValue = tmp->dwMorphology; break;
+            value.dwValue = tmp->_dwMorphology; break;
         case champ_hidden:
-            value.bValue = tmp->hidden; break;
+            value.bValue = tmp->_hidden; break;
         default:
-            value = tmp->bagGlobal.gen->getGen(champ);
+            value = tmp->_bagGlobal.getGen(champ);
         }
     }break;
     case elementInstSmpl:{
         // Analyse d'un sample lié à un instrument
-        SF2::BAG *tmp = this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt)->bag->getElt(id.indexElt2);
+        SF2::BAG *tmp = _sf2[id.indexSf2]->_inst[id.indexElt]->_bags[id.indexElt2];
         switch ((int)champ)
         {
         case champ_hidden:
-            value.bValue = tmp->hidden; break;
+            value.bValue = tmp->_hidden; break;
         default:
-            value = tmp->gen->getGen(champ);
+            value = tmp->getGen(champ);
         }
     }break;
     case elementPrstInst:{
         // Analyse d'un instrument lié à un preset
-        SF2::BAG *tmp = this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt)->bag->getElt(id.indexElt2);
+        SF2::BAG *tmp = _sf2[id.indexSf2]->_prst[id.indexElt]->_bags[id.indexElt2];
         switch ((int)champ)
         {
         case champ_hidden:
-            value.bValue = tmp->hidden; break;
+            value.bValue = tmp->_hidden; break;
         default:
-            value = tmp->gen->getGen(champ);
+            value = tmp->getGen(champ);
         }
     }break;
     case elementInstMod: case elementPrstMod: case elementInstSmplMod: case elementPrstInstMod:{
@@ -314,34 +303,34 @@ Valeur Pile_sf2::get(EltID id, Champ champ)
         switch ((int)id.typeElement)
         {
         case elementInstMod:
-            tmp = this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt)->bagGlobal.mod->getElt(id.indexMod);
+            tmp = &_sf2[id.indexSf2]->_inst[id.indexElt]->_bagGlobal._mods[id.indexMod];
             break;
         case elementPrstMod:
-            tmp = this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt)->bagGlobal.mod->getElt(id.indexMod);
+            tmp = &_sf2[id.indexSf2]->_prst[id.indexElt]->_bagGlobal._mods[id.indexMod];
             break;
         case elementInstSmplMod:
-            tmp = this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt)->bag->getElt(id.indexElt2)->mod->getElt(id.indexMod);
+            tmp = &_sf2[id.indexSf2]->_inst[id.indexElt]->_bags[id.indexElt2]->_mods[id.indexMod];
             break;
         case elementPrstInstMod:
-            tmp = this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt)->bag->getElt(id.indexElt2)->mod->getElt(id.indexMod);
+            tmp = &_sf2[id.indexSf2]->_prst[id.indexElt]->_bags[id.indexElt2]->_mods[id.indexMod];
             break;
         }
         switch ((int)champ)
         {
         case champ_sfModSrcOper:
-            value.sfModValue = tmp->sfModSrcOper; break;
+            value.sfModValue = tmp->_sfModSrcOper; break;
         case champ_sfModDestOper:
-            value.sfGenValue = tmp->sfModDestOper; break;
+            value.sfGenValue = tmp->_sfModDestOper; break;
         case champ_modAmount:
-            value.shValue = tmp->modAmount; break;
+            value.shValue = tmp->_modAmount; break;
         case champ_sfModAmtSrcOper:
-            value.sfModValue = tmp->sfModAmtSrcOper; break;
+            value.sfModValue = tmp->_sfModAmtSrcOper; break;
         case champ_sfModTransOper:
-            value.sfTransValue = tmp->sfModTransOper; break;
+            value.sfTransValue = tmp->_sfModTransOper; break;
         case champ_indexMod:
-            value.wValue = tmp->index; break;
+            value.wValue = tmp->_index; break;
         case champ_hidden:
-            value.bValue = tmp->hidden; break;
+            value.bValue = tmp->_hidden; break;
         }
     }break;
     case elementInstGen: case elementPrstGen: case elementInstSmplGen: case elementPrstInstGen:{
@@ -350,16 +339,16 @@ Valeur Pile_sf2::get(EltID id, Champ champ)
         switch ((int)id.typeElement)
         {
         case elementInstGen:
-            tmp = this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt)->bagGlobal.gen->getElt(id.indexMod);
+            tmp = &_sf2[id.indexSf2]->_inst[id.indexElt]->_bagGlobal._gens[id.indexMod];
             break;
         case elementPrstGen:
-            tmp = this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt)->bagGlobal.gen->getElt(id.indexMod);
+            tmp = &_sf2[id.indexSf2]->_prst[id.indexElt]->_bagGlobal._gens[id.indexMod];
             break;
         case elementInstSmplGen:
-            tmp = this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt)->bag->getElt(id.indexElt2)->gen->getElt(id.indexMod);
+            tmp = &_sf2[id.indexSf2]->_inst[id.indexElt]->_bags[id.indexElt2]->_gens[id.indexMod];
             break;
         case elementPrstInstGen:
-            tmp = this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt)->bag->getElt(id.indexElt2)->gen->getElt(id.indexMod);
+            tmp = &_sf2[id.indexSf2]->_prst[id.indexElt]->_bags[id.indexElt2]->_gens[id.indexMod];
             break;
         }
         switch ((int)champ)
@@ -373,19 +362,21 @@ Valeur Pile_sf2::get(EltID id, Champ champ)
     }
     return value;
 }
+
 Sound Pile_sf2::getSon(EltID id)
 {
     Sound son;
-    if (!this->isValide(id, 0))
+    if (!this->isValid(id, 0))
         return son;
 
     if (id.typeElement == elementSmpl)
-        return this->sf2->getElt(id.indexSf2)->smpl->getElt(id.indexElt)->son;
+        return _sf2[id.indexSf2]->_smpl[id.indexElt]->_sound;
     else return son;
 }
+
 QString Pile_sf2::getQstr(EltID id, Champ champ)
 {
-    if (!this->isValide(id, false))
+    if (!this->isValid(id, false))
         return "";
 
     // Type d'élément à analyser
@@ -393,86 +384,87 @@ QString Pile_sf2::getQstr(EltID id, Champ champ)
     {
     case elementSf2:{
         // Analyse d'un SF2
-        SF2 *tmp = this->sf2->getElt(id.indexSf2);
+        SF2 *tmp = _sf2[id.indexSf2];
         switch ((int)champ)
         {
         case champ_name:
-            return tmp->INAM; break;
+            return tmp->_INAM; break;
         case champ_ISNG:
-            return tmp->ISNG; break;
+            return tmp->_ISNG; break;
         case champ_IROM:
-            return tmp->IROM; break;
+            return tmp->_IROM; break;
         case champ_ICRD:
-            return tmp->ICRD; break;
+            return tmp->_ICRD; break;
         case champ_IENG:
-            return tmp->IENG; break;
+            return tmp->_IENG; break;
         case champ_IPRD:
-            return tmp->IPRD; break;
+            return tmp->_IPRD; break;
         case champ_ICOP:
-            return tmp->ICOP; break;
+            return tmp->_ICOP; break;
         case champ_ICMT:
-            return tmp->ICMT; break;
+            return tmp->_ICMT; break;
         case champ_ISFT:
-            return tmp->ISFT; break;
+            return tmp->_ISFT; break;
         case champ_filename:
-            return tmp->fileName; break;
+            return tmp->_fileName; break;
         }
     }break;
     case elementSmpl:{
         // Analyse d'un sample
-        SF2::SMPL *tmp = this->sf2->getElt(id.indexSf2)->smpl->getElt(id.indexElt);
+        SF2::SMPL *tmp = _sf2[id.indexSf2]->_smpl[id.indexElt];
         switch ((int)champ)
         {
         case champ_name:
-            return tmp->Name; break;
+            return tmp->_name; break;
         case champ_filename:
-            return tmp->son.getFileName(); break;
+            return tmp->_sound.getFileName(); break;
         }
     }break;
     case elementInst:{
         // Analyse d'un instrument
-        SF2::INST *tmp = this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt);
+        SF2::INST *tmp = _sf2[id.indexSf2]->_inst[id.indexElt];
         switch ((int)champ)
         {
         case champ_name:
-            return tmp->Name; break;
+            return tmp->_name; break;
         }
     }break;
     case elementPrst:{
         // Analyse d'un preset
-        SF2::PRST *tmp = this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt);
+        SF2::PRST *tmp = _sf2[id.indexSf2]->_prst[id.indexElt];
         switch ((int)champ)
         {
         case champ_name:
-            return tmp->Name; break;
+            return tmp->_name; break;
         }
     }break;
     }
     return "";
 }
+
 QByteArray Pile_sf2::getData(EltID id, Champ champ)
 {
-    if (!this->isValide(id, 0))
+    if (!this->isValid(id, 0))
         return QByteArray();
 
     // Type d'élément à analyser
     switch ((int)id.typeElement)
     {
     case elementSmpl:{
-        SF2::SMPL *tmp = this->sf2->getElt(id.indexSf2)->smpl->getElt(id.indexElt);
+        SF2::SMPL *tmp = _sf2[id.indexSf2]->_smpl[id.indexElt];
         switch ((int)champ)
         {
         case champ_sampleData16:
-            return tmp->son.getData(16);
+            return tmp->_sound.getData(16);
             break;
         case champ_sampleData24:
-            return tmp->son.getData(8);
+            return tmp->_sound.getData(8);
             break;
         case champ_sampleDataFull24:
-            return tmp->son.getData(24);
+            return tmp->_sound.getData(24);
             break;
         case champ_sampleData32:
-            return tmp->son.getData(32);
+            return tmp->_sound.getData(32);
             break;
         }
     }break;
@@ -497,220 +489,153 @@ int Pile_sf2::count(EltID id, bool withHidden)
     case elementInstSmplMod: case elementPrstInstMod: case elementInstSmplGen: case elementPrstInstGen:
         id.indexMod = -1;
     }
-    if (!this->isValide(id, 1))
+    if (!this->isValid(id, 1))
         return -1;
 
-    int i = 0;
-    // Type d'élément à compter
-    switch ((int)id.typeElement)
+    int count = 0;
+
+    if (withHidden)
     {
-    case elementSf2:{
-        // Comptage du nombre de SF2
-        SF2 *tmp = this->sf2;
-        while (tmp)
+        switch ((int)id.typeElement)
         {
-            if (!tmp->hidden || withHidden)
-                i++;
-            tmp = tmp->suivant;
+        case elementSf2:         count = _sf2.count(); break;
+        case elementSmpl:        count = _sf2[id.indexSf2]->_smpl.count(); break;
+        case elementInst:        count = _sf2[id.indexSf2]->_inst.count(); break;
+        case elementPrst:        count = _sf2[id.indexSf2]->_prst.count(); break;
+        case elementInstSmpl:    count = _sf2[id.indexSf2]->_inst[id.indexElt]->_bags.count(); break;
+        case elementPrstInst:    count = _sf2[id.indexSf2]->_prst[id.indexElt]->_bags.count(); break;
+        case elementInstMod:     count = _sf2[id.indexSf2]->_inst[id.indexElt]->_bagGlobal._mods.count(); break;
+        case elementPrstMod:     count = _sf2[id.indexSf2]->_prst[id.indexElt]->_bagGlobal._mods.count(); break;
+        case elementInstSmplMod: count = _sf2[id.indexSf2]->_inst[id.indexElt]->_bags[id.indexElt2]->_mods.count(); break;
+        case elementPrstInstMod: count = _sf2[id.indexSf2]->_prst[id.indexElt]->_bags[id.indexElt2]->_mods.count(); break;
+        case elementInstGen:     count = _sf2[id.indexSf2]->_inst[id.indexElt]->_bagGlobal._gens.count(); break;
+        case elementPrstGen:     count = _sf2[id.indexSf2]->_prst[id.indexElt]->_bagGlobal._gens.count(); break;
+        case elementInstSmplGen: count = _sf2[id.indexSf2]->_inst[id.indexElt]->_bags[id.indexElt2]->_gens.count(); break;
+        case elementPrstInstGen: count = _sf2[id.indexSf2]->_prst[id.indexElt]->_bags[id.indexElt2]->_gens.count(); break;
+        default:                 count = -1;
         }
-        return i;
-    }break;
-    case elementSmpl:{
-        // compte du nombre de samples
-        SF2::SMPL *tmp = this->sf2->getElt(id.indexSf2)->smpl;
-        while (tmp)
-        {
-            if (!tmp->hidden || withHidden)
-                i++;
-            tmp = tmp->suivant;
-        }
-        return i;
-    }break;
-    case elementInst:{
-        // compte du nombre d'instruments
-        SF2::INST *tmp = this->sf2->getElt(id.indexSf2)->inst;
-        while (tmp)
-        {
-            if (!tmp->hidden || withHidden)
-                i++;
-            tmp = tmp->suivant;
-        }
-        return i;
-    }break;
-    case elementPrst:{
-        // compte du nombre de presets
-        SF2::PRST *tmp = this->sf2->getElt(id.indexSf2)->prst;
-        while (tmp)
-        {
-            if (!tmp->hidden || withHidden)
-                i++;
-            tmp = tmp->suivant;
-        }
-        return i;
-    }break;
-    case elementInstSmpl:{
-        // compte du nombre de samples liés à un instrument
-        SF2::BAG *tmp = this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt)->bag;
-        while (tmp)
-        {
-            if (!tmp->hidden || withHidden)
-                i++;
-            tmp = tmp->suivant;
-        }
-        return i;
-    }break;
-    case elementPrstInst:{
-        // compte du nombre d'instruments liés à un preset
-        SF2::BAG *tmp = this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt)->bag;
-        while (tmp)
-        {
-            if (!tmp->hidden || withHidden)
-                i++;
-            tmp = tmp->suivant;
-        }
-        return i;
-    }break;
-    case elementInstMod:{
-        // compte du nombre de mods d'un instrument
-        SF2::BAG::MOD *tmp = this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt)->bagGlobal.mod;
-        while (tmp)
-        {
-            i++;
-            tmp = tmp->suivant;
-        }
-        return i;
-    }break;
-    case elementPrstMod:{
-        // compte du nombre de mods d'un preset
-        SF2::BAG::MOD *tmp = this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt)->bagGlobal.mod;
-        while (tmp)
-        {
-            i++;
-            tmp = tmp->suivant;
-        }
-        return i;
-    }break;
-    case elementInstSmplMod:{
-        // compte du nombre de mods d'un sample lié à un instrument
-        SF2::BAG::MOD *tmp = this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt)->bag->getElt(id.indexElt2)->mod;
-        while (tmp)
-        {
-            i++;
-            tmp = tmp->suivant;
-        }
-        return i;
-    }break;
-    case elementPrstInstMod:{
-        // compte du nombre de mods d'un instrument lié à un preset
-        SF2::BAG::MOD *tmp = this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt)->bag->getElt(id.indexElt2)->mod;
-        while (tmp)
-        {
-            i++;
-            tmp = tmp->suivant;
-        }
-        return i;
-    }break;
-    case elementInstGen:{
-        // compte du nombre de gens d'un instrument
-        SF2::BAG::GEN *tmp = this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt)->bagGlobal.gen;
-        while (tmp)
-        {
-            i++;
-            tmp = tmp->suivant;
-        }
-        return i;
-    }break;
-    case elementPrstGen:{
-        // compte du nombre de gens d'un preset
-        SF2::BAG::GEN *tmp = this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt)->bagGlobal.gen;
-        while (tmp)
-        {
-            i++;
-            tmp = tmp->suivant;
-        }
-        return i;
-    }break;
-    case elementInstSmplGen:{
-        // compte du nombre de gens d'un sample lié à un instrument
-        SF2::BAG::GEN *tmp = this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt)->bag->getElt(id.indexElt2)->gen;
-        while (tmp)
-        {
-            i++;
-            tmp = tmp->suivant;
-        }
-        return i;
-    }break;
-    case elementPrstInstGen:{
-        // compte du nombre de gens d'un instrument lié à un preset
-        SF2::BAG::GEN *tmp = this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt)->bag->getElt(id.indexElt2)->gen;
-        while (tmp)
-        {
-            i++;
-            tmp = tmp->suivant;
-        }
-        return i;
-    }break;
     }
-    return -1;
+    else
+    {
+        switch ((int)id.typeElement)
+        {
+        case elementSf2:
+            foreach (SF2 * elt, _sf2)
+                if (!elt->_hidden)
+                    ++count;
+            break;
+        case elementSmpl:
+            foreach (SF2::SMPL * elt, _sf2[id.indexSf2]->_smpl)
+                if (!elt->_hidden)
+                    ++count;
+            break;
+        case elementInst:
+            foreach (SF2::INST * elt, _sf2[id.indexSf2]->_inst)
+                if (!elt->_hidden)
+                    ++count;
+            break;
+        case elementPrst:
+            foreach (SF2::PRST * elt, _sf2[id.indexSf2]->_prst)
+                if (!elt->_hidden)
+                    ++count;
+            break;
+        case elementInstSmpl:
+            foreach (SF2::BAG * elt, _sf2[id.indexSf2]->_inst[id.indexElt]->_bags)
+                if (!elt->_hidden)
+                    ++count;
+            break;
+        case elementPrstInst:
+            foreach (SF2::BAG * elt, _sf2[id.indexSf2]->_prst[id.indexElt]->_bags)
+                if (!elt->_hidden)
+                    ++count;
+            break;
+        case elementInstMod:
+            foreach (SF2::BAG::MOD elt, _sf2[id.indexSf2]->_inst[id.indexElt]->_bagGlobal._mods)
+                if (!elt._hidden)
+                    ++count;
+            break;
+        case elementPrstMod:
+            foreach (SF2::BAG::MOD elt, _sf2[id.indexSf2]->_prst[id.indexElt]->_bagGlobal._mods)
+                if (!elt._hidden)
+                    ++count;
+            break;
+        case elementInstSmplMod:
+            foreach (SF2::BAG::MOD elt, _sf2[id.indexSf2]->_inst[id.indexElt]->_bags[id.indexElt2]->_mods)
+                if (!elt._hidden)
+                    ++count;
+            break;
+        case elementPrstInstMod:
+            foreach (SF2::BAG::MOD elt, _sf2[id.indexSf2]->_prst[id.indexElt]->_bags[id.indexElt2]->_mods)
+                if (!elt._hidden)
+                    ++count;
+            break;
+        case elementInstGen:     count = _sf2[id.indexSf2]->_inst[id.indexElt]->_bagGlobal._gens.count(); break;
+        case elementPrstGen:     count = _sf2[id.indexSf2]->_prst[id.indexElt]->_bagGlobal._gens.count(); break;
+        case elementInstSmplGen: count = _sf2[id.indexSf2]->_inst[id.indexElt]->_bags[id.indexElt2]->_gens.count(); break;
+        case elementPrstInstGen: count = _sf2[id.indexSf2]->_prst[id.indexElt]->_bags[id.indexElt2]->_gens.count(); break;
+        }
+    }
+
+    return count;
 }
 
 // Gestionnaire d'actions
 void Pile_sf2::releaseActions(bool withVeryOldActions)
 {
-    // suppression définitive des redo
-    Pile_actions::Action *action;
-    for (int i = this->pileActions->nombreEltRedo()-1; i >= 0; i--)
+    // Definitely remove redo (they are outdated now)
+    for (int i = _undoRedo->countRedo() - 1; i >= 0; i--)
     {
-        // Parcours des actions
-        action = this->pileActions->getEltRedo(i);
-        while (action)
+        // Browse actions within the redo
+        QList<Action *> actions = _undoRedo->getRedoActions(i);
+        foreach (Action * action, actions)
         {
-            if (action->typeAction == Pile_actions::actionCreer)
+            if (action->typeAction == Action::TypeCreation)
             {
-                // Suppression définitive de l'élément anciennement créé puis supprimé
+                // Definitely delete an element that has been created and deleted
                 this->remove(action->id, true, false);
 
-                // Mise à jour tableau
+                // Update table (a hidden element will be definitely removed)
                 emit(updateTable((int)action->id.typeElement, action->id.indexSf2,
                                  action->id.indexElt, action->id.indexElt2));
             }
-            action = action->suivant;
         }
-        // Suppression de la liste d'actions
-        this->pileActions->supprimerRedo(i);
+
+        // Delete the redo
+        _undoRedo->deleteRedo(i);
     }
 
     if (withVeryOldActions)
     {
-        // suppression définitive des undo après un certain nombre
-        for (int i = this->pileActions->nombreEltUndo()-1; i >= UNDO_NUMBER - 1; i--)
+        // Delete very old undo
+        for (int i = _undoRedo->countUndo() - 1; i >= UNDO_NUMBER - 1; i--)
         {
-            // Parcours des actions en sens inverse
-            action = this->pileActions->getEltUndo(i);
-            for (int j = action->nombreElt() - 1; j >= 0; j--)
+            // Reverse browse actions within the undo
+            QList<Action *> actions = _undoRedo->getUndoActions(i);
+            for (int j = actions.count() - 1; j >= 0; j--)
             {
-                Pile_actions::Action * actionTmp = action->getElt(j);
-                if (actionTmp->typeAction == Pile_actions::actionSupprimer)
+                Action * actionTmp = actions[j];
+                if (actionTmp->typeAction == Action::TypeRemoval)
                 {
-                    // Suppression définitive d'un élément supprimé depuis longtemps
+                    // Definitely delete an element that has been deleted a long time ago
                     int message = 1;
                     this->remove(actionTmp->id, true, false, &message);
 
-                    // Mise à jour tableau
+                    // Update table (a hidden element will be definitely removed)
                     emit(updateTable((int)actionTmp->id.typeElement, actionTmp->id.indexSf2,
                                      actionTmp->id.indexElt, actionTmp->id.indexElt2));
                 }
             }
 
-            // Modification de l'édition du sf2 s'il n'a jamais été sauvegardé
-            action = this->pileActions->getEltUndo(i);
-            if (action)
+            // Change the edition number of the sf2 if it has never been saved
+            actions = _undoRedo->getUndoActions(i);
+            if (!actions.isEmpty())
             {
-                if (this->sf2->getElt(action->id.indexSf2)->numEdition == -1)
-                    this->sf2->getElt(action->id.indexSf2)->numEdition = -2;
+                if (_sf2[actions[0]->id.indexSf2]->_numEdition == -1)
+                    _sf2[actions[0]->id.indexSf2]->_numEdition = -2;
             }
-            // Suppression de la liste d'actions
-            this->pileActions->supprimerUndo(i);
+
+            // Delete the undo
+            _undoRedo->deleteUndo(i);
         }
     }
 }
@@ -720,125 +645,122 @@ void Pile_sf2::prepareNewActions(bool removeOldActions)
     releaseActions(removeOldActions);
 
     // Nouvelle action
-    this->pileActions->nouvelleAction();
+    this->_undoRedo->newActionSet();
 }
 
-void Pile_sf2::cleanActions() {this->pileActions->cleanActions();}
+void Pile_sf2::cleanActions() { _undoRedo->cleanActions(); }
 
-bool Pile_sf2::isUndoable() {return this->pileActions->isUndoable();}
+bool Pile_sf2::isUndoable() { return _undoRedo->isUndoable(); }
 
-bool Pile_sf2::isRedoable() {return this->pileActions->isRedoable();}
+bool Pile_sf2::isRedoable() { return _undoRedo->isRedoable(); }
 
 void Pile_sf2::undo()
 {
-    Pile_actions::Action *action = this->pileActions->undo();
-    // Déroulement dans l'ordre
-    while (action)
+    QList<Action *> actions = _undoRedo->undo();
+
+    // Process actions in order
+    foreach (Action * action, actions)
     {
-        switch ((int)action->typeAction)
+        switch (action->typeAction)
         {
-        case Pile_actions::actionCreer:{
-            // Masquage de l'élément
+        case Action::TypeCreation: {
+            // Hide the element
             int message = 1;
             this->remove(action->id, 0, 0, &message);
         }break;
-        case Pile_actions::actionSupprimer:
-            // Affichage de l'élément
+        case Action::TypeRemoval:
+            // Display the element
             this->display(action->id);
             break;
-        case Pile_actions::actionModifier:
-            // Retour à l'ancienne valeur
+        case Action::TypeUpdate:
+        case Action::TypeChangeToDefault:
+            // Back to the old value
             if (action->champ >= 0 && action->champ < 164) this->set(action->id, action->champ, action->vOldValue, 0); // Valeur
             else if (action->champ >= 164 && action->champ < 200) this->set(action->id, action->champ, action->qOldValue, 0); // QString
             else if (action->champ >=200) this->set(action->id, action->champ, action->baOldValue, 0); // char*
             break;
-        case Pile_actions::actionModifierToDefault:
-            // Retour à l'ancienne valeur
-            if (action->champ >= 0 && action->champ < 164) this->set(action->id, action->champ, action->vOldValue, 0); // Valeur
-            else if (action->champ >= 164 && action->champ < 200) this->set(action->id, action->champ, action->qOldValue, 0); // QString
-            else if (action->champ >=200) this->set(action->id, action->champ, action->baOldValue, 0); // char*
-            break;
-        case Pile_actions::actionModifierFromDefault:
-            // Retour à l'ancienne valeur, reset
+        case Action::TypeChangeFromDefault:
+            // Retour to the old value, reset
             this->reset(action->id, action->champ, 0);
             break;
+        default:
+            break;
         }
-        action = action->suivant;
     }
 }
+
 void Pile_sf2::redo()
 {
-    Pile_actions::Action *listeActions = this->pileActions->redo();
-    // Déroulement inverse
-    Pile_actions::Action *action;
-    int j;
-    for (int i = listeActions->nombreElt()-1; i >= 0; i--)
+    QList<Action *> actions = _undoRedo->redo();
+
+    // Process actions in reverse order
+    Action * action;
+    for (int i = actions.count()-1; i >= 0; i--)
     {
-        action = listeActions; j = i;
-        while (j-- && action) action = action->suivant;
-        switch ((int)action->typeAction)
+        action = actions[i];
+        switch (action->typeAction)
         {
-        case Pile_actions::actionCreer:
-            // Affichage de l'élément
+        case Action::TypeCreation:
+            // Display element
             this->display(action->id);
             break;
-        case Pile_actions::actionSupprimer:{
-            // Masquage de l'élément
+        case Action::TypeRemoval:{
+            // Hide elemnet
             int message = 1;
             this->remove(action->id, 0, 0, &message);
         }break;
-        case Pile_actions::actionModifier:
-            // Réapplication de la nouvelle valeur
+        case Action::TypeUpdate:
+        case Action::TypeChangeFromDefault:
+            // Apply again the new value
             if (action->champ >= 0 && action->champ < 164) this->set(action->id, action->champ, action->vNewValue, 0); // Valeur
             else if (action->champ >= 164 && action->champ < 200) this->set(action->id, action->champ, action->qNewValue, 0); // QString
             else if (action->champ >=200) this->set(action->id, action->champ, action->baNewValue, 0); // char*
             break;
-        case Pile_actions::actionModifierToDefault:
-            // Réapplication de la nouvelle valeur, reset
+        case Action::TypeChangeToDefault:
+            // Apply the new value, reset
             this->reset(action->id, action->champ, 0);
             break;
-        case Pile_actions::actionModifierFromDefault:
-            // Réapplication de la nouvelle valeur
-            if (action->champ >= 0 && action->champ < 164) this->set(action->id, action->champ, action->vNewValue, 0); // Valeur
-            else if (action->champ >= 164 && action->champ < 200) this->set(action->id, action->champ, action->qNewValue, 0); // QString
-            else if (action->champ >=200) this->set(action->id, action->champ, action->baNewValue, 0); // char*
+        default:
             break;
         }
     }
 }
+
 // Gestion de la sauvegarde
-void Pile_sf2::storeEdition(int indexSf2) {this->sf2->getElt(indexSf2)->numEdition = this->pileActions->getEdition(indexSf2);}
-bool Pile_sf2::isEdited(int indexSf2) {return this->pileActions->getEdition(indexSf2) != this->sf2->getElt(indexSf2)->numEdition;}
+void Pile_sf2::storeEdition(int indexSf2) { _sf2[indexSf2]->_numEdition = this->_undoRedo->getEdition(indexSf2); }
+bool Pile_sf2::isEdited(int indexSf2) { return this->_undoRedo->getEdition(indexSf2) != _sf2[indexSf2]->_numEdition; }
 
 // Récupération liste de champs et valeurs de bags
 void Pile_sf2::getListeBags(EltID id, QList<Champ> &listeChamps, QList<genAmountType> &listeValeurs)
 {
-    if (!this->isValide(id))
+    if (!this->isValid(id))
         return;
 
-    SF2::BAG::GEN * gen = NULL;
+    QList<SF2::BAG::GEN> * gens = NULL;
     switch (id.typeElement)
     {
     case elementInst:
-        gen = this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt)->bagGlobal.gen;
+        gens = &_sf2[id.indexSf2]->_inst[id.indexElt]->_bagGlobal._gens;
         break;
     case elementInstSmpl:
-        gen = this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt)->bag->getElt(id.indexElt2)->gen;
+        gens = &_sf2[id.indexSf2]->_inst[id.indexElt]->_bags[id.indexElt2]->_gens;
         break;
     case elementPrst:
-        gen = this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt)->bagGlobal.gen;
+        gens = &_sf2[id.indexSf2]->_prst[id.indexElt]->_bagGlobal._gens;
         break;
     case elementPrstInst:
-        gen = this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt)->bag->getElt(id.indexElt2)->gen;
+        gens = &_sf2[id.indexSf2]->_prst[id.indexElt]->_bags[id.indexElt2]->_gens;
         break;
     default:
         break;
     }
-    while (gen)
+    if (gens)
     {
-        listeChamps << gen->sfGenOper;
-        listeValeurs << gen->genAmount;
-        gen = gen->suivant;
+        for (int i = 0; i < gens->count(); i++)
+        {
+            listeChamps << gens->at(i).sfGenOper;
+            listeValeurs << gens->at(i).genAmount;
+        }
     }
 }
 
@@ -854,232 +776,121 @@ int Pile_sf2::add(EltID id, bool storeAction)
     else if (id.typeElement == elementInstSmpl || id.typeElement == elementPrstInst)
         id.indexElt2 = -1;
     else id.indexMod = -1;
-    if (!this->isValide(id))
+    if (!this->isValid(id))
         return -1;
 
     int i = -1;
-    // Type d'élément à ajouter
+
     switch ((int)id.typeElement)
     {
-    case elementSf2:{
-        // Création d'un nouvel SF2
-        storeAction = false; // pas de retour possible
-        SF2 *sf2 = new SF2();
-        sf2->suivant = NULL;
-        sf2->smpl = NULL;
-        sf2->inst = NULL;
-        sf2->prst = NULL;
-        sf2->numEdition = 0;
-        i = 0;
-        if (this->sf2 == NULL)
-            this->sf2 = sf2;
-        else
-        {
-            SF2 *tmp = this->sf2;
-            i = 1;
-            while (tmp->suivant)
-            {
-                tmp = tmp->suivant;
-                i++;
-            }
-            tmp->suivant = sf2;
-        }
-        id.indexSf2 = i;
+    case elementSf2:
+        // Create a new SF2
+        storeAction = false; // No undo possible
+        _sf2 << new SF2();
+        i = id.indexSf2 = _sf2.count() - 1;
 
-        // initialisation bps
+        // Initialisation bps
+    {
         Valeur valTmp;
         valTmp.wValue = 16;
         this->set(id, champ_wBpsInit, valTmp, false);
         this->set(id, champ_wBpsSave, valTmp, false);
+    }
 
         // Emit signal for a new element
         emit(newElement(id));
-    }break;
-    case elementSmpl:{
-        // Création d'un nouveau sample
-        SF2 *sf2 = this->sf2->getElt(id.indexSf2);
-        SF2::SMPL *smpl = new SF2::SMPL;
-        smpl->suivant = NULL;
-        i = 0;
-        if (sf2->smpl == NULL)
-            sf2->smpl = smpl;
-        else
-        {
-            SF2::SMPL *tmp = sf2->smpl;
-            i = 1;
-            while (tmp->suivant)
-            {
-                tmp = tmp->suivant;
-                i++;
-            }
-            tmp->suivant = smpl;
-        }
-        id.indexElt = i;
+        break;
+    case elementSmpl:
+        // Create a new sample
+        _sf2[id.indexSf2]->_smpl << new SF2::SMPL();
+        i = id.indexElt = _sf2[id.indexSf2]->_smpl.count() - 1;
 
         // Emit signal for a new element
         emit(newElement(id));
-    }break;
-    case elementInst:{
-        // Création d'un nouvel instrument
-        SF2 *sf2 = this->sf2->getElt(id.indexSf2);
-        SF2::INST *inst = new SF2::INST;
-        inst->suivant = NULL;
-        i = 0;
-        if (sf2->inst == NULL)
-            sf2->inst = inst;
-        else
-        {
-            SF2::INST *tmp = sf2->inst;
-            i = 1;
-            while (tmp->suivant)
-            {
-                tmp = tmp->suivant;
-                i++;
-            }
-            tmp->suivant = inst;
-        }
-        id.indexElt = i;
+        break;
+    case elementInst:
+        // Create a new instrument
+        _sf2[id.indexSf2]->_inst << new SF2::INST();
+        i = id.indexElt = _sf2[id.indexSf2]->_inst.count() - 1;
 
         // Emit signal for a new element
         emit(newElement(id));
-    }break;
-    case elementPrst:{
-        // Création d'un nouveau preset
-        SF2 *sf2 = this->sf2->getElt(id.indexSf2);
-        SF2::PRST *prst = new SF2::PRST;
-        prst->suivant = NULL;
-        i = 0;
-        if (sf2->prst == NULL)
-            sf2->prst= prst;
-        else
-        {
-            SF2::PRST *tmp = sf2->prst;
-            i = 1;
-            while (tmp->suivant)
-            {
-                tmp = tmp->suivant;
-                i++;
-            }
-            tmp->suivant = prst;
-        }
-        id.indexElt = i;
+        break;
+    case elementPrst:
+        // Create a new preset
+        _sf2[id.indexSf2]->_prst << new SF2::PRST();
+        i = id.indexElt = _sf2[id.indexSf2]->_prst.count() - 1;
 
         // Emit signal for a new element
         emit(newElement(id));
-    }break;
-    case elementInstSmpl:{
-        // Ajout d'un nouveau sample pour un instrument
-        SF2::INST *inst = this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt);
-        SF2::BAG *bag = new SF2::BAG;
-        bag->suivant = NULL;
-        i = 0;
-        if (inst->bag == NULL)
-            inst->bag = bag;
-        else
-        {
-            SF2::BAG *tmp = inst->bag;
-            i = 1;
-            while (tmp->suivant)
-            {
-                tmp = tmp->suivant;
-                i++;
-            }
-            tmp->suivant = bag;
-        }
-        id.indexElt2 = i;
+        break;
+    case elementInstSmpl:
+        // Add a new sample in an instrument
+        _sf2[id.indexSf2]->_inst[id.indexElt]->_bags << new SF2::BAG();
+        i = id.indexElt2 = _sf2[id.indexSf2]->_inst[id.indexElt]->_bags.count() - 1;
 
         // Emit signal for a new element
         emit(newElement(id));
-    }break;
-    case elementPrstInst:{
-        // Ajout d'un nouvel instrument pour un preset
-        SF2::PRST *prst = this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt);
-        SF2::BAG *bag = new SF2::BAG;
-        bag->suivant = NULL;
-        i = 0;
-        if (prst->bag == NULL)
-            prst->bag = bag;
-        else
-        {
-            SF2::BAG *tmp = prst->bag;
-            i = 1;
-            while (tmp->suivant)
-            {
-                tmp = tmp->suivant;
-                i++;
-            }
-            tmp->suivant = bag;
-        }
-        id.indexElt2 = i;
+        break;
+    case elementPrstInst:
+        // Add a new instrument in a preset
+        _sf2[id.indexSf2]->_prst[id.indexElt]->_bags << new SF2::BAG();
+        i = id.indexElt2 = _sf2[id.indexSf2]->_prst[id.indexElt]->_bags.count() - 1;
 
         // Emit signal for a new element
         emit(newElement(id));
-    }break;
+        break;
     case elementInstMod: case elementPrstMod: case elementInstSmplMod: case elementPrstInstMod:{
-        // Ajout d'un nouveau mod
+        // Add a new mod
         SF2::BAG *bag = NULL;
-        SF2::BAG::MOD *mod = new SF2::BAG::MOD;
         switch ((int)id.typeElement)
         {
         case elementInstMod:
-            // pour un instrument
-            bag = &this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt)->bagGlobal;
+            // For an instrument
+            bag = &_sf2[id.indexSf2]->_inst[id.indexElt]->_bagGlobal;
             break;
         case elementPrstMod:
-            // pour un preset
-            bag = &this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt)->bagGlobal;
+            // For a preset
+            bag = &_sf2[id.indexSf2]->_prst[id.indexElt]->_bagGlobal;
             break;
         case elementInstSmplMod:
-            // pour un sample associé à un instrument
-            bag = this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt)->bag->getElt(id.indexElt2);
+            // For a sample linked to an instrument
+            bag = _sf2[id.indexSf2]->_inst[id.indexElt]->_bags[id.indexElt2];
             break;
         case elementPrstInstMod:
-            // pour un instrument associé à un preset
-            bag = this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt)->bag->getElt(id.indexElt2);
+            // For an instrument linked to a preset
+            bag = _sf2[id.indexSf2]->_prst[id.indexElt]->_bags[id.indexElt2];
         }
-        mod->suivant = NULL;
-        i = 0;
-        if (bag->mod == NULL)
-            bag->mod = mod;
-        else
-        {
-            SF2::BAG::MOD *tmp = bag->mod;
-            i = 1;
-            while (tmp->suivant)
-            {
-                tmp = tmp->suivant;
-                i++;
-            }
-            tmp->suivant = mod;
-        }
-        id.indexMod = i;
-        // renseignement de l'index
+        bag->_mods << SF2::BAG::MOD();
+        i = id.indexMod = bag->_mods.count() - 1;
+
+        // Fill the index
         Valeur val;
         val.wValue = id.indexMod;
         this->set(id, champ_indexMod, val, 0);
     }break;
     }
-    // Création et stockage de l'action
+
+    // Create and store an action
     if (storeAction)
     {
-        Pile_actions::Action *action = new Pile_actions::Action;
-        action->typeAction = Pile_actions::actionCreer;
+        Action *action = new Action();
+        action->typeAction = Action::TypeCreation;
         action->id = id;
-        this->pileActions->add(action);
+        this->_undoRedo->add(action);
     }
     return i;
 }
 
 int Pile_sf2::remove(EltID id, bool permanently, bool storeAction, int *message)
 {
-    if (!this->isValide(id, permanently)) // Les ID masqués sont acceptés pour une suppression définitive
+    if (!this->isValid(id, permanently)) // Hidden ID are acceped for a permanent removal
         return 1;
 
-    // Type d'élément à supprimer
     switch ((int)id.typeElement)
     {
     case elementSf2:{
-        permanently = true; // pas de retour après fermeture d'un fichier
+        permanently = true; // No undo possible after a file is closed
         storeAction = false;
         // suppression d'un SF2
         // nombre de presets associés
@@ -1087,7 +898,7 @@ int Pile_sf2::remove(EltID id, bool permanently, bool storeAction, int *message)
         int max = this->count(id2);
         for (int i = max - 1; i >= 0; i--)
         {
-            // propagation aux presets /!\ si temporaire, ne pas propager aux éléments déjà supprimés de manière temporaire
+            // Propagation aux presets /!\ si temporaire, ne pas propager aux éléments déjà supprimés de manière temporaire
             id2.indexElt = i;
             this->remove(id2, true, storeAction, message);
         }
@@ -1109,60 +920,40 @@ int Pile_sf2::remove(EltID id, bool permanently, bool storeAction, int *message)
         }
 
         // Ajustement de la numérotation dans les actions
-        this->pileActions->decrementer(id);
+        this->_undoRedo->decrement(id);
 
         // Suppression du sf2
-        SF2 *tmp = this->sf2->getElt(id.indexSf2)->suivant;
-        this->sf2->getElt(id.indexSf2)->suivant = NULL;
-        delete this->sf2->getElt(id.indexSf2);
-        if (id.indexSf2 == 0)
-            this->sf2 = tmp;
-        else
-            this->sf2->getElt(id.indexSf2-1)->suivant = tmp;
-
+        delete _sf2.takeAt(id.indexSf2);
         emit(removeElement(id));
     }break;
     case elementSmpl:{
-        // suppression d'un sample
-        // vérification qu'aucun instrument n'utilise le sample
-        int resultat = 0;
-        SF2::INST *instTmp = this->sf2->getElt(id.indexSf2)->inst;
-        SF2::BAG *bagTmp;
-        while (instTmp)
+        // Check that no instruments use the sample
+        foreach (SF2::INST * instTmp, _sf2[id.indexSf2]->_inst)
         {
-            if (!instTmp->hidden)
+            if (!instTmp->_hidden)
             {
-                bagTmp = instTmp->bag;
-                while (bagTmp)
+                foreach (SF2::BAG *bagTmp, instTmp->_bags)
                 {
-                    if (!bagTmp->hidden)
+                    if (!bagTmp->_hidden && bagTmp->isSet(champ_sampleID) &&
+                            bagTmp->getGen(champ_sampleID).wValue == id.indexElt)
                     {
-                        if (bagTmp->gen->isSet(champ_sampleID) && bagTmp->gen->getGen(champ_sampleID).wValue == id.indexElt)
-                            resultat = 1;
+                        if (*message % 2 != 0 || !message)
+                            *message *= 2;
+                        return 1;
                     }
-                    bagTmp = bagTmp->suivant;
                 }
-
             }
-            instTmp = instTmp->suivant;
         }
-        if (resultat)
-        {
-            if (*message %2 != 0 || !message)
-                *message *= 2;
-            return 1;
-        }
-        // sample lié ?
+
+        // Linked sample?
         EltID id2(elementSmpl, id.indexSf2, 0, 0, 0);
-        int i = -1;
         Valeur value;
-        SF2::SMPL *smplTmp = this->sf2->getElt(id.indexSf2)->smpl;
-        while (smplTmp)
+        for (int i = 0; i < _sf2[id.indexSf2]->_smpl.count(); i++)
         {
-            i++;
-            if (!smplTmp->hidden)
+            SF2::SMPL * smplTmp = _sf2[id.indexSf2]->_smpl[i];
+            if (!smplTmp->_hidden)
             {
-                if (smplTmp->wSampleLink == id.indexElt)
+                if (smplTmp->_wSampleLink == id.indexElt)
                 {
                     id2.indexElt = i;
                     value.wValue = 0;
@@ -1171,68 +962,50 @@ int Pile_sf2::remove(EltID id, bool permanently, bool storeAction, int *message)
                     this->set(id2, champ_sfSampleType, value, storeAction);
                 }
             }
-            smplTmp = smplTmp->suivant;
         }
+
         if (permanently)
         {
             // Ajustement de la numérotation dans les actions
-            this->pileActions->decrementer(id);
+            this->_undoRedo->decrement(id);
 
             // Décrémentation des samples liés aux instruments
-            for (int i = 0; i < this->sf2->getElt(id.indexSf2)->inst->nombreElt(); i++)
-                this->sf2->getElt(id.indexSf2)->inst->getElt(i)->bag->decrementerSMPL(id.indexElt);
+            for (int i = 0; i < _sf2[id.indexSf2]->_inst.count(); i++)
+                _sf2[id.indexSf2]->_inst[i]->decrementerSMPL(id.indexElt);
 
             // Décrémentation des samples liés par stéréo
-            this->sf2->getElt(id.indexSf2)->smpl->decrementerLinkSMPL(id.indexElt);
+            _sf2[id.indexSf2]->decrementerLinkSMPL(id.indexElt);
 
             // Suppression du sample
-            SF2::SMPL *tmp = this->sf2->getElt(id.indexSf2)->smpl->getElt(id.indexElt)->suivant;
-            this->sf2->getElt(id.indexSf2)->smpl->getElt(id.indexElt)->suivant = NULL;
-            delete this->sf2->getElt(id.indexSf2)->smpl->getElt(id.indexElt);
-            if (id.indexElt == 0)
-                this->sf2->getElt(id.indexSf2)->smpl = tmp;
-            else
-                this->sf2->getElt(id.indexSf2)->smpl->getElt(id.indexElt-1)->suivant = tmp;
-
+            delete _sf2[id.indexSf2]->_smpl.takeAt(id.indexElt);
             emit(removeElement(id));
         }
         else
         {
             // Masquage du sample
             emit(hideElement(id, true));
-            this->sf2->getElt(id.indexSf2)->smpl->getElt(id.indexElt)->hidden = 1;
+            _sf2[id.indexSf2]->_smpl[id.indexElt]->_hidden = 1;
         }
     }break;
     case elementInst:{
-        // suppression d'un instrument
-        // vérification qu'aucun preset n'utilise l'instrument
-        int resultat = 0;
-        SF2::PRST *prstTmp = this->sf2->getElt(id.indexSf2)->prst;
-        SF2::BAG *bagTmp;
-        while (prstTmp)
+        // Check that no presets use the instrument
+        foreach (SF2::PRST * prstTmp, _sf2[id.indexSf2]->_prst)
         {
-            if (!prstTmp->hidden)
+            if (!prstTmp->_hidden)
             {
-                bagTmp = prstTmp->bag;
-                while (bagTmp)
+                foreach (SF2::BAG *bagTmp, prstTmp->_bags)
                 {
-                    if (!bagTmp->hidden)
+                    if (!bagTmp->_hidden && bagTmp->isSet(champ_instrument) &&
+                            bagTmp->getGen(champ_instrument).wValue == id.indexElt)
                     {
-                        if (bagTmp->gen->isSet(champ_instrument) && bagTmp->gen->getGen(champ_instrument).wValue == id.indexElt)
-                            resultat = 1;
+                        if (*message % 3 != 0 || !message)
+                            *message *= 3;
+                        return 1;
                     }
-                    bagTmp = bagTmp->suivant;
                 }
-
             }
-            prstTmp = prstTmp->suivant;
         }
-        if (resultat)
-        {
-            if (*message %3 != 0 || !message)
-                (*message) = *message * 3;
-            return 1;
-        }
+
         // Propagation aux samples liés
         EltID id2(elementInstSmpl, id.indexSf2, id.indexElt, 0, 0);
         int nbInstSmpl = this->count(id2);
@@ -1252,36 +1025,27 @@ int Pile_sf2::remove(EltID id, bool permanently, bool storeAction, int *message)
         if (permanently)
         {
             // Ajustement de la numérotation dans les actions
-            this->pileActions->decrementer(id);
+            this->_undoRedo->decrement(id);
 
             // Décrémentation des instruments liés aux presets
-            for (int i = 0; i < this->sf2->getElt(id.indexSf2)->prst->nombreElt(); i++)
-                this->sf2->getElt(id.indexSf2)->prst->getElt(i)->bag->decrementerINST(id.indexElt);
+            for (int i = 0; i < _sf2[id.indexSf2]->_prst.count(); i++)
+                _sf2[id.indexSf2]->_prst[i]->decrementerINST(id.indexElt);
 
             // Suppression des gens
-            this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt)->bagGlobal.gen =
-                    this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt)->bagGlobal.gen->supprGenAndStore(id, storeAction, this);
+            _sf2[id.indexSf2]->_inst[id.indexElt]->_bagGlobal.supprGenAndStore(id, storeAction, this);
 
             // Suppression de l'instrument
-            SF2::INST *tmp = this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt)->suivant;
-            this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt)->suivant = NULL;
-            delete this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt);
-            if (id.indexElt == 0)
-                this->sf2->getElt(id.indexSf2)->inst = tmp;
-            else
-                this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt-1)->suivant = tmp;
-
+            delete _sf2[id.indexSf2]->_inst.takeAt(id.indexElt);
             emit(removeElement(id));
         }
         else
         {
             // Suppression des gens
-            this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt)->bagGlobal.gen =
-                    this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt)->bagGlobal.gen->supprGenAndStore(id, storeAction, this);
+            _sf2[id.indexSf2]->_inst[id.indexElt]->_bagGlobal.supprGenAndStore(id, storeAction, this);
 
             // Masquage de l'instrument
             emit(hideElement(id, true));
-            this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt)->hidden = 1;
+            _sf2[id.indexSf2]->_inst[id.indexElt]->_hidden = 1;
         }
     }break;
     case elementPrst:{
@@ -1305,32 +1069,23 @@ int Pile_sf2::remove(EltID id, bool permanently, bool storeAction, int *message)
         if (permanently)
         {
             // Ajustement de la numérotation dans les actions
-            this->pileActions->decrementer(id);
+            this->_undoRedo->decrement(id);
 
             // Suppression des gens
-            this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt)->bagGlobal.gen =
-                    this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt)->bagGlobal.gen->supprGenAndStore(id, storeAction, this);
+            _sf2[id.indexSf2]->_prst[id.indexElt]->_bagGlobal.supprGenAndStore(id, storeAction, this);
 
             // Suppression du preset
-            SF2::PRST *tmp = this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt)->suivant;
-            this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt)->suivant = NULL;
-            delete this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt);
-            if (id.indexElt == 0)
-                this->sf2->getElt(id.indexSf2)->prst = tmp;
-            else
-                this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt-1)->suivant = tmp;
-
+            delete _sf2[id.indexSf2]->_prst.takeAt(id.indexElt);
             emit(removeElement(id));
         }
         else
         {
             // Suppression des gens
-            this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt)->bagGlobal.gen =
-                    this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt)->bagGlobal.gen->supprGenAndStore(id, storeAction, this);
+            _sf2[id.indexSf2]->_prst[id.indexElt]->_bagGlobal.supprGenAndStore(id, storeAction, this);
 
             // Masquage du preset
             emit(hideElement(id, true));
-            this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt)->hidden = 1;
+            _sf2[id.indexSf2]->_prst[id.indexElt]->_hidden = 1;
         }
     }break;
     case elementInstSmpl:{
@@ -1346,32 +1101,23 @@ int Pile_sf2::remove(EltID id, bool permanently, bool storeAction, int *message)
         if (permanently)
         {
             // Ajustement de la numérotation dans les actions
-            this->pileActions->decrementer(id);
+            this->_undoRedo->decrement(id);
 
             // Suppression des gens
-            this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt)->bag->getElt(id.indexElt2)->gen =
-                    this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt)->bag->getElt(id.indexElt2)->gen->supprGenAndStore(id, storeAction, this);
+            _sf2[id.indexSf2]->_inst[id.indexElt]->_bags[id.indexElt2]->supprGenAndStore(id, storeAction, this);
 
             // Suppression du sample lié à l'instrument
-            SF2::BAG *tmp = this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt)->bag->getElt(id.indexElt2)->suivant;
-            this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt)->bag->getElt(id.indexElt2)->suivant = NULL;
-            delete this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt)->bag->getElt(id.indexElt2);
-            if (id.indexElt2 == 0)
-                this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt)->bag = tmp;
-            else
-                this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt)->bag->getElt(id.indexElt2-1)->suivant = tmp;
-
+            delete _sf2[id.indexSf2]->_inst[id.indexElt]->_bags.takeAt(id.indexElt2);
             emit(removeElement(id));
         }
         else
         {
             // Suppression des gens
-            this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt)->bag->getElt(id.indexElt2)->gen =
-                    this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt)->bag->getElt(id.indexElt2)->gen->supprGenAndStore(id, storeAction, this);
+            _sf2[id.indexSf2]->_inst[id.indexElt]->_bags[id.indexElt2]->supprGenAndStore(id, storeAction, this);
 
             // Masquage du sample lié à l'instrument
             emit(hideElement(id, true));
-            this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt)->bag->getElt(id.indexElt2)->hidden = 1;
+            _sf2[id.indexSf2]->_inst[id.indexElt]->_bags[id.indexElt2]->_hidden = 1;
         }
     }break;
     case elementPrstInst:{
@@ -1387,32 +1133,23 @@ int Pile_sf2::remove(EltID id, bool permanently, bool storeAction, int *message)
         if (permanently)
         {
             // Ajustement de la numérotation dans les actions
-            this->pileActions->decrementer(id);
+            this->_undoRedo->decrement(id);
 
             // Suppression des gens
-            this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt)->bag->getElt(id.indexElt2)->gen =
-                    this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt)->bag->getElt(id.indexElt2)->gen->supprGenAndStore(id, storeAction, this);
+            _sf2[id.indexSf2]->_prst[id.indexElt]->_bags[id.indexElt2]->supprGenAndStore(id, storeAction, this);
 
             // Suppression de l'instrument lié au preset
-            SF2::BAG *tmp = this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt)->bag->getElt(id.indexElt2)->suivant;
-            this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt)->bag->getElt(id.indexElt2)->suivant = NULL;
-            delete this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt)->bag->getElt(id.indexElt2);
-            if (id.indexElt2 == 0)
-                this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt)->bag = tmp;
-            else
-                this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt)->bag->getElt(id.indexElt2-1)->suivant = tmp;
-
+            delete _sf2[id.indexSf2]->_prst[id.indexElt]->_bags.takeAt(id.indexElt2);
             emit(removeElement(id));
         }
         else
         {
             // Suppression des gens
-            this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt)->bag->getElt(id.indexElt2)->gen =
-                    this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt)->bag->getElt(id.indexElt2)->gen->supprGenAndStore(id, storeAction, this);
+            _sf2[id.indexSf2]->_prst[id.indexElt]->_bags[id.indexElt2]->supprGenAndStore(id, storeAction, this);
 
             // Masquage de l'instrument lié au preset
             emit(hideElement(id, true));
-            this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt)->bag->getElt(id.indexElt2)->hidden = 1;
+            _sf2[id.indexSf2]->_prst[id.indexElt]->_bags[id.indexElt2]->_hidden = 1;
         }
     }break;
     case elementInstMod: case elementPrstMod: case elementInstSmplMod: case elementPrstInstMod:{
@@ -1422,59 +1159,54 @@ int Pile_sf2::remove(EltID id, bool permanently, bool storeAction, int *message)
         {
         case elementInstMod:
             // d'un instrument
-            bag = &this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt)->bagGlobal;
+            bag = &_sf2[id.indexSf2]->_inst[id.indexElt]->_bagGlobal;
             break;
         case elementPrstMod:
             // d'un preset
-            bag = &this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt)->bagGlobal;
+            bag = &_sf2[id.indexSf2]->_prst[id.indexElt]->_bagGlobal;
             break;
         case elementInstSmplMod:
             // d'un sample lié à un instrument
-            bag = this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt)->bag->getElt(id.indexElt2);
+            bag = _sf2[id.indexSf2]->_inst[id.indexElt]->_bags[id.indexElt2];
             break;
         case elementPrstInstMod:
             // d'un instrument lié à un prst
-            bag = this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt)->bag->getElt(id.indexElt2);
+            bag = _sf2[id.indexSf2]->_prst[id.indexElt]->_bags[id.indexElt2];
         }
         if (permanently)
         {
             // Ajustement de la numérotation dans les actions
-            this->pileActions->decrementer(id);
+            this->_undoRedo->decrement(id);
 
             // ajustement de la numérotation
-            bag->mod->enleverMod(id.indexMod);
+            bag->enleverMod(id.indexMod);
 
             // Le mod pointe sur un autre ?
-            int iVal = bag->mod->getElt(id.indexMod)->sfModDestOper;
+            int iVal = bag->_mods[id.indexMod]._sfModDestOper;
             if (iVal >= 32768 && iVal - 32768 < this->count(id))
             {
-                if (bag->mod->getElt(iVal-32768)->sfModSrcOper.CC == 0 &&
-                        bag->mod->getElt(iVal-32768)->sfModSrcOper.Index == 127)
-                    bag->mod->getElt(iVal-32768)->sfModSrcOper.Index = 0;
+                if (bag->_mods[iVal-32768]._sfModSrcOper.CC == 0 &&
+                        bag->_mods[iVal-32768]._sfModSrcOper.Index == 127)
+                    bag->_mods[iVal-32768]._sfModSrcOper.Index = 0;
             }
             // suppression du mod
-            SF2::BAG::MOD * tmp = bag->mod->getElt(id.indexMod)->suivant;
-            bag->mod->getElt(id.indexMod)->suivant = NULL;
-            delete bag->mod->getElt(id.indexMod);
-            if (id.indexMod == 0)
-                bag->mod = tmp;
-            else
-                bag->mod->getElt(id.indexMod - 1)->suivant = tmp;
+            bag->_mods.removeAt(id.indexMod);
         }
         else
         {
             // masquage du mod
-            bag->mod->getElt(id.indexMod)->hidden = true;
+            bag->_mods[id.indexMod]._hidden = true;
         }
     }break;
     }
-    // Création et stockage de l'action
+
+    // Create and store the action
     if (storeAction)
     {
-        Pile_actions::Action *action = new Pile_actions::Action;
-        action->typeAction = Pile_actions::actionSupprimer;
+        Action *action = new Action();
+        action->typeAction = Action::TypeRemoval;
         action->id = id;
-        this->pileActions->add(action);
+        this->_undoRedo->add(action);
     }
     return 0;
 }
@@ -1484,7 +1216,7 @@ int Pile_sf2::set(EltID id, Champ champ, Valeur value, bool storeAction, bool so
     if (champ == champ_hidden)
         return 1;
 
-    if (!this->isValide(id) && champ != champ_ram)
+    if (!this->isValid(id) && champ != champ_ram)
         return 1;
 
     Valeur oldValue;
@@ -1496,123 +1228,123 @@ int Pile_sf2::set(EltID id, Champ champ, Valeur value, bool storeAction, bool so
     {
     case elementSf2:{
         // Modification d'un SF2
-        SF2 *tmp = this->sf2->getElt(id.indexSf2);
+        SF2 *tmp = _sf2[id.indexSf2];
         switch ((int)champ)
         {
         case champ_IFIL:
-            oldValue.sfVerValue = tmp->IFIL;
-            tmp->IFIL = value.sfVerValue; break;
+            oldValue.sfVerValue = tmp->_IFIL;
+            tmp->_IFIL = value.sfVerValue; break;
         case champ_IVER:
-            oldValue.sfVerValue = tmp->IVER;
-            tmp->IVER = value.sfVerValue; break;
+            oldValue.sfVerValue = tmp->_IVER;
+            tmp->_IVER = value.sfVerValue; break;
         case champ_wBpsInit:
-            oldValue.wValue = tmp->wBpsInit;
-            tmp->wBpsInit = value.wValue; break;
+            oldValue.wValue = tmp->_wBpsInit;
+            tmp->_wBpsInit = value.wValue; break;
         case champ_wBpsSave:
-            oldValue.wValue = tmp->wBpsSave;
-            tmp->wBpsSave = value.wValue; break;
+            oldValue.wValue = tmp->_wBpsSave;
+            tmp->_wBpsSave = value.wValue; break;
         }
     }break;
     case elementSmpl:{
         // Modification d'un sample
-        SF2::SMPL *tmp = this->sf2->getElt(id.indexSf2)->smpl->getElt(id.indexElt);
+        SF2::SMPL *tmp = _sf2[id.indexSf2]->_smpl[id.indexElt];
         switch ((int)champ)
         {
         case champ_dwStart16:
-            oldValue.dwValue = tmp->son.get(champ_dwStart16);
-            tmp->son.set(champ_dwStart16, value); break;
+            oldValue.dwValue = tmp->_sound.get(champ_dwStart16);
+            tmp->_sound.set(champ_dwStart16, value); break;
         case champ_dwStart24:
-            oldValue.dwValue = tmp->son.get(champ_dwStart24);
-            tmp->son.set(champ_dwStart24, value); break;
+            oldValue.dwValue = tmp->_sound.get(champ_dwStart24);
+            tmp->_sound.set(champ_dwStart24, value); break;
         case champ_dwLength:
-            oldValue.dwValue = tmp->son.get(champ_dwLength);
-            tmp->son.set(champ_dwLength, value); break;
+            oldValue.dwValue = tmp->_sound.get(champ_dwLength);
+            tmp->_sound.set(champ_dwLength, value); break;
         case champ_dwStartLoop:
-            oldValue.dwValue = tmp->son.get(champ_dwStartLoop);
-            tmp->son.set(champ_dwStartLoop, value); break;
+            oldValue.dwValue = tmp->_sound.get(champ_dwStartLoop);
+            tmp->_sound.set(champ_dwStartLoop, value); break;
         case champ_dwEndLoop:
-            oldValue.dwValue = tmp->son.get(champ_dwEndLoop);
-            tmp->son.set(champ_dwEndLoop, value); break;
+            oldValue.dwValue = tmp->_sound.get(champ_dwEndLoop);
+            tmp->_sound.set(champ_dwEndLoop, value); break;
         case champ_dwSampleRate:
-            oldValue.dwValue = tmp->son.get(champ_dwSampleRate);
-            tmp->son.set(champ_dwSampleRate, value); break;
+            oldValue.dwValue = tmp->_sound.get(champ_dwSampleRate);
+            tmp->_sound.set(champ_dwSampleRate, value); break;
         case champ_byOriginalPitch:
-            oldValue.bValue = tmp->son.get(champ_byOriginalPitch);
-            tmp->son.set(champ_byOriginalPitch, value); break;
+            oldValue.bValue = tmp->_sound.get(champ_byOriginalPitch);
+            tmp->_sound.set(champ_byOriginalPitch, value); break;
         case champ_chPitchCorrection:
-            oldValue.cValue = tmp->son.get(champ_chPitchCorrection);
-            tmp->son.set(champ_chPitchCorrection, value); break;
+            oldValue.cValue = tmp->_sound.get(champ_chPitchCorrection);
+            tmp->_sound.set(champ_chPitchCorrection, value); break;
         case champ_wSampleLink:
-            oldValue.wValue = tmp->wSampleLink;
-            tmp->wSampleLink = value.wValue; break;
+            oldValue.wValue = tmp->_wSampleLink;
+            tmp->_wSampleLink = value.wValue; break;
         case champ_sfSampleType:
-            oldValue.sfLinkValue = tmp->sfSampleType;
-            tmp->sfSampleType = value.sfLinkValue; break;
+            oldValue.sfLinkValue = tmp->_sfSampleType;
+            tmp->_sfSampleType = value.sfLinkValue; break;
         case champ_bpsFile:
-            oldValue.wValue = tmp->son.get(champ_bpsFile);
-            tmp->son.set(champ_bpsFile, value); break;
+            oldValue.wValue = tmp->_sound.get(champ_bpsFile);
+            tmp->_sound.set(champ_bpsFile, value); break;
         case champ_wChannel:
-            oldValue.wValue = tmp->son.get(champ_wChannel);
-            tmp->son.set(champ_wChannel, value); break;
+            oldValue.wValue = tmp->_sound.get(champ_wChannel);
+            tmp->_sound.set(champ_wChannel, value); break;
         case champ_wChannels:
-            oldValue.wValue = tmp->son.get(champ_wChannels);
-            tmp->son.set(champ_wChannels, value); break;
+            oldValue.wValue = tmp->_sound.get(champ_wChannels);
+            tmp->_sound.set(champ_wChannels, value); break;
         case champ_ram:
             // pas d'enregistrement de l'action
             storeAction = false;
-            tmp->son.setRam(value.wValue);
+            tmp->_sound.setRam(value.wValue);
             break;
         }
     }break;
     case elementInst:{
-        // Modification d'un instrument
-        SF2::INST *tmp = this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt);
-        if (!tmp->bagGlobal.gen->isSet(champ)) defaultValue = 1;
-        oldValue = tmp->bagGlobal.gen->getGen(champ);
-        tmp->bagGlobal.gen = tmp->bagGlobal.gen->setGen(champ, value);
+        // Update an instrument
+        SF2::INST *tmp = _sf2[id.indexSf2]->_inst[id.indexElt];
+        if (!tmp->_bagGlobal.isSet(champ)) defaultValue = 1;
+        oldValue = tmp->_bagGlobal.getGen(champ);
+        tmp->_bagGlobal.setGen(champ, value);
     }break;
     case elementPrst:{
-        // Modification d'un preset
-        SF2::PRST *tmp = this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt);
+        // Update a preset
+        SF2::PRST *tmp = _sf2[id.indexSf2]->_prst[id.indexElt];
         switch ((int)champ)
         {
         case champ_wPreset:
-            oldValue.wValue = tmp->wPreset;
-            tmp->wPreset = value.wValue; break;
+            oldValue.wValue = tmp->_wPreset;
+            tmp->_wPreset = value.wValue; break;
         case champ_wBank:
-            oldValue.wValue = tmp->wBank;
-            tmp->wBank = value.wValue; break;
+            oldValue.wValue = tmp->_wBank;
+            tmp->_wBank = value.wValue; break;
         case champ_dwLibrary:
-            oldValue.dwValue = tmp->dwLibrary;
-            tmp->dwLibrary = value.dwValue; break;
+            oldValue.dwValue = tmp->_dwLibrary;
+            tmp->_dwLibrary = value.dwValue; break;
         case champ_dwGenre:
-            oldValue.dwValue = tmp->dwGenre;
-            tmp->dwGenre = value.dwValue; break;
+            oldValue.dwValue = tmp->_dwGenre;
+            tmp->_dwGenre = value.dwValue; break;
         case champ_dwMorphology:
-            oldValue.dwValue = tmp->dwMorphology;
-            tmp->dwMorphology = value.dwValue; break;
+            oldValue.dwValue = tmp->_dwMorphology;
+            tmp->_dwMorphology = value.dwValue; break;
         default:
-            if (!tmp->bagGlobal.gen->isSet(champ)) defaultValue = 1;
-            oldValue = tmp->bagGlobal.gen->getGen(champ);
-            tmp->bagGlobal.gen = tmp->bagGlobal.gen->setGen(champ, value);
+            if (!tmp->_bagGlobal.isSet(champ)) defaultValue = 1;
+            oldValue = tmp->_bagGlobal.getGen(champ);
+            tmp->_bagGlobal.setGen(champ, value);
         }
         if (champ == champ_wPreset || champ == champ_wBank)
         {
             // Notification that the element display changed
             QString text = QString("%1:%2 %3")
-                    .arg(tmp->wBank, 3, 10, QChar('0'))
-                    .arg(tmp->wPreset, 3, 10, QChar('0'))
-                    .arg(tmp->Name);
+                    .arg(tmp->_wBank, 3, 10, QChar('0'))
+                    .arg(tmp->_wPreset, 3, 10, QChar('0'))
+                    .arg(tmp->_name);
             emit(changeElementName(id, text));
             emit(changeElementOrder(id, text, sort));
         }
     }break;
     case elementInstSmpl:{
         // Modification of a sample linked to an instrument
-        SF2::BAG *tmp = this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt)->bag->getElt(id.indexElt2);
-        if (!tmp->gen->isSet(champ)) defaultValue = 1;
-        oldValue = tmp->gen->getGen(champ);
-        tmp->gen = tmp->gen->setGen(champ, value);
+        SF2::BAG *tmp = _sf2[id.indexSf2]->_inst[id.indexElt]->_bags[id.indexElt2];
+        if (!tmp->isSet(champ)) defaultValue = 1;
+        oldValue = tmp->getGen(champ);
+        tmp->setGen(champ, value);
 
         // Notifications
         if (champ == champ_sampleID || champ == champ_keyRange || champ == champ_velRange)
@@ -1628,10 +1360,10 @@ int Pile_sf2::set(EltID id, Champ champ, Valeur value, bool storeAction, bool so
     }break;
     case elementPrstInst:{
         // Modification of an instrument linked to a preset
-        SF2::BAG *tmp = this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt)->bag->getElt(id.indexElt2);
-        if (!tmp->gen->isSet(champ)) defaultValue = 1;
-        oldValue = tmp->gen->getGen(champ);
-        tmp->gen = tmp->gen->setGen(champ, value);
+        SF2::BAG *tmp = _sf2[id.indexSf2]->_prst[id.indexElt]->_bags[id.indexElt2];
+        if (!tmp->isSet(champ)) defaultValue = 1;
+        oldValue = tmp->getGen(champ);
+        tmp->setGen(champ, value);
 
         // Notifications
         if (champ == champ_instrument || champ == champ_keyRange || champ == champ_velRange)
@@ -1651,54 +1383,56 @@ int Pile_sf2::set(EltID id, Champ champ, Valeur value, bool storeAction, bool so
         switch ((int)id.typeElement)
         {
         case elementInstMod:
-            tmp = this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt)->bagGlobal.mod->getElt(id.indexMod); break;
+            tmp = &_sf2[id.indexSf2]->_inst[id.indexElt]->_bagGlobal._mods[id.indexMod]; break;
         case elementPrstMod:
-            tmp = this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt)->bagGlobal.mod->getElt(id.indexMod); break;
+            tmp = &_sf2[id.indexSf2]->_prst[id.indexElt]->_bagGlobal._mods[id.indexMod]; break;
         case elementInstSmplMod:
-            tmp = this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt)->bag->getElt(id.indexElt2)->mod->getElt(id.indexMod); break;
+            tmp = &_sf2[id.indexSf2]->_inst[id.indexElt]->_bags[id.indexElt2]->_mods[id.indexMod]; break;
         case elementPrstInstMod:
-            tmp = this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt)->bag->getElt(id.indexElt2)->mod->getElt(id.indexMod); break;
+            tmp = &_sf2[id.indexSf2]->_prst[id.indexElt]->_bags[id.indexElt2]->_mods[id.indexMod]; break;
         }
         switch ((int)champ)
         {
         case champ_sfModSrcOper:
-            oldValue.sfModValue = tmp->sfModSrcOper;
-            tmp->sfModSrcOper = value.sfModValue; break;
+            oldValue.sfModValue = tmp->_sfModSrcOper;
+            tmp->_sfModSrcOper = value.sfModValue; break;
         case champ_sfModDestOper:
-            oldValue.sfGenValue = tmp->sfModDestOper;
-            tmp->sfModDestOper = value.sfGenValue; break;
+            oldValue.sfGenValue = tmp->_sfModDestOper;
+            tmp->_sfModDestOper = value.sfGenValue; break;
         case champ_modAmount:
-            oldValue.shValue = tmp->modAmount;
-            tmp->modAmount = value.shValue; break;
+            oldValue.shValue = tmp->_modAmount;
+            tmp->_modAmount = value.shValue; break;
         case champ_sfModAmtSrcOper:
-            oldValue.sfModValue = tmp->sfModAmtSrcOper;
-            tmp->sfModAmtSrcOper = value.sfModValue; break;
+            oldValue.sfModValue = tmp->_sfModAmtSrcOper;
+            tmp->_sfModAmtSrcOper = value.sfModValue; break;
         case champ_sfModTransOper:
-            oldValue.sfTransValue = tmp->sfModTransOper;
-            tmp->sfModTransOper = value.sfTransValue; break;
+            oldValue.sfTransValue = tmp->_sfModTransOper;
+            tmp->_sfModTransOper = value.sfTransValue; break;
         case champ_indexMod:
-            oldValue.wValue = tmp->index;
-            tmp->index = value.wValue; break;
+            oldValue.wValue = tmp->_index;
+            tmp->_index = value.wValue; break;
         }
     }break;
     }
-    // Création et stockage de l'action
+
+    // Create and store the action
     if (storeAction)
     {
-        Pile_actions::Action *action = new Pile_actions::Action;
-        if (defaultValue) action->typeAction = Pile_actions::actionModifierFromDefault;
-        else action->typeAction = Pile_actions::actionModifier;
+        Action *action = new Action();
+        if (defaultValue) action->typeAction = Action::TypeChangeFromDefault;
+        else action->typeAction = Action::TypeUpdate;
         action->id = id;
         action->champ = champ;
         action->vOldValue = oldValue;
         action->vNewValue = value;
-        this->pileActions->add(action);
+        this->_undoRedo->add(action);
     }
     return 0;
 }
+
 int Pile_sf2::set(EltID id, Champ champ, QString qStr, bool storeAction, bool sort)
 {
-    if (!this->isValide(id))
+    if (!this->isValid(id))
         return 1;
 
     QString qOldStr = "";
@@ -1707,57 +1441,57 @@ int Pile_sf2::set(EltID id, Champ champ, QString qStr, bool storeAction, bool so
     {
     case elementSf2:{
         // Editing of a sf2
-        SF2 *tmp = this->sf2->getElt(id.indexSf2);
+        SF2 *tmp = _sf2[id.indexSf2];
         switch ((int)champ)
         {
         case champ_name:
-            qOldStr = tmp->INAM;
+            qOldStr = tmp->_INAM;
             qStr = qStr.left(256);
-            tmp->INAM = qStr;
+            tmp->_INAM = qStr;
 
             // Notify the name update
             emit(changeElementName(id, qStr));
             emit(changeElementOrder(id, qStr, true));
             break;
         case champ_ISNG:
-            qOldStr = tmp->ISNG;
-            tmp->ISNG = qStr.left(255); break;
+            qOldStr = tmp->_ISNG;
+            tmp->_ISNG = qStr.left(255); break;
         case champ_IROM:
-            qOldStr = tmp->IROM;
-            tmp->IROM = qStr.left(255); break;
+            qOldStr = tmp->_IROM;
+            tmp->_IROM = qStr.left(255); break;
         case champ_ICRD:
-            qOldStr = tmp->ICRD;
-            tmp->ICRD = qStr.left(255); break;
+            qOldStr = tmp->_ICRD;
+            tmp->_ICRD = qStr.left(255); break;
         case champ_IENG:
-            qOldStr = tmp->IENG;
-            tmp->IENG = qStr.left(255); break;
+            qOldStr = tmp->_IENG;
+            tmp->_IENG = qStr.left(255); break;
         case champ_IPRD:
-            qOldStr = tmp->IPRD;
-            tmp->IPRD = qStr.left(255); break;
+            qOldStr = tmp->_IPRD;
+            tmp->_IPRD = qStr.left(255); break;
         case champ_ICOP:
-            qOldStr = tmp->ICOP;
-            tmp->ICOP = qStr.left(255); break;
+            qOldStr = tmp->_ICOP;
+            tmp->_ICOP = qStr.left(255); break;
         case champ_ICMT:
-            qOldStr = tmp->ICMT;
-            tmp->ICMT = qStr.left(65535); break;
+            qOldStr = tmp->_ICMT;
+            tmp->_ICMT = qStr.left(65535); break;
         case champ_ISFT:
-            qOldStr = tmp->ISFT;
-            tmp->ISFT = qStr.left(255); break;
+            qOldStr = tmp->_ISFT;
+            tmp->_ISFT = qStr.left(255); break;
         case champ_filename:
-            qOldStr = tmp->fileName;
-            tmp->fileName = qStr; break;
+            qOldStr = tmp->_fileName;
+            tmp->_fileName = qStr; break;
         }
     }break;
     case elementSmpl:{
         // Editing of a sample
         qStr = qStr.trimmed();
-        SF2::SMPL *tmp = this->sf2->getElt(id.indexSf2)->smpl->getElt(id.indexElt);
+        SF2::SMPL *tmp = _sf2[id.indexSf2]->_smpl[id.indexElt];
         switch ((int)champ)
         {
         case champ_name:{
-            qOldStr = tmp->Name;
+            qOldStr = tmp->_name;
             qStr = qStr.left(20);
-            tmp->Name = qStr;
+            tmp->_name = qStr;
 
             // Notify the name update for the sample
             emit(changeElementName(id, qStr));
@@ -1798,22 +1532,22 @@ int Pile_sf2::set(EltID id, Champ champ, QString qStr, bool storeAction, bool so
             }
         };break;
         case champ_filename:
-            qOldStr = tmp->son.getFileName();
-            tmp->son.setFileName(qStr);
+            qOldStr = tmp->_sound.getFileName();
+            tmp->_sound.setFileName(qStr);
             break;
         }
     }break;
     case elementInst:{
         qStr = qStr.trimmed();
         // Modification d'un instrument
-        SF2::INST *tmp = this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt);
+        SF2::INST *tmp = _sf2[id.indexSf2]->_inst[id.indexElt];
         switch ((int)champ)
         {
         case champ_name:
             // Modification du nom d'un instrument
-            qOldStr = tmp->Name;
+            qOldStr = tmp->_name;
             qStr = qStr.left(20);
-            tmp->Name = qStr;
+            tmp->_name = qStr;
 
             // Notify the name update for the instrument
             emit(changeElementName(id, qStr));
@@ -1858,20 +1592,20 @@ int Pile_sf2::set(EltID id, Champ champ, QString qStr, bool storeAction, bool so
     case elementPrst:{
         qStr = qStr.trimmed();
         // Modification d'un preset
-        SF2::PRST *tmp = this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt);
+        SF2::PRST *tmp = _sf2[id.indexSf2]->_prst[id.indexElt];
         switch ((int)champ)
         {
         case champ_name:
             // Modification du nom d'un preset
-            qOldStr = tmp->Name;
+            qOldStr = tmp->_name;
             qStr = qStr.left(20);
-            tmp->Name = qStr;
+            tmp->_name = qStr;
 
             // Notify the name update for the preset
             QString qStr = QString("%1:%2 %3")
-                    .arg(tmp->wBank, 3, 10, QChar('0'))
-                    .arg(tmp->wPreset, 3, 10, QChar('0'))
-                    .arg(tmp->Name);
+                    .arg(tmp->_wBank, 3, 10, QChar('0'))
+                    .arg(tmp->_wPreset, 3, 10, QChar('0'))
+                    .arg(tmp->_name);
 
             emit(changeElementName(id, qStr));
             emit(changeElementOrder(id, qStr, sort));
@@ -1879,22 +1613,24 @@ int Pile_sf2::set(EltID id, Champ champ, QString qStr, bool storeAction, bool so
         }
     }break;
     }
-    // Création et stockage de l'action
+
+    // Create and store the action
     if (storeAction)
     {
-        Pile_actions::Action *action = new Pile_actions::Action;
-        action->typeAction = Pile_actions::actionModifier;
+        Action *action = new Action();
+        action->typeAction = Action::TypeUpdate;
         action->id = id;
         action->champ = champ;
         action->qOldValue = qOldStr;
         action->qNewValue = qStr;
-        this->pileActions->add(action);
+        this->_undoRedo->add(action);
     }
     return 0;
 }
+
 int Pile_sf2::set(EltID id, Champ champ, QByteArray data, bool storeAction)
 {
-    if (!this->isValide(id))
+    if (!this->isValid(id))
         return 1;
 
     QByteArray oldData;
@@ -1907,12 +1643,12 @@ int Pile_sf2::set(EltID id, Champ champ, QByteArray data, bool storeAction)
         switch ((int)champ)
         {
         case champ_sampleData16:
-            oldData = this->sf2->getElt(id.indexSf2)->smpl->getElt(id.indexElt)->son.getData(16);
-            this->sf2->getElt(id.indexSf2)->smpl->getElt(id.indexElt)->son.setData(data, 16);
+            oldData = _sf2[id.indexSf2]->_smpl[id.indexElt]->_sound.getData(16);
+            _sf2[id.indexSf2]->_smpl[id.indexElt]->_sound.setData(data, 16);
             break;
         case champ_sampleData24:
-            oldData = this->sf2->getElt(id.indexSf2)->smpl->getElt(id.indexElt)->son.getData(8);
-            this->sf2->getElt(id.indexSf2)->smpl->getElt(id.indexElt)->son.setData(data, 8);
+            oldData = _sf2[id.indexSf2]->_smpl[id.indexElt]->_sound.getData(8);
+            _sf2[id.indexSf2]->_smpl[id.indexElt]->_sound.setData(data, 8);
             break;
         case champ_sampleDataFull24:{
             // Modification 16 bits
@@ -1937,20 +1673,20 @@ int Pile_sf2::set(EltID id, Champ champ, QByteArray data, bool storeAction)
     // Création et stockage de l'action
     if (storeAction)
     {
-        Pile_actions::Action *action = new Pile_actions::Action;
-        action->typeAction = Pile_actions::actionModifier;
+        Action *action = new Action();
+        action->typeAction = Action::TypeUpdate;
         action->id = id;
         action->champ = champ;
         action->baOldValue = oldData;
         action->baNewValue = data;
-        this->pileActions->add(action);
+        this->_undoRedo->add(action);
     }
     return 0;
 }
 
 int Pile_sf2::reset(EltID id, Champ champ, bool storeAction)
 {
-    if (!this->isValide(id))
+    if (!this->isValid(id))
         return 0;
 
     Valeur oldValue;
@@ -1959,24 +1695,24 @@ int Pile_sf2::reset(EltID id, Champ champ, bool storeAction)
     {
     case elementInst:{
         // Remise à zéro d'une propriété d'un instrument
-        SF2::INST *tmp = this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt);
-        if (!tmp->bagGlobal.gen->isSet(champ)) return 0;
-        oldValue = tmp->bagGlobal.gen->getGen(champ);
-        tmp->bagGlobal.gen = tmp->bagGlobal.gen->resetGen(champ);
+        SF2::INST *tmp = _sf2[id.indexSf2]->_inst[id.indexElt];
+        if (!tmp->_bagGlobal.isSet(champ)) return 0;
+        oldValue = tmp->_bagGlobal.getGen(champ);
+        tmp->_bagGlobal.resetGen(champ);
     }break;
     case elementPrst:{
         // Remise à zéro d'une propriété d'un preset
-        SF2::PRST *tmp = this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt);
-        if (!tmp->bagGlobal.gen->isSet(champ)) return 0;
-        oldValue = tmp->bagGlobal.gen->getGen(champ);
-        tmp->bagGlobal.gen = tmp->bagGlobal.gen->resetGen(champ);
+        SF2::PRST *tmp = _sf2[id.indexSf2]->_prst[id.indexElt];
+        if (!tmp->_bagGlobal.isSet(champ)) return 0;
+        oldValue = tmp->_bagGlobal.getGen(champ);
+        tmp->_bagGlobal.resetGen(champ);
     }break;
     case elementInstSmpl:{
         // Remise à zéro d'une propriété d'un sample lié à un instrument
-        SF2::BAG *tmp = this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt)->bag->getElt(id.indexElt2);
-        if (!tmp->gen->isSet(champ)) return 0;
-        oldValue = tmp->gen->getGen(champ);
-        tmp->gen = tmp->gen->resetGen(champ);
+        SF2::BAG *tmp = _sf2[id.indexSf2]->_inst[id.indexElt]->_bags[id.indexElt2];
+        if (!tmp->isSet(champ)) return 0;
+        oldValue = tmp->getGen(champ);
+        tmp->resetGen(champ);
 
         // Notifications
         if (champ == champ_sampleID || champ == champ_keyRange || champ == champ_velRange)
@@ -1993,10 +1729,10 @@ int Pile_sf2::reset(EltID id, Champ champ, bool storeAction)
     }break;
     case elementPrstInst:{
         // Remise à zéro d'une propriété d'un instrument lié à un preset
-        SF2::BAG *tmp = this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt)->bag->getElt(id.indexElt2);
-        if (!tmp->gen->isSet(champ)) return 0;
-        oldValue = tmp->gen->getGen(champ);
-        tmp->gen = tmp->gen->resetGen(champ);
+        SF2::BAG *tmp = _sf2[id.indexSf2]->_prst[id.indexElt]->_bags[id.indexElt2];
+        if (!tmp->isSet(champ)) return 0;
+        oldValue = tmp->getGen(champ);
+        tmp->resetGen(champ);
 
         // Notifications
         if (champ == champ_instrument || champ == champ_keyRange || champ == champ_velRange)
@@ -2012,15 +1748,16 @@ int Pile_sf2::reset(EltID id, Champ champ, bool storeAction)
         }
     }break;
     }
-    // Création et stockage de l'action
+
+    // Create and store the action
     if (storeAction)
     {
-        Pile_actions::Action *action = new Pile_actions::Action;
-        action->typeAction = Pile_actions::actionModifierToDefault;
+        Action *action = new Action();
+        action->typeAction = Action::TypeChangeToDefault;
         action->id = id;
         action->champ = champ;
         action->vOldValue = oldValue;
-        this->pileActions->add(action);
+        this->_undoRedo->add(action);
     }
     return 1;
 }
@@ -2074,169 +1811,146 @@ void Pile_sf2::simplify(EltID id, Champ champ)
     }
 }
 
-bool Pile_sf2::SF2::BAG::GEN::isSet(Champ champ)
+bool Pile_sf2::SF2::BAG::isSet(Champ champ)
 {
-    bool resultat = 0;
-    if (this)
+    bool result = false;
+
+    foreach (SF2::BAG::GEN gen, this->_gens)
     {
-        // Recherche si la propriété existe
-        GEN *genTmp = this;
-        while((genTmp->sfGenOper != champ) && genTmp->suivant != NULL)
+        if (gen.sfGenOper == champ)
         {
-            genTmp = genTmp->suivant;
-        };
-        if (genTmp->sfGenOper == champ) resultat = 1;
+            result = true;
+            break;
+        }
     }
-    return resultat;
+
+    return result;
 }
-Valeur Pile_sf2::SF2::BAG::GEN::getGen(Champ champ)
+
+Valeur Pile_sf2::SF2::BAG::getGen(Champ champ)
 {
     Valeur value;
     value.genValue.wAmount = 0;
-    if (this)
+
+    foreach (SF2::BAG::GEN gen, this->_gens)
     {
-        // Recherche si la propriété existe
-        GEN *genTmp = this;
-        while((genTmp->sfGenOper != champ) && genTmp->suivant != NULL)
-            genTmp = genTmp->suivant;
-        if (genTmp->sfGenOper == champ)
-            value.genValue = genTmp->genAmount;
+        if (gen.sfGenOper == champ)
+        {
+            value.genValue = gen.genAmount;
+            break;
+        }
     }
+
     return value;
 }
-Pile_sf2::SF2::BAG::GEN * Pile_sf2::SF2::BAG::GEN::setGen(Champ champ, Valeur value)
+
+void Pile_sf2::SF2::BAG::setGen(Champ champ, Valeur value)
 {
-    if (!this)
+    // Existing property?
+    int index = -1;
+    for (int i = 0; i < _gens.count(); i++)
     {
-        // Création gen
-        GEN *gen = new GEN;
-        gen->sfGenOper = champ;
-        gen->genAmount = value.genValue;
-        gen->suivant = NULL;
-        return gen;
+        if (_gens[i].sfGenOper == champ)
+        {
+            index = i;
+            break;
+        }
     }
-    else
+
+    if (index == -1)
     {
-        // Recherche si la propriété existe déjà
-        GEN *genTmp = this;
-        while(genTmp->sfGenOper != champ && genTmp->suivant != NULL)
-        {
-            genTmp = genTmp->suivant;
-        };
-        if (genTmp->sfGenOper == champ)
-        {
-            genTmp->genAmount = value.genValue;
-        }
-        else
-        {
-            // Création gen
-            GEN *gen = new GEN;
-            gen->sfGenOper = champ;
-            gen->genAmount = value.genValue;
-            gen->suivant = NULL;
-            genTmp->suivant = gen;
-        }
-        return this;
+        // Create a new gen
+        GEN gen;
+        gen.sfGenOper = champ;
+        _gens << gen;
+        index = _gens.count() - 1;
     }
+
+    // Set the value
+    _gens[index].genAmount = value.genValue;
 }
-Pile_sf2::SF2::BAG::GEN * Pile_sf2::SF2::BAG::GEN::resetGen(Champ champ)
+
+void Pile_sf2::SF2::BAG::resetGen(Champ champ)
 {
-    if (this)
-    {
-        if (this->sfGenOper == champ)
-        {
-            GEN *genTmp = this->suivant;
-            this->suivant = NULL;
-            delete this;
-            return genTmp->resetGen(champ);
-        }
-        else this->suivant = this->suivant->resetGen(champ);
-    }
-    return this;
+    for (int i = _gens.count() - 1; i >= 0; i--)
+        if (_gens[i].sfGenOper == champ)
+            _gens.removeAt(i);
 }
-Pile_sf2::SF2::BAG::GEN * Pile_sf2::SF2::BAG::GEN::supprGenAndStore(EltID id, int storeAction, Pile_sf2 *root)
+
+void Pile_sf2::SF2::BAG::supprGenAndStore(EltID id, int storeAction, Pile_sf2 *root)
 {
-    SF2::BAG::GEN *genTmp = this;
-    SF2::BAG::GEN *genTmp2;
-    Pile_actions::Action *action;
-    while (genTmp)
+    while (!_gens.isEmpty())
     {
-        // Création et sauvegarde d'une action
+        SF2::BAG::GEN genTmp = _gens.takeFirst();
+
+        // Create and store an action
         if (storeAction)
         {
-            action = new Pile_actions::Action;
-            action->typeAction = Pile_actions::actionModifierToDefault;
+            Action * action = new Action();
+            action->typeAction = Action::TypeChangeToDefault;
             action->id = id;
-            action->vOldValue.genValue = genTmp->genAmount;
-            action->champ = genTmp->sfGenOper;
-            root->pileActions->add(action);
+            action->vOldValue.genValue = genTmp.genAmount;
+            action->champ = genTmp.sfGenOper;
+            root->_undoRedo->add(action);
         }
-        // Destruction gen
-        genTmp2 = genTmp;
-        genTmp = genTmp->suivant;
-        genTmp2->suivant = NULL;
-        delete genTmp2;
-    }
-    return genTmp;
-}
-
-void Pile_sf2::SF2::BAG::decrementerSMPL(int indexSmpl)
-{
-    if (this)
-    {
-        this->suivant->decrementerSMPL(indexSmpl);
-        int n = this->gen->getGen(champ_sampleID).wValue;
-        if (this->gen->isSet(champ_sampleID) && n >= indexSmpl)
-        {
-            Valeur value;
-            value.wValue = n-1;
-            this->gen->setGen(champ_sampleID, value);
-        }
-    }
-}
-void Pile_sf2::SF2::SMPL::decrementerLinkSMPL(int indexSmpl)
-{
-    if (this)
-    {
-        this->suivant->decrementerLinkSMPL(indexSmpl);
-        if (this->wSampleLink >= indexSmpl) this->wSampleLink = this->wSampleLink - 1;
     }
 }
 
-void Pile_sf2::SF2::BAG::decrementerINST(int indexInst)
+void Pile_sf2::SF2::INST::decrementerSMPL(int indexSmpl)
 {
-    if (this)
+    foreach (SF2::BAG * bag, _bags)
     {
-        this->suivant->decrementerINST(indexInst);
-        int n = this->gen->getGen(champ_instrument).wValue;
-        if (this->gen->isSet(champ_instrument) && n >= indexInst)
+        int n = bag->getGen(champ_sampleID).wValue;
+        if (bag->isSet(champ_sampleID) && n >= indexSmpl)
         {
             Valeur value;
             value.wValue = n-1;
-            this->gen->setGen(champ_instrument, value);
+            bag->setGen(champ_sampleID, value);
         }
     }
 }
-void Pile_sf2::SF2::BAG::MOD::enleverMod(int index)
+
+void Pile_sf2::SF2::decrementerLinkSMPL(int indexSmpl)
+{
+    foreach (SF2::SMPL * smpl, _smpl)
+        if (smpl->_wSampleLink >= indexSmpl)
+            smpl->_wSampleLink = smpl->_wSampleLink - 1;
+}
+
+void Pile_sf2::SF2::PRST::decrementerINST(int indexInst)
+{
+    foreach (SF2::BAG * bag, _bags)
+    {
+        int n = bag->getGen(champ_instrument).wValue;
+        if (bag->isSet(champ_instrument) && n >= indexInst)
+        {
+            Valeur value;
+            value.wValue = n-1;
+            bag->setGen(champ_instrument, value);
+        }
+    }
+}
+
+void Pile_sf2::SF2::BAG::enleverMod(int index)
 {
     // suppression de la référence à index
     // décrémentation des références supérieures
-    if ((int)this->sfModDestOper >= 32768)
+    for (int i = 0; i < _mods.count(); i++)
     {
-        // mode "link"
-        if (this->sfModDestOper - 32768 == index)
-            this->sfModDestOper = (Champ)0;
-        else if (this->sfModDestOper > index + 32768)
-            this->sfModDestOper = (Champ)(this->sfModDestOper - 1);
+        if ((int)_mods[i]._sfModDestOper >= 32768)
+        {
+            // mode "link"
+            if (_mods[i]._sfModDestOper - 32768 == index)
+                _mods[i]._sfModDestOper = (Champ)0;
+            else if (_mods[i]._sfModDestOper > index + 32768)
+                _mods[i]._sfModDestOper = (Champ)(_mods[i]._sfModDestOper - 1);
+        }
     }
-    // parcours des éléments suivants
-    if (this->suivant)
-        this->suivant->enleverMod(index);
 }
 
 int Pile_sf2::display(EltID id)
 {
-    if (!this->isValide(id, 1))
+    if (!this->isValid(id, 1))
         return 1;
 
     // Type d'élément à afficher (suite à une suppression non définitive)
@@ -2244,234 +1958,159 @@ int Pile_sf2::display(EltID id)
     {
     case elementSf2:{
         // affichage d'un SF2
-        SF2 *tmp = this->sf2->getElt(id.indexSf2);
-        tmp->hidden = 0;
+        SF2 *tmp = _sf2[id.indexSf2];
+        tmp->_hidden = 0;
         emit(hideElement(id, false));
     }break;
     case elementSmpl:{
         // affichage d'un sample
-        SF2::SMPL *tmp = this->sf2->getElt(id.indexSf2)->smpl->getElt(id.indexElt);
-        tmp->hidden = 0;
+        SF2::SMPL *tmp = _sf2[id.indexSf2]->_smpl[id.indexElt];
+        tmp->_hidden = 0;
         emit(hideElement(id, false));
     }break;
     case elementInst:{
         // affichage d'un instrument
-        SF2::INST *tmp = this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt);
-        tmp->hidden = 0;
+        SF2::INST *tmp = _sf2[id.indexSf2]->_inst[id.indexElt];
+        tmp->_hidden = 0;
         emit(hideElement(id, false));
     }break;
     case elementPrst:{
         // affichage d'un preset
-        SF2::PRST *tmp = this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt);
-        tmp->hidden = 0;
+        SF2::PRST *tmp = _sf2[id.indexSf2]->_prst[id.indexElt];
+        tmp->_hidden = 0;
         emit(hideElement(id, false));
     }break;
     case elementInstSmpl:{
         // affichage d'un sample lié à un instrument
-        SF2::BAG *tmp = this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt)->bag->getElt(id.indexElt2);
-        tmp->hidden = 0;
+        SF2::BAG *tmp = _sf2[id.indexSf2]->_inst[id.indexElt]->_bags[id.indexElt2];
+        tmp->_hidden = 0;
         emit(hideElement(id, false));
     }break;
     case elementPrstInst:{
         // affichage d'un instrument lié à un preset
-        SF2::BAG *tmp = this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt)->bag->getElt(id.indexElt2);
-        tmp->hidden = 0;
+        SF2::BAG *tmp = _sf2[id.indexSf2]->_prst[id.indexElt]->_bags[id.indexElt2];
+        tmp->_hidden = 0;
         emit(hideElement(id, false));
     }break;
     case elementInstMod:{
         // affichage d'un mod d'un instrument
-        SF2::BAG::MOD *tmp = this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt)->bagGlobal.mod->getElt(id.indexMod);
-        tmp->hidden = 0;
+        SF2::BAG::MOD *tmp = &_sf2[id.indexSf2]->_inst[id.indexElt]->_bagGlobal._mods[id.indexMod];
+        tmp->_hidden = 0;
     }break;
     case elementPrstMod:{
         // affichage d'un mod d'un preset
-        SF2::BAG::MOD *tmp = this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt)->bagGlobal.mod->getElt(id.indexMod);
-        tmp->hidden = 0;
+        SF2::BAG::MOD *tmp = &_sf2[id.indexSf2]->_prst[id.indexElt]->_bagGlobal._mods[id.indexMod];
+        tmp->_hidden = 0;
     }break;
     case elementInstSmplMod:{
         // affichage d'un mod d'un sample lié à un instrument
-        SF2::BAG::MOD *tmp = this->sf2->getElt(id.indexSf2)->inst->getElt(id.indexElt)->bag->getElt(id.indexElt2)->mod->getElt(id.indexMod);
-        tmp->hidden = 0;
+        SF2::BAG::MOD *tmp = &_sf2[id.indexSf2]->_inst[id.indexElt]->_bags[id.indexElt2]->_mods[id.indexMod];
+        tmp->_hidden = 0;
     }break;
     case elementPrstInstMod:{
         // affichage d'un mod d'un instrument lié à un preset
-        SF2::BAG::MOD *tmp = this->sf2->getElt(id.indexSf2)->prst->getElt(id.indexElt)->bag->getElt(id.indexElt2)->mod->getElt(id.indexMod);
-        tmp->hidden = 0;
+        SF2::BAG::MOD *tmp = &_sf2[id.indexSf2]->_prst[id.indexElt]->_bags[id.indexElt2]->_mods[id.indexMod];
+        tmp->_hidden = 0;
     }break;
     }
     return 0;
 }
 
-Pile_sf2::SF2::BAG::GEN * Pile_sf2::SF2::BAG::GEN::getElt(int pos){
-    GEN *tmp = this;
-    while (pos-- && tmp) tmp = tmp->suivant;
-    return tmp;}
-Pile_sf2::SF2::BAG::MOD * Pile_sf2::SF2::BAG::MOD::getElt(int pos){
-    MOD *tmp = this;
-    while (pos-- && tmp) tmp = tmp->suivant;
-    return tmp;}
-Pile_sf2::SF2::BAG * Pile_sf2::SF2::BAG::getElt(int pos){
-    BAG *tmp = this;
-    while (pos-- && tmp) tmp = tmp->suivant;
-    return tmp;}
-Pile_sf2::SF2::PRST * Pile_sf2::SF2::PRST::getElt(int pos){
-    PRST *tmp = this;
-    while (pos-- && tmp) tmp = tmp->suivant;
-    return tmp;}
-Pile_sf2::SF2::INST * Pile_sf2::SF2::INST::getElt(int pos){
-    INST *tmp = this;
-    while (pos-- && tmp) tmp = tmp->suivant;
-    return tmp;}
-Pile_sf2::SF2::SMPL * Pile_sf2::SF2::SMPL::getElt(int pos){
-    SMPL *tmp = this;
-    while (pos-- && tmp) tmp = tmp->suivant;
-    return tmp;}
-Pile_sf2::SF2 * Pile_sf2::SF2::getElt(int pos){
-    SF2 *tmp = this;
-    while (pos-- && tmp) tmp = tmp->suivant;
-    return tmp;}
-int Pile_sf2::SF2::BAG::nombreElt(){
-    if (this) return 1 + this->suivant->nombreElt();
-    else return 0;}
-int Pile_sf2::SF2::BAG::MOD::nombreElt(){
-    if (this) return 1 + this->suivant->nombreElt();
-    else return 0;}
-int Pile_sf2::SF2::BAG::GEN::nombreElt(){
-    if (this) return 1 + this->suivant->nombreElt();
-    else return 0;}
-int Pile_sf2::SF2::PRST::nombreElt(){
-    if (this) return 1 + this->suivant->nombreElt();
-    else return 0;}
-int Pile_sf2::SF2::INST::nombreElt(){
-    if (this) return 1 + this->suivant->nombreElt();
-    else return 0;}
-int Pile_sf2::SF2::SMPL::nombreElt(){
-    if (this) return 1 + this->suivant->nombreElt();
-    else return 0;}
-int Pile_sf2::SF2::nombreElt(){
-    if (this) return 1 + this->suivant->nombreElt();
-    else return 0;}
-
-bool Pile_sf2::isValide(EltID id, bool acceptHidden)
+bool Pile_sf2::isValid(EltID id, bool acceptHidden)
 {
-    int i;
     SF2 *sf2Tmp;
     if (id.typeElement < elementSf2 || id.typeElement > elementPrstInstGen)
         return false;
 
     if (id.indexSf2 < 0)
-        return (id.typeElement == elementSf2 || id.typeElement == elementRootSmpl || id.typeElement == elementRootInst
-                || id.typeElement == elementRootPrst);
+        return (id.typeElement == elementSf2 || id.typeElement == elementRootSmpl ||
+                id.typeElement == elementRootInst || id.typeElement == elementRootPrst);
 
-    // Vérification qu'indexSf2 est correct
-    i = 0;
-    sf2Tmp = this->sf2;
-    while (i < id.indexSf2 && sf2Tmp)
-    {
-        sf2Tmp = sf2Tmp->suivant;
-        i++;
-    }
-    if (!sf2Tmp) return false;
-    if (sf2Tmp->hidden && !acceptHidden) return false;
+    // Check indexSf2
+    if (id.indexSf2 >= _sf2.count())
+        return false;
+    sf2Tmp = _sf2[id.indexSf2];
+
+    if (sf2Tmp->_hidden && !acceptHidden)
+        return false;
+
     if (id.indexElt < 0 && id.typeElement != elementSf2 && id.typeElement != elementRootInst &&
             id.typeElement != elementRootSmpl && id.typeElement != elementRootPrst)
         return (id.typeElement == elementSmpl || id.typeElement == elementInst || id.typeElement == elementPrst);
 
-    // Vérification qu'indexElt est correct
     if (id.typeElement == elementSmpl)
     {
-        i = 0;
-        SF2::SMPL *smpl;
-        smpl = sf2Tmp->smpl;
-        while (i < id.indexElt && smpl)
-        {
-            smpl = smpl->suivant;
-            i++;
-        }
-        if (!smpl) return false;
-        if (smpl->hidden && !acceptHidden) return false;
+        // Check indexElt
+        if (id.indexElt >= sf2Tmp->_smpl.count())
+            return false;
+
+        if (sf2Tmp->_smpl[id.indexElt]->_hidden && !acceptHidden)
+            return false;
     }
     else if (id.typeElement == elementInst || id.typeElement == elementInstSmpl ||
              id.typeElement == elementInstMod || id.typeElement == elementInstSmplMod ||
              id.typeElement == elementInstGen || id.typeElement == elementInstSmplGen)
     {
-        i = 0;
-        SF2::INST *inst = sf2Tmp->inst;
-        while (i < id.indexElt && inst)
-        {
-            inst = inst->suivant;
-            i++;
-        }
-        if (!inst) return false;
-        if (inst->hidden && !acceptHidden) return false;
+        // Check indexElt
+        if (id.indexElt >= sf2Tmp->_inst.count())
+            return false;
+
+        SF2::INST *inst = sf2Tmp->_inst[id.indexElt];
+        if (inst->_hidden && !acceptHidden)
+            return false;
+
         if (id.typeElement == elementInstSmpl || id.typeElement == elementInstSmplMod || id.typeElement == elementInstSmplGen)
         {
             if (id.indexElt2 < 0 && id.typeElement != elementInstSmplMod && id.typeElement != elementInstSmplGen)
                 return (id.typeElement == elementInstSmpl);
 
             // Vérification qu'indexElt2 est correct
-            i = 0;
-            SF2::BAG *bag = inst->bag;
-            while (i < id.indexElt2 && bag)
-            {
-                bag = bag->suivant;
-                i++;
-            }
-            if (!bag) return false;
-            if (bag->hidden && !acceptHidden) return false;
+            if (id.indexElt2 >= inst->_bags.count())
+                return false;
+            SF2::BAG * bag = inst->_bags[id.indexElt2];
+
+            if (bag->_hidden && !acceptHidden)
+                return false;
+
             if (id.typeElement == elementInstSmplMod || id.typeElement == elementInstSmplGen)
             {
-                if (id.indexMod < 0) return true;
-                // Vérification qu'indexMod est correct
-                i = 0;
+                if (id.indexMod < 0)
+                    return true;
+
+                // Check indexMod
                 if (id.typeElement == elementInstSmplMod)
                 {
-                    SF2::BAG::MOD *mod = bag->mod;
-                    while (i < id.indexMod && mod)
-                    {
-                        mod = mod->suivant;
-                        i++;
-                    }
-                    if (!mod) return false;
-                    if (mod->hidden && !acceptHidden) return false;
+                    if (id.indexMod >= bag->_mods.count())
+                        return false;
+
+                    if (bag->_mods[id.indexMod]._hidden && !acceptHidden)
+                        return false;
                 }
                 else
                 {
-                    SF2::BAG::GEN *gen = bag->gen;
-                    while (i < id.indexMod && gen)
-                    {
-                        gen = gen->suivant;
-                        i++;
-                    }
-                    if (!gen) return false;
+                    if (id.indexMod >= bag->_gens.count())
+                        return false;
                 }
             }
         }
         else if (id.typeElement == elementInstMod || id.typeElement == elementInstGen)
         {
-            if (id.indexMod < 0) return true;
-            // Vérification qu'indexMod est correct
-            i = 0;
+            if (id.indexMod < 0)
+                return true;
+
+            // Check indexMod
             if (id.typeElement == elementInstMod)
             {
-                SF2::BAG::MOD *mod = inst->bagGlobal.mod;
-                while (i < id.indexMod && mod)
-                {
-                    mod = mod->suivant;
-                    i++;
-                }
-                if (!mod) return false;
-                if (mod->hidden && !acceptHidden) return false;
+                if (id.indexMod >= inst->_bagGlobal._mods.count())
+                    return false;
+
+                if (inst->_bagGlobal._mods[id.indexMod]._hidden && !acceptHidden)
+                    return false;
             }
             else
             {
-                SF2::BAG::GEN *gen = inst->bagGlobal.gen;
-                while (i < id.indexMod && gen)
-                {
-                    gen = gen->suivant;
-                    i++;
-                }
-                if (!gen) return false;
+                if (id.indexMod >= inst->_bagGlobal._gens.count())
+                    return false;
             }
         }
     }
@@ -2479,87 +2118,70 @@ bool Pile_sf2::isValide(EltID id, bool acceptHidden)
              id.typeElement == elementPrstMod || id.typeElement == elementPrstInstMod ||
              id.typeElement == elementPrstGen || id.typeElement == elementPrstInstGen)
     {
-        i = 0;
-        SF2::PRST *prst;
-        prst = sf2Tmp->prst;
-        while (i < id.indexElt && prst)
-        {
-            prst = prst->suivant;
-            i++;
-        }
-        if (!prst) return false;
-        if (prst->hidden && !acceptHidden) return false;
+        // Check indexElt
+        if (id.indexElt >= sf2Tmp->_prst.count())
+            return false;
+
+        SF2::PRST *prst = sf2Tmp->_prst[id.indexElt];
+        if (prst->_hidden && !acceptHidden)
+            return false;
+
         if (id.typeElement == elementPrstInst || id.typeElement == elementPrstInstMod || id.typeElement == elementPrstInstGen)
         {
             if (id.indexElt2 < 0 && id.typeElement != elementPrstInstMod && id.typeElement != elementPrstInstGen)
                 return (id.typeElement == elementPrstInst);
 
             // Vérification qu'indexElt2 est correct
-            i = 0;
-            SF2::BAG *bag = prst->bag;
-            while (i < id.indexElt2 && bag)
-            {
-                bag = bag->suivant;
-                i++;
-            }
-            if (!bag) return false;
-            if (bag->hidden && !acceptHidden) return false;
+            if (id.indexElt2 >= prst->_bags.count())
+                return false;
+            SF2::BAG * bag = prst->_bags[id.indexElt2];
+
+            if (bag->_hidden && !acceptHidden)
+                return false;
+
             if (id.typeElement == elementPrstInstMod || id.typeElement == elementPrstInstGen)
             {
-                if (id.indexMod < 0) return true;
-                // Vérification qu'indexMod est correct
-                i = 0;
+                if (id.indexMod < 0)
+                    return true;
+
+                // Check indexMod
                 if (id.typeElement == elementPrstInstMod)
                 {
-                    SF2::BAG::MOD *mod = bag->mod;
-                    while (i < id.indexMod && mod)
-                    {
-                        mod = mod->suivant;
-                        i++;
-                    }
-                    if (!mod) return false;
-                    if (mod->hidden && !acceptHidden) return false;
+                    if (id.indexMod >= bag->_mods.count())
+                        return false;
+
+                    if (bag->_mods[id.indexMod]._hidden && !acceptHidden)
+                        return false;
                 }
                 else
                 {
-                    SF2::BAG::GEN *gen = bag->gen;
-                    while (i < id.indexMod && gen)
-                    {
-                        gen = gen->suivant;
-                        i++;
-                    }
-                    if (!gen) return false;
+                    if (id.indexMod >= bag->_gens.count())
+                        return false;
                 }
             }
         }
         else if (id.typeElement == elementPrstMod || id.typeElement == elementPrstGen)
         {
-            if (id.indexMod < 0) return true;
-            // Vérification qu'indexMod est correct
-            i = 0;
+            if (id.indexMod < 0)
+                return true;
+
+            // Check indexMod
             if (id.typeElement == elementPrstMod)
             {
-                SF2::BAG::MOD *mod = prst->bagGlobal.mod;
-                while (i < id.indexMod && mod)
-                {
-                    mod = mod->suivant;
-                    i++;
-                }
-                if (!mod) return false;
-                if (mod->hidden && !acceptHidden) return false;
+                if (id.indexMod >= prst->_bagGlobal._mods.count())
+                    return false;
+
+                if (prst->_bagGlobal._mods[id.indexMod]._hidden && !acceptHidden)
+                    return false;
             }
             else
             {
-                SF2::BAG::GEN *gen = prst->bagGlobal.gen;
-                while (i < id.indexMod && gen)
-                {
-                    gen = gen->suivant;
-                    i++;
-                }
-                if (!gen) return false;
+                if (id.indexMod >= prst->_bagGlobal._gens.count())
+                    return false;
             }
         }
     }
+
     return true;
 }
 
@@ -2596,6 +2218,7 @@ void Pile_sf2::firstAvailablePresetBank(EltID id, int &nBank, int &nPreset)
     }
     while (nBank == -2);
 }
+
 int Pile_sf2::closestAvailablePreset(EltID id, quint16 wBank, quint16 wPreset)
 {
     int initVal = wPreset;
@@ -2620,6 +2243,7 @@ int Pile_sf2::closestAvailablePreset(EltID id, quint16 wBank, quint16 wPreset)
     else
         return -1;
 }
+
 bool Pile_sf2::isAvailable(EltID id, quint16 wBank, quint16 wPreset)
 {
     id.typeElement = elementPrst;
