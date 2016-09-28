@@ -1144,10 +1144,10 @@
      <normaloff>:/icones/volume_mini</normaloff>:/icones/volume_mini</iconset>
    </property>
    <property name="text">
-    <string>&amp;Régler atténuation minimale...</string>
+    <string>&amp;Régler atténuations...</string>
    </property>
    <property name="toolTip">
-    <string>Régle l'atténuation minimale</string>
+    <string>Régle les atténuations des instruments et presets</string>
    </property>
   </action>
   <action name="actionD_saccordage_ondulant">
