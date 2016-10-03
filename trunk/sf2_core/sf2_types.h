@@ -323,7 +323,9 @@ typedef enum
     champ_sampleData16 = 200,           // QByteArray
     champ_sampleData24 = 201,
     champ_sampleDataFull24 = 202,
-    champ_sampleData32
+    champ_sampleData32 = 203,
+
+    champ_pitchDefined = 300 // if pitch defined in a sample (wav)
 } Champ;
 
 typedef struct sfmodulator

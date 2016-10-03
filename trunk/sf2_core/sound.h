@@ -111,6 +111,7 @@ private:
         quint32 dwNote;
         quint16 wChannel;
         int iCent;
+        bool pitchDefined;
     } InfoSound;
 
     // Type de fichier

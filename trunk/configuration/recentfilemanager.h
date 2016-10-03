@@ -37,7 +37,8 @@ public:
         FILE_TYPE_RECORD,
         FILE_TYPE_SOUNDFONT,
         FILE_TYPE_EXPORT,
-        FILE_TYPE_FREQUENCIES
+        FILE_TYPE_FREQUENCIES,
+        FILE_TYPE_EXECUTABLE
     };
 
     /// Get the instance
@@ -69,7 +70,7 @@ private:
 
     static RecentFileManager * _instance;
     QStringList _listFiles;
-    QString _recordFile, _sampleFile, _exportFile, _importFile, _pngFile;
+    QString _recordFile, _sampleFile, _exportFile, _importFile, _pngFile, _executableFile;
 };
 
 #endif // RECENTFILEMANAGER_H

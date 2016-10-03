@@ -922,7 +922,8 @@ QList<QAction *> MainWindow::getListeActions()
                 << ui->action_Dissocier_les_samples_st_r_o
                 << ui->actionExporter_pics_de_fr_quence
                 << ui->action_Transposer
-                << ui->actionEnlever_tous_les_modulateurs;
+                << ui->actionEnlever_tous_les_modulateurs
+                << ui->action_Commande;
     return listeAction;
 }
 void MainWindow::setListeActions(QList<QAction *> listeActions)
@@ -1475,14 +1476,14 @@ void MainWindow::dragAndDrop(QString path, EltID idDest, int * arg)
     }
     else if (extension.compare("sfz") == 0)
     {
-        // Import sfz
+        // Import sfz: arg is the sf2 number that is created
         int valueTmp = -1;
         if (arg == NULL)
             arg = &valueTmp;
         ImportSfz import(this->sf2);
         import.import(path, arg);
 
-        // Sélection
+        // Select the new imported soundfont
         EltID id(elementSf2, *arg, -1, -1, -1);
         ui->arborescence->clearSelection();
         ui->arborescence->select(id, true);
@@ -1528,7 +1529,7 @@ void MainWindow::importerSmpl()
 {
     if (ui->arborescence->getSelectedItemsNumber() == 0) return;
 
-    // Autre format permis ?
+    // Other allowed format?
     QString ext = "";
     typedef QString (*MyPrototype)();
     MyPrototype myFunction = (MyPrototype) QLibrary::resolve(QCoreApplication::applicationDirPath() + "/extension_lecture",
@@ -1536,16 +1537,10 @@ void MainWindow::importerSmpl()
     if (myFunction)
         ext = myFunction();
 
-    // Affichage dialogue
-//#ifdef WIN32
+    // Display dialog
     QStringList strList = QFileDialog::getOpenFileNames(this, trUtf8("Importer un fichier audio"),
                                                         RecentFileManager::getInstance()->getLastDirectory(RecentFileManager::FILE_TYPE_SAMPLE),
                                                         trUtf8("Fichier .wav") + " (*.wav)" + ext);
-//#else
-//    QStringList strList = QFileDialog::getOpenFileNames(this, trUtf8("Importer un fichier audio"),
-//                                                        Config::getInstance()->getLastDirectory(Config::typeFichierSample),
-//                                                        trUtf8("Fichier .wav") + " (*.[wW][aA][vV])" + ext);
-//#endif
 
     if (strList.count() == 0)
         return;
@@ -1767,7 +1762,7 @@ void MainWindow::importerSmpl(QString path, EltID id, int * replace)
         }
 
         // Chargement dans la ram
-        if (this->configuration->getRam())
+        if (ConfManager::getInstance()->getValue(ConfManager::SECTION_NONE, "ram", false).toBool())
         {
             val.wValue = 1;
             this->sf2->set(id, champ_ram, val);
@@ -1775,6 +1770,7 @@ void MainWindow::importerSmpl(QString path, EltID id, int * replace)
     }
     delete son;
 }
+
 QString MainWindow::getName(QString name, int maxCharacters, int suffixNumber)
 {
     if (suffixNumber == 0)
@@ -1785,6 +1781,7 @@ QString MainWindow::getName(QString name, int maxCharacters, int suffixNumber)
         return name.left(maxCharacters);
     return name.left(maxCharacters - suffixSize - 1) + "-" + suffix;
 }
+
 void MainWindow::exporterSmpl()
 {
     QList<EltID> listIDs = ui->arborescence->getAllIDs();
@@ -1879,6 +1876,7 @@ void MainWindow::exporterSmpl()
         }
     }
 }
+
 void MainWindow::exporter()
 {
     int nbElt = ui->arborescence->getSelectedItemsNumber();
@@ -2291,6 +2289,7 @@ void MainWindow::filtreMur()        {this->page_smpl->filtreMur();}
 void MainWindow::reglerBalance()    {this->page_smpl->reglerBalance();}
 void MainWindow::transposer()       {this->page_smpl->transposer();}
 void MainWindow::sifflements()      {this->page_smpl->sifflements();}
+void MainWindow::command()          {this->page_smpl->command();}
 void MainWindow::desaccorder()      {this->page_inst->desaccorder();}
 void MainWindow::duplication()
 {

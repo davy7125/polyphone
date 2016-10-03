@@ -265,6 +265,7 @@
      </property>
      <addaction name="actionAjuster_la_fin_de_boucle"/>
      <addaction name="actionBouclage_automatique"/>
+     <addaction name="action_Commande"/>
      <addaction name="action_Diminuer_sifflements"/>
      <addaction name="actionEnlever_blanc_au_d_part"/>
      <addaction name="actionFiltre_mur_de_brique"/>
@@ -1556,6 +1557,21 @@
     <string>&amp;Forum</string>
    </property>
   </action>
+  <action name="action_Commande">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="ressources.qrc">
+     <normaloff>:/icones/command</normaloff>:/icones/command</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Commande externe...</string>
+   </property>
+   <property name="toolTip">
+    <string>Utilise un logiciel ou une commande externe pour modifier un fichier son .wav</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
@@ -2581,6 +2597,22 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>action_Commande</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>command()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>272</x>
+     <y>168</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>ouvrir()</slot>
@@ -2637,5 +2669,6 @@
   <slot>visualize()</slot>
   <slot>exporter()</slot>
   <slot>onPleinEcranTriggered()</slot>
+  <slot>command()</slot>
  </slots>
 </ui>
