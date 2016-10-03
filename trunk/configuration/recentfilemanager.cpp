@@ -41,6 +41,7 @@ RecentFileManager::RecentFileManager()
     _exportFile = ConfManager::getInstance()->getValue(ConfManager::SECTION_RECENT_FILES, "export", "").toString();
     _importFile = ConfManager::getInstance()->getValue(ConfManager::SECTION_RECENT_FILES, "import", "").toString();
     _pngFile = ConfManager::getInstance()->getValue(ConfManager::SECTION_RECENT_FILES, "frequencies", "").toString();
+    _executableFile = ConfManager::getInstance()->getValue(ConfManager::SECTION_RECENT_FILES, "executable", "").toString();
 
     int j = 0;
     QString strTmp;
@@ -88,6 +89,10 @@ void RecentFileManager::addRecentFile(FileType fileType, QString filePath)
     case FILE_TYPE_FREQUENCIES:
         _pngFile = filePath;
         ConfManager::getInstance()->setValue(ConfManager::SECTION_RECENT_FILES, "frequencies", _pngFile);
+        break;
+    case FILE_TYPE_EXECUTABLE:
+        _executableFile = filePath;
+        ConfManager::getInstance()->setValue(ConfManager::SECTION_RECENT_FILES, "executable", _executableFile);
         break;
     case FILE_TYPE_SF2:{
         int n = 4;
@@ -137,6 +142,9 @@ QString RecentFileManager::getLastFile(FileType fileType, int num)
         break;
     case FILE_TYPE_FREQUENCIES:
         lastFile = _pngFile;
+        break;
+    case FILE_TYPE_EXECUTABLE:
+        lastFile = _executableFile;
         break;
     }
 

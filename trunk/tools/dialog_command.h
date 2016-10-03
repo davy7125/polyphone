@@ -22,81 +22,36 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef PAGE_SMPL_H
-#define PAGE_SMPL_H
+#ifndef DIALOG_COMMAND_H
+#define DIALOG_COMMAND_H
 
-#include <QWidget>
-#include "page.h"
+#include <QDialog>
 
-namespace Ui
-{
-    class Page_Smpl;
+namespace Ui {
+class DialogCommand;
 }
 
-class Page_Smpl : public Page
+class DialogCommand : public QDialog
 {
     Q_OBJECT
-public:
-    explicit Page_Smpl(QWidget * parent = 0);
-    ~Page_Smpl();
 
-    // Méthodes publiques
-    void afficher();
-    void normalisation();
-    void enleveBlanc();
-    void enleveBlanc(EltID id);
-    void enleveFin();
-    void enleveFin(EltID id);
-    void bouclage();
-    void filtreMur();
-    void reglerBalance();
-    void transposer();
-    void sifflements();
-    void command();
-    bool isPlaying();
-    void pushPlayPause();
-    void getPeakFrequencies(EltID id, QList<double> &frequencies, QList<double> &factors, QList<int> &keys, QList<int> &corrections);
+public:
+    explicit DialogCommand(QWidget *parent = 0);
+    ~DialogCommand();
 
 signals:
-    void noteChanged(int unused, int vel);
+    void accepted(QString command, bool stereo, bool replaceInfo);
 
 private slots:
-    void lecture();
-    void lecteurFinished();
-    void applyEQ();
-    void initEQ();
-    void sifflements(int freq1, int freq2, double raideur);
-    void command(QString command, bool stereo, bool replaceInfo);
-    void commandFinished();
-    void setStartLoop();
-    void setStartLoop(int val);
-    void setEndLoop();
-    void setEndLoop(int val);
-    void on_pushFullLength_clicked();
-    void setRootKey();
-    void setRootKey(int val);
-    void setTune();
-    void setTune(int val);
-    void setType(int index);
-    void setLinkedSmpl(int index);
-    void setRate(int index);
-    void on_checkLectureBoucle_stateChanged(int arg1);
-    void setSinusEnabled(bool val);
-    void setGainSample(int val);
-    void setStereo(bool val);
-    void selectionChanged();
-    void on_pushAutoTune_clicked();
+    void on_comboPrevious_currentIndexChanged(const QString &arg1);
+    void accept();
+    void on_pushOpen_clicked();
 
 private:
-    Ui::Page_Smpl *ui;
-    bool lectureEnCours;
-    int preventStop;
+    Ui::DialogCommand *ui;
+    static const int HISTORY_SIZE;
 
-    // Méthodes privées
-    void setRateElt(EltID id, quint32 echFinal);
-    EltID getRepercussionID(EltID id);
-    void autoTune(EltID id, int &pitch, int &correction);
+    static bool isCommandValid(QString command);
 };
 
-
-#endif // PAGE_SMPL_H
+#endif // DIALOG_COMMAND_H

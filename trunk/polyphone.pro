@@ -234,7 +234,9 @@ SOURCES	+= main.cpp \
     configuration/keynamemanager.cpp \
     configuration/translationmanager.cpp \
     sf2_core/utils.cpp \
-    tools/dialog_attenuation.cpp
+    tools/dialog_attenuation.cpp \
+    tools/dialog_command.cpp \
+    tools/externalcommandrunner.cpp
 
 HEADERS  += mainwindow.h \
     sf2_core/sf2_types.h \
@@ -323,7 +325,9 @@ HEADERS  += mainwindow.h \
     configuration/keynamemanager.h \
     configuration/translationmanager.h \
     sf2_core/utils.h \
-    tools/dialog_attenuation.h
+    tools/dialog_attenuation.h \
+    tools/dialog_command.h \
+    tools/externalcommandrunner.h
 
 FORMS    += mainwindow.ui \
     configuration/config.ui \
@@ -348,7 +352,8 @@ FORMS    += mainwindow.ui \
     tools/dialog_transposition.ui \
     pages/pageoverview.ui \
     gui_divers/dialogchangelog.ui \
-    tools/dialog_attenuation.ui
+    tools/dialog_attenuation.ui \
+    tools/dialog_command.ui
 
 RESOURCES += ressources.qrc \
     clavier/pianokeybd.qrc

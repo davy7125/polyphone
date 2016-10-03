@@ -50,7 +50,6 @@ public:
     ~Config();
 
     // accesseurs
-    bool getRam()               {return false;}
     int  getAudioType();
     int  getAudioIndex();
     int  getBufferSize()        {return _bufferSize;}
@@ -155,7 +154,6 @@ public:
     void storeAudioConfig();
 
 private slots:
-    void setRam(int val);
     void setAudioOutput(int index);
     void setWavAutoLoop(bool checked);
     void setWavRemoveBlank(bool checked);

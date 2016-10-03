@@ -66,11 +66,6 @@ Config::Config(QWidget *parent, PianoKeybdCustom *keyboard, AudioDevice * audioD
     _loaded = false;
     this->load();
 
-    //    if (this->ram)
-    //        ui->comboRam->setCurrentIndex(1);
-    //    else
-    //        ui->comboRam->setCurrentIndex(0);
-
     // Liste des sorties audio
     QList<HostInfo> hostInfos = (audioDevice != NULL ? audioDevice->getHostInfo() : QList<HostInfo>());
     bool configFound = false;
@@ -207,15 +202,6 @@ void Config::show()
     QDialog::show();
 }
 
-void Config::setRam(int val)
-{
-    if (_loaded)
-    {
-        ConfManager::getInstance()->setValue(ConfManager::SECTION_NONE, "ram", (val == 1));
-        QMessageBox::information(QApplication::activeWindow(), trUtf8("Information"),
-                                 trUtf8("La modification sera prise en compte lors du prochain démarrage du logiciel."));
-    }
-}
 void Config::setAudioOutput(int index)
 {
     Q_UNUSED(index)

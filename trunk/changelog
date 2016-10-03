@@ -3,6 +3,7 @@ polyphone (1.8) unstable; urgency=low
   * (new) light and dark color themes
   * (new) czech translation
   * (new) links to the online manual & forum
+  * (new) tool to call an external editor for samples
   * (improvement) the attenuation tool can now deal with global parameters and presets 
   * (improvement) using space or enter over a cell makes it editable
   * (improvement) ctrl-x can be used in the tables

@@ -27,13 +27,16 @@
 #include "mainwindow.h"
 #include "sound.h"
 #include "dialog_sifflements.h"
+#include "dialog_command.h"
+#include "graphique.h"
+#include "graphiquefourier.h"
+#include "confmanager.h"
+#include "externalcommandrunner.h"
 #include <QProgressDialog>
 #include <QInputDialog>
 #include <QDesktopWidget>
 #include <QFileDialog>
-#include "graphique.h"
-#include "graphiquefourier.h"
-#include "confmanager.h"
+#include <QProcess>
 
 Page_Smpl::Page_Smpl(QWidget *parent) :
     Page(PAGE_SMPL, parent),
@@ -1392,11 +1395,10 @@ void Page_Smpl::reglerBalance()
 void Page_Smpl::sifflements()
 {
     if (_preparation) return;
-    DialogSifflements * dialogSifflements = new DialogSifflements(this);
-    dialogSifflements->setAttribute(Qt::WA_DeleteOnClose, true);
-    this->connect(dialogSifflements, SIGNAL(accepted(int,int,double)),
-                  SLOT(sifflements(int,int,double)));
-    dialogSifflements->show();
+    DialogSifflements * dialog = new DialogSifflements(this);
+    dialog->setAttribute(Qt::WA_DeleteOnClose, true);
+    this->connect(dialog, SIGNAL(accepted(int,int,double)), SLOT(sifflements(int,int,double)));
+    dialog->show();
 }
 
 void Page_Smpl::sifflements(int freq1, int freq2, double raideur)
@@ -1475,17 +1477,12 @@ void Page_Smpl::transposer()
     int nbEtapes = 0;
     QList<EltID> listID = _tree->getAllIDs();
     foreach (EltID id, listID)
-    {
-        if (id.typeElement == elementSmpl)
-        {
-            if (!_sf2->get(id, champ_hidden).bValue)
-                nbEtapes++;
-        }
-    }
+        if (id.typeElement == elementSmpl && !_sf2->get(id, champ_hidden).bValue)
+            nbEtapes++;
     if (nbEtapes == 0)
         return;
 
-    // Ouverture d'une barre de progression
+    // Open a progress bar
     QString textProgress = trUtf8("Traitement ");
     QProgressDialog progress("", trUtf8("Annuler"), 0, nbEtapes, this);
     progress.setWindowFlags(progress.windowFlags() & ~Qt::WindowContextHelpButtonHint);
@@ -1494,46 +1491,75 @@ void Page_Smpl::transposer()
     progress.show();
     foreach (EltID id, listID)
     {
-        if (id.typeElement == elementSmpl)
+        if (id.typeElement == elementSmpl && !_sf2->get(id, champ_hidden).bValue)
         {
-            if (!_sf2->get(id, champ_hidden).bValue)
-            {
-                QString name = _sf2->getQstr(id, champ_name);
-                progress.setLabelText(textProgress + name);
-                QApplication::processEvents();
-                // Récupération des données et de l'échantillonnage
-                QByteArray baData = _sf2->getData(id, champ_sampleDataFull24);
-                quint32 echFinal = _sf2->get(id, champ_dwSampleRate).dwValue;
-                // Calcul de l'échantillonnage fictif de départ
-                double echInit = (double)echFinal * pow(2, rep/12);
-                // Rééchantillonnage
-                baData = Sound::resampleMono(baData, echInit, echFinal, 24);
-                _sf2->set(id, champ_sampleDataFull24, baData);
-                // Ajustement de length, startLoop, endLoop
-                Valeur val;
-                val.dwValue = baData.size()/3;
-                _sf2->set(id, champ_dwLength, val);
-                quint32 dwTmp = _sf2->get(id, champ_dwStartLoop).dwValue;
-                dwTmp = ((qint64)dwTmp * (qint64)echFinal) / echInit;
-                val.dwValue = dwTmp;
-                _sf2->set(id, champ_dwStartLoop, val);
-                dwTmp = _sf2->get(id, champ_dwEndLoop).dwValue;
-                dwTmp = ((qint64)dwTmp * (qint64)echFinal) / echInit;
-                val.dwValue = dwTmp;
-                _sf2->set(id, champ_dwEndLoop, val);
-                if (!progress.wasCanceled())
-                    progress.setValue(progress.value() + 1);
-                else
-                {
-                    // Mise à jour et sortie
-                    _mainWindow->updateDo();
-                    this->afficher();
-                    return;
-                }
-            }
+            QString name = _sf2->getQstr(id, champ_name);
+            progress.setLabelText(textProgress + name);
+            QApplication::processEvents();
+
+            // Récupération des données et de l'échantillonnage
+            QByteArray baData = _sf2->getData(id, champ_sampleDataFull24);
+            quint32 echFinal = _sf2->get(id, champ_dwSampleRate).dwValue;
+
+            // Calcul de l'échantillonnage fictif de départ
+            double echInit = (double)echFinal * pow(2, rep/12);
+
+            // Rééchantillonnage
+            baData = Sound::resampleMono(baData, echInit, echFinal, 24);
+            _sf2->set(id, champ_sampleDataFull24, baData);
+
+            // Ajustement de length, startLoop, endLoop
+            Valeur val;
+            val.dwValue = baData.size()/3;
+            _sf2->set(id, champ_dwLength, val);
+            quint32 dwTmp = _sf2->get(id, champ_dwStartLoop).dwValue;
+            dwTmp = ((qint64)dwTmp * (qint64)echFinal) / echInit;
+            val.dwValue = dwTmp;
+            _sf2->set(id, champ_dwStartLoop, val);
+            dwTmp = _sf2->get(id, champ_dwEndLoop).dwValue;
+            dwTmp = ((qint64)dwTmp * (qint64)echFinal) / echInit;
+            val.dwValue = dwTmp;
+            _sf2->set(id, champ_dwEndLoop, val);
+
+            if (progress.wasCanceled())
+                break;
+            else
+                progress.setValue(progress.value() + 1);
         }
     }
+
     // Actualisation
+    _mainWindow->updateDo();
+    this->afficher();
+}
+
+void Page_Smpl::command()
+{
+    if (_preparation) return;
+    DialogCommand * dialog = new DialogCommand(this);
+    dialog->setAttribute(Qt::WA_DeleteOnClose, true);
+    this->connect(dialog, SIGNAL(accepted(QString, bool, bool)), SLOT(command(QString, bool, bool)));
+    dialog->show();
+}
+
+void Page_Smpl::command(QString command, bool stereo, bool replaceInfo)
+{
+    // About to store new actions
+    _sf2->prepareNewActions();
+    QList<EltID> listID = _tree->getAllIDs();
+    for (int i = listID.count() - 1; i >= 0; i--)
+        if (listID[i].typeElement != elementSmpl || _sf2->get(listID[i], champ_hidden).bValue)
+            listID.removeAt(i);
+
+    // Create a command runner and process the samples
+    ExternalCommandRunner * commandRunner = new ExternalCommandRunner(_sf2, this);
+    connect(commandRunner, SIGNAL(finished()), this, SLOT(commandFinished()));
+    commandRunner->run(listID, command, stereo, replaceInfo); // Will destroy the object once all samples are processed
+}
+
+void Page_Smpl::commandFinished()
+{
+    // Update mainwindow
     _mainWindow->updateDo();
     this->afficher();
 }
@@ -1545,15 +1571,15 @@ void Page_Smpl::applyEQ()
         return;
 
     if (ui->verticalSlider_1->value() == 0 &&
-        ui->verticalSlider_2->value() == 0 &&
-        ui->verticalSlider_3->value() == 0 &&
-        ui->verticalSlider_4->value() == 0 &&
-        ui->verticalSlider_5->value() == 0 &&
-        ui->verticalSlider_6->value() == 0 &&
-        ui->verticalSlider_7->value() == 0 &&
-        ui->verticalSlider_8->value() == 0 &&
-        ui->verticalSlider_9->value() == 0 &&
-        ui->verticalSlider_10->value() == 0)
+            ui->verticalSlider_2->value() == 0 &&
+            ui->verticalSlider_3->value() == 0 &&
+            ui->verticalSlider_4->value() == 0 &&
+            ui->verticalSlider_5->value() == 0 &&
+            ui->verticalSlider_6->value() == 0 &&
+            ui->verticalSlider_7->value() == 0 &&
+            ui->verticalSlider_8->value() == 0 &&
+            ui->verticalSlider_9->value() == 0 &&
+            ui->verticalSlider_10->value() == 0)
         return;
 
     _sf2->prepareNewActions();
