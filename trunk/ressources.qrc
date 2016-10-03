@@ -105,6 +105,7 @@
         <file alias="loop_off_w.png">ressources/loop_off_w.png</file>
         <file alias="loop_on_end_w.png">ressources/loop_on_end_w.png</file>
         <file alias="loop_on_w.png">ressources/loop_on_w.png</file>
+        <file alias="command">ressources/command_line.png</file>
     </qresource>
     <qresource prefix="/traductions">
         <file>ressources/traductions/polyphone_en.qm</file>

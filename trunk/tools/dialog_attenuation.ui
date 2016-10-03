@@ -14,7 +14,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Atténuations</string>
+   <string>Régler les atténuations</string>
   </property>
   <property name="windowIcon">
    <iconset resource="../ressources.qrc">

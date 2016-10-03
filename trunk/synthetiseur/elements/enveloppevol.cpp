@@ -44,8 +44,6 @@ EnveloppeVol::EnveloppeVol(VoiceParam * voiceParam, quint32 sampleRate, bool isM
         m_noteToHold      = (double)voiceParam->modKeynumToHold / 1200;
         m_noteToDecay     = (double)voiceParam->modKeynumToDecay / 1200;
         m_volume          = 0;
-        m_fixedVelocity   = voiceParam->fixedVelocity;
-        m_allowRelease    = (voiceParam->loopMode != 3);
     }
     else
     {
@@ -58,9 +56,10 @@ EnveloppeVol::EnveloppeVol(VoiceParam * voiceParam, quint32 sampleRate, bool isM
         m_noteToHold      = (double)voiceParam->volKeynumToHold / 1200;
         m_noteToDecay     = (double)voiceParam->volKeynumToDecay / 1200;
         m_volume          = -voiceParam->attenuation;
-        m_fixedVelocity   = voiceParam->fixedVelocity;
-        m_allowRelease    = (voiceParam->loopMode != 3);
     }
+
+    m_fixedVelocity   = voiceParam->fixedVelocity;
+    m_allowRelease    = (voiceParam->loopMode != 3);
 }
 
 bool EnveloppeVol::applyEnveloppe(float * data, quint32 size, bool release, int note,

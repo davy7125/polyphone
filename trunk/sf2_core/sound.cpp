@@ -96,8 +96,8 @@ QByteArray Sound::getData(quint16 wBps)
                     break;
                 case fileCustom1:{
                     typedef QByteArray (*GetDataSound)(QFile*, quint16, InfoSound);
-                    GetDataSound getDataSound = (GetDataSound) QLibrary::resolve(QCoreApplication::applicationDirPath() + "/extension_lecture",
-                                                                             "getDataSound");
+                    GetDataSound getDataSound = (GetDataSound) QLibrary::resolve(
+                                QCoreApplication::applicationDirPath() + "/extension_lecture", "getDataSound");
                     if (getDataSound)
                         baRet = getDataSound(fi, 1, _info);
                     else
@@ -132,7 +132,7 @@ QByteArray Sound::getData(quint16 wBps)
             if (!fi->exists())
             {
                 // Si impossible à ouvrir : pas de message d'erreur et remplissage 0
-                baRet.resize(_info.dwLength*2);
+                baRet.resize(_info.dwLength * 2);
                 baRet.fill(0);
             }
             else
@@ -148,13 +148,13 @@ QByteArray Sound::getData(quint16 wBps)
                     break;
                 case fileCustom1:{
                     typedef QByteArray (*GetDataSound)(QFile*, quint16, InfoSound);
-                    GetDataSound getDataSound = (GetDataSound) QLibrary::resolve(QCoreApplication::applicationDirPath() + "/extension_lecture",
-                                                                             "getDataSound");
+                    GetDataSound getDataSound = (GetDataSound) QLibrary::resolve(
+                                QCoreApplication::applicationDirPath() + "/extension_lecture", "getDataSound");
                     if (getDataSound)
                         baRet = getDataSound(fi, 2, _info);
                     else
                     {
-                        baRet.resize(_info.dwLength*2);
+                        baRet.resize(_info.dwLength * 2);
                         baRet.fill(0);
                     }
                     }break;
@@ -221,8 +221,8 @@ QByteArray Sound::getData(quint16 wBps)
                     break;
                 case fileCustom1:{
                     typedef QByteArray (*GetDataSound)(QFile*, quint16, InfoSound);
-                    GetDataSound getDataSound = (GetDataSound) QLibrary::resolve(QCoreApplication::applicationDirPath() + "/extension_lecture",
-                                                                             "getDataSound");
+                    GetDataSound getDataSound = (GetDataSound) QLibrary::resolve(
+                                QCoreApplication::applicationDirPath() + "/extension_lecture", "getDataSound");
                     if (getDataSound)
                         baRet = getDataSound(fi, 3, _info);
                     else
@@ -296,8 +296,8 @@ QByteArray Sound::getData(quint16 wBps)
                     break;
                 case fileCustom1:{
                     typedef QByteArray (*GetDataSound)(QFile*, quint16, InfoSound);
-                    GetDataSound getDataSound = (GetDataSound) QLibrary::resolve(QCoreApplication::applicationDirPath() + "/extension_lecture",
-                                                                             "getDataSound");
+                    GetDataSound getDataSound = (GetDataSound) QLibrary::resolve(
+                                QCoreApplication::applicationDirPath() + "/extension_lecture", "getDataSound");
                     if (getDataSound)
                         baRet = getDataSound(fi, 4, _info);
                     else
@@ -357,6 +357,9 @@ quint32 Sound::get(Champ champ)
         break;
     case champ_chPitchCorrection:
         result = _info.iCent;
+        break;
+    case champ_pitchDefined:
+        result = (_info.pitchDefined ? 1 : 0);
         break;
     default:
         break;
@@ -491,9 +494,11 @@ void Sound::exporter(QString fileName, Sound son1, Sound son2)
         wBps = 24;
     else
         wBps = 16;
+
     // Récupération des données
     QByteArray channel1 = son1.getData(wBps);
     QByteArray channel2 = son2.getData(wBps);
+
     // sample rate (max des 2 canaux)
     quint32 dwSmplRate = son1._info.dwSampleRate;
     if (son2._info.dwSampleRate > dwSmplRate)
@@ -507,6 +512,7 @@ void Sound::exporter(QString fileName, Sound son1, Sound son2)
         // Ajustement son2
         channel2 = resampleMono(channel2, son2._info.dwSampleRate, dwSmplRate, wBps);
     }
+
     // Taille et mise en forme des données
     quint32 dwLength = channel1.size();
     if (dwLength < (unsigned)channel2.size())
@@ -549,8 +555,8 @@ Sound::FileType Sound::getFileType()
 
     QString extCustom = "";
     typedef QString (*MyPrototype)();
-    MyPrototype myFunction = (MyPrototype) QLibrary::resolve(QCoreApplication::applicationDirPath() + "/extension_lecture",
-                                                             "getExtension");
+    MyPrototype myFunction = (MyPrototype) QLibrary::resolve(
+                QCoreApplication::applicationDirPath() + "/extension_lecture", "getExtension");
     if (myFunction)
         extCustom = myFunction();
 
@@ -578,8 +584,8 @@ void Sound::getInfoSound(bool tryFindRootkey)
         break;
     case fileCustom1:{
         typedef bool (*GetInfoSound)(QString, InfoSound*);
-        GetInfoSound getInfoSound = (GetInfoSound) QLibrary::resolve(QCoreApplication::applicationDirPath() + "/extension_lecture",
-                                                                 "getInfoSound");
+        GetInfoSound getInfoSound = (GetInfoSound) QLibrary::resolve(
+                    QCoreApplication::applicationDirPath() + "/extension_lecture", "getInfoSound");
         if (getInfoSound)
         {
             if (!getInfoSound(this->fileName, &_info))
@@ -596,6 +602,7 @@ void Sound::getInfoSound(bool tryFindRootkey)
                 _info.dwNote = 0;
                 _info.iCent = 0;
                 _info.wBpsFile = 0;
+                _info.pitchDefined = false;
             }
         }
         }break;
@@ -612,6 +619,7 @@ void Sound::getInfoSound(bool tryFindRootkey)
         _info.dwNote = 0;
         _info.iCent = 0;
         _info.wBpsFile = 0;
+        _info.pitchDefined = false;
     }
 }
 
@@ -628,6 +636,7 @@ void Sound::getInfoSoundWav(bool tryFindRootkey)
     _info.dwEndLoop = 0;
     _info.dwNote = 60; // Par défaut do central
     _info.iCent = 0;
+    _info.pitchDefined = false;
     QFile fi(fileName);
     if (!fi.exists())
     {
@@ -649,6 +658,7 @@ void Sound::getInfoSoundWav(QByteArray baData, bool tryFindRootkey)
         QMessageBox::warning(_parent, QObject::trUtf8("Attention"), QObject::trUtf8("Le fichier est corrompu."));
         return;
     }
+
     // Taille totale du fichier - 8 octets
     taille = readDWORD(baData, 4);
     if (taille == 0)
@@ -703,6 +713,7 @@ void Sound::getInfoSoundWav(QByteArray baData, bool tryFindRootkey)
                 // accordage
                 _info.iCent = (int)readDWORD(baData, pos + 16);
                 _info.iCent = qRound((double)_info.iCent / 2147483648. * 50.);
+                _info.pitchDefined = true;
             }
             if (sectionSize >= 60)
             {
@@ -759,7 +770,10 @@ void Sound::determineRootKey()
     }
 
     if (note != -1)
+    {
         _info.dwNote = note;
+        _info.pitchDefined = false;
+    }
 }
 
 QByteArray Sound::getDataSf2(QFile * fi, quint16 byte)

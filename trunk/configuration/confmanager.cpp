@@ -95,5 +95,5 @@ QString ConfManager::getFullKey(ToolType toolType, QString toolName, QString key
     case TOOL_TYPE_PRESET:     subSection = "preset";     break;
     }
 
-    return getFullKey(SECTION_TOOLS, subSection + "\\" + toolName + "_" + key);
+    return getFullKey(SECTION_TOOLS, subSection + "/" + toolName + "_" + key);
 }
