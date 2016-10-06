@@ -26,8 +26,8 @@
 #include "ui_page_smpl.h"
 #include "mainwindow.h"
 #include "sound.h"
-#include "dialog_sifflements.h"
 #include "dialog_command.h"
+#include "dialog_filter_frequencies.h"
 #include "graphique.h"
 #include "graphiquefourier.h"
 #include "confmanager.h"
@@ -1221,32 +1221,44 @@ void Page_Smpl::bouclage()
     this->afficher();
 }
 
-void Page_Smpl::filtreMur()
+void Page_Smpl::filter()
+{
+    QList<EltID> ids = _tree->getAllIDs();
+    if (ids.isEmpty())
+        return;
+
+    // Create a dialog
+    DialogFilterFrequencies * dial = new DialogFilterFrequencies(this);
+    this->connect(dial, SIGNAL(accepted(QVector<double>)),
+                  SLOT(filter(QVector<double>)));
+    dial->setAttribute(Qt::WA_DeleteOnClose, true);
+
+    // Add Fourier transforms
+    int nbFourier = qMin(ids.count(), 6);
+    dial->setNbFourier(nbFourier);
+    for (int i = 0; i < nbFourier; i++)
+    {
+        EltID id = ids[i];
+        quint32 sampleRate = _sf2->get(id, champ_dwSampleRate).dwValue;
+        QByteArray baData = _sf2->getData(id, champ_sampleData16);
+        dial->addFourierTransform(baData, sampleRate);
+    }
+
+    // Display the dialog
+    dial->show();
+}
+
+void Page_Smpl::filter(QVector<double> dValues)
 {
     if (_preparation) return;
-
-    // Filter frequency
-    bool ok;
-    double rep = QInputDialog::getDouble(
-                this, trUtf8("Question"),
-                trUtf8("Fréquence de coupure :"),
-                ConfManager::getInstance()->getToolValue(ConfManager::TOOL_TYPE_SAMPLE, "mur", "coupure", 15000.).toDouble(),
-                20, 96000, 2, &ok);
-    if (!ok) return;
-    ConfManager::getInstance()->setToolValue(ConfManager::TOOL_TYPE_SAMPLE, "mur", "coupure", rep);
     _sf2->prepareNewActions();
 
     // Compute number of steps
     int nbEtapes = 0;
     QList<EltID> listID = _tree->getAllIDs();
     foreach (EltID id, listID)
-    {
-        if (id.typeElement == elementSmpl)
-        {
-            if (!_sf2->get(id, champ_hidden).bValue)
-                nbEtapes++;
-        }
-    }
+        if (id.typeElement == elementSmpl && !_sf2->get(id, champ_hidden).bValue)
+            nbEtapes++;
     if (nbEtapes == 0)
         return;
 
@@ -1259,31 +1271,27 @@ void Page_Smpl::filtreMur()
     progress.show();
     foreach (EltID id, listID)
     {
-        if (id.typeElement == elementSmpl)
+        if (id.typeElement == elementSmpl && !_sf2->get(id, champ_hidden).bValue)
         {
-            if (!_sf2->get(id, champ_hidden).bValue)
-            {
-                QString name = _sf2->getQstr(id, champ_name);
-                progress.setLabelText(textProgress + name);
-                QApplication::processEvents();
-                // Récupération des données et de l'échantillonnage
-                QByteArray baData = _sf2->getData(id, champ_sampleDataFull24);
-                quint32 dwSmplRate = _sf2->get(id, champ_dwSampleRate).dwValue;
-                // Filtre passe bas
-                baData = Sound::bandFilter(baData, 24, dwSmplRate, rep, 0, -1);
-                _sf2->set(id, champ_sampleDataFull24, baData);
-                if (!progress.wasCanceled())
-                    progress.setValue(progress.value() + 1);
-                else
-                {
-                    // Mise à jour et sortie
-                    _mainWindow->updateDo();
-                    this->afficher();
-                    return;
-                }
-            }
+            QString name = _sf2->getQstr(id, champ_name);
+            progress.setLabelText(textProgress + name);
+            QApplication::processEvents();
+
+            // Récupération des données et de l'échantillonnage
+            QByteArray baData = _sf2->getData(id, champ_sampleDataFull24);
+            quint32 dwSmplRate = _sf2->get(id, champ_dwSampleRate).dwValue;
+
+            // Filtre passe bas
+            baData = Sound::cutFilter(baData, dwSmplRate, dValues, 24, 20000);
+            _sf2->set(id, champ_sampleDataFull24, baData);
+
+            if (!progress.wasCanceled())
+                progress.setValue(progress.value() + 1);
+            else
+                break;
         }
     }
+
     // Actualisation
     _mainWindow->updateDo();
     this->afficher();
@@ -1297,19 +1305,27 @@ void Page_Smpl::reglerBalance()
     // Calcul du nombre d'étapes
     int nbEtapes = 0;
     QList<EltID> listID = _tree->getAllIDs();
+    bool monoProcessed = false;
     foreach (EltID id, listID)
     {
-        if (id.typeElement == elementSmpl)
+        if (id.typeElement == elementSmpl && !_sf2->get(id, champ_hidden).bValue)
         {
-            if (!_sf2->get(id, champ_hidden).bValue)
-            {
-                // Sample lié ?
-                SFSampleLink typeLien = _sf2->get(id, champ_sfSampleType).sfLinkValue;
-                if (typeLien != monoSample && typeLien != RomMonoSample)
-                    nbEtapes++;
-            }
+            // Sample lié ?
+            SFSampleLink typeLien = _sf2->get(id, champ_sfSampleType).sfLinkValue;
+            if (typeLien != monoSample && typeLien != RomMonoSample)
+                nbEtapes++;
+            else
+                monoProcessed = true;
         }
     }
+
+
+    if (monoProcessed)
+    {
+        QMessageBox::warning(this, trUtf8("Attention"), trUtf8("Cet outil ne s'applique que sur des échantillons stéréo."));
+        return;
+    }
+
     if (nbEtapes == 0)
         return;
 
@@ -1387,75 +1403,67 @@ void Page_Smpl::reglerBalance()
             }
         }
     }
+
     // Actualisation
     _mainWindow->updateDo();
     this->afficher();
 }
 
-void Page_Smpl::sifflements()
-{
-    if (_preparation) return;
-    DialogSifflements * dialog = new DialogSifflements(this);
-    dialog->setAttribute(Qt::WA_DeleteOnClose, true);
-    this->connect(dialog, SIGNAL(accepted(int,int,double)), SLOT(sifflements(int,int,double)));
-    dialog->show();
-}
+//void Page_Smpl::sifflements(int freq1, int freq2, double raideur)
+//{
+//    // Elimination des sifflements
+//    _sf2->prepareNewActions();
 
-void Page_Smpl::sifflements(int freq1, int freq2, double raideur)
-{
-    // Elimination des sifflements
-    _sf2->prepareNewActions();
+//    // Calcul du nombre d'étapes
+//    int nbEtapes = 0;
+//    QList<EltID> listID = _tree->getAllIDs();
+//    foreach (EltID id, listID)
+//    {
+//        if (id.typeElement == elementSmpl)
+//        {
+//            if (!_sf2->get(id, champ_hidden).bValue)
+//                nbEtapes++;
+//        }
+//    }
+//    if (nbEtapes == 0)
+//        return;
 
-    // Calcul du nombre d'étapes
-    int nbEtapes = 0;
-    QList<EltID> listID = _tree->getAllIDs();
-    foreach (EltID id, listID)
-    {
-        if (id.typeElement == elementSmpl)
-        {
-            if (!_sf2->get(id, champ_hidden).bValue)
-                nbEtapes++;
-        }
-    }
-    if (nbEtapes == 0)
-        return;
-
-    // Ouverture d'une barre de progression
-    QString textProgress = trUtf8("Traitement ");
-    QProgressDialog progress("", trUtf8("Annuler"), 0, nbEtapes, this);
-    progress.setWindowFlags(progress.windowFlags() & ~Qt::WindowContextHelpButtonHint);
-    progress.setWindowModality(Qt::WindowModal);
-    progress.setFixedWidth(350);
-    progress.show();
-    foreach (EltID id, listID)
-    {
-        if (id.typeElement == elementSmpl)
-        {
-            if (!_sf2->get(id, champ_hidden).bValue)
-            {
-                QString name = _sf2->getQstr(id, champ_name);
-                progress.setLabelText(textProgress + name);
-                QApplication::processEvents();
-                QByteArray baData = _sf2->getData(id, champ_sampleDataFull24);
-                quint32 dwSmplRate = _sf2->get(id, champ_dwSampleRate).dwValue;
-                baData = Sound::sifflements(baData, dwSmplRate, 24, freq1, freq2, raideur);
-                _sf2->set(id, champ_sampleDataFull24, baData);
-                if (!progress.wasCanceled())
-                    progress.setValue(progress.value() + 1);
-                else
-                {
-                    // Mise à jour et sortie
-                    _mainWindow->updateDo();
-                    this->afficher();
-                    return;
-                }
-            }
-        }
-    }
-    // Mise à jour
-    _mainWindow->updateDo();
-    this->afficher();
-}
+//    // Ouverture d'une barre de progression
+//    QString textProgress = trUtf8("Traitement ");
+//    QProgressDialog progress("", trUtf8("Annuler"), 0, nbEtapes, this);
+//    progress.setWindowFlags(progress.windowFlags() & ~Qt::WindowContextHelpButtonHint);
+//    progress.setWindowModality(Qt::WindowModal);
+//    progress.setFixedWidth(350);
+//    progress.show();
+//    foreach (EltID id, listID)
+//    {
+//        if (id.typeElement == elementSmpl)
+//        {
+//            if (!_sf2->get(id, champ_hidden).bValue)
+//            {
+//                QString name = _sf2->getQstr(id, champ_name);
+//                progress.setLabelText(textProgress + name);
+//                QApplication::processEvents();
+//                QByteArray baData = _sf2->getData(id, champ_sampleDataFull24);
+//                quint32 dwSmplRate = _sf2->get(id, champ_dwSampleRate).dwValue;
+//                baData = Sound::sifflements(baData, dwSmplRate, 24, freq1, freq2, raideur);
+//                _sf2->set(id, champ_sampleDataFull24, baData);
+//                if (!progress.wasCanceled())
+//                    progress.setValue(progress.value() + 1);
+//                else
+//                {
+//                    // Mise à jour et sortie
+//                    _mainWindow->updateDo();
+//                    this->afficher();
+//                    return;
+//                }
+//            }
+//        }
+//    }
+//    // Mise à jour
+//    _mainWindow->updateDo();
+//    this->afficher();
+//}
 
 void Page_Smpl::transposer()
 {

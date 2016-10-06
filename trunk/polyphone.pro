@@ -183,7 +183,6 @@ SOURCES	+= main.cpp \
     tools/dialog_space.cpp \
     tools/dialog_paramglobal.cpp \
     tools/dialog_mixture.cpp \
-    tools/dialog_sifflements.cpp \
     tools/dialog_release.cpp \
     tools/dialog_magnetophone.cpp \
     tools/dialog_celeste.cpp \
@@ -236,7 +235,8 @@ SOURCES	+= main.cpp \
     sf2_core/utils.cpp \
     tools/dialog_attenuation.cpp \
     tools/dialog_command.cpp \
-    tools/externalcommandrunner.cpp
+    tools/externalcommandrunner.cpp \
+    tools/dialog_filter_frequencies.cpp
 
 HEADERS  += mainwindow.h \
     sf2_core/sf2_types.h \
@@ -268,7 +268,6 @@ HEADERS  += mainwindow.h \
     tools/dialog_space.h \
     tools/dialog_paramglobal.h \
     tools/dialog_mixture.h \
-    tools/dialog_sifflements.h \
     tools/dialog_release.h \
     tools/dialog_magnetophone.h \
     tools/dialog_celeste.h \
@@ -327,7 +326,8 @@ HEADERS  += mainwindow.h \
     sf2_core/utils.h \
     tools/dialog_attenuation.h \
     tools/dialog_command.h \
-    tools/externalcommandrunner.h
+    tools/externalcommandrunner.h \
+    tools/dialog_filter_frequencies.h
 
 FORMS    += mainwindow.ui \
     configuration/config.ui \
@@ -342,7 +342,6 @@ FORMS    += mainwindow.ui \
     tools/dialog_space.ui \
     tools/dialog_paramglobal.ui \
     tools/dialog_mixture.ui \
-    tools/dialog_sifflements.ui \
     tools/dialog_release.ui \
     tools/dialog_magnetophone.ui \
     tools/dialog_celeste.ui \
@@ -353,7 +352,8 @@ FORMS    += mainwindow.ui \
     pages/pageoverview.ui \
     gui_divers/dialogchangelog.ui \
     tools/dialog_attenuation.ui \
-    tools/dialog_command.ui
+    tools/dialog_command.ui \
+    tools/dialog_filter_frequencies.ui
 
 RESOURCES += ressources.qrc \
     clavier/pianokeybd.qrc

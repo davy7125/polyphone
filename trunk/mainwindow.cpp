@@ -845,6 +845,7 @@ void MainWindow::on_action_Flottant_triggered()
     _dialKeyboard.layout()->addWidget(ui->widgetKeyboard);
     updateActions();
 }
+
 void MainWindow::showKeyboard(bool val)
 {
     ui->widgetKeyboard->setVisible(val);
@@ -870,14 +871,17 @@ void MainWindow::showKeyboard(bool val)
         _dialKeyboard.hide();
     }
 }
+
 void MainWindow::onPleinEcranTriggered()
 {
     this->setWindowState(this->windowState() ^ Qt::WindowFullScreen);
 }
+
 void MainWindow::magnetophone()
 {
     dialogMagneto.show();
 }
+
 QList<QAction *> MainWindow::getListeActions()
 {
     QList<QAction *> listeAction;
@@ -899,9 +903,8 @@ QList<QAction *> MainWindow::getListeActions()
                 << ui->actionPr_f_rences
                 << ui->actionAjuster_la_fin_de_boucle
                 << ui->actionBouclage_automatique
-                << ui->action_Diminuer_sifflements
                 << ui->actionEnlever_blanc_au_d_part
-                << ui->actionFiltre_mur_de_brique
+                << ui->actionFiltrer
                 << ui->actionNormaliser_volume
                 << ui->action_R_glage_balance
                 << ui->actionTransposer
@@ -926,6 +929,7 @@ QList<QAction *> MainWindow::getListeActions()
                 << ui->action_Commande;
     return listeAction;
 }
+
 void MainWindow::setListeActions(QList<QAction *> listeActions)
 {
     // On vide la barre d'outils
@@ -2285,10 +2289,9 @@ void MainWindow::enleveBlanc()      {this->page_smpl->enleveBlanc();}
 void MainWindow::enleveFin()        {this->page_smpl->enleveFin();}
 void MainWindow::normalisation()    {this->page_smpl->normalisation();}
 void MainWindow::bouclage()         {this->page_smpl->bouclage();}
-void MainWindow::filtreMur()        {this->page_smpl->filtreMur();}
+void MainWindow::filtre()           {this->page_smpl->filter();}
 void MainWindow::reglerBalance()    {this->page_smpl->reglerBalance();}
 void MainWindow::transposer()       {this->page_smpl->transposer();}
-void MainWindow::sifflements()      {this->page_smpl->sifflements();}
 void MainWindow::command()          {this->page_smpl->command();}
 void MainWindow::desaccorder()      {this->page_inst->desaccorder();}
 void MainWindow::duplication()

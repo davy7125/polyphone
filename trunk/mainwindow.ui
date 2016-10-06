@@ -266,9 +266,8 @@
      <addaction name="actionAjuster_la_fin_de_boucle"/>
      <addaction name="actionBouclage_automatique"/>
      <addaction name="action_Commande"/>
-     <addaction name="action_Diminuer_sifflements"/>
      <addaction name="actionEnlever_blanc_au_d_part"/>
-     <addaction name="actionFiltre_mur_de_brique"/>
+     <addaction name="actionFiltrer"/>
      <addaction name="actionNormaliser_volume"/>
      <addaction name="action_R_glage_balance"/>
      <addaction name="actionTransposer"/>
@@ -1106,19 +1105,19 @@
     <string>Boucle automatiquement l'échantillon</string>
    </property>
   </action>
-  <action name="actionFiltre_mur_de_brique">
+  <action name="actionFiltrer">
    <property name="enabled">
     <bool>false</bool>
    </property>
    <property name="icon">
     <iconset resource="ressources.qrc">
-     <normaloff>:/icones/brickwall</normaloff>:/icones/brickwall</iconset>
+     <normaloff>:/icones/filter</normaloff>:/icones/filter</iconset>
    </property>
    <property name="text">
-    <string>&amp;Filtre &quot;mur de brique&quot;...</string>
+    <string>&amp;Filtrer des fréquences...</string>
    </property>
    <property name="toolTip">
-    <string>Applique un filtre &quot;mur de brique&quot;</string>
+    <string>Applique un filtre pour diminuer certaines fréquences</string>
    </property>
   </action>
   <action name="actionTransposer">
@@ -1257,21 +1256,6 @@
    </property>
    <property name="toolTip">
     <string>Crée une mixture</string>
-   </property>
-  </action>
-  <action name="action_Diminuer_sifflements">
-   <property name="enabled">
-    <bool>false</bool>
-   </property>
-   <property name="icon">
-    <iconset resource="ressources.qrc">
-     <normaloff>:/icones/sifflement</normaloff>:/icones/sifflement</iconset>
-   </property>
-   <property name="text">
-    <string>&amp;Diminuer sifflements...</string>
-   </property>
-   <property name="toolTip">
-    <string>Diminue les sifflements</string>
    </property>
   </action>
   <action name="action5_octaves">
@@ -2182,10 +2166,10 @@
    </hints>
   </connection>
   <connection>
-   <sender>actionFiltre_mur_de_brique</sender>
+   <sender>actionFiltrer</sender>
    <signal>triggered()</signal>
    <receiver>MainWindow</receiver>
-   <slot>filtreMur()</slot>
+   <slot>filtre()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>-1</x>
@@ -2346,22 +2330,6 @@
    <signal>triggered()</signal>
    <receiver>MainWindow</receiver>
    <slot>mixture()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>-1</x>
-     <y>-1</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>312</x>
-     <y>214</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>action_Diminuer_sifflements</sender>
-   <signal>triggered()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>sifflements()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>-1</x>
@@ -2645,7 +2613,7 @@
   <slot>enleveFin()</slot>
   <slot>normalisation()</slot>
   <slot>bouclage()</slot>
-  <slot>filtreMur()</slot>
+  <slot>filtre()</slot>
   <slot>transposer()</slot>
   <slot>spatialisation()</slot>
   <slot>desaccorder()</slot>
@@ -2656,7 +2624,6 @@
   <slot>reglerBalance()</slot>
   <slot>showHelp()</slot>
   <slot>mixture()</slot>
-  <slot>sifflements()</slot>
   <slot>setKeyboardType0()</slot>
   <slot>setKeyboardType1()</slot>
   <slot>setKeyboardType2()</slot>

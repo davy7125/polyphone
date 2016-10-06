@@ -48,10 +48,9 @@ public:
     void enleveFin();
     void enleveFin(EltID id);
     void bouclage();
-    void filtreMur();
+    void filter();
     void reglerBalance();
     void transposer();
-    void sifflements();
     void command();
     bool isPlaying();
     void pushPlayPause();
@@ -65,7 +64,7 @@ private slots:
     void lecteurFinished();
     void applyEQ();
     void initEQ();
-    void sifflements(int freq1, int freq2, double raideur);
+    void filter(QVector<double> dValues);
     void command(QString command, bool stereo, bool replaceInfo);
     void commandFinished();
     void setStartLoop();
