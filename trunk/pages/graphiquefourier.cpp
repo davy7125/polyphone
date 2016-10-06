@@ -186,20 +186,8 @@ void GraphiqueFourier::setPos(qint32 posStart, qint32 posEnd, QList<double> &fre
     QVector<float> vectCorrel = Sound::correlation(baData2.mid(0, qMin(baData2.size(), 4000)), dwSmplRate, 20, 20000, dMin);
 
     // Transformée de Fourier du signal
-    unsigned long size = 0;
-    Complex * cpxData = Sound::fromBaToComplex(baData2, size);
-    Complex * fc_sortie_fft = Sound::FFT(cpxData, size);
-    delete [] cpxData;
-    QVector<float> vectFourier;
-    vectFourier.resize(size / 2);
-    for (unsigned int i = 0; i < size / 2; i++)
-    {
-        vectFourier[i] = qSqrt(fc_sortie_fft[i].real() * fc_sortie_fft[i].real() +
-                               fc_sortie_fft[i].imag() * fc_sortie_fft[i].imag());
-        vectFourier[i] += qSqrt(fc_sortie_fft[size-i-1].real() * fc_sortie_fft[size-i-1].real() +
-                                fc_sortie_fft[size-i-1].imag() * fc_sortie_fft[size-i-1].imag());
-    }
-    delete fc_sortie_fft;
+    QVector<float> vectFourier = Sound::getFourierTransform(baData2);
+    unsigned long size = vectFourier.size() * 2;
 
     // Recherche des corrélations minimales (= plus grandes similitudes) et intensités fréquencielles maximales
     QList<int> posMinCor = Sound::findMins(vectCorrel, 20, 0.7);

@@ -2413,7 +2413,7 @@ void PageTable::paramGlobal()
     if (ids.isEmpty() || error)
         return;
 
-    DialogParamGlobal * dialogParam = new DialogParamGlobal(_sf2, _typePage == PAGE_PRST, this);
+    DialogParamGlobal * dialogParam = new DialogParamGlobal(_typePage == PAGE_PRST, this);
     dialogParam->setAttribute(Qt::WA_DeleteOnClose, true);
     this->connect(dialogParam, SIGNAL(accepted(QVector<double>,int,int,int,int)),
                   SLOT(paramGlobal(QVector<double>,int,int,int,int)));
