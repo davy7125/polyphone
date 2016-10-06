@@ -287,7 +287,7 @@ int Pile_sf2::open(QString fileName, QDataStream * stream, int &indexSf2, bool c
     if (strcmp("smpl", bloc))
     {
         // pas de sous-bloc, donc 16 bits
-        taille_smpl = taille_sdta-4;
+        taille_smpl = taille_sdta - 4;
         taille_sm24 = 0;
         wSmpl = 20 + taille_info + 12;
         wSm24 = 0;
@@ -307,7 +307,7 @@ int Pile_sf2::open(QString fileName, QDataStream * stream, int &indexSf2, bool c
             free(bloc_info);
             return 4;
         }
-        if (strcmp("sm24",bloc))
+        if (strcmp("sm24", bloc))
         {
             // Pas de bloc sm24, en arrière de 4
             QIODevice * fi = stream->device();
@@ -321,7 +321,7 @@ int Pile_sf2::open(QString fileName, QDataStream * stream, int &indexSf2, bool c
             taille_sm24 = freadSize(stream);
             if (taille_sm24 == taille_smpl/2 + ((taille_smpl/2) % 2))
             {
-                wSm24 = 20 + taille_info + 20 + taille_sm24 + 8;
+                wSm24 = 20 + taille_info + 20 + taille_smpl + 8;
                 stream->skipRawData(taille_sm24); // en avant de taille_sm24
             }
             else
@@ -719,7 +719,7 @@ int Pile_sf2::open(QString fileName, QDataStream * stream, int &indexSf2, bool c
             this->set(id, champ_dwStart16, value, false);
             if (wSm24)
             {
-                value.dwValue = temp1 * 2 + wSm24;
+                value.dwValue = temp1 + wSm24;
                 this->set(id, champ_dwStart24, value, false);
                 value.wValue = 24;
                 this->set(id, champ_bpsFile, value, false);
