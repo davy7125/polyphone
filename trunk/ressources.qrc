@@ -48,10 +48,8 @@
         <file alias="arrow_left">ressources/arrow_left.png</file>
         <file alias="arrow_right">ressources/arrow_right.png</file>
         <file alias="arrow_up">ressources/arrow_up.png</file>
-        <file alias="brickwall">ressources/brickwall.png</file>
         <file alias="recorder">ressources/recorder.png</file>
         <file alias="rename">ressources/rename.png</file>
-        <file alias="sifflement">ressources/sifflement.png</file>
         <file alias="loop">ressources/loop.png</file>
         <file alias="celeste">ressources/celeste.png</file>
         <file alias="spacialisation">ressources/spacialisation.png</file>
@@ -106,6 +104,7 @@
         <file alias="loop_on_end_w.png">ressources/loop_on_end_w.png</file>
         <file alias="loop_on_w.png">ressources/loop_on_w.png</file>
         <file alias="command">ressources/command_line.png</file>
+        <file alias="filter">ressources/filter.png</file>
     </qresource>
     <qresource prefix="/traductions">
         <file>ressources/traductions/polyphone_en.qm</file>

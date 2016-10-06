@@ -22,60 +22,46 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef DIALOG_PARAMGLOBAL_H
-#define DIALOG_PARAMGLOBAL_H
+#ifndef DIALOG_FILTER_FREQUENCIES_H
+#define DIALOG_FILTER_FREQUENCIES_H
 
 #include <QDialog>
 #include "qcustomplot.h"
 
-namespace Ui
-{
-    class DialogParamGlobal;
+namespace Ui {
+class DialogFilterFrequencies;
 }
 
-class DialogParamGlobal : public QDialog
+class DialogFilterFrequencies : public QDialog
 {
     Q_OBJECT
-    
+
 public:
-    DialogParamGlobal(bool isPrst, QWidget *parent = 0);
-    ~DialogParamGlobal();
+    explicit DialogFilterFrequencies(QWidget *parent = 0);
+    ~DialogFilterFrequencies();
+    void setNbFourier(int nbFourier);
+    void addFourierTransform(QByteArray baData, quint32 sampleRate);
+
+signals:
+    void accepted(QVector<double> dValues);
 
 private slots:
     void accept();
-    void indexMotifChanged(int index);  // Action sur le combobox motif
-    void raideurChanged(double value);  // Action sur spinBox raideur
-    void minChanged(double value);      // Action sur spinBox min
-    void maxChanged(double value);      // Action sur spinBox max
-
-signals:
-    void accepted(QVector<double> dValues, int typeModif, int param, int minVel, int maxVel);
 
 private:
     QVector<double> getStoredCurve();
     void storeCurve(QVector<double> val);
 
-    Ui::DialogParamGlobal *ui;
-    bool _isPrst;
+    Ui::DialogFilterFrequencies *ui;
 };
 
-class GraphParamGlobal : public QCustomPlot
+class GraphFilterFrequencies : public QCustomPlot
 {
     Q_OBJECT
 
 public:
-    enum TypeForme
-    {
-        FORME_MANUELLE,
-        FORME_LINEAIRE_ASC,
-        FORME_LINEAIRE_DESC,
-        FORME_EXP_ASC,
-        FORME_EXP_DESC,
-        FORME_ALEATOIRE
-    };
-
-    explicit GraphParamGlobal(QWidget *parent = 0);
-    ~GraphParamGlobal();
+    explicit GraphFilterFrequencies(QWidget *parent = 0);
+    ~GraphFilterFrequencies();
 
     bool eventFilter(QObject* o, QEvent* e)
     {
@@ -98,52 +84,34 @@ public:
                 else if (mouseEvent->type() == QEvent::MouseButtonRelease)
                     this->mouseReleased(pos);
             }
-            else if (mouseEvent->button() == Qt::RightButton)
-            {
-                if (mouseEvent->type() == QEvent::MouseButtonPress)
-                    this->mouseRightPressed(pos);
-                else if (mouseEvent->type() == QEvent::MouseButtonRelease)
-                    this->mouseRightReleased(pos);
-            }
             return true;
         }
         return false;
     }
 
-    void indexMotifChanged(int index);
-    void raideurChanged(double value);
-    void setEtendueClavier(int keyboardType);
-    void setMinMax(double min, double max)  { yMin = qMin(min, max); yMax = qMax(min, max); }
-    void setMinMaxX(int min, int max)       { xMin = qMin(min, max); xMax = qMax(min, max); }
+    void setNbFourier(int nbFourier) { _nbFourier = nbFourier; }
+    void addFourierTransform(QVector<float> fData, quint32 sampleRate);
     QVector<double> getValues();
     void setValues(QVector<double> val);
-    int getXmin()                           { return xMin; }
-    int getXmax()                           { return xMax; }
 
 private:
-    TypeForme forme;
     QVector<double> dValues;
     bool flagEdit;
-    int limitEdit;
     void replot();
-    int nbPoints;
     double raideurExp;
-    double yMin, yMax;
-    int xMin, xMax;
     QCPItemText * labelCoord;
     int previousX;
     double previousY;
+    int _nbFourier;
 
-    // Méthodes privées
     void mousePressed(QPoint pos);
-    void mouseRightPressed(QPoint pos);
     void mouseReleased(QPoint pos);
-    void mouseRightReleased(QPoint pos);
     void mouseMoved(QPoint pos);
     void mouseLeft();
-    void writeMotif();
     void write(QPoint pos);
     void afficheCoord(double x, double y);
+
+    static const int POINT_NUMBER;
 };
 
-#endif // DIALOG_PARAMGLOBAL_H
+#endif // DIALOG_FILTER_FREQUENCIES_H

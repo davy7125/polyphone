@@ -70,6 +70,7 @@ public:
     // Utilitaires
     static QByteArray resampleMono(QByteArray data, double echInit, qint32 echFinal, quint16 wBps);
     static QByteArray bandFilter(QByteArray baData, quint16 wBps, double dwSmplRate, double fBas, double fHaut, int ordre);
+    static QByteArray cutFilter(QByteArray baData, quint32 dwSmplRate, QVector<double> dValues, quint16 wBps, int maxFreq);
     static QByteArray EQ(QByteArray baData, quint32 dwSmplRate, quint16 wBps, int i1, int i2, int i3, int i4, int i5,
                          int i6, int i7, int i8, int i9, int i10);
     static QByteArray bpsConversion(QByteArray baData, quint16 wBpsInit, quint16 wBpsFinal, bool bigEndian = false);
@@ -78,8 +79,7 @@ public:
     static Complex * fromBaToComplex(QByteArray baData, quint16 wBps, unsigned long &size);
     static Complex * fromBaToComplex(QVector<float> fData, unsigned long &size);
     static QByteArray fromComplexToBa(Complex * cpxData, int size, quint16 wBps);
-    static Complex * FFT(Complex * x, int N); // N must be a power of 2
-    static Complex * IFFT(Complex * x, int N); // N must be a power of 2
+    static QVector<float> getFourierTransform(QVector<float> input);
     static QByteArray normaliser(QByteArray baData, double dVal, quint16 wBps, double &db);
     static QByteArray multiplier(QByteArray baData, double dMult, quint16 wBps, double &db);
     static QByteArray enleveBlanc(QByteArray baData, double seuil, quint16 wBps, quint32 &pos);
@@ -88,7 +88,6 @@ public:
     static QVector<float> correlation(const QVector<float> fData, quint32 dwSmplRate, qint32 fMin, qint32 fMax, qint32 &dMin);
     static float correlation(QVector<float> fData1, QVector<float> fData2);
     static QByteArray bouclage(QByteArray baData, quint32 dwSmplRate, qint32 &loopStart, qint32 &loopEnd, quint16 wBps);
-    static QByteArray sifflements(QByteArray baData, quint32 dwSmplRate, quint16 wBps, double fCut, double fMax, double raideur);
     static QList<int> findMins(QVector<float> vectData, int maxNb, double minFrac = 0);
     static QList<quint32> findMax(QVector<float> vectData, int maxNb, double minFrac = 0);
     static qint32 max(QByteArray baData, quint16 wBps);
@@ -150,6 +149,8 @@ private:
     static double sinc(double x);
     static void KBDWindow(double* window, int size, double alpha);
     static double BesselI0(double x);
+    static Complex * FFT(Complex * x, int N); // N must be a power of 2
+    static Complex * IFFT(Complex * x, int N); // N must be a power of 2
 
     static QWidget * _parent;
 };

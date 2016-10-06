@@ -320,6 +320,7 @@ QByteArray Sound::getData(quint16 wBps)
     }
     return baRet;
 }
+
 quint32 Sound::get(Champ champ)
 {
     quint32 result = 0;
@@ -366,6 +367,7 @@ quint32 Sound::get(Champ champ)
     }
     return result;
 }
+
 QString Sound::getFileName() {return this->fileName;}
 
 void Sound::setData(QByteArray data, quint16 wBps)
@@ -383,6 +385,7 @@ void Sound::setData(QByteArray data, quint16 wBps)
     else
         QMessageBox::warning(_parent, "warning", "In Sound::setData, forbidden operation");
 }
+
 void Sound::set(Champ champ, Valeur value)
 {
     switch (champ)
@@ -437,6 +440,7 @@ void Sound::set(Champ champ, Valeur value)
         break;
     }
 }
+
 void Sound::setFileName(QString qStr, bool tryFindRootKey)
 {
     this->fileName = qStr;
@@ -444,6 +448,7 @@ void Sound::setFileName(QString qStr, bool tryFindRootKey)
     // Récupération des infos sur le son
     this->getInfoSound(tryFindRootKey);
 }
+
 void Sound::setRam(bool ram)
 {
     if (ram)
@@ -483,6 +488,7 @@ void Sound::exporter(QString fileName, Sound son)
     info.wChannels = 1;
     exporter(fileName, baData, info);
 }
+
 void Sound::exporter(QString fileName, Sound son1, Sound son2)
 {
     // Exportation d'un sample stereo au format wav
@@ -905,6 +911,7 @@ QByteArray Sound::getDataSf2(QFile * fi, quint16 byte)
     }
     return baRet;
 }
+
 QByteArray Sound::getDataWav(QFile * fi, quint16 byte)
 {
     // Fichier wav
@@ -1250,6 +1257,7 @@ QByteArray Sound::resampleMono(QByteArray baData, double echInit, qint32 echFina
     baRet = bpsConversion(baRet, 32, wBps);
     return baRet;
 }
+
 QByteArray Sound::bandFilter(QByteArray baData, quint16 wBps, double dwSmplRate, double fBas, double fHaut, int ordre)
 {
     /******************************************************************************
@@ -1363,6 +1371,84 @@ QByteArray Sound::bandFilter(QByteArray baData, quint16 wBps, double dwSmplRate,
     return baData;
 }
 
+QByteArray Sound::cutFilter(QByteArray baData, quint32 dwSmplRate, QVector<double> dValues, quint16 wBps, int maxFreq)
+{
+    // Convert baData in complex
+    if (wBps != 32)
+        baData = bpsConversion(baData, wBps, 32);
+    unsigned long size;
+    Complex * cpxData = fromBaToComplex(baData, 32, size);
+
+    // Compute the fft
+    Complex * fc_sortie_fft = FFT(cpxData, size);
+    delete [] cpxData;
+
+    // Get the maximum module of the FFT
+    double moduleMax = 0;
+    for (unsigned long i = 0; i < (size + 1) / 2; i++)
+    {
+        // Left side
+        double module = sqrt(fc_sortie_fft[i].imag() * fc_sortie_fft[i].imag() +
+                             fc_sortie_fft[i].real() * fc_sortie_fft[i].real());
+        moduleMax = qMax(moduleMax, module);
+
+        // Right side
+        module = sqrt(fc_sortie_fft[size-1-i].imag() * fc_sortie_fft[size-1-i].imag() +
+                fc_sortie_fft[size-1-i].real() * fc_sortie_fft[size-1-i].real());
+        moduleMax = qMax(moduleMax, module);
+    }
+
+    // Cut the frequencies according to dValues (representing maximum intensities from minFreq to maxFreq)
+    int nbValues = dValues.count();
+    for (unsigned long i = 0; i < (size + 1) / 2; i++)
+    {
+        // Current frequency and current module
+        double freq = (double)(dwSmplRate * i) / ((double)size - 1);
+        double module1 = sqrt(fc_sortie_fft[i].imag() * fc_sortie_fft[i].imag() +
+                              fc_sortie_fft[i].real() * fc_sortie_fft[i].real());
+        double module2 = sqrt(fc_sortie_fft[size - 1 - i].imag() * fc_sortie_fft[size - 1 - i].imag() +
+                              fc_sortie_fft[size - 1 - i].real() * fc_sortie_fft[size - 1 - i].real());
+
+        // Module max
+        double limit = moduleMax;
+        int index1 = (int)(freq / maxFreq * dValues.count());
+        if (index1 >= nbValues - 1)
+            limit *= dValues[nbValues - 1];
+        else
+        {
+            double x1 = (double)index1 / nbValues * maxFreq;
+            double y1 = dValues[index1];
+            double x2 = (double)(index1 + 1) / nbValues * maxFreq;
+            double y2 = dValues[index1 + 1];
+            limit *= ((freq - x1) / (x2 - x1)) * (y2 - y1) + y1;
+        }
+
+        // Cut the frequency if it's above the limit
+        if (module1 > limit && module1 != 0)
+            fc_sortie_fft[i] *= limit / module1;
+        if (module2 > limit && module2 != 0)
+            fc_sortie_fft[size - 1 - i] *= limit / module2;
+    }
+
+    // Calculer l'ifft du signal
+    cpxData = IFFT(fc_sortie_fft, size);
+    delete [] fc_sortie_fft;
+
+    // Prise en compte du facteur d'echelle
+    for (unsigned long i = 0; i < size; i++)
+        cpxData[i].real(cpxData[i].real() / size);
+
+    // Retour en QByteArray
+    QByteArray baRet = fromComplexToBa(cpxData, (long int)baData.size() * 8 / 32, 32);
+    delete [] cpxData;
+
+    // retour wBps si nécessaire
+    if (wBps != 32)
+        baRet = bpsConversion(baRet, 32, wBps);
+
+    return baRet;
+}
+
 QByteArray Sound::EQ(QByteArray baData, quint32 dwSmplRate, quint16 wBps, int i1, int i2, int i3, int i4, int i5,
                          int i6, int i7, int i8, int i9, int i10)
 {
@@ -1412,6 +1498,7 @@ Complex * Sound::FFT(Complex * x, int N)
     delete [] scratch;
     return out;
 }
+
 Complex * Sound::IFFT(Complex * x, int N)
 {
     Complex * out = new Complex[N];
@@ -1428,6 +1515,7 @@ Complex * Sound::IFFT(Complex * x, int N)
     delete [] scratch;
     return out;
 }
+
 void Sound::bpsConversion(char *cDest, const char *cFrom, qint32 size, quint16 wBpsInit, quint16 wBpsFinal, bool bigEndian)
 {
     // Conversion entre formats 32, 24 et 16 bits
@@ -1724,8 +1812,10 @@ QByteArray Sound::bpsConversion(QByteArray baData, quint16 wBpsInit, quint16 wBp
     // Particularité : demander format 824 bits renvoie les 8 bits de poids faible
     //                 dans les 24 bits de poids fort
     int size = baData.size();
+
     // Données de retour
     QByteArray baRet;
+
     // Redimensionnement
     int i = 1;
     int j = 1;
@@ -1744,6 +1834,7 @@ QByteArray Sound::bpsConversion(QByteArray baData, quint16 wBpsInit, quint16 wBp
     default: j = 1;
     }
     baRet.resize((size * j) / i);
+
     // Remplissage
     char * cDest = baRet.data();
     const char * cFrom = baData.constData();
@@ -1856,6 +1947,26 @@ QByteArray Sound::from2MonoTo1Stereo(QByteArray baData1, QByteArray baData2, qui
         }
     }
     return baRet;
+}
+
+QVector<float> Sound::getFourierTransform(QVector<float> input)
+{
+    unsigned long size = 0;
+    Complex * cpxData = fromBaToComplex(input, size);
+    Complex * fc_sortie_fft = FFT(cpxData, size);
+    delete [] cpxData;
+    QVector<float> vectFourier;
+    vectFourier.resize(size / 2);
+    for (unsigned int i = 0; i < size / 2; i++)
+    {
+        vectFourier[i] = 0.5 * qSqrt(fc_sortie_fft[i].real() * fc_sortie_fft[i].real() +
+                                     fc_sortie_fft[i].imag() * fc_sortie_fft[i].imag());
+        vectFourier[i] += 0.5 * qSqrt(fc_sortie_fft[size-i-1].real() * fc_sortie_fft[size-i-1].real() +
+                fc_sortie_fft[size-i-1].imag() * fc_sortie_fft[size-i-1].imag());
+    }
+    delete fc_sortie_fft;
+
+    return vectFourier;
 }
 
 Complex * Sound::fromBaToComplex(QVector<float> fData, long unsigned int &size)
@@ -2205,74 +2316,6 @@ QByteArray Sound::bouclage(QByteArray baData, quint32 dwSmplRate, qint32 &loopSt
     if (wBps != 32)
         baData = bpsConversion(baData, 32, wBps);
     return baData;
-}
-
-QByteArray Sound::sifflements(QByteArray baData, quint32 dwSmplRate, quint16 wBps, double fCut, double fMax, double raideur)
-{
-    // Conversion 32 bits si nécessaire
-    if (wBps != 32)
-        baData = bpsConversion(baData, wBps, 32);
-    // Elimination des fréquences hautes du son
-    unsigned long size;
-    // Conversion de baData en complexes
-    Complex * cpxData;
-    cpxData = fromBaToComplex(baData, 32, size);
-    // Calculer la fft du signal
-    Complex * fc_sortie_fft = FFT(cpxData, size);
-    delete [] cpxData;
-    double pos;
-    // Ajustement raideur
-    raideur += 1;
-    // Module carré maxi de la FFT
-    double moduleMax = 0;
-    for (unsigned long i = 0; i < (size+1)/2; i++)
-    {
-        pos = i / ((double)size-1.0);
-        if (pos * dwSmplRate < fCut)
-        {
-            double module = sqrt(fc_sortie_fft[i].imag() * fc_sortie_fft[i].imag() +
-                            fc_sortie_fft[i].real() * fc_sortie_fft[i].real());
-            moduleMax = qMax(moduleMax, module);
-            module = sqrt(fc_sortie_fft[size-1-i].imag() * fc_sortie_fft[size-1-i].imag() +
-                          fc_sortie_fft[size-1-i].real() * fc_sortie_fft[size-1-i].real());
-            moduleMax = qMax(moduleMax, module);
-        }
-    }
-    for (unsigned long i = 0; i < (size+1)/2; i++)
-    {
-        pos = i / ((double)size-1);
-        if (pos * dwSmplRate > fMax)
-        {
-            fc_sortie_fft[i] *= 0;
-            fc_sortie_fft[size-1-i] *= 0;
-        }
-        else if (pos * dwSmplRate > fCut)
-        {
-            double module = sqrt(fc_sortie_fft[i].imag() * fc_sortie_fft[i].imag() +
-                                 fc_sortie_fft[i].real() * fc_sortie_fft[i].real());
-            double moduleMaxPos = (1.0 - (double)(pos * dwSmplRate - fCut) / (fMax - fCut));
-            moduleMaxPos = moduleMax * pow(moduleMaxPos, raideur);
-            if (module > moduleMaxPos && module != 0)
-            {
-                fc_sortie_fft[i] *= moduleMaxPos / module;
-                fc_sortie_fft[size-1-i] *= moduleMaxPos / module;
-            }
-        }
-    }
-
-    // Calculer l'ifft du signal
-    cpxData = IFFT(fc_sortie_fft, size);
-    delete [] fc_sortie_fft;
-    // Prise en compte du facteur d'echelle
-    for (unsigned long i = 0; i < size; i++)
-        cpxData[i].real(cpxData[i].real() / size);
-    // Retour en QByteArray
-    QByteArray baRet = fromComplexToBa(cpxData, (long int)baData.size() * 8 / 32, 32);
-    delete [] cpxData;
-    // retour wBps si nécessaire
-    if (wBps != 32)
-        baRet = bpsConversion(baRet, 32, wBps);
-    return baRet;
 }
 
 QList<int> Sound::findMins(QVector<float> vectData, int maxNb, double minFrac)

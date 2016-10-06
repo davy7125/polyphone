@@ -29,9 +29,8 @@
 #include "page.h"
 
 // Constructeur, destructeur
-DialogParamGlobal::DialogParamGlobal(Pile_sf2 *sf2, bool isPrst, QWidget *parent) :
+DialogParamGlobal::DialogParamGlobal(bool isPrst, QWidget *parent) :
     QDialog(parent),
-    _sf2(sf2),
     ui(new Ui::DialogParamGlobal),
     _isPrst(isPrst)
 {
@@ -145,6 +144,7 @@ DialogParamGlobal::DialogParamGlobal(Pile_sf2 *sf2, bool isPrst, QWidget *parent
     // Zone du clavier
     ui->graphParamGlobal->setEtendueClavier(ConfManager::getInstance()->getValue(ConfManager::SECTION_KEYBOARD, "type", 0).toInt());
 }
+
 DialogParamGlobal::~DialogParamGlobal()
 {
     delete ui;

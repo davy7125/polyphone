@@ -179,10 +179,9 @@ private slots:
     void enleveFin();           // outil sample, ajuster à la fin de boucle
     void normalisation();       // outil sample, normalisation
     void bouclage();            // outil sample, bouclage
-    void filtreMur();           // outil sample, filtre "mur de brique"
+    void filtre();              // outil sample, filtre "mur de brique"
     void reglerBalance();       // outil sample, réglage de la balance (samples liés)
     void transposer();          // outil sample, transposition
-    void sifflements();         // outil sample, suppression des sifflements
     void command();             // outil sample, utilisation d'une commande externe
     void desaccorder();         // outil instrument, désaccordage ondulant
     void repartitionAuto();     // outil instrument, répartition automatique keyrange
