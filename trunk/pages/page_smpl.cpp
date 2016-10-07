@@ -28,6 +28,7 @@
 #include "sound.h"
 #include "dialog_command.h"
 #include "dialog_filter_frequencies.h"
+#include "dialog_change_volume.h"
 #include "graphique.h"
 #include "graphiquefourier.h"
 #include "confmanager.h"
@@ -102,6 +103,7 @@ Page_Smpl::Page_Smpl(QWidget *parent) :
         layout->addWidget(tabWidget, 0, 0, 0, 1);
     }
 }
+
 Page_Smpl::~Page_Smpl()
 {
     delete ui;
@@ -920,7 +922,22 @@ EltID Page_Smpl::getRepercussionID(EltID id)
 }
 
 // Outils
-void Page_Smpl::normalisation()
+void Page_Smpl::changeVolume()
+{
+    QList<EltID> ids = _tree->getAllIDs();
+    if (ids.isEmpty())
+        return;
+
+    // Create a dialog
+    DialogChangeVolume * dial = new DialogChangeVolume(this);
+    this->connect(dial, SIGNAL(accepted(int, double)), SLOT(changeVolume(int, double)));
+    dial->setAttribute(Qt::WA_DeleteOnClose, true);
+
+    // Display the dialog
+    dial->show();
+}
+
+void Page_Smpl::changeVolume(int mode, double value)
 {
     if (_preparation) return;
     _sf2->prepareNewActions();
@@ -929,15 +946,11 @@ void Page_Smpl::normalisation()
     int nbEtapes = 0;
     QList<EltID> listID = _tree->getAllIDs();
     foreach (EltID id, listID)
-    {
-        if (id.typeElement == elementSmpl)
-        {
-            if (!_sf2->get(id, champ_hidden).bValue)
-                nbEtapes++;
-        }
-    }
+        if (id.typeElement == elementSmpl && !_sf2->get(id, champ_hidden).bValue)
+            nbEtapes++;
     if (nbEtapes == 0)
         return;
+
     // Ouverture d'une barre de progression
     QString textProgress = trUtf8("Traitement ");
     QProgressDialog progress("", trUtf8("Annuler"), 0, nbEtapes, this);
@@ -948,30 +961,38 @@ void Page_Smpl::normalisation()
 
     foreach (EltID id, listID)
     {
-        if (id.typeElement == elementSmpl)
+        if (id.typeElement == elementSmpl && !_sf2->get(id, champ_hidden).bValue)
         {
-            if (!_sf2->get(id, champ_hidden).bValue)
+            QString name = _sf2->getQstr(id, champ_name);
+            progress.setLabelText(textProgress + name);
+            QApplication::processEvents();
+
+            QByteArray baData = _sf2->getData(id, champ_sampleDataFull24);
+
+            double db = 0;
+            switch (mode)
             {
-                QString name = _sf2->getQstr(id, champ_name);
-                progress.setLabelText(textProgress + name);
-                QApplication::processEvents();
-                double db = 0;
-                QByteArray baData = _sf2->getData(id, champ_sampleDataFull24);
-                baData = Sound::normaliser(baData, 0.9, 24, db);
-                if (db != 0)
-                    _sf2->set(id, champ_sampleDataFull24, baData);
-                if (!progress.wasCanceled())
-                    progress.setValue(progress.value() + 1);
-                else
-                {
-                    // Mise à jour et sortie
-                    _mainWindow->updateDo();
-                    this->afficher();
-                    return;
-                }
+            case 0: // Add dB
+                // Compute the factor
+                value = qPow(10, value / 20.0);
+                baData = Sound::multiplier(baData, value, 24, db);
+                break;
+            case 1: // Multiply by a factor
+                baData = Sound::multiplier(baData, value, 24, db);
+                break;
+            case 2: // Normalize
+                baData = Sound::normaliser(baData, value / 100, 24, db);
+                break;
             }
+
+            _sf2->set(id, champ_sampleDataFull24, baData);
+
+            if (progress.wasCanceled())
+                break;
+            progress.setValue(progress.value() + 1);
         }
     }
+
     // Actualisation
     _mainWindow->updateDo();
     this->afficher();
@@ -1229,8 +1250,7 @@ void Page_Smpl::filter()
 
     // Create a dialog
     DialogFilterFrequencies * dial = new DialogFilterFrequencies(this);
-    this->connect(dial, SIGNAL(accepted(QVector<double>)),
-                  SLOT(filter(QVector<double>)));
+    this->connect(dial, SIGNAL(accepted(QVector<double>)), SLOT(filter(QVector<double>)));
     dial->setAttribute(Qt::WA_DeleteOnClose, true);
 
     // Add Fourier transforms
@@ -1408,62 +1428,6 @@ void Page_Smpl::reglerBalance()
     _mainWindow->updateDo();
     this->afficher();
 }
-
-//void Page_Smpl::sifflements(int freq1, int freq2, double raideur)
-//{
-//    // Elimination des sifflements
-//    _sf2->prepareNewActions();
-
-//    // Calcul du nombre d'étapes
-//    int nbEtapes = 0;
-//    QList<EltID> listID = _tree->getAllIDs();
-//    foreach (EltID id, listID)
-//    {
-//        if (id.typeElement == elementSmpl)
-//        {
-//            if (!_sf2->get(id, champ_hidden).bValue)
-//                nbEtapes++;
-//        }
-//    }
-//    if (nbEtapes == 0)
-//        return;
-
-//    // Ouverture d'une barre de progression
-//    QString textProgress = trUtf8("Traitement ");
-//    QProgressDialog progress("", trUtf8("Annuler"), 0, nbEtapes, this);
-//    progress.setWindowFlags(progress.windowFlags() & ~Qt::WindowContextHelpButtonHint);
-//    progress.setWindowModality(Qt::WindowModal);
-//    progress.setFixedWidth(350);
-//    progress.show();
-//    foreach (EltID id, listID)
-//    {
-//        if (id.typeElement == elementSmpl)
-//        {
-//            if (!_sf2->get(id, champ_hidden).bValue)
-//            {
-//                QString name = _sf2->getQstr(id, champ_name);
-//                progress.setLabelText(textProgress + name);
-//                QApplication::processEvents();
-//                QByteArray baData = _sf2->getData(id, champ_sampleDataFull24);
-//                quint32 dwSmplRate = _sf2->get(id, champ_dwSampleRate).dwValue;
-//                baData = Sound::sifflements(baData, dwSmplRate, 24, freq1, freq2, raideur);
-//                _sf2->set(id, champ_sampleDataFull24, baData);
-//                if (!progress.wasCanceled())
-//                    progress.setValue(progress.value() + 1);
-//                else
-//                {
-//                    // Mise à jour et sortie
-//                    _mainWindow->updateDo();
-//                    this->afficher();
-//                    return;
-//                }
-//            }
-//        }
-//    }
-//    // Mise à jour
-//    _mainWindow->updateDo();
-//    this->afficher();
-//}
 
 void Page_Smpl::transposer()
 {

@@ -42,7 +42,7 @@ public:
 
     // Méthodes publiques
     void afficher();
-    void normalisation();
+    void changeVolume();
     void enleveBlanc();
     void enleveBlanc(EltID id);
     void enleveFin();
@@ -67,6 +67,7 @@ private slots:
     void filter(QVector<double> dValues);
     void command(QString command, bool stereo, bool replaceInfo);
     void commandFinished();
+    void changeVolume(int mode, double value);
     void setStartLoop();
     void setStartLoop(int val);
     void setEndLoop();

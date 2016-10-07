@@ -4,16 +4,17 @@ polyphone (1.8) unstable; urgency=low
   * (new) czech translation
   * (new) links to the online manual & forum
   * (new) tool to call an external editor for samples
+  * (improvement) tool "normalize volume" replaced by "change volume" 
   * (improvement) tools "remove whistling" and "brickwall filter" replaced by "filter frequencies" 
   * (improvement) the attenuation tool can now deal with global parameters and presets 
   * (improvement) using space or enter over a cell makes it editable
   * (improvement) ctrl-x can be used in the tables
   * (improvement) double-clicking on a division go to the corresponding sample or instrument
   * (improvement) logo changed
-  * (fix) two alt-C hints were used in the close sf2 dialog
   * (fix) a progress dialog was displayed when opening the software
   * (fix) natural order in the tree and tables
   * (fix) behaviour of the "loop playback" cell in the tables
+  * (fix) small GUI issues
 
  -- Davy Triponney <davy.triponney@gmail.com>  Wed, 27 Oct 2016 20:51:55 +0100
 
