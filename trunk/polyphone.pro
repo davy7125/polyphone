@@ -236,7 +236,9 @@ SOURCES	+= main.cpp \
     tools/dialog_attenuation.cpp \
     tools/dialog_command.cpp \
     tools/externalcommandrunner.cpp \
-    tools/dialog_filter_frequencies.cpp
+    tools/dialog_filter_frequencies.cpp \
+    pages/tablecombobox.cpp \
+    tools/dialog_change_volume.cpp
 
 HEADERS  += mainwindow.h \
     sf2_core/sf2_types.h \
@@ -327,7 +329,8 @@ HEADERS  += mainwindow.h \
     tools/dialog_attenuation.h \
     tools/dialog_command.h \
     tools/externalcommandrunner.h \
-    tools/dialog_filter_frequencies.h
+    tools/dialog_filter_frequencies.h \
+    tools/dialog_change_volume.h
 
 FORMS    += mainwindow.ui \
     configuration/config.ui \
@@ -353,7 +356,8 @@ FORMS    += mainwindow.ui \
     gui_divers/dialogchangelog.ui \
     tools/dialog_attenuation.ui \
     tools/dialog_command.ui \
-    tools/dialog_filter_frequencies.ui
+    tools/dialog_filter_frequencies.ui \
+    tools/dialog_change_volume.ui
 
 RESOURCES += ressources.qrc \
     clavier/pianokeybd.qrc
