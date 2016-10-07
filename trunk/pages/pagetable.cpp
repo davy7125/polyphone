@@ -32,6 +32,7 @@
 #include "dialog_duplication.h"
 #include "dialogselection.h"
 #include "graphicsviewrange.h"
+#include "thememanager.h"
 #include "utils.h"
 #include <QScrollBar>
 #include <QMenu>
