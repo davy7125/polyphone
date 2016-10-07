@@ -177,7 +177,7 @@ private slots:
 
     void enleveBlanc();         // outil sample, enlever blanc au départ
     void enleveFin();           // outil sample, ajuster à la fin de boucle
-    void normalisation();       // outil sample, normalisation
+    void changeVolume();       // outil sample, change volume
     void bouclage();            // outil sample, bouclage
     void filtre();              // outil sample, filtre "mur de brique"
     void reglerBalance();       // outil sample, réglage de la balance (samples liés)
