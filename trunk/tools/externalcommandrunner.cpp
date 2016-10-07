@@ -8,8 +8,7 @@ ExternalCommandRunner::ExternalCommandRunner(Pile_sf2 *sf2, QWidget *parent) :
     QObject(parent),
     _sf2(sf2),
     _progress(NULL),
-    _process(NULL),
-    _tempFile(NULL)
+    _process(NULL)
 {}
 
 ExternalCommandRunner::~ExternalCommandRunner()
@@ -93,14 +92,19 @@ void ExternalCommandRunner::processOne()
     QApplication::processEvents();
 
     // Export the sample in a temporary file
-    _tempFile = new QTemporaryFile(QApplication::applicationName() + "-XXXXXX.wav");
-    _tempFile->open();
-    _tempFile->close();
+    QTemporaryFile * tempFile = new QTemporaryFile(QApplication::applicationName() + "-XXXXXX.wav");
+    tempFile->open();
+    _pathTempFile = tempFile->fileName();
+    tempFile->close();
     if (ids.count() == 2)
-        Sound::exporter(_tempFile->fileName(), _sf2->getSon(_id1), _sf2->getSon(_id2));
+        Sound::exporter(_pathTempFile, _sf2->getSon(_id1), _sf2->getSon(_id2));
     else
-        Sound::exporter(_tempFile->fileName(), _sf2->getSon(_id1));
-    _arguments[_indexWav] = _tempFile->fileName();
+        Sound::exporter(_pathTempFile, _sf2->getSon(_id1));
+    _arguments[_indexWav] = _pathTempFile;
+
+    // Definitely close the file
+    tempFile->setAutoRemove(false);
+    delete tempFile;
 
     // Start a new process
     _process = new QProcess(this);
@@ -118,7 +122,7 @@ void ExternalCommandRunner::onProcessStateChanged(QProcess::ProcessState state)
     _process = NULL;
 
     // Import the sample
-    Sound sound(_tempFile->fileName(), false);
+    Sound sound(_pathTempFile, false);
     Valeur val;
     val.wValue = 0;
     sound.set(champ_wChannel, val);
@@ -131,8 +135,7 @@ void ExternalCommandRunner::onProcessStateChanged(QProcess::ProcessState state)
     }
 
     // Delete the temporary file
-    delete _tempFile;
-    _tempFile = NULL;
+    QFile::remove(_pathTempFile);
 
     // Process the new sample if possible or quit
     if (_remainingIds.isEmpty() || _progress->wasCanceled())
