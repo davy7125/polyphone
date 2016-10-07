@@ -57,8 +57,8 @@ private:
     /// Current process
     QProcess * _process;
 
-    /// Current temporary file
-    QTemporaryFile * _tempFile;
+    /// Path of the temporary file
+    QString _pathTempFile;
 
     /// Current samples that are being edited (only one if mono)
     EltID _id1, _id2;
