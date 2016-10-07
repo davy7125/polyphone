@@ -199,7 +199,7 @@
      <x>0</x>
      <y>0</y>
      <width>546</width>
-     <height>23</height>
+     <height>21</height>
     </rect>
    </property>
    <property name="accessibleDescription">
@@ -1084,10 +1084,10 @@
      <normaloff>:/icones/normalise</normaloff>:/icones/normalise</iconset>
    </property>
    <property name="text">
-    <string>&amp;Normaliser volume</string>
+    <string>&amp;Modifier volume</string>
    </property>
    <property name="toolTip">
-    <string>Normalise le volume</string>
+    <string>Modifie le volume</string>
    </property>
   </action>
   <action name="actionBouclage_automatique">
@@ -2137,7 +2137,7 @@
    <sender>actionNormaliser_volume</sender>
    <signal>triggered()</signal>
    <receiver>MainWindow</receiver>
-   <slot>normalisation()</slot>
+   <slot>changeVolume()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>-1</x>
@@ -2611,7 +2611,7 @@
   <slot>nouveauPreset()</slot>
   <slot>enleveBlanc()</slot>
   <slot>enleveFin()</slot>
-  <slot>normalisation()</slot>
+  <slot>changeVolume()</slot>
   <slot>bouclage()</slot>
   <slot>filtre()</slot>
   <slot>transposer()</slot>

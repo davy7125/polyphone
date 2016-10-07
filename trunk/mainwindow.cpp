@@ -37,6 +37,7 @@
 #include "keynamemanager.h"
 #include <QFileDialog>
 #include <QInputDialog>
+#include <QUrl>
 #include <QDate>
 #include <QLibrary>
 #include <QDesktopWidget>
@@ -713,12 +714,12 @@ void MainWindow::showAbout()
 void MainWindow::showHelp()
 {
     // Open online documentation
-    QDesktopServices::openUrl(trUtf8("http://polyphone-soundfonts.com/fr/documentation"));
+    QDesktopServices::openUrl(QUrl(trUtf8("http://polyphone-soundfonts.com/fr/documentation")));
 }
 void MainWindow::on_action_Forum_triggered()
 {
     // Open online forum
-    QDesktopServices::openUrl(trUtf8("http://polyphone-soundfonts.com/fr/forum"));
+    QDesktopServices::openUrl(QUrl(trUtf8("http://polyphone-soundfonts.com/fr/forum")));
 }
 
 void MainWindow::AfficherBarreOutils()
@@ -2287,7 +2288,7 @@ void MainWindow::supprimer()
 // Outils
 void MainWindow::enleveBlanc()      {this->page_smpl->enleveBlanc();}
 void MainWindow::enleveFin()        {this->page_smpl->enleveFin();}
-void MainWindow::normalisation()    {this->page_smpl->normalisation();}
+void MainWindow::changeVolume()     {this->page_smpl->changeVolume();}
 void MainWindow::bouclage()         {this->page_smpl->bouclage();}
 void MainWindow::filtre()           {this->page_smpl->filter();}
 void MainWindow::reglerBalance()    {this->page_smpl->reglerBalance();}

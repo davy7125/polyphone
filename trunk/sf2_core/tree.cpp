@@ -26,6 +26,7 @@
 #include "mainwindow.h"
 #include <QMenu>
 #include <QAction>
+#include <QUrl>
 #include <QComboBox>
 #include "pile_sf2.h"
 

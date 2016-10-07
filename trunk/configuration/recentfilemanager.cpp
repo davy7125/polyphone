@@ -26,6 +26,7 @@
 #include "confmanager.h"
 #include <QFile>
 #include <QDir>
+#include <QDesktopServices>
 
 RecentFileManager * RecentFileManager::_instance = NULL;
 
