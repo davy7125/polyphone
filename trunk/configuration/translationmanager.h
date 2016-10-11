@@ -47,9 +47,10 @@ private:
     static TranslationManager * getInstance();
     static TranslationManager * _instance;
 
-    void addTranslation(QString languageName, QString locale);
+    void addTranslations(QString path);
     static const QString DEFAULT_LANGUAGE;
     static const QString RESOURCE_PATH;
+    static const QString TRANSLATION_DIRECTORY;
     QTranslator * _translator;
     QMap<QString, QString> _languages;
 };
