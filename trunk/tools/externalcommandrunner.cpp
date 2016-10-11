@@ -3,6 +3,7 @@
 #include <QProgressDialog>
 #include <QApplication>
 #include <QTemporaryFile>
+#include <QDir>
 
 ExternalCommandRunner::ExternalCommandRunner(Pile_sf2 *sf2, QWidget *parent) :
     QObject(parent),
@@ -92,7 +93,7 @@ void ExternalCommandRunner::processOne()
     QApplication::processEvents();
 
     // Export the sample in a temporary file
-    QTemporaryFile * tempFile = new QTemporaryFile(QApplication::applicationName() + "-XXXXXX.wav");
+    QTemporaryFile * tempFile = new QTemporaryFile(QDir::tempPath() + "/" + QApplication::applicationName() + "-XXXXXX.wav");
     tempFile->open();
     _pathTempFile = tempFile->fileName();
     tempFile->close();
@@ -100,7 +101,12 @@ void ExternalCommandRunner::processOne()
         Sound::exporter(_pathTempFile, _sf2->getSon(_id1), _sf2->getSon(_id2));
     else
         Sound::exporter(_pathTempFile, _sf2->getSon(_id1));
+
+#ifdef Q_OS_WIN
+    _arguments[_indexWav] = _pathTempFile.replace('/', '\\');
+#else
     _arguments[_indexWav] = _pathTempFile;
+#endif
 
     // Definitely close the file
     tempFile->setAutoRemove(false);

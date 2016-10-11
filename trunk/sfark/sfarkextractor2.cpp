@@ -132,7 +132,7 @@ void CloseOutputFile()
 
 #include <stdio.h>
 
-#ifdef TARGET_WIN32
+#ifdef Q_OS_WIN
 // Windows32 target
 #define WIN32_LEAN_AND_MEAN		// Exclude rarely-used stuff from Windows headers
 #include "windows.h"
