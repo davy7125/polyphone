@@ -68,7 +68,7 @@ int launchApplication(Options &options, QApplication &a)
     foreach (QString file, inputFiles)
         w.dragAndDrop(file, EltID(elementUnknown, -1, -1, -1, -1), &numSf2);
 
-#ifdef Q_OS_MACX
+#ifdef Q_OS_MAC
     QObject::connect(&a, SIGNAL(openFile(QString)), &w, SLOT(dragAndDrop(QString)));
 #endif
 
@@ -194,7 +194,7 @@ int convert(Options &options)
 
 int main(int argc, char *argv[])
 {
-#ifdef Q_OS_MACX
+#ifdef Q_OS_MAC
     MacApplication a(argc, argv);
 #else
     QApplication a(argc, argv);

@@ -199,7 +199,7 @@
      <x>0</x>
      <y>0</y>
      <width>546</width>
-     <height>21</height>
+     <height>23</height>
     </rect>
    </property>
    <property name="accessibleDescription">
@@ -1084,7 +1084,7 @@
      <normaloff>:/icones/normalise</normaloff>:/icones/normalise</iconset>
    </property>
    <property name="text">
-    <string>&amp;Modifier volume</string>
+    <string>&amp;Modifier volume...</string>
    </property>
    <property name="toolTip">
     <string>Modifie le volume</string>
