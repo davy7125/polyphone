@@ -24,30 +24,28 @@
 ***************************************************************************/
 
 #include "translationmanager.h"
+#include "confmanager.h"
 #include <QLocale>
 #include <QApplication>
-#include <QSettings>
 #include <QTranslator>
 #include <QDirIterator>
 
 TranslationManager * TranslationManager::_instance = NULL;
 const QString TranslationManager::DEFAULT_LANGUAGE = "en"; // English is the default language;
 const QString TranslationManager::RESOURCE_PATH = ":/traductions/ressources/traductions";
+const QString TranslationManager::TRANSLATION_DIRECTORY = "translations";
 
 TranslationManager::TranslationManager() :
     _translator(new QTranslator())
 {
-    // List of available languages (in code + in translation files)
-    this->addTranslation(QLocale("fr").nativeLanguageName(), "fr");
-    QDirIterator it(RESOURCE_PATH, QDirIterator::Subdirectories);
-    while (it.hasNext())
-    {
-        // Language
-        QString language = it.next().section('_', 1, 1).section(".", 0, 0);
-        QString languageName = QLocale(language).nativeLanguageName();
-        if (languageName != "")
-            this->addTranslation(languageName, language);
-    }
+    // Native language
+    _languages["fr"] = QLocale("fr").nativeLanguageName();
+
+    // Languages in embedded translation file
+    this->addTranslations(RESOURCE_PATH);
+
+    // Languages in the translation directory
+    this->addTranslations(QDir::currentPath() + "/" + TRANSLATION_DIRECTORY);
 }
 
 TranslationManager::~TranslationManager()
@@ -63,23 +61,38 @@ TranslationManager * TranslationManager::getInstance()
     return _instance;
 }
 
-void TranslationManager::addTranslation(QString languageName, QString locale)
+void TranslationManager::addTranslations(QString path)
 {
-    _languages[locale] = languageName;
+    QDirIterator it(path, QDirIterator::Subdirectories);
+    while (it.hasNext())
+    {
+        // Language
+        QString locale = it.next().section('_', 1, 1).section(".", 0, 0);
+        QString languageName = QLocale(locale).nativeLanguageName();
+        if (languageName != "")
+            _languages[locale] = languageName;
+    }
 }
 
 void TranslationManager::translate(QApplication * a)
 {
     // Language used
-    QSettings settings;
-    QString language = settings.value("language", QLocale::system().name().section('_', 0, 0)).toString();
+    QString language = ConfManager::getInstance()->getValue(
+                ConfManager::SECTION_NONE, "language",
+                QLocale::system().name().section('_', 0, 0)).toString();
 
     // If not french, the application is translated
     if (language != "fr")
     {
         if (!getInstance()->_languages.keys().contains(language))
             language = DEFAULT_LANGUAGE;
-        getInstance()->_translator->load(RESOURCE_PATH + "/polyphone_" + language + ".qm");
+
+        // First try to find an additional file
+        QString fileName = "/polyphone_" + language + ".qm";
+        if (QFile::exists(QDir::currentPath() + "/" + TRANSLATION_DIRECTORY + fileName))
+            getInstance()->_translator->load(QDir::currentPath() + "/" + TRANSLATION_DIRECTORY + fileName);
+        else
+            getInstance()->_translator->load(RESOURCE_PATH + fileName);
         a->installTranslator(getInstance()->_translator);
     }
 }
