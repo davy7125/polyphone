@@ -11,6 +11,7 @@ polyphone (1.8) unstable; urgency=low
   * (improvement) ctrl-x can be used in the tables
   * (improvement) double-clicking on a division go to the corresponding sample or instrument
   * (improvement) logo changed
+  * (improvement) translation files can be outside the executable
   * (fix) a progress dialog was displayed when opening the software
   * (fix) natural order in the tree and tables
   * (fix) behaviour of the "loop playback" cell in the tables

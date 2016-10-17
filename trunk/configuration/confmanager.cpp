@@ -34,9 +34,7 @@ MainWindow * ConfManager::_mainWindow = NULL;
 
 ConfManager::ConfManager(): QObject(_mainWindow),
     _settings(this)
-{
-
-}
+{}
 
 QVariant ConfManager::getValue(Section section, QString key, QVariant defaultValue) const
 {
@@ -96,4 +94,9 @@ QString ConfManager::getFullKey(ToolType toolType, QString toolName, QString key
     }
 
     return getFullKey(SECTION_TOOLS, subSection + "/" + toolName + "_" + key);
+}
+
+QString ConfManager::getConfigDir()
+{
+    return QFileInfo(_settings.fileName()).dir().path();
 }

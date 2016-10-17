@@ -141,41 +141,9 @@
         <translation>Rozkmit</translation>
     </message>
     <message>
-        <source>Arrière-plan</source>
-        <translation type="vanished">Pozadí</translation>
-    </message>
-    <message>
-        <source>Onde</source>
-        <translation type="vanished">Vlna</translation>
-    </message>
-    <message>
-        <source>Grille</source>
-        <translation type="vanished">Mřížka</translation>
-    </message>
-    <message>
-        <source>Début de boucle</source>
-        <translation type="vanished">Začátek smyčky</translation>
-    </message>
-    <message>
-        <source>Fin de boucle</source>
-        <translation type="vanished">Konec smyčky</translation>
-    </message>
-    <message>
-        <source>Barre de lecture</source>
-        <translation type="vanished">Ukazatel přehrávání</translation>
-    </message>
-    <message>
         <location filename="configuration/config.ui" line="1644"/>
         <source>Réinitialiser</source>
         <translation>Nastavit znovu</translation>
-    </message>
-    <message>
-        <source>Échantillons</source>
-        <translation type="vanished">Vzorky</translation>
-    </message>
-    <message>
-        <source>Couleurs du graphique</source>
-        <translation type="vanished">Barvy grafiky</translation>
     </message>
     <message>
         <location filename="configuration/config.ui" line="207"/>
@@ -238,14 +206,6 @@
         <translation>Jednočárkované C (C1) → C5, pak D♭5</translation>
     </message>
     <message>
-        <source>fixe</source>
-        <translation type="vanished">pevná</translation>
-    </message>
-    <message>
-        <source>Largeur des colonnes</source>
-        <translation type="vanished">Šířka sloupců</translation>
-    </message>
-    <message>
         <location filename="configuration/config.ui" line="335"/>
         <source>Langue</source>
         <translation>Jazyk</translation>
@@ -253,12 +213,12 @@
     <message>
         <location filename="configuration/config.ui" line="570"/>
         <source>Sélection</source>
-        <translation type="unfinished"></translation>
+        <translation>Výběr</translation>
     </message>
     <message>
         <location filename="configuration/config.ui" line="583"/>
         <source>Fond alternatif</source>
-        <translation type="unfinished"></translation>
+        <translation>Náhradní pozadí</translation>
     </message>
     <message>
         <location filename="configuration/config.ui" line="630"/>
@@ -266,12 +226,12 @@
         <location filename="configuration/config.ui" line="669"/>
         <location filename="configuration/config.ui" line="936"/>
         <source>Texte</source>
-        <translation type="unfinished"></translation>
+        <translation>Text</translation>
     </message>
     <message>
         <location filename="configuration/config.ui" line="643"/>
         <source>Fenêtre</source>
-        <translation type="unfinished"></translation>
+        <translation>Okno</translation>
     </message>
     <message>
         <location filename="configuration/config.ui" line="682"/>
@@ -279,22 +239,22 @@
         <location filename="configuration/config.ui" line="739"/>
         <location filename="configuration/config.ui" line="923"/>
         <source>Fond</source>
-        <translation type="unfinished"></translation>
+        <translation>Pozadí</translation>
     </message>
     <message>
         <location filename="configuration/config.ui" line="752"/>
         <source>Bouton</source>
-        <translation type="unfinished"></translation>
+        <translation>Tlačítko</translation>
     </message>
     <message>
         <location filename="configuration/config.ui" line="962"/>
         <source>Thème de couleur</source>
-        <translation type="unfinished"></translation>
+        <translation>Barevné téma</translation>
     </message>
     <message>
         <location filename="configuration/config.ui" line="985"/>
         <source>Liste et tableau</source>
-        <translation type="unfinished"></translation>
+        <translation>Seznam a tabulka</translation>
     </message>
     <message>
         <location filename="configuration/config.ui" line="1702"/>
@@ -408,31 +368,7 @@
         <location filename="configuration/config.cpp" line="778"/>
         <location filename="configuration/config.cpp" line="789"/>
         <source>Choisissez une couleur</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Couleur du fond</source>
-        <translation type="vanished">Barva pozadí</translation>
-    </message>
-    <message>
-        <source>Couleur de l&apos;onde</source>
-        <translation type="vanished">Barva vlny</translation>
-    </message>
-    <message>
-        <source>Couleur de la grille</source>
-        <translation type="vanished">Barva mřížky</translation>
-    </message>
-    <message>
-        <source>Couleur du début de la boucle</source>
-        <translation type="vanished">Barva začátku smyčky</translation>
-    </message>
-    <message>
-        <source>Couleur de la fin de la boucle</source>
-        <translation type="vanished">Barva konce smyčky</translation>
-    </message>
-    <message>
-        <source>Couleur du curseur de lecture</source>
-        <translation type="vanished">Barva ukazatele přehrávání</translation>
+        <translation>Vyberte barvu</translation>
     </message>
     <message>
         <location filename="configuration/config.cpp" line="370"/>
@@ -779,7 +715,7 @@
     </message>
     <message>
         <location filename="gui_divers/dialog_about.cpp" line="59"/>
-        <location filename="gui_divers/dialog_about.cpp" line="64"/>
+        <location filename="gui_divers/dialog_about.cpp" line="65"/>
         <source>Steve Clarke</source>
         <translation>Steve Clarke</translation>
     </message>
@@ -793,47 +729,52 @@
         <source>Jay Alexander Fleming</source>
         <translation>Jay Alexander Fleming</translation>
     </message>
+    <message>
+        <location filename="gui_divers/dialog_about.cpp" line="64"/>
+        <source>Pavel Fric</source>
+        <translation>Pavel Fric</translation>
+    </message>
 </context>
 <context>
     <name>DialogAttenuation</name>
     <message>
         <location filename="tools/dialog_attenuation.ui" line="17"/>
         <source>Régler les atténuations</source>
-        <translation type="unfinished"></translation>
+        <translation>Upravit zeslabení</translation>
     </message>
     <message>
         <location filename="tools/dialog_attenuation.ui" line="45"/>
         <source>Instruments</source>
-        <translation type="unfinished">Nástroje</translation>
+        <translation>Nástroje</translation>
     </message>
     <message>
         <location filename="tools/dialog_attenuation.ui" line="82"/>
         <location filename="tools/dialog_attenuation.ui" line="203"/>
         <source>Offset possible</source>
-        <translation type="unfinished"></translation>
+        <translation>Možný posun</translation>
     </message>
     <message>
         <location filename="tools/dialog_attenuation.ui" line="95"/>
         <location filename="tools/dialog_attenuation.ui" line="190"/>
         <source>Étendue des atténuations</source>
-        <translation type="unfinished"></translation>
+        <translation>Rozsah zeslabení</translation>
     </message>
     <message>
         <location filename="tools/dialog_attenuation.ui" line="121"/>
         <location filename="tools/dialog_attenuation.ui" line="242"/>
         <source> dB</source>
-        <translation type="unfinished"></translation>
+        <translation> dB</translation>
     </message>
     <message>
         <location filename="tools/dialog_attenuation.ui" line="137"/>
         <location filename="tools/dialog_attenuation.ui" line="177"/>
         <source>Valeur désirée</source>
-        <translation type="unfinished"></translation>
+        <translation>Požadovaná hodnota</translation>
     </message>
     <message>
         <location filename="tools/dialog_attenuation.ui" line="153"/>
         <source>Presets</source>
-        <translation type="unfinished">Přednastavení</translation>
+        <translation>Přednastavení</translation>
     </message>
 </context>
 <context>
@@ -918,32 +859,32 @@
     <message>
         <location filename="tools/dialog_change_volume.ui" line="17"/>
         <source>Modifier le volume</source>
-        <translation type="unfinished"></translation>
+        <translation>Změnit hlasitost</translation>
     </message>
     <message>
         <location filename="tools/dialog_change_volume.ui" line="27"/>
         <source>Ajouter</source>
-        <translation type="unfinished"></translation>
+        <translation>Přidat</translation>
     </message>
     <message>
         <location filename="tools/dialog_change_volume.ui" line="34"/>
         <source>Multiplier</source>
-        <translation type="unfinished"></translation>
+        <translation>Násobit</translation>
     </message>
     <message>
         <location filename="tools/dialog_change_volume.ui" line="41"/>
         <source>Normaliser</source>
-        <translation type="unfinished"></translation>
+        <translation>Normalizovat</translation>
     </message>
     <message>
         <location filename="tools/dialog_change_volume.ui" line="51"/>
         <source> %</source>
-        <translation type="unfinished"></translation>
+        <translation> %</translation>
     </message>
     <message>
         <location filename="tools/dialog_change_volume.ui" line="90"/>
         <source> dB</source>
-        <translation type="unfinished"></translation>
+        <translation> dB</translation>
     </message>
 </context>
 <context>
@@ -951,59 +892,53 @@
     <message>
         <location filename="tools/dialog_command.ui" line="17"/>
         <source>Utiliser une commande externe</source>
-        <translation type="unfinished"></translation>
+        <translation>Použít vnější příkaz</translation>
     </message>
     <message>
         <location filename="tools/dialog_command.ui" line="39"/>
         <source>Historique</source>
-        <translation type="unfinished"></translation>
+        <translation>Historie</translation>
     </message>
     <message>
         <location filename="tools/dialog_command.ui" line="46"/>
-        <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Cantarell&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Exemples de commandes :&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&amp;quot;C:/Program Files (x86)/Audacity/audacity.exe&amp;quot; {wav}&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;sweep {wav}&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="tools/dialog_command.ui" line="59"/>
         <source>Commande</source>
-        <translation type="unfinished"></translation>
+        <translation>Příkaz</translation>
     </message>
     <message>
-        <location filename="tools/dialog_command.ui" line="80"/>
+        <location filename="tools/dialog_command.ui" line="67"/>
         <source>Remplacer les informations de l&apos;échantillon si possible</source>
-        <translation type="unfinished"></translation>
+        <translation>Nahradit údaje vzorku, je-li to možné</translation>
     </message>
     <message>
-        <location filename="tools/dialog_command.ui" line="103"/>
+        <location filename="tools/dialog_command.ui" line="90"/>
         <source>Autoriser l&apos;édition stéréo</source>
-        <translation type="unfinished"></translation>
+        <translation>Povolit upravování sterea</translation>
+    </message>
+    <message>
+        <location filename="tools/dialog_command.ui" line="127"/>
+        <source>Exemples de commandes :</source>
+        <translation>Příklady příkaz:</translation>
     </message>
     <message>
         <location filename="tools/dialog_command.cpp" line="79"/>
         <source>Fichier exécutable</source>
-        <translation type="unfinished"></translation>
+        <translation>Spustitelný soubor</translation>
     </message>
     <message>
         <location filename="tools/dialog_command.cpp" line="96"/>
         <location filename="tools/dialog_command.cpp" line="103"/>
         <source>Attention</source>
-        <translation type="unfinished">Pozor</translation>
+        <translation>Pozor</translation>
     </message>
     <message>
         <location filename="tools/dialog_command.cpp" line="96"/>
         <source>Vous devez entrer une commande avec au moins {wav} comme argument.</source>
-        <translation type="unfinished"></translation>
+        <translation>Jako argument musíte zadat příkaz s alespoň {wav}.</translation>
     </message>
     <message>
         <location filename="tools/dialog_command.cpp" line="103"/>
         <source>La commande doit contenir l&apos;argument {wav}.</source>
-        <translation type="unfinished"></translation>
+        <translation>Příkaz musí obsahovat argument {wav}.</translation>
     </message>
 </context>
 <context>
@@ -1131,12 +1066,12 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="tools/dialog_filter_frequencies.ui" line="17"/>
         <source>Filtrer fréquences</source>
-        <translation type="unfinished"></translation>
+        <translation>Filtrovat kmitočty</translation>
     </message>
     <message>
         <location filename="tools/dialog_filter_frequencies.ui" line="88"/>
         <source>Mettre dans le rouge les fréquences du signal à filtrer :</source>
-        <translation type="unfinished"></translation>
+        <translation>Začervenit části kmitočtů signálu k filtrování:</translation>
     </message>
 </context>
 <context>
@@ -1534,25 +1469,6 @@ p, li { white-space: pre-wrap; }
     </message>
 </context>
 <context>
-    <name>DialogSifflements</name>
-    <message>
-        <source>Diminuer sifflements</source>
-        <translation type="vanished">Snížit pískání</translation>
-    </message>
-    <message>
-        <source>Début de la coupure (Hz)</source>
-        <translation type="vanished">Začátek řezu (Hz)</translation>
-    </message>
-    <message>
-        <source>Fin de la coupure (Hz)</source>
-        <translation type="vanished">Konec řezu (Hz)</translation>
-    </message>
-    <message>
-        <source>Raideur (0-10)</source>
-        <translation type="vanished">Tuhost (0-10)</translation>
-    </message>
-</context>
-<context>
     <name>DialogSpace</name>
     <message>
         <location filename="tools/dialog_space.ui" line="17"/>
@@ -1677,12 +1593,12 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="tools/externalcommandrunner.cpp" line="45"/>
         <source>Annuler</source>
-        <translation type="unfinished">Zrušit</translation>
+        <translation>Zrušit</translation>
     </message>
     <message>
         <location filename="tools/externalcommandrunner.cpp" line="91"/>
         <source>Traitement </source>
-        <translation type="unfinished">Zacházení  </translation>
+        <translation>Zpracování  </translation>
     </message>
 </context>
 <context>
@@ -1914,7 +1830,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="mainwindow.ui" line="740"/>
         <source>Ré&amp;tablir</source>
-        <translation>Z&amp;novu</translation>
+        <translation>Zn&amp;ovu</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="743"/>
@@ -2047,7 +1963,7 @@ p, li { white-space: pre-wrap; }
         <location filename="mainwindow.ui" line="997"/>
         <source>&amp;Importer des échantillons...</source>
         <oldsource>&amp;Importer des sons...</oldsource>
-        <translation>&amp;Zavést vzorky...</translation>
+        <translation>Z&amp;avést vzorky...</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="1012"/>
@@ -2068,18 +1984,10 @@ p, li { white-space: pre-wrap; }
         <translation>Ořezat vzorek na konci jeho smyčky</translation>
     </message>
     <message>
-        <source>Normalise le volume</source>
-        <translation type="vanished">Normalizovat hlasitost</translation>
-    </message>
-    <message>
         <location filename="mainwindow.ui" line="1105"/>
         <source>Boucle automatiquement l&apos;échantillon</source>
         <oldsource>Boucle automatiquement le sample</oldsource>
         <translation>Smyčkovat vzorek automaticky</translation>
-    </message>
-    <message>
-        <source>Applique un filtre &quot;mur de brique&quot;</source>
-        <translation type="vanished">Použít filtr cihlová zeď</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="1135"/>
@@ -2090,16 +1998,12 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="mainwindow.ui" line="1553"/>
         <source>&amp;Commande externe...</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Vnější příkaz...</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="1556"/>
         <source>Utilise un logiciel ou une commande externe pour modifier un fichier son .wav</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Régle l&apos;atténuation minimale</source>
-        <translation type="vanished">Nastavit nejmenší zeslabení</translation>
+        <translation>Použít vnější program nebo příkaz ke změně zvukového souboru .wav</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="1162"/>
@@ -2115,10 +2019,6 @@ p, li { white-space: pre-wrap; }
         <location filename="mainwindow.ui" line="1210"/>
         <source>Duplication des divisions...</source>
         <translation>Zdvojení dělení...</translation>
-    </message>
-    <message>
-        <source>Diminue les sifflements</source>
-        <translation type="vanished">Snížit pískání</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="1283"/>
@@ -2159,8 +2059,8 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="mainwindow.ui" line="1437"/>
-        <source>Exporter sound&amp;font...</source>
-        <oldsource>Exporter (sf&amp;z)...</oldsource>
+        <source>Ex&amp;porter soundfont...</source>
+        <oldsource>Exporter sound&amp;font...</oldsource>
         <translation>Vyvést zvukovou &amp;banku...</translation>
     </message>
     <message>
@@ -2266,37 +2166,37 @@ p, li { white-space: pre-wrap; }
         <location filename="mainwindow.ui" line="1087"/>
         <source>&amp;Modifier volume...</source>
         <oldsource>&amp;Modifier volume</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Změnit hlasitost...</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="1090"/>
         <source>Modifie le volume</source>
-        <translation type="unfinished"></translation>
+        <translation>Změnit hlasitost</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="1117"/>
         <source>&amp;Filtrer des fréquences...</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Filtrovat kmitočty...</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="1120"/>
         <source>Applique un filtre pour diminuer certaines fréquences</source>
-        <translation type="unfinished"></translation>
+        <translation>Použít filtr k zeslabení některých kmitočtů</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="1147"/>
         <source>&amp;Régler atténuations...</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Upravit zeslabení...</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="1150"/>
         <source>Régle les atténuations des instruments et presets</source>
-        <translation type="unfinished"></translation>
+        <translation>Celkově upravit zeslabení nástrojů a přednastavení</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="1335"/>
         <source>&amp;Élaboration release...</source>
-        <translation>Vytvoření času &amp;vyloudění tónu...</translation>
+        <translation>V&amp;ytvoření času vyloudění tónu...</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="1338"/>
@@ -2319,7 +2219,7 @@ p, li { white-space: pre-wrap; }
         <location filename="mainwindow.ui" line="1377"/>
         <source>&amp;Magnétophone</source>
         <oldsource>Magnétophone</oldsource>
-        <translation>&amp;Nahrávací zařízení</translation>
+        <translation>N&amp;ahrávací zařízení</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="985"/>
@@ -2399,17 +2299,9 @@ p, li { white-space: pre-wrap; }
         <translation>Oř&amp;ezat na konci smyčky</translation>
     </message>
     <message>
-        <source>&amp;Normaliser volume</source>
-        <translation type="vanished">&amp;Normalizovat hlasitost</translation>
-    </message>
-    <message>
         <location filename="mainwindow.ui" line="1102"/>
         <source>&amp;Bouclage automatique</source>
         <translation>Automatické &amp;smyčkování</translation>
-    </message>
-    <message>
-        <source>&amp;Filtre &quot;mur de brique&quot;...</source>
-        <translation type="vanished">&amp;Filtr cihlová zeď...</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="1132"/>
@@ -2417,15 +2309,10 @@ p, li { white-space: pre-wrap; }
         <translation>&amp;Transponovat...</translation>
     </message>
     <message>
-        <source>&amp;Régler atténuation minimale...</source>
-        <oldsource>Régler atténuation minimale...</oldsource>
-        <translation type="vanished">&amp;Nastavit nejmenší zeslabení...</translation>
-    </message>
-    <message>
         <location filename="mainwindow.ui" line="1177"/>
         <location filename="mainwindow.ui" line="1422"/>
         <source>&amp;Spatialisation du son...</source>
-        <translation>&amp;Zprostorovění zvuku...</translation>
+        <translation>Zp&amp;rostorovění zvuku...</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="1180"/>
@@ -2483,10 +2370,6 @@ p, li { white-space: pre-wrap; }
         <translation>Vytvořit směs</translation>
     </message>
     <message>
-        <source>&amp;Diminuer sifflements...</source>
-        <translation type="vanished">&amp;Snížit pískání...</translation>
-    </message>
-    <message>
         <location filename="mainwindow.cpp" line="296"/>
         <source>&amp;Quitter sans enregistrer</source>
         <translation>&amp;Zavřít bez uložení</translation>
@@ -2516,10 +2399,6 @@ p, li { white-space: pre-wrap; }
         <location filename="mainwindow.cpp" line="2838"/>
         <source>Attention</source>
         <translation>Pozor</translation>
-    </message>
-    <message>
-        <source>Operation en cours...</source>
-        <translation type="vanished">Probíhá operace...</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="64"/>
@@ -2622,10 +2501,6 @@ p, li { white-space: pre-wrap; }
         <translation>&quot; již existuje.&lt;br/&gt;Nahradit?</translation>
     </message>
     <message>
-        <source>Atténuation minimale (dB) :</source>
-        <translation type="vanished">Nejmenší zeslabení (dB):</translation>
-    </message>
-    <message>
         <location filename="mainwindow.cpp" line="608"/>
         <source> bits&lt;/b&gt;</source>
         <translation> bitů&lt;/b&gt;</translation>
@@ -2638,7 +2513,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="mainwindow.cpp" line="64"/>
         <source>Opération en cours...</source>
-        <translation type="unfinished"></translation>
+        <translation>Probíhá operace...</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="282"/>
@@ -2834,7 +2709,7 @@ Rozdělení souboru na několik sf2 může potíže vyřešit.</translation>
     <message>
         <location filename="mainwindow.cpp" line="2501"/>
         <source>Le fichier doit contenir au moins un instrument.</source>
-        <translation type="unfinished"></translation>
+        <translation>Soubor se zvukovou bankou musí obsahovat alespoň jeden nástroj.</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="2770"/>
@@ -4620,7 +4495,7 @@ spojen</translation>
     <message>
         <location filename="pages/page_smpl.cpp" line="1345"/>
         <source>Cet outil ne s&apos;applique que sur des échantillons stéréo.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tento nástroj se používá jen se stereovzorky.</translation>
     </message>
     <message>
         <location filename="pages/page_smpl.cpp" line="1440"/>
@@ -4673,17 +4548,9 @@ spojen</translation>
         <translation>Zrušit</translation>
     </message>
     <message>
-        <source>Fréquence de coupure :</source>
-        <translation type="vanished">Kmitočet oříznutí:</translation>
-    </message>
-    <message>
         <location filename="pages/page_smpl.cpp" line="1439"/>
         <source>Transposition</source>
         <translation>Transpozice</translation>
-    </message>
-    <message>
-        <source>Question</source>
-        <translation type="vanished">Otázka</translation>
     </message>
 </context>
 <context>
@@ -4692,6 +4559,64 @@ spojen</translation>
         <location filename="sf2_core/pile_sf2_sl.cpp" line="845"/>
         <source>sans titre</source>
         <translation>Bez názvu</translation>
+    </message>
+</context>
+<context>
+    <name>QApplication</name>
+    <message>
+        <location filename="configuration/thememanager.cpp" line="54"/>
+        <source>Personnalisé</source>
+        <translation>Vlastní</translation>
+    </message>
+    <message>
+        <location filename="configuration/thememanager.cpp" line="338"/>
+        <source>Défaut</source>
+        <translation>Výchozí</translation>
+    </message>
+    <message>
+        <location filename="configuration/thememanager.cpp" line="358"/>
+        <source>Gnome</source>
+        <translation>Gnome</translation>
+    </message>
+    <message>
+        <location filename="configuration/thememanager.cpp" line="371"/>
+        <source>Sombre, bleu</source>
+        <translation>Tmavé, modrá</translation>
+    </message>
+    <message>
+        <location filename="configuration/thememanager.cpp" line="384"/>
+        <source>Sombre, orange</source>
+        <translation>Tmavé, oranžová</translation>
+    </message>
+    <message>
+        <location filename="configuration/thememanager.cpp" line="397"/>
+        <source>Sombre, vert</source>
+        <translation>Tmavé, zelená</translation>
+    </message>
+    <message>
+        <location filename="configuration/thememanager.cpp" line="410"/>
+        <source>Sombre, jaune</source>
+        <translation>Tmavé, žlutá</translation>
+    </message>
+    <message>
+        <location filename="configuration/thememanager.cpp" line="423"/>
+        <source>Aqua</source>
+        <translation>Voda</translation>
+    </message>
+    <message>
+        <location filename="configuration/thememanager.cpp" line="436"/>
+        <source>Printemps</source>
+        <translation>Jaro</translation>
+    </message>
+    <message>
+        <location filename="configuration/thememanager.cpp" line="449"/>
+        <source>Windows 10</source>
+        <translation>Windows 10</translation>
+    </message>
+    <message>
+        <location filename="configuration/thememanager.cpp" line="462"/>
+        <source>Ubuntu</source>
+        <translation>Ubuntu</translation>
     </message>
 </context>
 <context>
@@ -4975,18 +4900,18 @@ spojen</translation>
         <translation>Bicí sada</translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_about.cpp" line="107"/>
+        <location filename="gui_divers/dialog_about.cpp" line="108"/>
         <source>Créé par </source>
         <translatorcomment>mind the final space</translatorcomment>
         <translation>Vytvořeno </translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_about.cpp" line="108"/>
+        <location filename="gui_divers/dialog_about.cpp" line="109"/>
         <source>Contributeurs </source>
         <translation>Přispěvatelé </translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_about.cpp" line="109"/>
+        <location filename="gui_divers/dialog_about.cpp" line="110"/>
         <source>Traduit par </source>
         <translation>Přeloženo </translation>
     </message>
@@ -5016,64 +4941,6 @@ spojen</translation>
         <location filename="pages/graphicslegenditem2.cpp" line="69"/>
         <source>Étendue vélocité :</source>
         <translation>Rozsah dynamiky:</translation>
-    </message>
-</context>
-<context>
-    <name>ThemeManager</name>
-    <message>
-        <location filename="configuration/thememanager.cpp" line="54"/>
-        <source>Personnalisé</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="configuration/thememanager.cpp" line="338"/>
-        <source>Défaut</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="configuration/thememanager.cpp" line="358"/>
-        <source>Gnome</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="configuration/thememanager.cpp" line="371"/>
-        <source>Sombre, bleu</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="configuration/thememanager.cpp" line="384"/>
-        <source>Sombre, orange</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="configuration/thememanager.cpp" line="397"/>
-        <source>Sombre, vert</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="configuration/thememanager.cpp" line="410"/>
-        <source>Sombre, jaune</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="configuration/thememanager.cpp" line="423"/>
-        <source>Aqua</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="configuration/thememanager.cpp" line="436"/>
-        <source>Printemps</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="configuration/thememanager.cpp" line="449"/>
-        <source>Windows 10</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="configuration/thememanager.cpp" line="462"/>
-        <source>Ubuntu</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
