@@ -46,6 +46,7 @@ TranslationManager::TranslationManager() :
 
     // Languages in the translation directory
     this->addTranslations(QDir::currentPath() + "/" + TRANSLATION_DIRECTORY);
+    this->addTranslations(ConfManager::getInstance()->getConfigDir() + "/" + TRANSLATION_DIRECTORY);
 }
 
 TranslationManager::~TranslationManager()
@@ -63,14 +64,17 @@ TranslationManager * TranslationManager::getInstance()
 
 void TranslationManager::addTranslations(QString path)
 {
-    QDirIterator it(path, QDirIterator::Subdirectories);
-    while (it.hasNext())
+    if (QDir(path).exists())
     {
-        // Language
-        QString locale = it.next().section('_', 1, 1).section(".", 0, 0);
-        QString languageName = QLocale(locale).nativeLanguageName();
-        if (languageName != "")
-            _languages[locale] = languageName;
+        QDirIterator it(path, QDirIterator::Subdirectories);
+        while (it.hasNext())
+        {
+            // Language
+            QString locale = it.next().section('_', 1, 1).section(".", 0, 0);
+            QString languageName = QLocale(locale).nativeLanguageName();
+            if (languageName != "")
+                _languages[locale] = languageName;
+        }
     }
 }
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="it_IT">
+<TS version="2.1" language="it_IT">
 <context>
     <name>ComboBox</name>
     <message>
@@ -141,41 +141,9 @@
         <translation>Profondità</translation>
     </message>
     <message>
-        <source>Arrière-plan</source>
-        <translation>Sfondo</translation>
-    </message>
-    <message>
-        <source>Onde</source>
-        <translation>Forma d&apos;Onda</translation>
-    </message>
-    <message>
-        <source>Grille</source>
-        <translation>Griglia</translation>
-    </message>
-    <message>
-        <source>Début de boucle</source>
-        <translation>Inizio del loop</translation>
-    </message>
-    <message>
-        <source>Fin de boucle</source>
-        <translation>Fine del loop</translation>
-    </message>
-    <message>
-        <source>Barre de lecture</source>
-        <translation>Cursore del play</translation>
-    </message>
-    <message>
         <location filename="configuration/config.ui" line="1644"/>
         <source>Réinitialiser</source>
         <translation>Reimposta</translation>
-    </message>
-    <message>
-        <source>Échantillons</source>
-        <translation>Campioni</translation>
-    </message>
-    <message>
-        <source>Couleurs du graphique</source>
-        <translation>Colori del grafico</translation>
     </message>
     <message>
         <location filename="configuration/config.ui" line="207"/>
@@ -236,14 +204,6 @@
         <location filename="configuration/config.ui" line="404"/>
         <source>Do central → C5, puis D♭5</source>
         <translation>Do Centrale → C5, poi D♭5</translation>
-    </message>
-    <message>
-        <source>fixe</source>
-        <translation>fissa</translation>
-    </message>
-    <message>
-        <source>Largeur des colonnes</source>
-        <translation>Larghezza colonne</translation>
     </message>
     <message>
         <location filename="configuration/config.ui" line="335"/>
@@ -409,30 +369,6 @@
         <location filename="configuration/config.cpp" line="789"/>
         <source>Choisissez une couleur</source>
         <translation>Scegli un colore</translation>
-    </message>
-    <message>
-        <source>Couleur du fond</source>
-        <translation>Colore dello sfondo</translation>
-    </message>
-    <message>
-        <source>Couleur de l&apos;onde</source>
-        <translation>Colore della forma d&apos;onda</translation>
-    </message>
-    <message>
-        <source>Couleur de la grille</source>
-        <translation>Colore della griglia</translation>
-    </message>
-    <message>
-        <source>Couleur du début de la boucle</source>
-        <translation>Colore dell&apos;inizio del loop</translation>
-    </message>
-    <message>
-        <source>Couleur de la fin de la boucle</source>
-        <translation>Colore della fine del loop</translation>
-    </message>
-    <message>
-        <source>Couleur du curseur de lecture</source>
-        <translation>Colore del cursore di play</translation>
     </message>
     <message>
         <location filename="configuration/config.cpp" line="370"/>
@@ -779,7 +715,7 @@
     </message>
     <message>
         <location filename="gui_divers/dialog_about.cpp" line="59"/>
-        <location filename="gui_divers/dialog_about.cpp" line="64"/>
+        <location filename="gui_divers/dialog_about.cpp" line="65"/>
         <source>Steve Clarke</source>
         <translation>Steve Clarke</translation>
     </message>
@@ -792,6 +728,11 @@
         <location filename="gui_divers/dialog_about.cpp" line="63"/>
         <source>Jay Alexander Fleming</source>
         <translation>Jay Alexander Fleming</translation>
+    </message>
+    <message>
+        <location filename="gui_divers/dialog_about.cpp" line="64"/>
+        <source>Pavel Fric</source>
+        <translation>Pavel Fric</translation>
     </message>
 </context>
 <context>
@@ -960,29 +901,23 @@
     </message>
     <message>
         <location filename="tools/dialog_command.ui" line="46"/>
-        <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Cantarell&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Exemples de commandes :&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&amp;quot;C:/Program Files (x86)/Audacity/audacity.exe&amp;quot; {wav}&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;sweep {wav}&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="tools/dialog_command.ui" line="59"/>
         <source>Commande</source>
         <translation>Comando</translation>
     </message>
     <message>
-        <location filename="tools/dialog_command.ui" line="80"/>
+        <location filename="tools/dialog_command.ui" line="67"/>
         <source>Remplacer les informations de l&apos;échantillon si possible</source>
         <translation>Sostituire le informazioni del campione, se possibile</translation>
     </message>
     <message>
-        <location filename="tools/dialog_command.ui" line="103"/>
+        <location filename="tools/dialog_command.ui" line="90"/>
         <source>Autoriser l&apos;édition stéréo</source>
         <translation>Consentire la modifica stereo</translation>
+    </message>
+    <message>
+        <location filename="tools/dialog_command.ui" line="127"/>
+        <source>Exemples de commandes :</source>
+        <translation>Esempio di comando:</translation>
     </message>
     <message>
         <location filename="tools/dialog_command.cpp" line="79"/>
@@ -1534,25 +1469,6 @@ p, li { white-space: pre-wrap; }
     </message>
 </context>
 <context>
-    <name>DialogSifflements</name>
-    <message>
-        <source>Diminuer sifflements</source>
-        <translation>Diminuzione del soffio</translation>
-    </message>
-    <message>
-        <source>Début de la coupure (Hz)</source>
-        <translation>Inizio del taglio (Hz)</translation>
-    </message>
-    <message>
-        <source>Fin de la coupure (Hz)</source>
-        <translation>Fine del taglio (Hz)</translation>
-    </message>
-    <message>
-        <source>Raideur (0-10)</source>
-        <translation>Rigidezza (0-10)</translation>
-    </message>
-</context>
-<context>
     <name>DialogSpace</name>
     <message>
         <location filename="tools/dialog_space.ui" line="17"/>
@@ -1864,7 +1780,7 @@ p, li { white-space: pre-wrap; }
         <location filename="mainwindow.ui" line="689"/>
         <source>Enregistrer &amp;sous...</source>
         <oldsource>Enregistrer &amp;sous ...</oldsource>
-        <translation>Salva &amp;con nome...</translation>
+        <translation>Sa&amp;lva con nome...</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="692"/>
@@ -1974,7 +1890,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="mainwindow.ui" line="844"/>
         <source>&amp;Supprimer</source>
-        <translation>&amp;Cancella</translation>
+        <translation>Ca&amp;ncella</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="847"/>
@@ -1997,7 +1913,7 @@ p, li { white-space: pre-wrap; }
         <location filename="mainwindow.cpp" line="1145"/>
         <location filename="mainwindow.cpp" line="1152"/>
         <source>&amp;Renommer</source>
-        <translation>&amp;Rinomina</translation>
+        <translation>Rino&amp;mina</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="883"/>
@@ -2068,18 +1984,10 @@ p, li { white-space: pre-wrap; }
         <translation>Taglia il campione alla fine del loop</translation>
     </message>
     <message>
-        <source>Normalise le volume</source>
-        <translation>Normalizza il volume</translation>
-    </message>
-    <message>
         <location filename="mainwindow.ui" line="1105"/>
         <source>Boucle automatiquement l&apos;échantillon</source>
         <oldsource>Boucle automatiquement le sample</oldsource>
         <translation>Loop automatico del campione</translation>
-    </message>
-    <message>
-        <source>Applique un filtre &quot;mur de brique&quot;</source>
-        <translation>Applica un filtro a muro</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="1135"/>
@@ -2098,10 +2006,6 @@ p, li { white-space: pre-wrap; }
         <translation>Utilizzare un software o un comando esterno per modificare il campione</translation>
     </message>
     <message>
-        <source>Régle l&apos;atténuation minimale</source>
-        <translation>Aggiusta l&apos;attenuazione minima</translation>
-    </message>
-    <message>
         <location filename="mainwindow.ui" line="1162"/>
         <source>&amp;Accordage céleste...</source>
         <translation>&amp;Accordatura celeste...</translation>
@@ -2115,10 +2019,6 @@ p, li { white-space: pre-wrap; }
         <location filename="mainwindow.ui" line="1210"/>
         <source>Duplication des divisions...</source>
         <translation>Duplicazione divisioni...</translation>
-    </message>
-    <message>
-        <source>Diminue les sifflements</source>
-        <translation>Diminuisci il soffio</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="1283"/>
@@ -2159,9 +2059,9 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="mainwindow.ui" line="1437"/>
-        <source>Exporter sound&amp;font...</source>
-        <oldsource>Exporter (sf&amp;z)...</oldsource>
-        <translation>Esporta soundfont...</translation>
+        <source>Ex&amp;porter soundfont...</source>
+        <oldsource>Exporter sound&amp;font...</oldsource>
+        <translation>Es&amp;porta soundfont...</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="1440"/>
@@ -2223,7 +2123,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="mainwindow.ui" line="1529"/>
         <source>&amp;Plein écran</source>
-        <translation>&amp;Schermo intero</translation>
+        <translation>Schermo &amp;intero</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="1541"/>
@@ -2286,7 +2186,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="mainwindow.ui" line="1147"/>
         <source>&amp;Régler atténuations...</source>
-        <translation>&amp;Regolare attenuazioni...</translation>
+        <translation>Regolare &amp;attenuazioni...</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="1150"/>
@@ -2393,27 +2293,14 @@ p, li { white-space: pre-wrap; }
         <translation>&amp;Taglia alla fine del loop</translation>
     </message>
     <message>
-        <source>&amp;Normaliser volume</source>
-        <translation>&amp;Normalizza il volume</translation>
-    </message>
-    <message>
         <location filename="mainwindow.ui" line="1102"/>
         <source>&amp;Bouclage automatique</source>
         <translation>&amp;Auto loop</translation>
     </message>
     <message>
-        <source>&amp;Filtre &quot;mur de brique&quot;...</source>
-        <translation>&amp;Filtro a muro...</translation>
-    </message>
-    <message>
         <location filename="mainwindow.ui" line="1132"/>
         <source>&amp;Transposer...</source>
-        <translation>&amp;Trasponi...</translation>
-    </message>
-    <message>
-        <source>&amp;Régler atténuation minimale...</source>
-        <oldsource>Régler atténuation minimale...</oldsource>
-        <translation>&amp;Aggiusta l&apos;attenuazione minima...</translation>
+        <translation>Tras&amp;poni...</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="1177"/>
@@ -2430,7 +2317,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="mainwindow.ui" line="1192"/>
         <source>&amp;Répartition automatique</source>
-        <translation>&amp;Distribuzione automatica</translation>
+        <translation>D&amp;istribuzione automatica</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="1195"/>
@@ -2458,7 +2345,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="mainwindow.ui" line="1240"/>
         <source>&amp;Réglage balance</source>
-        <translation>&amp;Regola il bilanciamento</translation>
+        <translation>Regola il &amp;bilanciamento</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="1243"/>
@@ -2475,10 +2362,6 @@ p, li { white-space: pre-wrap; }
         <location filename="mainwindow.ui" line="1258"/>
         <source>Crée une mixture</source>
         <translation>Crea una mixture</translation>
-    </message>
-    <message>
-        <source>&amp;Diminuer sifflements...</source>
-        <translation>&amp;Riduci il soffio...</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="296"/>
@@ -2510,10 +2393,6 @@ p, li { white-space: pre-wrap; }
         <location filename="mainwindow.cpp" line="2838"/>
         <source>Attention</source>
         <translation>Attenzione</translation>
-    </message>
-    <message>
-        <source>Operation en cours...</source>
-        <translation>Operazione in corso...</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="64"/>
@@ -2599,10 +2478,6 @@ p, li { white-space: pre-wrap; }
         <location filename="mainwindow.cpp" line="1614"/>
         <source> » existe déjà.&lt;br /&gt;Que faire ?</source>
         <translation>&quot; esiste già.&lt;br/&gt;Sostituisci?</translation>
-    </message>
-    <message>
-        <source>Atténuation minimale (dB) :</source>
-        <translation>Attenuazione minima (dB):</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="608"/>
@@ -4690,17 +4565,9 @@ collegato</translation>
         <translation>Annulla</translation>
     </message>
     <message>
-        <source>Fréquence de coupure :</source>
-        <translation>Frequenza di taglio:</translation>
-    </message>
-    <message>
         <location filename="pages/page_smpl.cpp" line="1439"/>
         <source>Transposition</source>
         <translation>Transposizione</translation>
-    </message>
-    <message>
-        <source>Question</source>
-        <translation>Domanda</translation>
     </message>
 </context>
 <context>
@@ -4709,6 +4576,64 @@ collegato</translation>
         <location filename="sf2_core/pile_sf2_sl.cpp" line="845"/>
         <source>sans titre</source>
         <translation>senza titolo</translation>
+    </message>
+</context>
+<context>
+    <name>QApplication</name>
+    <message>
+        <location filename="configuration/thememanager.cpp" line="54"/>
+        <source>Personnalisé</source>
+        <translation>Costume</translation>
+    </message>
+    <message>
+        <location filename="configuration/thememanager.cpp" line="338"/>
+        <source>Défaut</source>
+        <translation>Predefinito</translation>
+    </message>
+    <message>
+        <location filename="configuration/thememanager.cpp" line="358"/>
+        <source>Gnome</source>
+        <translation>Gnome</translation>
+    </message>
+    <message>
+        <location filename="configuration/thememanager.cpp" line="371"/>
+        <source>Sombre, bleu</source>
+        <translation>Scuro, blu</translation>
+    </message>
+    <message>
+        <location filename="configuration/thememanager.cpp" line="384"/>
+        <source>Sombre, orange</source>
+        <translation>Scuro, arancia</translation>
+    </message>
+    <message>
+        <location filename="configuration/thememanager.cpp" line="397"/>
+        <source>Sombre, vert</source>
+        <translation>Scuro, verde</translation>
+    </message>
+    <message>
+        <location filename="configuration/thememanager.cpp" line="410"/>
+        <source>Sombre, jaune</source>
+        <translation>Scuro, giallo</translation>
+    </message>
+    <message>
+        <location filename="configuration/thememanager.cpp" line="423"/>
+        <source>Aqua</source>
+        <translation>Aqua</translation>
+    </message>
+    <message>
+        <location filename="configuration/thememanager.cpp" line="436"/>
+        <source>Printemps</source>
+        <translation>Primavera</translation>
+    </message>
+    <message>
+        <location filename="configuration/thememanager.cpp" line="449"/>
+        <source>Windows 10</source>
+        <translation>Windows 10</translation>
+    </message>
+    <message>
+        <location filename="configuration/thememanager.cpp" line="462"/>
+        <source>Ubuntu</source>
+        <translation>Ubuntu</translation>
     </message>
 </context>
 <context>
@@ -4992,18 +4917,18 @@ collegato</translation>
         <translation>Kit di percussioni</translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_about.cpp" line="107"/>
+        <location filename="gui_divers/dialog_about.cpp" line="108"/>
         <source>Créé par </source>
         <translatorcomment>mind the final space</translatorcomment>
         <translation>Creato da </translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_about.cpp" line="108"/>
+        <location filename="gui_divers/dialog_about.cpp" line="109"/>
         <source>Contributeurs </source>
         <translation>Contributi </translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_about.cpp" line="109"/>
+        <location filename="gui_divers/dialog_about.cpp" line="110"/>
         <source>Traduit par </source>
         <translation>Tradotto da </translation>
     </message>
@@ -5033,64 +4958,6 @@ collegato</translation>
         <location filename="pages/graphicslegenditem2.cpp" line="69"/>
         <source>Étendue vélocité :</source>
         <translation>Gruppo velocità:</translation>
-    </message>
-</context>
-<context>
-    <name>ThemeManager</name>
-    <message>
-        <location filename="configuration/thememanager.cpp" line="54"/>
-        <source>Personnalisé</source>
-        <translation>Costume</translation>
-    </message>
-    <message>
-        <location filename="configuration/thememanager.cpp" line="338"/>
-        <source>Défaut</source>
-        <translation>Predefinito</translation>
-    </message>
-    <message>
-        <location filename="configuration/thememanager.cpp" line="358"/>
-        <source>Gnome</source>
-        <translation>Gnome</translation>
-    </message>
-    <message>
-        <location filename="configuration/thememanager.cpp" line="371"/>
-        <source>Sombre, bleu</source>
-        <translation>Scuro, blu</translation>
-    </message>
-    <message>
-        <location filename="configuration/thememanager.cpp" line="384"/>
-        <source>Sombre, orange</source>
-        <translation>Scuro, arancia</translation>
-    </message>
-    <message>
-        <location filename="configuration/thememanager.cpp" line="397"/>
-        <source>Sombre, vert</source>
-        <translation>Scuro, verde</translation>
-    </message>
-    <message>
-        <location filename="configuration/thememanager.cpp" line="410"/>
-        <source>Sombre, jaune</source>
-        <translation>Scuro, giallo</translation>
-    </message>
-    <message>
-        <location filename="configuration/thememanager.cpp" line="423"/>
-        <source>Aqua</source>
-        <translation>Aqua</translation>
-    </message>
-    <message>
-        <location filename="configuration/thememanager.cpp" line="436"/>
-        <source>Printemps</source>
-        <translation>Primavera</translation>
-    </message>
-    <message>
-        <location filename="configuration/thememanager.cpp" line="449"/>
-        <source>Windows 10</source>
-        <translation>Windows 10</translation>
-    </message>
-    <message>
-        <location filename="configuration/thememanager.cpp" line="462"/>
-        <source>Ubuntu</source>
-        <translation>Ubuntu</translation>
     </message>
 </context>
 <context>

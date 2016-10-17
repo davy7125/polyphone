@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="es_ES">
+<TS version="2.1" language="es_ES">
 <context>
     <name>ComboBox</name>
     <message>
@@ -149,41 +149,9 @@
         <translation>Ganancia (dB)</translation>
     </message>
     <message>
-        <source>Arrière-plan</source>
-        <translation>Fondo</translation>
-    </message>
-    <message>
-        <source>Onde</source>
-        <translation>Onda</translation>
-    </message>
-    <message>
-        <source>Grille</source>
-        <translation>Cuadrícula</translation>
-    </message>
-    <message>
-        <source>Début de boucle</source>
-        <translation>Inicio de loop</translation>
-    </message>
-    <message>
-        <source>Fin de boucle</source>
-        <translation>Fin de loop</translation>
-    </message>
-    <message>
-        <source>Barre de lecture</source>
-        <translation>Cursor de lectura</translation>
-    </message>
-    <message>
         <location filename="configuration/config.ui" line="1644"/>
         <source>Réinitialiser</source>
         <translation>Reiniciar</translation>
-    </message>
-    <message>
-        <source>Échantillons</source>
-        <translation>Muestras</translation>
-    </message>
-    <message>
-        <source>Couleurs du graphique</source>
-        <translation>Colores del gráfico</translation>
     </message>
     <message>
         <location filename="configuration/config.ui" line="207"/>
@@ -234,14 +202,6 @@
         <location filename="configuration/config.ui" line="404"/>
         <source>Do central → C5, puis D♭5</source>
         <translation>Do central → C5, luego D♭5</translation>
-    </message>
-    <message>
-        <source>fixe</source>
-        <translation>fijado</translation>
-    </message>
-    <message>
-        <source>Largeur des colonnes</source>
-        <translation>Ancho de columna</translation>
     </message>
     <message>
         <location filename="configuration/config.ui" line="335"/>
@@ -407,30 +367,6 @@
         <location filename="configuration/config.cpp" line="789"/>
         <source>Choisissez une couleur</source>
         <translation>Elige un color</translation>
-    </message>
-    <message>
-        <source>Couleur du fond</source>
-        <translation>Color de fondo</translation>
-    </message>
-    <message>
-        <source>Couleur de l&apos;onde</source>
-        <translation>Color de onda</translation>
-    </message>
-    <message>
-        <source>Couleur de la grille</source>
-        <translation>Color de la cuadrícula</translation>
-    </message>
-    <message>
-        <source>Couleur du début de la boucle</source>
-        <translation>Color de inicio de loop</translation>
-    </message>
-    <message>
-        <source>Couleur de la fin de la boucle</source>
-        <translation>Color de fin de loop</translation>
-    </message>
-    <message>
-        <source>Couleur du curseur de lecture</source>
-        <translation>Color del cursor de lectura</translation>
     </message>
     <message>
         <location filename="configuration/config.cpp" line="370"/>
@@ -776,7 +712,7 @@
     </message>
     <message>
         <location filename="gui_divers/dialog_about.cpp" line="59"/>
-        <location filename="gui_divers/dialog_about.cpp" line="64"/>
+        <location filename="gui_divers/dialog_about.cpp" line="65"/>
         <source>Steve Clarke</source>
         <translation>Steve Clarke</translation>
     </message>
@@ -789,6 +725,11 @@
         <location filename="gui_divers/dialog_about.cpp" line="63"/>
         <source>Jay Alexander Fleming</source>
         <translation>Jay Alexander Fleming</translation>
+    </message>
+    <message>
+        <location filename="gui_divers/dialog_about.cpp" line="64"/>
+        <source>Pavel Fric</source>
+        <translation>Pavel Fric</translation>
     </message>
 </context>
 <context>
@@ -956,29 +897,23 @@
     </message>
     <message>
         <location filename="tools/dialog_command.ui" line="46"/>
-        <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Cantarell&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Exemples de commandes :&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&amp;quot;C:/Program Files (x86)/Audacity/audacity.exe&amp;quot; {wav}&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;sweep {wav}&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="tools/dialog_command.ui" line="59"/>
         <source>Commande</source>
         <translation>Commando</translation>
     </message>
     <message>
-        <location filename="tools/dialog_command.ui" line="80"/>
+        <location filename="tools/dialog_command.ui" line="67"/>
         <source>Remplacer les informations de l&apos;échantillon si possible</source>
         <translation>Reemplazar información de la muestra si es posible</translation>
     </message>
     <message>
-        <location filename="tools/dialog_command.ui" line="103"/>
+        <location filename="tools/dialog_command.ui" line="90"/>
         <source>Autoriser l&apos;édition stéréo</source>
         <translation>Permitir la edición estéreo</translation>
+    </message>
+    <message>
+        <location filename="tools/dialog_command.ui" line="127"/>
+        <source>Exemples de commandes :</source>
+        <translation>Ejemplo de comando:</translation>
     </message>
     <message>
         <location filename="tools/dialog_command.cpp" line="79"/>
@@ -1527,25 +1462,6 @@ p, li { white-space: pre-wrap; }
     </message>
 </context>
 <context>
-    <name>DialogSifflements</name>
-    <message>
-        <source>Diminuer sifflements</source>
-        <translation>Reducción de silbido</translation>
-    </message>
-    <message>
-        <source>Début de la coupure (Hz)</source>
-        <translation>Inicio del corte (Hz)</translation>
-    </message>
-    <message>
-        <source>Fin de la coupure (Hz)</source>
-        <translation>Final del corte (Hz)</translation>
-    </message>
-    <message>
-        <source>Raideur (0-10)</source>
-        <translation>Cantidad (0-10)</translation>
-    </message>
-</context>
-<context>
     <name>DialogSpace</name>
     <message>
         <location filename="tools/dialog_space.ui" line="17"/>
@@ -1863,7 +1779,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="mainwindow.ui" line="689"/>
         <source>Enregistrer &amp;sous...</source>
-        <translation>Guardar &amp;como...</translation>
+        <translation>G&amp;uardar como...</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="692"/>
@@ -2084,21 +2000,13 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="mainwindow.ui" line="1072"/>
         <source>&amp;Ajuster à la fin de boucle</source>
-        <translation>Re&amp;cortar al final del loop</translation>
+        <translation>&amp;Recortar al final del loop</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="1075"/>
         <source>Ajuste l&apos;échantillon à sa fin de boucle</source>
         <oldsource>Ajuste le sample à sa fin de boucle</oldsource>
         <translation>Recorta la muestra al final del loop</translation>
-    </message>
-    <message>
-        <source>&amp;Normaliser volume</source>
-        <translation>&amp;Normalizar volumen</translation>
-    </message>
-    <message>
-        <source>Normalise le volume</source>
-        <translation>Normalizar volumen</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="1102"/>
@@ -2110,14 +2018,6 @@ p, li { white-space: pre-wrap; }
         <source>Boucle automatiquement l&apos;échantillon</source>
         <oldsource>Boucle automatiquement le sample</oldsource>
         <translation>Crear loop automáticamente con la muestra</translation>
-    </message>
-    <message>
-        <source>&amp;Filtre &quot;mur de brique&quot;...</source>
-        <translation>&amp;Filtro &quot;pared de ladrillo&quot;...</translation>
-    </message>
-    <message>
-        <source>Applique un filtre &quot;mur de brique&quot;</source>
-        <translation>Aplicar un filtro &quot;pared de ladrillo&quot;</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="1132"/>
@@ -2139,14 +2039,6 @@ p, li { white-space: pre-wrap; }
         <location filename="mainwindow.ui" line="1556"/>
         <source>Utilise un logiciel ou une commande externe pour modifier un fichier son .wav</source>
         <translation>El uso de un software externo o comando para modificar una muestra (archivo wav)</translation>
-    </message>
-    <message>
-        <source>&amp;Régler atténuation minimale...</source>
-        <translation>Establecer atenuación &amp;mínima...</translation>
-    </message>
-    <message>
-        <source>Régle l&apos;atténuation minimale</source>
-        <translation>Establecer atenuación mínima</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="1162"/>
@@ -2232,14 +2124,6 @@ p, li { white-space: pre-wrap; }
         <translation>Crear una mixtura</translation>
     </message>
     <message>
-        <source>&amp;Diminuer sifflements...</source>
-        <translation>&amp;Reducción de silbido...</translation>
-    </message>
-    <message>
-        <source>Diminue les sifflements</source>
-        <translation>Reducción de silbido</translation>
-    </message>
-    <message>
         <location filename="mainwindow.ui" line="1269"/>
         <source>&amp;5 octaves</source>
         <translation>&amp;5 octavas</translation>
@@ -2266,7 +2150,8 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="mainwindow.ui" line="1437"/>
-        <source>Exporter sound&amp;font...</source>
+        <source>Ex&amp;porter soundfont...</source>
+        <oldsource>Exporter sound&amp;font...</oldsource>
         <translation>Exportar sound&amp;font...</translation>
     </message>
     <message>
@@ -2381,7 +2266,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="mainwindow.ui" line="1147"/>
         <source>&amp;Régler atténuations...</source>
-        <translation>&amp;Ajuste atenuaciones...</translation>
+        <translation>A&amp;juste atenuaciones...</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="1150"/>
@@ -2738,10 +2623,6 @@ Dividir el fichero en diferentes sf2 puede resolver el problema.</translation>
         <translation>Los siguientes ficheros se han modificado:&lt;br/&gt; - </translation>
     </message>
     <message>
-        <source>Operation en cours...</source>
-        <translation>Operación en curso...</translation>
-    </message>
-    <message>
         <location filename="mainwindow.cpp" line="64"/>
         <source>Annuler</source>
         <translation>Deshacer</translation>
@@ -2842,10 +2723,6 @@ Dividir el fichero en diferentes sf2 puede resolver el problema.</translation>
         <location filename="mainwindow.cpp" line="2449"/>
         <source> échantillons et </source>
         <translation> muestras y </translation>
-    </message>
-    <message>
-        <source>Atténuation minimale (dB) :</source>
-        <translation>Atenuación mínima (dB):</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1374"/>
@@ -4591,10 +4468,6 @@ enlazada</translation>
         <translation>Parada</translation>
     </message>
     <message>
-        <source>Fréquence de coupure :</source>
-        <translation>Frecuencia de corte:</translation>
-    </message>
-    <message>
         <location filename="pages/page_smpl.cpp" line="1440"/>
         <source>Écart en demi-tons :</source>
         <translation>Cantidad en semitonos:</translation>
@@ -4637,10 +4510,6 @@ enlazada</translation>
         <translation>Deshacer</translation>
     </message>
     <message>
-        <source>Question</source>
-        <translation>Pregunta</translation>
-    </message>
-    <message>
         <location filename="pages/page_smpl.cpp" line="1439"/>
         <source>Transposition</source>
         <translation>Transporte</translation>
@@ -4652,6 +4521,64 @@ enlazada</translation>
         <location filename="sf2_core/pile_sf2_sl.cpp" line="845"/>
         <source>sans titre</source>
         <translation>sin título</translation>
+    </message>
+</context>
+<context>
+    <name>QApplication</name>
+    <message>
+        <location filename="configuration/thememanager.cpp" line="54"/>
+        <source>Personnalisé</source>
+        <translation>Personalizado</translation>
+    </message>
+    <message>
+        <location filename="configuration/thememanager.cpp" line="338"/>
+        <source>Défaut</source>
+        <translation>Defecto</translation>
+    </message>
+    <message>
+        <location filename="configuration/thememanager.cpp" line="358"/>
+        <source>Gnome</source>
+        <translation>Gnome</translation>
+    </message>
+    <message>
+        <location filename="configuration/thememanager.cpp" line="371"/>
+        <source>Sombre, bleu</source>
+        <translation>Oscuro, azul</translation>
+    </message>
+    <message>
+        <location filename="configuration/thememanager.cpp" line="384"/>
+        <source>Sombre, orange</source>
+        <translation>Oscuro, naranja</translation>
+    </message>
+    <message>
+        <location filename="configuration/thememanager.cpp" line="397"/>
+        <source>Sombre, vert</source>
+        <translation>Oscuro, verde</translation>
+    </message>
+    <message>
+        <location filename="configuration/thememanager.cpp" line="410"/>
+        <source>Sombre, jaune</source>
+        <translation>Oscuro, amarillo</translation>
+    </message>
+    <message>
+        <location filename="configuration/thememanager.cpp" line="423"/>
+        <source>Aqua</source>
+        <translation>Aqua</translation>
+    </message>
+    <message>
+        <location filename="configuration/thememanager.cpp" line="436"/>
+        <source>Printemps</source>
+        <translation>Primavera</translation>
+    </message>
+    <message>
+        <location filename="configuration/thememanager.cpp" line="449"/>
+        <source>Windows 10</source>
+        <translation>Windows 10</translation>
+    </message>
+    <message>
+        <location filename="configuration/thememanager.cpp" line="462"/>
+        <source>Ubuntu</source>
+        <translation>Ubuntu</translation>
     </message>
 </context>
 <context>
@@ -4928,17 +4855,17 @@ enlazada</translation>
         <translation>Kits de percusión</translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_about.cpp" line="107"/>
+        <location filename="gui_divers/dialog_about.cpp" line="108"/>
         <source>Créé par </source>
         <translation>Creado por </translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_about.cpp" line="108"/>
+        <location filename="gui_divers/dialog_about.cpp" line="109"/>
         <source>Contributeurs </source>
         <translation>Colaboradores </translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_about.cpp" line="109"/>
+        <location filename="gui_divers/dialog_about.cpp" line="110"/>
         <source>Traduit par </source>
         <translation>Traducido por </translation>
     </message>
@@ -4968,64 +4895,6 @@ enlazada</translation>
         <location filename="pages/graphicslegenditem2.cpp" line="69"/>
         <source>Étendue vélocité :</source>
         <translation>Rango de velocidad:</translation>
-    </message>
-</context>
-<context>
-    <name>ThemeManager</name>
-    <message>
-        <location filename="configuration/thememanager.cpp" line="54"/>
-        <source>Personnalisé</source>
-        <translation>Personalizado</translation>
-    </message>
-    <message>
-        <location filename="configuration/thememanager.cpp" line="338"/>
-        <source>Défaut</source>
-        <translation>Defecto</translation>
-    </message>
-    <message>
-        <location filename="configuration/thememanager.cpp" line="358"/>
-        <source>Gnome</source>
-        <translation>Gnome</translation>
-    </message>
-    <message>
-        <location filename="configuration/thememanager.cpp" line="371"/>
-        <source>Sombre, bleu</source>
-        <translation>Oscuro, azul</translation>
-    </message>
-    <message>
-        <location filename="configuration/thememanager.cpp" line="384"/>
-        <source>Sombre, orange</source>
-        <translation>Oscuro, naranja</translation>
-    </message>
-    <message>
-        <location filename="configuration/thememanager.cpp" line="397"/>
-        <source>Sombre, vert</source>
-        <translation>Oscuro, verde</translation>
-    </message>
-    <message>
-        <location filename="configuration/thememanager.cpp" line="410"/>
-        <source>Sombre, jaune</source>
-        <translation>Oscuro, amarillo</translation>
-    </message>
-    <message>
-        <location filename="configuration/thememanager.cpp" line="423"/>
-        <source>Aqua</source>
-        <translation>Aqua</translation>
-    </message>
-    <message>
-        <location filename="configuration/thememanager.cpp" line="436"/>
-        <source>Printemps</source>
-        <translation>Primavera</translation>
-    </message>
-    <message>
-        <location filename="configuration/thememanager.cpp" line="449"/>
-        <source>Windows 10</source>
-        <translation>Windows 10</translation>
-    </message>
-    <message>
-        <location filename="configuration/thememanager.cpp" line="462"/>
-        <source>Ubuntu</source>
-        <translation>Ubuntu</translation>
     </message>
 </context>
 <context>
