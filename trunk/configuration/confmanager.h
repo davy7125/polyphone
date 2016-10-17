@@ -95,6 +95,9 @@ public:
     /// Set a value in a tool
     void setToolValue(ToolType toolType, QString toolName, QString key, QVariant value);
 
+    /// Get the configuration file directory
+    QString getConfigDir();
+
 private:
     ConfManager();
     QString getFullKey(Section section, QString key) const;

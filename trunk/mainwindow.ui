@@ -1434,7 +1434,7 @@
      <normaloff>:/icones/export2</normaloff>:/icones/export2</iconset>
    </property>
    <property name="text">
-    <string>Exporter sound&amp;font...</string>
+    <string>Ex&amp;porter soundfont...</string>
    </property>
    <property name="toolTip">
     <string>Exporte une soundfont</string>

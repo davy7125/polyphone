@@ -67,14 +67,6 @@
         <translation>Notenname</translation>
     </message>
     <message>
-        <source>fixe</source>
-        <translation type="vanished">fest</translation>
-    </message>
-    <message>
-        <source>Largeur des colonnes</source>
-        <translation type="vanished">Spaltenbreite</translation>
-    </message>
-    <message>
         <location filename="configuration/config.ui" line="335"/>
         <source>Langue</source>
         <translation>Sprache</translation>
@@ -151,21 +143,9 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Couleurs du graphique</source>
-        <translation type="vanished">Grafikfarben</translation>
-    </message>
-    <message>
         <location filename="configuration/config.ui" line="1644"/>
         <source>Réinitialiser</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Arrière-plan</source>
-        <translation type="vanished">Hintergrund</translation>
-    </message>
-    <message>
-        <source>Onde</source>
-        <translation type="vanished">Welle</translation>
     </message>
     <message>
         <location filename="configuration/config.ui" line="207"/>
@@ -380,14 +360,6 @@
         <location filename="configuration/config.cpp" line="789"/>
         <source>Choisissez une couleur</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Couleur du fond</source>
-        <translation type="vanished">Hintergrundfarbe</translation>
-    </message>
-    <message>
-        <source>Couleur de l&apos;onde</source>
-        <translation type="vanished">Wellenfarbe</translation>
     </message>
     <message>
         <location filename="configuration/config.cpp" line="370"/>
@@ -733,7 +705,7 @@
     </message>
     <message>
         <location filename="gui_divers/dialog_about.cpp" line="59"/>
-        <location filename="gui_divers/dialog_about.cpp" line="64"/>
+        <location filename="gui_divers/dialog_about.cpp" line="65"/>
         <source>Steve Clarke</source>
         <translation>Steve Clarke</translation>
     </message>
@@ -746,6 +718,11 @@
         <location filename="gui_divers/dialog_about.cpp" line="63"/>
         <source>Jay Alexander Fleming</source>
         <translation>Jay Alexander Fleming</translation>
+    </message>
+    <message>
+        <location filename="gui_divers/dialog_about.cpp" line="64"/>
+        <source>Pavel Fric</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -913,28 +890,22 @@
     </message>
     <message>
         <location filename="tools/dialog_command.ui" line="46"/>
-        <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Cantarell&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Exemples de commandes :&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&amp;quot;C:/Program Files (x86)/Audacity/audacity.exe&amp;quot; {wav}&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;sweep {wav}&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="tools/dialog_command.ui" line="59"/>
         <source>Commande</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="tools/dialog_command.ui" line="80"/>
+        <location filename="tools/dialog_command.ui" line="67"/>
         <source>Remplacer les informations de l&apos;échantillon si possible</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="tools/dialog_command.ui" line="103"/>
+        <location filename="tools/dialog_command.ui" line="90"/>
         <source>Autoriser l&apos;édition stéréo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="tools/dialog_command.ui" line="127"/>
+        <source>Exemples de commandes :</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2277,7 +2248,8 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="mainwindow.ui" line="1437"/>
-        <source>Exporter sound&amp;font...</source>
+        <source>Ex&amp;porter soundfont...</source>
+        <oldsource>Exporter sound&amp;font...</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -4505,19 +4477,77 @@ lié</source>
     </message>
 </context>
 <context>
+    <name>QApplication</name>
+    <message>
+        <location filename="configuration/thememanager.cpp" line="54"/>
+        <source>Personnalisé</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="configuration/thememanager.cpp" line="338"/>
+        <source>Défaut</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="configuration/thememanager.cpp" line="358"/>
+        <source>Gnome</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="configuration/thememanager.cpp" line="371"/>
+        <source>Sombre, bleu</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="configuration/thememanager.cpp" line="384"/>
+        <source>Sombre, orange</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="configuration/thememanager.cpp" line="397"/>
+        <source>Sombre, vert</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="configuration/thememanager.cpp" line="410"/>
+        <source>Sombre, jaune</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="configuration/thememanager.cpp" line="423"/>
+        <source>Aqua</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="configuration/thememanager.cpp" line="436"/>
+        <source>Printemps</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="configuration/thememanager.cpp" line="449"/>
+        <source>Windows 10</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="configuration/thememanager.cpp" line="462"/>
+        <source>Ubuntu</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>QObject</name>
     <message>
-        <location filename="gui_divers/dialog_about.cpp" line="107"/>
+        <location filename="gui_divers/dialog_about.cpp" line="108"/>
         <source>Créé par </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_about.cpp" line="108"/>
+        <location filename="gui_divers/dialog_about.cpp" line="109"/>
         <source>Contributeurs </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_about.cpp" line="109"/>
+        <location filename="gui_divers/dialog_about.cpp" line="110"/>
         <source>Traduit par </source>
         <translation type="unfinished"></translation>
     </message>
@@ -4817,64 +4847,6 @@ lié</source>
         <location filename="pages/graphicslegenditem.cpp" line="129"/>
         <location filename="pages/graphicslegenditem2.cpp" line="69"/>
         <source>Étendue vélocité :</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>ThemeManager</name>
-    <message>
-        <location filename="configuration/thememanager.cpp" line="54"/>
-        <source>Personnalisé</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="configuration/thememanager.cpp" line="338"/>
-        <source>Défaut</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="configuration/thememanager.cpp" line="358"/>
-        <source>Gnome</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="configuration/thememanager.cpp" line="371"/>
-        <source>Sombre, bleu</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="configuration/thememanager.cpp" line="384"/>
-        <source>Sombre, orange</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="configuration/thememanager.cpp" line="397"/>
-        <source>Sombre, vert</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="configuration/thememanager.cpp" line="410"/>
-        <source>Sombre, jaune</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="configuration/thememanager.cpp" line="423"/>
-        <source>Aqua</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="configuration/thememanager.cpp" line="436"/>
-        <source>Printemps</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="configuration/thememanager.cpp" line="449"/>
-        <source>Windows 10</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="configuration/thememanager.cpp" line="462"/>
-        <source>Ubuntu</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
