@@ -40,7 +40,7 @@ public:
     ~DialogDuplication();
     
 signals:
-    void accepted(QVector<int> listeVelocite, bool duplicKey, bool duplicVel);
+    void accepted(QVector<QPair<int, int> > listeVelocite, bool duplicKey, bool duplicVel);
 
 private slots:
     void accept();
@@ -50,14 +50,16 @@ private slots:
     void on_spinMaxVel_valueChanged(int arg1);
     void on_checkForEachVelocityRange_clicked();
 
+    void on_listVelocites_currentRowChanged(int currentRow);
+
 private:
     Ui::DialogDuplication *ui;
     bool _isPrst;
-    QVector<int> _listeVelocites;
+    QVector<QPair<int, int> > _listeVelocites;
 
     void dispVel();
-    QVector<int> getStoredVelocites();
-    void storeVelocities(QVector<int> val);
+    QVector<QPair<int, int> > getStoredVelocites();
+    void storeVelocities(QVector<QPair<int, int> > val);
 };
 
 #endif // DIALOG_DUPLICATION_H

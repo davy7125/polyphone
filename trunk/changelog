@@ -12,10 +12,10 @@ polyphone (1.8) unstable; urgency=low
   * (improvement) double-clicking on a division go to the corresponding sample or instrument
   * (improvement) logo changed
   * (improvement) translation files can be outside the executable
+  * (fix) behaviour of the duplication tool when using several velocity ranges
   * (fix) a progress dialog was displayed when opening the software
   * (fix) natural order in the tree and tables
   * (fix) behaviour of the "loop playback" cell in the tables
-  * (fix) small GUI issues
 
  -- Davy Triponney <davy.triponney@gmail.com>  Wed, 27 Oct 2016 20:51:55 +0100
 

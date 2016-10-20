@@ -106,8 +106,6 @@ private:
     static void addAvailableSenderMod(ComboBox *combo, EltID id);
     int getAssociatedMod(EltID id);
     int limit(int iVal, Champ champ, EltID id);
-    void duplication(EltID id);
-    void duplication(EltID id, QVector<int> listeVelocite);
     void resetChamp(int colonne, Champ champ1, Champ champ2);
     void setOffset(int ligne, int colonne, Champ champ1, Champ champ2);
     void customizeKeyboard(bool withAllDivisions = false);
@@ -145,7 +143,7 @@ private slots:
     void paramGlobal(QVector<double> dValues, int typeModif, int champ, int velMin, int velMax);
     void spatialisation(QMap<int, double> mapPan);
     void spatialisation(QMap<int, double> mapPan, EltID id);
-    void duplication(QVector<int> listeVelocites, bool duplicKey, bool duplicVel);
+    void duplication(QVector<QPair<int, int> > listeVelocites, bool duplicKey, bool duplicVel);
 };
 
 #endif // PAGETABLE_H

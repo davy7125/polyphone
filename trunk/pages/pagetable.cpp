@@ -33,6 +33,7 @@
 #include "dialogselection.h"
 #include "graphicsviewrange.h"
 #include "thememanager.h"
+#include "duplicationtool.h"
 #include "utils.h"
 #include <QScrollBar>
 #include <QMenu>
@@ -2517,13 +2518,16 @@ void PageTable::duplication()
 
     DialogDuplication * dialogDuplication = new DialogDuplication(_typePage == PAGE_PRST, this);
     dialogDuplication->setAttribute(Qt::WA_DeleteOnClose, true);
-    this->connect(dialogDuplication, SIGNAL(accepted(QVector<int>,bool,bool)),
-                  SLOT(duplication(QVector<int>,bool,bool)));
+    this->connect(dialogDuplication, SIGNAL(accepted(QVector<QPair<int, int> >,bool,bool)),
+                  SLOT(duplication(QVector<QPair<int, int> >,bool,bool)));
     dialogDuplication->show();
 }
 
-void PageTable::duplication(QVector<int> listeVelocites, bool duplicKey, bool duplicVel)
+void PageTable::duplication(QVector<QPair<int, int> > listeVelocites, bool duplicKey, bool duplicVel)
 {
+    if (!duplicKey && !duplicVel)
+        return;
+
     _sf2->prepareNewActions();
 
     bool error;
@@ -2538,270 +2542,20 @@ void PageTable::duplication(QVector<int> listeVelocites, bool duplicKey, bool du
         else
             id.typeElement = elementPrstInst;
 
+        DuplicationTool tool(_sf2, id);
+
         // Duplication pour chaque note
         if (duplicKey)
-        {
-            int nbElementsLies = _sf2->count(id);
-            for (int i = 0; i < nbElementsLies; i++)
-            {
-                id.indexElt2 = i;
-                if (!_sf2->get(id, champ_hidden).bValue)
-                    this->duplication(id);
-            }
-        }
+            tool.duplicateByKey();
 
         // Duplication pour chaque velocityRange
         if (duplicVel)
-        {
-            int nbElementsLies = _sf2->count(id);
-            for (int i = 0; i < nbElementsLies; i++)
-            {
-                id.indexElt2 = i;
-                if (!_sf2->get(id, champ_hidden).bValue)
-                    this->duplication(id, listeVelocites);
-            }
-        }
+            tool.duplicateByVelocity(listeVelocites);
     }
 
     // Actualisation
     _mainWindow->updateDo();
     _mainWindow->updateActions();
-}
-
-void PageTable::duplication(EltID id)
-{
-    // Etendue du sample sur le clavier
-    int numBas = 0;
-    int numHaut = 127;
-    if (_sf2->isSet(id, champ_keyRange))
-    {
-        numBas = _sf2->get(id, champ_keyRange).rValue.byLo;
-        numHaut = _sf2->get(id, champ_keyRange).rValue.byHi;
-        if (numBas > numHaut)
-        {
-            int temp = numBas;
-            numBas = numHaut;
-            numHaut = temp;
-        }
-    }
-    if (numBas != numHaut)
-    {
-        // Modification keyrange
-        Valeur val;
-        val.rValue.byLo = numBas;
-        val.rValue.byHi = numBas;
-        _sf2->set(id, champ_keyRange, val);
-        // Création de divisions identiques pour les autres notes
-        EltID id2 = id;
-        for (int i = numBas+1; i <= numHaut; i++)
-        {
-            if (_typePage == PAGE_INST)
-            {
-                id.typeElement = elementInstSmpl;
-                id2.typeElement = elementInstSmpl;
-                id2.indexElt2 = _sf2->add(id);
-                // Recopiage des gens
-                id.typeElement = elementInstSmplGen;
-            }
-            else
-            {
-                id.typeElement = elementPrstInst;
-                id2.typeElement = elementPrstInst;
-                id2.indexElt2 = _sf2->add(id);
-                // Recopiage des gens
-                id.typeElement = elementPrstInstGen;
-            }
-            for (int j = 0; j < _sf2->count(id); j++)
-            {
-                id.indexMod = j;
-                _sf2->set(id2, (Champ)_sf2->get(id, champ_sfGenOper).wValue,
-                          _sf2->get(id, champ_sfGenAmount));
-            }
-            // Modification keyrange
-            val.rValue.byLo = i;
-            val.rValue.byHi = i;
-            _sf2->set(id2, champ_keyRange, val);
-            // Recopiage des mods
-            if (_typePage == PAGE_INST)
-            {
-                id.typeElement = elementInstSmplMod;
-                id2.typeElement = elementInstSmplMod;
-            }
-            else
-            {
-                id.typeElement = elementPrstInstMod;
-                id2.typeElement = elementPrstInstMod;
-            }
-            for (int j = 0; j < _sf2->count(id); j++)
-            {
-                id.indexMod = j;
-                id2.indexMod = _sf2->add(id2);
-                _sf2->set(id2, champ_modAmount, _sf2->get(id, champ_modAmount));
-                _sf2->set(id2, champ_sfModSrcOper, _sf2->get(id, champ_sfModSrcOper));
-                _sf2->set(id2, champ_sfModAmtSrcOper, _sf2->get(id, champ_sfModAmtSrcOper));
-                _sf2->set(id2, champ_sfModDestOper, _sf2->get(id, champ_sfModDestOper));
-                _sf2->set(id2, champ_sfModTransOper, _sf2->get(id, champ_sfModTransOper));
-            }
-        }
-    }
-}
-
-void PageTable::duplication(EltID id, QVector<int> listeVelocite)
-{
-    QVector<bool> rangeOk;
-    rangeOk.fill(false, listeVelocite.size() / 2);
-
-    // Element lié
-    int idLinked;
-    if (_typePage == PAGE_INST)
-        idLinked = _sf2->get(id, champ_sampleID).wValue;
-    else
-        idLinked = _sf2->get(id, champ_instrument).wValue;
-
-    // Keyrange
-    int noteMin = 0;
-    int noteMax = 127;
-    if (_sf2->isSet(id, champ_keyRange))
-    {
-        noteMin = _sf2->get(id, champ_keyRange).rValue.byLo;
-        noteMax = _sf2->get(id, champ_keyRange).rValue.byHi;
-        if (noteMin > noteMax)
-        {
-            int tmp = noteMin;
-            noteMin = noteMax;
-            noteMax = tmp;
-        }
-    }
-
-    // On scanne tous les éléments liés pour savoir si des étendues sont déjà présentes
-    bool selfOk = false;
-    int indexSelf = id.indexElt2;
-    int nbElementsLies = _sf2->count(id);
-    for (int i = 0; i < nbElementsLies; i++)
-    {
-        id.indexElt2 = i;
-        if (!_sf2->get(id, champ_hidden).bValue)
-        {
-            // Keyrange
-            int noteMin2 = 0;
-            int noteMax2 = 127;
-            if (_sf2->isSet(id, champ_keyRange))
-            {
-                noteMin2 = _sf2->get(id, champ_keyRange).rValue.byLo;
-                noteMax2 = _sf2->get(id, champ_keyRange).rValue.byHi;
-                if (noteMin2 > noteMax2)
-                {
-                    int tmp = noteMin2;
-                    noteMin2 = noteMax2;
-                    noteMax2 = tmp;
-                }
-            }
-            int idLinked2;
-            if (_typePage == PAGE_INST)
-                idLinked2 = _sf2->get(id, champ_sampleID).wValue;
-            else
-                idLinked2 = _sf2->get(id, champ_instrument).wValue;
-
-            if (noteMin == noteMin2 && noteMax == noteMax2 && idLinked == idLinked2)
-            {
-                int velMin2 = 0;
-                int velMax2 = 127;
-                if (_sf2->isSet(id, champ_keyRange))
-                {
-                    velMin2 = _sf2->get(id, champ_velRange).rValue.byLo;
-                    velMax2 = _sf2->get(id, champ_velRange).rValue.byHi;
-                    if (velMin2 > velMax2)
-                    {
-                        int tmp = velMin2;
-                        velMin2 = velMax2;
-                        velMax2 = tmp;
-                    }
-                }
-
-                for (int j = 0; j < listeVelocite.size() / 2; j++)
-                {
-                    int velMin = qMin(listeVelocite.at(2 * j), listeVelocite.at(2 * j + 1));
-                    int velMax = qMax(listeVelocite.at(2 * j), listeVelocite.at(2 * j + 1));
-
-                    if (velMin == velMin2 && velMax == velMax2)
-                    {
-                        rangeOk[j] = true;
-                        if (i == indexSelf)
-                            selfOk = true;
-                    }
-                }
-            }
-        }
-    }
-
-    if (rangeOk.indexOf(false) != -1)
-    {
-        id.indexElt2 = indexSelf;
-
-        if (!selfOk)
-        {
-            // Modification de l'étendue de vélocité de l'élément de départ
-            int pos = rangeOk.indexOf(false);
-            rangeOk[pos] = true;
-            Valeur val;
-            val.rValue.byLo = qMin(listeVelocite.at(2 * pos), listeVelocite.at(2 * pos + 1));
-            val.rValue.byHi = qMax(listeVelocite.at(2 * pos), listeVelocite.at(2 * pos + 1));
-            _sf2->set(id, champ_velRange, val);
-        }
-
-        while (rangeOk.indexOf(false) != -1)
-        {
-            // Duplication
-            if (_typePage == PAGE_INST)
-                id.typeElement = elementInstSmpl;
-            else
-                id.typeElement = elementPrstInst;
-            EltID id2 = id;
-            id2.indexElt2 = _sf2->add(id);
-
-            // Recopiage des gens
-            if (_typePage == PAGE_INST)
-                id.typeElement = elementInstSmplGen;
-            else
-                id.typeElement = elementPrstInstGen;
-            for (int j = 0; j < _sf2->count(id); j++)
-            {
-                id.indexMod = j;
-                _sf2->set(id2, (Champ)_sf2->get(id, champ_sfGenOper).wValue,
-                          _sf2->get(id, champ_sfGenAmount));
-            }
-
-            // Modification étendue de vélocité
-            int pos = rangeOk.indexOf(false);
-            rangeOk[pos] = true;
-            Valeur val;
-            val.rValue.byLo = qMin(listeVelocite.at(2 * pos), listeVelocite.at(2 * pos + 1));
-            val.rValue.byHi = qMax(listeVelocite.at(2 * pos), listeVelocite.at(2 * pos + 1));
-            _sf2->set(id2, champ_velRange, val);
-
-            // Recopiage des mods
-            if (_typePage == PAGE_INST)
-            {
-                id.typeElement = elementInstSmplMod;
-                id2.typeElement = elementInstSmplMod;
-            }
-            else
-            {
-                id.typeElement = elementPrstInstMod;
-                id2.typeElement = elementPrstInstMod;
-            }
-            for (int j = 0; j < _sf2->count(id); j++)
-            {
-                id.indexMod = j;
-                id2.indexMod = _sf2->add(id2);
-                _sf2->set(id2, champ_modAmount, _sf2->get(id, champ_modAmount));
-                _sf2->set(id2, champ_sfModSrcOper, _sf2->get(id, champ_sfModSrcOper));
-                _sf2->set(id2, champ_sfModAmtSrcOper, _sf2->get(id, champ_sfModAmtSrcOper));
-                _sf2->set(id2, champ_sfModDestOper, _sf2->get(id, champ_sfModDestOper));
-                _sf2->set(id2, champ_sfModTransOper, _sf2->get(id, champ_sfModTransOper));
-            }
-        }
-    }
 }
 
 void PageTable::spatialisation()
