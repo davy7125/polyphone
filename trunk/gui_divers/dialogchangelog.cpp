@@ -1,7 +1,7 @@
 /***************************************************************************
 **                                                                        **
 **  Polyphone, a soundfont editor                                         **
-**  Copyright (C) 2013-2015 Davy Triponney                                **
+**  Copyright (C) 2013-2016 Davy Triponney                                **
 **                                                                        **
 **  This program is free software: you can redistribute it and/or modify  **
 **  it under the terms of the GNU General Public License as published by  **
@@ -94,7 +94,7 @@ DialogChangeLog::~DialogChangeLog()
 
 void DialogChangeLog::on_pushDonate_clicked()
 {
-    QDesktopServices::openUrl(QUrl("https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=ESBLSGPJ7P938&lc=US&item_name=Polyphone&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donate_LG%2egif%3aNonHosted"));
+    QDesktopServices::openUrl(QUrl("http://polyphone-soundfonts.com/en/make-a-donation"));
 }
 
 void DialogChangeLog::on_pushOk_clicked()

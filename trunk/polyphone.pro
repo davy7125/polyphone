@@ -13,7 +13,7 @@
 
 # Polyphone version
 DEFINES += VERSION=1.8
-DEFINES += FINAL=false
+DEFINES += FINAL=true
 
 # List to complete if other translations are wished
 # Format: polyphone_XX.ts where XX is the language code
