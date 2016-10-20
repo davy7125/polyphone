@@ -238,7 +238,8 @@ SOURCES	+= main.cpp \
     tools/externalcommandrunner.cpp \
     tools/dialog_filter_frequencies.cpp \
     pages/tablecombobox.cpp \
-    tools/dialog_change_volume.cpp
+    tools/dialog_change_volume.cpp \
+    tools/duplicationtool.cpp
 
 HEADERS  += mainwindow.h \
     sf2_core/sf2_types.h \
@@ -330,7 +331,8 @@ HEADERS  += mainwindow.h \
     tools/dialog_command.h \
     tools/externalcommandrunner.h \
     tools/dialog_filter_frequencies.h \
-    tools/dialog_change_volume.h
+    tools/dialog_change_volume.h \
+    tools/duplicationtool.h
 
 FORMS    += mainwindow.ui \
     configuration/config.ui \

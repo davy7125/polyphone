@@ -452,6 +452,7 @@ void MainWindow::ouvrir(QString fileName)
 {
     // Chargement d'un fichier .sf2 ou .sf3
     _progressDialog.show();
+    QApplication::processEvents();
     QFuture<int> future = QtConcurrent::run(this, &MainWindow::ouvrir2, fileName);
     _futureWatcher.setFuture(future);
 }
@@ -468,6 +469,7 @@ int MainWindow::ouvrir2(QString fileName)
         ui->arborescence->clearSelection();
         ui->arborescence->select(EltID(elementSf2, indexSf2, 0, 0, 0), true);
     }
+
     return ret;
 }
 
@@ -1912,6 +1914,7 @@ void MainWindow::exporter(QList<QList<EltID> > listID, QString dir, int format, 
     int flags = presetPrefix + bankDir * 0x02 + gmSort * 0x04;
 
     _progressDialog.show();
+    QApplication::processEvents();
 
     QFuture<int> future = QtConcurrent::run(this, &MainWindow::exporter2, listID, dir, format, flags, quality);
     _futureWatcher.setFuture(future);
@@ -2026,8 +2029,6 @@ int MainWindow::exporter2(QList<QList<EltID> > listID, QString dir, int format, 
 
 void MainWindow::futureFinished()
 {
-    _progressDialog.hide();
-
     int result = _futureWatcher.result();
     if (result > -10)
     {
@@ -2061,6 +2062,8 @@ void MainWindow::futureFinished()
 
         updateDo();
     }
+
+    _progressDialog.hide();
 }
 
 void MainWindow::nouvelInstrument()
