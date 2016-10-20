@@ -16,8 +16,8 @@ Polyphone is an open-source soundfont editor for creating musical instruments, a
 
 ### Screenshots
 
-![Sample configuration](screenshots/sample_configuration.png) ![Instrument editing](screenshots/instrument_editing.png)
-![Range editor](screenshots/range_editor.png) ![Sample list](screenshots/sample_list.png)
+![Sample configuration](screenshots/SampleConfiguration.png) ![Instrument editing](screenshots/InstrumentEditing.png)
+![Range editor](screenshots/RangeEditor.png) ![Sample list](screenshots/SampleList.png)
 
 ### Install
 
