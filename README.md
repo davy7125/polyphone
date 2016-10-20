@@ -12,3 +12,7 @@ Features
  * simultaneous editing of parameters
  * specific tools for musical instrument creation
  * recorder to keep a trace of what is played in a .wav file
+
+# Support
+
+Documentation and forum here: http://polyphone-soundfonts.com
