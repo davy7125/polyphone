@@ -26,3 +26,7 @@ Check this [page](http://polyphone-soundfonts.com/en/download) to find installer
 ### Support
 
 See the [documentation](http://polyphone-soundfonts.com/en/documentation) and [forum](http://polyphone-soundfonts.com/en/forum).
+
+- - - - 
+
+[![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=ESBLSGPJ7P938&lc=US&item_name=Polyphone%20project)
