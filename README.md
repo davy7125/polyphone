@@ -1,4 +1,4 @@
-# polyphone
+# Polyphone
 
 Polyphone is a free soundfont editor for creating musical instruments, available for Windows, Mac OS X and Linux.
 
