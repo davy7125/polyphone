@@ -24,7 +24,7 @@ Type: files; Name: "{app}\platforms\qwindows.dll"
 ; (To generate a new GUID, click Tools | Generate GUID inside the IDE.)
 AppId={{B0A96B4A-783D-4090-89D6-0B66C8D71B42}
 AppName=Polyphone
-AppVersion=1.7
+AppVersion=1.8
 AppPublisher=Davy Triponney
 AppPublisherURL=http://www.polyphone.fr/
 AppSupportURL=http://www.polyphone.fr/
@@ -33,7 +33,7 @@ ChangesAssociations=yes
 DefaultDirName={pf}\Polyphone
 DefaultGroupName=Polyphone
 LicenseFile=license.txt
-OutputBaseFilename=Polyphone_v1.7_win32
+OutputBaseFilename=Polyphone_v1.8_win32
 SetupIconFile=polyphone.ico
 Compression=lzma
 SolidCompression=yes

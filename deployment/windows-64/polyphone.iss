@@ -7,7 +7,7 @@
 ; (To generate a new GUID, click Tools | Generate GUID inside the IDE.)
 AppId={{83549E04-CB44-4E12-85B6-9FBBA3B0FE65}
 AppName=Polyphone
-AppVersion=1.7
+AppVersion=1.8
 AppPublisher=Davy Triponney
 AppPublisherURL=http://www.polyphone.fr/
 AppSupportURL=http://www.polyphone.fr/
@@ -16,7 +16,7 @@ ChangesAssociations=yes
 DefaultDirName={pf64}\Polyphone
 DefaultGroupName=Polyphone
 LicenseFile=license.txt
-OutputBaseFilename=Polyphone_v1.7_win64  
+OutputBaseFilename=Polyphone_v1.8_win64  
 SetupIconFile=polyphone.ico
 Compression=lzma
 SolidCompression=yes
