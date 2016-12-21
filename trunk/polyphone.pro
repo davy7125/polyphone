@@ -9,7 +9,7 @@
 # Uncomment a line if your distribution doesn't come with some of the following libraries
 #DEFINES += USE_LOCAL_RTMIDI
 #DEFINES += USE_LOCAL_STK
-#DEFINES += USE_LOCAL_QCUSTOMPLOT
+DEFINES += USE_LOCAL_QCUSTOMPLOT
 
 # Polyphone version
 DEFINES += VERSION=1.8
@@ -22,6 +22,7 @@ TRANSLATIONS = polyphone_en.ts \
     polyphone_it.ts \
     polyphone_sr.ts \
     polyphone_de.ts \
+    polyphone_pt.ts \
     polyphone_cs.ts
 
 
