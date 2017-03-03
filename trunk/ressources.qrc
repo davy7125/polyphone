@@ -112,6 +112,7 @@
         <file>ressources/traductions/polyphone_it.qm</file>
         <file>ressources/traductions/polyphone_sr.qm</file>
         <file>ressources/traductions/polyphone_cs.qm</file>
+        <file>ressources/traductions/polyphone_pt.qm</file>
     </qresource>
     <qresource prefix="/logo">
         <file alias="noel">ressources/logo_noel.png</file>
