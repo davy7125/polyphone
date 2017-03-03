@@ -61,6 +61,7 @@ DialogAbout::DialogAbout(QWidget *parent) :
     _credit.addTranslator(trUtf8("Davy Triponney"), "contact@polyphone-soundfonts.com");
     _credit.addTranslator(trUtf8("F.J. Martínez Murcia"), "fjesusmartinez@ugr.es");
     _credit.addTranslator(trUtf8("Jay Alexander Fleming"), "tito.nehru.naser@gmail.com");
+    _credit.addTranslator(trUtf8("Joel Gomes"), "joelgomes1994@hotmail.com");
     _credit.addTranslator(trUtf8("Pavel Fric"), "pavelfric@seznam.cz");
     _credit.addTranslator(trUtf8("Steve Clarke"), "stevertyu@yahoo.com");
     ui->textBrowser->setHtml(_credit.getText());
