@@ -829,10 +829,12 @@ void Tree::dropEvent(QDropEvent *event)
             if (!path.isEmpty())
             {
                 QString extension = path.split(".").last().toLower();
+                EltID idDest = ((TreeWidgetItem *)itemAt(event->pos())) != NULL ?
+                            ((TreeWidgetItem *)itemAt(event->pos()))->getEltID() : EltID(elementUnknown, -1, -1, -1, -1);
                 if (extension == "sfz" || extension == "sf2"  || extension == "sf3" || extension == "sfark")
-                    _mainWindow->dragAndDrop(path, ((TreeWidgetItem *)itemAt(event->pos()))->getEltID(), &numSf2);
+                    _mainWindow->dragAndDrop(path, idDest, &numSf2);
                 else if (extension == "wav")
-                    _mainWindow->dragAndDrop(path, ((TreeWidgetItem *)itemAt(event->pos()))->getEltID(), &commandCopy);
+                    _mainWindow->dragAndDrop(path, idDest, &commandCopy);
             }
         }
         this->_mainWindow->updateActions();
