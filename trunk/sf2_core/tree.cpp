@@ -842,7 +842,8 @@ void Tree::dropEvent(QDropEvent *event)
     else
     {
         // Destination
-        EltID idDest = ((TreeWidgetItem *)itemAt(event->pos()))->getEltID();
+        TreeWidgetItem * twi = (TreeWidgetItem *)itemAt(event->pos());
+        EltID idDest = (twi == NULL ? EltID(elementUnknown, -1, -1, -1, -1) : twi->getEltID());
 
         // Constitution de la liste des éléments à copier / lier
         QList<EltID> liste = this->getAllIDs();
