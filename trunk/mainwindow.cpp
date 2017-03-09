@@ -36,6 +36,7 @@
 #include "dialogchangelog.h"
 #include "recentfilemanager.h"
 #include "keynamemanager.h"
+#include "modalprogressdialog.h"
 #include <QFileDialog>
 #include <QInputDialog>
 #include <QUrl>
@@ -62,7 +63,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent, Qt::Window | Qt::W
     actionKeyboard(NULL),
     _currentKey(-1),
     _dialKeyboard(this, Qt::Tool | Qt::WindowStaysOnTopHint | Qt::WindowCloseButtonHint),
-    _progressDialog(trUtf8("Opération en cours..."), trUtf8("Annuler"), 0, 0, this),
+    _progressDialog(NULL),
     _isSustainOn(false)
 {
     ui->setupUi(this);
@@ -203,10 +204,6 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent, Qt::Window | Qt::W
     ui->actionA_propos->setMenuRole(QAction::AboutRole);
     ui->actionPr_f_rences->setMenuRole(QAction::PreferencesRole);
 
-    _progressDialog.setWindowModality(Qt::WindowModal);
-    _progressDialog.setCancelButton(NULL);
-    _progressDialog.setWindowFlags(_progressDialog.windowFlags() & ~Qt::WindowContextHelpButtonHint & ~Qt::WindowCloseButtonHint);
-    _progressDialog.reset();
     connect(&_futureWatcher, SIGNAL (finished()), this, SLOT (futureFinished()));
 }
 
@@ -452,7 +449,8 @@ void MainWindow::ouvrirFichier5()
 void MainWindow::ouvrir(QString fileName)
 {
     // Chargement d'un fichier .sf2 ou .sf3
-    _progressDialog.show();
+    _progressDialog = new ModalProgressDialog(trUtf8("Opération en cours..."), trUtf8("Annuler"), 0, 0, this);
+    _progressDialog->show();
     QApplication::processEvents();
     QFuture<int> future = QtConcurrent::run(this, &MainWindow::ouvrir2, fileName);
     _futureWatcher.setFuture(future);
@@ -1915,7 +1913,8 @@ void MainWindow::exporter(QList<QList<EltID> > listID, QString dir, int format, 
 {
     int flags = presetPrefix + bankDir * 0x02 + gmSort * 0x04;
 
-    _progressDialog.show();
+    _progressDialog = new ModalProgressDialog(trUtf8("Opération en cours..."), trUtf8("Annuler"), 0, 0, this);
+    _progressDialog->show();
     QApplication::processEvents();
 
     QFuture<int> future = QtConcurrent::run(this, &MainWindow::exporter2, listID, dir, format, flags, quality);
@@ -2065,7 +2064,8 @@ void MainWindow::futureFinished()
         updateDo();
     }
 
-    _progressDialog.hide();
+    _progressDialog->deleteLater();
+    _progressDialog = NULL;
 }
 
 void MainWindow::nouvelInstrument()

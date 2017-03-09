@@ -57,7 +57,7 @@
 #include "synth.h"
 #include "pianokeybdcustom.h"
 #include "dialog_magnetophone.h"
-
+class ModalProgressDialog;
 
 namespace Ui
 {
@@ -241,7 +241,7 @@ private:
     QDialog _dialKeyboard;
     QByteArray _geometryDialKeyboard;
     QFutureWatcher<int> _futureWatcher;
-    QProgressDialog _progressDialog;
+    ModalProgressDialog * _progressDialog;
 
     // Gestion sustain pedal
     QList<int> _listKeysToRelease;
