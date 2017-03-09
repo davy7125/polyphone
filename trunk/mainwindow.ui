@@ -233,6 +233,7 @@
      <string>&amp;Aide</string>
     </property>
     <addaction name="actionSommaire"/>
+    <addaction name="action_T_l_charger_des_soundfonts"/>
     <addaction name="action_Forum"/>
     <addaction name="separator"/>
     <addaction name="actionA_propos"/>
@@ -1567,6 +1568,15 @@
    </property>
    <property name="toolTip">
     <string>Exporte la liste des presets dans un format texte</string>
+   </property>
+  </action>
+  <action name="action_T_l_charger_des_soundfonts">
+   <property name="icon">
+    <iconset resource="ressources.qrc">
+     <normaloff>:/icones/down</normaloff>:/icones/down</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Télécharger des soundfonts</string>
    </property>
   </action>
  </widget>
