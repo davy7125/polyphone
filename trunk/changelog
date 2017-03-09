@@ -5,6 +5,9 @@ polyphone (1.9) unstable; urgency=low
   * (fix) crash with a drag & drop in the tree
   * (fix) release bug when using loop + end mode
   * (fix) the progress bar sometimes remains when loading a small soundfont
+  * (fix) a double-click in the tree didn't expand or collapse the elements
+  * (fix) a same file could be loaded twice on windows
+  * (fix) sometimes the loop cell couldn't be edited with the mouse
 
  -- Davy Triponney <davy.triponney@gmail.com>  Wed, 16 Nov 2017 17:51:55 +0100
 
