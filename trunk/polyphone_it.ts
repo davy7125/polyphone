@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="it_IT">
+<TS version="2.0" language="it_IT">
 <context>
     <name>ComboBox</name>
     <message>
@@ -1066,27 +1066,27 @@
     <message>
         <location filename="tools/dialog_exportlist.ui" line="17"/>
         <source>Exporter la liste des presets</source>
-        <translation type="unfinished"></translation>
+        <translation>Esporta la lista di presets</translation>
     </message>
     <message>
         <location filename="tools/dialog_exportlist.ui" line="33"/>
         <source>texte copié dans le presse-papier</source>
-        <translation type="unfinished"></translation>
+        <translation>testo copiato negli appunti</translation>
     </message>
     <message>
         <location filename="tools/dialog_exportlist.ui" line="45"/>
         <source>format csv</source>
-        <translation type="unfinished"></translation>
+        <translation>Formato csv</translation>
     </message>
     <message>
         <location filename="tools/dialog_exportlist.ui" line="55"/>
         <source>tableau html</source>
-        <translation type="unfinished"></translation>
+        <translation>tabella HTML</translation>
     </message>
     <message>
         <location filename="tools/dialog_exportlist.ui" line="80"/>
         <source>Copier</source>
-        <translation type="unfinished">Copia</translation>
+        <translation>Copia</translation>
     </message>
 </context>
 <context>
@@ -2036,17 +2036,17 @@
     <message>
         <location filename="mainwindow.ui" line="1567"/>
         <source>Exporter la liste des &amp;presets</source>
-        <translation type="unfinished"></translation>
+        <translation>Esporta la lista di &amp;presets</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="1570"/>
         <source>Exporte la liste des presets dans un format texte</source>
-        <translation type="unfinished"></translation>
+        <translation>Esporta la liste dei preset in un formato di testo</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="1579"/>
         <source>&amp;Télécharger des soundfonts</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Scaricare soundfonts</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="1164"/>
@@ -2661,7 +2661,7 @@ Dividere il file in più SF2 può risolvere il problema.</translation>
     <message>
         <location filename="mainwindow.cpp" line="729"/>
         <source>http://polyphone-soundfonts.com/fr/soundfonts</source>
-        <translation type="unfinished"></translation>
+        <translation>http://polyphone-soundfonts.com/en/soundfonts</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1165"/>
