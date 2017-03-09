@@ -213,6 +213,7 @@ private slots:
     void futureFinished();
 
     void on_action_Forum_triggered();
+    void on_action_T_l_charger_des_soundfonts_triggered();
 
 signals:
     void initAudio(int numDevice, int numIndex, int bufferSize);
