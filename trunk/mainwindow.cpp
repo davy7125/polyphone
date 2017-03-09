@@ -723,6 +723,11 @@ void MainWindow::on_action_Forum_triggered()
     // Open online forum
     QDesktopServices::openUrl(QUrl(trUtf8("http://polyphone-soundfonts.com/fr/forum")));
 }
+void MainWindow::on_action_T_l_charger_des_soundfonts_triggered()
+{
+    // Open online forum
+    QDesktopServices::openUrl(QUrl(trUtf8("http://polyphone-soundfonts.com/fr/soundfonts")));
+}
 
 void MainWindow::AfficherBarreOutils()
 {

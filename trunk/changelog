@@ -1,5 +1,6 @@
 polyphone (1.9) unstable; urgency=low
 
+  * (new) soundfont repository online
   * (new) portuguese translation
   * (new) tool to export the preset list in a text format
   * (improvement) Glow effect when the virtual keyboard is focused with ctrl+K

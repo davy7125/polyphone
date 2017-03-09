@@ -106,6 +106,7 @@
         <file alias="command">ressources/command_line.png</file>
         <file alias="filter">ressources/filter.png</file>
         <file alias="list">ressources/list.png</file>
+        <file alias="down">ressources/down.png</file>
     </qresource>
     <qresource prefix="/traductions">
         <file>ressources/traductions/polyphone_en.qm</file>

@@ -715,7 +715,7 @@
     </message>
     <message>
         <location filename="gui_divers/dialog_about.cpp" line="59"/>
-        <location filename="gui_divers/dialog_about.cpp" line="65"/>
+        <location filename="gui_divers/dialog_about.cpp" line="66"/>
         <source>Steve Clarke</source>
         <translation>Steve Clarke</translation>
     </message>
@@ -730,7 +730,7 @@
         <translation>Jay Alexander Fleming</translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_about.cpp" line="64"/>
+        <location filename="gui_divers/dialog_about.cpp" line="65"/>
         <source>Pavel Fric</source>
         <translation>Pavel Fric</translation>
     </message>
@@ -1059,6 +1059,34 @@
         <location filename="gui_divers/dialog_export.cpp" line="193"/>
         <source>Au moins un preset doit être sélectionné.</source>
         <translation>Ao menos uma predefinição deve ser selecionada.</translation>
+    </message>
+</context>
+<context>
+    <name>DialogExportList</name>
+    <message>
+        <location filename="tools/dialog_exportlist.ui" line="17"/>
+        <source>Exporter la liste des presets</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="tools/dialog_exportlist.ui" line="33"/>
+        <source>texte copié dans le presse-papier</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="tools/dialog_exportlist.ui" line="45"/>
+        <source>format csv</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="tools/dialog_exportlist.ui" line="55"/>
+        <source>tableau html</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="tools/dialog_exportlist.ui" line="80"/>
+        <source>Copier</source>
+        <translation type="unfinished">Copiar</translation>
     </message>
 </context>
 <context>
@@ -1695,534 +1723,549 @@
         <translation>A&amp;juda</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="242"/>
+        <location filename="mainwindow.ui" line="243"/>
         <source>&amp;Édition</source>
         <translation>&amp;Editar</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="257"/>
+        <location filename="mainwindow.ui" line="258"/>
         <source>&amp;Outils</source>
         <translation>Utilitário&amp;s</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="294"/>
+        <location filename="mainwindow.ui" line="296"/>
         <source>&amp;Instrument</source>
         <translation>&amp;Instrumento</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="326"/>
+        <location filename="mainwindow.ui" line="328"/>
         <source>A&amp;ffichage</source>
         <translation>&amp;Visualizar</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="355"/>
+        <location filename="mainwindow.ui" line="357"/>
         <source>Barre d&apos;outils</source>
         <translation>Barra de Ferramentas</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="396"/>
+        <location filename="mainwindow.ui" line="398"/>
         <source>Arborescence</source>
         <translation>Árvore</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="522"/>
+        <location filename="mainwindow.ui" line="524"/>
         <source>Enroule l&apos;arborescence</source>
         <translation>Minimizar árvore</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="548"/>
+        <location filename="mainwindow.ui" line="550"/>
         <source>Déroule l&apos;arborescence</source>
         <translation>Expandir árvore</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="71"/>
+        <location filename="mainwindow.cpp" line="73"/>
         <source>Rechercher...</source>
         <translation>Buscar...</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="593"/>
+        <location filename="mainwindow.ui" line="595"/>
         <source>Efface la recherche</source>
         <translation>Limpar pesquisa</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="620"/>
+        <location filename="mainwindow.ui" line="622"/>
         <source>&amp;Ouvrir...</source>
         <translation>Abrir arquiv&amp;o...</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="623"/>
+        <location filename="mainwindow.ui" line="625"/>
         <source>Ouvre un fichier</source>
         <translation>Abrir um arquivo</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="635"/>
+        <location filename="mainwindow.ui" line="637"/>
         <source>&amp;Quitter</source>
         <translation>Sai&amp;r</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="659"/>
+        <location filename="mainwindow.ui" line="661"/>
         <source>&amp;A propos</source>
         <translation>So&amp;bre</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="671"/>
-        <location filename="mainwindow.cpp" line="294"/>
+        <location filename="mainwindow.ui" line="673"/>
+        <location filename="mainwindow.cpp" line="292"/>
         <location filename="mainwindow.cpp" line="515"/>
         <source>&amp;Enregistrer</source>
         <translation>&amp;Salvar</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="674"/>
+        <location filename="mainwindow.ui" line="676"/>
         <source>Enregistre le fichier actuel</source>
         <translation>Salvar arquivo atual</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="689"/>
+        <location filename="mainwindow.ui" line="691"/>
         <source>Enregistrer &amp;sous...</source>
         <oldsource>Enregistrer &amp;sous ...</oldsource>
         <translation>Salvar &amp;como...</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="692"/>
+        <location filename="mainwindow.ui" line="694"/>
         <source>Enregistre sous un autre fichier</source>
         <translation>Salvar em outro arquivo</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="704"/>
+        <location filename="mainwindow.ui" line="706"/>
         <source>&amp;Nouveau...</source>
         <translation>&amp;Novo...</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="707"/>
+        <location filename="mainwindow.ui" line="709"/>
         <source>Crée un nouveau fichier</source>
         <translation>Criar novo arquivo</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="295"/>
+        <location filename="mainwindow.cpp" line="293"/>
         <location filename="mainwindow.cpp" line="516"/>
         <location filename="mainwindow.cpp" line="643"/>
         <source>&amp;Annuler</source>
         <translation>Cancel&amp;ar</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="311"/>
+        <location filename="mainwindow.ui" line="313"/>
         <source>&amp;Preset</source>
         <translation>&amp;Predefinição</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="647"/>
+        <location filename="mainwindow.ui" line="649"/>
         <source>&amp;Manuel en ligne</source>
         <oldsource>&amp;Manuel</oldsource>
         <translation>&amp;Manual Online</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="722"/>
+        <location filename="mainwindow.ui" line="724"/>
         <source>&amp;Annuler</source>
         <comment>1</comment>
         <translatorcomment>Undo an action</translatorcomment>
         <translation>Desfa&amp;zer alteração</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="725"/>
+        <location filename="mainwindow.ui" line="727"/>
         <source>Annule la dernière action</source>
         <translation>Desfazer última ação</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="740"/>
+        <location filename="mainwindow.ui" line="742"/>
         <source>Ré&amp;tablir</source>
         <translation>Re&amp;fazer alteração</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="743"/>
+        <location filename="mainwindow.ui" line="745"/>
         <source>Refait la dernière action annulée</source>
         <translation>Refazer última ação desfeita</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="755"/>
+        <location filename="mainwindow.ui" line="757"/>
         <source>&amp;Préférences</source>
         <translation>&amp;Preferências</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="758"/>
+        <location filename="mainwindow.ui" line="760"/>
         <source>Ouvre les préférences</source>
         <translation>Abrir as preferências</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="769"/>
+        <location filename="mainwindow.ui" line="771"/>
         <source>&amp;Barre d&apos;outils</source>
         <translation>&amp;Barra de Ferramentas</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="772"/>
+        <location filename="mainwindow.ui" line="774"/>
         <source>Afficher / masque la barre d&apos;outils</source>
         <translation>Mostrar / esconder a barra de ferramentas</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="784"/>
+        <location filename="mainwindow.ui" line="786"/>
         <source>&amp;Fermer le fichier</source>
         <translation>&amp;Fechar arquivo</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="787"/>
+        <location filename="mainwindow.ui" line="789"/>
         <source>Ferme le fichier</source>
         <translation>Fecha o arquivo atual</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="802"/>
+        <location filename="mainwindow.ui" line="804"/>
         <source>&amp;Copier</source>
         <translation>&amp;Copiar</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="805"/>
+        <location filename="mainwindow.ui" line="807"/>
         <source>Copie un élément</source>
         <translation>Copia um elemento</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="823"/>
+        <location filename="mainwindow.ui" line="825"/>
         <source>C&amp;oller</source>
         <translation>C&amp;olar</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="826"/>
+        <location filename="mainwindow.ui" line="828"/>
         <source>Colle un élément</source>
         <translation>Cola um elemento</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="844"/>
+        <location filename="mainwindow.ui" line="846"/>
         <source>&amp;Supprimer</source>
         <translation>&amp;Deletar</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="847"/>
+        <location filename="mainwindow.ui" line="849"/>
         <source>Supprime un élément</source>
         <translation>Deleta um elemento</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="865"/>
+        <location filename="mainwindow.ui" line="867"/>
         <source>&amp;Enlever les éléments non utilisés</source>
         <translation>Remov&amp;er elementos não usados</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="868"/>
+        <location filename="mainwindow.ui" line="870"/>
         <source>Enlève les échantillons et instruments non utilisés</source>
         <oldsource>Enlève les samples et instruments non utilisés</oldsource>
         <translation>Remove amostras e instrumentos não usados</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="880"/>
-        <location filename="mainwindow.cpp" line="1147"/>
-        <location filename="mainwindow.cpp" line="1154"/>
+        <location filename="mainwindow.ui" line="882"/>
+        <location filename="mainwindow.cpp" line="1153"/>
+        <location filename="mainwindow.cpp" line="1160"/>
         <source>&amp;Renommer</source>
         <translation>&amp;Renomear</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="883"/>
+        <location filename="mainwindow.ui" line="885"/>
         <source>Renomme un ou plusieurs élément(s)</source>
         <translation>Renomeia um ou mais elemento(s)</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="894"/>
+        <location filename="mainwindow.ui" line="896"/>
         <source>fichier 1</source>
         <translation>arquivo1</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="900"/>
-        <location filename="mainwindow.ui" line="917"/>
-        <location filename="mainwindow.ui" line="934"/>
-        <location filename="mainwindow.ui" line="951"/>
-        <location filename="mainwindow.ui" line="968"/>
+        <location filename="mainwindow.ui" line="902"/>
+        <location filename="mainwindow.ui" line="919"/>
+        <location filename="mainwindow.ui" line="936"/>
+        <location filename="mainwindow.ui" line="953"/>
+        <location filename="mainwindow.ui" line="970"/>
         <source>Ouvre un fichier récent</source>
         <translation>Abre um arquivo recente</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="911"/>
+        <location filename="mainwindow.ui" line="913"/>
         <source>fichier 2</source>
         <translation>arquivo2</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="928"/>
+        <location filename="mainwindow.ui" line="930"/>
         <source>fichier 3</source>
         <translation>arquivo3</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="945"/>
+        <location filename="mainwindow.ui" line="947"/>
         <source>fichier 4</source>
         <translation>arquivo4</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="962"/>
+        <location filename="mainwindow.ui" line="964"/>
         <source>fichier 5</source>
         <translation>arquivo5</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="982"/>
+        <location filename="mainwindow.ui" line="984"/>
         <source>&amp;Section modulateurs</source>
         <translation>&amp;Seção de moduladores</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="997"/>
+        <location filename="mainwindow.ui" line="999"/>
         <source>&amp;Importer des échantillons...</source>
         <oldsource>&amp;Importer des sons...</oldsource>
         <translation>&amp;Importar amostras...</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1012"/>
+        <location filename="mainwindow.ui" line="1014"/>
         <source>E&amp;xporter des échantillons...</source>
         <oldsource>E&amp;xporter des sons...</oldsource>
         <translation>E&amp;xportar amostras...</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1060"/>
+        <location filename="mainwindow.ui" line="1062"/>
         <source>Enleve le blanc au début d&apos;un échantillon</source>
         <oldsource>Enleve le blanc au début d&apos;un sample</oldsource>
         <translation>Remover vazio ao início da amostra</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1075"/>
+        <location filename="mainwindow.ui" line="1077"/>
         <source>Ajuste l&apos;échantillon à sa fin de boucle</source>
         <oldsource>Ajuste le sample à sa fin de boucle</oldsource>
         <translation>Cortar amostra ao fim de sua repetição</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1105"/>
+        <location filename="mainwindow.ui" line="1107"/>
         <source>Boucle automatiquement l&apos;échantillon</source>
         <oldsource>Boucle automatiquement le sample</oldsource>
         <translation>Repetir automaticamente a amostra</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1135"/>
+        <location filename="mainwindow.ui" line="1137"/>
         <source>Transpose l&apos;échantillon</source>
         <oldsource>Transpose le sample</oldsource>
         <translation>Transpor a amostra</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1553"/>
+        <location filename="mainwindow.ui" line="1555"/>
         <source>&amp;Commande externe...</source>
         <translation>Comando &amp;Externo...</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1556"/>
+        <location filename="mainwindow.ui" line="1558"/>
         <source>Utilise un logiciel ou une commande externe pour modifier un fichier son .wav</source>
         <translation>Usar um software ou comando externo para modificar um arquivo .wav</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1162"/>
+        <location filename="mainwindow.ui" line="1567"/>
+        <source>Exporter la liste des &amp;presets</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="1570"/>
+        <source>Exporte la liste des presets dans un format texte</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="1579"/>
+        <source>&amp;Télécharger des soundfonts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="1164"/>
         <source>&amp;Accordage céleste...</source>
         <translation>&amp;Afinação centesimal...</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1165"/>
+        <location filename="mainwindow.ui" line="1167"/>
         <source>Accorde les sons pour créer des battements</source>
         <translation>Afinar os sons para criar batidas</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1210"/>
+        <location filename="mainwindow.ui" line="1212"/>
         <source>Duplication des divisions...</source>
         <translation>Duplicação de divisões...</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1283"/>
+        <location filename="mainwindow.ui" line="1285"/>
         <source>affiche un clavier de 6 octaves</source>
         <translation>Mostrar um teclado de 6 oitavas</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1291"/>
+        <location filename="mainwindow.ui" line="1293"/>
         <source>&amp;128 notes (complet)</source>
         <translation>&amp;128 teclas (completo)</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1305"/>
+        <location filename="mainwindow.ui" line="1307"/>
         <source>n&apos;affiche aucun clavier</source>
         <translation>Não mostrar teclado</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1320"/>
+        <location filename="mainwindow.ui" line="1322"/>
         <source>Duplication des divisions</source>
         <translation>Duplicação de divisões</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1380"/>
+        <location filename="mainwindow.ui" line="1382"/>
         <source>Affiche le magnétophone</source>
         <translation>Mostrar o gravador</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1392"/>
-        <location filename="mainwindow.ui" line="1407"/>
+        <location filename="mainwindow.ui" line="1394"/>
+        <location filename="mainwindow.ui" line="1409"/>
         <source>&amp;Visualiseur</source>
         <translation>&amp;Visualizar</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1395"/>
-        <location filename="mainwindow.ui" line="1410"/>
+        <location filename="mainwindow.ui" line="1397"/>
+        <location filename="mainwindow.ui" line="1412"/>
         <source>Visualise dans un graphique les paramètres utilisés</source>
         <translation>Mostrar em um gráfico os parâmetros usados</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1437"/>
+        <location filename="mainwindow.ui" line="1439"/>
         <source>Ex&amp;porter soundfont...</source>
         <oldsource>Exporter sound&amp;font...</oldsource>
         <translation>Ex&amp;portar soundfont...</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1440"/>
+        <location filename="mainwindow.ui" line="1442"/>
         <source>Exporte une soundfont</source>
         <translation>Exportar uma soundfont</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1452"/>
+        <location filename="mainwindow.ui" line="1454"/>
         <source>&amp;Dissocier les échantillons stéréo</source>
         <oldsource>&amp;Dissocier les samples stéréo</oldsource>
         <translation>Limpar relação de to&amp;das amostras estéreo</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1455"/>
+        <location filename="mainwindow.ui" line="1457"/>
         <source>Dissocie les échantillons stéréo</source>
         <oldsource>Dissocie les samples stéréo</oldsource>
         <translation>Limpar relação de todas amostras estéreo</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1467"/>
+        <location filename="mainwindow.ui" line="1469"/>
         <source>Exporter pics de &amp;fréquence (.csv)</source>
         <translation>Exportar picos e &amp;frequências (csv)</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1470"/>
+        <location filename="mainwindow.ui" line="1472"/>
         <source>Exporte les pics de fréquence des échantillons dans un fichier csv</source>
         <translation>Exportar os picos e frequências de todas amostras em um arquivo csv</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1478"/>
+        <location filename="mainwindow.ui" line="1480"/>
         <source>&amp;88 notes (piano)</source>
         <translation>&amp;88 teclas (piano)</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1489"/>
+        <location filename="mainwindow.ui" line="1491"/>
         <source>Dans la &amp;barre d&apos;outils</source>
         <translation>Na &amp;barra de ferramentas</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1497"/>
+        <location filename="mainwindow.ui" line="1499"/>
         <source>&amp;Flottant</source>
         <translation>&amp;Flutuante</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1509"/>
+        <location filename="mainwindow.ui" line="1511"/>
         <source>&amp;Transposition...</source>
         <translation>&amp;Transposição...</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1512"/>
+        <location filename="mainwindow.ui" line="1514"/>
         <source>Transpose tous les échantillons d&apos;un instrument</source>
         <translation>Transpor cada amostra de um instrumento</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1521"/>
+        <location filename="mainwindow.ui" line="1523"/>
         <source>Enlever tous les &amp;modulateurs</source>
         <translation>Remover todos &amp;moduladores</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1529"/>
+        <location filename="mainwindow.ui" line="1531"/>
         <source>&amp;Plein écran</source>
         <translation>&amp;Preencher tela</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1541"/>
+        <location filename="mainwindow.ui" line="1543"/>
         <source>&amp;Forum</source>
         <translation>&amp;Forum</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1269"/>
+        <location filename="mainwindow.ui" line="1271"/>
         <source>&amp;5 octaves</source>
         <translation>&amp;5 oitavas</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1272"/>
+        <location filename="mainwindow.ui" line="1274"/>
         <source>affiche un clavier de 5 octaves</source>
         <translation>Mostrar um teclado de 5 oitavas</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1280"/>
+        <location filename="mainwindow.ui" line="1282"/>
         <source>&amp;6 octaves</source>
         <translation>&amp;6 oitavas</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1294"/>
+        <location filename="mainwindow.ui" line="1296"/>
         <source>affiche un clavier de 128 notes</source>
         <translation>Mostrar um teclado de 128 teclas</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1302"/>
+        <location filename="mainwindow.ui" line="1304"/>
         <source>&amp;Aucun</source>
         <translation>Nen&amp;hum</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1207"/>
-        <location filename="mainwindow.ui" line="1317"/>
+        <location filename="mainwindow.ui" line="1209"/>
+        <location filename="mainwindow.ui" line="1319"/>
         <source>&amp;Duplication des divisions...</source>
         <oldsource>&amp;Duplication des divisions</oldsource>
         <translation>&amp;Duplicação de divisão...</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1087"/>
+        <location filename="mainwindow.ui" line="1089"/>
         <source>&amp;Modifier volume...</source>
         <oldsource>&amp;Modifier volume</oldsource>
         <translation>Mudar &amp;volume...</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1090"/>
+        <location filename="mainwindow.ui" line="1092"/>
         <source>Modifie le volume</source>
         <translation>Mudar o volume</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1117"/>
+        <location filename="mainwindow.ui" line="1119"/>
         <source>&amp;Filtrer des fréquences...</source>
         <translation>&amp;Filtrar frequências...</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1120"/>
+        <location filename="mainwindow.ui" line="1122"/>
         <source>Applique un filtre pour diminuer certaines fréquences</source>
         <translation>Aplicar um filtro para atenuar frequências específicas</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1147"/>
+        <location filename="mainwindow.ui" line="1149"/>
         <source>&amp;Régler atténuations...</source>
         <translation>Ajusta&amp;r atenuações...</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1150"/>
+        <location filename="mainwindow.ui" line="1152"/>
         <source>Régle les atténuations des instruments et presets</source>
         <translation>Ajustar atenuações de instrumentos e predefinições globalmente</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1335"/>
+        <location filename="mainwindow.ui" line="1337"/>
         <source>&amp;Élaboration release...</source>
         <translation>G&amp;erenciador de release...</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1338"/>
+        <location filename="mainwindow.ui" line="1340"/>
         <source>Crée automatiquement une release pour tous les sons liés</source>
         <translation>Criar um release automaticamente para todos sons relacionados</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1365"/>
+        <location filename="mainwindow.ui" line="1367"/>
         <source>&amp;Associer les échantillons stéréo</source>
         <oldsource>&amp;Association auto échantillons</oldsource>
         <translation>Rel&amp;acionar todas amostras estéreo</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1368"/>
+        <location filename="mainwindow.ui" line="1370"/>
         <source>Associe automatiquement les échantillons G/D</source>
         <oldsource>Associe automatiquement les samples G/D</oldsource>
         <translation>Relacionar automaticamente amostras E/D de acordo com seus nomes</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1377"/>
+        <location filename="mainwindow.ui" line="1379"/>
         <source>&amp;Magnétophone</source>
         <oldsource>Magnétophone</oldsource>
         <translation>G&amp;ravador</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="985"/>
+        <location filename="mainwindow.ui" line="987"/>
         <source>Affiche la section modulateurs</source>
         <translation>Mostrar a seção modular</translation>
     </message>
@@ -2233,138 +2276,138 @@
     </message>
     <message>
         <location filename="mainwindow.ui" line="69"/>
-        <location filename="mainwindow.cpp" line="2793"/>
+        <location filename="mainwindow.cpp" line="2809"/>
         <source>Note</source>
         <translation>Nota</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="264"/>
+        <location filename="mainwindow.ui" line="265"/>
         <source>&amp;Échantillon</source>
         <translation>&amp;Amostra</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="280"/>
+        <location filename="mainwindow.ui" line="281"/>
         <source>&amp;Global</source>
         <translation>&amp;Global</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="330"/>
+        <location filename="mainwindow.ui" line="332"/>
         <source>&amp;Clavier</source>
         <translation>&amp;Teclado</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1000"/>
+        <location filename="mainwindow.ui" line="1002"/>
         <source>Importe un fichier audio</source>
         <translation>Importar um arquivo de áudio</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1015"/>
+        <location filename="mainwindow.ui" line="1017"/>
         <source>Exporte au format wav</source>
         <translation>Exportar em formato .wav</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1027"/>
+        <location filename="mainwindow.ui" line="1029"/>
         <source>Nouvel instrument</source>
         <translation>Novo instrumento</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1030"/>
+        <location filename="mainwindow.ui" line="1032"/>
         <source>Crée un nouvel instrument</source>
         <translation>Criar um novo instrumento</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1042"/>
+        <location filename="mainwindow.ui" line="1044"/>
         <source>Nouveau preset</source>
         <translation>Nova predefinição</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1045"/>
+        <location filename="mainwindow.ui" line="1047"/>
         <source>Crée un nouveau preset</source>
         <translation>Criar uma nova predefinição</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1057"/>
+        <location filename="mainwindow.ui" line="1059"/>
         <source>&amp;Enlever blanc au départ</source>
         <translation>&amp;Remover vazio ao início</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1072"/>
+        <location filename="mainwindow.ui" line="1074"/>
         <source>&amp;Ajuster à la fin de boucle</source>
         <translation>&amp;Cortar ao fim da repetição</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1102"/>
+        <location filename="mainwindow.ui" line="1104"/>
         <source>&amp;Bouclage automatique</source>
         <translation>&amp;Auto repetição</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1132"/>
+        <location filename="mainwindow.ui" line="1134"/>
         <source>&amp;Transposer...</source>
         <translation>&amp;Transpor...</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1177"/>
-        <location filename="mainwindow.ui" line="1422"/>
+        <location filename="mainwindow.ui" line="1179"/>
+        <location filename="mainwindow.ui" line="1424"/>
         <source>&amp;Spatialisation du son...</source>
         <translation>E&amp;spacialização de som...</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1180"/>
-        <location filename="mainwindow.ui" line="1425"/>
+        <location filename="mainwindow.ui" line="1182"/>
+        <location filename="mainwindow.ui" line="1427"/>
         <source>Dispose les sons dans l&apos;espace</source>
         <translation>Colocar sons no espaço</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1192"/>
+        <location filename="mainwindow.ui" line="1194"/>
         <source>&amp;Répartition automatique</source>
         <translation>Dist&amp;ribuição automática</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1195"/>
+        <location filename="mainwindow.ui" line="1197"/>
         <source>Répartit automatiquement les sons sur le clavier</source>
         <translation>Organizar amostras automaticamente sobre o teclado</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1213"/>
-        <location filename="mainwindow.ui" line="1323"/>
+        <location filename="mainwindow.ui" line="1215"/>
+        <location filename="mainwindow.ui" line="1325"/>
         <source>Duplique les divisions</source>
         <translation>Duplicar divisões</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1225"/>
-        <location filename="mainwindow.ui" line="1350"/>
+        <location filename="mainwindow.ui" line="1227"/>
+        <location filename="mainwindow.ui" line="1352"/>
         <source>&amp;Paramétrage global...</source>
         <translation>&amp;Parâmetros globais...</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1228"/>
-        <location filename="mainwindow.ui" line="1353"/>
+        <location filename="mainwindow.ui" line="1230"/>
+        <location filename="mainwindow.ui" line="1355"/>
         <source>Paramètre toutes les divisions simultanément</source>
         <translation>Definir todas divisões simultaneamente</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1240"/>
+        <location filename="mainwindow.ui" line="1242"/>
         <source>&amp;Réglage balance</source>
         <translation>Ajuste de &amp;balanço</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1243"/>
+        <location filename="mainwindow.ui" line="1245"/>
         <source>Règle la balance de l&apos;échantillon</source>
         <oldsource>Règle la balance du sample</oldsource>
         <translation>Definir balanço da amostra</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1255"/>
+        <location filename="mainwindow.ui" line="1257"/>
         <source>&amp;Création mixture...</source>
         <translation>Criação de &amp;mistura...</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="1258"/>
+        <location filename="mainwindow.ui" line="1260"/>
         <source>Crée une mixture</source>
         <translation>Criar uma mistura</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="296"/>
+        <location filename="mainwindow.cpp" line="294"/>
         <source>&amp;Quitter sans enregistrer</source>
         <translation>&amp;Não salvar</translation>
     </message>
@@ -2375,67 +2418,68 @@
         <translation>Arquivo .sf2 (*.sf2)</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="281"/>
+        <location filename="mainwindow.cpp" line="279"/>
         <location filename="mainwindow.cpp" line="513"/>
         <location filename="mainwindow.cpp" line="566"/>
         <location filename="mainwindow.cpp" line="569"/>
         <location filename="mainwindow.cpp" line="678"/>
         <location filename="mainwindow.cpp" line="681"/>
         <location filename="mainwindow.cpp" line="684"/>
-        <location filename="mainwindow.cpp" line="1524"/>
-        <location filename="mainwindow.cpp" line="2047"/>
-        <location filename="mainwindow.cpp" line="2050"/>
-        <location filename="mainwindow.cpp" line="2053"/>
-        <location filename="mainwindow.cpp" line="2056"/>
-        <location filename="mainwindow.cpp" line="2059"/>
-        <location filename="mainwindow.cpp" line="2100"/>
-        <location filename="mainwindow.cpp" line="2504"/>
-        <location filename="mainwindow.cpp" line="2841"/>
+        <location filename="mainwindow.cpp" line="1530"/>
+        <location filename="mainwindow.cpp" line="2054"/>
+        <location filename="mainwindow.cpp" line="2057"/>
+        <location filename="mainwindow.cpp" line="2060"/>
+        <location filename="mainwindow.cpp" line="2063"/>
+        <location filename="mainwindow.cpp" line="2066"/>
+        <location filename="mainwindow.cpp" line="2108"/>
+        <location filename="mainwindow.cpp" line="2512"/>
+        <location filename="mainwindow.cpp" line="2857"/>
         <source>Attention</source>
         <translation>Atenção</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="64"/>
+        <location filename="mainwindow.cpp" line="453"/>
+        <location filename="mainwindow.cpp" line="1922"/>
         <source>Annuler</source>
         <translation>Cancelar</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="393"/>
+        <location filename="mainwindow.cpp" line="392"/>
         <source>Soundfonts</source>
         <translation>Soundfonts</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="394"/>
+        <location filename="mainwindow.cpp" line="393"/>
         <source>Fichiers .sf2</source>
         <translation>Arquivos Sf2</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="395"/>
+        <location filename="mainwindow.cpp" line="394"/>
         <source>Fichiers .sf3</source>
         <translation>Arquivos Sf3</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="396"/>
+        <location filename="mainwindow.cpp" line="395"/>
         <source>Fichiers .sfz</source>
         <translation>Arquivos Sfz</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="397"/>
+        <location filename="mainwindow.cpp" line="396"/>
         <source>Archives .sfArk</source>
         <translation>Arquivos sfArk</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2053"/>
+        <location filename="mainwindow.cpp" line="2060"/>
         <source>Impossible d&apos;ouvrir le fichier.</source>
         <translation>Não foi possível abrir o arquivo.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2056"/>
+        <location filename="mainwindow.cpp" line="2063"/>
         <source>Lecture impossible.</source>
         <translation>Não foi possível ler o arquivo.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2059"/>
+        <location filename="mainwindow.cpp" line="2066"/>
         <source>Le fichier est corrompu.</source>
         <translation>O arquivo esta corrompido.</translation>
     </message>
@@ -2450,32 +2494,32 @@
         <translation>&amp;Não salvar</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1373"/>
+        <location filename="mainwindow.cpp" line="1379"/>
         <source>Nom de l&apos;instrument (max 20 caractères) :</source>
         <translation>Nome do instrumento (máx 20 caracteres):</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1374"/>
+        <location filename="mainwindow.cpp" line="1380"/>
         <source>Nom du preset (max 20 caractères) :</source>
         <translation>Nome da predefinição (máx 20 caracteres):</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1375"/>
+        <location filename="mainwindow.cpp" line="1381"/>
         <source>Nom du SF2 (max 255 caractères) :</source>
         <translation>Nome da soundfont (máx 255 caracteres):</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1601"/>
+        <location filename="mainwindow.cpp" line="1607"/>
         <source>L » existe déjà.&lt;br /&gt;Que faire ?</source>
         <translation>E&quot; já existe.&lt;br/&gt;Substituir?</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1607"/>
+        <location filename="mainwindow.cpp" line="1613"/>
         <source>R » existe déjà.&lt;br /&gt;Que faire ?</source>
         <translation>D&quot; já existe.&lt;br/&gt;Substituir?</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1616"/>
+        <location filename="mainwindow.cpp" line="1622"/>
         <source> » existe déjà.&lt;br /&gt;Que faire ?</source>
         <translation>&quot; já existe.&lt;br/&gt;Substituir?</translation>
     </message>
@@ -2485,48 +2529,48 @@
         <translation> bits&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="149"/>
+        <location filename="mainwindow.cpp" line="151"/>
         <source>Clavier virtuel</source>
         <translation>Teclado virtual</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="282"/>
+        <location filename="mainwindow.cpp" line="280"/>
         <location filename="mainwindow.cpp" line="509"/>
         <source>&lt;b&gt;Sauvegarder avant de quitter ?&lt;/b&gt;</source>
         <translation>&lt;b&gt;Salvar antes de sair?&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="285"/>
+        <location filename="mainwindow.cpp" line="283"/>
         <source>Les fichiers suivants ont été modifiés :&lt;br/&gt; - </source>
         <oldsource>Les fichiers suivants ont été modifiés depuis leur dernier enregistrement :&lt;br/&gt; - </oldsource>
         <translation>Os seguintes arquivos foram modificados:&lt;br/&gt; - </translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="290"/>
+        <location filename="mainwindow.cpp" line="288"/>
         <location filename="mainwindow.cpp" line="511"/>
         <source>Le fichier « </source>
         <oldsource>Le fichier «&amp;#160;</oldsource>
         <translation>O arquivo &quot;</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="290"/>
+        <location filename="mainwindow.cpp" line="288"/>
         <location filename="mainwindow.cpp" line="511"/>
         <source> » a été modifié.</source>
         <translation>&quot; foi modificado.</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="17"/>
-        <location filename="mainwindow.cpp" line="326"/>
+        <location filename="mainwindow.cpp" line="324"/>
         <source>Polyphone</source>
         <translation>Polyphone</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="391"/>
+        <location filename="mainwindow.cpp" line="390"/>
         <source>Ouverture de fichiers</source>
         <translation>Abrindo arquivos</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2040"/>
+        <location filename="mainwindow.cpp" line="2047"/>
         <source>Fichier corrompu : utilisation des échantillons en qualité 16 bits.</source>
         <translation>Arquivo corrompido: uso de amostras 16 bits.</translation>
     </message>
@@ -2536,7 +2580,8 @@
         <translation>Não se pode deletar uma amostra usada por outro instrumento.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="64"/>
+        <location filename="mainwindow.cpp" line="453"/>
+        <location filename="mainwindow.cpp" line="1922"/>
         <source>Opération en cours...</source>
         <translation>Operação em progresso...</translation>
     </message>
@@ -2615,185 +2660,190 @@ Dividindo o arquivo em vários sf2 pode resolver o problema.</translation>
         <translation>http://polyphone-soundfonts.com/en/forum</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1159"/>
+        <location filename="mainwindow.cpp" line="729"/>
+        <source>http://polyphone-soundfonts.com/fr/soundfonts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="1165"/>
         <source>&amp;Renommer en masse</source>
         <translation>&amp;Renomeação em massa</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1372"/>
+        <location filename="mainwindow.cpp" line="1378"/>
         <source>Nom de l&apos;échantillon (max 20 caractères) :</source>
         <oldsource>Nom du sample (max 20 caractères) :</oldsource>
         <translation>Nome da amostra (máx 20 caracteres):</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1376"/>
+        <location filename="mainwindow.cpp" line="1382"/>
         <source>Question</source>
         <translation>Questão</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1524"/>
+        <location filename="mainwindow.cpp" line="1530"/>
         <source>Une erreur est survenue lors de l&apos;import du fichier </source>
         <translation>Um erro ocorreu ao importar o arquivo </translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1550"/>
+        <location filename="mainwindow.cpp" line="1556"/>
         <source>Fichier .wav</source>
         <oldsource>Fichier .wav (*.[wW][aA][vV])</oldsource>
         <translation>Arquivo .wav</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1600"/>
         <location filename="mainwindow.cpp" line="1606"/>
-        <location filename="mainwindow.cpp" line="1615"/>
+        <location filename="mainwindow.cpp" line="1612"/>
+        <location filename="mainwindow.cpp" line="1621"/>
         <source>L&apos;échantillon « </source>
         <translation>A amostra &quot;</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1630"/>
+        <location filename="mainwindow.cpp" line="1636"/>
         <source>&amp;Remplacer</source>
         <translation>Substitui&amp;r</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1631"/>
+        <location filename="mainwindow.cpp" line="1637"/>
         <source>R&amp;emplacer tout</source>
         <translation>Substituir &amp;tudo</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1632"/>
+        <location filename="mainwindow.cpp" line="1638"/>
         <source>&amp;Dupliquer</source>
         <translation>&amp;Duplicar</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1633"/>
+        <location filename="mainwindow.cpp" line="1639"/>
         <source>D&amp;upliquer tout</source>
         <translation>D&amp;uplicar tudo</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1634"/>
+        <location filename="mainwindow.cpp" line="1640"/>
         <source>&amp;Ignorer</source>
         <translation>&amp;Ignorar</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1635"/>
+        <location filename="mainwindow.cpp" line="1641"/>
         <source>I&amp;gnorer tout</source>
         <translation>I&amp;gnorar tudo</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1957"/>
+        <location filename="mainwindow.cpp" line="1964"/>
         <source>Fusion des soundfonts :</source>
         <translation>Juntar soundfonts:</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2075"/>
+        <location filename="mainwindow.cpp" line="2083"/>
         <source>Créer un nouvel instrument</source>
         <translation>Criar um novo instrumento</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2100"/>
+        <location filename="mainwindow.cpp" line="2108"/>
         <source>Aucun preset n&apos;est disponible.</source>
         <translation>Nenhuma predefinição disponível.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2110"/>
+        <location filename="mainwindow.cpp" line="2118"/>
         <source>Créer un nouveau preset</source>
         <translation>Criar uma nova predefinição</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2450"/>
+        <location filename="mainwindow.cpp" line="2458"/>
         <source> échantillon et </source>
         <translation> amostra e </translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2452"/>
+        <location filename="mainwindow.cpp" line="2460"/>
         <source> échantillons et </source>
         <translation> amostras e </translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2504"/>
+        <location filename="mainwindow.cpp" line="2512"/>
         <source>Le fichier doit contenir au moins un instrument.</source>
         <translation>A soundfont deve conter ao menos um instrumento.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2773"/>
+        <location filename="mainwindow.cpp" line="2789"/>
         <source>Exporter les pics de fréquence</source>
         <translation>Exportar picos de frequências</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2774"/>
+        <location filename="mainwindow.cpp" line="2790"/>
         <source>Fichier .csv (*.csv)</source>
         <translation>Arquivo csv (*.csv)</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2789"/>
+        <location filename="mainwindow.cpp" line="2805"/>
         <source>;</source>
         <translatorcomment>column separator symbol in csv files</translatorcomment>
         <translation>,</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2791"/>
+        <location filename="mainwindow.cpp" line="2807"/>
         <source>Echantillon</source>
         <translation>Amostra</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2791"/>
+        <location filename="mainwindow.cpp" line="2807"/>
         <source>Numéro de pic</source>
         <translation>Numero de pico</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2792"/>
+        <location filename="mainwindow.cpp" line="2808"/>
         <source>Facteur</source>
         <translation>Fator</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2792"/>
+        <location filename="mainwindow.cpp" line="2808"/>
         <source>Fréquence</source>
         <translation>Frequência</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2793"/>
+        <location filename="mainwindow.cpp" line="2809"/>
         <source>Correction</source>
         <translation>Correção</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2815"/>
-        <location filename="mainwindow.cpp" line="2816"/>
+        <location filename="mainwindow.cpp" line="2831"/>
+        <location filename="mainwindow.cpp" line="2832"/>
         <source>,</source>
         <translatorcomment>decimal separator</translatorcomment>
         <translation>,</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2841"/>
+        <location filename="mainwindow.cpp" line="2857"/>
         <source>Le fichier ne contient aucun modulateur.</source>
         <translation>A soundfont não contém moduladores.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2843"/>
-        <location filename="mainwindow.cpp" line="2845"/>
+        <location filename="mainwindow.cpp" line="2859"/>
+        <location filename="mainwindow.cpp" line="2861"/>
         <source>Information</source>
         <translation>Informação</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2843"/>
+        <location filename="mainwindow.cpp" line="2859"/>
         <source>1 modulateur a été supprimé.</source>
         <translation>1 modulador foi deletado.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2846"/>
+        <location filename="mainwindow.cpp" line="2862"/>
         <source>modulateurs ont été supprimés.</source>
         <translation>moduladores foram deletados.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1548"/>
+        <location filename="mainwindow.cpp" line="1554"/>
         <source>Importer un fichier audio</source>
         <translation>Importar um arquivo de áudio</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2047"/>
+        <location filename="mainwindow.cpp" line="2054"/>
         <source>Format inconnu.</source>
         <translation>Formato desconhecido.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2050"/>
+        <location filename="mainwindow.cpp" line="2057"/>
         <source>Le fichier est déjà chargé.</source>
         <translation>Arquivo já aberto.</translation>
     </message>
@@ -2813,28 +2863,28 @@ Dividindo o arquivo em vários sf2 pode resolver o problema.</translation>
         <translation>Arquivo já aberto, impossível salvar.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1796"/>
+        <location filename="mainwindow.cpp" line="1802"/>
         <source>Choisir un répertoire de destination</source>
         <translation>Escolher uma pasta de destino</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2075"/>
+        <location filename="mainwindow.cpp" line="2083"/>
         <source>Nom du nouvel instrument :</source>
         <translation>Nome do novo instrumento:</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2110"/>
+        <location filename="mainwindow.cpp" line="2118"/>
         <source>Nom du nouveau preset :</source>
         <translation>Nome da nova predefinição:</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2454"/>
+        <location filename="mainwindow.cpp" line="2462"/>
         <source> instrument ont été supprimés.</source>
         <translatorcomment>instrument: singular</translatorcomment>
         <translation> instrumento foi deletado.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2456"/>
+        <location filename="mainwindow.cpp" line="2464"/>
         <source> instruments ont été supprimés.</source>
         <translatorcomment>instrument: plural</translatorcomment>
         <translation> instrumentos foram deletados.</translation>
@@ -4695,7 +4745,7 @@ inválida</translation>
         <translation>A predefinição &quot;</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="2039"/>
+        <location filename="mainwindow.cpp" line="2046"/>
         <location filename="sf2_core/duplicator.cpp" line="563"/>
         <location filename="sf2_core/sound.cpp" line="110"/>
         <location filename="sf2_core/sound.cpp" line="162"/>
@@ -4747,17 +4797,17 @@ inválida</translation>
         <translation>I&amp;gnorar tudo</translation>
     </message>
     <message>
-        <location filename="sf2_core/tree.cpp" line="970"/>
+        <location filename="sf2_core/tree.cpp" line="975"/>
         <source>Échantillons</source>
         <translation>Amostras</translation>
     </message>
     <message>
-        <location filename="sf2_core/tree.cpp" line="975"/>
+        <location filename="sf2_core/tree.cpp" line="980"/>
         <source>Instruments</source>
         <translation>Instrumentos</translation>
     </message>
     <message>
-        <location filename="sf2_core/tree.cpp" line="980"/>
+        <location filename="sf2_core/tree.cpp" line="985"/>
         <source>Presets</source>
         <translation>Predefinições</translation>
     </message>
@@ -4922,18 +4972,18 @@ inválida</translation>
         <translation>Kit de percussão</translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_about.cpp" line="108"/>
+        <location filename="gui_divers/dialog_about.cpp" line="109"/>
         <source>Créé par </source>
         <translatorcomment>mind the final space</translatorcomment>
         <translation>Criado por </translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_about.cpp" line="109"/>
+        <location filename="gui_divers/dialog_about.cpp" line="110"/>
         <source>Contributeurs </source>
         <translation>Contribuidores </translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_about.cpp" line="110"/>
+        <location filename="gui_divers/dialog_about.cpp" line="111"/>
         <source>Traduit par </source>
         <translation>Traduzido por </translation>
     </message>
