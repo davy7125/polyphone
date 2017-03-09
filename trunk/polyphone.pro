@@ -12,8 +12,8 @@
 DEFINES += USE_LOCAL_QCUSTOMPLOT
 
 # Polyphone version
-DEFINES += VERSION=1.8
-DEFINES += FINAL=true
+DEFINES += VERSION=1.9
+DEFINES += FINAL=false
 
 # List to complete if other translations are wished
 # Format: polyphone_XX.ts where XX is the language code
@@ -245,7 +245,8 @@ SOURCES	+= main.cpp \
     tools/dialog_filter_frequencies.cpp \
     pages/tablecombobox.cpp \
     tools/dialog_change_volume.cpp \
-    tools/duplicationtool.cpp
+    tools/duplicationtool.cpp \
+    tools/dialog_exportlist.cpp
 
 HEADERS  += mainwindow.h \
     sf2_core/sf2_types.h \
@@ -338,7 +339,8 @@ HEADERS  += mainwindow.h \
     tools/externalcommandrunner.h \
     tools/dialog_filter_frequencies.h \
     tools/dialog_change_volume.h \
-    tools/duplicationtool.h
+    tools/duplicationtool.h \
+    tools/dialog_exportlist.h
 
 FORMS    += mainwindow.ui \
     configuration/config.ui \
@@ -365,7 +367,8 @@ FORMS    += mainwindow.ui \
     tools/dialog_attenuation.ui \
     tools/dialog_command.ui \
     tools/dialog_filter_frequencies.ui \
-    tools/dialog_change_volume.ui
+    tools/dialog_change_volume.ui \
+    tools/dialog_exportlist.ui
 
 RESOURCES += ressources.qrc \
     clavier/pianokeybd.qrc

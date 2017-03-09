@@ -22,33 +22,34 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef EDITKEY_H
-#define EDITKEY_H
+#ifndef DIALOG_EXPORTLIST_H
+#define DIALOG_EXPORTLIST_H
 
-#include <QLineEdit>
-#include <QKeySequence>
-#include <QKeyEvent>
+#include <QDialog>
+#include "sf2_types.h"
+#include "pile_sf2.h"
 
-class EditKey : public QLineEdit
+namespace Ui {
+class DialogExportList;
+}
+
+class DialogExportList : public QDialog
 {
     Q_OBJECT
 
 public:
-    EditKey(QWidget * parent = NULL);
-    void setCombinaison(const QString &text);
+    explicit DialogExportList(Pile_sf2 * sf2, EltID id, QWidget *parent = 0);
+    ~DialogExportList();
 
-signals:
-    void combinaisonChanged(QString combinaison);
-
-protected:
-    void keyPressEvent(QKeyEvent * event);
-    void keyReleaseEvent(QKeyEvent * event);
-    void focusInEvent(QFocusEvent *);
-    void focusOutEvent(QFocusEvent *);
+private slots:
+    void on_radioCsv_clicked();
+    void on_radioHtml_clicked();
+    void on_pushCopy_clicked();
 
 private:
-    QString _combinaison;
-    static QKeySequence getSequence(QKeyEvent * event);
+    bool _init;
+    Ui::DialogExportList *ui;
+    QMap<int, QMap<int, QString> > _mapName;
 };
 
-#endif // EDITKEY_H
+#endif // DIALOG_EXPORTLIST_H

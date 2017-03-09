@@ -1,7 +1,7 @@
 /***************************************************************************
 **                                                                        **
 **  Polyphone, a soundfont editor                                         **
-**  Copyright (C) 2013-2016 Davy Triponney                                **
+**  Copyright (C) 2013-2017 Davy Triponney                                **
 **                                                                        **
 **  This program is free software: you can redistribute it and/or modify  **
 **  it under the terms of the GNU General Public License as published by  **
@@ -59,7 +59,6 @@ EnveloppeVol::EnveloppeVol(VoiceParam * voiceParam, quint32 sampleRate, bool isM
     }
 
     m_fixedVelocity   = voiceParam->fixedVelocity;
-    m_allowRelease    = (voiceParam->loopMode != 3);
 }
 
 bool EnveloppeVol::applyEnveloppe(float * data, quint32 size, bool release, int note,
@@ -70,25 +69,13 @@ bool EnveloppeVol::applyEnveloppe(float * data, quint32 size, bool release, int 
     Q_UNUSED(voiceParam);
 
     // Application de l'enveloppe sur des données
-    // renvoie 1 si la fin de la release est atteint
+    // renvoie true si la fin de la release est atteint
 
+    // Beginning of the release phase?
     if (release && m_currentPhase != phase7off && m_currentPhase != phase6release)
     {
-        if (m_allowRelease)
-        {
-            m_currentPhase = phase6release;
-            m_currentSmpl = 0;
-        }
-        else if (m_currentPhase != phase5sustain)
-        {
-            if (m_precValue < m_levelSustain)
-            {
-                m_levelSustain = m_precValue;
-                m_currentPhase = phase5sustain;
-            }
-            else
-                m_currentPhase = phase4decay;
-        }
+        m_currentPhase = phase6release;
+        m_currentSmpl = 0;
     }
 
     // Ajustement sustain level

@@ -1,7 +1,7 @@
 /***************************************************************************
 **                                                                        **
 **  Polyphone, a soundfont editor                                         **
-**  Copyright (C) 2013-2016 Davy Triponney                                **
+**  Copyright (C) 2013-2017 Davy Triponney                                **
 **                                                                        **
 **  This program is free software: you can redistribute it and/or modify  **
 **  it under the terms of the GNU General Public License as published by  **
@@ -177,7 +177,7 @@ private slots:
 
     void enleveBlanc();         // outil sample, enlever blanc au départ
     void enleveFin();           // outil sample, ajuster à la fin de boucle
-    void changeVolume();       // outil sample, change volume
+    void changeVolume();        // outil sample, change volume
     void bouclage();            // outil sample, bouclage
     void filtre();              // outil sample, filtre "mur de brique"
     void reglerBalance();       // outil sample, réglage de la balance (samples liés)
@@ -192,10 +192,11 @@ private slots:
     void paramGlobal();         // outil instrument et preset, modification globale d'un paramètre
     void visualize();           // outil instrument et preset, visualise les paramètres utilisés dans un graphique
     void on_action_Transposer_triggered();
-    void attenuationMini();     // outil sf2, mise à jour de toutes les atténuations
+    void attenuationMini();     // global tool, mise à jour de toutes les atténuations
     void attenuationMini(double value, double valuePrst);
-    void purger();              // outil sf2, suppression des éléments non utilisés
-    void associationAutoSmpl(); // outil sf2, association auto gauche-droite des samples
+    void purger();              // global tool, suppression des éléments non utilisés
+    void associationAutoSmpl(); // global tool, association auto gauche-droite des samples
+    void exportPresetList();    // global tool
     void magnetophone();        // affichage du magnétophone
     void on_action_Dissocier_les_samples_st_r_o_triggered();
     void on_actionExporter_pics_de_fr_quence_triggered();
