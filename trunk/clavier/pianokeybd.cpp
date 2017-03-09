@@ -309,3 +309,8 @@ void PianoKeybd::triggerNote(int key, int velocity)
     else
         m_scene->keyNoteOff(key);
 }
+
+void PianoKeybd::triggerGlowEffect()
+{
+    this->m_scene->triggerGlowEffect();
+}

@@ -22,6 +22,7 @@
 #include <QPalette>
 #include <QGraphicsSceneMouseEvent>
 #include <QKeyEvent>
+#include <QTimer>
 #include <qmath.h>
 
 int PianoScene::MIN_NOTE = 0;
@@ -71,8 +72,12 @@ PianoScene::PianoScene (const int startKey, const int numKeys, PianoScene *previ
     m_startKey(startKey),
     m_minNote(0),
     m_maxNote(127),
-    m_ratio((double)width() / (double)height())
+    m_ratio((double)width() / (double)height()),
+    _glowEffect(0)
 {
+    _timer = new QTimer(this);
+    connect(_timer, SIGNAL(timeout()), this, SLOT(updateGlowEffect()));
+
     // Initialisation
     initConfiguration(previousScene);
     initLabels();
@@ -866,4 +871,23 @@ void PianoScene::resetCustomization(int key, PianoKeybd::CustomizationType type)
         break;
     }
     refreshKeys();
+}
+
+
+void PianoScene::triggerGlowEffect()
+{
+    PianoKey::setGlowEffect(1);
+    _glowEffect = 1;
+    _timer->start(30);
+}
+
+void PianoScene::updateGlowEffect()
+{
+    _glowEffect -= .1;
+    if (_glowEffect < 0) {
+        _glowEffect = 0;
+        _timer->stop();
+    }
+    PianoKey::setGlowEffect(_glowEffect);
+    this->update();
 }
