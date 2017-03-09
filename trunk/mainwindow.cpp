@@ -367,6 +367,7 @@ void MainWindow::keyPressEvent(QKeyEvent * event)
         if (_dialKeyboard.isVisible())
             _dialKeyboard.activateWindow();
         ui->widgetKeyboard->setFocus();
+        ui->widgetKeyboard->triggerGlowEffect();
     }
     QMainWindow::keyPressEvent(event);
 }

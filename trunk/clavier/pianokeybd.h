@@ -178,6 +178,7 @@ public:
     double ratio() const;
 
     void triggerNote(int key, int velocity);
+    void triggerGlowEffect();
 
 signals:
     void noteOn(int midiNote, int vel);

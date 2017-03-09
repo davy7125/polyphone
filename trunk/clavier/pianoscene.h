@@ -45,6 +45,7 @@ public:
     PianoKeybd::ColorationType getColorationType() { return m_colorationType; }
     void setColor(int num, QColor color);
     QColor getColor(int num) { return m_palette.value(num); }
+    void triggerGlowEffect();
 
     // Customization
     void addCustomColor(int key, QColor color);
@@ -105,6 +106,9 @@ protected:
     void keyReleaseEvent(QKeyEvent * keyEvent );
     bool event(QEvent *event);
 
+protected slots:
+    void updateGlowEffect();
+
 private:
     void initConfiguration(PianoScene *previousScene);
     void initLabels();
@@ -149,6 +153,9 @@ private:
 
     static int MIN_NOTE, MAX_NOTE, KEYWIDTH, KEYHEIGHT;
     static KeyboardMap* m_keybdMap;
+
+    QTimer *_timer;
+    double _glowEffect;
 };
 
 #endif /*PIANOSCENE_H_*/
