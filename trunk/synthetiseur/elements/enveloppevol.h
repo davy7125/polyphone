@@ -1,7 +1,7 @@
 /***************************************************************************
 **                                                                        **
 **  Polyphone, a soundfont editor                                         **
-**  Copyright (C) 2013-2016 Davy Triponney                                **
+**  Copyright (C) 2013-2017 Davy Triponney                                **
 **                                                                        **
 **  This program is free software: you can redistribute it and/or modify  **
 **  it under the terms of the GNU General Public License as published by  **
@@ -79,9 +79,6 @@ private:
 
     // Echantillonnage
     quint32 m_sampleRate;
-
-    // Release autorisée ?
-    bool m_allowRelease;
 };
 
 #endif // ENVELOPPEVOL_H

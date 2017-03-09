@@ -1,7 +1,7 @@
 /***************************************************************************
 **                                                                        **
 **  Polyphone, a soundfont editor                                         **
-**  Copyright (C) 2013-2016 Davy Triponney                                **
+**  Copyright (C) 2013-2017 Davy Triponney                                **
 **                                                                        **
 **  This program is free software: you can redistribute it and/or modify  **
 **  it under the terms of the GNU General Public License as published by  **
@@ -27,6 +27,7 @@
 #include "sound.h"
 #include "dialog_rename.h"
 #include "dialog_attenuation.h"
+#include "dialog_exportlist.h"
 #include "conversion_sfz.h"
 #include "dialog_export.h"
 #include "duplicator.h"
@@ -48,9 +49,9 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent, Qt::Window | Qt::W
                                                       Qt::WindowMaximizeButtonHint | Qt::WindowMinimizeButtonHint |
                                                       Qt::WindowSystemMenuHint | Qt::WindowTitleHint |
                                                       Qt::CustomizeWindowHint
-#if QT_VERSION >= QT_VERSION_CHECK(5, 0, 0)
+                                                      #if QT_VERSION >= QT_VERSION_CHECK(5, 0, 0)
                                                       | Qt::WindowFullscreenButtonHint
-#endif
+                                                      #endif
                                                       ),
     ui(new Ui::MainWindow),
     synth(NULL),
@@ -929,7 +930,8 @@ QList<QAction *> MainWindow::getListeActions()
                 << ui->actionExporter_pics_de_fr_quence
                 << ui->action_Transposer
                 << ui->actionEnlever_tous_les_modulateurs
-                << ui->action_Commande;
+                << ui->action_Commande
+                << ui->actionExporter_la_liste_des_presets;
     return listeAction;
 }
 
@@ -2014,7 +2016,7 @@ int MainWindow::exporter2(QList<QList<EltID> > listID, QString dir, int format, 
 
         // Sauvegarde
         newSf2.save(idDest.indexSf2, name, quality);
-        }break;
+    }break;
     case 2:
         // Export sfz
         foreach (QList<EltID> sublist, listID)
@@ -2728,6 +2730,14 @@ void MainWindow::associationAutoSmpl()
     this->updateDo();
     if (ui->stackedWidget->currentWidget() == this->page_smpl)
         this->page_smpl->afficher();
+}
+void MainWindow::exportPresetList()
+{
+    if (ui->arborescence->getSelectedItemsNumber() == 0) return;
+    EltID id = ui->arborescence->getFirstID();
+    DialogExportList * dial = new DialogExportList(sf2, id, this);
+    dial->setAttribute(Qt::WA_DeleteOnClose);
+    dial->show();
 }
 void MainWindow::on_action_Dissocier_les_samples_st_r_o_triggered()
 {
