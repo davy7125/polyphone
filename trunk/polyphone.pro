@@ -340,7 +340,8 @@ HEADERS  += mainwindow.h \
     tools/dialog_filter_frequencies.h \
     tools/dialog_change_volume.h \
     tools/duplicationtool.h \
-    tools/dialog_exportlist.h
+    tools/dialog_exportlist.h \
+    gui_divers/modalprogressdialog.h
 
 FORMS    += mainwindow.ui \
     configuration/config.ui \
