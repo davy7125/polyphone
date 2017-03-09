@@ -26,7 +26,8 @@
 #include "thememanager.h"
 
 ComboBoxLoopMode::ComboBoxLoopMode(QWidget *parent) : QComboBox(parent),
-    _ignoreFirstHide(true)
+    _ignoreFirstHide(true),
+    _currentIndex(0)
 {
     this->setView(new ComboView());
 
@@ -45,6 +46,7 @@ ComboBoxLoopMode::ComboBoxLoopMode(QWidget *parent) : QComboBox(parent),
     }
 
     QObject::connect(this, SIGNAL(activated(int)), this, SLOT(onActivated(int)));
+    QObject::connect(this, SIGNAL(currentIndexChanged(int)), this, SLOT(onActivated(int)));
 }
 
 void ComboBoxLoopMode::showEvent(QShowEvent * event)
@@ -70,9 +72,8 @@ void ComboBoxLoopMode::hidePopup()
 
 void ComboBoxLoopMode::onActivated(int index)
 {
-    // Select the right index
-    if (this->view()->currentIndex().isValid())
-        this->setCurrentIndex(index);
+    // Save the index
+    _currentIndex = index;
 
     // End the editor
     this->setDisabled(true);
