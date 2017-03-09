@@ -26,7 +26,7 @@
 
 QBrush PianoKey::BLACK_BRUSH = QBrush(Qt::black);
 QBrush PianoKey::WHITE_BRUSH = QBrush(Qt::white);
-
+double PianoKey::s_glowEffect = 0;
 
 PianoKey::PianoKey(const QRectF &rect, const bool black, const int note)
     : QGraphicsRectItem(rect),
@@ -43,8 +43,11 @@ PianoKey::PianoKey(const QRectF &rect, const bool black, const int note)
 
 void PianoKey::paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWidget *)
 {
-    const QPen blackPen(Qt::black, 1);
-    const QPen grayPen(QBrush(Qt::gray), 1, Qt::SolidLine,  Qt::RoundCap, Qt::RoundJoin);
+    // Mix between black and gray with the glow color
+    QColor glowColor = QApplication::palette().color(QPalette::Highlight);
+    const QPen blackPen(mergeColor(Qt::black, glowColor, s_glowEffect), 1);
+    const QPen grayPen(QBrush(mergeColor(Qt::gray, glowColor, s_glowEffect)),
+                       1, Qt::SolidLine,  Qt::RoundCap, Qt::RoundJoin);
     if (m_pressed)
     {
         if (m_selectedBrush.style() != Qt::NoBrush)
@@ -86,6 +89,13 @@ void PianoKey::paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWidge
 
         drawMarker(painter, rectMarker, m_markerType);
     }
+}
+
+QColor PianoKey::mergeColor(QColor color1, QColor color2, double fade)
+{
+    return QColor((1. - fade) * color1.red() + fade * color2.red(),
+                  (1. - fade) * color1.green() + fade * color2.green(),
+                  (1. - fade) * color1.blue() + fade * color2.blue());
 }
 
 void PianoKey::setPressed(bool p)

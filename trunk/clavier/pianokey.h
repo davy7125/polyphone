@@ -38,6 +38,7 @@ public:
     void setPressed(bool p);
     void setMarker(PianoKeybd::MarkerType type);
     int isBlack() const { return m_black; }
+    static void setGlowEffect(double glowEffect) { s_glowEffect = glowEffect; }
 
     static QBrush BLACK_BRUSH;
     static QBrush WHITE_BRUSH;
@@ -47,6 +48,7 @@ private:
     static QColor getBorderColor(PianoKeybd::MarkerType type);
     static QColor getFillColor(PianoKeybd::MarkerType type);
     void flipPainter(QPainter * painter, QRectF &rect);
+    QColor mergeColor(QColor color1, QColor color2, double fade);
 
     bool m_pressed;
     QBrush m_selectedBrush;
@@ -54,6 +56,8 @@ private:
     int m_note;
     bool m_black;
     PianoKeybd::MarkerType m_markerType;
+
+    static double s_glowEffect;
 };
 
 #endif /*PIANOKEY_H_*/
