@@ -184,11 +184,11 @@ void TableDelegate::setModelData(QWidget *editor, QAbstractItemModel *model, con
 
     if (isLoop)
     {
-        QComboBox * combobox = (QComboBox *)editor;
+        ComboBoxLoopMode * combobox = (ComboBoxLoopMode *)editor;
 
         if (combobox->count() > 0)
         {
-            int currentData = combobox->itemData(combobox->currentIndex(), Qt::UserRole).toInt();
+            int currentData = combobox->itemData(combobox->getIndex(), Qt::UserRole).toInt();
             model->setData(index, currentData, Qt::UserRole);
 
             bool isDark = ThemeManager::getInstance()->isDark(ThemeManager::LIST_BACKGROUND, ThemeManager::LIST_TEXT);

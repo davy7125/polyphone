@@ -34,6 +34,7 @@ class ComboBoxLoopMode : public QComboBox
 
 public:
     explicit ComboBoxLoopMode(QWidget *parent = 0);
+    int getIndex() { return _currentIndex; }
 
 protected:
     void showEvent(QShowEvent * event);
@@ -44,6 +45,7 @@ private slots:
 
 private:
     bool _ignoreFirstHide;
+    int _currentIndex;
 };
 
 class ComboView : public QListView
