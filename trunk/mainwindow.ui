@@ -283,6 +283,7 @@
      <addaction name="action_Dissocier_les_samples_st_r_o"/>
      <addaction name="action_Enlever_les_l_ments_non_utilis_s"/>
      <addaction name="actionEnlever_tous_les_modulateurs"/>
+     <addaction name="actionExporter_la_liste_des_presets"/>
      <addaction name="actionExporter_pics_de_fr_quence"/>
      <addaction name="actionR_gler_att_nuation_minimale"/>
     </widget>
@@ -1556,6 +1557,18 @@
     <string>Utilise un logiciel ou une commande externe pour modifier un fichier son .wav</string>
    </property>
   </action>
+  <action name="actionExporter_la_liste_des_presets">
+   <property name="icon">
+    <iconset resource="ressources.qrc">
+     <normaloff>:/icones/list</normaloff>:/icones/list</iconset>
+   </property>
+   <property name="text">
+    <string>Exporter la liste des &amp;presets</string>
+   </property>
+   <property name="toolTip">
+    <string>Exporte la liste des presets dans un format texte</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
@@ -2581,6 +2594,22 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>actionExporter_la_liste_des_presets</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>exportPresetList()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>272</x>
+     <y>168</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>ouvrir()</slot>
@@ -2637,5 +2666,6 @@
   <slot>exporter()</slot>
   <slot>onPleinEcranTriggered()</slot>
   <slot>command()</slot>
+  <slot>exportPresetList()</slot>
  </slots>
 </ui>
