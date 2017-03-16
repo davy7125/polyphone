@@ -3,7 +3,7 @@
 
 Polyphone is an open-source soundfont editor for creating musical instruments, available for Windows, Mac OS X and Linux.
 
-###Features
+### Features
 
  * editing of sf2, sf3, sfz and sfArk file formats
  * compatible with jack and asio audio servers
