@@ -59,6 +59,9 @@ Page_Smpl::Page_Smpl(QWidget *parent) :
     // Couleur de fond du graphe Fourier
     ui->grapheFourier->setBackgroundColor(this->palette().background().color());
 
+    // Initialize EQ
+    loadEQ();
+
     // Adaptation petits écrans
     if (QApplication::desktop()->width() <= 800)
     {
@@ -1541,6 +1544,7 @@ void Page_Smpl::applyEQ()
 {
     if (_preparation)
         return;
+    saveEQ();
 
     if (ui->verticalSlider_1->value() == 0 &&
             ui->verticalSlider_2->value() == 0 &&
@@ -1618,6 +1622,7 @@ void Page_Smpl::initEQ()
     ui->verticalSlider_8->setValue(0);
     ui->verticalSlider_9->setValue(0);
     ui->verticalSlider_10->setValue(0);
+    saveEQ();
 }
 
 // Lecture
@@ -1758,7 +1763,6 @@ void Page_Smpl::on_pushAutoTune_clicked()
 {
     _sf2->prepareNewActions();
 
-
     int displayedPitch = -1000, displayedCorrection = -1000;
     bool firstValue = true;
     bool triggersMessage = false;
@@ -1839,4 +1843,32 @@ void Page_Smpl::autoTune(EltID id, int &pitch, int &correction)
         pitch = _sf2->get(id, champ_byOriginalPitch).wValue;
         correction = _sf2->get(id, champ_chPitchCorrection).wValue;
     }
+}
+
+void Page_Smpl::saveEQ()
+{
+    ConfManager::getInstance()->setToolValue(ConfManager::TOOL_TYPE_SAMPLE, "EQ", "01", ui->verticalSlider_1->value());
+    ConfManager::getInstance()->setToolValue(ConfManager::TOOL_TYPE_SAMPLE, "EQ", "02", ui->verticalSlider_2->value());
+    ConfManager::getInstance()->setToolValue(ConfManager::TOOL_TYPE_SAMPLE, "EQ", "03", ui->verticalSlider_3->value());
+    ConfManager::getInstance()->setToolValue(ConfManager::TOOL_TYPE_SAMPLE, "EQ", "04", ui->verticalSlider_4->value());
+    ConfManager::getInstance()->setToolValue(ConfManager::TOOL_TYPE_SAMPLE, "EQ", "05", ui->verticalSlider_5->value());
+    ConfManager::getInstance()->setToolValue(ConfManager::TOOL_TYPE_SAMPLE, "EQ", "06", ui->verticalSlider_6->value());
+    ConfManager::getInstance()->setToolValue(ConfManager::TOOL_TYPE_SAMPLE, "EQ", "07", ui->verticalSlider_7->value());
+    ConfManager::getInstance()->setToolValue(ConfManager::TOOL_TYPE_SAMPLE, "EQ", "08", ui->verticalSlider_8->value());
+    ConfManager::getInstance()->setToolValue(ConfManager::TOOL_TYPE_SAMPLE, "EQ", "09", ui->verticalSlider_9->value());
+    ConfManager::getInstance()->setToolValue(ConfManager::TOOL_TYPE_SAMPLE, "EQ", "10", ui->verticalSlider_10->value());
+}
+
+void Page_Smpl::loadEQ()
+{
+    ui->verticalSlider_1->setValue(ConfManager::getInstance()->getToolValue(ConfManager::TOOL_TYPE_SAMPLE, "EQ", "01", 0).toInt());
+    ui->verticalSlider_2->setValue(ConfManager::getInstance()->getToolValue(ConfManager::TOOL_TYPE_SAMPLE, "EQ", "02", 0).toInt());
+    ui->verticalSlider_3->setValue(ConfManager::getInstance()->getToolValue(ConfManager::TOOL_TYPE_SAMPLE, "EQ", "03", 0).toInt());
+    ui->verticalSlider_4->setValue(ConfManager::getInstance()->getToolValue(ConfManager::TOOL_TYPE_SAMPLE, "EQ", "04", 0).toInt());
+    ui->verticalSlider_5->setValue(ConfManager::getInstance()->getToolValue(ConfManager::TOOL_TYPE_SAMPLE, "EQ", "05", 0).toInt());
+    ui->verticalSlider_6->setValue(ConfManager::getInstance()->getToolValue(ConfManager::TOOL_TYPE_SAMPLE, "EQ", "06", 0).toInt());
+    ui->verticalSlider_7->setValue(ConfManager::getInstance()->getToolValue(ConfManager::TOOL_TYPE_SAMPLE, "EQ", "07", 0).toInt());
+    ui->verticalSlider_8->setValue(ConfManager::getInstance()->getToolValue(ConfManager::TOOL_TYPE_SAMPLE, "EQ", "08", 0).toInt());
+    ui->verticalSlider_9->setValue(ConfManager::getInstance()->getToolValue(ConfManager::TOOL_TYPE_SAMPLE, "EQ", "09", 0).toInt());
+    ui->verticalSlider_10->setValue(ConfManager::getInstance()->getToolValue(ConfManager::TOOL_TYPE_SAMPLE, "EQ", "10", 0).toInt());
 }

@@ -96,6 +96,8 @@ private:
     void setRateElt(EltID id, quint32 echFinal);
     EltID getRepercussionID(EltID id);
     void autoTune(EltID id, int &pitch, int &correction);
+    void saveEQ();
+    void loadEQ();
 };
 
 
