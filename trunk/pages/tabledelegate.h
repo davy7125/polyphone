@@ -34,12 +34,10 @@ class TableDelegate : public QStyledItemDelegate
     Q_OBJECT
 
 public:
-    TableDelegate(QTableWidget * table, QObject * parent = NULL): QStyledItemDelegate(parent),
-        _table(table),
-        _isEditing(false)
-    {}
-
+    TableDelegate(QTableWidget * table, QObject * parent = NULL);
     bool isEditing() { return _isEditing; }
+    void resetModDisplay();
+    void updateModDisplay(int column, QList<int> rows);
 
 protected:
     QWidget * createEditor(QWidget *parent, const QStyleOptionViewItem &option, const QModelIndex &index) const;
@@ -56,6 +54,8 @@ private:
 
     static const char * DECO_PROPERTY;
     mutable bool _isEditing;
+    QMap<int, QList<int> > _modDisplay;
+    QColor _redColor;
 };
 
 #endif // TABLEDELEGATE_H

@@ -34,6 +34,20 @@
 
 const char * TableDelegate::DECO_PROPERTY = "deco";
 
+TableDelegate::TableDelegate(QTableWidget * table, QObject * parent): QStyledItemDelegate(parent),
+    _table(table),
+    _isEditing(false)
+{
+    if (ThemeManager::getInstance()->isDark(ThemeManager::LIST_BACKGROUND, ThemeManager::LIST_TEXT))
+    {
+        _redColor = _table->palette().color(QPalette::BrightText).lighter();
+    }
+    else
+    {
+        _redColor = _table->palette().color(QPalette::BrightText);
+    }
+}
+
 QWidget * TableDelegate::createEditor(QWidget *parent, const QStyleOptionViewItem &option, const QModelIndex &index) const
 {
     Q_UNUSED(option)
@@ -65,7 +79,7 @@ QWidget * TableDelegate::createEditor(QWidget *parent, const QStyleOptionViewIte
             spin->setMinimum(0);
             spin->setMaximum(127);
             spin->setStyleSheet("SpinBoxKey{ border: 3px solid " + highlightColor.name() + "; }"
-                                "SpinBoxKey::down-button{width:0px;} SpinBoxKey::up-button{width:0px;} ");
+                                                                                           "SpinBoxKey::down-button{width:0px;} SpinBoxKey::up-button{width:0px;} ");
             widget = spin;
         }
         else if (nbDecimales == 0)
@@ -74,7 +88,7 @@ QWidget * TableDelegate::createEditor(QWidget *parent, const QStyleOptionViewIte
             spin->setMinimum(-2147483647);
             spin->setMaximum(2147483647);
             spin->setStyleSheet("QSpinBox{ border: 3px solid " + highlightColor.name() + "; }"
-                                "QSpinBox::down-button{width:0px;} QSpinBox::up-button{width:0px;} ");
+                                                                                         "QSpinBox::down-button{width:0px;} QSpinBox::up-button{width:0px;} ");
             widget = spin;
         }
         else
@@ -84,7 +98,7 @@ QWidget * TableDelegate::createEditor(QWidget *parent, const QStyleOptionViewIte
             spin->setMaximum(1000000);
             spin->setSingleStep(.1);
             spin->setStyleSheet("QDoubleSpinBox{ border: 3px solid " + highlightColor.name() + "; }"
-                                "QDoubleSpinBox::down-button{width:0px;} QDoubleSpinBox::up-button{width:0px;} ");
+                                                                                               "QDoubleSpinBox::down-button{width:0px;} QDoubleSpinBox::up-button{width:0px;} ");
             spin->setDecimals(nbDecimales);
             widget = spin;
         }
@@ -98,7 +112,7 @@ QWidget * TableDelegate::createEditor(QWidget *parent, const QStyleOptionViewIte
         else
             spin = new SpinBoxVelocityRange(parent);
         spin->setStyleSheet("SpinBoxRange{ border: 3px solid " + highlightColor.name() + "; }"
-                            "SpinBoxRange::down-button{width:0px;} SpinBoxRange::up-button{width:0px;} ");
+                                                                                         "SpinBoxRange::down-button{width:0px;} SpinBoxRange::up-button{width:0px;} ");
         widget = spin;
     }
 
@@ -274,6 +288,15 @@ void TableDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option,
     {
         QStyledItemDelegate::paint(painter, option, index);
     }
+
+    // Display mods
+    if (_modDisplay.contains(index.column()) && _modDisplay[index.column()].contains(index.row()))
+    {
+        QStyleOptionViewItemV4 opt(option);
+        initStyleOption(&opt, index);
+        painter->setPen(QPen(QBrush(_redColor), 2));
+        painter->drawRect(opt.rect);
+    }
 }
 
 void TableDelegate::getType(bool &isNumeric, bool &isKey, int &nbDecimales, int numRow, bool &isLoop) const
@@ -283,30 +306,30 @@ void TableDelegate::getType(bool &isNumeric, bool &isKey, int &nbDecimales, int 
     isLoop = false;
     nbDecimales = 0;
 
-    if (_table->rowCount() == 50)
+    if (_table->rowCount() == 47)
     {
         // Table instrument
-        switch (numRow)
+        switch (numRow - 1)
         {
-        case 4:
+        case 0:
             isNumeric = false;
             isKey = true;
             break;
-        case 5:
+        case 1:
             isNumeric = false;
             break;
-        case 6: case 7: case 14: case 19: case 27: case 37: case 42: case 43:
+        case 2: case 3: case 10: case 15: case 23: case 33: case 38: case 39:
             nbDecimales = 1;
             break;
-        case 15: case 16: case 17: case 18: case 20:
-        case 23: case 24: case 25: case 26: case 28:
-        case 33: case 34: case 38: case 39:
+        case 11: case 12: case 13: case 14: case 16:
+        case 19: case 20: case 21: case 22: case 24:
+        case 29: case 30: case 34: case 35:
             nbDecimales = 3;
             break;
-        case 9: case 44:
+        case 5: case 40:
             isKey = true;
             break;
-        case 8:
+        case 4:
             // Loop mode
             isLoop = true;
             break;
@@ -315,23 +338,33 @@ void TableDelegate::getType(bool &isNumeric, bool &isKey, int &nbDecimales, int 
     else
     {
         // Table preset
-        switch (numRow)
+        switch (numRow - 1)
         {
-        case 4:
+        case 0:
             isNumeric = false;
             isKey = true;
             break;
-        case 5:
+        case 1:
             isNumeric = false;
             break;
-        case 6: case 7: case 12: case 17: case 25: case 35: case 39: case 40:
+        case 2: case 3: case 8: case 13: case 21: case 31: case 35: case 36:
             nbDecimales = 1;
             break;
-        case 11: case 13: case 14: case 15: case 16: case 18:
-        case 21: case 22: case 23: case 24: case 26: case 31:
-        case 32: case 36: case 37:
+        case 7: case 9: case 10: case 11: case 12: case 14:
+        case 17: case 18: case 19: case 20: case 22: case 27:
+        case 28: case 32: case 33:
             nbDecimales = 3;
             break;
         }
     }
+}
+
+void TableDelegate::resetModDisplay()
+{
+    _modDisplay.clear();
+}
+
+void TableDelegate::updateModDisplay(int column, QList<int> rows)
+{
+    _modDisplay[column] = rows;
 }
