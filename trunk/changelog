@@ -5,6 +5,7 @@ polyphone (1.9) unstable; urgency=low
   * (new) tool to export the preset list in a text format
   * (improvement) Glow effect when the virtual keyboard is focused with ctrl+K
   * (improvement) EQ values automatically stored and loaded on startup
+  * (improvement) highlight a modulator corresponding to a cell and vice versa
   * (fix) crash with a drag & drop in the tree
   * (fix) release bug when using loop + end mode
   * (fix) the progress bar sometimes remains when loading a small soundfont

@@ -101,6 +101,7 @@ private:
     void addDivisions(EltID id);
     void formatTable(bool multiGlobal);
     void afficheRange();
+    void afficheMod(EltID id, Champ selectedField);
     void afficheMod(EltID id, int selectedIndex = -1);
     static void addAvailableReceiverMod(ComboBox *combo, EltID id);
     static void addAvailableSenderMod(ComboBox *combo, EltID id);
