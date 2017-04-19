@@ -30,6 +30,7 @@ void TableWidgetMod::clear()
     for (int i = 0; i < this->columnCount(); i++)
         for (int j = 0; j < this->rowCount(); j++)
             delete this->item(j, i);
+    this->clearSelection();
     this->setRowCount(0);
 }
 
@@ -62,20 +63,21 @@ void TableWidgetMod::addRow(int row, EltID id)
 EltID TableWidgetMod::getID(int row)
 {
     EltID id;
-    if (this->item(row, 0)->text() == "Inst")
-        id.typeElement = elementInstMod;
-    else if (this->item(row, 0)->text() == "InstSmpl")
-        id.typeElement = elementInstSmplMod;
-    else if (this->item(row, 0)->text() == "Prst")
-        id.typeElement = elementPrstMod;
-    else if (this->item(row, 0)->text() == "PrstInst")
-        id.typeElement = elementPrstInstMod;
-
-    id.indexSf2 = this->item(row, 1)->text().toInt();
-    id.indexElt = this->item(row, 2)->text().toInt();
-    id.indexElt2 = this->item(row, 3)->text().toInt();
-    id.indexMod = this->item(row, 4)->text().toInt();
-
+    if (row < this->rowCount() && this->item(row, 0) != NULL)
+    {
+        if (this->item(row, 0)->text() == "Inst")
+            id.typeElement = elementInstMod;
+        else if (this->item(row, 0)->text() == "InstSmpl")
+            id.typeElement = elementInstSmplMod;
+        else if (this->item(row, 0)->text() == "Prst")
+            id.typeElement = elementPrstMod;
+        else if (this->item(row, 0)->text() == "PrstInst")
+            id.typeElement = elementPrstInstMod;
+        id.indexSf2 = this->item(row, 1)->text().toInt();
+        id.indexElt = this->item(row, 2)->text().toInt();
+        id.indexElt2 = this->item(row, 3)->text().toInt();
+        id.indexMod = this->item(row, 4)->text().toInt();
+    }
     return id;
 }
 

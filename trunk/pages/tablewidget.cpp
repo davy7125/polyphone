@@ -46,12 +46,13 @@ void TableWidget::clear()
     for (int i = 0; i < this->columnCount(); i++)
         for (int j = 0; j < this->rowCount(); j++)
             delete this->item(j, i);
-
     this->setColumnCount(0);
+    _columnIds.clear();
 }
 
 void TableWidget::addColumn(int column, QString title)
 {
+    _columnIds.insert(column, EltID());
     this->insertColumn(column);
     for (int i = 0; i < this->rowCount(); i++)
         this->setItem(i, column, new QTableWidgetItem());
@@ -63,41 +64,23 @@ void TableWidget::addColumn(int column, QString title)
     this->horizontalHeaderItem(column)->setForeground(color);
 }
 
-void TableWidget::setID(EltID id, int colonne)
+void TableWidget::setID(EltID id, int column)
 {
-    QString str;
-    switch(id.typeElement)
-    {
-    case elementInstGen: case elementInst: str = "Inst"; break;
-    case elementInstSmplGen: case elementInstSmpl: str = "InstSmpl"; break;
-    case elementPrstGen: case elementPrst:  str = "Prst"; break;
-    case elementPrstInstGen: case elementPrstInst: str = "PrstInst"; break;
-    default: break;
-    }
-    item(0, colonne)->setText(str);
-    this->item(1, colonne)->setText(QString::number(id.indexSf2));
-    this->item(2, colonne)->setText(QString::number(id.indexElt));
-    this->item(3, colonne)->setText(QString::number(id.indexElt2));
+    if (id.typeElement == elementInstGen)
+        id.typeElement = elementInst;
+    if (id.typeElement == elementInstSmplGen)
+        id.typeElement = elementInstSmpl;
+    if (id.typeElement == elementPrstGen)
+        id.typeElement = elementPrst;
+    if (id.typeElement == elementPrstInstGen)
+        id.typeElement = elementPrstInst;
+    if (_columnIds.count() > column)
+        _columnIds[column] = id;
 }
 
-EltID TableWidget::getID(int colonne)
+EltID TableWidget::getID(int column)
 {
-    EltID id(elementUnknown, 0, 0, 0, 0);
-    if (this->columnCount() > colonne)
-    {
-        if (item(0, colonne)->text() == "Inst")
-            id.typeElement = elementInst;
-        else if (item(0, colonne)->text() == "InstSmpl")
-            id.typeElement = elementInstSmpl;
-        else if (item(0, colonne)->text() == "Prst")
-            id.typeElement = elementPrst;
-        else if (item(0, colonne)->text() == "PrstInst")
-            id.typeElement = elementPrstInst;
-        id.indexSf2 = item(1, colonne)->text().toInt();
-        id.indexElt = item(2, colonne)->text().toInt();
-        id.indexElt2 = item(3, colonne)->text().toInt();
-    }
-    return id;
+    return _columnIds.count() > column ? _columnIds[column] : EltID();
 }
 
 void TableWidget::setEnlighted(int colonne, bool isEnlighted)
@@ -145,6 +128,9 @@ void TableWidget::updateColors()
 void TableWidget::setColumnCount(int columns)
 {
     QTableWidget::setColumnCount(columns);
+    _columnIds.clear();
+    for (int i = 0; i < columns; i++)
+        _columnIds.append(EltID());
     _listColors.clear();
     QPalette p = this->palette();
     QColor color = p.color(QPalette::Text);
@@ -156,6 +142,7 @@ void TableWidget::removeColumn(int column)
 {
     QTableWidget::removeColumn(column);
     _listColors.removeAt(column);
+    _columnIds.removeAt(column);
 }
 
 void TableWidget::keyPressEvent(QKeyEvent *event)
@@ -196,7 +183,8 @@ void TableWidget::keyPressEvent(QKeyEvent *event)
 
         QTableWidget::keyPressEvent(event);
 
-        if (editing) {
+        if (editing)
+        {
             // Otherwise the next cell is selected
             this->setCurrentIndex(index);
 
@@ -230,7 +218,7 @@ void TableWidget::commitData(QWidget *editor)
                 {
                     const QModelIndex idx = model()->index(rows, cols);
 
-                    if (this->rowCount() == 50 && curRow == 8)
+                    if (this->rowCount() == 47 && curRow == 5)
                     {
                         // Copy the data in DecorationRole and UserRole
                         model()->setData(idx, model()->data(currentIndex(), Qt::DecorationRole), Qt::DecorationRole);
@@ -298,11 +286,11 @@ void TableWidget::copy()
         // They may not be contiguous!
         QModelIndexList indexes = selectionModel()->selectedIndexes();
 
-        // Rows before 4 are for identifiers
+        // Row 0 is for selection
         int indexNumber = indexes.size();
         for (int i = indexNumber - 1; i >= 0; i--)
-            if (indexes.at(i).row() < 4)
-                indexes.removeAt(i);
+          if (indexes.at(i).row() == 0)
+            indexes.removeAt(i);
 
         QMap<int, QMap<int, QString> > mapText;
         foreach (QModelIndex index, indexes)
@@ -393,9 +381,9 @@ void TableWidget::paste()
             minCol = qMin(minCol, modelIndex.column());
     }
 
-    // First rows are identifiers, no paste here
-    if (minRow < 4)
-        minRow = 4;
+    // First row is for selection, no paste here
+    if (minRow < 1)
+      minRow = 1;
 
     for (int indRow = 0; indRow < cellrows; indRow++)
     {
@@ -408,7 +396,7 @@ void TableWidget::paste()
                 if (text == "!")
                     text = "";
 
-                if (this->rowCount() == 50 && indRow + minRow == 8)
+                if (this->rowCount() == 47 && indRow + minRow == 5)
                 {
                     bool ok;
                     int val = text.toInt(&ok);
@@ -444,17 +432,17 @@ void TableWidget::onSectionDoubleClicked(int index)
 
 void TableWidget::onItemSelectionChanged()
 {
-    if (this->rowCount() == 50) // If instrument
+    if (this->rowCount() == 47) // If instrument
     {
         // Problematic case: background color when the first loopmode cell is selected
-        if (this->item(8, 0)->isSelected())
-            this->item(8, 0)->setBackgroundColor(this->palette().color(QPalette::Highlight));
-        else if (this->item(8, 0)->backgroundColor() == this->palette().color(QPalette::Highlight))
+        if (this->item(5, 0)->isSelected())
+            this->item(5, 0)->setBackgroundColor(this->palette().color(QPalette::Highlight));
+        else if (this->item(5, 0)->backgroundColor() == this->palette().color(QPalette::Highlight))
         {
             QColor color = this->palette().color(QPalette::Base);
             QColor alternateColor = this->palette().color(QPalette::AlternateBase);
             QBrush brush(TableWidget::getPixMap(color, alternateColor));
-            this->item(8, 0)->setBackground(brush);
+            this->item(5, 0)->setBackground(brush);
         }
     }
 }
@@ -470,4 +458,26 @@ QPixmap TableWidget::getPixMap(QColor backgroundColor, QColor dotColor)
     painter.drawPoint(1, 2);
     painter.drawPoint(0, 3);
     return pix;
+}
+
+void TableWidget::resetModDisplay()
+{
+    _tableDelegate->resetModDisplay();
+}
+
+void TableWidget::updateModDisplay(int column, QList<int> rows)
+{
+    _tableDelegate->updateModDisplay(column, rows);
+}
+
+void TableWidget::selectCell(EltID id, Champ champ)
+{
+    int numRow = getRow(champ);
+    int numCol = _columnIds.indexOf(id);
+    if (numRow >= 0 && numRow < this->rowCount() && numCol >= 0 && numCol < this->columnCount())
+    {
+        this->blockSignals(true);
+        this->selectionModel()->select(this->model()->index(numRow, numCol), QItemSelectionModel::ClearAndSelect);
+        this->blockSignals(false);
+    }
 }

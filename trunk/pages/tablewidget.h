@@ -41,11 +41,14 @@ public:
     ~TableWidget() { delete this->itemDelegate(); }
     void clear();
     void addColumn(int column, QString title);
-    void setID(EltID id, int colonne);
-    EltID getID(int colonne);
+    void setID(EltID id, int column);
+    EltID getID(int column);
     void setEnlighted(int colonne, bool isEnlighted);
     void setColumnCount(int columns);
     void removeColumn(int column);
+    void resetModDisplay();
+    void updateModDisplay(int column, QList<int> rows);
+    void selectCell(EltID id, Champ champ);
 
     // Set the image corresponding to the loop mode value
     // -1 will remove the image
@@ -82,6 +85,7 @@ private:
     void copy();
     void paste();
     void deleteCells();
+    QList<EltID> _columnIds;
 };
 
 #endif // TABLEWIDGET_H

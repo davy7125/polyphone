@@ -89,7 +89,7 @@ void PageTable::afficheTable()
 
         ///////////////////// REMPLISSAGE DES MODS //////////////////////////
         if (ids.count() == 1)
-            this->afficheMod(ids.first());
+            this->afficheMod(_tree->getFirstID());
         else
             afficheEditMod();
     }
@@ -326,19 +326,19 @@ void PageTable::formatTable(bool multiGlobal)
         {
             for (int j = 0; j < this->table->rowCount(); j++)
             {
-                if (j < 9)
+                if (j < 6)
                     this->table->item(j, 0)->setBackground(brush1);
-                else if (j < 13)
+                else if (j < 10)
                     this->table->item(j, 0)->setBackground(brush2);
-                else if (j < 15)
+                else if (j < 12)
                     this->table->item(j, 0)->setBackground(brush1);
-                else if (j < 23)
+                else if (j < 20)
                     this->table->item(j, 0)->setBackground(brush2);
-                else if (j < 33)
+                else if (j < 30)
                     this->table->item(j, 0)->setBackground(brush1);
-                else if (j < 41)
+                else if (j < 38)
                     this->table->item(j, 0)->setBackground(brush2);
-                else if (j < 46)
+                else if (j < 43)
                     this->table->item(j, 0)->setBackground(brush1);
                 else
                     this->table->item(j, 0)->setBackground(brush2);
@@ -351,16 +351,16 @@ void PageTable::formatTable(bool multiGlobal)
         {
             for (int j = 0; j < this->table->rowCount(); j++)
             {
-                if (j < 9) {}
-                else if (j < 13)
+                if (j < 6) {}
+                else if (j < 10)
                     this->table->item(j, i)->setBackgroundColor(alternateColor);
-                else if (j < 15) {}
-                else if (j < 23)
+                else if (j < 12) {}
+                else if (j < 20)
                     this->table->item(j, i)->setBackgroundColor(alternateColor);
-                else if (j < 33) {}
-                else if (j < 41)
+                else if (j < 30) {}
+                else if (j < 38)
                     this->table->item(j, i)->setBackgroundColor(alternateColor);
-                else if (j < 46) {}
+                else if (j < 43) {}
                 else
                     this->table->item(j, i)->setBackgroundColor(alternateColor);
                 this->table->item(j, i)->setTextAlignment(Qt::AlignVCenter | Qt::AlignRight);
@@ -374,17 +374,17 @@ void PageTable::formatTable(bool multiGlobal)
         {
             for (int j = 0; j < this->table->rowCount(); j++)
             {
-                if (j < 8)
+                if (j < 5)
                     this->table->item(j, 0)->setBackground(brush1);
-                else if (j < 11)
+                else if (j < 8)
                     this->table->item(j, 0)->setBackground(brush2);
-                else if (j < 13)
+                else if (j < 10)
                     this->table->item(j, 0)->setBackground(brush1);
-                else if (j < 21)
+                else if (j < 18)
                     this->table->item(j, 0)->setBackground(brush2);
-                else if (j < 31)
+                else if (j < 28)
                     this->table->item(j, 0)->setBackground(brush1);
-                else if (j < 39)
+                else if (j < 36)
                     this->table->item(j, 0)->setBackground(brush2);
                 else
                     this->table->item(j, 0)->setBackground(brush1);
@@ -397,26 +397,49 @@ void PageTable::formatTable(bool multiGlobal)
         {
             for (int j = 0; j < this->table->rowCount(); j++)
             {
-                if (j < 8) {}
-                else if (j < 11)
+                if (j < 5) {}
+                else if (j < 8)
                     this->table->item(j, i)->setBackgroundColor(alternateColor);
-                else if (j < 13) {}
-                else if (j < 21)
+                else if (j < 10) {}
+                else if (j < 18)
                     this->table->item(j, i)->setBackgroundColor(alternateColor);
-                else if (j < 31) {}
-                else if (j < 39)
+                else if (j < 28) {}
+                else if (j < 36)
                     this->table->item(j, i)->setBackgroundColor(alternateColor);
                 this->table->item(j, i)->setTextAlignment(Qt::AlignVCenter | Qt::AlignRight);
             }
         }
     }
-    for (int i = 0; i < 4; i++)
-        this->table->hideRow(i);
+    this->table->hideRow(0);
 }
 
 void PageTable::afficheRange()
 {
     _rangeEditor->display(_tree->getFirstID());
+}
+
+void PageTable::afficheMod(EltID id, Champ selectedField)
+{
+    // Try to find a corresponding index
+    EltID idMod = id;
+    if (id.typeElement == this->contenant)
+        idMod.typeElement = this->contenantMod;
+    else
+        idMod.typeElement = this->lienMod;
+    int index = -1;
+    if (this->table->selectedItems().count() == 1)
+    {
+        for (int i = 0; i < _sf2->count(idMod); i++)
+        {
+            idMod.indexMod = i;
+            if (!_sf2->get(idMod, champ_hidden).bValue)
+            {
+                if (_sf2->get(idMod, champ_sfModDestOper).genValue.wAmount == (quint16)selectedField)
+                    index = i;
+            }
+        }
+    }
+    afficheMod(id, index);
 }
 
 void PageTable::afficheMod(EltID id, int selectedIndex)
@@ -512,12 +535,14 @@ void PageTable::afficheMod(EltID id, int selectedIndex)
     }
     for (int i = 0; i < 5; i++)
         this->tableMod->hideColumn(i);
+
     if (selectedIndex > -1)
     {
         for (int i = 0; i < this->tableMod->rowCount(); i++)
             if (this->tableMod->getID(i).indexMod == selectedIndex)
                 this->tableMod->selectRow(i);
     }
+
     this->tableMod->resizeColumnToContents(5);
     this->tableMod->resizeColumnToContents(6);
     this->tableMod->resizeColumnToContents(7);
@@ -616,6 +641,14 @@ void PageTable::afficheEditMod()
         wTmp = _sf2->get(id, champ_sfModDestOper).wValue;
         this->comboDestination->selectIndex(this->getDestIndex(wTmp), wTmp);
         this->comboDestination->setEnabled(true);
+
+        // Selection in the table
+        EltID idParent = id;
+        if (idParent.typeElement == this->contenantMod)
+            idParent.typeElement = this->contenant;
+        else if (idParent.typeElement == this->lienMod)
+            idParent.typeElement = this->lien;
+        this->table->selectCell(idParent, (Champ)_sf2->get(id, champ_sfModDestOper).wValue);
     }
     else
     {
@@ -1431,7 +1464,7 @@ void PageTable::select(EltID id)
             if (max / this->table->columnCount() > 62)
                 this->table->horizontalScrollBar()->setValue((max*(i-1)) / this->table->columnCount());
             else
-                this->table->scrollToItem(this->table->item(10, i), QAbstractItemView::PositionAtCenter);
+                this->table->scrollToItem(this->table->item(7, i), QAbstractItemView::PositionAtCenter);
         }
     }
     _preparation = false;
@@ -1455,7 +1488,10 @@ void PageTable::selected()
         // Mise à jour des informations sur les mods
         _preparation = true;
         int colonne = listItems.last()->column();
-        this->afficheMod(this->table->getID(colonne));
+        if (listItems.count() == 1)
+            this->afficheMod(this->table->getID(colonne), this->table->getChamp(listItems.last()->row()));
+        else
+            this->afficheMod(this->table->getID(colonne));
         _preparation = false;
     }
     customizeKeyboard();
