@@ -59,7 +59,6 @@ protected:
     void mouseReleaseEvent(QMouseEvent *event);
     void mouseMoveEvent(QMouseEvent *event);
     void wheelEvent(QWheelEvent *event);
-    void leaveEvent(QEvent * event);
 
 private:
     QPen _penLecture;
@@ -78,7 +77,8 @@ private:
     int _currentPos;
     bool _filterEventEnabled;
     QCPItemText * _textMultipleSelection;
-    QCPItemText * _textMousePosition;
+    QCPItemText * _textPositionL;
+    QCPItemText * _textPositionR;
     QTime _lastUpdate;
     int _sampleRate;
 
@@ -86,8 +86,7 @@ private:
     void drag(QPoint point);
     void setZoomLine(double x1, double y1, double x2, double y2);
     void plotOverlay();
-    void displayCurrentMousePosition(int x);
-    void hideCurrentMousePosition();
+    void displayCurrentRange();
 };
 
 #endif // GRAPHIQUE_H
