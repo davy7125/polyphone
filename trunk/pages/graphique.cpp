@@ -30,26 +30,28 @@
 #include <thememanager.h>
 
 Graphique::Graphique(QWidget * parent) : QCustomPlot(parent),
-    zoomFlag(false),
-    dragFlag(false),
-    zoomX(1),
-    zoomY(1),
-    posX(.5),
-    posY(.5),
-    zoomXinit(1),
-    zoomYinit(1),
-    posXinit(.5),
-    posYinit(.5),
-    bFromExt(false),
-    qScrollX(NULL),
-    spinStart(NULL),
-    spinEnd(NULL),
-    filterEventEnabled(true),
-    textMultipleSelection(NULL)
+    _zoomFlag(false),
+    _dragFlag(false),
+    _zoomX(1),
+    _zoomY(1),
+    _posX(.5),
+    _posY(.5),
+    _zoomXinit(1),
+    _zoomYinit(1),
+    _posXinit(.5),
+    _posYinit(.5),
+    _bFromExt(false),
+    _qScrollX(NULL),
+    _spinStart(NULL),
+    _spinEnd(NULL),
+    _filterEventEnabled(true),
+    _textMultipleSelection(NULL),
+    _textMousePosition(NULL),
+    _sampleRate(0)
 {
     // Graphe des données
     this->addGraph();
-    this->graph(0)->setAntialiased(false);
+    this->graph(0)->setAntialiased(true);
 
     // Graphes contenant startLoop, endLoop
     this->addGraph();
@@ -74,14 +76,24 @@ Graphique::Graphique(QWidget * parent) : QCustomPlot(parent),
     this->axisRect()->setMargins(QMargins(0, 0, 0, 0));
 
     // Message "sélection multiple"
-    textMultipleSelection = new QCPItemText(this);
-    textMultipleSelection->position->setType(QCPItemPosition::ptAxisRectRatio);
-    textMultipleSelection->setPositionAlignment(Qt::AlignCenter|Qt::AlignHCenter);
-    textMultipleSelection->position->setCoords(.5, .5);
-    textMultipleSelection->setTextAlignment(Qt::AlignHCenter);
-    textMultipleSelection->setFont(QFont(font().family(), 16, QFont::Bold));
-    textMultipleSelection->setText(trUtf8("Sélection multiple"));
-    addItem(textMultipleSelection);
+    _textMultipleSelection = new QCPItemText(this);
+    _textMultipleSelection->position->setType(QCPItemPosition::ptAxisRectRatio);
+    _textMultipleSelection->setPositionAlignment(Qt::AlignCenter|Qt::AlignHCenter);
+    _textMultipleSelection->position->setCoords(.5, .5);
+    _textMultipleSelection->setTextAlignment(Qt::AlignHCenter);
+    _textMultipleSelection->setFont(QFont(font().family(), 16, QFont::Bold));
+    _textMultipleSelection->setText(trUtf8("Sélection multiple"));
+    addItem(_textMultipleSelection);
+
+    // Mouse position
+    _textMousePosition = new QCPItemText(this);
+    _textMousePosition->position->setType(QCPItemPosition::ptAxisRectRatio);
+    _textMousePosition->setPositionAlignment(Qt::AlignRight|Qt::AlignTop);
+    _textMousePosition->position->setCoords(1, 0);
+    _textMousePosition->setTextAlignment(Qt::AlignTop);
+    _textMousePosition->setFont(QFont(font().family(), 10, QFont::Bold));
+    _textMousePosition->setText("");
+    addItem(_textMousePosition);
 
     // Paramétrage des couleurs
     this->updateStyle();
@@ -159,12 +171,13 @@ void Graphique::updateStyle()
     graphPen.setStyle(Qt::DotLine);
     this->yAxis->grid()->setPen(graphPen);
 
-    // Curseur de lecture et message (sélection multiple)
+    // Curseur de lecture et texte
     textColor.setAlpha(255);
-    penLecture.setColor(textColor);
-    penLecture.setWidthF(1);
+    _penLecture.setColor(textColor);
+    _penLecture.setWidthF(1);
     textColor.setAlpha(180);
-    textMultipleSelection->setColor(textColor);
+    _textMultipleSelection->setColor(textColor);
+    _textMousePosition->setColor(textColor);
 
     this->replot();
 }
@@ -178,11 +191,12 @@ void Graphique::clearAll()
     this->graph(4)->clearData();
     this->graph(5)->clearData();
 }
-void Graphique::setData(QByteArray baData)
+
+void Graphique::setData(QByteArray baData, int sampleRate)
 {
     // Ajout des données
     quint32 size_x = baData.size() / 2;
-    this->sizeX = ((double)size_x + 1);
+    this->_sizeX = ((double)size_x + 1);
     qint16 * data = (qint16 *)baData.data();
     QVector<double> x(size_x), y(size_x);
     for (unsigned long i = 0; i < size_x; i++)
@@ -191,32 +205,37 @@ void Graphique::setData(QByteArray baData)
         y[i] = (double)data[i] / 32768.; // normalisation entre -1 et 1
     }
     this->graph(0)->setData(x, y);
+    _sampleRate = sampleRate;
 }
+
 void Graphique::linkSliderX(QScrollBar * qScrollX)
 {
-    this->qScrollX = qScrollX;
+    this->_qScrollX = qScrollX;
 }
+
 void Graphique::linkSpinBoxes(QSpinBox * spinStart, QSpinBox * spinEnd)
 {
-    this->spinStart = spinStart;
-    this->spinEnd = spinEnd;
+    this->_spinStart = spinStart;
+    this->_spinEnd = spinEnd;
 }
+
 void Graphique::setPosX(int posX)
 {
-    if (this->qScrollX)
+    if (this->_qScrollX)
     {
-        bFromExt = true;
-        if (this->qScrollX->maximum() > 0)
-            this->posX = (double)posX / this->qScrollX->maximum();
+        _bFromExt = true;
+        if (this->_qScrollX->maximum() > 0)
+            this->_posX = (double)posX / this->_qScrollX->maximum();
         else
-            this->posX = 0.5;
+            this->_posX = 0.5;
         this->zoomDrag();
-        bFromExt = false;
+        _bFromExt = false;
     }
 }
+
 void Graphique::setStartLoop(int pos, bool replot)
 {
-    if (filterEventEnabled)
+    if (_filterEventEnabled)
     {
         if (pos >= 0)
         {
@@ -232,9 +251,10 @@ void Graphique::setStartLoop(int pos, bool replot)
             this->replot();
     }
 }
+
 void Graphique::setEndLoop(int pos, bool replot)
 {
-    if (filterEventEnabled)
+    if (_filterEventEnabled)
     {
         if (pos >= 0)
         {
@@ -250,136 +270,149 @@ void Graphique::setEndLoop(int pos, bool replot)
             this->replot();
     }
 }
+
 void Graphique::setCurrentSample(int pos)
 {
     if (_lastUpdate.elapsed() < 16)
         return;
     _lastUpdate.restart();
 
-    m_currentPos = this->xAxis->coordToPixel(pos);
+    _currentPos = this->xAxis->coordToPixel(pos);
     this->repaint();
     this->update();
 }
+
 void Graphique::paintEvent(QPaintEvent *event)
 {
     QCustomPlot::paintEvent(event);
 
     // Ajout du trait de lecture
-    if (m_currentPos > 0)
+    if (_currentPos > 0)
     {
         QPainter painter(this);
-        painter.setPen(penLecture);
-        painter.drawLine(QPointF(m_currentPos, -10000), QPointF(m_currentPos, 10000));
+        painter.setPen(_penLecture);
+        painter.drawLine(QPointF(_currentPos, -10000), QPointF(_currentPos, 10000));
     }
 }
+
 void Graphique::zoomDrag()
 {
     // Bornes des paramètres d'affichage
-    if (this->zoomX < 1)
-        this->zoomX = 1;
-    else if (this->zoomX > sizeX * 200)
-        this->zoomX = sizeX * 200;
-    if (this->zoomY < 1)
-        this->zoomY = 1;
-    else if (this->zoomY > 50)
-        this->zoomY = 50;
-    if (this->posX < 0)
-        this->posX = 0;
-    else if (this->posX > 1)
-        this->posX = 1;
-    if (this->posY < 0)
-        this->posY = 0;
-    else if (this->posY > 1)
-        this->posY = 1;
-    posY = 0.5; // blocage sur Y
+    if (this->_posX < 0)
+        this->_posX = 0;
+    else if (this->_posX > 1)
+        this->_posX = 1;
+    if (this->_posY < 0)
+        this->_posY = 0;
+    else if (this->_posY > 1)
+        this->_posY = 1;
+    _posY = 0.5; // blocage sur Y
 
     // Application du drag et zoom
-    double etendueX = sizeX / zoomX;
-    double offsetX = (sizeX - etendueX) * posX - 1;
+    double etendueX = _sizeX / _zoomX;
+    double offsetX = (_sizeX - etendueX) * _posX - 1;
     this->xAxis->setRange(offsetX, offsetX + etendueX);
-    double etendueY = 2. / zoomY;
-    double offsetY = (2. - etendueY) * posY - 1;
+    double etendueY = 2. / _zoomY;
+    double offsetY = (2. - etendueY) * _posY - 1;
     this->yAxis->setRange(offsetY, offsetY + etendueY);
 
     // Mise à jour
-    this->replot();
-    if (!bFromExt && qScrollX)
+    this->replot(QCustomPlot::rpQueued);
+    if (!_bFromExt && _qScrollX)
     {
         // Mise à jour du scrollbar
-        double valMax = ((zoomX - 1.) * sizeX) / 10000;
-        qScrollX->blockSignals(true);
-        qScrollX->setRange(0, valMax);
-        qScrollX->setValue(valMax*posX);
-        qScrollX->blockSignals(false);
+        double valMax = ((_zoomX - 1.) * _sizeX) / 10000;
+        _qScrollX->blockSignals(true);
+        _qScrollX->setRange(0, valMax);
+        _qScrollX->setValue(valMax*_posX);
+        _qScrollX->blockSignals(false);
     }
 }
+
 void Graphique::displayMultipleSelection(bool isOn)
 {
-    qScrollX->setEnabled(!isOn);
-    filterEventEnabled = !isOn;
-    textMultipleSelection->setVisible(isOn);
+    _qScrollX->setEnabled(!isOn);
+    _filterEventEnabled = !isOn;
+    _textMultipleSelection->setVisible(isOn);
     if (isOn)
         zoomDrag();
     else
-        qScrollX->setRange(0, 0);
+        _qScrollX->setRange(0, 0);
 }
 
 // Méthodes privées
 void Graphique::zoom(QPoint point)
 {
     // Décalage
-    double decX = this->xAxis2->pixelToCoord(point.x()) - this->xInit;
-    double decY = this->yAxis2->pixelToCoord(point.y()) - this->yInit;
+    double decX = this->xAxis2->pixelToCoord(point.x()) - this->_xInit;
+    double decY = this->yAxis2->pixelToCoord(point.y()) - this->_yInit;
 
     // Modification zoom & drag
-    this->zoomX = zoomXinit * pow(2, 25.0 * decX);
-    this->zoomY = zoomYinit * pow(2,  5.0 * decY);
+    double newZoomX = _zoomXinit * pow(2, 25.0 * decX);
+    double newZoomY = _zoomYinit * pow(2,  5.0 * decY);
 
-    // Ajustement posX et posY
-    if (zoomX > 1)
-        posX = (zoomX * posXinit * (zoomXinit - 1) + xInit*(zoomX - zoomXinit)) / (zoomXinit*(zoomX - 1));
-    if (zoomY > 1)
-        posY = (zoomY * posYinit * (zoomYinit - 1) + yInit*(zoomY - zoomYinit)) / (zoomYinit*(zoomY - 1));
+    if (newZoomX < 1)
+        newZoomX = 1;
+    else if (newZoomX > _sizeX * 200)
+        newZoomX = _sizeX * 200;
+    if (newZoomY < 1)
+        newZoomY = 1;
+    else if (newZoomY > 50)
+        newZoomY = 50;
 
-    // Mise à jour
-    this->zoomDrag();
+    if (newZoomX != _zoomX || newZoomY != _zoomY)
+    {
+        _zoomX = newZoomX;
+        _zoomY = newZoomY;
+
+        // Ajustement posX et posY
+        if (_zoomX > 1)
+            _posX = (_zoomX * _posXinit * (_zoomXinit - 1) + _xInit*(_zoomX - _zoomXinit)) / (_zoomXinit * (_zoomX - 1));
+        if (_zoomY > 1)
+            _posY = (_zoomY * _posYinit * (_zoomYinit - 1) + _yInit*(_zoomY - _zoomYinit)) / (_zoomYinit * (_zoomY - 1));
+
+        // Mise à jour
+        this->zoomDrag();
+    }
 }
+
 void Graphique::drag(QPoint point)
 {
     // Décalage
-    double decX = this->xAxis2->pixelToCoord(point.x()) - this->xInit;
-    double decY = this->yAxis2->pixelToCoord(point.y()) - this->yInit;
+    double decX = this->xAxis2->pixelToCoord(point.x()) - this->_xInit;
+    double decY = this->yAxis2->pixelToCoord(point.y()) - this->_yInit;
 
     // Modification posX et posY
-    if (zoomXinit > 1)
-        posX = posXinit - decX / (zoomXinit - 1);
-    if (zoomYinit > 1)
-        posY = posYinit - decY / (zoomYinit - 1);
+    if (_zoomXinit > 1)
+        _posX = _posXinit - decX / (_zoomXinit - 1);
+    if (_zoomYinit > 1)
+        _posY = _posYinit - decY / (_zoomYinit - 1);
 
     // Mise à jour
     this->zoomDrag();
 }
+
 void Graphique::setZoomLine(double x1, double y1, double x2, double y2)
 {
     if (x1 >= 0)
     {
         // Conversion
         QVector<double> x(2), y(2);
-        x[0] = sizeX * (x1 + posX * (zoomX - 1)) / zoomX - 1;
-        x[1] = sizeX * (x2 + posX * (zoomX - 1)) / zoomX - 1;
-        y[0] = 2 * (y1 + posY * (zoomY - 1)) / zoomY - 1;
-        y[1] = 2 * (y2 + posY * (zoomY - 1)) / zoomY - 1;
+        x[0] = _sizeX * (x1 + _posX * (_zoomX - 1)) / _zoomX - 1;
+        x[1] = _sizeX * (x2 + _posX * (_zoomX - 1)) / _zoomX - 1;
+        y[0] = 2 * (y1 + _posY * (_zoomY - 1)) / _zoomY - 1;
+        y[1] = 2 * (y2 + _posY * (_zoomY - 1)) / _zoomY - 1;
         this->graph(3)->setData(x, y);
     }
     else
         this->graph(3)->clearData();
-    this->replot();
 }
+
 void Graphique::plotOverlay()
 {
     int sizeOverlay = 20;
-    qint32 posDebut = this->spinStart->value();
-    qint32 posFin = this->spinEnd->value();
+    qint32 posDebut = this->_spinStart->value();
+    qint32 posFin = this->_spinEnd->value();
     if (posDebut >= 0 && posFin >= 0 && posDebut != posFin)
     {
         QVector<double> x1(2 * sizeOverlay), y1(2 * sizeOverlay), x2(2 * sizeOverlay), y2(2 * sizeOverlay);
@@ -408,43 +441,43 @@ void Graphique::plotOverlay()
 
 void Graphique::mousePressEvent(QMouseEvent *event)
 {
-    if (!filterEventEnabled)
+    if (!_filterEventEnabled)
         return;
 
     // Enregistrement situation
-    xInit = this->xAxis2->pixelToCoord(event->x());
-    yInit = this->yAxis2->pixelToCoord(event->y());
-    zoomXinit = zoomX;
-    zoomYinit = zoomY;
-    posXinit = posX;
-    posYinit = posY;
-    modifiedFlag = false;
-    if (event->button() == Qt::LeftButton && !zoomFlag)
-        dragFlag = true;
-    else if (event->button() == Qt::RightButton && !dragFlag)
-        zoomFlag = true;
+    _xInit = this->xAxis2->pixelToCoord(event->x());
+    _yInit = this->yAxis2->pixelToCoord(event->y());
+    _zoomXinit = _zoomX;
+    _zoomYinit = _zoomY;
+    _posXinit = _posX;
+    _posYinit = _posY;
+    _modifiedFlag = false;
+    if (event->button() == Qt::LeftButton && !_zoomFlag)
+        _dragFlag = true;
+    else if (event->button() == Qt::RightButton && !_dragFlag)
+        _zoomFlag = true;
 }
 
 void Graphique::mouseReleaseEvent(QMouseEvent *event)
 {
-    if (!filterEventEnabled)
+    if (!_filterEventEnabled)
         return;
 
-    int val = qRound(sizeX / zoomX * ((zoomX - 1) * posX + xInit) - 1);
+    int val = qRound(_sizeX / _zoomX * ((_zoomX - 1) * _posX + _xInit) - 1);
     if (val < 0)
         val = 0;
     if (event->button() == Qt::LeftButton)
     {
-        dragFlag = false;
-        if (!modifiedFlag)
+        _dragFlag = false;
+        if (!_modifiedFlag)
         {
             // Modification start loop
-            if (this->spinStart && this->spinEnd)
+            if (this->_spinStart && this->_spinEnd)
             {
-                if (this->spinEnd->value() > val)
+                if (this->_spinEnd->value() > val)
                 {
-                    this->spinEnd->setMinimum(val);
-                    this->spinStart->setValue(val);
+                    this->_spinEnd->setMinimum(val);
+                    this->_spinStart->setValue(val);
                     emit(startLoopChanged());
                 }
             }
@@ -456,16 +489,16 @@ void Graphique::mouseReleaseEvent(QMouseEvent *event)
     }
     else if (event->button() == Qt::RightButton)
     {
-        zoomFlag = false;
-        if (!modifiedFlag)
+        _zoomFlag = false;
+        if (!_modifiedFlag)
         {
             // Modification end loop
-            if (this->spinStart && this->spinEnd)
+            if (this->_spinStart && this->_spinEnd)
             {
-                if (this->spinStart->value() < val)
+                if (this->_spinStart->value() < val)
                 {
-                    this->spinStart->setMaximum(val);
-                    this->spinEnd->setValue(val);
+                    this->_spinStart->setMaximum(val);
+                    this->_spinEnd->setValue(val);
                     emit(endLoopChanged());
                 }
             }
@@ -476,46 +509,82 @@ void Graphique::mouseReleaseEvent(QMouseEvent *event)
         {
             this->setZoomLine(-1, 0, 0, 0);
             this->setCursor(Qt::ArrowCursor);
+            this->replot();
         }
     }
+    if (!_zoomFlag && !_dragFlag)
+        displayCurrentMousePosition(event->x());
 }
 
 void Graphique::mouseMoveEvent(QMouseEvent *event)
 {
-    if (!filterEventEnabled)
+    if (!_filterEventEnabled)
         return;
 
-    if (zoomFlag)
+    if (_zoomFlag)
     {
-        if (!modifiedFlag)
+        hideCurrentMousePosition();
+        if (!_modifiedFlag)
         {
-            modifiedFlag = true;
+            _modifiedFlag = true;
             this->setCursor(Qt::SizeAllCursor);
         }
-        this->zoom(event->pos());
 
         // Ligne de zoom
-        this->setZoomLine(xInit, yInit,
+        this->setZoomLine(_xInit, _yInit,
                           this->xAxis2->pixelToCoord(event->x()),
                           this->yAxis2->pixelToCoord(event->y()));
+
+        this->zoom(event->pos());
     }
-    else if (dragFlag)
+    else if (_dragFlag)
     {
-        if (!modifiedFlag)
+        hideCurrentMousePosition();
+        if (!_modifiedFlag)
         {
-            modifiedFlag = true;
+            _modifiedFlag = true;
             this->setCursor(Qt::ClosedHandCursor);
         }
         this->drag(event->pos());
     }
+    else
+        displayCurrentMousePosition(event->x());
 }
 
 void Graphique::wheelEvent(QWheelEvent *event)
 {
-    if (!dragFlag && !zoomFlag)
+    if (!_filterEventEnabled)
+        return;
+
+    if (!_dragFlag && !_zoomFlag)
 #if QT_VERSION >= QT_VERSION_CHECK(5, 0, 0)
-        qScrollX->setValue(qScrollX->value() - 0.05 * event->angleDelta().x());
+        _qScrollX->setValue(_qScrollX->value() - 0.05 * event->angleDelta().x());
 #else
         qScrollX->setValue(qScrollX->value() - 0.05 * event->delta());
 #endif
+}
+
+void Graphique::leaveEvent(QEvent *event)
+{
+    if (!_filterEventEnabled)
+        return;
+
+    Q_UNUSED(event);
+    this->hideCurrentMousePosition();
+    this->replot();
+}
+
+void Graphique::displayCurrentMousePosition(int x)
+{
+    if (_sampleRate > 0)
+    {
+        double coordX = qMax(0., this->xAxis->pixelToCoord(x) / _sampleRate);
+        _textMousePosition->setText(QString::number(coordX, 'f', 3) + "s ");
+        this->replot(QCustomPlot::rpImmediate);
+    }
+}
+
+void Graphique::hideCurrentMousePosition()
+{
+    _textMousePosition->setText("");
 }

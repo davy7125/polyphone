@@ -196,7 +196,7 @@ void Page_Smpl::afficher()
     {
         ui->graphe->displayMultipleSelection(false);
         QByteArray baData = _sf2->getData(id, champ_sampleData16);
-        ui->graphe->setData(baData); // prend du temps
+        ui->graphe->setData(baData, sampleRate); // prend du temps
         ui->graphe->setStartLoop(startLoop, false);
         ui->graphe->setEndLoop(endLoop, false);
         ui->graphe->zoomDrag();
