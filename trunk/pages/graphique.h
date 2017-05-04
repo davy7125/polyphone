@@ -35,18 +35,16 @@ class Graphique : public QCustomPlot
     Q_OBJECT
 public:
     explicit Graphique(QWidget *parent = 0);
-
-    // Méthodes publiques
     void clearAll();
-    void setData(QByteArray baData);
-    void linkSliderX(QScrollBar * qScrollX);
-    void linkSpinBoxes(QSpinBox * spinStart, QSpinBox * spinEnd);
+    void setData(QByteArray baData, int sampleRate);
+    void linkSliderX(QScrollBar * _qScrollX);
+    void linkSpinBoxes(QSpinBox * _spinStart, QSpinBox * _spinEnd);
     void zoomDrag();
     void updateStyle();
     void displayMultipleSelection(bool isOn);
 
 public slots:
-    void setPosX(int posX);
+    void setPosX(int _posX);
     void setStartLoop(int pos, bool replot = true);
     void setEndLoop(int pos, bool replot = true);
     void setCurrentSample(int pos);
@@ -61,31 +59,35 @@ protected:
     void mouseReleaseEvent(QMouseEvent *event);
     void mouseMoveEvent(QMouseEvent *event);
     void wheelEvent(QWheelEvent *event);
+    void leaveEvent(QEvent * event);
 
 private:
-    QPen penLecture;
-    double sizeX;
-    bool zoomFlag;
-    bool dragFlag;
-    bool modifiedFlag;
-    double xInit, yInit;
-    double zoomX, zoomY, posX, posY;
-    double zoomXinit, zoomYinit, posXinit, posYinit;
-    QPoint pointInit;
-    bool bFromExt;
-    QScrollBar * qScrollX;
-    QSpinBox * spinStart;
-    QSpinBox * spinEnd;
-    int m_currentPos;
-    bool filterEventEnabled;
-    QCPItemText * textMultipleSelection;
+    QPen _penLecture;
+    double _sizeX;
+    bool _zoomFlag;
+    bool _dragFlag;
+    bool _modifiedFlag;
+    double _xInit, _yInit;
+    double _zoomX, _zoomY, _posX, _posY;
+    double _zoomXinit, _zoomYinit, _posXinit, _posYinit;
+    QPoint _pointInit;
+    bool _bFromExt;
+    QScrollBar * _qScrollX;
+    QSpinBox * _spinStart;
+    QSpinBox * _spinEnd;
+    int _currentPos;
+    bool _filterEventEnabled;
+    QCPItemText * _textMultipleSelection;
+    QCPItemText * _textMousePosition;
     QTime _lastUpdate;
+    int _sampleRate;
 
-    // Méthodes privées
     void zoom(QPoint point);
     void drag(QPoint point);
     void setZoomLine(double x1, double y1, double x2, double y2);
     void plotOverlay();
+    void displayCurrentMousePosition(int x);
+    void hideCurrentMousePosition();
 };
 
 #endif // GRAPHIQUE_H
