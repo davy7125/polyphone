@@ -48,6 +48,7 @@ public:
     void spatialisation();
     void visualize();
     void keyPlayed(int key, int velocity);
+    void displayModInTable();
 
 protected:
     // Attributs protégés

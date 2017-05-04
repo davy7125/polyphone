@@ -434,7 +434,16 @@ void PageTable::afficheMod(EltID id, Champ selectedField)
             idMod.indexMod = i;
             if (!_sf2->get(idMod, champ_hidden).bValue)
             {
-                if (_sf2->get(idMod, champ_sfModDestOper).genValue.wAmount == (quint16)selectedField)
+                Champ champ = _sf2->get(idMod, champ_sfModDestOper).sfGenValue;
+                if (champ == champ_startAddrsCoarseOffset)
+                    champ = champ_startAddrsOffset;
+                else if (champ == champ_endAddrsCoarseOffset)
+                    champ = champ_endAddrsOffset;
+                else if (champ == champ_startloopAddrsCoarseOffset)
+                    champ = champ_startloopAddrsOffset;
+                else if (champ == champ_endloopAddrsCoarseOffset)
+                    champ = champ_endloopAddrsOffset;
+                if (champ == selectedField)
                     index = i;
             }
         }
@@ -548,6 +557,7 @@ void PageTable::afficheMod(EltID id, int selectedIndex)
     this->tableMod->resizeColumnToContents(7);
 
     this->afficheEditMod();
+    this->displayModInTable();
 }
 
 void PageTable::afficheEditMod()
@@ -3192,4 +3202,46 @@ void PageTable::onOpenElement(EltID id)
     _tree->selectNone();
     _tree->select(id, true);
     _tree->scrollToItem(_tree->selectedItems()[0]);
+}
+
+void PageTable::displayModInTable()
+{
+    this->table->resetModDisplay();
+
+    // Mod for the global division
+    for (int i = 0; i < this->table->columnCount(); i++)
+    {
+        EltID id = this->table->getID(i);
+        if (_sf2->isValid(id))
+        {
+            if (!_sf2->get(id, champ_hidden).bValue)
+            {
+                if (id.typeElement == this->contenant)
+                    id.typeElement = this->contenantMod;
+                else
+                    id.typeElement = this->lienMod;
+
+                int modCount = _sf2->count(id);
+                if (modCount > 0)
+                {
+                    QList<int> rows;
+                    for (int j = 0; j < modCount; j++)
+                    {
+                        id.indexMod = j;
+                        Champ champ = _sf2->get(id, champ_sfModDestOper).sfGenValue;
+                        if (champ == champ_startAddrsCoarseOffset)
+                            champ = champ_startAddrsOffset;
+                        else if (champ == champ_endAddrsCoarseOffset)
+                            champ = champ_endAddrsOffset;
+                        else if (champ == champ_startloopAddrsCoarseOffset)
+                            champ = champ_startloopAddrsOffset;
+                        else if (champ == champ_endloopAddrsCoarseOffset)
+                            champ = champ_endloopAddrsOffset;
+                        rows << this->table->getRow(champ);
+                    }
+                    this->table->updateModDisplay(i, rows);
+                }
+            }
+        }
+    }
 }

@@ -38,14 +38,14 @@ TableDelegate::TableDelegate(QTableWidget * table, QObject * parent): QStyledIte
     _table(table),
     _isEditing(false)
 {
-    if (ThemeManager::getInstance()->isDark(ThemeManager::LIST_BACKGROUND, ThemeManager::LIST_TEXT))
-    {
-        _redColor = _table->palette().color(QPalette::BrightText).lighter();
-    }
-    else
-    {
-        _redColor = _table->palette().color(QPalette::BrightText);
-    }
+    QColor color1 = ThemeManager::getInstance()->getColor(ThemeManager::LIST_BACKGROUND);
+    QColor color2 = ThemeManager::getInstance()->getColor(ThemeManager::LIST_TEXT);
+    _modBorderColor = QColor((color1.red() + color2.red()) / 2,
+                             (color1.green() + color2.green()) / 2,
+                             (color1.blue() + color2.blue()) / 2);
+    _modBorderColor2 = QColor((color1.red() * 3 + color2.red()) / 4,
+                              (color1.green() * 3 + color2.green()) / 4,
+                              (color1.blue() * 3 + color2.blue()) / 4);
 }
 
 QWidget * TableDelegate::createEditor(QWidget *parent, const QStyleOptionViewItem &option, const QModelIndex &index) const
@@ -287,15 +287,20 @@ void TableDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option,
     else
     {
         QStyledItemDelegate::paint(painter, option, index);
-    }
 
-    // Display mods
-    if (_modDisplay.contains(index.column()) && _modDisplay[index.column()].contains(index.row()))
-    {
-        QStyleOptionViewItemV4 opt(option);
-        initStyleOption(&opt, index);
-        painter->setPen(QPen(QBrush(_redColor), 2));
-        painter->drawRect(opt.rect);
+        // Display mods
+        if (_modDisplay.contains(index.column()) && _modDisplay[index.column()].contains(index.row()))
+        {
+            QStyleOptionViewItemV4 opt(option);
+            initStyleOption(&opt, index);
+            QRect rect1 = opt.rect;
+
+            painter->setPen(QPen(QBrush(_modBorderColor), 1));
+            painter->drawRect(QRect(rect1.left(), rect1.top(), rect1.width() - 1, rect1.height() - 1));
+
+            painter->setPen(QPen(QBrush(_modBorderColor2), 1));
+            painter->drawRect(QRect(rect1.left() + 1, rect1.top() + 1, rect1.width() - 3, rect1.height() - 3));
+        }
     }
 }
 

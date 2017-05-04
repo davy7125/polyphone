@@ -472,6 +472,15 @@ void TableWidget::updateModDisplay(int column, QList<int> rows)
 
 void TableWidget::selectCell(EltID id, Champ champ)
 {
+    if (champ == champ_startAddrsCoarseOffset)
+        champ = champ_startAddrsOffset;
+    else if (champ == champ_endAddrsCoarseOffset)
+        champ = champ_endAddrsOffset;
+    else if (champ == champ_startloopAddrsCoarseOffset)
+        champ = champ_startloopAddrsOffset;
+    else if (champ == champ_endloopAddrsCoarseOffset)
+        champ = champ_endloopAddrsOffset;
+
     int numRow = getRow(champ);
     int numCol = _columnIds.indexOf(id);
     if (numRow >= 0 && numRow < this->rowCount() && numCol >= 0 && numCol < this->columnCount())
