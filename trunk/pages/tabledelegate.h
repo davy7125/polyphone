@@ -55,7 +55,7 @@ private:
     static const char * DECO_PROPERTY;
     mutable bool _isEditing;
     QMap<int, QList<int> > _modDisplay;
-    QColor _redColor;
+    QColor _modBorderColor, _modBorderColor2;
 };
 
 #endif // TABLEDELEGATE_H
