@@ -46,7 +46,8 @@ Graphique::Graphique(QWidget * parent) : QCustomPlot(parent),
     _spinEnd(NULL),
     _filterEventEnabled(true),
     _textMultipleSelection(NULL),
-    _textMousePosition(NULL),
+    _textPositionL(NULL),
+    _textPositionR(NULL),
     _sampleRate(0)
 {
     // Graphe des données
@@ -85,15 +86,24 @@ Graphique::Graphique(QWidget * parent) : QCustomPlot(parent),
     _textMultipleSelection->setText(trUtf8("Sélection multiple"));
     addItem(_textMultipleSelection);
 
-    // Mouse position
-    _textMousePosition = new QCPItemText(this);
-    _textMousePosition->position->setType(QCPItemPosition::ptAxisRectRatio);
-    _textMousePosition->setPositionAlignment(Qt::AlignRight|Qt::AlignTop);
-    _textMousePosition->position->setCoords(1, 0);
-    _textMousePosition->setTextAlignment(Qt::AlignTop);
-    _textMousePosition->setFont(QFont(font().family(), 10, QFont::Bold));
-    _textMousePosition->setText("");
-    addItem(_textMousePosition);
+    // Positions
+    _textPositionL = new QCPItemText(this);
+    _textPositionL->position->setType(QCPItemPosition::ptAxisRectRatio);
+    _textPositionL->setPositionAlignment(Qt::AlignLeft|Qt::AlignBottom);
+    _textPositionL->position->setCoords(0, 1);
+    _textPositionL->setTextAlignment(Qt::AlignBottom);
+    _textPositionL->setFont(QFont(font().family(), 8, QFont::Bold));
+    _textPositionL->setText("");
+    addItem(_textPositionL);
+
+    _textPositionR = new QCPItemText(this);
+    _textPositionR->position->setType(QCPItemPosition::ptAxisRectRatio);
+    _textPositionR->setPositionAlignment(Qt::AlignRight|Qt::AlignBottom);
+    _textPositionR->position->setCoords(1, 1);
+    _textPositionR->setTextAlignment(Qt::AlignBottom);
+    _textPositionR->setFont(QFont(font().family(), 8, QFont::Bold));
+    _textPositionR->setText("");
+    addItem(_textPositionR);
 
     // Paramétrage des couleurs
     this->updateStyle();
@@ -177,7 +187,8 @@ void Graphique::updateStyle()
     _penLecture.setWidthF(1);
     textColor.setAlpha(180);
     _textMultipleSelection->setColor(textColor);
-    _textMousePosition->setColor(textColor);
+    _textPositionL->setColor(textColor);
+    _textPositionR->setColor(textColor);
 
     this->replot();
 }
@@ -317,6 +328,7 @@ void Graphique::zoomDrag()
     this->yAxis->setRange(offsetY, offsetY + etendueY);
 
     // Mise à jour
+    displayCurrentRange();
     this->replot(QCustomPlot::rpQueued);
     if (!_bFromExt && _qScrollX)
     {
@@ -512,8 +524,6 @@ void Graphique::mouseReleaseEvent(QMouseEvent *event)
             this->replot();
         }
     }
-    if (!_zoomFlag && !_dragFlag)
-        displayCurrentMousePosition(event->x());
 }
 
 void Graphique::mouseMoveEvent(QMouseEvent *event)
@@ -523,7 +533,6 @@ void Graphique::mouseMoveEvent(QMouseEvent *event)
 
     if (_zoomFlag)
     {
-        hideCurrentMousePosition();
         if (!_modifiedFlag)
         {
             _modifiedFlag = true;
@@ -539,7 +548,6 @@ void Graphique::mouseMoveEvent(QMouseEvent *event)
     }
     else if (_dragFlag)
     {
-        hideCurrentMousePosition();
         if (!_modifiedFlag)
         {
             _modifiedFlag = true;
@@ -547,8 +555,6 @@ void Graphique::mouseMoveEvent(QMouseEvent *event)
         }
         this->drag(event->pos());
     }
-    else
-        displayCurrentMousePosition(event->x());
 }
 
 void Graphique::wheelEvent(QWheelEvent *event)
@@ -564,27 +570,22 @@ void Graphique::wheelEvent(QWheelEvent *event)
 #endif
 }
 
-void Graphique::leaveEvent(QEvent *event)
-{
-    if (!_filterEventEnabled)
-        return;
-
-    Q_UNUSED(event);
-    this->hideCurrentMousePosition();
-    this->replot();
-}
-
-void Graphique::displayCurrentMousePosition(int x)
+void Graphique::displayCurrentRange()
 {
     if (_sampleRate > 0)
     {
-        double coordX = qMax(0., this->xAxis->pixelToCoord(x) / _sampleRate);
-        _textMousePosition->setText(QString::number(coordX, 'f', 3) + "s ");
-        this->replot(QCustomPlot::rpImmediate);
-    }
-}
+        double etendueX = _sizeX / _zoomX;
+        double offsetX = (_sizeX - etendueX) * _posX - 1;
 
-void Graphique::hideCurrentMousePosition()
-{
-    _textMousePosition->setText("");
+        double coordX1 = qMax(0., offsetX / _sampleRate);
+        double coordX2 = qMax(0., (offsetX + etendueX) / _sampleRate);
+
+        _textPositionL->setText(" " + QString::number(coordX1, 'f', 3) + "s");
+        _textPositionR->setText(QString::number(coordX2, 'f', 3) + "s ");
+    }
+    else
+    {
+        _textPositionL->setText("");
+        _textPositionR->setText("");
+    }
 }
