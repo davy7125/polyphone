@@ -4,14 +4,15 @@ polyphone (1.9) unstable; urgency=low
   * (new) portuguese translation
   * (new) tool to export the preset list in a text format
   * (improvement) table cells linked to a modulator have a thicker border
+  * (improvement) highlight a modulator corresponding to a cell and vice versa
   * (improvement) glow effect when the virtual keyboard is focused with ctrl+K
   * (improvement) EQ values automatically stored and loaded on startup
-  * (improvement) highlight a modulator corresponding to a cell and vice versa
   * (improvement) the displayed period limits are written in the sample graph
+  * (fix) display of uncommon sample rates
   * (fix) the last change were sometimes not saved if the focus remained in a field
-  * (fix) crash with a drag & drop in the tree
+  * (fix) sometimes a crash occured with a drag & drop in the tree
   * (fix) release bug when using loop + end mode
-  * (fix) the progress bar sometimes remains when loading a small soundfont
+  * (fix) the progress bar sometimes remained when loading a small soundfont
   * (fix) a double-click in the tree didn't expand or collapse the elements
   * (fix) a same file could be loaded twice on windows
   * (fix) sometimes the loop cell couldn't be edited with the mouse
