@@ -244,6 +244,8 @@ void MainWindow::delayedInit()
 
 void MainWindow::closeEvent(QCloseEvent *event)
 {
+    this->setFocus();
+
     // Sauvegarde de la géométrie
     ConfManager::getInstance()->setValue(ConfManager::SECTION_DISPLAY, "dock_width", ui->dockWidget->width());
     ConfManager::getInstance()->setValue(ConfManager::SECTION_DISPLAY, "windowGeometry", saveGeometry());
@@ -305,7 +307,7 @@ void MainWindow::closeEvent(QCloseEvent *event)
                 id.indexSf2 = i;
                 if (!sf2->get(id, champ_hidden).bValue)
                     if (sf2->isEdited(i))
-                        if (sauvegarder(i, 0))
+                        if (sauvegarder(i, false))
                         {
                             event->ignore();
                             return;
@@ -495,6 +497,8 @@ void MainWindow::nouveau()
 
 void MainWindow::Fermer()
 {
+    this->setFocus();
+
     // Fermeture SF2
     if (ui->arborescence->getSelectedItemsNumber() == 0) return;
     if (!ui->arborescence->isSelectedItemsSf2Unique()) return;
@@ -524,9 +528,11 @@ void MainWindow::Fermer()
 
     switch (ret)
     {
-    case QMessageBox::Cancel: return;
+    case QMessageBox::Cancel:
+        return;
     case QMessageBox::Save:
-        if (sauvegarder(id.indexSf2, 0)) return;
+        if (sauvegarder(id.indexSf2, false))
+            return;
     case QMessageBox::Discard:{
         sf2->prepareNewActions();
         // Reprise id si modif
@@ -583,7 +589,7 @@ void MainWindow::sauvegarder()
     if (ui->arborescence->getSelectedItemsNumber() == 0) return;
     if (!ui->arborescence->isSelectedItemsSf2Unique()) return;
     EltID id = ui->arborescence->getFirstID();
-    sauvegarder(id.indexSf2, 0);
+    sauvegarder(id.indexSf2, false);
 }
 
 void MainWindow::sauvegarderSous()
@@ -591,11 +597,16 @@ void MainWindow::sauvegarderSous()
     if (ui->arborescence->getSelectedItemsNumber() == 0) return;
     if (!ui->arborescence->isSelectedItemsSf2Unique()) return;
     EltID id = ui->arborescence->getFirstID();
-    sauvegarder(id.indexSf2, 1);
+    sauvegarder(id.indexSf2, true);
 }
 
 int MainWindow::sauvegarder(int indexSf2, bool saveAs)
 {
+    // Remove the focus from the interface
+    this->setFocus();
+    if (!sf2->isEdited(indexSf2) && !saveAs)
+        return 0;
+
     this->sf2->prepareNewActions();
     EltID id(elementSf2, indexSf2, 0, 0, 0);
     // Avertissement si enregistrement dans une résolution inférieure
@@ -614,7 +625,8 @@ int MainWindow::sauvegarder(int indexSf2, bool saveAs)
         msgBox.button(QMessageBox::Cancel)->setText(trUtf8("&Non"));
         msgBox.setDefaultButton(QMessageBox::Cancel);
         ret = msgBox.exec();
-        if (ret == QMessageBox::Cancel) return 1;
+        if (ret == QMessageBox::Cancel)
+            return 1;
     }
 
     // Compte du nombre de générateurs utilisés
@@ -643,7 +655,8 @@ int MainWindow::sauvegarder(int indexSf2, bool saveAs)
         msgBox.button(QMessageBox::Cancel)->setText(trUtf8("&Annuler"));
         msgBox.setDefaultButton(QMessageBox::Cancel);
         ret = msgBox.exec();
-        if (ret == QMessageBox::Cancel) return 1;
+        if (ret == QMessageBox::Cancel)
+            return 1;
         if (ret == QMessageBox::YesAll)
             ConfManager::getInstance()->setValue(ConfManager::SECTION_WARNINGS, "to_many_generators", false);
     }
@@ -660,9 +673,11 @@ int MainWindow::sauvegarder(int indexSf2, bool saveAs)
         else
             fileName = QFileDialog::getSaveFileName(this, trUtf8("Sauvegarder une soundfont"),
                                                     sf2->getQstr(id, champ_filename), trUtf8("Fichier .sf2 (*.sf2)"));
-        if (fileName.isNull()) return 1;
+        if (fileName.isNull())
+            return 1;
     }
-    else fileName = sf2->getQstr(id, champ_filename);
+    else
+        fileName = sf2->getQstr(id, champ_filename);
     switch (this->sf2->save(indexSf2, fileName))
     {
     case 0:
@@ -998,18 +1013,15 @@ void MainWindow::updateTitle()
         if (sf2->isEdited(id.indexSf2))
         {
             _title = "*" + sf2->getQstr(id, champ_filename);
-            ui->actionEnregistrer->setEnabled(1);
         }
         else
         {
             _title = sf2->getQstr(id, champ_filename);
-            ui->actionEnregistrer->setEnabled(0);
         }
     }
     else
     {
         _title = "";
-        ui->actionEnregistrer->setEnabled(0);
     }
     resizeEvent(NULL);
 }
@@ -1124,12 +1136,13 @@ void MainWindow::updateActions()
     // ACTIVATION, DESACTIVATION DES COMMANDES
     if (fichierUnique)
     {
-        // Actions possibles : fermer, importer, coller, enregistrer sous
+        // Actions possibles : fermer, importer, coller, enregistrer (sous)
         // Nouveau sample, instrument, preset
         ui->actionFermer_le_fichier->setEnabled(true);
         ui->actionImporter->setEnabled(true);
         ui->actionColler->setEnabled(true);
         ui->actionEnregistrer_sous->setEnabled(true);
+        ui->actionEnregistrer->setEnabled(true);
         ui->actionNouveau_preset->setEnabled(true);
         ui->actionNouvel_instrument->setEnabled(true);
 
@@ -1207,8 +1220,9 @@ void MainWindow::updateActions()
         // Actions importer des échantillons
         ui->actionImporter->setEnabled(false);
 
-        // Actions enregistrer sous
+        // Actions enregistrer (sous)
         ui->actionEnregistrer_sous->setEnabled(false);
+        ui->actionEnregistrer->setEnabled(false);
 
         // Nouveau sample, instrument, preset
         ui->actionNouveau_preset->setEnabled(false);
