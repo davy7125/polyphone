@@ -70,6 +70,7 @@ private:
     QRectF getCurrentRect();
 
     Pile_sf2 * _sf2;
+    EltID _defaultID;
 
     // Graphics items
     QGraphicsScene * _scene;
