@@ -195,10 +195,21 @@ void GraphicsViewRange::display(EltID id)
     _currentRectangles.clear();
 
     // Add new ones
-    if (id.typeElement == elementInst)
+    _defaultID = id;
+    switch (id.typeElement)
+    {
+    case elementInst: case elementInstSmpl:
+        _defaultID.typeElement = elementInst;
         id.typeElement = elementInstSmpl;
-    else if (id.typeElement == elementPrst)
+        break;
+    case elementPrst: case elementPrstInst:
+        _defaultID.typeElement = elementPrst;
         id.typeElement = elementPrstInst;
+        break;
+    default:
+        return;
+    }
+
     int count = _sf2->count(id);
     for (int i = 0; i < count; i++)
     {
@@ -266,6 +277,8 @@ void GraphicsViewRange::mousePressEvent(QMouseEvent *event)
             QList<EltID> ids;
             foreach (GraphicsRectangleItem * item, _currentRectangles)
                 ids << item->getID();
+            if (ids.empty())
+                ids << _defaultID;
             divisionsSelected(ids);
         }
     }
