@@ -9,6 +9,7 @@ polyphone (1.9) unstable; urgency=low
   * (improvement) EQ values automatically stored and loaded on startup
   * (improvement) the displayed period limits are written in the sample graph
   * (fix) display of uncommon sample rates
+  * (fix) 8-bit samples were badly imported
   * (fix) the last change were sometimes not saved if the focus remained in a field
   * (fix) sometimes a crash occured with a drag & drop in the tree
   * (fix) release bug when using loop + end mode

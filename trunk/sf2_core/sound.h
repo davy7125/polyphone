@@ -125,8 +125,8 @@ private:
     // Attributs privés
     QString fileName;
     InfoSound _info;
-    QByteArray smpl;
-    QByteArray sm24;
+    QByteArray _smpl;
+    QByteArray _sm24;
 
     // Méthodes privées
     FileType getFileType();
