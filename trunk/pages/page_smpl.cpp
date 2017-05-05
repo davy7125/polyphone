@@ -159,7 +159,14 @@ void Page_Smpl::afficher()
         rootKey = 0;
 
     // Remplissage des informations
-    ui->comboSampleRate->setCurrentIndex(ui->comboSampleRate->findText(QString::number(sampleRate)));
+    while (ui->comboSampleRate->count() > 7)
+        ui->comboSampleRate->removeItem(7);
+    int sampleRateIndex = ui->comboSampleRate->findText(QString::number(sampleRate));
+    if (sampleRateIndex == -1) {
+        ui->comboSampleRate->addItem(QString::number(sampleRate));
+        sampleRateIndex = 7;
+    }
+    ui->comboSampleRate->setCurrentIndex(sampleRateIndex);
     if (nombreElements == 1)
         ui->labelTaille->setText(QString::number(length) + " - " +
                                  QString::number((double)length / sampleRate, 'f', 3) + trUtf8("s", "unit for seconds"));
