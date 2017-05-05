@@ -567,7 +567,9 @@ bool Tree::isSelectedItemsSf2Unique() {if (this->_updateSelectionInfo) updateSel
 bool Tree::isSelectedItemsFamilyUnique() {if (this->_updateSelectionInfo) updateSelectionInfo(); return this->_infoIsSelectedItemsFamilyUnique;}
 EltID Tree::getFirstID()
 {
-    return this->selectedItem(0)->getEltID();
+    if (this->selectedItem(0) != NULL)
+      return this->selectedItem(0)->getEltID();
+    return EltID();
 }
 QList<EltID> Tree::getAllIDs()
 {
