@@ -8,6 +8,7 @@ polyphone (1.9) unstable; urgency=low
   * (improvement) EQ values automatically stored and loaded on startup
   * (improvement) highlight a modulator corresponding to a cell and vice versa
   * (improvement) the displayed period limits are written in the sample graph
+  * (fix) the last change were sometimes not saved if the focus remained in a field
   * (fix) crash with a drag & drop in the tree
   * (fix) release bug when using loop + end mode
   * (fix) the progress bar sometimes remains when loading a small soundfont
