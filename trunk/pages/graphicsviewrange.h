@@ -27,7 +27,6 @@
 
 #include <QGraphicsView>
 #include "pile_sf2.h"
-#include "mainwindow.h"
 class GraphicsSimpleTextItem;
 class GraphicsRectangleItem;
 class GraphicsLegendItem;

@@ -32,6 +32,7 @@
 #include "tablewidget.h"
 #include "tablewidgetmod.h"
 class GraphicsViewRange;
+class EnvelopEditor;
 
 // Spécialisation de page pour inst et prst
 class PageTable : public Page
@@ -72,8 +73,10 @@ protected:
     QPushButton *pushNouveauMod;
     QMenu * _menu;
     QPushButton * _pushCopyMod;
-    QPushButton * _pushRangeMode;
+    QPushButton * _pushRanges;
+    QPushButton * _pushEnvelops;
     GraphicsViewRange * _rangeEditor;
+    EnvelopEditor * _envelopEditor;
 
     void select(EltID id);
     static void remplirComboSource(ComboBox *comboBox);
@@ -101,7 +104,8 @@ private:
     void addGlobal(EltID id, bool multiGlobal);
     void addDivisions(EltID id);
     void formatTable(bool multiGlobal);
-    void afficheRange();
+    void afficheRanges();
+    void afficheEnvelops();
     void afficheMod(EltID id, Champ selectedField);
     void afficheMod(EltID id, int selectedIndex = -1);
     static void addAvailableReceiverMod(ComboBox *combo, EltID id);
@@ -110,7 +114,6 @@ private:
     int limit(int iVal, Champ champ, EltID id);
     void resetChamp(int colonne, Champ champ1, Champ champ2);
     void setOffset(int ligne, int colonne, Champ champ1, Champ champ2);
-    void customizeKeyboard(bool withAllDivisions = false);
     void pasteMod(EltID id, QList<Modulator> modulators);
     QList<Modulator> getModList(EltID id);
 
@@ -138,7 +141,7 @@ protected slots:
     void duplicateMod(QList<int> listIndex);
     void actionBegin();
     void actionFinished();
-    void updateKeyboard();
+    void customizeKeyboard();
     void onOpenElement(EltID id);
 
 private slots:

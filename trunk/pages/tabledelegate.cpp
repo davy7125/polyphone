@@ -274,7 +274,11 @@ void TableDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option,
     if (isLoop)
     {
         // Background
+#if QT_VERSION >= QT_VERSION_CHECK(5, 7, 0)
+        QStyleOptionViewItem opt(option);
+#else
         QStyleOptionViewItemV4 opt(option);
+#endif
         initStyleOption(&opt, index);
         painter->fillRect(option.rect, opt.backgroundBrush);
 
@@ -291,7 +295,11 @@ void TableDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option,
         // Display mods
         if (_modDisplay.contains(index.column()) && _modDisplay[index.column()].contains(index.row()))
         {
-            QStyleOptionViewItemV4 opt(option);
+#if QT_VERSION >= QT_VERSION_CHECK(5, 7, 0)
+        QStyleOptionViewItem opt(option);
+#else
+        QStyleOptionViewItemV4 opt(option);
+#endif
             initStyleOption(&opt, index);
             QRect rect1 = opt.rect;
 

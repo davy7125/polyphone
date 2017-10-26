@@ -32,6 +32,7 @@
 #include "dialog_duplication.h"
 #include "dialogselection.h"
 #include "graphicsviewrange.h"
+#include "envelopeditor.h"
 #include "thememanager.h"
 #include "duplicationtool.h"
 #include "utils.h"
@@ -48,12 +49,13 @@ PageTable::PageTable(TypePage typePage, QWidget *parent) : Page(typePage, parent
 
 void PageTable::afficher()
 {
+    customizeKeyboard();
+
     // Prepare page
-    if (_pushRangeMode->isChecked())
-    {
-        updateKeyboard();
-        afficheRange();
-    }
+    if (_pushRanges->isChecked())
+        afficheRanges();
+    else if (_pushEnvelops->isChecked())
+        afficheEnvelops();
     else
         afficheTable();
 
@@ -413,9 +415,14 @@ void PageTable::formatTable(bool multiGlobal)
     this->table->hideRow(0);
 }
 
-void PageTable::afficheRange()
+void PageTable::afficheRanges()
 {
     _rangeEditor->display(_tree->getFirstID());
+}
+
+void PageTable::afficheEnvelops()
+{
+    _envelopEditor->display(_tree->getAllIDs());
 }
 
 void PageTable::afficheMod(EltID id, Champ selectedField)
@@ -1508,32 +1515,45 @@ void PageTable::selected()
     _tree->blockSignals(false);
 }
 
-void PageTable::updateKeyboard()
-{
-    customizeKeyboard(true);
-}
-
-void PageTable::customizeKeyboard(bool withAllDivisions)
+void PageTable::customizeKeyboard()
 {
     _mainWindow->clearKeyboardCustomisation();
 
-    QList<int> selectedColumns;
-    QList<QTableWidgetItem*> listSelectedItems = table->selectedItems();
-    foreach (QTableWidgetItem * item, listSelectedItems)
-        if (!selectedColumns.contains(item->column()))
-            selectedColumns << item->column();
-
-    // Si aucune colonne n'est sélectionnée, on affiche toutes les étendues
-    if (withAllDivisions || selectedColumns.isEmpty())
+    QList<EltID> ids;
+    if (_pushRanges->isChecked() || _pushEnvelops->isChecked())
     {
-        selectedColumns.clear();
-        selectedColumns << 0;
+        ids = _tree->getAllIDs();
+    }
+    else
+    {
+        QList<int> selectedColumns;
+        QList<QTableWidgetItem*> listSelectedItems = table->selectedItems();
+        foreach (QTableWidgetItem * item, listSelectedItems)
+            if (!selectedColumns.contains(item->column()))
+                selectedColumns << item->column();
+
+        // Si aucune colonne n'est sélectionnée, on affiche toutes les étendues
+        if (selectedColumns.isEmpty())
+            selectedColumns << 0;
+
+        foreach (int selectedColumn, selectedColumns)
+            ids << this->table->getID(selectedColumn);
+    }
+
+    // If the global division is in the list, exclude the rest
+    foreach (EltID id, ids)
+    {
+        if (id.typeElement == elementInst || id.typeElement == elementPrst)
+        {
+            ids.clear();
+            ids << id;
+            break;
+        }
     }
 
     // Affichage des étendues et rootkeys des divisions sélectionnées
-    foreach (int colonne, selectedColumns)
+    foreach (EltID id, ids)
     {
-        EltID id = this->table->getID(colonne);
         if (id.typeElement == elementInstSmpl || id.typeElement == elementPrstInst)
         {
             int rootKey = -1;
@@ -1546,7 +1566,7 @@ void PageTable::customizeKeyboard(bool withAllDivisions)
                     EltID idSmpl = id;
                     idSmpl.typeElement = elementSmpl;
                     idSmpl.indexElt = _sf2->get(id, champ_sampleID).wValue;
-                    rootKey = _sf2->get(idSmpl, champ_byOriginalPitch).wValue;
+                    rootKey = _sf2->get(idSmpl, champ_byOriginalPitch).bValue;
                 }
             }
 
@@ -3182,7 +3202,8 @@ void PageTable::keyPlayed(int key, int velocity)
     }
 
     // Visualization on the range editor
-    _rangeEditor->playKey(key, velocity);
+    if (_pushRanges->isChecked())
+        _rangeEditor->playKey(key, velocity);
 }
 
 void PageTable::onOpenElement(EltID id)
