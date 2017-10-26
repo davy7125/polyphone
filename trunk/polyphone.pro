@@ -246,7 +246,11 @@ SOURCES	+= main.cpp \
     pages/tablecombobox.cpp \
     tools/dialog_change_volume.cpp \
     tools/duplicationtool.cpp \
-    tools/dialog_exportlist.cpp
+    tools/dialog_exportlist.cpp \
+    pages/graphicsviewenvelop.cpp \
+    pages/envelopeditor.cpp \
+    pages/envelop.cpp \
+    sf2_core/parameter.cpp
 
 HEADERS  += mainwindow.h \
     sf2_core/sf2_types.h \
@@ -341,7 +345,11 @@ HEADERS  += mainwindow.h \
     tools/dialog_change_volume.h \
     tools/duplicationtool.h \
     tools/dialog_exportlist.h \
-    gui_divers/modalprogressdialog.h
+    gui_divers/modalprogressdialog.h \
+    pages/graphicsviewenvelop.h \
+    pages/envelopeditor.h \
+    pages/envelop.h \
+    sf2_core/parameter.h
 
 FORMS    += mainwindow.ui \
     configuration/config.ui \
@@ -369,7 +377,8 @@ FORMS    += mainwindow.ui \
     tools/dialog_command.ui \
     tools/dialog_filter_frequencies.ui \
     tools/dialog_change_volume.ui \
-    tools/dialog_exportlist.ui
+    tools/dialog_exportlist.ui \
+    pages/envelopeditor.ui
 
 RESOURCES += ressources.qrc \
     clavier/pianokeybd.qrc
@@ -408,10 +417,10 @@ ExtraCompiler.output = ${QMAKE_VAR_OBJECTS_DIR}${QMAKE_FILE_IN_BASE}$${QMAKE_EXT
 win32 {
     ExtraCompiler.commands = $${QMAKE_CXX} -D__LITTLE_ENDIAN__ -MD -arch:IA32 -D_CRT_SECURE_NO_WARNINGS $(INCPATH) -c ${QMAKE_FILE_IN} -Fo${QMAKE_FILE_OUT}
 }
-unix:!macx {
+equals(QMAKE_CXX, g++) {
     ExtraCompiler.commands = $${QMAKE_CXX} -fPIC -D__LITTLE_ENDIAN__ -mfpmath=387 $(INCPATH) -c ${QMAKE_FILE_IN} -o ${QMAKE_FILE_OUT}
 }
-macx {
+equals(QMAKE_CXX, clang++) {
     ExtraCompiler.commands = $${QMAKE_CXX} $(CXXFLAGS) -D__LITTLE_ENDIAN__ -mno-sse -mfpmath=387 $(INCPATH) -c ${QMAKE_FILE_IN} -o ${QMAKE_FILE_OUT}
 }
 QMAKE_EXTRA_COMPILERS += ExtraCompiler

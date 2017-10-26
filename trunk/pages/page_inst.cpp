@@ -59,8 +59,10 @@ Page_Inst::Page_Inst(QWidget *parent) :
     this->comboSource2 = ui->comboSource2;
     this->comboDestination = ui->comboDestination;
     _pushCopyMod = ui->pushCopyMod;
-    _pushRangeMode = ui->pushRangeMode;
+    _pushRanges = ui->pushRanges;
+    _pushEnvelops = ui->pushEnvelops;
     _rangeEditor = ui->rangeEditor;
+    _envelopEditor = ui->envelopEditor;
 
     // Remplissage de comboDestination
     for (int i = 0; i < 48; i++)
@@ -76,8 +78,9 @@ Page_Inst::Page_Inst(QWidget *parent) :
     _menu->addAction("", this, SLOT(duplicateMod()));
     _menu->addAction("", this, SLOT(copyMod()));
 
-    // Initialisation édition étendues
+    // Initialisation édition étendues, enveloppes
     ui->rangeEditor->init(_sf2);
+    ui->envelopEditor->init(_sf2);
 
 #ifdef Q_OS_MAC
     this->table->setStyleSheet("QHeaderView::section:horizontal{padding: 4px 10px 4px 10px;}");
@@ -91,10 +94,11 @@ Page_Inst::Page_Inst(QWidget *parent) :
     connect(this->table, SIGNAL(actionBegin()), this, SLOT(actionBegin()));
     connect(this->table, SIGNAL(actionFinished()), this, SLOT(actionFinished()));
     connect(this->table, SIGNAL(openElement(EltID)), this, SLOT(onOpenElement(EltID)));
-    connect(ui->rangeEditor, SIGNAL(updateKeyboard()), this, SLOT(updateKeyboard()));
+    connect(ui->rangeEditor, SIGNAL(updateKeyboard()), this, SLOT(customizeKeyboard()));
     connect(ui->rangeEditor, SIGNAL(divisionUpdated()), this, SLOT(updateMainwindow()));
     connect(ui->rangeEditor, SIGNAL(keyTriggered(int,int)), this, SLOT(playKey(int, int)));
     connect(ui->rangeEditor, SIGNAL(divisionsSelected(QList<EltID>)), this, SLOT(selectInTree(QList<EltID>)));
+    connect(ui->envelopEditor, SIGNAL(valueChanged()), this, SLOT(updateMainwindow()));
 }
 Page_Inst::~Page_Inst()
 {
@@ -112,15 +116,15 @@ void Page_Inst::afficher()
     QList<EltID> ids = this->getUniqueInstOrPrst(error, false, false);
     if (ids.count() > 1)
     {
-        ui->pushRangeMode->setChecked(false);
-        ui->pushRangeMode->setEnabled(false);
+        ui->pushRanges->setChecked(false);
+        ui->pushRanges->setEnabled(false);
         ui->stackedWidget->setCurrentIndex(0);
 
         ui->labelPrst->setText("");
     }
     else
     {
-        ui->pushRangeMode->setEnabled(true);
+        ui->pushRanges->setEnabled(true);
 
         // Liste des presets qui utilisent l'instrument
         EltID id = _tree->getFirstID();
@@ -1031,12 +1035,21 @@ QByteArray Page_Inst::addSampleData(QByteArray baData1, QByteArray baData2, doub
     return baData1;
 }
 
-void Page_Inst::on_pushRangeMode_clicked()
+void Page_Inst::on_pushTable_clicked()
 {
-    if (ui->pushRangeMode->isChecked())
-        ui->stackedWidget->setCurrentIndex(1);
-    else
-        ui->stackedWidget->setCurrentIndex(0);
+    ui->stackedWidget->setCurrentIndex(0);
+    PageTable::afficher();
+}
+
+void Page_Inst::on_pushRanges_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(1);
+    PageTable::afficher();
+}
+
+void Page_Inst::on_pushEnvelops_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(2);
     PageTable::afficher();
 }
 

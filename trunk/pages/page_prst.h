@@ -34,7 +34,7 @@ namespace Ui
 }
 
 
-class SpinBox; // Déclaration anticipée
+class SpinBox;
 
 class Page_Prst : public PageTable
 {
@@ -51,7 +51,8 @@ public slots:
     void setPreset();
 
 private slots:
-    void on_pushRangeMode_clicked();
+    void on_pushTable_clicked();
+    void on_pushRanges_clicked();
 
 private:
     Ui::Page_Prst *ui;
@@ -62,7 +63,6 @@ class TableWidgetPrst : public TableWidget
 {
     Q_OBJECT
 public:
-    // Constructeur
     TableWidgetPrst(QWidget *parent = 0);
     ~TableWidgetPrst();
     // Association champ - ligne
@@ -76,12 +76,13 @@ class SpinBox : public QSpinBox
 {
     Q_OBJECT
 public:
-    // Constructeur
     SpinBox(QWidget *parent = 0) : QSpinBox(parent) {}
     // Initialisation du sf2
     void init(Page_Prst *page) {this->page = page;}
+
 public slots:
     virtual void stepBy(int steps) {this->page->spinUpDown(steps, this);}
+
 private:
     Page_Prst *page;
 };

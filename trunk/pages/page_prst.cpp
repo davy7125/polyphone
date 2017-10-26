@@ -52,7 +52,7 @@ Page_Prst::Page_Prst(QWidget *parent) :
     this->comboSource2 = ui->comboSource2;
     this->comboDestination = ui->comboDestination;
     _pushCopyMod = ui->pushCopyMod;
-    _pushRangeMode = ui->pushRangeMode;
+    _pushRanges = ui->pushRanges;
     _rangeEditor = ui->rangeEditor;
 
     // Remplissage de comboDestination
@@ -88,7 +88,7 @@ Page_Prst::Page_Prst(QWidget *parent) :
     connect(this->table, SIGNAL(actionBegin()), this, SLOT(actionBegin()));
     connect(this->table, SIGNAL(actionFinished()), this, SLOT(actionFinished()));
     connect(this->table, SIGNAL(openElement(EltID)), this, SLOT(onOpenElement(EltID)));
-    connect(ui->rangeEditor, SIGNAL(updateKeyboard()), this, SLOT(updateKeyboard()));
+    connect(ui->rangeEditor, SIGNAL(updateKeyboard()), this, SLOT(customizeKeyboard()));
     connect(ui->rangeEditor, SIGNAL(divisionUpdated()), this, SLOT(updateMainwindow()));
     connect(ui->rangeEditor, SIGNAL(keyTriggered(int,int)), this, SLOT(playKey(int, int)));
     connect(ui->rangeEditor, SIGNAL(divisionsSelected(QList<EltID>)), this, SLOT(selectInTree(QList<EltID>)));
@@ -113,13 +113,13 @@ void Page_Prst::afficher()
     {
         ui->horizontalFrame->setEnabled(false);
         ui->frameModulator->setEnabled(false);
-        ui->pushRangeMode->setChecked(false);
-        ui->pushRangeMode->setEnabled(false);
+        ui->pushRanges->setChecked(false);
+        ui->pushRanges->setEnabled(false);
         ui->stackedWidget->setCurrentIndex(0);
     }
     else if (!ids.isEmpty())
     {
-        ui->pushRangeMode->setEnabled(true);
+        ui->pushRanges->setEnabled(true);
         ui->horizontalFrame->setEnabled(true);
         ui->frameModulator->setEnabled(true);
         EltID id = ids.first();
@@ -362,11 +362,14 @@ void Page_Prst::setPreset()
     _preparation = 0;
 }
 
-void Page_Prst::on_pushRangeMode_clicked()
+void Page_Prst::on_pushTable_clicked()
 {
-    if (ui->pushRangeMode->isChecked())
-        ui->stackedWidget->setCurrentIndex(1);
-    else
-        ui->stackedWidget->setCurrentIndex(0);
+    ui->stackedWidget->setCurrentIndex(0);
+    PageTable::afficher();
+}
+
+void Page_Prst::on_pushRanges_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(1);
     PageTable::afficher();
 }

@@ -13,10 +13,7 @@
   <property name="windowTitle">
    <string notr="true">Form</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout" stretch="1,0">
-   <property name="spacing">
-    <number>0</number>
-   </property>
+  <layout class="QGridLayout" name="gridLayout_5">
    <property name="leftMargin">
     <number>6</number>
    </property>
@@ -29,7 +26,10 @@
    <property name="bottomMargin">
     <number>6</number>
    </property>
-   <item>
+   <property name="verticalSpacing">
+    <number>3</number>
+   </property>
+   <item row="0" column="0">
     <widget class="QFrame" name="frame_5">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Ignored" vsizetype="Preferred">
@@ -66,7 +66,7 @@
        <number>0</number>
       </property>
       <property name="bottomMargin">
-       <number>3</number>
+       <number>0</number>
       </property>
       <item>
        <widget class="QLabel" name="labelPrst">
@@ -113,14 +113,82 @@
        </spacer>
       </item>
       <item>
-       <widget class="QPushButton" name="pushRangeMode">
+       <widget class="QPushButton" name="pushTable">
         <property name="focusPolicy">
          <enum>Qt::NoFocus</enum>
         </property>
+        <property name="toolTip">
+         <string>Table</string>
+        </property>
         <property name="text">
-         <string>Éditer étendues</string>
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset resource="../ressources.qrc">
+          <normaloff>:/icones/table</normaloff>:/icones/table</iconset>
         </property>
         <property name="checkable">
+         <bool>true</bool>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+        <property name="autoExclusive">
+         <bool>true</bool>
+        </property>
+        <property name="flat">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pushRanges">
+        <property name="focusPolicy">
+         <enum>Qt::NoFocus</enum>
+        </property>
+        <property name="toolTip">
+         <string>Étendues</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset resource="../ressources.qrc">
+          <normaloff>:/icones/range</normaloff>:/icones/range</iconset>
+        </property>
+        <property name="checkable">
+         <bool>true</bool>
+        </property>
+        <property name="autoExclusive">
+         <bool>true</bool>
+        </property>
+        <property name="flat">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pushEnvelops">
+        <property name="focusPolicy">
+         <enum>Qt::NoFocus</enum>
+        </property>
+        <property name="toolTip">
+         <string>Enveloppes</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset resource="../ressources.qrc">
+          <normaloff>:/icones/adsr</normaloff>:/icones/adsr</iconset>
+        </property>
+        <property name="checkable">
+         <bool>true</bool>
+        </property>
+        <property name="autoExclusive">
+         <bool>true</bool>
+        </property>
+        <property name="flat">
          <bool>true</bool>
         </property>
        </widget>
@@ -128,7 +196,7 @@
      </layout>
     </widget>
    </item>
-   <item>
+   <item row="1" column="0">
     <widget class="QStackedWidget" name="stackedWidget">
      <property name="currentIndex">
       <number>0</number>
@@ -992,7 +1060,26 @@
         <number>0</number>
        </property>
        <item row="0" column="0">
-        <widget class="GraphicsViewRange" name="rangeEditor" native="true"/>
+        <widget class="GraphicsViewRange" name="rangeEditor"/>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="page_3">
+      <layout class="QGridLayout" name="gridLayout_6">
+       <property name="leftMargin">
+        <number>0</number>
+       </property>
+       <property name="topMargin">
+        <number>0</number>
+       </property>
+       <property name="rightMargin">
+        <number>0</number>
+       </property>
+       <property name="bottomMargin">
+        <number>0</number>
+       </property>
+       <item row="0" column="0">
+        <widget class="EnvelopEditor" name="envelopEditor" native="true"/>
        </item>
       </layout>
      </widget>
@@ -1001,12 +1088,6 @@
   </layout>
  </widget>
  <customwidgets>
-  <customwidget>
-   <class>GraphicsViewRange</class>
-   <extends>QWidget</extends>
-   <header>graphicsviewrange.h</header>
-   <container>1</container>
-  </customwidget>
   <customwidget>
    <class>TableWidgetMod</class>
    <extends>QTableWidget</extends>
@@ -1038,6 +1119,18 @@
    <class>TableWidgetInst</class>
    <extends>QTableWidget</extends>
    <header>page_inst.h</header>
+  </customwidget>
+  <customwidget>
+   <class>GraphicsViewRange</class>
+   <extends>QGraphicsView</extends>
+   <header>graphicsviewrange.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>EnvelopEditor</class>
+   <extends>QWidget</extends>
+   <header>envelopeditor.h</header>
+   <container>1</container>
   </customwidget>
  </customwidgets>
  <resources>
