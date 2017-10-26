@@ -52,7 +52,9 @@ int launchApplication(Options &options, QApplication &a)
 
     // Application style
     QApplication::setStyle(QStyleFactory::create("Fusion"));
-    qApp->setPalette(ThemeManager::getInstance()->getPalette());
+    try {
+        qApp->setPalette(ThemeManager::getInstance()->getPalette());
+    } catch (...) { /* bug with mac */ }
 
     // Additional types used in signals
     qRegisterMetaType<EltID>("EltID");
