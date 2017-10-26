@@ -1847,8 +1847,8 @@ void Page_Smpl::autoTune(EltID id, int &pitch, int &correction)
     }
     else
     {
-        pitch = _sf2->get(id, champ_byOriginalPitch).wValue;
-        correction = _sf2->get(id, champ_chPitchCorrection).wValue;
+        pitch = _sf2->get(id, champ_byOriginalPitch).bValue;
+        correction = _sf2->get(id, champ_chPitchCorrection).cValue;
     }
 }
 

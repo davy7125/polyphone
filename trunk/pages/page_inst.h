@@ -55,7 +55,9 @@ private slots:
     void release(EltID id, double duree36, double division, double deTune);
     void transposer(double ton, bool adaptKeyRange);
     void transposer(EltID idInstSmpl, double ton, bool adaptKeyRange);
-    void on_pushRangeMode_clicked();
+    void on_pushTable_clicked();
+    void on_pushRanges_clicked();
+    void on_pushEnvelops_clicked();
 
 private:
     Ui::Page_Inst *ui;
@@ -72,7 +74,6 @@ class TableWidgetInst : public TableWidget
 {
     Q_OBJECT
 public:
-    // Constructeur
     TableWidgetInst(QWidget *parent = 0);
     ~TableWidgetInst();
 

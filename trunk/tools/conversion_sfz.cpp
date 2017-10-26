@@ -188,8 +188,8 @@ void ConversionSfz::exportPrst(QString dir, EltID id, bool presetPrefix)
                             if (_sf2->get(idSmpl, champ_dwStartLoop).dwValue == _sf2->get(idSmplLinked, champ_dwStartLoop).dwValue &&
                                 _sf2->get(idSmpl, champ_dwEndLoop).dwValue == _sf2->get(idSmplLinked, champ_dwEndLoop).dwValue &&
                                 _sf2->get(idSmpl, champ_dwLength).dwValue == _sf2->get(idSmplLinked, champ_dwLength).dwValue &&
-                                _sf2->get(idSmpl, champ_chPitchCorrection).dwValue == _sf2->get(idSmplLinked, champ_chPitchCorrection).dwValue &&
-                                _sf2->get(idSmpl, champ_byOriginalPitch).dwValue == _sf2->get(idSmplLinked, champ_byOriginalPitch).dwValue &&
+                                _sf2->get(idSmpl, champ_chPitchCorrection).cValue == _sf2->get(idSmplLinked, champ_chPitchCorrection).cValue &&
+                                _sf2->get(idSmpl, champ_byOriginalPitch).bValue == _sf2->get(idSmplLinked, champ_byOriginalPitch).bValue &&
                                 _sf2->get(idSmpl, champ_dwSampleRate).dwValue == _sf2->get(idSmplLinked, champ_dwSampleRate).dwValue)
                             {
                                 // Recherche d'un instSmpl correspondant exactement à l'autre canal

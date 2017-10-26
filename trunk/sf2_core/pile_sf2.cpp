@@ -184,7 +184,7 @@ bool Pile_sf2::isSet(EltID id, Champ champ)
 Valeur Pile_sf2::get(EltID id, Champ champ)
 {
     Valeur value;
-    value.bValue = 0;
+    value.dwValue = 0;
     if (!this->isValid(id, champ == champ_hidden))
         return value;
 

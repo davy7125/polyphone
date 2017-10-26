@@ -47,7 +47,7 @@ const double GraphicsViewRange::OFFSET = -0.5;
 // 150: zoom line
 
 GraphicsViewRange::GraphicsViewRange(QWidget *parent) : QGraphicsView(parent),
-    _scene(new QGraphicsScene(OFFSET - MARGIN, OFFSET - MARGIN, WIDTH + 2 * MARGIN, WIDTH + 2 * MARGIN)),
+    _scene(new QGraphicsScene(OFFSET, OFFSET, WIDTH, WIDTH)),
     _legendItem(NULL),
     _legendItem2(NULL),
     _zoomLine(NULL),
@@ -280,6 +280,7 @@ void GraphicsViewRange::mousePressEvent(QMouseEvent *event)
             if (ids.empty())
                 ids << _defaultID;
             divisionsSelected(ids);
+            updateKeyboard();
         }
     }
 
@@ -307,7 +308,7 @@ void GraphicsViewRange::mouseReleaseEvent(QMouseEvent *event)
             if (_moveOccured)
             {
                 /// Save the changes
-                _sf2->prepareNewActions(false); // False because we can't the id again at this stage, if some old actions delete items
+                _sf2->prepareNewActions(false); // False because we can't find the id again at this stage, if some old actions delete items
                 foreach (GraphicsRectangleItem * item, _currentRectangles)
                     item->saveChanges();
                 divisionUpdated();

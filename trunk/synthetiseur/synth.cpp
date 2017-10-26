@@ -194,7 +194,7 @@ void Synth::play_sub(int type, int idSf2, int idElt, int note, int velocity, Voi
                 this->play(0, idSf2, m_sf2->get(idSmpl, champ_wSampleLink).wValue, -2, 127);
 
             // Modification pitch du sinus
-            _sinus.setPitch(m_sf2->get(idSmpl, champ_byOriginalPitch).wValue);
+            _sinus.setPitch(m_sf2->get(idSmpl, champ_byOriginalPitch).bValue);
             if (_isSinusEnabled)
                 _sinus.on();
             _sampleRunning = true;
