@@ -130,7 +130,13 @@
       <item>
        <widget class="QScrollBar" name="sliderGraphe">
         <property name="maximum">
-         <number>1000</number>
+         <number>0</number>
+        </property>
+        <property name="singleStep">
+         <number>200</number>
+        </property>
+        <property name="pageStep">
+         <number>10000</number>
         </property>
         <property name="orientation">
          <enum>Qt::Horizontal</enum>

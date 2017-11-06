@@ -77,7 +77,8 @@ private:
 
     void enableEditor(bool isEnabled);
     void stopSignals(bool isStopped);
-    void addEnvelop(EltID id, int index);
+    void addEnvelop(EltID id, bool isVolume, bool isMain);
+    void addSample(EltID idInstSmpl);
     double computeValue(EltID id, Champ champ, bool &isOverriden);
     void processEdit(Champ champ, double value);
     void processClear(Champ champ);
