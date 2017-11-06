@@ -54,7 +54,7 @@ void PageTable::afficher()
     // Prepare page
     if (_pushRanges->isChecked())
         afficheRanges();
-    else if (_pushEnvelops->isChecked())
+    else if (_pushEnvelops != NULL && _pushEnvelops->isChecked())
         afficheEnvelops();
     else
         afficheTable();
@@ -422,7 +422,8 @@ void PageTable::afficheRanges()
 
 void PageTable::afficheEnvelops()
 {
-    _envelopEditor->display(_tree->getAllIDs());
+    if (_envelopEditor != NULL)
+        _envelopEditor->display(_tree->getAllIDs());
 }
 
 void PageTable::afficheMod(EltID id, Champ selectedField)
@@ -1520,7 +1521,7 @@ void PageTable::customizeKeyboard()
     _mainWindow->clearKeyboardCustomisation();
 
     QList<EltID> ids;
-    if (_pushRanges->isChecked() || _pushEnvelops->isChecked())
+    if (_pushRanges->isChecked() || (_pushEnvelops != NULL && _pushEnvelops->isChecked()))
     {
         ids = _tree->getAllIDs();
     }

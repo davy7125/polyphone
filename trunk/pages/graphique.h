@@ -40,7 +40,6 @@ public:
     void linkSliderX(QScrollBar * _qScrollX);
     void linkSpinBoxes(QSpinBox * _spinStart, QSpinBox * _spinEnd);
     void zoomDrag();
-    void updateStyle();
     void displayMultipleSelection(bool isOn);
 
 public slots:
@@ -82,6 +81,7 @@ private:
     QTime _lastUpdate;
     int _sampleRate;
 
+    void updateStyle();
     void zoom(QPoint point);
     void drag(QPoint point);
     void setZoomLine(double x1, double y1, double x2, double y2);
