@@ -25,6 +25,7 @@
 #include "page_prst.h"
 #include "ui_page_prst.h"
 #include "mainwindow.h"
+#include "thememanager.h"
 #include <QMenu>
 
 // Constructeur, destructeur
@@ -92,6 +93,12 @@ Page_Prst::Page_Prst(QWidget *parent) :
     connect(ui->rangeEditor, SIGNAL(divisionUpdated()), this, SLOT(updateMainwindow()));
     connect(ui->rangeEditor, SIGNAL(keyTriggered(int,int)), this, SLOT(playKey(int, int)));
     connect(ui->rangeEditor, SIGNAL(divisionsSelected(QList<EltID>)), this, SLOT(selectInTree(QList<EltID>)));
+
+    if (ThemeManager::getInstance()->isDark(ThemeManager::LIST_BACKGROUND, ThemeManager::LIST_TEXT))
+    {
+        ui->pushTable->setIcon(QIcon(":/icones/table_w"));
+        ui->pushRanges->setIcon(QIcon(":/icones/range_w"));
+    }
 }
 Page_Prst::~Page_Prst()
 {
@@ -103,19 +110,25 @@ void Page_Prst::setModVisible(bool visible)
 }
 void Page_Prst::afficher()
 {
-    PageTable::afficher();
-
     bool error;
     QList<EltID> ids = this->getUniqueInstOrPrst(error, false, false);
+
+    if (ids.count() > 1)
+    {
+        ui->pushTable->blockSignals(true);
+        ui->pushTable->setChecked(true);
+        ui->pushTable->blockSignals(false);
+        ui->stackedWidget->setCurrentIndex(0);
+    }
+
+    PageTable::afficher();
 
     _preparation = true;
     if (ids.count() > 1)
     {
         ui->horizontalFrame->setEnabled(false);
         ui->frameModulator->setEnabled(false);
-        ui->pushRanges->setChecked(false);
         ui->pushRanges->setEnabled(false);
-        ui->stackedWidget->setCurrentIndex(0);
     }
     else if (!ids.isEmpty())
     {

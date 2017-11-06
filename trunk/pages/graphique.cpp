@@ -333,10 +333,10 @@ void Graphique::zoomDrag()
     if (!_bFromExt && _qScrollX)
     {
         // Mise à jour du scrollbar
-        double valMax = ((_zoomX - 1.) * _sizeX) / 10000;
         _qScrollX->blockSignals(true);
-        _qScrollX->setRange(0, valMax);
-        _qScrollX->setValue(valMax*_posX);
+        _qScrollX->setPageStep(10000. / _zoomX);
+        _qScrollX->setRange(0, 10000. - _qScrollX->pageStep());
+        _qScrollX->setValue(_qScrollX->maximum() * _posX);
         _qScrollX->blockSignals(false);
     }
 }
@@ -564,9 +564,9 @@ void Graphique::wheelEvent(QWheelEvent *event)
 
     if (!_dragFlag && !_zoomFlag)
 #if QT_VERSION >= QT_VERSION_CHECK(5, 0, 0)
-        _qScrollX->setValue(_qScrollX->value() - 0.05 * event->angleDelta().x());
+        _qScrollX->setValue(_qScrollX->value() - 0.2 * event->angleDelta().x());
 #else
-        qScrollX->setValue(qScrollX->value() - 0.05 * event->delta());
+        qScrollX->setValue(qScrollX->value() - 0.2 * event->delta());
 #endif
 }
 

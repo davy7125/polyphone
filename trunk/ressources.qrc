@@ -113,6 +113,9 @@
         <file alias="note_off.png">ressources/note_off.png</file>
         <file alias="note_on.png">ressources/note_on.png</file>
         <file alias="revert.png">ressources/revert.png</file>
+        <file alias="adsr_w">ressources/adsr_w.png</file>
+        <file alias="range_w">ressources/range_w.png</file>
+        <file alias="table_w">ressources/table_w.png</file>
     </qresource>
     <qresource prefix="/traductions">
         <file>ressources/traductions/polyphone_en.qm</file>

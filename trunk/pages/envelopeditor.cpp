@@ -25,6 +25,7 @@
 #include "envelopeditor.h"
 #include "ui_envelopeditor.h"
 #include "parameter.h"
+#include "thememanager.h"
 #include <qmath.h>
 
 EnvelopEditor::EnvelopEditor(QWidget *parent) :
@@ -34,6 +35,36 @@ EnvelopEditor::EnvelopEditor(QWidget *parent) :
     _isVolume(true)
 {
     ui->setupUi(this);
+    ui->graphicsView->linkSliderX(ui->sliderGraph);
+    connect(ui->sliderGraph, SIGNAL(valueChanged(int)), ui->graphicsView, SLOT(setPosX(int)));
+
+    QColor redColor;
+    QColor greenColor;
+    if (ThemeManager::getInstance()->isDark(ThemeManager::LIST_BACKGROUND, ThemeManager::LIST_TEXT))
+    {
+        redColor = this->palette().color(QPalette::BrightText);
+        greenColor = this->palette().color(QPalette::NoRole);
+    }
+    else
+    {
+        redColor = this->palette().color(QPalette::BrightText).lighter();
+        greenColor = this->palette().color(QPalette::NoRole).lighter();
+    }
+
+    QImage imageG(32, 16, QImage::Format_ARGB32);
+    QImage imageR(32, 16, QImage::Format_ARGB32);
+    for (int i = 0; i < 16; i++)
+    {
+        for (int j = 0; j < 16; j++)
+        {
+            imageG.setPixelColor(i, j, greenColor);
+            imageG.setPixelColor(16 + i, j, Qt::transparent);
+            imageR.setPixelColor(i, j, redColor);
+            imageR.setPixelColor(16 + i, j, Qt::transparent);
+        }
+    }
+    ui->pushVolume->setIcon(QPixmap::fromImage(imageG));
+    ui->pushModulation->setIcon(QPixmap::fromImage(imageR));
 }
 
 EnvelopEditor::~EnvelopEditor()
@@ -84,9 +115,6 @@ void EnvelopEditor::on_pushModulation_clicked()
 void EnvelopEditor::populate()
 {
     stopSignals(true);
-
-    // Clear all envelops
-    ui->graphicsView->clearEnvelops();
 
     // Prepare fonts
     QFont font = this->font();
@@ -140,20 +168,39 @@ void EnvelopEditor::populate()
         ui->pushKeyDecay->setEnabled(isOverriden);
     }
 
-    // Display the envelop
-    /*EltID child = _baseElt;
-    if (child.typeElement == elementInst)
-        child.typeElement = elementInstSmpl;
-    else if (child.typeElement == elementPrst)
-        child.typeElement = elementPrstInst;
-
-    addEnvelop(_baseElt, -1);
-    for (int i = 0; i < _sf2->count(child); i++)
+    // Graphics
+    ui->graphicsView->clearEnvelops();
+    if (_isVolume)
     {
-        child.indexElt2 = i;
-        if (!_sf2->get(child, champ_hidden).bValue)
-            addEnvelop(child, i);
-    }*/
+        for (int i = 0; i < _displayedElt.count(); i++)
+        {
+            EltID id = _displayedElt[i];
+
+            // Volume envelop
+            addEnvelop(id, true, true);
+        }
+    }
+    else
+    {
+        for (int i = 0; i < _displayedElt.count(); i++)
+        {
+            EltID id = _displayedElt[i];
+
+            // Corresponding volume envelop in secondary
+            addEnvelop(id, true, false);
+
+            // Modulation envelop
+            addEnvelop(id, false, true);
+        }
+    }
+    ui->graphicsView->drawEnvelops();
+
+    // Sample
+    if (_displayedElt.count() == 1 && _displayedElt[0].typeElement == elementInstSmpl)
+        addSample(_displayedElt[0]);
+
+    ui->graphicsView->repaint();
+    ui->graphicsView->zoomDrag();
 
     stopSignals(false);
 }
@@ -182,64 +229,94 @@ double EnvelopEditor::computeValue(EltID id, Champ champ, bool &isOverriden)
     }
 }
 
-void EnvelopEditor::addEnvelop(EltID id, int index)
+void EnvelopEditor::addEnvelop(EltID id, bool isVolume, bool isMain)
 {
-    ui->graphicsView->addEnvelop(index);
+    int index = ui->graphicsView->addEnvelop();
+    ui->graphicsView->setEnvelopStyle(index, id.typeElement == elementInst, isVolume, isMain);
 
-    if (_isVolume)
+    bool isOverriden;
+    if (isVolume)
     {
-        if (_sf2->isSet(id, champ_delayVolEnv))
-            ui->graphicsView->setValue(index, Envelop::DELAY,
-                                       qPow(2., (double)_sf2->get(id, champ_delayVolEnv).genValue.shAmount / 1200.));
-        else if (_sf2->isSet(id, champ_attackVolEnv))
-            ui->graphicsView->setValue(index, Envelop::ATTACK,
-                                       qPow(2., (double)_sf2->get(id, champ_attackVolEnv).genValue.shAmount / 1200.));
-        else if (_sf2->isSet(id, champ_holdVolEnv))
-            ui->graphicsView->setValue(index, Envelop::HOLD,
-                                       qPow(2., (double)_sf2->get(id, champ_holdVolEnv).genValue.shAmount / 1200.));
-        else if (_sf2->isSet(id, champ_decayVolEnv))
-            ui->graphicsView->setValue(index, Envelop::DECAY,
-                                       qPow(2., (double)_sf2->get(id, champ_decayVolEnv).genValue.shAmount / 1200.));
-        else if (_sf2->isSet(id, champ_sustainVolEnv))
-            ui->graphicsView->setValue(index, Envelop::SUSTAIN,
-                                       (double)_sf2->get(id, champ_sustainVolEnv).genValue.shAmount / 1440.);
-        else if (_sf2->isSet(id, champ_releaseVolEnv))
-            ui->graphicsView->setValue(index, Envelop::RELEASE,
-                                       qPow(2., (double)_sf2->get(id, champ_releaseVolEnv).genValue.shAmount / 1200.));
-        else if (_sf2->isSet(id, champ_keynumToVolEnvHold))
-            ui->graphicsView->setValue(index, Envelop::KEYNUM_TO_HOLD,
-                                       _sf2->get(id, champ_keynumToVolEnvHold).genValue.shAmount);
-        else if (_sf2->isSet(id, champ_keynumToVolEnvDecay))
-            ui->graphicsView->setValue(index, Envelop::KEYNUM_TO_DECAY,
-                                       _sf2->get(id, champ_keynumToVolEnvDecay).genValue.shAmount);
+        ui->graphicsView->setValue(index, Envelop::DELAY, computeValue(id, champ_delayVolEnv, isOverriden), isOverriden);
+        ui->graphicsView->setValue(index, Envelop::ATTACK, computeValue(id, champ_attackVolEnv, isOverriden), isOverriden);
+        ui->graphicsView->setValue(index, Envelop::HOLD, computeValue(id, champ_holdVolEnv, isOverriden), isOverriden);
+        ui->graphicsView->setValue(index, Envelop::DECAY, computeValue(id, champ_decayVolEnv, isOverriden), isOverriden);
+        ui->graphicsView->setValue(index, Envelop::SUSTAIN, 1. - computeValue(id, champ_sustainVolEnv, isOverriden) / 144., isOverriden);
+        ui->graphicsView->setValue(index, Envelop::RELEASE, computeValue(id, champ_releaseVolEnv, isOverriden), isOverriden);
+        ui->graphicsView->setValue(index, Envelop::KEYNUM_TO_HOLD, computeValue(id, champ_keynumToVolEnvHold, isOverriden), isOverriden);
+        ui->graphicsView->setValue(index, Envelop::KEYNUM_TO_DECAY, computeValue(id, champ_keynumToVolEnvDecay, isOverriden), isOverriden);
     }
     else
     {
-        if (_sf2->isSet(id, champ_attackModEnv))
-            ui->graphicsView->setValue(index, Envelop::DELAY,
-                                       qPow(2., (double)_sf2->get(id, champ_attackModEnv).genValue.shAmount / 1200.));
-        else if (_sf2->isSet(id, champ_attackVolEnv))
-            ui->graphicsView->setValue(index, Envelop::ATTACK,
-                                       qPow(2., (double)_sf2->get(id, champ_attackModEnv).genValue.shAmount / 1200.));
-        else if (_sf2->isSet(id, champ_attackVolEnv))
-            ui->graphicsView->setValue(index, Envelop::HOLD,
-                                       qPow(2., (double)_sf2->get(id, champ_attackVolEnv).genValue.shAmount / 1200.));
-        else if (_sf2->isSet(id, champ_attackVolEnv))
-            ui->graphicsView->setValue(index, Envelop::DECAY,
-                                       qPow(2., (double)_sf2->get(id, champ_attackVolEnv).genValue.shAmount / 1200.));
-        else if (_sf2->isSet(id, champ_attackVolEnv))
-            ui->graphicsView->setValue(index, Envelop::SUSTAIN,
-                                       (double)_sf2->get(id, champ_attackVolEnv).genValue.shAmount / 1000.);
-        else if (_sf2->isSet(id, champ_attackVolEnv))
-            ui->graphicsView->setValue(index, Envelop::RELEASE,
-                                       qPow(2., (double)_sf2->get(id, champ_attackVolEnv).genValue.shAmount / 1200.));
-        else if (_sf2->isSet(id, champ_attackVolEnv))
-            ui->graphicsView->setValue(index, Envelop::KEYNUM_TO_DECAY,
-                                       _sf2->get(id, champ_attackVolEnv).genValue.shAmount);
-        else if (_sf2->isSet(id, champ_attackVolEnv))
-            ui->graphicsView->setValue(index, Envelop::KEYNUM_TO_HOLD,
-                                       _sf2->get(id, champ_attackVolEnv).genValue.shAmount);
+        ui->graphicsView->setValue(index, Envelop::DELAY, computeValue(id, champ_delayModEnv, isOverriden), isOverriden);
+        ui->graphicsView->setValue(index, Envelop::ATTACK, computeValue(id, champ_attackModEnv, isOverriden), isOverriden);
+        ui->graphicsView->setValue(index, Envelop::HOLD, computeValue(id, champ_holdModEnv, isOverriden), isOverriden);
+        ui->graphicsView->setValue(index, Envelop::DECAY, computeValue(id, champ_decayModEnv, isOverriden), isOverriden);
+        ui->graphicsView->setValue(index, Envelop::SUSTAIN, 1. - computeValue(id, champ_sustainModEnv, isOverriden) / 100., isOverriden);
+        ui->graphicsView->setValue(index, Envelop::RELEASE, computeValue(id, champ_releaseModEnv, isOverriden), isOverriden);
+        ui->graphicsView->setValue(index, Envelop::KEYNUM_TO_HOLD, computeValue(id, champ_keynumToModEnvHold, isOverriden), isOverriden);
+        ui->graphicsView->setValue(index, Envelop::KEYNUM_TO_DECAY, computeValue(id, champ_keynumToModEnvDecay, isOverriden), isOverriden);
     }
+
+    // Keyrange of the envelop
+    int keyMin = 0;
+    int keyMax = 127;
+    if (_sf2->isSet(id, champ_keyRange))
+    {
+        Valeur val = _sf2->get(id, champ_keyRange);
+        keyMin = val.genValue.ranges.byLo;
+        keyMax = val.genValue.ranges.byHi;
+    }
+    else if (id.typeElement == elementInstSmpl)
+    {
+        // Global value?
+        EltID id2 = id;
+        id2.typeElement = elementInst;
+        if (_sf2->isSet(id2, champ_keyRange))
+        {
+            Valeur val = _sf2->get(id2, champ_keyRange);
+            keyMin = val.genValue.ranges.byLo;
+            keyMax = val.genValue.ranges.byHi;
+        }
+    }
+
+    ui->graphicsView->setKeyRange(index, keyMin, keyMax);
+}
+
+void EnvelopEditor::addSample(EltID idInstSmpl)
+{
+    // Index of the sample
+    EltID idSmpl = idInstSmpl;
+    idSmpl.typeElement = elementSmpl;
+    idSmpl.indexElt = _sf2->get(idInstSmpl, champ_sampleID).wValue;
+
+    // Data
+    QByteArray data = _sf2->getData(idSmpl, champ_sampleData32);
+    const qint32 * dataSmpl = (qint32 *)data.constData();
+    QVector<double> dataD(data.length() / 4);
+    for (int i = 0; i < data.length() / 4; i++)
+        dataD[i] = (double)dataSmpl[i] / 2147483648.;
+
+    // Parameters
+    int sampleRate = _sf2->get(idSmpl, champ_dwSampleRate).dwValue;
+    int startLoop = _sf2->get(idSmpl, champ_dwStartLoop).dwValue;
+    int endLoop = _sf2->get(idSmpl, champ_dwEndLoop).dwValue;
+    int loopMode = 0;
+    if (_sf2->isSet(idInstSmpl, champ_sampleModes))
+        loopMode = _sf2->get(idInstSmpl, champ_sampleModes).wValue;
+    else
+    {
+        EltID idInst = idInstSmpl;
+        idInst.typeElement = elementInst;
+        if (_sf2->isSet(idInst, champ_sampleModes))
+            loopMode = _sf2->get(idInst, champ_sampleModes).wValue;
+    }
+
+    // Adjust values
+    if (startLoop < 0 || endLoop > dataD.length())
+        loopMode = 0;
+
+    ui->graphicsView->setSample(dataD, sampleRate, loopMode, startLoop, endLoop);
 }
 
 void EnvelopEditor::enableEditor(bool isEnabled)

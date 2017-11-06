@@ -24,6 +24,7 @@
 
 #include "page_inst.h"
 #include "mainwindow.h"
+#include "thememanager.h"
 #include "ui_page_inst.h"
 #include "dialog_mixture.h"
 #include "dialog_release.h"
@@ -99,6 +100,13 @@ Page_Inst::Page_Inst(QWidget *parent) :
     connect(ui->rangeEditor, SIGNAL(keyTriggered(int,int)), this, SLOT(playKey(int, int)));
     connect(ui->rangeEditor, SIGNAL(divisionsSelected(QList<EltID>)), this, SLOT(selectInTree(QList<EltID>)));
     connect(ui->envelopEditor, SIGNAL(valueChanged()), this, SLOT(updateMainwindow()));
+
+    if (ThemeManager::getInstance()->isDark(ThemeManager::LIST_BACKGROUND, ThemeManager::LIST_TEXT))
+    {
+        ui->pushTable->setIcon(QIcon(":/icones/table_w"));
+        ui->pushRanges->setIcon(QIcon(":/icones/range_w"));
+        ui->pushEnvelops->setIcon(QIcon(":/icones/adsr_w"));
+    }
 }
 Page_Inst::~Page_Inst()
 {
@@ -110,21 +118,31 @@ void Page_Inst::setModVisible(bool visible)
 }
 void Page_Inst::afficher()
 {
-    PageTable::afficher();
-
     bool error;
     QList<EltID> ids = this->getUniqueInstOrPrst(error, false, false);
+
     if (ids.count() > 1)
     {
-        ui->pushRanges->setChecked(false);
-        ui->pushRanges->setEnabled(false);
+        ui->pushTable->blockSignals(true);
+        ui->pushTable->setChecked(true);
+        ui->pushTable->blockSignals(false);
         ui->stackedWidget->setCurrentIndex(0);
+    }
 
+    PageTable::afficher();
+
+    if (ids.count() > 1)
+    {
+        ui->pushTable->setEnabled(false);
+        ui->pushRanges->setEnabled(false);
+        ui->pushEnvelops->setEnabled(false);
         ui->labelPrst->setText("");
     }
     else
     {
         ui->pushRanges->setEnabled(true);
+        ui->pushEnvelops->setEnabled(true);
+        ui->pushTable->setEnabled(true);
 
         // Liste des presets qui utilisent l'instrument
         EltID id = _tree->getFirstID();
