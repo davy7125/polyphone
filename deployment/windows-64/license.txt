@@ -1,5 +1,5 @@
 ﻿Copyright
-	© 2013-2014 Davy Triponney
+	© 2013-2017 Davy Triponney
 	© 2012 Emanuel Eichhammer <dermanu@worksklikeclockwork.com>
 	© 2008-2010 Pedro Lopez-Cabanillas <plcl@users.sf.net>
 	© 1996 Steinberg Soft- und Hardware GmbH
