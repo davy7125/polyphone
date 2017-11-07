@@ -199,7 +199,7 @@
      <x>0</x>
      <y>0</y>
      <width>546</width>
-     <height>23</height>
+     <height>21</height>
     </rect>
    </property>
    <property name="accessibleDescription">
@@ -1564,7 +1564,7 @@
      <normaloff>:/icones/list</normaloff>:/icones/list</iconset>
    </property>
    <property name="text">
-    <string>Exporter la liste des &amp;presets</string>
+    <string>Exporter la liste des &amp;presets...</string>
    </property>
    <property name="toolTip">
     <string>Exporte la liste des presets dans un format texte</string>
