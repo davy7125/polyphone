@@ -7,7 +7,7 @@
 ; (To generate a new GUID, click Tools | Generate GUID inside the IDE.)
 AppId={{83549E04-CB44-4E12-85B6-9FBBA3B0FE65}
 AppName=Polyphone
-AppVersion=1.8
+AppVersion=1.9
 AppPublisher=Davy Triponney
 AppPublisherURL=http://www.polyphone.fr/
 AppSupportURL=http://www.polyphone.fr/
@@ -16,7 +16,7 @@ ChangesAssociations=yes
 DefaultDirName={pf64}\Polyphone
 DefaultGroupName=Polyphone
 LicenseFile=license.txt
-OutputBaseFilename=Polyphone_v1.8_win64  
+OutputBaseFilename=Polyphone_v1.9_win64  
 SetupIconFile=polyphone.ico
 Compression=lzma
 SolidCompression=yes
@@ -24,10 +24,12 @@ ArchitecturesAllowed=x64
 ArchitecturesInstallIn64BitMode=x64
 
 [Languages]
-Name: "english"; MessagesFile: "compiler:Default.isl"
-Name: "french";  MessagesFile: "compiler:Languages\French.isl"
-Name: "german";  MessagesFile: "compiler:Languages\German.isl" 
+Name: "english"; MessagesFile: "compiler:Default.isl"   
+Name: "czech";  MessagesFile: "compiler:Languages\Czech.isl" 
+Name: "french";  MessagesFile: "compiler:Languages\French.isl" 
 Name: "italian"; MessagesFile: "compiler:Languages\Italian.isl"
+Name: "portuguese"; MessagesFile: "compiler:Languages\Portuguese.isl"
+Name: "serbian"; MessagesFile: "compiler:Languages\SerbianCyrillic.isl"
 Name: "spanish"; MessagesFile: "compiler:Languages\Spanish.isl"
 
 [Tasks]
