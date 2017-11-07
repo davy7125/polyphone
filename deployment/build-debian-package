@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # First adapt debian/changelog so that the version and date are correct
+# Make sure "devscripts" package is installed (available in synaptic)
 # Then run this script by opening a terminal in this current directory
 # For version 1.7 write "build-debian-package 1.7"
 
