@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string notr="true">Form</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
    <property name="leftMargin">
@@ -34,7 +34,7 @@
      <item row="0" column="7">
       <widget class="QDoubleSpinBox" name="doubleSpinHold">
        <property name="suffix">
-        <string> s</string>
+        <string comment="unit for second"> s</string>
        </property>
        <property name="decimals">
         <number>3</number>
@@ -67,7 +67,7 @@
      <item row="1" column="1">
       <widget class="QDoubleSpinBox" name="doubleSpinSustain">
        <property name="suffix">
-        <string> dB</string>
+        <string comment="unit for decibels"> dB</string>
        </property>
        <property name="decimals">
         <number>1</number>
@@ -96,7 +96,7 @@
      <item row="0" column="1">
       <widget class="QDoubleSpinBox" name="doubleSpinDelay">
        <property name="suffix">
-        <string> s</string>
+        <string comment="unit for second"> s</string>
        </property>
        <property name="decimals">
         <number>3</number>
@@ -115,7 +115,7 @@
      <item row="1" column="9">
       <widget class="QLabel" name="labelKeyDecay">
        <property name="text">
-        <string>Key  Decay</string>
+        <string>Note  Decay</string>
        </property>
        <property name="alignment">
         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -159,7 +159,7 @@
      <item row="0" column="4">
       <widget class="QDoubleSpinBox" name="doubleSpinAttack">
        <property name="suffix">
-        <string> s</string>
+        <string comment="unit for second"> s</string>
        </property>
        <property name="decimals">
         <number>3</number>
@@ -188,7 +188,7 @@
      <item row="1" column="4">
       <widget class="QDoubleSpinBox" name="doubleSpinRelease">
        <property name="suffix">
-        <string> s</string>
+        <string comment="unit for second"> s</string>
        </property>
        <property name="decimals">
         <number>3</number>
@@ -213,7 +213,7 @@
         </sizepolicy>
        </property>
        <property name="text">
-        <string>Key  Hold</string>
+        <string>Note  Hold</string>
        </property>
        <property name="alignment">
         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -275,7 +275,7 @@
      <item row="1" column="7">
       <widget class="QDoubleSpinBox" name="doubleSpinDecay">
        <property name="suffix">
-        <string> s</string>
+        <string comment="unit for second"> s</string>
        </property>
        <property name="decimals">
         <number>3</number>
@@ -380,7 +380,7 @@
    <item row="0" column="0">
     <widget class="QPushButton" name="pushVolume">
      <property name="text">
-      <string>Volume</string>
+      <string>Enveloppe de volume</string>
      </property>
      <property name="checkable">
       <bool>true</bool>
@@ -399,7 +399,7 @@
    <item row="0" column="1">
     <widget class="QPushButton" name="pushModulation">
      <property name="text">
-      <string>Modulation</string>
+      <string>Enveloppe de modulation</string>
      </property>
      <property name="checkable">
       <bool>true</bool>
