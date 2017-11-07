@@ -46,5 +46,5 @@ Description: soundfont editor
   - automatic loop of samples,
   - a recorder, for the record of what is played in a .wav file,
   - built-in synthesizer, using a virtual keyboard or midi signals,
-  - built-in user manual,
+  - user manual, forum and soundfont repository online,
   - available in several languages.
