@@ -2,7 +2,7 @@ polyphone (1.9) unstable; urgency=low
 
   * (new) soundfont repository online
   * (new) graphical envelop editor
-  * (new) portuguese & chinese translations
+  * (new) Portuguese & Chinese translations
   * (new) tool to export the preset list in a text format
   * (improvement) table cells linked to a modulator have a thicker border
   * (improvement) highlight a modulator corresponding to a cell and vice versa
@@ -12,7 +12,7 @@ polyphone (1.9) unstable; urgency=low
   * (fix) display of uncommon sample rates
   * (fix) 8-bit samples were badly imported
   * (fix) the last edit was sometimes not saved if the focus remained in a field
-  * (fix) sometimes a crash occured during a drag & drop in the tree
+  * (fix) sometimes a crash occurred during a drag & drop in the tree
   * (fix) the release was wrong when using loop + end mode
   * (fix) the progress bar sometimes remained when loading a small soundfont
   * (fix) a double-click in the tree didn't expand or collapse the elements
@@ -20,7 +20,7 @@ polyphone (1.9) unstable; urgency=low
   * (fix) sometimes the loop cell couldn't be edited with the mouse
   * (fix) wrong modulators were sometimes displayed after a selection in the tree
 
- -- Davy Triponney <davy.triponney@gmail.com>  Wed, 16 Nov 2017 17:51:55 +0100
+ -- Davy Triponney <davy.triponney@gmail.com>  Tue, 7 Nov 2017 12:40:25 +0100
 
 
 polyphone (1.8) UNRELEASED; urgency=low
