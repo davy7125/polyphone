@@ -88,7 +88,7 @@ void DialogExportList::on_radioCsv_clicked()
         for (int j = 0; j < listPreset.count(); j++)
         {
             int presetNumber = listPreset[j];
-            if (j > 0)
+            if (!str.isEmpty())
                 str += "\n";
             str += QString::number(bankNumber) + "\t" +
                     QString::number(presetNumber) + "\t" +
