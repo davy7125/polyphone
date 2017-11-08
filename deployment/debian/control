@@ -9,7 +9,8 @@ Build-Depends:
  libasound2-dev,
  libjack-jackd2-dev,
  portaudio19-dev,
- libqt4-dev (>= 4:4.6.3),
+ qtbase5-dev,
+ libqt5svg5-dev,
  zlib1g-dev,
  librtmidi-dev,
  libstk0-dev,
@@ -17,7 +18,7 @@ Build-Depends:
  libogg-dev,
  libvorbis-dev
 Standards-Version: 3.9.6
-Homepage: http://www.polyphone.fr
+Homepage: http://polyphone-soundfonts.com
 
 Package: polyphone
 Architecture: any
