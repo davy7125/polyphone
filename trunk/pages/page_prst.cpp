@@ -54,7 +54,9 @@ Page_Prst::Page_Prst(QWidget *parent) :
     this->comboDestination = ui->comboDestination;
     _pushCopyMod = ui->pushCopyMod;
     _pushRanges = ui->pushRanges;
+    _pushEnvelops = NULL;
     _rangeEditor = ui->rangeEditor;
+    _envelopEditor = NULL;
 
     // Remplissage de comboDestination
     for (int i = 0; i < 35; i++)

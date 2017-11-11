@@ -1246,8 +1246,8 @@ QByteArray Sound::resampleMono(QByteArray baData, double echInit, qint32 echFina
     for (int i = 0; i < sizeFinal; i++)
         dataRetI[i] = dataRet[i] * coef;
 
-    delete dataRet;
-    delete data;
+    delete [] dataRet;
+    delete [] data;
 
     // Filtre passe bas après resampling
     baRet = Sound::bandFilter(baRet, 32, echFinal, echFinal/2, 0, -1);
