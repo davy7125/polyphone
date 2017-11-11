@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="zh_CN">
+<TS version="2.1" language="zh_CN" sourcelanguage="en_US">
 <context>
     <name>ComboBox</name>
     <message>
         <location filename="pages/combobox.h" line="77"/>
         <source>Modulateur</source>
-        <translation>调节器</translation>
+        <translation>调制器</translation>
     </message>
 </context>
 <context>
@@ -51,7 +51,7 @@
         <location filename="configuration/config.ui" line="289"/>
         <source>Édition stéréo</source>
         <oldsource>Édition des samples</oldsource>
-        <translation>立体声编辑</translation>
+        <translation>双声道编辑</translation>
     </message>
     <message>
         <location filename="configuration/config.ui" line="168"/>
@@ -108,12 +108,12 @@
         <location filename="configuration/config.ui" line="1064"/>
         <location filename="configuration/config.ui" line="1222"/>
         <source>Niveau</source>
-        <translation>级别</translation>
+        <translation>大小</translation>
     </message>
     <message>
         <location filename="configuration/config.ui" line="1132"/>
         <source>Profondeur</source>
-        <translation>空间</translation>
+        <translation>体积</translation>
     </message>
     <message>
         <location filename="configuration/config.ui" line="1148"/>
@@ -715,7 +715,7 @@
     </message>
     <message>
         <location filename="gui_divers/dialog_about.cpp" line="59"/>
-        <location filename="gui_divers/dialog_about.cpp" line="66"/>
+        <location filename="gui_divers/dialog_about.cpp" line="67"/>
         <source>Steve Clarke</source>
         <translation>Steve Clarke</translation>
     </message>
@@ -736,6 +736,11 @@
     </message>
     <message>
         <location filename="gui_divers/dialog_about.cpp" line="65"/>
+        <source>Magson</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="gui_divers/dialog_about.cpp" line="66"/>
         <source>Pavel Fric</source>
         <translation>Pavel Fric</translation>
     </message>
@@ -793,6 +798,7 @@
         <location filename="tools/dialog_celeste.ui" line="39"/>
         <source>Nombre de battements par secondes au do 4 (note 60)</source>
         <oldsource>Nombre de battements par secondes au do 3 (note 60)</oldsource>
+        <translatorcomment>C4(音符 60)的每秒节拍数</translatorcomment>
         <translation type="unfinished">Number of beats per second at C4 (key 60)</translation>
     </message>
     <message>
@@ -803,11 +809,12 @@
     <message>
         <location filename="tools/dialog_celeste.ui" line="79"/>
         <source>Division à l&apos;octave suivante</source>
-        <translation type="unfinished">Division to the next octave</translation>
+        <translation>划分到下个八度音阶</translation>
     </message>
     <message>
         <location filename="tools/dialog_celeste.cpp" line="44"/>
         <source>Nombre de battements par secondes (note </source>
+        <translatorcomment>每秒节拍数(音符 </translatorcomment>
         <translation type="unfinished">Number of beats per second (key </translation>
     </message>
 </context>
@@ -879,7 +886,7 @@
     <message>
         <location filename="tools/dialog_change_volume.ui" line="41"/>
         <source>Normaliser</source>
-        <translation>标准化</translation>
+        <translation>规格化</translation>
     </message>
     <message>
         <location filename="tools/dialog_change_volume.ui" line="51"/>
@@ -917,7 +924,7 @@
     <message>
         <location filename="tools/dialog_command.ui" line="90"/>
         <source>Autoriser l&apos;édition stéréo</source>
-        <translation>允许编辑立体声</translation>
+        <translation>允许编辑双声道</translation>
     </message>
     <message>
         <location filename="tools/dialog_command.ui" line="127"/>
@@ -951,17 +958,17 @@
     <message>
         <location filename="tools/dialog_duplication.ui" line="17"/>
         <source>Duplication des divisions</source>
-        <translation type="unfinished">Division duplication</translation>
+        <translation>创建分层副本</translation>
     </message>
     <message>
         <location filename="tools/dialog_duplication.ui" line="65"/>
         <source>Une division pour chaque note</source>
-        <translation type="unfinished">A division for 每个音符</translation>
+        <translation>为每个音符创建分层</translation>
     </message>
     <message>
         <location filename="tools/dialog_duplication.ui" line="124"/>
         <source>Une division pour chaque étendue de vélocité</source>
-        <translation type="unfinished">A division for 每个力度范围</translation>
+        <translation>为每个力度范围创建分层</translation>
     </message>
 </context>
 <context>
@@ -1071,22 +1078,22 @@
     <message>
         <location filename="tools/dialog_exportlist.ui" line="17"/>
         <source>Exporter la liste des presets</source>
-        <translation type="unfinished">Export preset list</translation>
+        <translation>导出预设列表</translation>
     </message>
     <message>
         <location filename="tools/dialog_exportlist.ui" line="33"/>
         <source>texte copié dans le presse-papier</source>
-        <translation type="unfinished">text copied in the clipboard</translation>
+        <translation>文本已复制到剪贴板</translation>
     </message>
     <message>
         <location filename="tools/dialog_exportlist.ui" line="45"/>
         <source>format csv</source>
-        <translation type="unfinished">csv format</translation>
+        <translation>CSV 表</translation>
     </message>
     <message>
         <location filename="tools/dialog_exportlist.ui" line="55"/>
         <source>tableau html</source>
-        <translation type="unfinished">html table</translation>
+        <translation>HTML 表</translation>
     </message>
     <message>
         <location filename="tools/dialog_exportlist.ui" line="80"/>
@@ -1162,7 +1169,7 @@
     <message>
         <location filename="tools/dialog_mixture.ui" line="38"/>
         <source>Nom de la mixture :</source>
-        <translation type="unfinished">Name of the mixture:</translation>
+        <translation>名称：</translation>
     </message>
     <message>
         <location filename="tools/dialog_mixture.ui" line="48"/>
@@ -1192,12 +1199,12 @@
     <message>
         <location filename="tools/dialog_mixture.ui" line="84"/>
         <source>Stéréo</source>
-        <translation>立体声</translation>
+        <translation>双声道</translation>
     </message>
     <message>
         <location filename="tools/dialog_mixture.ui" line="98"/>
         <source>Divisions</source>
-        <translation type="unfinished">Divisions</translation>
+        <translation>分层</translation>
     </message>
     <message>
         <location filename="tools/dialog_mixture.ui" line="251"/>
@@ -1388,28 +1395,29 @@
     <message>
         <location filename="tools/dialog_release.ui" line="17"/>
         <source>Élaboration release</source>
-        <translation type="unfinished">Release maker</translation>
+        <translation>释音制作器</translation>
     </message>
     <message>
         <location filename="tools/dialog_release.ui" line="114"/>
         <source>Désaccordage provoqué (demi-tons)</source>
+        <translatorcomment>失谐引导(半音)</translatorcomment>
         <translation type="unfinished">Detuning induced (半音)</translation>
     </message>
     <message>
         <location filename="tools/dialog_release.ui" line="61"/>
         <source>Durée release au do 2 (note 36)</source>
         <oldsource>Durée release au do 1 (note 36)</oldsource>
-        <translation type="unfinished">Release time at C2 (key 36)</translation>
+        <translation type="unfinished">C2(音符 36)的释音时间</translation>
     </message>
     <message>
         <location filename="tools/dialog_release.ui" line="68"/>
         <source>Division à l&apos;octave suivante</source>
-        <translation type="unfinished">Division to the next octave</translation>
+        <translation type="unfinished">划分到下个八度音阶</translation>
     </message>
     <message>
         <location filename="tools/dialog_release.cpp" line="45"/>
         <source>Durée release (note </source>
-        <translation type="unfinished">Release time (key </translation>
+        <translation type="unfinished">释音时间(音符 </translation>
     </message>
 </context>
 <context>
@@ -1580,7 +1588,7 @@
     <message>
         <location filename="tools/dialog_transposition.ui" line="27"/>
         <source>Adapter l&apos;étendue de notes</source>
-        <translation>自适应音符范围</translation>
+        <translation>适应音符范围</translation>
     </message>
 </context>
 <context>
@@ -1631,7 +1639,7 @@
         <location filename="pages/envelopeditor.ui" line="278"/>
         <source> s</source>
         <comment>unit for second</comment>
-        <translation>秒</translation>
+        <translation> 秒</translation>
     </message>
     <message>
         <location filename="pages/envelopeditor.ui" line="70"/>
@@ -1643,61 +1651,61 @@
     <message>
         <location filename="pages/envelopeditor.ui" line="89"/>
         <source>Delay</source>
-        <translation type="unfinished">Delay</translation>
+        <translation>延迟(Delay)</translation>
     </message>
     <message>
         <location filename="pages/envelopeditor.ui" line="118"/>
         <source>Note  Decay</source>
         <oldsource>Key  Decay</oldsource>
-        <translation type="unfinished">Key  Decay</translation>
+        <translation type="unfinished">Key → Decay</translation>
     </message>
     <message>
         <location filename="pages/envelopeditor.ui" line="142"/>
         <source>Decay</source>
-        <translation type="unfinished">Decay</translation>
+        <translation>衰减(Decay)</translation>
     </message>
     <message>
         <location filename="pages/envelopeditor.ui" line="181"/>
         <source>Sustain</source>
-        <translation type="unfinished">Sustain</translation>
+        <translation>延音(Sustain)</translation>
     </message>
     <message>
         <location filename="pages/envelopeditor.ui" line="216"/>
         <source>Note  Hold</source>
         <oldsource>Key  Hold</oldsource>
-        <translation type="unfinished">Key  Hold</translation>
+        <translation type="unfinished">Key → Hold</translation>
     </message>
     <message>
         <location filename="pages/envelopeditor.ui" line="232"/>
         <source>Hold</source>
-        <translation type="unfinished">Hold</translation>
+        <translation>保持(Hold)</translation>
     </message>
     <message>
         <location filename="pages/envelopeditor.ui" line="252"/>
         <source>Release</source>
-        <translation type="unfinished">Release</translation>
+        <translation>释音(Release)</translation>
     </message>
     <message>
         <location filename="pages/envelopeditor.ui" line="268"/>
         <source>Attack</source>
-        <translation type="unfinished">Attack</translation>
+        <translation>起音(Attack)</translation>
     </message>
     <message>
         <location filename="pages/envelopeditor.ui" line="383"/>
         <source>Enveloppe de volume</source>
-        <translation type="unfinished">Volume envelope</translation>
+        <translation>音量包络</translation>
     </message>
     <message>
         <location filename="pages/envelopeditor.ui" line="402"/>
         <source>Enveloppe de modulation</source>
         <oldsource>Modulation</oldsource>
-        <translation type="unfinished">Modulation envelope</translation>
+        <translation>调制包络</translation>
     </message>
     <message>
         <location filename="pages/envelopeditor.cpp" line="108"/>
         <source>%</source>
         <comment>percentage</comment>
-        <translation> %</translation>
+        <translation>%</translation>
     </message>
 </context>
 <context>
@@ -1834,7 +1842,7 @@
     <message>
         <location filename="mainwindow.ui" line="398"/>
         <source>Arborescence</source>
-        <translation>树状图</translation>
+        <translation>树</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="524"/>
@@ -2068,7 +2076,7 @@
     <message>
         <location filename="mainwindow.ui" line="984"/>
         <source>&amp;Section modulateurs</source>
-        <translation>调节器面板(&amp;M)</translation>
+        <translation>调制器面板(&amp;M)</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="999"/>
@@ -2114,23 +2122,23 @@
     <message>
         <location filename="mainwindow.ui" line="1558"/>
         <source>Utilise un logiciel ou une commande externe pour modifier un fichier son .wav</source>
-        <translation>使用外部软件或命令来修改 WAV 文件</translation>
+        <translation>使用外部软件和命令来修改 WAV 文件</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="1567"/>
         <source>Exporter la liste des &amp;presets...</source>
         <oldsource>Exporter la liste des &amp;presets</oldsource>
-        <translation type="unfinished">Export preset list (&amp;P)...</translation>
+        <translation>导出预设列表(&amp;E)...</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="1570"/>
         <source>Exporte la liste des presets dans un format texte</source>
-        <translation type="unfinished">Export the preset list in a text format</translation>
+        <translation>以文本格式导出预设列表</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="1579"/>
         <source>&amp;Télécharger des soundfonts</source>
-        <translation type="unfinished">&amp;Soundfont repository</translation>
+        <translation>音色库仓库(&amp;S)</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="1164"/>
@@ -2145,12 +2153,12 @@
     <message>
         <location filename="mainwindow.ui" line="1212"/>
         <source>Duplication des divisions...</source>
-        <translation type="unfinished">Division duplication...</translation>
+        <translation>创建分层副本...</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="1285"/>
         <source>affiche un clavier de 6 octaves</source>
-        <translation>显示一个 6 音阶键盘</translation>
+        <translation>显示 6 音阶键盘</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="1293"/>
@@ -2160,12 +2168,12 @@
     <message>
         <location filename="mainwindow.ui" line="1307"/>
         <source>n&apos;affiche aucun clavier</source>
-        <translation>不显示键盘</translation>
+        <translation>隐藏键盘</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="1322"/>
         <source>Duplication des divisions</source>
-        <translation type="unfinished">Division duplication</translation>
+        <translation>创建分层副本</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="1382"/>
@@ -2199,13 +2207,13 @@
         <location filename="mainwindow.ui" line="1454"/>
         <source>&amp;Dissocier les échantillons stéréo</source>
         <oldsource>&amp;Dissocier les samples stéréo</oldsource>
-        <translation>解除立体声样本链接(&amp;U)</translation>
+        <translation>解除双声道样本链接(&amp;U)</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="1457"/>
         <source>Dissocie les échantillons stéréo</source>
         <oldsource>Dissocie les samples stéréo</oldsource>
-        <translation>取消立体声样本的所有链接</translation>
+        <translation>取消所有双声道样本的链接</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="1469"/>
@@ -2240,12 +2248,12 @@
     <message>
         <location filename="mainwindow.ui" line="1514"/>
         <source>Transpose tous les échantillons d&apos;un instrument</source>
-        <translation>修改乐器每个样本的音调</translation>
+        <translation>修改乐器中每个样本的音调</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="1523"/>
         <source>Enlever tous les &amp;modulateurs</source>
-        <translation>移除所有调节器(&amp;M)</translation>
+        <translation>移除所有调制器(&amp;M)</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="1531"/>
@@ -2265,7 +2273,7 @@
     <message>
         <location filename="mainwindow.ui" line="1274"/>
         <source>affiche un clavier de 5 octaves</source>
-        <translation>显示一个 5 音阶键盘</translation>
+        <translation>显示 5 音阶键盘</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="1282"/>
@@ -2275,7 +2283,7 @@
     <message>
         <location filename="mainwindow.ui" line="1296"/>
         <source>affiche un clavier de 128 notes</source>
-        <translation>显示一个 128 键键盘</translation>
+        <translation>显示 128 键键盘</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="1304"/>
@@ -2287,7 +2295,7 @@
         <location filename="mainwindow.ui" line="1319"/>
         <source>&amp;Duplication des divisions...</source>
         <oldsource>&amp;Duplication des divisions</oldsource>
-        <translation type="unfinished">&amp;Division duplication...</translation>
+        <translation>创建分层副本(&amp;D)...</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="1089"/>
@@ -2323,18 +2331,18 @@
     <message>
         <location filename="mainwindow.ui" line="1337"/>
         <source>&amp;Élaboration release...</source>
-        <translation type="unfinished">&amp;Release maker...</translation>
+        <translation>释音制作器(&amp;R)...</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="1340"/>
         <source>Crée automatiquement une release pour tous les sons liés</source>
-        <translation type="unfinished">自动创建所有链接样本的release</translation>
+        <translation>为所有链接的样本自动创建释音</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="1367"/>
         <source>&amp;Associer les échantillons stéréo</source>
         <oldsource>&amp;Association auto échantillons</oldsource>
-        <translation>链接所有立体声样本(&amp;L)</translation>
+        <translation>链接所有双声道样本(&amp;L)</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="1370"/>
@@ -2351,7 +2359,7 @@
     <message>
         <location filename="mainwindow.ui" line="987"/>
         <source>Affiche la section modulateurs</source>
-        <translation>显示调节器面板</translation>
+        <translation>显示调制器面板</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="138"/>
@@ -2382,7 +2390,7 @@
     <message>
         <location filename="mainwindow.ui" line="1002"/>
         <source>Importe un fichier audio</source>
-        <translation>导入一个音频文件</translation>
+        <translation>导入音频文件</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="1017"/>
@@ -2439,35 +2447,35 @@
         <location filename="mainwindow.ui" line="1182"/>
         <location filename="mainwindow.ui" line="1427"/>
         <source>Dispose les sons dans l&apos;espace</source>
-        <translation type="unfinished">模拟声音空间</translation>
+        <translation type="unfinished">Place sounds in space</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="1194"/>
         <source>&amp;Répartition automatique</source>
-        <translation type="unfinished">&amp;Automatic distribution</translation>
+        <translation>自动分布音符范围(&amp;A)</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="1197"/>
         <source>Répartit automatiquement les sons sur le clavier</source>
-        <translation>自动在键盘上排列样本</translation>
+        <translation>自动在键盘上编排样本</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="1215"/>
         <location filename="mainwindow.ui" line="1325"/>
         <source>Duplique les divisions</source>
-        <translation type="unfinished">Duplicate the divisions</translation>
+        <translation>为乐器分层创建副本</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="1227"/>
         <location filename="mainwindow.ui" line="1352"/>
         <source>&amp;Paramétrage global...</source>
-        <translation>全局设置(&amp;G)...</translation>
+        <translation>全局调整(&amp;G)...</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="1230"/>
         <location filename="mainwindow.ui" line="1355"/>
         <source>Paramètre toutes les divisions simultanément</source>
-        <translation type="unfinished">Set all divisions simultaneously</translation>
+        <translation>同时设置所有分层的属性</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="1242"/>
@@ -2580,12 +2588,12 @@
     <message>
         <location filename="mainwindow.cpp" line="1393"/>
         <source>Nom de l&apos;instrument (max 20 caractères) :</source>
-        <translation>乐器名称 (最多 20 个半角字符):</translation>
+        <translation>乐器名称(最多 20 个半角字符)：</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1394"/>
         <source>Nom du preset (max 20 caractères) :</source>
-        <translation>预设名称 (最多 20 个半角字符):</translation>
+        <translation>预设名称(最多 20 个半角字符)：</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1395"/>
@@ -2595,17 +2603,17 @@
     <message>
         <location filename="mainwindow.cpp" line="1621"/>
         <source>L » existe déjà.&lt;br /&gt;Que faire ?</source>
-        <translation>左声道&quot; 已存在。&lt;br/&gt;要替换吗？</translation>
+        <translation>左声道&quot;已存在。&lt;br/&gt;是否替换？</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1627"/>
         <source>R » existe déjà.&lt;br /&gt;Que faire ?</source>
-        <translation>右声道&quot; 已存在。&lt;br/&gt;要替换吗？</translation>
+        <translation>右声道&quot; 已存在。&lt;br/&gt;是否替换？</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1636"/>
         <source> » existe déjà.&lt;br /&gt;Que faire ?</source>
-        <translation>&quot; 已存在。&lt;br/&gt;要替换吗？</translation>
+        <translation>&quot;已存在。&lt;br/&gt;是否替换？</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="621"/>
@@ -2621,7 +2629,7 @@
         <location filename="mainwindow.cpp" line="282"/>
         <location filename="mainwindow.cpp" line="513"/>
         <source>&lt;b&gt;Sauvegarder avant de quitter ?&lt;/b&gt;</source>
-        <translation>&lt;b&gt;退出前要保存文件吗？&lt;/b&gt;</translation>
+        <translation>&lt;b&gt;退出前是否保存文件？&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="285"/>
@@ -2634,13 +2642,13 @@
         <location filename="mainwindow.cpp" line="515"/>
         <source>Le fichier « </source>
         <oldsource>Le fichier «&amp;#160;</oldsource>
-        <translation>文件 &quot;</translation>
+        <translation>文件&quot;</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="290"/>
         <location filename="mainwindow.cpp" line="515"/>
         <source> » a été modifié.</source>
-        <translation>&quot; 已被修改。</translation>
+        <translation>&quot;已被修改。</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="17"/>
@@ -2651,12 +2659,12 @@
     <message>
         <location filename="mainwindow.cpp" line="392"/>
         <source>Ouverture de fichiers</source>
-        <translation>打开多个文件</translation>
+        <translation>正在打开文件</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="2061"/>
         <source>Fichier corrompu : utilisation des échantillons en qualité 16 bits.</source>
-        <translation>损坏的文件：使用 16 位样本。</translation>
+        <translation type="unfinished">损坏的文件：使用 16 位样本。</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="573"/>
@@ -2687,24 +2695,24 @@
     <message>
         <location filename="mainwindow.cpp" line="643"/>
         <source>&lt;b&gt;Trop de paramètres dans les instruments et les presets.&lt;/b&gt;</source>
-        <translation>&lt;b&gt;在乐器和预设中定义了太多参数。&lt;/b&gt;</translation>
+        <translation>&lt;b&gt;在乐器和预设中定义了过多参数。&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="645"/>
         <source>&lt;b&gt;Trop de paramètres dans les instruments.&lt;/b&gt;</source>
-        <translation>&lt;b&gt;该乐器中定义了太多参数。&lt;/b&gt;</translation>
+        <translation>&lt;b&gt;此乐器中定义了过多参数。&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="647"/>
         <source>&lt;b&gt;Trop de paramètres dans les presets.&lt;/b&gt;</source>
-        <translation>&lt;b&gt;该预设中定义了太多参数。&lt;/b&gt;</translation>
+        <translation>&lt;b&gt;此预设中定义了过多参数。&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="649"/>
         <source>Certains synthétiseurs ne prennent pas en compte les paramètres au delà du 65536ème.
 Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
-        <translation type="unfinished">一些合成器会跳过第65536个参数。
-将文件分割到几个 SF2 文件中可能解决这个问题。</translation>
+        <translation>一些合成器会忽略第 65536 个以后的参数。
+将文件分割到几个 SF2 文件中可能可以解决这个问题。</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="653"/>
@@ -2714,7 +2722,7 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
     <message>
         <location filename="mainwindow.cpp" line="654"/>
         <source>Sauvegarder, &amp;désactiver ce message</source>
-        <translation>保存并禁用该提示(&amp;D)</translation>
+        <translation>保存并不再提示(&amp;D)</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="671"/>
@@ -2746,7 +2754,7 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
     <message>
         <location filename="mainwindow.cpp" line="744"/>
         <source>http://polyphone-soundfonts.com/fr/soundfonts</source>
-        <translation>http://polyphone-soundfonts.com/en/soundfonts</translation>
+        <translation>https://polyphone-soundfonts.com/en/soundfonts</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1178"/>
@@ -2780,7 +2788,7 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
         <location filename="mainwindow.cpp" line="1626"/>
         <location filename="mainwindow.cpp" line="1635"/>
         <source>L&apos;échantillon « </source>
-        <translation>样本 &quot;</translation>
+        <translation>样本&quot;</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1650"/>
@@ -2871,12 +2879,12 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
     <message>
         <location filename="mainwindow.cpp" line="2821"/>
         <source>Numéro de pic</source>
-        <translation type="unfinished">Peak number</translation>
+        <translation type="unfinished">峰值</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="2822"/>
         <source>Facteur</source>
-        <translation type="unfinished">Factor</translation>
+        <translation>系数</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="2822"/>
@@ -2898,7 +2906,7 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
     <message>
         <location filename="mainwindow.cpp" line="2871"/>
         <source>Le fichier ne contient aucun modulateur.</source>
-        <translation>该音色库不包含调节器。</translation>
+        <translation>此音色库不包含调制器。</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="2873"/>
@@ -2909,17 +2917,17 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
     <message>
         <location filename="mainwindow.cpp" line="2873"/>
         <source>1 modulateur a été supprimé.</source>
-        <translation>1 个调节器已被删除。</translation>
+        <translation>1 个调制器已被删除。</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="2876"/>
         <source>modulateurs ont été supprimés.</source>
-        <translation>个调节器已被删除。</translation>
+        <translation>个调制器已被删除。</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1568"/>
         <source>Importer un fichier audio</source>
-        <translation>导入一个音频文件</translation>
+        <translation>导入音频文件</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="2068"/>
@@ -2939,7 +2947,7 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
     <message>
         <location filename="mainwindow.cpp" line="622"/>
         <source>La qualité des samples sera abaissée suite à cette opération. Continuer ?</source>
-        <translation>样本质量将会降低。继续？</translation>
+        <translation>样本质量将会损失。是否继续？</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="696"/>
@@ -2965,13 +2973,13 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
         <location filename="mainwindow.cpp" line="2476"/>
         <source> instrument ont été supprimés.</source>
         <translatorcomment>instrument: singular</translatorcomment>
-        <translation> 乐器已被删除。</translation>
+        <translation> 个乐器已被删除。</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="2478"/>
         <source> instruments ont été supprimés.</source>
         <translatorcomment>instrument: plural</translatorcomment>
-        <translation> 乐器已被删除。</translation>
+        <translation> 个乐器已被删除。</translation>
     </message>
 </context>
 <context>
@@ -3291,13 +3299,13 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
         <location filename="pages/page.cpp" line="624"/>
         <location filename="pages/page.cpp" line="625"/>
         <source>Accordage (demi-tons)</source>
-        <translation>调音(半音)</translation>
+        <translation>校音(半音)</translation>
     </message>
     <message>
         <location filename="pages/page.cpp" line="632"/>
         <location filename="pages/page.cpp" line="633"/>
         <source>Accordage (centièmes)</source>
-        <translation>调音(音分)</translation>
+        <translation>校音(音分)</translation>
     </message>
     <message>
         <location filename="pages/page.cpp" line="640"/>
@@ -3308,17 +3316,17 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
         <location filename="pages/page.cpp" line="648"/>
         <location filename="pages/page.cpp" line="649"/>
         <source>Accordage (scale)</source>
-        <translation>调音(音阶)</translation>
+        <translation>校音(音阶)</translation>
     </message>
     <message>
         <location filename="pages/page.cpp" line="656"/>
         <source>Classe exclusive</source>
-        <translation>专用类</translation>
+        <translation type="unfinished">专用类</translation>
     </message>
     <message>
         <location filename="pages/page.cpp" line="664"/>
         <source>Note de base</source>
-        <translation>原始音符</translation>
+        <translation>基准音符</translation>
     </message>
 </context>
 <context>
@@ -3346,21 +3354,21 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
         <source>Nombre
 d&apos;échantillons</source>
         <oldsource>Nombre d&apos;échantillons</oldsource>
-        <translation>样本个数</translation>
+        <translation>样本数</translation>
     </message>
     <message>
         <location filename="pages/pageoverviewinst.cpp" line="40"/>
         <source>Nombre de
 paramètres</source>
         <oldsource>Nombre de paramètres</oldsource>
-        <translation>参数个数</translation>
+        <translation>参数数</translation>
     </message>
     <message>
         <location filename="pages/pageoverviewinst.cpp" line="41"/>
         <source>Nombre de
 modulateurs</source>
         <oldsource>Nombre de modulateurs</oldsource>
-        <translation>调节器个数</translation>
+        <translation>调制器数</translation>
     </message>
     <message>
         <location filename="pages/pageoverviewinst.cpp" line="42"/>
@@ -3458,7 +3466,7 @@ paramètres</source>
         <source>Nombre de
 modulateurs</source>
         <oldsource>Nombre de modulateurs</oldsource>
-        <translation>调节器编号</translation>
+        <translation>调制器编号</translation>
     </message>
     <message>
         <location filename="pages/pageoverviewprst.cpp" line="42"/>
@@ -3527,7 +3535,7 @@ la boucle</source>
         <location filename="pages/pageoverviewsmpl.cpp" line="41"/>
         <source>Note
 de base</source>
-        <translation>原始
+        <translation>基准
 音符</translation>
     </message>
     <message>
@@ -3589,7 +3597,7 @@ lié</source>
         <location filename="pages/pageoverviewsmpl.cpp" line="139"/>
         <source>Stéréo non défini</source>
         <oldsource>Stereo non défini</oldsource>
-        <translation>未定义立体声声道</translation>
+        <translation>双声道未定义</translation>
     </message>
     <message>
         <location filename="pages/pageoverviewsmpl.cpp" line="159"/>
@@ -3610,7 +3618,7 @@ lié</source>
         <location filename="pages/pagetable.cpp" line="1670"/>
         <location filename="pages/pagetable.cpp" line="1738"/>
         <source>Modulateur</source>
-        <translation>调节器</translation>
+        <translation>调制器</translation>
     </message>
     <message>
         <location filename="pages/pagetable.cpp" line="523"/>
@@ -3620,7 +3628,7 @@ lié</source>
     <message>
         <location filename="pages/pagetable.cpp" line="575"/>
         <source>Copier / dupliquer des modulateurs</source>
-        <translation type="unfinished">复制调节器</translation>
+        <translation>复制调制器</translation>
     </message>
     <message>
         <location filename="pages/pagetable.cpp" line="578"/>
@@ -3631,18 +3639,18 @@ lié</source>
         <location filename="pages/pagetable.cpp" line="579"/>
         <location filename="pages/pagetable.cpp" line="590"/>
         <source>Copier l&apos;ensemble des modulateurs</source>
-        <translation>复制全部调节器</translation>
+        <translation>复制全部调制器</translation>
     </message>
     <message>
         <location filename="pages/pagetable.cpp" line="583"/>
         <source>Dupliquer la sélection vers...</source>
-        <translation type="unfinished">Duplicate the selection toward...</translation>
+        <translation>复制选择项到...</translation>
     </message>
     <message>
         <location filename="pages/pagetable.cpp" line="584"/>
         <location filename="pages/pagetable.cpp" line="592"/>
         <source>Copier les modulateurs sélectionnés</source>
-        <translation>复制选择的调节器</translation>
+        <translation>复制选择的调制器</translation>
     </message>
     <message>
         <location filename="pages/pagetable.cpp" line="1992"/>
@@ -3665,12 +3673,12 @@ lié</source>
     <message>
         <location filename="pages/pagetable.cpp" line="2003"/>
         <source>les offsets ne peuvent être modulés dans un preset.</source>
-        <translation>在预设中偏移量无法被调节。</translation>
+        <translation>在预设中偏移量无法被调制。</translation>
     </message>
     <message>
         <location filename="pages/pagetable.cpp" line="2012"/>
         <source>&quot; ne peut être modulé dans un preset.</source>
-        <translation>&quot; 在预设中无法被调节。</translation>
+        <translation>&quot;在预设中无法被调制。</translation>
     </message>
     <message>
         <location filename="pages/pagetable.cpp" line="2904"/>
@@ -3685,7 +3693,7 @@ lié</source>
     <message>
         <location filename="pages/pagetable.cpp" line="2912"/>
         <source>L&apos;étendue de notes de toutes les divisions doit être spécifiée.</source>
-        <translation type="unfinished">The keyrange of all divisions must be specified.</translation>
+        <translation>必须为每个分层设置音符范围。</translation>
     </message>
     <message>
         <location filename="pages/pagetable.cpp" line="2951"/>
@@ -3713,17 +3721,17 @@ lié</source>
     <message>
         <location filename="pages/page_inst.ui" line="121"/>
         <source>Table</source>
-        <translation type="unfinished">Table</translation>
+        <translation>表格</translation>
     </message>
     <message>
         <location filename="pages/page_inst.ui" line="150"/>
         <source>Étendues</source>
-        <translation>范围</translation>
+        <translation>分层范围</translation>
     </message>
     <message>
         <location filename="pages/page_inst.ui" line="176"/>
         <source>Enveloppes</source>
-        <translation type="unfinished">Envelopes</translation>
+        <translation>包络</translation>
     </message>
     <message>
         <location filename="pages/page_inst.ui" line="286"/>
@@ -3743,7 +3751,7 @@ lié</source>
     <message>
         <location filename="pages/page_inst.ui" line="301"/>
         <source>Balance [-50;50]</source>
-        <translation>平衡[-50;50]</translation>
+        <translation>平衡[-50:50]</translation>
     </message>
     <message>
         <location filename="pages/page_inst.ui" line="306"/>
@@ -3753,22 +3761,22 @@ lié</source>
     <message>
         <location filename="pages/page_inst.ui" line="311"/>
         <source>Note de base</source>
-        <translation>原始音符</translation>
+        <translation>基准音符</translation>
     </message>
     <message>
         <location filename="pages/page_inst.ui" line="316"/>
         <source>Accordage (demi-tons)</source>
-        <translation>调音(半音)</translation>
+        <translation>校音(半音)</translation>
     </message>
     <message>
         <location filename="pages/page_inst.ui" line="321"/>
         <source>Accordage (centièmes)</source>
-        <translation>调音(音分)</translation>
+        <translation>校音(音分)</translation>
     </message>
     <message>
         <location filename="pages/page_inst.ui" line="326"/>
         <source>Accordage (scale)</source>
-        <translation>调音(音阶)</translation>
+        <translation>校音(音阶)</translation>
     </message>
     <message>
         <location filename="pages/page_inst.ui" line="331"/>
@@ -3917,7 +3925,7 @@ lié</source>
     <message>
         <location filename="pages/page_inst.ui" line="477"/>
         <source>Classe exclusive</source>
-        <translation>专用类</translation>
+        <translation type="unfinished">专用类</translation>
     </message>
     <message>
         <location filename="pages/page_inst.ui" line="482"/>
@@ -3932,7 +3940,7 @@ lié</source>
     <message>
         <location filename="pages/page_inst.ui" line="492"/>
         <source>Note fixe</source>
-        <translation>固定音符</translation>
+        <translation type="unfinished">固定音符</translation>
     </message>
     <message>
         <location filename="pages/page_inst.ui" line="497"/>
@@ -3969,48 +3977,48 @@ lié</source>
     <message>
         <location filename="pages/page_inst.ui" line="639"/>
         <source>Supprime un modulateur</source>
-        <translation>删除一个调节器</translation>
+        <translation>删除一个调制器</translation>
     </message>
     <message>
         <location filename="pages/page_inst.ui" line="659"/>
         <source>Copie les modulateurs</source>
-        <translation>复制调节器</translation>
+        <translation>复制调制器</translation>
     </message>
     <message>
         <location filename="pages/page_inst.ui" line="685"/>
         <source>Colle les modulateurs copiés</source>
-        <translation>粘贴调节器</translation>
+        <translation>粘贴调制器</translation>
     </message>
     <message>
         <location filename="pages/page_inst.ui" line="576"/>
         <source>Modulateurs</source>
-        <translation>调节器</translation>
+        <translation>调制器</translation>
     </message>
     <message>
         <location filename="pages/page_inst.ui" line="613"/>
         <source>Ajoute un modulateur</source>
-        <translation>添加一个调节器</translation>
+        <translation>添加调制器</translation>
     </message>
     <message>
         <location filename="pages/page_inst.ui" line="799"/>
         <source>Source</source>
-        <translation>来源值</translation>
+        <translation type="unfinished">来源值</translation>
     </message>
     <message>
         <location filename="pages/page_inst.ui" line="810"/>
         <source>Quantité</source>
-        <translation>对应值</translation>
+        <translation type="unfinished">量</translation>
     </message>
     <message>
         <location filename="pages/page_inst.ui" line="821"/>
         <location filename="pages/page_inst.ui" line="987"/>
         <source>Destination</source>
-        <translation>目标</translation>
+        <translation type="unfinished">调制目标</translation>
     </message>
     <message>
         <location filename="pages/page_inst.ui" line="835"/>
         <source>Source / Quantité</source>
-        <translation>来源值/对应值</translation>
+        <translation type="unfinished">来源值/量</translation>
     </message>
     <message>
         <location filename="pages/page_inst.ui" line="1036"/>
@@ -4027,13 +4035,13 @@ lié</source>
         <location filename="pages/page_inst.cpp" line="189"/>
         <source>&lt;b&gt;Instrument lié au preset : &lt;/b&gt;</source>
         <oldsource>&lt;b&gt;Instrument liÃ© au preset : &lt;/b&gt;</oldsource>
-        <translation>&lt;b&gt;乐器已链接到的预设：&lt;/b&gt;</translation>
+        <translation>&lt;b&gt;乐器已链接到的预设:&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="pages/page_inst.cpp" line="191"/>
         <source>&lt;b&gt;Instrument lié aux presets : &lt;/b&gt;</source>
         <oldsource>&lt;b&gt;Instrument liÃ© aux presets : &lt;/b&gt;</oldsource>
-        <translation>&lt;b&gt;乐器已链接到的预设： &lt;/b&gt;</translation>
+        <translation>&lt;b&gt;乐器已链接到的预设:&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="pages/page_inst.cpp" line="401"/>
@@ -4043,7 +4051,7 @@ lié</source>
     <message>
         <location filename="pages/page_inst.cpp" line="401"/>
         <source>L&apos;instrument doit contenir des sons.</source>
-        <translation>该乐器不包含样本。</translation>
+        <translation>此乐器不包含样本。</translation>
     </message>
     <message>
         <location filename="pages/page_inst.cpp" line="426"/>
@@ -4102,17 +4110,17 @@ lié</source>
     <message>
         <location filename="pages/page_prst.ui" line="335"/>
         <source>Accordage (demi-tons)</source>
-        <translation>调音(半音)</translation>
+        <translation>校音(半音)</translation>
     </message>
     <message>
         <location filename="pages/page_prst.ui" line="340"/>
         <source>Accordage (centièmes)</source>
-        <translation>调音(音分)</translation>
+        <translation>校音(音分)</translation>
     </message>
     <message>
         <location filename="pages/page_prst.ui" line="345"/>
         <source>Accordage (scale)</source>
-        <translation>调音(音阶)</translation>
+        <translation>校音(音阶)</translation>
     </message>
     <message>
         <location filename="pages/page_prst.ui" line="350"/>
@@ -4291,32 +4299,32 @@ lié</source>
     <message>
         <location filename="pages/page_prst.ui" line="640"/>
         <source>Copie les modulateurs</source>
-        <translation>复制调节器</translation>
+        <translation>复制调制器</translation>
     </message>
     <message>
         <location filename="pages/page_prst.ui" line="666"/>
         <source>Colle les modulateurs copiés</source>
-        <translation>粘贴调节器</translation>
+        <translation>粘贴调制器</translation>
     </message>
     <message>
         <location filename="pages/page_prst.ui" line="594"/>
         <source>Ajoute un modulateur</source>
-        <translation>添加一个调节器</translation>
+        <translation>添加调制器</translation>
     </message>
     <message>
         <location filename="pages/page_prst.ui" line="620"/>
         <source>Supprime un modulateur</source>
-        <translation>删除一个调节器</translation>
+        <translation>删除调制器</translation>
     </message>
     <message>
         <location filename="pages/page_prst.ui" line="554"/>
         <source>Modulateurs</source>
-        <translation>调节器</translation>
+        <translation>调制器</translation>
     </message>
     <message>
         <location filename="pages/page_prst.ui" line="188"/>
         <source>Table</source>
-        <translation type="unfinished">Table</translation>
+        <translation type="unfinished">表</translation>
     </message>
     <message>
         <location filename="pages/page_prst.ui" line="217"/>
@@ -4331,18 +4339,18 @@ lié</source>
     <message>
         <location filename="pages/page_prst.ui" line="791"/>
         <source>Quantité</source>
-        <translation>对应值</translation>
+        <translation type="unfinished">量</translation>
     </message>
     <message>
         <location filename="pages/page_prst.ui" line="802"/>
         <location filename="pages/page_prst.ui" line="953"/>
         <source>Destination</source>
-        <translation>目标</translation>
+        <translation type="unfinished">调制目标</translation>
     </message>
     <message>
         <location filename="pages/page_prst.ui" line="822"/>
         <source>Source / Quantité</source>
-        <translation>来源值/对应值</translation>
+        <translation type="unfinished">来源值/量</translation>
     </message>
     <message>
         <location filename="pages/page_prst.ui" line="996"/>
@@ -4421,12 +4429,12 @@ lié</source>
     <message>
         <location filename="pages/page_sf2.ui" line="246"/>
         <source>Nombre de paramètres (instruments)</source>
-        <translation>乐器参数个数</translation>
+        <translation>乐器参数数</translation>
     </message>
     <message>
         <location filename="pages/page_sf2.ui" line="266"/>
         <source>Nombre de paramètres (presets)</source>
-        <translation>预设参数个数</translation>
+        <translation>预设参数数</translation>
     </message>
     <message>
         <location filename="pages/page_sf2.ui" line="365"/>
@@ -4438,17 +4446,17 @@ lié</source>
         <location filename="pages/page_sf2.ui" line="239"/>
         <source>Nombre d&apos;échantillons</source>
         <oldsource>Nombre de samples</oldsource>
-        <translation>样本个数</translation>
+        <translation>样本数</translation>
     </message>
     <message>
         <location filename="pages/page_sf2.ui" line="232"/>
         <source>Nombre d&apos;instruments</source>
-        <translation>乐器个数</translation>
+        <translation>乐器数</translation>
     </message>
     <message>
         <location filename="pages/page_sf2.ui" line="292"/>
         <source>Nombre de presets</source>
-        <translation>预设个数</translation>
+        <translation>预设数</translation>
     </message>
     <message>
         <location filename="pages/page_sf2.cpp" line="226"/>
@@ -4492,12 +4500,12 @@ lié</source>
     <message>
         <location filename="pages/page_smpl.ui" line="951"/>
         <source>Utilise la longueur totale de l&apos;échantillon comme boucle</source>
-        <translation>使用样本的全长来循环</translation>
+        <translation>全长循环</translation>
     </message>
     <message>
         <location filename="pages/page_smpl.ui" line="1019"/>
         <source>Utilise l&apos;estimation de la note comme valeur</source>
-        <translation>预测并校正音符</translation>
+        <translation>使用音调预测校正音符值</translation>
     </message>
     <message>
         <location filename="pages/page_smpl.ui" line="1131"/>
@@ -4515,17 +4523,18 @@ lié</source>
     <message>
         <location filename="pages/page_smpl.ui" line="1198"/>
         <source>stéréo</source>
-        <translation>立体声</translation>
+        <translation>双声道</translation>
     </message>
     <message>
         <location filename="pages/page_smpl.ui" line="1147"/>
         <source>sinus</source>
-        <translation>正弦</translation>
+        <translatorcomment>A sinus calibration is added to the sound, allowing a sample tuning to the nearest pitch hundredth. At first the root key must be filled. At this level, beats can be heard if the frequency of the sinus differs slightly from the fundamental frequency of the sound. It remains to finely adjust the correction to make the beats as slow as possible, so that the sample is tuned at best.</translatorcomment>
+        <translation type="unfinished">sinus</translation>
     </message>
     <message>
         <location filename="pages/page_smpl.ui" line="971"/>
         <source>Taille</source>
-        <translation>大小</translation>
+        <translation>长度</translation>
     </message>
     <message>
         <location filename="pages/page_smpl.ui" line="825"/>
@@ -4535,7 +4544,7 @@ lié</source>
     <message>
         <location filename="pages/page_smpl.ui" line="1006"/>
         <source>Note de base</source>
-        <translation>原始音符</translation>
+        <translation>基准音符</translation>
     </message>
     <message>
         <location filename="pages/page_smpl.ui" line="978"/>
@@ -4604,13 +4613,13 @@ lié</source>
         <location filename="pages/page_smpl.cpp" line="342"/>
         <source>&lt;b&gt;Échantillon lié à l&apos;instrument : &lt;/b&gt;</source>
         <oldsource>&lt;b&gt;Sample lié à l&apos;instrument : &lt;/b&gt;</oldsource>
-        <translation>&lt;b&gt;样本已链接到的乐器： &lt;/b&gt;</translation>
+        <translation>&lt;b&gt;样本已链接到的乐器：&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="pages/page_smpl.cpp" line="344"/>
         <source>&lt;b&gt;Échantillon lié aux instruments : &lt;/b&gt;</source>
         <oldsource>&lt;b&gt;Sample lié aux instruments : &lt;/b&gt;</oldsource>
-        <translation>&lt;b&gt;样本已链接到的乐器： &lt;/b&gt;</translation>
+        <translation>&lt;b&gt;样本已链接到的乐器：&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="pages/page_smpl.cpp" line="560"/>
@@ -4622,7 +4631,7 @@ lié</source>
         <location filename="pages/page_smpl.cpp" line="561"/>
         <location filename="pages/page_smpl.cpp" line="1821"/>
         <source>Modification appliquée avec succès aux différents échantillons</source>
-        <translation>更改已成功应用到不同的样本</translation>
+        <translation>更改已成功应用到其它样本</translation>
     </message>
     <message>
         <location filename="pages/page_smpl.cpp" line="1238"/>
@@ -4632,7 +4641,7 @@ lié</source>
     <message>
         <location filename="pages/page_smpl.cpp" line="1238"/>
         <source> » n&apos;a pas pu être bouclé.</source>
-        <translation>&quot; 无法循环。</translation>
+        <translation>&quot;无法循环。</translation>
     </message>
     <message>
         <location filename="pages/page_smpl.cpp" line="1241"/>
@@ -4653,7 +4662,7 @@ lié</source>
     <message>
         <location filename="pages/page_smpl.cpp" line="1355"/>
         <source>Cet outil ne s&apos;applique que sur des échantillons stéréo.</source>
-        <translation>该工具仅可用于立体声样本。</translation>
+        <translation>该工具仅可用于双声道样本。</translation>
     </message>
     <message>
         <location filename="pages/page_smpl.cpp" line="1450"/>
@@ -4782,12 +4791,12 @@ lié</source>
     <message>
         <location filename="sf2_core/duplicator.cpp" line="259"/>
         <source>&lt;b&gt;Des paramètres globaux sont déjà renseignés.&lt;/b&gt;</source>
-        <translation>&lt;b&gt;全局参数已被填充。&lt;/b&gt;</translation>
+        <translation>&lt;b&gt;全局参数已填充。&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="sf2_core/duplicator.cpp" line="260"/>
         <source>La division globale ne sera pas recopiée.</source>
-        <translation>The global division will not be copied.</translation>
+        <translation>全局分层将不会被复制。</translation>
     </message>
     <message>
         <location filename="sf2_core/duplicator.cpp" line="262"/>
@@ -4797,38 +4806,38 @@ lié</source>
     <message>
         <location filename="sf2_core/duplicator.cpp" line="263"/>
         <source>Ok, &amp;désactiver ce message</source>
-        <translation>确定并禁用该提示(&amp;D)</translation>
+        <translation>确定并不再提示(&amp;D)</translation>
     </message>
     <message>
         <location filename="sf2_core/duplicator.cpp" line="298"/>
         <source>L&apos;échantillon « </source>
         <oldsource>l&apos;échantillon « </oldsource>
-        <translation>样本 &quot;</translation>
+        <translation>样本&quot;</translation>
     </message>
     <message>
         <location filename="sf2_core/duplicator.cpp" line="299"/>
         <source> » existe déjà.&lt;br /&gt;Que faire ?</source>
         <oldsource>&amp;#160;» existe déjà.&lt;br /&gt;Que faire ?</oldsource>
-        <translation>&quot;已存在。&lt;br/&gt;要执行什么操作？</translation>
+        <translation>&quot;已存在。&lt;br/&gt;是否替换？</translation>
     </message>
     <message>
         <location filename="sf2_core/duplicator.cpp" line="440"/>
         <source>L&apos;instrument « </source>
         <oldsource>L&apos;instrument «&amp;#160;</oldsource>
-        <translation>乐器 &quot;</translation>
+        <translation>乐器&quot;</translation>
     </message>
     <message>
         <location filename="sf2_core/duplicator.cpp" line="441"/>
         <location filename="sf2_core/duplicator.cpp" line="541"/>
         <source> » existe déjà.&lt;br /&gt;Souhaitez-vous le remplacer ?</source>
         <oldsource>&amp;#160;» existe déjà.&lt;br /&gt;Souhaitez-vous le remplacer ?</oldsource>
-        <translation>&quot;已存在。&lt;br/&gt;要替换吗？</translation>
+        <translation>&quot;已存在。&lt;br/&gt;是否替换？</translation>
     </message>
     <message>
         <location filename="sf2_core/duplicator.cpp" line="540"/>
         <source>Le preset « </source>
         <oldsource>Le preset «&amp;#160;</oldsource>
-        <translation>预设 &quot;</translation>
+        <translation>预设&quot;</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="2060"/>
@@ -4907,12 +4916,12 @@ lié</source>
     <message>
         <location filename="sf2_core/sound.cpp" line="320"/>
         <source>Erreur dans Sound::getData.</source>
-        <translation>Error in Sound::getData.</translation>
+        <translation>在 Sound::getData 中发生错误。</translation>
     </message>
     <message>
         <location filename="sf2_core/sound.cpp" line="651"/>
         <source>Impossible d&apos;ouvrir le fichier</source>
-        <translation>无法打开该文件。</translation>
+        <translation>无法打开该文件</translation>
     </message>
     <message>
         <location filename="sf2_core/sound.cpp" line="665"/>
@@ -4932,33 +4941,33 @@ lié</source>
         <location filename="tools/conversion_sfz.cpp" line="288"/>
         <source>// Sfz exporté depuis un sf2 par Polyphone</source>
         <oldsource>// Sfz exported from sf2 by Polyphone</oldsource>
-        <translation>// 该 SFZ 由 Polyphone 从 SF2 导出</translation>
+        <translation>// 此 SFZ 文件由 Polyphone 从 SF2 导出</translation>
     </message>
     <message>
         <location filename="tools/conversion_sfz.cpp" line="289"/>
         <source>// Nom         : </source>
         <translatorcomment>count the spaces so that the &quot;:&quot; are aligned</translatorcomment>
-        <translation>// 名字     :</translation>
+        <translation>// 名字     : </translation>
     </message>
     <message>
         <location filename="tools/conversion_sfz.cpp" line="290"/>
         <source>// Auteur      : </source>
-        <translation>// 作者     :</translation>
+        <translation>// 作者     : </translation>
     </message>
     <message>
         <location filename="tools/conversion_sfz.cpp" line="291"/>
         <source>// Copyright   : </source>
-        <translation>// 版权     ：</translation>
+        <translation>// 版权     : </translation>
     </message>
     <message>
         <location filename="tools/conversion_sfz.cpp" line="292"/>
         <source>// Date        : </source>
-        <translation>// 日期     :</translation>
+        <translation>// 日期     : </translation>
     </message>
     <message>
         <location filename="tools/conversion_sfz.cpp" line="293"/>
         <source>// Commentaire : </source>
-        <translation>// 评论     :</translation>
+        <translation>// 评论     : </translation>
     </message>
     <message>
         <location filename="tools/conversion_sfz.cpp" line="551"/>
@@ -4974,12 +4983,12 @@ lié</source>
     <message>
         <location filename="tools/conversion_sfz.cpp" line="556"/>
         <source>Percussions chromatiques</source>
-        <translation type="unfinished">Chromatic percussion</translation>
+        <translation>半音阶打击乐</translation>
     </message>
     <message>
         <location filename="tools/conversion_sfz.cpp" line="558"/>
         <source>Orgues</source>
-        <translation type="unfinished">Organ</translation>
+        <translation>风琴</translation>
     </message>
     <message>
         <location filename="tools/conversion_sfz.cpp" line="560"/>
@@ -4989,57 +4998,57 @@ lié</source>
     <message>
         <location filename="tools/conversion_sfz.cpp" line="562"/>
         <source>Basses</source>
-        <translation>Bass</translation>
+        <translation>低音</translation>
     </message>
     <message>
         <location filename="tools/conversion_sfz.cpp" line="564"/>
         <source>Cordes</source>
-        <translation type="unfinished">Strings</translation>
+        <translation>弦乐</translation>
     </message>
     <message>
         <location filename="tools/conversion_sfz.cpp" line="566"/>
         <source>Orchestre</source>
-        <translation type="unfinished">Ensemble</translation>
+        <translation>和弦</translation>
     </message>
     <message>
         <location filename="tools/conversion_sfz.cpp" line="568"/>
         <source>Cuivres</source>
-        <translation type="unfinished">Brass</translation>
+        <translation>铜管乐</translation>
     </message>
     <message>
         <location filename="tools/conversion_sfz.cpp" line="570"/>
         <source>Instrument à anches</source>
-        <translation type="unfinished">Reed</translation>
+        <translation>簧乐</translation>
     </message>
     <message>
         <location filename="tools/conversion_sfz.cpp" line="572"/>
         <source>Flûtes</source>
-        <translation type="unfinished">Pipe</translation>
+        <translation>管乐</translation>
     </message>
     <message>
         <location filename="tools/conversion_sfz.cpp" line="574"/>
         <source>Synthétiseur solo</source>
-        <translation type="unfinished">Synth lead</translation>
+        <translation>合成主音</translation>
     </message>
     <message>
         <location filename="tools/conversion_sfz.cpp" line="576"/>
         <source>Nappes de synthétiseur</source>
-        <translation type="unfinished">Synth pad</translation>
+        <translation>合成柔音</translation>
     </message>
     <message>
         <location filename="tools/conversion_sfz.cpp" line="578"/>
         <source>Effets de synthétiseur</source>
-        <translation>合成效果</translation>
+        <translation>合成音效</translation>
     </message>
     <message>
         <location filename="tools/conversion_sfz.cpp" line="580"/>
         <source>Instruments ethniques</source>
-        <translation type="unfinished">Ethnic</translation>
+        <translation>民乐</translation>
     </message>
     <message>
         <location filename="tools/conversion_sfz.cpp" line="582"/>
         <source>Percussions</source>
-        <translation type="unfinished">Percussive</translation>
+        <translation>打击乐</translation>
     </message>
     <message>
         <location filename="tools/conversion_sfz.cpp" line="584"/>
@@ -5049,33 +5058,33 @@ lié</source>
     <message>
         <location filename="tools/conversion_sfz.cpp" line="586"/>
         <source>Kits de percussion</source>
-        <translation type="unfinished">Percussion kit</translation>
-    </message>
-    <message>
-        <location filename="gui_divers/dialog_about.cpp" line="109"/>
-        <source>Créé par </source>
-        <translatorcomment>mind the final space</translatorcomment>
-        <translation>制作者 </translation>
+        <translation>打击乐组</translation>
     </message>
     <message>
         <location filename="gui_divers/dialog_about.cpp" line="110"/>
+        <source>Créé par </source>
+        <translatorcomment>mind the final space</translatorcomment>
+        <translation>作者 </translation>
+    </message>
+    <message>
+        <location filename="gui_divers/dialog_about.cpp" line="111"/>
         <source>Contributeurs </source>
         <translation>贡献者 </translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_about.cpp" line="111"/>
+        <location filename="gui_divers/dialog_about.cpp" line="112"/>
         <source>Traduit par </source>
         <translation>翻译者 </translation>
     </message>
     <message>
         <location filename="tools/import_sfz.cpp" line="166"/>
         <source>Import sfz</source>
-        <translation>导入 SFZ</translation>
+        <translation>导入 SFZ 文件</translation>
     </message>
     <message>
         <location filename="tools/import_sfz.cpp" line="168"/>
         <source>Sf2 importé depuis un fichier sfz par Polyphone</source>
-        <translation>该 SF2 由 Polyphone 从 SFZ 导入</translation>
+        <translation>此 SF2 文件由 Polyphone 从 SFZ 导入</translation>
     </message>
     <message>
         <location filename="sfark/sfarkextractor.cpp" line="62"/>
@@ -5100,12 +5109,12 @@ lié</source>
     <message>
         <location filename="sf2_core/tree.cpp" line="59"/>
         <source>Nouvel instrument...</source>
-        <translation>新乐器(&amp;I)...</translation>
+        <translation>新乐器...</translation>
     </message>
     <message>
         <location filename="sf2_core/tree.cpp" line="62"/>
         <source>Nouveau preset...</source>
-        <translation>新预设(&amp;P)...</translation>
+        <translation>新预设...</translation>
     </message>
     <message>
         <location filename="sf2_core/tree.cpp" line="71"/>
@@ -5151,7 +5160,7 @@ lié</source>
         <location filename="sf2_core/tree.cpp" line="118"/>
         <location filename="sf2_core/tree.cpp" line="194"/>
         <source>Tout afficher</source>
-        <translation>显示全部</translation>
+        <translation>全部</translation>
     </message>
     <message>
         <location filename="sf2_core/tree.cpp" line="504"/>
