@@ -715,7 +715,7 @@
     </message>
     <message>
         <location filename="gui_divers/dialog_about.cpp" line="59"/>
-        <location filename="gui_divers/dialog_about.cpp" line="66"/>
+        <location filename="gui_divers/dialog_about.cpp" line="67"/>
         <source>Steve Clarke</source>
         <translation>Steve Clarke</translation>
     </message>
@@ -736,6 +736,11 @@
     </message>
     <message>
         <location filename="gui_divers/dialog_about.cpp" line="65"/>
+        <source>Magson</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="gui_divers/dialog_about.cpp" line="66"/>
         <source>Pavel Fric</source>
         <translation>Pavel Fric</translation>
     </message>
@@ -5052,18 +5057,18 @@ sample</translation>
         <translation>Percussion kit</translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_about.cpp" line="109"/>
+        <location filename="gui_divers/dialog_about.cpp" line="110"/>
         <source>Créé par </source>
         <translatorcomment>mind the final space</translatorcomment>
         <translation>Created by </translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_about.cpp" line="110"/>
+        <location filename="gui_divers/dialog_about.cpp" line="111"/>
         <source>Contributeurs </source>
         <translation>Contributors </translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_about.cpp" line="111"/>
+        <location filename="gui_divers/dialog_about.cpp" line="112"/>
         <source>Traduit par </source>
         <translation>Translated by </translation>
     </message>
