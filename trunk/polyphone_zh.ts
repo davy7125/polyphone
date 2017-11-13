@@ -24,7 +24,7 @@
     <message>
         <location filename="configuration/config.ui" line="46"/>
         <source>Général</source>
-        <translation>通常</translation>
+        <translation>通用</translation>
     </message>
     <message>
         <location filename="configuration/config.ui" line="191"/>
@@ -39,13 +39,13 @@
     <message>
         <location filename="configuration/config.ui" line="237"/>
         <source>enlever le blanc au départ</source>
-        <translation>移除起始空白部分</translation>
+        <translation>删除开头空白部分</translation>
     </message>
     <message>
         <location filename="configuration/config.ui" line="276"/>
         <source>répercuter les modifications</source>
         <oldsource>répercuter les modifications si stéréo</oldsource>
-        <translation>同时修改链接的样本</translation>
+        <translation>修改链接的样本</translation>
     </message>
     <message>
         <location filename="configuration/config.ui" line="289"/>
@@ -158,7 +158,7 @@
     <message>
         <location filename="configuration/config.ui" line="1417"/>
         <source>Actions disponibles</source>
-        <translation>可用动作</translation>
+        <translation>可用操作</translation>
     </message>
     <message>
         <location filename="configuration/config.ui" line="1663"/>
@@ -173,7 +173,7 @@
     <message>
         <location filename="configuration/config.ui" line="263"/>
         <source>Import fichiers wav</source>
-        <translation>WAV 文件输出</translation>
+        <translation>WAV 文件导入</translation>
     </message>
     <message>
         <location filename="configuration/config.ui" line="1815"/>
@@ -773,7 +773,7 @@
         <location filename="tools/dialog_attenuation.ui" line="121"/>
         <location filename="tools/dialog_attenuation.ui" line="242"/>
         <source> dB</source>
-        <translation> dB</translation>
+        <translation> 分贝</translation>
     </message>
     <message>
         <location filename="tools/dialog_attenuation.ui" line="137"/>
@@ -792,19 +792,18 @@
     <message>
         <location filename="tools/dialog_celeste.ui" line="17"/>
         <source>Accordage céleste</source>
-        <translation type="unfinished">Celeste tuning</translation>
+        <translation>钢片琴调音</translation>
     </message>
     <message>
         <location filename="tools/dialog_celeste.ui" line="39"/>
         <source>Nombre de battements par secondes au do 4 (note 60)</source>
         <oldsource>Nombre de battements par secondes au do 3 (note 60)</oldsource>
-        <translatorcomment>C4(音符 60)的每秒节拍数</translatorcomment>
-        <translation type="unfinished">Number of beats per second at C4 (key 60)</translation>
+        <translation>C4(音符 60)的每秒节拍数</translation>
     </message>
     <message>
         <location filename="tools/dialog_celeste.ui" line="56"/>
         <source>Le signe définit le sens du désaccordage.</source>
-        <translation type="unfinished">The algebraic sign determines the tuning direction.</translation>
+        <translation>代数符号决定调音方向。</translation>
     </message>
     <message>
         <location filename="tools/dialog_celeste.ui" line="79"/>
@@ -814,8 +813,7 @@
     <message>
         <location filename="tools/dialog_celeste.cpp" line="44"/>
         <source>Nombre de battements par secondes (note </source>
-        <translatorcomment>每秒节拍数(音符 </translatorcomment>
-        <translation type="unfinished">Number of beats per second (key </translation>
+        <translation>每秒节拍数(音符 </translation>
     </message>
 </context>
 <context>
@@ -858,12 +856,12 @@
     <message>
         <location filename="gui_divers/dialogchangelog.cpp" line="82"/>
         <source>Ce qui est amélioré</source>
-        <translation>改进的地方</translation>
+        <translation>改进部分</translation>
     </message>
     <message>
         <location filename="gui_divers/dialogchangelog.cpp" line="85"/>
         <source>Ce qui est résolu</source>
-        <translation>修复的问题</translation>
+        <translation>修复问题</translation>
     </message>
 </context>
 <context>
@@ -896,7 +894,7 @@
     <message>
         <location filename="tools/dialog_change_volume.ui" line="90"/>
         <source> dB</source>
-        <translation> dB</translation>
+        <translation> 分贝</translation>
     </message>
 </context>
 <context>
@@ -914,7 +912,7 @@
     <message>
         <location filename="tools/dialog_command.ui" line="46"/>
         <source>Commande</source>
-        <translation>命令行</translation>
+        <translation>命令</translation>
     </message>
     <message>
         <location filename="tools/dialog_command.ui" line="67"/>
@@ -958,7 +956,7 @@
     <message>
         <location filename="tools/dialog_duplication.ui" line="17"/>
         <source>Duplication des divisions</source>
-        <translation>创建分层副本</translation>
+        <translation>复制分层</translation>
     </message>
     <message>
         <location filename="tools/dialog_duplication.ui" line="65"/>
@@ -987,7 +985,7 @@
     <message>
         <location filename="gui_divers/dialog_export.ui" line="54"/>
         <source>Tout décocher</source>
-        <translation>取消全选</translation>
+        <translation>全不选</translation>
     </message>
     <message>
         <location filename="gui_divers/dialog_export.ui" line="109"/>
@@ -1002,17 +1000,17 @@
     <message>
         <location filename="gui_divers/dialog_export.ui" line="159"/>
         <source>numéro de preset en préfixe</source>
-        <translation>名称附加预设编号前缀</translation>
+        <translation>附加预设号前缀</translation>
     </message>
     <message>
         <location filename="gui_divers/dialog_export.ui" line="152"/>
         <source>un répertoire par banque</source>
-        <translation>每个库置于分别文件夹</translation>
+        <translation>每个库置于单独文件夹</translation>
     </message>
     <message>
         <location filename="gui_divers/dialog_export.ui" line="145"/>
         <source>classement général midi</source>
-        <translation>GM MIDI 标准</translation>
+        <translation>GM MIDI 分类</translation>
     </message>
     <message>
         <location filename="gui_divers/dialog_export.ui" line="170"/>
@@ -1055,17 +1053,17 @@
     <message>
         <location filename="gui_divers/dialog_export.cpp" line="141"/>
         <source>Le répertoire n&apos;est pas valide.</source>
-        <translation>不合法的目录。</translation>
+        <translation>路径不合法。</translation>
     </message>
     <message>
         <location filename="gui_divers/dialog_export.cpp" line="180"/>
         <source>Dans le cas où plusieurs soundfonts sont exportées, le nombre maximal de presets par soundfont est de 127.</source>
-        <translation>在导出多个音色库时，每个音色库的预设数量上限是 127 个。</translation>
+        <translation>导出音色库时，每个音色库的预设数不能超过 127。</translation>
     </message>
     <message>
         <location filename="gui_divers/dialog_export.cpp" line="186"/>
         <source>Le nombre maximal de soundfonts à exporter est de 127.</source>
-        <translation>一次最多可导出的音色库数量是 127 个。</translation>
+        <translation>一次最多只能导出 127 个音色库。</translation>
     </message>
     <message>
         <location filename="gui_divers/dialog_export.cpp" line="193"/>
@@ -1106,12 +1104,12 @@
     <message>
         <location filename="tools/dialog_filter_frequencies.ui" line="17"/>
         <source>Filtrer fréquences</source>
-        <translation>频率过滤</translation>
+        <translation>频率滤波</translation>
     </message>
     <message>
         <location filename="tools/dialog_filter_frequencies.ui" line="88"/>
         <source>Mettre dans le rouge les fréquences du signal à filtrer :</source>
-        <translation>请把要过滤的频率置于红色区域中：</translation>
+        <translation>将要滤波的频率置于红色部分：</translation>
     </message>
 </context>
 <context>
@@ -1148,7 +1146,7 @@
     <message>
         <location filename="tools/dialog_magnetophone.cpp" line="96"/>
         <source>Fichier .wav (*.wav)</source>
-        <translation>波形文件(*.wav)</translation>
+        <translation>WAV 文件(*.wav)</translation>
     </message>
     <message>
         <location filename="tools/dialog_magnetophone.cpp" line="163"/>
@@ -1163,8 +1161,8 @@
         <location filename="tools/dialog_mixture.ui" line="17"/>
         <source>Création mixture</source>
         <oldsource>Création mutation / mixture</oldsource>
-        <translatorcomment>Mixture = organ stop made of a combinaison of harmonics</translatorcomment>
-        <translation type="unfinished">Mixture creation</translation>
+        <translatorcomment>Mixture = organ stop made of a combination of harmonics</translatorcomment>
+        <translation>创建混合音栓</translation>
     </message>
     <message>
         <location filename="tools/dialog_mixture.ui" line="38"/>
@@ -1174,7 +1172,7 @@
     <message>
         <location filename="tools/dialog_mixture.ui" line="48"/>
         <source>Création de son :</source>
-        <translation type="unfinished">Sample creation:</translation>
+        <translation>创建样本：</translation>
     </message>
     <message>
         <location filename="tools/dialog_mixture.ui" line="56"/>
@@ -1214,7 +1212,8 @@
     <message>
         <location filename="tools/dialog_mixture.ui" line="274"/>
         <source>Rangs</source>
-        <translation type="unfinished">Ranks</translation>
+        <translatorcomment>音管</translatorcomment>
+        <translation>管列</translation>
     </message>
     <message>
         <location filename="tools/dialog_mixture.ui" line="347"/>
@@ -1224,72 +1223,72 @@
     <message>
         <location filename="tools/dialog_mixture.ui" line="355"/>
         <source>octave</source>
-        <translation>八度音阶</translation>
+        <translation>八度</translation>
     </message>
     <message>
         <location filename="tools/dialog_mixture.ui" line="360"/>
         <source>quinte</source>
-        <translation type="unfinished">fifth</translation>
+        <translation>五度</translation>
     </message>
     <message>
         <location filename="tools/dialog_mixture.ui" line="365"/>
         <source>tierce</source>
-        <translation type="unfinished">third</translation>
+        <translation>三度</translation>
     </message>
     <message>
         <location filename="tools/dialog_mixture.ui" line="370"/>
         <source>septième</source>
-        <translation type="unfinished">seventh</translation>
+        <translation>七度</translation>
     </message>
     <message>
         <location filename="tools/dialog_mixture.ui" line="375"/>
         <source>neuvième</source>
-        <translation type="unfinished">ninth</translation>
+        <translation>九度</translation>
     </message>
     <message>
         <location filename="tools/dialog_mixture.ui" line="380"/>
         <source>onzième</source>
-        <translation type="unfinished">eleventh</translation>
+        <translation>十一度</translation>
     </message>
     <message>
         <location filename="tools/dialog_mixture.ui" line="385"/>
         <source>treizième</source>
-        <translation type="unfinished">thirteenth</translation>
+        <translation>十三度</translation>
     </message>
     <message>
         <location filename="tools/dialog_mixture.ui" line="390"/>
         <source>quinzième</source>
-        <translation type="unfinished">fifteenth</translation>
+        <translation>十五度</translation>
     </message>
     <message>
         <location filename="tools/dialog_mixture.ui" line="395"/>
         <source>dix-septième</source>
-        <translation type="unfinished">seventeenth</translation>
+        <translation>十七度</translation>
     </message>
     <message>
         <location filename="tools/dialog_mixture.ui" line="400"/>
         <source>dix-neuvième</source>
-        <translation type="unfinished">nineteenth</translation>
+        <translation>十九度</translation>
     </message>
     <message>
         <location filename="tools/dialog_mixture.ui" line="405"/>
         <source>vingt-et-unième</source>
-        <translation type="unfinished">twenty-first</translation>
+        <translation>二十一度</translation>
     </message>
     <message>
         <location filename="tools/dialog_mixture.ui" line="410"/>
         <source>vingt-troisième</source>
-        <translation type="unfinished">twenty-third</translation>
+        <translation>二十三度</translation>
     </message>
     <message>
         <location filename="tools/dialog_mixture.ui" line="415"/>
         <source>vingt-cinquième</source>
-        <translation type="unfinished">twenty-fifth</translation>
+        <translation>二十五度</translation>
     </message>
     <message>
         <location filename="tools/dialog_mixture.ui" line="420"/>
         <source>vingt-septième</source>
-        <translation type="unfinished">twenty-seventh</translation>
+        <translation>二十七度</translation>
     </message>
     <message>
         <location filename="tools/dialog_mixture.cpp" line="291"/>
@@ -1302,7 +1301,7 @@
     <message>
         <location filename="tools/dialog_paramglobal.ui" line="17"/>
         <source>Paramétrage global</source>
-        <translation>全局设置</translation>
+        <translation>全局调整</translation>
     </message>
     <message>
         <location filename="tools/dialog_paramglobal.ui" line="181"/>
@@ -1400,24 +1399,23 @@
     <message>
         <location filename="tools/dialog_release.ui" line="114"/>
         <source>Désaccordage provoqué (demi-tons)</source>
-        <translatorcomment>失谐引导(半音)</translatorcomment>
-        <translation type="unfinished">Detuning induced (半音)</translation>
+        <translation>引发失谐(半音)</translation>
     </message>
     <message>
         <location filename="tools/dialog_release.ui" line="61"/>
         <source>Durée release au do 2 (note 36)</source>
         <oldsource>Durée release au do 1 (note 36)</oldsource>
-        <translation type="unfinished">C2(音符 36)的释音时间</translation>
+        <translation>C2(音符 36)的释音时长</translation>
     </message>
     <message>
         <location filename="tools/dialog_release.ui" line="68"/>
         <source>Division à l&apos;octave suivante</source>
-        <translation type="unfinished">划分到下个八度音阶</translation>
+        <translation>划分到下个八度音阶</translation>
     </message>
     <message>
         <location filename="tools/dialog_release.cpp" line="45"/>
         <source>Durée release (note </source>
-        <translation type="unfinished">释音时间(音符 </translation>
+        <translation>释音时长(音符 </translation>
     </message>
 </context>
 <context>
@@ -1440,7 +1438,7 @@
     <message>
         <location filename="gui_divers/dialog_rename.ui" line="69"/>
         <source>Supprimer une étendue</source>
-        <translation>在指定范围删除文本</translation>
+        <translation>删除指定范围文本</translation>
     </message>
     <message>
         <location filename="gui_divers/dialog_rename.ui" line="87"/>
@@ -1451,7 +1449,7 @@
     <message>
         <location filename="gui_divers/dialog_rename.ui" line="49"/>
         <source>Écraser nom existant avec nom de la note en suffixe</source>
-        <translation>为名称添加音符后缀</translation>
+        <translation>为名称添加音符名后缀</translation>
     </message>
     <message>
         <location filename="gui_divers/dialog_rename.ui" line="54"/>
@@ -1462,7 +1460,7 @@
         <location filename="gui_divers/dialog_rename.cpp" line="84"/>
         <location filename="gui_divers/dialog_rename.cpp" line="95"/>
         <source>Nouveau nom :</source>
-        <translation>新名字：</translation>
+        <translation>新名称：</translation>
     </message>
     <message>
         <location filename="gui_divers/dialog_rename.cpp" line="106"/>
@@ -1477,7 +1475,7 @@
     <message>
         <location filename="gui_divers/dialog_rename.cpp" line="119"/>
         <source>Texte à insérer :</source>
-        <translation>要插入的文本：</translation>
+        <translation>插入文本：</translation>
     </message>
     <message>
         <location filename="gui_divers/dialog_rename.cpp" line="130"/>
@@ -1501,7 +1499,7 @@
     <message>
         <location filename="gui_divers/dialogselection.ui" line="37"/>
         <source>Tout décocher</source>
-        <translation>取消全选</translation>
+        <translation>全不选</translation>
     </message>
     <message>
         <location filename="gui_divers/dialogselection.ui" line="46"/>
@@ -1583,7 +1581,7 @@
     <message>
         <location filename="tools/dialog_transposition.ui" line="44"/>
         <source>Écart en demi-tons</source>
-        <translation>音调移动量(半音)</translation>
+        <translation>移动量(半音)</translation>
     </message>
     <message>
         <location filename="tools/dialog_transposition.ui" line="27"/>
@@ -1646,7 +1644,7 @@
         <location filename="pages/envelopeditor.cpp" line="95"/>
         <source> dB</source>
         <comment>unit for decibels</comment>
-        <translation> dB</translation>
+        <translation> 分贝</translation>
     </message>
     <message>
         <location filename="pages/envelopeditor.ui" line="89"/>
@@ -1757,7 +1755,7 @@
     <message>
         <location filename="pages/graphiquefourier.cpp" line="53"/>
         <source>Fréquence (Hz)</source>
-        <translation>频率(Hz)</translation>
+        <translation>频率(赫兹)</translation>
     </message>
     <message>
         <location filename="pages/graphiquefourier.cpp" line="68"/>
@@ -1788,7 +1786,7 @@
         <location filename="pages/graphiquefourier.cpp" line="326"/>
         <source>Hz</source>
         <comment>unit for Herz</comment>
-        <translation>Hz</translation>
+        <translation>赫兹</translation>
     </message>
     <message>
         <location filename="pages/graphiquefourier.cpp" line="395"/>
@@ -2019,13 +2017,13 @@
     <message>
         <location filename="mainwindow.ui" line="867"/>
         <source>&amp;Enlever les éléments non utilisés</source>
-        <translation>移除未使用的元素(&amp;R)</translation>
+        <translation>删除未使用的元素(&amp;R)</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="870"/>
         <source>Enlève les échantillons et instruments non utilisés</source>
         <oldsource>Enlève les samples et instruments non utilisés</oldsource>
-        <translation>移除未使用的样本和乐器</translation>
+        <translation>删除未使用的样本和乐器</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="882"/>
@@ -2094,7 +2092,7 @@
         <location filename="mainwindow.ui" line="1062"/>
         <source>Enleve le blanc au début d&apos;un échantillon</source>
         <oldsource>Enleve le blanc au début d&apos;un sample</oldsource>
-        <translation>移除样本的起始空白部分</translation>
+        <translation>删除样本开头的空白部分</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="1077"/>
@@ -2143,17 +2141,17 @@
     <message>
         <location filename="mainwindow.ui" line="1164"/>
         <source>&amp;Accordage céleste...</source>
-        <translation type="unfinished">&amp;Celeste tuning...</translation>
+        <translation>钢片琴调音(&amp;C)...</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="1167"/>
         <source>Accorde les sons pour créer des battements</source>
-        <translation type="unfinished">Tune the sounds to create beats</translation>
+        <translation>调音以创建节拍</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="1212"/>
         <source>Duplication des divisions...</source>
-        <translation>创建分层副本...</translation>
+        <translation>复制分层...</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="1285"/>
@@ -2173,7 +2171,7 @@
     <message>
         <location filename="mainwindow.ui" line="1322"/>
         <source>Duplication des divisions</source>
-        <translation>创建分层副本</translation>
+        <translation>复制分层</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="1382"/>
@@ -2253,7 +2251,7 @@
     <message>
         <location filename="mainwindow.ui" line="1523"/>
         <source>Enlever tous les &amp;modulateurs</source>
-        <translation>移除所有调制器(&amp;M)</translation>
+        <translation>删除所有调制器(&amp;M)</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="1531"/>
@@ -2295,7 +2293,7 @@
         <location filename="mainwindow.ui" line="1319"/>
         <source>&amp;Duplication des divisions...</source>
         <oldsource>&amp;Duplication des divisions</oldsource>
-        <translation>创建分层副本(&amp;D)...</translation>
+        <translation>复制分层(&amp;D)...</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="1089"/>
@@ -2311,7 +2309,7 @@
     <message>
         <location filename="mainwindow.ui" line="1119"/>
         <source>&amp;Filtrer des fréquences...</source>
-        <translation>频率过滤(&amp;F)...</translation>
+        <translation>频率滤波(&amp;F)...</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="1122"/>
@@ -2420,7 +2418,7 @@
     <message>
         <location filename="mainwindow.ui" line="1059"/>
         <source>&amp;Enlever blanc au départ</source>
-        <translation>移除起始空白部分(&amp;R)</translation>
+        <translation>删除开头空白部分(&amp;R)</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="1074"/>
@@ -2441,18 +2439,19 @@
         <location filename="mainwindow.ui" line="1179"/>
         <location filename="mainwindow.ui" line="1424"/>
         <source>&amp;Spatialisation du son...</source>
-        <translation>空间化(&amp;S)...</translation>
+        <translation>声音空间化(&amp;S)...</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="1182"/>
         <location filename="mainwindow.ui" line="1427"/>
         <source>Dispose les sons dans l&apos;espace</source>
-        <translation type="unfinished">Place sounds in space</translation>
+        <translation>在空间中放置声音</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="1194"/>
         <source>&amp;Répartition automatique</source>
-        <translation>自动分布音符范围(&amp;A)</translation>
+        <translatorcomment>自动分布音符范围</translatorcomment>
+        <translation>自动分布(&amp;A)</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="1197"/>
@@ -2475,7 +2474,7 @@
         <location filename="mainwindow.ui" line="1230"/>
         <location filename="mainwindow.ui" line="1355"/>
         <source>Paramètre toutes les divisions simultanément</source>
-        <translation>同时设置所有分层的属性</translation>
+        <translation>同时调整所有分层</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="1242"/>
@@ -2486,17 +2485,17 @@
         <location filename="mainwindow.ui" line="1245"/>
         <source>Règle la balance de l&apos;échantillon</source>
         <oldsource>Règle la balance du sample</oldsource>
-        <translation>设置样本左右声道平衡</translation>
+        <translation>调整样本平衡</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="1257"/>
         <source>&amp;Création mixture...</source>
-        <translation type="unfinished">&amp;Mixture creation...</translation>
+        <translation>创建混合音栓(&amp;M)...</translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="1260"/>
         <source>Crée une mixture</source>
-        <translation type="unfinished">Create a mixture</translation>
+        <translation>创建一个混合音栓</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="296"/>
@@ -2664,7 +2663,7 @@
     <message>
         <location filename="mainwindow.cpp" line="2061"/>
         <source>Fichier corrompu : utilisation des échantillons en qualité 16 bits.</source>
-        <translation type="unfinished">损坏的文件：使用 16 位样本。</translation>
+        <translation>损坏的文件：使用 16 位样本。</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="573"/>
@@ -2675,7 +2674,7 @@
         <location filename="mainwindow.cpp" line="455"/>
         <location filename="mainwindow.cpp" line="1936"/>
         <source>Opération en cours...</source>
-        <translation>操作进行中...</translation>
+        <translation>正在执行操作...</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="576"/>
@@ -2879,7 +2878,7 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
     <message>
         <location filename="mainwindow.cpp" line="2821"/>
         <source>Numéro de pic</source>
-        <translation type="unfinished">峰值</translation>
+        <translation>峰值</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="2822"/>
@@ -2942,7 +2941,7 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
     <message>
         <location filename="mainwindow.cpp" line="618"/>
         <source>&lt;b&gt;Perte de résolution </source>
-        <translation type="unfinished">&lt;b&gt;丢失分辨率 </translation>
+        <translation>&lt;b&gt;丢失分辨率 </translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="622"/>
@@ -3036,18 +3035,18 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
     <message>
         <location filename="pages/page.cpp" line="336"/>
         <source>Filtre, fréquence (Hz)</source>
-        <translation type="unfinished">Filter, frequency (Hz)</translation>
+        <translation>频率滤波(赫兹)</translation>
     </message>
     <message>
         <location filename="pages/page.cpp" line="337"/>
         <source>Filtre, fréquence (×)</source>
-        <translation type="unfinished">Filter, frequency (×)</translation>
+        <translation>频率滤波(×)</translation>
     </message>
     <message>
         <location filename="pages/page.cpp" line="344"/>
         <location filename="pages/page.cpp" line="345"/>
         <source>Filtre, résonance (dB)</source>
-        <translation type="unfinished">Filter, resonance (dB)</translation>
+        <translation>共鸣滤波(分贝)</translation>
     </message>
     <message>
         <location filename="pages/page.cpp" line="352"/>
@@ -3082,12 +3081,12 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
     <message>
         <location filename="pages/page.cpp" line="400"/>
         <source>Balance [-50;50]</source>
-        <translation>平衡[-50;50]</translation>
+        <translation>平衡[-50:50]</translation>
     </message>
     <message>
         <location filename="pages/page.cpp" line="401"/>
         <source>Balance [-100;100]</source>
-        <translation>平衡[-100;100]</translation>
+        <translation>平衡[-100:100]</translation>
     </message>
     <message>
         <location filename="pages/page.cpp" line="408"/>
@@ -3133,58 +3132,58 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
     <message>
         <location filename="pages/page.cpp" line="440"/>
         <source>Mod env delay (s)</source>
-        <translation type="unfinished">Mod env delay (s)</translation>
+        <translation>调制包络延迟(秒)</translation>
     </message>
     <message>
         <location filename="pages/page.cpp" line="441"/>
         <source>Mod env delay (×)</source>
-        <translation type="unfinished">Mod env delay (×)</translation>
+        <translation>调制包络延迟(×)</translation>
     </message>
     <message>
         <location filename="pages/page.cpp" line="448"/>
         <source>Mod env attack (s)</source>
-        <translation type="unfinished">Mod env attack (s)</translation>
+        <translation>调制包络起音(s)</translation>
     </message>
     <message>
         <location filename="pages/page.cpp" line="449"/>
         <source>Mod env attack (×)</source>
-        <translation type="unfinished">Mod env attack (×)</translation>
+        <translation>调制包络起音(×)</translation>
     </message>
     <message>
         <location filename="pages/page.cpp" line="456"/>
         <source>Mod env hold (s)</source>
-        <translation type="unfinished">Mod env hold (s)</translation>
+        <translation>调制包络保持(秒)</translation>
     </message>
     <message>
         <location filename="pages/page.cpp" line="457"/>
         <source>Mod env hold (×)</source>
-        <translation type="unfinished">Mod env hold (×)</translation>
+        <translation>调制包络保持(×)</translation>
     </message>
     <message>
         <location filename="pages/page.cpp" line="464"/>
         <source>Mod env decay (s)</source>
-        <translation type="unfinished">Mod env decay (s)</translation>
+        <translation>调制包络衰减(秒)</translation>
     </message>
     <message>
         <location filename="pages/page.cpp" line="465"/>
         <source>Mod env decay (×)</source>
-        <translation type="unfinished">Mod env decay (×)</translation>
+        <translation>调制包络衰减(×)</translation>
     </message>
     <message>
         <location filename="pages/page.cpp" line="472"/>
         <location filename="pages/page.cpp" line="473"/>
         <source>Mod env sustain (%)</source>
-        <translation type="unfinished">Mod env sustain (%)</translation>
+        <translation>调制包络延音(%)</translation>
     </message>
     <message>
         <location filename="pages/page.cpp" line="480"/>
         <source>Mod env release (s)</source>
-        <translation type="unfinished">Mod env release (s)</translation>
+        <translation>调制包络释音(秒)</translation>
     </message>
     <message>
         <location filename="pages/page.cpp" line="481"/>
         <source>Mod env release (×)</source>
-        <translation type="unfinished">Mod env release (×)</translation>
+        <translation>调制包络释音(×)</translation>
     </message>
     <message>
         <location filename="pages/page.cpp" line="488"/>
@@ -3201,59 +3200,59 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
     <message>
         <location filename="pages/page.cpp" line="504"/>
         <source>Vol env delay (s)</source>
-        <translation type="unfinished">Vol env delay (s)</translation>
+        <translation>音量包络延迟(秒)</translation>
     </message>
     <message>
         <location filename="pages/page.cpp" line="505"/>
         <source>Vol env delay (×)</source>
-        <translation type="unfinished">Vol env delay (×)</translation>
+        <translation>音量包络延迟(×)</translation>
     </message>
     <message>
         <location filename="pages/page.cpp" line="528"/>
         <source>Vol env decay (s)</source>
-        <translation type="unfinished">Vol env decay (s)</translation>
+        <translation>音量包络衰减(秒)</translation>
     </message>
     <message>
         <location filename="pages/page.cpp" line="529"/>
         <source>Vol env decay (×)</source>
-        <translation type="unfinished">Vol env decay (×)</translation>
+        <translation>音量包络衰减(×)</translation>
     </message>
     <message>
         <location filename="pages/page.cpp" line="512"/>
         <source>Vol env attack (s)</source>
-        <translation type="unfinished">Vol env attack (s)</translation>
+        <translation>音量包络起音(秒)</translation>
     </message>
     <message>
         <location filename="pages/page.cpp" line="513"/>
         <source>Vol env attack (×)</source>
-        <translation type="unfinished">Vol env attack (×)</translation>
+        <translation>音量包络起音(×)</translation>
     </message>
     <message>
         <location filename="pages/page.cpp" line="520"/>
         <source>Vol env hold (s)</source>
-        <translation type="unfinished">Vol env hold (s)</translation>
+        <translation>音量包络保持(秒)</translation>
     </message>
     <message>
         <location filename="pages/page.cpp" line="521"/>
         <source>Vol env hold (×)</source>
-        <translation type="unfinished">Vol env hold (×)</translation>
+        <translation>音量包络保持(×)</translation>
     </message>
     <message>
         <location filename="pages/page.cpp" line="536"/>
         <location filename="pages/page.cpp" line="537"/>
         <source>Vol env sustain (dB)</source>
         <oldsource>Vol env sustain (%)</oldsource>
-        <translation type="unfinished">Vol env sustain (dB)</translation>
+        <translation>音量包络延音(秒)</translation>
     </message>
     <message>
         <location filename="pages/page.cpp" line="544"/>
         <source>Vol env release (s)</source>
-        <translation type="unfinished">Vol env release (s)</translation>
+        <translation>音量包络释音(秒)</translation>
     </message>
     <message>
         <location filename="pages/page.cpp" line="545"/>
         <source>Vol env release (×)</source>
-        <translation type="unfinished">Vol env release (×)</translation>
+        <translation>音量包络释音(×)</translation>
     </message>
     <message>
         <location filename="pages/page.cpp" line="552"/>
@@ -3293,7 +3292,7 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
         <location filename="pages/page.cpp" line="608"/>
         <location filename="pages/page.cpp" line="609"/>
         <source>Atténuation (dB)</source>
-        <translation>衰减(dB)</translation>
+        <translation>衰减(分贝)</translation>
     </message>
     <message>
         <location filename="pages/page.cpp" line="624"/>
@@ -3321,12 +3320,12 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
     <message>
         <location filename="pages/page.cpp" line="656"/>
         <source>Classe exclusive</source>
-        <translation type="unfinished">专用类</translation>
+        <translation>独占类</translation>
     </message>
     <message>
         <location filename="pages/page.cpp" line="664"/>
         <source>Note de base</source>
-        <translation>基准音符</translation>
+        <translation>根音符</translation>
     </message>
 </context>
 <context>
@@ -3535,7 +3534,7 @@ la boucle</source>
         <location filename="pages/pageoverviewsmpl.cpp" line="41"/>
         <source>Note
 de base</source>
-        <translation>基准
+        <translation>根
 音符</translation>
     </message>
     <message>
@@ -3633,7 +3632,7 @@ lié</source>
     <message>
         <location filename="pages/pagetable.cpp" line="578"/>
         <source>Dupliquer les modulateurs vers...</source>
-        <translation>Duplicate modulators toward...</translation>
+        <translation>复制调制器到...</translation>
     </message>
     <message>
         <location filename="pages/pagetable.cpp" line="579"/>
@@ -3655,7 +3654,7 @@ lié</source>
     <message>
         <location filename="pages/pagetable.cpp" line="1992"/>
         <source>Action impossible : </source>
-        <translation>禁止的操作： </translation>
+        <translation>禁止操作：</translation>
     </message>
     <message>
         <location filename="pages/pagetable.cpp" line="2002"/>
@@ -3746,7 +3745,7 @@ lié</source>
     <message>
         <location filename="pages/page_inst.ui" line="296"/>
         <source>Atténuation (dB)</source>
-        <translation>衰减(dB)</translation>
+        <translation>衰减(分贝)</translation>
     </message>
     <message>
         <location filename="pages/page_inst.ui" line="301"/>
@@ -3761,7 +3760,8 @@ lié</source>
     <message>
         <location filename="pages/page_inst.ui" line="311"/>
         <source>Note de base</source>
-        <translation>基准音符</translation>
+        <translatorcomment>基础音</translatorcomment>
+        <translation>根音符</translation>
     </message>
     <message>
         <location filename="pages/page_inst.ui" line="316"/>
@@ -3781,42 +3781,42 @@ lié</source>
     <message>
         <location filename="pages/page_inst.ui" line="331"/>
         <source>Filtre, fréquence (Hz)</source>
-        <translation type="unfinished">Filter, frequency (Hz)</translation>
+        <translation>频率滤波(赫兹)</translation>
     </message>
     <message>
         <location filename="pages/page_inst.ui" line="342"/>
         <source>Filtre, résonance (dB)</source>
-        <translation type="unfinished">Filter, resonance (dB)</translation>
+        <translation>共鸣滤波(分贝)</translation>
     </message>
     <message>
         <location filename="pages/page_inst.ui" line="347"/>
         <source>Vol env delay (s)</source>
-        <translation type="unfinished">Vol env delay (s)</translation>
+        <translation>音量包络延迟(秒)</translation>
     </message>
     <message>
         <location filename="pages/page_inst.ui" line="352"/>
         <source>Vol env attack (s)</source>
-        <translation type="unfinished">Vol env attack (s)</translation>
+        <translation>音量包络起音(秒)</translation>
     </message>
     <message>
         <location filename="pages/page_inst.ui" line="357"/>
         <source>Vol env hold (s)</source>
-        <translation type="unfinished">Vol env hold (s)</translation>
+        <translation>音量包络保持(秒)</translation>
     </message>
     <message>
         <location filename="pages/page_inst.ui" line="362"/>
         <source>Vol env decay (s)</source>
-        <translation type="unfinished">Vol env decay (s)</translation>
+        <translation>音量包络衰减(秒)</translation>
     </message>
     <message>
         <location filename="pages/page_inst.ui" line="367"/>
         <source>Vol env sustain (dB)</source>
-        <translation type="unfinished">Vol env sustain (dB)</translation>
+        <translation>音量包络延音(秒)</translation>
     </message>
     <message>
         <location filename="pages/page_inst.ui" line="372"/>
         <source>Vol env release (s)</source>
-        <translation type="unfinished">Vol env release (s)</translation>
+        <translation>音量包络释音(秒)</translation>
     </message>
     <message>
         <location filename="pages/page_inst.ui" line="377"/>
@@ -3833,32 +3833,32 @@ lié</source>
     <message>
         <location filename="pages/page_inst.ui" line="387"/>
         <source>Mod env delay (s)</source>
-        <translation type="unfinished">Mod env delay (s)</translation>
+        <translation>调制包络延迟(秒)</translation>
     </message>
     <message>
         <location filename="pages/page_inst.ui" line="392"/>
         <source>Mod env attack (s)</source>
-        <translation type="unfinished">Mod env attack (s)</translation>
+        <translation>调制包络起音(秒)</translation>
     </message>
     <message>
         <location filename="pages/page_inst.ui" line="397"/>
         <source>Mod env hold (s)</source>
-        <translation type="unfinished">Mod env hold (s)</translation>
+        <translation>调制包络保持(秒)</translation>
     </message>
     <message>
         <location filename="pages/page_inst.ui" line="402"/>
         <source>Mod env decay (s)</source>
-        <translation type="unfinished">Mod env decay (s)</translation>
+        <translation>调制包络衰减(秒)</translation>
     </message>
     <message>
         <location filename="pages/page_inst.ui" line="407"/>
         <source>Mod env sustain (%)</source>
-        <translation type="unfinished">Mod env sustain (%)</translation>
+        <translation>调制包络延音(秒)</translation>
     </message>
     <message>
         <location filename="pages/page_inst.ui" line="412"/>
         <source>Mod env release (s)</source>
-        <translation type="unfinished">Mod env release (s)</translation>
+        <translation>调制包络释音(秒)</translation>
     </message>
     <message>
         <location filename="pages/page_inst.ui" line="417"/>
@@ -3925,7 +3925,7 @@ lié</source>
     <message>
         <location filename="pages/page_inst.ui" line="477"/>
         <source>Classe exclusive</source>
-        <translation type="unfinished">专用类</translation>
+        <translation>独占类</translation>
     </message>
     <message>
         <location filename="pages/page_inst.ui" line="482"/>
@@ -3940,7 +3940,7 @@ lié</source>
     <message>
         <location filename="pages/page_inst.ui" line="492"/>
         <source>Note fixe</source>
-        <translation type="unfinished">固定音符</translation>
+        <translation>固定音符</translation>
     </message>
     <message>
         <location filename="pages/page_inst.ui" line="497"/>
@@ -3977,7 +3977,7 @@ lié</source>
     <message>
         <location filename="pages/page_inst.ui" line="639"/>
         <source>Supprime un modulateur</source>
-        <translation>删除一个调制器</translation>
+        <translation>删除调制器</translation>
     </message>
     <message>
         <location filename="pages/page_inst.ui" line="659"/>
@@ -4099,13 +4099,13 @@ lié</source>
     <message>
         <location filename="pages/page_prst.ui" line="325"/>
         <source>Atténuation (dB)</source>
-        <translation>衰减(dB)</translation>
+        <translation>衰减(分贝)</translation>
     </message>
     <message>
         <location filename="pages/page_prst.ui" line="330"/>
         <source>Balance [-100;100]</source>
         <oldsource>Balance [-50;50]</oldsource>
-        <translation>平衡[-100;100]</translation>
+        <translation>平衡[-100:100]</translation>
     </message>
     <message>
         <location filename="pages/page_prst.ui" line="335"/>
@@ -4126,47 +4126,47 @@ lié</source>
         <location filename="pages/page_prst.ui" line="350"/>
         <source>Filtre, fréquence (×)</source>
         <oldsource>Filtre, fréquence (Hz)</oldsource>
-        <translation type="unfinished">Filter, frequency (×)</translation>
+        <translation>频率滤波(×)</translation>
     </message>
     <message>
         <location filename="pages/page_prst.ui" line="361"/>
         <source>Filtre, résonance (dB)</source>
-        <translation type="unfinished">Filter, resonance (dB)</translation>
+        <translation>共鸣滤波(分贝)</translation>
     </message>
     <message>
         <location filename="pages/page_prst.ui" line="366"/>
         <source>Vol env delay (×)</source>
         <oldsource>Vol env delay (s)</oldsource>
-        <translation type="unfinished">Vol env delay (×)</translation>
+        <translation>音量包络延迟(×)</translation>
     </message>
     <message>
         <location filename="pages/page_prst.ui" line="371"/>
         <source>Vol env attack (×)</source>
         <oldsource>Vol env attack (s)</oldsource>
-        <translation type="unfinished">Vol env attack (×)</translation>
+        <translation>音量包络起音(×)</translation>
     </message>
     <message>
         <location filename="pages/page_prst.ui" line="376"/>
         <source>Vol env hold (×)</source>
         <oldsource>Vol env hold (s)</oldsource>
-        <translation type="unfinished">Vol env hold (×)</translation>
+        <translation>音量包络保持(×)</translation>
     </message>
     <message>
         <location filename="pages/page_prst.ui" line="381"/>
         <source>Vol env decay (×)</source>
         <oldsource>Vol env decay (s)</oldsource>
-        <translation type="unfinished">Vol env decay (×)</translation>
+        <translation>音量包络衰减(×)</translation>
     </message>
     <message>
         <location filename="pages/page_prst.ui" line="386"/>
         <source>Vol env sustain (dB)</source>
-        <translation type="unfinished">Vol env sustain (dB)</translation>
+        <translation>音量包络延音(分贝)</translation>
     </message>
     <message>
         <location filename="pages/page_prst.ui" line="391"/>
         <source>Vol env release (×)</source>
         <oldsource>Vol env release (s)</oldsource>
-        <translation type="unfinished">Vol env release (×)</translation>
+        <translation>音量包络释音(×)</translation>
     </message>
     <message>
         <location filename="pages/page_prst.ui" line="396"/>
@@ -4184,36 +4184,36 @@ lié</source>
         <location filename="pages/page_prst.ui" line="406"/>
         <source>Mod env delay (×)</source>
         <oldsource>Mod env delay (s)</oldsource>
-        <translation type="unfinished">Mod env delay (×)</translation>
+        <translation>调制包络延迟(×)</translation>
     </message>
     <message>
         <location filename="pages/page_prst.ui" line="411"/>
         <source>Mod env attack (×)</source>
         <oldsource>Mod env attack (s)</oldsource>
-        <translation type="unfinished">Mod env attack (×)</translation>
+        <translation>调制包络起音(×)</translation>
     </message>
     <message>
         <location filename="pages/page_prst.ui" line="416"/>
         <source>Mod env hold (×)</source>
         <oldsource>Mod env hold (s)</oldsource>
-        <translation type="unfinished">Mod env hold (×)</translation>
+        <translation>调制包络保持(×)</translation>
     </message>
     <message>
         <location filename="pages/page_prst.ui" line="421"/>
         <source>Mod env decay (×)</source>
         <oldsource>Mod env decay (s)</oldsource>
-        <translation type="unfinished">Mod env decay (×)</translation>
+        <translation>调制包络衰减(×)</translation>
     </message>
     <message>
         <location filename="pages/page_prst.ui" line="426"/>
         <source>Mod env sustain (%)</source>
-        <translation type="unfinished">Mod env sustain (%)</translation>
+        <translation>调制包络延音(%)</translation>
     </message>
     <message>
         <location filename="pages/page_prst.ui" line="431"/>
         <source>Mod env release (×)</source>
         <oldsource>Mod env release (s)</oldsource>
-        <translation type="unfinished">Mod env release (×)</translation>
+        <translation>调制包络释音(×)</translation>
     </message>
     <message>
         <location filename="pages/page_prst.ui" line="436"/>
@@ -4241,6 +4241,7 @@ lié</source>
         <location filename="pages/page_prst.ui" line="456"/>
         <source>Mod LFO delay (×)</source>
         <oldsource>Mod LFO delay (s)</oldsource>
+        <translatorcomment>调制低频振荡延迟(×)</translatorcomment>
         <translation type="unfinished">Mod LFO delay (×)</translation>
     </message>
     <message>
@@ -4324,7 +4325,7 @@ lié</source>
     <message>
         <location filename="pages/page_prst.ui" line="188"/>
         <source>Table</source>
-        <translation type="unfinished">表</translation>
+        <translation>表格</translation>
     </message>
     <message>
         <location filename="pages/page_prst.ui" line="217"/>
@@ -4345,7 +4346,7 @@ lié</source>
         <location filename="pages/page_prst.ui" line="802"/>
         <location filename="pages/page_prst.ui" line="953"/>
         <source>Destination</source>
-        <translation type="unfinished">调制目标</translation>
+        <translation>目标</translation>
     </message>
     <message>
         <location filename="pages/page_prst.ui" line="822"/>
@@ -4505,7 +4506,7 @@ lié</source>
     <message>
         <location filename="pages/page_smpl.ui" line="1019"/>
         <source>Utilise l&apos;estimation de la note comme valeur</source>
-        <translation>使用音调预测校正音符值</translation>
+        <translation>使用音高测量校正音符值</translation>
     </message>
     <message>
         <location filename="pages/page_smpl.ui" line="1131"/>
@@ -4529,7 +4530,7 @@ lié</source>
         <location filename="pages/page_smpl.ui" line="1147"/>
         <source>sinus</source>
         <translatorcomment>A sinus calibration is added to the sound, allowing a sample tuning to the nearest pitch hundredth. At first the root key must be filled. At this level, beats can be heard if the frequency of the sinus differs slightly from the fundamental frequency of the sound. It remains to finely adjust the correction to make the beats as slow as possible, so that the sample is tuned at best.</translatorcomment>
-        <translation type="unfinished">sinus</translation>
+        <translation>正弦校准</translation>
     </message>
     <message>
         <location filename="pages/page_smpl.ui" line="971"/>
@@ -4544,7 +4545,8 @@ lié</source>
     <message>
         <location filename="pages/page_smpl.ui" line="1006"/>
         <source>Note de base</source>
-        <translation>基准音符</translation>
+        <translatorcomment>基础音</translatorcomment>
+        <translation>根音符</translation>
     </message>
     <message>
         <location filename="pages/page_smpl.ui" line="978"/>
@@ -4667,7 +4669,7 @@ lié</source>
     <message>
         <location filename="pages/page_smpl.cpp" line="1450"/>
         <source>Écart en demi-tons :</source>
-        <translation>音调移动量(半音)：</translation>
+        <translation>移动量(半音)：</translation>
     </message>
     <message>
         <location filename="pages/page_smpl.cpp" line="1640"/>
@@ -4694,7 +4696,7 @@ lié</source>
     <message>
         <location filename="pages/page_smpl.cpp" line="102"/>
         <source>Égaliseur (±15 dB)</source>
-        <translation>均衡器(±15 dB)</translation>
+        <translation>均衡器(±15 分贝)</translation>
     </message>
     <message>
         <location filename="pages/page_smpl.cpp" line="172"/>
