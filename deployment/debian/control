@@ -37,9 +37,9 @@ Description: soundfont editor
  making it possible to handle a large amount of data.
  .
  Main features:
+  - import from sf2, sfz, sfArk, sf3,
+  - export as sf2, sfz, sf3,
   - support of sf2 format v2.01 and v2.04 (with 24-bit samples),
-  - import from sfz, sfArk, sf3,
-  - export as sfz, sf3,
   - support for jack and asio audio servers,
   - simultaneous editing of parameters,
   - specific tools for musical instrument creation,
