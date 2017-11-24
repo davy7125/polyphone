@@ -2,21 +2,27 @@ Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 Upstream-Name: polyphone
 
 Files:      *
-Copyright:  2012-2014 Davy Triponney, davy.triponney@gmail.com
+Copyright:  2012-2017 Davy Triponney, davy.triponney@gmail.com
 License:    GPL-3+
 
 Files:      clavier/*
 Copyright:  2008-2014 Pedro Lopez-Cabanillas, plcl@users.sf.net
-            2013-2014 Davy Triponney, davy.triponney@gmail.com
+            2013-2017 Davy Triponney, davy.triponney@gmail.com
 License:    GPL-3+
 
 Files:      sfark/*
 Copyright:  Jeff Glatt
-            2014 Davy Triponney <davy.triponney@gmail.com>
+            2017 Davy Triponney <davy.triponney@gmail.com>
 License:    GPL-3+
 
 Files:      lib/sfarklib/*
 Copyright:  1998-2000 Andy Inman
+License:    GPL-3+
+
+Files:      deployment/debian/*
+Copyright:
+ 2012-2017  Davy Triponney, <davy.triponney@gmail.com>
+ 2016-2017  Olivier Humbert <trebmuh@tuxfamily.org>
 License:    GPL-3+
 
 License: GPL-3+
