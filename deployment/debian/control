@@ -8,15 +8,15 @@ Build-Depends:
  dpkg-dev (>= 1.16.1~),
  libasound2-dev,
  libjack-jackd2-dev,
- portaudio19-dev,
- qtbase5-dev,
+ libogg-dev,
+ libqcustomplot-dev,
  libqt5svg5-dev,
- zlib1g-dev,
  librtmidi-dev,
  libstk0-dev,
- libqcustomplot-dev,
- libogg-dev,
- libvorbis-dev
+ libvorbis-dev,
+ portaudio19-dev,
+ qtbase5-dev,
+ zlib1g-dev,
 Standards-Version: 3.9.6
 Homepage: http://polyphone-soundfonts.com
 
