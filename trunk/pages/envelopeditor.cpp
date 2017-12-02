@@ -57,7 +57,7 @@ EnvelopEditor::EnvelopEditor(QWidget *parent) :
     {
         for (int j = 0; j < 16; j++)
         {
-#if QT_VERSION >= QT_VERSION_CHECK(5, 0, 0)
+#if QT_VERSION >= QT_VERSION_CHECK(5, 7, 0)
             imageG.setPixelColor(i, j, greenColor);
             imageG.setPixelColor(16 + i, j, Qt::transparent);
             imageR.setPixelColor(i, j, redColor);
