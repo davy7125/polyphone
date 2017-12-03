@@ -1670,10 +1670,11 @@ int Pile_sf2::sauvegarderSf2(int indexSf2, QString fileName)
             fi.write((char *)&wTmp, 4);
         }
     }
-    // phdr de fin
+    // phdr de fin (38 byte)
     fi.write("EOP", 3);
     charTmp = '\0';
-    fi.write(&charTmp, 21);
+    for (quint32 i = 0; i < 21; i++)
+        fi.write(&charTmp, 1);
     // index bag de fin
     wTmp = nBag;
     fi.write((char *)&wTmp, 2);
