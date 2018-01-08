@@ -566,7 +566,7 @@ void Graphique::wheelEvent(QWheelEvent *event)
 #if QT_VERSION >= QT_VERSION_CHECK(5, 0, 0)
         _qScrollX->setValue(_qScrollX->value() - 0.2 * event->angleDelta().x());
 #else
-        qScrollX->setValue(qScrollX->value() - 0.2 * event->delta());
+        _qScrollX->setValue(_qScrollX->value() - 0.2 * event->delta());
 #endif
 }
 
