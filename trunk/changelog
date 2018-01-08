@@ -1,4 +1,12 @@
-polyphone (1.9) unstable; urgency=low
+polyphone (2.0) unstable; urgency=low
+
+  * 
+  * (fix) bug when saving/loading 24-bit samples
+
+ -- Davy Triponney <davy.triponney@gmail.com>
+
+
+polyphone (1.9) UNRELEASED; urgency=low
 
   * (new) soundfont repository online
   * (new) graphical envelop editor
