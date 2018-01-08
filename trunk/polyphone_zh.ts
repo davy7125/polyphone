@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="zh_CN" sourcelanguage="en_US">
+<TS version="2.0" language="zh_CN" sourcelanguage="en_US">
 <context>
     <name>ComboBox</name>
     <message>
@@ -11,7 +11,7 @@
 </context>
 <context>
     <name>Config</name>
-    <message>
+    <message utf8="true">
         <location filename="configuration/config.ui" line="17"/>
         <source>Préférences</source>
         <translation>设置</translation>
@@ -21,33 +21,33 @@
         <source>Sortie audio</source>
         <translation>音频后端</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="configuration/config.ui" line="46"/>
         <source>Général</source>
         <translation>通用</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="configuration/config.ui" line="191"/>
         <source>Entrée midi</source>
         <translation>MIDI 输入</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="configuration/config.ui" line="250"/>
         <source>ajuster à la boucle</source>
         <translation>裁剪以循环</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="configuration/config.ui" line="237"/>
         <source>enlever le blanc au départ</source>
         <translation>删除开头空白部分</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="configuration/config.ui" line="276"/>
         <source>répercuter les modifications</source>
         <oldsource>répercuter les modifications si stéréo</oldsource>
         <translation>修改链接的样本</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="configuration/config.ui" line="289"/>
         <source>Édition stéréo</source>
         <oldsource>Édition des samples</oldsource>
@@ -59,30 +59,30 @@
         <oldsource>Taille tampon</oldsource>
         <translation>缓冲大小</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="configuration/config.ui" line="58"/>
         <source>Entrées / sorties</source>
         <translation>输入/输出</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="configuration/config.ui" line="374"/>
         <source>Do central → 60, puis 61</source>
         <oldsource>Numérique (do central → 60)</oldsource>
         <translation>中央 C → 60 ，之后为 61</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="configuration/config.ui" line="379"/>
         <source>Do central → C3, puis C♯3</source>
         <oldsource>Texte (do central → C3)</oldsource>
         <translation>中央 C → C3 ，之后为 C♯3</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="configuration/config.ui" line="384"/>
         <source>Do central → C3, puis D♭3</source>
         <oldsource>Texte (do central → C4)</oldsource>
         <translation>中央 C → C3 ，之后为 D♭3</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="configuration/config.ui" line="389"/>
         <source>Do central → C4, puis C♯4</source>
         <oldsource>Texte (do central → C5)</oldsource>
@@ -93,12 +93,12 @@
         <source>Nom des notes</source>
         <translation>音符名格式</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="configuration/config.ui" line="996"/>
         <source>Synthétiseur</source>
         <translation>合成</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="configuration/config.ui" line="1028"/>
         <source>Réverbération</source>
         <oldsource>Reverbération</oldsource>
@@ -115,12 +115,12 @@
         <source>Profondeur</source>
         <translation>体积</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="configuration/config.ui" line="1148"/>
         <source>Densité</source>
         <translation>宽度</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="configuration/config.ui" line="1164"/>
         <source>Atténuation</source>
         <translation>湿度</translation>
@@ -130,7 +130,7 @@
         <source>Chorus</source>
         <translation>和声</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="configuration/config.ui" line="1264"/>
         <source>Fréquence</source>
         <translation>频率</translation>
@@ -140,7 +140,7 @@
         <source>Amplitude</source>
         <translation>深度</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="configuration/config.ui" line="1644"/>
         <source>Réinitialiser</source>
         <translation>重设</translation>
@@ -190,17 +190,17 @@
         <source>Interface</source>
         <translation>界面</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="configuration/config.ui" line="394"/>
         <source>Do central → C4, puis D♭4</source>
         <translation>中央 C → C4 ，之后为 D♭4</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="configuration/config.ui" line="399"/>
         <source>Do central → C5, puis C♯5</source>
         <translation>中央 C → C5 ，之后为 C♯5</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="configuration/config.ui" line="404"/>
         <source>Do central → C5, puis D♭5</source>
         <translation>中央 C → C5 ，之后为 D♭5</translation>
@@ -210,7 +210,7 @@
         <source>Langue</source>
         <translation>语言</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="configuration/config.ui" line="570"/>
         <source>Sélection</source>
         <translation>选择</translation>
@@ -228,7 +228,7 @@
         <source>Texte</source>
         <translation>文本</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="configuration/config.ui" line="643"/>
         <source>Fenêtre</source>
         <translation>窗口</translation>
@@ -246,7 +246,7 @@
         <source>Bouton</source>
         <translation>按钮</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="configuration/config.ui" line="962"/>
         <source>Thème de couleur</source>
         <translation>颜色主题</translation>
@@ -282,12 +282,12 @@
         <source>Do#</source>
         <translation>C#</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="configuration/config.ui" line="1727"/>
         <source>Ré</source>
         <translation>D</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="configuration/config.ui" line="1732"/>
         <source>Ré#</source>
         <translation>D#</translation>
@@ -332,7 +332,7 @@
         <source>Si</source>
         <translation>B</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="configuration/config.ui" line="1798"/>
         <source>Vélocité par défaut</source>
         <translation>默认力度</translation>
@@ -349,7 +349,7 @@
         <source>Information</source>
         <translation>信息</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="configuration/config.cpp" line="639"/>
         <location filename="configuration/config.cpp" line="685"/>
         <location filename="configuration/config.cpp" line="692"/>
@@ -370,7 +370,7 @@
         <source>Choisissez une couleur</source>
         <translation>选择一种颜色</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="configuration/config.cpp" line="370"/>
         <location filename="configuration/config.cpp" line="386"/>
         <source>---- séparateur ----</source>
@@ -447,7 +447,7 @@
         <source>a</source>
         <translation>q</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="configuration/config.h" line="85"/>
         <source>é</source>
         <translation>2</translation>
@@ -492,7 +492,7 @@
         <source>y</source>
         <translation>y</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="configuration/config.h" line="94"/>
         <source>è</source>
         <translation>7</translation>
@@ -645,7 +645,7 @@
         <source>A propos</source>
         <translation>关于</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="gui_divers/dialog_about.ui" line="175"/>
         <source>Crédits</source>
         <translation>制作人员</translation>
@@ -719,7 +719,7 @@
         <source>Steve Clarke</source>
         <translation>Steve Clarke</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="gui_divers/dialog_about.cpp" line="62"/>
         <source>F.J. Martínez Murcia</source>
         <translation>F.J. Martínez Murcia</translation>
@@ -747,7 +747,7 @@
 </context>
 <context>
     <name>DialogAttenuation</name>
-    <message>
+    <message utf8="true">
         <location filename="tools/dialog_attenuation.ui" line="17"/>
         <source>Régler les atténuations</source>
         <translation>衰减调整</translation>
@@ -763,7 +763,7 @@
         <source>Offset possible</source>
         <translation>可偏移量</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="tools/dialog_attenuation.ui" line="95"/>
         <location filename="tools/dialog_attenuation.ui" line="190"/>
         <source>Étendue des atténuations</source>
@@ -775,7 +775,7 @@
         <source> dB</source>
         <translation> 分贝</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="tools/dialog_attenuation.ui" line="137"/>
         <location filename="tools/dialog_attenuation.ui" line="177"/>
         <source>Valeur désirée</source>
@@ -789,7 +789,7 @@
 </context>
 <context>
     <name>DialogCeleste</name>
-    <message>
+    <message utf8="true">
         <location filename="tools/dialog_celeste.ui" line="17"/>
         <source>Accordage céleste</source>
         <translation>钢片琴调音</translation>
@@ -800,12 +800,12 @@
         <oldsource>Nombre de battements par secondes au do 3 (note 60)</oldsource>
         <translation>C4(音符 60)的每秒节拍数</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="tools/dialog_celeste.ui" line="56"/>
         <source>Le signe définit le sens du désaccordage.</source>
         <translation>代数符号决定调音方向。</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="tools/dialog_celeste.ui" line="79"/>
         <source>Division à l&apos;octave suivante</source>
         <translation>划分到下个八度音阶</translation>
@@ -833,7 +833,7 @@
         <source>&amp;Ok</source>
         <translation>确定(&amp;O)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="gui_divers/dialogchangelog.cpp" line="40"/>
         <source>Merci d&apos;avoir installé</source>
         <translation>感谢您安装了</translation>
@@ -853,12 +853,12 @@
         <source>Ce qu&apos;il y a de nouveau</source>
         <translation>新变化</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="gui_divers/dialogchangelog.cpp" line="82"/>
         <source>Ce qui est amélioré</source>
         <translation>改进部分</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="gui_divers/dialogchangelog.cpp" line="85"/>
         <source>Ce qui est résolu</source>
         <translation>修复问题</translation>
@@ -914,12 +914,12 @@
         <source>Commande</source>
         <translation>命令</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="tools/dialog_command.ui" line="67"/>
         <source>Remplacer les informations de l&apos;échantillon si possible</source>
         <translation>如可能则替换样本信息</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="tools/dialog_command.ui" line="90"/>
         <source>Autoriser l&apos;édition stéréo</source>
         <translation>允许编辑双声道</translation>
@@ -929,7 +929,7 @@
         <source>Exemples de commandes :</source>
         <translation>命令示例：</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="tools/dialog_command.cpp" line="79"/>
         <source>Fichier exécutable</source>
         <translation>可执行文件</translation>
@@ -963,7 +963,7 @@
         <source>Une division pour chaque note</source>
         <translation>为每个音符创建分层</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="tools/dialog_duplication.ui" line="124"/>
         <source>Une division pour chaque étendue de vélocité</source>
         <translation>为每个力度范围创建分层</translation>
@@ -982,7 +982,7 @@
         <source>Tout cocher</source>
         <translation>全选</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="gui_divers/dialog_export.ui" line="54"/>
         <source>Tout décocher</source>
         <translation>全不选</translation>
@@ -997,17 +997,17 @@
         <source>Format</source>
         <translation>格式</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="gui_divers/dialog_export.ui" line="159"/>
         <source>numéro de preset en préfixe</source>
         <translation>附加预设号前缀</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="gui_divers/dialog_export.ui" line="152"/>
         <source>un répertoire par banque</source>
         <translation>每个库置于单独文件夹</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="gui_divers/dialog_export.ui" line="145"/>
         <source>classement général midi</source>
         <translation>GM MIDI 分类</translation>
@@ -1027,7 +1027,7 @@
         <source>Basse</source>
         <translation>低</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="gui_divers/dialog_export.ui" line="188"/>
         <source>Qualité</source>
         <translation>质量</translation>
@@ -1037,7 +1037,7 @@
         <source>Annuler</source>
         <translation>取消</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="gui_divers/dialog_export.cpp" line="122"/>
         <source>Choisir un répertoire de destination</source>
         <translation>选择目标文件夹</translation>
@@ -1050,22 +1050,22 @@
         <source>Attention</source>
         <translation>警告</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="gui_divers/dialog_export.cpp" line="141"/>
         <source>Le répertoire n&apos;est pas valide.</source>
         <translation>路径不合法。</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="gui_divers/dialog_export.cpp" line="180"/>
         <source>Dans le cas où plusieurs soundfonts sont exportées, le nombre maximal de presets par soundfont est de 127.</source>
         <translation>导出音色库时，每个音色库的预设数不能超过 127。</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="gui_divers/dialog_export.cpp" line="186"/>
         <source>Le nombre maximal de soundfonts à exporter est de 127.</source>
         <translation>一次最多只能导出 127 个音色库。</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="gui_divers/dialog_export.cpp" line="193"/>
         <source>Au moins un preset doit être sélectionné.</source>
         <translation>必须至少选择一个预设。</translation>
@@ -1078,7 +1078,7 @@
         <source>Exporter la liste des presets</source>
         <translation>导出预设列表</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="tools/dialog_exportlist.ui" line="33"/>
         <source>texte copié dans le presse-papier</source>
         <translation>文本已复制到剪贴板</translation>
@@ -1101,12 +1101,12 @@
 </context>
 <context>
     <name>DialogFilterFrequencies</name>
-    <message>
+    <message utf8="true">
         <location filename="tools/dialog_filter_frequencies.ui" line="17"/>
         <source>Filtrer fréquences</source>
         <translation>频率滤波</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="tools/dialog_filter_frequencies.ui" line="88"/>
         <source>Mettre dans le rouge les fréquences du signal à filtrer :</source>
         <translation>将要滤波的频率置于红色部分：</translation>
@@ -1114,7 +1114,7 @@
 </context>
 <context>
     <name>DialogList</name>
-    <message>
+    <message utf8="true">
         <location filename="gui_divers/dialog_list.cpp" line="54"/>
         <source>Liste des échantillons</source>
         <oldsource>Liste des samples</oldsource>
@@ -1133,7 +1133,7 @@
 </context>
 <context>
     <name>DialogMagnetophone</name>
-    <message>
+    <message utf8="true">
         <location filename="tools/dialog_magnetophone.ui" line="26"/>
         <source>Magnétophone</source>
         <translation>录音机</translation>
@@ -1157,7 +1157,7 @@
 </context>
 <context>
     <name>DialogMixture</name>
-    <message>
+    <message utf8="true">
         <location filename="tools/dialog_mixture.ui" line="17"/>
         <source>Création mixture</source>
         <oldsource>Création mutation / mixture</oldsource>
@@ -1169,12 +1169,12 @@
         <source>Nom de la mixture :</source>
         <translation>名称：</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="tools/dialog_mixture.ui" line="48"/>
         <source>Création de son :</source>
         <translation>创建样本：</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="tools/dialog_mixture.ui" line="56"/>
         <source>à chaque note</source>
         <translation>每个音符</translation>
@@ -1194,7 +1194,7 @@
         <source>Bouclage</source>
         <translation>自动循环</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="tools/dialog_mixture.ui" line="84"/>
         <source>Stéréo</source>
         <translation>双声道</translation>
@@ -1235,57 +1235,57 @@
         <source>tierce</source>
         <translation>三度</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="tools/dialog_mixture.ui" line="370"/>
         <source>septième</source>
         <translation>七度</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="tools/dialog_mixture.ui" line="375"/>
         <source>neuvième</source>
         <translation>九度</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="tools/dialog_mixture.ui" line="380"/>
         <source>onzième</source>
         <translation>十一度</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="tools/dialog_mixture.ui" line="385"/>
         <source>treizième</source>
         <translation>十三度</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="tools/dialog_mixture.ui" line="390"/>
         <source>quinzième</source>
         <translation>十五度</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="tools/dialog_mixture.ui" line="395"/>
         <source>dix-septième</source>
         <translation>十七度</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="tools/dialog_mixture.ui" line="400"/>
         <source>dix-neuvième</source>
         <translation>十九度</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="tools/dialog_mixture.ui" line="405"/>
         <source>vingt-et-unième</source>
         <translation>二十一度</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="tools/dialog_mixture.ui" line="410"/>
         <source>vingt-troisième</source>
         <translation>二十三度</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="tools/dialog_mixture.ui" line="415"/>
         <source>vingt-cinquième</source>
         <translation>二十五度</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="tools/dialog_mixture.ui" line="420"/>
         <source>vingt-septième</source>
         <translation>二十七度</translation>
@@ -1298,7 +1298,7 @@
 </context>
 <context>
     <name>DialogParamGlobal</name>
-    <message>
+    <message utf8="true">
         <location filename="tools/dialog_paramglobal.ui" line="17"/>
         <source>Paramétrage global</source>
         <translation>全局调整</translation>
@@ -1313,7 +1313,7 @@
         <source>Raideur</source>
         <translation>硬度</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="tools/dialog_paramglobal.cpp" line="184"/>
         <source>Répartition</source>
         <translation>分布</translation>
@@ -1333,7 +1333,7 @@
         <source>Modification</source>
         <translation>修改方式</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="tools/dialog_paramglobal.ui" line="110"/>
         <source>Paramètre</source>
         <translation>参数</translation>
@@ -1343,12 +1343,12 @@
         <source>Manuel</source>
         <translation>手动</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="tools/dialog_paramglobal.ui" line="153"/>
         <source>Linéaire ascendant</source>
         <translation>线性上升</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="tools/dialog_paramglobal.ui" line="158"/>
         <source>Linéaire descendant</source>
         <translation>线性下降</translation>
@@ -1363,7 +1363,7 @@
         <source>Exponentiel descendant</source>
         <translation>指数下降</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="tools/dialog_paramglobal.ui" line="173"/>
         <source>Aléatoire</source>
         <translation>随机</translation>
@@ -1383,7 +1383,7 @@
         <source>Remplacement</source>
         <translation>替换</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="tools/dialog_paramglobal.ui" line="188"/>
         <source>Appliquer à l&apos;étendue de vélocité</source>
         <translation>应用到力度范围</translation>
@@ -1391,28 +1391,28 @@
 </context>
 <context>
     <name>DialogRelease</name>
-    <message>
+    <message utf8="true">
         <location filename="tools/dialog_release.ui" line="17"/>
         <source>Élaboration release</source>
         <translation>释音制作器</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="tools/dialog_release.ui" line="114"/>
         <source>Désaccordage provoqué (demi-tons)</source>
         <translation>引发失谐(半音)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="tools/dialog_release.ui" line="61"/>
         <source>Durée release au do 2 (note 36)</source>
         <oldsource>Durée release au do 1 (note 36)</oldsource>
         <translation>C2(音符 36)的释音时长</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="tools/dialog_release.ui" line="68"/>
         <source>Division à l&apos;octave suivante</source>
         <translation>划分到下个八度音阶</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="tools/dialog_release.cpp" line="45"/>
         <source>Durée release (note </source>
         <translation>释音时长(音符 </translation>
@@ -1425,17 +1425,17 @@
         <source>Renommage de masse</source>
         <translation>批量重命名</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="gui_divers/dialog_rename.ui" line="59"/>
         <source>Remplacer une chaîne de caractères</source>
         <translation>替换文本</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="gui_divers/dialog_rename.ui" line="64"/>
         <source>Insérer après une position</source>
         <translation>在指定位置插入文本</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="gui_divers/dialog_rename.ui" line="69"/>
         <source>Supprimer une étendue</source>
         <translation>删除指定范围文本</translation>
@@ -1446,12 +1446,12 @@
         <source>Position</source>
         <translation>位置</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="gui_divers/dialog_rename.ui" line="49"/>
         <source>Écraser nom existant avec nom de la note en suffixe</source>
         <translation>为名称添加音符名后缀</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="gui_divers/dialog_rename.ui" line="54"/>
         <source>Écraser nom existant avec incrément en suffixe</source>
         <translation>为名称添加升序数字后缀</translation>
@@ -1472,12 +1472,12 @@
         <source>Et remplacer par :</source>
         <translation>并替换：</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="gui_divers/dialog_rename.cpp" line="119"/>
         <source>Texte à insérer :</source>
         <translation>插入文本：</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="gui_divers/dialog_rename.cpp" line="130"/>
         <source>Étendue</source>
         <translation>范围</translation>
@@ -1496,7 +1496,7 @@
         <source>Tout cocher</source>
         <translation>全选</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="gui_divers/dialogselection.ui" line="37"/>
         <source>Tout décocher</source>
         <translation>全不选</translation>
@@ -1555,7 +1555,7 @@
         <source>Creux</source>
         <translation>回荡</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="tools/dialog_space.ui" line="87"/>
         <source>Aléatoire</source>
         <translation>随机</translation>
@@ -1578,12 +1578,12 @@
         <source>Transposition</source>
         <translation>音调调整</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="tools/dialog_transposition.ui" line="44"/>
         <source>Écart en demi-tons</source>
         <translation>移动量(半音)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="tools/dialog_transposition.ui" line="27"/>
         <source>Adapter l&apos;étendue de notes</source>
         <translation>适应音符范围</translation>
@@ -1601,7 +1601,7 @@
         <source>Visualisation</source>
         <translation>显示选项</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="tools/dialog_visualizer.ui" line="172"/>
         <source>Légende</source>
         <translation>图例</translation>
@@ -1611,17 +1611,17 @@
         <source>Valeur moyenne par note</source>
         <translation>每个音符的平均值</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="tools/dialog_visualizer.ui" line="231"/>
         <source>Paramètres par défaut</source>
         <translation>默认参数</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="tools/dialog_visualizer.ui" line="273"/>
         <source>Paramètres définis</source>
         <translation>定义的参数</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="tools/dialog_visualizer.ui" line="150"/>
         <source>échelle log</source>
         <translation>对数刻度</translation>
@@ -1641,7 +1641,7 @@
     </message>
     <message>
         <location filename="pages/envelopeditor.ui" line="70"/>
-        <location filename="pages/envelopeditor.cpp" line="95"/>
+        <location filename="pages/envelopeditor.cpp" line="102"/>
         <source> dB</source>
         <comment>unit for decibels</comment>
         <translation> 分贝</translation>
@@ -1651,7 +1651,7 @@
         <source>Delay</source>
         <translation>延迟(Delay)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/envelopeditor.ui" line="118"/>
         <source>Note  Decay</source>
         <oldsource>Key  Decay</oldsource>
@@ -1667,7 +1667,7 @@
         <source>Sustain</source>
         <translation>延音(Sustain)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/envelopeditor.ui" line="216"/>
         <source>Note  Hold</source>
         <oldsource>Key  Hold</oldsource>
@@ -1700,7 +1700,7 @@
         <translation>调制包络</translation>
     </message>
     <message>
-        <location filename="pages/envelopeditor.cpp" line="108"/>
+        <location filename="pages/envelopeditor.cpp" line="115"/>
         <source>%</source>
         <comment>percentage</comment>
         <translation>%</translation>
@@ -1744,7 +1744,7 @@
 </context>
 <context>
     <name>Graphique</name>
-    <message>
+    <message utf8="true">
         <location filename="pages/graphique.cpp" line="86"/>
         <source>Sélection multiple</source>
         <translation>多选</translation>
@@ -1752,12 +1752,12 @@
 </context>
 <context>
     <name>GraphiqueFourier</name>
-    <message>
+    <message utf8="true">
         <location filename="pages/graphiquefourier.cpp" line="53"/>
         <source>Fréquence (Hz)</source>
         <translation>频率(赫兹)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/graphiquefourier.cpp" line="68"/>
         <source>Intensité</source>
         <translation>强度</translation>
@@ -1812,7 +1812,7 @@
         <source>&amp;Aide</source>
         <translation>帮助(&amp;H)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="mainwindow.ui" line="243"/>
         <source>&amp;Édition</source>
         <translation>编辑(&amp;E)</translation>
@@ -1847,7 +1847,7 @@
         <source>Enroule l&apos;arborescence</source>
         <translation>折叠树</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="mainwindow.ui" line="550"/>
         <source>Déroule l&apos;arborescence</source>
         <translation>展开树</translation>
@@ -1910,7 +1910,7 @@
         <source>&amp;Nouveau...</source>
         <translation>新建(&amp;N)...</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="mainwindow.ui" line="709"/>
         <source>Crée un nouveau fichier</source>
         <translation>创建新文件</translation>
@@ -1939,27 +1939,27 @@
         <comment>1</comment>
         <translation>撤销(&amp;U)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="mainwindow.ui" line="727"/>
         <source>Annule la dernière action</source>
         <translation>撤销最后一次操作</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="mainwindow.ui" line="742"/>
         <source>Ré&amp;tablir</source>
         <translation>重做(&amp;R)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="mainwindow.ui" line="745"/>
         <source>Refait la dernière action annulée</source>
         <translation>重做撤销的操作</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="mainwindow.ui" line="757"/>
         <source>&amp;Préférences</source>
         <translation>设置(&amp;S)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="mainwindow.ui" line="760"/>
         <source>Ouvre les préférences</source>
         <translation>打开设置</translation>
@@ -1989,7 +1989,7 @@
         <source>&amp;Copier</source>
         <translation>复制(&amp;C)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="mainwindow.ui" line="807"/>
         <source>Copie un élément</source>
         <translation>复制元素</translation>
@@ -1999,7 +1999,7 @@
         <source>C&amp;oller</source>
         <translation>粘贴(&amp;P)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="mainwindow.ui" line="828"/>
         <source>Colle un élément</source>
         <translation>粘贴元素</translation>
@@ -2009,17 +2009,17 @@
         <source>&amp;Supprimer</source>
         <translation>删除(&amp;D)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="mainwindow.ui" line="849"/>
         <source>Supprime un élément</source>
         <translation>删除元素</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="mainwindow.ui" line="867"/>
         <source>&amp;Enlever les éléments non utilisés</source>
         <translation>删除未使用的元素(&amp;R)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="mainwindow.ui" line="870"/>
         <source>Enlève les échantillons et instruments non utilisés</source>
         <oldsource>Enlève les samples et instruments non utilisés</oldsource>
@@ -2032,7 +2032,7 @@
         <source>&amp;Renommer</source>
         <translation>重命名(&amp;N)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="mainwindow.ui" line="885"/>
         <source>Renomme un ou plusieurs élément(s)</source>
         <translation>重命名一个或多个元素</translation>
@@ -2042,7 +2042,7 @@
         <source>fichier 1</source>
         <translation>文件 1</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="mainwindow.ui" line="902"/>
         <location filename="mainwindow.ui" line="919"/>
         <location filename="mainwindow.ui" line="936"/>
@@ -2076,37 +2076,37 @@
         <source>&amp;Section modulateurs</source>
         <translation>调制器面板(&amp;M)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="mainwindow.ui" line="999"/>
         <source>&amp;Importer des échantillons...</source>
         <oldsource>&amp;Importer des sons...</oldsource>
         <translation>导入样本(&amp;I)...</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="mainwindow.ui" line="1014"/>
         <source>E&amp;xporter des échantillons...</source>
         <oldsource>E&amp;xporter des sons...</oldsource>
         <translation>导出样本(&amp;X)...</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="mainwindow.ui" line="1062"/>
         <source>Enleve le blanc au début d&apos;un échantillon</source>
         <oldsource>Enleve le blanc au début d&apos;un sample</oldsource>
         <translation>删除样本开头的空白部分</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="mainwindow.ui" line="1077"/>
         <source>Ajuste l&apos;échantillon à sa fin de boucle</source>
         <oldsource>Ajuste le sample à sa fin de boucle</oldsource>
         <translation>裁剪样本至循环终点</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="mainwindow.ui" line="1107"/>
         <source>Boucle automatiquement l&apos;échantillon</source>
         <oldsource>Boucle automatiquement le sample</oldsource>
         <translation>自动循环样本</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="mainwindow.ui" line="1137"/>
         <source>Transpose l&apos;échantillon</source>
         <oldsource>Transpose le sample</oldsource>
@@ -2133,17 +2133,17 @@
         <source>Exporte la liste des presets dans un format texte</source>
         <translation>以文本格式导出预设列表</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="mainwindow.ui" line="1579"/>
         <source>&amp;Télécharger des soundfonts</source>
         <translation>音色库仓库(&amp;S)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="mainwindow.ui" line="1164"/>
         <source>&amp;Accordage céleste...</source>
         <translation>钢片琴调音(&amp;C)...</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="mainwindow.ui" line="1167"/>
         <source>Accorde les sons pour créer des battements</source>
         <translation>调音以创建节拍</translation>
@@ -2173,7 +2173,7 @@
         <source>Duplication des divisions</source>
         <translation>复制分层</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="mainwindow.ui" line="1382"/>
         <source>Affiche le magnétophone</source>
         <translation>显示录音机</translation>
@@ -2184,7 +2184,7 @@
         <source>&amp;Visualiseur</source>
         <translation>可视化(&amp;V)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="mainwindow.ui" line="1397"/>
         <location filename="mainwindow.ui" line="1412"/>
         <source>Visualise dans un graphique les paramètres utilisés</source>
@@ -2201,24 +2201,24 @@
         <source>Exporte une soundfont</source>
         <translation>导出音色库</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="mainwindow.ui" line="1454"/>
         <source>&amp;Dissocier les échantillons stéréo</source>
         <oldsource>&amp;Dissocier les samples stéréo</oldsource>
         <translation>解除双声道样本链接(&amp;U)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="mainwindow.ui" line="1457"/>
         <source>Dissocie les échantillons stéréo</source>
         <oldsource>Dissocie les samples stéréo</oldsource>
         <translation>取消所有双声道样本的链接</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="mainwindow.ui" line="1469"/>
         <source>Exporter pics de &amp;fréquence (.csv)</source>
         <translation>导出峰值频率(csv)(&amp;F)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="mainwindow.ui" line="1472"/>
         <source>Exporte les pics de fréquence des échantillons dans un fichier csv</source>
         <translation>导出所有样本的峰值频率到 CSV 文件中</translation>
@@ -2243,7 +2243,7 @@
         <source>&amp;Transposition...</source>
         <translation>音调调整(&amp;T)...</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="mainwindow.ui" line="1514"/>
         <source>Transpose tous les échantillons d&apos;un instrument</source>
         <translation>修改乐器中每个样本的音调</translation>
@@ -2253,7 +2253,7 @@
         <source>Enlever tous les &amp;modulateurs</source>
         <translation>删除所有调制器(&amp;M)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="mainwindow.ui" line="1531"/>
         <source>&amp;Plein écran</source>
         <translation>全屏(&amp;F)</translation>
@@ -2306,49 +2306,49 @@
         <source>Modifie le volume</source>
         <translation>调整音量大小</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="mainwindow.ui" line="1119"/>
         <source>&amp;Filtrer des fréquences...</source>
         <translation>频率滤波(&amp;F)...</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="mainwindow.ui" line="1122"/>
         <source>Applique un filtre pour diminuer certaines fréquences</source>
         <translation>应用滤波器以衰减指定的频率</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="mainwindow.ui" line="1149"/>
         <source>&amp;Régler atténuations...</source>
         <translation>衰减调整(&amp;A)...</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="mainwindow.ui" line="1152"/>
         <source>Régle les atténuations des instruments et presets</source>
         <translation>全局调整乐器和预设的衰减</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="mainwindow.ui" line="1337"/>
         <source>&amp;Élaboration release...</source>
         <translation>释音制作器(&amp;R)...</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="mainwindow.ui" line="1340"/>
         <source>Crée automatiquement une release pour tous les sons liés</source>
         <translation>为所有链接的样本自动创建释音</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="mainwindow.ui" line="1367"/>
         <source>&amp;Associer les échantillons stéréo</source>
         <oldsource>&amp;Association auto échantillons</oldsource>
         <translation>链接所有双声道样本(&amp;L)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="mainwindow.ui" line="1370"/>
         <source>Associe automatiquement les échantillons G/D</source>
         <oldsource>Associe automatiquement les samples G/D</oldsource>
         <translation>根据文件名自动链接左/右声道样本</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="mainwindow.ui" line="1379"/>
         <source>&amp;Magnétophone</source>
         <oldsource>Magnétophone</oldsource>
@@ -2359,7 +2359,7 @@
         <source>Affiche la section modulateurs</source>
         <translation>显示调制器面板</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="mainwindow.ui" line="138"/>
         <source>Vél.</source>
         <translation>力度</translation>
@@ -2370,7 +2370,7 @@
         <source>Note</source>
         <translation>音符</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="mainwindow.ui" line="265"/>
         <source>&amp;Échantillon</source>
         <translation>样本(&amp;S)</translation>
@@ -2400,7 +2400,7 @@
         <source>Nouvel instrument</source>
         <translation>新乐器</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="mainwindow.ui" line="1032"/>
         <source>Crée un nouvel instrument</source>
         <translation>创建新乐器</translation>
@@ -2410,17 +2410,17 @@
         <source>Nouveau preset</source>
         <translation>新预设</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="mainwindow.ui" line="1047"/>
         <source>Crée un nouveau preset</source>
         <translation>创建新预设</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="mainwindow.ui" line="1059"/>
         <source>&amp;Enlever blanc au départ</source>
         <translation>删除开头空白部分(&amp;R)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="mainwindow.ui" line="1074"/>
         <source>&amp;Ajuster à la fin de boucle</source>
         <translation>裁剪至循环终点(&amp;T)</translation>
@@ -2447,13 +2447,13 @@
         <source>Dispose les sons dans l&apos;espace</source>
         <translation>在空间中放置声音</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="mainwindow.ui" line="1194"/>
         <source>&amp;Répartition automatique</source>
         <translatorcomment>自动分布音符范围</translatorcomment>
         <translation>自动分布(&amp;A)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="mainwindow.ui" line="1197"/>
         <source>Répartit automatiquement les sons sur le clavier</source>
         <translation>自动在键盘上编排样本</translation>
@@ -2464,35 +2464,35 @@
         <source>Duplique les divisions</source>
         <translation>为乐器分层创建副本</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="mainwindow.ui" line="1227"/>
         <location filename="mainwindow.ui" line="1352"/>
         <source>&amp;Paramétrage global...</source>
         <translation>全局调整(&amp;G)...</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="mainwindow.ui" line="1230"/>
         <location filename="mainwindow.ui" line="1355"/>
         <source>Paramètre toutes les divisions simultanément</source>
         <translation>同时调整所有分层</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="mainwindow.ui" line="1242"/>
         <source>&amp;Réglage balance</source>
         <translation>平衡调整(&amp;B)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="mainwindow.ui" line="1245"/>
         <source>Règle la balance de l&apos;échantillon</source>
         <oldsource>Règle la balance du sample</oldsource>
         <translation>调整样本平衡</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="mainwindow.ui" line="1257"/>
         <source>&amp;Création mixture...</source>
         <translation>创建混合音栓(&amp;M)...</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="mainwindow.ui" line="1260"/>
         <source>Crée une mixture</source>
         <translation>创建一个混合音栓</translation>
@@ -2584,32 +2584,32 @@
         <source>&amp;Fermer sans enregistrer</source>
         <translation>不保存(&amp;N)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="mainwindow.cpp" line="1393"/>
         <source>Nom de l&apos;instrument (max 20 caractères) :</source>
         <translation>乐器名称(最多 20 个半角字符)：</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="mainwindow.cpp" line="1394"/>
         <source>Nom du preset (max 20 caractères) :</source>
         <translation>预设名称(最多 20 个半角字符)：</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="mainwindow.cpp" line="1395"/>
         <source>Nom du SF2 (max 255 caractères) :</source>
         <translation>音色库名称(最多 255 个半角字符)：</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="mainwindow.cpp" line="1621"/>
         <source>L » existe déjà.&lt;br /&gt;Que faire ?</source>
         <translation>左声道&quot;已存在。&lt;br/&gt;是否替换？</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="mainwindow.cpp" line="1627"/>
         <source>R » existe déjà.&lt;br /&gt;Que faire ?</source>
         <translation>右声道&quot; 已存在。&lt;br/&gt;是否替换？</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="mainwindow.cpp" line="1636"/>
         <source> » existe déjà.&lt;br /&gt;Que faire ?</source>
         <translation>&quot;已存在。&lt;br/&gt;是否替换？</translation>
@@ -2630,20 +2630,20 @@
         <source>&lt;b&gt;Sauvegarder avant de quitter ?&lt;/b&gt;</source>
         <translation>&lt;b&gt;退出前是否保存文件？&lt;/b&gt;</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="mainwindow.cpp" line="285"/>
         <source>Les fichiers suivants ont été modifiés :&lt;br/&gt; - </source>
         <oldsource>Les fichiers suivants ont été modifiés depuis leur dernier enregistrement :&lt;br/&gt; - </oldsource>
         <translation>下列文件已被修改：&lt;br/&gt; - </translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="mainwindow.cpp" line="290"/>
         <location filename="mainwindow.cpp" line="515"/>
         <source>Le fichier « </source>
         <oldsource>Le fichier «&amp;#160;</oldsource>
         <translation>文件&quot;</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="mainwindow.cpp" line="290"/>
         <location filename="mainwindow.cpp" line="515"/>
         <source> » a été modifié.</source>
@@ -2660,23 +2660,23 @@
         <source>Ouverture de fichiers</source>
         <translation>正在打开文件</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="mainwindow.cpp" line="2061"/>
         <source>Fichier corrompu : utilisation des échantillons en qualité 16 bits.</source>
         <translation>损坏的文件：使用 16 位样本。</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="mainwindow.cpp" line="573"/>
         <source>Impossible de supprimer un échantillon s&apos;il est utilisé par un instrument.</source>
         <translation>无法删除已被乐器使用的样本。</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="mainwindow.cpp" line="455"/>
         <location filename="mainwindow.cpp" line="1936"/>
         <source>Opération en cours...</source>
         <translation>正在执行操作...</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="mainwindow.cpp" line="576"/>
         <source>Impossible de supprimer un instrument s&apos;il est utilisé par un preset.</source>
         <translation>无法删除已被预设使用的乐器。</translation>
@@ -2691,22 +2691,22 @@
         <source>&amp;Non</source>
         <translation>否(&amp;N)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="mainwindow.cpp" line="643"/>
         <source>&lt;b&gt;Trop de paramètres dans les instruments et les presets.&lt;/b&gt;</source>
         <translation>&lt;b&gt;在乐器和预设中定义了过多参数。&lt;/b&gt;</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="mainwindow.cpp" line="645"/>
         <source>&lt;b&gt;Trop de paramètres dans les instruments.&lt;/b&gt;</source>
         <translation>&lt;b&gt;此乐器中定义了过多参数。&lt;/b&gt;</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="mainwindow.cpp" line="647"/>
         <source>&lt;b&gt;Trop de paramètres dans les presets.&lt;/b&gt;</source>
         <translation>&lt;b&gt;此预设中定义了过多参数。&lt;/b&gt;</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="mainwindow.cpp" line="649"/>
         <source>Certains synthétiseurs ne prennent pas en compte les paramètres au delà du 65536ème.
 Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
@@ -2718,7 +2718,7 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
         <source>&amp;Sauvegarder</source>
         <translation>保存(&amp;S)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="mainwindow.cpp" line="654"/>
         <source>Sauvegarder, &amp;désactiver ce message</source>
         <translation>保存并不再提示(&amp;D)</translation>
@@ -2760,7 +2760,7 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
         <source>&amp;Renommer en masse</source>
         <translation>批量重命名(&amp;B)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="mainwindow.cpp" line="1392"/>
         <source>Nom de l&apos;échantillon (max 20 caractères) :</source>
         <oldsource>Nom du sample (max 20 caractères) :</oldsource>
@@ -2782,7 +2782,7 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
         <oldsource>Fichier .wav (*.[wW][aA][vV])</oldsource>
         <translation>WAV 文件</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="mainwindow.cpp" line="1620"/>
         <location filename="mainwindow.cpp" line="1626"/>
         <location filename="mainwindow.cpp" line="1635"/>
@@ -2824,7 +2824,7 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
         <source>Fusion des soundfonts :</source>
         <translation>合并音色库：</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="mainwindow.cpp" line="2097"/>
         <source>Créer un nouvel instrument</source>
         <translation>创建新乐器</translation>
@@ -2834,17 +2834,17 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
         <source>Aucun preset n&apos;est disponible.</source>
         <translation>无预设可用。</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="mainwindow.cpp" line="2132"/>
         <source>Créer un nouveau preset</source>
         <translation>创建新预设</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="mainwindow.cpp" line="2472"/>
         <source> échantillon et </source>
         <translation> 个样本和 </translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="mainwindow.cpp" line="2474"/>
         <source> échantillons et </source>
         <translation> 个样本和 </translation>
@@ -2854,7 +2854,7 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
         <source>Le fichier doit contenir au moins un instrument.</source>
         <translation>音色库必须包含至少一个乐器。</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="mainwindow.cpp" line="2803"/>
         <source>Exporter les pics de fréquence</source>
         <translation>导出峰值频率</translation>
@@ -2875,7 +2875,7 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
         <source>Echantillon</source>
         <translation>样本</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="mainwindow.cpp" line="2821"/>
         <source>Numéro de pic</source>
         <translation>峰值</translation>
@@ -2885,7 +2885,7 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
         <source>Facteur</source>
         <translation>系数</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="mainwindow.cpp" line="2822"/>
         <source>Fréquence</source>
         <translation>频率</translation>
@@ -2913,12 +2913,12 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
         <source>Information</source>
         <translation>信息</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="mainwindow.cpp" line="2873"/>
         <source>1 modulateur a été supprimé.</source>
         <translation>1 个调制器已被删除。</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="mainwindow.cpp" line="2876"/>
         <source>modulateurs ont été supprimés.</source>
         <translation>个调制器已被删除。</translation>
@@ -2933,27 +2933,27 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
         <source>Format inconnu.</source>
         <translation>未知格式。</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="mainwindow.cpp" line="2071"/>
         <source>Le fichier est déjà chargé.</source>
         <translation>文件已被加载。</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="mainwindow.cpp" line="618"/>
         <source>&lt;b&gt;Perte de résolution </source>
         <translation>&lt;b&gt;丢失分辨率 </translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="mainwindow.cpp" line="622"/>
         <source>La qualité des samples sera abaissée suite à cette opération. Continuer ?</source>
         <translation>样本质量将会损失。是否继续？</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="mainwindow.cpp" line="696"/>
         <source>Fichier déjà ouvert, impossible de sauvegarder.</source>
         <translation>文件已打开，无法保存。</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="mainwindow.cpp" line="1816"/>
         <source>Choisir un répertoire de destination</source>
         <translation>选择目标文件夹</translation>
@@ -2968,13 +2968,13 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
         <source>Nom du nouveau preset :</source>
         <translation>新预设名称：</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="mainwindow.cpp" line="2476"/>
         <source> instrument ont été supprimés.</source>
         <translatorcomment>instrument: singular</translatorcomment>
         <translation> 个乐器已被删除。</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="mainwindow.cpp" line="2478"/>
         <source> instruments ont été supprimés.</source>
         <translatorcomment>instrument: plural</translatorcomment>
@@ -2988,7 +2988,7 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
         <source>, valeur absolue</source>
         <translation>，绝对值</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/page.cpp" line="272"/>
         <location filename="pages/page.cpp" line="304"/>
         <location filename="pages/page.cpp" line="584"/>
@@ -2996,14 +2996,14 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
         <oldsource>Offset début sample</oldsource>
         <translation>样本起点偏移</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/page.cpp" line="280"/>
         <location filename="pages/page.cpp" line="368"/>
         <source>Offset fin échantillon</source>
         <oldsource>Offset fin sample</oldsource>
         <translation>样本终点偏移</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/page.cpp" line="288"/>
         <source>Offset début boucle</source>
         <translation>循环起点偏移</translation>
@@ -3014,53 +3014,53 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
         <source>Offset fin boucle</source>
         <translation>循环终点偏移</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/page.cpp" line="312"/>
         <location filename="pages/page.cpp" line="313"/>
         <source>Mod LFO → ton (c)</source>
         <translation type="unfinished">Mod LFO → pitch (c)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/page.cpp" line="320"/>
         <location filename="pages/page.cpp" line="321"/>
         <source>Vib LFO → ton (c)</source>
         <translation type="unfinished">Vib LFO → pitch (c)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/page.cpp" line="328"/>
         <location filename="pages/page.cpp" line="329"/>
         <source>Mod env → ton (c)</source>
         <translation type="unfinished">Mod env → pitch (c)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/page.cpp" line="336"/>
         <source>Filtre, fréquence (Hz)</source>
         <translation>频率滤波(赫兹)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/page.cpp" line="337"/>
         <source>Filtre, fréquence (×)</source>
         <translation>频率滤波(×)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/page.cpp" line="344"/>
         <location filename="pages/page.cpp" line="345"/>
         <source>Filtre, résonance (dB)</source>
         <translation>共鸣滤波(分贝)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/page.cpp" line="352"/>
         <location filename="pages/page.cpp" line="353"/>
         <source>Mod LFO → filtre (c)</source>
         <translation type="unfinished">Mod LFO → filter (c)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/page.cpp" line="360"/>
         <location filename="pages/page.cpp" line="361"/>
         <source>Mod env → filtre (c)</source>
         <translation type="unfinished">Mod env → filter (c)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/page.cpp" line="376"/>
         <location filename="pages/page.cpp" line="377"/>
         <source>Mod LFO → volume (dB)</source>
@@ -3072,7 +3072,7 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
         <source>Chorus (%)</source>
         <translation>和声(%)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/page.cpp" line="392"/>
         <location filename="pages/page.cpp" line="393"/>
         <source>Réverbération (%)</source>
@@ -3094,7 +3094,7 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
         <translatorcomment>english formulations may be kept...</translatorcomment>
         <translation type="unfinished">Mod LFO delay (s)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/page.cpp" line="409"/>
         <source>Mod LFO delay (×)</source>
         <translation type="unfinished">Mod LFO delay (×)</translation>
@@ -3104,7 +3104,7 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
         <source>Mod LFO freq (Hz)</source>
         <translation type="unfinished">Mod LFO freq (Hz)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/page.cpp" line="417"/>
         <source>Mod LFO freq (×)</source>
         <translation type="unfinished">Mod LFO freq (×)</translation>
@@ -3114,7 +3114,7 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
         <source>Vib LFO delay (s)</source>
         <translation type="unfinished">Vib LFO delay (s)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/page.cpp" line="425"/>
         <source>Vib LFO delay (×)</source>
         <translation type="unfinished">Vib LFO delay (×)</translation>
@@ -3124,7 +3124,7 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
         <source>Vib LFO freq (Hz)</source>
         <translation type="unfinished">Vib LFO freq (Hz)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/page.cpp" line="433"/>
         <source>Vib LFO freq (×)</source>
         <translation type="unfinished">Vib LFO freq (×)</translation>
@@ -3134,7 +3134,7 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
         <source>Mod env delay (s)</source>
         <translation>调制包络延迟(秒)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/page.cpp" line="441"/>
         <source>Mod env delay (×)</source>
         <translation>调制包络延迟(×)</translation>
@@ -3144,7 +3144,7 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
         <source>Mod env attack (s)</source>
         <translation>调制包络起音(s)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/page.cpp" line="449"/>
         <source>Mod env attack (×)</source>
         <translation>调制包络起音(×)</translation>
@@ -3154,7 +3154,7 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
         <source>Mod env hold (s)</source>
         <translation>调制包络保持(秒)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/page.cpp" line="457"/>
         <source>Mod env hold (×)</source>
         <translation>调制包络保持(×)</translation>
@@ -3164,7 +3164,7 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
         <source>Mod env decay (s)</source>
         <translation>调制包络衰减(秒)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/page.cpp" line="465"/>
         <source>Mod env decay (×)</source>
         <translation>调制包络衰减(×)</translation>
@@ -3180,18 +3180,18 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
         <source>Mod env release (s)</source>
         <translation>调制包络释音(秒)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/page.cpp" line="481"/>
         <source>Mod env release (×)</source>
         <translation>调制包络释音(×)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/page.cpp" line="488"/>
         <location filename="pages/page.cpp" line="489"/>
         <source>Note → Mod env hold (c)</source>
         <translation type="unfinished">Key → Mod env hold (c)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/page.cpp" line="496"/>
         <location filename="pages/page.cpp" line="497"/>
         <source>Note → Mod env decay (c)</source>
@@ -3202,7 +3202,7 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
         <source>Vol env delay (s)</source>
         <translation>音量包络延迟(秒)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/page.cpp" line="505"/>
         <source>Vol env delay (×)</source>
         <translation>音量包络延迟(×)</translation>
@@ -3212,7 +3212,7 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
         <source>Vol env decay (s)</source>
         <translation>音量包络衰减(秒)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/page.cpp" line="529"/>
         <source>Vol env decay (×)</source>
         <translation>音量包络衰减(×)</translation>
@@ -3222,7 +3222,7 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
         <source>Vol env attack (s)</source>
         <translation>音量包络起音(秒)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/page.cpp" line="513"/>
         <source>Vol env attack (×)</source>
         <translation>音量包络起音(×)</translation>
@@ -3232,7 +3232,7 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
         <source>Vol env hold (s)</source>
         <translation>音量包络保持(秒)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/page.cpp" line="521"/>
         <source>Vol env hold (×)</source>
         <translation>音量包络保持(×)</translation>
@@ -3249,30 +3249,30 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
         <source>Vol env release (s)</source>
         <translation>音量包络释音(秒)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/page.cpp" line="545"/>
         <source>Vol env release (×)</source>
         <translation>音量包络释音(×)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/page.cpp" line="552"/>
         <location filename="pages/page.cpp" line="553"/>
         <source>Note → Vol env hold (c)</source>
         <translation type="unfinished">Key → Vol env hold (c)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/page.cpp" line="560"/>
         <location filename="pages/page.cpp" line="561"/>
         <source>Note → Vol env decay (c)</source>
         <translation type="unfinished">Key → Vol env decay (c)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/page.cpp" line="568"/>
         <location filename="pages/page.cpp" line="569"/>
         <source>Étendue note</source>
         <translation>音符范围</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/page.cpp" line="576"/>
         <location filename="pages/page.cpp" line="577"/>
         <source>Étendue vélocité</source>
@@ -3283,12 +3283,12 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
         <source>Note fixe</source>
         <translation>固定音符</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/page.cpp" line="600"/>
         <source>Vélocité fixe</source>
         <translation>固定力度</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/page.cpp" line="608"/>
         <location filename="pages/page.cpp" line="609"/>
         <source>Atténuation (dB)</source>
@@ -3300,7 +3300,7 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
         <source>Accordage (demi-tons)</source>
         <translation>校音(半音)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/page.cpp" line="632"/>
         <location filename="pages/page.cpp" line="633"/>
         <source>Accordage (centièmes)</source>
@@ -3343,19 +3343,19 @@ Diviser le fichier en plusieurs sf2 peut résoudre le problème.</source>
         <source>Liste des instruments</source>
         <translation>乐器列表</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/pageoverviewinst.cpp" line="38"/>
         <source>Utilisé</source>
         <translation>已使用</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/pageoverviewinst.cpp" line="39"/>
         <source>Nombre
 d&apos;échantillons</source>
         <oldsource>Nombre d&apos;échantillons</oldsource>
         <translation>样本数</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/pageoverviewinst.cpp" line="40"/>
         <source>Nombre de
 paramètres</source>
@@ -3369,21 +3369,21 @@ modulateurs</source>
         <oldsource>Nombre de modulateurs</oldsource>
         <translation>调制器数</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/pageoverviewinst.cpp" line="42"/>
         <source>Étendue totale
 (note)</source>
         <oldsource>Étendue totale (note)</oldsource>
         <translation>最大音符范围</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/pageoverviewinst.cpp" line="43"/>
         <source>Étendue totale
 (vélocité)</source>
         <oldsource>Étendue totale (vélocité)</oldsource>
         <translation>最大力度范围</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/pageoverviewinst.cpp" line="44"/>
         <source>Atténuation</source>
         <translation>衰减</translation>
@@ -3400,7 +3400,7 @@ en boucle</source>
         <source>Chorus</source>
         <translation>和声</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/pageoverviewinst.cpp" line="47"/>
         <source>Réverbération</source>
         <oldsource>Reverbération</oldsource>
@@ -3418,7 +3418,7 @@ en boucle</source>
         <source>non</source>
         <translation>否</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/pageoverviewinst.cpp" line="283"/>
         <source>oui, jusqu&apos;à la fin</source>
         <translatorcomment>speaking about a loop mode</translatorcomment>
@@ -3453,7 +3453,7 @@ d&apos;instruments</source>
         <oldsource>Nombre d&apos;instruments</oldsource>
         <translation>乐器编号</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/pageoverviewprst.cpp" line="40"/>
         <source>Nombre de
 paramètres</source>
@@ -3467,21 +3467,21 @@ modulateurs</source>
         <oldsource>Nombre de modulateurs</oldsource>
         <translation>调制器编号</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/pageoverviewprst.cpp" line="42"/>
         <source>Étendue totale
 (note)</source>
         <oldsource>Étendue totale (note)</oldsource>
         <translation>最大音符范围</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/pageoverviewprst.cpp" line="43"/>
         <source>Étendue totale
 (vélocité)</source>
         <oldsource>Étendue totale (vélocité)</oldsource>
         <translation>最大力度范围</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/pageoverviewprst.cpp" line="44"/>
         <source>Atténuation</source>
         <translation>衰减</translation>
@@ -3491,7 +3491,7 @@ modulateurs</source>
         <source>Chorus</source>
         <translation>和声</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/pageoverviewprst.cpp" line="46"/>
         <source>Réverbération</source>
         <oldsource>Reverbération</oldsource>
@@ -3500,17 +3500,17 @@ modulateurs</source>
 </context>
 <context>
     <name>PageOverviewSmpl</name>
-    <message>
+    <message utf8="true">
         <location filename="pages/pageoverviewsmpl.cpp" line="32"/>
         <source>Liste des échantillons</source>
         <translation>样本列表</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/pageoverviewsmpl.cpp" line="38"/>
         <source>Utilisé</source>
         <translation>已使用</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/pageoverviewsmpl.cpp" line="39"/>
         <source>Durée
 totale</source>
@@ -3523,7 +3523,7 @@ totale</source>
         <source>Correction</source>
         <translation>校正</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/pageoverviewsmpl.cpp" line="40"/>
         <source>Durée de
 la boucle</source>
@@ -3537,7 +3537,7 @@ de base</source>
         <translation>根
 音符</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/pageoverviewsmpl.cpp" line="43"/>
         <source>Type
 d&apos;échantillon</source>
@@ -3545,7 +3545,7 @@ d&apos;échantillon</source>
         <translation>样本
 类型</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/pageoverviewsmpl.cpp" line="44"/>
         <source>Échantillon
 lié</source>
@@ -3580,19 +3580,19 @@ lié</source>
         <comment>opposite to stereo</comment>
         <translation>单声道</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/pageoverviewsmpl.cpp" line="133"/>
         <source>Stéréo droit</source>
         <oldsource>Stereo droit</oldsource>
         <translation>左声道</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/pageoverviewsmpl.cpp" line="136"/>
         <source>Stéréo gauche</source>
         <oldsource>Stereo gauche</oldsource>
         <translation>右声道</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/pageoverviewsmpl.cpp" line="139"/>
         <source>Stéréo non défini</source>
         <oldsource>Stereo non défini</oldsource>
@@ -3640,12 +3640,12 @@ lié</source>
         <source>Copier l&apos;ensemble des modulateurs</source>
         <translation>复制全部调制器</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/pagetable.cpp" line="583"/>
         <source>Dupliquer la sélection vers...</source>
         <translation>复制选择项到...</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/pagetable.cpp" line="584"/>
         <location filename="pages/pagetable.cpp" line="592"/>
         <source>Copier les modulateurs sélectionnés</source>
@@ -3669,12 +3669,12 @@ lié</source>
         <source>Attention</source>
         <translation>警告</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/pagetable.cpp" line="2003"/>
         <source>les offsets ne peuvent être modulés dans un preset.</source>
         <translation>在预设中偏移量无法被调制。</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/pagetable.cpp" line="2012"/>
         <source>&quot; ne peut être modulé dans un preset.</source>
         <translation>&quot;在预设中无法被调制。</translation>
@@ -3689,7 +3689,7 @@ lié</source>
         <source>Un preset ne contenant aucun instrument n&apos;est pas compatible avec cet outil.</source>
         <translation>不包含乐器的预设与该工具不兼容。</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/pagetable.cpp" line="2912"/>
         <source>L&apos;étendue de notes de toutes les divisions doit être spécifiée.</source>
         <translation>必须为每个分层设置音符范围。</translation>
@@ -3704,12 +3704,12 @@ lié</source>
         <source>Le preset doit contenir des instruments.</source>
         <translation>该预设不包含乐器。</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/pagetable.cpp" line="2959"/>
         <source>Aucune étendue de notes spécifiée pour l&apos;instrument.</source>
         <translation>该乐器未指定音符范围。</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/pagetable.cpp" line="2961"/>
         <source>Aucune étendue de notes spécifiée pour le preset.</source>
         <translation>该预设未指定音符范围。</translation>
@@ -3722,7 +3722,7 @@ lié</source>
         <source>Table</source>
         <translation>表格</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/page_inst.ui" line="150"/>
         <source>Étendues</source>
         <translation>分层范围</translation>
@@ -3737,12 +3737,12 @@ lié</source>
         <source>Etendue note</source>
         <translation>音符范围</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/page_inst.ui" line="291"/>
         <source>Etendue vélocité</source>
         <translation>力度范围</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/page_inst.ui" line="296"/>
         <source>Atténuation (dB)</source>
         <translation>衰减(分贝)</translation>
@@ -3768,7 +3768,7 @@ lié</source>
         <source>Accordage (demi-tons)</source>
         <translation>校音(半音)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/page_inst.ui" line="321"/>
         <source>Accordage (centièmes)</source>
         <translation>校音(音分)</translation>
@@ -3778,12 +3778,12 @@ lié</source>
         <source>Accordage (scale)</source>
         <translation>校音(音阶)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/page_inst.ui" line="331"/>
         <source>Filtre, fréquence (Hz)</source>
         <translation>频率滤波(赫兹)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/page_inst.ui" line="342"/>
         <source>Filtre, résonance (dB)</source>
         <translation>共鸣滤波(分贝)</translation>
@@ -3818,13 +3818,13 @@ lié</source>
         <source>Vol env release (s)</source>
         <translation>音量包络释音(秒)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/page_inst.ui" line="377"/>
         <source>Note → Vol env hold (c)</source>
         <oldsource>Vol env note → hold (c)</oldsource>
         <translation type="unfinished">Key → Vol env hold (c)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/page_inst.ui" line="382"/>
         <source>Note → Vol env decay (c)</source>
         <oldsource>Vol env note → decay (c)</oldsource>
@@ -3860,23 +3860,23 @@ lié</source>
         <source>Mod env release (s)</source>
         <translation>调制包络释音(秒)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/page_inst.ui" line="417"/>
         <source>Mod env → ton (c)</source>
         <translation type="unfinished">Mod env → pitch (c)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/page_inst.ui" line="422"/>
         <source>Mod env → filtre (c)</source>
         <translation type="unfinished">Mod env → filter (c)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/page_inst.ui" line="427"/>
         <source>Note → Mod env hold (c)</source>
         <oldsource>Mod env note → hold (c)</oldsource>
         <translation type="unfinished">Key → Mod env hold (c)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/page_inst.ui" line="432"/>
         <source>Note → Mod env decay (c)</source>
         <oldsource>Mod env note → decay (c)</oldsource>
@@ -3892,17 +3892,17 @@ lié</source>
         <source>Mod LFO freq (Hz)</source>
         <translation type="unfinished">Mod LFO freq (Hz)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/page_inst.ui" line="447"/>
         <source>Mod LFO → ton (c)</source>
         <translation type="unfinished">Mod LFO → pitch (c)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/page_inst.ui" line="452"/>
         <source>Mod LFO → filtre (c)</source>
         <translation type="unfinished">Mod LFO → filter (c)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/page_inst.ui" line="457"/>
         <source>Mod LFO → volume (dB)</source>
         <translation type="unfinished">Mod LFO → volume (dB)</translation>
@@ -3917,7 +3917,7 @@ lié</source>
         <source>Vib LFO freq (Hz)</source>
         <translation type="unfinished">Vib LFO freq (Hz)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/page_inst.ui" line="472"/>
         <source>Vib LFO → ton (c)</source>
         <translation type="unfinished">Vib LFO → pitch (c)</translation>
@@ -3932,7 +3932,7 @@ lié</source>
         <source>Chorus (%)</source>
         <translation>和声(%)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/page_inst.ui" line="487"/>
         <source>Réverbération (%)</source>
         <translation>混响(%)</translation>
@@ -3942,24 +3942,24 @@ lié</source>
         <source>Note fixe</source>
         <translation>固定音符</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/page_inst.ui" line="497"/>
         <source>Vélocité fixe</source>
         <translation>固定力度</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/page_inst.ui" line="502"/>
         <source>Offset début échantillon</source>
         <oldsource>Offset début sample</oldsource>
         <translation>样本起点偏移</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/page_inst.ui" line="507"/>
         <source>Offset fin échantillon</source>
         <oldsource>Offset fin sample</oldsource>
         <translation>样本终点偏移</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/page_inst.ui" line="512"/>
         <source>Offset début boucle</source>
         <translation>循环起点偏移</translation>
@@ -3984,7 +3984,7 @@ lié</source>
         <source>Copie les modulateurs</source>
         <translation>复制调制器</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/page_inst.ui" line="685"/>
         <source>Colle les modulateurs copiés</source>
         <translation>粘贴调制器</translation>
@@ -4004,7 +4004,7 @@ lié</source>
         <source>Source</source>
         <translation type="unfinished">来源值</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/page_inst.ui" line="810"/>
         <source>Quantité</source>
         <translation type="unfinished">量</translation>
@@ -4015,7 +4015,7 @@ lié</source>
         <source>Destination</source>
         <translation type="unfinished">调制目标</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/page_inst.ui" line="835"/>
         <source>Source / Quantité</source>
         <translation type="unfinished">来源值/量</translation>
@@ -4025,19 +4025,19 @@ lié</source>
         <source>Valeur abs.</source>
         <translation>绝对值</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/page_inst.cpp" line="187"/>
         <source>&lt;b&gt;Instrument lié à aucun preset.&lt;/b&gt;</source>
         <oldsource>&lt;b&gt;Instrument liÃ© Ã  aucun preset.&lt;/b&gt;</oldsource>
         <translation>&lt;b&gt;乐器未链接到任何预设。&lt;/b&gt;</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/page_inst.cpp" line="189"/>
         <source>&lt;b&gt;Instrument lié au preset : &lt;/b&gt;</source>
         <oldsource>&lt;b&gt;Instrument liÃ© au preset : &lt;/b&gt;</oldsource>
         <translation>&lt;b&gt;乐器已链接到的预设:&lt;/b&gt;</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/page_inst.cpp" line="191"/>
         <source>&lt;b&gt;Instrument lié aux presets : &lt;/b&gt;</source>
         <oldsource>&lt;b&gt;Instrument liÃ© aux presets : &lt;/b&gt;</oldsource>
@@ -4053,7 +4053,7 @@ lié</source>
         <source>L&apos;instrument doit contenir des sons.</source>
         <translation>此乐器不包含样本。</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/page_inst.cpp" line="426"/>
         <source>Création </source>
         <translation type="unfinished">Creation </translation>
@@ -4091,12 +4091,12 @@ lié</source>
         <source>Etendue note</source>
         <translation>音符范围</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/page_prst.ui" line="320"/>
         <source>Etendue vélocité</source>
         <translation>力度范围</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/page_prst.ui" line="325"/>
         <source>Atténuation (dB)</source>
         <translation>衰减(分贝)</translation>
@@ -4112,7 +4112,7 @@ lié</source>
         <source>Accordage (demi-tons)</source>
         <translation>校音(半音)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/page_prst.ui" line="340"/>
         <source>Accordage (centièmes)</source>
         <translation>校音(音分)</translation>
@@ -4122,36 +4122,36 @@ lié</source>
         <source>Accordage (scale)</source>
         <translation>校音(音阶)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/page_prst.ui" line="350"/>
         <source>Filtre, fréquence (×)</source>
         <oldsource>Filtre, fréquence (Hz)</oldsource>
         <translation>频率滤波(×)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/page_prst.ui" line="361"/>
         <source>Filtre, résonance (dB)</source>
         <translation>共鸣滤波(分贝)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/page_prst.ui" line="366"/>
         <source>Vol env delay (×)</source>
         <oldsource>Vol env delay (s)</oldsource>
         <translation>音量包络延迟(×)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/page_prst.ui" line="371"/>
         <source>Vol env attack (×)</source>
         <oldsource>Vol env attack (s)</oldsource>
         <translation>音量包络起音(×)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/page_prst.ui" line="376"/>
         <source>Vol env hold (×)</source>
         <oldsource>Vol env hold (s)</oldsource>
         <translation>音量包络保持(×)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/page_prst.ui" line="381"/>
         <source>Vol env decay (×)</source>
         <oldsource>Vol env decay (s)</oldsource>
@@ -4162,43 +4162,43 @@ lié</source>
         <source>Vol env sustain (dB)</source>
         <translation>音量包络延音(分贝)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/page_prst.ui" line="391"/>
         <source>Vol env release (×)</source>
         <oldsource>Vol env release (s)</oldsource>
         <translation>音量包络释音(×)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/page_prst.ui" line="396"/>
         <source>Note → Vol env hold (c)</source>
         <oldsource>Vol env note → hold (c)</oldsource>
         <translation type="unfinished">Key → Vol env hold (c)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/page_prst.ui" line="401"/>
         <source>Note → Vol env decay (c)</source>
         <oldsource>Vol env note → decay (c)</oldsource>
         <translation type="unfinished">Key → Vol env decay (c)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/page_prst.ui" line="406"/>
         <source>Mod env delay (×)</source>
         <oldsource>Mod env delay (s)</oldsource>
         <translation>调制包络延迟(×)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/page_prst.ui" line="411"/>
         <source>Mod env attack (×)</source>
         <oldsource>Mod env attack (s)</oldsource>
         <translation>调制包络起音(×)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/page_prst.ui" line="416"/>
         <source>Mod env hold (×)</source>
         <oldsource>Mod env hold (s)</oldsource>
         <translation>调制包络保持(×)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/page_prst.ui" line="421"/>
         <source>Mod env decay (×)</source>
         <oldsource>Mod env decay (s)</oldsource>
@@ -4209,75 +4209,75 @@ lié</source>
         <source>Mod env sustain (%)</source>
         <translation>调制包络延音(%)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/page_prst.ui" line="431"/>
         <source>Mod env release (×)</source>
         <oldsource>Mod env release (s)</oldsource>
         <translation>调制包络释音(×)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/page_prst.ui" line="436"/>
         <source>Mod env → ton (c)</source>
         <translation type="unfinished">Mod env → pitch (c)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/page_prst.ui" line="441"/>
         <source>Mod env → filtre (c)</source>
         <translation type="unfinished">Mod env → filter (c)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/page_prst.ui" line="446"/>
         <source>Note → Mod env hold (c)</source>
         <oldsource>Mod env note → hold (c)</oldsource>
         <translation type="unfinished">Key → Mod env hold (c)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/page_prst.ui" line="451"/>
         <source>Note → Mod env decay (c)</source>
         <oldsource>Mod env note → decay (c)</oldsource>
         <translation type="unfinished">Key → Mod env decay (c)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/page_prst.ui" line="456"/>
         <source>Mod LFO delay (×)</source>
         <oldsource>Mod LFO delay (s)</oldsource>
         <translatorcomment>调制低频振荡延迟(×)</translatorcomment>
         <translation type="unfinished">Mod LFO delay (×)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/page_prst.ui" line="461"/>
         <source>Mod LFO freq (×)</source>
         <oldsource>Mod LFO freq (Hz)</oldsource>
         <translation type="unfinished">Mod LFO freq (×)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/page_prst.ui" line="466"/>
         <source>Mod LFO → ton (c)</source>
         <translation type="unfinished">Mod LFO → pitch (c)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/page_prst.ui" line="471"/>
         <source>Mod LFO → filtre (c)</source>
         <translation type="unfinished">Mod LFO → filter (c)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/page_prst.ui" line="476"/>
         <source>Mod LFO → volume (dB)</source>
         <translation type="unfinished">Mod LFO → volume (dB)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/page_prst.ui" line="481"/>
         <source>Vib LFO delay (×)</source>
         <oldsource>Vib LFO delay (s)</oldsource>
         <translation type="unfinished">Vib LFO delay (×)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/page_prst.ui" line="486"/>
         <source>Vib LFO freq (×)</source>
         <oldsource>Vib LFO freq (Hz)</oldsource>
         <translation type="unfinished">Vib LFO freq (×)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/page_prst.ui" line="491"/>
         <source>Vib LFO → ton (c)</source>
         <translation type="unfinished">Vib LFO → pitch (c)</translation>
@@ -4287,7 +4287,7 @@ lié</source>
         <source>Chorus (%)</source>
         <translation>和声(%)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/page_prst.ui" line="501"/>
         <source>Réverbération (%)</source>
         <translation>混响(%)</translation>
@@ -4302,7 +4302,7 @@ lié</source>
         <source>Copie les modulateurs</source>
         <translation>复制调制器</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/page_prst.ui" line="666"/>
         <source>Colle les modulateurs copiés</source>
         <translation>粘贴调制器</translation>
@@ -4327,7 +4327,7 @@ lié</source>
         <source>Table</source>
         <translation>表格</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/page_prst.ui" line="217"/>
         <source>Étendues</source>
         <translation>范围</translation>
@@ -4337,7 +4337,7 @@ lié</source>
         <source>Source</source>
         <translation>来源值</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/page_prst.ui" line="791"/>
         <source>Quantité</source>
         <translation type="unfinished">量</translation>
@@ -4348,7 +4348,7 @@ lié</source>
         <source>Destination</source>
         <translation>目标</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/page_prst.ui" line="822"/>
         <source>Source / Quantité</source>
         <translation type="unfinished">来源值/量</translation>
@@ -4401,7 +4401,7 @@ lié</source>
         <source>Commentaires</source>
         <translation>备注</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/page_sf2.ui" line="147"/>
         <source>Échantillons</source>
         <translation>样本</translation>
@@ -4427,23 +4427,23 @@ lié</source>
         <source>Fichier</source>
         <translation>文件</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/page_sf2.ui" line="246"/>
         <source>Nombre de paramètres (instruments)</source>
         <translation>乐器参数数</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/page_sf2.ui" line="266"/>
         <source>Nombre de paramètres (presets)</source>
         <translation>预设参数数</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/page_sf2.ui" line="365"/>
         <source>Logiciel(s) d&apos;édition</source>
         <oldsource>Logiciel d&apos;édition</oldsource>
         <translation>编辑软件</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/page_sf2.ui" line="239"/>
         <source>Nombre d&apos;échantillons</source>
         <oldsource>Nombre de samples</oldsource>
@@ -4459,7 +4459,7 @@ lié</source>
         <source>Nombre de presets</source>
         <translation>预设数</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/page_sf2.cpp" line="226"/>
         <location filename="pages/page_sf2.cpp" line="241"/>
         <source> (inutilisés : </source>
@@ -4467,7 +4467,7 @@ lié</source>
         <translatorcomment>plural</translatorcomment>
         <translation> (未使用： </translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/page_sf2.cpp" line="229"/>
         <location filename="pages/page_sf2.cpp" line="244"/>
         <source> (inutilisé : </source>
@@ -4478,7 +4478,7 @@ lié</source>
 </context>
 <context>
     <name>Page_Smpl</name>
-    <message>
+    <message utf8="true">
         <location filename="pages/page_smpl.ui" line="191"/>
         <source>&lt;b&gt;Fréquences&lt;/b&gt;</source>
         <translation>&lt;b&gt;频率&lt;/b&gt;</translation>
@@ -4488,7 +4488,7 @@ lié</source>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Informations&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;信息&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/page_smpl.ui" line="754"/>
         <source>Réinitialiser</source>
         <translation>重设</translation>
@@ -4498,7 +4498,7 @@ lié</source>
         <source>Appliquer</source>
         <translation>应用</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/page_smpl.ui" line="951"/>
         <source>Utilise la longueur totale de l&apos;échantillon comme boucle</source>
         <translation>全长循环</translation>
@@ -4521,7 +4521,7 @@ lié</source>
         <source>en boucle</source>
         <translation>循环</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/page_smpl.ui" line="1198"/>
         <source>stéréo</source>
         <translation>双声道</translation>
@@ -4548,7 +4548,7 @@ lié</source>
         <translatorcomment>基础音</translatorcomment>
         <translation>根音符</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/page_smpl.ui" line="978"/>
         <source>Correction (centième)</source>
         <translation>校正(音分)</translation>
@@ -4558,7 +4558,7 @@ lié</source>
         <source>Echantillonnage</source>
         <translation>采样率</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/page_smpl.ui" line="792"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Égaliseur (±15 dB)&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;均衡器(±15 dB)&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
@@ -4605,19 +4605,19 @@ lié</source>
         <source>lien</source>
         <translation>链接</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/page_smpl.cpp" line="340"/>
         <source>&lt;b&gt;Échantillon lié à aucun instrument.&lt;/b&gt;</source>
         <oldsource>&lt;b&gt;Sample lié à aucun instrument.&lt;/b&gt;</oldsource>
         <translation>&lt;b&gt;样本未链接到任何乐器。&lt;/b&gt;</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/page_smpl.cpp" line="342"/>
         <source>&lt;b&gt;Échantillon lié à l&apos;instrument : &lt;/b&gt;</source>
         <oldsource>&lt;b&gt;Sample lié à l&apos;instrument : &lt;/b&gt;</oldsource>
         <translation>&lt;b&gt;样本已链接到的乐器：&lt;/b&gt;</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/page_smpl.cpp" line="344"/>
         <source>&lt;b&gt;Échantillon lié aux instruments : &lt;/b&gt;</source>
         <oldsource>&lt;b&gt;Sample lié aux instruments : &lt;/b&gt;</oldsource>
@@ -4629,23 +4629,23 @@ lié</source>
         <source>Information</source>
         <translation>信息</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/page_smpl.cpp" line="561"/>
         <location filename="pages/page_smpl.cpp" line="1821"/>
         <source>Modification appliquée avec succès aux différents échantillons</source>
         <translation>更改已成功应用到其它样本</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/page_smpl.cpp" line="1238"/>
         <source>L&apos;échantillon « </source>
         <translation>样本&quot;</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/page_smpl.cpp" line="1238"/>
         <source> » n&apos;a pas pu être bouclé.</source>
         <translation>&quot;无法循环。</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/page_smpl.cpp" line="1241"/>
         <source>Les échantillons suivants n&apos;ont pas pu être bouclés :</source>
         <translation>下列样本无法循环：</translation>
@@ -4661,17 +4661,17 @@ lié</source>
         <source>Attention</source>
         <translation>警告</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/page_smpl.cpp" line="1355"/>
         <source>Cet outil ne s&apos;applique que sur des échantillons stéréo.</source>
         <translation>该工具仅可用于双声道样本。</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/page_smpl.cpp" line="1450"/>
         <source>Écart en demi-tons :</source>
         <translation>移动量(半音)：</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/page_smpl.cpp" line="1640"/>
         <source>Arrêt</source>
         <oldsource>arrêt</oldsource>
@@ -4693,7 +4693,7 @@ lié</source>
         <source>Informations</source>
         <translation>信息</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/page_smpl.cpp" line="102"/>
         <source>Égaliseur (±15 dB)</source>
         <translation>均衡器(±15 分贝)</translation>
@@ -4732,12 +4732,12 @@ lié</source>
 </context>
 <context>
     <name>QApplication</name>
-    <message>
+    <message utf8="true">
         <location filename="configuration/thememanager.cpp" line="54"/>
         <source>Personnalisé</source>
         <translation>自定义</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="configuration/thememanager.cpp" line="338"/>
         <source>Défaut</source>
         <translation>默认</translation>
@@ -4790,12 +4790,12 @@ lié</source>
 </context>
 <context>
     <name>QObject</name>
-    <message>
+    <message utf8="true">
         <location filename="sf2_core/duplicator.cpp" line="259"/>
         <source>&lt;b&gt;Des paramètres globaux sont déjà renseignés.&lt;/b&gt;</source>
         <translation>&lt;b&gt;全局参数已填充。&lt;/b&gt;</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="sf2_core/duplicator.cpp" line="260"/>
         <source>La division globale ne sera pas recopiée.</source>
         <translation>全局分层将不会被复制。</translation>
@@ -4805,37 +4805,37 @@ lié</source>
         <source>&amp;Ok</source>
         <translation>确定(&amp;O)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="sf2_core/duplicator.cpp" line="263"/>
         <source>Ok, &amp;désactiver ce message</source>
         <translation>确定并不再提示(&amp;D)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="sf2_core/duplicator.cpp" line="298"/>
         <source>L&apos;échantillon « </source>
         <oldsource>l&apos;échantillon « </oldsource>
         <translation>样本&quot;</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="sf2_core/duplicator.cpp" line="299"/>
         <source> » existe déjà.&lt;br /&gt;Que faire ?</source>
         <oldsource>&amp;#160;» existe déjà.&lt;br /&gt;Que faire ?</oldsource>
         <translation>&quot;已存在。&lt;br/&gt;是否替换？</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="sf2_core/duplicator.cpp" line="440"/>
         <source>L&apos;instrument « </source>
         <oldsource>L&apos;instrument «&amp;#160;</oldsource>
         <translation>乐器&quot;</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="sf2_core/duplicator.cpp" line="441"/>
         <location filename="sf2_core/duplicator.cpp" line="541"/>
         <source> » existe déjà.&lt;br /&gt;Souhaitez-vous le remplacer ?</source>
         <oldsource>&amp;#160;» existe déjà.&lt;br /&gt;Souhaitez-vous le remplacer ?</oldsource>
         <translation>&quot;已存在。&lt;br/&gt;是否替换？</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="sf2_core/duplicator.cpp" line="540"/>
         <source>Le preset « </source>
         <oldsource>Le preset «&amp;#160;</oldsource>
@@ -4892,7 +4892,7 @@ lié</source>
         <source>I&amp;gnorer tout</source>
         <translation>全部忽略(&amp;G)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="sf2_core/tree.cpp" line="977"/>
         <source>Échantillons</source>
         <translation>样本</translation>
@@ -4939,7 +4939,7 @@ lié</source>
         <source>sans nom</source>
         <translation>未命名</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="tools/conversion_sfz.cpp" line="288"/>
         <source>// Sfz exporté depuis un sf2 par Polyphone</source>
         <oldsource>// Sfz exported from sf2 by Polyphone</oldsource>
@@ -5017,27 +5017,27 @@ lié</source>
         <source>Cuivres</source>
         <translation>铜管乐</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="tools/conversion_sfz.cpp" line="570"/>
         <source>Instrument à anches</source>
         <translation>簧乐</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="tools/conversion_sfz.cpp" line="572"/>
         <source>Flûtes</source>
         <translation>管乐</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="tools/conversion_sfz.cpp" line="574"/>
         <source>Synthétiseur solo</source>
         <translation>合成主音</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="tools/conversion_sfz.cpp" line="576"/>
         <source>Nappes de synthétiseur</source>
         <translation>合成柔音</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="tools/conversion_sfz.cpp" line="578"/>
         <source>Effets de synthétiseur</source>
         <translation>合成音效</translation>
@@ -5062,7 +5062,7 @@ lié</source>
         <source>Kits de percussion</source>
         <translation>打击乐组</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="gui_divers/dialog_about.cpp" line="110"/>
         <source>Créé par </source>
         <translatorcomment>mind the final space</translatorcomment>
@@ -5083,7 +5083,7 @@ lié</source>
         <source>Import sfz</source>
         <translation>导入 SFZ 文件</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="tools/import_sfz.cpp" line="168"/>
         <source>Sf2 importé depuis un fichier sfz par Polyphone</source>
         <translation>此 SF2 文件由 Polyphone 从 SFZ 导入</translation>
@@ -5093,13 +5093,13 @@ lié</source>
         <source>Extraction en cours...</source>
         <translation>正在解压...</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/graphicslegenditem.cpp" line="110"/>
         <location filename="pages/graphicslegenditem2.cpp" line="66"/>
         <source>Étendue note :</source>
         <translation>音符范围：</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="pages/graphicslegenditem.cpp" line="129"/>
         <location filename="pages/graphicslegenditem2.cpp" line="69"/>
         <source>Étendue vélocité :</source>
@@ -5123,12 +5123,12 @@ lié</source>
         <source>Remplacer par...</source>
         <translation>替换为...</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="sf2_core/tree.cpp" line="68"/>
         <source>Associer à...</source>
         <translation>绑定到...</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="sf2_core/tree.cpp" line="56"/>
         <source>Nouvel échantillon...</source>
         <translation>新样本...</translation>
