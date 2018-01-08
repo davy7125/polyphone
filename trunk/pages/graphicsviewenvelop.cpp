@@ -26,6 +26,7 @@
 #include "thememanager.h"
 #include <QDebug>
 #include <QResizeEvent>
+#include <QScrollBar>
 
 GraphicsViewEnvelop::GraphicsViewEnvelop(QWidget *parent) : QCustomPlot(parent),
     _dontRememberScroll(false),
@@ -319,19 +320,19 @@ void GraphicsViewEnvelop::setSample(QVector<double> data, int sampleRate, int lo
     else
     {
         // Pas de boucle
-        if (data.length() - currentSmplPos < nbRead)
+        if (data.size() - currentSmplPos < nbRead)
         {
-            for (int i = 0; i < data.length() - currentSmplPos; i++)
+            for (int i = 0; i < data.size() - currentSmplPos; i++)
             {
                 dataX[i] = (double)i / sampleRate;
                 dataY[i] = data[currentSmplPos + i] * multiplier;
             }
-            for (int i = data.length() - currentSmplPos; i < nbRead; i++)
+            for (int i = data.size() - currentSmplPos; i < nbRead; i++)
             {
                 dataX[i] = (double)i / sampleRate;
                 dataY[i] = 0;
             }
-            currentSmplPos = data.length();
+            currentSmplPos = data.size();
         }
         else
         {
@@ -372,19 +373,19 @@ void GraphicsViewEnvelop::setSample(QVector<double> data, int sampleRate, int lo
     else
     {
         // Pas de boucle
-        if (data.length() - currentSmplPos < nbRead)
+        if (data.size() - currentSmplPos < nbRead)
         {
-            for (int i = 0; i < data.length() - currentSmplPos; i++)
+            for (int i = 0; i < data.size() - currentSmplPos; i++)
             {
                 dataX[offset + i] = (double)(offset + i) / sampleRate;
                 dataY[offset + i] = data[currentSmplPos + i] * multiplier;
             }
-            for (int i = data.length() - currentSmplPos; i < nbRead; i++)
+            for (int i = data.size() - currentSmplPos; i < nbRead; i++)
             {
                 dataX[offset + i] = (double)(offset + i) / sampleRate;
                 dataY[offset + i] = 0;
             }
-            currentSmplPos = data.length();
+            currentSmplPos = data.size();
         }
         else
         {
@@ -537,7 +538,7 @@ void GraphicsViewEnvelop::wheelEvent(QWheelEvent *event)
 #if QT_VERSION >= QT_VERSION_CHECK(5, 0, 0)
         _qScrollX->setValue(_qScrollX->value() - 0.2 * event->angleDelta().x());
 #else
-        qScrollX->setValue(qScrollX->value() - 0.2 * event->delta());
+        _qScrollX->setValue(_qScrollX->value() - 0.2 * event->delta());
 #endif
 }
 

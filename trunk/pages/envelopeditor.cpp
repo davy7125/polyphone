@@ -57,10 +57,17 @@ EnvelopEditor::EnvelopEditor(QWidget *parent) :
     {
         for (int j = 0; j < 16; j++)
         {
+#if QT_VERSION >= QT_VERSION_CHECK(5, 6, 0)
             imageG.setPixelColor(i, j, greenColor);
             imageG.setPixelColor(16 + i, j, Qt::transparent);
             imageR.setPixelColor(i, j, redColor);
             imageR.setPixelColor(16 + i, j, Qt::transparent);
+#else
+            imageG.setPixel(i, j, greenColor.rgba());
+            imageG.setPixel(16 + i, j, Qt::transparent);
+            imageR.setPixel(i, j, redColor.rgba());
+            imageR.setPixel(16 + i, j, Qt::transparent);
+#endif
         }
     }
     ui->pushVolume->setIcon(QPixmap::fromImage(imageG));
@@ -313,7 +320,7 @@ void EnvelopEditor::addSample(EltID idInstSmpl)
     }
 
     // Adjust values
-    if (startLoop < 0 || endLoop > dataD.length())
+    if (startLoop < 0 || endLoop > dataD.size())
         loopMode = 0;
 
     ui->graphicsView->setSample(dataD, sampleRate, loopMode, startLoop, endLoop);
