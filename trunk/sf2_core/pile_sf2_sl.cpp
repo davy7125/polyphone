@@ -1519,7 +1519,6 @@ int Pile_sf2::sauvegarderSf2(int indexSf2, QString fileName)
     }
 
     // 24 bits
-    dwTmp2 = 11*4 + taille_info + taille_smpl;
     id.typeElement = elementSf2;
     if (this->get(id, champ_wBpsSave).wValue == 24)
     {
@@ -1527,6 +1526,7 @@ int Pile_sf2::sauvegarderSf2(int indexSf2, QString fileName)
         fi.write("sm24", 4);
         taille_sm24 -= 8;
         fi.write((char *)&taille_sm24, 4);
+        dwTmp2 = 12*4 + taille_info + taille_smpl;
         for (int i = 0; i < this->count(id2); i++)
         {
             // copie de chaque sample
@@ -1670,10 +1670,11 @@ int Pile_sf2::sauvegarderSf2(int indexSf2, QString fileName)
             fi.write((char *)&wTmp, 4);
         }
     }
-    // phdr de fin
+    // phdr de fin (38 byte)
     fi.write("EOP", 3);
     charTmp = '\0';
-    fi.write(&charTmp, 21);
+    for (quint32 i = 0; i < 21; i++)
+        fi.write(&charTmp, 1);
     // index bag de fin
     wTmp = nBag;
     fi.write((char *)&wTmp, 2);
