@@ -8,15 +8,15 @@ Build-Depends:
  dpkg-dev (>= 1.16.1~),
  libasound2-dev,
  libjack-jackd2-dev,
- portaudio19-dev,
- qtbase5-dev,
+ libogg-dev,
+ libqcustomplot-dev,
  libqt5svg5-dev,
- zlib1g-dev,
  librtmidi-dev,
  libstk0-dev,
- libqcustomplot-dev,
- libogg-dev,
- libvorbis-dev
+ libvorbis-dev,
+ portaudio19-dev,
+ qtbase5-dev,
+ zlib1g-dev,
 Standards-Version: 3.9.6
 Homepage: http://polyphone-soundfonts.com
 
@@ -37,9 +37,9 @@ Description: soundfont editor
  making it possible to handle a large amount of data.
  .
  Main features:
+  - import from sf2, sfz, sfArk, sf3,
+  - export as sf2, sfz, sf3,
   - support of sf2 format v2.01 and v2.04 (with 24-bit samples),
-  - import from sfz, sfArk, sf3,
-  - export as sfz, sf3,
   - support for jack and asio audio servers,
   - simultaneous editing of parameters,
   - specific tools for musical instrument creation,
