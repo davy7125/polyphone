@@ -176,7 +176,7 @@ QByteArray Sound::getData(quint16 wBps)
             baRet.resize(_info.dwLength*3);
             char * cDest = baRet.data();
             char * cFrom = this->_smpl.data();
-            char * cFrom24 = this->_smpl.data();
+            char * cFrom24 = this->_sm24.data();
             int len = (int)_info.dwLength;
             for (int i = 0; i < len; i++)
             {
@@ -249,7 +249,7 @@ QByteArray Sound::getData(quint16 wBps)
             baRet.resize(_info.dwLength*4);
             char * cDest = baRet.data();
             char * cFrom = this->_smpl.data();
-            char * cFrom24 = this->_smpl.data();
+            char * cFrom24 = this->_sm24.data();
             int len = (int)_info.dwLength;
             for (int i = 0; i < len; i++)
             {
