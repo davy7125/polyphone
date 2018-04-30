@@ -678,59 +678,64 @@
     </message>
     <message>
         <location filename="gui_divers/dialog_about.cpp" line="54"/>
-        <location filename="gui_divers/dialog_about.cpp" line="61"/>
+        <location filename="gui_divers/dialog_about.cpp" line="63"/>
         <source>Davy Triponney</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_about.cpp" line="55"/>
-        <location filename="gui_divers/dialog_about.cpp" line="60"/>
+        <location filename="gui_divers/dialog_about.cpp" line="56"/>
+        <location filename="gui_divers/dialog_about.cpp" line="62"/>
         <source>Andrea Celani</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_about.cpp" line="56"/>
+        <location filename="gui_divers/dialog_about.cpp" line="57"/>
         <source>Kinwie</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_about.cpp" line="57"/>
+        <location filename="gui_divers/dialog_about.cpp" line="58"/>
         <source>Michael Schyllberg</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_about.cpp" line="58"/>
+        <location filename="gui_divers/dialog_about.cpp" line="59"/>
         <source>Paul Stratman</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_about.cpp" line="59"/>
-        <location filename="gui_divers/dialog_about.cpp" line="67"/>
+        <location filename="gui_divers/dialog_about.cpp" line="60"/>
+        <location filename="gui_divers/dialog_about.cpp" line="70"/>
         <source>Steve Clarke</source>
         <translation type="unfinished"></translation>
     </message>
     <message utf8="true">
-        <location filename="gui_divers/dialog_about.cpp" line="62"/>
+        <location filename="gui_divers/dialog_about.cpp" line="64"/>
         <source>F.J. Martínez Murcia</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_about.cpp" line="63"/>
-        <source>Jay Alexander Fleming</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="gui_divers/dialog_about.cpp" line="64"/>
-        <source>Joel Gomes</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="gui_divers/dialog_about.cpp" line="65"/>
-        <source>Magson</source>
+        <source>Georg Gergull</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="gui_divers/dialog_about.cpp" line="66"/>
+        <source>Jay Alexander Fleming</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="gui_divers/dialog_about.cpp" line="67"/>
+        <source>Joel Gomes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="gui_divers/dialog_about.cpp" line="68"/>
+        <source>Magson</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="gui_divers/dialog_about.cpp" line="69"/>
         <source>Pavel Fric</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4668,17 +4673,17 @@ lié</source>
 <context>
     <name>QObject</name>
     <message utf8="true">
-        <location filename="gui_divers/dialog_about.cpp" line="110"/>
+        <location filename="gui_divers/dialog_about.cpp" line="114"/>
         <source>Créé par </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_about.cpp" line="111"/>
+        <location filename="gui_divers/dialog_about.cpp" line="115"/>
         <source>Contributeurs </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="gui_divers/dialog_about.cpp" line="112"/>
+        <location filename="gui_divers/dialog_about.cpp" line="116"/>
         <source>Traduit par </source>
         <translation type="unfinished"></translation>
     </message>

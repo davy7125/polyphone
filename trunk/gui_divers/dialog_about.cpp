@@ -50,21 +50,25 @@ DialogAbout::DialogAbout(QWidget *parent) :
                                   trUtf8("Faire un don") + "</span></a>" +
                                   "</p></body></html>");
 
-    // Crédit
+    // Credits
     _credit.addCreator(trUtf8("Davy Triponney"), "contact@polyphone-soundfonts.com");
+
     _credit.addContributor(trUtf8("Andrea Celani"), "acelani74@gmail.com");
     _credit.addContributor(trUtf8("Kinwie"), "kinwie@yahoo.com");
     _credit.addContributor(trUtf8("Michael Schyllberg"), "michael.schyllberg@bredband.net");
     _credit.addContributor(trUtf8("Paul Stratman"), "pcstratman@gmail.com");
     _credit.addContributor(trUtf8("Steve Clarke"), "stevertyu@yahoo.com");
-    _credit.addTranslator(trUtf8("Andrea Celani"), "acelani74@gmail.com");
-    _credit.addTranslator(trUtf8("Davy Triponney"), "contact@polyphone-soundfonts.com");
-    _credit.addTranslator(trUtf8("F.J. Martínez Murcia"), "fjesusmartinez@ugr.es");
-    _credit.addTranslator(trUtf8("Jay Alexander Fleming"), "tito.nehru.naser@gmail.com");
-    _credit.addTranslator(trUtf8("Joel Gomes"), "joelgomes1994@hotmail.com");
-    _credit.addTranslator(trUtf8("Magson"), "magsom@qq.com");
-    _credit.addTranslator(trUtf8("Pavel Fric"), "pavelfric@seznam.cz");
-    _credit.addTranslator(trUtf8("Steve Clarke"), "stevertyu@yahoo.com");
+
+    _credit.addTranslator(trUtf8("Andrea Celani"), "acelani74@gmail.com"); // Italian
+    _credit.addTranslator(trUtf8("Davy Triponney"), "contact@polyphone-soundfonts.com"); // French
+    _credit.addTranslator(trUtf8("F.J. Martínez Murcia"), "fjesusmartinez@ugr.es"); // Spanish
+    _credit.addTranslator(trUtf8("Georg Gergull"), "geoger@hotmail.de"); // German
+    _credit.addTranslator(trUtf8("Jay Alexander Fleming"), "tito.nehru.naser@gmail.com"); // Serbian
+    _credit.addTranslator(trUtf8("Joel Gomes"), "joelgomes1994@hotmail.com"); // Portuguese
+    _credit.addTranslator(trUtf8("Magson"), "magsom@qq.com"); // Chinese
+    _credit.addTranslator(trUtf8("Pavel Fric"), "pavelfric@seznam.cz"); // Czech
+    _credit.addTranslator(trUtf8("Steve Clarke"), "stevertyu@yahoo.com"); // English
+
     ui->textBrowser->setHtml(_credit.getText());
 }
 
