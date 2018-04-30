@@ -1,6 +1,6 @@
 polyphone (2.0) unstable; urgency=low
 
-  * 
+  * (new) German translation
   * (fix) bug when saving/loading 24-bit samples
 
  -- Davy Triponney <davy.triponney@gmail.com>
@@ -34,7 +34,7 @@ polyphone (1.9) UNRELEASED; urgency=low
 polyphone (1.8) UNRELEASED; urgency=low
 
   * (new) light and dark color themes
-  * (new) czech translation
+  * (new) Czech translation
   * (new) links to the online manual & forum
   * (new) tool to call an external editor for samples
   * (improvement) tool "normalize volume" replaced by "change volume" 
@@ -58,7 +58,7 @@ polyphone (1.7) UNRELEASED; urgency=low
   * (new) convenient view to graphically edit key and velocity ranges
   * (new) overview pages showing a configuration summary of all samples, instruments or presets
   * (new) sf3 import / export
-  * (new) serbian translation
+  * (new) Serbian translation
   * (new) command line for conversions between sf2, sf3, sfz and sfArk
   * (improvement) simultaneous editing of multiple global divisions
   * (improvement) tools are allowed when several instruments or presets are selected in the tree
@@ -96,7 +96,7 @@ polyphone (1.6) UNRELEASED; urgency=low
 
 polyphone (1.5) UNRELEASED; urgency=low
 
-  * italian translation
+  * Italian translation
   * transposition tool
   * more options when renaming several elements
   * tool to remove all modulators
@@ -156,7 +156,7 @@ polyphone (1.3) UNRELEASED; urgency=low
 
 polyphone (1.2) UNRELEASED; urgency=low
 
-  * spanish translation
+  * Spanish translation
   * sfz import
   * sfz export improvement
   * simultaneous editing of samples
