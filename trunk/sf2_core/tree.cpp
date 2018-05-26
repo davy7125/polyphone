@@ -882,7 +882,7 @@ void Tree::mouseDoubleClickEvent(QMouseEvent *event)
         this->selectNone();
         this->select(id, true);
         this->scrollToItem(this->selectedItems()[0]);
-    } else if (this) {
+    } else {
         QTreeWidget::mouseDoubleClickEvent(event);
     }
 }
