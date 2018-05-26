@@ -1654,7 +1654,7 @@
         <location filename="pages/envelopeditor.ui" line="118"/>
         <source>Note  Decay</source>
         <oldsource>Key  Decay</oldsource>
-        <translation>Key  Decay</translation>
+        <translation>Key → Decay</translation>
     </message>
     <message>
         <location filename="pages/envelopeditor.ui" line="142"/>
@@ -1670,7 +1670,7 @@
         <location filename="pages/envelopeditor.ui" line="216"/>
         <source>Note  Hold</source>
         <oldsource>Key  Hold</oldsource>
-        <translation>Key  Hold</translation>
+        <translation>Key →    Hold</translation>
     </message>
     <message>
         <location filename="pages/envelopeditor.ui" line="232"/>
@@ -1827,7 +1827,7 @@
     <message>
         <location filename="mainwindow.ui" line="258"/>
         <source>&amp;Outils</source>
-        <translation>&amp;Tools</translation>
+        <translation>&amp;Werkzeuge</translation>
     </message>
     <message utf8="true">
         <location filename="mainwindow.ui" line="265"/>
@@ -2029,7 +2029,7 @@
     <message utf8="true">
         <location filename="mainwindow.ui" line="867"/>
         <source>&amp;Enlever les éléments non utilisés</source>
-        <translation>&amp;Entfernt ungenutzte Elemente</translation>
+        <translation>&amp;entfernt ungenutzte Elemente</translation>
     </message>
     <message utf8="true">
         <location filename="mainwindow.ui" line="870"/>
@@ -2424,7 +2424,7 @@
     <message utf8="true">
         <location filename="mainwindow.ui" line="1469"/>
         <source>Exporter pics de &amp;fréquence (.csv)</source>
-        <translation>Peak &amp;Frequenz Export (csv)</translation>
+        <translation>Peak-&amp;Frequenz Export (csv)</translation>
     </message>
     <message utf8="true">
         <location filename="mainwindow.ui" line="1472"/>
@@ -2871,7 +2871,7 @@ Das Aufteilen der Datei in mehrere sf2 könnte das Problem lösen.</translation>
     <message utf8="true">
         <location filename="mainwindow.cpp" line="2472"/>
         <source> échantillon et </source>
-        <translation> speichern und </translation>
+        <translation> Samples und </translation>
     </message>
     <message utf8="true">
         <location filename="mainwindow.cpp" line="2474"/>
@@ -2881,7 +2881,7 @@ Das Aufteilen der Datei in mehrere sf2 könnte das Problem lösen.</translation>
     <message utf8="true">
         <location filename="mainwindow.cpp" line="2476"/>
         <source> instrument ont été supprimés.</source>
-        <translation> Instrument.wurde gelöscht.</translation>
+        <translation> Instrumente wurden gelöscht.</translation>
     </message>
     <message utf8="true">
         <location filename="mainwindow.cpp" line="2478"/>
@@ -3210,7 +3210,7 @@ Das Aufteilen der Datei in mehrere sf2 könnte das Problem lösen.</translation>
         <location filename="pages/page.cpp" line="528"/>
         <source>Vol env decay (s)</source>
         <translatorcomment>Vol env decay (s)</translatorcomment>
-        <translation></translation>
+        <translation>Vol env decay (s)</translation>
     </message>
     <message utf8="true">
         <location filename="pages/page.cpp" line="529"/>
@@ -3340,7 +3340,7 @@ Anzahl</translation>
         <source>Nombre de
 paramètres</source>
         <oldsource>Nombre de paramètres</oldsource>
-        <translation>Prameter
+        <translation>Parameter
 Anzahl</translation>
     </message>
     <message>
@@ -3715,7 +3715,7 @@ sample</translation>
     <message utf8="true">
         <location filename="pages/page_inst.ui" line="150"/>
         <source>Étendues</source>
-        <translation>Bereiche</translation>
+        <translation>TastenBereiche</translation>
     </message>
     <message>
         <location filename="pages/page_inst.ui" line="176"/>
@@ -3736,7 +3736,7 @@ sample</translation>
         <location filename="pages/page_inst.ui" line="296"/>
         <source>Atténuation (dB)</source>
         <translatorcomment>Dämpfung (dB)</translatorcomment>
-        <translation></translation>
+        <translation>Dämpfung (dB)</translation>
     </message>
     <message>
         <location filename="pages/page_inst.ui" line="301"/>
@@ -3817,7 +3817,7 @@ sample</translation>
         <location filename="pages/page_inst.ui" line="382"/>
         <source>Note → Vol env decay (c)</source>
         <translatorcomment>Key → Vol env decay (c)</translatorcomment>
-        <translation></translation>
+        <translation>Key → Vol env decay (c)</translation>
     </message>
     <message>
         <location filename="pages/page_inst.ui" line="387"/>
@@ -3833,8 +3833,7 @@ sample</translation>
     <message>
         <location filename="pages/page_inst.ui" line="397"/>
         <source>Mod env hold (s)</source>
-        <translatorcomment>Mod env hold (s)</translatorcomment>
-        <translation></translation>
+        <translation>Mod env hold (s)</translation>
     </message>
     <message>
         <location filename="pages/page_inst.ui" line="402"/>
