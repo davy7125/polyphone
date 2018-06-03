@@ -26,6 +26,7 @@
 #include <QDir>
 #include <QColorDialog>
 #include <QDesktopServices>
+#include <QAction>
 #include "config.h"
 #include "ui_config.h"
 #include "mainwindow.h"
