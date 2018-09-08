@@ -6,7 +6,7 @@
 ######### 1. Prerequisite ##########################################################################
 
 The following libraries are required (the name may vary depending on your system):
- - qt          (libqt4-dev / qt4-devel)
+ - qt          (libqt5-dev / qt5-devel) (also libqt5svg5-dev)
  - alsa        (libasound2-dev / alsa-lib-devel)
  - jack        (libjack-jack2-dev / jack-audio-connection-kit-devel)
  - portaudio   (portaudio19-dev / portaudio-devel)
@@ -21,7 +21,7 @@ Use your package manager to install them: synaptic, yum,...
 
 ######### 2. Build #################################################################################
 
-Run "qmake && make" (or qmake-qt4 && make) in the root directory to compile the project. An 
+Run "qmake -qt5 && make" (or qmake-qt5 && make) in the root directory to compile the project. An
 executable file "polyphone" in the directory "RELEASE" should then appear if everything went right.
 
 Note: If you are using QT Creator, the project may be opened via its .pro file present in the root 
