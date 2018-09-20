@@ -1,0 +1,129 @@
+####################################################################################################
+################################### BUILDING POLYPHONE FOR LINUX ###################################
+####################################################################################################
+
+
+######### 1. Prerequisite ##########################################################################
+
+The following libraries are required (the name may vary depending on your system):
+ - qt          (libqt4-dev / qt4-devel)
+ - alsa        (libasound2-dev / alsa-lib-devel)
+ - jack        (libjack-jack2-dev / jack-audio-connection-kit-devel)
+ - portaudio   (portaudio19-dev / portaudio-devel)
+ - rtmidi      (librtmidi-dev)
+ - stk         (libstk0-dev)
+ - qcustomplot (libqcustomplot-dev)
+ - vorbis      (libvorbis-dev)
+ - ogg         (libogg-dev)
+
+Use your package manager to install them: synaptic, yum,...
+
+
+######### 2. Build #################################################################################
+
+Run "qmake && make" (or qmake-qt4 && make) in the root directory to compile the project. An 
+executable file "polyphone" in the directory "RELEASE" should then appear if everything went right.
+
+Note: If you are using QT Creator, the project may be opened via its .pro file present in the root 
+directory. Take care shadow build is not checked (project properties).
+
+
+
+####################################################################################################
+################################## BUILDING POLYPHONE FOR MAC OS X #################################
+####################################################################################################
+
+
+######### 1. Prerequisite ##########################################################################
+
+The following applications are required:
+ - Xcode (available in app store)
+ - qt    (http://qt-project.org/downloads)
+
+
+######### 2. Build #################################################################################
+
+Open polyphone.pro with QT Creator. When configuring the project, take care shadow build is not
+checked.
+Build the project, a bundle should appear in the directory "RELEASE".
+
+
+######### 3. Complete the bundle ###################################################################
+
+Run the following command to include libraries and frameworks inside the bundle (adjust the path
+first!):
+/Path/To/Qt/5.2.0/clang_64/bin/macdeployqt /Path/To/trunk/RELEASE/Polyphone.app
+
+Copy / paste the framework Jackmp from trunk/lib/mac to:
+trunk/RELEASE/Polyphone.app/Contents/Frameworks
+
+Finally, run the following command in a single line (adjust the last path first!):
+install_name_tool -change /System/Library/Frameworks/Jackmp.framework/Versions/A/Jackmp 
+@executable_path/../Frameworks/Jackmp.framework/Versions/A/Jackmp 
+/Path/To/trunk/RELEASE/Polyphone.app/Contents/MacOS/Polyphone 
+
+If you want to provide a .dmg file, drag the file Polyphone.app onto the icon of the application
+"Disk Utility".
+
+
+
+####################################################################################################
+###################################### TRANSLATING POLYPHONE #######################################
+####################################################################################################
+
+
+For those willing to see Polyphone in their own language.
+
+
+######### 1. Prerequisite ##########################################################################
+
+All you need to translate Polyphone is Qt Linguist.
+This software can be found via synaptic (for debian or ubuntu) or at this page for Windows users:
+https://github.com/thurask/Qt-Linguist/releases/download/20150629/linguist.exe
+
+
+######### 2. Opening the translation files #########################################################
+
+With Qt Linguist, open the .ts file you want to edit. This file is located in the root folder of 
+the sources. For example, open polyphone_es.ts for a spanish translation.
+If the translation file is not present yet, ask the developer to create one --> "info@polyphone.fr"
+
+Polyphone's native language is French. If you want to translate from another language (from English 
+for instance), once you have opened your .ts file go to "file" -> "Open Read-Only" and select 
+"polyphone_en.ts". For each element to translate, French AND English will be provided.
+
+
+######### 3. Translating ###########################################################################
+
+Each item in each context needs to be translated. All you have to do is to review each element one 
+by one and fill your translation. The "Sources and Forms" area show you the element to translate in 
+its context.
+
+To validate your translation and go to the next item use "Ctrl + enter". If you are unsure use 
+"Ctrl + J" instead, the next item will appear and the previous one will not be validated.
+
+Don't forget to save your work! ("Ctrl + S")
+
+A translation needs attention and may be therefore cumbersome. Please take care of:
+ - the punctuation
+ - the first and final spaces
+ - the character case (lowercase / uppercase)
+ - singular and plural forms
+
+Just an advice: take your time!
+
+
+######### 4. Submitting your work ##################################################################
+
+Once you are done (or bothered!), send the .ts file you were editing to "info@polyphone.fr".
+A new version including your translation will be returned to you so that you will be able to test
+it.
+
+You may also want to build yourself Polyphone if you cannot wait:
+ - in Qt Linguist, go to "file" -> "Release As..." and select the corresponding .qm file in 
+   "/ressources/traductions" within the sources ("polyphone_es.qm" for instance),
+ - close Qt Linguist,
+ - build Polyphone (take a look at the first part of this file).
+
+Note: the operation "Release As..." may translate only text comprising no accent. If this bug
+      happens you can use the command "lrelease polyphone_en.ts" (or another file).

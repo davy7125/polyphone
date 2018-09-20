@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>673</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>0</width>
+    <height>600</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>Polyphone Soundfont Editor</string>
+  </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>:/icons/icon</normaloff>:/icons/icon</iconset>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QGridLayout" name="gridLayout">
+    <property name="leftMargin">
+     <number>0</number>
+    </property>
+    <property name="topMargin">
+     <number>3</number>
+    </property>
+    <property name="rightMargin">
+     <number>0</number>
+    </property>
+    <property name="bottomMargin">
+     <number>0</number>
+    </property>
+    <item row="0" column="0">
+     <widget class="ColoredTabWidget" name="tabWidget">
+      <property name="currentIndex">
+       <number>0</number>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>32</width>
+        <height>32</height>
+       </size>
+      </property>
+      <property name="tabsClosable">
+       <bool>true</bool>
+      </property>
+      <property name="movable">
+       <bool>true</bool>
+      </property>
+      <widget class="QWidget" name="tab">
+       <property name="autoFillBackground">
+        <bool>true</bool>
+       </property>
+       <attribute name="title">
+        <string/>
+       </attribute>
+       <layout class="QGridLayout" name="gridLayout_2" columnstretch="1,1,1,1,1,1,1,3,0" columnminimumwidth="0,0,0,0,0,0,0,250,0">
+        <item row="3" column="4" colspan="2">
+         <widget class="QPushButton" name="pushButtonSettings">
+          <property name="styleSheet">
+           <string notr="true">padding: 10px;</string>
+          </property>
+          <property name="text">
+           <string>  Préfèrences</string>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>48</width>
+            <height>48</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="0" colspan="2">
+         <widget class="QPushButton" name="pushButtonDocumentation">
+          <property name="styleSheet">
+           <string notr="true">padding: 10px;</string>
+          </property>
+          <property name="text">
+           <string>  Documentation</string>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>48</width>
+            <height>48</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="0" colspan="6">
+         <widget class="WidgetShowHistory" name="widgetShowHistory" native="true"/>
+        </item>
+        <item row="0" column="0" colspan="3">
+         <widget class="QPushButton" name="pushButtonNew">
+          <property name="styleSheet">
+           <string notr="true">padding: 10px;</string>
+          </property>
+          <property name="text">
+           <string>  Nouvelle
+  soundfont</string>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>48</width>
+            <height>48</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="8">
+         <widget class="QPushButton" name="pushButtonSearch">
+          <property name="styleSheet">
+           <string notr="true">padding: 10px;</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>48</width>
+            <height>48</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="2" colspan="2">
+         <widget class="QPushButton" name="pushButtonForum">
+          <property name="styleSheet">
+           <string notr="true">padding: 10px;</string>
+          </property>
+          <property name="text">
+           <string>  Forum</string>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>48</width>
+            <height>48</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="7" colspan="2">
+         <widget class="QLabel" name="label">
+          <property name="font">
+           <font>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="text">
+           <string>Soundfonts du jour</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="7" colspan="2">
+         <widget class="QPushButton" name="pushButtonSoundfonts">
+          <property name="styleSheet">
+           <string notr="true">padding: 10px;</string>
+          </property>
+          <property name="text">
+           <string>  Soundfonts
+  en ligne</string>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>48</width>
+            <height>48</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="7">
+         <widget class="QLineEdit" name="lineSearch">
+          <property name="styleSheet">
+           <string notr="true">height:64px</string>
+          </property>
+          <property name="placeholderText">
+           <string>Rechercher une soundfont...</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="3" colspan="3">
+         <widget class="QPushButton" name="pushButtonOpen">
+          <property name="styleSheet">
+           <string notr="true">padding: 10px;</string>
+          </property>
+          <property name="text">
+           <string>  Ouvrir
+  soundfont</string>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>48</width>
+            <height>48</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0" colspan="6">
+         <widget class="QLabel" name="label_2">
+          <property name="font">
+           <font>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="text">
+           <string>Historique</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="7" colspan="2">
+         <widget class="ShowSoundfonts" name="widgetShowSoundfonts" native="true">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="6" rowspan="4">
+         <widget class="Line" name="line">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>ShowSoundfonts</class>
+   <extends>QWidget</extends>
+   <header>showsoundfonts.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>WidgetShowHistory</class>
+   <extends>QWidget</extends>
+   <header>widgetshowhistory.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>ColoredTabWidget</class>
+   <extends>QTabWidget</extends>
+   <header>coloredtabwidget.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>
