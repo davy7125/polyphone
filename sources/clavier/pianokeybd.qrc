@@ -1,0 +1,16 @@
+<RCC>
+    <qresource prefix="/vpiano">
+        <file>pianokeybd.png</file>
+        <file>blkey.svg</file>
+        <file>star_black.svg</file>
+        <file>star_blue.svg</file>
+        <file>star_red.svg</file>
+        <file>star_white.svg</file>
+        <file>star_yellow.svg</file>
+        <file>arrow_black.svg</file>
+        <file>arrow_blue.svg</file>
+        <file>arrow_red.svg</file>
+        <file>arrow_white.svg</file>
+        <file>arrow_yellow.svg</file>
+    </qresource>
+</RCC>
