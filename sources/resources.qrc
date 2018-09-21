@@ -104,5 +104,6 @@
         <file alias="trim_loop.svg">editor/tools/trim_end/trim_loop.svg</file>
         <file alias="loop.svg">editor/tools/auto_loop/loop.svg</file>
         <file alias="command_line.svg">editor/tools/external_command/command_line.svg</file>
+        <file alias="remove_blank.svg">editor/tools/trim_start/remove_blank.svg</file>
     </qresource>
 </RCC>
