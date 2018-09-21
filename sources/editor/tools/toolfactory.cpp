@@ -7,6 +7,8 @@
 #include "trim_start/tooltrimstart.h"
 #include "frequency_filter/toolfrequencyfilter.h"
 #include "change_volume/toolchangevolume.h"
+#include "balance_adjustment/toolbalanceadjustment.h"
+#include "transpose_smpl/tooltransposesmpl.h"
 
 ToolFactory::ToolFactory(QWidget * parent)
 {
@@ -19,7 +21,9 @@ ToolFactory::ToolFactory(QWidget * parent)
            << new ToolExternalCommand()
            << new ToolTrimStart()
            << new ToolFrequencyFilter()
-           << new ToolChangeVolume();
+           << new ToolChangeVolume()
+           << new ToolBalanceAdjustment()
+           << new ToolTransposeSmpl();
 }
 
 ToolFactory::~ToolFactory()

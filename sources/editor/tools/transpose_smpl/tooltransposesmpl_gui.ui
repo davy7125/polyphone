@@ -1,30 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>DialogTransposition</class>
- <widget class="QDialog" name="DialogTransposition">
-  <property name="windowModality">
-   <enum>Qt::ApplicationModal</enum>
-  </property>
+ <class>ToolTransposeSmpl_gui</class>
+ <widget class="QWidget" name="ToolTransposeSmpl_gui">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>242</width>
-    <height>114</height>
+    <width>233</width>
+    <height>81</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Transposition</string>
-  </property>
-  <property name="windowIcon">
-   <iconset>
-    <normaloff>:/icons/icon</normaloff>:/icons/icon</iconset>
+   <string>Form</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
-   <item row="1" column="0" colspan="2">
-    <widget class="QCheckBox" name="checkKeyRange">
+   <item row="0" column="0">
+    <widget class="QLabel" name="label">
      <property name="text">
-      <string>Adapter l'étendue de notes</string>
+      <string>Écart en demi-tons</string>
      </property>
     </widget>
    </item>
@@ -38,14 +31,7 @@
      </property>
     </widget>
    </item>
-   <item row="0" column="0">
-    <widget class="QLabel" name="label">
-     <property name="text">
-      <string>Écart en demi-tons</string>
-     </property>
-    </widget>
-   </item>
-   <item row="2" column="0" colspan="2">
+   <item row="1" column="0" colspan="2">
     <widget class="QDialogButtonBox" name="buttonBox">
      <property name="standardButtons">
       <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>

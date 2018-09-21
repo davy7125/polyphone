@@ -125,8 +125,6 @@ private slots:
     void sauvegarder();         // Clic sur l'action "sauvegarder"
     void sauvegarderSous();     // Clic sur l'action "sauvegarder sous"
 
-    void reglerBalance();       // outil sample, réglage de la balance (samples liés)
-    void transposer();          // outil sample, transposition
     void desaccorder();         // outil instrument, désaccordage ondulant
     void spatialisation();      // outil instrument, spatialisation du son
     void duplication();         // outil instrument et preset, duplication des divisions

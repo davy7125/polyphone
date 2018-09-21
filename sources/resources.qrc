@@ -107,5 +107,7 @@
         <file alias="remove_blank.svg">editor/tools/trim_start/remove_blank.svg</file>
         <file alias="filter_frequencies.svg">editor/tools/frequency_filter/filter_frequencies.svg</file>
         <file alias="change_volume.svg">editor/tools/change_volume/change_volume.svg</file>
+        <file alias="balance.svg">editor/tools/balance_adjustment/balance.svg</file>
+        <file alias="transpose.svg">editor/tools/transpose_smpl/transpose.svg</file>
     </qresource>
 </RCC>
