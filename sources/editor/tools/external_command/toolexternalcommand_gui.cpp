@@ -29,20 +29,37 @@ void ToolExternalCommand_gui::updateInterface(AbstractToolParameters * parameter
     Q_UNUSED(ids)
     ToolExternalCommand_parameters * params = (ToolExternalCommand_parameters *)parameters;
 
+    // Command history
+    ui->comboPrevious->clear();
     ui->comboPrevious->addItems(params->getCommandHistory());
     if (ui->comboPrevious->count() == 0)
         ui->comboPrevious->addItem("-");
+    if (!params->getCommandHistory().empty())
+        ui->lineCommand->setText(params->getCommandHistory()[0]);
 
+    // Stereo and replace info
     ui->checkStereo->setChecked(params->getStereo());
-    ui->checkRemplaceInfo->setChecked(params->getReplaceInfo());
+    ui->checkReplaceInfo->setChecked(params->getReplaceInfo());
 }
 
 void ToolExternalCommand_gui::saveParameters(AbstractToolParameters * parameters)
 {
     ToolExternalCommand_parameters * params = (ToolExternalCommand_parameters *)parameters;
 
+    // Update the command history
+    QList<QString> history;
+    history << ui->lineCommand->text();
+    for (int i = 0; i < ui->comboPrevious->count(); i++)
+    {
+        QString strTmp = ui->comboPrevious->itemText(i);
+        if (strTmp != "-" && !history.contains(strTmp))
+            history << strTmp;
+    }
+    params->setCommandHistory(history);
+
+    // Update stereo and replace info
     params->setStereo(ui->checkStereo->isChecked());
-    params->setReplaceInfo(ui->checkRemplaceInfo->isChecked());
+    params->setReplaceInfo(ui->checkReplaceInfo->isChecked());
 }
 
 void ToolExternalCommand_gui::on_comboPrevious_currentIndexChanged(const QString &arg1)
@@ -82,24 +99,6 @@ void ToolExternalCommand_gui::on_buttonBox_accepted()
         QMessageBox::warning(this, trUtf8("Attention"), trUtf8("La commande doit contenir l'argument {wav}."));
         return;
     }
-
-    // Store the command used
-    QList<QString> previousCommands;
-    previousCommands << command;
-    for (int i = 0; i < ui->comboPrevious->count(); i++)
-    {
-        QString strTmp = ui->comboPrevious->itemText(i);
-        if (strTmp != "-" && !previousCommands.contains(strTmp))
-            previousCommands << strTmp;
-    }
-    for (int i = 0; i < qMin(HISTORY_SIZE, previousCommands.count()); i++)
-        ContextManager::configuration()->setToolValue(
-                    ConfManager::TOOL_TYPE_SAMPLE, "command",
-                    "previous_" + QString("%1").arg(i+1, 2, 10, QChar('0')), previousCommands[i]);
-    ContextManager::configuration()->setToolValue(ConfManager::TOOL_TYPE_SAMPLE, "command",
-                                             "stereo", ui->checkStereo->isChecked());
-    ContextManager::configuration()->setToolValue(ConfManager::TOOL_TYPE_SAMPLE, "command",
-                                             "replace_info", ui->checkRemplaceInfo->isChecked());
 
     // Notify about the validation
     emit(this->validated());

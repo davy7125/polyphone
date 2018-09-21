@@ -53,12 +53,22 @@ bool AbstractToolIterating::isCompatible(IdList ids)
 
 void AbstractToolIterating::run(SoundfontManager * sm, QWidget * parent, IdList ids, AbstractToolParameters *parameters)
 {
+    _sm = sm;
+    _parameters = parameters;
+
     // Number of steps
     _steps = 0;
     QList<EltID> listID = ids.getSelectedIds(_elementType);
+    _idsToProcess.clear();
     foreach (EltID id, listID)
-        if (sm->isValid(id))
+    {
+        if (_sm->isValid(id))
+        {
+            _idsToProcess.append(id);
             _steps++;
+        }
+    }
+
     if (_steps == 0)
     {
         emit(finished(false));
@@ -74,10 +84,13 @@ void AbstractToolIterating::run(SoundfontManager * sm, QWidget * parent, IdList 
     connect(_waitingDialog, SIGNAL(canceled()), this, SLOT(onCancel()));
 
     // Process the ids
+    this->beforeProcess();
     _canceled = false;
-    foreach (EltID id, listID)
-        if (sm->isValid(id))
-            QThreadPool::globalInstance()->start(new RunnableTool(sm, this, id, parameters));
+    if (_async)
+        foreach (EltID id, _idsToProcess)
+            QThreadPool::globalInstance()->start(new RunnableTool(_sm, this, id, _parameters));
+    else
+        QThreadPool::globalInstance()->start(new RunnableTool(_sm, this, _idsToProcess.takeFirst(), _parameters));
 }
 
 void AbstractToolIterating::onElementProcessed()
@@ -97,7 +110,8 @@ void AbstractToolIterating::onElementProcessed()
         }
         else
             emit(finished(true));
-    }
+    } else if (!_idsToProcess.empty())
+        QThreadPool::globalInstance()->start(new RunnableTool(_sm, this, _idsToProcess.takeFirst(), _parameters));
 }
 
 void AbstractToolIterating::onCancel()

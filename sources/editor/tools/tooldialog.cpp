@@ -1,7 +1,9 @@
 #include "tooldialog.h"
 #include "abstracttoolgui.h"
+#include "abstracttool.h"
+#include <QGridLayout>
 
-ToolDialog::ToolDialog(AbstractToolGui *toolGui, QWidget *parent) : QDialog(parent)
+ToolDialog::ToolDialog(AbstractToolGui *toolGui, AbstractTool * tool, QWidget *parent) : QDialog(parent)
 {
     this->setWindowFlags((windowFlags() & ~Qt::WindowContextHelpButtonHint));
     this->setWindowModality(Qt::WindowModal);
@@ -10,7 +12,13 @@ ToolDialog::ToolDialog(AbstractToolGui *toolGui, QWidget *parent) : QDialog(pare
     connect(toolGui, SIGNAL(validated()), this, SIGNAL(validated()));
     connect(toolGui, SIGNAL(canceled()), this, SLOT(canceled()));
 
-    toolGui->setParent(this);
+    // Fill the dialog
+    QLayout * layout = new QGridLayout(this);
+    layout->addWidget(toolGui);
+    this->setLayout(layout);
+
+    // Title
+    this->setWindowTitle(tool->getLabel());
 }
 
 void ToolDialog::canceled()

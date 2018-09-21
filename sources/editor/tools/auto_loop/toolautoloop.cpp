@@ -1,6 +1,11 @@
 #include "auto_loop/toolautoloop.h"
 #include "soundfontmanager.h"
 
+void ToolAutoLoop::beforeProcess()
+{
+    _samplesNotLooped.clear();
+}
+
 void ToolAutoLoop::process(SoundfontManager * sm, EltID id, AbstractToolParameters *parameters)
 {
     Q_UNUSED(parameters)
@@ -26,7 +31,11 @@ void ToolAutoLoop::process(SoundfontManager * sm, EltID id, AbstractToolParamete
         sm->set(id, champ_dwLength, val);
     }
     else
+    {
+        _mutex.lock();
         _samplesNotLooped << sm->getQstr(id, champ_name);
+        _mutex.unlock();
+    }
 }
 
 QString ToolAutoLoop::getWarning()

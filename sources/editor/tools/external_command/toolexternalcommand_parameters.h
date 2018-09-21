@@ -13,9 +13,6 @@ public:
     /// Save the configuration in the ini file
     void saveConfiguration() override;
 
-    QString getCommand() { return _command; }
-    void setCommand(QString command) { _command = command; }
-
     bool getStereo() { return _stereo; }
     void setStereo(bool stereo) { _stereo = stereo; }
 
@@ -26,7 +23,6 @@ public:
     void setCommandHistory(QStringList commandHistory) { _commandHistory = commandHistory; }
 
 private:
-    QString _command;
     bool _stereo;
     bool _replaceInfo;
     QStringList _commandHistory;
