@@ -1230,12 +1230,12 @@ void MainWindowOld::importerSmpl(QString path, EltID id, int * replace)
             this->sf2->set(id, champ_chPitchCorrection, val);
 
             // Automatically remove leading blank?
-            if (ContextManager::configuration()->getValue(ConfManager::SECTION_NONE, "wav_remove_blank", false).toBool())
-                this->page_smpl->enleveBlanc(id);
+//            if (ContextManager::configuration()->getValue(ConfManager::SECTION_NONE, "wav_remove_blank", false).toBool())
+//                this->page_smpl->enleveBlanc(id);
 
-            // Automatically trim to loop?
-            if (ContextManager::configuration()->getValue(ConfManager::SECTION_NONE, "wav_auto_loop", false).toBool())
-                this->page_smpl->enleveFin(id);
+//            // Automatically trim to loop?
+//            if (ContextManager::configuration()->getValue(ConfManager::SECTION_NONE, "wav_auto_loop", false).toBool())
+//                this->page_smpl->enleveFin(id);
 
             ui->tree->select(id, true);
         }

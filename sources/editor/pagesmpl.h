@@ -41,10 +41,6 @@ public:
     ~PageSmpl();
 
     void changeVolume();
-    void enleveBlanc();
-    void enleveBlanc(EltID id);
-    void enleveFin();
-    void enleveFin(EltID id);
     void filter();
     void reglerBalance();
     void transposer();

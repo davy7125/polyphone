@@ -4,6 +4,7 @@
 #include "trim_end/tooltrimend.h"
 #include "auto_loop/toolautoloop.h"
 #include "external_command/toolexternalcommand.h"
+#include "trim_start/tooltrimstart.h"
 
 ToolFactory::ToolFactory(QWidget * parent)
 {
@@ -13,7 +14,8 @@ ToolFactory::ToolFactory(QWidget * parent)
     // Register all possible tools
     _tools << new ToolTrimEnd()
            << new ToolAutoLoop()
-           << new ToolExternalCommand();
+           << new ToolExternalCommand()
+           << new ToolTrimStart();
 }
 
 ToolFactory::~ToolFactory()
