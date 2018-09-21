@@ -40,7 +40,6 @@ public:
     explicit PageSmpl(QWidget * parent = 0);
     ~PageSmpl();
 
-    void changeVolume();
     void reglerBalance();
     void transposer();
     bool isPlaying();
@@ -59,7 +58,6 @@ private slots:
     void lecteurFinished();
     void applyEQ();
     void initEQ();
-    void changeVolume(int mode, double value);
     void setStartLoop();
     void setStartLoop(int val);
     void setEndLoop();

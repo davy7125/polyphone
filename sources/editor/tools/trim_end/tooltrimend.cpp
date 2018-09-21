@@ -1,4 +1,4 @@
-#include "trim_end/tooltrimend.h"
+#include "tooltrimend.h"
 #include "soundfontmanager.h"
 
 void ToolTrimEnd::process(SoundfontManager * sm, EltID id, AbstractToolParameters *parameters)
