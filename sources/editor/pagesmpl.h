@@ -41,7 +41,6 @@ public:
     ~PageSmpl();
 
     void changeVolume();
-    void filter();
     void reglerBalance();
     void transposer();
     bool isPlaying();
@@ -60,7 +59,6 @@ private slots:
     void lecteurFinished();
     void applyEQ();
     void initEQ();
-    void filter(QVector<double> dValues);
     void changeVolume(int mode, double value);
     void setStartLoop();
     void setStartLoop(int val);

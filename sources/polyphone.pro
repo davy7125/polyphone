@@ -237,7 +237,6 @@ SOURCES	+= main.cpp \
     editor/tools/dialog_duplication.cpp \
     editor/tools/dialog_transposition.cpp \
     editor/tools/dialog_attenuation.cpp \
-    editor/tools/dialog_filter_frequencies.cpp \
     editor/tools/dialog_change_volume.cpp \
     editor/tools/duplicationtool.cpp \
     editor/tools/dialog_exportlist.cpp \
@@ -336,7 +335,11 @@ SOURCES	+= main.cpp \
     editor/tools/tooldialog.cpp \
     editor/tools/external_command/toolexternalcommand_parameters.cpp \
     editor/tools/external_command/toolexternalcommand_gui.cpp \
-    editor/tools/trim_start/tooltrimstart.cpp
+    editor/tools/trim_start/tooltrimstart.cpp \
+    editor/tools/frequency_filter/toolfrequencyfilter.cpp \
+    editor/tools/frequency_filter/toolfrequencyfilter_parameters.cpp \
+    editor/tools/frequency_filter/toolfrequencyfilter_gui.cpp \
+    editor/tools/frequency_filter/graphfilterfrequencies.cpp
 
 HEADERS  += \
     core/sf2_types.h \
@@ -408,7 +411,6 @@ HEADERS  += \
     editor/tools/dialog_duplication.h \
     editor/tools/dialog_transposition.h \
     editor/tools/dialog_attenuation.h \
-    editor/tools/dialog_filter_frequencies.h \
     editor/tools/dialog_change_volume.h \
     editor/tools/duplicationtool.h \
     editor/tools/dialog_exportlist.h \
@@ -512,7 +514,11 @@ HEADERS  += \
     editor/tools/abstracttoolgui.h \
     editor/tools/external_command/toolexternalcommand_parameters.h \
     editor/tools/external_command/toolexternalcommand_gui.h \
-    editor/tools/trim_start/tooltrimstart.h
+    editor/tools/trim_start/tooltrimstart.h \
+    editor/tools/frequency_filter/toolfrequencyfilter.h \
+    editor/tools/frequency_filter/toolfrequencyfilter_parameters.h \
+    editor/tools/frequency_filter/toolfrequencyfilter_gui.h \
+    editor/tools/frequency_filter/graphfilterfrequencies.h
 
 FORMS    += \
     context/interface/config.ui \
@@ -535,7 +541,6 @@ FORMS    += \
     editor/tools/dialog_duplication.ui \
     editor/tools/dialog_transposition.ui \
     editor/tools/dialog_attenuation.ui \
-    editor/tools/dialog_filter_frequencies.ui \
     editor/tools/dialog_change_volume.ui \
     editor/tools/dialog_exportlist.ui \
     mainwindow/widgetshowhistory.ui \
@@ -554,7 +559,8 @@ FORMS    += \
     editor/pagesmpl.ui \
     editor/pagesf2.ui \
     editor/tools/waitingtooldialog.ui \
-    editor/tools/external_command/toolexternalcommand_gui.ui
+    editor/tools/external_command/toolexternalcommand_gui.ui \
+    editor/tools/frequency_filter/toolfrequencyfilter_gui.ui
 
 RESOURCES += resources.qrc \
     clavier/pianokeybd.qrc
