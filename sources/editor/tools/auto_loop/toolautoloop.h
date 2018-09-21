@@ -2,6 +2,7 @@
 #define TOOLAUTOLOOP_H
 
 #include "abstracttooliterating.h"
+#include <QMutex>
 #include <QObject>
 
 class ToolAutoLoop: public AbstractToolIterating
@@ -31,15 +32,19 @@ public:
         return "smpl:autoLoop";
     }
 
+    /// Method executed before the iterating process
+    void beforeProcess() override;
+
     /// Process an element
     void process(SoundfontManager * sm, EltID id, AbstractToolParameters * parameters) override;
 
 protected:
-    /// Get the warning to display once the tool is run
+    /// Get the warning to display after the tool is run
     QString getWarning() override;
 
 private:
     QStringList _samplesNotLooped;
+    QMutex _mutex;
 };
 
 #endif // TOOLAUTOLOOP_H

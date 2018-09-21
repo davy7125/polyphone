@@ -14,18 +14,12 @@ AbstractTool::AbstractTool(AbstractToolParameters *parameters, AbstractToolGui *
     _toolDialog(NULL)
 {
     connect(this, SIGNAL(finished(bool)), this, SLOT(onFinished(bool)), Qt::QueuedConnection);
-
-    if (_toolGui != NULL)
-    {
-        _toolDialog = new ToolDialog(_toolGui, s_parent);
-        connect(_toolDialog, SIGNAL(validated()), this, SLOT(onParametersValidated()));
-    }
 }
 
 AbstractTool::~AbstractTool()
 {
-    delete _toolDialog;
     delete _toolGui;
+    delete _toolDialog;
     delete _toolParameters;
 }
 
@@ -43,6 +37,13 @@ bool AbstractTool::setIds(IdList ids)
 
 void AbstractTool::run()
 {
+    // Possibly create a dialog if not already done
+    if (_toolGui != NULL && _toolDialog == NULL)
+    {
+        _toolDialog = new ToolDialog(_toolGui, this, s_parent);
+        connect(_toolDialog, SIGNAL(validated()), this, SLOT(onParametersValidated()));
+    }
+
     // Possibly display a dialog
     if (_toolDialog == NULL)
         onParametersValidated();
@@ -60,6 +61,7 @@ void AbstractTool::onParametersValidated()
     if (_toolGui != NULL) {
         _toolGui->saveParameters(_toolParameters);
         _toolParameters->saveConfiguration();
+        _toolDialog->close();
     }
 
     // Run the tool, the signal "finished" will be sent

@@ -3,7 +3,6 @@
 
 #include "abstracttooliterating.h"
 #include <QObject>
-#include <QProcess>
 #include "sound.h"
 class QProcess;
 
@@ -13,7 +12,6 @@ class ToolExternalCommand: public AbstractToolIterating
 
 public:
     ToolExternalCommand();
-    ~ToolExternalCommand();
 
     /// Icon, label and category displayed to the user to describe the tool
     QString getIconName() const override
@@ -37,39 +35,24 @@ public:
         return "smpl:command";
     }
 
+    /// Method executed before the iterating process
+    void beforeProcess() override;
+
     /// Process an element
     void process(SoundfontManager * sm, EltID id, AbstractToolParameters * parameters) override;
 
-private slots:
-    void onProcessStateChanged(QProcess::ProcessState state);
+protected:
+    /// Get the warning to display after the tool is run
+    QString getWarning() override;
 
 private:
     void storeStereoIds(QList<EltID> ids);
-    void import(EltID id, Sound &sound);
+    void import(EltID id, Sound &sound, SoundfontManager * sm, bool replaceInfo);
 
     /// All samples than have been processed
     QList<EltID> _processedIds;
 
-    /// Program to execute
-    QString _program;
-
-    /// Arguments associated to the program
-    QStringList _arguments;
-
-    /// True if information in samples are replaced
-    bool _replaceInfo;
-
-    /// Index of the argument that will contain the sample path
-    int _indexWav;
-
-    /// Path of the temporary file
-    QString _pathTempFile;
-
-    /// Current samples that are being edited (only one if mono)
-    EltID _id1, _id2;
-
-    QProcess * _process;
-    SoundfontManager * _sm;
+    QString _warning;
 };
 
 #endif // TOOLEXTERNALCOMMAND_H

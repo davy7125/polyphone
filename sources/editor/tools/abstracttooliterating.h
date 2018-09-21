@@ -20,6 +20,9 @@ public:
     /// Run the tool on a list of id
     void run(SoundfontManager * sm, QWidget * parent, IdList ids, AbstractToolParameters * parameters) override;
 
+    /// Method executed before the iterating process
+    virtual void beforeProcess() {}
+
     /// Process an element
     virtual void process(SoundfontManager * sm, EltID id, AbstractToolParameters * parameters) = 0;
 
@@ -37,6 +40,9 @@ private:
     int _currentStep;
     bool _canceled;
     bool _async;
+    QList<EltID> _idsToProcess;
+    SoundfontManager * _sm;
+    AbstractToolParameters * _parameters;
 };
 
 #endif // ABSTRACTTOOLITERATING_H
