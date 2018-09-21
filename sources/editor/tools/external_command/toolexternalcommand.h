@@ -21,7 +21,7 @@ public:
 
     QString getLabel() const override
     {
-        return trUtf8("Commande externe");
+        return trUtf8("Commande externe...");
     }
 
     QString getCategory() const override

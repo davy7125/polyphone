@@ -5,6 +5,7 @@
 #include "auto_loop/toolautoloop.h"
 #include "external_command/toolexternalcommand.h"
 #include "trim_start/tooltrimstart.h"
+#include "frequency_filter/toolfrequencyfilter.h"
 
 ToolFactory::ToolFactory(QWidget * parent)
 {
@@ -12,10 +13,11 @@ ToolFactory::ToolFactory(QWidget * parent)
     AbstractTool::initialize(parent);
 
     // Register all possible tools
-    _tools << new ToolTrimEnd()
+    _tools << new ToolTrimEnd() // Samples
            << new ToolAutoLoop()
            << new ToolExternalCommand()
-           << new ToolTrimStart();
+           << new ToolTrimStart()
+           << new ToolFrequencyFilter();
 }
 
 ToolFactory::~ToolFactory()

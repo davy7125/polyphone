@@ -126,7 +126,6 @@ private slots:
     void sauvegarderSous();     // Clic sur l'action "sauvegarder sous"
 
     void changeVolume();        // outil sample, change volume
-    void filtre();              // outil sample, filtre "mur de brique"
     void reglerBalance();       // outil sample, réglage de la balance (samples liés)
     void transposer();          // outil sample, transposition
     void desaccorder();         // outil instrument, désaccordage ondulant

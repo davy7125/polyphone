@@ -1,102 +1,4 @@
-/***************************************************************************
-**                                                                        **
-**  Polyphone, a soundfont editor                                         **
-**  Copyright (C) 2013-2017 Davy Triponney                                **
-**                                                                        **
-**  This program is free software: you can redistribute it and/or modify  **
-**  it under the terms of the GNU General Public License as published by  **
-**  the Free Software Foundation, either version 3 of the License, or     **
-**  (at your option) any later version.                                   **
-**                                                                        **
-**  This program is distributed in the hope that it will be useful,       **
-**  but WITHOUT ANY WARRANTY; without even the implied warranty of        **
-**  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the         **
-**  GNU General Public License for more details.                          **
-**                                                                        **
-**  You should have received a copy of the GNU General Public License     **
-**  along with this program.  If not, see http://www.gnu.org/licenses/.   **
-**                                                                        **
-****************************************************************************
-**           Author: Davy Triponney                                       **
-**  Website/Contact: http://polyphone-soundfonts.com                      **
-**             Date: 01.01.2013                                           **
-***************************************************************************/
-
-#include "dialog_filter_frequencies.h"
-#include "ui_dialog_filter_frequencies.h"
-#include "contextmanager.h"
-#include "sound.h"
-
-DialogFilterFrequencies::DialogFilterFrequencies(QWidget *parent) :
-    QDialog(parent),
-    ui(new Ui::DialogFilterFrequencies)
-{
-    ui->setupUi(this);
-    this->setWindowFlags((windowFlags() & ~Qt::WindowContextHelpButtonHint));
-
-    // Plot values
-    ui->graphFilterFrequencies->setValues(getStoredCurve());
-}
-
-DialogFilterFrequencies::~DialogFilterFrequencies()
-{
-    delete ui;
-}
-
-void DialogFilterFrequencies::setNbFourier(int nbFourier)
-{
-    ui->graphFilterFrequencies->setNbFourier(nbFourier);
-}
-
-void DialogFilterFrequencies::addFourierTransform(QByteArray baData, quint32 sampleRate)
-{
-    // Get the Fourier transform of the sample
-    int length = baData.size() / 2;
-    QVector<float> fData;
-    fData.resize(length);
-    qint16 * data = (qint16*)baData.data();
-    for (int i = 0; i < length; i++)
-        fData[i] = (float)data[i];
-    fData = Sound::getFourierTransform(fData);
-
-    // Display it
-    ui->graphFilterFrequencies->addFourierTransform(fData, sampleRate);
-}
-
-QVector<double> DialogFilterFrequencies::getStoredCurve()
-{
-    QList<QVariant> listTmp = ContextManager::configuration()->getToolValue(
-                ConfManager::TOOL_TYPE_SAMPLE,
-                "filter_frequencies", "curve", QList<QVariant>()).toList();
-    QVector<double> vectRet;
-    vectRet.resize(listTmp.size());
-    for (int i = 0; i < listTmp.size(); i++)
-        vectRet[i] = listTmp.at(i).toDouble();
-    return vectRet;
-}
-
-void DialogFilterFrequencies::storeCurve(QVector<double> val)
-{
-    QVariantList listTmp;
-    for (int i = 0; i < val.size(); i++)
-        listTmp << val.at(i);
-    ContextManager::configuration()->setToolValue(ConfManager::TOOL_TYPE_SAMPLE, "filter_frequencies", "curve", listTmp);
-}
-
-void DialogFilterFrequencies::accept()
-{
-    // Save parameters
-    storeCurve(ui->graphFilterFrequencies->getValues());
-
-    // Récupération et mise en forme des modificateurs
-    QVector<double> dValues = ui->graphFilterFrequencies->getValues();
-    emit(accepted(dValues));
-    QDialog::accept();
-}
-
-/////////////////////////////////////////////////
-///////////////////// GRAPH /////////////////////
-/////////////////////////////////////////////////
+#include "graphfilterfrequencies.h"
 
 const int GraphFilterFrequencies::POINT_NUMBER = 201;
 
@@ -200,6 +102,13 @@ GraphFilterFrequencies::GraphFilterFrequencies(QWidget * parent) : QCustomPlot(p
 }
 
 GraphFilterFrequencies::~GraphFilterFrequencies() {}
+
+void GraphFilterFrequencies::setNbFourier(int nbFourier)
+{
+    while (this->graphCount() > 4)
+        this->removeGraph(4);
+    _nbFourier = nbFourier;
+}
 
 void GraphFilterFrequencies::addFourierTransform(QVector<float> fData, quint32 sampleRate)
 {
