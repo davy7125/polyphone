@@ -1,5 +1,5 @@
-#ifndef TOOLEXTERNALCOMMAND_PARAMETERS_H
-#define TOOLEXTERNALCOMMAND_PARAMETERS_H
+#ifndef TOOLFREQUENCYFILTER_PARAMETERS_H
+#define TOOLFREQUENCYFILTER_PARAMETERS_H
 
 #include "abstracttoolparameters.h"
 #include <QVector>
@@ -20,4 +20,4 @@ private:
     QVector<double> _curve;
 };
 
-#endif // TOOLEXTERNALCOMMAND_PARAMETERS_H
+#endif // TOOLFREQUENCYFILTER_PARAMETERS_H

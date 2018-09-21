@@ -1749,7 +1749,6 @@ void MainWindowOld::supprimer()
 }
 
 // Outils
-void MainWindowOld::changeVolume()     {this->page_smpl->changeVolume();}
 void MainWindowOld::reglerBalance()    {this->page_smpl->reglerBalance();}
 void MainWindowOld::transposer()       {this->page_smpl->transposer();}
 void MainWindowOld::desaccorder()      {this->page_inst->desaccorder();}

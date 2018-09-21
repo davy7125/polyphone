@@ -1,6 +1,6 @@
-#include "external_command/toolexternalcommand.h"
-#include "external_command/toolexternalcommand_gui.h"
-#include "external_command/toolexternalcommand_parameters.h"
+#include "toolexternalcommand.h"
+#include "toolexternalcommand_gui.h"
+#include "toolexternalcommand_parameters.h"
 #include <QProgressDialog>
 #include <QTemporaryFile>
 #include <QDir>
