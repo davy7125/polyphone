@@ -44,7 +44,7 @@ protected:
     /// Run the tool, emit the signal "finished" at the end
     virtual void run(SoundfontManager * sm, QWidget * parent, IdList ids, AbstractToolParameters * parameters) = 0;
 
-    /// Get the warning to display once the tool is run
+    /// Get the warning to display after the tool is run
     virtual QString getWarning() { return ""; }
 
 private slots:
