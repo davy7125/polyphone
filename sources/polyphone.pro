@@ -341,7 +341,11 @@ SOURCES	+= main.cpp \
     editor/tools/frequency_filter/graphfilterfrequencies.cpp \
     editor/tools/change_volume/toolchangevolume.cpp \
     editor/tools/change_volume/toolchangevolume_parameters.cpp \
-    editor/tools/change_volume/toolchangevolume_gui.cpp
+    editor/tools/change_volume/toolchangevolume_gui.cpp \
+    editor/tools/balance_adjustment/toolbalanceadjustment.cpp \
+    editor/tools/transpose_smpl/tooltransposesmpl.cpp \
+    editor/tools/transpose_smpl/tooltransposesmpl_parameters.cpp \
+    editor/tools/transpose_smpl/tooltransposesmpl_gui.cpp
 
 HEADERS  += \
     core/sf2_types.h \
@@ -522,7 +526,11 @@ HEADERS  += \
     editor/tools/frequency_filter/graphfilterfrequencies.h \
     editor/tools/change_volume/toolchangevolume.h \
     editor/tools/change_volume/toolchangevolume_parameters.h \
-    editor/tools/change_volume/toolchangevolume_gui.h
+    editor/tools/change_volume/toolchangevolume_gui.h \
+    editor/tools/balance_adjustment/toolbalanceadjustment.h \
+    editor/tools/transpose_smpl/tooltransposesmpl.h \
+    editor/tools/transpose_smpl/tooltransposesmpl_parameters.h \
+    editor/tools/transpose_smpl/tooltransposesmpl_gui.h
 
 FORMS    += \
     context/interface/config.ui \
@@ -564,7 +572,8 @@ FORMS    += \
     editor/tools/waitingtooldialog.ui \
     editor/tools/external_command/toolexternalcommand_gui.ui \
     editor/tools/frequency_filter/toolfrequencyfilter_gui.ui \
-    editor/tools/change_volume/toolchangevolume_gui.ui
+    editor/tools/change_volume/toolchangevolume_gui.ui \
+    editor/tools/transpose_smpl/tooltransposesmpl_gui.ui
 
 RESOURCES += resources.qrc \
     clavier/pianokeybd.qrc
