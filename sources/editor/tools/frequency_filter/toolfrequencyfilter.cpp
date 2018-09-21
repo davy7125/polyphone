@@ -1,6 +1,6 @@
-#include "frequency_filter/toolfrequencyfilter.h"
-#include "frequency_filter/toolfrequencyfilter_gui.h"
-#include "frequency_filter/toolfrequencyfilter_parameters.h"
+#include "toolfrequencyfilter.h"
+#include "toolfrequencyfilter_gui.h"
+#include "toolfrequencyfilter_parameters.h"
 #include "soundfontmanager.h"
 
 ToolFrequencyFilter::ToolFrequencyFilter() : AbstractToolIterating(elementSmpl, new ToolFrequencyFilter_parameters(), new ToolFrequencyFilter_gui())

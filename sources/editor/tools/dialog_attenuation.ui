@@ -9,15 +9,15 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>287</width>
-    <height>257</height>
+    <width>335</width>
+    <height>296</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Régler les atténuations</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="../resources.qrc">
+   <iconset>
     <normaloff>:/icons/icon</normaloff>:/icons/icon</iconset>
   </property>
   <layout class="QGridLayout" name="gridLayout">
@@ -261,9 +261,7 @@
    </item>
   </layout>
  </widget>
- <resources>
-  <include location="../resources.qrc"/>
- </resources>
+ <resources/>
  <connections>
   <connection>
    <sender>buttonBox</sender>

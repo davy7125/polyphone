@@ -26,7 +26,6 @@
 #include "ui_pagesmpl.h"
 #include "editor_old.h"
 #include "sound.h"
-#include "dialog_change_volume.h"
 #include "graphique.h"
 #include "graphiquefourier.h"
 #include "contextmanager.h"
@@ -910,83 +909,6 @@ EltID PageSmpl::getRepercussionID(EltID id)
         id2.indexElt = -1;
 
     return id2;
-}
-
-// Outils
-void PageSmpl::changeVolume()
-{
-    QList<EltID> ids = _currentIds.getSelectedIds(elementSmpl);
-    if (ids.isEmpty())
-        return;
-
-    // Create a dialog
-    DialogChangeVolume * dial = new DialogChangeVolume(this);
-    this->connect(dial, SIGNAL(accepted(int, double)), SLOT(changeVolume(int, double)));
-    dial->setAttribute(Qt::WA_DeleteOnClose, true);
-
-    // Display the dialog
-    dial->show();
-}
-
-void PageSmpl::changeVolume(int mode, double value)
-{
-    if (_preparingPage)
-        return;
-
-    // Soundfont editing
-
-    // Calcul du nombre d'étapes
-    int nbEtapes = 0;
-    QList<EltID> listID = _currentIds.getSelectedIds(elementSmpl);
-    foreach (EltID id, listID)
-        if (id.typeElement == elementSmpl && _sf2->isValid(id))
-            nbEtapes++;
-    if (nbEtapes == 0)
-        return;
-
-    // Ouverture d'une barre de progression
-    QString textProgress = trUtf8("Traitement ");
-    QProgressDialog progress("", trUtf8("Annuler"), 0, nbEtapes, this);
-    progress.setWindowFlags(progress.windowFlags() & ~Qt::WindowContextHelpButtonHint);
-    progress.setWindowModality(Qt::WindowModal);
-    progress.setFixedWidth(350);
-    progress.show();
-
-    foreach (EltID id, listID)
-    {
-        if (id.typeElement == elementSmpl && _sf2->isValid(id))
-        {
-            QString name = _sf2->getQstr(id, champ_name);
-            progress.setLabelText(textProgress + name);
-            QApplication::processEvents();
-
-            QByteArray baData = _sf2->getData(id, champ_sampleDataFull24);
-
-            double db = 0;
-            switch (mode)
-            {
-            case 0: // Add dB
-                // Compute the factor
-                value = qPow(10, value / 20.0);
-                baData = Sound::multiplier(baData, value, 24, db);
-                break;
-            case 1: // Multiply by a factor
-                baData = Sound::multiplier(baData, value, 24, db);
-                break;
-            case 2: // Normalize
-                baData = Sound::normaliser(baData, value / 100, 24, db);
-                break;
-            }
-
-            _sf2->set(id, champ_sampleDataFull24, baData);
-
-            if (progress.wasCanceled())
-                break;
-            progress.setValue(progress.value() + 1);
-        }
-    }
-
-    _sf2->endEditing("tool:smpl:changeVolume");
 }
 
 void PageSmpl::reglerBalance()

@@ -6,6 +6,7 @@
 #include "external_command/toolexternalcommand.h"
 #include "trim_start/tooltrimstart.h"
 #include "frequency_filter/toolfrequencyfilter.h"
+#include "change_volume/toolchangevolume.h"
 
 ToolFactory::ToolFactory(QWidget * parent)
 {
@@ -17,7 +18,8 @@ ToolFactory::ToolFactory(QWidget * parent)
            << new ToolAutoLoop()
            << new ToolExternalCommand()
            << new ToolTrimStart()
-           << new ToolFrequencyFilter();
+           << new ToolFrequencyFilter()
+           << new ToolChangeVolume();
 }
 
 ToolFactory::~ToolFactory()
