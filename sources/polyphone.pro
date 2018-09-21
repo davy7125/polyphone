@@ -335,7 +335,8 @@ SOURCES	+= main.cpp \
     editor/tools/abstracttoolparameters.cpp \
     editor/tools/tooldialog.cpp \
     editor/tools/external_command/toolexternalcommand_parameters.cpp \
-    editor/tools/external_command/toolexternalcommand_gui.cpp
+    editor/tools/external_command/toolexternalcommand_gui.cpp \
+    editor/tools/trim_start/tooltrimstart.cpp
 
 HEADERS  += \
     core/sf2_types.h \
@@ -510,7 +511,8 @@ HEADERS  += \
     editor/tools/tooldialog.h \
     editor/tools/abstracttoolgui.h \
     editor/tools/external_command/toolexternalcommand_parameters.h \
-    editor/tools/external_command/toolexternalcommand_gui.h
+    editor/tools/external_command/toolexternalcommand_gui.h \
+    editor/tools/trim_start/tooltrimstart.h
 
 FORMS    += \
     context/interface/config.ui \
