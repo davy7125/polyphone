@@ -28,7 +28,7 @@ public:
     /// Internal identifier
     QString getIdentifier() const override
     {
-        return "smpl:removeFrequencies";
+        return "smpl:changeVolume";
     }
 
     /// Process an element

@@ -1,23 +1,23 @@
-#ifndef TOOLTRIMSTART_H
-#define TOOLTRIMSTART_H
+#ifndef TOOLTRANSPOSESMPL_H
+#define TOOLTRANSPOSESMPL_H
 
 #include "abstracttooliterating.h"
 #include <QObject>
 
-class ToolTrimStart: public AbstractToolIterating
+class ToolTransposeSmpl: public AbstractToolIterating
 {
 public:
-    ToolTrimStart() : AbstractToolIterating(elementSmpl) {}
+    ToolTransposeSmpl();
 
     /// Icon, label and category displayed to the user to describe the tool
     QString getIconName() const override
     {
-        return ":/tool/remove_blank.svg";
+        return ":/tool/transpose.svg";
     }
 
     QString getLabel() const override
     {
-        return trUtf8("Enlever le silence initial");
+        return trUtf8("Transposer...");
     }
 
     QString getCategory() const override
@@ -28,11 +28,11 @@ public:
     /// Internal identifier
     QString getIdentifier() const override
     {
-        return "smpl:trimStart";
+        return "smpl:transpose";
     }
 
     /// Process an element
     void process(SoundfontManager * sm, EltID id, AbstractToolParameters * parameters) override;
 };
 
-#endif // TOOLTRIMSTART_H
+#endif // TOOLTRANSPOSESMPL_H
