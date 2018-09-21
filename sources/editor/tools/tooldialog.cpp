@@ -13,7 +13,8 @@ ToolDialog::ToolDialog(AbstractToolGui *toolGui, AbstractTool * tool, QWidget *p
     connect(toolGui, SIGNAL(canceled()), this, SLOT(canceled()));
 
     // Fill the dialog
-    QLayout * layout = new QGridLayout(this);
+    QGridLayout * layout = new QGridLayout(this);
+    layout->setMargin(0);
     layout->addWidget(toolGui);
     this->setLayout(layout);
 
