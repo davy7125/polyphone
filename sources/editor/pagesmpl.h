@@ -44,9 +44,6 @@ public:
     void pushPlayPause();
     void getPeakFrequencies(EltID id, QList<double> &frequencies, QList<double> &factors, QList<int> &keys, QList<int> &corrections);
 
-signals:
-    void noteChanged(int unused, int vel);
-
 protected:
     // Update the interface
     bool updateInterface(QString editingSource, IdList selectedIds, int displayOption);
@@ -72,7 +69,6 @@ private slots:
     void setSinusEnabled(bool val);
     void setGainSample(int val);
     void setStereo(bool val);
-    void selectionChanged();
     void on_pushAutoTune_clicked();
     void onLinkClicked(EltID id);
 

@@ -37,6 +37,8 @@ DialogMagnetophone::DialogMagnetophone(QWidget *parent) :
     ui(new Ui::DialogMagnetophone),
     _sampleRate(0)
 {
+    //    connect(this->synth, SIGNAL(sampleRateChanged(qint32)), &dialogMagneto, SLOT(setSampleRate(qint32)));
+    //    connect(this->synth, SIGNAL(samplesRead(int)), &dialogMagneto, SLOT(avanceSamples(int)));
     ui->setupUi(this);
     _synth = ContextManager::audio()->getSynth();
     this->setWindowFlags(Qt::Tool | Qt::WindowStaysOnTopHint | Qt::CustomizeWindowHint | Qt::WindowCloseButtonHint);

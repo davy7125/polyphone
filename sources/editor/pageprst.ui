@@ -27,7 +27,7 @@
     <number>0</number>
    </property>
    <property name="verticalSpacing">
-    <number>3</number>
+    <number>0</number>
    </property>
    <item row="1" column="0">
     <widget class="QStackedWidget" name="stackedWidget">
@@ -326,7 +326,7 @@
            <number>6</number>
           </property>
           <property name="bottomMargin">
-           <number>0</number>
+           <number>3</number>
           </property>
           <property name="verticalSpacing">
            <number>0</number>
@@ -809,7 +809,11 @@
         <number>0</number>
        </property>
        <item row="0" column="0">
-        <widget class="GraphicsViewRange" name="rangeEditor"/>
+        <widget class="GraphicsViewRange" name="rangeEditor">
+         <property name="frameShape">
+          <enum>QFrame::NoFrame</enum>
+         </property>
+        </widget>
        </item>
       </layout>
      </widget>

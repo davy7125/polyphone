@@ -1,6 +1,6 @@
 #include "windowmanager.h"
 #include "contextmanager.h"
-#include "config.h"
+#include "configpanel.h"
 #include "soundfontbrowser.h"
 #include "coloredtabwidget.h"
 #include "soundfontmanager.h"
@@ -13,7 +13,7 @@
 
 WindowManager::WindowManager(ColoredTabWidget *tabWidget) : QObject(NULL),
     _tabWidget(tabWidget),
-    _configTab(new Config()),
+    _configTab(new ConfigPanel()),
     _browserTab(new SoundfontBrowser()),
     _inputFactory(new InputFactory())
 {

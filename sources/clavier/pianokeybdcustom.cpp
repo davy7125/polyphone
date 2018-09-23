@@ -24,7 +24,7 @@
 
 #include "pianokeybdcustom.h"
 #include "sf2_types.h"
-#include "config.h"
+#include "configpanel.h"
 #include <QApplication>
 
 // Définition des couleurs du clavier

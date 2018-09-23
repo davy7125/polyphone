@@ -42,6 +42,7 @@ public:
     ~Synth();
 
     // Executed by the main thread (thread 1)
+    // Type 0 is sample, 1 is instrument, 2 is preset
     void play(int type, int idSf2, int idElt, int note, int velocity,
               VoiceParam * voiceParamTmp = NULL);
     void stop();

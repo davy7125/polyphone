@@ -22,8 +22,8 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef CONFIG_H
-#define CONFIG_H
+#ifndef CONFIGPANEL_H
+#define CONFIGPANEL_H
 
 #include <QMessageBox>
 #include <QWidget>
@@ -33,16 +33,16 @@
 
 namespace Ui
 {
-class Config;
+class ConfigPanel;
 }
 
-class Config : public QWidget
+class ConfigPanel : public QWidget
 {
     Q_OBJECT
     
 public:
-    Config(QWidget *parent = NULL);
-    ~Config();
+    ConfigPanel(QWidget *parent = NULL);
+    ~ConfigPanel();
 
     // Mapping
     QString getKeyMapped(int numOctave, PianoKeybd::Key key)
@@ -168,7 +168,7 @@ private slots:
     void on_pushColorListText_clicked();
 
 private:
-    Ui::Config * ui;
+    Ui::ConfigPanel * ui;
 
     // Misc
     bool _loaded;
@@ -177,4 +177,4 @@ private:
     void initComboLanguage();
 };
 
-#endif // CONFIG_H
+#endif // CONFIGPANEL_H
