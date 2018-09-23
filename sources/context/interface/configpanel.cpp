@@ -26,16 +26,16 @@
 #include <QDir>
 #include <QColorDialog>
 #include <QDesktopServices>
-#include "config.h"
-#include "ui_config.h"
+#include "configpanel.h"
+#include "ui_configpanel.h"
 #include "editor_old.h"
 #include "portaudio.h"
 #include <qmath.h>
 #include "contextmanager.h"
 
 
-Config::Config(QWidget *parent) : QWidget(parent),
-    ui(new Ui::Config)
+ConfigPanel::ConfigPanel(QWidget *parent) : QWidget(parent),
+    ui(new Ui::ConfigPanel)
 {
     ui->setupUi(this);
 
@@ -158,12 +158,12 @@ Config::Config(QWidget *parent) : QWidget(parent),
     _loaded = true;
 }
 
-Config::~Config()
+ConfigPanel::~ConfigPanel()
 {
     delete ui;
 }
 
-void Config::initializeInterface()
+void ConfigPanel::initializeInterface()
 {
     // Style
     QString styleSheet = QString("QLabel{border-radius:5px;padding: 0px 5px;") +
@@ -190,7 +190,7 @@ void Config::initializeInterface()
     ui->comboMidiInput->blockSignals(false);
 }
 
-void Config::setAudioOutput(int index)
+void ConfigPanel::setAudioOutput(int index)
 {
     Q_UNUSED(index)
     if (_loaded)
@@ -204,7 +204,7 @@ void Config::setAudioOutput(int index)
         ContextManager::configuration()->setValue(ConfManager::SECTION_AUDIO, "type", audioType);
     }
 }
-void Config::on_comboBufferSize_activated(int index)
+void ConfigPanel::on_comboBufferSize_activated(int index)
 {
     // Modification de la taille du buffer
     if (_loaded)
@@ -213,21 +213,21 @@ void Config::on_comboBufferSize_activated(int index)
         ContextManager::configuration()->setValue(ConfManager::SECTION_AUDIO, "buffer_size", bufferSize);
     }
 }
-void Config::setWavAutoLoop(bool checked)
+void ConfigPanel::setWavAutoLoop(bool checked)
 {
     if (_loaded)
     {
         ContextManager::configuration()->setValue(ConfManager::SECTION_NONE, "wav_auto_loop", checked);
     }
 }
-void Config::setWavRemoveBlank(bool checked)
+void ConfigPanel::setWavRemoveBlank(bool checked)
 {
     if (_loaded)
     {
         ContextManager::configuration()->setValue(ConfManager::SECTION_NONE, "wav_remove_blank", checked);
     }
 }
-void Config::setNumPortMidi(int val)
+void ConfigPanel::setNumPortMidi(int val)
 {
     if (_loaded)
     {
@@ -237,7 +237,7 @@ void Config::setNumPortMidi(int val)
     }
 }
 
-void Config::setSynthGain(int val)
+void ConfigPanel::setSynthGain(int val)
 {
     if (_loaded)
     {
@@ -245,7 +245,7 @@ void Config::setSynthGain(int val)
     }
 }
 
-void Config::setVolume(int val)
+void ConfigPanel::setVolume(int val)
 {
     setSynthGain(val);
     ui->sliderGain->blockSignals(true);
@@ -254,7 +254,7 @@ void Config::setVolume(int val)
     ui->sliderGain->blockSignals(false);
 }
 
-void Config::on_dialRevNiveau_valueChanged(int value)
+void ConfigPanel::on_dialRevNiveau_valueChanged(int value)
 {
     if (_loaded)
     {
@@ -262,7 +262,7 @@ void Config::on_dialRevNiveau_valueChanged(int value)
     }
 }
 
-void Config::on_dialRevProfondeur_valueChanged(int value)
+void ConfigPanel::on_dialRevProfondeur_valueChanged(int value)
 {
     if (_loaded)
     {
@@ -270,7 +270,7 @@ void Config::on_dialRevProfondeur_valueChanged(int value)
     }
 }
 
-void Config::on_dialRevDensite_valueChanged(int value)
+void ConfigPanel::on_dialRevDensite_valueChanged(int value)
 {
     if (_loaded)
     {
@@ -278,7 +278,7 @@ void Config::on_dialRevDensite_valueChanged(int value)
     }
 }
 
-void Config::on_dialRevAttenuation_valueChanged(int value)
+void ConfigPanel::on_dialRevAttenuation_valueChanged(int value)
 {
     if (_loaded)
     {
@@ -286,7 +286,7 @@ void Config::on_dialRevAttenuation_valueChanged(int value)
     }
 }
 
-void Config::on_dialChoNiveau_valueChanged(int value)
+void ConfigPanel::on_dialChoNiveau_valueChanged(int value)
 {
     if (_loaded)
     {
@@ -294,7 +294,7 @@ void Config::on_dialChoNiveau_valueChanged(int value)
     }
 }
 
-void Config::on_dialChoAmplitude_valueChanged(int value)
+void ConfigPanel::on_dialChoAmplitude_valueChanged(int value)
 {
     if (_loaded)
     {
@@ -302,7 +302,7 @@ void Config::on_dialChoAmplitude_valueChanged(int value)
     }
 }
 
-void Config::on_dialChoFrequence_valueChanged(int value)
+void ConfigPanel::on_dialChoFrequence_valueChanged(int value)
 {
     if (_loaded)
     {
@@ -310,7 +310,7 @@ void Config::on_dialChoFrequence_valueChanged(int value)
     }
 }
 
-void Config::on_checkRepercussionStereo_clicked()
+void ConfigPanel::on_checkRepercussionStereo_clicked()
 {
     if (_loaded)
     {
@@ -319,14 +319,14 @@ void Config::on_checkRepercussionStereo_clicked()
     }
 }
 
-void Config::combinaisonChanged(int key, int numOctave, QString combinaison)
+void ConfigPanel::combinaisonChanged(int key, int numOctave, QString combinaison)
 {
     ContextManager::configuration()->setValue(ConfManager::SECTION_MAP,
                                          "key_" + QString::number(numOctave) + "_" + QString::number(key),
                                          combinaison);
 }
 
-void Config::on_comboKeyName_currentIndexChanged(int index)
+void ConfigPanel::on_comboKeyName_currentIndexChanged(int index)
 {
     if (_loaded)
     {
@@ -335,7 +335,7 @@ void Config::on_comboKeyName_currentIndexChanged(int index)
     }
 }
 
-void Config::on_comboDo_currentIndexChanged(int index)
+void ConfigPanel::on_comboDo_currentIndexChanged(int index)
 {
     ContextManager::configuration()->setValue(ConfManager::SECTION_MAP, "octave_offset", index);
     ui->comboDo->blockSignals(true);
@@ -344,14 +344,14 @@ void Config::on_comboDo_currentIndexChanged(int index)
     //KeyboardManager::set(PianoKeybd::PROPERTY_MAPPING_FIRST_NOTE, index * 12);
 }
 
-void Config::renameComboDo()
+void ConfigPanel::renameComboDo()
 {
     int nbElement = ui->comboDo->count();
     for (int i = 0; i < nbElement; i++)
         ui->comboDo->setItemText(i, ContextManager::keyName()->getKeyName(12 * i));
 }
 
-void Config::on_spinDefaultVelocity_editingFinished()
+void ConfigPanel::on_spinDefaultVelocity_editingFinished()
 {
     if (_loaded)
     {
@@ -366,7 +366,7 @@ bool caseInsensitiveLessThan(const QString &s1, const QString &s2)
     return s1.toLower() < s2.toLower();
 }
 
-void Config::initComboLanguage()
+void ConfigPanel::initComboLanguage()
 {
     // Load the different languages
     ui->comboLangue->blockSignals(true);
@@ -407,7 +407,7 @@ void Config::initComboLanguage()
     ui->comboLangue->blockSignals(false);
 }
 
-void Config::on_comboLangue_currentIndexChanged(int index)
+void ConfigPanel::on_comboLangue_currentIndexChanged(int index)
 {
     ContextManager::configuration()->setValue(ConfManager::SECTION_NONE, "language", ui->comboLangue->itemData(index));
     QMessageBox::information(QApplication::activeWindow(), trUtf8("Information"),
@@ -419,7 +419,7 @@ void Config::on_comboLangue_currentIndexChanged(int index)
 /// Colors ///
 //////////////
 
-void Config::on_comboColorTheme_currentIndexChanged(int index)
+void ConfigPanel::on_comboColorTheme_currentIndexChanged(int index)
 {
     if (_loaded) {
         if (index == 0) {
@@ -439,7 +439,7 @@ void Config::on_comboColorTheme_currentIndexChanged(int index)
     }
 }
 
-void Config::on_pushColorWindowBackground_clicked()
+void ConfigPanel::on_pushColorWindowBackground_clicked()
 {
     QColor color = QColorDialog::getColor(ContextManager::theme()->getColor(ThemeManager::WINDOW_BACKGROUND),
                                           this, trUtf8("Choisissez une couleur"));
@@ -450,7 +450,7 @@ void Config::on_pushColorWindowBackground_clicked()
     }
 }
 
-void Config::on_pushColorButtonBackground_clicked()
+void ConfigPanel::on_pushColorButtonBackground_clicked()
 {
     QColor color = QColorDialog::getColor(ContextManager::theme()->getColor(ThemeManager::BUTTON_BACKGROUND),
                                           this, trUtf8("Choisissez une couleur"));
@@ -461,7 +461,7 @@ void Config::on_pushColorButtonBackground_clicked()
     }
 }
 
-void Config::on_pushColorSelectionBackground_clicked()
+void ConfigPanel::on_pushColorSelectionBackground_clicked()
 {
     QColor color = QColorDialog::getColor(ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND),
                                           this, trUtf8("Choisissez une couleur"));
@@ -472,7 +472,7 @@ void Config::on_pushColorSelectionBackground_clicked()
     }
 }
 
-void Config::on_pushColorListBackground_clicked()
+void ConfigPanel::on_pushColorListBackground_clicked()
 {
     QColor color = QColorDialog::getColor(ContextManager::theme()->getColor(ThemeManager::LIST_BACKGROUND),
                                           this, trUtf8("Choisissez une couleur"));
@@ -483,7 +483,7 @@ void Config::on_pushColorListBackground_clicked()
     }
 }
 
-void Config::on_pushColorListAlternativeBackground_clicked()
+void ConfigPanel::on_pushColorListAlternativeBackground_clicked()
 {
     QColor color = QColorDialog::getColor(ContextManager::theme()->getColor(ThemeManager::LIST_ALTERNATIVE_BACKGROUND),
                                           this, trUtf8("Choisissez une couleur"));
@@ -494,7 +494,7 @@ void Config::on_pushColorListAlternativeBackground_clicked()
     }
 }
 
-void Config::on_pushColorWindowText_clicked()
+void ConfigPanel::on_pushColorWindowText_clicked()
 {
     QColor color = QColorDialog::getColor(ContextManager::theme()->getColor(ThemeManager::WINDOW_TEXT),
                                           this, trUtf8("Choisissez une couleur"));
@@ -505,7 +505,7 @@ void Config::on_pushColorWindowText_clicked()
     }
 }
 
-void Config::on_pushColorButtonText_clicked()
+void ConfigPanel::on_pushColorButtonText_clicked()
 {
     QColor color = QColorDialog::getColor(ContextManager::theme()->getColor(ThemeManager::BUTTON_TEXT),
                                           this, trUtf8("Choisissez une couleur"));
@@ -516,7 +516,7 @@ void Config::on_pushColorButtonText_clicked()
     }
 }
 
-void Config::on_pushColorSelectionText_clicked()
+void ConfigPanel::on_pushColorSelectionText_clicked()
 {
     QColor color = QColorDialog::getColor(ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_TEXT),
                                           this, trUtf8("Choisissez une couleur"));
@@ -527,7 +527,7 @@ void Config::on_pushColorSelectionText_clicked()
     }
 }
 
-void Config::on_pushColorListText_clicked()
+void ConfigPanel::on_pushColorListText_clicked()
 {
     QColor color = QColorDialog::getColor(ContextManager::theme()->getColor(ThemeManager::LIST_TEXT),
                                           this, trUtf8("Choisissez une couleur"));
@@ -538,7 +538,7 @@ void Config::on_pushColorListText_clicked()
     }
 }
 
-void Config::fillColors()
+void ConfigPanel::fillColors()
 {
     QString styleStart = "QPushButton{border: 1px solid #888; background-color: ";
     ui->pushColorWindowBackground->setStyleSheet(

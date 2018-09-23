@@ -82,6 +82,8 @@ AudioDevice::AudioDevice(ConfManager *configuration) : QObject(NULL),
     _initialized = (err == paNoError);
     if (!_initialized)
         printf("Error during initialization: %s\n", Pa_GetErrorText(err));
+
+    this->initAudio();
 }
 
 AudioDevice::~AudioDevice()

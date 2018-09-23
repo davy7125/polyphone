@@ -42,7 +42,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "soundfontmanager.h"
-#include "config.h"
+#include "configpanel.h"
 #include "dialog_list.h"
 #include "dialog_about.h"
 #include "pagesf2.h"
@@ -94,8 +94,6 @@ public slots:
     void coller();              // Envoi du signal "coller"
 
 private slots:
-    void noteNameChanged();
-
     void renommer();            // Renommer un ou plusieurs éléments dans l'arborescence
     void renommerEnMasse(int renameType, QString text1, QString text2, int val1, int val2);
     void importerSmpl();        // Import d'un sample
@@ -148,11 +146,9 @@ private slots:
     void noteChanged(int key, int vel);
 
     void on_actionEnlever_tous_les_modulateurs_triggered();
-    void onAudioConnectionDone();
     void futureFinished();
 
 signals:
-    void stopAudio();
     void play(int type, int idSf2, int idElt, int note, int velocity);
 
 private:
@@ -164,8 +160,6 @@ private:
     PageOverviewInst * _pageOverviewInst;
     PageOverviewPrst * _pageOverviewPrst;
     SoundfontManager * sf2;
-    Synth * synth;
-    AudioDevice * audioDevice;
     DialogAbout about;
     DialogList dialList;
     DialogMagnetophone dialogMagneto;

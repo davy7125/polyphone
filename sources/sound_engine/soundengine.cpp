@@ -270,7 +270,7 @@ void SoundEngine::setLoopEnabled(bool isEnabled)
 
 void SoundEngine::setLoopEnabledInstance(bool isEnabled)
 {
-    // Mise a jour voix -1 et -2
+    // Mise à jour voix -1 et -2
     _mutexVoices.lock();
     for (int i = 0; i < _listVoices.size(); i++)
         if (_listVoices.at(i)->getNote() == -1 || _listVoices.at(i)->getNote() == -2)

@@ -9,8 +9,10 @@
 #include "audiodevice.h"
 #include "mididevice.h"
 
-class ContextManager
+class ContextManager: public QObject
 {
+    Q_OBJECT
+
 public:
     // Access to the configuration (key / value)
     static ConfManager * configuration();

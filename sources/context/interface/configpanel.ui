@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Config</class>
- <widget class="QWidget" name="Config">
+ <class>ConfigPanel</class>
+ <widget class="QWidget" name="ConfigPanel">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -1639,7 +1639,7 @@
   <connection>
    <sender>comboAudioOuput</sender>
    <signal>activated(int)</signal>
-   <receiver>Config</receiver>
+   <receiver>ConfigPanel</receiver>
    <slot>setAudioOutput(int)</slot>
    <hints>
     <hint type="sourcelabel">
@@ -1655,7 +1655,7 @@
   <connection>
    <sender>comboMidiInput</sender>
    <signal>activated(int)</signal>
-   <receiver>Config</receiver>
+   <receiver>ConfigPanel</receiver>
    <slot>setNumPortMidi(int)</slot>
    <hints>
     <hint type="sourcelabel">
@@ -1687,7 +1687,7 @@
   <connection>
    <sender>sliderGain</sender>
    <signal>valueChanged(int)</signal>
-   <receiver>Config</receiver>
+   <receiver>ConfigPanel</receiver>
    <slot>setSynthGain(int)</slot>
    <hints>
     <hint type="sourcelabel">

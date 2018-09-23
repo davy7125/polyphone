@@ -1,4 +1,5 @@
 #include "contextmanager.h"
+#include "synth.h"
 
 ContextManager * ContextManager::s_instance = NULL;
 
@@ -85,6 +86,8 @@ ContextManager::ContextManager() :
 
     // 6. Audio device
     _audio = new AudioDevice(_configuration);
+    connect(_configuration, SIGNAL(audioServerConfigurationChanged()), _audio, SLOT(initAudio()));
+    connect(_configuration, SIGNAL(soundEngineConfigurationChanged()), _audio->getSynth(), SLOT(updateConfiguration()));
 
     // 7. Midi device
     _midi = new MidiDevice(_configuration);

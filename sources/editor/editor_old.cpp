@@ -29,7 +29,6 @@ MainWindowOld::MainWindowOld(QWidget *parent) : QMainWindow(parent, Qt::Window |
                                                             #endif
                                                             ),
     ui(new Ui::MainWindowOld),
-    synth(NULL),
     about(this),
     dialList(this),
     dialogMagneto(NULL),
@@ -41,7 +40,6 @@ MainWindowOld::MainWindowOld(QWidget *parent) : QMainWindow(parent, Qt::Window |
 {
     ui->setupUi(this);
     this->setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint);
-    audioDevice = ContextManager::audio();
 #if QT_VERSION >= QT_VERSION_CHECK(4, 7, 0)
     ui->editSearch->setPlaceholderText(trUtf8("Rechercher..."));
 #endif
@@ -53,26 +51,6 @@ MainWindowOld::MainWindowOld(QWidget *parent) : QMainWindow(parent, Qt::Window |
 
     // Initialisation de l'objet pile sf2
     this->sf2 = SoundfontManager::getInstance();
-
-    // Connexion avec mise à jour table
-    connect(this->sf2, SIGNAL(updateTable(int,int,int,int)), this, SLOT(updateTable(int,int,int,int)));
-
-    // Initialisation du synthétiseur
-    //this->synth = new Synth(this->sf2);
-
-    // Connexions du magnétophone avec le synthé
-    connect(this->synth, SIGNAL(sampleRateChanged(qint32)), &dialogMagneto, SLOT(setSampleRate(qint32)));
-    connect(this->synth, SIGNAL(samplesRead(int)), &dialogMagneto, SLOT(avanceSamples(int)));
-
-    // Initialisation de la sortie audio²²
-    connect(this, SIGNAL(stopAudio()), this->audioDevice, SLOT(closeConnections()));
-    connect(this->audioDevice, SIGNAL(connectionDone()), this, SLOT(onAudioConnectionDone()));
-
-    connect(ContextManager::configuration(), SIGNAL(soundEngineConfigurationChanged()), this->synth, SLOT(updateConfiguration()));
-    connect(ContextManager::configuration(), SIGNAL(audioServerConfigurationChanged()), this->audioDevice, SLOT(initAudio()));
-    connect(ContextManager::configuration(), SIGNAL(interfaceChanged()), this, SLOT(noteNameChanged()));
-    this->synth->updateConfiguration();
-    this->audioDevice->initAudio();
 
     // Création des pages
     page_sf2 = new PageSf2();
@@ -163,8 +141,6 @@ MainWindowOld::MainWindowOld(QWidget *parent) : QMainWindow(parent, Qt::Window |
 
 MainWindowOld::~MainWindowOld()
 {
-    // Arrêt audio et fin du synthé
-    this->stopAudio();
     SoundfontManager::kill();
     delete this->page_inst;
     delete this->page_prst;
@@ -173,8 +149,6 @@ MainWindowOld::~MainWindowOld()
     delete _pageOverviewSmpl;
     delete _pageOverviewInst;
     delete _pageOverviewPrst;
-    delete this->synth;
-    delete this->audioDevice;
     delete ui;
 }
 
@@ -879,17 +853,6 @@ void MainWindowOld::updateFavoriteFiles()
             qAct->setVisible(false);
             qAct->setEnabled(false);
         }
-    }
-}
-
-void MainWindowOld::noteNameChanged()
-{
-    QWidget * widget = ui->stackedWidget->currentWidget();
-    if (widget == this->page_smpl || widget == this->page_inst || widget == this->page_prst ||
-            widget == _pageOverviewSmpl || widget == _pageOverviewInst || widget == _pageOverviewPrst)
-    {
-        Page * page = (Page *)ui->stackedWidget->currentWidget();
-        //        page->afficher();
     }
 }
 
@@ -2292,13 +2255,6 @@ int MainWindowOld::deleteMods(EltID id)
     return count;
 }
 
-
-// Gestion du clavier virtuel / du son
-void MainWindowOld::onAudioConnectionDone()
-{
-    //Config::getInstance()->storeAudioConfig();
-}
-
 void MainWindowOld::noteOff(int key)
 {
     noteChanged(key, 0);
@@ -2350,7 +2306,7 @@ void MainWindowOld::noteChanged(int key, int vel)
     // Cas particulier : arrêt de la lecture d'un sample
     if (key == -1 && vel == 0)
     {
-        this->synth->play(0, 0, 0, -1, 0);
+        ContextManager::audio()->getSynth()->play(0, 0, 0, -1, 0);
         return;
     }
 
@@ -2394,7 +2350,7 @@ void MainWindowOld::noteChanged(int key, int vel)
         if (ui->tree->isSelectedItemsSf2Unique())
         {
             if (id.typeElement == elementSmpl && ui->tree->getSelectedItemsNumber() == 1)
-                this->synth->play(0, id.indexSf2, id.indexElt, key, vel);
+                ContextManager::audio()->getSynth()->play(0, id.indexSf2, id.indexElt, key, vel);
             else if (ui->tree->isSelectedItemsFamilyUnique())
             {
                 if ((id.typeElement == elementInst || id.typeElement == elementInstSmpl) &&
@@ -2454,11 +2410,11 @@ void MainWindowOld::noteChanged(int key, int vel)
                         }
                     }
 
-                    this->synth->play(1, id.indexSf2, id.indexElt, key, vel);
+                    ContextManager::audio()->getSynth()->play(1, id.indexSf2, id.indexElt, key, vel);
                 }
                 else if ((id.typeElement == elementPrst || id.typeElement == elementPrstInst) &&
                          ui->tree->isSelectedItemsFamilyUnique())
-                    this->synth->play(2, id.indexSf2, id.indexElt, key, vel);
+                    ContextManager::audio()->getSynth()->play(2, id.indexSf2, id.indexElt, key, vel);
             }
         }
     }

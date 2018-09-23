@@ -10,6 +10,7 @@
 #DEFINES += USE_LOCAL_RTMIDI
 #DEFINES += USE_LOCAL_STK
 #DEFINES += USE_LOCAL_QCUSTOMPLOT
+DEFINES += USE_LOCAL_FLUIDSYNTH
 
 # Polyphone version
 DEFINES += VERSION=2.0
@@ -53,7 +54,7 @@ CONFIG(debug, debug|release) {
 }
 
 win32{
-    DEFINES += __WINDOWS_MM__ USE_LOCAL_RTMIDI USE_LOCAL_STK USE_LOCAL_QCUSTOMPLOT
+    DEFINES += __WINDOWS_MM__ USE_LOCAL_RTMIDI USE_LOCAL_STK USE_LOCAL_QCUSTOMPLOT USE_LOCAL_FLUIDSYNTH
     INCLUDEPATH += lib \
         lib/win/ \
         lib/ogg_vorbis
@@ -78,13 +79,13 @@ win32{
 unix:!macx {
     DEFINES += __LINUX_ALSASEQ__
     CONFIG += link_pkgconfig
-    PKGCONFIG += alsa jack portaudio-2.0 zlib ogg vorbis vorbisfile vorbisenc
+    PKGCONFIG += alsa jack portaudio-2.0 zlib ogg vorbis vorbisfile vorbisenc glib-2.0
     INCLUDEPATH += /usr/include/jack
 }
 macx {
     QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.6
     QMAKE_MAC_SDK = macosx10.9
-    DEFINES += __MACOSX_CORE__ USE_LOCAL_RTMIDI USE_LOCAL_STK USE_LOCAL_QCUSTOMPLOT
+    DEFINES += __MACOSX_CORE__ USE_LOCAL_RTMIDI USE_LOCAL_STK USE_LOCAL_QCUSTOMPLOT USE_LOCAL_FLUIDSYNTH
     INCLUDEPATH += lib/mac/Jackmp.framework/Headers \
         lib \
         lib/ogg_vorbis
@@ -145,6 +146,16 @@ contains(DEFINES, USE_LOCAL_QCUSTOMPLOT) {
     INCLUDEPATH += /usr/include/qcustomplot
 }
 
+# Location of FluidSynth
+contains(DEFINES, USE_LOCAL_FLUIDSYNTH) {
+    INCLUDEPATH += lib/fluidsynth
+    HEADERS += lib/fluidsynth/fluidsynth.h
+    LIBS += -L$$PWD/lib/fluidsynth -lfluidsynth
+} else {
+    LIBS += -lfluidsynth
+    INCLUDEPATH += /usr/include/fluidsynth
+}
+
 INCLUDEPATH += mainwindow \
     dialogs \
     context \
@@ -190,7 +201,6 @@ SOURCES	+= main.cpp \
     context/recentfilemanager.cpp \
     context/keynamemanager.cpp \
     context/translationmanager.cpp \
-    context/interface/config.cpp \
     context/interface/editkey.cpp \
     context/interface/tablekey.cpp \
     context/audiodevice.cpp \
@@ -345,7 +355,8 @@ SOURCES	+= main.cpp \
     editor/tools/balance_adjustment/toolbalanceadjustment.cpp \
     editor/tools/transpose_smpl/tooltransposesmpl.cpp \
     editor/tools/transpose_smpl/tooltransposesmpl_parameters.cpp \
-    editor/tools/transpose_smpl/tooltransposesmpl_gui.cpp
+    editor/tools/transpose_smpl/tooltransposesmpl_gui.cpp \
+    context/interface/configpanel.cpp
 
 HEADERS  += \
     core/sf2_types.h \
@@ -367,7 +378,6 @@ HEADERS  += \
     context/recentfilemanager.h \
     context/keynamemanager.h \
     context/translationmanager.h \
-    context/interface/config.h \
     context/interface/editkey.h \
     context/interface/tablekey.h \
     context/mididevice.h \
@@ -530,10 +540,10 @@ HEADERS  += \
     editor/tools/balance_adjustment/toolbalanceadjustment.h \
     editor/tools/transpose_smpl/tooltransposesmpl.h \
     editor/tools/transpose_smpl/tooltransposesmpl_parameters.h \
-    editor/tools/transpose_smpl/tooltransposesmpl_gui.h
+    editor/tools/transpose_smpl/tooltransposesmpl_gui.h \
+    context/interface/configpanel.h
 
 FORMS    += \
-    context/interface/config.ui \
     dialogs/dialog_list.ui \
     dialogs/dialog_rename.ui \
     dialogs/dialog_about.ui \
@@ -573,7 +583,8 @@ FORMS    += \
     editor/tools/external_command/toolexternalcommand_gui.ui \
     editor/tools/frequency_filter/toolfrequencyfilter_gui.ui \
     editor/tools/change_volume/toolchangevolume_gui.ui \
-    editor/tools/transpose_smpl/tooltransposesmpl_gui.ui
+    editor/tools/transpose_smpl/tooltransposesmpl_gui.ui \
+    context/interface/configpanel.ui
 
 RESOURCES += resources.qrc \
     clavier/pianokeybd.qrc

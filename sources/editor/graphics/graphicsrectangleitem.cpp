@@ -25,7 +25,7 @@
 #include "graphicsrectangleitem.h"
 #include <QGraphicsScene>
 #include <QApplication>
-#include "config.h"
+#include "configpanel.h"
 
 SoundfontManager * GraphicsRectangleItem::s_sf2 = NULL;
 
