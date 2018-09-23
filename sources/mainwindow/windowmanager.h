@@ -3,7 +3,7 @@
 
 #include <QObject>
 class ColoredTabWidget;
-class Config;
+class ConfigPanel;
 class SoundfontFilter;
 class SoundfontBrowser;
 class Editor;
@@ -45,7 +45,7 @@ private slots:
 
 private:
     ColoredTabWidget * _tabWidget;
-    Config * _configTab;
+    ConfigPanel * _configTab;
     SoundfontBrowser * _browserTab;
     QList<Editor*> _editors;
     InputFactory * _inputFactory;

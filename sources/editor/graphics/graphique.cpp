@@ -23,7 +23,7 @@
 ***************************************************************************/
 
 #include "graphique.h"
-#include "config.h"
+#include "configpanel.h"
 #include "sf2_types.h"
 #include <QScrollBar>
 #include <QSpinBox>
@@ -284,7 +284,7 @@ void Graphique::setEndLoop(int pos, bool replot)
 
 void Graphique::setCurrentSample(int pos)
 {
-    if (_lastUpdate.elapsed() < 16)
+    if (_lastUpdate.elapsed() < 16 && pos != 0)
         return;
     _lastUpdate.restart();
 

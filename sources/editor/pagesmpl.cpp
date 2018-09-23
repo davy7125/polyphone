@@ -34,6 +34,8 @@
 #include <QDesktopWidget>
 #include <QFileDialog>
 #include <QProcess>
+#include <QDebug>
+#include "fluidsynth.h"
 
 PageSmpl::PageSmpl(QWidget *parent) :
     Page(parent, PAGE_SMPL, "page:smpl"),
@@ -54,7 +56,6 @@ PageSmpl::PageSmpl(QWidget *parent) :
                                    "QPushButton:hover{color:" + resetHoverColor + "}");
     ui->frameGraph->setStyleSheet("QFrame{border:0; border-bottom: 1px solid " + this->palette().dark().color().name() + "}");
 
-
     // Initialisation du graphique
     ui->graphe->linkSliderX(ui->sliderGraphe);
     ui->graphe->linkSpinBoxes(ui->spinStartLoop, ui->spinEndLoop);
@@ -63,7 +64,6 @@ PageSmpl::PageSmpl(QWidget *parent) :
     ui->graphe->connect(_synth, SIGNAL(currentPosChanged(int)), SLOT(setCurrentSample(int)));
     this->connect(_synth, SIGNAL(readFinished()), SLOT(lecteurFinished()));
     connect(ui->widgetLinkedTo, SIGNAL(itemClicked(EltID)), this, SLOT(onLinkClicked(EltID)));
-    //connect(_tree, SIGNAL(itemSelectionChanged()), this, SLOT(selectionChanged()));
 
     // Couleur de fond du graphe Fourier
     ui->grapheFourier->setBackgroundColor(this->palette().background().color());
@@ -328,6 +328,14 @@ bool PageSmpl::updateInterface(QString editingSource, IdList selectedIds, int di
 
     if (!ui->pushLecture->isChecked())
         ui->pushLecture->setText(trUtf8("Lecture"));
+
+    // Reprise de la lecture
+    if (this->lectureEnCours)
+    {
+        ui->pushLecture->setChecked(true);
+        this->lecture();
+        preventStop++;
+    }
 
     return true;
 }
@@ -1000,7 +1008,10 @@ void PageSmpl::lecture()
     if (ui->pushLecture->isChecked())
     {
         ui->pushLecture->setText(trUtf8("Arrêt"));
-        this->noteChanged(-1, 127);
+
+        QList<EltID> listID = _currentIds.getSelectedIds(elementSmpl);
+        if (listID.count() == 1)
+            _synth->play(0, listID[0].indexSf2, listID[0].indexElt, -1, 127);
 
         // Désactivations
         ui->comboLink->setEnabled(false);
@@ -1019,15 +1030,13 @@ void PageSmpl::lecture()
         ui->pushEgaliser->setEnabled(false);
         ui->pushEgalRestore->setEnabled(false);
 
-        // Désactivation outils sample
-        //_mainWindow->desactiveOutilsSmpl();
         this->lectureEnCours = true;
     }
     else
     {
         ui->pushLecture->setText(trUtf8("Lecture"));
         this->lectureEnCours = false;
-        this->noteChanged(-1, 0);
+        _synth->play(0, 0, 0, -1, 0);
     }
 }
 
@@ -1038,7 +1047,6 @@ void PageSmpl::lecteurFinished()
         preventStop--;
         return;
     }
-
     ui->graphe->setCurrentSample(0);
 
     // Réinitialisation des boutons
@@ -1058,9 +1066,6 @@ void PageSmpl::lecteurFinished()
     ui->pushEgaliser->setEnabled(true);
     ui->pushEgalRestore->setEnabled(true);
 
-    // Réactivation outils sample
-    //    if (_qStackedWidget->currentWidget() == this)
-    //        _mainWindow->activeOutilsSmpl();
     if (ui->pushLecture->isChecked())
     {
         ui->pushLecture->blockSignals(true);
@@ -1069,21 +1074,6 @@ void PageSmpl::lecteurFinished()
         ui->pushLecture->blockSignals(false);
     }
     this->lectureEnCours = false;
-    //    _mainWindow->activeOutilsSmpl();
-}
-
-void PageSmpl::selectionChanged()
-{
-    if (this->lectureEnCours)
-    {
-        this->noteChanged(-1, 0);
-        if (this->isVisible())
-        {
-            ui->pushLecture->setChecked(true);
-            this->lecture();
-            preventStop++;
-        }
-    }
 }
 
 bool PageSmpl::isPlaying() { return this->lectureEnCours; }
