@@ -211,7 +211,6 @@ SOURCES	+= main.cpp \
     dialogs/dialog_export.cpp \
     dialogs/dialogselection.cpp \
     dialogs/dialogchangelog.cpp \
-    dialogs/dialog_magnetophone.cpp \
     editor/editor_old.cpp \
     editor/page.cpp \
     editor/pagetable.cpp \
@@ -270,7 +269,6 @@ SOURCES	+= main.cpp \
     mainwindow/mainwindow.cpp \
     mainwindow/windowmanager.cpp \
     mainwindow/coloredtabwidget.cpp \
-    clavier/keyboardmanager.cpp \
     repository/urlreader.cpp \
     repository/urlreaderjson.cpp \
     repository/repositorymanager.cpp \
@@ -356,7 +354,10 @@ SOURCES	+= main.cpp \
     editor/tools/transpose_smpl/tooltransposesmpl.cpp \
     editor/tools/transpose_smpl/tooltransposesmpl_parameters.cpp \
     editor/tools/transpose_smpl/tooltransposesmpl_gui.cpp \
-    context/interface/configpanel.cpp
+    context/interface/configpanel.cpp \
+    sound_engine/midilistener.cpp \
+    dialogs/dialogkeyboard.cpp \
+    dialogs/dialogrecorder.cpp
 
 HEADERS  += \
     core/sf2_types.h \
@@ -389,7 +390,6 @@ HEADERS  += \
     dialogs/dialogselection.h \
     dialogs/dialogchangelog.h \
     dialogs/modalprogressdialog.h \
-    dialogs/dialog_magnetophone.h \
     editor/editor_old.h \
     editor/page.h \
     editor/pagetable.h \
@@ -452,7 +452,6 @@ HEADERS  += \
     mainwindow/mainwindow.h \
     mainwindow/windowmanager.h \
     mainwindow/coloredtabwidget.h \
-    clavier/keyboardmanager.h \
     repository/urlreader.h \
     repository/urlreaderjson.h \
     repository/repositorymanager.h \
@@ -541,7 +540,10 @@ HEADERS  += \
     editor/tools/transpose_smpl/tooltransposesmpl.h \
     editor/tools/transpose_smpl/tooltransposesmpl_parameters.h \
     editor/tools/transpose_smpl/tooltransposesmpl_gui.h \
-    context/interface/configpanel.h
+    context/interface/configpanel.h \
+    sound_engine/midilistener.h \
+    dialogs/dialogkeyboard.h \
+    dialogs/dialogrecorder.h
 
 FORMS    += \
     dialogs/dialog_list.ui \
@@ -550,7 +552,6 @@ FORMS    += \
     dialogs/dialog_export.ui \
     dialogs/dialogselection.ui \
     dialogs/dialogchangelog.ui \
-    dialogs/dialog_magnetophone.ui \
     editor/editor_old.ui \
     editor/envelopeditor.ui \
     editor/overview/pageoverview.ui \
@@ -584,7 +585,9 @@ FORMS    += \
     editor/tools/frequency_filter/toolfrequencyfilter_gui.ui \
     editor/tools/change_volume/toolchangevolume_gui.ui \
     editor/tools/transpose_smpl/tooltransposesmpl_gui.ui \
-    context/interface/configpanel.ui
+    context/interface/configpanel.ui \
+    dialogs/dialogkeyboard.ui \
+    dialogs/dialogrecorder.ui
 
 RESOURCES += resources.qrc \
     clavier/pianokeybd.qrc

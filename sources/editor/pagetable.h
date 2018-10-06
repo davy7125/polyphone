@@ -68,7 +68,7 @@ protected:
     ElementType lienGen;
     ElementType lienMod;
     ElementType contenu;
-    TableWidget *table;
+    TableWidget *_table;
     TableWidgetMod *tableMod;
     QSpinBox *spinAmount;
     ComboBox *comboSource1;

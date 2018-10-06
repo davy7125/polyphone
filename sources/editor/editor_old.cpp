@@ -678,8 +678,7 @@ void MainWindowOld::updateActions()
 
         // Supprimer, copier
         if (typeUnique && (((type == elementInstSmpl || type == elementPrstInst) && familleUnique) ||
-                           type == elementSmpl || type == elementInst || type == elementPrst) &&
-                !this->page_smpl->isPlaying())
+                           type == elementSmpl || type == elementInst || type == elementPrst))
         {
             ui->action_Supprimer->setEnabled(true);
             ui->actionCopier->setEnabled(true);
@@ -711,15 +710,12 @@ void MainWindowOld::updateActions()
         }
 
         // Outils
-        this->enableActionSample(typeUnique && type == elementSmpl && !this->page_smpl->isPlaying());
+        this->enableActionSample(typeUnique && type == elementSmpl);
         this->enableActionInstrument((typeUnique && type == elementInst) ||
                                      (familleUnique && (type == elementInst || type == elementInstSmpl)));
         this->enableActionPreset((typeUnique && type == elementPrst) ||
                                  (familleUnique && (type == elementPrst || type == elementPrstInst)));
         this->enableActionSf2(true);
-
-        // Particularité 1 : "enlever éléments non utilisés" doit être désactivé si la lecture est en cours
-        ui->action_Enlever_les_l_ments_non_utilis_s->setEnabled(!this->page_smpl->isPlaying());
 
         // Particularité 2: visualiseurs et mixtures désactivés si plusieurs instruments / presets sont sélectionnés
         ui->action_Visualiseur->setEnabled(typeUnique && familleUnique);
@@ -824,10 +820,6 @@ void MainWindowOld::activeOutilsSmpl()
     ui->menuSample->setEnabled(1);
     ui->action_Enlever_les_l_ments_non_utilis_s->setEnabled(1);
     ui->tree->activeSuppression();
-}
-bool MainWindowOld::isPlaying()
-{
-    return this->page_smpl->isPlaying();
 }
 void MainWindowOld::updateFavoriteFiles()
 {

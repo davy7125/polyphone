@@ -36,6 +36,13 @@ public slots:
     /// The function is called when pages have to be updated
     void editingDone(QString source, QList<int> sf2Indexes);
 
+signals:
+    /// Emitted when the visibility of the recorder changes
+    void recorderDisplayChanged(bool isDisplayed);
+
+    /// Emitted when the visibility of the keyboard changes
+    void keyboardDisplayChanged(bool isDisplayed);
+
 private slots:
     /// Called when the tab title changes
     void onTabTitleChanged(QString title);

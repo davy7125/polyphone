@@ -28,6 +28,8 @@ public:
 
 signals:
     void tabTitleChanged(QString title);
+    void recorderDisplayChanged(bool isDisplayed);
+    void keyboardDisplayChanged(bool isDisplayed);
 
 public slots:
 

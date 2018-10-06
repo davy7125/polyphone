@@ -22,8 +22,8 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#include "dialog_magnetophone.h"
-#include "ui_dialog_magnetophone.h"
+#include "dialogrecorder.h"
+#include "ui_dialogrecorder.h"
 #include <QTime>
 #include <QFileInfo>
 #include <QDir>
@@ -31,112 +31,107 @@
 #include <QFileDialog>
 #include "contextmanager.h"
 #include "synth.h"
+#include "editortoolbar.h"
 
-DialogMagnetophone::DialogMagnetophone(QWidget *parent) :
+DialogRecorder::DialogRecorder(QWidget *parent) :
     QDialog(parent),
-    ui(new Ui::DialogMagnetophone),
-    _sampleRate(0)
+    ui(new Ui::DialogRecorder)
 {
-    //    connect(this->synth, SIGNAL(sampleRateChanged(qint32)), &dialogMagneto, SLOT(setSampleRate(qint32)));
-    //    connect(this->synth, SIGNAL(samplesRead(int)), &dialogMagneto, SLOT(avanceSamples(int)));
     ui->setupUi(this);
     _synth = ContextManager::audio()->getSynth();
+    connect(_synth, SIGNAL(dataWritten(qint32,int)), this, SLOT(onDataWritten(qint32,int)));
     this->setWindowFlags(Qt::Tool | Qt::WindowStaysOnTopHint | Qt::CustomizeWindowHint | Qt::WindowCloseButtonHint);
-    this->initGui();
+    this->initialize();
 }
 
-DialogMagnetophone::~DialogMagnetophone()
+DialogRecorder::~DialogRecorder()
 {
     delete ui;
 }
 
-void DialogMagnetophone::initGui()
+void DialogRecorder::initialize()
 {
+    // Initialize interface
     ui->lcdNumber->display("00:00:00");
-    ui->pushRecord->blockSignals(true);
-    ui->pushRecord->setChecked(false);
-    ui->pushRecord->blockSignals(false);
-    ui->pushPlayPause->setIcon(QIcon(":/icons/play"));
+    ui->pushRecord->setIcon(ContextManager::theme()->getColoredSvg(":/icons/recorder_record.svg", QSize(32, 32), ThemeManager::WINDOW_TEXT));
+    ui->pushPlayPause->setEnabled(false);
+    ui->pushPlayPause->setIcon(ContextManager::theme()->getColoredSvg(":/icons/recorder_play.svg", QSize(32, 32), ThemeManager::WINDOW_TEXT));
 
-    // Initialisation des variables
-    _isPause = false;
+    // Initialize variables
+    _isRecording = false;
+    _isPaused = false;
     _currentSample = 0;
 }
 
-void DialogMagnetophone::setSampleRate(qint32 sampleRate)
-{
-    _sampleRate = sampleRate;
-}
-
-void DialogMagnetophone::avanceSamples(int number)
+void DialogRecorder::onDataWritten(int sampleRate, int number)
 {
     _currentSample += number;
-    // Mise à jour de l'affichage
-    if (_sampleRate != 0)
+
+    // Update display
+    if (sampleRate != 0)
     {
         QTime time(0, 0);
-        time = time.addMSecs((int)((double)_currentSample / ((double)_sampleRate / 1000.)));
+        time = time.addMSecs((int)((double)_currentSample / ((double)sampleRate / 1000.)));
         ui->lcdNumber->display(time.toString("HH:mm:ss"));
     }
 }
 
-void DialogMagnetophone::closeEvent(QCloseEvent *)
+void DialogRecorder::closeEvent(QCloseEvent * event)
 {
-    // Arrêt de l'enregistrement si besoin
-    if (ui->pushRecord->isChecked())
+    QDialog::closeEvent(event);
+    EditorToolBar::updateRecorderButtonsState(false);
+
+    // Stop the recording if needed
+    if (_isRecording)
         _synth->endRecord();
-    this->initGui();
+    this->initialize();
 }
 
-void DialogMagnetophone::on_pushRecord_toggled(bool checked)
+void DialogRecorder::on_pushRecord_clicked()
 {
-    ui->pushPlayPause->setEnabled(checked);
-    if (checked)
+    if (_isRecording)
+    {
+        // Stop recording
+        this->initialize();
+        _synth->endRecord();
+    }
+    else
     {
         // File name
         QString defaultPath = this->getDefaultPath();
         defaultPath = QFileDialog::getSaveFileName(this, trUtf8("Sauvegarder un enregistrement"),
                                                    defaultPath, trUtf8("Fichier .wav (*.wav)"));
-        if (defaultPath.size())
+        if (!defaultPath.isEmpty())
         {
             if (defaultPath.right(4).toLower() != ".wav")
                 defaultPath.append(".wav");
             ContextManager::recentFile()->addRecentFile(RecentFileManager::FILE_TYPE_RECORD, defaultPath);
 
             // Begin the record
-            ui->pushPlayPause->setIcon(QIcon(":/icons/pause"));
-            _isPause = false;
+            ui->pushRecord->setIcon(ContextManager::theme()->getColoredSvg(":/icons/recorder_stop.svg", QSize(32, 32), ThemeManager::WINDOW_TEXT));
+            ui->pushPlayPause->setIcon(ContextManager::theme()->getColoredSvg(":/icons/recorder_pause.svg", QSize(32, 32), ThemeManager::WINDOW_TEXT));
+            _isPaused = false;
+            _isRecording = true;
             _synth->startNewRecord(defaultPath);
-        }
-        else
-        {
-            ui->pushRecord->blockSignals(true);
-            ui->pushRecord->setChecked(false);
-            ui->pushRecord->blockSignals(false);
+            ui->pushPlayPause->setEnabled(true);
         }
     }
-    else
-    {
-        // Arrêt de l'enregistrement
-        this->initGui();
-        _synth->endRecord();
-    }
+
 }
 
-void DialogMagnetophone::on_pushPlayPause_clicked()
+void DialogRecorder::on_pushPlayPause_clicked()
 {
-    if (ui->pushRecord->isChecked())
+    if (_isRecording)
     {
-        _isPause = !_isPause;
-        if (_isPause)
-            ui->pushPlayPause->setIcon(QIcon(":/icons/play"));
-        else
-            ui->pushPlayPause->setIcon(QIcon(":/icons/pause"));
-        _synth->pause(_isPause);
+        _isPaused = !_isPaused;
+        ui->pushPlayPause->setIcon(ContextManager::theme()->getColoredSvg(
+                                       _isPaused ? ":/icons/recorder_play.svg" : ":/icons/recorder_pause.svg",
+                                       QSize(32, 32), ThemeManager::WINDOW_TEXT));
+        _synth->pause(_isPaused);
     }
 }
 
-QString DialogMagnetophone::getDefaultPath()
+QString DialogRecorder::getDefaultPath()
 {
     QString defaultPath = ContextManager::recentFile()->getLastFile(RecentFileManager::FILE_TYPE_RECORD);
     QFileInfo info(defaultPath);
@@ -169,4 +164,18 @@ QString DialogMagnetophone::getDefaultPath()
 #endif
 
     return defaultPath + ".wav";
+}
+
+void DialogRecorder::hideEvent(QHideEvent * event)
+{
+    ContextManager::configuration()->setValue(ConfManager::SECTION_DISPLAY, "recorderGeometry", this->saveGeometry());
+    QDialog::hideEvent(event);
+}
+
+void DialogRecorder::showEvent(QShowEvent * event)
+{
+    QDialog::showEvent(event);
+    QByteArray geometry = ContextManager::configuration()->getValue(ConfManager::SECTION_DISPLAY, "recorderGeometry", QByteArray()).toByteArray();
+    if (!geometry.isEmpty())
+        this->restoreGeometry(geometry);
 }

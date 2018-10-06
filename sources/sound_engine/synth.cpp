@@ -29,7 +29,6 @@
 #include "contextmanager.h"
 #include "soundfontmanager.h"
 
-
 // Constructeur, destructeur
 Synth::Synth(ConfManager *configuration) : QObject(NULL),
     _isSinusEnabled(false),
@@ -548,7 +547,7 @@ void Synth::readData(float *data1, float *data2, qint64 maxlen)
 
         // Prise en compte de l'avance
         m_recordLength += maxlen * 8;
-        this->samplesRead(maxlen);
+        emit(dataWritten(m_format.sampleRate(), maxlen));
     }
     m_mutexRecord.unlock();
 }

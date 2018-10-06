@@ -40,7 +40,6 @@ public:
     explicit PageSmpl(QWidget * parent = 0);
     ~PageSmpl();
 
-    bool isPlaying();
     void pushPlayPause();
     void getPeakFrequencies(EltID id, QList<double> &frequencies, QList<double> &factors, QList<int> &keys, QList<int> &corrections);
 
@@ -85,6 +84,5 @@ private:
     void saveEQ();
     void loadEQ();
 };
-
 
 #endif // PAGE_SMPL_H
