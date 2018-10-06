@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>DialogMagnetophone</class>
- <widget class="QDialog" name="DialogMagnetophone">
+ <class>DialogRecorder</class>
+ <widget class="QDialog" name="DialogRecorder">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -26,7 +26,7 @@
    <string>Magnétophone</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="../resources.qrc">
+   <iconset>
     <normaloff>:/icons/icon</normaloff>:/icons/icon</iconset>
   </property>
   <layout class="QHBoxLayout" name="horizontalLayout">
@@ -72,7 +72,7 @@
       <string/>
      </property>
      <property name="icon">
-      <iconset resource="../resources.qrc">
+      <iconset>
        <normaloff>:/icons/record</normaloff>:/icons/record</iconset>
      </property>
      <property name="iconSize">
@@ -80,9 +80,6 @@
        <width>32</width>
        <height>32</height>
       </size>
-     </property>
-     <property name="checkable">
-      <bool>true</bool>
      </property>
      <property name="flat">
       <bool>true</bool>
@@ -141,7 +138,7 @@
       <string/>
      </property>
      <property name="icon">
-      <iconset resource="../resources.qrc">
+      <iconset>
        <normaloff>:/icons/play</normaloff>:/icons/play</iconset>
      </property>
      <property name="iconSize">
@@ -157,8 +154,6 @@
    </item>
   </layout>
  </widget>
- <resources>
-  <include location="../resources.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>

@@ -30,6 +30,8 @@
 #include "contextmanager.h"
 #include "soundfontmanager.h"
 #include "dialogchangelog.h"
+#include "dialogkeyboard.h"
+#include "dialogrecorder.h"
 #include <QToolButton>
 #include <QLabel>
 #include <QDesktopServices>
@@ -42,7 +44,9 @@
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::MainWindow)
+    ui(new Ui::MainWindow),
+    _keyboard(new DialogKeyboard(this)),
+    _recorder(new DialogRecorder(this))
 {
     ///////////
     /// GUI ///
@@ -91,6 +95,8 @@ MainWindow::MainWindow(QWidget *parent) :
     // Window manager
     _windowManager = new WindowManager(ui->tabWidget);
     connect(ui->widgetShowSoundfonts, SIGNAL(itemClicked(SoundfontFilter*)), _windowManager, SLOT(openRepository(SoundfontFilter*)));
+    connect(_windowManager, SIGNAL(keyboardDisplayChanged(bool)), this, SLOT(onKeyboardDisplayChange(bool)));
+    connect(_windowManager, SIGNAL(recorderDisplayChanged(bool)), this, SLOT(onRecorderDisplayChange(bool)));
 
     // Initialize the repository
     RepositoryManager * rm = RepositoryManager::getInstance();
@@ -116,6 +122,8 @@ MainWindow::~MainWindow()
 {
     RepositoryManager::kill();
     delete ui;
+    delete _recorder;
+    delete _keyboard;
     delete _windowManager;
 }
 
@@ -285,4 +293,14 @@ void MainWindow::openFile(QString fileName)
     else
         ContextManager::recentFile()->addRecentFile(RecentFileManager::FILE_TYPE_SOUNDFONT, fileName);
     _windowManager->openSoundfont(fileName);
+}
+
+void MainWindow::onKeyboardDisplayChange(bool isDisplayed)
+{
+    _keyboard->setVisible(isDisplayed);
+}
+
+void MainWindow::onRecorderDisplayChange(bool isDisplayed)
+{
+    _recorder->setVisible(isDisplayed);
 }

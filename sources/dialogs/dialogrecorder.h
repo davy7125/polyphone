@@ -22,43 +22,44 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef DIALOG_MAGNETOPHONE_H
-#define DIALOG_MAGNETOPHONE_H
+#ifndef DIALOGRECORDER_H
+#define DIALOGRECORDER_H
 
 #include <QDialog>
 
 namespace Ui {
-class DialogMagnetophone;
+class DialogRecorder;
 }
 
 class Synth;
 
-class DialogMagnetophone : public QDialog
+class DialogRecorder : public QDialog
 {
     Q_OBJECT
     
 public:
-    explicit DialogMagnetophone(QWidget *parent = 0);
-    ~DialogMagnetophone();
+    explicit DialogRecorder(QWidget *parent = 0);
+    ~DialogRecorder();
 
-public slots:
-    void avanceSamples(int number);
-    void setSampleRate(qint32 sampleRate);
-    
+protected:
+    void hideEvent(QHideEvent * event) override;
+    void showEvent(QShowEvent * event) override;
+    void closeEvent(QCloseEvent * event) override;
+
 private slots:
-    void on_pushRecord_toggled(bool checked);
+    void onDataWritten(qint32 sampleRate, int number);
+    void on_pushRecord_clicked();
     void on_pushPlayPause_clicked();
 
 private:
-    Ui::DialogMagnetophone *ui;
-    int _sampleRate;
+    Ui::DialogRecorder *ui;
     int _currentSample;
-    bool _isPause;
+    bool _isRecording;
+    bool _isPaused;
     Synth * _synth;
 
-    void closeEvent(QCloseEvent *);
-    void initGui();
+    void initialize();
     QString getDefaultPath();
 };
 
-#endif // DIALOG_MAGNETOPHONE_H
+#endif // DIALOGRECORDER_H

@@ -54,7 +54,7 @@
 #include "pageoverviewprst.h"
 #include "audiodevice.h"
 #include "synth.h"
-#include "dialog_magnetophone.h"
+#include "dialogrecorder.h"
 class ModalProgressDialog;
 
 namespace Ui
@@ -82,7 +82,6 @@ public:
     void remplacer(EltID idSrc);
     void desactiveOutilsSmpl();
     void activeOutilsSmpl();
-    bool isPlaying();
     void dragAndDrop(EltID idDest, QList<EltID> idSources);
     void setRangeAndRootKey(int rootKey, int noteMin, int noteMax);
     void clearKeyboardCustomisation();
@@ -162,7 +161,7 @@ private:
     SoundfontManager * sf2;
     DialogAbout about;
     DialogList dialList;
-    DialogMagnetophone dialogMagneto;
+    DialogRecorder dialogMagneto;
     QAction * actionKeyboard;
     QList<QAction *> actionSeparators;
     QString _title;

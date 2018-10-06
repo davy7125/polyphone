@@ -66,7 +66,7 @@ PageInst::PageInst(QWidget *parent) :
     this->lien = elementInstSmpl;
     this->lienGen = elementInstSmplGen;
     this->lienMod = elementInstSmplMod;
-    this->table = ui->tableInst;
+    this->_table = ui->tableInst;
     this->tableMod = ui->tableMod;
     this->spinAmount = ui->spinSource2;
     this->checkAbs = ui->checkAbs;
@@ -113,9 +113,9 @@ PageInst::PageInst(QWidget *parent) :
     ui->tableInst->horizontalHeader()->setFont(font);
     ui->tableInst->verticalHeader()->setFont(font);
 
-    connect(this->table, SIGNAL(actionBegin()), this, SLOT(actionBegin()));
-    connect(this->table, SIGNAL(actionFinished()), this, SLOT(actionFinished()));
-    connect(this->table, SIGNAL(openElement(EltID)), this, SLOT(onOpenElement(EltID)));
+    connect(this->_table, SIGNAL(actionBegin()), this, SLOT(actionBegin()));
+    connect(this->_table, SIGNAL(actionFinished()), this, SLOT(actionFinished()));
+    connect(this->_table, SIGNAL(openElement(EltID)), this, SLOT(onOpenElement(EltID)));
     connect(ui->rangeEditor, SIGNAL(updateKeyboard()), this, SLOT(customizeKeyboard()));
     connect(ui->rangeEditor, SIGNAL(keyTriggered(int,int)), this, SIGNAL(triggerNote(int,int)));
     connect(ui->rangeEditor, SIGNAL(divisionsSelected(IdList)), this, SIGNAL(selectedIdsChanged(IdList)));

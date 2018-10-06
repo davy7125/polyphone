@@ -4,6 +4,10 @@
 #include "soundfontmanager.h"
 #include "toolmenu.h"
 
+bool EditorToolBar::s_recorderOpen = false;
+bool EditorToolBar::s_keyboardOpen = false;
+QList<EditorToolBar *> EditorToolBar::s_instances;
+
 EditorToolBar::EditorToolBar(QWidget * parent) : QToolBar(parent),
     _sf2Index(-1),
     _updatingDisplayOptions(false)
@@ -53,10 +57,27 @@ EditorToolBar::EditorToolBar(QWidget * parent) : QToolBar(parent),
 
     _actionShowRecorder = new StyledAction(trUtf8("Magnétophone"), ":/icons/recorder.svg", this);
     _actionShowRecorder->setCheckable(true);
+    _actionShowRecorder->setChecked(s_recorderOpen);
+    connect(_actionShowRecorder, SIGNAL(clicked()), this, SLOT(onRecorderActionClicked()));
     this->addWidget(_actionShowRecorder);
+
     _actionShowKeyboard = new StyledAction(trUtf8("Clavier virtuel"), ":/icons/piano.svg", this);
     _actionShowKeyboard->setCheckable(true);
+    _actionShowKeyboard->setChecked(s_keyboardOpen);
+    connect(_actionShowKeyboard, SIGNAL(clicked()), this, SLOT(onKeyboardActionClicked()));
     this->addWidget(_actionShowKeyboard);
+
+    s_instances << this;
+}
+
+EditorToolBar::~EditorToolBar()
+{
+    s_instances.removeAll(this);
+    if (s_instances.empty())
+    {
+        s_keyboardOpen = false;
+        s_recorderOpen = false;
+    }
 }
 
 void EditorToolBar::setSf2Index(int sf2index)
@@ -148,4 +169,41 @@ void EditorToolBar::selectDisplayOption(int displayOption)
         action->setChecked(action->getData() == displayOption);
     }
     _updatingDisplayOptions = false;
+}
+
+
+void EditorToolBar::onRecorderActionClicked()
+{
+    bool isDisplayed = _actionShowRecorder->isChecked();
+    updateRecorderButtonsState(isDisplayed);
+    emit(recorderDisplayChanged(isDisplayed));
+}
+
+void EditorToolBar::onKeyboardActionClicked()
+{
+    bool isDisplayed = _actionShowKeyboard->isChecked();
+    updateKeyboardButtonsState(isDisplayed);
+    emit(keyboardDisplayChanged(isDisplayed));
+}
+
+void EditorToolBar::updateRecorderButtonsState(bool isChecked)
+{
+    s_recorderOpen = isChecked;
+    foreach (EditorToolBar * toolBar, s_instances)
+    {
+        toolBar->blockSignals(true);
+        toolBar->_actionShowRecorder->setChecked(s_recorderOpen);
+        toolBar->blockSignals(false);
+    }
+}
+
+void EditorToolBar::updateKeyboardButtonsState(bool isChecked)
+{
+    s_keyboardOpen = isChecked;
+    foreach (EditorToolBar * toolBar, s_instances)
+    {
+        toolBar->blockSignals(true);
+        toolBar->_actionShowKeyboard->setChecked(s_keyboardOpen);
+        toolBar->blockSignals(false);
+    }
 }

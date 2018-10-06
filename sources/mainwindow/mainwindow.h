@@ -32,6 +32,8 @@ namespace Ui {
 class MainWindow;
 }
 class WindowManager;
+class DialogKeyboard;
+class DialogRecorder;
 
 class MainWindow : public QMainWindow
 {
@@ -59,11 +61,14 @@ private slots:
     void on_pushButtonSoundfonts_clicked();
     void on_pushButtonOpen_clicked();
     void on_pushButtonNew_clicked();
+    void onKeyboardDisplayChange(bool isDisplayed);
+    void onRecorderDisplayChange(bool isDisplayed);
 
 private:
-
     Ui::MainWindow *ui;
     WindowManager *_windowManager;
+    DialogKeyboard * _keyboard;
+    DialogRecorder * _recorder;
 };
 
 #endif // WINDOW_H

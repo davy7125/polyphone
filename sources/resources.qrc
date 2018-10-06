@@ -4,9 +4,6 @@
         <file alias="about">resources/help-about.png</file>
         <file alias="close">resources/window-close.png</file>
         <file alias="document">resources/document.png</file>
-        <file alias="pause">resources/player_pause.png</file>
-        <file alias="play">resources/player_play.png</file>
-        <file alias="record">resources/player_record.png</file>
         <file alias="rename">resources/rename.png</file>
         <file alias="export">resources/export.png</file>
         <file alias="export2">resources/export2.png</file>
@@ -81,6 +78,10 @@
         <file alias="minus.svg">resources/minus.svg</file>
         <file alias="copy.svg">resources/copy.svg</file>
         <file alias="paste.svg">resources/paste.svg</file>
+        <file alias="recorder_pause.svg">resources/recorder_pause.svg</file>
+        <file alias="recorder_play.svg">resources/recorder_play.svg</file>
+        <file alias="recorder_record.svg">resources/recorder_record.svg</file>
+        <file alias="recorder_stop.svg">resources/recorder_stop.svg</file>
     </qresource>
     <qresource prefix="/traductions">
         <file>resources/traductions/polyphone_en.qm</file>

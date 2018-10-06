@@ -91,6 +91,8 @@ void WindowManager::openSoundfont(QString fileName)
                                           ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND),
                                           ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_TEXT));
     connect(editor, SIGNAL(tabTitleChanged(QString)), this, SLOT(onTabTitleChanged(QString)));
+    connect(editor, SIGNAL(keyboardDisplayChanged(bool)), this, SIGNAL(keyboardDisplayChanged(bool)));
+    connect(editor, SIGNAL(recorderDisplayChanged(bool)), this, SIGNAL(recorderDisplayChanged(bool)));
     _editors << editor;
 
     // Initialize and display it
@@ -179,7 +181,13 @@ void WindowManager::onTabCloseRequested(int tabIndex)
 
         _editors.removeAll(editor);
         _tabWidget->removeTab(tabIndex);
-        delete editor;
+        editor->deleteLater();
+
+        if (_editors.empty())
+        {
+            recorderDisplayChanged(false);
+            keyboardDisplayChanged(false);
+        }
     }
     else if (widget == (QWidget *)_configTab)
     {
