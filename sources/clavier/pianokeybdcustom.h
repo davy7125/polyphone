@@ -61,6 +61,7 @@ protected:
 class PianoKeybdCustom : public PianoKeybd
 {
     Q_OBJECT
+
 public:
     PianoKeybdCustom(QWidget * parent);
     void changeKey(int key, int vel);

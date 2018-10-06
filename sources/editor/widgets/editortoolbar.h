@@ -13,10 +13,14 @@ class EditorToolBar : public QToolBar
 
 public:
     EditorToolBar(QWidget *parent = NULL);
+    ~EditorToolBar();
     void setSf2Index(int sf2index);
     void updateActions();
     void disable();
     void setDisplayOptions(QList<Page::DisplayOption> displayOptions);
+
+    static void updateRecorderButtonsState(bool isChecked);
+    static void updateKeyboardButtonsState(bool isChecked);
 
 public slots:
     void onSelectionChanged(IdList ids);
@@ -25,9 +29,13 @@ public slots:
 
 signals:
     void displayOptionChanged(int displayOption);
+    void recorderDisplayChanged(bool isDisplayed);
+    void keyboardDisplayChanged(bool isDisplayed);
 
 private slots:
     void onDisplayActionClicked();
+    void onRecorderActionClicked();
+    void onKeyboardActionClicked();
     void onUndo();
     void onRedo();
 
@@ -47,6 +55,10 @@ private:
     QList<StyledAction *> _displayActions;
     bool _updatingDisplayOptions;
     ToolMenu * _toolMenu;
+
+    static QList<EditorToolBar *> s_instances;
+    static bool s_recorderOpen;
+    static bool s_keyboardOpen;
 };
 
 #endif // EDITORTOOLBAR_H

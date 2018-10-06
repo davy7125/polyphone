@@ -71,7 +71,7 @@ signals:
     void currentPosChanged(int pos);
     void readFinished();
     void sampleRateChanged(qint32 sampleRate);
-    void samplesRead(int number);
+    void dataWritten(qint32 sampleRate, int number);
 
 public slots:
     void updateConfiguration();

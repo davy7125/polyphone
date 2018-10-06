@@ -41,19 +41,19 @@
 QList<PageTable::Modulator> PageTable::_modulatorCopy;
 
 PageTable::PageTable(TypePage typePage, QWidget *parent) : Page(parent, typePage, typePage == PAGE_INST ? "page:inst" : "page:prst"),
-    table(NULL),
+    _table(NULL),
     tableMod(NULL)
 {
 }
 
 void PageTable::afficheTable()
 {
-    int posV = this->table->verticalScrollBar()->value();
+    int posV = this->_table->verticalScrollBar()->value();
 
     // Destruction des cellules précédentes
-    table->blockSignals(true);
-    this->table->clear();
-    table->blockSignals(false);
+    _table->blockSignals(true);
+    this->_table->clear();
+    _table->blockSignals(false);
 
     QList<EltID> ids = _currentParentIds;
 
@@ -79,7 +79,7 @@ void PageTable::afficheTable()
 
     // Fin de la préparation
     this->reselect();
-    this->table->verticalScrollBar()->setValue(posV);
+    this->_table->verticalScrollBar()->setValue(posV);
 }
 
 void PageTable::addGlobal(EltID id, bool multiGlobal)
@@ -102,7 +102,7 @@ void PageTable::addGlobal(EltID id, bool multiGlobal)
     else
         qStr = trUtf8("Global");
 
-    this->table->addColumn(0, qStr);
+    this->_table->addColumn(0, qStr);
     EltID idGen = id;
     idGen.typeElement = this->contenantGen;
     idGen.indexElt2 = 0;
@@ -136,37 +136,37 @@ void PageTable::addGlobal(EltID id, bool multiGlobal)
             offsetEndLoop += 32768 * genValTmp.shAmount;
             break;
         default:
-            row = this->table->getRow(i);
+            row = this->_table->getRow(i);
             if (row > -1)
             {
                 if (i == champ_sampleModes)
-                    this->table->setLoopModeImage(row, 0, genValTmp.wAmount);
+                    this->_table->setLoopModeImage(row, 0, genValTmp.wAmount);
                 else
-                    this->table->item(row, 0)->setText(getTextValue(T, i, genValTmp));
+                    this->_table->item(row, 0)->setText(getTextValue(T, i, genValTmp));
             }
         }
     }
-    if (offsetStart && this->table->getRow(champ_startAddrsOffset) > -1)
+    if (offsetStart && this->_table->getRow(champ_startAddrsOffset) > -1)
     {
-        row = this->table->getRow(champ_startAddrsOffset);
-        this->table->item(row, 0)->setText(getTextValue(T, champ_startAddrsOffset, offsetStart));
+        row = this->_table->getRow(champ_startAddrsOffset);
+        this->_table->item(row, 0)->setText(getTextValue(T, champ_startAddrsOffset, offsetStart));
     }
-    if (offsetEnd && this->table->getRow(champ_endAddrsOffset) > -1)
+    if (offsetEnd && this->_table->getRow(champ_endAddrsOffset) > -1)
     {
-        row = this->table->getRow(champ_endAddrsOffset);
-        this->table->item(row, 0)->setText(getTextValue(T, champ_endAddrsOffset, offsetEnd));
+        row = this->_table->getRow(champ_endAddrsOffset);
+        this->_table->item(row, 0)->setText(getTextValue(T, champ_endAddrsOffset, offsetEnd));
     }
-    if (offsetStartLoop && this->table->getRow(champ_startloopAddrsOffset) > -1)
+    if (offsetStartLoop && this->_table->getRow(champ_startloopAddrsOffset) > -1)
     {
-        row = this->table->getRow(champ_startloopAddrsOffset);
-        this->table->item(row, 0)->setText(getTextValue(T, champ_startloopAddrsOffset, offsetStartLoop));
+        row = this->_table->getRow(champ_startloopAddrsOffset);
+        this->_table->item(row, 0)->setText(getTextValue(T, champ_startloopAddrsOffset, offsetStartLoop));
     }
-    if (offsetEndLoop && this->table->getRow(champ_endloopAddrsOffset) > -1)
+    if (offsetEndLoop && this->_table->getRow(champ_endloopAddrsOffset) > -1)
     {
-        row = this->table->getRow(champ_endloopAddrsOffset);
-        this->table->item(row, 0)->setText(getTextValue(T, champ_endloopAddrsOffset, offsetEndLoop));
+        row = this->_table->getRow(champ_endloopAddrsOffset);
+        this->_table->item(row, 0)->setText(getTextValue(T, champ_endloopAddrsOffset, offsetEndLoop));
     }
-    this->table->setID(id, 0);
+    this->_table->setID(id, 0);
 }
 
 void PageTable::addDivisions(EltID id)
@@ -206,10 +206,10 @@ void PageTable::addDivisions(EltID id)
         for (int j = 1; j < nbSmplInst + 1; j++)
         {
             // note et vélocité basses de la colonne et prise en compte du nom de l'élément lié
-            id3.indexElt = _sf2->get(this->table->getID(j), cElementLie).wValue;
+            id3.indexElt = _sf2->get(this->_table->getID(j), cElementLie).wValue;
             QString strOrder2 = QString("%1-%2-%3")
-                    .arg(_sf2->get(this->table->getID(j), champ_keyRange).rValue.byLo, 3, 10, QChar('0'))
-                    .arg(_sf2->get(this->table->getID(j), champ_velRange).rValue.byLo, 3, 10, QChar('0'))
+                    .arg(_sf2->get(this->_table->getID(j), champ_keyRange).rValue.byLo, 3, 10, QChar('0'))
+                    .arg(_sf2->get(this->_table->getID(j), champ_velRange).rValue.byLo, 3, 10, QChar('0'))
                     .arg(_sf2->getQstr(id3, champ_name));
             if (Utils::naturalOrder(strOrder, strOrder2) > 0)
                 numCol++;
@@ -220,7 +220,7 @@ void PageTable::addDivisions(EltID id)
         int offsetEnd = 0;
         int offsetStartLoop = 0;
         int offsetEndLoop = 0;
-        this->table->addColumn(numCol, qStr);
+        this->_table->addColumn(numCol, qStr);
         foreach (int champTmp, _sf2->getSiblings(id2))
         {
             genValTmp = _sf2->get(id, (Champ)champTmp).genValue;
@@ -251,38 +251,38 @@ void PageTable::addDivisions(EltID id)
                 offsetEndLoop += 32768 * genValTmp.shAmount;
                 break;
             default:
-                row = this->table->getRow(champTmp);
+                row = this->_table->getRow(champTmp);
                 if (row > -1)
                 {
                     if (champTmp == champ_sampleModes)
-                        this->table->setLoopModeImage(row, numCol, genValTmp.wAmount);
+                        this->_table->setLoopModeImage(row, numCol, genValTmp.wAmount);
                     else
-                        this->table->item(row, numCol)->setText(getTextValue(T, champTmp, genValTmp));
+                        this->_table->item(row, numCol)->setText(getTextValue(T, champTmp, genValTmp));
                 }
             }
         }
 
-        if (offsetStart && this->table->getRow(champ_startAddrsOffset) > -1)
+        if (offsetStart && this->_table->getRow(champ_startAddrsOffset) > -1)
         {
-            row = this->table->getRow(champ_startAddrsOffset);
-            this->table->item(row, numCol)->setText(getTextValue(T, champ_startAddrsOffset, offsetStart));
+            row = this->_table->getRow(champ_startAddrsOffset);
+            this->_table->item(row, numCol)->setText(getTextValue(T, champ_startAddrsOffset, offsetStart));
         }
-        if (offsetEnd && this->table->getRow(champ_endAddrsOffset) > -1)
+        if (offsetEnd && this->_table->getRow(champ_endAddrsOffset) > -1)
         {
-            row = this->table->getRow(champ_endAddrsOffset);
-            this->table->item(row, numCol)->setText(getTextValue(T, champ_endAddrsOffset, offsetEnd));
+            row = this->_table->getRow(champ_endAddrsOffset);
+            this->_table->item(row, numCol)->setText(getTextValue(T, champ_endAddrsOffset, offsetEnd));
         }
-        if (offsetStartLoop && this->table->getRow(champ_startloopAddrsOffset) > -1)
+        if (offsetStartLoop && this->_table->getRow(champ_startloopAddrsOffset) > -1)
         {
-            row = this->table->getRow(champ_startloopAddrsOffset);
-            this->table->item(row, numCol)->setText(getTextValue(T, champ_startloopAddrsOffset, offsetStartLoop));
+            row = this->_table->getRow(champ_startloopAddrsOffset);
+            this->_table->item(row, numCol)->setText(getTextValue(T, champ_startloopAddrsOffset, offsetStartLoop));
         }
-        if (offsetEndLoop && this->table->getRow(champ_endloopAddrsOffset) > -1)
+        if (offsetEndLoop && this->_table->getRow(champ_endloopAddrsOffset) > -1)
         {
-            row = this->table->getRow(champ_endloopAddrsOffset);
-            this->table->item(row, numCol)->setText(getTextValue(T, champ_endloopAddrsOffset, offsetEndLoop));
+            row = this->_table->getRow(champ_endloopAddrsOffset);
+            this->_table->item(row, numCol)->setText(getTextValue(T, champ_endloopAddrsOffset, offsetEndLoop));
         }
-        this->table->setID(id2, numCol);
+        this->_table->setID(id2, numCol);
     }
 }
 
@@ -297,46 +297,46 @@ void PageTable::formatTable(bool multiGlobal)
         // First column with a hatching pattern
         if (!multiGlobal)
         {
-            for (int j = 0; j < this->table->rowCount(); j++)
+            for (int j = 0; j < this->_table->rowCount(); j++)
             {
                 if (j < 6)
-                    this->table->item(j, 0)->setBackground(brush1);
+                    this->_table->item(j, 0)->setBackground(brush1);
                 else if (j < 10)
-                    this->table->item(j, 0)->setBackground(brush2);
+                    this->_table->item(j, 0)->setBackground(brush2);
                 else if (j < 12)
-                    this->table->item(j, 0)->setBackground(brush1);
+                    this->_table->item(j, 0)->setBackground(brush1);
                 else if (j < 20)
-                    this->table->item(j, 0)->setBackground(brush2);
+                    this->_table->item(j, 0)->setBackground(brush2);
                 else if (j < 30)
-                    this->table->item(j, 0)->setBackground(brush1);
+                    this->_table->item(j, 0)->setBackground(brush1);
                 else if (j < 38)
-                    this->table->item(j, 0)->setBackground(brush2);
+                    this->_table->item(j, 0)->setBackground(brush2);
                 else if (j < 43)
-                    this->table->item(j, 0)->setBackground(brush1);
+                    this->_table->item(j, 0)->setBackground(brush1);
                 else
-                    this->table->item(j, 0)->setBackground(brush2);
-                this->table->item(j, 0)->setTextAlignment(Qt::AlignVCenter | Qt::AlignRight);
+                    this->_table->item(j, 0)->setBackground(brush2);
+                this->_table->item(j, 0)->setTextAlignment(Qt::AlignVCenter | Qt::AlignRight);
             }
         }
 
         // Yellow rows
-        for (int i = multiGlobal ? 0 : 1; i < this->table->columnCount(); i++)
+        for (int i = multiGlobal ? 0 : 1; i < this->_table->columnCount(); i++)
         {
-            for (int j = 0; j < this->table->rowCount(); j++)
+            for (int j = 0; j < this->_table->rowCount(); j++)
             {
                 if (j < 6) {}
                 else if (j < 10)
-                    this->table->item(j, i)->setBackgroundColor(alternateColor);
+                    this->_table->item(j, i)->setBackgroundColor(alternateColor);
                 else if (j < 12) {}
                 else if (j < 20)
-                    this->table->item(j, i)->setBackgroundColor(alternateColor);
+                    this->_table->item(j, i)->setBackgroundColor(alternateColor);
                 else if (j < 30) {}
                 else if (j < 38)
-                    this->table->item(j, i)->setBackgroundColor(alternateColor);
+                    this->_table->item(j, i)->setBackgroundColor(alternateColor);
                 else if (j < 43) {}
                 else
-                    this->table->item(j, i)->setBackgroundColor(alternateColor);
-                this->table->item(j, i)->setTextAlignment(Qt::AlignVCenter | Qt::AlignRight);
+                    this->_table->item(j, i)->setBackgroundColor(alternateColor);
+                this->_table->item(j, i)->setTextAlignment(Qt::AlignVCenter | Qt::AlignRight);
             }
         }
     }
@@ -345,45 +345,45 @@ void PageTable::formatTable(bool multiGlobal)
         // First column with a hatching pattern
         if (!multiGlobal)
         {
-            for (int j = 0; j < this->table->rowCount(); j++)
+            for (int j = 0; j < this->_table->rowCount(); j++)
             {
                 if (j < 5)
-                    this->table->item(j, 0)->setBackground(brush1);
+                    this->_table->item(j, 0)->setBackground(brush1);
                 else if (j < 8)
-                    this->table->item(j, 0)->setBackground(brush2);
+                    this->_table->item(j, 0)->setBackground(brush2);
                 else if (j < 10)
-                    this->table->item(j, 0)->setBackground(brush1);
+                    this->_table->item(j, 0)->setBackground(brush1);
                 else if (j < 18)
-                    this->table->item(j, 0)->setBackground(brush2);
+                    this->_table->item(j, 0)->setBackground(brush2);
                 else if (j < 28)
-                    this->table->item(j, 0)->setBackground(brush1);
+                    this->_table->item(j, 0)->setBackground(brush1);
                 else if (j < 36)
-                    this->table->item(j, 0)->setBackground(brush2);
+                    this->_table->item(j, 0)->setBackground(brush2);
                 else
-                    this->table->item(j, 0)->setBackground(brush1);
-                this->table->item(j, 0)->setTextAlignment(Qt::AlignVCenter | Qt::AlignRight);
+                    this->_table->item(j, 0)->setBackground(brush1);
+                this->_table->item(j, 0)->setTextAlignment(Qt::AlignVCenter | Qt::AlignRight);
             }
         }
 
         // Yellow rows
-        for (int i = multiGlobal ? 0 : 1; i < this->table->columnCount(); i++)
+        for (int i = multiGlobal ? 0 : 1; i < this->_table->columnCount(); i++)
         {
-            for (int j = 0; j < this->table->rowCount(); j++)
+            for (int j = 0; j < this->_table->rowCount(); j++)
             {
                 if (j < 5) {}
                 else if (j < 8)
-                    this->table->item(j, i)->setBackgroundColor(alternateColor);
+                    this->_table->item(j, i)->setBackgroundColor(alternateColor);
                 else if (j < 10) {}
                 else if (j < 18)
-                    this->table->item(j, i)->setBackgroundColor(alternateColor);
+                    this->_table->item(j, i)->setBackgroundColor(alternateColor);
                 else if (j < 28) {}
                 else if (j < 36)
-                    this->table->item(j, i)->setBackgroundColor(alternateColor);
-                this->table->item(j, i)->setTextAlignment(Qt::AlignVCenter | Qt::AlignRight);
+                    this->_table->item(j, i)->setBackgroundColor(alternateColor);
+                this->_table->item(j, i)->setTextAlignment(Qt::AlignVCenter | Qt::AlignRight);
             }
         }
     }
-    this->table->hideRow(0);
+    this->_table->hideRow(0);
 }
 
 void PageTable::afficheRanges()
@@ -406,7 +406,7 @@ void PageTable::afficheMod(EltID id, Champ selectedField)
     else
         idMod.typeElement = this->lienMod;
     int index = -1;
-    if (this->table->selectedItems().count() == 1)
+    if (this->_table->selectedItems().count() == 1)
     {
         foreach (int i, _sf2->getSiblings(idMod))
         {
@@ -636,7 +636,7 @@ void PageTable::afficheEditMod()
             idParent.typeElement = this->contenant;
         else if (idParent.typeElement == this->lienMod)
             idParent.typeElement = this->lien;
-        this->table->selectCell(idParent, (Champ)_sf2->get(id, champ_sfModDestOper).wValue);
+        this->_table->selectCell(idParent, (Champ)_sf2->get(id, champ_sfModDestOper).wValue);
     }
     else
     {
@@ -666,53 +666,53 @@ void PageTable::updateId(EltID id)
     if (id.typeElement == elementSf2)
     {
         // décrémentation sf2 ?
-        for (int i = 0; i < this->table->columnCount(); i++)
+        for (int i = 0; i < this->_table->columnCount(); i++)
         {
-            id2 = this->table->getID(i);
+            id2 = this->_table->getID(i);
             if (id2.indexSf2 > id.indexSf2)
             {
                 id2.indexSf2--;
-                this->table->setID(id2, i);
+                this->_table->setID(id2, i);
             }
         }
     }
     else if (id.typeElement == elementInst || id.typeElement == elementPrst)
     {
         // décrémentation elt ?
-        for (int i = 0; i < this->table->columnCount(); i++)
+        for (int i = 0; i < this->_table->columnCount(); i++)
         {
-            id2 = this->table->getID(i);
+            id2 = this->_table->getID(i);
             if (id2.indexElt > id.indexElt && id2.indexSf2 == id.indexSf2)
             {
                 id2.indexElt--;
-                this->table->setID(id2, i);
+                this->_table->setID(id2, i);
             }
         }
     }
     else if (id.typeElement == elementInstSmpl || id.typeElement == elementPrstInst)
     {
         // décrémentation elt2 ?
-        for (int i = 0; i < this->table->columnCount(); i++)
+        for (int i = 0; i < this->_table->columnCount(); i++)
         {
-            id2 = this->table->getID(i);
+            id2 = this->_table->getID(i);
             if (id2.indexElt2 > id.indexElt2  && id2.indexSf2 == id.indexSf2
                     && id2.indexElt == id.indexElt)
             {
                 id2.indexElt2--;
-                this->table->setID(id2, i);
+                this->_table->setID(id2, i);
             }
         }
     }
 
     // Affichage mod
     int currentRow = this->tableMod->currentRow();
-    this->afficheMod(this->table->getID(0));
+    this->afficheMod(this->_table->getID(0));
     this->tableMod->selectRow(currentRow);
 }
 
 void PageTable::resetChamp(int colonne, Champ champ1, Champ champ2)
 {
-    EltID id = table->getID(colonne);
+    EltID id = _table->getID(colonne);
     bool ok = _sf2->isSet(id, champ1);
     if (champ2 != champ_unknown)
         ok = ok || _sf2->isSet(id, champ2);
@@ -720,7 +720,7 @@ void PageTable::resetChamp(int colonne, Champ champ1, Champ champ2)
     if (ok)
     {
         // On efface la donnée
-        id = table->getID(colonne);
+        id = _table->getID(colonne);
         _sf2->reset(id, champ1);
         if (champ2 != champ_unknown)
             _sf2->reset(id, champ2);
@@ -729,10 +729,10 @@ void PageTable::resetChamp(int colonne, Champ champ1, Champ champ2)
 
 void PageTable::setOffset(int ligne, int colonne, Champ champ1, Champ champ2)
 {
-    EltID id = this->table->getID(colonne);
+    EltID id = this->_table->getID(colonne);
     bool ok;
     char T[20];
-    QString texte = this->table->item(ligne, colonne)->text().left(9);
+    QString texte = this->_table->item(ligne, colonne)->text().left(9);
     genAmountType genAmount = getValue(texte, champ1, ok);
     if (ok)
     {
@@ -745,7 +745,7 @@ void PageTable::setOffset(int ligne, int colonne, Champ champ1, Champ champ2)
                 genAmount2.shAmount != _sf2->get(id, champ2).shValue)
         {
             // Modification du sf2
-            id = this->table->getID(colonne);
+            id = this->_table->getID(colonne);
             Valeur value;
             value.genValue = genAmount;
             _sf2->set(id, champ1, value);
@@ -755,7 +755,7 @@ void PageTable::setOffset(int ligne, int colonne, Champ champ1, Champ champ2)
         // Mise à jour de la valeur dans la cellule
         int offset = _sf2->get(id, champ1).genValue.shAmount +
                 32768 * _sf2->get(id, champ2).genValue.shAmount;
-        this->table->item(ligne, colonne)->setText(getTextValue(T, champ1, offset));
+        this->_table->item(ligne, colonne)->setText(getTextValue(T, champ1, offset));
     }
     else
     {
@@ -764,10 +764,10 @@ void PageTable::setOffset(int ligne, int colonne, Champ champ1, Champ champ2)
         {
             int offset = _sf2->get(id, champ1).genValue.shAmount +
                     32768 * _sf2->get(id, champ2).genValue.shAmount;
-            this->table->item(ligne, colonne)->setText(getTextValue(T, champ1, offset));
+            this->_table->item(ligne, colonne)->setText(getTextValue(T, champ1, offset));
         }
         else
-            this->table->item(ligne, colonne)->setText("");
+            this->_table->item(ligne, colonne)->setText("");
     }
 }
 
@@ -790,11 +790,11 @@ void PageTable::set(int ligne, int colonne, bool allowPropagation)
         return;
 
     // Modification d'un élément du tableau
-    Champ champ = this->table->getChamp(ligne);
+    Champ champ = this->_table->getChamp(ligne);
     if (champ == champ_unknown)
         return;
 
-    EltID id = this->table->getID(colonne);
+    EltID id = this->_table->getID(colonne);
     if (allowPropagation && id.typeElement == elementInstSmpl && champ != champ_pan &&
             ContextManager::configuration()->getValue(ConfManager::SECTION_NONE, "stereo_modification", false).toBool())
     {
@@ -814,9 +814,9 @@ void PageTable::set(int ligne, int colonne, bool allowPropagation)
             bool ok = true;
             int numCol2 = -1;
             EltID idTmp = id;
-            for (int i = 1; i < table->columnCount(); i++)
+            for (int i = 1; i < _table->columnCount(); i++)
             {
-                idTmp = this->table->getID(i);
+                idTmp = this->_table->getID(i);
                 if (i != colonne)
                 {
                     rangesType keyRange2 = _sf2->get(idTmp, champ_keyRange).rValue;
@@ -841,16 +841,16 @@ void PageTable::set(int ligne, int colonne, bool allowPropagation)
             // Application de la modification
             if (numCol2 != -1 && ok)
             {
-                table->blockSignals(true);
+                _table->blockSignals(true);
 
                 if (champ == champ_sampleModes)
                 {
-                    table->item(ligne, numCol2)->setData(Qt::DecorationRole, table->item(ligne, colonne)->data(Qt::DecorationRole));
-                    table->item(ligne, numCol2)->setData(Qt::UserRole, table->item(ligne, colonne)->data(Qt::UserRole));
+                    _table->item(ligne, numCol2)->setData(Qt::DecorationRole, _table->item(ligne, colonne)->data(Qt::DecorationRole));
+                    _table->item(ligne, numCol2)->setData(Qt::UserRole, _table->item(ligne, colonne)->data(Qt::UserRole));
                 }
                 else
-                    table->item(ligne, numCol2)->setText(table->item(ligne, colonne)->text());
-                table->blockSignals(false);
+                    _table->item(ligne, numCol2)->setText(_table->item(ligne, colonne)->text());
+                _table->blockSignals(false);
                 set(ligne, numCol2, false);
             }
         }
@@ -859,13 +859,13 @@ void PageTable::set(int ligne, int colonne, bool allowPropagation)
     if (champ == champ_sampleModes)
     {
         // Effacement du champ ?
-        if (table->item(ligne, colonne)->data(Qt::UserRole).isNull())
+        if (_table->item(ligne, colonne)->data(Qt::UserRole).isNull())
             resetChamp(colonne, champ, champ_unknown);
         else
         {
-            EltID id = this->table->getID(colonne);
+            EltID id = this->_table->getID(colonne);
             genAmountType genAmount;
-            genAmount.wAmount = table->item(ligne, colonne)->data(Qt::UserRole).toInt();
+            genAmount.wAmount = _table->item(ligne, colonne)->data(Qt::UserRole).toInt();
 
             // Modification champ
             if (genAmount.wAmount != _sf2->get(id, champ).wValue || !_sf2->isSet(id, champ))
@@ -879,7 +879,7 @@ void PageTable::set(int ligne, int colonne, bool allowPropagation)
     }
     else
     {
-        if (table->item(ligne, colonne)->text().isEmpty())
+        if (_table->item(ligne, colonne)->text().isEmpty())
         {
             // Effacement d'un paramètre ?
             switch ((int)champ)
@@ -918,10 +918,10 @@ void PageTable::set(int ligne, int colonne, bool allowPropagation)
                 setOffset(ligne, colonne, champ_endloopAddrsOffset, champ_endloopAddrsCoarseOffset);
                 break;
             default:{
-                QString texte = this->table->item(ligne, colonne)->text().left(9);
+                QString texte = this->_table->item(ligne, colonne)->text().left(9);
                 bool ok;
                 char T[20];
-                EltID id = this->table->getID(colonne);
+                EltID id = this->_table->getID(colonne);
                 genAmountType genAmount = getValue(texte, champ, ok);
                 if (ok)
                 {
@@ -934,14 +934,14 @@ void PageTable::set(int ligne, int colonne, bool allowPropagation)
                         _sf2->set(id, champ, value);
                     }
                     // Mise à jour de la valeur dans la cellule
-                    table->item(ligne, colonne)->setText(getTextValue(T, champ, genAmount));
+                    _table->item(ligne, colonne)->setText(getTextValue(T, champ, genAmount));
                 }
                 else
                 {
                     // Restauration valeur précédente
                     if (_sf2->isSet(id, champ))
-                        this->table->item(ligne, colonne)->setText(getTextValue(T, champ, _sf2->get(id, champ).genValue));
-                    else this->table->item(ligne, colonne)->setText("");
+                        this->_table->item(ligne, colonne)->setText(getTextValue(T, champ, _sf2->get(id, champ).genValue));
+                    else this->_table->item(ligne, colonne)->setText("");
                 }
             }
             }
@@ -950,7 +950,7 @@ void PageTable::set(int ligne, int colonne, bool allowPropagation)
     }
 
     // Mise à jour partie mod (car entre 2 des mods peuvent être définitivement détruits, et les index peuvent être mis à jour)
-    id = this->table->getID(colonne);
+    id = this->_table->getID(colonne);
     this->afficheMod(id);
 
     if (champ == champ_overridingRootKey || champ == champ_keyRange)
@@ -1420,15 +1420,15 @@ void PageTable::setSource2(int index)
 
 void PageTable::reselect()
 {
-    this->table->clearSelection();
-    this->table->setSelectionMode(QAbstractItemView::MultiSelection);
+    this->_table->clearSelection();
+    this->_table->setSelectionMode(QAbstractItemView::MultiSelection);
     QList<EltID> listID = _currentIds;
-    this->table->setRowHidden(0, false); // Selection will be on a visible row
+    this->_table->setRowHidden(0, false); // Selection will be on a visible row
     foreach (EltID id, listID)
         this->select(id);
-    this->table->setSelectionMode(QAbstractItemView::ExtendedSelection);
+    this->_table->setSelectionMode(QAbstractItemView::ExtendedSelection);
     customizeKeyboard();
-    this->table->setRowHidden(0, true); // It's now hidden again
+    this->_table->setRowHidden(0, true); // It's now hidden again
 }
 
 void PageTable::select(EltID id)
@@ -1436,20 +1436,20 @@ void PageTable::select(EltID id)
     _preparingPage = true;
     EltID id2;
     int max;
-    for (int i = 0; i < this->table->columnCount(); i++)
+    for (int i = 0; i < this->_table->columnCount(); i++)
     {
-        id2 = this->table->getID(i);
+        id2 = this->_table->getID(i);
         if (id.typeElement == id2.typeElement && id.indexSf2 == id2.indexSf2 && id.indexElt == id2.indexElt &&
                 (id.indexElt2 == id2.indexElt2 || id.typeElement == elementInst || id.typeElement == elementPrst))
         {
-            table->blockSignals(true);
-            this->table->item(0, i)->setSelected(true);
-            table->blockSignals(false);
-            max = this->table->horizontalScrollBar()->maximum();
-            if (max / this->table->columnCount() > 62)
-                this->table->horizontalScrollBar()->setValue((max*(i-1)) / this->table->columnCount());
+            _table->blockSignals(true);
+            this->_table->item(0, i)->setSelected(true);
+            _table->blockSignals(false);
+            max = this->_table->horizontalScrollBar()->maximum();
+            if (max / this->_table->columnCount() > 62)
+                this->_table->horizontalScrollBar()->setValue((max*(i-1)) / this->_table->columnCount());
             else
-                this->table->scrollToItem(this->table->item(7, i), QAbstractItemView::PositionAtCenter);
+                this->_table->scrollToItem(this->_table->item(7, i), QAbstractItemView::PositionAtCenter);
         }
     }
     _preparingPage = false;
@@ -1497,7 +1497,7 @@ void PageTable::customizeKeyboard()
 //    else
     {
         QList<int> selectedColumns;
-        QList<QTableWidgetItem*> listSelectedItems = table->selectedItems();
+        QList<QTableWidgetItem*> listSelectedItems = _table->selectedItems();
         foreach (QTableWidgetItem * item, listSelectedItems)
             if (!selectedColumns.contains(item->column()))
                 selectedColumns << item->column();
@@ -1507,7 +1507,7 @@ void PageTable::customizeKeyboard()
             selectedColumns << 0;
 
         foreach (int selectedColumn, selectedColumns)
-            ids << this->table->getID(selectedColumn);
+            ids << this->_table->getID(selectedColumn);
     }
 
     // If the global division is in the list, exclude the rest
@@ -3071,38 +3071,40 @@ int PageTable::getDestIndex(int i)
 
 void PageTable::keyPlayed(int key, int velocity)
 {
-    bool isEnlighted = (velocity > 0);
-
-    // Mise à jour éléments enclenchés
-    if (isEnlighted && _listKeyEnlighted.indexOf(key) == -1)
-        _listKeyEnlighted.append(key);
-    else
-        _listKeyEnlighted.removeAll(key);
-
-    // Mise à jour de la table
-    for (int i = 1; i < this->table->columnCount(); i++)
+    // Visiualization on the table
+    if (_table->isVisible())
     {
-        EltID id = this->table->getID(i);
-        if (_sf2->isValid(id))
+        // Update triggered elements
+        if (velocity > 0 && _listKeyEnlighted.indexOf(key) == -1)
+            _listKeyEnlighted.append(key);
+        else
+            _listKeyEnlighted.removeAll(key);
+
+        // Color table
+        for (int i = 1; i < _table->columnCount(); i++)
         {
-            bool enlighted = false;
-            int key1 = _sf2->get(id, champ_keyRange).rValue.byLo;
-            int key2 = _sf2->get(id, champ_keyRange).rValue.byHi;
-            if (!_sf2->isSet(id, champ_keyRange))
+            EltID id = _table->getID(i);
+            if (_sf2->isValid(id))
             {
-                key1 = 0;
-                key2 = 128;
+                bool enlighted = false;
+                int key1 = _sf2->get(id, champ_keyRange).rValue.byLo;
+                int key2 = _sf2->get(id, champ_keyRange).rValue.byHi;
+                if (!_sf2->isSet(id, champ_keyRange))
+                {
+                    key1 = 0;
+                    key2 = 128;
+                }
+                for (int j = 0; j < _listKeyEnlighted.size(); j++)
+                    enlighted = enlighted || (qMin(key1, key2) <= _listKeyEnlighted.at(j)
+                                              && qMax(key1, key2) >= _listKeyEnlighted.at(j));
+                _table->setEnlighted(i, enlighted);
             }
-            for (int j = 0; j < _listKeyEnlighted.size(); j++)
-                enlighted = enlighted || (qMin(key1, key2) <= _listKeyEnlighted.at(j)
-                                          && qMax(key1, key2) >= _listKeyEnlighted.at(j));
-            this->table->setEnlighted(i, enlighted);
         }
     }
 
     // Visualization on the range editor
-//    if (_pushRanges->isChecked())
-//        _rangeEditor->playKey(key, velocity);
+    if (_rangeEditor->isVisible())
+        _rangeEditor->playKey(key, velocity);
 }
 
 void PageTable::onOpenElement(EltID id)
@@ -3124,12 +3126,12 @@ void PageTable::onOpenElement(EltID id)
 
 void PageTable::displayModInTable()
 {
-    this->table->resetModDisplay();
+    this->_table->resetModDisplay();
 
     // Mod for the global division
-    for (int i = 0; i < this->table->columnCount(); i++)
+    for (int i = 0; i < this->_table->columnCount(); i++)
     {
-        EltID id = this->table->getID(i);
+        EltID id = this->_table->getID(i);
         if (_sf2->isValid(id))
         {
             if (id.typeElement == this->contenant)
@@ -3153,9 +3155,9 @@ void PageTable::displayModInTable()
                         champ = champ_startloopAddrsOffset;
                     else if (champ == champ_endloopAddrsCoarseOffset)
                         champ = champ_endloopAddrsOffset;
-                    rows << this->table->getRow(champ);
+                    rows << this->_table->getRow(champ);
                 }
-                this->table->updateModDisplay(i, rows);
+                this->_table->updateModDisplay(i, rows);
             }
         }
     }

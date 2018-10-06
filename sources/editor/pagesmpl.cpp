@@ -1076,8 +1076,6 @@ void PageSmpl::lecteurFinished()
     this->lectureEnCours = false;
 }
 
-bool PageSmpl::isPlaying() { return this->lectureEnCours; }
-
 void PageSmpl::pushPlayPause()
 {
     ui->pushLecture->toggle();

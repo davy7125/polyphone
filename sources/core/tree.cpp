@@ -472,8 +472,7 @@ void Tree::clicTree()
 
         // Supprimer, copier, coller
         if (typeUnique && (((type == elementInstSmpl || type == elementPrstInst) && familleUnique)
-                           || type == elementSmpl || type == elementInst || type == elementPrst)
-                && !this->_mainWindow->isPlaying())
+                           || type == elementSmpl || type == elementInst || type == elementPrst))
         {
             _treeMenu->supprimer->setEnabled(true);
             _treeMenu->copier->setEnabled(true);
