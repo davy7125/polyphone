@@ -251,7 +251,6 @@ SOURCES	+= main.cpp \
     clavier/pianoscene.cpp \
     clavier/pianokey.cpp \
     clavier/pianokeybd.cpp \
-    clavier/keylabel.cpp \
     clavier/pianokeybdcustom.cpp \
     clavier/keyboardmap.cpp \
     sound_engine/synth.cpp \
@@ -432,7 +431,6 @@ HEADERS  += \
     clavier/pianoscene.h \
     clavier/pianokey.h \
     clavier/keyboardmap.h \
-    clavier/keylabel.h \
     clavier/pianokeybd.h \
     clavier/pianokeybdcustom.h \
     clavier/keyboardmap.h \
@@ -543,7 +541,9 @@ HEADERS  += \
     context/interface/configpanel.h \
     sound_engine/midilistener.h \
     dialogs/dialogkeyboard.h \
-    dialogs/dialogrecorder.h
+    dialogs/dialogrecorder.h \
+    context/controllerevent.h \
+    context/noteevent.h
 
 FORMS    += \
     dialogs/dialog_list.ui \
@@ -589,8 +589,7 @@ FORMS    += \
     dialogs/dialogkeyboard.ui \
     dialogs/dialogrecorder.ui
 
-RESOURCES += resources.qrc \
-    clavier/pianokeybd.qrc
+RESOURCES += resources.qrc
 
 
 # SfArk extraction (what a mess!)

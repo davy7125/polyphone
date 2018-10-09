@@ -28,35 +28,6 @@
 #include "pianokeybd.h"
 #include <QKeyEvent>
 
-// Events
-class NoteEvent : public QEvent
-{
-public:
-    NoteEvent(unsigned char note, unsigned char val) : QEvent(QEvent::User),
-          m_note(note),
-          m_velocity(val) {}
-    unsigned char getNote() const {return m_note;}
-    unsigned char getVelocity() const {return m_velocity;}
-
-protected:
-    unsigned char m_note;
-    unsigned char m_velocity;
-};
-
-class ControllerEvent : public QEvent
-{
-public:
-    ControllerEvent(unsigned char numController, unsigned char value) : QEvent((QEvent::Type)(QEvent::User+1)),
-          m_numController(numController),
-          m_value(value) {}
-    unsigned char getNumController() const {return m_numController;}
-    unsigned char getValue() const {return m_value;}
-
-protected:
-    unsigned char m_numController;
-    unsigned char m_value;
-};
-
 
 class PianoKeybdCustom : public PianoKeybd
 {
@@ -64,42 +35,30 @@ class PianoKeybdCustom : public PianoKeybd
 
 public:
     PianoKeybdCustom(QWidget * parent);
-    void changeKey(int key, int vel);
-    void changeController(int numController, int value);
-    void setRangeAndRootKey(int rootKey, int noteMin, int noteMax);
+
+    // Add a range and a root key if rootKey != -1
+    void addRangeAndRootKey(int rootKey, int noteMin, int noteMax);
+
+    // Remove all customization
     void clearCustomization();
-    void setCurrentRange(int note, int noteMin, int noteMax);
 
-signals:
-    void sustainChanged(bool isOn);
-    void volumeChanged(int value);
+    // Add a current range arround a key
+    void addCurrentRange(int note, int noteMin, int noteMax);
 
-protected:
-    void customEvent(QEvent * event)
-    {
-        if (event->type() == QEvent::User)
-        {
-            NoteEvent *noteEvent = dynamic_cast<NoteEvent *>(event);
-            this->changeKey(noteEvent->getNote(), noteEvent->getVelocity());
-            event->accept();
-        }
-        else if (event->type() == QEvent::User + 1)
-        {
-            ControllerEvent *controllerEvent = dynamic_cast<ControllerEvent *>(event);
-            this->changeController(controllerEvent->getNumController(), controllerEvent->getValue());
-            event->accept();
-        }
-    }
-    void keyPressEvent(QKeyEvent *event);
+public slots:
+    // Remove a current range arround a key
+    void removeCurrentRange(int num);
 
 private slots:
     void setKey(int num, int vel);
-    void setKeyOff(int num);
 
 private:
+    void updateRanges();
+
     QList<int> _currentRange;
     QList<int> _rootKeys;
     QMap<int, QList<int> > _mapPressed;
+
     static QColor COLOR_PRESSED;
     static QColor COLOR_BLACK_ENABLED;
     static QColor COLOR_WHITE_ENABLED;
@@ -107,9 +66,6 @@ private:
     static QColor COLOR_WHITE_DISABLED;
     static QColor COLOR_BLACK_RANGE;
     static QColor COLOR_WHITE_RANGE;
-
-    void updateRanges();
 };
-
 
 #endif // PIANOKEYBDCUSTOM_H

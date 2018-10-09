@@ -29,7 +29,6 @@ int PianoScene::MIN_NOTE = 0;
 int PianoScene::MAX_NOTE = 127;
 int PianoScene::KEYWIDTH = 18;
 int PianoScene::KEYHEIGHT = 72;
-KeyboardMap * PianoScene::m_keybdMap = NULL;
 
 qreal PianoScene::sceneWidth(int startKey, int keys)
 {
@@ -80,13 +79,11 @@ PianoScene::PianoScene (const int startKey, const int numKeys, PianoScene *previ
 
     // Initialisation
     initConfiguration(previousScene);
-    initLabels();
 
     // Keyboard creation
     createKeyboard();
 
     refreshKeys();
-    refreshLabels();
 }
 
 void PianoScene::initConfiguration(PianoScene * previousScene)
@@ -94,14 +91,11 @@ void PianoScene::initConfiguration(PianoScene * previousScene)
     if (previousScene)
     {
         // recovering configuration
-        m_mouseEnabled = previousScene->m_mouseEnabled;
-        m_touchEnabled = previousScene->m_touchEnabled;
-        m_keyboardEnabled = previousScene->m_keyboardEnabled;
         m_mousePressed = previousScene->m_mousePressed;
         m_channel = previousScene->m_channel;
         m_velocity = previousScene->m_velocity;
-        m_lastVelocity= previousScene->m_lastVelocity;
-        m_lastNote= previousScene->m_lastNote;
+        m_lastVelocity = previousScene->m_lastVelocity;
+        m_lastNote = previousScene->m_lastNote;
         m_autoVelocity = previousScene->m_autoVelocity;
         m_colorationType = previousScene->m_colorationType;
         m_transpose = previousScene->m_transpose;
@@ -109,9 +103,6 @@ void PianoScene::initConfiguration(PianoScene * previousScene)
             m_palette[i] = previousScene->m_palette.value(i);
         m_customColors = previousScene->m_customColors;
         m_markers = previousScene->m_markers;
-        m_labelType = previousScene->m_labelType;
-        m_middleC = previousScene->m_middleC;
-        m_indicesInLabels = previousScene->m_indicesInLabels;
         
         m_lastNoteUp = previousScene->m_lastNoteUp;
         m_lastNoteDown = previousScene->m_lastNoteDown;
@@ -122,9 +113,6 @@ void PianoScene::initConfiguration(PianoScene * previousScene)
     else
     {
         // default configuration
-        m_mouseEnabled = true;
-        m_touchEnabled = true;
-        m_keyboardEnabled = true;
         m_mousePressed = false;
         m_channel = 0;
         m_velocity = 127;
@@ -133,9 +121,6 @@ void PianoScene::initConfiguration(PianoScene * previousScene)
         m_autoVelocity = true;
         m_colorationType = PianoKeybd::COLORATION_TYPE_UNIQUE;
         m_transpose = 0;
-        m_labelType = PianoKeybd::LABEL_TYPE_NONE;
-        m_middleC = PianoKeybd::MIDDLE_KEY_C4;
-        m_indicesInLabels = true;
 
         // color initialisation
         m_palette[-4] = QColor(255, 255, 255);
@@ -167,42 +152,8 @@ void PianoScene::initConfiguration(PianoScene * previousScene)
     }
 }
 
-void PianoScene::initLabels()
-{
-    m_names_s.clear();
-    m_names_f.clear();
-    m_names_s << QString::fromUtf8("C")
-              << QString::fromUtf8("C♯")
-              << QString::fromUtf8("D")
-              << QString::fromUtf8("D♯")
-              << QString::fromUtf8("E")
-              << QString::fromUtf8("F")
-              << QString::fromUtf8("F♯")
-              << QString::fromUtf8("G")
-              << QString::fromUtf8("G♯")
-              << QString::fromUtf8("A")
-              << QString::fromUtf8("A♯")
-              << QString::fromUtf8("B");
-    m_names_f << QString::fromUtf8("C")
-              << QString::fromUtf8("D♭")
-              << QString::fromUtf8("D")
-              << QString::fromUtf8("E♭")
-              << QString::fromUtf8("E")
-              << QString::fromUtf8("F")
-              << QString::fromUtf8("G♭")
-              << QString::fromUtf8("G")
-              << QString::fromUtf8("A♭")
-              << QString::fromUtf8("A")
-              << QString::fromUtf8("B♭")
-              << QString::fromUtf8("B");
-    while (m_names_custom.size() != 12)
-        m_names_custom << "";
-}
-
 void PianoScene::createKeyboard()
 {
-    QFont lblFont("Tahoma", 8);
-
     int skippedWhiteKeys = m_startKey % 12;
     if (skippedWhiteKeys >= 5)
         skippedWhiteKeys = (skippedWhiteKeys + 1) / 2;
@@ -239,23 +190,10 @@ void PianoScene::createKeyboard()
         if (offsetX != 0)
             x += ((1. - coefWidth) / 2 + offsetX) * KEYWIDTH;
         PianoKey* key = new PianoKey(QRectF(x, 0, KEYWIDTH * coefWidth, KEYHEIGHT * coefHeight), offsetX != 0, i);
-        KeyLabel* lbl = new KeyLabel(key);
-        if (offsetX == 0)
-        {
-            lbl->setDefaultTextColor(m_palette.value(-4));
-            lbl->setPos(x - 2, KEYHEIGHT);
-        }
-        else
-        {
-            lbl->setDefaultTextColor(m_palette.value(-5));
-            lbl->setPos(x - 3, KEYHEIGHT * coefHeight - 3);
-        }
 
         key->setAcceptTouchEvents(true);
         m_keys.insert(i, key);
         addItem(key);
-        lbl->setFont(lblFont);
-        m_labels.insert(i, lbl);
     }
 }
 
@@ -299,9 +237,12 @@ void PianoScene::showKeyOn(PianoKey* key, int vel, int channel)
             default:
                 break;
             }
-            key->setPressedBrush(color.lighter(100 + 0.5 * (127 - vel)));
+
+            QColor base = key->isBlack() ? m_palette.value(-1) : m_palette.value(-2);
+            key->setPressedBrush(ContextManager::theme()->mix(base, color, (double)vel / 127.));
         }
     }
+
     key->setPressed(true);
     m_lastVelocity = vel;
     m_lastNote = key->getNote();
@@ -341,19 +282,13 @@ void PianoScene::triggerNoteOn(const int note, const int vel)
 void PianoScene::triggerNoteOff( const int note )
 {
     int n = note + m_transpose;
-    if ((n >= m_minNote) && (n <= m_maxNote))
+    if (n >= m_minNote && n <= m_maxNote)
         emit noteOff(n);
 }
 
 int PianoScene::getKeyVelocity()
 {
-    int vel;
-    if(m_autoVelocity){
-        vel = m_lastVelocity;
-    }else{
-        vel = m_velocity;
-    }
-    return vel;
+    return m_autoVelocity ? m_lastVelocity : m_velocity;
 }
 
 void PianoScene::keyOn(PianoKey* key, qreal pressure)
@@ -375,8 +310,6 @@ void PianoScene::keyNoteOn(const int note , const int velo)
         keyOn(m_keys.value(note), velo);
     else
         triggerNoteOn(note, velo);
-    // If the key is not displayed the velocity is replaced?!
-    //triggerNoteOn(note, getKeyVelocity());
 }
 
 void PianoScene::keyNoteOff(const int note)
@@ -411,209 +344,191 @@ int PianoScene::getPressureFromPos(const QPointF& p, bool isBlack) const
 
 void PianoScene::mouseMoveEvent(QGraphicsSceneMouseEvent * mouseEvent)
 {
-    if (m_mouseEnabled)
+    if (m_mousePressed)
     {
-        if (m_mousePressed)
-        {
-            PianoKey* key = getKeyForPos(mouseEvent->scenePos());
-            PianoKey* lastkey = getKeyForPos(mouseEvent->lastScenePos());
-            if ((lastkey != NULL) && (lastkey != key) && lastkey->isPressed())
-                keyOff(lastkey);
+        PianoKey* key = getKeyForPos(mouseEvent->scenePos());
+        PianoKey* lastkey = getKeyForPos(mouseEvent->lastScenePos());
+        if (lastkey != NULL && lastkey != key && lastkey->isPressed())
+            keyOff(lastkey);
 
-            if ((key != NULL) && !key->isPressed())
-                keyOn(key, getPressureFromPos(mouseEvent->scenePos(), key->isBlack()));
+        if (key != NULL && !key->isPressed())
+            keyOn(key, getPressureFromPos(mouseEvent->scenePos(), key->isBlack()));
 
-            mouseEvent->accept();
-            return;
-        }
+        mouseEvent->accept();
+    }
+    else
+    {
+        PianoKey* key = getKeyForPos(mouseEvent->scenePos());
+        if (key)
+            mouseOver(key->getNote() + m_transpose,
+                      getPressureFromPos(mouseEvent->scenePos(), key->isBlack()));
         else
-        {
-            PianoKey* key = getKeyForPos(mouseEvent->scenePos());
-            if (key)
-                mouseOver(key->getNote() + m_transpose,
-                          getPressureFromPos(mouseEvent->scenePos(), key->isBlack()));
-            else
-                mouseOver(-1, -1);
-        }
+            mouseOver(-1, -1);
     }
 }
 
 void PianoScene::mousePressEvent(QGraphicsSceneMouseEvent * mouseEvent)
 {
-    if (m_mouseEnabled)
+    PianoKey* key = getKeyForPos(mouseEvent->scenePos());
+    if (key != NULL && !key->isPressed())
     {
-        PianoKey* key = getKeyForPos(mouseEvent->scenePos());
-        if (key != NULL && !key->isPressed())
-        {
-            keyOn(key, getPressureFromPos(mouseEvent->scenePos(), key->isBlack()));
-            m_mousePressed = true;
-            mouseEvent->accept();
-            return;
-        }
+        keyOn(key, getPressureFromPos(mouseEvent->scenePos(), key->isBlack()));
+        m_mousePressed = true;
+        mouseEvent->accept();
     }
 }
 
 void PianoScene::mouseReleaseEvent(QGraphicsSceneMouseEvent * mouseEvent)
 {
-    if (m_mouseEnabled)
+    m_mousePressed = false;
+    PianoKey* key = getKeyForPos(mouseEvent->scenePos());
+    if (key != NULL && key->isPressed())
     {
-        m_mousePressed = false;
-        PianoKey* key = getKeyForPos(mouseEvent->scenePos());
-        if (key != NULL && key->isPressed())
-        {
-            keyOff(key);
-            mouseEvent->accept();
-            return;
-        }
+        keyOff(key);
+        mouseEvent->accept();
     }
 }
 
 void PianoScene::keyPressEvent(QKeyEvent * keyEvent)
 {
-    if (m_keyboardEnabled)
+    if (!keyEvent->isAutoRepeat()) // ignore auto-repeats
     {
-        if (!keyEvent->isAutoRepeat()) // ignore auto-repeats
+        if (keyEvent->modifiers() & Qt::ControlModifier)
         {
-            if (keyEvent->key() == Qt::Key_Up && m_currentArrow == 0)
+            int key = keyEvent->key();
+            if (key >= Qt::Key_1 && key <= Qt::Key_8)
             {
-                int modif = keyEvent->modifiers() & Qt::ShiftModifier ? 10 : 1;
-                m_lastNoteUp = m_lastNote;
-                keyNoteOn(m_lastNoteUp, qMin(127, m_lastVelocity + modif));
-                m_currentArrow = 1;
-            }
-            else if (keyEvent->key() == Qt::Key_Down && m_currentArrow == 0)
-            {
-                int modif = keyEvent->modifiers() & Qt::ShiftModifier ? 10 : 1;
-                m_lastNoteDown = m_lastNote;
-                keyNoteOn(m_lastNoteDown, qMax(1, m_lastVelocity - modif));
-                m_currentArrow = 2;
-            }
-            else if (keyEvent->key() == Qt::Key_Right && m_currentArrow == 0)
-            {
-                int modif = keyEvent->modifiers() & Qt::ShiftModifier ? 6 : 1;
-                m_lastNoteRight = qMin(127, m_lastNote + modif);
-                keyNoteOn(m_lastNoteRight, m_lastVelocity);
-                m_currentArrow = 3;
-            }
-            else if (keyEvent->key() == Qt::Key_Left && m_currentArrow == 0)
-            {
-                int modif = keyEvent->modifiers() & Qt::ShiftModifier ? 6 : 1;
-                m_lastNoteLeft = qMax(0, m_lastNote - modif);
-                keyNoteOn(m_lastNoteLeft, m_lastVelocity);
-                m_currentArrow = 4;
-            }
-            else
-            {
-                QString modifier;
-                if (keyEvent->modifiers() & Qt::ShiftModifier)
-                    modifier = "Shift+";
-                QString key = QKeySequence(keyEvent->key()).toString();
-                QKeySequence(modifier + key);
-                int note = m_keybdMap->getKey(QKeySequence(modifier + key));
-                if (note > -1)
-                    keyNoteOn(note, getKeyVelocity());
+                int octave = key - Qt::Key_1;
+                ContextManager::configuration()->setValue(ConfManager::SECTION_MAP, "octave_offset", octave);
             }
         }
-        keyEvent->accept();
-        return;
+        else if (keyEvent->key() == Qt::Key_Up && m_currentArrow == 0)
+        {
+            int modif = keyEvent->modifiers() & Qt::ShiftModifier ? 10 : 1;
+            m_lastNoteUp = m_lastNote;
+            keyNoteOn(m_lastNoteUp, qMin(127, m_lastVelocity + modif));
+            m_currentArrow = 1;
+        }
+        else if (keyEvent->key() == Qt::Key_Down && m_currentArrow == 0)
+        {
+            int modif = keyEvent->modifiers() & Qt::ShiftModifier ? 10 : 1;
+            m_lastNoteDown = m_lastNote;
+            keyNoteOn(m_lastNoteDown, qMax(1, m_lastVelocity - modif));
+            m_currentArrow = 2;
+        }
+        else if (keyEvent->key() == Qt::Key_Right && m_currentArrow == 0)
+        {
+            int modif = keyEvent->modifiers() & Qt::ShiftModifier ? 6 : 1;
+            m_lastNoteRight = qMin(127, m_lastNote + modif);
+            keyNoteOn(m_lastNoteRight, m_lastVelocity);
+            m_currentArrow = 3;
+        }
+        else if (keyEvent->key() == Qt::Key_Left && m_currentArrow == 0)
+        {
+            int modif = keyEvent->modifiers() & Qt::ShiftModifier ? 6 : 1;
+            m_lastNoteLeft = qMax(0, m_lastNote - modif);
+            keyNoteOn(m_lastNoteLeft, m_lastVelocity);
+            m_currentArrow = 4;
+        }
+        else
+        {
+            QString modifier;
+            if (keyEvent->modifiers() & Qt::ShiftModifier)
+                modifier = "Shift+";
+            QString key = QKeySequence(keyEvent->key()).toString();
+            int note = _keybdMap.getKey(QKeySequence(modifier + key));
+            if (note > -1)
+                keyNoteOn(note, getKeyVelocity());
+        }
     }
-    keyEvent->ignore();
+    keyEvent->accept();
 }
 
 void PianoScene::keyReleaseEvent(QKeyEvent * keyEvent)
 {
-    if (m_keyboardEnabled)
+    if (!keyEvent->isAutoRepeat()) // ignore auto-repeats
     {
-        if (!keyEvent->isAutoRepeat()) // ignore auto-repeats
+        if (keyEvent->key() == Qt::Key_Up && m_currentArrow == 1)
         {
-            if (keyEvent->key() == Qt::Key_Up && m_currentArrow == 1)
-            {
-                keyNoteOff(m_lastNoteUp);
-                m_currentArrow = 0;
-            }
-            else if (keyEvent->key() == Qt::Key_Down && m_currentArrow == 2)
-            {
-                keyNoteOff(m_lastNoteDown);
-                m_currentArrow = 0;
-            }
-            else if (keyEvent->key() == Qt::Key_Right && m_currentArrow == 3)
-            {
-                keyNoteOff(m_lastNoteRight);
-                m_currentArrow = 0;
-            }
-            else if(keyEvent->key() == Qt::Key_Left && m_currentArrow == 4)
-            {
-                keyNoteOff(m_lastNoteLeft);
-                m_currentArrow = 0;
-            }
-            else
-            {
-                QString modifier;
-                if (keyEvent->modifiers() & Qt::ShiftModifier)
-                    modifier = "Shift+";
-                QString key = QKeySequence(keyEvent->key()).toString();
-                QKeySequence(modifier + key);
-                int note = m_keybdMap->getKey(QKeySequence(modifier + key));
-                if (note > -1)
-                    keyNoteOff(note);
-            }
+            keyNoteOff(m_lastNoteUp);
+            m_currentArrow = 0;
         }
-        keyEvent->accept();
-        return;
+        else if (keyEvent->key() == Qt::Key_Down && m_currentArrow == 2)
+        {
+            keyNoteOff(m_lastNoteDown);
+            m_currentArrow = 0;
+        }
+        else if (keyEvent->key() == Qt::Key_Right && m_currentArrow == 3)
+        {
+            keyNoteOff(m_lastNoteRight);
+            m_currentArrow = 0;
+        }
+        else if(keyEvent->key() == Qt::Key_Left && m_currentArrow == 4)
+        {
+            keyNoteOff(m_lastNoteLeft);
+            m_currentArrow = 0;
+        }
+        else
+        {
+            QString modifier;
+            if (keyEvent->modifiers() & Qt::ShiftModifier)
+                modifier = "Shift+";
+            QString key = QKeySequence(keyEvent->key()).toString();
+            QKeySequence(modifier + key);
+            int note = _keybdMap.getKey(QKeySequence(modifier + key));
+            if (note > -1)
+                keyNoteOff(note);
+        }
     }
-    keyEvent->ignore();
+    keyEvent->accept();
 }
 
 bool PianoScene::event(QEvent *event)
 {
-    switch(event->type())
+    switch (event->type())
     {
     case QEvent::TouchBegin:
     case QEvent::TouchEnd:
     case QEvent::TouchUpdate:
     {
-        if (m_touchEnabled)
+        QTouchEvent *touchEvent = static_cast<QTouchEvent*>(event);
+        QList<QTouchEvent::TouchPoint> touchPoints = touchEvent->touchPoints();
+        foreach(const QTouchEvent::TouchPoint& touchPoint, touchPoints)
         {
-            QTouchEvent *touchEvent = static_cast<QTouchEvent*>(event);
-            QList<QTouchEvent::TouchPoint> touchPoints = touchEvent->touchPoints();
-            foreach(const QTouchEvent::TouchPoint& touchPoint, touchPoints)
+            switch (touchPoint.state())
             {
-                switch (touchPoint.state())
-                {
-                //case Qt::TouchPointPrimary:
-                case Qt::TouchPointStationary:
-                    continue;
-                case Qt::TouchPointReleased: {
-                    PianoKey* key = getKeyForPos(touchPoint.scenePos());
-                    if (key != NULL && key->isPressed())
-                        keyOff(key);
-                    break;
-                }
-                case Qt::TouchPointPressed: {
-                    PianoKey* key = getKeyForPos(touchPoint.scenePos());
-                    if (key != NULL && !key->isPressed()) {
-                        keyOn(key, touchPoint.pressure());
-                        key->ensureVisible();
-                    }
-                    break;
-                }
-                case Qt::TouchPointMoved: {
-                    PianoKey* key = getKeyForPos(touchPoint.scenePos());
-                    PianoKey* lastkey = getKeyForPos(touchPoint.lastScenePos());
-                    if ((lastkey != NULL) && (lastkey != key) && lastkey->isPressed())
-                        keyOff(lastkey);
-                    if ((key != NULL) && !key->isPressed())
-                        keyOn(key, touchPoint.pressure());
-                    break;
-                }
-                default:
-                    break;
-                }
+            //case Qt::TouchPointPrimary:
+            case Qt::TouchPointStationary:
+                continue;
+            case Qt::TouchPointReleased: {
+                PianoKey* key = getKeyForPos(touchPoint.scenePos());
+                if (key != NULL && key->isPressed())
+                    keyOff(key);
+                break;
             }
-            event->accept();
-            return true;
+            case Qt::TouchPointPressed: {
+                PianoKey* key = getKeyForPos(touchPoint.scenePos());
+                if (key != NULL && !key->isPressed()) {
+                    keyOn(key, touchPoint.pressure());
+                    key->ensureVisible();
+                }
+                break;
+            }
+            case Qt::TouchPointMoved: {
+                PianoKey* key = getKeyForPos(touchPoint.scenePos());
+                PianoKey* lastkey = getKeyForPos(touchPoint.lastScenePos());
+                if ((lastkey != NULL) && (lastkey != key) && lastkey->isPressed())
+                    keyOff(lastkey);
+                if ((key != NULL) && !key->isPressed())
+                    keyOn(key, touchPoint.pressure());
+                break;
+            }
+            default:
+                break;
+            }
         }
-        break;
+        event->accept();
+        return true;
     }
     case QEvent::Leave:
         mouseOver(-1, -1);
@@ -633,74 +548,6 @@ void PianoScene::allKeysOff()
     }
 }
 
-QString PianoScene::noteName(int note)
-{
-    QString str;
-
-    note += m_transpose;
-    if (note < m_minNote || note > m_maxNote)
-        return "";
-
-    int degree = note % 12;
-    int oct;
-    if (m_labelType == PianoKeybd::LABEL_TYPE_KEY_NAME_WITH_FLATS)
-        oct = (note + 4) / 12;
-    else
-        oct = (note + 3) / 12;
-    if (m_middleC == PianoKeybd::MIDDLE_KEY_C3)
-        oct--;
-    else if (m_middleC == PianoKeybd::MIDDLE_KEY_C5)
-        oct++;
-
-    switch (m_labelType)
-    {
-    case PianoKeybd::LABEL_TYPE_NONE:
-        str = "";
-        break;
-    case PianoKeybd::LABEL_TYPE_KEY_NAME_WITH_SHARPS:
-        str = m_names_s.at(degree);
-        break;
-    case PianoKeybd::LABEL_TYPE_KEY_NAME_WITH_FLATS:
-        str = m_names_f.at(degree);
-        break;
-    case PianoKeybd::LABEL_TYPE_NUMBER:
-        str = QString::number(note);
-        break;
-    case PianoKeybd::LABEL_TYPE_OCTAVES:
-        if (degree == 0)
-            str = m_names_s.first();
-        break;
-    case PianoKeybd::LABEL_TYPE_MAPPING:{
-        QList<QKeySequence> listSequences = m_keybdMap->getSequences(note);
-        if (!listSequences.isEmpty())
-        {
-            str = formatSequence(listSequences.first());
-            if (listSequences.size() > 1)
-                str += " / " + formatSequence(listSequences.at(1));
-        }
-    }break;
-    case PianoKeybd::LABEL_TYPE_CUSTOM:
-    case PianoKeybd::LABEL_TYPE_CUSTOM_WITH_OCTAVE_NUMBER:
-        str = m_names_custom.at(degree);
-        break;
-    }
-
-    // Octave number
-    if (m_labelType != PianoKeybd::LABEL_TYPE_NONE &&
-            m_labelType != PianoKeybd::LABEL_TYPE_NUMBER &&
-            m_labelType != PianoKeybd::LABEL_TYPE_MAPPING &&
-            m_labelType != PianoKeybd::LABEL_TYPE_CUSTOM &&
-            (m_labelType != PianoKeybd::LABEL_TYPE_OCTAVES || degree == 0))
-    {
-        if (m_indicesInLabels)
-            str += "<span style='vertical-align:sub;'>" + QString::number(oct) + "</span>";
-        else
-            str += QString::number(oct);
-    }
-
-    return str;
-}
-
 QString PianoScene::formatSequence(QKeySequence sequence)
 {
     int key = sequence[0];
@@ -712,23 +559,6 @@ QString PianoScene::formatSequence(QKeySequence sequence)
         str.append("</u>");
     }
     return str;
-}
-
-void PianoScene::refreshLabels()
-{
-    foreach(KeyLabel* lbl, m_labels)
-    {
-        PianoKey* key = dynamic_cast<PianoKey*>(lbl->parentItem());
-        if (key != NULL)
-        {
-            if (key->isBlack())
-                lbl->setDefaultTextColor(m_palette.value(-4));
-            else
-                lbl->setDefaultTextColor(m_palette.value(-3));
-            lbl->setHtml(noteName(key->getNote()));
-            lbl->setVisible(m_labelType != PianoKeybd::LABEL_TYPE_NONE);
-        }
-    }
 }
 
 void PianoScene::refreshKeys()
@@ -752,68 +582,12 @@ void PianoScene::refreshKeys()
     invalidate();
 }
 
-void PianoScene::setLabelType(PianoKeybd::LabelType type)
-{
-    if (m_labelType != type)
-    {
-        m_labelType = type;
-        refreshLabels();
-    }
-}
-
-void PianoScene::setCustomNoteNames(const QStringList& names)
-{
-    if (names.size() < 12)
-        return;
-    m_names_custom = names;
-    while (m_names_custom.size() > 12)
-        m_names_custom.removeLast();
-    refreshLabels();
-}
-
-void PianoScene::setMiddleC(PianoKeybd::MiddleKey middleC)
-{
-    if (m_middleC != middleC)
-    {
-        m_middleC = middleC;
-        refreshLabels();
-    }
-}
-
-void PianoScene::setIndicesInLabels(bool enabled)
-{
-    if (m_indicesInLabels != enabled)
-    {
-        m_indicesInLabels = enabled;
-        refreshLabels();
-    }
-}
-
 void PianoScene::setTranspose(const int transpose)
 {
     if (m_transpose != transpose && transpose > -12 && transpose < 12)
     {
         m_transpose = transpose;
-        refreshLabels();
     }
-}
-
-void PianoScene::setKeyboardEnabled(const bool enable)
-{
-    if (enable != m_keyboardEnabled)
-        m_keyboardEnabled = enable;
-}
-
-void PianoScene::setMouseEnabled(const bool enable)
-{
-    if (enable != m_mouseEnabled)
-        m_mouseEnabled = enable;
-}
-
-void PianoScene::setTouchEnabled(const bool enable)
-{
-    if (enable != m_touchEnabled)
-        m_touchEnabled = enable;
 }
 
 void PianoScene::setColorationType(PianoKeybd::ColorationType colorationType)
@@ -827,9 +601,6 @@ void PianoScene::setColor(int num, QColor color)
     m_palette[num] = color;
     if (num == -1 || num == -2)
         refreshKeys();
-
-    else if (num == -3 || num == -4)
-        refreshLabels();
 }
 
 // CUSTOMIZATION //
@@ -890,4 +661,9 @@ void PianoScene::updateGlowEffect()
     }
     PianoKey::setGlowEffect(_glowEffect);
     this->update();
+}
+
+void PianoScene::updateMapping()
+{
+    _keybdMap.initializeMapping();
 }

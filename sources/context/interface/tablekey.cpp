@@ -24,7 +24,7 @@
 
 #include "tablekey.h"
 #include "editkey.h"
-#include "keyboardmanager.h"
+#include "contextmanager.h"
 #include <QHeaderView>
 
 
@@ -38,24 +38,27 @@ TableKey::TableKey(QWidget * parent) : QTableWidget(parent),
 
     // Signal mapper
     connect(_signalMapper, SIGNAL(mapped(QString)), this, SLOT(rowChanged(QString)));
+
+    // Populate the table
+    this->populate();
 }
 
-//void TableKey::setKeyboard(PianoKeybdCustom * keyboard)
-//{
-//    for (int j = 0; j < columnCount(); j++)
-//    {
-//        for (int i = 0; i < rowCount(); i++)
-//        {
-//            EditKey * editKey = new EditKey();
-//            editKey->setStyleSheet("EditKey{border: 0px; padding-left: 2px;}");
-//            editKey->setCombinaison(PianoKeybd::getMapping((PianoKeybd::Key)j, i).toString());
-//            this->setCellWidget(i, j, editKey);
+void TableKey::populate()
+{
+    for (int j = 0; j < columnCount(); j++)
+    {
+        for (int i = 0; i < rowCount(); i++)
+        {
+            EditKey * editKey = new EditKey();
+            editKey->setStyleSheet("EditKey{border: 0px; padding-left: 2px;}");
+            editKey->setCombinaison(ContextManager::configuration()->getMapping(i, (ConfManager::Key)j));
+            this->setCellWidget(i, j, editKey);
 
-//            _signalMapper->setMapping(editKey, QString::number(i) + ":" + QString::number(j));
-//            connect(editKey, SIGNAL(combinaisonChanged(QString)), _signalMapper, SLOT(map()));
-//        }
-//    }
-//}
+            _signalMapper->setMapping(editKey, QString::number(i) + ":" + QString::number(j));
+            connect(editKey, SIGNAL(combinaisonChanged(QString)), _signalMapper, SLOT(map()));
+        }
+    }
+}
 
 void TableKey::rowChanged(QString id)
 {

@@ -46,36 +46,37 @@ PageTable::PageTable(TypePage typePage, QWidget *parent) : Page(parent, typePage
 {
 }
 
-void PageTable::afficheTable()
+void PageTable::afficheTable(bool sameElement)
 {
     int posV = this->_table->verticalScrollBar()->value();
 
-    // Destruction des cellules précédentes
-    _table->blockSignals(true);
-    this->_table->clear();
-    _table->blockSignals(false);
-
-    QList<EltID> ids = _currentParentIds;
-
-    if (!ids.isEmpty())
+    if (!sameElement)
     {
-        ////// AFFICHAGE DES PARAMETRES GLOBAUX //////
-        foreach (EltID id, ids)
-            addGlobal(id, ids.count() > 1);
+        // Clear the table and repopulate it
+        _table->blockSignals(true);
+        this->_table->clear();
+        _table->blockSignals(false);
 
-        ////// AFFICHAGE DES PARAMETRES PAR ELEMENT LIÉ //////
-        if (ids.count() == 1)
-            addDivisions(ids.first());
+        if (!_currentParentIds.isEmpty())
+        {
+            // Global division
+            foreach (EltID id, _currentParentIds)
+                addGlobal(id, _currentParentIds.count() > 1);
 
-        ////// MISE EN FORME DE LA TABLE (couleurs, alignement) //////
-        formatTable(ids.count() > 1);
+            // Child divisions
+            if (_currentParentIds.count() == 1)
+                addDivisions(_currentParentIds.first());
 
-        ///////////////////// REMPLISSAGE DES MODS //////////////////////////
-        if (ids.count() == 1)
-            this->afficheMod(ids[0]);
-        else
-            afficheEditMod();
+            // Table style
+            formatTable(_currentParentIds.count() > 1);
+        }
     }
+
+    // Mods
+    if (_currentParentIds.count() == 1)
+        afficheMod(_currentParentIds[0]);
+    else
+        afficheEditMod();
 
     // Fin de la préparation
     this->reselect();
@@ -386,15 +387,15 @@ void PageTable::formatTable(bool multiGlobal)
     this->_table->hideRow(0);
 }
 
-void PageTable::afficheRanges()
+void PageTable::afficheRanges(bool sameElement)
 {
-    _rangeEditor->display(_currentIds[0]);
+    _rangeEditor->display(_currentIds[0], sameElement);
 }
 
-void PageTable::afficheEnvelops()
+void PageTable::afficheEnvelops(bool sameElement)
 {
     if (_envelopEditor != NULL)
-        _envelopEditor->display(_currentIds);
+        _envelopEditor->display(_currentIds, sameElement);
 }
 
 void PageTable::afficheMod(EltID id, Champ selectedField)
@@ -1434,6 +1435,7 @@ void PageTable::reselect()
 void PageTable::select(EltID id)
 {
     _preparingPage = true;
+
     EltID id2;
     int max;
     for (int i = 0; i < this->_table->columnCount(); i++)
@@ -1459,56 +1461,35 @@ void PageTable::selected()
 {
     if (_preparingPage)
         return;
+    _preparingPage = true;
 
-    // Mise à jour de la sélection dans l'arborescence
-    //    _tree->blockSignals(true);
-    //    QList<QTableWidgetItem*> listItems = table->selectedItems();
-    //    int compte = listItems.count();
-    //    if (compte)
-    //    {
-    //        QList<EltID> ids;
-    //        for (int i = 0; i < compte; i++)
-    //            ids << this->table->getID(listItems.at(i)->column());
-    //        emit(selectedIdsChanged(ids));
+    // Selected items
+    IdList ids;
+    QList<QTableWidgetItem*> listItems = _table->selectedItems();
+    for (int i = 0; i < listItems.count(); i++)
+        ids << _table->getID(listItems.at(i)->column());
 
-    //        // Mise à jour des informations sur les mods
-    //        _preparingPage = true;
-    //        int colonne = listItems.last()->column();
-    //        if (listItems.count() == 1)
-    //            this->afficheMod(this->table->getID(colonne), this->table->getChamp(listItems.last()->row()));
-    //        else
-    //            this->afficheMod(this->table->getID(colonne));
-    //        _preparingPage = false;
-    //    }
-    //    _tree->blockSignals(false);
+    // Mise à jour des informations sur les mods
+    int colonne = listItems.last()->column();
+    if (listItems.count() == 1)
+        this->afficheMod(_table->getID(colonne), _table->getChamp(listItems.last()->row()));
+    else
+        this->afficheMod(_table->getID(colonne));
+
+    // Update the selection outside the table
+    emit(selectedIdsChanged(ids));
+    _preparingPage = false;
 
     customizeKeyboard();
 }
 
 void PageTable::customizeKeyboard()
 {
-    //_mainWindow->clearKeyboardCustomisation();
+    ContextManager::midi()->keyboard()->clearCustomization();
 
-    QList<EltID> ids;
-//    if (_pushRanges->isChecked() || (_pushEnvelops != NULL && _pushEnvelops->isChecked()))
-//    {
-//        ids = _currentIds;
-//    }
-//    else
-    {
-        QList<int> selectedColumns;
-        QList<QTableWidgetItem*> listSelectedItems = _table->selectedItems();
-        foreach (QTableWidgetItem * item, listSelectedItems)
-            if (!selectedColumns.contains(item->column()))
-                selectedColumns << item->column();
-
-        // Si aucune colonne n'est sélectionnée, on affiche toutes les étendues
-        if (selectedColumns.isEmpty())
-            selectedColumns << 0;
-
-        foreach (int selectedColumn, selectedColumns)
-            ids << this->_table->getID(selectedColumn);
-    }
+    QList<EltID> ids = _currentIds;
+    if (ids.isEmpty())
+        return;
 
     // If the global division is in the list, exclude the rest
     foreach (EltID id, ids)
@@ -1554,7 +1535,7 @@ void PageTable::customizeKeyboard()
                 if (_sf2->isSet(id, champ_keyRange))
                     keyRange = _sf2->get(id, champ_keyRange).rValue;
             }
-            //_mainWindow->setRangeAndRootKey(rootKey, keyRange.byLo, keyRange.byHi);
+            ContextManager::midi()->keyboard()->addRangeAndRootKey(rootKey, keyRange.byLo, keyRange.byHi);
         }
         else if (id.typeElement == elementInst || id.typeElement == elementPrst)
         {
@@ -1578,7 +1559,7 @@ void PageTable::customizeKeyboard()
                     keyRange = _sf2->get(id, champ_keyRange).rValue;
                 else
                     keyRange = defaultKeyRange;
-                //_mainWindow->setRangeAndRootKey(-1, keyRange.byLo, keyRange.byHi);
+                ContextManager::midi()->keyboard()->addRangeAndRootKey(-1, keyRange.byLo, keyRange.byHi);
             }
         }
     }
@@ -3069,9 +3050,9 @@ int PageTable::getDestIndex(int i)
     }
 }
 
-void PageTable::keyPlayed(int key, int velocity)
+void PageTable::keyPlayedInternal(int key, int velocity)
 {
-    // Visiualization on the table
+    // Visualization on the table
     if (_table->isVisible())
     {
         // Update triggered elements
@@ -3105,6 +3086,9 @@ void PageTable::keyPlayed(int key, int velocity)
     // Visualization on the range editor
     if (_rangeEditor->isVisible())
         _rangeEditor->playKey(key, velocity);
+
+    // Specific commands for instruments or presets
+    keyPlayedInternal2(key, velocity);
 }
 
 void PageTable::onOpenElement(EltID id)
@@ -3161,4 +3145,10 @@ void PageTable::displayModInTable()
             }
         }
     }
+}
+
+void PageTable::onShow()
+{
+    // Refresh the keyboard
+    customizeKeyboard();
 }

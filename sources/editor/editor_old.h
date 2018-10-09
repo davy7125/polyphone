@@ -73,7 +73,6 @@ public:
     ~MainWindowOld();
 
     void updateDo();
-    void updateActions();
     void enableActionSample(bool isEnabled);
     void enableActionInstrument(bool isEnabled);
     void enableActionPreset(bool isEnabled);
@@ -83,8 +82,6 @@ public:
     void desactiveOutilsSmpl();
     void activeOutilsSmpl();
     void dragAndDrop(EltID idDest, QList<EltID> idSources);
-    void setRangeAndRootKey(int rootKey, int noteMin, int noteMax);
-    void clearKeyboardCustomisation();
     void spaceKeyPressedInTree();
 
 public slots:
@@ -110,13 +107,6 @@ private slots:
     void showAbout();           // Affichage fenêtre à propos
     void AfficherBarreOutils(); // Clic sur l'action "barre d'outils" du menu "afficher"
     void afficherSectionModulateurs();
-    void setKeyboardType0();    // Clic sur clavier -> aucun
-    void setKeyboardType1();    // Clic sur clavier -> 5 octaves
-    void setKeyboardType2();    // Clic sur clavier -> 6 octaves
-    void setKeyboardType3();    // Clic sur clavier -> 128 notes
-    void on_action88_notes_triggered();
-    void on_actionDans_la_barre_d_outils_triggered();
-    void on_action_Flottant_triggered();
     void undo();                // Clic sur l'action "undo"
     void redo();                // Clic sur l'action "redo"
     void sauvegarder();         // Clic sur l'action "sauvegarder"
@@ -137,13 +127,6 @@ private slots:
     void on_action_Dissocier_les_samples_st_r_o_triggered();
     void on_actionExporter_pics_de_fr_quence_triggered();
     void onPleinEcranTriggered();
-
-    void noteOff(int key);
-    void noteHover(int key, int vel);
-    void setSustain(bool isOn);
-    void setVolume(int vol);
-    void noteChanged(int key, int vel);
-
     void on_actionEnlever_tous_les_modulateurs_triggered();
     void futureFinished();
 
@@ -165,29 +148,17 @@ private:
     QAction * actionKeyboard;
     QList<QAction *> actionSeparators;
     QString _title;
-    int _currentKey;
-    QDialog _dialKeyboard;
-    QByteArray _geometryDialKeyboard;
     QFutureWatcher<int> _futureWatcher;
     ModalProgressDialog * _progressDialog;
-
-    // Gestion sustain pedal
-    QList<int> _listKeysToRelease;
-    bool _isSustainOn;
 
     // Méthodes privées
     void importerSmpl(QString path, EltID id, int *replace);
     void exporterFrequences(QString fileName);
     int sauvegarder(int indexSf2, bool saveAs);
     void updateFavoriteFiles();
-    void setKeyboardType(int val);
-    void showKeyboard(bool val);
     QList<QAction *> getListeActions();
     static QString getName(QString name, int maxCharacters, int suffixNumber);
     int deleteMods(EltID id);
-
-protected:
-    void keyPressEvent(QKeyEvent *event);
 };
 
 #endif // MAINWINDOW_H

@@ -52,6 +52,7 @@ public slots:
 
 protected:
     void closeEvent(QCloseEvent *event);
+    void keyPressEvent(QKeyEvent *event);
 
 private slots:
     void on_pushButtonDocumentation_clicked();
@@ -65,8 +66,8 @@ private slots:
     void onRecorderDisplayChange(bool isDisplayed);
 
 private:
-    Ui::MainWindow *ui;
-    WindowManager *_windowManager;
+    Ui::MainWindow * ui;
+    WindowManager * _windowManager;
     DialogKeyboard * _keyboard;
     DialogRecorder * _recorder;
 };

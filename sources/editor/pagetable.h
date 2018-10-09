@@ -48,14 +48,18 @@ public:
     void duplication();
     void spatialisation();
     void visualize();
-    void keyPlayed(int key, int velocity);
     void displayModInTable();
 
 protected:
     QList<EltID> getEltIds(bool &error, bool allWithDivisions, bool allDivWithRange);
-    void afficheTable();
-    void afficheRanges();
-    void afficheEnvelops();
+    void afficheTable(bool sameElement);
+    void afficheRanges(bool sameElement);
+    void afficheEnvelops(bool sameElement);
+    void keyPlayedInternal(int key, int velocity) override;
+    virtual void keyPlayedInternal2(int key, int velocity) = 0;
+
+    // Refresh things after a page is shown
+    void onShow() override;
 
     IdList _currentParentIds;
     IdList _currentIds;

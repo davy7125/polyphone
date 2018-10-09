@@ -163,12 +163,15 @@ void VoiceParam::readSample(EltID id)
     // Lecture d'un sample
     this->fineTune          = m_sf2->get(id, champ_chPitchCorrection).cValue;
     this->rootkey           = m_sf2->get(id, champ_byOriginalPitch).bValue;
+
     // Début et fin du sample
     this->sampleStart       = 0;
     this->sampleEnd         = m_sf2->get(id, champ_dwLength).dwValue;
+
     // Début et fin de la boucle
     this->loopStart         = m_sf2->get(id, champ_dwStartLoop).dwValue;
     this->loopEnd           = m_sf2->get(id, champ_dwEndLoop).dwValue;
+
     // Type de boucle
     this->loopMode          = 0;
 }
@@ -236,7 +239,14 @@ void VoiceParam::read(EltID id)
         id.typeElement = elementInstSmpl;
     else
         id.typeElement = elementPrstInst;
-    m_sf2->getListeBags(id, listChamps, listValeurs);
+    QList<Champ> listChamps2;
+    QList<genAmountType> listValeurs2;
+    m_sf2->getListeBags(id, listChamps2, listValeurs2);
+    for (int i = 0; i < listChamps2.count(); i++)
+    {
+        listChamps << listChamps2.at(i);
+        listValeurs << listValeurs2.at(i);
+    }
 
     // Doublons à enlever
     QList<Champ> listChampsNonDoublon;
@@ -345,6 +355,7 @@ void VoiceParam::add(VoiceParam * voiceParamTmp)
     this->scaleTune          += voiceParamTmp->scaleTune;
     this->filterFreq         *= voiceParamTmp->filterFreq;
     this->filterQ            += voiceParamTmp->filterQ;
+
     // Enveloppe volume
     this->volDelayTime       *= voiceParamTmp->volDelayTime;
     this->volAttackTime      *= voiceParamTmp->volAttackTime;
@@ -354,6 +365,7 @@ void VoiceParam::add(VoiceParam * voiceParamTmp)
     this->volReleaseTime     *= voiceParamTmp->volReleaseTime;
     this->volKeynumToHold    += voiceParamTmp->volKeynumToHold;
     this->volKeynumToDecay   += voiceParamTmp->volKeynumToDecay;
+
     // Enveloppe modulation
     this->modDelayTime       *= voiceParamTmp->modDelayTime;
     this->modAttackTime      *= voiceParamTmp->modAttackTime;
@@ -365,6 +377,7 @@ void VoiceParam::add(VoiceParam * voiceParamTmp)
     this->modKeynumToDecay   += voiceParamTmp->modKeynumToDecay;
     this->modEnvToPitch      += voiceParamTmp->modEnvToPitch;
     this->modEnvToFilterFc   += voiceParamTmp->modEnvToFilterFc;
+
     // LFOs
     this->modLfoDelay        *= voiceParamTmp->modLfoDelay;
     this->modLfoFreq         *= voiceParamTmp->modLfoFreq;
@@ -374,9 +387,11 @@ void VoiceParam::add(VoiceParam * voiceParamTmp)
     this->modLfoToFilterFreq += voiceParamTmp->modLfoToFilterFreq;
     this->modLfoToVolume     += voiceParamTmp->modLfoToVolume;
     this->vibLfoToPitch      += voiceParamTmp->vibLfoToPitch;
+
     // Effets
     this->reverb             += voiceParamTmp->reverb;
     this->chorus             += voiceParamTmp->chorus;
+
     // Autres
     if (voiceParamTmp->loopMode != -1)
         this->loopMode        = voiceParamTmp->loopMode;
@@ -404,10 +419,12 @@ double VoiceParam::getPitchDifference(int note)
     return (noteJouee - this->rootkey) * ((double)scaleTune / 100.)
            + (double)(fineTune) / 100 + coarseTune;
 }
+
 double VoiceParam::d1200e2(qint32 val)
 {
     return qPow(2., (double)val / 1200);
 }
+
 double VoiceParam::limit(double val, double min, double max)
 {
     if (val < min)
@@ -416,6 +433,7 @@ double VoiceParam::limit(double val, double min, double max)
         return max;
     return val;
 }
+
 qint32 VoiceParam::limit(qint32 val, qint32 min, qint32 max)
 {
     if (val < min)

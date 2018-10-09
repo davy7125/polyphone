@@ -48,6 +48,7 @@ private:
             emit(editingFinished());
         QTextEdit::focusOutEvent(e);
     }
+
     void keyPressEvent(QKeyEvent *e)
     {
         int key = e->key();
@@ -87,7 +88,10 @@ private slots:
 
 protected:
     // Update the interface
-    bool updateInterface(QString editingSource, IdList selectedIds, int displayOption);
+    bool updateInterface(QString editingSource, IdList selectedIds, int displayOption) override;
+
+    // Refresh things after a page is shown
+    void onShow() override;
 
 private:
     EltID _currentID;

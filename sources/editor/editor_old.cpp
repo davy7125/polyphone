@@ -33,10 +33,7 @@ MainWindowOld::MainWindowOld(QWidget *parent) : QMainWindow(parent, Qt::Window |
     dialList(this),
     dialogMagneto(NULL),
     actionKeyboard(NULL),
-    _currentKey(-1),
-    _dialKeyboard(this, Qt::Tool | Qt::WindowStaysOnTopHint | Qt::WindowCloseButtonHint),
-    _progressDialog(NULL),
-    _isSustainOn(false)
+    _progressDialog(NULL)
 {
     ui->setupUi(this);
     this->setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint);
@@ -93,36 +90,6 @@ MainWindowOld::MainWindowOld(QWidget *parent) : QMainWindow(parent, Qt::Window |
         this->page_prst->setModVisible(false);
     }
 
-    // Clavier
-    _dialKeyboard.setWindowTitle(trUtf8("Clavier virtuel"));
-    connect(&_dialKeyboard, SIGNAL(finished(int)), ui->actionDans_la_barre_d_outils, SLOT(trigger()));
-    QVBoxLayout * layoutKeyboard = new QVBoxLayout();
-    layoutKeyboard->setContentsMargins(0, 0, 0, 0);
-    _dialKeyboard.setLayout(layoutKeyboard);
-    _geometryDialKeyboard = ContextManager::configuration()->getValue(
-                ConfManager::SECTION_DISPLAY, "keyboardGeometry", QByteArray()).toByteArray();
-    if (_geometryDialKeyboard.isEmpty())
-        _dialKeyboard.resize(600, 75);
-    else
-        _dialKeyboard.restoreGeometry(_geometryDialKeyboard);
-    ui->toolBar->setFixedHeight(40);
-    ui->toolBar->setContentsMargins(0, 0, 0, 0);
-    actionKeyboard = ui->toolBar->addWidget(ui->ensembleKeyboard);
-    this->showKeyboard(false);
-    if (ContextManager::configuration()->getValue(ConfManager::SECTION_KEYBOARD, "keyboard_in_toolbar", true).toBool())
-        this->on_actionDans_la_barre_d_outils_triggered();
-    else
-        this->on_action_Flottant_triggered();
-
-    // Ouverture port midi et connexions
-    ContextManager::midi()->openMidiPort(ContextManager::configuration()->getValue(ConfManager::SECTION_MIDI, "index_port", -1).toInt());
-    connect(ui->widgetKeyboard, SIGNAL(noteOn(int,int)), this, SLOT(noteChanged(int,int)));
-    connect(ui->widgetKeyboard, SIGNAL(sustainChanged(bool)), this, SLOT(setSustain(bool)));
-    connect(ui->widgetKeyboard, SIGNAL(volumeChanged(int)), this, SLOT(setVolume(int)));
-    connect(ui->widgetKeyboard, SIGNAL(noteOff(int)), this, SLOT(noteOff(int)));
-    connect(ui->widgetKeyboard, SIGNAL(mouseOver(int, int)), this, SLOT(noteHover(int, int)));
-    connect(this->page_smpl, SIGNAL(noteChanged(int,int)), this, SLOT(noteChanged(int,int)));
-
     // Initialisation objet Sound
     Sound::setParent(this);
 
@@ -150,18 +117,6 @@ MainWindowOld::~MainWindowOld()
     delete _pageOverviewInst;
     delete _pageOverviewPrst;
     delete ui;
-}
-
-void MainWindowOld::keyPressEvent(QKeyEvent * event)
-{
-    if (event->modifiers() & Qt::ControlModifier && event->key() == Qt::Key_K)
-    {
-        if (_dialKeyboard.isVisible())
-            _dialKeyboard.activateWindow();
-        ui->widgetKeyboard->setFocus();
-        ui->widgetKeyboard->triggerGlowEffect();
-    }
-    QMainWindow::keyPressEvent(event);
 }
 
 void MainWindowOld::spaceKeyPressedInTree()
@@ -196,7 +151,7 @@ void MainWindowOld::supprimerElt()
     if (message == 1 && elementToSelect.typeElement != elementUnknown)
         ui->tree->select(elementToSelect, true);
 
-    updateActions();
+    //updateActions();
     updateDo();
 }
 
@@ -323,7 +278,7 @@ void MainWindowOld::undo()
 {
     ui->tree->clearPastedID();
     //sf2->undo();
-    updateActions();
+    //updateActions();
     updateDo();
 }
 
@@ -331,7 +286,7 @@ void MainWindowOld::redo()
 {
     ui->tree->clearPastedID();
     //sf2->redo();
-    updateActions();
+    //updateActions();
     updateDo();
 }
 
@@ -354,142 +309,6 @@ void MainWindowOld::afficherSectionModulateurs()
     ContextManager::configuration()->setValue(ConfManager::SECTION_DISPLAY, "section_modulateur", display);
     this->page_inst->setModVisible(display);
     this->page_prst->setModVisible(display);
-}
-
-void MainWindowOld::setKeyboardType0() {this->setKeyboardType(0);}
-void MainWindowOld::setKeyboardType1() {this->setKeyboardType(1);}
-void MainWindowOld::setKeyboardType2() {this->setKeyboardType(2);}
-void MainWindowOld::setKeyboardType3() {this->setKeyboardType(3);}
-void MainWindowOld::on_action88_notes_triggered() {this->setKeyboardType(4);}
-void MainWindowOld::setKeyboardType(int val)
-{
-    ui->actionAucun->blockSignals(true);
-    ui->action5_octaves->blockSignals(true);
-    ui->action6_octaves->blockSignals(true);
-    ui->action128_notes->blockSignals(true);
-    ui->action88_notes->blockSignals(true);
-    ui->actionAucun->setChecked(false);
-    ui->action5_octaves->setChecked(false);
-    ui->action6_octaves->setChecked(false);
-    ui->action128_notes->setChecked(false);
-    ui->action88_notes->setChecked(false);
-    switch (val)
-    {
-    case 1:
-        // Clavier 5 octaves
-        ui->widgetKeyboard->set(PianoKeybd::PROPERTY_KEY_MIN, 36);
-        ui->widgetKeyboard->set(PianoKeybd::PROPERTY_KEY_NUMBER, 61);
-        ui->action5_octaves->setChecked(true);
-        if (ui->stackedWidget->currentWidget() == this->page_inst ||
-                ui->stackedWidget->currentWidget() == this->page_prst)
-            this->showKeyboard(true);
-        break;
-    case 2:
-        // Clavier 6 octaves
-        ui->widgetKeyboard->set(PianoKeybd::PROPERTY_KEY_MIN, 36);
-        ui->widgetKeyboard->set(PianoKeybd::PROPERTY_KEY_NUMBER, 73);
-        ui->action6_octaves->setChecked(true);
-        if (ui->stackedWidget->currentWidget() == this->page_inst ||
-                ui->stackedWidget->currentWidget() == this->page_prst)
-            this->showKeyboard(true);
-        break;
-    case 3:
-        // Clavier 128 notes
-        ui->widgetKeyboard->set(PianoKeybd::PROPERTY_KEY_MIN, 0);
-        ui->widgetKeyboard->set(PianoKeybd::PROPERTY_KEY_NUMBER, 128);
-        ui->action128_notes->setChecked(true);
-        if (ui->stackedWidget->currentWidget() == this->page_inst ||
-                ui->stackedWidget->currentWidget() == this->page_prst)
-            this->showKeyboard(true);
-        break;
-    case 4:
-        // Clavier 88 notes
-        ui->widgetKeyboard->set(PianoKeybd::PROPERTY_KEY_MIN, 21);
-        ui->widgetKeyboard->set(PianoKeybd::PROPERTY_KEY_NUMBER, 88);
-        ui->action88_notes->setChecked(true);
-        if (ui->stackedWidget->currentWidget() == this->page_inst ||
-                ui->stackedWidget->currentWidget() == this->page_prst)
-            this->showKeyboard(true);
-        break;
-    default:
-        // Aucun clavier
-        ui->actionAucun->setChecked(true);
-        this->showKeyboard(false);
-        break;
-    }
-
-    // Redimensionnement
-    if (ContextManager::configuration()->getValue(ConfManager::SECTION_KEYBOARD, "keyboard_in_toolbar", true).toBool())
-    {
-        int widthKeyboard = (int)((double)(ui->ensembleKeyboard->height()) * .87 * ui->widgetKeyboard->ratio()) + 12;
-        ui->widgetKeyboard->setFixedWidth(widthKeyboard);
-    }
-
-    ui->actionAucun->blockSignals(false);
-    ui->action5_octaves->blockSignals(false);
-    ui->action6_octaves->blockSignals(false);
-    ui->action128_notes->blockSignals(false);
-    ui->action88_notes->blockSignals(false);
-
-    // Save the parameter
-    ContextManager::configuration()->setValue(ConfManager::SECTION_KEYBOARD, "type", val);
-}
-void MainWindowOld::on_actionDans_la_barre_d_outils_triggered()
-{
-    ui->actionDans_la_barre_d_outils->blockSignals(true);
-    ui->actionDans_la_barre_d_outils->setChecked(true);
-    ui->actionDans_la_barre_d_outils->blockSignals(false);
-    ui->action_Flottant->blockSignals(true);
-    ui->action_Flottant->setChecked(false);
-    ui->action_Flottant->blockSignals(false);
-
-    // Save the parameter
-    ContextManager::configuration()->setValue(ConfManager::SECTION_KEYBOARD, "keyboard_in_toolbar", true);
-
-    QGridLayout * layout = (QGridLayout*)ui->ensembleKeyboard->layout();
-    layout->addWidget(ui->widgetKeyboard, 0, 3, 2, 1);
-    updateActions();
-}
-void MainWindowOld::on_action_Flottant_triggered()
-{
-    ui->action_Flottant->blockSignals(true);
-    ui->action_Flottant->setChecked(true);
-    ui->action_Flottant->blockSignals(false);
-    ui->actionDans_la_barre_d_outils->blockSignals(true);
-    ui->actionDans_la_barre_d_outils->setChecked(false);
-    ui->actionDans_la_barre_d_outils->blockSignals(false);
-
-    // Save the parameter
-    ContextManager::configuration()->setValue(ConfManager::SECTION_KEYBOARD, "keyboard_in_toolbar", false);
-
-    _dialKeyboard.layout()->addWidget(ui->widgetKeyboard);
-    updateActions();
-}
-
-void MainWindowOld::showKeyboard(bool val)
-{
-    ui->widgetKeyboard->setVisible(val);
-    ui->labelNote->setVisible(val);
-    ui->labelVelocite->setVisible(val);
-    ui->label_2->setVisible(val);
-    ui->label_3->setVisible(val);
-    if (val && !ContextManager::configuration()->getValue(ConfManager::SECTION_KEYBOARD, "keyboard_in_toolbar", true).toBool())
-    {
-        if (!_dialKeyboard.isVisible())
-        {
-            ui->widgetKeyboard->setMinimumWidth(0);
-            ui->widgetKeyboard->setMaximumWidth(100000);
-            _dialKeyboard.restoreGeometry(_geometryDialKeyboard);
-            _dialKeyboard.show();
-        }
-    }
-    else
-    {
-        _geometryDialKeyboard = _dialKeyboard.saveGeometry();
-        int widthKeyboard = (int)((double)(ui->ensembleKeyboard->height()) * .87 * ui->widgetKeyboard->ratio()) + 12;
-        ui->widgetKeyboard->setFixedWidth(widthKeyboard);
-        _dialKeyboard.hide();
-    }
 }
 
 void MainWindowOld::onPleinEcranTriggered()
@@ -559,212 +378,6 @@ void MainWindowOld::updateDo()
     ui->actionR_tablir->setEnabled(sf2->isRedoable(-1));
 }
 
-void MainWindowOld::updateActions()
-{
-    // Un élément est cliqué dans l'arborescence
-    int nb;
-    bool fichierUnique = true;
-    bool familleUnique = true;
-    bool typeUnique = true;
-    ElementType type = elementUnknown;
-    EltID id;
-
-    // Caractéristiques de la sélection
-    // Nombre d'éléments sélectionnés
-    nb = ui->tree->getSelectedItemsNumber();
-    if (nb == 0)
-    {
-        // Rien n'est sélectionné
-        fichierUnique = false;
-
-        // Affichage page logiciel
-        ui->stackedWidget->setCurrentWidget(ui->page_Soft);
-
-        // Export soundfont
-        ui->actionExporter_en_tant_qu_sfz->setEnabled(false);
-    }
-    else
-    {
-        // Au moins un élément est sélectionné
-        id = ui->tree->getFirstID();
-        type = id.typeElement;
-        fichierUnique = ui->tree->isSelectedItemsSf2Unique();
-        typeUnique = ui->tree->isSelectedItemsTypeUnique();
-        familleUnique = ui->tree->isSelectedItemsFamilyUnique();
-
-        // Affichage partie droite
-        if (typeUnique && fichierUnique && id.typeElement == elementSmpl)
-        {
-            // Affichage page Smpl
-            //page_smpl->preparePage();
-            if (ContextManager::configuration()->getValue(ConfManager::SECTION_KEYBOARD, "type", 1).toInt() > 0 && nb == 1)
-                this->showKeyboard(true);
-            else
-                this->showKeyboard(false);
-        }
-        else if (fichierUnique && (familleUnique ||
-                                   (typeUnique && (id.typeElement == elementInst || id.typeElement == elementPrst))))
-        {
-            if (id.typeElement == elementInst || id.typeElement == elementInstSmpl)
-            {
-                // Affichage page Inst
-                //page_inst->afficher();
-                if (ContextManager::configuration()->getValue(ConfManager::SECTION_KEYBOARD, "type", 1).toInt() > 0)
-                    this->showKeyboard(familleUnique);
-                else
-                    this->showKeyboard(false);
-            }
-            else
-            {
-                // Affichage page Prst
-                //page_prst->afficher();
-                if (ContextManager::configuration()->getValue(ConfManager::SECTION_KEYBOARD, "type", 1).toInt() > 0)
-                    this->showKeyboard(familleUnique);
-                else
-                    this->showKeyboard(false);
-            }
-        }
-        else
-        {
-            if (fichierUnique)
-            {
-                //                if (typeUnique)
-                //                {
-                //                    switch (id.typeElement)
-                //                    {
-                //                    case elementSf2:
-                //                        page_sf2->afficher();
-                //                        break;
-                //                    case elementRootSmpl:
-                //                        _pageOverviewSmpl->afficher();
-                //                        break;
-                //                    case elementRootInst:
-                //                        _pageOverviewInst->afficher();
-                //                        break;
-                //                    case elementRootPrst:
-                //                        _pageOverviewPrst->afficher();
-                //                        break;
-                //                    default:
-                //                        ui->stackedWidget->setCurrentWidget(ui->page_Soft);
-                //                        break;
-                //                    }
-                //                }
-                //                else
-                //                    ui->stackedWidget->setCurrentWidget(ui->page_Soft);
-            }
-            else
-                ui->stackedWidget->setCurrentWidget(ui->page_Soft);
-            this->showKeyboard(false);
-        }
-
-        // Export soundfonts and samples
-        ui->actionExporter_en_tant_qu_sfz->setEnabled(true);
-        ui->actionExporter->setEnabled(typeUnique &&
-                                       (id.typeElement == elementSmpl || id.typeElement == elementInstSmpl));
-    }
-
-    // ACTIVATION, DESACTIVATION DES COMMANDES
-    if (fichierUnique)
-    {
-        // Actions possibles : fermer, importer, coller, enregistrer (sous)
-        // Nouveau sample, instrument, preset
-        ui->actionFermer_le_fichier->setEnabled(true);
-        ui->actionImporter->setEnabled(true);
-        ui->actionColler->setEnabled(true);
-        ui->actionEnregistrer_sous->setEnabled(true);
-        ui->actionEnregistrer->setEnabled(true);
-        ui->actionNouveau_preset->setEnabled(true);
-        ui->actionNouvel_instrument->setEnabled(true);
-
-        // Supprimer, copier
-        if (typeUnique && (((type == elementInstSmpl || type == elementPrstInst) && familleUnique) ||
-                           type == elementSmpl || type == elementInst || type == elementPrst))
-        {
-            ui->action_Supprimer->setEnabled(true);
-            ui->actionCopier->setEnabled(true);
-        }
-        else
-        {
-            ui->action_Supprimer->setEnabled(false);
-            ui->actionCopier->setEnabled(false);
-        }
-
-        // Renommer
-        if (!typeUnique || (type != elementSmpl && type != elementInst && type != elementPrst && type != elementSf2))
-        {
-            ui->actionRenommer->setText(trUtf8("&Renommer"));
-            ui->actionRenommer->setEnabled(false);
-        }
-        else
-        {
-            if (nb == 1)
-            {
-                ui->actionRenommer->setText(trUtf8("&Renommer"));
-                ui->actionRenommer->setEnabled(true);
-            }
-            else
-            {
-                ui->actionRenommer->setText(trUtf8("&Renommer en masse"));
-                ui->actionRenommer->setEnabled(true);
-            }
-        }
-
-        // Outils
-        this->enableActionSample(typeUnique && type == elementSmpl);
-        this->enableActionInstrument((typeUnique && type == elementInst) ||
-                                     (familleUnique && (type == elementInst || type == elementInstSmpl)));
-        this->enableActionPreset((typeUnique && type == elementPrst) ||
-                                 (familleUnique && (type == elementPrst || type == elementPrstInst)));
-        this->enableActionSf2(true);
-
-        // Particularité 2: visualiseurs et mixtures désactivés si plusieurs instruments / presets sont sélectionnés
-        ui->action_Visualiseur->setEnabled(typeUnique && familleUnique);
-        ui->action_Visualiseur_2->setEnabled(typeUnique && familleUnique);
-        ui->action_Cr_ation_mutation_mixture->setEnabled(typeUnique && familleUnique);
-
-        // Particularité 3: paramétrage global, répartition automatique et duplication des divisions sont communs pour inst et prst
-        ui->action_Param_trage_global->setEnabled((typeUnique && (type == elementInst || type == elementPrst)) ||
-                                                  (familleUnique && (type == elementInst || type == elementInstSmpl ||
-                                                                     type == elementPrst || type == elementPrstInst)));
-        ui->action_R_partition_automatique->setEnabled((typeUnique && (type == elementInst || type == elementPrst)) ||
-                                                       (familleUnique && (type == elementInst || type == elementInstSmpl ||
-                                                                          type == elementPrst || type == elementPrstInst)));
-        ui->actionD_uplication_des_divisions->setEnabled((typeUnique && (type == elementInst || type == elementPrst)) ||
-                                                         (familleUnique && (type == elementInst || type == elementInstSmpl ||
-                                                                            type == elementPrst || type == elementPrstInst)));
-    }
-    else
-    {
-        // Action impossible : fermer
-        ui->actionFermer_le_fichier->setEnabled(false);
-
-        // Action impossible : copier, coller, supprimer
-        ui->actionCopier->setEnabled(false);
-        ui->actionColler->setEnabled(false);
-        ui->action_Supprimer->setEnabled(false);
-
-        // Actions importer des échantillons
-        ui->actionImporter->setEnabled(false);
-
-        // Actions enregistrer (sous)
-        ui->actionEnregistrer_sous->setEnabled(false);
-        ui->actionEnregistrer->setEnabled(false);
-
-        // Nouveau sample, instrument, preset
-        ui->actionNouveau_preset->setEnabled(false);
-        ui->actionNouvel_instrument->setEnabled(false);
-
-        // Renommer, clavier, ...
-        ui->actionRenommer->setEnabled(false);
-        this->showKeyboard(false);
-
-        // Outils
-        this->enableActionSample(false);
-        this->enableActionInstrument(false);
-        this->enableActionPreset(false);
-        this->enableActionSf2(false);
-    }
-}
 void MainWindowOld::enableActionSample(bool isEnabled)
 {
     ui->menuSample->setEnabled(isEnabled);
@@ -804,7 +417,7 @@ void MainWindowOld::activeOutilsSmpl()
     int nb = ui->tree->getSelectedItemsNumber();
     if (nb != 1)
     {
-        this->updateActions();
+        //this->updateActions();
         ui->tree->clicTree();
         return;
     }
@@ -812,7 +425,7 @@ void MainWindowOld::activeOutilsSmpl()
     ElementType type = ID.typeElement;
     if (type != elementSmpl)
     {
-        this->updateActions();
+        //this->updateActions();
         ui->tree->clicTree();
         return;
     }
@@ -882,7 +495,7 @@ void MainWindowOld::renommer()
             ID = ui->tree->getFirstID();
             sf2->set(ID, champ_name, text);
             updateDo();
-            updateActions();
+            //updateActions();
         }
     }
 }
@@ -953,7 +566,7 @@ void MainWindowOld::renommerEnMasse(int renameType, QString text1, QString text2
     }
 
     updateDo();
-    updateActions();
+    //updateActions();
 }
 
 void MainWindowOld::dragAndDrop(EltID idDest, QList<EltID> idSources)
@@ -962,7 +575,7 @@ void MainWindowOld::dragAndDrop(EltID idDest, QList<EltID> idSources)
     Duplicator duplicator(this->sf2, this->sf2, this);
     for (int i = 0; i < idSources.size(); i++)
         duplicator.copy(idSources.at(i), idDest);
-    updateActions();
+    //updateActions();
 }
 
 void MainWindowOld::importerSmpl()
@@ -993,7 +606,7 @@ void MainWindowOld::importerSmpl()
         //this->dragAndDrop(strList.takeAt(0), id, &replace);
     }
     updateDo();
-    updateActions();
+    //updateActions();
 }
 
 void MainWindowOld::importerSmpl(QString path, EltID id, int * replace)
@@ -1464,7 +1077,7 @@ void MainWindowOld::futureFinished()
         case 0:
             // Loading ok
             updateFavoriteFiles();
-            updateActions();
+            //updateActions();
             break;
         case 1:
             QMessageBox::warning(this, trUtf8("Attention"), trUtf8("Format inconnu."));
@@ -1637,7 +1250,7 @@ void MainWindowOld::associer(EltID idDest)
         }
     }
     updateDo();
-    updateActions();
+    //updateActions();
 }
 void MainWindowOld::remplacer()
 {
@@ -1668,7 +1281,7 @@ void MainWindowOld::remplacer(EltID idSrc)
     val.wValue = idSrc.indexElt;
     this->sf2->set(idDest, champ, val);
     updateDo();
-    updateActions();
+    //updateActions();
 }
 
 // Envoi de signaux
@@ -1839,7 +1452,7 @@ void MainWindowOld::purger()
 
     QMessageBox::information(this, "", qStr);
     updateDo();
-    updateActions();
+    //updateActions();
 }
 
 void MainWindowOld::attenuationMini()
@@ -2198,7 +1811,7 @@ void MainWindowOld::on_actionEnlever_tous_les_modulateurs_triggered()
         QMessageBox::information(this, trUtf8("Information"), QString::number(count) + " " +
                                  trUtf8("modulateurs ont été supprimés."));
     updateDo();
-    updateActions();
+    //updateActions();
 }
 
 int MainWindowOld::deleteMods(EltID id)
@@ -2245,179 +1858,4 @@ int MainWindowOld::deleteMods(EltID id)
     }
 
     return count;
-}
-
-void MainWindowOld::noteOff(int key)
-{
-    noteChanged(key, 0);
-}
-
-void MainWindowOld::noteHover(int key, int vel)
-{
-    if (_currentKey == -1)
-    {
-        if (key != -1)
-        {
-            ui->labelNote->setText(ContextManager::keyName()->getKeyName(key));
-            ui->labelVelocite->setText(QString::number(vel));
-        }
-        else
-        {
-            ui->labelNote->setText("-");
-            ui->labelVelocite->setText("-");
-        }
-    }
-}
-void MainWindowOld::setSustain(bool isOn)
-{
-    _isSustainOn = isOn;
-    if (!isOn)
-    {
-        // On relâche les notes maintenues
-        while (_listKeysToRelease.size())
-        {
-            noteChanged(_listKeysToRelease.takeFirst(), 0);
-        }
-    }
-}
-
-void MainWindowOld::setVolume(int vol)
-{
-    vol = (double)vol / 127. * 101. - 50.5;
-    ContextManager::configuration()->setValue(ConfManager::SECTION_SOUND_ENGINE, "gain", vol);
-}
-
-void MainWindowOld::noteChanged(int key, int vel)
-{
-    // Note hover
-    if (vel == 0)
-        _currentKey = -1;
-    else
-        _currentKey = key;
-
-    // Cas particulier : arrêt de la lecture d'un sample
-    if (key == -1 && vel == 0)
-    {
-        ContextManager::audio()->getSynth()->play(0, 0, 0, -1, 0);
-        return;
-    }
-
-    if (key != -1)
-    {
-        // Mise en évidence de la ou des éléments liés étant en train de jouer
-        this->page_inst->keyPlayed(key, vel);
-        this->page_prst->keyPlayed(key, vel);
-    }
-
-    if (vel)
-    {
-        if (_listKeysToRelease.contains(key))
-            noteChanged(key, 0);
-    }
-    else
-    {
-        if (_isSustainOn)
-        {
-            if (!_listKeysToRelease.contains(key))
-                _listKeysToRelease << key;
-            return;
-        }
-    }
-
-    if (vel > 0 && key != -1)
-    {
-        ui->labelNote->setText(ContextManager::keyName()->getKeyName(key));
-        ui->labelVelocite->setText(QString::number(vel));
-    }
-    else
-    {
-        ui->labelNote->setText("-");
-        ui->labelVelocite->setText("-");
-    }
-
-    // Lecture ?
-    if (ui->tree->getSelectedItemsNumber())
-    {
-        EltID id = ui->tree->getFirstID();
-        if (ui->tree->isSelectedItemsSf2Unique())
-        {
-            if (id.typeElement == elementSmpl && ui->tree->getSelectedItemsNumber() == 1)
-                ContextManager::audio()->getSynth()->play(0, id.indexSf2, id.indexElt, key, vel);
-            else if (ui->tree->isSelectedItemsFamilyUnique())
-            {
-                if ((id.typeElement == elementInst || id.typeElement == elementInstSmpl) &&
-                        ui->tree->isSelectedItemsFamilyUnique())
-                {
-                    // Mise en évidence des étendues concernées
-                    if (vel)
-                    {
-                        EltID idInst = id;
-                        idInst.typeElement = elementInst;
-                        rangesType defaultKeyRange, defaultVelRange;
-                        if (sf2->isSet(idInst, champ_keyRange))
-                            defaultKeyRange = sf2->get(idInst, champ_keyRange).rValue;
-                        else
-                        {
-                            defaultKeyRange.byLo = 0;
-                            defaultKeyRange.byHi = 127;
-                        }
-                        if (sf2->isSet(idInst, champ_velRange))
-                            defaultVelRange = sf2->get(idInst, champ_velRange).rValue;
-                        else
-                        {
-                            defaultVelRange.byLo = 0;
-                            defaultVelRange.byHi = 127;
-                        }
-
-                        EltID idInstSmpl = id;
-                        idInstSmpl.typeElement = elementInstSmpl;
-                        foreach (int i, sf2->getSiblings(idInstSmpl))
-                        {
-                            idInstSmpl.indexElt2 = i;
-                            int keyMin, keyMax, velMin, velMax;
-                            if (sf2->isSet(idInstSmpl, champ_keyRange))
-                            {
-                                rangesType rangeTmp = sf2->get(idInstSmpl, champ_keyRange).rValue;
-                                keyMin = rangeTmp.byLo;
-                                keyMax = rangeTmp.byHi;
-                            }
-                            else
-                            {
-                                keyMin = defaultKeyRange.byLo;
-                                keyMax = defaultKeyRange.byHi;
-                            }
-                            if (sf2->isSet(idInstSmpl, champ_velRange))
-                            {
-                                rangesType rangeTmp = sf2->get(idInstSmpl, champ_velRange).rValue;
-                                velMin = rangeTmp.byLo;
-                                velMax = rangeTmp.byHi;
-                            }
-                            else
-                            {
-                                velMin = defaultVelRange.byLo;
-                                velMax = defaultVelRange.byHi;
-                            }
-                            if (keyMin <= key && keyMax >= key && velMin <= vel && velMax >= vel)
-                                ui->widgetKeyboard->setCurrentRange(key, keyMin, keyMax);
-                        }
-                    }
-
-                    ContextManager::audio()->getSynth()->play(1, id.indexSf2, id.indexElt, key, vel);
-                }
-                else if ((id.typeElement == elementPrst || id.typeElement == elementPrstInst) &&
-                         ui->tree->isSelectedItemsFamilyUnique())
-                    ContextManager::audio()->getSynth()->play(2, id.indexSf2, id.indexElt, key, vel);
-            }
-        }
-    }
-}
-
-void MainWindowOld::setRangeAndRootKey(int rootKey, int noteMin, int noteMax)
-{
-    ui->widgetKeyboard->setRangeAndRootKey(rootKey, noteMin, noteMax);
-}
-
-void MainWindowOld::clearKeyboardCustomisation()
-{
-    ui->widgetKeyboard->clearCustomization();
 }

@@ -35,7 +35,7 @@ public:
     // Link to the system for receiving MIDI signals
     static MidiDevice * midi();
 
-    // FINALLY, kill everything that has been build
+    // FINALLY, kill everything that has been built
     static void kill();
 
 private:

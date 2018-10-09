@@ -23,7 +23,7 @@
 ***************************************************************************/
 
 #include "graphicsviewrange.h"
-#include "keynamemanager.h"
+#include "contextmanager.h"
 #include "graphicssimpletextitem.h"
 #include "graphicsrectangleitem.h"
 #include "graphicslegenditem.h"
@@ -184,8 +184,11 @@ void GraphicsViewRange::init(SoundfontManager * sf2)
     GraphicsLegendItem::initSf2(sf2);
 }
 
-void GraphicsViewRange::display(EltID id)
+void GraphicsViewRange::display(EltID id, bool sameElement)
 {
+    if (sameElement)
+        return; // Nothing special is done
+
     // Clear previous rectangles
     while (!_rectangles.isEmpty())
     {
@@ -242,7 +245,7 @@ void GraphicsViewRange::mousePressEvent(QMouseEvent *event)
         int velocity = 127 - qRound(p.y());
         if (velocity > 0)
         {
-            keyTriggered(key, velocity);
+            ContextManager::midi()->setKey(key, velocity, true);
             _keyTriggered = key;
         }
     }
@@ -293,7 +296,7 @@ void GraphicsViewRange::mouseReleaseEvent(QMouseEvent *event)
     {
         if (_keyTriggered != -1)
         {
-            keyTriggered(_keyTriggered, 0);
+            ContextManager::midi()->setKeyOff(_keyTriggered, true);
             _keyTriggered = -1;
         }
     }
