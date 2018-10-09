@@ -24,70 +24,59 @@
 
 #include "pianokeybdcustom.h"
 #include "sf2_types.h"
-#include "configpanel.h"
 #include <QApplication>
+#include "contextmanager.h"
 
-// Définition des couleurs du clavier
-QColor PianoKeybdCustom::COLOR_PRESSED          = QColor(  0,   0, 255);    // Bleu
-QColor PianoKeybdCustom::COLOR_BLACK_ENABLED    = QColor(  0,   0,   0);    // Noir
-QColor PianoKeybdCustom::COLOR_WHITE_ENABLED    = QColor(255, 255, 255);    // Blanc
-QColor PianoKeybdCustom::COLOR_BLACK_DISABLED   = QColor(200, 200, 200);    // Gris moyen
-QColor PianoKeybdCustom::COLOR_WHITE_DISABLED   = QColor(200, 200, 200);    // Gris moyen
-QColor PianoKeybdCustom::COLOR_BLACK_RANGE      = QColor(200, 200,   0);    // Jaune foncé
-QColor PianoKeybdCustom::COLOR_WHITE_RANGE      = QColor(255, 255,  50);    // Jaune clair
+// Keyboard colors
+QColor PianoKeybdCustom::COLOR_PRESSED;
+QColor PianoKeybdCustom::COLOR_BLACK_ENABLED;
+QColor PianoKeybdCustom::COLOR_WHITE_ENABLED;
+QColor PianoKeybdCustom::COLOR_BLACK_DISABLED;
+QColor PianoKeybdCustom::COLOR_WHITE_DISABLED;
+QColor PianoKeybdCustom::COLOR_BLACK_RANGE;
+QColor PianoKeybdCustom::COLOR_WHITE_RANGE;
 
-// Constructeur, destructeur_noteOnRange
 PianoKeybdCustom::PianoKeybdCustom(QWidget *parent) : PianoKeybd(parent)
 {
-    // Couleurs et style
+    /// DEFINITION OF THE COLORS
+
+    // Key pressed
+    COLOR_PRESSED = ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND);
+
+    if (ContextManager::theme()->isDark(ThemeManager::LIST_BACKGROUND, ThemeManager::LIST_TEXT))
+    {
+        // Normal color of keys
+        COLOR_BLACK_ENABLED = ContextManager::theme()->getColor(ThemeManager::LIST_BACKGROUND);
+        COLOR_WHITE_ENABLED = ContextManager::theme()->getColor(ThemeManager::LIST_TEXT);
+    }
+    else
+    {
+        // Normal color of keys
+        COLOR_BLACK_ENABLED = ContextManager::theme()->getColor(ThemeManager::LIST_TEXT);
+        COLOR_WHITE_ENABLED = ContextManager::theme()->getColor(ThemeManager::LIST_BACKGROUND);
+    }
+
+    // Color when keys are disabled
+    COLOR_BLACK_DISABLED = COLOR_WHITE_DISABLED = ContextManager::theme()->mix(COLOR_BLACK_ENABLED, COLOR_WHITE_ENABLED, 0.5);
+
+    // Color of the range around a key
+    COLOR_BLACK_RANGE = ContextManager::theme()->mix(COLOR_BLACK_ENABLED, COLOR_PRESSED, 0.5);
+    COLOR_WHITE_RANGE = ContextManager::theme()->mix(COLOR_WHITE_ENABLED, COLOR_PRESSED, 0.3);
+
+    /// APPLY THEME
+
     set(PROPERTY_COLOR_BLACK_KEYS, COLOR_BLACK_DISABLED);
     set(PROPERTY_COLOR_WHITE_KEYS, COLOR_WHITE_DISABLED);
     set(PROPERTY_COLOR_1, COLOR_PRESSED);
     setFrameStyle(0);
+
+    /// CONNECTIONS
+
+    connect(this, SIGNAL(noteOn(int,int)), this, SLOT(setKey(int,int)));
+    connect(this, SIGNAL(noteOff(int)), this, SLOT(removeCurrentRange(int)));
 }
 
-void PianoKeybdCustom::changeKey(int key, int vel)
-{
-    // Action sur les touches
-    if (vel > 0)
-        this->inputNoteOn(key, vel);
-    else
-        this->inputNoteOff(key);
-
-    // Envoi signal
-    this->noteOn(key, vel);
-}
-
-void PianoKeybdCustom::changeController(int numController, int value)
-{
-    if (numController == 64)
-    {
-        // Pédale sustain
-        this->sustainChanged(value >= 64);
-    }
-    else if (numController == 7)
-    {
-        // Volume général
-        this->volumeChanged(value);
-    }
-}
-
-void PianoKeybdCustom::keyPressEvent(QKeyEvent * event)
-{
-    if (event->modifiers() & Qt::ControlModifier)
-    {
-        int key = event->key();
-        if (key >= Qt::Key_1 && key <= Qt::Key_8)
-        {
-            int octave = key - Qt::Key_1;
-            set(PROPERTY_MAPPING_FIRST_NOTE, 12 * octave);
-            ContextManager::configuration()->setValue(ConfManager::SECTION_MAP, "octave_offset", octave);
-        }
-    }
-    PianoKeybd::keyPressEvent(event);
-}
-
-void PianoKeybdCustom::setRangeAndRootKey(int rootKey, int noteMin, int noteMax)
+void PianoKeybdCustom::addRangeAndRootKey(int rootKey, int noteMin, int noteMax)
 {
     // Mémorisation de l'étendue
     for (int i = noteMin; i <= noteMax; i++)
@@ -106,6 +95,7 @@ void PianoKeybdCustom::clearCustomization()
 {
     _rootKeys.clear();
     _currentRange.clear();
+    _mapPressed.clear();
     updateRanges();
 }
 
@@ -118,13 +108,13 @@ void PianoKeybdCustom::setKey(int num, int vel)
     updateRanges();
 }
 
-void PianoKeybdCustom::setKeyOff(int num)
+void PianoKeybdCustom::removeCurrentRange(int num)
 {
     _mapPressed.remove(num);
     updateRanges();
 }
 
-void PianoKeybdCustom::setCurrentRange(int note, int noteMin, int noteMax)
+void PianoKeybdCustom::addCurrentRange(int note, int noteMin, int noteMax)
 {
     for (int i = noteMin; i <= noteMax; i++)
         if (!_mapPressed[note].contains(i))

@@ -134,9 +134,6 @@ void MainWindow::closeEvent(QCloseEvent *event)
     // Save state
     ContextManager::configuration()->setValue(ConfManager::SECTION_DISPLAY, "windowGeometry", saveGeometry());
     ContextManager::configuration()->setValue(ConfManager::SECTION_DISPLAY, "windowState", saveState());
-//    if (_dialKeyboard.isVisible())
-//        _geometryDialKeyboard = _dialKeyboard.saveGeometry();
-//    ContextManager::configuration()->setValue(ConfManager::SECTION_DISPLAY, "keyboardGeometry", _geometryDialKeyboard);
 
     // Number of files not saved
     int nbFile = 0;
@@ -303,4 +300,15 @@ void MainWindow::onKeyboardDisplayChange(bool isDisplayed)
 void MainWindow::onRecorderDisplayChange(bool isDisplayed)
 {
     _recorder->setVisible(isDisplayed);
+}
+
+void MainWindow::keyPressEvent(QKeyEvent * event)
+{
+    if (event->modifiers() & Qt::ControlModifier && event->key() == Qt::Key_K)
+    {
+        if (_keyboard->isVisible())
+            _keyboard->activateWindow();
+        _keyboard->glow();
+    }
+    QMainWindow::keyPressEvent(event);
 }

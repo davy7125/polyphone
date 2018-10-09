@@ -122,6 +122,11 @@ public:
         return idParent;
     }
 
+    bool operator !=(const EltID &other)
+    {
+        return !((*this) == other);
+    }
+
     bool operator==(const EltID &other)
     {
         bool ok = true;

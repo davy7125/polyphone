@@ -520,7 +520,7 @@ void Tree::clicTree()
     }
 
     // Activation, désactivation des actions de MainWindow
-    this->_mainWindow->updateActions();
+    //this->_mainWindow->updateActions();
 }
 
 void Tree::clicTreeRight()
@@ -831,7 +831,7 @@ void Tree::dropEvent(QDropEvent *event)
                     _mainWindow->dragAndDrop(path, idDest, &commandCopy);*/
             }
         }
-        this->_mainWindow->updateActions();
+        //this->_mainWindow->updateActions();
     }
     else
     {

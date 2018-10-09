@@ -166,3 +166,8 @@ void PageOverview::on_table_cellDoubleClicked(int row, int column)
     EltID id((ElementType)listTmp[0].toInt(), listTmp[1].toInt(), listTmp[2].toInt(), 0, 0);
     emit(selectedIdsChanged(IdList(id)));
 }
+
+void PageOverview::onShow()
+{
+    // Nothing special
+}

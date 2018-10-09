@@ -45,7 +45,12 @@ public:
 
 protected:
     // Update the interface
-    bool updateInterface(QString editingSource, IdList selectedIds, int displayOption);
+    bool updateInterface(QString editingSource, IdList selectedIds, int displayOption) override;
+
+    // Refresh things after a page is shown
+    void onShow() override;
+
+    void keyPlayedInternal(int key, int velocity) override;
 
 private slots:
     void lecture();

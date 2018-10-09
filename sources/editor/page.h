@@ -93,10 +93,15 @@ public:
 
     static QString getGenName(quint16 iVal, int type = 0);
 
-signals:
-    // Ask a note to be played
-    void triggerNote(int key, int velocity);
+public slots:
+    // A key is being played or not played anymore (if velocity is 0)
+    void keyPlayed(int key, int velocity)
+    {
+        if (key != -1 && this->isVisible())
+            this->keyPlayedInternal(key, velocity);
+    }
 
+signals:
     // Emitted when the selected ids changed
     void selectedIdsChanged(IdList ids);
 
@@ -106,6 +111,16 @@ protected:
 
     // Update the interface
     virtual bool updateInterface(QString editingSource, IdList selectedIds, int displayOption) = 0;
+
+    // A key is being played or not played anymore (if velocity is 0)
+    virtual void keyPlayedInternal(int key, int velocity)
+    {
+        Q_UNUSED(key)
+        Q_UNUSED(velocity)
+    }
+
+    // Refresh things after a page is shown
+    virtual void onShow() = 0;
 
     // Get the editing source when a soundfont is edited
     // Can be for instance page:smpl, page:inst, page:prst
@@ -121,6 +136,9 @@ protected:
     static char * getTextValue(char * T, quint16 champ, SFModulator sfModVal);
     static QString getIndexName(quint16 iVal, int CC);
     genAmountType getValue(QString texte, quint16 champ, bool &ok);
+
+    void showEvent(QShowEvent * event);
+    void hideEvent(QHideEvent * event);
 
 private:
     int limit(int iTmp, int minInst, int maxInst, int minPrst = 0, int maxPrst = 0);

@@ -17,7 +17,7 @@
    <string>Polyphone</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="../resources.qrc">
+   <iconset>
     <normaloff>:/icons/icon</normaloff>:/icons/icon</iconset>
   </property>
   <property name="styleSheet">
@@ -43,128 +43,7 @@
     <property name="horizontalSpacing">
      <number>6</number>
     </property>
-    <item row="0" column="0">
-     <widget class="QWidget" name="ensembleKeyboard" native="true">
-      <layout class="QGridLayout" name="gridLayout_4">
-       <property name="leftMargin">
-        <number>0</number>
-       </property>
-       <property name="topMargin">
-        <number>0</number>
-       </property>
-       <property name="rightMargin">
-        <number>0</number>
-       </property>
-       <property name="bottomMargin">
-        <number>0</number>
-       </property>
-       <item row="0" column="1">
-        <widget class="QLabel" name="label_3">
-         <property name="font">
-          <font>
-           <pointsize>10</pointsize>
-          </font>
-         </property>
-         <property name="text">
-          <string>Note</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="2">
-        <widget class="QLabel" name="labelVelocite">
-         <property name="minimumSize">
-          <size>
-           <width>25</width>
-           <height>0</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>25</width>
-           <height>16777215</height>
-          </size>
-         </property>
-         <property name="font">
-          <font>
-           <pointsize>10</pointsize>
-          </font>
-         </property>
-         <property name="text">
-          <string notr="true">-</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignCenter</set>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="2">
-        <widget class="QLabel" name="labelNote">
-         <property name="minimumSize">
-          <size>
-           <width>25</width>
-           <height>0</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>25</width>
-           <height>16777215</height>
-          </size>
-         </property>
-         <property name="font">
-          <font>
-           <pointsize>10</pointsize>
-          </font>
-         </property>
-         <property name="text">
-          <string notr="true">-</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignCenter</set>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="1">
-        <widget class="QLabel" name="label_2">
-         <property name="font">
-          <font>
-           <pointsize>10</pointsize>
-          </font>
-         </property>
-         <property name="text">
-          <string>Vél.</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="0" rowspan="2">
-        <spacer name="horizontalSpacer">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-         <property name="sizeType">
-          <enum>QSizePolicy::MinimumExpanding</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>40</width>
-           <height>20</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item row="0" column="3" rowspan="2">
-        <widget class="PianoKeybdCustom" name="widgetKeyboard" native="true"/>
-       </item>
-      </layout>
-     </widget>
-    </item>
-    <item row="2" column="0">
+    <item row="1" column="0">
      <widget class="QStackedWidget" name="stackedWidget">
       <property name="currentIndex">
        <number>0</number>
@@ -626,7 +505,7 @@
   </action>
   <action name="actionQuitter">
    <property name="icon">
-    <iconset resource="../resources.qrc">
+    <iconset>
      <normaloff>:/icons/exit</normaloff>:/icons/exit</iconset>
    </property>
    <property name="text">
@@ -793,7 +672,7 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset resource="../resources.qrc">
+    <iconset>
      <normaloff>:/icons/copy</normaloff>:/icons/copy</iconset>
    </property>
    <property name="text">
@@ -814,7 +693,7 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset resource="../resources.qrc">
+    <iconset>
      <normaloff>:/icons/paste</normaloff>:/icons/paste</iconset>
    </property>
    <property name="text">
@@ -856,7 +735,7 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset resource="../resources.qrc">
+    <iconset>
      <normaloff>:/icons/auto_remove</normaloff>:/icons/auto_remove</iconset>
    </property>
    <property name="text">
@@ -1048,7 +927,7 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset resource="../resources.qrc">
+    <iconset>
      <normaloff>:/icons/couper_blanc</normaloff>:/icons/couper_blanc</iconset>
    </property>
    <property name="text">
@@ -1063,7 +942,7 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset resource="../resources.qrc">
+    <iconset>
      <normaloff>:/icons/couper_fin_boucle</normaloff>:/icons/couper_fin_boucle</iconset>
    </property>
    <property name="text">
@@ -1078,7 +957,7 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset resource="../resources.qrc">
+    <iconset>
      <normaloff>:/icons/normalise</normaloff>:/icons/normalise</iconset>
    </property>
    <property name="text">
@@ -1093,7 +972,7 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset resource="../resources.qrc">
+    <iconset>
      <normaloff>:/icons/loop</normaloff>:/icons/loop</iconset>
    </property>
    <property name="text">
@@ -1108,7 +987,7 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset resource="../resources.qrc">
+    <iconset>
      <normaloff>:/icons/filter</normaloff>:/icons/filter</iconset>
    </property>
    <property name="text">
@@ -1123,7 +1002,7 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset resource="../resources.qrc">
+    <iconset>
      <normaloff>:/icons/transposer</normaloff>:/icons/transposer</iconset>
    </property>
    <property name="text">
@@ -1138,7 +1017,7 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset resource="../resources.qrc">
+    <iconset>
      <normaloff>:/icons/volume_mini</normaloff>:/icons/volume_mini</iconset>
    </property>
    <property name="text">
@@ -1153,7 +1032,7 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset resource="../resources.qrc">
+    <iconset>
      <normaloff>:/icons/celeste</normaloff>:/icons/celeste</iconset>
    </property>
    <property name="text">
@@ -1168,7 +1047,7 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset resource="../resources.qrc">
+    <iconset>
      <normaloff>:/icons/spacialisation</normaloff>:/icons/spacialisation</iconset>
    </property>
    <property name="text">
@@ -1183,7 +1062,7 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset resource="../resources.qrc">
+    <iconset>
      <normaloff>:/icons/repartition_auto</normaloff>:/icons/repartition_auto</iconset>
    </property>
    <property name="text">
@@ -1198,7 +1077,7 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset resource="../resources.qrc">
+    <iconset>
      <normaloff>:/icons/dupliquer</normaloff>:/icons/dupliquer</iconset>
    </property>
    <property name="text">
@@ -1216,7 +1095,7 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset resource="../resources.qrc">
+    <iconset>
      <normaloff>:/icons/parametrageGlobal</normaloff>:/icons/parametrageGlobal</iconset>
    </property>
    <property name="text">
@@ -1231,7 +1110,7 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset resource="../resources.qrc">
+    <iconset>
      <normaloff>:/icons/balance</normaloff>:/icons/balance</iconset>
    </property>
    <property name="text">
@@ -1246,7 +1125,7 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset resource="../resources.qrc">
+    <iconset>
      <normaloff>:/icons/mixture_creation</normaloff>:/icons/mixture_creation</iconset>
    </property>
    <property name="text">
@@ -1308,7 +1187,7 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset resource="../resources.qrc">
+    <iconset>
      <normaloff>:/icons/dupliquer</normaloff>:/icons/dupliquer</iconset>
    </property>
    <property name="text">
@@ -1326,7 +1205,7 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset resource="../resources.qrc">
+    <iconset>
      <normaloff>:/icons/release</normaloff>:/icons/release</iconset>
    </property>
    <property name="text">
@@ -1341,7 +1220,7 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset resource="../resources.qrc">
+    <iconset>
      <normaloff>:/icons/parametrageGlobal</normaloff>:/icons/parametrageGlobal</iconset>
    </property>
    <property name="text">
@@ -1356,7 +1235,7 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset resource="../resources.qrc">
+    <iconset>
      <normaloff>:/icons/link</normaloff>:/icons/link</iconset>
    </property>
    <property name="text">
@@ -1383,7 +1262,7 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset resource="../resources.qrc">
+    <iconset>
      <normaloff>:/icons/monitor</normaloff>:/icons/monitor</iconset>
    </property>
    <property name="text">
@@ -1398,7 +1277,7 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset resource="../resources.qrc">
+    <iconset>
      <normaloff>:/icons/monitor</normaloff>:/icons/monitor</iconset>
    </property>
    <property name="text">
@@ -1413,7 +1292,7 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset resource="../resources.qrc">
+    <iconset>
      <normaloff>:/icons/spacialisation</normaloff>:/icons/spacialisation</iconset>
    </property>
    <property name="text">
@@ -1443,7 +1322,7 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset resource="../resources.qrc">
+    <iconset>
      <normaloff>:/icons/unlink</normaloff>:/icons/unlink</iconset>
    </property>
    <property name="text">
@@ -1458,7 +1337,7 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset resource="../resources.qrc">
+    <iconset>
      <normaloff>:/icons/csv</normaloff>:/icons/csv</iconset>
    </property>
    <property name="text">
@@ -1500,7 +1379,7 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset resource="../resources.qrc">
+    <iconset>
      <normaloff>:/icons/transposer_inst</normaloff>:/icons/transposer_inst</iconset>
    </property>
    <property name="text">
@@ -1544,7 +1423,7 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset resource="../resources.qrc">
+    <iconset>
      <normaloff>:/icons/command</normaloff>:/icons/command</iconset>
    </property>
    <property name="text">
@@ -1556,7 +1435,7 @@
   </action>
   <action name="actionExporter_la_liste_des_presets">
    <property name="icon">
-    <iconset resource="../resources.qrc">
+    <iconset>
      <normaloff>:/icons/list</normaloff>:/icons/list</iconset>
    </property>
    <property name="text">
@@ -1590,12 +1469,6 @@
     <slot>clicTree()</slot>
     <slot>clicTreeRight()</slot>
    </slots>
-  </customwidget>
-  <customwidget>
-   <class>PianoKeybdCustom</class>
-   <extends>QWidget</extends>
-   <header>pianokeybdcustom.h</header>
-   <container>1</container>
   </customwidget>
  </customwidgets>
  <resources>

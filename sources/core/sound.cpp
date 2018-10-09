@@ -31,7 +31,6 @@
 #include "qmath.h"
 #include <QFile>
 #include "contextmanager.h"
-#include <QDebug>
 
 QWidget * Sound::_parent = NULL;
 

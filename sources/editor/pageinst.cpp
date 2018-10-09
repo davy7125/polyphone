@@ -117,7 +117,6 @@ PageInst::PageInst(QWidget *parent) :
     connect(this->_table, SIGNAL(actionFinished()), this, SLOT(actionFinished()));
     connect(this->_table, SIGNAL(openElement(EltID)), this, SLOT(onOpenElement(EltID)));
     connect(ui->rangeEditor, SIGNAL(updateKeyboard()), this, SLOT(customizeKeyboard()));
-    connect(ui->rangeEditor, SIGNAL(keyTriggered(int,int)), this, SIGNAL(triggerNote(int,int)));
     connect(ui->rangeEditor, SIGNAL(divisionsSelected(IdList)), this, SIGNAL(selectedIdsChanged(IdList)));
     connect(ui->widgetLinkedTo, SIGNAL(itemClicked(EltID)), this, SLOT(onLinkClicked(EltID)));
 }
@@ -147,9 +146,26 @@ bool PageInst::updateInterface(QString editingSource, IdList selectedIds, int di
     if (selectedIds.empty())
         return false;
 
-    _currentParentIds = IdList(selectedIds.getSelectedIds(elementInst));
+    // Check if the new parents are the same
+    IdList parentIds = selectedIds.getSelectedIds(elementInst);
+    bool sameElement = true;
+    if (parentIds.count() == _currentParentIds.count())
+    {
+        for (int i = 0; i < parentIds.count(); i++)
+        {
+            if (parentIds[i] != _currentParentIds[i])
+            {
+                sameElement = false;
+                break;
+            }
+        }
+    }
+    else
+        sameElement = false;
+
+    // Update the selection
+    _currentParentIds = parentIds;
     _currentIds = selectedIds;
-    customizeKeyboard();
 
     if (_currentParentIds.count() == 1)
     {
@@ -170,22 +186,25 @@ bool PageInst::updateInterface(QString editingSource, IdList selectedIds, int di
         ui->widgetLinkedTo->clear();
     }
 
+    int oldIndex = ui->stackedWidget->currentIndex();
     switch (displayOption)
     {
     case 1:
         ui->stackedWidget->setCurrentIndex(0);
-        this->afficheTable();
+        this->afficheTable(sameElement && oldIndex == 0);
         break;
     case 2:
         ui->stackedWidget->setCurrentIndex(1);
-        this->afficheRanges();
+        this->afficheRanges(sameElement && oldIndex == 1);
         break;
     case 3:
         ui->stackedWidget->setCurrentIndex(2);
-        this->afficheEnvelops();
+        this->afficheEnvelops(sameElement && oldIndex == 2);
         break;
-    default: return false;
+    default:
+        return false;
     }
+    customizeKeyboard();
 
     return true;
 }
@@ -1144,4 +1163,67 @@ Champ TableWidgetInst::getChamp(int row)
 void PageInst::onLinkClicked(EltID id)
 {
     emit(selectedIdsChanged(id));
+}
+
+void PageInst::keyPlayedInternal2(int key, int velocity)
+{
+    IdList ids = _currentIds.getSelectedIds(elementInst);
+    if (ids.count() == 1)
+    {
+        ContextManager::audio()->getSynth()->play(1, ids[0].indexSf2, ids[0].indexElt, key, velocity);
+
+        if (velocity > 0)
+        {
+            // Emphasize the related ranges
+            EltID idInst = ids[0];
+            idInst.typeElement = elementInst;
+            rangesType defaultKeyRange, defaultVelRange;
+            if (_sf2->isSet(idInst, champ_keyRange))
+                defaultKeyRange = _sf2->get(idInst, champ_keyRange).rValue;
+            else
+            {
+                defaultKeyRange.byLo = 0;
+                defaultKeyRange.byHi = 127;
+            }
+            if (_sf2->isSet(idInst, champ_velRange))
+                defaultVelRange = _sf2->get(idInst, champ_velRange).rValue;
+            else
+            {
+                defaultVelRange.byLo = 0;
+                defaultVelRange.byHi = 127;
+            }
+
+            EltID idInstSmpl = ids[0];
+            idInstSmpl.typeElement = elementInstSmpl;
+            foreach (int i, _sf2->getSiblings(idInstSmpl))
+            {
+                idInstSmpl.indexElt2 = i;
+                int keyMin, keyMax, velMin, velMax;
+                if (_sf2->isSet(idInstSmpl, champ_keyRange))
+                {
+                    rangesType rangeTmp = _sf2->get(idInstSmpl, champ_keyRange).rValue;
+                    keyMin = rangeTmp.byLo;
+                    keyMax = rangeTmp.byHi;
+                }
+                else
+                {
+                    keyMin = defaultKeyRange.byLo;
+                    keyMax = defaultKeyRange.byHi;
+                }
+                if (_sf2->isSet(idInstSmpl, champ_velRange))
+                {
+                    rangesType rangeTmp = _sf2->get(idInstSmpl, champ_velRange).rValue;
+                    velMin = rangeTmp.byLo;
+                    velMax = rangeTmp.byHi;
+                }
+                else
+                {
+                    velMin = defaultVelRange.byLo;
+                    velMax = defaultVelRange.byHi;
+                }
+                if (keyMin <= key && keyMax >= key && velMin <= velocity && velMax >= velocity)
+                    ContextManager::midi()->keyboard()->addCurrentRange(key, keyMin, keyMax);
+            }
+        }
+    }
 }

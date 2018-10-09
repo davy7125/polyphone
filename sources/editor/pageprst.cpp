@@ -108,7 +108,6 @@ PagePrst::PagePrst(QWidget *parent) :
     connect(this->_table, SIGNAL(actionFinished()), this, SLOT(actionFinished()));
     connect(this->_table, SIGNAL(openElement(EltID)), this, SLOT(onOpenElement(EltID)));
     connect(ui->rangeEditor, SIGNAL(updateKeyboard()), this, SLOT(customizeKeyboard()));
-    connect(ui->rangeEditor, SIGNAL(keyTriggered(int,int)), this, SIGNAL(triggerNote(int, int)));
     connect(ui->rangeEditor, SIGNAL(divisionsSelected(IdList)), this, SIGNAL(selectedIdsChanged(IdList)));
 }
 
@@ -136,9 +135,25 @@ bool PagePrst::updateInterface(QString editingSource, IdList selectedIds, int di
     if (selectedIds.empty())
         return false;
 
-    _currentParentIds = selectedIds.getSelectedIds(elementInst);
+    // Check if the new parents are the same
+    IdList parentIds = selectedIds.getSelectedIds(elementPrst);
+    bool sameElement = true;
+    if (parentIds.count() == _currentParentIds.count())
+    {
+        for (int i = 0; i < parentIds.count(); i++)
+        {
+            if (parentIds[i] != _currentParentIds[i])
+            {
+                sameElement = false;
+                break;
+            }
+        }
+    }
+    else
+        sameElement = false;
+
+    _currentParentIds = parentIds;
     _currentIds = selectedIds;
-    customizeKeyboard();
 
     if (_currentParentIds.count() == 1)
     {
@@ -156,18 +171,21 @@ bool PagePrst::updateInterface(QString editingSource, IdList selectedIds, int di
         ui->frameModulator->setEnabled(false);
     }
 
+    int oldIndex = ui->stackedWidget->currentIndex();
     switch (displayOption)
     {
     case 1:
-        this->afficheTable();
         ui->stackedWidget->setCurrentIndex(0);
+        this->afficheTable(sameElement && oldIndex == 0);
         break;
     case 2:
-        this->afficheRanges();
         ui->stackedWidget->setCurrentIndex(1);
+        this->afficheRanges(sameElement && oldIndex == 1);
         break;
-    default: return false;
+    default:
+        return false;
     }
+    customizeKeyboard();
 
     return true;
 }
@@ -396,4 +414,11 @@ void PagePrst::setPreset()
         }
     }
     _preparingPage = 0;
+}
+
+void PagePrst::keyPlayedInternal2(int key, int velocity)
+{
+    IdList ids = _currentIds.getSelectedIds(elementPrst);
+    if (ids.count() == 1)
+        ContextManager::audio()->getSynth()->play(2, ids[0].indexSf2, ids[0].indexElt, key, velocity);
 }

@@ -43,7 +43,7 @@ public:
     ~EnvelopEditor();
 
     void init(SoundfontManager * sf2);
-    void display(QList<EltID> ids);
+    void display(QList<EltID> ids, bool sameElement);
 
 private slots:
     void on_pushVolume_clicked();

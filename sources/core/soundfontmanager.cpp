@@ -31,7 +31,6 @@
 #include "division.h"
 #include "modulator.h"
 #include "action.h"
-#include <QDebug>
 
 SoundfontManager * SoundfontManager::s_instance = NULL;
 SoundfontManager * SoundfontManager::getInstance()
@@ -98,30 +97,25 @@ bool SoundfontManager::isSet(EltID id, Champ champ)
         // Analyse d'un sample
         value = true;
         break;
-    case elementInst:{
+    case elementInst:
         // Analyse d'un instrument
-        InstPrst *tmp = _soundfonts->getSoundfont(id.indexSf2)->getInstrument(id.indexElt);
-        value = tmp->getGlobalDivision()->isSet(champ);
-    }break;
-    case elementPrst:{
+        value = _soundfonts->getSoundfont(id.indexSf2)->getInstrument(id.indexElt)->getGlobalDivision()->isSet(champ);
+        break;
+    case elementPrst:
         // Analyse d'un preset
-        InstPrst *tmp = _soundfonts->getSoundfont(id.indexSf2)->getPreset(id.indexElt);
         switch ((int)champ)
         {
         case champ_wPreset:
-            value = true; break;
         case champ_wBank:
-            value = true; break;
         case champ_dwLibrary:
-            value = true; break;
         case champ_dwGenre:
-            value = true; break;
         case champ_dwMorphology:
-            value = true; break;
+            value = true;
+            break;
         default:
-            value = tmp->getGlobalDivision()->isSet(champ);
+            value = _soundfonts->getSoundfont(id.indexSf2)->getPreset(id.indexElt)->getGlobalDivision()->isSet(champ);
         }
-    }break;
+        break;
     case elementInstSmpl:{
         // Analyse d'un sample lié à un instrument
         Division *tmp = _soundfonts->getSoundfont(id.indexSf2)->getInstrument(id.indexElt)->getDivision(id.indexElt2);
@@ -217,7 +211,7 @@ Valeur SoundfontManager::get(EltID id, Champ champ)
     case elementInst:{
         // Analyse d'un instrument
         InstPrst *tmp = _soundfonts->getSoundfont(id.indexSf2)->getInstrument(id.indexElt);
-        value.bValue = tmp->isHidden();
+        value = tmp->getGlobalDivision()->getGen(champ);
     }break;
     case elementPrst:{
         // Analyse d'un preset

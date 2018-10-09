@@ -111,4 +111,7 @@
         <file alias="balance.svg">editor/tools/balance_adjustment/balance.svg</file>
         <file alias="transpose.svg">editor/tools/transpose_smpl/transpose.svg</file>
     </qresource>
+    <qresource prefix="/vpiano">
+        <file alias="blkey.svg">resources/blkey.svg</file>
+    </qresource>
 </RCC>

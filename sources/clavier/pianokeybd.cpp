@@ -24,18 +24,16 @@
 
 PianoKeybd::PianoKeybd(QWidget *parent, const int startKey, const int numKeys) : QGraphicsView(parent),
       m_rotation(0),
-      m_scene(NULL),
-      m_keyboardMap(new KeyboardMap())
+      m_scene(NULL)
 {
     initialize();
-    PianoScene::initKeyboardMap(m_keyboardMap);
     initScene(startKey, numKeys);
+    this->setMouseTracking(true);
 }
 
 PianoKeybd::~PianoKeybd()
 {
     delete m_scene;
-    delete m_keyboardMap;
 }
 
 void PianoKeybd::initScene(int startKey, int numKeys)
@@ -83,8 +81,6 @@ void PianoKeybd::set(KeyboardProperty keyboardProperty, QVariant value)
     case PROPERTY_COLORATION_TYPE:
         m_scene->setColorationType((ColorationType)value.toInt());
         break;
-    case PROPERTY_COLOR_TEXT_BLACK_KEYS: m_scene->setColor(-4, value.value<QColor>()); break;
-    case PROPERTY_COLOR_TEXT_WHITE_KEYS: m_scene->setColor(-3, value.value<QColor>()); break;
     case PROPERTY_COLOR_BLACK_KEYS: m_scene->setColor(-2, value.value<QColor>()); break;
     case PROPERTY_COLOR_WHITE_KEYS: m_scene->setColor(-1, value.value<QColor>()); break;
     case PROPERTY_COLOR_1:          m_scene->setColor(0,  value.value<QColor>()); break;
@@ -99,32 +95,6 @@ void PianoKeybd::set(KeyboardProperty keyboardProperty, QVariant value)
         break;
     case PROPERTY_VELOCITY:
         m_scene->setVelocity(value.toInt());
-        break;
-    case PROPERTY_ENABLE_COMPUTER_KEYBOARD:
-        m_scene->setKeyboardEnabled(value.toBool());
-        break;
-    case PROPERTY_ENABLE_MOUSE:
-        m_scene->setMouseEnabled(value.toBool());
-        break;
-    case PROPERTY_ENABLE_TOUCH:
-        m_scene->setTouchEnabled(value.toBool());
-        break;
-    case PROPERTY_LABEL_TYPE:
-        m_scene->setLabelType((LabelType)value.toInt());
-        break;
-    case PROPERTY_MIDDLE_C:
-        m_scene->setMiddleC((MiddleKey)value.toInt());
-        break;
-    case PROPERTY_CUSTOM_LABELS:
-        m_scene->setCustomNoteNames(value.toStringList());
-        break;
-    case PROPERTY_LABEL_OCTAVE_INDICE:
-        m_scene->setIndicesInLabels(value.toBool());
-        break;
-    case PROPERTY_MAPPING_FIRST_NOTE:
-        m_keyboardMap->setFirstNote(value.toInt());
-        if (m_scene->getLabelType() == LABEL_TYPE_MAPPING)
-            m_scene->refreshLabels();
         break;
     }
 }
@@ -143,8 +113,6 @@ QVariant PianoKeybd::get(KeyboardProperty keyboardProperty)
     case PROPERTY_COLORATION_TYPE:
         vRet = (int)m_scene->getColorationType();
         break;
-    case PROPERTY_COLOR_TEXT_BLACK_KEYS: vRet = m_scene->getColor(-4); break;
-    case PROPERTY_COLOR_TEXT_WHITE_KEYS: vRet = m_scene->getColor(-3); break;
     case PROPERTY_COLOR_BLACK_KEYS: vRet = m_scene->getColor(-2); break;
     case PROPERTY_COLOR_WHITE_KEYS: vRet = m_scene->getColor(-1); break;
     case PROPERTY_COLOR_1:          vRet = m_scene->getColor(0);  break;
@@ -159,30 +127,6 @@ QVariant PianoKeybd::get(KeyboardProperty keyboardProperty)
         break;
     case PROPERTY_VELOCITY:
         vRet = m_scene->getVelocity();
-        break;
-    case PROPERTY_ENABLE_COMPUTER_KEYBOARD:
-        vRet = m_scene->isKeyboardEnabled();
-        break;
-    case PROPERTY_ENABLE_MOUSE:
-        vRet = m_scene->isMouseEnabled();
-        break;
-    case PROPERTY_ENABLE_TOUCH:
-        vRet = m_scene->isTouchEnabled();
-        break;
-    case PROPERTY_LABEL_TYPE:
-        vRet = (int)m_scene->getLabelType();
-        break;
-    case PROPERTY_MIDDLE_C:
-        vRet = (int)m_scene->getMiddleC();
-        break;
-    case PROPERTY_CUSTOM_LABELS:
-        vRet = m_scene->customNoteNames();
-        break;
-    case PROPERTY_LABEL_OCTAVE_INDICE:
-        vRet = m_scene->indicesInLabels();
-        break;
-    case PROPERTY_MAPPING_FIRST_NOTE:
-        vRet = m_keyboardMap->getFirstNote();
         break;
     }
     return vRet;
@@ -201,7 +145,7 @@ void PianoKeybd::setRotation(int r)
 
 void PianoKeybd::setStartKey(int startKey)
 {
-    if ( startKey != m_scene->startKey() )
+    if (startKey != m_scene->startKey())
     {
         initScene(startKey, m_scene->numKeys());
         fitInView(m_scene->sceneRect(), Qt::KeepAspectRatio);
@@ -260,18 +204,6 @@ void PianoKeybd::inputNoteOff(int midiNote, int channel)
     m_scene->showNoteOff(midiNote, channel);
 }
 
-void PianoKeybd::setMapping(Key key, int numOctave, QKeySequence sequence)
-{
-    m_keyboardMap->setMapping(key, numOctave, sequence);
-    if (m_scene->getLabelType() == LABEL_TYPE_MAPPING)
-        m_scene->refreshLabels();
-}
-
-QKeySequence PianoKeybd::getMapping(Key key, int numOctave)
-{
-    return m_keyboardMap->getMapping(key, numOctave);
-}
-
 void PianoKeybd::triggerNote(int key, int velocity)
 {
     if (velocity > 0)
@@ -282,5 +214,10 @@ void PianoKeybd::triggerNote(int key, int velocity)
 
 void PianoKeybd::triggerGlowEffect()
 {
-    this->m_scene->triggerGlowEffect();
+    m_scene->triggerGlowEffect();
+}
+
+void PianoKeybd::updateMapping()
+{
+    m_scene->updateMapping();
 }

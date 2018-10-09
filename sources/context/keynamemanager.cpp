@@ -61,16 +61,16 @@ QString KeyNameManager::getKeyName(int keyNum, bool forceTexte, bool with0, bool
         switch (keyNum % 12)
         {
         case 0:  keyName = "C";  break;
-        case 1:  keyName = "Db"; break;
+        case 1:  keyName = "D♭"; break;
         case 2:  keyName = "D";  break;
-        case 3:  keyName = "Eb"; break;
+        case 3:  keyName = "E♭"; break;
         case 4:  keyName = "E";  break;
         case 5:  keyName = "F";  break;
-        case 6:  keyName = "Gb"; break;
+        case 6:  keyName = "G♭"; break;
         case 7:  keyName = "G";  break;
-        case 8:  keyName = "Ab"; break;
+        case 8:  keyName = "A♭"; break;
         case 9:  keyName = "A";  break;
-        case 10: keyName = "Bb"; break;
+        case 10: keyName = "B♭"; break;
         case 11: keyName = "B";  break;
         }
     }
@@ -79,16 +79,16 @@ QString KeyNameManager::getKeyName(int keyNum, bool forceTexte, bool with0, bool
         switch (keyNum % 12)
         {
         case 0:  keyName = "C";  break;
-        case 1:  keyName = "C#"; break;
+        case 1:  keyName = "C♯"; break;
         case 2:  keyName = "D";  break;
-        case 3:  keyName = "D#"; break;
+        case 3:  keyName = "D♯"; break;
         case 4:  keyName = "E";  break;
         case 5:  keyName = "F";  break;
-        case 6:  keyName = "F#"; break;
+        case 6:  keyName = "F♯"; break;
         case 7:  keyName = "G";  break;
-        case 8:  keyName = "G#"; break;
+        case 8:  keyName = "G♯"; break;
         case 9:  keyName = "A";  break;
-        case 10: keyName = "A#"; break;
+        case 10: keyName = "A♯"; break;
         case 11: keyName = "B";  break;
         }
     }
@@ -116,7 +116,7 @@ int KeyNameManager::getKeyNum(QString keyName, bool forceC4)
         case 'e': note = 64; break;
         case 'f': note = 65; break;
         case 'g': note = 67; break;
-        case 'a': note = 69; break;
+        case 'a': case 'h': note = 69; break;
         case 'b': note = 71; break;
         default : return -1; break;
         }

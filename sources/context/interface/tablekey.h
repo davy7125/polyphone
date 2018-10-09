@@ -44,6 +44,8 @@ private slots:
     void rowChanged(QString id);
 
 private:
+    void populate();
+
     QSignalMapper * _signalMapper;
 };
 

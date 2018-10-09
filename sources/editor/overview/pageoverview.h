@@ -44,6 +44,9 @@ protected:
     // Update the interface
     bool updateInterface(QString editingSource, IdList selectedIds, int displayOption) override;
 
+    // Refresh things after a page is shown
+    void onShow() override;
+
     virtual QString getTitle() = 0;
     virtual QStringList getHorizontalHeader() = 0;
     virtual void prepare(EltID id) = 0;
