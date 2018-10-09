@@ -58,6 +58,23 @@ public:
         TOOL_TYPE_PRESET
     };
 
+    enum Key
+    {
+        KEY_C_LEFT,
+        KEY_C_SHARP,
+        KEY_D,
+        KEY_D_SHARP,
+        KEY_E,
+        KEY_F,
+        KEY_F_SHARP,
+        KEY_G,
+        KEY_G_SHARP,
+        KEY_A,
+        KEY_A_SHARP,
+        KEY_B,
+        KEY_C_RIGHT
+    };
+
     ConfManager();
 
     /// Get a value from a section
@@ -75,6 +92,9 @@ public:
     /// Get the configuration file directory
     QString getConfigDir();
 
+    /// Get the keyboard combination associated to a specific note
+    QString getMapping(int numOctave, Key key);
+
 signals:
     /// Emitted when the chorus or reverb configuration changed or the buffer size
     void soundEngineConfigurationChanged();
@@ -84,6 +104,9 @@ signals:
 
     /// Emitted when the note names changed
     void interfaceChanged();
+
+    /// Emitted when the mapping changed
+    void keyMapChanged();
 
 private:
     QString getFullKey(Section section, QString key) const;

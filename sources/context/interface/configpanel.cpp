@@ -76,9 +76,6 @@ ConfigPanel::ConfigPanel(QWidget *parent) : QWidget(parent),
                                              QString::number(hostInfos[i]._devices[j]._index));
                 if (hostInfos[i]._devices[j]._isDefault)
                 {
-                    //                    ui->comboAudioOuput->setItemData(ui->comboAudioOuput->count() - 1,
-                    //                                                     QColor(0, 0, 200),
-                    //                                                     Qt::ForegroundRole);
                     if (hostInfos[i]._isDefault)
                         comboboxDefaultIndex = ui->comboAudioOuput->count() - 1;
                 }
@@ -127,16 +124,16 @@ ConfigPanel::ConfigPanel(QWidget *parent) : QWidget(parent),
     ui->spinDefaultVelocity->setValue(
                 ContextManager::configuration()->getValue(ConfManager::SECTION_KEYBOARD, "velocity", 127).toInt());
 
-    //ui->comboRam->setVisible(false); // Temporaire : tout charger dans la ram n'apporte rien pour l'instant (sur linux)
-    //ui->label_2->setVisible(false);
     QTimer::singleShot(1, this, SLOT(fillColors())); // trick that fixes a bug which appeared with Qt5
 
-    // Initialisation mappage
-
+    // Keyboard map
     int octaveMapping = ContextManager::configuration()->getValue(ConfManager::SECTION_MAP, "octave_offset", 3).toInt();
     if (octaveMapping >= ui->comboDo->count())
         octaveMapping = 3;
+    else if (octaveMapping < 0)
+        octaveMapping = 0;
     ui->comboDo->setCurrentIndex(octaveMapping);
+
 //    KeyboardManager::set(PianoKeybd::PROPERTY_MAPPING_FIRST_NOTE, 12 * octaveMapping);
 //    for (int i = 0; i < 4; i++)
 //    {

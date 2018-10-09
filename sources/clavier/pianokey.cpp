@@ -44,7 +44,7 @@ PianoKey::PianoKey(const QRectF &rect, const bool black, const int note)
 void PianoKey::paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWidget *)
 {
     // Mix between black and gray with the glow color
-    QColor glowColor = QApplication::palette().color(QPalette::Highlight);
+    QColor glowColor = Qt::white;
     const QPen blackPen(mergeColor(Qt::black, glowColor, s_glowEffect), 1);
     const QPen grayPen(QBrush(mergeColor(Qt::gray, glowColor, s_glowEffect)),
                        1, Qt::SolidLine,  Qt::RoundCap, Qt::RoundJoin);
@@ -126,34 +126,19 @@ QColor PianoKey::getBorderColor(PianoKeybd::MarkerType type)
     QColor color;
     switch (type)
     {
-    case PianoKeybd::MARKER_TYPE_ARROW_BLUE:
-    case PianoKeybd::MARKER_TYPE_CROSS_BLUE:
     case PianoKeybd::MARKER_TYPE_DOT_BLUE:
-    case PianoKeybd::MARKER_TYPE_STAR_BLUE:
         color = QColor(0, 0, 127);
         break;
-    case PianoKeybd::MARKER_TYPE_ARROW_RED:
-    case PianoKeybd::MARKER_TYPE_CROSS_RED:
     case PianoKeybd::MARKER_TYPE_DOT_RED:
-    case PianoKeybd::MARKER_TYPE_STAR_RED:
         color = QColor(127, 0, 0);
         break;
-    case PianoKeybd::MARKER_TYPE_ARROW_YELLOW:
-    case PianoKeybd::MARKER_TYPE_CROSS_YELLOW:
     case PianoKeybd::MARKER_TYPE_DOT_YELLOW:
-    case PianoKeybd::MARKER_TYPE_STAR_YELLOW:
         color = QColor(127, 127, 0);
         break;
-    case PianoKeybd::MARKER_TYPE_ARROW_BLACK:
-    case PianoKeybd::MARKER_TYPE_CROSS_BLACK:
     case PianoKeybd::MARKER_TYPE_DOT_BLACK:
-    case PianoKeybd::MARKER_TYPE_STAR_BLACK:
         color = QColor(127, 127, 127);
         break;
-    case PianoKeybd::MARKER_TYPE_ARROW_WHITE:
-    case PianoKeybd::MARKER_TYPE_CROSS_WHITE:
     case PianoKeybd::MARKER_TYPE_DOT_WHITE:
-    case PianoKeybd::MARKER_TYPE_STAR_WHITE:
         color = QColor(127, 127, 127);
         break;
     default:
@@ -167,34 +152,19 @@ QColor PianoKey::getFillColor(PianoKeybd::MarkerType type)
     QColor color;
     switch (type)
     {
-    case PianoKeybd::MARKER_TYPE_ARROW_BLUE:
-    case PianoKeybd::MARKER_TYPE_CROSS_BLUE:
     case PianoKeybd::MARKER_TYPE_DOT_BLUE:
-    case PianoKeybd::MARKER_TYPE_STAR_BLUE:
         color = QColor(0, 0, 255);
         break;
-    case PianoKeybd::MARKER_TYPE_ARROW_RED:
-    case PianoKeybd::MARKER_TYPE_CROSS_RED:
     case PianoKeybd::MARKER_TYPE_DOT_RED:
-    case PianoKeybd::MARKER_TYPE_STAR_RED:
         color = QColor(255, 160, 0);
         break;
-    case PianoKeybd::MARKER_TYPE_ARROW_YELLOW:
-    case PianoKeybd::MARKER_TYPE_CROSS_YELLOW:
     case PianoKeybd::MARKER_TYPE_DOT_YELLOW:
-    case PianoKeybd::MARKER_TYPE_STAR_YELLOW:
         color = QColor(255, 255, 0);
         break;
-    case PianoKeybd::MARKER_TYPE_ARROW_BLACK:
-    case PianoKeybd::MARKER_TYPE_CROSS_BLACK:
     case PianoKeybd::MARKER_TYPE_DOT_BLACK:
-    case PianoKeybd::MARKER_TYPE_STAR_BLACK:
         color = QColor(0, 0, 0);
         break;
-    case PianoKeybd::MARKER_TYPE_ARROW_WHITE:
-    case PianoKeybd::MARKER_TYPE_CROSS_WHITE:
     case PianoKeybd::MARKER_TYPE_DOT_WHITE:
-    case PianoKeybd::MARKER_TYPE_STAR_WHITE:
         color = QColor(255, 255, 255);
         break;
     default:
@@ -207,47 +177,6 @@ void PianoKey::drawMarker(QPainter *painter, QRectF &rect, PianoKeybd::MarkerTyp
 {
     switch (type)
     {
-    case PianoKeybd::MARKER_TYPE_ARROW_BLUE:
-        if (isBlack())
-            flipPainter(painter, rect);
-        QSvgRenderer(QString(":/vpiano/arrow_blue.svg")).render(painter, rect);
-        break;
-    case PianoKeybd::MARKER_TYPE_ARROW_RED:
-        if (isBlack())
-            flipPainter(painter, rect);
-        QSvgRenderer(QString(":/vpiano/arrow_red.svg")).render(painter, rect);
-        break;
-    case PianoKeybd::MARKER_TYPE_ARROW_YELLOW:
-        if (isBlack())
-            flipPainter(painter, rect);
-        QSvgRenderer(QString(":/vpiano/arrow_yellow.svg")).render(painter, rect);
-        break;
-    case PianoKeybd::MARKER_TYPE_ARROW_BLACK:
-        if (isBlack())
-            flipPainter(painter, rect);
-        QSvgRenderer(QString(":/vpiano/arrow_black.svg")).render(painter, rect);
-        break;
-    case PianoKeybd::MARKER_TYPE_ARROW_WHITE:
-        if (isBlack())
-            flipPainter(painter, rect);
-        QSvgRenderer(QString(":/vpiano/arrow_white.svg")).render(painter, rect);
-        break;
-    case PianoKeybd::MARKER_TYPE_CROSS_BLUE:
-    case PianoKeybd::MARKER_TYPE_CROSS_RED:
-    case PianoKeybd::MARKER_TYPE_CROSS_YELLOW:
-    case PianoKeybd::MARKER_TYPE_CROSS_BLACK:
-    case PianoKeybd::MARKER_TYPE_CROSS_WHITE:
-    {
-        double margin = rect.width() * .15;
-        rect.setCoords(rect.left() + margin, rect.bottom() - margin,
-                       rect.right() - margin, rect.top() + margin);
-        painter->setPen(QPen(getBorderColor(type), 4, Qt::SolidLine, Qt::RoundCap));
-        painter->drawLine(rect.bottomLeft(), rect.topRight());
-        painter->drawLine(rect.bottomRight(), rect.topLeft());
-        painter->setPen(QPen(getFillColor(type), 2, Qt::SolidLine, Qt::RoundCap));
-        painter->drawLine(rect.bottomLeft(), rect.topRight());
-        painter->drawLine(rect.bottomRight(), rect.topLeft());
-    }break;
     case PianoKeybd::MARKER_TYPE_DOT_BLUE:
     case PianoKeybd::MARKER_TYPE_DOT_RED:
     case PianoKeybd::MARKER_TYPE_DOT_YELLOW:
@@ -256,21 +185,6 @@ void PianoKey::drawMarker(QPainter *painter, QRectF &rect, PianoKeybd::MarkerTyp
         painter->setPen(QPen(getBorderColor(type), 1));
         painter->setBrush(getFillColor(type));
         painter->drawEllipse(rect);
-        break;
-    case PianoKeybd::MARKER_TYPE_STAR_BLUE:
-        QSvgRenderer(QString(":/vpiano/star_blue.svg")).render(painter, rect);
-        break;
-    case PianoKeybd::MARKER_TYPE_STAR_RED:
-        QSvgRenderer(QString(":/vpiano/star_red.svg")).render(painter, rect);
-        break;
-    case PianoKeybd::MARKER_TYPE_STAR_YELLOW:
-        QSvgRenderer(QString(":/vpiano/star_yellow.svg")).render(painter, rect);
-        break;
-    case PianoKeybd::MARKER_TYPE_STAR_BLACK:
-        QSvgRenderer(QString(":/vpiano/star_black.svg")).render(painter, rect);
-        break;
-    case PianoKeybd::MARKER_TYPE_STAR_WHITE:
-        QSvgRenderer(QString(":/vpiano/star_white.svg")).render(painter, rect);
         break;
     default:
         break;

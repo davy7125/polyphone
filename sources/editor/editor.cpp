@@ -38,6 +38,11 @@ Editor::Editor(QWidget *parent) :
     connect(ui->treeView, SIGNAL(selectionChanged(IdList)), this, SLOT(onSelectionChanged(IdList)));
     connect(ui->treeView, SIGNAL(selectionChanged(IdList)), ui->toolBar, SLOT(onSelectionChanged(IdList)));
 
+    // Midi event
+    connect(ContextManager::midi(), SIGNAL(keyPlayed(int,int)), ui->pageSmpl, SLOT(keyPlayed(int,int)));
+    connect(ContextManager::midi(), SIGNAL(keyPlayed(int,int)), ui->pageInst, SLOT(keyPlayed(int,int)));
+    connect(ContextManager::midi(), SIGNAL(keyPlayed(int,int)), ui->pagePrst, SLOT(keyPlayed(int,int)));
+
     // Toolbar connections
     connect(ui->toolBar, SIGNAL(displayOptionChanged(int)), this, SLOT(displayOptionChanged(int)));
     connect(ui->toolBar, SIGNAL(keyboardDisplayChanged(bool)), this, SIGNAL(keyboardDisplayChanged(bool)));

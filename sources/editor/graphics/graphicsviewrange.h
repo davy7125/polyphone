@@ -45,12 +45,11 @@ public:
     ~GraphicsViewRange();
 
     void init(SoundfontManager * sf2);
-    void display(EltID id);
+    void display(EltID id, bool sameElement);
     void playKey(int key, int velocity);
 
 signals:
     void updateKeyboard();
-    void keyTriggered(int key, int velocity);
     void divisionsSelected(IdList divisions);
 
 protected:

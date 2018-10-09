@@ -90,7 +90,7 @@ ContextManager::ContextManager() :
     connect(_configuration, SIGNAL(soundEngineConfigurationChanged()), _audio->getSynth(), SLOT(updateConfiguration()));
 
     // 7. Midi device
-    _midi = new MidiDevice(_configuration);
+    _midi = new MidiDevice(_configuration, _audio->getSynth());
 }
 
 ContextManager::~ContextManager()

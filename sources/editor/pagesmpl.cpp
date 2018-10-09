@@ -34,8 +34,6 @@
 #include <QDesktopWidget>
 #include <QFileDialog>
 #include <QProcess>
-#include <QDebug>
-#include "fluidsynth.h"
 
 PageSmpl::PageSmpl(QWidget *parent) :
     Page(parent, PAGE_SMPL, "page:smpl"),
@@ -154,7 +152,7 @@ bool PageSmpl::updateInterface(QString editingSource, IdList selectedIds, int di
         if (sampleRate != _sf2->get(idTmp, champ_dwSampleRate).dwValue)
             sampleRate = -1;
         if (rootKey != _sf2->get(idTmp, champ_byOriginalPitch).bValue)
-            rootKey = -1;
+            rootKey = 0;
         if (correction != _sf2->get(idTmp, champ_chPitchCorrection).cValue)
             correction = 0;
         if (startLoop != (int)_sf2->get(idTmp, champ_dwStartLoop).dwValue)
@@ -165,12 +163,6 @@ bool PageSmpl::updateInterface(QString editingSource, IdList selectedIds, int di
         if (typeLink != _sf2->get(idTmp, champ_sfSampleType).sfLinkValue)
             typeLink = linkInvalid;
     }
-
-    // Initialisation clavier
-    //_mainWindow->clearKeyboardCustomisation();
-    //_mainWindow->setRangeAndRootKey(rootKey, 0, 127);
-    if (rootKey == -1)
-        rootKey = 0;
 
     // Remplissage des informations
     while (ui->comboSampleRate->count() > 7)
@@ -581,8 +573,8 @@ void PageSmpl::setRootKey()
 
 void PageSmpl::setRootKey(int val)
 {
-    //_mainWindow->clearKeyboardCustomisation();
-    //_mainWindow->setRangeAndRootKey(val, 0, 127);
+    ContextManager::midi()->keyboard()->clearCustomization();
+    ContextManager::midi()->keyboard()->addRangeAndRootKey(val, 0, 127);
 
     // Modif synth
     if (_currentIds.count() == 1)
@@ -1231,4 +1223,24 @@ void PageSmpl::loadEQ()
 void PageSmpl::onLinkClicked(EltID id)
 {
     emit(selectedIdsChanged(id));
+}
+
+void PageSmpl::keyPlayedInternal(int key, int velocity)
+{
+    IdList ids = _currentIds.getSelectedIds(elementSmpl);
+    if (ids.count() == 1)
+        ContextManager::audio()->getSynth()->play(0, ids[0].indexSf2, ids[0].indexElt, key, velocity);
+}
+
+void PageSmpl::onShow()
+{
+    // Initialize keyboard
+    QList<EltID> ids = _currentIds.getSelectedIds(elementSmpl);
+    if (ids.count() == 1)
+    {
+        int rootKey = _sf2->get(ids.at(0), champ_byOriginalPitch).bValue;
+        ContextManager::midi()->keyboard()->addRangeAndRootKey(rootKey, 0, 127);
+    }
+    else
+        ContextManager::midi()->keyboard()->addRangeAndRootKey(-1, 0, 127);
 }

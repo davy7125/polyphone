@@ -84,8 +84,10 @@ void EnvelopEditor::init(SoundfontManager * sf2)
     _sf2 = sf2;
 }
 
-void EnvelopEditor::display(QList<EltID> ids)
+void EnvelopEditor::display(QList<EltID> ids, bool sameElement)
 {
+    Q_UNUSED(sameElement)
+
     // Reinitialization
     _displayedElt = ids;
 

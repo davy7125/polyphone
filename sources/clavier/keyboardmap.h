@@ -21,23 +21,20 @@
 #define KEYBOARDMAP_H
 
 #include "pianokeybd.h"
+#include "contextmanager.h"
 #include <QMap>
 
 class KeyboardMap
 {
 public:
     KeyboardMap();
-    void setMapping(PianoKeybd::Key key, int numOctave, QKeySequence sequence);
-    QKeySequence getMapping(PianoKeybd::Key key, int numOctave);
-    int getKey(QKeySequence sequence);
-    QList<QKeySequence> getSequences(int note);
 
-    void setFirstNote(int note) { _firstNote = note; }
-    int getFirstNote()          { return _firstNote; }
+    void initializeMapping();
+    int getKey(QKeySequence sequence);
 
 private:
     int _firstNote;
-    QMap<int, QMap<PianoKeybd::Key, QKeySequence> > _keyMap;
+    QMap<int, QMap<ConfManager::Key, QKeySequence> > _keyMap;
 };
 
 #endif /* KEYBOARDMAP_H */

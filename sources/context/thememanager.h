@@ -86,6 +86,9 @@ public:
     QPixmap getColoredSvg(QString filename, QSize maxSize, ColorType currentColor);
     QPixmap getColoredSvg(QString filename, QSize maxSize, QMap<QString, QString> &replacement);
 
+    /// Function to mix two colors
+    QColor mix(QColor color1, QColor color2, double fade);
+
 private:
     class ColorTheme
     {
@@ -108,7 +111,6 @@ private:
     QPalette::ColorRole getColorRole(ColorType type);
     QColor disabled1(QColor color, QColor limit);
     QColor disabled2(QColor color, QColor limit);
-    QColor mix(QColor color1, QColor color2, double fade);
     ColorType getAssociatedColorType(ColorType type);
 
     ConfManager * _configuration;

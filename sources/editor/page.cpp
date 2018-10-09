@@ -45,6 +45,8 @@ Page::Page(QWidget *parent, TypePage typePage, QString editingSource) : QWidget(
 
 bool Page::preparePage(QString editingSource, IdList selectedIds)
 {
+    if (_preparingPage)
+        return true;
     _preparingPage = true;
 
     // Possibly update the selected ids
@@ -886,4 +888,20 @@ int Page::limit(int iTmp, int minInst, int maxInst, int minPrst, int maxPrst)
             valRet = iTmp;
     }
     return valRet;
+}
+
+void Page::showEvent(QShowEvent * event)
+{
+    // Specific display per page
+    this->onShow();
+
+    QWidget::showEvent(event);
+}
+
+void Page::hideEvent(QHideEvent * event)
+{
+    // Stop all sounds
+    ContextManager::midi()->stopAll();
+
+    QWidget::hideEvent(event);
 }

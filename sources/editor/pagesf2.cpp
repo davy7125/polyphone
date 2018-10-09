@@ -438,3 +438,8 @@ void PageSf2::on_comboBox_currentIndexChanged(int index)
     _sf2->set(_currentID, champ_wBpsSave, valTmp);
     _sf2->endEditing(getEditingSource());
 }
+
+void PageSf2::onShow()
+{
+    // Nothing special
+}
