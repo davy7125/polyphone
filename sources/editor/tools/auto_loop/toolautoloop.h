@@ -23,7 +23,7 @@ public:
 
     QString getCategory() const override
     {
-        return trUtf8("Échantillon");
+        return trUtf8("Traitement des échantillons");
     }
 
     /// Internal identifier

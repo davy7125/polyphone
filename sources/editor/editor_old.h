@@ -121,10 +121,7 @@ private slots:
     void attenuationMini();     // global tool, mise à jour de toutes les atténuations
     void attenuationMini(double value, double valuePrst);
     void purger();              // global tool, suppression des éléments non utilisés
-    void associationAutoSmpl(); // global tool, association auto gauche-droite des samples
     void exportPresetList();    // global tool
-    void magnetophone();        // affichage du magnétophone
-    void on_action_Dissocier_les_samples_st_r_o_triggered();
     void on_actionExporter_pics_de_fr_quence_triggered();
     void onPleinEcranTriggered();
     void on_actionEnlever_tous_les_modulateurs_triggered();
@@ -144,7 +141,6 @@ private:
     SoundfontManager * sf2;
     DialogAbout about;
     DialogList dialList;
-    DialogRecorder dialogMagneto;
     QAction * actionKeyboard;
     QList<QAction *> actionSeparators;
     QString _title;

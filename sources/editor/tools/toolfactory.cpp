@@ -9,6 +9,8 @@
 #include "change_volume/toolchangevolume.h"
 #include "balance_adjustment/toolbalanceadjustment.h"
 #include "transpose_smpl/tooltransposesmpl.h"
+#include "link_sample/toollinksample.h"
+#include "unlink_sample/toolunlinksample.h"
 
 ToolFactory::ToolFactory(QWidget * parent)
 {
@@ -23,7 +25,9 @@ ToolFactory::ToolFactory(QWidget * parent)
            << new ToolFrequencyFilter()
            << new ToolChangeVolume()
            << new ToolBalanceAdjustment()
-           << new ToolTransposeSmpl();
+           << new ToolTransposeSmpl()
+           << new ToolLinkSample()
+           << new ToolUnlinkSample();
 }
 
 ToolFactory::~ToolFactory()

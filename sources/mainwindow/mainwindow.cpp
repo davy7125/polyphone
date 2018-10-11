@@ -306,9 +306,16 @@ void MainWindow::keyPressEvent(QKeyEvent * event)
 {
     if (event->modifiers() & Qt::ControlModifier && event->key() == Qt::Key_K)
     {
-        if (_keyboard->isVisible())
+        if (!_keyboard->isVisible())
+        {
+            _keyboard->show();
             _keyboard->activateWindow();
-        _keyboard->glow();
+        }
+        else
+        {
+            _keyboard->activateWindow();
+            _keyboard->glow();
+        }
     }
     QMainWindow::keyPressEvent(event);
 }

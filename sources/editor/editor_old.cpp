@@ -31,7 +31,6 @@ MainWindowOld::MainWindowOld(QWidget *parent) : QMainWindow(parent, Qt::Window |
     ui(new Ui::MainWindowOld),
     about(this),
     dialList(this),
-    dialogMagneto(NULL),
     actionKeyboard(NULL),
     _progressDialog(NULL)
 {
@@ -314,11 +313,6 @@ void MainWindowOld::afficherSectionModulateurs()
 void MainWindowOld::onPleinEcranTriggered()
 {
     this->setWindowState(this->windowState() ^ Qt::WindowFullScreen);
-}
-
-void MainWindowOld::magnetophone()
-{
-    dialogMagneto.show();
 }
 
 QList<QAction *> MainWindowOld::getListeActions()
@@ -1611,90 +1605,6 @@ void MainWindowOld::attenuationMini(double value, double valuePrst)
     //        this->page_prst->afficher();
 }
 
-void MainWindowOld::associationAutoSmpl()
-{
-    // Association automatique des samples
-    // Condition : même nom sauf pour la dernière lettre (R ou L)
-    EltID id = ui->tree->getFirstID();
-    id.typeElement = elementSmpl;
-
-    // Constitution listes de noms et indices
-    QList<EltID> listID;
-    QStringList  listNom;
-    QList<bool>  listSens;
-    QString currentStr;
-    foreach (int i, this->sf2->getSiblings(id))
-    {
-        id.indexElt = i;
-        currentStr = this->sf2->getQstr(id, champ_name);
-        if (currentStr.right(1).toUpper() == "R")
-        {
-            listID.append(id);
-            listNom.append(currentStr.left(currentStr.size() - 1));
-            listSens.append(false);
-        }
-        else if (currentStr.right(1).toUpper() == "L")
-        {
-            listID.append(id);
-            listNom.append(currentStr.left(currentStr.size() - 1));
-            listSens.append(true);
-        }
-    }
-
-    // Assemblage
-    EltID currentID, idBis;
-    bool currentSens;
-    bool isFound;
-    int indice;
-    Valeur value;
-    while (listID.size())
-    {
-        currentID = listID.takeLast();
-        currentStr = listNom.takeLast();
-        currentSens = listSens.takeLast();
-
-        // Recherche d'une association
-        indice = 0;
-        isFound = false;
-        while (indice < listID.size() && !isFound)
-        {
-            if (listNom.at(indice) == currentStr && listSens.at(indice) != currentSens)
-            {
-                idBis = listID.takeAt(indice);
-                listNom.takeAt(indice);
-                listSens.takeAt(indice);
-
-                // Association idBis avec currentID
-                value.wValue = idBis.indexElt;
-                this->sf2->set(currentID, champ_wSampleLink, value);
-                value.wValue = currentID.indexElt;
-                this->sf2->set(idBis, champ_wSampleLink, value);
-                if (currentSens)
-                {
-                    value.sfLinkValue = leftSample;
-                    this->sf2->set(currentID, champ_sfSampleType, value);
-                    value.sfLinkValue = rightSample;
-                    this->sf2->set(idBis, champ_sfSampleType, value);
-                }
-                else
-                {
-                    value.sfLinkValue = rightSample;
-                    this->sf2->set(currentID, champ_sfSampleType, value);
-                    value.sfLinkValue = leftSample;
-                    this->sf2->set(idBis, champ_sfSampleType, value);
-                }
-                isFound = true;
-            }
-            else
-                indice++;
-        }
-    }
-
-    // Mise à jour
-    //    this->updateDo();
-    //    if (ui->stackedWidget->currentWidget() == this->page_smpl)
-    //        this->page_smpl->afficher();
-}
 void MainWindowOld::exportPresetList()
 {
     if (ui->tree->getSelectedItemsNumber() == 0) return;
@@ -1702,37 +1612,6 @@ void MainWindowOld::exportPresetList()
     DialogExportList * dial = new DialogExportList(sf2, id, this);
     dial->setAttribute(Qt::WA_DeleteOnClose);
     dial->show();
-}
-void MainWindowOld::on_action_Dissocier_les_samples_st_r_o_triggered()
-{
-    EltID id = ui->tree->getFirstID();
-    id.typeElement = elementSmpl;
-    foreach (int i, sf2->getSiblings(id))
-    {
-        id.indexElt = i;
-        SFSampleLink type = sf2->get(id, champ_sfSampleType).sfLinkValue;
-        if (type != monoSample && type != RomMonoSample)
-        {
-            Valeur value;
-            if (type == leftSample || type == rightSample || type == linkedSample)
-            {
-                value.sfLinkValue = monoSample;
-                sf2->set(id, champ_sfSampleType, value);
-            }
-            else if (type == RomLeftSample || type == RomRightSample || type == RomLinkedSample)
-            {
-                value.sfLinkValue = RomMonoSample;
-                sf2->set(id, champ_sfSampleType, value);
-            }
-            value.wValue = 0;
-            sf2->set(id, champ_wSampleLink, value);
-        }
-    }
-
-    // Mise à jour
-    //    this->updateDo();
-    //    if (ui->stackedWidget->currentWidget() == this->page_smpl)
-    //        this->page_smpl->afficher();
 }
 void MainWindowOld::on_actionExporter_pics_de_fr_quence_triggered()
 {
