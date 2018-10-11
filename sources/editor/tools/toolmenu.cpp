@@ -2,10 +2,19 @@
 #include "toolfactory.h"
 #include "abstracttool.h"
 #include "contextmanager.h"
+#include <QLabel>
+#include <QWidgetAction>
 
 ToolMenu::ToolMenu(QWidget * parent) : QMenu(parent),
     _toolFactory(new ToolFactory(parent))
 {
+    // Colors for the separators
+    _separatorTextColor = ContextManager::theme()->getColor(ThemeManager::LIST_BACKGROUND).name();
+    _separatorBackgroundColor = ContextManager::theme()->mix(
+                ContextManager::theme()->getColor(ThemeManager::LIST_BACKGROUND),
+                ContextManager::theme()->getColor(ThemeManager::LIST_TEXT), 0.5).name();
+
+    // Connection of the actions
     connect(this, SIGNAL(triggered(QAction*)), this, SLOT(onTriggered(QAction*)));
 }
 
@@ -35,7 +44,7 @@ void ToolMenu::selectionChanged(IdList ids)
         {
             currentCategory = tool->getCategory();
             if (currentCategory != "")
-                this->addSection(currentCategory);
+                this->addCategory(currentCategory);
         }
 
         // Insert the tool
@@ -44,6 +53,19 @@ void ToolMenu::selectionChanged(IdList ids)
                     tool->getLabel());
         _currentActions[action] = tool;
     }
+}
+
+void ToolMenu::addCategory(QString categoryName)
+{
+    // Create a styled label
+    QLabel * label = new QLabel(categoryName);
+    label->setStyleSheet(QString("background: %1; color: %2; padding: 3px")
+                         .arg(_separatorBackgroundColor).arg(_separatorTextColor));
+
+    // Add it as a separator
+    QWidgetAction * separator = new QWidgetAction(this);
+    separator->setDefaultWidget(label);
+    this->addAction(separator);
 }
 
 bool ToolMenu::lessThan(const AbstractTool * tool1, const AbstractTool * tool2)
