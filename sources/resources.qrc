@@ -110,6 +110,8 @@
         <file alias="change_volume.svg">editor/tools/change_volume/change_volume.svg</file>
         <file alias="balance.svg">editor/tools/balance_adjustment/balance.svg</file>
         <file alias="transpose.svg">editor/tools/transpose_smpl/transpose.svg</file>
+        <file alias="unlink.svg">editor/tools/unlink_sample/unlink.svg</file>
+        <file alias="link.svg">editor/tools/link_sample/link.svg</file>
     </qresource>
     <qresource prefix="/vpiano">
         <file alias="blkey.svg">resources/blkey.svg</file>

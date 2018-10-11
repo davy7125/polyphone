@@ -18,12 +18,12 @@ public:
 
     QString getLabel() const override
     {
-        return trUtf8("Réglage balance");
+        return trUtf8("Équilibrer la balance");
     }
 
     QString getCategory() const override
     {
-        return trUtf8("Échantillon");
+        return trUtf8("Échantillons stéréo");
     }
 
     /// Internal identifier

@@ -22,7 +22,10 @@ private slots:
     void onTriggered(QAction * action);
 
 private:
+    void addCategory(QString categoryName);
     static bool lessThan(const AbstractTool * tool1, const AbstractTool * tool2);
+    QString _separatorBackgroundColor;
+    QString _separatorTextColor;
 
     ToolFactory * _toolFactory;
     QMap<QAction *, AbstractTool *> _currentActions;

@@ -356,7 +356,9 @@ SOURCES	+= main.cpp \
     context/interface/configpanel.cpp \
     sound_engine/midilistener.cpp \
     dialogs/dialogkeyboard.cpp \
-    dialogs/dialogrecorder.cpp
+    dialogs/dialogrecorder.cpp \
+    editor/tools/link_sample/toollinksample.cpp \
+    editor/tools/unlink_sample/toolunlinksample.cpp
 
 HEADERS  += \
     core/sf2_types.h \
@@ -543,7 +545,9 @@ HEADERS  += \
     dialogs/dialogkeyboard.h \
     dialogs/dialogrecorder.h \
     context/controllerevent.h \
-    context/noteevent.h
+    context/noteevent.h \
+    editor/tools/link_sample/toollinksample.h \
+    editor/tools/unlink_sample/toolunlinksample.h
 
 FORMS    += \
     dialogs/dialog_list.ui \
