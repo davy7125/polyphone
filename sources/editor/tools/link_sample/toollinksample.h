@@ -32,7 +32,7 @@ public:
     }
 
     /// Method executed before the iterating process
-    void beforeProcess() override;
+    void beforeProcess(IdList ids) override;
 
     /// Process an element
     void process(SoundfontManager * sm, EltID id, AbstractToolParameters * parameters) override;
@@ -47,7 +47,6 @@ private:
     QList<bool> _leftRight; // false is left, true is right
     QList<int> _processedIds;
     QStringList _sampleErrors;
-    bool _scanned;
 };
 
 #endif // TOOLLINKSAMPLE_H

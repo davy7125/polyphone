@@ -13,8 +13,9 @@ ToolExternalCommand::ToolExternalCommand() : AbstractToolIterating(elementSmpl, 
 
 }
 
-void ToolExternalCommand::beforeProcess()
+void ToolExternalCommand::beforeProcess(IdList ids)
 {
+    Q_UNUSED(ids)
     _warning = "";
 }
 

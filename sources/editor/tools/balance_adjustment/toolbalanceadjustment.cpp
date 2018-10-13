@@ -2,8 +2,9 @@
 #include "soundfontmanager.h"
 #include <qmath.h>
 
-void ToolBalanceAdjustment::beforeProcess()
+void ToolBalanceAdjustment::beforeProcess(IdList ids)
 {
+    Q_UNUSED(ids)
     _processedSamples.clear();
     _monoSamplesInError.clear();
 }

@@ -36,7 +36,7 @@ public:
     }
 
     /// Method executed before the iterating process
-    void beforeProcess() override;
+    void beforeProcess(IdList ids) override;
 
     /// Process an element
     void process(SoundfontManager * sm, EltID id, AbstractToolParameters * parameters) override;

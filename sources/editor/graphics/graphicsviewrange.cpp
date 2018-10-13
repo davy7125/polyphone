@@ -184,9 +184,9 @@ void GraphicsViewRange::init(SoundfontManager * sf2)
     GraphicsLegendItem::initSf2(sf2);
 }
 
-void GraphicsViewRange::display(EltID id, bool sameElement)
+void GraphicsViewRange::display(EltID id, bool justSelection)
 {
-    if (sameElement)
+    if (justSelection)
         return; // Nothing special is done
 
     // Clear previous rectangles

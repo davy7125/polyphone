@@ -45,7 +45,7 @@ public:
     ~GraphicsViewRange();
 
     void init(SoundfontManager * sf2);
-    void display(EltID id, bool sameElement);
+    void display(EltID id, bool justSelection);
     void playKey(int key, int velocity);
 
 signals:

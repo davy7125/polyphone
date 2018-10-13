@@ -141,8 +141,6 @@ void PageInst::setModVisible(bool visible)
 
 bool PageInst::updateInterface(QString editingSource, IdList selectedIds, int displayOption)
 {
-    Q_UNUSED(editingSource)
-
     if (selectedIds.empty())
         return false;
 
@@ -162,6 +160,7 @@ bool PageInst::updateInterface(QString editingSource, IdList selectedIds, int di
     }
     else
         sameElement = false;
+    bool justSelection = (sameElement && editingSource == "command:selection");
 
     // Update the selection
     _currentParentIds = parentIds;
@@ -186,20 +185,19 @@ bool PageInst::updateInterface(QString editingSource, IdList selectedIds, int di
         ui->widgetLinkedTo->clear();
     }
 
-    int oldIndex = ui->stackedWidget->currentIndex();
     switch (displayOption)
     {
     case 1:
         ui->stackedWidget->setCurrentIndex(0);
-        this->afficheTable(sameElement && oldIndex == 0);
+        this->afficheTable(justSelection);
         break;
     case 2:
         ui->stackedWidget->setCurrentIndex(1);
-        this->afficheRanges(sameElement && oldIndex == 1);
+        this->afficheRanges(justSelection);
         break;
     case 3:
         ui->stackedWidget->setCurrentIndex(2);
-        this->afficheEnvelops(sameElement && oldIndex == 2);
+        this->afficheEnvelops(justSelection);
         break;
     default:
         return false;
