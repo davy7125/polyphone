@@ -112,6 +112,7 @@
         <file alias="transpose.svg">editor/tools/transpose_smpl/transpose.svg</file>
         <file alias="unlink.svg">editor/tools/unlink_sample/unlink.svg</file>
         <file alias="link.svg">editor/tools/link_sample/link.svg</file>
+        <file alias="change_attenuation.svg">editor/tools/change_attenuation/change_attenuation.svg</file>
     </qresource>
     <qresource prefix="/vpiano">
         <file alias="blkey.svg">resources/blkey.svg</file>

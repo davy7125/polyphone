@@ -245,7 +245,6 @@ SOURCES	+= main.cpp \
     editor/tools/dialog_visualizer.cpp \
     editor/tools/dialog_duplication.cpp \
     editor/tools/dialog_transposition.cpp \
-    editor/tools/dialog_attenuation.cpp \
     editor/tools/duplicationtool.cpp \
     editor/tools/dialog_exportlist.cpp \
     clavier/pianoscene.cpp \
@@ -358,7 +357,10 @@ SOURCES	+= main.cpp \
     dialogs/dialogkeyboard.cpp \
     dialogs/dialogrecorder.cpp \
     editor/tools/link_sample/toollinksample.cpp \
-    editor/tools/unlink_sample/toolunlinksample.cpp
+    editor/tools/unlink_sample/toolunlinksample.cpp \
+    editor/tools/change_attenuation/toolchangeattenuation.cpp \
+    editor/tools/change_attenuation/toolchangeattenuation_gui.cpp \
+    editor/tools/change_attenuation/toolchangeattenuation_parameters.cpp
 
 HEADERS  += \
     core/sf2_types.h \
@@ -427,7 +429,6 @@ HEADERS  += \
     editor/tools/dialog_visualizer.h \
     editor/tools/dialog_duplication.h \
     editor/tools/dialog_transposition.h \
-    editor/tools/dialog_attenuation.h \
     editor/tools/duplicationtool.h \
     editor/tools/dialog_exportlist.h \
     clavier/pianoscene.h \
@@ -547,7 +548,10 @@ HEADERS  += \
     context/controllerevent.h \
     context/noteevent.h \
     editor/tools/link_sample/toollinksample.h \
-    editor/tools/unlink_sample/toolunlinksample.h
+    editor/tools/unlink_sample/toolunlinksample.h \
+    editor/tools/change_attenuation/toolchangeattenuation.h \
+    editor/tools/change_attenuation/toolchangeattenuation_gui.h \
+    editor/tools/change_attenuation/toolchangeattenuation_parameters.h
 
 FORMS    += \
     dialogs/dialog_list.ui \
@@ -567,7 +571,6 @@ FORMS    += \
     editor/tools/dialog_visualizer.ui \
     editor/tools/dialog_duplication.ui \
     editor/tools/dialog_transposition.ui \
-    editor/tools/dialog_attenuation.ui \
     editor/tools/dialog_exportlist.ui \
     mainwindow/widgetshowhistory.ui \
     mainwindow/widgetshowhistorycell.ui \
@@ -591,7 +594,8 @@ FORMS    += \
     editor/tools/transpose_smpl/tooltransposesmpl_gui.ui \
     context/interface/configpanel.ui \
     dialogs/dialogkeyboard.ui \
-    dialogs/dialogrecorder.ui
+    dialogs/dialogrecorder.ui \
+    editor/tools/change_attenuation/toolchangeattenuation_gui.ui
 
 RESOURCES += resources.qrc
 

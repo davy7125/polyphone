@@ -11,6 +11,7 @@
 #include "transpose_smpl/tooltransposesmpl.h"
 #include "link_sample/toollinksample.h"
 #include "unlink_sample/toolunlinksample.h"
+#include "change_attenuation/toolchangeattenuation.h"
 
 ToolFactory::ToolFactory(QWidget * parent)
 {
@@ -27,7 +28,8 @@ ToolFactory::ToolFactory(QWidget * parent)
            << new ToolBalanceAdjustment()
            << new ToolTransposeSmpl()
            << new ToolLinkSample()
-           << new ToolUnlinkSample();
+           << new ToolUnlinkSample()
+           << new ToolChangeAttenuation();
 }
 
 ToolFactory::~ToolFactory()

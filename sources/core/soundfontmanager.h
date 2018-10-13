@@ -92,8 +92,8 @@ public:
 signals:
     // Emitted when a group of actions is finished
     // "editingSource" can be:
-    //   * command:{command name} (for instance "command:undo" or "command:redo")
-    //   * tool:{tool name}
+    //   * command:{command name} (for instance "command:undo", "command:redo", "command:display", "command:selection")
+    //   * tool:{tool kind}:{tool name}
     //   * page:{page name}
     void editingDone(QString editingSource, QList<int> sf2Indexes);
 

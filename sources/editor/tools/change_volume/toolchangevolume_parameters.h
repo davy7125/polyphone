@@ -2,7 +2,6 @@
 #define TOOLCHANGEVOLUME_PARAMETERS_H
 
 #include "abstracttoolparameters.h"
-#include <QVector>
 
 class ToolChangeVolume_parameters: public AbstractToolParameters
 {

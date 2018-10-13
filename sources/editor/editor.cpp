@@ -136,7 +136,7 @@ void Editor::onSelectionChanged(IdList ids)
 
     if (currentPage != NULL)
     {
-        currentPage->preparePage("command:update", ids);
+        currentPage->preparePage("command:selection", ids);
         ui->toolBar->setDisplayOptions(currentPage->getDisplayOptions());
 
         // Display the page

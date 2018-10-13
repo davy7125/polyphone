@@ -1,8 +1,9 @@
 #include "auto_loop/toolautoloop.h"
 #include "soundfontmanager.h"
 
-void ToolAutoLoop::beforeProcess()
+void ToolAutoLoop::beforeProcess(IdList ids)
 {
+    Q_UNUSED(ids)
     _samplesNotLooped.clear();
 }
 
