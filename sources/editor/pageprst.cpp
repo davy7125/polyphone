@@ -130,8 +130,6 @@ void PagePrst::setModVisible(bool visible)
 
 bool PagePrst::updateInterface(QString editingSource, IdList selectedIds, int displayOption)
 {
-    Q_UNUSED(editingSource)
-
     if (selectedIds.empty())
         return false;
 
@@ -151,6 +149,7 @@ bool PagePrst::updateInterface(QString editingSource, IdList selectedIds, int di
     }
     else
         sameElement = false;
+    bool justSelection = (sameElement && editingSource == "command:selection");
 
     _currentParentIds = parentIds;
     _currentIds = selectedIds;
@@ -171,16 +170,15 @@ bool PagePrst::updateInterface(QString editingSource, IdList selectedIds, int di
         ui->frameModulator->setEnabled(false);
     }
 
-    int oldIndex = ui->stackedWidget->currentIndex();
     switch (displayOption)
     {
     case 1:
         ui->stackedWidget->setCurrentIndex(0);
-        this->afficheTable(sameElement && oldIndex == 0);
+        this->afficheTable(justSelection);
         break;
     case 2:
         ui->stackedWidget->setCurrentIndex(1);
-        this->afficheRanges(sameElement && oldIndex == 1);
+        this->afficheRanges(justSelection);
         break;
     default:
         return false;

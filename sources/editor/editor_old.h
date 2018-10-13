@@ -118,8 +118,6 @@ private slots:
     void paramGlobal();         // outil instrument et preset, modification globale d'un paramètre
     void visualize();           // outil instrument et preset, visualise les paramètres utilisés dans un graphique
     void on_action_Transposer_triggered();
-    void attenuationMini();     // global tool, mise à jour de toutes les atténuations
-    void attenuationMini(double value, double valuePrst);
     void purger();              // global tool, suppression des éléments non utilisés
     void exportPresetList();    // global tool
     void on_actionExporter_pics_de_fr_quence_triggered();

@@ -46,11 +46,11 @@ PageTable::PageTable(TypePage typePage, QWidget *parent) : Page(parent, typePage
 {
 }
 
-void PageTable::afficheTable(bool sameElement)
+void PageTable::afficheTable(bool justSelection)
 {
     int posV = this->_table->verticalScrollBar()->value();
 
-    if (!sameElement)
+    if (!justSelection)
     {
         // Clear the table and repopulate it
         _table->blockSignals(true);
@@ -387,15 +387,15 @@ void PageTable::formatTable(bool multiGlobal)
     this->_table->hideRow(0);
 }
 
-void PageTable::afficheRanges(bool sameElement)
+void PageTable::afficheRanges(bool justSelection)
 {
-    _rangeEditor->display(_currentIds[0], sameElement);
+    _rangeEditor->display(_currentIds[0], justSelection);
 }
 
-void PageTable::afficheEnvelops(bool sameElement)
+void PageTable::afficheEnvelops(bool justSelection)
 {
     if (_envelopEditor != NULL)
-        _envelopEditor->display(_currentIds, sameElement);
+        _envelopEditor->display(_currentIds, justSelection);
 }
 
 void PageTable::afficheMod(EltID id, Champ selectedField)

@@ -52,9 +52,9 @@ public:
 
 protected:
     QList<EltID> getEltIds(bool &error, bool allWithDivisions, bool allDivWithRange);
-    void afficheTable(bool sameElement);
-    void afficheRanges(bool sameElement);
-    void afficheEnvelops(bool sameElement);
+    void afficheTable(bool justSelection);
+    void afficheRanges(bool justSelection);
+    void afficheEnvelops(bool justSelection);
     void keyPlayedInternal(int key, int velocity) override;
     virtual void keyPlayedInternal2(int key, int velocity) = 0;
 

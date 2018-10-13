@@ -34,7 +34,17 @@ private:
 
 AbstractToolIterating::AbstractToolIterating(ElementType elementType, AbstractToolParameters *parameters, AbstractToolGui *gui, bool async) :
     AbstractTool(parameters, gui),
-    _elementType(elementType),
+    _waitingDialog(NULL),
+    _async(async)
+{
+    _elementTypes << elementType;
+    connect(this, SIGNAL(elementProcessed()), this, SLOT(onElementProcessed()), Qt::QueuedConnection);
+}
+
+
+AbstractToolIterating::AbstractToolIterating(QList<ElementType> elementTypes, AbstractToolParameters * parameters, AbstractToolGui * gui, bool async) :
+    AbstractTool(parameters, gui),
+    _elementTypes(elementTypes),
     _waitingDialog(NULL),
     _async(async)
 {
@@ -48,7 +58,12 @@ AbstractToolIterating::~AbstractToolIterating()
 
 bool AbstractToolIterating::isCompatible(IdList ids)
 {
-    return ids.areAllWithType(_elementType);
+    foreach (ElementType type, _elementTypes)
+    {
+        if (ids.areAllWithType(type))
+            return true;
+    }
+    return false;
 }
 
 void AbstractToolIterating::run(SoundfontManager * sm, QWidget * parent, IdList ids, AbstractToolParameters *parameters)
@@ -58,7 +73,13 @@ void AbstractToolIterating::run(SoundfontManager * sm, QWidget * parent, IdList 
 
     // Number of steps
     _steps = 0;
-    QList<EltID> listID = ids.getSelectedIds(_elementType);
+    QList<EltID> listID;
+    foreach (ElementType type, _elementTypes)
+    {
+        listID = ids.getSelectedIds(type);
+        if (!listID.isEmpty())
+            break;
+    }
     _idsToProcess.clear();
     foreach (EltID id, listID)
     {
@@ -84,7 +105,7 @@ void AbstractToolIterating::run(SoundfontManager * sm, QWidget * parent, IdList 
     connect(_waitingDialog, SIGNAL(canceled()), this, SLOT(onCancel()));
 
     // Process the ids
-    this->beforeProcess();
+    this->beforeProcess(_idsToProcess);
     _canceled = false;
     if (_async)
         foreach (EltID id, _idsToProcess)

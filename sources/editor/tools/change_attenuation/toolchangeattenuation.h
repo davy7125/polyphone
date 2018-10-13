@@ -1,35 +1,34 @@
-#ifndef TOOLBALANCEADJUSTMENT_H
-#define TOOLBALANCEADJUSTMENT_H
+#ifndef TOOLCHANGEATTENUATION_H
+#define TOOLCHANGEATTENUATION_H
 
 #include "abstracttooliterating.h"
 #include <QObject>
-#include <QMutex>
 
-class ToolBalanceAdjustment: public AbstractToolIterating
+class ToolChangeAttenuation: public AbstractToolIterating
 {
 public:
-    ToolBalanceAdjustment() : AbstractToolIterating(elementSmpl) {}
+    ToolChangeAttenuation();
 
     /// Icon, label and category displayed to the user to describe the tool
     QString getIconName() const override
     {
-        return ":/tool/balance.svg";
+        return ":/tool/change_attenuation.svg";
     }
 
     QString getLabel() const override
     {
-        return trUtf8("Équilibrer la balance");
+        return trUtf8("Modifier les atténuations...");
     }
 
     QString getCategory() const override
     {
-        return trUtf8("Échantillons stéréo");
+        return trUtf8("Édition rapide");
     }
 
     /// Internal identifier
     QString getIdentifier() const override
     {
-        return "smpl:balance";
+        return _isInst ? "inst:changeAttenuation" : "prst:changeAttenuation";
     }
 
     /// Method executed before the iterating process
@@ -38,14 +37,9 @@ public:
     /// Process an element
     void process(SoundfontManager * sm, EltID id, AbstractToolParameters * parameters) override;
 
-protected:
-    /// Get the warning to display after the tool is run
-    QString getWarning() override;
-
 private:
-    QMutex _mutex;
-    IdList _processedSamples;
-    QStringList _monoSamplesInError;
+    int limitOffset(int offset);
+    bool _isInst;
 };
 
-#endif // TOOLBALANCEADJUSTMENT_H
+#endif // TOOLCHANGEATTENUATION_H

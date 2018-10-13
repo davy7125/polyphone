@@ -1,26 +1,23 @@
 #include "toollinksample.h"
 #include "soundfontmanager.h"
 
-void ToolLinkSample::beforeProcess()
+void ToolLinkSample::beforeProcess(IdList ids)
 {
     _smplIds.clear();
     _names.clear();
     _leftRight.clear();
     _processedIds.clear();
     _sampleErrors.clear();
-    _scanned = false;
+
+    // Scan all samples
+    SoundfontManager * sm = SoundfontManager::getInstance();
+    if (!ids.isEmpty())
+        this->scan(sm, ids[0].indexSf2);
 }
 
 void ToolLinkSample::process(SoundfontManager * sm, EltID id, AbstractToolParameters *parameters)
 {
     Q_UNUSED(parameters);
-
-    // Scan if not done
-    if (!_scanned)
-    {
-        this->scan(sm, id.indexSf2);
-        _scanned = true;
-    }
 
     // Return immediately if the sample has already been processed
     if (_processedIds.contains(id.indexElt))
