@@ -69,7 +69,8 @@ void ToolGlobalSettings_gui::updateInterface(AbstractToolParameters * parameters
         ui->comboAttribute->addItem(Page::getGenName(paramTypeList.at(i), _isInst ? 1 : 2));
         ui->comboAttribute->setItemData(i, (int)paramTypeList.at(i));
     }
-    ui->comboAttribute->setCurrentIndex(_isInst ? params->getInstAttribute() : params->getPrstAttribute());
+    AttributeType attributeToSelect = (AttributeType)(_isInst ? params->getInstAttribute() : params->getPrstAttribute());
+    ui->comboAttribute->setCurrentIndex(paramTypeList.indexOf(attributeToSelect));
     ui->comboAttribute->blockSignals(false);
 
     // Pattern type
