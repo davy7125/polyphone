@@ -40,7 +40,6 @@ public:
     explicit PageInst(QWidget *parent = 0);
     ~PageInst();
     void setModVisible(bool visible);
-    void desaccorder();
     void repartitionAuto();
     void mixture();
     void release();
@@ -54,8 +53,6 @@ protected:
     void keyPlayedInternal2(int key, int velocity) override;
 
 private slots:
-    void desaccorder(double doHerz, double division);
-    void desaccorder(EltID id, double doHerz, double division);
     void repartitionAuto(EltID id);
     void mixture(QList<QList<int> > listeParam, QString nomInst, bool bouclage, int freq, bool stereo);
     void release(double duree36, double division, double deTune);

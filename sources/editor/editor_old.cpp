@@ -1117,8 +1117,6 @@ void MainWindowOld::supprimer()
     }
 }
 
-// Outils
-void MainWindowOld::desaccorder()      {this->page_inst->desaccorder();}
 void MainWindowOld::duplication()
 {
     //if (ui->tree->getSelectedItemsNumber() == 0) return;

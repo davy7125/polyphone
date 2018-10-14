@@ -13,6 +13,7 @@
 #include "unlink_sample/toolunlinksample.h"
 #include "change_attenuation/toolchangeattenuation.h"
 #include "global_settings/toolglobalsettings.h"
+#include "celeste_tuning/toolcelestetuning.h"
 
 ToolFactory::ToolFactory(QWidget * parent)
 {
@@ -30,7 +31,8 @@ ToolFactory::ToolFactory(QWidget * parent)
            << new ToolTransposeSmpl()
            << new ToolLinkSample()
            << new ToolUnlinkSample()
-           << new ToolChangeAttenuation()
+           << new ToolCelesteTuning() // Instruments
+           << new ToolChangeAttenuation() // Instruments, presets
            << new ToolGlobalSettings();
 }
 
