@@ -2,7 +2,7 @@
 #define TREEITEMROOT_H
 
 #include "treeitem.h"
-#include "sf2_types.h"
+#include "basetypes.h"
 #include <QList>
 class TreeModel;
 

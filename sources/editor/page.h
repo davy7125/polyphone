@@ -26,7 +26,6 @@
 #define PAGE_H
 
 #include "soundfontmanager.h"
-#include "idlist.h"
 #include "synth.h"
 #include <QStackedWidget>
 #include <QTableWidget>
@@ -131,17 +130,12 @@ protected:
     bool _preparingPage;
     TypePage _typePage;
 
-    char * getTextValue(char * T, quint16 champ, genAmountType genVal);
-    static char * getTextValue(char * T, quint16 champ, int iVal);
-    static char * getTextValue(char * T, quint16 champ, SFModulator sfModVal);
     static QString getIndexName(quint16 iVal, int CC);
-    genAmountType getValue(QString texte, quint16 champ, bool &ok);
 
     void showEvent(QShowEvent * event);
     void hideEvent(QHideEvent * event);
 
 private:
-    int limit(int iTmp, int minInst, int maxInst, int minPrst = 0, int maxPrst = 0);
     IdList _selectedIds;
     QString _editingSource;
     int _currentDisplayOption;

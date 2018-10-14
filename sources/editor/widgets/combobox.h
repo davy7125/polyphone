@@ -29,7 +29,6 @@
 #include <QComboBox>
 #include <QAbstractItemView>
 #include <QMouseEvent>
-#include "sf2_types.h"
 
 // Classe ComboBox pour destination et source
 class ComboBox : public QComboBox

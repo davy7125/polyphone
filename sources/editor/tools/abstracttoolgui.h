@@ -2,7 +2,7 @@
 #define ABSTRACTTOOLGUI_H
 
 #include <QWidget>
-#include "idlist.h"
+#include "basetypes.h"
 class AbstractToolParameters;
 
 class AbstractToolGui: public QWidget

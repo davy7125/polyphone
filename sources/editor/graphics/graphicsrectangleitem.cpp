@@ -331,7 +331,7 @@ void GraphicsRectangleItem::saveChanges()
             s_sf2->reset(_id, champ_keyRange);
         else
         {
-            Valeur value;
+            AttributeValue value;
             value.rValue.byLo = _minKey;
             value.rValue.byHi = _maxKey;
             s_sf2->set(_id, champ_keyRange, value);
@@ -345,7 +345,7 @@ void GraphicsRectangleItem::saveChanges()
             s_sf2->reset(_id, champ_velRange);
         else
         {
-            Valeur value;
+            AttributeValue value;
             value.rValue.byLo = _minVel;
             value.rValue.byHi = _maxVel;
             s_sf2->set(_id, champ_velRange, value);

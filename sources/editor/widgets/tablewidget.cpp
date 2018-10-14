@@ -470,7 +470,7 @@ void TableWidget::updateModDisplay(int column, QList<int> rows)
     _tableDelegate->updateModDisplay(column, rows);
 }
 
-void TableWidget::selectCell(EltID id, Champ champ)
+void TableWidget::selectCell(EltID id, AttributeType champ)
 {
     if (champ == champ_startAddrsCoarseOffset)
         champ = champ_startAddrsOffset;

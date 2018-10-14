@@ -338,7 +338,7 @@ void PageSmpl::setStartLoop()
         return;
 
     // Soundfont editing
-    Valeur val;
+    AttributeValue val;
     val.dwValue = ui->spinStartLoop->value();
     ui->spinEndLoop->setMinimum(val.dwValue);
     QList<EltID> listID = _currentIds.getSelectedIds(elementSmpl);
@@ -401,7 +401,7 @@ void PageSmpl::setEndLoop()
         return;
 
     // Soundfont editing
-    Valeur val;
+    AttributeValue val;
     val.dwValue = ui->spinEndLoop->value();
     ui->spinStartLoop->setMaximum(val.dwValue);
     QList<EltID> listID = _currentIds.getSelectedIds(elementSmpl);
@@ -461,7 +461,7 @@ void PageSmpl::setEndLoop(int val)
 void PageSmpl::on_pushFullLength_clicked()
 {
     // Soundfont editing
-    Valeur val;
+    AttributeValue val;
 
     quint32 displayedEndLoop = 0;
     bool firstValue = true;
@@ -546,7 +546,7 @@ void PageSmpl::setRootKey()
         return;
 
     // Soundfont editing
-    Valeur val;
+    AttributeValue val;
     val.bValue = ui->spinRootKey->value();
     QList<EltID> listID = _currentIds.getSelectedIds(elementSmpl);
     foreach (EltID id, listID)
@@ -587,7 +587,7 @@ void PageSmpl::setTune()
         return;
 
     // Soundfont editing
-    Valeur val;
+    AttributeValue val;
     val.cValue = ui->spinTune->value();
     QList<EltID> listID = _currentIds.getSelectedIds(elementSmpl);
     foreach (EltID id, listID)
@@ -645,7 +645,7 @@ void PageSmpl::setType(int index)
 
     _preparingPage = true;
     // Modification du type du sample
-    Valeur val;
+    AttributeValue val;
     val.sfLinkValue = nouveauType;
     _sf2->set(id, champ_sfSampleType, val);
     if (ancienType != monoSample)
@@ -760,7 +760,7 @@ void PageSmpl::setLinkedSmpl(int index)
     _preparingPage = true;
 
     // Suppression du lien du sample anciennement lié, le cas échéant
-    Valeur val;
+    AttributeValue val;
     if (idLinkedOld.indexElt > -1)
     {
         val.sfLinkValue = monoSample;
@@ -879,7 +879,7 @@ void PageSmpl::setRateElt(EltID id, quint32 echFinal)
     QByteArray baData = _sf2->getData(id, champ_sampleDataFull24);
     baData = Sound::resampleMono(baData, echInit, echFinal, 24);
     _sf2->set(id, champ_sampleDataFull24, baData);
-    Valeur val;
+    AttributeValue val;
     val.dwValue = echFinal;
     _sf2->set(id, champ_dwSampleRate, val);
 
@@ -1179,7 +1179,7 @@ void PageSmpl::autoTune(EltID id, int &pitch, int &correction)
     if (pitch != -1)
     {
         // Modification du pitch et de la correction
-        Valeur val;
+        AttributeValue val;
         val.wValue = pitch;
         _sf2->set(id, champ_byOriginalPitch, val);
         val.wValue = correction;

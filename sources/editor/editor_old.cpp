@@ -63,14 +63,11 @@ MainWindowOld::MainWindowOld(QWidget *parent) : QMainWindow(parent, Qt::Window |
     ui->stackedWidget->addWidget(_pageOverviewInst);
     ui->stackedWidget->addWidget(_pageOverviewPrst);
 
-    // Initialisation arbre (passage de l'adresse de mainWindow et du combobox)
-    ui->tree->init(this, sf2, ui->comboSf2);
-
     // Initialisation dialog liste (pointeur vers les sf2 et mainWindow)
     this->dialList.init(this, this->sf2);
 
     // Fichiers récents
-    updateFavoriteFiles();
+    //updateFavoriteFiles();
 
     // Affichage logo logiciel
     ui->stackedWidget->setCurrentWidget(ui->page_Soft);
@@ -126,14 +123,14 @@ void MainWindowOld::spaceKeyPressedInTree()
 void MainWindowOld::supprimerElt()
 {
     // Suppression d'un ou plusieurs éléments dans l'arborescence
-    int nb = ui->tree->getSelectedItemsNumber();
+    int nb = 0;
     if (nb <= 0)
         return;
 
-    QList<EltID> listID = ui->tree->getAllIDs();
+    QList<EltID> listID;
 
     // 1er élément à supprimer
-    EltID elementToSelect = ui->tree->getElementToSelectAfterDeletion();
+    EltID elementToSelect;// = ui->tree->getElementToSelectAfterDeletion();
 
     int message = 1;
     foreach (EltID id, listID)
@@ -146,29 +143,11 @@ void MainWindowOld::supprimerElt()
         QMessageBox::warning(this, trUtf8("Attention"),
                              trUtf8("Impossible de supprimer un instrument s'il est utilisé par un preset."));
 
-    if (message == 1 && elementToSelect.typeElement != elementUnknown)
-        ui->tree->select(elementToSelect, true);
+//    if (message == 1 && elementToSelect.typeElement != elementUnknown)
+//        ui->tree->select(elementToSelect, true);
 
     //updateActions();
-    updateDo();
-}
-
-// Sauvegarde, undo, redo
-void MainWindowOld::sauvegarder()
-{
-    // Sauvegarde d'un SF2 (appel de l'interface)
-    if (ui->tree->getSelectedItemsNumber() == 0) return;
-    if (!ui->tree->isSelectedItemsSf2Unique()) return;
-    EltID id = ui->tree->getFirstID();
-    sauvegarder(id.indexSf2, false);
-}
-
-void MainWindowOld::sauvegarderSous()
-{
-    if (ui->tree->getSelectedItemsNumber() == 0) return;
-    if (!ui->tree->isSelectedItemsSf2Unique()) return;
-    EltID id = ui->tree->getFirstID();
-    sauvegarder(id.indexSf2, true);
+    //updateDo();
 }
 
 int MainWindowOld::sauvegarder(int indexSf2, bool saveAs)
@@ -272,22 +251,6 @@ int MainWindowOld::sauvegarder(int indexSf2, bool saveAs)
     return 1;
 }
 
-void MainWindowOld::undo()
-{
-    ui->tree->clearPastedID();
-    //sf2->undo();
-    //updateActions();
-    updateDo();
-}
-
-void MainWindowOld::redo()
-{
-    ui->tree->clearPastedID();
-    //sf2->redo();
-    //updateActions();
-    updateDo();
-}
-
 // Fenetres / affichage
 void MainWindowOld::showAbout()
 {
@@ -314,154 +277,13 @@ void MainWindowOld::onPleinEcranTriggered()
     this->setWindowState(this->windowState() ^ Qt::WindowFullScreen);
 }
 
-QList<QAction *> MainWindowOld::getListeActions()
-{
-    QList<QAction *> listeAction;
-    listeAction << ui->actionNouveau
-                << ui->actionOuvrir
-                << ui->actionEnregistrer
-                << ui->actionEnregistrer_sous
-                << ui->actionImporter
-                << ui->actionExporter
-                << ui->actionFermer_le_fichier
-                << ui->actionNouvel_instrument
-                << ui->actionNouveau_preset
-                << ui->actionAnnuler
-                << ui->actionR_tablir
-                << ui->actionCopier
-                << ui->actionColler
-                << ui->action_Supprimer
-                << ui->actionRenommer
-                << ui->actionPr_f_rences
-                << ui->actionAjuster_la_fin_de_boucle
-                << ui->actionBouclage_automatique
-                << ui->actionEnlever_blanc_au_d_part
-                << ui->actionFiltrer
-                << ui->actionNormaliser_volume
-                << ui->action_R_glage_balance
-                << ui->actionTransposer
-                << ui->action_Cr_ation_mutation_mixture
-                << ui->actionD_saccordage_ondulant
-                << ui->actionD_uplication_des_divisions
-                << ui->action_laboration_release
-                << ui->action_Param_trage_global
-                << ui->action_R_partition_automatique
-                << ui->actionSpacialisation_du_son
-                << ui->action_Association_auto_samples
-                << ui->action_Enlever_les_l_ments_non_utilis_s
-                << ui->actionR_gler_att_nuation_minimale
-                << ui->actionMagn_tophone
-                << ui->actionSommaire
-                << ui->action_Visualiseur
-                << ui->actionExporter_en_tant_qu_sfz
-                << ui->action_Dissocier_les_samples_st_r_o
-                << ui->actionExporter_pics_de_fr_quence
-                << ui->action_Transposer
-                << ui->actionEnlever_tous_les_modulateurs
-                << ui->action_Commande
-                << ui->actionExporter_la_liste_des_presets;
-    return listeAction;
-}
-
-// Mise à jour
-void MainWindowOld::updateDo()
-{
-    // Affichage undo / redo et titre
-    ui->actionAnnuler->setEnabled(sf2->isUndoable(-1));
-    ui->actionR_tablir->setEnabled(sf2->isRedoable(-1));
-}
-
-void MainWindowOld::enableActionSample(bool isEnabled)
-{
-    ui->menuSample->setEnabled(isEnabled);
-    for (int i = 0; i < ui->menuSample->actions().size(); i++)
-        ui->menuSample->actions().at(i)->setEnabled(isEnabled);
-}
-void MainWindowOld::enableActionInstrument(bool isEnabled)
-{
-    ui->menuInstrument->setEnabled(isEnabled);
-    for (int i = 0; i < ui->menuInstrument->actions().size(); i++)
-        ui->menuInstrument->actions().at(i)->setEnabled(isEnabled);
-}
-void MainWindowOld::enableActionPreset(bool isEnabled)
-{
-    ui->menuPreset->setEnabled(isEnabled);
-    for (int i = 0; i < ui->menuPreset->actions().size(); i++)
-        ui->menuPreset->actions().at(i)->setEnabled(isEnabled);
-}
-void MainWindowOld::enableActionSf2(bool isEnabled)
-{
-    ui->menuDivers->setEnabled(isEnabled);
-    for (int i = 0; i < ui->menuDivers->actions().size(); i++)
-        ui->menuDivers->actions().at(i)->setEnabled(isEnabled);
-}
-
-void MainWindowOld::desactiveOutilsSmpl()
-{
-    // Appel depuis pageSmpl
-    ui->action_Supprimer->setEnabled(0);
-    ui->menuSample->setEnabled(0);
-    ui->action_Enlever_les_l_ments_non_utilis_s->setEnabled(0);
-    ui->tree->desactiveSuppression();
-}
-void MainWindowOld::activeOutilsSmpl()
-{
-    // Appel depuis pageSmpl
-    int nb = ui->tree->getSelectedItemsNumber();
-    if (nb != 1)
-    {
-        //this->updateActions();
-        ui->tree->clicTree();
-        return;
-    }
-    EltID ID = ui->tree->getFirstID();
-    ElementType type = ID.typeElement;
-    if (type != elementSmpl)
-    {
-        //this->updateActions();
-        ui->tree->clicTree();
-        return;
-    }
-    ui->action_Supprimer->setEnabled(1);
-    ui->menuSample->setEnabled(1);
-    ui->action_Enlever_les_l_ments_non_utilis_s->setEnabled(1);
-    ui->tree->activeSuppression();
-}
-void MainWindowOld::updateFavoriteFiles()
-{
-    QAction *qAct = NULL;
-    for (int i = 0; i < 5; i++)
-    {
-        switch (i)
-        {
-        case 0: qAct = ui->actionFichier_1; break;
-        case 1: qAct = ui->actionFichier_2; break;
-        case 2: qAct = ui->actionFichier_3; break;
-        case 3: qAct = ui->actionFichier_4; break;
-        case 4: qAct = ui->actionFichier_5; break;
-        }
-        if (!ContextManager::recentFile()->getLastFile(RecentFileManager::FILE_TYPE_SF2, i).isEmpty())
-        {
-            qAct->setText(ContextManager::recentFile()->getLastFile(RecentFileManager::FILE_TYPE_SF2, i));
-            qAct->setVisible(true);
-            qAct->setEnabled(true);
-        }
-        else
-        {
-            qAct->setVisible(false);
-            qAct->setEnabled(false);
-        }
-    }
-}
-
 // Modifications
 void MainWindowOld::renommer()
 {
     bool ok;
     // Nb d'éléments sélectionnés
-    int nb = ui->tree->getSelectedItemsNumber();
-    if (nb == 0) return;
-    EltID ID = ui->tree->getFirstID();
+    int nb = 0;
+    EltID ID;
     ElementType type = ID.typeElement;
 
     if (type != elementSf2 && type != elementSmpl && type != elementInst && type != elementPrst)
@@ -485,10 +307,7 @@ void MainWindowOld::renommer()
         QString text = QInputDialog::getText(this, trUtf8("Question"), msg, QLineEdit::Normal, sf2->getQstr(ID, champ_name), &ok);
         if (ok && !text.isEmpty())
         {
-            ID = ui->tree->getFirstID();
             sf2->set(ID, champ_name, text);
-            updateDo();
-            //updateActions();
         }
     }
 }
@@ -505,7 +324,7 @@ void MainWindowOld::renommerEnMasse(int renameType, QString text1, QString text2
             return;
     }
 
-    QList<EltID> listID = ui->tree->getAllIDs();
+    QList<EltID> listID;;
 
     for (int i = 0; i < listID.size(); i++)
     {
@@ -557,9 +376,6 @@ void MainWindowOld::renommerEnMasse(int renameType, QString text1, QString text2
         if (sf2->getQstr(ID, champ_name).compare(newName, Qt::CaseInsensitive))
             sf2->set(ID, champ_name, newName);
     }
-
-    updateDo();
-    //updateActions();
 }
 
 void MainWindowOld::dragAndDrop(EltID idDest, QList<EltID> idSources)
@@ -573,8 +389,6 @@ void MainWindowOld::dragAndDrop(EltID idDest, QList<EltID> idSources)
 
 void MainWindowOld::importerSmpl()
 {
-    if (ui->tree->getSelectedItemsNumber() == 0) return;
-
     // Other allowed format?
     QString ext = "";
     typedef QString (*MyPrototype)();
@@ -591,15 +405,13 @@ void MainWindowOld::importerSmpl()
     if (strList.count() == 0)
         return;
 
-    EltID id = ui->tree->getFirstID();
+    EltID id;
     int replace = 0;
     while (!strList.isEmpty())
     {
-        ui->tree->clearSelection();
+        //ui->tree->clearSelection();
         //this->dragAndDrop(strList.takeAt(0), id, &replace);
     }
-    updateDo();
-    //updateActions();
 }
 
 void MainWindowOld::importerSmpl(QString path, EltID id, int * replace)
@@ -616,7 +428,7 @@ void MainWindowOld::importerSmpl(QString path, EltID id, int * replace)
     int nChannels = son->get(champ_wChannels);
 
     // Ajout d'un sample
-    Valeur val;
+    AttributeValue val;
     nom = qFileInfo.completeBaseName();
 
     // Remplacement ?
@@ -728,7 +540,7 @@ void MainWindowOld::importerSmpl(QString path, EltID id, int * replace)
                     id.indexElt = indexR;
 
                 // Mise à jour des données
-                Valeur valTmp;
+                AttributeValue valTmp;
                 valTmp.wValue = j;
                 son->set(champ_wChannel, valTmp);
                 QByteArray data = son->getData(24);
@@ -798,7 +610,7 @@ void MainWindowOld::importerSmpl(QString path, EltID id, int * replace)
 //            if (ContextManager::configuration()->getValue(ConfManager::SECTION_NONE, "wav_auto_loop", false).toBool())
 //                this->page_smpl->enleveFin(id);
 
-            ui->tree->select(id, true);
+            //ui->tree->select(id, true);
         }
     }
     delete son;
@@ -817,7 +629,7 @@ QString MainWindowOld::getName(QString name, int maxCharacters, int suffixNumber
 
 void MainWindowOld::exporterSmpl()
 {
-    QList<EltID> listIDs = ui->tree->getAllIDs();
+    QList<EltID> listIDs;
     if (listIDs.isEmpty()) return;
     QString qDir = QFileDialog::getExistingDirectory(this, trUtf8("Choisir un répertoire de destination"),
                                                      ContextManager::recentFile()->getLastDirectory(RecentFileManager::FILE_TYPE_SAMPLE));
@@ -912,12 +724,12 @@ void MainWindowOld::exporterSmpl()
 
 void MainWindowOld::exporter()
 {
-    int nbElt = ui->tree->getSelectedItemsNumber();
+    int nbElt;
     if (nbElt == 0)
         return;
 
     // List of sf2
-    QList<EltID> selectedElements = ui->tree->getAllIDs();
+    QList<EltID> selectedElements;// = ui->tree->getAllIDs();
     QList<EltID> listSf2;
     for (int i = 0; i < selectedElements.size(); i++)
     {
@@ -1009,7 +821,7 @@ int MainWindowOld::exporter2(QList<QList<EltID> > listID, QString dir, int forma
                 {
                     int originalBank = sf2->get(id, champ_wBank).wValue;
                     int originalPreset = sf2->get(id, champ_wPreset).wValue;
-                    Valeur value;
+                    AttributeValue value;
                     value.wValue = nbBank;
                     sf2->set(id, champ_wBank, value);
                     value.wValue = nbPreset;
@@ -1069,7 +881,7 @@ void MainWindowOld::futureFinished()
                                  trUtf8("Fichier corrompu : utilisation des échantillons en qualité 16 bits."));
         case 0:
             // Loading ok
-            updateFavoriteFiles();
+            //updateFavoriteFiles();
             //updateActions();
             break;
         case 1:
@@ -1088,8 +900,6 @@ void MainWindowOld::futureFinished()
             QMessageBox::warning(this, trUtf8("Attention"), trUtf8("Le fichier est corrompu."));
             break;
         }
-
-        updateDo();
     }
 
     _progressDialog->deleteLater();
@@ -1098,78 +908,78 @@ void MainWindowOld::futureFinished()
 
 void MainWindowOld::nouvelInstrument()
 {
-    int nb = ui->tree->getSelectedItemsNumber();
-    if (nb == 0) return;
-    EltID id = ui->tree->getFirstID();
-    bool ok;
-    QString name = QInputDialog::getText(this, trUtf8("Créer un nouvel instrument"), trUtf8("Nom du nouvel instrument :"), QLineEdit::Normal, "", &ok);
-    if (ok && !name.isEmpty())
-    {
-        // Reprise ID si modif
-        id = ui->tree->getFirstID();
-        id.typeElement = elementInst;
-        id.indexElt = this->sf2->add(id);
-        this->sf2->set(id, champ_name, name.left(20));
-        updateDo();
-        ui->tree->clearSelection();
-        ui->tree->select(id, true);
-    }
+//    int nb = ui->tree->getSelectedItemsNumber();
+//    if (nb == 0) return;
+//    EltID id = ui->tree->getFirstID();
+//    bool ok;
+//    QString name = QInputDialog::getText(this, trUtf8("Créer un nouvel instrument"), trUtf8("Nom du nouvel instrument :"), QLineEdit::Normal, "", &ok);
+//    if (ok && !name.isEmpty())
+//    {
+//        // Reprise ID si modif
+//        id = ui->tree->getFirstID();
+//        id.typeElement = elementInst;
+//        id.indexElt = this->sf2->add(id);
+//        this->sf2->set(id, champ_name, name.left(20));
+//        updateDo();
+//        ui->tree->clearSelection();
+//        ui->tree->select(id, true);
+//    }
 }
 void MainWindowOld::nouveauPreset()
 {
-    int nb = ui->tree->getSelectedItemsNumber();
-    if (nb == 0) return;
-    EltID id = ui->tree->getFirstID();
-    // Vérification qu'un preset est disponible
-    int nPreset = -1;
-    int nBank = -1;
-    sf2->firstAvailablePresetBank(id, nBank, nPreset);
-    if (nPreset == -1)
-    {
-        QMessageBox::warning(this, trUtf8("Attention"), trUtf8("Aucun preset n'est disponible."));
-        return;
-    }
-    bool ok;
-    QString text = "";
-    if (id.typeElement == elementInst || id.typeElement == elementInstSmpl)
-    {
-        id.typeElement = elementInst;
-        text = this->sf2->getQstr(id, champ_name);
-    }
-    QString name = QInputDialog::getText(this, trUtf8("Créer un nouveau preset"), trUtf8("Nom du nouveau preset :"), QLineEdit::Normal, text, &ok);
-    if (ok && !name.isEmpty())
-    {
-        Valeur val;
-        // Reprise de l'identificateur si modification
-        id = ui->tree->getFirstID();
-        id.typeElement = elementPrst;
-        id.indexElt = this->sf2->add(id);
-        this->sf2->set(id, champ_name, name.left(20));
-        val.wValue = nPreset;
-        this->sf2->set(id, champ_wPreset, val);
-        val.wValue = nBank;
-        this->sf2->set(id, champ_wBank, val);
-        updateDo();
-        ui->tree->clearSelection();
-        ui->tree->select(id, true);
-    }
+//    int nb = ui->tree->getSelectedItemsNumber();
+//    if (nb == 0) return;
+//    EltID id = ui->tree->getFirstID();
+//    // Vérification qu'un preset est disponible
+//    int nPreset = -1;
+//    int nBank = -1;
+//    sf2->firstAvailablePresetBank(id, nBank, nPreset);
+//    if (nPreset == -1)
+//    {
+//        QMessageBox::warning(this, trUtf8("Attention"), trUtf8("Aucun preset n'est disponible."));
+//        return;
+//    }
+//    bool ok;
+//    QString text = "";
+//    if (id.typeElement == elementInst || id.typeElement == elementInstSmpl)
+//    {
+//        id.typeElement = elementInst;
+//        text = this->sf2->getQstr(id, champ_name);
+//    }
+//    QString name = QInputDialog::getText(this, trUtf8("Créer un nouveau preset"), trUtf8("Nom du nouveau preset :"), QLineEdit::Normal, text, &ok);
+//    if (ok && !name.isEmpty())
+//    {
+//        Valeur val;
+//        // Reprise de l'identificateur si modification
+//        id = ui->tree->getFirstID();
+//        id.typeElement = elementPrst;
+//        id.indexElt = this->sf2->add(id);
+//        this->sf2->set(id, champ_name, name.left(20));
+//        val.wValue = nPreset;
+//        this->sf2->set(id, champ_wPreset, val);
+//        val.wValue = nBank;
+//        this->sf2->set(id, champ_wBank, val);
+//        updateDo();
+//        ui->tree->clearSelection();
+//        ui->tree->select(id, true);
+//    }
 }
 void MainWindowOld::associer()
 {
-    if (!ui->tree->getSelectedItemsNumber())
-        return;
-    EltID id = ui->tree->getFirstID();
-    this->dialList.showDialog(id, DialogList::MODE_ASSOCIATION);
+//    if (!ui->tree->getSelectedItemsNumber())
+//        return;
+//    EltID id = ui->tree->getFirstID();
+//    this->dialList.showDialog(id, DialogList::MODE_ASSOCIATION);
 }
 void MainWindowOld::associer(EltID idDest)
 {
-    int nb = ui->tree->getSelectedItemsNumber();
+    int nb;// = ui->tree->getSelectedItemsNumber();
     if (nb == 0 || (idDest.typeElement != elementInst && idDest.typeElement != elementPrst))
     {
-        updateDo();
+        //updateDo();
         return;
     }
-    Champ champ;
+    AttributeType champ;
     if (idDest.typeElement == elementInst)
     {
         idDest.typeElement = elementInstSmpl;
@@ -1180,10 +990,10 @@ void MainWindowOld::associer(EltID idDest)
         idDest.typeElement = elementPrstInst;
         champ = champ_instrument;
     }
-    Valeur val;
+    AttributeValue val;
 
     // Liste des éléments sources
-    QList<EltID> listeSrc = ui->tree->getAllIDs();
+    QList<EltID> listeSrc;// = ui->tree->getAllIDs();
     foreach (EltID idSrc, listeSrc)
     {
         // Création élément lié
@@ -1228,7 +1038,7 @@ void MainWindowOld::associer(EltID idDest)
                     keyMax = qMax(keyMax, (int)this->sf2->get(idLinked, champ_keyRange).rValue.byHi);
                 }
             }
-            Valeur value;
+            AttributeValue value;
             if (keyMin < keyMax)
             {
                 value.rValue.byLo = keyMin;
@@ -1242,38 +1052,36 @@ void MainWindowOld::associer(EltID idDest)
             this->sf2->set(idDest, champ_keyRange, value);
         }
     }
-    updateDo();
-    //updateActions();
 }
 void MainWindowOld::remplacer()
 {
-    int nb = ui->tree->getSelectedItemsNumber();
+    int nb;// = ui->tree->getSelectedItemsNumber();
     if (nb != 1) return;
-    EltID id = ui->tree->getFirstID();
+    EltID id;// = ui->tree->getFirstID();
     this->dialList.showDialog(id, DialogList::MODE_REMPLACEMENT);
 }
 void MainWindowOld::remplacer(EltID idSrc)
 {
-    int nb = ui->tree->getSelectedItemsNumber();
+    int nb;// = ui->tree->getSelectedItemsNumber();
     if (nb != 1 || (idSrc.typeElement != elementSmpl && idSrc.typeElement != elementInst))
     {
-        updateDo();
+        //updateDo();
         return;
     }
-    EltID idDest = ui->tree->getFirstID();
+    EltID idDest;// = ui->tree->getFirstID();
     if (idDest.typeElement != elementInstSmpl && idDest.typeElement != elementPrstInst)
         return;
-    Champ champ;
+    AttributeType champ;
     if (idSrc.typeElement == elementSmpl)
         champ = champ_sampleID;
     else
         champ = champ_instrument;
 
     // Remplacement d'un sample ou instrument lié
-    Valeur val;
+    AttributeValue val;
     val.wValue = idSrc.indexElt;
     this->sf2->set(idDest, champ, val);
-    updateDo();
+    //updateDo();
     //updateActions();
 }
 
@@ -1313,28 +1121,18 @@ void MainWindowOld::supprimer()
 void MainWindowOld::desaccorder()      {this->page_inst->desaccorder();}
 void MainWindowOld::duplication()
 {
-    if (ui->tree->getSelectedItemsNumber() == 0) return;
-    ElementType type = ui->tree->getFirstID().typeElement;
+    //if (ui->tree->getSelectedItemsNumber() == 0) return;
+    ElementType type;// = ui->tree->getFirstID().typeElement;
     if (type == elementInst || type == elementInstSmpl)
         this->page_inst->duplication();
     else if (type == elementPrst || type == elementPrstInst)
         this->page_prst->duplication();
 }
 
-void MainWindowOld::paramGlobal()
-{
-    if (ui->tree->getSelectedItemsNumber() == 0) return;
-    ElementType type = ui->tree->getFirstID().typeElement;
-    if (type == elementInst || type == elementInstSmpl)
-        this->page_inst->paramGlobal();
-    else if (type == elementPrst || type == elementPrstInst)
-        this->page_prst->paramGlobal();
-}
-
 void MainWindowOld::spatialisation()
 {
-    if (ui->tree->getSelectedItemsNumber() == 0) return;
-    ElementType type = ui->tree->getFirstID().typeElement;
+    //if (ui->tree->getSelectedItemsNumber() == 0) return;
+    ElementType type;// = ui->tree->getFirstID().typeElement;
     if (type == elementInst || type == elementInstSmpl)
         this->page_inst->spatialisation();
     else if (type == elementPrst || type == elementPrstInst)
@@ -1348,8 +1146,8 @@ void MainWindowOld::on_action_Transposer_triggered()
 
 void MainWindowOld::visualize()
 {
-    if (ui->tree->getSelectedItemsNumber() == 0) return;
-    ElementType type = ui->tree->getFirstID().typeElement;
+    //if (ui->tree->getSelectedItemsNumber() == 0) return;
+    ElementType type;// = ui->tree->getFirstID().typeElement;
     if (type == elementInst || type == elementInstSmpl)
         this->page_inst->visualize();
     else if (type == elementPrst || type == elementPrstInst)
@@ -1358,9 +1156,9 @@ void MainWindowOld::visualize()
 void MainWindowOld::purger()
 {
     // Suppression des éléments non utilisés
-    if (ui->tree->getSelectedItemsNumber() == 0) return;
-    if (!ui->tree->isSelectedItemsSf2Unique()) return;
-    EltID id = ui->tree->getFirstID();
+    //if (ui->tree->getSelectedItemsNumber() == 0) return;
+    //if (!ui->tree->isSelectedItemsSf2Unique()) return;
+    EltID id;// = ui->tree->getFirstID();
 
     // Nombre de samples et instruments non utilisés
     int unusedSmpl = 0;
@@ -1444,21 +1242,21 @@ void MainWindowOld::purger()
         qStr += QString::number(unusedInst) + trUtf8(" instruments ont été supprimés.");
 
     QMessageBox::information(this, "", qStr);
-    updateDo();
+    //updateDo();
     //updateActions();
 }
 
 void MainWindowOld::exportPresetList()
 {
-    if (ui->tree->getSelectedItemsNumber() == 0) return;
-    EltID id = ui->tree->getFirstID();
+    //if (ui->tree->getSelectedItemsNumber() == 0) return;
+    EltID id;// = ui->tree->getFirstID();
     DialogExportList * dial = new DialogExportList(sf2, id, this);
     dial->setAttribute(Qt::WA_DeleteOnClose);
     dial->show();
 }
 void MainWindowOld::on_actionExporter_pics_de_fr_quence_triggered()
 {
-    EltID id = ui->tree->getFirstID();
+    EltID id;// = ui->tree->getFirstID();
     id.typeElement = elementSf2;
     QString defaultFile = ContextManager::recentFile()->getLastDirectory(RecentFileManager::FILE_TYPE_FREQUENCIES) + "/" +
             sf2->getQstr(id, champ_name).replace(QRegExp(QString::fromUtf8("[`~*|:<>«»?/{}\"\\\\]")), "_") + ".csv";
@@ -1484,7 +1282,7 @@ void MainWindowOld::exporterFrequences(QString fileName)
            << trUtf8("Facteur") << "\"" << sep << "\"" << trUtf8("Fréquence") << "\"" << sep << "\""
            << trUtf8("Note") << "\"" << sep << "\"" << trUtf8("Correction") << "\"";
 
-    EltID id = ui->tree->getFirstID();
+    EltID id;// = ui->tree->getFirstID();
     id.typeElement = elementSmpl;
     QString nomSmpl;
     QList<double> listeFrequences, listeFacteurs;
@@ -1513,7 +1311,7 @@ void MainWindowOld::exporterFrequences(QString fileName)
 
 void MainWindowOld::on_actionEnlever_tous_les_modulateurs_triggered()
 {
-    EltID id = ui->tree->getFirstID();
+    EltID id;// = ui->tree->getFirstID();
 
     int count = 0;
 
@@ -1532,7 +1330,7 @@ void MainWindowOld::on_actionEnlever_tous_les_modulateurs_triggered()
     else
         QMessageBox::information(this, trUtf8("Information"), QString::number(count) + " " +
                                  trUtf8("modulateurs ont été supprimés."));
-    updateDo();
+    //updateDo();
     //updateActions();
 }
 

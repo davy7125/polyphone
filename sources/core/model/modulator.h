@@ -1,7 +1,7 @@
 #ifndef MODULATOR_H
 #define MODULATOR_H
 
-#include "sf2_types.h"
+#include "basetypes.h"
 
 class Modulator
 {
@@ -12,7 +12,7 @@ public:
     bool isHidden() { return _hidden; }
 
     SFModulator _sfModSrcOper;
-    Champ _sfModDestOper;
+    AttributeType _sfModDestOper;
     short _modAmount;
     SFModulator _sfModAmtSrcOper;
     SFTransform _sfModTransOper;

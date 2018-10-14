@@ -311,66 +311,6 @@
         </widget>
        </item>
        <item>
-        <widget class="Tree" name="tree">
-         <property name="font">
-          <font>
-           <weight>50</weight>
-           <bold>false</bold>
-          </font>
-         </property>
-         <property name="mouseTracking">
-          <bool>false</bool>
-         </property>
-         <property name="contextMenuPolicy">
-          <enum>Qt::CustomContextMenu</enum>
-         </property>
-         <property name="acceptDrops">
-          <bool>true</bool>
-         </property>
-         <property name="frameShape">
-          <enum>QFrame::Panel</enum>
-         </property>
-         <property name="frameShadow">
-          <enum>QFrame::Sunken</enum>
-         </property>
-         <property name="editTriggers">
-          <set>QAbstractItemView::NoEditTriggers</set>
-         </property>
-         <property name="showDropIndicator" stdset="0">
-          <bool>true</bool>
-         </property>
-         <property name="dragEnabled">
-          <bool>true</bool>
-         </property>
-         <property name="dragDropMode">
-          <enum>QAbstractItemView::DragDrop</enum>
-         </property>
-         <property name="defaultDropAction">
-          <enum>Qt::IgnoreAction</enum>
-         </property>
-         <property name="selectionMode">
-          <enum>QAbstractItemView::ExtendedSelection</enum>
-         </property>
-         <property name="indentation">
-          <number>17</number>
-         </property>
-         <property name="animated">
-          <bool>true</bool>
-         </property>
-         <property name="columnCount">
-          <number>1</number>
-         </property>
-         <attribute name="headerVisible">
-          <bool>false</bool>
-         </attribute>
-         <column>
-          <property name="text">
-           <string notr="true">1</string>
-          </property>
-         </column>
-        </widget>
-       </item>
-       <item>
         <layout class="QHBoxLayout" name="horizontalLayout_2">
          <property name="spacing">
           <number>2</number>
@@ -529,7 +469,7 @@
   </action>
   <action name="actionA_propos">
    <property name="icon">
-    <iconset resource="../resources.qrc">
+    <iconset>
      <normaloff>:/icons/about</normaloff>:/icons/about</iconset>
    </property>
    <property name="text">
@@ -714,7 +654,7 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset resource="../resources.qrc">
+    <iconset>
      <normaloff>:/icons/delete</normaloff>:/icons/delete</iconset>
    </property>
    <property name="text">
@@ -882,7 +822,7 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset resource="../resources.qrc">
+    <iconset>
      <normaloff>:/icons/export</normaloff>:/icons/export</iconset>
    </property>
    <property name="text">
@@ -1307,7 +1247,7 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset resource="../resources.qrc">
+    <iconset>
      <normaloff>:/icons/export2</normaloff>:/icons/export2</iconset>
    </property>
    <property name="text">
@@ -1447,7 +1387,7 @@
   </action>
   <action name="action_T_l_charger_des_soundfonts">
    <property name="icon">
-    <iconset resource="../resources.qrc">
+    <iconset>
      <normaloff>:/icons/down</normaloff>:/icons/down</iconset>
    </property>
    <property name="text">
@@ -1456,21 +1396,6 @@
   </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
- <customwidgets>
-  <customwidget>
-   <class>Tree</class>
-   <extends>QTreeWidget</extends>
-   <header>tree.h</header>
-   <slots>
-    <signal>dropped(EltID,EltID,int,int*,QByteArray*,QByteArray*)</signal>
-    <slot>collapse()</slot>
-    <slot>searchTree(QString)</slot>
-    <slot>clicTree(QTreeWidgetItem*)</slot>
-    <slot>clicTree()</slot>
-    <slot>clicTreeRight()</slot>
-   </slots>
-  </customwidget>
- </customwidgets>
  <resources>
   <include location="../resources.qrc"/>
  </resources>
@@ -1508,38 +1433,6 @@
    </hints>
   </connection>
   <connection>
-   <sender>push_derouler</sender>
-   <signal>clicked()</signal>
-   <receiver>tree</receiver>
-   <slot>expandAll()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>59</x>
-     <y>972</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>24</x>
-     <y>916</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>push_enrouler</sender>
-   <signal>clicked()</signal>
-   <receiver>tree</receiver>
-   <slot>collapse()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>32</x>
-     <y>972</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>128</x>
-     <y>513</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
    <sender>push_nosearch</sender>
    <signal>clicked()</signal>
    <receiver>editSearch</receiver>
@@ -1572,22 +1465,6 @@
    </hints>
   </connection>
   <connection>
-   <sender>editSearch</sender>
-   <signal>textChanged(QString)</signal>
-   <receiver>tree</receiver>
-   <slot>searchTree(QString)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>144</x>
-     <y>955</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>128</x>
-     <y>513</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
    <sender>actionFermer_le_fichier</sender>
    <signal>triggered()</signal>
    <receiver>MainWindowOld</receiver>
@@ -1600,22 +1477,6 @@
     <hint type="destinationlabel">
      <x>699</x>
      <y>499</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>tree</sender>
-   <signal>customContextMenuRequested(QPoint)</signal>
-   <receiver>tree</receiver>
-   <slot>clicTreeRight()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>128</x>
-     <y>514</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>128</x>
-     <y>513</y>
     </hint>
    </hints>
   </connection>
@@ -1824,22 +1685,6 @@
     <hint type="destinationlabel">
      <x>699</x>
      <y>499</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>tree</sender>
-   <signal>itemSelectionChanged()</signal>
-   <receiver>tree</receiver>
-   <slot>clicTree()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>128</x>
-     <y>513</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>128</x>
-     <y>513</y>
     </hint>
    </hints>
   </connection>

@@ -145,7 +145,7 @@ void Duplicator::linkSmpl(EltID idSource, EltID idDest)
 {
     idDest.typeElement = elementInstSmpl;
     idDest.indexElt2 = _destination->add(idDest);
-    Valeur val;
+    AttributeValue val;
     val.wValue = idSource.indexElt;
     _destination->set(idDest, champ_sampleID, val);
 
@@ -176,7 +176,7 @@ void Duplicator::linkInst(EltID idSource, EltID idDest)
 {
     idDest.typeElement = elementPrstInst;
     idDest.indexElt2 = _destination->add(idDest);
-    Valeur val;
+    AttributeValue val;
     val.wValue = idSource.indexElt;
     _destination->set(idDest, champ_instrument, val);
 
@@ -194,7 +194,7 @@ void Duplicator::linkInst(EltID idSource, EltID idDest)
             keyMax = qMax(keyMax, (int)_source->get(idLinked, champ_keyRange).rValue.byHi);
         }
     }
-    Valeur value;
+    AttributeValue value;
     if (keyMin <= keyMax)
     {
         value.rValue.byLo = keyMin;
@@ -325,7 +325,7 @@ void Duplicator::copySmpl(EltID idSource, EltID idDest)
             // Possible ?
             EltID idSourceLink = idSource;
             idSourceLink.indexElt = _source->get(idSource, champ_wSampleLink).wValue;
-            Valeur val;
+            AttributeValue val;
             if (_listCopy.contains(idSourceLink))
             {
                 // Association
@@ -543,7 +543,7 @@ void Duplicator::copyPrst(EltID idSource, EltID idDest)
         {
             // Création d'un nouveau preset
             idDest.indexElt = _destination->add(idDest);
-            Valeur val;
+            AttributeValue val;
             val.wValue = numBank;
             _destination->set(idDest, champ_wBank, val);
             val.wValue = numPreset;
@@ -627,7 +627,7 @@ void Duplicator::copyGen(EltID idSource, EltID idDest)
         return;
     }
 
-    Valeur val;
+    AttributeValue val;
     foreach (int i, _source->getSiblings(idGen))
     {
         // Copie, sauf bank et preset
@@ -641,15 +641,15 @@ void Duplicator::copyGen(EltID idSource, EltID idDest)
                     idLinkSource.typeElement = elementSmpl;
                 else
                     idLinkSource.typeElement = elementInst;
-                idLinkSource.indexElt = _source->get(idSource, (Champ)i).wValue;
+                idLinkSource.indexElt = _source->get(idSource, (AttributeType)i).wValue;
                 if (_listCopy.contains(idLinkSource))
                     val.wValue = _listPaste.at(_listCopy.indexOf(idLinkSource)).indexElt;
                 else
                     val.wValue = idLinkSource.indexElt;
             }
             else
-                val.genValue = _source->get(idSource, (Champ)i).genValue;
-            _destination->set(idDest, (Champ)i, val);
+                val = _source->get(idSource, (AttributeType)i);
+            _destination->set(idDest, (AttributeType)i, val);
         }
     }
 }
@@ -708,7 +708,7 @@ void Duplicator::copyMod(EltID idSource, EltID idDest)
     }
 
     // Mise en place des liens (les éléments cachés ayant disparus)
-    Valeur val;
+    AttributeValue val;
     foreach (int i, _source->getSiblings(idSource))
     {
         idSource.indexMod = i;
@@ -764,7 +764,7 @@ void Duplicator::reset(EltID idDest)
     {
         id.indexMod = paramType;
         if (paramType != champ_wBank && paramType != champ_wPreset) // On garde bank et preset
-            _destination->reset(id, (Champ)paramType);
+            _destination->reset(id, (AttributeType)paramType);
     }
 
     // Suppression des modulateurs

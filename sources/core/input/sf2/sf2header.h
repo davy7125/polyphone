@@ -1,7 +1,7 @@
 #ifndef SF2HEADER_H
 #define SF2HEADER_H
 
-#include "sf2_types.h"
+#include "basetypes.h"
 #include "sf2basetypes.h"
 #include <QMap>
 class QDataStream;

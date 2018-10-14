@@ -2,7 +2,7 @@
 #define TREEITEMFIRSTLEVEL_H
 
 #include "treeitem.h"
-#include "sf2_types.h"
+#include "basetypes.h"
 class TreeItemRoot;
 
 class TreeItemFirstLevel: public TreeItem

@@ -2,7 +2,7 @@
 #define TREEITEM_H
 
 #include <QString>
-#include "sf2_types.h"
+#include "basetypes.h"
 class TreeModel;
 
 class TreeItem

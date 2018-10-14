@@ -230,8 +230,8 @@ void VoiceParam::read(EltID id)
         id.typeElement = elementInst;
     else
         id.typeElement = elementPrst;
-    QList<Champ> listChamps;
-    QList<genAmountType> listValeurs;
+    QList<AttributeType> listChamps;
+    QList<AttributeValue> listValeurs;
     m_sf2->getListeBags(id, listChamps, listValeurs);
 
     // Chargement des bags des éléments
@@ -239,8 +239,8 @@ void VoiceParam::read(EltID id)
         id.typeElement = elementInstSmpl;
     else
         id.typeElement = elementPrstInst;
-    QList<Champ> listChamps2;
-    QList<genAmountType> listValeurs2;
+    QList<AttributeType> listChamps2;
+    QList<AttributeValue> listValeurs2;
     m_sf2->getListeBags(id, listChamps2, listValeurs2);
     for (int i = 0; i < listChamps2.count(); i++)
     {
@@ -249,7 +249,7 @@ void VoiceParam::read(EltID id)
     }
 
     // Doublons à enlever
-    QList<Champ> listChampsNonDoublon;
+    QList<AttributeType> listChampsNonDoublon;
     listChampsNonDoublon << champ_startloopAddrsOffset
                          << champ_startloopAddrsCoarseOffset
                          << champ_endloopAddrsOffset
@@ -260,7 +260,7 @@ void VoiceParam::read(EltID id)
                          << champ_endAddrsCoarseOffset;
     for (int i = 0; i < listChampsNonDoublon.size(); i++)
     {
-        Champ champTmp = listChampsNonDoublon.at(i);
+        AttributeType champTmp = listChampsNonDoublon.at(i);
         if (listChamps.count(champTmp) > 1)
         {
             int firstIndex = listChamps.indexOf(champTmp);
@@ -269,76 +269,76 @@ void VoiceParam::read(EltID id)
         }
     }
 
-    Champ champTmp;
-    genAmountType valTmp;
+    AttributeType champTmp;
+    AttributeValue valTmp;
     for (int i = 0; i < listChamps.size(); i++)
     {
         champTmp = listChamps.at(i);
         valTmp = listValeurs.at(i);
         switch (champTmp)
         {
-        case champ_fineTune:                    this->fineTune           = valTmp.shAmount;               break;
-        case champ_coarseTune:                  this->coarseTune         = valTmp.shAmount;               break;
-        case champ_pan:                         this->pan                = (double)valTmp.shAmount / 10.; break;
-        case champ_initialAttenuation:          this->attenuation        = (double)valTmp.shAmount / 10.; break;
-        case champ_initialFilterQ:              this->filterQ            = (double)valTmp.shAmount / 10.; break;
-        case champ_sustainVolEnv:               this->volSustainLevel    = (double)valTmp.shAmount / 10.; break;
-        case champ_keynumToVolEnvHold:          this->volKeynumToHold    = valTmp.shAmount;               break;
-        case champ_keynumToVolEnvDecay:         this->volKeynumToDecay   = valTmp.shAmount;               break;
-        case champ_sustainModEnv:               this->modSustainLevel    = (double)valTmp.shAmount / 10.; break;
-        case champ_keynumToModEnvHold:          this->modKeynumToHold    = valTmp.shAmount;               break;
-        case champ_keynumToModEnvDecay:         this->modKeynumToDecay   = valTmp.shAmount;               break;
-        case champ_modEnvToPitch:               this->modEnvToPitch      = valTmp.shAmount;               break;
-        case champ_modEnvToFilterFc:            this->modEnvToFilterFc   = valTmp.shAmount;               break;
-        case champ_modLfoToPitch:               this->modLfoToPitch      = valTmp.shAmount;               break;
-        case champ_modLfoToFilterFc:            this->modLfoToFilterFreq = valTmp.shAmount;               break;
-        case champ_modLfoToVolume:              this->modLfoToVolume     = (double)valTmp.shAmount / 10.; break;
-        case champ_vibLfoToPitch:               this->vibLfoToPitch      = valTmp.shAmount;               break;
-        case champ_reverbEffectsSend:           this->reverb             = (double)valTmp.shAmount / 10.; break;
-        case champ_chorusEffectsSend:           this->chorus             = (double)valTmp.shAmount / 10.; break;
-        case champ_delayVolEnv:                 this->volDelayTime       = d1200e2(valTmp.shAmount);      break;
-        case champ_attackVolEnv:                this->volAttackTime      = d1200e2(valTmp.shAmount);      break;
-        case champ_holdVolEnv:                  this->volHoldTime        = d1200e2(valTmp.shAmount);      break;
-        case champ_decayVolEnv:                 this->volDecayTime       = d1200e2(valTmp.shAmount);      break;
-        case champ_releaseVolEnv:               this->volReleaseTime     = d1200e2(valTmp.shAmount);      break;
-        case champ_delayModEnv:                 this->modDelayTime       = d1200e2(valTmp.shAmount);      break;
-        case champ_attackModEnv:                this->modAttackTime      = d1200e2(valTmp.shAmount);      break;
-        case champ_holdModEnv:                  this->modHoldTime        = d1200e2(valTmp.shAmount);      break;
-        case champ_decayModEnv:                 this->modDecayTime       = d1200e2(valTmp.shAmount);      break;
-        case champ_releaseModEnv:               this->modReleaseTime     = d1200e2(valTmp.shAmount);      break;
-        case champ_delayModLFO:                 this->modLfoDelay        = d1200e2(valTmp.shAmount);      break;
-        case champ_delayVibLFO:                 this->vibLfoDelay        = d1200e2(valTmp.shAmount);      break;
-        case champ_scaleTuning:                 this->scaleTune          = valTmp.shAmount;               break;
-        case champ_overridingRootKey:           this->rootkey            = valTmp.wAmount;                break;
-        case champ_keynum:                      this->keynum             = valTmp.wAmount;                break;
-        case champ_velocity:                    this->fixedVelocity      = valTmp.wAmount;                break;
-        case champ_sampleModes:                 this->loopMode           = valTmp.wAmount;                break;
-        case champ_exclusiveClass:              this->exclusiveClass     = valTmp.wAmount;                break;
-        case champ_startloopAddrsOffset:        this->loopStart         += valTmp.shAmount;               break;
-        case champ_startloopAddrsCoarseOffset:  this->loopStart         += valTmp.shAmount * 32768;       break;
-        case champ_endloopAddrsOffset:          this->loopEnd           += valTmp.shAmount;               break;
-        case champ_endloopAddrsCoarseOffset:    this->loopEnd           += valTmp.shAmount * 32768;       break;
-        case champ_startAddrsOffset:            this->sampleStart       += valTmp.shAmount;               break;
-        case champ_startAddrsCoarseOffset:      this->sampleStart       += valTmp.shAmount * 32768;       break;
-        case champ_endAddrsOffset:              this->sampleEnd         += valTmp.shAmount;               break;
-        case champ_endAddrsCoarseOffset:        this->sampleEnd         += valTmp.shAmount * 32768;       break;
+        case champ_fineTune:                    this->fineTune           = valTmp.shValue;               break;
+        case champ_coarseTune:                  this->coarseTune         = valTmp.shValue;               break;
+        case champ_pan:                         this->pan                = (double)valTmp.shValue / 10.; break;
+        case champ_initialAttenuation:          this->attenuation        = (double)valTmp.shValue / 10.; break;
+        case champ_initialFilterQ:              this->filterQ            = (double)valTmp.shValue / 10.; break;
+        case champ_sustainVolEnv:               this->volSustainLevel    = (double)valTmp.shValue / 10.; break;
+        case champ_keynumToVolEnvHold:          this->volKeynumToHold    = valTmp.shValue;               break;
+        case champ_keynumToVolEnvDecay:         this->volKeynumToDecay   = valTmp.shValue;               break;
+        case champ_sustainModEnv:               this->modSustainLevel    = (double)valTmp.shValue / 10.; break;
+        case champ_keynumToModEnvHold:          this->modKeynumToHold    = valTmp.shValue;               break;
+        case champ_keynumToModEnvDecay:         this->modKeynumToDecay   = valTmp.shValue;               break;
+        case champ_modEnvToPitch:               this->modEnvToPitch      = valTmp.shValue;               break;
+        case champ_modEnvToFilterFc:            this->modEnvToFilterFc   = valTmp.shValue;               break;
+        case champ_modLfoToPitch:               this->modLfoToPitch      = valTmp.shValue;               break;
+        case champ_modLfoToFilterFc:            this->modLfoToFilterFreq = valTmp.shValue;               break;
+        case champ_modLfoToVolume:              this->modLfoToVolume     = (double)valTmp.shValue / 10.; break;
+        case champ_vibLfoToPitch:               this->vibLfoToPitch      = valTmp.shValue;               break;
+        case champ_reverbEffectsSend:           this->reverb             = (double)valTmp.shValue / 10.; break;
+        case champ_chorusEffectsSend:           this->chorus             = (double)valTmp.shValue / 10.; break;
+        case champ_delayVolEnv:                 this->volDelayTime       = d1200e2(valTmp.shValue);      break;
+        case champ_attackVolEnv:                this->volAttackTime      = d1200e2(valTmp.shValue);      break;
+        case champ_holdVolEnv:                  this->volHoldTime        = d1200e2(valTmp.shValue);      break;
+        case champ_decayVolEnv:                 this->volDecayTime       = d1200e2(valTmp.shValue);      break;
+        case champ_releaseVolEnv:               this->volReleaseTime     = d1200e2(valTmp.shValue);      break;
+        case champ_delayModEnv:                 this->modDelayTime       = d1200e2(valTmp.shValue);      break;
+        case champ_attackModEnv:                this->modAttackTime      = d1200e2(valTmp.shValue);      break;
+        case champ_holdModEnv:                  this->modHoldTime        = d1200e2(valTmp.shValue);      break;
+        case champ_decayModEnv:                 this->modDecayTime       = d1200e2(valTmp.shValue);      break;
+        case champ_releaseModEnv:               this->modReleaseTime     = d1200e2(valTmp.shValue);      break;
+        case champ_delayModLFO:                 this->modLfoDelay        = d1200e2(valTmp.shValue);      break;
+        case champ_delayVibLFO:                 this->vibLfoDelay        = d1200e2(valTmp.shValue);      break;
+        case champ_scaleTuning:                 this->scaleTune          = valTmp.shValue;               break;
+        case champ_overridingRootKey:           this->rootkey            = valTmp.wValue;                break;
+        case champ_keynum:                      this->keynum             = valTmp.wValue;                break;
+        case champ_velocity:                    this->fixedVelocity      = valTmp.wValue;                break;
+        case champ_sampleModes:                 this->loopMode           = valTmp.wValue;                break;
+        case champ_exclusiveClass:              this->exclusiveClass     = valTmp.wValue;                break;
+        case champ_startloopAddrsOffset:        this->loopStart         += valTmp.shValue;               break;
+        case champ_startloopAddrsCoarseOffset:  this->loopStart         += valTmp.shValue * 32768;       break;
+        case champ_endloopAddrsOffset:          this->loopEnd           += valTmp.shValue;               break;
+        case champ_endloopAddrsCoarseOffset:    this->loopEnd           += valTmp.shValue * 32768;       break;
+        case champ_startAddrsOffset:            this->sampleStart       += valTmp.shValue;               break;
+        case champ_startAddrsCoarseOffset:      this->sampleStart       += valTmp.shValue * 32768;       break;
+        case champ_endAddrsOffset:              this->sampleEnd         += valTmp.shValue;               break;
+        case champ_endAddrsCoarseOffset:        this->sampleEnd         += valTmp.shValue * 32768;       break;
         case champ_initialFilterFc:
             if (id.typeElement == elementInstSmpl)
-                this->filterFreq = d1200e2(valTmp.shAmount) * 8.176;
+                this->filterFreq = d1200e2(valTmp.shValue) * 8.176;
             else
-                this->filterFreq = d1200e2(valTmp.shAmount);
+                this->filterFreq = d1200e2(valTmp.shValue);
             break;
         case champ_freqModLFO:
             if (id.typeElement == elementInstSmpl)
-                this->modLfoFreq = d1200e2(valTmp.shAmount) * 8.176;
+                this->modLfoFreq = d1200e2(valTmp.shValue) * 8.176;
             else
-                this->modLfoFreq = d1200e2(valTmp.shAmount);
+                this->modLfoFreq = d1200e2(valTmp.shValue);
             break;
         case champ_freqVibLFO:
             if (id.typeElement == elementInstSmpl)
-                this->vibLfoFreq = d1200e2(valTmp.shAmount) * 8.176;
+                this->vibLfoFreq = d1200e2(valTmp.shValue) * 8.176;
             else
-                this->vibLfoFreq = d1200e2(valTmp.shAmount);
+                this->vibLfoFreq = d1200e2(valTmp.shValue);
             break;
         default:
             break;

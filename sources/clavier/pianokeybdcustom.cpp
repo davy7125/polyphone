@@ -23,7 +23,7 @@
 ***************************************************************************/
 
 #include "pianokeybdcustom.h"
-#include "sf2_types.h"
+#include "basetypes.h"
 #include <QApplication>
 #include "contextmanager.h"
 

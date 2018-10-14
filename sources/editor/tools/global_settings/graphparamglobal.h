@@ -1,63 +1,7 @@
-/***************************************************************************
-**                                                                        **
-**  Polyphone, a soundfont editor                                         **
-**  Copyright (C) 2013-2017 Davy Triponney                                **
-**                                                                        **
-**  This program is free software: you can redistribute it and/or modify  **
-**  it under the terms of the GNU General Public License as published by  **
-**  the Free Software Foundation, either version 3 of the License, or     **
-**  (at your option) any later version.                                   **
-**                                                                        **
-**  This program is distributed in the hope that it will be useful,       **
-**  but WITHOUT ANY WARRANTY; without even the implied warranty of        **
-**  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the         **
-**  GNU General Public License for more details.                          **
-**                                                                        **
-**  You should have received a copy of the GNU General Public License     **
-**  along with this program.  If not, see http://www.gnu.org/licenses/.   **
-**                                                                        **
-****************************************************************************
-**           Author: Davy Triponney                                       **
-**  Website/Contact: http://polyphone-soundfonts.com                      **
-**             Date: 01.01.2013                                           **
-***************************************************************************/
+#ifndef GRAPHPARAMGLOBAL_H
+#define GRAPHPARAMGLOBAL_H
 
-#ifndef DIALOG_PARAMGLOBAL_H
-#define DIALOG_PARAMGLOBAL_H
-
-#include <QDialog>
 #include "qcustomplot.h"
-
-namespace Ui
-{
-    class DialogParamGlobal;
-}
-
-class DialogParamGlobal : public QDialog
-{
-    Q_OBJECT
-    
-public:
-    DialogParamGlobal(bool isPrst, QWidget *parent = 0);
-    ~DialogParamGlobal();
-
-private slots:
-    void accept();
-    void indexMotifChanged(int index);  // Action sur le combobox motif
-    void raideurChanged(double value);  // Action sur spinBox raideur
-    void minChanged(double value);      // Action sur spinBox min
-    void maxChanged(double value);      // Action sur spinBox max
-
-signals:
-    void accepted(QVector<double> dValues, int typeModif, int param, int minVel, int maxVel);
-
-private:
-    QVector<double> getStoredCurve();
-    void storeCurve(QVector<double> val);
-
-    Ui::DialogParamGlobal *ui;
-    bool _isPrst;
-};
 
 class GraphParamGlobal : public QCustomPlot
 {
@@ -112,7 +56,7 @@ public:
 
     void indexMotifChanged(int index);
     void raideurChanged(double value);
-    void setEtendueClavier(int keyboardType);
+    void setKeyboardRange(int keyboardType);
     void setMinMax(double min, double max)  { yMin = qMin(min, max); yMax = qMax(min, max); }
     void setMinMaxX(int min, int max)       { xMin = qMin(min, max); xMax = qMax(min, max); }
     QVector<double> getValues();
@@ -146,4 +90,4 @@ private:
     void afficheCoord(double x, double y);
 };
 
-#endif // DIALOG_PARAMGLOBAL_H
+#endif // GRAPHPARAMGLOBAL_H

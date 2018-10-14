@@ -120,7 +120,7 @@ int SoundfontManager::sauvegarderSf2(int indexSf2, QString fileName)
     quint8 byTmp;
     char charTmp;
     char tcharTmp[20];
-    Valeur valTmp;
+    AttributeValue valTmp;
 
     // Modification du logiciel d'édition
     this->set(id, champ_ISFT, QString("Polyphone"));
@@ -780,7 +780,7 @@ int SoundfontManager::sauvegarderSf2(int indexSf2, QString fileName)
     for (quint32 i = 0; i < 10; i++)
         fi.write(&charTmp, 1);
 
-    genAmountType genTmp;
+    AttributeValue genTmp;
     fi.write("pgen", 4);
     fi.write((char *)&taille_pgen, 4);
     id.typeElement = elementPrst;
@@ -802,22 +802,22 @@ int SoundfontManager::sauvegarderSf2(int indexSf2, QString fileName)
         {
             wTmp = champ_keyRange;
             fi.write((char *)&wTmp, 2);
-            genTmp = this->get(id, champ_keyRange).genValue;
-            if (genTmp.ranges.byLo > 127)
-                genTmp.ranges.byLo = 127;
-            if (genTmp.ranges.byHi > 127)
-                genTmp.ranges.byHi = 127;
+            genTmp = this->get(id, champ_keyRange);
+            if (genTmp.rValue.byLo > 127)
+                genTmp.rValue.byLo = 127;
+            if (genTmp.rValue.byHi > 127)
+                genTmp.rValue.byHi = 127;
             fi.write((char *)&genTmp, 2);
         }
         if (this->isSet(id, champ_velRange))
         {
             wTmp = champ_velRange;
             fi.write((char *)&wTmp, 2);
-            genTmp = this->get(id, champ_velRange).genValue;
-            if (genTmp.ranges.byLo > 127)
-                genTmp.ranges.byLo = 127;
-            if (genTmp.ranges.byHi > 127)
-                genTmp.ranges.byHi = 127;
+            genTmp = this->get(id, champ_velRange);
+            if (genTmp.rValue.byLo > 127)
+                genTmp.rValue.byLo = 127;
+            if (genTmp.rValue.byHi > 127)
+                genTmp.rValue.byHi = 127;
             fi.write((char *)&genTmp, 2);
         }
         foreach (int k, this->getSiblings(id3))
@@ -825,7 +825,7 @@ int SoundfontManager::sauvegarderSf2(int indexSf2, QString fileName)
             if (k != champ_keyRange && k != champ_velRange && k != champ_instrument)
             {
                 fi.write((char *)&wTmp, 2);
-                genTmp = this->get(id, (Champ)k).genValue;
+                genTmp = this->get(id, (AttributeType)k);
                 fi.write((char *)&genTmp, 2);
             }
         }
@@ -845,22 +845,22 @@ int SoundfontManager::sauvegarderSf2(int indexSf2, QString fileName)
             {
                 wTmp = champ_keyRange;
                 fi.write((char *)&wTmp, 2);
-                genTmp = this->get(id2, champ_keyRange).genValue;
-                if (genTmp.ranges.byLo > 127)
-                    genTmp.ranges.byLo = 127;
-                if (genTmp.ranges.byHi > 127)
-                    genTmp.ranges.byHi = 127;
+                genTmp = this->get(id2, champ_keyRange);
+                if (genTmp.rValue.byLo > 127)
+                    genTmp.rValue.byLo = 127;
+                if (genTmp.rValue.byHi > 127)
+                    genTmp.rValue.byHi = 127;
                 fi.write((char *)&genTmp, 2);
             }
             if (this->isSet(id2, champ_velRange))
             {
                 wTmp = champ_velRange;
                 fi.write((char *)&wTmp, 2);
-                genTmp = this->get(id2, champ_velRange).genValue;
-                if (genTmp.ranges.byLo > 127)
-                    genTmp.ranges.byLo = 127;
-                if (genTmp.ranges.byHi > 127)
-                    genTmp.ranges.byHi = 127;
+                genTmp = this->get(id2, champ_velRange);
+                if (genTmp.rValue.byLo > 127)
+                    genTmp.rValue.byLo = 127;
+                if (genTmp.rValue.byHi > 127)
+                    genTmp.rValue.byHi = 127;
                 fi.write((char *)&genTmp, 2);
             }
             foreach (int k, this->getSiblings(id3))
@@ -868,13 +868,13 @@ int SoundfontManager::sauvegarderSf2(int indexSf2, QString fileName)
                 if (k != champ_keyRange && k != champ_velRange && k != champ_instrument)
                 {
                     fi.write((char *)&wTmp, 2);
-                    genTmp = this->get(id2, (Champ)k).genValue;
+                    genTmp = this->get(id2, (AttributeType)k);
                     fi.write((char *)&genTmp, 2);
                 }
             }
             wTmp = champ_instrument;
             fi.write((char *)&wTmp, 2);
-            genTmp.wAmount = converterInst->calculIndex(this->get(id2, champ_instrument).wValue);
+            genTmp.wValue = converterInst->calculIndex(this->get(id2, champ_instrument).wValue);
             fi.write((char *)&genTmp, 2);
         }
     }
@@ -1080,22 +1080,22 @@ int SoundfontManager::sauvegarderSf2(int indexSf2, QString fileName)
         {
             wTmp = champ_keyRange;
             fi.write((char *)&wTmp, 2);
-            genTmp = this->get(id, champ_keyRange).genValue;
-            if (genTmp.ranges.byLo > 127)
-                genTmp.ranges.byLo = 127;
-            if (genTmp.ranges.byHi > 127)
-                genTmp.ranges.byHi = 127;
+            genTmp = this->get(id, champ_keyRange);
+            if (genTmp.rValue.byLo > 127)
+                genTmp.rValue.byLo = 127;
+            if (genTmp.rValue.byHi > 127)
+                genTmp.rValue.byHi = 127;
             fi.write((char *)&genTmp, 2);
         }
         if (this->isSet(id, champ_velRange))
         {
             wTmp = champ_velRange;
             fi.write((char *)&wTmp, 2);
-            genTmp = this->get(id, champ_velRange).genValue;
-            if (genTmp.ranges.byLo > 127)
-                genTmp.ranges.byLo = 127;
-            if (genTmp.ranges.byHi > 127)
-                genTmp.ranges.byHi = 127;
+            genTmp = this->get(id, champ_velRange);
+            if (genTmp.rValue.byLo > 127)
+                genTmp.rValue.byLo = 127;
+            if (genTmp.rValue.byHi > 127)
+                genTmp.rValue.byHi = 127;
             fi.write((char *)&genTmp, 2);
         }
         foreach (int k, this->getSiblings(id3))
@@ -1103,7 +1103,7 @@ int SoundfontManager::sauvegarderSf2(int indexSf2, QString fileName)
             if (k != champ_keyRange && k != champ_velRange && k != champ_sampleID)
             {
                 fi.write((char *)&wTmp, 2);
-                genTmp = this->get(id, (Champ)k).genValue;
+                genTmp = this->get(id, (AttributeType)k);
                 fi.write((char *)&genTmp, 2);
             }
         }
@@ -1123,22 +1123,22 @@ int SoundfontManager::sauvegarderSf2(int indexSf2, QString fileName)
             {
                 wTmp = champ_keyRange;
                 fi.write((char *)&wTmp, 2);
-                genTmp = this->get(id2, champ_keyRange).genValue;
-                if (genTmp.ranges.byLo > 127)
-                    genTmp.ranges.byLo = 127;
-                if (genTmp.ranges.byHi > 127)
-                    genTmp.ranges.byHi = 127;
+                genTmp = this->get(id2, champ_keyRange);
+                if (genTmp.rValue.byLo > 127)
+                    genTmp.rValue.byLo = 127;
+                if (genTmp.rValue.byHi > 127)
+                    genTmp.rValue.byHi = 127;
                 fi.write((char *)&genTmp, 2);
             }
             if (this->isSet(id2, champ_velRange))
             {
                 wTmp = champ_velRange;
                 fi.write((char *)&wTmp, 2);
-                genTmp = this->get(id2, champ_velRange).genValue;
-                if (genTmp.ranges.byLo > 127)
-                    genTmp.ranges.byLo = 127;
-                if (genTmp.ranges.byHi > 127)
-                    genTmp.ranges.byHi = 127;
+                genTmp = this->get(id2, champ_velRange);
+                if (genTmp.rValue.byLo > 127)
+                    genTmp.rValue.byLo = 127;
+                if (genTmp.rValue.byHi > 127)
+                    genTmp.rValue.byHi = 127;
                 fi.write((char *)&genTmp, 2);
             }
             foreach (int k, this->getSiblings(id3))
@@ -1146,13 +1146,13 @@ int SoundfontManager::sauvegarderSf2(int indexSf2, QString fileName)
                 if (k != champ_keyRange && k != champ_velRange && k != champ_sampleID)
                 {
                     fi.write((char *)&wTmp, 2);
-                    genTmp = this->get(id2, (Champ)k).genValue;
+                    genTmp = this->get(id2, (AttributeType)k);
                     fi.write((char *)&genTmp, 2);
                 }
             }
             wTmp = champ_sampleID;
             fi.write((char *)&wTmp, 2);
-            genTmp.wAmount = converterSmpl->calculIndex(this->get(id2, champ_sampleID).wValue);
+            genTmp.wValue = converterSmpl->calculIndex(this->get(id2, champ_sampleID).wValue);
             fi.write((char *)&genTmp, 2);
         }
     }

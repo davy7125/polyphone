@@ -48,14 +48,14 @@ public:
     void removeColumn(int column);
     void resetModDisplay();
     void updateModDisplay(int column, QList<int> rows);
-    void selectCell(EltID id, Champ champ);
+    void selectCell(EltID id, AttributeType champ);
 
     // Set the image corresponding to the loop mode value
     // -1 will remove the image
     void setLoopModeImage(int row, int column, int loopModeValue);
 
     // Association champ - ligne (méthodes virtuelles pures)
-    virtual Champ getChamp(int row) = 0;
+    virtual AttributeType getChamp(int row) = 0;
     virtual int getRow(quint16 champ) = 0;
 
     static QPixmap getPixMap(QColor backgroundColor, QColor dotColor);

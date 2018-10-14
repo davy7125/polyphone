@@ -82,7 +82,7 @@ void DuplicationTool::duplicateByKey(QPair<int, int> keyRange, QPair<int, int> v
     if (keyLow != keyHigh)
     {
         // Change keyrange
-        Valeur val;
+        AttributeValue val;
         val.rValue.byLo = keyLow;
         val.rValue.byHi = keyLow;
         _sf2->set(id, champ_keyRange, val);
@@ -135,7 +135,7 @@ void DuplicationTool::duplicateByVelocity(QMap<QPair<int, int>, QList<EltID> > e
         QPair<int, int> newVel = velocities[i];
         foreach (EltID id, elts[oldVel])
         {
-            Valeur val;
+            AttributeValue val;
             val.rValue.byLo = qMin(newVel.first, newVel.second);
             val.rValue.byHi = qMax(newVel.first, newVel.second);
             _sf2->set(id, champ_velRange, val);
@@ -156,7 +156,7 @@ void DuplicationTool::duplicateByVelocity(QMap<QPair<int, int>, QList<EltID> > e
             duplicateGenMod(id, id2);
 
             // Change velocity range
-            Valeur val;
+            AttributeValue val;
             val.rValue.byLo = qMin(newVel.first, newVel.second);
             val.rValue.byHi = qMax(newVel.first, newVel.second);
             _sf2->set(id2, champ_velRange, val);
@@ -169,7 +169,7 @@ void DuplicationTool::duplicateGenMod(EltID idFrom, EltID idTo)
     // Copy gens
     idFrom.typeElement = _isInst ? elementInstSmplGen : elementPrstInstGen;
     foreach (int champ, _sf2->getSiblings(idFrom))
-        _sf2->set(idTo, (Champ)champ, _sf2->get(idFrom.parent(), (Champ)champ));
+        _sf2->set(idTo, (AttributeType)champ, _sf2->get(idFrom.parent(), (AttributeType)champ));
 
     // Copy mods
     idFrom.typeElement = idTo.typeElement = _isInst ? elementInstSmplMod : elementPrstInstMod;

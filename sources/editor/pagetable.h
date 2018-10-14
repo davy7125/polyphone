@@ -44,7 +44,6 @@ public:
 
     void reselect();
     void updateId(EltID id);
-    void paramGlobal();
     void duplication();
     void spatialisation();
     void visualize();
@@ -100,7 +99,7 @@ private:
     {
     public:
         SFModulator modSrcOper;
-        Champ modDestOper;
+        AttributeType modDestOper;
         qint32 modAmount;
         SFModulator modAmtSrcOper;
         SFTransform modTransOper;
@@ -110,14 +109,14 @@ private:
     void addGlobal(EltID id, bool multiGlobal);
     void addDivisions(EltID id);
     void formatTable(bool multiGlobal);
-    void afficheMod(EltID id, Champ selectedField);
+    void afficheMod(EltID id, AttributeType selectedField);
     void afficheMod(EltID id, int selectedIndex = -1);
     static void addAvailableReceiverMod(ComboBox *combo, EltID id);
     static void addAvailableSenderMod(ComboBox *combo, EltID id);
     int getAssociatedMod(EltID id);
-    int limit(int iVal, Champ champ, EltID id);
-    void resetChamp(int colonne, Champ champ1, Champ champ2);
-    void setOffset(int ligne, int colonne, Champ champ1, Champ champ2);
+    int limit(int iVal, AttributeType champ, EltID id);
+    void resetChamp(int colonne, AttributeType champ1, AttributeType champ2);
+    void setOffset(int ligne, int colonne, AttributeType champ1, AttributeType champ2);
     void pasteMod(EltID id, QList<Modulator> modulators);
     QList<Modulator> getModList(EltID id);
 
@@ -149,7 +148,6 @@ protected slots:
     void onOpenElement(EltID id);
 
 private slots:
-    void paramGlobal(QVector<double> dValues, int typeModif, int champ, int velMin, int velMax);
     void spatialisation(QMap<int, double> mapPan);
     void spatialisation(QMap<int, double> mapPan, EltID id);
     void duplication(QVector<QPair<int, int> > listeVelocites, bool duplicKey, bool duplicVel);

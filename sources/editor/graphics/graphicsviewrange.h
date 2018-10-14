@@ -28,7 +28,7 @@
 #include <QGraphicsView>
 #include "soundfontmanager.h"
 #include <QMap>
-#include "idlist.h"
+#include "basetypes.h"
 class GraphicsSimpleTextItem;
 class GraphicsRectangleItem;
 class GraphicsLegendItem;

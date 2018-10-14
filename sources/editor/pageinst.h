@@ -84,7 +84,7 @@ public:
     ~TableWidgetInst();
 
     // Association champ - ligne
-    Champ getChamp(int row);
+    AttributeType getChamp(int row);
     int getRow(quint16 champ);
 };
 

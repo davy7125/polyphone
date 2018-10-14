@@ -50,9 +50,6 @@ private:
     SoundfontManager * _sf2;
     Ui::DialogVisualizer *ui;
     EltID _initialID;
-
-    double getValue(EltID id, Champ champ);
-    double getDefaultValue(Champ champ);
 };
 
 

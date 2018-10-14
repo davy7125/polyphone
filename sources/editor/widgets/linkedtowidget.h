@@ -3,7 +3,7 @@
 
 #include <QWidget>
 #include <QMap>
-#include "sf2_types.h"
+#include "basetypes.h"
 class FlowLayout;
 
 class LinkedToWidget : public QWidget

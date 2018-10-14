@@ -26,7 +26,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include "sf2_types.h"
+#include "basetypes.h"
 
 namespace Ui {
 class MainWindow;

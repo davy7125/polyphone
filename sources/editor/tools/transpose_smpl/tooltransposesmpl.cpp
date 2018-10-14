@@ -25,7 +25,7 @@ void ToolTransposeSmpl::process(SoundfontManager * sm, EltID id, AbstractToolPar
     sm->set(id, champ_sampleDataFull24, baData);
 
     // Update the length
-    Valeur val;
+    AttributeValue val;
     val.dwValue = baData.size() / 3;
     sm->set(id, champ_dwLength, val);
 
