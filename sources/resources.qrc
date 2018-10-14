@@ -109,6 +109,7 @@
         <file alias="link.svg">editor/tools/link_sample/link.svg</file>
         <file alias="change_attenuation.svg">editor/tools/change_attenuation/change_attenuation.svg</file>
         <file alias="global_setting.svg">editor/tools/global_settings/global_setting.svg</file>
+        <file alias="celeste_tuning.svg">editor/tools/celeste_tuning/celeste_tuning.svg</file>
     </qresource>
     <qresource prefix="/vpiano">
         <file alias="blkey.svg">resources/blkey.svg</file>

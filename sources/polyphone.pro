@@ -237,7 +237,6 @@ SOURCES	+= main.cpp \
     editor/tools/dialog_space.cpp \
     editor/tools/dialog_mixture.cpp \
     editor/tools/dialog_release.cpp \
-    editor/tools/dialog_celeste.cpp \
     editor/tools/dialog_visualizer.cpp \
     editor/tools/dialog_duplication.cpp \
     editor/tools/dialog_transposition.cpp \
@@ -363,7 +362,10 @@ SOURCES	+= main.cpp \
     editor/tools/global_settings/graphparamglobal.cpp \
     core/types/eltid.cpp \
     core/types/complex.cpp \
-    core/types/attribute.cpp
+    core/types/attribute.cpp \
+    editor/tools/celeste_tuning/toolcelestetuning.cpp \
+    editor/tools/celeste_tuning/toolcelestetuning_gui.cpp \
+    editor/tools/celeste_tuning/toolcelestetuning_parameters.cpp
 
 HEADERS  += \
     core/sound.h \
@@ -423,7 +425,6 @@ HEADERS  += \
     editor/tools/dialog_space.h \
     editor/tools/dialog_mixture.h \
     editor/tools/dialog_release.h \
-    editor/tools/dialog_celeste.h \
     editor/tools/dialog_visualizer.h \
     editor/tools/dialog_duplication.h \
     editor/tools/dialog_transposition.h \
@@ -557,7 +558,10 @@ HEADERS  += \
     core/types/eltid.h \
     core/types/complex.h \
     core/types/attribute.h \
-    core/types/basetypes.h
+    core/types/basetypes.h \
+    editor/tools/celeste_tuning/toolcelestetuning.h \
+    editor/tools/celeste_tuning/toolcelestetuning_gui.h \
+    editor/tools/celeste_tuning/toolcelestetuning_parameters.h
 
 FORMS    += \
     dialogs/dialog_list.ui \
@@ -572,7 +576,6 @@ FORMS    += \
     editor/tools/dialog_space.ui \
     editor/tools/dialog_mixture.ui \
     editor/tools/dialog_release.ui \
-    editor/tools/dialog_celeste.ui \
     editor/tools/dialog_visualizer.ui \
     editor/tools/dialog_duplication.ui \
     editor/tools/dialog_transposition.ui \
@@ -601,7 +604,8 @@ FORMS    += \
     dialogs/dialogkeyboard.ui \
     dialogs/dialogrecorder.ui \
     editor/tools/change_attenuation/toolchangeattenuation_gui.ui \
-    editor/tools/global_settings/toolglobalsettings_gui.ui
+    editor/tools/global_settings/toolglobalsettings_gui.ui \
+    editor/tools/celeste_tuning/toolcelestetuning_gui.ui
 
 RESOURCES += resources.qrc
 

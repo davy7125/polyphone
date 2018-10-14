@@ -101,7 +101,6 @@ private slots:
     void AfficherBarreOutils(); // Clic sur l'action "barre d'outils" du menu "afficher"
     void afficherSectionModulateurs();
 
-    void desaccorder();         // outil instrument, désaccordage ondulant
     void spatialisation();      // outil instrument, spatialisation du son
     void duplication();         // outil instrument et preset, duplication des divisions
     void visualize();           // outil instrument et preset, visualise les paramètres utilisés dans un graphique
