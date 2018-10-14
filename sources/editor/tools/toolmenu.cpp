@@ -71,7 +71,8 @@ void ToolMenu::addCategory(QString categoryName)
 
 bool ToolMenu::lessThan(const AbstractTool * tool1, const AbstractTool * tool2)
 {
-    return Utils::naturalOrder(tool1->getCategory() + tool1->getLabel(), tool2->getCategory() + tool2->getLabel());
+    return Utils::removeAccents(tool1->getCategory() + tool1->getLabel()).toLower() <
+            Utils::removeAccents(tool2->getCategory() + tool2->getLabel()).toLower();
 }
 
 void ToolMenu::onTriggered(QAction * action)

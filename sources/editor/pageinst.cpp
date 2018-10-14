@@ -28,7 +28,6 @@
 #include "ui_pageinst.h"
 #include "dialog_mixture.h"
 #include "dialog_release.h"
-#include "dialog_celeste.h"
 #include "dialog_transposition.h"
 #include <QProgressDialog>
 #include <QInputDialog>
@@ -205,108 +204,6 @@ bool PageInst::updateInterface(QString editingSource, IdList selectedIds, int di
     customizeKeyboard();
 
     return true;
-}
-
-// Outils instrument
-void PageInst::desaccorder()
-{
-    bool error;
-    QList<EltID> ids = this->getEltIds(error, true, true);
-    if (ids.isEmpty() || error)
-        return;
-
-    DialogCeleste * dialogCeleste = new DialogCeleste(this);
-    dialogCeleste->setAttribute(Qt::WA_DeleteOnClose, true);
-    this->connect(dialogCeleste, SIGNAL(accepted(double,double)),
-                  SLOT(desaccorder(double, double)));
-    dialogCeleste->show();
-}
-
-void PageInst::desaccorder(double doHerz, double division)
-{
-    bool error;
-    QList<EltID> ids = this->getEltIds(error, true, true);
-    if (ids.isEmpty() || error)
-        return;
-
-    foreach (EltID id, ids)
-        desaccorder(id, doHerz, division);
-
-    // Actualisation
-    _sf2->endEditing(getEditingSource());
-}
-
-void PageInst::desaccorder(EltID id, double doHerz, double division)
-{
-    // Modification pour chaque sample lié
-    id.typeElement = elementInstSmpl;
-    foreach (int i, _sf2->getSiblings(id))
-    {
-        id.indexElt2 = i;
-
-        // Sample lié
-        EltID id2 = id;
-        id2.typeElement = elementSmpl;
-        id2.indexElt = _sf2->get(id, champ_sampleID).wValue;
-        // Numéro de la note du sample
-        int numNoteSmpl = _sf2->get(id2, champ_byOriginalPitch).bValue;
-        // Note de base sur le clavier correspondant à numNoteSmpl;
-        int numBase = numNoteSmpl;
-        if (_sf2->isSet(id, champ_overridingRootKey))
-            numBase = _sf2->get(id, champ_overridingRootKey).wValue;
-        // Etendue du sample sur le clavier
-        int numBas = 0;
-        int numHaut = 0;
-        // Intervalle joué par le sample
-        if (_sf2->isSet(id, champ_keynum))
-        {
-            numBas = numNoteSmpl + _sf2->get(id, champ_keynum).wValue - numBase;
-            numHaut = numBas;
-        }
-        else
-        {
-            numBas = numNoteSmpl + _sf2->get(id, champ_keyRange).rValue.byLo - numBase;
-            numHaut = numNoteSmpl + _sf2->get(id, champ_keyRange).rValue.byHi - numBase;
-        }
-        // Fréquence des battements
-        double keyMoy = (double)(_sf2->get(id, champ_keyRange).rValue.byHi +
-                                 _sf2->get(id, champ_keyRange).rValue.byLo) / 2.;
-        double bps = doHerz * qPow(division, (60. - keyMoy) / 12.);
-        if (bps < -30)
-            bps = -30;
-        else if (bps > 30)
-            bps = 30;
-        // Note moyenne
-        double noteMoy = (double)(numBas + numHaut) / 2;
-        // Calcul du désaccordage, passage en frequence
-        double freqMoy = qPow(2., (noteMoy + 36.3763) / 12);
-        // Ajout du désaccordage
-        // - octave ondulante : division par 2 de bps
-        // - diminution désaccordage vers les graves
-        // - accentuation désaccordage vers les aigus
-        double freqMod = freqMoy + 1.2 * qPow(2., (noteMoy - 60)/30) * bps / 2;
-        // Retour en pitch
-        double noteMod = 12 * qLn(freqMod) / 0.69314718056 - 36.3763;
-        // Décalage
-        int decalage = ceil(100*(noteMod - noteMoy)-0.5);
-        if (bps > 0)
-        {
-            if (decalage < 1) decalage = 1;
-            else if (decalage > 50) decalage = 50;
-        }
-        else if (bps < 0)
-        {
-            if (decalage < -50) decalage = -50;
-            else if (decalage > -1) decalage = -1;
-        }
-        // Modification instSmpl
-        if (_sf2->get(id, champ_fineTune).shValue != decalage)
-        {
-            AttributeValue val;
-            val.shValue = decalage;
-            _sf2->set(id, champ_fineTune, val);
-        }
-    }
 }
 
 void PageInst::repartitionAuto()
