@@ -29,6 +29,7 @@
 #include <QDir>
 #include <QDate>
 #include "contextmanager.h"
+#include "attribute.h"
 
 ConversionSfz::ConversionSfz(SoundfontManager *sf2) :
     _sf2(sf2)
@@ -201,29 +202,29 @@ void ConversionSfz::exportPrst(QString dir, EltID id, bool presetPrefix)
                                     idInstSmplGen.typeElement = elementInstSmplGen;
                                     EltID idLinkedInstSmplGen = listInstSmpl.at(k);
                                     idLinkedInstSmplGen.typeElement = elementInstSmplGen;
-                                    QMap<Champ, genAmountType> map, mapLinked;
+                                    QMap<AttributeType, AttributeValue> map, mapLinked;
                                     foreach (int champ, _sf2->getSiblings(idInstSmplGen))
                                     {
-                                        map.insert((Champ)champ, _sf2->get(idInstSmplGen.parent(), (Champ)champ).genValue);
+                                        map.insert((AttributeType)champ, _sf2->get(idInstSmplGen.parent(), (AttributeType)champ));
                                     }
                                     foreach (int champ, _sf2->getSiblings(idLinkedInstSmplGen))
                                     {
-                                        mapLinked.insert((Champ)champ, _sf2->get(idLinkedInstSmplGen.parent(), (Champ)champ).genValue);
+                                        mapLinked.insert((AttributeType)champ, _sf2->get(idLinkedInstSmplGen.parent(), (AttributeType)champ));
                                     }
-                                    QList<Champ> listeChamps = map.keys();
-                                    QList<Champ> listeChampsLinked = mapLinked.keys();
-                                    QList<genAmountType> listeValeurs = map.values();
-                                    QList<genAmountType> listeValeursLinked = mapLinked.values();
+                                    QList<AttributeType> listeChamps = map.keys();
+                                    QList<AttributeType> listeChampsLinked = mapLinked.keys();
+                                    QList<AttributeValue> listeValeurs = map.values();
+                                    QList<AttributeValue> listeValeursLinked = mapLinked.values();
                                     if (listeChamps.size() == listeChampsLinked.size())
                                     {
                                         for (int l = 0; l < listeChamps.size(); l++)
                                         {
                                             if (listeChamps.at(l) == champ_pan)
                                                 isEqual &= listeChamps.at(l) == listeChampsLinked.at(l) &&
-                                                        listeValeurs.at(l).shAmount == -listeValeursLinked.at(l).shAmount;
+                                                        listeValeurs.at(l).shValue == -listeValeursLinked.at(l).shValue;
                                             else if (listeChamps.at(l) != champ_sampleID)
                                                 isEqual &= listeChamps.at(l) == listeChampsLinked.at(l) &&
-                                                        listeValeurs.at(l).shAmount == listeValeursLinked.at(l).shAmount;
+                                                        listeValeurs.at(l).shValue == listeValeursLinked.at(l).shValue;
                                         }
                                     }
                                     else
@@ -319,7 +320,7 @@ void ConversionSfz::writeRegion(QFile * fichierSfz, ParamListe * listeParam, QSt
     }
 }
 
-void ConversionSfz::writeElement(QTextStream &out, Champ champ, double value)
+void ConversionSfz::writeElement(QTextStream &out, AttributeType champ, double value)
 {
     QString v2 = " // sfz v2";
     switch (champ)
@@ -620,7 +621,6 @@ QString ConversionSfz::getDrumCategory(int numPreset)
     return strRet;
 }
 
-
 bool ConversionSfz::isIncluded(ParamListe * paramPrst, EltID idInstSmpl)
 {
     // Etendues de la division globale
@@ -844,7 +844,7 @@ ParamListe::ParamListe(SoundfontManager * sf2, ParamListe * paramPrst, EltID idI
             if (sf2->isSet(instGlob, champ_initialAttenuation))
             {
                 _listeChamps << champ_initialAttenuation;
-                _listeValeurs << getValue(champ_initialAttenuation, sf2->get(instGlob, champ_initialAttenuation).genValue, false);
+                _listeValeurs << Attribute::toRealValue(champ_initialAttenuation, false, sf2->get(instGlob, champ_initialAttenuation));
             }
         }
     }
@@ -922,26 +922,26 @@ ParamListe::ParamListe(SoundfontManager * sf2, ParamListe * paramPrst, EltID idI
         if (!_listeChamps.contains(champ_attackVolEnv))
         {
             _listeChamps << champ_attackVolEnv;
-            _listeValeurs << getDefaultValue(champ_attackVolEnv);
+            _listeValeurs << Attribute::getDefaultRealValue(champ_attackVolEnv, false);
         }
 
         // Fréquences par défaut si non définies
         if (!_listeChamps.contains(champ_freqModLFO))
         {
             _listeChamps << champ_freqModLFO;
-            _listeValeurs << getDefaultValue(champ_freqModLFO);
+            _listeValeurs << Attribute::getDefaultRealValue(champ_freqModLFO, false);
         }
         if (!_listeChamps.contains(champ_freqVibLFO))
         {
             _listeChamps << champ_freqVibLFO;
-            _listeValeurs << getDefaultValue(champ_freqVibLFO);
+            _listeValeurs << Attribute::getDefaultRealValue(champ_freqVibLFO, false);
         }
 
         // Fréquence de coupure par défaut si non définie
         if (!_listeChamps.contains(champ_initialFilterFc))
         {
             _listeChamps << champ_initialFilterFc;
-            _listeValeurs << getDefaultValue(champ_initialFilterFc);
+            _listeValeurs << Attribute::getDefaultRealValue(champ_initialFilterFc, false);
         }
     }
 
@@ -989,7 +989,7 @@ void ParamListe::adaptKeynum2()
     adaptKeynum2(minKey, maxKey, champ_decayVolEnv, champ_keynumToVolEnvDecay);
     adaptKeynum2(minKey, maxKey, champ_holdVolEnv, champ_keynumToVolEnvHold);
 }
-void ParamListe::adaptKeynum2(int minKey, int maxKey, Champ champBase, Champ champKeynum)
+void ParamListe::adaptKeynum2(int minKey, int maxKey, AttributeType champBase, AttributeType champKeynum)
 {
     double valBase = 0.001;
     double valMin, valMax;
@@ -1048,27 +1048,27 @@ void ParamListe::adaptLfo(SoundfontManager * sf2, EltID idInstSmpl)
         if (!_listeChamps.contains(champ_delayModLFO) && sf2->isSet(idInst, champ_delayModLFO))
         {
             _listeChamps << champ_delayModLFO;
-            _listeValeurs << getValue(champ_delayModLFO, sf2->get(idInst, champ_delayModLFO).genValue, false);
+            _listeValeurs << Attribute::toRealValue(champ_delayModLFO, false, sf2->get(idInst, champ_delayModLFO));
         }
         if (!_listeChamps.contains(champ_freqModLFO) && sf2->isSet(idInst, champ_freqModLFO))
         {
             _listeChamps << champ_freqModLFO;
-            _listeValeurs << getValue(champ_freqModLFO, sf2->get(idInst, champ_freqModLFO).genValue, false);
+            _listeValeurs << Attribute::toRealValue(champ_freqModLFO, false, sf2->get(idInst, champ_freqModLFO));
         }
         if (!_listeChamps.contains(champ_modLfoToPitch) && sf2->isSet(idInst, champ_modLfoToPitch))
         {
             _listeChamps << champ_modLfoToPitch;
-            _listeValeurs << getValue(champ_modLfoToPitch, sf2->get(idInst, champ_modLfoToPitch).genValue, false);
+            _listeValeurs << Attribute::toRealValue(champ_modLfoToPitch, false, sf2->get(idInst, champ_modLfoToPitch));
         }
         if (!_listeChamps.contains(champ_modLfoToFilterFc) && sf2->isSet(idInst, champ_modLfoToFilterFc))
         {
             _listeChamps << champ_modLfoToFilterFc;
-            _listeValeurs << getValue(champ_modLfoToFilterFc, sf2->get(idInst, champ_modLfoToFilterFc).genValue, false);
+            _listeValeurs << Attribute::toRealValue(champ_modLfoToFilterFc, false, sf2->get(idInst, champ_modLfoToFilterFc));
         }
         if (!_listeChamps.contains(champ_modLfoToVolume) && sf2->isSet(idInst, champ_modLfoToVolume))
         {
             _listeChamps << champ_modLfoToVolume;
-            _listeValeurs << getValue(champ_modLfoToVolume, sf2->get(idInst, champ_modLfoToVolume).genValue, false);
+            _listeValeurs << Attribute::toRealValue(champ_modLfoToVolume, false, sf2->get(idInst, champ_modLfoToVolume));
         }
     }
     if (_listeChamps.contains(champ_vibLfoToPitch) || _listeChamps.contains(champ_delayVibLFO) ||
@@ -1077,17 +1077,17 @@ void ParamListe::adaptLfo(SoundfontManager * sf2, EltID idInstSmpl)
         if (!_listeChamps.contains(champ_delayVibLFO) && sf2->isSet(idInst, champ_delayVibLFO))
         {
             _listeChamps << champ_delayVibLFO;
-            _listeValeurs << getValue(champ_delayVibLFO, sf2->get(idInst, champ_delayVibLFO).genValue, false);
+            _listeValeurs << Attribute::toRealValue(champ_delayVibLFO, false, sf2->get(idInst, champ_delayVibLFO));
         }
         if (!_listeChamps.contains(champ_freqVibLFO) && sf2->isSet(idInst, champ_freqVibLFO))
         {
             _listeChamps << champ_freqVibLFO;
-            _listeValeurs << getValue(champ_freqVibLFO, sf2->get(idInst, champ_freqVibLFO).genValue, false);
+            _listeValeurs << Attribute::toRealValue(champ_freqVibLFO, false, sf2->get(idInst, champ_freqVibLFO));
         }
         if (!_listeChamps.contains(champ_vibLfoToPitch) && sf2->isSet(idInst, champ_vibLfoToPitch))
         {
             _listeChamps << champ_vibLfoToPitch;
-            _listeValeurs << getValue(champ_vibLfoToPitch, sf2->get(idInst, champ_vibLfoToPitch).genValue, false);
+            _listeValeurs << Attribute::toRealValue(champ_vibLfoToPitch, false, sf2->get(idInst, champ_vibLfoToPitch));
         }
     }
 }
@@ -1097,12 +1097,12 @@ double ParamListe::getValKeynum(double valBase, int key, double keynum)
     return valBase * qPow(2., (60. - (double)key) * keynum / 1200.);
 }
 
-void ParamListe::prepend(Champ champ)
+void ParamListe::prepend(AttributeType champ)
 {
     if (_listeChamps.indexOf(champ) != -1)
     {
         int index = _listeChamps.indexOf(champ);
-        Champ chTmp = _listeChamps.takeAt(index);
+        AttributeType chTmp = _listeChamps.takeAt(index);
         double value = _listeValeurs.takeAt(index);
         _listeChamps.prepend(chTmp);
         _listeValeurs.prepend(value);
@@ -1117,7 +1117,7 @@ void ParamListe::load(SoundfontManager * sf2, EltID id)
 
     foreach (int champ, sf2->getSiblings(id))
     {
-        if (!_listeChamps.contains((Champ)champ))
+        if (!_listeChamps.contains((AttributeType)champ))
         {
             if (id.typeElement != elementInstGen || (
                         champ != champ_startAddrsCoarseOffset &&
@@ -1134,8 +1134,8 @@ void ParamListe::load(SoundfontManager * sf2, EltID id)
                         champ != champ_keynumToVolEnvDecay &&
                         champ != champ_keynumToVolEnvHold))
             {
-                _listeChamps << (Champ)champ;
-                _listeValeurs << getValue((Champ)champ, sf2->get(parent, (Champ)champ).genValue, isPrst);
+                _listeChamps << (AttributeType)champ;
+                _listeValeurs << Attribute::toRealValue((AttributeType)champ, isPrst, sf2->get(parent, (AttributeType)champ));
             }
         }
     }
@@ -1177,17 +1177,17 @@ void ParamListe::load(SoundfontManager * sf2, EltID id)
     }
 }
 
-void ParamListe::getGlobalValue(SoundfontManager * sf2, EltID id, Champ champ)
+void ParamListe::getGlobalValue(SoundfontManager * sf2, EltID id, AttributeType champ)
 {
     // Chargement d'une valeur de la division globale
     if (!_listeChamps.contains(champ) && sf2->isSet(id, champ))
     {
         _listeChamps << champ;
-        _listeValeurs << getValue(champ, sf2->get(id, champ).genValue, false);
+        _listeValeurs << Attribute::toRealValue(champ, false, sf2->get(id, champ));
     }
 }
 
-void ParamListe::mix(Champ champCoarse, Champ champFine, int addValue)
+void ParamListe::mix(AttributeType champCoarse, AttributeType champFine, int addValue)
 {
     if (_listeChamps.contains(champCoarse))
     {
@@ -1211,58 +1211,14 @@ void ParamListe::mix(Champ champCoarse, Champ champFine, int addValue)
     }
 }
 
-double ParamListe::getDefaultValue(Champ champ)
-{
-    double defValue;
-    switch (champ)
-    {
-    case champ_fineTune: case champ_coarseTune: case champ_initialFilterQ:
-    case champ_startAddrsOffset: case champ_endAddrsOffset: case champ_startloopAddrsOffset:
-    case champ_endloopAddrsOffset: case champ_initialAttenuation: case champ_pan:
-    case champ_keynumToVolEnvHold: case champ_keynumToVolEnvDecay:
-    case champ_sustainVolEnv: case champ_keynumToModEnvHold: case champ_keynumToModEnvDecay:
-    case champ_sustainModEnv: case champ_modEnvToPitch: case champ_modEnvToFilterFc:
-    case champ_modLfoToPitch: case champ_modLfoToFilterFc: case champ_modLfoToVolume:
-    case champ_vibLfoToPitch: case champ_reverbEffectsSend: case champ_chorusEffectsSend:
-    case champ_exclusiveClass: case champ_sampleModes:
-        defValue = 0;
-        break;
-    case champ_keynum: case champ_overridingRootKey: case champ_velocity:
-        defValue = -1;
-        break;
-    case champ_initialFilterFc:
-        defValue = 19914;
-        break;
-    case champ_delayVolEnv: case champ_attackVolEnv: case champ_holdVolEnv:
-    case champ_decayVolEnv: case champ_releaseVolEnv: case champ_delayModEnv:
-    case champ_attackModEnv: case champ_holdModEnv: case champ_decayModEnv:
-    case champ_releaseModEnv: case champ_delayModLFO: case champ_delayVibLFO:
-        defValue = 0.001;
-        break;
-    case champ_freqModLFO: case champ_freqVibLFO:
-        defValue = 8.176;
-        break;
-    case champ_scaleTuning:
-        defValue = 100;
-        break;
-    case champ_keyRange: case champ_velRange:
-        defValue = 127;
-        break;
-    default:
-        defValue = 0;
-        break;
-    }
-    return defValue;
-}
-
-void ParamListe::fusion(Champ champ, double value)
+void ParamListe::fusion(AttributeType champ, double value)
 {
     int index = _listeChamps.indexOf(champ);
     if (index == -1)
     {
         index = _listeChamps.size();
         _listeChamps.append(champ);
-        _listeValeurs.append(getDefaultValue(champ));
+        _listeValeurs.append(Attribute::getDefaultRealValue(champ, false));
     }
 
     switch (champ)
@@ -1320,53 +1276,7 @@ void ParamListe::fusion(Champ champ, double value)
     }
 }
 
-double ParamListe::getValue(Champ champ, genAmountType amount, bool isPrst)
-{
-    double dRet = 0;
-    switch (champ)
-    {
-    case champ_fineTune: case champ_coarseTune: case champ_keynumToVolEnvHold: case champ_keynumToVolEnvDecay:
-    case champ_keynumToModEnvHold: case champ_keynumToModEnvDecay: case champ_modEnvToPitch:
-    case champ_modEnvToFilterFc: case champ_modLfoToPitch: case champ_modLfoToFilterFc:
-    case champ_vibLfoToPitch: case champ_scaleTuning:
-    case champ_startloopAddrsOffset: case champ_startAddrsOffset: case champ_endloopAddrsOffset:
-    case champ_endAddrsOffset:
-        dRet = amount.shAmount;
-        break;
-    case champ_pan: case champ_initialAttenuation: case champ_initialFilterQ: case champ_sustainVolEnv:
-    case champ_sustainModEnv: case champ_modLfoToVolume: case champ_reverbEffectsSend:
-    case champ_chorusEffectsSend:
-        dRet = (double)amount.shAmount / 10.;
-        break;
-    case champ_delayVolEnv: case champ_attackVolEnv: case champ_holdVolEnv: case champ_decayVolEnv:
-    case champ_releaseVolEnv: case champ_delayModEnv: case champ_attackModEnv: case champ_holdModEnv:
-    case champ_decayModEnv: case champ_releaseModEnv: case champ_delayModLFO: case champ_delayVibLFO:
-        dRet = d1200e2(amount.shAmount);
-        break;
-    case champ_overridingRootKey: case champ_keynum: case champ_velocity: case champ_sampleModes:
-    case champ_exclusiveClass: case champ_sampleID:
-        dRet = amount.wAmount;
-        break;
-    case champ_startloopAddrsCoarseOffset: case champ_endloopAddrsCoarseOffset:
-    case champ_startAddrsCoarseOffset: case champ_endAddrsCoarseOffset:
-        dRet = amount.shAmount * 32768;
-        break;
-    case champ_initialFilterFc: case champ_freqModLFO: case champ_freqVibLFO:
-        if (isPrst)
-            dRet = d1200e2(amount.shAmount);
-        else
-            dRet = d1200e2(amount.shAmount) * 8.176;
-        break;
-    case champ_keyRange: case champ_velRange:
-        dRet = amount.ranges.byLo * 1000 + amount.ranges.byHi;
-        break;
-    default:
-        break;
-    }
-    return dRet;
-}
-
-double ParamListe::limit(double val, Champ champ)
+double ParamListe::limit(double val, AttributeType champ)
 {
     double min = 0;
     double max = 0;

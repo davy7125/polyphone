@@ -25,7 +25,7 @@
 #ifndef DUPLICATOR_H
 #define DUPLICATOR_H
 
-#include "sf2_types.h"
+#include "basetypes.h"
 #include <QList>
 #include <QMap>
 

@@ -98,7 +98,7 @@ void InputSf2::fillSf2(Sf2Header &header, Sf2SdtaPart &sdtaPart, Sf2PdtaPart &pd
     _sm->set(id, champ_ICOP, header.getInfo("ICOP"));
     _sm->set(id, champ_ICMT, header.getInfo("ICMT"));
     _sm->set(id, champ_ISFT, header.getInfo("ISFT"));
-    Valeur value;
+    AttributeValue value;
     value.sfVerValue = header.getVersion("ifil");
     _sm->set(id, champ_IFIL, value);
     value.sfVerValue = header.getVersion("iver");
@@ -264,8 +264,8 @@ void InputSf2::fillSf2(Sf2Header &header, Sf2SdtaPart &sdtaPart, Sf2PdtaPart &pd
             }
             for (int k = genmin; k < genmax; k++)
             {
-                value.genValue.wAmount = pdtaPart._igens[k]._genAmount.value;
-                _sm->set(id2, (Champ)pdtaPart._igens[k]._sfGenOper.value, value);
+                value.wValue = pdtaPart._igens[k]._genAmount.value;
+                _sm->set(id2, (AttributeType)pdtaPart._igens[k]._sfGenOper.value, value);
             }
 
             // Modulators
@@ -288,7 +288,7 @@ void InputSf2::fillSf2(Sf2Header &header, Sf2SdtaPart &sdtaPart, Sf2PdtaPart &pd
                 Sf2PdtaPart_mod mod = pdtaPart._imods[k];
                 value.sfModValue = mod._sfModSrcOper;
                 _sm->set(id2, champ_sfModSrcOper, value);
-                value.sfGenValue = (Champ)mod._sfModDestOper.value;
+                value.sfGenValue = (AttributeType)mod._sfModDestOper.value;
                 _sm->set(id2, champ_sfModDestOper, value);
                 value.shValue = mod._modAmount.value;
                 _sm->set(id2, champ_modAmount, value);
@@ -368,8 +368,8 @@ void InputSf2::fillSf2(Sf2Header &header, Sf2SdtaPart &sdtaPart, Sf2PdtaPart &pd
             }
             for (int k = genmin; k < genmax; k++)
             {
-                value.genValue.wAmount = pdtaPart._pgens[k]._genAmount.value;
-                _sm->set(id2, (Champ)pdtaPart._pgens[k]._sfGenOper.value, value);
+                value.wValue = pdtaPart._pgens[k]._genAmount.value;
+                _sm->set(id2, (AttributeType)pdtaPart._pgens[k]._sfGenOper.value, value);
             }
 
             // Modulators
@@ -392,7 +392,7 @@ void InputSf2::fillSf2(Sf2Header &header, Sf2SdtaPart &sdtaPart, Sf2PdtaPart &pd
                 Sf2PdtaPart_mod mod = pdtaPart._pmods[k];
                 value.sfModValue = mod._sfModSrcOper;
                 _sm->set(id2, champ_sfModSrcOper, value);
-                value.sfGenValue = (Champ)mod._sfModDestOper.value;
+                value.sfGenValue = (AttributeType)mod._sfModDestOper.value;
                 _sm->set(id2, champ_sfModDestOper, value);
                 value.shValue = mod._modAmount.value;
                 _sm->set(id2, champ_modAmount, value);

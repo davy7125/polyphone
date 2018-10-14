@@ -2,7 +2,7 @@
 #include <QPainter>
 #include "treeview.h"
 #include "contextmanager.h"
-#include "sf2_types.h"
+#include "basetypes.h"
 #include <QToolTip>
 #include <QHelpEvent>
 

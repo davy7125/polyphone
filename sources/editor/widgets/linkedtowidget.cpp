@@ -35,7 +35,7 @@ void LinkedToWidget::initialize(EltID id)
     id2.typeElement = (id.typeElement == elementSmpl ? elementInst : elementPrst);
     EltID id3 = id;
     id3.typeElement = (id.typeElement == elementSmpl ? elementInstSmpl : elementPrstInst);
-    Champ elementToFind = (id.typeElement == elementSmpl ? champ_sampleID : champ_instrument);
+    AttributeType elementToFind = (id.typeElement == elementSmpl ? champ_sampleID : champ_instrument);
 
     // Browse all instruments or presets
     SoundfontManager * sf2 = SoundfontManager::getInstance();

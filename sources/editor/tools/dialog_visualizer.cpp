@@ -26,6 +26,7 @@
 #include "ui_dialog_visualizer.h"
 #include "contextmanager.h"
 #include "page.h"
+#include "attribute.h"
 
 DialogVisualizer::DialogVisualizer(SoundfontManager *sf2, EltID id, QWidget *parent) :
     QDialog(parent),
@@ -34,7 +35,7 @@ DialogVisualizer::DialogVisualizer(SoundfontManager *sf2, EltID id, QWidget *par
     _initialID(id)
 {
     // Initialize fields
-    QList<Champ> listeDesChamps;
+    QList<AttributeType> listeDesChamps;
     listeDesChamps << champ_initialAttenuation
                    << champ_pan
                    << champ_coarseTune
@@ -119,7 +120,7 @@ void DialogVisualizer::on_comboParameter_currentIndexChanged(int index)
     QVector<QList<double> > vectListPoints, vectListPointsDef;
     vectListPoints.resize(128);
     vectListPointsDef.resize(128);
-    Champ champ = (Champ)ui->comboParameter->itemData(index).toInt();
+    AttributeType champ = (AttributeType)ui->comboParameter->itemData(index).toInt();
 
     // Valeur par défaut
     EltID id = _initialID;
@@ -130,9 +131,9 @@ void DialogVisualizer::on_comboParameter_currentIndexChanged(int index)
     bool globDefined = _sf2->isSet(id, champ);
     double globVal;
     if (globDefined)
-        globVal = this->getValue(id, champ);
+        globVal = Attribute::toRealValue(champ, _isPrst, _sf2->get(id, champ));
     else
-        globVal = this->getDefaultValue(champ);
+        globVal = Attribute::getDefaultRealValue(champ, _isPrst);
     if (_isPrst)
         id.typeElement = elementPrstInst;
     else
@@ -144,7 +145,7 @@ void DialogVisualizer::on_comboParameter_currentIndexChanged(int index)
         if (_sf2->isSet(id, champ))
         {
             // Champ renseigné dans la division
-            double val = this->getValue(id, champ);
+            double val = Attribute::toRealValue(champ, _isPrst, _sf2->get(id, champ));
             for (int key = keyRange.byLo; key <= keyRange.byHi; key++)
             {
                 if (key >= 0 && key < 128)
@@ -184,113 +185,6 @@ void DialogVisualizer::on_checkLog_stateChanged(int arg1)
     // Modification de l'échelle
     ui->graphVisualizer->setIsLog(arg1);
     ui->graphVisualizer->setScale();
-}
-
-double DialogVisualizer::getValue(EltID id, Champ champ)
-{
-    genAmountType genVal = _sf2->get(id, champ).genValue;
-    double dRet = 0;
-    switch (champ)
-    {
-    case champ_initialAttenuation: case champ_pan: case champ_initialFilterQ:
-    case champ_modLfoToVolume:
-    case champ_sustainVolEnv: case champ_sustainModEnv:
-    case champ_chorusEffectsSend: case champ_reverbEffectsSend:
-        dRet = (double)genVal.shAmount / 10.;
-        break;
-
-    case champ_sampleModes: case champ_overridingRootKey: case champ_exclusiveClass:
-    case champ_keynum: case champ_velocity:
-        dRet = genVal.wAmount;
-        break;
-
-    case champ_scaleTuning: case champ_coarseTune: case champ_fineTune:
-    case champ_modLfoToFilterFc: case champ_modEnvToFilterFc:
-    case champ_modEnvToPitch: case champ_modLfoToPitch: case champ_vibLfoToPitch:
-    case champ_keynumToModEnvHold: case champ_keynumToVolEnvHold:
-    case champ_keynumToModEnvDecay: case champ_keynumToVolEnvDecay:
-    case champ_startAddrsOffset: case champ_startAddrsCoarseOffset:
-    case champ_startloopAddrsOffset: case champ_startloopAddrsCoarseOffset:
-    case champ_endAddrsOffset: case champ_endAddrsCoarseOffset:
-    case champ_endloopAddrsOffset: case champ_endloopAddrsCoarseOffset:
-        dRet = genVal.shAmount;
-        break;
-
-    case champ_initialFilterFc:
-        if (_isPrst)
-            dRet = qPow(2., (double)genVal.shAmount/1200);
-        else
-            dRet = qPow(2., (double)genVal.shAmount/1200) * 8.176;
-        break;
-
-    case champ_freqModLFO: case champ_freqVibLFO:
-        if (_isPrst)
-            dRet = qPow(2., (double)genVal.shAmount/1200);
-        else
-            dRet = qPow(2., (double)genVal.shAmount/1200) * 8.176;
-        break;
-
-    case champ_delayModEnv: case champ_attackModEnv: case champ_holdModEnv: case champ_decayModEnv: case champ_releaseModEnv:
-    case champ_delayVolEnv: case champ_attackVolEnv: case champ_holdVolEnv: case champ_decayVolEnv: case champ_releaseVolEnv:
-    case champ_delayModLFO: case champ_delayVibLFO:
-        dRet = qPow(2., (double)genVal.shAmount/1200);
-        break;
-
-    default: break;
-    }
-
-    return dRet;
-}
-double DialogVisualizer::getDefaultValue(Champ champ)
-{
-    double dRet = 0;
-    switch (champ)
-    {
-    case champ_sampleModes: case champ_overridingRootKey:
-    case champ_keynum: case champ_velocity:
-        dRet = -1;
-        break;
-    case champ_scaleTuning: case champ_coarseTune: case champ_fineTune:
-    case champ_exclusiveClass: case champ_pan: case champ_initialFilterQ:
-    case champ_startAddrsOffset: case champ_startAddrsCoarseOffset:
-    case champ_startloopAddrsOffset: case champ_startloopAddrsCoarseOffset:
-    case champ_endAddrsOffset: case champ_endAddrsCoarseOffset:
-    case champ_endloopAddrsOffset: case champ_endloopAddrsCoarseOffset:
-    case champ_initialAttenuation: case champ_sustainModEnv:
-    case champ_keynumToModEnvHold: case champ_keynumToVolEnvHold:
-    case champ_keynumToModEnvDecay: case champ_keynumToVolEnvDecay:
-    case champ_modLfoToFilterFc: case champ_modEnvToFilterFc:
-    case champ_modEnvToPitch: case champ_modLfoToPitch: case champ_vibLfoToPitch:
-    case champ_sustainVolEnv: case champ_modLfoToVolume:
-    case champ_chorusEffectsSend: case champ_reverbEffectsSend:
-        dRet = 0;
-        break;
-    case champ_delayModEnv: case champ_attackModEnv: case champ_holdModEnv: case champ_decayModEnv: case champ_releaseModEnv:
-    case champ_delayVolEnv: case champ_attackVolEnv: case champ_holdVolEnv: case champ_decayVolEnv: case champ_releaseVolEnv:
-    case champ_delayModLFO: case champ_delayVibLFO:
-        if (_isPrst)
-            dRet = 1;
-        else
-            dRet = 0.001;
-        break;
-
-    case champ_freqModLFO: case champ_freqVibLFO:
-        if (_isPrst)
-            dRet = 1;
-        else
-            dRet = 8.176;
-        break;
-
-    case champ_initialFilterFc:
-        if (_isPrst)
-            dRet = 1;
-        else
-            dRet = 19914;
-        break;
-    default: break;
-    }
-
-    return dRet;
 }
 
 
@@ -601,28 +495,30 @@ void GraphVisualizer::afficheCoord(double x, double y)
         yVector.resize(1);
         xVector[0] = x;
         yVector[0] = y;
+
         // Limites du graphique
         double xMin = this->xAxis->range().lower;
         double xMax = this->xAxis->range().upper;
         double yMin = this->yAxis->range().lower;
         double yMax = this->yAxis->range().upper;
+
         // Affichage texte
         if (y > (yMin + yMax) / 2)
             labelCoord->setPositionAlignment(Qt::AlignTop    | Qt::AlignHCenter);
         else
             labelCoord->setPositionAlignment(Qt::AlignBottom | Qt::AlignHCenter);
-        char T[20];
+        QString label = ContextManager::keyName()->getKeyName(qRound(x)) + ":";
         if (y == 0)
-            sprintf(T, "%s:%.0f", ContextManager::keyName()->getKeyName(qRound(x)).toStdString().c_str(), y);
+            label += QString::number(y, 'f', 0);
         else if (y < 1)
-            sprintf(T, "%s:%.3f", ContextManager::keyName()->getKeyName(qRound(x)).toStdString().c_str(), y);
+            label += QString::number(y, 'f', 3);
         else if (y < 10)
-            sprintf(T, "%s:%.2f", ContextManager::keyName()->getKeyName(qRound(x)).toStdString().c_str(), y);
+            label += QString::number(y, 'f', 2);
         else if (y < 100)
-            sprintf(T, "%s:%.1f", ContextManager::keyName()->getKeyName(qRound(x)).toStdString().c_str(), y);
+            label += QString::number(y, 'f', 1);
         else
-            sprintf(T, "%s:%.0f", ContextManager::keyName()->getKeyName(qRound(x)).toStdString().c_str(), y);
-        labelCoord->setText(T);
+            label += QString::number(y, 'f', 0);
+        labelCoord->setText(label);
 
         // Adjust the position on x
         QFontMetrics fm(labelCoord->font());
@@ -631,6 +527,7 @@ void GraphVisualizer::afficheCoord(double x, double y)
             x = xMin + distX;
         else if (x > xMax - distX)
             x = xMax - distX;
+
         // Ajustement position sur y
         int pixelY = this->yAxis->coordToPixel(y);
         if (y > (yMin + yMax) / 2)
@@ -638,6 +535,7 @@ void GraphVisualizer::afficheCoord(double x, double y)
         else
             pixelY -= 3;
         y = yAxis->pixelToCoord(pixelY);
+
         // Positionnement du texte
         labelCoord->position->setCoords(x, y);
     }

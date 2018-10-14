@@ -321,7 +321,7 @@ QByteArray Sound::getData(quint16 wBps)
     return baRet;
 }
 
-quint32 Sound::get(Champ champ)
+quint32 Sound::get(AttributeType champ)
 {
     quint32 result = 0;
     switch (champ)
@@ -386,7 +386,7 @@ void Sound::setData(QByteArray data, quint16 wBps)
         QMessageBox::warning(_parent, "warning", "In Sound::setData, forbidden operation");
 }
 
-void Sound::set(Champ champ, Valeur value)
+void Sound::set(AttributeType champ, AttributeValue value)
 {
     switch (champ)
     {
@@ -2796,4 +2796,26 @@ int Sound::lastLettersToRemove(QString str1, QString str2)
     }
 
     return nbLetters;
+}
+
+quint32 Sound::readDWORD(const char *chaine, int pos)
+{
+    unsigned char b0, b1, b2, b3;
+    b3 = chaine[pos];
+    b2 = chaine[pos+1];
+    b1 = chaine[pos+2];
+    b0 = chaine[pos+3];
+    // Assuming file is little-endian.
+    // for big endian, swap the order to b3...b0
+    return (((quint32) b0) << 24) | (((quint32) b1) << 16) | (((quint32) b2) << 8) | b3;
+}
+
+quint16 Sound::readWORD(const char *chaine, int pos)
+{
+    unsigned char b0, b1;
+    b1 = chaine[pos];
+    b0 = chaine[pos+1];
+    // Assuming file is little-endian.
+    // for big endian, swap the order to b1...b0
+    return (((quint16) b0) << 8) | b1;
 }

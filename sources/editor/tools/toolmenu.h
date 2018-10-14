@@ -2,7 +2,7 @@
 #define TOOLMENU_H
 
 #include <QMenu>
-#include "idlist.h"
+#include "basetypes.h"
 class ToolFactory;
 class AbstractTool;
 

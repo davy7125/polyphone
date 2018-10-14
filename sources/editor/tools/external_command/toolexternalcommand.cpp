@@ -95,7 +95,7 @@ void ToolExternalCommand::process(SoundfontManager * sm, EltID id, AbstractToolP
     {
         // Import the sample
         Sound sound(pathTempFile, false);
-        Valeur val;
+        AttributeValue val;
         val.wValue = 0;
         sound.set(champ_wChannel, val);
         import(id, sound, sm, replaceInfo);
@@ -117,7 +117,7 @@ void ToolExternalCommand::import(EltID id, Sound &sound, SoundfontManager * sm, 
 {
     sm->set(id, champ_sampleDataFull24, sound.getData(24));
 
-    Valeur val;
+    AttributeValue val;
     val.dwValue = sound.get(champ_dwStart16);
     sm->set(id, champ_dwStart16, val);
     val.dwValue = sound.get(champ_dwStart24);

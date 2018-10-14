@@ -24,7 +24,7 @@
 
 #include "graphique.h"
 #include "configpanel.h"
-#include "sf2_types.h"
+#include "basetypes.h"
 #include <QScrollBar>
 #include <QSpinBox>
 #include <thememanager.h>

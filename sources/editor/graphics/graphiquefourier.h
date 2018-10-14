@@ -26,7 +26,7 @@
 #define GRAPHIQUEFOURIER_H
 
 #include "qcustomplot.h"
-#include "sf2_types.h"
+#include "basetypes.h"
 class QMenu;
 
 class GraphiqueFourier : public QCustomPlot

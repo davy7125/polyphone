@@ -72,15 +72,8 @@ public:
     explicit MainWindowOld(QWidget *parent = 0);
     ~MainWindowOld();
 
-    void updateDo();
-    void enableActionSample(bool isEnabled);
-    void enableActionInstrument(bool isEnabled);
-    void enableActionPreset(bool isEnabled);
-    void enableActionSf2(bool isEnabled);
     void associer(EltID idDest);
     void remplacer(EltID idSrc);
-    void desactiveOutilsSmpl();
-    void activeOutilsSmpl();
     void dragAndDrop(EltID idDest, QList<EltID> idSources);
     void spaceKeyPressedInTree();
 
@@ -107,15 +100,10 @@ private slots:
     void showAbout();           // Affichage fenêtre à propos
     void AfficherBarreOutils(); // Clic sur l'action "barre d'outils" du menu "afficher"
     void afficherSectionModulateurs();
-    void undo();                // Clic sur l'action "undo"
-    void redo();                // Clic sur l'action "redo"
-    void sauvegarder();         // Clic sur l'action "sauvegarder"
-    void sauvegarderSous();     // Clic sur l'action "sauvegarder sous"
 
     void desaccorder();         // outil instrument, désaccordage ondulant
     void spatialisation();      // outil instrument, spatialisation du son
     void duplication();         // outil instrument et preset, duplication des divisions
-    void paramGlobal();         // outil instrument et preset, modification globale d'un paramètre
     void visualize();           // outil instrument et preset, visualise les paramètres utilisés dans un graphique
     void on_action_Transposer_triggered();
     void purger();              // global tool, suppression des éléments non utilisés
@@ -149,8 +137,6 @@ private:
     void importerSmpl(QString path, EltID id, int *replace);
     void exporterFrequences(QString fileName);
     int sauvegarder(int indexSf2, bool saveAs);
-    void updateFavoriteFiles();
-    QList<QAction *> getListeActions();
     static QString getName(QString name, int maxCharacters, int suffixNumber);
     int deleteMods(EltID id);
 };

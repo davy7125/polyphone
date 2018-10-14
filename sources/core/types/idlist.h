@@ -3,7 +3,7 @@
 
 #include <QList>
 #include <QMap>
-#include "sf2_types.h"
+#include "eltid.h"
 
 class IdList : public QList<EltID>
 {

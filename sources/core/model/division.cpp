@@ -16,27 +16,27 @@ Division::~Division()
         delete _modulators.take(modKey);
 }
 
-bool Division::isSet(Champ champ)
+bool Division::isSet(AttributeType champ)
 {
     return _parameters.contains(champ);
 }
 
-Valeur Division::getGen(Champ champ)
+AttributeValue Division::getGen(AttributeType champ)
 {
-    Valeur value;
+    AttributeValue value;
     if (_parameters.contains(champ))
-        value.genValue = _parameters[champ];
+        value = _parameters[champ];
     else
-        value.genValue.wAmount = 0;
+        value.wValue = 0;
     return value;
 }
 
-void Division::setGen(Champ champ, Valeur value)
+void Division::setGen(AttributeType champ, AttributeValue value)
 {
-    _parameters[champ] = value.genValue;
+    _parameters[champ] = value;
 }
 
-void Division::resetGen(Champ champ)
+void Division::resetGen(AttributeType champ)
 {
     _parameters.remove(champ);
 }

@@ -76,9 +76,9 @@ private:
     void stopSignals(bool isStopped);
     void addEnvelop(EltID id, bool isVolume, bool isMain);
     void addSample(EltID idInstSmpl);
-    double computeValue(EltID id, Champ champ, bool &isOverriden);
-    void processEdit(Champ champ, double value);
-    void processClear(Champ champ);
+    double computeValue(EltID id, AttributeType champ, bool &isOverriden);
+    void processEdit(AttributeType champ, double value);
+    void processClear(AttributeType champ);
 };
 
 #endif // ENVELOPEDITOR_H

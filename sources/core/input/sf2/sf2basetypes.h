@@ -2,7 +2,7 @@
 #define SF2BASETYPE_H
 
 #include "qglobal.h"
-#include "sf2_types.h"
+#include "basetypes.h"
 class QDataStream;
 
 class quint32Reversed

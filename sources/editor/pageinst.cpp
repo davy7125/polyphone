@@ -247,7 +247,7 @@ void PageInst::desaccorder(EltID id, double doHerz, double division)
         // Sample lié
         EltID id2 = id;
         id2.typeElement = elementSmpl;
-        id2.indexElt = _sf2->get(id, champ_sampleID).genValue.wAmount;
+        id2.indexElt = _sf2->get(id, champ_sampleID).wValue;
         // Numéro de la note du sample
         int numNoteSmpl = _sf2->get(id2, champ_byOriginalPitch).bValue;
         // Note de base sur le clavier correspondant à numNoteSmpl;
@@ -302,7 +302,7 @@ void PageInst::desaccorder(EltID id, double doHerz, double division)
         // Modification instSmpl
         if (_sf2->get(id, champ_fineTune).shValue != decalage)
         {
-            Valeur val;
+            AttributeValue val;
             val.shValue = decalage;
             _sf2->set(id, champ_fineTune, val);
         }
@@ -353,7 +353,7 @@ void PageInst::repartitionAuto(EltID id)
     }
 
     // Répartition
-    Valeur val;
+    AttributeValue val;
     noteSuivante = -1;
     notePrecedente = -1;
     for (int i = 0; i < listID.size(); i++)
@@ -450,7 +450,7 @@ void PageInst::mixture(QList<QList<int> > listeParam, QString nomInst, bool bouc
     _sf2->set(idNewInst, champ_name, nomInst.left(20));
     if (bouclage)
     {
-        Valeur value;
+        AttributeValue value;
         value.wValue = 1;
         _sf2->set(idNewInst, champ_sampleModes, value);
     }
@@ -589,7 +589,7 @@ void PageInst::mixture(QList<QList<int> > listeParam, QString nomInst, bool bouc
                     _sf2->set(idSmpl, champ_sampleData24, Sound::bpsConversion(baData, 32, 824));
 
                 // Configuration
-                Valeur value;
+                AttributeValue value;
                 value.dwValue = baData.length() / 4;
                 _sf2->set(idSmpl, champ_dwLength, value);
                 value.dwValue = fEch;
@@ -705,7 +705,7 @@ void PageInst::release(EltID id, double duree36, double division, double deTune)
         // Valeur correspondante
         short val = 1200 * qLn(release) / 0.69314718056;
         // Modification instSmpl
-        Valeur valeur;
+        AttributeValue valeur;
         if (_sf2->get(id, champ_releaseVolEnv).shValue != val)
         {
             valeur.shValue = val;
@@ -790,7 +790,7 @@ void PageInst::transposer(EltID idInstSmpl, double ton, bool adaptKeyRange)
     foreach (int i, _sf2->getSiblings(idInstSmpl))
     {
         idInstSmpl.indexElt2 = i;
-        Valeur valeur;
+        AttributeValue valeur;
 
         // Etendue
         if (adaptKeyRange)
@@ -1102,9 +1102,9 @@ int TableWidgetInst::getRow(quint16 champ)
     return row + 1;
 }
 
-Champ TableWidgetInst::getChamp(int row)
+AttributeType TableWidgetInst::getChamp(int row)
 {
-    Champ champ = champ_unknown;
+    AttributeType champ = champ_unknown;
     switch (row - 1)
     {
     case 0: champ = champ_keyRange; break;

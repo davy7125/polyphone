@@ -26,7 +26,7 @@
 #define DIALOGSELECTION_H
 
 #include <QDialog>
-#include "sf2_types.h"
+#include "basetypes.h"
 
 class SoundfontManager;
 

@@ -3,7 +3,7 @@
 
 #include <QList>
 #include <QObject>
-#include "sf2_types.h"
+#include "basetypes.h"
 class Action;
 
 class ActionSet: public QObject

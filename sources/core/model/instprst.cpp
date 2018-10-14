@@ -86,14 +86,14 @@ QString InstPrst::getName()
     return _name;
 }
 
-void InstPrst::setExtraField(Champ champ, int value)
+void InstPrst::setExtraField(AttributeType champ, int value)
 {
     _extraFields[champ] = value;
     if (champ == champ_wPreset || champ == champ_wBank)
         notifyRename();
 }
 
-int InstPrst::getExtraField(Champ champ)
+int InstPrst::getExtraField(AttributeType champ)
 {
     return _extraFields.contains(champ) ? _extraFields[champ] : 0;
 }

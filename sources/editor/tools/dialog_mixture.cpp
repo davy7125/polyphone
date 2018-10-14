@@ -24,7 +24,7 @@
 
 #include "dialog_mixture.h"
 #include "ui_dialog_mixture.h"
-#include "sf2_types.h"
+#include "basetypes.h"
 #include "contextmanager.h"
 
 // Constructeur, destructeur

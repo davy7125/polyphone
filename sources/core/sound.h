@@ -25,29 +25,10 @@
 #ifndef SOUND_H
 #define SOUND_H
 
-#include "sf2_types.h"
+#include "basetypes.h"
 
 class QFile;
 class QWidget;
-
-class Complex
-{
-public:
-    void imag(double value) { _imag = value; }
-    void real(double value) { _real = value; }
-    double imag() { return _imag; }
-    double real() { return _real; }
-
-    Complex operator *= (const double factor)
-    {
-        _real *= factor;
-        _imag *= factor;
-        return *this;
-    }
-private:
-    double _real, _imag;
-};
-
 
 class Sound
 {
@@ -58,9 +39,9 @@ public:
     // Méthodes publiques
     static void setParent(QWidget * parent) { _parent = parent; }
     QByteArray getData(quint16 wBps);
-    quint32 get(Champ champ);
+    quint32 get(AttributeType champ);
     QString getFileName();
-    void set(Champ champ, Valeur value);
+    void set(AttributeType champ, AttributeValue value);
     void setFileName(QString qStr, bool tryFindRootKey = true);
     void setData(QByteArray data, quint16 wBps);
     void setRam(bool ram);
@@ -151,6 +132,9 @@ private:
     static double BesselI0(double x);
     static Complex * FFT(Complex * x, int N); // N must be a power of 2
     static Complex * IFFT(Complex * x, int N); // N must be a power of 2
+
+    static quint32 readDWORD(const char *chaine, int pos);
+    static quint16 readWORD(const char *chaine, int pos);
 
     static QWidget * _parent;
 };

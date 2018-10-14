@@ -2,7 +2,7 @@
 #define EDITOR_H
 
 #include <QMainWindow>
-#include "idlist.h"
+#include "basetypes.h"
 class AbstractInput;
 
 namespace Ui {

@@ -26,7 +26,7 @@
 #define PILE_SF2_H
 
 #include "sound.h"
-#include "sf2_types.h"
+#include "basetypes.h"
 #include <QMap>
 #include <QObject>
 class Action;
@@ -50,16 +50,16 @@ public:
     void remove(EltID id, int *message = NULL);
 
     // Accès / modification des propriétés
-    bool isSet(EltID id, Champ champ);
-    Valeur get(EltID id, Champ champ);
-    QString getQstr(EltID id, Champ champ);
+    bool isSet(EltID id, AttributeType champ);
+    AttributeValue get(EltID id, AttributeType champ);
+    QString getQstr(EltID id, AttributeType champ);
     Sound getSon(EltID id);
-    QByteArray getData(EltID id, Champ champ);
-    int set(EltID id, Champ champ, Valeur value);
-    int set(EltID id, Champ champ, QString qStr);
-    int set(EltID id, Champ champ, QByteArray data);
-    int reset(EltID id, Champ champ);
-    void simplify(EltID id, Champ champ);
+    QByteArray getData(EltID id, AttributeType champ);
+    int set(EltID id, AttributeType champ, AttributeValue value);
+    int set(EltID id, AttributeType champ, QString qStr);
+    int set(EltID id, AttributeType champ, QByteArray data);
+    int reset(EltID id, AttributeType champ);
+    void simplify(EltID id, AttributeType champ);
 
     // Nombre de freres de id (id compris)
     QList<int> getSiblings(EltID id);
@@ -79,7 +79,7 @@ public:
     bool isEdited(int indexSf2);
 
     // Récupération d'une liste de champs et de valeurs contenues dans les bags de l'élément id
-    void getListeBags(EltID id, QList<Champ> &listeChamps, QList<genAmountType> &listeValeurs);
+    void getListeBags(EltID id, QList<AttributeType> &listeChamps, QList<AttributeValue> &listeValeurs);
 
     // Détermination de la validité d'un ID (en acceptant ou non les ID masqués, par défaut non)
     bool isValid(EltID id, bool acceptHidden = false);

@@ -2,7 +2,7 @@
 #define INSTPRST_H
 
 #include <QMap>
-#include "sf2_types.h"
+#include "basetypes.h"
 #include "treeitem.h"
 #include "division.h"
 class Soundfont;
@@ -27,8 +27,8 @@ public:
     // Name, extra fields
     void setName(QString name);
     QString getName();
-    void setExtraField(Champ champ, int value);
-    int getExtraField(Champ champ);
+    void setExtraField(AttributeType champ, int value);
+    int getExtraField(AttributeType champ);
 
     // TreeItem implementation
     int childCount() const override;
@@ -43,7 +43,7 @@ private:
     bool _hidden;
     int _divisionCounter;
     QString _name;
-    QMap<Champ, int> _extraFields; // Used for presets only
+    QMap<AttributeType, int> _extraFields; // Used for presets only
 };
 
 #endif // INSTPRST_H

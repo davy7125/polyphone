@@ -1,7 +1,7 @@
 #ifndef SMPL_H
 #define SMPL_H
 
-#include "sf2_types.h"
+#include "basetypes.h"
 #include "sound.h"
 #include "treeitem.h"
 class Soundfont;
