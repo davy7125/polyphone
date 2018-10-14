@@ -52,7 +52,7 @@ protected:
     virtual void prepare(EltID id) = 0;
     virtual QStringList getInformation(EltID id) = 0;
 
-    QString getRange(EltID id, Champ champ);
+    QString getRange(EltID id, AttributeType champ);
 
 private slots:
     void on_table_cellDoubleClicked(int row, int column);

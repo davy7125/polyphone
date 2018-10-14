@@ -26,7 +26,7 @@
 #define TABLEWIDGETMOD_H
 
 #include <QTableWidget>
-#include "sf2_types.h"
+#include "basetypes.h"
 
 // Classe QTableWidget pour mod
 class TableWidgetMod : public QTableWidget

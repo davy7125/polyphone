@@ -2,7 +2,7 @@
 #define TREESORTFILTERPROXY_H
 
 #include <QSortFilterProxyModel>
-#include "sf2_types.h"
+#include "basetypes.h"
 class TreeView;
 
 class TreeSortFilterProxy : public QSortFilterProxyModel

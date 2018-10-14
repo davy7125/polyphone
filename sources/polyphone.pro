@@ -171,6 +171,7 @@ INCLUDEPATH += mainwindow \
     core/input \
     core/output \
     core/model \
+    core/types \
     clavier \
     sound_engine \
     sound_engine/elements \
@@ -182,15 +183,11 @@ INCLUDEPATH += mainwindow \
     .
 
 SOURCES	+= main.cpp \
-    core/sf2_types.cpp \
-    core/tree.cpp \
     core/sound.cpp \
     core/pile_sf2_sl.cpp \
     core/duplicator.cpp \
-    core/treewidgetitem.cpp \
     core/oggconverter.cpp \
     core/utils.cpp \
-    core/parameter.cpp \
     core/input/sfz/import_sfz.cpp \
     core/input/sfark/sfarkglobal.cpp \
     core/input/sfark/sfarkfilemanager.cpp \
@@ -238,7 +235,6 @@ SOURCES	+= main.cpp \
     editor/widgets/spinboxrange.cpp \
     editor/widgets/comboboxloopmode.cpp \
     editor/tools/dialog_space.cpp \
-    editor/tools/dialog_paramglobal.cpp \
     editor/tools/dialog_mixture.cpp \
     editor/tools/dialog_release.cpp \
     editor/tools/dialog_celeste.cpp \
@@ -288,7 +284,7 @@ SOURCES	+= main.cpp \
     editor/pagesf2.cpp \
     editor/pageprst.cpp \
     editor/pagesmpl.cpp \
-    core/idlist.cpp \
+    core/types/idlist.cpp \
     core/soundfontmanager.cpp \
     core/actionmanager.cpp \
     core/model/soundfont.cpp \
@@ -360,17 +356,20 @@ SOURCES	+= main.cpp \
     editor/tools/unlink_sample/toolunlinksample.cpp \
     editor/tools/change_attenuation/toolchangeattenuation.cpp \
     editor/tools/change_attenuation/toolchangeattenuation_gui.cpp \
-    editor/tools/change_attenuation/toolchangeattenuation_parameters.cpp
+    editor/tools/change_attenuation/toolchangeattenuation_parameters.cpp \
+    editor/tools/global_settings/toolglobalsettings.cpp \
+    editor/tools/global_settings/toolglobalsettings_gui.cpp \
+    editor/tools/global_settings/toolglobalsettings_parameters.cpp \
+    editor/tools/global_settings/graphparamglobal.cpp \
+    core/types/eltid.cpp \
+    core/types/complex.cpp \
+    core/types/attribute.cpp
 
 HEADERS  += \
-    core/sf2_types.h \
-    core/tree.h \
     core/sound.h \
     core/duplicator.h \
-    core/treewidgetitem.h \
     core/oggconverter.h \
     core/utils.h \
-    core/parameter.h \
     core/input/sfz/import_sfz.h \
     core/input/sfark/sfarkglobal.h \
     core/input/sfark/sfarkfilemanager.h \
@@ -422,7 +421,6 @@ HEADERS  += \
     editor/widgets/spinboxrange.h \
     editor/widgets/comboboxloopmode.h \
     editor/tools/dialog_space.h \
-    editor/tools/dialog_paramglobal.h \
     editor/tools/dialog_mixture.h \
     editor/tools/dialog_release.h \
     editor/tools/dialog_celeste.h \
@@ -474,7 +472,7 @@ HEADERS  += \
     editor/pageprst.h \
     editor/pagesf2.h \
     editor/pagesmpl.h \
-    core/idlist.h \
+    core/types/idlist.h \
     core/soundfontmanager.h \
     core/actionmanager.h \
     core/model/soundfont.h \
@@ -551,7 +549,15 @@ HEADERS  += \
     editor/tools/unlink_sample/toolunlinksample.h \
     editor/tools/change_attenuation/toolchangeattenuation.h \
     editor/tools/change_attenuation/toolchangeattenuation_gui.h \
-    editor/tools/change_attenuation/toolchangeattenuation_parameters.h
+    editor/tools/change_attenuation/toolchangeattenuation_parameters.h \
+    editor/tools/global_settings/toolglobalsettings.h \
+    editor/tools/global_settings/toolglobalsettings_gui.h \
+    editor/tools/global_settings/toolglobalsettings_parameters.h \
+    editor/tools/global_settings/graphparamglobal.h \
+    core/types/eltid.h \
+    core/types/complex.h \
+    core/types/attribute.h \
+    core/types/basetypes.h
 
 FORMS    += \
     dialogs/dialog_list.ui \
@@ -564,7 +570,6 @@ FORMS    += \
     editor/envelopeditor.ui \
     editor/overview/pageoverview.ui \
     editor/tools/dialog_space.ui \
-    editor/tools/dialog_paramglobal.ui \
     editor/tools/dialog_mixture.ui \
     editor/tools/dialog_release.ui \
     editor/tools/dialog_celeste.ui \
@@ -595,7 +600,8 @@ FORMS    += \
     context/interface/configpanel.ui \
     dialogs/dialogkeyboard.ui \
     dialogs/dialogrecorder.ui \
-    editor/tools/change_attenuation/toolchangeattenuation_gui.ui
+    editor/tools/change_attenuation/toolchangeattenuation_gui.ui \
+    editor/tools/global_settings/toolglobalsettings_gui.ui
 
 RESOURCES += resources.qrc
 

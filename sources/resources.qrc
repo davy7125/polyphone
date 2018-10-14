@@ -1,12 +1,8 @@
 <RCC>
     <qresource prefix="/icons">
-        <file alias="delete">resources/edit-delete.png</file>
-        <file alias="about">resources/help-about.png</file>
         <file alias="close">resources/window-close.png</file>
         <file alias="document">resources/document.png</file>
         <file alias="rename">resources/rename.png</file>
-        <file alias="export">resources/export.png</file>
-        <file alias="export2">resources/export2.png</file>
         <file alias="folder">resources/folder.png</file>
         <file alias="import">resources/import.png</file>
         <file alias="external_link.gif">resources/external_link.gif</file>
@@ -21,7 +17,6 @@
         <file alias="loop_off_w.png">resources/loop_off_w.png</file>
         <file alias="loop_on_end_w.png">resources/loop_on_end_w.png</file>
         <file alias="loop_on_w.png">resources/loop_on_w.png</file>
-        <file alias="down">resources/down.png</file>
         <file alias="note_off.png">resources/note_off.png</file>
         <file alias="note_on.png">resources/note_on.png</file>
         <file alias="revert.png">resources/revert.png</file>
@@ -113,6 +108,7 @@
         <file alias="unlink.svg">editor/tools/unlink_sample/unlink.svg</file>
         <file alias="link.svg">editor/tools/link_sample/link.svg</file>
         <file alias="change_attenuation.svg">editor/tools/change_attenuation/change_attenuation.svg</file>
+        <file alias="global_setting.svg">editor/tools/global_settings/global_setting.svg</file>
     </qresource>
     <qresource prefix="/vpiano">
         <file alias="blkey.svg">resources/blkey.svg</file>

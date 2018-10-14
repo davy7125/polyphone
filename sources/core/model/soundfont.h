@@ -1,7 +1,7 @@
 #ifndef SOUNDFONT_H
 #define SOUNDFONT_H
 
-#include "sf2_types.h"
+#include "basetypes.h"
 #include <QList>
 #include <QMap>
 class Smpl;

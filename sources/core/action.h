@@ -1,7 +1,7 @@
 #ifndef ACTION_H
 #define ACTION_H
 
-#include "sf2_types.h"
+#include "basetypes.h"
 
 class Action
 {
@@ -22,11 +22,11 @@ public:
     // Data
     ActionType typeAction;
     EltID id;
-    Champ champ;
+    AttributeType champ;
     QString qNewValue;
     QString qOldValue;
-    Valeur vNewValue;
-    Valeur vOldValue;
+    AttributeValue vNewValue;
+    AttributeValue vOldValue;
     QByteArray baNewValue;
     QByteArray baOldValue;
 };

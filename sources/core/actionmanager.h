@@ -29,7 +29,7 @@
 #include <QMap>
 #include <QObject>
 #include <QMutex>
-#include "sf2_types.h"
+#include "basetypes.h"
 class ActionSet;
 class Action;
 

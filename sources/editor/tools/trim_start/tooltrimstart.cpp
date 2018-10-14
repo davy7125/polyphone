@@ -16,7 +16,7 @@ void ToolTrimStart::process(SoundfontManager * sm, EltID id, AbstractToolParamet
         sm->set(id, champ_sampleDataFull24, baData);
 
         // Update length
-        Valeur val;
+        AttributeValue val;
         val.dwValue = baData.size()/3;
         sm->set(id, champ_dwLength, val);
 

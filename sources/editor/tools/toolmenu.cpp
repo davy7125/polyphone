@@ -2,6 +2,7 @@
 #include "toolfactory.h"
 #include "abstracttool.h"
 #include "contextmanager.h"
+#include "utils.h"
 #include <QLabel>
 #include <QWidgetAction>
 
@@ -70,7 +71,7 @@ void ToolMenu::addCategory(QString categoryName)
 
 bool ToolMenu::lessThan(const AbstractTool * tool1, const AbstractTool * tool2)
 {
-    return tool1->getCategory() + tool1->getLabel() < tool2->getCategory() + tool2->getLabel();
+    return Utils::naturalOrder(tool1->getCategory() + tool1->getLabel(), tool2->getCategory() + tool2->getLabel());
 }
 
 void ToolMenu::onTriggered(QAction * action)

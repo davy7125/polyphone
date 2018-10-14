@@ -26,7 +26,6 @@
 #include "pagetable.h"
 #include "editor_old.h"
 #include "contextmanager.h"
-#include "dialog_paramglobal.h"
 #include "dialog_visualizer.h"
 #include "dialog_space.h"
 #include "dialog_duplication.h"
@@ -48,13 +47,13 @@ PageTable::PageTable(TypePage typePage, QWidget *parent) : Page(parent, typePage
 
 void PageTable::afficheTable(bool justSelection)
 {
-    int posV = this->_table->verticalScrollBar()->value();
+    int posV = _table->verticalScrollBar()->value();
 
     if (!justSelection)
     {
         // Clear the table and repopulate it
         _table->blockSignals(true);
-        this->_table->clear();
+        _table->clear();
         _table->blockSignals(false);
 
         if (!_currentParentIds.isEmpty())
@@ -80,18 +79,17 @@ void PageTable::afficheTable(bool justSelection)
 
     // Fin de la préparation
     this->reselect();
-    this->_table->verticalScrollBar()->setValue(posV);
+    _table->verticalScrollBar()->setValue(posV);
 }
 
 void PageTable::addGlobal(EltID id, bool multiGlobal)
 {
-    genAmountType genValTmp;
+    AttributeValue genValTmp;
     int offsetStart = 0;
     int offsetEnd = 0;
     int offsetStartLoop = 0;
     int offsetEndLoop = 0;
     int row;
-    char T[20];
 
     QString qStr;
     if (multiGlobal)
@@ -103,78 +101,81 @@ void PageTable::addGlobal(EltID id, bool multiGlobal)
     else
         qStr = trUtf8("Global");
 
-    this->_table->addColumn(0, qStr);
+    _table->addColumn(0, qStr);
     EltID idGen = id;
     idGen.typeElement = this->contenantGen;
     idGen.indexElt2 = 0;
     foreach (int i, _sf2->getSiblings(idGen))
     {
-        genValTmp = _sf2->get(id, (Champ)i).genValue;
+        genValTmp = _sf2->get(id, (AttributeType)i);
         switch (i)
         {
         case champ_startAddrsOffset:
-            offsetStart += genValTmp.shAmount;
+            offsetStart += genValTmp.shValue;
             break;
         case champ_startAddrsCoarseOffset:
-            offsetStart += 32768 * genValTmp.shAmount;
+            offsetStart += 32768 * genValTmp.shValue;
             break;
         case champ_endAddrsOffset:
-            offsetEnd += genValTmp.shAmount;
+            offsetEnd += genValTmp.shValue;
             break;
         case champ_endAddrsCoarseOffset:
-            offsetEnd += 32768 * genValTmp.shAmount;
+            offsetEnd += 32768 * genValTmp.shValue;
             break;
         case champ_startloopAddrsOffset:
-            offsetStartLoop += genValTmp.shAmount;
+            offsetStartLoop += genValTmp.shValue;
             break;
         case champ_startloopAddrsCoarseOffset:
-            offsetStartLoop += 32768 * genValTmp.shAmount;
+            offsetStartLoop += 32768 * genValTmp.shValue;
             break;
         case champ_endloopAddrsOffset:
-            offsetEndLoop += genValTmp.shAmount;
+            offsetEndLoop += genValTmp.shValue;
             break;
         case champ_endloopAddrsCoarseOffset:
-            offsetEndLoop += 32768 * genValTmp.shAmount;
+            offsetEndLoop += 32768 * genValTmp.shValue;
             break;
         default:
-            row = this->_table->getRow(i);
+            row = _table->getRow(i);
             if (row > -1)
             {
                 if (i == champ_sampleModes)
-                    this->_table->setLoopModeImage(row, 0, genValTmp.wAmount);
+                    _table->setLoopModeImage(row, 0, genValTmp.wValue);
                 else
-                    this->_table->item(row, 0)->setText(getTextValue(T, i, genValTmp));
+                    _table->item(row, 0)->setText(Attribute::toString((AttributeType)i, _typePage == PAGE_PRST, genValTmp));
             }
         }
     }
-    if (offsetStart && this->_table->getRow(champ_startAddrsOffset) > -1)
+    if (offsetStart && _table->getRow(champ_startAddrsOffset) > -1)
     {
-        row = this->_table->getRow(champ_startAddrsOffset);
-        this->_table->item(row, 0)->setText(getTextValue(T, champ_startAddrsOffset, offsetStart));
+        row = _table->getRow(champ_startAddrsOffset);
+        genValTmp.shValue = offsetStart;
+        _table->item(row, 0)->setText(Attribute::toString(champ_startAddrsOffset, _typePage == PAGE_PRST, genValTmp));
     }
-    if (offsetEnd && this->_table->getRow(champ_endAddrsOffset) > -1)
+    if (offsetEnd && _table->getRow(champ_endAddrsOffset) > -1)
     {
-        row = this->_table->getRow(champ_endAddrsOffset);
-        this->_table->item(row, 0)->setText(getTextValue(T, champ_endAddrsOffset, offsetEnd));
+        row = _table->getRow(champ_endAddrsOffset);
+        genValTmp.shValue = offsetEnd;
+        _table->item(row, 0)->setText(Attribute::toString(champ_endAddrsOffset, _typePage == PAGE_PRST, genValTmp));
     }
-    if (offsetStartLoop && this->_table->getRow(champ_startloopAddrsOffset) > -1)
+    if (offsetStartLoop && _table->getRow(champ_startloopAddrsOffset) > -1)
     {
-        row = this->_table->getRow(champ_startloopAddrsOffset);
-        this->_table->item(row, 0)->setText(getTextValue(T, champ_startloopAddrsOffset, offsetStartLoop));
+        row = _table->getRow(champ_startloopAddrsOffset);
+        genValTmp.shValue = offsetStartLoop;
+        _table->item(row, 0)->setText(Attribute::toString(champ_startloopAddrsOffset, _typePage == PAGE_PRST, genValTmp));
     }
-    if (offsetEndLoop && this->_table->getRow(champ_endloopAddrsOffset) > -1)
+    if (offsetEndLoop && _table->getRow(champ_endloopAddrsOffset) > -1)
     {
-        row = this->_table->getRow(champ_endloopAddrsOffset);
-        this->_table->item(row, 0)->setText(getTextValue(T, champ_endloopAddrsOffset, offsetEndLoop));
+        row = _table->getRow(champ_endloopAddrsOffset);
+        genValTmp.shValue = offsetEndLoop;
+        _table->item(row, 0)->setText(Attribute::toString(champ_endloopAddrsOffset, _typePage == PAGE_PRST, genValTmp));
     }
-    this->_table->setID(id, 0);
+    _table->setID(id, 0);
 }
 
 void PageTable::addDivisions(EltID id)
 {
-    genAmountType genValTmp;
+    AttributeValue genValTmp;
     int row;
-    char T[40];
     EltID id2 = id;
     EltID id3 = id;
     int nbSmplInst = 0;
@@ -191,7 +192,7 @@ void PageTable::addDivisions(EltID id)
         int numCol = 1;
 
         // Détermination de la colonne
-        Champ cElementLie;
+        AttributeType cElementLie;
         if (this->contenant == elementInst)
             cElementLie = champ_sampleID;
         else
@@ -207,10 +208,10 @@ void PageTable::addDivisions(EltID id)
         for (int j = 1; j < nbSmplInst + 1; j++)
         {
             // note et vélocité basses de la colonne et prise en compte du nom de l'élément lié
-            id3.indexElt = _sf2->get(this->_table->getID(j), cElementLie).wValue;
+            id3.indexElt = _sf2->get(_table->getID(j), cElementLie).wValue;
             QString strOrder2 = QString("%1-%2-%3")
-                    .arg(_sf2->get(this->_table->getID(j), champ_keyRange).rValue.byLo, 3, 10, QChar('0'))
-                    .arg(_sf2->get(this->_table->getID(j), champ_velRange).rValue.byLo, 3, 10, QChar('0'))
+                    .arg(_sf2->get(_table->getID(j), champ_keyRange).rValue.byLo, 3, 10, QChar('0'))
+                    .arg(_sf2->get(_table->getID(j), champ_velRange).rValue.byLo, 3, 10, QChar('0'))
                     .arg(_sf2->getQstr(id3, champ_name));
             if (Utils::naturalOrder(strOrder, strOrder2) > 0)
                 numCol++;
@@ -221,69 +222,73 @@ void PageTable::addDivisions(EltID id)
         int offsetEnd = 0;
         int offsetStartLoop = 0;
         int offsetEndLoop = 0;
-        this->_table->addColumn(numCol, qStr);
+        _table->addColumn(numCol, qStr);
         foreach (int champTmp, _sf2->getSiblings(id2))
         {
-            genValTmp = _sf2->get(id, (Champ)champTmp).genValue;
+            genValTmp = _sf2->get(id, (AttributeType)champTmp);
             switch (champTmp)
             {
             case champ_startAddrsOffset:
-                offsetStart += genValTmp.shAmount;
+                offsetStart += genValTmp.shValue;
                 break;
             case champ_startAddrsCoarseOffset:
-                offsetStart += 32768 * genValTmp.shAmount;
+                offsetStart += 32768 * genValTmp.shValue;
                 break;
             case champ_endAddrsOffset:
-                offsetEnd += genValTmp.shAmount;
+                offsetEnd += genValTmp.shValue;
                 break;
             case champ_endAddrsCoarseOffset:
-                offsetEnd += 32768 * genValTmp.shAmount;
+                offsetEnd += 32768 * genValTmp.shValue;
                 break;
             case champ_startloopAddrsOffset:
-                offsetStartLoop += genValTmp.shAmount;
+                offsetStartLoop += genValTmp.shValue;
                 break;
             case champ_startloopAddrsCoarseOffset:
-                offsetStartLoop += 32768 * genValTmp.shAmount;
+                offsetStartLoop += 32768 * genValTmp.shValue;
                 break;
             case champ_endloopAddrsOffset:
-                offsetEndLoop += genValTmp.shAmount;
+                offsetEndLoop += genValTmp.shValue;
                 break;
             case champ_endloopAddrsCoarseOffset:
-                offsetEndLoop += 32768 * genValTmp.shAmount;
+                offsetEndLoop += 32768 * genValTmp.shValue;
                 break;
             default:
-                row = this->_table->getRow(champTmp);
+                row = _table->getRow(champTmp);
                 if (row > -1)
                 {
                     if (champTmp == champ_sampleModes)
-                        this->_table->setLoopModeImage(row, numCol, genValTmp.wAmount);
+                        _table->setLoopModeImage(row, numCol, genValTmp.wValue);
                     else
-                        this->_table->item(row, numCol)->setText(getTextValue(T, champTmp, genValTmp));
+                        _table->item(row, numCol)->setText(Attribute::toString((AttributeType)champTmp, _typePage == PAGE_PRST, genValTmp));
                 }
             }
         }
 
-        if (offsetStart && this->_table->getRow(champ_startAddrsOffset) > -1)
+        if (offsetStart && _table->getRow(champ_startAddrsOffset) > -1)
         {
-            row = this->_table->getRow(champ_startAddrsOffset);
-            this->_table->item(row, numCol)->setText(getTextValue(T, champ_startAddrsOffset, offsetStart));
+            row = _table->getRow(champ_startAddrsOffset);
+            genValTmp.shValue = offsetStart;
+            _table->item(row, numCol)->setText(Attribute::toString(champ_startAddrsOffset, _typePage == PAGE_PRST, genValTmp));
         }
-        if (offsetEnd && this->_table->getRow(champ_endAddrsOffset) > -1)
+        if (offsetEnd && _table->getRow(champ_endAddrsOffset) > -1)
         {
-            row = this->_table->getRow(champ_endAddrsOffset);
-            this->_table->item(row, numCol)->setText(getTextValue(T, champ_endAddrsOffset, offsetEnd));
+            row = _table->getRow(champ_endAddrsOffset);
+            genValTmp.shValue = offsetEnd;
+            _table->item(row, numCol)->setText(Attribute::toString(champ_endAddrsOffset, _typePage == PAGE_PRST, genValTmp));
         }
-        if (offsetStartLoop && this->_table->getRow(champ_startloopAddrsOffset) > -1)
+        if (offsetStartLoop && _table->getRow(champ_startloopAddrsOffset) > -1)
         {
-            row = this->_table->getRow(champ_startloopAddrsOffset);
-            this->_table->item(row, numCol)->setText(getTextValue(T, champ_startloopAddrsOffset, offsetStartLoop));
+            row = _table->getRow(champ_startloopAddrsOffset);
+            genValTmp.shValue = offsetStartLoop;
+            _table->item(row, numCol)->setText(Attribute::toString(champ_startloopAddrsOffset, _typePage == PAGE_PRST, genValTmp));
         }
-        if (offsetEndLoop && this->_table->getRow(champ_endloopAddrsOffset) > -1)
+        if (offsetEndLoop && _table->getRow(champ_endloopAddrsOffset) > -1)
         {
-            row = this->_table->getRow(champ_endloopAddrsOffset);
-            this->_table->item(row, numCol)->setText(getTextValue(T, champ_endloopAddrsOffset, offsetEndLoop));
+            row = _table->getRow(champ_endloopAddrsOffset);
+            genValTmp.shValue = offsetEndLoop;
+            _table->item(row, numCol)->setText(Attribute::toString(champ_endloopAddrsOffset, _typePage == PAGE_PRST, genValTmp));
         }
-        this->_table->setID(id2, numCol);
+        _table->setID(id2, numCol);
     }
 }
 
@@ -298,46 +303,46 @@ void PageTable::formatTable(bool multiGlobal)
         // First column with a hatching pattern
         if (!multiGlobal)
         {
-            for (int j = 0; j < this->_table->rowCount(); j++)
+            for (int j = 0; j < _table->rowCount(); j++)
             {
                 if (j < 6)
-                    this->_table->item(j, 0)->setBackground(brush1);
+                    _table->item(j, 0)->setBackground(brush1);
                 else if (j < 10)
-                    this->_table->item(j, 0)->setBackground(brush2);
+                    _table->item(j, 0)->setBackground(brush2);
                 else if (j < 12)
-                    this->_table->item(j, 0)->setBackground(brush1);
+                    _table->item(j, 0)->setBackground(brush1);
                 else if (j < 20)
-                    this->_table->item(j, 0)->setBackground(brush2);
+                    _table->item(j, 0)->setBackground(brush2);
                 else if (j < 30)
-                    this->_table->item(j, 0)->setBackground(brush1);
+                    _table->item(j, 0)->setBackground(brush1);
                 else if (j < 38)
-                    this->_table->item(j, 0)->setBackground(brush2);
+                    _table->item(j, 0)->setBackground(brush2);
                 else if (j < 43)
-                    this->_table->item(j, 0)->setBackground(brush1);
+                    _table->item(j, 0)->setBackground(brush1);
                 else
-                    this->_table->item(j, 0)->setBackground(brush2);
-                this->_table->item(j, 0)->setTextAlignment(Qt::AlignVCenter | Qt::AlignRight);
+                    _table->item(j, 0)->setBackground(brush2);
+                _table->item(j, 0)->setTextAlignment(Qt::AlignVCenter | Qt::AlignRight);
             }
         }
 
         // Yellow rows
-        for (int i = multiGlobal ? 0 : 1; i < this->_table->columnCount(); i++)
+        for (int i = multiGlobal ? 0 : 1; i < _table->columnCount(); i++)
         {
-            for (int j = 0; j < this->_table->rowCount(); j++)
+            for (int j = 0; j < _table->rowCount(); j++)
             {
                 if (j < 6) {}
                 else if (j < 10)
-                    this->_table->item(j, i)->setBackgroundColor(alternateColor);
+                    _table->item(j, i)->setBackgroundColor(alternateColor);
                 else if (j < 12) {}
                 else if (j < 20)
-                    this->_table->item(j, i)->setBackgroundColor(alternateColor);
+                    _table->item(j, i)->setBackgroundColor(alternateColor);
                 else if (j < 30) {}
                 else if (j < 38)
-                    this->_table->item(j, i)->setBackgroundColor(alternateColor);
+                    _table->item(j, i)->setBackgroundColor(alternateColor);
                 else if (j < 43) {}
                 else
-                    this->_table->item(j, i)->setBackgroundColor(alternateColor);
-                this->_table->item(j, i)->setTextAlignment(Qt::AlignVCenter | Qt::AlignRight);
+                    _table->item(j, i)->setBackgroundColor(alternateColor);
+                _table->item(j, i)->setTextAlignment(Qt::AlignVCenter | Qt::AlignRight);
             }
         }
     }
@@ -346,45 +351,45 @@ void PageTable::formatTable(bool multiGlobal)
         // First column with a hatching pattern
         if (!multiGlobal)
         {
-            for (int j = 0; j < this->_table->rowCount(); j++)
+            for (int j = 0; j < _table->rowCount(); j++)
             {
                 if (j < 5)
-                    this->_table->item(j, 0)->setBackground(brush1);
+                    _table->item(j, 0)->setBackground(brush1);
                 else if (j < 8)
-                    this->_table->item(j, 0)->setBackground(brush2);
+                    _table->item(j, 0)->setBackground(brush2);
                 else if (j < 10)
-                    this->_table->item(j, 0)->setBackground(brush1);
+                    _table->item(j, 0)->setBackground(brush1);
                 else if (j < 18)
-                    this->_table->item(j, 0)->setBackground(brush2);
+                    _table->item(j, 0)->setBackground(brush2);
                 else if (j < 28)
-                    this->_table->item(j, 0)->setBackground(brush1);
+                    _table->item(j, 0)->setBackground(brush1);
                 else if (j < 36)
-                    this->_table->item(j, 0)->setBackground(brush2);
+                    _table->item(j, 0)->setBackground(brush2);
                 else
-                    this->_table->item(j, 0)->setBackground(brush1);
-                this->_table->item(j, 0)->setTextAlignment(Qt::AlignVCenter | Qt::AlignRight);
+                    _table->item(j, 0)->setBackground(brush1);
+                _table->item(j, 0)->setTextAlignment(Qt::AlignVCenter | Qt::AlignRight);
             }
         }
 
         // Yellow rows
-        for (int i = multiGlobal ? 0 : 1; i < this->_table->columnCount(); i++)
+        for (int i = multiGlobal ? 0 : 1; i < _table->columnCount(); i++)
         {
-            for (int j = 0; j < this->_table->rowCount(); j++)
+            for (int j = 0; j < _table->rowCount(); j++)
             {
                 if (j < 5) {}
                 else if (j < 8)
-                    this->_table->item(j, i)->setBackgroundColor(alternateColor);
+                    _table->item(j, i)->setBackgroundColor(alternateColor);
                 else if (j < 10) {}
                 else if (j < 18)
-                    this->_table->item(j, i)->setBackgroundColor(alternateColor);
+                    _table->item(j, i)->setBackgroundColor(alternateColor);
                 else if (j < 28) {}
                 else if (j < 36)
-                    this->_table->item(j, i)->setBackgroundColor(alternateColor);
-                this->_table->item(j, i)->setTextAlignment(Qt::AlignVCenter | Qt::AlignRight);
+                    _table->item(j, i)->setBackgroundColor(alternateColor);
+                _table->item(j, i)->setTextAlignment(Qt::AlignVCenter | Qt::AlignRight);
             }
         }
     }
-    this->_table->hideRow(0);
+    _table->hideRow(0);
 }
 
 void PageTable::afficheRanges(bool justSelection)
@@ -398,7 +403,7 @@ void PageTable::afficheEnvelops(bool justSelection)
         _envelopEditor->display(_currentIds, justSelection);
 }
 
-void PageTable::afficheMod(EltID id, Champ selectedField)
+void PageTable::afficheMod(EltID id, AttributeType selectedField)
 {
     // Try to find a corresponding index
     EltID idMod = id;
@@ -407,12 +412,12 @@ void PageTable::afficheMod(EltID id, Champ selectedField)
     else
         idMod.typeElement = this->lienMod;
     int index = -1;
-    if (this->_table->selectedItems().count() == 1)
+    if (_table->selectedItems().count() == 1)
     {
         foreach (int i, _sf2->getSiblings(idMod))
         {
             idMod.indexMod = i;
-            Champ champ = _sf2->get(idMod, champ_sfModDestOper).sfGenValue;
+            AttributeType champ = _sf2->get(idMod, champ_sfModDestOper).sfGenValue;
             if (champ == champ_startAddrsCoarseOffset)
                 champ = champ_startAddrsOffset;
             else if (champ == champ_endAddrsCoarseOffset)
@@ -450,9 +455,8 @@ void PageTable::afficheMod(EltID id, int selectedIndex)
     }
 
     QString qStr;
-    genAmountType genValTmp;
+    AttributeValue genValTmp;
     SFModulator sfModTmp;
-    char T[60];
     if (id.typeElement == this->contenant)
         id.typeElement = this->contenantMod;
     else
@@ -474,7 +478,8 @@ void PageTable::afficheMod(EltID id, int selectedIndex)
 
         // Ajout d'un modulateur
         this->tableMod->addRow(numLigne, id);
-        this->tableMod->item(numLigne, 5)->setText(getTextValue(T, champ_indexMod, id.indexMod));
+        genValTmp.wValue = id.indexMod;
+        this->tableMod->item(numLigne, 5)->setText(Attribute::toString(champ_indexMod, _typePage == PAGE_PRST, genValTmp));
 
         sfModTmp = _sf2->get(id, champ_sfModSrcOper).sfModValue;
         iVal = 4*sfModTmp.D + 8*sfModTmp.P + sfModTmp.Type + 1;
@@ -486,10 +491,7 @@ void PageTable::afficheMod(EltID id, int selectedIndex)
             // On cherche le lien
             iVal = getAssociatedMod(id);
             if (iVal > -1)
-            {
-                sprintf(T, "%s: #%d", trUtf8("Modulateur").toStdString().c_str(), iVal+1);
-                qStr = T;
-            }
+                qStr = trUtf8("Modulateur") + ": #" + QString::number(iVal + 1);
             else
                 qStr = trUtf8("Lien (invalide)");
         }
@@ -503,21 +505,21 @@ void PageTable::afficheMod(EltID id, int selectedIndex)
         icon = ContextManager::theme()->getColoredSvg(iconName, QSize(iconWidth, iconWidth), replacement);
         this->tableMod->item(numLigne, 7)->setIcon(icon);
         qStr = getIndexName(sfModTmp.Index, sfModTmp.CC);
-        genValTmp = _sf2->get(id, champ_modAmount).genValue;
-        qStr.append(QString::fromUtf8(" × ")).append(getTextValue(T, champ_modAmount, genValTmp));
+        genValTmp = _sf2->get(id, champ_modAmount);
+        qStr.append(QString::fromUtf8(" × ")).append(Attribute::toString(champ_modAmount, _typePage == PAGE_PRST, genValTmp));
         this->tableMod->item(numLigne, 7)->setText(qStr);
-        this->spinAmount->setValue(genValTmp.shAmount);
-        genValTmp = _sf2->get(id, champ_sfModDestOper).genValue;
-        if (genValTmp.wAmount > 99)
+        this->spinAmount->setValue(genValTmp.shValue);
+        genValTmp = _sf2->get(id, champ_sfModDestOper);
+        if (genValTmp.wValue > 99)
         {
             // lien vers modulateur
-            qStr = trUtf8("Modulateur") + ": #" + QString::number(genValTmp.wAmount - 32767);
+            qStr = trUtf8("Modulateur") + ": #" + QString::number(genValTmp.wValue - 32767);
         }
         else
-            qStr = getGenName(genValTmp.wAmount);
+            qStr = getGenName(genValTmp.wValue);
 
-        genValTmp = _sf2->get(id, champ_sfModTransOper).genValue;
-        qStr.append(getTextValue(T, champ_sfModTransOper, genValTmp));
+        genValTmp = _sf2->get(id, champ_sfModTransOper);
+        qStr.append(Attribute::toString(champ_sfModTransOper, _typePage == PAGE_PRST, genValTmp));
         this->tableMod->item(numLigne, 8)->setText(qStr);
         numLigne++;
     }
@@ -637,7 +639,7 @@ void PageTable::afficheEditMod()
             idParent.typeElement = this->contenant;
         else if (idParent.typeElement == this->lienMod)
             idParent.typeElement = this->lien;
-        this->_table->selectCell(idParent, (Champ)_sf2->get(id, champ_sfModDestOper).wValue);
+        _table->selectCell(idParent, (AttributeType)_sf2->get(id, champ_sfModDestOper).wValue);
     }
     else
     {
@@ -667,51 +669,51 @@ void PageTable::updateId(EltID id)
     if (id.typeElement == elementSf2)
     {
         // décrémentation sf2 ?
-        for (int i = 0; i < this->_table->columnCount(); i++)
+        for (int i = 0; i < _table->columnCount(); i++)
         {
-            id2 = this->_table->getID(i);
+            id2 = _table->getID(i);
             if (id2.indexSf2 > id.indexSf2)
             {
                 id2.indexSf2--;
-                this->_table->setID(id2, i);
+                _table->setID(id2, i);
             }
         }
     }
     else if (id.typeElement == elementInst || id.typeElement == elementPrst)
     {
         // décrémentation elt ?
-        for (int i = 0; i < this->_table->columnCount(); i++)
+        for (int i = 0; i < _table->columnCount(); i++)
         {
-            id2 = this->_table->getID(i);
+            id2 = _table->getID(i);
             if (id2.indexElt > id.indexElt && id2.indexSf2 == id.indexSf2)
             {
                 id2.indexElt--;
-                this->_table->setID(id2, i);
+                _table->setID(id2, i);
             }
         }
     }
     else if (id.typeElement == elementInstSmpl || id.typeElement == elementPrstInst)
     {
         // décrémentation elt2 ?
-        for (int i = 0; i < this->_table->columnCount(); i++)
+        for (int i = 0; i < _table->columnCount(); i++)
         {
-            id2 = this->_table->getID(i);
+            id2 = _table->getID(i);
             if (id2.indexElt2 > id.indexElt2  && id2.indexSf2 == id.indexSf2
                     && id2.indexElt == id.indexElt)
             {
                 id2.indexElt2--;
-                this->_table->setID(id2, i);
+                _table->setID(id2, i);
             }
         }
     }
 
     // Affichage mod
     int currentRow = this->tableMod->currentRow();
-    this->afficheMod(this->_table->getID(0));
+    this->afficheMod(_table->getID(0));
     this->tableMod->selectRow(currentRow);
 }
 
-void PageTable::resetChamp(int colonne, Champ champ1, Champ champ2)
+void PageTable::resetChamp(int colonne, AttributeType champ1, AttributeType champ2)
 {
     EltID id = _table->getID(colonne);
     bool ok = _sf2->isSet(id, champ1);
@@ -728,47 +730,41 @@ void PageTable::resetChamp(int colonne, Champ champ1, Champ champ2)
     }
 }
 
-void PageTable::setOffset(int ligne, int colonne, Champ champ1, Champ champ2)
+void PageTable::setOffset(int ligne, int colonne, AttributeType champ1, AttributeType champ2)
 {
-    EltID id = this->_table->getID(colonne);
+    EltID id = _table->getID(colonne);
     bool ok;
-    char T[20];
-    QString texte = this->_table->item(ligne, colonne)->text().left(9);
-    genAmountType genAmount = getValue(texte, champ1, ok);
+    QString texte = _table->item(ligne, colonne)->text().left(9);
+    AttributeValue genAmount = Attribute::fromString(champ1, _typePage == PAGE_PRST, texte, ok);
     if (ok)
     {
         // Enregistrement de la nouvelle valeur
-        genAmountType genAmount2 = getValue(texte, champ2, ok);
-        int iVal = limit(32768 * genAmount2.shAmount + genAmount.shAmount, champ1, id);
-        genAmount2.shAmount = iVal / 32768;
-        genAmount.shAmount = iVal % 32768;
-        if (genAmount.shAmount != _sf2->get(id, champ1).shValue ||
-                genAmount2.shAmount != _sf2->get(id, champ2).shValue)
+        AttributeValue genAmount2 = Attribute::fromString(champ2, _typePage == PAGE_PRST, texte, ok);
+        int iVal = limit(32768 * genAmount2.shValue + genAmount.shValue, champ1, id);
+        genAmount2.shValue = iVal / 32768;
+        genAmount.shValue = iVal % 32768;
+        if (genAmount.shValue != _sf2->get(id, champ1).shValue ||
+                genAmount2.shValue != _sf2->get(id, champ2).shValue)
         {
             // Modification du sf2
-            id = this->_table->getID(colonne);
-            Valeur value;
-            value.genValue = genAmount;
-            _sf2->set(id, champ1, value);
-            value.genValue = genAmount2;
-            _sf2->set(id, champ2, value);
+            id = _table->getID(colonne);
+            _sf2->set(id, champ1, genAmount);
+            _sf2->set(id, champ2, genAmount2);
         }
         // Mise à jour de la valeur dans la cellule
-        int offset = _sf2->get(id, champ1).genValue.shAmount +
-                32768 * _sf2->get(id, champ2).genValue.shAmount;
-        this->_table->item(ligne, colonne)->setText(getTextValue(T, champ1, offset));
+        genAmount.shValue = _sf2->get(id, champ1).shValue + 32768 * _sf2->get(id, champ2).shValue;
+        _table->item(ligne, colonne)->setText(Attribute::toString(champ1, _typePage == PAGE_PRST, genAmount));
     }
     else
     {
         // Restauration valeur précédente
         if (_sf2->isSet(id, champ1) || _sf2->isSet(id, champ2))
         {
-            int offset = _sf2->get(id, champ1).genValue.shAmount +
-                    32768 * _sf2->get(id, champ2).genValue.shAmount;
-            this->_table->item(ligne, colonne)->setText(getTextValue(T, champ1, offset));
+            genAmount.shValue = _sf2->get(id, champ1).shValue + 32768 * _sf2->get(id, champ2).shValue;
+            _table->item(ligne, colonne)->setText(Attribute::toString(champ1, _typePage == PAGE_PRST, genAmount));
         }
         else
-            this->_table->item(ligne, colonne)->setText("");
+            _table->item(ligne, colonne)->setText("");
     }
 }
 
@@ -791,11 +787,11 @@ void PageTable::set(int ligne, int colonne, bool allowPropagation)
         return;
 
     // Modification d'un élément du tableau
-    Champ champ = this->_table->getChamp(ligne);
+    AttributeType champ = _table->getChamp(ligne);
     if (champ == champ_unknown)
         return;
 
-    EltID id = this->_table->getID(colonne);
+    EltID id = _table->getID(colonne);
     if (allowPropagation && id.typeElement == elementInstSmpl && champ != champ_pan &&
             ContextManager::configuration()->getValue(ConfManager::SECTION_NONE, "stereo_modification", false).toBool())
     {
@@ -817,7 +813,7 @@ void PageTable::set(int ligne, int colonne, bool allowPropagation)
             EltID idTmp = id;
             for (int i = 1; i < _table->columnCount(); i++)
             {
-                idTmp = this->_table->getID(i);
+                idTmp = _table->getID(i);
                 if (i != colonne)
                 {
                     rangesType keyRange2 = _sf2->get(idTmp, champ_keyRange).rValue;
@@ -864,17 +860,15 @@ void PageTable::set(int ligne, int colonne, bool allowPropagation)
             resetChamp(colonne, champ, champ_unknown);
         else
         {
-            EltID id = this->_table->getID(colonne);
-            genAmountType genAmount;
-            genAmount.wAmount = _table->item(ligne, colonne)->data(Qt::UserRole).toInt();
+            EltID id = _table->getID(colonne);
+            AttributeValue genAmount;
+            genAmount.wValue = _table->item(ligne, colonne)->data(Qt::UserRole).toInt();
 
             // Modification champ
-            if (genAmount.wAmount != _sf2->get(id, champ).wValue || !_sf2->isSet(id, champ))
+            if (genAmount.wValue != _sf2->get(id, champ).wValue || !_sf2->isSet(id, champ))
             {
                 // Modification du sf2
-                Valeur value;
-                value.genValue = genAmount;
-                _sf2->set(id, champ, value);
+                _sf2->set(id, champ, genAmount);
             }
         }
     }
@@ -919,30 +913,27 @@ void PageTable::set(int ligne, int colonne, bool allowPropagation)
                 setOffset(ligne, colonne, champ_endloopAddrsOffset, champ_endloopAddrsCoarseOffset);
                 break;
             default:{
-                QString texte = this->_table->item(ligne, colonne)->text().left(9);
+                QString texte = _table->item(ligne, colonne)->text().left(9);
                 bool ok;
-                char T[20];
-                EltID id = this->_table->getID(colonne);
-                genAmountType genAmount = getValue(texte, champ, ok);
+                EltID id = _table->getID(colonne);
+                AttributeValue genAmount = Attribute::fromString(champ, _typePage == PAGE_PRST, texte, ok);
                 if (ok)
                 {
                     // Modification champ
-                    if (genAmount.wAmount != _sf2->get(id, champ).wValue || !_sf2->isSet(id, champ))
+                    if (genAmount.wValue != _sf2->get(id, champ).wValue || !_sf2->isSet(id, champ))
                     {
                         // Modification du sf2
-                        Valeur value;
-                        value.genValue = genAmount;
-                        _sf2->set(id, champ, value);
+                        _sf2->set(id, champ, genAmount);
                     }
                     // Mise à jour de la valeur dans la cellule
-                    _table->item(ligne, colonne)->setText(getTextValue(T, champ, genAmount));
+                    _table->item(ligne, colonne)->setText(Attribute::toString(champ, _typePage == PAGE_PRST, genAmount));
                 }
                 else
                 {
                     // Restauration valeur précédente
                     if (_sf2->isSet(id, champ))
-                        this->_table->item(ligne, colonne)->setText(getTextValue(T, champ, _sf2->get(id, champ).genValue));
-                    else this->_table->item(ligne, colonne)->setText("");
+                        _table->item(ligne, colonne)->setText(Attribute::toString(champ, _typePage == PAGE_PRST, _sf2->get(id, champ)));
+                    else _table->item(ligne, colonne)->setText("");
                 }
             }
             }
@@ -951,7 +942,7 @@ void PageTable::set(int ligne, int colonne, bool allowPropagation)
     }
 
     // Mise à jour partie mod (car entre 2 des mods peuvent être définitivement détruits, et les index peuvent être mis à jour)
-    id = this->_table->getID(colonne);
+    id = _table->getID(colonne);
     this->afficheMod(id);
 
     if (champ == champ_overridingRootKey || champ == champ_keyRange)
@@ -970,7 +961,7 @@ void PageTable::setAmount()
         id.typeElement = this->contenant;
     else
         id.typeElement = this->lien;
-    Valeur val;
+    AttributeValue val;
     val.shValue = this->spinAmount->value();
     if (id2.typeElement != elementUnknown)
     {
@@ -1009,7 +1000,7 @@ void PageTable::setAbs()
         id.typeElement = this->contenant;
     else
         id.typeElement = this->lien;
-    Valeur val;
+    AttributeValue val;
     if (this->checkAbs->isChecked())
         val.wValue = 2;
     else
@@ -1051,7 +1042,7 @@ void PageTable::setSourceType(int row, int column)
         id.typeElement = this->contenant;
     else
         id.typeElement = this->lien;
-    Valeur val;
+    AttributeValue val;
     int D = column % 2;
     int P = column / 2;
     int type = row;
@@ -1096,7 +1087,7 @@ void PageTable::setSourceAmountType(int row, int column)
         id.typeElement = this->contenant;
     else
         id.typeElement = this->lien;
-    Valeur val;
+    AttributeValue val;
     int D = column % 2;
     int P = column / 2;
     int type = row;
@@ -1145,12 +1136,12 @@ void PageTable::setDest(int index)
         id.typeElement = this->lien;
     if (index < 32768)
         index = getDestNumber(index);
-    Valeur val;
+    AttributeValue val;
     if (id2.typeElement != elementUnknown)
     {
         // Comparaison avec valeur précédente
         val.sfGenValue = _sf2->get(id2, champ_sfModDestOper).sfGenValue;
-        if (val.sfGenValue != (Champ)index)
+        if (val.sfGenValue != (AttributeType)index)
         {
             // Reprise des identificateurs si modification
             id = this->tableMod->getID();
@@ -1166,7 +1157,7 @@ void PageTable::setDest(int index)
                 id3.indexMod = val.wValue - 32768;
                 if (_sf2->getSiblings(id2).contains(id3.indexMod))
                 {
-                    Valeur val2;
+                    AttributeValue val2;
                     val2.sfModValue = _sf2->get(id3, champ_sfModSrcOper).sfModValue;
                     val2.sfModValue.CC = 0;
                     val2.sfModValue.Index = 0;
@@ -1180,14 +1171,14 @@ void PageTable::setDest(int index)
                 EltID id3 = id2;
                 id3.indexMod = index - 32768;
                 // Destruction des précédents liens vers le nouvel élément
-                Valeur val2;
+                AttributeValue val2;
                 EltID id4 = id2;
                 do
                 {
                     id4.indexMod = this->getAssociatedMod(id3);
                     if (id4.indexMod != -1)
                     {
-                        val2.sfGenValue = (Champ)0;
+                        val2.sfGenValue = (AttributeType)0;
                         _sf2->set(id4, champ_sfModDestOper, val2);
                     }
                 } while (id4.indexMod != -1);
@@ -1196,7 +1187,7 @@ void PageTable::setDest(int index)
                 val2.sfModValue.CC = 0;
                 _sf2->set(id3, champ_sfModSrcOper, val2);
             }
-            val.sfGenValue = (Champ)index;
+            val.sfGenValue = (AttributeType)index;
             _sf2->set(id2, champ_sfModDestOper, val);
             if (this->tableMod->selectedItems().count())
             {
@@ -1225,7 +1216,7 @@ void PageTable::setSource(int index)
     bool CC;
     if (index < 32768) index = getSrcNumber(index, CC);
     else CC = 0;
-    Valeur val;
+    AttributeValue val;
     if (id2.typeElement != elementUnknown)
     {
         // Comparaison avec valeur précédente
@@ -1247,7 +1238,7 @@ void PageTable::setSource(int index)
                 {
                     // On casse le lien
                     EltID id3 = id2;
-                    Valeur val2;
+                    AttributeValue val2;
                     do
                     {
                         id3.indexMod = this->getAssociatedMod(id2);
@@ -1288,7 +1279,7 @@ void PageTable::setSource(int index)
                 EltID id3 = id2;
                 id3.indexMod = index - 32768;
                 // sender était-il lié à un autre mod ?
-                Valeur val2;
+                AttributeValue val2;
                 val2.wValue = _sf2->get(id3, champ_sfModDestOper).wValue;
                 if (val2.wValue >= 32768)
                 {
@@ -1326,7 +1317,7 @@ void PageTable::setSource(int index)
                 if (id3.indexMod != index - 32768)
                 {
                     // On enlève les liens précédents
-                    Valeur val2;
+                    AttributeValue val2;
                     do
                     {
                         id3.indexMod = this->getAssociatedMod(id2);
@@ -1387,7 +1378,7 @@ void PageTable::setSource2(int index)
         id.typeElement = this->lien;
     bool CC;
     index = getSrcNumber(index, CC);
-    Valeur val;
+    AttributeValue val;
     if (id2.typeElement != elementUnknown)
     {
         // Comparaison avec valeur précédente
@@ -1421,15 +1412,15 @@ void PageTable::setSource2(int index)
 
 void PageTable::reselect()
 {
-    this->_table->clearSelection();
-    this->_table->setSelectionMode(QAbstractItemView::MultiSelection);
+    _table->clearSelection();
+    _table->setSelectionMode(QAbstractItemView::MultiSelection);
     QList<EltID> listID = _currentIds;
-    this->_table->setRowHidden(0, false); // Selection will be on a visible row
+    _table->setRowHidden(0, false); // Selection will be on a visible row
     foreach (EltID id, listID)
         this->select(id);
-    this->_table->setSelectionMode(QAbstractItemView::ExtendedSelection);
+    _table->setSelectionMode(QAbstractItemView::ExtendedSelection);
     customizeKeyboard();
-    this->_table->setRowHidden(0, true); // It's now hidden again
+    _table->setRowHidden(0, true); // It's now hidden again
 }
 
 void PageTable::select(EltID id)
@@ -1438,20 +1429,20 @@ void PageTable::select(EltID id)
 
     EltID id2;
     int max;
-    for (int i = 0; i < this->_table->columnCount(); i++)
+    for (int i = 0; i < _table->columnCount(); i++)
     {
-        id2 = this->_table->getID(i);
+        id2 = _table->getID(i);
         if (id.typeElement == id2.typeElement && id.indexSf2 == id2.indexSf2 && id.indexElt == id2.indexElt &&
                 (id.indexElt2 == id2.indexElt2 || id.typeElement == elementInst || id.typeElement == elementPrst))
         {
             _table->blockSignals(true);
-            this->_table->item(0, i)->setSelected(true);
+            _table->item(0, i)->setSelected(true);
             _table->blockSignals(false);
-            max = this->_table->horizontalScrollBar()->maximum();
-            if (max / this->_table->columnCount() > 62)
-                this->_table->horizontalScrollBar()->setValue((max*(i-1)) / this->_table->columnCount());
+            max = _table->horizontalScrollBar()->maximum();
+            if (max / _table->columnCount() > 62)
+                _table->horizontalScrollBar()->setValue((max*(i-1)) / _table->columnCount());
             else
-                this->_table->scrollToItem(this->_table->item(7, i), QAbstractItemView::PositionAtCenter);
+                _table->scrollToItem(_table->item(7, i), QAbstractItemView::PositionAtCenter);
         }
     }
     _preparingPage = false;
@@ -1727,7 +1718,7 @@ void PageTable::supprimerMod()
     {
         // Liens vers le mod ?
         int iVal = -1;
-        Valeur val;
+        AttributeValue val;
         EltID id2 = id;
         do
         {
@@ -1735,7 +1726,7 @@ void PageTable::supprimerMod()
             if (iVal != -1)
             {
                 // Suppression du lien
-                val.sfGenValue = (Champ)0;
+                val.sfGenValue = (AttributeType)0;
                 id2.indexMod = iVal;
                 _sf2->set(id2, champ_sfModDestOper, val);
             }
@@ -1776,8 +1767,8 @@ void PageTable::nouveauMod()
     id.indexMod = _sf2->add(id);
 
     // initialisation
-    Valeur val;
-    val.sfGenValue = (Champ)0;
+    AttributeValue val;
+    val.sfGenValue = (AttributeType)0;
     val.wValue = 0;
     _sf2->set(id, champ_modAmount, val);
     _sf2->set(id, champ_sfModTransOper, val);
@@ -1789,7 +1780,7 @@ void PageTable::nouveauMod()
     _sf2->set(id, champ_sfModSrcOper, val);
     _sf2->set(id, champ_sfModAmtSrcOper, val);
     if (id.typeElement == elementPrstMod || id.typeElement == elementPrstInstMod)
-        val.sfGenValue = (Champ)52;
+        val.sfGenValue = (AttributeType)52;
     _sf2->set(id, champ_sfModDestOper, val);
     this->afficheMod(_currentIds[0], id.indexMod);
     _sf2->endEditing(getEditingSource());
@@ -1861,7 +1852,7 @@ QList<PageTable::Modulator> PageTable::getModList(EltID id)
             // Les liens cassés disparaissent
             int link = mod.modDestOper - 32768;
             if (listIndex.contains(link))
-                mod.modDestOper = (Champ)(32768 + listIndex.indexOf(link));
+                mod.modDestOper = (AttributeType)(32768 + listIndex.indexOf(link));
             else
                 mod.modDestOper = champ_fineTune;
         }
@@ -1928,7 +1919,7 @@ void PageTable::pasteMod(EltID id, QList<Modulator> modulators)
     if (id.typeElement == elementPrstMod || id.typeElement == elementPrstInstMod)
     {
         // Vérification que toutes les destinations sont possibles
-        Champ champTmp;
+        AttributeType champTmp;
         for (int i = 0; i < modulators.size(); i++)
         {
             champTmp = modulators[i].modDestOper;
@@ -1970,12 +1961,12 @@ void PageTable::pasteMod(EltID id, QList<Modulator> modulators)
         Modulator mod = modulators.at(i);
         mod.index += offsetIndex;
         if ((int)mod.modDestOper >= 32768)
-            mod.modDestOper = (Champ)(mod.modDestOper + offsetIndex);
+            mod.modDestOper = (AttributeType)(mod.modDestOper + offsetIndex);
         modulators[i] = mod;
     }
 
     // Copie des configurations des mods sauvegardés
-    Valeur valTmp;
+    AttributeValue valTmp;
     Modulator modTmp;
     for (int i = 0; i < modulators.size(); i++)
     {
@@ -2259,7 +2250,7 @@ quint16 PageTable::getSrcIndex(quint16 wVal, bool bVal)
     return wRet;
 }
 
-int PageTable::limit(int iVal, Champ champ, EltID id)
+int PageTable::limit(int iVal, AttributeType champ, EltID id)
 {
     int ret = iVal;
     EltID id2 = id;
@@ -2446,101 +2437,6 @@ QList<EltID> PageTable::getEltIds(bool &error, bool allWithDivisions, bool allDi
     return result;
 }
 
-void PageTable::paramGlobal()
-{
-    bool error;
-    QList<EltID> ids = this->getEltIds(error, true, true);
-    if (ids.isEmpty() || error)
-        return;
-
-    DialogParamGlobal * dialogParam = new DialogParamGlobal(_typePage == PAGE_PRST, this);
-    dialogParam->setAttribute(Qt::WA_DeleteOnClose, true);
-    this->connect(dialogParam, SIGNAL(accepted(QVector<double>,int,int,int,int)),
-                  SLOT(paramGlobal(QVector<double>,int,int,int,int)));
-    dialogParam->show();
-}
-
-void PageTable::paramGlobal(QVector<double> dValues, int typeModif, int champ, int velMin, int velMax)
-{
-    bool error;
-    QList<EltID> ids = this->getEltIds(error, true, true);
-    if (error)
-        return;
-
-    if (velMin > velMax)
-    {
-        int tmp = velMin;
-        velMin = velMax;
-        velMax = tmp;
-    }
-
-    // Modification de tous les éléments
-    foreach (EltID id, ids)
-    {
-        // Pos min et max sur le clavier
-        if (id.typeElement == elementInst || id.typeElement == elementInstSmpl)
-            id.typeElement = elementInstSmpl;
-        else
-            id.typeElement = elementPrstInst;
-
-        // Modification des valeurs pour chaque élément associé à id
-        double amount;
-        int pos;
-        char T[30];
-        bool ok;
-        Valeur value;
-        foreach (int i, _sf2->getSiblings(id))
-        {
-            id.indexElt2 = i;
-            int velMin2 = 0;
-            int velMax2 = 127;
-            if (_sf2->isSet(id, champ_velRange))
-            {
-                velMin2 = _sf2->get(id, champ_velRange).rValue.byLo;
-                velMax2 = _sf2->get(id, champ_velRange).rValue.byHi;
-            }
-            if (velMin2 > velMax2)
-            {
-                int tmp = velMin2;
-                velMin2 = velMax2;
-                velMax2 = tmp;
-            }
-            if (velMin2 >= velMin && velMax2 <= velMax)
-            {
-                amount = QString(getTextValue(T, (Champ)champ, _sf2->get(id, (Champ)champ).genValue))
-                        .replace(",", ".").toDouble();
-
-                // Calcul de la modification
-                pos = (double)(_sf2->get(id, champ_keyRange).rValue.byLo +
-                               _sf2->get(id, champ_keyRange).rValue.byHi) / 2 * dValues.size() / 127. + 0.5;
-                if (pos < 0)
-                    pos = 0;
-                else if (pos >= dValues.size())
-                    pos = dValues.size() - 1;
-
-                // Application de la modification
-                switch (typeModif)
-                {
-                case 0: // Ajout
-                    amount += dValues.at(pos);
-                    break;
-                case 1: // Multiplication
-                    amount *= dValues.at(pos);
-                    break;
-                case 2: // Remplacement
-                    amount = dValues.at(pos);
-                    break;
-                }
-                value.genValue = getValue(QString::number(amount), (Champ)champ, ok);
-                _sf2->set(id, (Champ)champ, value);
-            }
-        }
-    }
-
-    // Actualisation
-    _sf2->endEditing(getEditingSource());
-}
-
 void PageTable::duplication()
 {
     bool error;
@@ -2609,9 +2505,9 @@ void PageTable::spatialisation()
             id.indexElt2 = i;
             if (_sf2->isSet(id, champ_keyRange))
             {
-                genAmountType amount = _sf2->get(id, champ_keyRange).genValue;
-                if (amount.ranges.byLo < noteMin) noteMin = amount.ranges.byLo;
-                if (amount.ranges.byHi > noteMax) noteMax = amount.ranges.byHi;
+                AttributeValue amount = _sf2->get(id, champ_keyRange);
+                if (amount.rValue.byLo < noteMin) noteMin = amount.rValue.byLo;
+                if (amount.rValue.byHi > noteMax) noteMax = amount.rValue.byHi;
             }
         }
     }
@@ -2650,9 +2546,9 @@ void PageTable::spatialisation(QMap<int, double> mapPan, EltID id)
 
     // Liste des éléments liés avec leur lien (stéréo) le cas échéant
     QList<EltID> list1;
-    QList<genAmountType> listRange;
+    QList<AttributeValue> listRange;
     QList<EltID> list2;
-    genAmountType amount;
+    AttributeValue amount;
     bool found;
     int pos;
     int noteMin = 128;
@@ -2665,14 +2561,14 @@ void PageTable::spatialisation(QMap<int, double> mapPan, EltID id)
     {
         id.indexElt2 = i;
         if (_sf2->isSet(id, champ_keyRange))
-            amount = _sf2->get(id, champ_keyRange).genValue;
+            amount = _sf2->get(id, champ_keyRange);
         else
         {
-            amount.ranges.byLo = 0;
-            amount.ranges.byHi = 127;
+            amount.rValue.byLo = 0;
+            amount.rValue.byHi = 127;
         }
-        if (amount.ranges.byLo < noteMin) noteMin = amount.ranges.byLo;
-        if (amount.ranges.byHi > noteMax) noteMax = amount.ranges.byHi;
+        if (amount.rValue.byLo < noteMin) noteMin = amount.rValue.byLo;
+        if (amount.rValue.byHi > noteMax) noteMax = amount.rValue.byHi;
 
         // Recherche d'une note liée ayant la même étendue sur le clavier
         found = false;
@@ -2681,8 +2577,8 @@ void PageTable::spatialisation(QMap<int, double> mapPan, EltID id)
             pos = 0;
             while (pos < list1.size() && !found)
             {
-                if (amount.ranges.byHi == listRange.at(pos).ranges.byHi &&
-                        amount.ranges.byLo == listRange.at(pos).ranges.byLo &&
+                if (amount.rValue.byHi == listRange.at(pos).rValue.byHi &&
+                        amount.rValue.byLo == listRange.at(pos).rValue.byLo &&
                         list2.at(pos).indexElt2 == -1)
                 {
                     // Les samples sont-ils liés ?
@@ -2727,17 +2623,17 @@ void PageTable::spatialisation(QMap<int, double> mapPan, EltID id)
     int note = 64;
     EltID id2, id3;
     int sampleG;
-    Valeur val;
+    AttributeValue val;
     for (int i = 0; i < list1.size(); i++)
     {
-        note = (listRange.at(i).ranges.byLo + listRange.at(i).ranges.byHi) / 2;
+        note = (listRange.at(i).rValue.byLo + listRange.at(i).rValue.byHi) / 2;
         pan = mapPan.value(note);
 
         // Lien ?
         if (list2.at(i).indexElt2 == -1)
         {
             // pas de lien
-            val.genValue.shAmount = 1000 * pan - 500;
+            val.shValue = 1000 * pan - 500;
             _sf2->set(list1.at(i), champ_pan, val);
         }
         else
@@ -2784,19 +2680,19 @@ void PageTable::spatialisation(QMap<int, double> mapPan, EltID id)
             if (pan < 0.5)
             {
                 // Gauche
-                val.genValue.shAmount = -500;
+                val.shValue = -500;
                 _sf2->set(list1.at(i), champ_pan, val);
                 // Droite
-                val.genValue.shAmount = 2000 * pan - 500;
+                val.shValue = 2000 * pan - 500;
                 _sf2->set(list2.at(i), champ_pan, val);
             }
             else
             {
                 // Gauche
-                val.genValue.shAmount = 2000 * pan - 1500;
+                val.shValue = 2000 * pan - 1500;
                 _sf2->set(list1.at(i), champ_pan, val);
                 // Droite
-                val.genValue.shAmount = 500;
+                val.shValue = 500;
                 _sf2->set(list2.at(i), champ_pan, val);
             }
         }
@@ -3110,12 +3006,12 @@ void PageTable::onOpenElement(EltID id)
 
 void PageTable::displayModInTable()
 {
-    this->_table->resetModDisplay();
+    _table->resetModDisplay();
 
     // Mod for the global division
-    for (int i = 0; i < this->_table->columnCount(); i++)
+    for (int i = 0; i < _table->columnCount(); i++)
     {
-        EltID id = this->_table->getID(i);
+        EltID id = _table->getID(i);
         if (_sf2->isValid(id))
         {
             if (id.typeElement == this->contenant)
@@ -3130,7 +3026,7 @@ void PageTable::displayModInTable()
                 foreach (int j, modCount)
                 {
                     id.indexMod = j;
-                    Champ champ = _sf2->get(id, champ_sfModDestOper).sfGenValue;
+                    AttributeType champ = _sf2->get(id, champ_sfModDestOper).sfGenValue;
                     if (champ == champ_startAddrsCoarseOffset)
                         champ = champ_startAddrsOffset;
                     else if (champ == champ_endAddrsCoarseOffset)
@@ -3139,9 +3035,9 @@ void PageTable::displayModInTable()
                         champ = champ_startloopAddrsOffset;
                     else if (champ == champ_endloopAddrsCoarseOffset)
                         champ = champ_endloopAddrsOffset;
-                    rows << this->_table->getRow(champ);
+                    rows << _table->getRow(champ);
                 }
-                this->_table->updateModDisplay(i, rows);
+                _table->updateModDisplay(i, rows);
             }
         }
     }

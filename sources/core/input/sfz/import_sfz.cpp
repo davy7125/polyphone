@@ -172,7 +172,7 @@ void ImportSfz::import(QString fileName, int * numSf2, bool &success, QString &e
         idPrst.typeElement = elementPrst;
         idPrst.indexElt = _sf2->add(idPrst);
         _sf2->set(idPrst, champ_name, nom);
-        Valeur val;
+        AttributeValue val;
         val.wValue = numBank;
         _sf2->set(idPrst, champ_wBank, val);
         val.wValue = numPreset;
@@ -586,7 +586,7 @@ void EnsembleGroupes::decode(SoundfontManager * sf2, EltID idInst, QString pathS
     idInstSmpl.typeElement = elementInstSmpl;
     EltID idSmpl = idInst;
     idSmpl.typeElement = elementSmpl;
-    Valeur val;
+    AttributeValue val;
     for (int i = 0; i < _listeDivisions.size(); i++)
     {
         // Création des samples si besoin et récupération de leur index
@@ -755,7 +755,7 @@ QList<int> GroupeParametres::getSampleIndex(SoundfontManager *sf2, EltID idElt, 
     }
 
     // Création d'un nouveau sample
-    Valeur val;
+    AttributeValue val;
     for (int numChannel = 0; numChannel < nChannels; numChannel++)
     {
         idElt.indexElt = sf2->add(idElt);
@@ -925,7 +925,7 @@ QStringList GroupeParametres::getFullPath(QString base, QStringList directories)
 
 void GroupeParametres::decode(SoundfontManager * sf2, EltID idElt) const
 {
-    Valeur val;
+    AttributeValue val;
     double dTmp;
     for (int i = 0; i < _listeParam.size(); i++)
     {
@@ -1359,10 +1359,10 @@ void GroupeParametres::getKeynumValues(double &baseValue, int &keynum,
     }
 }
 
-void GroupeParametres::addSeconds(double value, Champ champ, SoundfontManager * sf2, EltID id)
+void GroupeParametres::addSeconds(double value, AttributeType champ, SoundfontManager * sf2, EltID id)
 {
     double dTmp;
-    Valeur val;
+    AttributeValue val;
     if (sf2->isSet(id, champ))
         dTmp = d1200e2(sf2->get(id, champ).shValue);
     else

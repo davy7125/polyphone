@@ -25,7 +25,7 @@ void ToolChangeAttenuation::process(SoundfontManager * sm, EltID id, AbstractToo
         return;
 
     // Apply the offset on the element
-    Valeur val;
+    AttributeValue val;
     int defaultAttenuation = sm->isSet(id, champ_initialAttenuation) ? sm->get(id, champ_initialAttenuation).shValue : 0;
     val.shValue = limitOffset(defaultAttenuation + offset);
     sm->set(id, champ_initialAttenuation, val);

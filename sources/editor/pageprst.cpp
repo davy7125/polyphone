@@ -238,9 +238,9 @@ int TableWidgetPrst::getRow(quint16 champ)
     }
     return row + 1;
 }
-Champ TableWidgetPrst::getChamp(int row)
+AttributeType TableWidgetPrst::getChamp(int row)
 {
-    Champ champ = champ_unknown;
+    AttributeType champ = champ_unknown;
     switch (row - 1)
     {
     case 0: champ = champ_keyRange; break;
@@ -365,7 +365,7 @@ void PagePrst::setBank()
             ui->spinBank->setValue(initVal);
 
             // Save the new value
-            Valeur val;
+            AttributeValue val;
             val.wValue = initVal;
             _sf2->set(id, champ_wBank, val);
             _sf2->endEditing(getEditingSource());
@@ -400,7 +400,7 @@ void PagePrst::setPreset()
             ui->spinPreset->setValue(initVal);
 
             // Save the new value
-            Valeur val;
+            AttributeValue val;
             val.wValue = initVal;
             _sf2->set(id, champ_wPreset, val);
             _sf2->endEditing(getEditingSource());

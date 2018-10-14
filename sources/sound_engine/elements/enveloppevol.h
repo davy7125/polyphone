@@ -26,7 +26,6 @@
 #define ENVELOPPEVOL_H
 
 #include "voiceparam.h"
-#include "sf2_types.h"
 
 class EnveloppeVol
 {

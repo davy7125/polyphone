@@ -25,7 +25,7 @@
 #ifndef VOICEPARAM_H
 #define VOICEPARAM_H
 
-#include "sf2_types.h"
+#include "basetypes.h"
 #include "soundfontmanager.h"
 
 // Classe regroupant la liste des paramètres de lecture

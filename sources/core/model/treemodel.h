@@ -2,7 +2,7 @@
 #define TREEMODEL_H
 
 #include <QAbstractItemModel>
-#include "sf2_types.h"
+#include "basetypes.h"
 class TreeItem;
 
 class TreeModel: public QAbstractItemModel

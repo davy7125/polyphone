@@ -28,7 +28,7 @@
 #include <QApplication>
 #include <QFileOpenEvent>
 #include <QStringList>
-#include "sf2_types.h"
+#include "basetypes.h"
 
 class MacApplication: public QApplication
 {

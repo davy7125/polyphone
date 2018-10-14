@@ -106,6 +106,5 @@ void DialogList::accept()
 
 void DialogList::reject()
 {
-    this->window->updateDo();
     QDialog::reject();
 }

@@ -23,7 +23,7 @@ void ToolAutoLoop::process(SoundfontManager * sm, EltID id, AbstractToolParamete
     {
         // Update data, length, startloop and endloop
         sm->set(id, champ_sampleDataFull24, baData);
-        Valeur val;
+        AttributeValue val;
         val.dwValue = startLoop;
         sm->set(id, champ_dwStartLoop, val);
         val.dwValue = endLoop;

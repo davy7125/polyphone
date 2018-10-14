@@ -2,7 +2,6 @@
 #define EDITORTOOLBAR_H
 
 #include <QToolBar>
-#include "idlist.h"
 #include "page.h"
 class ToolMenu;
 class StyledAction;

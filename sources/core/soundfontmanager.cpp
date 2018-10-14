@@ -80,7 +80,7 @@ void SoundfontManager::onDropId(EltID id)
 }
 
 // Accès / modification des propriétés
-bool SoundfontManager::isSet(EltID id, Champ champ)
+bool SoundfontManager::isSet(EltID id, AttributeType champ)
 {
     bool value = false;
     if (!this->isValid(id))
@@ -146,9 +146,9 @@ bool SoundfontManager::isSet(EltID id, Champ champ)
     return value;
 }
 
-Valeur SoundfontManager::get(EltID id, Champ champ)
+AttributeValue SoundfontManager::get(EltID id, AttributeType champ)
 {
-    Valeur value;
+    AttributeValue value;
     value.dwValue = 0;
     if (!this->isValid(id))
         return value;
@@ -307,7 +307,7 @@ Sound SoundfontManager::getSon(EltID id)
     else return son;
 }
 
-QString SoundfontManager::getQstr(EltID id, Champ champ)
+QString SoundfontManager::getQstr(EltID id, AttributeType champ)
 {
     if (!this->isValid(id))
         return "";
@@ -377,7 +377,7 @@ QString SoundfontManager::getQstr(EltID id, Champ champ)
     return "";
 }
 
-QByteArray SoundfontManager::getData(EltID id, Champ champ)
+QByteArray SoundfontManager::getData(EltID id, AttributeType champ)
 {
     if (!this->isValid(id))
         return QByteArray();
@@ -634,7 +634,7 @@ bool SoundfontManager::isEdited(int indexSf2)
 }
 
 // Récupération liste de champs et valeurs de bags
-void SoundfontManager::getListeBags(EltID id, QList<Champ> &listeChamps, QList<genAmountType> &listeValeurs)
+void SoundfontManager::getListeBags(EltID id, QList<AttributeType> &listeChamps, QList<AttributeValue> &listeValeurs)
 {
     if (!this->isValid(id))
         return;
@@ -687,7 +687,7 @@ int SoundfontManager::add(EltID id)
 
         // Initialisation bps
     {
-        Valeur valTmp;
+        AttributeValue valTmp;
         valTmp.wValue = 16;
         this->set(id, champ_wBpsInit, valTmp);
         this->set(id, champ_wBpsSave, valTmp);
@@ -737,7 +737,7 @@ int SoundfontManager::add(EltID id)
         i = id.indexMod = bag->addMod();
 
         // Fill the index
-        Valeur val;
+        AttributeValue val;
         val.wValue = id.indexMod;
         this->set(id, champ_indexMod, val);
     }break;
@@ -815,7 +815,7 @@ int SoundfontManager::remove(EltID id, bool permanently, bool storeAction, int *
 
         // Linked sample?
         EltID id2(elementSmpl, id.indexSf2, 0, 0, 0);
-        Valeur value;
+        AttributeValue value;
         foreach (int i, _soundfonts->getSoundfont(id.indexSf2)->getSamples().keys())
         {
             Smpl * smplTmp = _soundfonts->getSoundfont(id.indexSf2)->getSample(i);
@@ -993,7 +993,7 @@ int SoundfontManager::remove(EltID id, bool permanently, bool storeAction, int *
             {
                 EltID id2 = id;
                 id2.indexMod = indexMod;
-                Valeur value;
+                AttributeValue value;
                 value.dwValue = 0;
                 this->set(id2, champ_sfModDestOper, value);
             }
@@ -1008,7 +1008,7 @@ int SoundfontManager::remove(EltID id, bool permanently, bool storeAction, int *
             {
                 EltID id2 = id;
                 id2.indexMod = iVal - 32768;
-                Valeur value;
+                AttributeValue value;
                 value.dwValue = 0;
                 this->set(id2, champ_sfModSrcOper, value);
             }
@@ -1052,8 +1052,8 @@ void SoundfontManager::supprGenAndStore(EltID id, int storeAction)
         return;
     }
 
-    const QMap<Champ, genAmountType> parameters = division->getGens();
-    foreach (Champ champ, parameters.keys())
+    const QMap<AttributeType, AttributeValue> parameters = division->getGens();
+    foreach (AttributeType champ, parameters.keys())
     {
         // Create and store an action
         if (storeAction)
@@ -1062,7 +1062,7 @@ void SoundfontManager::supprGenAndStore(EltID id, int storeAction)
             action->typeAction = Action::TypeChangeToDefault;
             action->id = id;
             action->champ = champ;
-            action->vOldValue.genValue = parameters[champ];
+            action->vOldValue = parameters[champ];
             _undoRedo->add(action);
         }
 
@@ -1070,12 +1070,12 @@ void SoundfontManager::supprGenAndStore(EltID id, int storeAction)
     }
 }
 
-int SoundfontManager::set(EltID id, Champ champ, Valeur value)
+int SoundfontManager::set(EltID id, AttributeType champ, AttributeValue value)
 {
     if (!this->isValid(id))
         return 1;
 
-    Valeur oldValue;
+    AttributeValue oldValue;
     oldValue.wValue = 0;
     int defaultValue = 0;
 
@@ -1243,7 +1243,7 @@ int SoundfontManager::set(EltID id, Champ champ, Valeur value)
     return 0;
 }
 
-int SoundfontManager::set(EltID id, Champ champ, QString qStr)
+int SoundfontManager::set(EltID id, AttributeType champ, QString qStr)
 {
     if (!this->isValid(id))
         return 1;
@@ -1354,7 +1354,7 @@ int SoundfontManager::set(EltID id, Champ champ, QString qStr)
     return 0;
 }
 
-int SoundfontManager::set(EltID id, Champ champ, QByteArray data)
+int SoundfontManager::set(EltID id, AttributeType champ, QByteArray data)
 {
     if (!this->isValid(id))
         return 1;
@@ -1406,12 +1406,12 @@ int SoundfontManager::set(EltID id, Champ champ, QByteArray data)
     return 0;
 }
 
-int SoundfontManager::reset(EltID id, Champ champ)
+int SoundfontManager::reset(EltID id, AttributeType champ)
 {
     if (!this->isValid(id))
         return 0;
 
-    Valeur oldValue;
+    AttributeValue oldValue;
     // Type d'élément à modifier
     switch ((int)id.typeElement)
     {
@@ -1457,7 +1457,7 @@ int SoundfontManager::reset(EltID id, Champ champ)
     return 1;
 }
 
-void SoundfontManager::simplify(EltID id, Champ champ)
+void SoundfontManager::simplify(EltID id, AttributeType champ)
 {
     EltID idElement = id;
     if (id.typeElement == elementInst || id.typeElement == elementInstSmpl)
@@ -1473,7 +1473,7 @@ void SoundfontManager::simplify(EltID id, Champ champ)
     else return;
 
     bool firstValue = true;
-    Valeur valeur;
+    AttributeValue valeur;
 
     foreach (int i, this->getSiblings(idElement))
     {

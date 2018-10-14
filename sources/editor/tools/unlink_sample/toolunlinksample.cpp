@@ -18,7 +18,7 @@ void ToolUnlinkSample::process(SoundfontManager * sm, EltID id, AbstractToolPara
 void ToolUnlinkSample::unlink(SoundfontManager * sm, EltID idSample)
 {
     // Sample type
-    Valeur value;
+    AttributeValue value;
     SFSampleLink type = sm->get(idSample, champ_sfSampleType).sfLinkValue;
     if (type == leftSample || type == rightSample || type == linkedSample)
     {

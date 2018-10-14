@@ -1,8 +1,7 @@
 #ifndef TOOLFACTORY_H
 #define TOOLFACTORY_H
 
-#include "idlist.h"
-#include <QList>
+#include "basetypes.h"
 class AbstractTool;
 class QWidget;
 

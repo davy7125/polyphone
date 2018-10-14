@@ -1,7 +1,7 @@
 #ifndef ABSTRACTTOOL_H
 #define ABSTRACTTOOL_H
 
-#include "idlist.h"
+#include "basetypes.h"
 #include <QObject>
 class QWidget;
 class SoundfontManager;

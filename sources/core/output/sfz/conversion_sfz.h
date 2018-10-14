@@ -30,7 +30,7 @@
 #include <QMap>
 #include <QTextStream>
 #include "qmath.h"
-#include "sf2_types.h"
+#include "basetypes.h"
 
 class SoundfontManager;
 class QFile;
@@ -40,27 +40,24 @@ class ParamListe
 public:
     ParamListe(SoundfontManager * sf2, EltID id);
     ParamListe(SoundfontManager * sf2, ParamListe * paramPrst, EltID idInst);
-    Champ getChamp(int num)     { return _listeChamps.at(num); }
+    AttributeType getChamp(int num)     { return _listeChamps.at(num); }
     double getValeur(int num)   { return _listeValeurs.at(num); }
     int size()                  { return _listeChamps.size(); }
-    int findChamp(Champ champ)  { return _listeChamps.indexOf(champ); }
+    int findChamp(AttributeType champ)  { return _listeChamps.indexOf(champ); }
 
 private:
-    QList<Champ> _listeChamps;
+    QList<AttributeType> _listeChamps;
     QList<double> _listeValeurs;
     static int _boucleGlobale;
 
-    double getValue(Champ champ, genAmountType amount, bool isPrst);
-    double d1200e2(qint32 val) { return qPow(2., (double)val / 1200.); }
-    double limit(double val, Champ champ);
+    double limit(double val, AttributeType champ);
     void load(SoundfontManager *sf2, EltID id);
-    void getGlobalValue(SoundfontManager * sf2, EltID id, Champ champ);
-    void mix(Champ champCoarse, Champ champFine, int addValue = 0);
-    void fusion(Champ champ, double value);
-    double getDefaultValue(Champ champ);
-    void prepend(Champ champ);
+    void getGlobalValue(SoundfontManager * sf2, EltID id, AttributeType champ);
+    void mix(AttributeType champCoarse, AttributeType champFine, int addValue = 0);
+    void fusion(AttributeType champ, double value);
+    void prepend(AttributeType champ);
     void adaptKeynum2();
-    void adaptKeynum2(int minKey, int maxKey, Champ champBase, Champ champKeynum);
+    void adaptKeynum2(int minKey, int maxKey, AttributeType champBase, AttributeType champKeynum);
     void adaptLfo(SoundfontManager *sf2, EltID idInstSmpl);
     double getValKeynum(double valBase, int key, double keynum);
 };
@@ -86,7 +83,7 @@ private:
     void writeEntete(QFile * fichierSfz, EltID id);
     void writeGroup(QFile * fichierSfz, ParamListe * listeParam, bool isPercKit);
     void writeRegion(QFile * fichierSfz, ParamListe * listeParam, QString pathSample, bool ignorePan);
-    void writeElement(QTextStream &out, Champ champ, double value);
+    void writeElement(QTextStream &out, AttributeType champ, double value);
     bool isIncluded(ParamListe * paramPrst, EltID idInstSmpl);
     static double dbToPercent(double dB) { return 100. * pow(10, -dB / 20); }
     static QString escapeStr(QString str);

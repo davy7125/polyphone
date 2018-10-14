@@ -103,7 +103,7 @@ void ToolLinkSample::associate(SoundfontManager * sm, EltID leftSmpl, EltID righ
     this->disconnectTarget(sm, rightSmpl);
 
     // Then link left with right sample
-    Valeur value;
+    AttributeValue value;
     value.sfLinkValue = leftSample;
     sm->set(leftSmpl, champ_sfSampleType, value);
     value.wValue = rightSmpl.indexElt;
@@ -124,7 +124,7 @@ void ToolLinkSample::disconnectTarget(SoundfontManager * sm, EltID id)
         EltID otherID(elementSmpl, id.indexSf2, otherSample);
         if (sm->isValid(otherID))
         {
-            Valeur value;
+            AttributeValue value;
             value.sfLinkValue = monoSample;
             sm->set(otherID, champ_sfSampleType, value);
             value.wValue = 0;

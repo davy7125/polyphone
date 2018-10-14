@@ -2,8 +2,7 @@
 #define TREEVIEW_H
 
 #include <QTreeView>
-#include "sf2_types.h"
-#include "idlist.h"
+#include "basetypes.h"
 
 class TreeView : public QTreeView
 {

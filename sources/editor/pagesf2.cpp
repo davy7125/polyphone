@@ -433,7 +433,7 @@ void PageSf2::on_comboBox_currentIndexChanged(int index)
         return;
 
     // Soundfont editing
-    Valeur valTmp;
+    AttributeValue valTmp;
     valTmp.wValue = (index == 1 ? 24 : 16);
     _sf2->set(_currentID, champ_wBpsSave, valTmp);
     _sf2->endEditing(getEditingSource());

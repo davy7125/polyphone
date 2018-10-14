@@ -24,7 +24,6 @@
 
 #include "envelopeditor.h"
 #include "ui_envelopeditor.h"
-#include "parameter.h"
 #include "contextmanager.h"
 #include <qmath.h>
 
@@ -214,24 +213,24 @@ void EnvelopEditor::populate()
     stopSignals(false);
 }
 
-double EnvelopEditor::computeValue(EltID id, Champ champ, bool &isOverriden)
+double EnvelopEditor::computeValue(EltID id, AttributeType champ, bool &isOverriden)
 {
     if (_sf2->isSet(id, champ))
     {
         isOverriden = true;
-        return Parameter::computeRealValue(champ, false, _sf2->get(id, champ).genValue);
+        return Attribute::toRealValue(champ, false, _sf2->get(id, champ));
     }
     else
     {
         // Default value
-        double value = Parameter::getDefaultRealValue(champ, false);
+        double value = Attribute::getDefaultRealValue(champ, false);
         if (id.typeElement == elementInstSmpl)
         {
             // Global value?
             EltID id2 = id;
             id2.typeElement = elementInst;
             if (_sf2->isSet(id2, champ))
-                value = Parameter::computeRealValue(champ, false, _sf2->get(id2, champ).genValue);
+                value = Attribute::toRealValue(champ, false, _sf2->get(id2, champ));
         }
         isOverriden = false;
         return value;
@@ -272,9 +271,9 @@ void EnvelopEditor::addEnvelop(EltID id, bool isVolume, bool isMain)
     int keyMax = 127;
     if (_sf2->isSet(id, champ_keyRange))
     {
-        Valeur val = _sf2->get(id, champ_keyRange);
-        keyMin = val.genValue.ranges.byLo;
-        keyMax = val.genValue.ranges.byHi;
+        AttributeValue val = _sf2->get(id, champ_keyRange);
+        keyMin = val.rValue.byLo;
+        keyMax = val.rValue.byHi;
     }
     else if (id.typeElement == elementInstSmpl)
     {
@@ -283,9 +282,9 @@ void EnvelopEditor::addEnvelop(EltID id, bool isVolume, bool isMain)
         id2.typeElement = elementInst;
         if (_sf2->isSet(id2, champ_keyRange))
         {
-            Valeur val = _sf2->get(id2, champ_keyRange);
-            keyMin = val.genValue.ranges.byLo;
-            keyMax = val.genValue.ranges.byHi;
+            AttributeValue val = _sf2->get(id2, champ_keyRange);
+            keyMin = val.rValue.byLo;
+            keyMax = val.rValue.byHi;
         }
     }
 
@@ -388,14 +387,13 @@ void EnvelopEditor::on_spinKeyDecay_editingFinished()
     processEdit(_isVolume ? champ_keynumToVolEnvDecay : champ_keynumToModEnvDecay, ui->spinKeyDecay->value());
 }
 
-void EnvelopEditor::processEdit(Champ champ, double value)
+void EnvelopEditor::processEdit(AttributeType champ, double value)
 {
     bool isOverriden = true;
     double oldValue = computeValue(_displayedElt[0], champ, isOverriden);
     if (qAbs(value - oldValue) > 0.0005)
     {
-        Valeur val;
-        val.genValue = Parameter::computeStoredValue(champ, false, value);
+        AttributeValue val = Attribute::fromRealValue(champ, false, value);
         _sf2->set(_displayedElt[0], champ, val);
         _sf2->endEditing("envelopEditor");
         populate();
@@ -442,7 +440,7 @@ void EnvelopEditor::on_pushKeyDecay_clicked()
     processClear(_isVolume ? champ_keynumToVolEnvDecay : champ_keynumToModEnvDecay);
 }
 
-void EnvelopEditor::processClear(Champ champ)
+void EnvelopEditor::processClear(AttributeType champ)
 {
     if (_sf2->isSet(_displayedElt[0], champ))
     {

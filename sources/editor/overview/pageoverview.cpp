@@ -122,7 +122,7 @@ QString PageOverview::fillInformation(EltID id, int row)
     return _sf2->getQstr(id, champ_name);
 }
 
-QString PageOverview::getRange(EltID id, Champ champ)
+QString PageOverview::getRange(EltID id, AttributeType champ)
 {
     // Global value
     int globalValue = 0;
