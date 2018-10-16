@@ -1,38 +1,37 @@
-#ifndef TOOLCELESTETUNING_H
-#define TOOLCELESTETUNING_H
+#ifndef TOOLFREQUENCYPEAKS_H
+#define TOOLFREQUENCYPEAKS_H
 
 #include "abstracttooliterating.h"
-#include <QObject>
 
-class ToolCelesteTuning: public AbstractToolIterating
+class ToolFrequencyPeaks: public AbstractToolIterating
 {
 public:
-    ToolCelesteTuning();
+    ToolFrequencyPeaks() : AbstractToolIterating(elementSmpl) {}
 
     /// Icon, label and category displayed to the user to describe the tool
     QString getIconName() const override
     {
-        return ":/tool/celeste_tuning.svg";
+        return ":/tool/peak_export.svg";
     }
 
     QString getLabel() const override
     {
-        return trUtf8("Désaccorder...");
+        return trUtf8("Visualiser les pics de fréquences");
     }
 
     QString getCategory() const override
     {
-        return trUtf8("Édition rapide");
+        return trUtf8("Analyse");
     }
 
     /// Internal identifier
     QString getIdentifier() const override
     {
-        return "inst:celesteTuning";
+        return "smpl:frequencyPeaks";
     }
 
     /// Process an element
     void process(SoundfontManager * sm, EltID id, AbstractToolParameters * parameters) override;
 };
 
-#endif // TOOLCELESTETUNING_H
+#endif // TOOLFREQUENCYPEAKS_H

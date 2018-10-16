@@ -1,38 +1,37 @@
-#ifndef TOOLCELESTETUNING_H
-#define TOOLCELESTETUNING_H
+#ifndef TOOLCLEANUNUSED_H
+#define TOOLCLEANUNUSED_H
 
 #include "abstracttooliterating.h"
-#include <QObject>
 
-class ToolCelesteTuning: public AbstractToolIterating
+class ToolCleanUnused: public AbstractToolIterating
 {
 public:
-    ToolCelesteTuning();
+    ToolCleanUnused() : AbstractToolIterating(elementSf2) {}
 
     /// Icon, label and category displayed to the user to describe the tool
     QString getIconName() const override
     {
-        return ":/tool/celeste_tuning.svg";
+        return ":/tool/remove_unused.svg";
     }
 
     QString getLabel() const override
     {
-        return trUtf8("Désaccorder...");
+        return trUtf8("Enlever les éléments non utilisés");
     }
 
     QString getCategory() const override
     {
-        return trUtf8("Édition rapide");
+        return trUtf8("Nettoyage");
     }
 
     /// Internal identifier
     QString getIdentifier() const override
     {
-        return "inst:celesteTuning";
+        return "sf2:cleanUnused";
     }
 
     /// Process an element
     void process(SoundfontManager * sm, EltID id, AbstractToolParameters * parameters) override;
 };
 
-#endif // TOOLCELESTETUNING_H
+#endif // TOOLCLEANUNUSED_H
