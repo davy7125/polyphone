@@ -1,23 +1,22 @@
-#ifndef TOOLCELESTETUNING_H
-#define TOOLCELESTETUNING_H
+#ifndef TOOLAUTODISTRIBUTION_H
+#define TOOLAUTODISTRIBUTION_H
 
 #include "abstracttooliterating.h"
-#include <QObject>
 
-class ToolCelesteTuning: public AbstractToolIterating
+class ToolAutoDistribution: public AbstractToolIterating
 {
 public:
-    ToolCelesteTuning();
+    ToolAutoDistribution() : AbstractToolIterating(elementInst, NULL, NULL, false) {}
 
     /// Icon, label and category displayed to the user to describe the tool
     QString getIconName() const override
     {
-        return ":/tool/celeste_tuning.svg";
+        return ":/tool/auto_distribution.svg";
     }
 
     QString getLabel() const override
     {
-        return trUtf8("Désaccorder...");
+        return trUtf8("Répartir automatiquement les échantillons");
     }
 
     QString getCategory() const override
@@ -28,11 +27,11 @@ public:
     /// Internal identifier
     QString getIdentifier() const override
     {
-        return "inst:celesteTuning";
+        return "inst:autoDistribution";
     }
 
     /// Process an element
     void process(SoundfontManager * sm, EltID id, AbstractToolParameters * parameters) override;
 };
 
-#endif // TOOLCELESTETUNING_H
+#endif // TOOLAUTODISTRIBUTION_H

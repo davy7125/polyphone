@@ -110,6 +110,16 @@
         <file alias="change_attenuation.svg">editor/tools/change_attenuation/change_attenuation.svg</file>
         <file alias="global_setting.svg">editor/tools/global_settings/global_setting.svg</file>
         <file alias="celeste_tuning.svg">editor/tools/celeste_tuning/celeste_tuning.svg</file>
+        <file alias="auto_distribution.svg">editor/tools/auto_distribution/auto_distribution.svg</file>
+        <file alias="remove_unused.svg">editor/tools/clean_unused_elements/remove_unused.svg</file>
+        <file alias="duplicate.svg">editor/tools/division_duplication/duplicate.svg</file>
+        <file alias="peak_export.svg">editor/tools/frequency_peaks/peak_export.svg</file>
+        <file alias="mixture.svg">editor/tools/mixture_creation/mixture.svg</file>
+        <file alias="monitor.svg">editor/tools/monitor/monitor.svg</file>
+        <file alias="preset_list.svg">editor/tools/preset_list/preset_list.svg</file>
+        <file alias="remove_mods.svg">editor/tools/remove_mods/remove_mods.svg</file>
+        <file alias="spatialization.svg">editor/tools/sound_spatialization/spatialization.svg</file>
+        <file alias="transpose2.svg">editor/tools/transpose/transpose2.svg</file>
     </qresource>
     <qresource prefix="/vpiano">
         <file alias="blkey.svg">resources/blkey.svg</file>

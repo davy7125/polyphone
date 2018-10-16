@@ -1,34 +1,33 @@
-#ifndef TOOLGLOBALSETTINGS_H
-#define TOOLGLOBALSETTINGS_H
+#ifndef TOOLDIVISIONDUPLICATION_H
+#define TOOLDIVISIONDUPLICATION_H
 
 #include "abstracttooliterating.h"
-#include <QObject>
 
-class ToolGlobalSettings: public AbstractToolIterating
+class ToolDivisionDuplication: public AbstractToolIterating
 {
 public:
-    ToolGlobalSettings();
+    ToolDivisionDuplication();
 
     /// Icon, label and category displayed to the user to describe the tool
     QString getIconName() const override
     {
-        return ":/tool/global_setting.svg";
+        return ":/tool/duplicate.svg";
     }
 
     QString getLabel() const override
     {
-        return trUtf8("Paramètrer en fonction des notes...");
+        return trUtf8("Dupliquer les divisions...");
     }
 
     QString getCategory() const override
     {
-        return trUtf8("Édition rapide");
+        return trUtf8("Transformation");
     }
 
     /// Internal identifier
     QString getIdentifier() const override
     {
-        return _isInst ? "inst:globalSettings" : "prst:globalSettings";
+        return _isInst ? "inst:divisionDuplication" : "prst:divisionDuplication";
     }
 
     /// Method executed before the iterating process
@@ -41,4 +40,4 @@ private:
     bool _isInst;
 };
 
-#endif // TOOLGLOBALSETTINGS_H
+#endif // TOOLDIVISIONDUPLICATION_H

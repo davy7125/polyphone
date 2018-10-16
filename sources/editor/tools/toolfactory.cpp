@@ -14,6 +14,16 @@
 #include "change_attenuation/toolchangeattenuation.h"
 #include "global_settings/toolglobalsettings.h"
 #include "celeste_tuning/toolcelestetuning.h"
+#include "auto_distribution/toolautodistribution.h"
+#include "clean_unused_elements/toolcleanunused.h"
+#include "division_duplication/tooldivisionduplication.h"
+#include "frequency_peaks/toolfrequencypeaks.h"
+#include "mixture_creation/toolmixturecreation.h"
+#include "monitor/toolmonitor.h"
+#include "preset_list/toolpresetlist.h"
+#include "remove_mods/toolremovemods.h"
+#include "sound_spatialization/toolsoundspatialization.h"
+#include "transpose/tooltranspose.h"
 
 ToolFactory::ToolFactory(QWidget * parent)
 {
@@ -31,9 +41,19 @@ ToolFactory::ToolFactory(QWidget * parent)
            << new ToolTransposeSmpl()
            << new ToolLinkSample()
            << new ToolUnlinkSample()
+           << new ToolFrequencyPeaks()
            << new ToolCelesteTuning() // Instruments
+           << new ToolAutoDistribution()
+           << new ToolMixtureCreation()
+           << new ToolSoundSpatialization()
+           << new ToolTranspose()
            << new ToolChangeAttenuation() // Instruments, presets
-           << new ToolGlobalSettings();
+           << new ToolGlobalSettings()
+           << new ToolDivisionDuplication()
+           << new ToolMonitor()
+           << new ToolRemoveMods()
+           << new ToolCleanUnused()   // Sf2
+           << new ToolPresetList() ;
 }
 
 ToolFactory::~ToolFactory()

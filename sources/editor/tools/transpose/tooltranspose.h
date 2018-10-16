@@ -1,23 +1,22 @@
-#ifndef TOOLCELESTETUNING_H
-#define TOOLCELESTETUNING_H
+#ifndef TOOLTRANSPOSE_H
+#define TOOLTRANSPOSE_H
 
 #include "abstracttooliterating.h"
-#include <QObject>
 
-class ToolCelesteTuning: public AbstractToolIterating
+class ToolTranspose: public AbstractToolIterating
 {
 public:
-    ToolCelesteTuning();
+    ToolTranspose();
 
     /// Icon, label and category displayed to the user to describe the tool
     QString getIconName() const override
     {
-        return ":/tool/celeste_tuning.svg";
+        return ":/tool/transpose2.svg";
     }
 
     QString getLabel() const override
     {
-        return trUtf8("Désaccorder...");
+        return trUtf8("Transposer...");
     }
 
     QString getCategory() const override
@@ -28,11 +27,11 @@ public:
     /// Internal identifier
     QString getIdentifier() const override
     {
-        return "inst:celesteTuning";
+        return "inst:transpose";
     }
 
     /// Process an element
     void process(SoundfontManager * sm, EltID id, AbstractToolParameters * parameters) override;
 };
 
-#endif // TOOLCELESTETUNING_H
+#endif // TOOLTRANSPOSE_H

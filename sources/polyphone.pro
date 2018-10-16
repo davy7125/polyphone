@@ -365,7 +365,29 @@ SOURCES	+= main.cpp \
     core/types/attribute.cpp \
     editor/tools/celeste_tuning/toolcelestetuning.cpp \
     editor/tools/celeste_tuning/toolcelestetuning_gui.cpp \
-    editor/tools/celeste_tuning/toolcelestetuning_parameters.cpp
+    editor/tools/celeste_tuning/toolcelestetuning_parameters.cpp \
+    editor/tools/auto_distribution/toolautodistribution.cpp \
+    editor/tools/clean_unused_elements/toolcleanunused.cpp \
+    editor/tools/division_duplication/tooldivisionduplication.cpp \
+    editor/tools/division_duplication/tooldivisionduplication_gui.cpp \
+    editor/tools/division_duplication/tooldivisionduplication_parameters.cpp \
+    editor/tools/frequency_peaks/toolfrequencypeaks.cpp \
+    editor/tools/mixture_creation/toolmixturecreation.cpp \
+    editor/tools/mixture_creation/toolmixturecreation_gui.cpp \
+    editor/tools/mixture_creation/toolmixturecreation_parameters.cpp \
+    editor/tools/monitor/toolmonitor.cpp \
+    editor/tools/monitor/toolmonitor_gui.cpp \
+    editor/tools/monitor/toolmonitor_parameters.cpp \
+    editor/tools/preset_list/toolpresetlist.cpp \
+    editor/tools/preset_list/toolpresetlist_gui.cpp \
+    editor/tools/preset_list/toolpresetlist_parameters.cpp \
+    editor/tools/remove_mods/toolremovemods.cpp \
+    editor/tools/sound_spatialization/toolsoundspatialization.cpp \
+    editor/tools/sound_spatialization/toolsoundspatialization_gui.cpp \
+    editor/tools/sound_spatialization/toolsoundspatialization_parameters.cpp \
+    editor/tools/transpose/tooltranspose.cpp \
+    editor/tools/transpose/tooltranspose_gui.cpp \
+    editor/tools/transpose/tooltranspose_parameters.cpp
 
 HEADERS  += \
     core/sound.h \
@@ -561,7 +583,29 @@ HEADERS  += \
     core/types/basetypes.h \
     editor/tools/celeste_tuning/toolcelestetuning.h \
     editor/tools/celeste_tuning/toolcelestetuning_gui.h \
-    editor/tools/celeste_tuning/toolcelestetuning_parameters.h
+    editor/tools/celeste_tuning/toolcelestetuning_parameters.h \
+    editor/tools/auto_distribution/toolautodistribution.h \
+    editor/tools/clean_unused_elements/toolcleanunused.h \
+    editor/tools/division_duplication/tooldivisionduplication.h \
+    editor/tools/division_duplication/tooldivisionduplication_gui.h \
+    editor/tools/division_duplication/tooldivisionduplication_parameters.h \
+    editor/tools/frequency_peaks/toolfrequencypeaks.h \
+    editor/tools/mixture_creation/toolmixturecreation.h \
+    editor/tools/mixture_creation/toolmixturecreation_gui.h \
+    editor/tools/mixture_creation/toolmixturecreation_parameters.h \
+    editor/tools/monitor/toolmonitor.h \
+    editor/tools/monitor/toolmonitor_gui.h \
+    editor/tools/monitor/toolmonitor_parameters.h \
+    editor/tools/preset_list/toolpresetlist.h \
+    editor/tools/preset_list/toolpresetlist_gui.h \
+    editor/tools/preset_list/toolpresetlist_parameters.h \
+    editor/tools/remove_mods/toolremovemods.h \
+    editor/tools/sound_spatialization/toolsoundspatialization.h \
+    editor/tools/sound_spatialization/toolsoundspatialization_gui.h \
+    editor/tools/sound_spatialization/toolsoundspatialization_parameters.h \
+    editor/tools/transpose/tooltranspose.h \
+    editor/tools/transpose/tooltranspose_gui.h \
+    editor/tools/transpose/tooltranspose_parameters.h
 
 FORMS    += \
     dialogs/dialog_list.ui \
@@ -605,7 +649,13 @@ FORMS    += \
     dialogs/dialogrecorder.ui \
     editor/tools/change_attenuation/toolchangeattenuation_gui.ui \
     editor/tools/global_settings/toolglobalsettings_gui.ui \
-    editor/tools/celeste_tuning/toolcelestetuning_gui.ui
+    editor/tools/celeste_tuning/toolcelestetuning_gui.ui \
+    editor/tools/division_duplication/tooldivisionduplication_gui.ui \
+    editor/tools/mixture_creation/toolmixturecreation_gui.ui \
+    editor/tools/monitor/toolmonitor_gui.ui \
+    editor/tools/preset_list/toolpresetlist_gui.ui \
+    editor/tools/sound_spatialization/toolsoundspatialization_gui.ui \
+    editor/tools/transpose/tooltranspose_gui.ui
 
 RESOURCES += resources.qrc
 
@@ -650,3 +700,5 @@ equals(QMAKE_CXX, clang++) {
     ExtraCompiler.commands = $${QMAKE_CXX} $(CXXFLAGS) -D__LITTLE_ENDIAN__ -mno-sse -mfpmath=387 $(INCPATH) -c ${QMAKE_FILE_IN} -o ${QMAKE_FILE_OUT}
 }
 QMAKE_EXTRA_COMPILERS += ExtraCompiler
+
+DISTFILES +=
