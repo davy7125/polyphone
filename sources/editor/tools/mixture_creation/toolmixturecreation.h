@@ -1,38 +1,37 @@
-#ifndef TOOLCELESTETUNING_H
-#define TOOLCELESTETUNING_H
+#ifndef TOOLMIXTURECREATION_H
+#define TOOLMIXTURECREATION_H
 
 #include "abstracttooliterating.h"
-#include <QObject>
 
-class ToolCelesteTuning: public AbstractToolIterating
+class ToolMixtureCreation: public AbstractToolIterating
 {
 public:
-    ToolCelesteTuning();
+    ToolMixtureCreation();
 
     /// Icon, label and category displayed to the user to describe the tool
     QString getIconName() const override
     {
-        return ":/tool/celeste_tuning.svg";
+        return ":/tool/mixture.svg";
     }
 
     QString getLabel() const override
     {
-        return trUtf8("Désaccorder...");
+        return trUtf8("Créer une mixture...");
     }
 
     QString getCategory() const override
     {
-        return trUtf8("Édition rapide");
+        return trUtf8("Transformation");
     }
 
     /// Internal identifier
     QString getIdentifier() const override
     {
-        return "inst:celesteTuning";
+        return "inst:mixtureCreation";
     }
 
     /// Process an element
     void process(SoundfontManager * sm, EltID id, AbstractToolParameters * parameters) override;
 };
 
-#endif // TOOLCELESTETUNING_H
+#endif // TOOLMIXTURECREATION_H

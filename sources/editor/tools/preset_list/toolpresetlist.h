@@ -1,38 +1,37 @@
-#ifndef TOOLCELESTETUNING_H
-#define TOOLCELESTETUNING_H
+#ifndef TOOLPRESETLIST_H
+#define TOOLPRESETLIST_H
 
 #include "abstracttooliterating.h"
-#include <QObject>
 
-class ToolCelesteTuning: public AbstractToolIterating
+class ToolPresetList: public AbstractToolIterating
 {
 public:
-    ToolCelesteTuning();
+    ToolPresetList();
 
     /// Icon, label and category displayed to the user to describe the tool
     QString getIconName() const override
     {
-        return ":/tool/celeste_tuning.svg";
+        return ":/tool/preset_list.svg";
     }
 
     QString getLabel() const override
     {
-        return trUtf8("Désaccorder...");
+        return trUtf8("Exporter la liste des presets...");
     }
 
     QString getCategory() const override
     {
-        return trUtf8("Édition rapide");
+        return trUtf8("Utilitaire");
     }
 
     /// Internal identifier
     QString getIdentifier() const override
     {
-        return "inst:celesteTuning";
+        return "sf2:presetList";
     }
 
     /// Process an element
     void process(SoundfontManager * sm, EltID id, AbstractToolParameters * parameters) override;
 };
 
-#endif // TOOLCELESTETUNING_H
+#endif // TOOLPRESETLIST_H

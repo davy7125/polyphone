@@ -1,23 +1,22 @@
-#ifndef TOOLCELESTETUNING_H
-#define TOOLCELESTETUNING_H
+#ifndef TOOLSOUNDSPATIALIZATION_H
+#define TOOLSOUNDSPATIALIZATION_H
 
 #include "abstracttooliterating.h"
-#include <QObject>
 
-class ToolCelesteTuning: public AbstractToolIterating
+class ToolSoundSpatialization: public AbstractToolIterating
 {
 public:
-    ToolCelesteTuning();
+    ToolSoundSpatialization();
 
     /// Icon, label and category displayed to the user to describe the tool
     QString getIconName() const override
     {
-        return ":/tool/celeste_tuning.svg";
+        return ":/tool/spatialization.svg";
     }
 
     QString getLabel() const override
     {
-        return trUtf8("Désaccorder...");
+        return trUtf8("Spatialiser le son...");
     }
 
     QString getCategory() const override
@@ -28,11 +27,17 @@ public:
     /// Internal identifier
     QString getIdentifier() const override
     {
-        return "inst:celesteTuning";
+        return _isInst ? "inst:soundSpatialization" : "prst:soundSpatialization";
     }
+
+    /// Method executed before the iterating process
+    void beforeProcess(IdList ids) override;
 
     /// Process an element
     void process(SoundfontManager * sm, EltID id, AbstractToolParameters * parameters) override;
+
+private:
+    bool _isInst;
 };
 
-#endif // TOOLCELESTETUNING_H
+#endif // TOOLSOUNDSPATIALIZATION_H
