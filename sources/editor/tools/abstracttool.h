@@ -47,6 +47,9 @@ protected:
     /// Get the warning to display after the tool is run
     virtual QString getWarning() { return ""; }
 
+    /// Get a confirmation message after the tool is run
+    virtual QString getConfirmation() { return ""; }
+
 private slots:
     void onFinished(bool updateNeeded);
     void onParametersValidated();

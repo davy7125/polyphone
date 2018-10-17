@@ -106,7 +106,7 @@ private:
         qint32 index;
     };
 
-    void addGlobal(EltID id, bool multiGlobal);
+    void addGlobal(IdList listIds);
     void addDivisions(EltID id);
     void formatTable(bool multiGlobal);
     void afficheMod(EltID id, AttributeType selectedField);
