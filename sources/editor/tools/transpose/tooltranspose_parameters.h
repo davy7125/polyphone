@@ -12,9 +12,15 @@ public:
     /// Save the configuration in the ini file
     void saveConfiguration() override;
     
-
+    double getSemiTones() { return _semiTones; }
+    void setSemiTones(double semiTones) { _semiTones = semiTones; }
+    
+    bool getAdaptKeyRanges() { return _adaptKeyRanges; }
+    void setAdaptKeyRanges(bool adaptKeyRanges) { _adaptKeyRanges = adaptKeyRanges; }
+    
 private:
-
+    double _semiTones;
+    bool _adaptKeyRanges;
 };
 
 #endif // TOOLTRANSPOSE_PARAMETERS_H

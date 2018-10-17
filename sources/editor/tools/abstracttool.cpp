@@ -76,6 +76,9 @@ void AbstractTool::onFinished(bool updateNeeded)
         QString warning = getWarning();
         if (!warning.isEmpty())
             QMessageBox::warning(s_parent, trUtf8("Attention"), warning);
+        QString info = getConfirmation();
+        if (!info.isEmpty())
+            QMessageBox::information(s_parent, trUtf8("Information"), info);
 
         s_sm->endEditing("tool:" + getIdentifier());
     }

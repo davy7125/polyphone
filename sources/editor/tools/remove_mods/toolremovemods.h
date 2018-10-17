@@ -36,8 +36,15 @@ public:
     /// Process an element
     void process(SoundfontManager * sm, EltID id, AbstractToolParameters * parameters) override;
 
+    /// Get a confirmation message after the tool is run
+    QString getConfirmation() override;
+
+    /// Get the warning to display after the tool is run
+    QString getWarning() override;
+
 private:
     bool _isInst;
+    int _count;
 };
 
 #endif // TOOLREMOVEMODS_H
