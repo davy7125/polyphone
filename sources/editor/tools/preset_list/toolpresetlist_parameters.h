@@ -12,8 +12,11 @@ public:
     /// Save the configuration in the ini file
     void saveConfiguration() override;
 
+    int getFormat() { return _format; }
+    void setFormat(int format) { _format = format; }
+    
 private:
-
+    int _format;
 };
 
 #endif // TOOLPRESETLIST_PARAMETERS_H

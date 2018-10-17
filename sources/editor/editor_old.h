@@ -109,7 +109,6 @@ private slots:
     void exportPresetList();    // global tool
     void on_actionExporter_pics_de_fr_quence_triggered();
     void onPleinEcranTriggered();
-    void on_actionEnlever_tous_les_modulateurs_triggered();
     void futureFinished();
 
 signals:
@@ -137,7 +136,6 @@ private:
     void exporterFrequences(QString fileName);
     int sauvegarder(int indexSf2, bool saveAs);
     static QString getName(QString name, int maxCharacters, int suffixNumber);
-    int deleteMods(EltID id);
 };
 
 #endif // MAINWINDOW_H

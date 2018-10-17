@@ -58,9 +58,8 @@ void PageTable::afficheTable(bool justSelection)
 
         if (!_currentParentIds.isEmpty())
         {
-            // Global division
-            foreach (EltID id, _currentParentIds)
-                addGlobal(id, _currentParentIds.count() > 1);
+            // Global division(s)
+            addGlobal(_currentParentIds);
 
             // Child divisions
             if (_currentParentIds.count() == 1)
@@ -75,101 +74,121 @@ void PageTable::afficheTable(bool justSelection)
     if (_currentParentIds.count() == 1)
         afficheMod(_currentParentIds[0]);
     else
-        afficheEditMod();
+    {
+        this->afficheEditMod();
+        this->displayModInTable();
+    }
 
     // Fin de la préparation
     this->reselect();
     _table->verticalScrollBar()->setValue(posV);
 }
 
-void PageTable::addGlobal(EltID id, bool multiGlobal)
+void PageTable::addGlobal(IdList listIds)
 {
-    AttributeValue genValTmp;
-    int offsetStart = 0;
-    int offsetEnd = 0;
-    int offsetStartLoop = 0;
-    int offsetEndLoop = 0;
-    int row;
+    bool multiGlobal = listIds.count() > 1;
+    int nbGlobal = 0;
 
-    QString qStr;
-    if (multiGlobal)
+    foreach (EltID id, listIds)
     {
-        qStr = _sf2->getQstr(id, champ_name).left(10);
-        qStr.append("\n");
-        qStr.append(_sf2->getQstr(id, champ_name).mid(10).left(10));
-    }
-    else
-        qStr = trUtf8("Global");
+        AttributeValue genValTmp;
+        int offsetStart = 0;
+        int offsetEnd = 0;
+        int offsetStartLoop = 0;
+        int offsetEndLoop = 0;
+        int row;
 
-    _table->addColumn(0, qStr);
-    EltID idGen = id;
-    idGen.typeElement = this->contenantGen;
-    idGen.indexElt2 = 0;
-    foreach (int i, _sf2->getSiblings(idGen))
-    {
-        genValTmp = _sf2->get(id, (AttributeType)i);
-        switch (i)
+        QString qStr;
+        if (multiGlobal)
         {
-        case champ_startAddrsOffset:
-            offsetStart += genValTmp.shValue;
-            break;
-        case champ_startAddrsCoarseOffset:
-            offsetStart += 32768 * genValTmp.shValue;
-            break;
-        case champ_endAddrsOffset:
-            offsetEnd += genValTmp.shValue;
-            break;
-        case champ_endAddrsCoarseOffset:
-            offsetEnd += 32768 * genValTmp.shValue;
-            break;
-        case champ_startloopAddrsOffset:
-            offsetStartLoop += genValTmp.shValue;
-            break;
-        case champ_startloopAddrsCoarseOffset:
-            offsetStartLoop += 32768 * genValTmp.shValue;
-            break;
-        case champ_endloopAddrsOffset:
-            offsetEndLoop += genValTmp.shValue;
-            break;
-        case champ_endloopAddrsCoarseOffset:
-            offsetEndLoop += 32768 * genValTmp.shValue;
-            break;
-        default:
-            row = _table->getRow(i);
-            if (row > -1)
+            qStr = _sf2->getQstr(id, champ_name).left(10);
+            qStr.append("\n");
+            qStr.append(_sf2->getQstr(id, champ_name).mid(10).left(10));
+        }
+        else
+            qStr = trUtf8("Global");
+
+        // Column number
+        int numCol = 0;
+        for (int i = 0; i < nbGlobal; i++)
+        {
+            if (Utils::naturalOrder(qStr, _table->horizontalHeaderItem(i)->text()) > 0)
+                numCol++;
+            else
+                break;
+        }
+
+        _table->addColumn(numCol, qStr);
+        nbGlobal++;
+        EltID idGen = id;
+        idGen.typeElement = this->contenantGen;
+        idGen.indexElt2 = 0;
+        foreach (int i, _sf2->getSiblings(idGen))
+        {
+            genValTmp = _sf2->get(id, (AttributeType)i);
+            switch (i)
             {
-                if (i == champ_sampleModes)
-                    _table->setLoopModeImage(row, 0, genValTmp.wValue);
-                else
-                    _table->item(row, 0)->setText(Attribute::toString((AttributeType)i, _typePage == PAGE_PRST, genValTmp));
+            case champ_startAddrsOffset:
+                offsetStart += genValTmp.shValue;
+                break;
+            case champ_startAddrsCoarseOffset:
+                offsetStart += 32768 * genValTmp.shValue;
+                break;
+            case champ_endAddrsOffset:
+                offsetEnd += genValTmp.shValue;
+                break;
+            case champ_endAddrsCoarseOffset:
+                offsetEnd += 32768 * genValTmp.shValue;
+                break;
+            case champ_startloopAddrsOffset:
+                offsetStartLoop += genValTmp.shValue;
+                break;
+            case champ_startloopAddrsCoarseOffset:
+                offsetStartLoop += 32768 * genValTmp.shValue;
+                break;
+            case champ_endloopAddrsOffset:
+                offsetEndLoop += genValTmp.shValue;
+                break;
+            case champ_endloopAddrsCoarseOffset:
+                offsetEndLoop += 32768 * genValTmp.shValue;
+                break;
+            default:
+                row = _table->getRow(i);
+                if (row > -1)
+                {
+                    if (i == champ_sampleModes)
+                        _table->setLoopModeImage(row, numCol, genValTmp.wValue);
+                    else
+                        _table->item(row, numCol)->setText(Attribute::toString((AttributeType)i, _typePage == PAGE_PRST, genValTmp));
+                }
             }
         }
+        if (offsetStart && _table->getRow(champ_startAddrsOffset) > -1)
+        {
+            row = _table->getRow(champ_startAddrsOffset);
+            genValTmp.shValue = offsetStart;
+            _table->item(row, numCol)->setText(Attribute::toString(champ_startAddrsOffset, _typePage == PAGE_PRST, genValTmp));
+        }
+        if (offsetEnd && _table->getRow(champ_endAddrsOffset) > -1)
+        {
+            row = _table->getRow(champ_endAddrsOffset);
+            genValTmp.shValue = offsetEnd;
+            _table->item(row, numCol)->setText(Attribute::toString(champ_endAddrsOffset, _typePage == PAGE_PRST, genValTmp));
+        }
+        if (offsetStartLoop && _table->getRow(champ_startloopAddrsOffset) > -1)
+        {
+            row = _table->getRow(champ_startloopAddrsOffset);
+            genValTmp.shValue = offsetStartLoop;
+            _table->item(row, numCol)->setText(Attribute::toString(champ_startloopAddrsOffset, _typePage == PAGE_PRST, genValTmp));
+        }
+        if (offsetEndLoop && _table->getRow(champ_endloopAddrsOffset) > -1)
+        {
+            row = _table->getRow(champ_endloopAddrsOffset);
+            genValTmp.shValue = offsetEndLoop;
+            _table->item(row, numCol)->setText(Attribute::toString(champ_endloopAddrsOffset, _typePage == PAGE_PRST, genValTmp));
+        }
+        _table->setID(id, numCol);
     }
-    if (offsetStart && _table->getRow(champ_startAddrsOffset) > -1)
-    {
-        row = _table->getRow(champ_startAddrsOffset);
-        genValTmp.shValue = offsetStart;
-        _table->item(row, 0)->setText(Attribute::toString(champ_startAddrsOffset, _typePage == PAGE_PRST, genValTmp));
-    }
-    if (offsetEnd && _table->getRow(champ_endAddrsOffset) > -1)
-    {
-        row = _table->getRow(champ_endAddrsOffset);
-        genValTmp.shValue = offsetEnd;
-        _table->item(row, 0)->setText(Attribute::toString(champ_endAddrsOffset, _typePage == PAGE_PRST, genValTmp));
-    }
-    if (offsetStartLoop && _table->getRow(champ_startloopAddrsOffset) > -1)
-    {
-        row = _table->getRow(champ_startloopAddrsOffset);
-        genValTmp.shValue = offsetStartLoop;
-        _table->item(row, 0)->setText(Attribute::toString(champ_startloopAddrsOffset, _typePage == PAGE_PRST, genValTmp));
-    }
-    if (offsetEndLoop && _table->getRow(champ_endloopAddrsOffset) > -1)
-    {
-        row = _table->getRow(champ_endloopAddrsOffset);
-        genValTmp.shValue = offsetEndLoop;
-        _table->item(row, 0)->setText(Attribute::toString(champ_endloopAddrsOffset, _typePage == PAGE_PRST, genValTmp));
-    }
-    _table->setID(id, 0);
 }
 
 void PageTable::addDivisions(EltID id)

@@ -3,12 +3,10 @@
 
 void ToolPresetList_parameters::loadConfiguration()
 {
-    // Values
-    
+    _format = ContextManager::configuration()->getToolValue(ConfManager::TOOL_TYPE_SF2, "presetlist", "format", 0).toInt();
 }
 
 void ToolPresetList_parameters::saveConfiguration()
 {
-    // Values
-    
+    ContextManager::configuration()->setToolValue(ConfManager::TOOL_TYPE_SF2, "presetlist", "format", _format);
 }
