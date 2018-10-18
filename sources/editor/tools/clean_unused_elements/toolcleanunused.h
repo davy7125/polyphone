@@ -30,8 +30,18 @@ public:
         return "sf2:cleanUnused";
     }
 
+    /// Method executed before the iterating process
+    void beforeProcess(IdList ids) override;
+
     /// Process an element
     void process(SoundfontManager * sm, EltID id, AbstractToolParameters * parameters) override;
+
+    /// Get a confirmation message after the tool is run
+    QString getConfirmation() override;
+
+private:
+    int _unusedSmpl;
+    int _unusedInst;
 };
 
 #endif // TOOLCLEANUNUSED_H
