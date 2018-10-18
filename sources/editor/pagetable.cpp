@@ -71,8 +71,8 @@ void PageTable::afficheTable(bool justSelection)
     }
 
     // Mods
-    if (_currentParentIds.count() == 1)
-        afficheMod(_currentParentIds[0]);
+    if (_currentIds.count() == 1)
+        afficheMod(_currentIds[0]);
     else
     {
         this->afficheEditMod();
@@ -501,7 +501,7 @@ void PageTable::afficheMod(EltID id, int selectedIndex)
         this->tableMod->item(numLigne, 5)->setText(Attribute::toString(champ_indexMod, _typePage == PAGE_PRST, genValTmp));
 
         sfModTmp = _sf2->get(id, champ_sfModSrcOper).sfModValue;
-        iVal = 4*sfModTmp.D + 8*sfModTmp.P + sfModTmp.Type + 1;
+        iVal = 4 * sfModTmp.D + 8 * sfModTmp.P + sfModTmp.Type + 1;
         QString iconName = QString(":/icons/courbe%1.svg").arg(iVal, 2, 10, QChar('0'));
         icon = ContextManager::theme()->getColoredSvg(iconName, QSize(iconWidth, iconWidth), replacement);
         this->tableMod->item(numLigne, 6)->setIcon(icon);
@@ -679,57 +679,6 @@ void PageTable::afficheEditMod()
         this->comboSource2->setCurrentIndex(0);
         this->comboSource2->setEnabled(false);
     }
-}
-
-void PageTable::updateId(EltID id)
-{
-    // Mise à jour tableau, id a été supprimé
-    EltID id2;
-    if (id.typeElement == elementSf2)
-    {
-        // décrémentation sf2 ?
-        for (int i = 0; i < _table->columnCount(); i++)
-        {
-            id2 = _table->getID(i);
-            if (id2.indexSf2 > id.indexSf2)
-            {
-                id2.indexSf2--;
-                _table->setID(id2, i);
-            }
-        }
-    }
-    else if (id.typeElement == elementInst || id.typeElement == elementPrst)
-    {
-        // décrémentation elt ?
-        for (int i = 0; i < _table->columnCount(); i++)
-        {
-            id2 = _table->getID(i);
-            if (id2.indexElt > id.indexElt && id2.indexSf2 == id.indexSf2)
-            {
-                id2.indexElt--;
-                _table->setID(id2, i);
-            }
-        }
-    }
-    else if (id.typeElement == elementInstSmpl || id.typeElement == elementPrstInst)
-    {
-        // décrémentation elt2 ?
-        for (int i = 0; i < _table->columnCount(); i++)
-        {
-            id2 = _table->getID(i);
-            if (id2.indexElt2 > id.indexElt2  && id2.indexSf2 == id.indexSf2
-                    && id2.indexElt == id.indexElt)
-            {
-                id2.indexElt2--;
-                _table->setID(id2, i);
-            }
-        }
-    }
-
-    // Affichage mod
-    int currentRow = this->tableMod->currentRow();
-    this->afficheMod(_table->getID(0));
-    this->tableMod->selectRow(currentRow);
 }
 
 void PageTable::resetChamp(int colonne, AttributeType champ1, AttributeType champ2)

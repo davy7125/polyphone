@@ -1,7 +1,7 @@
 #include "modulator.h"
 
 Modulator::Modulator(int id) :
-    _index(id),
+    _id(id),
     _hidden(false)
 {
 

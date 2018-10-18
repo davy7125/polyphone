@@ -43,7 +43,6 @@ public:
     PageTable(TypePage typePage, QWidget *parent = 0);
 
     void reselect();
-    void updateId(EltID id);
     void duplication();
     void spatialisation();
     void visualize();

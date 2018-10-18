@@ -105,7 +105,6 @@ private slots:
     void duplication();         // outil instrument et preset, duplication des divisions
     void visualize();           // outil instrument et preset, visualise les paramètres utilisés dans un graphique
     void on_action_Transposer_triggered();
-    void purger();              // global tool, suppression des éléments non utilisés
     void exportPresetList();    // global tool
     void on_actionExporter_pics_de_fr_quence_triggered();
     void onPleinEcranTriggered();
