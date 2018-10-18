@@ -458,22 +458,22 @@ QList<int> SoundfontManager::getSiblings(EltID id)
     case elementInstMod:
         foreach (Modulator * elt, _soundfonts->getSoundfont(id.indexSf2)->getInstrument(id.indexElt)->getGlobalDivision()->getMods().values())
             if (!elt->isHidden())
-                result << elt->_index;
+                result << elt->_id;
         break;
     case elementPrstMod:
         foreach (Modulator * elt, _soundfonts->getSoundfont(id.indexSf2)->getPreset(id.indexElt)->getGlobalDivision()->getMods().values())
             if (!elt->isHidden())
-                result << elt->_index;
+                result << elt->_id;
         break;
     case elementInstSmplMod:
         foreach (Modulator * elt, _soundfonts->getSoundfont(id.indexSf2)->getInstrument(id.indexElt)->getDivision(id.indexElt2)->getMods().values())
             if (!elt->isHidden())
-                result << elt->_index;
+                result << elt->_id;
         break;
     case elementPrstInstMod:
         foreach (Modulator * elt, _soundfonts->getSoundfont(id.indexSf2)->getPreset(id.indexElt)->getDivision(id.indexElt2)->getMods().values())
             if (!elt->isHidden())
-                result << elt->_index;
+                result << elt->_id;
         break;
     case elementInstGen:
         foreach (int key, _soundfonts->getSoundfont(id.indexSf2)->getInstrument(id.indexElt)->getGlobalDivision()->getGens().keys())
@@ -983,6 +983,7 @@ int SoundfontManager::remove(EltID id, bool permanently, bool storeAction, int *
         case elementPrstInstMod:
             // d'un instrument lié à un prst
             bag = _soundfonts->getSoundfont(id.indexSf2)->getPreset(id.indexElt)->getDivision(id.indexElt2);
+            break;
         }
 
         // If the destination of a modulator is the modulator to delete, remove the link

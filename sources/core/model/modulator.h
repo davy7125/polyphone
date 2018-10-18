@@ -16,7 +16,8 @@ public:
     short _modAmount;
     SFModulator _sfModAmtSrcOper;
     SFTransform _sfModTransOper;
-    int _index;
+    int _index; // Global index of the modulator that may be referenced by others
+    int _id;
 
 private:
     bool _hidden;
