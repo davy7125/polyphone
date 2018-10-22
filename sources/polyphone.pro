@@ -165,6 +165,7 @@ INCLUDEPATH += mainwindow \
     editor/overview \
     editor/tools \
     editor/widgets \
+    editor/tree \
     qcustomplot \
     resources \
     core \
@@ -295,10 +296,10 @@ SOURCES	+= main.cpp \
     core/model/treemodel.cpp \
     core/model/treeitemfirstlevel.cpp \
     core/model/treeitemroot.cpp \
-    editor/treeview.cpp \
-    editor/treeitemdelegate.cpp \
+    editor/tree/treeview.cpp \
+    editor/tree/treeitemdelegate.cpp \
     editor/widgets/backgroundwidget.cpp \
-    editor/treesortfilterproxy.cpp \
+    editor/tree/treesortfilterproxy.cpp \
     core/model/treeitem.cpp \
     editor/widgets/styledaction.cpp \
     editor/widgets/editortoolbar.cpp \
@@ -387,7 +388,8 @@ SOURCES	+= main.cpp \
     editor/tools/sound_spatialization/toolsoundspatialization_parameters.cpp \
     editor/tools/transpose/tooltranspose.cpp \
     editor/tools/transpose/tooltranspose_gui.cpp \
-    editor/tools/transpose/tooltranspose_parameters.cpp
+    editor/tools/transpose/tooltranspose_parameters.cpp \
+    editor/tree/treeviewmenu.cpp
 
 HEADERS  += \
     core/sound.h \
@@ -508,10 +510,10 @@ HEADERS  += \
     core/model/treemodel.h \
     core/model/treeitemfirstlevel.h \
     core/model/treeitemroot.h \
-    editor/treeview.h \
-    editor/treeitemdelegate.h \
+    editor/tree/treeview.h \
+    editor/tree/treeitemdelegate.h \
     editor/widgets/backgroundwidget.h \
-    editor/treesortfilterproxy.h \
+    editor/tree/treesortfilterproxy.h \
     editor/widgets/styledaction.h \
     editor/widgets/editortoolbar.h \
     core/actionset.h \
@@ -605,7 +607,8 @@ HEADERS  += \
     editor/tools/sound_spatialization/toolsoundspatialization_parameters.h \
     editor/tools/transpose/tooltranspose.h \
     editor/tools/transpose/tooltranspose_gui.h \
-    editor/tools/transpose/tooltranspose_parameters.h
+    editor/tools/transpose/tooltranspose_parameters.h \
+    editor/tree/treeviewmenu.h
 
 FORMS    += \
     dialogs/dialog_list.ui \

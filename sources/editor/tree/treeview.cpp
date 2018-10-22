@@ -5,6 +5,7 @@
 #include <QMouseEvent>
 #include <QScrollBar>
 #include <QMessageBox>
+#include "treeviewmenu.h"
 
 TreeView::TreeView(QWidget * parent) : QTreeView(parent),
     _fixingSelection(false),
@@ -16,6 +17,10 @@ TreeView::TreeView(QWidget * parent) : QTreeView(parent),
     this->setItemDelegate(new TreeItemDelegate(this));
     this->viewport()->setAutoFillBackground(false);
     this->sortByColumn(0, Qt::AscendingOrder);
+
+    // Menu
+    _menu = new TreeViewMenu(parent);
+    connect(this, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(openMenu(QPoint)));
 }
 
 void TreeView::mousePressEvent(QMouseEvent * event)
@@ -80,7 +85,8 @@ void TreeView::keyPressEvent(QKeyEvent * event)
     if (event->key() == Qt::Key_Delete)
     {
         // Delete the selection
-        this->remove(getSelectedIds());
+        _menu->initialize(getSelectedIds());
+        _menu->remove();
         event->accept();
         return;
     }
@@ -513,20 +519,13 @@ void TreeView::restoreExpandedState()
     this->verticalScrollBar()->setValue(_verticalScrollValue);
 }
 
-void TreeView::remove(IdList ids)
+void TreeView::openMenu(const QPoint &point)
 {
-    // Remove all the selected elements
-    int message = 1;
-    SoundfontManager * sm = SoundfontManager::getInstance();
-    foreach (EltID id, ids)
-        sm->remove(id, &message);
-
-    if (message % 2 == 0)
-        QMessageBox::warning(this, trUtf8("Attention"),
-                             trUtf8("Impossible de supprimer un échantillon s'il est utilisé par un instrument."));
-    if (message % 3 == 0)
-        QMessageBox::warning(this, trUtf8("Attention"),
-                             trUtf8("Impossible de supprimer un instrument s'il est utilisé par un preset."));
-
-    sm->endEditing("tree:remove");
+    // Open the menu if the selected ids allow it
+    IdList ids = getSelectedIds();
+    if (ids.getSelectedIds(elementSmpl).count() + ids.getSelectedIds(elementInst).count() + ids.getSelectedIds(elementPrst).count() > 0)
+    {
+        _menu->initialize(ids);
+        _menu->exec(this->viewport()->mapToGlobal(point));
+    }
 }

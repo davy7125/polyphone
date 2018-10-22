@@ -26,9 +26,8 @@
 #define DIALOG_LIST_H
 
 #include <QDialog>
-#include "soundfontmanager.h"
+#include "basetypes.h"
 #include <QListWidgetItem>
-class MainWindowOld;
 
 namespace Ui
 {
@@ -41,17 +40,13 @@ class DialogList : public QDialog
     Q_OBJECT
 
 public:
-    enum ModeListDialog
-    {
-        MODE_ASSOCIATION,
-        MODE_REMPLACEMENT
-    };
-
     explicit DialogList(QWidget *parent = 0);
     ~DialogList();
 
-    void init(MainWindowOld *window, SoundfontManager *sf2) {this->window = window; this->sf2 = sf2;}
-    void showDialog(EltID idSrc, ModeListDialog mode);
+    void showDialog(EltID idSrc, bool isAssociation);
+
+signals:
+    void elementSelected(EltID id, bool isAssociation);
 
 private slots:
     void accept();
@@ -62,15 +57,13 @@ signals:
 
 private:
     Ui::DialogList *ui;
-    SoundfontManager *sf2;
-    MainWindowOld *window;
-    ModeListDialog _mode;
+    bool _isAssociation;
 };
 
 class ListWidgetItem : public QListWidgetItem
 {
 public:
-    explicit ListWidgetItem(const QString &text, QListWidget *view = 0, int type = Type) \
+    explicit ListWidgetItem(const QString &text, QListWidget *view = 0, int type = Type)
         : QListWidgetItem(text, view, type){}
     EltID id;
 };

@@ -72,8 +72,6 @@ public:
     explicit MainWindowOld(QWidget *parent = 0);
     ~MainWindowOld();
 
-    void associer(EltID idDest);
-    void remplacer(EltID idSrc);
     void dragAndDrop(EltID idDest, QList<EltID> idSources);
     void spaceKeyPressedInTree();
 
@@ -89,9 +87,6 @@ private slots:
     void exporter(QList<QList<EltID> > listID, QString dir, int format,
                   bool presetPrefix, bool bankDir, bool gmSort, int quality);
     int exporter2(QList<QList<EltID> > listID, QString dir, int format, int flags, int quality);
-    void associer();            // Association InstSmpl et PrstInst
-    void remplacer();           // Remplacement InstSmpl et PrstInst
-    void supprimer();           // Envoi du signal "supprimer"
 
     void showAbout();           // Affichage fenêtre à propos
     void AfficherBarreOutils(); // Clic sur l'action "barre d'outils" du menu "afficher"
@@ -100,7 +95,6 @@ private slots:
     void spatialisation();      // outil instrument, spatialisation du son
     void duplication();         // outil instrument et preset, duplication des divisions
     void visualize();           // outil instrument et preset, visualise les paramètres utilisés dans un graphique
-    void on_action_Transposer_triggered();
     void exportPresetList();    // global tool
     void on_actionExporter_pics_de_fr_quence_triggered();
     void onPleinEcranTriggered();
