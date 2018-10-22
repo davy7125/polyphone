@@ -137,7 +137,10 @@ void Editor::onSelectionChanged(IdList ids)
 
     if (currentPage != NULL)
     {
-        currentPage->preparePage("command:selection", ids);
+        if ((void *)currentPage == (void *)ui->stackedWidget->currentWidget())
+            currentPage->preparePage("command:selection", ids);
+        else
+            currentPage->preparePage("command:display", ids);
         ui->toolBar->setDisplayOptions(currentPage->getDisplayOptions());
 
         // Display the page

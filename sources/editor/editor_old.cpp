@@ -63,12 +63,6 @@ MainWindowOld::MainWindowOld(QWidget *parent) : QMainWindow(parent, Qt::Window |
     ui->stackedWidget->addWidget(_pageOverviewInst);
     ui->stackedWidget->addWidget(_pageOverviewPrst);
 
-    // Initialisation dialog liste (pointeur vers les sf2 et mainWindow)
-    this->dialList.init(this, this->sf2);
-
-    // Fichiers récents
-    //updateFavoriteFiles();
-
     // Affichage logo logiciel
     ui->stackedWidget->setCurrentWidget(ui->page_Soft);
 
@@ -636,127 +630,6 @@ void MainWindowOld::futureFinished()
     _progressDialog = NULL;
 }
 
-void MainWindowOld::associer()
-{
-//    if (!ui->tree->getSelectedItemsNumber())
-//        return;
-//    EltID id = ui->tree->getFirstID();
-//    this->dialList.showDialog(id, DialogList::MODE_ASSOCIATION);
-}
-void MainWindowOld::associer(EltID idDest)
-{
-    int nb;// = ui->tree->getSelectedItemsNumber();
-    if (nb == 0 || (idDest.typeElement != elementInst && idDest.typeElement != elementPrst))
-    {
-        //updateDo();
-        return;
-    }
-    AttributeType champ;
-    if (idDest.typeElement == elementInst)
-    {
-        idDest.typeElement = elementInstSmpl;
-        champ = champ_sampleID;
-    }
-    else
-    {
-        idDest.typeElement = elementPrstInst;
-        champ = champ_instrument;
-    }
-    AttributeValue val;
-
-    // Liste des éléments sources
-    QList<EltID> listeSrc;// = ui->tree->getAllIDs();
-    foreach (EltID idSrc, listeSrc)
-    {
-        // Création élément lié
-        idDest.indexElt2 = this->sf2->add(idDest);
-        // Association de idSrc vers idDest
-        val.wValue = idSrc.indexElt;
-        this->sf2->set(idDest, champ, val);
-        if (champ == champ_sampleID)
-        {
-            // Balance
-            if (this->sf2->get(idSrc, champ_sfSampleType).sfLinkValue == rightSample ||
-                    this->sf2->get(idSrc, champ_sfSampleType).sfLinkValue == RomRightSample)
-            {
-                val.shValue = 500;
-                this->sf2->set(idDest, champ_pan, val);
-            }
-            else if (this->sf2->get(idSrc, champ_sfSampleType).sfLinkValue == leftSample ||
-                     this->sf2->get(idSrc, champ_sfSampleType).sfLinkValue == RomLeftSample)
-            {
-                val.shValue = -500;
-                this->sf2->set(idDest, champ_pan, val);
-            }
-            else
-            {
-                val.shValue = 0;
-                this->sf2->set(idDest, champ_pan, val);
-            }
-        }
-        else
-        {
-            // Key range
-            int keyMin = 127;
-            int keyMax = 0;
-            EltID idLinked = idSrc;
-            idLinked.typeElement = elementInstSmpl;
-            foreach (int i, this->sf2->getSiblings(idLinked))
-            {
-                idLinked.indexElt2 = i;
-                if (this->sf2->isSet(idLinked, champ_keyRange))
-                {
-                    keyMin = qMin(keyMin, (int)this->sf2->get(idLinked, champ_keyRange).rValue.byLo);
-                    keyMax = qMax(keyMax, (int)this->sf2->get(idLinked, champ_keyRange).rValue.byHi);
-                }
-            }
-            AttributeValue value;
-            if (keyMin < keyMax)
-            {
-                value.rValue.byLo = keyMin;
-                value.rValue.byHi = keyMax;
-            }
-            else
-            {
-                value.rValue.byLo = 0;
-                value.rValue.byHi = 127;
-            }
-            this->sf2->set(idDest, champ_keyRange, value);
-        }
-    }
-}
-void MainWindowOld::remplacer()
-{
-    int nb;// = ui->tree->getSelectedItemsNumber();
-    if (nb != 1) return;
-    EltID id;// = ui->tree->getFirstID();
-    this->dialList.showDialog(id, DialogList::MODE_REMPLACEMENT);
-}
-void MainWindowOld::remplacer(EltID idSrc)
-{
-    int nb;// = ui->tree->getSelectedItemsNumber();
-    if (nb != 1 || (idSrc.typeElement != elementSmpl && idSrc.typeElement != elementInst))
-    {
-        //updateDo();
-        return;
-    }
-    EltID idDest;// = ui->tree->getFirstID();
-    if (idDest.typeElement != elementInstSmpl && idDest.typeElement != elementPrstInst)
-        return;
-    AttributeType champ;
-    if (idSrc.typeElement == elementSmpl)
-        champ = champ_sampleID;
-    else
-        champ = champ_instrument;
-
-    // Remplacement d'un sample ou instrument lié
-    AttributeValue val;
-    val.wValue = idSrc.indexElt;
-    this->sf2->set(idDest, champ, val);
-    //updateDo();
-    //updateActions();
-}
-
 // Envoi de signaux
 void MainWindowOld::copier()
 {
@@ -778,16 +651,6 @@ void MainWindowOld::coller()
         QApplication::postEvent(focused, new QKeyEvent(QEvent::KeyRelease, Qt::Key_V, Qt::ControlModifier));
     }
 }
-void MainWindowOld::supprimer()
-{
-    // émission d'un signal "supprimer"
-    QWidget* focused = QApplication::focusWidget();
-    if( focused != 0 )
-    {
-        QApplication::postEvent(focused, new QKeyEvent(QEvent::KeyPress, Qt::Key_Delete, 0));
-        QApplication::postEvent(focused, new QKeyEvent(QEvent::KeyRelease, Qt::Key_Delete, 0));
-    }
-}
 
 void MainWindowOld::duplication()
 {
@@ -807,11 +670,6 @@ void MainWindowOld::spatialisation()
         this->page_inst->spatialisation();
     else if (type == elementPrst || type == elementPrstInst)
         this->page_prst->spatialisation();
-}
-
-void MainWindowOld::on_action_Transposer_triggered()
-{
-    this->page_inst->transposer();
 }
 
 void MainWindowOld::visualize()
