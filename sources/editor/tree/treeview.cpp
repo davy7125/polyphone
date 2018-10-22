@@ -90,6 +90,14 @@ void TreeView::keyPressEvent(QKeyEvent * event)
         event->accept();
         return;
     }
+    else if (event->key() == Qt::Key_F2)
+    {
+        // Rename the selection
+        _menu->initialize(getSelectedIds());
+        _menu->rename();
+        event->accept();
+        return;
+    }
 
     QTreeView::keyPressEvent(event);
 }
