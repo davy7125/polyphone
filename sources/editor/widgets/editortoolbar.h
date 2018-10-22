@@ -30,8 +30,13 @@ signals:
     void displayOptionChanged(int displayOption);
     void recorderDisplayChanged(bool isDisplayed);
     void keyboardDisplayChanged(bool isDisplayed);
+    void selectionChanged(IdList id);
 
 private slots:
+    void onNewSmplClicked();
+    void onNewInstClicked();
+    void onNewPrstClicked();
+    void onSaveClicked();
     void onDisplayActionClicked();
     void onRecorderActionClicked();
     void onKeyboardActionClicked();
@@ -39,6 +44,9 @@ private slots:
     void onRedo();
 
 private:
+    IdList addSmpl(QString path, EltID id, int *replace);
+    QString getName(QString name, int maxCharacters, int suffixNumber);
+
     StyledAction * _actionAddSample;
     StyledAction * _actionAddInstrument;
     StyledAction * _actionAddPreset;
@@ -54,6 +62,7 @@ private:
     QList<StyledAction *> _displayActions;
     bool _updatingDisplayOptions;
     ToolMenu * _toolMenu;
+    IdList _currentSelection;
 
     static QList<EditorToolBar *> s_instances;
     static bool s_recorderOpen;
