@@ -26,11 +26,14 @@ protected:
     void mousePressEvent(QMouseEvent * event);
     void mouseDoubleClickEvent(QMouseEvent * event);
     void selectionChanged(const QItemSelection &selected, const QItemSelection &deselected) override;
+    void keyPressEvent(QKeyEvent * event);
 
 private:
     bool select(EltID id, QItemSelectionModel::SelectionFlag flags = QItemSelectionModel::ClearAndSelect);
     bool isSelectionValid();
     QModelIndex getIndex(EltID id);
+    void remove(IdList ids);
+    IdList getSelectedIds();
 
     bool _fixingSelection;
     int _sf2Index;
