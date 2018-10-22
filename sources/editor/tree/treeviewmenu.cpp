@@ -244,7 +244,7 @@ void TreeViewMenu::rename()
     if (_currentIds.empty())
         return;
     ElementType type = _currentIds[0].typeElement;
-    if (type != elementSf2 && type != elementSmpl && type != elementInst && type != elementPrst)
+    if (type != elementSmpl && type != elementInst && type != elementPrst)
         return;
 
     if (_currentIds.count() > 1)
@@ -264,8 +264,6 @@ void TreeViewMenu::rename()
             msg = trUtf8("Nom de l'instrument (max 20 caractères) :");
         else if (type == elementPrst)
             msg = trUtf8("Nom du preset (max 20 caractères) :");
-        else if (type == elementSf2)
-            msg = trUtf8("Nom du SF2 (max 255 caractères) :");
 
         SoundfontManager * sm = SoundfontManager::getInstance();
         bool ok = true;
