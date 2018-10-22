@@ -4,6 +4,14 @@
 void ToolTrimEnd::process(SoundfontManager * sm, EltID id, AbstractToolParameters *parameters)
 {
     Q_UNUSED(parameters);
+    Q_UNUSED(sm);
+
+    trim(id);
+}
+
+void ToolTrimEnd::trim(EltID id)
+{
+    SoundfontManager * sm = SoundfontManager::getInstance();
     QByteArray baData = sm->getData(id, champ_sampleDataFull24);
 
     // Number of values to remove
@@ -11,6 +19,7 @@ void ToolTrimEnd::process(SoundfontManager * sm, EltID id, AbstractToolParameter
     qint32 endLoop = sm->get(id, champ_dwEndLoop).dwValue;
     if (endLoop == 0)
         return;
+
     if (endLoop < size - 8)
     {
         qint32 pos = size - (8 + endLoop);

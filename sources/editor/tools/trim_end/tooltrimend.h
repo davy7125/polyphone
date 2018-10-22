@@ -33,6 +33,9 @@ public:
 
     /// Process an element
     void process(SoundfontManager * sm, EltID id, AbstractToolParameters * parameters) override;
+
+    /// Trim a sample
+    static void trim(EltID id);
 };
 
 #endif // TOOLTRIMEND_H

@@ -85,14 +85,11 @@ public slots:
 private slots:
     void renommer();            // Renommer un ou plusieurs éléments dans l'arborescence
     void renommerEnMasse(int renameType, QString text1, QString text2, int val1, int val2);
-    void importerSmpl();        // Import d'un sample
     void exporterSmpl();        // Export d'un sample
     void exporter();            // Export d'un ou plusieurs preset(s)
     void exporter(QList<QList<EltID> > listID, QString dir, int format,
                   bool presetPrefix, bool bankDir, bool gmSort, int quality);
     int exporter2(QList<QList<EltID> > listID, QString dir, int format, int flags, int quality);
-    void nouvelInstrument();    // Création d'un instrument
-    void nouveauPreset();       // Création d'un preset
     void associer();            // Association InstSmpl et PrstInst
     void remplacer();           // Remplacement InstSmpl et PrstInst
     void supprimer();           // Envoi du signal "supprimer"
@@ -131,10 +128,8 @@ private:
     ModalProgressDialog * _progressDialog;
 
     // Méthodes privées
-    void importerSmpl(QString path, EltID id, int *replace);
     void exporterFrequences(QString fileName);
     int sauvegarder(int indexSf2, bool saveAs);
-    static QString getName(QString name, int maxCharacters, int suffixNumber);
 };
 
 #endif // MAINWINDOW_H
