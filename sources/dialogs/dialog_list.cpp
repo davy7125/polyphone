@@ -32,6 +32,7 @@ DialogList::DialogList(QWidget *parent) :
 {
     ui->setupUi(this);
     this->setWindowFlags((windowFlags() & ~Qt::WindowContextHelpButtonHint));
+    this->setWindowModality(Qt::ApplicationModal);
 }
 
 DialogList::~DialogList()
@@ -39,15 +40,14 @@ DialogList::~DialogList()
     delete ui;
 }
 
-void DialogList::showDialog(EltID idSrc, ModeListDialog mode)
+void DialogList::showDialog(EltID idSrc, bool isAssociation)
 {
-    _mode = mode;
-    if ((mode == MODE_ASSOCIATION &&
-         (idSrc.typeElement != elementInst && idSrc.typeElement != elementSmpl)) ||
-            (mode == MODE_REMPLACEMENT &&
-             (idSrc.typeElement != elementInstSmpl && idSrc.typeElement != elementPrstInst)))
+    _isAssociation = isAssociation;
+    if ((_isAssociation && (idSrc.typeElement != elementInst && idSrc.typeElement != elementSmpl)) ||
+            (!_isAssociation && (idSrc.typeElement != elementInstSmpl && idSrc.typeElement != elementPrstInst)))
         return;
-    // Titre
+
+    // Title
     ElementType element;
     if (idSrc.typeElement == elementInstSmpl)
     {
@@ -64,28 +64,30 @@ void DialogList::showDialog(EltID idSrc, ModeListDialog mode)
         this->setWindowTitle(trUtf8("Liste des presets"));
         element = elementPrst;
     }
-    // Remplissage de la liste
+
+    // Fill the list
     ui->listWidget->clear();
     ui->listWidget->scrollToTop();
     EltID id(element, idSrc.indexSf2, 0, 0, 0);
     ListWidgetItem *item;
-    foreach (int i, this->sf2->getSiblings(id))
+    SoundfontManager * sm = SoundfontManager::getInstance();
+    foreach (int i, sm->getSiblings(id))
     {
         id.indexElt = i;
         if (id.typeElement == elementPrst)
             item = new ListWidgetItem(QString("%1:%2 %3")
-                                      .arg(this->sf2->get(id, champ_wBank).wValue, 3, 10, QChar('0'))
-                                      .arg(this->sf2->get(id, champ_wPreset).wValue, 3, 10, QChar('0'))
-                                      .arg(this->sf2->getQstr(id, champ_name)));
+                                      .arg(sm->get(id, champ_wBank).wValue, 3, 10, QChar('0'))
+                                      .arg(sm->get(id, champ_wPreset).wValue, 3, 10, QChar('0'))
+                                      .arg(sm->getQstr(id, champ_name)));
         else
-            item = new ListWidgetItem(this->sf2->getQstr(id, champ_name));
+            item = new ListWidgetItem(sm->getQstr(id, champ_name));
         item->id = id;
         ui->listWidget->addItem(item);
     }
     ui->listWidget->clearSelection();
     ui->listWidget->sortItems();
-    // Affichage du dialogue
-    this->setWindowModality(Qt::ApplicationModal);
+
+    // Display the dialog
     this->show();
 }
 
@@ -95,11 +97,7 @@ void DialogList::accept()
     if (ui->listWidget->selectedItems().count())
     {
         ListWidgetItem *item = dynamic_cast<ListWidgetItem *>(ui->listWidget->currentItem());
-        // Association de MainWindow
-        if (_mode == MODE_ASSOCIATION)
-            this->window->associer(item->id);
-        else
-            this->window->remplacer(item->id);
+        emit(elementSelected(item->id, _isAssociation));
     }
     QDialog::accept();
 }

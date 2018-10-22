@@ -3,6 +3,7 @@
 
 #include <QTreeView>
 #include "basetypes.h"
+class TreeViewMenu;
 
 class TreeView : public QTreeView
 {
@@ -28,11 +29,13 @@ protected:
     void selectionChanged(const QItemSelection &selected, const QItemSelection &deselected) override;
     void keyPressEvent(QKeyEvent * event);
 
+private slots:
+    void openMenu(const QPoint &point);
+
 private:
     bool select(EltID id, QItemSelectionModel::SelectionFlag flags = QItemSelectionModel::ClearAndSelect);
     bool isSelectionValid();
     QModelIndex getIndex(EltID id);
-    void remove(IdList ids);
     IdList getSelectedIds();
 
     bool _fixingSelection;
@@ -43,6 +46,7 @@ private:
     EltID _lastSelectedId;
     QList<EltID> _expandedIds;
     int _verticalScrollValue;
+    TreeViewMenu * _menu;
 };
 
 #endif // TREEVIEW_H
