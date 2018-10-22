@@ -1,7 +1,10 @@
 #include "treeviewmenu.h"
 #include "soundfontmanager.h"
 #include "dialog_list.h"
+#include "dialog_rename.h"
+#include "QInputDialog"
 #include <QMessageBox>
+#include "contextmanager.h"
 #include <QDebug>
 
 TreeViewMenu::TreeViewMenu(QWidget * parent) : QMenu(parent),
@@ -237,7 +240,107 @@ void TreeViewMenu::replace(EltID idSrc, EltID idDest)
 
 void TreeViewMenu::rename()
 {
-    qDebug() << "rename";
+    // Checkes
+    if (_currentIds.empty())
+        return;
+    ElementType type = _currentIds[0].typeElement;
+    if (type != elementSf2 && type != elementSmpl && type != elementInst && type != elementPrst)
+        return;
+
+    if (_currentIds.count() > 1)
+    {
+        DialogRename * dial = new DialogRename(type == elementSmpl, (QWidget*)this->parent());
+        dial->setAttribute(Qt::WA_DeleteOnClose);
+        connect(dial, SIGNAL(updateNames(int, QString, QString, int, int)),
+                this, SLOT(bulkRename(int, QString, QString, int, int)));
+        dial->show();
+    }
+    else
+    {
+        QString msg;
+        if (type == elementSmpl)
+            msg = trUtf8("Nom de l'échantillon (max 20 caractères) :");
+        else if (type == elementInst)
+            msg = trUtf8("Nom de l'instrument (max 20 caractères) :");
+        else if (type == elementPrst)
+            msg = trUtf8("Nom du preset (max 20 caractères) :");
+        else if (type == elementSf2)
+            msg = trUtf8("Nom du SF2 (max 255 caractères) :");
+
+        SoundfontManager * sm = SoundfontManager::getInstance();
+        bool ok = true;
+        QString text = QInputDialog::getText((QWidget*)this->parent(), trUtf8("Question"), msg, QLineEdit::Normal, sm->getQstr(_currentIds[0], champ_name), &ok);
+        if (ok && !text.isEmpty())
+            sm->set(_currentIds[0], champ_name, text);
+        sm->endEditing("command:rename");
+    }
+}
+
+void TreeViewMenu::bulkRename(int renameType, QString text1, QString text2, int val1, int val2)
+{
+    if (renameType == 4)
+    {
+        if (val1 == val2)
+            return;
+    }
+    else
+    {
+        if (text1.isEmpty())
+            return;
+    }
+
+    SoundfontManager * sm = SoundfontManager::getInstance();
+    for (int i = 0; i < _currentIds.size(); i++)
+    {
+        EltID ID = _currentIds.at(i);
+
+        // Compute the name
+        QString newName = sm->getQstr(ID, champ_name);
+        switch (renameType)
+        {
+        case 0:{
+            // Replace with the name as a suffix
+            QString suffix = " " + ContextManager::keyName()->getKeyName(sm->get(ID, champ_byOriginalPitch).bValue, false, true);
+            SFSampleLink pos = sm->get(ID, champ_sfSampleType).sfLinkValue;
+            if (pos == rightSample || pos == RomRightSample)
+                suffix += 'R';
+            else if (pos == leftSample || pos == RomLeftSample)
+                suffix += 'L';
+
+            newName = text1.left(20 - suffix.size()) + suffix;
+        }break;
+        case 1:
+            // Replace with an index an a suffix
+            if ((i+1) % 100 < 10)
+                newName = text1.left(17) + "-0" + QString::number((i+1) % 100);
+            else
+                newName = text1.left(17) + "-" + QString::number((i+1) % 100);
+            break;
+        case 2:
+            // Replace a string
+            newName.replace(text1, text2, Qt::CaseInsensitive);
+            break;
+        case 3:
+            // Insert a string
+            if (val1 > newName.size())
+                val1 = newName.size();
+            newName.insert(val1, text1);
+            break;
+        case 4:
+            // Delete a part
+            if (val2 > val1)
+                newName.remove(val1, val2 - val1);
+            else
+                newName.remove(val2, val1 - val2);
+            break;
+        }
+
+        newName = newName.left(20);
+
+        if (sm->getQstr(ID, champ_name).compare(newName, Qt::CaseInsensitive))
+            sm->set(ID, champ_name, newName);
+    }
+    sm->endEditing("command:bulkRename");
 }
 
 void TreeViewMenu::copy()

@@ -80,8 +80,6 @@ public slots:
     void coller();              // Envoi du signal "coller"
 
 private slots:
-    void renommer();            // Renommer un ou plusieurs éléments dans l'arborescence
-    void renommerEnMasse(int renameType, QString text1, QString text2, int val1, int val2);
     void exporterSmpl();        // Export d'un sample
     void exporter();            // Export d'un ou plusieurs preset(s)
     void exporter(QList<QList<EltID> > listID, QString dir, int format,
