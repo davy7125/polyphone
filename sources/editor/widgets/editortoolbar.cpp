@@ -241,7 +241,7 @@ void EditorToolBar::onNewSmplClicked()
     IdList smplList;
     while (!strList.isEmpty())
         smplList << this->addSmpl(strList.takeAt(0), id, &replace);
-    SoundfontManager::getInstance()->endEditing("smpl:new");
+    SoundfontManager::getInstance()->endEditing("command:newSmpl");
 
     // Selection
     selectionChanged(smplList);
@@ -262,7 +262,7 @@ void EditorToolBar::onNewInstClicked()
         id.typeElement = elementInst;
         id.indexElt = sm->add(id);
         sm->set(id, champ_name, name.left(20));
-        sm->endEditing("inst:new");
+        sm->endEditing("command:newInst");
 
         // Selection
         selectionChanged(id);
@@ -307,7 +307,7 @@ void EditorToolBar::onNewPrstClicked()
         sm->set(id, champ_wPreset, val);
         val.wValue = nBank;
         sm->set(id, champ_wBank, val);
-        sm->endEditing("prst:new");
+        sm->endEditing("command:newPrst");
 
         // Selection
         selectionChanged(id);

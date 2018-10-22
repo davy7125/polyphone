@@ -4,6 +4,7 @@
 #include "soundfontmanager.h"
 #include <QMouseEvent>
 #include <QScrollBar>
+#include <QMessageBox>
 
 TreeView::TreeView(QWidget * parent) : QTreeView(parent),
     _fixingSelection(false),
@@ -72,6 +73,19 @@ void TreeView::mouseDoubleClickEvent(QMouseEvent * event)
     }
 
     QTreeView::mouseDoubleClickEvent(event);
+}
+
+void TreeView::keyPressEvent(QKeyEvent * event)
+{
+    if (event->key() == Qt::Key_Delete)
+    {
+        // Delete the selection
+        this->remove(getSelectedIds());
+        event->accept();
+        return;
+    }
+
+    QTreeView::keyPressEvent(event);
 }
 
 void TreeView::setBestMatch(int sampleId, int instrumentId, int presetId)
@@ -168,10 +182,15 @@ void TreeView::selectionChanged(const QItemSelection &selected, const QItemSelec
         _fixingSelection = false;
     }
 
+    emit(selectionChanged(getSelectedIds()));
+}
+
+IdList TreeView::getSelectedIds()
+{
     IdList selectedIds;
     foreach (QModelIndex index, this->selectedIndexes())
         selectedIds << index.data(Qt::UserRole).value<EltID>();
-    emit(selectionChanged(selectedIds));
+    return selectedIds;
 }
 
 bool TreeView::isSelectionValid()
@@ -492,4 +511,22 @@ void TreeView::restoreExpandedState()
 
     // Restore the vertical scroll position
     this->verticalScrollBar()->setValue(_verticalScrollValue);
+}
+
+void TreeView::remove(IdList ids)
+{
+    // Remove all the selected elements
+    int message = 1;
+    SoundfontManager * sm = SoundfontManager::getInstance();
+    foreach (EltID id, ids)
+        sm->remove(id, &message);
+
+    if (message % 2 == 0)
+        QMessageBox::warning(this, trUtf8("Attention"),
+                             trUtf8("Impossible de supprimer un échantillon s'il est utilisé par un instrument."));
+    if (message % 3 == 0)
+        QMessageBox::warning(this, trUtf8("Attention"),
+                             trUtf8("Impossible de supprimer un instrument s'il est utilisé par un preset."));
+
+    sm->endEditing("tree:remove");
 }

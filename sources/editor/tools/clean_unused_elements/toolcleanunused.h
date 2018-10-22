@@ -6,7 +6,7 @@
 class ToolCleanUnused: public AbstractToolIterating
 {
 public:
-    ToolCleanUnused() : AbstractToolIterating(elementSf2) {}
+    ToolCleanUnused() : AbstractToolIterating(elementSf2, NULL, NULL, false) {}
 
     /// Icon, label and category displayed to the user to describe the tool
     QString getIconName() const override

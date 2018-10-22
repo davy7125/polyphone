@@ -108,8 +108,7 @@ void TreeModel::elementUpdated(EltID id)
     QModelIndex index = getParentIndexWithPosition(id, position);
     index = this->index(position, 0, index);
 
-    emit(saveExpandedState());
-    emit(dataChanged(index, index));
+    _indexToChange << index;
 
     // Possibly update the name of the linked elements
     if (id.typeElement == elementSmpl)
@@ -130,7 +129,7 @@ void TreeModel::elementUpdated(EltID id)
                 {
                     index = getParentIndexWithPosition(id3, position);
                     index = this->index(position, 0, index);
-                    emit(dataChanged(index, index));
+                    _indexToChange << index;
                 }
             }
         }
@@ -153,13 +152,11 @@ void TreeModel::elementUpdated(EltID id)
                 {
                     index = getParentIndexWithPosition(id3, position);
                     index = this->index(position, 0, index);
-                    emit(dataChanged(index, index));
+                    _indexToChange << index;
                 }
             }
         }
     }
-
-    emit(restoreExpandedState());
 }
 
 void TreeModel::elementBeingDeleted(EltID id)
@@ -180,12 +177,9 @@ void TreeModel::endOfDeletion()
 void TreeModel::visibilityChanged(EltID id)
 {
     int position;
-    QModelIndex index = getParentIndexWithPosition(id, position);
-    index = this->index(position, 0, index);
-
-    emit(saveExpandedState());
-    emit(dataChanged(index, index));
-    emit(restoreExpandedState());
+    QModelIndex indexParent = getParentIndexWithPosition(id, position);
+    QModelIndex index = this->index(position, 0, indexParent);
+    _indexToChange << index << indexParent;
 }
 
 QModelIndex TreeModel::getParentIndexWithPosition(EltID id, int &position)
@@ -231,4 +225,18 @@ QModelIndex TreeModel::getParentIndexWithPosition(EltID id, int &position)
     }
 
     return index;
+}
+
+void TreeModel::triggerUpdate()
+{
+    if (!_indexToChange.empty())
+    {
+        emit(saveExpandedState());
+        while (!_indexToChange.empty())
+        {
+            QModelIndex index = _indexToChange.takeFirst();
+            emit(dataChanged(index, index));
+        }
+        emit(restoreExpandedState());
+    }
 }

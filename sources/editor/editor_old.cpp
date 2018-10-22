@@ -120,36 +120,6 @@ void MainWindowOld::spaceKeyPressedInTree()
         page_smpl->pushPlayPause();
 }
 
-void MainWindowOld::supprimerElt()
-{
-    // Suppression d'un ou plusieurs éléments dans l'arborescence
-    int nb = 0;
-    if (nb <= 0)
-        return;
-
-    QList<EltID> listID;
-
-    // 1er élément à supprimer
-    EltID elementToSelect;// = ui->tree->getElementToSelectAfterDeletion();
-
-    int message = 1;
-    foreach (EltID id, listID)
-        sf2->remove(id, &message);
-
-    if (message % 2 == 0)
-        QMessageBox::warning(this, trUtf8("Attention"),
-                             trUtf8("Impossible de supprimer un échantillon s'il est utilisé par un instrument."));
-    if (message % 3 == 0)
-        QMessageBox::warning(this, trUtf8("Attention"),
-                             trUtf8("Impossible de supprimer un instrument s'il est utilisé par un preset."));
-
-//    if (message == 1 && elementToSelect.typeElement != elementUnknown)
-//        ui->tree->select(elementToSelect, true);
-
-    //updateActions();
-    //updateDo();
-}
-
 int MainWindowOld::sauvegarder(int indexSf2, bool saveAs)
 {
     // Remove the focus from the interface
