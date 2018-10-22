@@ -154,6 +154,9 @@ void Editor::update(QString editingSource)
     Page * currentPage = (Page*)ui->stackedWidget->currentWidget();
     currentPage->preparePage(editingSource);
 
+    // Treeview
+    ((TreeModel*)SoundfontManager::getInstance()->getModel(_sf2Index))->triggerUpdate();
+
     // Tab title
     updateTitle();
 }

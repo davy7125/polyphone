@@ -78,7 +78,6 @@ public:
     void spaceKeyPressedInTree();
 
 public slots:
-    void supprimerElt();        // Suppression des éléments sélectionnés dans l'arbre
     void copier();              // Envoi du signal "copier"
     void coller();              // Envoi du signal "coller"
 

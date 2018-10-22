@@ -24,6 +24,9 @@ public:
     void endOfDeletion();
     void visibilityChanged(EltID id);
 
+    /// Trigger all dataChanged() when the editing is done
+    void triggerUpdate();
+
 signals:
     void saveExpandedState();
     void restoreExpandedState();
@@ -31,6 +34,7 @@ signals:
 private:
     QModelIndex getParentIndexWithPosition(EltID id, int &position);
     TreeItem * _rootItem;
+    QList<QModelIndex> _indexToChange;
 };
 
 #endif // TREEMODEL_H

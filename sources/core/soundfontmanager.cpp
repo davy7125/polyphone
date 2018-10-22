@@ -887,10 +887,8 @@ int SoundfontManager::remove(EltID id, bool permanently, bool storeAction, int *
             _soundfonts->getSoundfont(id.indexSf2)->getInstrument(id.indexElt)->setHidden(true);
     }break;
     case elementPrst:{
-        // suppression d'un preset
-        EltID id2(elementPrstInst, id.indexSf2, id.indexElt, 0, 0);
-
         // Propagation aux instruments liés
+        EltID id2(elementPrstInst, id.indexSf2, id.indexElt, 0, 0);
         QMap<int, Division*> divisions = _soundfonts->getSoundfont(id.indexSf2)->getPreset(id.indexElt)->getDivisions();
         foreach (int i, divisions.keys())
         {
@@ -901,7 +899,6 @@ int SoundfontManager::remove(EltID id, bool permanently, bool storeAction, int *
 
         // Propagation aux mods associés
         id2.typeElement = elementPrstMod;
-        id2.typeElement = elementInstMod;
         QMap<int, Modulator*> mods = _soundfonts->getSoundfont(id.indexSf2)->getPreset(id.indexElt)->getGlobalDivision()->getMods();
         foreach (int i, mods.keys())
         {
@@ -942,10 +939,8 @@ int SoundfontManager::remove(EltID id, bool permanently, bool storeAction, int *
             _soundfonts->getSoundfont(id.indexSf2)->getInstrument(id.indexElt)->getDivision(id.indexElt2)->setHidden(true);
     }break;
     case elementPrstInst:{
-        // suppression d'un instrument lié à un preset
-        EltID id2(elementPrstInstMod, id.indexSf2, id.indexElt, id.indexElt2, 0);
-
         // Propagation aux mods associés
+        EltID id2(elementPrstInstMod, id.indexSf2, id.indexElt, id.indexElt2, 0);
         QMap<int, Modulator*> mods = _soundfonts->getSoundfont(id.indexSf2)->getPreset(id.indexElt)->getDivision(id.indexElt2)->getMods();
         foreach (int i, mods.keys())
         {
@@ -1021,6 +1016,8 @@ int SoundfontManager::remove(EltID id, bool permanently, bool storeAction, int *
         else
             bag->getMod(id.indexMod)->setHidden(true);
     }break;
+    default:
+        return 1;
     }
 
     // Create and store the action
