@@ -25,6 +25,9 @@ public slots:
     void remove();
     void rename();
 
+private slots:
+    void bulkRename(int renameType, QString text1, QString text2, int val1, int val2);
+
 private:
     void associate(IdList ids, EltID idDest);
     void replace(EltID idSrc, EltID idDest);
