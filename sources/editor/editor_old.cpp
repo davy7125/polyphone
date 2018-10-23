@@ -241,16 +241,6 @@ void MainWindowOld::onPleinEcranTriggered()
     this->setWindowState(this->windowState() ^ Qt::WindowFullScreen);
 }
 
-// Modifications
-void MainWindowOld::dragAndDrop(EltID idDest, QList<EltID> idSources)
-{
-    // prepareNewActions() et updateDo() faits à l'extérieur
-    Duplicator duplicator(this->sf2, this->sf2, this);
-    for (int i = 0; i < idSources.size(); i++)
-        duplicator.copy(idSources.at(i), idDest);
-    //updateActions();
-}
-
 void MainWindowOld::exporterSmpl()
 {
     QList<EltID> listIDs;

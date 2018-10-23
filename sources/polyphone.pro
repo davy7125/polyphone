@@ -241,7 +241,7 @@ SOURCES	+= main.cpp \
     editor/tools/dialog_visualizer.cpp \
     editor/tools/dialog_duplication.cpp \
     editor/tools/dialog_transposition.cpp \
-    editor/tools/duplicationtool.cpp \
+    editor/tools/division_duplication/duplicationtool.cpp \
     editor/tools/dialog_exportlist.cpp \
     clavier/pianoscene.cpp \
     clavier/pianokey.cpp \
@@ -452,7 +452,7 @@ HEADERS  += \
     editor/tools/dialog_visualizer.h \
     editor/tools/dialog_duplication.h \
     editor/tools/dialog_transposition.h \
-    editor/tools/duplicationtool.h \
+    editor/tools/division_duplication/duplicationtool.h \
     editor/tools/dialog_exportlist.h \
     clavier/pianoscene.h \
     clavier/pianokey.h \
