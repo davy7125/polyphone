@@ -36,12 +36,17 @@ namespace Ui
 class PageSmpl : public Page
 {
     Q_OBJECT
+
 public:
     explicit PageSmpl(QWidget * parent = 0);
     ~PageSmpl();
 
     void pushPlayPause();
     void getPeakFrequencies(EltID id, QList<double> &frequencies, QList<double> &factors, QList<int> &keys, QList<int> &corrections);
+
+public slots:
+    // When the key "space" is pressed in the tree
+    void onSampleOnOff();
 
 protected:
     // Update the interface
@@ -50,6 +55,7 @@ protected:
     // Refresh things after a page is shown
     void onShow() override;
 
+    // Reaction when a key is played
     void keyPlayedInternal(int key, int velocity) override;
 
 private slots:

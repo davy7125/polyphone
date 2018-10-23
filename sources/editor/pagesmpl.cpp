@@ -1232,6 +1232,12 @@ void PageSmpl::keyPlayedInternal(int key, int velocity)
         ContextManager::audio()->getSynth()->play(0, ids[0].indexSf2, ids[0].indexElt, key, velocity);
 }
 
+void PageSmpl::onSampleOnOff()
+{
+    ui->pushLecture->toggle();
+    this->lecture();
+}
+
 void PageSmpl::onShow()
 {
     // Initialize keyboard

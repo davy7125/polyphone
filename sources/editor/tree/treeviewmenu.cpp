@@ -343,10 +343,24 @@ void TreeViewMenu::bulkRename(int renameType, QString text1, QString text2, int 
 
 void TreeViewMenu::copy()
 {
-    qDebug() << "copy";
+    qDebug() << "copy";// Nombre d'éléments sélectionnés
+//    int nbElt = this->getSelectedItemsNumber();
+//    this->clearPastedID();
+//    if (nbElt >= 0)
+//    {
+//        if (this->isSelectedItemsSf2Unique() && this->isSelectedItemsTypeUnique())
+//        {
+//            _mainWindow->updateDo();
+
+//            // Copie des éléments
+//            this->_idList = this->getAllIDs();
+//        }
+//    }
 }
 
 void TreeViewMenu::paste()
 {
     qDebug() << "paste";
+//    if (this->getSelectedItemsNumber() == 1 && this->_idList.size())
+//        _mainWindow->dragAndDrop(this->getFirstID(), this->_idList);
 }

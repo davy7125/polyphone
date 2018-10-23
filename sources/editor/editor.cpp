@@ -48,6 +48,9 @@ Editor::Editor(QWidget *parent) :
     connect(ui->toolBar, SIGNAL(keyboardDisplayChanged(bool)), this, SIGNAL(keyboardDisplayChanged(bool)));
     connect(ui->toolBar, SIGNAL(recorderDisplayChanged(bool)), this, SIGNAL(recorderDisplayChanged(bool)));
     connect(ui->toolBar, SIGNAL(selectionChanged(IdList)), ui->treeView, SLOT(onSelectionChanged(IdList)));
+
+    // Tree connection
+    connect(ui->treeView, SIGNAL(sampleOnOff()), ui->pageSmpl, SLOT(onSampleOnOff()));
 }
 
 Editor::~Editor()
