@@ -5,7 +5,10 @@
 #include "QInputDialog"
 #include <QMessageBox>
 #include "contextmanager.h"
+#include "duplicator.h"
 #include <QDebug>
+
+IdList TreeViewMenu::s_copy = IdList();
 
 TreeViewMenu::TreeViewMenu(QWidget * parent) : QMenu(parent),
     _dialogList(new DialogList(parent))
@@ -21,7 +24,7 @@ TreeViewMenu::TreeViewMenu(QWidget * parent) : QMenu(parent),
     this->addAction(_replaceAction);
     this->addSeparator();
 
-    connect(_dialogList, SIGNAL(elementSelected(EltID,bool)), this, SLOT(itemSelectedFromList(EltID,bool)));
+    connect(_dialogList, SIGNAL(elementSelected(EltID, bool)), this, SLOT(itemSelectedFromList(EltID, bool)));
 
     // Copy
     _copyAction = new QAction(trUtf8("Copier"), this);
@@ -343,24 +346,25 @@ void TreeViewMenu::bulkRename(int renameType, QString text1, QString text2, int 
 
 void TreeViewMenu::copy()
 {
-    qDebug() << "copy";// Nombre d'éléments sélectionnés
-//    int nbElt = this->getSelectedItemsNumber();
-//    this->clearPastedID();
-//    if (nbElt >= 0)
-//    {
-//        if (this->isSelectedItemsSf2Unique() && this->isSelectedItemsTypeUnique())
-//        {
-//            _mainWindow->updateDo();
-
-//            // Copie des éléments
-//            this->_idList = this->getAllIDs();
-//        }
-//    }
+    s_copy = _currentIds;
 }
 
 void TreeViewMenu::paste()
 {
-    qDebug() << "paste";
-//    if (this->getSelectedItemsNumber() == 1 && this->_idList.size())
-//        _mainWindow->dragAndDrop(this->getFirstID(), this->_idList);
+    if (_currentIds.count() == 1 && s_copy.count() > 0)
+    {
+        // Destination of all copied elements
+        EltID idDest = _currentIds[0];
+
+        // Paste all copied elements
+        SoundfontManager * sm = SoundfontManager::getInstance();
+        Duplicator duplicator(sm, sm, (QWidget*)this->parent());
+        foreach (EltID idSource, s_copy)
+        {
+            if ((idSource.typeElement == elementSmpl || idSource.typeElement == elementInst || idSource.typeElement == elementPrst ||
+                 idSource.typeElement == elementInstSmpl || idSource.typeElement == elementPrstInst) && sm->isValid(idSource))
+                duplicator.copy(idSource, idDest);
+        }
+        sm->endEditing("command:paste");
+    }
 }
