@@ -32,7 +32,6 @@
 #include "dialogselection.h"
 #include "graphicsviewrange.h"
 #include "envelopeditor.h"
-#include "duplicationtool.h"
 #include "utils.h"
 #include <QScrollBar>
 #include <QMenu>
@@ -2407,48 +2406,48 @@ QList<EltID> PageTable::getEltIds(bool &error, bool allWithDivisions, bool allDi
 
 void PageTable::duplication()
 {
-    bool error;
-    QList<EltID> ids = this->getEltIds(error, true, false);
-    if (ids.isEmpty() || error)
-        return;
+//    bool error;
+//    QList<EltID> ids = this->getEltIds(error, true, false);
+//    if (ids.isEmpty() || error)
+//        return;
 
-    DialogDuplication * dialogDuplication = new DialogDuplication(_typePage == PAGE_PRST, this);
-    dialogDuplication->setAttribute(Qt::WA_DeleteOnClose, true);
-    this->connect(dialogDuplication, SIGNAL(accepted(QVector<QPair<int, int> >,bool,bool)),
-                  SLOT(duplication(QVector<QPair<int, int> >,bool,bool)));
-    dialogDuplication->show();
+//    DialogDuplication * dialogDuplication = new DialogDuplication(_typePage == PAGE_PRST, this);
+//    dialogDuplication->setAttribute(Qt::WA_DeleteOnClose, true);
+//    this->connect(dialogDuplication, SIGNAL(accepted(QVector<QPair<int, int> >,bool,bool)),
+//                  SLOT(duplication(QVector<QPair<int, int> >,bool,bool)));
+//    dialogDuplication->show();
 }
 
 void PageTable::duplication(QVector<QPair<int, int> > listeVelocites, bool duplicKey, bool duplicVel)
 {
-    if (!duplicKey && !duplicVel)
-        return;
+//    if (!duplicKey && !duplicVel)
+//        return;
 
-    bool error;
-    QList<EltID> ids = this->getEltIds(error, true, false);
-    if (error)
-        return;
+//    bool error;
+//    QList<EltID> ids = this->getEltIds(error, true, false);
+//    if (error)
+//        return;
 
-    foreach (EltID id, ids)
-    {
-        if (_typePage == PAGE_INST)
-            id.typeElement = elementInstSmpl;
-        else
-            id.typeElement = elementPrstInst;
+//    foreach (EltID id, ids)
+//    {
+//        if (_typePage == PAGE_INST)
+//            id.typeElement = elementInstSmpl;
+//        else
+//            id.typeElement = elementPrstInst;
 
-        DuplicationTool tool(_sf2, id);
+//        DuplicationTool tool(_sf2, id);
 
-        // Duplication pour chaque note
-        if (duplicKey)
-            tool.duplicateByKey();
+//        // Duplication pour chaque note
+//        if (duplicKey)
+//            tool.duplicateByKey();
 
-        // Duplication pour chaque velocityRange
-        if (duplicVel)
-            tool.duplicateByVelocity(listeVelocites);
-    }
+//        // Duplication pour chaque velocityRange
+//        if (duplicVel)
+//            tool.duplicateByVelocity(listeVelocites);
+//    }
 
-    // Actualisation
-    _sf2->endEditing(getEditingSource());
+//    // Actualisation
+//    _sf2->endEditing(getEditingSource());
 }
 
 void PageTable::spatialisation()

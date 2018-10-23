@@ -71,8 +71,6 @@ public:
     Ui::MainWindowOld *ui;
     explicit MainWindowOld(QWidget *parent = 0);
     ~MainWindowOld();
-
-    void dragAndDrop(EltID idDest, QList<EltID> idSources);
     void spaceKeyPressedInTree();
 
 public slots:

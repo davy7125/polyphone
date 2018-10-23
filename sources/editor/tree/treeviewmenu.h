@@ -40,6 +40,9 @@ private:
     QAction * _removeAction;
     QAction * _renameAction;
     DialogList * _dialogList;
+
+    // Same copy for all instances
+    static IdList s_copy;
 };
 
 #endif // TREEVIEWMENU_H
