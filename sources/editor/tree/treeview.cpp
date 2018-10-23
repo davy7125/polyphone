@@ -88,7 +88,6 @@ void TreeView::keyPressEvent(QKeyEvent * event)
         _menu->initialize(getSelectedIds());
         _menu->remove();
         event->accept();
-        return;
     }
     else if (event->key() == Qt::Key_F2)
     {
@@ -96,10 +95,31 @@ void TreeView::keyPressEvent(QKeyEvent * event)
         _menu->initialize(getSelectedIds());
         _menu->rename();
         event->accept();
-        return;
     }
-
-    QTreeView::keyPressEvent(event);
+    else if (event->matches(QKeySequence::Copy))
+    {
+        // Copy the selection
+        _menu->initialize(getSelectedIds());
+        _menu->copy();
+        event->accept();
+    }
+    else if (event->matches(QKeySequence::Paste))
+    {
+        // Paste the selection
+        _menu->initialize(getSelectedIds());
+        _menu->paste();
+        event->accept();
+    }
+    else if (event->key() == Qt::Key_Space)
+    {
+        if (getSelectedIds().getSelectedIds(elementSmpl).count() == 1)
+        {
+            emit(sampleOnOff());
+            event->accept();
+        }
+    }
+    else
+        QTreeView::keyPressEvent(event);
 }
 
 void TreeView::setBestMatch(int sampleId, int instrumentId, int presetId)
