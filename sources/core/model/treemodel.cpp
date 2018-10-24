@@ -240,3 +240,25 @@ void TreeModel::triggerUpdate()
         emit(restoreExpandedState());
     }
 }
+
+Qt::ItemFlags TreeModel::flags(const QModelIndex &index) const
+{
+    Qt::ItemFlags defaultFlags = QAbstractItemModel::flags(index);
+    TreeItem *childItem = static_cast<TreeItem*>(index.internalPointer());
+    if (childItem != NULL)
+    {
+        EltID id = childItem->getId();
+        switch (id.typeElement)
+        {
+        case elementSmpl:
+            return Qt::ItemIsDragEnabled | defaultFlags;
+        case elementInst: case elementInstSmpl:
+        case elementPrst: case elementPrstInst:
+            return Qt::ItemIsDragEnabled | Qt::ItemIsDropEnabled | defaultFlags;
+        default:
+            break;
+        }
+    }
+
+    return defaultFlags;
+}

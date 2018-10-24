@@ -27,6 +27,10 @@ public:
     /// Trigger all dataChanged() when the editing is done
     void triggerUpdate();
 
+    /// Drag & drop
+    Qt::DropActions supportedDropActions() const { return Qt::MoveAction; }
+    Qt::ItemFlags flags(const QModelIndex &index) const;
+
 signals:
     void saveExpandedState();
     void restoreExpandedState();

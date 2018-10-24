@@ -29,6 +29,9 @@ protected:
     void mouseDoubleClickEvent(QMouseEvent * event);
     void selectionChanged(const QItemSelection &selected, const QItemSelection &deselected) override;
     void keyPressEvent(QKeyEvent * event);
+    void dragEnterEvent(QDragEnterEvent * event);
+    void dragMoveEvent(QDragMoveEvent * event);
+    void dropEvent(QDropEvent *event);
 
 private slots:
     void openMenu(const QPoint &point);
@@ -48,6 +51,7 @@ private:
     QList<EltID> _expandedIds;
     int _verticalScrollValue;
     TreeViewMenu * _menu;
+    IdList _draggedIds;
 };
 
 #endif // TREEVIEW_H
