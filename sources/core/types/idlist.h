@@ -33,6 +33,9 @@ public:
     // For instrument and preset only, return true if all their divisions have a range specified
     bool areAllWithRange(ElementType type);
 
+    // True if all elements have the same type
+    bool sameType();
+
 private:
     QMap<ElementType, IdList > _computedLists;
 };

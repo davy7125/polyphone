@@ -174,3 +174,16 @@ bool IdList::areAllWithRange(ElementType type)
 
     return true;
 }
+
+bool IdList::sameType()
+{
+    ElementType type = elementUnknown;
+    for (int i = 0; i < this->count(); i++)
+    {
+        if (i == 0)
+            type = this->at(i).typeElement;
+        else if (type != this->at(i).typeElement)
+            return false;
+    }
+    return true;
+}

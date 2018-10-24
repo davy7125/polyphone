@@ -96,6 +96,9 @@ void TreeViewMenu::initialize(IdList ids)
         _renameAction->setText(trUtf8("Renommer..."));
         _renameAction->setEnabled(false);
     }
+
+    // Paste
+    _pasteAction->setEnabled(ids.count() == 1);
 }
 
 void TreeViewMenu::associate()
