@@ -389,7 +389,8 @@ SOURCES	+= main.cpp \
     editor/tools/transpose/tooltranspose.cpp \
     editor/tools/transpose/tooltranspose_gui.cpp \
     editor/tools/transpose/tooltranspose_parameters.cpp \
-    editor/tree/treeviewmenu.cpp
+    editor/tree/treeviewmenu.cpp \
+    core/sampleloader.cpp
 
 HEADERS  += \
     core/sound.h \
@@ -608,7 +609,8 @@ HEADERS  += \
     editor/tools/transpose/tooltranspose.h \
     editor/tools/transpose/tooltranspose_gui.h \
     editor/tools/transpose/tooltranspose_parameters.h \
-    editor/tree/treeviewmenu.h
+    editor/tree/treeviewmenu.h \
+    core/sampleloader.h
 
 FORMS    += \
     dialogs/dialog_list.ui \

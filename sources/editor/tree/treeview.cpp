@@ -4,8 +4,9 @@
 #include "soundfontmanager.h"
 #include <QMouseEvent>
 #include <QScrollBar>
-#include <QMessageBox>
 #include "treeviewmenu.h"
+#include "duplicator.h"
+#include "sampleloader.h"
 
 TreeView::TreeView(QWidget * parent) : QTreeView(parent),
     _fixingSelection(false),
@@ -21,6 +22,14 @@ TreeView::TreeView(QWidget * parent) : QTreeView(parent),
     // Menu
     _menu = new TreeViewMenu(parent);
     connect(this, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(openMenu(QPoint)));
+
+    // Drag & drop
+    this->setAcceptDrops(true);
+    this->setSelectionMode(QAbstractItemView::ExtendedSelection);
+    this->setDragEnabled(true);
+    this->viewport()->setAcceptDrops(true);
+    this->setDropIndicatorShown(true);
+    this->setDragDropMode(QAbstractItemView::InternalMove);
 }
 
 void TreeView::mousePressEvent(QMouseEvent * event)
@@ -555,5 +564,66 @@ void TreeView::openMenu(const QPoint &point)
     {
         _menu->initialize(ids);
         _menu->exec(this->viewport()->mapToGlobal(point));
+    }
+}
+
+void TreeView::dragEnterEvent(QDragEnterEvent * event)
+{
+    // Current selection
+    _draggedIds.clear();
+    IdList ids = getSelectedIds();
+    if (ids.sameType())
+        _draggedIds = ids;
+
+    event->acceptProposedAction();
+}
+
+void TreeView::dragMoveEvent(QDragMoveEvent * event)
+{
+    event->accept();
+}
+
+void TreeView::dropEvent(QDropEvent *event)
+{
+    // Destination
+    QModelIndex index = this->indexAt(event->pos());
+    if (!index.isValid())
+        return;
+    EltID idDest = index.data(Qt::UserRole).value<EltID>();
+
+    if (event->mimeData()->hasUrls() && event->source() == NULL)
+    {
+        SoundfontManager * sm = SoundfontManager::getInstance();
+        int replace = 0;
+        SampleLoader sl((QWidget*)this->parent());
+        IdList smplList;
+        for (int i = 0; i < event->mimeData()->urls().count(); i++)
+        {
+            QString path = QUrl::fromPercentEncoding(event->mimeData()->urls().at(i).toEncoded());
+            if (!path.isEmpty())
+            {
+                QString extension = path.split(".").last().toLower();
+                if (extension == "wav")
+                {
+                    if (path.startsWith("file://"))
+                        path = path.mid(7);
+                    smplList << sl.load(path, idDest.indexSf2, &replace);
+                }
+            }
+        }
+        sm->endEditing("command:dropSmpl");
+        this->onSelectionChanged(smplList);
+    }
+    else if (!_draggedIds.empty())
+    {
+        SoundfontManager * sm = SoundfontManager::getInstance();
+        Duplicator duplicator(sm, sm, (QWidget*)this->parent());
+        foreach (EltID idSource, _draggedIds)
+        {
+            if ((idSource.typeElement == elementSmpl || idSource.typeElement == elementInst || idSource.typeElement == elementPrst ||
+                 idSource.typeElement == elementInstSmpl || idSource.typeElement == elementPrstInst) && sm->isValid(idSource))
+                duplicator.copy(idSource, idDest);
+        }
+        sm->endEditing("command:drop");
     }
 }

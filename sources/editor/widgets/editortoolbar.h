@@ -44,9 +44,6 @@ private slots:
     void onRedo();
 
 private:
-    IdList addSmpl(QString path, EltID id, int *replace);
-    QString getName(QString name, int maxCharacters, int suffixNumber);
-
     StyledAction * _actionAddSample;
     StyledAction * _actionAddInstrument;
     StyledAction * _actionAddPreset;
