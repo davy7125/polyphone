@@ -32,20 +32,20 @@ class DuplicationTool : QObject
 {
 public:
     /// Initialize the duplication tool with an instrument or a preset
-    DuplicationTool(SoundfontManager * sf2, EltID id);
+    DuplicationTool(EltID id);
 
     /// Duplicate each division by key
     void duplicateByKey();
 
     /// Duplicate each division by velocity
-    void duplicateByVelocity(QVector<QPair<int, int> > velocities);
+    void duplicateByVelocity(QList<QPair<int, int> > velocities);
 
 private:
     /// Duplicate a division
     void duplicateByKey(QPair<int, int> keyRange, QPair<int, int> velRange, EltID id);
 
     /// Duplicate a series of division sharing the same key range
-    void duplicateByVelocity(QMap<QPair<int, int>, QList<EltID> > elts, QVector<QPair<int, int> > velocities);
+    void duplicateByVelocity(QMap<QPair<int, int>, QList<EltID> > elts, QList<QPair<int, int> > velocities);
 
     /// Copy the attributes of idFrom to idTo
     void duplicateGenMod(EltID idFrom, EltID idTo);

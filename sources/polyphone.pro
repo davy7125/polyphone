@@ -239,7 +239,6 @@ SOURCES	+= main.cpp \
     editor/tools/dialog_mixture.cpp \
     editor/tools/dialog_release.cpp \
     editor/tools/dialog_visualizer.cpp \
-    editor/tools/dialog_duplication.cpp \
     editor/tools/dialog_transposition.cpp \
     editor/tools/division_duplication/duplicationtool.cpp \
     editor/tools/dialog_exportlist.cpp \
@@ -451,7 +450,6 @@ HEADERS  += \
     editor/tools/dialog_mixture.h \
     editor/tools/dialog_release.h \
     editor/tools/dialog_visualizer.h \
-    editor/tools/dialog_duplication.h \
     editor/tools/dialog_transposition.h \
     editor/tools/division_duplication/duplicationtool.h \
     editor/tools/dialog_exportlist.h \
@@ -626,7 +624,6 @@ FORMS    += \
     editor/tools/dialog_mixture.ui \
     editor/tools/dialog_release.ui \
     editor/tools/dialog_visualizer.ui \
-    editor/tools/dialog_duplication.ui \
     editor/tools/dialog_transposition.ui \
     editor/tools/dialog_exportlist.ui \
     mainwindow/widgetshowhistory.ui \

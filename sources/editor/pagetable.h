@@ -43,7 +43,6 @@ public:
     PageTable(TypePage typePage, QWidget *parent = 0);
 
     void reselect();
-    void duplication();
     void spatialisation();
     void visualize();
     void displayModInTable();
@@ -149,7 +148,6 @@ protected slots:
 private slots:
     void spatialisation(QMap<int, double> mapPan);
     void spatialisation(QMap<int, double> mapPan, EltID id);
-    void duplication(QVector<QPair<int, int> > listeVelocites, bool duplicKey, bool duplicVel);
 };
 
 #endif // PAGETABLE_H

@@ -542,16 +542,6 @@ void MainWindowOld::coller()
     }
 }
 
-void MainWindowOld::duplication()
-{
-    //if (ui->tree->getSelectedItemsNumber() == 0) return;
-    ElementType type;// = ui->tree->getFirstID().typeElement;
-    if (type == elementInst || type == elementInstSmpl)
-        this->page_inst->duplication();
-    else if (type == elementPrst || type == elementPrstInst)
-        this->page_prst->duplication();
-}
-
 void MainWindowOld::spatialisation()
 {
     //if (ui->tree->getSelectedItemsNumber() == 0) return;

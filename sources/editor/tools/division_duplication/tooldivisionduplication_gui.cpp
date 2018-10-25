@@ -19,18 +19,130 @@ void ToolDivisionDuplication_gui::updateInterface(AbstractToolParameters * param
 {
     _isInst = (ids.isEmpty() || ids[0].typeElement == elementInst || ids[0].typeElement == elementInstSmpl);
     ToolDivisionDuplication_parameters * params = (ToolDivisionDuplication_parameters *) parameters;
-    SoundfontManager * sm = SoundfontManager::getInstance();
 
+    // Recall values
+    _listeVelocites = _isInst ? params->getInstVelocityRanges() : params->getPrstVelocityRanges();
+    ui->checkForEachKey->setChecked(_isInst ? params->getInstDuplicKey() : params->getPrstDuplicKey());
+    ui->checkForEachVelocityRange->setChecked(_isInst ? params->getInstDuplicVel() : params->getPrstDuplicVel());
+
+    this->on_checkForEachVelocityRange_clicked();
+    if (_listeVelocites.size() >= 1)
+    {
+        ui->spinMinVel->blockSignals(true);
+        ui->spinMinVel->setValue(_listeVelocites[0].first);
+        ui->spinMinVel->blockSignals(false);
+        ui->spinMaxVel->blockSignals(true);
+        ui->spinMaxVel->setValue(_listeVelocites[0].second);
+        ui->spinMaxVel->blockSignals(false);
+    }
+
+    // Display velocities
+    this->dispVel();
+}
+
+void ToolDivisionDuplication_gui::dispVel()
+{
+    // Clear velocity list
+    ui->listVelocites->blockSignals(true);
+    int selectedIndex = ui->listVelocites->currentRow();
+    ui->listVelocites->clear();
+
+    // Remplissage
+    int valMin, valMax;
+    for (int i = 0; i < _listeVelocites.size(); i++)
+    {
+        // Add an element
+        valMin = qMin(_listeVelocites[i].first, _listeVelocites[i].second);
+        valMax = qMax(_listeVelocites[i].first, _listeVelocites[i].second);
+        ui->listVelocites->addItem(QString::number(valMin) + " - " + QString::number(valMax));
+    }
+    if (ui->listVelocites->count() > selectedIndex)
+        ui->listVelocites->setCurrentRow(selectedIndex);
+    else if (ui->listVelocites->count() > selectedIndex - 1)
+        ui->listVelocites->setCurrentRow(selectedIndex - 1);
+    ui->listVelocites->blockSignals(false);
 }
 
 void ToolDivisionDuplication_gui::saveParameters(AbstractToolParameters * parameters)
 {
     ToolDivisionDuplication_parameters * params = (ToolDivisionDuplication_parameters *) parameters;
 
+    // Save values
+    if (_isInst)
+    {
+        params->setInstVelocityRanges(_listeVelocites);
+        params->setInstDuplicKey(ui->checkForEachKey->isChecked());
+        params->setInstDuplicVel(ui->checkForEachVelocityRange->isChecked());
+    }
+    else
+    {
+        params->setPrstVelocityRanges(_listeVelocites);
+        params->setPrstDuplicKey(ui->checkForEachKey->isChecked());
+        params->setPrstDuplicVel(ui->checkForEachVelocityRange->isChecked());
+    }
+}
+
+void ToolDivisionDuplication_gui::on_pushAdd_clicked()
+{
+    int minVel = qMin(ui->spinMinVel->value(), ui->spinMaxVel->value());
+    int maxVel = qMax(ui->spinMinVel->value(), ui->spinMaxVel->value());
+    _listeVelocites.append(QPair<int, int>(minVel, maxVel));
+    this->dispVel();
+    ui->listVelocites->setCurrentRow(ui->listVelocites->count() - 1);
+}
+
+void ToolDivisionDuplication_gui::on_pushRemove_clicked()
+{
+    int index = ui->listVelocites->currentRow();
+    if (index >= 0 && _listeVelocites.size() > 1)
+    {
+        _listeVelocites.removeAt(index);
+        this->dispVel();
+    }
+}
+
+void ToolDivisionDuplication_gui::on_listVelocites_currentRowChanged(int currentRow)
+{
+    ui->spinMinVel->blockSignals(true);
+    ui->spinMaxVel->blockSignals(true);
+    ui->spinMinVel->setValue(_listeVelocites[currentRow].first);
+    ui->spinMaxVel->setValue(_listeVelocites[currentRow].second);
+    ui->spinMinVel->blockSignals(false);
+    ui->spinMaxVel->blockSignals(false);
+}
+
+void ToolDivisionDuplication_gui::on_spinMinVel_valueChanged(int arg1)
+{
+    Q_UNUSED(arg1);
+    int index = ui->listVelocites->currentRow();
+    if (index >= 0)
+    {
+        int minVel = qMin(ui->spinMinVel->value(), ui->spinMaxVel->value());
+        int maxVel = qMax(ui->spinMinVel->value(), ui->spinMaxVel->value());
+        _listeVelocites[index].first = minVel;
+        _listeVelocites[index].second = maxVel;
+        this->dispVel();
+    }
+}
+
+void ToolDivisionDuplication_gui::on_spinMaxVel_valueChanged(int arg1)
+{
+    Q_UNUSED(arg1);
+    this->on_spinMinVel_valueChanged(0);
+}
+
+void ToolDivisionDuplication_gui::on_checkForEachVelocityRange_clicked()
+{
+    bool isEnabled = ui->checkForEachVelocityRange->isChecked();
+    ui->listVelocites->setEnabled(isEnabled);
+    ui->pushAdd->setEnabled(isEnabled);
+    ui->pushRemove->setEnabled(isEnabled);
+    ui->spinMaxVel->setEnabled(isEnabled);
+    ui->spinMinVel->setEnabled(isEnabled);
 }
 
 void ToolDivisionDuplication_gui::on_buttonBox_accepted()
-{
+{       
     emit(this->validated());
 }
 
