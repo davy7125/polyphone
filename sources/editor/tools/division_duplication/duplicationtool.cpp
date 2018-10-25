@@ -25,8 +25,8 @@
 #include "duplicationtool.h"
 #include <QVector>
 
-DuplicationTool::DuplicationTool(SoundfontManager * sf2, EltID id) :
-    _sf2(sf2),
+DuplicationTool::DuplicationTool(EltID id) :
+    _sf2(SoundfontManager::getInstance()),
     _id(id)
 {
     _isInst = (id.typeElement == elementInstSmpl);
@@ -108,7 +108,7 @@ void DuplicationTool::duplicateByKey(QPair<int, int> keyRange, QPair<int, int> v
         _elts[QPair<int, int>(keyLow, keyLow)][velRange] << id;
 }
 
-void DuplicationTool::duplicateByVelocity(QVector<QPair<int, int> > velocities)
+void DuplicationTool::duplicateByVelocity(QList<QPair<int, int> > velocities)
 {
     QPair<int, int> keyRange;
     foreach (keyRange, _elts.keys())
@@ -120,7 +120,7 @@ bool DuplicationTool::lessThan(QPair<int, int> elt1, QPair<int, int> elt2)
     return elt1.first < elt2.first || (elt1.first == elt2.first && elt1.second < elt2.second);
 }
 
-void DuplicationTool::duplicateByVelocity(QMap<QPair<int, int>, QList<EltID> > elts, QVector<QPair<int, int> > velocities)
+void DuplicationTool::duplicateByVelocity(QMap<QPair<int, int>, QList<EltID> > elts, QList<QPair<int, int> > velocities)
 {
     // Sort ids and velocities by ascending velocity
     QList<QPair<int, int> > orderedOldVel = elts.keys();

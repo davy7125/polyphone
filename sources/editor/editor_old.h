@@ -89,7 +89,6 @@ private slots:
     void afficherSectionModulateurs();
 
     void spatialisation();      // outil instrument, spatialisation du son
-    void duplication();         // outil instrument et preset, duplication des divisions
     void visualize();           // outil instrument et preset, visualise les paramètres utilisés dans un graphique
     void exportPresetList();    // global tool
     void on_actionExporter_pics_de_fr_quence_triggered();

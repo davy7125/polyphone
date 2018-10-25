@@ -24,10 +24,20 @@ public:
 private slots:
     void on_buttonBox_accepted();
     void on_buttonBox_rejected();
+    void on_pushAdd_clicked();
+    void on_pushRemove_clicked();
+    void on_spinMinVel_valueChanged(int arg1);
+    void on_spinMaxVel_valueChanged(int arg1);
+    void on_checkForEachVelocityRange_clicked();
+    void on_listVelocites_currentRowChanged(int currentRow);
 
 private:
-    bool _isInst;
+    void dispVel();
+    void storeVelocities(QVector<QPair<int, int> > val);
+
     Ui::ToolDivisionDuplication_gui *ui;
+    bool _isInst;
+    QList<QPair<int, int> > _listeVelocites;
 };
 
 #endif // TOOLDIVISIONDUPLICATION_GUI_H

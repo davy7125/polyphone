@@ -36,8 +36,13 @@ public:
     /// Process an element
     void process(SoundfontManager * sm, EltID id, AbstractToolParameters * parameters) override;
 
+protected:
+    /// Get the warning to display after the tool is run
+    QString getWarning() override;
+
 private:
     bool _isInst;
+    QStringList _elementsInError;
 };
 
 #endif // TOOLDIVISIONDUPLICATION_H
