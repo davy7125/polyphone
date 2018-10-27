@@ -136,40 +136,40 @@ void MainWindow::closeEvent(QCloseEvent *event)
     ContextManager::configuration()->setValue(ConfManager::SECTION_DISPLAY, "windowState", saveState());
 
     // Number of files not saved
-    int nbFile = 0;
     EltID id(elementSf2);
     SoundfontManager * sf2 = SoundfontManager::getInstance();
     QList<int> nbSf2 = sf2->getSiblings(id);
-    QString qStr = "";
+    QStringList fileNames;
     foreach (int i, nbSf2)
     {
         id.indexSf2 = i;
         if (sf2->isEdited(i))
         {
-            if (nbFile)
-                qStr.append("<br /> - " + sf2->getQstr(id, champ_name));
+            QString name = sf2->getQstr(id, champ_name);
+            if (name.isEmpty())
+                fileNames << trUtf8("sans titre");
             else
-                qStr = sf2->getQstr(id, champ_name);
-            nbFile++;
+                fileNames << sf2->getQstr(id, champ_name);
         }
     }
 
-    if (nbFile)
+    if (!fileNames.empty())
     {
         QMessageBox msgBox(this);
         msgBox.setIcon(QMessageBox::Warning);
         msgBox.setWindowTitle(trUtf8("Attention"));
         msgBox.setText(trUtf8("<b>Sauvegarder avant de quitter ?</b>"));
-        if (nbFile > 1)
+        if (fileNames.count() > 1)
         {
-            qStr.prepend(trUtf8("Les fichiers suivants n'ont pas été sauvegardés :<br/> - "));
-            msgBox.setInformativeText(qStr);
+            QString txt = trUtf8("Les fichiers suivants n'ont pas été sauvegardés :") + "<ul>";
+            foreach (QString filename, fileNames)
+                txt += "<li>" + filename + "</li>";
+            txt += "</ul>";
+            msgBox.setInformativeText(txt);
         }
         else
-        {
-            qStr = trUtf8("Le fichier « ") + qStr + trUtf8(" » n'a pas été sauvegardé.");
-            msgBox.setInformativeText(qStr);
-        }
+            msgBox.setInformativeText(trUtf8("Le fichier « %0 » n'a pas été sauvegardé.").arg(fileNames[0]));
+
         msgBox.setStandardButtons(QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel);
         msgBox.button(QMessageBox::Save)->setText(trUtf8("&Enregistrer"));
         msgBox.button(QMessageBox::Cancel)->setText(trUtf8("&Annuler"));
@@ -194,8 +194,6 @@ void MainWindow::closeEvent(QCloseEvent *event)
             break;
         }
     }
-
-    // Close magnéto
 }
 
 void MainWindow::slotAddTab()

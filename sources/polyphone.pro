@@ -389,7 +389,9 @@ SOURCES	+= main.cpp \
     editor/tools/transpose/tooltranspose_gui.cpp \
     editor/tools/transpose/tooltranspose_parameters.cpp \
     editor/tree/treeviewmenu.cpp \
-    core/sampleloader.cpp
+    core/sampleloader.cpp \
+    editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp \
+    editor/tools/frequency_peaks/toolfrequencypeaks_parameters.cpp
 
 HEADERS  += \
     core/sound.h \
@@ -608,7 +610,9 @@ HEADERS  += \
     editor/tools/transpose/tooltranspose_gui.h \
     editor/tools/transpose/tooltranspose_parameters.h \
     editor/tree/treeviewmenu.h \
-    core/sampleloader.h
+    core/sampleloader.h \
+    editor/tools/frequency_peaks/toolfrequencypeaks_gui.h \
+    editor/tools/frequency_peaks/toolfrequencypeaks_parameters.h
 
 FORMS    += \
     dialogs/dialog_list.ui \
@@ -657,7 +661,8 @@ FORMS    += \
     editor/tools/monitor/toolmonitor_gui.ui \
     editor/tools/preset_list/toolpresetlist_gui.ui \
     editor/tools/sound_spatialization/toolsoundspatialization_gui.ui \
-    editor/tools/transpose/tooltranspose_gui.ui
+    editor/tools/transpose/tooltranspose_gui.ui \
+    editor/tools/frequency_peaks/toolfrequencypeaks_gui.ui
 
 RESOURCES += resources.qrc
 

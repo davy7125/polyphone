@@ -151,10 +151,11 @@ void WindowManager::onTabCloseRequested(int tabIndex)
             QMessageBox msgBox(_tabWidget);
             msgBox.setIcon(QMessageBox::Warning);
             id.typeElement = elementSf2;
-            QString qStr = trUtf8("<b>Sauvegarder avant de quitter ?</b>");
-            msgBox.setText(qStr);
-            qStr = trUtf8("Le fichier « ") + sf2->getQstr(id,champ_name) + trUtf8(" » a été modifié.");
-            msgBox.setInformativeText(qStr);
+            msgBox.setText("<b>" + trUtf8("Sauvegarder avant de quitter ?") + "</b>");
+            QString filename = sf2->getQstr(id, champ_name);
+            if (filename.isEmpty())
+                filename = trUtf8("sans titre");
+            msgBox.setInformativeText(trUtf8("Le fichier « %0 » a été modifié.").arg(filename));
             msgBox.setWindowTitle(trUtf8("Attention"));
             msgBox.setStandardButtons(QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel);
             msgBox.button(QMessageBox::Save)->setText(trUtf8("&Enregistrer"));

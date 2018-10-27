@@ -221,21 +221,6 @@ void MainWindowOld::showAbout()
     about.show();
 }
 
-void MainWindowOld::AfficherBarreOutils()
-{
-    bool display = ui->actionBarre_d_outils->isChecked();
-    ContextManager::configuration()->setValue(ConfManager::SECTION_DISPLAY, "tool_bar", display);
-    ui->toolBar->setVisible(display);
-}
-
-void MainWindowOld::afficherSectionModulateurs()
-{
-    bool display = ui->actionSection_modulateurs->isChecked();
-    ContextManager::configuration()->setValue(ConfManager::SECTION_DISPLAY, "section_modulateur", display);
-    this->page_inst->setModVisible(display);
-    this->page_prst->setModVisible(display);
-}
-
 void MainWindowOld::onPleinEcranTriggered()
 {
     this->setWindowState(this->windowState() ^ Qt::WindowFullScreen);
@@ -569,58 +554,4 @@ void MainWindowOld::exportPresetList()
     DialogExportList * dial = new DialogExportList(sf2, id, this);
     dial->setAttribute(Qt::WA_DeleteOnClose);
     dial->show();
-}
-void MainWindowOld::on_actionExporter_pics_de_fr_quence_triggered()
-{
-    EltID id;// = ui->tree->getFirstID();
-    id.typeElement = elementSf2;
-    QString defaultFile = ContextManager::recentFile()->getLastDirectory(RecentFileManager::FILE_TYPE_FREQUENCIES) + "/" +
-            sf2->getQstr(id, champ_name).replace(QRegExp(QString::fromUtf8("[`~*|:<>«»?/{}\"\\\\]")), "_") + ".csv";
-    QString fileName = QFileDialog::getSaveFileName(this, trUtf8("Exporter les pics de fréquence"),
-                                                    defaultFile, trUtf8("Fichier .csv (*.csv)"));
-    if (!fileName.isEmpty())
-    {
-        ContextManager::recentFile()->addRecentFile(RecentFileManager::FILE_TYPE_FREQUENCIES, fileName);
-        exporterFrequences(fileName);
-    }
-}
-
-void MainWindowOld::exporterFrequences(QString fileName)
-{
-    // Création fichier csv
-    QFile file(fileName);
-    if (!file.open(QIODevice::WriteOnly))
-        return;
-
-    QString sep = trUtf8(";");
-    QTextStream stream(&file);
-    stream << "\"" << trUtf8("Echantillon") << "\"" << sep << "\"" << trUtf8("Numéro de pic") << "\"" << sep << "\""
-           << trUtf8("Facteur") << "\"" << sep << "\"" << trUtf8("Fréquence") << "\"" << sep << "\""
-           << trUtf8("Note") << "\"" << sep << "\"" << trUtf8("Correction") << "\"";
-
-    EltID id;// = ui->tree->getFirstID();
-    id.typeElement = elementSmpl;
-    QString nomSmpl;
-    QList<double> listeFrequences, listeFacteurs;
-    QList<int> listeNotes, listeCorrections;
-    foreach (int i, sf2->getSiblings(id))
-    {
-        id.indexElt = i;
-        nomSmpl = sf2->getQstr(id, champ_name).replace(QRegExp(QString::fromUtf8("[`~*|:<>«»?/{}\"\\\\]")), "_");
-
-        // Ecriture valeurs pour l'échantillon
-        page_smpl->getPeakFrequencies(id, listeFrequences, listeFacteurs, listeNotes, listeCorrections);
-
-        for (int j = 0; j < listeFrequences.size(); j++)
-        {
-            stream << endl;
-            stream << "\"" << nomSmpl << "\"" << sep;
-            stream << j << sep;
-            stream << QString::number(listeFacteurs.at(j)).replace(".", trUtf8(",")) << sep;
-            stream << QString::number(listeFrequences.at(j)).replace(".", trUtf8(",")) << sep;
-            stream << ContextManager::keyName()->getKeyName(listeNotes.at(j)) << sep;
-            stream << listeCorrections.at(j);
-        }
-    }
-    file.close();
 }
