@@ -85,13 +85,10 @@ private slots:
     int exporter2(QList<QList<EltID> > listID, QString dir, int format, int flags, int quality);
 
     void showAbout();           // Affichage fenêtre à propos
-    void AfficherBarreOutils(); // Clic sur l'action "barre d'outils" du menu "afficher"
-    void afficherSectionModulateurs();
 
     void spatialisation();      // outil instrument, spatialisation du son
     void visualize();           // outil instrument et preset, visualise les paramètres utilisés dans un graphique
     void exportPresetList();    // global tool
-    void on_actionExporter_pics_de_fr_quence_triggered();
     void onPleinEcranTriggered();
     void futureFinished();
 
@@ -116,7 +113,6 @@ private:
     ModalProgressDialog * _progressDialog;
 
     // Méthodes privées
-    void exporterFrequences(QString fileName);
     int sauvegarder(int indexSf2, bool saveAs);
 };
 

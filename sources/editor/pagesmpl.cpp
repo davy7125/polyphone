@@ -1096,19 +1096,6 @@ void PageSmpl::setStereo(bool val)
     _synth->setStereo(val);
 }
 
-void PageSmpl::getPeakFrequencies(EltID id, QList<double> &frequencies, QList<double> &factors,
-                                  QList<int> &keys, QList<int> &corrections)
-{
-    GraphiqueFourier graphTmp(NULL);
-    graphTmp.setData(_sf2->getData(id, champ_sampleData16), _sf2->get(id, champ_dwSampleRate).dwValue);
-    frequencies.clear();
-    factors.clear();
-    keys.clear();
-    corrections.clear();
-    graphTmp.setPos(_sf2->get(id, champ_dwStartLoop).dwValue, _sf2->get(id, champ_dwEndLoop).dwValue,
-                    frequencies, factors, keys, corrections, false);
-}
-
 void PageSmpl::on_pushAutoTune_clicked()
 {
     // Soundfont editing
