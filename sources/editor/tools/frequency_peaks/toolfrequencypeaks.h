@@ -1,12 +1,12 @@
 #ifndef TOOLFREQUENCYPEAKS_H
 #define TOOLFREQUENCYPEAKS_H
 
-#include "abstracttooliterating.h"
+#include "abstracttool.h"
 
-class ToolFrequencyPeaks: public AbstractToolIterating
+class ToolFrequencyPeaks: public AbstractTool
 {
 public:
-    ToolFrequencyPeaks() : AbstractToolIterating(elementSmpl) {}
+    ToolFrequencyPeaks();
 
     /// Icon, label and category displayed to the user to describe the tool
     QString getIconName() const override
@@ -30,8 +30,15 @@ public:
         return "smpl:frequencyPeaks";
     }
 
-    /// Process an element
-    void process(SoundfontManager * sm, EltID id, AbstractToolParameters * parameters) override;
+protected:
+    /// Return true if the tool can be used on the specified ids
+    bool isCompatible(IdList ids) override;
+
+    /// Run the tool on a list of id
+    void run(SoundfontManager * sm, QWidget * parent, IdList ids, AbstractToolParameters * parameters) override;
+
+    /// Get a confirmation message after the tool is run
+    QString getConfirmation() override;
 };
 
 #endif // TOOLFREQUENCYPEAKS_H

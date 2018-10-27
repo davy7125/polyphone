@@ -1,0 +1,166 @@
+#include "toolfrequencypeaks_gui.h"
+#include "ui_toolfrequencypeaks_gui.h"
+#include "contextmanager.h"
+#include "graphiquefourier.h"
+#include "soundfontmanager.h"
+#include "utils.h"
+
+class RunnableTask: public QRunnable
+{
+public:
+    RunnableTask(ToolFrequencyPeaks_gui * toolGui, EltID id) : QRunnable(),
+        _toolGui(toolGui),
+        _id(id)
+    {}
+
+    void run() override
+    {
+        // Compute data
+        QList<double> frequencies;
+        QList<double> factors;
+        QList<int> keys;
+        QList<int> corrections;
+        SoundfontManager * sm = SoundfontManager::getInstance();
+        GraphiqueFourier graphTmp(NULL);
+        graphTmp.setData(sm->getData(_id, champ_sampleData16), sm->get(_id, champ_dwSampleRate).dwValue);
+        graphTmp.setPos(sm->get(_id, champ_dwStartLoop).dwValue, sm->get(_id, champ_dwEndLoop).dwValue,
+                        frequencies, factors, keys, corrections, false);
+
+        // Store data
+        SampleFrequencyInfo sampleInfo;
+        sampleInfo.name = sm->getQstr(_id, champ_name);
+        for (int i = 0; i < frequencies.count(); i++)
+        {
+            FrequencyInfo info;
+            info.frequency = frequencies[i];
+            info.factor = factors[i];
+            info.key = keys[i];
+            info.correction = corrections[i];
+            sampleInfo.frequencies << info;
+        }
+
+        // Send the data to the tool gui
+        _toolGui->peakComputed(_id, sampleInfo);
+    }
+
+private:
+    ToolFrequencyPeaks_gui * _toolGui;
+    EltID _id;
+};
+
+
+ToolFrequencyPeaks_gui::ToolFrequencyPeaks_gui(QWidget *parent) :
+    AbstractToolGui(parent),
+    ui(new Ui::ToolFrequencyPeaks_gui)
+{
+    ui->setupUi(this);
+
+    // Table header
+    ui->table->setColumnCount(6);
+    ui->table->setHorizontalHeaderItem(0, new QTableWidgetItem(trUtf8("Échantillon")));
+    ui->table->setHorizontalHeaderItem(1, new QTableWidgetItem(trUtf8("Pic")));
+    ui->table->setHorizontalHeaderItem(2, new QTableWidgetItem(trUtf8("Intensité")));
+    ui->table->setHorizontalHeaderItem(3, new QTableWidgetItem(trUtf8("Fréquence")));
+    ui->table->setHorizontalHeaderItem(4, new QTableWidgetItem(trUtf8("Note")));
+    ui->table->setHorizontalHeaderItem(5, new QTableWidgetItem(trUtf8("Correction")));
+
+    // Connection (do to different threads)
+    qRegisterMetaType<SampleFrequencyInfo>();
+    connect(this, SIGNAL(peakComputed(EltID,const SampleFrequencyInfo)), this, SLOT(onPeakComputed(EltID,const SampleFrequencyInfo)), Qt::QueuedConnection);
+}
+
+ToolFrequencyPeaks_gui::~ToolFrequencyPeaks_gui()
+{
+    delete ui;
+}
+
+void ToolFrequencyPeaks_gui::updateInterface(AbstractToolParameters * parameters, IdList ids)
+{
+    Q_UNUSED(parameters)
+
+    // Name of the sf2
+    _sf2Name = "untitled.csv";
+    SoundfontManager * sm = SoundfontManager::getInstance();
+    if (!ids.empty())
+        _sf2Name = sm->getQstr(EltID(elementSf2, ids[0].indexSf2), champ_name)
+                .replace(QRegExp(QString::fromUtf8("[`~*|:<>«»?/{}\"\\\\]")), "_") + ".csv";
+
+    // Initialize the table
+    ui->table->clearContents();
+    ui->table->setRowCount(0);
+
+    // Compute the peaks
+    ui->pushExport->setEnabled(false);
+    _data.clear();
+    _idsToCompute = ids;
+    foreach (EltID id, ids)
+        QThreadPool::globalInstance()->start(new RunnableTask(this, id));
+}
+
+void ToolFrequencyPeaks_gui::onPeakComputed(EltID id, const SampleFrequencyInfo sfi)
+{
+    if (_idsToCompute.contains(id))
+    {
+        _idsToCompute.removeAll(id);
+
+        if (!sfi.frequencies.empty())
+        {
+            // Store the data that just came
+            int pos = 0;
+            while (pos < _data.count() && Utils::naturalOrder(Utils::removeAccents(_data[pos].name), Utils::removeAccents(sfi.name)) < 0)
+                pos++;
+            _data.insert(pos, sfi);
+
+            // Update the table
+            int currentRow = ui->table->rowCount();
+            ui->table->setRowCount(currentRow + sfi.frequencies.count());
+            for (int i = 0; i < sfi.frequencies.count(); i++)
+            {
+                FrequencyInfo fi = sfi.frequencies[i];
+                if (i == 0)
+                {
+                    ui->table->setItem(currentRow, 0, new QTableWidgetItem(sfi.name));
+                    ui->table->item(currentRow, 0)->setBackground(this->palette().color(QPalette::Base));
+                }
+                ui->table->setItem(currentRow + i, 1, new QTableWidgetItem(QString::number(i + 1)));
+                ui->table->setItem(currentRow + i, 2, new QTableWidgetItem(QString::number(fi.factor)));
+                ui->table->setItem(currentRow + i, 3, new QTableWidgetItem(QString::number(fi.frequency) + " " + trUtf8("Hz")));
+                ui->table->setItem(currentRow + i, 4, new QTableWidgetItem(ContextManager::keyName()->getKeyName(fi.key)));
+                ui->table->setItem(currentRow + i, 5, new QTableWidgetItem(QString::number(fi.correction)));
+            }
+            ui->table->setSpan(currentRow, 0, sfi.frequencies.count(), 1);
+        }
+    }
+
+    if (_idsToCompute.empty())
+        ui->pushExport->setEnabled(true);
+}
+
+void ToolFrequencyPeaks_gui::saveParameters(AbstractToolParameters * parameters)
+{
+    ToolFrequencyPeaks_parameters * params = (ToolFrequencyPeaks_parameters *) parameters;
+
+    // Save the path and data
+    params->setFilePath(_path);
+    params->setSampleFrequencies(_data);
+}
+
+void ToolFrequencyPeaks_gui::on_pushExport_clicked()
+{
+    QString defaultFile = ContextManager::recentFile()->getLastDirectory(RecentFileManager::FILE_TYPE_FREQUENCIES) + "/" + _sf2Name;
+    QString fileName = QFileDialog::getSaveFileName(this, trUtf8("Exporter les pics de fréquence"),
+                                                    defaultFile, trUtf8("Fichier .csv (*.csv)"));
+    if (!fileName.isEmpty())
+    {
+        ContextManager::recentFile()->addRecentFile(RecentFileManager::FILE_TYPE_FREQUENCIES, fileName);
+        _path = fileName;
+        _idsToCompute.clear();
+        emit(this->validated());
+    }
+}
+
+void ToolFrequencyPeaks_gui::on_pushClose_clicked()
+{
+    _idsToCompute.clear();
+    emit(this->canceled());
+}
