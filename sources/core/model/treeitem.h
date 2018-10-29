@@ -35,7 +35,7 @@ public:
     // Signals for updating the view
     void notifyCreation();
     void notifyRename();
-    void notifyDeletion();
+    void notifyDeletion(bool storeExpandedState = true);
 
 protected:
     TreeModel * _model;

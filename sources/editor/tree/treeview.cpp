@@ -60,31 +60,31 @@ void TreeView::mousePressEvent(QMouseEvent * event)
 
 void TreeView::mouseDoubleClickEvent(QMouseEvent * event)
 {
-    QModelIndex index = this->indexAt(event->pos());
-    if (index.isValid())
-    {
-        EltID currentId = index.data(Qt::UserRole).value<EltID>();
-        if (currentId.typeElement == elementInstSmpl)
-        {
-            // Find the corresponding sample
-            EltID id(elementSmpl, _sf2Index, SoundfontManager::getInstance()->get(currentId, champ_sampleID).wValue, -1, -1);
-            TreeSortFilterProxy * proxy = (TreeSortFilterProxy *)this->model();
-            if (!proxy->isFiltered(id))
-                this->onSelectionChanged(IdList(id));
-            event->accept();
-            return;
-        }
-        else if (currentId.typeElement == elementPrstInst)
-        {
-            // Find the corresponding instrument
-            EltID id(elementInst, _sf2Index, SoundfontManager::getInstance()->get(currentId, champ_instrument).wValue, -1, -1);
-            TreeSortFilterProxy * proxy = (TreeSortFilterProxy *)this->model();
-            if (!proxy->isFiltered(id))
-                this->onSelectionChanged(IdList(id));
-            event->accept();
-            return;
-        }
-    }
+//    QModelIndex index = this->indexAt(event->pos());
+//    if (index.isValid())
+//    {
+//        EltID currentId = index.data(Qt::UserRole).value<EltID>();
+//        if (currentId.typeElement == elementInstSmpl)
+//        {
+//            // Find the corresponding sample
+//            EltID id(elementSmpl, _sf2Index, SoundfontManager::getInstance()->get(currentId, champ_sampleID).wValue, -1, -1);
+//            TreeSortFilterProxy * proxy = (TreeSortFilterProxy *)this->model();
+//            if (!proxy->isFiltered(id))
+//                this->onSelectionChanged(IdList(id));
+//            event->accept();
+//            return;
+//        }
+//        else if (currentId.typeElement == elementPrstInst)
+//        {
+//            // Find the corresponding instrument
+//            EltID id(elementInst, _sf2Index, SoundfontManager::getInstance()->get(currentId, champ_instrument).wValue, -1, -1);
+//            TreeSortFilterProxy * proxy = (TreeSortFilterProxy *)this->model();
+//            if (!proxy->isFiltered(id))
+//                this->onSelectionChanged(IdList(id));
+//            event->accept();
+//            return;
+//        }
+//    }
 
     QTreeView::mouseDoubleClickEvent(event);
 }
@@ -158,27 +158,27 @@ void TreeView::selectionChanged(const QItemSelection &selected, const QItemSelec
     }
 
     // First attempt to select an index if empty: reselect the selected index or the unselected index
-    if (this->selectedIndexes().isEmpty())
-    {
-        _fixingSelection = true;
-        if (!selected.indexes().isEmpty())
-        {
-            // Id to reselect
-            EltID id = selected.indexes()[0].data(Qt::UserRole).value<EltID>();
-            TreeSortFilterProxy * proxy = (TreeSortFilterProxy *)this->model();
-            if (!proxy->isFiltered(id))
-                this->setCurrentIndex(selected.indexes()[0]);
-        }
-        else if (!deselected.indexes().isEmpty())
-        {
-            // Id to reselect
-            EltID id = deselected.indexes()[0].data(Qt::UserRole).value<EltID>();
-            TreeSortFilterProxy * proxy = (TreeSortFilterProxy *)this->model();
-            if (!proxy->isFiltered(id))
-                this->setCurrentIndex(deselected.indexes()[0]);
-        }
-        _fixingSelection = false;
-    }
+//    if (this->selectedIndexes().isEmpty())
+//    {
+//        _fixingSelection = true;
+//        if (!selected.indexes().isEmpty())
+//        {
+//            // Id to reselect
+//            EltID id = selected.indexes()[0].data(Qt::UserRole).value<EltID>();
+//            TreeSortFilterProxy * proxy = (TreeSortFilterProxy *)this->model();
+//            if (!proxy->isFiltered(id))
+//                this->setCurrentIndex(selected.indexes()[0]);
+//        }
+//        else if (!deselected.indexes().isEmpty())
+//        {
+//            // Id to reselect
+//            EltID id = deselected.indexes()[0].data(Qt::UserRole).value<EltID>();
+//            TreeSortFilterProxy * proxy = (TreeSortFilterProxy *)this->model();
+//            if (!proxy->isFiltered(id))
+//                this->setCurrentIndex(deselected.indexes()[0]);
+//        }
+//        _fixingSelection = false;
+//    }
 
     // Second attempt to select an index if empty: take the best match based on the filter
     if (this->selectedIndexes().isEmpty())
@@ -503,28 +503,34 @@ void TreeView::saveExpandedState()
     _verticalScrollValue = this->verticalScrollBar()->value();
 
     // Headers?
-    if (this->isExpanded(this->model()->index(1, 0)))
+    QModelIndex elt = this->model()->index(1, 0);
+    if (elt.isValid() && this->isExpanded(elt))
         _expandedIds << EltID(elementRootSmpl, _sf2Index);
-    if (this->isExpanded(this->model()->index(2, 0)))
+    elt = this->model()->index(2, 0);
+    if (elt.isValid() && this->isExpanded(elt))
         _expandedIds << EltID(elementRootInst, _sf2Index);
-    if (this->isExpanded(this->model()->index(3, 0)))
+    elt = this->model()->index(3, 0);
+    if (elt.isValid() && this->isExpanded(elt))
         _expandedIds << EltID(elementRootPrst, _sf2Index);
 
     // Instruments?
-    QModelIndex parent = this->model()->index(2, 0);
-    for (int i = 0; i < this->model()->rowCount(parent); i++)
+    elt = this->model()->index(2, 0);
+    if (elt.isValid())
     {
-        QModelIndex child = parent.child(i, 0);
-        if (this->isExpanded(child))
-            _expandedIds << child.data(Qt::UserRole).value<EltID>();
+        for (int i = 0; i < this->model()->rowCount(elt); i++)
+        {
+            QModelIndex child = elt.child(i, 0);
+            if (child.isValid() && this->isExpanded(child))
+                _expandedIds << child.data(Qt::UserRole).value<EltID>();
+        }
     }
 
     // Presets?
-    parent = this->model()->index(3, 0);
-    for (int i = 0; i < this->model()->rowCount(parent); i++)
+    elt = this->model()->index(3, 0);
+    for (int i = 0; i < this->model()->rowCount(elt); i++)
     {
-        QModelIndex child = parent.child(i, 0);
-        if (this->isExpanded(child))
+        QModelIndex child = elt.child(i, 0);
+        if (child.isValid() && this->isExpanded(child))
             _expandedIds << child.data(Qt::UserRole).value<EltID>();
     }
 }
@@ -551,6 +557,7 @@ void TreeView::restoreExpandedState()
             break;
         }
     }
+    _expandedIds.clear();
 
     // Restore the vertical scroll position
     this->verticalScrollBar()->setValue(_verticalScrollValue);

@@ -135,6 +135,7 @@ void ToolMixtureCreation::onElementProcessed(EltID idSmpl, int key, int minKey, 
     }
     else
         name = name + ' ' + str2;
+    qDebug() << "sample name" << name;
     sm->set(idSmpl, champ_name, name);
 
     // Link samples
