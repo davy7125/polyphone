@@ -40,9 +40,7 @@ public:
     explicit PageInst(QWidget *parent = 0);
     ~PageInst();
     void setModVisible(bool visible);
-    void mixture();
     void release();
-    void transposer();
 
     // Display options
     QList<DisplayOption> getDisplayOptions(IdList selectedIds) override;
@@ -50,23 +48,17 @@ public:
 protected:
     bool updateInterface(QString editingSource, IdList selectedIds, int displayOption) override;
     void keyPlayedInternal2(int key, int velocity) override;
+    int getDestIndex(AttributeType type) override;
+    AttributeType getDestNumber(int row) override;
 
 private slots:
-    void mixture(QList<QList<int> > listeParam, QString nomInst, bool bouclage, int freq, bool stereo);
     void release(double duree36, double division, double deTune);
     void release(EltID id, double duree36, double division, double deTune);
-    void transposer(double ton, bool adaptKeyRange);
-    void transposer(EltID idInstSmpl, double ton, bool adaptKeyRange);
     void onLinkClicked(EltID id);
 
 private:
     Ui::PageInst *ui;
-
-    // Outils
-    static double getOffset(int type1, int type2);
-    static EltID closestSample(EltID idInst, double pitch, double &ecart, int cote, EltID &idInstSmpl);
-    static QByteArray getSampleData(EltID idSmpl, qint32 nbRead);
-    static QByteArray addSampleData(QByteArray baData1, QByteArray baData2, double mult);
+    QList<AttributeType> _destIndex;
 };
 
 // Classe TableWidget pour instruments

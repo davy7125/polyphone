@@ -70,16 +70,16 @@ void AbstractTool::onParametersValidated()
 
 void AbstractTool::onFinished(bool updateNeeded)
 {
-    if (updateNeeded)
-    {
-        // Display a warning if there is one
-        QString warning = getWarning();
-        if (!warning.isEmpty())
-            QMessageBox::warning(s_parent, trUtf8("Attention"), warning);
-        QString info = getConfirmation();
-        if (!info.isEmpty())
-            QMessageBox::information(s_parent, trUtf8("Information"), info);
+    // Display a warning if there is one
+    QString warning = getWarning();
+    if (!warning.isEmpty())
+        QMessageBox::warning(s_parent, trUtf8("Attention"), warning);
 
+    // Possibly display a confirmation
+    QString info = getConfirmation();
+    if (!info.isEmpty())
+        QMessageBox::information(s_parent, trUtf8("Information"), info);
+
+    if (updateNeeded)
         s_sm->endEditing("tool:" + getIdentifier());
-    }
 }

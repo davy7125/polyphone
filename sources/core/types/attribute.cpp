@@ -506,3 +506,182 @@ AttributeValue Attribute::fromString(AttributeType champ, bool isPrst, QString s
 
     return value;
 }
+
+QString Attribute::getDescription(AttributeType champ, bool isPrst)
+{
+    QString result = trUtf8("inconnu");
+
+    switch (champ)
+    {
+    case champ_startAddrsOffset:
+        result = trUtf8("Offset début échantillon");
+        break;
+    case champ_endAddrsOffset:
+        result = trUtf8("Offset fin échantillon");
+        break;
+    case champ_startloopAddrsOffset:
+        result = trUtf8("Offset début boucle");
+        break;
+    case champ_endloopAddrsOffset:
+        result = trUtf8("Offset fin boucle");
+        break;
+    case champ_startAddrsCoarseOffset:
+        result = trUtf8("Offset début échantillon (× 32768)");
+        break;
+    case champ_modLfoToPitch:
+        result = trUtf8("Mod LFO → note (c)");
+        break;
+    case champ_vibLfoToPitch:
+        result = trUtf8("Vib LFO → note (c)");
+        break;
+    case champ_modEnvToPitch:
+        result = trUtf8("Mod env → note (c)");
+        break;
+    case champ_initialFilterFc:
+        result = isPrst ? trUtf8("Filtre, coupure (×)") :
+                          trUtf8("Filtre, coupure (Hz)");
+        break;
+    case champ_initialFilterQ:
+        result = trUtf8("Filtre, résonance (dB)");
+        break;
+    case champ_modLfoToFilterFc:
+        result = trUtf8("Mod LFO → filtre (c)");
+        break;
+    case champ_modEnvToFilterFc:
+        result = trUtf8("Mod env → filtre (c)");
+        break;
+    case champ_endAddrsCoarseOffset:
+        result = trUtf8("Offset fin échantillon (× 32768)");
+        break;
+    case champ_modLfoToVolume:
+        result = trUtf8("Mod LFO → volume (dB)");
+        break;
+    case champ_chorusEffectsSend:
+        result = trUtf8("Chorus (%)");
+        break;
+    case champ_reverbEffectsSend:
+        result = trUtf8("Réverbération (%)");
+        break;
+    case champ_pan:
+        result = isPrst ? trUtf8("Balance [-100;100]") :
+                          trUtf8("Balance [-50;50]");
+        break;
+    case champ_delayModLFO:
+        result = isPrst ? trUtf8("Mod LFO delay (×)") :
+                          trUtf8("Mod LFO delay (s)");
+        break;
+    case champ_freqModLFO:
+        result = isPrst ? trUtf8("Mod LFO freq (×)") :
+                          trUtf8("Mod LFO freq (Hz)");
+        break;
+    case champ_delayVibLFO:
+        result = isPrst ? trUtf8("Vib LFO delay (×)") :
+                          trUtf8("Vib LFO delay (s)");
+        break;
+    case champ_freqVibLFO:
+        result = isPrst ? trUtf8("Vib LFO freq (×)") :
+                          trUtf8("Vib LFO freq (Hz)");
+        break;
+    case champ_delayModEnv:
+        result = isPrst ? trUtf8("Mod env delay (×)") :
+                          trUtf8("Mod env delay (s)");
+        break;
+    case champ_attackModEnv:
+        result = isPrst ? trUtf8("Mod env attack (×)") :
+                          trUtf8("Mod env attack (s)");
+        break;
+    case champ_holdModEnv:
+        result = isPrst ? trUtf8("Mod env hold (×)") :
+                          trUtf8("Mod env hold (s)");
+        break;
+    case champ_decayModEnv:
+        result = isPrst ? trUtf8("Mod env decay (×)") :
+                          trUtf8("Mod env decay (s)");
+        break;
+    case champ_sustainModEnv:
+        result = trUtf8("Mod env sustain (%)");
+        break;
+    case champ_releaseModEnv:
+        result = isPrst ? trUtf8("Mod env release (×)") :
+                          trUtf8("Mod env release (s)");
+        break;
+    case champ_keynumToModEnvHold:
+        result = trUtf8("Note → Mod env hold (c)");
+        break;
+    case champ_keynumToModEnvDecay:
+        result = trUtf8("Note → Mod env decay (c)");
+        break;
+    case champ_delayVolEnv:
+        result = isPrst ? trUtf8("Vol env delay (×)") :
+                          trUtf8("Vol env delay (s)");
+        break;
+    case champ_attackVolEnv:
+        result = isPrst ? trUtf8("Vol env attack (×)") :
+                          trUtf8("Vol env attack (s)");
+        break;
+    case champ_holdVolEnv:
+        result = isPrst ? trUtf8("Vol env hold (×)") :
+                          trUtf8("Vol env hold (s)");
+        break;
+    case champ_decayVolEnv:
+        result = isPrst ? trUtf8("Vol env decay (×)") :
+                          trUtf8("Vol env decay (s)");
+        break;
+    case champ_sustainVolEnv:
+        result = trUtf8("Vol env sustain (dB)");
+        break;
+    case champ_releaseVolEnv:
+        result = isPrst ? trUtf8("Vol env release (×)") :
+                          trUtf8("Vol env release (s)");
+        break;
+    case champ_keynumToVolEnvHold:
+        result = trUtf8("Note → Vol env hold (c)");
+        break;
+    case champ_keynumToVolEnvDecay:
+        result = trUtf8("Note → Vol env decay (c)");
+        break;
+    case champ_keyRange:
+        result = trUtf8("Étendue note");
+        break;
+    case champ_velRange:
+        result = trUtf8("Étendue vélocité");
+        break;
+    case champ_startloopAddrsCoarseOffset:
+        result = trUtf8("Offset début échantillon (× 32768)");
+        break;
+    case champ_keynum:
+        result = trUtf8("Note fixe");
+        break;
+    case champ_velocity:
+        result = trUtf8("Vélocité fixe");
+        break;
+    case champ_initialAttenuation:
+        result = trUtf8("Atténuation (dB)");
+        break;
+    case champ_endloopAddrsCoarseOffset:
+        result = trUtf8("Offset fin boucle (× 32768)");
+        break;
+    case champ_coarseTune:
+        result = trUtf8("Accordage (demi-tons)");
+        break;
+    case champ_fineTune:
+        result = trUtf8("Accordage (centièmes)");
+        break;
+    case champ_sampleModes:
+        result = trUtf8("Lecture en boucle");
+        break;
+    case champ_scaleTuning:
+        result = trUtf8("Réglage de tonalité");
+        break;
+    case champ_exclusiveClass:
+        result = trUtf8("Classe exclusive");
+        break;
+    case champ_overridingRootKey:
+        result = trUtf8("Note de base");
+        break;
+    default:
+        break;
+    }
+
+    return result;
+}

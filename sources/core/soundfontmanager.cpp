@@ -55,7 +55,8 @@ QAbstractItemModel * SoundfontManager::getModel(int indexSf2)
 
 SoundfontManager::SoundfontManager() :
     _soundfonts(new Soundfonts()),
-    _undoRedo(new ActionManager())
+    _undoRedo(new ActionManager()),
+    _mutex(QMutex::Recursive)
 {
     connect(_undoRedo, SIGNAL(dropId(EltID)), this, SLOT(onDropId(EltID)));
 }
@@ -71,7 +72,9 @@ SoundfontManager::~SoundfontManager()
 // Ajout / suppression des données
 void SoundfontManager::remove(EltID id, int *message)
 {
+    _mutex.lock();
     this->remove(id, false, true, message);
+    _mutex.unlock();
 }
 
 void SoundfontManager::onDropId(EltID id)
@@ -148,10 +151,14 @@ bool SoundfontManager::isSet(EltID id, AttributeType champ)
 
 AttributeValue SoundfontManager::get(EltID id, AttributeType champ)
 {
+    _mutex.lock();
     AttributeValue value;
     value.dwValue = 0;
     if (!this->isValid(id))
+    {
+        _mutex.unlock();
         return value;
+    }
 
     // Type d'élément à analyser
     switch ((int)id.typeElement)
@@ -291,28 +298,41 @@ AttributeValue SoundfontManager::get(EltID id, AttributeType champ)
             division = _soundfonts->getSoundfont(id.indexSf2)->getPreset(id.indexElt)->getDivision(id.indexElt2);
             break;
         }
+        value = division->getGen(champ);
     }break;
     }
+    _mutex.unlock();
     return value;
 }
 
 Sound SoundfontManager::getSon(EltID id)
 {
+    _mutex.lock();
     Sound son;
     if (!this->isValid(id))
+    {
+        _mutex.unlock();
         return son;
+    }
 
     if (id.typeElement == elementSmpl)
-        return _soundfonts->getSoundfont(id.indexSf2)->getSample(id.indexElt)->_sound;
-    else return son;
+        son = _soundfonts->getSoundfont(id.indexSf2)->getSample(id.indexElt)->_sound;
+
+    _mutex.unlock();
+    return son;
 }
 
 QString SoundfontManager::getQstr(EltID id, AttributeType champ)
 {
+    _mutex.lock();
     if (!this->isValid(id))
+    {
+        _mutex.unlock();
         return "";
+    }
 
     // Type d'élément à analyser
+    QString ret = "";
     switch ((int)id.typeElement)
     {
     case elementSf2:{
@@ -321,27 +341,27 @@ QString SoundfontManager::getQstr(EltID id, AttributeType champ)
         switch ((int)champ)
         {
         case champ_name:
-            return tmp->_INAM; break;
+            ret = tmp->_INAM; break;
         case champ_ISNG:
-            return tmp->_ISNG; break;
+            ret = tmp->_ISNG; break;
         case champ_IROM:
-            return tmp->_IROM; break;
+            ret = tmp->_IROM; break;
         case champ_ICRD:
-            return tmp->_ICRD; break;
+            ret = tmp->_ICRD; break;
         case champ_IENG:
-            return tmp->_IENG; break;
+            ret = tmp->_IENG; break;
         case champ_IPRD:
-            return tmp->_IPRD; break;
+            ret = tmp->_IPRD; break;
         case champ_ICOP:
-            return tmp->_ICOP; break;
+            ret = tmp->_ICOP; break;
         case champ_ICMT:
-            return tmp->_ICMT; break;
+            ret = tmp->_ICMT; break;
         case champ_ISFT:
-            return tmp->_ISFT; break;
+            ret = tmp->_ISFT; break;
         case champ_filenameInitial:
-            return tmp->_fileNameInitial; break;
+            ret = tmp->_fileNameInitial; break;
         case champ_filenameForData:
-            return tmp->_fileNameForData; break;
+            ret = tmp->_fileNameForData; break;
         }
     }break;
     case elementSmpl:{
@@ -350,9 +370,9 @@ QString SoundfontManager::getQstr(EltID id, AttributeType champ)
         switch ((int)champ)
         {
         case champ_name:
-            return tmp->getName(); break;
+            ret = tmp->getName(); break;
         case champ_filenameForData:
-            return tmp->_sound.getFileName(); break;
+            ret = tmp->_sound.getFileName(); break;
         }
     }break;
     case elementInst:{
@@ -361,7 +381,7 @@ QString SoundfontManager::getQstr(EltID id, AttributeType champ)
         switch ((int)champ)
         {
         case champ_name:
-            return tmp->getName(); break;
+            ret = tmp->getName(); break;
         }
     }break;
     case elementPrst:{
@@ -370,17 +390,24 @@ QString SoundfontManager::getQstr(EltID id, AttributeType champ)
         switch ((int)champ)
         {
         case champ_name:
-            return tmp->getName(); break;
+            ret = tmp->getName(); break;
         }
     }break;
     }
-    return "";
+
+    _mutex.unlock();
+    return ret;
 }
 
 QByteArray SoundfontManager::getData(EltID id, AttributeType champ)
 {
+    _mutex.lock();
+    QByteArray baRet;
     if (!this->isValid(id))
-        return QByteArray();
+    {
+        _mutex.unlock();
+        return baRet;
+    }
 
     // Type d'élément à analyser
     switch ((int)id.typeElement)
@@ -390,27 +417,29 @@ QByteArray SoundfontManager::getData(EltID id, AttributeType champ)
         switch ((int)champ)
         {
         case champ_sampleData16:
-            return tmp->_sound.getData(16);
+            baRet = tmp->_sound.getData(16);
             break;
         case champ_sampleData24:
-            return tmp->_sound.getData(8);
+            baRet = tmp->_sound.getData(8);
             break;
         case champ_sampleDataFull24:
-            return tmp->_sound.getData(24);
+            baRet = tmp->_sound.getData(24);
             break;
         case champ_sampleData32:
-            return tmp->_sound.getData(32);
+            baRet = tmp->_sound.getData(32);
             break;
         }
     }break;
     }
-    QByteArray baRet;
+
+    _mutex.unlock();
     return baRet;
 }
 
 // Freres de id (id compris)
 QList<int> SoundfontManager::getSiblings(EltID id)
 {
+    _mutex.lock();
     switch ((int)id.typeElement)
     {
     case elementSf2:
@@ -423,13 +452,19 @@ QList<int> SoundfontManager::getSiblings(EltID id)
     case elementInstSmplMod: case elementPrstInstMod: case elementInstSmplGen: case elementPrstInstGen:
         id.indexMod = -1;
     }
-    if (!this->isValid(id, true))
-        return QList<int>();
 
     QList<int> result;
+    if (!this->isValid(id, true))
+    {
+        _mutex.unlock();
+        return result;
+    }
+
     switch ((int)id.typeElement)
     {
-    case elementSf2: result = _soundfonts->getSoundfonts().keys(); break;
+    case elementSf2:
+        result = _soundfonts->getSoundfonts().keys();
+        break;
     case elementSmpl:
         foreach (Smpl * elt, _soundfonts->getSoundfont(id.indexSf2)->getSamples().values())
             if (!elt->isHidden())
@@ -493,6 +528,7 @@ QList<int> SoundfontManager::getSiblings(EltID id)
         break;
     }
 
+    _mutex.unlock();
     return result;
 }
 
@@ -662,11 +698,10 @@ void SoundfontManager::getListeBags(EltID id, QList<AttributeType> &listeChamps,
     listeValeurs = division->getGens().values();
 }
 
-///////////////////////// METHODES PRIVEES /////////////////////////
-
 // Ajoute un enfant à id
 int SoundfontManager::add(EltID id)
 {
+    _mutex.lock();
     if (id.typeElement == elementSf2)
         id.indexSf2 = -1;
     else if (id.typeElement == elementSmpl || id.typeElement == elementInst || id.typeElement == elementPrst)
@@ -675,7 +710,10 @@ int SoundfontManager::add(EltID id)
         id.indexElt2 = -1;
     else id.indexMod = -1;
     if (!this->isValid(id))
+    {
+        _mutex.unlock();
         return -1;
+    }
 
     int i = -1;
 
@@ -748,6 +786,8 @@ int SoundfontManager::add(EltID id)
     action->typeAction = Action::TypeCreation;
     action->id = id;
     this->_undoRedo->add(action);
+
+    _mutex.unlock();
     return i;
 }
 
@@ -1070,8 +1110,12 @@ void SoundfontManager::supprGenAndStore(EltID id, int storeAction)
 
 int SoundfontManager::set(EltID id, AttributeType champ, AttributeValue value)
 {
+    _mutex.lock();
     if (!this->isValid(id))
+    {
+        _mutex.unlock();
         return 1;
+    }
 
     AttributeValue oldValue;
     oldValue.wValue = 0;
@@ -1148,7 +1192,8 @@ int SoundfontManager::set(EltID id, AttributeType champ, AttributeValue value)
     case elementInst:{
         // Update an instrument
         InstPrst *tmp = _soundfonts->getSoundfont(id.indexSf2)->getInstrument(id.indexElt);
-        if (!tmp->getGlobalDivision()->isSet(champ)) defaultValue = 1;
+        if (!tmp->getGlobalDivision()->isSet(champ))
+            defaultValue = 1;
         oldValue = tmp->getGlobalDivision()->getGen(champ);
         tmp->getGlobalDivision()->setGen(champ, value);
     }break;
@@ -1174,14 +1219,16 @@ int SoundfontManager::set(EltID id, AttributeType champ, AttributeValue value)
     case elementInstSmpl:{
         // Modification of a sample linked to an instrument
         Division *tmp = _soundfonts->getSoundfont(id.indexSf2)->getInstrument(id.indexElt)->getDivision(id.indexElt2);
-        if (!tmp->isSet(champ)) defaultValue = 1;
+        if (!tmp->isSet(champ))
+            defaultValue = 1;
         oldValue = tmp->getGen(champ);
         tmp->setGen(champ, value);
     }break;
     case elementPrstInst:{
         // Modification of an instrument linked to a preset
         Division *tmp = _soundfonts->getSoundfont(id.indexSf2)->getPreset(id.indexElt)->getDivision(id.indexElt2);
-        if (!tmp->isSet(champ)) defaultValue = 1;
+        if (!tmp->isSet(champ))
+            defaultValue = 1;
         oldValue = tmp->getGen(champ);
         tmp->setGen(champ, value);
     }break;
@@ -1238,13 +1285,18 @@ int SoundfontManager::set(EltID id, AttributeType champ, AttributeValue value)
     action->vNewValue = value;
     this->_undoRedo->add(action);
 
+    _mutex.unlock();
     return 0;
 }
 
 int SoundfontManager::set(EltID id, AttributeType champ, QString qStr)
 {
+    _mutex.lock();
     if (!this->isValid(id))
+    {
+        _mutex.unlock();
         return 1;
+    }
 
     QString qOldStr = "";
 
@@ -1349,13 +1401,18 @@ int SoundfontManager::set(EltID id, AttributeType champ, QString qStr)
     action->qNewValue = qStr;
     this->_undoRedo->add(action);
 
+    _mutex.unlock();
     return 0;
 }
 
 int SoundfontManager::set(EltID id, AttributeType champ, QByteArray data)
 {
+    _mutex.lock();
     if (!this->isValid(id))
+    {
+        _mutex.unlock();
         return 1;
+    }
 
     QByteArray oldData;
     oldData.clear();
@@ -1401,13 +1458,18 @@ int SoundfontManager::set(EltID id, AttributeType champ, QByteArray data)
     action->baNewValue = data;
     this->_undoRedo->add(action);
 
+    _mutex.unlock();
     return 0;
 }
 
-int SoundfontManager::reset(EltID id, AttributeType champ)
+void SoundfontManager::reset(EltID id, AttributeType champ)
 {
+    _mutex.lock();
     if (!this->isValid(id))
-        return 0;
+    {
+        _mutex.unlock();
+        return;
+    }
 
     AttributeValue oldValue;
     // Type d'élément à modifier
@@ -1416,14 +1478,22 @@ int SoundfontManager::reset(EltID id, AttributeType champ)
     case elementInst:{
         // Remise à zéro d'une propriété d'un instrument
         InstPrst *tmp = _soundfonts->getSoundfont(id.indexSf2)->getInstrument(id.indexElt);
-        if (!tmp->getGlobalDivision()->isSet(champ)) return 0;
+        if (!tmp->getGlobalDivision()->isSet(champ))
+        {
+            _mutex.unlock();
+            return;
+        }
         oldValue = tmp->getGlobalDivision()->getGen(champ);
         tmp->getGlobalDivision()->resetGen(champ);
     }break;
     case elementPrst:{
         // Remise à zéro d'une propriété d'un preset
         InstPrst *tmp = _soundfonts->getSoundfont(id.indexSf2)->getPreset(id.indexElt);
-        if (!tmp->getGlobalDivision()->isSet(champ)) return 0;
+        if (!tmp->getGlobalDivision()->isSet(champ))
+        {
+            _mutex.unlock();
+            return;
+        }
         oldValue = tmp->getGlobalDivision()->getGen(champ);
         tmp->getGlobalDivision()->resetGen(champ);
     }break;
@@ -1431,14 +1501,21 @@ int SoundfontManager::reset(EltID id, AttributeType champ)
         // Remise à zéro d'une propriété d'un sample lié à un instrument
         Division *tmp = _soundfonts->getSoundfont(id.indexSf2)->getInstrument(id.indexElt)->getDivision(id.indexElt2);
         if (!tmp->isSet(champ))
-            return 0;
+        {
+            _mutex.unlock();
+            return;
+        }
         oldValue = tmp->getGen(champ);
         tmp->resetGen(champ);
     }break;
     case elementPrstInst:{
         // Remise à zéro d'une propriété d'un instrument lié à un preset
         Division *tmp = _soundfonts->getSoundfont(id.indexSf2)->getPreset(id.indexElt)->getDivision(id.indexElt2);
-        if (!tmp->isSet(champ)) return 0;
+        if (!tmp->isSet(champ))
+        {
+            _mutex.unlock();
+            return;
+        }
         oldValue = tmp->getGen(champ);
         tmp->resetGen(champ);
     }break;
@@ -1452,7 +1529,7 @@ int SoundfontManager::reset(EltID id, AttributeType champ)
     action->vOldValue = oldValue;
     this->_undoRedo->add(action);
 
-    return 1;
+    _mutex.unlock();
 }
 
 void SoundfontManager::simplify(EltID id, AttributeType champ)

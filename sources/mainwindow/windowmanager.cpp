@@ -201,3 +201,25 @@ void WindowManager::onTabCloseRequested(int tabIndex)
         _tabWidget->removeTab(tabIndex);
     }
 }
+
+void WindowManager::undo()
+{
+    QWidget * widget = _tabWidget->currentWidget();
+    if (_editors.contains((Editor*)widget))
+    {
+        // Undo an action for the current soundfont
+        Editor * editor = (Editor*)widget;
+        SoundfontManager::getInstance()->undo(editor->getSf2Index());
+    }
+}
+
+void WindowManager::redo()
+{
+    QWidget * widget = _tabWidget->currentWidget();
+    if (_editors.contains((Editor*)widget))
+    {
+        // Undo an action for the current soundfont
+        Editor * editor = (Editor*)widget;
+        SoundfontManager::getInstance()->redo(editor->getSf2Index());
+    }
+}

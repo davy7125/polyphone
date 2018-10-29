@@ -587,9 +587,6 @@ void TreeView::dropEvent(QDropEvent *event)
 {
     // Destination
     QModelIndex index = this->indexAt(event->pos());
-    if (!index.isValid())
-        return;
-    EltID idDest = index.data(Qt::UserRole).value<EltID>();
 
     if (event->mimeData()->hasUrls() && event->source() == NULL)
     {
@@ -607,7 +604,7 @@ void TreeView::dropEvent(QDropEvent *event)
                 {
                     if (path.startsWith("file://"))
                         path = path.mid(7);
-                    smplList << sl.load(path, idDest.indexSf2, &replace);
+                    smplList << sl.load(path, _sf2Index, &replace);
                 }
             }
         }
@@ -616,6 +613,10 @@ void TreeView::dropEvent(QDropEvent *event)
     }
     else if (!_draggedIds.empty())
     {
+        if (!index.isValid())
+            return;
+        EltID idDest = index.data(Qt::UserRole).value<EltID>();
+
         SoundfontManager * sm = SoundfontManager::getInstance();
         Duplicator duplicator(sm, sm, (QWidget*)this->parent());
         foreach (EltID idSource, _draggedIds)

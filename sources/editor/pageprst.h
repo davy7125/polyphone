@@ -51,6 +51,8 @@ public:
 protected:
     bool updateInterface(QString editingSource, IdList selectedIds, int displayOption) override;
     void keyPlayedInternal2(int key, int velocity) override;
+    int getDestIndex(AttributeType type) override;
+    AttributeType getDestNumber(int row) override;
 
 private slots:
     void setBank();
@@ -58,6 +60,7 @@ private slots:
 
 private:
     Ui::PagePrst *ui;
+    QList<AttributeType> _destIndex;
 };
 
 // Classe TableWidget pour presets
@@ -67,6 +70,7 @@ class TableWidgetPrst : public TableWidget
 public:
     TableWidgetPrst(QWidget *parent = 0);
     ~TableWidgetPrst();
+
     // Association champ - ligne
     AttributeType getChamp(int row);
     int getRow(quint16 champ);
@@ -87,6 +91,7 @@ public slots:
 
 private:
     PagePrst *page;
+    QList<AttributeType> _rows;
 };
 
 #endif // PAGE_PRST_H

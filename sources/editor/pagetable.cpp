@@ -26,7 +26,6 @@
 #include "pagetable.h"
 #include "editor_old.h"
 #include "contextmanager.h"
-#include "dialog_visualizer.h"
 #include "dialog_space.h"
 #include "dialogselection.h"
 #include "graphicsviewrange.h"
@@ -533,7 +532,7 @@ void PageTable::afficheMod(EltID id, int selectedIndex)
             qStr = trUtf8("Modulateur") + ": #" + QString::number(genValTmp.wValue - 32767);
         }
         else
-            qStr = getGenName(genValTmp.wValue);
+            qStr = Attribute::getDescription(genValTmp.sfGenValue, _typePage == PAGE_PRST);
 
         genValTmp = _sf2->get(id, champ_sfModTransOper);
         qStr.append(Attribute::toString(champ_sfModTransOper, _typePage == PAGE_PRST, genValTmp));
@@ -647,7 +646,7 @@ void PageTable::afficheEditMod()
 
         // Sélection et activation
         wTmp = _sf2->get(id, champ_sfModDestOper).wValue;
-        this->comboDestination->selectIndex(this->getDestIndex(wTmp), wTmp);
+        this->comboDestination->selectIndex(this->getDestIndex((AttributeType)wTmp), wTmp);
         this->comboDestination->setEnabled(true);
 
         // Selection in the table
@@ -1909,7 +1908,8 @@ void PageTable::pasteMod(EltID id, QList<Modulator> modulators)
                      champTmp == champ_overridingRootKey)
             {
                 QMessageBox::warning(this, trUtf8("Attention"), warnQStr +
-                                     "\"" + getGenName(champTmp) + trUtf8("\" ne peut être modulé dans un preset."));
+                                     "\"" + Attribute::getDescription(champTmp, true) +
+                                     trUtf8("\" ne peut être modulé dans un preset."));
                 return;
             }
         }
@@ -2615,253 +2615,6 @@ void PageTable::spatialisation(QMap<int, double> mapPan, EltID id)
                 val.shValue = 500;
                 _sf2->set(list2.at(i), champ_pan, val);
             }
-        }
-    }
-}
-
-void PageTable::visualize()
-{
-    EltID id = _currentIds[0];
-    if (_typePage == PAGE_INST)
-        id.typeElement = elementInstSmpl;
-    else
-        id.typeElement = elementPrstInst;
-
-    // Vérification que l'élément possède au moins un élément lié, avec un keyrange valide
-    int nbElt = 0;
-    int posMin = 128;
-    int posMax = 0;
-    foreach (int i, _sf2->getSiblings(id))
-    {
-        id.indexElt2 = i;
-        nbElt++;
-        if (_sf2->isSet(id, champ_keyRange))
-        {
-            if (_sf2->get(id, champ_keyRange).rValue.byLo < posMin)
-                posMin = _sf2->get(id, champ_keyRange).rValue.byLo;
-            if (_sf2->get(id, champ_keyRange).rValue.byHi > posMax)
-                posMax = _sf2->get(id, champ_keyRange).rValue.byHi;
-        }
-    }
-    if (nbElt == 0)
-    {
-        if (_typePage == PAGE_INST)
-            QMessageBox::warning(this, trUtf8("Attention"), trUtf8("L'instrument doit contenir des sons."));
-        else
-            QMessageBox::warning(this, trUtf8("Attention"), trUtf8("Le preset doit contenir des instruments."));
-        return;
-    }
-    if (posMin > posMax)
-    {
-        if (_typePage == PAGE_INST)
-            QMessageBox::warning(this, trUtf8("Attention"), trUtf8("Aucune étendue de notes spécifiée pour l'instrument."));
-        else
-            QMessageBox::warning(this, trUtf8("Attention"), trUtf8("Aucune étendue de notes spécifiée pour le preset."));
-        return;
-    }
-    DialogVisualizer * dialogVisu = new DialogVisualizer(_sf2, id, this);
-    dialogVisu->setAttribute(Qt::WA_DeleteOnClose, true);
-    dialogVisu->show();
-}
-
-int PageTable::getDestNumber(int i)
-{
-    if (_typePage == PAGE_PRST)
-    {
-        switch (i)
-        {
-        case 0:  return 52; // Pitch/Effects
-        case 1:  return 51;
-        case 2:  return 56;
-        case 3:  return 8;
-        case 4:  return 9;
-        case 5:  return 17;
-        case 6:  return 15;
-        case 7:  return 16;
-        case 8:  return 48; // Volume envelope
-        case 9:  return 33;
-        case 10: return 34;
-        case 11: return 35;
-        case 12: return 36;
-        case 13: return 37;
-        case 14: return 38;
-        case 15: return 39;
-        case 16: return 40;
-        case 17: return 25; // Modulation envelope
-        case 18: return 26;
-        case 19: return 27;
-        case 20: return 28;
-        case 21: return 29;
-        case 22: return 30;
-        case 23: return 7;
-        case 24: return 11;
-        case 25: return 31;
-        case 26: return 32;
-        case 27: return 21; // Modulation LFO
-        case 28: return 22;
-        case 29: return 5;
-        case 30: return 13;
-        case 31: return 10;
-        case 32: return 23; // Vibrato LFO
-        case 33: return 24;
-        case 34: return 6;
-        default: return 100;
-        }
-    }
-    else
-    {
-        switch (i)
-        {
-        case 0:  return 0; // Sample
-        case 1:  return 4;
-        case 2:  return 1;
-        case 3:  return 12;
-        case 4:  return 2;
-        case 5:  return 45;
-        case 6:  return 3;
-        case 7:  return 50;
-        case 8:  return 58; // Pitch/Effects
-        case 9:  return 52;
-        case 10: return 51;
-        case 11: return 56;
-        case 12: return 8;
-        case 13: return 9;
-        case 14: return 17;
-        case 15: return 15;
-        case 16: return 16;
-        case 17: return 46;
-        case 18: return 57;
-        case 19: return 48; // Volume envelope
-        case 20: return 33;
-        case 21: return 34;
-        case 22: return 35;
-        case 23: return 36;
-        case 24: return 37;
-        case 25: return 38;
-        case 26: return 39;
-        case 27: return 40;
-        case 28: return 47;
-        case 29: return 54;
-        case 30: return 25; // Modulation envelope
-        case 31: return 26;
-        case 32: return 27;
-        case 33: return 28;
-        case 34: return 29;
-        case 35: return 30;
-        case 36: return 7;
-        case 37: return 11;
-        case 38: return 31;
-        case 39: return 32;
-        case 40: return 21; // Modulation LFO
-        case 41: return 22;
-        case 42: return 5;
-        case 43: return 13;
-        case 44: return 10;
-        case 45: return 23; // Vibrato LFO
-        case 46: return 24;
-        case 47: return 6;
-        default: return 100;
-        }
-    }
-}
-
-int PageTable::getDestIndex(int i)
-{
-    if (_typePage == PAGE_PRST)
-    {
-        switch (i)
-        {
-        case 52: return 0; // Pitch/Effects
-        case 51: return 1;
-        case 56: return 2;
-        case 8:  return 3;
-        case 9:  return 4;
-        case 17: return 5;
-        case 15: return 6;
-        case 16: return 7;
-        case 48: return 8; // Volume envelope
-        case 33: return 9;
-        case 34: return 10;
-        case 35: return 11;
-        case 36: return 12;
-        case 37: return 13;
-        case 38: return 14;
-        case 39: return 15;
-        case 40: return 16;
-        case 25: return 17; // Modulation envelope
-        case 26: return 18;
-        case 27: return 19;
-        case 28: return 20;
-        case 29: return 21;
-        case 30: return 22;
-        case 7:  return 23;
-        case 11: return 24;
-        case 31: return 25;
-        case 32: return 26;
-        case 21: return 27; // Modulation LFO
-        case 22: return 28;
-        case 5:  return 29;
-        case 13: return 30;
-        case 10: return 31;
-        case 23: return 32; // Vibrato LFO
-        case 24: return 33;
-        case 6:  return 34;
-        default: return 100;
-        }
-    }
-    else
-    {
-        switch (i)
-        {
-        case 0:  return 0; // Sample
-        case 4:  return 1;
-        case 1:  return 2;
-        case 12: return 3;
-        case 2:  return 4;
-        case 45: return 5;
-        case 3:  return 6;
-        case 50: return 7;
-        case 58: return 8;
-        case 52: return 9; // Pitch/Effects
-        case 51: return 10;
-        case 56: return 11;
-        case 8:  return 12;
-        case 9:  return 13;
-        case 17: return 14;
-        case 15: return 15;
-        case 16: return 16;
-        case 46: return 17;
-        case 57: return 18;
-        case 48: return 19; // Volume envelope
-        case 33: return 20;
-        case 34: return 21;
-        case 35: return 22;
-        case 36: return 23;
-        case 37: return 24;
-        case 38: return 25;
-        case 39: return 26;
-        case 40: return 27;
-        case 47: return 28;
-        case 54: return 29;
-        case 25: return 30; // Modulation envelope
-        case 26: return 31;
-        case 27: return 32;
-        case 28: return 33;
-        case 29: return 34;
-        case 30: return 35;
-        case 7:  return 36;
-        case 11: return 37;
-        case 31: return 38;
-        case 32: return 39;
-        case 21: return 40; // Modulation LFO
-        case 22: return 41;
-        case 5:  return 42;
-        case 13: return 43;
-        case 10: return 44;
-        case 23: return 45; // Vibrato LFO
-        case 24: return 46;
-        case 6:  return 47;
-        default: return 100;
         }
     }
 }

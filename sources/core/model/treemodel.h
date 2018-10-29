@@ -18,18 +18,19 @@ public:
     QModelIndex	index(int row, int column, const QModelIndex &parent = QModelIndex()) const override;
     QModelIndex	parent(const QModelIndex &index) const override;
 
-    void elementAdded(EltID id);
-    void elementUpdated(EltID id);
-    void elementBeingDeleted(EltID id);
-    void endOfDeletion();
-    void visibilityChanged(EltID id);
-
     /// Trigger all dataChanged() when the editing is done
     void triggerUpdate();
 
     /// Drag & drop
     Qt::DropActions supportedDropActions() const { return Qt::MoveAction; }
     Qt::ItemFlags flags(const QModelIndex &index) const;
+
+    /// Tree update
+    void elementAdded(EltID id);
+    void elementUpdated(EltID id);
+    void elementBeingDeleted(EltID id);
+    void endOfDeletion();
+    void visibilityChanged(EltID id);
 
 signals:
     void saveExpandedState();

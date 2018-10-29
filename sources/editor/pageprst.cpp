@@ -35,6 +35,42 @@ PagePrst::PagePrst(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    _destIndex << champ_fineTune
+               << champ_coarseTune
+               << champ_scaleTuning
+               << champ_initialFilterFc
+               << champ_initialFilterQ
+               << champ_pan
+               << champ_chorusEffectsSend
+               << champ_reverbEffectsSend
+               << champ_initialAttenuation
+               << champ_delayVolEnv
+               << champ_attackVolEnv
+               << champ_holdVolEnv
+               << champ_decayVolEnv
+               << champ_sustainVolEnv
+               << champ_releaseVolEnv
+               << champ_keynumToVolEnvHold
+               << champ_keynumToVolEnvDecay
+               << champ_delayModEnv
+               << champ_attackModEnv
+               << champ_holdModEnv
+               << champ_decayModEnv
+               << champ_sustainModEnv
+               << champ_releaseModEnv
+               << champ_modEnvToPitch
+               << champ_modEnvToFilterFc
+               << champ_keynumToModEnvHold
+               << champ_keynumToModEnvDecay
+               << champ_delayModLFO
+               << champ_freqModLFO
+               << champ_modLfoToPitch
+               << champ_modLfoToVolume
+               << champ_modLfoToFilterFc
+               << champ_delayVibLFO
+               << champ_freqVibLFO
+               << champ_vibLfoToPitch;
+
     // Style
     ui->frameBottom->setStyleSheet("QFrame{background-color:" +
                                    ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND).name() + ";color:" +
@@ -71,7 +107,7 @@ PagePrst::PagePrst(QWidget *parent) :
 
     // Remplissage de comboDestination
     for (int i = 0; i < 35; i++)
-        this->comboDestination->addItem(getGenName(this->getDestNumber(i)));
+        this->comboDestination->addItem(Attribute::getDescription(this->getDestNumber(i), true));
     this->comboDestination->setLimite(35);
 
     // Remplissage des combosources
@@ -419,4 +455,17 @@ void PagePrst::keyPlayedInternal2(int key, int velocity)
     IdList ids = _currentIds.getSelectedIds(elementPrst);
     if (ids.count() == 1)
         ContextManager::audio()->getSynth()->play(2, ids[0].indexSf2, ids[0].indexElt, key, velocity);
+}
+
+
+int PagePrst::getDestIndex(AttributeType type)
+{
+    return _destIndex.indexOf(type);
+}
+
+AttributeType PagePrst::getDestNumber(int row)
+{
+    if (_destIndex.count() > row)
+        return _destIndex[row];
+    return champ_unknown;
 }
