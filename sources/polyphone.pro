@@ -148,12 +148,12 @@ contains(DEFINES, USE_LOCAL_QCUSTOMPLOT) {
 
 # Location of FluidSynth
 contains(DEFINES, USE_LOCAL_FLUIDSYNTH) {
-    INCLUDEPATH += lib/fluidsynth
-    HEADERS += lib/fluidsynth/fluidsynth.h
-    LIBS += -L$$PWD/lib/fluidsynth -lfluidsynth
+    #INCLUDEPATH += lib/fluidsynth
+    #HEADERS += lib/fluidsynth/fluidsynth.h
+    #LIBS += -L$$PWD/lib/fluidsynth -lfluidsynth
 } else {
-    LIBS += -lfluidsynth
-    INCLUDEPATH += /usr/include/fluidsynth
+    #LIBS += -lfluidsynth
+    #INCLUDEPATH += /usr/include/fluidsynth
 }
 
 INCLUDEPATH += mainwindow \
@@ -239,7 +239,6 @@ SOURCES	+= main.cpp \
     editor/tools/dialog_mixture.cpp \
     editor/tools/dialog_release.cpp \
     editor/tools/dialog_visualizer.cpp \
-    editor/tools/dialog_transposition.cpp \
     editor/tools/division_duplication/duplicationtool.cpp \
     editor/tools/dialog_exportlist.cpp \
     clavier/pianoscene.cpp \
@@ -452,7 +451,6 @@ HEADERS  += \
     editor/tools/dialog_mixture.h \
     editor/tools/dialog_release.h \
     editor/tools/dialog_visualizer.h \
-    editor/tools/dialog_transposition.h \
     editor/tools/division_duplication/duplicationtool.h \
     editor/tools/dialog_exportlist.h \
     clavier/pianoscene.h \
@@ -628,7 +626,6 @@ FORMS    += \
     editor/tools/dialog_mixture.ui \
     editor/tools/dialog_release.ui \
     editor/tools/dialog_visualizer.ui \
-    editor/tools/dialog_transposition.ui \
     editor/tools/dialog_exportlist.ui \
     mainwindow/widgetshowhistory.ui \
     mainwindow/widgetshowhistorycell.ui \
