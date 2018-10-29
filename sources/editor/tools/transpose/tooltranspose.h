@@ -30,8 +30,19 @@ public:
         return "inst:transpose";
     }
 
+    /// Method executed before the iterating process
+    void beforeProcess(IdList ids) override;
+
     /// Process an element
     void process(SoundfontManager * sm, EltID id, AbstractToolParameters * parameters) override;
+
+protected:
+    /// Get the warning to display after the tool is run
+    QString getWarning() override;
+
+private:
+    QStringList _elementsInError;
+    QMutex _mutex;
 };
 
 #endif // TOOLTRANSPOSE_H
