@@ -342,7 +342,6 @@ void PageInst::release(EltID id, double duree36, double division, double deTune)
     _sf2->simplify(id, champ_releaseVolEnv);
 }
 
-
 // TableWidgetInst
 TableWidgetInst::TableWidgetInst(QWidget *parent) : TableWidget(parent) {}
 
