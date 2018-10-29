@@ -2,7 +2,6 @@
 #include "ui_toolglobalsettings_gui.h"
 #include "toolglobalsettings_parameters.h"
 #include "soundfontmanager.h"
-#include "page.h"
 #include "graphparamglobal.h"
 
 ToolGlobalSettings_gui::ToolGlobalSettings_gui(QWidget *parent) :
@@ -66,7 +65,7 @@ void ToolGlobalSettings_gui::updateInterface(AbstractToolParameters * parameters
     ui->comboAttribute->blockSignals(true);
     for (int i = 0; i < paramTypeList.size(); i++)
     {
-        ui->comboAttribute->addItem(Page::getGenName(paramTypeList.at(i), _isInst ? 1 : 2));
+        ui->comboAttribute->addItem(Attribute::getDescription(paramTypeList.at(i), !_isInst));
         ui->comboAttribute->setItemData(i, (int)paramTypeList.at(i));
     }
     AttributeType attributeToSelect = (AttributeType)(_isInst ? params->getInstAttribute() : params->getPrstAttribute());

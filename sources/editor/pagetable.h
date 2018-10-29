@@ -44,7 +44,6 @@ public:
 
     void reselect();
     void spatialisation();
-    void visualize();
     void displayModInTable();
 
 protected:
@@ -87,8 +86,8 @@ protected:
 
     void select(EltID id);
     static void remplirComboSource(ComboBox *comboBox);
-    int getDestIndex(int i);
-    int getDestNumber(int i);
+    virtual int getDestIndex(AttributeType type) = 0;
+    virtual AttributeType getDestNumber(int row) = 0;
     quint16 getSrcIndex(quint16 wVal, bool bVal);
     quint16 getSrcNumber(quint16 wVal, bool &CC);
 

@@ -111,32 +111,48 @@ int Soundfont::indexOfSample(Smpl * smpl)
 
 int Soundfont::addInstrument()
 {
+    _mutexInst.lock();
     _inst[_instCounter] = new InstPrst(this, _instrumentTreeItem, EltID(elementInst, _id.indexSf2, _instCounter, -1, -1));
     _inst[_instCounter]->notifyCreation();
-    return _instCounter++;
+    int result = _instCounter++;
+    _mutexInst.unlock();
+
+    return result;
 }
 
 InstPrst * Soundfont::getInstrument(int index)
 {
+    _mutexInst.lock();
+    InstPrst * result = NULL;
     if (_inst.contains(index))
-        return _inst[index];
-    return NULL;
+        result = _inst[index];
+    _mutexInst.unlock();
+
+    return result;
 }
 
 bool Soundfont::deleteInstrument(int index)
 {
+    _mutexInst.lock();
     if (_inst.contains(index))
     {
         _inst[index]->notifyDeletion();
         delete _inst.take(index);
+        _mutexInst.unlock();
         return true;
     }
+
+    _mutexInst.unlock();
     return false;
 }
 
 int Soundfont::indexOfInstrument(InstPrst * inst)
 {
-    return _inst.values().indexOf(inst);
+    _mutexInst.lock();
+    int result = _inst.values().indexOf(inst);
+    _mutexInst.unlock();
+
+    return result;
 }
 
 int Soundfont::addPreset()

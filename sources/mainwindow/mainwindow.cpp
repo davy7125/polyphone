@@ -302,7 +302,7 @@ void MainWindow::onRecorderDisplayChange(bool isDisplayed)
 
 void MainWindow::keyPressEvent(QKeyEvent * event)
 {
-    if (event->modifiers() & Qt::ControlModifier && event->key() == Qt::Key_K)
+    if (event->modifiers() == Qt::ControlModifier && event->key() == Qt::Key_K)
     {
         if (!_keyboard->isVisible())
         {
@@ -315,5 +315,21 @@ void MainWindow::keyPressEvent(QKeyEvent * event)
             _keyboard->glow();
         }
     }
+    else if (event->modifiers() == Qt::ControlModifier && event->key() == Qt::Key_Z)
+    {
+        // Undo
+        _windowManager->undo();
+    }
+    else if ((event->modifiers() == Qt::ControlModifier && event->key() == Qt::Key_Y) ||
+             (event->modifiers() == (Qt::ControlModifier | Qt::ShiftModifier) && event->key() == Qt::Key_Z))
+    {
+        // Redo
+        _windowManager->redo();
+    }
+    else if (event->key() == Qt::Key_F12)
+    {
+        // Full screen
+    }
+
     QMainWindow::keyPressEvent(event);
 }

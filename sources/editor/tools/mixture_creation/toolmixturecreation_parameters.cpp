@@ -13,18 +13,20 @@ void ToolMixtureCreation_parameters::loadConfiguration()
     
     // Divisions
     _divisions.clear();
-    QList<QVariant> list1 = ContextManager::configuration()->getToolValue(ConfManager::TOOL_TYPE_INSTRUMENT, "mixture", "divisions", QList<QVariant>()).toList();
-    foreach (QVariant element, list1)
+    QStringList listDivision = ContextManager::configuration()->getToolValue(ConfManager::TOOL_TYPE_INSTRUMENT, "mixture", "divisions", QList<QVariant>()).toStringList();
+    foreach (QString divisionStr, listDivision)
     {
-        QList<QVariant> list2 = element.toList();
-        if (list2.count() >= 4)
+        QStringList listTmp = divisionStr.split(' ');
+        if (listTmp.count() >= 4)
         {
             // The two first elements of the list are the range of the division
-            DivisionInfo division(list2.takeFirst().toInt(), list2.takeFirst().toInt());
+            DivisionInfo division(listTmp.takeFirst().toInt(), listTmp.takeFirst().toInt());
             
             // Then, ranks are specified by two numbers
-            while (list2.count() >= 2)
-                division.addRank(list2.takeFirst().toInt(), list2.takeFirst().toInt());
+            while (listTmp.count() >= 2)
+                division.addRank(listTmp.takeFirst().toInt(), listTmp.takeFirst().toInt());
+
+            _divisions << division;
         }
     }
 }
@@ -40,20 +42,19 @@ void ToolMixtureCreation_parameters::saveConfiguration()
     ContextManager::configuration()->setToolValue(ConfManager::TOOL_TYPE_INSTRUMENT, "mixture", "loop", _loopSample);
     
     // Divisions
-    QList<QVariant> listTmp;
+    QStringList listDivision;
     foreach (DivisionInfo division, _divisions)
     {
-        QList<QVariant> listDivision;
+        QStringList divisionStr;
         
         // The two first elements are the key range
-        listDivision << division.getMinKey();
-        listDivision << division.getMaxKey();
+        divisionStr << QString::number(division.getMinKey()) << QString::number(division.getMaxKey());
         
         // Then the description of the ranks
         foreach (RankInfo rank, division.getRanks())
-            listDivision << rank.getOvertoneType() << rank.getOctave();
+            divisionStr << QString::number(rank.getOctave()) << QString::number(rank.getOvertoneType());
         
-        listTmp << listDivision;
+        listDivision << divisionStr.join(' ');
     }
-    ContextManager::configuration()->setToolValue(ConfManager::TOOL_TYPE_INSTRUMENT, "mixture", "divisions", listTmp);
+    ContextManager::configuration()->setToolValue(ConfManager::TOOL_TYPE_INSTRUMENT, "mixture", "divisions", listDivision);
 }

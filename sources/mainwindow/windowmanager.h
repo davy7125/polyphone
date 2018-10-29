@@ -36,6 +36,10 @@ public slots:
     /// The function is called when pages have to be updated
     void editingDone(QString source, QList<int> sf2Indexes);
 
+    /// Ask for undo / redo if possible
+    void undo();
+    void redo();
+
 signals:
     /// Emitted when the visibility of the recorder changes
     void recorderDisplayChanged(bool isDisplayed);

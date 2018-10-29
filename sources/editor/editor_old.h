@@ -71,11 +71,6 @@ public:
     Ui::MainWindowOld *ui;
     explicit MainWindowOld(QWidget *parent = 0);
     ~MainWindowOld();
-    void spaceKeyPressedInTree();
-
-public slots:
-    void copier();              // Envoi du signal "copier"
-    void coller();              // Envoi du signal "coller"
 
 private slots:
     void exporterSmpl();        // Export d'un sample
@@ -83,17 +78,9 @@ private slots:
     void exporter(QList<QList<EltID> > listID, QString dir, int format,
                   bool presetPrefix, bool bankDir, bool gmSort, int quality);
     int exporter2(QList<QList<EltID> > listID, QString dir, int format, int flags, int quality);
-
     void showAbout();           // Affichage fenêtre à propos
-
-    void spatialisation();      // outil instrument, spatialisation du son
-    void visualize();           // outil instrument et preset, visualise les paramètres utilisés dans un graphique
-    void exportPresetList();    // global tool
     void onPleinEcranTriggered();
     void futureFinished();
-
-signals:
-    void play(int type, int idSf2, int idElt, int note, int velocity);
 
 private:
     PageSf2 * page_sf2;

@@ -12,10 +12,10 @@ public:
     /// Save the configuration in the ini file
     void saveConfiguration() override;
     
-    bool getInstAttribute() { return _instAttribute; }
-    void setInstAttribute(bool instAttribute) { _instAttribute = instAttribute; }
-    bool getPrstAttribute() { return _prstAttribute; }
-    void setPrstAttribute(bool prstAttribute) { _prstAttribute = prstAttribute; }
+    int getInstAttribute() { return _instAttribute; }
+    void setInstAttribute(int instAttribute) { _instAttribute = instAttribute; }
+    int getPrstAttribute() { return _prstAttribute; }
+    void setPrstAttribute(int prstAttribute) { _prstAttribute = prstAttribute; }
 
     bool getInstLog() { return _instLog; }
     void setInstLog(bool instLog) { _instLog = instLog; }
