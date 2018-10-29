@@ -43,6 +43,7 @@ protected:
 private:
     bool _isInst;
     QStringList _elementsInError;
+    QMutex _mutex;
 };
 
 #endif // TOOLDIVISIONDUPLICATION_H
