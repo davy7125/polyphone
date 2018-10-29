@@ -23,10 +23,10 @@ void TreeItem::notifyRename()
         _model->elementUpdated(_id);
 }
 
-void TreeItem::notifyDeletion()
+void TreeItem::notifyDeletion(bool storeExpandedState)
 {
     if (_model)
-        _model->elementBeingDeleted(_id);
+        _model->elementBeingDeleted(_id, storeExpandedState);
 }
 
 TreeItem::~TreeItem()

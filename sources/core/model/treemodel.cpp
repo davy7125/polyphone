@@ -96,10 +96,10 @@ void TreeModel::elementAdded(EltID id)
     int position;
     QModelIndex index = getParentIndexWithPosition(id, position);
 
-    emit(saveExpandedState());
+    //emit(saveExpandedState());
     emit(beginInsertRows(index, position, position));
     emit(endInsertRows());
-    emit(restoreExpandedState());
+    //emit(restoreExpandedState());
 }
 
 void TreeModel::elementUpdated(EltID id)
@@ -159,12 +159,13 @@ void TreeModel::elementUpdated(EltID id)
     }
 }
 
-void TreeModel::elementBeingDeleted(EltID id)
+void TreeModel::elementBeingDeleted(EltID id, bool storeExpandedState)
 {
     int position;
     QModelIndex index = getParentIndexWithPosition(id, position);
 
-    emit(saveExpandedState());
+    if (storeExpandedState)
+        emit(saveExpandedState());
     emit(beginRemoveRows(index, position, position));
 }
 
