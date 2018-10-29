@@ -19,7 +19,7 @@ void ToolTranspose::process(SoundfontManager * sm, EltID id, AbstractToolParamet
     ToolTranspose_parameters * params = (ToolTranspose_parameters *)parameters;
     
     // Elements to transpose
-    EltID divId = EltID(elementInstSmpl, id.indexSf2, id.elementId);
+    EltID divId = EltID(elementInstSmpl, id.indexSf2, id.indexElt);
     if (sm->getSiblings(divId).empty())
     {
         // No divisions => error
@@ -74,8 +74,8 @@ void ToolTranspose::process(SoundfontManager * sm, EltID id, AbstractToolParamet
             idSmpl.typeElement = elementSmpl;
             idSmpl.indexElt = sm->get(divId, champ_sampleID).wValue;
             int rootKey = sm->get(idSmpl, champ_byOriginalPitch).bValue;
-            if (sm->isSet(idInst, champ_overridingRootKey))
-                rootKey = sm->get(idInst, champ_overridingRootKey).wValue;
+            if (sm->isSet(id, champ_overridingRootKey))
+                rootKey = sm->get(id, champ_overridingRootKey).wValue;
             if (sm->isSet(divId, champ_overridingRootKey))
                 rootKey = sm->get(divId, champ_overridingRootKey).wValue;
 
@@ -90,13 +90,13 @@ void ToolTranspose::process(SoundfontManager * sm, EltID id, AbstractToolParamet
 
             // Correction
             int fineTune = 0;
-            if (sm->isSet(idInst, champ_fineTune))
-                fineTune = sm->get(idInst, champ_fineTune).wValue;
+            if (sm->isSet(id, champ_fineTune))
+                fineTune = sm->get(id, champ_fineTune).wValue;
             if (sm->isSet(divId, champ_fineTune))
                 fineTune = sm->get(divId, champ_fineTune).wValue;
             int coarseTune = 0;
-            if (sm->isSet(idInst, champ_coarseTune))
-                coarseTune = sm->get(idInst, champ_coarseTune).wValue;
+            if (sm->isSet(id, champ_coarseTune))
+                coarseTune = sm->get(id, champ_coarseTune).wValue;
             if (sm->isSet(divId, champ_coarseTune))
                 coarseTune = sm->get(divId, champ_coarseTune).wValue;
 
