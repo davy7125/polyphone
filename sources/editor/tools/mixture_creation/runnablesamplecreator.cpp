@@ -31,20 +31,20 @@ void RunnableSampleCreator::run()
 
     // Minimum attenuation for all ranks
     double attMini = 1000000;
-//    foreach (RankInfo ri, _di.getRanks())
-//    {
-//        double noteTmp = (double)_key + ri.getOffset();
-//        double ecart;
-//        EltID idInstSmplTmp;
-//        closestSample(_idInst, noteTmp, ecart, _side, idInstSmplTmp);
-//        double attenuation = 0;
-//        if (sm->isSet(idInstSmplTmp, champ_initialAttenuation))
-//            attenuation = (double)sm->get(idInstSmplTmp, champ_initialAttenuation).shValue / 10.0;
-//        if (attenuation < attMini)
-//            attMini = attenuation;
-//    }
+    foreach (RankInfo ri, _di.getRanks())
+    {
+        double noteTmp = (double)_key + ri.getOffset();
+        double ecart;
+        EltID idInstSmplTmp;
+        closestSample(_idInst, noteTmp, ecart, _side, idInstSmplTmp);
+        double attenuation = 0;
+        if (sm->isSet(idInstSmplTmp, champ_initialAttenuation))
+            attenuation = (double)sm->get(idInstSmplTmp, champ_initialAttenuation).shValue / 10.0;
+        if (attenuation < attMini)
+            attMini = attenuation;
+    }
 
-//    // For each rank
+    // For each rank
 //    foreach (RankInfo ri, _di.getRanks())
 //    {
 //        // Calcul de la note à ajouter à la mixture
@@ -98,39 +98,39 @@ void RunnableSampleCreator::run()
     idSmpl.indexElt = sm->add(idSmpl);
     _mutex.unlock();
 
-//    // Ajout des données
-//    sm->set(idSmpl, champ_sampleData16, Sound::bpsConversion(baData, 32, 16));
-//    EltID idSf2 = idSmpl;
-//    idSf2.typeElement = elementSf2;
-//    if (sm->get(idSf2, champ_wBpsSave).wValue == 24)
-//        sm->set(idSmpl, champ_sampleData24, Sound::bpsConversion(baData, 32, 824));
+    // Ajout des données
+    sm->set(idSmpl, champ_sampleData16, Sound::bpsConversion(baData, 32, 16));
+    EltID idSf2 = idSmpl;
+    idSf2.typeElement = elementSf2;
+    if (sm->get(idSf2, champ_wBpsSave).wValue == 24)
+        sm->set(idSmpl, champ_sampleData24, Sound::bpsConversion(baData, 32, 824));
 
-//    // Configuration
-//    AttributeValue value;
-//    value.dwValue = baData.length() / 4;
-//    sm->set(idSmpl, champ_dwLength, value);
-//    value.dwValue = SAMPLE_RATE;
-//    sm->set(idSmpl, champ_dwSampleRate, value);
-//    value.wValue = _key;
-//    sm->set(idSmpl, champ_byOriginalPitch, value);
-//    value.cValue = 0;
-//    sm->set(idSmpl, champ_chPitchCorrection, value);
-//    value.dwValue = loopStart;
-//    sm->set(idSmpl, champ_dwStartLoop, value);
-//    value.dwValue = loopEnd;
-//    sm->set(idSmpl, champ_dwEndLoop, value);
+    // Configuration
+    AttributeValue value;
+    value.dwValue = baData.length() / 4;
+    sm->set(idSmpl, champ_dwLength, value);
+    value.dwValue = SAMPLE_RATE;
+    sm->set(idSmpl, champ_dwSampleRate, value);
+    value.wValue = _key;
+    sm->set(idSmpl, champ_byOriginalPitch, value);
+    value.cValue = 0;
+    sm->set(idSmpl, champ_chPitchCorrection, value);
+    value.dwValue = loopStart;
+    sm->set(idSmpl, champ_dwStartLoop, value);
+    value.dwValue = loopEnd;
+    sm->set(idSmpl, champ_dwEndLoop, value);
 
-//    // Link
-//    if (_stereo)
-//    {
-//        if (_side == 0)
-//            value.sfLinkValue = rightSample;
-//        else
-//            value.sfLinkValue = leftSample;
-//    }
-//    else
-//        value.sfLinkValue = monoSample;
-//    sm->set(idSmpl, champ_sfSampleType, value);
+    // Link
+    if (_stereo)
+    {
+        if (_side == 0)
+            value.sfLinkValue = rightSample;
+        else
+            value.sfLinkValue = leftSample;
+    }
+    else
+        value.sfLinkValue = monoSample;
+    sm->set(idSmpl, champ_sfSampleType, value);
 
     _tool->sampleDataReady(idSmpl, _key, _minKey, attMini);
 }

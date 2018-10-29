@@ -28,7 +28,7 @@ public:
     /// Tree update
     void elementAdded(EltID id);
     void elementUpdated(EltID id);
-    void elementBeingDeleted(EltID id);
+    void elementBeingDeleted(EltID id, bool storeExpandedState);
     void endOfDeletion();
     void visibilityChanged(EltID id);
 
