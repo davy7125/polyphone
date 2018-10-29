@@ -28,8 +28,6 @@ private:
     bool _loop;
     bool _stereo;
     int _side;
-
-    static QMutex _mutex;
 };
 
 #endif // RUNNABLESAMPLECREATOR_H
