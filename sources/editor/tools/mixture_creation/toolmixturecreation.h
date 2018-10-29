@@ -35,8 +35,6 @@ public:
         return "inst:mixtureCreation";
     }
 
-    void sampleDataReady(EltID idSmpl, int key, int minKey, double minAtt);
-
 signals:
     void elementProcessed(EltID idSmpl, int key, int minKey, double minAtt);
 
@@ -65,7 +63,6 @@ private:
     QString _instrumentName;
     bool _stereoSamples;
     EltID _idNewInst;
-    QMutex _mutex;
 };
 
 #endif // TOOLMIXTURECREATION_H

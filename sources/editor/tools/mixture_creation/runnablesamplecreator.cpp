@@ -4,7 +4,7 @@
 
 double RunnableSampleCreator::SAMPLE_DURATION = 7.0;
 int RunnableSampleCreator::SAMPLE_RATE = 48000;
-QMutex RunnableSampleCreator::_mutex;
+
 RunnableSampleCreator::RunnableSampleCreator(ToolMixtureCreation * tool, EltID idInst, DivisionInfo di, int key, int minKey, bool loop, bool stereo, int side) : QRunnable(),
     _tool(tool),
     _idInst(idInst),
@@ -45,58 +45,56 @@ void RunnableSampleCreator::run()
     }
 
     // For each rank
-//    foreach (RankInfo ri, _di.getRanks())
-//    {
-//        // Calcul de la note à ajouter à la mixture
-//        double noteTmp = (double)_key + ri.getOffset();
-//        if (noteTmp <= 120)
-//        {
-//            // Sample le plus proche et écart associé
-//            double ecart;
-//            EltID idInstSmplTmp;
-//            EltID idSmpl = closestSample(_idInst, noteTmp, ecart, _side, idInstSmplTmp);
-//            //                        printf("touche %d, note cherchee %.2f, sample %s, instsmpl %d-%d\n",
-//            //                               note, noteTmp, sf2->getQstr(idSmpl, champ_name).toStdString().c_str(),
-//            //                               sf2->get(idInstSmplTmp, champ_keyRange).rValue.byLo,
-//            //                               sf2->get(idInstSmplTmp, champ_keyRange).rValue.byHi);
+    foreach (RankInfo ri, _di.getRanks())
+    {
+        // Calcul de la note à ajouter à la mixture
+        double noteTmp = (double)_key + ri.getOffset();
+        if (noteTmp <= 120)
+        {
+            // Sample le plus proche et écart associé
+            double ecart;
+            EltID idInstSmplTmp;
+            EltID idSmpl = closestSample(_idInst, noteTmp, ecart, _side, idInstSmplTmp);
+            //                        printf("touche %d, note cherchee %.2f, sample %s, instsmpl %d-%d\n",
+            //                               note, noteTmp, sf2->getQstr(idSmpl, champ_name).toStdString().c_str(),
+            //                               sf2->get(idInstSmplTmp, champ_keyRange).rValue.byLo,
+            //                               sf2->get(idInstSmplTmp, champ_keyRange).rValue.byHi);
 
-//            // Fréquence d'échantillonnage initiale fictive (pour accordage)
-//            double fEchInit = (double)sm->get(idSmpl, champ_dwSampleRate).dwValue * pow(2, ecart / 12.0);
+            // Fréquence d'échantillonnage initiale fictive (pour accordage)
+            double fEchInit = (double)sm->get(idSmpl, champ_dwSampleRate).dwValue * pow(2, ecart / 12.0);
 
-//            // Récupération du son
-//            QByteArray baDataTmp = getSampleData(idSmpl, SAMPLE_DURATION * fEchInit);
+            // Récupération du son
+            QByteArray baDataTmp = getSampleData(idSmpl, SAMPLE_DURATION * fEchInit);
 
-//            // Prise en compte atténuation en dB
-//            double attenuation = 1;
-//            if (sm->isSet(idInstSmplTmp, champ_initialAttenuation))
-//            {
-//                attenuation = (double)sm->get(idInstSmplTmp, champ_initialAttenuation).shValue / 10.0 - attMini;
-//                attenuation = pow(10, -attenuation / 20.0);
-//            }
+            // Prise en compte atténuation en dB
+            double attenuation = 1;
+            if (sm->isSet(idInstSmplTmp, champ_initialAttenuation))
+            {
+                attenuation = (double)sm->get(idInstSmplTmp, champ_initialAttenuation).shValue / 10.0 - attMini;
+                attenuation = pow(10, -attenuation / 20.0);
+            }
 
-//            // Rééchantillonnage
-//            baDataTmp = Sound::resampleMono(baDataTmp, fEchInit, SAMPLE_RATE, 32);
+            // Rééchantillonnage
+            baDataTmp = Sound::resampleMono(baDataTmp, fEchInit, SAMPLE_RATE, 32);
 
-//            // Ajout du son
-//            addSampleData(baData, baDataTmp, attenuation);
-//        }
-//    }
+            // Ajout du son
+            addSampleData(baData, baDataTmp, attenuation);
+        }
+    }
 
     // Loop sample if needed
     qint32 loopStart = 0;
     qint32 loopEnd = 0;
-//    if (_loop)
-//    {
-//        QByteArray baData2 = Sound::bouclage(baData, SAMPLE_RATE, loopStart, loopEnd, 32);
-//        if (!baData2.isEmpty())
-//            baData = baData2;
-//    }
+    if (_loop)
+    {
+        QByteArray baData2 = Sound::bouclage(baData, SAMPLE_RATE, loopStart, loopEnd, 32);
+        if (!baData2.isEmpty())
+            baData = baData2;
+    }
 
     // Création d'un nouveau sample
-    _mutex.lock();
     EltID idSmpl(elementSmpl, _idInst.indexSf2);
     idSmpl.indexElt = sm->add(idSmpl);
-    _mutex.unlock();
 
     // Ajout des données
     sm->set(idSmpl, champ_sampleData16, Sound::bpsConversion(baData, 32, 16));
@@ -132,7 +130,7 @@ void RunnableSampleCreator::run()
         value.sfLinkValue = monoSample;
     sm->set(idSmpl, champ_sfSampleType, value);
 
-    _tool->sampleDataReady(idSmpl, _key, _minKey, attMini);
+    _tool->elementProcessed(idSmpl, _key, _minKey, attMini);
 }
 
 EltID RunnableSampleCreator::closestSample(EltID idInst, double pitch, double &ecart, int cote, EltID &idInstSmpl)

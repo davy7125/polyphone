@@ -1422,6 +1422,8 @@ void PageTable::selected()
     // Selected items
     IdList ids;
     QList<QTableWidgetItem*> listItems = _table->selectedItems();
+    if (listItems.empty())
+        return;
     for (int i = 0; i < listItems.count(); i++)
         ids << _table->getID(listItems.at(i)->column());
 
