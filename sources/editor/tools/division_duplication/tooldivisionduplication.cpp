@@ -36,7 +36,9 @@ void ToolDivisionDuplication::process(SoundfontManager * sm, EltID id, AbstractT
     if (sm->getSiblings(divId).empty())
     {
         // No divisions => error
+        _mutex.lock();
         _elementsInError << sm->getQstr(id, champ_name);
+        _mutex.unlock();
     }
     else
     {
