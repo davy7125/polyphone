@@ -6,22 +6,467 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>460</width>
-    <height>148</height>
+    <width>542</width>
+    <height>300</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <layout class="QGridLayout" name="gridLayout">
-   <item row="2" column="0" colspan="2">
-    <widget class="QLabel" name="label_4">
-     <property name="text">
-      <string>Division à l'octave suivante</string>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <layout class="QGridLayout" name="gridLayout">
+     <property name="topMargin">
+      <number>0</number>
      </property>
-    </widget>
+     <item row="0" column="0">
+      <widget class="QLabel" name="label_3">
+       <property name="text">
+        <string>Nom de la mixture :</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="QLineEdit" name="lineNom"/>
+     </item>
+     <item row="1" column="0">
+      <widget class="QLabel" name="label_4">
+       <property name="text">
+        <string>Création de son :</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="QComboBox" name="comboFreq">
+       <item>
+        <property name="text">
+         <string>à chaque note</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>toutes les 3 notes</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>toutes les 6 notes</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+     <item row="1" column="2">
+      <widget class="QCheckBox" name="checkBouclage">
+       <property name="text">
+        <string>Bouclage</string>
+       </property>
+       <property name="checked">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="2">
+      <widget class="QCheckBox" name="checkStereo">
+       <property name="text">
+        <string>Stéréo</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </item>
-   <item row="4" column="1" colspan="2">
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_5">
+     <property name="bottomMargin">
+      <number>0</number>
+     </property>
+     <item>
+      <widget class="QGroupBox" name="groupBox">
+       <property name="title">
+        <string>Divisions</string>
+       </property>
+       <layout class="QGridLayout" name="gridLayout_2" columnstretch="100,0,0,0">
+        <property name="leftMargin">
+         <number>0</number>
+        </property>
+        <property name="topMargin">
+         <number>9</number>
+        </property>
+        <property name="rightMargin">
+         <number>0</number>
+        </property>
+        <property name="bottomMargin">
+         <number>0</number>
+        </property>
+        <property name="verticalSpacing">
+         <number>6</number>
+        </property>
+        <item row="3" column="1" colspan="3">
+         <widget class="SpinBoxKey" name="spinDivStart">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="maximum">
+           <number>127</number>
+          </property>
+          <property name="value">
+           <number>36</number>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="1">
+         <widget class="QPushButton" name="pushAddDiv">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>24</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>24</width>
+            <height>24</height>
+           </size>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset>
+            <normaloff>:/icons/add</normaloff>:/icons/add</iconset>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="0" rowspan="6">
+         <widget class="QListWidget" name="listDivisions">
+          <property name="minimumSize">
+           <size>
+            <width>150</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="editTriggers">
+           <set>QAbstractItemView::NoEditTriggers</set>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="2">
+         <widget class="QPushButton" name="pushRemoveDiv">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>24</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>24</width>
+            <height>24</height>
+           </size>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset>
+            <normaloff>:/icons/remove</normaloff>:/icons/remove</iconset>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1">
+         <spacer name="verticalSpacer_3">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeType">
+           <enum>QSizePolicy::Fixed</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>6</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item row="0" column="3">
+         <spacer name="horizontalSpacer">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item row="4" column="1" colspan="3">
+         <widget class="SpinBoxKey" name="spinDivEnd">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="maximum">
+           <number>127</number>
+          </property>
+          <property name="value">
+           <number>96</number>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="1" colspan="3">
+         <widget class="QLabel" name="label">
+          <property name="text">
+           <string>Etendue</string>
+          </property>
+         </widget>
+        </item>
+        <item row="5" column="1">
+         <spacer name="verticalSpacer">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>40</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+       </layout>
+      </widget>
+     </item>
+     <item>
+      <widget class="QGroupBox" name="groupBox_2">
+       <property name="title">
+        <string>Rangs</string>
+       </property>
+       <layout class="QGridLayout" name="gridLayout_3" columnstretch="100,0,0,0">
+        <property name="leftMargin">
+         <number>0</number>
+        </property>
+        <property name="topMargin">
+         <number>9</number>
+        </property>
+        <property name="rightMargin">
+         <number>0</number>
+        </property>
+        <property name="bottomMargin">
+         <number>0</number>
+        </property>
+        <property name="verticalSpacing">
+         <number>6</number>
+        </property>
+        <item row="1" column="1">
+         <spacer name="verticalSpacer_4">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeType">
+           <enum>QSizePolicy::Fixed</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>6</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item row="0" column="3">
+         <spacer name="horizontalSpacer_2">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item row="0" column="2">
+         <widget class="QPushButton" name="pushRemoveRank">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>24</width>
+            <height>24</height>
+           </size>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset>
+            <normaloff>:/icons/remove</normaloff>:/icons/remove</iconset>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="1" colspan="3">
+         <widget class="QLabel" name="label_2">
+          <property name="text">
+           <string>Type</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="1" colspan="3">
+         <widget class="QComboBox" name="comboType1">
+          <item>
+           <property name="text">
+            <string>octave</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>quinte</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>tierce</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>septième</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>neuvième</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>onzième</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>treizième</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>quinzième</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>dix-septième</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>dix-neuvième</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>vingt-et-unième</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>vingt-troisième</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>vingt-cinquième</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>vingt-septième</string>
+           </property>
+          </item>
+         </widget>
+        </item>
+        <item row="4" column="1" colspan="3">
+         <widget class="QComboBox" name="comboType2"/>
+        </item>
+        <item row="0" column="1">
+         <widget class="QPushButton" name="pushAddRank">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>24</width>
+            <height>24</height>
+           </size>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset>
+            <normaloff>:/icons/add</normaloff>:/icons/add</iconset>
+          </property>
+         </widget>
+        </item>
+        <item row="5" column="1">
+         <spacer name="verticalSpacer_2">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>40</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item row="0" column="0" rowspan="6">
+         <widget class="QListWidget" name="listRangs">
+          <property name="minimumSize">
+           <size>
+            <width>150</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="editTriggers">
+           <set>QAbstractItemView::NoEditTriggers</set>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
     <widget class="QDialogButtonBox" name="buttonBox">
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
@@ -31,67 +476,15 @@
      </property>
     </widget>
    </item>
-   <item row="2" column="2">
-    <widget class="QDoubleSpinBox" name="doubleSpinDiv">
-     <property name="minimum">
-      <double>0.500000000000000</double>
-     </property>
-     <property name="maximum">
-      <double>2.000000000000000</double>
-     </property>
-     <property name="singleStep">
-      <double>0.100000000000000</double>
-     </property>
-     <property name="value">
-      <double>1.000000000000000</double>
-     </property>
-    </widget>
-   </item>
-   <item row="0" column="0" colspan="2">
-    <widget class="QLabel" name="label">
-     <property name="text">
-      <string notr="true">Nombre de battements par secondes au do 4 (note 60)</string>
-     </property>
-    </widget>
-   </item>
-   <item row="1" column="0" colspan="2">
-    <widget class="QLabel" name="label_2">
-     <property name="text">
-      <string>Le signe définit le sens du désaccordage.</string>
-     </property>
-    </widget>
-   </item>
-   <item row="0" column="2">
-    <widget class="QDoubleSpinBox" name="doubleSpinHerz">
-     <property name="decimals">
-      <number>1</number>
-     </property>
-     <property name="minimum">
-      <double>-10.000000000000000</double>
-     </property>
-     <property name="maximum">
-      <double>10.000000000000000</double>
-     </property>
-     <property name="value">
-      <double>4.000000000000000</double>
-     </property>
-    </widget>
-   </item>
-   <item row="3" column="2">
-    <spacer name="verticalSpacer">
-     <property name="orientation">
-      <enum>Qt::Vertical</enum>
-     </property>
-     <property name="sizeHint" stdset="0">
-      <size>
-       <width>20</width>
-       <height>40</height>
-      </size>
-     </property>
-    </spacer>
-   </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>SpinBoxKey</class>
+   <extends>QSpinBox</extends>
+   <header>spinboxkey.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>

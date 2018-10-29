@@ -58,7 +58,7 @@ public:
     int set(EltID id, AttributeType champ, AttributeValue value);
     int set(EltID id, AttributeType champ, QString qStr);
     int set(EltID id, AttributeType champ, QByteArray data);
-    int reset(EltID id, AttributeType champ);
+    void reset(EltID id, AttributeType champ);
     void simplify(EltID id, AttributeType champ);
 
     // Nombre de freres de id (id compris)
@@ -159,6 +159,7 @@ private:
     static SoundfontManager * s_instance;
     Soundfonts * _soundfonts;
     ActionManager * _undoRedo;
+    QMutex _mutex;
 };
 
 #endif // PILE_SF2_H

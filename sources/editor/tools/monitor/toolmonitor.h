@@ -1,9 +1,9 @@
 #ifndef TOOLMONITOR_H
 #define TOOLMONITOR_H
 
-#include "abstracttooliterating.h"
+#include "abstracttool.h"
 
-class ToolMonitor: public AbstractToolIterating
+class ToolMonitor: public AbstractTool
 {
 public:
     ToolMonitor();
@@ -30,11 +30,12 @@ public:
         return _isInst ? "inst:monitor" : "prst:monitor";
     }
 
-    /// Method executed before the iterating process
-    void beforeProcess(IdList ids) override;
+protected:
+    /// Return true if the tool can be used on the specified ids
+    bool isCompatible(IdList ids) override;
 
-    /// Process an element
-    void process(SoundfontManager * sm, EltID id, AbstractToolParameters * parameters) override;
+    /// Run the tool, emit the signal "finished" at the end
+    void run(SoundfontManager * sm, QWidget * parent, IdList ids, AbstractToolParameters * parameters) override;
 
 private:
     bool _isInst;

@@ -21,7 +21,8 @@ void ToolTranspose_gui::updateInterface(AbstractToolParameters * parameters, IdL
     ToolTranspose_parameters * params = (ToolTranspose_parameters *) parameters;
 
     // Load parameters
-    
+    ui->spinTon->setValue(params->getSemiTones());
+    ui->checkKeyRange->setChecked(params->getAdaptKeyRanges());
 }
 
 void ToolTranspose_gui::saveParameters(AbstractToolParameters * parameters)
@@ -29,7 +30,8 @@ void ToolTranspose_gui::saveParameters(AbstractToolParameters * parameters)
     ToolTranspose_parameters * params = (ToolTranspose_parameters *) parameters;
 
     // Save current parameters
-    
+    params->setSemiTones(ui->spinTon->value());
+    params->setAdaptKeyRanges(ui->checkKeyRange->isChecked());
 }
 
 void ToolTranspose_gui::on_buttonBox_accepted()

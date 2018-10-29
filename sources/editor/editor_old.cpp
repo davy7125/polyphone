@@ -82,16 +82,6 @@ MainWindowOld::MainWindowOld(QWidget *parent) : QMainWindow(parent, Qt::Window |
     // Initialisation objet Sound
     Sound::setParent(this);
 
-    // Bug QT: restauration de la largeur d'un QDockWidget si fenêtre maximisée
-    int dockWidth = ContextManager::configuration()->getValue(ConfManager::SECTION_DISPLAY, "dock_width", 150).toInt();
-    if (ui->dockWidget->width() < dockWidth)
-        ui->dockWidget->setMinimumWidth(dockWidth);
-    else
-        ui->dockWidget->setMaximumWidth(dockWidth);
-
-    ui->actionA_propos->setMenuRole(QAction::AboutRole);
-    ui->actionPr_f_rences->setMenuRole(QAction::PreferencesRole);
-
     connect(&_futureWatcher, SIGNAL (finished()), this, SLOT (futureFinished()));
 }
 
@@ -106,12 +96,6 @@ MainWindowOld::~MainWindowOld()
     delete _pageOverviewInst;
     delete _pageOverviewPrst;
     delete ui;
-}
-
-void MainWindowOld::spaceKeyPressedInTree()
-{
-    if (ui->stackedWidget->currentWidget() == page_smpl)
-        page_smpl->pushPlayPause();
 }
 
 int MainWindowOld::sauvegarder(int indexSf2, bool saveAs)
@@ -503,55 +487,4 @@ void MainWindowOld::futureFinished()
 
     _progressDialog->deleteLater();
     _progressDialog = NULL;
-}
-
-// Envoi de signaux
-void MainWindowOld::copier()
-{
-    // émission d'un signal "copier"
-    QWidget* focused = QApplication::focusWidget();
-    if( focused != 0 )
-    {
-        QApplication::postEvent(focused, new QKeyEvent(QEvent::KeyPress, Qt::Key_C, Qt::ControlModifier));
-        QApplication::postEvent(focused, new QKeyEvent(QEvent::KeyRelease, Qt::Key_C, Qt::ControlModifier));
-    }
-}
-void MainWindowOld::coller()
-{
-    // émission d'un signal "coller"
-    QWidget* focused = QApplication::focusWidget();
-    if( focused != 0 )
-    {
-        QApplication::postEvent(focused, new QKeyEvent(QEvent::KeyPress, Qt::Key_V, Qt::ControlModifier));
-        QApplication::postEvent(focused, new QKeyEvent(QEvent::KeyRelease, Qt::Key_V, Qt::ControlModifier));
-    }
-}
-
-void MainWindowOld::spatialisation()
-{
-    //if (ui->tree->getSelectedItemsNumber() == 0) return;
-    ElementType type;// = ui->tree->getFirstID().typeElement;
-    if (type == elementInst || type == elementInstSmpl)
-        this->page_inst->spatialisation();
-    else if (type == elementPrst || type == elementPrstInst)
-        this->page_prst->spatialisation();
-}
-
-void MainWindowOld::visualize()
-{
-    //if (ui->tree->getSelectedItemsNumber() == 0) return;
-    ElementType type;// = ui->tree->getFirstID().typeElement;
-    if (type == elementInst || type == elementInstSmpl)
-        this->page_inst->visualize();
-    else if (type == elementPrst || type == elementPrstInst)
-        this->page_prst->visualize();
-}
-
-void MainWindowOld::exportPresetList()
-{
-    //if (ui->tree->getSelectedItemsNumber() == 0) return;
-    EltID id;// = ui->tree->getFirstID();
-    DialogExportList * dial = new DialogExportList(sf2, id, this);
-    dial->setAttribute(Qt::WA_DeleteOnClose);
-    dial->show();
 }

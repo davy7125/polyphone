@@ -224,6 +224,9 @@ public:
     // Limit
     static AttributeValue limit(AttributeType champ, AttributeValue value, bool isPrst);
 
+    // Textual description
+    static QString getDescription(AttributeType champ, bool isPrst);
+
 private:
     static int limit(int value, int min, int max);
     static double limit(double value, double min, double max);

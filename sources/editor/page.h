@@ -90,8 +90,6 @@ public:
     // Change the display option
     void setDisplayOption(int displayOption);
 
-    static QString getGenName(quint16 iVal, int type = 0);
-
 public slots:
     // A key is being played or not played anymore (if velocity is 0)
     void keyPlayed(int key, int velocity)
