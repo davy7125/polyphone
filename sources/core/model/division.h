@@ -18,12 +18,12 @@ public:
     void setGen(AttributeType champ, AttributeValue value);
     void resetGen(AttributeType champ);
     AttributeValue getGen(AttributeType champ);
-    const QMap<AttributeType, AttributeValue> getGens() { return _parameters; }
+    const QMap<AttributeType, AttributeValue> & getGens() { return _parameters; }
 
     // Operations on modulators
     int addMod();
     Modulator * getMod(int index);
-    const QMap<int, Modulator *> getMods() { return _modulators; }
+    const QMap<int, Modulator *> & getMods() { return _modulators; }
     bool deleteMod(int index);
 
     // TreeItem implementation

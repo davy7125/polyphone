@@ -20,21 +20,21 @@ public:
     // Add, get or delete a sample
     int addSample();
     Smpl * getSample(int index);
-    const QMap<int, Smpl *> getSamples() { return _smpl; }
+    const QMap<int, Smpl *> & getSamples() { return _smpl; }
     bool deleteSample(int index);
     int indexOfSample(Smpl * smpl);
 
     // Add, get or delete an instrument
     int addInstrument();
     InstPrst *getInstrument(int index);
-    const QMap<int, InstPrst *> getInstruments() { return _inst; }
+    const QMap<int, InstPrst *> & getInstruments() { return _inst; }
     bool deleteInstrument(int index);
     int indexOfInstrument(InstPrst * inst);
 
     // Add, get or delete a preset
     int addPreset();
     InstPrst * getPreset(int index);
-    const QMap<int, InstPrst *> getPresets() { return _prst; }
+    const QMap<int, InstPrst *> & getPresets() { return _prst; }
     bool deletePreset(int index);
     int indexOfPreset(InstPrst * prst);
 

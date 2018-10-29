@@ -24,6 +24,7 @@ void ToolMixtureCreation::run(SoundfontManager * sm, QWidget * parent, IdList id
 {
     ToolMixtureCreation_parameters * params = (ToolMixtureCreation_parameters *)parameters;
     _sampleKey.clear();
+    _canceled = false;
     _warning = "";
 
     // Current instrument
@@ -32,6 +33,7 @@ void ToolMixtureCreation::run(SoundfontManager * sm, QWidget * parent, IdList id
     if (sm->getSiblings(EltID(elementInstSmpl, idInst.indexSf2, idInst.indexElt)).empty())
     {
         _warning = trUtf8("L'instrument doit contenir des sons.");
+        finished(true);
         return;
     }
 
@@ -108,13 +110,10 @@ void ToolMixtureCreation::run(SoundfontManager * sm, QWidget * parent, IdList id
     }
 }
 
-void ToolMixtureCreation::sampleDataReady(EltID idSmpl, int key, int minKey, double minAtt)
-{
-    emit(elementProcessed(idSmpl, key, minKey, minAtt));
-}
-
 void ToolMixtureCreation::onElementProcessed(EltID idSmpl, int key, int minKey, double minAtt)
 {
+    if (_waitingDialog == NULL)
+        return; // Just in case
     SoundfontManager * sm = SoundfontManager::getInstance();
 
     // Sample name
@@ -135,20 +134,23 @@ void ToolMixtureCreation::onElementProcessed(EltID idSmpl, int key, int minKey, 
     }
     else
         name = name + ' ' + str2;
-    qDebug() << "sample name" << name;
     sm->set(idSmpl, champ_name, name);
 
     // Link samples
-
-    //    if (side == 1)
-    //    {
-    //        EltID idLink = idSmpl;
-    //        idLink.indexElt = idSmpl.indexElt - 1;
-    //        value.wValue = idLink.indexElt;
-    //        sm->set(idSmpl, champ_wSampleLink, value);
-    //        value.wValue = idSmpl.indexElt;
-    //        sm->set(idLink, champ_wSampleLink, value);
-    //    }
+    AttributeValue value;
+    if (_stereoSamples)
+    {
+        if (_sampleKey.contains(key))
+        {
+            EltID idLink = _sampleKey.take(key);
+            value.wValue = idLink.indexElt;
+            sm->set(idSmpl, champ_wSampleLink, value);
+            value.wValue = idSmpl.indexElt;
+            sm->set(idLink, champ_wSampleLink, value);
+        }
+        else
+            _sampleKey[key] = idSmpl;
+    }
 
     // Ajout du sample dans l'instrument
     EltID idInstSmpl = _idNewInst;
@@ -156,7 +158,6 @@ void ToolMixtureCreation::onElementProcessed(EltID idSmpl, int key, int minKey, 
     idInstSmpl.indexElt2 = sm->add(idInstSmpl);
 
     // Configuration
-    AttributeValue value;
     value.wValue = idSmpl.indexElt;
     sm->set(idInstSmpl, champ_sampleID, value);
     value.rValue.byLo = minKey;
@@ -175,13 +176,7 @@ void ToolMixtureCreation::onElementProcessed(EltID idSmpl, int key, int minKey, 
     value.wValue = minAtt * 10;
     sm->set(idInstSmpl, champ_initialAttenuation, value);
 
-
-
-
-
-    if (_waitingDialog == NULL)
-        return; // Just in case
-
+    // Update the waiting dialog
     _waitingDialog->setValue(++_currentStep);
     if (_currentStep >= _steps)
     {

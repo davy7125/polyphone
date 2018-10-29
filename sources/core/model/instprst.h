@@ -20,7 +20,7 @@ public:
     int addDivision();
     Division * getGlobalDivision() { return _globalDivision; }
     Division * getDivision(int index);
-    const QMap<int, Division *> getDivisions() { return _divisions; }
+    const QMap<int, Division *> & getDivisions() { return _divisions; }
     bool deleteDivision(int index);
     int indexOfId(int id);
 
