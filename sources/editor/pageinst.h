@@ -42,7 +42,6 @@ public:
     void setModVisible(bool visible);
     void mixture();
     void release();
-    void transposer();
 
     // Display options
     QList<DisplayOption> getDisplayOptions(IdList selectedIds) override;
@@ -55,8 +54,6 @@ private slots:
     void mixture(QList<QList<int> > listeParam, QString nomInst, bool bouclage, int freq, bool stereo);
     void release(double duree36, double division, double deTune);
     void release(EltID id, double duree36, double division, double deTune);
-    void transposer(double ton, bool adaptKeyRange);
-    void transposer(EltID idInstSmpl, double ton, bool adaptKeyRange);
     void onLinkClicked(EltID id);
 
 private:
