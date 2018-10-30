@@ -29,7 +29,7 @@
    <string>A propos</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="../resources.qrc">
+   <iconset>
     <normaloff>:/icons/icon</normaloff>:/icons/icon</iconset>
   </property>
   <property name="modal">
@@ -52,7 +52,7 @@
     <number>6</number>
    </property>
    <item>
-    <widget class="QLabel" name="label">
+    <widget class="QLabel" name="labelIcon">
      <property name="minimumSize">
       <size>
        <width>128</width>
@@ -61,9 +61,6 @@
      </property>
      <property name="text">
       <string/>
-     </property>
-     <property name="pixmap">
-      <pixmap resource="../resources.qrc">:/icons/icon</pixmap>
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>
@@ -207,8 +204,6 @@
   <tabstop>pushClose</tabstop>
   <tabstop>pushCredit</tabstop>
  </tabstops>
- <resources>
-  <include location="../resources.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>

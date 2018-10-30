@@ -26,60 +26,10 @@ MainWindowOld::MainWindowOld(QWidget *parent) : QMainWindow(parent, Qt::Window |
                                                             | Qt::WindowFullscreenButtonHint
                                                             #endif
                                                             ),
-    ui(new Ui::MainWindowOld),
-    about(this),
-    dialList(this),
-    actionKeyboard(NULL),
-    _progressDialog(NULL)
+    ui(new Ui::MainWindowOld)
 {
     ui->setupUi(this);
     this->setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint);
-#if QT_VERSION >= QT_VERSION_CHECK(4, 7, 0)
-    ui->editSearch->setPlaceholderText(trUtf8("Rechercher..."));
-#endif
-#ifdef Q_OS_MAC
-    ui->verticalLayout_3->setSpacing(4);
-#endif
-
-    ui->actionPlein_cran->setChecked(this->windowState() & Qt::WindowFullScreen);
-
-    // Initialisation de l'objet pile sf2
-    this->sf2 = SoundfontManager::getInstance();
-
-    // Création des pages
-    page_sf2 = new PageSf2();
-    page_smpl = new PageSmpl();
-    page_inst = new PageInst();
-    page_prst = new PagePrst();
-    _pageOverviewSmpl = new PageOverviewSmpl();
-    _pageOverviewInst = new PageOverviewInst();
-    _pageOverviewPrst = new PageOverviewPrst();
-    ui->stackedWidget->addWidget(page_sf2);
-    ui->stackedWidget->addWidget(page_smpl);
-    ui->stackedWidget->addWidget(page_inst);
-    ui->stackedWidget->addWidget(page_prst);
-    ui->stackedWidget->addWidget(_pageOverviewSmpl);
-    ui->stackedWidget->addWidget(_pageOverviewInst);
-    ui->stackedWidget->addWidget(_pageOverviewPrst);
-
-    // Affichage logo logiciel
-    ui->stackedWidget->setCurrentWidget(ui->page_Soft);
-
-    // Préférences d'affichage
-    if (!ContextManager::configuration()->getValue(ConfManager::SECTION_DISPLAY, "tool_bar", true).toBool())
-    {
-        ui->actionBarre_d_outils->setChecked(false);
-        ui->toolBar->setVisible(false);
-    }
-    if (!ContextManager::configuration()->getValue(ConfManager::SECTION_DISPLAY, "section_modulateur", true).toBool())
-    {
-        ui->actionSection_modulateurs->setChecked(false);
-        this->page_inst->setModVisible(false);
-        this->page_prst->setModVisible(false);
-    }
-
-    // Initialisation objet Sound
-    Sound::setParent(this);
 
     connect(&_futureWatcher, SIGNAL (finished()), this, SLOT (futureFinished()));
 }
@@ -87,13 +37,6 @@ MainWindowOld::MainWindowOld(QWidget *parent) : QMainWindow(parent, Qt::Window |
 MainWindowOld::~MainWindowOld()
 {
     SoundfontManager::kill();
-    delete this->page_inst;
-    delete this->page_prst;
-    delete this->page_sf2;
-    delete this->page_smpl;
-    delete _pageOverviewSmpl;
-    delete _pageOverviewInst;
-    delete _pageOverviewPrst;
     delete ui;
 }
 
@@ -196,17 +139,6 @@ int MainWindowOld::sauvegarder(int indexSf2, bool saveAs)
         break;
     }*/
     return 1;
-}
-
-// Fenetres / affichage
-void MainWindowOld::showAbout()
-{
-    about.show();
-}
-
-void MainWindowOld::onPleinEcranTriggered()
-{
-    this->setWindowState(this->windowState() ^ Qt::WindowFullScreen);
 }
 
 void MainWindowOld::exporterSmpl()

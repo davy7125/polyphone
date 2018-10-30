@@ -60,31 +60,31 @@ void TreeView::mousePressEvent(QMouseEvent * event)
 
 void TreeView::mouseDoubleClickEvent(QMouseEvent * event)
 {
-//    QModelIndex index = this->indexAt(event->pos());
-//    if (index.isValid())
-//    {
-//        EltID currentId = index.data(Qt::UserRole).value<EltID>();
-//        if (currentId.typeElement == elementInstSmpl)
-//        {
-//            // Find the corresponding sample
-//            EltID id(elementSmpl, _sf2Index, SoundfontManager::getInstance()->get(currentId, champ_sampleID).wValue, -1, -1);
-//            TreeSortFilterProxy * proxy = (TreeSortFilterProxy *)this->model();
-//            if (!proxy->isFiltered(id))
-//                this->onSelectionChanged(IdList(id));
-//            event->accept();
-//            return;
-//        }
-//        else if (currentId.typeElement == elementPrstInst)
-//        {
-//            // Find the corresponding instrument
-//            EltID id(elementInst, _sf2Index, SoundfontManager::getInstance()->get(currentId, champ_instrument).wValue, -1, -1);
-//            TreeSortFilterProxy * proxy = (TreeSortFilterProxy *)this->model();
-//            if (!proxy->isFiltered(id))
-//                this->onSelectionChanged(IdList(id));
-//            event->accept();
-//            return;
-//        }
-//    }
+    QModelIndex index = this->indexAt(event->pos());
+    if (index.isValid())
+    {
+        EltID currentId = index.data(Qt::UserRole).value<EltID>();
+        if (currentId.typeElement == elementInstSmpl)
+        {
+            // Find the corresponding sample
+            EltID id(elementSmpl, _sf2Index, SoundfontManager::getInstance()->get(currentId, champ_sampleID).wValue, -1, -1);
+            TreeSortFilterProxy * proxy = (TreeSortFilterProxy *)this->model();
+            if (!proxy->isFiltered(id))
+                this->onSelectionChanged(IdList(id));
+            event->accept();
+            return;
+        }
+        else if (currentId.typeElement == elementPrstInst)
+        {
+            // Find the corresponding instrument
+            EltID id(elementInst, _sf2Index, SoundfontManager::getInstance()->get(currentId, champ_instrument).wValue, -1, -1);
+            TreeSortFilterProxy * proxy = (TreeSortFilterProxy *)this->model();
+            if (!proxy->isFiltered(id))
+                this->onSelectionChanged(IdList(id));
+            event->accept();
+            return;
+        }
+    }
 
     QTreeView::mouseDoubleClickEvent(event);
 }
@@ -127,6 +127,11 @@ void TreeView::keyPressEvent(QKeyEvent * event)
             event->accept();
         }
     }
+    else if (event->modifiers() == Qt::ControlModifier && event->key() == Qt::Key_F)
+    {
+        emit(focusOnSearch());
+        event->accept();
+    }
     else
         QTreeView::keyPressEvent(event);
 }
@@ -148,83 +153,179 @@ void TreeView::selectionChanged(const QItemSelection &selected, const QItemSelec
     QTreeView::selectionChanged(selected, deselected);
     if (_fixingSelection)
         return;
+    _fixingSelection = true;
 
     // Reset the selection if not valid
     if (!isSelectionValid())
-    {
-        _fixingSelection = true;
         this->clearSelection();
-        _fixingSelection = false;
-    }
 
     // First attempt to select an index if empty: reselect the selected index or the unselected index
-//    if (this->selectedIndexes().isEmpty())
-//    {
-//        _fixingSelection = true;
-//        if (!selected.indexes().isEmpty())
-//        {
-//            // Id to reselect
-//            EltID id = selected.indexes()[0].data(Qt::UserRole).value<EltID>();
-//            TreeSortFilterProxy * proxy = (TreeSortFilterProxy *)this->model();
-//            if (!proxy->isFiltered(id))
-//                this->setCurrentIndex(selected.indexes()[0]);
-//        }
-//        else if (!deselected.indexes().isEmpty())
-//        {
-//            // Id to reselect
-//            EltID id = deselected.indexes()[0].data(Qt::UserRole).value<EltID>();
-//            TreeSortFilterProxy * proxy = (TreeSortFilterProxy *)this->model();
-//            if (!proxy->isFiltered(id))
-//                this->setCurrentIndex(deselected.indexes()[0]);
-//        }
-//        _fixingSelection = false;
-//    }
+    if (this->selectedIndexes().isEmpty())
+    {
+        if (!selected.indexes().isEmpty())
+        {
+            // Id to reselect
+            EltID id = selected.indexes()[0].data(Qt::UserRole).value<EltID>();
+            bool isHidden = selected.indexes()[0].data(Qt::UserRole + 1).toBool();
+            TreeSortFilterProxy * proxy = (TreeSortFilterProxy *)this->model();
+            if (!proxy->isFiltered(id) && !isHidden)
+                this->selectionModel()->select(selected.indexes()[0], QItemSelectionModel::ClearAndSelect);
+        }
+        else if (!deselected.indexes().isEmpty())
+        {
+            // Id to reselect
+            EltID id = deselected.indexes()[0].data(Qt::UserRole).value<EltID>();
+            bool isHidden = deselected.indexes()[0].data(Qt::UserRole + 1).toBool();
+            TreeSortFilterProxy * proxy = (TreeSortFilterProxy *)this->model();
+            if (!proxy->isFiltered(id) && !isHidden)
+                this->selectionModel()->select(deselected.indexes()[0], QItemSelectionModel::ClearAndSelect);
+        }
+    }
 
     // Second attempt to select an index if empty: take the best match based on the filter
     if (this->selectedIndexes().isEmpty())
     {
+        QModelIndex index;
+        bool ok = false;
         switch (_lastSelectedId.typeElement)
         {
         case elementSmpl:
             // First sample, then instrument and finally preset
             if (_bestMatchSample != -1)
-                onSelectionChanged(EltID(elementSmpl, _sf2Index, _bestMatchSample, -1, -1));
-            if (this->selectedIndexes().isEmpty() && _bestMatchInstrument != -1)
-                onSelectionChanged(EltID(elementInst, _sf2Index, _bestMatchInstrument, -1, -1));
-            if (this->selectedIndexes().isEmpty() && _bestMatchPreset != -1)
-                onSelectionChanged(EltID(elementPrst, _sf2Index, _bestMatchPreset, -1, -1));
+            {
+                index = getIndex(EltID(elementSmpl, _sf2Index, _bestMatchSample));
+                if (!index.data(Qt::UserRole + 1).toBool())
+                {
+                    this->selectionModel()->select(index, QItemSelectionModel::ClearAndSelect);
+                    ok = true;
+                }
+            }
+            if (!ok && _bestMatchInstrument != -1)
+            {
+                index = getIndex(EltID(elementInst, _sf2Index, _bestMatchInstrument));
+                if (!index.data(Qt::UserRole + 1).toBool())
+                {
+                    this->selectionModel()->select(index, QItemSelectionModel::ClearAndSelect);
+                    ok = true;
+                }
+            }
+            if (!ok && _bestMatchPreset != -1)
+            {
+                index = getIndex(EltID(elementPrst, _sf2Index, _bestMatchPreset));
+                if (!index.data(Qt::UserRole + 1).toBool())
+                    this->selectionModel()->select(index, QItemSelectionModel::ClearAndSelect);
+            }
             break;
         case elementInst: case elementInstSmpl:
             // First instrument, then sample and finally preset
             if (_bestMatchInstrument != -1)
-                onSelectionChanged(EltID(elementInst, _sf2Index, _bestMatchInstrument, -1, -1));
-            if (this->selectedIndexes().isEmpty() && _bestMatchSample != -1)
-                onSelectionChanged(EltID(elementSmpl, _sf2Index, _bestMatchSample, -1, -1));
-            if (this->selectedIndexes().isEmpty() && _bestMatchPreset != -1)
-                onSelectionChanged(EltID(elementPrst, _sf2Index, _bestMatchPreset, -1, -1));
+            {
+                index = getIndex(EltID(elementInst, _sf2Index, _bestMatchInstrument));
+                if (!index.data(Qt::UserRole + 1).toBool())
+                {
+                    this->selectionModel()->select(index, QItemSelectionModel::ClearAndSelect);
+                    ok = true;
+                }
+            }
+            if (!ok && _bestMatchSample != -1)
+            {
+                index = getIndex(EltID(elementSmpl, _sf2Index, _bestMatchSample));
+                if (!index.data(Qt::UserRole + 1).toBool())
+                {
+                    this->selectionModel()->select(index, QItemSelectionModel::ClearAndSelect);
+                    ok = true;
+                }
+            }
+            if (!ok && _bestMatchPreset != -1)
+            {
+                index = getIndex(EltID(elementPrst, _sf2Index, _bestMatchPreset));
+                if (!index.data(Qt::UserRole + 1).toBool())
+                    this->selectionModel()->select(index, QItemSelectionModel::ClearAndSelect);
+            }
             break;
         case elementPrst: case elementPrstInst:
             // First preset, then instrument and finally sample
             if (_bestMatchPreset != -1)
-                onSelectionChanged(EltID(elementPrst, _sf2Index, _bestMatchPreset, -1, -1));
-            if (this->selectedIndexes().isEmpty() && _bestMatchInstrument != -1)
-                onSelectionChanged(EltID(elementInst, _sf2Index, _bestMatchInstrument, -1, -1));
-            if (this->selectedIndexes().isEmpty() && _bestMatchSample != -1)
-                onSelectionChanged(EltID(elementSmpl, _sf2Index, _bestMatchSample, -1, -1));
+            {
+                index = getIndex(EltID(elementPrst, _sf2Index, _bestMatchPreset));
+                if (!index.data(Qt::UserRole + 1).toBool())
+                {
+                    this->selectionModel()->select(index, QItemSelectionModel::ClearAndSelect);
+                    ok = true;
+                }
+            }
+            if (!ok && _bestMatchInstrument != -1)
+            {
+                index = getIndex(EltID(elementInst, _sf2Index, _bestMatchInstrument));
+                if (!index.data(Qt::UserRole + 1).toBool())
+                {
+                    this->selectionModel()->select(index, QItemSelectionModel::ClearAndSelect);
+                    ok = true;
+                }
+            }
+            if (!ok && _bestMatchSample != -1)
+            {
+                index = getIndex(EltID(elementSmpl, _sf2Index, _bestMatchSample));
+                if (!index.data(Qt::UserRole + 1).toBool())
+                    this->selectionModel()->select(index, QItemSelectionModel::ClearAndSelect);
+            }
             break;
         default:
             break;
         }
     }
 
-    // Third attempt to select an index if empty: take the root
+    // Third attempt to select an index if empty: take the element at the same position or above in the tree
     if (this->selectedIndexes().isEmpty())
     {
-        _fixingSelection = true;
-        this->setCurrentIndex(this->model()->index(0, 0));
-        _fixingSelection = false;
+        TreeSortFilterProxy * proxy = (TreeSortFilterProxy *)this->model();
+        QModelIndex indexInitial = getIndex(_lastSelectedId);
+        if (indexInitial.isValid())
+        {
+            QModelIndex parent = indexInitial.parent();
+
+            // We try first to select the same position
+            bool ok = false;
+            for (int i = indexInitial.row(); i < this->model()->rowCount(parent); i++)
+            {
+                QModelIndex sibling = parent.child(i, 0);
+                if (!sibling.data(Qt::UserRole + 1).toBool() &&
+                        !proxy->isFiltered(sibling.data(Qt::UserRole).value<EltID>()))
+                {
+                    this->selectionModel()->select(sibling, QItemSelectionModel::ClearAndSelect);
+                    ok = true;
+                    break;
+                }
+            }
+
+            // Then a position above
+            if (!ok)
+            {
+                for (int i = indexInitial.row() - 1; i >= 0; i--)
+                {
+                    QModelIndex sibling = parent.child(i, 0);
+                    if (!sibling.data(Qt::UserRole + 1).toBool() &&
+                            !proxy->isFiltered(sibling.data(Qt::UserRole).value<EltID>()))
+                    {
+                        this->selectionModel()->select(sibling, QItemSelectionModel::ClearAndSelect);
+                        ok = true;
+                        break;
+                    }
+                }
+            }
+
+            // Finally the parent is selected
+            if (!ok)
+                this->selectionModel()->select(parent, QItemSelectionModel::ClearAndSelect);
+        }
     }
 
+    // Fourth attempt to select an index if empty: take the root
+    if (this->selectedIndexes().isEmpty())
+        this->selectionModel()->select(this->model()->index(0, 0), QItemSelectionModel::ClearAndSelect);
+
+    this->setCurrentIndex(this->selectedIndexes()[0]);
+    _fixingSelection = false;
     emit(selectionChanged(getSelectedIds()));
 }
 

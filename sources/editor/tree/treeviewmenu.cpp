@@ -6,13 +6,18 @@
 #include <QMessageBox>
 #include "contextmanager.h"
 #include "duplicator.h"
-#include <QDebug>
 
 IdList TreeViewMenu::s_copy = IdList();
 
 TreeViewMenu::TreeViewMenu(QWidget * parent) : QMenu(parent),
     _dialogList(new DialogList(parent))
 {   
+    // Style
+    this->setStyleSheet(QString("QMenu::separator {background: ") +
+                        ThemeManager::mix(ContextManager::theme()->getColor(ThemeManager::LIST_TEXT),
+                                          ContextManager::theme()->getColor(ThemeManager::LIST_BACKGROUND), 0.5).name() +
+                        ";margin: 10px 45px; height: 1px}");
+
     // Associate
     _associateAction = new QAction(trUtf8("Associer à..."), this);
     connect(_associateAction, SIGNAL(triggered()), this, SLOT(associate()));

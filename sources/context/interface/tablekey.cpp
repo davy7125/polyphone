@@ -27,10 +27,10 @@
 #include "contextmanager.h"
 #include <QHeaderView>
 
-
 TableKey::TableKey(QWidget * parent) : QTableWidget(parent),
     _signalMapper(new QSignalMapper(this))
 {
+    // Style
     QFont font = this->font();
     font.setBold(true);
     this->horizontalHeader()->setFont(font);
@@ -38,9 +38,6 @@ TableKey::TableKey(QWidget * parent) : QTableWidget(parent),
 
     // Signal mapper
     connect(_signalMapper, SIGNAL(mapped(QString)), this, SLOT(rowChanged(QString)));
-
-    // Populate the table
-    this->populate();
 }
 
 void TableKey::populate()
@@ -67,7 +64,6 @@ void TableKey::rowChanged(QString id)
     int colonne = id.right(id.length() - posSeparator - 1).toInt();
 
     QString sequence = ((EditKey*)this->cellWidget(ligne, colonne))->text();
-    //KeyboardManager::setMapping((PianoKeybd::Key)colonne, ligne, QKeySequence(sequence));
 
     emit(combinaisonChanged(colonne, ligne, sequence));
 }

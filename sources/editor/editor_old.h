@@ -44,7 +44,6 @@
 #include "soundfontmanager.h"
 #include "configpanel.h"
 #include "dialog_list.h"
-#include "dialog_about.h"
 #include "pagesf2.h"
 #include "pagesmpl.h"
 #include "pageinst.h"
@@ -78,20 +77,10 @@ private slots:
     void exporter(QList<QList<EltID> > listID, QString dir, int format,
                   bool presetPrefix, bool bankDir, bool gmSort, int quality);
     int exporter2(QList<QList<EltID> > listID, QString dir, int format, int flags, int quality);
-    void showAbout();           // Affichage fenêtre à propos
-    void onPleinEcranTriggered();
     void futureFinished();
 
 private:
-    PageSf2 * page_sf2;
-    PageSmpl * page_smpl;
-    PageInst * page_inst;
-    PagePrst * page_prst;
-    PageOverviewSmpl * _pageOverviewSmpl;
-    PageOverviewInst * _pageOverviewInst;
-    PageOverviewPrst * _pageOverviewPrst;
     SoundfontManager * sf2;
-    DialogAbout about;
     DialogList dialList;
     QAction * actionKeyboard;
     QList<QAction *> actionSeparators;

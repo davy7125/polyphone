@@ -75,8 +75,6 @@ private:
     TreeItem * _sampleTreeItem;
     TreeItem * _instrumentTreeItem;
     TreeItem * _presetTreeItem;
-
-    QMutex _mutexSmpl, _mutexInst, _mutexPrst;
 };
 
 #endif // SOUNDFONT_H
