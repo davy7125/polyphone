@@ -36,9 +36,11 @@ public slots:
     /// The function is called when pages have to be updated
     void editingDone(QString source, QList<int> sf2Indexes);
 
-    /// Ask for undo / redo if possible
-    void undo();
-    void redo();
+    /// Get the current sf2 if an editor is displayed, or -1
+    int getCurrentSf2();
+
+    /// Close the current tab
+    void closeCurrentTab();
 
 signals:
     /// Emitted when the visibility of the recorder changes
@@ -47,12 +49,17 @@ signals:
     /// Emitted when the visibility of the keyboard changes
     void keyboardDisplayChanged(bool isDisplayed);
 
+    /// Emitted when the current tab changed
+    void editorOpen(bool isOpen);
+
 private slots:
     /// Called when the tab title changes
     void onTabTitleChanged(QString title);
 
     /// Called when the user wants to close a tab
     void onTabCloseRequested(int tabIndex);
+
+    void onTabIndexChanged(int tabIndex);
 
 private:
     ColoredTabWidget * _tabWidget;

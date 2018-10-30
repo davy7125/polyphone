@@ -57,11 +57,11 @@ PianoKeybdCustom::PianoKeybdCustom(QWidget *parent) : PianoKeybd(parent)
     }
 
     // Color when keys are disabled
-    COLOR_BLACK_DISABLED = COLOR_WHITE_DISABLED = ContextManager::theme()->mix(COLOR_BLACK_ENABLED, COLOR_WHITE_ENABLED, 0.5);
+    COLOR_BLACK_DISABLED = COLOR_WHITE_DISABLED = ThemeManager::mix(COLOR_BLACK_ENABLED, COLOR_WHITE_ENABLED, 0.5);
 
     // Color of the range around a key
-    COLOR_BLACK_RANGE = ContextManager::theme()->mix(COLOR_BLACK_ENABLED, COLOR_PRESSED, 0.5);
-    COLOR_WHITE_RANGE = ContextManager::theme()->mix(COLOR_WHITE_ENABLED, COLOR_PRESSED, 0.3);
+    COLOR_BLACK_RANGE = ThemeManager::mix(COLOR_BLACK_ENABLED, COLOR_PRESSED, 0.5);
+    COLOR_WHITE_RANGE = ThemeManager::mix(COLOR_WHITE_ENABLED, COLOR_PRESSED, 0.3);
 
     /// APPLY THEME
 

@@ -133,19 +133,9 @@ ConfigPanel::ConfigPanel(QWidget *parent) : QWidget(parent),
     else if (octaveMapping < 0)
         octaveMapping = 0;
     ui->comboDo->setCurrentIndex(octaveMapping);
-
-//    KeyboardManager::set(PianoKeybd::PROPERTY_MAPPING_FIRST_NOTE, 12 * octaveMapping);
-//    for (int i = 0; i < 4; i++)
-//    {
-//        for (int j = 0; j < 13; j++)
-//            KeyboardManager::setMapping((PianoKeybd::Key)j, i, QKeySequence::fromString(getKeyMapped(i, (PianoKeybd::Key)j)));
-//    }
-//    connect(ui->tableKeyboardMap, SIGNAL(combinaisonChanged(int,int,QString)), this, SLOT(combinaisonChanged(int,int,QString)));
-//    renameComboDo();
-
-//    // Vélocité par défaut du clavier
-//    KeyboardManager::set(PianoKeybd::PROPERTY_VELOCITY,
-//                         ContextManager::configuration()->getValue(ConfManager::SECTION_KEYBOARD, "velocity", 127).toInt());
+    connect(ui->tableKeyboardMap, SIGNAL(combinaisonChanged(int,int,QString)), this, SLOT(combinaisonChanged(int,int,QString)));
+    renameComboDo();
+    ui->tableKeyboardMap->populate();
 
     initComboLanguage();
 
@@ -312,15 +302,15 @@ void ConfigPanel::on_checkRepercussionStereo_clicked()
     if (_loaded)
     {
         ContextManager::configuration()->setValue(ConfManager::SECTION_NONE, "stereo_modification",
-                                             ui->checkRepercussionStereo->isChecked());
+                                                  ui->checkRepercussionStereo->isChecked());
     }
 }
 
 void ConfigPanel::combinaisonChanged(int key, int numOctave, QString combinaison)
 {
     ContextManager::configuration()->setValue(ConfManager::SECTION_MAP,
-                                         "key_" + QString::number(numOctave) + "_" + QString::number(key),
-                                         combinaison);
+                                              "key_" + QString::number(numOctave) + "_" + QString::number(key),
+                                              combinaison);
 }
 
 void ConfigPanel::on_comboKeyName_currentIndexChanged(int index)
@@ -338,7 +328,6 @@ void ConfigPanel::on_comboDo_currentIndexChanged(int index)
     ui->comboDo->blockSignals(true);
     ui->comboDo->setCurrentIndex(index);
     ui->comboDo->blockSignals(false);
-    //KeyboardManager::set(PianoKeybd::PROPERTY_MAPPING_FIRST_NOTE, index * 12);
 }
 
 void ConfigPanel::renameComboDo()
@@ -354,7 +343,6 @@ void ConfigPanel::on_spinDefaultVelocity_editingFinished()
     {
         int velocity = ui->spinDefaultVelocity->value();
         ContextManager::configuration()->setValue(ConfManager::SECTION_KEYBOARD, "velocity", velocity);
-        //KeyboardManager::set(PianoKeybd::PROPERTY_VELOCITY, velocity);
     }
 }
 

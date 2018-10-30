@@ -24,6 +24,7 @@
 
 #include "dialog_about.h"
 #include "ui_dialog_about.h"
+#include "contextmanager.h"
 #include <QDate>
 
 DialogAbout::DialogAbout(QWidget *parent) :
@@ -35,9 +36,15 @@ DialogAbout::DialogAbout(QWidget *parent) :
     ui->labelNomVersion->setText(trUtf8("Polyphone") + " " + QString::number(VERSION) +
                                  (FINAL ? "" : " unreleased"));
 
+    // Icon
+    QMap<QString, QString> replacement;
+    replacement["currentColor"] = ContextManager::theme()->getColor(ThemeManager::WINDOW_TEXT).name();
+    replacement["secondColor"] = ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND).name();
+    ui->labelIcon->setPixmap(ContextManager::theme()->getColoredSvg(":/misc/logo.svg", QSize(128, 128), replacement));
+
     // Description
     QString annee = "2013 -" + QString::number(QDate::currentDate().year());
-    QString url = trUtf8("http://polyphone-soundfonts.com/fr");
+    QString url = trUtf8("https://www.polyphone-soundfonts.com/fr");
     QString urlDonation = "https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=ESBLSGPJ7P938&lc=US&item_name=Polyphone&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donate_LG%2egif%3aNonHosted";
     ui->labelDescription->setText("<html><head/><body><p align='center'>" + trUtf8("Copyright") + QString::fromUtf8(" © ") + annee +
                                   " " + trUtf8("Davy Triponney", "this is my name") + "<br/><br/><a href='" + url +

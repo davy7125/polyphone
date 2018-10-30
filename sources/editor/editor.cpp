@@ -51,6 +51,7 @@ Editor::Editor(QWidget *parent) :
 
     // Tree connection
     connect(ui->treeView, SIGNAL(sampleOnOff()), ui->pageSmpl, SLOT(onSampleOnOff()));
+    connect(ui->treeView, SIGNAL(focusOnSearch()), ui->editFilter, SLOT(setFocus()));
 }
 
 Editor::~Editor()

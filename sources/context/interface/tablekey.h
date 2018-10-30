@@ -28,14 +28,13 @@
 #include <QTableWidget>
 #include <QSignalMapper>
 
-class PianoKeybdCustom;
-
 class TableKey : public QTableWidget
 {
     Q_OBJECT
 
 public:
     TableKey(QWidget * parent = NULL);
+    void populate();
 
 signals:
     void combinaisonChanged(int key, int octave, QString combinaison);
@@ -44,7 +43,6 @@ private slots:
     void rowChanged(QString id);
 
 private:
-    void populate();
 
     QSignalMapper * _signalMapper;
 };
