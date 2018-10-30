@@ -1,14 +1,30 @@
 #include "toolremovemods.h"
 #include "soundfontmanager.h"
 
-ToolRemoveMods::ToolRemoveMods() : AbstractToolIterating(QList<ElementType>() << elementInst << elementPrst, NULL, NULL)
+ToolRemoveMods::ToolRemoveMods() :
+    AbstractToolIterating(
+        QList<ElementType>() << elementInst << elementPrst << elementSf2, nullptr, nullptr)
 {
 
 }
 
 void ToolRemoveMods::beforeProcess(IdList ids)
 {
-    _isInst = (ids.count() == 0 || ids[0].typeElement == elementInst || ids[0].typeElement == elementInstSmpl);
+    _deletionType = DeletionGlobal;
+    if (!ids.empty())
+    {
+        switch (ids[0].typeElement)
+        {
+        case elementInst: case elementInstSmpl:
+            _deletionType = DeletionForInstrument;
+            break;
+        case elementPrst: case elementPrstInst:
+            _deletionType = DeletionForPreset;
+            break;
+        default:
+            break;
+        }
+    }
     _count = 0;
 }
 
@@ -16,30 +32,53 @@ void ToolRemoveMods::process(SoundfontManager * sm, EltID id, AbstractToolParame
 {
     Q_UNUSED(parameters)
 
+    switch (_deletionType)
+    {
+    case DeletionGlobal:
+        id.typeElement = elementInst;
+        foreach (int i, sm->getSiblings(EltID(elementInst, id.indexSf2)))
+            clearModInst(sm, EltID(elementInst, id.indexSf2, i));
+        foreach (int i, sm->getSiblings(EltID(elementPrst, id.indexSf2)))
+            clearModPrst(sm, EltID(elementPrst, id.indexSf2, i));
+        break;
+    case DeletionForInstrument:
+        id.typeElement = elementInst;
+        clearModInst(sm, id);
+        break;
+    case DeletionForPreset:
+        id.typeElement = elementPrst;
+        clearModPrst(sm, id);
+        break;
+    }
+}
+
+void ToolRemoveMods::clearModInst(SoundfontManager *sm, EltID idInst)
+{
     // Mods in the global division
-    EltID idMod = id;
-    idMod.typeElement = _isInst ? elementInstMod : elementPrstMod;
+    clearMod(sm, EltID(elementInstMod, idInst.indexSf2, idInst.indexElt));
+
+    // Mods in each division linked to an element
+    foreach (int i, sm->getSiblings(EltID(elementInstSmpl, idInst.indexSf2, idInst.indexElt)))
+        clearMod(sm, EltID(elementInstSmplMod, idInst.indexSf2, idInst.indexElt, i));
+}
+
+void ToolRemoveMods::clearModPrst(SoundfontManager *sm, EltID idPrst)
+{
+    // Mods in the global division
+    clearMod(sm, EltID(elementPrstMod, idPrst.indexSf2, idPrst.indexElt));
+
+    // Mods in each division linked to an element
+    foreach (int i, sm->getSiblings(EltID(elementPrstInst, idPrst.indexSf2, idPrst.indexElt)))
+        clearMod(sm, EltID(elementPrstInstMod, idPrst.indexSf2, idPrst.indexElt, i));
+}
+
+void ToolRemoveMods::clearMod(SoundfontManager * sm, EltID idMod)
+{
     foreach (int i, sm->getSiblings(idMod))
     {
         idMod.indexMod = i;
         sm->remove(idMod);
         _count++;
-    }
-
-    // Mods in each division linked to an element
-    EltID idSub = id;
-    idSub.typeElement = _isInst ? elementInstSmpl : elementPrstInst;
-    foreach (int i, sm->getSiblings(idSub))
-    {
-        idSub.indexElt2 = i;
-        idMod = idSub;
-        idMod.typeElement = _isInst ? elementInstSmplMod : elementPrstInstMod;
-        foreach (int j, sm->getSiblings(idMod))
-        {
-            idMod.indexMod = j;
-            sm->remove(idMod);
-            _count++;
-        }
     }
 }
 

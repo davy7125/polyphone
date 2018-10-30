@@ -3,11 +3,15 @@
 #include "utils.h"
 #include "soundfontmanager.h"
 #include "treeview.h"
+//#include <QAbstractItemModelTester>
 
 TreeSortFilterProxy::TreeSortFilterProxy(int indexSf2, TreeView *treeView, QAbstractItemModel * model) : QSortFilterProxyModel(treeView),
     _indexSf2(indexSf2),
-    _treeView(treeView)
+    _treeView(treeView),
+    _sm(SoundfontManager::getInstance())
 {
+    //new QAbstractItemModelTester(model, QAbstractItemModelTester::FailureReportingMode::Warning, this);
+
     this->setSourceModel(model);
     _treeView->setSf2Index(indexSf2);
     _treeView->setModel(this);
@@ -43,15 +47,14 @@ bool TreeSortFilterProxy::lessThan(const QModelIndex &left, const QModelIndex &r
     case elementInstSmpl: case elementPrstInst:
     {
         EltID id2 = right.data(Qt::UserRole).value<EltID>();
-        SoundfontManager * sf2 = SoundfontManager::getInstance();
-        int lKey1 = sf2->get(id, champ_keyRange).rValue.byLo;
-        int lKey2 = sf2->get(id2, champ_keyRange).rValue.byLo;
+        int lKey1 = _sm->get(id, champ_keyRange).rValue.byLo;
+        int lKey2 = _sm->get(id2, champ_keyRange).rValue.byLo;
         if (lKey1 != lKey2)
             result = (lKey1 < lKey2);
         else
         {
-            int lVel1 = sf2->get(id, champ_velRange).rValue.byLo;
-            int lVel2 = sf2->get(id2, champ_velRange).rValue.byLo;
+            int lVel1 = _sm->get(id, champ_velRange).rValue.byLo;
+            int lVel2 = _sm->get(id2, champ_velRange).rValue.byLo;
             if (lVel1 != lVel2)
                 result = (lVel1 < lVel2);
             else
@@ -62,9 +65,8 @@ bool TreeSortFilterProxy::lessThan(const QModelIndex &left, const QModelIndex &r
     case elementPrst:
     {
         EltID id2 = right.data(Qt::UserRole).value<EltID>();
-        SoundfontManager * sf2 = SoundfontManager::getInstance();
-        result = ((sf2->get(id, champ_wBank).wValue * 1000 + sf2->get(id, champ_wPreset).wValue) <
-                  (sf2->get(id2, champ_wBank).wValue * 1000 + sf2->get(id2, champ_wPreset).wValue));
+        result = ((_sm->get(id, champ_wBank).wValue * 1000 + _sm->get(id, champ_wPreset).wValue) <
+                  (_sm->get(id2, champ_wBank).wValue * 1000 + _sm->get(id2, champ_wPreset).wValue));
     }
         break;
     default: // Inst, Smpl
@@ -140,14 +142,12 @@ void TreeSortFilterProxy::findMatches(int idSf2, QString filter)
     if (filter.isEmpty())
         return;
 
-    SoundfontManager * sf2 = SoundfontManager::getInstance();
-
     // Browse all samples
     EltID idSmpl(elementSmpl, idSf2, -1, -1, -1);
-    foreach (int i, sf2->getSiblings(idSmpl))
+    foreach (int i, _sm->getSiblings(idSmpl))
     {
         idSmpl.indexElt = i;
-        QString name = sf2->getQstr(idSmpl, champ_name);
+        QString name = _sm->getQstr(idSmpl, champ_name).toLower();
         if (name.contains(filter))
         {
             _matchingSamples << i;
@@ -161,10 +161,10 @@ void TreeSortFilterProxy::findMatches(int idSf2, QString filter)
 
     // Browse all instruments
     EltID idInst(elementInst, idSf2, -1, -1, -1);
-    foreach (int i, sf2->getSiblings(idInst))
+    foreach (int i, _sm->getSiblings(idInst))
     {
         idInst.indexElt = i;
-        QString name = sf2->getQstr(idInst, champ_name);
+        QString name = _sm->getQstr(idInst, champ_name).toLower();
         if (name.contains(filter))
         {
             _matchingInstruments << i;
@@ -178,13 +178,13 @@ void TreeSortFilterProxy::findMatches(int idSf2, QString filter)
 
     // Browse all presets
     EltID idPrst(elementPrst, idSf2, -1, -1, -1);
-    foreach (int i, sf2->getSiblings(idPrst))
+    foreach (int i, _sm->getSiblings(idPrst))
     {
         idPrst.indexElt = i;
         QString name = QString("%0:%1 %2")
-                .arg(sf2->get(idPrst, champ_wBank).wValue, 3, 10, QChar('0'))
-                .arg(sf2->get(idPrst, champ_wPreset).wValue, 3, 10, QChar('0'))
-                .arg(sf2->getQstr(idPrst, champ_name));
+                .arg(_sm->get(idPrst, champ_wBank).wValue, 3, 10, QChar('0'))
+                .arg(_sm->get(idPrst, champ_wPreset).wValue, 3, 10, QChar('0'))
+                .arg(_sm->getQstr(idPrst, champ_name)).toLower();
         if (name.contains(filter))
         {
             _matchingPresets << i;

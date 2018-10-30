@@ -326,7 +326,7 @@ void MainWindow::keyPressEvent(QKeyEvent * event)
         // Redo
         _windowManager->redo();
     }
-    else if (event->key() == Qt::Key_F12)
+    else if (event->key() == Qt::Key_F11)
     {
         // Full screen
     }

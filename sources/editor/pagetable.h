@@ -40,11 +40,24 @@ class PageTable : public Page
     Q_OBJECT
 
 public:
-    PageTable(TypePage typePage, QWidget *parent = 0);
+    PageTable(TypePage typePage, QWidget *parent = nullptr);
 
     void reselect();
-    void spatialisation();
     void displayModInTable();
+
+public slots:
+    void set(int ligne, int colonne, bool allowPropagation = true);
+    void setAmount();
+    void setAbs();
+    void selected();
+    void afficheEditMod();
+    void setSourceType(int row, int column);
+    void setSourceAmountType(int row, int column);
+    void setDest(int index);
+    void setSource(int index);
+    void setSource2(int index);
+    void supprimerMod();
+    void nouveauMod();
 
 protected:
     QList<EltID> getEltIds(bool &error, bool allWithDivisions, bool allDivWithRange);
@@ -60,7 +73,6 @@ protected:
     IdList _currentParentIds;
     IdList _currentIds;
 
-    // Attributs protégés
     ElementType contenant;
     ElementType contenantGen;
     ElementType contenantMod;
@@ -91,6 +103,16 @@ protected:
     quint16 getSrcIndex(quint16 wVal, bool bVal);
     quint16 getSrcNumber(quint16 wVal, bool &CC);
 
+protected slots:
+    void copyMod();
+    void pasteMod();
+    void duplicateMod();
+    void duplicateMod(QList<int> listIndex);
+    void actionBegin();
+    void actionFinished();
+    void customizeKeyboard();
+    void onOpenElement(EltID id);
+
 private:
     class Modulator
     {
@@ -119,34 +141,6 @@ private:
 
     static QList<Modulator> _modulatorCopy;
     QList<int> _listKeyEnlighted;
-
-public slots:
-    void set(int ligne, int colonne, bool allowPropagation = true);
-    void setAmount();
-    void setAbs();
-    void selected();
-    void afficheEditMod();
-    void setSourceType(int row, int column);
-    void setSourceAmountType(int row, int column);
-    void setDest(int index);
-    void setSource(int index);
-    void setSource2(int index);
-    void supprimerMod();
-    void nouveauMod();
-
-protected slots:
-    void copyMod();
-    void pasteMod();
-    void duplicateMod();
-    void duplicateMod(QList<int> listIndex);
-    void actionBegin();
-    void actionFinished();
-    void customizeKeyboard();
-    void onOpenElement(EltID id);
-
-private slots:
-    void spatialisation(QMap<int, double> mapPan);
-    void spatialisation(QMap<int, double> mapPan, EltID id);
 };
 
 #endif // PAGETABLE_H

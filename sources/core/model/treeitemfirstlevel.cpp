@@ -11,16 +11,16 @@ TreeItemFirstLevel::TreeItemFirstLevel(QString label, QMap<int, TreeItem *> *chi
 
 int TreeItemFirstLevel::childCount() const
 {
-    if (_children == NULL)
+    if (_children == nullptr)
         return 0;
     return _children->count();
 }
 
 TreeItem * TreeItemFirstLevel::child(int row)
 {
-    if (_children == NULL || row < _children->count())
+    if (_children == nullptr || row < _children->count())
         return _children->values()[row];
-    return NULL;
+    return nullptr;
 }
 
 QString TreeItemFirstLevel::display()
@@ -35,7 +35,7 @@ int TreeItemFirstLevel::row()
 
 int TreeItemFirstLevel::indexOfId(int id)
 {
-    if (_children == NULL)
+    if (_children == nullptr)
         return -1;
     return _children->keys().indexOf(id);
 }

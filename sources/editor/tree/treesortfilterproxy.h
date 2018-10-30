@@ -4,6 +4,7 @@
 #include <QSortFilterProxyModel>
 #include "basetypes.h"
 class TreeView;
+class SoundfontManager;
 
 class TreeSortFilterProxy : public QSortFilterProxyModel
 {
@@ -31,6 +32,7 @@ private:
     QList<int> _matchingPresets;
     int _bestMatchSample, _bestMatchInstrument, _bestMatchPreset;
     QString _bestMatchSampleName, _bestMatchInstrumentName, _bestMatchPresetName;
+    SoundfontManager * _sm;
 };
 
 #endif // TREESORTFILTERPROXY_H

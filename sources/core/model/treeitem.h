@@ -32,8 +32,8 @@ public:
     void setHidden(bool isHidden);
     bool isHidden() { return _isHidden; }
 
-    // Signals for updating the view
-    void notifyCreation();
+    // Trigger signals for updating the view
+    void notifyCreated();
     void notifyRename();
     void notifyDeletion(bool storeExpandedState = true);
 

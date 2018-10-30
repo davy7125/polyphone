@@ -2,19 +2,21 @@
 #include "treemodel.h"
 
 TreeItem::TreeItem(EltID id, TreeItem * parent) :
-    _model(NULL),
+    _model(nullptr),
     _id(id),
     _parent(parent),
     _isHidden(false)
 {
-    if (parent != NULL)
+    if (parent != nullptr)
         _model = parent->_model;
+    if (_model != nullptr)
+        _model->elementBeingAdded(_id);
 }
 
-void TreeItem::notifyCreation()
+void TreeItem::notifyCreated()
 {
     if (_model)
-        _model->elementAdded(_id);
+        _model->endOfAddition();
 }
 
 void TreeItem::notifyRename()

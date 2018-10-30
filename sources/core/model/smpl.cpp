@@ -20,7 +20,7 @@ TreeItem * Smpl::child(int row)
 
 QString Smpl::display()
 {
-    return _name;
+    return _name.isEmpty() ? "..." : _name;
 }
 
 int Smpl::row()

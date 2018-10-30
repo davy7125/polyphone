@@ -10,7 +10,7 @@ class TreeItemRoot: public TreeItem
 {
 public:
     TreeItemRoot(EltID id);
-    virtual ~TreeItemRoot() {}
+    virtual ~TreeItemRoot() override {}
 
     int childCount() const override;
     TreeItem * child(int row) override;

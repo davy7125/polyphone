@@ -120,6 +120,8 @@
         <file alias="remove_mods.svg">editor/tools/remove_mods/remove_mods.svg</file>
         <file alias="spatialization.svg">editor/tools/sound_spatialization/spatialization.svg</file>
         <file alias="transpose2.svg">editor/tools/transpose/transpose2.svg</file>
+        <file alias="chord.svg">editor/tools/chords/chord.svg</file>
+        <file alias="release.svg">editor/tools/release/release.svg</file>
     </qresource>
     <qresource prefix="/vpiano">
         <file alias="blkey.svg">resources/blkey.svg</file>

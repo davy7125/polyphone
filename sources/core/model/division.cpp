@@ -34,6 +34,8 @@ AttributeValue Division::getGen(AttributeType champ)
 void Division::setGen(AttributeType champ, AttributeValue value)
 {
     _parameters[champ] = value;
+    if (champ == champ_sampleID || champ == champ_instrument)
+        notifyRename();
 }
 
 void Division::resetGen(AttributeType champ)
@@ -77,22 +79,24 @@ TreeItem * Division::child(int row)
 
 QString Division::display()
 {
+    QString display = "";
+
     // Take the name of the corresponding element
     ElementType type = this->getId().typeElement;
     if (type == elementInstSmpl && isSet(champ_sampleID))
     {
         Smpl * smpl = _instPrst->soundfont()->getSample(getGen(champ_sampleID).wValue);
         if (smpl != NULL)
-            return smpl->display();
+            display = smpl->display();
     }
-    if (type == elementPrstInst && isSet(champ_instrument))
+    else if (type == elementPrstInst && isSet(champ_instrument))
     {
         InstPrst * inst = _instPrst->soundfont()->getInstrument(getGen(champ_instrument).wValue);
         if (inst != NULL)
-            return inst->display();
+            display = inst->display();
     }
 
-    return "...";
+    return display.isEmpty() ? "..." : "";
 }
 
 int Division::row()

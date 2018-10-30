@@ -8,6 +8,12 @@ ToolMixtureCreation_gui::ToolMixtureCreation_gui(QWidget *parent) :
     ui(new Ui::ToolMixtureCreation_gui)
 {
     ui->setupUi(this);
+
+    // Icons
+    ui->pushAddDiv->setIcon(ContextManager::theme()->getColoredSvg(":/icons/document-new.svg", QSize(16, 16), ThemeManager::BUTTON_TEXT));
+    ui->pushRemoveDiv->setIcon(ContextManager::theme()->getColoredSvg(":/icons/minus.svg", QSize(16, 16), ThemeManager::BUTTON_TEXT));
+    ui->pushAddRank->setIcon(ContextManager::theme()->getColoredSvg(":/icons/document-new.svg", QSize(16, 16), ThemeManager::BUTTON_TEXT));
+    ui->pushRemoveRank->setIcon(ContextManager::theme()->getColoredSvg(":/icons/minus.svg", QSize(16, 16), ThemeManager::BUTTON_TEXT));
 }
 
 ToolMixtureCreation_gui::~ToolMixtureCreation_gui()
