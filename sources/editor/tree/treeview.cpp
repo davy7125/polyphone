@@ -169,7 +169,7 @@ void TreeView::selectionChanged(const QItemSelection &selected, const QItemSelec
             bool isHidden = selected.indexes()[0].data(Qt::UserRole + 1).toBool();
             TreeSortFilterProxy * proxy = (TreeSortFilterProxy *)this->model();
             if (!proxy->isFiltered(id) && !isHidden)
-                this->selectionModel()->select(selected.indexes()[0], QItemSelectionModel::ClearAndSelect);
+                this->setCurrentIndex(selected.indexes()[0]);
         }
         else if (!deselected.indexes().isEmpty())
         {
@@ -178,7 +178,7 @@ void TreeView::selectionChanged(const QItemSelection &selected, const QItemSelec
             bool isHidden = deselected.indexes()[0].data(Qt::UserRole + 1).toBool();
             TreeSortFilterProxy * proxy = (TreeSortFilterProxy *)this->model();
             if (!proxy->isFiltered(id) && !isHidden)
-                this->selectionModel()->select(deselected.indexes()[0], QItemSelectionModel::ClearAndSelect);
+                this->setCurrentIndex(deselected.indexes()[0]);
         }
     }
 
@@ -196,7 +196,7 @@ void TreeView::selectionChanged(const QItemSelection &selected, const QItemSelec
                 index = getIndex(EltID(elementSmpl, _sf2Index, _bestMatchSample));
                 if (!index.data(Qt::UserRole + 1).toBool())
                 {
-                    this->selectionModel()->select(index, QItemSelectionModel::ClearAndSelect);
+                    this->setCurrentIndex(index);
                     ok = true;
                 }
             }
@@ -205,7 +205,7 @@ void TreeView::selectionChanged(const QItemSelection &selected, const QItemSelec
                 index = getIndex(EltID(elementInst, _sf2Index, _bestMatchInstrument));
                 if (!index.data(Qt::UserRole + 1).toBool())
                 {
-                    this->selectionModel()->select(index, QItemSelectionModel::ClearAndSelect);
+                    this->setCurrentIndex(index);
                     ok = true;
                 }
             }
@@ -213,7 +213,7 @@ void TreeView::selectionChanged(const QItemSelection &selected, const QItemSelec
             {
                 index = getIndex(EltID(elementPrst, _sf2Index, _bestMatchPreset));
                 if (!index.data(Qt::UserRole + 1).toBool())
-                    this->selectionModel()->select(index, QItemSelectionModel::ClearAndSelect);
+                    this->setCurrentIndex(index);
             }
             break;
         case elementInst: case elementInstSmpl:
@@ -223,7 +223,7 @@ void TreeView::selectionChanged(const QItemSelection &selected, const QItemSelec
                 index = getIndex(EltID(elementInst, _sf2Index, _bestMatchInstrument));
                 if (!index.data(Qt::UserRole + 1).toBool())
                 {
-                    this->selectionModel()->select(index, QItemSelectionModel::ClearAndSelect);
+                    this->setCurrentIndex(index);
                     ok = true;
                 }
             }
@@ -232,7 +232,7 @@ void TreeView::selectionChanged(const QItemSelection &selected, const QItemSelec
                 index = getIndex(EltID(elementSmpl, _sf2Index, _bestMatchSample));
                 if (!index.data(Qt::UserRole + 1).toBool())
                 {
-                    this->selectionModel()->select(index, QItemSelectionModel::ClearAndSelect);
+                    this->setCurrentIndex(index);
                     ok = true;
                 }
             }
@@ -240,7 +240,7 @@ void TreeView::selectionChanged(const QItemSelection &selected, const QItemSelec
             {
                 index = getIndex(EltID(elementPrst, _sf2Index, _bestMatchPreset));
                 if (!index.data(Qt::UserRole + 1).toBool())
-                    this->selectionModel()->select(index, QItemSelectionModel::ClearAndSelect);
+                    this->setCurrentIndex(index);
             }
             break;
         case elementPrst: case elementPrstInst:
@@ -250,7 +250,7 @@ void TreeView::selectionChanged(const QItemSelection &selected, const QItemSelec
                 index = getIndex(EltID(elementPrst, _sf2Index, _bestMatchPreset));
                 if (!index.data(Qt::UserRole + 1).toBool())
                 {
-                    this->selectionModel()->select(index, QItemSelectionModel::ClearAndSelect);
+                    this->setCurrentIndex(index);
                     ok = true;
                 }
             }
@@ -259,7 +259,7 @@ void TreeView::selectionChanged(const QItemSelection &selected, const QItemSelec
                 index = getIndex(EltID(elementInst, _sf2Index, _bestMatchInstrument));
                 if (!index.data(Qt::UserRole + 1).toBool())
                 {
-                    this->selectionModel()->select(index, QItemSelectionModel::ClearAndSelect);
+                    this->setCurrentIndex(index);
                     ok = true;
                 }
             }
@@ -267,7 +267,7 @@ void TreeView::selectionChanged(const QItemSelection &selected, const QItemSelec
             {
                 index = getIndex(EltID(elementSmpl, _sf2Index, _bestMatchSample));
                 if (!index.data(Qt::UserRole + 1).toBool())
-                    this->selectionModel()->select(index, QItemSelectionModel::ClearAndSelect);
+                    this->setCurrentIndex(index);
             }
             break;
         default:
@@ -292,7 +292,7 @@ void TreeView::selectionChanged(const QItemSelection &selected, const QItemSelec
                 if (!sibling.data(Qt::UserRole + 1).toBool() &&
                         !proxy->isFiltered(sibling.data(Qt::UserRole).value<EltID>()))
                 {
-                    this->selectionModel()->select(sibling, QItemSelectionModel::ClearAndSelect);
+                    this->setCurrentIndex(sibling);
                     ok = true;
                     break;
                 }
@@ -307,7 +307,7 @@ void TreeView::selectionChanged(const QItemSelection &selected, const QItemSelec
                     if (!sibling.data(Qt::UserRole + 1).toBool() &&
                             !proxy->isFiltered(sibling.data(Qt::UserRole).value<EltID>()))
                     {
-                        this->selectionModel()->select(sibling, QItemSelectionModel::ClearAndSelect);
+                        this->setCurrentIndex(sibling);
                         ok = true;
                         break;
                     }
@@ -316,15 +316,14 @@ void TreeView::selectionChanged(const QItemSelection &selected, const QItemSelec
 
             // Finally the parent is selected
             if (!ok)
-                this->selectionModel()->select(parent, QItemSelectionModel::ClearAndSelect);
+                this->setCurrentIndex(parent);
         }
     }
 
     // Fourth attempt to select an index if empty: take the root
     if (this->selectedIndexes().isEmpty())
-        this->selectionModel()->select(this->model()->index(0, 0), QItemSelectionModel::ClearAndSelect);
+        this->setCurrentIndex(this->model()->index(0, 0));
 
-    this->setCurrentIndex(this->selectedIndexes()[0]);
     _fixingSelection = false;
     emit(selectionChanged(getSelectedIds()));
 }
