@@ -1,6 +1,6 @@
 #include "treeitemroot.h"
 
-TreeItemRoot::TreeItemRoot(EltID id) : TreeItem(id, NULL)
+TreeItemRoot::TreeItemRoot(EltID id) : TreeItem(id, nullptr)
 {
 
 }
@@ -14,7 +14,7 @@ TreeItem * TreeItemRoot::child(int row)
 {
     if (row < _children.count())
         return _children[row];
-    return NULL;
+    return nullptr;
 }
 
 QString TreeItemRoot::display()

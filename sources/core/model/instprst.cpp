@@ -23,7 +23,7 @@ int InstPrst::addDivision()
     childId.indexElt2 = _divisionCounter;
 
     _divisions[_divisionCounter] = new Division(this, this, childId);
-    _divisions[_divisionCounter]->notifyCreation();
+    _divisions[_divisionCounter]->notifyCreated();
     return _divisionCounter++;
 }
 
@@ -31,7 +31,7 @@ Division * InstPrst::getDivision(int index)
 {
     if (_divisions.contains(index))
         return _divisions[index];
-    return NULL;
+    return nullptr;
 }
 
 bool InstPrst::deleteDivision(int index)
@@ -62,9 +62,11 @@ TreeItem * InstPrst::child(int row)
 
 QString InstPrst::display()
 {
+    QString display = "";
     if (_extraFields.contains(champ_wBank) && _extraFields.contains(champ_wPreset))
-        return QString("%0:%1 %2").arg(_extraFields[champ_wBank], 3, 10, QChar('0')).arg(_extraFields[champ_wPreset], 3, 10, QChar('0')).arg(_name);
-    return _name;
+        display = QString("%0:%1 ").arg(_extraFields[champ_wBank], 3, 10, QChar('0')).arg(_extraFields[champ_wPreset], 3, 10, QChar('0'));
+    display += (_name.isEmpty() ? "..." : _name);
+    return display;
 }
 
 int InstPrst::row()

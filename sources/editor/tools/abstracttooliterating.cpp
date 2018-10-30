@@ -15,7 +15,7 @@ public:
         _parameters(parameters)
     {}
 
-    ~RunnableTool()
+    ~RunnableTool() override
     {
         _tool->elementProcessed();
     }
@@ -34,7 +34,7 @@ private:
 
 AbstractToolIterating::AbstractToolIterating(ElementType elementType, AbstractToolParameters *parameters, AbstractToolGui *gui, bool async) :
     AbstractTool(parameters, gui),
-    _waitingDialog(NULL),
+    _waitingDialog(nullptr),
     _async(async)
 {
     _elementTypes << elementType;
@@ -45,7 +45,7 @@ AbstractToolIterating::AbstractToolIterating(ElementType elementType, AbstractTo
 AbstractToolIterating::AbstractToolIterating(QList<ElementType> elementTypes, AbstractToolParameters * parameters, AbstractToolGui * gui, bool async) :
     AbstractTool(parameters, gui),
     _elementTypes(elementTypes),
-    _waitingDialog(NULL),
+    _waitingDialog(nullptr),
     _async(async)
 {
     connect(this, SIGNAL(elementProcessed()), this, SLOT(onElementProcessed()), Qt::QueuedConnection);
@@ -98,7 +98,7 @@ void AbstractToolIterating::run(SoundfontManager * sm, QWidget * parent, IdList 
     _currentStep = 0;
 
     // Create and open a progress dialog
-    if (_waitingDialog != NULL)
+    if (_waitingDialog != nullptr)
         delete _waitingDialog;
     _waitingDialog = new WaitingToolDialog(this->getLabel(), _steps, parent);
     _waitingDialog->show();
@@ -116,14 +116,14 @@ void AbstractToolIterating::run(SoundfontManager * sm, QWidget * parent, IdList 
 
 void AbstractToolIterating::onElementProcessed()
 {
-    if (_waitingDialog == NULL)
+    if (_waitingDialog == nullptr)
         return; // Just in case
 
     _waitingDialog->setValue(++_currentStep);
     if (_currentStep >= _steps)
     {
         delete _waitingDialog;
-        _waitingDialog = NULL;
+        _waitingDialog = nullptr;
         if (_canceled)
         {
             SoundfontManager::getInstance()->revertNewEditing();

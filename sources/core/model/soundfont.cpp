@@ -24,7 +24,7 @@ Soundfont::Soundfont(EltID id) :
     _rootItem->attachModel(sourceModel);
 
     // Built the tree
-    _generalTreeItem = new TreeItemFirstLevel(QObject::trUtf8("Général"), NULL, _rootItem, EltID(elementSf2, _id.indexSf2, -1, -1, -1));
+    _generalTreeItem = new TreeItemFirstLevel(QObject::trUtf8("Général"), nullptr, _rootItem, EltID(elementSf2, _id.indexSf2, -1, -1, -1));
     _sampleTreeItem = new TreeItemFirstLevel(QObject::trUtf8("Échantillons"), (QMap<int, TreeItem*> *)&_smpl, _rootItem, EltID(elementRootSmpl, _id.indexSf2, -1, -1, -1));
     _instrumentTreeItem = new TreeItemFirstLevel(QObject::trUtf8("Instruments"), (QMap<int, TreeItem*> *)&_inst, _rootItem, EltID(elementRootInst, _id.indexSf2, -1, -1, -1));
     _presetTreeItem = new TreeItemFirstLevel(QObject::trUtf8("Presets"), (QMap<int, TreeItem*> *)&_prst, _rootItem, EltID(elementRootPrst, _id.indexSf2, -1, -1, -1));
@@ -86,8 +86,7 @@ int Soundfont::addSample()
 {
     QMutexLocker locker(&_mutexSmpl);
     _smpl[_smplCounter] = new Smpl(this, _sampleTreeItem, EltID(elementSmpl, _id.indexSf2, _smplCounter, -1, -1));
-    _smpl[_smplCounter]->notifyCreation();
-    qDebug() << "add sample, number is" << _smplCounter << _smpl.count();
+    _smpl[_smplCounter]->notifyCreated();
     return _smplCounter++;
 }
 
@@ -96,7 +95,7 @@ Smpl * Soundfont::getSample(int index)
     QMutexLocker locker(&_mutexSmpl);
     if (_smpl.contains(index))
         return _smpl[index];
-    return NULL;
+    return nullptr;
 }
 
 bool Soundfont::deleteSample(int index)
@@ -121,7 +120,7 @@ int Soundfont::addInstrument()
 {
     QMutexLocker locker(&_mutexInst);
     _inst[_instCounter] = new InstPrst(this, _instrumentTreeItem, EltID(elementInst, _id.indexSf2, _instCounter, -1, -1));
-    _inst[_instCounter]->notifyCreation();
+    _inst[_instCounter]->notifyCreated();
     return _instCounter++;
 }
 
@@ -130,7 +129,7 @@ InstPrst * Soundfont::getInstrument(int index)
     QMutexLocker locker(&_mutexInst);
     if (_inst.contains(index))
         return _inst[index];
-    return NULL;
+    return nullptr;
 }
 
 bool Soundfont::deleteInstrument(int index)
@@ -156,7 +155,7 @@ int Soundfont::addPreset()
 {
     QMutexLocker locker(&_mutexPrst);
     _prst[_prstCounter] = new InstPrst(this, _presetTreeItem, EltID(elementPrst, _id.indexSf2, _prstCounter, -1, -1));
-    _prst[_prstCounter]->notifyCreation();
+    _prst[_prstCounter]->notifyCreated();
 
     // Extra fields for presets
     _prst[_prstCounter]->setExtraField(champ_wPreset, 0);
@@ -173,7 +172,7 @@ InstPrst * Soundfont::getPreset(int index)
     QMutexLocker locker(&_mutexPrst);
     if (_prst.contains(index))
         return _prst[index];
-    return NULL;
+    return nullptr;
 }
 
 bool Soundfont::deletePreset(int index)

@@ -10,7 +10,10 @@ ToolPresetList::ToolPresetList() : AbstractToolIterating(elementSf2, new ToolPre
 
 void ToolPresetList::process(SoundfontManager * sm, EltID id, AbstractToolParameters *parameters)
 {
-    ToolPresetList_parameters * params = (ToolPresetList_parameters *)parameters;
+    Q_UNUSED(sm)
+    Q_UNUSED(id)
+    Q_UNUSED(parameters)
 
+    // Nothing here
 }
 

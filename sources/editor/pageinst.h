@@ -37,10 +37,9 @@ class PageInst : public PageTable
     Q_OBJECT
 
 public:
-    explicit PageInst(QWidget *parent = 0);
-    ~PageInst();
+    explicit PageInst(QWidget *parent = nullptr);
+    ~PageInst() override;
     void setModVisible(bool visible);
-    void release();
 
     // Display options
     QList<DisplayOption> getDisplayOptions(IdList selectedIds) override;
@@ -52,8 +51,6 @@ protected:
     AttributeType getDestNumber(int row) override;
 
 private slots:
-    void release(double duree36, double division, double deTune);
-    void release(EltID id, double duree36, double division, double deTune);
     void onLinkClicked(EltID id);
 
 private:
@@ -67,7 +64,7 @@ class TableWidgetInst : public TableWidget
     Q_OBJECT
 
 public:
-    TableWidgetInst(QWidget *parent = 0);
+    TableWidgetInst(QWidget *parent = nullptr);
     ~TableWidgetInst();
 
     // Association champ - ligne

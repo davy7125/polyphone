@@ -27,7 +27,20 @@ public:
     /// Internal identifier
     QString getIdentifier() const override
     {
-        return _isInst ? "inst:removeMods" : "prst:removeMods";
+        QString identifier;
+        switch (_deletionType)
+        {
+        case DeletionGlobal:
+            identifier = "sf2:removeMods";
+            break;
+        case DeletionForInstrument:
+            identifier = "inst:removeMods";
+            break;
+        case DeletionForPreset:
+            identifier = "prst:removeMods";
+            break;
+        }
+        return identifier;
     }
 
     /// Method executed before the iterating process
@@ -43,7 +56,18 @@ public:
     QString getWarning() override;
 
 private:
-    bool _isInst;
+    enum DeletionType
+    {
+        DeletionGlobal,
+        DeletionForInstrument,
+        DeletionForPreset
+    };
+
+    void clearModInst(SoundfontManager *sm, EltID idInst);
+    void clearModPrst(SoundfontManager *sm, EltID idPrst);
+    void clearMod(SoundfontManager *sm, EltID idMod);
+
+    DeletionType _deletionType;
     int _count;
 };
 

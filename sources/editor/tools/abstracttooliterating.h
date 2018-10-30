@@ -11,9 +11,9 @@ class AbstractToolIterating: public AbstractTool
 
 public:
     /// Constructor, with the type of element to manage (can be elementSmpl, elementInst, elementPrst, elementSf2 or a combination)
-    AbstractToolIterating(ElementType elementType, AbstractToolParameters * parameters = NULL, AbstractToolGui * gui = NULL, bool async = true);
-    AbstractToolIterating(QList<ElementType> elementTypes, AbstractToolParameters * parameters = NULL, AbstractToolGui * gui = NULL, bool async = true);
-    virtual ~AbstractToolIterating();
+    AbstractToolIterating(ElementType elementType, AbstractToolParameters * parameters = nullptr, AbstractToolGui * gui = nullptr, bool async = true);
+    AbstractToolIterating(QList<ElementType> elementTypes, AbstractToolParameters * parameters = nullptr, AbstractToolGui * gui = nullptr, bool async = true);
+    virtual ~AbstractToolIterating() override;
 
     /// Return true if the tool can be used on the specified ids
     bool isCompatible(IdList ids) override;

@@ -26,7 +26,6 @@
 #include "editor_old.h"
 #include "thememanager.h"
 #include "ui_pageinst.h"
-#include "dialog_release.h"
 #include <QProgressDialog>
 #include <QInputDialog>
 #include <QMenu>
@@ -251,95 +250,6 @@ bool PageInst::updateInterface(QString editingSource, IdList selectedIds, int di
     customizeKeyboard();
 
     return true;
-}
-
-void PageInst::release()
-{
-    bool error;
-    QList<EltID> ids = this->getEltIds(error, true, true);
-    if (ids.isEmpty() || error)
-        return;
-
-    DialogRelease * dialogRelease = new DialogRelease(this);
-    dialogRelease->setAttribute(Qt::WA_DeleteOnClose, true);
-    this->connect(dialogRelease, SIGNAL(accepted(double, double, double)),
-                  SLOT(release(double, double, double)));
-    dialogRelease->show();
-}
-
-void PageInst::release(double duree36, double division, double deTune)
-{
-    bool error;
-    QList<EltID> ids = this->getEltIds(error, true, true);
-    if (ids.isEmpty() || error)
-        return;
-
-    foreach (EltID id, ids)
-        release(id, duree36, division, deTune);
-
-    // Actualisation
-    _sf2->endEditing(getEditingSource());
-}
-
-void PageInst::release(EltID id, double duree36, double division, double deTune)
-{
-    // Modification pour chaque sample lié
-    id.typeElement = elementInstSmpl;
-    foreach (int i, _sf2->getSiblings(id))
-    {
-        id.indexElt2 = i;
-
-        // Note moyenne
-        double noteMoy = (double)(_sf2->get(id, champ_keyRange).rValue.byHi +
-                                  _sf2->get(id, champ_keyRange).rValue.byLo) / 2;
-        // Calcul durée release
-        double release = pow(division, ((36. - noteMoy) / 12.)) * duree36;
-        if (release < 0.001) release = 0.001;
-        else if (release > 101.594) release = 101.594;
-        // Valeur correspondante
-        short val = 1200 * qLn(release) / 0.69314718056;
-        // Modification instSmpl
-        AttributeValue valeur;
-        if (_sf2->get(id, champ_releaseVolEnv).shValue != val)
-        {
-            valeur.shValue = val;
-            _sf2->set(id, champ_releaseVolEnv, valeur);
-        }
-        if (deTune != 0)
-        {
-            // Release de l'enveloppe de modulation
-            if (_sf2->get(id, champ_releaseModEnv).shValue != val)
-            {
-                valeur.shValue = val;
-                _sf2->set(id, champ_releaseModEnv, valeur);
-            }
-            if (_sf2->get(id, champ_modEnvToPitch).shValue != -(int)100*deTune)
-            {
-                valeur.shValue = -(int)100*deTune;
-                _sf2->set(id, champ_modEnvToPitch, valeur);
-            }
-            // Hauteur de l'effet
-            int tuningCoarse = floor(deTune);
-            int tuningFine = 100*(deTune - tuningCoarse);
-            valeur.shValue = _sf2->get(id, champ_coarseTune).shValue + tuningCoarse;
-            if (valeur.shValue != 0)
-                _sf2->set(id, champ_coarseTune, valeur);
-            else
-                _sf2->reset(id, champ_coarseTune);
-            valeur.shValue = _sf2->get(id, champ_fineTune).shValue + tuningFine;
-            if (valeur.shValue != 0)
-                _sf2->set(id, champ_fineTune, valeur);
-            else
-                _sf2->reset(id, champ_fineTune);
-        }
-    }
-
-    // Simplification
-    _sf2->simplify(id, champ_fineTune);
-    _sf2->simplify(id, champ_coarseTune);
-    _sf2->simplify(id, champ_modEnvToPitch);
-    _sf2->simplify(id, champ_releaseModEnv);
-    _sf2->simplify(id, champ_releaseVolEnv);
 }
 
 // TableWidgetInst
