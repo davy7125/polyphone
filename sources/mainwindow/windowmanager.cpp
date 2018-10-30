@@ -20,6 +20,7 @@ WindowManager::WindowManager(ColoredTabWidget *tabWidget) : QObject(NULL),
     SoundfontManager * sf2 = SoundfontManager::getInstance();
     connect(sf2, SIGNAL(editingDone(QString,QList<int>)), this, SLOT(editingDone(QString,QList<int>)));
     connect(_tabWidget, SIGNAL(tabCloseRequested(int)), this, SLOT(onTabCloseRequested(int)));
+    connect(_tabWidget, SIGNAL(currentChanged(int)), this, SLOT(onTabIndexChanged(int)));
 }
 
 WindowManager::~WindowManager()
@@ -202,24 +203,24 @@ void WindowManager::onTabCloseRequested(int tabIndex)
     }
 }
 
-void WindowManager::undo()
+int WindowManager::getCurrentSf2()
 {
     QWidget * widget = _tabWidget->currentWidget();
     if (_editors.contains((Editor*)widget))
     {
-        // Undo an action for the current soundfont
         Editor * editor = (Editor*)widget;
-        SoundfontManager::getInstance()->undo(editor->getSf2Index());
+        return editor->getSf2Index();
     }
+    return -1;
 }
 
-void WindowManager::redo()
+void WindowManager::closeCurrentTab()
 {
-    QWidget * widget = _tabWidget->currentWidget();
-    if (_editors.contains((Editor*)widget))
-    {
-        // Undo an action for the current soundfont
-        Editor * editor = (Editor*)widget;
-        SoundfontManager::getInstance()->redo(editor->getSf2Index());
-    }
+    this->onTabCloseRequested(_tabWidget->currentIndex());
+}
+
+void WindowManager::onTabIndexChanged(int tabIndex)
+{
+    QWidget * widget = _tabWidget->widget(tabIndex);
+    emit(editorOpen(_editors.contains((Editor*)widget)));
 }

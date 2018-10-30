@@ -27,6 +27,7 @@
 
 #include <QMainWindow>
 #include "basetypes.h"
+#include "dialog_about.h"
 
 namespace Ui {
 class MainWindow;
@@ -42,10 +43,8 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
-    void dragAndDrop(QString path, EltID idDest = EltID(elementUnknown, -1, -1, -1, -1), int *arg = NULL);
 
 public slots:
-    void slotAddTab();
     void slotCloseTab(int index);
     void recentSf2Changed();
     void openFile(QString fileName);
@@ -62,14 +61,21 @@ private slots:
     void on_pushButtonSoundfonts_clicked();
     void on_pushButtonOpen_clicked();
     void on_pushButtonNew_clicked();
+    void onAboutClicked();
     void onKeyboardDisplayChange(bool isDisplayed);
     void onRecorderDisplayChange(bool isDisplayed);
+    void fullScreenTriggered();
+    void onCloseFile();
+    void onSave();
+    void onSaveAs();
+    void onExport();
 
 private:
     Ui::MainWindow * ui;
     WindowManager * _windowManager;
     DialogKeyboard * _keyboard;
     DialogRecorder * _recorder;
+    DialogAbout _dialogAbout;
 };
 
 #endif // WINDOW_H

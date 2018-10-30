@@ -96,7 +96,7 @@ QString Division::display()
             display = inst->display();
     }
 
-    return display.isEmpty() ? "..." : "";
+    return display.isEmpty() ? "..." : display;
 }
 
 int Division::row()

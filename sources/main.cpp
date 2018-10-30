@@ -70,8 +70,8 @@ int launchApplication(Options &options, QApplication &a)
     // Open files passed as argument
     QStringList inputFiles = options.getInputFiles();
     int numSf2 = -1;
-    foreach (QString file, inputFiles)
-        w.dragAndDrop(file.replace('\\', '/'), EltID(elementUnknown, -1, -1, -1, -1), &numSf2);
+//    foreach (QString file, inputFiles)
+//        w.dragAndDrop(file.replace('\\', '/'), EltID(elementUnknown, -1, -1, -1, -1), &numSf2);
 
 #ifdef Q_OS_MAC
     QObject::connect(&a, SIGNAL(openFile(QString)), &w, SLOT(dragAndDrop(QString)));

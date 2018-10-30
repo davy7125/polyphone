@@ -11,7 +11,7 @@ ToolMenu::ToolMenu(QWidget * parent) : QMenu(parent),
 {
     // Colors for the separators
     _separatorTextColor = ContextManager::theme()->getColor(ThemeManager::LIST_BACKGROUND).name();
-    _separatorBackgroundColor = ContextManager::theme()->mix(
+    _separatorBackgroundColor = ThemeManager::mix(
                 ContextManager::theme()->getColor(ThemeManager::LIST_BACKGROUND),
                 ContextManager::theme()->getColor(ThemeManager::LIST_TEXT), 0.5).name();
 

@@ -239,7 +239,7 @@ void PianoScene::showKeyOn(PianoKey* key, int vel, int channel)
             }
 
             QColor base = key->isBlack() ? m_palette.value(-1) : m_palette.value(-2);
-            key->setPressedBrush(ContextManager::theme()->mix(base, color, (double)vel / 127.));
+            key->setPressedBrush(ThemeManager::mix(base, color, (double)vel / 127.));
         }
     }
 

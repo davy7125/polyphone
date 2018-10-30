@@ -15,7 +15,6 @@ TreeSortFilterProxy::TreeSortFilterProxy(int indexSf2, TreeView *treeView, QAbst
     this->setSourceModel(model);
     _treeView->setSf2Index(indexSf2);
     _treeView->setModel(this);
-    //_treeView->setModel(model);
     _treeView->setCurrentIndex(this->index(0, 0));
 }
 

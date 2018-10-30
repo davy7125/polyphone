@@ -118,17 +118,17 @@ QString ConfManager::getMapping(int numOctave, Key key)
     case 0:
         switch (key)
         {
-        case KEY_C_LEFT:  txt = trUtf8("w"); break;
-        case KEY_C_SHARP: txt = trUtf8("s"); break;
-        case KEY_D:       txt = trUtf8("x"); break;
-        case KEY_D_SHARP: txt = trUtf8("d"); break;
-        case KEY_E:       txt = trUtf8("c"); break;
-        case KEY_F:       txt = trUtf8("v"); break;
-        case KEY_F_SHARP: txt = trUtf8("g"); break;
-        case KEY_G:       txt = trUtf8("b"); break;
-        case KEY_G_SHARP: txt = trUtf8("h"); break;
-        case KEY_A:       txt = trUtf8("n"); break;
-        case KEY_A_SHARP: txt = trUtf8("j"); break;
+        case KEY_C_LEFT:  txt = trUtf8("W"); break;
+        case KEY_C_SHARP: txt = trUtf8("S"); break;
+        case KEY_D:       txt = trUtf8("X"); break;
+        case KEY_D_SHARP: txt = trUtf8("D"); break;
+        case KEY_E:       txt = trUtf8("C"); break;
+        case KEY_F:       txt = trUtf8("V"); break;
+        case KEY_F_SHARP: txt = trUtf8("G"); break;
+        case KEY_G:       txt = trUtf8("B"); break;
+        case KEY_G_SHARP: txt = trUtf8("H"); break;
+        case KEY_A:       txt = trUtf8("N"); break;
+        case KEY_A_SHARP: txt = trUtf8("J"); break;
         case KEY_B:       txt = trUtf8(","); break;
         case KEY_C_RIGHT: txt = trUtf8(";"); break;
         }
@@ -136,35 +136,35 @@ QString ConfManager::getMapping(int numOctave, Key key)
     case 1:
         switch (key)
         {
-        case KEY_C_LEFT:  txt = trUtf8("a"); break;
-        case KEY_C_SHARP: txt = trUtf8("é"); break;
-        case KEY_D:       txt = trUtf8("z"); break;
+        case KEY_C_LEFT:  txt = trUtf8("A"); break;
+        case KEY_C_SHARP: txt = trUtf8("É"); break;
+        case KEY_D:       txt = trUtf8("Z"); break;
         case KEY_D_SHARP: txt = trUtf8("\""); break;
-        case KEY_E:       txt = trUtf8("e"); break;
-        case KEY_F:       txt = trUtf8("r"); break;
+        case KEY_E:       txt = trUtf8("E"); break;
+        case KEY_F:       txt = trUtf8("R"); break;
         case KEY_F_SHARP: txt = trUtf8("("); break;
-        case KEY_G:       txt = trUtf8("t"); break;
+        case KEY_G:       txt = trUtf8("T"); break;
         case KEY_G_SHARP: txt = trUtf8("-"); break;
-        case KEY_A:       txt = trUtf8("y"); break;
-        case KEY_A_SHARP: txt = trUtf8("è"); break;
-        case KEY_B:       txt = trUtf8("u"); break;
-        case KEY_C_RIGHT: txt = trUtf8("i"); break;
+        case KEY_A:       txt = trUtf8("Y"); break;
+        case KEY_A_SHARP: txt = trUtf8("È"); break;
+        case KEY_B:       txt = trUtf8("U"); break;
+        case KEY_C_RIGHT: txt = trUtf8("I"); break;
         }
         break;
     case 2:
         switch (key)
         {
-        case KEY_C_LEFT:  txt = trUtf8("Shift+w"); break;
-        case KEY_C_SHARP: txt = trUtf8("Shift+s"); break;
-        case KEY_D:       txt = trUtf8("Shift+x"); break;
-        case KEY_D_SHARP: txt = trUtf8("Shift+d"); break;
-        case KEY_E:       txt = trUtf8("Shift+c"); break;
-        case KEY_F:       txt = trUtf8("Shift+v"); break;
-        case KEY_F_SHARP: txt = trUtf8("Shift+g"); break;
-        case KEY_G:       txt = trUtf8("Shift+b"); break;
-        case KEY_G_SHARP: txt = trUtf8("Shift+h"); break;
-        case KEY_A:       txt = trUtf8("Shift+n"); break;
-        case KEY_A_SHARP: txt = trUtf8("Shift+j"); break;
+        case KEY_C_LEFT:  txt = trUtf8("Shift+W"); break;
+        case KEY_C_SHARP: txt = trUtf8("Shift+S"); break;
+        case KEY_D:       txt = trUtf8("Shift+X"); break;
+        case KEY_D_SHARP: txt = trUtf8("Shift+D"); break;
+        case KEY_E:       txt = trUtf8("Shift+C"); break;
+        case KEY_F:       txt = trUtf8("Shift+V"); break;
+        case KEY_F_SHARP: txt = trUtf8("Shift+G"); break;
+        case KEY_G:       txt = trUtf8("Shift+B"); break;
+        case KEY_G_SHARP: txt = trUtf8("Shift+H"); break;
+        case KEY_A:       txt = trUtf8("Shift+N"); break;
+        case KEY_A_SHARP: txt = trUtf8("Shift+J"); break;
         case KEY_B:       txt = trUtf8("Shift+?"); break;
         case KEY_C_RIGHT: txt = trUtf8("Shift+."); break;
         }
@@ -172,19 +172,19 @@ QString ConfManager::getMapping(int numOctave, Key key)
     case 3:
         switch (key)
         {
-        case KEY_C_LEFT:  txt = trUtf8("Shift+a"); break;
+        case KEY_C_LEFT:  txt = trUtf8("Shift+A"); break;
         case KEY_C_SHARP: txt = trUtf8("Shift+2"); break;
-        case KEY_D:       txt = trUtf8("Shift+z"); break;
+        case KEY_D:       txt = trUtf8("Shift+Z"); break;
         case KEY_D_SHARP: txt = trUtf8("Shift+3"); break;
-        case KEY_E:       txt = trUtf8("Shift+e"); break;
-        case KEY_F:       txt = trUtf8("Shift+r"); break;
+        case KEY_E:       txt = trUtf8("Shift+E"); break;
+        case KEY_F:       txt = trUtf8("Shift+R"); break;
         case KEY_F_SHARP: txt = trUtf8("Shift+5"); break;
-        case KEY_G:       txt = trUtf8("Shift+t"); break;
+        case KEY_G:       txt = trUtf8("Shift+T"); break;
         case KEY_G_SHARP: txt = trUtf8("Shift+6"); break;
-        case KEY_A:       txt = trUtf8("Shift+y"); break;
+        case KEY_A:       txt = trUtf8("Shift+Y"); break;
         case KEY_A_SHARP: txt = trUtf8("Shift+7"); break;
-        case KEY_B:       txt = trUtf8("Shift+u"); break;
-        case KEY_C_RIGHT: txt = trUtf8("Shift+i"); break;
+        case KEY_B:       txt = trUtf8("Shift+U"); break;
+        case KEY_C_RIGHT: txt = trUtf8("Shift+I"); break;
         }
         break;
     default:

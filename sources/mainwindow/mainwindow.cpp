@@ -32,6 +32,7 @@
 #include "dialogchangelog.h"
 #include "dialogkeyboard.h"
 #include "dialogrecorder.h"
+#include "mainmenu.h"
 #include <QToolButton>
 #include <QLabel>
 #include <QDesktopServices>
@@ -46,7 +47,8 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow),
     _keyboard(new DialogKeyboard(this)),
-    _recorder(new DialogRecorder(this))
+    _recorder(new DialogRecorder(this)),
+    _dialogAbout(this)
 {
     ///////////
     /// GUI ///
@@ -79,9 +81,31 @@ MainWindow::MainWindow(QWidget *parent) :
 
     // Create a menu button what must be placed in tabs row
     QToolButton* tb = new QToolButton(this);
-    tb->setText(trUtf8("Menu"));
-    connect(tb, SIGNAL(clicked()), this, SLOT(slotAddTab()));
+    tb->setPopupMode(QToolButton::InstantPopup);
+    tb->setIconSize(QSize(28, 28));
+    tb->setIcon(ContextManager::theme()->getColoredSvg(":/icons/menu.svg", QSize(28, 28),
+                                                       ContextManager::theme()->isDark(ThemeManager::WINDOW_BACKGROUND, ThemeManager::WINDOW_TEXT) ?
+                                                           ThemeManager::WINDOW_TEXT : ThemeManager::WINDOW_BACKGROUND));
+    tb->setStyleSheet(QString("QToolButton::menu-indicator{width:0px;}") +
+                      "QToolButton{margin: 3px;padding: 3px;background-color:#000}");
     ui->tabWidget->setCornerWidget(tb, Qt::Corner::TopRightCorner);
+
+    // Main menu
+    MainMenu * menu = new MainMenu(tb);
+    tb->setMenu(menu);
+
+    connect(menu, SIGNAL(newClicked()), this, SLOT(on_pushButtonNew_clicked()));
+    connect(menu, SIGNAL(openClicked()), this, SLOT(on_pushButtonOpen_clicked()));
+    connect(menu, SIGNAL(openSettingsClicked()), this, SLOT(on_pushButtonSettings_clicked()));
+    connect(menu, SIGNAL(onlineHelpClicked()), this, SLOT(on_pushButtonDocumentation_clicked()));
+    connect(menu, SIGNAL(aboutClicked()), this, SLOT(onAboutClicked()));
+    connect(menu, SIGNAL(closeFileClicked()), this, SLOT(onCloseFile()));
+    connect(menu, SIGNAL(closeClicked()), this, SLOT(close()));
+    connect(menu, SIGNAL(save()), this, SLOT(onSave()));
+    connect(menu, SIGNAL(saveAs()), this, SLOT(onSaveAs()));
+    connect(menu, SIGNAL(exportSoundfonts()), this, SLOT(onExport()));
+    connect(menu, SIGNAL(fullScreenTriggered()), this, SLOT(fullScreenTriggered()));
+    menu->setFullScreen(this->windowState() & Qt::WindowFullScreen);
 
     // Remove the close button of the first tab "home"
     ui->tabWidget->tabBar()->tabButton(0, QTabBar::RightSide)->deleteLater();
@@ -97,12 +121,16 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->widgetShowSoundfonts, SIGNAL(itemClicked(SoundfontFilter*)), _windowManager, SLOT(openRepository(SoundfontFilter*)));
     connect(_windowManager, SIGNAL(keyboardDisplayChanged(bool)), this, SLOT(onKeyboardDisplayChange(bool)));
     connect(_windowManager, SIGNAL(recorderDisplayChanged(bool)), this, SLOT(onRecorderDisplayChange(bool)));
+    connect(_windowManager, SIGNAL(editorOpen(bool)), menu, SLOT(onEditorOpen(bool)));
 
     // Initialize the repository
     RepositoryManager * rm = RepositoryManager::getInstance();
     connect(rm, SIGNAL(initializing()), ui->widgetShowSoundfonts, SLOT(initialize()));
     connect(rm, SIGNAL(ready(QString)), ui->widgetShowSoundfonts, SLOT(soundfontListAvailable(QString)), Qt::QueuedConnection);
     rm->initialize();
+
+    // Initialization object Sound
+    Sound::setParent(this);
 
     // Recent files
     connect(ContextManager::recentFile(), SIGNAL(recentSf2Changed()), this, SLOT(recentSf2Changed()));
@@ -196,21 +224,9 @@ void MainWindow::closeEvent(QCloseEvent *event)
     }
 }
 
-void MainWindow::slotAddTab()
-{
-    QWidget* newTab = new QWidget(ui->tabWidget);
-    ui->tabWidget->addTab(newTab, tr("Tab %1").arg(QString::number(ui->tabWidget->count())));
-    ui->tabWidget->setCurrentWidget(newTab);
-}
-
 void MainWindow::slotCloseTab(int index)
 {
     delete ui->tabWidget->widget(index);
-}
-
-void MainWindow::dragAndDrop(QString path, EltID idDest, int *arg)
-{
-
 }
 
 void MainWindow::recentSf2Changed()
@@ -318,18 +334,49 @@ void MainWindow::keyPressEvent(QKeyEvent * event)
     else if (event->modifiers() == Qt::ControlModifier && event->key() == Qt::Key_Z)
     {
         // Undo
-        _windowManager->undo();
+        int currentSf2 = _windowManager->getCurrentSf2();
+        if (currentSf2 != -1)
+            SoundfontManager::getInstance()->undo(currentSf2);
     }
     else if ((event->modifiers() == Qt::ControlModifier && event->key() == Qt::Key_Y) ||
              (event->modifiers() == (Qt::ControlModifier | Qt::ShiftModifier) && event->key() == Qt::Key_Z))
     {
         // Redo
-        _windowManager->redo();
-    }
-    else if (event->key() == Qt::Key_F11)
-    {
-        // Full screen
+        int currentSf2 = _windowManager->getCurrentSf2();
+        if (currentSf2 != -1)
+            SoundfontManager::getInstance()->redo(currentSf2);
     }
 
     QMainWindow::keyPressEvent(event);
+}
+
+void MainWindow::fullScreenTriggered()
+{
+    this->setWindowState(this->windowState() ^ Qt::WindowFullScreen);
+}
+
+void MainWindow::onAboutClicked()
+{
+    _dialogAbout.show();
+}
+
+void MainWindow::onCloseFile()
+{
+    if (_windowManager->getCurrentSf2() != -1)
+        _windowManager->closeCurrentTab();
+}
+
+void MainWindow::onSave()
+{
+
+}
+
+void MainWindow::onSaveAs()
+{
+
+}
+
+void MainWindow::onExport()
+{
+
 }

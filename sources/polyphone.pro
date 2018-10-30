@@ -395,7 +395,8 @@ SOURCES	+= main.cpp \
     editor/tools/chords/runnablechordcreator.cpp \
     editor/tools/chords/toolchords.cpp \
     editor/tools/chords/toolchords_gui.cpp \
-    editor/tools/chords/toolchords_parameters.cpp
+    editor/tools/chords/toolchords_parameters.cpp \
+    mainwindow/mainmenu.cpp
 
 HEADERS  += \
     core/sound.h \
@@ -621,7 +622,8 @@ HEADERS  += \
     editor/tools/chords/runnablechordcreator.h \
     editor/tools/chords/toolchords.h \
     editor/tools/chords/toolchords_gui.h \
-    editor/tools/chords/toolchords_parameters.h
+    editor/tools/chords/toolchords_parameters.h \
+    mainwindow/mainmenu.h
 
 FORMS    += \
     dialogs/dialog_list.ui \

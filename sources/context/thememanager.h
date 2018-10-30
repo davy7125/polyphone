@@ -87,7 +87,7 @@ public:
     QPixmap getColoredSvg(QString filename, QSize maxSize, QMap<QString, QString> &replacement);
 
     /// Function to mix two colors
-    QColor mix(QColor color1, QColor color2, double fade);
+    static QColor mix(QColor color1, QColor color2, double fade);
 
 private:
     class ColorTheme

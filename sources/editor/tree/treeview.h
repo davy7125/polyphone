@@ -23,6 +23,7 @@ public slots:
 signals:
     void selectionChanged(IdList selectedIds);
     void sampleOnOff();
+    void focusOnSearch();
 
 protected:
     void mousePressEvent(QMouseEvent * event);
