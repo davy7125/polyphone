@@ -1,19 +1,20 @@
-#ifndef TOOLCELESTETUNING_GUI_H
-#define TOOLCELESTETUNING_GUI_H
+#ifndef TOOLCHORDS_GUI_H
+#define TOOLCHORDS_GUI_H
 
 #include "abstracttoolgui.h"
+#include "toolchords_parameters.h"
 
 namespace Ui {
-class ToolCelesteTuning_gui;
+class ToolChords_gui;
 }
 
-class ToolCelesteTuning_gui : public AbstractToolGui
+class ToolChords_gui : public AbstractToolGui
 {
     Q_OBJECT
 
 public:
-    explicit ToolCelesteTuning_gui(QWidget *parent = 0);
-    ~ToolCelesteTuning_gui();
+    explicit ToolChords_gui(QWidget *parent = nullptr);
+    ~ToolChords_gui() override;
 
     /// Update the interface with the parameters
     void updateInterface(AbstractToolParameters * parameters, IdList ids) override;
@@ -26,7 +27,7 @@ private slots:
     void on_buttonBox_rejected();
 
 private:
-    Ui::ToolCelesteTuning_gui *ui;
+    Ui::ToolChords_gui *ui;
 };
 
-#endif // TOOLCELESTETUNING_GUI_H
+#endif // TOOLCHORDS_GUI_H

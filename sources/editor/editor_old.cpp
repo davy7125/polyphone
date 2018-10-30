@@ -2,7 +2,6 @@
 #include "ui_editor_old.h"
 #include "sound.h"
 #include "dialog_rename.h"
-#include "dialog_exportlist.h"
 #include "sfz/conversion_sfz.h"
 #include "dialog_export.h"
 #include "duplicator.h"

@@ -19,13 +19,13 @@ int	TreeModel::rowCount(const QModelIndex &parent) const
     if (parent.column() > 0)
         return 0;
 
-    TreeItem *parentItem = NULL;
+    TreeItem *parentItem = nullptr;
     if (!parent.isValid())
         parentItem = _rootItem;
     else
         parentItem = static_cast<TreeItem*>(parent.internalPointer());
 
-    if (parentItem != NULL)
+    if (parentItem != nullptr)
         return parentItem->childCount();
     return 0;
 }
@@ -38,19 +38,19 @@ QVariant TreeModel::data(const QModelIndex &index, int role) const
     if (role == Qt::DisplayRole)
     {
         TreeItem *item = static_cast<TreeItem*>(index.internalPointer());
-        if (item != NULL)
+        if (item != nullptr)
             return item->display();
     }
     else if (role == Qt::UserRole)
     {
         TreeItem *item = static_cast<TreeItem*>(index.internalPointer());
-        if (item != NULL)
+        if (item != nullptr)
             return QVariant::fromValue(item->getId());
     }
     else if (role == Qt::UserRole + 1)
     {
         TreeItem *item = static_cast<TreeItem*>(index.internalPointer());
-        if (item != NULL)
+        if (item != nullptr)
             return item->isHidden();
     }
 
@@ -62,14 +62,14 @@ QModelIndex	TreeModel::index(int row, int column, const QModelIndex &parent) con
     if (!hasIndex(row, column, parent))
         return QModelIndex();
 
-    TreeItem *parentItem = NULL;
+    TreeItem *parentItem = nullptr;
 
     if (!parent.isValid())
         parentItem = _rootItem;
     else
         parentItem = static_cast<TreeItem*>(parent.internalPointer());
 
-    if (parentItem != NULL && parentItem->childCount() > row)
+    if (parentItem != nullptr && parentItem->childCount() > row)
         return createIndex(row, column, parentItem->child(row));
 
     return QModelIndex();
@@ -81,25 +81,30 @@ QModelIndex	TreeModel::parent(const QModelIndex &index) const
         return QModelIndex();
 
     TreeItem *childItem = static_cast<TreeItem*>(index.internalPointer());
-    if (childItem != NULL)
+    if (childItem != nullptr)
     {
         TreeItem *parentItem = childItem->parent();
-        if (parentItem != NULL)
+        if (parentItem == _rootItem)
+            return QModelIndex();
+        if (parentItem != nullptr)
             return createIndex(parentItem->row(), 0, parentItem);
     }
 
     return QModelIndex();
 }
 
-void TreeModel::elementAdded(EltID id)
+void TreeModel::elementBeingAdded(EltID id)
 {
     int position;
     QModelIndex index = getParentIndexWithPosition(id, position);
-
-    //emit(saveExpandedState());
+    emit(saveExpandedState());
     emit(beginInsertRows(index, position, position));
+}
+
+void TreeModel::endOfAddition()
+{
     emit(endInsertRows());
-    //emit(restoreExpandedState());
+    emit(restoreExpandedState());
 }
 
 void TreeModel::elementUpdated(EltID id)
@@ -225,6 +230,10 @@ QModelIndex TreeModel::getParentIndexWithPosition(EltID id, int &position)
         return QModelIndex();
     }
 
+    // If -1, the element is going to be added at the end
+    if (position == -1)
+        position = item->childCount();
+
     return index;
 }
 
@@ -246,7 +255,7 @@ Qt::ItemFlags TreeModel::flags(const QModelIndex &index) const
 {
     Qt::ItemFlags defaultFlags = QAbstractItemModel::flags(index);
     TreeItem *childItem = static_cast<TreeItem*>(index.internalPointer());
-    if (childItem != NULL)
+    if (childItem != nullptr)
     {
         EltID id = childItem->getId();
         switch (id.typeElement)

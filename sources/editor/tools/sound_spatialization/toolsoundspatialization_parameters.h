@@ -49,7 +49,7 @@ public:
     void setPrstFlop(bool prstFlop) { _prstFlop = prstFlop; }
     
     /// Computed value, transitional
-    QMap<int, double> getMapPan() { return _mapPan; }
+    QMap<int, double> & getMapPan() { return _mapPan; }
     void setMapPan(QMap<int, double> mapPan) { _mapPan = mapPan; }
 
 private:

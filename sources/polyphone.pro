@@ -33,7 +33,7 @@ TRANSLATIONS = polyphone_en.ts \
     polyphone_da.ts
 
 
-QT += core gui printsupport svg network
+QT += core gui printsupport svg network #testlib
 TARGET = polyphone
 TEMPLATE = app
 
@@ -235,10 +235,7 @@ SOURCES	+= main.cpp \
     editor/widgets/spinboxkey.cpp \
     editor/widgets/spinboxrange.cpp \
     editor/widgets/comboboxloopmode.cpp \
-    editor/tools/dialog_space.cpp \
-    editor/tools/dialog_release.cpp \
     editor/tools/division_duplication/duplicationtool.cpp \
-    editor/tools/dialog_exportlist.cpp \
     clavier/pianoscene.cpp \
     clavier/pianokey.cpp \
     clavier/pianokeybd.cpp \
@@ -328,7 +325,6 @@ SOURCES	+= main.cpp \
     editor/tools/abstracttooliterating.cpp \
     editor/tools/waitingtooldialog.cpp \
     editor/tools/external_command/toolexternalcommand.cpp \
-    editor/tools/abstracttoolparameters.cpp \
     editor/tools/tooldialog.cpp \
     editor/tools/external_command/toolexternalcommand_parameters.cpp \
     editor/tools/external_command/toolexternalcommand_gui.cpp \
@@ -391,7 +387,15 @@ SOURCES	+= main.cpp \
     editor/tools/frequency_peaks/toolfrequencypeaks_parameters.cpp \
     editor/tools/mixture_creation/runnablesamplecreator.cpp \
     editor/tools/monitor/graphlegend.cpp \
-    editor/tools/monitor/graphvisualizer.cpp
+    editor/tools/monitor/graphvisualizer.cpp \
+    editor/tools/sound_spatialization/graphspace.cpp \
+    editor/tools/release/toolrelease.cpp \
+    editor/tools/release/toolrelease_gui.cpp \
+    editor/tools/release/toolrelease_parameters.cpp \
+    editor/tools/chords/runnablechordcreator.cpp \
+    editor/tools/chords/toolchords.cpp \
+    editor/tools/chords/toolchords_gui.cpp \
+    editor/tools/chords/toolchords_parameters.cpp
 
 HEADERS  += \
     core/sound.h \
@@ -448,10 +452,7 @@ HEADERS  += \
     editor/widgets/spinboxkey.h \
     editor/widgets/spinboxrange.h \
     editor/widgets/comboboxloopmode.h \
-    editor/tools/dialog_space.h \
-    editor/tools/dialog_release.h \
     editor/tools/division_duplication/duplicationtool.h \
-    editor/tools/dialog_exportlist.h \
     clavier/pianoscene.h \
     clavier/pianokey.h \
     clavier/keyboardmap.h \
@@ -612,7 +613,15 @@ HEADERS  += \
     editor/tools/frequency_peaks/toolfrequencypeaks_parameters.h \
     editor/tools/mixture_creation/runnablesamplecreator.h \
     editor/tools/monitor/graphlegend.h \
-    editor/tools/monitor/graphvisualizer.h
+    editor/tools/monitor/graphvisualizer.h \
+    editor/tools/sound_spatialization/graphspace.h \
+    editor/tools/release/toolrelease.h \
+    editor/tools/release/toolrelease_gui.h \
+    editor/tools/release/toolrelease_parameters.h \
+    editor/tools/chords/runnablechordcreator.h \
+    editor/tools/chords/toolchords.h \
+    editor/tools/chords/toolchords_gui.h \
+    editor/tools/chords/toolchords_parameters.h
 
 FORMS    += \
     dialogs/dialog_list.ui \
@@ -624,9 +633,6 @@ FORMS    += \
     editor/editor_old.ui \
     editor/envelopeditor.ui \
     editor/overview/pageoverview.ui \
-    editor/tools/dialog_space.ui \
-    editor/tools/dialog_release.ui \
-    editor/tools/dialog_exportlist.ui \
     mainwindow/widgetshowhistory.ui \
     mainwindow/widgetshowhistorycell.ui \
     mainwindow/mainwindow.ui \
@@ -659,7 +665,9 @@ FORMS    += \
     editor/tools/preset_list/toolpresetlist_gui.ui \
     editor/tools/sound_spatialization/toolsoundspatialization_gui.ui \
     editor/tools/transpose/tooltranspose_gui.ui \
-    editor/tools/frequency_peaks/toolfrequencypeaks_gui.ui
+    editor/tools/frequency_peaks/toolfrequencypeaks_gui.ui \
+    editor/tools/release/toolrelease_gui.ui \
+    editor/tools/chords/toolchords_gui.ui
 
 RESOURCES += resources.qrc
 

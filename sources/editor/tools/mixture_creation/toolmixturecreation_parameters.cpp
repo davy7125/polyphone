@@ -5,7 +5,7 @@ void ToolMixtureCreation_parameters::loadConfiguration()
 {
     // Instrument properties
     _instrumentName = ContextManager::configuration()->getToolValue(ConfManager::TOOL_TYPE_INSTRUMENT, "mixture", "name", "").toString();
-    _densityType = ContextManager::configuration()->getToolValue(ConfManager::TOOL_TYPE_INSTRUMENT, "mixture", "density", 0).toInt();
+    _densityType = ContextManager::configuration()->getToolValue(ConfManager::TOOL_TYPE_INSTRUMENT, "mixture", "density", 1).toInt();
     
     // Sample properties
     _stereoSample = ContextManager::configuration()->getToolValue(ConfManager::TOOL_TYPE_INSTRUMENT, "mixture", "stereo", true).toBool();

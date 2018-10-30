@@ -24,6 +24,9 @@
 #include "remove_mods/toolremovemods.h"
 #include "sound_spatialization/toolsoundspatialization.h"
 #include "transpose/tooltranspose.h"
+#include "release/toolrelease.h"
+#include "chords/toolchords.h"
+
 
 ToolFactory::ToolFactory(QWidget * parent)
 {
@@ -45,15 +48,17 @@ ToolFactory::ToolFactory(QWidget * parent)
            << new ToolCelesteTuning() // Instruments
            << new ToolAutoDistribution()
            << new ToolMixtureCreation()
+           << new ToolChords()
            << new ToolSoundSpatialization()
            << new ToolTranspose()
+           << new ToolRelease()
            << new ToolChangeAttenuation() // Instruments, presets
            << new ToolGlobalSettings()
            << new ToolDivisionDuplication()
            << new ToolMonitor()
            << new ToolRemoveMods()
            << new ToolCleanUnused()   // Sf2
-           << new ToolPresetList() ;
+           << new ToolPresetList();
 }
 
 ToolFactory::~ToolFactory()

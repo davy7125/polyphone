@@ -1,14 +1,14 @@
-#include "runnablesamplecreator.h"
-#include "toolmixturecreation.h"
+#include "runnablechordcreator.h"
+#include "toolchords.h"
 #include "soundfontmanager.h"
 
-double RunnableSampleCreator::SAMPLE_DURATION = 7.0;
-int RunnableSampleCreator::SAMPLE_RATE = 48000;
+double RunnableChordCreator::SAMPLE_DURATION = 7.0;
+int RunnableChordCreator::SAMPLE_RATE = 48000;
 
-RunnableSampleCreator::RunnableSampleCreator(ToolMixtureCreation * tool, EltID idInst, DivisionInfo di, int key, int minKey, bool loop, bool stereo, int side) : QRunnable(),
+RunnableChordCreator::RunnableChordCreator(ToolChords * tool, EltID idInst, ChordInfo ci, int key, int minKey, bool loop, bool stereo, int side) : QRunnable(),
     _tool(tool),
     _idInst(idInst),
-    _di(di),
+    _ci(ci),
     _key(key),
     _minKey(minKey),
     _loop(loop),
@@ -16,11 +16,12 @@ RunnableSampleCreator::RunnableSampleCreator(ToolMixtureCreation * tool, EltID i
     _side(side)
 {}
 
-RunnableSampleCreator::~RunnableSampleCreator()
+RunnableChordCreator::~RunnableChordCreator()
 {
+    qDebug() << "finished";
 }
 
-void RunnableSampleCreator::run()
+void RunnableChordCreator::run()
 {
     // Data initialization
     SoundfontManager * sm = SoundfontManager::getInstance();
@@ -30,7 +31,7 @@ void RunnableSampleCreator::run()
 
     // Minimum attenuation for all ranks
     double attMini = 1000000;
-    foreach (RankInfo ri, _di.getRanks())
+    /*foreach (RankInfo ri, _di.getRanks())
     {
         double noteTmp = (double)_key + ri.getOffset();
         double ecart;
@@ -41,10 +42,10 @@ void RunnableSampleCreator::run()
             attenuation = (double)sm->get(idInstSmplTmp, champ_initialAttenuation).shValue / 10.0;
         if (attenuation < attMini)
             attMini = attenuation;
-    }
+    }*/
 
     // For each rank
-    foreach (RankInfo ri, _di.getRanks())
+    /*foreach (RankInfo ri, _di.getRanks())
     {
         // Calcul de la note à ajouter à la mixture
         double noteTmp = (double)_key + ri.getOffset();
@@ -79,7 +80,7 @@ void RunnableSampleCreator::run()
             // Ajout du son
             addSampleData(baData, baDataTmp, attenuation);
         }
-    }
+    }*/
 
     // Loop sample if needed
     qint32 loopStart = 0;
@@ -132,7 +133,7 @@ void RunnableSampleCreator::run()
     _tool->elementProcessed(idSmpl, _key, _minKey, attMini);
 }
 
-EltID RunnableSampleCreator::closestSample(EltID idInst, double pitch, double &ecart, int cote, EltID &idInstSmpl)
+EltID RunnableChordCreator::closestSample(EltID idInst, double pitch, double &ecart, int cote, EltID &idInstSmpl)
 {
     // Recherche du sample le plus proche de pitch dans l'instrument idInst
     SoundfontManager * sm = SoundfontManager::getInstance();
@@ -249,7 +250,7 @@ EltID RunnableSampleCreator::closestSample(EltID idInst, double pitch, double &e
     return idSmplRet;
 }
 
-QByteArray RunnableSampleCreator::getSampleData(EltID idSmpl, qint32 nbRead)
+QByteArray RunnableChordCreator::getSampleData(EltID idSmpl, qint32 nbRead)
 {
     // Récupération de données provenant d'un sample, en prenant en compte la boucle
     SoundfontManager * sm = SoundfontManager::getInstance();
@@ -288,7 +289,7 @@ QByteArray RunnableSampleCreator::getSampleData(EltID idSmpl, qint32 nbRead)
     return baDataRet;
 }
 
-void RunnableSampleCreator::addSampleData(QByteArray &baData1, QByteArray &baData2, double mult)
+void RunnableChordCreator::addSampleData(QByteArray &baData1, QByteArray &baData2, double mult)
 {
     // Ajout de baData2 multiplié par mult dans baData1
     qint32 * data1 = (qint32 *)baData1.data();
