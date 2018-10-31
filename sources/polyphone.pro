@@ -206,7 +206,6 @@ SOURCES	+= main.cpp \
     dialogs/dialog_list.cpp \
     dialogs/dialog_rename.cpp \
     dialogs/dialog_about.cpp \
-    dialogs/dialog_export.cpp \
     dialogs/dialogselection.cpp \
     dialogs/dialogchangelog.cpp \
     editor/editor_old.cpp \
@@ -396,7 +395,11 @@ SOURCES	+= main.cpp \
     editor/tools/chords/toolchords.cpp \
     editor/tools/chords/toolchords_gui.cpp \
     editor/tools/chords/toolchords_parameters.cpp \
-    mainwindow/mainmenu.cpp
+    mainwindow/mainmenu.cpp \
+    editor/tools/sample_export/toolsampleexport.cpp \
+    editor/tools/soundfont_export/toolsoundfontexport.cpp \
+    editor/tools/soundfont_export/toolsoundfontexport_gui.cpp \
+    editor/tools/soundfont_export/toolsoundfontexport_parameters.cpp
 
 HEADERS  += \
     core/sound.h \
@@ -421,7 +424,6 @@ HEADERS  += \
     dialogs/dialog_list.h \
     dialogs/dialog_rename.h \
     dialogs/dialog_about.h \
-    dialogs/dialog_export.h \
     dialogs/dialogselection.h \
     dialogs/dialogchangelog.h \
     dialogs/modalprogressdialog.h \
@@ -623,13 +625,16 @@ HEADERS  += \
     editor/tools/chords/toolchords.h \
     editor/tools/chords/toolchords_gui.h \
     editor/tools/chords/toolchords_parameters.h \
-    mainwindow/mainmenu.h
+    mainwindow/mainmenu.h \
+    editor/tools/sample_export/toolsampleexport.h \
+    editor/tools/soundfont_export/toolsoundfontexport.h \
+    editor/tools/soundfont_export/toolsoundfontexport_gui.h \
+    editor/tools/soundfont_export/toolsoundfontexport_parameters.h
 
 FORMS    += \
     dialogs/dialog_list.ui \
     dialogs/dialog_rename.ui \
     dialogs/dialog_about.ui \
-    dialogs/dialog_export.ui \
     dialogs/dialogselection.ui \
     dialogs/dialogchangelog.ui \
     editor/editor_old.ui \
@@ -669,7 +674,8 @@ FORMS    += \
     editor/tools/transpose/tooltranspose_gui.ui \
     editor/tools/frequency_peaks/toolfrequencypeaks_gui.ui \
     editor/tools/release/toolrelease_gui.ui \
-    editor/tools/chords/toolchords_gui.ui
+    editor/tools/chords/toolchords_gui.ui \
+    editor/tools/soundfont_export/toolsoundfontexport_gui.ui
 
 RESOURCES += resources.qrc
 

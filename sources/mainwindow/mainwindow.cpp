@@ -103,7 +103,6 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(menu, SIGNAL(closeClicked()), this, SLOT(close()));
     connect(menu, SIGNAL(save()), this, SLOT(onSave()));
     connect(menu, SIGNAL(saveAs()), this, SLOT(onSaveAs()));
-    connect(menu, SIGNAL(exportSoundfonts()), this, SLOT(onExport()));
     connect(menu, SIGNAL(fullScreenTriggered()), this, SLOT(fullScreenTriggered()));
     menu->setFullScreen(this->windowState() & Qt::WindowFullScreen);
 
@@ -153,6 +152,7 @@ MainWindow::~MainWindow()
     delete _recorder;
     delete _keyboard;
     delete _windowManager;
+    SoundfontManager::kill();
 }
 
 void MainWindow::closeEvent(QCloseEvent *event)
@@ -372,11 +372,6 @@ void MainWindow::onSave()
 }
 
 void MainWindow::onSaveAs()
-{
-
-}
-
-void MainWindow::onExport()
 {
 
 }

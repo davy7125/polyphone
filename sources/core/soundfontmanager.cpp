@@ -32,19 +32,19 @@
 #include "modulator.h"
 #include "action.h"
 
-SoundfontManager * SoundfontManager::s_instance = NULL;
+SoundfontManager * SoundfontManager::s_instance = nullptr;
 SoundfontManager * SoundfontManager::getInstance()
 {
-    if (s_instance == NULL)
+    if (s_instance == nullptr)
         s_instance = new SoundfontManager();
     return s_instance;
 }
 void SoundfontManager::kill()
 {
-    if (s_instance != NULL)
+    if (s_instance != nullptr)
     {
         delete s_instance;
-        s_instance = NULL;
+        s_instance = nullptr;
     }
 }
 
@@ -244,7 +244,7 @@ AttributeValue SoundfontManager::get(EltID id, AttributeType champ)
     }break;
     case elementInstMod: case elementPrstMod: case elementInstSmplMod: case elementPrstInstMod:{
         // Analyse d'un mod
-        Modulator *tmp = NULL;
+        Modulator *tmp = nullptr;
         switch ((int)id.typeElement)
         {
         case elementInstMod:
@@ -278,7 +278,7 @@ AttributeValue SoundfontManager::get(EltID id, AttributeType champ)
     }break;
     case elementInstGen: case elementPrstGen: case elementInstSmplGen: case elementPrstInstGen:{
         // Analyse d'un gen
-        Division * division = NULL;
+        Division * division = nullptr;
         switch ((int)id.typeElement)
         {
         case elementInstGen:
@@ -301,7 +301,7 @@ AttributeValue SoundfontManager::get(EltID id, AttributeType champ)
     return value;
 }
 
-Sound SoundfontManager::getSon(EltID id)
+Sound SoundfontManager::getSound(EltID id)
 {
     QMutexLocker locker(&_mutex);
     Sound son;
@@ -666,7 +666,7 @@ void SoundfontManager::getListeBags(EltID id, QList<AttributeType> &listeChamps,
     if (!this->isValid(id))
         return;
 
-    Division * division = NULL;
+    Division * division = nullptr;
     switch (id.typeElement)
     {
     case elementInst:
@@ -741,7 +741,7 @@ int SoundfontManager::add(EltID id)
         break;
     case elementInstMod: case elementPrstMod: case elementInstSmplMod: case elementPrstInstMod:{
         // Add a new mod
-        Division *bag = NULL;
+        Division *bag = nullptr;
         switch ((int)id.typeElement)
         {
         case elementInstMod:
@@ -832,7 +832,7 @@ int SoundfontManager::remove(EltID id, bool permanently, bool storeAction, int *
                     if (!bagTmp->isHidden() && bagTmp->isSet(champ_sampleID) &&
                             bagTmp->getGen(champ_sampleID).wValue == id.indexElt)
                     {
-                        if (message != NULL && (*message) % 2 != 0)
+                        if (message != nullptr && (*message) % 2 != 0)
                             *message *= 2;
                         return 1;
                     }
@@ -876,7 +876,7 @@ int SoundfontManager::remove(EltID id, bool permanently, bool storeAction, int *
                     if (!bagTmp->isHidden() && bagTmp->isSet(champ_instrument) &&
                             bagTmp->getGen(champ_instrument).wValue == id.indexElt)
                     {
-                        if (message != NULL && (*message) % 3 != 0)
+                        if (message != nullptr && (*message) % 3 != 0)
                             *message *= 3;
                         return 1;
                     }
@@ -987,7 +987,7 @@ int SoundfontManager::remove(EltID id, bool permanently, bool storeAction, int *
     }break;
     case elementInstMod: case elementPrstMod: case elementInstSmplMod: case elementPrstInstMod:{
         // suppression d'un mod
-        Division *bag = NULL;
+        Division *bag = nullptr;
         switch ((int)id.typeElement)
         {
         case elementInstMod:
@@ -1024,7 +1024,7 @@ int SoundfontManager::remove(EltID id, bool permanently, bool storeAction, int *
 
         // If the src of a modulator is the modulator to delete, remove the link
         int iVal = bag->getMod(id.indexMod)->_sfModDestOper;
-        if (iVal >= 32768 && bag->getMod(iVal - 32768) != NULL)
+        if (iVal >= 32768 && bag->getMod(iVal - 32768) != nullptr)
         {
             Modulator * mod2 = bag->getMod(iVal - 32768);
             if (mod2->_sfModSrcOper.CC == 0 && mod2->_sfModSrcOper.Index == 127)
@@ -1048,17 +1048,20 @@ int SoundfontManager::remove(EltID id, bool permanently, bool storeAction, int *
     }
 
     // Create and store the action
-    Action *action = new Action();
-    action->typeAction = Action::TypeRemoval;
-    action->id = id;
-    this->_undoRedo->add(action);
+    if (storeAction)
+    {
+        Action *action = new Action();
+        action->typeAction = Action::TypeRemoval;
+        action->id = id;
+        this->_undoRedo->add(action);
+    }
 
     return 0;
 }
 
 void SoundfontManager::supprGenAndStore(EltID id, int storeAction)
 {
-    Division *division = NULL;
+    Division *division = nullptr;
     switch (id.typeElement)
     {
     case elementInst:
@@ -1218,7 +1221,7 @@ int SoundfontManager::set(EltID id, AttributeType champ, AttributeValue value)
     }break;
     case elementInstMod: case elementPrstMod: case elementInstSmplMod: case elementPrstInstMod:{
         // Modification d'un mod d'un instrument
-        Modulator *tmp = NULL;
+        Modulator *tmp = nullptr;
         switch ((int)id.typeElement)
         {
         case elementInstMod:
@@ -1612,7 +1615,7 @@ bool SoundfontManager::isValid(EltID id, bool acceptHidden)
                 id.typeElement == elementRootInst || id.typeElement == elementRootPrst);
 
     // Check indexSf2
-    if (_soundfonts->getSoundfont(id.indexSf2) == NULL)
+    if (_soundfonts->getSoundfont(id.indexSf2) == nullptr)
         return false;
     sf2Tmp = _soundfonts->getSoundfont(id.indexSf2);
 
@@ -1623,7 +1626,7 @@ bool SoundfontManager::isValid(EltID id, bool acceptHidden)
     if (id.typeElement == elementSmpl)
     {
         // Check indexElt
-        if (sf2Tmp->getSample(id.indexElt) == NULL)
+        if (sf2Tmp->getSample(id.indexElt) == nullptr)
             return false;
 
         if (sf2Tmp->getSample(id.indexElt)->isHidden() && !acceptHidden)
@@ -1634,7 +1637,7 @@ bool SoundfontManager::isValid(EltID id, bool acceptHidden)
              id.typeElement == elementInstGen || id.typeElement == elementInstSmplGen)
     {
         // Check indexElt
-        if (sf2Tmp->getInstrument(id.indexElt) == NULL)
+        if (sf2Tmp->getInstrument(id.indexElt) == nullptr)
             return false;
 
         InstPrst *inst = sf2Tmp->getInstrument(id.indexElt);
@@ -1647,7 +1650,7 @@ bool SoundfontManager::isValid(EltID id, bool acceptHidden)
                 return (id.typeElement == elementInstSmpl);
 
             // Vérification qu'indexElt2 est correct
-            if (inst->getDivision(id.indexElt2) == NULL)
+            if (inst->getDivision(id.indexElt2) == nullptr)
                 return false;
             Division * bag = inst->getDivision(id.indexElt2);
 
@@ -1662,7 +1665,7 @@ bool SoundfontManager::isValid(EltID id, bool acceptHidden)
                 // Check indexMod
                 if (id.typeElement == elementInstSmplMod)
                 {
-                    if (bag->getMod(id.indexMod) == NULL)
+                    if (bag->getMod(id.indexMod) == nullptr)
                         return false;
 
                     if (bag->getMod(id.indexMod)->isHidden() && !acceptHidden)
@@ -1683,7 +1686,7 @@ bool SoundfontManager::isValid(EltID id, bool acceptHidden)
             // Check indexMod
             if (id.typeElement == elementInstMod)
             {
-                if (inst->getGlobalDivision()->getMod(id.indexMod) == NULL)
+                if (inst->getGlobalDivision()->getMod(id.indexMod) == nullptr)
                     return false;
 
                 if (inst->getGlobalDivision()->getMod(id.indexMod)->isHidden() && !acceptHidden)
@@ -1701,7 +1704,7 @@ bool SoundfontManager::isValid(EltID id, bool acceptHidden)
              id.typeElement == elementPrstGen || id.typeElement == elementPrstInstGen)
     {
         // Check indexElt
-        if (sf2Tmp->getPreset(id.indexElt) == NULL)
+        if (sf2Tmp->getPreset(id.indexElt) == nullptr)
             return false;
 
         InstPrst *prst = sf2Tmp->getPreset(id.indexElt);
@@ -1714,7 +1717,7 @@ bool SoundfontManager::isValid(EltID id, bool acceptHidden)
                 return (id.typeElement == elementPrstInst);
 
             // Vérification qu'indexElt2 est correct
-            if (prst->getDivision(id.indexElt2) == NULL)
+            if (prst->getDivision(id.indexElt2) == nullptr)
                 return false;
             Division * bag = prst->getDivision(id.indexElt2);
 
@@ -1729,7 +1732,7 @@ bool SoundfontManager::isValid(EltID id, bool acceptHidden)
                 // Check indexMod
                 if (id.typeElement == elementPrstInstMod)
                 {
-                    if (bag->getMod(id.indexMod) == NULL)
+                    if (bag->getMod(id.indexMod) == nullptr)
                         return false;
 
                     if (bag->getMod(id.indexMod)->isHidden() && !acceptHidden)
@@ -1750,7 +1753,7 @@ bool SoundfontManager::isValid(EltID id, bool acceptHidden)
             // Check indexMod
             if (id.typeElement == elementPrstMod)
             {
-                if (prst->getGlobalDivision()->getMod(id.indexMod) == NULL)
+                if (prst->getGlobalDivision()->getMod(id.indexMod) == nullptr)
                     return false;
 
                 if (prst->getGlobalDivision()->getMod(id.indexMod)->isHidden() && !acceptHidden)

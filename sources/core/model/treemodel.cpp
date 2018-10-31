@@ -113,7 +113,7 @@ void TreeModel::elementUpdated(EltID id)
     QModelIndex index = getParentIndexWithPosition(id, position);
     index = this->index(position, 0, index);
 
-    _indexToChange << index;
+    emit(dataChanged(index, index));
 
     // Possibly update the name of the linked elements
     if (id.typeElement == elementSmpl)
@@ -134,7 +134,7 @@ void TreeModel::elementUpdated(EltID id)
                 {
                     index = getParentIndexWithPosition(id3, position);
                     index = this->index(position, 0, index);
-                    _indexToChange << index;
+                    emit(dataChanged(index, index));
                 }
             }
         }
@@ -157,7 +157,7 @@ void TreeModel::elementUpdated(EltID id)
                 {
                     index = getParentIndexWithPosition(id3, position);
                     index = this->index(position, 0, index);
-                    _indexToChange << index;
+                    emit(dataChanged(index, index));
                 }
             }
         }
@@ -185,14 +185,14 @@ void TreeModel::visibilityChanged(EltID id)
     int position;
     QModelIndex indexParent = getParentIndexWithPosition(id, position);
     QModelIndex index = this->index(position, 0, indexParent);
-    _indexToChange << index << indexParent;
+    emit(dataChanged(index, index));
 }
 
 QModelIndex TreeModel::getParentIndexWithPosition(EltID id, int &position)
 {
     // Find the corresponding parent index of an id
     QModelIndex index = QModelIndex();
-    TreeItem * item;
+    TreeItem * item = nullptr;
     switch (id.typeElement)
     {
     case elementSmpl:
@@ -226,29 +226,18 @@ QModelIndex TreeModel::getParentIndexWithPosition(EltID id, int &position)
         item = (TreeItem*)index.internalPointer();
         position = item->indexOfId(id.indexElt2);
         break;
+    case elementSf2: case elementRootSmpl: case elementRootInst: case elementRootPrst:
+        position = _rootItem->indexOfId((int)id.typeElement);
+        break;
     default:
         return QModelIndex();
     }
 
     // If -1, the element is going to be added at the end
-    if (position == -1)
+    if (position == -1 && item != nullptr)
         position = item->childCount();
 
     return index;
-}
-
-void TreeModel::triggerUpdate()
-{
-    if (!_indexToChange.empty())
-    {
-        emit(saveExpandedState());
-        while (!_indexToChange.empty())
-        {
-            QModelIndex index = _indexToChange.takeFirst();
-            emit(dataChanged(index, index));
-        }
-        emit(restoreExpandedState());
-    }
 }
 
 Qt::ItemFlags TreeModel::flags(const QModelIndex &index) const

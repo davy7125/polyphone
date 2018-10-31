@@ -14,7 +14,7 @@ class AbstractTool: public QObject
     Q_OBJECT
 
 public:
-    AbstractTool(AbstractToolParameters * parameters = NULL, AbstractToolGui * gui = NULL);
+    AbstractTool(AbstractToolParameters * parameters = nullptr, AbstractToolGui * gui = nullptr);
     virtual ~AbstractTool();
 
     /// Initialization of resources shared by all tools

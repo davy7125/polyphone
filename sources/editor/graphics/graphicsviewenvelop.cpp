@@ -36,9 +36,9 @@ GraphicsViewEnvelop::GraphicsViewEnvelop(QWidget *parent) : QCustomPlot(parent),
     _zoomXinit(1),
     _posXinit(.5),
     _bFromExt(false),
-    _qScrollX(NULL),
-    _textPositionL(NULL),
-    _textPositionR(NULL)
+    _qScrollX(nullptr),
+    _textPositionL(nullptr),
+    _textPositionR(nullptr)
 {
     // Images
     _imageNoteOn = QImage(":/icons/note_on.png").scaled(36, 36, Qt::KeepAspectRatio);
@@ -402,6 +402,8 @@ void GraphicsViewEnvelop::setSample(QVector<double> data, int sampleRate, int lo
 
 void GraphicsViewEnvelop::setEnvelopStyle(int index, bool isGlobal, bool isVolume, bool isMain)
 {
+    Q_UNUSED(isGlobal)
+
     // Colors
     QColor redColor;
     QColor greenColor;

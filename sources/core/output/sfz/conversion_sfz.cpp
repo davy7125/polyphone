@@ -477,12 +477,12 @@ QString ConversionSfz::getLink(EltID idSmpl, bool enableStereo)
             if (idSmpl.indexElt2 != -1)
             {
                 _mapMonoSamples.insert(idSmpl.indexElt, path);
-                Sound::exporter(_dirSamples + "/" + name + ".wav", _sf2->getSon(idSmpl));
+                Sound::exporter(_dirSamples + "/" + name + ".wav", _sf2->getSound(idSmpl));
             }
             else if (idSmpl2.indexElt != -1)
             {
                 _mapMonoSamples.insert(idSmpl2.indexElt, path);
-                Sound::exporter(_dirSamples + "/" + name + ".wav", _sf2->getSon(idSmpl2));
+                Sound::exporter(_dirSamples + "/" + name + ".wav", _sf2->getSound(idSmpl2));
             }
         }
         else
@@ -490,7 +490,7 @@ QString ConversionSfz::getLink(EltID idSmpl, bool enableStereo)
             // Stéréo
             _mapStereoSamples.insert(idSmpl.indexElt, path);
             _mapStereoSamples.insert(idSmpl2.indexElt, path);
-            Sound::exporter(_dirSamples + "/" + name + ".wav", _sf2->getSon(idSmpl2), _sf2->getSon(idSmpl));
+            Sound::exporter(_dirSamples + "/" + name + ".wav", _sf2->getSound(idSmpl2), _sf2->getSound(idSmpl));
         }
     }
     return path;

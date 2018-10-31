@@ -11,7 +11,7 @@
 #include <QMessageBox>
 #include <QAbstractButton>
 
-WindowManager::WindowManager(ColoredTabWidget *tabWidget) : QObject(NULL),
+WindowManager::WindowManager(ColoredTabWidget *tabWidget) : QObject(nullptr),
     _tabWidget(tabWidget),
     _configTab(new ConfigPanel()),
     _browserTab(new SoundfontBrowser()),

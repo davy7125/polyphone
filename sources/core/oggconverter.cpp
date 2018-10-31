@@ -102,7 +102,7 @@ void OggConverter::convert()
     _decodedData.clear();
     OggVorbis_File vf;
     vorbisData.pos  = 0;
-    if (ov_open_callbacks(&vorbisData, &vf, 0, 0, ovCallbacks) == 0)
+    if (ov_open_callbacks(&vorbisData, &vf, nullptr, 0, ovCallbacks) == 0)
     {
         char buffer[4096];
         int numberRead = 0;

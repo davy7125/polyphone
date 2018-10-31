@@ -7,7 +7,10 @@
 class ToolUnlinkSample: public AbstractToolIterating
 {
 public:
-    ToolUnlinkSample() : AbstractToolIterating(elementSmpl, NULL, NULL, false) {}
+    ToolUnlinkSample() : AbstractToolIterating(elementSmpl)
+    {
+        _async = false;
+    }
 
     /// Icon, label and category displayed to the user to describe the tool
     QString getIconName() const override
