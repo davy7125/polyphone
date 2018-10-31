@@ -32,21 +32,23 @@ private:
     AbstractToolParameters * _parameters;
 };
 
-AbstractToolIterating::AbstractToolIterating(ElementType elementType, AbstractToolParameters *parameters, AbstractToolGui *gui, bool async) :
+AbstractToolIterating::AbstractToolIterating(ElementType elementType, AbstractToolParameters *parameters, AbstractToolGui *gui) :
     AbstractTool(parameters, gui),
-    _waitingDialog(nullptr),
-    _async(async)
+    _openWaitDialogJustInProcess(false),
+    _async(true),
+    _waitingDialog(nullptr)
 {
     _elementTypes << elementType;
     connect(this, SIGNAL(elementProcessed()), this, SLOT(onElementProcessed()), Qt::QueuedConnection);
 }
 
 
-AbstractToolIterating::AbstractToolIterating(QList<ElementType> elementTypes, AbstractToolParameters * parameters, AbstractToolGui * gui, bool async) :
+AbstractToolIterating::AbstractToolIterating(QList<ElementType> elementTypes, AbstractToolParameters * parameters, AbstractToolGui * gui) :
     AbstractTool(parameters, gui),
+    _openWaitDialogJustInProcess(false),
+    _async(true),
     _elementTypes(elementTypes),
-    _waitingDialog(nullptr),
-    _async(async)
+    _waitingDialog(nullptr)
 {
     connect(this, SIGNAL(elementProcessed()), this, SLOT(onElementProcessed()), Qt::QueuedConnection);
 }
@@ -100,12 +102,26 @@ void AbstractToolIterating::run(SoundfontManager * sm, QWidget * parent, IdList 
     // Create and open a progress dialog
     if (_waitingDialog != nullptr)
         delete _waitingDialog;
-    _waitingDialog = new WaitingToolDialog(this->getLabel(), _steps, parent);
-    _waitingDialog->show();
-    connect(_waitingDialog, SIGNAL(canceled()), this, SLOT(onCancel()));
+
+    // Before process
+    if (_openWaitDialogJustInProcess)
+    {
+        this->beforeProcess(_idsToProcess);
+
+        _waitingDialog = new WaitingToolDialog(this->getLabel(), _steps, parent);
+        _waitingDialog->show();
+        connect(_waitingDialog, SIGNAL(canceled()), this, SLOT(onCancel()));
+    }
+    else
+    {
+        _waitingDialog = new WaitingToolDialog(this->getLabel(), _steps, parent);
+        _waitingDialog->show();
+        connect(_waitingDialog, SIGNAL(canceled()), this, SLOT(onCancel()));
+
+        this->beforeProcess(_idsToProcess);
+    }
 
     // Process the ids
-    this->beforeProcess(_idsToProcess);
     _canceled = false;
     if (_async)
         foreach (EltID id, _idsToProcess)

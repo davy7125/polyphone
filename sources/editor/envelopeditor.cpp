@@ -242,7 +242,7 @@ void EnvelopEditor::addEnvelop(EltID id, bool isVolume, bool isMain)
     int index = ui->graphicsView->addEnvelop();
     ui->graphicsView->setEnvelopStyle(index, id.typeElement == elementInst, isVolume, isMain);
 
-    bool isOverriden;
+    bool isOverriden = false;
     if (isVolume)
     {
         ui->graphicsView->setValue(index, Envelop::DELAY, computeValue(id, champ_delayVolEnv, isOverriden), isOverriden);

@@ -39,6 +39,8 @@ ImportSfz::ImportSfz(SoundfontManager * sf2) :
 
 void ImportSfz::import(QString fileName, int * numSf2, bool &success, QString &error)
 {
+    Q_UNUSED(error)
+
     QFile inputFile(fileName);
     if (inputFile.open(QIODevice::ReadOnly))
     {

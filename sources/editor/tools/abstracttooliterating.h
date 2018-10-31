@@ -11,8 +11,8 @@ class AbstractToolIterating: public AbstractTool
 
 public:
     /// Constructor, with the type of element to manage (can be elementSmpl, elementInst, elementPrst, elementSf2 or a combination)
-    AbstractToolIterating(ElementType elementType, AbstractToolParameters * parameters = nullptr, AbstractToolGui * gui = nullptr, bool async = true);
-    AbstractToolIterating(QList<ElementType> elementTypes, AbstractToolParameters * parameters = nullptr, AbstractToolGui * gui = nullptr, bool async = true);
+    AbstractToolIterating(ElementType elementType, AbstractToolParameters * parameters = nullptr, AbstractToolGui * gui = nullptr);
+    AbstractToolIterating(QList<ElementType> elementTypes, AbstractToolParameters * parameters = nullptr, AbstractToolGui * gui = nullptr);
     virtual ~AbstractToolIterating() override;
 
     /// Return true if the tool can be used on the specified ids
@@ -30,6 +30,11 @@ public:
 signals:
     void elementProcessed();
 
+protected:
+    // Additional configurations
+    bool _openWaitDialogJustInProcess; // false by default
+    bool _async; // true by default
+
 private slots:
     void onElementProcessed();
     void onCancel();
@@ -40,7 +45,6 @@ private:
     int _steps;
     int _currentStep;
     bool _canceled;
-    bool _async;
     IdList _idsToProcess;
     SoundfontManager * _sm;
     AbstractToolParameters * _parameters;

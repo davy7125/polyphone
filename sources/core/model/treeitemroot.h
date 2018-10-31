@@ -16,9 +16,10 @@ public:
     TreeItem * child(int row) override;
     QString display() override;
     int row() override;
-    int indexOfId(int id) override;
+    int indexOfId(int id) override; // Here, id is the type element
 
     int addChild(TreeItem * treeItem);
+    void removeChild(TreeItem * treeItem);
     void attachModel(TreeModel * model) { this->_model = model; }
 
 private:

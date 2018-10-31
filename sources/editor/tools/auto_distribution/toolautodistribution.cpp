@@ -5,7 +5,7 @@ void ToolAutoDistribution::process(SoundfontManager * sm, EltID id, AbstractTool
 {
     Q_UNUSED(parameters);
 
-    // Liste of all sample linked with the corresponding root key
+    // List of all sample linked with the corresponding root key
     QList<EltID> listID;
     QList<int> listNote;
     int notePrecedente, note, noteSuivante;

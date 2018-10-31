@@ -489,34 +489,34 @@ void Sound::exporter(QString fileName, Sound son)
     exporter(fileName, baData, info);
 }
 
-void Sound::exporter(QString fileName, Sound son1, Sound son2)
+void Sound::exporter(QString fileName, Sound leftSound, Sound rightSound)
 {
     // Exportation d'un sample stereo au format wav
     // bps (max des 2 canaux)
-    quint16 wBps = son1._info.wBpsFile;
-    if (son2._info.wBpsFile > wBps)
-        wBps = son2._info.wBpsFile;
+    quint16 wBps = leftSound._info.wBpsFile;
+    if (rightSound._info.wBpsFile > wBps)
+        wBps = rightSound._info.wBpsFile;
     if (wBps > 16)
         wBps = 24;
     else
         wBps = 16;
 
     // Récupération des données
-    QByteArray channel1 = son1.getData(wBps);
-    QByteArray channel2 = son2.getData(wBps);
+    QByteArray channel1 = leftSound.getData(wBps);
+    QByteArray channel2 = rightSound.getData(wBps);
 
     // sample rate (max des 2 canaux)
-    quint32 dwSmplRate = son1._info.dwSampleRate;
-    if (son2._info.dwSampleRate > dwSmplRate)
+    quint32 dwSmplRate = leftSound._info.dwSampleRate;
+    if (rightSound._info.dwSampleRate > dwSmplRate)
     {
         // Ajustement son1
-        channel1 = resampleMono(channel1, dwSmplRate, son2._info.dwSampleRate, wBps);
-        dwSmplRate = son2._info.dwSampleRate;
+        channel1 = resampleMono(channel1, dwSmplRate, rightSound._info.dwSampleRate, wBps);
+        dwSmplRate = rightSound._info.dwSampleRate;
     }
-    else if (son2._info.dwSampleRate < dwSmplRate)
+    else if (rightSound._info.dwSampleRate < dwSmplRate)
     {
         // Ajustement son2
-        channel2 = resampleMono(channel2, son2._info.dwSampleRate, dwSmplRate, wBps);
+        channel2 = resampleMono(channel2, rightSound._info.dwSampleRate, dwSmplRate, wBps);
     }
 
     // Taille et mise en forme des données
@@ -543,7 +543,7 @@ void Sound::exporter(QString fileName, Sound son1, Sound son2)
     QByteArray baData = from2MonoTo1Stereo(channel1, channel2, wBps);
 
     // Création d'un fichier
-    InfoSound info = son1._info;
+    InfoSound info = leftSound._info;
     info.wBpsFile = wBps;
     info.dwSampleRate = dwSmplRate;
     info.wChannels = 2;

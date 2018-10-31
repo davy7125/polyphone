@@ -40,20 +40,19 @@ class SoundfontManager : public QObject
 
 public:
     static SoundfontManager * getInstance();
-    static SoundfontManager * getOtherInstance() { return new SoundfontManager(); }
     static void kill();
     ~SoundfontManager();
     QAbstractItemModel * getModel(int indexSf2);
 
     // Ajout / suppression des données
     int add(EltID id);
-    void remove(EltID id, int *message = NULL);
+    void remove(EltID id, int *message = nullptr);
 
     // Accès / modification des propriétés
     bool isSet(EltID id, AttributeType champ);
     AttributeValue get(EltID id, AttributeType champ);
     QString getQstr(EltID id, AttributeType champ);
-    Sound getSon(EltID id);
+    Sound getSound(EltID id);
     QByteArray getData(EltID id, AttributeType champ);
     int set(EltID id, AttributeType champ, AttributeValue value);
     int set(EltID id, AttributeType champ, QString qStr);
@@ -146,7 +145,7 @@ private:
     int display(EltID id);
 
     /// Delete or hide the element id. Error if the element is used by another
-    int remove(EltID id, bool permanently, bool storeAction, int *message = NULL);
+    int remove(EltID id, bool permanently, bool storeAction, int *message = nullptr);
 
     /// Clear parameters
     void supprGenAndStore(EltID id, int storeAction);

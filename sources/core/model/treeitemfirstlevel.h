@@ -9,7 +9,7 @@ class TreeItemFirstLevel: public TreeItem
 {
 public:
     TreeItemFirstLevel(QString label, QMap<int, TreeItem *> * children, TreeItemRoot *parent, EltID id);
-    virtual ~TreeItemFirstLevel() override {}
+    virtual ~TreeItemFirstLevel() override;
 
     int childCount() const override;
     TreeItem * child(int row) override;

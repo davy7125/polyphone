@@ -53,17 +53,26 @@ Soundfont::~Soundfont()
     // Delete all presets
     QList<int> keys = _prst.keys();
     foreach (int key, keys)
+    {
+        _prst[key]->notifyDeletion(false);
         delete _prst.take(key);
+    }
 
     // Delete all instruments
     keys = _inst.keys();
     foreach (int key, keys)
+    {
+        _inst[key]->notifyDeletion(false);
         delete _inst.take(key);
+    }
 
     // Delete all samples
     keys = _smpl.keys();
     foreach (int key, keys)
+    {
+        _smpl[key]->notifyDeletion(false);
         delete _smpl.take(key);
+    }
 
     // Delete headers
     _presetTreeItem->notifyDeletion(false);
@@ -74,6 +83,7 @@ Soundfont::~Soundfont()
     delete _sampleTreeItem;
     _generalTreeItem->notifyDeletion(false);
     delete _generalTreeItem;
+    _model->removeRow(0); // Root item
 
     // Delete the model
     delete _model;

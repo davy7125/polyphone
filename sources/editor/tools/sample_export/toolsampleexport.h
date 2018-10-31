@@ -1,36 +1,38 @@
-#ifndef TOOLCLEANUNUSED_H
-#define TOOLCLEANUNUSED_H
+#ifndef TOOLSAMPLEEXPORT_H
+#define TOOLSAMPLEEXPORT_H
 
 #include "abstracttooliterating.h"
+#include <QObject>
+#include <QMutex>
 
-class ToolCleanUnused: public AbstractToolIterating
+class ToolSampleExport: public AbstractToolIterating
 {
 public:
-    ToolCleanUnused() : AbstractToolIterating(elementSf2)
+    ToolSampleExport() : AbstractToolIterating(elementSmpl)
     {
-        _async = false;
+        _openWaitDialogJustInProcess = true;
     }
 
     /// Icon, label and category displayed to the user to describe the tool
     QString getIconName() const override
     {
-        return ":/tool/remove_unused.svg";
+        return ":/tool/file-audio.svg";
     }
 
     QString getLabel() const override
     {
-        return trUtf8("Enlever les éléments non utilisés");
+        return trUtf8("Exporter au format wav");
     }
 
     QString getCategory() const override
     {
-        return trUtf8("Nettoyage");
+        return trUtf8("Fichiers");
     }
 
     /// Internal identifier
     QString getIdentifier() const override
     {
-        return "sf2:cleanUnused";
+        return "smpl:wavExport";
     }
 
     /// Method executed before the iterating process
@@ -39,12 +41,12 @@ public:
     /// Process an element
     void process(SoundfontManager * sm, EltID id, AbstractToolParameters * parameters) override;
 
-    /// Get a confirmation message after the tool is run
-    QString getConfirmation() override;
-
 private:
-    int _unusedSmpl;
-    int _unusedInst;
+    QString getFilePath(SoundfontManager *sm, EltID id1, EltID id2, bool isStereo);
+
+    QMutex _mutex;
+    IdList _exportedSamples;
+    QString _dirPath;
 };
 
-#endif // TOOLCLEANUNUSED_H
+#endif // TOOLSAMPLEEXPORT_H

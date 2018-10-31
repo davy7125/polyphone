@@ -1,7 +1,9 @@
 #include "mainmenu.h"
 #include "contextmanager.h"
+#include "soundfont_export/toolsoundfontexport.h"
 
-MainMenu::MainMenu(QWidget * parent) : QMenu(parent)
+MainMenu::MainMenu(QWidget * parent) : QMenu(parent),
+    _toolExport(new ToolSoundfontExport())
 {
     // Style
     this->setStyleSheet(QString("QMenu::separator {background: ") +
@@ -34,7 +36,7 @@ MainMenu::MainMenu(QWidget * parent) : QMenu(parent)
 
     _exportAction = new QAction(trUtf8("Exporter soundfonts"), this);
     _exportAction->setShortcut(QString("Ctrl+E"));
-    connect(_exportAction, SIGNAL(triggered()), this, SIGNAL(exportSoundfonts()));
+    connect(_exportAction, SIGNAL(triggered()), this, SLOT(onExport()));
     this->addAction(_exportAction);
 
     this->addSeparator();
@@ -99,4 +101,9 @@ void MainMenu::onEditorOpen(bool isOpen)
         _closeFileAction->setEnabled(false);
         _exportAction->setEnabled(false);
     }
+}
+
+void MainMenu::onExport()
+{
+    _toolExport->run();
 }

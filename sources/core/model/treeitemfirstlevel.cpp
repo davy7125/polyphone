@@ -9,6 +9,11 @@ TreeItemFirstLevel::TreeItemFirstLevel(QString label, QMap<int, TreeItem *> *chi
     _row = parent->addChild(this);
 }
 
+TreeItemFirstLevel::~TreeItemFirstLevel()
+{
+    ((TreeItemRoot *)this->parent())->removeChild(this);
+}
+
 int TreeItemFirstLevel::childCount() const
 {
     if (_children == nullptr)

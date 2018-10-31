@@ -6,7 +6,7 @@
 class ToolAutoDistribution: public AbstractToolIterating
 {
 public:
-    ToolAutoDistribution() : AbstractToolIterating(elementInst, NULL, NULL, false) {}
+    ToolAutoDistribution() : AbstractToolIterating(elementInst) {}
 
     /// Icon, label and category displayed to the user to describe the tool
     QString getIconName() const override
