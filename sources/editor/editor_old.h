@@ -68,15 +68,8 @@ class MainWindowOld : public QMainWindow
 
 public:
     Ui::MainWindowOld *ui;
-    explicit MainWindowOld(QWidget *parent = 0);
-    ~MainWindowOld();
 
 private slots:
-    void exporterSmpl();        // Export d'un sample
-    void exporter();            // Export d'un ou plusieurs preset(s)
-    void exporter(QList<QList<EltID> > listID, QString dir, int format,
-                  bool presetPrefix, bool bankDir, bool gmSort, int quality);
-    int exporter2(QList<QList<EltID> > listID, QString dir, int format, int flags, int quality);
     void futureFinished();
 
 private:

@@ -695,7 +695,7 @@ void TreeView::dropEvent(QDropEvent *event)
     // Destination
     QModelIndex index = this->indexAt(event->pos());
 
-    if (event->mimeData()->hasUrls() && event->source() == NULL)
+    if (event->mimeData()->hasUrls() && event->source() == nullptr)
     {
         SoundfontManager * sm = SoundfontManager::getInstance();
         int replace = 0;

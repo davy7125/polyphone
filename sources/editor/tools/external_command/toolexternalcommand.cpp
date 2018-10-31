@@ -8,9 +8,10 @@
 #include "soundfontmanager.h"
 #include <QProcess>
 
-ToolExternalCommand::ToolExternalCommand() : AbstractToolIterating(elementSmpl, new ToolExternalCommand_parameters(), new ToolExternalCommand_gui(), false)
+ToolExternalCommand::ToolExternalCommand() :
+    AbstractToolIterating(elementSmpl, new ToolExternalCommand_parameters(), new ToolExternalCommand_gui())
 {
-
+    _async = false;
 }
 
 void ToolExternalCommand::beforeProcess(IdList ids)
@@ -72,9 +73,9 @@ void ToolExternalCommand::process(SoundfontManager * sm, EltID id, AbstractToolP
     QString pathTempFile = tempFile->fileName();
     tempFile->close();
     if (id2.indexElt != -1)
-        Sound::exporter(pathTempFile, sm->getSon(id), sm->getSon(id2));
+        Sound::exporter(pathTempFile, sm->getSound(id), sm->getSound(id2));
     else
-        Sound::exporter(pathTempFile, sm->getSon(id));
+        Sound::exporter(pathTempFile, sm->getSound(id));
 
     // Execute an external command
 #ifdef Q_OS_WIN

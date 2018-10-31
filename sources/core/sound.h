@@ -46,7 +46,7 @@ public:
     void setData(QByteArray data, quint16 wBps);
     void setRam(bool ram);
     static void exporter(QString fileName, Sound son);
-    static void exporter(QString fileName, Sound son1, Sound son2);
+    static void exporter(QString fileName, Sound leftSound, Sound rightSound);
 
     // Utilitaires
     static QByteArray resampleMono(QByteArray data, double echInit, qint32 echFinal, quint16 wBps);

@@ -44,6 +44,8 @@ public:
 private:
     QString getGroup(QString nameGroup, QStringList listName, QStringList listMail);
     QString getFormattedName(QString name, QString email);
+    QString getFormattedLink(QString text, QString link);
+    QString getAwesomeCredit();
     QStringList _listCreatorName, _listCreatorMail,
         _listContributorName, _listContributorMail,
         _listTranslatorName, _listTranslatorMail;
@@ -55,7 +57,7 @@ class DialogAbout : public QDialog
     Q_OBJECT
     
 public:
-    explicit DialogAbout(QWidget *parent = 0);
+    explicit DialogAbout(QWidget *parent = nullptr);
     ~DialogAbout();
     
 private slots:

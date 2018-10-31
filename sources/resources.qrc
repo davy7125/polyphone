@@ -1,10 +1,5 @@
 <RCC>
     <qresource prefix="/icons">
-        <file alias="close">resources/window-close.png</file>
-        <file alias="document">resources/document.png</file>
-        <file alias="rename">resources/rename.png</file>
-        <file alias="folder">resources/folder.png</file>
-        <file alias="import">resources/import.png</file>
         <file alias="external_link.gif">resources/external_link.gif</file>
         <file alias="double-arrow">resources/double-arrow.png</file>
         <file alias="auto">resources/auto.png</file>
@@ -123,6 +118,8 @@
         <file alias="transpose2.svg">editor/tools/transpose/transpose2.svg</file>
         <file alias="chord.svg">editor/tools/chords/chord.svg</file>
         <file alias="release.svg">editor/tools/release/release.svg</file>
+        <file alias="file-audio.svg">editor/tools/sample_export/file-audio.svg</file>
+        <file alias="file-export.svg">editor/tools/soundfont_export/file-export.svg</file>
     </qresource>
     <qresource prefix="/vpiano">
         <file alias="blkey.svg">resources/blkey.svg</file>

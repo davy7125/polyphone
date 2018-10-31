@@ -33,7 +33,8 @@ DialogAbout::DialogAbout(QWidget *parent) :
 {
     ui->setupUi(this);
     this->setWindowFlags((windowFlags() & ~Qt::WindowContextHelpButtonHint));
-    ui->labelNomVersion->setText(trUtf8("Polyphone") + " " + QString::number(VERSION) +
+    ui->labelNomVersion->setText(trUtf8("Polyphone") + " " +
+                                 (qAbs(VERSION) == VERSION ? QString::number(VERSION, 'f', 1) : QString::number(VERSION)) +
                                  (FINAL ? "" : " unreleased"));
 
     // Icon
@@ -116,11 +117,12 @@ void Credit::addTranslator(QString name, QString mail)
 QString Credit::getText()
 {
     QString text = "<html><head/><body><table border='0' style='margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px;' "
-            "cellspacing='2' cellpadding='0'>";
+                   "cellspacing='2' cellpadding='0'>";
 
     text += getGroup(QObject::trUtf8("Créé par "), _listCreatorName, _listCreatorMail) + "<tr></tr>";
     text += getGroup(QObject::trUtf8("Contributeurs "), _listContributorName, _listContributorMail) + "<tr></tr>";
-    text += getGroup(QObject::trUtf8("Traduit par "), _listTranslatorName, _listTranslatorMail);
+    text += getGroup(QObject::trUtf8("Traduit par "), _listTranslatorName, _listTranslatorMail) + "<tr></tr>";
+    text += getAwesomeCredit();
 
     return text + "</table></body></html>";
 }
@@ -149,4 +151,23 @@ QString Credit::getFormattedName(QString name, QString email)
     else
         text += "<span style='font-size:9pt;'>" + QString::fromUtf8(name.toStdString().c_str()) + "</span>";
     return text + "</p>";
+}
+
+QString Credit::getFormattedLink(QString text, QString link)
+{
+    return "<a href='" + link + "'><span style='font-size:9pt; text-decoration: underline; color:" +
+            QApplication::palette().color(QPalette::Link).name() + ";'>" +
+            QString::fromUtf8(text.toStdString().c_str()) + "</span></a>";
+}
+
+QString Credit::getAwesomeCredit()
+{
+    return "<tr><td width='50%'><p align='right'><span style='font-size:9pt;'>" +
+            QObject::trUtf8("Icônes") +
+            " </span></p></td>" +
+            "<td width='50%'>Most of the icons are provided by " +
+            getFormattedLink("Awesome", "https://fontawesome.com/") +
+            " under the license " +
+            getFormattedLink("CC BY 4.0", "https://creativecommons.org/licenses/by/4.0/") +
+            " and have been colored to fit the themes.</td></tr>";
 }

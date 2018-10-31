@@ -33,8 +33,15 @@ int TreeItemRoot::addChild(TreeItem * treeItem)
     return _children.count() - 1;
 }
 
+void TreeItemRoot::removeChild(TreeItem * treeItem)
+{
+    _children.removeAll(treeItem);
+}
+
 int TreeItemRoot::indexOfId(int id)
 {
-    Q_UNUSED(id)
+    for (int i = 0; i < _children.count(); i++)
+        if ((int)_children[i]->getId().typeElement == id)
+            return i;
     return -1;
 }

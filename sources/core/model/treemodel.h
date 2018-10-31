@@ -18,9 +18,6 @@ public:
     QModelIndex	index(int row, int column, const QModelIndex &parent = QModelIndex()) const override;
     QModelIndex	parent(const QModelIndex &index) const override;
 
-    /// Trigger all dataChanged() when the editing is done
-    void triggerUpdate();
-
     /// Drag & drop
     Qt::DropActions supportedDropActions() const override { return Qt::MoveAction; }
     Qt::ItemFlags flags(const QModelIndex &index) const override;
@@ -40,7 +37,6 @@ signals:
 private:
     QModelIndex getParentIndexWithPosition(EltID id, int &position);
     TreeItem * _rootItem;
-    QList<QModelIndex> _indexToChange;
 };
 
 #endif // TREEMODEL_H

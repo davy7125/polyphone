@@ -2,6 +2,7 @@
 #define MAINMENU_H
 
 #include <QMenu>
+class AbstractTool;
 
 class MainMenu : public QMenu
 {
@@ -25,7 +26,9 @@ signals:
     void fullScreenTriggered();
     void save();
     void saveAs();
-    void exportSoundfonts();
+
+private slots:
+    void onExport();
 
 private:
     QAction * _newAction;
@@ -39,6 +42,8 @@ private:
     QAction * _aboutAction;
     QAction * _closeFileAction;
     QAction * _closeAction;
+
+    AbstractTool * _toolExport;
 };
 
 #endif // MAINMENU_H

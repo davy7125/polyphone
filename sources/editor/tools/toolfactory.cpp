@@ -26,6 +26,7 @@
 #include "transpose/tooltranspose.h"
 #include "release/toolrelease.h"
 #include "chords/toolchords.h"
+#include "sample_export/toolsampleexport.h"
 
 
 ToolFactory::ToolFactory(QWidget * parent)
@@ -45,6 +46,7 @@ ToolFactory::ToolFactory(QWidget * parent)
            << new ToolLinkSample()
            << new ToolUnlinkSample()
            << new ToolFrequencyPeaks()
+           << new ToolSampleExport()
            << new ToolCelesteTuning() // Instruments
            << new ToolAutoDistribution()
            << new ToolMixtureCreation()

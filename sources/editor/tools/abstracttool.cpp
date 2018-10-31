@@ -5,13 +5,13 @@
 #include "abstracttoolgui.h"
 #include <QMessageBox>
 
-QWidget * AbstractTool::s_parent = NULL;
-SoundfontManager * AbstractTool::s_sm = NULL;
+QWidget * AbstractTool::s_parent = nullptr;
+SoundfontManager * AbstractTool::s_sm = nullptr;
 
 AbstractTool::AbstractTool(AbstractToolParameters *parameters, AbstractToolGui *gui) :
     _toolParameters(parameters),
     _toolGui(gui),
-    _toolDialog(NULL)
+    _toolDialog(nullptr)
 {
     connect(this, SIGNAL(finished(bool)), this, SLOT(onFinished(bool)), Qt::QueuedConnection);
 }
@@ -38,14 +38,14 @@ bool AbstractTool::setIds(IdList ids)
 void AbstractTool::run()
 {
     // Possibly create a dialog if not already done
-    if (_toolGui != NULL && _toolDialog == NULL)
+    if (_toolGui != nullptr && _toolDialog == nullptr)
     {
         _toolDialog = new ToolDialog(_toolGui, this, s_parent);
         connect(_toolDialog, SIGNAL(validated()), this, SLOT(onParametersValidated()));
     }
 
     // Possibly display a dialog
-    if (_toolDialog == NULL)
+    if (_toolDialog == nullptr)
         onParametersValidated();
     else
     {
@@ -58,7 +58,7 @@ void AbstractTool::run()
 void AbstractTool::onParametersValidated()
 {
     // Get the tool parameters
-    if (_toolGui != NULL) {
+    if (_toolGui != nullptr) {
         _toolGui->saveParameters(_toolParameters);
         _toolParameters->saveConfiguration();
         _toolDialog->close();
