@@ -1,9 +1,9 @@
 #ifndef TOOLFREQUENCYPEAKS_H
 #define TOOLFREQUENCYPEAKS_H
 
-#include "abstracttool.h"
+#include "abstracttoolonestep.h"
 
-class ToolFrequencyPeaks: public AbstractTool
+class ToolFrequencyPeaks: public AbstractToolOneStep
 {
 public:
     ToolFrequencyPeaks();
@@ -30,12 +30,12 @@ public:
         return "smpl:frequencyPeaks";
     }
 
+    /// Process asynchronously run
+    void process(SoundfontManager * sm, IdList ids, AbstractToolParameters * parameters) override;
+
 protected:
     /// Return true if the tool can be used on the specified ids
     bool isCompatible(IdList ids) override;
-
-    /// Run the tool on a list of id
-    void run(SoundfontManager * sm, QWidget * parent, IdList ids, AbstractToolParameters * parameters) override;
 
     /// Get a confirmation message after the tool is run
     QString getConfirmation() override;

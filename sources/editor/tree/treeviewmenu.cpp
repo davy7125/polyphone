@@ -366,7 +366,7 @@ void TreeViewMenu::paste()
 
         // Paste all copied elements
         SoundfontManager * sm = SoundfontManager::getInstance();
-        Duplicator duplicator(sm, sm, (QWidget*)this->parent());
+        Duplicator duplicator;
         foreach (EltID idSource, s_copy)
         {
             if ((idSource.typeElement == elementSmpl || idSource.typeElement == elementInst || idSource.typeElement == elementPrst ||

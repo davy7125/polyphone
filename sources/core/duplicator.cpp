@@ -25,10 +25,9 @@
 #include "duplicator.h"
 #include "editor_old.h"
 
-Duplicator::Duplicator(SoundfontManager *source, SoundfontManager *destination, QWidget * parent) :
-    _parent(parent),
-    _source(source),
-    _destination(destination),
+Duplicator::Duplicator() :
+    _parent(QApplication::activeWindow()),
+    _sm(SoundfontManager::getInstance()),
     _copieSmpl(DUPLIQUER),
     _copieInst(DUPLIQUER),
     _copiePrst(DUPLIQUER),
@@ -37,15 +36,15 @@ Duplicator::Duplicator(SoundfontManager *source, SoundfontManager *destination, 
 {
     // Initial counts
     EltID id = EltID(elementSf2, -1, -1, -1, -1);
-    foreach (int indexSf2, _destination->getSiblings(id))
+    foreach (int indexSf2, _sm->getSiblings(id))
     {
         id.indexSf2 = indexSf2;
         id.typeElement = elementSmpl;
-        _initialSmplIndexes[indexSf2] = destination->getSiblings(id);
+        _initialSmplIndexes[indexSf2] = _sm->getSiblings(id);
         id.typeElement = elementInst;
-        _initialInstIndexes[indexSf2] = destination->getSiblings(id);
+        _initialInstIndexes[indexSf2] = _sm->getSiblings(id);
         id.typeElement = elementPrst;
-        _initialPrstIndexes[indexSf2] = destination->getSiblings(id);
+        _initialPrstIndexes[indexSf2] = _sm->getSiblings(id);
     }
 }
 
@@ -57,7 +56,7 @@ void Duplicator::copy(EltID idSource, EltID idDest)
             idDest.typeElement != elementRootPrst && idDest.typeElement != elementRootSmpl &&
             idDest.typeElement != elementSmpl) return;
 
-    if (_source == _destination && idSource.indexSf2 == idDest.indexSf2)
+    if (_sm == _sm && idSource.indexSf2 == idDest.indexSf2)
     {
         // Lien dans le même Sf2
         switch (idSource.typeElement)
@@ -77,7 +76,7 @@ void Duplicator::copy(EltID idSource, EltID idDest)
 
                 // Copie de tous les samples d'un instrument dans un autre
                 idSource.typeElement = elementInstSmpl;
-                foreach (int i, _source->getSiblings(idSource))
+                foreach (int i, _sm->getSiblings(idSource))
                 {
                     idSource.indexElt2 = i;
                     copy(idSource, idDest);
@@ -98,7 +97,7 @@ void Duplicator::copy(EltID idSource, EltID idDest)
 
                 // Copie de tous les instruments d'un preset dans un autre
                 idSource.typeElement = elementPrstInst;
-                foreach (int i, _source->getSiblings(idSource))
+                foreach (int i, _sm->getSiblings(idSource))
                 {
                     idSource.indexElt2 = i;
                     copy(idSource, idDest);
@@ -144,28 +143,28 @@ void Duplicator::copy(EltID idSource, EltID idDest)
 void Duplicator::linkSmpl(EltID idSource, EltID idDest)
 {
     idDest.typeElement = elementInstSmpl;
-    idDest.indexElt2 = _destination->add(idDest);
+    idDest.indexElt2 = _sm->add(idDest);
     AttributeValue val;
     val.wValue = idSource.indexElt;
-    _destination->set(idDest, champ_sampleID, val);
+    _sm->set(idDest, champ_sampleID, val);
 
     // Balance
-    if (_source->get(idSource, champ_sfSampleType).sfLinkValue == rightSample ||
-            _source->get(idSource, champ_sfSampleType).sfLinkValue == RomRightSample)
+    if (_sm->get(idSource, champ_sfSampleType).sfLinkValue == rightSample ||
+            _sm->get(idSource, champ_sfSampleType).sfLinkValue == RomRightSample)
     {
         val.shValue = 500;
-        _destination->set(idDest, champ_pan, val);
+        _sm->set(idDest, champ_pan, val);
     }
-    else if (_source->get(idSource, champ_sfSampleType).sfLinkValue == leftSample ||
-             _source->get(idSource, champ_sfSampleType).sfLinkValue == RomLeftSample)
+    else if (_sm->get(idSource, champ_sfSampleType).sfLinkValue == leftSample ||
+             _sm->get(idSource, champ_sfSampleType).sfLinkValue == RomLeftSample)
     {
         val.shValue = -500;
-        _destination->set(idDest, champ_pan, val);
+        _sm->set(idDest, champ_pan, val);
     }
     else
     {
         val.shValue = 0;
-        _destination->set(idDest, champ_pan, val);
+        _sm->set(idDest, champ_pan, val);
     }
 }
 
@@ -175,23 +174,23 @@ void Duplicator::linkSmpl(EltID idSource, EltID idDest)
 void Duplicator::linkInst(EltID idSource, EltID idDest)
 {
     idDest.typeElement = elementPrstInst;
-    idDest.indexElt2 = _destination->add(idDest);
+    idDest.indexElt2 = _sm->add(idDest);
     AttributeValue val;
     val.wValue = idSource.indexElt;
-    _destination->set(idDest, champ_instrument, val);
+    _sm->set(idDest, champ_instrument, val);
 
     // Keyrange
     int keyMin = 127;
     int keyMax = 0;
     EltID idLinked = idSource;
     idLinked.typeElement = elementInstSmpl;
-    foreach (int i, _source->getSiblings(idLinked))
+    foreach (int i, _sm->getSiblings(idLinked))
     {
         idLinked.indexElt2 = i;
-        if (_source->isSet(idLinked, champ_keyRange))
+        if (_sm->isSet(idLinked, champ_keyRange))
         {
-            keyMin = qMin(keyMin, (int)_source->get(idLinked, champ_keyRange).rValue.byLo);
-            keyMax = qMax(keyMax, (int)_source->get(idLinked, champ_keyRange).rValue.byHi);
+            keyMin = qMin(keyMin, (int)_sm->get(idLinked, champ_keyRange).rValue.byLo);
+            keyMax = qMax(keyMax, (int)_sm->get(idLinked, champ_keyRange).rValue.byHi);
         }
     }
     AttributeValue value;
@@ -205,7 +204,7 @@ void Duplicator::linkInst(EltID idSource, EltID idDest)
         value.rValue.byLo = 0;
         value.rValue.byHi = 127;
     }
-    _destination->set(idDest, champ_keyRange, value);
+    _sm->set(idDest, champ_keyRange, value);
 }
 
 // Copie d'un instrument lié dans un autre instrument
@@ -214,7 +213,7 @@ void Duplicator::linkInst(EltID idSource, EltID idDest)
 void Duplicator::copyLink(EltID idSource, EltID idDest)
 {
     idDest.typeElement = idSource.typeElement;
-    idDest.indexElt2 = _destination->add(idDest);
+    idDest.indexElt2 = _sm->add(idDest);
 
     // Copie des gens
     copyGen(idSource, idDest);
@@ -270,14 +269,14 @@ void Duplicator::copySmpl(EltID idSource, EltID idDest)
 {
     // Recherche si un sample du même nom existe déjà dans les éléments initiaux
     idDest.typeElement = elementSmpl;
-    QString nom = _source->getQstr(idSource, champ_name);
+    QString nom = _sm->getQstr(idSource, champ_name);
     int index = -1;
     if (_copieSmpl != DUPLIQUER_TOUT)
     {
         foreach (int j, _initialSmplIndexes[idDest.indexSf2])
         {
             idDest.indexElt = j;
-            if (_destination->getQstr(idDest, champ_name).compare(nom.left(20)) == 0)
+            if (_sm->getQstr(idDest, champ_name).compare(nom.left(20)) == 0)
                 index = j;
         }
 
@@ -294,7 +293,7 @@ void Duplicator::copySmpl(EltID idSource, EltID idDest)
     else
     {
         // création d'un nouveau smpl
-        idDest.indexElt = _destination->add(idDest);
+        idDest.indexElt = _sm->add(idDest);
     }
 
     // Adaptation éventuelle du nom
@@ -304,38 +303,38 @@ void Duplicator::copySmpl(EltID idSource, EltID idDest)
     if (index == -1 || (_copieSmpl != IGNORER && _copieSmpl != IGNORER_TOUT))
     {
         // Configuration du sample
-        _destination->set(idDest, champ_sampleData16, _source->getData(idSource, champ_sampleData16));
+        _sm->set(idDest, champ_sampleData16, _sm->getData(idSource, champ_sampleData16));
         EltID id3 = idDest;
         id3.typeElement = elementSf2;
-        if (_source->get(id3, champ_wBpsSave).wValue == 24)
-            _destination->set(idDest, champ_sampleData24,   _source->getData(idSource, champ_sampleData24));
-        _destination->set(idDest, champ_dwLength,           _source->get(idSource, champ_dwLength));
-        _destination->set(idDest, champ_dwSampleRate,       _source->get(idSource, champ_dwSampleRate));
-        _destination->set(idDest, champ_dwStartLoop,        _source->get(idSource, champ_dwStartLoop));
-        _destination->set(idDest, champ_dwEndLoop,          _source->get(idSource, champ_dwEndLoop));
-        _destination->set(idDest, champ_sfSampleType,       _source->get(idSource, champ_sfSampleType));
-        _destination->set(idDest, champ_byOriginalPitch,    _source->get(idSource, champ_byOriginalPitch));
-        _destination->set(idDest, champ_chPitchCorrection,  _source->get(idSource, champ_chPitchCorrection));
-        _destination->set(idDest, champ_name,               nom);
+        if (_sm->get(id3, champ_wBpsSave).wValue == 24)
+            _sm->set(idDest, champ_sampleData24,   _sm->getData(idSource, champ_sampleData24));
+        _sm->set(idDest, champ_dwLength,           _sm->get(idSource, champ_dwLength));
+        _sm->set(idDest, champ_dwSampleRate,       _sm->get(idSource, champ_dwSampleRate));
+        _sm->set(idDest, champ_dwStartLoop,        _sm->get(idSource, champ_dwStartLoop));
+        _sm->set(idDest, champ_dwEndLoop,          _sm->get(idSource, champ_dwEndLoop));
+        _sm->set(idDest, champ_sfSampleType,       _sm->get(idSource, champ_sfSampleType));
+        _sm->set(idDest, champ_byOriginalPitch,    _sm->get(idSource, champ_byOriginalPitch));
+        _sm->set(idDest, champ_chPitchCorrection,  _sm->get(idSource, champ_chPitchCorrection));
+        _sm->set(idDest, champ_name,               nom);
 
         // Lien
-        if (_source->get(idSource, champ_sfSampleType).wValue != RomMonoSample &&
-                _source->get(idSource, champ_sfSampleType).wValue != monoSample)
+        if (_sm->get(idSource, champ_sfSampleType).wValue != RomMonoSample &&
+                _sm->get(idSource, champ_sfSampleType).wValue != monoSample)
         {
             // Possible ?
             EltID idSourceLink = idSource;
-            idSourceLink.indexElt = _source->get(idSource, champ_wSampleLink).wValue;
+            idSourceLink.indexElt = _sm->get(idSource, champ_wSampleLink).wValue;
             AttributeValue val;
             if (_listCopy.contains(idSourceLink))
             {
                 // Association
                 EltID idDestLink = _listPaste.at(_listCopy.indexOf(idSourceLink));
                 val.wValue = idDestLink.indexElt;
-                _destination->set(idDest, champ_wSampleLink, val);
+                _sm->set(idDest, champ_wSampleLink, val);
                 val.wValue = idDest.indexElt;
-                _destination->set(idDestLink, champ_wSampleLink, val);
+                _sm->set(idDestLink, champ_wSampleLink, val);
 
-                switch (_source->get(idSource, champ_sfSampleType).wValue)
+                switch (_sm->get(idSource, champ_sfSampleType).wValue)
                 {
                 case linkedSample:
                     val.sfLinkValue = linkedSample;
@@ -356,17 +355,17 @@ void Duplicator::copySmpl(EltID idSource, EltID idDest)
                     val.sfLinkValue = RomRightSample;
                     break;
                 }
-                _destination->set(idDestLink, champ_sfSampleType, val);
+                _sm->set(idDestLink, champ_sfSampleType, val);
             }
             else
             {
-                if (_source->get(idSource, champ_sfSampleType).wValue == linkedSample ||
-                        _source->get(idSource, champ_sfSampleType).wValue == rightSample ||
-                        _source->get(idSource, champ_sfSampleType).wValue == leftSample)
+                if (_sm->get(idSource, champ_sfSampleType).wValue == linkedSample ||
+                        _sm->get(idSource, champ_sfSampleType).wValue == rightSample ||
+                        _sm->get(idSource, champ_sfSampleType).wValue == leftSample)
                     val.sfLinkValue = monoSample;
                 else
                     val.sfLinkValue = RomMonoSample;
-                _destination->set(idDest, champ_sfSampleType, val);
+                _sm->set(idDest, champ_sfSampleType, val);
             }
         }
     }
@@ -385,19 +384,19 @@ void Duplicator::copyInst(EltID idSource, EltID idDest)
     EltID idSmpl = idSource;
     idSource.typeElement = elementInstSmpl;
     idSmpl.typeElement = elementSmpl;
-    foreach (int i, _source->getSiblings(idSource))
+    foreach (int i, _sm->getSiblings(idSource))
     {
         idSource.indexElt2 = i;
-        idSmpl.indexElt = _source->get(idSource, champ_sampleID).wValue;
+        idSmpl.indexElt = _sm->get(idSource, champ_sampleID).wValue;
         if (!_listCopy.contains(idSmpl)) // Ne pas copier un smpl déjà copié
             copy(idSmpl, idDest);
 
         // Sample stéréo ?
-        if (_source->get(idSource, champ_sfSampleType).wValue != RomMonoSample &&
-                _source->get(idSource, champ_sfSampleType).wValue != monoSample)
+        if (_sm->get(idSource, champ_sfSampleType).wValue != RomMonoSample &&
+                _sm->get(idSource, champ_sfSampleType).wValue != monoSample)
         {
             EltID idSourceLink = idSource;
-            idSourceLink.indexElt = _source->get(idSource, champ_wSampleLink).wValue;
+            idSourceLink.indexElt = _sm->get(idSource, champ_wSampleLink).wValue;
             if (!_listCopy.contains(idSourceLink))
                 copy(idSourceLink, idDest);
         }
@@ -406,14 +405,14 @@ void Duplicator::copyInst(EltID idSource, EltID idDest)
     // Recherche si un instrument du même nom existe déjà dans les éléments initiaux
     idSource.typeElement = elementInst;
     idDest.typeElement = elementInst;
-    QString nom = _source->getQstr(idSource, champ_name);
+    QString nom = _sm->getQstr(idSource, champ_name);
     int index = -1;
     if (_copieInst != DUPLIQUER_TOUT)
     {
         foreach (int j, _initialInstIndexes[idDest.indexSf2])
         {
             idDest.indexElt = j;
-            if (_destination->getQstr(idDest, champ_name).compare(nom.left(20)) == 0)
+            if (_sm->getQstr(idDest, champ_name).compare(nom.left(20)) == 0)
                 index = j;
         }
 
@@ -434,7 +433,7 @@ void Duplicator::copyInst(EltID idSource, EltID idDest)
     else
     {
         // Création d'un nouvel instrument
-        idDest.indexElt = _destination->add(idDest);
+        idDest.indexElt = _sm->add(idDest);
     }
 
     // Adaptation éventuelle du nom
@@ -445,7 +444,7 @@ void Duplicator::copyInst(EltID idSource, EltID idDest)
     if (index == -1 || (_copieInst != IGNORER && _copieInst != IGNORER_TOUT))
     {
         // Info
-        _destination->set(idDest, champ_name, nom.left(20));
+        _sm->set(idDest, champ_name, nom.left(20));
 
         // Gen globaux
         copyGen(idSource, idDest);
@@ -456,11 +455,11 @@ void Duplicator::copyInst(EltID idSource, EltID idDest)
         // Copie des InstSmpl
         idSource.typeElement = elementInstSmpl;
         idDest.typeElement = elementInstSmpl;
-        foreach (int i, _source->getSiblings(idSource))
+        foreach (int i, _sm->getSiblings(idSource))
         {
             idSource.indexElt2 = i;
             // Création d'un lien avec sample
-            idDest.indexElt2 = _destination->add(idDest);
+            idDest.indexElt2 = _sm->add(idDest);
 
             // Copie des gens
             copyGen(idSource, idDest);
@@ -486,10 +485,10 @@ void Duplicator::copyPrst(EltID idSource, EltID idDest)
     EltID idInst = idSource;
     idSource.typeElement = elementPrstInst;
     idInst.typeElement = elementInst;
-    foreach (int i,_source->getSiblings(idSource))
+    foreach (int i,_sm->getSiblings(idSource))
     {
         idSource.indexElt2 = i;
-        idInst.indexElt = _source->get(idSource, champ_instrument).wValue;
+        idInst.indexElt = _sm->get(idSource, champ_instrument).wValue;
         if (!_listCopy.contains(idInst)) // Ne pas copier un inst déjà copié
             copy(idInst, idDest);
     }
@@ -497,14 +496,14 @@ void Duplicator::copyPrst(EltID idSource, EltID idDest)
     // Recherche si un preset du même nom existe déjà dans les éléments initiaux
     idSource.typeElement = elementPrst;
     idDest.typeElement = elementPrst;
-    QString nom = _source->getQstr(idSource, champ_name);
+    QString nom = _sm->getQstr(idSource, champ_name);
     int index = -1;
     if (_copiePrst != DUPLIQUER_TOUT)
     {
         foreach (int j, _initialPrstIndexes[idDest.indexSf2])
         {
             idDest.indexElt = j;
-            if (_destination->getQstr(idDest, champ_name).compare(nom.left(20)) == 0)
+            if (_sm->getQstr(idDest, champ_name).compare(nom.left(20)) == 0)
                 index = j;
         }
 
@@ -525,9 +524,9 @@ void Duplicator::copyPrst(EltID idSource, EltID idDest)
     else
     {
         // Vérification qu'un emplacement dans la banque est disponible
-        int numPreset = _source->get(idSource, champ_wPreset).wValue;
-        int numBank = _source->get(idSource, champ_wBank).wValue;
-        _destination->firstAvailablePresetBank(idDest, numBank, numPreset);
+        int numPreset = _sm->get(idSource, champ_wPreset).wValue;
+        int numBank = _sm->get(idSource, champ_wBank).wValue;
+        _sm->firstAvailablePresetBank(idDest, numBank, numPreset);
         if (numPreset == -1)
         {
             // Aucun preset disponible
@@ -542,12 +541,12 @@ void Duplicator::copyPrst(EltID idSource, EltID idDest)
         else
         {
             // Création d'un nouveau preset
-            idDest.indexElt = _destination->add(idDest);
+            idDest.indexElt = _sm->add(idDest);
             AttributeValue val;
             val.wValue = numBank;
-            _destination->set(idDest, champ_wBank, val);
+            _sm->set(idDest, champ_wBank, val);
             val.wValue = numPreset;
-            _destination->set(idDest, champ_wPreset, val);
+            _sm->set(idDest, champ_wPreset, val);
         }
     }
 
@@ -559,7 +558,7 @@ void Duplicator::copyPrst(EltID idSource, EltID idDest)
     if (idDest.indexElt != -1 && (index == -1 || (_copiePrst != IGNORER && _copiePrst != IGNORER_TOUT)))
     {
         // Info
-        _destination->set(idDest, champ_name, nom.left(20));
+        _sm->set(idDest, champ_name, nom.left(20));
 
         // Gen globaux
         copyGen(idSource, idDest);
@@ -570,12 +569,12 @@ void Duplicator::copyPrst(EltID idSource, EltID idDest)
         // Copie des PrstInst
         idSource.typeElement = elementPrstInst;
         idDest.typeElement = elementPrstInst;
-        foreach (int i, _source->getSiblings(idSource))
+        foreach (int i, _sm->getSiblings(idSource))
         {
             idSource.indexElt2 = i;
 
             // Création d'un lien avec instrument
-            idDest.indexElt2 = _destination->add(idDest);
+            idDest.indexElt2 = _sm->add(idDest);
 
             // Copie des gens
             copyGen(idSource, idDest);
@@ -628,7 +627,7 @@ void Duplicator::copyGen(EltID idSource, EltID idDest)
     }
 
     AttributeValue val;
-    foreach (int i, _source->getSiblings(idGen))
+    foreach (int i, _sm->getSiblings(idGen))
     {
         // Copie, sauf bank et preset
         if (i != champ_wBank && i != champ_wPreset)
@@ -641,15 +640,15 @@ void Duplicator::copyGen(EltID idSource, EltID idDest)
                     idLinkSource.typeElement = elementSmpl;
                 else
                     idLinkSource.typeElement = elementInst;
-                idLinkSource.indexElt = _source->get(idSource, (AttributeType)i).wValue;
+                idLinkSource.indexElt = _sm->get(idSource, (AttributeType)i).wValue;
                 if (_listCopy.contains(idLinkSource))
                     val.wValue = _listPaste.at(_listCopy.indexOf(idLinkSource)).indexElt;
                 else
                     val.wValue = idLinkSource.indexElt;
             }
             else
-                val = _source->get(idSource, (AttributeType)i);
-            _destination->set(idDest, (AttributeType)i, val);
+                val = _sm->get(idSource, (AttributeType)i);
+            _sm->set(idDest, (AttributeType)i, val);
         }
     }
 }
@@ -694,29 +693,29 @@ void Duplicator::copyMod(EltID idSource, EltID idDest)
     // Correspondance des index
     QMap<int, int> indMod;
 
-    foreach (int i, _source->getSiblings(idSource))
+    foreach (int i, _sm->getSiblings(idSource))
     {
         idSource.indexMod = i;
-        idDest.indexMod = _destination->add(idDest);
+        idDest.indexMod = _sm->add(idDest);
         indMod[i] = idDest.indexMod;
-        _destination->set(idDest, champ_modAmount,       _source->get(idSource, champ_modAmount));
-        _destination->set(idDest, champ_sfModSrcOper,    _source->get(idSource, champ_sfModSrcOper));
-        _destination->set(idDest, champ_sfModAmtSrcOper, _source->get(idSource, champ_sfModAmtSrcOper));
-        _destination->set(idDest, champ_sfModDestOper,   _source->get(idSource, champ_sfModDestOper));
-        if (_source->get(idSource, champ_sfModDestOper).wValue < 32768) // pas de lien
-            _destination->set(idDest, champ_sfModTransOper,  _source->get(idSource, champ_sfModTransOper));
+        _sm->set(idDest, champ_modAmount,       _sm->get(idSource, champ_modAmount));
+        _sm->set(idDest, champ_sfModSrcOper,    _sm->get(idSource, champ_sfModSrcOper));
+        _sm->set(idDest, champ_sfModAmtSrcOper, _sm->get(idSource, champ_sfModAmtSrcOper));
+        _sm->set(idDest, champ_sfModDestOper,   _sm->get(idSource, champ_sfModDestOper));
+        if (_sm->get(idSource, champ_sfModDestOper).wValue < 32768) // pas de lien
+            _sm->set(idDest, champ_sfModTransOper,  _sm->get(idSource, champ_sfModTransOper));
     }
 
     // Mise en place des liens (les éléments cachés ayant disparus)
     AttributeValue val;
-    foreach (int i, _source->getSiblings(idSource))
+    foreach (int i, _sm->getSiblings(idSource))
     {
         idSource.indexMod = i;
-        if (_source->get(idSource, champ_sfModDestOper).wValue >= 32768)
+        if (_sm->get(idSource, champ_sfModDestOper).wValue >= 32768)
         {
             idDest.indexMod = indMod[i];
-            val.wValue = 32768 + indMod[_source->get(idSource, champ_sfModDestOper).wValue - 32768];
-            _destination->set(idDest, champ_sfModDestOper, val);
+            val.wValue = 32768 + indMod[_sm->get(idSource, champ_sfModDestOper).wValue - 32768];
+            _sm->set(idDest, champ_sfModDestOper, val);
         }
     }
 }
@@ -759,12 +758,12 @@ void Duplicator::reset(EltID idDest)
         id.typeElement = elementInstGen;
     else
         id.typeElement = elementPrstGen;
-    QList<int> paramTypes = _destination->getSiblings(id);
+    QList<int> paramTypes = _sm->getSiblings(id);
     foreach (int paramType, paramTypes)
     {
         id.indexMod = paramType;
         if (paramType != champ_wBank && paramType != champ_wPreset) // On garde bank et preset
-            _destination->reset(id, (AttributeType)paramType);
+            _sm->reset(id, (AttributeType)paramType);
     }
 
     // Suppression des modulateurs
@@ -772,10 +771,10 @@ void Duplicator::reset(EltID idDest)
         id.typeElement = elementInstMod;
     else
         id.typeElement = elementPrstMod;
-    foreach (int i, _destination->getSiblings(id))
+    foreach (int i, _sm->getSiblings(id))
     {
         id.indexMod = i;
-        _destination->remove(id);
+        _sm->remove(id);
     }
 
     // Suppression des éléments liés
@@ -783,10 +782,10 @@ void Duplicator::reset(EltID idDest)
         id.typeElement = elementInstSmpl;
     else
         id.typeElement = elementPrstInst;
-    foreach (int i, _destination->getSiblings(id))
+    foreach (int i, _sm->getSiblings(id))
     {
         id.indexElt2 = i;
-        _destination->remove(id);
+        _sm->remove(id);
     }
 }
 
@@ -797,14 +796,14 @@ bool Duplicator::isGlobalEmpty(EltID id)
         id.typeElement = elementInstGen;
     else
         id.typeElement = elementPrstGen;
-    bool isEmpty = _destination->getSiblings(id).empty();
+    bool isEmpty = _sm->getSiblings(id).empty();
 
     // Nombre de modulateurs
     if (id.typeElement == elementInstGen)
         id.typeElement = elementInstMod;
     else
         id.typeElement = elementPrstMod;
-    isEmpty = isEmpty && _destination->getSiblings(id).empty();
+    isEmpty = isEmpty && _sm->getSiblings(id).empty();
 
     return isEmpty;
 }
@@ -822,7 +821,7 @@ QString Duplicator::adaptName(QString nom, EltID idDest)
     foreach (int j, nbElt)
     {
         idDest.indexElt = j;
-        listName << _destination->getQstr(idDest, champ_name);
+        listName << _sm->getQstr(idDest, champ_name);
     }
 
     int suffixNumber = 0;

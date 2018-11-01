@@ -1,13 +1,14 @@
 #ifndef TOOLSOUNDFONTEXPORT_H
 #define TOOLSOUNDFONTEXPORT_H
 
-#include "abstracttool.h"
-#include <QObject>
+#include "abstracttoolonestep.h"
+class OutputFactory;
 
-class ToolSoundfontExport: public AbstractTool
+class ToolSoundfontExport: public AbstractToolOneStep
 {
 public:
     ToolSoundfontExport();
+    virtual ~ToolSoundfontExport();
 
     /// Icon, label and category displayed to the user to describe the tool
     QString getIconName() const override
@@ -31,15 +32,25 @@ public:
         return "sf2:export";
     }
 
+    /// Process asynchronously run
+    void process(SoundfontManager * sm, IdList ids, AbstractToolParameters * parameters) override;
+
 protected:
     /// Return true if the tool can be used on the specified ids
     bool isCompatible(IdList ids) override;
 
-    /// Run the tool, emit the signal "finished" at the end
-    void run(SoundfontManager * sm, QWidget * parent, IdList ids, AbstractToolParameters * parameters) override;
+    /// Get the warning to display after the tool is run
+    QString getWarning() override;
 
     /// Get a confirmation message after the tool is run
     QString getConfirmation() override;
+
+private:
+    EltID mergeSoundfonts(SoundfontManager * sm, QMap<int,  QList<int> > presets);
+    QString getFilePath(QString directory, int format);
+
+    OutputFactory * _outputFactory;
+    QString _error;
 };
 
 #endif // TOOLSOUNDFONTEXPORT_H
