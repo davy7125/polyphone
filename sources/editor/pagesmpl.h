@@ -41,7 +41,6 @@ public:
     explicit PageSmpl(QWidget * parent = 0);
     ~PageSmpl();
 
-    void pushPlayPause();
     void getPeakFrequencies(EltID id, QList<double> &frequencies, QList<double> &factors, QList<int> &keys, QList<int> &corrections);
 
 public slots:
@@ -94,6 +93,7 @@ private:
     void autoTune(EltID id, int &pitch, int &correction);
     void saveEQ();
     void loadEQ();
+    void updateSinus();
 };
 
 #endif // PAGE_SMPL_H

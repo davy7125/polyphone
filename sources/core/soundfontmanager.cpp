@@ -43,7 +43,7 @@ void SoundfontManager::kill()
 {
     if (s_instance != nullptr)
     {
-        delete s_instance;
+        s_instance->deleteLater();
         s_instance = nullptr;
     }
 }

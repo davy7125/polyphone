@@ -27,7 +27,8 @@
 
 CalibrationSinus::CalibrationSinus() :
     _sinus(NULL),
-    _freq(440),
+    _pitch(0),
+    _currentPitch(-1),
     _level(0),
     _currentLevel(0),
     _buf(NULL)
@@ -57,7 +58,7 @@ void CalibrationSinus::setSampleRate(int sampleRate)
 void CalibrationSinus::setPitch(int numNote)
 {
     _mutex.lock();
-    _freq = 440.0 * qPow(2., (double)(numNote - 69) / 12.);
+    _pitch = numNote;
     _mutex.unlock();
 }
 
@@ -85,19 +86,33 @@ void CalibrationSinus::addData(float * dataR, float * dataL, int len)
 
     if (!_mutex.tryLock(1)) // Impossible ici d'attendre
         return;
-    double freq = _freq;
+    double pitch = _pitch;
     double level = _level;
     _mutex.unlock();
 
+    // Possibly stop here
     if (level == 0 && _currentLevel <= 0.0004)
         return;
 
+    // Current frequency (smooth transitions)
+    if (_currentPitch == -1)
+        _currentPitch = pitch;
+    if (_currentPitch > pitch)
+        _currentPitch -= 0.5;
+    else if (_currentPitch < pitch)
+        _currentPitch += 0.5;
+
     // Génération et copie
-    _sinus->getSinus(_buf, len, freq);
+    _sinus->getSinus(_buf, len, 440.0 * qPow(2., (double)(_currentPitch - 69) / 12.));
 
     for (int i = 0; i < len; i++)
     {
-        (level > _currentLevel) ? _currentLevel += 0.0004 : _currentLevel -= 0.0004;
+        // Smooth transition for the level
+        if (_currentLevel > level)
+            _currentLevel -= 0.0002;
+        else if (_currentLevel < level)
+            _currentLevel += 0.0002;
+
         dataR[i] += _currentLevel * _buf[i];
         dataL[i] += _currentLevel * _buf[i];
     }

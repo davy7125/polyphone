@@ -18,7 +18,7 @@ RunnableChordCreator::RunnableChordCreator(ToolChords * tool, EltID idInst, Chor
 
 RunnableChordCreator::~RunnableChordCreator()
 {
-    qDebug() << "finished";
+
 }
 
 void RunnableChordCreator::run()

@@ -47,7 +47,7 @@ private:
     void initBuffer(int size);
 
     OscSinus * _sinus;
-    double _freq;
+    double _pitch, _currentPitch;
     double _level, _currentLevel;
 
     // Buffer de travail
