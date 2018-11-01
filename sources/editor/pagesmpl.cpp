@@ -577,8 +577,7 @@ void PageSmpl::setRootKey(int val)
     ContextManager::midi()->keyboard()->addRangeAndRootKey(val, 0, 127);
 
     // Modif synth
-    if (_currentIds.count() == 1)
-        _synth->setRootKey(val);
+    updateSinus();
 }
 
 void PageSmpl::setTune()
@@ -911,7 +910,6 @@ EltID PageSmpl::getRepercussionID(EltID id)
     return id2;
 }
 
-// Egaliseur
 void PageSmpl::applyEQ()
 {
     if (_preparingPage)
@@ -994,7 +992,6 @@ void PageSmpl::initEQ()
     saveEQ();
 }
 
-// Lecture
 void PageSmpl::lecture()
 {
     if (ui->pushLecture->isChecked())
@@ -1030,6 +1027,8 @@ void PageSmpl::lecture()
         this->lectureEnCours = false;
         _synth->play(0, 0, 0, -1, 0);
     }
+
+    updateSinus();
 }
 
 void PageSmpl::lecteurFinished()
@@ -1064,14 +1063,9 @@ void PageSmpl::lecteurFinished()
         ui->pushLecture->setChecked(false);
         ui->pushLecture->setText(trUtf8("Lecture"));
         ui->pushLecture->blockSignals(false);
+        updateSinus();
     }
     this->lectureEnCours = false;
-}
-
-void PageSmpl::pushPlayPause()
-{
-    ui->pushLecture->toggle();
-    this->lecture();
 }
 
 void PageSmpl::on_checkLectureBoucle_stateChanged(int arg1)
@@ -1082,14 +1076,22 @@ void PageSmpl::on_checkLectureBoucle_stateChanged(int arg1)
 
 void PageSmpl::setSinusEnabled(bool val)
 {
-    // Modif synth
-    _synth->setSinusEnabled(val);
+    Q_UNUSED(val)
+    updateSinus();
 }
+
 void PageSmpl::setGainSample(int val)
 {
     // Modif synth
     _synth->setGainSample(val);
 }
+
+void PageSmpl::updateSinus()
+{
+     _synth->setSinus(_currentIds.count() == 1 && ui->pushLecture->isChecked() && ui->checkLectureSinus->isChecked(),
+                      ui->spinRootKey->value());
+}
+
 void PageSmpl::setStereo(bool val)
 {
     // Modif synth

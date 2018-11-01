@@ -54,8 +54,7 @@ public:
     void setStartLoop(int startLoop, bool repercute);
     void setEndLoop(int endLoop, bool repercute);
     void setLoopEnabled(bool isEnabled);
-    void setRootKey(int rootKey);
-    void setSinusEnabled(bool isEnabled);
+    void setSinus(bool isOn, int rootKey);
     void setPitchCorrection(int correction, bool repercute);
 
     // Record
@@ -75,9 +74,6 @@ signals:
 
 public slots:
     void updateConfiguration();
-
-private slots:
-    void stopSinus();
 
 private:
     void play_sub(int type, int idSf2, int idElt, int note, int velocity,
@@ -127,7 +123,6 @@ private:
     }
 
     CalibrationSinus _sinus;
-    bool _isSinusEnabled, _sampleRunning;
 
     // Pointeur vers les données
     SoundfontManager * _sf2;
