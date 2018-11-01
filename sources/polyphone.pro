@@ -399,7 +399,14 @@ SOURCES	+= main.cpp \
     editor/tools/sample_export/toolsampleexport.cpp \
     editor/tools/soundfont_export/toolsoundfontexport.cpp \
     editor/tools/soundfont_export/toolsoundfontexport_gui.cpp \
-    editor/tools/soundfont_export/toolsoundfontexport_parameters.cpp
+    editor/tools/soundfont_export/toolsoundfontexport_parameters.cpp \
+    editor/tools/abstracttoolonestep.cpp \
+    core/output/abstractoutput.cpp \
+    core/output/outputfactory.cpp \
+    core/output/empty/outputdummy.cpp \
+    core/output/sf2/outputsf2.cpp \
+    core/output/sfz/outputsfz.cpp \
+    core/output/not_supported/outputnotsupported.cpp
 
 HEADERS  += \
     core/sound.h \
@@ -629,7 +636,14 @@ HEADERS  += \
     editor/tools/sample_export/toolsampleexport.h \
     editor/tools/soundfont_export/toolsoundfontexport.h \
     editor/tools/soundfont_export/toolsoundfontexport_gui.h \
-    editor/tools/soundfont_export/toolsoundfontexport_parameters.h
+    editor/tools/soundfont_export/toolsoundfontexport_parameters.h \
+    editor/tools/abstracttoolonestep.h \
+    core/output/abstractoutput.h \
+    core/output/outputfactory.h \
+    core/output/empty/outputdummy.h \
+    core/output/sf2/outputsf2.h \
+    core/output/sfz/outputsfz.h \
+    core/output/not_supported/outputnotsupported.h
 
 FORMS    += \
     dialogs/dialog_list.ui \

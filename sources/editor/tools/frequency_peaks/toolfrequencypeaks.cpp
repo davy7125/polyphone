@@ -3,7 +3,7 @@
 #include "soundfontmanager.h"
 #include "contextmanager.h"
 
-ToolFrequencyPeaks::ToolFrequencyPeaks() : AbstractTool(new ToolFrequencyPeaks_parameters(), new ToolFrequencyPeaks_gui())
+ToolFrequencyPeaks::ToolFrequencyPeaks() : AbstractToolOneStep(new ToolFrequencyPeaks_parameters(), new ToolFrequencyPeaks_gui())
 {
 
 }
@@ -13,11 +13,10 @@ bool ToolFrequencyPeaks::isCompatible(IdList ids)
     return !ids.getSelectedIds(elementSmpl).empty();
 }
 
-void ToolFrequencyPeaks::run(SoundfontManager * sm, QWidget * parent, IdList ids, AbstractToolParameters * parameters)
+void ToolFrequencyPeaks::process(SoundfontManager * sm, IdList ids, AbstractToolParameters * parameters)
 {
     Q_UNUSED(sm)
     Q_UNUSED(ids)
-    Q_UNUSED(parent)
     ToolFrequencyPeaks_parameters * params = (ToolFrequencyPeaks_parameters *) parameters;
 
     // Création fichier csv
@@ -55,5 +54,5 @@ void ToolFrequencyPeaks::run(SoundfontManager * sm, QWidget * parent, IdList ids
 
 QString ToolFrequencyPeaks::getConfirmation()
 {
-    return trUtf8("");
+    return trUtf8("Succès");
 }

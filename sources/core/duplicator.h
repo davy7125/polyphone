@@ -35,7 +35,7 @@ class SoundfontManager;
 class Duplicator
 {
 public:
-    Duplicator(SoundfontManager * source, SoundfontManager * destination, QWidget * parent = NULL);
+    Duplicator();
     ~Duplicator() {}
 
     // Copie idSrc vers idDest si sf2 différent
@@ -55,7 +55,7 @@ private:
     };
 
     QWidget * _parent;
-    SoundfontManager * _source, * _destination;
+    SoundfontManager * _sm;
 
     // Correspondances
     QList<EltID> _listCopy, _listPaste;

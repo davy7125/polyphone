@@ -164,12 +164,19 @@ void ToolSoundfontExport_gui::on_pushExport_clicked()
         return;
     }
 
-    int count = 0;
-    foreach (int i, _presetList.keys())
-        count += _presetList[i].count();
-    if (count > 127)
+    if (_presetList.count() > 127)
     {
-        QMessageBox::warning(this, trUtf8("Attention"), trUtf8("Le nombre maximal de presets par soundfont est de 127."));
+        QMessageBox::warning(this, trUtf8("Attention"), trUtf8("Le nombre maximal de soundfonts à exporter est de 127."));
+        return;
+    }
+
+    int maxNumberOfPresets = 0;
+    foreach (int i, _presetList.keys())
+        maxNumberOfPresets += qMax(maxNumberOfPresets, _presetList[i].count());
+    if (maxNumberOfPresets > 127)
+    {
+        QMessageBox::warning(this, trUtf8("Attention"), trUtf8("Dans le cas où plusieurs soundfonts sont exportées, "
+                                                               "le nombre maximal de presets par soundfont est de 127."));
         return;
     }
 

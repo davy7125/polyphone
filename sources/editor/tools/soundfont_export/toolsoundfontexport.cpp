@@ -3,10 +3,18 @@
 #include "toolsoundfontexport_parameters.h"
 #include "soundfontmanager.h"
 #include "duplicator.h"
+#include "outputfactory.h"
+#include "abstractoutput.h"
 
-ToolSoundfontExport::ToolSoundfontExport() : AbstractTool(new ToolSoundfontExport_parameters(), new ToolSoundfontExport_gui())
+ToolSoundfontExport::ToolSoundfontExport() : AbstractToolOneStep(new ToolSoundfontExport_parameters(), new ToolSoundfontExport_gui()),
+    _outputFactory(new OutputFactory())
 {
 
+}
+
+ToolSoundfontExport::~ToolSoundfontExport()
+{
+    delete _outputFactory;
 }
 
 bool ToolSoundfontExport::isCompatible(IdList ids)
@@ -17,117 +25,150 @@ bool ToolSoundfontExport::isCompatible(IdList ids)
     return false;
 }
 
-void ToolSoundfontExport::run(SoundfontManager * sm, QWidget * parent, IdList ids, AbstractToolParameters * parameters)
+void ToolSoundfontExport::process(SoundfontManager * sm, IdList ids, AbstractToolParameters * parameters)
 {
     Q_UNUSED(ids)
     ToolSoundfontExport_parameters * params = (ToolSoundfontExport_parameters *)parameters;
     
-    // Flags
-    bool presetPrefix = params->getPresetPrefix();
-    bool bankDir = params->getBankDirectory();
-    bool gmSort = params->getGmSort();
+    // Create a new soundfont with the presets to export
+    EltID idExport = mergeSoundfonts(sm, params->getSelectedPresets());
 
-//    switch (params->getFormat())
-//    {
-//    case 0: case 1: {
-//        // Export sf2 ou sf3, création d'un nouvel sf2 indépendant
-//        SoundfontManager * newSf2 = SoundfontManager::getInstance();
-//        EltID idDest(elementSf2, 0, 0, 0, 0);
-//        idDest.indexSf2 = newSf2->add(idDest);
+    // Destination
+    QString filePath = getFilePath(params->getDirectory(), params->getFormat());
 
-//        // Infos du nouvel sf2
-//        QString name, comment;
-//        if (listID.size() == 1)
-//        {
-//            EltID idSf2Source = listID.first().first();
-//            idSf2Source.typeElement = elementSf2;
-//            name = sf2->getQstr(idSf2Source, champ_name);
-//            comment = sf2->getQstr(idSf2Source, champ_ICMT);
-//            newSf2->set(idDest, champ_ISNG, sf2->getQstr(idSf2Source, champ_ISNG));
-//            newSf2->set(idDest, champ_IROM, sf2->getQstr(idSf2Source, champ_IROM));
-//            newSf2->set(idDest, champ_ICRD, sf2->getQstr(idSf2Source, champ_ICRD));
-//            newSf2->set(idDest, champ_IENG, sf2->getQstr(idSf2Source, champ_IENG));
-//            newSf2->set(idDest, champ_IPRD, sf2->getQstr(idSf2Source, champ_IPRD));
-//            newSf2->set(idDest, champ_ICOP, sf2->getQstr(idSf2Source, champ_ICOP));
-//            newSf2->set(idDest, champ_ISFT, sf2->getQstr(idSf2Source, champ_ISFT));
-//        }
-//        else
-//        {
-//            name = "soundfont";
-//            comment = trUtf8("Fusion des soundfonts :");
-//            foreach (QList<EltID> subList, listID)
-//            {
-//                EltID idSf2Source = subList.first();
-//                idSf2Source.typeElement = elementSf2;
-//                comment += "\n - " + sf2->getQstr(idSf2Source, champ_name);
-//            }
-//        }
-//        newSf2->set(idDest, champ_name, name);
-//        newSf2->set(idDest, champ_ICMT, comment);
+    // Get a parser and configure it
+    AbstractOutput * output = _outputFactory->getOutput(filePath);
+    switch (params->getFormat())
+    {
+    case 0: // sf2
+        // Nothing special
+        break;
+    case 1: // sf3
+        output->setOption("quality", params->getQuality());
+        break;
+    case 2: // sfz
+        output->setOption("prefix", params->getPresetPrefix());
+        output->setOption("bankdir", params->getBankDirectory());
+        output->setOption("gmsort", params->getGmSort());
+        break;
+    default:
+        break;
+    }
 
-//        // Ajout des presets
-//        Duplicator duplicator(this->sf2, newSf2, this);
-//        for (int nbBank = 0; nbBank < listID.size(); nbBank++)
-//        {
-//            QList<EltID> subList = listID[nbBank];
-//            for (int nbPreset = 0; nbPreset < subList.size(); nbPreset++)
-//            {
-//                EltID id = subList[nbPreset];
+    // Export
+    output->process(idExport.indexSf2, false);
+    _error = output->getError();
 
-//                if (listID.size() == 1)
-//                {
-//                    duplicator.copy(id, idDest);
-//                }
-//                else
-//                {
-//                    int originalBank = sf2->get(id, champ_wBank).wValue;
-//                    int originalPreset = sf2->get(id, champ_wPreset).wValue;
-//                    AttributeValue value;
-//                    value.wValue = nbBank;
-//                    sf2->set(id, champ_wBank, value);
-//                    value.wValue = nbPreset;
-//                    sf2->set(id, champ_wPreset, value);
+    // Close the temporary soundfont and discard possible changes
+    sm->remove(idExport);
+    sm->revertNewEditing();
+}
 
-//                    duplicator.copy(id, idDest);
+EltID ToolSoundfontExport::mergeSoundfonts(SoundfontManager * sm, QMap<int,  QList<int> > presets)
+{
+    // Merge all data in a new soundfont
+    EltID idDest(elementSf2);
+    idDest.indexSf2 = sm->add(idDest);
 
-//                    value.wValue = originalBank;
-//                    sf2->set(id, champ_wBank, value);
-//                    value.wValue = originalPreset;
-//                    sf2->set(id, champ_wPreset, value);
-//                }
-//            }
-//        }
-//        sf2->clearNewEditing();
+    // Infos du nouvel sf2
+    QString name, comment;
+    if (presets.size() == 1)
+    {
+        EltID idSf2Source(elementSf2, presets.keys()[0]);
+        name = sm->getQstr(idSf2Source, champ_name);
+        comment = sm->getQstr(idSf2Source, champ_ICMT);
+        sm->set(idDest, champ_ISNG, sm->getQstr(idSf2Source, champ_ISNG));
+        sm->set(idDest, champ_IROM, sm->getQstr(idSf2Source, champ_IROM));
+        sm->set(idDest, champ_ICRD, sm->getQstr(idSf2Source, champ_ICRD));
+        sm->set(idDest, champ_IENG, sm->getQstr(idSf2Source, champ_IENG));
+        sm->set(idDest, champ_IPRD, sm->getQstr(idSf2Source, champ_IPRD));
+        sm->set(idDest, champ_ICOP, sm->getQstr(idSf2Source, champ_ICOP));
+        sm->set(idDest, champ_ISFT, sm->getQstr(idSf2Source, champ_ISFT));
+    }
+    else
+    {
+        name = "soundfont";
+        comment = trUtf8("Fusion des soundfonts :");
+        foreach (int sf2Index, presets.keys())
+            comment += "\n - " + sm->getQstr(EltID(elementSf2, sf2Index), champ_name);
+    }
+    sm->set(idDest, champ_name, name);
+    sm->set(idDest, champ_ICMT, comment);
 
-//        // Détermination du nom de fichier
-//        name = name.replace(QRegExp("[:<>\"/\\\\\\*\\?\\|]"), "_");
+    // Ajout des presets
+    Duplicator duplicator;
+    for (int nbBank = 0; nbBank < presets.keys().count(); nbBank++)
+    {
+        QList<EltID> subList;
+        int sf2Index = presets.keys()[nbBank];
+        foreach (int presetIndex, presets[sf2Index])
+            subList << EltID(elementPrst, sf2Index, presetIndex);
 
-//        QString extension = (format == 0 ? ".sf2" : ".sf3");
-//        QFile fichier(dir + "/" + name + extension);
-//        if (fichier.exists())
-//        {
-//            int i = 1;
-//            while (QFile(dir + "/" + name + "-" + QString::number(i) + extension).exists())
-//                i++;
-//            name += "-" + QString::number(i);
-//        }
-//        name = dir + "/" + name + extension;
+        for (int nbPreset = 0; nbPreset < subList.size(); nbPreset++)
+        {
+            EltID id = subList[nbPreset];
 
-//        // Sauvegarde
-//        newSf2->save(idDest.indexSf2, name, quality);
-//        delete newSf2;
-//    }break;
-//    case 2:
-//        // Export sfz
-//        foreach (QList<EltID> sublist, listID)
-//            ConversionSfz(sf2).convert(dir, sublist, presetPrefix, bankDir, gmSort);
-//        break;
-//    default:
-//        break;
-//    }
+            if (presets.count() == 1)
+            {
+                // Simple copy, the preset numbers will be the same
+                duplicator.copy(id, idDest);
+            }
+            else
+            {
+                int originalBank = sm->get(id, champ_wBank).wValue;
+                int originalPreset = sm->get(id, champ_wPreset).wValue;
+                AttributeValue value;
+                value.wValue = nbBank;
+                sm->set(id, champ_wBank, value);
+                value.wValue = nbPreset;
+                sm->set(id, champ_wPreset, value);
+
+                duplicator.copy(id, idDest);
+
+                value.wValue = originalBank;
+                sm->set(id, champ_wBank, value);
+                value.wValue = originalPreset;
+                sm->set(id, champ_wPreset, value);
+            }
+        }
+    }
+
+    return idDest;
+}
+
+QString ToolSoundfontExport::getFilePath(QString directory, int format)
+{
+    QString name = "export";
+    //name = name.replace(QRegExp("[:<>\"/\\\\\\*\\?\\|]"), "_"); // Can be useful later
+
+    QString extension;
+    switch (format)
+    {
+    case 0: extension = ".sf2"; break;
+    case 1: extension = ".sf3"; break;
+    case 2: extension = ".sfz"; break;
+    default: extension = ".xxx"; break;
+    }
+
+    // Find a filepath that doesn't exist yet
+    QFile fichier(directory + "/" + name + extension);
+    if (fichier.exists())
+    {
+        int i = 1;
+        while (QFile(directory + "/" + name + "-" + QString::number(i) + extension).exists())
+            i++;
+        name += "-" + QString::number(i);
+    }
+
+    return directory + "/" + name + extension;
+}
+
+QString ToolSoundfontExport::getWarning()
+{
+    return _error;
 }
 
 QString ToolSoundfontExport::getConfirmation()
 {
-    return "";
+    return _error.isEmpty() ? trUtf8("L'export a réussi !") : "";
 }
