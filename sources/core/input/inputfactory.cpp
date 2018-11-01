@@ -8,9 +8,6 @@
 #include "not_supported/inputnotsupported.h"
 #include "empty/inputempty.h"
 
-InputFactory::InputFactory() : _sm(SoundfontManager::getInstance())
-{}
-
 AbstractInput * InputFactory::getInput(QString fileName)
 {
     AbstractInput * input = NULL;
@@ -45,7 +42,7 @@ AbstractInput * InputFactory::getInput(QString fileName)
             input = new InputNotSupported();
         }
     }
-    input->initialize(fileName, _sm);
+    input->initialize(fileName, SoundfontManager::getInstance());
 
     return input;
 }

@@ -181,7 +181,7 @@ int convert(Options &options)
         }
 
         // Conversion sfz
-        ConversionSfz conversionSfz(sf2);
+        ConversionSfz conversionSfz;
         conversionSfz.convert(QDir(options.getOutputDirectory()).absolutePath(), presets,
                               options.sfzPresetPrefix(), options.sfzOneDirPerBank(), options.sfzGeneralMidi());
 

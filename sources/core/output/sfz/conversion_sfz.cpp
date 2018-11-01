@@ -31,8 +31,8 @@
 #include "contextmanager.h"
 #include "attribute.h"
 
-ConversionSfz::ConversionSfz(SoundfontManager *sf2) :
-    _sf2(sf2)
+ConversionSfz::ConversionSfz() :
+    _sf2(SoundfontManager::getInstance())
 {}
 
 void ConversionSfz::convert(QString dir, QList<EltID> listID, bool presetPrefix, bool bankDir, bool gmSort)

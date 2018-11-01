@@ -725,7 +725,7 @@ void TreeView::dropEvent(QDropEvent *event)
         EltID idDest = index.data(Qt::UserRole).value<EltID>();
 
         SoundfontManager * sm = SoundfontManager::getInstance();
-        Duplicator duplicator(sm, sm, (QWidget*)this->parent());
+        Duplicator duplicator;
         foreach (EltID idSource, _draggedIds)
         {
             if ((idSource.typeElement == elementSmpl || idSource.typeElement == elementInst || idSource.typeElement == elementPrst ||

@@ -66,7 +66,7 @@ private:
 class ConversionSfz
 {
 public:
-    ConversionSfz(SoundfontManager * sf2);
+    ConversionSfz();
 
     // Export en sfz
     void convert(QString dir, QList<EltID> listID, bool presetPrefix, bool bankDir, bool gmSort);
