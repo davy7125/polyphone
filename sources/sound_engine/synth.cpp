@@ -31,8 +31,6 @@
 
 // Constructeur, destructeur
 Synth::Synth(ConfManager *configuration) : QObject(NULL),
-    _isSinusEnabled(false),
-    _sampleRunning(false),
     _sf2(SoundfontManager::getInstance()),
     m_gain(0),
     m_choLevel(0), m_choDepth(0), m_choFrequency(0),
@@ -89,7 +87,6 @@ void Synth::createSoundEnginesAndBuffers()
     {
         SoundEngine * soundEngine = new SoundEngine(_bufferSize);
         connect(soundEngine, SIGNAL(readFinished()), this, SIGNAL(readFinished()));
-        connect(soundEngine, SIGNAL(readFinished()), this, SLOT(stopSinus()));
         soundEngine->moveToThread(new QThread());
         soundEngine->thread()->start(QThread::TimeCriticalPriority);
         QMetaObject::invokeMethod(soundEngine, "start");
@@ -117,11 +114,6 @@ void Synth::play_sub(int type, int idSf2, int idElt, int note, int velocity, Voi
     {
         // Relachement d'une note
         SoundEngine::releaseNote(note);
-        if (note < 0)
-        {
-            _sampleRunning = false;
-            _sinus.off();
-        }
         return;
     }
 
@@ -181,12 +173,6 @@ void Synth::play_sub(int type, int idSf2, int idElt, int note, int velocity, Voi
             SFSampleLink typeLien = _sf2->get(idSmpl, champ_sfSampleType).sfLinkValue;
             if (typeLien != monoSample && typeLien != RomMonoSample)
                 this->play(0, idSf2, _sf2->get(idSmpl, champ_wSampleLink).wValue, -2, 127);
-
-            // Modification pitch du sinus
-            _sinus.setPitch(_sf2->get(idSmpl, champ_byOriginalPitch).bValue);
-            if (_isSinusEnabled)
-                _sinus.on();
-            _sampleRunning = true;
         }
     }break;
     case 1:{ // instrument
@@ -364,49 +350,44 @@ void Synth::setGainSample(int gain)
     // Modification du gain des samples
     SoundEngine::setGainSample(gain);
 }
+
 void Synth::setStereo(bool isStereo)
 {
     // Modification lecture mono ou stereo
     SoundEngine::setStereo(isStereo);
 }
+
 void Synth::setLoopEnabled(bool isEnabled)
 {
     // Modification lecture en boucle ou non
     SoundEngine::setLoopEnabled(isEnabled);
 }
-void Synth::setSinusEnabled(bool isEnabled)
+
+void Synth::setSinus(bool isOn, int rootKey)
 {
-    // Modification lecture avec sinus non
-    _isSinusEnabled = isEnabled;
-    if (isEnabled && _sampleRunning)
+    _sinus.setPitch(rootKey);
+    if (isOn)
         _sinus.on();
     else
         _sinus.off();
 }
-void Synth::setRootKey(int rootKey)
-{
-    // Modification pitch du sinus
-    _sinus.setPitch(rootKey);
-}
+
 void Synth::setStartLoop(int startLoop, bool repercute)
 {
     // mise à jour voix -1 et -2 si répercussion
     SoundEngine::setStartLoop(startLoop, repercute);
 }
+
 void Synth::setEndLoop(int endLoop, bool repercute)
 {
     // mise à jour voix -1 et -2 si répercussion
     SoundEngine::setEndLoop(endLoop, repercute);
 }
+
 void Synth::setPitchCorrection(int correction, bool repercute)
 {
     // mise à jour voix -1 et -2 si répercussion
     SoundEngine::setPitchCorrection(correction, repercute);
-}
-
-void Synth::stopSinus()
-{
-    _sinus.off();
 }
 
 void Synth::setFormat(AudioFormat format)

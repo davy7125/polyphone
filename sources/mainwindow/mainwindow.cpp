@@ -147,12 +147,12 @@ MainWindow::MainWindow(QWidget *parent) :
 
 MainWindow::~MainWindow()
 {
-    RepositoryManager::kill();
     delete ui;
-    delete _recorder;
-    delete _keyboard;
-    delete _windowManager;
+    _recorder->deleteLater();
+    _keyboard->deleteLater();
+    _windowManager->deleteLater();
     SoundfontManager::kill();
+    RepositoryManager::kill();
 }
 
 void MainWindow::closeEvent(QCloseEvent *event)
