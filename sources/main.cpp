@@ -182,8 +182,8 @@ int convert(Options &options)
 
         // Conversion sfz
         ConversionSfz conversionSfz;
-        conversionSfz.convert(QDir(options.getOutputDirectory()).absolutePath(), presets,
-                              options.sfzPresetPrefix(), options.sfzOneDirPerBank(), options.sfzGeneralMidi());
+//        conversionSfz.convert(QDir(options.getOutputDirectory()).absolutePath(), presets,
+//                              options.sfzPresetPrefix(), options.sfzOneDirPerBank(), options.sfzGeneralMidi());
 
     } break;
     default:

@@ -47,7 +47,8 @@ protected:
 
 private:
     EltID mergeSoundfonts(SoundfontManager * sm, QMap<int,  QList<int> > presets);
-    QString getFilePath(QString directory, int format);
+    QString getName(SoundfontManager * sm, QList<int> sf2Indexes);
+    QString getFilePath(QString directory, QString name, int format);
 
     OutputFactory * _outputFactory;
     QString _error;
