@@ -406,7 +406,8 @@ SOURCES	+= main.cpp \
     core/output/empty/outputdummy.cpp \
     core/output/sf2/outputsf2.cpp \
     core/output/sfz/outputsfz.cpp \
-    core/output/not_supported/outputnotsupported.cpp
+    core/output/not_supported/outputnotsupported.cpp \
+    core/output/sfz/sfzparamlist.cpp
 
 HEADERS  += \
     core/sound.h \
@@ -643,7 +644,8 @@ HEADERS  += \
     core/output/empty/outputdummy.h \
     core/output/sf2/outputsf2.h \
     core/output/sfz/outputsfz.h \
-    core/output/not_supported/outputnotsupported.h
+    core/output/not_supported/outputnotsupported.h \
+    core/output/sfz/sfzparamlist.h
 
 FORMS    += \
     dialogs/dialog_list.ui \

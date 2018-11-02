@@ -34,15 +34,12 @@ public:
     /// Return a reason when the process couldn't be done (isSuccess being false)
     QString getError() { return _error; }
 
-    /// Path of the file that has been created
-    QString getPath() { return _fileName; }
-
 signals:
     /// Signal emitted when the file is processed
     void finished();
 
 protected slots:
-    virtual void processInternal(QString &fileName, SoundfontManager * sm, bool &success, QString &error, int sf2Index, QMap<QString, QVariant> & options) = 0;
+    virtual void processInternal(QString fileName, SoundfontManager * sm, bool &success, QString &error, int sf2Index, QMap<QString, QVariant> & options) = 0;
 
 private:
     void processAsync();

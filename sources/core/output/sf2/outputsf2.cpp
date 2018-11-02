@@ -3,7 +3,7 @@
 
 OutputSf2::OutputSf2() : AbstractOutput() {}
 
-void OutputSf2::processInternal(QString &fileName, SoundfontManager * sm, bool &success, QString &error, int sf2Index, QMap<QString, QVariant> & options)
+void OutputSf2::processInternal(QString fileName, SoundfontManager * sm, bool &success, QString &error, int sf2Index, QMap<QString, QVariant> & options)
 {
     Q_UNUSED(fileName)
     Q_UNUSED(sm)

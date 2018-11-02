@@ -34,7 +34,8 @@ void ToolSoundfontExport::process(SoundfontManager * sm, IdList ids, AbstractToo
     EltID idExport = mergeSoundfonts(sm, params->getSelectedPresets());
 
     // Destination
-    QString filePath = getFilePath(params->getDirectory(), params->getFormat());
+    QString name = getName(sm, params->getSelectedPresets().keys());
+    QString filePath = getFilePath(params->getDirectory(), name, params->getFormat());
 
     // Get a parser and configure it
     AbstractOutput * output = _outputFactory->getOutput(filePath);
@@ -136,11 +137,24 @@ EltID ToolSoundfontExport::mergeSoundfonts(SoundfontManager * sm, QMap<int,  QLi
     return idDest;
 }
 
-QString ToolSoundfontExport::getFilePath(QString directory, int format)
+QString ToolSoundfontExport::getName(SoundfontManager * sm, QList<int> sf2Indexes)
 {
-    QString name = "export";
-    //name = name.replace(QRegExp("[:<>\"/\\\\\\*\\?\\|]"), "_"); // Can be useful later
+    QString name = "";
+    if (sf2Indexes.count() == 1)
+    {
+        EltID idSf2(elementSf2, sf2Indexes[0]);
+        name = QFileInfo(sm->getQstr(idSf2, champ_filenameInitial)).baseName();
+        if (name.isEmpty())
+            name = sm->getQstr(idSf2, champ_name);
+        name = name.replace(QRegExp("[:<>\"/\\\\\\*\\?\\|]"), "_");
+    }
+    if (name.isEmpty())
+        name = "export";
+    return name;
+}
 
+QString ToolSoundfontExport::getFilePath(QString directory, QString name, int format)
+{
     QString extension;
     switch (format)
     {

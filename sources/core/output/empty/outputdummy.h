@@ -10,7 +10,7 @@ public:
     OutputDummy();
 
 protected slots:
-    void processInternal(QString &fileName, SoundfontManager * sm, bool &success, QString &error, int sf2Index, QMap<QString, QVariant> & options) override;
+    void processInternal(QString fileName, SoundfontManager * sm, bool &success, QString &error, int sf2Index, QMap<QString, QVariant> & options) override;
 };
 
 #endif // OUTPUTDUMMY_H
