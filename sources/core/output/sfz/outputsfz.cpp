@@ -1,25 +1,23 @@
 #include "outputsfz.h"
 #include "soundfontmanager.h"
+#include "conversion_sfz.h"
 
 OutputSfz::OutputSfz() : AbstractOutput() {}
 
-void OutputSfz::processInternal(QString &fileName, SoundfontManager * sm, bool &success, QString &error, int sf2Index, QMap<QString, QVariant> & options)
+void OutputSfz::processInternal(QString fileName, SoundfontManager * sm, bool &success, QString &error, int sf2Index, QMap<QString, QVariant> & options)
 {
-    Q_UNUSED(fileName)
     Q_UNUSED(sm)
-    Q_UNUSED(sf2Index)
-    Q_UNUSED(options)
 
-    // Nothing special
-    success = true;
-    error = "";
+    // Directory (possibly remove the extension .sfz)
+    if (fileName.endsWith(".sfz"))
+        fileName = QFileInfo(fileName).absolutePath() + "/" + QFileInfo(fileName).completeBaseName();
 
+    // Options
+    bool presetPrefix = options["prefix"].toBool();
+    bool bankDir = options["bankdir"].toBool();
+    bool gmSort = options["gmsort"].toBool();
 
-//    foreach (int sf2Index, presets.keys())
-//    {
-//        QList<EltID> ids;
-//        foreach (int presetIndex, presets[sf2Index])
-//            ids << EltID(elementPrst, sf2Index, presetIndex);
-//        ConversionSfz().convert(directory, ids, presetPrefix, bankDir, gmSort);
-//    }
+    // Convert
+    error = ConversionSfz().convert(fileName, EltID(elementSf2, sf2Index), presetPrefix, bankDir, gmSort);
+    success = error.isEmpty();
 }

@@ -31,45 +31,18 @@
 #include <QTextStream>
 #include "qmath.h"
 #include "basetypes.h"
-
+class SfzParamList;
 class SoundfontManager;
 class QFile;
 
-class ParamListe
-{
-public:
-    ParamListe(SoundfontManager * sf2, EltID id);
-    ParamListe(SoundfontManager * sf2, ParamListe * paramPrst, EltID idInst);
-    AttributeType getChamp(int num)     { return _listeChamps.at(num); }
-    double getValeur(int num)   { return _listeValeurs.at(num); }
-    int size()                  { return _listeChamps.size(); }
-    int findChamp(AttributeType champ)  { return _listeChamps.indexOf(champ); }
-
-private:
-    QList<AttributeType> _listeChamps;
-    QList<double> _listeValeurs;
-    static int _boucleGlobale;
-
-    double limit(double val, AttributeType champ);
-    void load(SoundfontManager *sf2, EltID id);
-    void getGlobalValue(SoundfontManager * sf2, EltID id, AttributeType champ);
-    void mix(AttributeType champCoarse, AttributeType champFine, int addValue = 0);
-    void fusion(AttributeType champ, double value);
-    void prepend(AttributeType champ);
-    void adaptKeynum2();
-    void adaptKeynum2(int minKey, int maxKey, AttributeType champBase, AttributeType champKeynum);
-    void adaptLfo(SoundfontManager *sf2, EltID idInstSmpl);
-    double getValKeynum(double valBase, int key, double keynum);
-};
-
-
-class ConversionSfz
+class ConversionSfz : public QObject
 {
 public:
     ConversionSfz();
 
-    // Export en sfz
-    void convert(QString dir, QList<EltID> listID, bool presetPrefix, bool bankDir, bool gmSort);
+    /// Convert a soundfont
+    /// dirPath is the root directory and must be created yet (otherwise a suffix will be added)
+    QString convert(QString dirPath, EltID idSf2, bool presetPrefix, bool bankDir, bool gmSort);
 
 private:
     SoundfontManager * _sf2;
@@ -81,10 +54,10 @@ private:
     QString getPathSfz(QString dir, QString name);
     QString getLink(EltID idSmpl, bool enableStereo);
     void writeEntete(QFile * fichierSfz, EltID id);
-    void writeGroup(QFile * fichierSfz, ParamListe * listeParam, bool isPercKit);
-    void writeRegion(QFile * fichierSfz, ParamListe * listeParam, QString pathSample, bool ignorePan);
+    void writeGroup(QFile * fichierSfz, SfzParamList * listeParam, bool isPercKit);
+    void writeRegion(QFile * fichierSfz, SfzParamList * listeParam, QString pathSample, bool ignorePan);
     void writeElement(QTextStream &out, AttributeType champ, double value);
-    bool isIncluded(ParamListe * paramPrst, EltID idInstSmpl);
+    bool isIncluded(SfzParamList * paramPrst, EltID idInstSmpl);
     static double dbToPercent(double dB) { return 100. * pow(10, -dB / 20); }
     static QString escapeStr(QString str);
     static int lastLettersToRemove(QString str1, QString str2);
