@@ -10,6 +10,7 @@ class MainMenu : public QMenu
 
 public:
     MainMenu(QWidget *parent = nullptr);
+    ~MainMenu();
     void setFullScreen(bool isOn);
 
 public slots:

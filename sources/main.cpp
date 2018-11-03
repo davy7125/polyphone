@@ -160,11 +160,11 @@ int convert(Options &options)
     {
     case Options::MODE_CONVERSION_TO_SF2: case Options::MODE_CONVERSION_TO_SF3:
         qDebug() << "Saving file" << outputFile.filePath() << "...";
-        if (sf2->save(0, outputFile.filePath(), options.quality()) != 0)
-        {
-            qWarning() << "fail";
-            return 4;
-        }
+//        if (sf2->save(0, outputFile.filePath(), options.quality()) != 0)
+//        {
+//            qWarning() << "fail";
+//            return 4;
+//        }
         break;
     case Options::MODE_CONVERSION_TO_SFZ: {
         qDebug() << "Exporting in directory" << options.getOutputDirectory() << "...";

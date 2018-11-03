@@ -3,6 +3,7 @@
 #include "soundfontmanager.h"
 #include "abstractinput.h"
 #include "sf2/inputsf2.h"
+#include "sf3/inputsf3.h"
 #include "sfz/inputsfz.h"
 #include "sfark/inputsfark.h"
 #include "not_supported/inputnotsupported.h"
@@ -21,17 +22,22 @@ AbstractInput * InputFactory::getInput(QString fileName)
     {
         QFileInfo fileInfo(fileName);
         QString extension = fileInfo.suffix().toLower();
-        if (extension == "sf2" || extension == "sf3")
+        if (extension == "sf2")
         {
-            // Format sf2 or sf3
+            // Format sf2
             input = new InputSf2();
+        }
+        else if (extension == "sf3")
+        {
+            // Format sf3
+            input = new InputSf3();
         }
         else if (extension == "sfz")
         {
             // Format sfz
             input = new InputSfz();
         }
-        else if (extension == "sfark")
+        else if (extension == "sfArk")
         {
             // Format sfArk
             input = new InputSfArk();

@@ -72,8 +72,7 @@ public:
     void undo(int indexSf2);
     void redo(int indexSf2);
 
-    // Chargement / sauvegarde / nouveau
-    int save(int indexSf2, QString fileName, int quality = 1);
+    // Edition management
     void markAsSaved(int indexSf2);
     bool isEdited(int indexSf2);
 
@@ -102,45 +101,6 @@ private slots:
 private:
     SoundfontManager();
 
-    // Type de fichier
-    typedef enum
-    {
-        fileUnknown = 0,
-        fileSf2 = 1,
-        fileSf3 = 2
-    } FileType;
-
-    // Classes utilitaires
-    class ConvertMod
-    {
-    public:
-        ConvertMod(SoundfontManager *_soundfonts, EltID id);
-        int calculDestIndex(int destIndex);
-
-    private:
-        QList<int> _listIndex;
-    };
-
-    class ConvertSmpl
-    {
-    public:
-        ConvertSmpl(SoundfontManager *_soundfonts, int indexSf2);
-        int calculIndex(int index);
-
-    private:
-        QList<int> _listIndex;
-    };
-
-    class ConvertInst
-    {
-    public:
-        ConvertInst(SoundfontManager *_soundfonts, int indexSf2);
-        int calculIndex(int index);
-
-    private:
-        QList<int> _listIndex;
-    };
-
     /// Affiche l'élément id
     int display(EltID id);
 
@@ -149,9 +109,6 @@ private:
 
     /// Clear parameters
     void supprGenAndStore(EltID id, int storeAction);
-
-    /// Save
-    int sauvegarderSf2(int indexSf2, QString fileName);
 
     QList<int> undo(QList<Action *> actions);
 
