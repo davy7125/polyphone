@@ -18,8 +18,8 @@ AbstractTool::AbstractTool(AbstractToolParameters *parameters, AbstractToolGui *
 
 AbstractTool::~AbstractTool()
 {
-    delete _toolGui;
-    delete _toolDialog;
+    _toolGui->deleteLater();
+    _toolDialog->deleteLater();
     delete _toolParameters;
 }
 

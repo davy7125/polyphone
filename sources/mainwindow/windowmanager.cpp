@@ -177,7 +177,8 @@ void WindowManager::onTabCloseRequested(int tabIndex)
             //if (sauvegarder(id.indexSf2, false))
                 return;
         case QMessageBox::Discard:
-            sf2->remove(id);
+            if (id.indexSf2 >= 0)
+                sf2->remove(id);
             break;
         }
 

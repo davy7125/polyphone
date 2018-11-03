@@ -26,10 +26,9 @@ void ToolSoundfontExport_gui::updateInterface(AbstractToolParameters * parameter
     // Populate the tree
     ui->listPresets->clear();
     SoundfontManager * sm = SoundfontManager::getInstance();
-    EltID id(elementSf2);
-    foreach (int i, sm->getSiblings(id))
+    foreach (int i, sm->getSiblings(EltID(elementSf2)))
     {
-        id.indexSf2 = i;
+        EltID id(elementSf2, i);
         QTreeWidgetItem * rootItem = new QTreeWidgetItem(QStringList(sm->getQstr(id, champ_name)));
         ui->listPresets->addTopLevelItem(rootItem);
 

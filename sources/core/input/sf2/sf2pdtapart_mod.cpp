@@ -22,7 +22,7 @@ Sf2PdtaPart_mod::Sf2PdtaPart_mod() :
 
 QDataStream & operator >> (QDataStream &in, Sf2PdtaPart_mod &mod)
 {
-    in >> mod._sfModSrcOper >> mod._sfModDestOper >> mod._modAmount >> mod._modAmount >> mod._sfModTransOper;
+    in >> mod._sfModSrcOper >> mod._sfModDestOper >> mod._modAmount >> mod._sfModAmtSrcOper >> mod._sfModTransOper;
 
     mod._isValid = true;
     return  in;

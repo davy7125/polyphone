@@ -185,7 +185,6 @@ INCLUDEPATH += mainwindow \
 
 SOURCES	+= main.cpp \
     core/sound.cpp \
-    core/pile_sf2_sl.cpp \
     core/duplicator.cpp \
     core/oggconverter.cpp \
     core/utils.cpp \
@@ -407,7 +406,10 @@ SOURCES	+= main.cpp \
     core/output/sf2/outputsf2.cpp \
     core/output/sfz/outputsfz.cpp \
     core/output/not_supported/outputnotsupported.cpp \
-    core/output/sfz/sfzparamlist.cpp
+    core/output/sfz/sfzparamlist.cpp \
+    core/output/sf2/sf2indexconverter.cpp \
+    core/output/sf3/outputsf3.cpp \
+    core/input/sf3/inputsf3.cpp
 
 HEADERS  += \
     core/sound.h \
@@ -645,7 +647,10 @@ HEADERS  += \
     core/output/sf2/outputsf2.h \
     core/output/sfz/outputsfz.h \
     core/output/not_supported/outputnotsupported.h \
-    core/output/sfz/sfzparamlist.h
+    core/output/sfz/sfzparamlist.h \
+    core/output/sf2/sf2indexconverter.h \
+    core/output/sf3/outputsf3.h \
+    core/input/sf3/inputsf3.h
 
 FORMS    += \
     dialogs/dialog_list.ui \
