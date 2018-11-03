@@ -234,10 +234,10 @@ void MainWindow::recentSf2Changed()
     ui->widgetShowHistory->clear();
     for (int i = 0; i < RecentFileManager::MAX_SF2_FILES; i++)
     {
-        QString filePath = ContextManager::recentFile()->getLastFile(RecentFileManager::FILE_TYPE_SF2, i);
+        QString filePath = ContextManager::recentFile()->getLastFile(RecentFileManager::FILE_TYPE_SOUNDFONT, i);
         if (!filePath.isEmpty())
         {
-            QDateTime dateTime = ContextManager::recentFile()->getLastFileDateTime(RecentFileManager::FILE_TYPE_SF2, i);
+            QDateTime dateTime = ContextManager::recentFile()->getLastFileDateTime(RecentFileManager::FILE_TYPE_SOUNDFONT, i);
             ui->widgetShowHistory->addFile(filePath, dateTime);
         }
     }
@@ -299,10 +299,7 @@ void MainWindow::openFile(QString fileName)
         fileName = fileName.remove(0, 1);
 #endif
 
-    if (fileName.endsWith("2"))
-        ContextManager::recentFile()->addRecentFile(RecentFileManager::FILE_TYPE_SF2, fileName);
-    else
-        ContextManager::recentFile()->addRecentFile(RecentFileManager::FILE_TYPE_SOUNDFONT, fileName);
+    ContextManager::recentFile()->addRecentFile(RecentFileManager::FILE_TYPE_SOUNDFONT, fileName);
     _windowManager->openSoundfont(fileName);
 }
 

@@ -37,7 +37,6 @@ RecentFileManager::RecentFileManager(ConfManager * configuration) : QObject(NULL
     _recordFile = _configuration->getValue(ConfManager::SECTION_RECENT_FILES, "record", "").toString();
     _sampleFile = _configuration->getValue(ConfManager::SECTION_RECENT_FILES, "sample", "").toString();
     _exportFile = _configuration->getValue(ConfManager::SECTION_RECENT_FILES, "export", "").toString();
-    _importFile = _configuration->getValue(ConfManager::SECTION_RECENT_FILES, "import", "").toString();
     _pngFile = _configuration->getValue(ConfManager::SECTION_RECENT_FILES, "frequencies", "").toString();
     _executableFile = _configuration->getValue(ConfManager::SECTION_RECENT_FILES, "executable", "").toString();
 
@@ -82,10 +81,6 @@ void RecentFileManager::addRecentFile(FileType fileType, QString filePath)
         _exportFile = filePath;
         _configuration->setValue(ConfManager::SECTION_RECENT_FILES, "export", _exportFile);
         break;
-    case FILE_TYPE_SOUNDFONT:
-        _importFile = filePath;
-        _configuration->setValue(ConfManager::SECTION_RECENT_FILES, "import", _importFile);
-        break;
     case FILE_TYPE_FREQUENCIES:
         _pngFile = filePath;
         _configuration->setValue(ConfManager::SECTION_RECENT_FILES, "frequencies", _pngFile);
@@ -94,7 +89,7 @@ void RecentFileManager::addRecentFile(FileType fileType, QString filePath)
         _executableFile = filePath;
         _configuration->setValue(ConfManager::SECTION_RECENT_FILES, "executable", _executableFile);
         break;
-    case FILE_TYPE_SF2:{
+    case FILE_TYPE_SOUNDFONT:{
         int position = _listFiles.indexOf(filePath);
         if (position == -1)
             position = MAX_SF2_FILES - 1;
@@ -129,15 +124,12 @@ QString RecentFileManager::getLastFile(FileType fileType, int num)
     case FILE_TYPE_SAMPLE:
         lastFile = _sampleFile;
         break;
-    case FILE_TYPE_SF2:
+    case FILE_TYPE_SOUNDFONT:
         if (num >= 0 && num < _listFiles.count())
             lastFile = _listFiles.at(num);
         break;
     case FILE_TYPE_EXPORT:
         lastFile = _exportFile;
-        break;
-    case FILE_TYPE_SOUNDFONT:
-        lastFile = _importFile;
         break;
     case FILE_TYPE_FREQUENCIES:
         lastFile = _pngFile;
@@ -157,7 +149,7 @@ QDateTime RecentFileManager::getLastFileDateTime(FileType fileType, int num)
 
     switch (fileType)
     {
-    case FILE_TYPE_SF2:
+    case FILE_TYPE_SOUNDFONT:
         if (num >= 0 && num < _listDateTimes.count())
             datetime = _listDateTimes.at(num);
         break;

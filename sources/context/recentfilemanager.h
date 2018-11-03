@@ -39,10 +39,9 @@ public:
 
     enum FileType
     {
-        FILE_TYPE_SF2,
+        FILE_TYPE_SOUNDFONT,
         FILE_TYPE_SAMPLE,
         FILE_TYPE_RECORD,
-        FILE_TYPE_SOUNDFONT,
         FILE_TYPE_EXPORT,
         FILE_TYPE_FREQUENCIES,
         FILE_TYPE_EXECUTABLE
@@ -70,7 +69,7 @@ private:
     ConfManager * _configuration;
     QStringList _listFiles;
     QList<QDateTime> _listDateTimes;
-    QString _recordFile, _sampleFile, _exportFile, _importFile, _pngFile, _executableFile;
+    QString _recordFile, _sampleFile, _exportFile, _pngFile, _executableFile;
 };
 
 #endif // RECENTFILEMANAGER_H
