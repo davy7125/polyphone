@@ -157,7 +157,7 @@ AttributeValue SoundfontManager::get(EltID id, AttributeType champ)
         return value;
 
     // Type d'élément à analyser
-    switch ((int)id.typeElement)
+    switch (id.typeElement)
     {
     case elementSf2:{
         // Analyse d'un SF2
@@ -279,7 +279,7 @@ AttributeValue SoundfontManager::get(EltID id, AttributeType champ)
     case elementInstGen: case elementPrstGen: case elementInstSmplGen: case elementPrstInstGen:{
         // Analyse d'un gen
         Division * division = nullptr;
-        switch ((int)id.typeElement)
+        switch (id.typeElement)
         {
         case elementInstGen:
             division = _soundfonts->getSoundfont(id.indexSf2)->getInstrument(id.indexElt)->getGlobalDivision();
@@ -293,9 +293,13 @@ AttributeValue SoundfontManager::get(EltID id, AttributeType champ)
         case elementPrstInstGen:
             division = _soundfonts->getSoundfont(id.indexSf2)->getPreset(id.indexElt)->getDivision(id.indexElt2);
             break;
+        default:
+            break;
         }
         value = division->getGen(champ);
     }break;
+    default:
+        break;
     }
 
     return value;
@@ -655,6 +659,8 @@ void SoundfontManager::markAsSaved(int indexSf2)
 bool SoundfontManager::isEdited(int indexSf2)
 {
     QMutexLocker locker(&_mutex);
+    if (_soundfonts->getSoundfont(indexSf2) == nullptr)
+        return false;
     return this->_undoRedo->getEdition(indexSf2) != _soundfonts->getSoundfont(indexSf2)->_numEdition ||
             !this->getQstr(EltID(elementSf2, indexSf2), champ_filenameInitial).endsWith(".sf2");
 }

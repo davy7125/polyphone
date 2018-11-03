@@ -78,6 +78,11 @@ MainMenu::MainMenu(QWidget * parent) : QMenu(parent),
     onEditorOpen(false);
 }
 
+MainMenu::~MainMenu()
+{
+    delete _toolExport;
+}
+
 void MainMenu::setFullScreen(bool isOn)
 {
     _fullScreenAction->blockSignals(true);

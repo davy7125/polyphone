@@ -174,7 +174,7 @@ void InputSf2::fillSf2(Sf2Header &header, Sf2SdtaPart &sdtaPart, Sf2PdtaPart &pd
         // Récupération des données
         /* if (copySamples || isSf3)
         {
-            // Remplissage des champ smpl et smpl24 à partir des données
+            // Remplissage des champs smpl et smpl24 à partir des données
             quint32 length = get(id, champ_dwLength).dwValue;
             QIODevice * fi = stream->device();
             fi->seek(get(id, champ_dwStart16).dwValue);

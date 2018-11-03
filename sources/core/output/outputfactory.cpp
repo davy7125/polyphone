@@ -3,6 +3,7 @@
 #include "soundfontmanager.h"
 #include "abstractoutput.h"
 #include "sf2/outputsf2.h"
+#include "sf3/outputsf3.h"
 #include "sfz/outputsfz.h"
 #include "not_supported/outputnotsupported.h"
 #include "empty/outputdummy.h"
@@ -20,10 +21,15 @@ AbstractOutput * OutputFactory::getOutput(QString fileName)
     {
         QFileInfo fileInfo(fileName);
         QString extension = fileInfo.suffix().toLower();
-        if (extension == "sf2" || extension == "sf3")
+        if (extension == "sf2")
         {
-            // Format sf2 or sf3
+            // Format sf2
             output = new OutputSf2();
+        }
+        else if (extension == "sf3")
+        {
+            // Format sf3
+            output = new OutputSf3();
         }
         else if (extension == "sfz")
         {

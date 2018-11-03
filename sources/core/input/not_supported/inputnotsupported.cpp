@@ -1,5 +1,4 @@
 #include "inputnotsupported.h"
-#include <QFileInfo>
 
 InputNotSupported::InputNotSupported() : AbstractInput() {}
 
