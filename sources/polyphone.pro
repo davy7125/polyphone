@@ -188,7 +188,6 @@ SOURCES	+= main.cpp \
     core/duplicator.cpp \
     core/oggconverter.cpp \
     core/utils.cpp \
-    core/input/sfz/import_sfz.cpp \
     core/input/sfark/sfarkglobal.cpp \
     core/input/sfark/sfarkfilemanager.cpp \
     core/output/sfz/conversion_sfz.cpp \
@@ -409,14 +408,16 @@ SOURCES	+= main.cpp \
     core/output/sfz/sfzparamlist.cpp \
     core/output/sf2/sf2indexconverter.cpp \
     core/output/sf3/outputsf3.cpp \
-    core/input/sf3/inputsf3.cpp
+    core/input/sf3/inputsf3.cpp \
+    core/input/sfz/sfzparameter.cpp \
+    core/input/sfz/sfzparametergroup.cpp \
+    core/input/sfz/sfzparametergroupassembly.cpp
 
 HEADERS  += \
     core/sound.h \
     core/duplicator.h \
     core/oggconverter.h \
     core/utils.h \
-    core/input/sfz/import_sfz.h \
     core/input/sfark/sfarkglobal.h \
     core/input/sfark/sfarkfilemanager.h \
     core/input/sfark/sfarkextractor1.h \
@@ -650,7 +651,10 @@ HEADERS  += \
     core/output/sfz/sfzparamlist.h \
     core/output/sf2/sf2indexconverter.h \
     core/output/sf3/outputsf3.h \
-    core/input/sf3/inputsf3.h
+    core/input/sf3/inputsf3.h \
+    core/input/sfz/sfzparameter.h \
+    core/input/sfz/sfzparametergroup.h \
+    core/input/sfz/sfzparametergroupassembly.h
 
 FORMS    += \
     dialogs/dialog_list.ui \

@@ -4,7 +4,7 @@
 
 InputSf3::InputSf3() : AbstractInput() {}
 
-void InputSf3::processInternal(QString fileName, SoundfontManager * sm, bool &success, QString &error, int &sf2Index)
+void InputSf3::processInternal(QString fileName, SoundfontManager * sm, bool &success, QString &error, int &sf2Index, QString &tempFilePath)
 {
     Q_UNUSED(fileName)
     Q_UNUSED(sm)

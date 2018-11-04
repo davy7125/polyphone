@@ -1,5 +1,4 @@
 #include "inputsfark.h"
-#include "soundfontmanager.h"
 #include "abstractextractor.h"
 #include "sfarkextractor1.h"
 #include "sfarkextractor2.h"
@@ -7,8 +6,10 @@
 
 InputSfArk::InputSfArk() : AbstractInput() {}
 
-void InputSfArk::processInternal(QString fileName, SoundfontManager * sm, bool &success, QString &error, int &sf2Index)
+void InputSfArk::processInternal(QString fileName, SoundfontManager * sm, bool &success, QString &error, int &sf2Index, QString &tempFilePath)
 {
+    Q_UNUSED(sm)
+
     // Extraction sfArk
     bool isVersion1;
     SfArkExtractor1 * extractorTmp = new SfArkExtractor1(fileName.toStdString().c_str(), isVersion1);
@@ -28,8 +29,11 @@ void InputSfArk::processInternal(QString fileName, SoundfontManager * sm, bool &
         QByteArray data(rawData, size);
         QDataStream streamSf2(&data, QIODevice::ReadOnly);
         //sm->open(fileName, &streamSf2, sf2Index, true);
-        //success = true;
+        success = true;
     }
     else
+    {
+        success = false;
         error = sfArkExtractor->getError();
+    }
 }

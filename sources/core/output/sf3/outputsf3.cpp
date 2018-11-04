@@ -1,7 +1,8 @@
 #include "outputsf3.h"
-#include "soundfontmanager.h"
 #include "sfont.h"
 #include "outputfactory.h"
+#include <QFile>
+#include <QVariant>
 
 OutputSf3::OutputSf3() : AbstractOutput() {}
 

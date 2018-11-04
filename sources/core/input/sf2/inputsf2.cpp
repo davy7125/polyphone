@@ -8,22 +8,13 @@
 
 InputSf2::InputSf2() : AbstractInput() {}
 
-void InputSf2::processInternal(QString fileName, SoundfontManager * sm, bool &success, QString &error, int &sf2Index)
+void InputSf2::processInternal(QString fileName, SoundfontManager * sm, bool &success, QString &error, int &sf2Index, QString &tempFilePath)
 {
+    Q_UNUSED(tempFilePath)
+
     // Keep the variables
     _sm = sm;
     _filename = fileName;
-
-    // Check that the file is not already open
-    foreach (int i, _sm->getSiblings(EltID(elementSf2)))
-    {
-        if (_sm->getQstr(EltID(elementSf2, i), champ_filenameInitial) == fileName)
-        {
-            success = false;
-            error = trUtf8("Le fichier est déjà ouvert");
-            return;
-        }
-    }
 
     // Open the file
     QFile fi(fileName);
@@ -38,14 +29,6 @@ void InputSf2::processInternal(QString fileName, SoundfontManager * sm, bool &su
     QDataStream stream(&fi);
     this->parse(stream, success, error, sf2Index);
     fi.close();
-
-    if (success)
-    {
-        EltID id(elementSf2, sf2Index);
-        _sm->set(id, champ_filenameInitial, fileName);
-        _sm->set(id, champ_filenameForData, fileName);
-    }
-    _sm->clearNewEditing();
 }
 
 void InputSf2::parse(QDataStream &stream, bool &success, QString &error, int &sf2Index)
