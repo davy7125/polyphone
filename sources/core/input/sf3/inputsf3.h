@@ -10,7 +10,7 @@ public:
     InputSf3();
 
 protected slots:
-    void processInternal(QString fileName, SoundfontManager * sm, bool &success, QString &error, int &sf2Index) override;
+    void processInternal(QString fileName, SoundfontManager * sm, bool &success, QString &error, int &sf2Index, QString &tempFilePath) override;
 };
 
 #endif // INPUTSF3_H
