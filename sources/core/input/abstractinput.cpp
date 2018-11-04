@@ -1,4 +1,6 @@
 #include "abstractinput.h"
+#include "basetypes.h"
+#include "soundfontmanager.h"
 #include <QFuture>
 
 #if QT_VERSION >= QT_VERSION_CHECK(5, 0, 0)
@@ -38,6 +40,29 @@ void AbstractInput::process()
 
 void AbstractInput::processAsync()
 {
+    // Check that the file is not already open
+    foreach (int i, _sm->getSiblings(EltID(elementSf2)))
+    {
+        if (_sm->getQstr(EltID(elementSf2, i), champ_filenameInitial) == _fileName)
+        {
+            _isSuccess = false;
+            _error = trUtf8("Le fichier est déjà ouvert");
+            return;
+        }
+    }
+
     // Parse the file
-    this->processInternal(_fileName, _sm, _isSuccess, _error, _sf2Index);
+    QString tempFilePath = "";
+    this->processInternal(_fileName, _sm, _isSuccess, _error, _sf2Index, tempFilePath);
+
+    // Keep a track of the files
+    if (_isSuccess)
+    {
+        EltID id(elementSf2, _sf2Index);
+        _sm->set(id, champ_filenameInitial, _fileName);
+        _sm->set(id, champ_filenameForData, tempFilePath.isEmpty() ? _fileName : tempFilePath);
+    }
+
+    // The operation are not stored in the action manager
+    _sm->clearNewEditing();
 }

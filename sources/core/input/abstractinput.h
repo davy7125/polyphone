@@ -39,7 +39,7 @@ signals:
     void finished();
 
 protected slots:
-    virtual void processInternal(QString fileName, SoundfontManager * sm, bool &success, QString &error, int &sf2Index) = 0;
+    virtual void processInternal(QString fileName, SoundfontManager * sm, bool &success, QString &error, int &sf2Index, QString &tempFilePath) = 0;
 
 private:
     void processAsync();

@@ -37,7 +37,7 @@ AbstractInput * InputFactory::getInput(QString fileName)
             // Format sfz
             input = new InputSfz();
         }
-        else if (extension == "sfArk")
+        else if (extension == "sfark")
         {
             // Format sfArk
             input = new InputSfArk();

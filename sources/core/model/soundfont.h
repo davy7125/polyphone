@@ -55,7 +55,7 @@ public:
     QString _ISFT; // Soundfont tools used                         e.g. “:Preditor 2.00a:Vienna SF Studio 2.0:”
 
     QString _fileNameInitial; // File that is initially opened, updated after each save
-    QString _fileNameForData; // sf2 file (_fileNameInitial or extraction or the initial file). The sounds are read from this file
+    QString _fileNameForData; // sf2 file (_fileNameInitial or extraction of the initial file). The sounds are read from this file
 
     // Other
     double _numEdition;  // numéro de l'édition sauvegardée

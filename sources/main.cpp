@@ -29,7 +29,6 @@
 #include <QItemSelection>
 #include "soundfontmanager.h"
 #include "sfz/conversion_sfz.h"
-#include "sfz/import_sfz.h"
 #include "options.h"
 #include "contextmanager.h"
 
@@ -120,7 +119,7 @@ int convert(Options &options)
     }
     else if (inputExtension == "sfz")
     {
-        ImportSfz importSfz(sf2);
+//        ImportSfz importSfz(sf2);
 //        int num = -1;
 //        qDebug() << "conversion sfz" <<  inputFile.filePath();
 //        importSfz.import(inputFile.filePath(), &num);
