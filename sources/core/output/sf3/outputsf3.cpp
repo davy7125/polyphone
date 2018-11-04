@@ -1,43 +1,70 @@
 #include "outputsf3.h"
 #include "soundfontmanager.h"
 #include "sfont.h"
+#include "outputfactory.h"
 
 OutputSf3::OutputSf3() : AbstractOutput() {}
 
 void OutputSf3::processInternal(QString fileName, SoundfontManager * sm, bool &success, QString &error, int sf2Index, QMap<QString, QVariant> & options)
 {
-//    // Temporary file
-//    QString fileNameSf2 = fileName.left(fileName.length() - 4) + "_tmp.sf2";
-//    if (QFile(fileNameSf2).exists()) {
-//        int index = 2;
-//        QString left = fileNameSf2.left(fileNameSf2.length() - 8);
-//        while (QFile(left + "-" + QString::number(index) + "_tmp.sf2").exists())
-//            index++;
-//        fileNameSf2 = left + "-" + QString::number(index) + "_tmp.sf2";
-//    }
+    Q_UNUSED(sm)
 
-//    // Save sf2 first
-//    if (this->sauvegarderSf2(indexSf2, fileNameSf2) == 0)
-//    {
-//        // Then create sf3
-//        SfConvert::SoundFont sf(fileNameSf2);
-//        if (sf.read())
-//        {
-//            QFile fo(fileName);
-//            if (fo.open(QIODevice::WriteOnly))
-//            {
-//                sf.write(&fo, quality);
-//                fo.close();
-//            }
-//            else
-//                ret = 3;
-//        }
-//        else
-//            ret = 3;
-//    }
-//    else
-//        ret = 3;
+    // First save in the sf2 format
+    QString fileNameSf2 = fileName.left(fileName.length() - 4) + "_tmp";
+    if (QFile(fileNameSf2 + ".sf2").exists())
+    {
+        int index = 1;
+        while (QFile(fileNameSf2 + "-" + QString::number(index) + ".sf2").exists())
+            index++;
+        fileNameSf2 = fileNameSf2 + "-" + QString::number(index);
+    }
+    fileNameSf2 += ".sf2";
 
-//    // Delete the sf2 temporary file
-//    QFile::remove(fileNameSf2);
+    AbstractOutput * outputSf2 = OutputFactory::getOutput(fileNameSf2);
+    outputSf2->process(sf2Index, false);
+    error = outputSf2->getError();
+    success = outputSf2->isSuccess();
+    delete outputSf2;
+    if (!success)
+        return;
+
+    // Then create an sf3 file
+    int quality = options.contains("quality") ? options["quality"].toInt() : 1;
+    if (quality < 0)
+        quality = 0;
+    else if (quality > 2)
+        quality = 2;
+
+    SfConvert::SoundFont sf(fileNameSf2);
+    if (sf.read())
+    {
+        QFile fo(fileName);
+        if (fo.open(QIODevice::WriteOnly))
+        {
+            if (sf.write(&fo, quality))
+            {
+                error = "";
+                success = true;
+            }
+            else
+            {
+                error = trUtf8("Erreur lors de la conversion sf3");
+                success = false;
+            }
+            fo.close();
+        }
+        else
+        {
+            error = trUtf8("Impossible de créer le fichier '%0'").arg(fileName);
+            success = false;
+        }
+    }
+    else
+    {
+        error = trUtf8("Impossible de lire le fichier '%0'").arg(fileNameSf2);
+        success = false;
+    }
+
+    // Delete the sf2 temporary file and the sf2
+    QFile::remove(fileNameSf2);
 }
