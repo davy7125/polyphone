@@ -10,7 +10,8 @@
 #DEFINES += USE_LOCAL_RTMIDI
 #DEFINES += USE_LOCAL_STK
 #DEFINES += USE_LOCAL_QCUSTOMPLOT
-DEFINES += USE_LOCAL_FLUIDSYNTH
+DEFINES += USE_LOCAL_FLUIDSYNTH \
+    SFTOOLS_NOXML
 
 # Polyphone version
 DEFINES += VERSION=2.0
@@ -186,7 +187,6 @@ INCLUDEPATH += mainwindow \
 SOURCES	+= main.cpp \
     core/sound.cpp \
     core/duplicator.cpp \
-    core/oggconverter.cpp \
     core/utils.cpp \
     core/input/sfark/sfarkglobal.cpp \
     core/input/sfark/sfarkfilemanager.cpp \
@@ -416,7 +416,6 @@ SOURCES	+= main.cpp \
 HEADERS  += \
     core/sound.h \
     core/duplicator.h \
-    core/oggconverter.h \
     core/utils.h \
     core/input/sfark/sfarkglobal.h \
     core/input/sfark/sfarkfilemanager.h \

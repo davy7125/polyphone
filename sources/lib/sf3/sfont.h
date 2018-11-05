@@ -4,7 +4,6 @@
 //  $Id:$
 //
 //  Copyright (C) 2010 Werner Schweer and others
-//                2015 Davy Triponney
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -25,9 +24,9 @@
 #include <QtCore/QString>
 #include <QtCore/QList>
 class QFile;
-
-namespace SfConvert {
 class Xml;
+
+namespace SfTools {
 
 //---------------------------------------------------------
 //   sfVersionTag
@@ -158,84 +157,106 @@ struct Sample {
 //---------------------------------------------------------
 
 class SoundFont {
-    QString _path;
-    sfVersionTag _version;
-    char* _engine;
-    char* _name;
-    char* _date;
-    char* _comment;
-    char* _tools;
-    char* _creator;
-    char* _product;
-    char* _copyright;
+    QString path;
+    sfVersionTag version;
+    char* engine;
+    char* name;
+    char* date;
+    char* comment;
+    char* tools;
+    char* creator;
+    char* product;
+    char* copyright;
 
-    int _samplePos;
-    int _sampleLen;
+    int samplePos;
+    int sampleLen;
 
-    QList<Preset*> _presets;
-    QList<Instrument*> _instruments;
+    QList<Preset*> presets;
+    QList<Instrument*> instruments;
 
-    QList<Zone*> _pZones;
-    QList<Zone*> _iZones;
-    QList<Sample*> _samples;
+    QList<Zone*> pZones;
+    QList<Zone*> iZones;
+    QList<Sample*> samples;
 
     QFile* _file;
-    FILE* _f;
+    FILE* f;
 
-    bool _smallSf;
+    bool _compress;
+    double _oggQuality;
+    double _oggAmp;
+    qint64 _oggSerial;
 
     unsigned readDword();
     int readWord();
     int readShort();
     int readByte();
     int readChar();
-    int readFourcc(const char* signature);
-    int readFourcc(char* signature);
+    int readFourcc(const char*);
+    int readFourcc(char*);
     void readSignature(const char* signature);
     void readSignature(char* signature);
-    void skip(int n);
+    void skip(int);
     void readSection(const char* fourcc, int len);
     void readVersion();
-    char* readString(int n);
-    void readPhdr(int len);
-    void readBag(int, QList<Zone*>* zones);
-    void readMod(int, QList<Zone*>* zones);
-    void readGen(int, QList<Zone*>* zones);
-    void readInst(int size);
-    void readShdr(int size);
+    char* readString(int);
+    void readPhdr(int);
+    void readBag(int, QList<Zone*>*);
+    void readMod(int, QList<Zone*>*);
+    void readGen(int, QList<Zone*>*);
+    void readInst(int);
+    void readShdr(int);
 
-    void writeDword(int val);
-    void writeWord(unsigned short int val);
-    void writeByte(unsigned char val);
-    void writeChar(char val);
-    void writeShort(short val);
+    void writeDword(int);
+    void writeWord(unsigned short int);
+    void writeByte(unsigned char);
+    void writeChar(char);
+    void writeShort(short);
     void write(const char* p, int n);
-    void writeSample(const Sample* s);
+    void writeSample(const Sample*);
     void writeStringSection(const char* fourcc, char* s);
-    void writePreset(int zoneIdx, const Preset* preset);
-    void writeModulator(const ModulatorList* m);
-    void writeGenerator(const GeneratorList* g);
-    void writeInstrument(int zoneIdx, const Instrument* instrument);
+    void writePreset(int zoneIdx, const Preset*);
+    void writeModulator(const ModulatorList*);
+    void writeGenerator(const GeneratorList*);
+    void writeInstrument(int zoneIdx, const Instrument*);
 
     void writeIfil();
-    void writeSmpl(int quality);
+    void writeSmpl();
     void writePhdr();
-    void writeBag(const char* fourcc, QList<Zone*>* zones);
-    void writeMod(const char* fourcc, const QList<Zone*>* zones);
-    void writeGen(const char* fourcc, QList<Zone*>* zones);
+    void writeBag(const char* fourcc, QList<Zone*>*);
+    void writeMod(const char* fourcc, const QList<Zone*>*);
+    void writeGen(const char* fourcc, QList<Zone*>*);
     void writeInst();
     void writeShdr();
 
-    int writeCompressedSample(Sample* s, int quality);
-    bool writeCSample(Sample*, int idx);
+    int writeCompressedSample(Sample*);
+    int writeUncompressedSample(Sample* s);
+    bool writeCSample(Sample*, int);
+
+    bool write();
 
 public:
-    SoundFont(const QString& s);
+    SoundFont(const QString&);
     ~SoundFont();
     bool read();
-    bool write(QFile * f, int quality);
+    bool compress(QFile* f, double oggQuality, double oggAmp, qint64 oggSerial = rand());
+    bool uncompress(QFile* f);
+    bool writeCode(QList<int>);
+    bool writeCode();
+    void dumpPresets();
+
+    // Extra option
+    bool smallSf;
+
+#ifndef SFTOOLS_NOXML
+private:
+    void write(Xml&, Zone*);
+    bool writeSampleFile(Sample*, QString);
+
+public:
+    bool readXml(QFile*);
+    bool writeXml(QFile*);
+#endif
 };
 }
-
 #endif
 

@@ -90,10 +90,3 @@ QDataStream & operator >> (QDataStream &in, Sf2Header &header)
     header._isValid = true;
     return in;
 }
-
-QDataStream & operator << (QDataStream &out, const Sf2Header &header)
-{
-    //out << static_cast<qint32>(cls->x) << static_cast<qint32>(cls->y) << cls->ok << cls->message;
-
-    return out;
-}

@@ -19,8 +19,10 @@ public:
     /// Initialize the parser (done by the InputFactory)
     void initialize(QString fileName, SoundfontManager * sm);
 
-    /// Process a file. The function returns immediately and the signal "finished" is sent later
-    void process();
+    /// Process a file.
+    /// When async is false, the function returns when the job is done
+    /// Otherwise the function returns immediately and the signal "finished" is sent later
+    void process(bool async);
 
     /// Return true after having processed the file if it was successful
     bool isSuccess() { return _isSuccess; }

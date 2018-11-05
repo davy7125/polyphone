@@ -17,6 +17,6 @@ public:
 
 // Extension methods for QDataStream to serialize / deserialize
 QDataStream & operator >> (QDataStream &in, Sf2PdtaPart_gen &gen);
-QDataStream & operator << (QDataStream &out, const Sf2PdtaPart_gen &gen);
+//QDataStream & operator << (QDataStream &out, const Sf2PdtaPart_gen &gen);
 
 #endif // SF2PDTAPART_GEN_H

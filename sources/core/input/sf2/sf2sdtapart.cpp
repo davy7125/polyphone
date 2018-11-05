@@ -79,9 +79,3 @@ QDataStream & operator >> (QDataStream &in, Sf2SdtaPart &sdta)
     sdta._isValid = true;
     return in;
 }
-
-
-QDataStream & operator << (QDataStream &out, const Sf2SdtaPart &sdta)
-{
-    return out;
-}

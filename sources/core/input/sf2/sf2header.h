@@ -28,6 +28,6 @@ public:
 
 // Extension methods for QDataStream to serialize / deserialize
 QDataStream & operator >> (QDataStream &in, Sf2Header &header);
-QDataStream & operator << (QDataStream &out, const Sf2Header &header);
+//QDataStream & operator << (QDataStream &out, const Sf2Header &header);
 
 #endif // SF2HEADER_H
