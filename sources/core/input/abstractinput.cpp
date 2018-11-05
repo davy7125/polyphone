@@ -32,10 +32,15 @@ void AbstractInput::initialize(QString fileName, SoundfontManager * sm)
     _sm = sm;
 }
 
-void AbstractInput::process()
+void AbstractInput::process(bool async)
 {
-    QFuture<void> future = QtConcurrent::run(this, &AbstractInput::processAsync);
-    _futureWatcher->setFuture(future);
+    if (async)
+    {
+        QFuture<void> future = QtConcurrent::run(this, &AbstractInput::processAsync);
+        _futureWatcher->setFuture(future);
+    }
+    else
+        processAsync();
 }
 
 void AbstractInput::processAsync()
@@ -62,6 +67,8 @@ void AbstractInput::processAsync()
         _sm->set(id, champ_filenameInitial, _fileName);
         _sm->set(id, champ_filenameForData, tempFilePath.isEmpty() ? _fileName : tempFilePath);
     }
+    else if (!tempFilePath.isEmpty())
+        QFile::remove(tempFilePath);
 
     // The operation are not stored in the action manager
     _sm->clearNewEditing();

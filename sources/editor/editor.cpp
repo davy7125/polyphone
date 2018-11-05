@@ -66,7 +66,7 @@ void Editor::initialize(AbstractInput * input)
     ui->labelFileName->setText(input->getFileName());
     ui->labelFileName2->setText(input->getFileName());
     connect(input, SIGNAL(finished()), this, SLOT(inputProcessed()));
-    input->process();
+    input->process(true);
 }
 
 void Editor::inputProcessed()

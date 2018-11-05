@@ -245,7 +245,6 @@ void OutputSf2::processInternal(QString fileName, SoundfontManager * sm, bool &s
     dwTmp = 4; fi.write((char *)&dwTmp, 4);
     id.typeElement = elementSf2;
 
-    // sfVersionTmp = sm->get(id, champ_IFIL).sfVerValue; // Message d'erreur dans Viena
     if (sm->get(id, champ_wBpsSave).wValue == 24)
     {
         sfVersionTmp.wMajor = 2;
@@ -410,7 +409,7 @@ void OutputSf2::processInternal(QString fileName, SoundfontManager * sm, bool &s
     taille_smpl -= 12;
     fi.write((char *)&taille_smpl, 4);
     id2.typeElement = elementSmpl;
-    dwTmp2 = 10*4 + taille_info;
+    dwTmp2 = 10 * 4 + taille_info;
     QByteArray baData;
     foreach (int i, sm->getSiblings(id2))
     {

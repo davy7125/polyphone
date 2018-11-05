@@ -30,26 +30,33 @@ Soundfont::Soundfont(EltID id) :
     SfVersionTag sfVersionTmp;
     sfVersionTmp.wMajor = 2;
     sfVersionTmp.wMinor = 4;
-    this->_IFIL = sfVersionTmp;
+    _IFIL = sfVersionTmp;
     sfVersionTmp.wMajor = 0;
     sfVersionTmp.wMinor = 0;
-    this->_IVER = sfVersionTmp;
-    this->_ISNG = "EMU8000";
-    this->_INAM = "";
-    this->_IROM = "";
-    this->_ICRD = "";
-    this->_IENG = "";
-    this->_IPRD = "";
-    this->_ICOP = "";
-    this->_ICMT = "";
-    this->_ISFT = "";
-    this->_fileNameForData = "";
-    this->_fileNameInitial = "";
-    this->_numEdition = 0;
+    _IVER = sfVersionTmp;
+    _ISNG = "EMU8000";
+    _INAM = "";
+    _IROM = "";
+    _ICRD = "";
+    _IENG = "";
+    _IPRD = "";
+    _ICOP = "";
+    _ICMT = "";
+    _ISFT = "";
+    _fileNameForData = "";
+    _fileNameInitial = "";
+    _numEdition = 0;
 }
 
 Soundfont::~Soundfont()
 {
+    // Possibly delete a temporary file associated to the soundfont
+    if (!_fileNameForData.isEmpty() && _fileNameForData != _fileNameInitial)
+    {
+        // Delete the temporary file
+        QFile::remove(_fileNameForData);
+    }
+
     // Delete all presets
     QList<int> keys = _prst.keys();
     foreach (int key, keys)

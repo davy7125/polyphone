@@ -37,8 +37,3 @@ QDataStream & operator >> (QDataStream &in, Sf2PdtaPart_phdr &phdr)
     phdr._isValid = true;
     return in;
 }
-
-QDataStream & operator << (QDataStream &out, const Sf2PdtaPart_phdr &phdr)
-{
-    return out;
-}
