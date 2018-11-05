@@ -18,7 +18,3 @@ QDataStream & operator >> (QDataStream &in, Sf2PdtaPart_bag &bag)
     return in;
 }
 
-QDataStream & operator << (QDataStream &out, const Sf2PdtaPart_bag &bag)
-{
-    return out;
-}

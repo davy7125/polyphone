@@ -31,8 +31,6 @@ signals:
     void recorderDisplayChanged(bool isDisplayed);
     void keyboardDisplayChanged(bool isDisplayed);
 
-public slots:
-
 private slots:
     void inputProcessed();
     void onSelectionChanged(IdList ids);

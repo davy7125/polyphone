@@ -31,18 +31,21 @@ void OutputSf3::processInternal(QString fileName, SoundfontManager * sm, bool &s
 
     // Then create an sf3 file
     int quality = options.contains("quality") ? options["quality"].toInt() : 1;
-    if (quality < 0)
-        quality = 0;
-    else if (quality > 2)
-        quality = 2;
+    double qualityValue = 1.0;
+    switch (quality)
+    {
+    case 0: qualityValue = 0.2; break;
+    case 1: qualityValue = 0.6; break;
+    case 2: qualityValue = 1.0; break;
+    }
 
-    SfConvert::SoundFont sf(fileNameSf2);
+    SfTools::SoundFont sf(fileNameSf2);
     if (sf.read())
     {
         QFile fo(fileName);
         if (fo.open(QIODevice::WriteOnly))
         {
-            if (sf.write(&fo, quality))
+            if (sf.compress(&fo, qualityValue, -1.0))
             {
                 error = "";
                 success = true;

@@ -61,6 +61,6 @@ public:
 
 // Extension methods for QDataStream to serialize / deserialize
 QDataStream & operator >> (QDataStream &in, Sf2PdtaPart &pdta);
-QDataStream & operator << (QDataStream &out, const Sf2PdtaPart &pdta);
+//QDataStream & operator << (QDataStream &out, const Sf2PdtaPart &pdta);
 
 #endif // SF2PDTAPART_H

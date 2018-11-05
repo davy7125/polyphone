@@ -63,7 +63,6 @@ void InputSf2::parse(QDataStream &stream, bool &success, QString &error, int &sf
     fillSf2(header, sdtaPart, pdtaPart, success, error, sf2Index);
 }
 
-
 void InputSf2::fillSf2(Sf2Header &header, Sf2SdtaPart &sdtaPart, Sf2PdtaPart &pdtaPart, bool &success, QString &error, int &sf2Index)
 {
     // Create a new soundfont
@@ -129,7 +128,6 @@ void InputSf2::fillSf2(Sf2Header &header, Sf2SdtaPart &sdtaPart, Sf2PdtaPart &pd
         // Start / end / length of the sample
         value.dwValue = SHDR._end.value - SHDR._start.value;
         _sm->set(id, champ_dwLength, value);
-        //value.dwValue = SHDR._start * (isSf3 ? 1: 2) + (20 + header._infoSize + sdtaPart._startSmplOffset);
         value.dwValue = SHDR._start.value * 2 + (20 + header._infoSize.value + sdtaPart._startSmplOffset);
         _sm->set(id, champ_dwStart16, value);
         if (sdtaPart._startSm24Offset > 0)
@@ -148,46 +146,10 @@ void InputSf2::fillSf2(Sf2Header &header, Sf2SdtaPart &sdtaPart, Sf2PdtaPart &pd
         }
 
         // Loop
-        value.dwValue = SHDR._startLoop.value - SHDR._start.value; // Si sf3, ne pas soustraire
+        value.dwValue = SHDR._startLoop.value - SHDR._start.value;
         _sm->set(id, champ_dwStartLoop, value);
         value.dwValue = SHDR._endLoop.value - SHDR._start.value;
         _sm->set(id, champ_dwEndLoop, value);
-
-
-        // Récupération des données
-        /* if (copySamples || isSf3)
-        {
-            // Remplissage des champs smpl et smpl24 à partir des données
-            quint32 length = get(id, champ_dwLength).dwValue;
-            QIODevice * fi = stream->device();
-            fi->seek(get(id, champ_dwStart16).dwValue);
-            QByteArray baData;
-            if (isSf3)
-            {
-                QByteArray arrayTmp;
-                arrayTmp.resize(length);
-                stream->readRawData(arrayTmp.data(), length);
-
-                OggConverter oggConverter(arrayTmp);
-                baData = oggConverter.GetDecodedData();
-
-                value.dwValue = baData.size() / 2;
-                this->set(id, champ_dwLength, value, false);
-            }
-            else
-            {
-                baData.resize(2 * length);
-                stream->readRawData(baData.data(), 2 * length);
-            }
-            this->set(id, champ_sampleData16, baData, false);
-            if (wSm24)
-            {
-                fi->seek(get(id, champ_dwStart24).dwValue);
-                baData.resize(length);
-                stream->readRawData(baData.data(), length);
-                this->set(id, champ_sampleData24, baData, false);
-            }
-        }*/
     }
 
     /// Instruments
