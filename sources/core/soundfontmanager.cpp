@@ -656,6 +656,7 @@ void SoundfontManager::markAsSaved(int indexSf2)
 {
     QMutexLocker locker(&_mutex);
     _soundfonts->getSoundfont(indexSf2)->_numEdition = this->_undoRedo->getEdition(indexSf2);
+    emit(editingDone("command:save", QList<int>() << indexSf2));
 }
 
 bool SoundfontManager::isEdited(int indexSf2)

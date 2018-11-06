@@ -7,6 +7,7 @@
 #include "soundfontfilter.h"
 #include "editor.h"
 #include "inputfactory.h"
+#include "outputfactory.h"
 #include <QFileInfo>
 #include <QMessageBox>
 #include <QAbstractButton>
@@ -146,6 +147,7 @@ void WindowManager::onTabCloseRequested(int tabIndex)
     {
         // Close a soundfont
         Editor * editor = (Editor*)widget;
+        editor->setFocus();
 
         int ret;
         EltID id(elementSf2, editor->getSf2Index());
@@ -176,7 +178,7 @@ void WindowManager::onTabCloseRequested(int tabIndex)
         case QMessageBox::Cancel:
             return;
         case QMessageBox::Save:
-            //if (sauvegarder(id.indexSf2, false))
+            if (!OutputFactory::save(id.indexSf2, false))
                 return;
         case QMessageBox::Discard:
             if (id.indexSf2 >= 0)
