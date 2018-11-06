@@ -25,26 +25,20 @@ void InputSfArk::processInternal(QString fileName, SoundfontManager * sm, bool &
     }
     tempFilePath += ".sf2";
 
-    // Extraction sfArk
-    bool isVersion1;
-    SfArkExtractor1 * extractorTmp = new SfArkExtractor1(fileName.toStdString().c_str(), isVersion1);
-    delete extractorTmp;
-
+    // Take the right version of the extractor
     AbstractExtractor * sfArkExtractor;
-    if (isVersion1)
-        sfArkExtractor = new SfArkExtractor1(fileName.toStdString().c_str());
+    SfArkExtractor1 * extractorV1 = new SfArkExtractor1(fileName.toStdString().c_str());
+    if (extractorV1->isVersion1())
+        sfArkExtractor = extractorV1;
     else
-        sfArkExtractor = new SfArkExtractor2(fileName.toStdString().c_str());
-
-    sfArkExtractor->extract();
-    int size = 0;
-    char * rawData = NULL;
-    if (sfArkExtractor->getData(rawData, size))
     {
-        QByteArray data(rawData, size);
-        QDataStream streamSf2(&data, QIODevice::ReadOnly);
-        //sm->open(fileName, &streamSf2, sf2Index, true);
+        delete extractorV1;
+        sfArkExtractor = new SfArkExtractor2(fileName.toStdString().c_str());
+    }
 
+    // Convert data
+    if (sfArkExtractor->extract(tempFilePath.toStdString().c_str()))
+    {
         // Then load the sf2
         AbstractInput * sf2Input = InputFactory::getInput(tempFilePath);
         sf2Input->process(false);
@@ -59,4 +53,6 @@ void InputSfArk::processInternal(QString fileName, SoundfontManager * sm, bool &
     }
     else
         error = sfArkExtractor->getError();
+
+    delete sfArkExtractor;
 }

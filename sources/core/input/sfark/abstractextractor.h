@@ -35,9 +35,8 @@ class AbstractExtractor: public QObject
 
 public:
     AbstractExtractor() {}
-    virtual ~AbstractExtractor();
-    virtual void extract() = 0;
-    virtual bool getData(char *&data, qint32 &size) = 0;
+    virtual ~AbstractExtractor() {}
+    virtual bool extract(const char * outputFilePath) = 0;
     virtual QString getError() = 0;
 };
 

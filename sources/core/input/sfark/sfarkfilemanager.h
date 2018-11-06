@@ -55,16 +55,12 @@ public:
     // Return the number of bytes written, -1 otherwise
     int write(int fileHandler, const char * ptr, unsigned int count);
 
-    // Return all data of a simulated file
-    char * retrieveData(const char * name, int &size);
-
-    // Clear all files
-    void clearFiles();
+    // Clear data (not the files)
+    void clearData();
 
 private:
     QMap<QString, int> _mapName;
     QMap<int, QDataStream *> _mapDataStream;
-    QMap<int, QByteArray *> _mapByteArray;
     QMap<int, QFile *> _mapFile;
 
     static int _maxFileHandler;

@@ -715,7 +715,6 @@ HEADERS += lib/sfarklib/sfArkLib.h \
 SPECIAL_SOURCE = core/input/sfark/sfarkextractor1.cpp
 macx {
     SOURCES += core/input/sfark/sfarkextractor2.cpp \
-        core/input/sfark/abstractextractor.cpp \
         lib/sfarklib/sfklZip.cpp \
         lib/sfarklib/sfklLPC.cpp \
         lib/sfarklib/sfklDiff.cpp \
@@ -723,7 +722,6 @@ macx {
         lib/sfarklib/sfklCoding.cpp
 } else {
     SPECIAL_SOURCE += core/input/sfark/sfarkextractor2.cpp \
-        core/input/sfark/abstractextractor.cpp \
         lib/sfarklib/sfklZip.cpp \
         lib/sfarklib/sfklLPC.cpp \
         lib/sfarklib/sfklDiff.cpp \
