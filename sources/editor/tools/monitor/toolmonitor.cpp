@@ -29,7 +29,7 @@ bool ToolMonitor::isCompatible(IdList ids)
     return false;
 }
 
-void ToolMonitor::run(SoundfontManager * sm, QWidget * parent, IdList ids, AbstractToolParameters * parameters)
+void ToolMonitor::runInternal(SoundfontManager * sm, QWidget * parent, IdList ids, AbstractToolParameters * parameters)
 {
     _isInst = (ids.count() == 0 || ids[0].typeElement == elementInst || ids[0].typeElement == elementInstSmpl);
 

@@ -15,12 +15,6 @@ public:
     AbstractToolIterating(QList<ElementType> elementTypes, AbstractToolParameters * parameters = nullptr, AbstractToolGui * gui = nullptr);
     virtual ~AbstractToolIterating() override;
 
-    /// Return true if the tool can be used on the specified ids
-    bool isCompatible(IdList ids) override;
-
-    /// Run the tool on a list of id
-    void run(SoundfontManager * sm, QWidget * parent, IdList ids, AbstractToolParameters * parameters) override;
-
     /// Method executed before the iterating process
     virtual void beforeProcess(IdList ids) { Q_UNUSED(ids) }
 
@@ -31,6 +25,12 @@ signals:
     void elementProcessed();
 
 protected:
+    /// Return true if the tool can be used on the specified ids
+    bool isCompatible(IdList ids) override;
+
+    /// Run the tool on a list of id
+    void runInternal(SoundfontManager * sm, QWidget * parent, IdList ids, AbstractToolParameters * parameters) override;
+
     // Additional configurations
     bool _openWaitDialogJustInProcess; // false by default
     bool _async; // true by default

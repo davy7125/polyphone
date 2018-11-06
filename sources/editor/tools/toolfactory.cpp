@@ -65,6 +65,7 @@ ToolFactory::ToolFactory(QWidget * parent)
 
 ToolFactory::~ToolFactory()
 {
+    // Delete all tools
     while (!_tools.empty())
         delete _tools.takeFirst();
 }

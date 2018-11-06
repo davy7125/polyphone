@@ -20,7 +20,7 @@ bool ToolChords::isCompatible(IdList ids)
     return ids.getSelectedIds(elementInst).count() == 1;
 }
 
-void ToolChords::run(SoundfontManager * sm, QWidget * parent, IdList ids, AbstractToolParameters * parameters)
+void ToolChords::runInternal(SoundfontManager * sm, QWidget * parent, IdList ids, AbstractToolParameters * parameters)
 {
     ToolChords_parameters * params = (ToolChords_parameters *)parameters;
     _canceled = false;

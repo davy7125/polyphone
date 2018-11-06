@@ -24,11 +24,13 @@
 
 #include <QApplication>
 #include <QFileInfo>
-#include <QSettings>
 #include <QStyleFactory>
 #include <QItemSelection>
 #include "soundfontmanager.h"
-#include "sfz/conversion_sfz.h"
+#include "inputfactory.h"
+#include "abstractinput.h"
+#include "outputfactory.h"
+#include "abstractoutput.h"
 #include "options.h"
 #include "contextmanager.h"
 
@@ -37,15 +39,13 @@
 #endif
 #include "mainwindow.h"
 #include "translationmanager.h"
-
 #include <QDir>
-#include <QDebug>
 
 #ifdef Q_OS_MAC
 #include "macapplication.h"
 #endif
 
-int launchApplication(Options &options, QApplication &a)
+int launchApplication(Options &options, QApplication& a)
 {
     // Application name
     a.setApplicationName("Polyphone");
@@ -58,9 +58,8 @@ int launchApplication(Options &options, QApplication &a)
         qApp->setPalette(ContextManager::theme()->getPalette());
     } catch (...) { /* bug with mac */ }
 
-    // Additional types used in signals
+    // Additional type used in signals
     qRegisterMetaType<EltID>("EltID");
-    qRegisterMetaType<QItemSelection>("QItemSelection");
 
     // Display the main window
     MainWindow w;
@@ -68,9 +67,8 @@ int launchApplication(Options &options, QApplication &a)
 
     // Open files passed as argument
     QStringList inputFiles = options.getInputFiles();
-    int numSf2 = -1;
-//    foreach (QString file, inputFiles)
-//        w.dragAndDrop(file.replace('\\', '/'), EltID(elementUnknown, -1, -1, -1, -1), &numSf2);
+    foreach (QString file, inputFiles)
+        w.openFile(file);
 
 #ifdef Q_OS_MAC
     QObject::connect(&a, SIGNAL(openFile(QString)), &w, SLOT(dragAndDrop(QString)));
@@ -86,16 +84,19 @@ int launchApplication(Options &options, QApplication &a)
 /// 4: cannot save the output file (internal problem or write access denied)
 int convert(Options &options)
 {
+    // Check the input file
     QFileInfo inputFile(options.getInputFiles()[0]);
+    if (!inputFile.exists())
+    {
+        qWarning() << "The file" << inputFile.filePath() << "does not exist.";
+        return 1;
+    }
+
+    // Check the output
     QFileInfo outputFile(options.getOutputFileFullPath());
     if (!QDir(options.getOutputDirectory()).exists())
     {
         qWarning() << "The directory" << options.getOutputDirectory() << "does not exist.";
-        return 1;
-    }
-    if (!inputFile.exists())
-    {
-        qWarning() << "The file" << inputFile.filePath() << "does not exist.";
         return 1;
     }
     if (outputFile.exists() && options.mode() != Options::MODE_CONVERSION_TO_SFZ)
@@ -105,93 +106,62 @@ int convert(Options &options)
     }
 
     // Load input file
-    SoundfontManager * sf2 = SoundfontManager::getInstance();
-    QString inputExtension = inputFile.suffix().toLower();
-    qDebug() << "Loading file" << inputFile.filePath() << "...";
-    if (inputExtension == "sf2" || inputExtension == "sf3")
+    qInfo() << "Loading file" << inputFile.filePath() << "...";
+    AbstractInput * input = InputFactory::getInput(inputFile.filePath());
+    input->process(false);
+    if (!input->isSuccess())
     {
-        int indexSf2;
-        /*if (sf2->open(inputFile.filePath(), indexSf2) > 0)
-        {
-            qWarning() << "fail";
-            return 3;
-        }*/
+        qWarning() << "Couldn't load" << inputFile.filePath() + ":" << input->getError();
+        delete input;
+        return 1;
     }
-    else if (inputExtension == "sfz")
-    {
-//        ImportSfz importSfz(sf2);
-//        int num = -1;
-//        qDebug() << "conversion sfz" <<  inputFile.filePath();
-//        importSfz.import(inputFile.filePath(), &num);
-//        qDebug() << "import ok" << num;
-    }
-    else if (inputExtension == "sfark")
-    {
-        bool ok = false;
+    int sf2Index = input->getSf2Index();
+    delete input;
+    qInfo() << "File loaded";
 
-//        SfArkExtractor sfArkExtractor(inputFile.filePath().toStdString().c_str(), NULL);
-//        sfArkExtractor.extract();
-//        int size = 0;
-//        char * rawData = NULL;
-//        if (sfArkExtractor.getData(rawData, size))
-//        {
-//            QByteArray data(rawData, size);
-//            QDataStream streamSf2(&data, QIODevice::ReadOnly);
-//            int indexSf2 = -1;
-//            ok = (sf2->open("", &streamSf2, indexSf2, true) <= 0);
-//        }
-
-        if (!ok)
-        {
-            qWarning() << "fail";
-            return 3;
-        }
-    }
-    else
-    {
-        qWarning() << "fail";
-        return 2;
-    }
-    qWarning() << "done";
-
-    // Save in output file
+    // Prepare the output with the respective options
+    AbstractOutput * output = OutputFactory::getOutput(outputFile.filePath());
     switch (options.mode())
     {
-    case Options::MODE_CONVERSION_TO_SF2: case Options::MODE_CONVERSION_TO_SF3:
+    case Options::MODE_CONVERSION_TO_SF2:
         qDebug() << "Saving file" << outputFile.filePath() << "...";
-//        if (sf2->save(0, outputFile.filePath(), options.quality()) != 0)
-//        {
-//            qWarning() << "fail";
-//            return 4;
-//        }
+        break;
+    case Options::MODE_CONVERSION_TO_SF3:
+        output->setOption("quality", options.quality());
+        qDebug() << "Saving file" << outputFile.filePath() << "...";
         break;
     case Options::MODE_CONVERSION_TO_SFZ: {
-        qDebug() << "Exporting in directory" << options.getOutputDirectory() << "...";
-
-        // Preset list
-        EltID id = EltID(elementPrst, 0, -1, 0, 0);
-        QList<int> presetNumbers = sf2->getSiblings(id);
-        QList<EltID> presets;
-        foreach (int presetNumber, presetNumbers)
-        {
-            EltID idTmp = id;
-            idTmp.indexElt = presetNumber;
-            presets << idTmp;
-        }
-
-        // Conversion sfz
-        ConversionSfz conversionSfz;
-//        conversionSfz.convert(QDir(options.getOutputDirectory()).absolutePath(), presets,
-//                              options.sfzPresetPrefix(), options.sfzOneDirPerBank(), options.sfzGeneralMidi());
-
+        output->setOption("prefix", options.sfzPresetPrefix());
+        output->setOption("bankdir", options.sfzOneDirPerBank());
+        output->setOption("gmsort", options.sfzGeneralMidi());
+        qInfo() << "Exporting in directory" << options.getOutputDirectory() << "...";
+        break;
     } break;
     default:
         qWarning() << "fail";
-        return 2;
+        return 1;
     }
 
-    qWarning() << "done";
+    // Convert
+    output->process(sf2Index, false);
+    if (!output->isSuccess())
+    {
+        qWarning() << "Couldn't create" << outputFile.filePath() + ":" << output->getError();
+        delete output;
+        return 1;
+    }
+    delete output;
+    qInfo() << "done";
+
+    // Destroy a singleton that has been silently created
     SoundfontManager::kill();
+    return 0;
+}
+
+int displayHelp(Options &options)
+{
+    Q_UNUSED(options)
+    qInfo() << "write \"man polyphone\" to show usage";
     return 0;
 }
 
@@ -202,22 +172,15 @@ int main(int argc, char *argv[])
 #else
     QApplication a(argc, argv);
 #endif
-
     Options options(argc, argv);
     int valRet = 0;
 
-    if (options.error())
-    {
-        // Show usage
-        qDebug() << "write \"man polyphone\" to show usage";
-    }
+    if (options.error() || options.help())
+        valRet = displayHelp(options);
+    else if (options.mode() == Options::MODE_GUI)
+        valRet = launchApplication(options, a);
     else
-    {
-        if (options.mode() == Options::MODE_GUI)
-            valRet = launchApplication(options, a);
-        else
-            valRet = convert(options);
-    }
+        valRet = convert(options);
 
     return valRet;
 }

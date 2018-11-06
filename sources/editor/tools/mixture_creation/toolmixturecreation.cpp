@@ -20,7 +20,7 @@ bool ToolMixtureCreation::isCompatible(IdList ids)
     return ids.getSelectedIds(elementInst).count() == 1;
 }
 
-void ToolMixtureCreation::run(SoundfontManager * sm, QWidget * parent, IdList ids, AbstractToolParameters * parameters)
+void ToolMixtureCreation::runInternal(SoundfontManager * sm, QWidget * parent, IdList ids, AbstractToolParameters * parameters)
 {
     ToolMixtureCreation_parameters * params = (ToolMixtureCreation_parameters *)parameters;
     _sampleKey.clear();
