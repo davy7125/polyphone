@@ -35,7 +35,7 @@ protected:
     bool isCompatible(IdList ids) override;
 
     /// Run the tool, emit the signal "finished" at the end
-    void run(SoundfontManager * sm, QWidget * parent, IdList ids, AbstractToolParameters * parameters) override;
+    void runInternal(SoundfontManager * sm, QWidget * parent, IdList ids, AbstractToolParameters * parameters) override;
 
 private:
     bool _isInst;

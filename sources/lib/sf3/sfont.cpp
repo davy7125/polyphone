@@ -101,6 +101,11 @@ SoundFont::SoundFont(const QString& s)
     creator   = 0;
     product   = 0;
     copyright = 0;
+    irom      = 0;
+    version.major = 0;
+    version.minor = 0;
+    iver.major = 0;
+    iver.minor = 0;
     smallSf   = false;
 }
 
@@ -114,6 +119,7 @@ SoundFont::~SoundFont()
     free(creator);
     free(product);
     free(copyright);
+    free(irom);
 }
 
 //---------------------------------------------------------
@@ -327,13 +333,13 @@ int SoundFont::readChar()
 //   readVersion
 //---------------------------------------------------------
 
-void SoundFont::readVersion()
+void SoundFont::readVersion(sfVersionTag * v)
 {
     unsigned char data[4];
     if (_file->read((char*)data, 4) != 4)
         throw(QString("unexpected end of file\n"));
-    version.major = data[0] + (data[1] << 8);
-    version.minor = data[2] + (data[3] << 8);
+    v->major = data[0] + (data[1] << 8);
+    v->minor = data[2] + (data[3] << 8);
 }
 
 //---------------------------------------------------------
@@ -360,7 +366,7 @@ void SoundFont::readSection(const char* fourcc, int len)
 
     switch(FOURCC(fourcc[0], fourcc[1], fourcc[2], fourcc[3])) {
     case FOURCC('i', 'f', 'i', 'l'):    // version
-        readVersion();
+        readVersion(&version);
         break;
     case FOURCC('I','N','A','M'):       // sound font name
         name = readString(len);
@@ -422,7 +428,11 @@ void SoundFont::readSection(const char* fourcc, int len)
         readShdr(len);
         break;
     case FOURCC('i', 'r', 'o', 'm'):    // sample rom
+        irom = readString(len);
+        break;
     case FOURCC('i', 'v', 'e', 'r'):    // sample rom version
+        readVersion(&iver);
+        break;
     default:
         skip(len);
         throw(QString("unknown fourcc <%1>").arg(fourcc));
@@ -648,6 +658,9 @@ bool SoundFont::write()
             writeStringSection("ICMT", comment);
         if (copyright)
             writeStringSection("ICOP", copyright);
+        if (irom)
+            writeStringSection("irom", irom);
+        writeIver();
 
         qint64 pos = _file->pos();
         _file->seek(listLenPos);
@@ -763,6 +776,22 @@ void SoundFont::writeIfil()
     data[1] = version.major >> 8;
     data[2] = version.minor;
     data[3] = version.minor >> 8;
+    write((char*)data, 4);
+}
+
+//---------------------------------------------------------
+//   writeIVer
+//---------------------------------------------------------
+
+void SoundFont::writeIver()
+{
+    write("iver", 4);
+    writeDword(4);
+    unsigned char data[4];
+    data[0] = iver.major;
+    data[1] = iver.major >> 8;
+    data[2] = iver.minor;
+    data[3] = iver.minor >> 8;
     write((char*)data, 4);
 }
 

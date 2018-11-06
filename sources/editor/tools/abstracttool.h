@@ -42,7 +42,7 @@ protected:
     virtual bool isCompatible(IdList ids) = 0;
 
     /// Run the tool, emit the signal "finished" at the end
-    virtual void run(SoundfontManager * sm, QWidget * parent, IdList ids, AbstractToolParameters * parameters) = 0;
+    virtual void runInternal(SoundfontManager * sm, QWidget * parent, IdList ids, AbstractToolParameters * parameters) = 0;
 
     /// Get the warning to display after the tool is run
     virtual QString getWarning() { return ""; }

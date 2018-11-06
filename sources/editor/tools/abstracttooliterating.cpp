@@ -68,7 +68,7 @@ bool AbstractToolIterating::isCompatible(IdList ids)
     return false;
 }
 
-void AbstractToolIterating::run(SoundfontManager * sm, QWidget * parent, IdList ids, AbstractToolParameters *parameters)
+void AbstractToolIterating::runInternal(SoundfontManager * sm, QWidget * parent, IdList ids, AbstractToolParameters *parameters)
 {
     _sm = sm;
     _parameters = parameters;
