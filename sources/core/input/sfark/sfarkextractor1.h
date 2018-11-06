@@ -38,12 +38,11 @@ class SfArkExtractor1: public AbstractExtractor
 {
 public:
     SfArkExtractor1(const char * fileName);
-    SfArkExtractor1(const char * fileName, bool &isVersion1);
 
     virtual ~SfArkExtractor1();
-    virtual void extract();
-    virtual bool getData(char *&data, qint32 &size);
-    virtual QString getError()
+    bool extract(const char * outputFilePath) override;
+    bool isVersion1();
+    QString getError()
     {
         QString error = "";
         switch (_error)

@@ -23,7 +23,6 @@
 ***************************************************************************/
 
 #include "sfarkfilemanager.h"
-
 #include <QFile>
 #include <QDataStream>
 
@@ -34,7 +33,7 @@ SfArkFileManager::SfArkFileManager()
 
 SfArkFileManager::~SfArkFileManager()
 {
-    clearFiles();
+    clearData();
 }
 
 // Return file handler if success, otherwise -1
@@ -60,11 +59,7 @@ int SfArkFileManager::openReadOnly(const char * name)
         }
     }
 
-    if (_mapFile.contains(handler))
-        _mapDataStream[handler] = new QDataStream(_mapFile[handler]);
-    else
-        _mapDataStream[handler] = new QDataStream(_mapByteArray[handler], QIODevice::ReadOnly);
-
+    _mapDataStream[handler] = new QDataStream(_mapFile[handler]);
     return handler;
 }
 
@@ -76,13 +71,21 @@ int SfArkFileManager::create(const char *name)
         handler = _mapName.value(name);
     else
     {
-        _mapName[name] = _maxFileHandler;
-        _mapByteArray[_maxFileHandler] = new QByteArray();
-        _maxFileHandler++;
+        QFile * file = new QFile(name);
+        if (file->open(QIODevice::ReadWrite))
+        {
+            _mapName[name] = _maxFileHandler;
+            _mapFile[_maxFileHandler] = file;
+            _maxFileHandler++;
+        }
+        else
+        {
+            delete file;
+            return -1;
+        }
     }
 
-    _mapDataStream[handler] = new QDataStream(_mapByteArray[handler], QIODevice::ReadWrite);
-
+    _mapDataStream[handler] = new QDataStream(_mapFile[handler]);
     return handler;
 }
 
@@ -93,12 +96,11 @@ void SfArkFileManager::close(int fileHandler)
     if (_mapDataStream.contains(fileHandler))
          delete _mapDataStream.take(fileHandler);
 
-    // Fermeture si fichier ouvert, pas de suppression des byteArrays
+    // Fermeture si fichier ouvert
     if (_mapFile.contains(fileHandler))
     {
         QFile * file = _mapFile.take(fileHandler);
         file->close();
-        delete file;
 
         QString key = _mapName.key(fileHandler, "");
         if (!key.isEmpty())
@@ -140,41 +142,21 @@ int SfArkFileManager::write(int fileHandler, const char *ptr, unsigned int count
     return -1;
 }
 
-char * SfArkFileManager::retrieveData(const char *name, int &size)
-{
-    char * ret = NULL;
-    if (_mapName.contains(name))
-    {
-        int handle = _mapName.value(name);
-        if (_mapByteArray.contains(handle))
-        {
-            QByteArray * data = _mapByteArray.value(handle);
-            ret = data->data();
-            size = data->size();
-        }
-    }
-    return ret;
-}
-
-void SfArkFileManager::clearFiles()
+void SfArkFileManager::clearData()
 {
     _maxFileHandler = 0;
-
     _mapName.clear();
 
+    // Close the data streams
     QList<int> keys = _mapDataStream.keys();
     foreach (int key, keys)
         delete _mapDataStream.take(key);
 
-    keys = _mapByteArray.keys();
-    foreach (int key, keys)
-        delete _mapByteArray.take(key);
-
+    // Close the files
     keys = _mapFile.keys();
     foreach (int key, keys)
     {
         QFile * file = _mapFile.take(key);
         file->close();
-        delete file;
     }
 }

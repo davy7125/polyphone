@@ -41,22 +41,13 @@ SfArkExtractor2::SfArkExtractor2(const char * fileName) : AbstractExtractor(),
 
 SfArkExtractor2::~SfArkExtractor2()
 {
-    _fileManager.clearFiles();
+    _fileManager.clearData();
 }
 
-void SfArkExtractor2::extract()
+bool SfArkExtractor2::extract(const char *outputFilePath)
 {
-    _errorNumber = sfkl_Decode(_filename.toStdString().c_str(), "output.sf2");
+    _errorNumber = sfkl_Decode(_filename.toStdString().c_str(), outputFilePath);
     _error = (_errorNumber != SFARKLIB_SUCCESS && _errorNumber != SFARKLIB_ERR_CORRUPT && _errorNumber != SFARKLIB_ERR_FILECHECK);
-}
-
-bool SfArkExtractor2::getData(char *&data, qint32 &size)
-{
-    if (_error)
-        data = NULL;
-    else
-        data = _fileManager.retrieveData("output.sf2", size);
-
     return !_error;
 }
 
