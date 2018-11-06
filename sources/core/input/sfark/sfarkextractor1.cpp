@@ -39,15 +39,9 @@ SfArkExtractor1::SfArkExtractor1(const char * fileName) : AbstractExtractor(),
     _error = (SfArkError)SfarkOpen(fileName);
 }
 
-SfArkExtractor1::SfArkExtractor1(const char * fileName, bool &isVersion1) : AbstractExtractor(),
-    _sfArkInfo(new SfArkInfo)
+bool SfArkExtractor1::isVersion1()
 {
-    _error = SFARKERR_OK;
-
-    if (SfarkOpen(fileName) == 0)
-        isVersion1 = (_sfArkInfo->CompressType < 3);
-
-    cleanFiles();
+    return _sfArkInfo->CompressType < 3;
 }
 
 SfArkExtractor1::~SfArkExtractor1()
@@ -55,11 +49,11 @@ SfArkExtractor1::~SfArkExtractor1()
     delete _sfArkInfo;
 }
 
-void SfArkExtractor1::extract()
+bool SfArkExtractor1::extract(const char * outputFilePath)
 {
     if (_error == SFARKERR_OK)
     {
-        if (!(_error = (SfArkError)SfarkBeginExtract("output.sf2")))
+        if (!(_error = (SfArkError)SfarkBeginExtract(outputFilePath)))
         {
             do
             {
@@ -71,18 +65,8 @@ void SfArkExtractor1::extract()
         _error = SFARKERR_OK;
 
     cleanFiles();
-}
 
-bool SfArkExtractor1::getData(char *&data, qint32 &size)
-{
-    if (_error == SFARKERR_OK || _error == SFARKERR_CHKSUM) // checksum errors accepted
-    {
-        data = _fileManager.retrieveData("output.sf2", size);
-        return true;
-    }
-
-    data = NULL;
-    return false;
+    return _error == SFARKERR_OK || _error == SFARKERR_CHKSUM; // checksum errors are accepted
 }
 
 
@@ -2182,7 +2166,8 @@ corrupt:								goto bad;
         }
 
         // Close files if an error or we're done
-        if (result) cleanFiles();
+        if (result)
+            cleanFiles();
 
         return result;
     }

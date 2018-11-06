@@ -56,7 +56,7 @@ void Duplicator::copy(EltID idSource, EltID idDest)
             idDest.typeElement != elementRootPrst && idDest.typeElement != elementRootSmpl &&
             idDest.typeElement != elementSmpl) return;
 
-    if (_sm == _sm && idSource.indexSf2 == idDest.indexSf2)
+    if (idSource.indexSf2 == idDest.indexSf2)
     {
         // Lien dans le même Sf2
         switch (idSource.typeElement)
