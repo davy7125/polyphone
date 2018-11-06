@@ -4,7 +4,6 @@
 #include "dialog_rename.h"
 #include "sfz/conversion_sfz.h"
 #include "duplicator.h"
-#include "sfz/import_sfz.h"
 #include "dialogchangelog.h"
 #include "contextmanager.h"
 #include "modalprogressdialog.h"

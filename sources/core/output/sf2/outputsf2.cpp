@@ -2,8 +2,6 @@
 #include "sf2indexconverter.h"
 #include "soundfontmanager.h"
 #include "contextmanager.h"
-#include "oggconverter.h"
-#include "sfont.h"
 #include <QFile>
 #include <QFileInfo>
 

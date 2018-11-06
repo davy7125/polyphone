@@ -59,7 +59,7 @@ TreeViewMenu::TreeViewMenu(QWidget * parent) : QMenu(parent),
 
 TreeViewMenu::~TreeViewMenu()
 {
-    _dialogList->deleteLater();
+    delete _dialogList;
 }
 
 void TreeViewMenu::initialize(IdList ids)

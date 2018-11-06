@@ -20,7 +20,6 @@ void InputSf3::processInternal(QString fileName, SoundfontManager * sm, bool &su
         tempFilePath = tempFilePath + "-" + QString::number(index);
     }
     tempFilePath += ".sf2";
-    qDebug() << "temp file" << tempFilePath;
 
     // First convert to sf2
     SfTools::SoundFont sf(fileName);

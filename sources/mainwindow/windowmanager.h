@@ -7,7 +7,6 @@ class ConfigPanel;
 class SoundfontFilter;
 class SoundfontBrowser;
 class Editor;
-class InputFactory;
 
 class WindowManager : public QObject
 {
@@ -66,7 +65,6 @@ private:
     ConfigPanel * _configTab;
     SoundfontBrowser * _browserTab;
     QList<Editor*> _editors;
-    InputFactory * _inputFactory;
 };
 
 #endif // WINDOWMANAGER_H

@@ -33,17 +33,19 @@
 #include "action.h"
 
 SoundfontManager * SoundfontManager::s_instance = nullptr;
+
 SoundfontManager * SoundfontManager::getInstance()
 {
     if (s_instance == nullptr)
         s_instance = new SoundfontManager();
     return s_instance;
 }
+
 void SoundfontManager::kill()
 {
     if (s_instance != nullptr)
     {
-        s_instance->deleteLater();
+        delete s_instance;
         s_instance = nullptr;
     }
 }
