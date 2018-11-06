@@ -30,8 +30,8 @@
 #include "graphicslegenditem2.h"
 #include "graphicszoomline.h"
 #include "graphicskey.h"
-#include "editor_old.h"
 #include <QScrollBar>
+#include <QMouseEvent>
 
 const double GraphicsViewRange::WIDTH = 128.0;
 const double GraphicsViewRange::MARGIN = 0.5;

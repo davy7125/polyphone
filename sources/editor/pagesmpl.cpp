@@ -24,11 +24,11 @@
 
 #include "pagesmpl.h"
 #include "ui_pagesmpl.h"
-#include "editor_old.h"
 #include "sound.h"
 #include "graphique.h"
 #include "graphiquefourier.h"
 #include "contextmanager.h"
+#include "pianokeybdcustom.h"
 #include <QProgressDialog>
 #include <QInputDialog>
 #include <QDesktopWidget>

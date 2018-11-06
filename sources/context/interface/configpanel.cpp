@@ -28,9 +28,9 @@
 #include <QDesktopServices>
 #include "configpanel.h"
 #include "ui_configpanel.h"
-#include "editor_old.h"
 #include "portaudio.h"
 #include <qmath.h>
+#include <QTimer>
 #include "contextmanager.h"
 
 

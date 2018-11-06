@@ -24,8 +24,7 @@
 
 #include "pageprst.h"
 #include "ui_pageprst.h"
-#include "editor_old.h"
-#include "thememanager.h"
+#include "contextmanager.h"
 #include <QMenu>
 
 // Constructeur, destructeur

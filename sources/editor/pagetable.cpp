@@ -24,7 +24,6 @@
 ***************************************************************************/
 
 #include "pagetable.h"
-#include "editor_old.h"
 #include "contextmanager.h"
 #include "dialogselection.h"
 #include "graphicsviewrange.h"
@@ -32,6 +31,7 @@
 #include "utils.h"
 #include <QScrollBar>
 #include <QMenu>
+#include "pianokeybdcustom.h"
 
 QList<PageTable::Modulator> PageTable::_modulatorCopy;
 

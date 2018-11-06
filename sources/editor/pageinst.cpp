@@ -23,13 +23,13 @@
 ***************************************************************************/
 
 #include "pageinst.h"
-#include "editor_old.h"
-#include "thememanager.h"
 #include "ui_pageinst.h"
 #include <QProgressDialog>
 #include <QInputDialog>
 #include <QMenu>
 #include <qmath.h>
+#include "pianokeybdcustom.h"
+#include "contextmanager.h"
 
 
 PageInst::PageInst(QWidget *parent) :

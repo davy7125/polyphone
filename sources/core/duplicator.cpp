@@ -23,7 +23,11 @@
 ***************************************************************************/
 
 #include "duplicator.h"
-#include "editor_old.h"
+#include <QApplication>
+#include "soundfontmanager.h"
+#include "contextmanager.h"
+#include <QMessageBox>
+#include <QAbstractButton>
 
 Duplicator::Duplicator() :
     _parent(QApplication::activeWindow()),

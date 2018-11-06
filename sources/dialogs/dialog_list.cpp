@@ -24,7 +24,7 @@
 
 #include "dialog_list.h"
 #include "ui_dialog_list.h"
-#include "editor_old.h"
+#include "soundfontmanager.h"
 
 DialogList::DialogList(QWidget *parent) :
     QDialog(parent),
