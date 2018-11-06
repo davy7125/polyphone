@@ -24,7 +24,6 @@
 
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-
 #include "repositorymanager.h"
 #include "windowmanager.h"
 #include "contextmanager.h"
@@ -34,14 +33,14 @@
 #include "dialogrecorder.h"
 #include "mainmenu.h"
 #include <QToolButton>
-#include <QLabel>
+#include <QDesktopWidget>
 #include <QDesktopServices>
 #include <QUrl>
 #include <QTimer>
 #include <QFileDialog>
-#include <QDesktopWidget>
 #include <QMessageBox>
 #include <QCloseEvent>
+#include "outputfactory.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -165,19 +164,19 @@ void MainWindow::closeEvent(QCloseEvent *event)
 
     // Number of files not saved
     EltID id(elementSf2);
-    SoundfontManager * sf2 = SoundfontManager::getInstance();
-    QList<int> nbSf2 = sf2->getSiblings(id);
+    SoundfontManager * sm = SoundfontManager::getInstance();
+    QList<int> nbSf2 = sm->getSiblings(id);
     QStringList fileNames;
     foreach (int i, nbSf2)
     {
         id.indexSf2 = i;
-        if (sf2->isEdited(i))
+        if (sm->isEdited(i))
         {
-            QString name = sf2->getQstr(id, champ_name);
+            QString name = sm->getQstr(id, champ_name);
             if (name.isEmpty())
                 fileNames << trUtf8("sans titre");
             else
-                fileNames << sf2->getQstr(id, champ_name);
+                fileNames << sm->getQstr(id, champ_name);
         }
     }
 
@@ -213,7 +212,7 @@ void MainWindow::closeEvent(QCloseEvent *event)
             foreach (int i, nbSf2)
             {
                 id.indexSf2 = i;
-                if (sf2->isEdited(i))// && sauvegarder(i, false))
+                if (sm->isEdited(i) && !OutputFactory::save(i, false))
                 {
                     event->ignore();
                     return;
@@ -365,10 +364,16 @@ void MainWindow::onCloseFile()
 
 void MainWindow::onSave()
 {
+    // Remove the focus from the interface (so that all changes are taken into account)
+    this->setFocus();
 
+    OutputFactory::save(_windowManager->getCurrentSf2(), false);
 }
 
 void MainWindow::onSaveAs()
 {
+    // Remove the focus from the interface (so that all changes are taken into account)
+    this->setFocus();
 
+    OutputFactory::save(_windowManager->getCurrentSf2(), true);
 }

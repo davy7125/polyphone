@@ -58,6 +58,7 @@ private slots:
     /// Called when the user wants to close a tab
     void onTabCloseRequested(int tabIndex);
 
+    /// Called every time the tab changes
     void onTabIndexChanged(int tabIndex);
 
 private:

@@ -2,7 +2,6 @@
 #define TOOLSOUNDFONTEXPORT_H
 
 #include "abstracttoolonestep.h"
-class OutputFactory;
 
 class ToolSoundfontExport: public AbstractToolOneStep
 {
