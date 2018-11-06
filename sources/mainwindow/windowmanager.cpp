@@ -10,12 +10,12 @@
 #include <QFileInfo>
 #include <QMessageBox>
 #include <QAbstractButton>
+#include <QApplication>
 
 WindowManager::WindowManager(ColoredTabWidget *tabWidget) : QObject(nullptr),
     _tabWidget(tabWidget),
     _configTab(new ConfigPanel()),
-    _browserTab(new SoundfontBrowser()),
-    _inputFactory(new InputFactory())
+    _browserTab(new SoundfontBrowser())
 {
     SoundfontManager * sf2 = SoundfontManager::getInstance();
     connect(sf2, SIGNAL(editingDone(QString,QList<int>)), this, SLOT(editingDone(QString,QList<int>)));
@@ -25,9 +25,11 @@ WindowManager::WindowManager(ColoredTabWidget *tabWidget) : QObject(nullptr),
 
 WindowManager::~WindowManager()
 {
-    delete _inputFactory;
     delete _configTab;
     delete _browserTab;
+    while (_tabWidget->count() > 0)
+        _tabWidget->removeTab(0);
+    QApplication::processEvents();
     while (!_editors.isEmpty())
         delete _editors.takeFirst();
 }
@@ -54,7 +56,7 @@ void WindowManager::openNewSoundfont()
     _editors << editor;
 
     // Initialize and display it
-    editor->initialize(_inputFactory->getInput(""));
+    editor->initialize(InputFactory::getInput(""));
     _tabWidget->setCurrentIndex(index);
 }
 
@@ -97,7 +99,7 @@ void WindowManager::openSoundfont(QString fileName)
     _editors << editor;
 
     // Initialize and display it
-    editor->initialize(_inputFactory->getInput(fileName));
+    editor->initialize(InputFactory::getInput(fileName));
     _tabWidget->setCurrentIndex(index);
 }
 
@@ -184,7 +186,7 @@ void WindowManager::onTabCloseRequested(int tabIndex)
 
         _editors.removeAll(editor);
         _tabWidget->removeTab(tabIndex);
-        editor->deleteLater();
+        delete editor;
 
         if (_editors.empty())
         {

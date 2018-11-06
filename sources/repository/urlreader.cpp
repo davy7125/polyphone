@@ -23,8 +23,8 @@ UrlReader::UrlReader(QString url) :
 UrlReader::~UrlReader()
 {
     _timer->stop();
-    _timer->deleteLater();
-    _webCtrl->deleteLater();
+    delete _timer;
+    delete _webCtrl;
     if (_reply != NULL)
         _reply->deleteLater();
 }

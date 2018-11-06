@@ -29,7 +29,7 @@ ShowSoundfonts::ShowSoundfonts(QWidget *parent) :
 
 ShowSoundfonts::~ShowSoundfonts()
 {
-    _urlReaderJson->deleteLater();
+    delete _urlReaderJson;
     delete ui;
 }
 

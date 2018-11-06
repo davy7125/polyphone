@@ -2211,7 +2211,8 @@ qint32 SfArkExtractor1::SfarkBeginExtract(const void * sfontName)
     {
         // If app didn't specify a name, use the original sfont name (that SfarkOpen stored
         // in WorkBuffer2)
-        if (!sfontName) sfontName = _sfArkInfo->WorkBuffer2;
+        if (!sfontName)
+            sfontName = _sfArkInfo->WorkBuffer2;
 
         if (_sfArkInfo->CompressType == 2)
         {

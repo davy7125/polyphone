@@ -24,7 +24,7 @@ Soundfont * Soundfonts::getSoundfont(int index)
 {
     if (_soundfonts.contains(index))
         return _soundfonts[index];
-    return NULL;
+    return nullptr;
 }
 
 bool Soundfonts::deleteSoundfont(int index)
@@ -46,5 +46,5 @@ QAbstractItemModel * Soundfonts::getModel(int indexSf2)
 {
     if (_soundfonts.contains(indexSf2))
         return _soundfonts[indexSf2]->getModel();
-    return NULL;
+    return nullptr;
 }

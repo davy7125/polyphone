@@ -148,9 +148,9 @@ MainWindow::MainWindow(QWidget *parent) :
 MainWindow::~MainWindow()
 {
     delete ui;
-    _recorder->deleteLater();
-    _keyboard->deleteLater();
-    _windowManager->deleteLater();
+    delete _recorder;
+    delete _windowManager;
+    delete _keyboard;
     SoundfontManager::kill();
     RepositoryManager::kill();
 }
