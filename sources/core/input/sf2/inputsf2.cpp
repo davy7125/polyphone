@@ -72,6 +72,8 @@ void InputSf2::parse(QDataStream &stream, bool &success, QString &error, int &sf
 
 void InputSf2::fillSf2(Sf2Header &header, Sf2SdtaPart &sdtaPart, Sf2PdtaPart &pdtaPart, bool &success, QString &error, int &sf2Index)
 {
+    Q_UNUSED(error)
+
     // Create a new soundfont
     sf2Index = _sm->add(EltID(elementSf2));
     EltID id(elementSf2, sf2Index);

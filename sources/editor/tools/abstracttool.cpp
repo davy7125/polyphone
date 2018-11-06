@@ -18,8 +18,6 @@ AbstractTool::AbstractTool(AbstractToolParameters *parameters, AbstractToolGui *
 
 AbstractTool::~AbstractTool()
 {
-    delete _toolGui;
-    delete _toolDialog;
     delete _toolParameters;
 }
 
@@ -65,7 +63,7 @@ void AbstractTool::onParametersValidated()
     }
 
     // Run the tool, the signal "finished" will be sent
-    run(s_sm, s_parent, _currentIds, _toolParameters);
+    runInternal(s_sm, s_parent, _currentIds, _toolParameters);
 }
 
 void AbstractTool::onFinished(bool updateNeeded)

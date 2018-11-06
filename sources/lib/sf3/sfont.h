@@ -167,6 +167,8 @@ class SoundFont {
     char* creator;
     char* product;
     char* copyright;
+    char* irom;
+    sfVersionTag iver;
 
     int samplePos;
     int sampleLen;
@@ -197,7 +199,7 @@ class SoundFont {
     void readSignature(char* signature);
     void skip(int);
     void readSection(const char* fourcc, int len);
-    void readVersion();
+    void readVersion(sfVersionTag * v);
     char* readString(int);
     void readPhdr(int);
     void readBag(int, QList<Zone*>*);
@@ -220,6 +222,7 @@ class SoundFont {
     void writeInstrument(int zoneIdx, const Instrument*);
 
     void writeIfil();
+    void writeIver();
     void writeSmpl();
     void writePhdr();
     void writeBag(const char* fourcc, QList<Zone*>*);

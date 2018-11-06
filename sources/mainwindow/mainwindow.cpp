@@ -291,6 +291,7 @@ void MainWindow::on_pushButtonNew_clicked()
 
 void MainWindow::openFile(QString fileName)
 {
+    fileName = fileName.replace('\\', '/');
     if (fileName.left(7).compare("file://") == 0)
         fileName = fileName.right(fileName.length() - 7);
 #ifdef Q_OS_WIN

@@ -40,7 +40,7 @@ AbstractToolOneStep::~AbstractToolOneStep()
     delete _waitingDialog;
 }
 
-void AbstractToolOneStep::run(SoundfontManager * sm, QWidget * parent, IdList ids, AbstractToolParameters * parameters)
+void AbstractToolOneStep::runInternal(SoundfontManager * sm, QWidget * parent, IdList ids, AbstractToolParameters * parameters)
 {
     // Create and open a progress dialog
     if (_waitingDialog != nullptr)
