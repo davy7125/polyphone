@@ -206,7 +206,6 @@ SOURCES	+= main.cpp \
     dialogs/dialog_about.cpp \
     dialogs/dialogselection.cpp \
     dialogs/dialogchangelog.cpp \
-    editor/editor_old.cpp \
     editor/page.cpp \
     editor/pagetable.cpp \
     editor/envelopeditor.cpp \
@@ -437,7 +436,6 @@ HEADERS  += \
     dialogs/dialogselection.h \
     dialogs/dialogchangelog.h \
     dialogs/modalprogressdialog.h \
-    editor/editor_old.h \
     editor/page.h \
     editor/pagetable.h \
     editor/envelopeditor.h \

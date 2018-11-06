@@ -1145,7 +1145,9 @@ void OutputSf2::processInternal(QString fileName, SoundfontManager * sm, bool &s
     // Sauvegarde de fileName, wBpsInit
     id.typeElement = elementSf2;
     sm->set(id, champ_filenameInitial, fileName);
+    sm->set(id, champ_filenameForData, fileName);
     sm->set(id, champ_wBpsInit, sm->get(id, champ_wBpsSave));
+    sm->clearNewEditing();
     sm->markAsSaved(sf2Index);
 
     success = true;
