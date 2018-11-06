@@ -12,7 +12,10 @@ InstPrst::~InstPrst()
 {
     QList<int> keys = _divisions.keys();
     foreach (int key, keys)
+    {
+        _divisions[key]->notifyDeletion(false);
         delete _divisions.take(key);
+    }
     delete _globalDivision;
 }
 

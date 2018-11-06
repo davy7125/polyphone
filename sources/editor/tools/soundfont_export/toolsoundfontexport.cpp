@@ -6,15 +6,14 @@
 #include "outputfactory.h"
 #include "abstractoutput.h"
 
-ToolSoundfontExport::ToolSoundfontExport() : AbstractToolOneStep(new ToolSoundfontExport_parameters(), new ToolSoundfontExport_gui()),
-    _outputFactory(new OutputFactory())
+ToolSoundfontExport::ToolSoundfontExport() : AbstractToolOneStep(new ToolSoundfontExport_parameters(), new ToolSoundfontExport_gui())
 {
 
 }
 
 ToolSoundfontExport::~ToolSoundfontExport()
 {
-    delete _outputFactory;
+
 }
 
 bool ToolSoundfontExport::isCompatible(IdList ids)
@@ -38,7 +37,7 @@ void ToolSoundfontExport::process(SoundfontManager * sm, IdList ids, AbstractToo
     QString filePath = getFilePath(params->getDirectory(), name, params->getFormat());
 
     // Get a parser and configure it
-    AbstractOutput * output = _outputFactory->getOutput(filePath);
+    AbstractOutput * output = OutputFactory::getOutput(filePath);
     switch (params->getFormat())
     {
     case 0: // sf2
@@ -59,6 +58,7 @@ void ToolSoundfontExport::process(SoundfontManager * sm, IdList ids, AbstractToo
     // Export
     output->process(idExport.indexSf2, false);
     _error = output->getError();
+    delete output;
 
     // Close the temporary soundfont and discard possible changes
     sm->remove(idExport);

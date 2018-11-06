@@ -62,7 +62,8 @@ Soundfont::~Soundfont()
     foreach (int key, keys)
     {
         _prst[key]->notifyDeletion(false);
-        delete _prst.take(key);
+        delete _prst[key];
+        _prst.remove(key);
     }
 
     // Delete all instruments
@@ -70,7 +71,8 @@ Soundfont::~Soundfont()
     foreach (int key, keys)
     {
         _inst[key]->notifyDeletion(false);
-        delete _inst.take(key);
+        delete _inst[key];
+        _inst.remove(key);
     }
 
     // Delete all samples
