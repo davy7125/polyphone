@@ -25,7 +25,6 @@
 #include "page.h"
 #include "soundfontmanager.h"
 #include "contextmanager.h"
-#include "editor_old.h"
 #include <qmath.h>
 
 SoundfontManager * Page::_sf2 = nullptr;

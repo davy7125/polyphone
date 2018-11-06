@@ -123,7 +123,7 @@ void ToolMixtureCreation::onElementProcessed(EltID idSmpl, int key, int minKey, 
     else
         name = _instrumentName.left(16);
     QString str2 = QString("%1").arg(key, 3, 10, QChar('0'));
-    bool isRight;
+    bool isRight = false;
     if (_stereoSamples)
     {
         isRight = (sm->get(idSmpl, champ_sfSampleType).sfLinkValue == rightSample);
