@@ -1,0 +1,127 @@
+<RCC>
+    <qresource prefix="/icons">
+        <file alias="external_link.gif">resources/external_link.gif</file>
+        <file alias="double-arrow">resources/double-arrow.png</file>
+        <file alias="auto">resources/auto.png</file>
+        <file alias="modulator">resources/modulator.png</file>
+        <file alias="zoom_in">resources/zoom_in.png</file>
+        <file alias="zoom_out">resources/zoom_out.png</file>
+        <file alias="loop_off.png">resources/loop_off.png</file>
+        <file alias="loop_on.png">resources/loop_on.png</file>
+        <file alias="loop_on_end.png">resources/loop_on_end.png</file>
+        <file alias="loop_off_w.png">resources/loop_off_w.png</file>
+        <file alias="loop_on_end_w.png">resources/loop_on_end_w.png</file>
+        <file alias="loop_on_w.png">resources/loop_on_w.png</file>
+        <file alias="note_off.png">resources/note_off.png</file>
+        <file alias="note_on.png">resources/note_on.png</file>
+        <file alias="revert.png">resources/revert.png</file>
+        <file alias="file-audio.svg">resources/file-audio.svg</file>
+        <file alias="search.svg">resources/search.svg</file>
+        <file alias="settings.svg">resources/settings.svg</file>
+        <file alias="forum.svg">resources/forum.svg</file>
+        <file alias="book.svg">resources/book.svg</file>
+        <file alias="document-new.svg">resources/document-new.svg</file>
+        <file alias="document-open.svg">resources/document-open.svg</file>
+        <file alias="globe.svg">resources/globe.svg</file>
+        <file alias="reload.svg">resources/reload.svg</file>
+        <file alias="comment.svg">resources/comment.svg</file>
+        <file alias="download.svg">resources/download.svg</file>
+        <file alias="calendar.svg">resources/calendar.svg</file>
+        <file alias="copyright.svg">resources/copyright.svg</file>
+        <file alias="user.svg">resources/user.svg</file>
+        <file alias="star.svg">resources/star.svg</file>
+        <file alias="close.svg">resources/close.svg</file>
+        <file alias="sort.svg">resources/sort.svg</file>
+        <file alias="arrow_down.svg">resources/arrow_down.svg</file>
+        <file alias="arrow_left.svg">resources/arrow_left.svg</file>
+        <file alias="arrow_right.svg">resources/arrow_right.svg</file>
+        <file alias="arrow_up.svg">resources/arrow_up.svg</file>
+        <file alias="instrument.svg">resources/instrument.svg</file>
+        <file alias="preset.svg">resources/preset.svg</file>
+        <file alias="sample.svg">resources/sample.svg</file>
+        <file alias="document-save.svg">resources/document-save.svg</file>
+        <file alias="edit-redo.svg">resources/edit-redo.svg</file>
+        <file alias="edit-undo.svg">resources/edit-undo.svg</file>
+        <file alias="toolbox.svg">resources/toolbox.svg</file>
+        <file alias="recorder.svg">resources/recorder.svg</file>
+        <file alias="piano.svg">resources/piano.svg</file>
+        <file alias="warning.svg">resources/warning.svg</file>
+        <file alias="adsr.svg">resources/adsr.svg</file>
+        <file alias="range.svg">resources/range.svg</file>
+        <file alias="table.svg">resources/table.svg</file>
+        <file alias="courbe01.svg">resources/courbe01.svg</file>
+        <file alias="courbe02.svg">resources/courbe02.svg</file>
+        <file alias="courbe03.svg">resources/courbe03.svg</file>
+        <file alias="courbe04.svg">resources/courbe04.svg</file>
+        <file alias="courbe05.svg">resources/courbe05.svg</file>
+        <file alias="courbe06.svg">resources/courbe06.svg</file>
+        <file alias="courbe07.svg">resources/courbe07.svg</file>
+        <file alias="courbe08.svg">resources/courbe08.svg</file>
+        <file alias="courbe09.svg">resources/courbe09.svg</file>
+        <file alias="courbe10.svg">resources/courbe10.svg</file>
+        <file alias="courbe11.svg">resources/courbe11.svg</file>
+        <file alias="courbe12.svg">resources/courbe12.svg</file>
+        <file alias="courbe13.svg">resources/courbe13.svg</file>
+        <file alias="courbe14.svg">resources/courbe14.svg</file>
+        <file alias="courbe15.svg">resources/courbe15.svg</file>
+        <file alias="courbe16.svg">resources/courbe16.svg</file>
+        <file alias="minus.svg">resources/minus.svg</file>
+        <file alias="copy.svg">resources/copy.svg</file>
+        <file alias="paste.svg">resources/paste.svg</file>
+        <file alias="recorder_pause.svg">resources/recorder_pause.svg</file>
+        <file alias="recorder_play.svg">resources/recorder_play.svg</file>
+        <file alias="recorder_record.svg">resources/recorder_record.svg</file>
+        <file alias="recorder_stop.svg">resources/recorder_stop.svg</file>
+        <file alias="menu.svg">resources/menu.svg</file>
+    </qresource>
+    <qresource prefix="/traductions">
+        <file>resources/traductions/polyphone_en.qm</file>
+        <file>resources/traductions/polyphone_es.qm</file>
+        <file>resources/traductions/polyphone_it.qm</file>
+        <file>resources/traductions/polyphone_sr.qm</file>
+        <file>resources/traductions/polyphone_cs.qm</file>
+        <file>resources/traductions/polyphone_pt.qm</file>
+        <file>resources/traductions/polyphone_zh.qm</file>
+        <file>resources/traductions/polyphone_de.qm</file>
+    </qresource>
+    <qresource prefix="/misc">
+        <file>changelog</file>
+        <file alias="background.png">resources/background.png</file>
+        <file alias="background_dark.png">resources/background_dark.png</file>
+        <file alias="logo.svg">resources/logo.svg</file>
+        <file alias="spinner.svg">resources/spinner.svg</file>
+        <file alias="decoration.svg">resources/decoration.svg</file>
+    </qresource>
+    <qresource prefix="/tool">
+        <file alias="trim_loop.svg">editor/tools/trim_end/trim_loop.svg</file>
+        <file alias="loop.svg">editor/tools/auto_loop/loop.svg</file>
+        <file alias="command_line.svg">editor/tools/external_command/command_line.svg</file>
+        <file alias="remove_blank.svg">editor/tools/trim_start/remove_blank.svg</file>
+        <file alias="filter_frequencies.svg">editor/tools/frequency_filter/filter_frequencies.svg</file>
+        <file alias="change_volume.svg">editor/tools/change_volume/change_volume.svg</file>
+        <file alias="balance.svg">editor/tools/balance_adjustment/balance.svg</file>
+        <file alias="transpose.svg">editor/tools/transpose_smpl/transpose.svg</file>
+        <file alias="unlink.svg">editor/tools/unlink_sample/unlink.svg</file>
+        <file alias="link.svg">editor/tools/link_sample/link.svg</file>
+        <file alias="change_attenuation.svg">editor/tools/change_attenuation/change_attenuation.svg</file>
+        <file alias="global_setting.svg">editor/tools/global_settings/global_setting.svg</file>
+        <file alias="celeste_tuning.svg">editor/tools/celeste_tuning/celeste_tuning.svg</file>
+        <file alias="auto_distribution.svg">editor/tools/auto_distribution/auto_distribution.svg</file>
+        <file alias="remove_unused.svg">editor/tools/clean_unused_elements/remove_unused.svg</file>
+        <file alias="duplicate.svg">editor/tools/division_duplication/duplicate.svg</file>
+        <file alias="peak_export.svg">editor/tools/frequency_peaks/peak_export.svg</file>
+        <file alias="mixture.svg">editor/tools/mixture_creation/mixture.svg</file>
+        <file alias="monitor.svg">editor/tools/monitor/monitor.svg</file>
+        <file alias="preset_list.svg">editor/tools/preset_list/preset_list.svg</file>
+        <file alias="remove_mods.svg">editor/tools/remove_mods/remove_mods.svg</file>
+        <file alias="spatialization.svg">editor/tools/sound_spatialization/spatialization.svg</file>
+        <file alias="transpose2.svg">editor/tools/transpose/transpose2.svg</file>
+        <file alias="chord.svg">editor/tools/chords/chord.svg</file>
+        <file alias="release.svg">editor/tools/release/release.svg</file>
+        <file alias="file-audio.svg">editor/tools/sample_export/file-audio.svg</file>
+        <file alias="file-export.svg">editor/tools/soundfont_export/file-export.svg</file>
+    </qresource>
+    <qresource prefix="/vpiano">
+        <file alias="blkey.svg">resources/blkey.svg</file>
+    </qresource>
+</RCC>
