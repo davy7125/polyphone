@@ -48,6 +48,7 @@ private:
     QString correction(EltID id);
     QString type(EltID id);
     QString link(EltID id);
+    QString sampleRate(EltID id);
 
     QList<int> _usedSmpl;
 };
