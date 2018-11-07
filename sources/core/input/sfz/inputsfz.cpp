@@ -145,14 +145,20 @@ void InputSfz::parseFile(QString filename, bool &success, QString &error)
                     return;
                 }
             }
+            else if (str.indexOf("#define") == 0)
+            {
+                QStringList splitTmp = str.split(' ', QString::SkipEmptyParts);
+                if (splitTmp.size() == 3)
+                    _replacements[splitTmp[1]] = splitTmp[2];
+            }
             else if (str.left(1) == "<" && str.right(1) == ">")
                 changeBloc(str.right(str.size()-1).left(str.size()-2));
             else if (str.contains("="))
             {
                 int index = str.indexOf("=");
                 QString opcode = str.left(index).toLower();
-                QString value = str.right(str.length() - index - 1);
-                if (opcode.size() && value.size())
+                QString value = this->applyReplacements(str.right(str.length() - index - 1));
+                if (!opcode.isEmpty() && !value.isEmpty())
                     addOpcode(opcode, value);
             }
         }
@@ -178,6 +184,13 @@ QString InputSfz::getFilePathFromInclude(QString str)
         str = _rootDir + "/" + str;
 
     return str;
+}
+
+QString InputSfz::applyReplacements(QString opcodeValue)
+{
+    foreach (QString key, _replacements.keys())
+        opcodeValue = opcodeValue.replace(key, _replacements[key]);
+    return opcodeValue;
 }
 
 void InputSfz::changeBloc(QString bloc)

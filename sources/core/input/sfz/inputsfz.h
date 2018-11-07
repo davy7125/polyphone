@@ -28,8 +28,10 @@ private:
     SfzParameterGroup _globalZone;
     QStringList _openFilePaths;
     QString _rootDir;
+    QMap<QString, QString> _replacements;
 
     void parseFile(QString filename, bool &success, QString &error);
+    QString applyReplacements(QString opcodeValue);
     QString getFilePathFromInclude(QString str);
     void changeBloc(QString bloc);
     void addOpcode(QString opcode, QString value);
