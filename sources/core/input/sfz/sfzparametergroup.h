@@ -11,6 +11,7 @@ public:
     // Chargement
     SfzParameterGroup() {}
     void operator << (SfzParameter param) { _listeParam << param; }
+    void mergeIfNotDefined(SfzParameterGroup &groupToMerge);
 
     // Décodage
     void decode(SoundfontManager * sf2, EltID idElt) const;

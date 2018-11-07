@@ -1,6 +1,11 @@
 #include "sfzparametergroupassembly.h"
 #include "soundfontmanager.h"
 
+void SfzParameterGroupAssembly::moveOpcodesInGlobal(SfzParameterGroup &globalZone)
+{
+    _paramGlobaux.mergeIfNotDefined(globalZone);
+}
+
 void SfzParameterGroupAssembly::moveKeynumInSamples(SfzParameter::OpCode opCodeKeynum, SfzParameter::OpCode opCodeBase)
 {
     if (_paramGlobaux.isDefined(opCodeKeynum))
