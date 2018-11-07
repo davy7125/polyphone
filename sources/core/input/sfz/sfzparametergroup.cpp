@@ -704,3 +704,10 @@ QString SfzParameterGroup::getName(QString name, int maxCharacters, int suffixNu
 
     return name.left(maxCharacters - suffixNumSize - suffixSize) + suffix + "-" + suffixNum;
 }
+
+void SfzParameterGroup::mergeIfNotDefined(SfzParameterGroup &groupToMerge)
+{
+    foreach (SfzParameter param, groupToMerge._listeParam)
+        if (!this->isDefined(param.getOpCode()))
+            _listeParam << param;
+}
