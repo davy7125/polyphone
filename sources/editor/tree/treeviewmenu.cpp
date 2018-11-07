@@ -43,6 +43,12 @@ TreeViewMenu::TreeViewMenu(QWidget * parent) : QMenu(parent),
     connect(_pasteAction, SIGNAL(triggered()), this, SLOT(paste()));
     this->addAction(_pasteAction);
 
+    // Duplicate
+    _duplicateAction = new QAction(trUtf8("Dupliquer"), this);
+    _duplicateAction->setShortcut(QString("Ctrl+D"));
+    connect(_duplicateAction, SIGNAL(triggered()), this, SLOT(duplicate()));
+    this->addAction(_duplicateAction);
+
     // Delete
     _removeAction = new QAction(trUtf8("Supprimer"), this);
     _removeAction->setShortcut(QString("Del"));
@@ -66,8 +72,22 @@ void TreeViewMenu::initialize(IdList ids)
 {
     _currentIds = ids;
 
+    // All ids with the same element?
+    ElementType type = elementUnknown;
+    bool sameElement = true;
+    foreach (EltID id, ids)
+    {
+        if (type == elementUnknown)
+            type = id.typeElement;
+        else if (type != id.typeElement)
+        {
+            sameElement = false;
+            break;
+        }
+    }
+
     // Associate
-    bool associate = true;
+    bool associate = sameElement;
     foreach (EltID id, ids)
     {
         if (id.typeElement != elementSmpl && id.typeElement != elementInst)
@@ -102,8 +122,17 @@ void TreeViewMenu::initialize(IdList ids)
         _renameAction->setEnabled(false);
     }
 
+    // Copy
+    _copyAction->setEnabled(sameElement);
+
     // Paste
     _pasteAction->setEnabled(ids.count() == 1);
+
+    // Duplicate
+    _duplicateAction->setEnabled(sameElement);
+
+    // Delete
+    _removeAction->setEnabled(sameElement);
 }
 
 void TreeViewMenu::associate()
@@ -375,4 +404,20 @@ void TreeViewMenu::paste()
         }
         sm->endEditing("command:paste");
     }
+}
+
+void TreeViewMenu::duplicate()
+{
+    if (_currentIds.empty())
+        return;
+
+    // Duplicate all elements
+    SoundfontManager * sm = SoundfontManager::getInstance();
+    Duplicator duplicator;
+    foreach (EltID idSource, _currentIds)
+    {
+        if (sm->isValid(idSource))
+            duplicator.duplicate(idSource);
+    }
+    sm->endEditing("command:duplicate");
 }

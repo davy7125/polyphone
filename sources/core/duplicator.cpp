@@ -126,14 +126,42 @@ void Duplicator::copy(EltID idSource, EltID idDest)
             copySmpl(idSource, idDest);
             break;
         case elementInst:
-            copyInst(idSource, idDest);
+            copyInst(idSource, idDest, true);
             break;
         case elementPrst:
-            copyPrst(idSource, idDest);
+            copyPrst(idSource, idDest, true);
             break;
         default:
             return;
         }
+    }
+}
+
+void Duplicator::duplicate(EltID idSource)
+{
+    // Copy within the same soundfont
+    switch (idSource.typeElement)
+    {
+    case elementSmpl:
+        _copieSmpl = DUPLIQUER_TOUT;
+        copySmpl(idSource, EltID(elementSf2, idSource.indexSf2));
+        break;
+    case elementInst:
+        _copieInst = DUPLIQUER_TOUT;
+        copyInst(idSource, EltID(elementSf2, idSource.indexSf2), false);
+        break;
+    case elementInstSmpl:
+        copyLink(idSource, EltID(elementInst, idSource.indexSf2, idSource.indexElt));
+        break;
+    case elementPrst:
+        _copiePrst = DUPLIQUER_TOUT;
+        copyPrst(idSource, EltID(elementSf2, idSource.indexSf2), false);
+        break;
+    case elementPrstInst:
+        copyLink(idSource, EltID(elementPrst, idSource.indexSf2, idSource.indexElt));
+        break;
+    default:
+        return;
     }
 }
 
@@ -382,27 +410,30 @@ void Duplicator::copySmpl(EltID idSource, EltID idDest)
 // Copie d'un instrument dans un autre sf2
 // idSource : instrument
 // idDest   : indexSf2 différent ou provenant d'un autre fichier
-void Duplicator::copyInst(EltID idSource, EltID idDest)
+void Duplicator::copyInst(EltID idSource, EltID idDest, bool withSmpl)
 {
-    // Copie des samples associés
-    EltID idSmpl = idSource;
-    idSource.typeElement = elementInstSmpl;
-    idSmpl.typeElement = elementSmpl;
-    foreach (int i, _sm->getSiblings(idSource))
+    if (withSmpl)
     {
-        idSource.indexElt2 = i;
-        idSmpl.indexElt = _sm->get(idSource, champ_sampleID).wValue;
-        if (!_listCopy.contains(idSmpl)) // Ne pas copier un smpl déjà copié
-            copy(idSmpl, idDest);
-
-        // Sample stéréo ?
-        if (_sm->get(idSource, champ_sfSampleType).wValue != RomMonoSample &&
-                _sm->get(idSource, champ_sfSampleType).wValue != monoSample)
+        // Copie des samples associés
+        EltID idSmpl = idSource;
+        idSource.typeElement = elementInstSmpl;
+        idSmpl.typeElement = elementSmpl;
+        foreach (int i, _sm->getSiblings(idSource))
         {
-            EltID idSourceLink = idSource;
-            idSourceLink.indexElt = _sm->get(idSource, champ_wSampleLink).wValue;
-            if (!_listCopy.contains(idSourceLink))
-                copy(idSourceLink, idDest);
+            idSource.indexElt2 = i;
+            idSmpl.indexElt = _sm->get(idSource, champ_sampleID).wValue;
+            if (!_listCopy.contains(idSmpl)) // Ne pas copier un smpl déjà copié
+                copy(idSmpl, idDest);
+
+            // Sample stéréo ?
+            if (_sm->get(idSource, champ_sfSampleType).wValue != RomMonoSample &&
+                    _sm->get(idSource, champ_sfSampleType).wValue != monoSample)
+            {
+                EltID idSourceLink = idSource;
+                idSourceLink.indexElt = _sm->get(idSource, champ_wSampleLink).wValue;
+                if (!_listCopy.contains(idSourceLink))
+                    copy(idSourceLink, idDest);
+            }
         }
     }
 
@@ -483,18 +514,21 @@ void Duplicator::copyInst(EltID idSource, EltID idDest)
 // Copie d'un preset dans un autre sf2
 // idSource : preset
 // idDest   : indexSf2 différent ou provenant d'un autre fichier
-void Duplicator::copyPrst(EltID idSource, EltID idDest)
+void Duplicator::copyPrst(EltID idSource, EltID idDest, bool withInst)
 {
-    // Copie des instruments associés
-    EltID idInst = idSource;
-    idSource.typeElement = elementPrstInst;
-    idInst.typeElement = elementInst;
-    foreach (int i,_sm->getSiblings(idSource))
+    if (withInst)
     {
-        idSource.indexElt2 = i;
-        idInst.indexElt = _sm->get(idSource, champ_instrument).wValue;
-        if (!_listCopy.contains(idInst)) // Ne pas copier un inst déjà copié
-            copy(idInst, idDest);
+        // Copie des instruments associés
+        EltID idInst = idSource;
+        idSource.typeElement = elementPrstInst;
+        idInst.typeElement = elementInst;
+        foreach (int i,_sm->getSiblings(idSource))
+        {
+            idSource.indexElt2 = i;
+            idInst.indexElt = _sm->get(idSource, champ_instrument).wValue;
+            if (!_listCopy.contains(idInst)) // Ne pas copier un inst déjà copié
+                copy(idInst, idDest);
+        }
     }
 
     // Recherche si un preset du même nom existe déjà dans les éléments initiaux
@@ -634,26 +668,26 @@ void Duplicator::copyGen(EltID idSource, EltID idDest)
     foreach (int i, _sm->getSiblings(idGen))
     {
         // Copie, sauf bank et preset
-        if (i != champ_wBank && i != champ_wPreset)
+        if (i == champ_wBank || i == champ_wPreset)
+            continue;
+
+        if (i == champ_sampleID || i == champ_instrument)
         {
             // Ajustement des liens
-            if (i == champ_sampleID || i == champ_instrument)
-            {
-                EltID idLinkSource = idSource;
-                if (i== champ_sampleID)
-                    idLinkSource.typeElement = elementSmpl;
-                else
-                    idLinkSource.typeElement = elementInst;
-                idLinkSource.indexElt = _sm->get(idSource, (AttributeType)i).wValue;
-                if (_listCopy.contains(idLinkSource))
-                    val.wValue = _listPaste.at(_listCopy.indexOf(idLinkSource)).indexElt;
-                else
-                    val.wValue = idLinkSource.indexElt;
-            }
+            EltID idLinkSource = idSource;
+            if (i == champ_sampleID)
+                idLinkSource.typeElement = elementSmpl;
             else
-                val = _sm->get(idSource, (AttributeType)i);
-            _sm->set(idDest, (AttributeType)i, val);
+                idLinkSource.typeElement = elementInst;
+            idLinkSource.indexElt = _sm->get(idSource, (AttributeType)i).wValue;
+            if (_listCopy.contains(idLinkSource))
+                val.wValue = _listPaste.at(_listCopy.indexOf(idLinkSource)).indexElt;
+            else
+                val.wValue = idLinkSource.indexElt;
         }
+        else
+            val = _sm->get(idSource, (AttributeType)i);
+        _sm->set(idDest, (AttributeType)i, val);
     }
 }
 
