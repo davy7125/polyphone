@@ -410,7 +410,8 @@ SOURCES	+= main.cpp \
     core/input/sf3/inputsf3.cpp \
     core/input/sfz/sfzparameter.cpp \
     core/input/sfz/sfzparametergroup.cpp \
-    core/input/sfz/sfzparametergroupassembly.cpp
+    core/input/sfz/sfzparametergroupassembly.cpp \
+    dialogs/dialogcreateelements.cpp
 
 HEADERS  += \
     core/sound.h \
@@ -651,7 +652,8 @@ HEADERS  += \
     core/input/sf3/inputsf3.h \
     core/input/sfz/sfzparameter.h \
     core/input/sfz/sfzparametergroup.h \
-    core/input/sfz/sfzparametergroupassembly.h
+    core/input/sfz/sfzparametergroupassembly.h \
+    dialogs/dialogcreateelements.h
 
 FORMS    += \
     dialogs/dialog_list.ui \
@@ -697,7 +699,8 @@ FORMS    += \
     editor/tools/frequency_peaks/toolfrequencypeaks_gui.ui \
     editor/tools/release/toolrelease_gui.ui \
     editor/tools/chords/toolchords_gui.ui \
-    editor/tools/soundfont_export/toolsoundfontexport_gui.ui
+    editor/tools/soundfont_export/toolsoundfontexport_gui.ui \
+    dialogs/dialogcreateelements.ui
 
 RESOURCES += resources.qrc
 

@@ -52,8 +52,9 @@ signals:
     void editorOpen(bool isOpen);
 
 private slots:
-    /// Called when the tab title changes
+    /// Called when the name or the filepath of a soundfont changed
     void onTabTitleChanged(QString title);
+    void onFilePathChanged(QString filePath);
 
     /// Called when the user wants to close a tab
     void onTabCloseRequested(int tabIndex);

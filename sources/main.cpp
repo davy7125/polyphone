@@ -124,11 +124,11 @@ int convert(Options &options)
     switch (options.mode())
     {
     case Options::MODE_CONVERSION_TO_SF2:
-        qDebug() << "Saving file" << outputFile.filePath() << "...";
+        qInfo() << "Saving file" << outputFile.filePath() << "...";
         break;
     case Options::MODE_CONVERSION_TO_SF3:
         output->setOption("quality", options.quality());
-        qDebug() << "Saving file" << outputFile.filePath() << "...";
+        qInfo() << "Saving file" << outputFile.filePath() << "...";
         break;
     case Options::MODE_CONVERSION_TO_SFZ: {
         output->setOption("prefix", options.sfzPresetPrefix());

@@ -54,6 +54,7 @@ void WindowManager::openNewSoundfont()
                                           ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND),
                                           ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_TEXT));
     connect(editor, SIGNAL(tabTitleChanged(QString)), this, SLOT(onTabTitleChanged(QString)));
+    connect(editor, SIGNAL(filePathChanged(QString)), this, SLOT(onFilePathChanged(QString)));
     _editors << editor;
 
     // Initialize and display it
@@ -95,6 +96,7 @@ void WindowManager::openSoundfont(QString fileName)
                                           ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND),
                                           ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_TEXT));
     connect(editor, SIGNAL(tabTitleChanged(QString)), this, SLOT(onTabTitleChanged(QString)));
+    connect(editor, SIGNAL(filePathChanged(QString)), this, SLOT(onFilePathChanged(QString)));
     connect(editor, SIGNAL(keyboardDisplayChanged(bool)), this, SIGNAL(keyboardDisplayChanged(bool)));
     connect(editor, SIGNAL(recorderDisplayChanged(bool)), this, SIGNAL(recorderDisplayChanged(bool)));
     _editors << editor;
@@ -137,6 +139,13 @@ void WindowManager::onTabTitleChanged(QString title)
     int index = _tabWidget->indexOf((Editor*)QObject::sender());
     if (index != -1)
         _tabWidget->setTabText(index, title);
+}
+
+void WindowManager::onFilePathChanged(QString filePath)
+{
+    int index = _tabWidget->indexOf((Editor*)QObject::sender());
+    if (index != -1)
+        _tabWidget->setTabToolTip(index, filePath);
 }
 
 void WindowManager::onTabCloseRequested(int tabIndex)

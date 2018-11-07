@@ -350,5 +350,5 @@ SfzParameter::SfzParameter(QString opcode, QString valeur) :
         // Nothing to do, no warning
     }
     else
-        qDebug() << "opcode not supported: " + opcode + " (" + valeur + ")";
+        qWarning() << "opcode not supported: " + opcode + " (" + valeur + ")";
 }

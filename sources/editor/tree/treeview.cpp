@@ -7,6 +7,7 @@
 #include "treeviewmenu.h"
 #include "duplicator.h"
 #include "sampleloader.h"
+#include "dialogcreateelements.h"
 
 TreeView::TreeView(QWidget * parent) : QTreeView(parent),
     _fixingSelection(false),
@@ -729,15 +730,101 @@ void TreeView::dropEvent(QDropEvent *event)
         if (!index.isValid())
             return;
         EltID idDest = index.data(Qt::UserRole).value<EltID>();
-
-        SoundfontManager * sm = SoundfontManager::getInstance();
-        Duplicator duplicator;
-        foreach (EltID idSource, _draggedIds)
+        if (idDest.typeElement == elementRootInst)
         {
-            if ((idSource.typeElement == elementSmpl || idSource.typeElement == elementInst || idSource.typeElement == elementPrst ||
-                 idSource.typeElement == elementInstSmpl || idSource.typeElement == elementPrstInst) && sm->isValid(idSource))
-                duplicator.copy(idSource, idDest);
+            // Possibly create one or more instruments based on samples
+            foreach (EltID idSource, _draggedIds)
+                if (idSource.typeElement != elementSmpl)
+                    return;
+            DialogCreateElements * dial = new DialogCreateElements(this);
+            dial->initialize(_draggedIds);
+            connect(dial, SIGNAL(createElements(IdList,bool)), this, SLOT(onCreateElements(IdList,bool)));
+            dial->open();
         }
-        sm->endEditing("command:drop");
+        else if (idDest.typeElement == elementRootPrst)
+        {
+            // Possibly create one or more presets based on instruments
+            foreach (EltID idSource, _draggedIds)
+                if (idSource.typeElement != elementInst)
+                    return;
+            DialogCreateElements * dial = new DialogCreateElements(this);
+            dial->initialize(_draggedIds);
+            connect(dial, SIGNAL(createElements(IdList,bool)), this, SLOT(onCreateElements(IdList,bool)));
+            dial->open();
+        }
+        else
+        {
+            SoundfontManager * sm = SoundfontManager::getInstance();
+            Duplicator duplicator;
+            foreach (EltID idSource, _draggedIds)
+            {
+                if ((idSource.typeElement == elementSmpl || idSource.typeElement == elementInst || idSource.typeElement == elementPrst ||
+                     idSource.typeElement == elementInstSmpl || idSource.typeElement == elementPrstInst) && sm->isValid(idSource))
+                    duplicator.copy(idSource, idDest);
+            }
+            sm->endEditing("command:drop");
+        }
     }
+}
+
+void TreeView::onCreateElements(IdList ids, bool oneForEach)
+{
+    if (ids.empty())
+        return;
+    bool isSmpl = (ids[0].typeElement == elementSmpl);
+    int indexSf2 = ids[0].indexSf2;
+
+    // List of all instrument names
+    SoundfontManager * sm = SoundfontManager::getInstance();
+    QStringList names;
+    foreach (int i, sm->getSiblings(EltID(isSmpl ? elementInst : elementPrst, indexSf2)))
+        names << sm->getQstr(EltID(isSmpl ? elementInst : elementPrst, indexSf2, i), champ_name);
+
+    Duplicator duplicator;
+    if (oneForEach)
+    {
+        foreach (EltID id, ids)
+        {
+            // Find a name
+            QString elementName = sm->getQstr(id, champ_name);
+            if (names.contains(elementName))
+            {
+                int suffix = 1;
+                while (names.contains(elementName + "-" + QString::number(suffix)))
+                    suffix++;
+                elementName += "-" + QString::number(suffix);
+            }
+            names << elementName;
+
+            // Create an element
+            EltID newElement(isSmpl ? elementInst : elementPrst, indexSf2);
+            newElement.indexElt = sm->add(newElement);
+            sm->set(newElement, champ_name, elementName);
+
+            // Link to the dragged sample or instrument
+            duplicator.copy(id, newElement);
+        }
+    }
+    else
+    {
+        // Find a name
+        QString elementName = trUtf8("instrument");
+        if (names.contains(elementName))
+        {
+            int suffix = 1;
+            while (names.contains(elementName + "-" + QString::number(suffix)))
+                suffix++;
+            elementName += "-" + QString::number(suffix);
+        }
+
+        // Create an element
+        EltID newElement(isSmpl ? elementInst : elementPrst, indexSf2);
+        newElement.indexElt = sm->add(newElement);
+        sm->set(newElement, champ_name, elementName);
+
+        // Link all dragged samples or intruments
+        foreach (EltID id, ids)
+            duplicator.copy(id, newElement);
+    }
+    sm->endEditing("command:fastAdd");
 }
