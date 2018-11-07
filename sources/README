@@ -6,7 +6,7 @@
 ######### 1. Prerequisite ##########################################################################
 
 The following libraries are required (the name may vary depending on your system):
- - qt          (libqt5-dev / qt5-devel) (also libqt5svg5-dev)
+ - qt          (qtbase5-dev / qt5-devel) (also libqt5svg5-dev)
  - alsa        (libasound2-dev / alsa-lib-devel)
  - jack        (libjack-jack2-dev / jack-audio-connection-kit-devel)
  - portaudio   (portaudio19-dev / portaudio-devel)
