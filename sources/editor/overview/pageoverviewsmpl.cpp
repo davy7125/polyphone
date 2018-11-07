@@ -41,7 +41,8 @@ QStringList PageOverviewSmpl::getHorizontalHeader()
             << trUtf8("Note\nde base")
             << trUtf8("Correction")
             << trUtf8("Type\nd'échantillon")
-            << trUtf8("Échantillon\nlié");
+            << trUtf8("Échantillon\nlié")
+            << trUtf8("Taux\nd'échantillonnage");
     return hHeader;
 }
 
@@ -74,7 +75,8 @@ QStringList PageOverviewSmpl::getInformation(EltID id)
          << rootKey(id)
          << correction(id)
          << type(id)
-         << link(id);
+         << link(id)
+         << sampleRate(id);
     return info;
 }
 
@@ -152,4 +154,10 @@ QString PageOverviewSmpl::link(EltID id)
         else
             return trUtf8("non valide");
     }
+}
+
+QString PageOverviewSmpl::sampleRate(EltID id)
+{
+    int sampleRate = _sf2->get(id, champ_dwSampleRate).dwValue;
+    return QString::number(sampleRate) + " " + trUtf8("Hz");
 }
