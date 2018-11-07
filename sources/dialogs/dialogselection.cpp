@@ -31,7 +31,7 @@ DialogSelection::DialogSelection(SoundfontManager *sf2, EltID id, QWidget *paren
     ui(new Ui::DialogSelection)
 {
     ui->setupUi(this);
-    this->setAttribute(Qt::WA_DeleteOnClose, true);
+    this->setAttribute(Qt::WA_DeleteOnClose);
     this->setWindowFlags((windowFlags() & ~Qt::WindowContextHelpButtonHint));
 
     // Remplissage de la liste

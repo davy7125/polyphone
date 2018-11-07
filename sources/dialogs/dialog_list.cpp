@@ -32,7 +32,6 @@ DialogList::DialogList(QWidget *parent) :
 {
     ui->setupUi(this);
     this->setWindowFlags((windowFlags() & ~Qt::WindowContextHelpButtonHint));
-    this->setWindowModality(Qt::ApplicationModal);
 }
 
 DialogList::~DialogList()

@@ -28,6 +28,7 @@ public:
 
 signals:
     void tabTitleChanged(QString title);
+    void filePathChanged(QString filePath);
     void recorderDisplayChanged(bool isDisplayed);
     void keyboardDisplayChanged(bool isDisplayed);
 
@@ -37,7 +38,7 @@ private slots:
     void displayOptionChanged(int displayOption);
 
 private:
-    void updateTitle();
+    void updateTitleAndPath();
 
     Ui::Editor *ui;
     int _sf2Index;

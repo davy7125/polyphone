@@ -290,7 +290,6 @@ void TreeViewMenu::rename()
     if (_currentIds.count() > 1)
     {
         DialogRename * dial = new DialogRename(type == elementSmpl, (QWidget*)this->parent());
-        dial->setAttribute(Qt::WA_DeleteOnClose);
         connect(dial, SIGNAL(updateNames(int, QString, QString, int, int)),
                 this, SLOT(bulkRename(int, QString, QString, int, int)));
         dial->show();
