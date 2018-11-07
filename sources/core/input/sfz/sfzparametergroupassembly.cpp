@@ -157,7 +157,7 @@ void SfzParameterGroupAssembly::checkSampleValid(QString path)
 {
     int size = _listeDivisions.size();
     for (int i = size - 1; i >= 0; i--)
-        if (!_listeDivisions.at(i).sampleValid(path))
+        if (!_listeDivisions[i].sampleValid(path))
             _listeDivisions.removeAt(i);
 }
 
