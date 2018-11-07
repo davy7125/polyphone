@@ -26,8 +26,11 @@ private:
     QList<SfzParameterGroupAssembly> _listeEnsembles;
     Bloc _currentBloc;
     SfzParameterGroup _globalZone;
+    QStringList _openFilePaths;
+    QString _rootDir;
 
     void parseFile(QString filename, bool &success, QString &error);
+    QString getFilePathFromInclude(QString str);
     void changeBloc(QString bloc);
     void addOpcode(QString opcode, QString value);
 

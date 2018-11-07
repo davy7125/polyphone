@@ -12,6 +12,9 @@ void InputSfz::processInternal(QString fileName, SoundfontManager * sm, bool &su
     _currentBloc = BLOC_UNKNOWN;
 
     // Parse the file
+    _rootDir = QFileInfo(fileName).dir().path();
+    if (_rootDir.endsWith('/'))
+        _rootDir = _rootDir.left(_rootDir.size() - 1);
     parseFile(fileName, success, error);
     if (!success)
         return;
@@ -70,6 +73,14 @@ void InputSfz::processInternal(QString fileName, SoundfontManager * sm, bool &su
 
 void InputSfz::parseFile(QString filename, bool &success, QString &error)
 {
+    if (_openFilePaths.contains(filename))
+    {
+        // Recursion!
+        success = false;
+        error = trUtf8("Récursion entre fichiers") + " (#include)";
+        return;
+    }
+
     QFile inputFile(filename);
     if (!inputFile.open(QIODevice::ReadOnly))
     {
@@ -78,13 +89,16 @@ void InputSfz::parseFile(QString filename, bool &success, QString &error)
         return;
     }
 
+    _openFilePaths << filename;
     QTextStream in(&inputFile);
     while (!in.atEnd())
     {
-        // Lecture ligne par ligne
+        // Read one line
         QString line = in.readLine();
+        if (line.isEmpty())
+            continue;
 
-        // Suppression des commentaires
+        // Remove comment
         if (line.contains("//"))
             line = line.left(line.indexOf("//"));
 
@@ -100,44 +114,70 @@ void InputSfz::parseFile(QString filename, bool &success, QString &error)
             }
         }
 
-        // Suppression des espaces de fin et des champs vides
+        // Trim spaces and remove empty fields
         length = list.size();
         for (int i = length - 1; i >= 0; i--)
         {
-            QString strTmp = list.at(i);
-            while (strTmp.endsWith(' '))
-                strTmp.chop(1);
-
+            QString strTmp = list.at(i).trimmed();
             if (strTmp.isEmpty())
                 list.removeAt(i);
             else
                 list[i] = strTmp;
         }
 
-        // Stockage
-        for (int i = 0; i < list.size(); i++)
+        // Store elements
+        foreach (QString str, list)
         {
-            QString str = list.at(i);
-
             // Valide ?
-            if (str.size() > 2)
+            if (str.size() <= 2)
+                continue;
+
+            if (str.indexOf("#include") == 0)
             {
-                if (str.left(1) == "<" && str.right(1) == ">")
-                    changeBloc(str.right(str.size()-1).left(str.size()-2));
-                else if (str.contains("="))
+                // Read another file
+                QString otherFile = getFilePathFromInclude(str);
+                this->parseFile(otherFile, success, error);
+
+                // In case of error, return immediately
+                if (!success)
                 {
-                    int index = str.indexOf("=");
-                    QString opcode = str.left(index).toLower();
-                    QString value = str.right(str.length() - index - 1);
-                    if (opcode.size() && value.size())
-                        addOpcode(opcode, value);
+                    inputFile.close();
+                    return;
                 }
+            }
+            else if (str.left(1) == "<" && str.right(1) == ">")
+                changeBloc(str.right(str.size()-1).left(str.size()-2));
+            else if (str.contains("="))
+            {
+                int index = str.indexOf("=");
+                QString opcode = str.left(index).toLower();
+                QString value = str.right(str.length() - index - 1);
+                if (opcode.size() && value.size())
+                    addOpcode(opcode, value);
             }
         }
     }
     inputFile.close();
+    _openFilePaths.removeAll(filename);
 
     success = true;
+}
+
+QString InputSfz::getFilePathFromInclude(QString str)
+{
+    // Skip the "#include", remove quotes and extra spaces
+    str = str.right(str.size() - 8).replace("\"", "").replace("'", "").trimmed();
+    if (str.isEmpty())
+        return "";
+
+    // Make an absolute path
+    str = str.replace("\\", "/");
+    if (str[0] == '/')
+        str = _rootDir + str;
+    else
+        str = _rootDir + "/" + str;
+
+    return str;
 }
 
 void InputSfz::changeBloc(QString bloc)
