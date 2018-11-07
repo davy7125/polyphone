@@ -18,16 +18,21 @@ private:
     {
         BLOC_UNKNOWN,
         BLOC_CONTROL,
+        BLOC_GLOBAL,
         BLOC_GROUP,
         BLOC_REGION
     };
 
     QList<SfzParameterGroupAssembly> _listeEnsembles;
     Bloc _currentBloc;
+    SfzParameterGroup _globalZone;
 
+    void parseFile(QString filename, bool &success, QString &error);
     void changeBloc(QString bloc);
     void addOpcode(QString opcode, QString value);
-    QString getNomInstrument(QString filePath, int &numBank, int &numPreset);
+
+    void createSf2(int &sf2Index, QString filename, bool isChannel10);
+    QString getInstrumentName(QString filePath, int &numBank, int &numPreset);
 };
 
 #endif // INPUTSFZ_H
