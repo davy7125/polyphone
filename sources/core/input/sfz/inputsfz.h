@@ -17,6 +17,7 @@ private:
     enum Bloc
     {
         BLOC_UNKNOWN,
+        BLOC_CONTROL,
         BLOC_GROUP,
         BLOC_REGION
     };

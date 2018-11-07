@@ -309,7 +309,9 @@ QString InputSfz::getNomInstrument(QString filePath, int &numBank, int &numPrese
 
 void InputSfz::changeBloc(QString bloc)
 {
-    if (bloc == "group")
+    if (bloc == "control")
+        _currentBloc = BLOC_CONTROL;
+    else if (bloc == "group")
     {
         _currentBloc = BLOC_GROUP;
         _listeEnsembles << SfzParameterGroupAssembly();
@@ -329,4 +331,16 @@ void InputSfz::addOpcode(QString opcode, QString value)
 {
     if (_currentBloc == BLOC_GROUP || _currentBloc == BLOC_REGION)
         _listeEnsembles.last().addParam(opcode, value);
+    else if (_currentBloc == BLOC_CONTROL)
+    {
+        if (opcode == "default_path")
+        {
+            QString defaultPath = value.replace("\\", "/");
+            if (!defaultPath.isEmpty() && defaultPath[0] == '/')
+                defaultPath = defaultPath.right(defaultPath.size() - 1);
+            if (!defaultPath.isEmpty() && defaultPath.endsWith('/'))
+                defaultPath = defaultPath.left(defaultPath.size() - 1);
+            SfzParameter::DEFAULT_PATH = defaultPath;
+        }
+    }
 }

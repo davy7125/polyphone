@@ -17,7 +17,7 @@ public:
     QList<int> getSampleIndex(SoundfontManager * sf2, EltID idElt, QString pathSfz) const;
     void adaptOffsets(int startLoop, int endLoop, int length);
     void adjustStereoVolumeAndCorrection(QString path, int defaultCorrection);
-    bool sampleValid(QString path) const;
+    bool sampleValid(QString path);
     void checkFilter();
     void adjustVolume(double offset);
     void adjustCorrection(int offset, int defaultCorrection);
