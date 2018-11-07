@@ -41,7 +41,7 @@ public:
         op_amp_velcurve_1,
         op_amp_velcurve_127,
 
-        // Enveloppe volume
+        // Envelop volume
         op_ampeg_delay,
         op_ampeg_attack,
         op_ampeg_hold,
@@ -56,7 +56,7 @@ public:
         op_modLFOfreq,
         op_modLFOtoVolume,
 
-        // Enveloppe pitch
+        // Envelop pitch
         op_pitcheg_delay,
         op_pitcheg_attack,
         op_pitcheg_hold,
@@ -113,6 +113,7 @@ public:
     void    setIntValue(int value)       { _intValue = value; }
     void    setDoubleValue(double value) { _dblValue = value; }
 
+    static QString DEFAULT_PATH;
 private:
     OpCode  _opcode;
     int     _intValue;

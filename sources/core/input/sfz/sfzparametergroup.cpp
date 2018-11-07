@@ -15,7 +15,7 @@ QList<int> SfzParameterGroup::getSampleIndex(SoundfontManager *sf2, EltID idElt,
 
     // Reconstitution adresse du fichier
     QString filePath =  _listeParam.at(indexOpSample).getStringValue();
-    QString fileName = pathSfz + "/" + filePath.replace("\\", "/");
+    QString fileName = pathSfz + "/" + filePath;
     if (!QFile(fileName).exists())
     {
         QStringList list = getFullPath(pathSfz, filePath.split("/", QString::SkipEmptyParts));
@@ -142,7 +142,7 @@ void SfzParameterGroup::adaptOffsets(int startLoop, int endLoop, int length)
 
 void SfzParameterGroup::adjustStereoVolumeAndCorrection(QString path, int defaultCorrection)
 {
-    QString sample = getStrValue(SfzParameter::op_sample).replace("\\", "/");
+    QString sample = getStrValue(SfzParameter::op_sample);
     if (!sample.isEmpty())
     {
         Sound son(path + "/" + sample);
@@ -154,12 +154,12 @@ void SfzParameterGroup::adjustStereoVolumeAndCorrection(QString path, int defaul
     }
 }
 
-bool SfzParameterGroup::sampleValid(QString path) const
+bool SfzParameterGroup::sampleValid(QString path)
 {
     bool bRet = false;
     if (this->isDefined(SfzParameter::op_sample))
     {
-        QString sample = getStrValue(SfzParameter::op_sample).replace("\\", "/");
+        QString sample = getStrValue(SfzParameter::op_sample);
         bRet = QFile(path + "/" + sample).exists();
     }
     return bRet;

@@ -2,6 +2,8 @@
 #include "contextmanager.h"
 #include <QDebug>
 
+QString SfzParameter::DEFAULT_PATH = "";
+
 SfzParameter::SfzParameter(QString opcode, QString valeur) :
     _opcode(op_unknown),
     _intValue(0),
@@ -12,7 +14,11 @@ SfzParameter::SfzParameter(QString opcode, QString valeur) :
     if (opcode == "sample")
     {
         _opcode = op_sample;
-        _strValue = valeur;
+        _strValue = valeur.replace("\\", "/");
+        if (!_strValue.isEmpty() && _strValue[0] == '/')
+            _strValue = _strValue.right(_strValue.size() - 1);
+        if (!DEFAULT_PATH.isEmpty())
+            _strValue = DEFAULT_PATH + "/" + _strValue;
     }
     else if (opcode == "key")
     {
@@ -344,5 +350,5 @@ SfzParameter::SfzParameter(QString opcode, QString valeur) :
         // Nothing to do, no warning
     }
     else
-        qDebug() << "non pris en charge: " + opcode + " (" + valeur + ")";
+        qDebug() << "opcode not supported: " + opcode + " (" + valeur + ")";
 }
