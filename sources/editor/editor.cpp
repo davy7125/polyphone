@@ -88,8 +88,8 @@ void Editor::inputProcessed()
         // Prepare the actions
         ui->toolBar->setSf2Index(_sf2Index);
 
-        // Tab title
-        updateTitle();
+        // Tab title and filepath
+        updateTitleAndPath();
     }
     else
     {
@@ -161,17 +161,21 @@ void Editor::update(QString editingSource)
     Page * currentPage = (Page*)ui->stackedWidget->currentWidget();
     currentPage->preparePage(editingSource);
 
-    // Tab title
-    updateTitle();
+    // Tab title and filepath
+    updateTitleAndPath();
 }
 
-void Editor::updateTitle()
+void Editor::updateTitleAndPath()
 {
+    // Title
     SoundfontManager * sm = SoundfontManager::getInstance();
     QString title = sm->getQstr(EltID(elementSf2, _sf2Index), champ_name);
     if (title.isEmpty())
         title = trUtf8("Sans titre");
     emit(tabTitleChanged((sm->isEdited(_sf2Index) ? "*" : "") + title));
+
+    // Path
+    emit(filePathChanged(sm->getQstr(EltID(elementSf2, _sf2Index), champ_filenameInitial)));
 }
 
 void Editor::displayOptionChanged(int displayOption)
