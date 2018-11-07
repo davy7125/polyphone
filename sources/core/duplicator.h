@@ -43,6 +43,9 @@ public:
     // Ou ne fait rien
     void copy(EltID idSource, EltID idDest);
 
+    // Duplicate an element
+    void duplicate(EltID id);
+
 private:
     enum EtatMessage
     {
@@ -65,18 +68,18 @@ private:
     // Initial sample, instrument and preset indexes
     QMap<int, QList<int> > _initialSmplIndexes, _initialInstIndexes, _initialPrstIndexes;
 
-    // DEPLACEMENT DANS UN MEME SF2 //
+    // Link
     void linkSmpl(EltID idSource, EltID idDest);
     void linkInst(EltID idSource, EltID idDest);
     void copyLink(EltID idSource, EltID idDest);
     void copyGlobal(EltID idSource, EltID idDest);
 
-    // DEPLACEMENT DANS UN AUTRE SF2 //
+    // Copy
     void copySmpl(EltID idSource, EltID idDest);
-    void copyInst(EltID idSource, EltID idDest);
-    void copyPrst(EltID idSource, EltID idDest);
+    void copyInst(EltID idSource, EltID idDest, bool withSmpl);
+    void copyPrst(EltID idSource, EltID idDest, bool withInst);
 
-    // Utilitaires
+    // Utils
     void copyGen(EltID idSource, EltID idDest);
     void copyMod(EltID idSource, EltID idDest);
     EtatMessage openDialog(QString question);

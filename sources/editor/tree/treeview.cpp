@@ -127,6 +127,12 @@ void TreeView::keyPressEvent(QKeyEvent * event)
             event->accept();
         }
     }
+    else if (event->modifiers() == Qt::ControlModifier && event->key() == Qt::Key_D)
+    {
+        _menu->initialize(getSelectedIds());
+        _menu->duplicate();
+        event->accept();
+    }
     else if (event->modifiers() == Qt::ControlModifier && event->key() == Qt::Key_F)
     {
         emit(focusOnSearch());

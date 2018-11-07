@@ -22,6 +22,7 @@ public slots:
     void itemSelectedFromList(EltID id, bool isAssociation);
     void copy();
     void paste();
+    void duplicate();
     void remove();
     void rename();
 
@@ -37,6 +38,7 @@ private:
     QAction * _associateAction;
     QAction * _copyAction;
     QAction * _pasteAction;
+    QAction * _duplicateAction;
     QAction * _removeAction;
     QAction * _renameAction;
     DialogList * _dialogList;
