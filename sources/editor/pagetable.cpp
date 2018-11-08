@@ -114,7 +114,7 @@ void PageTable::addGlobal(IdList listIds)
                 break;
         }
 
-        _table->addColumn(numCol, qStr);
+        _table->addColumn(numCol, qStr, id);
         nbGlobal++;
         EltID idGen = id;
         idGen.typeElement = this->contenantGen;
@@ -183,7 +183,6 @@ void PageTable::addGlobal(IdList listIds)
             genValTmp.shValue = offsetEndLoop;
             _table->item(row, numCol)->setText(Attribute::toString(champ_endloopAddrsOffset, _typePage == PAGE_PRST, genValTmp));
         }
-        _table->setID(id, numCol);
     }
 }
 
@@ -237,7 +236,7 @@ void PageTable::addDivisions(EltID id)
         int offsetEnd = 0;
         int offsetStartLoop = 0;
         int offsetEndLoop = 0;
-        _table->addColumn(numCol, qStr);
+        _table->addColumn(numCol, qStr, id);
         foreach (int champTmp, _sf2->getSiblings(id2))
         {
             genValTmp = _sf2->get(id, (AttributeType)champTmp);
@@ -303,7 +302,6 @@ void PageTable::addDivisions(EltID id)
             genValTmp.shValue = offsetEndLoop;
             _table->item(row, numCol)->setText(Attribute::toString(champ_endloopAddrsOffset, _typePage == PAGE_PRST, genValTmp));
         }
-        _table->setID(id2, numCol);
     }
 }
 

@@ -30,15 +30,22 @@
 #include <QKeyEvent>
 #include <QClipboard>
 #include <QPainter>
+#include <QHeaderView>
+#include "tableheaderview.h"
 
 TableWidget::TableWidget(QWidget *parent) : QTableWidget(parent)
 {
     _tableDelegate = new TableDelegate(this);
     setItemDelegate(_tableDelegate);
+    _tableHeader = new TableHeaderView(this);
+    setHorizontalHeader(_tableHeader);
+
     _timer = new QTimer(this);
     connect(_timer, SIGNAL(timeout()), this, SLOT(updateColors()));
     connect((QObject*)this->horizontalHeader(), SIGNAL(sectionDoubleClicked(int)), this, SLOT(onSectionDoubleClicked(int)));
     connect(this, SIGNAL(itemSelectionChanged()), this, SLOT(onItemSelectionChanged()));
+
+    _muteIcon = ContextManager::theme()->getColoredSvg(":/icons/volume-mute.svg", QSize(12, 12), ThemeManager::HIGHLIGHTED_BACKGROUND);
 }
 
 void TableWidget::clear()
@@ -50,7 +57,7 @@ void TableWidget::clear()
     _columnIds.clear();
 }
 
-void TableWidget::addColumn(int column, QString title)
+void TableWidget::addColumn(int column, QString title, EltID id)
 {
     _columnIds.insert(column, EltID());
     this->insertColumn(column);
@@ -62,10 +69,8 @@ void TableWidget::addColumn(int column, QString title)
     QColor color = this->palette().color(QPalette::Text);
     _listColors.insert(column, color);
     this->horizontalHeaderItem(column)->setForeground(color);
-}
 
-void TableWidget::setID(EltID id, int column)
-{
+    // Keep the id somewhere
     if (id.typeElement == elementInstGen)
         id.typeElement = elementInst;
     if (id.typeElement == elementInstSmplGen)
@@ -74,8 +79,12 @@ void TableWidget::setID(EltID id, int column)
         id.typeElement = elementPrst;
     if (id.typeElement == elementPrstInstGen)
         id.typeElement = elementPrstInst;
-    if (_columnIds.count() > column)
-        _columnIds[column] = id;
+    _columnIds[column] = id;
+    this->model()->setHeaderData(column, Qt::Horizontal, QVariant::fromValue(id), Qt::UserRole);
+
+    if ((id.typeElement == elementInstSmpl || id.typeElement == elementPrstInst) &&
+            SoundfontManager::getInstance()->get(id, champ_mute).bValue > 0)
+        this->model()->setHeaderData(column, Qt::Horizontal, QVariant::fromValue(_muteIcon), Qt::DecorationRole);
 }
 
 EltID TableWidget::getID(int column)
@@ -289,8 +298,8 @@ void TableWidget::copy()
         // Row 0 is for selection
         int indexNumber = indexes.size();
         for (int i = indexNumber - 1; i >= 0; i--)
-          if (indexes.at(i).row() == 0)
-            indexes.removeAt(i);
+            if (indexes.at(i).row() == 0)
+                indexes.removeAt(i);
 
         QMap<int, QMap<int, QString> > mapText;
         foreach (QModelIndex index, indexes)
@@ -383,7 +392,7 @@ void TableWidget::paste()
 
     // First row is for selection, no paste here
     if (minRow < 1)
-      minRow = 1;
+        minRow = 1;
 
     for (int indRow = 0; indRow < cellrows; indRow++)
     {

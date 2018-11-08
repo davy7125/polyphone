@@ -115,7 +115,8 @@ typedef enum
     champ_sampleDataFull24 = 202,
     champ_sampleData32 = 203,
 
-    champ_pitchDefined = 300 // if pitch defined in a sample (wav)
+    champ_pitchDefined = 300, // if pitch defined in a sample (wav)
+    champ_mute = 301 // Divisions can be muted for testing purposes
 } AttributeType;
 
 typedef enum

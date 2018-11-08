@@ -82,9 +82,6 @@
          <property name="columnCount">
           <number>1</number>
          </property>
-         <attribute name="horizontalHeaderDefaultSectionSize">
-          <number>63</number>
-         </attribute>
          <attribute name="horizontalHeaderMinimumSectionSize">
           <number>18</number>
          </attribute>
