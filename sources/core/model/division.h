@@ -20,6 +20,9 @@ public:
     AttributeValue getGen(AttributeType champ);
     const QMap<AttributeType, AttributeValue> & getGens() { return _parameters; }
 
+    void setMute(bool mute) { _mute = mute; }
+    bool isMute() { return _mute; }
+
     // Operations on modulators
     int addMod();
     Modulator * getMod(int index);
@@ -38,6 +41,7 @@ private:
     QMap<int, Modulator *> _modulators;
     QMap<AttributeType, AttributeValue> _parameters;
     int _modCounter;
+    bool _mute;
 };
 
 #endif // DIVISION_H

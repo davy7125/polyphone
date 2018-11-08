@@ -6,7 +6,8 @@
 
 Division::Division(InstPrst * instPrst, TreeItem * parent, EltID id) : TreeItem(id, parent),
     _instPrst(instPrst),
-    _modCounter(0)
+    _modCounter(0),
+    _mute(false)
 {}
 
 Division::~Division()
