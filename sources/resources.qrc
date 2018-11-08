@@ -14,7 +14,6 @@
         <file alias="loop_on_w.png">resources/loop_on_w.png</file>
         <file alias="note_off.png">resources/note_off.png</file>
         <file alias="note_on.png">resources/note_on.png</file>
-        <file alias="revert.png">resources/revert.png</file>
         <file alias="file-audio.svg">resources/file-audio.svg</file>
         <file alias="search.svg">resources/search.svg</file>
         <file alias="settings.svg">resources/settings.svg</file>
@@ -74,6 +73,12 @@
         <file alias="recorder_stop.svg">resources/recorder_stop.svg</file>
         <file alias="menu.svg">resources/menu.svg</file>
         <file alias="volume-mute.svg">resources/volume-mute.svg</file>
+        <file alias="flag.svg">resources/flag.svg</file>
+        <file alias="keyboard.svg">resources/keyboard.svg</file>
+        <file alias="sound.svg">resources/sound.svg</file>
+        <file alias="wrench.svg">resources/wrench.svg</file>
+        <file alias="crown.svg">resources/crown.svg</file>
+        <file alias="skull.svg">resources/skull.svg</file>
     </qresource>
     <qresource prefix="/traductions">
         <file>resources/traductions/polyphone_en.qm</file>

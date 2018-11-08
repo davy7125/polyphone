@@ -412,7 +412,15 @@ SOURCES	+= main.cpp \
     core/input/sfz/sfzparametergroup.cpp \
     core/input/sfz/sfzparametergroupassembly.cpp \
     dialogs/dialogcreateelements.cpp \
-    editor/widgets/tableheaderview.cpp
+    editor/widgets/tableheaderview.cpp \
+    context/interface/configtoc.cpp \
+    context/interface/configtocbutton.cpp \
+    context/interface/configsectiongeneral.cpp \
+    context/interface/configsectioninterface.cpp \
+    context/interface/configsectionsound.cpp \
+    context/interface/configsectionkeyboard.cpp \
+    context/interface/configsectionrepository.cpp \
+    repository/usermanager.cpp
 
 HEADERS  += \
     core/sound.h \
@@ -655,7 +663,15 @@ HEADERS  += \
     core/input/sfz/sfzparametergroup.h \
     core/input/sfz/sfzparametergroupassembly.h \
     dialogs/dialogcreateelements.h \
-    editor/widgets/tableheaderview.h
+    editor/widgets/tableheaderview.h \
+    context/interface/configtoc.h \
+    context/interface/configtocbutton.h \
+    context/interface/configsectiongeneral.h \
+    context/interface/configsectioninterface.h \
+    context/interface/configsectionsound.h \
+    context/interface/configsectionkeyboard.h \
+    context/interface/configsectionrepository.h \
+    repository/usermanager.h
 
 FORMS    += \
     dialogs/dialog_list.ui \
@@ -702,7 +718,13 @@ FORMS    += \
     editor/tools/release/toolrelease_gui.ui \
     editor/tools/chords/toolchords_gui.ui \
     editor/tools/soundfont_export/toolsoundfontexport_gui.ui \
-    dialogs/dialogcreateelements.ui
+    dialogs/dialogcreateelements.ui \
+    context/interface/configtoc.ui \
+    context/interface/configsectiongeneral.ui \
+    context/interface/configsectioninterface.ui \
+    context/interface/configsectionsound.ui \
+    context/interface/configsectionkeyboard.ui \
+    context/interface/configsectionrepository.ui
 
 RESOURCES += resources.qrc
 

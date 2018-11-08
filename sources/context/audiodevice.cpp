@@ -157,7 +157,7 @@ QList<HostInfo> AudioDevice::getHostInfo()
         listRet[0]._isDefault = true;
 
 #ifndef Q_OS_WIN
-    // Ajout jack
+    // Add jack if not windows
     listRet << HostInfo("Jack", -2);
 #endif
 
@@ -166,13 +166,15 @@ QList<HostInfo> AudioDevice::getHostInfo()
 
 void AudioDevice::initAudio()
 {
-    int deviceType = _configuration->getValue(ConfManager::SECTION_AUDIO, "type", 0).toInt();
-    int numIndex = _configuration->getValue(ConfManager::SECTION_AUDIO, "index", 0).toInt();
-    int bufferSize = _configuration->getValue(ConfManager::SECTION_AUDIO, "buffer_size", 512).toInt();
-
     // ≥0 : standard
     // -1 : none
     // -2 : jack
+    QString audioTypeStr = _configuration->getValue(ConfManager::SECTION_AUDIO, "type", "0#0").toString();
+    QStringList listStr = audioTypeStr.split("#");
+    int deviceType = listStr.size() >= 1 ? listStr[0].toInt() : 0;
+    int numIndex = listStr.size() >= 2 ? listStr[1].toInt() : 0;
+
+    int bufferSize = _configuration->getValue(ConfManager::SECTION_AUDIO, "buffer_size", 512).toInt();
 
     // Arrêt des serveurs son si besoin
     this->closeConnections();

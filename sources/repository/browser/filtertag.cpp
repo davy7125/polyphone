@@ -3,6 +3,7 @@
 #include <QCompleter>
 #include "flowlayout.h"
 #include "filtertagcell.h"
+#include <QMouseEvent>
 
 FilterTag::FilterTag(QWidget *parent) :
     QWidget(parent),
