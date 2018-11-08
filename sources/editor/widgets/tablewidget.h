@@ -30,6 +30,7 @@
 #include <QTimer>
 #include "soundfontmanager.h"
 class TableDelegate;
+class TableHeaderView;
 
 // QTableWidget an id by column, double click triggers an event and blue effect on the header
 class TableWidget : public QTableWidget
@@ -40,8 +41,7 @@ public:
     TableWidget(QWidget *parent = 0);
     ~TableWidget() { delete this->itemDelegate(); }
     void clear();
-    void addColumn(int column, QString title);
-    void setID(EltID id, int column);
+    void addColumn(int column, QString title, EltID id);
     EltID getID(int column);
     void setEnlighted(int colonne, bool isEnlighted);
     void setColumnCount(int columns);
@@ -81,6 +81,8 @@ private:
     QTimer *_timer;
     QList<QColor> _listColors;
     TableDelegate * _tableDelegate;
+    TableHeaderView * _tableHeader;
+    QPixmap _muteIcon;
 
     void copy();
     void paste();

@@ -411,7 +411,8 @@ SOURCES	+= main.cpp \
     core/input/sfz/sfzparameter.cpp \
     core/input/sfz/sfzparametergroup.cpp \
     core/input/sfz/sfzparametergroupassembly.cpp \
-    dialogs/dialogcreateelements.cpp
+    dialogs/dialogcreateelements.cpp \
+    editor/widgets/tableheaderview.cpp
 
 HEADERS  += \
     core/sound.h \
@@ -653,7 +654,8 @@ HEADERS  += \
     core/input/sfz/sfzparameter.h \
     core/input/sfz/sfzparametergroup.h \
     core/input/sfz/sfzparametergroupassembly.h \
-    dialogs/dialogcreateelements.h
+    dialogs/dialogcreateelements.h \
+    editor/widgets/tableheaderview.h
 
 FORMS    += \
     dialogs/dialog_list.ui \

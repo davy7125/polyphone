@@ -73,6 +73,7 @@
         <file alias="recorder_record.svg">resources/recorder_record.svg</file>
         <file alias="recorder_stop.svg">resources/recorder_stop.svg</file>
         <file alias="menu.svg">resources/menu.svg</file>
+        <file alias="volume-mute.svg">resources/volume-mute.svg</file>
     </qresource>
     <qresource prefix="/traductions">
         <file>resources/traductions/polyphone_en.qm</file>

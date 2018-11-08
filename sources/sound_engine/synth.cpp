@@ -200,6 +200,11 @@ void Synth::play_sub(int type, int idSf2, int idElt, int note, int velocity, Voi
         foreach (int i, _sf2->getSiblings(idInstSmpl))
         {
             idInstSmpl.indexElt2 = i;
+
+            // Skip muted divisions
+            if (_sf2->get(idInstSmpl, champ_mute).bValue > 0)
+                continue;
+
             if (_sf2->isSet(idInstSmpl, champ_keyRange))
             {
                 rangeTmp = _sf2->get(idInstSmpl, champ_keyRange).rValue;
@@ -222,8 +227,7 @@ void Synth::play_sub(int type, int idSf2, int idElt, int note, int velocity, Voi
                 velMin = defaultVelRange.byLo;
                 velMax = defaultVelRange.byHi;
             }
-            if (keyMin <= note && keyMax >= note &&
-                    velMin <= velocity && velMax >= velocity)
+            if (keyMin <= note && keyMax >= note && velMin <= velocity && velMax >= velocity)
             {
                 // Récupération des paramètres et lecture du sample associé
                 VoiceParam * voiceParam = new VoiceParam(_sf2, idInstSmpl, voiceParamTmp);
@@ -258,6 +262,11 @@ void Synth::play_sub(int type, int idSf2, int idElt, int note, int velocity, Voi
         foreach (int i, _sf2->getSiblings(idPrstInst))
         {
             idPrstInst.indexElt2 = i;
+
+            // Skip muted divisions
+            if (_sf2->get(idPrstInst, champ_mute).bValue > 0)
+                continue;
+
             if (_sf2->isSet(idPrstInst, champ_keyRange))
             {
                 rangeTmp = _sf2->get(idPrstInst, champ_keyRange).rValue;

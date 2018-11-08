@@ -237,12 +237,18 @@ AttributeValue SoundfontManager::get(EltID id, AttributeType champ)
     case elementInstSmpl:{
         // Analyse d'un sample lié à un instrument
         Division *tmp = _soundfonts->getSoundfont(id.indexSf2)->getInstrument(id.indexElt)->getDivision(id.indexElt2);
-        value = tmp->getGen(champ);
+        if (champ == champ_mute)
+            value.bValue = (tmp->isMute() ? 1 : 0);
+        else
+            value = tmp->getGen(champ);
     }break;
     case elementPrstInst:{
         // Analyse d'un instrument lié à un preset
         Division *tmp = _soundfonts->getSoundfont(id.indexSf2)->getPreset(id.indexElt)->getDivision(id.indexElt2);
-        value = tmp->getGen(champ);
+        if (champ == champ_mute)
+            value.bValue = (tmp->isMute() ? 1 : 0);
+        else
+            value = tmp->getGen(champ);
     }break;
     case elementInstMod: case elementPrstMod: case elementInstSmplMod: case elementPrstInstMod:{
         // Analyse d'un mod
@@ -1112,6 +1118,7 @@ int SoundfontManager::set(EltID id, AttributeType champ, AttributeValue value)
     QMutexLocker locker(&_mutex);
     if (!this->isValid(id))
         return 1;
+    bool storeAction = true;
 
     AttributeValue oldValue;
     oldValue.wValue = 0;
@@ -1215,18 +1222,34 @@ int SoundfontManager::set(EltID id, AttributeType champ, AttributeValue value)
     case elementInstSmpl:{
         // Modification of a sample linked to an instrument
         Division *tmp = _soundfonts->getSoundfont(id.indexSf2)->getInstrument(id.indexElt)->getDivision(id.indexElt2);
-        if (!tmp->isSet(champ))
-            defaultValue = 1;
-        oldValue = tmp->getGen(champ);
-        tmp->setGen(champ, value);
+        if (champ == champ_mute)
+        {
+            tmp->setMute(value.bValue > 0);
+            storeAction = false;
+        }
+        else
+        {
+            if (!tmp->isSet(champ))
+                defaultValue = 1;
+            oldValue = tmp->getGen(champ);
+            tmp->setGen(champ, value);
+        }
     }break;
     case elementPrstInst:{
         // Modification of an instrument linked to a preset
         Division *tmp = _soundfonts->getSoundfont(id.indexSf2)->getPreset(id.indexElt)->getDivision(id.indexElt2);
-        if (!tmp->isSet(champ))
-            defaultValue = 1;
-        oldValue = tmp->getGen(champ);
-        tmp->setGen(champ, value);
+        if (champ == champ_mute)
+        {
+            tmp->setMute(value.bValue > 0);
+            storeAction = false;
+        }
+        else
+        {
+            if (!tmp->isSet(champ))
+                defaultValue = 1;
+            oldValue = tmp->getGen(champ);
+            tmp->setGen(champ, value);
+        }
     }break;
     case elementInstMod: case elementPrstMod: case elementInstSmplMod: case elementPrstInstMod:{
         // Modification d'un mod d'un instrument
@@ -1269,17 +1292,20 @@ int SoundfontManager::set(EltID id, AttributeType champ, AttributeValue value)
     }break;
     }
 
-    // Create and store the action
-    Action *action = new Action();
-    if (defaultValue)
-        action->typeAction = Action::TypeChangeFromDefault;
-    else
-        action->typeAction = Action::TypeUpdate;
-    action->id = id;
-    action->champ = champ;
-    action->vOldValue = oldValue;
-    action->vNewValue = value;
-    this->_undoRedo->add(action);
+    if (storeAction)
+    {
+        // Create and store the action
+        Action *action = new Action();
+        if (defaultValue)
+            action->typeAction = Action::TypeChangeFromDefault;
+        else
+            action->typeAction = Action::TypeUpdate;
+        action->id = id;
+        action->champ = champ;
+        action->vOldValue = oldValue;
+        action->vNewValue = value;
+        this->_undoRedo->add(action);
+    }
 
     return 0;
 }
