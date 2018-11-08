@@ -22,127 +22,28 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#include <QFileInfo>
-#include <QDir>
-#include <QColorDialog>
-#include <QDesktopServices>
 #include "configpanel.h"
 #include "ui_configpanel.h"
-#include "portaudio.h"
-#include <qmath.h>
-#include <QTimer>
 #include "contextmanager.h"
-
+#include <QScrollBar>
 
 ConfigPanel::ConfigPanel(QWidget *parent) : QWidget(parent),
     ui(new Ui::ConfigPanel)
 {
     ui->setupUi(this);
 
-#ifdef Q_OS_MAC
-    ui->groupBox->layout()->setMargin(10);
-#endif
+    // Style
+    QString styleSheet = QString("QLabel{border-radius:5px;padding: 0px 5px;") +
+            "background-color:" + ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND).name() + ";" +
+            "color: " + ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_TEXT).name() + ";}";
+    ui->generalLabel->setStyleSheet(styleSheet);
+    ui->interfaceLabel->setStyleSheet(styleSheet);
+    ui->soundLabel->setStyleSheet(styleSheet);
+    ui->keyboardLabel->setStyleSheet(styleSheet);
+    ui->repositoryLabel->setStyleSheet(styleSheet);
 
-    // LOAD CONFIGURATION
-    _loaded = false;
-
-    // Liste des sorties audio
-    int audioType = ContextManager::configuration()->getValue(ConfManager::SECTION_AUDIO, "type", 0).toInt();
-    int audioIndex = ContextManager::configuration()->getValue(ConfManager::SECTION_AUDIO, "index", 0).toInt();
-
-    QList<HostInfo> hostInfos = ContextManager::audio()->getHostInfo();
-    bool configFound = false;
-    int comboboxIndex = 0;
-    int comboboxDefaultIndex = 0;
-    for (int i = 0; i < hostInfos.size(); i++)
-    {
-        if (hostInfos[i]._index < 0)
-        {
-            ui->comboAudioOuput->addItem(hostInfos[i]._name, QString::number(hostInfos[i]._index) + "#-1");
-            if (hostInfos[i]._index == audioType)
-            {
-                configFound = true;
-                comboboxIndex = ui->comboAudioOuput->count() - 1;
-            }
-        }
-        else
-        {
-            for (int j = 0; j < hostInfos[i]._devices.size(); j++)
-            {
-                QString suffix = "";
-                ui->comboAudioOuput->addItem(hostInfos[i]._name + ": " +
-                                             hostInfos[i]._devices[j]._name + suffix,
-                                             QString::number(hostInfos[i]._index) + "#" +
-                                             QString::number(hostInfos[i]._devices[j]._index));
-                if (hostInfos[i]._devices[j]._isDefault)
-                {
-                    if (hostInfos[i]._isDefault)
-                        comboboxDefaultIndex = ui->comboAudioOuput->count() - 1;
-                }
-                if (!configFound && hostInfos[i]._index == audioType)
-                {
-                    if (hostInfos[i]._devices[j]._index == audioIndex)
-                    {
-                        configFound = true;
-                        comboboxIndex = ui->comboAudioOuput->count() - 1;
-                    }
-                    else if (hostInfos[i]._devices[j]._isDefault)
-                        comboboxIndex = ui->comboAudioOuput->count() - 1;
-                }
-            }
-        }
-    }
-    if (!configFound)
-        comboboxIndex = comboboxDefaultIndex;
-    ui->comboAudioOuput->setCurrentIndex(comboboxIndex);
-
-    int bufferSize = ContextManager::configuration()->getValue(ConfManager::SECTION_AUDIO, "buffer_size", 512).toInt();
-    int pos = qRound(qLn(bufferSize) / 0.69314718056 - 4);
-    if (pos < 0)
-        pos = 0;
-    if (pos > ui->comboBufferSize->count() - 1)
-        pos = ui->comboBufferSize->count() - 1;
-    ui->comboBufferSize->setCurrentIndex(pos);
-    ui->checkBoucle->setChecked(ContextManager::configuration()->getValue(ConfManager::SECTION_NONE, "wav_auto_loop", false).toBool());
-    ui->checkBlanc->setChecked(ContextManager::configuration()->getValue(ConfManager::SECTION_NONE, "wav_remove_blank", false).toBool());
-
-    // Paramètres synthétiseur
-    int gain = ContextManager::configuration()->getValue(ConfManager::SECTION_SOUND_ENGINE, "gain", 0).toInt();
-    ui->sliderGain->setValue(gain);
-    ui->labelGain->setNum(gain);
-    ui->dialRevNiveau->setValue(ContextManager::configuration()->getValue(ConfManager::SECTION_SOUND_ENGINE, "rev_level", 0).toInt());
-    ui->dialRevProfondeur->setValue(ContextManager::configuration()->getValue(ConfManager::SECTION_SOUND_ENGINE, "rev_size", 0).toInt());
-    ui->dialRevDensite->setValue(ContextManager::configuration()->getValue(ConfManager::SECTION_SOUND_ENGINE, "rev_width", 0).toInt());
-    ui->dialRevAttenuation->setValue(ContextManager::configuration()->getValue(ConfManager::SECTION_SOUND_ENGINE, "rev_damping", 0).toInt());
-    ui->dialChoNiveau->setValue(ContextManager::configuration()->getValue(ConfManager::SECTION_SOUND_ENGINE, "cho_level", 0).toInt());
-    ui->dialChoAmplitude->setValue(ContextManager::configuration()->getValue(ConfManager::SECTION_SOUND_ENGINE, "cho_depth", 0).toInt());
-    ui->dialChoFrequence->setValue(ContextManager::configuration()->getValue(ConfManager::SECTION_SOUND_ENGINE, "cho_frequency", 0).toInt());
-    ui->checkRepercussionStereo->setChecked(
-                ContextManager::configuration()->getValue(ConfManager::SECTION_NONE, "stereo_modification", false).toBool());
-    ui->comboKeyName->setCurrentIndex(
-                (int)ContextManager::keyName()->getNameMiddleC());
-    ui->spinDefaultVelocity->setValue(
-                ContextManager::configuration()->getValue(ConfManager::SECTION_KEYBOARD, "velocity", 127).toInt());
-
-    QTimer::singleShot(1, this, SLOT(fillColors())); // trick that fixes a bug which appeared with Qt5
-
-    // Keyboard map
-    int octaveMapping = ContextManager::configuration()->getValue(ConfManager::SECTION_MAP, "octave_offset", 3).toInt();
-    if (octaveMapping >= ui->comboDo->count())
-        octaveMapping = 3;
-    else if (octaveMapping < 0)
-        octaveMapping = 0;
-    ui->comboDo->setCurrentIndex(octaveMapping);
-    connect(ui->tableKeyboardMap, SIGNAL(combinaisonChanged(int,int,QString)), this, SLOT(combinaisonChanged(int,int,QString)));
-    renameComboDo();
-    ui->tableKeyboardMap->populate();
-
-    initComboLanguage();
-
-    // Populate color themes and select the current one
-    ContextManager::theme()->populateCombobox(ui->comboColorTheme);
-
-    _loaded = true;
+    // Events
+    connect(ui->widgetToc, SIGNAL(sectionClicked(int)), this, SLOT(goToSection(int)));
 }
 
 ConfigPanel::~ConfigPanel()
@@ -152,397 +53,27 @@ ConfigPanel::~ConfigPanel()
 
 void ConfigPanel::initializeInterface()
 {
-    // Style
-    QString styleSheet = QString("QLabel{border-radius:5px;padding: 0px 5px;") +
-            "background-color:" + ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND).name() + ";" +
-            "color: " + ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_TEXT).name() + ";}";
-    ui->generalLabel->setStyleSheet(styleSheet);
-    ui->interfaceLabel->setStyleSheet(styleSheet);
-    ui->soundLabel->setStyleSheet(styleSheet);
-    ui->keyboardLabel->setStyleSheet(styleSheet);
-
-    // Midi input to contineously update
-    ui->comboMidiInput->blockSignals(true);
-    ui->comboMidiInput->clear();
-    QStringList listMidi = ContextManager::midi()->getMidiList();
-    ui->comboMidiInput->addItem("-");
-    ui->comboMidiInput->addItems(listMidi);
-
-    // Sélection
-    int numMidiPort = ContextManager::configuration()->getValue(ConfManager::SECTION_MIDI, "index_port", -1).toInt();
-    if (ui->comboMidiInput->count() > numMidiPort + 1)
-        ui->comboMidiInput->setCurrentIndex(numMidiPort + 1);
-    else
-        ui->comboMidiInput->setCurrentIndex(0);
-    ui->comboMidiInput->blockSignals(false);
+    ui->generalWidget->initialize();
+    ui->interfaceWidget->initialize();
+    ui->soundWidget->initialize();
+    ui->keyboardWidget->initialize();
+    ui->repositoryWidget->initialize();
 }
 
-void ConfigPanel::setAudioOutput(int index)
+void ConfigPanel::goToSection(int sectionNumber)
 {
-    Q_UNUSED(index)
-    if (_loaded)
+    QWidget * widget;
+    switch (sectionNumber)
     {
-        QString str = ui->comboAudioOuput->itemData(ui->comboAudioOuput->currentIndex()).toString();
-        QStringList listStr = str.split("#");
-        int audioType = listStr.size() >= 1 ? listStr[0].toInt() : 0;
-        int audioIndex = listStr.size() >= 2 ? listStr[1].toInt() : 0;
-
-        ContextManager::configuration()->setValue(ConfManager::SECTION_AUDIO, "index", audioIndex);
-        ContextManager::configuration()->setValue(ConfManager::SECTION_AUDIO, "type", audioType);
-    }
-}
-void ConfigPanel::on_comboBufferSize_activated(int index)
-{
-    // Modification de la taille du buffer
-    if (_loaded)
-    {
-        int bufferSize = pow(2.0f, index + 4);
-        ContextManager::configuration()->setValue(ConfManager::SECTION_AUDIO, "buffer_size", bufferSize);
-    }
-}
-void ConfigPanel::setWavAutoLoop(bool checked)
-{
-    if (_loaded)
-    {
-        ContextManager::configuration()->setValue(ConfManager::SECTION_NONE, "wav_auto_loop", checked);
-    }
-}
-void ConfigPanel::setWavRemoveBlank(bool checked)
-{
-    if (_loaded)
-    {
-        ContextManager::configuration()->setValue(ConfManager::SECTION_NONE, "wav_remove_blank", checked);
-    }
-}
-void ConfigPanel::setNumPortMidi(int val)
-{
-    if (_loaded)
-    {
-        int numPortMidi = val-1;
-        ContextManager::configuration()->setValue(ConfManager::SECTION_MIDI, "index_port", numPortMidi);
-        ContextManager::midi()->openMidiPort(numPortMidi);
-    }
-}
-
-void ConfigPanel::setSynthGain(int val)
-{
-    if (_loaded)
-    {
-        ContextManager::configuration()->setValue(ConfManager::SECTION_SOUND_ENGINE, "gain", val);
-    }
-}
-
-void ConfigPanel::setVolume(int val)
-{
-    setSynthGain(val);
-    ui->sliderGain->blockSignals(true);
-    ui->sliderGain->setValue(val);
-    ui->labelGain->setText(QString::number(val));
-    ui->sliderGain->blockSignals(false);
-}
-
-void ConfigPanel::on_dialRevNiveau_valueChanged(int value)
-{
-    if (_loaded)
-    {
-        ContextManager::configuration()->setValue(ConfManager::SECTION_SOUND_ENGINE, "rev_level", value);
-    }
-}
-
-void ConfigPanel::on_dialRevProfondeur_valueChanged(int value)
-{
-    if (_loaded)
-    {
-        ContextManager::configuration()->setValue(ConfManager::SECTION_SOUND_ENGINE, "rev_size", value);
-    }
-}
-
-void ConfigPanel::on_dialRevDensite_valueChanged(int value)
-{
-    if (_loaded)
-    {
-        ContextManager::configuration()->setValue(ConfManager::SECTION_SOUND_ENGINE, "rev_width", value);
-    }
-}
-
-void ConfigPanel::on_dialRevAttenuation_valueChanged(int value)
-{
-    if (_loaded)
-    {
-        ContextManager::configuration()->setValue(ConfManager::SECTION_SOUND_ENGINE, "rev_damping", value);
-    }
-}
-
-void ConfigPanel::on_dialChoNiveau_valueChanged(int value)
-{
-    if (_loaded)
-    {
-        ContextManager::configuration()->setValue(ConfManager::SECTION_SOUND_ENGINE, "cho_level", value);
-    }
-}
-
-void ConfigPanel::on_dialChoAmplitude_valueChanged(int value)
-{
-    if (_loaded)
-    {
-        ContextManager::configuration()->setValue(ConfManager::SECTION_SOUND_ENGINE, "cho_depth", value);
-    }
-}
-
-void ConfigPanel::on_dialChoFrequence_valueChanged(int value)
-{
-    if (_loaded)
-    {
-        ContextManager::configuration()->setValue(ConfManager::SECTION_SOUND_ENGINE, "cho_frequency", value);
-    }
-}
-
-void ConfigPanel::on_checkRepercussionStereo_clicked()
-{
-    if (_loaded)
-    {
-        ContextManager::configuration()->setValue(ConfManager::SECTION_NONE, "stereo_modification",
-                                                  ui->checkRepercussionStereo->isChecked());
-    }
-}
-
-void ConfigPanel::combinaisonChanged(int key, int numOctave, QString combinaison)
-{
-    ContextManager::configuration()->setValue(ConfManager::SECTION_MAP,
-                                              "key_" + QString::number(numOctave) + "_" + QString::number(key),
-                                              combinaison);
-}
-
-void ConfigPanel::on_comboKeyName_currentIndexChanged(int index)
-{
-    if (_loaded)
-    {
-        ContextManager::keyName()->setMiddleKey((KeyNameManager::NameMiddleC)index);
-        renameComboDo();
-    }
-}
-
-void ConfigPanel::on_comboDo_currentIndexChanged(int index)
-{
-    ContextManager::configuration()->setValue(ConfManager::SECTION_MAP, "octave_offset", index);
-    ui->comboDo->blockSignals(true);
-    ui->comboDo->setCurrentIndex(index);
-    ui->comboDo->blockSignals(false);
-}
-
-void ConfigPanel::renameComboDo()
-{
-    int nbElement = ui->comboDo->count();
-    for (int i = 0; i < nbElement; i++)
-        ui->comboDo->setItemText(i, ContextManager::keyName()->getKeyName(12 * i));
-}
-
-void ConfigPanel::on_spinDefaultVelocity_editingFinished()
-{
-    if (_loaded)
-    {
-        int velocity = ui->spinDefaultVelocity->value();
-        ContextManager::configuration()->setValue(ConfManager::SECTION_KEYBOARD, "velocity", velocity);
-    }
-}
-
-bool caseInsensitiveLessThan(const QString &s1, const QString &s2)
-{
-    return s1.toLower() < s2.toLower();
-}
-
-void ConfigPanel::initComboLanguage()
-{
-    // Load the different languages
-    ui->comboLangue->blockSignals(true);
-    QMap<QString, QString> languages = ContextManager::translation()->getLanguages();
-    QStringList languageNames = languages.values();
-    qSort(languageNames.begin(), languageNames.end(), caseInsensitiveLessThan);
-
-    foreach (QString languageName, languageNames)
-        ui->comboLangue->addItem(languageName, languages.key(languageName));
-
-    // Selection of the current language
-    QString locale = QLocale::system().name().section('_', 0, 0);
-    locale = ContextManager::configuration()->getValue(ConfManager::SECTION_NONE, "language", locale).toString();
-    bool found = false;
-    for (int i = 0; i < ui->comboLangue->count(); i++)
-    {
-        if (ui->comboLangue->itemData(i).toString() == locale)
-        {
-            found = true;
-            ui->comboLangue->setCurrentIndex(i);
-            break;
-        }
+    case 0: widget = ui->generalLabel; break;
+    case 1: widget = ui->interfaceLabel; break;
+    case 2: widget = ui->soundLabel; break;
+    case 3: widget = ui->keyboardLabel; break;
+    case 4: widget = ui->repositoryLabel; break;
+    default:
+        return;
     }
 
-    // If not found, english is the default
-    if (!found)
-    {
-        for (int i = 0; i < ui->comboLangue->count(); i++)
-        {
-            if (ui->comboLangue->itemData(i).toString() == "en")
-            {
-                ui->comboLangue->setCurrentIndex(i);
-                break;
-            }
-        }
-    }
-
-    ui->comboLangue->blockSignals(false);
-}
-
-void ConfigPanel::on_comboLangue_currentIndexChanged(int index)
-{
-    ContextManager::configuration()->setValue(ConfManager::SECTION_NONE, "language", ui->comboLangue->itemData(index));
-    QMessageBox::information(QApplication::activeWindow(), trUtf8("Information"),
-                             trUtf8("La modification sera prise en compte lors du prochain démarrage du logiciel."));
-}
-
-
-//////////////
-/// Colors ///
-//////////////
-
-void ConfigPanel::on_comboColorTheme_currentIndexChanged(int index)
-{
-    if (_loaded) {
-        if (index == 0) {
-            ContextManager::theme()->resetTheme();
-            fillColors();
-            QMessageBox::information(QApplication::activeWindow(), trUtf8("Information"),
-                                     trUtf8("La modification sera prise en compte lors du prochain démarrage du logiciel."));
-        } else {
-            int themeIndex = ui->comboColorTheme->itemData(index).toInt();
-            if (themeIndex != -1) {
-                ContextManager::theme()->applyTheme(themeIndex);
-                fillColors();
-                QMessageBox::information(QApplication::activeWindow(), trUtf8("Information"),
-                                         trUtf8("La modification sera prise en compte lors du prochain démarrage du logiciel."));
-            }
-        }
-    }
-}
-
-void ConfigPanel::on_pushColorWindowBackground_clicked()
-{
-    QColor color = QColorDialog::getColor(ContextManager::theme()->getColor(ThemeManager::WINDOW_BACKGROUND),
-                                          this, trUtf8("Choisissez une couleur"));
-    if (color.isValid())
-    {
-        ContextManager::theme()->setColor(ThemeManager::WINDOW_BACKGROUND, color);
-        this->fillColors();
-    }
-}
-
-void ConfigPanel::on_pushColorButtonBackground_clicked()
-{
-    QColor color = QColorDialog::getColor(ContextManager::theme()->getColor(ThemeManager::BUTTON_BACKGROUND),
-                                          this, trUtf8("Choisissez une couleur"));
-    if (color.isValid())
-    {
-        ContextManager::theme()->setColor(ThemeManager::BUTTON_BACKGROUND, color);
-        this->fillColors();
-    }
-}
-
-void ConfigPanel::on_pushColorSelectionBackground_clicked()
-{
-    QColor color = QColorDialog::getColor(ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND),
-                                          this, trUtf8("Choisissez une couleur"));
-    if (color.isValid())
-    {
-        ContextManager::theme()->setColor(ThemeManager::HIGHLIGHTED_BACKGROUND, color);
-        this->fillColors();
-    }
-}
-
-void ConfigPanel::on_pushColorListBackground_clicked()
-{
-    QColor color = QColorDialog::getColor(ContextManager::theme()->getColor(ThemeManager::LIST_BACKGROUND),
-                                          this, trUtf8("Choisissez une couleur"));
-    if (color.isValid())
-    {
-        ContextManager::theme()->setColor(ThemeManager::LIST_BACKGROUND, color);
-        this->fillColors();
-    }
-}
-
-void ConfigPanel::on_pushColorListAlternativeBackground_clicked()
-{
-    QColor color = QColorDialog::getColor(ContextManager::theme()->getColor(ThemeManager::LIST_ALTERNATIVE_BACKGROUND),
-                                          this, trUtf8("Choisissez une couleur"));
-    if (color.isValid())
-    {
-        ContextManager::theme()->setColor(ThemeManager::LIST_ALTERNATIVE_BACKGROUND, color);
-        this->fillColors();
-    }
-}
-
-void ConfigPanel::on_pushColorWindowText_clicked()
-{
-    QColor color = QColorDialog::getColor(ContextManager::theme()->getColor(ThemeManager::WINDOW_TEXT),
-                                          this, trUtf8("Choisissez une couleur"));
-    if (color.isValid())
-    {
-        ContextManager::theme()->setColor(ThemeManager::WINDOW_TEXT, color);
-        this->fillColors();
-    }
-}
-
-void ConfigPanel::on_pushColorButtonText_clicked()
-{
-    QColor color = QColorDialog::getColor(ContextManager::theme()->getColor(ThemeManager::BUTTON_TEXT),
-                                          this, trUtf8("Choisissez une couleur"));
-    if (color.isValid())
-    {
-        ContextManager::theme()->setColor(ThemeManager::BUTTON_TEXT, color);
-        this->fillColors();
-    }
-}
-
-void ConfigPanel::on_pushColorSelectionText_clicked()
-{
-    QColor color = QColorDialog::getColor(ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_TEXT),
-                                          this, trUtf8("Choisissez une couleur"));
-    if (color.isValid())
-    {
-        ContextManager::theme()->setColor(ThemeManager::HIGHLIGHTED_TEXT, color);
-        this->fillColors();
-    }
-}
-
-void ConfigPanel::on_pushColorListText_clicked()
-{
-    QColor color = QColorDialog::getColor(ContextManager::theme()->getColor(ThemeManager::LIST_TEXT),
-                                          this, trUtf8("Choisissez une couleur"));
-    if (color.isValid())
-    {
-        ContextManager::theme()->setColor(ThemeManager::LIST_TEXT, color);
-        this->fillColors();
-    }
-}
-
-void ConfigPanel::fillColors()
-{
-    QString styleStart = "QPushButton{border: 1px solid #888; background-color: ";
-    ui->pushColorWindowBackground->setStyleSheet(
-                styleStart + ContextManager::theme()->getColor(ThemeManager::WINDOW_BACKGROUND).name() + ";}");
-    ui->pushColorWindowText->setStyleSheet(
-                styleStart + ContextManager::theme()->getColor(ThemeManager::WINDOW_TEXT).name() + ";}");
-    ui->pushColorButtonBackground->setStyleSheet(
-                styleStart + ContextManager::theme()->getColor(ThemeManager::BUTTON_BACKGROUND).name() + ";}");
-    ui->pushColorButtonText->setStyleSheet(
-                styleStart + ContextManager::theme()->getColor(ThemeManager::BUTTON_TEXT).name() + ";}");
-    ui->pushColorSelectionBackground->setStyleSheet(
-                styleStart + ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND).name() + ";}");
-    ui->pushColorSelectionText->setStyleSheet(
-                styleStart + ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_TEXT).name() + ";}");
-    ui->pushColorListBackground->setStyleSheet(
-                styleStart + ContextManager::theme()->getColor(ThemeManager::LIST_BACKGROUND).name() + ";}");
-    ui->pushColorListAlternativeBackground->setStyleSheet(
-                styleStart + ContextManager::theme()->getColor(ThemeManager::LIST_ALTERNATIVE_BACKGROUND).name() + ";}");
-    ui->pushColorListText->setStyleSheet(
-                styleStart + ContextManager::theme()->getColor(ThemeManager::LIST_TEXT).name() + ";}");
-    ContextManager::theme()->selectIndex(ui->comboColorTheme);
+    const QPoint p = widget->mapTo(ui->scrollArea, QPoint(0,0));
+    ui->scrollArea->verticalScrollBar()->setValue(p.y() + ui->scrollArea->verticalScrollBar()->value() - ui->horizontalLayout->margin());
 }

@@ -3,15 +3,18 @@
 #include "soundfontinformation.h"
 #include "soundfontfilter.h"
 #include "contextmanager.h"
+#include "repositorymanager.h"
 
 SoundfontCell::IconContainer * SoundfontCell::s_icons = NULL;
 
 SoundfontCell::SoundfontCell(SoundfontInformation* soundfontInfo, QWidget *parent) :
     QWidget(parent),
     ui(new Ui::SoundfontCell),
-    _active(true)
+    _active(true),
+    _soundfontId(soundfontInfo->getId())
 {
     ui->setupUi(this);
+    this->installEventFilter(this);
 
     if (s_icons == NULL)
         s_icons = new IconContainer();
@@ -101,4 +104,16 @@ int SoundfontCell::heightForWidth(int width) const
 bool SoundfontCell::hasHeightForWidth() const
 {
     return true;
+}
+
+void SoundfontCell::mouseDoubleClickEvent(QMouseEvent *event)
+{
+    if (event->button() == Qt::LeftButton && _active)
+    {
+        RepositoryManager::getInstance()->openSoundfont(_soundfontId, true);
+        event->accept();
+        return;
+    }
+
+    QWidget::mouseDoubleClickEvent(event);
 }

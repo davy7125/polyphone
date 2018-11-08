@@ -115,7 +115,7 @@
        </property>
        <property name="icon">
         <iconset resource="../resources.qrc">
-         <normaloff>:/icons/revert.png</normaloff>:/icons/revert.png</iconset>
+         <normaloff>:/icons/edit-undo.svg</normaloff>:/icons/edit-undo.svg</iconset>
        </property>
        <property name="flat">
         <bool>true</bool>
@@ -149,7 +149,7 @@
        </property>
        <property name="icon">
         <iconset resource="../resources.qrc">
-         <normaloff>:/icons/revert.png</normaloff>:/icons/revert.png</iconset>
+         <normaloff>:/icons/edit-undo.svg</normaloff>:/icons/edit-undo.svg</iconset>
        </property>
        <property name="flat">
         <bool>true</bool>
@@ -192,7 +192,7 @@
        </property>
        <property name="icon">
         <iconset resource="../resources.qrc">
-         <normaloff>:/icons/revert.png</normaloff>:/icons/revert.png</iconset>
+         <normaloff>:/icons/edit-undo.svg</normaloff>:/icons/edit-undo.svg</iconset>
        </property>
        <property name="flat">
         <bool>true</bool>
@@ -244,7 +244,7 @@
        </property>
        <property name="icon">
         <iconset resource="../resources.qrc">
-         <normaloff>:/icons/revert.png</normaloff>:/icons/revert.png</iconset>
+         <normaloff>:/icons/edit-undo.svg</normaloff>:/icons/edit-undo.svg</iconset>
        </property>
        <property name="flat">
         <bool>true</bool>
@@ -290,7 +290,7 @@
        </property>
        <property name="icon">
         <iconset resource="../resources.qrc">
-         <normaloff>:/icons/revert.png</normaloff>:/icons/revert.png</iconset>
+         <normaloff>:/icons/edit-undo.svg</normaloff>:/icons/edit-undo.svg</iconset>
        </property>
        <property name="flat">
         <bool>true</bool>
@@ -359,7 +359,7 @@
        </property>
        <property name="icon">
         <iconset resource="../resources.qrc">
-         <normaloff>:/icons/revert.png</normaloff>:/icons/revert.png</iconset>
+         <normaloff>:/icons/edit-undo.svg</normaloff>:/icons/edit-undo.svg</iconset>
        </property>
        <property name="flat">
         <bool>true</bool>
@@ -431,7 +431,7 @@
        </property>
        <property name="icon">
         <iconset resource="../resources.qrc">
-         <normaloff>:/icons/revert.png</normaloff>:/icons/revert.png</iconset>
+         <normaloff>:/icons/edit-undo.svg</normaloff>:/icons/edit-undo.svg</iconset>
        </property>
        <property name="flat">
         <bool>true</bool>
@@ -445,7 +445,7 @@
        </property>
        <property name="icon">
         <iconset resource="../resources.qrc">
-         <normaloff>:/icons/revert.png</normaloff>:/icons/revert.png</iconset>
+         <normaloff>:/icons/edit-undo.svg</normaloff>:/icons/edit-undo.svg</iconset>
        </property>
        <property name="flat">
         <bool>true</bool>

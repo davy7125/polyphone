@@ -19,9 +19,13 @@ public:
     void setActive(bool isActive);
     bool hasHeightForWidth() const;
     int heightForWidth(int width) const override;
+    int getSoundfontId() { return _soundfontId; }
 
 signals:
     void itemClicked(SoundfontFilter * filter);
+
+protected:
+    void mouseDoubleClickEvent(QMouseEvent *event);
 
 private slots:
     void on_labelAuthor_linkActivated(const QString &link);
@@ -53,6 +57,7 @@ private:
     bool _active;
     QString _authorTextNoColor;
     QString _licenseTextNoColor;
+    int _soundfontId;
     static IconContainer * s_icons;
 };
 

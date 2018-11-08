@@ -35,6 +35,9 @@ public:
     QString getLicenseLink(QString licenseKey);
     QStringList getTags() { return _tags; }
 
+    // Ask for opening a soundfont
+    void openSoundfont(int soundfontId, bool daily);
+
 signals:
     // Notify that the list is downloading
     void initializing();

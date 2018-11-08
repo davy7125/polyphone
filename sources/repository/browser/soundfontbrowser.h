@@ -24,6 +24,7 @@ public slots:
 
 protected:
     void resizeEvent(QResizeEvent * event);
+    void keyPressEvent(QKeyEvent * event);
 
 private slots:
     void on_pushRetry_clicked();

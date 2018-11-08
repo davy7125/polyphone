@@ -324,3 +324,24 @@ void SoundfontBrowser::on_pushClearSearch_clicked()
 {
     ui->lineSearch->clear();
 }
+
+void SoundfontBrowser::keyPressEvent(QKeyEvent * event)
+{
+    // Key press event in the cell doesn't seem to work? So the code is here
+    if (event->key() == Qt::Key_Return || event->key() == Qt::Key_Enter)
+    {
+        for (int i = 0; i < ui->listWidget->count(); i++)
+        {
+            QListWidgetItem * item = ui->listWidget->item(i);
+            if (item->isSelected())
+            {
+                SoundfontCellFull* cell = (SoundfontCellFull*)ui->listWidget->itemWidget(item);
+                RepositoryManager::getInstance()->openSoundfont(cell->getSoundfontId(), false);
+            }
+        }
+        event->accept();
+        return;
+    }
+
+    QWidget::keyPressEvent(event);
+}

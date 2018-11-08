@@ -9,7 +9,8 @@ SoundfontCellFull::IconContainer * SoundfontCellFull::s_icons = NULL;
 SoundfontCellFull::SoundfontCellFull(SoundfontInformation* soundfontInfo, QWidget *parent) :
     QWidget(parent),
     ui(new Ui::SoundfontCellFull),
-    _active(true)
+    _active(true),
+    _soundfontId(soundfontInfo->getId())
 {
     ui->setupUi(this);
 
@@ -52,7 +53,7 @@ SoundfontCellFull::SoundfontCellFull(SoundfontInformation* soundfontInfo, QWidge
     QColor buttonBackgroundHover2 = ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_TEXT, ThemeManager::HOVERED);
     QString tmp = "QPushButton{background-color:%0; color:%1;border:0px;padding:5px;border-radius:4px;}\
             QPushButton:hover{ background-color:%2;}QLabel#labelAuthor{color:%0;}";
-    _normalStyleSheet = tmp.arg(buttonBackground.name()).arg(buttonText.name()).arg(buttonBackgroundHover.name());
+            _normalStyleSheet = tmp.arg(buttonBackground.name()).arg(buttonText.name()).arg(buttonBackgroundHover.name());
     _activeStyleSheet = tmp.arg(buttonText.name()).arg(buttonBackground.name()).arg(buttonBackgroundHover2.name()) +
             "QLabel{color:" + ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_TEXT).name() + ";}";
 
@@ -139,4 +140,16 @@ int SoundfontCellFull::heightForWidth(int width) const
 bool SoundfontCellFull::hasHeightForWidth() const
 {
     return true;
+}
+
+void SoundfontCellFull::mouseDoubleClickEvent(QMouseEvent *event)
+{
+    if (event->button() == Qt::LeftButton && _active)
+    {
+        event->accept();
+        RepositoryManager::getInstance()->openSoundfont(_soundfontId, false);
+        return;
+    }
+
+    QWidget::mouseDoubleClickEvent(event);
 }

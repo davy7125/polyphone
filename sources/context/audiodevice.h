@@ -75,7 +75,7 @@ public:
     {}
 
     QString _name;
-    int _index;
+    int _index; // -2 is jack, -1 is none, >= 0 are from port audio
     bool _isDefault;
     QList<DeviceInfo> _devices;
 };

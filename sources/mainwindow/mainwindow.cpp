@@ -25,6 +25,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "repositorymanager.h"
+#include "usermanager.h"
 #include "windowmanager.h"
 #include "contextmanager.h"
 #include "soundfontmanager.h"
@@ -126,6 +127,9 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(rm, SIGNAL(initializing()), ui->widgetShowSoundfonts, SLOT(initialize()));
     connect(rm, SIGNAL(ready(QString)), ui->widgetShowSoundfonts, SLOT(soundfontListAvailable(QString)), Qt::QueuedConnection);
     rm->initialize();
+
+    // Initialize the user (must be done after the window manager creation)
+    UserManager::getInstance()->login();
 
     // Initialization object Sound
     Sound::setParent(this);

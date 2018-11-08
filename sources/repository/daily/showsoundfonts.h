@@ -28,6 +28,7 @@ signals:
 
 protected:
     void resizeEvent(QResizeEvent * event);
+    void keyPressEvent(QKeyEvent * event);
 
 private slots:
     void dailyListAvailable(QString error);
