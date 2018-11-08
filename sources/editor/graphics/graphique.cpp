@@ -23,11 +23,10 @@
 ***************************************************************************/
 
 #include "graphique.h"
-#include "configpanel.h"
 #include "basetypes.h"
 #include <QScrollBar>
 #include <QSpinBox>
-#include <thememanager.h>
+#include "contextmanager.h"
 
 Graphique::Graphique(QWidget * parent) : QCustomPlot(parent),
     _zoomFlag(false),

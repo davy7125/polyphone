@@ -24,7 +24,6 @@
 
 #include "sound.h"
 #include <QMessageBox>
-#include "configpanel.h"
 #include <QLibrary>
 #include <QCoreApplication>
 #include <QFileInfo>

@@ -426,3 +426,8 @@ QString RepositoryManager::getLicenseLink(QString licenseKey)
 {
     return _licenseUrl + licenseKey;
 }
+
+void RepositoryManager::openSoundfont(int soundfontId, bool daily)
+{
+    qDebug() << "open" << soundfontId << daily;
+}

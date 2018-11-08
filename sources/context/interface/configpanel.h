@@ -25,11 +25,8 @@
 #ifndef CONFIGPANEL_H
 #define CONFIGPANEL_H
 
-#include <QMessageBox>
 #include <QWidget>
-#include <QString>
-#include "pianokeybdcustom.h"
-#include "contextmanager.h"
+#include "usermanager.h"
 
 namespace Ui
 {
@@ -47,49 +44,11 @@ public:
     // Initialize the interface with the parameters values
     void initializeInterface();
 
-    // Initialisation
-    void setVolume(int val);
-
 private slots:
-    void setAudioOutput(int index);
-    void setWavAutoLoop(bool checked);
-    void setWavRemoveBlank(bool checked);
-    void setNumPortMidi(int val);
-    void setSynthGain(int val);
-    void on_dialRevNiveau_valueChanged(int value);
-    void on_dialRevProfondeur_valueChanged(int value);
-    void on_dialRevDensite_valueChanged(int value);
-    void on_dialRevAttenuation_valueChanged(int value);
-    void on_dialChoNiveau_valueChanged(int value);
-    void on_dialChoAmplitude_valueChanged(int value);
-    void on_dialChoFrequence_valueChanged(int value);
-    void combinaisonChanged(int key, int numOctave, QString combinaison);
-    void on_checkRepercussionStereo_clicked();
-    void on_comboBufferSize_activated(int index);
-    void on_comboKeyName_currentIndexChanged(int index);
-    void on_comboDo_currentIndexChanged(int index);
-    void on_spinDefaultVelocity_editingFinished();
-    void on_comboLangue_currentIndexChanged(int index);
-    void fillColors();
-    void on_comboColorTheme_currentIndexChanged(int index);
-    void on_pushColorWindowBackground_clicked();
-    void on_pushColorButtonBackground_clicked();
-    void on_pushColorSelectionBackground_clicked();
-    void on_pushColorListBackground_clicked();
-    void on_pushColorListAlternativeBackground_clicked();
-    void on_pushColorWindowText_clicked();
-    void on_pushColorButtonText_clicked();
-    void on_pushColorSelectionText_clicked();
-    void on_pushColorListText_clicked();
+    void goToSection(int sectionNumber);
 
 private:
     Ui::ConfigPanel * ui;
-
-    // Misc
-    bool _loaded;
-
-    void renameComboDo();
-    void initComboLanguage();
 };
 
 #endif // CONFIGPANEL_H

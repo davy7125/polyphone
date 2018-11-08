@@ -71,6 +71,16 @@ EnvelopEditor::EnvelopEditor(QWidget *parent) :
     }
     ui->pushVolume->setIcon(QPixmap::fromImage(imageG));
     ui->pushModulation->setIcon(QPixmap::fromImage(imageR));
+
+    QPixmap revertIcon = ContextManager::theme()->getColoredSvg(":/icons/edit-undo.svg", QSize(16, 16), ThemeManager::BUTTON_TEXT);
+    ui->pushAttack->setIcon(revertIcon);
+    ui->pushDecay->setIcon(revertIcon);
+    ui->pushDelay->setIcon(revertIcon);
+    ui->pushHold->setIcon(revertIcon);
+    ui->pushKeyDecay->setIcon(revertIcon);
+    ui->pushKeyHold->setIcon(revertIcon);
+    ui->pushRelease->setIcon(revertIcon);
+    ui->pushSustain->setIcon(revertIcon);
 }
 
 EnvelopEditor::~EnvelopEditor()
