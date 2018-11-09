@@ -32,7 +32,7 @@
 #include "dialogchangelog.h"
 #include "dialogkeyboard.h"
 #include "dialogrecorder.h"
-#include "mainmenu.h"
+#include "toprightwidget.h"
 #include <QToolButton>
 #include <QDesktopWidget>
 #include <QDesktopServices>
@@ -79,36 +79,24 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->pushButtonSearch->setIcon(ContextManager::theme()->getColoredSvg(":/icons/search.svg", QSize(48, 48), ThemeManager::BUTTON_TEXT));
     ui->pushButtonSoundfonts->setIcon(ContextManager::theme()->getColoredSvg(":/icons/globe.svg", QSize(48, 48), ThemeManager::BUTTON_TEXT));
 
-    // Create a menu button what must be placed in tabs row
-    QToolButton* tb = new QToolButton(this);
-    tb->setPopupMode(QToolButton::InstantPopup);
-    tb->setIconSize(QSize(28, 28));
-    tb->setIcon(ContextManager::theme()->getColoredSvg(":/icons/menu.svg", QSize(28, 28),
-                                                       ContextManager::theme()->isDark(ThemeManager::WINDOW_BACKGROUND, ThemeManager::WINDOW_TEXT) ?
-                                                           ThemeManager::WINDOW_TEXT : ThemeManager::WINDOW_BACKGROUND));
-    tb->setStyleSheet(QString("QToolButton::menu-indicator{width:0px;}") +
-                      "QToolButton{margin: 3px;padding: 3px;background-color:#000}");
-    ui->tabWidget->setCornerWidget(tb, Qt::Corner::TopRightCorner);
-
-    // Main menu
-    MainMenu * menu = new MainMenu(tb);
-    tb->setMenu(menu);
-
-    connect(menu, SIGNAL(newClicked()), this, SLOT(on_pushButtonNew_clicked()));
-    connect(menu, SIGNAL(openClicked()), this, SLOT(on_pushButtonOpen_clicked()));
-    connect(menu, SIGNAL(openSettingsClicked()), this, SLOT(on_pushButtonSettings_clicked()));
-    connect(menu, SIGNAL(onlineHelpClicked()), this, SLOT(on_pushButtonDocumentation_clicked()));
-    connect(menu, SIGNAL(aboutClicked()), this, SLOT(onAboutClicked()));
-    connect(menu, SIGNAL(closeFileClicked()), this, SLOT(onCloseFile()));
-    connect(menu, SIGNAL(closeClicked()), this, SLOT(close()));
-    connect(menu, SIGNAL(save()), this, SLOT(onSave()));
-    connect(menu, SIGNAL(saveAs()), this, SLOT(onSaveAs()));
-    connect(menu, SIGNAL(fullScreenTriggered()), this, SLOT(fullScreenTriggered()));
-    menu->setFullScreen(this->windowState() & Qt::WindowFullScreen);
+    // Top right widget
+    TopRightWidget * trw = new TopRightWidget(this);
+    ui->tabWidget->setCornerWidget(trw, Qt::Corner::TopRightCorner);
+    connect(trw, SIGNAL(newClicked()), this, SLOT(on_pushButtonNew_clicked()));
+    connect(trw, SIGNAL(openClicked()), this, SLOT(on_pushButtonOpen_clicked()));
+    connect(trw, SIGNAL(openSettingsClicked()), this, SLOT(on_pushButtonSettings_clicked()));
+    connect(trw, SIGNAL(onlineHelpClicked()), this, SLOT(on_pushButtonDocumentation_clicked()));
+    connect(trw, SIGNAL(aboutClicked()), this, SLOT(onAboutClicked()));
+    connect(trw, SIGNAL(closeFileClicked()), this, SLOT(onCloseFile()));
+    connect(trw, SIGNAL(closeClicked()), this, SLOT(close()));
+    connect(trw, SIGNAL(save()), this, SLOT(onSave()));
+    connect(trw, SIGNAL(saveAs()), this, SLOT(onSaveAs()));
+    connect(trw, SIGNAL(fullScreenTriggered()), this, SLOT(fullScreenTriggered()));
+    connect(trw, SIGNAL(userClicked()), this, SLOT(onUserClicked()));
 
     // Remove the close button of the first tab "home"
     ui->tabWidget->tabBar()->tabButton(0, QTabBar::RightSide)->deleteLater();
-    ui->tabWidget->tabBar()->setTabButton(0, QTabBar::RightSide, NULL);
+    ui->tabWidget->tabBar()->setTabButton(0, QTabBar::RightSide, nullptr);
 
 
     //////////////////////
@@ -120,7 +108,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->widgetShowSoundfonts, SIGNAL(itemClicked(SoundfontFilter*)), _windowManager, SLOT(openRepository(SoundfontFilter*)));
     connect(_windowManager, SIGNAL(keyboardDisplayChanged(bool)), this, SLOT(onKeyboardDisplayChange(bool)));
     connect(_windowManager, SIGNAL(recorderDisplayChanged(bool)), this, SLOT(onRecorderDisplayChange(bool)));
-    connect(_windowManager, SIGNAL(editorOpen(bool)), menu, SLOT(onEditorOpen(bool)));
+    connect(_windowManager, SIGNAL(editorOpen(bool)), trw, SLOT(onEditorOpen(bool)));
 
     // Initialize the repository
     RepositoryManager * rm = RepositoryManager::getInstance();
@@ -128,8 +116,9 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(rm, SIGNAL(ready(QString)), ui->widgetShowSoundfonts, SLOT(soundfontListAvailable(QString)), Qt::QueuedConnection);
     rm->initialize();
 
-    // Initialize the user (must be done after the window manager creation)
-    UserManager::getInstance()->login();
+    // Possibly initialize the user (must be done after the window manager creation)
+    if (ContextManager::configuration()->getValue(ConfManager::SECTION_REPOSITORY, "auto_connect", false).toBool())
+        UserManager::getInstance()->login();
 
     // Initialization object Sound
     Sound::setParent(this);
@@ -381,4 +370,9 @@ void MainWindow::onSaveAs()
     this->setFocus();
 
     OutputFactory::save(_windowManager->getCurrentSf2(), true);
+}
+
+void MainWindow::onUserClicked()
+{
+    _windowManager->openUser();
 }

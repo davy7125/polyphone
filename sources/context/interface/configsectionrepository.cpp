@@ -3,12 +3,15 @@
 #include "contextmanager.h"
 #include <QDesktopServices>
 #include <QUrl>
+#include <QDir>
+#include <QFileDialog>
 
 ConfigSectionRepository::ConfigSectionRepository(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::ConfigSectionRepository)
 {
     ui->setupUi(this);
+    ui->pushDirectory->setIcon(ContextManager::theme()->getColoredSvg(":/icons/document-open.svg", QSize(16, 16), ThemeManager::WINDOW_TEXT));
 
     // Style for "Create an account"
     QString styleSheet = "QToolButton{border:none; background-color:" + ContextManager::theme()->getColor(ThemeManager::WINDOW_BACKGROUND).name() + ";}";
@@ -37,7 +40,23 @@ ConfigSectionRepository::~ConfigSectionRepository()
 
 void ConfigSectionRepository::initialize()
 {
+    // User identifier and password
+    ui->lineUser->setText(ContextManager::configuration()->getValue(ConfManager::SECTION_REPOSITORY, "username", "").toString());
+    int passwordLength = ContextManager::configuration()->getValue(ConfManager::SECTION_REPOSITORY, "password_length", 0).toInt();
+    QString fake;
+    fake.resize(passwordLength);
+    ui->linePassword->setText(fake); // Same number of characters
+    _fakePassword = true;
+    if (_currentState == UserManager::DISCONNECTED)
+        ui->labelMessage->setText("");
 
+    // Download directory
+    QString defaultDir = QStandardPaths::writableLocation(QStandardPaths::DownloadLocation);
+    if (defaultDir.isEmpty())
+        defaultDir = QDir::homePath();
+    ui->lineDownloadDirectory->blockSignals(true);
+    ui->lineDownloadDirectory->setText(ContextManager::configuration()->getValue(ConfManager::SECTION_REPOSITORY, "directory", defaultDir).toString());
+    ui->lineDownloadDirectory->blockSignals(false);
 }
 
 void ConfigSectionRepository::onConnectionStateChanged(UserManager::ConnectionState connectionState)
@@ -48,10 +67,12 @@ void ConfigSectionRepository::onConnectionStateChanged(UserManager::ConnectionSt
     int currentIndex;
     QString buttonText;
 
-    switch (connectionState)
+    switch (_currentState)
     {
     case UserManager::DISCONNECTED:
         messageContent = "";
+        messageColor = ThemeManager::mix(ContextManager::theme()->getColor(ThemeManager::WINDOW_BACKGROUND),
+                                         ContextManager::theme()->getColor(ThemeManager::WINDOW_TEXT), 0.5);
         currentIndex = 0;
         buttonText = trUtf8("Connexion");
         break;
@@ -77,7 +98,7 @@ void ConfigSectionRepository::onConnectionStateChanged(UserManager::ConnectionSt
     case UserManager::BANNED:
         messageContent = "";
         currentIndex = 3;
-        buttonText = trUtf8("Connexion");
+        buttonText = trUtf8("Se déconnecter");
         break;
     case UserManager::FAILED:
         messageContent = UserManager::getInstance()->error();
@@ -91,16 +112,6 @@ void ConfigSectionRepository::onConnectionStateChanged(UserManager::ConnectionSt
     ui->labelMessage->setStyleSheet("QLabel{color:" + messageColor.name() + "}");
     ui->stackedWidget->setCurrentIndex(currentIndex);
     ui->pushConnect->setText(buttonText);
-}
-
-void ConfigSectionRepository::on_lineUser_editingFinished()
-{
-
-}
-
-void ConfigSectionRepository::on_linePassword_editingFinished()
-{
-
 }
 
 void ConfigSectionRepository::on_buttonCreateAccount_clicked()
@@ -118,14 +129,58 @@ void ConfigSectionRepository::on_pushConnect_clicked()
     switch (_currentState)
     {
     case UserManager::DISCONNECTED:
-    case UserManager::BANNED:
     case UserManager::FAILED:
+        // Save the user name and the password hashed
+        ContextManager::configuration()->setValue(ConfManager::SECTION_REPOSITORY, "username", ui->lineUser->text());
+        if (!_fakePassword) // If it didn't change, keep the old hash
+        {
+            QString hash = ui->linePassword->text(); // Todo: hash it like joomla
+            ContextManager::configuration()->setValue(ConfManager::SECTION_REPOSITORY, "password", hash);
+            ContextManager::configuration()->setValue(ConfManager::SECTION_REPOSITORY, "password_length", ui->linePassword->text().size());
+        }
+
+        // Try to log
+        ContextManager::configuration()->setValue(ConfManager::SECTION_REPOSITORY, "auto_connect", true);
         UserManager::getInstance()->login();
         break;
     case UserManager::PENDING:
     case UserManager::CONNECTED:
     case UserManager::CONNECTED_PREMIUM:
+    case UserManager::BANNED:
+        // Disconnect the user or stop the connection
+        ContextManager::configuration()->setValue(ConfManager::SECTION_REPOSITORY, "auto_connect", false);
         UserManager::getInstance()->logout();
         break;
+    }
+}
+
+void ConfigSectionRepository::on_lineDownloadDirectory_editingFinished()
+{
+    ContextManager::configuration()->setValue(ConfManager::SECTION_REPOSITORY, "directory", ui->lineDownloadDirectory->text());
+}
+
+void ConfigSectionRepository::on_lineUser_textEdited(const QString &arg1)
+{
+    Q_UNUSED(arg1)
+    if (_currentState == UserManager::DISCONNECTED)
+        ui->labelMessage->setText(trUtf8("Cliquez sur \"Connexion\" pour sauvegarder les paramètres."));
+}
+
+void ConfigSectionRepository::on_linePassword_textChanged(const QString &arg1)
+{
+    Q_UNUSED(arg1)
+    if (_currentState == UserManager::DISCONNECTED)
+        ui->labelMessage->setText(trUtf8("Cliquez sur \"Connexion\" pour sauvegarder les paramètres."));
+    _fakePassword = false;
+}
+
+void ConfigSectionRepository::on_pushDirectory_clicked()
+{
+    QString qDir = QFileDialog::getExistingDirectory(this, trUtf8("Choisir un répertoire de destination"),
+                                                     ui->lineDownloadDirectory->text());
+    if (!qDir.isEmpty())
+    {
+        ui->lineDownloadDirectory->setText(qDir);
+        on_lineDownloadDirectory_editingFinished();
     }
 }

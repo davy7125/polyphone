@@ -46,13 +46,16 @@ void AbstractInput::process(bool async)
 void AbstractInput::processAsync()
 {
     // Check that the file is not already open
-    foreach (int i, _sm->getSiblings(EltID(elementSf2)))
+    if (!_fileName.isEmpty())
     {
-        if (_sm->getQstr(EltID(elementSf2, i), champ_filenameInitial) == _fileName)
+        foreach (int i, _sm->getSiblings(EltID(elementSf2)))
         {
-            _isSuccess = false;
-            _error = trUtf8("Le fichier est déjà ouvert");
-            return;
+            if (_sm->getQstr(EltID(elementSf2, i), champ_filenameInitial) == _fileName)
+            {
+                _isSuccess = false;
+                _error = trUtf8("Le fichier est déjà ouvert");
+                return;
+            }
         }
     }
 

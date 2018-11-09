@@ -68,6 +68,7 @@ private slots:
     void onCloseFile();
     void onSave();
     void onSaveAs();
+    void onUserClicked();
 
 private:
     Ui::MainWindow * ui;
