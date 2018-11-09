@@ -1,4 +1,5 @@
 #include "usermanager.h"
+#include "contextmanager.h"
 
 UserManager * UserManager::s_instance = nullptr;
 
@@ -31,8 +32,22 @@ UserManager::~UserManager()
 
 void UserManager::login()
 {
-    _connectionState = CONNECTED_PREMIUM;
+    // Get username / password
+    QString username = ContextManager::configuration()->getValue(ConfManager::SECTION_REPOSITORY, "username", "").toString();
+    QString hashedPassword = ContextManager::configuration()->getValue(ConfManager::SECTION_REPOSITORY, "password", "").toString();
+    if (username.isEmpty() || hashedPassword.isEmpty())
+    {
+        ContextManager::configuration()->setValue(ConfManager::SECTION_REPOSITORY, "auto_connect", false);
+        _connectionState = DISCONNECTED;
+        emit(connectionStateChanged(_connectionState));
+        return;
+    }
+
+    // State is now pending
+    _connectionState = PENDING;
     emit(connectionStateChanged(_connectionState));
+
+    // Prepare the query for login
 }
 
 void UserManager::logout()

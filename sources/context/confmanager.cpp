@@ -82,6 +82,7 @@ QString ConfManager::getFullKey(Section section, QString key) const
     case SECTION_SOUND_ENGINE: firstPart = "synth";       break;
     case SECTION_TOOLS:        firstPart = "tools";       break;
     case SECTION_WARNINGS:     firstPart = "warnings";    break;
+    case SECTION_REPOSITORY:   firstPart = "repository";  break;
     }
     if (firstPart != "")
         firstPart += "/";

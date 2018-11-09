@@ -6,14 +6,21 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>543</width>
-    <height>148</height>
+    <width>426</width>
+    <height>158</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
+   <item row="0" column="0" colspan="2">
+    <widget class="QLabel" name="label_5">
+     <property name="text">
+      <string>Nom d'utilisateur</string>
+     </property>
+    </widget>
+   </item>
    <item row="0" column="3" rowspan="3">
     <widget class="QStackedWidget" name="stackedWidget">
      <property name="maximumSize">
@@ -219,19 +226,8 @@ Premium !</string>
      </widget>
     </widget>
    </item>
-   <item row="1" column="0" colspan="2">
-    <widget class="QLabel" name="label_34">
-     <property name="text">
-      <string>Mot de passe</string>
-     </property>
-    </widget>
-   </item>
-   <item row="0" column="0" colspan="2">
-    <widget class="QLabel" name="label_5">
-     <property name="text">
-      <string>Nom d'utilisateur</string>
-     </property>
-    </widget>
+   <item row="0" column="2">
+    <widget class="QLineEdit" name="lineUser"/>
    </item>
    <item row="1" column="2">
     <widget class="QLineEdit" name="linePassword">
@@ -239,26 +235,6 @@ Premium !</string>
       <enum>QLineEdit::Password</enum>
      </property>
     </widget>
-   </item>
-   <item row="3" column="0" colspan="2">
-    <widget class="QLabel" name="label_35">
-     <property name="text">
-      <string>Dossier des téléchargements</string>
-     </property>
-    </widget>
-   </item>
-   <item row="3" column="2" colspan="2">
-    <widget class="QLineEdit" name="lineDownloadDirectory"/>
-   </item>
-   <item row="2" column="0">
-    <widget class="QPushButton" name="pushConnect">
-     <property name="text">
-      <string notr="true">Connexion</string>
-     </property>
-    </widget>
-   </item>
-   <item row="0" column="2">
-    <widget class="QLineEdit" name="lineUser"/>
    </item>
    <item row="2" column="1" colspan="2">
     <widget class="QLabel" name="labelMessage">
@@ -272,6 +248,53 @@ Premium !</string>
       <string notr="true">...</string>
      </property>
     </widget>
+   </item>
+   <item row="1" column="0" colspan="2">
+    <widget class="QLabel" name="label_34">
+     <property name="text">
+      <string>Mot de passe</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="0">
+    <widget class="QPushButton" name="pushConnect">
+     <property name="text">
+      <string notr="true">Connexion</string>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="0" colspan="4">
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <property name="topMargin">
+      <number>9</number>
+     </property>
+     <item>
+      <widget class="QLabel" name="label_35">
+       <property name="text">
+        <string>Dossier des téléchargements</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="lineDownloadDirectory"/>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushDirectory">
+       <property name="maximumSize">
+        <size>
+         <width>26</width>
+         <height>26</height>
+        </size>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="flat">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </item>
   </layout>
  </widget>

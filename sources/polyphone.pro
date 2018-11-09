@@ -420,7 +420,8 @@ SOURCES	+= main.cpp \
     context/interface/configsectionsound.cpp \
     context/interface/configsectionkeyboard.cpp \
     context/interface/configsectionrepository.cpp \
-    repository/usermanager.cpp
+    repository/usermanager.cpp \
+    mainwindow/toprightwidget.cpp
 
 HEADERS  += \
     core/sound.h \
@@ -671,7 +672,8 @@ HEADERS  += \
     context/interface/configsectionsound.h \
     context/interface/configsectionkeyboard.h \
     context/interface/configsectionrepository.h \
-    repository/usermanager.h
+    repository/usermanager.h \
+    mainwindow/toprightwidget.h
 
 FORMS    += \
     dialogs/dialog_list.ui \
@@ -724,7 +726,8 @@ FORMS    += \
     context/interface/configsectioninterface.ui \
     context/interface/configsectionsound.ui \
     context/interface/configsectionkeyboard.ui \
-    context/interface/configsectionrepository.ui
+    context/interface/configsectionrepository.ui \
+    mainwindow/toprightwidget.ui
 
 RESOURCES += resources.qrc
 

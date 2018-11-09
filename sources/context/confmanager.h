@@ -47,7 +47,8 @@ public:
         SECTION_RECENT_FILES,
         SECTION_SOUND_ENGINE,
         SECTION_TOOLS,
-        SECTION_WARNINGS
+        SECTION_WARNINGS,
+        SECTION_REPOSITORY
     };
 
     enum ToolType
