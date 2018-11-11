@@ -26,6 +26,7 @@ private slots:
 
     void on_buttonCreateAccount_clicked();
     void on_buttonBecomePremium_clicked();
+    void on_linePassword_returnPressed();
     void on_pushConnect_clicked();
 
     void on_pushDirectory_clicked();
