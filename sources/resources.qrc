@@ -79,6 +79,7 @@
         <file alias="wrench.svg">resources/wrench.svg</file>
         <file alias="crown.svg">resources/crown.svg</file>
         <file alias="skull.svg">resources/skull.svg</file>
+        <file alias="file-description.svg">resources/file-description.svg</file>
     </qresource>
     <qresource prefix="/traductions">
         <file>resources/traductions/polyphone_en.qm</file>

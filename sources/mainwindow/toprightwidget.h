@@ -36,6 +36,7 @@ signals:
 
 private slots:
     void userStateChanged(UserManager::ConnectionState state);
+    void on_pushUser_clicked();
 
 private:
     Ui::TopRightWidget *ui;

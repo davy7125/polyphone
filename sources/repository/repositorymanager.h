@@ -46,6 +46,9 @@ signals:
     // Possibly contains an error if the soundfont list cannot be downloaded
     void ready(QString error);
 
+    // Open a soundfont from the repository
+    void openSoundfont(int id);
+
 private slots:
     void soundfontListAvailable(QString error);
 
