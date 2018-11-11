@@ -7,6 +7,8 @@ class ConfigPanel;
 class SoundfontFilter;
 class SoundfontBrowser;
 class Editor;
+class UserArea;
+class SoundfontViewer;
 
 class WindowManager : public QObject
 {
@@ -28,6 +30,9 @@ public slots:
     /// Note: this function delete the filter, no need to do it elsewhere
     /// The filter can be NULL
     void openRepository(SoundfontFilter * filter);
+
+    /// Open a soundfont available on the repository
+    void openRepositorySoundfont(int id);
 
     /// Open the user profile
     void openUser();
@@ -66,7 +71,9 @@ private:
     ColoredTabWidget * _tabWidget;
     ConfigPanel * _configTab;
     SoundfontBrowser * _browserTab;
+    UserArea * _userTab;
     QList<Editor*> _editors;
+    QList<SoundfontViewer*> _viewers;
 };
 
 #endif // WINDOWMANAGER_H

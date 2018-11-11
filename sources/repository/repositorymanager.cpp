@@ -1,9 +1,12 @@
 #include "repositorymanager.h"
 #include "contextmanager.h"
 #include "urlreaderjson.h"
+#include "usermanager.h"
 #include <QDateTime>
 #include <QJsonArray>
 #include <QJsonValue>
+#include <QMessageBox>
+#include <QApplication>
 #include <QDebug>
 
 //const QString RepositoryManager::BASE_URL = "http://localhost/polyphone-soundfonts/fr/api/soundfonts/";
@@ -429,5 +432,35 @@ QString RepositoryManager::getLicenseLink(QString licenseKey)
 
 void RepositoryManager::openSoundfont(int soundfontId, bool daily)
 {
-    qDebug() << "open" << soundfontId << daily;
+    if (!daily)
+    {
+        // Check that the user is allowed to open the soundfont
+        QString error = "";
+        switch (UserManager::getInstance()->getConnectionState())
+        {
+        case UserManager::PENDING:
+            error = trUtf8("Veuillez patienter quelques instants");
+            break;
+        case UserManager::BANNED:
+            error = trUtf8("Votre compte a été banni !");
+            break;
+        case UserManager::DISCONNECTED:
+        case UserManager::CONNECTED:
+        case UserManager::FAILED:
+            error = trUtf8("Un compte Premium vous permet de visualiser et télécharger toutes les soundfonts disponibles en ligne !");
+            break;
+        case UserManager::CONNECTED_PREMIUM:
+            error = ""; // ok
+            break;
+        }
+
+        if (!error.isEmpty())
+        {
+            QMessageBox::warning(QApplication::activeWindow(), trUtf8("Attention"), error);
+            return;
+        }
+    }
+
+    // Ask to open the page
+    emit(openSoundfont(soundfontId));
 }

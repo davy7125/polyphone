@@ -114,6 +114,7 @@ MainWindow::MainWindow(QWidget *parent) :
     RepositoryManager * rm = RepositoryManager::getInstance();
     connect(rm, SIGNAL(initializing()), ui->widgetShowSoundfonts, SLOT(initialize()));
     connect(rm, SIGNAL(ready(QString)), ui->widgetShowSoundfonts, SLOT(soundfontListAvailable(QString)), Qt::QueuedConnection);
+    connect(rm, SIGNAL(openSoundfont(int)), _windowManager, SLOT(openRepositorySoundfont(int)));
     rm->initialize();
 
     // Possibly initialize the user (must be done after the window manager creation)
