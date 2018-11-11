@@ -80,7 +80,7 @@ win32{
 unix:!macx {
     DEFINES += __LINUX_ALSASEQ__
     CONFIG += link_pkgconfig
-    PKGCONFIG += alsa jack portaudio-2.0 zlib ogg vorbis vorbisfile vorbisenc glib-2.0
+    PKGCONFIG += alsa jack portaudio-2.0 zlib ogg vorbis vorbisfile vorbisenc glib-2.0 openssl
     INCLUDEPATH += /usr/include/jack
 }
 macx {

@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include <QMutex>
+class UrlReaderJson;
 
 class UserManager: public QObject
 {
@@ -38,6 +39,9 @@ public:
 signals:
     void connectionStateChanged(UserManager::ConnectionState state);
 
+private slots:
+    void userDataAvailable(QString error);
+
 private:
     UserManager();
     ~UserManager();
@@ -45,6 +49,7 @@ private:
     ConnectionState _connectionState;
     QString _error;
     QMutex _mutex;
+    UrlReaderJson * _userReaderJson;
     static UserManager * s_instance;
 };
 

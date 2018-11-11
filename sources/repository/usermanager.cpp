@@ -1,5 +1,8 @@
 #include "usermanager.h"
 #include "contextmanager.h"
+#include "repositorymanager.h"
+#include "urlreaderjson.h"
+#include <QUrl>
 
 UserManager * UserManager::s_instance = nullptr;
 
@@ -20,22 +23,23 @@ void UserManager::kill()
 }
 
 UserManager::UserManager() : QObject(),
-    _connectionState(DISCONNECTED)
+    _connectionState(DISCONNECTED),
+    _userReaderJson(new UrlReaderJson(RepositoryManager::BASE_URL + "login"))
 {
-
+    connect(_userReaderJson, SIGNAL(downloadCompleted(QString)), this, SLOT(userDataAvailable(QString)));
 }
 
 UserManager::~UserManager()
 {
-
+    delete _userReaderJson;
 }
 
 void UserManager::login()
 {
     // Get username / password
     QString username = ContextManager::configuration()->getValue(ConfManager::SECTION_REPOSITORY, "username", "").toString();
-    QString hashedPassword = ContextManager::configuration()->getValue(ConfManager::SECTION_REPOSITORY, "password", "").toString();
-    if (username.isEmpty() || hashedPassword.isEmpty())
+    QString password = ContextManager::configuration()->getValue(ConfManager::SECTION_REPOSITORY, "password", "").toString();
+    if (username.isEmpty() || password.isEmpty())
     {
         ContextManager::configuration()->setValue(ConfManager::SECTION_REPOSITORY, "auto_connect", false);
         _connectionState = DISCONNECTED;
@@ -48,6 +52,12 @@ void UserManager::login()
     emit(connectionStateChanged(_connectionState));
 
     // Prepare the query for login
+    _userReaderJson->clearArguments();
+    _userReaderJson->addArgument("user", QUrl::toPercentEncoding(username));
+    _userReaderJson->addArgument("pass", QUrl::toPercentEncoding(password));
+
+    // Send the query
+    _userReaderJson->download();
 }
 
 void UserManager::logout()
@@ -69,4 +79,55 @@ UserManager::ConnectionState UserManager::getConnectionState()
 QString UserManager::error()
 {
     return _error;
+}
+
+void UserManager::userDataAvailable(QString error)
+{
+    if (error.isEmpty())
+    {
+        QJsonObject data = _userReaderJson->getData();
+        if (data.contains("status"))
+        {
+            switch (data.value("status").toInt())
+            {
+            case 0:
+                _error = trUtf8("Problème serveur");
+                _connectionState = FAILED;
+                break;
+            case 1:
+                _error = trUtf8("Mauvais identifiant / mot de passe");
+                _connectionState = FAILED;
+
+                // Stop the auto-connect
+                ContextManager::configuration()->setValue(ConfManager::SECTION_REPOSITORY, "autoconnect", false);
+                break;
+            case 2:
+                _error = "";
+                if (data.contains("isPremium") && data.value("isPremium").toBool())
+                    _connectionState = CONNECTED_PREMIUM;
+                else
+                    _connectionState = CONNECTED;
+                break;
+            case 3:
+                _error = "";
+                _connectionState = BANNED;
+                break;
+            default:
+                _error = trUtf8("Problème serveur") + QString(" (status '%0')").arg(data.value("status").toString());
+                _connectionState = FAILED;
+            }
+        }
+        else
+        {
+            _error = trUtf8("Problème serveur");
+            _connectionState = FAILED;
+        }
+    }
+    else
+    {
+        _error = error;
+        _connectionState = FAILED;
+    }
+
+    emit(connectionStateChanged(_connectionState));
 }

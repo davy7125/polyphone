@@ -6,6 +6,7 @@ class QNetworkAccessManager;
 class QNetworkReply;
 class QTimer;
 class QMutex;
+#include <QMap>
 
 // Base class for downloading data
 class UrlReader: public QObject
@@ -16,6 +17,11 @@ public:
     // Constructor, destructor
     explicit UrlReader(QString url);
     ~UrlReader();
+
+    // Set the url
+    void setUrl(QString url) { _url = url; }
+    void clearArguments() { _arguments.clear(); }
+    void addArgument(QString key, QString value) { _arguments[key] = value; }
 
     // Start the download. When this is finished, the signal "downloaded"
     void download();
@@ -38,6 +44,7 @@ private slots:
 
 private:
     QString _url;
+    QMap<QString, QString> _arguments;
     QNetworkAccessManager * _webCtrl;
     QByteArray _data;
     QTimer * _timer;
