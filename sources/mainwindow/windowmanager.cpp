@@ -5,9 +5,12 @@
 #include "coloredtabwidget.h"
 #include "soundfontmanager.h"
 #include "soundfontfilter.h"
+#include "soundfontviewer.h"
 #include "editor.h"
+#include "userarea.h"
 #include "inputfactory.h"
 #include "outputfactory.h"
+#include "repositorymanager.h"
 #include <QFileInfo>
 #include <QMessageBox>
 #include <QAbstractButton>
@@ -16,7 +19,8 @@
 WindowManager::WindowManager(ColoredTabWidget *tabWidget) : QObject(nullptr),
     _tabWidget(tabWidget),
     _configTab(new ConfigPanel()),
-    _browserTab(new SoundfontBrowser())
+    _browserTab(new SoundfontBrowser()),
+    _userTab(new UserArea())
 {
     SoundfontManager * sf2 = SoundfontManager::getInstance();
     connect(sf2, SIGNAL(editingDone(QString,QList<int>)), this, SLOT(editingDone(QString,QList<int>)));
@@ -28,11 +32,14 @@ WindowManager::~WindowManager()
 {
     delete _configTab;
     delete _browserTab;
+    delete _userTab;
     while (_tabWidget->count() > 0)
         _tabWidget->removeTab(0);
     QApplication::processEvents();
     while (!_editors.isEmpty())
         delete _editors.takeFirst();
+    while (!_viewers.isEmpty())
+        delete _viewers.takeFirst();
 }
 
 void WindowManager::openConfiguration()
@@ -119,11 +126,6 @@ void WindowManager::openRepository(SoundfontFilter *filter)
                                           ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND),
                                           ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_TEXT));
     _tabWidget->setCurrentIndex(index);
-}
-
-void WindowManager::openUser()
-{
-
 }
 
 void WindowManager::editingDone(QString source, QList<int> sf2Indexes)
@@ -215,6 +217,19 @@ void WindowManager::onTabCloseRequested(int tabIndex)
         // Close the soundfont browser
         _tabWidget->removeTab(tabIndex);
     }
+    else if (widget == (QWidget *)_userTab)
+    {
+        // Close the user area
+        _tabWidget->removeTab(tabIndex);
+    }
+    else if (_viewers.contains((SoundfontViewer*)widget))
+    {
+        // Close a soundfont from the repository
+        SoundfontViewer * viewer = (SoundfontViewer*)widget;
+        _viewers.removeAll(viewer);
+        _tabWidget->removeTab(tabIndex);
+        delete viewer;
+    }
 }
 
 int WindowManager::getCurrentSf2()
@@ -237,4 +252,46 @@ void WindowManager::onTabIndexChanged(int tabIndex)
 {
     QWidget * widget = _tabWidget->widget(tabIndex);
     emit(editorOpen(_editors.contains((Editor*)widget)));
+}
+
+void WindowManager::openUser()
+{
+    _userTab->initializeInterface();
+    int index = _tabWidget->indexOf(_userTab);
+    if (index == -1)
+        index = _tabWidget->addTab(_userTab,
+                                   ContextManager::theme()->getColoredSvg(":/icons/user.svg", QSize(32, 32), ThemeManager::WINDOW_TEXT),
+                                   trUtf8("Espace utilisateur"));
+    _tabWidget->setCurrentIndex(index);
+}
+
+void WindowManager::openRepositorySoundfont(int id)
+{
+    // Find the corresponding viewer if the file is already open
+    foreach (SoundfontViewer * viewer, _viewers)
+    {
+        if (viewer->getSoundfontId() == id)
+        {
+            int index = _tabWidget->indexOf(viewer);
+            _tabWidget->setCurrentIndex(index);
+            return;
+        }
+    }
+
+    // Title of the soundfont
+    SoundfontInformation * si = RepositoryManager::getInstance()->getSoundfontInformation(id);
+    if (si == nullptr)
+        return;
+    QString title = si->getTitle();
+
+    // Otherwise, create a new viewer
+    SoundfontViewer * viewer = new SoundfontViewer();
+    int index = _tabWidget->addColoredTab(viewer, ":/icons/file-description.svg", title,
+                                          ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND),
+                                          ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_TEXT));
+    _viewers << viewer;
+
+    // Initialize and display it
+    viewer->initialize(id);
+    _tabWidget->setCurrentIndex(index);
 }

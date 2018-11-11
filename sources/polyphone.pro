@@ -182,6 +182,8 @@ INCLUDEPATH += mainwindow \
     repository/browser \
     repository/daily \
     repository/widgets \
+    repository/user \
+    repository/soundfont \
     .
 
 SOURCES	+= main.cpp \
@@ -421,7 +423,9 @@ SOURCES	+= main.cpp \
     context/interface/configsectionkeyboard.cpp \
     context/interface/configsectionrepository.cpp \
     repository/usermanager.cpp \
-    mainwindow/toprightwidget.cpp
+    mainwindow/toprightwidget.cpp \
+    repository/user/userarea.cpp \
+    repository/soundfont/soundfontviewer.cpp
 
 HEADERS  += \
     core/sound.h \
@@ -673,7 +677,9 @@ HEADERS  += \
     context/interface/configsectionkeyboard.h \
     context/interface/configsectionrepository.h \
     repository/usermanager.h \
-    mainwindow/toprightwidget.h
+    mainwindow/toprightwidget.h \
+    repository/user/userarea.h \
+    repository/soundfont/soundfontviewer.h
 
 FORMS    += \
     dialogs/dialog_list.ui \
@@ -727,7 +733,9 @@ FORMS    += \
     context/interface/configsectionsound.ui \
     context/interface/configsectionkeyboard.ui \
     context/interface/configsectionrepository.ui \
-    mainwindow/toprightwidget.ui
+    mainwindow/toprightwidget.ui \
+    repository/user/userarea.ui \
+    repository/soundfont/soundfontviewer.ui
 
 RESOURCES += resources.qrc
 

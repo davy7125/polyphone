@@ -109,3 +109,8 @@ void TopRightWidget::userStateChanged(UserManager::ConnectionState state)
         break;
     }
 }
+
+void TopRightWidget::on_pushUser_clicked()
+{
+    emit(userClicked());
+}

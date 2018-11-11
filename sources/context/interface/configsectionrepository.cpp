@@ -5,7 +5,6 @@
 #include <QUrl>
 #include <QDir>
 #include <QFileDialog>
-#include <QDebug>
 #include "utils.h"
 
 ConfigSectionRepository::ConfigSectionRepository(QWidget *parent) :
