@@ -39,6 +39,10 @@ public:
     /// Can be useful for sorting strings
     static QString removeAccents(QString s);
 
+    /// Encrypt / decrypt data
+    static QString rsaEncrypt(QString input);
+    static QString rsaDecrypt(QString input);
+
 private:
     static int getNumberPart(const QString &str, int &length);
 

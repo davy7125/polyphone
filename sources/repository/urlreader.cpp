@@ -4,6 +4,7 @@
 #include <QNetworkReply>
 #include <QTimer>
 #include <QMutex>
+#include <QUrlQuery>
 
 UrlReader::UrlReader(QString url) :
     _url(url),
@@ -32,7 +33,17 @@ UrlReader::~UrlReader()
 void UrlReader::download()
 {
     _queryProcessed = false;
-    _reply = _webCtrl->get(QNetworkRequest(_url));
+
+    // Prepare the url
+    QUrl url(_url);
+
+    QUrlQuery query;
+    foreach (QString key, _arguments.keys())
+        query.addQueryItem(key, _arguments[key]);
+    url.setQuery(query.query());
+
+    // Send the query
+    _reply = _webCtrl->get(QNetworkRequest(url));
     _timer->start(5000);
 }
 

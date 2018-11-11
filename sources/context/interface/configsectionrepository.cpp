@@ -5,6 +5,8 @@
 #include <QUrl>
 #include <QDir>
 #include <QFileDialog>
+#include <QDebug>
+#include "utils.h"
 
 ConfigSectionRepository::ConfigSectionRepository(QWidget *parent) :
     QWidget(parent),
@@ -64,7 +66,7 @@ void ConfigSectionRepository::onConnectionStateChanged(UserManager::ConnectionSt
     _currentState = connectionState;
     QString messageContent;
     QColor messageColor;
-    int currentIndex;
+    int currentIndex = 0;
     QString buttonText;
 
     switch (_currentState)
@@ -130,12 +132,12 @@ void ConfigSectionRepository::on_pushConnect_clicked()
     {
     case UserManager::DISCONNECTED:
     case UserManager::FAILED:
-        // Save the user name and the password hashed
+        // Save the user name and the encrypted password
         ContextManager::configuration()->setValue(ConfManager::SECTION_REPOSITORY, "username", ui->lineUser->text());
-        if (!_fakePassword) // If it didn't change, keep the old hash
+        if (!_fakePassword) // If it didn't change, keep the old encrypted password
         {
-            QString hash = ui->linePassword->text(); // Todo: hash it like joomla
-            ContextManager::configuration()->setValue(ConfManager::SECTION_REPOSITORY, "password", hash);
+            QString password = ui->linePassword->text();
+            ContextManager::configuration()->setValue(ConfManager::SECTION_REPOSITORY, "password", Utils::rsaEncrypt(password));
             ContextManager::configuration()->setValue(ConfManager::SECTION_REPOSITORY, "password_length", ui->linePassword->text().size());
         }
 
@@ -183,4 +185,10 @@ void ConfigSectionRepository::on_pushDirectory_clicked()
         ui->lineDownloadDirectory->setText(qDir);
         on_lineDownloadDirectory_editingFinished();
     }
+}
+
+void ConfigSectionRepository::on_linePassword_returnPressed()
+{
+    if (!_fakePassword && (_currentState == UserManager::DISCONNECTED || _currentState == UserManager::FAILED))
+        this->on_pushConnect_clicked();
 }

@@ -24,6 +24,11 @@
 
 #include "utils.h"
 #include <QStringList>
+#include <QDebug>
+#include <QFile>
+#include "openssl/rsa.h"
+#include "openssl/pem.h"
+#include "openssl/engine.h"
 
 QString Utils::s_diacriticLetters;
 QStringList Utils::s_noDiacriticLetters;
@@ -96,9 +101,9 @@ QString Utils::removeAccents(QString s)
     {
         s_diacriticLetters = QString::fromUtf8("ŠŒŽšœžŸ¥µÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝßàáâãäåæçèéêëìíîïðñòóôõöøùúûüýÿ");
         s_noDiacriticLetters << "S"<<"OE"<<"Z"<<"s"<<"oe"<<"z"<<"Y"<<"Y"<<"u"<<"A"<<"A"<<"A"<<"A"<<"A"<<"A"<<"AE"<<"C"<<"E"
-                            <<"E"<<"E"<<"E"<<"I"<<"I"<<"I"<<"I"<<"D"<<"N"<<"O"<<"O"<<"O"<<"O"<<"O"<<"O"<<"U"<<"U"<<"U"<<"U"
-                           <<"Y"<<"s"<<"a"<<"a"<<"a"<<"a"<<"a"<<"a"<<"ae"<<"c"<<"e"<<"e"<<"e"<<"e"<<"i"<<"i"<<"i"<<"i"<<"o"
-                          <<"n"<<"o"<<"o"<<"o"<<"o"<<"o"<<"o"<<"u"<<"u"<<"u"<<"u"<<"y"<<"y";
+                             <<"E"<<"E"<<"E"<<"I"<<"I"<<"I"<<"I"<<"D"<<"N"<<"O"<<"O"<<"O"<<"O"<<"O"<<"O"<<"U"<<"U"<<"U"<<"U"
+                            <<"Y"<<"s"<<"a"<<"a"<<"a"<<"a"<<"a"<<"a"<<"ae"<<"c"<<"e"<<"e"<<"e"<<"e"<<"i"<<"i"<<"i"<<"i"<<"o"
+                           <<"n"<<"o"<<"o"<<"o"<<"o"<<"o"<<"o"<<"u"<<"u"<<"u"<<"u"<<"y"<<"y";
     }
 
     QString output = "";
@@ -115,4 +120,83 @@ QString Utils::removeAccents(QString s)
     }
 
     return output;
+}
+
+QString Utils::rsaEncrypt(QString input)
+{
+    // Load the public key from the resources
+    QFile file(":/misc/id_rsa.pub");
+    if (!file.open(QIODevice::ReadOnly)) {
+        qWarning() << "Error when opening the public key file";
+        return "";
+    }
+    QByteArray publicKeyData = file.readAll();
+    file.close();
+
+    // Create the RSA public key
+    BIO* bio = BIO_new_mem_buf((void*)publicKeyData.data(), publicKeyData.size());
+    BIO_set_flags(bio, BIO_FLAGS_BASE64_NO_NL); // NO NL
+    RSA* publicKey = PEM_read_bio_RSA_PUBKEY(bio, nullptr, nullptr, nullptr);
+    BIO_free(bio);
+    if (publicKey == nullptr)
+    {
+        qWarning() << "Error when reading the public key:" << ERR_error_string(ERR_get_error(), nullptr);
+        return "";
+    }
+
+    // Encrypt data
+    int rsaLen = RSA_size(publicKey);
+    unsigned char* encryptedText = new unsigned char[rsaLen];
+    int resultLen = RSA_public_encrypt(input.size(), (const unsigned char*)input.toLatin1().data(), encryptedText, publicKey, RSA_PKCS1_PADDING);
+    RSA_free(publicKey);
+    if (resultLen == -1)
+    {
+        qWarning() << "Error when encrypting with RSA:" << ERR_error_string(ERR_get_error(), nullptr);
+        delete [] encryptedText;
+        return "";
+    }
+
+    // Convert the encryptedText to QString (base 64) and return it
+    QString result = QByteArray((char*)encryptedText, resultLen).toBase64();
+    delete [] encryptedText;
+    return result;
+}
+
+QString Utils::rsaDecrypt(QString input)
+{
+    // Load the public key from the resources
+    QFile file(":/misc/id_rsa.pub");
+    if (!file.open(QIODevice::ReadOnly)) {
+        qWarning() << "Error when opening the public key file";
+        return "";
+    }
+    QByteArray publicKeyData = file.readAll();
+    file.close();
+
+    // Create the RSA public key
+    BIO *bio = BIO_new_mem_buf((void*)publicKeyData.data(), publicKeyData.size());
+    BIO_set_flags(bio, BIO_FLAGS_BASE64_NO_NL); // NO NL
+    RSA* publicKey = PEM_read_bio_RSA_PUBKEY(bio, NULL, NULL, NULL);
+    BIO_free(bio) ;
+    if (publicKey == nullptr)
+    {
+        qWarning() << "Error when reading the public key:" << ERR_error_string(ERR_get_error(), nullptr);
+        return "";
+    }
+
+    // Decrypt data
+    int rsaLen = RSA_size(publicKey); // That's how many bytes the decrypted data would be
+    unsigned char * decryptedText = new unsigned char[rsaLen];
+    int resultLen = RSA_public_decrypt(RSA_size(publicKey), (unsigned char *)QByteArray::fromBase64(input.toUtf8()).data(), decryptedText, publicKey, RSA_PKCS1_PADDING);
+    if (resultLen == -1)
+    {
+        qWarning() << "Error when decrypting with RSA:" << ERR_error_string(ERR_get_error(), nullptr);
+        delete decryptedText;
+        return "";
+    }
+
+    // Convert the decryptedText to QString (base 64) and return it
+    QString result = QString::fromLatin1((char*) decryptedText, resultLen);
+    delete decryptedText;
+    return result;
 }
