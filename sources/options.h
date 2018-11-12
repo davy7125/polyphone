@@ -32,6 +32,7 @@ class Options
 public:
     enum Mode
     {
+        MODE_RESET_CONFIG = -1,
         MODE_GUI = 0,
         MODE_CONVERSION_TO_SF2 = 1,
         MODE_CONVERSION_TO_SF3 = 2,
