@@ -134,8 +134,10 @@ MainWindow::MainWindow(QWidget *parent) :
     {
         DialogChangeLog * dialog = new DialogChangeLog(this);
         QTimer::singleShot(500, dialog, SLOT(show()));
-        ContextManager::configuration()->setValue(ConfManager::SECTION_NONE, "last_version_installed", VERSION);
     }
+    if (ContextManager::configuration()->getValue(ConfManager::SECTION_NONE, "last_version_installed", 0.).toDouble() < 2.0)
+        ContextManager::configuration()->clear();
+    ContextManager::configuration()->setValue(ConfManager::SECTION_NONE, "last_version_installed", VERSION);
 }
 
 MainWindow::~MainWindow()

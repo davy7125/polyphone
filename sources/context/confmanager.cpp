@@ -195,3 +195,8 @@ QString ConfManager::getMapping(int numOctave, Key key)
     // The default value is possibly overriden
     return this->getValue(SECTION_MAP, "key_" + QString::number(numOctave) + "_" + QString::number((int)key), txt).toString();
 }
+
+void ConfManager::clear()
+{
+    _settings.clear();
+}

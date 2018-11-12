@@ -96,6 +96,9 @@ public:
     /// Get the keyboard combination associated to a specific note
     QString getMapping(int numOctave, Key key);
 
+    /// Clear everything
+    void clear();
+
 signals:
     /// Emitted when the chorus or reverb configuration changed or the buffer size
     void soundEngineConfigurationChanged();

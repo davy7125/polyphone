@@ -106,6 +106,9 @@ void Options::processType1(QString arg)
     case 'h':
         _help = true;
         break;
+    case 'r':
+        _mode = MODE_RESET_CONFIG;
+        break;
     default:
         _error = true;
         break;
@@ -190,6 +193,9 @@ void Options::checkErrors()
 
     switch (_mode)
     {
+    case MODE_RESET_CONFIG:
+        _error = false;
+        break;
     case MODE_GUI:
         if (_outputDirectory != "" || _outputFile != "")
             _error = true;
@@ -203,7 +209,7 @@ void Options::checkErrors()
 
 void Options::postTreatment()
 {
-    if (_mode != MODE_GUI)
+    if (_mode > MODE_GUI)
     {
         // By default, the output directory is the same than the input file directory
         if (_outputDirectory == "")

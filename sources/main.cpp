@@ -158,6 +158,19 @@ int convert(Options &options)
     return 0;
 }
 
+int resetConfig(Options &options, QApplication& a)
+{
+    Q_UNUSED(options)
+
+    a.setApplicationName("Polyphone");
+    a.setOrganizationName("polyphone");
+    QSettings settings;
+    settings.clear();
+    qInfo() << "Previous configuration is now cleared.";
+
+    return 0;
+}
+
 int displayHelp(Options &options)
 {
     Q_UNUSED(options)
@@ -179,6 +192,8 @@ int main(int argc, char *argv[])
         valRet = displayHelp(options);
     else if (options.mode() == Options::MODE_GUI)
         valRet = launchApplication(options, a);
+    else if (options.mode() == Options::MODE_RESET_CONFIG)
+        valRet = resetConfig(options, a);
     else
         valRet = convert(options);
 
