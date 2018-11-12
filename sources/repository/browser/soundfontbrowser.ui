@@ -290,7 +290,32 @@
          </layout>
         </widget>
        </item>
-       <item row="1" column="0">
+       <item row="2" column="1">
+        <widget class="QListWidget" name="listWidget">
+         <property name="frameShape">
+          <enum>QFrame::NoFrame</enum>
+         </property>
+         <property name="horizontalScrollBarPolicy">
+          <enum>Qt::ScrollBarAlwaysOff</enum>
+         </property>
+         <property name="editTriggers">
+          <set>QAbstractItemView::NoEditTriggers</set>
+         </property>
+         <property name="showDropIndicator" stdset="0">
+          <bool>false</bool>
+         </property>
+         <property name="alternatingRowColors">
+          <bool>true</bool>
+         </property>
+         <property name="selectionBehavior">
+          <enum>QAbstractItemView::SelectRows</enum>
+         </property>
+         <property name="verticalScrollMode">
+          <enum>QAbstractItemView::ScrollPerPixel</enum>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0" rowspan="2">
         <widget class="QScrollArea" name="scrollArea">
          <property name="frameShape">
           <enum>QFrame::NoFrame</enum>
@@ -454,27 +479,21 @@
         </widget>
        </item>
        <item row="1" column="1">
-        <widget class="QListWidget" name="listWidget">
-         <property name="frameShape">
-          <enum>QFrame::NoFrame</enum>
+        <widget class="QPushButton" name="pushBecomePremium">
+         <property name="font">
+          <font>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
          </property>
-         <property name="horizontalScrollBarPolicy">
-          <enum>Qt::ScrollBarAlwaysOff</enum>
+         <property name="cursor">
+          <cursorShape>PointingHandCursor</cursorShape>
          </property>
-         <property name="editTriggers">
-          <set>QAbstractItemView::NoEditTriggers</set>
+         <property name="text">
+          <string>Souscrivez à un compte Premium pour bénéficier de toutes les fonctionnalités !</string>
          </property>
-         <property name="showDropIndicator" stdset="0">
-          <bool>false</bool>
-         </property>
-         <property name="alternatingRowColors">
+         <property name="flat">
           <bool>true</bool>
-         </property>
-         <property name="selectionBehavior">
-          <enum>QAbstractItemView::SelectRows</enum>
-         </property>
-         <property name="verticalScrollMode">
-          <enum>QAbstractItemView::ScrollPerPixel</enum>
          </property>
         </widget>
        </item>

@@ -6,6 +6,7 @@
 #include "soundfontcellfull.h"
 #include "utils.h"
 #include <QResizeEvent>
+#include <QDesktopServices>
 
 SoundfontBrowser::SoundfontBrowser(QWidget *parent) :
     QWidget(parent),
@@ -29,6 +30,10 @@ SoundfontBrowser::SoundfontBrowser(QWidget *parent) :
     ui->listWidget->setStyleSheet("QListWidget{border:1px solid " +
                                   this->palette().dark().color().name() +
                                   ";border-top:0;border-right:0;border-bottom:0}");
+    ui->pushBecomePremium->setStyleSheet("QPushButton{border:1px solid " +
+                                         this->palette().dark().color().name() +
+                                         ";border-top:0;border-right:0;padding:4px;"
+                                         "color:" + palette().color(QPalette::BrightText).name() + "}");
     ui->comboSort->view()->window()->setWindowFlags(Qt::Popup | Qt::FramelessWindowHint | Qt::NoDropShadowWindowHint);
     ui->comboSort->setStyleSheet(QString("QComboBox,QComboBox::drop-down{border-top-right-radius: 2px;border-bottom-right-radius: 2px}") +
                                  "QComboBox::drop-down{border-width:0}" +
@@ -62,6 +67,10 @@ SoundfontBrowser::SoundfontBrowser(QWidget *parent) :
     connect(ui->filterGenre, SIGNAL(selectionChanged()), this, SLOT(updateList()));
     connect(ui->filterMidiStandard, SIGNAL(selectionChanged()), this, SLOT(updateList()));
     connect(ui->filterTag, SIGNAL(selectionChanged()), this, SLOT(updateList()));
+
+    // Connection with the user manager
+    connect(UserManager::getInstance(), SIGNAL(connectionStateChanged(UserManager::ConnectionState)),
+            this, SLOT(userStatusChanged(UserManager::ConnectionState)));
 }
 
 SoundfontBrowser::~SoundfontBrowser()
@@ -344,4 +353,17 @@ void SoundfontBrowser::keyPressEvent(QKeyEvent * event)
     }
 
     QWidget::keyPressEvent(event);
+}
+
+void SoundfontBrowser::on_pushBecomePremium_clicked()
+{
+    if (UserManager::getInstance()->getConnectionState() == UserManager::CONNECTED)
+        QDesktopServices::openUrl(QUrl("https://www.polyphone-soundfonts.com/en/subscribe"));
+    else
+        QDesktopServices::openUrl(QUrl("https://www.polyphone-soundfonts.com/en/create-an-account"));
+}
+
+void SoundfontBrowser::userStatusChanged(UserManager::ConnectionState state)
+{
+    ui->pushBecomePremium->setVisible(state != UserManager::CONNECTED_PREMIUM);
 }

@@ -2,6 +2,7 @@
 #define SOUNDFONTBROWSER_H
 
 #include <QWidget>
+#include "usermanager.h"
 class SoundfontFilter;
 class SoundfontInformation;
 
@@ -33,6 +34,8 @@ private slots:
     void on_listWidget_itemSelectionChanged();
     void on_comboSort_currentIndexChanged(int index);
     void on_pushClearSearch_clicked();
+    void on_pushBecomePremium_clicked();
+    void userStatusChanged(UserManager::ConnectionState state);
 
 private:
     void fillFilter();
