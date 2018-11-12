@@ -439,15 +439,15 @@ void RepositoryManager::openSoundfont(int soundfontId, bool daily)
         switch (UserManager::getInstance()->getConnectionState())
         {
         case UserManager::PENDING:
-            error = trUtf8("Veuillez patienter quelques instants");
+            error = trUtf8("Veuillez patienter quelques instants...");
             break;
         case UserManager::BANNED:
-            error = trUtf8("Votre compte a été banni !");
+            error = trUtf8("Votre compte a été banni.");
             break;
         case UserManager::DISCONNECTED:
         case UserManager::CONNECTED:
         case UserManager::FAILED:
-            error = trUtf8("Un compte Premium vous permet de visualiser et télécharger toutes les soundfonts disponibles en ligne !");
+            error = trUtf8("Un compte Premium vous permet de visualiser et télécharger toutes les soundfonts disponibles en ligne.");
             break;
         case UserManager::CONNECTED_PREMIUM:
             error = ""; // ok
