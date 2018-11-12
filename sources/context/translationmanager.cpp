@@ -31,7 +31,7 @@
 #include <QDirIterator>
 
 const QString TranslationManager::DEFAULT_LANGUAGE = "en"; // English is the default language;
-const QString TranslationManager::RESOURCE_PATH = ":/traductions/ressources/traductions";
+const QString TranslationManager::RESOURCE_PATH = ":/translations/resources/translations";
 const QString TranslationManager::TRANSLATION_DIRECTORY = "translations";
 
 TranslationManager::TranslationManager(ConfManager * configuration) :

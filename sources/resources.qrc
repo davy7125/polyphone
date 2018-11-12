@@ -81,15 +81,19 @@
         <file alias="skull.svg">resources/skull.svg</file>
         <file alias="file-description.svg">resources/file-description.svg</file>
     </qresource>
-    <qresource prefix="/traductions">
-        <file>resources/traductions/polyphone_en.qm</file>
-        <file>resources/traductions/polyphone_es.qm</file>
-        <file>resources/traductions/polyphone_it.qm</file>
-        <file>resources/traductions/polyphone_sr.qm</file>
-        <file>resources/traductions/polyphone_cs.qm</file>
-        <file>resources/traductions/polyphone_pt.qm</file>
-        <file>resources/traductions/polyphone_zh.qm</file>
-        <file>resources/traductions/polyphone_de.qm</file>
+    <qresource prefix="/translations">
+        <file>resources/translations/polyphone_cs.qm</file>
+        <file>resources/translations/polyphone_de.qm</file>
+        <file>resources/translations/polyphone_en.qm</file>
+        <file>resources/translations/polyphone_es.qm</file>
+        <file>resources/translations/polyphone_it.qm</file>
+        <file>resources/translations/polyphone_ja.qm</file>
+        <file>resources/translations/polyphone_nl.qm</file>
+        <file>resources/translations/polyphone_pt.qm</file>
+        <file>resources/translations/polyphone_ru.qm</file>
+        <file>resources/translations/polyphone_sr.qm</file>
+        <file>resources/translations/polyphone_tr.qm</file>
+        <file>resources/translations/polyphone_zh.qm</file>
     </qresource>
     <qresource prefix="/misc">
         <file>changelog</file>
