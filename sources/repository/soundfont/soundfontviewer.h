@@ -2,6 +2,7 @@
 #define SOUNDFONTVIEWER_H
 
 #include <QWidget>
+class SoundfontFilter;
 
 namespace Ui {
 class SoundfontViewer;
@@ -17,6 +18,12 @@ public:
 
     void initialize(int soundfontId);
     int getSoundfontId() { return _soundfontId; }
+
+signals:
+    void itemClicked(SoundfontFilter * filter);
+
+private slots:
+    void on_labelAuthor_linkActivated(const QString &link);
 
 private:
     Ui::SoundfontViewer *ui;

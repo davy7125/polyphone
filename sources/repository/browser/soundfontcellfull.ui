@@ -241,7 +241,13 @@
        </widget>
       </item>
       <item>
-       <widget class="QLabel" name="labelLicense">
+       <widget class="ElidedLabel" name="labelLicense">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
         <property name="cursor">
          <cursorShape>PointingHandCursor</cursorShape>
         </property>
@@ -256,19 +262,6 @@
         </property>
        </widget>
       </item>
-      <item>
-       <spacer name="horizontalSpacer">
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>40</width>
-          <height>20</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
      </layout>
     </widget>
    </item>
@@ -279,12 +272,6 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>AttributeFlow</class>
-   <extends>QWidget</extends>
-   <header>attributeflow.h</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
    <class>FiveStarsWidget</class>
    <extends>QWidget</extends>
    <header>fivestarswidget.h</header>
@@ -294,6 +281,12 @@
    <class>ElidedLabel</class>
    <extends>QLabel</extends>
    <header>elidedlabel.h</header>
+  </customwidget>
+  <customwidget>
+   <class>AttributeFlow</class>
+   <extends>QWidget</extends>
+   <header>attributeflow.h</header>
+   <container>1</container>
   </customwidget>
  </customwidgets>
  <resources/>

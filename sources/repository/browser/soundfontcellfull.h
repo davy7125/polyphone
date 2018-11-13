@@ -56,7 +56,8 @@ private:
     QString _activeStyleSheet;
     bool _active;
     QString _authorTextNoColor;
-    QString _licenseTextNoColor;
+    QString _licenseLinkContent;
+    QString _licenseLabel;
     int _soundfontId;
     static IconContainer * s_icons;
 };
