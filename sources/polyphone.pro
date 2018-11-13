@@ -82,6 +82,10 @@ unix:!macx {
     CONFIG += link_pkgconfig
     PKGCONFIG += alsa jack portaudio-2.0 zlib ogg vorbis vorbisfile vorbisenc glib-2.0 openssl
     INCLUDEPATH += /usr/include/jack
+    isEmpty(PREFIX) {
+        PREFIX = /usr/local
+    }
+    TARGET.path = $$PREFIX/
 }
 macx {
     QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.6
@@ -778,5 +782,3 @@ equals(QMAKE_CXX, clang++) {
     ExtraCompiler.commands = $${QMAKE_CXX} $(CXXFLAGS) -D__LITTLE_ENDIAN__ -mno-sse -mfpmath=387 $(INCPATH) -c ${QMAKE_FILE_IN} -o ${QMAKE_FILE_OUT}
 }
 QMAKE_EXTRA_COMPILERS += ExtraCompiler
-
-DISTFILES +=
