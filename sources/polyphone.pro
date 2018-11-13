@@ -429,7 +429,8 @@ SOURCES	+= main.cpp \
     repository/usermanager.cpp \
     mainwindow/toprightwidget.cpp \
     repository/user/userarea.cpp \
-    repository/soundfont/soundfontviewer.cpp
+    repository/soundfont/soundfontviewer.cpp \
+    repository/widgets/elidedpushbutton.cpp
 
 HEADERS  += \
     core/sound.h \
@@ -683,7 +684,8 @@ HEADERS  += \
     repository/usermanager.h \
     mainwindow/toprightwidget.h \
     repository/user/userarea.h \
-    repository/soundfont/soundfontviewer.h
+    repository/soundfont/soundfontviewer.h \
+    repository/widgets/elidedpushbutton.h
 
 FORMS    += \
     dialogs/dialog_list.ui \

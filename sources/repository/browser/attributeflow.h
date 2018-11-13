@@ -5,6 +5,7 @@
 #include "soundfontinformation.h"
 class FlowLayout;
 class SoundfontFilter;
+class ElidedPushButton;
 
 class AttributeFlow : public QWidget
 {
@@ -21,6 +22,9 @@ signals:
     // Signal emitted when an item is clicked
     // The filter must be deleted then
     void itemClicked(SoundfontFilter * filter);
+
+protected:
+    void resizeEvent(QResizeEvent * event);
 
 private slots:
     void onClick(bool checked);
@@ -43,10 +47,10 @@ private:
         QString _tag;
     };
 
-    QWidget * createItem(QString text);
+    ElidedPushButton * createItem(QString text);
 
     FlowLayout * _layout;
-    QMap<QWidget *, FilterDefinition> _filterDefinitions;
+    QMap<ElidedPushButton *, FilterDefinition> _filterDefinitions;
 };
 
 #endif // ATTRIBUTEFLOW_H
