@@ -2,7 +2,7 @@
 #include "flowlayout.h"
 #include "repositorymanager.h"
 #include "windowmanager.h"
-#include <QPushButton>
+#include "elidedpushbutton.h"
 
 AttributeFlow::AttributeFlow(QWidget *parent) : QWidget(parent)
 {
@@ -20,7 +20,7 @@ AttributeFlow::~AttributeFlow()
 
 void AttributeFlow::addCategory(int id)
 {
-    QWidget * widget = createItem(RepositoryManager::getInstance()->getCategoryName(id));
+    ElidedPushButton * widget = createItem(RepositoryManager::getInstance()->getCategoryName(id));
     _filterDefinitions[widget]._type = FilterType::CATEGORY;
     _filterDefinitions[widget]._id = id;
     _layout->addWidget(widget);
@@ -28,7 +28,7 @@ void AttributeFlow::addCategory(int id)
 
 void AttributeFlow::addProperty(SoundfontInformation::Property property, QString propertyValue)
 {
-    QWidget * widget = createItem(propertyValue);
+    ElidedPushButton * widget = createItem(propertyValue);
     _filterDefinitions[widget]._type = FilterType::PROPERTY;
     _filterDefinitions[widget]._property = property;
     _filterDefinitions[widget]._propertyValue = propertyValue;
@@ -37,19 +37,29 @@ void AttributeFlow::addProperty(SoundfontInformation::Property property, QString
 
 void AttributeFlow::addTag(QString tagName)
 {
-    QWidget * widget = createItem(tagName);
+    ElidedPushButton * widget = createItem(tagName);
     _filterDefinitions[widget]._type = FilterType::TAG;
     _filterDefinitions[widget]._tag = tagName;
     _layout->addWidget(widget);
 }
 
-QWidget * AttributeFlow::createItem(QString text)
+ElidedPushButton * AttributeFlow::createItem(QString text)
 {
-    QPushButton * button = new QPushButton(this);
-    button->setText(text);
+    ElidedPushButton * button = new ElidedPushButton(this);
+    button->setTextToElide(text, this->width() - 12);
     button->setCursor(Qt::PointingHandCursor);
     connect(button, SIGNAL(clicked(bool)), this, SLOT(onClick(bool)));
     return button;
+}
+
+void AttributeFlow::resizeEvent(QResizeEvent * event)
+{
+    Q_UNUSED(event)
+
+    foreach (ElidedPushButton * button, _filterDefinitions.keys())
+        button->setAvailableWidth(this->width() - 12);
+
+    QWidget::resizeEvent(event);
 }
 
 void AttributeFlow::onClick(bool checked)
@@ -57,7 +67,7 @@ void AttributeFlow::onClick(bool checked)
     Q_UNUSED(checked)
 
     // Create a soundfont filter
-    QWidget * sender = (QWidget*)QObject::sender();
+    ElidedPushButton * sender = (ElidedPushButton*)QObject::sender();
     if (_filterDefinitions.contains(sender))
     {
         SoundfontFilter * filter = new SoundfontFilter();

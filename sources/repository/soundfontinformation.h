@@ -8,7 +8,7 @@
 class SoundfontInformation
 {
 public:
-    enum class Property
+    enum Property
     {
         SAMPLE_SOURCE,
         TIMBRE,
@@ -17,7 +17,7 @@ public:
         MIDI_STANDARD
     };
 
-    enum class LicenseFlag
+    enum LicenseFlag
     {
         NONE = 0x00,
         COMMERCIAL_USE = 0x01,
@@ -56,7 +56,7 @@ public:
 
     // Additional properties
     void addProperty(Property property, QString propertyValue);
-    const QMap<Property, QStringList> getProperties() { return _properties; }
+    const QMap<Property, QStringList>& getProperties() { return _properties; }
 
     // Tags
     void addTag(QString tag);

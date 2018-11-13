@@ -32,10 +32,11 @@ void FilterTagCell::on_pushDelete_clicked()
 
 void FilterTagCell::setTagName(QString tagName)
 {
-    ui->labelName->setText(tagName);
+    _tagName = tagName;
+    ui->labelName->setTextToElide(tagName);
 }
 
 QString FilterTagCell::getTagName()
 {
-    return ui->labelName->text();
+    return _tagName;
 }

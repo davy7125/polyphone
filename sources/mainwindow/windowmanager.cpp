@@ -284,8 +284,9 @@ void WindowManager::openRepositorySoundfont(int id)
         return;
     QString title = si->getTitle();
 
-    // Otherwise, create a new viewer
+    // Create a new viewer
     SoundfontViewer * viewer = new SoundfontViewer();
+    connect(viewer, SIGNAL(itemClicked(SoundfontFilter*)), this, SLOT(openRepository(SoundfontFilter*)));
     int index = _tabWidget->addColoredTab(viewer, ":/icons/file-description.svg", title,
                                           ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND),
                                           ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_TEXT));

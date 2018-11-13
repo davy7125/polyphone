@@ -26,6 +26,7 @@ private slots:
 
 private:
     Ui::FilterTagCell *ui;
+    QString _tagName;
 };
 
 #endif // FILTERTAGCELL_H
