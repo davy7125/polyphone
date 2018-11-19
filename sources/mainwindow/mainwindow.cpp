@@ -339,6 +339,12 @@ void MainWindow::keyPressEvent(QKeyEvent * event)
         if (currentSf2 != -1)
             SoundfontManager::getInstance()->redo(currentSf2);
     }
+    else if (event->modifiers() == Qt::ControlModifier && event->key() == Qt::Key_F)
+    {
+        // Search
+        if (ui->lineSearch->isVisible())
+            ui->lineSearch->setFocus();
+    }
 
     QMainWindow::keyPressEvent(event);
 }

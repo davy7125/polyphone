@@ -117,7 +117,7 @@ private:
     QByteArray getDataWav(QByteArray baData, quint16 byte);
     void determineRootKey();
     void getInfoSoundWav(bool tryFindRootkey);
-    void getInfoSoundWav(QByteArray baData, bool tryFindRootkey);
+    void getInfoSoundWav(QByteArray &baData, bool tryFindRootkey);
     static void exporter(QString fileName, QByteArray baData, InfoSound info);
     static void FFT_calculate(Complex * x, long N /* must be a power of 2 */,
             Complex * X, Complex * scratch, Complex * twiddles);
