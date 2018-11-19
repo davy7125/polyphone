@@ -655,7 +655,7 @@ void Sound::getInfoSoundWav(bool tryFindRootkey)
     this->getInfoSoundWav(baData, tryFindRootkey);
 }
 
-void Sound::getInfoSoundWav(QByteArray baData, bool tryFindRootkey)
+void Sound::getInfoSoundWav(QByteArray& baData, bool tryFindRootkey)
 {
     int taille, pos;
     if (strcmp("RIFF", baData.left(4)))
@@ -679,13 +679,13 @@ void Sound::getInfoSoundWav(QByteArray baData, bool tryFindRootkey)
     }
     pos = 12;
     bool rootKeyOk = false;
+    bool smplOk = false;
+    bool dataOk = false;
     while (pos < baData.size() - 8)
     {
         QString section = baData.mid(pos, 4);
         pos += 4;
         int sectionSize = readDWORD(baData, pos);
-        if (sectionSize % 2 != 0)
-            sectionSize++;
         pos += 4;
 
         if (section == "fmt ")
@@ -700,6 +700,7 @@ void Sound::getInfoSoundWav(QByteArray baData, bool tryFindRootkey)
             _info.wChannels = readWORD(baData, pos + 2);
             _info.dwSampleRate = readDWORD(baData, pos + 4);
             _info.wBpsFile = readWORD(baData, pos + 14);
+            smplOk = true;
         }
         else if (section == "smpl")
         {
@@ -726,13 +727,21 @@ void Sound::getInfoSoundWav(QByteArray baData, bool tryFindRootkey)
         }
         else if (section == "data")
         {
-            if (sectionSize == 0) sectionSize = baData.size() - pos;
+            if (sectionSize <= 0)
+                sectionSize = baData.size() - pos;
             _info.dwStart = pos;
             if (_info.wBpsFile != 0 && _info.wChannels != 0)
                 _info.dwLength = qMin(sectionSize, baData.size() - pos) / (_info.wBpsFile * _info.wChannels / 8);
+            dataOk = true;
         }
 
         // Mise à jour de la position
+        if (sectionSize < 0)
+        {
+            if (!dataOk || !smplOk)
+                QMessageBox::warning(_parent, QObject::trUtf8("Attention"), QObject::trUtf8("Le fichier est corrompu."));
+            return;
+        }
         pos += sectionSize;
     }
     if (!rootKeyOk && tryFindRootkey)
