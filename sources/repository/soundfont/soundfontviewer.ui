@@ -46,11 +46,52 @@
         <x>0</x>
         <y>0</y>
         <width>236</width>
-        <height>406</height>
+        <height>432</height>
        </rect>
       </property>
       <layout class="QGridLayout" name="gridLayout">
+       <item row="9" column="0" colspan="2">
+        <widget class="AttributeFlow" name="attributeCategory" native="true"/>
+       </item>
+       <item row="16" column="0" colspan="2">
+        <widget class="QLabel" name="labelGenre">
+         <property name="font">
+          <font>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Genre</string>
+         </property>
+        </widget>
+       </item>
+       <item row="15" column="0" colspan="2">
+        <widget class="AttributeFlow" name="attributeArticulation" native="true"/>
+       </item>
+       <item row="3" column="1">
+        <widget class="QLabel" name="labelLicense">
+         <property name="cursor">
+          <cursorShape>PointingHandCursor</cursorShape>
+         </property>
+         <property name="text">
+          <string notr="true">labelLicense</string>
+         </property>
+         <property name="textFormat">
+          <enum>Qt::RichText</enum>
+         </property>
+         <property name="wordWrap">
+          <bool>true</bool>
+         </property>
+         <property name="openExternalLinks">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
        <item row="17" column="0" colspan="2">
+        <widget class="AttributeFlow" name="attributeGenre" native="true"/>
+       </item>
+       <item row="18" column="0" colspan="2">
         <widget class="QLabel" name="labelMidiStandard">
          <property name="font">
           <font>
@@ -63,42 +104,7 @@
          </property>
         </widget>
        </item>
-       <item row="8" column="0" colspan="2">
-        <widget class="AttributeFlow" name="attributeCategory" native="true"/>
-       </item>
-       <item row="2" column="0">
-        <widget class="QLabel" name="iconDate">
-         <property name="minimumSize">
-          <size>
-           <width>16</width>
-           <height>16</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>16</width>
-           <height>16</height>
-          </size>
-         </property>
-         <property name="text">
-          <string/>
-         </property>
-        </widget>
-       </item>
-       <item row="19" column="0" colspan="2">
-        <widget class="QLabel" name="labelTags">
-         <property name="font">
-          <font>
-           <weight>75</weight>
-           <bold>true</bold>
-          </font>
-         </property>
-         <property name="text">
-          <string>Tags</string>
-         </property>
-        </widget>
-       </item>
-       <item row="13" column="0" colspan="2">
+       <item row="14" column="0" colspan="2">
         <widget class="QLabel" name="labelArticulation">
          <property name="font">
           <font>
@@ -111,11 +117,8 @@
          </property>
         </widget>
        </item>
-       <item row="20" column="0" colspan="2">
-        <widget class="AttributeFlow" name="attributeTag" native="true"/>
-       </item>
-       <item row="9" column="0" colspan="2">
-        <widget class="QLabel" name="labelSampleSource">
+       <item row="8" column="0" colspan="2">
+        <widget class="QLabel" name="labelCategory">
          <property name="font">
           <font>
            <weight>75</weight>
@@ -123,9 +126,12 @@
           </font>
          </property>
          <property name="text">
-          <string>Source des échantillons</string>
+          <string>Catégorie</string>
          </property>
         </widget>
+       </item>
+       <item row="19" column="0" colspan="2">
+        <widget class="AttributeFlow" name="attributeMidiStandard" native="true"/>
        </item>
        <item row="1" column="0">
         <widget class="QLabel" name="iconAuthor">
@@ -146,11 +152,18 @@
          </property>
         </widget>
        </item>
-       <item row="14" column="0" colspan="2">
-        <widget class="AttributeFlow" name="attributeArticulation" native="true"/>
+       <item row="2" column="1">
+        <widget class="QLabel" name="labelDate">
+         <property name="text">
+          <string notr="true">labelDate</string>
+         </property>
+        </widget>
        </item>
        <item row="11" column="0" colspan="2">
-        <widget class="QLabel" name="labelTimbre">
+        <widget class="AttributeFlow" name="attributeSampleSource" native="true"/>
+       </item>
+       <item row="10" column="0" colspan="2">
+        <widget class="QLabel" name="labelSampleSource">
          <property name="font">
           <font>
            <weight>75</weight>
@@ -158,27 +171,17 @@
           </font>
          </property>
          <property name="text">
-          <string>Timbre</string>
+          <string>Source des échantillons</string>
          </property>
         </widget>
        </item>
-       <item row="16" column="0" colspan="2">
-        <widget class="AttributeFlow" name="attributeGenre" native="true"/>
-       </item>
-       <item row="2" column="1">
-        <widget class="QLabel" name="labelDate">
-         <property name="text">
-          <string>labelDate</string>
-         </property>
-        </widget>
-       </item>
-       <item row="3" column="1">
-        <widget class="QLabel" name="labelLicense">
+       <item row="1" column="1">
+        <widget class="QLabel" name="labelAuthor">
          <property name="cursor">
           <cursorShape>PointingHandCursor</cursorShape>
          </property>
          <property name="text">
-          <string>labelLicense</string>
+          <string notr="true">labelAuthor</string>
          </property>
          <property name="textFormat">
           <enum>Qt::RichText</enum>
@@ -186,13 +189,55 @@
          <property name="wordWrap">
           <bool>true</bool>
          </property>
-         <property name="openExternalLinks">
-          <bool>true</bool>
+        </widget>
+       </item>
+       <item row="20" column="0" colspan="2">
+        <widget class="QLabel" name="labelTags">
+         <property name="font">
+          <font>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Tags</string>
          </property>
         </widget>
        </item>
-       <item row="10" column="0" colspan="2">
-        <widget class="AttributeFlow" name="attributeSampleSource" native="true"/>
+       <item row="22" column="0">
+        <spacer name="verticalSpacer">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>0</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="2" column="0">
+        <widget class="QLabel" name="iconDate">
+         <property name="minimumSize">
+          <size>
+           <width>16</width>
+           <height>16</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>16</width>
+           <height>16</height>
+          </size>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item row="13" column="0" colspan="2">
+        <widget class="AttributeFlow" name="attributeTimbre" native="true"/>
        </item>
        <item row="3" column="0">
         <widget class="QLabel" name="iconLicense">
@@ -213,65 +258,17 @@
          </property>
         </widget>
        </item>
-       <item row="15" column="0" colspan="2">
-        <widget class="QLabel" name="labelGenre">
-         <property name="font">
-          <font>
-           <weight>75</weight>
-           <bold>true</bold>
-          </font>
-         </property>
-         <property name="text">
-          <string>Genre</string>
-         </property>
-        </widget>
-       </item>
-       <item row="18" column="0" colspan="2">
-        <widget class="AttributeFlow" name="attributeMidiStandard" native="true"/>
-       </item>
-       <item row="21" column="0">
-        <spacer name="verticalSpacer">
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>0</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item row="7" column="0" colspan="2">
-        <widget class="QLabel" name="labelCategory">
-         <property name="font">
-          <font>
-           <weight>75</weight>
-           <bold>true</bold>
-          </font>
-         </property>
-         <property name="text">
-          <string>Catégorie</string>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="1">
-        <widget class="QLabel" name="labelAuthor">
-         <property name="cursor">
-          <cursorShape>PointingHandCursor</cursorShape>
-         </property>
-         <property name="text">
-          <string>labelAuthor</string>
-         </property>
-         <property name="textFormat">
-          <enum>Qt::RichText</enum>
-         </property>
-        </widget>
-       </item>
-       <item row="12" column="0" colspan="2">
-        <widget class="AttributeFlow" name="attributeTimbre" native="true"/>
-       </item>
        <item row="4" column="0">
+        <widget class="QLabel" name="iconWebsite">
+         <property name="text">
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item row="21" column="0" colspan="2">
+        <widget class="AttributeFlow" name="attributeTag" native="true"/>
+       </item>
+       <item row="5" column="0">
         <spacer name="verticalSpacer_6">
          <property name="orientation">
           <enum>Qt::Vertical</enum>
@@ -286,6 +283,32 @@
           </size>
          </property>
         </spacer>
+       </item>
+       <item row="12" column="0" colspan="2">
+        <widget class="QLabel" name="labelTimbre">
+         <property name="font">
+          <font>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Timbre</string>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="1">
+        <widget class="QLabel" name="labelWebsite">
+         <property name="text">
+          <string notr="true">labelWebsite</string>
+         </property>
+         <property name="wordWrap">
+          <bool>true</bool>
+         </property>
+         <property name="openExternalLinks">
+          <bool>true</bool>
+         </property>
+        </widget>
        </item>
       </layout>
      </widget>
@@ -409,8 +432,17 @@
            </rect>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout">
+           <property name="topMargin">
+            <number>9</number>
+           </property>
+           <property name="rightMargin">
+            <number>9</number>
+           </property>
+           <property name="bottomMargin">
+            <number>9</number>
+           </property>
            <item>
-            <widget class="QLabel" name="label_2">
+            <widget class="QLabel" name="labelDescription">
              <property name="sizePolicy">
               <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
                <horstretch>0</horstretch>
@@ -430,17 +462,10 @@
             </widget>
            </item>
            <item>
-            <widget class="QFrame" name="frameDescription">
-             <property name="frameShape">
-              <enum>QFrame::NoFrame</enum>
-             </property>
-             <property name="frameShadow">
-              <enum>QFrame::Raised</enum>
-             </property>
-            </widget>
+            <widget class="SoundfontDescription" name="widgetDescription" native="true"/>
            </item>
            <item>
-            <widget class="QLabel" name="label_3">
+            <widget class="QLabel" name="labelDownload">
              <property name="sizePolicy">
               <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
                <horstretch>0</horstretch>
@@ -455,22 +480,15 @@
               </font>
              </property>
              <property name="text">
-              <string>Downloads</string>
+              <string>Téléchargements</string>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="QFrame" name="frameDownloads">
-             <property name="frameShape">
-              <enum>QFrame::NoFrame</enum>
-             </property>
-             <property name="frameShadow">
-              <enum>QFrame::Raised</enum>
-             </property>
-            </widget>
+            <widget class="SoundfontDownload" name="widgetDownload" native="true"/>
            </item>
            <item>
-            <widget class="QLabel" name="label_5">
+            <widget class="QLabel" name="labelComment">
              <property name="sizePolicy">
               <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
                <horstretch>0</horstretch>
@@ -485,19 +503,12 @@
               </font>
              </property>
              <property name="text">
-              <string>Comments</string>
+              <string>Commentaires</string>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="QFrame" name="frameComments">
-             <property name="frameShape">
-              <enum>QFrame::NoFrame</enum>
-             </property>
-             <property name="frameShadow">
-              <enum>QFrame::Raised</enum>
-             </property>
-            </widget>
+            <widget class="SoundfontComment" name="widgetComment" native="true"/>
            </item>
           </layout>
          </widget>
@@ -730,6 +741,24 @@ de télécharger le contenu</string>
    <class>AttributeFlow</class>
    <extends>QWidget</extends>
    <header>attributeflow.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>SoundfontDescription</class>
+   <extends>QWidget</extends>
+   <header>soundfontdescription.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>SoundfontDownload</class>
+   <extends>QWidget</extends>
+   <header>soundfontdownload.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>SoundfontComment</class>
+   <extends>QWidget</extends>
+   <header>soundfontcomment.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

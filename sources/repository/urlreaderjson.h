@@ -3,7 +3,6 @@
 
 #include "urlreader.h"
 #include <QJsonObject>
-class QJsonDocument;
 
 class UrlReaderJson : public UrlReader
 {

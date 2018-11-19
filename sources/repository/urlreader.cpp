@@ -10,7 +10,7 @@ UrlReader::UrlReader(QString url) :
     _url(url),
     _webCtrl(new QNetworkAccessManager(this)),
     _timer(new QTimer(this)),
-    _reply(NULL),
+    _reply(nullptr),
     _mutex(new QMutex())
 {
     // Connect the network access manager
@@ -25,9 +25,15 @@ UrlReader::~UrlReader()
 {
     _timer->stop();
     delete _timer;
-    delete _webCtrl;
-    if (_reply != NULL)
+    if (_reply != nullptr)
         _reply->deleteLater();
+    delete _webCtrl;
+    delete _mutex;
+}
+
+void UrlReader::addArgument(QString key, QString value)
+{
+    _arguments[key] = QUrl::toPercentEncoding(value);
 }
 
 void UrlReader::download()
@@ -43,6 +49,8 @@ void UrlReader::download()
     url.setQuery(query.query());
 
     // Send the query
+    if (_reply != nullptr)
+        _reply->deleteLater();
     _reply = _webCtrl->get(QNetworkRequest(url));
     _timer->start(5000);
 }

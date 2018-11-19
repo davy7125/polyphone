@@ -79,7 +79,7 @@ void TopRightWidget::userStateChanged(UserManager::ConnectionState state)
         break;
     case UserManager::CONNECTED:
         // Show a warning "not premium"
-        ui->labelWarning->setToolTip(trUtf8("Utilisez un compte Premium pour profiter des avantages."));
+        ui->labelWarning->setToolTip(trUtf8("Souscrivez à un compte Premium pour bénéficier de toutes les fonctionnalités !"));
         ui->labelWarning->setPixmap(ContextManager::theme()->getColoredSvg(":/icons/warning.svg", QSize(16, 16), _colorReplacement));
         ui->labelWarning->show();
         ui->pushUser->hide();

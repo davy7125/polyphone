@@ -10,8 +10,7 @@
 #DEFINES += USE_LOCAL_RTMIDI
 #DEFINES += USE_LOCAL_STK
 #DEFINES += USE_LOCAL_QCUSTOMPLOT
-DEFINES += USE_LOCAL_FLUIDSYNTH \
-    SFTOOLS_NOXML
+DEFINES += USE_LOCAL_FLUIDSYNTH
 
 # Polyphone version
 DEFINES += VERSION=2.0
@@ -34,7 +33,7 @@ TRANSLATIONS = polyphone_en.ts \
     polyphone_da.ts
 
 
-QT += core gui printsupport svg network #testlib
+QT += core gui printsupport svg network webkitwidgets #testlib
 TARGET = polyphone
 TEMPLATE = app
 
@@ -106,6 +105,7 @@ macx {
     ICON = polyphone.icns
     QMAKE_INFO_PLIST = polyphone.plist
 }
+DEFINES += SFTOOLS_NOXML
 
 # Location of RtMidi
 contains(DEFINES, USE_LOCAL_RTMIDI) {
@@ -430,7 +430,18 @@ SOURCES	+= main.cpp \
     mainwindow/toprightwidget.cpp \
     repository/user/userarea.cpp \
     repository/soundfont/soundfontviewer.cpp \
-    repository/widgets/elidedpushbutton.cpp
+    repository/widgets/elidedpushbutton.cpp \
+    repository/soundfont/soundfontdescription.cpp \
+    repository/soundfont/soundfontdownload.cpp \
+    repository/soundfont/soundfontcomment.cpp \
+    repository/soundfontdetails.cpp \
+    repository/detailsmanager.cpp \
+    repository/soundfont/soundfontcommentdata.cpp \
+    repository/soundfont/soundfontdescriptiondata.cpp \
+    repository/soundfont/soundfontdownloaddata.cpp \
+    repository/urlreaderimage.cpp \
+    repository/soundfont/soundfontdownloadcell.cpp \
+    repository/soundfont/soundfontcommentcell.cpp
 
 HEADERS  += \
     core/sound.h \
@@ -685,7 +696,18 @@ HEADERS  += \
     mainwindow/toprightwidget.h \
     repository/user/userarea.h \
     repository/soundfont/soundfontviewer.h \
-    repository/widgets/elidedpushbutton.h
+    repository/widgets/elidedpushbutton.h \
+    repository/soundfont/soundfontdescription.h \
+    repository/soundfont/soundfontdownload.h \
+    repository/soundfont/soundfontcomment.h \
+    repository/soundfontdetails.h \
+    repository/detailsmanager.h \
+    repository/soundfont/soundfontcommentdata.h \
+    repository/soundfont/soundfontdescriptiondata.h \
+    repository/soundfont/soundfontdownloaddata.h \
+    repository/urlreaderimage.h \
+    repository/soundfont/soundfontdownloadcell.h \
+    repository/soundfont/soundfontcommentcell.h
 
 FORMS    += \
     dialogs/dialog_list.ui \
@@ -741,7 +763,12 @@ FORMS    += \
     context/interface/configsectionrepository.ui \
     mainwindow/toprightwidget.ui \
     repository/user/userarea.ui \
-    repository/soundfont/soundfontviewer.ui
+    repository/soundfont/soundfontviewer.ui \
+    repository/soundfont/soundfontdescription.ui \
+    repository/soundfont/soundfontdownload.ui \
+    repository/soundfont/soundfontcomment.ui \
+    repository/soundfont/soundfontdownloadcell.ui \
+    repository/soundfont/soundfontcommentcell.ui
 
 RESOURCES += resources.qrc
 

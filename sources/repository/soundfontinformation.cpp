@@ -11,7 +11,8 @@ SoundfontInformation::SoundfontInformation(int id, QString title) :
     _downloadNumber(-1),
     _commentNumber(-1),
     _categoryId(-1),
-    _rating(-1)
+    _rating(-1),
+    _website("")
 {
 
 }

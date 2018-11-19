@@ -21,13 +21,15 @@ public:
     // Set the url
     void setUrl(QString url) { _url = url; }
     void clearArguments() { _arguments.clear(); }
-    void addArgument(QString key, QString value) { _arguments[key] = value; }
+    void addArgument(QString key, QString value);
 
     // Start the download. When this is finished, the signal "downloaded"
     void download();
 
     // Get raw data
     QByteArray getRawData() { return _data; }
+
+    QString getUrl() { return _url; }
 
 signals:
     // Emitted when the download is complete
