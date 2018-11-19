@@ -62,6 +62,10 @@ public:
     void addTag(QString tag);
     const QStringList getTags() { return _tags; }
 
+    // Website
+    void setWebsite(QString website) { _website = website; }
+    QString getWebsite() { return _website; }
+
 private:
     int _id;
     QString _title, _author;
@@ -72,6 +76,7 @@ private:
     double _rating;
     QMap<Property, QStringList> _properties;
     QStringList _tags;
+    QString _website;
 };
 
 Q_DECLARE_OPERATORS_FOR_FLAGS(SoundfontInformation::LicenseFlags)

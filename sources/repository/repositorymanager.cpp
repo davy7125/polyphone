@@ -8,6 +8,7 @@
 #include <QMessageBox>
 #include <QApplication>
 #include <QDebug>
+#include "soundfontdetails.h"
 
 //const QString RepositoryManager::BASE_URL = "http://localhost/polyphone-soundfonts/fr/api/soundfonts/";
 const QString RepositoryManager::BASE_URL = "https://www.polyphone-soundfonts.com/en/api/soundfonts/";
@@ -108,6 +109,7 @@ void RepositoryManager::fillPropertyTranslation()
     _propertyTranslations[SoundfontInformation::Property::GENRE]["electronic"] = trUtf8("musique électronique");
     _propertyTranslations[SoundfontInformation::Property::GENRE]["trance"] = trUtf8("trance");
     _propertyTranslations[SoundfontInformation::Property::GENRE]["ambient"] = trUtf8("ambient");
+    _propertyTranslations[SoundfontInformation::Property::GENRE]["ambiant"] = trUtf8("ambient");
     _propertyTranslations[SoundfontInformation::Property::GENRE]["house"] = trUtf8("house");
     _propertyTranslations[SoundfontInformation::Property::GENRE]["techno_electro"] = trUtf8("techno / électro");
     _propertyTranslations[SoundfontInformation::Property::GENRE]["dnb_breaks"] = trUtf8("D'n'B / breaks");
@@ -122,6 +124,7 @@ void RepositoryManager::fillPropertyTranslation()
     _propertyTranslations[SoundfontInformation::Property::GENRE]["jazz_swing"] = trUtf8("jazz / swing");
     _propertyTranslations[SoundfontInformation::Property::GENRE]["folk_country"] = trUtf8("folk / country");
     _propertyTranslations[SoundfontInformation::Property::GENRE]["ethnic_world"] = trUtf8("musique du monde / éthnique");
+    _propertyTranslations[SoundfontInformation::Property::GENRE]["ethnic / world"] = trUtf8("musique du monde / éthnique");
 
     // No translations for MIDI STANDARDS
     _propertyTranslations[SoundfontInformation::Property::MIDI_STANDARD]["no_standards"] = "no standards"; // Shouldn't be used
@@ -257,6 +260,11 @@ QString RepositoryManager::loadSoundfontInfo()
         valueTmp = jsonObject.value("comment_number");
         if (valueTmp.isDouble())
             si->setCommentNumber((int)valueTmp.toDouble());
+
+        // Website
+        valueTmp = jsonObject.value("website");
+        if (valueTmp.isString())
+            si->setWebsite(valueTmp.toString());
 
         // Category id and name
         valueTmp = jsonObject.value("category_id");

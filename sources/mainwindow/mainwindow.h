@@ -58,6 +58,7 @@ private slots:
     void on_pushButtonForum_clicked();
     void on_pushButtonSettings_clicked();
     void on_pushButtonSearch_clicked();
+    void on_lineSearch_returnPressed();
     void on_pushButtonSoundfonts_clicked();
     void on_pushButtonOpen_clicked();
     void on_pushButtonNew_clicked();

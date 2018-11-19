@@ -52,6 +52,13 @@ SoundfontBrowser::SoundfontBrowser(QWidget *parent) :
     ui->pushClearSearch->setIcon(ContextManager::theme()->getColoredSvg(":/icons/close.svg", QSize(16, 16), ThemeManager::HIGHLIGHTED_BACKGROUND));
     ui->pushClearSearch->setStyleSheet("QPushButton{border:0;border-top-right-radius:2px;border-bottom-right-radius:2px;background-color:" +
                                        ContextManager::theme()->getColor(ThemeManager::LIST_BACKGROUND).name() + "}");
+    QColor color = ThemeManager::mix(
+                ContextManager::theme()->getColor(ThemeManager::LIST_BACKGROUND),
+                ContextManager::theme()->getColor(ThemeManager::LIST_TEXT),
+                0.5);
+    ui->labelNoResult->setStyleSheet("QLabel{color:" + color.name() +
+                                     ";border:1px solid " + this->palette().dark().color().name() +
+                                     ";border-top:0;border-right:0;border-bottom:0}");
 
     // Connection with the repository manager
     RepositoryManager * rm = RepositoryManager::getInstance();
@@ -294,6 +301,20 @@ void SoundfontBrowser::updateList2()
         ui->listWidget->addItem(item);
         ui->listWidget->setItemWidget(item, cell);
     }
+
+    if (_currentSoundfontInfos.empty())
+    {
+        // Display "no results"
+        ui->labelNoResult->show();
+        ui->listWidget->hide();
+    }
+    else
+    {
+        // Display the list
+        ui->listWidget->show();
+        ui->labelNoResult->hide();
+    }
+
     updateCellHeight();
 }
 

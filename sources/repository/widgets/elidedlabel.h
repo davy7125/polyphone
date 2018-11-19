@@ -15,6 +15,7 @@ public:
     {
         _text = text;
         _linkContent = "";
+        this->resizeEvent(nullptr);
     }
 
     /// Set the text to elide, being wrap in <a> for creating a link. The displayed text will be set automatically
@@ -22,13 +23,15 @@ public:
     {
         _text = text;
         _linkContent = linkContent;
+        this->resizeEvent(nullptr);
     }
 
 protected:
     void resizeEvent(QResizeEvent * event)
     {
         QFontMetrics metrics(this->font());
-        QString elidedText = metrics.elidedText(_text, Qt::ElideMiddle, event->size().width());
+        int width = (event == nullptr ? this->width() : event->size().width());
+        QString elidedText = metrics.elidedText(_text, Qt::ElideMiddle, width);
         if (_linkContent.isEmpty())
             this->setText(elidedText);
         else

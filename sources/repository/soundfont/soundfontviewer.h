@@ -24,6 +24,9 @@ signals:
 
 private slots:
     void on_labelAuthor_linkActivated(const QString &link);
+    void onDetailsReady(int soundfontId);
+    void onDetailsFailed(int soundfontId, QString error);
+    void on_pushRetry_clicked();
 
 private:
     Ui::SoundfontViewer *ui;

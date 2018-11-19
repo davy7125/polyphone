@@ -53,8 +53,8 @@ void UserManager::login()
 
     // Prepare the query for login
     _userReaderJson->clearArguments();
-    _userReaderJson->addArgument("user", QUrl::toPercentEncoding(username));
-    _userReaderJson->addArgument("pass", QUrl::toPercentEncoding(password));
+    _userReaderJson->addArgument("user", username);
+    _userReaderJson->addArgument("pass", password);
 
     // Send the query
     _userReaderJson->download();
@@ -88,7 +88,7 @@ void UserManager::userDataAvailable(QString error)
         QJsonObject data = _userReaderJson->getData();
         if (data.contains("status"))
         {
-            switch (data.value("status").toInt())
+            switch (data.value("status").toInt(-1))
             {
             case 0:
                 _error = trUtf8("Problème serveur");

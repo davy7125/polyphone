@@ -2,10 +2,11 @@
 #include "ui_soundfontviewer.h"
 #include "contextmanager.h"
 #include "repositorymanager.h"
+#include "detailsmanager.h"
 #include "soundfontfilter.h"
+#include "soundfontdetails.h"
 
-SoundfontViewer::SoundfontViewer(QWidget *parent) :
-    QWidget(parent),
+SoundfontViewer::SoundfontViewer(QWidget *parent) : QWidget(parent),
     ui(new Ui::SoundfontViewer)
 {
     ui->setupUi(this);
@@ -25,8 +26,19 @@ SoundfontViewer::SoundfontViewer(QWidget *parent) :
     ui->iconAuthor->setPixmap(ContextManager::theme()->getColoredSvg(":/icons/user.svg", QSize(16, 16), ThemeManager::ColorType::LIST_TEXT));
     ui->iconDate->setPixmap(ContextManager::theme()->getColoredSvg(":/icons/calendar.svg", QSize(16, 16), ThemeManager::ColorType::LIST_TEXT));
     ui->iconLicense->setPixmap(ContextManager::theme()->getColoredSvg(":/icons/copyright.svg", QSize(16, 16), ThemeManager::ColorType::LIST_TEXT));
+    ui->iconWebsite->setPixmap(ContextManager::theme()->getColoredSvg(":/icons/globe.svg", QSize(16, 16), ThemeManager::ColorType::LIST_TEXT));
     ui->scrollMainArea->setStyleSheet("QWidget#scrollMainArea{ background: " + ContextManager::theme()->getColor(ThemeManager::LIST_BACKGROUND).name() +
                                       ";color:" + ContextManager::theme()->getColor(ThemeManager::LIST_TEXT).name() + "; }");
+    ui->pageFailed->setStyleSheet("QWidget#pageFailed{ background: " + ContextManager::theme()->getColor(ThemeManager::LIST_BACKGROUND).name() +
+                                  ";color:" + ContextManager::theme()->getColor(ThemeManager::LIST_TEXT).name() + "; }");
+    ui->pageWait->setStyleSheet("QWidget#pageWait{ background: " + ContextManager::theme()->getColor(ThemeManager::LIST_BACKGROUND).name() +
+                                  ";color:" + ContextManager::theme()->getColor(ThemeManager::LIST_TEXT).name() + "; }");
+    QString styleSheetTitle = "QLabel { background-color:" + ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND).name() +
+            "; color: " + ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_TEXT).name() +
+            ";border-radius: 2px; padding: 3px 5px; }";
+    ui->labelDescription->setStyleSheet(styleSheetTitle);
+    ui->labelDownload->setStyleSheet(styleSheetTitle);
+    ui->labelComment->setStyleSheet(styleSheetTitle);
 
     QColor buttonBackground = ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND);
     QColor buttonText = ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_TEXT);
@@ -43,6 +55,8 @@ SoundfontViewer::~SoundfontViewer()
 
 void SoundfontViewer::initialize(int soundfontId)
 {
+    ui->spinner->startAnimation();
+    ui->stackedWidget->setCurrentIndex(0);
     _soundfontId = soundfontId;
 
     SoundfontInformation * soundfontInfo = RepositoryManager::getInstance()->getSoundfontInformation(soundfontId);
@@ -72,6 +86,21 @@ void SoundfontViewer::initialize(int soundfontId)
                               "\" href=\"" +
                               RepositoryManager::getInstance()->getLicenseLink(soundfontInfo->getLicense()) +
                               "\">" + RepositoryManager::getInstance()->getLicenseLabel(soundfontInfo->getLicense()) + "</a>");
+
+    // Website
+    if (soundfontInfo->getWebsite() == "")
+    {
+        ui->labelWebsite->hide();
+        ui->iconWebsite->hide();
+    }
+    else
+    {
+        ui->labelWebsite->show();
+        ui->iconWebsite->show();
+        ui->labelWebsite->setText("<a href='" + soundfontInfo->getWebsite() + "' style='text-decoration:none;color:" +
+                                  ContextManager::theme()->getColor(ThemeManager::WINDOW_TEXT).name()+
+                                  "'>" + soundfontInfo->getWebsite() + "</a>");
+    }
 
     // Category
     connect(ui->attributeCategory, SIGNAL(itemClicked(SoundfontFilter*)), this, SIGNAL(itemClicked(SoundfontFilter*)));
@@ -156,8 +185,11 @@ void SoundfontViewer::initialize(int soundfontId)
             ui->attributeTag->addTag(tag);
     }
 
-
     // Ask for the details
+    DetailsManager * dm = DetailsManager::getInstance();
+    connect(dm, SIGNAL(detailsReady(int)), this, SLOT(onDetailsReady(int)));
+    connect(dm, SIGNAL(detailsFailed(int,QString)), this, SLOT(onDetailsFailed(int,QString)));
+    dm->askForSoundfontDetails(_soundfontId);
 }
 
 void SoundfontViewer::on_labelAuthor_linkActivated(const QString &link)
@@ -165,4 +197,38 @@ void SoundfontViewer::on_labelAuthor_linkActivated(const QString &link)
     SoundfontFilter * filter = new SoundfontFilter();
     filter->setSearchText(QString("Author:\"%0\"").arg(link));
     emit(itemClicked(filter));
+}
+
+void SoundfontViewer::onDetailsReady(int soundfontId)
+{
+    if (soundfontId != _soundfontId)
+        return;
+
+    // Get the details
+    SoundfontDetails * sd = DetailsManager::getInstance()->getDetails(_soundfontId);
+    if (sd != nullptr)
+    {
+        ui->widgetDescription->display(sd->getDescription());
+        ui->widgetDownload->display(sd->getDownloads());
+        ui->widgetComment->display(sd->getComments());
+        ui->stackedWidget->setCurrentIndex(1);
+    }
+    else
+        ui->stackedWidget->setCurrentIndex(2);
+}
+
+void SoundfontViewer::onDetailsFailed(int soundfontId, QString error)
+{
+    Q_UNUSED(error)
+
+    if (soundfontId != _soundfontId)
+        return;
+
+    ui->stackedWidget->setCurrentIndex(2);
+}
+
+void SoundfontViewer::on_pushRetry_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(0);
+    DetailsManager::getInstance()->askForSoundfontDetails(_soundfontId);
 }
