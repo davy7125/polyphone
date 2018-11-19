@@ -379,3 +379,9 @@ void MainWindow::onUserClicked()
 {
     _windowManager->openUser();
 }
+
+void MainWindow::on_lineSearch_returnPressed()
+{
+    if (!ui->lineSearch->text().isEmpty())
+        on_pushButtonSearch_clicked();
+}

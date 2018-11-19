@@ -1,6 +1,5 @@
 #include "urlreaderjson.h"
 #include <QJsonDocument>
-#include <QJsonObject>
 
 UrlReaderJson::UrlReaderJson(QString url) : UrlReader(url) {}
 

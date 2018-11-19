@@ -8,7 +8,6 @@
 #include "soundfontfilter.h"
 class UrlReaderJson;
 
-
 class RepositoryManager: public QObject
 {
     Q_OBJECT
