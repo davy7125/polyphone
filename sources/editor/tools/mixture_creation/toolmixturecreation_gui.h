@@ -13,7 +13,7 @@ class ToolMixtureCreation_gui : public AbstractToolGui
     Q_OBJECT
 
 public:
-    explicit ToolMixtureCreation_gui(QWidget *parent = 0);
+    explicit ToolMixtureCreation_gui(QWidget *parent = nullptr);
     ~ToolMixtureCreation_gui();
 
     /// Update the interface with the parameters
