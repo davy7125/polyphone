@@ -10,7 +10,6 @@
 #DEFINES += USE_LOCAL_RTMIDI
 #DEFINES += USE_LOCAL_STK
 #DEFINES += USE_LOCAL_QCUSTOMPLOT
-DEFINES += USE_LOCAL_FLUIDSYNTH
 
 # Polyphone version
 DEFINES += VERSION=2.0
@@ -33,48 +32,27 @@ TRANSLATIONS = polyphone_en.ts \
     polyphone_da.ts
 
 
-QT += core gui printsupport svg network webkitwidgets #testlib
+QT += core gui printsupport svg network #testlib
 TARGET = polyphone
 TEMPLATE = app
 
-CONFIG(release, debug|release) {
-    DESTDIR = RELEASE
-    OBJECTS_DIR = RELEASE/.obj
-    MOC_DIR = RELEASE/.moc
-    RCC_DIR = RELEASE/.rcc
-    UI_DIR = RELEASE/.ui
-    DEFINES += QT_NO_DEBUG_OUTPUT
-}
-CONFIG(debug, debug|release) {
-    DESTDIR = DEBUG
-    OBJECTS_DIR = DEBUG/.obj
-    MOC_DIR = DEBUG/.moc
-    RCC_DIR = DEBUG/.rcc
-    UI_DIR = DEBUG/.ui
-}
-
 win32{
-    DEFINES += __WINDOWS_MM__ USE_LOCAL_RTMIDI USE_LOCAL_STK USE_LOCAL_QCUSTOMPLOT USE_LOCAL_FLUIDSYNTH
+    DEFINES += __WINDOWS_MM__ USE_LOCAL_RTMIDI USE_LOCAL_STK USE_LOCAL_QCUSTOMPLOT
     INCLUDEPATH += lib \
-        lib/win/ \
-        lib/ogg_vorbis
-    HEADERS  += lib/win/zconf.h \
-        lib/win/zlib.h \
-        lib/portaudio.h \
-        lib/ogg_vorbis/ogg/ogg.h \
-        lib/ogg_vorbis/ogg/os_types.h \
-        lib/ogg_vorbis/vorbis/codec.h \
-        lib/ogg_vorbis/vorbis/vorbisenc.h \
-        lib/ogg_vorbis/vorbis/vorbisfile.h
+        lib/ogg_vorbis \
+        ../lib_windows/include
     RC_FILE = polyphone.rc
 
     !contains(QMAKE_TARGET.arch, x86_64) {
-        LIBS += -Llib/win/32bits -lportaudio_x86 -lzlib1 -lwinmm -llibogg -llibvorbis -llibvorbisfile
         QMAKE_LFLAGS_WINDOWS = /SUBSYSTEM:WINDOWS,5.01
+        LIBS += -L$$PWD/../lib_windows/32bits -lportaudio_x86
+        DESTDIR = $$PWD/../lib_windows/32bits
     } else {
-        LIBS += -Llib/win/64bits -lportaudio_x64 -lzlib1 -lwinmm -llibogg -llibvorbis -llibvorbisfile
         QMAKE_LFLAGS_WINDOWS = /SUBSYSTEM:WINDOWS,5.02
+        LIBS += -L$$PWD/../lib_windows/64bits -lportaudio_x64
+        DESTDIR = $$PWD/../lib_windows/64bits
     }
+    LIBS += -lzlib1 -lwinmm -llibogg -llibvorbis -llibvorbisfile -lcrypto
 }
 unix:!macx {
     DEFINES += __LINUX_ALSASEQ__
@@ -89,21 +67,16 @@ unix:!macx {
 macx {
     QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.6
     QMAKE_MAC_SDK = macosx10.9
-    DEFINES += __MACOSX_CORE__ USE_LOCAL_RTMIDI USE_LOCAL_STK USE_LOCAL_QCUSTOMPLOT USE_LOCAL_FLUIDSYNTH
-    INCLUDEPATH += lib/mac/Jackmp.framework/Headers \
-        lib \
-        lib/ogg_vorbis
-    HEADERS += lib/portaudio.h \
-        lib/ogg_vorbis/ogg/ogg.h \
-        lib/ogg_vorbis/ogg/os_types.h \
-        lib/ogg_vorbis/vorbis/codec.h \
-        lib/ogg_vorbis/vorbis/vorbisenc.h \
-        lib/ogg_vorbis/vorbis/vorbisfile.h
-    LIBS += -L$$PWD/lib/mac -lportaudio -logg -lvorbis -F$$PWD/lib/mac/ -framework Jackmp \
+    DEFINES += __MACOSX_CORE__ USE_LOCAL_RTMIDI USE_LOCAL_STK USE_LOCAL_QCUSTOMPLOT
+    INCLUDEPATH += ../lib_mac/Jackmp.framework/Headers \
+        ../lib_mac \
+        ../lib_mac/ogg_vorbis
+    LIBS += -L$$PWD/../lib_mac -lportaudio -logg -lvorbis -F$$PWD/../lib_mac/ -framework Jackmp \
         -framework CoreAudio -framework CoreMIDI -framework CoreFoundation \
         -framework AudioUnit -framework AudioToolbox -framework Cocoa -lz
     ICON = polyphone.icns
     QMAKE_INFO_PLIST = polyphone.plist
+    DESTDIR = $$PWD/../lib_mac
 }
 DEFINES += SFTOOLS_NOXML
 
@@ -149,16 +122,6 @@ contains(DEFINES, USE_LOCAL_QCUSTOMPLOT) {
 } else {
     LIBS += -lqcustomplot
     INCLUDEPATH += /usr/include/qcustomplot
-}
-
-# Location of FluidSynth
-contains(DEFINES, USE_LOCAL_FLUIDSYNTH) {
-    #INCLUDEPATH += lib/fluidsynth
-    #HEADERS += lib/fluidsynth/fluidsynth.h
-    #LIBS += -L$$PWD/lib/fluidsynth -lfluidsynth
-} else {
-    #LIBS += -lfluidsynth
-    #INCLUDEPATH += /usr/include/fluidsynth
 }
 
 INCLUDEPATH += mainwindow \
