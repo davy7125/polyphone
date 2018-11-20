@@ -2,7 +2,6 @@
 #include "ui_soundfontdescription.h"
 #include "soundfontdescriptiondata.h"
 #include "contextmanager.h"
-#include <QWebFrame>
 
 QString SoundfontDescription::s_css = "";
 QString SoundfontDescription::s_js = "";
@@ -12,7 +11,7 @@ SoundfontDescription::SoundfontDescription(QWidget *parent) :
     ui(new Ui::SoundfontDescription)
 {
     ui->setupUi(this);
-    ui->webView->page()->mainFrame()->setScrollBarPolicy(Qt::Vertical, Qt::ScrollBarAlwaysOff);
+    //ui->webView->page()->mainFrame()->setScrollBarPolicy(Qt::Vertical, Qt::ScrollBarAlwaysOff);
 }
 
 SoundfontDescription::~SoundfontDescription()
@@ -29,11 +28,11 @@ void SoundfontDescription::display(SoundfontDescriptionData * data)
                       "<script type='text/javascript'>%1</script>"
                       "</head>"
                       "<body onresize='updateTitle()'><div id='description'>%2</div></body></html>";
-    ui->webView->setHtml(content
-                         .arg(getCss())
-                         .arg(getJs())
-                         .arg(getBody(data))
-                         );
+//    ui->webView->setHtml(content
+//                         .arg(getCss())
+//                         .arg(getJs())
+//                         .arg(getBody(data))
+//                         );
 }
 
 QString SoundfontDescription::getCss()
@@ -92,6 +91,6 @@ void SoundfontDescription::on_webView_titleChanged(const QString &title)
     // Automatically resize the QWebView
     bool ok = false;
     int height = title.toInt(&ok);
-    if (ok)
-        ui->webView->setMinimumHeight(height);
+//    if (ok)
+//        ui->webView->setMinimumHeight(height);
 }

@@ -19,7 +19,7 @@
 //=============================================================================
 
 #include <stdio.h>
-#include <unistd.h>
+//#include <unistd.h>
 #include <stdlib.h>
 #include <string.h>
 #include <math.h>
@@ -64,7 +64,7 @@ using namespace SfTools;
 
 Sample::Sample()
 {
-    name = 0;
+    name = nullptr;
 }
 
 Sample::~Sample()
@@ -78,7 +78,7 @@ Sample::~Sample()
 
 Instrument::Instrument()
 {
-    name = 0;
+    name = nullptr;
 }
 
 Instrument::~Instrument()
@@ -93,15 +93,15 @@ Instrument::~Instrument()
 SoundFont::SoundFont(const QString& s)
 {
     path      = s;
-    engine    = 0;
-    name      = 0;
-    date      = 0;
-    comment   = 0;
-    tools     = 0;
-    creator   = 0;
-    product   = 0;
-    copyright = 0;
-    irom      = 0;
+    engine    = nullptr;
+    name      = nullptr;
+    date      = nullptr;
+    comment   = nullptr;
+    tools     = nullptr;
+    creator   = nullptr;
+    product   = nullptr;
+    copyright = nullptr;
+    irom      = nullptr;
     version.major = 0;
     version.minor = 0;
     iver.major = 0;

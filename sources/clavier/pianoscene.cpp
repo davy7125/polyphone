@@ -50,7 +50,7 @@ qreal PianoScene::sceneWidth(int startKey, int keys)
     return KEYWIDTH * nbWidth;
 }
 
-float PianoScene::getOffsetX(int numKey)
+double PianoScene::getOffsetX(int numKey)
 {
     float offset;
     switch (numKey % 12)
