@@ -1,8 +1,6 @@
-/trunk/Makefile
-/trunk/DEBUG/*
-/trunk/RELEASE/*
-/trunk/polyphone.pro.user
-/trunk/.qmake.stash
+/sources/Makefile
+/sources/polyphone.pro.user
+/sources/.qmake.stash
 /sources/polyphone.pro.user
 /build-*
 **/polyphone.exe
