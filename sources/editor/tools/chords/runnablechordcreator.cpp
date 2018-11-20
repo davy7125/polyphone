@@ -297,3 +297,58 @@ void RunnableChordCreator::addSampleData(QByteArray &baData1, QByteArray &baData
     for (int i = 0; i < qMin(baData1.size(), baData2.size()) / 4; i++)
         data1[i] += mult * data2[i];
 }
+
+// List of all possible keys with their corresponding attenuation
+QMap<int, int> RunnableChordCreator::getChordKeys(int key, ChordInfo& chordInfo)
+{
+    QMap<int, int> chordKeys;
+    int shift = 0;
+
+    // Root key (not impacted by the octave or inversion)
+    if (chordInfo.chordType1 == 1)
+        chordKeys[0] = chordInfo.chordType1Attenuation;
+
+    // Third
+    switch (chordInfo.chordType3)
+    {
+    case 1: shift = 4; break; // Major
+    case 2: shift = 3; break; // Minor
+    default: shift = 0; break;
+    }
+    if (shift != 0)
+        chordKeys[key + shift + 12 * (chordInfo.octave - (chordInfo.chordType3Inversion ? 1 : 0))] = chordInfo.chordType3Attenuation;
+
+    // Fifth
+    switch (chordInfo.chordType5)
+    {
+    case 1: shift = 7; break; // Perfect
+    case 2: shift = 6; break; // Diminished
+    case 3: shift = 8; break; // Augmented
+    default: shift = 0; break;
+    }
+    if (shift != 0)
+        chordKeys[key + shift + 12 * (chordInfo.octave - (chordInfo.chordType5Inversion ? 1 : 0))] = chordInfo.chordType5Attenuation;
+
+    // Seventh
+    switch (chordInfo.chordType7)
+    {
+    case 1: shift = 10; break; // Minor
+    case 2: shift = 11; break; // Major
+    case 3: shift = 9; break; // Diminished
+    default: shift = 0; break;
+    }
+    if (shift != 0)
+        chordKeys[key + shift + 12 * (chordInfo.octave - (chordInfo.chordType7Inversion ? 1 : 0))] = chordInfo.chordType7Attenuation;
+
+    // Ninth
+    switch (chordInfo.chordType9)
+    {
+    case 1: shift = 14; break; // Major
+    case 2: shift = 13; break; // Minor
+    default: shift = 0; break;
+    }
+    if (shift != 0)
+        chordKeys[key + shift + 12 * (chordInfo.octave - (chordInfo.chordType9Inversion ? 1 : 0))] = chordInfo.chordType9Attenuation;
+
+    return chordKeys;
+}

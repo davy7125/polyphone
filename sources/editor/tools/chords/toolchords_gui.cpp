@@ -7,21 +7,6 @@ ToolChords_gui::ToolChords_gui(QWidget *parent) :
     ui(new Ui::ToolChords_gui)
 {
     ui->setupUi(this);
-
-    // Root key selection
-    ui->comboRootKey->addItem(trUtf8("mobile"));
-    ui->comboRootKey->addItem(trUtf8("fixe : %0").arg("C"));
-    ui->comboRootKey->addItem(trUtf8("fixe : %0").arg("C♯"));
-    ui->comboRootKey->addItem(trUtf8("fixe : %0").arg("D"));
-    ui->comboRootKey->addItem(trUtf8("fixe : %0").arg("D♯"));
-    ui->comboRootKey->addItem(trUtf8("fixe : %0").arg("E"));
-    ui->comboRootKey->addItem(trUtf8("fixe : %0").arg("F"));
-    ui->comboRootKey->addItem(trUtf8("fixe : %0").arg("F♯"));
-    ui->comboRootKey->addItem(trUtf8("fixe : %0").arg("G"));
-    ui->comboRootKey->addItem(trUtf8("fixe : %0").arg("G♯"));
-    ui->comboRootKey->addItem(trUtf8("fixe : %0").arg("A"));
-    ui->comboRootKey->addItem(trUtf8("fixe : %0").arg("A♯"));
-    ui->comboRootKey->addItem(trUtf8("fixe : %0").arg("B"));
 }
 
 ToolChords_gui::~ToolChords_gui()
@@ -42,14 +27,44 @@ void ToolChords_gui::updateInterface(AbstractToolParameters * parameters, IdList
 
     // Chord configuration
     ChordInfo ci = params->getChordConfiguration();
+    int inversions = 0;
+    int possibleInversions = 0;
+
+    ui->comboType1->setCurrentIndex(ci.chordType1);
+    ui->sliderType1->setValue(ci.chordType1Attenuation);
+
     ui->comboType3->setCurrentIndex(ci.chordType3);
+    ui->sliderType3->setValue(ci.chordType3Attenuation);
+    if (ci.chordType3Inversion)
+        inversions++;
+    if (ci.chordType3 != 0)
+        possibleInversions++;
+
     ui->comboType5->setCurrentIndex(ci.chordType5);
+    ui->sliderType5->setValue(ci.chordType5Attenuation);
+    if (ci.chordType5Inversion)
+        inversions++;
+    if (ci.chordType5 != 0)
+        possibleInversions++;
+
     ui->comboType7->setCurrentIndex(ci.chordType7);
+    ui->sliderType7->setValue(ci.chordType7Attenuation);
+    if (ci.chordType7Inversion)
+        inversions++;
+    if (ci.chordType7 != 0)
+        possibleInversions++;
+
     ui->comboType9->setCurrentIndex(ci.chordType9);
-    ui->spinHarmonicNumber->setValue(ci.harmonicNumber);
-    ui->comboRootKey->setCurrentIndex(ci.rootNote + 1);
-    ui->doubleSpinAttenuation->setValue(ci.attenuation);
-    ui->horizontalPosition->setValue(ci.position);
+    ui->sliderType9->setValue(ci.chordType9Attenuation);
+    if (ci.chordType9Inversion)
+        inversions++;
+    if (ci.chordType9 != 0)
+        possibleInversions++;
+
+    ui->spinInversions->setMaximum(possibleInversions);
+    ui->spinInversions->setValue(inversions);
+
+    ui->sliderOctave->setValue(ci.octave);
 }
 
 void ToolChords_gui::saveParameters(AbstractToolParameters * parameters)
@@ -64,14 +79,53 @@ void ToolChords_gui::saveParameters(AbstractToolParameters * parameters)
 
     // Chord configuration
     ChordInfo ci;
-    ci.chordType3 = ui->comboType3->currentIndex();
-    ci.chordType5 = ui->comboType5->currentIndex();
-    ci.chordType7 = ui->comboType7->currentIndex();
+    int inversions = ui->spinInversions->value();
+
     ci.chordType9 = ui->comboType9->currentIndex();
-    ci.harmonicNumber = ui->spinHarmonicNumber->value();
-    ci.rootNote = ui->comboRootKey->currentIndex() - 1;
-    ci.attenuation = ui->doubleSpinAttenuation->value();
-    ci.position = ui->horizontalPosition->value();
+    ci.chordType9Attenuation = ui->sliderType9->value();
+    if (inversions > 0)
+    {
+        ci.chordType9Inversion = true;
+        inversions--;
+    }
+    else
+        ci.chordType9Inversion = false;
+
+    ci.chordType7 = ui->comboType7->currentIndex();
+    ci.chordType7Attenuation = ui->sliderType7->value();
+    if (inversions > 0)
+    {
+        ci.chordType7Inversion = true;
+        inversions--;
+    }
+    else
+        ci.chordType7Inversion = false;
+
+    ci.chordType5 = ui->comboType5->currentIndex();
+    ci.chordType5Attenuation = ui->sliderType5->value();
+    if (inversions > 0)
+    {
+        ci.chordType5Inversion = true;
+        inversions--;
+    }
+    else
+        ci.chordType5Inversion = false;
+
+    ci.chordType3 = ui->comboType3->currentIndex();
+    ci.chordType3Attenuation = ui->sliderType3->value();
+    if (inversions > 0)
+    {
+        ci.chordType3Inversion = true;
+        inversions--;
+    }
+    else
+        ci.chordType3Inversion = false;
+
+    ci.chordType1 = ui->comboType1->currentIndex();
+    ci.chordType1Attenuation = ui->sliderType1->value();
+
+    ci.octave = ui->sliderOctave->value();
+
     params->setChordConfiguration(ci);
 }
 

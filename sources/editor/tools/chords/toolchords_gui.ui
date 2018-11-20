@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>402</width>
-    <height>299</height>
+    <width>430</width>
+    <height>339</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -86,34 +86,8 @@
       <string>Accord</string>
      </property>
      <layout class="QGridLayout" name="gridLayout_2">
-      <item row="4" column="0">
-       <widget class="QLabel" name="label_6">
-        <property name="font">
-         <font>
-          <weight>50</weight>
-          <bold>false</bold>
-         </font>
-        </property>
-        <property name="text">
-         <string>Attenuation</string>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="0">
-       <widget class="QLabel" name="label_2">
-        <property name="font">
-         <font>
-          <weight>50</weight>
-          <bold>false</bold>
-         </font>
-        </property>
-        <property name="text">
-         <string>Fondamentale</string>
-        </property>
-       </widget>
-      </item>
       <item row="3" column="0">
-       <widget class="QLabel" name="label_5">
+       <widget class="QLabel" name="label_7">
         <property name="font">
          <font>
           <weight>50</weight>
@@ -121,7 +95,7 @@
          </font>
         </property>
         <property name="text">
-         <string>Nombre d'harmoniques</string>
+         <string>Septième</string>
         </property>
        </widget>
       </item>
@@ -134,12 +108,12 @@
          </font>
         </property>
         <property name="text">
-         <string>Composition</string>
+         <string>Fondamentale</string>
         </property>
        </widget>
       </item>
-      <item row="5" column="0">
-       <widget class="QLabel" name="label_7">
+      <item row="4" column="0">
+       <widget class="QLabel" name="label_8">
         <property name="font">
          <font>
           <weight>50</weight>
@@ -147,12 +121,38 @@
          </font>
         </property>
         <property name="text">
-         <string>Position</string>
+         <string>Neuvième</string>
         </property>
        </widget>
       </item>
-      <item row="3" column="1" colspan="2">
-       <widget class="QSpinBox" name="spinHarmonicNumber">
+      <item row="2" column="0">
+       <widget class="QLabel" name="label_6">
+        <property name="font">
+         <font>
+          <weight>50</weight>
+          <bold>false</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>Quinte</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="label_2">
+        <property name="font">
+         <font>
+          <weight>50</weight>
+          <bold>false</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>Tierce</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="2">
+       <widget class="QSlider" name="sliderType5">
         <property name="font">
          <font>
           <weight>50</weight>
@@ -160,30 +160,23 @@
          </font>
         </property>
         <property name="minimum">
-         <number>1</number>
+         <number>-1440</number>
         </property>
         <property name="maximum">
+         <number>0</number>
+        </property>
+        <property name="singleStep">
          <number>10</number>
         </property>
-       </widget>
-      </item>
-      <item row="4" column="1" colspan="2">
-       <widget class="QDoubleSpinBox" name="doubleSpinAttenuation">
-        <property name="font">
-         <font>
-          <weight>50</weight>
-          <bold>false</bold>
-         </font>
+        <property name="pageStep">
+         <number>100</number>
         </property>
-        <property name="suffix">
-         <string> dB</string>
-        </property>
-        <property name="maximum">
-         <double>144.000000000000000</double>
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
         </property>
        </widget>
       </item>
-      <item row="0" column="1">
+      <item row="1" column="1">
        <widget class="QComboBox" name="comboType3">
         <property name="font">
          <font>
@@ -193,140 +186,92 @@
         </property>
         <item>
          <property name="text">
-          <string>pas de tierce</string>
+          <string>non</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>tierce majeure</string>
+          <string>majeure</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>tierce mineure</string>
+          <string>mineure</string>
          </property>
         </item>
        </widget>
       </item>
-      <item row="5" column="1" colspan="2">
-       <layout class="QHBoxLayout" name="horizontalLayout">
+      <item row="0" column="1">
+       <widget class="QComboBox" name="comboType1">
+        <property name="font">
+         <font>
+          <weight>50</weight>
+          <bold>false</bold>
+         </font>
+        </property>
         <item>
-         <widget class="QLabel" name="label_8">
-          <property name="font">
-           <font>
-            <weight>50</weight>
-            <bold>false</bold>
-           </font>
-          </property>
-          <property name="text">
-           <string>grave</string>
-          </property>
-         </widget>
+         <property name="text">
+          <string>non</string>
+         </property>
         </item>
         <item>
-         <widget class="QSlider" name="horizontalPosition">
-          <property name="font">
-           <font>
-            <weight>50</weight>
-            <bold>false</bold>
-           </font>
-          </property>
-          <property name="minimum">
-           <number>-6</number>
-          </property>
-          <property name="maximum">
-           <number>6</number>
-          </property>
-          <property name="pageStep">
-           <number>2</number>
-          </property>
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="tickPosition">
-           <enum>QSlider::TicksAbove</enum>
-          </property>
-          <property name="tickInterval">
-           <number>3</number>
-          </property>
-         </widget>
+         <property name="text">
+          <string>oui</string>
+         </property>
         </item>
-        <item>
-         <widget class="QLabel" name="label_9">
-          <property name="font">
-           <font>
-            <weight>50</weight>
-            <bold>false</bold>
-           </font>
-          </property>
-          <property name="text">
-           <string>aigü</string>
-          </property>
-         </widget>
-        </item>
-       </layout>
+       </widget>
+      </item>
+      <item row="3" column="2">
+       <widget class="QSlider" name="sliderType7">
+        <property name="font">
+         <font>
+          <weight>50</weight>
+          <bold>false</bold>
+         </font>
+        </property>
+        <property name="minimum">
+         <number>-1440</number>
+        </property>
+        <property name="maximum">
+         <number>0</number>
+        </property>
+        <property name="singleStep">
+         <number>10</number>
+        </property>
+        <property name="pageStep">
+         <number>100</number>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+       </widget>
       </item>
       <item row="0" column="2">
-       <widget class="QComboBox" name="comboType5">
+       <widget class="QSlider" name="sliderType1">
         <property name="font">
          <font>
           <weight>50</weight>
           <bold>false</bold>
          </font>
         </property>
-        <item>
-         <property name="text">
-          <string>pas de quinte</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>quinte juste</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>quinte diminuée</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>quinte augmentée</string>
-         </property>
-        </item>
-       </widget>
-      </item>
-      <item row="1" column="1">
-       <widget class="QComboBox" name="comboType7">
-        <property name="font">
-         <font>
-          <weight>50</weight>
-          <bold>false</bold>
-         </font>
+        <property name="minimum">
+         <number>-1440</number>
         </property>
-        <item>
-         <property name="text">
-          <string>pas de septième</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>septième majeure</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>septième mineure</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>septième diminuée</string>
-         </property>
-        </item>
+        <property name="maximum">
+         <number>0</number>
+        </property>
+        <property name="singleStep">
+         <number>10</number>
+        </property>
+        <property name="pageStep">
+         <number>100</number>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
        </widget>
       </item>
-      <item row="1" column="2">
+      <item row="4" column="1">
        <widget class="QComboBox" name="comboType9">
         <property name="font">
          <font>
@@ -336,33 +281,245 @@
         </property>
         <item>
          <property name="text">
-          <string>pas de neuvième</string>
+          <string>non</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>neuvième majeure</string>
+          <string>majeure</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>neuvième mineure</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>neuvième augmentée</string>
+          <string>mineure</string>
          </property>
         </item>
        </widget>
       </item>
-      <item row="2" column="1" colspan="2">
-       <widget class="QComboBox" name="comboRootKey">
+      <item row="1" column="2">
+       <widget class="QSlider" name="sliderType3">
         <property name="font">
          <font>
           <weight>50</weight>
           <bold>false</bold>
          </font>
+        </property>
+        <property name="minimum">
+         <number>-1440</number>
+        </property>
+        <property name="maximum">
+         <number>0</number>
+        </property>
+        <property name="singleStep">
+         <number>10</number>
+        </property>
+        <property name="pageStep">
+         <number>100</number>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="QComboBox" name="comboType5">
+        <property name="font">
+         <font>
+          <weight>50</weight>
+          <bold>false</bold>
+         </font>
+        </property>
+        <item>
+         <property name="text">
+          <string>non</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>juste</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>diminuée</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>augmentée</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+      <item row="3" column="1">
+       <widget class="QComboBox" name="comboType7">
+        <property name="font">
+         <font>
+          <weight>50</weight>
+          <bold>false</bold>
+         </font>
+        </property>
+        <item>
+         <property name="text">
+          <string>non</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>mineure</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>majeure</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>diminuée</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+      <item row="4" column="2">
+       <widget class="QSlider" name="sliderType9">
+        <property name="font">
+         <font>
+          <weight>50</weight>
+          <bold>false</bold>
+         </font>
+        </property>
+        <property name="minimum">
+         <number>-1440</number>
+        </property>
+        <property name="maximum">
+         <number>0</number>
+        </property>
+        <property name="singleStep">
+         <number>10</number>
+        </property>
+        <property name="pageStep">
+         <number>100</number>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="0">
+       <widget class="QLabel" name="label_5">
+        <property name="font">
+         <font>
+          <weight>50</weight>
+          <bold>false</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>Nombre de renversements</string>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="1" colspan="3">
+       <widget class="QSpinBox" name="spinInversions">
+        <property name="font">
+         <font>
+          <weight>50</weight>
+          <bold>false</bold>
+         </font>
+        </property>
+        <property name="minimum">
+         <number>0</number>
+        </property>
+        <property name="maximum">
+         <number>4</number>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="3">
+       <widget class="QLabel" name="labelType3">
+        <property name="font">
+         <font>
+          <weight>50</weight>
+          <bold>false</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="3">
+       <widget class="QLabel" name="labelType1">
+        <property name="font">
+         <font>
+          <weight>50</weight>
+          <bold>false</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="3">
+       <widget class="QLabel" name="labelType5">
+        <property name="font">
+         <font>
+          <weight>50</weight>
+          <bold>false</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="3">
+       <widget class="QLabel" name="labelType7">
+        <property name="font">
+         <font>
+          <weight>50</weight>
+          <bold>false</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="3">
+       <widget class="QLabel" name="labelType9">
+        <property name="font">
+         <font>
+          <weight>50</weight>
+          <bold>false</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item row="6" column="0">
+       <widget class="QLabel" name="label_9">
+        <property name="text">
+         <string>Octaves</string>
+        </property>
+       </widget>
+      </item>
+      <item row="6" column="1" colspan="3">
+       <widget class="QSlider" name="sliderOctave">
+        <property name="minimum">
+         <number>-3</number>
+        </property>
+        <property name="maximum">
+         <number>3</number>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="tickPosition">
+         <enum>QSlider::TicksBelow</enum>
         </property>
        </widget>
       </item>

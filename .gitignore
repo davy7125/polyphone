@@ -3,3 +3,6 @@
 /trunk/RELEASE/*
 /trunk/polyphone.pro.user
 /trunk/.qmake.stash
+/sources/polyphone.pro.user
+/build-*
+**/polyphone.exe

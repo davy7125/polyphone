@@ -10,14 +10,26 @@
 class ChordInfo
 {
 public:
-    int chordType3;
-    int chordType5;
-    int chordType7;
-    int chordType9;
-    int harmonicNumber;
-    double attenuation;
-    int position;
-    int rootNote; // -1 is rootkey, 0 is C, 1 is C#, 2 is D, ..., 11 is B
+    int chordType1; // 0: none, 1: yes
+    int chordType1Attenuation;
+
+    int chordType3; // 0: none, 1: major, 2: minor
+    int chordType3Attenuation;
+    bool chordType3Inversion;
+
+    int chordType5; // 0: none, 1: perfect, 2: diminished, 3: augmented
+    int chordType5Attenuation;
+    bool chordType5Inversion;
+
+    int chordType7; // 0: none, 1: minor, 2: major, 3: diminished
+    int chordType7Attenuation;
+    bool chordType7Inversion;
+
+    int chordType9; // 0: none, 1: major, 2: minor
+    int chordType9Attenuation;
+    bool chordType9Inversion;
+
+    int octave; // range is [-3; +3]
 };
 
 class ToolChords_parameters: public AbstractToolParameters
