@@ -37,13 +37,24 @@ void ToolChords::runInternal(SoundfontManager * sm, QWidget * parent, IdList ids
         return;
     }
 
+    // Number of keys per sample
+    int keyNumber = 1;
+    switch (params->getDensityType())
+    {
+    case 0: keyNumber = 1; break;
+    case 1: keyNumber = 3; break;
+    case 2: keyNumber = 6; break;
+    default:
+        return;
+    }
+
     // Compute the number of steps
     _currentStep = 0;
-    _steps = 0;
-    /*for (int i = 0; i < dis.length(); i++)
-        _steps += qAbs(dis[i].getMaxKey() - dis[i].getMinKey()) / keyNumber + 1;
+    rangesType range = sm->get(idInst, champ_keyRange).rValue;
+    _steps = qAbs(range.byHi - range.byLo) / keyNumber + 1;
+    _stereoSamples = params->getStereoSample();
     if (_stereoSamples)
-        _steps *= 2;*/
+        _steps *= 2;
 
     // Create a new instrument
     _idNewInst = idInst;
@@ -64,26 +75,23 @@ void ToolChords::runInternal(SoundfontManager * sm, QWidget * parent, IdList ids
     connect(_waitingDialog, SIGNAL(canceled()), this, SLOT(onCancel()));
 
     // For each division
-    /*foreach (DivisionInfo di, dis)
-    {
-        // Corresponding key range
-        int noteStart2 = qMin(di.getMinKey(), di.getMaxKey());
-        int noteEnd = qMax(di.getMinKey(), di.getMaxKey());
-        int noteStart = noteStart2 + (noteEnd - noteStart2) % keyNumber;
+    int noteStart2 = qMin(range.byLo, range.byHi);
+    int noteEnd = qMax(range.byLo, range.byHi);
+    int noteStart = noteStart2 + (noteEnd - noteStart2) % keyNumber;
 
-        // For each key
-        for (int key = noteStart; key <= noteEnd; key += keyNumber)
+    // For each key
+    ChordInfo ci = params->getChordConfiguration();
+    for (int key = noteStart; key <= noteEnd; key += keyNumber)
+    {
+        // For each side (left / right)
+        for (int side = 0; side < 1 + (_stereoSamples ? 1 : 0); side++)
         {
-            // For each side (left / right)
-            for (int side = 0; side < 1 + (_stereoSamples ? 1 : 0); side++)
-            {
-                RunnableSampleCreator * rsc = new RunnableSampleCreator(this, idInst, di, key,
-                                                                        qMax(noteStart2, key - keyNumber + 1), // min key
-                                                                        loopEnabled, _stereoSamples, side);
-                QThreadPool::globalInstance()->start(rsc);
-            }
+            RunnableChordCreator * rcc = new RunnableChordCreator(this, idInst, ci, key,
+                                                                  qMax(noteStart2, key - keyNumber + 1), // min key
+                                                                  loopEnabled, _stereoSamples, side);
+            QThreadPool::globalInstance()->start(rcc);
         }
-    }*/
+    }
 }
 
 void ToolChords::onElementProcessed(EltID idSmpl, int key, int minKey, double minAtt)
@@ -157,7 +165,7 @@ void ToolChords::onElementProcessed(EltID idSmpl, int key, int minKey, double mi
     if (_currentStep >= _steps)
     {
         delete _waitingDialog;
-        _waitingDialog = NULL;
+        _waitingDialog = nullptr;
         if (_canceled)
         {
             SoundfontManager::getInstance()->revertNewEditing();
