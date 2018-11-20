@@ -25,7 +25,7 @@ Check this [page](https://www.polyphone-soundfonts.com/en/download) to find inst
 
 ### Support
 
-See the [documentation](http://polyphone-soundfonts.com/en/documentation) and [forum](https://www.polyphone-soundfonts.com/en/forum).
+See the [documentation](https://www.polyphone-soundfonts.com/en/documentation) and [forum](https://www.polyphone-soundfonts.com/en/forum).
 
 - - - - 
 
