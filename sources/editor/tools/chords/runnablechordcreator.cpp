@@ -29,32 +29,33 @@ void RunnableChordCreator::run()
     baData.resize(SAMPLE_DURATION * SAMPLE_RATE * 4);
     baData.fill(0);
 
+    // Get the different pitches with the corresponding attenuation
+    QMap<int, int> pitches = getChordKeys(_key, _ci);
+
+
     // Minimum attenuation for all ranks
     double attMini = 1000000;
-    /*foreach (RankInfo ri, _di.getRanks())
+    foreach (int pitch, pitches.keys())
     {
-        double noteTmp = (double)_key + ri.getOffset();
         double ecart;
         EltID idInstSmplTmp;
-        closestSample(_idInst, noteTmp, ecart, _side, idInstSmplTmp);
+        closestSample(_idInst, pitch, ecart, _side, idInstSmplTmp);
         double attenuation = 0;
         if (sm->isSet(idInstSmplTmp, champ_initialAttenuation))
             attenuation = (double)sm->get(idInstSmplTmp, champ_initialAttenuation).shValue / 10.0;
         if (attenuation < attMini)
             attMini = attenuation;
-    }*/
+    }
 
-    // For each rank
-    /*foreach (RankInfo ri, _di.getRanks())
+    // For each part
+    foreach (int pitch, pitches.keys())
     {
-        // Calcul de la note à ajouter à la mixture
-        double noteTmp = (double)_key + ri.getOffset();
-        if (noteTmp <= 120)
+        if (pitch <= 120)
         {
             // Sample le plus proche et écart associé
             double ecart;
             EltID idInstSmplTmp;
-            EltID idSmpl = closestSample(_idInst, noteTmp, ecart, _side, idInstSmplTmp);
+            EltID idSmpl = closestSample(_idInst, pitch, ecart, _side, idInstSmplTmp);
             //                        printf("touche %d, note cherchee %.2f, sample %s, instsmpl %d-%d\n",
             //                               note, noteTmp, sf2->getQstr(idSmpl, champ_name).toStdString().c_str(),
             //                               sf2->get(idInstSmplTmp, champ_keyRange).rValue.byLo,
@@ -70,7 +71,7 @@ void RunnableChordCreator::run()
             double attenuation = 1;
             if (sm->isSet(idInstSmplTmp, champ_initialAttenuation))
             {
-                attenuation = (double)sm->get(idInstSmplTmp, champ_initialAttenuation).shValue / 10.0 - attMini;
+                attenuation = (double)sm->get(idInstSmplTmp, champ_initialAttenuation).shValue / 10.0 - attMini + (double)pitches[pitch] / 10.;
                 attenuation = pow(10, -attenuation / 20.0);
             }
 
@@ -80,7 +81,7 @@ void RunnableChordCreator::run()
             // Ajout du son
             addSampleData(baData, baDataTmp, attenuation);
         }
-    }*/
+    }
 
     // Loop sample if needed
     qint32 loopStart = 0;
