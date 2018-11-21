@@ -4,7 +4,7 @@
 #include "runnablesamplecreator.h"
 
 ToolMixtureCreation::ToolMixtureCreation() : AbstractTool(new ToolMixtureCreation_parameters(), new ToolMixtureCreation_gui()),
-    _waitingDialog(NULL)
+    _waitingDialog(nullptr)
 {
     connect(this, SIGNAL(elementProcessed(EltID, int, int, double)), this, SLOT(onElementProcessed(EltID, int, int, double)), Qt::QueuedConnection);
 }

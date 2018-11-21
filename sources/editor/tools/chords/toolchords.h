@@ -53,6 +53,8 @@ private slots:
     void onCancel();
 
 private:
+    rangesType getInstrumentRange(EltID idInst);
+
     WaitingToolDialog * _waitingDialog;
     int _steps;
     int _currentStep;

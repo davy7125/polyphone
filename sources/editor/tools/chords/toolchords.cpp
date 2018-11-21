@@ -37,6 +37,18 @@ void ToolChords::runInternal(SoundfontManager * sm, QWidget * parent, IdList ids
         return;
     }
 
+    // Create a new instrument
+    _instrumentName = params->getInstrumentName();
+    _idNewInst = idInst;
+    _idNewInst.indexElt = sm->add(_idNewInst);
+    sm->set(_idNewInst, champ_name, _instrumentName.left(20));
+    if (loopEnabled)
+    {
+        AttributeValue value;
+        value.wValue = 1;
+        sm->set(_idNewInst, champ_sampleModes, value);
+    }
+
     // Number of keys per sample
     int keyNumber = 1;
     switch (params->getDensityType())
@@ -50,22 +62,11 @@ void ToolChords::runInternal(SoundfontManager * sm, QWidget * parent, IdList ids
 
     // Compute the number of steps
     _currentStep = 0;
-    rangesType range = sm->get(idInst, champ_keyRange).rValue;
+    rangesType range = this->getInstrumentRange(idInst);
     _steps = qAbs(range.byHi - range.byLo) / keyNumber + 1;
     _stereoSamples = params->getStereoSample();
     if (_stereoSamples)
         _steps *= 2;
-
-    // Create a new instrument
-    _idNewInst = idInst;
-    _idNewInst.indexElt = sm->add(_idNewInst);
-    sm->set(_idNewInst, champ_name, _instrumentName.left(20));
-    if (loopEnabled)
-    {
-        AttributeValue value;
-        value.wValue = 1;
-        sm->set(_idNewInst, champ_sampleModes, value);
-    }
 
     // Create and open a progress dialog
     if (_waitingDialog != nullptr)
@@ -75,8 +76,8 @@ void ToolChords::runInternal(SoundfontManager * sm, QWidget * parent, IdList ids
     connect(_waitingDialog, SIGNAL(canceled()), this, SLOT(onCancel()));
 
     // For each division
-    int noteStart2 = qMin(range.byLo, range.byHi);
-    int noteEnd = qMax(range.byLo, range.byHi);
+    int noteStart2 = range.byLo;
+    int noteEnd = range.byHi;
     int noteStart = noteStart2 + (noteEnd - noteStart2) % keyNumber;
 
     // For each key
@@ -185,4 +186,51 @@ void ToolChords::onCancel()
 QString ToolChords::getWarning()
 {
     return _warning;
+}
+
+rangesType ToolChords::getInstrumentRange(EltID idInst)
+{
+    rangesType result;
+    result.byLo = 127;
+    result.byHi = 0;
+
+    // Check the range of all divisions
+    SoundfontManager * sm = SoundfontManager::getInstance();
+    EltID idInstSmpl(elementInstSmpl, idInst.indexSf2, idInst.indexElt);
+    bool useDefault = false;
+    foreach (int index, sm->getSiblings(idInstSmpl))
+    {
+        idInstSmpl.indexElt2 = index;
+
+        if (sm->isSet(idInstSmpl, champ_keyRange))
+        {
+            rangesType rangeTmp = sm->get(idInstSmpl, champ_keyRange).rValue;
+            if (rangeTmp.byLo < result.byLo)
+                result.byLo = rangeTmp.byLo;
+            if (rangeTmp.byHi > result.byHi)
+                result.byHi = rangeTmp.byHi;
+        }
+        else
+            useDefault = true;
+    }
+
+    // Check the range of the instrument, if needed
+    if (useDefault && sm->isSet(idInst, champ_keyRange))
+    {
+        rangesType defaultRange = sm->get(idInst, champ_keyRange).rValue;
+        if (defaultRange.byLo < result.byLo)
+            result.byLo = defaultRange.byLo;
+        if (defaultRange.byHi > result.byHi)
+            result.byHi = defaultRange.byHi;
+    }
+
+    // Final check
+    if (result.byHi < result.byLo)
+    {
+        quint8 tmp = result.byLo;
+        result.byLo = result.byHi;
+        result.byHi = tmp;
+    }
+
+    return result;
 }
