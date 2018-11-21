@@ -74,6 +74,7 @@ void RunnableChordCreator::run()
                 attenuation = (double)sm->get(idInstSmplTmp, champ_initialAttenuation).shValue / 10.0 - attMini + (double)pitches[pitch] / 10.;
                 attenuation = pow(10, -attenuation / 20.0);
             }
+            attenuation /= pitches.count();
 
             // Rééchantillonnage
             baDataTmp = Sound::resampleMono(baDataTmp, fEchInit, SAMPLE_RATE, 32);
