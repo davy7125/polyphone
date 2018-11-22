@@ -46,7 +46,7 @@
         <x>0</x>
         <y>0</y>
         <width>411</width>
-        <height>353</height>
+        <height>283</height>
        </rect>
       </property>
       <layout class="QHBoxLayout" name="horizontalLayout">
@@ -69,7 +69,7 @@
           <widget class="QLabel" name="generalLabel">
            <property name="font">
             <font>
-             <pointsize>20</pointsize>
+             <pointsize>13</pointsize>
              <weight>75</weight>
              <bold>true</bold>
             </font>
@@ -102,7 +102,7 @@
           <widget class="QLabel" name="interfaceLabel">
            <property name="font">
             <font>
-             <pointsize>20</pointsize>
+             <pointsize>13</pointsize>
              <weight>75</weight>
              <bold>true</bold>
             </font>
@@ -135,7 +135,7 @@
           <widget class="QLabel" name="soundLabel">
            <property name="font">
             <font>
-             <pointsize>20</pointsize>
+             <pointsize>13</pointsize>
              <weight>75</weight>
              <bold>true</bold>
             </font>
@@ -168,7 +168,7 @@
           <widget class="QLabel" name="keyboardLabel">
            <property name="font">
             <font>
-             <pointsize>20</pointsize>
+             <pointsize>13</pointsize>
              <weight>75</weight>
              <bold>true</bold>
             </font>
@@ -201,7 +201,7 @@
           <widget class="QLabel" name="repositoryLabel">
            <property name="font">
             <font>
-             <pointsize>20</pointsize>
+             <pointsize>13</pointsize>
              <weight>75</weight>
              <bold>true</bold>
             </font>
