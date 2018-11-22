@@ -17,6 +17,7 @@ public:
     QDateTime getCreatedTime() const { return _createdTime; }
     QDateTime getUpdatedTime() const { return _updatedTime; }
     int getOrdering() const { return _ordering; }
+    int getId() const { return _id; }
 
 private:
     QDateTime convertDate(QString txt);
@@ -27,6 +28,7 @@ private:
     QDateTime _createdTime;
     QDateTime _updatedTime;
     int _ordering;
+    int _id;
 };
 
 #endif // SOUNDFONTDOWNLOADDATA_H

@@ -15,6 +15,8 @@ SoundfontDownloadData::SoundfontDownloadData(const QJsonObject &data)
         _updatedTime = convertDate(data.value("modified").toString());
     if (data.contains("ordering"))
         _ordering = data.value("ordering").toString().toInt();
+    if (data.contains("id"))
+        _id = data.value("id").toString().toInt();
 }
 
 QDateTime SoundfontDownloadData::convertDate(QString txt)

@@ -22,7 +22,6 @@ QTabBar::tab {\
     margin: 3px -1px 0 -1px;\
 }\
 QTabBar::tab:selected {\
-    border-bottom: 0px;\
     padding-top: 7px;\
     padding-right: 0px;\
     margin-top: 0px;\
@@ -91,6 +90,7 @@ int ColoredTabWidget::addColoredTab(QWidget *widget, QString iconName, const QSt
     QPushButton * button = new QPushButton();
     button->setFlat(true);
     button->setMaximumWidth(16);
+    button->setCursor(Qt::PointingHandCursor);
     _tabInfo[widget]._closeButton = button;
     connect(button, SIGNAL(clicked()), this, SLOT(onCloseButtonClicked()));
     this->tabBar()->setTabButton(indexTab, QTabBar::RightSide, button);
@@ -144,6 +144,7 @@ void ColoredTabWidget::onCloseButtonClicked()
         {
             // Send a tabbar event
             this->tabBar()->tabCloseRequested(this->indexOf(widget));
+            onCurrentChanged(this->currentIndex());
             return;
         }
     }
