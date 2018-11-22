@@ -33,7 +33,7 @@ ConfigPanel::ConfigPanel(QWidget *parent) : QWidget(parent),
     ui->setupUi(this);
 
     // Style
-    QString styleSheet = QString("QLabel{border-radius:5px;padding: 0px 5px;") +
+    QString styleSheet = QString("QLabel{border-radius:2px;padding: 3px 5px;") +
             "background-color:" + ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND).name() + ";" +
             "color: " + ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_TEXT).name() + ";}";
     ui->generalLabel->setStyleSheet(styleSheet);

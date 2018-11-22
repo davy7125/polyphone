@@ -678,7 +678,6 @@ FORMS    += \
     dialogs/dialog_about.ui \
     dialogs/dialogselection.ui \
     dialogs/dialogchangelog.ui \
-    editor/editor_old.ui \
     editor/envelopeditor.ui \
     editor/overview/pageoverview.ui \
     mainwindow/widgetshowhistory.ui \

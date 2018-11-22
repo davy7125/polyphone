@@ -107,14 +107,14 @@
         <widget class="QFrame" name="frameSearch">
          <property name="minimumSize">
           <size>
-           <width>28</width>
-           <height>0</height>
+           <width>0</width>
+           <height>24</height>
           </size>
          </property>
          <property name="maximumSize">
           <size>
            <width>16777215</width>
-           <height>28</height>
+           <height>24</height>
           </size>
          </property>
          <property name="frameShape">
@@ -122,16 +122,16 @@
          </property>
          <layout class="QGridLayout" name="gridLayout">
           <property name="leftMargin">
-           <number>4</number>
+           <number>3</number>
           </property>
           <property name="topMargin">
-           <number>4</number>
+           <number>0</number>
           </property>
           <property name="rightMargin">
            <number>1</number>
           </property>
           <property name="bottomMargin">
-           <number>4</number>
+           <number>0</number>
           </property>
           <item row="0" column="0">
            <widget class="QLineEdit" name="editFilter">
@@ -156,6 +156,9 @@
      <widget class="QStackedWidget" name="stackedWidget">
       <property name="autoFillBackground">
        <bool>true</bool>
+      </property>
+      <property name="currentIndex">
+       <number>0</number>
       </property>
       <widget class="QWidget" name="pageWait">
        <layout class="QGridLayout" name="gridLayout_2">
@@ -248,7 +251,13 @@
           <property name="minimumSize">
            <size>
             <width>0</width>
-            <height>28</height>
+            <height>24</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>24</height>
            </size>
           </property>
           <layout class="QHBoxLayout" name="horizontalLayout_2">
@@ -399,7 +408,13 @@
           <property name="minimumSize">
            <size>
             <width>0</width>
-            <height>28</height>
+            <height>24</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>24</height>
            </size>
           </property>
           <layout class="QHBoxLayout" name="horizontalLayout_3">
