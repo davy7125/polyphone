@@ -14,7 +14,6 @@
 const QString RepositoryManager::BASE_URL = "https://www.polyphone-soundfonts.com/en/api/soundfonts/";
 RepositoryManager * RepositoryManager::s_instance = NULL;
 
-
 RepositoryManager * RepositoryManager::getInstance()
 {
     if (s_instance == NULL)
