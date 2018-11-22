@@ -1,7 +1,7 @@
 #include "configtocbutton.h"
 #include "contextmanager.h"
 
-QSize ConfigTocButton::ICON_SIZE(48, 48);
+QSize ConfigTocButton::ICON_SIZE(42, 42);
 
 ConfigTocButton::ConfigTocButton(QWidget *parent) : QToolButton(parent)
 {

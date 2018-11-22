@@ -7,7 +7,7 @@
 class TabBar : public QTabBar
 {
 public:
-    TabBar(QWidget *parent = NULL) : QTabBar(parent)
+    TabBar(QWidget *parent = nullptr) : QTabBar(parent)
     {
         this->setDrawBase(false);
     }

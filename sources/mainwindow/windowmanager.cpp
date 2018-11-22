@@ -47,9 +47,9 @@ void WindowManager::openConfiguration()
     _configTab->initializeInterface();
     int index = _tabWidget->indexOf(_configTab);
     if (index == -1)
-        index = _tabWidget->addTab(_configTab,
-                                   ContextManager::theme()->getColoredSvg(":/icons/settings.svg", QSize(32, 32), ThemeManager::WINDOW_TEXT),
-                                   trUtf8("Préférences"));
+        index = _tabWidget->addColoredTab(_configTab, ":/icons/settings.svg", trUtf8("Préférences"),
+                                          ContextManager::theme()->getColor(ThemeManager::WINDOW_BACKGROUND),
+                                          ContextManager::theme()->getColor(ThemeManager::WINDOW_TEXT));
     _tabWidget->setCurrentIndex(index);
 }
 
@@ -259,9 +259,9 @@ void WindowManager::openUser()
     _userTab->initializeInterface();
     int index = _tabWidget->indexOf(_userTab);
     if (index == -1)
-        index = _tabWidget->addTab(_userTab,
-                                   ContextManager::theme()->getColoredSvg(":/icons/user.svg", QSize(32, 32), ThemeManager::WINDOW_TEXT),
-                                   trUtf8("Espace utilisateur"));
+        index = _tabWidget->addColoredTab(_userTab, ":/icons/user.svg", trUtf8("Espace utilisateur"),
+                                          ContextManager::theme()->getColor(ThemeManager::WINDOW_BACKGROUND),
+                                          ContextManager::theme()->getColor(ThemeManager::WINDOW_TEXT));
     _tabWidget->setCurrentIndex(index);
 }
 

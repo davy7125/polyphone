@@ -57,7 +57,6 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
 
     // Window state
-    this->setMaximumSize(QApplication::desktop()->size());
     restoreGeometry(ContextManager::configuration()->getValue(ConfManager::SECTION_DISPLAY, "windowGeometry", QByteArray()).toByteArray());
     restoreState(ContextManager::configuration()->getValue(ConfManager::SECTION_DISPLAY, "windowState", QByteArray()).toByteArray());
 
@@ -70,14 +69,15 @@ MainWindow::MainWindow(QWidget *parent) :
     QMap<QString, QString> replacement;
     replacement["currentColor"] = ContextManager::theme()->getColor(ThemeManager::WINDOW_TEXT).name();
     replacement["secondColor"] = ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND).name();
-    ui->tabWidget->setTabIcon(0, ContextManager::theme()->getColoredSvg(":/misc/logo.svg", QSize(32, 32), replacement));
-    ui->pushButtonNew->setIcon(ContextManager::theme()->getColoredSvg(":/icons/document-new.svg", QSize(48, 48), ThemeManager::BUTTON_TEXT));
-    ui->pushButtonOpen->setIcon(ContextManager::theme()->getColoredSvg(":/icons/document-open.svg", QSize(48, 48), ThemeManager::BUTTON_TEXT));
-    ui->pushButtonDocumentation->setIcon(ContextManager::theme()->getColoredSvg(":/icons/book.svg", QSize(48, 48), ThemeManager::BUTTON_TEXT));
-    ui->pushButtonForum->setIcon(ContextManager::theme()->getColoredSvg(":/icons/forum.svg", QSize(48, 48), ThemeManager::BUTTON_TEXT));
-    ui->pushButtonSettings->setIcon(ContextManager::theme()->getColoredSvg(":/icons/settings.svg", QSize(48, 48), ThemeManager::BUTTON_TEXT));
-    ui->pushButtonSearch->setIcon(ContextManager::theme()->getColoredSvg(":/icons/search.svg", QSize(48, 48), ThemeManager::BUTTON_TEXT));
-    ui->pushButtonSoundfonts->setIcon(ContextManager::theme()->getColoredSvg(":/icons/globe.svg", QSize(48, 48), ThemeManager::BUTTON_TEXT));
+    ui->tabWidget->setTabIcon(0, ContextManager::theme()->getColoredSvg(":/icons/home.svg", ColoredTabWidget::TAB_ICON_SIZE, replacement));
+    QSize iconSize(36, 36);
+    ui->pushButtonNew->setIcon(ContextManager::theme()->getColoredSvg(":/icons/document-new.svg", iconSize, ThemeManager::BUTTON_TEXT));
+    ui->pushButtonOpen->setIcon(ContextManager::theme()->getColoredSvg(":/icons/document-open.svg", iconSize, ThemeManager::BUTTON_TEXT));
+    ui->pushButtonDocumentation->setIcon(ContextManager::theme()->getColoredSvg(":/icons/book.svg", iconSize, ThemeManager::BUTTON_TEXT));
+    ui->pushButtonForum->setIcon(ContextManager::theme()->getColoredSvg(":/icons/forum.svg", iconSize, ThemeManager::BUTTON_TEXT));
+    ui->pushButtonSettings->setIcon(ContextManager::theme()->getColoredSvg(":/icons/settings.svg", iconSize, ThemeManager::BUTTON_TEXT));
+    ui->pushButtonSearch->setIcon(ContextManager::theme()->getColoredSvg(":/icons/search.svg", iconSize, ThemeManager::BUTTON_TEXT));
+    ui->pushButtonSoundfonts->setIcon(ContextManager::theme()->getColoredSvg(":/icons/globe.svg", iconSize, ThemeManager::BUTTON_TEXT));
 
     // Top right widget
     TopRightWidget * trw = new TopRightWidget(this);
