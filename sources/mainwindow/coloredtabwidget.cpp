@@ -1,35 +1,39 @@
 #include "coloredtabwidget.h"
 #include "contextmanager.h"
 #include "tabbar.h"
+#include <QPushButton>
 
-const QString ColoredTabWidget::s_styleSheetLastPart = "QTabWidget:pane {\
-        border-right: 0px;\
-border-left: 0px;\
-border-bottom: 0px;\
-top: -1px;\
+const QSize ColoredTabWidget::TAB_ICON_SIZE = QSize(24, 24);
+
+const QString ColoredTabWidget::s_styleSheetLastPart = "\
+QTabWidget:pane {\
+    border-right: 0px;\
+    border-left: 0px;\
+    border-bottom: 0px;\
+    top: -1px;\
 }\
 QTabBar::tab {\
     border-bottom: 0px;\
-    border-top-left-radius: 4px;\
-    border-top-right-radius: 4px;\
+    border-top-left-radius: 3px;\
+    border-top-right-radius: 3px;\
     border-bottom-left-radius: 0px;\
     border-bottom-right-radius: 0px;\
-padding: 5px 1px 7px 15px;\
-margin: 3px -1px 0 -1px;\
+    padding: 2px 1px 2px 10px;\
+    margin: 3px -1px 0 -1px;\
 }\
 QTabBar::tab:selected {\
-                 border-bottom: 0px;\
-padding-top: 5px;\
-padding-right: 0px;\
-margin-top: 0px;\
-margin-right: 0px;\
+    border-bottom: 0px;\
+    padding-top: 7px;\
+    padding-right: 0px;\
+    margin-top: 0px;\
+    margin-right: 0px;\
 }\
 QTabBar::tab:last {\
-                 margin-right: 0px;\
+    margin-right: 0px;\
 }";
 
 ColoredTabWidget::ColoredTabWidget(QWidget *parent) : QTabWidget(parent),
-    _lastWidget(NULL)
+    _lastWidget(nullptr)
 {
     // First tab doesn't move
     this->setTabBar(new TabBar());
@@ -61,9 +65,17 @@ ColoredTabWidget::ColoredTabWidget(QWidget *parent) : QTabWidget(parent),
 
 void ColoredTabWidget::changeStyleSheet(QColor backgroundColor, QColor textColor)
 {
-    this->setStyleSheet(_styleSheetFirstPart + backgroundColor.name() +
-                        ");border-bottom: 1px solid " + backgroundColor.name() +
-                        ";color:" + textColor.name() + "}" + s_styleSheetLastPart);
+    QString styleSheet = _styleSheetFirstPart + backgroundColor.name() +
+            ");border-bottom: 1px solid " + backgroundColor.name() +
+            ";color:" + textColor.name() + "}" + s_styleSheetLastPart;
+
+    // Max width of the first tab
+    if (this->count() == 1)
+        styleSheet += "QTabBar::tab{max-width:33px;}";
+    else
+        styleSheet += "QTabBar::tab:first{max-width:33px;}";
+
+    this->setStyleSheet(styleSheet);
 }
 
 int ColoredTabWidget::addColoredTab(QWidget *widget, QString iconName, const QString &label, QColor backgroundColor, QColor textColor)
@@ -73,7 +85,17 @@ int ColoredTabWidget::addColoredTab(QWidget *widget, QString iconName, const QSt
     _tabInfo[widget]._textColor = textColor;
     _tabInfo[widget]._iconName = iconName;
 
-    return this->addTab(widget, ContextManager::theme()->getColoredSvg(iconName, QSize(32, 32), ThemeManager::WINDOW_TEXT), label);
+    int indexTab = this->addTab(widget, label);
+
+    // Style the close button
+    QPushButton * button = new QPushButton();
+    button->setFlat(true);
+    button->setMaximumWidth(16);
+    _tabInfo[widget]._closeButton = button;
+    connect(button, SIGNAL(clicked()), this, SLOT(onCloseButtonClicked()));
+    this->tabBar()->setTabButton(indexTab, QTabBar::RightSide, button);
+
+    return indexTab;
 }
 
 void ColoredTabWidget::onCurrentChanged(int index)
@@ -85,20 +107,44 @@ void ColoredTabWidget::onCurrentChanged(int index)
         changeStyleSheet(_tabInfo[currentWidget]._backgroundColor, _tabInfo[currentWidget]._textColor);
         QMap<QString, QString> replacement;
         replacement["currentColor"] = _tabInfo[currentWidget]._textColor.name();
-        this->setTabIcon(index, ContextManager::theme()->getColoredSvg(_tabInfo[currentWidget]._iconName, QSize(32, 32), replacement));
+
+        // Icons
+        this->setTabIcon(index, ContextManager::theme()->getColoredSvg(_tabInfo[currentWidget]._iconName, TAB_ICON_SIZE, replacement));
+        _tabInfo[currentWidget]._closeButton->setIcon(ContextManager::theme()->getColoredSvg(":/icons/close.svg", QSize(12, 12), replacement));
     }
     else
         changeStyleSheet(_defaultWindowColor, _defaultTextColor);
 
     // Restore the icon of the previous index
-    if (_lastWidget != NULL && _tabInfo.contains(_lastWidget) && this->indexOf(_lastWidget) != -1 && currentWidget != _lastWidget)
+    if (_lastWidget != nullptr && _tabInfo.contains(_lastWidget) && this->indexOf(_lastWidget) != -1 && currentWidget != _lastWidget)
     {
         int lastIndex = this->indexOf(_lastWidget);
         QMap<QString, QString> replacement;
         replacement["currentColor"] = _defaultTextColor.name();
-        this->setTabIcon(lastIndex, ContextManager::theme()->getColoredSvg(_tabInfo[_lastWidget]._iconName, QSize(32, 32), replacement));
+
+        // Icons
+        this->setTabIcon(lastIndex, ContextManager::theme()->getColoredSvg(_tabInfo[_lastWidget]._iconName, TAB_ICON_SIZE, replacement));
+        _tabInfo[_lastWidget]._closeButton->setIcon(ContextManager::theme()->getColoredSvg(":/icons/close.svg", QSize(12, 12), replacement));
     }
 
     // Store the new widget
     _lastWidget = currentWidget;
+}
+
+void ColoredTabWidget::onCloseButtonClicked()
+{
+    QPushButton * sender = (QPushButton *)QObject::sender();
+    if (sender == nullptr)
+        return;
+
+    // Find the widget having this button
+    foreach (QWidget * widget, _tabInfo.keys())
+    {
+        if (_tabInfo[widget]._closeButton == sender)
+        {
+            // Send a tabbar event
+            this->tabBar()->tabCloseRequested(this->indexOf(widget));
+            return;
+        }
+    }
 }
