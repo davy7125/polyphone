@@ -63,7 +63,8 @@ void LinkedToWidget::addLink(EltID id, QString text)
     QPushButton * button = new QPushButton(this);
     button->setText(text);
     button->setCursor(Qt::PointingHandCursor);
-    button->setMinimumHeight(28);
+    button->setMinimumHeight(24);
+    button->setMaximumHeight(24);
     _buttonIds[button] = id;
     connect(button, SIGNAL(clicked(bool)), this, SLOT(onClick(bool)));
     _layout->addWidget(button);
