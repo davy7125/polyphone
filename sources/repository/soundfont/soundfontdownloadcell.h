@@ -24,7 +24,9 @@ private slots:
 private:
     QString getSize(SoundfontDownloadData * data);
     QString getDate(SoundfontDownloadData * data);
+
     Ui::SoundfontDownloadCell *ui;
+    int _id;
 };
 
 #endif // SOUNDFONTDOWNLOADCELL_H
