@@ -3,7 +3,7 @@
 
 #include <QWidget>
 class SoundfontDescriptionData;
-class QTextDocument;
+class UrlReaderImage;
 
 namespace Ui {
 class SoundfontDescription;
@@ -14,22 +14,25 @@ class SoundfontDescription : public QWidget
     Q_OBJECT
 
 public:
-    explicit SoundfontDescription(QWidget *parent = 0);
+    explicit SoundfontDescription(QWidget *parent = nullptr);
     ~SoundfontDescription();
 
     void display(SoundfontDescriptionData * data);
 
 private slots:
-    void on_webView_titleChanged(const QString &title);
+    void documentSizeChanged(QSizeF size);
+    void imageDownloaded(QString error);
 
 private:
     static QString getCss();
-    static QString getJs();
+    QString processFrame(QString frame);
     QString getBody(SoundfontDescriptionData * data);
+    void downloadOneImage();
 
     Ui::SoundfontDescription *ui;
+    UrlReaderImage * _imageReader;
+    QStringList _imagesToDownload;
     static QString s_css;
-    static QString s_js;
 };
 
 #endif // SOUNDFONTDESCRIPTION_H

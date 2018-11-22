@@ -23,7 +23,7 @@ public:
     void clearArguments() { _arguments.clear(); }
     void addArgument(QString key, QString value);
 
-    // Start the download. When this is finished, the signal "downloaded"
+    // Start the download. When this is finished, the signal "downloadCompleted" is emitted
     void download();
 
     // Get raw data
