@@ -15,7 +15,7 @@ AbstractInput::AbstractInput() : QObject(),
     _sm(NULL),
     _fileName(""),
     _isSuccess(false),
-    _error(trUtf8("not processed yet")),
+    _error(trUtf8("pas encore traité")),
     _sf2Index(-1)
 {
     connect(_futureWatcher, SIGNAL(finished()), this, SIGNAL(finished()), Qt::QueuedConnection);

@@ -391,7 +391,7 @@ void GraphiqueFourier::exportPng()
     QString defaultFile = ContextManager::recentFile()->getLastDirectory(RecentFileManager::FILE_TYPE_FREQUENCIES) + "/" +
             _name.replace(QRegExp(QString::fromUtf8("[`~*|:<>«»?/{}\"\\\\]")), "_") + ".png";
     QString fileName = QFileDialog::getSaveFileName(this, trUtf8("Exporter un graphique"),
-                                                    defaultFile, trUtf8("Fichier .png (*.png)"));
+                                                    defaultFile, trUtf8("Fichier .png") + " (*.png)");
     if (!fileName.isEmpty())
     {
         ContextManager::recentFile()->addRecentFile(RecentFileManager::FILE_TYPE_FREQUENCIES, fileName);

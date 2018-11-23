@@ -56,10 +56,6 @@ void RunnableChordCreator::run()
             double ecart;
             EltID idInstSmplTmp;
             EltID idSmpl = closestSample(_idInst, pitch, ecart, _side, idInstSmplTmp);
-            //                        printf("touche %d, note cherchee %.2f, sample %s, instsmpl %d-%d\n",
-            //                               note, noteTmp, sf2->getQstr(idSmpl, champ_name).toStdString().c_str(),
-            //                               sf2->get(idInstSmplTmp, champ_keyRange).rValue.byLo,
-            //                               sf2->get(idInstSmplTmp, champ_keyRange).rValue.byHi);
 
             // Fréquence d'échantillonnage initiale fictive (pour accordage)
             double fEchInit = (double)sm->get(idSmpl, champ_dwSampleRate).dwValue * pow(2, ecart / 12.0);

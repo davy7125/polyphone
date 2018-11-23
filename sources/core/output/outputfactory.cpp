@@ -89,7 +89,8 @@ bool OutputFactory::save(int indexSf2, bool saveAs)
             defaultPath = filePathInitial;
 
         // Dialog for choosing a destination
-        savePath = QFileDialog::getSaveFileName(QApplication::activeWindow(), QObject::trUtf8("Sauvegarder une soundfont"), defaultPath, QObject::trUtf8("Fichier .sf2 (*.sf2)"));
+        savePath = QFileDialog::getSaveFileName(QApplication::activeWindow(), QObject::trUtf8("Sauvegarder une soundfont"),
+                                                defaultPath, QObject::trUtf8("Fichier .sf2") + " (*.sf2)");
         if (savePath.isNull())
             return false;
     }

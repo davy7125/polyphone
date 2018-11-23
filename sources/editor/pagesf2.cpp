@@ -245,11 +245,9 @@ void PageSf2::countElements()
     if (unusedSmpl)
     {
         if (unusedSmpl > 1)
-            ui->label_nbSmpl->setText(QString::number(usedSmpl) +
-                                      trUtf8(" (inutilisés : ") + QString::number(unusedSmpl) + ")");
+            ui->label_nbSmpl->setText(trUtf8("%0 (inutilisés : %1)", "plural form").arg(usedSmpl).arg(unusedSmpl));
         else
-            ui->label_nbSmpl->setText(QString::number(usedSmpl) +
-                                      trUtf8(" (inutilisé : ") + QString::number(unusedSmpl) + ")");
+            ui->label_nbSmpl->setText(trUtf8("%0 (inutilisé : %1)", "singular form").arg(usedSmpl).arg(unusedSmpl));
         ui->label_nbSmpl->setStyleSheet(redStr);
     }
     else

@@ -315,7 +315,7 @@ QByteArray Sound::getData(quint16 wBps)
         }
         break;
     default:
-        QMessageBox::warning(_parent, QObject::trUtf8("Attention"), QObject::trUtf8("Erreur dans Sound::getData."));
+        QMessageBox::warning(_parent, QObject::trUtf8("Attention"), "Error in Sound::getData.");
     }
     return baRet;
 }
@@ -646,7 +646,7 @@ void Sound::getInfoSoundWav(bool tryFindRootkey)
     if (!fi.exists())
     {
         QMessageBox::warning(_parent, QObject::trUtf8("Attention"),
-                             QObject::trUtf8("Impossible d'ouvrir le fichier") + " " + fileName);
+                             QObject::trUtf8("Impossible d'ouvrir le fichier « %0 »").arg(fileName));
         return;
     }
     fi.open(QFile::ReadOnly | QFile::Unbuffered);

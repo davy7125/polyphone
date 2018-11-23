@@ -46,7 +46,8 @@ DialogChangeLog::DialogChangeLog(QWidget *parent) :
 
     // Version
     ui->labelTitle->setText(trUtf8("Merci d'avoir installé") + "\n" +
-                            trUtf8("Polyphone") + " " + trUtf8("version") + " " + QString::number(VERSION) +
+                            trUtf8("Polyphone") + " " + trUtf8("version") + " " +
+                            (qAbs(VERSION) == VERSION ? QString::number(VERSION, 'f', 1) : QString::number(VERSION)) +
                             (FINAL ? "" : " unreleased"));
 
     // Read changelog and extract information
