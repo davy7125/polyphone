@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string notr="true">Form</string>
   </property>
   <layout class="QHBoxLayout" name="horizontalLayout">
    <property name="spacing">
@@ -38,7 +38,7 @@
       </sizepolicy>
      </property>
      <property name="text">
-      <string>labelName</string>
+      <string notr="true">labelName</string>
      </property>
     </widget>
    </item>

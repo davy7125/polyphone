@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string notr="true">Form</string>
   </property>
   <property name="autoFillBackground">
    <bool>true</bool>
@@ -155,8 +155,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>236</width>
-            <height>354</height>
+            <width>250</width>
+            <height>346</height>
            </rect>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout">

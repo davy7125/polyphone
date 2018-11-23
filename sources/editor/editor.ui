@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string notr="true">MainWindow</string>
   </property>
   <property name="autoFillBackground">
    <bool>true</bool>
@@ -448,7 +448,7 @@
   </widget>
   <widget class="EditorToolBar" name="toolBar">
    <property name="windowTitle">
-    <string>toolBar</string>
+    <string notr="true"/>
    </property>
    <property name="movable">
     <bool>false</bool>
