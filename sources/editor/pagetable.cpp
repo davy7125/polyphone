@@ -1907,8 +1907,7 @@ void PageTable::pasteMod(EltID id, QList<Modulator> modulators)
                      champTmp == champ_overridingRootKey)
             {
                 QMessageBox::warning(this, trUtf8("Attention"), warnQStr +
-                                     "\"" + Attribute::getDescription(champTmp, true) +
-                                     trUtf8("\" ne peut être modulé dans un preset."));
+                                     trUtf8("%0 ne peut être modulé dans un preset.").arg("<b>" + Attribute::getDescription(champTmp, true) + "</b>"));
                 return;
             }
         }

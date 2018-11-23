@@ -48,7 +48,7 @@ DialogAbout::DialogAbout(QWidget *parent) :
     QString url = trUtf8("https://www.polyphone-soundfonts.com/fr");
     QString urlDonation = "https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=ESBLSGPJ7P938&lc=US&item_name=Polyphone&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donate_LG%2egif%3aNonHosted";
     ui->labelDescription->setText("<html><head/><body><p align='center'>" + trUtf8("Copyright") + QString::fromUtf8(" © ") + annee +
-                                  " " + trUtf8("Davy Triponney", "this is my name") + "<br/><br/><a href='" + url +
+                                  " " + trUtf8("Davy Triponney") + "<br/><br/><a href='" + url +
                                   "'><span style=' text-decoration: underline; color:" +
                                   this->palette().color(QPalette::Link).name() + ";'>" +
                                   trUtf8("Site internet de Polyphone") + "</span></a>" +
@@ -119,9 +119,9 @@ QString Credit::getText()
     QString text = "<html><head/><body><table border='0' style='margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px;' "
                    "cellspacing='2' cellpadding='0'>";
 
-    text += getGroup(QObject::trUtf8("Créé par "), _listCreatorName, _listCreatorMail) + "<tr></tr>";
-    text += getGroup(QObject::trUtf8("Contributeurs "), _listContributorName, _listContributorMail) + "<tr></tr>";
-    text += getGroup(QObject::trUtf8("Traduit par "), _listTranslatorName, _listTranslatorMail) + "<tr></tr>";
+    text += getGroup(QObject::trUtf8("Créé par") + " ", _listCreatorName, _listCreatorMail) + "<tr></tr>";
+    text += getGroup(QObject::trUtf8("Contributeurs") + " ", _listContributorName, _listContributorMail) + "<tr></tr>";
+    text += getGroup(QObject::trUtf8("Traduit par") + " ", _listTranslatorName, _listTranslatorMail) + "<tr></tr>";
     text += getAwesomeCredit();
 
     return text + "</table></body></html>";

@@ -48,6 +48,9 @@ void ConfigSectionRepository::initialize()
     fake.resize(passwordLength);
     ui->linePassword->setText(fake); // Same number of characters
     _fakePassword = true;
+
+    // Force the initialization of the user state
+    onConnectionStateChanged(UserManager::getInstance()->getConnectionState());
     if (_currentState == UserManager::DISCONNECTED)
         ui->labelMessage->setText("");
 
@@ -164,20 +167,20 @@ void ConfigSectionRepository::on_lineUser_textEdited(const QString &arg1)
 {
     Q_UNUSED(arg1)
     if (_currentState == UserManager::DISCONNECTED)
-        ui->labelMessage->setText(trUtf8("Cliquez sur \"Connexion\" pour sauvegarder les paramètres."));
+        ui->labelMessage->setText(trUtf8("Cliquez sur %0 pour sauvegarder les paramètres.").arg("<b>" + ui->pushConnect->text() + "</b>"));
 }
 
 void ConfigSectionRepository::on_linePassword_textChanged(const QString &arg1)
 {
     Q_UNUSED(arg1)
     if (_currentState == UserManager::DISCONNECTED)
-        ui->labelMessage->setText(trUtf8("Cliquez sur \"Connexion\" pour sauvegarder les paramètres."));
+        ui->labelMessage->setText(trUtf8("Cliquez sur %0 pour sauvegarder les paramètres.").arg("<b>" + ui->pushConnect->text() + "</b>"));
     _fakePassword = false;
 }
 
 void ConfigSectionRepository::on_pushDirectory_clicked()
 {
-    QString qDir = QFileDialog::getExistingDirectory(this, trUtf8("Choisir un répertoire de destination"),
+    QString qDir = QFileDialog::getExistingDirectory(this, trUtf8("Choisissez un répertoire de destination"),
                                                      ui->lineDownloadDirectory->text());
     if (!qDir.isEmpty())
     {

@@ -110,7 +110,7 @@ void EnvelopEditor::on_pushVolume_clicked()
     {
         _isVolume = true;
         stopSignals(true);
-        ui->doubleSpinSustain->setSuffix(trUtf8(" dB", "unit for decibels"));
+        ui->doubleSpinSustain->setSuffix(" " + trUtf8("dB", "unit for decibels"));
         ui->doubleSpinSustain->setMaximum(144);
         stopSignals(false);
         populate();

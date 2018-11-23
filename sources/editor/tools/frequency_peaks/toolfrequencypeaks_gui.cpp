@@ -149,7 +149,7 @@ void ToolFrequencyPeaks_gui::on_pushExport_clicked()
 {
     QString defaultFile = ContextManager::recentFile()->getLastDirectory(RecentFileManager::FILE_TYPE_FREQUENCIES) + "/" + _sf2Name;
     QString fileName = QFileDialog::getSaveFileName(this, trUtf8("Exporter les pics de fréquence"),
-                                                    defaultFile, trUtf8("Fichier .csv (*.csv)"));
+                                                    defaultFile, trUtf8("Fichier .csv") + " (*.csv)");
     if (!fileName.isEmpty())
     {
         ContextManager::recentFile()->addRecentFile(RecentFileManager::FILE_TYPE_FREQUENCIES, fileName);

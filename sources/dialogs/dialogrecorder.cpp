@@ -100,7 +100,7 @@ void DialogRecorder::on_pushRecord_clicked()
         // File name
         QString defaultPath = this->getDefaultPath();
         defaultPath = QFileDialog::getSaveFileName(this, trUtf8("Sauvegarder un enregistrement"),
-                                                   defaultPath, trUtf8("Fichier .wav (*.wav)"));
+                                                   defaultPath, trUtf8("Fichier .wav") + " (*.wav)");
         if (!defaultPath.isEmpty())
         {
             if (defaultPath.right(4).toLower() != ".wav")

@@ -419,7 +419,7 @@ QString RepositoryManager::getCategoryName(int id)
         if (_categoryNames.contains(id))
             result = _categoryNames[id];
         else
-            result = trUtf8("category") + QString::number(id);
+            result = trUtf8("Catégorie %0").arg(id);
         break;
     }
 
@@ -450,7 +450,7 @@ void RepositoryManager::openSoundfont(int soundfontId, bool daily)
             error = trUtf8("Veuillez patienter quelques instants...");
             break;
         case UserManager::BANNED:
-            error = trUtf8("Votre compte a été banni.");
+            error = trUtf8("Ce compte a été banni.");
             break;
         case UserManager::DISCONNECTED:
         case UserManager::CONNECTED:

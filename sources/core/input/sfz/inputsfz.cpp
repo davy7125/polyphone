@@ -85,7 +85,7 @@ void InputSfz::parseFile(QString filename, bool &success, QString &error)
     if (!inputFile.open(QIODevice::ReadOnly))
     {
         success = false;
-        error = trUtf8("Impossible d'ouvrir le fichier %0").arg(filename);
+        error = trUtf8("Impossible d'ouvrir le fichier « %0 »").arg(filename);
         return;
     }
 
@@ -262,9 +262,9 @@ void InputSfz::createSf2(int &sf2Index, QString filename, bool isChannel10)
     else
     {
         idSf2.indexSf2 = sf2Index;
-        sm->set(idSf2, champ_name, QObject::trUtf8("Import sfz"));
+        sm->set(idSf2, champ_name, trUtf8("Import sfz"));
     }
-    sm->set(idSf2, champ_ICMT, QObject::trUtf8("Sf2 importé depuis un fichier sfz par Polyphone"));
+    sm->set(idSf2, champ_ICMT, trUtf8("Sf2 importé depuis un fichier sfz par Polyphone"));
     sm->closestAvailablePreset(idSf2, numBank, numPreset);
 
     // Création d'un preset
@@ -433,6 +433,6 @@ QString InputSfz::getInstrumentName(QString filePath, int &numBank, int &numPres
 
     // Nom de l'instrument
     if (nomFichier.isEmpty())
-        nomFichier = QObject::trUtf8("sans nom");
+        nomFichier = trUtf8("sans nom");
     return nomFichier.left(20);
 }
