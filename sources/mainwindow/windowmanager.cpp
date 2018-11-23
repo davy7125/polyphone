@@ -282,7 +282,8 @@ void WindowManager::openRepositorySoundfont(int id)
     SoundfontInformation * si = RepositoryManager::getInstance()->getSoundfontInformation(id);
     if (si == nullptr)
         return;
-    QString title = si->getTitle();
+    QFontMetrics fontMetrics(QApplication::font());
+    QString title = fontMetrics.elidedText(si->getTitle(), Qt::ElideMiddle, 150);
 
     // Create a new viewer
     SoundfontViewer * viewer = new SoundfontViewer();

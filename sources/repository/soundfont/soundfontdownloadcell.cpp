@@ -2,6 +2,7 @@
 #include "ui_soundfontdownloadcell.h"
 #include "soundfontdownloaddata.h"
 #include "contextmanager.h"
+#include "downloadmanager.h"
 
 SoundfontDownloadCell::SoundfontDownloadCell(QWidget *parent) :
     QWidget(parent),
@@ -30,6 +31,9 @@ void SoundfontDownloadCell::initialize(SoundfontDownloadData * data)
 
     // Format informations
     ui->labelInfo->setText(QString("(%0, %1)").arg(getSize(data)).arg(getDate(data)));
+
+    // Store the id
+    _id = data->getId();
 }
 
 QString SoundfontDownloadCell::getSize(SoundfontDownloadData * data)
@@ -54,5 +58,5 @@ QString SoundfontDownloadCell::getDate(SoundfontDownloadData * data)
 
 void SoundfontDownloadCell::on_pushDownload_clicked()
 {
-
+    DownloadManager::getInstance()->download(_id);
 }

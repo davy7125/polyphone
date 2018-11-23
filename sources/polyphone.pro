@@ -404,7 +404,8 @@ SOURCES	+= main.cpp \
     repository/soundfont/soundfontdownloaddata.cpp \
     repository/urlreaderimage.cpp \
     repository/soundfont/soundfontdownloadcell.cpp \
-    repository/soundfont/soundfontcommentcell.cpp
+    repository/soundfont/soundfontcommentcell.cpp \
+    repository/downloadmanager.cpp
 
 HEADERS  += \
     core/sound.h \
@@ -670,7 +671,8 @@ HEADERS  += \
     repository/soundfont/soundfontdownloaddata.h \
     repository/urlreaderimage.h \
     repository/soundfont/soundfontdownloadcell.h \
-    repository/soundfont/soundfontcommentcell.h
+    repository/soundfont/soundfontcommentcell.h \
+    repository/downloadmanager.h
 
 FORMS    += \
     dialogs/dialog_list.ui \

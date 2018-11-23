@@ -75,15 +75,13 @@ QString SoundfontDescription::getBody(SoundfontDescriptionData * data)
         str = "<p>" + trUtf8("Pas de description.") + "</p>";
     else
     {
-        qDebug() << "before:\n" << str;
-
         // Remove unnecessary data
         str = str.replace(QRegExp("[\r\n\t]"), "");
 
         // Format tables
         str = str.replace("<table>", "<table cellspacing=0>");
 
-        // Process possible iframes (youtube)
+        // Process possible iframes
         QRegExp rx("<iframe([^<>]*)>[^<>]*</iframe>");
         int pos = 0;
         while ((pos = rx.indexIn(str, pos)) != -1)
@@ -94,7 +92,6 @@ QString SoundfontDescription::getBody(SoundfontDescriptionData * data)
 
         // Links
 
-        qDebug() << "after:\n" << str;
     }
 
     return str;
@@ -117,7 +114,7 @@ QString SoundfontDescription::processFrame(QString frame)
         QString videoId = rx.cap(1);
         QString thumbnailUrl = "https://img.youtube.com/vi/" + videoId + "/hqdefault.jpg";
         result = "<a href='https://www.youtube/watch?v=" + videoId + "'>" +
-                 "<img width='320' height='180' src='" + thumbnailUrl + "'></img>bla</a>";
+                 "<img width='320' height='180' src='" + thumbnailUrl + "'></img></a>";
 
         // Temporary image
         ui->textBrowser->document()->addResource(QTextDocument::ImageResource, thumbnailUrl,
