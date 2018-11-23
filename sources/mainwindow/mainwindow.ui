@@ -68,7 +68,7 @@
            <string notr="true">padding: 10px;</string>
           </property>
           <property name="text">
-           <string>  Préfèrences</string>
+           <string extracomment="prefixed with 2 spaces">  Préfèrences</string>
           </property>
           <property name="iconSize">
            <size>
@@ -84,7 +84,7 @@
            <string notr="true">padding: 10px;</string>
           </property>
           <property name="text">
-           <string>  Documentation</string>
+           <string extracomment="prefixed with 2 spaces">  Documentation</string>
           </property>
           <property name="iconSize">
            <size>
@@ -103,7 +103,7 @@
            <string notr="true">padding: 10px;</string>
           </property>
           <property name="text">
-           <string>  Nouvelle
+           <string extracomment="prefixed with 2 spaces for each line">  Nouvelle
   soundfont</string>
           </property>
           <property name="iconSize">
@@ -136,7 +136,7 @@
            <string notr="true">padding: 10px;</string>
           </property>
           <property name="text">
-           <string>  Forum</string>
+           <string extracomment="prefixed with 2 spaces">  Forum</string>
           </property>
           <property name="iconSize">
            <size>
@@ -165,7 +165,7 @@
            <string notr="true">padding: 10px;</string>
           </property>
           <property name="text">
-           <string>  Soundfonts
+           <string extracomment="prefixed with 2 spaces for each line">  Soundfonts
   en ligne</string>
           </property>
           <property name="iconSize">
@@ -192,7 +192,7 @@
            <string notr="true">padding: 10px;</string>
           </property>
           <property name="text">
-           <string>  Ouvrir
+           <string extracomment="prefixed with 2 spaces for each line">  Ouvrir
   soundfont</string>
           </property>
           <property name="iconSize">

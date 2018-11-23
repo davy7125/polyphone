@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string notr="true">Form</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
@@ -56,7 +56,7 @@
          </font>
         </property>
         <property name="text">
-         <string>labelTitle</string>
+         <string notr="true">labelTitle</string>
         </property>
        </widget>
       </item>
@@ -88,7 +88,7 @@
          </size>
         </property>
         <property name="text">
-         <string>0</string>
+         <string notr="true">0</string>
         </property>
         <property name="alignment">
          <set>Qt::AlignCenter</set>
@@ -123,7 +123,7 @@
          </size>
         </property>
         <property name="text">
-         <string>0</string>
+         <string notr="true">0</string>
         </property>
         <property name="alignment">
          <set>Qt::AlignCenter</set>
@@ -188,7 +188,7 @@
          <cursorShape>PointingHandCursor</cursorShape>
         </property>
         <property name="text">
-         <string>labelAuthor</string>
+         <string notr="true">labelAuthor</string>
         </property>
         <property name="textFormat">
          <enum>Qt::RichText</enum>
@@ -217,7 +217,7 @@
       <item>
        <widget class="QLabel" name="labelDate">
         <property name="text">
-         <string>labelDate</string>
+         <string notr="true">labelDate</string>
         </property>
        </widget>
       </item>
@@ -252,7 +252,7 @@
          <cursorShape>PointingHandCursor</cursorShape>
         </property>
         <property name="text">
-         <string>labelLicense</string>
+         <string notr="true">labelLicense</string>
         </property>
         <property name="textFormat">
          <enum>Qt::RichText</enum>
@@ -272,12 +272,6 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>FiveStarsWidget</class>
-   <extends>QWidget</extends>
-   <header>fivestarswidget.h</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
    <class>ElidedLabel</class>
    <extends>QLabel</extends>
    <header>elidedlabel.h</header>
@@ -286,6 +280,12 @@
    <class>AttributeFlow</class>
    <extends>QWidget</extends>
    <header>attributeflow.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>FiveStarsWidget</class>
+   <extends>QWidget</extends>
+   <header>fivestarswidget.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

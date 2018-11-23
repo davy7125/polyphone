@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string notr="true">Form</string>
   </property>
   <property name="autoFillBackground">
    <bool>true</bool>
@@ -45,8 +45,8 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>236</width>
-        <height>432</height>
+        <width>250</width>
+        <height>393</height>
        </rect>
       </property>
       <layout class="QGridLayout" name="gridLayout">
@@ -727,15 +727,15 @@ de télécharger le contenu</string>
    <container>1</container>
   </customwidget>
   <customwidget>
+   <class>ElidedLabel</class>
+   <extends>QLabel</extends>
+   <header>elidedlabel.h</header>
+  </customwidget>
+  <customwidget>
    <class>FiveStarsWidget</class>
    <extends>QWidget</extends>
    <header>fivestarswidget.h</header>
    <container>1</container>
-  </customwidget>
-  <customwidget>
-   <class>ElidedLabel</class>
-   <extends>QLabel</extends>
-   <header>elidedlabel.h</header>
   </customwidget>
   <customwidget>
    <class>AttributeFlow</class>
