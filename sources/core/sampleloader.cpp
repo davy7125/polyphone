@@ -44,14 +44,12 @@ IdList SampleLoader::load(QString path, int numSf2, int *replace)
                 if (sm->getQstr(id, champ_name).compare(nom.left(19).append("L")) == 0)
                 {
                     indexL = j;
-                    qStr3 = QObject::trUtf8("L'échantillon « ") + nom.left(19).toUtf8() +
-                            QObject::trUtf8("L » existe déjà.<br />Que faire ?");
+                    qStr3 = QObject::trUtf8("L'échantillon « %0L » existe déjà.<br />Que faire ?").arg(nom.left(19));
                 }
                 else if (sm->getQstr(id, champ_name).compare(nom.left(19).append("R")) == 0)
                 {
                     indexR = j;
-                    qStr3 = QObject::trUtf8("L'échantillon « ") + nom.left(19).toUtf8() +
-                            QObject::trUtf8("R » existe déjà.<br />Que faire ?");
+                    qStr3 = QObject::trUtf8("L'échantillon « %0R » existe déjà.<br />Que faire ?").arg(nom.left(19));
                 }
             }
             else
@@ -59,8 +57,7 @@ IdList SampleLoader::load(QString path, int numSf2, int *replace)
                 if (sm->getQstr(id, champ_name).compare(nom.left(20)) == 0)
                 {
                     indexL = j;
-                    qStr3 = QObject::trUtf8("L'échantillon « ") + nom.left(20).toUtf8() +
-                            QObject::trUtf8(" » existe déjà.<br />Que faire ?");
+                    qStr3 = QObject::trUtf8("L'échantillon « %0 » existe déjà.<br />Que faire ?").arg(nom.left(20));
                 }
             }
         }

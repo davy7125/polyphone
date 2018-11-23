@@ -17,7 +17,7 @@ void OutputSf2::processInternal(QString fileName, SoundfontManager * sm, bool &s
         if (i != sf2Index && QString::compare(sm->getQstr(EltID(elementSf2, i), champ_filenameInitial), fileName, Qt::CaseSensitive) == 0)
         {
             success = false;
-            error = trUtf8("Please close the file before overriding it.");
+            error = trUtf8("Fermez le fichier avant de sauvegarder par-dessus.");
             return;
         }
     }
@@ -223,7 +223,7 @@ void OutputSf2::processInternal(QString fileName, SoundfontManager * sm, bool &s
     if (!fi.open(QIODevice::WriteOnly))
     {
         success = false;
-        error = trUtf8("Impossible de créer le fichier '%0'").arg(fileName);
+        error = trUtf8("Impossible de créer le fichier « %0 »").arg(fileName);
         return;
     }
 

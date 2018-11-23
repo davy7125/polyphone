@@ -19,12 +19,12 @@ TreeViewMenu::TreeViewMenu(QWidget * parent) : QMenu(parent),
                         ";margin: 10px 45px; height: 1px}");
 
     // Associate
-    _associateAction = new QAction(trUtf8("Associer à..."), this);
+    _associateAction = new QAction(trUtf8("&Associer à..."), this);
     connect(_associateAction, SIGNAL(triggered()), this, SLOT(associate()));
     this->addAction(_associateAction);
 
     // Replace
-    _replaceAction = new QAction(trUtf8("Remplacer par..."), this);
+    _replaceAction = new QAction(trUtf8("&Remplacer par..."), this);
     connect(_replaceAction, SIGNAL(triggered()), this, SLOT(replace()));
     this->addAction(_replaceAction);
     this->addSeparator();
@@ -32,32 +32,32 @@ TreeViewMenu::TreeViewMenu(QWidget * parent) : QMenu(parent),
     connect(_dialogList, SIGNAL(elementSelected(EltID, bool)), this, SLOT(itemSelectedFromList(EltID, bool)));
 
     // Copy
-    _copyAction = new QAction(trUtf8("Copier"), this);
+    _copyAction = new QAction(trUtf8("&Copier"), this);
     _copyAction->setShortcut(QString("Ctrl+C"));
     connect(_copyAction, SIGNAL(triggered()), this, SLOT(copy()));
     this->addAction(_copyAction);
 
     // Paste
-    _pasteAction = new QAction(trUtf8("Coller"), this);
+    _pasteAction = new QAction(trUtf8("C&oller"), this);
     _pasteAction->setShortcut(QString("Ctrl+V"));
     connect(_pasteAction, SIGNAL(triggered()), this, SLOT(paste()));
     this->addAction(_pasteAction);
 
     // Duplicate
-    _duplicateAction = new QAction(trUtf8("Dupliquer"), this);
+    _duplicateAction = new QAction(trUtf8("&Dupliquer"), this);
     _duplicateAction->setShortcut(QString("Ctrl+D"));
     connect(_duplicateAction, SIGNAL(triggered()), this, SLOT(duplicate()));
     this->addAction(_duplicateAction);
 
     // Delete
-    _removeAction = new QAction(trUtf8("Supprimer"), this);
+    _removeAction = new QAction(trUtf8("&Supprimer"), this);
     _removeAction->setShortcut(QString("Del"));
     connect(_removeAction, SIGNAL(triggered()), this, SLOT(remove()));
     this->addAction(_removeAction);
     this->addSeparator();
 
     // Rename
-    _renameAction = new QAction(trUtf8("Renommer..."), this);
+    _renameAction = new QAction(trUtf8("Re&nommer..."), this);
     _renameAction->setShortcut(Qt::Key_F2);
     connect(_renameAction, SIGNAL(triggered()), this, SLOT(rename()));
     this->addAction(_renameAction);
@@ -114,11 +114,11 @@ void TreeViewMenu::initialize(IdList ids)
     if (rename)
     {
         _renameAction->setEnabled(true);
-        _renameAction->setText(ids.count() == 1 ? trUtf8("Renommer...") : trUtf8("&Renommer en masse..."));
+        _renameAction->setText(ids.count() == 1 ? trUtf8("Re&nommer...") : trUtf8("Re&nommer en masse..."));
     }
     else
     {
-        _renameAction->setText(trUtf8("Renommer..."));
+        _renameAction->setText(trUtf8("Re&nommer..."));
         _renameAction->setEnabled(false);
     }
 

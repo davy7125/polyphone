@@ -28,8 +28,8 @@ void DialogCreateElements::initialize(IdList ids)
         if (ids.count() == 1)
         {
             ui->stackedWidget->setCurrentIndex(1);
-            ui->labelOneChoice->setText(trUtf8("Créer un instrument contenant l'échantillon \"%0\" ?")
-                                        .arg(SoundfontManager::getInstance()->getQstr(ids[0], champ_name)));
+            ui->labelOneChoice->setText(trUtf8("Créer un instrument contenant l'échantillon %0 ?")
+                                        .arg("<b>" + SoundfontManager::getInstance()->getQstr(ids[0], champ_name) + "</b>"));
         }
         else
         {
@@ -44,8 +44,8 @@ void DialogCreateElements::initialize(IdList ids)
         if (ids.count() == 1)
         {
             ui->stackedWidget->setCurrentIndex(1);
-            ui->labelOneChoice->setText(trUtf8("Créer un preset contenant l'instrument \"%0\" ?")
-                                        .arg(SoundfontManager::getInstance()->getQstr(ids[0], champ_name)));
+            ui->labelOneChoice->setText(trUtf8("Créer un preset contenant l'instrument %0 ?")
+                                        .arg("<b>" + SoundfontManager::getInstance()->getQstr(ids[0], champ_name) + "</b>"));
         }
         else
         {

@@ -25,7 +25,7 @@ void ToolFrequencyPeaks::process(SoundfontManager * sm, IdList ids, AbstractTool
         return;
 
     // Header
-    QString sep = trUtf8(";");
+    QString sep = ",";
     QTextStream stream(&file);
     stream << "\"" << trUtf8("Échantillon") << "\"" << sep << "\"" << trUtf8("Pic") << "\"" << sep << "\""
            << trUtf8("Intensité") << "\"" << sep << "\"" << trUtf8("Fréquence") << "\"" << sep << "\""
@@ -42,8 +42,8 @@ void ToolFrequencyPeaks::process(SoundfontManager * sm, IdList ids, AbstractTool
             stream << endl;
             stream << "\"" << sampleName << "\"" << sep;
             stream << number << sep;
-            stream << QString::number(fi.factor).replace(".", trUtf8(",")) << sep;
-            stream << QString::number(fi.frequency).replace(".", trUtf8(",")) << sep;
+            stream << QString::number(fi.factor) << sep;
+            stream << QString::number(fi.frequency) << sep;
             stream << ContextManager::keyName()->getKeyName(fi.key) << sep;
             stream << QString::number(fi.correction);
             number++;

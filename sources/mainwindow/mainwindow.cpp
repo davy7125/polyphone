@@ -135,9 +135,6 @@ MainWindow::MainWindow(QWidget *parent) :
         DialogChangeLog * dialog = new DialogChangeLog(this);
         QTimer::singleShot(500, dialog, SLOT(show()));
     }
-    if (ContextManager::configuration()->getValue(ConfManager::SECTION_NONE, "last_version_installed", 0.).toDouble() < 2.0)
-        ContextManager::configuration()->clear();
-    ContextManager::configuration()->setValue(ConfManager::SECTION_NONE, "last_version_installed", VERSION);
 }
 
 MainWindow::~MainWindow()
@@ -181,7 +178,7 @@ void MainWindow::closeEvent(QCloseEvent *event)
         QMessageBox msgBox(this);
         msgBox.setIcon(QMessageBox::Warning);
         msgBox.setWindowTitle(trUtf8("Attention"));
-        msgBox.setText(trUtf8("<b>Sauvegarder avant de quitter ?</b>"));
+        msgBox.setText("<b>" + trUtf8("Sauvegarder avant de quitter ?") + "</b>");
         if (fileNames.count() > 1)
         {
             QString txt = trUtf8("Les fichiers suivants n'ont pas été sauvegardés :") + "<ul>";

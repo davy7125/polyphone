@@ -179,10 +179,10 @@ bool PageSmpl::updateInterface(QString editingSource, IdList selectedIds, int di
     else
     {
         if (sampleRate > 0)
-            ui->labelTaille->setText(trUtf8("(min) ") + QString::number(length) + " - " +
+            ui->labelTaille->setText(trUtf8("(min)", "minimum") + " " + QString::number(length) + " - " +
                                      QString::number((double)length / sampleRate, 'f', 3) + trUtf8("s", "unit for seconds"));
         else
-            ui->labelTaille->setText(trUtf8("(min) ") + QString::number(length));
+            ui->labelTaille->setText(trUtf8("(min)", "minumum") + " " + QString::number(length));
     }
     ui->spinStartLoop->blockSignals(true);
     ui->spinEndLoop->blockSignals(true);
@@ -261,7 +261,7 @@ bool PageSmpl::updateInterface(QString editingSource, IdList selectedIds, int di
     ui->comboLink->setEnabled(nombreElements == 1 && !lectureEnCours);
 
     // Types possibles et sélections
-    ui->comboType->addItem(trUtf8("mono"));
+    ui->comboType->addItem(trUtf8("mono", "opposite to stereo"));
     if (typeLink == monoSample || typeLink == RomMonoSample)
     {
         ui->comboType->setCurrentIndex(0);
@@ -666,7 +666,7 @@ void PageSmpl::setType(int index)
 
             // Mise à jour combobox
             ui->comboType->clear();
-            ui->comboType->addItem(trUtf8("mono"));
+            ui->comboType->addItem(trUtf8("mono", "opposite to stereo"));
             ui->comboLink->setCurrentIndex(0);
             ui->checkLectureLien->setEnabled(false);
             ui->checkLectureLien->setChecked(false);

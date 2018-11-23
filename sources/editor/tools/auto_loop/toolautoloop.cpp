@@ -47,7 +47,7 @@ QString ToolAutoLoop::getWarning()
     {
 
         if (_samplesNotLooped.size() == 1)
-            txt = trUtf8("L'échantillon « ") + _samplesNotLooped.first() + trUtf8(" » n'a pas pu être bouclé.") + "<br/>";
+            txt = trUtf8("L'échantillon « %0 » n'a pas pu être bouclé.").arg(_samplesNotLooped.first()) + "<br/>";
         else
         {
             txt = trUtf8("Les échantillons suivants n'ont pas pu être bouclés :") + "<ul>";

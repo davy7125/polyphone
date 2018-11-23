@@ -32,8 +32,10 @@
 class QWidget;
 class SoundfontManager;
 
-class Duplicator
+class Duplicator: public QObject
 {
+    Q_OBJECT
+
 public:
     Duplicator();
     ~Duplicator() {}
