@@ -264,7 +264,7 @@ void InputSfz::createSf2(int &sf2Index, QString filename, bool isChannel10)
         idSf2.indexSf2 = sf2Index;
         sm->set(idSf2, champ_name, trUtf8("Import sfz"));
     }
-    sm->set(idSf2, champ_ICMT, trUtf8("Sf2 importé depuis un fichier sfz par Polyphone"));
+    sm->set(idSf2, champ_ICMT, QString("Sf2 imported from sfz by Polyphone"));
     sm->closestAvailablePreset(idSf2, numBank, numPreset);
 
     // Création d'un preset

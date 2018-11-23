@@ -258,11 +258,9 @@ void PageSf2::countElements()
     if (unusedInst)
     {
         if (unusedInst > 1)
-            ui->label_nbInst->setText(QString::number(usedInst) +
-                                      trUtf8(" (inutilisés : ") + QString::number(unusedInst) + ")");
+            ui->label_nbInst->setText(trUtf8("%0 (inutilisés : %1)", "plural form").arg(usedInst).arg(unusedInst));
         else
-            ui->label_nbInst->setText(QString::number(usedInst) +
-                                      trUtf8(" (inutilisé : ") + QString::number(unusedInst) + ")");
+            ui->label_nbInst->setText(trUtf8("%0 (inutilisé : %1)", "singular form").arg(usedInst).arg(unusedInst));
         ui->label_nbInst->setStyleSheet(redStr);
     }
     else

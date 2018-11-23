@@ -53,7 +53,7 @@ void AbstractInput::processAsync()
             if (_sm->getQstr(EltID(elementSf2, i), champ_filenameInitial) == _fileName)
             {
                 _isSuccess = false;
-                _error = trUtf8("Le fichier est déjà ouvert");
+                _error = trUtf8("Ce fichier est déjà ouvert.");
                 return;
             }
         }
