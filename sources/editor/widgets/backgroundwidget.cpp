@@ -12,13 +12,10 @@ const double BackgroundWidget::COLOR_RATIO = 0.2;
 BackgroundWidget::BackgroundWidget(QWidget *parent) : QWidget(parent)
 {
     // Color of the decoration
-    QColor backgroundColor = ContextManager::theme()->getColor(ThemeManager::LIST_BACKGROUND);
-    QColor highlightColor = ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND);
-    QColor decorationColor = QColor((1.0 - COLOR_RATIO) * backgroundColor.red() + COLOR_RATIO * highlightColor.red(),
-                                    (1.0 - COLOR_RATIO) * backgroundColor.green() + COLOR_RATIO * highlightColor.green(),
-                                    (1.0 - COLOR_RATIO) * backgroundColor.blue() + COLOR_RATIO * highlightColor.blue());
     QMap<QString, QString> replacements;
-    replacements["currentColor"] = decorationColor.name();
+    replacements["currentColor"] = ThemeManager::mix(ContextManager::theme()->getColor(ThemeManager::LIST_BACKGROUND),
+                                                     ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND),
+                                                     COLOR_RATIO).name();
     _decoration = ContextManager::theme()->getColoredSvg(":/misc/decoration.svg", QSize(SIZE, SIZE), replacements);
 }
 

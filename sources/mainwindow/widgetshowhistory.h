@@ -49,12 +49,20 @@ public:
 signals:
     void openFile(QString file);
 
+protected:
+    void paintEvent(QPaintEvent *event);
+
 private slots:
     void on_listWidget_itemDoubleClicked(QListWidgetItem *item);
     void on_listWidget_itemSelectionChanged();
 
 private:
     Ui::WidgetShowHistory *ui;
+    QPixmap _decoration;
+    static const int SIZE;
+    static const int OFFSET_X;
+    static const int OFFSET_Y;
+    static const double COLOR_RATIO;
 };
 
 #endif // WIDGETSHOWHISTORY_H

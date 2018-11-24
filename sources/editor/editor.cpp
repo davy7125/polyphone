@@ -15,7 +15,7 @@ Editor::Editor(QWidget *parent) :
     ui->setupUi(this);
 
     // General style
-    ui->editFilter->setStyleSheet("QLineEdit{border: 0; border-radius: 2px}");
+    ui->editFilter->setStyleSheet("QLineEdit{border: 0}");
     ui->frameSearch->setStyleSheet("QFrame{background-color:" +
                                    ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND).name() + "}");
     ui->treeView->setStyleSheet("TreeView{border:1px solid " +
