@@ -25,13 +25,33 @@
 #include "widgetshowhistory.h"
 #include "ui_widgetshowhistory.h"
 #include "widgetshowhistorycell.h"
+#include "contextmanager.h"
 #include <QDateTime>
+#include <QPainter>
+
+const int WidgetShowHistory::SIZE = 900;
+const int WidgetShowHistory::OFFSET_X = -120;
+const int WidgetShowHistory::OFFSET_Y = -140;
+const double WidgetShowHistory::COLOR_RATIO = 0.2;
 
 WidgetShowHistory::WidgetShowHistory(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::WidgetShowHistory)
 {
     ui->setupUi(this);
+    ui->listWidget->viewport()->setAutoFillBackground(false);
+
+    // Decoration
+    QMap<QString, QString> replacements;
+    replacements["currentColor"] = ThemeManager::mix(ContextManager::theme()->getColor(ThemeManager::LIST_BACKGROUND),
+                                                     ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND),
+                                                     COLOR_RATIO).name();
+    _decoration = ContextManager::theme()->getColoredSvg(":/misc/decoration.svg", QSize(SIZE, SIZE), replacements);
+
+    // Flip the image
+    QMatrix matrix;
+    matrix = matrix.scale(-1, 1);
+    _decoration = _decoration.transformed(matrix);
 }
 
 WidgetShowHistory::~WidgetShowHistory()
@@ -71,3 +91,14 @@ void WidgetShowHistory::on_listWidget_itemSelectionChanged()
         ((WidgetShowHistoryCell*)ui->listWidget->itemWidget(item))->setActive(item->isSelected());
     }
 }
+
+void WidgetShowHistory::paintEvent(QPaintEvent *event)
+{
+    QStyleOption opt;
+    opt.init(this);
+    QPainter p(this);
+    p.fillRect(opt.rect, ContextManager::theme()->getColor(ThemeManager::LIST_BACKGROUND));
+    p.drawPixmap(opt.rect.right() - OFFSET_X - _decoration.width(), opt.rect.bottom() - _decoration.height() - OFFSET_Y, _decoration);
+    QWidget::paintEvent(event);
+}
+
