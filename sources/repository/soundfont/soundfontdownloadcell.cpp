@@ -32,8 +32,9 @@ void SoundfontDownloadCell::initialize(SoundfontDownloadData * data)
     // Format informations
     ui->labelInfo->setText(QString("(%0, %1)").arg(getSize(data)).arg(getDate(data)));
 
-    // Store the id
+    // Store data
     _id = data->getId();
+    _name = data->getName();
 }
 
 QString SoundfontDownloadCell::getSize(SoundfontDownloadData * data)
@@ -58,5 +59,5 @@ QString SoundfontDownloadCell::getDate(SoundfontDownloadData * data)
 
 void SoundfontDownloadCell::on_pushDownload_clicked()
 {
-    DownloadManager::getInstance()->download(_id);
+    DownloadManager::getInstance()->download(_id, _name);
 }

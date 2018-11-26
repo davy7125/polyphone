@@ -27,6 +27,7 @@ private:
 
     Ui::SoundfontDownloadCell *ui;
     int _id;
+    QString _name;
 };
 
 #endif // SOUNDFONTDOWNLOADCELL_H

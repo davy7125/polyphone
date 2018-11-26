@@ -45,7 +45,8 @@ void SoundfontCommentCell::initialize(SoundfontCommentData * data, int level)
         QColor color = ThemeManager::mix(
                     ContextManager::theme()->getColor(ThemeManager::WINDOW_TEXT),
                     ContextManager::theme()->getColor(ThemeManager::WINDOW_BACKGROUND),
-                    (double)i / maxLevel * level);
+                    (double)i / maxLevel);
+
         verticalBar->setStyleSheet("QWidget{margin-left: 6px; margin-right: 14px;background-color: " + color.name() + ";}");
         ui->leftBars->addWidget(verticalBar);
     }
