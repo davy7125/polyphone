@@ -14,11 +14,6 @@ public:
         return ":/tool/spatialization.svg";
     }
 
-    QString getLabel() const override
-    {
-        return trUtf8("Spatialiser le son...");
-    }
-
     QString getCategory() const override
     {
         return trUtf8("Édition rapide");
@@ -35,6 +30,12 @@ public:
 
     /// Process an element
     void process(SoundfontManager * sm, EltID id, AbstractToolParameters * parameters) override;
+
+protected:
+    QString getLabelInternal() const override
+    {
+        return trUtf8("Spatialiser le son");
+    }
 
 private:
     bool _isInst;

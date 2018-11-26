@@ -18,11 +18,6 @@ public:
         return ":/tool/link.svg";
     }
 
-    QString getLabel() const override
-    {
-        return trUtf8("Trouver un lien");
-    }
-
     QString getCategory() const override
     {
         return trUtf8("Échantillons stéréo");
@@ -39,6 +34,12 @@ public:
 
     /// Process an element
     void process(SoundfontManager * sm, EltID id, AbstractToolParameters * parameters) override;
+
+protected:
+    QString getLabelInternal() const override
+    {
+        return trUtf8("Trouver un lien");
+    }
 
 private:
     void scan(SoundfontManager * sm, int indexSf2);

@@ -22,7 +22,7 @@ public:
 
     /// Icon, label and category displayed to the user to describe the tool
     virtual QString getIconName() const = 0;
-    virtual QString getLabel() const = 0;
+    QString getLabel() const;
     virtual QString getCategory() const = 0;
 
     /// Internal identifier
@@ -38,6 +38,9 @@ signals:
     void finished(bool updateNeeded);
 
 protected:
+    /// Get the name of the tool. It will be then followed by "..." if there is a GUI
+    virtual QString getLabelInternal() const = 0;
+
     /// Return true if the tool can be used on the specified ids
     virtual bool isCompatible(IdList ids) = 0;
 

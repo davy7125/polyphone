@@ -637,7 +637,7 @@ de télécharger le contenu</string>
          </font>
         </property>
         <property name="text">
-         <string>labelTitle</string>
+         <string notr="true">labelTitle</string>
         </property>
        </widget>
       </item>
@@ -669,7 +669,7 @@ de télécharger le contenu</string>
          </size>
         </property>
         <property name="text">
-         <string>0</string>
+         <string notr="true">0</string>
         </property>
         <property name="alignment">
          <set>Qt::AlignCenter</set>
@@ -732,15 +732,15 @@ de télécharger le contenu</string>
    <header>elidedlabel.h</header>
   </customwidget>
   <customwidget>
-   <class>FiveStarsWidget</class>
-   <extends>QWidget</extends>
-   <header>fivestarswidget.h</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
    <class>AttributeFlow</class>
    <extends>QWidget</extends>
    <header>attributeflow.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>FiveStarsWidget</class>
+   <extends>QWidget</extends>
+   <header>fivestarswidget.h</header>
    <container>1</container>
   </customwidget>
   <customwidget>

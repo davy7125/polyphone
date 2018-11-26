@@ -18,11 +18,6 @@ public:
         return ":/tool/unlink.svg";
     }
 
-    QString getLabel() const override
-    {
-        return trUtf8("Dissocier");
-    }
-
     QString getCategory() const override
     {
         return trUtf8("Échantillons stéréo");
@@ -36,6 +31,12 @@ public:
 
     /// Process an element
     void process(SoundfontManager * sm, EltID id, AbstractToolParameters * parameters) override;
+
+protected:
+    QString getLabelInternal() const override
+    {
+        return trUtf8("Dissocier");
+    }
 
 private:
     void unlink(SoundfontManager * sm, EltID idSample);

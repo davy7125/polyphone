@@ -14,11 +14,6 @@ public:
         return ":/tool/preset_list.svg";
     }
 
-    QString getLabel() const override
-    {
-        return trUtf8("Exporter la liste des presets...");
-    }
-
     QString getCategory() const override
     {
         return trUtf8("Utilitaire");
@@ -32,6 +27,12 @@ public:
 
     /// Process an element
     void process(SoundfontManager * sm, EltID id, AbstractToolParameters * parameters) override;
+
+protected:
+    QString getLabelInternal() const override
+    {
+        return trUtf8("Exporter la liste des presets");
+    }
 };
 
 #endif // TOOLPRESETLIST_H

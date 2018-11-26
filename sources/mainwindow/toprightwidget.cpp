@@ -2,6 +2,7 @@
 #include "ui_toprightwidget.h"
 #include "mainmenu.h"
 #include "contextmanager.h"
+#include "usermanager.h"
 
 TopRightWidget::TopRightWidget(QWidget *parent) :
     QWidget(parent),
@@ -89,11 +90,12 @@ void TopRightWidget::userStateChanged(UserManager::ConnectionState state)
         // Show the user button
         ui->labelWarning->hide();
         ui->pushUser->show();
+        ui->pushUser->setToolTip(trUtf8("Bienvenue %0").arg(UserManager::getInstance()->getUsername()));
         ui->spinner->hide();
         break;
     case UserManager::BANNED:
         // Show an error "banned account"
-        ui->labelWarning->setToolTip(trUtf8("Ce compte a été banni"));
+        ui->labelWarning->setToolTip(trUtf8("Ce compte a été banni."));
         ui->labelWarning->setPixmap(ContextManager::theme()->getColoredSvg(":/icons/skull.svg", QSize(20, 20), _colorReplacement));
         ui->labelWarning->show();
         ui->pushUser->hide();

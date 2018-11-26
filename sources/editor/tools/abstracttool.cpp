@@ -81,3 +81,8 @@ void AbstractTool::onFinished(bool updateNeeded)
     if (updateNeeded)
         s_sm->endEditing("tool:" + getIdentifier());
 }
+
+QString AbstractTool::getLabel() const
+{
+    return this->getLabelInternal() + (_toolGui == nullptr ? "" : "...");
+}

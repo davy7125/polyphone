@@ -14,11 +14,6 @@ public:
         return ":/tool/monitor.svg";
     }
 
-    QString getLabel() const override
-    {
-        return trUtf8("Visualiser les paramètres...");
-    }
-
     QString getCategory() const override
     {
         return trUtf8("Analyse");
@@ -31,6 +26,11 @@ public:
     }
 
 protected:
+    QString getLabelInternal() const override
+    {
+        return trUtf8("Visualiser les paramètres");
+    }
+
     /// Return true if the tool can be used on the specified ids
     bool isCompatible(IdList ids) override;
 

@@ -14,11 +14,6 @@ public:
         return ":/tool/transpose2.svg";
     }
 
-    QString getLabel() const override
-    {
-        return trUtf8("Transposer...");
-    }
-
     QString getCategory() const override
     {
         return trUtf8("Édition rapide");
@@ -37,6 +32,11 @@ public:
     void process(SoundfontManager * sm, EltID id, AbstractToolParameters * parameters) override;
 
 protected:
+    QString getLabelInternal() const override
+    {
+        return trUtf8("Transposer");
+    }
+
     /// Get the warning to display after the tool is run
     QString getWarning() override;
 
