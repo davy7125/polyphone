@@ -6,6 +6,8 @@
 #include <QMutex>
 #include <QUrlQuery>
 
+const int UrlReader::TIMEOUT_MS = 5000;
+
 UrlReader::UrlReader(QString url) :
     _url(url),
     _webCtrl(new QNetworkAccessManager(this)),
@@ -52,7 +54,8 @@ void UrlReader::download()
     if (_reply != nullptr)
         _reply->deleteLater();
     _reply = _webCtrl->get(QNetworkRequest(url));
-    _timer->start(5000);
+    connect(_reply, SIGNAL(downloadProgress(qint64,qint64)), this, SLOT(downloadProgressed(qint64, qint64)));
+    _timer->start(TIMEOUT_MS);
 }
 
 void UrlReader::fileDownloaded(QNetworkReply * pReply)
@@ -114,4 +117,11 @@ void UrlReader::onTimeout()
     _reply->abort();
 
     emit(downloadCompleted("timeout"));
+}
+
+void UrlReader::downloadProgressed(qint64 bytesReceived, qint64 bytesTotal)
+{
+    _timer->start(TIMEOUT_MS);
+    if (bytesTotal != 0)
+        emit(progressChanged(100 * bytesReceived / bytesTotal));
 }
