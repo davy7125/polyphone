@@ -37,7 +37,7 @@ class WidgetShowHistory : public QWidget
     Q_OBJECT
 
 public:
-    explicit WidgetShowHistory(QWidget *parent = 0);
+    explicit WidgetShowHistory(QWidget *parent = nullptr);
     ~WidgetShowHistory();
 
     /// Clear all files

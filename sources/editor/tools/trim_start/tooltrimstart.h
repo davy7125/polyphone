@@ -15,11 +15,6 @@ public:
         return ":/tool/remove_blank.svg";
     }
 
-    QString getLabel() const override
-    {
-        return trUtf8("Enlever le silence initial");
-    }
-
     QString getCategory() const override
     {
         return trUtf8("Traitement des échantillons");
@@ -36,6 +31,12 @@ public:
 
     /// Trim a sample
     static void trim(EltID id);
+
+protected:
+    QString getLabelInternal() const override
+    {
+        return trUtf8("Enlever le silence initial");
+    }
 };
 
 #endif // TOOLTRIMSTART_H

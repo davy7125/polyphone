@@ -3362,14 +3362,9 @@ d&apos;échantillonnage</source>
     </message>
     <message>
         <location filename="editor/pagesmpl.cpp" line="182"/>
-        <source>(min)</source>
-        <comment>minimum</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="editor/pagesmpl.cpp" line="185"/>
         <source>(min)</source>
-        <comment>minumum</comment>
+        <comment>minimum</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -4284,48 +4279,6 @@ de télécharger la liste</source>
     </message>
 </context>
 <context>
-    <name>SoundfontCell</name>
-    <message>
-        <location filename="repository/daily/soundfontcell.ui" line="53"/>
-        <source>labelTitle</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="repository/daily/soundfontcell.ui" line="118"/>
-        <source>labelAuthor</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>SoundfontCellFull</name>
-    <message>
-        <location filename="repository/browser/soundfontcellfull.ui" line="59"/>
-        <source>labelTitle</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="repository/browser/soundfontcellfull.ui" line="91"/>
-        <location filename="repository/browser/soundfontcellfull.ui" line="126"/>
-        <source>0</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="repository/browser/soundfontcellfull.ui" line="191"/>
-        <source>labelAuthor</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="repository/browser/soundfontcellfull.ui" line="220"/>
-        <source>labelDate</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="repository/browser/soundfontcellfull.ui" line="255"/>
-        <source>labelLicense</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>SoundfontComment</name>
     <message>
         <location filename="repository/soundfont/soundfontcomment.cpp" line="51"/>
@@ -4437,12 +4390,6 @@ de télécharger le contenu</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="repository/soundfont/soundfontviewer.ui" line="640"/>
-        <source>labelTitle</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="repository/soundfont/soundfontviewer.ui" line="672"/>
         <location filename="repository/soundfont/soundfontviewer.ui" line="707"/>
         <source>0</source>
         <translation type="unfinished"></translation>
@@ -4522,12 +4469,12 @@ de télécharger le contenu</source>
 <context>
     <name>ToolAutoDistribution</name>
     <message>
-        <location filename="editor/tools/auto_distribution/toolautodistribution.h" line="19"/>
+        <location filename="editor/tools/auto_distribution/toolautodistribution.h" line="34"/>
         <source>Répartir automatiquement les échantillons</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/tools/auto_distribution/toolautodistribution.h" line="24"/>
+        <location filename="editor/tools/auto_distribution/toolautodistribution.h" line="19"/>
         <source>Édition rapide</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4550,12 +4497,12 @@ de télécharger le contenu</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/tools/auto_loop/toolautoloop.h" line="21"/>
+        <location filename="editor/tools/auto_loop/toolautoloop.h" line="39"/>
         <source>Bouclage automatique</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/tools/auto_loop/toolautoloop.h" line="26"/>
+        <location filename="editor/tools/auto_loop/toolautoloop.h" line="21"/>
         <source>Traitement des échantillons</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4568,12 +4515,12 @@ de télécharger le contenu</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/tools/balance_adjustment/toolbalanceadjustment.h" line="21"/>
+        <location filename="editor/tools/balance_adjustment/toolbalanceadjustment.h" line="39"/>
         <source>Équilibrer la balance</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/tools/balance_adjustment/toolbalanceadjustment.h" line="26"/>
+        <location filename="editor/tools/balance_adjustment/toolbalanceadjustment.h" line="21"/>
         <source>Échantillons stéréo</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4582,12 +4529,12 @@ de télécharger le contenu</source>
     <name>ToolCelesteTuning</name>
     <message>
         <location filename="editor/tools/celeste_tuning/toolcelestetuning.h" line="20"/>
-        <source>Désaccorder...</source>
+        <source>Édition rapide</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/tools/celeste_tuning/toolcelestetuning.h" line="25"/>
-        <source>Édition rapide</source>
+        <location filename="editor/tools/celeste_tuning/toolcelestetuning.h" line="35"/>
+        <source>Désaccorder</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -4618,12 +4565,12 @@ de télécharger le contenu</source>
     <name>ToolChangeAttenuation</name>
     <message>
         <location filename="editor/tools/change_attenuation/toolchangeattenuation.h" line="20"/>
-        <source>Modifier les atténuations...</source>
+        <source>Édition rapide</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/tools/change_attenuation/toolchangeattenuation.h" line="25"/>
-        <source>Édition rapide</source>
+        <location filename="editor/tools/change_attenuation/toolchangeattenuation.h" line="38"/>
+        <source>Modifier les atténuations</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -4654,12 +4601,12 @@ de télécharger le contenu</source>
     <name>ToolChangeVolume</name>
     <message>
         <location filename="editor/tools/change_volume/toolchangevolume.h" line="20"/>
-        <source>Modifier volume...</source>
+        <source>Traitement des échantillons</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/tools/change_volume/toolchangevolume.h" line="25"/>
-        <source>Traitement des échantillons</source>
+        <location filename="editor/tools/change_volume/toolchangevolume.h" line="35"/>
+        <source>Modifier volume</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -4700,12 +4647,12 @@ de télécharger le contenu</source>
     </message>
     <message>
         <location filename="editor/tools/chords/toolchords.h" line="24"/>
-        <source>Créer des accords...</source>
+        <source>Transformation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/tools/chords/toolchords.h" line="29"/>
-        <source>Transformation</source>
+        <location filename="editor/tools/chords/toolchords.h" line="39"/>
+        <source>Créer des accords</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -4839,12 +4786,12 @@ de télécharger le contenu</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/tools/clean_unused_elements/toolcleanunused.h" line="22"/>
+        <location filename="editor/tools/clean_unused_elements/toolcleanunused.h" line="43"/>
         <source>Enlever les éléments non utilisés</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/tools/clean_unused_elements/toolcleanunused.h" line="27"/>
+        <location filename="editor/tools/clean_unused_elements/toolcleanunused.h" line="22"/>
         <source>Nettoyage</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4863,12 +4810,12 @@ de télécharger le contenu</source>
     </message>
     <message>
         <location filename="editor/tools/division_duplication/tooldivisionduplication.h" line="19"/>
-        <source>Dupliquer les divisions...</source>
+        <source>Transformation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/tools/division_duplication/tooldivisionduplication.h" line="24"/>
-        <source>Transformation</source>
+        <location filename="editor/tools/division_duplication/tooldivisionduplication.h" line="37"/>
+        <source>Dupliquer les divisions</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -4899,12 +4846,12 @@ de télécharger le contenu</source>
     </message>
     <message>
         <location filename="editor/tools/external_command/toolexternalcommand.h" line="24"/>
-        <source>Commande externe...</source>
+        <source>Traitement des échantillons</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/tools/external_command/toolexternalcommand.h" line="29"/>
-        <source>Traitement des échantillons</source>
+        <location filename="editor/tools/external_command/toolexternalcommand.h" line="42"/>
+        <source>Commande externe</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -4961,12 +4908,18 @@ de télécharger le contenu</source>
     <name>ToolFrequencyFilter</name>
     <message>
         <location filename="editor/tools/frequency_filter/toolfrequencyfilter.h" line="20"/>
-        <source>Filtrer des fréquences...</source>
+        <source>Traitement des échantillons</source>
+        <oldsource>Filtrer des fréquences...</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/tools/frequency_filter/toolfrequencyfilter.h" line="25"/>
+        <location filename="editor/tools/frequency_filter/toolfrequencyfilter.h" line="20"/>
         <source>Traitement des échantillons</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="editor/tools/frequency_filter/toolfrequencyfilter.h" line="35"/>
+        <source>Filtrer des fréquences</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5016,12 +4969,12 @@ de télécharger le contenu</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/tools/frequency_peaks/toolfrequencypeaks.h" line="19"/>
+        <location filename="editor/tools/frequency_peaks/toolfrequencypeaks.h" line="34"/>
         <source>Visualiser les pics de fréquences</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/tools/frequency_peaks/toolfrequencypeaks.h" line="24"/>
+        <location filename="editor/tools/frequency_peaks/toolfrequencypeaks.h" line="19"/>
         <source>Analyse</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5088,12 +5041,12 @@ de télécharger le contenu</source>
     <name>ToolGlobalSettings</name>
     <message>
         <location filename="editor/tools/global_settings/toolglobalsettings.h" line="20"/>
-        <source>Paramètrer en fonction des notes...</source>
+        <source>Édition rapide</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/tools/global_settings/toolglobalsettings.h" line="25"/>
-        <source>Édition rapide</source>
+        <location filename="editor/tools/global_settings/toolglobalsettings.h" line="38"/>
+        <source>Paramètrer en fonction des notes</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5188,12 +5141,12 @@ de télécharger le contenu</source>
 <context>
     <name>ToolLinkSample</name>
     <message>
-        <location filename="editor/tools/link_sample/toollinksample.h" line="23"/>
+        <location filename="editor/tools/link_sample/toollinksample.h" line="41"/>
         <source>Trouver un lien</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/tools/link_sample/toollinksample.h" line="28"/>
+        <location filename="editor/tools/link_sample/toollinksample.h" line="23"/>
         <source>Échantillons stéréo</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5207,12 +5160,12 @@ de télécharger le contenu</source>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation.h" line="24"/>
-        <source>Créer une mixture...</source>
+        <source>Transformation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/tools/mixture_creation/toolmixturecreation.h" line="29"/>
-        <source>Transformation</source>
+        <location filename="editor/tools/mixture_creation/toolmixturecreation.h" line="39"/>
+        <source>Créer une mixture</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5364,12 +5317,12 @@ de télécharger le contenu</source>
     <name>ToolMonitor</name>
     <message>
         <location filename="editor/tools/monitor/toolmonitor.h" line="19"/>
-        <source>Visualiser les paramètres...</source>
+        <source>Analyse</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/tools/monitor/toolmonitor.h" line="24"/>
-        <source>Analyse</source>
+        <location filename="editor/tools/monitor/toolmonitor.h" line="31"/>
+        <source>Visualiser les paramètres</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5410,12 +5363,12 @@ de télécharger le contenu</source>
     <name>ToolPresetList</name>
     <message>
         <location filename="editor/tools/preset_list/toolpresetlist.h" line="19"/>
-        <source>Exporter la liste des presets...</source>
+        <source>Utilitaire</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/tools/preset_list/toolpresetlist.h" line="24"/>
-        <source>Utilitaire</source>
+        <location filename="editor/tools/preset_list/toolpresetlist.h" line="34"/>
+        <source>Exporter la liste des presets</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5451,12 +5404,12 @@ de télécharger le contenu</source>
     <name>ToolRelease</name>
     <message>
         <location filename="editor/tools/release/toolrelease.h" line="20"/>
-        <source>Release naturelle...</source>
+        <source>Édition rapide</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/tools/release/toolrelease.h" line="25"/>
-        <source>Édition rapide</source>
+        <location filename="editor/tools/release/toolrelease.h" line="35"/>
+        <source>Release naturelle</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5496,12 +5449,12 @@ de télécharger le contenu</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/tools/remove_mods/toolremovemods.h" line="19"/>
+        <location filename="editor/tools/remove_mods/toolremovemods.h" line="56"/>
         <source>Enlever les modulateurs</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/tools/remove_mods/toolremovemods.h" line="24"/>
+        <location filename="editor/tools/remove_mods/toolremovemods.h" line="19"/>
         <source>Nettoyage</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5514,12 +5467,12 @@ de télécharger le contenu</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/tools/sample_export/toolsampleexport.h" line="24"/>
+        <location filename="editor/tools/sample_export/toolsampleexport.h" line="42"/>
         <source>Exporter au format wav</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/tools/sample_export/toolsampleexport.h" line="29"/>
+        <location filename="editor/tools/sample_export/toolsampleexport.h" line="24"/>
         <source>Fichiers</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5528,12 +5481,12 @@ de télécharger le contenu</source>
     <name>ToolSoundSpatialization</name>
     <message>
         <location filename="editor/tools/sound_spatialization/toolsoundspatialization.h" line="19"/>
-        <source>Spatialiser le son...</source>
+        <source>Édition rapide</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/tools/sound_spatialization/toolsoundspatialization.h" line="24"/>
-        <source>Édition rapide</source>
+        <location filename="editor/tools/sound_spatialization/toolsoundspatialization.h" line="37"/>
+        <source>Spatialiser le son</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5609,12 +5562,12 @@ de télécharger le contenu</source>
     </message>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport.h" line="20"/>
-        <source>Exporter...</source>
+        <source>Fichiers</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/tools/soundfont_export/toolsoundfontexport.h" line="25"/>
-        <source>Fichiers</source>
+        <location filename="editor/tools/soundfont_export/toolsoundfontexport.h" line="35"/>
+        <source>Exporter</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5728,12 +5681,12 @@ de télécharger le contenu</source>
     </message>
     <message>
         <location filename="editor/tools/transpose/tooltranspose.h" line="19"/>
-        <source>Transposer...</source>
+        <source>Édition rapide</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/tools/transpose/tooltranspose.h" line="24"/>
-        <source>Édition rapide</source>
+        <location filename="editor/tools/transpose/tooltranspose.h" line="37"/>
+        <source>Transposer</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5741,12 +5694,12 @@ de télécharger le contenu</source>
     <name>ToolTransposeSmpl</name>
     <message>
         <location filename="editor/tools/transpose_smpl/tooltransposesmpl.h" line="20"/>
-        <source>Transposer...</source>
+        <source>Traitement des échantillons</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/tools/transpose_smpl/tooltransposesmpl.h" line="25"/>
-        <source>Traitement des échantillons</source>
+        <location filename="editor/tools/transpose_smpl/tooltransposesmpl.h" line="35"/>
+        <source>Transposer</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5774,12 +5727,12 @@ de télécharger le contenu</source>
 <context>
     <name>ToolTrimEnd</name>
     <message>
-        <location filename="editor/tools/trim_end/tooltrimend.h" line="20"/>
+        <location filename="editor/tools/trim_end/tooltrimend.h" line="38"/>
         <source>Ajuster à la fin de boucle</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/tools/trim_end/tooltrimend.h" line="25"/>
+        <location filename="editor/tools/trim_end/tooltrimend.h" line="20"/>
         <source>Traitement des échantillons</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5787,12 +5740,12 @@ de télécharger le contenu</source>
 <context>
     <name>ToolTrimStart</name>
     <message>
-        <location filename="editor/tools/trim_start/tooltrimstart.h" line="20"/>
+        <location filename="editor/tools/trim_start/tooltrimstart.h" line="38"/>
         <source>Enlever le silence initial</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/tools/trim_start/tooltrimstart.h" line="25"/>
+        <location filename="editor/tools/trim_start/tooltrimstart.h" line="20"/>
         <source>Traitement des échantillons</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5800,23 +5753,18 @@ de télécharger le contenu</source>
 <context>
     <name>ToolUnlinkSample</name>
     <message>
-        <location filename="editor/tools/unlink_sample/toolunlinksample.h" line="23"/>
+        <location filename="editor/tools/unlink_sample/toolunlinksample.h" line="38"/>
         <source>Dissocier</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/tools/unlink_sample/toolunlinksample.h" line="28"/>
+        <location filename="editor/tools/unlink_sample/toolunlinksample.h" line="23"/>
         <source>Échantillons stéréo</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>TopRightWidget</name>
-    <message>
-        <location filename="mainwindow/toprightwidget.ui" line="20"/>
-        <source>Form</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <location filename="mainwindow/toprightwidget.ui" line="71"/>
         <source>Espace utilisateur</source>
@@ -5828,13 +5776,18 @@ de télécharger le contenu</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow/toprightwidget.cpp" line="82"/>
+        <location filename="mainwindow/toprightwidget.cpp" line="83"/>
         <source>Souscrivez à un compte Premium pour bénéficier de toutes les fonctionnalités !</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow/toprightwidget.cpp" line="96"/>
-        <source>Ce compte a été banni</source>
+        <location filename="mainwindow/toprightwidget.cpp" line="93"/>
+        <source>Bienvenue %0</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow/toprightwidget.cpp" line="98"/>
+        <source>Ce compte a été banni.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5931,8 +5884,8 @@ de télécharger le contenu</source>
     <name>UserManager</name>
     <message>
         <location filename="repository/usermanager.cpp" line="94"/>
-        <location filename="repository/usermanager.cpp" line="116"/>
-        <location filename="repository/usermanager.cpp" line="122"/>
+        <location filename="repository/usermanager.cpp" line="120"/>
+        <location filename="repository/usermanager.cpp" line="126"/>
         <source>Problème serveur</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5965,6 +5918,11 @@ de télécharger le contenu</source>
     <message>
         <location filename="mainwindow/widgetshowhistory.ui" line="14"/>
         <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow/widgetshowhistory.ui" line="84"/>
+        <source>La liste est vide !</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

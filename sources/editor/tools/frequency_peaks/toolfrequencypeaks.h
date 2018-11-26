@@ -14,11 +14,6 @@ public:
         return ":/tool/peak_export.svg";
     }
 
-    QString getLabel() const override
-    {
-        return trUtf8("Visualiser les pics de fréquences");
-    }
-
     QString getCategory() const override
     {
         return trUtf8("Analyse");
@@ -34,6 +29,11 @@ public:
     void process(SoundfontManager * sm, IdList ids, AbstractToolParameters * parameters) override;
 
 protected:
+    QString getLabelInternal() const override
+    {
+        return trUtf8("Visualiser les pics de fréquences");
+    }
+
     /// Return true if the tool can be used on the specified ids
     bool isCompatible(IdList ids) override;
 

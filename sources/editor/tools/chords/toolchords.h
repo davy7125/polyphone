@@ -19,11 +19,6 @@ public:
         return ":/tool/chord.svg";
     }
 
-    QString getLabel() const override
-    {
-        return trUtf8("Créer des accords...");
-    }
-
     QString getCategory() const override
     {
         return trUtf8("Transformation");
@@ -39,6 +34,11 @@ signals:
     void elementProcessed(EltID idSmpl, int key, int minKey, double minAtt);
 
 protected:
+    QString getLabelInternal() const override
+    {
+        return trUtf8("Créer des accords");
+    }
+
     /// Return true if the tool can be used on the specified ids
     bool isCompatible(IdList ids) override;
 

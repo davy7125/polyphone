@@ -16,11 +16,6 @@ public:
         return ":/tool/balance.svg";
     }
 
-    QString getLabel() const override
-    {
-        return trUtf8("Équilibrer la balance");
-    }
-
     QString getCategory() const override
     {
         return trUtf8("Échantillons stéréo");
@@ -39,6 +34,11 @@ public:
     void process(SoundfontManager * sm, EltID id, AbstractToolParameters * parameters) override;
 
 protected:
+    QString getLabelInternal() const override
+    {
+        return trUtf8("Équilibrer la balance");
+    }
+
     /// Get the warning to display after the tool is run
     QString getWarning() override;
 

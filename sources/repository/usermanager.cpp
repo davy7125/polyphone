@@ -107,6 +107,10 @@ void UserManager::userDataAvailable(QString error)
                     _connectionState = CONNECTED_PREMIUM;
                 else
                     _connectionState = CONNECTED;
+                if (data.contains("username"))
+                    _username = data.value("username").toString();
+                else
+                    _username = "";
                 break;
             case 3:
                 _error = "";

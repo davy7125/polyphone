@@ -36,6 +36,9 @@ public:
     /// Get the error if the state is FAILED
     QString error();
 
+    /// Get the current user name
+    QString getUsername() { return _username; }
+
 signals:
     void connectionStateChanged(UserManager::ConnectionState state);
 
@@ -50,6 +53,7 @@ private:
     QString _error;
     QMutex _mutex;
     UrlReaderJson * _userReaderJson;
+    QString _username;
     static UserManager * s_instance;
 };
 

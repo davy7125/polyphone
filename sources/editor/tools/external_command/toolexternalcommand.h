@@ -19,11 +19,6 @@ public:
         return ":/tool/command_line.svg";
     }
 
-    QString getLabel() const override
-    {
-        return trUtf8("Commande externe...");
-    }
-
     QString getCategory() const override
     {
         return trUtf8("Traitement des échantillons");
@@ -42,6 +37,11 @@ public:
     void process(SoundfontManager * sm, EltID id, AbstractToolParameters * parameters) override;
 
 protected:
+    QString getLabelInternal() const override
+    {
+        return trUtf8("Commande externe");
+    }
+
     /// Get the warning to display after the tool is run
     QString getWarning() override;
 

@@ -62,6 +62,8 @@ WidgetShowHistory::~WidgetShowHistory()
 void WidgetShowHistory::clear()
 {
     ui->listWidget->clear();
+    ui->listWidget->hide();
+    ui->frameNoHistory->show();
 }
 
 void WidgetShowHistory::addFile(QString path, QDateTime datetime)
@@ -74,6 +76,9 @@ void WidgetShowHistory::addFile(QString path, QDateTime datetime)
     item->setSizeHint(QSize(cell->width(), cell->height()));
     ui->listWidget->addItem(item);
     ui->listWidget->setItemWidget(item, cell);
+
+    ui->frameNoHistory->hide();
+    ui->listWidget->show();
 }
 
 void WidgetShowHistory::on_listWidget_itemDoubleClicked(QListWidgetItem *item)
