@@ -17,11 +17,6 @@ public:
         return ":/tool/remove_unused.svg";
     }
 
-    QString getLabel() const override
-    {
-        return trUtf8("Enlever les éléments non utilisés");
-    }
-
     QString getCategory() const override
     {
         return trUtf8("Nettoyage");
@@ -41,6 +36,12 @@ public:
 
     /// Get a confirmation message after the tool is run
     QString getConfirmation() override;
+
+protected:
+    QString getLabelInternal() const override
+    {
+        return trUtf8("Enlever les éléments non utilisés");
+    }
 
 private:
     int _unusedSmpl;

@@ -15,11 +15,6 @@ public:
         return ":/tool/global_setting.svg";
     }
 
-    QString getLabel() const override
-    {
-        return trUtf8("Paramètrer en fonction des notes...");
-    }
-
     QString getCategory() const override
     {
         return trUtf8("Édition rapide");
@@ -36,6 +31,12 @@ public:
 
     /// Process an element
     void process(SoundfontManager * sm, EltID id, AbstractToolParameters * parameters) override;
+
+protected:
+    QString getLabelInternal() const override
+    {
+        return trUtf8("Paramètrer en fonction des notes");
+    }
 
 private:
     bool _isInst;

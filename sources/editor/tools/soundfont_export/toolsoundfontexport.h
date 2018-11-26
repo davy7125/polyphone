@@ -15,11 +15,6 @@ public:
         return ":/tool/file-export.svg";
     }
 
-    QString getLabel() const override
-    {
-        return trUtf8("Exporter...");
-    }
-
     QString getCategory() const override
     {
         return trUtf8("Fichiers");
@@ -35,6 +30,11 @@ public:
     void process(SoundfontManager * sm, IdList ids, AbstractToolParameters * parameters) override;
 
 protected:
+    QString getLabelInternal() const override
+    {
+        return trUtf8("Exporter");
+    }
+
     /// Return true if the tool can be used on the specified ids
     bool isCompatible(IdList ids) override;
 

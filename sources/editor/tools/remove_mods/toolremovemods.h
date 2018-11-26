@@ -14,11 +14,6 @@ public:
         return ":/tool/remove_mods.svg";
     }
 
-    QString getLabel() const override
-    {
-        return trUtf8("Enlever les modulateurs");
-    }
-
     QString getCategory() const override
     {
         return trUtf8("Nettoyage");
@@ -54,6 +49,12 @@ public:
 
     /// Get the warning to display after the tool is run
     QString getWarning() override;
+
+protected:
+    QString getLabelInternal() const override
+    {
+        return trUtf8("Enlever les modulateurs");
+    }
 
 private:
     enum DeletionType

@@ -182,7 +182,7 @@ bool PageSmpl::updateInterface(QString editingSource, IdList selectedIds, int di
             ui->labelTaille->setText(trUtf8("(min)", "minimum") + " " + QString::number(length) + " - " +
                                      QString::number((double)length / sampleRate, 'f', 3) + trUtf8("s", "unit for seconds"));
         else
-            ui->labelTaille->setText(trUtf8("(min)", "minumum") + " " + QString::number(length));
+            ui->labelTaille->setText(trUtf8("(min)", "minimum") + " " + QString::number(length));
     }
     ui->spinStartLoop->blockSignals(true);
     ui->spinEndLoop->blockSignals(true);

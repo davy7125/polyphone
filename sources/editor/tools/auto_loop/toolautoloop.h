@@ -16,11 +16,6 @@ public:
         return ":/tool/loop.svg";
     }
 
-    QString getLabel() const override
-    {
-        return trUtf8("Bouclage automatique");
-    }
-
     QString getCategory() const override
     {
         return trUtf8("Traitement des échantillons");
@@ -39,6 +34,11 @@ public:
     void process(SoundfontManager * sm, EltID id, AbstractToolParameters * parameters) override;
 
 protected:
+    QString getLabelInternal() const override
+    {
+        return trUtf8("Bouclage automatique");
+    }
+
     /// Get the warning to display after the tool is run
     QString getWarning() override;
 

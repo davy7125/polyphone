@@ -15,11 +15,6 @@ public:
         return ":/tool/filter_frequencies.svg";
     }
 
-    QString getLabel() const override
-    {
-        return trUtf8("Filtrer des fréquences...");
-    }
-
     QString getCategory() const override
     {
         return trUtf8("Traitement des échantillons");
@@ -33,6 +28,12 @@ public:
 
     /// Process an element
     void process(SoundfontManager * sm, EltID id, AbstractToolParameters * parameters) override;
+
+protected:
+    QString getLabelInternal() const override
+    {
+        return trUtf8("Filtrer des fréquences");
+    }
 };
 
 #endif // TOOLFREQUENCYFILTER_H

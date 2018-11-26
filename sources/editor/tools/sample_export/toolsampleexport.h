@@ -19,11 +19,6 @@ public:
         return ":/tool/file-audio.svg";
     }
 
-    QString getLabel() const override
-    {
-        return trUtf8("Exporter au format wav");
-    }
-
     QString getCategory() const override
     {
         return trUtf8("Fichiers");
@@ -40,6 +35,12 @@ public:
 
     /// Process an element
     void process(SoundfontManager * sm, EltID id, AbstractToolParameters * parameters) override;
+
+protected:
+    QString getLabelInternal() const override
+    {
+        return trUtf8("Exporter au format wav");
+    }
 
 private:
     QString getFilePath(SoundfontManager *sm, EltID id1, EltID id2, bool isStereo);
