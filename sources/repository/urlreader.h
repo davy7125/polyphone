@@ -36,6 +36,9 @@ signals:
     // The download is successful when the error is empty
     void downloadCompleted(QString error);
 
+    // Signal emitted when the download is going on
+    void progressChanged(int percent);
+
 protected:
     // This will be specific for each specialized url reader
     virtual void processData() {}
@@ -43,6 +46,7 @@ protected:
 private slots:
     void fileDownloaded(QNetworkReply* pReply);
     void onTimeout();
+    void downloadProgressed(qint64 bytesReceived, qint64 bytesTotal);
 
 private:
     QString _url;
@@ -53,6 +57,8 @@ private:
     QNetworkReply* _reply;
     bool _queryProcessed;
     QMutex * _mutex;
+
+    static const int TIMEOUT_MS;
 };
 
 #endif // URLREADER_H

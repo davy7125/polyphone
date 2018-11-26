@@ -3,6 +3,7 @@
 #include "urlreaderjson.h"
 #include "repositorymanager.h"
 #include "contextmanager.h"
+#include "usermanager.h"
 #include <QVariant>
 #include <QUrl>
 
@@ -70,8 +71,11 @@ void DetailsManager::run()
         _currentReaderDetailId = _stack.takeLast();
         _urlReaderDetails->clearArguments();
         _urlReaderDetails->addArgument("id", QString::number(_currentReaderDetailId));
-        _urlReaderDetails->addArgument("user", ContextManager::configuration()->getValue(ConfManager::SECTION_REPOSITORY, "username", "").toString());
-        _urlReaderDetails->addArgument("pass", ContextManager::configuration()->getValue(ConfManager::SECTION_REPOSITORY, "password", "").toString());
+        if (UserManager::getInstance()->getConnectionState() == UserManager::CONNECTED_PREMIUM)
+        {
+            _urlReaderDetails->addArgument("user", ContextManager::configuration()->getValue(ConfManager::SECTION_REPOSITORY, "username", "").toString());
+            _urlReaderDetails->addArgument("pass", ContextManager::configuration()->getValue(ConfManager::SECTION_REPOSITORY, "password", "").toString());
+        }
         _urlReaderDetails->download();
     }
 
