@@ -36,7 +36,7 @@ void SoundfontDescription::display(SoundfontDescriptionData * data)
     // Set the content
     QString content = "<html><head>"
                       "<meta http-equiv='Content-Type' content='text/html;charset=utf-8'/>"
-                      "<style>%0</style>"
+                      "<style>%1</style>"
                       "</head>"
                       "<body>%2</body></html>";
     ui->textBrowser->setHtml(content.arg(getCss()).arg(getBody(data)));
@@ -49,12 +49,12 @@ QString SoundfontDescription::getCss()
 {
     if (s_css == "")
     {
-        s_css = "body { color: %0; padding: 0px; margin: 0px; }"
+        s_css = "body { color: %1; padding: 0px; margin: 0px; }"
                 "p {text-align: justify; }"
-                "h1, h2, h3, h4, h5, h5, h6 { color: %1; font-weight: bold; } "
-                "a {color: %1; text-decoration: none; }"
+                "h1, h2, h3, h4, h5, h5, h6 { color: %2; font-weight: bold; } "
+                "a {color: %2; text-decoration: none; }"
                 "img { max-width: 100%; }"
-                "table { border-color: %2; border-width: 1px; }"
+                "table { border-color: %3; border-width: 1px; }"
                 "th, td { text-align: left; padding: 2px 5px; }";
         s_css = s_css
                 .arg(ContextManager::theme()->getColor(ThemeManager::LIST_TEXT).name())

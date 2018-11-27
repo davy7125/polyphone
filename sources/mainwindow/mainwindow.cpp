@@ -188,7 +188,7 @@ void MainWindow::closeEvent(QCloseEvent *event)
             msgBox.setInformativeText(txt);
         }
         else
-            msgBox.setInformativeText(trUtf8("Le fichier « %0 » n'a pas été sauvegardé.").arg(fileNames[0]));
+            msgBox.setInformativeText(trUtf8("Le fichier « %1 » n'a pas été sauvegardé.").arg(fileNames[0]));
 
         msgBox.setStandardButtons(QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel);
         msgBox.button(QMessageBox::Save)->setText(trUtf8("&Enregistrer"));

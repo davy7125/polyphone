@@ -115,7 +115,7 @@ void DetailsManager::downloadCompleted(QString error)
                 error = trUtf8("Problème serveur");
                 break;
             default:
-                error = trUtf8("Problème serveur") + QString(" (status '%0')").arg(data.value("status").toString());
+                error = trUtf8("Problème serveur") + QString(" (status '%1')").arg(data.value("status").toString());
                 break;
             }
         }

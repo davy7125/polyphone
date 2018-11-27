@@ -85,7 +85,7 @@ void InputSfz::parseFile(QString filename, bool &success, QString &error)
     if (!inputFile.open(QIODevice::ReadOnly))
     {
         success = false;
-        error = trUtf8("Impossible d'ouvrir le fichier « %0 »").arg(filename);
+        error = trUtf8("Impossible d'ouvrir le fichier « %1 »").arg(filename);
         return;
     }
 

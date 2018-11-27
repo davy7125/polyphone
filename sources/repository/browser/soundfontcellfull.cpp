@@ -27,13 +27,13 @@ SoundfontCellFull::SoundfontCellFull(SoundfontInformation* soundfontInfo, QWidge
 
     // Author
     _authorTextNoColor = soundfontInfo->getAuthor();
-    _authorTextNoColor = "<a style=\"text-decoration:none;color:%0;\" href=\"" + _authorTextNoColor + "\">" + _authorTextNoColor + "</a>";
+    _authorTextNoColor = "<a style=\"text-decoration:none;color:%1;\" href=\"" + _authorTextNoColor + "\">" + _authorTextNoColor + "</a>";
 
     // Date
     ui->labelDate->setText(soundfontInfo->getDateTime().toString(Qt::SystemLocaleShortDate));
 
     // License
-    _licenseLinkContent = "style=\"text-decoration:none;color:%0;\" href=\"" +
+    _licenseLinkContent = "style=\"text-decoration:none;color:%1;\" href=\"" +
             RepositoryManager::getInstance()->getLicenseLink(soundfontInfo->getLicense()) + "\"";
     _licenseLabel = RepositoryManager::getInstance()->getLicenseLabel(soundfontInfo->getLicense());
 
@@ -51,8 +51,8 @@ SoundfontCellFull::SoundfontCellFull(SoundfontInformation* soundfontInfo, QWidge
     QColor buttonText = ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_TEXT);
     QColor buttonBackgroundHover = ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND, ThemeManager::HOVERED);
     QColor buttonBackgroundHover2 = ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_TEXT, ThemeManager::HOVERED);
-    QString tmp = QString("QPushButton{background-color:%0; color:%1;border:0px;padding:5px;border-radius:4px;}") +
-            "QPushButton:hover{ background-color:%2;}QLabel#labelAuthor{color:%0;}";
+    QString tmp = QString("QPushButton{background-color:%1; color:%2;border:0px;padding:5px;border-radius:4px;}") +
+            "QPushButton:hover{ background-color:%3;}QLabel#labelAuthor{color:%1;}";
     _normalStyleSheet = tmp.arg(buttonBackground.name()).arg(buttonText.name()).arg(buttonBackgroundHover.name());
     _activeStyleSheet = tmp.arg(buttonText.name()).arg(buttonBackground.name()).arg(buttonBackgroundHover2.name()) +
             "QLabel{color:" + ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_TEXT).name() + ";}";
@@ -128,7 +128,7 @@ SoundfontCellFull::IconContainer::IconContainer()
 void SoundfontCellFull::on_labelAuthor_linkActivated(const QString &link)
 {
     SoundfontFilter * filter = new SoundfontFilter();
-    filter->setSearchText(QString("Author:\"%0\"").arg(link));
+    filter->setSearchText(QString("Author:\"%1\"").arg(link));
     emit(itemClicked(filter));
 }
 

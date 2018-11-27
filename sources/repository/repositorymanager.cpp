@@ -418,7 +418,7 @@ QString RepositoryManager::getCategoryName(int id)
         if (_categoryNames.contains(id))
             result = _categoryNames[id];
         else
-            result = trUtf8("Catégorie %0").arg(id);
+            result = trUtf8("Catégorie %1").arg(id);
         break;
     }
 

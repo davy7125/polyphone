@@ -102,17 +102,17 @@ bool PageSf2::updateInterface(QString editingSource, IdList selectedIds, int dis
             if (size > 1073741824)
             {
                 // GB
-                txt += QString(" (%0 %1)").arg((double)size / 1073741824, 3, 'f', 2).arg(trUtf8("Go", "giga byte"));
+                txt += QString(" (%1 %2)").arg((double)size / 1073741824, 3, 'f', 2).arg(trUtf8("Go", "giga byte"));
             }
             else if (size > 1048576)
             {
                 // MB
-                txt += QString(" (%0 %1)").arg((double)size / 1048576, 3, 'f', 2).arg(trUtf8("Mo", "mega byte"));
+                txt += QString(" (%1 %2)").arg((double)size / 1048576, 3, 'f', 2).arg(trUtf8("Mo", "mega byte"));
             }
             else
             {
                 // kB
-                txt += QString(" (%0 %1)").arg((double)size / 1024, 3, 'f', 2).arg(trUtf8("ko", "kilo byte"));
+                txt += QString(" (%1 %2)").arg((double)size / 1024, 3, 'f', 2).arg(trUtf8("ko", "kilo byte"));
             }
         }
     }
@@ -245,9 +245,9 @@ void PageSf2::countElements()
     if (unusedSmpl)
     {
         if (unusedSmpl > 1)
-            ui->label_nbSmpl->setText(trUtf8("%0 (inutilisés : %1)", "plural form").arg(usedSmpl).arg(unusedSmpl));
+            ui->label_nbSmpl->setText(trUtf8("%1 (inutilisés : %2)", "plural form").arg(usedSmpl).arg(unusedSmpl));
         else
-            ui->label_nbSmpl->setText(trUtf8("%0 (inutilisé : %1)", "singular form").arg(usedSmpl).arg(unusedSmpl));
+            ui->label_nbSmpl->setText(trUtf8("%1 (inutilisé : %2)", "singular form").arg(usedSmpl).arg(unusedSmpl));
         ui->label_nbSmpl->setStyleSheet(redStr);
     }
     else
@@ -258,9 +258,9 @@ void PageSf2::countElements()
     if (unusedInst)
     {
         if (unusedInst > 1)
-            ui->label_nbInst->setText(trUtf8("%0 (inutilisés : %1)", "plural form").arg(usedInst).arg(unusedInst));
+            ui->label_nbInst->setText(trUtf8("%1 (inutilisés : %2)", "plural form").arg(usedInst).arg(unusedInst));
         else
-            ui->label_nbInst->setText(trUtf8("%0 (inutilisé : %1)", "singular form").arg(usedInst).arg(unusedInst));
+            ui->label_nbInst->setText(trUtf8("%1 (inutilisé : %2)", "singular form").arg(usedInst).arg(unusedInst));
         ui->label_nbInst->setStyleSheet(redStr);
     }
     else

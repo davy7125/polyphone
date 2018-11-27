@@ -90,7 +90,7 @@ void ToolExternalCommand::process(SoundfontManager * sm, EltID id, AbstractToolP
         _warning = trUtf8("La commande n'a pas pu démarrer.");
         break;
     case -1:
-        _warning = trUtf8("La commande s'est terminée avec une erreur");
+        _warning = trUtf8("La commande s'est terminée avec une erreur.");
         break;
     default:
     {

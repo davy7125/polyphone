@@ -114,7 +114,7 @@ void DownloadManager::fileDownloaded(QString error)
     else
     {
         QMessageBox::warning(QApplication::activeWindow(), trUtf8("Attention"),
-                             trUtf8("Impossible de télécharger le fichier %0 : %1").arg(currentDownload)
+                             trUtf8("Impossible de télécharger le fichier « %1 » : %2").arg(currentDownload)
                              .arg(error));
     }
     _currentDownload = -1;

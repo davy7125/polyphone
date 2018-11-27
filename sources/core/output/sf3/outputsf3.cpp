@@ -59,13 +59,13 @@ void OutputSf3::processInternal(QString fileName, SoundfontManager * sm, bool &s
         }
         else
         {
-            error = trUtf8("Impossible de créer le fichier « %0 »").arg(fileName);
+            error = trUtf8("Impossible de créer le fichier « %1 »").arg(fileName);
             success = false;
         }
     }
     else
     {
-        error = trUtf8("Impossible de lire le fichier « %0 »").arg(fileNameSf2);
+        error = trUtf8("Impossible de lire le fichier « %1 »").arg(fileNameSf2);
         success = false;
     }
 
