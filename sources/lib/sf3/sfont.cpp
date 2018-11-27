@@ -1088,7 +1088,7 @@ int SoundFont::writeCompressedSample(Sample* s)
     ogg_packet header_code;
 
     // Keep a track of the attenuation used before the compression
-    vorbis_comment_add(&vc, QString("AMP=%0\0").arg(_oggAmp).toStdString().c_str());
+    vorbis_comment_add(&vc, QString("AMP=%1\0").arg(_oggAmp).toStdString().c_str());
 
     vorbis_analysis_headerout(&vd, &vc, &header, &header_comm, &header_code);
     ogg_stream_packetin(&os, &header);

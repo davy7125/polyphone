@@ -38,7 +38,7 @@ void KeyNameManager::setMiddleKey(NameMiddleC name)
     _configuration->setValue(ConfManager::SECTION_NONE, "name_middle_c", (int)_nameMiddleC);
 }
 
-QString KeyNameManager::getKeyName(int keyNum, bool forceTexte, bool with0, bool forceC4)
+QString KeyNameManager::getKeyName(int keyNum, bool forceTexte, bool with0, bool forceC4, bool noOctave)
 {
     if (_nameMiddleC == MIDDLE_C_60 && !forceTexte)
     {
@@ -60,45 +60,48 @@ QString KeyNameManager::getKeyName(int keyNum, bool forceTexte, bool with0, bool
     {
         switch (keyNum % 12)
         {
-        case 0:  keyName = "C";  break;
-        case 1:  keyName = "D♭"; break;
-        case 2:  keyName = "D";  break;
-        case 3:  keyName = "E♭"; break;
-        case 4:  keyName = "E";  break;
-        case 5:  keyName = "F";  break;
-        case 6:  keyName = "G♭"; break;
-        case 7:  keyName = "G";  break;
-        case 8:  keyName = "A♭"; break;
-        case 9:  keyName = "A";  break;
-        case 10: keyName = "B♭"; break;
-        case 11: keyName = "B";  break;
+        case 0:  keyName = QObject::trUtf8("Do");  break;
+        case 1:  keyName = QObject::trUtf8("Ré♭"); break;
+        case 2:  keyName = QObject::trUtf8("Ré");  break;
+        case 3:  keyName = QObject::trUtf8("Mi♭"); break;
+        case 4:  keyName = QObject::trUtf8("Mi");  break;
+        case 5:  keyName = QObject::trUtf8("Fa");  break;
+        case 6:  keyName = QObject::trUtf8("Sol♭"); break;
+        case 7:  keyName = QObject::trUtf8("Sol");  break;
+        case 8:  keyName = QObject::trUtf8("La♭"); break;
+        case 9:  keyName = QObject::trUtf8("La");  break;
+        case 10: keyName = QObject::trUtf8("Si♭"); break;
+        case 11: keyName = QObject::trUtf8("Si");  break;
         }
     }
     else
     {
         switch (keyNum % 12)
         {
-        case 0:  keyName = "C";  break;
-        case 1:  keyName = "C♯"; break;
-        case 2:  keyName = "D";  break;
-        case 3:  keyName = "D♯"; break;
-        case 4:  keyName = "E";  break;
-        case 5:  keyName = "F";  break;
-        case 6:  keyName = "F♯"; break;
-        case 7:  keyName = "G";  break;
-        case 8:  keyName = "G♯"; break;
-        case 9:  keyName = "A";  break;
-        case 10: keyName = "A♯"; break;
-        case 11: keyName = "B";  break;
+        case 0:  keyName = QObject::trUtf8("Do");  break;
+        case 1:  keyName = QObject::trUtf8("Do♯"); break;
+        case 2:  keyName = QObject::trUtf8("Ré");  break;
+        case 3:  keyName = QObject::trUtf8("Ré♯"); break;
+        case 4:  keyName = QObject::trUtf8("Mi");  break;
+        case 5:  keyName = QObject::trUtf8("Fa");  break;
+        case 6:  keyName = QObject::trUtf8("Fa♯"); break;
+        case 7:  keyName = QObject::trUtf8("Sol");  break;
+        case 8:  keyName = QObject::trUtf8("Sol♯"); break;
+        case 9:  keyName = QObject::trUtf8("La");  break;
+        case 10: keyName = QObject::trUtf8("La♯"); break;
+        case 11: keyName = QObject::trUtf8("Si");  break;
         }
     }
 
-    int numOctave = (keyNum) / 12 - 1;
-    if ((_nameMiddleC == MIDDLE_C_C3_WITH_FLATS || _nameMiddleC == MIDDLE_C_C3_WITH_SHARPS) && !forceC4)
-        numOctave -= 1;
-    else if ((_nameMiddleC == MIDDLE_C_C5_WITH_FLATS || _nameMiddleC == MIDDLE_C_C5_WITH_SHARPS) && !forceC4)
-        numOctave += 1;
-    keyName += QString::number(numOctave);
+    if (!noOctave)
+    {
+        int numOctave = (keyNum) / 12 - 1;
+        if ((_nameMiddleC == MIDDLE_C_C3_WITH_FLATS || _nameMiddleC == MIDDLE_C_C3_WITH_SHARPS) && !forceC4)
+            numOctave -= 1;
+        else if ((_nameMiddleC == MIDDLE_C_C5_WITH_FLATS || _nameMiddleC == MIDDLE_C_C5_WITH_SHARPS) && !forceC4)
+            numOctave += 1;
+        keyName += QString::number(numOctave);
+    }
 
     return keyName;
 }

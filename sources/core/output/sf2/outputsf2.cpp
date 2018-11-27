@@ -223,7 +223,7 @@ void OutputSf2::processInternal(QString fileName, SoundfontManager * sm, bool &s
     if (!fi.open(QIODevice::WriteOnly))
     {
         success = false;
-        error = trUtf8("Impossible de créer le fichier « %0 »").arg(fileName);
+        error = trUtf8("Impossible de créer le fichier « %1 »").arg(fileName);
         return;
     }
 

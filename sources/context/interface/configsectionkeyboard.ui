@@ -62,67 +62,67 @@
      </row>
      <column>
       <property name="text">
-       <string>Do</string>
+       <string notr="true">Do</string>
       </property>
      </column>
      <column>
       <property name="text">
-       <string>Do#</string>
+       <string notr="true">Do#</string>
       </property>
      </column>
      <column>
       <property name="text">
-       <string>Ré</string>
+       <string notr="true">Ré</string>
       </property>
      </column>
      <column>
       <property name="text">
-       <string>Ré#</string>
+       <string notr="true">Ré#</string>
       </property>
      </column>
      <column>
       <property name="text">
-       <string>Mi</string>
+       <string notr="true">Mi</string>
       </property>
      </column>
      <column>
       <property name="text">
-       <string>Fa</string>
+       <string notr="true">Fa</string>
       </property>
      </column>
      <column>
       <property name="text">
-       <string>Fa#</string>
+       <string notr="true">Fa#</string>
       </property>
      </column>
      <column>
       <property name="text">
-       <string>Sol</string>
+       <string notr="true">Sol</string>
       </property>
      </column>
      <column>
       <property name="text">
-       <string>Sol#</string>
+       <string notr="true">Sol#</string>
       </property>
      </column>
      <column>
       <property name="text">
-       <string>La</string>
+       <string notr="true">La</string>
       </property>
      </column>
      <column>
       <property name="text">
-       <string>La#</string>
+       <string notr="true">La#</string>
       </property>
      </column>
      <column>
       <property name="text">
-       <string>Si</string>
+       <string notr="true">Si</string>
       </property>
      </column>
      <column>
       <property name="text">
-       <string>Do</string>
+       <string notr="true">Do</string>
       </property>
      </column>
     </widget>

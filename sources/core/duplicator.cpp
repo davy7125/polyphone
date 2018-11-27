@@ -314,7 +314,7 @@ void Duplicator::copySmpl(EltID idSource, EltID idDest)
 
         // Remplacement ?
         if (_copieSmpl != REMPLACER_TOUT && _copieSmpl != IGNORER_TOUT && index != -1)
-            _copieSmpl = openDialog(trUtf8("L'échantillon « %0 » existe déjà.<br />Que faire ?").arg(nom.left(20)));
+            _copieSmpl = openDialog(trUtf8("L'échantillon « %1 » existe déjà.<br />Que faire ?").arg(nom.left(20)));
     }
     if (index != -1 && _copieSmpl != DUPLIQUER_TOUT && _copieSmpl != DUPLIQUER)
     {
@@ -452,7 +452,7 @@ void Duplicator::copyInst(EltID idSource, EltID idDest, bool withSmpl)
 
         // Remplacement ?
         if (_copieInst != REMPLACER_TOUT && _copieInst != IGNORER_TOUT && (index != -1))
-            _copieInst = openDialog(trUtf8("L'instrument « %0 » existe déjà.<br />Souhaitez-vous le remplacer ?").arg(nom.left(20)));
+            _copieInst = openDialog(trUtf8("L'instrument « %1 » existe déjà.<br />Souhaitez-vous le remplacer ?").arg(nom.left(20)));
     }
     if (index != -1 && _copieInst != DUPLIQUER_TOUT && _copieInst != DUPLIQUER)
     {
@@ -545,7 +545,7 @@ void Duplicator::copyPrst(EltID idSource, EltID idDest, bool withInst)
 
         // Remplacement ?
         if (_copiePrst != REMPLACER_TOUT && _copiePrst != IGNORER_TOUT && (index != -1))
-            _copiePrst = openDialog(trUtf8("Le preset « %0 » existe déjà.<br />Souhaitez-vous le remplacer ?").arg(nom.left(20)));
+            _copiePrst = openDialog(trUtf8("Le preset « %1 » existe déjà.<br />Souhaitez-vous le remplacer ?").arg(nom.left(20)));
     }
     if (index != -1 && _copiePrst != DUPLIQUER_TOUT && _copiePrst != DUPLIQUER)
     {

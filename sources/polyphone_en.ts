@@ -388,262 +388,262 @@
     <message>
         <location filename="context/confmanager.cpp" line="127"/>
         <source>W</source>
-        <translation type="unfinished"></translation>
+        <translation>Z</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="128"/>
         <source>S</source>
-        <translation type="unfinished"></translation>
+        <translation>S</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="129"/>
         <source>X</source>
-        <translation type="unfinished"></translation>
+        <translation>X</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="130"/>
         <source>D</source>
-        <translation type="unfinished">R</translation>
+        <translation>D</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="131"/>
         <source>C</source>
-        <translation type="unfinished"></translation>
+        <translation>C</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="132"/>
         <source>V</source>
-        <translation type="unfinished"></translation>
+        <translation>V</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="133"/>
         <source>G</source>
-        <translation type="unfinished">L</translation>
+        <translation>G</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="134"/>
         <source>B</source>
-        <translation type="unfinished"></translation>
+        <translation>B</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="135"/>
         <source>H</source>
-        <translation type="unfinished"></translation>
+        <translation>H</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="136"/>
         <source>N</source>
-        <translation type="unfinished"></translation>
+        <translation>N</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="137"/>
         <source>J</source>
-        <translation type="unfinished"></translation>
+        <translation>J</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="138"/>
         <source>,</source>
-        <translation type="unfinished"></translation>
+        <translation>M</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="139"/>
         <source>;</source>
-        <translation type="unfinished">,</translation>
+        <translation>,</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="145"/>
         <source>A</source>
-        <translation type="unfinished"></translation>
+        <translation>Q</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="146"/>
         <source>É</source>
-        <translation type="unfinished"></translation>
+        <translation>2</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="147"/>
         <source>Z</source>
-        <translation type="unfinished"></translation>
+        <translation>W</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="148"/>
         <source>&quot;</source>
-        <translation type="unfinished">3</translation>
+        <translation>3</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="149"/>
         <source>E</source>
-        <translation type="unfinished"></translation>
+        <translation>E</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="150"/>
         <source>R</source>
-        <translation type="unfinished"></translation>
+        <translation>R</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="151"/>
         <source>(</source>
-        <translation type="unfinished">5</translation>
+        <translation>5</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="152"/>
         <source>T</source>
-        <translation type="unfinished"></translation>
+        <translation>T</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="153"/>
         <source>-</source>
-        <translation type="unfinished">6</translation>
+        <translation>6</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="154"/>
         <source>Y</source>
-        <translation type="unfinished"></translation>
+        <translation>Y</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="155"/>
         <source>È</source>
-        <translation type="unfinished"></translation>
+        <translation>7</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="156"/>
         <source>U</source>
-        <translation type="unfinished"></translation>
+        <translation>U</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="157"/>
         <source>I</source>
-        <translation type="unfinished"></translation>
+        <translation>I</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="163"/>
         <source>Shift+W</source>
-        <translation type="unfinished"></translation>
+        <translation>Shift+Z</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="164"/>
         <source>Shift+S</source>
-        <translation type="unfinished"></translation>
+        <translation>Shift+S</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="165"/>
         <source>Shift+X</source>
-        <translation type="unfinished"></translation>
+        <translation>Shift+X</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="166"/>
         <source>Shift+D</source>
-        <translation type="unfinished"></translation>
+        <translation>Shift+D</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="167"/>
         <source>Shift+C</source>
-        <translation type="unfinished"></translation>
+        <translation>Shift+C</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="168"/>
         <source>Shift+V</source>
-        <translation type="unfinished"></translation>
+        <translation>Shift+V</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="169"/>
         <source>Shift+G</source>
-        <translation type="unfinished"></translation>
+        <translation>Shift+G</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="170"/>
         <source>Shift+B</source>
-        <translation type="unfinished"></translation>
+        <translation>Shift+B</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="171"/>
         <source>Shift+H</source>
-        <translation type="unfinished"></translation>
+        <translation>Shift+H</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="172"/>
         <source>Shift+N</source>
-        <translation type="unfinished"></translation>
+        <translation>Shift+N</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="173"/>
         <source>Shift+J</source>
-        <translation type="unfinished"></translation>
+        <translation>Shift+J</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="174"/>
         <source>Shift+?</source>
-        <translation type="unfinished">Shift+m</translation>
+        <translation>Shift+M</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="175"/>
         <source>Shift+.</source>
-        <translation type="unfinished">Shift+&lt;</translation>
+        <translation>Shift+&lt;</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="181"/>
         <source>Shift+A</source>
-        <translation type="unfinished"></translation>
+        <translation>Shift+Q</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="182"/>
         <source>Shift+2</source>
-        <translation type="unfinished">Shift+@</translation>
+        <translation>Shift+@</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="183"/>
         <source>Shift+Z</source>
-        <translation type="unfinished"></translation>
+        <translation>Shift+W</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="184"/>
         <source>Shift+3</source>
-        <translation type="unfinished">Shift+#</translation>
+        <translation>Shift+#</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="185"/>
         <source>Shift+E</source>
-        <translation type="unfinished"></translation>
+        <translation>Shift+E</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="186"/>
         <source>Shift+R</source>
-        <translation type="unfinished"></translation>
+        <translation>Shift+R</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="187"/>
         <source>Shift+5</source>
-        <translation type="unfinished">Shift+%</translation>
+        <translation>Shift+%</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="188"/>
         <source>Shift+T</source>
-        <translation type="unfinished"></translation>
+        <translation>Shift+T</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="189"/>
         <source>Shift+6</source>
-        <translation type="unfinished">Shift+^</translation>
+        <translation>Shift+^</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="190"/>
         <source>Shift+Y</source>
-        <translation type="unfinished"></translation>
+        <translation>Shift+Y</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="191"/>
         <source>Shift+7</source>
-        <translation type="unfinished">Shift+&amp;</translation>
+        <translation>Shift+&amp;</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="192"/>
         <source>Shift+U</source>
-        <translation type="unfinished"></translation>
+        <translation>Shift+U</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="193"/>
         <source>Shift+I</source>
-        <translation type="unfinished"></translation>
+        <translation>Shift+I</translation>
     </message>
 </context>
 <context>
@@ -1356,65 +1356,52 @@
         <translation>Octave #4</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionkeyboard.ui" line="65"/>
-        <location filename="context/interface/configsectionkeyboard.ui" line="125"/>
         <source>Do</source>
-        <translation>C</translation>
+        <translation type="vanished">C</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionkeyboard.ui" line="70"/>
         <source>Do#</source>
-        <translation>C#</translation>
+        <translation type="vanished">C#</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionkeyboard.ui" line="75"/>
         <source>Ré</source>
-        <translation>D</translation>
+        <translation type="vanished">D</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionkeyboard.ui" line="80"/>
         <source>Ré#</source>
-        <translation type="unfinished">D#</translation>
+        <translation type="obsolete">D#</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionkeyboard.ui" line="85"/>
         <source>Mi</source>
-        <translation type="unfinished">E</translation>
+        <translation type="vanished">E</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionkeyboard.ui" line="90"/>
         <source>Fa</source>
-        <translation>F</translation>
+        <translation type="vanished">F</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionkeyboard.ui" line="95"/>
         <source>Fa#</source>
-        <translation type="unfinished">F#</translation>
+        <translation type="obsolete">F#</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionkeyboard.ui" line="100"/>
         <source>Sol</source>
-        <translation>G</translation>
+        <translation type="vanished">G</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionkeyboard.ui" line="105"/>
         <source>Sol#</source>
-        <translation type="unfinished">G#</translation>
+        <translation type="obsolete">G#</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionkeyboard.ui" line="110"/>
         <source>La</source>
-        <translation type="unfinished">A</translation>
+        <translation type="vanished">A</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionkeyboard.ui" line="115"/>
         <source>La#</source>
-        <translation type="unfinished">A#</translation>
+        <translation type="obsolete">A#</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionkeyboard.ui" line="120"/>
         <source>Si</source>
-        <translation>B</translation>
+        <translation type="vanished">B</translation>
     </message>
     <message>
         <location filename="context/interface/configsectionkeyboard.ui" line="133"/>
@@ -1493,8 +1480,9 @@ Premium!</translation>
     <message>
         <location filename="context/interface/configsectionrepository.cpp" line="170"/>
         <location filename="context/interface/configsectionrepository.cpp" line="177"/>
-        <source>Cliquez sur %0 pour sauvegarder les paramètres.</source>
-        <translation>Click on %0 to save parameters</translation>
+        <source>Cliquez sur %1 pour sauvegarder les paramètres.</source>
+        <oldsource>Cliquez sur %0 pour sauvegarder les paramètres.</oldsource>
+        <translation>Click on %1 to save parameters.</translation>
     </message>
     <message>
         <location filename="context/interface/configsectionrepository.cpp" line="183"/>
@@ -1515,38 +1503,38 @@ Premium!</translation>
         <translation>Gain (dB)</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionsound.ui" line="85"/>
+        <location filename="context/interface/configsectionsound.ui" line="88"/>
         <source>Densité</source>
         <translation>Width</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionsound.ui" line="120"/>
-        <location filename="context/interface/configsectionsound.ui" line="294"/>
+        <location filename="context/interface/configsectionsound.ui" line="123"/>
+        <location filename="context/interface/configsectionsound.ui" line="297"/>
         <source>Niveau</source>
         <translation>Level</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionsound.ui" line="175"/>
+        <location filename="context/interface/configsectionsound.ui" line="178"/>
         <source>Atténuation</source>
         <translation>Damp</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionsound.ui" line="191"/>
+        <location filename="context/interface/configsectionsound.ui" line="194"/>
         <source>Profondeur</source>
         <translation>Room</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionsound.ui" line="261"/>
+        <location filename="context/interface/configsectionsound.ui" line="264"/>
         <source>Chorus</source>
         <translation>Chorus</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionsound.ui" line="342"/>
+        <location filename="context/interface/configsectionsound.ui" line="345"/>
         <source>Fréquence</source>
         <translation>Frequency</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionsound.ui" line="358"/>
+        <location filename="context/interface/configsectionsound.ui" line="361"/>
         <source>Amplitude</source>
         <translation>Depth</translation>
     </message>
@@ -1585,8 +1573,9 @@ repository</translation>
     <name>ConversionSfz</name>
     <message>
         <location filename="core/output/sfz/conversion_sfz.cpp" line="51"/>
-        <source>Impossible de créer le dossier « %0 »</source>
-        <translation>Cannot create directory &quot;%0&quot;</translation>
+        <source>Impossible de créer le dossier « %1 »</source>
+        <oldsource>Impossible de créer le dossier « %0 »</oldsource>
+        <translation>Cannot create directory &quot;%1&quot;</translation>
     </message>
     <message>
         <location filename="core/output/sfz/conversion_sfz.cpp" line="256"/>
@@ -1688,14 +1677,14 @@ repository</translation>
 <context>
     <name>DetailsManager</name>
     <message>
-        <location filename="repository/detailsmanager.cpp" line="108"/>
+        <location filename="repository/detailsmanager.cpp" line="112"/>
         <source>Souscrivez à un compte Premium pour bénéficier de toutes les fonctionnalités !</source>
         <translation>Subscribe to a Premium account to get all the features!</translation>
     </message>
     <message>
-        <location filename="repository/detailsmanager.cpp" line="111"/>
-        <location filename="repository/detailsmanager.cpp" line="114"/>
-        <location filename="repository/detailsmanager.cpp" line="120"/>
+        <location filename="repository/detailsmanager.cpp" line="115"/>
+        <location filename="repository/detailsmanager.cpp" line="118"/>
+        <location filename="repository/detailsmanager.cpp" line="124"/>
         <source>Problème serveur</source>
         <translation>Server error</translation>
     </message>
@@ -1998,8 +1987,9 @@ repository</translation>
     </message>
     <message>
         <location filename="dialogs/dialogcreateelements.cpp" line="31"/>
-        <source>Créer un instrument contenant l&apos;échantillon %0 ?</source>
-        <translation>Create an instrument comprising the sample %0?</translation>
+        <source>Créer un instrument contenant l&apos;échantillon %1 ?</source>
+        <oldsource>Créer un instrument contenant l&apos;échantillon %0 ?</oldsource>
+        <translation>Create an instrument comprising the sample %1?</translation>
     </message>
     <message>
         <location filename="dialogs/dialogcreateelements.cpp" line="37"/>
@@ -2013,13 +2003,15 @@ repository</translation>
     </message>
     <message>
         <location filename="dialogs/dialogcreateelements.cpp" line="39"/>
-        <source>contenant les %0 échantillons</source>
-        <translation>comprising the %0 samples</translation>
+        <source>contenant les %1 échantillons</source>
+        <oldsource>contenant les %0 échantillons</oldsource>
+        <translation>comprising the %1 samples</translation>
     </message>
     <message>
         <location filename="dialogs/dialogcreateelements.cpp" line="47"/>
-        <source>Créer un preset contenant l&apos;instrument %0 ?</source>
-        <translation>Create a preset comprising the instrument %0?</translation>
+        <source>Créer un preset contenant l&apos;instrument %1 ?</source>
+        <oldsource>Créer un preset contenant l&apos;instrument %0 ?</oldsource>
+        <translation>Create a preset comprising the instrument %1?</translation>
     </message>
     <message>
         <location filename="dialogs/dialogcreateelements.cpp" line="53"/>
@@ -2033,8 +2025,9 @@ repository</translation>
     </message>
     <message>
         <location filename="dialogs/dialogcreateelements.cpp" line="55"/>
-        <source>contenant les %0 instruments</source>
-        <translation>comprising the %0 instruments</translation>
+        <source>contenant les %1 instruments</source>
+        <oldsource>contenant les %0 instruments</oldsource>
+        <translation>comprising the %1 instruments</translation>
     </message>
 </context>
 <context>
@@ -2665,6 +2658,26 @@ repository</translation>
     </message>
 </context>
 <context>
+    <name>DownloadManager</name>
+    <message>
+        <location filename="repository/downloadmanager.cpp" line="82"/>
+        <location filename="repository/downloadmanager.cpp" line="130"/>
+        <source>sans titre</source>
+        <translation>untitled</translation>
+    </message>
+    <message>
+        <location filename="repository/downloadmanager.cpp" line="116"/>
+        <source>Attention</source>
+        <translation>Warning</translation>
+    </message>
+    <message>
+        <location filename="repository/downloadmanager.cpp" line="117"/>
+        <source>Impossible de télécharger le fichier « %1 » : %2</source>
+        <oldsource>Impossible de télécharger le fichier « %0 » : %1</oldsource>
+        <translation>Couldn&apos;t download file &quot;%1&quot;: %2</translation>
+    </message>
+</context>
+<context>
     <name>Duplicator</name>
     <message>
         <location filename="core/duplicator.cpp" line="281"/>
@@ -2688,18 +2701,21 @@ repository</translation>
     </message>
     <message>
         <location filename="core/duplicator.cpp" line="317"/>
-        <source>L&apos;échantillon « %0 » existe déjà.&lt;br /&gt;Que faire ?</source>
-        <translation>The sample &quot;%0&quot; already exists.&lt;br /&gt;Replace?</translation>
+        <source>L&apos;échantillon « %1 » existe déjà.&lt;br /&gt;Que faire ?</source>
+        <oldsource>L&apos;échantillon « %0 » existe déjà.&lt;br /&gt;Que faire ?</oldsource>
+        <translation>The sample &quot;%1&quot; already exists.&lt;br /&gt;Replace?</translation>
     </message>
     <message>
         <location filename="core/duplicator.cpp" line="455"/>
-        <source>L&apos;instrument « %0 » existe déjà.&lt;br /&gt;Souhaitez-vous le remplacer ?</source>
-        <translation>The instrument &quot;%0&quot; already exists.&lt;br /&gt;Replace?</translation>
+        <source>L&apos;instrument « %1 » existe déjà.&lt;br /&gt;Souhaitez-vous le remplacer ?</source>
+        <oldsource>L&apos;instrument « %0 » existe déjà.&lt;br /&gt;Souhaitez-vous le remplacer ?</oldsource>
+        <translation>The instrument &quot;%1&quot; already exists.&lt;br /&gt;Replace?</translation>
     </message>
     <message>
         <location filename="core/duplicator.cpp" line="548"/>
-        <source>Le preset « %0 » existe déjà.&lt;br /&gt;Souhaitez-vous le remplacer ?</source>
-        <translation>The preset &quot;%0&quot; already exists.&lt;br/&gt;Replace?</translation>
+        <source>Le preset « %1 » existe déjà.&lt;br /&gt;Souhaitez-vous le remplacer ?</source>
+        <oldsource>Le preset « %0 » existe déjà.&lt;br /&gt;Souhaitez-vous le remplacer ?</oldsource>
+        <translation>The preset &quot;%1&quot; already exists.&lt;br/&gt;Replace?</translation>
     </message>
     <message>
         <location filename="core/duplicator.cpp" line="570"/>
@@ -3070,15 +3086,15 @@ repository</translation>
     <name>InputSf2</name>
     <message>
         <location filename="core/input/sf2/inputsf2.cpp" line="24"/>
-        <source>Le fichier « %0 » est introuvable.</source>
-        <oldsource>Le fichier %0 est introuvable</oldsource>
-        <translation>Cannot find file &quot;%0&quot;.</translation>
+        <source>Le fichier « %1 » est introuvable.</source>
+        <oldsource>Le fichier « %0 » est introuvable.</oldsource>
+        <translation>Cannot find file &quot;%1&quot;.</translation>
     </message>
     <message>
         <location filename="core/input/sf2/inputsf2.cpp" line="31"/>
-        <source>Le fichier « %0 » n&apos;est pas accessible en lecture.</source>
-        <oldsource>Le fichier %0 n&apos;est pas accessible en lecture</oldsource>
-        <translation>Access denied for reading file &quot;%0&quot;.</translation>
+        <source>Le fichier « %1 » n&apos;est pas accessible en lecture.</source>
+        <oldsource>Le fichier « %0 » n&apos;est pas accessible en lecture.</oldsource>
+        <translation>Access denied for reading file &quot;%1&quot;.</translation>
     </message>
 </context>
 <context>
@@ -3090,13 +3106,15 @@ repository</translation>
     </message>
     <message>
         <location filename="core/input/sf3/inputsf3.cpp" line="54"/>
-        <source>Impossible de créer le fichier « %0 »</source>
-        <translation>Cannot create file &quot;%0&quot;</translation>
+        <source>Impossible de créer le fichier « %1 »</source>
+        <oldsource>Impossible de créer le fichier « %0 »</oldsource>
+        <translation>Cannot create file &quot;%1&quot;</translation>
     </message>
     <message>
         <location filename="core/input/sf3/inputsf3.cpp" line="57"/>
-        <source>Impossible de lire le fichier « %0 »</source>
-        <translation>Cannot read file &quot;%0&quot;</translation>
+        <source>Impossible de lire le fichier « %1 »</source>
+        <oldsource>Impossible de lire le fichier « %0 »</oldsource>
+        <translation>Cannot read file &quot;%1&quot;</translation>
     </message>
 </context>
 <context>
@@ -3108,8 +3126,9 @@ repository</translation>
     </message>
     <message>
         <location filename="core/input/sfz/inputsfz.cpp" line="88"/>
-        <source>Impossible d&apos;ouvrir le fichier « %0 »</source>
-        <translation>Cannot open file &quot;%0&quot;</translation>
+        <source>Impossible d&apos;ouvrir le fichier « %1 »</source>
+        <oldsource>Impossible d&apos;ouvrir le fichier « %0 »</oldsource>
+        <translation>Cannot open file &quot;%1&quot;</translation>
     </message>
     <message>
         <location filename="core/input/sfz/inputsfz.cpp" line="265"/>
@@ -3769,8 +3788,9 @@ repository</translation>
     </message>
     <message>
         <location filename="mainwindow/mainwindow.cpp" line="191"/>
-        <source>Le fichier « %0 » n&apos;a pas été sauvegardé.</source>
-        <translation>File &quot;%0&quot; has been modified.</translation>
+        <source>Le fichier « %1 » n&apos;a pas été sauvegardé.</source>
+        <oldsource>Le fichier « %0 » n&apos;a pas été sauvegardé.</oldsource>
+        <translation>File &quot;%1&quot; has been modified.</translation>
     </message>
     <message>
         <location filename="mainwindow/mainwindow.cpp" line="240"/>
@@ -4222,8 +4242,9 @@ Splitting the file into several sf2 might solve the problem.</translation>
     </message>
     <message>
         <location filename="core/output/sf2/outputsf2.cpp" line="226"/>
-        <source>Impossible de créer le fichier « %0 »</source>
-        <translation>Cannot create file &quot;%0&quot;</translation>
+        <source>Impossible de créer le fichier « %1 »</source>
+        <oldsource>Impossible de créer le fichier « %0 »</oldsource>
+        <translation>Cannot create file &quot;%1&quot;</translation>
     </message>
 </context>
 <context>
@@ -4235,13 +4256,15 @@ Splitting the file into several sf2 might solve the problem.</translation>
     </message>
     <message>
         <location filename="core/output/sf3/outputsf3.cpp" line="62"/>
-        <source>Impossible de créer le fichier « %0 »</source>
-        <translation>Cannot create file &quot;%0&quot;</translation>
+        <source>Impossible de créer le fichier « %1 »</source>
+        <oldsource>Impossible de créer le fichier « %0 »</oldsource>
+        <translation>Cannot create file &quot;%1&quot;</translation>
     </message>
     <message>
         <location filename="core/output/sf3/outputsf3.cpp" line="68"/>
-        <source>Impossible de lire le fichier « %0 »</source>
-        <translation>Cannot read file &quot;%0&quot;</translation>
+        <source>Impossible de lire le fichier « %1 »</source>
+        <oldsource>Impossible de lire le fichier « %0 »</oldsource>
+        <translation>Cannot read file &quot;%1&quot;</translation>
     </message>
 </context>
 <context>
@@ -4738,88 +4761,88 @@ Splitting the file into several sf2 might solve the problem.</translation>
     <message>
         <location filename="editor/pageinst.ui" line="349"/>
         <source>Global</source>
-        <translation type="unfinished">Global</translation>
+        <translation>Global</translation>
     </message>
     <message>
         <location filename="editor/pageinst.ui" line="403"/>
         <source>Modulateurs</source>
-        <translation type="unfinished">Modulators</translation>
+        <translation>Modulators</translation>
     </message>
     <message>
         <location filename="editor/pageinst.ui" line="440"/>
         <source>Ajoute un modulateur</source>
-        <translation type="unfinished">Add a modulator</translation>
+        <translation>Add a modulator</translation>
     </message>
     <message>
         <location filename="editor/pageinst.ui" line="466"/>
         <source>Supprime un modulateur</source>
-        <translation type="unfinished">Delete a modulator</translation>
+        <translation>Delete a modulator</translation>
     </message>
     <message>
         <location filename="editor/pageinst.ui" line="486"/>
         <source>Copie les modulateurs</source>
-        <translation type="unfinished">Copy modulators</translation>
+        <translation>Copy modulators</translation>
     </message>
     <message>
         <location filename="editor/pageinst.ui" line="512"/>
         <source>Colle les modulateurs copiés</source>
-        <translation type="unfinished">Paste the copied modulators</translation>
+        <translation>Paste the copied modulators</translation>
     </message>
     <message>
         <location filename="editor/pageinst.ui" line="626"/>
         <source>Source</source>
-        <translation type="unfinished">Source</translation>
+        <translation>Source</translation>
     </message>
     <message>
         <location filename="editor/pageinst.ui" line="637"/>
         <source>Quantité</source>
-        <translation type="unfinished">Amount</translation>
+        <translation>Amount</translation>
     </message>
     <message>
         <location filename="editor/pageinst.ui" line="648"/>
         <location filename="editor/pageinst.ui" line="814"/>
         <source>Destination</source>
-        <translation type="unfinished">Destination</translation>
+        <translation>Destination</translation>
     </message>
     <message>
         <location filename="editor/pageinst.ui" line="662"/>
         <source>Source / Quantité</source>
-        <translation type="unfinished">Source / Amount</translation>
+        <translation>Source / Amount</translation>
     </message>
     <message>
         <location filename="editor/pageinst.ui" line="863"/>
         <source>Valeur abs.</source>
-        <translation type="unfinished">Abs. value</translation>
+        <translation>Abs. value</translation>
     </message>
     <message>
         <location filename="editor/pageinst.cpp" line="177"/>
         <source>Table</source>
-        <translation type="unfinished">Table</translation>
+        <translation>Table</translation>
     </message>
     <message>
         <location filename="editor/pageinst.cpp" line="178"/>
         <source>Étendues</source>
-        <translation type="unfinished">Ranges</translation>
+        <translation>Ranges</translation>
     </message>
     <message>
         <location filename="editor/pageinst.cpp" line="179"/>
         <source>Enveloppes</source>
-        <translation type="unfinished">Envelopes</translation>
+        <translation>Envelopes</translation>
     </message>
     <message>
         <location filename="editor/pageinst.cpp" line="221"/>
         <source>Instrument lié à aucun preset.</source>
-        <translation type="unfinished"></translation>
+        <translation>Instrument not linked to a preset yet.</translation>
     </message>
     <message>
         <location filename="editor/pageinst.cpp" line="223"/>
         <source>Instrument lié au preset :</source>
-        <translation type="unfinished"></translation>
+        <translation>Instrument linked to preset:</translation>
     </message>
     <message>
         <location filename="editor/pageinst.cpp" line="225"/>
         <source>Instrument lié aux presets :</source>
-        <translation type="unfinished"></translation>
+        <translation>Instrument linked to presets:</translation>
     </message>
 </context>
 <context>
@@ -5320,83 +5343,83 @@ rate</translation>
     <message>
         <location filename="editor/pageprst.ui" line="292"/>
         <source>Global</source>
-        <translation type="unfinished">Global</translation>
+        <translation>Global</translation>
     </message>
     <message>
         <location filename="editor/pageprst.ui" line="340"/>
         <source>Modulateurs</source>
-        <translation type="unfinished">Modulators</translation>
+        <translation>Modulators</translation>
     </message>
     <message>
         <location filename="editor/pageprst.ui" line="380"/>
         <source>Ajoute un modulateur</source>
-        <translation type="unfinished">Add a modulator</translation>
+        <translation>Add a modulator</translation>
     </message>
     <message>
         <location filename="editor/pageprst.ui" line="406"/>
         <source>Supprime un modulateur</source>
-        <translation type="unfinished">Delete a modulator</translation>
+        <translation>Delete a modulator</translation>
     </message>
     <message>
         <location filename="editor/pageprst.ui" line="426"/>
         <source>Copie les modulateurs</source>
-        <translation type="unfinished">Copy modulators</translation>
+        <translation>Copy modulators</translation>
     </message>
     <message>
         <location filename="editor/pageprst.ui" line="452"/>
         <source>Colle les modulateurs copiés</source>
-        <translation type="unfinished">Paste the copied modulators</translation>
+        <translation>Paste the copied modulators</translation>
     </message>
     <message>
         <location filename="editor/pageprst.ui" line="566"/>
         <source>Source</source>
-        <translation type="unfinished">Source</translation>
+        <translation>Source</translation>
     </message>
     <message>
         <location filename="editor/pageprst.ui" line="577"/>
         <source>Quantité</source>
-        <translation type="unfinished">Amount</translation>
+        <translation>Amount</translation>
     </message>
     <message>
         <location filename="editor/pageprst.ui" line="588"/>
         <location filename="editor/pageprst.ui" line="739"/>
         <source>Destination</source>
-        <translation type="unfinished">Destination</translation>
+        <translation>Destination</translation>
     </message>
     <message>
         <location filename="editor/pageprst.ui" line="608"/>
         <source>Source / Quantité</source>
-        <translation type="unfinished">Source / Amount</translation>
+        <translation>Source / Amount</translation>
     </message>
     <message>
         <location filename="editor/pageprst.ui" line="782"/>
         <source>Valeur abs.</source>
-        <translation type="unfinished">Abs. value</translation>
+        <translation>Abs. value</translation>
     </message>
     <message>
         <location filename="editor/pageprst.ui" line="858"/>
         <source>Banque</source>
-        <translation type="unfinished">Bank</translation>
+        <translation>Bank</translation>
     </message>
     <message>
         <location filename="editor/pageprst.ui" line="890"/>
         <source>Preset</source>
-        <translation type="unfinished">Preset</translation>
+        <translation>Preset</translation>
     </message>
     <message>
         <location filename="editor/pageprst.ui" line="929"/>
         <source>(percussion)</source>
-        <translation type="unfinished">(percussion)</translation>
+        <translation>(percussion)</translation>
     </message>
     <message>
         <location filename="editor/pageprst.cpp" line="157"/>
         <source>Table</source>
-        <translation type="unfinished">Table</translation>
+        <translation>Table</translation>
     </message>
     <message>
         <location filename="editor/pageprst.cpp" line="158"/>
         <source>Étendues</source>
-        <translation type="unfinished">Ranges</translation>
+        <translation>Ranges</translation>
     </message>
 </context>
 <context>
@@ -5529,16 +5552,18 @@ rate</translation>
     <message>
         <location filename="editor/pagesf2.cpp" line="248"/>
         <location filename="editor/pagesf2.cpp" line="261"/>
-        <source>%0 (inutilisés : %1)</source>
+        <source>%1 (inutilisés : %2)</source>
+        <oldsource>%0 (inutilisés : %1)</oldsource>
         <comment>plural form</comment>
-        <translation>%0 (unused: %1)</translation>
+        <translation>%1 (unused: %2)</translation>
     </message>
     <message>
         <location filename="editor/pagesf2.cpp" line="250"/>
         <location filename="editor/pagesf2.cpp" line="263"/>
-        <source>%0 (inutilisé : %1)</source>
+        <source>%1 (inutilisé : %2)</source>
+        <oldsource>%0 (inutilisé : %1)</oldsource>
         <comment>singular form</comment>
-        <translation>%0 (unused: %1)</translation>
+        <translation>%1 (unused: %2)</translation>
     </message>
     <message>
         <source> (inutilisés : </source>
@@ -5562,12 +5587,11 @@ rate</translation>
         <translation>Apply</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.ui" line="784"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Égaliseur (±15 dB)&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Equalizer (±15 dB)&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="obsolete">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Equalizer (±15 dB)&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.ui" line="856"/>
+        <location filename="editor/pagesmpl.ui" line="862"/>
         <location filename="editor/pagesmpl.cpp" line="322"/>
         <location filename="editor/pagesmpl.cpp" line="1026"/>
         <location filename="editor/pagesmpl.cpp" line="1064"/>
@@ -5575,81 +5599,86 @@ rate</translation>
         <translation>Play</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.ui" line="872"/>
+        <location filename="editor/pagesmpl.ui" line="878"/>
         <source>sinus</source>
         <translation>sinus</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.ui" line="910"/>
+        <location filename="editor/pagesmpl.ui" line="916"/>
         <source>en boucle</source>
         <translation>loop</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.ui" line="923"/>
+        <location filename="editor/pagesmpl.ui" line="929"/>
         <source>stéréo</source>
         <translation>stereo</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.ui" line="956"/>
         <source>&lt;b&gt;Fréquences&lt;/b&gt;</source>
-        <translation type="unfinished">&lt;b&gt;Frequency&lt;/b&gt;</translation>
+        <translation type="obsolete">&lt;b&gt;Frequency&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.ui" line="986"/>
+        <location filename="editor/pagesmpl.ui" line="968"/>
+        <source>Fréquences</source>
+        <translation>Frequencies</translation>
+    </message>
+    <message>
+        <location filename="editor/pagesmpl.ui" line="998"/>
         <source>Boucle</source>
         <translation>Loop</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.ui" line="1112"/>
+        <location filename="editor/pagesmpl.ui" line="1124"/>
         <source>Utilise la longueur totale de l&apos;échantillon comme boucle</source>
         <translation>Use the full length of the sample as loop</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.ui" line="1132"/>
+        <location filename="editor/pagesmpl.ui" line="1144"/>
         <source>Taille</source>
         <translation>Size</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.ui" line="1139"/>
+        <location filename="editor/pagesmpl.ui" line="1151"/>
         <source>Correction (centième)</source>
         <translation>Correction (cents)</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.ui" line="1146"/>
+        <location filename="editor/pagesmpl.ui" line="1158"/>
         <source>Echantillonnage</source>
         <translation>Sample rate</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.ui" line="1153"/>
+        <location filename="editor/pagesmpl.ui" line="1165"/>
         <source>Type</source>
         <translation>Type</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.ui" line="1160"/>
+        <location filename="editor/pagesmpl.ui" line="1172"/>
         <source>Lien</source>
         <translation>Link</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.ui" line="1167"/>
+        <location filename="editor/pagesmpl.ui" line="1179"/>
         <source>Note de base</source>
         <translation>Root key</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.ui" line="1180"/>
+        <location filename="editor/pagesmpl.ui" line="1192"/>
         <source>Utilise l&apos;estimation de la note comme valeur</source>
         <translation>Use the estimated pitch and correction as values</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.ui" line="1217"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Informations&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Information&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="obsolete">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Information&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
+        <location filename="editor/pagesmpl.ui" line="1235"/>
         <location filename="editor/pagesmpl.cpp" line="108"/>
         <source>Informations</source>
         <translation>Information</translation>
     </message>
     <message>
+        <location filename="editor/pagesmpl.ui" line="790"/>
         <location filename="editor/pagesmpl.cpp" line="109"/>
         <source>Égaliseur (±15 dB)</source>
         <translation>Equalizer (±15 dB)</translation>
@@ -5799,8 +5828,9 @@ rate</translation>
     </message>
     <message>
         <location filename="editor/pagetable.cpp" line="1910"/>
-        <source>%0 ne peut être modulé dans un preset.</source>
-        <translation>%0 cannot be modulated in a preset.</translation>
+        <source>%1 ne peut être modulé dans un preset.</source>
+        <oldsource>%0 ne peut être modulé dans un preset.</oldsource>
+        <translation>%1 cannot be modulated in a preset.</translation>
     </message>
     <message>
         <location filename="editor/pagetable.cpp" line="2389"/>
@@ -6773,18 +6803,21 @@ rate</translation>
     </message>
     <message>
         <location filename="core/sampleloader.cpp" line="47"/>
-        <source>L&apos;échantillon « %0L » existe déjà.&lt;br /&gt;Que faire ?</source>
-        <translation>Sample &quot;%0L&quot; already exists.&lt;br /&gt;Replace?</translation>
+        <source>L&apos;échantillon « %1L » existe déjà.&lt;br /&gt;Que faire ?</source>
+        <oldsource>L&apos;échantillon « %0L » existe déjà.&lt;br /&gt;Que faire ?</oldsource>
+        <translation>Sample &quot;%1L&quot; already exists.&lt;br /&gt;Replace?</translation>
     </message>
     <message>
         <location filename="core/sampleloader.cpp" line="52"/>
-        <source>L&apos;échantillon « %0R » existe déjà.&lt;br /&gt;Que faire ?</source>
-        <translation>Sample &quot;%0R&quot; already exists.&lt;br /&gt;Replace?</translation>
+        <source>L&apos;échantillon « %1R » existe déjà.&lt;br /&gt;Que faire ?</source>
+        <oldsource>L&apos;échantillon « %0R » existe déjà.&lt;br /&gt;Que faire ?</oldsource>
+        <translation>Sample &quot;%1R&quot; already exists.&lt;br /&gt;Replace?</translation>
     </message>
     <message>
         <location filename="core/sampleloader.cpp" line="60"/>
-        <source>L&apos;échantillon « %0 » existe déjà.&lt;br /&gt;Que faire ?</source>
-        <translation>Sample &quot;%0&quot; already exists.&lt;br /&gt;Replace?</translation>
+        <source>L&apos;échantillon « %1 » existe déjà.&lt;br /&gt;Que faire ?</source>
+        <oldsource>L&apos;échantillon « %0 » existe déjà.&lt;br /&gt;Que faire ?</oldsource>
+        <translation>Sample &quot;%1&quot; already exists.&lt;br /&gt;Replace?</translation>
     </message>
     <message>
         <location filename="core/sampleloader.cpp" line="73"/>
@@ -6846,8 +6879,9 @@ rate</translation>
     </message>
     <message>
         <location filename="core/sound.cpp" line="649"/>
-        <source>Impossible d&apos;ouvrir le fichier « %0 »</source>
-        <translation>Cannot open file &quot;%0&quot;</translation>
+        <source>Impossible d&apos;ouvrir le fichier « %1 »</source>
+        <oldsource>Impossible d&apos;ouvrir le fichier « %0 »</oldsource>
+        <translation>Cannot open file &quot;%1&quot;</translation>
     </message>
     <message>
         <source>Erreur dans Sound::getData.</source>
@@ -7029,6 +7063,98 @@ rate</translation>
         <location filename="repository/soundfontinformation.cpp" line="22"/>
         <source>Auteur inconnu</source>
         <translation>Unknown author</translation>
+    </message>
+    <message>
+        <location filename="context/keynamemanager.cpp" line="63"/>
+        <location filename="context/keynamemanager.cpp" line="81"/>
+        <source>Do</source>
+        <translation>C</translation>
+    </message>
+    <message>
+        <location filename="context/keynamemanager.cpp" line="64"/>
+        <source>Ré♭</source>
+        <translation>D♭</translation>
+    </message>
+    <message>
+        <location filename="context/keynamemanager.cpp" line="65"/>
+        <location filename="context/keynamemanager.cpp" line="83"/>
+        <source>Ré</source>
+        <translation>D</translation>
+    </message>
+    <message>
+        <location filename="context/keynamemanager.cpp" line="66"/>
+        <source>Mi♭</source>
+        <translation>E♭</translation>
+    </message>
+    <message>
+        <location filename="context/keynamemanager.cpp" line="67"/>
+        <location filename="context/keynamemanager.cpp" line="85"/>
+        <source>Mi</source>
+        <translation>E</translation>
+    </message>
+    <message>
+        <location filename="context/keynamemanager.cpp" line="68"/>
+        <location filename="context/keynamemanager.cpp" line="86"/>
+        <source>Fa</source>
+        <translation>F</translation>
+    </message>
+    <message>
+        <location filename="context/keynamemanager.cpp" line="69"/>
+        <source>Sol♭</source>
+        <translation>G♭</translation>
+    </message>
+    <message>
+        <location filename="context/keynamemanager.cpp" line="70"/>
+        <location filename="context/keynamemanager.cpp" line="88"/>
+        <source>Sol</source>
+        <translation>G</translation>
+    </message>
+    <message>
+        <location filename="context/keynamemanager.cpp" line="71"/>
+        <source>La♭</source>
+        <translation>A♭</translation>
+    </message>
+    <message>
+        <location filename="context/keynamemanager.cpp" line="72"/>
+        <location filename="context/keynamemanager.cpp" line="90"/>
+        <source>La</source>
+        <translation>A</translation>
+    </message>
+    <message>
+        <location filename="context/keynamemanager.cpp" line="73"/>
+        <source>Si♭</source>
+        <translation>B♭</translation>
+    </message>
+    <message>
+        <location filename="context/keynamemanager.cpp" line="74"/>
+        <location filename="context/keynamemanager.cpp" line="92"/>
+        <source>Si</source>
+        <translation>B</translation>
+    </message>
+    <message>
+        <location filename="context/keynamemanager.cpp" line="82"/>
+        <source>Do♯</source>
+        <translation>C♯</translation>
+    </message>
+    <message>
+        <location filename="context/keynamemanager.cpp" line="84"/>
+        <source>Ré♯</source>
+        <translation>D♯</translation>
+    </message>
+    <message>
+        <location filename="context/keynamemanager.cpp" line="87"/>
+        <source>Fa♯</source>
+        <translation>F♯</translation>
+    </message>
+    <message>
+        <location filename="context/keynamemanager.cpp" line="89"/>
+        <source>Sol♯</source>
+        <translation>G♯</translation>
+    </message>
+    <message>
+        <location filename="context/keynamemanager.cpp" line="91"/>
+        <source>La♯</source>
+        <translation>A♯</translation>
     </message>
 </context>
 <context>
@@ -7497,8 +7623,9 @@ rate</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="421"/>
-        <source>Catégorie %0</source>
-        <translation>Category %0</translation>
+        <source>Catégorie %1</source>
+        <oldsource>Catégorie %0</oldsource>
+        <translation>Category %1</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="449"/>
@@ -7660,30 +7787,30 @@ download the list</translation>
         <translation>Download</translation>
     </message>
     <message>
-        <location filename="repository/soundfont/soundfontdownloadcell.cpp" line="43"/>
+        <location filename="repository/soundfont/soundfontdownloadcell.cpp" line="44"/>
         <source>octets</source>
         <translation>bytes</translation>
     </message>
     <message>
-        <location filename="repository/soundfont/soundfontdownloadcell.cpp" line="45"/>
+        <location filename="repository/soundfont/soundfontdownloadcell.cpp" line="46"/>
         <source>ko</source>
         <comment>kilobytes</comment>
         <translation>kB</translation>
     </message>
     <message>
-        <location filename="repository/soundfont/soundfontdownloadcell.cpp" line="47"/>
+        <location filename="repository/soundfont/soundfontdownloadcell.cpp" line="48"/>
         <source>Mo</source>
         <comment>megabytes</comment>
         <translation>MB</translation>
     </message>
     <message>
-        <location filename="repository/soundfont/soundfontdownloadcell.cpp" line="49"/>
+        <location filename="repository/soundfont/soundfontdownloadcell.cpp" line="50"/>
         <source>Go</source>
         <comment>gigabytes</comment>
         <translation>GB</translation>
     </message>
     <message>
-        <location filename="repository/soundfont/soundfontdownloadcell.cpp" line="50"/>
+        <location filename="repository/soundfont/soundfontdownloadcell.cpp" line="51"/>
         <source>To</source>
         <comment>terabytes</comment>
         <translation>TB</translation>
@@ -7747,11 +7874,6 @@ download the list</translation>
 de télécharger le contenu</source>
         <translation>Oops! Cannot
 download content</translation>
-    </message>
-    <message>
-        <location filename="repository/soundfont/soundfontviewer.ui" line="707"/>
-        <source>0</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -7842,8 +7964,9 @@ download content</translation>
     <name>ToolAutoLoop</name>
     <message>
         <location filename="editor/tools/auto_loop/toolautoloop.cpp" line="50"/>
-        <source>L&apos;échantillon « %0 » n&apos;a pas pu être bouclé.</source>
-        <translation>Failed to loop sample &quot;%0&quot;.</translation>
+        <source>L&apos;échantillon « %1 » n&apos;a pas pu être bouclé.</source>
+        <oldsource>L&apos;échantillon « %0 » n&apos;a pas pu être bouclé.</oldsource>
+        <translation>Failed to loop sample &quot;%1&quot;.</translation>
     </message>
     <message>
         <location filename="editor/tools/auto_loop/toolautoloop.cpp" line="53"/>
@@ -8019,7 +8142,7 @@ download content</translation>
     <message>
         <location filename="editor/tools/chords/toolchords.h" line="24"/>
         <source>Transformation</source>
-        <translation type="unfinished"></translation>
+        <translation>Transformation</translation>
     </message>
     <message>
         <location filename="editor/tools/chords/toolchords.h" line="39"/>
@@ -8032,67 +8155,67 @@ download content</translation>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="25"/>
         <source>Nom de l&apos;instrument :</source>
-        <translation type="unfinished"></translation>
+        <translation>Instrument name:</translation>
     </message>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="35"/>
         <source>Création de son :</source>
-        <translation type="unfinished">Sample creation:</translation>
+        <translation>Sample creation:</translation>
     </message>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="43"/>
         <source>à chaque note</source>
-        <translation type="unfinished">for every key</translation>
+        <translation>for every key</translation>
     </message>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="48"/>
         <source>toutes les 3 notes</source>
-        <translation type="unfinished">every 3 keys</translation>
+        <translation>every 3 keys</translation>
     </message>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="53"/>
         <source>toutes les 6 notes</source>
-        <translation type="unfinished">every 6 keys</translation>
+        <translation>every 6 keys</translation>
     </message>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="61"/>
         <source>Bouclage</source>
-        <translation type="unfinished">Auto loop</translation>
+        <translation>Auto loop</translation>
     </message>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="71"/>
         <source>Stéréo</source>
-        <translation type="unfinished">Stereo</translation>
+        <translation>Stereo</translation>
     </message>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="86"/>
         <source>Accord</source>
-        <translation type="unfinished"></translation>
+        <translation>Chord</translation>
     </message>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="111"/>
         <source>Septième</source>
-        <translation type="unfinished"></translation>
+        <translation>Seventh</translation>
     </message>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="124"/>
         <source>Neuvième</source>
-        <translation type="unfinished"></translation>
+        <translation>Ninth</translation>
     </message>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="137"/>
         <source>Tierce</source>
-        <translation type="unfinished"></translation>
+        <translation>Third</translation>
     </message>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="175"/>
         <source>Fondamentale</source>
-        <translation type="unfinished"></translation>
+        <translation>Root key</translation>
     </message>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="188"/>
         <source>Quinte</source>
-        <translation type="unfinished"></translation>
+        <translation>Fifth</translation>
     </message>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="227"/>
@@ -8101,60 +8224,61 @@ download content</translation>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="360"/>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="415"/>
         <source>non</source>
-        <translation type="unfinished">no</translation>
+        <translation>no</translation>
     </message>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="232"/>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="302"/>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="370"/>
         <source>majeure</source>
-        <translation type="unfinished"></translation>
+        <translation>major</translation>
     </message>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="237"/>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="307"/>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="365"/>
         <source>mineure</source>
-        <translation type="unfinished"></translation>
+        <translation>minor</translation>
     </message>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="257"/>
         <source>oui</source>
-        <translation type="unfinished">yes</translation>
+        <translation>yes</translation>
     </message>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="346"/>
         <source>Nombre de renversements</source>
-        <translation type="unfinished"></translation>
+        <translation>Inversion number</translation>
     </message>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="375"/>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="425"/>
         <source>diminuée</source>
-        <translation type="unfinished"></translation>
+        <translation>diminished</translation>
     </message>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="420"/>
         <source>juste</source>
-        <translation type="unfinished"></translation>
+        <translation>perfect</translation>
     </message>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="430"/>
         <source>augmentée</source>
-        <translation type="unfinished"></translation>
+        <translation>augmented</translation>
     </message>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="683"/>
         <source>Octave</source>
-        <translation type="unfinished"></translation>
+        <translation>Octave</translation>
     </message>
 </context>
 <context>
     <name>ToolCleanUnused</name>
     <message>
         <location filename="editor/tools/clean_unused_elements/toolcleanunused.cpp" line="86"/>
-        <source>%0 échantillon(s) et %1 instrument(s) ont été supprimés.</source>
-        <translation type="unfinished"></translation>
+        <source>%1 échantillon(s) et %2 instrument(s) ont été supprimés.</source>
+        <oldsource>%0 échantillon(s) et %1 instrument(s) ont été supprimés.</oldsource>
+        <translation>%1 sample(s) and %2 instrument(s) have been deleted.</translation>
     </message>
     <message>
         <location filename="editor/tools/clean_unused_elements/toolcleanunused.h" line="43"/>
@@ -8172,22 +8296,22 @@ download content</translation>
     <message>
         <location filename="editor/tools/division_duplication/tooldivisionduplication.cpp" line="60"/>
         <source>Un instrument ne contenant aucun sample n&apos;est pas compatible avec cet outil :</source>
-        <translation type="unfinished"></translation>
+        <translation>An instrument comprising no samples is not compatible with this tool:</translation>
     </message>
     <message>
         <location filename="editor/tools/division_duplication/tooldivisionduplication.cpp" line="61"/>
         <source>Un preset ne contenant aucun instrument n&apos;est pas compatible avec cet outil :</source>
-        <translation type="unfinished"></translation>
+        <translation>A preset comprising no instruments is not compatible with this tool:</translation>
     </message>
     <message>
         <location filename="editor/tools/division_duplication/tooldivisionduplication.h" line="19"/>
         <source>Transformation</source>
-        <translation type="unfinished"></translation>
+        <translation>Transformation</translation>
     </message>
     <message>
         <location filename="editor/tools/division_duplication/tooldivisionduplication.h" line="37"/>
         <source>Dupliquer les divisions</source>
-        <translation type="unfinished"></translation>
+        <translation>Division duplication</translation>
     </message>
 </context>
 <context>
@@ -8195,12 +8319,12 @@ download content</translation>
     <message>
         <location filename="editor/tools/division_duplication/tooldivisionduplication_gui.ui" line="119"/>
         <source>Une division pour chaque étendue de vélocité</source>
-        <translation type="unfinished">A division for each velocity range</translation>
+        <translation>A division for each velocity range</translation>
     </message>
     <message>
         <location filename="editor/tools/division_duplication/tooldivisionduplication_gui.ui" line="126"/>
         <source>Une division pour chaque note</source>
-        <translation type="unfinished">A division for each key</translation>
+        <translation>A division for each key</translation>
     </message>
 </context>
 <context>
@@ -8208,22 +8332,23 @@ download content</translation>
     <message>
         <location filename="editor/tools/external_command/toolexternalcommand.cpp" line="90"/>
         <source>La commande n&apos;a pas pu démarrer.</source>
-        <translation type="unfinished"></translation>
+        <translation>Couldn&apos;t start the command.</translation>
     </message>
     <message>
         <location filename="editor/tools/external_command/toolexternalcommand.cpp" line="93"/>
-        <source>La commande s&apos;est terminée avec une erreur</source>
-        <translation type="unfinished"></translation>
+        <source>La commande s&apos;est terminée avec une erreur.</source>
+        <oldsource>La commande s&apos;est terminée avec une erreur</oldsource>
+        <translation>The execution of the command ended with an error.</translation>
     </message>
     <message>
         <location filename="editor/tools/external_command/toolexternalcommand.h" line="24"/>
         <source>Traitement des échantillons</source>
-        <translation type="unfinished">Sample processing</translation>
+        <translation>Sample processing</translation>
     </message>
     <message>
         <location filename="editor/tools/external_command/toolexternalcommand.h" line="42"/>
         <source>Commande externe</source>
-        <translation type="unfinished"></translation>
+        <translation>External command</translation>
     </message>
 </context>
 <context>
@@ -8231,48 +8356,48 @@ download content</translation>
     <message>
         <location filename="editor/tools/external_command/toolexternalcommand_gui.ui" line="20"/>
         <source>Commande</source>
-        <translation type="unfinished">Command</translation>
+        <translation>Command</translation>
     </message>
     <message>
         <location filename="editor/tools/external_command/toolexternalcommand_gui.ui" line="44"/>
         <source>Historique</source>
-        <translation type="unfinished">History</translation>
+        <translation>History</translation>
     </message>
     <message>
         <location filename="editor/tools/external_command/toolexternalcommand_gui.ui" line="54"/>
         <source>Autoriser l&apos;édition stéréo</source>
-        <translation type="unfinished">Authorize stereo editing</translation>
+        <translation>Authorize stereo editing</translation>
     </message>
     <message>
         <location filename="editor/tools/external_command/toolexternalcommand_gui.ui" line="61"/>
         <source>Remplacer les informations de l&apos;échantillon si possible</source>
-        <translation type="unfinished">Replace sample information if possible</translation>
+        <translation>Replace sample information if possible</translation>
     </message>
     <message>
         <location filename="editor/tools/external_command/toolexternalcommand_gui.ui" line="98"/>
         <source>Exemples de commandes :</source>
-        <translation type="unfinished">Command example:</translation>
+        <translation>Command examples:</translation>
     </message>
     <message>
         <location filename="editor/tools/external_command/toolexternalcommand_gui.cpp" line="75"/>
         <source>Fichier exécutable</source>
-        <translation type="unfinished">Executable file</translation>
+        <translation>Executable file</translation>
     </message>
     <message>
         <location filename="editor/tools/external_command/toolexternalcommand_gui.cpp" line="92"/>
         <location filename="editor/tools/external_command/toolexternalcommand_gui.cpp" line="99"/>
         <source>Attention</source>
-        <translation type="unfinished">Warning</translation>
+        <translation>Warning</translation>
     </message>
     <message>
         <location filename="editor/tools/external_command/toolexternalcommand_gui.cpp" line="92"/>
         <source>Vous devez entrer une commande avec au moins {wav} comme argument.</source>
-        <translation type="unfinished">You must enter a command with at least {wav} as argument.</translation>
+        <translation>You must enter a command with at least {wav} as argument.</translation>
     </message>
     <message>
         <location filename="editor/tools/external_command/toolexternalcommand_gui.cpp" line="99"/>
         <source>La commande doit contenir l&apos;argument {wav}.</source>
-        <translation type="unfinished">The command must contain the argument {wav}.</translation>
+        <translation>The command must contain the argument {wav}.</translation>
     </message>
 </context>
 <context>
@@ -8281,12 +8406,12 @@ download content</translation>
         <location filename="editor/tools/frequency_filter/toolfrequencyfilter.h" line="20"/>
         <source>Traitement des échantillons</source>
         <oldsource>Filtrer des fréquences...</oldsource>
-        <translation type="unfinished">Sample processing</translation>
+        <translation>Sample processing</translation>
     </message>
     <message>
         <location filename="editor/tools/frequency_filter/toolfrequencyfilter.h" line="35"/>
         <source>Filtrer des fréquences</source>
-        <translation type="unfinished"></translation>
+        <translation>Filter frequencies</translation>
     </message>
 </context>
 <context>
@@ -8294,7 +8419,7 @@ download content</translation>
     <message>
         <location filename="editor/tools/frequency_filter/toolfrequencyfilter_gui.ui" line="26"/>
         <source>Mettre dans le rouge les fréquences du signal à filtrer :</source>
-        <translation type="unfinished">Put in red the part of frequencies to filter:</translation>
+        <translation>Put in red the part of frequencies to filter:</translation>
     </message>
 </context>
 <context>
@@ -8302,47 +8427,47 @@ download content</translation>
     <message>
         <location filename="editor/tools/frequency_peaks/toolfrequencypeaks.cpp" line="30"/>
         <source>Échantillon</source>
-        <translation type="unfinished"></translation>
+        <translation>Sample</translation>
     </message>
     <message>
         <location filename="editor/tools/frequency_peaks/toolfrequencypeaks.cpp" line="30"/>
         <source>Pic</source>
-        <translation type="unfinished"></translation>
+        <translation>Peak</translation>
     </message>
     <message>
         <location filename="editor/tools/frequency_peaks/toolfrequencypeaks.cpp" line="31"/>
         <source>Intensité</source>
-        <translation type="unfinished">Intensity</translation>
+        <translation>Intensity</translation>
     </message>
     <message>
         <location filename="editor/tools/frequency_peaks/toolfrequencypeaks.cpp" line="31"/>
         <source>Fréquence</source>
-        <translation type="unfinished">Frequency</translation>
+        <translation>Frequency</translation>
     </message>
     <message>
         <location filename="editor/tools/frequency_peaks/toolfrequencypeaks.cpp" line="32"/>
         <source>Note</source>
-        <translation type="unfinished">Key</translation>
+        <translation>Key</translation>
     </message>
     <message>
         <location filename="editor/tools/frequency_peaks/toolfrequencypeaks.cpp" line="32"/>
         <source>Correction</source>
-        <translation type="unfinished">Correction</translation>
+        <translation>Correction</translation>
     </message>
     <message>
         <location filename="editor/tools/frequency_peaks/toolfrequencypeaks.cpp" line="57"/>
         <source>Succès</source>
-        <translation type="unfinished"></translation>
+        <translation>Success</translation>
     </message>
     <message>
         <location filename="editor/tools/frequency_peaks/toolfrequencypeaks.h" line="34"/>
         <source>Visualiser les pics de fréquences</source>
-        <translation type="unfinished"></translation>
+        <translation>Show peak frequency</translation>
     </message>
     <message>
         <location filename="editor/tools/frequency_peaks/toolfrequencypeaks.h" line="19"/>
         <source>Analyse</source>
-        <translation type="unfinished"></translation>
+        <translation>Analyze</translation>
     </message>
 </context>
 <context>
@@ -8350,57 +8475,57 @@ download content</translation>
     <message>
         <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.ui" line="26"/>
         <source>Exporter</source>
-        <translation type="unfinished">Export</translation>
+        <translation>Export</translation>
     </message>
     <message>
         <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.ui" line="33"/>
         <source>Fermer</source>
-        <translation type="unfinished">Close</translation>
+        <translation>Close</translation>
     </message>
     <message>
         <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="60"/>
         <source>Échantillon</source>
-        <translation type="unfinished"></translation>
+        <translation>Sample</translation>
     </message>
     <message>
         <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="61"/>
         <source>Pic</source>
-        <translation type="unfinished"></translation>
+        <translation>Peak</translation>
     </message>
     <message>
         <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="62"/>
         <source>Intensité</source>
-        <translation type="unfinished">Intensity</translation>
+        <translation>Intensity</translation>
     </message>
     <message>
         <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="63"/>
         <source>Fréquence</source>
-        <translation type="unfinished">Frequency</translation>
+        <translation>Frequency</translation>
     </message>
     <message>
         <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="64"/>
         <source>Note</source>
-        <translation type="unfinished">Key</translation>
+        <translation>Key</translation>
     </message>
     <message>
         <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="65"/>
         <source>Correction</source>
-        <translation type="unfinished">Correction</translation>
+        <translation>Correction</translation>
     </message>
     <message>
         <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="127"/>
         <source>Hz</source>
-        <translation type="unfinished">Hz</translation>
+        <translation>Hz</translation>
     </message>
     <message>
         <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="151"/>
         <source>Exporter les pics de fréquence</source>
-        <translation type="unfinished">Export peak frequency</translation>
+        <translation>Export peak frequency</translation>
     </message>
     <message>
         <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="152"/>
         <source>Fichier .csv</source>
-        <translation type="unfinished"></translation>
+        <translation>Csv file</translation>
     </message>
 </context>
 <context>
@@ -8408,12 +8533,12 @@ download content</translation>
     <message>
         <location filename="editor/tools/global_settings/toolglobalsettings.h" line="20"/>
         <source>Édition rapide</source>
-        <translation type="unfinished">Fast editing</translation>
+        <translation>Fast editing</translation>
     </message>
     <message>
         <location filename="editor/tools/global_settings/toolglobalsettings.h" line="38"/>
         <source>Paramètrer en fonction des notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Key-based configuration</translation>
     </message>
 </context>
 <context>
@@ -8421,87 +8546,87 @@ download content</translation>
     <message>
         <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="37"/>
         <source>Minimum</source>
-        <translation type="unfinished">Minimum</translation>
+        <translation>Minimum</translation>
     </message>
     <message>
         <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="45"/>
         <source>Ajout</source>
-        <translation type="unfinished">Addition</translation>
+        <translation>Addition</translation>
     </message>
     <message>
         <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="50"/>
         <source>Multiplication</source>
-        <translation type="unfinished">Multiplication</translation>
+        <translation>Multiplication</translation>
     </message>
     <message>
         <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="55"/>
         <source>Remplacement</source>
-        <translation type="unfinished">Replacement</translation>
+        <translation>Replacement</translation>
     </message>
     <message>
         <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="86"/>
         <source>Paramètre</source>
-        <translation type="unfinished">Parameter</translation>
+        <translation>Parameter</translation>
     </message>
     <message>
         <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="106"/>
         <source>Motif</source>
-        <translation type="unfinished">Pattern</translation>
+        <translation>Pattern</translation>
     </message>
     <message>
         <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="129"/>
         <source>Maximum</source>
-        <translation type="unfinished">Maximum</translation>
+        <translation>Maximum</translation>
     </message>
     <message>
         <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="136"/>
         <source>Modification</source>
-        <translation type="unfinished">Modification</translation>
+        <translation>Modification</translation>
     </message>
     <message>
         <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="163"/>
         <source>Manuel</source>
-        <translation type="unfinished">Manual</translation>
+        <translation>Manual</translation>
     </message>
     <message>
         <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="168"/>
         <source>Linéaire ascendant</source>
-        <translation type="unfinished">Linear ascending</translation>
+        <translation>Linear ascending</translation>
     </message>
     <message>
         <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="173"/>
         <source>Linéaire descendant</source>
-        <translation type="unfinished">Linear descending</translation>
+        <translation>Linear descending</translation>
     </message>
     <message>
         <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="178"/>
         <source>Exponentiel ascendant</source>
-        <translation type="unfinished">Exponential ascending</translation>
+        <translation>Exponential ascending</translation>
     </message>
     <message>
         <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="183"/>
         <source>Exponentiel descendant</source>
-        <translation type="unfinished">Exponential descending</translation>
+        <translation>Exponential descending</translation>
     </message>
     <message>
         <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="188"/>
         <source>Aléatoire</source>
-        <translation type="unfinished">Random</translation>
+        <translation>Random</translation>
     </message>
     <message>
         <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="259"/>
         <source>Appliquer à l&apos;étendue de vélocité</source>
-        <translation type="unfinished">Apply to a velocity range</translation>
+        <translation>Apply to a velocity range</translation>
     </message>
     <message>
         <location filename="editor/tools/global_settings/toolglobalsettings_gui.cpp" line="174"/>
         <source>Raideur</source>
-        <translation type="unfinished">Stiffness</translation>
+        <translation>Stiffness</translation>
     </message>
     <message>
         <location filename="editor/tools/global_settings/toolglobalsettings_gui.cpp" line="179"/>
         <source>Répartition</source>
-        <translation type="unfinished">Distribution</translation>
+        <translation>Distribution</translation>
     </message>
 </context>
 <context>
@@ -8509,12 +8634,12 @@ download content</translation>
     <message>
         <location filename="editor/tools/link_sample/toollinksample.h" line="41"/>
         <source>Trouver un lien</source>
-        <translation type="unfinished"></translation>
+        <translation>Find a link</translation>
     </message>
     <message>
         <location filename="editor/tools/link_sample/toollinksample.h" line="23"/>
         <source>Échantillons stéréo</source>
-        <translation type="unfinished">Stereo samples</translation>
+        <translation>Stereo samples</translation>
     </message>
 </context>
 <context>
@@ -8522,17 +8647,17 @@ download content</translation>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation.cpp" line="35"/>
         <source>L&apos;instrument doit contenir des sons.</source>
-        <translation type="unfinished">The instrument contains no samples.</translation>
+        <translation>The instrument contains no samples.</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation.h" line="24"/>
         <source>Transformation</source>
-        <translation type="unfinished"></translation>
+        <translation>Transformation</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation.h" line="39"/>
         <source>Créer une mixture</source>
-        <translation type="unfinished"></translation>
+        <translation>Mixture creation</translation>
     </message>
 </context>
 <context>
@@ -8540,143 +8665,143 @@ download content</translation>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="25"/>
         <source>Nom de la mixture :</source>
-        <translation type="unfinished">Name of the mixture:</translation>
+        <translation>Name of the mixture:</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="35"/>
         <source>Création de son :</source>
-        <translation type="unfinished">Sample creation:</translation>
+        <translation>Sample creation:</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="43"/>
         <source>à chaque note</source>
-        <translation type="unfinished">for every key</translation>
+        <translation>for every key</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="48"/>
         <source>toutes les 3 notes</source>
-        <translation type="unfinished">every 3 keys</translation>
+        <translation>every 3 keys</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="53"/>
         <source>toutes les 6 notes</source>
-        <translation type="unfinished">every 6 keys</translation>
+        <translation>every 6 keys</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="61"/>
         <source>Bouclage</source>
-        <translation type="unfinished">Auto loop</translation>
+        <translation>Auto loop</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="71"/>
         <source>Stéréo</source>
-        <translation type="unfinished">Stereo</translation>
+        <translation>Stereo</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="85"/>
         <source>Divisions</source>
-        <translation type="unfinished">Divisions</translation>
+        <translation>Divisions</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="238"/>
         <source>Etendue</source>
-        <translation type="unfinished">Key range</translation>
+        <translation>Key range</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="261"/>
         <source>Rangs</source>
-        <translation type="unfinished">Ranks</translation>
+        <translation>Ranks</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="334"/>
         <source>Type</source>
-        <translation type="unfinished">Type</translation>
+        <translation>Type</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="342"/>
         <source>octave</source>
-        <translation type="unfinished">octave</translation>
+        <translation>octave</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="347"/>
         <source>quinte</source>
-        <translation type="unfinished">fifth</translation>
+        <translation>fifth</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="352"/>
         <source>tierce</source>
-        <translation type="unfinished">third</translation>
+        <translation>third</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="357"/>
         <source>septième</source>
-        <translation type="unfinished">seventh</translation>
+        <translation>seventh</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="362"/>
         <source>neuvième</source>
-        <translation type="unfinished">ninth</translation>
+        <translation>ninth</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="367"/>
         <source>onzième</source>
-        <translation type="unfinished">eleventh</translation>
+        <translation>eleventh</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="372"/>
         <source>treizième</source>
-        <translation type="unfinished">thirteenth</translation>
+        <translation>thirteenth</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="377"/>
         <source>quinzième</source>
-        <translation type="unfinished">fifteenth</translation>
+        <translation>fifteenth</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="382"/>
         <source>dix-septième</source>
-        <translation type="unfinished">seventeenth</translation>
+        <translation>seventeenth</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="387"/>
         <source>dix-neuvième</source>
-        <translation type="unfinished">nineteenth</translation>
+        <translation>nineteenth</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="392"/>
         <source>vingt-et-unième</source>
-        <translation type="unfinished">twenty-first</translation>
+        <translation>twenty-first</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="397"/>
         <source>vingt-troisième</source>
-        <translation type="unfinished">twenty-third</translation>
+        <translation>twenty-third</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="402"/>
         <source>vingt-cinquième</source>
-        <translation type="unfinished">twenty-fifth</translation>
+        <translation>twenty-fifth</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="407"/>
         <source>vingt-septième</source>
-        <translation type="unfinished">twenty-seventh</translation>
+        <translation>twenty-seventh</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.cpp" line="59"/>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.cpp" line="75"/>
         <source>Attention</source>
-        <translation type="unfinished">Warning</translation>
+        <translation>Warning</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.cpp" line="59"/>
         <source>Un titre doit être renseigné.</source>
-        <translation type="unfinished"></translation>
+        <translation>The instrument name must be provided.</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.cpp" line="75"/>
         <source>Au moins un rang doit être renseigné.</source>
-        <translation type="unfinished"></translation>
+        <translation>At least one rank must be specified.</translation>
     </message>
 </context>
 <context>
@@ -8684,12 +8809,12 @@ download content</translation>
     <message>
         <location filename="editor/tools/monitor/toolmonitor.h" line="19"/>
         <source>Analyse</source>
-        <translation type="unfinished"></translation>
+        <translation>Analyze</translation>
     </message>
     <message>
         <location filename="editor/tools/monitor/toolmonitor.h" line="31"/>
         <source>Visualiser les paramètres</source>
-        <translation type="unfinished"></translation>
+        <translation>Display parameters</translation>
     </message>
 </context>
 <context>
@@ -8697,32 +8822,32 @@ download content</translation>
     <message>
         <location filename="editor/tools/monitor/toolmonitor_gui.ui" line="97"/>
         <source>Visualisation</source>
-        <translation type="unfinished">Display options</translation>
+        <translation>Display options</translation>
     </message>
     <message>
         <location filename="editor/tools/monitor/toolmonitor_gui.ui" line="140"/>
         <source>échelle log</source>
-        <translation type="unfinished">Log scale</translation>
+        <translation>Log scale</translation>
     </message>
     <message>
         <location filename="editor/tools/monitor/toolmonitor_gui.ui" line="162"/>
         <source>Légende</source>
-        <translation type="unfinished">Legend</translation>
+        <translation>Legend</translation>
     </message>
     <message>
         <location filename="editor/tools/monitor/toolmonitor_gui.ui" line="221"/>
         <source>Paramètres par défaut</source>
-        <translation type="unfinished">Default parameters</translation>
+        <translation>Default parameters</translation>
     </message>
     <message>
         <location filename="editor/tools/monitor/toolmonitor_gui.ui" line="250"/>
         <source>Valeur moyenne par note</source>
-        <translation type="unfinished">Mean value per key</translation>
+        <translation>Mean value per key</translation>
     </message>
     <message>
         <location filename="editor/tools/monitor/toolmonitor_gui.ui" line="263"/>
         <source>Paramètres définis</source>
-        <translation type="unfinished">Defined parameters</translation>
+        <translation>Defined parameters</translation>
     </message>
 </context>
 <context>
@@ -8730,12 +8855,12 @@ download content</translation>
     <message>
         <location filename="editor/tools/preset_list/toolpresetlist.h" line="19"/>
         <source>Utilitaire</source>
-        <translation type="unfinished"></translation>
+        <translation>Utility</translation>
     </message>
     <message>
         <location filename="editor/tools/preset_list/toolpresetlist.h" line="34"/>
         <source>Exporter la liste des presets</source>
-        <translation type="unfinished">Export preset list</translation>
+        <translation>Export preset list</translation>
     </message>
 </context>
 <context>
@@ -8743,27 +8868,27 @@ download content</translation>
     <message>
         <location filename="editor/tools/preset_list/toolpresetlist_gui.ui" line="30"/>
         <source>Copier</source>
-        <translation type="unfinished">Copy</translation>
+        <translation>Copy</translation>
     </message>
     <message>
         <location filename="editor/tools/preset_list/toolpresetlist_gui.ui" line="56"/>
         <source>texte copié dans le presse-papier</source>
-        <translation type="unfinished">text copied in the clipboard</translation>
+        <translation>text copied in the clipboard</translation>
     </message>
     <message>
         <location filename="editor/tools/preset_list/toolpresetlist_gui.ui" line="81"/>
         <source>format csv</source>
-        <translation type="unfinished">csv format</translation>
+        <translation>csv format</translation>
     </message>
     <message>
         <location filename="editor/tools/preset_list/toolpresetlist_gui.ui" line="91"/>
         <source>tableau html</source>
-        <translation type="unfinished">html table</translation>
+        <translation>html table</translation>
     </message>
     <message>
         <location filename="editor/tools/preset_list/toolpresetlist_gui.ui" line="113"/>
         <source>Fermer</source>
-        <translation type="unfinished">Close</translation>
+        <translation>Close</translation>
     </message>
 </context>
 <context>
@@ -8771,58 +8896,58 @@ download content</translation>
     <message>
         <location filename="editor/tools/release/toolrelease.h" line="20"/>
         <source>Édition rapide</source>
-        <translation type="unfinished">Fast editing</translation>
+        <translation>Fast editing</translation>
     </message>
     <message>
         <location filename="editor/tools/release/toolrelease.h" line="35"/>
         <source>Release naturelle</source>
-        <translation type="unfinished"></translation>
+        <translation>Natural release</translation>
     </message>
 </context>
 <context>
     <name>ToolRelease_gui</name>
     <message>
-        <location filename="editor/tools/release/toolrelease_gui.ui" line="20"/>
         <source>Durée release au do 2 (note 36)</source>
-        <translation type="unfinished">Release time at C2 (key 36)</translation>
+        <translation type="obsolete">Release time at C2 (key 36)</translation>
     </message>
     <message>
         <location filename="editor/tools/release/toolrelease_gui.ui" line="43"/>
         <source>Division à l&apos;octave suivante</source>
-        <translation type="unfinished">Division to the next octave</translation>
+        <translation>Division to the next octave</translation>
     </message>
     <message>
         <location filename="editor/tools/release/toolrelease_gui.ui" line="66"/>
         <source>Désaccordage provoqué (demi-tons)</source>
-        <translation type="unfinished">Detuning induced (semi-tones)</translation>
+        <translation>Detuning induced (semi-tones)</translation>
     </message>
     <message>
         <location filename="editor/tools/release/toolrelease_gui.cpp" line="27"/>
         <source>Durée release (note %1)</source>
-        <translation type="unfinished"></translation>
+        <translation>Release time (key %1)</translation>
     </message>
 </context>
 <context>
     <name>ToolRemoveMods</name>
     <message>
         <location filename="editor/tools/remove_mods/toolremovemods.cpp" line="90"/>
-        <source>%0 modulateurs ont été supprimés.</source>
-        <translation type="unfinished"></translation>
+        <source>%1 modulateurs ont été supprimés.</source>
+        <oldsource>%0 modulateurs ont été supprimés.</oldsource>
+        <translation>%1 modulators have been deleted.</translation>
     </message>
     <message>
         <location filename="editor/tools/remove_mods/toolremovemods.cpp" line="97"/>
         <source>La sélection ne contient aucun modulateur.</source>
-        <translation type="unfinished"></translation>
+        <translation>The selection contains no modulators.</translation>
     </message>
     <message>
         <location filename="editor/tools/remove_mods/toolremovemods.h" line="56"/>
         <source>Enlever les modulateurs</source>
-        <translation type="unfinished"></translation>
+        <translation>Remove modulators</translation>
     </message>
     <message>
         <location filename="editor/tools/remove_mods/toolremovemods.h" line="19"/>
         <source>Nettoyage</source>
-        <translation type="unfinished"></translation>
+        <translation>Clean up</translation>
     </message>
 </context>
 <context>
@@ -8830,17 +8955,17 @@ download content</translation>
     <message>
         <location filename="editor/tools/sample_export/toolsampleexport.cpp" line="15"/>
         <source>Choisir un répertoire de destination</source>
-        <translation type="unfinished">Choose a destination folder</translation>
+        <translation>Choose a destination folder</translation>
     </message>
     <message>
         <location filename="editor/tools/sample_export/toolsampleexport.h" line="42"/>
         <source>Exporter au format wav</source>
-        <translation type="unfinished"></translation>
+        <translation>Wav export</translation>
     </message>
     <message>
         <location filename="editor/tools/sample_export/toolsampleexport.h" line="24"/>
         <source>Fichiers</source>
-        <translation type="unfinished"></translation>
+        <translation>Files</translation>
     </message>
 </context>
 <context>
@@ -8848,12 +8973,12 @@ download content</translation>
     <message>
         <location filename="editor/tools/sound_spatialization/toolsoundspatialization.h" line="19"/>
         <source>Édition rapide</source>
-        <translation type="unfinished">Fast editing</translation>
+        <translation>Fast editing</translation>
     </message>
     <message>
         <location filename="editor/tools/sound_spatialization/toolsoundspatialization.h" line="37"/>
         <source>Spatialiser le son</source>
-        <translation type="unfinished"></translation>
+        <translation>Sound spatialization</translation>
     </message>
 </context>
 <context>
@@ -8861,57 +8986,61 @@ download content</translation>
     <message>
         <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="70"/>
         <source>Renversements</source>
-        <translation type="unfinished">Inversions</translation>
+        <translation>Inversions</translation>
     </message>
     <message>
         <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="100"/>
         <source>Etalement (%)</source>
-        <translation type="unfinished">Spreading (%)</translation>
+        <translation>Spreading (%)</translation>
     </message>
     <message>
         <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="144"/>
         <source>Ascendant</source>
-        <translation type="unfinished">Ascending</translation>
+        <translation>Ascending</translation>
     </message>
     <message>
         <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="149"/>
         <source>Descendant</source>
-        <translation type="unfinished">Descending</translation>
+        <translation>Descending</translation>
     </message>
     <message>
         <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="154"/>
         <source>Creux</source>
-        <translation type="unfinished">Hollow</translation>
+        <translation>Hollow</translation>
     </message>
     <message>
         <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="159"/>
         <source>Pointe</source>
-        <translation type="unfinished">Spike</translation>
+        <translation>Spike</translation>
     </message>
     <message>
         <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="164"/>
         <source>Aléatoire</source>
-        <translation type="unfinished">Random</translation>
+        <translation>Random</translation>
     </message>
     <message>
         <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="172"/>
+        <source>Motif</source>
+        <translation>Pattern</translation>
+    </message>
+    <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Motif&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Pattern&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="obsolete">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Pattern&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="189"/>
         <source>Nombre divisions</source>
-        <translation type="unfinished">Division number</translation>
+        <translation>Division number</translation>
     </message>
     <message>
         <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="196"/>
         <source>Offset (0-100)</source>
-        <translation type="unfinished">Offset (0-100)</translation>
+        <translation>Offset (0-100)</translation>
     </message>
     <message>
         <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="203"/>
         <source>Occupation (%)</source>
-        <translation type="unfinished">Filling (%)</translation>
+        <translation>Filling (%)</translation>
     </message>
 </context>
 <context>
@@ -8919,22 +9048,22 @@ download content</translation>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport.cpp" line="92"/>
         <source>Fusion des soundfonts :</source>
-        <translation type="unfinished">Merge soudfonts:</translation>
+        <translation>Merge soudfonts:</translation>
     </message>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport.cpp" line="187"/>
         <source>L&apos;export a réussi !</source>
-        <translation type="unfinished"></translation>
+        <translation>Export successful!</translation>
     </message>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport.h" line="20"/>
         <source>Fichiers</source>
-        <translation type="unfinished"></translation>
+        <translation>Files</translation>
     </message>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport.h" line="35"/>
         <source>Exporter</source>
-        <translation type="unfinished">Export</translation>
+        <translation>Export</translation>
     </message>
 </context>
 <context>
@@ -8942,72 +9071,73 @@ download content</translation>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="22"/>
         <source>Tout cocher</source>
-        <translation type="unfinished">Select all</translation>
+        <translation>Select all</translation>
     </message>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="29"/>
         <source>Tout décocher</source>
-        <translation type="unfinished">Unselect all</translation>
+        <translation>Unselect all</translation>
     </message>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="80"/>
         <source>Emplacement</source>
-        <translation type="unfinished">Location</translation>
+        <translation>Destination</translation>
     </message>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="106"/>
         <source>Format</source>
-        <translation type="unfinished">Format</translation>
+        <translation>Format</translation>
     </message>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="116"/>
-        <source>classement général midi</source>
-        <translation type="unfinished">General Midi classification</translation>
+        <source>classement général MIDI</source>
+        <oldsource>classement général midi</oldsource>
+        <translation>General MIDI classification</translation>
     </message>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="123"/>
         <source>un répertoire par banque</source>
-        <translation type="unfinished">one directory per bank</translation>
+        <translation>one directory per bank</translation>
     </message>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="130"/>
         <source>numéro de preset en préfixe</source>
-        <translation type="unfinished">preset number as prefix</translation>
+        <translation>preset number as prefix</translation>
     </message>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="141"/>
         <source>Haute</source>
-        <translation type="unfinished">High</translation>
+        <translation>High</translation>
     </message>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="146"/>
         <source>Moyenne</source>
-        <translation type="unfinished">Medium</translation>
+        <translation>Medium</translation>
     </message>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="151"/>
         <source>Basse</source>
-        <translation type="unfinished">Low</translation>
+        <translation>Low</translation>
     </message>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="159"/>
         <source>Qualité</source>
-        <translation type="unfinished">Quality</translation>
+        <translation>Quality</translation>
     </message>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="170"/>
         <source>Annuler</source>
-        <translation type="unfinished">Cancel</translation>
+        <translation>Cancel</translation>
     </message>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="190"/>
         <source>Exporter</source>
-        <translation type="unfinished">Export</translation>
+        <translation>Export</translation>
     </message>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="117"/>
         <source>Choisissez un répertoire de destination</source>
-        <translation type="unfinished">Select the destination directory</translation>
+        <translation>Select the destination directory</translation>
     </message>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="133"/>
@@ -9015,27 +9145,27 @@ download content</translation>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="168"/>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="177"/>
         <source>Attention</source>
-        <translation type="unfinished">Warning</translation>
+        <translation>Warning</translation>
     </message>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="133"/>
         <source>Le répertoire n&apos;est pas valide.</source>
-        <translation type="unfinished">Invalid directory.</translation>
+        <translation>Invalid directory.</translation>
     </message>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="162"/>
         <source>Au moins un preset doit être sélectionné.</source>
-        <translation type="unfinished">At least one preset must be selected.</translation>
+        <translation>At least one preset must be selected.</translation>
     </message>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="168"/>
         <source>Le nombre maximal de soundfonts à exporter est de 127.</source>
-        <translation type="unfinished">The maximal number of soundfont to export is 127.</translation>
+        <translation>The maximal number of soundfont to export is 127.</translation>
     </message>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="177"/>
         <source>Dans le cas où plusieurs soundfonts sont exportées, le nombre maximal de presets par soundfont est de 127.</source>
-        <translation type="unfinished">In the case where several soundfonts are exported, the maximal number of presets per soundfonts is 127.</translation>
+        <translation>In the case where several soundfonts are exported, the maximal number of presets per soundfonts is 127.</translation>
     </message>
 </context>
 <context>
@@ -9043,17 +9173,17 @@ download content</translation>
     <message>
         <location filename="editor/tools/transpose/tooltranspose.cpp" line="135"/>
         <source>Un instrument ne contenant aucun sample n&apos;est pas compatible avec cet outil :</source>
-        <translation type="unfinished"></translation>
+        <translation>An instrument comprising no samples is not compatible with this tool:</translation>
     </message>
     <message>
         <location filename="editor/tools/transpose/tooltranspose.h" line="19"/>
         <source>Édition rapide</source>
-        <translation type="unfinished">Fast editing</translation>
+        <translation>Fast editing</translation>
     </message>
     <message>
         <location filename="editor/tools/transpose/tooltranspose.h" line="37"/>
         <source>Transposer</source>
-        <translation type="unfinished"></translation>
+        <translation>Transpose</translation>
     </message>
 </context>
 <context>
@@ -9061,12 +9191,12 @@ download content</translation>
     <message>
         <location filename="editor/tools/transpose_smpl/tooltransposesmpl.h" line="20"/>
         <source>Traitement des échantillons</source>
-        <translation type="unfinished">Sample processing</translation>
+        <translation>Sample processing</translation>
     </message>
     <message>
         <location filename="editor/tools/transpose_smpl/tooltransposesmpl.h" line="35"/>
         <source>Transposer</source>
-        <translation type="unfinished"></translation>
+        <translation>Transpose</translation>
     </message>
 </context>
 <context>
@@ -9074,7 +9204,7 @@ download content</translation>
     <message>
         <location filename="editor/tools/transpose_smpl/tooltransposesmpl_gui.ui" line="20"/>
         <source>Écart en demi-tons</source>
-        <translation type="unfinished">Shift in semitones</translation>
+        <translation>Shift in semitones</translation>
     </message>
 </context>
 <context>
@@ -9082,12 +9212,12 @@ download content</translation>
     <message>
         <location filename="editor/tools/transpose/tooltranspose_gui.ui" line="20"/>
         <source>Écart en demi-tons</source>
-        <translation type="unfinished">Shift in semitones</translation>
+        <translation>Shift in semitones</translation>
     </message>
     <message>
         <location filename="editor/tools/transpose/tooltranspose_gui.ui" line="44"/>
         <source>Adapter l&apos;étendue de notes</source>
-        <translation type="unfinished">Adapt keyrange</translation>
+        <translation>Adapt keyrange</translation>
     </message>
 </context>
 <context>
@@ -9095,12 +9225,12 @@ download content</translation>
     <message>
         <location filename="editor/tools/trim_end/tooltrimend.h" line="38"/>
         <source>Ajuster à la fin de boucle</source>
-        <translation type="unfinished"></translation>
+        <translation>Trim to end of loop</translation>
     </message>
     <message>
         <location filename="editor/tools/trim_end/tooltrimend.h" line="20"/>
         <source>Traitement des échantillons</source>
-        <translation type="unfinished">Sample processing</translation>
+        <translation>Sample processing</translation>
     </message>
 </context>
 <context>
@@ -9108,12 +9238,12 @@ download content</translation>
     <message>
         <location filename="editor/tools/trim_start/tooltrimstart.h" line="38"/>
         <source>Enlever le silence initial</source>
-        <translation type="unfinished"></translation>
+        <translation>Remove blank at start</translation>
     </message>
     <message>
         <location filename="editor/tools/trim_start/tooltrimstart.h" line="20"/>
         <source>Traitement des échantillons</source>
-        <translation type="unfinished">Sample processing</translation>
+        <translation>Sample processing</translation>
     </message>
 </context>
 <context>
@@ -9121,12 +9251,12 @@ download content</translation>
     <message>
         <location filename="editor/tools/unlink_sample/toolunlinksample.h" line="38"/>
         <source>Dissocier</source>
-        <translation type="unfinished"></translation>
+        <translation>Unlink</translation>
     </message>
     <message>
         <location filename="editor/tools/unlink_sample/toolunlinksample.h" line="23"/>
         <source>Échantillons stéréo</source>
-        <translation type="unfinished">Stereo samples</translation>
+        <translation>Stereo samples</translation>
     </message>
 </context>
 <context>
@@ -9148,13 +9278,14 @@ download content</translation>
     </message>
     <message>
         <location filename="mainwindow/toprightwidget.cpp" line="93"/>
-        <source>Bienvenue %0</source>
-        <translation type="unfinished"></translation>
+        <source>Bienvenue %1</source>
+        <oldsource>Bienvenue %0</oldsource>
+        <translation>Welcome %1</translation>
     </message>
     <message>
         <location filename="mainwindow/toprightwidget.cpp" line="98"/>
         <source>Ce compte a été banni.</source>
-        <translation type="unfinished">This account has been banned.</translation>
+        <translation>This account has been banned.</translation>
     </message>
     <message>
         <source>Ce compte a été banni</source>
@@ -9221,7 +9352,7 @@ download content</translation>
     <message>
         <location filename="editor/tree/treeview.cpp" line="811"/>
         <source>instrument</source>
-        <translation type="unfinished"></translation>
+        <translation>instrument</translation>
     </message>
 </context>
 <context>
@@ -9229,80 +9360,80 @@ download content</translation>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="22"/>
         <source>&amp;Associer à...</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Bind to...</translation>
     </message>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="27"/>
         <source>&amp;Remplacer par...</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Replace by...</translation>
     </message>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="35"/>
         <source>&amp;Copier</source>
-        <translation type="unfinished">&amp;Copy</translation>
+        <translation>&amp;Copy</translation>
     </message>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="41"/>
         <source>C&amp;oller</source>
-        <translation type="unfinished">&amp;Paste</translation>
+        <translation>&amp;Paste</translation>
     </message>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="47"/>
         <source>&amp;Dupliquer</source>
-        <translation type="unfinished">&amp;Duplicate</translation>
+        <translation>D&amp;uplicate</translation>
     </message>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="53"/>
         <source>&amp;Supprimer</source>
-        <translation type="unfinished">&amp;Delete</translation>
+        <translation>&amp;Delete</translation>
     </message>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="60"/>
         <location filename="editor/tree/treeviewmenu.cpp" line="117"/>
         <location filename="editor/tree/treeviewmenu.cpp" line="121"/>
         <source>Re&amp;nommer...</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Rename...</translation>
     </message>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="117"/>
         <source>Re&amp;nommer en masse...</source>
-        <translation type="unfinished"></translation>
+        <translation>Bulk &amp;rename...</translation>
     </message>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="163"/>
         <location filename="editor/tree/treeviewmenu.cpp" line="166"/>
         <source>Attention</source>
-        <translation type="unfinished">Warning</translation>
+        <translation>Warning</translation>
     </message>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="164"/>
         <source>Impossible de supprimer un échantillon s&apos;il est utilisé par un instrument.</source>
-        <translation type="unfinished">Cannot delete a sample used by another instrument.</translation>
+        <translation>Cannot delete a sample used by another instrument.</translation>
     </message>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="167"/>
         <source>Impossible de supprimer un instrument s&apos;il est utilisé par un preset.</source>
-        <translation type="unfinished">Cannot delete an instrument used by another preset.</translation>
+        <translation>Cannot delete an instrument used by another preset.</translation>
     </message>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="301"/>
         <source>Nom de l&apos;échantillon (max 20 caractères) :</source>
-        <translation type="unfinished">Sample name (max 20 characters):</translation>
+        <translation>Sample name (max 20 characters):</translation>
     </message>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="303"/>
         <source>Nom de l&apos;instrument (max 20 caractères) :</source>
-        <translation type="unfinished">Instrument name (max 20 characters):</translation>
+        <translation>Instrument name (max 20 characters):</translation>
     </message>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="305"/>
         <source>Nom du preset (max 20 caractères) :</source>
-        <translation type="unfinished">Preset name (max 20 characters):</translation>
+        <translation>Preset name (max 20 characters):</translation>
     </message>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="309"/>
         <source>Question</source>
-        <translation type="unfinished">Question</translation>
+        <translation>Question</translation>
     </message>
 </context>
 <context>
@@ -9317,56 +9448,29 @@ download content</translation>
     <message>
         <location filename="repository/usermanager.cpp" line="98"/>
         <source>Mauvais identifiant / mot de passe</source>
-        <translation type="unfinished"></translation>
+        <translation>Wrong username or password</translation>
     </message>
 </context>
 <context>
     <name>WaitingToolDialog</name>
     <message>
-        <location filename="editor/tools/waitingtooldialog.ui" line="14"/>
-        <source>Dialog</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="editor/tools/waitingtooldialog.ui" line="50"/>
         <source>Traitement en cours...</source>
-        <translation type="unfinished"></translation>
+        <translation>Processing..</translation>
     </message>
     <message>
         <location filename="editor/tools/waitingtooldialog.cpp" line="53"/>
         <source>Annulation...</source>
-        <translation type="unfinished"></translation>
+        <translation>Canceling...</translation>
     </message>
 </context>
 <context>
     <name>WidgetShowHistory</name>
     <message>
-        <location filename="mainwindow/widgetshowhistory.ui" line="14"/>
-        <source>Form</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="mainwindow/widgetshowhistory.ui" line="84"/>
-        <source>La liste est vide !</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>WidgetShowHistoryCell</name>
-    <message>
-        <location filename="mainwindow/widgetshowhistorycell.ui" line="14"/>
-        <source>Form</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="mainwindow/widgetshowhistorycell.ui" line="23"/>
-        <source>labelDateTime</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="mainwindow/widgetshowhistorycell.ui" line="36"/>
-        <source>labelLink</source>
-        <translation type="unfinished"></translation>
+        <source>La liste est vide</source>
+        <oldsource>La liste est vide !</oldsource>
+        <translation>Empty list</translation>
     </message>
 </context>
 <context>
@@ -9374,52 +9478,53 @@ download content</translation>
     <message>
         <location filename="mainwindow/windowmanager.cpp" line="50"/>
         <source>Préférences</source>
-        <translation type="unfinished">Settings</translation>
+        <translation>Settings</translation>
     </message>
     <message>
         <location filename="mainwindow/windowmanager.cpp" line="125"/>
         <source>Soundfonts en ligne</source>
-        <translation type="unfinished">Online repository</translation>
+        <translation>Online repository</translation>
     </message>
     <message>
         <location filename="mainwindow/windowmanager.cpp" line="170"/>
         <source>Sauvegarder avant de quitter ?</source>
-        <translation type="unfinished">Save before exiting?</translation>
+        <translation>Save before exiting?</translation>
     </message>
     <message>
         <location filename="mainwindow/windowmanager.cpp" line="173"/>
         <source>sans titre</source>
-        <translation type="unfinished">untitled</translation>
+        <translation>untitled</translation>
     </message>
     <message>
         <location filename="mainwindow/windowmanager.cpp" line="174"/>
-        <source>Le fichier « %0 » a été modifié.</source>
-        <translation type="unfinished"></translation>
+        <source>Le fichier « %1 » a été modifié.</source>
+        <oldsource>Le fichier « %0 » a été modifié.</oldsource>
+        <translation>File &quot;%1&quot; has been modified.</translation>
     </message>
     <message>
         <location filename="mainwindow/windowmanager.cpp" line="175"/>
         <source>Attention</source>
-        <translation type="unfinished">Warning</translation>
+        <translation>Warning</translation>
     </message>
     <message>
         <location filename="mainwindow/windowmanager.cpp" line="177"/>
         <source>&amp;Enregistrer</source>
-        <translation type="unfinished">&amp;Save</translation>
+        <translation>&amp;Save</translation>
     </message>
     <message>
         <location filename="mainwindow/windowmanager.cpp" line="178"/>
         <source>&amp;Annuler</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Cancel</translation>
     </message>
     <message>
         <location filename="mainwindow/windowmanager.cpp" line="179"/>
         <source>&amp;Fermer sans enregistrer</source>
-        <translation type="unfinished">Do&amp;n&apos;t save</translation>
+        <translation>Do&amp;n&apos;t save</translation>
     </message>
     <message>
         <location filename="mainwindow/windowmanager.cpp" line="262"/>
         <source>Espace utilisateur</source>
-        <translation type="unfinished">User area</translation>
+        <translation>User area</translation>
     </message>
 </context>
 </TS>

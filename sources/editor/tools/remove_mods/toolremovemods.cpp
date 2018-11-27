@@ -87,7 +87,7 @@ QString ToolRemoveMods::getConfirmation()
     if (_count == 1)
         return "1 modulateur a été supprimé.";
     else if (_count > 1)
-        return trUtf8("%0 modulateurs ont été supprimés.").arg(QString::number(_count));
+        return trUtf8("%1 modulateurs ont été supprimés.").arg(QString::number(_count));
     return "";
 }
 

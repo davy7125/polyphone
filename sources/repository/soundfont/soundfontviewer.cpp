@@ -43,8 +43,8 @@ SoundfontViewer::SoundfontViewer(QWidget *parent) : QWidget(parent),
     QColor buttonBackground = ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND);
     QColor buttonText = ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_TEXT);
     QColor buttonBackgroundHover = ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND, ThemeManager::HOVERED);
-    QString tmp = QString("QPushButton{background-color:%0; color:%1;border:0px;padding:5px;border-radius:4px;}") +
-            "QPushButton:hover{ background-color:%2;}QLabel#labelAuthor{color:%0;}";
+    QString tmp = QString("QPushButton{background-color:%1; color:%2;border:0px;padding:5px;border-radius:4px;}") +
+            "QPushButton:hover{ background-color:%3;}QLabel#labelAuthor{color:%1;}";
     ui->scrollArea->setStyleSheet(tmp.arg(buttonBackground.name()).arg(buttonText.name()).arg(buttonBackgroundHover.name()));
 }
 
@@ -195,7 +195,7 @@ void SoundfontViewer::initialize(int soundfontId)
 void SoundfontViewer::on_labelAuthor_linkActivated(const QString &link)
 {
     SoundfontFilter * filter = new SoundfontFilter();
-    filter->setSearchText(QString("Author:\"%0\"").arg(link));
+    filter->setSearchText(QString("Author:\"%1\"").arg(link));
     emit(itemClicked(filter));
 }
 
