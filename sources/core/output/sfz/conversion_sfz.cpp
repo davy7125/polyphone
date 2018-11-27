@@ -48,7 +48,7 @@ QString ConversionSfz::convert(QString dirPath, EltID idSf2, bool presetPrefix, 
         dirPath += "-" + QString::number(i);
     }
     if (!QDir().mkdir(dirPath))
-        return trUtf8("Impossible de créer le dossier « %0 »").arg(dirPath);
+        return trUtf8("Impossible de créer le dossier « %1 »").arg(dirPath);
 
     // Plusieurs banques sont utilisées ?
     int numBankUnique = -1;

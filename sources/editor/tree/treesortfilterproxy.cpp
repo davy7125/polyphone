@@ -180,7 +180,7 @@ void TreeSortFilterProxy::findMatches(int idSf2, QString filter)
     foreach (int i, _sm->getSiblings(idPrst))
     {
         idPrst.indexElt = i;
-        QString name = QString("%0:%1 %2")
+        QString name = QString("%1:%2 %3")
                 .arg(_sm->get(idPrst, champ_wBank).wValue, 3, 10, QChar('0'))
                 .arg(_sm->get(idPrst, champ_wPreset).wValue, 3, 10, QChar('0'))
                 .arg(_sm->getQstr(idPrst, champ_name)).toLower();

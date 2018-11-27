@@ -171,7 +171,7 @@ void WindowManager::onTabCloseRequested(int tabIndex)
             QString filename = sf2->getQstr(id, champ_name);
             if (filename.isEmpty())
                 filename = trUtf8("sans titre");
-            msgBox.setInformativeText(trUtf8("Le fichier « %0 » a été modifié.").arg(filename));
+            msgBox.setInformativeText(trUtf8("Le fichier « %1 » a été modifié.").arg(filename));
             msgBox.setWindowTitle(trUtf8("Attention"));
             msgBox.setStandardButtons(QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel);
             msgBox.button(QMessageBox::Save)->setText(trUtf8("&Enregistrer"));

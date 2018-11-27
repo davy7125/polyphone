@@ -67,7 +67,7 @@ QString InstPrst::display()
 {
     QString display = "";
     if (_extraFields.contains(champ_wBank) && _extraFields.contains(champ_wPreset))
-        display = QString("%0:%1 ").arg(_extraFields[champ_wBank], 3, 10, QChar('0')).arg(_extraFields[champ_wPreset], 3, 10, QChar('0'));
+        display = QString("%1:%2 ").arg(_extraFields[champ_wBank], 3, 10, QChar('0')).arg(_extraFields[champ_wPreset], 3, 10, QChar('0'));
     display += (_name.isEmpty() ? "..." : _name);
     return display;
 }

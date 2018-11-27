@@ -55,7 +55,10 @@
       </font>
      </property>
      <property name="styleSheet">
-      <string notr="true">QGroupBox{padding-top:20px; margin-top:-20px}</string>
+      <string notr="true">QGroupBox{padding-top:17px; margin-top:-17px}</string>
+     </property>
+     <property name="flat">
+      <bool>true</bool>
      </property>
      <layout class="QGridLayout" name="gridLayout">
       <property name="leftMargin">

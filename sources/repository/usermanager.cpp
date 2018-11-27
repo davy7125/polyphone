@@ -117,7 +117,7 @@ void UserManager::userDataAvailable(QString error)
                 _connectionState = BANNED;
                 break;
             default:
-                _error = trUtf8("Problème serveur") + QString(" (status '%0')").arg(data.value("status").toString());
+                _error = trUtf8("Problème serveur") + QString(" (status '%1')").arg(data.value("status").toString());
                 _connectionState = FAILED;
             }
         }

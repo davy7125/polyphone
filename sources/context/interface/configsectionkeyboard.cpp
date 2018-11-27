@@ -18,6 +18,18 @@ ConfigSectionKeyboard::~ConfigSectionKeyboard()
 
 void ConfigSectionKeyboard::initialize()
 {
+    // Name of the keys in the table
+    for (int i = 0; i <= 12; i++)
+    {
+        ui->tableKeyboardMap->horizontalHeaderItem(i)->setText(ContextManager::keyName()->getKeyName(i, true, false, false, true));
+    }
+
+    // Populate the table
+    ui->tableKeyboardMap->blockSignals(true);
+    ui->tableKeyboardMap->populate();
+    ui->tableKeyboardMap->blockSignals(false);
+
+    // Octave configuration
     ui->comboDo->blockSignals(true);
     int octaveMapping = ContextManager::configuration()->getValue(ConfManager::SECTION_MAP, "octave_offset", 3).toInt();
     if (octaveMapping >= ui->comboDo->count())
@@ -27,10 +39,7 @@ void ConfigSectionKeyboard::initialize()
     ui->comboDo->setCurrentIndex(octaveMapping);
     ui->comboDo->blockSignals(false);
 
-    ui->tableKeyboardMap->blockSignals(true);
-    ui->tableKeyboardMap->populate();
-    ui->tableKeyboardMap->blockSignals(false);
-
+    // Default velocity
     ui->spinDefaultVelocity->blockSignals(true);
     ui->spinDefaultVelocity->setValue(ContextManager::configuration()->getValue(ConfManager::SECTION_KEYBOARD, "velocity", 127).toInt());
     ui->spinDefaultVelocity->blockSignals(false);

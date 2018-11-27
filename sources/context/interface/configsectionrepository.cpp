@@ -167,14 +167,14 @@ void ConfigSectionRepository::on_lineUser_textEdited(const QString &arg1)
 {
     Q_UNUSED(arg1)
     if (_currentState == UserManager::DISCONNECTED)
-        ui->labelMessage->setText(trUtf8("Cliquez sur %0 pour sauvegarder les paramètres.").arg("<b>" + ui->pushConnect->text() + "</b>"));
+        ui->labelMessage->setText(trUtf8("Cliquez sur %1 pour sauvegarder les paramètres.").arg("<b>" + ui->pushConnect->text() + "</b>"));
 }
 
 void ConfigSectionRepository::on_linePassword_textChanged(const QString &arg1)
 {
     Q_UNUSED(arg1)
     if (_currentState == UserManager::DISCONNECTED)
-        ui->labelMessage->setText(trUtf8("Cliquez sur %0 pour sauvegarder les paramètres.").arg("<b>" + ui->pushConnect->text() + "</b>"));
+        ui->labelMessage->setText(trUtf8("Cliquez sur %1 pour sauvegarder les paramètres.").arg("<b>" + ui->pushConnect->text() + "</b>"));
     _fakePassword = false;
 }
 

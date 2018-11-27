@@ -1356,65 +1356,52 @@
         <translation type="unfinished">Ottava 4</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionkeyboard.ui" line="65"/>
-        <location filename="context/interface/configsectionkeyboard.ui" line="125"/>
         <source>Do</source>
-        <translation type="unfinished">Do</translation>
+        <translation type="obsolete">Do</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionkeyboard.ui" line="70"/>
         <source>Do#</source>
-        <translation type="unfinished">Do#</translation>
+        <translation type="obsolete">Do#</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionkeyboard.ui" line="75"/>
         <source>Ré</source>
-        <translation type="unfinished">Re</translation>
+        <translation type="obsolete">Re</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionkeyboard.ui" line="80"/>
         <source>Ré#</source>
-        <translation type="unfinished">Re#</translation>
+        <translation type="obsolete">Re#</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionkeyboard.ui" line="85"/>
         <source>Mi</source>
-        <translation type="unfinished">Mi</translation>
+        <translation type="obsolete">Mi</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionkeyboard.ui" line="90"/>
         <source>Fa</source>
-        <translation type="unfinished">Fa</translation>
+        <translation type="obsolete">Fa</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionkeyboard.ui" line="95"/>
         <source>Fa#</source>
-        <translation type="unfinished">Fa#</translation>
+        <translation type="obsolete">Fa#</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionkeyboard.ui" line="100"/>
         <source>Sol</source>
-        <translation type="unfinished">Sol</translation>
+        <translation type="obsolete">Sol</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionkeyboard.ui" line="105"/>
         <source>Sol#</source>
-        <translation type="unfinished">Sol#</translation>
+        <translation type="obsolete">Sol#</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionkeyboard.ui" line="110"/>
         <source>La</source>
-        <translation type="unfinished">La</translation>
+        <translation type="obsolete">La</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionkeyboard.ui" line="115"/>
         <source>La#</source>
-        <translation type="unfinished">La#</translation>
+        <translation type="obsolete">La#</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionkeyboard.ui" line="120"/>
         <source>Si</source>
-        <translation type="unfinished">Si</translation>
+        <translation type="obsolete">Si</translation>
     </message>
     <message>
         <location filename="context/interface/configsectionkeyboard.ui" line="133"/>
@@ -1492,7 +1479,8 @@ Premium !</source>
     <message>
         <location filename="context/interface/configsectionrepository.cpp" line="170"/>
         <location filename="context/interface/configsectionrepository.cpp" line="177"/>
-        <source>Cliquez sur %0 pour sauvegarder les paramètres.</source>
+        <source>Cliquez sur %1 pour sauvegarder les paramètres.</source>
+        <oldsource>Cliquez sur %0 pour sauvegarder les paramètres.</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1514,38 +1502,38 @@ Premium !</source>
         <translation type="unfinished">Guadagno (dB)</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionsound.ui" line="85"/>
+        <location filename="context/interface/configsectionsound.ui" line="88"/>
         <source>Densité</source>
         <translation type="unfinished">Densità</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionsound.ui" line="120"/>
-        <location filename="context/interface/configsectionsound.ui" line="294"/>
+        <location filename="context/interface/configsectionsound.ui" line="123"/>
+        <location filename="context/interface/configsectionsound.ui" line="297"/>
         <source>Niveau</source>
         <translation type="unfinished">Livello</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionsound.ui" line="175"/>
+        <location filename="context/interface/configsectionsound.ui" line="178"/>
         <source>Atténuation</source>
         <translation type="unfinished">Attenuazione</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionsound.ui" line="191"/>
+        <location filename="context/interface/configsectionsound.ui" line="194"/>
         <source>Profondeur</source>
         <translation type="unfinished">Profondità</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionsound.ui" line="261"/>
+        <location filename="context/interface/configsectionsound.ui" line="264"/>
         <source>Chorus</source>
         <translation type="unfinished">Chorus</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionsound.ui" line="342"/>
+        <location filename="context/interface/configsectionsound.ui" line="345"/>
         <source>Fréquence</source>
         <translation type="unfinished">Frequenza</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectionsound.ui" line="358"/>
+        <location filename="context/interface/configsectionsound.ui" line="361"/>
         <source>Amplitude</source>
         <translation type="unfinished">Profondità</translation>
     </message>
@@ -1583,7 +1571,8 @@ en ligne</source>
     <name>ConversionSfz</name>
     <message>
         <location filename="core/output/sfz/conversion_sfz.cpp" line="51"/>
-        <source>Impossible de créer le dossier « %0 »</source>
+        <source>Impossible de créer le dossier « %1 »</source>
+        <oldsource>Impossible de créer le dossier « %0 »</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1686,14 +1675,14 @@ en ligne</source>
 <context>
     <name>DetailsManager</name>
     <message>
-        <location filename="repository/detailsmanager.cpp" line="108"/>
+        <location filename="repository/detailsmanager.cpp" line="112"/>
         <source>Souscrivez à un compte Premium pour bénéficier de toutes les fonctionnalités !</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="repository/detailsmanager.cpp" line="111"/>
-        <location filename="repository/detailsmanager.cpp" line="114"/>
-        <location filename="repository/detailsmanager.cpp" line="120"/>
+        <location filename="repository/detailsmanager.cpp" line="115"/>
+        <location filename="repository/detailsmanager.cpp" line="118"/>
+        <location filename="repository/detailsmanager.cpp" line="124"/>
         <source>Problème serveur</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1996,7 +1985,8 @@ en ligne</source>
     </message>
     <message>
         <location filename="dialogs/dialogcreateelements.cpp" line="31"/>
-        <source>Créer un instrument contenant l&apos;échantillon %0 ?</source>
+        <source>Créer un instrument contenant l&apos;échantillon %1 ?</source>
+        <oldsource>Créer un instrument contenant l&apos;échantillon %0 ?</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2011,12 +2001,14 @@ en ligne</source>
     </message>
     <message>
         <location filename="dialogs/dialogcreateelements.cpp" line="39"/>
-        <source>contenant les %0 échantillons</source>
+        <source>contenant les %1 échantillons</source>
+        <oldsource>contenant les %0 échantillons</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="dialogs/dialogcreateelements.cpp" line="47"/>
-        <source>Créer un preset contenant l&apos;instrument %0 ?</source>
+        <source>Créer un preset contenant l&apos;instrument %1 ?</source>
+        <oldsource>Créer un preset contenant l&apos;instrument %0 ?</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2031,7 +2023,8 @@ en ligne</source>
     </message>
     <message>
         <location filename="dialogs/dialogcreateelements.cpp" line="55"/>
-        <source>contenant les %0 instruments</source>
+        <source>contenant les %1 instruments</source>
+        <oldsource>contenant les %0 instruments</oldsource>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2663,6 +2656,26 @@ en ligne</source>
     </message>
 </context>
 <context>
+    <name>DownloadManager</name>
+    <message>
+        <location filename="repository/downloadmanager.cpp" line="82"/>
+        <location filename="repository/downloadmanager.cpp" line="130"/>
+        <source>sans titre</source>
+        <translation type="unfinished">senza titolo</translation>
+    </message>
+    <message>
+        <location filename="repository/downloadmanager.cpp" line="116"/>
+        <source>Attention</source>
+        <translation type="unfinished">Attenzione</translation>
+    </message>
+    <message>
+        <location filename="repository/downloadmanager.cpp" line="117"/>
+        <source>Impossible de télécharger le fichier « %1 » : %2</source>
+        <oldsource>Impossible de télécharger le fichier « %0 » : %1</oldsource>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>Duplicator</name>
     <message>
         <location filename="core/duplicator.cpp" line="281"/>
@@ -2686,17 +2699,20 @@ en ligne</source>
     </message>
     <message>
         <location filename="core/duplicator.cpp" line="317"/>
-        <source>L&apos;échantillon « %0 » existe déjà.&lt;br /&gt;Que faire ?</source>
+        <source>L&apos;échantillon « %1 » existe déjà.&lt;br /&gt;Que faire ?</source>
+        <oldsource>L&apos;échantillon « %0 » existe déjà.&lt;br /&gt;Que faire ?</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="core/duplicator.cpp" line="455"/>
-        <source>L&apos;instrument « %0 » existe déjà.&lt;br /&gt;Souhaitez-vous le remplacer ?</source>
+        <source>L&apos;instrument « %1 » existe déjà.&lt;br /&gt;Souhaitez-vous le remplacer ?</source>
+        <oldsource>L&apos;instrument « %0 » existe déjà.&lt;br /&gt;Souhaitez-vous le remplacer ?</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="core/duplicator.cpp" line="548"/>
-        <source>Le preset « %0 » existe déjà.&lt;br /&gt;Souhaitez-vous le remplacer ?</source>
+        <source>Le preset « %1 » existe déjà.&lt;br /&gt;Souhaitez-vous le remplacer ?</source>
+        <oldsource>Le preset « %0 » existe déjà.&lt;br /&gt;Souhaitez-vous le remplacer ?</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3068,14 +3084,14 @@ en ligne</source>
     <name>InputSf2</name>
     <message>
         <location filename="core/input/sf2/inputsf2.cpp" line="24"/>
-        <source>Le fichier « %0 » est introuvable.</source>
-        <oldsource>Le fichier %0 est introuvable</oldsource>
+        <source>Le fichier « %1 » est introuvable.</source>
+        <oldsource>Le fichier « %0 » est introuvable.</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="core/input/sf2/inputsf2.cpp" line="31"/>
-        <source>Le fichier « %0 » n&apos;est pas accessible en lecture.</source>
-        <oldsource>Le fichier %0 n&apos;est pas accessible en lecture</oldsource>
+        <source>Le fichier « %1 » n&apos;est pas accessible en lecture.</source>
+        <oldsource>Le fichier « %0 » n&apos;est pas accessible en lecture.</oldsource>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -3088,12 +3104,14 @@ en ligne</source>
     </message>
     <message>
         <location filename="core/input/sf3/inputsf3.cpp" line="54"/>
-        <source>Impossible de créer le fichier « %0 »</source>
+        <source>Impossible de créer le fichier « %1 »</source>
+        <oldsource>Impossible de créer le fichier « %0 »</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="core/input/sf3/inputsf3.cpp" line="57"/>
-        <source>Impossible de lire le fichier « %0 »</source>
+        <source>Impossible de lire le fichier « %1 »</source>
+        <oldsource>Impossible de lire le fichier « %0 »</oldsource>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -3106,7 +3124,8 @@ en ligne</source>
     </message>
     <message>
         <location filename="core/input/sfz/inputsfz.cpp" line="88"/>
-        <source>Impossible d&apos;ouvrir le fichier « %0 »</source>
+        <source>Impossible d&apos;ouvrir le fichier « %1 »</source>
+        <oldsource>Impossible d&apos;ouvrir le fichier « %0 »</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3767,7 +3786,8 @@ en ligne</source>
     </message>
     <message>
         <location filename="mainwindow/mainwindow.cpp" line="191"/>
-        <source>Le fichier « %0 » n&apos;a pas été sauvegardé.</source>
+        <source>Le fichier « %1 » n&apos;a pas été sauvegardé.</source>
+        <oldsource>Le fichier « %0 » n&apos;a pas été sauvegardé.</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -4215,7 +4235,8 @@ Dividere il file in più SF2 può risolvere il problema.</translation>
     </message>
     <message>
         <location filename="core/output/sf2/outputsf2.cpp" line="226"/>
-        <source>Impossible de créer le fichier « %0 »</source>
+        <source>Impossible de créer le fichier « %1 »</source>
+        <oldsource>Impossible de créer le fichier « %0 »</oldsource>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -4228,12 +4249,14 @@ Dividere il file in più SF2 può risolvere il problema.</translation>
     </message>
     <message>
         <location filename="core/output/sf3/outputsf3.cpp" line="62"/>
-        <source>Impossible de créer le fichier « %0 »</source>
+        <source>Impossible de créer le fichier « %1 »</source>
+        <oldsource>Impossible de créer le fichier « %0 »</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="core/output/sf3/outputsf3.cpp" line="68"/>
-        <source>Impossible de lire le fichier « %0 »</source>
+        <source>Impossible de lire le fichier « %1 »</source>
+        <oldsource>Impossible de lire le fichier « %0 »</oldsource>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5531,14 +5554,16 @@ d&apos;échantillonnage</source>
     <message>
         <location filename="editor/pagesf2.cpp" line="248"/>
         <location filename="editor/pagesf2.cpp" line="261"/>
-        <source>%0 (inutilisés : %1)</source>
+        <source>%1 (inutilisés : %2)</source>
+        <oldsource>%0 (inutilisés : %1)</oldsource>
         <comment>plural form</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="editor/pagesf2.cpp" line="250"/>
         <location filename="editor/pagesf2.cpp" line="263"/>
-        <source>%0 (inutilisé : %1)</source>
+        <source>%1 (inutilisé : %2)</source>
+        <oldsource>%0 (inutilisé : %1)</oldsource>
         <comment>singular form</comment>
         <translation type="unfinished"></translation>
     </message>
@@ -5564,12 +5589,11 @@ d&apos;échantillonnage</source>
         <translation type="unfinished">Applica</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.ui" line="784"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Égaliseur (±15 dB)&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Equalizzatore (±15 dB)&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="obsolete">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Equalizzatore (±15 dB)&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.ui" line="856"/>
+        <location filename="editor/pagesmpl.ui" line="862"/>
         <location filename="editor/pagesmpl.cpp" line="322"/>
         <location filename="editor/pagesmpl.cpp" line="1026"/>
         <location filename="editor/pagesmpl.cpp" line="1064"/>
@@ -5577,81 +5601,86 @@ d&apos;échantillonnage</source>
         <translation type="unfinished">Play</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.ui" line="872"/>
+        <location filename="editor/pagesmpl.ui" line="878"/>
         <source>sinus</source>
         <translation type="unfinished">sinus</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.ui" line="910"/>
+        <location filename="editor/pagesmpl.ui" line="916"/>
         <source>en boucle</source>
         <translation type="unfinished">loop</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.ui" line="923"/>
+        <location filename="editor/pagesmpl.ui" line="929"/>
         <source>stéréo</source>
         <translation type="unfinished">stereo</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.ui" line="956"/>
         <source>&lt;b&gt;Fréquences&lt;/b&gt;</source>
-        <translation type="unfinished">&lt;b&gt;Frequenza&lt;/b&gt;</translation>
+        <translation type="obsolete">&lt;b&gt;Frequenza&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.ui" line="986"/>
+        <location filename="editor/pagesmpl.ui" line="968"/>
+        <source>Fréquences</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="editor/pagesmpl.ui" line="998"/>
         <source>Boucle</source>
         <translation type="unfinished">Loop</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.ui" line="1112"/>
+        <location filename="editor/pagesmpl.ui" line="1124"/>
         <source>Utilise la longueur totale de l&apos;échantillon comme boucle</source>
         <translation type="unfinished">Usa la lunghezza totale del campione come loop</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.ui" line="1132"/>
+        <location filename="editor/pagesmpl.ui" line="1144"/>
         <source>Taille</source>
         <translation type="unfinished">Durata</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.ui" line="1139"/>
+        <location filename="editor/pagesmpl.ui" line="1151"/>
         <source>Correction (centième)</source>
         <translation type="unfinished">Correzione (cents)</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.ui" line="1146"/>
+        <location filename="editor/pagesmpl.ui" line="1158"/>
         <source>Echantillonnage</source>
         <translation type="unfinished">Campionamento</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.ui" line="1153"/>
+        <location filename="editor/pagesmpl.ui" line="1165"/>
         <source>Type</source>
         <translation type="unfinished">Tipo</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.ui" line="1160"/>
+        <location filename="editor/pagesmpl.ui" line="1172"/>
         <source>Lien</source>
         <translation type="unfinished">Collegamento</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.ui" line="1167"/>
+        <location filename="editor/pagesmpl.ui" line="1179"/>
         <source>Note de base</source>
         <translation type="unfinished">Nota di base</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.ui" line="1180"/>
+        <location filename="editor/pagesmpl.ui" line="1192"/>
         <source>Utilise l&apos;estimation de la note comme valeur</source>
         <translation type="unfinished">Usa la stima della nota come valore</translation>
     </message>
     <message>
-        <location filename="editor/pagesmpl.ui" line="1217"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Informations&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Informazioni&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="obsolete">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Informazioni&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
+        <location filename="editor/pagesmpl.ui" line="1235"/>
         <location filename="editor/pagesmpl.cpp" line="108"/>
         <source>Informations</source>
         <translation type="unfinished">Informazioni</translation>
     </message>
     <message>
+        <location filename="editor/pagesmpl.ui" line="790"/>
         <location filename="editor/pagesmpl.cpp" line="109"/>
         <source>Égaliseur (±15 dB)</source>
         <translation type="unfinished">Equalizzatore (±15 dB)</translation>
@@ -5801,7 +5830,8 @@ d&apos;échantillonnage</source>
     </message>
     <message>
         <location filename="editor/pagetable.cpp" line="1910"/>
-        <source>%0 ne peut être modulé dans un preset.</source>
+        <source>%1 ne peut être modulé dans un preset.</source>
+        <oldsource>%0 ne peut être modulé dans un preset.</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -6775,17 +6805,20 @@ d&apos;échantillonnage</source>
     </message>
     <message>
         <location filename="core/sampleloader.cpp" line="47"/>
-        <source>L&apos;échantillon « %0L » existe déjà.&lt;br /&gt;Que faire ?</source>
+        <source>L&apos;échantillon « %1L » existe déjà.&lt;br /&gt;Que faire ?</source>
+        <oldsource>L&apos;échantillon « %0L » existe déjà.&lt;br /&gt;Que faire ?</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="core/sampleloader.cpp" line="52"/>
-        <source>L&apos;échantillon « %0R » existe déjà.&lt;br /&gt;Que faire ?</source>
+        <source>L&apos;échantillon « %1R » existe déjà.&lt;br /&gt;Que faire ?</source>
+        <oldsource>L&apos;échantillon « %0R » existe déjà.&lt;br /&gt;Que faire ?</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="core/sampleloader.cpp" line="60"/>
-        <source>L&apos;échantillon « %0 » existe déjà.&lt;br /&gt;Que faire ?</source>
+        <source>L&apos;échantillon « %1 » existe déjà.&lt;br /&gt;Que faire ?</source>
+        <oldsource>L&apos;échantillon « %0 » existe déjà.&lt;br /&gt;Que faire ?</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -6848,7 +6881,8 @@ d&apos;échantillonnage</source>
     </message>
     <message>
         <location filename="core/sound.cpp" line="649"/>
-        <source>Impossible d&apos;ouvrir le fichier « %0 »</source>
+        <source>Impossible d&apos;ouvrir le fichier « %1 »</source>
+        <oldsource>Impossible d&apos;ouvrir le fichier « %0 »</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -7030,6 +7064,98 @@ d&apos;échantillonnage</source>
     <message>
         <location filename="repository/soundfontinformation.cpp" line="22"/>
         <source>Auteur inconnu</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="context/keynamemanager.cpp" line="63"/>
+        <location filename="context/keynamemanager.cpp" line="81"/>
+        <source>Do</source>
+        <translation type="unfinished">Do</translation>
+    </message>
+    <message>
+        <location filename="context/keynamemanager.cpp" line="64"/>
+        <source>Ré♭</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="context/keynamemanager.cpp" line="65"/>
+        <location filename="context/keynamemanager.cpp" line="83"/>
+        <source>Ré</source>
+        <translation type="unfinished">Re</translation>
+    </message>
+    <message>
+        <location filename="context/keynamemanager.cpp" line="66"/>
+        <source>Mi♭</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="context/keynamemanager.cpp" line="67"/>
+        <location filename="context/keynamemanager.cpp" line="85"/>
+        <source>Mi</source>
+        <translation type="unfinished">Mi</translation>
+    </message>
+    <message>
+        <location filename="context/keynamemanager.cpp" line="68"/>
+        <location filename="context/keynamemanager.cpp" line="86"/>
+        <source>Fa</source>
+        <translation type="unfinished">Fa</translation>
+    </message>
+    <message>
+        <location filename="context/keynamemanager.cpp" line="69"/>
+        <source>Sol♭</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="context/keynamemanager.cpp" line="70"/>
+        <location filename="context/keynamemanager.cpp" line="88"/>
+        <source>Sol</source>
+        <translation type="unfinished">Sol</translation>
+    </message>
+    <message>
+        <location filename="context/keynamemanager.cpp" line="71"/>
+        <source>La♭</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="context/keynamemanager.cpp" line="72"/>
+        <location filename="context/keynamemanager.cpp" line="90"/>
+        <source>La</source>
+        <translation type="unfinished">La</translation>
+    </message>
+    <message>
+        <location filename="context/keynamemanager.cpp" line="73"/>
+        <source>Si♭</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="context/keynamemanager.cpp" line="74"/>
+        <location filename="context/keynamemanager.cpp" line="92"/>
+        <source>Si</source>
+        <translation type="unfinished">Si</translation>
+    </message>
+    <message>
+        <location filename="context/keynamemanager.cpp" line="82"/>
+        <source>Do♯</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="context/keynamemanager.cpp" line="84"/>
+        <source>Ré♯</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="context/keynamemanager.cpp" line="87"/>
+        <source>Fa♯</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="context/keynamemanager.cpp" line="89"/>
+        <source>Sol♯</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="context/keynamemanager.cpp" line="91"/>
+        <source>La♯</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -7499,7 +7625,8 @@ d&apos;échantillonnage</source>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="421"/>
-        <source>Catégorie %0</source>
+        <source>Catégorie %1</source>
+        <oldsource>Catégorie %0</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -7660,30 +7787,30 @@ de télécharger la liste</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="repository/soundfont/soundfontdownloadcell.cpp" line="43"/>
+        <location filename="repository/soundfont/soundfontdownloadcell.cpp" line="44"/>
         <source>octets</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="repository/soundfont/soundfontdownloadcell.cpp" line="45"/>
+        <location filename="repository/soundfont/soundfontdownloadcell.cpp" line="46"/>
         <source>ko</source>
         <comment>kilobytes</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="repository/soundfont/soundfontdownloadcell.cpp" line="47"/>
+        <location filename="repository/soundfont/soundfontdownloadcell.cpp" line="48"/>
         <source>Mo</source>
         <comment>megabytes</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="repository/soundfont/soundfontdownloadcell.cpp" line="49"/>
+        <location filename="repository/soundfont/soundfontdownloadcell.cpp" line="50"/>
         <source>Go</source>
         <comment>gigabytes</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="repository/soundfont/soundfontdownloadcell.cpp" line="50"/>
+        <location filename="repository/soundfont/soundfontdownloadcell.cpp" line="51"/>
         <source>To</source>
         <comment>terabytes</comment>
         <translation type="unfinished"></translation>
@@ -7745,11 +7872,6 @@ de télécharger la liste</source>
         <location filename="repository/soundfont/soundfontviewer.ui" line="575"/>
         <source>Oups ! Impossible
 de télécharger le contenu</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="repository/soundfont/soundfontviewer.ui" line="707"/>
-        <source>0</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -7841,7 +7963,8 @@ de télécharger le contenu</source>
     <name>ToolAutoLoop</name>
     <message>
         <location filename="editor/tools/auto_loop/toolautoloop.cpp" line="50"/>
-        <source>L&apos;échantillon « %0 » n&apos;a pas pu être bouclé.</source>
+        <source>L&apos;échantillon « %1 » n&apos;a pas pu être bouclé.</source>
+        <oldsource>L&apos;échantillon « %0 » n&apos;a pas pu être bouclé.</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -8140,7 +8263,8 @@ de télécharger le contenu</source>
     <name>ToolCleanUnused</name>
     <message>
         <location filename="editor/tools/clean_unused_elements/toolcleanunused.cpp" line="86"/>
-        <source>%0 échantillon(s) et %1 instrument(s) ont été supprimés.</source>
+        <source>%1 échantillon(s) et %2 instrument(s) ont été supprimés.</source>
+        <oldsource>%0 échantillon(s) et %1 instrument(s) ont été supprimés.</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -8199,7 +8323,8 @@ de télécharger le contenu</source>
     </message>
     <message>
         <location filename="editor/tools/external_command/toolexternalcommand.cpp" line="93"/>
-        <source>La commande s&apos;est terminée avec une erreur</source>
+        <source>La commande s&apos;est terminée avec une erreur.</source>
+        <oldsource>La commande s&apos;est terminée avec une erreur</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -8268,11 +8393,6 @@ de télécharger le contenu</source>
         <location filename="editor/tools/frequency_filter/toolfrequencyfilter.h" line="20"/>
         <source>Traitement des échantillons</source>
         <oldsource>Filtrer des fréquences...</oldsource>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="editor/tools/frequency_filter/toolfrequencyfilter.h" line="20"/>
-        <source>Traitement des échantillons</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -8774,9 +8894,8 @@ de télécharger le contenu</source>
 <context>
     <name>ToolRelease_gui</name>
     <message>
-        <location filename="editor/tools/release/toolrelease_gui.ui" line="20"/>
         <source>Durée release au do 2 (note 36)</source>
-        <translation type="unfinished">Tempo di release a C2 (nota 36)</translation>
+        <translation type="obsolete">Tempo di release a C2 (nota 36)</translation>
     </message>
     <message>
         <location filename="editor/tools/release/toolrelease_gui.ui" line="43"/>
@@ -8798,7 +8917,8 @@ de télécharger le contenu</source>
     <name>ToolRemoveMods</name>
     <message>
         <location filename="editor/tools/remove_mods/toolremovemods.cpp" line="90"/>
-        <source>%0 modulateurs ont été supprimés.</source>
+        <source>%1 modulateurs ont été supprimés.</source>
+        <oldsource>%0 modulateurs ont été supprimés.</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -8887,8 +9007,12 @@ de télécharger le contenu</source>
     </message>
     <message>
         <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="172"/>
+        <source>Motif</source>
+        <translation type="unfinished">Tipo</translation>
+    </message>
+    <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Motif&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Tipo&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="obsolete">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Tipo&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="189"/>
@@ -8953,7 +9077,8 @@ de télécharger le contenu</source>
     </message>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="116"/>
-        <source>classement général midi</source>
+        <source>classement général MIDI</source>
+        <oldsource>classement général midi</oldsource>
         <translation type="unfinished">classifica General Midi</translation>
     </message>
     <message>
@@ -9140,7 +9265,8 @@ de télécharger le contenu</source>
     </message>
     <message>
         <location filename="mainwindow/toprightwidget.cpp" line="93"/>
-        <source>Bienvenue %0</source>
+        <source>Bienvenue %1</source>
+        <oldsource>Bienvenue %0</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -9311,11 +9437,6 @@ de télécharger le contenu</source>
 <context>
     <name>WaitingToolDialog</name>
     <message>
-        <location filename="editor/tools/waitingtooldialog.ui" line="14"/>
-        <source>Dialog</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="editor/tools/waitingtooldialog.ui" line="50"/>
         <source>Traitement en cours...</source>
         <translation type="unfinished"></translation>
@@ -9329,31 +9450,9 @@ de télécharger le contenu</source>
 <context>
     <name>WidgetShowHistory</name>
     <message>
-        <location filename="mainwindow/widgetshowhistory.ui" line="14"/>
-        <source>Form</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="mainwindow/widgetshowhistory.ui" line="84"/>
-        <source>La liste est vide !</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>WidgetShowHistoryCell</name>
-    <message>
-        <location filename="mainwindow/widgetshowhistorycell.ui" line="14"/>
-        <source>Form</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="mainwindow/widgetshowhistorycell.ui" line="23"/>
-        <source>labelDateTime</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="mainwindow/widgetshowhistorycell.ui" line="36"/>
-        <source>labelLink</source>
+        <source>La liste est vide</source>
+        <oldsource>La liste est vide !</oldsource>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -9381,7 +9480,8 @@ de télécharger le contenu</source>
     </message>
     <message>
         <location filename="mainwindow/windowmanager.cpp" line="174"/>
-        <source>Le fichier « %0 » a été modifié.</source>
+        <source>Le fichier « %1 » a été modifié.</source>
+        <oldsource>Le fichier « %0 » a été modifié.</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>

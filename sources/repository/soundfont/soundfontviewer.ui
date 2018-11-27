@@ -704,7 +704,7 @@ de télécharger le contenu</string>
          </size>
         </property>
         <property name="text">
-         <string>0</string>
+         <string notr="true">0</string>
         </property>
         <property name="alignment">
          <set>Qt::AlignCenter</set>

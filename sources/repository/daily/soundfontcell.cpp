@@ -24,7 +24,7 @@ SoundfontCell::SoundfontCell(SoundfontInformation* soundfontInfo, QWidget *paren
 
     // Author
     _authorTextNoColor = soundfontInfo->getAuthor();
-    _authorTextNoColor = "<a style=\"text-decoration:none;color:%0;\" href=\"" + _authorTextNoColor + "\">" + _authorTextNoColor + "</a>";
+    _authorTextNoColor = "<a style=\"text-decoration:none;color:%1;\" href=\"" + _authorTextNoColor + "\">" + _authorTextNoColor + "</a>";
 
     // Attributes
     connect(ui->line3, SIGNAL(itemClicked(SoundfontFilter*)), this, SIGNAL(itemClicked(SoundfontFilter*)));
@@ -92,7 +92,7 @@ SoundfontCell::IconContainer::IconContainer()
 void SoundfontCell::on_labelAuthor_linkActivated(const QString &link)
 {
     SoundfontFilter * filter = new SoundfontFilter();
-    filter->setSearchText(QString("Author:\"%0\"").arg(link));
+    filter->setSearchText(QString("Author:\"%1\"").arg(link));
     emit(itemClicked(filter));
 }
 
