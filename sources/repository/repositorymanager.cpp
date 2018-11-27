@@ -449,7 +449,7 @@ void RepositoryManager::openSoundfont(int soundfontId, bool daily)
             error = trUtf8("Veuillez patienter quelques instants...");
             break;
         case UserManager::BANNED:
-            error = trUtf8("Ce compte a été banni.");
+            error = trUtf8("Votre compte a été banni.");
             break;
         case UserManager::DISCONNECTED:
         case UserManager::CONNECTED:
