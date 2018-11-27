@@ -224,100 +224,64 @@ bool PagePrst::updateInterface(QString editingSource, IdList selectedIds, int di
 }
 
 // TableWidgetPrst
-TableWidgetPrst::TableWidgetPrst(QWidget *parent) : TableWidget(parent) {}
+TableWidgetPrst::TableWidgetPrst(QWidget *parent) : TableWidget(parent)
+{
+    _fieldList << champ_keyRange
+               << champ_velRange
+               << champ_initialAttenuation
+               << champ_pan
+               << champ_coarseTune
+               << champ_fineTune
+               << champ_scaleTuning
+               << champ_initialFilterFc
+               << champ_initialFilterQ
+               << champ_delayVolEnv
+               << champ_attackVolEnv
+               << champ_holdVolEnv
+               << champ_decayVolEnv
+               << champ_sustainVolEnv
+               << champ_releaseVolEnv
+               << champ_keynumToVolEnvHold
+               << champ_keynumToVolEnvDecay
+               << champ_delayModEnv
+               << champ_attackModEnv
+               << champ_holdModEnv
+               << champ_decayModEnv
+               << champ_sustainModEnv
+               << champ_releaseModEnv
+               << champ_modEnvToPitch
+               << champ_modEnvToFilterFc
+               << champ_keynumToModEnvHold
+               << champ_keynumToModEnvDecay
+               << champ_delayModLFO
+               << champ_freqModLFO
+               << champ_modLfoToPitch
+               << champ_modLfoToFilterFc
+               << champ_modLfoToVolume
+               << champ_delayVibLFO
+               << champ_freqVibLFO
+               << champ_vibLfoToPitch
+               << champ_chorusEffectsSend
+               << champ_reverbEffectsSend;
+
+    this->setRowCount(_fieldList.count() + 1);
+    for (int i = 1; i < this->rowCount(); i++)
+        this->setVerticalHeaderItem(i, new QTableWidgetItem(Attribute::getDescription(_fieldList[i - 1], true)));
+}
 
 TableWidgetPrst::~TableWidgetPrst() {}
 
 int TableWidgetPrst::getRow(quint16 champ)
 {
-    int row = -1;
-    switch (champ)
-    {
-    case champ_keyRange: row = 0; break;
-    case champ_velRange: row = 1; break;
-    case champ_initialAttenuation: row = 2; break;
-    case champ_pan: row = 3; break;
-    case champ_coarseTune: row = 4; break;
-    case champ_fineTune: row = 5; break;
-    case champ_scaleTuning: row = 6; break;
-    case champ_initialFilterFc: row = 7; break;
-    case champ_initialFilterQ: row = 8; break;
-    case champ_delayVolEnv: row = 9; break;
-    case champ_attackVolEnv: row = 10; break;
-    case champ_holdVolEnv: row = 11; break;
-    case champ_decayVolEnv: row = 12; break;
-    case champ_sustainVolEnv: row = 13; break;
-    case champ_releaseVolEnv: row = 14; break;
-    case champ_keynumToVolEnvHold: row = 15; break;
-    case champ_keynumToVolEnvDecay: row = 16; break;
-    case champ_delayModEnv: row = 17; break;
-    case champ_attackModEnv: row = 18; break;
-    case champ_holdModEnv: row = 19; break;
-    case champ_decayModEnv: row = 20; break;
-    case champ_sustainModEnv: row = 21; break;
-    case champ_releaseModEnv: row = 22; break;
-    case champ_modEnvToPitch: row = 23; break;
-    case champ_modEnvToFilterFc: row = 24; break;
-    case champ_keynumToModEnvHold: row = 25; break;
-    case champ_keynumToModEnvDecay: row = 26; break;
-    case champ_delayModLFO: row = 27; break;
-    case champ_freqModLFO: row = 28; break;
-    case champ_modLfoToPitch: row = 29; break;
-    case champ_modLfoToFilterFc: row = 30; break;
-    case champ_modLfoToVolume: row = 31; break;
-    case champ_delayVibLFO: row = 32; break;
-    case champ_freqVibLFO: row = 33; break;
-    case champ_vibLfoToPitch: row = 34; break;
-    case champ_chorusEffectsSend: row = 35; break;
-    case champ_reverbEffectsSend: row = 36; break;
-    }
-    return row + 1;
+    return _fieldList.indexOf((AttributeType)champ) + 1;
 }
+
 AttributeType TableWidgetPrst::getChamp(int row)
 {
-    AttributeType champ = champ_unknown;
-    switch (row - 1)
-    {
-    case 0: champ = champ_keyRange; break;
-    case 1: champ = champ_velRange; break;
-    case 2: champ = champ_initialAttenuation; break;
-    case 3: champ = champ_pan; break;
-    case 4: champ = champ_coarseTune; break;
-    case 5: champ = champ_fineTune; break;
-    case 6: champ = champ_scaleTuning; break;
-    case 7: champ = champ_initialFilterFc; break;
-    case 8: champ = champ_initialFilterQ; break;
-    case 9: champ = champ_delayVolEnv; break;
-    case 10: champ = champ_attackVolEnv; break;
-    case 11: champ = champ_holdVolEnv; break;
-    case 12: champ = champ_decayVolEnv; break;
-    case 13: champ = champ_sustainVolEnv; break;
-    case 14: champ = champ_releaseVolEnv; break;
-    case 15: champ = champ_keynumToVolEnvHold; break;
-    case 16: champ = champ_keynumToVolEnvDecay; break;
-    case 17: champ = champ_delayModEnv; break;
-    case 18: champ = champ_attackModEnv; break;
-    case 19: champ = champ_holdModEnv; break;
-    case 20: champ = champ_decayModEnv; break;
-    case 21: champ = champ_sustainModEnv; break;
-    case 22: champ = champ_releaseModEnv; break;
-    case 23: champ = champ_modEnvToPitch; break;
-    case 24: champ = champ_modEnvToFilterFc; break;
-    case 25: champ = champ_keynumToModEnvHold; break;
-    case 26: champ = champ_keynumToModEnvDecay; break;
-    case 27: champ = champ_delayModLFO; break;
-    case 28: champ = champ_freqModLFO; break;
-    case 29: champ = champ_modLfoToPitch; break;
-    case 30: champ = champ_modLfoToFilterFc; break;
-    case 31: champ = champ_modLfoToVolume; break;
-    case 32: champ = champ_delayVibLFO; break;
-    case 33: champ = champ_freqVibLFO; break;
-    case 34: champ = champ_vibLfoToPitch; break;
-    case 35: champ = champ_chorusEffectsSend; break;
-    case 36: champ = champ_reverbEffectsSend; break;
-    default: champ = champ_unknown;
-    }
-    return champ;
+    row--;
+    if (row >= 0 && row < _fieldList.count())
+        return _fieldList[row];
+    return champ_unknown;
 }
 
 void PagePrst::spinUpDown(int steps, SpinBox *spin)

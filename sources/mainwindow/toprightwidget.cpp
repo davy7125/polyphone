@@ -95,7 +95,7 @@ void TopRightWidget::userStateChanged(UserManager::ConnectionState state)
         break;
     case UserManager::BANNED:
         // Show an error "banned account"
-        ui->labelWarning->setToolTip(trUtf8("Ce compte a été banni."));
+        ui->labelWarning->setToolTip(trUtf8("Votre compte a été banni."));
         ui->labelWarning->setPixmap(ContextManager::theme()->getColoredSvg(":/icons/skull.svg", QSize(20, 20), _colorReplacement));
         ui->labelWarning->show();
         ui->pushUser->hide();
