@@ -1170,21 +1170,8 @@ repository</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_about.cpp" line="48"/>
-        <source>https://www.polyphone-soundfonts.com/en</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="dialogs/dialog_about.cpp" line="50"/>
         <source>Copyright</source>
-        <oldsource>Copyright © </oldsource>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="dialogs/dialog_about.cpp" line="51"/>
-        <location filename="dialogs/dialog_about.cpp" line="62"/>
-        <location filename="dialogs/dialog_about.cpp" line="71"/>
-        <source>Davy Triponney</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1195,6 +1182,18 @@ repository</source>
     <message>
         <location filename="dialogs/dialog_about.cpp" line="58"/>
         <source>Donate</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="dialogs/dialog_about.cpp" line="51"/>
+        <location filename="dialogs/dialog_about.cpp" line="62"/>
+        <location filename="dialogs/dialog_about.cpp" line="71"/>
+        <source>Davy Triponney</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="dialogs/dialog_about.cpp" line="48"/>
+        <source>https://www.polyphone-soundfonts.com/en</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1227,7 +1226,6 @@ repository</source>
     <message>
         <location filename="dialogs/dialog_about.cpp" line="72"/>
         <source>F.J. Martínez Murcia</source>
-        <oldsource>F.J. Mart�nez Murcia</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1704,43 +1702,33 @@ repository</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="257"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="258"/>
         <source>Name of the new instrument:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="284"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="286"/>
         <source>Warning</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="284"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="286"/>
         <source>No preset available.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="297"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="299"/>
         <source>Create a new preset</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="297"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="300"/>
         <source>Name of the new preset:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>EnvelopEditor</name>
-    <message>
-        <location filename="editor/envelopeditor.ui" line="128"/>
-        <source>Decay</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="editor/envelopeditor.ui" line="138"/>
-        <source>Release</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <location filename="editor/envelopeditor.ui" line="162"/>
         <location filename="editor/envelopeditor.ui" line="205"/>
@@ -1752,14 +1740,9 @@ repository</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/envelopeditor.ui" line="181"/>
-        <source>Key → Decay</source>
-        <oldsource>Key ? Decay</oldsource>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="editor/envelopeditor.ui" line="263"/>
-        <source>Hold</source>
+        <location filename="editor/envelopeditor.ui" line="372"/>
+        <source> dB</source>
+        <comment>unit for decibels</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1768,25 +1751,38 @@ repository</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/envelopeditor.ui" line="329"/>
-        <source>Attack</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="editor/envelopeditor.ui" line="372"/>
-        <source> dB</source>
-        <comment>unit for decibels</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="editor/envelopeditor.ui" line="391"/>
-        <source>Key → Hold</source>
-        <oldsource>Key ? Hold</oldsource>
+        <location filename="editor/envelopeditor.ui" line="128"/>
+        <source>Decay</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="editor/envelopeditor.ui" line="420"/>
         <source>Sustain</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="editor/envelopeditor.ui" line="263"/>
+        <source>Hold</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="editor/envelopeditor.ui" line="138"/>
+        <source>Release</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="editor/envelopeditor.ui" line="181"/>
+        <source>Key → Decay</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="editor/envelopeditor.ui" line="329"/>
+        <source>Attack</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="editor/envelopeditor.ui" line="391"/>
+        <source>Key → Hold</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2031,6 +2027,88 @@ repository</source>
 <context>
     <name>MainWindow</name>
     <message>
+        <location filename="mainwindow/mainwindow.cpp" line="194"/>
+        <source>&amp;Save</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow/mainwindow.cpp" line="180"/>
+        <source>Warning</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow/mainwindow.cpp" line="170"/>
+        <source>untitled</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow/mainwindow.cpp" line="181"/>
+        <source>Save before exiting?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow/mainwindow.cpp" line="184"/>
+        <source>The following files have been modified:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow/mainwindow.cpp" line="191"/>
+        <source>File &quot;%1&quot; has been modified.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow/mainwindow.cpp" line="195"/>
+        <source>&amp;Cancel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow/mainwindow.cpp" line="196"/>
+        <source>Do&amp;n&apos;t save</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow/mainwindow.cpp" line="240"/>
+        <source>en/documentation</source>
+        <comment>path for the documentation online</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow/mainwindow.cpp" line="245"/>
+        <source>en/forum</source>
+        <comment>path for the forum</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow/mainwindow.cpp" line="268"/>
+        <source>Opening files</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow/mainwindow.cpp" line="270"/>
+        <source>Soundfonts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow/mainwindow.cpp" line="271"/>
+        <source>Sf2 files</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow/mainwindow.cpp" line="272"/>
+        <source>Sf3 files</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow/mainwindow.cpp" line="273"/>
+        <source>Sfz files</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow/mainwindow.cpp" line="274"/>
+        <source>sfArk archives</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="mainwindow/mainwindow.ui" line="20"/>
         <source>Polyphone Soundfont Editor</source>
         <translation type="unfinished"></translation>
@@ -2087,88 +2165,6 @@ repository</source>
     <message>
         <location filename="mainwindow/mainwindow.ui" line="215"/>
         <source>History</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="mainwindow/mainwindow.cpp" line="170"/>
-        <source>untitled</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="mainwindow/mainwindow.cpp" line="180"/>
-        <source>Warning</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="mainwindow/mainwindow.cpp" line="181"/>
-        <source>Save before exiting?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="mainwindow/mainwindow.cpp" line="184"/>
-        <source>The following files have been modified:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="mainwindow/mainwindow.cpp" line="191"/>
-        <source>File &quot;%1&quot; has been modified.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="mainwindow/mainwindow.cpp" line="194"/>
-        <source>&amp;Save</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="mainwindow/mainwindow.cpp" line="195"/>
-        <source>&amp;Cancel</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="mainwindow/mainwindow.cpp" line="196"/>
-        <source>Do&amp;n&apos;t save</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="mainwindow/mainwindow.cpp" line="240"/>
-        <source>en/documentation</source>
-        <comment>path for the documentation online</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="mainwindow/mainwindow.cpp" line="245"/>
-        <source>en/forum</source>
-        <comment>path for the forum</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="mainwindow/mainwindow.cpp" line="268"/>
-        <source>Opening files</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="mainwindow/mainwindow.cpp" line="270"/>
-        <source>Soundfonts</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="mainwindow/mainwindow.cpp" line="271"/>
-        <source>Sf2 files</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="mainwindow/mainwindow.cpp" line="272"/>
-        <source>Sf3 files</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="mainwindow/mainwindow.cpp" line="273"/>
-        <source>Sfz files</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="mainwindow/mainwindow.cpp" line="274"/>
-        <source>sfArk archives</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2666,74 +2662,74 @@ rate</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/pagesf2.ui" line="324"/>
+        <location filename="editor/pagesf2.ui" line="323"/>
         <source>Soundfont version</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/pagesf2.ui" line="366"/>
+        <location filename="editor/pagesf2.ui" line="359"/>
         <source>ROM name and version</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/pagesf2.ui" line="408"/>
+        <location filename="editor/pagesf2.ui" line="395"/>
         <source>Sound engine</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/pagesf2.ui" line="450"/>
+        <location filename="editor/pagesf2.ui" line="431"/>
         <source>Editing software</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/pagesf2.ui" line="558"/>
+        <location filename="editor/pagesf2.ui" line="534"/>
         <source>Presets</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/pagesf2.ui" line="580"/>
-        <location filename="editor/pagesf2.ui" line="701"/>
-        <location filename="editor/pagesf2.ui" line="1029"/>
+        <location filename="editor/pagesf2.ui" line="556"/>
+        <location filename="editor/pagesf2.ui" line="677"/>
+        <location filename="editor/pagesf2.ui" line="1005"/>
         <source>Details</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/pagesf2.ui" line="679"/>
-        <location filename="editor/pagesf2.ui" line="778"/>
+        <location filename="editor/pagesf2.ui" line="655"/>
+        <location filename="editor/pagesf2.ui" line="754"/>
         <source>Samples</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/pagesf2.ui" line="764"/>
-        <location filename="editor/pagesf2.ui" line="833"/>
-        <location filename="editor/pagesf2.ui" line="896"/>
+        <location filename="editor/pagesf2.ui" line="740"/>
+        <location filename="editor/pagesf2.ui" line="809"/>
+        <location filename="editor/pagesf2.ui" line="872"/>
         <source>Number</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/pagesf2.ui" line="792"/>
+        <location filename="editor/pagesf2.ui" line="768"/>
         <source>16 bits</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/pagesf2.ui" line="797"/>
+        <location filename="editor/pagesf2.ui" line="773"/>
         <source>24 bits</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/pagesf2.ui" line="826"/>
-        <location filename="editor/pagesf2.ui" line="924"/>
+        <location filename="editor/pagesf2.ui" line="802"/>
+        <location filename="editor/pagesf2.ui" line="900"/>
         <source>Modulators</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/pagesf2.ui" line="854"/>
-        <location filename="editor/pagesf2.ui" line="889"/>
+        <location filename="editor/pagesf2.ui" line="830"/>
+        <location filename="editor/pagesf2.ui" line="865"/>
         <source>Parameters</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/pagesf2.ui" line="1007"/>
+        <location filename="editor/pagesf2.ui" line="983"/>
         <source>Instruments</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3030,6 +3026,136 @@ rate</source>
 <context>
     <name>QObject</name>
     <message>
+        <location filename="core/output/outputfactory.cpp" line="92"/>
+        <source>Save a soundfont</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="core/output/outputfactory.cpp" line="93"/>
+        <source>Sf2 files</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="core/output/outputfactory.cpp" line="115"/>
+        <location filename="core/sound.cpp" line="109"/>
+        <location filename="core/sound.cpp" line="161"/>
+        <location filename="core/sound.cpp" line="234"/>
+        <location filename="core/sound.cpp" line="309"/>
+        <location filename="core/sound.cpp" line="318"/>
+        <location filename="core/sound.cpp" line="648"/>
+        <location filename="core/sound.cpp" line="663"/>
+        <location filename="core/sound.cpp" line="671"/>
+        <location filename="core/sound.cpp" line="677"/>
+        <location filename="core/sound.cpp" line="696"/>
+        <location filename="core/sound.cpp" line="742"/>
+        <source>Warning</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="editor/graphics/graphicslegenditem.cpp" line="110"/>
+        <location filename="editor/graphics/graphicslegenditem2.cpp" line="66"/>
+        <source>Key range:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="editor/graphics/graphicslegenditem.cpp" line="129"/>
+        <location filename="editor/graphics/graphicslegenditem2.cpp" line="69"/>
+        <source>Velocity range:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="core/sampleloader.cpp" line="47"/>
+        <source>Sample &quot;%1L&quot; already exists.&lt;br /&gt;Replace?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="core/sampleloader.cpp" line="52"/>
+        <source>Sample &quot;%1R&quot; already exists.&lt;br /&gt;Replace?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="core/sampleloader.cpp" line="60"/>
+        <source>Sample &quot;%1&quot; already exists.&lt;br /&gt;Replace?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="core/sampleloader.cpp" line="73"/>
+        <source>&amp;Replace</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="core/sampleloader.cpp" line="74"/>
+        <source>R&amp;eplace all</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="core/sampleloader.cpp" line="75"/>
+        <source>&amp;Duplicate</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="core/sampleloader.cpp" line="76"/>
+        <source>D&amp;uplicate all</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="core/sampleloader.cpp" line="77"/>
+        <source>&amp;Ignore</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="core/sampleloader.cpp" line="78"/>
+        <source>I&amp;gnore all</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="core/sound.cpp" line="109"/>
+        <location filename="core/sound.cpp" line="161"/>
+        <location filename="core/sound.cpp" line="234"/>
+        <location filename="core/sound.cpp" line="309"/>
+        <source>File not supported.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="core/sound.cpp" line="649"/>
+        <source>Cannot open file &quot;%1&quot;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="core/sound.cpp" line="663"/>
+        <location filename="core/sound.cpp" line="671"/>
+        <location filename="core/sound.cpp" line="677"/>
+        <location filename="core/sound.cpp" line="696"/>
+        <location filename="core/sound.cpp" line="742"/>
+        <source>Corrupted file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="core/model/soundfont.cpp" line="24"/>
+        <source>General</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="core/model/soundfont.cpp" line="25"/>
+        <source>Samples</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="core/model/soundfont.cpp" line="26"/>
+        <source>Instruments</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="core/model/soundfont.cpp" line="27"/>
+        <source>Presets</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="core/output/outputfactory.cpp" line="79"/>
+        <source>untitled</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="context/keynamemanager.cpp" line="63"/>
         <location filename="context/keynamemanager.cpp" line="81"/>
         <source>C</source>
@@ -3122,124 +3248,6 @@ rate</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/model/soundfont.cpp" line="24"/>
-        <source>General</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="core/model/soundfont.cpp" line="25"/>
-        <source>Samples</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="core/model/soundfont.cpp" line="26"/>
-        <source>Instruments</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="core/model/soundfont.cpp" line="27"/>
-        <source>Presets</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="core/output/outputfactory.cpp" line="79"/>
-        <source>untitled</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="core/output/outputfactory.cpp" line="92"/>
-        <source>Save a soundfont</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="core/output/outputfactory.cpp" line="93"/>
-        <source>Sf2 files</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="core/output/outputfactory.cpp" line="115"/>
-        <location filename="core/sound.cpp" line="109"/>
-        <location filename="core/sound.cpp" line="161"/>
-        <location filename="core/sound.cpp" line="234"/>
-        <location filename="core/sound.cpp" line="309"/>
-        <location filename="core/sound.cpp" line="318"/>
-        <location filename="core/sound.cpp" line="648"/>
-        <location filename="core/sound.cpp" line="663"/>
-        <location filename="core/sound.cpp" line="671"/>
-        <location filename="core/sound.cpp" line="677"/>
-        <location filename="core/sound.cpp" line="696"/>
-        <location filename="core/sound.cpp" line="742"/>
-        <source>Warning</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="core/sampleloader.cpp" line="47"/>
-        <source>Sample &quot;%1L&quot; already exists.&lt;br /&gt;Replace?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="core/sampleloader.cpp" line="52"/>
-        <source>Sample &quot;%1R&quot; already exists.&lt;br /&gt;Replace?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="core/sampleloader.cpp" line="60"/>
-        <source>Sample &quot;%1&quot; already exists.&lt;br /&gt;Replace?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="core/sampleloader.cpp" line="73"/>
-        <source>&amp;Replace</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="core/sampleloader.cpp" line="74"/>
-        <source>R&amp;eplace all</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="core/sampleloader.cpp" line="75"/>
-        <source>&amp;Duplicate</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="core/sampleloader.cpp" line="76"/>
-        <source>D&amp;uplicate all</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="core/sampleloader.cpp" line="77"/>
-        <source>&amp;Ignore</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="core/sampleloader.cpp" line="78"/>
-        <source>I&amp;gnore all</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="core/sound.cpp" line="109"/>
-        <location filename="core/sound.cpp" line="161"/>
-        <location filename="core/sound.cpp" line="234"/>
-        <location filename="core/sound.cpp" line="309"/>
-        <source>File not supported.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="core/sound.cpp" line="649"/>
-        <source>Cannot open file &quot;%1&quot;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="core/sound.cpp" line="663"/>
-        <location filename="core/sound.cpp" line="671"/>
-        <location filename="core/sound.cpp" line="677"/>
-        <location filename="core/sound.cpp" line="696"/>
-        <location filename="core/sound.cpp" line="742"/>
-        <source>Corrupted file.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="dialogs/dialog_about.cpp" line="122"/>
         <source>Created by</source>
         <translation type="unfinished"></translation>
@@ -3257,18 +3265,6 @@ rate</source>
     <message>
         <location filename="dialogs/dialog_about.cpp" line="166"/>
         <source>Icons</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="editor/graphics/graphicslegenditem.cpp" line="110"/>
-        <location filename="editor/graphics/graphicslegenditem2.cpp" line="66"/>
-        <source>Key range:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="editor/graphics/graphicslegenditem.cpp" line="129"/>
-        <location filename="editor/graphics/graphicslegenditem2.cpp" line="69"/>
-        <source>Velocity range:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3841,7 +3837,6 @@ download the list</source>
     <message>
         <location filename="repository/browser/soundfontbrowser.ui" line="402"/>
         <source>Title (A→Z)</source>
-        <oldsource>Title (A?Z)</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
