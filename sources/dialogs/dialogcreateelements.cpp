@@ -28,15 +28,15 @@ void DialogCreateElements::initialize(IdList ids)
         if (ids.count() == 1)
         {
             ui->stackedWidget->setCurrentIndex(1);
-            ui->labelOneChoice->setText(trUtf8("Créer un instrument contenant l'échantillon %1 ?")
+            ui->labelOneChoice->setText(trUtf8("Create an instrument comprising the sample %1?")
                                         .arg("<b>" + SoundfontManager::getInstance()->getQstr(ids[0], champ_name) + "</b>"));
         }
         else
         {
             ui->stackedWidget->setCurrentIndex(0);
-            ui->labelChoice->setText(trUtf8("Créer un instrument"));
-            ui->radioOnePerElement->setText(trUtf8("pour chaque échantillon"));
-            ui->radioOnlyOne->setText(trUtf8("contenant les %1 échantillons").arg(ids.count()));
+            ui->labelChoice->setText(trUtf8("Create an instrument"));
+            ui->radioOnePerElement->setText(trUtf8("for each sample"));
+            ui->radioOnlyOne->setText(trUtf8("comprising the %1 samples").arg(ids.count()));
         }
     }
     else
@@ -44,15 +44,15 @@ void DialogCreateElements::initialize(IdList ids)
         if (ids.count() == 1)
         {
             ui->stackedWidget->setCurrentIndex(1);
-            ui->labelOneChoice->setText(trUtf8("Créer un preset contenant l'instrument %1 ?")
+            ui->labelOneChoice->setText(trUtf8("Create a preset comprising the instrument %1?")
                                         .arg("<b>" + SoundfontManager::getInstance()->getQstr(ids[0], champ_name) + "</b>"));
         }
         else
         {
             ui->stackedWidget->setCurrentIndex(0);
-            ui->labelChoice->setText(trUtf8("Créer un preset"));
-            ui->radioOnePerElement->setText(trUtf8("pour chaque instrument"));
-            ui->radioOnlyOne->setText(trUtf8("contenant les %1 instruments").arg(ids.count()));
+            ui->labelChoice->setText(trUtf8("Create a preset"));
+            ui->radioOnePerElement->setText(trUtf8("for each instrument"));
+            ui->radioOnlyOne->setText(trUtf8("comprising the %1 instruments").arg(ids.count()));
         }
     }
 

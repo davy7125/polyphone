@@ -36,7 +36,7 @@
       </font>
      </property>
      <property name="text">
-      <string>Valeur désirée</string>
+      <string>Desired value</string>
      </property>
     </widget>
    </item>
@@ -62,7 +62,7 @@
       </font>
      </property>
      <property name="text">
-      <string>Offset possible</string>
+      <string>Possible offset</string>
      </property>
     </widget>
    </item>
@@ -75,7 +75,7 @@
       </font>
      </property>
      <property name="text">
-      <string>Étendue des atténuations</string>
+      <string>Attenuation range</string>
      </property>
     </widget>
    </item>

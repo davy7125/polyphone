@@ -22,7 +22,7 @@
      <item row="0" column="0">
       <widget class="QLabel" name="label_3">
        <property name="text">
-        <string>Nom de l'instrument :</string>
+        <string>Instrument name:</string>
        </property>
       </widget>
      </item>
@@ -32,7 +32,7 @@
      <item row="1" column="0">
       <widget class="QLabel" name="label_4">
        <property name="text">
-        <string>Création de son :</string>
+        <string>Sample creation:</string>
        </property>
       </widget>
      </item>
@@ -40,17 +40,17 @@
       <widget class="QComboBox" name="comboFreq">
        <item>
         <property name="text">
-         <string>à chaque note</string>
+         <string>for every key</string>
         </property>
        </item>
        <item>
         <property name="text">
-         <string>toutes les 3 notes</string>
+         <string>every 3 keys</string>
         </property>
        </item>
        <item>
         <property name="text">
-         <string>toutes les 6 notes</string>
+         <string>every 6 keys</string>
         </property>
        </item>
       </widget>
@@ -58,7 +58,7 @@
      <item row="1" column="2">
       <widget class="QCheckBox" name="checkLoop">
        <property name="text">
-        <string>Bouclage</string>
+        <string>Auto loop</string>
        </property>
        <property name="checked">
         <bool>true</bool>
@@ -68,7 +68,7 @@
      <item row="0" column="2">
       <widget class="QCheckBox" name="checkStereo">
        <property name="text">
-        <string>Stéréo</string>
+        <string>Stereo</string>
        </property>
       </widget>
      </item>
@@ -83,7 +83,7 @@
       </font>
      </property>
      <property name="title">
-      <string>Accord</string>
+      <string>Chord</string>
      </property>
      <layout class="QGridLayout" name="gridLayout_2">
       <item row="4" column="3">
@@ -108,7 +108,7 @@
          </font>
         </property>
         <property name="text">
-         <string>Septième</string>
+         <string>Seventh</string>
         </property>
        </widget>
       </item>
@@ -121,7 +121,7 @@
          </font>
         </property>
         <property name="text">
-         <string>Neuvième</string>
+         <string>Ninth</string>
         </property>
        </widget>
       </item>
@@ -134,7 +134,7 @@
          </font>
         </property>
         <property name="text">
-         <string>Tierce</string>
+         <string>Third</string>
         </property>
        </widget>
       </item>
@@ -172,7 +172,7 @@
          </font>
         </property>
         <property name="text">
-         <string>Fondamentale</string>
+         <string>Root key</string>
         </property>
        </widget>
       </item>
@@ -185,7 +185,7 @@
          </font>
         </property>
         <property name="text">
-         <string>Quinte</string>
+         <string>Fifth</string>
         </property>
        </widget>
       </item>
@@ -224,17 +224,17 @@
         </property>
         <item>
          <property name="text">
-          <string>non</string>
+          <string>no</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>majeure</string>
+          <string>major</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>mineure</string>
+          <string>minor</string>
          </property>
         </item>
        </widget>
@@ -249,12 +249,12 @@
         </property>
         <item>
          <property name="text">
-          <string>non</string>
+          <string>no</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>oui</string>
+          <string>yes</string>
          </property>
         </item>
        </widget>
@@ -294,17 +294,17 @@
         </property>
         <item>
          <property name="text">
-          <string>non</string>
+          <string>no</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>majeure</string>
+          <string>major</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>mineure</string>
+          <string>minor</string>
          </property>
         </item>
        </widget>
@@ -343,7 +343,7 @@
          </font>
         </property>
         <property name="text">
-         <string>Nombre de renversements</string>
+         <string>Inversion number</string>
         </property>
        </widget>
       </item>
@@ -357,22 +357,22 @@
         </property>
         <item>
          <property name="text">
-          <string>non</string>
+          <string>no</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>mineure</string>
+          <string>minor</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>majeure</string>
+          <string>major</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>diminuée</string>
+          <string>diminished</string>
          </property>
         </item>
        </widget>
@@ -412,22 +412,22 @@
         </property>
         <item>
          <property name="text">
-          <string>non</string>
+          <string>no</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>juste</string>
+          <string>perfect</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>diminuée</string>
+          <string>diminished</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>augmentée</string>
+          <string>augmented</string>
          </property>
         </item>
        </widget>

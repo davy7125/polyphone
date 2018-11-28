@@ -211,8 +211,8 @@
        <item row="1" column="0" colspan="3">
         <widget class="QLabel" name="label">
          <property name="text">
-          <string>Oups ! Impossible
-de télécharger la liste</string>
+          <string>Oops! Cannot
+download the list</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignCenter</set>

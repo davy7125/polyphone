@@ -7,6 +7,8 @@ class SoundfontManager;
 
 class InputSfz : public AbstractInput
 {
+    Q_OBJECT
+    
 public:
     InputSfz();
 

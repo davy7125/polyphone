@@ -155,7 +155,7 @@ QList<Page::DisplayOption> PagePrst::getDisplayOptions(IdList selectedIds)
 {
     return QList<DisplayOption>()
             << DisplayOption(1, ":/icons/table.svg", trUtf8("Table"))
-            << DisplayOption(2, ":/icons/range.svg", trUtf8("Étendues"), selectedIds.isElementUnique(elementPrst));
+            << DisplayOption(2, ":/icons/range.svg", trUtf8("Ranges"), selectedIds.isElementUnique(elementPrst));
 }
 
 void PagePrst::setModVisible(bool visible)

@@ -41,7 +41,7 @@ public:
     /// Translate the application according to the default locale or the overwritten local in QSettings
     void translate(QApplication * a);
 
-    /// Get all languages, key is two letters (fr, en, ...), value is the language native name
+    /// Get all languages, key is two letters (en, fr, ...), value is the language native name
     QMap<QString, QString> getLanguages() { return _languages; }
 
 private:

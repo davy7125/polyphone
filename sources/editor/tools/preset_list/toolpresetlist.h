@@ -5,6 +5,8 @@
 
 class ToolPresetList: public AbstractToolIterating
 {
+    Q_OBJECT
+
 public:
     ToolPresetList();
 
@@ -16,7 +18,7 @@ public:
 
     QString getCategory() const override
     {
-        return trUtf8("Utilitaire");
+        return trUtf8("Utility");
     }
 
     /// Internal identifier
@@ -31,7 +33,7 @@ public:
 protected:
     QString getLabelInternal() const override
     {
-        return trUtf8("Exporter la liste des presets");
+        return trUtf8("Export preset list");
     }
 };
 

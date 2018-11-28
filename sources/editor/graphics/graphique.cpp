@@ -82,7 +82,7 @@ Graphique::Graphique(QWidget * parent) : QCustomPlot(parent),
     _textMultipleSelection->position->setCoords(.5, .5);
     _textMultipleSelection->setTextAlignment(Qt::AlignHCenter);
     _textMultipleSelection->setFont(QFont(font().family(), 16, QFont::Bold));
-    _textMultipleSelection->setText(trUtf8("Sélection multiple"));
+    _textMultipleSelection->setText(trUtf8("Multiple selection"));
     addItem(_textMultipleSelection);
 
     // Positions

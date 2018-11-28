@@ -6,6 +6,8 @@ class SoundfontManager;
 
 class OutputNotSupported : public AbstractOutput
 {
+    Q_OBJECT
+    
 public:
     OutputNotSupported();
 

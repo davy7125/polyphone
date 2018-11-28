@@ -175,8 +175,8 @@ QList<Page::DisplayOption> PageInst::getDisplayOptions(IdList selectedIds)
 {
     return QList<DisplayOption>()
             << DisplayOption(1, ":/icons/table.svg", trUtf8("Table"))
-            << DisplayOption(2, ":/icons/range.svg", trUtf8("Étendues"), selectedIds.isElementUnique(elementInst))
-            << DisplayOption(3, ":/icons/adsr.svg", trUtf8("Enveloppes"), selectedIds.isElementUnique(elementInst));
+            << DisplayOption(2, ":/icons/range.svg", trUtf8("Ranges"), selectedIds.isElementUnique(elementInst))
+            << DisplayOption(3, ":/icons/adsr.svg", trUtf8("Envelopes"), selectedIds.isElementUnique(elementInst));
 }
 
 void PageInst::setModVisible(bool visible)
@@ -218,11 +218,11 @@ bool PageInst::updateInterface(QString editingSource, IdList selectedIds, int di
         int nbPrst = ui->widgetLinkedTo->getLinkNumber();
 
         if (nbPrst == 0)
-            ui->labelLinkedTo->setText(trUtf8("Instrument lié à aucun preset."));
+            ui->labelLinkedTo->setText(trUtf8("Instrument not linked to a preset yet."));
         else if (nbPrst == 1)
-            ui->labelLinkedTo->setText(trUtf8("Instrument lié au preset :"));
+            ui->labelLinkedTo->setText(trUtf8("Instrument linked to preset:"));
         else
-            ui->labelLinkedTo->setText(trUtf8("Instrument lié aux presets :"));
+            ui->labelLinkedTo->setText(trUtf8("Instrument linked to presets:"));
     }
     else
     {

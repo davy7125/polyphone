@@ -400,7 +400,7 @@ QString Attribute::toString(AttributeType champ, bool isPrst, AttributeValue sto
         break;
     case champ_sfModTransOper:
         if (storedValue.wValue == 2)
-            result = ", " + trUtf8("valeur absolue");
+            result = ", " + trUtf8("absolute value");
         break;
     case champ_indexMod:
         result = QString::number(storedValue.wValue + 1);
@@ -509,49 +509,49 @@ AttributeValue Attribute::fromString(AttributeType champ, bool isPrst, QString s
 
 QString Attribute::getDescription(AttributeType champ, bool isPrst)
 {
-    QString result = trUtf8("inconnu");
+    QString result = trUtf8("unknown");
 
     switch (champ)
     {
     case champ_startAddrsOffset:
-        result = trUtf8("Offset début échantillon");
+        result = trUtf8("Sample start offset");
         break;
     case champ_endAddrsOffset:
-        result = trUtf8("Offset fin échantillon");
+        result = trUtf8("Sample end offset");
         break;
     case champ_startloopAddrsOffset:
-        result = trUtf8("Offset début boucle");
+        result = trUtf8("Loop start offset");
         break;
     case champ_endloopAddrsOffset:
-        result = trUtf8("Offset fin boucle");
+        result = trUtf8("Loop end offset");
         break;
     case champ_startAddrsCoarseOffset:
-        result = trUtf8("Offset début échantillon (× 32768)");
+        result = trUtf8("Loop start offset (× 32768)");
         break;
     case champ_modLfoToPitch:
-        result = trUtf8("Mod LFO → note (c)");
+        result = trUtf8("Mod LFO → pitch (c)");
         break;
     case champ_vibLfoToPitch:
-        result = trUtf8("Vib LFO → note (c)");
+        result = trUtf8("Vib LFO → pitch (c)");
         break;
     case champ_modEnvToPitch:
-        result = trUtf8("Mod env → note (c)");
+        result = trUtf8("Mod env → pitch (c)");
         break;
     case champ_initialFilterFc:
-        result = isPrst ? trUtf8("Filtre, coupure (×)") :
-                          trUtf8("Filtre, coupure (Hz)");
+        result = isPrst ? trUtf8("Filter, cutoff (×)") :
+                          trUtf8("Filter, cutoff (Hz)");
         break;
     case champ_initialFilterQ:
-        result = trUtf8("Filtre, résonance (dB)");
+        result = trUtf8("Filter, resonance (dB)");
         break;
     case champ_modLfoToFilterFc:
-        result = trUtf8("Mod LFO → filtre (c)");
+        result = trUtf8("Mod LFO → filter (c)");
         break;
     case champ_modEnvToFilterFc:
-        result = trUtf8("Mod env → filtre (c)");
+        result = trUtf8("Mod env → filter (c)");
         break;
     case champ_endAddrsCoarseOffset:
-        result = trUtf8("Offset fin échantillon (× 32768)");
+        result = trUtf8("Sample end offset (× 32768)");
         break;
     case champ_modLfoToVolume:
         result = trUtf8("Mod LFO → volume (dB)");
@@ -560,11 +560,11 @@ QString Attribute::getDescription(AttributeType champ, bool isPrst)
         result = trUtf8("Chorus (%)");
         break;
     case champ_reverbEffectsSend:
-        result = trUtf8("Réverbération (%)");
+        result = trUtf8("Reverb (%)");
         break;
     case champ_pan:
-        result = isPrst ? trUtf8("Balance [-100;100]") :
-                          trUtf8("Balance [-50;50]");
+        result = isPrst ? trUtf8("Pan [-100;100]") :
+                          trUtf8("Pan [-50;50]");
         break;
     case champ_delayModLFO:
         result = isPrst ? trUtf8("Mod LFO delay (×)") :
@@ -606,10 +606,10 @@ QString Attribute::getDescription(AttributeType champ, bool isPrst)
                           trUtf8("Mod env release (s)");
         break;
     case champ_keynumToModEnvHold:
-        result = trUtf8("Note → Mod env hold (c)");
+        result = trUtf8("Key → Mod env hold (c)");
         break;
     case champ_keynumToModEnvDecay:
-        result = trUtf8("Note → Mod env decay (c)");
+        result = trUtf8("Key → Mod env decay (c)");
         break;
     case champ_delayVolEnv:
         result = isPrst ? trUtf8("Vol env delay (×)") :
@@ -635,49 +635,49 @@ QString Attribute::getDescription(AttributeType champ, bool isPrst)
                           trUtf8("Vol env release (s)");
         break;
     case champ_keynumToVolEnvHold:
-        result = trUtf8("Note → Vol env hold (c)");
+        result = trUtf8("Key → Vol env hold (c)");
         break;
     case champ_keynumToVolEnvDecay:
-        result = trUtf8("Note → Vol env decay (c)");
+        result = trUtf8("Key → Vol env decay (c)");
         break;
     case champ_keyRange:
-        result = trUtf8("Étendue note");
+        result = trUtf8("Key range");
         break;
     case champ_velRange:
-        result = trUtf8("Étendue vélocité");
+        result = trUtf8("Velocity range");
         break;
     case champ_startloopAddrsCoarseOffset:
-        result = trUtf8("Offset début échantillon (× 32768)");
+        result = trUtf8("Loop start offset (× 32768)");
         break;
     case champ_keynum:
-        result = trUtf8("Note fixe");
+        result = trUtf8("Fixed key");
         break;
     case champ_velocity:
-        result = trUtf8("Vélocité fixe");
+        result = trUtf8("Fixed velocity");
         break;
     case champ_initialAttenuation:
-        result = trUtf8("Atténuation (dB)");
+        result = trUtf8("Attenuation (dB)");
         break;
     case champ_endloopAddrsCoarseOffset:
-        result = trUtf8("Offset fin boucle (× 32768)");
+        result = trUtf8("Loop end offset (× 32768)");
         break;
     case champ_coarseTune:
-        result = trUtf8("Accordage (demi-tons)");
+        result = trUtf8("Tuning (semi-tones)");
         break;
     case champ_fineTune:
-        result = trUtf8("Accordage (centièmes)");
+        result = trUtf8("Tuning (cents)");
         break;
     case champ_sampleModes:
-        result = trUtf8("Lecture en boucle");
+        result = trUtf8("Loop playback");
         break;
     case champ_scaleTuning:
-        result = trUtf8("Réglage de tonalité");
+        result = trUtf8("Scale tuning");
         break;
     case champ_exclusiveClass:
-        result = trUtf8("Classe exclusive");
+        result = trUtf8("Exclusive class");
         break;
     case champ_overridingRootKey:
-        result = trUtf8("Note de base");
+        result = trUtf8("Root key");
         break;
     default:
         break;

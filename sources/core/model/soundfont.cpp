@@ -21,8 +21,8 @@ Soundfont::Soundfont(EltID id) :
     _rootItem->attachModel(sourceModel);
 
     // Built the tree
-    _generalTreeItem = new TreeItemFirstLevel(QObject::trUtf8("Général"), nullptr, _rootItem, EltID(elementSf2, _id.indexSf2, -1, -1, -1));
-    _sampleTreeItem = new TreeItemFirstLevel(QObject::trUtf8("Échantillons"), (QMap<int, TreeItem*> *)&_smpl, _rootItem, EltID(elementRootSmpl, _id.indexSf2, -1, -1, -1));
+    _generalTreeItem = new TreeItemFirstLevel(QObject::trUtf8("General"), nullptr, _rootItem, EltID(elementSf2, _id.indexSf2, -1, -1, -1));
+    _sampleTreeItem = new TreeItemFirstLevel(QObject::trUtf8("Samples"), (QMap<int, TreeItem*> *)&_smpl, _rootItem, EltID(elementRootSmpl, _id.indexSf2, -1, -1, -1));
     _instrumentTreeItem = new TreeItemFirstLevel(QObject::trUtf8("Instruments"), (QMap<int, TreeItem*> *)&_inst, _rootItem, EltID(elementRootInst, _id.indexSf2, -1, -1, -1));
     _presetTreeItem = new TreeItemFirstLevel(QObject::trUtf8("Presets"), (QMap<int, TreeItem*> *)&_prst, _rootItem, EltID(elementRootPrst, _id.indexSf2, -1, -1, -1));
 

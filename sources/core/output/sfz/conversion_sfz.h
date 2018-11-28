@@ -37,6 +37,8 @@ class QFile;
 
 class ConversionSfz : public QObject
 {
+    Q_OBJECT
+    
 public:
     ConversionSfz();
 

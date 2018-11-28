@@ -504,9 +504,9 @@ void PageTable::afficheMod(EltID id, int selectedIndex)
             // On cherche le lien
             iVal = getAssociatedMod(id);
             if (iVal > -1)
-                qStr = trUtf8("Modulateur") + ": #" + QString::number(iVal + 1);
+                qStr = trUtf8("Modulator") + ": #" + QString::number(iVal + 1);
             else
-                qStr = trUtf8("Lien (invalide)");
+                qStr = trUtf8("Link (invalid)");
         }
         else
             qStr = getIndexName(sfModTmp.Index, sfModTmp.CC);
@@ -526,7 +526,7 @@ void PageTable::afficheMod(EltID id, int selectedIndex)
         if (genValTmp.wValue > 99)
         {
             // lien vers modulateur
-            qStr = trUtf8("Modulateur") + ": #" + QString::number(genValTmp.wValue - 32767);
+            qStr = trUtf8("Modulator") + ": #" + QString::number(genValTmp.wValue - 32767);
         }
         else
             qStr = Attribute::getDescription(genValTmp.sfGenValue, _typePage == PAGE_PRST);
@@ -558,24 +558,24 @@ void PageTable::afficheEditMod()
 {
     if (_pushCopyMod->menu())
     {
-        _pushCopyMod->setToolTip(trUtf8("Copier / dupliquer des modulateurs"));
+        _pushCopyMod->setToolTip(trUtf8("Copy / duplicate modulators"));
         if (this->tableMod->getSelectedIDs().isEmpty())
         {
-            _menu->actions()[0]->setText(trUtf8("Dupliquer les modulateurs vers..."));
-            _menu->actions()[1]->setText(trUtf8("Copier l'ensemble des modulateurs"));
+            _menu->actions()[0]->setText(trUtf8("Duplicate modulators toward..."));
+            _menu->actions()[1]->setText(trUtf8("Copy all modulators"));
         }
         else
         {
-            _menu->actions()[0]->setText(trUtf8("Dupliquer la sélection vers..."));
-            _menu->actions()[1]->setText(trUtf8("Copier les modulateurs sélectionnés"));
+            _menu->actions()[0]->setText(trUtf8("Duplicate the selection toward..."));
+            _menu->actions()[1]->setText(trUtf8("Copy the selected modulators"));
         }
     }
     else
     {
         if (this->tableMod->getSelectedIDs().isEmpty())
-            _pushCopyMod->setToolTip(trUtf8("Copier l'ensemble des modulateurs"));
+            _pushCopyMod->setToolTip(trUtf8("Copy all modulators"));
         else
-            _pushCopyMod->setToolTip(trUtf8("Copier les modulateurs sélectionnés"));
+            _pushCopyMod->setToolTip(trUtf8("Copy the selected modulators"));
     }
 
     // Only one selected division ?
@@ -1572,7 +1572,7 @@ void PageTable::addAvailableReceiverMod(ComboBox *combo, EltID id)
             if (!found)
             {
                 // id2 peut recevoir les signaux de id
-                combo->addItem(trUtf8("Modulateur") + ": #" + QString::number(id2.indexMod + 1));
+                combo->addItem(trUtf8("Modulator") + ": #" + QString::number(id2.indexMod + 1));
             }
         }
     }
@@ -1638,7 +1638,7 @@ void PageTable::addAvailableSenderMod(ComboBox *combo, EltID id)
             if (!found)
             {
                 // id2 peut envoyer des signaux à id
-                combo->addItem(trUtf8("Modulateur") + ": #" + QString::number(id2.indexMod + 1));
+                combo->addItem(trUtf8("Modulator") + ": #" + QString::number(id2.indexMod + 1));
             }
         }
     }
@@ -1887,7 +1887,7 @@ void PageTable::pasteMod(EltID id, QList<Modulator> modulators)
         for (int i = 0; i < modulators.size(); i++)
         {
             champTmp = modulators[i].modDestOper;
-            QString warnQStr = trUtf8("Action impossible : ");
+            QString warnQStr = trUtf8("Forbidden action:");
             if (champTmp == champ_startAddrsOffset ||
                     champTmp == champ_startAddrsCoarseOffset ||
                     champTmp == champ_startloopAddrsOffset ||
@@ -1897,8 +1897,8 @@ void PageTable::pasteMod(EltID id, QList<Modulator> modulators)
                     champTmp == champ_endloopAddrsOffset ||
                     champTmp == champ_endloopAddrsCoarseOffset)
             {
-                QMessageBox::warning(this, trUtf8("Attention"), warnQStr +
-                                     trUtf8("les offsets ne peuvent être modulés dans un preset."));
+                QMessageBox::warning(this, trUtf8("Warning"), warnQStr +
+                                     trUtf8("offsets cannot be modulated in a preset."));
                 return;
             }
             else if (champTmp == champ_keynum || champTmp == champ_velocity ||
@@ -1906,8 +1906,8 @@ void PageTable::pasteMod(EltID id, QList<Modulator> modulators)
                      champTmp == champ_exclusiveClass ||
                      champTmp == champ_overridingRootKey)
             {
-                QMessageBox::warning(this, trUtf8("Attention"), warnQStr +
-                                     trUtf8("%1 ne peut être modulé dans un preset.").arg("<b>" + Attribute::getDescription(champTmp, true) + "</b>"));
+                QMessageBox::warning(this, trUtf8("Warning"), warnQStr +
+                                     trUtf8("%1 cannot be modulated in a preset.").arg("<b>" + Attribute::getDescription(champTmp, true) + "</b>"));
                 return;
             }
         }
@@ -2385,16 +2385,16 @@ QList<EltID> PageTable::getEltIds(bool &error, bool allWithDivisions, bool allDi
     if (allWithDivisions && !_currentIds.areAllWithDivisions(_typePage == PAGE_INST ? elementInst : elementPrst))
     {
         error = true;
-        QMessageBox::warning(this, trUtf8("Attention"), _typePage == PAGE_INST ?
-                                 trUtf8("Un instrument ne contenant aucun sample n'est pas compatible avec cet outil") :
-                                 trUtf8("Un preset ne contenant aucun instrument n'est pas compatible avec cet outil"));
+        QMessageBox::warning(this, trUtf8("Warning"), _typePage == PAGE_INST ?
+                                 trUtf8("An instrument comprising no samples is not compatible with this tool.") :
+                                 trUtf8("A preset comprising no instruments is not compatible with this tool."));
         return result;
     }
 
     if (allDivWithRange && !_currentIds.areAllWithRange(_typePage == PAGE_INST ? elementInst : elementPrst))
     {
         error = true;
-        QMessageBox::warning(this, trUtf8("Attention"), trUtf8("L'étendue de notes de toutes les divisions doit être spécifiée"));
+        QMessageBox::warning(this, trUtf8("Warning"), trUtf8("The keyrange of all divisions must be specified."));
         return result;
     }
 

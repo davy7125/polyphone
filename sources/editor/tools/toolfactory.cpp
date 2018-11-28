@@ -1,5 +1,6 @@
 #include "toolfactory.h"
 #include "abstracttool.h"
+#include <QApplication>
 
 #include "trim_end/tooltrimend.h"
 #include "auto_loop/toolautoloop.h"
@@ -28,11 +29,29 @@
 #include "chords/toolchords.h"
 #include "sample_export/toolsampleexport.h"
 
+ToolFactory::~ToolFactory()
+{
+    // Delete all tools
+    while (!_tools.empty())
+        delete _tools.takeFirst();
+}
 
-ToolFactory::ToolFactory(QWidget * parent)
+QList<AbstractTool *> ToolFactory::getTools(IdList ids)
+{
+    if (_tools.empty())
+        initialize();
+
+    QList<AbstractTool *> possibleTools;
+    foreach (AbstractTool * tool, _tools)
+        if (tool->setIds(ids))
+            possibleTools << tool;
+    return possibleTools;
+}
+
+void ToolFactory::initialize()
 {
     // Initialize the tools
-    AbstractTool::initialize(parent);
+    AbstractTool::initialize(QApplication::activeWindow());
 
     // Register all possible tools
     _tools << new ToolTrimEnd() // Samples
@@ -61,20 +80,4 @@ ToolFactory::ToolFactory(QWidget * parent)
            << new ToolRemoveMods()
            << new ToolCleanUnused()   // Sf2
            << new ToolPresetList();
-}
-
-ToolFactory::~ToolFactory()
-{
-    // Delete all tools
-    while (!_tools.empty())
-        delete _tools.takeFirst();
-}
-
-QList<AbstractTool *> ToolFactory::getTools(IdList ids)
-{
-    QList<AbstractTool *> possibleTools;
-    foreach (AbstractTool * tool, _tools)
-        if (tool->setIds(ids))
-            possibleTools << tool;
-    return possibleTools;
 }

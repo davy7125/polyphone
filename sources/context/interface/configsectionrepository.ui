@@ -17,7 +17,7 @@
    <item row="0" column="0" colspan="2">
     <widget class="QLabel" name="label_5">
      <property name="text">
-      <string>Nom d'utilisateur</string>
+      <string>Username</string>
      </property>
     </widget>
    </item>
@@ -64,7 +64,7 @@
           <cursorShape>PointingHandCursor</cursorShape>
          </property>
          <property name="text">
-          <string>Créer un compte</string>
+          <string>Create an account</string>
          </property>
          <property name="iconSize">
           <size>
@@ -111,8 +111,8 @@
           <cursorShape>PointingHandCursor</cursorShape>
          </property>
          <property name="text">
-          <string>Devenez membre
-Premium !</string>
+          <string>Become
+Premium!</string>
          </property>
          <property name="iconSize">
           <size>
@@ -192,7 +192,7 @@ Premium !</string>
           </font>
          </property>
          <property name="text">
-          <string>Compte banni</string>
+          <string>Banned account</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignCenter</set>
@@ -252,7 +252,7 @@ Premium !</string>
    <item row="1" column="0" colspan="2">
     <widget class="QLabel" name="label_34">
      <property name="text">
-      <string>Mot de passe</string>
+      <string>Password</string>
      </property>
     </widget>
    </item>
@@ -271,7 +271,7 @@ Premium !</string>
      <item>
       <widget class="QLabel" name="label_35">
        <property name="text">
-        <string>Dossier des téléchargements</string>
+        <string>Download directory</string>
        </property>
       </widget>
      </item>

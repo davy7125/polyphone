@@ -23,7 +23,7 @@
       </sizepolicy>
      </property>
      <property name="text">
-      <string>Mettre dans le rouge les fréquences du signal à filtrer :</string>
+      <string>Put in red the part of frequencies to filter:</string>
      </property>
     </widget>
    </item>

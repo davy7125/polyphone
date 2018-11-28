@@ -122,7 +122,7 @@
          </property>
          <layout class="QGridLayout" name="gridLayout">
           <property name="leftMargin">
-           <number>0</number>
+           <number>1</number>
           </property>
           <property name="topMargin">
            <number>1</number>
@@ -139,7 +139,7 @@
              <string/>
             </property>
             <property name="placeholderText">
-             <string>Rechercher...</string>
+             <string>Search...</string>
             </property>
             <property name="clearButtonEnabled">
              <bool>true</bool>
@@ -239,7 +239,7 @@
         <item row="1" column="0" colspan="3">
          <widget class="QLabel" name="labelWait">
           <property name="text">
-           <string>Ouverture du fichier en cours...</string>
+           <string>Opening file...</string>
           </property>
           <property name="alignment">
            <set>Qt::AlignCenter</set>
@@ -370,7 +370,7 @@
            </font>
           </property>
           <property name="text">
-           <string>Impossible d'ouvrir le fichier</string>
+           <string>Cannot open the file</string>
           </property>
           <property name="alignment">
            <set>Qt::AlignCenter</set>

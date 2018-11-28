@@ -5,6 +5,8 @@
 
 class ToolFrequencyPeaks: public AbstractToolOneStep
 {
+    Q_OBJECT
+
 public:
     ToolFrequencyPeaks();
 
@@ -16,7 +18,7 @@ public:
 
     QString getCategory() const override
     {
-        return trUtf8("Analyse");
+        return trUtf8("Analyze");
     }
 
     /// Internal identifier
@@ -31,7 +33,7 @@ public:
 protected:
     QString getLabelInternal() const override
     {
-        return trUtf8("Visualiser les pics de fréquences");
+        return trUtf8("Show peak frequency");
     }
 
     /// Return true if the tool can be used on the specified ids

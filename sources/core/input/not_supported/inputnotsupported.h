@@ -5,6 +5,8 @@
 
 class InputNotSupported : public AbstractInput
 {
+    Q_OBJECT
+    
 public:
     InputNotSupported();
 

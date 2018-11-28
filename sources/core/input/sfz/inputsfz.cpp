@@ -77,7 +77,7 @@ void InputSfz::parseFile(QString filename, bool &success, QString &error)
     {
         // Recursion!
         success = false;
-        error = trUtf8("Récursion entre fichiers") + " (#include)";
+        error = trUtf8("File recursion") + " (#include)";
         return;
     }
 
@@ -85,7 +85,7 @@ void InputSfz::parseFile(QString filename, bool &success, QString &error)
     if (!inputFile.open(QIODevice::ReadOnly))
     {
         success = false;
-        error = trUtf8("Impossible d'ouvrir le fichier « %1 »").arg(filename);
+        error = trUtf8("Cannot open file \"%1\"").arg(filename);
         return;
     }
 
@@ -262,7 +262,7 @@ void InputSfz::createSf2(int &sf2Index, QString filename, bool isChannel10)
     else
     {
         idSf2.indexSf2 = sf2Index;
-        sm->set(idSf2, champ_name, trUtf8("Import sfz"));
+        sm->set(idSf2, champ_name, trUtf8("Sfz import"));
     }
     sm->set(idSf2, champ_ICMT, QString("Sf2 imported from sfz by Polyphone"));
     sm->closestAvailablePreset(idSf2, numBank, numPreset);
@@ -433,6 +433,6 @@ QString InputSfz::getInstrumentName(QString filePath, int &numBank, int &numPres
 
     // Nom de l'instrument
     if (nomFichier.isEmpty())
-        nomFichier = trUtf8("sans nom");
+        nomFichier = trUtf8("untitled");
     return nomFichier.left(20);
 }

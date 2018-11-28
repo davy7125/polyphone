@@ -39,7 +39,7 @@ TranslationManager::TranslationManager(ConfManager * configuration) :
     _translator(new QTranslator())
 {
     // Native language
-    _languages["fr"] = QLocale("fr").nativeLanguageName();
+    _languages["en"] = QLocale("en").nativeLanguageName();
 
     // Languages in embedded translation file
     this->addTranslations(RESOURCE_PATH);
@@ -77,8 +77,8 @@ void TranslationManager::translate(QApplication * a)
                 ConfManager::SECTION_NONE, "language",
                 QLocale::system().name().section('_', 0, 0)).toString();
 
-    // If not french, the application is translated
-    if (language != "fr")
+    // If not english, the application is translated
+    if (language != "en")
     {
         if (!_languages.keys().contains(language))
             language = DEFAULT_LANGUAGE;

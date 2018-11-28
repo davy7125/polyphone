@@ -54,7 +54,7 @@ void ThemeManager::populateCombobox(QComboBox * combobox)
     combobox->insertItem(0, _themes[0].getName(), _themes[0].getId());
 
     // Custom
-    combobox->addItem(trUtf8("Personnalisé"), -1);
+    combobox->addItem(trUtf8("Custom"), -1);
 
     // Select the current theme
     selectIndex(combobox);
@@ -357,7 +357,7 @@ QPalette ThemeManager::getPalette()
 
 ThemeManager::ColorTheme ThemeManager::getDefaultTheme()
 {
-    ColorTheme theme = ColorTheme(trUtf8("Défaut"), 0);
+    ColorTheme theme = ColorTheme(trUtf8("Default"), 0);
 
     theme.setColor(WINDOW_BACKGROUND, _defaultPalette.color(getColorRole(WINDOW_BACKGROUND)));
     theme.setColor(WINDOW_TEXT, _defaultPalette.color(getColorRole(WINDOW_TEXT)));
@@ -390,7 +390,7 @@ QList<ThemeManager::ColorTheme> ThemeManager::getThemes()
     themes << theme1;
 
     // Dark blue theme
-    ColorTheme theme2 = ColorTheme(trUtf8("Sombre, bleu"), 2);
+    ColorTheme theme2 = ColorTheme(trUtf8("Dark, blue"), 2);
     theme2.setColor(WINDOW_BACKGROUND, QColor(50, 50, 50));
     theme2.setColor(WINDOW_TEXT, QColor(255, 255, 255));
     theme2.setColor(BUTTON_BACKGROUND, QColor(73, 73, 73));
@@ -403,7 +403,7 @@ QList<ThemeManager::ColorTheme> ThemeManager::getThemes()
     themes << theme2;
 
     // Dark orange theme
-    ColorTheme theme3 = ColorTheme(trUtf8("Sombre, orange"), 3);
+    ColorTheme theme3 = ColorTheme(trUtf8("Dark, orange"), 3);
     theme3.setColor(WINDOW_BACKGROUND, QColor(50, 50, 50));
     theme3.setColor(WINDOW_TEXT, QColor(255, 255, 255));
     theme3.setColor(BUTTON_BACKGROUND, QColor(73, 73, 73));
@@ -416,7 +416,7 @@ QList<ThemeManager::ColorTheme> ThemeManager::getThemes()
     themes << theme3;
 
     // Dark green theme
-    ColorTheme theme4 = ColorTheme(trUtf8("Sombre, vert"), 4);
+    ColorTheme theme4 = ColorTheme(trUtf8("Dark, green"), 4);
     theme4.setColor(WINDOW_BACKGROUND, QColor(50, 50, 50));
     theme4.setColor(WINDOW_TEXT, QColor(255, 255, 255));
     theme4.setColor(BUTTON_BACKGROUND, QColor(73, 73, 73));
@@ -429,7 +429,7 @@ QList<ThemeManager::ColorTheme> ThemeManager::getThemes()
     themes << theme4;
 
     // Dark yellow theme
-    ColorTheme theme5 = ColorTheme(trUtf8("Sombre, jaune"), 5);
+    ColorTheme theme5 = ColorTheme(trUtf8("Dark, yellow"), 5);
     theme5.setColor(WINDOW_BACKGROUND, QColor(50, 50, 50));
     theme5.setColor(WINDOW_TEXT, QColor(255, 255, 245));
     theme5.setColor(BUTTON_BACKGROUND, QColor(73, 73, 73));
@@ -455,7 +455,7 @@ QList<ThemeManager::ColorTheme> ThemeManager::getThemes()
     themes << theme6;
 
     // Spring theme
-    ColorTheme theme7 = ColorTheme(trUtf8("Printemps"), 7);
+    ColorTheme theme7 = ColorTheme(trUtf8("Spring"), 7);
     theme7.setColor(WINDOW_BACKGROUND, QColor(206, 254, 217));
     theme7.setColor(WINDOW_TEXT, QColor(50, 50, 50));
     theme7.setColor(BUTTON_BACKGROUND, QColor(99, 224, 138));

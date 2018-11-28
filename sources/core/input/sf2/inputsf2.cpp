@@ -21,14 +21,14 @@ void InputSf2::processInternal(QString fileName, SoundfontManager * sm, bool &su
     if (!fi.exists())
     {
         success = false;
-        error = trUtf8("Le fichier « %1 » est introuvable.").arg(fileName);
+        error = trUtf8("Cannot find file \"%1\".").arg(fileName);
         return;
     }
 
     if (!fi.open(QIODevice::ReadOnly))
     {
         success = false;
-        error = trUtf8("Le fichier « %1 » n'est pas accessible en lecture.").arg(fileName);
+        error = trUtf8("Access denied for reading file \"%1\".").arg(fileName);
         return;
     }
 

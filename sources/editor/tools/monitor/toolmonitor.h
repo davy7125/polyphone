@@ -5,6 +5,8 @@
 
 class ToolMonitor: public AbstractTool
 {
+    Q_OBJECT
+
 public:
     ToolMonitor();
 
@@ -16,7 +18,7 @@ public:
 
     QString getCategory() const override
     {
-        return trUtf8("Analyse");
+        return trUtf8("Analyze");
     }
 
     /// Internal identifier
@@ -28,7 +30,7 @@ public:
 protected:
     QString getLabelInternal() const override
     {
-        return trUtf8("Visualiser les paramètres");
+        return trUtf8("Display parameters");
     }
 
     /// Return true if the tool can be used on the specified ids

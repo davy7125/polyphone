@@ -721,7 +721,7 @@
                </size>
               </property>
               <property name="text">
-               <string>Réinitialiser</string>
+               <string>Reset</string>
               </property>
              </widget>
             </item>
@@ -740,7 +740,7 @@
                </size>
               </property>
               <property name="text">
-               <string>Appliquer</string>
+               <string>Apply</string>
               </property>
              </widget>
             </item>
@@ -787,7 +787,7 @@
          </font>
         </property>
         <property name="text">
-         <string>Égaliseur (±15 dB)</string>
+         <string>Equalizer (±15 dB)</string>
         </property>
        </widget>
       </item>
@@ -859,7 +859,7 @@
           <item row="0" column="0">
            <widget class="QPushButton" name="pushLecture">
             <property name="text">
-             <string>Lecture</string>
+             <string>Play</string>
             </property>
             <property name="checkable">
              <bool>true</bool>
@@ -913,7 +913,7 @@
              </sizepolicy>
             </property>
             <property name="text">
-             <string>en boucle</string>
+             <string>loop</string>
             </property>
            </widget>
           </item>
@@ -926,7 +926,7 @@
              </sizepolicy>
             </property>
             <property name="text">
-             <string>stéréo</string>
+             <string>stereo</string>
             </property>
            </widget>
           </item>
@@ -965,7 +965,7 @@
          </font>
         </property>
         <property name="text">
-         <string>Fréquences</string>
+         <string>Frequencies</string>
         </property>
        </widget>
       </item>
@@ -995,7 +995,7 @@
            <item row="1" column="0">
             <widget class="QLabel" name="label_2">
              <property name="text">
-              <string>Boucle</string>
+              <string>Loop</string>
              </property>
             </widget>
            </item>
@@ -1121,7 +1121,7 @@
               </size>
              </property>
              <property name="toolTip">
-              <string>Utilise la longueur totale de l'échantillon comme boucle</string>
+              <string>Use the full length of the sample as loop</string>
              </property>
              <property name="text">
               <string/>
@@ -1141,21 +1141,21 @@
            <item row="0" column="0" colspan="2">
             <widget class="QLabel" name="label">
              <property name="text">
-              <string>Taille</string>
+              <string>Size</string>
              </property>
             </widget>
            </item>
            <item row="3" column="0" colspan="2">
             <widget class="QLabel" name="label_4">
              <property name="text">
-              <string>Correction (centième)</string>
+              <string>Correction (cents)</string>
              </property>
             </widget>
            </item>
            <item row="4" column="0" colspan="2">
             <widget class="QLabel" name="label_6">
              <property name="text">
-              <string>Echantillonnage</string>
+              <string>Sample rate</string>
              </property>
             </widget>
            </item>
@@ -1169,14 +1169,14 @@
            <item row="6" column="0" colspan="2">
             <widget class="QLabel" name="label_5">
              <property name="text">
-              <string>Lien</string>
+              <string>Link</string>
              </property>
             </widget>
            </item>
            <item row="2" column="0">
             <widget class="QLabel" name="label_3">
              <property name="text">
-              <string>Note de base</string>
+              <string>Root key</string>
              </property>
             </widget>
            </item>
@@ -1189,7 +1189,7 @@
               </size>
              </property>
              <property name="toolTip">
-              <string>Utilise l'estimation de la note comme valeur</string>
+              <string>Use the estimated pitch and correction as values</string>
              </property>
              <property name="text">
               <string/>
@@ -1232,7 +1232,7 @@
          </font>
         </property>
         <property name="text">
-         <string>Informations</string>
+         <string>Information</string>
         </property>
        </widget>
       </item>

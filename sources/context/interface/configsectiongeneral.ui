@@ -23,7 +23,7 @@
       </font>
      </property>
      <property name="title">
-      <string>Entrées / sorties</string>
+      <string>Input / Output</string>
      </property>
      <property name="flat">
       <bool>true</bool>
@@ -92,7 +92,7 @@
          </font>
         </property>
         <property name="text">
-         <string>Sortie audio</string>
+         <string>Audio backend</string>
         </property>
        </widget>
       </item>
@@ -121,7 +121,7 @@
          </font>
         </property>
         <property name="text">
-         <string>Taille du tampon</string>
+         <string>Buffer size</string>
         </property>
        </widget>
       </item>
@@ -144,7 +144,7 @@
          </font>
         </property>
         <property name="text">
-         <string>Entrée midi</string>
+         <string>Midi input</string>
         </property>
        </widget>
       </item>
@@ -175,7 +175,7 @@
          </font>
         </property>
         <property name="text">
-         <string>Import fichiers wav</string>
+         <string>Wav file import</string>
         </property>
        </widget>
       </item>
@@ -188,7 +188,7 @@
          </font>
         </property>
         <property name="text">
-         <string>répercuter les modifications</string>
+         <string>change linked sample</string>
         </property>
        </widget>
       </item>
@@ -201,7 +201,7 @@
          </font>
         </property>
         <property name="text">
-         <string>ajuster à la boucle</string>
+         <string>trim to loop</string>
         </property>
        </widget>
       </item>
@@ -214,7 +214,7 @@
          </font>
         </property>
         <property name="text">
-         <string>Édition stéréo</string>
+         <string>Stereo editing</string>
         </property>
        </widget>
       </item>
@@ -227,7 +227,7 @@
          </font>
         </property>
         <property name="text">
-         <string>enlever le blanc au départ</string>
+         <string>remove blank at start</string>
         </property>
        </widget>
       </item>

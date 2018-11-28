@@ -21,7 +21,7 @@ public:
 
     QString getCategory() const override
     {
-        return trUtf8("Traitement des échantillons");
+        return trUtf8("Sample processing");
     }
 
     /// Internal identifier
@@ -39,7 +39,7 @@ public:
 protected:
     QString getLabelInternal() const override
     {
-        return trUtf8("Commande externe");
+        return trUtf8("External command");
     }
 
     /// Get the warning to display after the tool is run

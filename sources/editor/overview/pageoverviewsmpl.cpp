@@ -29,20 +29,20 @@ PageOverviewSmpl::PageOverviewSmpl(QWidget * parent) : PageOverview(PAGE_SMPL, e
 
 QString PageOverviewSmpl::getTitle()
 {
-    return trUtf8("Échantillons");
+    return trUtf8("Samples");
 }
 
 QStringList PageOverviewSmpl::getHorizontalHeader()
 {
     QStringList hHeader;
-    hHeader << trUtf8("Utilisé")
-            << trUtf8("Durée\ntotale")
-            << trUtf8("Durée de\nla boucle")
-            << trUtf8("Note\nde base")
+    hHeader << trUtf8("Used")
+            << trUtf8("Total\nduration")
+            << trUtf8("Loop\nduration")
+            << trUtf8("Root\nkey")
             << trUtf8("Correction")
-            << trUtf8("Type\nd'échantillon")
-            << trUtf8("Échantillon\nlié")
-            << trUtf8("Taux\nd'échantillonnage");
+            << trUtf8("Sample\ntype")
+            << trUtf8("Linked\nsample")
+            << trUtf8("Sample\nrate");
     return hHeader;
 }
 
@@ -82,7 +82,7 @@ QStringList PageOverviewSmpl::getInformation(EltID id)
 
 QString PageOverviewSmpl::isUsed(EltID id)
 {
-    return _usedSmpl.contains(id.indexElt) ? trUtf8("oui") : trUtf8("non");
+    return _usedSmpl.contains(id.indexElt) ? trUtf8("yes") : trUtf8("no");
 }
 
 QString PageOverviewSmpl::totalLength(EltID id)
@@ -120,19 +120,19 @@ QString PageOverviewSmpl::type(EltID id)
     switch (_sf2->get(id, champ_sfSampleType).sfLinkValue)
     {
     case linkInvalid:
-        type = trUtf8("Lien invalide");
+        type = trUtf8("Invalid link");
         break;
     case monoSample: case RomMonoSample:
         type = trUtf8("Mono", "opposite to stereo");
         break;
     case rightSample: case RomRightSample:
-        type = trUtf8("Stéréo droit");
+        type = trUtf8("Stereo right");
         break;
     case leftSample: case RomLeftSample:
-        type = trUtf8("Stéréo gauche");
+        type = trUtf8("Stereo left");
         break;
     case linkedSample: case RomLinkedSample:
-        type = trUtf8("Stéréo non défini");
+        type = trUtf8("Stereo non defined");
         break;
     }
 
@@ -152,7 +152,7 @@ QString PageOverviewSmpl::link(EltID id)
         if (_sf2->isValid(id2))
             return _sf2->getQstr(id2, champ_name);
         else
-            return trUtf8("non valide");
+            return trUtf8("invalid");
     }
 }
 

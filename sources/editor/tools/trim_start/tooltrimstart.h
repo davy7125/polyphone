@@ -6,6 +6,8 @@
 
 class ToolTrimStart: public AbstractToolIterating
 {
+    Q_OBJECT
+
 public:
     ToolTrimStart() : AbstractToolIterating(elementSmpl) {}
 
@@ -17,7 +19,7 @@ public:
 
     QString getCategory() const override
     {
-        return trUtf8("Traitement des échantillons");
+        return trUtf8("Sample processing");
     }
 
     /// Internal identifier
@@ -35,7 +37,7 @@ public:
 protected:
     QString getLabelInternal() const override
     {
-        return trUtf8("Enlever le silence initial");
+        return trUtf8("Remove blank at start");
     }
 };
 

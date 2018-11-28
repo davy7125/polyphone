@@ -67,7 +67,7 @@
    <item row="7" column="1">
     <widget class="QLabel" name="label_6">
      <property name="text">
-      <string>Renversements</string>
+      <string>Inversions</string>
      </property>
     </widget>
    </item>
@@ -97,7 +97,7 @@
    <item row="3" column="1">
     <widget class="QLabel" name="label_3">
      <property name="text">
-      <string>Etalement (%)</string>
+      <string>Spreading (%)</string>
      </property>
     </widget>
    </item>
@@ -141,27 +141,27 @@
     <widget class="QComboBox" name="comboPattern">
      <item>
       <property name="text">
-       <string>Ascendant</string>
+       <string>Ascending</string>
       </property>
      </item>
      <item>
       <property name="text">
-       <string>Descendant</string>
+       <string>Descending</string>
       </property>
      </item>
      <item>
       <property name="text">
-       <string>Creux</string>
+       <string>Hollow</string>
       </property>
      </item>
      <item>
       <property name="text">
-       <string>Pointe</string>
+       <string>Spike</string>
       </property>
      </item>
      <item>
       <property name="text">
-       <string>Aléatoire</string>
+       <string>Random</string>
       </property>
      </item>
     </widget>
@@ -169,7 +169,7 @@
    <item row="0" column="1">
     <widget class="QLabel" name="label">
      <property name="text">
-      <string>Motif</string>
+      <string>Pattern</string>
      </property>
     </widget>
    </item>
@@ -186,7 +186,7 @@
    <item row="1" column="1">
     <widget class="QLabel" name="label_2">
      <property name="text">
-      <string>Nombre divisions</string>
+      <string>Division number</string>
      </property>
     </widget>
    </item>
@@ -200,7 +200,7 @@
    <item row="2" column="1">
     <widget class="QLabel" name="label_4">
      <property name="text">
-      <string>Occupation (%)</string>
+      <string>Filling (%)</string>
      </property>
     </widget>
    </item>

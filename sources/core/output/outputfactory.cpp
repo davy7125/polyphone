@@ -76,7 +76,7 @@ bool OutputFactory::save(int indexSf2, bool saveAs)
             // A new file is to be saved, the path is based on the internal name and the recent files
             QString currentName = sm->getQstr(id, champ_name);
             if (currentName.isEmpty())
-                currentName = QObject::trUtf8("sans titre");
+                currentName = QObject::trUtf8("untitled");
             defaultPath = ContextManager::recentFile()->getLastDirectory(RecentFileManager::FILE_TYPE_SOUNDFONT) + "/" + currentName + ".sf2";
         }
         else if (filePathInitial != filePathForData)
@@ -89,8 +89,8 @@ bool OutputFactory::save(int indexSf2, bool saveAs)
             defaultPath = filePathInitial;
 
         // Dialog for choosing a destination
-        savePath = QFileDialog::getSaveFileName(QApplication::activeWindow(), QObject::trUtf8("Sauvegarder une soundfont"),
-                                                defaultPath, QObject::trUtf8("Fichier .sf2") + " (*.sf2)");
+        savePath = QFileDialog::getSaveFileName(QApplication::activeWindow(), QObject::trUtf8("Save a soundfont"),
+                                                defaultPath, QObject::trUtf8("Sf2 files") + " (*.sf2)");
         if (savePath.isNull())
             return false;
     }
@@ -112,7 +112,7 @@ bool OutputFactory::save(int indexSf2, bool saveAs)
         ContextManager::recentFile()->addRecentFile(RecentFileManager::FILE_TYPE_SOUNDFONT, savePath);
     }
     else
-        QMessageBox::warning(QApplication::activeWindow(), QObject::trUtf8("Attention"), output->getError());
+        QMessageBox::warning(QApplication::activeWindow(), QObject::trUtf8("Warning"), output->getError());
     delete output;
 
     return success;

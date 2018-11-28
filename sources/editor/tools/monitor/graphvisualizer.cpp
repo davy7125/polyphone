@@ -212,7 +212,7 @@ void GraphVisualizer::setScale()
         if (this->yMinDonnees < minY)
         {
             // Affichage avertissement
-            textWarning->setText(trUtf8("Impossible d'afficher tous les points."));
+            textWarning->setText(trUtf8("Cannot display all the values."));
             textWarning->position->setCoords(this->xAxis->range().lower, maxY);
         }
         else

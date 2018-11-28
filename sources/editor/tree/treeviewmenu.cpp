@@ -19,12 +19,12 @@ TreeViewMenu::TreeViewMenu(QWidget * parent) : QMenu(parent),
                         ";margin: 10px 45px; height: 1px}");
 
     // Associate
-    _associateAction = new QAction(trUtf8("&Associer à..."), this);
+    _associateAction = new QAction(trUtf8("&Bind to..."), this);
     connect(_associateAction, SIGNAL(triggered()), this, SLOT(associate()));
     this->addAction(_associateAction);
 
     // Replace
-    _replaceAction = new QAction(trUtf8("&Remplacer par..."), this);
+    _replaceAction = new QAction(trUtf8("&Replace by..."), this);
     connect(_replaceAction, SIGNAL(triggered()), this, SLOT(replace()));
     this->addAction(_replaceAction);
     this->addSeparator();
@@ -32,32 +32,32 @@ TreeViewMenu::TreeViewMenu(QWidget * parent) : QMenu(parent),
     connect(_dialogList, SIGNAL(elementSelected(EltID, bool)), this, SLOT(itemSelectedFromList(EltID, bool)));
 
     // Copy
-    _copyAction = new QAction(trUtf8("&Copier"), this);
+    _copyAction = new QAction(trUtf8("&Copy"), this);
     _copyAction->setShortcut(QString("Ctrl+C"));
     connect(_copyAction, SIGNAL(triggered()), this, SLOT(copy()));
     this->addAction(_copyAction);
 
     // Paste
-    _pasteAction = new QAction(trUtf8("C&oller"), this);
+    _pasteAction = new QAction(trUtf8("&Paste"), this);
     _pasteAction->setShortcut(QString("Ctrl+V"));
     connect(_pasteAction, SIGNAL(triggered()), this, SLOT(paste()));
     this->addAction(_pasteAction);
 
     // Duplicate
-    _duplicateAction = new QAction(trUtf8("&Dupliquer"), this);
+    _duplicateAction = new QAction(trUtf8("D&uplicate"), this);
     _duplicateAction->setShortcut(QString("Ctrl+D"));
     connect(_duplicateAction, SIGNAL(triggered()), this, SLOT(duplicate()));
     this->addAction(_duplicateAction);
 
     // Delete
-    _removeAction = new QAction(trUtf8("&Supprimer"), this);
+    _removeAction = new QAction(trUtf8("&Delete"), this);
     _removeAction->setShortcut(QString("Del"));
     connect(_removeAction, SIGNAL(triggered()), this, SLOT(remove()));
     this->addAction(_removeAction);
     this->addSeparator();
 
     // Rename
-    _renameAction = new QAction(trUtf8("Re&nommer..."), this);
+    _renameAction = new QAction(trUtf8("&Rename..."), this);
     _renameAction->setShortcut(Qt::Key_F2);
     connect(_renameAction, SIGNAL(triggered()), this, SLOT(rename()));
     this->addAction(_renameAction);
@@ -114,11 +114,11 @@ void TreeViewMenu::initialize(IdList ids)
     if (rename)
     {
         _renameAction->setEnabled(true);
-        _renameAction->setText(ids.count() == 1 ? trUtf8("Re&nommer...") : trUtf8("Re&nommer en masse..."));
+        _renameAction->setText(ids.count() == 1 ? trUtf8("&Rename...") : trUtf8("Bulk &rename..."));
     }
     else
     {
-        _renameAction->setText(trUtf8("Re&nommer..."));
+        _renameAction->setText(trUtf8("&Rename..."));
         _renameAction->setEnabled(false);
     }
 
@@ -160,11 +160,11 @@ void TreeViewMenu::remove()
     }
 
     if (message % 2 == 0)
-        QMessageBox::warning((QWidget*)this->parent(), trUtf8("Attention"),
-                             trUtf8("Impossible de supprimer un échantillon s'il est utilisé par un instrument."));
+        QMessageBox::warning((QWidget*)this->parent(), trUtf8("Warning"),
+                             trUtf8("Cannot delete a sample used by another instrument."));
     if (message % 3 == 0)
-        QMessageBox::warning((QWidget*)this->parent(), trUtf8("Attention"),
-                             trUtf8("Impossible de supprimer un instrument s'il est utilisé par un preset."));
+        QMessageBox::warning((QWidget*)this->parent(), trUtf8("Warning"),
+                             trUtf8("Cannot delete an instrument used by another preset."));
 
     sm->endEditing("tree:remove");
 }
@@ -298,15 +298,17 @@ void TreeViewMenu::rename()
     {
         QString msg;
         if (type == elementSmpl)
-            msg = trUtf8("Nom de l'échantillon (max 20 caractères) :");
+            msg = trUtf8("Sample name (max 20 characters):");
         else if (type == elementInst)
-            msg = trUtf8("Nom de l'instrument (max 20 caractères) :");
+            msg = trUtf8("Instrument name (max 20 characters):");
         else if (type == elementPrst)
-            msg = trUtf8("Nom du preset (max 20 caractères) :");
+            msg = trUtf8("Preset name (max 20 characters):");
 
         SoundfontManager * sm = SoundfontManager::getInstance();
         bool ok = true;
-        QString text = QInputDialog::getText((QWidget*)this->parent(), trUtf8("Question"), msg, QLineEdit::Normal, sm->getQstr(_currentIds[0], champ_name), &ok);
+        QString text = QInputDialog::getText((QWidget*)this->parent(), trUtf8("Question"), msg, QLineEdit::Normal,
+                                             sm->getQstr(_currentIds[0], champ_name), &ok,
+                Qt::WindowSystemMenuHint | Qt::WindowTitleHint | Qt::WindowCloseButtonHint);
         if (ok && !text.isEmpty())
             sm->set(_currentIds[0], champ_name, text);
         sm->endEditing("command:rename");

@@ -71,7 +71,7 @@ void AbstractTool::onFinished(bool updateNeeded)
     // Display a warning if there is one
     QString warning = getWarning();
     if (!warning.isEmpty())
-        QMessageBox::warning(s_parent, trUtf8("Attention"), warning);
+        QMessageBox::warning(s_parent, trUtf8("Warning"), warning);
 
     // Possibly display a confirmation
     QString info = getConfirmation();

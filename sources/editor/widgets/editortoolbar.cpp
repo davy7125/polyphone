@@ -24,36 +24,36 @@ EditorToolBar::EditorToolBar(QWidget * parent) : QToolBar(parent),
     this->setStyleSheet("QToolBar{border:0;background-color:" + highlightColor.name() + "}");
 
     // Create the actions
-    _actionAddSample = new StyledAction(trUtf8("Ajouter un échantillon"), ":/icons/sample.svg", this);
+    _actionAddSample = new StyledAction(trUtf8("Add a sample"), ":/icons/sample.svg", this);
     connect(_actionAddSample, SIGNAL(clicked()), this, SLOT(onNewSmplClicked()));
     this->addWidget(_actionAddSample);
 
-    _actionAddInstrument = new StyledAction(trUtf8("Ajouter un instrument"), ":/icons/instrument.svg", this);
+    _actionAddInstrument = new StyledAction(trUtf8("Add an instrument"), ":/icons/instrument.svg", this);
     connect(_actionAddInstrument, SIGNAL(clicked()), this, SLOT(onNewInstClicked()));
     this->addWidget(_actionAddInstrument);
 
-    _actionAddPreset = new StyledAction(trUtf8("Ajouter un preset"), ":/icons/preset.svg", this);
+    _actionAddPreset = new StyledAction(trUtf8("Add a preset"), ":/icons/preset.svg", this);
     connect(_actionAddPreset, SIGNAL(clicked()), this, SLOT(onNewPrstClicked()));
     this->addWidget(_actionAddPreset);
 
-    _actionToolBox = new StyledAction(trUtf8("Boîte à outils"), ":/icons/toolbox.svg", this);
+    _actionToolBox = new StyledAction(trUtf8("Toolbox"), ":/icons/toolbox.svg", this);
     this->addWidget(_actionToolBox);
     _toolMenu = new ToolMenu(_actionToolBox);
     _actionToolBox->setMenu(_toolMenu);
     _actionToolBox->setPopupMode(QToolButton::InstantPopup);
 
     this->addSeparator();
-    _actionUndo = new StyledAction(trUtf8("Annuler"), ":/icons/edit-undo.svg", this);
+    _actionUndo = new StyledAction(trUtf8("Cancel"), ":/icons/edit-undo.svg", this);
 //    _actionUndo->setShortcut(Qt::CTRL + Qt::Key_Z);
     connect(_actionUndo, SIGNAL(clicked()), this, SLOT(onUndo()));
     this->addWidget(_actionUndo);
 
-    _actionRedo = new StyledAction(trUtf8("Rétablir"), ":/icons/edit-redo.svg", this);
+    _actionRedo = new StyledAction(trUtf8("Redo"), ":/icons/edit-redo.svg", this);
     connect(_actionRedo, SIGNAL(clicked()), this, SLOT(onRedo()));
     this->addWidget(_actionRedo);
     this->addSeparator();
 
-    _actionSave = new StyledAction(trUtf8("Sauvegarder"), ":/icons/document-save.svg", this);
+    _actionSave = new StyledAction(trUtf8("Save"), ":/icons/document-save.svg", this);
     connect(_actionSave, SIGNAL(clicked()), this, SLOT(onSaveClicked()));
     this->addWidget(_actionSave);
 
@@ -63,13 +63,13 @@ EditorToolBar::EditorToolBar(QWidget * parent) : QToolBar(parent),
     _displayActionSeparator = this->addSeparator();
     _displayActionSeparator->setVisible(false);
 
-    _actionShowRecorder = new StyledAction(trUtf8("Magnétophone"), ":/icons/recorder.svg", this);
+    _actionShowRecorder = new StyledAction(trUtf8("Recorder"), ":/icons/recorder.svg", this);
     _actionShowRecorder->setCheckable(true);
     _actionShowRecorder->setChecked(s_recorderOpen);
     connect(_actionShowRecorder, SIGNAL(clicked()), this, SLOT(onRecorderActionClicked()));
     this->addWidget(_actionShowRecorder);
 
-    _actionShowKeyboard = new StyledAction(trUtf8("Clavier virtuel"), ":/icons/piano.svg", this);
+    _actionShowKeyboard = new StyledAction(trUtf8("Virtual keyboard"), ":/icons/piano.svg", this);
     _actionShowKeyboard->setCheckable(true);
     _actionShowKeyboard->setChecked(s_keyboardOpen);
     connect(_actionShowKeyboard, SIGNAL(clicked()), this, SLOT(onKeyboardActionClicked()));
@@ -227,9 +227,9 @@ void EditorToolBar::onNewSmplClicked()
         ext = myFunction();
 
     // Display dialog
-    QStringList strList = QFileDialog::getOpenFileNames(this, trUtf8("Importer un fichier audio"),
+    QStringList strList = QFileDialog::getOpenFileNames(this, trUtf8("Import an audio file"),
                                                         ContextManager::recentFile()->getLastDirectory(RecentFileManager::FILE_TYPE_SAMPLE),
-                                                        trUtf8("Fichier .wav") + " (*.wav)" + ext);
+                                                        trUtf8("Wav file") + " (*.wav)" + ext);
 
     if (strList.count() == 0)
         return;
@@ -254,7 +254,9 @@ void EditorToolBar::onNewInstClicked()
         return;
 
     bool ok;
-    QString name = QInputDialog::getText(this, trUtf8("Créer un nouvel instrument"), trUtf8("Nom du nouvel instrument :"), QLineEdit::Normal, "", &ok);
+    QString name = QInputDialog::getText(this, trUtf8("Create a new instrument"),
+                                         trUtf8("Name of the new instrument:"), QLineEdit::Normal, "", &ok,
+                                         Qt::WindowSystemMenuHint | Qt::WindowTitleHint | Qt::WindowCloseButtonHint);
     if (ok && !name.isEmpty())
     {
         // Add a new instrument
@@ -281,7 +283,7 @@ void EditorToolBar::onNewPrstClicked()
     sm->firstAvailablePresetBank(id, nBank, nPreset);
     if (nPreset == -1)
     {
-        QMessageBox::warning(this, trUtf8("Attention"), trUtf8("Aucun preset n'est disponible."));
+        QMessageBox::warning(this, trUtf8("Warning"), trUtf8("No preset available."));
         return;
     }
 
@@ -294,7 +296,9 @@ void EditorToolBar::onNewPrstClicked()
     }
 
     bool ok;
-    QString name = QInputDialog::getText(this, trUtf8("Créer un nouveau preset"), trUtf8("Nom du nouveau preset :"), QLineEdit::Normal, text, &ok);
+    QString name = QInputDialog::getText(this, trUtf8("Create a new preset"),
+                                         trUtf8("Name of the new preset:"), QLineEdit::Normal, text, &ok,
+                                         Qt::WindowSystemMenuHint | Qt::WindowTitleHint | Qt::WindowCloseButtonHint);
     if (ok && !name.isEmpty())
     {
         // Add a new preset
