@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="sr_RS">
+<TS version="2.1" language="sr_RS">
 <context>
     <name>AbstractInput</name>
-    <message utf8="true">
+    <message>
         <location filename="core/input/abstractinput.cpp" line="18"/>
         <source>pas encore traité</source>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/input/abstractinput.cpp" line="56"/>
         <source>Ce fichier est déjà ouvert.</source>
         <oldsource>Le fichier est déjà ouvert</oldsource>
@@ -17,7 +17,7 @@
 </context>
 <context>
     <name>AbstractOutput</name>
-    <message utf8="true">
+    <message>
         <location filename="core/output/abstractoutput.cpp" line="16"/>
         <source>pas encore traité</source>
         <translation type="unfinished"></translation>
@@ -48,17 +48,17 @@
         <source>inconnu</source>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/types/attribute.cpp" line="517"/>
         <source>Offset début échantillon</source>
         <translation type="unfinished">Помак почетка узорка</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/types/attribute.cpp" line="520"/>
         <source>Offset fin échantillon</source>
         <translation type="unfinished">Помак краја узорка</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/types/attribute.cpp" line="523"/>
         <source>Offset début boucle</source>
         <translation type="unfinished">Помак почетка вртње</translation>
@@ -68,28 +68,28 @@
         <source>Offset fin boucle</source>
         <translation type="unfinished">Помак краја вртње</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/types/attribute.cpp" line="529"/>
         <location filename="core/types/attribute.cpp" line="650"/>
         <source>Offset début échantillon (× 32768)</source>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/types/attribute.cpp" line="532"/>
         <source>Mod LFO → note (c)</source>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/types/attribute.cpp" line="535"/>
         <source>Vib LFO → note (c)</source>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/types/attribute.cpp" line="538"/>
         <source>Mod env → note (c)</source>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/types/attribute.cpp" line="541"/>
         <source>Filtre, coupure (×)</source>
         <translation type="unfinished"></translation>
@@ -99,27 +99,27 @@
         <source>Filtre, coupure (Hz)</source>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/types/attribute.cpp" line="545"/>
         <source>Filtre, résonance (dB)</source>
         <translation type="unfinished">Филтар, резонанса (dB)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/types/attribute.cpp" line="548"/>
         <source>Mod LFO → filtre (c)</source>
         <translation type="unfinished">»Mod LFO« → филтар (c)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/types/attribute.cpp" line="551"/>
         <source>Mod env → filtre (c)</source>
         <translation type="unfinished">»Mod env« → филтар (c)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/types/attribute.cpp" line="554"/>
         <source>Offset fin échantillon (× 32768)</source>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/types/attribute.cpp" line="557"/>
         <source>Mod LFO → volume (dB)</source>
         <translation type="unfinished">»Mod LFO« → гласноћа (dB)</translation>
@@ -129,7 +129,7 @@
         <source>Chorus (%)</source>
         <translation type="unfinished">Хорус (%)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/types/attribute.cpp" line="563"/>
         <source>Réverbération (%)</source>
         <translation type="unfinished">Јека (%)</translation>
@@ -144,7 +144,7 @@
         <source>Balance [-50;50]</source>
         <translation type="unfinished">Пан [-50;50]</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/types/attribute.cpp" line="570"/>
         <source>Mod LFO delay (×)</source>
         <translation type="unfinished">»Mod LFO« кашњење (×)</translation>
@@ -154,7 +154,7 @@
         <source>Mod LFO delay (s)</source>
         <translation type="unfinished">»Mod LFO« кашњење (s)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/types/attribute.cpp" line="574"/>
         <source>Mod LFO freq (×)</source>
         <translation type="unfinished">»Mod LFO« учестаност (×)</translation>
@@ -164,7 +164,7 @@
         <source>Mod LFO freq (Hz)</source>
         <translation type="unfinished">»Mod LFO« учестаност (Hz)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/types/attribute.cpp" line="578"/>
         <source>Vib LFO delay (×)</source>
         <translation type="unfinished">»Vib LFO« кашњење (×)</translation>
@@ -174,7 +174,7 @@
         <source>Vib LFO delay (s)</source>
         <translation type="unfinished">»Vib LFO« кашњење (s)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/types/attribute.cpp" line="582"/>
         <source>Vib LFO freq (×)</source>
         <translation type="unfinished">»Vib LFO« учестаност (×)</translation>
@@ -184,7 +184,7 @@
         <source>Vib LFO freq (Hz)</source>
         <translation type="unfinished">»Vib LFO« учестаност (Hz)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/types/attribute.cpp" line="586"/>
         <source>Mod env delay (×)</source>
         <translation type="unfinished">»Mod env« кашњење (×)</translation>
@@ -194,7 +194,7 @@
         <source>Mod env delay (s)</source>
         <translation type="unfinished">»Mod env« кашњење (s)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/types/attribute.cpp" line="590"/>
         <source>Mod env attack (×)</source>
         <translation type="unfinished">»Mod env« пораст (×)</translation>
@@ -204,7 +204,7 @@
         <source>Mod env attack (s)</source>
         <translation type="unfinished">»Mod env« пораст (s)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/types/attribute.cpp" line="594"/>
         <source>Mod env hold (×)</source>
         <translation type="unfinished">»Mod env« одржавање (×)</translation>
@@ -214,7 +214,7 @@
         <source>Mod env hold (s)</source>
         <translation type="unfinished">»Mod env« одржавање (s)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/types/attribute.cpp" line="598"/>
         <source>Mod env decay (×)</source>
         <translation type="unfinished">»Mod env« пад (×)</translation>
@@ -229,7 +229,7 @@
         <source>Mod env sustain (%)</source>
         <translation type="unfinished">»Mod env« задршка (%)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/types/attribute.cpp" line="605"/>
         <source>Mod env release (×)</source>
         <translation type="unfinished">»Mod env« стишавање (×)</translation>
@@ -239,17 +239,17 @@
         <source>Mod env release (s)</source>
         <translation type="unfinished">»Mod env« стишавање (s)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/types/attribute.cpp" line="609"/>
         <source>Note → Mod env hold (c)</source>
         <translation type="unfinished">Нота → »Mod env« одржавање (c)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/types/attribute.cpp" line="612"/>
         <source>Note → Mod env decay (c)</source>
         <translation type="unfinished">Нота → »Mod env« пад (c)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/types/attribute.cpp" line="615"/>
         <source>Vol env delay (×)</source>
         <translation type="unfinished">»Vol env« кашњење (×)</translation>
@@ -259,7 +259,7 @@
         <source>Vol env delay (s)</source>
         <translation type="unfinished">»Vol env« кашњење (s)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/types/attribute.cpp" line="619"/>
         <source>Vol env attack (×)</source>
         <translation type="unfinished">»Vol env« пораст (×)</translation>
@@ -269,7 +269,7 @@
         <source>Vol env attack (s)</source>
         <translation type="unfinished">»Vol env« пораст (s)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/types/attribute.cpp" line="623"/>
         <source>Vol env hold (×)</source>
         <translation type="unfinished">»Vol env« одржавање (×)</translation>
@@ -279,7 +279,7 @@
         <source>Vol env hold (s)</source>
         <translation type="unfinished">»Vol env« одржавање (s)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/types/attribute.cpp" line="627"/>
         <source>Vol env decay (×)</source>
         <translation type="unfinished">»Vol env« пад (×)</translation>
@@ -294,7 +294,7 @@
         <source>Vol env sustain (dB)</source>
         <translation type="unfinished">»Vol env« задршка (dB)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/types/attribute.cpp" line="634"/>
         <source>Vol env release (×)</source>
         <translation type="unfinished">»Vol env« стишавање (×)</translation>
@@ -304,22 +304,22 @@
         <source>Vol env release (s)</source>
         <translation type="unfinished">»Vol env« стишавање (s)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/types/attribute.cpp" line="638"/>
         <source>Note → Vol env hold (c)</source>
         <translation type="unfinished">Нота → »Vol env« одржавање (c)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/types/attribute.cpp" line="641"/>
         <source>Note → Vol env decay (c)</source>
         <translation type="unfinished">Нота → »Vol env« пад (c)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/types/attribute.cpp" line="644"/>
         <source>Étendue note</source>
         <translation type="unfinished">Опсег нота</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/types/attribute.cpp" line="647"/>
         <source>Étendue vélocité</source>
         <translation type="unfinished">Опсег јачине удара</translation>
@@ -329,17 +329,17 @@
         <source>Note fixe</source>
         <translation type="unfinished">Учвршћена нота</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/types/attribute.cpp" line="656"/>
         <source>Vélocité fixe</source>
         <translation type="unfinished">Учвршћена јачина</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/types/attribute.cpp" line="659"/>
         <source>Atténuation (dB)</source>
         <translation type="unfinished">Пригушење (dB)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/types/attribute.cpp" line="662"/>
         <source>Offset fin boucle (× 32768)</source>
         <translation type="unfinished"></translation>
@@ -349,7 +349,7 @@
         <source>Accordage (demi-tons)</source>
         <translation type="unfinished">Угађање (полутонови)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/types/attribute.cpp" line="668"/>
         <source>Accordage (centièmes)</source>
         <translation type="unfinished">Угађање (центи)</translation>
@@ -359,7 +359,7 @@
         <source>Lecture en boucle</source>
         <translation type="unfinished">Свирање вртње</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/types/attribute.cpp" line="674"/>
         <source>Réglage de tonalité</source>
         <translation type="unfinished"></translation>
@@ -455,7 +455,7 @@
         <source>A</source>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="context/confmanager.cpp" line="146"/>
         <source>É</source>
         <translation type="unfinished"></translation>
@@ -500,7 +500,7 @@
         <source>Y</source>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="context/confmanager.cpp" line="155"/>
         <source>È</source>
         <translation type="unfinished"></translation>
@@ -648,7 +648,7 @@
 </context>
 <context>
     <name>ConfigPanel</name>
-    <message utf8="true">
+    <message>
         <location filename="context/interface/configpanel.ui" line="81"/>
         <source>Général</source>
         <translation type="unfinished">Опште</translation>
@@ -676,7 +676,7 @@
 </context>
 <context>
     <name>ConfigSectionGeneral</name>
-    <message utf8="true">
+    <message>
         <location filename="context/interface/configsectiongeneral.ui" line="26"/>
         <source>Entrées / sorties</source>
         <translation type="unfinished">Улаз/Излаз</translation>
@@ -691,7 +691,7 @@
         <source>Taille du tampon</source>
         <translation type="unfinished">Величина бафера</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="context/interface/configsectiongeneral.ui" line="147"/>
         <source>Entrée midi</source>
         <translation type="unfinished">Миди-улаз</translation>
@@ -706,22 +706,22 @@
         <source>Import fichiers wav</source>
         <translation type="unfinished">Увоз вав-датотека</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="context/interface/configsectiongeneral.ui" line="191"/>
         <source>répercuter les modifications</source>
         <translation type="unfinished">мењај и повезани узорак</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="context/interface/configsectiongeneral.ui" line="204"/>
         <source>ajuster à la boucle</source>
         <translation type="unfinished">орежи према вртњи</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="context/interface/configsectiongeneral.ui" line="217"/>
         <source>Édition stéréo</source>
         <translation type="unfinished">Стерео уређивање</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="context/interface/configsectiongeneral.ui" line="230"/>
         <source>enlever le blanc au départ</source>
         <translation type="unfinished">уклони почетну празнину</translation>
@@ -739,47 +739,47 @@
         <source>Nom des notes</source>
         <translation type="unfinished">Називи нота</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="context/interface/configsectioninterface.ui" line="67"/>
         <source>Do central → 60, puis 61</source>
         <translation type="unfinished">Основна »До« → 60, затим 61</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="context/interface/configsectioninterface.ui" line="72"/>
         <source>Do central → C3, puis C♯3</source>
         <translation type="unfinished">Основна »До« → C3, затим C♯3</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="context/interface/configsectioninterface.ui" line="77"/>
         <source>Do central → C3, puis D♭3</source>
         <translation type="unfinished">Основна »До« → C3, затим D♭3</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="context/interface/configsectioninterface.ui" line="82"/>
         <source>Do central → C4, puis C♯4</source>
         <translation type="unfinished">Основна »До« → C4, затим C♯4</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="context/interface/configsectioninterface.ui" line="87"/>
         <source>Do central → C4, puis D♭4</source>
         <translation type="unfinished">Основна »До« → C4, затим D♭4</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="context/interface/configsectioninterface.ui" line="92"/>
         <source>Do central → C5, puis C♯5</source>
         <translation type="unfinished">Основна »До« → C5, затим C♯5</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="context/interface/configsectioninterface.ui" line="97"/>
         <source>Do central → C5, puis D♭5</source>
         <translation type="unfinished">Основна »До« → C5, затим D♭5</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="context/interface/configsectioninterface.ui" line="126"/>
         <source>Thème</source>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="context/interface/configsectioninterface.ui" line="232"/>
         <source>Sélection</source>
         <translation type="unfinished">Избор</translation>
@@ -797,7 +797,7 @@
         <source>Texte</source>
         <translation type="unfinished">Текст</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="context/interface/configsectioninterface.ui" line="305"/>
         <source>Fenêtre</source>
         <translation type="unfinished">Прозор</translation>
@@ -815,7 +815,7 @@
         <source>Bouton</source>
         <translation type="unfinished">Дугме</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="context/interface/configsectioninterface.ui" line="624"/>
         <source>Thème de couleur</source>
         <translation type="unfinished">Изглед</translation>
@@ -825,7 +825,7 @@
         <source>Liste et tableau</source>
         <translation type="unfinished">Списак и табела</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="context/interface/configsectioninterface.ui" line="663"/>
         <source>La modification sera prise en compte lors du prochain démarrage du logiciel.</source>
         <translation type="unfinished">Ова измена биће примењена по поновном покретању програма.</translation>
@@ -871,7 +871,7 @@
         <source>Premier Do</source>
         <translation type="unfinished">Почетна »До«</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="context/interface/configsectionkeyboard.ui" line="187"/>
         <source>Vélocité par défaut</source>
         <translation type="unfinished">Уобичајена јачина удара</translation>
@@ -884,7 +884,7 @@
         <source>Nom d&apos;utilisateur</source>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="context/interface/configsectionrepository.ui" line="67"/>
         <source>Créer un compte</source>
         <translation type="unfinished"></translation>
@@ -905,7 +905,7 @@ Premium !</source>
         <source>Mot de passe</source>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="context/interface/configsectionrepository.ui" line="274"/>
         <source>Dossier des téléchargements</source>
         <translation type="unfinished"></translation>
@@ -926,27 +926,27 @@ Premium !</source>
         <source>Annuler</source>
         <translation type="unfinished">Поништи</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="context/interface/configsectionrepository.cpp" line="91"/>
         <location filename="context/interface/configsectionrepository.cpp" line="97"/>
         <source>Connecté</source>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="context/interface/configsectionrepository.cpp" line="94"/>
         <location filename="context/interface/configsectionrepository.cpp" line="100"/>
         <location filename="context/interface/configsectionrepository.cpp" line="105"/>
         <source>Se déconnecter</source>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="context/interface/configsectionrepository.cpp" line="170"/>
         <location filename="context/interface/configsectionrepository.cpp" line="177"/>
         <source>Cliquez sur %1 pour sauvegarder les paramètres.</source>
         <oldsource>Cliquez sur %0 pour sauvegarder les paramètres.</oldsource>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="context/interface/configsectionrepository.cpp" line="183"/>
         <source>Choisissez un répertoire de destination</source>
         <translation type="unfinished"></translation>
@@ -954,7 +954,7 @@ Premium !</source>
 </context>
 <context>
     <name>ConfigSectionSound</name>
-    <message utf8="true">
+    <message>
         <location filename="context/interface/configsectionsound.ui" line="26"/>
         <source>Réverbération</source>
         <translation type="unfinished">Јека</translation>
@@ -964,7 +964,7 @@ Premium !</source>
         <source>Gain (dB)</source>
         <translation type="unfinished">Појачање (dB)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="context/interface/configsectionsound.ui" line="88"/>
         <source>Densité</source>
         <translation type="unfinished">Ширина</translation>
@@ -975,7 +975,7 @@ Premium !</source>
         <source>Niveau</source>
         <translation type="unfinished">Количина</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="context/interface/configsectionsound.ui" line="178"/>
         <source>Atténuation</source>
         <translation type="unfinished">Пригушење</translation>
@@ -990,7 +990,7 @@ Premium !</source>
         <source>Chorus</source>
         <translation type="unfinished">Хорус</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="context/interface/configsectionsound.ui" line="345"/>
         <source>Fréquence</source>
         <translation type="unfinished">Учестаност</translation>
@@ -1003,7 +1003,7 @@ Premium !</source>
 </context>
 <context>
     <name>ConfigToc</name>
-    <message utf8="true">
+    <message>
         <location filename="context/interface/configtoc.ui" line="59"/>
         <source>Général</source>
         <translation type="unfinished">Опште</translation>
@@ -1032,7 +1032,7 @@ en ligne</source>
 </context>
 <context>
     <name>ConversionSfz</name>
-    <message utf8="true">
+    <message>
         <location filename="core/output/sfz/conversion_sfz.cpp" line="51"/>
         <source>Impossible de créer le dossier « %1 »</source>
         <oldsource>Impossible de créer le dossier « %0 »</oldsource>
@@ -1089,27 +1089,27 @@ en ligne</source>
         <source>Cuivres</source>
         <translation type="unfinished">Дувачки, лимени</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/output/sfz/conversion_sfz.cpp" line="559"/>
         <source>Instrument à anches</source>
         <translation type="unfinished">Дувачки, дрвени</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/output/sfz/conversion_sfz.cpp" line="561"/>
         <source>Flûtes</source>
         <translation type="unfinished">Дувачки, дрвени без језичка</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/output/sfz/conversion_sfz.cpp" line="563"/>
         <source>Synthétiseur solo</source>
         <translation type="unfinished">Синтесајзер — главни</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/output/sfz/conversion_sfz.cpp" line="565"/>
         <source>Nappes de synthétiseur</source>
         <translation type="unfinished">Синтесајзер — блок</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/output/sfz/conversion_sfz.cpp" line="567"/>
         <source>Effets de synthétiseur</source>
         <translation type="unfinished">Синт-ефекти</translation>
@@ -1137,12 +1137,12 @@ en ligne</source>
 </context>
 <context>
     <name>DetailsManager</name>
-    <message utf8="true">
+    <message>
         <location filename="repository/detailsmanager.cpp" line="112"/>
         <source>Souscrivez à un compte Premium pour bénéficier de toutes les fonctionnalités !</source>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="repository/detailsmanager.cpp" line="115"/>
         <location filename="repository/detailsmanager.cpp" line="118"/>
         <location filename="repository/detailsmanager.cpp" line="124"/>
@@ -1157,7 +1157,7 @@ en ligne</source>
         <source>A propos</source>
         <translation>О програму</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="dialogs/dialog_about.ui" line="172"/>
         <source>Crédits</source>
         <translation>Заслуге</translation>
@@ -1226,7 +1226,7 @@ en ligne</source>
         <source>Steve Clarke</source>
         <translation>Стив Кларк (Steve Clarke)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="dialogs/dialog_about.cpp" line="72"/>
         <source>F.J. Martínez Murcia</source>
         <translation>Ф.Ј. Мартинез Мурција (F.J. Martínez Murcia)</translation>
@@ -1274,7 +1274,7 @@ en ligne</source>
         <source>&amp;Ok</source>
         <translation>&amp;У реду</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="dialogs/dialogchangelog.cpp" line="48"/>
         <source>Merci d&apos;avoir installé</source>
         <translation>Хвала Вам што сте инсталиран</translation>
@@ -1294,12 +1294,12 @@ en ligne</source>
         <source>Ce qu&apos;il y a de nouveau</source>
         <translation>Новост</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="dialogs/dialogchangelog.cpp" line="89"/>
         <source>Ce qui est amélioré</source>
         <translation>Побољшање</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="dialogs/dialogchangelog.cpp" line="92"/>
         <source>Ce qui est résolu</source>
         <translation>Резолуција</translation>
@@ -1312,35 +1312,35 @@ en ligne</source>
         <source>Question</source>
         <translation type="unfinished">Питање</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="dialogs/dialogcreateelements.cpp" line="31"/>
         <source>Créer un instrument contenant l&apos;échantillon %1 ?</source>
         <oldsource>Créer un instrument contenant l&apos;échantillon %0 ?</oldsource>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="dialogs/dialogcreateelements.cpp" line="37"/>
         <source>Créer un instrument</source>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="dialogs/dialogcreateelements.cpp" line="38"/>
         <source>pour chaque échantillon</source>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="dialogs/dialogcreateelements.cpp" line="39"/>
         <source>contenant les %1 échantillons</source>
         <oldsource>contenant les %0 échantillons</oldsource>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="dialogs/dialogcreateelements.cpp" line="47"/>
         <source>Créer un preset contenant l&apos;instrument %1 ?</source>
         <oldsource>Créer un preset contenant l&apos;instrument %0 ?</oldsource>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="dialogs/dialogcreateelements.cpp" line="53"/>
         <source>Créer un preset</source>
         <translation type="unfinished"></translation>
@@ -1389,7 +1389,7 @@ en ligne</source>
         <source>Note</source>
         <translation type="unfinished">Нота</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="dialogs/dialogkeyboard.ui" line="150"/>
         <source>Vélocité</source>
         <translation type="unfinished"></translation>
@@ -1397,7 +1397,7 @@ en ligne</source>
 </context>
 <context>
     <name>DialogList</name>
-    <message utf8="true">
+    <message>
         <location filename="dialogs/dialog_list.cpp" line="53"/>
         <source>Liste des échantillons</source>
         <translation>Списак узорака</translation>
@@ -1415,7 +1415,7 @@ en ligne</source>
 </context>
 <context>
     <name>DialogRecorder</name>
-    <message utf8="true">
+    <message>
         <location filename="dialogs/dialogrecorder.ui" line="26"/>
         <source>Magnétophone</source>
         <translation type="unfinished">Магнетофон (снимач)</translation>
@@ -1444,27 +1444,27 @@ en ligne</source>
         <source>Renommage de masse</source>
         <translation>Скупно преименовање</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="dialogs/dialog_rename.ui" line="49"/>
         <source>Écraser nom existant avec nom de la note en suffixe</source>
         <translation>Препиши постојећи назив додајући на његов крај назив ноте</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="dialogs/dialog_rename.ui" line="54"/>
         <source>Écraser nom existant avec incrément en suffixe</source>
         <translation>Препиши постојећи назив додајући на његов крај бројеве (растући)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="dialogs/dialog_rename.ui" line="59"/>
         <source>Remplacer une chaîne de caractères</source>
         <translation>Замени знакове</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="dialogs/dialog_rename.ui" line="64"/>
         <source>Insérer après une position</source>
         <translation>Уметни после датог положаја</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="dialogs/dialog_rename.ui" line="69"/>
         <source>Supprimer une étendue</source>
         <translation>Уклони опсег знакова</translation>
@@ -1491,12 +1491,12 @@ en ligne</source>
         <source>Et remplacer par :</source>
         <translation>И замени са: </translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="dialogs/dialog_rename.cpp" line="121"/>
         <source>Texte à insérer :</source>
         <translation>Текст за уметање: </translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="dialogs/dialog_rename.cpp" line="132"/>
         <source>Étendue</source>
         <translation>Опсег</translation>
@@ -1515,7 +1515,7 @@ en ligne</source>
         <source>Tout cocher</source>
         <translation>Означи све</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="dialogs/dialogselection.ui" line="37"/>
         <source>Tout décocher</source>
         <translation>Одзначи све</translation>
@@ -1539,7 +1539,7 @@ en ligne</source>
         <source>Attention</source>
         <translation type="unfinished">Упозорење</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="repository/downloadmanager.cpp" line="117"/>
         <source>Impossible de télécharger le fichier « %1 » : %2</source>
         <oldsource>Impossible de télécharger le fichier « %0 » : %1</oldsource>
@@ -1548,12 +1548,12 @@ en ligne</source>
 </context>
 <context>
     <name>Duplicator</name>
-    <message utf8="true">
+    <message>
         <location filename="core/duplicator.cpp" line="281"/>
         <source>Des paramètres globaux sont déjà renseignés.</source>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/duplicator.cpp" line="282"/>
         <source>La division globale ne sera pas recopiée.</source>
         <translation type="unfinished">Укупни део неће бити умножен.</translation>
@@ -1563,24 +1563,24 @@ en ligne</source>
         <source>&amp;Ok</source>
         <translation type="unfinished">&amp;У реду</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/duplicator.cpp" line="285"/>
         <source>Ok, &amp;désactiver ce message</source>
         <translation type="unfinished">У реду, &amp;онемогући ову поруку</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/duplicator.cpp" line="317"/>
         <source>L&apos;échantillon « %1 » existe déjà.&lt;br /&gt;Que faire ?</source>
         <oldsource>L&apos;échantillon « %0 » existe déjà.&lt;br /&gt;Que faire ?</oldsource>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/duplicator.cpp" line="455"/>
         <source>L&apos;instrument « %1 » existe déjà.&lt;br /&gt;Souhaitez-vous le remplacer ?</source>
         <oldsource>L&apos;instrument « %0 » existe déjà.&lt;br /&gt;Souhaitez-vous le remplacer ?</oldsource>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/duplicator.cpp" line="548"/>
         <source>Le preset « %1 » existe déjà.&lt;br /&gt;Souhaitez-vous le remplacer ?</source>
         <oldsource>Le preset « %0 » existe déjà.&lt;br /&gt;Souhaitez-vous le remplacer ?</oldsource>
@@ -1652,7 +1652,7 @@ en ligne</source>
 </context>
 <context>
     <name>EditorToolBar</name>
-    <message utf8="true">
+    <message>
         <location filename="editor/widgets/editortoolbar.cpp" line="27"/>
         <source>Ajouter un échantillon</source>
         <translation type="unfinished"></translation>
@@ -1667,7 +1667,7 @@ en ligne</source>
         <source>Ajouter un preset</source>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/widgets/editortoolbar.cpp" line="39"/>
         <source>Boîte à outils</source>
         <translation type="unfinished"></translation>
@@ -1677,7 +1677,7 @@ en ligne</source>
         <source>Annuler</source>
         <translation type="unfinished">Поништи</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/widgets/editortoolbar.cpp" line="51"/>
         <source>Rétablir</source>
         <translation type="unfinished"></translation>
@@ -1687,7 +1687,7 @@ en ligne</source>
         <source>Sauvegarder</source>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/widgets/editortoolbar.cpp" line="66"/>
         <source>Magnétophone</source>
         <translation type="unfinished">Магнетофон (снимач)</translation>
@@ -1707,7 +1707,7 @@ en ligne</source>
         <source>Fichier .wav</source>
         <translation type="unfinished">Вав-датотека (*.wav)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/widgets/editortoolbar.cpp" line="257"/>
         <source>Créer un nouvel instrument</source>
         <translation type="unfinished">Створи нов инструменат</translation>
@@ -1727,7 +1727,7 @@ en ligne</source>
         <source>Aucun preset n&apos;est disponible.</source>
         <translation type="unfinished">Нема доступне поставке.</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/widgets/editortoolbar.cpp" line="297"/>
         <source>Créer un nouveau preset</source>
         <translation type="unfinished">Створи нову поставку</translation>
@@ -1761,7 +1761,7 @@ en ligne</source>
         <source>Delay</source>
         <translation>Кашњење</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/envelopeditor.ui" line="181"/>
         <source>Note  Decay</source>
         <oldsource>Key  Decay</oldsource>
@@ -1777,7 +1777,7 @@ en ligne</source>
         <source>Sustain</source>
         <translation>Задршка</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/envelopeditor.ui" line="391"/>
         <source>Note  Hold</source>
         <oldsource>Key  Hold</oldsource>
@@ -1863,7 +1863,7 @@ en ligne</source>
 </context>
 <context>
     <name>Graphique</name>
-    <message utf8="true">
+    <message>
         <location filename="editor/graphics/graphique.cpp" line="85"/>
         <source>Sélection multiple</source>
         <translation>Вишеструки одабир</translation>
@@ -1871,12 +1871,12 @@ en ligne</source>
 </context>
 <context>
     <name>GraphiqueFourier</name>
-    <message utf8="true">
+    <message>
         <location filename="editor/graphics/graphiquefourier.cpp" line="51"/>
         <source>Fréquence (Hz)</source>
         <translation>Учестаност (Hz)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/graphics/graphiquefourier.cpp" line="66"/>
         <source>Intensité</source>
         <translation>Интензитет</translation>
@@ -1920,7 +1920,7 @@ en ligne</source>
 </context>
 <context>
     <name>InputNotSupported</name>
-    <message utf8="true">
+    <message>
         <location filename="core/input/not_supported/inputnotsupported.cpp" line="14"/>
         <source>Le format du fichier n&apos;est pas supporté.</source>
         <translation type="unfinished"></translation>
@@ -1928,13 +1928,13 @@ en ligne</source>
 </context>
 <context>
     <name>InputSf2</name>
-    <message utf8="true">
+    <message>
         <location filename="core/input/sf2/inputsf2.cpp" line="24"/>
         <source>Le fichier « %1 » est introuvable.</source>
         <oldsource>Le fichier « %0 » est introuvable.</oldsource>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/input/sf2/inputsf2.cpp" line="31"/>
         <source>Le fichier « %1 » n&apos;est pas accessible en lecture.</source>
         <oldsource>Le fichier « %0 » n&apos;est pas accessible en lecture.</oldsource>
@@ -1948,13 +1948,13 @@ en ligne</source>
         <source>Erreur lors de la conversion sf3 =&gt; sf2</source>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/input/sf3/inputsf3.cpp" line="54"/>
         <source>Impossible de créer le fichier « %1 »</source>
         <oldsource>Impossible de créer le fichier « %0 »</oldsource>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/input/sf3/inputsf3.cpp" line="57"/>
         <source>Impossible de lire le fichier « %1 »</source>
         <oldsource>Impossible de lire le fichier « %0 »</oldsource>
@@ -1963,12 +1963,12 @@ en ligne</source>
 </context>
 <context>
     <name>InputSfz</name>
-    <message utf8="true">
+    <message>
         <location filename="core/input/sfz/inputsfz.cpp" line="80"/>
         <source>Récursion entre fichiers</source>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/input/sfz/inputsfz.cpp" line="88"/>
         <source>Impossible d&apos;ouvrir le fichier « %1 »</source>
         <oldsource>Impossible d&apos;ouvrir le fichier « %0 »</oldsource>
@@ -2012,12 +2012,12 @@ en ligne</source>
         <source>&amp;Exporter soundfonts</source>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="mainwindow/mainmenu.cpp" line="44"/>
         <source>P&amp;lein écran</source>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="mainwindow/mainmenu.cpp" line="52"/>
         <source>&amp;Préférences</source>
         <translation type="unfinished">Поде&amp;шавања</translation>
@@ -2027,7 +2027,7 @@ en ligne</source>
         <source>&amp;Aide en ligne</source>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="mainwindow/mainmenu.cpp" line="61"/>
         <source>À p&amp;ropos de Polyphone...</source>
         <translation type="unfinished"></translation>
@@ -2080,12 +2080,12 @@ en ligne</source>
         <source>Sauvegarder avant de quitter ?</source>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="mainwindow/mainwindow.cpp" line="184"/>
         <source>Les fichiers suivants n&apos;ont pas été sauvegardés :</source>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="mainwindow/mainwindow.cpp" line="191"/>
         <source>Le fichier « %1 » n&apos;a pas été sauvegardé.</source>
         <oldsource>Le fichier « %0 » n&apos;a pas été sauvegardé.</oldsource>
@@ -2133,7 +2133,7 @@ en ligne</source>
         <source>Polyphone Soundfont Editor</source>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="mainwindow/mainwindow.ui" line="71"/>
         <source>  Préfèrences</source>
         <extracomment>prefixed with 2 spaces</extracomment>
@@ -2190,7 +2190,7 @@ en ligne</source>
 </context>
 <context>
     <name>OutputNotSupported</name>
-    <message utf8="true">
+    <message>
         <location filename="core/output/not_supported/outputnotsupported.cpp" line="15"/>
         <source>Le format du fichier n&apos;est pas supporté.</source>
         <translation type="unfinished"></translation>
@@ -2203,7 +2203,7 @@ en ligne</source>
         <source>Fermez le fichier avant de sauvegarder par-dessus.</source>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/output/sf2/outputsf2.cpp" line="226"/>
         <source>Impossible de créer le fichier « %1 »</source>
         <oldsource>Impossible de créer le fichier « %0 »</oldsource>
@@ -2217,13 +2217,13 @@ en ligne</source>
         <source>Erreur lors de la conversion sf3</source>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/output/sf3/outputsf3.cpp" line="62"/>
         <source>Impossible de créer le fichier « %1 »</source>
         <oldsource>Impossible de créer le fichier « %0 »</oldsource>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/output/sf3/outputsf3.cpp" line="68"/>
         <source>Impossible de lire le fichier « %1 »</source>
         <oldsource>Impossible de lire le fichier « %0 »</oldsource>
@@ -2252,7 +2252,7 @@ en ligne</source>
         <source>Copie les modulateurs</source>
         <translation type="unfinished">Умножи модулаторе</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/pageinst.ui" line="250"/>
         <source>Colle les modulateurs copiés</source>
         <translation type="unfinished">Убаци умножене модулаторе</translation>
@@ -2262,7 +2262,7 @@ en ligne</source>
         <source>Source</source>
         <translation type="unfinished">Извориште</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/pageinst.ui" line="375"/>
         <source>Quantité</source>
         <translation type="unfinished">Количина</translation>
@@ -2273,7 +2273,7 @@ en ligne</source>
         <source>Destination</source>
         <translation type="unfinished">Одредиште</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/pageinst.ui" line="400"/>
         <source>Source / Quantité</source>
         <translation type="unfinished">Извориште/Количина</translation>
@@ -2288,7 +2288,7 @@ en ligne</source>
         <source>Table</source>
         <translation type="unfinished">Таблица</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/pageinst.cpp" line="178"/>
         <source>Étendues</source>
         <translation type="unfinished">Опсег</translation>
@@ -2298,17 +2298,17 @@ en ligne</source>
         <source>Enveloppes</source>
         <translation type="unfinished">Коверте</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/pageinst.cpp" line="221"/>
         <source>Instrument lié à aucun preset.</source>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/pageinst.cpp" line="223"/>
         <source>Instrument lié au preset :</source>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/pageinst.cpp" line="225"/>
         <source>Instrument lié aux presets :</source>
         <translation type="unfinished"></translation>
@@ -2316,12 +2316,12 @@ en ligne</source>
 </context>
 <context>
     <name>PageOverview</name>
-    <message utf8="true">
+    <message>
         <location filename="editor/overview/pageoverview.cpp" line="82"/>
         <source>éléments</source>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/overview/pageoverview.cpp" line="82"/>
         <source>élément</source>
         <translation type="unfinished"></translation>
@@ -2334,12 +2334,12 @@ en ligne</source>
         <source>Instruments</source>
         <translation type="unfinished">Инструменти</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/overview/pageoverviewinst.cpp" line="38"/>
         <source>Utilisé</source>
         <translation>Употребљен</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/overview/pageoverviewinst.cpp" line="39"/>
         <source>Nombre
 d&apos;échantillons</source>
@@ -2347,7 +2347,7 @@ d&apos;échantillons</source>
         <translation>Број
 узорака</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/overview/pageoverviewinst.cpp" line="40"/>
         <source>Nombre de
 paramètres</source>
@@ -2363,7 +2363,7 @@ modulateurs</source>
         <translation>Број
 модулатора</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/overview/pageoverviewinst.cpp" line="42"/>
         <source>Étendue totale
 (note)</source>
@@ -2371,7 +2371,7 @@ modulateurs</source>
         <translation>Свеукупни
 нотни опсег</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/overview/pageoverviewinst.cpp" line="43"/>
         <source>Étendue totale
 (vélocité)</source>
@@ -2379,7 +2379,7 @@ modulateurs</source>
         <translation>Свеукупни опсег
 јачине удара</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/overview/pageoverviewinst.cpp" line="44"/>
         <source>Atténuation</source>
         <translation>Пригушење</translation>
@@ -2397,7 +2397,7 @@ en boucle</source>
         <source>Chorus</source>
         <translation>Хорус</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/overview/pageoverviewinst.cpp" line="47"/>
         <source>Réverbération</source>
         <translation>Јека</translation>
@@ -2414,7 +2414,7 @@ en boucle</source>
         <source>non</source>
         <translation>не</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/overview/pageoverviewinst.cpp" line="257"/>
         <source>oui, jusqu&apos;à la fin</source>
         <translatorcomment>овде се мисли на начин вртње (понављања)</translatorcomment>
@@ -2449,7 +2449,7 @@ d&apos;instruments</source>
         <translation>Број
 инструмената</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/overview/pageoverviewprst.cpp" line="40"/>
         <source>Nombre de
 paramètres</source>
@@ -2465,7 +2465,7 @@ modulateurs</source>
         <translation>Број
 модулатора</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/overview/pageoverviewprst.cpp" line="42"/>
         <source>Étendue totale
 (note)</source>
@@ -2473,7 +2473,7 @@ modulateurs</source>
         <translation>Свеукупни
 нотни опсег</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/overview/pageoverviewprst.cpp" line="43"/>
         <source>Étendue totale
 (vélocité)</source>
@@ -2481,7 +2481,7 @@ modulateurs</source>
         <translation>Свеукупни опсег
 јачине удара</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/overview/pageoverviewprst.cpp" line="44"/>
         <source>Atténuation</source>
         <translation>Пригушење</translation>
@@ -2491,7 +2491,7 @@ modulateurs</source>
         <source>Chorus</source>
         <translation>Хорус</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/overview/pageoverviewprst.cpp" line="46"/>
         <source>Réverbération</source>
         <translation>Јека</translation>
@@ -2499,12 +2499,12 @@ modulateurs</source>
 </context>
 <context>
     <name>PageOverviewSmpl</name>
-    <message utf8="true">
+    <message>
         <location filename="editor/overview/pageoverviewsmpl.cpp" line="38"/>
         <source>Utilisé</source>
         <translation>Употребљен</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/overview/pageoverviewsmpl.cpp" line="39"/>
         <source>Durée
 totale</source>
@@ -2517,14 +2517,14 @@ totale</source>
         <source>Correction</source>
         <translation>Поправка</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/overview/pageoverviewsmpl.cpp" line="40"/>
         <source>Durée de
 la boucle</source>
         <translation>Трајање
 вртње</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/overview/pageoverviewsmpl.cpp" line="32"/>
         <source>Échantillons</source>
         <translation type="unfinished">Узорци</translation>
@@ -2536,7 +2536,7 @@ de base</source>
         <translation>Основна
 нота</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/overview/pageoverviewsmpl.cpp" line="43"/>
         <source>Type
 d&apos;échantillon</source>
@@ -2544,14 +2544,14 @@ d&apos;échantillon</source>
         <translation>Врста
 узорка</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/overview/pageoverviewsmpl.cpp" line="44"/>
         <source>Échantillon
 lié</source>
         <translation>Повезан
 узорак</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/overview/pageoverviewsmpl.cpp" line="45"/>
         <source>Taux
 d&apos;échantillonnage</source>
@@ -2585,19 +2585,19 @@ d&apos;échantillonnage</source>
         <comment>opposite to stereo</comment>
         <translation>Моно</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/overview/pageoverviewsmpl.cpp" line="129"/>
         <source>Stéréo droit</source>
         <oldsource>Stereo droit</oldsource>
         <translation>Стерео — Десно</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/overview/pageoverviewsmpl.cpp" line="132"/>
         <source>Stéréo gauche</source>
         <oldsource>Stereo gauche</oldsource>
         <translation>Стерео — Лево</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/overview/pageoverviewsmpl.cpp" line="135"/>
         <source>Stéréo non défini</source>
         <oldsource>Stereo non défini</oldsource>
@@ -2636,7 +2636,7 @@ d&apos;échantillonnage</source>
         <source>Copie les modulateurs</source>
         <translation type="unfinished">Умножи модулаторе</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/pageprst.ui" line="235"/>
         <source>Colle les modulateurs copiés</source>
         <translation type="unfinished">Убаци умножене модулаторе</translation>
@@ -2646,7 +2646,7 @@ d&apos;échantillonnage</source>
         <source>Source</source>
         <translation type="unfinished">Извориште</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/pageprst.ui" line="360"/>
         <source>Quantité</source>
         <translation type="unfinished">Количина</translation>
@@ -2657,7 +2657,7 @@ d&apos;échantillonnage</source>
         <source>Destination</source>
         <translation type="unfinished">Одредиште</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/pageprst.ui" line="391"/>
         <source>Source / Quantité</source>
         <translation type="unfinished">Извориште/Количина</translation>
@@ -2687,10 +2687,10 @@ d&apos;échantillonnage</source>
         <source>Table</source>
         <translation type="unfinished">Таблица</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/pageprst.cpp" line="158"/>
-        <source>�tendues</source>
-        <oldsource>Étendues</oldsource>
+        <source>Étendues</source>
+        <oldsource>�tendues</oldsource>
         <translation type="unfinished">Опсег</translation>
     </message>
 </context>
@@ -2746,7 +2746,7 @@ d&apos;échantillonnage</source>
         <source>Sound engine</source>
         <translation type="unfinished">Звучни покретач</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/pagesf2.ui" line="450"/>
         <source>Logiciel(s) d&apos;édition</source>
         <translation type="unfinished">Програмски уређивач</translation>
@@ -2756,14 +2756,14 @@ d&apos;échantillonnage</source>
         <source>Presets</source>
         <translation type="unfinished">Поставке</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/pagesf2.ui" line="580"/>
         <location filename="editor/pagesf2.ui" line="701"/>
         <location filename="editor/pagesf2.ui" line="1029"/>
         <source>Détails</source>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/pagesf2.ui" line="679"/>
         <location filename="editor/pagesf2.ui" line="778"/>
         <source>Échantillons</source>
@@ -2792,7 +2792,7 @@ d&apos;échantillonnage</source>
         <source>Modulateurs</source>
         <translation type="unfinished">Модулатори</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/pagesf2.ui" line="854"/>
         <location filename="editor/pagesf2.ui" line="889"/>
         <source>Paramètres</source>
@@ -2821,7 +2821,7 @@ d&apos;échantillonnage</source>
         <comment>kilo byte</comment>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/pagesf2.cpp" line="248"/>
         <location filename="editor/pagesf2.cpp" line="261"/>
         <source>%1 (inutilisés : %2)</source>
@@ -2829,7 +2829,7 @@ d&apos;échantillonnage</source>
         <comment>plural form</comment>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/pagesf2.cpp" line="250"/>
         <location filename="editor/pagesf2.cpp" line="263"/>
         <source>%1 (inutilisé : %2)</source>
@@ -2840,7 +2840,7 @@ d&apos;échantillonnage</source>
 </context>
 <context>
     <name>PageSmpl</name>
-    <message utf8="true">
+    <message>
         <location filename="editor/pagesmpl.ui" line="724"/>
         <source>Réinitialiser</source>
         <translation type="unfinished">Поврати</translation>
@@ -2868,12 +2868,12 @@ d&apos;échantillonnage</source>
         <source>en boucle</source>
         <translation type="unfinished">врти</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/pagesmpl.ui" line="929"/>
         <source>stéréo</source>
         <translation type="unfinished">стерео</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/pagesmpl.ui" line="968"/>
         <source>Fréquences</source>
         <translation type="unfinished"></translation>
@@ -2883,7 +2883,7 @@ d&apos;échantillonnage</source>
         <source>Boucle</source>
         <translation type="unfinished">Вртња</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/pagesmpl.ui" line="1124"/>
         <source>Utilise la longueur totale de l&apos;échantillon comme boucle</source>
         <translation type="unfinished">Употреби узорак за пуно трајање вртње</translation>
@@ -2893,7 +2893,7 @@ d&apos;échantillonnage</source>
         <source>Taille</source>
         <translation type="unfinished">Величина</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/pagesmpl.ui" line="1151"/>
         <source>Correction (centième)</source>
         <translation type="unfinished">Поправка (центи)</translation>
@@ -2929,7 +2929,7 @@ d&apos;échantillonnage</source>
         <source>Informations</source>
         <translation type="unfinished">Подаци</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/pagesmpl.ui" line="790"/>
         <location filename="editor/pagesmpl.cpp" line="109"/>
         <source>Égaliseur (±15 dB)</source>
@@ -2940,7 +2940,7 @@ d&apos;échantillonnage</source>
         <location filename="editor/pagesmpl.cpp" line="183"/>
         <source>s</source>
         <comment>unit for seconds</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">s</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.cpp" line="182"/>
@@ -2974,17 +2974,17 @@ d&apos;échantillonnage</source>
         <source>lien</source>
         <translation type="unfinished">веза</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/pagesmpl.cpp" line="314"/>
         <source>Échantillon lié à aucun instrument.</source>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/pagesmpl.cpp" line="316"/>
         <source>Échantillon lié à l&apos;instrument :</source>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/pagesmpl.cpp" line="318"/>
         <source>Échantillon lié aux instruments :</source>
         <translation type="unfinished"></translation>
@@ -2995,7 +2995,7 @@ d&apos;échantillonnage</source>
         <source>Information</source>
         <translation type="unfinished">Подаци</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/pagesmpl.cpp" line="540"/>
         <location filename="editor/pagesmpl.cpp" line="1150"/>
         <source>Modification appliquée avec succès aux différents échantillons</source>
@@ -3007,7 +3007,7 @@ d&apos;échantillonnage</source>
         <source>mono</source>
         <translation type="unfinished">моно</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/pagesmpl.cpp" line="999"/>
         <source>Arrêt</source>
         <translation type="unfinished">Заустави</translation>
@@ -3049,12 +3049,12 @@ d&apos;échantillonnage</source>
         <source>Copier l&apos;ensemble des modulateurs</source>
         <translation>Умножи све модулаторе</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/pagetable.cpp" line="569"/>
         <source>Dupliquer la sélection vers...</source>
         <translation>Удвостручи одабрано у...</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/pagetable.cpp" line="570"/>
         <location filename="editor/pagetable.cpp" line="578"/>
         <source>Copier les modulateurs sélectionnés</source>
@@ -3073,12 +3073,12 @@ d&apos;échantillonnage</source>
         <source>Attention</source>
         <translation>Упозорење</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/pagetable.cpp" line="1901"/>
         <source>les offsets ne peuvent être modulés dans un preset.</source>
         <translation>помаци не могу да се модулирају у поставку.</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/pagetable.cpp" line="1910"/>
         <source>%1 ne peut être modulé dans un preset.</source>
         <oldsource>%0 ne peut être modulé dans un preset.</oldsource>
@@ -3094,7 +3094,7 @@ d&apos;échantillonnage</source>
         <source>Un preset ne contenant aucun instrument n&apos;est pas compatible avec cet outil</source>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/pagetable.cpp" line="2397"/>
         <source>L&apos;étendue de notes de toutes les divisions doit être spécifiée</source>
         <translation type="unfinished"></translation>
@@ -3133,19 +3133,19 @@ d&apos;échantillonnage</source>
         <source>Attention</source>
         <translation>Упозорење</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/sampleloader.cpp" line="47"/>
         <source>L&apos;échantillon « %1L » existe déjà.&lt;br /&gt;Que faire ?</source>
         <oldsource>L&apos;échantillon « %0L » existe déjà.&lt;br /&gt;Que faire ?</oldsource>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/sampleloader.cpp" line="52"/>
         <source>L&apos;échantillon « %1R » existe déjà.&lt;br /&gt;Que faire ?</source>
         <oldsource>L&apos;échantillon « %0R » existe déjà.&lt;br /&gt;Que faire ?</oldsource>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/sampleloader.cpp" line="60"/>
         <source>L&apos;échantillon « %1 » existe déjà.&lt;br /&gt;Que faire ?</source>
         <oldsource>L&apos;échantillon « %0 » existe déjà.&lt;br /&gt;Que faire ?</oldsource>
@@ -3181,12 +3181,12 @@ d&apos;échantillonnage</source>
         <source>I&amp;gnorer tout</source>
         <translation>Занемари с&amp;ве</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/model/soundfont.cpp" line="24"/>
         <source>Général</source>
         <translation type="unfinished">Опште</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/model/soundfont.cpp" line="25"/>
         <source>Échantillons</source>
         <translation>Узорци</translation>
@@ -3209,7 +3209,7 @@ d&apos;échantillonnage</source>
         <source>Fichier non pris en charge.</source>
         <translation>Датотека није подржана.</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/sound.cpp" line="649"/>
         <source>Impossible d&apos;ouvrir le fichier « %1 »</source>
         <oldsource>Impossible d&apos;ouvrir le fichier « %0 »</oldsource>
@@ -3224,19 +3224,19 @@ d&apos;échantillonnage</source>
         <source>Le fichier est corrompu.</source>
         <translation>Датотека је оштећена.</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/graphics/graphicslegenditem.cpp" line="110"/>
         <location filename="editor/graphics/graphicslegenditem2.cpp" line="66"/>
         <source>Étendue note :</source>
         <translation>Опсег нота:</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/graphics/graphicslegenditem.cpp" line="129"/>
         <location filename="editor/graphics/graphicslegenditem2.cpp" line="69"/>
         <source>Étendue vélocité :</source>
         <translation>Опсег јачине удара:</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="dialogs/dialog_about.cpp" line="122"/>
         <source>Créé par</source>
         <translation type="unfinished"></translation>
@@ -3251,7 +3251,7 @@ d&apos;échantillonnage</source>
         <source>Traduit par</source>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="dialogs/dialog_about.cpp" line="166"/>
         <source>Icônes</source>
         <translation type="unfinished"></translation>
@@ -3267,18 +3267,18 @@ d&apos;échantillonnage</source>
         <source>Do</source>
         <translation type="unfinished">До</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="context/keynamemanager.cpp" line="64"/>
         <source>Ré♭</source>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="context/keynamemanager.cpp" line="65"/>
         <location filename="context/keynamemanager.cpp" line="83"/>
         <source>Ré</source>
         <translation type="unfinished">Ре</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="context/keynamemanager.cpp" line="66"/>
         <source>Mi♭</source>
         <translation type="unfinished"></translation>
@@ -3295,7 +3295,7 @@ d&apos;échantillonnage</source>
         <source>Fa</source>
         <translation type="unfinished">Фа</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="context/keynamemanager.cpp" line="69"/>
         <source>Sol♭</source>
         <translation type="unfinished"></translation>
@@ -3306,7 +3306,7 @@ d&apos;échantillonnage</source>
         <source>Sol</source>
         <translation type="unfinished">Сол</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="context/keynamemanager.cpp" line="71"/>
         <source>La♭</source>
         <translation type="unfinished"></translation>
@@ -3317,7 +3317,7 @@ d&apos;échantillonnage</source>
         <source>La</source>
         <translation type="unfinished">Ла</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="context/keynamemanager.cpp" line="73"/>
         <source>Si♭</source>
         <translation type="unfinished"></translation>
@@ -3328,27 +3328,27 @@ d&apos;échantillonnage</source>
         <source>Si</source>
         <translation type="unfinished">Ти</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="context/keynamemanager.cpp" line="82"/>
         <source>Do♯</source>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="context/keynamemanager.cpp" line="84"/>
         <source>Ré♯</source>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="context/keynamemanager.cpp" line="87"/>
         <source>Fa♯</source>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="context/keynamemanager.cpp" line="89"/>
         <source>Sol♯</source>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="context/keynamemanager.cpp" line="91"/>
         <source>La♯</source>
         <translation type="unfinished"></translation>
@@ -3361,7 +3361,7 @@ d&apos;échantillonnage</source>
         <source>instrument acoustique</source>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="repository/repositorymanager.cpp" line="54"/>
         <source>instrument électrique</source>
         <translation type="unfinished"></translation>
@@ -3371,12 +3371,12 @@ d&apos;échantillonnage</source>
         <source>sources multiples</source>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="repository/repositorymanager.cpp" line="56"/>
         <source>synthèse additive</source>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="repository/repositorymanager.cpp" line="57"/>
         <source>synthèse soustractive</source>
         <translation type="unfinished"></translation>
@@ -3386,27 +3386,27 @@ d&apos;échantillonnage</source>
         <source>table d&apos;ondes</source>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="repository/repositorymanager.cpp" line="59"/>
         <source>synthèse par modélisation</source>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="repository/repositorymanager.cpp" line="60"/>
         <source>synthèse FM</source>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="repository/repositorymanager.cpp" line="61"/>
         <source>synthèse vectorielle</source>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="repository/repositorymanager.cpp" line="62"/>
         <source>synthèse granulaire</source>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="repository/repositorymanager.cpp" line="63"/>
         <source>autre synthèse</source>
         <translation type="unfinished"></translation>
@@ -3421,7 +3421,7 @@ d&apos;échantillonnage</source>
         <source>grave</source>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="repository/repositorymanager.cpp" line="68"/>
         <source>déformé</source>
         <translation type="unfinished"></translation>
@@ -3476,7 +3476,7 @@ d&apos;échantillonnage</source>
         <source>en sourdine</source>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="repository/repositorymanager.cpp" line="79"/>
         <source>désaccordé</source>
         <translation type="unfinished"></translation>
@@ -3486,12 +3486,12 @@ d&apos;échantillonnage</source>
         <source>dissonant</source>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="repository/repositorymanager.cpp" line="81"/>
         <source>bruité</source>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="repository/repositorymanager.cpp" line="82"/>
         <source>métallique</source>
         <translation type="unfinished"></translation>
@@ -3511,7 +3511,7 @@ d&apos;échantillonnage</source>
         <source>attaque lente</source>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="repository/repositorymanager.cpp" line="88"/>
         <source>déclinant</source>
         <translation type="unfinished"></translation>
@@ -3531,7 +3531,7 @@ d&apos;échantillonnage</source>
         <source>percussif</source>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="repository/repositorymanager.cpp" line="92"/>
         <source>long développement</source>
         <translation type="unfinished"></translation>
@@ -3541,7 +3541,7 @@ d&apos;échantillonnage</source>
         <source>avec pulsations</source>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="repository/repositorymanager.cpp" line="94"/>
         <source>avec écho</source>
         <translation type="unfinished"></translation>
@@ -3576,7 +3576,7 @@ d&apos;échantillonnage</source>
         <source>modulation de filtres</source>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="repository/repositorymanager.cpp" line="101"/>
         <source>arpégié</source>
         <translation type="unfinished"></translation>
@@ -3591,7 +3591,7 @@ d&apos;échantillonnage</source>
         <source>articulation complexe</source>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="repository/repositorymanager.cpp" line="104"/>
         <source>articulation randomisée</source>
         <translation type="unfinished"></translation>
@@ -3601,7 +3601,7 @@ d&apos;échantillonnage</source>
         <source>musique classique</source>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="repository/repositorymanager.cpp" line="108"/>
         <source>musique électronique</source>
         <translation type="unfinished"></translation>
@@ -3622,7 +3622,7 @@ d&apos;échantillonnage</source>
         <source>house</source>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="repository/repositorymanager.cpp" line="113"/>
         <source>techno / électro</source>
         <translation type="unfinished"></translation>
@@ -3637,7 +3637,7 @@ d&apos;échantillonnage</source>
         <source>industriel</source>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="repository/repositorymanager.cpp" line="116"/>
         <source>musique expérimentale</source>
         <translation type="unfinished"></translation>
@@ -3662,7 +3662,7 @@ d&apos;échantillonnage</source>
         <source>pop / rock</source>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="repository/repositorymanager.cpp" line="121"/>
         <source>métal</source>
         <translation type="unfinished"></translation>
@@ -3682,7 +3682,7 @@ d&apos;échantillonnage</source>
         <source>folk / country</source>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="repository/repositorymanager.cpp" line="125"/>
         <location filename="repository/repositorymanager.cpp" line="126"/>
         <source>musique du monde / éthnique</source>
@@ -3703,7 +3703,7 @@ d&apos;échantillonnage</source>
         <source>mentionner l&apos;auteur, ne pas distribuer avec plus de restrictions</source>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="repository/repositorymanager.cpp" line="146"/>
         <source>pas de diffusion après modification</source>
         <translation type="unfinished"></translation>
@@ -3718,7 +3718,7 @@ d&apos;échantillonnage</source>
         <source>usage personnel, ne pas distribuer avec plus de restrictions</source>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="repository/repositorymanager.cpp" line="149"/>
         <source>usage personnel, pas de diffusion après modification</source>
         <translation type="unfinished"></translation>
@@ -3733,7 +3733,7 @@ d&apos;échantillonnage</source>
         <source>orgue</source>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="repository/repositorymanager.cpp" line="366"/>
         <source>synthétiseur</source>
         <translation type="unfinished"></translation>
@@ -3753,17 +3753,17 @@ d&apos;échantillonnage</source>
         <source>basse</source>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="repository/repositorymanager.cpp" line="378"/>
         <source>cordes pincées</source>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="repository/repositorymanager.cpp" line="381"/>
         <source>cordes frottées</source>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="repository/repositorymanager.cpp" line="384"/>
         <source>flûte</source>
         <translation type="unfinished"></translation>
@@ -3783,12 +3783,12 @@ d&apos;échantillonnage</source>
         <source>vocal</source>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="repository/repositorymanager.cpp" line="396"/>
         <source>percussion non mélodique</source>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="repository/repositorymanager.cpp" line="399"/>
         <source>percussion mélodique</source>
         <translation type="unfinished"></translation>
@@ -3818,7 +3818,7 @@ d&apos;échantillonnage</source>
         <source>inclassifiable</source>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="repository/repositorymanager.cpp" line="421"/>
         <source>Catégorie %1</source>
         <oldsource>Catégorie %0</oldsource>
@@ -3829,13 +3829,13 @@ d&apos;échantillonnage</source>
         <source>Veuillez patienter quelques instants...</source>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="repository/repositorymanager.cpp" line="452"/>
         <source>Votre compte a été banni.</source>
         <oldsource>Ce compte a été banni.</oldsource>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="repository/repositorymanager.cpp" line="457"/>
         <source>Un compte Premium vous permet de visualiser et télécharger toutes les soundfonts disponibles en ligne.</source>
         <translation type="unfinished"></translation>
@@ -3848,7 +3848,7 @@ d&apos;échantillonnage</source>
 </context>
 <context>
     <name>ShowSoundfonts</name>
-    <message utf8="true">
+    <message>
         <location filename="repository/daily/showsoundfonts.ui" line="214"/>
         <source>Oups ! Impossible
 de télécharger la liste</source>
@@ -3857,7 +3857,7 @@ de télécharger la liste</source>
 </context>
 <context>
     <name>SoundfontBrowser</name>
-    <message utf8="true">
+    <message>
         <location filename="repository/browser/soundfontbrowser.ui" line="172"/>
         <source>Catégorie</source>
         <translation type="unfinished"></translation>
@@ -3867,7 +3867,7 @@ de télécharger la liste</source>
         <source>Licence</source>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="repository/browser/soundfontbrowser.ui" line="204"/>
         <source>Source des échantillons</source>
         <translation type="unfinished"></translation>
@@ -3907,17 +3907,17 @@ de télécharger la liste</source>
         <source>Date</source>
         <translation type="unfinished">Датум</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="repository/browser/soundfontbrowser.ui" line="392"/>
         <source>Téléchargements</source>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="repository/browser/soundfontbrowser.ui" line="397"/>
         <source>Évaluation</source>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="repository/browser/soundfontbrowser.ui" line="402"/>
         <source>Titre (A→Z)</source>
         <translation type="unfinished"></translation>
@@ -3927,22 +3927,22 @@ de télécharger la liste</source>
         <source>Filtres</source>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="repository/browser/soundfontbrowser.ui" line="484"/>
         <source>réinitialiser</source>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="repository/browser/soundfontbrowser.ui" line="503"/>
         <source>Souscrivez à un compte Premium pour bénéficier de toutes les fonctionnalités !</source>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="repository/browser/soundfontbrowser.ui" line="525"/>
         <source>Pas de résultat</source>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="repository/browser/soundfontbrowser.ui" line="606"/>
         <source>Oups ! Impossible
 de télécharger la liste</source>
@@ -3953,7 +3953,7 @@ de télécharger la liste</source>
         <source>utilisation commerciale</source>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="repository/browser/soundfontbrowser.cpp" line="120"/>
         <source>partage après modification</source>
         <translation type="unfinished"></translation>
@@ -3977,7 +3977,7 @@ de télécharger la liste</source>
 </context>
 <context>
     <name>SoundfontDownloadCell</name>
-    <message utf8="true">
+    <message>
         <location filename="repository/soundfont/soundfontdownloadcell.ui" line="61"/>
         <source>Télécharger</source>
         <translation type="unfinished"></translation>
@@ -4029,12 +4029,12 @@ de télécharger la liste</source>
         <source>Articulation</source>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="repository/soundfont/soundfontviewer.ui" line="129"/>
         <source>Catégorie</source>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="repository/soundfont/soundfontviewer.ui" line="174"/>
         <source>Source des échantillons</source>
         <translation type="unfinished"></translation>
@@ -4054,7 +4054,7 @@ de télécharger la liste</source>
         <source>Description</source>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="repository/soundfont/soundfontviewer.ui" line="483"/>
         <source>Téléchargements</source>
         <translation type="unfinished"></translation>
@@ -4064,7 +4064,7 @@ de télécharger la liste</source>
         <source>Commentaires</source>
         <translation type="unfinished">Примедбе</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="repository/soundfont/soundfontviewer.ui" line="575"/>
         <source>Oups ! Impossible
 de télécharger le contenu</source>
@@ -4078,7 +4078,7 @@ de télécharger le contenu</source>
         <source>muet</source>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/widgets/tableheaderview.cpp" line="22"/>
         <source>tout réactiver</source>
         <translation type="unfinished"></translation>
@@ -4086,12 +4086,12 @@ de télécharger le contenu</source>
 </context>
 <context>
     <name>ThemeManager</name>
-    <message utf8="true">
+    <message>
         <location filename="context/thememanager.cpp" line="57"/>
         <source>Personnalisé</source>
         <translation type="unfinished">Прилагођено</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="context/thememanager.cpp" line="360"/>
         <source>Défaut</source>
         <translation type="unfinished">Уобичајено</translation>
@@ -4144,12 +4144,12 @@ de télécharger le contenu</source>
 </context>
 <context>
     <name>ToolAutoDistribution</name>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/auto_distribution/toolautodistribution.h" line="34"/>
         <source>Répartir automatiquement les échantillons</source>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/auto_distribution/toolautodistribution.h" line="19"/>
         <source>Édition rapide</source>
         <translation type="unfinished"></translation>
@@ -4157,13 +4157,13 @@ de télécharger le contenu</source>
 </context>
 <context>
     <name>ToolAutoLoop</name>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/auto_loop/toolautoloop.cpp" line="50"/>
         <source>L&apos;échantillon « %1 » n&apos;a pas pu être bouclé.</source>
         <oldsource>L&apos;échantillon « %0 » n&apos;a pas pu être bouclé.</oldsource>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/auto_loop/toolautoloop.cpp" line="53"/>
         <source>Les échantillons suivants n&apos;ont pas pu être bouclés :</source>
         <translation type="unfinished">Ови узорци не могу да се понављају (врте):</translation>
@@ -4178,7 +4178,7 @@ de télécharger le contenu</source>
         <source>Bouclage automatique</source>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/auto_loop/toolautoloop.h" line="21"/>
         <source>Traitement des échantillons</source>
         <translation type="unfinished"></translation>
@@ -4186,17 +4186,17 @@ de télécharger le contenu</source>
 </context>
 <context>
     <name>ToolBalanceAdjustment</name>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/balance_adjustment/toolbalanceadjustment.cpp" line="96"/>
         <source>Cet outil ne s&apos;applique pas sur les échantillons mono :</source>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/balance_adjustment/toolbalanceadjustment.h" line="39"/>
         <source>Équilibrer la balance</source>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/balance_adjustment/toolbalanceadjustment.h" line="21"/>
         <source>Échantillons stéréo</source>
         <translation type="unfinished"></translation>
@@ -4204,12 +4204,12 @@ de télécharger le contenu</source>
 </context>
 <context>
     <name>ToolCelesteTuning</name>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/celeste_tuning/toolcelestetuning.h" line="20"/>
         <source>Édition rapide</source>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/celeste_tuning/toolcelestetuning.h" line="35"/>
         <source>Désaccorder</source>
         <translation type="unfinished"></translation>
@@ -4217,12 +4217,12 @@ de télécharger le contenu</source>
 </context>
 <context>
     <name>ToolCelesteTuning_gui</name>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/celeste_tuning/toolcelestetuning_gui.ui" line="20"/>
         <source>Division à l&apos;octave suivante</source>
         <translation type="unfinished">Део до наредне октаве</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/celeste_tuning/toolcelestetuning_gui.ui" line="60"/>
         <source>Le signe définit le sens du désaccordage.</source>
         <translation type="unfinished">Алгебарски знак одређује правац угађања.</translation>
@@ -4240,12 +4240,12 @@ de télécharger le contenu</source>
 </context>
 <context>
     <name>ToolChangeAttenuation</name>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/change_attenuation/toolchangeattenuation.h" line="20"/>
         <source>Édition rapide</source>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/change_attenuation/toolchangeattenuation.h" line="38"/>
         <source>Modifier les atténuations</source>
         <translation type="unfinished"></translation>
@@ -4253,7 +4253,7 @@ de télécharger le contenu</source>
 </context>
 <context>
     <name>ToolChangeAttenuation_gui</name>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/change_attenuation/toolchangeattenuation_gui.ui" line="39"/>
         <source>Valeur désirée</source>
         <translation type="unfinished">Захтевана вредност</translation>
@@ -4263,7 +4263,7 @@ de télécharger le contenu</source>
         <source>Offset possible</source>
         <translation type="unfinished">Могућ помак</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/change_attenuation/toolchangeattenuation_gui.ui" line="78"/>
         <source>Étendue des atténuations</source>
         <translation type="unfinished">Опсег пригушења</translation>
@@ -4276,7 +4276,7 @@ de télécharger le contenu</source>
 </context>
 <context>
     <name>ToolChangeVolume</name>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/change_volume/toolchangevolume.h" line="20"/>
         <source>Traitement des échantillons</source>
         <translation type="unfinished"></translation>
@@ -4327,7 +4327,7 @@ de télécharger le contenu</source>
         <source>Transformation</source>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/chords/toolchords.h" line="39"/>
         <source>Créer des accords</source>
         <translation type="unfinished"></translation>
@@ -4340,12 +4340,12 @@ de télécharger le contenu</source>
         <source>Nom de l&apos;instrument :</source>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="35"/>
         <source>Création de son :</source>
         <translation type="unfinished">Стварање узорка:</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="43"/>
         <source>à chaque note</source>
         <translation type="unfinished">за сваку ноту</translation>
@@ -4365,7 +4365,7 @@ de télécharger le contenu</source>
         <source>Bouclage</source>
         <translation type="unfinished">Сам врти</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="71"/>
         <source>Stéréo</source>
         <translation type="unfinished">Стерео</translation>
@@ -4375,12 +4375,12 @@ de télécharger le contenu</source>
         <source>Accord</source>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="111"/>
         <source>Septième</source>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="124"/>
         <source>Neuvième</source>
         <translation type="unfinished"></translation>
@@ -4433,7 +4433,7 @@ de télécharger le contenu</source>
         <source>Nombre de renversements</source>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="375"/>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="425"/>
         <source>diminuée</source>
@@ -4444,7 +4444,7 @@ de télécharger le contenu</source>
         <source>juste</source>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="430"/>
         <source>augmentée</source>
         <translation type="unfinished"></translation>
@@ -4457,13 +4457,13 @@ de télécharger le contenu</source>
 </context>
 <context>
     <name>ToolCleanUnused</name>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/clean_unused_elements/toolcleanunused.cpp" line="86"/>
         <source>%1 échantillon(s) et %2 instrument(s) ont été supprimés.</source>
         <oldsource>%0 échantillon(s) et %1 instrument(s) ont été supprimés.</oldsource>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/clean_unused_elements/toolcleanunused.h" line="43"/>
         <source>Enlever les éléments non utilisés</source>
         <translation type="unfinished"></translation>
@@ -4499,7 +4499,7 @@ de télécharger le contenu</source>
 </context>
 <context>
     <name>ToolDivisionDuplication_gui</name>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/division_duplication/tooldivisionduplication_gui.ui" line="119"/>
         <source>Une division pour chaque étendue de vélocité</source>
         <translation type="unfinished">Један део за сваки опсег јачине удара</translation>
@@ -4512,18 +4512,18 @@ de télécharger le contenu</source>
 </context>
 <context>
     <name>ToolExternalCommand</name>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/external_command/toolexternalcommand.cpp" line="90"/>
         <source>La commande n&apos;a pas pu démarrer.</source>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/external_command/toolexternalcommand.cpp" line="93"/>
         <source>La commande s&apos;est terminée avec une erreur.</source>
         <oldsource>La commande s&apos;est terminée avec une erreur</oldsource>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/external_command/toolexternalcommand.h" line="24"/>
         <source>Traitement des échantillons</source>
         <translation type="unfinished"></translation>
@@ -4546,12 +4546,12 @@ de télécharger le contenu</source>
         <source>Historique</source>
         <translation type="unfinished">Историјат</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/external_command/toolexternalcommand_gui.ui" line="54"/>
         <source>Autoriser l&apos;édition stéréo</source>
         <translation type="unfinished">Дозволи стерео уређивање</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/external_command/toolexternalcommand_gui.ui" line="61"/>
         <source>Remplacer les informations de l&apos;échantillon si possible</source>
         <translation type="unfinished">Када је то могуће, замени податке узорка</translation>
@@ -4561,7 +4561,7 @@ de télécharger le contenu</source>
         <source>Exemples de commandes :</source>
         <translation type="unfinished">Команда пример:</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/external_command/toolexternalcommand_gui.cpp" line="75"/>
         <source>Fichier exécutable</source>
         <translation type="unfinished">Извршна датотека</translation>
@@ -4585,13 +4585,13 @@ de télécharger le contenu</source>
 </context>
 <context>
     <name>ToolFrequencyFilter</name>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/frequency_filter/toolfrequencyfilter.h" line="20"/>
         <source>Traitement des échantillons</source>
         <oldsource>Filtrer des fréquences...</oldsource>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/frequency_filter/toolfrequencyfilter.h" line="35"/>
         <source>Filtrer des fréquences</source>
         <translation type="unfinished"></translation>
@@ -4599,7 +4599,7 @@ de télécharger le contenu</source>
 </context>
 <context>
     <name>ToolFrequencyFilter_gui</name>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/frequency_filter/toolfrequencyfilter_gui.ui" line="26"/>
         <source>Mettre dans le rouge les fréquences du signal à filtrer :</source>
         <translation type="unfinished">Сместите у црвено део учестаности за филтрирање :</translation>
@@ -4607,7 +4607,7 @@ de télécharger le contenu</source>
 </context>
 <context>
     <name>ToolFrequencyPeaks</name>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/frequency_peaks/toolfrequencypeaks.cpp" line="30"/>
         <source>Échantillon</source>
         <translation type="unfinished"></translation>
@@ -4617,12 +4617,12 @@ de télécharger le contenu</source>
         <source>Pic</source>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/frequency_peaks/toolfrequencypeaks.cpp" line="31"/>
         <source>Intensité</source>
         <translation type="unfinished">Интензитет</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/frequency_peaks/toolfrequencypeaks.cpp" line="31"/>
         <source>Fréquence</source>
         <translation type="unfinished">Учестаност</translation>
@@ -4637,12 +4637,12 @@ de télécharger le contenu</source>
         <source>Correction</source>
         <translation type="unfinished">Поправка</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/frequency_peaks/toolfrequencypeaks.cpp" line="57"/>
         <source>Succès</source>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/frequency_peaks/toolfrequencypeaks.h" line="34"/>
         <source>Visualiser les pics de fréquences</source>
         <translation type="unfinished"></translation>
@@ -4665,7 +4665,7 @@ de télécharger le contenu</source>
         <source>Fermer</source>
         <translation type="unfinished">Затвори</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="60"/>
         <source>Échantillon</source>
         <translation type="unfinished"></translation>
@@ -4675,12 +4675,12 @@ de télécharger le contenu</source>
         <source>Pic</source>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="62"/>
         <source>Intensité</source>
         <translation type="unfinished">Интензитет</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="63"/>
         <source>Fréquence</source>
         <translation type="unfinished">Учестаност</translation>
@@ -4700,7 +4700,7 @@ de télécharger le contenu</source>
         <source>Hz</source>
         <translation type="unfinished">Hz</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="151"/>
         <source>Exporter les pics de fréquence</source>
         <translation type="unfinished">Извези вршне учестаности</translation>
@@ -4713,12 +4713,12 @@ de télécharger le contenu</source>
 </context>
 <context>
     <name>ToolGlobalSettings</name>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/global_settings/toolglobalsettings.h" line="20"/>
         <source>Édition rapide</source>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/global_settings/toolglobalsettings.h" line="38"/>
         <source>Paramètrer en fonction des notes</source>
         <translation type="unfinished"></translation>
@@ -4746,7 +4746,7 @@ de télécharger le contenu</source>
         <source>Remplacement</source>
         <translation type="unfinished">Замењивање</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="86"/>
         <source>Paramètre</source>
         <translation type="unfinished">Параметар</translation>
@@ -4771,12 +4771,12 @@ de télécharger le contenu</source>
         <source>Manuel</source>
         <translation type="unfinished">Ручно</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="168"/>
         <source>Linéaire ascendant</source>
         <translation type="unfinished">Равномеран пораст</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="173"/>
         <source>Linéaire descendant</source>
         <translation type="unfinished">Равномеран пад</translation>
@@ -4791,12 +4791,12 @@ de télécharger le contenu</source>
         <source>Exponentiel descendant</source>
         <translation type="unfinished">Експоненцијалан пад</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="188"/>
         <source>Aléatoire</source>
         <translation type="unfinished">Насумице</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="259"/>
         <source>Appliquer à l&apos;étendue de vélocité</source>
         <translation type="unfinished">Примени на опсег јачине удара</translation>
@@ -4806,7 +4806,7 @@ de télécharger le contenu</source>
         <source>Raideur</source>
         <translation type="unfinished">Крутост</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/global_settings/toolglobalsettings_gui.cpp" line="179"/>
         <source>Répartition</source>
         <translation type="unfinished">Раздел</translation>
@@ -4819,7 +4819,7 @@ de télécharger le contenu</source>
         <source>Trouver un lien</source>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/link_sample/toollinksample.h" line="23"/>
         <source>Échantillons stéréo</source>
         <translation type="unfinished"></translation>
@@ -4837,7 +4837,7 @@ de télécharger le contenu</source>
         <source>Transformation</source>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation.h" line="39"/>
         <source>Créer une mixture</source>
         <translation type="unfinished"></translation>
@@ -4850,12 +4850,12 @@ de télécharger le contenu</source>
         <source>Nom de la mixture :</source>
         <translation type="unfinished">Назив микстуре:</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="35"/>
         <source>Création de son :</source>
         <translation type="unfinished">Стварање узорка:</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="43"/>
         <source>à chaque note</source>
         <translation type="unfinished">за сваку ноту</translation>
@@ -4875,7 +4875,7 @@ de télécharger le contenu</source>
         <source>Bouclage</source>
         <translation type="unfinished">Сам врти</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="71"/>
         <source>Stéréo</source>
         <translation type="unfinished">Стерео</translation>
@@ -4915,57 +4915,57 @@ de télécharger le contenu</source>
         <source>tierce</source>
         <translation type="unfinished">терца</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="357"/>
         <source>septième</source>
         <translation type="unfinished">септима</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="362"/>
         <source>neuvième</source>
         <translation type="unfinished">деветина</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="367"/>
         <source>onzième</source>
         <translation type="unfinished">једанаестина</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="372"/>
         <source>treizième</source>
         <translation type="unfinished">тринаестина</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="377"/>
         <source>quinzième</source>
         <translation type="unfinished">петнаестина</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="382"/>
         <source>dix-septième</source>
         <translation type="unfinished">седамнаестина</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="387"/>
         <source>dix-neuvième</source>
         <translation type="unfinished">деветнаестина</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="392"/>
         <source>vingt-et-unième</source>
         <translation type="unfinished">двадесетједнина</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="397"/>
         <source>vingt-troisième</source>
         <translation type="unfinished">двадесеттрећина</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="402"/>
         <source>vingt-cinquième</source>
         <translation type="unfinished">двадесетпетина</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="407"/>
         <source>vingt-septième</source>
         <translation type="unfinished">двадесетседмина</translation>
@@ -4976,12 +4976,12 @@ de télécharger le contenu</source>
         <source>Attention</source>
         <translation type="unfinished">Упозорење</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.cpp" line="59"/>
         <source>Un titre doit être renseigné.</source>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.cpp" line="75"/>
         <source>Au moins un rang doit être renseigné.</source>
         <translation type="unfinished"></translation>
@@ -4994,7 +4994,7 @@ de télécharger le contenu</source>
         <source>Analyse</source>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/monitor/toolmonitor.h" line="31"/>
         <source>Visualiser les paramètres</source>
         <translation type="unfinished"></translation>
@@ -5007,17 +5007,17 @@ de télécharger le contenu</source>
         <source>Visualisation</source>
         <translation type="unfinished">Приказивање</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/monitor/toolmonitor_gui.ui" line="140"/>
         <source>échelle log</source>
         <translation type="unfinished">лог. подела</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/monitor/toolmonitor_gui.ui" line="162"/>
         <source>Légende</source>
         <translation type="unfinished">Појашњења</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/monitor/toolmonitor_gui.ui" line="221"/>
         <source>Paramètres par défaut</source>
         <translation type="unfinished">Подразумевани параметри</translation>
@@ -5027,7 +5027,7 @@ de télécharger le contenu</source>
         <source>Valeur moyenne par note</source>
         <translation type="unfinished">Просечна вредност по ноти</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/monitor/toolmonitor_gui.ui" line="263"/>
         <source>Paramètres définis</source>
         <translation type="unfinished">Задати параметри</translation>
@@ -5053,7 +5053,7 @@ de télécharger le contenu</source>
         <source>Copier</source>
         <translation type="unfinished">Умножи</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/preset_list/toolpresetlist_gui.ui" line="56"/>
         <source>texte copié dans le presse-papier</source>
         <translation type="unfinished">текст копиран у клипборд</translation>
@@ -5076,7 +5076,7 @@ de télécharger le contenu</source>
 </context>
 <context>
     <name>ToolRelease</name>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/release/toolrelease.h" line="20"/>
         <source>Édition rapide</source>
         <translation type="unfinished"></translation>
@@ -5089,17 +5089,17 @@ de télécharger le contenu</source>
 </context>
 <context>
     <name>ToolRelease_gui</name>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/release/toolrelease_gui.ui" line="43"/>
         <source>Division à l&apos;octave suivante</source>
         <translation type="unfinished">Део до наредне октаве</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/release/toolrelease_gui.ui" line="66"/>
         <source>Désaccordage provoqué (demi-tons)</source>
         <translation type="unfinished">Изазвано раздешавање (полутонови)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/release/toolrelease_gui.cpp" line="27"/>
         <source>Durée release (note %1)</source>
         <translation type="unfinished"></translation>
@@ -5107,13 +5107,13 @@ de télécharger le contenu</source>
 </context>
 <context>
     <name>ToolRemoveMods</name>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/remove_mods/toolremovemods.cpp" line="90"/>
         <source>%1 modulateurs ont été supprimés.</source>
         <oldsource>%0 modulateurs ont été supprimés.</oldsource>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/remove_mods/toolremovemods.cpp" line="97"/>
         <source>La sélection ne contient aucun modulateur.</source>
         <translation type="unfinished"></translation>
@@ -5131,7 +5131,7 @@ de télécharger le contenu</source>
 </context>
 <context>
     <name>ToolSampleExport</name>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/sample_export/toolsampleexport.cpp" line="15"/>
         <source>Choisir un répertoire de destination</source>
         <translation type="unfinished">Одаберите одредишни директоријум</translation>
@@ -5149,7 +5149,7 @@ de télécharger le contenu</source>
 </context>
 <context>
     <name>ToolSoundSpatialization</name>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/sound_spatialization/toolsoundspatialization.h" line="19"/>
         <source>Édition rapide</source>
         <translation type="unfinished"></translation>
@@ -5192,7 +5192,7 @@ de télécharger le contenu</source>
         <source>Pointe</source>
         <translation type="unfinished">Зашиљено</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="164"/>
         <source>Aléatoire</source>
         <translation type="unfinished">Насумице</translation>
@@ -5225,7 +5225,7 @@ de télécharger le contenu</source>
         <source>Fusion des soundfonts :</source>
         <translation type="unfinished">Сједини звукотеке:</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport.cpp" line="187"/>
         <source>L&apos;export a réussi !</source>
         <translation type="unfinished"></translation>
@@ -5248,7 +5248,7 @@ de télécharger le contenu</source>
         <source>Tout cocher</source>
         <translation type="unfinished">Означи све</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="29"/>
         <source>Tout décocher</source>
         <translation type="unfinished">Одзначи све</translation>
@@ -5263,18 +5263,18 @@ de télécharger le contenu</source>
         <source>Format</source>
         <translation type="unfinished">Врста</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="116"/>
         <source>classement général MIDI</source>
         <oldsource>classement général midi</oldsource>
         <translation type="unfinished">Џенерал-миди распоред</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="123"/>
         <source>un répertoire par banque</source>
         <translation type="unfinished">један директоријум по банци</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="130"/>
         <source>numéro de preset en préfixe</source>
         <translation type="unfinished">број поставке као предложак</translation>
@@ -5294,7 +5294,7 @@ de télécharger le contenu</source>
         <source>Basse</source>
         <translation type="unfinished">Низак</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="159"/>
         <source>Qualité</source>
         <translation type="unfinished">Квалитет</translation>
@@ -5309,7 +5309,7 @@ de télécharger le contenu</source>
         <source>Exporter</source>
         <translation type="unfinished">Извези</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="117"/>
         <source>Choisissez un répertoire de destination</source>
         <translation type="unfinished"></translation>
@@ -5322,22 +5322,22 @@ de télécharger le contenu</source>
         <source>Attention</source>
         <translation type="unfinished">Упозорење</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="133"/>
         <source>Le répertoire n&apos;est pas valide.</source>
         <translation type="unfinished">Директоријум није ваљан.</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="162"/>
         <source>Au moins un preset doit être sélectionné.</source>
         <translation type="unfinished">Морате одабрати бар једну поставку.</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="168"/>
         <source>Le nombre maximal de soundfonts à exporter est de 127.</source>
         <translation type="unfinished">Највећи број извежених звукотека је 127.</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="177"/>
         <source>Dans le cas où plusieurs soundfonts sont exportées, le nombre maximal de presets par soundfont est de 127.</source>
         <translation type="unfinished">Код вишеструког извожења звукотека, највећи број поставки по звукотеци је 127.</translation>
@@ -5350,7 +5350,7 @@ de télécharger le contenu</source>
         <source>Un instrument ne contenant aucun sample n&apos;est pas compatible avec cet outil :</source>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/transpose/tooltranspose.h" line="19"/>
         <source>Édition rapide</source>
         <translation type="unfinished"></translation>
@@ -5363,7 +5363,7 @@ de télécharger le contenu</source>
 </context>
 <context>
     <name>ToolTransposeSmpl</name>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/transpose_smpl/tooltransposesmpl.h" line="20"/>
         <source>Traitement des échantillons</source>
         <translation type="unfinished"></translation>
@@ -5376,7 +5376,7 @@ de télécharger le contenu</source>
 </context>
 <context>
     <name>ToolTransposeSmpl_gui</name>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/transpose_smpl/tooltransposesmpl_gui.ui" line="20"/>
         <source>Écart en demi-tons</source>
         <translation type="unfinished">Помак у полутоновима</translation>
@@ -5384,12 +5384,12 @@ de télécharger le contenu</source>
 </context>
 <context>
     <name>ToolTranspose_gui</name>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/transpose/tooltranspose_gui.ui" line="20"/>
         <source>Écart en demi-tons</source>
         <translation type="unfinished">Помак у полутоновима</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/transpose/tooltranspose_gui.ui" line="44"/>
         <source>Adapter l&apos;étendue de notes</source>
         <translation type="unfinished">Прилагоди нотни опсег</translation>
@@ -5397,12 +5397,12 @@ de télécharger le contenu</source>
 </context>
 <context>
     <name>ToolTrimEnd</name>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/trim_end/tooltrimend.h" line="38"/>
         <source>Ajuster à la fin de boucle</source>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/trim_end/tooltrimend.h" line="20"/>
         <source>Traitement des échantillons</source>
         <translation type="unfinished"></translation>
@@ -5415,7 +5415,7 @@ de télécharger le contenu</source>
         <source>Enlever le silence initial</source>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/trim_start/tooltrimstart.h" line="20"/>
         <source>Traitement des échantillons</source>
         <translation type="unfinished"></translation>
@@ -5428,7 +5428,7 @@ de télécharger le contenu</source>
         <source>Dissocier</source>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/unlink_sample/toolunlinksample.h" line="23"/>
         <source>Échantillons stéréo</source>
         <translation type="unfinished"></translation>
@@ -5446,7 +5446,7 @@ de télécharger le contenu</source>
         <source>Menu principal</source>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="mainwindow/toprightwidget.cpp" line="83"/>
         <source>Souscrivez à un compte Premium pour bénéficier de toutes les fonctionnalités !</source>
         <translation type="unfinished"></translation>
@@ -5457,7 +5457,7 @@ de télécharger le contenu</source>
         <oldsource>Bienvenue %0</oldsource>
         <translation type="unfinished"></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="mainwindow/toprightwidget.cpp" line="98"/>
         <source>Votre compte a été banni.</source>
         <oldsource>Ce compte a été banni.</oldsource>
@@ -5474,7 +5474,7 @@ de télécharger le contenu</source>
 </context>
 <context>
     <name>TreeViewMenu</name>
-    <message utf8="true">
+    <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="22"/>
         <source>&amp;Associer à...</source>
         <translation type="unfinished"></translation>
@@ -5522,27 +5522,27 @@ de télécharger le contenu</source>
         <source>Attention</source>
         <translation type="unfinished">Упозорење</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="164"/>
         <source>Impossible de supprimer un échantillon s&apos;il est utilisé par un instrument.</source>
         <translation type="unfinished">Не могу да уклоним узорак који употребљава други инструменат.</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="167"/>
         <source>Impossible de supprimer un instrument s&apos;il est utilisé par un preset.</source>
         <translation type="unfinished">Не могу да уклоним инструменат употребљен у другој поставци.</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="301"/>
         <source>Nom de l&apos;échantillon (max 20 caractères) :</source>
         <translation type="unfinished">Назив узорка (до 20 знакова):</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="303"/>
         <source>Nom de l&apos;instrument (max 20 caractères) :</source>
         <translation type="unfinished">Назив инструмента (до 20 знакова):</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="305"/>
         <source>Nom du preset (max 20 caractères) :</source>
         <translation type="unfinished">Назив поставке (до 20 знакова):</translation>
@@ -5555,7 +5555,7 @@ de télécharger le contenu</source>
 </context>
 <context>
     <name>UserManager</name>
-    <message utf8="true">
+    <message>
         <location filename="repository/usermanager.cpp" line="94"/>
         <location filename="repository/usermanager.cpp" line="120"/>
         <location filename="repository/usermanager.cpp" line="126"/>
@@ -5592,7 +5592,7 @@ de télécharger le contenu</source>
 </context>
 <context>
     <name>WindowManager</name>
-    <message utf8="true">
+    <message>
         <location filename="mainwindow/windowmanager.cpp" line="50"/>
         <source>Préférences</source>
         <translation type="unfinished">Подешавања</translation>
@@ -5612,7 +5612,7 @@ de télécharger le contenu</source>
         <source>sans titre</source>
         <translation type="unfinished">без наслова</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="mainwindow/windowmanager.cpp" line="174"/>
         <source>Le fichier « %1 » a été modifié.</source>
         <oldsource>Le fichier « %0 » a été modifié.</oldsource>
@@ -5631,7 +5631,7 @@ de télécharger le contenu</source>
     <message>
         <location filename="mainwindow/windowmanager.cpp" line="178"/>
         <source>&amp;Annuler</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&amp;Поништи</translation>
     </message>
     <message>
         <location filename="mainwindow/windowmanager.cpp" line="179"/>
