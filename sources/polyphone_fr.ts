@@ -692,8 +692,9 @@
     </message>
     <message>
         <location filename="context/interface/configsectiongeneral.ui" line="147"/>
-        <source>Midi input</source>
-        <translation>Entrée midi</translation>
+        <source>MIDI input</source>
+        <oldsource>Midi input</oldsource>
+        <translation>Entrée MIDI</translation>
     </message>
     <message>
         <location filename="context/interface/configsectiongeneral.ui" line="163"/>
