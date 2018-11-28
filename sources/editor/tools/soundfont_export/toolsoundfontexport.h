@@ -5,6 +5,8 @@
 
 class ToolSoundfontExport: public AbstractToolOneStep
 {
+    Q_OBJECT
+
 public:
     ToolSoundfontExport();
     virtual ~ToolSoundfontExport();
@@ -17,7 +19,7 @@ public:
 
     QString getCategory() const override
     {
-        return trUtf8("Fichiers");
+        return trUtf8("Files");
     }
 
     /// Internal identifier
@@ -32,7 +34,7 @@ public:
 protected:
     QString getLabelInternal() const override
     {
-        return trUtf8("Exporter");
+        return trUtf8("Export");
     }
 
     /// Return true if the tool can be used on the specified ids

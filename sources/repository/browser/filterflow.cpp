@@ -37,7 +37,7 @@ void FilterFlow::initialize(bool singleSelection)
     }
 
     // Add the element "All"
-    this->addElement(trUtf8("Tous"), -1, true);
+    this->addElement(trUtf8("All"), -1, true);
 }
 
 void FilterFlow::addElement(QString text, int id, bool selected)

@@ -47,7 +47,7 @@ void WindowManager::openConfiguration()
     _configTab->initializeInterface();
     int index = _tabWidget->indexOf(_configTab);
     if (index == -1)
-        index = _tabWidget->addColoredTab(_configTab, ":/icons/settings.svg", trUtf8("Préférences"),
+        index = _tabWidget->addColoredTab(_configTab, ":/icons/settings.svg", trUtf8("Settings"),
                                           ContextManager::theme()->getColor(ThemeManager::WINDOW_BACKGROUND),
                                           ContextManager::theme()->getColor(ThemeManager::WINDOW_TEXT));
     _tabWidget->setCurrentIndex(index);
@@ -122,7 +122,7 @@ void WindowManager::openRepository(SoundfontFilter *filter)
     }
     int index = _tabWidget->indexOf(_browserTab);
     if (index == -1)
-        index = _tabWidget->addColoredTab(_browserTab, ":/icons/globe.svg", trUtf8("Soundfonts en ligne"),
+        index = _tabWidget->addColoredTab(_browserTab, ":/icons/globe.svg", trUtf8("Online repository"),
                                           ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND),
                                           ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_TEXT));
     _tabWidget->setCurrentIndex(index);
@@ -167,16 +167,16 @@ void WindowManager::onTabCloseRequested(int tabIndex)
             QMessageBox msgBox(_tabWidget);
             msgBox.setIcon(QMessageBox::Warning);
             id.typeElement = elementSf2;
-            msgBox.setText("<b>" + trUtf8("Sauvegarder avant de quitter ?") + "</b>");
+            msgBox.setText("<b>" + trUtf8("Save before exiting?") + "</b>");
             QString filename = sf2->getQstr(id, champ_name);
             if (filename.isEmpty())
-                filename = trUtf8("sans titre");
-            msgBox.setInformativeText(trUtf8("Le fichier « %1 » a été modifié.").arg(filename));
-            msgBox.setWindowTitle(trUtf8("Attention"));
+                filename = trUtf8("untitled");
+            msgBox.setInformativeText(trUtf8("File \"%1\" has been modified.").arg(filename));
+            msgBox.setWindowTitle(trUtf8("Warning"));
             msgBox.setStandardButtons(QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel);
-            msgBox.button(QMessageBox::Save)->setText(trUtf8("&Enregistrer"));
-            msgBox.button(QMessageBox::Cancel)->setText(trUtf8("&Annuler"));
-            msgBox.button(QMessageBox::Discard)->setText(trUtf8("&Fermer sans enregistrer"));
+            msgBox.button(QMessageBox::Save)->setText(trUtf8("&Save"));
+            msgBox.button(QMessageBox::Cancel)->setText(trUtf8("&Cancel"));
+            msgBox.button(QMessageBox::Discard)->setText(trUtf8("Do&n't save"));
             msgBox.button(QMessageBox::Save)->setIcon(QIcon::fromTheme("filesave"));
             msgBox.setDefaultButton(QMessageBox::Save);
             ret = msgBox.exec();
@@ -259,7 +259,7 @@ void WindowManager::openUser()
     _userTab->initializeInterface();
     int index = _tabWidget->indexOf(_userTab);
     if (index == -1)
-        index = _tabWidget->addColoredTab(_userTab, ":/icons/user.svg", trUtf8("Espace utilisateur"),
+        index = _tabWidget->addColoredTab(_userTab, ":/icons/user.svg", trUtf8("User area"),
                                           ContextManager::theme()->getColor(ThemeManager::WINDOW_BACKGROUND),
                                           ContextManager::theme()->getColor(ThemeManager::WINDOW_TEXT));
     _tabWidget->setCurrentIndex(index);

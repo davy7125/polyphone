@@ -79,7 +79,7 @@ void DownloadManager::processOne()
 void DownloadManager::fileDownloaded(QString error)
 {
     _mutex.lock();
-    QString currentDownload = _fileNames.contains(_currentDownload) ? _fileNames[_currentDownload] : trUtf8("sans titre");
+    QString currentDownload = _fileNames.contains(_currentDownload) ? _fileNames[_currentDownload] : trUtf8("untitled");
     if (error.isEmpty())
     {
         // Download directory
@@ -113,8 +113,8 @@ void DownloadManager::fileDownloaded(QString error)
     }
     else
     {
-        QMessageBox::warning(QApplication::activeWindow(), trUtf8("Attention"),
-                             trUtf8("Impossible de télécharger le fichier « %1 » : %2").arg(currentDownload)
+        QMessageBox::warning(QApplication::activeWindow(), trUtf8("Warning"),
+                             trUtf8("Couldn't download file \"%1\": %2").arg(currentDownload)
                              .arg(error));
     }
     _currentDownload = -1;
@@ -127,7 +127,7 @@ void DownloadManager::fileDownloaded(QString error)
 void DownloadManager::progressChanged(int percent)
 {
     _mutex.lock();
-    QString currentDownload = _fileNames.contains(_currentDownload) ? _fileNames[_currentDownload] : trUtf8("sans titre");
+    QString currentDownload = _fileNames.contains(_currentDownload) ? _fileNames[_currentDownload] : trUtf8("untitled");
     _mutex.unlock();
 
     emit(progressChanged(percent, currentDownload, ""));

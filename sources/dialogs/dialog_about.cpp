@@ -45,17 +45,17 @@ DialogAbout::DialogAbout(QWidget *parent) :
 
     // Description
     QString annee = "2013 -" + QString::number(QDate::currentDate().year());
-    QString url = trUtf8("https://www.polyphone-soundfonts.com/fr");
+    QString url = trUtf8("https://www.polyphone-soundfonts.com/en");
     QString urlDonation = "https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=ESBLSGPJ7P938&lc=US&item_name=Polyphone&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donate_LG%2egif%3aNonHosted";
-    ui->labelDescription->setText("<html><head/><body><p align='center'>" + trUtf8("Copyright") + QString::fromUtf8(" © ") + annee +
+    ui->labelDescription->setText("<html><head/><body><p align='center'>" + trUtf8("Copyright") + " © " + annee +
                                   " " + trUtf8("Davy Triponney") + "<br/><br/><a href='" + url +
                                   "'><span style=' text-decoration: underline; color:" +
                                   this->palette().color(QPalette::Link).name() + ";'>" +
-                                  trUtf8("Site internet de Polyphone") + "</span></a>" +
+                                  trUtf8("Polyphone website") + "</span></a>" +
                                   "<br/><br/><a href='" + urlDonation +
                                   "'><span style=' text-decoration: underline; color:" +
                                   this->palette().color(QPalette::Link).name() + ";'>" +
-                                  trUtf8("Faire un don") + "</span></a>" +
+                                  trUtf8("Donate") + "</span></a>" +
                                   "</p></body></html>");
 
     // Credits
@@ -119,9 +119,9 @@ QString Credit::getText()
     QString text = "<html><head/><body><table border='0' style='margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px;' "
                    "cellspacing='2' cellpadding='0'>";
 
-    text += getGroup(QObject::trUtf8("Créé par") + " ", _listCreatorName, _listCreatorMail) + "<tr></tr>";
-    text += getGroup(QObject::trUtf8("Contributeurs") + " ", _listContributorName, _listContributorMail) + "<tr></tr>";
-    text += getGroup(QObject::trUtf8("Traduit par") + " ", _listTranslatorName, _listTranslatorMail) + "<tr></tr>";
+    text += getGroup(QObject::trUtf8("Created by") + " ", _listCreatorName, _listCreatorMail) + "<tr></tr>";
+    text += getGroup(QObject::trUtf8("Contributors") + " ", _listContributorName, _listContributorMail) + "<tr></tr>";
+    text += getGroup(QObject::trUtf8("Translated by") + " ", _listTranslatorName, _listTranslatorMail) + "<tr></tr>";
     text += getAwesomeCredit();
 
     return text + "</table></body></html>";
@@ -163,7 +163,7 @@ QString Credit::getFormattedLink(QString text, QString link)
 QString Credit::getAwesomeCredit()
 {
     return "<tr><td width='50%'><p align='right'><span style='font-size:9pt;'>" +
-            QObject::trUtf8("Icônes") +
+            QObject::trUtf8("Icons") +
             " </span></p></td>" +
             "<td width='50%'>Most of the icons are provided by " +
             getFormattedLink("Awesome", "https://fontawesome.com/") +

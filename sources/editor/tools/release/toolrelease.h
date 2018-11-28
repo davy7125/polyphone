@@ -6,6 +6,8 @@
 
 class ToolRelease: public AbstractToolIterating
 {
+    Q_OBJECT
+
 public:
     ToolRelease();
 
@@ -17,7 +19,7 @@ public:
 
     QString getCategory() const override
     {
-        return trUtf8("Édition rapide");
+        return trUtf8("Fast editing");
     }
 
     /// Internal identifier
@@ -32,7 +34,7 @@ public:
 protected:
     QString getLabelInternal() const override
     {
-        return trUtf8("Release naturelle");
+        return trUtf8("Natural release");
     }
 };
 

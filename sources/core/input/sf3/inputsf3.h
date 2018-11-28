@@ -6,6 +6,8 @@ class SoundfontManager;
 
 class InputSf3 : public AbstractInput
 {
+    Q_OBJECT
+    
 public:
     InputSf3();
 

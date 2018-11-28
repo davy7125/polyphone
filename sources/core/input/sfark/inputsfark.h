@@ -5,6 +5,8 @@
 
 class InputSfArk : public AbstractInput
 {
+    Q_OBJECT
+    
 public:
     InputSfArk();
 

@@ -49,7 +49,7 @@ GraphSpace::GraphSpace(QWidget * parent) : QCustomPlot(parent)
     text->setFont(QFont(font().family(), 10, 100));
     color.setAlpha(180);
     text->setColor(color);
-    text->setText(trUtf8("G", "first letter of Left in your language"));
+    text->setText(trUtf8("L", "first letter of Left in your language"));
     this->addItem(text);
     text = new QCPItemText(this);
     text->position->setType(QCPItemPosition::ptAxisRectRatio);
@@ -58,7 +58,7 @@ GraphSpace::GraphSpace(QWidget * parent) : QCustomPlot(parent)
     text->setTextAlignment(Qt::AlignRight);
     text->setFont(QFont(font().family(), 10, 100));
     text->setColor(color);
-    text->setText(trUtf8("D", "first letter of Right in your language"));
+    text->setText(trUtf8("R", "first letter of Right in your language"));
     this->addItem(text);
 
     // Layer aperçu valeurs

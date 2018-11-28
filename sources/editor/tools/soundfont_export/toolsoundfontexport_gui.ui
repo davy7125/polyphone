@@ -19,14 +19,14 @@
      <item>
       <widget class="QPushButton" name="pushTick">
        <property name="text">
-        <string>Tout cocher</string>
+        <string>Select all</string>
        </property>
       </widget>
      </item>
      <item>
       <widget class="QPushButton" name="pushUntick">
        <property name="text">
-        <string>Tout décocher</string>
+        <string>Unselect all</string>
        </property>
       </widget>
      </item>
@@ -77,7 +77,7 @@
      <item row="0" column="0">
       <widget class="QLabel" name="label_2">
        <property name="text">
-        <string>Emplacement</string>
+        <string>Destination</string>
        </property>
       </widget>
      </item>
@@ -113,21 +113,21 @@
      <item row="4" column="1" colspan="2">
       <widget class="QCheckBox" name="checkGM">
        <property name="text">
-        <string>classement général MIDI</string>
+        <string>General MIDI classification</string>
        </property>
       </widget>
      </item>
      <item row="3" column="1" colspan="2">
       <widget class="QCheckBox" name="checkBank">
        <property name="text">
-        <string>un répertoire par banque</string>
+        <string>one directory per bank</string>
        </property>
       </widget>
      </item>
      <item row="2" column="1" colspan="2">
       <widget class="QCheckBox" name="checkPreset">
        <property name="text">
-        <string>numéro de preset en préfixe</string>
+        <string>preset number as prefix</string>
        </property>
       </widget>
      </item>
@@ -138,17 +138,17 @@
        </property>
        <item>
         <property name="text">
-         <string>Haute</string>
+         <string>High</string>
         </property>
        </item>
        <item>
         <property name="text">
-         <string>Moyenne</string>
+         <string>Medium</string>
         </property>
        </item>
        <item>
         <property name="text">
-         <string>Basse</string>
+         <string>Low</string>
         </property>
        </item>
       </widget>
@@ -156,7 +156,7 @@
      <item row="5" column="0">
       <widget class="QLabel" name="labelQuality">
        <property name="text">
-        <string>Qualité</string>
+        <string>Quality</string>
        </property>
       </widget>
      </item>
@@ -167,7 +167,7 @@
      <item>
       <widget class="QPushButton" name="pushAnnuler">
        <property name="text">
-        <string>Annuler</string>
+        <string>Cancel</string>
        </property>
       </widget>
      </item>
@@ -187,7 +187,7 @@
      <item>
       <widget class="QPushButton" name="pushExport">
        <property name="text">
-        <string>Exporter</string>
+        <string>Export</string>
        </property>
       </widget>
      </item>

@@ -23,7 +23,7 @@
    </size>
   </property>
   <property name="windowTitle">
-   <string>Magnétophone</string>
+   <string>Recorder</string>
   </property>
   <property name="windowIcon">
    <iconset>

@@ -27,7 +27,7 @@
    <item row="2" column="0">
     <widget class="QPushButton" name="pushCopy">
      <property name="text">
-      <string>Copier</string>
+      <string>Copy</string>
      </property>
     </widget>
    </item>
@@ -53,7 +53,7 @@
       </sizepolicy>
      </property>
      <property name="text">
-      <string>texte copié dans le presse-papier</string>
+      <string>text copied in the clipboard</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>
@@ -78,7 +78,7 @@
      <item>
       <widget class="QRadioButton" name="radioCsv">
        <property name="text">
-        <string>format csv</string>
+        <string>csv format</string>
        </property>
        <property name="checked">
         <bool>true</bool>
@@ -88,7 +88,7 @@
      <item>
       <widget class="QRadioButton" name="radioHtml">
        <property name="text">
-        <string>tableau html</string>
+        <string>html table</string>
        </property>
       </widget>
      </item>
@@ -110,7 +110,7 @@
    <item row="2" column="4">
     <widget class="QPushButton" name="pushClose">
      <property name="text">
-      <string>Fermer</string>
+      <string>Close</string>
      </property>
     </widget>
    </item>

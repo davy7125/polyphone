@@ -33,6 +33,8 @@ class ConfManager;
 
 class ThemeManager: QObject
 {
+    Q_OBJECT
+    
 public:
     /// Color type, each type being used at specific locations in the interface
     enum ColorType

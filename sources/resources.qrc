@@ -85,7 +85,6 @@
     <qresource prefix="/translations">
         <file>resources/translations/polyphone_cs.qm</file>
         <file>resources/translations/polyphone_de.qm</file>
-        <file>resources/translations/polyphone_en.qm</file>
         <file>resources/translations/polyphone_es.qm</file>
         <file>resources/translations/polyphone_it.qm</file>
         <file>resources/translations/polyphone_ja.qm</file>
@@ -95,6 +94,7 @@
         <file>resources/translations/polyphone_sr.qm</file>
         <file>resources/translations/polyphone_tr.qm</file>
         <file>resources/translations/polyphone_zh.qm</file>
+        <file>resources/translations/polyphone_fr.qm</file>
     </qresource>
     <qresource prefix="/misc">
         <file>changelog</file>

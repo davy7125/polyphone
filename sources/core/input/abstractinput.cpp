@@ -15,7 +15,7 @@ AbstractInput::AbstractInput() : QObject(),
     _sm(NULL),
     _fileName(""),
     _isSuccess(false),
-    _error(trUtf8("pas encore traité")),
+    _error(trUtf8("not processed yet")),
     _sf2Index(-1)
 {
     connect(_futureWatcher, SIGNAL(finished()), this, SIGNAL(finished()), Qt::QueuedConnection);
@@ -53,7 +53,7 @@ void AbstractInput::processAsync()
             if (_sm->getQstr(EltID(elementSf2, i), champ_filenameInitial) == _fileName)
             {
                 _isSuccess = false;
-                _error = trUtf8("Ce fichier est déjà ouvert.");
+                _error = trUtf8("This file is already open.");
                 return;
             }
         }

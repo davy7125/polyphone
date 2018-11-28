@@ -6,6 +6,8 @@ class SoundfontManager;
 
 class OutputSfz : public AbstractOutput
 {
+    Q_OBJECT
+    
 public:
     OutputSfz();
 

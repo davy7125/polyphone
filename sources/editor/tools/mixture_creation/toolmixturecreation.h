@@ -36,7 +36,7 @@ signals:
 protected:
     QString getLabelInternal() const override
     {
-        return trUtf8("Créer une mixture");
+        return trUtf8("Mixture creation");
     }
 
     /// Return true if the tool can be used on the specified ids

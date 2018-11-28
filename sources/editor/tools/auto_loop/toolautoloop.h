@@ -7,6 +7,8 @@
 
 class ToolAutoLoop: public AbstractToolIterating
 {
+    Q_OBJECT
+
 public:
     ToolAutoLoop() : AbstractToolIterating(elementSmpl) {}
 
@@ -18,7 +20,7 @@ public:
 
     QString getCategory() const override
     {
-        return trUtf8("Traitement des échantillons");
+        return trUtf8("Sample processing");
     }
 
     /// Internal identifier
@@ -36,7 +38,7 @@ public:
 protected:
     QString getLabelInternal() const override
     {
-        return trUtf8("Bouclage automatique");
+        return trUtf8("Auto loop");
     }
 
     /// Get the warning to display after the tool is run

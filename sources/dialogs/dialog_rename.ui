@@ -20,7 +20,7 @@
    </sizepolicy>
   </property>
   <property name="windowTitle">
-   <string>Renommage de masse</string>
+   <string>Bulk rename</string>
   </property>
   <property name="windowIcon">
    <iconset resource="../resources.qrc">
@@ -46,27 +46,27 @@
     <widget class="QComboBox" name="comboBox">
      <item>
       <property name="text">
-       <string>Écraser nom existant avec nom de la note en suffixe</string>
+       <string>Overwrite existing name with key name as suffix</string>
       </property>
      </item>
      <item>
       <property name="text">
-       <string>Écraser nom existant avec incrément en suffixe</string>
+       <string>Overwrite existing name with numerical ascending suffix</string>
       </property>
      </item>
      <item>
       <property name="text">
-       <string>Remplacer une chaîne de caractères</string>
+       <string>Replace characters</string>
       </property>
      </item>
      <item>
       <property name="text">
-       <string>Insérer après une position</string>
+       <string>Insert after a specific position</string>
       </property>
      </item>
      <item>
       <property name="text">
-       <string>Supprimer une étendue</string>
+       <string>Delete character range</string>
       </property>
      </item>
     </widget>

@@ -56,7 +56,7 @@
          </sizepolicy>
         </property>
         <property name="text">
-         <string>Général</string>
+         <string>General</string>
         </property>
        </widget>
       </item>
@@ -82,7 +82,7 @@
          </sizepolicy>
         </property>
         <property name="text">
-         <string>Son</string>
+         <string>Sound</string>
         </property>
        </widget>
       </item>
@@ -95,7 +95,7 @@
          </sizepolicy>
         </property>
         <property name="text">
-         <string>Clavier virtuel</string>
+         <string>Virtual keyboard</string>
         </property>
        </widget>
       </item>
@@ -108,8 +108,8 @@
          </sizepolicy>
         </property>
         <property name="text">
-         <string>Soundfonts
-en ligne</string>
+         <string>Online
+repository</string>
         </property>
        </widget>
       </item>

@@ -17,7 +17,7 @@
    <item row="0" column="0">
     <widget class="QLabel" name="label">
      <property name="text">
-      <string>Écart en demi-tons</string>
+      <string>Shift in semitones</string>
      </property>
     </widget>
    </item>
@@ -41,7 +41,7 @@
    <item row="1" column="0" colspan="2">
     <widget class="QCheckBox" name="checkKeyRange">
      <property name="text">
-      <string>Adapter l'étendue de notes</string>
+      <string>Adapt keyrange</string>
      </property>
     </widget>
    </item>

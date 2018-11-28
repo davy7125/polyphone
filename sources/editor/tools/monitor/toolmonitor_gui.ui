@@ -94,7 +94,7 @@
          </font>
         </property>
         <property name="title">
-         <string>Visualisation</string>
+         <string>Display options</string>
         </property>
         <layout class="QVBoxLayout" name="verticalLayout_5">
          <property name="spacing">
@@ -137,7 +137,7 @@
             </font>
            </property>
            <property name="text">
-            <string>échelle log</string>
+            <string>Log scale</string>
            </property>
           </widget>
          </item>
@@ -159,7 +159,7 @@
          </font>
         </property>
         <property name="title">
-         <string>Légende</string>
+         <string>Legend</string>
         </property>
         <layout class="QGridLayout" name="gridLayout_2">
          <property name="leftMargin">
@@ -218,7 +218,7 @@
             </font>
            </property>
            <property name="text">
-            <string>Paramètres par défaut</string>
+            <string>Default parameters</string>
            </property>
           </widget>
          </item>
@@ -247,7 +247,7 @@
             </font>
            </property>
            <property name="text">
-            <string>Valeur moyenne par note</string>
+            <string>Mean value per key</string>
            </property>
           </widget>
          </item>
@@ -260,7 +260,7 @@
             </font>
            </property>
            <property name="text">
-            <string>Paramètres définis</string>
+            <string>Defined parameters</string>
            </property>
           </widget>
          </item>

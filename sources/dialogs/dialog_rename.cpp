@@ -83,7 +83,7 @@ void DialogRename::on_comboBox_currentIndexChanged(int index)
         ui->labelPos->hide();
         ui->spinPos1->hide();
         ui->spinPos2->hide();
-        ui->labelString1->setText(trUtf8("Nouveau nom :"));
+        ui->labelString1->setText(trUtf8("New name:"));
         ui->labelString1->show();
         ui->lineText1->show();
         ui->labelString2->hide();
@@ -94,7 +94,7 @@ void DialogRename::on_comboBox_currentIndexChanged(int index)
         ui->labelPos->hide();
         ui->spinPos1->hide();
         ui->spinPos2->hide();
-        ui->labelString1->setText(trUtf8("Nouveau nom :"));
+        ui->labelString1->setText(trUtf8("New name:"));
         ui->labelString1->show();
         ui->lineText1->show();
         ui->labelString2->hide();
@@ -105,10 +105,10 @@ void DialogRename::on_comboBox_currentIndexChanged(int index)
         ui->labelPos->hide();
         ui->spinPos1->hide();
         ui->spinPos2->hide();
-        ui->labelString1->setText(trUtf8("Trouver :"));
+        ui->labelString1->setText(trUtf8("Find:"));
         ui->labelString1->show();
         ui->lineText1->show();
-        ui->labelString2->setText(trUtf8("Et remplacer par :"));
+        ui->labelString2->setText(trUtf8("And replace by:"));
         ui->labelString2->show();
         ui->lineText2->show();
         break;
@@ -118,7 +118,7 @@ void DialogRename::on_comboBox_currentIndexChanged(int index)
         ui->spinPos1->show();
         ui->spinPos2->hide();
         ui->labelPos->setText(trUtf8("Position"));
-        ui->labelString1->setText(trUtf8("Texte à insérer :"));
+        ui->labelString1->setText(trUtf8("Text to insert:"));
         ui->labelString1->show();
         ui->lineText1->show();
         ui->labelString2->hide();
@@ -129,7 +129,7 @@ void DialogRename::on_comboBox_currentIndexChanged(int index)
         ui->labelPos->show();
         ui->spinPos1->show();
         ui->spinPos2->show();
-        ui->labelPos->setText(trUtf8("Étendue"));
+        ui->labelPos->setText(trUtf8("Range"));
         ui->labelString1->hide();
         ui->lineText1->hide();
         ui->labelString2->hide();

@@ -29,7 +29,7 @@
    <item>
     <widget class="QLineEdit" name="lineEdit">
      <property name="placeholderText">
-      <string>Nom d'un tag...</string>
+      <string>Tag name...</string>
      </property>
     </widget>
    </item>

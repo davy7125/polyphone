@@ -114,7 +114,7 @@ void ToolSoundfontExport_gui::on_pushUntick_clicked()
 
 void ToolSoundfontExport_gui::on_pushFolder_clicked()
 {
-    QString qDir = QFileDialog::getExistingDirectory(this, trUtf8("Choisissez un répertoire de destination"),
+    QString qDir = QFileDialog::getExistingDirectory(this, trUtf8("Select the destination directory"),
                                                      ui->lineFolder->text());
     if (!qDir.isEmpty())
         ui->lineFolder->setText(qDir);
@@ -130,7 +130,7 @@ void ToolSoundfontExport_gui::on_pushExport_clicked()
     // Check the directory
     if (ui->lineFolder->text().isEmpty() || !QDir(ui->lineFolder->text()).exists())
     {
-        QMessageBox::warning(this, trUtf8("Attention"), trUtf8("Le répertoire n'est pas valide."));
+        QMessageBox::warning(this, trUtf8("Warning"), trUtf8("Invalid directory."));
         return;
     }
 
@@ -159,13 +159,13 @@ void ToolSoundfontExport_gui::on_pushExport_clicked()
     // Check on the number of selected elements
     if (_presetList.empty())
     {
-        QMessageBox::warning(this, trUtf8("Attention"), trUtf8("Au moins un preset doit être sélectionné."));
+        QMessageBox::warning(this, trUtf8("Warning"), trUtf8("At least one preset must be selected."));
         return;
     }
 
     if (_presetList.count() > 127)
     {
-        QMessageBox::warning(this, trUtf8("Attention"), trUtf8("Le nombre maximal de soundfonts à exporter est de 127."));
+        QMessageBox::warning(this, trUtf8("Warning"), trUtf8("The maximal number of soundfont to export is 127."));
         return;
     }
 
@@ -174,7 +174,7 @@ void ToolSoundfontExport_gui::on_pushExport_clicked()
         maxNumberOfPresets += qMax(maxNumberOfPresets, _presetList[i].count());
     if (_presetList.count() > 1 && maxNumberOfPresets > 127)
     {
-        QMessageBox::warning(this, trUtf8("Attention"), trUtf8("Dans le cas où plusieurs soundfonts sont exportées, le nombre maximal de presets par soundfont est de 127."));
+        QMessageBox::warning(this, trUtf8("Warning"), trUtf8("In the case where several soundfonts are exported, the maximal number of presets per soundfonts is 127."));
         return;
     }
 

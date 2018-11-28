@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Clavier virtuel</string>
+   <string>Virtual keyboard</string>
   </property>
   <property name="windowIcon">
    <iconset resource="../resources.qrc">
@@ -89,12 +89,12 @@
         </item>
         <item>
          <property name="text">
-          <string>88 notes (piano)</string>
+          <string>88 keys (piano)</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>128 notes (complet)</string>
+          <string>128 keys (full)</string>
          </property>
         </item>
        </widget>
@@ -121,7 +121,7 @@
          </font>
         </property>
         <property name="text">
-         <string>Note</string>
+         <string>Key</string>
         </property>
        </widget>
       </item>
@@ -147,7 +147,7 @@
          </font>
         </property>
         <property name="text">
-         <string>Vélocité</string>
+         <string>Velocity</string>
         </property>
        </widget>
       </item>

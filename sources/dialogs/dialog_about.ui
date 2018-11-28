@@ -26,7 +26,7 @@
    </size>
   </property>
   <property name="windowTitle">
-   <string>A propos</string>
+   <string>About</string>
   </property>
   <property name="windowIcon">
    <iconset>
@@ -169,7 +169,7 @@
      <item>
       <widget class="QPushButton" name="pushCredit">
        <property name="text">
-        <string>Crédits</string>
+        <string>Credit</string>
        </property>
        <property name="checkable">
         <bool>true</bool>
@@ -192,7 +192,7 @@
      <item>
       <widget class="QPushButton" name="pushClose">
        <property name="text">
-        <string>Fermer</string>
+        <string>Close</string>
        </property>
       </widget>
      </item>

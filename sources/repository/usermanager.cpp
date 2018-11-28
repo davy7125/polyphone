@@ -91,11 +91,11 @@ void UserManager::userDataAvailable(QString error)
             switch (data.value("status").toInt(-1))
             {
             case 0:
-                _error = trUtf8("Problème serveur");
+                _error = trUtf8("Server error");
                 _connectionState = FAILED;
                 break;
             case 1:
-                _error = trUtf8("Mauvais identifiant / mot de passe");
+                _error = trUtf8("Wrong username or password");
                 _connectionState = FAILED;
 
                 // Stop the auto-connect
@@ -117,13 +117,13 @@ void UserManager::userDataAvailable(QString error)
                 _connectionState = BANNED;
                 break;
             default:
-                _error = trUtf8("Problème serveur") + QString(" (status '%1')").arg(data.value("status").toString());
+                _error = trUtf8("Server error") + QString(" (status '%1')").arg(data.value("status").toString());
                 _connectionState = FAILED;
             }
         }
         else
         {
-            _error = trUtf8("Problème serveur");
+            _error = trUtf8("Server error");
             _connectionState = FAILED;
         }
     }

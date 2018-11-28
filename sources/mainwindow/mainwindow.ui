@@ -68,7 +68,7 @@
            <string notr="true">padding: 10px;</string>
           </property>
           <property name="text">
-           <string extracomment="prefixed with 2 spaces">  Préfèrences</string>
+           <string extracomment="prefixed with 2 spaces">  Settings</string>
           </property>
           <property name="iconSize">
            <size>
@@ -103,7 +103,7 @@
            <string notr="true">padding: 10px;</string>
           </property>
           <property name="text">
-           <string extracomment="prefixed with 2 spaces for each line">  Nouvelle
+           <string extracomment="prefixed with 2 spaces for each line">  New
   soundfont</string>
           </property>
           <property name="iconSize">
@@ -155,7 +155,7 @@
            </font>
           </property>
           <property name="text">
-           <string>Soundfonts du jour</string>
+           <string>Daily soundfonts</string>
           </property>
          </widget>
         </item>
@@ -165,8 +165,8 @@
            <string notr="true">padding: 10px;</string>
           </property>
           <property name="text">
-           <string extracomment="prefixed with 2 spaces for each line">  Soundfonts
-  en ligne</string>
+           <string extracomment="prefixed with 2 spaces for each line">  Online
+  repository</string>
           </property>
           <property name="iconSize">
            <size>
@@ -182,7 +182,7 @@
            <string notr="true">height:52px</string>
           </property>
           <property name="placeholderText">
-           <string>Rechercher une soundfont...</string>
+           <string>Search a soundfont...</string>
           </property>
          </widget>
         </item>
@@ -192,7 +192,7 @@
            <string notr="true">padding: 10px;</string>
           </property>
           <property name="text">
-           <string extracomment="prefixed with 2 spaces for each line">  Ouvrir
+           <string extracomment="prefixed with 2 spaces for each line">  Open
   soundfont</string>
           </property>
           <property name="iconSize">
@@ -212,7 +212,7 @@
            </font>
           </property>
           <property name="text">
-           <string>Historique</string>
+           <string>History</string>
           </property>
           <property name="alignment">
            <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>

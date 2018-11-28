@@ -178,7 +178,7 @@
      <item row="2" column="9">
       <widget class="QLabel" name="labelKeyDecay">
        <property name="text">
-        <string>Note  Decay</string>
+        <string>Key → Decay</string>
        </property>
        <property name="alignment">
         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -388,7 +388,7 @@
         </sizepolicy>
        </property>
        <property name="text">
-        <string>Note  Hold</string>
+        <string>Key → Hold</string>
        </property>
        <property name="alignment">
         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -455,7 +455,7 @@
      <item row="0" column="0" colspan="6">
       <widget class="QPushButton" name="pushVolume">
        <property name="text">
-        <string>Enveloppe de volume</string>
+        <string>Volume envelope</string>
        </property>
        <property name="checkable">
         <bool>true</bool>
@@ -474,7 +474,7 @@
      <item row="0" column="6" colspan="6">
       <widget class="QPushButton" name="pushModulation">
        <property name="text">
-        <string>Enveloppe de modulation</string>
+        <string>Modulation envelope</string>
        </property>
        <property name="checkable">
         <bool>true</bool>

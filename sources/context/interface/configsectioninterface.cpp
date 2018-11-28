@@ -124,7 +124,7 @@ void ConfigSectionInterface::on_comboColorTheme_currentIndexChanged(int index)
 void ConfigSectionInterface::on_pushColorWindowBackground_clicked()
 {
     QColor color = QColorDialog::getColor(ContextManager::theme()->getColor(ThemeManager::WINDOW_BACKGROUND),
-                                          this, trUtf8("Choisissez une couleur"));
+                                          this, trUtf8("Select a color"));
     if (color.isValid())
     {
         ContextManager::theme()->setColor(ThemeManager::WINDOW_BACKGROUND, color);
@@ -136,7 +136,7 @@ void ConfigSectionInterface::on_pushColorWindowBackground_clicked()
 void ConfigSectionInterface::on_pushColorButtonBackground_clicked()
 {
     QColor color = QColorDialog::getColor(ContextManager::theme()->getColor(ThemeManager::BUTTON_BACKGROUND),
-                                          this, trUtf8("Choisissez une couleur"));
+                                          this, trUtf8("Select a color"));
     if (color.isValid())
     {
         ContextManager::theme()->setColor(ThemeManager::BUTTON_BACKGROUND, color);
@@ -148,7 +148,7 @@ void ConfigSectionInterface::on_pushColorButtonBackground_clicked()
 void ConfigSectionInterface::on_pushColorSelectionBackground_clicked()
 {
     QColor color = QColorDialog::getColor(ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND),
-                                          this, trUtf8("Choisissez une couleur"));
+                                          this, trUtf8("Select a color"));
     if (color.isValid())
     {
         ContextManager::theme()->setColor(ThemeManager::HIGHLIGHTED_BACKGROUND, color);
@@ -160,7 +160,7 @@ void ConfigSectionInterface::on_pushColorSelectionBackground_clicked()
 void ConfigSectionInterface::on_pushColorListBackground_clicked()
 {
     QColor color = QColorDialog::getColor(ContextManager::theme()->getColor(ThemeManager::LIST_BACKGROUND),
-                                          this, trUtf8("Choisissez une couleur"));
+                                          this, trUtf8("Select a color"));
     if (color.isValid())
     {
         ContextManager::theme()->setColor(ThemeManager::LIST_BACKGROUND, color);
@@ -172,7 +172,7 @@ void ConfigSectionInterface::on_pushColorListBackground_clicked()
 void ConfigSectionInterface::on_pushColorListAlternativeBackground_clicked()
 {
     QColor color = QColorDialog::getColor(ContextManager::theme()->getColor(ThemeManager::LIST_ALTERNATIVE_BACKGROUND),
-                                          this, trUtf8("Choisissez une couleur"));
+                                          this, trUtf8("Select a color"));
     if (color.isValid())
     {
         ContextManager::theme()->setColor(ThemeManager::LIST_ALTERNATIVE_BACKGROUND, color);
@@ -184,7 +184,7 @@ void ConfigSectionInterface::on_pushColorListAlternativeBackground_clicked()
 void ConfigSectionInterface::on_pushColorWindowText_clicked()
 {
     QColor color = QColorDialog::getColor(ContextManager::theme()->getColor(ThemeManager::WINDOW_TEXT),
-                                          this, trUtf8("Choisissez une couleur"));
+                                          this, trUtf8("Select a color"));
     if (color.isValid())
     {
         ContextManager::theme()->setColor(ThemeManager::WINDOW_TEXT, color);
@@ -196,7 +196,7 @@ void ConfigSectionInterface::on_pushColorWindowText_clicked()
 void ConfigSectionInterface::on_pushColorButtonText_clicked()
 {
     QColor color = QColorDialog::getColor(ContextManager::theme()->getColor(ThemeManager::BUTTON_TEXT),
-                                          this, trUtf8("Choisissez une couleur"));
+                                          this, trUtf8("Select a color"));
     if (color.isValid())
     {
         ContextManager::theme()->setColor(ThemeManager::BUTTON_TEXT, color);
@@ -208,7 +208,7 @@ void ConfigSectionInterface::on_pushColorButtonText_clicked()
 void ConfigSectionInterface::on_pushColorSelectionText_clicked()
 {
     QColor color = QColorDialog::getColor(ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_TEXT),
-                                          this, trUtf8("Choisissez une couleur"));
+                                          this, trUtf8("Select a color"));
     if (color.isValid())
     {
         ContextManager::theme()->setColor(ThemeManager::HIGHLIGHTED_TEXT, color);
@@ -220,7 +220,7 @@ void ConfigSectionInterface::on_pushColorSelectionText_clicked()
 void ConfigSectionInterface::on_pushColorListText_clicked()
 {
     QColor color = QColorDialog::getColor(ContextManager::theme()->getColor(ThemeManager::LIST_TEXT),
-                                          this, trUtf8("Choisissez une couleur"));
+                                          this, trUtf8("Select a color"));
     if (color.isValid())
     {
         ContextManager::theme()->setColor(ThemeManager::LIST_TEXT, color);

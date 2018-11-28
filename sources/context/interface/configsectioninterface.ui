@@ -25,7 +25,7 @@
         </font>
        </property>
        <property name="text">
-        <string>Langue</string>
+        <string>Language</string>
        </property>
       </widget>
      </item>
@@ -44,7 +44,7 @@
         </font>
        </property>
        <property name="text">
-        <string>Nom des notes</string>
+        <string>Key names</string>
        </property>
       </widget>
      </item>
@@ -64,37 +64,37 @@
        </property>
        <item>
         <property name="text">
-         <string>Do central → 60, puis 61</string>
+         <string>Middle C → 60, then 61</string>
         </property>
        </item>
        <item>
         <property name="text">
-         <string>Do central → C3, puis C♯3</string>
+         <string>Middle C → C3, then C♯3</string>
         </property>
        </item>
        <item>
         <property name="text">
-         <string>Do central → C3, puis D♭3</string>
+         <string>Middle C → C3, then D♭3</string>
         </property>
        </item>
        <item>
         <property name="text">
-         <string>Do central → C4, puis C♯4</string>
+         <string>Middle C → C4, then C♯4</string>
         </property>
        </item>
        <item>
         <property name="text">
-         <string>Do central → C4, puis D♭4</string>
+         <string>Middle C → C4, then D♭4</string>
         </property>
        </item>
        <item>
         <property name="text">
-         <string>Do central → C5, puis C♯5</string>
+         <string>Middle C → C5, then C♯5</string>
         </property>
        </item>
        <item>
         <property name="text">
-         <string>Do central → C5, puis D♭5</string>
+         <string>Middle C → C5, then D♭5</string>
         </property>
        </item>
       </widget>
@@ -123,7 +123,7 @@
       </font>
      </property>
      <property name="title">
-      <string>Thème</string>
+      <string>Theme</string>
      </property>
      <property name="flat">
       <bool>true</bool>
@@ -229,7 +229,7 @@
          </font>
         </property>
         <property name="text">
-         <string>Sélection</string>
+         <string>Selection</string>
         </property>
        </widget>
       </item>
@@ -242,7 +242,7 @@
          </font>
         </property>
         <property name="text">
-         <string>Fond alternatif</string>
+         <string>Alternate background</string>
         </property>
        </widget>
       </item>
@@ -289,7 +289,7 @@
          </font>
         </property>
         <property name="text">
-         <string>Texte</string>
+         <string>Text</string>
         </property>
        </widget>
       </item>
@@ -302,7 +302,7 @@
          </font>
         </property>
         <property name="text">
-         <string>Fenêtre</string>
+         <string>Window</string>
         </property>
        </widget>
       </item>
@@ -315,7 +315,7 @@
          </font>
         </property>
         <property name="text">
-         <string>Texte</string>
+         <string>Text</string>
         </property>
        </widget>
       </item>
@@ -328,7 +328,7 @@
          </font>
         </property>
         <property name="text">
-         <string>Texte</string>
+         <string>Text</string>
         </property>
        </widget>
       </item>
@@ -341,7 +341,7 @@
          </font>
         </property>
         <property name="text">
-         <string>Fond</string>
+         <string>Background</string>
         </property>
        </widget>
       </item>
@@ -354,7 +354,7 @@
          </font>
         </property>
         <property name="text">
-         <string>Fond</string>
+         <string>Background</string>
         </property>
        </widget>
       </item>
@@ -398,7 +398,7 @@
          </font>
         </property>
         <property name="text">
-         <string>Fond</string>
+         <string>Background</string>
         </property>
        </widget>
       </item>
@@ -411,7 +411,7 @@
          </font>
         </property>
         <property name="text">
-         <string>Bouton</string>
+         <string>Button</string>
         </property>
        </widget>
       </item>
@@ -582,7 +582,7 @@
          </font>
         </property>
         <property name="text">
-         <string>Fond</string>
+         <string>Background</string>
         </property>
        </widget>
       </item>
@@ -595,7 +595,7 @@
          </font>
         </property>
         <property name="text">
-         <string>Texte</string>
+         <string>Text</string>
         </property>
        </widget>
       </item>
@@ -621,7 +621,7 @@
          </font>
         </property>
         <property name="text">
-         <string>Thème de couleur</string>
+         <string>Color theme</string>
         </property>
        </widget>
       </item>
@@ -644,7 +644,7 @@
          </font>
         </property>
         <property name="text">
-         <string>Liste et tableau</string>
+         <string>List and table</string>
         </property>
        </widget>
       </item>
@@ -660,7 +660,7 @@
       </font>
      </property>
      <property name="text">
-      <string>La modification sera prise en compte lors du prochain démarrage du logiciel.</string>
+      <string>This modification will be applied during the next start of the software.</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>

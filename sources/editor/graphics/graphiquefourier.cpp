@@ -48,7 +48,7 @@ GraphiqueFourier::GraphiqueFourier(QWidget * parent) : QCustomPlot(parent),
     this->xAxis->setRange(0, 20000);
     this->xAxis->setVisible(false);
     this->xAxis->setTicks(false);
-    this->xAxis->setLabel(trUtf8("Fréquence (Hz)"));
+    this->xAxis->setLabel(trUtf8("Frequency (Hz)"));
     this->xAxis->setAutoSubTicks(false);
     this->xAxis->setAutoTickStep(false);
     this->xAxis->setTickStep(2000);
@@ -63,7 +63,7 @@ GraphiqueFourier::GraphiqueFourier(QWidget * parent) : QCustomPlot(parent),
     this->yAxis->setRange(0, 1.05);
     this->yAxis->setVisible(false);
     this->yAxis->setTicks(false);
-    this->yAxis->setLabel(trUtf8("Intensité"));
+    this->yAxis->setLabel(trUtf8("Intensity"));
     this->yAxis->setAutoSubTicks(false);
     this->yAxis->setAutoTickStep(false);
     this->yAxis->setTickStep(0.2);
@@ -120,7 +120,7 @@ GraphiqueFourier::GraphiqueFourier(QWidget * parent) : QCustomPlot(parent),
 
     // Préparation du menu contextuel
     _menu = new QMenu(this);
-    QAction * action = _menu->addAction(trUtf8("Exporter graphique"));
+    QAction * action = _menu->addAction(trUtf8("Export graph"));
     connect(action, SIGNAL(triggered()), this, SLOT(exportPng()));
 
     this->plotLayout()->insertRow(0);
@@ -308,7 +308,7 @@ void GraphiqueFourier::setPos(qint32 posStart, qint32 posEnd, QList<double> &fre
     QString qStr5 = "";
     if (note >= 0 && note <= 128)
     {
-        qStr1 = trUtf8("note") + " " + ContextManager::keyName()->getKeyName(note) + ", " +
+        qStr1 = trUtf8("key") + " " + ContextManager::keyName()->getKeyName(note) + ", " +
                 trUtf8("correction") + " " + QString::number(correction) + " (" + trUtf8("estimation") + ")";
         _note = note;
         _correction = correction;
@@ -390,8 +390,8 @@ void GraphiqueFourier::exportPng()
 {
     QString defaultFile = ContextManager::recentFile()->getLastDirectory(RecentFileManager::FILE_TYPE_FREQUENCIES) + "/" +
             _name.replace(QRegExp(QString::fromUtf8("[`~*|:<>«»?/{}\"\\\\]")), "_") + ".png";
-    QString fileName = QFileDialog::getSaveFileName(this, trUtf8("Exporter un graphique"),
-                                                    defaultFile, trUtf8("Fichier .png") + " (*.png)");
+    QString fileName = QFileDialog::getSaveFileName(this, trUtf8("Export a graph"),
+                                                    defaultFile, trUtf8("Png file") + " (*.png)");
     if (!fileName.isEmpty())
     {
         ContextManager::recentFile()->addRecentFile(RecentFileManager::FILE_TYPE_FREQUENCIES, fileName);

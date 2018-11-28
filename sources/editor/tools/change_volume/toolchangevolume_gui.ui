@@ -17,7 +17,7 @@
    <item row="0" column="0">
     <widget class="QRadioButton" name="radioAdd">
      <property name="text">
-      <string>Ajouter</string>
+      <string>Add</string>
      </property>
     </widget>
    </item>
@@ -40,7 +40,7 @@
    <item row="1" column="0">
     <widget class="QRadioButton" name="radioMultiply">
      <property name="text">
-      <string>Multiplier</string>
+      <string>Multiply</string>
      </property>
     </widget>
    </item>
@@ -60,7 +60,7 @@
    <item row="2" column="0">
     <widget class="QRadioButton" name="radioNormalize">
      <property name="text">
-      <string>Normaliser</string>
+      <string>Normalize</string>
      </property>
     </widget>
    </item>

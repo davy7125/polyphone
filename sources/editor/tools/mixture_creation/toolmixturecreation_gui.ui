@@ -22,7 +22,7 @@
      <item row="0" column="0">
       <widget class="QLabel" name="label_3">
        <property name="text">
-        <string>Nom de la mixture :</string>
+        <string>Name of the mixture:</string>
        </property>
       </widget>
      </item>
@@ -32,7 +32,7 @@
      <item row="1" column="0">
       <widget class="QLabel" name="label_4">
        <property name="text">
-        <string>Création de son :</string>
+        <string>Sample creation:</string>
        </property>
       </widget>
      </item>
@@ -40,17 +40,17 @@
       <widget class="QComboBox" name="comboFreq">
        <item>
         <property name="text">
-         <string>à chaque note</string>
+         <string>for every key</string>
         </property>
        </item>
        <item>
         <property name="text">
-         <string>toutes les 3 notes</string>
+         <string>every 3 keys</string>
         </property>
        </item>
        <item>
         <property name="text">
-         <string>toutes les 6 notes</string>
+         <string>every 6 keys</string>
         </property>
        </item>
       </widget>
@@ -58,7 +58,7 @@
      <item row="1" column="2">
       <widget class="QCheckBox" name="checkBouclage">
        <property name="text">
-        <string>Bouclage</string>
+        <string>Auto loop</string>
        </property>
        <property name="checked">
         <bool>true</bool>
@@ -68,7 +68,7 @@
      <item row="0" column="2">
       <widget class="QCheckBox" name="checkStereo">
        <property name="text">
-        <string>Stéréo</string>
+        <string>Stereo</string>
        </property>
       </widget>
      </item>
@@ -235,7 +235,7 @@
         <item row="2" column="1" colspan="3">
          <widget class="QLabel" name="label">
           <property name="text">
-           <string>Etendue</string>
+           <string>Key range</string>
           </property>
          </widget>
         </item>
@@ -258,7 +258,7 @@
      <item>
       <widget class="QGroupBox" name="groupBox_2">
        <property name="title">
-        <string>Rangs</string>
+        <string>Ranks</string>
        </property>
        <layout class="QGridLayout" name="gridLayout_3" columnstretch="100,0,0,0">
         <property name="leftMargin">
@@ -344,67 +344,67 @@
           </item>
           <item>
            <property name="text">
-            <string>quinte</string>
+            <string>fifth</string>
            </property>
           </item>
           <item>
            <property name="text">
-            <string>tierce</string>
+            <string>third</string>
            </property>
           </item>
           <item>
            <property name="text">
-            <string>septième</string>
+            <string>seventh</string>
            </property>
           </item>
           <item>
            <property name="text">
-            <string>neuvième</string>
+            <string>ninth</string>
            </property>
           </item>
           <item>
            <property name="text">
-            <string>onzième</string>
+            <string>eleventh</string>
            </property>
           </item>
           <item>
            <property name="text">
-            <string>treizième</string>
+            <string>thirteenth</string>
            </property>
           </item>
           <item>
            <property name="text">
-            <string>quinzième</string>
+            <string>fifteenth</string>
            </property>
           </item>
           <item>
            <property name="text">
-            <string>dix-septième</string>
+            <string>seventeenth</string>
            </property>
           </item>
           <item>
            <property name="text">
-            <string>dix-neuvième</string>
+            <string>nineteenth</string>
            </property>
           </item>
           <item>
            <property name="text">
-            <string>vingt-et-unième</string>
+            <string>twenty-first</string>
            </property>
           </item>
           <item>
            <property name="text">
-            <string>vingt-troisième</string>
+            <string>twenty-third</string>
            </property>
           </item>
           <item>
            <property name="text">
-            <string>vingt-cinquième</string>
+            <string>twenty-fifth</string>
            </property>
           </item>
           <item>
            <property name="text">
-            <string>vingt-septième</string>
+            <string>twenty-seventh</string>
            </property>
           </item>
          </widget>

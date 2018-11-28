@@ -105,8 +105,8 @@ PageSmpl::PageSmpl(QWidget *parent) :
         ui->spinTune->setFont(font);
         ui->pushEgaliser->setFont(font);
         ui->pushEgalRestore->setFont(font);
-        tabWidget->addTab(ui->frameLeft, trUtf8("Informations"));
-        tabWidget->addTab(ui->frameRight, trUtf8("Égaliseur (±15 dB)"));
+        tabWidget->addTab(ui->frameLeft, trUtf8("Information"));
+        tabWidget->addTab(ui->frameRight, trUtf8("Equalizer (±15 dB)"));
         delete ui->label_20;
         delete ui->label_21;
         QGridLayout * layout = (QGridLayout *) ui->frame_5->layout();
@@ -271,9 +271,9 @@ bool PageSmpl::updateInterface(QString editingSource, IdList selectedIds, int di
     }
     else
     {
-        ui->comboType->addItem(trUtf8("droit"));
-        ui->comboType->addItem(trUtf8("gauche"));
-        ui->comboType->addItem(trUtf8("lien"));
+        ui->comboType->addItem(trUtf8("right"));
+        ui->comboType->addItem(trUtf8("left"));
+        ui->comboType->addItem(trUtf8("link"));
         switch (typeLink)
         {
         case rightSample: case RomRightSample:
@@ -311,15 +311,15 @@ bool PageSmpl::updateInterface(QString editingSource, IdList selectedIds, int di
         ui->widgetLinkedTo->initialize(id);
         int nbInst = ui->widgetLinkedTo->getLinkNumber();
         if (nbInst == 0)
-            ui->labelLinkedTo->setText(trUtf8("Échantillon lié à aucun instrument."));
+            ui->labelLinkedTo->setText(trUtf8("Sample not linked to an instrument yet."));
         else if (nbInst == 1)
-            ui->labelLinkedTo->setText(trUtf8("Échantillon lié à l'instrument :"));
+            ui->labelLinkedTo->setText(trUtf8("Sample linked to instrument:"));
         else
-            ui->labelLinkedTo->setText(trUtf8("Échantillon lié aux instruments :"));
+            ui->labelLinkedTo->setText(trUtf8("Sample linked to instruments:"));
     }
 
     if (!ui->pushLecture->isChecked())
-        ui->pushLecture->setText(trUtf8("Lecture"));
+        ui->pushLecture->setText(trUtf8("Play"));
 
     // Reprise de la lecture
     if (this->lectureEnCours)
@@ -349,7 +349,7 @@ void PageSmpl::setStartLoop()
             if (_sf2->get(id, champ_dwStartLoop).dwValue != val.dwValue)
                 _sf2->set(id, champ_dwStartLoop, val);
 
-            // Sample associé ?
+            // Linked sample?
             EltID id2 = getRepercussionID(id);
             if (id2.indexElt != -1)
             {
@@ -412,7 +412,7 @@ void PageSmpl::setEndLoop()
             if (_sf2->get(id, champ_dwEndLoop).dwValue != val.dwValue)
                 _sf2->set(id, champ_dwEndLoop, val);
 
-            // Sample associé ?
+            // Linked sample?
             EltID id2 = getRepercussionID(id);
             if (id2.indexElt != -1)
             {
@@ -494,18 +494,18 @@ void PageSmpl::on_pushFullLength_clicked()
                 triggersMessage = true;
             }
 
-            // Sample associé ?
+            // Linked sample associé?
             EltID id2 = getRepercussionID(id);
             if (id2.indexElt != -1)
             {
                 if (_sf2->isValid(id2))
                 {
-                    // Début de la boucle à 0
+                    // Start loop
                     val.dwValue = 0;
                     if (_sf2->get(id2, champ_dwStartLoop).dwValue != 0)
                         _sf2->set(id2, champ_dwStartLoop, val);
 
-                    // Fin de la boucle correspondant à la fin de l'échantillon
+                    // End loop is the end of the sample
                     length = _sf2->get(id2, champ_dwLength).dwValue - 1;
                     val.dwValue = length;
                     if (_sf2->get(id2, champ_dwEndLoop).dwValue != length)
@@ -537,7 +537,7 @@ void PageSmpl::on_pushFullLength_clicked()
 
     if (triggersMessage)
         QMessageBox::information(this, trUtf8("Information"),
-                                 trUtf8("Modification appliquée avec succès aux différents échantillons"));
+                                 trUtf8("Change successfully applied to the different samples"));
 }
 
 void PageSmpl::setRootKey()
@@ -556,7 +556,7 @@ void PageSmpl::setRootKey()
             if (_sf2->get(id, champ_byOriginalPitch).bValue != val.bValue)
                 _sf2->set(id, champ_byOriginalPitch, val);
 
-            // Sample associé ?
+            // Linked sample?
             EltID id2 = getRepercussionID(id);
             if (id2.indexElt != -1)
             {
@@ -596,7 +596,7 @@ void PageSmpl::setTune()
             if (_sf2->get(id, champ_chPitchCorrection).cValue != val.cValue)
                 _sf2->set(id, champ_chPitchCorrection, val);
 
-            // Sample associé ?
+            // Linked sample?
             EltID id2 = getRepercussionID(id);
             if (id2.indexElt != -1)
             {
@@ -805,9 +805,9 @@ void PageSmpl::setLinkedSmpl(int index)
             // Mise à jour combobox
             ui->comboType->clear();
             ui->comboType->addItem(trUtf8("mono"));
-            ui->comboType->addItem(trUtf8("droit"));
-            ui->comboType->addItem(trUtf8("gauche"));
-            ui->comboType->addItem(trUtf8("lien"));
+            ui->comboType->addItem(trUtf8("right"));
+            ui->comboType->addItem(trUtf8("left"));
+            ui->comboType->addItem(trUtf8("link"));
             ui->comboType->setCurrentIndex(3);
         }
 
@@ -996,7 +996,7 @@ void PageSmpl::lecture()
 {
     if (ui->pushLecture->isChecked())
     {
-        ui->pushLecture->setText(trUtf8("Arrêt"));
+        ui->pushLecture->setText(trUtf8("Stop"));
 
         QList<EltID> listID = _currentIds.getSelectedIds(elementSmpl);
         if (listID.count() == 1)
@@ -1023,7 +1023,7 @@ void PageSmpl::lecture()
     }
     else
     {
-        ui->pushLecture->setText(trUtf8("Lecture"));
+        ui->pushLecture->setText(trUtf8("Play"));
         this->lectureEnCours = false;
         _synth->play(0, 0, 0, -1, 0);
     }
@@ -1061,7 +1061,7 @@ void PageSmpl::lecteurFinished()
     {
         ui->pushLecture->blockSignals(true);
         ui->pushLecture->setChecked(false);
-        ui->pushLecture->setText(trUtf8("Lecture"));
+        ui->pushLecture->setText(trUtf8("Play"));
         ui->pushLecture->blockSignals(false);
         updateSinus();
     }
@@ -1147,7 +1147,7 @@ void PageSmpl::on_pushAutoTune_clicked()
 
     if (triggersMessage)
         QMessageBox::information(this, trUtf8("Information"),
-                                 trUtf8("Modification appliquée avec succès aux différents échantillons"));
+                                 trUtf8("Change successfully applied to the different samples"));
 }
 
 void PageSmpl::autoTune(EltID id, int &pitch, int &correction)

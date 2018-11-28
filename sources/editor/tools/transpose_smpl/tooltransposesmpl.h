@@ -6,6 +6,8 @@
 
 class ToolTransposeSmpl: public AbstractToolIterating
 {
+    Q_OBJECT
+
 public:
     ToolTransposeSmpl();
 
@@ -17,7 +19,7 @@ public:
 
     QString getCategory() const override
     {
-        return trUtf8("Traitement des échantillons");
+        return trUtf8("Sample processing");
     }
 
     /// Internal identifier
@@ -32,7 +34,7 @@ public:
 protected:
     QString getLabelInternal() const override
     {
-        return trUtf8("Transposer");
+        return trUtf8("Transpose");
     }
 };
 

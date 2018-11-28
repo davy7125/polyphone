@@ -30,6 +30,8 @@
 
 class DuplicationTool : QObject
 {
+    Q_OBJECT
+
 public:
     /// Initialize the duplication tool with an instrument or a preset
     DuplicationTool(EltID id);

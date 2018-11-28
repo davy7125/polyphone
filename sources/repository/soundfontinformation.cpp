@@ -19,7 +19,7 @@ SoundfontInformation::SoundfontInformation(int id, QString title) :
 
 QString SoundfontInformation::getAuthor() {
     if (_author.isEmpty())
-        return QObject::trUtf8("Auteur inconnu");
+        return QObject::trUtf8("Unknown author");
     return _author;
 }
 

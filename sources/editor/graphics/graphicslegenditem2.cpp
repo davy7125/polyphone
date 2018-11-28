@@ -63,10 +63,10 @@ void GraphicsLegendItem2::setNewValues(int minKey, int maxKey, int minVel, int m
     _text.clear();
     if (minKey != -1)
     {
-        _text << QObject::trUtf8("Étendue note :") + " " +
+        _text << QObject::trUtf8("Key range:") + " " +
                  ContextManager::keyName()->getKeyName(minKey) + " - " +
                  ContextManager::keyName()->getKeyName(maxKey)
-              << QObject::trUtf8("Étendue vélocité :") + " " +
+              << QObject::trUtf8("Velocity range:") + " " +
                  QString::number(minVel) + " - " +
                  QString::number(maxVel);
     }

@@ -6,6 +6,8 @@
 
 class ToolTrimEnd: public AbstractToolIterating
 {
+    Q_OBJECT
+
 public:
     ToolTrimEnd() : AbstractToolIterating(elementSmpl) {}
 
@@ -17,7 +19,7 @@ public:
 
     QString getCategory() const override
     {
-        return trUtf8("Traitement des échantillons");
+        return trUtf8("Sample processing");
     }
 
     /// Internal identifier
@@ -35,7 +37,7 @@ public:
 protected:
     QString getLabelInternal() const override
     {
-        return trUtf8("Ajuster à la fin de boucle");
+        return trUtf8("Trim to end of loop");
     }
 };
 

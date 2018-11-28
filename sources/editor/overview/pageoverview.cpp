@@ -79,7 +79,7 @@ bool PageOverview::updateInterface(QString editingSource, IdList selectedIds, in
     id.typeElement = _typeElement;
     QList<int> indexes = _sf2->getSiblings(id);
     ui->table->setRowCount(indexes.count());
-    ui->labelInformation->setText(QString::number(indexes.count()) + " " + (indexes.count() > 1 ? trUtf8("éléments") : trUtf8("élément")));
+    ui->labelInformation->setText(QString::number(indexes.count()) + " " + (indexes.count() > 1 ? trUtf8("elements") : trUtf8("element")));
 
     // Preparation (if needed by the overview page)
     this->prepare(id);
