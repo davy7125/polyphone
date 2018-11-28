@@ -42,22 +42,22 @@
      </attribute>
      <row>
       <property name="text">
-       <string>Octave 1</string>
+       <string>Octave #1</string>
       </property>
      </row>
      <row>
       <property name="text">
-       <string>Octave 2</string>
+       <string>Octave #2</string>
       </property>
      </row>
      <row>
       <property name="text">
-       <string>Octave 3</string>
+       <string>Octave #3</string>
       </property>
      </row>
      <row>
       <property name="text">
-       <string>Octave 4</string>
+       <string>Octave #4</string>
       </property>
      </row>
      <column>
@@ -130,7 +130,7 @@
    <item row="1" column="0">
     <widget class="QLabel" name="label_3">
      <property name="text">
-      <string>Premier Do</string>
+      <string>First C</string>
      </property>
     </widget>
    </item>
@@ -184,7 +184,7 @@
    <item row="2" column="0">
     <widget class="QLabel" name="label_20">
      <property name="text">
-      <string>Vélocité par défaut</string>
+      <string>Default velocity</string>
      </property>
     </widget>
    </item>

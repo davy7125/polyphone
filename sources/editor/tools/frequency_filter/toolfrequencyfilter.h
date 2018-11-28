@@ -6,6 +6,8 @@
 
 class ToolFrequencyFilter: public AbstractToolIterating
 {
+    Q_OBJECT
+
 public:
     ToolFrequencyFilter();
 
@@ -17,7 +19,7 @@ public:
 
     QString getCategory() const override
     {
-        return trUtf8("Traitement des échantillons");
+        return trUtf8("Sample processing");
     }
 
     /// Internal identifier
@@ -32,7 +34,7 @@ public:
 protected:
     QString getLabelInternal() const override
     {
-        return trUtf8("Filtrer des fréquences");
+        return trUtf8("Filter frequencies");
     }
 };
 

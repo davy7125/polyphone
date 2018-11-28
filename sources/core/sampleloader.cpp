@@ -44,12 +44,12 @@ IdList SampleLoader::load(QString path, int numSf2, int *replace)
                 if (sm->getQstr(id, champ_name).compare(nom.left(19).append("L")) == 0)
                 {
                     indexL = j;
-                    qStr3 = QObject::trUtf8("L'échantillon « %1L » existe déjà.<br />Que faire ?").arg(nom.left(19));
+                    qStr3 = QObject::trUtf8("Sample \"%1L\" already exists.<br />Replace?").arg(nom.left(19));
                 }
                 else if (sm->getQstr(id, champ_name).compare(nom.left(19).append("R")) == 0)
                 {
                     indexR = j;
-                    qStr3 = QObject::trUtf8("L'échantillon « %1R » existe déjà.<br />Que faire ?").arg(nom.left(19));
+                    qStr3 = QObject::trUtf8("Sample \"%1R\" already exists.<br />Replace?").arg(nom.left(19));
                 }
             }
             else
@@ -57,7 +57,7 @@ IdList SampleLoader::load(QString path, int numSf2, int *replace)
                 if (sm->getQstr(id, champ_name).compare(nom.left(20)) == 0)
                 {
                     indexL = j;
-                    qStr3 = QObject::trUtf8("L'échantillon « %1 » existe déjà.<br />Que faire ?").arg(nom.left(20));
+                    qStr3 = QObject::trUtf8("Sample \"%1\" already exists.<br />Replace?").arg(nom.left(20));
                 }
             }
         }
@@ -70,12 +70,12 @@ IdList SampleLoader::load(QString path, int numSf2, int *replace)
             msgBox.setInformativeText("");
             msgBox.setStandardButtons(QMessageBox::YesAll | QMessageBox::Yes | QMessageBox::SaveAll | QMessageBox::Save |
                                       QMessageBox::NoAll | QMessageBox::No);
-            msgBox.button(QMessageBox::Yes)->setText(QObject::trUtf8("&Remplacer"));
-            msgBox.button(QMessageBox::YesAll)->setText(QObject::trUtf8("R&emplacer tout"));
-            msgBox.button(QMessageBox::Save)->setText(QObject::trUtf8("&Dupliquer"));
-            msgBox.button(QMessageBox::SaveAll)->setText(QObject::trUtf8("D&upliquer tout"));
-            msgBox.button(QMessageBox::No)->setText(QObject::trUtf8("&Ignorer"));
-            msgBox.button(QMessageBox::NoAll)->setText(QObject::trUtf8("I&gnorer tout"));
+            msgBox.button(QMessageBox::Yes)->setText(QObject::trUtf8("&Replace"));
+            msgBox.button(QMessageBox::YesAll)->setText(QObject::trUtf8("R&eplace all"));
+            msgBox.button(QMessageBox::Save)->setText(QObject::trUtf8("&Duplicate"));
+            msgBox.button(QMessageBox::SaveAll)->setText(QObject::trUtf8("D&uplicate all"));
+            msgBox.button(QMessageBox::No)->setText(QObject::trUtf8("&Ignore"));
+            msgBox.button(QMessageBox::NoAll)->setText(QObject::trUtf8("I&gnore all"));
             msgBox.setDefaultButton(QMessageBox::YesAll);
             switch (msgBox.exec())
             {

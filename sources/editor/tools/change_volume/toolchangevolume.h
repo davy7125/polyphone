@@ -6,6 +6,8 @@
 
 class ToolChangeVolume: public AbstractToolIterating
 {
+    Q_OBJECT
+
 public:
     ToolChangeVolume();
 
@@ -17,7 +19,7 @@ public:
 
     QString getCategory() const override
     {
-        return trUtf8("Traitement des échantillons");
+        return trUtf8("Sample processing");
     }
 
     /// Internal identifier
@@ -32,7 +34,7 @@ public:
 protected:
     QString getLabelInternal() const override
     {
-        return trUtf8("Modifier volume");
+        return trUtf8("Change volume");
     }
 };
 

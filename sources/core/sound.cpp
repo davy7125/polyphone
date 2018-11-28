@@ -106,7 +106,7 @@ QByteArray Sound::getData(quint16 wBps)
                     }
                     }break;
                 default:
-                    QMessageBox::warning(_parent, QObject::trUtf8("Attention"), QObject::trUtf8("Fichier non pris en charge."));
+                    QMessageBox::warning(_parent, QObject::trUtf8("Warning"), QObject::trUtf8("File not supported."));
                 }
                 // Fermeture du fichier
                 fi->close();
@@ -158,7 +158,7 @@ QByteArray Sound::getData(quint16 wBps)
                     }
                     }break;
                 default:
-                    QMessageBox::warning(_parent, QObject::trUtf8("Attention"), QObject::trUtf8("Fichier non pris en charge."));
+                    QMessageBox::warning(_parent, QObject::trUtf8("Warning"), QObject::trUtf8("File not supported."));
                 }
                 // Fermeture du fichier
                 fi->close();
@@ -231,7 +231,7 @@ QByteArray Sound::getData(quint16 wBps)
                     }
                     }break;
                 default:
-                    QMessageBox::warning(_parent, QObject::trUtf8("Attention"), QObject::trUtf8("Fichier non pris en charge."));
+                    QMessageBox::warning(_parent, QObject::trUtf8("Warning"), QObject::trUtf8("File not supported."));
                 }
                 // Fermeture du fichier
                 fi->close();
@@ -306,7 +306,7 @@ QByteArray Sound::getData(quint16 wBps)
                     }
                     }break;
                 default:
-                    QMessageBox::warning(_parent, QObject::trUtf8("Attention"), QObject::trUtf8("Fichier non pris en charge."));
+                    QMessageBox::warning(_parent, QObject::trUtf8("Warning"), QObject::trUtf8("File not supported."));
                 }
                 // Fermeture du fichier
                 fi->close();
@@ -315,7 +315,7 @@ QByteArray Sound::getData(quint16 wBps)
         }
         break;
     default:
-        QMessageBox::warning(_parent, QObject::trUtf8("Attention"), "Error in Sound::getData.");
+        QMessageBox::warning(_parent, QObject::trUtf8("Warning"), "Error in Sound::getData.");
     }
     return baRet;
 }
@@ -645,8 +645,8 @@ void Sound::getInfoSoundWav(bool tryFindRootkey)
     QFile fi(fileName);
     if (!fi.exists())
     {
-        QMessageBox::warning(_parent, QObject::trUtf8("Attention"),
-                             QObject::trUtf8("Impossible d'ouvrir le fichier « %1 »").arg(fileName));
+        QMessageBox::warning(_parent, QObject::trUtf8("Warning"),
+                             QObject::trUtf8("Cannot open file \"%1\"").arg(fileName));
         return;
     }
     fi.open(QFile::ReadOnly | QFile::Unbuffered);
@@ -660,7 +660,7 @@ void Sound::getInfoSoundWav(QByteArray& baData, bool tryFindRootkey)
     int taille, pos;
     if (strcmp("RIFF", baData.left(4)))
     {
-        QMessageBox::warning(_parent, QObject::trUtf8("Attention"), QObject::trUtf8("Le fichier est corrompu."));
+        QMessageBox::warning(_parent, QObject::trUtf8("Warning"), QObject::trUtf8("Corrupted file."));
         return;
     }
 
@@ -668,13 +668,13 @@ void Sound::getInfoSoundWav(QByteArray& baData, bool tryFindRootkey)
     taille = readDWORD(baData, 4);
     if (taille == 0)
     {
-        QMessageBox::warning(_parent, QObject::trUtf8("Attention"), QObject::trUtf8("Le fichier est corrompu."));
+        QMessageBox::warning(_parent, QObject::trUtf8("Warning"), QObject::trUtf8("Corrupted file."));
         return;
     }
     taille = taille + 8;
     if (strcmp("WAVE", baData.mid(8, 4)))
     {
-        QMessageBox::warning(_parent, QObject::trUtf8("Attention"), QObject::trUtf8("Le fichier est corrompu."));
+        QMessageBox::warning(_parent, QObject::trUtf8("Warning"), QObject::trUtf8("Corrupted file."));
         return;
     }
     pos = 12;
@@ -693,7 +693,7 @@ void Sound::getInfoSoundWav(QByteArray& baData, bool tryFindRootkey)
             // informations concernant le signal audio
             if (sectionSize < 16 || sectionSize > 40)
             {
-                QMessageBox::warning(_parent, QObject::trUtf8("Attention"), QObject::trUtf8("Le fichier est corrompu."));
+                QMessageBox::warning(_parent, QObject::trUtf8("Warning"), QObject::trUtf8("Corrupted file."));
                 return;
             }
             _info.wFormat = readWORD(baData, pos);
@@ -739,7 +739,7 @@ void Sound::getInfoSoundWav(QByteArray& baData, bool tryFindRootkey)
         if (sectionSize < 0)
         {
             if (!dataOk || !smplOk)
-                QMessageBox::warning(_parent, QObject::trUtf8("Attention"), QObject::trUtf8("Le fichier est corrompu."));
+                QMessageBox::warning(_parent, QObject::trUtf8("Warning"), QObject::trUtf8("Corrupted file."));
             return;
         }
         pos += sectionSize;

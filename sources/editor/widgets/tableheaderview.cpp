@@ -15,11 +15,11 @@ TableHeaderView::TableHeaderView(QWidget *parent) : QHeaderView(Qt::Horizontal, 
 
     // Menu
     _menu = new QMenu(this);
-    _muteAction = _menu->addAction(trUtf8("muet"));
+    _muteAction = _menu->addAction(trUtf8("mute"));
     _muteAction->setCheckable(true);
     connect(_muteAction, SIGNAL(toggled(bool)), this, SLOT(mute(bool)));
 
-    QAction * action = _menu->addAction(trUtf8("tout réactiver"));
+    QAction * action = _menu->addAction(trUtf8("unmute all"));
     connect(action, SIGNAL(triggered(bool)), this, SLOT(unmuteAll(bool)));
 }
 

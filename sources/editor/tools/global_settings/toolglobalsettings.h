@@ -6,6 +6,8 @@
 
 class ToolGlobalSettings: public AbstractToolIterating
 {
+    Q_OBJECT
+
 public:
     ToolGlobalSettings();
 
@@ -17,7 +19,7 @@ public:
 
     QString getCategory() const override
     {
-        return trUtf8("Édition rapide");
+        return trUtf8("Fast editing");
     }
 
     /// Internal identifier
@@ -35,7 +37,7 @@ public:
 protected:
     QString getLabelInternal() const override
     {
-        return trUtf8("Paramètrer en fonction des notes");
+        return trUtf8("Key-based configuration");
     }
 
 private:

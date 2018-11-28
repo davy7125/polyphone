@@ -5,6 +5,8 @@
 
 class ToolRemoveMods: public AbstractToolIterating
 {
+    Q_OBJECT
+
 public:
     ToolRemoveMods();
 
@@ -16,7 +18,7 @@ public:
 
     QString getCategory() const override
     {
-        return trUtf8("Nettoyage");
+        return trUtf8("Clean up");
     }
 
     /// Internal identifier
@@ -53,7 +55,7 @@ public:
 protected:
     QString getLabelInternal() const override
     {
-        return trUtf8("Enlever les modulateurs");
+        return trUtf8("Remove modulators");
     }
 
 private:

@@ -72,7 +72,7 @@ QString SoundfontDescription::getBody(SoundfontDescriptionData * data)
 {
     QString str = data->getText();
     if (str == "")
-        str = "<p>" + trUtf8("Pas de description.") + "</p>";
+        str = "<p>" + trUtf8("No description.") + "</p>";
     else
     {
         // Remove unnecessary data

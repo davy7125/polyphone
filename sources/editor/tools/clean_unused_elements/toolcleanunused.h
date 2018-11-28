@@ -5,6 +5,8 @@
 
 class ToolCleanUnused: public AbstractToolIterating
 {
+    Q_OBJECT
+
 public:
     ToolCleanUnused() : AbstractToolIterating(elementSf2)
     {
@@ -19,7 +21,7 @@ public:
 
     QString getCategory() const override
     {
-        return trUtf8("Nettoyage");
+        return trUtf8("Clean up");
     }
 
     /// Internal identifier
@@ -40,7 +42,7 @@ public:
 protected:
     QString getLabelInternal() const override
     {
-        return trUtf8("Enlever les éléments non utilisés");
+        return trUtf8("Remove unused elements");
     }
 
 private:

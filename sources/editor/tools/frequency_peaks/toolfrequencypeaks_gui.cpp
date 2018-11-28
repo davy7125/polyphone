@@ -57,11 +57,11 @@ ToolFrequencyPeaks_gui::ToolFrequencyPeaks_gui(QWidget *parent) :
 
     // Table header
     ui->table->setColumnCount(6);
-    ui->table->setHorizontalHeaderItem(0, new QTableWidgetItem(trUtf8("Échantillon")));
-    ui->table->setHorizontalHeaderItem(1, new QTableWidgetItem(trUtf8("Pic")));
-    ui->table->setHorizontalHeaderItem(2, new QTableWidgetItem(trUtf8("Intensité")));
-    ui->table->setHorizontalHeaderItem(3, new QTableWidgetItem(trUtf8("Fréquence")));
-    ui->table->setHorizontalHeaderItem(4, new QTableWidgetItem(trUtf8("Note")));
+    ui->table->setHorizontalHeaderItem(0, new QTableWidgetItem(trUtf8("Sample")));
+    ui->table->setHorizontalHeaderItem(1, new QTableWidgetItem(trUtf8("Peak")));
+    ui->table->setHorizontalHeaderItem(2, new QTableWidgetItem(trUtf8("Intensity")));
+    ui->table->setHorizontalHeaderItem(3, new QTableWidgetItem(trUtf8("Frequency")));
+    ui->table->setHorizontalHeaderItem(4, new QTableWidgetItem(trUtf8("Key")));
     ui->table->setHorizontalHeaderItem(5, new QTableWidgetItem(trUtf8("Correction")));
 
     // Connection (do to different threads)
@@ -148,8 +148,8 @@ void ToolFrequencyPeaks_gui::saveParameters(AbstractToolParameters * parameters)
 void ToolFrequencyPeaks_gui::on_pushExport_clicked()
 {
     QString defaultFile = ContextManager::recentFile()->getLastDirectory(RecentFileManager::FILE_TYPE_FREQUENCIES) + "/" + _sf2Name;
-    QString fileName = QFileDialog::getSaveFileName(this, trUtf8("Exporter les pics de fréquence"),
-                                                    defaultFile, trUtf8("Fichier .csv") + " (*.csv)");
+    QString fileName = QFileDialog::getSaveFileName(this, trUtf8("Export peak frequency"),
+                                                    defaultFile, trUtf8("Csv file") + " (*.csv)");
     if (!fileName.isEmpty())
     {
         ContextManager::recentFile()->addRecentFile(RecentFileManager::FILE_TYPE_FREQUENCIES, fileName);

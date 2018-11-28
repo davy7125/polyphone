@@ -80,7 +80,7 @@ void TopRightWidget::userStateChanged(UserManager::ConnectionState state)
         break;
     case UserManager::CONNECTED:
         // Show a warning "not premium"
-        ui->labelWarning->setToolTip(trUtf8("Souscrivez à un compte Premium pour bénéficier de toutes les fonctionnalités !"));
+        ui->labelWarning->setToolTip(trUtf8("Subscribe to a Premium account to get all the features!"));
         ui->labelWarning->setPixmap(ContextManager::theme()->getColoredSvg(":/icons/warning.svg", QSize(16, 16), _colorReplacement));
         ui->labelWarning->show();
         ui->pushUser->hide();
@@ -90,12 +90,12 @@ void TopRightWidget::userStateChanged(UserManager::ConnectionState state)
         // Show the user button
         ui->labelWarning->hide();
         ui->pushUser->show();
-        ui->pushUser->setToolTip(trUtf8("Bienvenue %1").arg(UserManager::getInstance()->getUsername()));
+        ui->pushUser->setToolTip(trUtf8("Welcome %1").arg(UserManager::getInstance()->getUsername()));
         ui->spinner->hide();
         break;
     case UserManager::BANNED:
         // Show an error "banned account"
-        ui->labelWarning->setToolTip(trUtf8("Votre compte a été banni."));
+        ui->labelWarning->setToolTip(trUtf8("Your account has been banned."));
         ui->labelWarning->setPixmap(ContextManager::theme()->getColoredSvg(":/icons/skull.svg", QSize(20, 20), _colorReplacement));
         ui->labelWarning->show();
         ui->pushUser->hide();

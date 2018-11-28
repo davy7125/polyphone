@@ -116,8 +116,8 @@ void SoundfontBrowser::fillFilter()
 
     // License
     ui->filterLicense->initialize();
-    ui->filterLicense->addElement(trUtf8("utilisation commerciale"), (int)SoundfontInformation::LicenseFlag::COMMERCIAL_USE);
-    ui->filterLicense->addElement(trUtf8("partage après modification"), (int)SoundfontInformation::LicenseFlag::SHARE_MODIFIED);
+    ui->filterLicense->addElement(trUtf8("commercial use"), (int)SoundfontInformation::LicenseFlag::COMMERCIAL_USE);
+    ui->filterLicense->addElement(trUtf8("share after editing"), (int)SoundfontInformation::LicenseFlag::SHARE_MODIFIED);
 
     // Properties
     ui->filterSampleSource->initialize();

@@ -138,7 +138,7 @@
              </font>
             </property>
             <property name="text">
-             <string>Modulateurs</string>
+             <string>Modulators</string>
             </property>
            </widget>
           </item>
@@ -175,7 +175,7 @@
                </size>
               </property>
               <property name="toolTip">
-               <string>Ajoute un modulateur</string>
+               <string>Add a modulator</string>
               </property>
               <property name="text">
                <string/>
@@ -201,7 +201,7 @@
                </size>
               </property>
               <property name="toolTip">
-               <string>Supprime un modulateur</string>
+               <string>Delete a modulator</string>
               </property>
               <property name="text">
                <string/>
@@ -221,7 +221,7 @@
                </size>
               </property>
               <property name="toolTip">
-               <string>Copie les modulateurs</string>
+               <string>Copy modulators</string>
               </property>
               <property name="text">
                <string/>
@@ -247,7 +247,7 @@
                </size>
               </property>
               <property name="toolTip">
-               <string>Colle les modulateurs copiés</string>
+               <string>Paste the copied modulators</string>
               </property>
               <property name="text">
                <string/>
@@ -372,7 +372,7 @@
             </column>
             <column>
              <property name="text">
-              <string>Quantité</string>
+              <string>Amount</string>
              </property>
              <property name="font">
               <font>
@@ -397,7 +397,7 @@
           <item row="1" column="1">
            <widget class="QGroupBox" name="groupBox_3">
             <property name="title">
-             <string>Source / Quantité</string>
+             <string>Source / Amount</string>
             </property>
             <layout class="QGridLayout" name="gridLayout_3">
              <property name="leftMargin">
@@ -598,7 +598,7 @@
                 </sizepolicy>
                </property>
                <property name="text">
-                <string>Valeur abs.</string>
+                <string>Abs. value</string>
                </property>
               </widget>
              </item>

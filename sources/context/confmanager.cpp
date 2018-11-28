@@ -124,7 +124,7 @@ QString ConfManager::getMapping(int numOctave, Key key)
     case 0:
         switch (key)
         {
-        case KEY_C_LEFT:  txt = trUtf8("W"); break;
+        case KEY_C_LEFT:  txt = trUtf8("Z"); break;
         case KEY_C_SHARP: txt = trUtf8("S"); break;
         case KEY_D:       txt = trUtf8("X"); break;
         case KEY_D_SHARP: txt = trUtf8("D"); break;
@@ -135,24 +135,24 @@ QString ConfManager::getMapping(int numOctave, Key key)
         case KEY_G_SHARP: txt = trUtf8("H"); break;
         case KEY_A:       txt = trUtf8("N"); break;
         case KEY_A_SHARP: txt = trUtf8("J"); break;
-        case KEY_B:       txt = trUtf8(","); break;
-        case KEY_C_RIGHT: txt = trUtf8(";"); break;
+        case KEY_B:       txt = trUtf8("M"); break;
+        case KEY_C_RIGHT: txt = trUtf8(","); break;
         }
         break;
     case 1:
         switch (key)
         {
-        case KEY_C_LEFT:  txt = trUtf8("A"); break;
-        case KEY_C_SHARP: txt = trUtf8("É"); break;
-        case KEY_D:       txt = trUtf8("Z"); break;
-        case KEY_D_SHARP: txt = trUtf8("\""); break;
+        case KEY_C_LEFT:  txt = trUtf8("Q"); break;
+        case KEY_C_SHARP: txt = trUtf8("2"); break;
+        case KEY_D:       txt = trUtf8("W"); break;
+        case KEY_D_SHARP: txt = trUtf8("3"); break;
         case KEY_E:       txt = trUtf8("E"); break;
         case KEY_F:       txt = trUtf8("R"); break;
-        case KEY_F_SHARP: txt = trUtf8("("); break;
+        case KEY_F_SHARP: txt = trUtf8("5"); break;
         case KEY_G:       txt = trUtf8("T"); break;
-        case KEY_G_SHARP: txt = trUtf8("-"); break;
+        case KEY_G_SHARP: txt = trUtf8("6"); break;
         case KEY_A:       txt = trUtf8("Y"); break;
-        case KEY_A_SHARP: txt = trUtf8("È"); break;
+        case KEY_A_SHARP: txt = trUtf8("7"); break;
         case KEY_B:       txt = trUtf8("U"); break;
         case KEY_C_RIGHT: txt = trUtf8("I"); break;
         }
@@ -160,7 +160,7 @@ QString ConfManager::getMapping(int numOctave, Key key)
     case 2:
         switch (key)
         {
-        case KEY_C_LEFT:  txt = trUtf8("Shift+W"); break;
+        case KEY_C_LEFT:  txt = trUtf8("Shift+Z"); break;
         case KEY_C_SHARP: txt = trUtf8("Shift+S"); break;
         case KEY_D:       txt = trUtf8("Shift+X"); break;
         case KEY_D_SHARP: txt = trUtf8("Shift+D"); break;
@@ -171,24 +171,24 @@ QString ConfManager::getMapping(int numOctave, Key key)
         case KEY_G_SHARP: txt = trUtf8("Shift+H"); break;
         case KEY_A:       txt = trUtf8("Shift+N"); break;
         case KEY_A_SHARP: txt = trUtf8("Shift+J"); break;
-        case KEY_B:       txt = trUtf8("Shift+?"); break;
-        case KEY_C_RIGHT: txt = trUtf8("Shift+."); break;
+        case KEY_B:       txt = trUtf8("Shift+M"); break;
+        case KEY_C_RIGHT: txt = trUtf8("Shift+<"); break;
         }
         break;
     case 3:
         switch (key)
         {
-        case KEY_C_LEFT:  txt = trUtf8("Shift+A"); break;
-        case KEY_C_SHARP: txt = trUtf8("Shift+2"); break;
-        case KEY_D:       txt = trUtf8("Shift+Z"); break;
-        case KEY_D_SHARP: txt = trUtf8("Shift+3"); break;
+        case KEY_C_LEFT:  txt = trUtf8("Shift+Q"); break;
+        case KEY_C_SHARP: txt = trUtf8("Shift+@"); break;
+        case KEY_D:       txt = trUtf8("Shift+W"); break;
+        case KEY_D_SHARP: txt = trUtf8("Shift+#"); break;
         case KEY_E:       txt = trUtf8("Shift+E"); break;
         case KEY_F:       txt = trUtf8("Shift+R"); break;
-        case KEY_F_SHARP: txt = trUtf8("Shift+5"); break;
+        case KEY_F_SHARP: txt = trUtf8("Shift+%"); break;
         case KEY_G:       txt = trUtf8("Shift+T"); break;
-        case KEY_G_SHARP: txt = trUtf8("Shift+6"); break;
+        case KEY_G_SHARP: txt = trUtf8("Shift+^"); break;
         case KEY_A:       txt = trUtf8("Shift+Y"); break;
-        case KEY_A_SHARP: txt = trUtf8("Shift+7"); break;
+        case KEY_A_SHARP: txt = trUtf8("Shift+&"); break;
         case KEY_B:       txt = trUtf8("Shift+U"); break;
         case KEY_C_RIGHT: txt = trUtf8("Shift+I"); break;
         }

@@ -58,7 +58,7 @@
       <cursorShape>PointingHandCursor</cursorShape>
      </property>
      <property name="toolTip">
-      <string>Télécharger</string>
+      <string>Download</string>
      </property>
      <property name="text">
       <string/>

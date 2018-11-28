@@ -32,7 +32,7 @@ void ToolChords::runInternal(SoundfontManager * sm, QWidget * parent, IdList ids
     idInst.typeElement = elementInst;
     if (sm->getSiblings(EltID(elementInstSmpl, idInst.indexSf2, idInst.indexElt)).empty())
     {
-        _warning = trUtf8("L'instrument doit contenir des sons.");
+        _warning = trUtf8("The instrument contains no samples.");
         finished(true);
         return;
     }

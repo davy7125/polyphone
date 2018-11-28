@@ -5,6 +5,8 @@
 
 class ToolAutoDistribution: public AbstractToolIterating
 {
+    Q_OBJECT
+
 public:
     ToolAutoDistribution() : AbstractToolIterating(elementInst) {}
 
@@ -16,7 +18,7 @@ public:
 
     QString getCategory() const override
     {
-        return trUtf8("Édition rapide");
+        return trUtf8("Fast editing");
     }
 
     /// Internal identifier
@@ -31,7 +33,7 @@ public:
 protected:
     QString getLabelInternal() const override
     {
-        return trUtf8("Répartir automatiquement les échantillons");
+        return trUtf8("Automatically link the samples");
     }
 };
 

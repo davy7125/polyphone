@@ -6,6 +6,8 @@
 
 class ToolLinkSample: public AbstractToolIterating
 {
+    Q_OBJECT
+
 public:
     ToolLinkSample() : AbstractToolIterating(elementSmpl)
     {
@@ -20,7 +22,7 @@ public:
 
     QString getCategory() const override
     {
-        return trUtf8("Échantillons stéréo");
+        return trUtf8("Stereo samples");
     }
 
     /// Internal identifier
@@ -38,7 +40,7 @@ public:
 protected:
     QString getLabelInternal() const override
     {
-        return trUtf8("Trouver un lien");
+        return trUtf8("Find a link");
     }
 
 private:

@@ -12,5 +12,5 @@ void OutputNotSupported::processInternal(QString fileName, SoundfontManager * sm
 
     // File not supported
     success = false;
-    error = trUtf8("Le format du fichier n'est pas supporté.");
+    error = trUtf8("This file format is not supported.");
 }

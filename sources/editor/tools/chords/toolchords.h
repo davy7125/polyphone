@@ -36,7 +36,7 @@ signals:
 protected:
     QString getLabelInternal() const override
     {
-        return trUtf8("Créer des accords");
+        return trUtf8("Create chords");
     }
 
     /// Return true if the tool can be used on the specified ids

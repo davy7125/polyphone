@@ -5,6 +5,8 @@
 
 class ToolDivisionDuplication: public AbstractToolIterating
 {
+    Q_OBJECT
+    
 public:
     ToolDivisionDuplication();
 
@@ -34,7 +36,7 @@ public:
 protected:
     QString getLabelInternal() const override
     {
-        return trUtf8("Dupliquer les divisions");
+        return trUtf8("Division duplication");
     }
 
     /// Get the warning to display after the tool is run

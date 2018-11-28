@@ -47,15 +47,15 @@ QString ToolAutoLoop::getWarning()
     {
 
         if (_samplesNotLooped.size() == 1)
-            txt = trUtf8("L'échantillon « %1 » n'a pas pu être bouclé.").arg(_samplesNotLooped.first()) + "<br/>";
+            txt = trUtf8("Failed to loop sample \"%1\".").arg(_samplesNotLooped.first()) + "<br/>";
         else
         {
-            txt = trUtf8("Les échantillons suivants n'ont pas pu être bouclés :") + "<ul>";
+            txt = trUtf8("The following samples couldn't be looped:") + "<ul>";
             for (int i = 0; i < _samplesNotLooped.size(); i++)
                 txt += "<li>" + _samplesNotLooped.at(i) + "</li>";
             txt += "</ul>";
         }
-        txt += trUtf8("Causes possibles : trop court ou trop turbulent.");
+        txt += trUtf8("Possible reasons: too short or too turbulent.");
     }
 
     return txt;

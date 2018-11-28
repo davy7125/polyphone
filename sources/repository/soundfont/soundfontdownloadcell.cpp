@@ -41,14 +41,14 @@ QString SoundfontDownloadCell::getSize(SoundfontDownloadData * data)
 {
     qint64 bytes = data->getSize();
     if (bytes < 1024)
-        return QString::number(bytes) + " " + trUtf8("octets");
+        return QString::number(bytes) + " " + trUtf8("bytes");
     if (bytes < 1024 * 1024)
-        return QString::number((double)bytes / 1024, 'f', 2) + " " + trUtf8("ko", "kilobytes");
+        return QString::number((double)bytes / 1024, 'f', 2) + " " + trUtf8("kB", "kilobytes");
     if (bytes < 1024 * 1024 * 1024)
-        return QString::number((double)bytes / 1024 / 1024, 'f', 2) + " " + trUtf8("Mo", "megabytes");
+        return QString::number((double)bytes / 1024 / 1024, 'f', 2) + " " + trUtf8("MB", "megabytes");
     if (bytes / 1024 < 1024 * 1024 * 1024)
-        return QString::number((double)bytes / 1024 / 1024 / 1024, 'f', 2) + " " + trUtf8("Go", "gigabytes");
-    return QString::number((double)bytes / 1024 / 1024 / 1024 / 1024, 'f', 2) + " " + trUtf8("To", "terabytes");
+        return QString::number((double)bytes / 1024 / 1024 / 1024, 'f', 2) + " " + trUtf8("GB", "gigabytes");
+    return QString::number((double)bytes / 1024 / 1024 / 1024 / 1024, 'f', 2) + " " + trUtf8("TB", "terabytes");
 }
 
 QString SoundfontDownloadCell::getDate(SoundfontDownloadData * data)

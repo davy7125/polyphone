@@ -68,7 +68,7 @@
       <bool>false</bool>
      </property>
      <property name="toolTip">
-      <string>Espace utilisateur</string>
+      <string>User area</string>
      </property>
      <property name="text">
       <string/>
@@ -90,7 +90,7 @@
       <cursorShape>PointingHandCursor</cursorShape>
      </property>
      <property name="toolTip">
-      <string>Menu principal</string>
+      <string>Main menu</string>
      </property>
      <property name="text">
       <string notr="true"/>

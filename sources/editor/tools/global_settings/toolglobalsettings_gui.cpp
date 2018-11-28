@@ -171,12 +171,12 @@ void ToolGlobalSettings_gui::on_comboPattern_currentIndexChanged(int index)
 {
     if (index == 3 || index == 4)
     {
-        ui->label_6->setText(trUtf8("Raideur"));
+        ui->label_6->setText(trUtf8("Stiffness"));
         ui->doubleSpinParam->setEnabled(true);
     }
     else if (index == 5)
     {
-        ui->label_6->setText(trUtf8("Répartition"));
+        ui->label_6->setText(trUtf8("Distribution"));
         ui->doubleSpinParam->setEnabled(true);
     }
     else

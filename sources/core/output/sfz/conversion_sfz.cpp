@@ -48,7 +48,7 @@ QString ConversionSfz::convert(QString dirPath, EltID idSf2, bool presetPrefix, 
         dirPath += "-" + QString::number(i);
     }
     if (!QDir().mkdir(dirPath))
-        return trUtf8("Impossible de créer le dossier « %1 »").arg(dirPath);
+        return trUtf8("Cannot create directory \"%1\"").arg(dirPath);
 
     // Plusieurs banques sont utilisées ?
     int numBankUnique = -1;
@@ -253,7 +253,7 @@ void ConversionSfz::exportPrst(QString dir, EltID id, bool presetPrefix)
 QString ConversionSfz::getPathSfz(QString dir, QString name)
 {
     if (name.isEmpty())
-        name = trUtf8("sans nom");
+        name = trUtf8("untitled");
     name = escapeStr(name);
     QFile file(dir + "/" + name + ".sfz");
     QDir dossier(dir + "/" + name);
@@ -537,49 +537,49 @@ int ConversionSfz::lastLettersToRemove(QString str1, QString str2)
 
 QString ConversionSfz::getDirectoryName(int numPreset)
 {
-    QString strRet = trUtf8("autre");
+    QString strRet = trUtf8("other");
 
     if (numPreset < 8)
         strRet = "000-007 " + trUtf8("Piano");
     else if (numPreset < 16)
-        strRet = "008-015 " + trUtf8("Percussions chromatiques");
+        strRet = "008-015 " + trUtf8("Chromatic percussion");
     else if (numPreset < 24)
-        strRet = "016-023 " + trUtf8("Orgues");
+        strRet = "016-023 " + trUtf8("Organ");
     else if (numPreset < 32)
-        strRet = "024-031 " + trUtf8("Guitares");
+        strRet = "024-031 " + trUtf8("Guitar");
     else if (numPreset < 40)
-        strRet = "032-039 " + trUtf8("Basses");
+        strRet = "032-039 " + trUtf8("Bass");
     else if (numPreset < 48)
-        strRet = "040-047 " + trUtf8("Cordes");
+        strRet = "040-047 " + trUtf8("Strings");
     else if (numPreset < 56)
-        strRet = "048-055 " + trUtf8("Orchestre");
+        strRet = "048-055 " + trUtf8("Ensemble");
     else if (numPreset < 64)
-        strRet = "056-063 " + trUtf8("Cuivres");
+        strRet = "056-063 " + trUtf8("Brass");
     else if (numPreset < 72)
-        strRet = "064-071 " + trUtf8("Instrument à anches");
+        strRet = "064-071 " + trUtf8("Reed");
     else if (numPreset < 80)
-        strRet = "072-079 " + trUtf8("Flûtes");
+        strRet = "072-079 " + trUtf8("Pipe");
     else if (numPreset < 88)
-        strRet = "080-087 " + trUtf8("Synthétiseur solo");
+        strRet = "080-087 " + trUtf8("Synth lead");
     else if (numPreset < 96)
-        strRet = "088-095 " + trUtf8("Nappes de synthétiseur");
+        strRet = "088-095 " + trUtf8("Synth pad");
     else if (numPreset < 104)
-        strRet = "096-103 " + trUtf8("Effets de synthétiseur");
+        strRet = "096-103 " + trUtf8("Synth effects");
     else if (numPreset < 112)
-        strRet = "104-111 " + trUtf8("Instruments ethniques");
+        strRet = "104-111 " + trUtf8("Ethnic");
     else if (numPreset < 120)
-        strRet = "112-119 " + trUtf8("Percussions");
+        strRet = "112-119 " + trUtf8("Percussive");
     else if (numPreset < 128)
-        strRet = "120-127 " + trUtf8("Effets sonores");
+        strRet = "120-127 " + trUtf8("Sound effects");
     else if (numPreset == 128)
-        strRet = trUtf8("Kits de percussion");
+        strRet = trUtf8("Percussion kit");
 
     return strRet;
 }
 
 QString ConversionSfz::getDrumCategory(int numPreset)
 {
-    QString strRet = trUtf8("autre");
+    QString strRet = trUtf8("other");
 
     if (numPreset < 8)
         strRet = "000-007 Standard kit";

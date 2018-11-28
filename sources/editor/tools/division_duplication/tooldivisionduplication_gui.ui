@@ -116,14 +116,14 @@
    <item row="1" column="0" colspan="4">
     <widget class="QCheckBox" name="checkForEachVelocityRange">
      <property name="text">
-      <string>Une division pour chaque étendue de vélocité</string>
+      <string>A division for each velocity range</string>
      </property>
     </widget>
    </item>
    <item row="0" column="0" colspan="4">
     <widget class="QCheckBox" name="checkForEachKey">
      <property name="text">
-      <string>Une division pour chaque note</string>
+      <string>A division for each key</string>
      </property>
      <property name="checked">
       <bool>true</bool>

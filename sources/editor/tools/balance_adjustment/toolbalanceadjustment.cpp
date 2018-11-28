@@ -93,7 +93,7 @@ QString ToolBalanceAdjustment::getWarning()
 
     if (!_monoSamplesInError.isEmpty())
     {
-        txt = trUtf8("Cet outil ne s'applique pas sur les échantillons mono :");
+        txt = trUtf8("This tool cannot be used with mono samples:");
         txt += "<ul>";
         for (int i = 0; i < _monoSamplesInError.size(); i++)
             txt += "<li>" + _monoSamplesInError.at(i) + "</li>";

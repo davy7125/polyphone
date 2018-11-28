@@ -7,6 +7,8 @@
 
 class ToolSampleExport: public AbstractToolIterating
 {
+    Q_OBJECT
+
 public:
     ToolSampleExport() : AbstractToolIterating(elementSmpl)
     {
@@ -21,7 +23,7 @@ public:
 
     QString getCategory() const override
     {
-        return trUtf8("Fichiers");
+        return trUtf8("Files");
     }
 
     /// Internal identifier
@@ -39,7 +41,7 @@ public:
 protected:
     QString getLabelInternal() const override
     {
-        return trUtf8("Exporter au format wav");
+        return trUtf8("Wav export");
     }
 
 private:

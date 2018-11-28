@@ -14,7 +14,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Bienvenue</string>
+   <string>Welcome</string>
   </property>
   <property name="windowIcon">
    <iconset resource="../resources.qrc">
@@ -84,7 +84,7 @@
      <item>
       <widget class="QPushButton" name="pushDonate">
        <property name="text">
-        <string>Faire un &amp;don</string>
+        <string>&amp;Donate</string>
        </property>
       </widget>
      </item>

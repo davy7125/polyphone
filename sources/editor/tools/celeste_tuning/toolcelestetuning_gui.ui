@@ -17,7 +17,7 @@
    <item row="2" column="0" colspan="2">
     <widget class="QLabel" name="label_4">
      <property name="text">
-      <string>Division à l'octave suivante</string>
+      <string>Division to the next octave</string>
      </property>
     </widget>
    </item>
@@ -57,7 +57,7 @@
    <item row="1" column="0" colspan="2">
     <widget class="QLabel" name="label_2">
      <property name="text">
-      <string>Le signe définit le sens du désaccordage.</string>
+      <string>The algebraic sign determines the tuning direction.</string>
      </property>
     </widget>
    </item>

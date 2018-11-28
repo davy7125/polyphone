@@ -5,6 +5,8 @@
 
 class ToolTranspose: public AbstractToolIterating
 {
+    Q_OBJECT
+
 public:
     ToolTranspose();
 
@@ -16,7 +18,7 @@ public:
 
     QString getCategory() const override
     {
-        return trUtf8("Édition rapide");
+        return trUtf8("Fast editing");
     }
 
     /// Internal identifier
@@ -34,7 +36,7 @@ public:
 protected:
     QString getLabelInternal() const override
     {
-        return trUtf8("Transposer");
+        return trUtf8("Transpose");
     }
 
     /// Get the warning to display after the tool is run

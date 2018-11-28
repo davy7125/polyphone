@@ -107,7 +107,7 @@ void GraphicsLegendItem::setIds(QList<EltID> ids, int selectionIndex, int select
             minKey = range.byLo;
             maxKey = range.byHi;
         }
-        _text << QObject::trUtf8("Étendue note :") + " " +
+        _text << QObject::trUtf8("Key range:") + " " +
                  ContextManager::keyName()->getKeyName(minKey) + " - " +
                  ContextManager::keyName()->getKeyName(maxKey);
 
@@ -126,7 +126,7 @@ void GraphicsLegendItem::setIds(QList<EltID> ids, int selectionIndex, int select
             minVel = range.byLo;
             maxVel = range.byHi;
         }
-        _text << QObject::trUtf8("Étendue vélocité :") + " " +
+        _text << QObject::trUtf8("Velocity range:") + " " +
                  QString::number(minVel) + " - " +
                  QString::number(maxVel);
     }

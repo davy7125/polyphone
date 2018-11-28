@@ -7,7 +7,7 @@
 #include <QWidgetAction>
 
 ToolMenu::ToolMenu(QWidget * parent) : QMenu(parent),
-    _toolFactory(new ToolFactory(parent))
+    _toolFactory(new ToolFactory())
 {
     // Colors for the separators
     _separatorTextColor = ContextManager::theme()->getColor(ThemeManager::LIST_BACKGROUND).name();

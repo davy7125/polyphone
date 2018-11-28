@@ -7,6 +7,8 @@
 
 class ToolBalanceAdjustment: public AbstractToolIterating
 {
+    Q_OBJECT
+
 public:
     ToolBalanceAdjustment() : AbstractToolIterating(elementSmpl) {}
 
@@ -18,7 +20,7 @@ public:
 
     QString getCategory() const override
     {
-        return trUtf8("Échantillons stéréo");
+        return trUtf8("Stereo samples");
     }
 
     /// Internal identifier
@@ -36,7 +38,7 @@ public:
 protected:
     QString getLabelInternal() const override
     {
-        return trUtf8("Équilibrer la balance");
+        return trUtf8("Balance adjustement");
     }
 
     /// Get the warning to display after the tool is run

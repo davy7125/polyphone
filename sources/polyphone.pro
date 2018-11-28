@@ -17,7 +17,7 @@ DEFINES += FINAL=false
 
 # List to complete if other translations are wished
 # Format: polyphone_XX.ts where XX is the language code
-TRANSLATIONS = polyphone_en.ts \
+TRANSLATIONS = polyphone_fr.ts \
     polyphone_es.ts \
     polyphone_it.ts \
     polyphone_sr.ts \

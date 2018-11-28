@@ -45,7 +45,7 @@ DialogChangeLog::DialogChangeLog(QWidget *parent) :
     ui->labelLogo->setPixmap(ContextManager::theme()->getColoredSvg(":/misc/logo.svg", QSize(100, 100), replacement));
 
     // Version
-    ui->labelTitle->setText(trUtf8("Merci d'avoir installé") + "\n" +
+    ui->labelTitle->setText(trUtf8("Thank you for having installed") + "\n" +
                             trUtf8("Polyphone") + " " + trUtf8("version") + " " +
                             (qAbs(VERSION) == VERSION ? QString::number(VERSION, 'f', 1) : QString::number(VERSION)) +
                             (FINAL ? "" : " unreleased"));
@@ -83,13 +83,13 @@ DialogChangeLog::DialogChangeLog(QWidget *parent) :
     // Prepare and fill text
     QString text;
     if (!listNew.empty())
-        text += "<h2><font color='" + highlightColor.name() +  "'>" + trUtf8("Ce qu'il y a de nouveau") + "</font></h2>" +
+        text += "<h2><font color='" + highlightColor.name() +  "'>" + trUtf8("What is new") + "</font></h2>" +
                 " &#9679; " + listNew.join("<br/> &#9679; ");
     if (!listImprovement.empty())
-        text += "<h2><font color='" + highlightColor.name() +  "'>" + trUtf8("Ce qui est amélioré") + "</font></h2>" +
+        text += "<h2><font color='" + highlightColor.name() +  "'>" + trUtf8("What has improved") + "</font></h2>" +
                 " &#9679; " + listImprovement.join("<br/> &#9679; ");
     if (!listFix.empty())
-        text += "<h2><font color='" + highlightColor.name() +  "'>" + trUtf8("Ce qui est résolu") + "</font></h2>" +
+        text += "<h2><font color='" + highlightColor.name() +  "'>" + trUtf8("What is fixed") + "</font></h2>" +
                 " &#9679; " + listFix.join("<br/> &#9679; ");
     ui->textChangelog->setText(text);
 }

@@ -81,7 +81,7 @@
          </font>
         </property>
         <property name="text">
-         <string>La liste est vide</string>
+         <string>Empty list</string>
         </property>
         <property name="alignment">
          <set>Qt::AlignCenter</set>

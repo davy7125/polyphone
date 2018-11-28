@@ -9,6 +9,8 @@ class Sf2PdtaPart;
 
 class InputSf2 : public AbstractInput
 {
+    Q_OBJECT
+    
 public:
     InputSf2();
 
