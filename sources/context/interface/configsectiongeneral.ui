@@ -144,7 +144,7 @@
          </font>
         </property>
         <property name="text">
-         <string>Midi input</string>
+         <string>MIDI input</string>
         </property>
        </widget>
       </item>

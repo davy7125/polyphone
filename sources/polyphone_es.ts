@@ -1178,7 +1178,8 @@
     </message>
     <message>
         <location filename="context/interface/configsectiongeneral.ui" line="147"/>
-        <source>Midi input</source>
+        <source>MIDI input</source>
+        <oldsource>Midi input</oldsource>
         <translation type="unfinished">Entrada MIDI</translation>
     </message>
     <message>
