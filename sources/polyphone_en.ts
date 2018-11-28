@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="en_US">
+<TS version="2.1" language="en_US">
 <context>
     <name>AbstractInput</name>
-    <message utf8="true">
+    <message>
         <location filename="core/input/abstractinput.cpp" line="18"/>
         <source>pas encore traité</source>
         <translation>not processed yet</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/input/abstractinput.cpp" line="56"/>
         <source>Ce fichier est déjà ouvert.</source>
         <oldsource>Le fichier est déjà ouvert</oldsource>
@@ -17,7 +17,7 @@
 </context>
 <context>
     <name>AbstractOutput</name>
-    <message utf8="true">
+    <message>
         <location filename="core/output/abstractoutput.cpp" line="16"/>
         <source>pas encore traité</source>
         <translation>not processed yet</translation>
@@ -48,17 +48,17 @@
         <source>inconnu</source>
         <translation>unknown</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/types/attribute.cpp" line="517"/>
         <source>Offset début échantillon</source>
         <translation>Sample start offset</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/types/attribute.cpp" line="520"/>
         <source>Offset fin échantillon</source>
         <translation>Sample end offset</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/types/attribute.cpp" line="523"/>
         <source>Offset début boucle</source>
         <translation>Loop start offset</translation>
@@ -68,28 +68,28 @@
         <source>Offset fin boucle</source>
         <translation>Loop end offset</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/types/attribute.cpp" line="529"/>
         <location filename="core/types/attribute.cpp" line="650"/>
         <source>Offset début échantillon (× 32768)</source>
         <translation>Loop start offset (× 32768)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/types/attribute.cpp" line="532"/>
         <source>Mod LFO → note (c)</source>
         <translation>Mod LFO → pitch (c)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/types/attribute.cpp" line="535"/>
         <source>Vib LFO → note (c)</source>
         <translation>Vib LFO → pitch (c)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/types/attribute.cpp" line="538"/>
         <source>Mod env → note (c)</source>
         <translation>Mod env → pitch (c)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/types/attribute.cpp" line="541"/>
         <source>Filtre, coupure (×)</source>
         <translation>Filter, cutoff (×)</translation>
@@ -99,27 +99,27 @@
         <source>Filtre, coupure (Hz)</source>
         <translation>Filter, cutoff (Hz)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/types/attribute.cpp" line="545"/>
         <source>Filtre, résonance (dB)</source>
         <translation>Filter, resonance (dB)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/types/attribute.cpp" line="548"/>
         <source>Mod LFO → filtre (c)</source>
         <translation>Mod LFO → filter (c)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/types/attribute.cpp" line="551"/>
         <source>Mod env → filtre (c)</source>
         <translation>Mod env → filter (c)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/types/attribute.cpp" line="554"/>
         <source>Offset fin échantillon (× 32768)</source>
         <translation>Sample end offset (× 32768)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/types/attribute.cpp" line="557"/>
         <source>Mod LFO → volume (dB)</source>
         <translation>Mod LFO → volume (dB)</translation>
@@ -129,7 +129,7 @@
         <source>Chorus (%)</source>
         <translation>Chorus (%)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/types/attribute.cpp" line="563"/>
         <source>Réverbération (%)</source>
         <translation>Reverb (%)</translation>
@@ -144,7 +144,7 @@
         <source>Balance [-50;50]</source>
         <translation>Pan [-50;50]</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/types/attribute.cpp" line="570"/>
         <source>Mod LFO delay (×)</source>
         <translation>Mod LFO delay (×)</translation>
@@ -154,7 +154,7 @@
         <source>Mod LFO delay (s)</source>
         <translation>Mod LFO delay (s)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/types/attribute.cpp" line="574"/>
         <source>Mod LFO freq (×)</source>
         <translation>Mod LFO freq (×)</translation>
@@ -164,7 +164,7 @@
         <source>Mod LFO freq (Hz)</source>
         <translation>Mod LFO freq (Hz)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/types/attribute.cpp" line="578"/>
         <source>Vib LFO delay (×)</source>
         <translation>Vib LFO delay (×)</translation>
@@ -174,7 +174,7 @@
         <source>Vib LFO delay (s)</source>
         <translation>Vib LFO delay (s)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/types/attribute.cpp" line="582"/>
         <source>Vib LFO freq (×)</source>
         <translation>Vib LFO freq (×)</translation>
@@ -184,7 +184,7 @@
         <source>Vib LFO freq (Hz)</source>
         <translation>Vib LFO freq (Hz)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/types/attribute.cpp" line="586"/>
         <source>Mod env delay (×)</source>
         <translation>Mod env delay (×)</translation>
@@ -194,7 +194,7 @@
         <source>Mod env delay (s)</source>
         <translation>Mod env delay (s)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/types/attribute.cpp" line="590"/>
         <source>Mod env attack (×)</source>
         <translation>Mod env attack (×)</translation>
@@ -204,7 +204,7 @@
         <source>Mod env attack (s)</source>
         <translation>Mod env attack (s)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/types/attribute.cpp" line="594"/>
         <source>Mod env hold (×)</source>
         <translation>Mod env hold (×)</translation>
@@ -214,7 +214,7 @@
         <source>Mod env hold (s)</source>
         <translation>Mod env hold (s)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/types/attribute.cpp" line="598"/>
         <source>Mod env decay (×)</source>
         <translation>Mod env decay (×)</translation>
@@ -229,7 +229,7 @@
         <source>Mod env sustain (%)</source>
         <translation>Mod env sustain (%)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/types/attribute.cpp" line="605"/>
         <source>Mod env release (×)</source>
         <translation>Mod env release (×)</translation>
@@ -239,17 +239,17 @@
         <source>Mod env release (s)</source>
         <translation>Mod env release (s)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/types/attribute.cpp" line="609"/>
         <source>Note → Mod env hold (c)</source>
         <translation>Key → Mod env hold (c)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/types/attribute.cpp" line="612"/>
         <source>Note → Mod env decay (c)</source>
         <translation>Key → Mod env decay (c)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/types/attribute.cpp" line="615"/>
         <source>Vol env delay (×)</source>
         <translation>Vol env delay (×)</translation>
@@ -259,7 +259,7 @@
         <source>Vol env delay (s)</source>
         <translation>Vol env delay (s)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/types/attribute.cpp" line="619"/>
         <source>Vol env attack (×)</source>
         <translation>Vol env attack (×)</translation>
@@ -269,7 +269,7 @@
         <source>Vol env attack (s)</source>
         <translation>Vol env attack (s)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/types/attribute.cpp" line="623"/>
         <source>Vol env hold (×)</source>
         <translation>Vol env hold (×)</translation>
@@ -279,7 +279,7 @@
         <source>Vol env hold (s)</source>
         <translation>Vol env hold (s)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/types/attribute.cpp" line="627"/>
         <source>Vol env decay (×)</source>
         <translation>Vol env decay (×)</translation>
@@ -294,7 +294,7 @@
         <source>Vol env sustain (dB)</source>
         <translation>Vol env sustain (dB)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/types/attribute.cpp" line="634"/>
         <source>Vol env release (×)</source>
         <translation>Vol env release (×)</translation>
@@ -304,22 +304,22 @@
         <source>Vol env release (s)</source>
         <translation>Vol env release (s)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/types/attribute.cpp" line="638"/>
         <source>Note → Vol env hold (c)</source>
         <translation>Key → Vol env hold (c)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/types/attribute.cpp" line="641"/>
         <source>Note → Vol env decay (c)</source>
         <translation>Key → Vol env decay (c)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/types/attribute.cpp" line="644"/>
         <source>Étendue note</source>
         <translation>Key range</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/types/attribute.cpp" line="647"/>
         <source>Étendue vélocité</source>
         <translation>Velocity range</translation>
@@ -329,17 +329,17 @@
         <source>Note fixe</source>
         <translation>Fixed key</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/types/attribute.cpp" line="656"/>
         <source>Vélocité fixe</source>
         <translation>Fixed velocity</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/types/attribute.cpp" line="659"/>
         <source>Atténuation (dB)</source>
         <translation>Attenuation (dB)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/types/attribute.cpp" line="662"/>
         <source>Offset fin boucle (× 32768)</source>
         <translation>Loop end offset (× 32768)</translation>
@@ -349,7 +349,7 @@
         <source>Accordage (demi-tons)</source>
         <translation>Tuning (semi-tones)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/types/attribute.cpp" line="668"/>
         <source>Accordage (centièmes)</source>
         <translation>Tuning (cents)</translation>
@@ -359,7 +359,7 @@
         <source>Lecture en boucle</source>
         <translation>Loop playback</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/types/attribute.cpp" line="674"/>
         <source>Réglage de tonalité</source>
         <translation>Scale tuning</translation>
@@ -455,7 +455,7 @@
         <source>A</source>
         <translation>Q</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="context/confmanager.cpp" line="146"/>
         <source>É</source>
         <translation>2</translation>
@@ -500,7 +500,7 @@
         <source>Y</source>
         <translation>Y</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="context/confmanager.cpp" line="155"/>
         <source>È</source>
         <translation>7</translation>
@@ -648,7 +648,7 @@
 </context>
 <context>
     <name>ConfigPanel</name>
-    <message utf8="true">
+    <message>
         <location filename="context/interface/configpanel.ui" line="81"/>
         <source>Général</source>
         <translation>General</translation>
@@ -676,7 +676,7 @@
 </context>
 <context>
     <name>ConfigSectionGeneral</name>
-    <message utf8="true">
+    <message>
         <location filename="context/interface/configsectiongeneral.ui" line="26"/>
         <source>Entrées / sorties</source>
         <translation>Input / Output</translation>
@@ -691,7 +691,7 @@
         <source>Taille du tampon</source>
         <translation>Buffer size</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="context/interface/configsectiongeneral.ui" line="147"/>
         <source>Entrée midi</source>
         <translation>Midi input</translation>
@@ -706,22 +706,22 @@
         <source>Import fichiers wav</source>
         <translation>Wav file import</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="context/interface/configsectiongeneral.ui" line="191"/>
         <source>répercuter les modifications</source>
         <translation>change linked sample</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="context/interface/configsectiongeneral.ui" line="204"/>
         <source>ajuster à la boucle</source>
         <translation>trim to loop</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="context/interface/configsectiongeneral.ui" line="217"/>
         <source>Édition stéréo</source>
         <translation>Stereo editing</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="context/interface/configsectiongeneral.ui" line="230"/>
         <source>enlever le blanc au départ</source>
         <translation>remove blank at start</translation>
@@ -739,47 +739,47 @@
         <source>Nom des notes</source>
         <translation>Key names</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="context/interface/configsectioninterface.ui" line="67"/>
         <source>Do central → 60, puis 61</source>
         <translation>Middle C → 60, then 61</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="context/interface/configsectioninterface.ui" line="72"/>
         <source>Do central → C3, puis C♯3</source>
         <translation>Middle C → C3, then C♯3</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="context/interface/configsectioninterface.ui" line="77"/>
         <source>Do central → C3, puis D♭3</source>
         <translation>Middle C → C3, then D♭3</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="context/interface/configsectioninterface.ui" line="82"/>
         <source>Do central → C4, puis C♯4</source>
         <translation>Middle C → C4, then C♯4</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="context/interface/configsectioninterface.ui" line="87"/>
         <source>Do central → C4, puis D♭4</source>
         <translation>Middle C → C4, then D♭4</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="context/interface/configsectioninterface.ui" line="92"/>
         <source>Do central → C5, puis C♯5</source>
         <translation>Middle C → C5, then C♯5</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="context/interface/configsectioninterface.ui" line="97"/>
         <source>Do central → C5, puis D♭5</source>
         <translation>Middle C → C5, then D♭5</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="context/interface/configsectioninterface.ui" line="126"/>
         <source>Thème</source>
         <translation>Theme</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="context/interface/configsectioninterface.ui" line="232"/>
         <source>Sélection</source>
         <translation>Selection</translation>
@@ -797,7 +797,7 @@
         <source>Texte</source>
         <translation>Text</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="context/interface/configsectioninterface.ui" line="305"/>
         <source>Fenêtre</source>
         <translation>Window</translation>
@@ -815,7 +815,7 @@
         <source>Bouton</source>
         <translation>Button</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="context/interface/configsectioninterface.ui" line="624"/>
         <source>Thème de couleur</source>
         <translation>Color theme</translation>
@@ -825,7 +825,7 @@
         <source>Liste et tableau</source>
         <translation>List and table</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="context/interface/configsectioninterface.ui" line="663"/>
         <source>La modification sera prise en compte lors du prochain démarrage du logiciel.</source>
         <translation>This modification will be applied during the next start of the software.</translation>
@@ -871,7 +871,7 @@
         <source>Premier Do</source>
         <translation>First C</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="context/interface/configsectionkeyboard.ui" line="187"/>
         <source>Vélocité par défaut</source>
         <translation>Default velocity</translation>
@@ -884,7 +884,7 @@
         <source>Nom d&apos;utilisateur</source>
         <translation>Username</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="context/interface/configsectionrepository.ui" line="67"/>
         <source>Créer un compte</source>
         <translation>Create an account</translation>
@@ -906,7 +906,7 @@ Premium!</translation>
         <source>Mot de passe</source>
         <translation>Password</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="context/interface/configsectionrepository.ui" line="274"/>
         <source>Dossier des téléchargements</source>
         <translation>Download directory</translation>
@@ -927,27 +927,27 @@ Premium!</translation>
         <source>Annuler</source>
         <translation>Cancel</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="context/interface/configsectionrepository.cpp" line="91"/>
         <location filename="context/interface/configsectionrepository.cpp" line="97"/>
         <source>Connecté</source>
         <translation>Connected</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="context/interface/configsectionrepository.cpp" line="94"/>
         <location filename="context/interface/configsectionrepository.cpp" line="100"/>
         <location filename="context/interface/configsectionrepository.cpp" line="105"/>
         <source>Se déconnecter</source>
         <translation>Log out</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="context/interface/configsectionrepository.cpp" line="170"/>
         <location filename="context/interface/configsectionrepository.cpp" line="177"/>
         <source>Cliquez sur %1 pour sauvegarder les paramètres.</source>
         <oldsource>Cliquez sur %0 pour sauvegarder les paramètres.</oldsource>
         <translation>Click on %1 to save parameters.</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="context/interface/configsectionrepository.cpp" line="183"/>
         <source>Choisissez un répertoire de destination</source>
         <translation>Select the destination directory</translation>
@@ -955,7 +955,7 @@ Premium!</translation>
 </context>
 <context>
     <name>ConfigSectionSound</name>
-    <message utf8="true">
+    <message>
         <location filename="context/interface/configsectionsound.ui" line="26"/>
         <source>Réverbération</source>
         <translation>Reverb</translation>
@@ -965,7 +965,7 @@ Premium!</translation>
         <source>Gain (dB)</source>
         <translation>Gain (dB)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="context/interface/configsectionsound.ui" line="88"/>
         <source>Densité</source>
         <translation>Width</translation>
@@ -976,7 +976,7 @@ Premium!</translation>
         <source>Niveau</source>
         <translation>Level</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="context/interface/configsectionsound.ui" line="178"/>
         <source>Atténuation</source>
         <translation>Damp</translation>
@@ -991,7 +991,7 @@ Premium!</translation>
         <source>Chorus</source>
         <translation>Chorus</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="context/interface/configsectionsound.ui" line="345"/>
         <source>Fréquence</source>
         <translation>Frequency</translation>
@@ -1004,7 +1004,7 @@ Premium!</translation>
 </context>
 <context>
     <name>ConfigToc</name>
-    <message utf8="true">
+    <message>
         <location filename="context/interface/configtoc.ui" line="59"/>
         <source>Général</source>
         <translation>General</translation>
@@ -1034,7 +1034,7 @@ repository</translation>
 </context>
 <context>
     <name>ConversionSfz</name>
-    <message utf8="true">
+    <message>
         <location filename="core/output/sfz/conversion_sfz.cpp" line="51"/>
         <source>Impossible de créer le dossier « %1 »</source>
         <oldsource>Impossible de créer le dossier « %0 »</oldsource>
@@ -1091,27 +1091,27 @@ repository</translation>
         <source>Cuivres</source>
         <translation>Brass</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/output/sfz/conversion_sfz.cpp" line="559"/>
         <source>Instrument à anches</source>
         <translation>Reed</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/output/sfz/conversion_sfz.cpp" line="561"/>
         <source>Flûtes</source>
         <translation>Pipe</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/output/sfz/conversion_sfz.cpp" line="563"/>
         <source>Synthétiseur solo</source>
         <translation>Synth lead</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/output/sfz/conversion_sfz.cpp" line="565"/>
         <source>Nappes de synthétiseur</source>
         <translation>Synth pad</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/output/sfz/conversion_sfz.cpp" line="567"/>
         <source>Effets de synthétiseur</source>
         <translation>Synth effects</translation>
@@ -1139,12 +1139,12 @@ repository</translation>
 </context>
 <context>
     <name>DetailsManager</name>
-    <message utf8="true">
+    <message>
         <location filename="repository/detailsmanager.cpp" line="112"/>
         <source>Souscrivez à un compte Premium pour bénéficier de toutes les fonctionnalités !</source>
         <translation>Subscribe to a Premium account to get all the features!</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="repository/detailsmanager.cpp" line="115"/>
         <location filename="repository/detailsmanager.cpp" line="118"/>
         <location filename="repository/detailsmanager.cpp" line="124"/>
@@ -1159,7 +1159,7 @@ repository</translation>
         <source>A propos</source>
         <translation>About</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="dialogs/dialog_about.ui" line="172"/>
         <source>Crédits</source>
         <translation>Credit</translation>
@@ -1228,7 +1228,7 @@ repository</translation>
         <source>Steve Clarke</source>
         <translation>Steve Clarke</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="dialogs/dialog_about.cpp" line="72"/>
         <source>F.J. Martínez Murcia</source>
         <translation>F.J. Martínez Murcia</translation>
@@ -1276,7 +1276,7 @@ repository</translation>
         <source>&amp;Ok</source>
         <translation>&amp;Ok</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="dialogs/dialogchangelog.cpp" line="48"/>
         <source>Merci d&apos;avoir installé</source>
         <translation>Thank you for having installed</translation>
@@ -1296,12 +1296,12 @@ repository</translation>
         <source>Ce qu&apos;il y a de nouveau</source>
         <translation>What is new</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="dialogs/dialogchangelog.cpp" line="89"/>
         <source>Ce qui est amélioré</source>
         <translation>What has improved</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="dialogs/dialogchangelog.cpp" line="92"/>
         <source>Ce qui est résolu</source>
         <translation>What is fixed</translation>
@@ -1314,35 +1314,35 @@ repository</translation>
         <source>Question</source>
         <translation>Question</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="dialogs/dialogcreateelements.cpp" line="31"/>
         <source>Créer un instrument contenant l&apos;échantillon %1 ?</source>
         <oldsource>Créer un instrument contenant l&apos;échantillon %0 ?</oldsource>
         <translation>Create an instrument comprising the sample %1?</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="dialogs/dialogcreateelements.cpp" line="37"/>
         <source>Créer un instrument</source>
         <translation>Create an instrument</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="dialogs/dialogcreateelements.cpp" line="38"/>
         <source>pour chaque échantillon</source>
         <translation>for each sample</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="dialogs/dialogcreateelements.cpp" line="39"/>
         <source>contenant les %1 échantillons</source>
         <oldsource>contenant les %0 échantillons</oldsource>
         <translation>comprising the %1 samples</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="dialogs/dialogcreateelements.cpp" line="47"/>
         <source>Créer un preset contenant l&apos;instrument %1 ?</source>
         <oldsource>Créer un preset contenant l&apos;instrument %0 ?</oldsource>
         <translation>Create a preset comprising the instrument %1?</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="dialogs/dialogcreateelements.cpp" line="53"/>
         <source>Créer un preset</source>
         <translation>Create a preset</translation>
@@ -1391,7 +1391,7 @@ repository</translation>
         <source>Note</source>
         <translation>Key</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="dialogs/dialogkeyboard.ui" line="150"/>
         <source>Vélocité</source>
         <translation>Velocity</translation>
@@ -1399,7 +1399,7 @@ repository</translation>
 </context>
 <context>
     <name>DialogList</name>
-    <message utf8="true">
+    <message>
         <location filename="dialogs/dialog_list.cpp" line="53"/>
         <source>Liste des échantillons</source>
         <oldsource>Liste des samples</oldsource>
@@ -1418,7 +1418,7 @@ repository</translation>
 </context>
 <context>
     <name>DialogRecorder</name>
-    <message utf8="true">
+    <message>
         <location filename="dialogs/dialogrecorder.ui" line="26"/>
         <source>Magnétophone</source>
         <translation>Recorder</translation>
@@ -1447,17 +1447,17 @@ repository</translation>
         <source>Renommage de masse</source>
         <translation>Bulk rename</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="dialogs/dialog_rename.ui" line="59"/>
         <source>Remplacer une chaîne de caractères</source>
         <translation>Replace characters</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="dialogs/dialog_rename.ui" line="64"/>
         <source>Insérer après une position</source>
         <translation>Insert after a specific position</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="dialogs/dialog_rename.ui" line="69"/>
         <source>Supprimer une étendue</source>
         <translation>Delete character range</translation>
@@ -1468,12 +1468,12 @@ repository</translation>
         <source>Position</source>
         <translation>Position</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="dialogs/dialog_rename.ui" line="49"/>
         <source>Écraser nom existant avec nom de la note en suffixe</source>
         <translation>Overwrite existing name with key name as suffix</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="dialogs/dialog_rename.ui" line="54"/>
         <source>Écraser nom existant avec incrément en suffixe</source>
         <translation>Overwrite existing name with numerical ascending suffix</translation>
@@ -1494,12 +1494,12 @@ repository</translation>
         <source>Et remplacer par :</source>
         <translation>And replace by:</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="dialogs/dialog_rename.cpp" line="121"/>
         <source>Texte à insérer :</source>
         <translation>Text to insert:</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="dialogs/dialog_rename.cpp" line="132"/>
         <source>Étendue</source>
         <translation>Range</translation>
@@ -1518,7 +1518,7 @@ repository</translation>
         <source>Tout cocher</source>
         <translation>Select all</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="dialogs/dialogselection.ui" line="37"/>
         <source>Tout décocher</source>
         <translation>Unselect all</translation>
@@ -1542,7 +1542,7 @@ repository</translation>
         <source>Attention</source>
         <translation>Warning</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="repository/downloadmanager.cpp" line="117"/>
         <source>Impossible de télécharger le fichier « %1 » : %2</source>
         <oldsource>Impossible de télécharger le fichier « %0 » : %1</oldsource>
@@ -1551,12 +1551,12 @@ repository</translation>
 </context>
 <context>
     <name>Duplicator</name>
-    <message utf8="true">
+    <message>
         <location filename="core/duplicator.cpp" line="281"/>
         <source>Des paramètres globaux sont déjà renseignés.</source>
         <translation>Global parameters are already filled.</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/duplicator.cpp" line="282"/>
         <source>La division globale ne sera pas recopiée.</source>
         <translation>The global division will not be copied.</translation>
@@ -1566,24 +1566,24 @@ repository</translation>
         <source>&amp;Ok</source>
         <translation>&amp;Ok</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/duplicator.cpp" line="285"/>
         <source>Ok, &amp;désactiver ce message</source>
         <translation>Ok, &amp;disable this message</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/duplicator.cpp" line="317"/>
         <source>L&apos;échantillon « %1 » existe déjà.&lt;br /&gt;Que faire ?</source>
         <oldsource>L&apos;échantillon « %0 » existe déjà.&lt;br /&gt;Que faire ?</oldsource>
         <translation>The sample &quot;%1&quot; already exists.&lt;br /&gt;Replace?</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/duplicator.cpp" line="455"/>
         <source>L&apos;instrument « %1 » existe déjà.&lt;br /&gt;Souhaitez-vous le remplacer ?</source>
         <oldsource>L&apos;instrument « %0 » existe déjà.&lt;br /&gt;Souhaitez-vous le remplacer ?</oldsource>
         <translation>The instrument &quot;%1&quot; already exists.&lt;br /&gt;Replace?</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/duplicator.cpp" line="548"/>
         <source>Le preset « %1 » existe déjà.&lt;br /&gt;Souhaitez-vous le remplacer ?</source>
         <oldsource>Le preset « %0 » existe déjà.&lt;br /&gt;Souhaitez-vous le remplacer ?</oldsource>
@@ -1655,7 +1655,7 @@ repository</translation>
 </context>
 <context>
     <name>EditorToolBar</name>
-    <message utf8="true">
+    <message>
         <location filename="editor/widgets/editortoolbar.cpp" line="27"/>
         <source>Ajouter un échantillon</source>
         <translation>Add a sample</translation>
@@ -1670,7 +1670,7 @@ repository</translation>
         <source>Ajouter un preset</source>
         <translation>Add a preset</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/widgets/editortoolbar.cpp" line="39"/>
         <source>Boîte à outils</source>
         <translation>Toolbox</translation>
@@ -1680,7 +1680,7 @@ repository</translation>
         <source>Annuler</source>
         <translation>Cancel</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/widgets/editortoolbar.cpp" line="51"/>
         <source>Rétablir</source>
         <translation>Redo</translation>
@@ -1690,7 +1690,7 @@ repository</translation>
         <source>Sauvegarder</source>
         <translation>Save</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/widgets/editortoolbar.cpp" line="66"/>
         <source>Magnétophone</source>
         <translation>Recorder</translation>
@@ -1710,7 +1710,7 @@ repository</translation>
         <source>Fichier .wav</source>
         <translation>Wav file</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/widgets/editortoolbar.cpp" line="257"/>
         <source>Créer un nouvel instrument</source>
         <translation>Create a new instrument</translation>
@@ -1730,7 +1730,7 @@ repository</translation>
         <source>Aucun preset n&apos;est disponible.</source>
         <translation>No preset available.</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/widgets/editortoolbar.cpp" line="297"/>
         <source>Créer un nouveau preset</source>
         <translation>Create a new preset</translation>
@@ -1764,7 +1764,7 @@ repository</translation>
         <source>Delay</source>
         <translation>Delay</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/envelopeditor.ui" line="181"/>
         <source>Note  Decay</source>
         <oldsource>Key  Decay</oldsource>
@@ -1780,7 +1780,7 @@ repository</translation>
         <source>Sustain</source>
         <translation>Sustain</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/envelopeditor.ui" line="391"/>
         <source>Note  Hold</source>
         <oldsource>Key  Hold</oldsource>
@@ -1866,7 +1866,7 @@ repository</translation>
 </context>
 <context>
     <name>Graphique</name>
-    <message utf8="true">
+    <message>
         <location filename="editor/graphics/graphique.cpp" line="85"/>
         <source>Sélection multiple</source>
         <translation>Multiple selection</translation>
@@ -1874,12 +1874,12 @@ repository</translation>
 </context>
 <context>
     <name>GraphiqueFourier</name>
-    <message utf8="true">
+    <message>
         <location filename="editor/graphics/graphiquefourier.cpp" line="51"/>
         <source>Fréquence (Hz)</source>
         <translation>Frequency (Hz)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/graphics/graphiquefourier.cpp" line="66"/>
         <source>Intensité</source>
         <translation>Intensity</translation>
@@ -1923,7 +1923,7 @@ repository</translation>
 </context>
 <context>
     <name>InputNotSupported</name>
-    <message utf8="true">
+    <message>
         <location filename="core/input/not_supported/inputnotsupported.cpp" line="14"/>
         <source>Le format du fichier n&apos;est pas supporté.</source>
         <translation>This file format is not supported.</translation>
@@ -1931,13 +1931,13 @@ repository</translation>
 </context>
 <context>
     <name>InputSf2</name>
-    <message utf8="true">
+    <message>
         <location filename="core/input/sf2/inputsf2.cpp" line="24"/>
         <source>Le fichier « %1 » est introuvable.</source>
         <oldsource>Le fichier « %0 » est introuvable.</oldsource>
         <translation>Cannot find file &quot;%1&quot;.</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/input/sf2/inputsf2.cpp" line="31"/>
         <source>Le fichier « %1 » n&apos;est pas accessible en lecture.</source>
         <oldsource>Le fichier « %0 » n&apos;est pas accessible en lecture.</oldsource>
@@ -1951,13 +1951,13 @@ repository</translation>
         <source>Erreur lors de la conversion sf3 =&gt; sf2</source>
         <translation>Error during the sf3 =&gt; sf2 conversion</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/input/sf3/inputsf3.cpp" line="54"/>
         <source>Impossible de créer le fichier « %1 »</source>
         <oldsource>Impossible de créer le fichier « %0 »</oldsource>
         <translation>Cannot create file &quot;%1&quot;</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/input/sf3/inputsf3.cpp" line="57"/>
         <source>Impossible de lire le fichier « %1 »</source>
         <oldsource>Impossible de lire le fichier « %0 »</oldsource>
@@ -1966,12 +1966,12 @@ repository</translation>
 </context>
 <context>
     <name>InputSfz</name>
-    <message utf8="true">
+    <message>
         <location filename="core/input/sfz/inputsfz.cpp" line="80"/>
         <source>Récursion entre fichiers</source>
         <translation>File recursion</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/input/sfz/inputsfz.cpp" line="88"/>
         <source>Impossible d&apos;ouvrir le fichier « %1 »</source>
         <oldsource>Impossible d&apos;ouvrir le fichier « %0 »</oldsource>
@@ -2015,12 +2015,12 @@ repository</translation>
         <source>&amp;Exporter soundfonts</source>
         <translation>&amp;Export soundfonts</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="mainwindow/mainmenu.cpp" line="44"/>
         <source>P&amp;lein écran</source>
         <translation>&amp;Full screen</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="mainwindow/mainmenu.cpp" line="52"/>
         <source>&amp;Préférences</source>
         <translation>Se&amp;ttings</translation>
@@ -2030,7 +2030,7 @@ repository</translation>
         <source>&amp;Aide en ligne</source>
         <translation>Online &amp;manual</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="mainwindow/mainmenu.cpp" line="61"/>
         <source>À p&amp;ropos de Polyphone...</source>
         <translation>About &amp;Polyphone...</translation>
@@ -2078,12 +2078,12 @@ repository</translation>
         <source>Sauvegarder avant de quitter ?</source>
         <translation>Save before exiting?</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="mainwindow/mainwindow.cpp" line="184"/>
         <source>Les fichiers suivants n&apos;ont pas été sauvegardés :</source>
         <translation>The following files have been modified:</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="mainwindow/mainwindow.cpp" line="191"/>
         <source>Le fichier « %1 » n&apos;a pas été sauvegardé.</source>
         <oldsource>Le fichier « %0 » n&apos;a pas été sauvegardé.</oldsource>
@@ -2136,7 +2136,7 @@ repository</translation>
         <source>Polyphone Soundfont Editor</source>
         <translation>Polyphone Soundfont Editor</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="mainwindow/mainwindow.ui" line="71"/>
         <source>  Préfèrences</source>
         <extracomment>prefixed with 2 spaces</extracomment>
@@ -2197,7 +2197,7 @@ repository</translation>
 </context>
 <context>
     <name>OutputNotSupported</name>
-    <message utf8="true">
+    <message>
         <location filename="core/output/not_supported/outputnotsupported.cpp" line="15"/>
         <source>Le format du fichier n&apos;est pas supporté.</source>
         <translation>This file format is not supported.</translation>
@@ -2210,7 +2210,7 @@ repository</translation>
         <source>Fermez le fichier avant de sauvegarder par-dessus.</source>
         <translation>Please close file before overriding it.</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/output/sf2/outputsf2.cpp" line="226"/>
         <source>Impossible de créer le fichier « %1 »</source>
         <oldsource>Impossible de créer le fichier « %0 »</oldsource>
@@ -2224,13 +2224,13 @@ repository</translation>
         <source>Erreur lors de la conversion sf3</source>
         <translation>Error during the sf3 conversion</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/output/sf3/outputsf3.cpp" line="62"/>
         <source>Impossible de créer le fichier « %1 »</source>
         <oldsource>Impossible de créer le fichier « %0 »</oldsource>
         <translation>Cannot create file &quot;%1&quot;</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/output/sf3/outputsf3.cpp" line="68"/>
         <source>Impossible de lire le fichier « %1 »</source>
         <oldsource>Impossible de lire le fichier « %0 »</oldsource>
@@ -2259,7 +2259,7 @@ repository</translation>
         <source>Copie les modulateurs</source>
         <translation>Copy modulators</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/pageinst.ui" line="250"/>
         <source>Colle les modulateurs copiés</source>
         <translation>Paste the copied modulators</translation>
@@ -2269,7 +2269,7 @@ repository</translation>
         <source>Source</source>
         <translation>Source</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/pageinst.ui" line="375"/>
         <source>Quantité</source>
         <translation>Amount</translation>
@@ -2280,7 +2280,7 @@ repository</translation>
         <source>Destination</source>
         <translation>Destination</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/pageinst.ui" line="400"/>
         <source>Source / Quantité</source>
         <translation>Source / Amount</translation>
@@ -2295,7 +2295,7 @@ repository</translation>
         <source>Table</source>
         <translation>Table</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/pageinst.cpp" line="178"/>
         <source>Étendues</source>
         <translation>Ranges</translation>
@@ -2305,17 +2305,17 @@ repository</translation>
         <source>Enveloppes</source>
         <translation>Envelopes</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/pageinst.cpp" line="221"/>
         <source>Instrument lié à aucun preset.</source>
         <translation>Instrument not linked to a preset yet.</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/pageinst.cpp" line="223"/>
         <source>Instrument lié au preset :</source>
         <translation>Instrument linked to preset:</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/pageinst.cpp" line="225"/>
         <source>Instrument lié aux presets :</source>
         <translation>Instrument linked to presets:</translation>
@@ -2323,12 +2323,12 @@ repository</translation>
 </context>
 <context>
     <name>PageOverview</name>
-    <message utf8="true">
+    <message>
         <location filename="editor/overview/pageoverview.cpp" line="82"/>
         <source>éléments</source>
         <translation>elements</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/overview/pageoverview.cpp" line="82"/>
         <source>élément</source>
         <translation>element</translation>
@@ -2341,19 +2341,19 @@ repository</translation>
         <source>Instruments</source>
         <translation>Instruments</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/overview/pageoverviewinst.cpp" line="38"/>
         <source>Utilisé</source>
         <translation>Used</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/overview/pageoverviewinst.cpp" line="39"/>
         <source>Nombre
 d&apos;échantillons</source>
         <oldsource>Nombre d&apos;échantillons</oldsource>
         <translation>Sample number</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/overview/pageoverviewinst.cpp" line="40"/>
         <source>Nombre de
 paramètres</source>
@@ -2367,21 +2367,21 @@ modulateurs</source>
         <oldsource>Nombre de modulateurs</oldsource>
         <translation>Modulator number</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/overview/pageoverviewinst.cpp" line="42"/>
         <source>Étendue totale
 (note)</source>
         <oldsource>Étendue totale (note)</oldsource>
         <translation>Max key range</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/overview/pageoverviewinst.cpp" line="43"/>
         <source>Étendue totale
 (vélocité)</source>
         <oldsource>Étendue totale (vélocité)</oldsource>
         <translation>Max velocity range</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/overview/pageoverviewinst.cpp" line="44"/>
         <source>Atténuation</source>
         <translation>Attenuation</translation>
@@ -2398,7 +2398,7 @@ en boucle</source>
         <source>Chorus</source>
         <translation>Chorus</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/overview/pageoverviewinst.cpp" line="47"/>
         <source>Réverbération</source>
         <oldsource>Reverbération</oldsource>
@@ -2416,7 +2416,7 @@ en boucle</source>
         <source>non</source>
         <translation>no</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/overview/pageoverviewinst.cpp" line="257"/>
         <source>oui, jusqu&apos;à la fin</source>
         <translatorcomment>speaking about a loop mode</translatorcomment>
@@ -2450,7 +2450,7 @@ d&apos;instruments</source>
         <oldsource>Nombre d&apos;instruments</oldsource>
         <translation>Instrument number</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/overview/pageoverviewprst.cpp" line="40"/>
         <source>Nombre de
 paramètres</source>
@@ -2464,21 +2464,21 @@ modulateurs</source>
         <oldsource>Nombre de modulateurs</oldsource>
         <translation>Modulator number</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/overview/pageoverviewprst.cpp" line="42"/>
         <source>Étendue totale
 (note)</source>
         <oldsource>Étendue totale (note)</oldsource>
         <translation>Max key range</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/overview/pageoverviewprst.cpp" line="43"/>
         <source>Étendue totale
 (vélocité)</source>
         <oldsource>Étendue totale (vélocité)</oldsource>
         <translation>Max velocity range</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/overview/pageoverviewprst.cpp" line="44"/>
         <source>Atténuation</source>
         <translation>Attenuation</translation>
@@ -2488,7 +2488,7 @@ modulateurs</source>
         <source>Chorus</source>
         <translation>Chorus</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/overview/pageoverviewprst.cpp" line="46"/>
         <source>Réverbération</source>
         <oldsource>Reverbération</oldsource>
@@ -2497,12 +2497,12 @@ modulateurs</source>
 </context>
 <context>
     <name>PageOverviewSmpl</name>
-    <message utf8="true">
+    <message>
         <location filename="editor/overview/pageoverviewsmpl.cpp" line="38"/>
         <source>Utilisé</source>
         <translation>Used</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/overview/pageoverviewsmpl.cpp" line="39"/>
         <source>Durée
 totale</source>
@@ -2515,14 +2515,14 @@ duration</translation>
         <source>Correction</source>
         <translation>Correction</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/overview/pageoverviewsmpl.cpp" line="40"/>
         <source>Durée de
 la boucle</source>
         <translation>Loop
 duration</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/overview/pageoverviewsmpl.cpp" line="32"/>
         <source>Échantillons</source>
         <translation>Samples</translation>
@@ -2534,7 +2534,7 @@ de base</source>
         <translation>Root
 key</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/overview/pageoverviewsmpl.cpp" line="43"/>
         <source>Type
 d&apos;échantillon</source>
@@ -2542,14 +2542,14 @@ d&apos;échantillon</source>
         <translation>Sample
 type</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/overview/pageoverviewsmpl.cpp" line="44"/>
         <source>Échantillon
 lié</source>
         <translation>Linked
 sample</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/overview/pageoverviewsmpl.cpp" line="45"/>
         <source>Taux
 d&apos;échantillonnage</source>
@@ -2584,19 +2584,19 @@ rate</translation>
         <comment>opposite to stereo</comment>
         <translation>Mono</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/overview/pageoverviewsmpl.cpp" line="129"/>
         <source>Stéréo droit</source>
         <oldsource>Stereo droit</oldsource>
         <translation>Stereo right</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/overview/pageoverviewsmpl.cpp" line="132"/>
         <source>Stéréo gauche</source>
         <oldsource>Stereo gauche</oldsource>
         <translation>Stereo left</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/overview/pageoverviewsmpl.cpp" line="135"/>
         <source>Stéréo non défini</source>
         <oldsource>Stereo non défini</oldsource>
@@ -2635,7 +2635,7 @@ rate</translation>
         <source>Copie les modulateurs</source>
         <translation>Copy modulators</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/pageprst.ui" line="235"/>
         <source>Colle les modulateurs copiés</source>
         <translation>Paste the copied modulators</translation>
@@ -2645,7 +2645,7 @@ rate</translation>
         <source>Source</source>
         <translation>Source</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/pageprst.ui" line="360"/>
         <source>Quantité</source>
         <translation>Amount</translation>
@@ -2656,7 +2656,7 @@ rate</translation>
         <source>Destination</source>
         <translation>Destination</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/pageprst.ui" line="391"/>
         <source>Source / Quantité</source>
         <translation>Source / Amount</translation>
@@ -2686,10 +2686,10 @@ rate</translation>
         <source>Table</source>
         <translation>Table</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/pageprst.cpp" line="158"/>
-        <source>�tendues</source>
-        <oldsource>Étendues</oldsource>
+        <source>Étendues</source>
+        <oldsource>�tendues</oldsource>
         <translation>Ranges</translation>
     </message>
 </context>
@@ -2745,7 +2745,7 @@ rate</translation>
         <source>Sound engine</source>
         <translation>Sound engine</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/pagesf2.ui" line="450"/>
         <source>Logiciel(s) d&apos;édition</source>
         <translation>Editing software</translation>
@@ -2755,14 +2755,14 @@ rate</translation>
         <source>Presets</source>
         <translation>Presets</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/pagesf2.ui" line="580"/>
         <location filename="editor/pagesf2.ui" line="701"/>
         <location filename="editor/pagesf2.ui" line="1029"/>
         <source>Détails</source>
         <translation>Details</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/pagesf2.ui" line="679"/>
         <location filename="editor/pagesf2.ui" line="778"/>
         <source>Échantillons</source>
@@ -2791,7 +2791,7 @@ rate</translation>
         <source>Modulateurs</source>
         <translation>Modulators</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/pagesf2.ui" line="854"/>
         <location filename="editor/pagesf2.ui" line="889"/>
         <source>Paramètres</source>
@@ -2820,7 +2820,7 @@ rate</translation>
         <comment>kilo byte</comment>
         <translation>kB</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/pagesf2.cpp" line="248"/>
         <location filename="editor/pagesf2.cpp" line="261"/>
         <source>%1 (inutilisés : %2)</source>
@@ -2828,7 +2828,7 @@ rate</translation>
         <comment>plural form</comment>
         <translation>%1 (unused: %2)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/pagesf2.cpp" line="250"/>
         <location filename="editor/pagesf2.cpp" line="263"/>
         <source>%1 (inutilisé : %2)</source>
@@ -2839,7 +2839,7 @@ rate</translation>
 </context>
 <context>
     <name>PageSmpl</name>
-    <message utf8="true">
+    <message>
         <location filename="editor/pagesmpl.ui" line="724"/>
         <source>Réinitialiser</source>
         <translation>Reset</translation>
@@ -2867,12 +2867,12 @@ rate</translation>
         <source>en boucle</source>
         <translation>loop</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/pagesmpl.ui" line="929"/>
         <source>stéréo</source>
         <translation>stereo</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/pagesmpl.ui" line="968"/>
         <source>Fréquences</source>
         <translation>Frequencies</translation>
@@ -2882,7 +2882,7 @@ rate</translation>
         <source>Boucle</source>
         <translation>Loop</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/pagesmpl.ui" line="1124"/>
         <source>Utilise la longueur totale de l&apos;échantillon comme boucle</source>
         <translation>Use the full length of the sample as loop</translation>
@@ -2892,7 +2892,7 @@ rate</translation>
         <source>Taille</source>
         <translation>Size</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/pagesmpl.ui" line="1151"/>
         <source>Correction (centième)</source>
         <translation>Correction (cents)</translation>
@@ -2928,7 +2928,7 @@ rate</translation>
         <source>Informations</source>
         <translation>Information</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/pagesmpl.ui" line="790"/>
         <location filename="editor/pagesmpl.cpp" line="109"/>
         <source>Égaliseur (±15 dB)</source>
@@ -2973,17 +2973,17 @@ rate</translation>
         <source>lien</source>
         <translation>link</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/pagesmpl.cpp" line="314"/>
         <source>Échantillon lié à aucun instrument.</source>
         <translation>Sample not linked to an instrument yet.</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/pagesmpl.cpp" line="316"/>
         <source>Échantillon lié à l&apos;instrument :</source>
         <translation>Sample linked to instrument:</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/pagesmpl.cpp" line="318"/>
         <source>Échantillon lié aux instruments :</source>
         <translation>Sample linked to instruments:</translation>
@@ -2994,7 +2994,7 @@ rate</translation>
         <source>Information</source>
         <translation>Information</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/pagesmpl.cpp" line="540"/>
         <location filename="editor/pagesmpl.cpp" line="1150"/>
         <source>Modification appliquée avec succès aux différents échantillons</source>
@@ -3006,7 +3006,7 @@ rate</translation>
         <source>mono</source>
         <translation>mono</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/pagesmpl.cpp" line="999"/>
         <source>Arrêt</source>
         <translation>Stop</translation>
@@ -3048,12 +3048,12 @@ rate</translation>
         <source>Copier l&apos;ensemble des modulateurs</source>
         <translation>Copy all modulators</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/pagetable.cpp" line="569"/>
         <source>Dupliquer la sélection vers...</source>
         <translation>Duplicate the selection toward...</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/pagetable.cpp" line="570"/>
         <location filename="editor/pagetable.cpp" line="578"/>
         <source>Copier les modulateurs sélectionnés</source>
@@ -3072,12 +3072,12 @@ rate</translation>
         <source>Attention</source>
         <translation>Warning</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/pagetable.cpp" line="1901"/>
         <source>les offsets ne peuvent être modulés dans un preset.</source>
         <translation>offsets cannot be modulated in a preset.</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/pagetable.cpp" line="1910"/>
         <source>%1 ne peut être modulé dans un preset.</source>
         <oldsource>%0 ne peut être modulé dans un preset.</oldsource>
@@ -3093,7 +3093,7 @@ rate</translation>
         <source>Un preset ne contenant aucun instrument n&apos;est pas compatible avec cet outil</source>
         <translation>A preset comprising no instruments is not compatible with this tool.</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/pagetable.cpp" line="2397"/>
         <source>L&apos;étendue de notes de toutes les divisions doit être spécifiée</source>
         <translation>The keyrange of all divisions must be specified.</translation>
@@ -3132,19 +3132,19 @@ rate</translation>
         <source>Attention</source>
         <translation>Warning</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/sampleloader.cpp" line="47"/>
         <source>L&apos;échantillon « %1L » existe déjà.&lt;br /&gt;Que faire ?</source>
         <oldsource>L&apos;échantillon « %0L » existe déjà.&lt;br /&gt;Que faire ?</oldsource>
         <translation>Sample &quot;%1L&quot; already exists.&lt;br /&gt;Replace?</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/sampleloader.cpp" line="52"/>
         <source>L&apos;échantillon « %1R » existe déjà.&lt;br /&gt;Que faire ?</source>
         <oldsource>L&apos;échantillon « %0R » existe déjà.&lt;br /&gt;Que faire ?</oldsource>
         <translation>Sample &quot;%1R&quot; already exists.&lt;br /&gt;Replace?</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/sampleloader.cpp" line="60"/>
         <source>L&apos;échantillon « %1 » existe déjà.&lt;br /&gt;Que faire ?</source>
         <oldsource>L&apos;échantillon « %0 » existe déjà.&lt;br /&gt;Que faire ?</oldsource>
@@ -3180,12 +3180,12 @@ rate</translation>
         <source>I&amp;gnorer tout</source>
         <translation>I&amp;gnore all</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/model/soundfont.cpp" line="24"/>
         <source>Général</source>
         <translation>General</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/model/soundfont.cpp" line="25"/>
         <source>Échantillons</source>
         <translation>Samples</translation>
@@ -3208,7 +3208,7 @@ rate</translation>
         <source>Fichier non pris en charge.</source>
         <translation>File not supported.</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/sound.cpp" line="649"/>
         <source>Impossible d&apos;ouvrir le fichier « %1 »</source>
         <oldsource>Impossible d&apos;ouvrir le fichier « %0 »</oldsource>
@@ -3223,19 +3223,19 @@ rate</translation>
         <source>Le fichier est corrompu.</source>
         <translation>Corrupted file.</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/graphics/graphicslegenditem.cpp" line="110"/>
         <location filename="editor/graphics/graphicslegenditem2.cpp" line="66"/>
         <source>Étendue note :</source>
         <translation>Key range:</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/graphics/graphicslegenditem.cpp" line="129"/>
         <location filename="editor/graphics/graphicslegenditem2.cpp" line="69"/>
         <source>Étendue vélocité :</source>
         <translation>Velocity range:</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="dialogs/dialog_about.cpp" line="122"/>
         <source>Créé par</source>
         <translation>Created by</translation>
@@ -3250,7 +3250,7 @@ rate</translation>
         <source>Traduit par</source>
         <translation>Translated by</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="dialogs/dialog_about.cpp" line="166"/>
         <source>Icônes</source>
         <translation>Icons</translation>
@@ -3266,18 +3266,18 @@ rate</translation>
         <source>Do</source>
         <translation>C</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="context/keynamemanager.cpp" line="64"/>
         <source>Ré♭</source>
         <translation>D♭</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="context/keynamemanager.cpp" line="65"/>
         <location filename="context/keynamemanager.cpp" line="83"/>
         <source>Ré</source>
         <translation>D</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="context/keynamemanager.cpp" line="66"/>
         <source>Mi♭</source>
         <translation>E♭</translation>
@@ -3294,7 +3294,7 @@ rate</translation>
         <source>Fa</source>
         <translation>F</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="context/keynamemanager.cpp" line="69"/>
         <source>Sol♭</source>
         <translation>G♭</translation>
@@ -3305,7 +3305,7 @@ rate</translation>
         <source>Sol</source>
         <translation>G</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="context/keynamemanager.cpp" line="71"/>
         <source>La♭</source>
         <translation>A♭</translation>
@@ -3316,7 +3316,7 @@ rate</translation>
         <source>La</source>
         <translation>A</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="context/keynamemanager.cpp" line="73"/>
         <source>Si♭</source>
         <translation>B♭</translation>
@@ -3327,27 +3327,27 @@ rate</translation>
         <source>Si</source>
         <translation>B</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="context/keynamemanager.cpp" line="82"/>
         <source>Do♯</source>
         <translation>C♯</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="context/keynamemanager.cpp" line="84"/>
         <source>Ré♯</source>
         <translation>D♯</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="context/keynamemanager.cpp" line="87"/>
         <source>Fa♯</source>
         <translation>F♯</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="context/keynamemanager.cpp" line="89"/>
         <source>Sol♯</source>
         <translation>G♯</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="context/keynamemanager.cpp" line="91"/>
         <source>La♯</source>
         <translation>A♯</translation>
@@ -3360,7 +3360,7 @@ rate</translation>
         <source>instrument acoustique</source>
         <translation>acoustic instrument</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="repository/repositorymanager.cpp" line="54"/>
         <source>instrument électrique</source>
         <translation>electronic instrument</translation>
@@ -3370,12 +3370,12 @@ rate</translation>
         <source>sources multiples</source>
         <translation>various records</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="repository/repositorymanager.cpp" line="56"/>
         <source>synthèse additive</source>
         <translation>additive synthesis</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="repository/repositorymanager.cpp" line="57"/>
         <source>synthèse soustractive</source>
         <translation>subtrative synthesis</translation>
@@ -3385,27 +3385,27 @@ rate</translation>
         <source>table d&apos;ondes</source>
         <translation>wavetable synthesis</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="repository/repositorymanager.cpp" line="59"/>
         <source>synthèse par modélisation</source>
         <translation>model synthesis</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="repository/repositorymanager.cpp" line="60"/>
         <source>synthèse FM</source>
         <translation>FM synthesis</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="repository/repositorymanager.cpp" line="61"/>
         <source>synthèse vectorielle</source>
         <translation>vector synthesis</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="repository/repositorymanager.cpp" line="62"/>
         <source>synthèse granulaire</source>
         <translation>granular synthesis</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="repository/repositorymanager.cpp" line="63"/>
         <source>autre synthèse</source>
         <translation>other synthesis</translation>
@@ -3420,7 +3420,7 @@ rate</translation>
         <source>grave</source>
         <translation>low</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="repository/repositorymanager.cpp" line="68"/>
         <source>déformé</source>
         <translation>distorted</translation>
@@ -3475,7 +3475,7 @@ rate</translation>
         <source>en sourdine</source>
         <translation>muted</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="repository/repositorymanager.cpp" line="79"/>
         <source>désaccordé</source>
         <translation>detuned</translation>
@@ -3485,12 +3485,12 @@ rate</translation>
         <source>dissonant</source>
         <translation>dissonant</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="repository/repositorymanager.cpp" line="81"/>
         <source>bruité</source>
         <translation>noisy</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="repository/repositorymanager.cpp" line="82"/>
         <source>métallique</source>
         <translation>metallic</translation>
@@ -3510,7 +3510,7 @@ rate</translation>
         <source>attaque lente</source>
         <translation>slow attack</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="repository/repositorymanager.cpp" line="88"/>
         <source>déclinant</source>
         <translation>decaying</translation>
@@ -3530,7 +3530,7 @@ rate</translation>
         <source>percussif</source>
         <translation>percussive</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="repository/repositorymanager.cpp" line="92"/>
         <source>long développement</source>
         <translation>long / evolving</translation>
@@ -3540,7 +3540,7 @@ rate</translation>
         <source>avec pulsations</source>
         <translation>pulsating</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="repository/repositorymanager.cpp" line="94"/>
         <source>avec écho</source>
         <translation>echoing</translation>
@@ -3575,7 +3575,7 @@ rate</translation>
         <source>modulation de filtres</source>
         <translation>sweep / filter mod</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="repository/repositorymanager.cpp" line="101"/>
         <source>arpégié</source>
         <translation>arpeggiated</translation>
@@ -3590,7 +3590,7 @@ rate</translation>
         <source>articulation complexe</source>
         <translation>complex</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="repository/repositorymanager.cpp" line="104"/>
         <source>articulation randomisée</source>
         <translation>randomized</translation>
@@ -3600,7 +3600,7 @@ rate</translation>
         <source>musique classique</source>
         <translation>classic music</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="repository/repositorymanager.cpp" line="108"/>
         <source>musique électronique</source>
         <translation>electronic music</translation>
@@ -3621,7 +3621,7 @@ rate</translation>
         <source>house</source>
         <translation>house</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="repository/repositorymanager.cpp" line="113"/>
         <source>techno / électro</source>
         <translation>techno / electro</translation>
@@ -3636,7 +3636,7 @@ rate</translation>
         <source>industriel</source>
         <translation>industrial</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="repository/repositorymanager.cpp" line="116"/>
         <source>musique expérimentale</source>
         <translation>experimental</translation>
@@ -3661,7 +3661,7 @@ rate</translation>
         <source>pop / rock</source>
         <translation>pop / rock</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="repository/repositorymanager.cpp" line="121"/>
         <source>métal</source>
         <translation>metal music</translation>
@@ -3681,7 +3681,7 @@ rate</translation>
         <source>folk / country</source>
         <translation>folk / country</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="repository/repositorymanager.cpp" line="125"/>
         <location filename="repository/repositorymanager.cpp" line="126"/>
         <source>musique du monde / éthnique</source>
@@ -3702,7 +3702,7 @@ rate</translation>
         <source>mentionner l&apos;auteur, ne pas distribuer avec plus de restrictions</source>
         <translation>give credit, don&apos;t distribute with more restrictions</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="repository/repositorymanager.cpp" line="146"/>
         <source>pas de diffusion après modification</source>
         <translation>don&apos;t distribute a modified version</translation>
@@ -3717,7 +3717,7 @@ rate</translation>
         <source>usage personnel, ne pas distribuer avec plus de restrictions</source>
         <translation>personal use, don&apos;t distribute with more restrictions</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="repository/repositorymanager.cpp" line="149"/>
         <source>usage personnel, pas de diffusion après modification</source>
         <translation>personal use, don&apos;t distribute a modified version</translation>
@@ -3732,7 +3732,7 @@ rate</translation>
         <source>orgue</source>
         <translation>organ</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="repository/repositorymanager.cpp" line="366"/>
         <source>synthétiseur</source>
         <translation>synthesizer</translation>
@@ -3752,17 +3752,17 @@ rate</translation>
         <source>basse</source>
         <translation>bass</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="repository/repositorymanager.cpp" line="378"/>
         <source>cordes pincées</source>
         <translation>plucked strings</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="repository/repositorymanager.cpp" line="381"/>
         <source>cordes frottées</source>
         <translation>bowed strings</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="repository/repositorymanager.cpp" line="384"/>
         <source>flûte</source>
         <translation>flute</translation>
@@ -3782,12 +3782,12 @@ rate</translation>
         <source>vocal</source>
         <translation>vocal</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="repository/repositorymanager.cpp" line="396"/>
         <source>percussion non mélodique</source>
         <translation>unpitched percussion</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="repository/repositorymanager.cpp" line="399"/>
         <source>percussion mélodique</source>
         <translation>melodic percussion</translation>
@@ -3817,7 +3817,7 @@ rate</translation>
         <source>inclassifiable</source>
         <translation>unclassifiable</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="repository/repositorymanager.cpp" line="421"/>
         <source>Catégorie %1</source>
         <oldsource>Catégorie %0</oldsource>
@@ -3828,13 +3828,13 @@ rate</translation>
         <source>Veuillez patienter quelques instants...</source>
         <translation>Please wait...</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="repository/repositorymanager.cpp" line="452"/>
         <source>Votre compte a été banni.</source>
         <oldsource>Ce compte a été banni.</oldsource>
         <translation>Your account has been banned.</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="repository/repositorymanager.cpp" line="457"/>
         <source>Un compte Premium vous permet de visualiser et télécharger toutes les soundfonts disponibles en ligne.</source>
         <translation>A Premium account allows you to browse and download all soundfonts available online.</translation>
@@ -3847,7 +3847,7 @@ rate</translation>
 </context>
 <context>
     <name>ShowSoundfonts</name>
-    <message utf8="true">
+    <message>
         <location filename="repository/daily/showsoundfonts.ui" line="214"/>
         <source>Oups ! Impossible
 de télécharger la liste</source>
@@ -3857,7 +3857,7 @@ download the list</translation>
 </context>
 <context>
     <name>SoundfontBrowser</name>
-    <message utf8="true">
+    <message>
         <location filename="repository/browser/soundfontbrowser.ui" line="172"/>
         <source>Catégorie</source>
         <translation>Category</translation>
@@ -3867,7 +3867,7 @@ download the list</translation>
         <source>Licence</source>
         <translation>License</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="repository/browser/soundfontbrowser.ui" line="204"/>
         <source>Source des échantillons</source>
         <translation>Sample source</translation>
@@ -3907,17 +3907,17 @@ download the list</translation>
         <source>Date</source>
         <translation>Date</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="repository/browser/soundfontbrowser.ui" line="392"/>
         <source>Téléchargements</source>
         <translation>Downloads</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="repository/browser/soundfontbrowser.ui" line="397"/>
         <source>Évaluation</source>
         <translation>Rating score</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="repository/browser/soundfontbrowser.ui" line="402"/>
         <source>Titre (A→Z)</source>
         <translation>Title (A→Z)</translation>
@@ -3927,22 +3927,22 @@ download the list</translation>
         <source>Filtres</source>
         <translation>Filters</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="repository/browser/soundfontbrowser.ui" line="484"/>
         <source>réinitialiser</source>
         <translation>Reset</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="repository/browser/soundfontbrowser.ui" line="503"/>
         <source>Souscrivez à un compte Premium pour bénéficier de toutes les fonctionnalités !</source>
         <translation>Subscribe to a Premium account to get all the features!</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="repository/browser/soundfontbrowser.ui" line="525"/>
         <source>Pas de résultat</source>
         <translation>No results</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="repository/browser/soundfontbrowser.ui" line="606"/>
         <source>Oups ! Impossible
 de télécharger la liste</source>
@@ -3954,7 +3954,7 @@ download the list</translation>
         <source>utilisation commerciale</source>
         <translation>commercial use</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="repository/browser/soundfontbrowser.cpp" line="120"/>
         <source>partage après modification</source>
         <translation>share after editing</translation>
@@ -3978,7 +3978,7 @@ download the list</translation>
 </context>
 <context>
     <name>SoundfontDownloadCell</name>
-    <message utf8="true">
+    <message>
         <location filename="repository/soundfont/soundfontdownloadcell.ui" line="61"/>
         <source>Télécharger</source>
         <translation>Download</translation>
@@ -4030,12 +4030,12 @@ download the list</translation>
         <source>Articulation</source>
         <translation>Articulation</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="repository/soundfont/soundfontviewer.ui" line="129"/>
         <source>Catégorie</source>
         <translation>Category</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="repository/soundfont/soundfontviewer.ui" line="174"/>
         <source>Source des échantillons</source>
         <translation>Sample source</translation>
@@ -4055,7 +4055,7 @@ download the list</translation>
         <source>Description</source>
         <translation>Description</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="repository/soundfont/soundfontviewer.ui" line="483"/>
         <source>Téléchargements</source>
         <translation>Downloads</translation>
@@ -4065,7 +4065,7 @@ download the list</translation>
         <source>Commentaires</source>
         <translation>Comments</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="repository/soundfont/soundfontviewer.ui" line="575"/>
         <source>Oups ! Impossible
 de télécharger le contenu</source>
@@ -4080,7 +4080,7 @@ download content</translation>
         <source>muet</source>
         <translation>mute</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/widgets/tableheaderview.cpp" line="22"/>
         <source>tout réactiver</source>
         <translation>unmute all</translation>
@@ -4088,12 +4088,12 @@ download content</translation>
 </context>
 <context>
     <name>ThemeManager</name>
-    <message utf8="true">
+    <message>
         <location filename="context/thememanager.cpp" line="57"/>
         <source>Personnalisé</source>
         <translation>Custom</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="context/thememanager.cpp" line="360"/>
         <source>Défaut</source>
         <translation>Default</translation>
@@ -4146,12 +4146,12 @@ download content</translation>
 </context>
 <context>
     <name>ToolAutoDistribution</name>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/auto_distribution/toolautodistribution.h" line="34"/>
         <source>Répartir automatiquement les échantillons</source>
         <translation>Automatically link the samples</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/auto_distribution/toolautodistribution.h" line="19"/>
         <source>Édition rapide</source>
         <translation>Fast editing</translation>
@@ -4159,13 +4159,13 @@ download content</translation>
 </context>
 <context>
     <name>ToolAutoLoop</name>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/auto_loop/toolautoloop.cpp" line="50"/>
         <source>L&apos;échantillon « %1 » n&apos;a pas pu être bouclé.</source>
         <oldsource>L&apos;échantillon « %0 » n&apos;a pas pu être bouclé.</oldsource>
         <translation>Failed to loop sample &quot;%1&quot;.</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/auto_loop/toolautoloop.cpp" line="53"/>
         <source>Les échantillons suivants n&apos;ont pas pu être bouclés :</source>
         <translation>The following samples couldn&apos;t be looped:</translation>
@@ -4180,7 +4180,7 @@ download content</translation>
         <source>Bouclage automatique</source>
         <translation>Auto loop</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/auto_loop/toolautoloop.h" line="21"/>
         <source>Traitement des échantillons</source>
         <translation>Sample processing</translation>
@@ -4188,17 +4188,17 @@ download content</translation>
 </context>
 <context>
     <name>ToolBalanceAdjustment</name>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/balance_adjustment/toolbalanceadjustment.cpp" line="96"/>
         <source>Cet outil ne s&apos;applique pas sur les échantillons mono :</source>
         <translation>This tool cannot be used with mono samples:</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/balance_adjustment/toolbalanceadjustment.h" line="39"/>
         <source>Équilibrer la balance</source>
         <translation>Balance adjustement</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/balance_adjustment/toolbalanceadjustment.h" line="21"/>
         <source>Échantillons stéréo</source>
         <translation>Stereo samples</translation>
@@ -4206,12 +4206,12 @@ download content</translation>
 </context>
 <context>
     <name>ToolCelesteTuning</name>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/celeste_tuning/toolcelestetuning.h" line="20"/>
         <source>Édition rapide</source>
         <translation>Fast editing</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/celeste_tuning/toolcelestetuning.h" line="35"/>
         <source>Désaccorder</source>
         <translation>Detune</translation>
@@ -4219,12 +4219,12 @@ download content</translation>
 </context>
 <context>
     <name>ToolCelesteTuning_gui</name>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/celeste_tuning/toolcelestetuning_gui.ui" line="20"/>
         <source>Division à l&apos;octave suivante</source>
         <translation>Division to the next octave</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/celeste_tuning/toolcelestetuning_gui.ui" line="60"/>
         <source>Le signe définit le sens du désaccordage.</source>
         <translation>The algebraic sign determines the tuning direction.</translation>
@@ -4242,12 +4242,12 @@ download content</translation>
 </context>
 <context>
     <name>ToolChangeAttenuation</name>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/change_attenuation/toolchangeattenuation.h" line="20"/>
         <source>Édition rapide</source>
         <translation>Fast editing</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/change_attenuation/toolchangeattenuation.h" line="38"/>
         <source>Modifier les atténuations</source>
         <translation>Change attenuations</translation>
@@ -4255,7 +4255,7 @@ download content</translation>
 </context>
 <context>
     <name>ToolChangeAttenuation_gui</name>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/change_attenuation/toolchangeattenuation_gui.ui" line="39"/>
         <source>Valeur désirée</source>
         <translation>Desired value</translation>
@@ -4265,7 +4265,7 @@ download content</translation>
         <source>Offset possible</source>
         <translation>Possible offset</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/change_attenuation/toolchangeattenuation_gui.ui" line="78"/>
         <source>Étendue des atténuations</source>
         <translation>Attenuation range</translation>
@@ -4278,7 +4278,7 @@ download content</translation>
 </context>
 <context>
     <name>ToolChangeVolume</name>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/change_volume/toolchangevolume.h" line="20"/>
         <source>Traitement des échantillons</source>
         <translation>Sample processing</translation>
@@ -4329,7 +4329,7 @@ download content</translation>
         <source>Transformation</source>
         <translation>Transformation</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/chords/toolchords.h" line="39"/>
         <source>Créer des accords</source>
         <translation>Create chords</translation>
@@ -4342,12 +4342,12 @@ download content</translation>
         <source>Nom de l&apos;instrument :</source>
         <translation>Instrument name:</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="35"/>
         <source>Création de son :</source>
         <translation>Sample creation:</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="43"/>
         <source>à chaque note</source>
         <translation>for every key</translation>
@@ -4367,7 +4367,7 @@ download content</translation>
         <source>Bouclage</source>
         <translation>Auto loop</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="71"/>
         <source>Stéréo</source>
         <translation>Stereo</translation>
@@ -4377,12 +4377,12 @@ download content</translation>
         <source>Accord</source>
         <translation>Chord</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="111"/>
         <source>Septième</source>
         <translation>Seventh</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="124"/>
         <source>Neuvième</source>
         <translation>Ninth</translation>
@@ -4435,7 +4435,7 @@ download content</translation>
         <source>Nombre de renversements</source>
         <translation>Inversion number</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="375"/>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="425"/>
         <source>diminuée</source>
@@ -4446,7 +4446,7 @@ download content</translation>
         <source>juste</source>
         <translation>perfect</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="430"/>
         <source>augmentée</source>
         <translation>augmented</translation>
@@ -4459,13 +4459,13 @@ download content</translation>
 </context>
 <context>
     <name>ToolCleanUnused</name>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/clean_unused_elements/toolcleanunused.cpp" line="86"/>
         <source>%1 échantillon(s) et %2 instrument(s) ont été supprimés.</source>
         <oldsource>%0 échantillon(s) et %1 instrument(s) ont été supprimés.</oldsource>
         <translation>%1 sample(s) and %2 instrument(s) have been deleted.</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/clean_unused_elements/toolcleanunused.h" line="43"/>
         <source>Enlever les éléments non utilisés</source>
         <translation>Remove unused elements</translation>
@@ -4501,7 +4501,7 @@ download content</translation>
 </context>
 <context>
     <name>ToolDivisionDuplication_gui</name>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/division_duplication/tooldivisionduplication_gui.ui" line="119"/>
         <source>Une division pour chaque étendue de vélocité</source>
         <translation>A division for each velocity range</translation>
@@ -4514,18 +4514,18 @@ download content</translation>
 </context>
 <context>
     <name>ToolExternalCommand</name>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/external_command/toolexternalcommand.cpp" line="90"/>
         <source>La commande n&apos;a pas pu démarrer.</source>
         <translation>Couldn&apos;t start the command.</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/external_command/toolexternalcommand.cpp" line="93"/>
         <source>La commande s&apos;est terminée avec une erreur.</source>
         <oldsource>La commande s&apos;est terminée avec une erreur</oldsource>
         <translation>The execution of the command ended with an error.</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/external_command/toolexternalcommand.h" line="24"/>
         <source>Traitement des échantillons</source>
         <translation>Sample processing</translation>
@@ -4548,12 +4548,12 @@ download content</translation>
         <source>Historique</source>
         <translation>History</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/external_command/toolexternalcommand_gui.ui" line="54"/>
         <source>Autoriser l&apos;édition stéréo</source>
         <translation>Authorize stereo editing</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/external_command/toolexternalcommand_gui.ui" line="61"/>
         <source>Remplacer les informations de l&apos;échantillon si possible</source>
         <translation>Replace sample information if possible</translation>
@@ -4563,7 +4563,7 @@ download content</translation>
         <source>Exemples de commandes :</source>
         <translation>Command examples:</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/external_command/toolexternalcommand_gui.cpp" line="75"/>
         <source>Fichier exécutable</source>
         <translation>Executable file</translation>
@@ -4587,13 +4587,13 @@ download content</translation>
 </context>
 <context>
     <name>ToolFrequencyFilter</name>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/frequency_filter/toolfrequencyfilter.h" line="20"/>
         <source>Traitement des échantillons</source>
         <oldsource>Filtrer des fréquences...</oldsource>
         <translation>Sample processing</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/frequency_filter/toolfrequencyfilter.h" line="35"/>
         <source>Filtrer des fréquences</source>
         <translation>Filter frequencies</translation>
@@ -4601,7 +4601,7 @@ download content</translation>
 </context>
 <context>
     <name>ToolFrequencyFilter_gui</name>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/frequency_filter/toolfrequencyfilter_gui.ui" line="26"/>
         <source>Mettre dans le rouge les fréquences du signal à filtrer :</source>
         <translation>Put in red the part of frequencies to filter:</translation>
@@ -4609,7 +4609,7 @@ download content</translation>
 </context>
 <context>
     <name>ToolFrequencyPeaks</name>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/frequency_peaks/toolfrequencypeaks.cpp" line="30"/>
         <source>Échantillon</source>
         <translation>Sample</translation>
@@ -4619,12 +4619,12 @@ download content</translation>
         <source>Pic</source>
         <translation>Peak</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/frequency_peaks/toolfrequencypeaks.cpp" line="31"/>
         <source>Intensité</source>
         <translation>Intensity</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/frequency_peaks/toolfrequencypeaks.cpp" line="31"/>
         <source>Fréquence</source>
         <translation>Frequency</translation>
@@ -4639,12 +4639,12 @@ download content</translation>
         <source>Correction</source>
         <translation>Correction</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/frequency_peaks/toolfrequencypeaks.cpp" line="57"/>
         <source>Succès</source>
         <translation>Success</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/frequency_peaks/toolfrequencypeaks.h" line="34"/>
         <source>Visualiser les pics de fréquences</source>
         <translation>Show peak frequency</translation>
@@ -4667,7 +4667,7 @@ download content</translation>
         <source>Fermer</source>
         <translation>Close</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="60"/>
         <source>Échantillon</source>
         <translation>Sample</translation>
@@ -4677,12 +4677,12 @@ download content</translation>
         <source>Pic</source>
         <translation>Peak</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="62"/>
         <source>Intensité</source>
         <translation>Intensity</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="63"/>
         <source>Fréquence</source>
         <translation>Frequency</translation>
@@ -4702,7 +4702,7 @@ download content</translation>
         <source>Hz</source>
         <translation>Hz</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="151"/>
         <source>Exporter les pics de fréquence</source>
         <translation>Export peak frequency</translation>
@@ -4715,12 +4715,12 @@ download content</translation>
 </context>
 <context>
     <name>ToolGlobalSettings</name>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/global_settings/toolglobalsettings.h" line="20"/>
         <source>Édition rapide</source>
         <translation>Fast editing</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/global_settings/toolglobalsettings.h" line="38"/>
         <source>Paramètrer en fonction des notes</source>
         <translation>Key-based configuration</translation>
@@ -4748,7 +4748,7 @@ download content</translation>
         <source>Remplacement</source>
         <translation>Replacement</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="86"/>
         <source>Paramètre</source>
         <translation>Parameter</translation>
@@ -4773,12 +4773,12 @@ download content</translation>
         <source>Manuel</source>
         <translation>Manual</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="168"/>
         <source>Linéaire ascendant</source>
         <translation>Linear ascending</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="173"/>
         <source>Linéaire descendant</source>
         <translation>Linear descending</translation>
@@ -4793,12 +4793,12 @@ download content</translation>
         <source>Exponentiel descendant</source>
         <translation>Exponential descending</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="188"/>
         <source>Aléatoire</source>
         <translation>Random</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="259"/>
         <source>Appliquer à l&apos;étendue de vélocité</source>
         <translation>Apply to a velocity range</translation>
@@ -4808,7 +4808,7 @@ download content</translation>
         <source>Raideur</source>
         <translation>Stiffness</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/global_settings/toolglobalsettings_gui.cpp" line="179"/>
         <source>Répartition</source>
         <translation>Distribution</translation>
@@ -4821,7 +4821,7 @@ download content</translation>
         <source>Trouver un lien</source>
         <translation>Find a link</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/link_sample/toollinksample.h" line="23"/>
         <source>Échantillons stéréo</source>
         <translation>Stereo samples</translation>
@@ -4839,7 +4839,7 @@ download content</translation>
         <source>Transformation</source>
         <translation>Transformation</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation.h" line="39"/>
         <source>Créer une mixture</source>
         <translation>Mixture creation</translation>
@@ -4852,12 +4852,12 @@ download content</translation>
         <source>Nom de la mixture :</source>
         <translation>Name of the mixture:</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="35"/>
         <source>Création de son :</source>
         <translation>Sample creation:</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="43"/>
         <source>à chaque note</source>
         <translation>for every key</translation>
@@ -4877,7 +4877,7 @@ download content</translation>
         <source>Bouclage</source>
         <translation>Auto loop</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="71"/>
         <source>Stéréo</source>
         <translation>Stereo</translation>
@@ -4917,57 +4917,57 @@ download content</translation>
         <source>tierce</source>
         <translation>third</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="357"/>
         <source>septième</source>
         <translation>seventh</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="362"/>
         <source>neuvième</source>
         <translation>ninth</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="367"/>
         <source>onzième</source>
         <translation>eleventh</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="372"/>
         <source>treizième</source>
         <translation>thirteenth</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="377"/>
         <source>quinzième</source>
         <translation>fifteenth</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="382"/>
         <source>dix-septième</source>
         <translation>seventeenth</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="387"/>
         <source>dix-neuvième</source>
         <translation>nineteenth</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="392"/>
         <source>vingt-et-unième</source>
         <translation>twenty-first</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="397"/>
         <source>vingt-troisième</source>
         <translation>twenty-third</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="402"/>
         <source>vingt-cinquième</source>
         <translation>twenty-fifth</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="407"/>
         <source>vingt-septième</source>
         <translation>twenty-seventh</translation>
@@ -4978,12 +4978,12 @@ download content</translation>
         <source>Attention</source>
         <translation>Warning</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.cpp" line="59"/>
         <source>Un titre doit être renseigné.</source>
         <translation>The instrument name must be provided.</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.cpp" line="75"/>
         <source>Au moins un rang doit être renseigné.</source>
         <translation>At least one rank must be specified.</translation>
@@ -4996,7 +4996,7 @@ download content</translation>
         <source>Analyse</source>
         <translation>Analyze</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/monitor/toolmonitor.h" line="31"/>
         <source>Visualiser les paramètres</source>
         <translation>Display parameters</translation>
@@ -5009,17 +5009,17 @@ download content</translation>
         <source>Visualisation</source>
         <translation>Display options</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/monitor/toolmonitor_gui.ui" line="140"/>
         <source>échelle log</source>
         <translation>Log scale</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/monitor/toolmonitor_gui.ui" line="162"/>
         <source>Légende</source>
         <translation>Legend</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/monitor/toolmonitor_gui.ui" line="221"/>
         <source>Paramètres par défaut</source>
         <translation>Default parameters</translation>
@@ -5029,7 +5029,7 @@ download content</translation>
         <source>Valeur moyenne par note</source>
         <translation>Mean value per key</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/monitor/toolmonitor_gui.ui" line="263"/>
         <source>Paramètres définis</source>
         <translation>Defined parameters</translation>
@@ -5055,7 +5055,7 @@ download content</translation>
         <source>Copier</source>
         <translation>Copy</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/preset_list/toolpresetlist_gui.ui" line="56"/>
         <source>texte copié dans le presse-papier</source>
         <translation>text copied in the clipboard</translation>
@@ -5078,7 +5078,7 @@ download content</translation>
 </context>
 <context>
     <name>ToolRelease</name>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/release/toolrelease.h" line="20"/>
         <source>Édition rapide</source>
         <translation>Fast editing</translation>
@@ -5091,17 +5091,17 @@ download content</translation>
 </context>
 <context>
     <name>ToolRelease_gui</name>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/release/toolrelease_gui.ui" line="43"/>
         <source>Division à l&apos;octave suivante</source>
         <translation>Division to the next octave</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/release/toolrelease_gui.ui" line="66"/>
         <source>Désaccordage provoqué (demi-tons)</source>
         <translation>Detuning induced (semi-tones)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/release/toolrelease_gui.cpp" line="27"/>
         <source>Durée release (note %1)</source>
         <translation>Release time (key %1)</translation>
@@ -5109,13 +5109,13 @@ download content</translation>
 </context>
 <context>
     <name>ToolRemoveMods</name>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/remove_mods/toolremovemods.cpp" line="90"/>
         <source>%1 modulateurs ont été supprimés.</source>
         <oldsource>%0 modulateurs ont été supprimés.</oldsource>
         <translation>%1 modulators have been deleted.</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/remove_mods/toolremovemods.cpp" line="97"/>
         <source>La sélection ne contient aucun modulateur.</source>
         <translation>The selection contains no modulators.</translation>
@@ -5133,7 +5133,7 @@ download content</translation>
 </context>
 <context>
     <name>ToolSampleExport</name>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/sample_export/toolsampleexport.cpp" line="15"/>
         <source>Choisir un répertoire de destination</source>
         <translation>Choose a destination folder</translation>
@@ -5151,7 +5151,7 @@ download content</translation>
 </context>
 <context>
     <name>ToolSoundSpatialization</name>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/sound_spatialization/toolsoundspatialization.h" line="19"/>
         <source>Édition rapide</source>
         <translation>Fast editing</translation>
@@ -5194,7 +5194,7 @@ download content</translation>
         <source>Pointe</source>
         <translation>Spike</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="164"/>
         <source>Aléatoire</source>
         <translation>Random</translation>
@@ -5227,7 +5227,7 @@ download content</translation>
         <source>Fusion des soundfonts :</source>
         <translation>Merge soudfonts:</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport.cpp" line="187"/>
         <source>L&apos;export a réussi !</source>
         <translation>Export successful!</translation>
@@ -5250,7 +5250,7 @@ download content</translation>
         <source>Tout cocher</source>
         <translation>Select all</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="29"/>
         <source>Tout décocher</source>
         <translation>Unselect all</translation>
@@ -5265,18 +5265,18 @@ download content</translation>
         <source>Format</source>
         <translation>Format</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="116"/>
         <source>classement général MIDI</source>
         <oldsource>classement général midi</oldsource>
         <translation>General MIDI classification</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="123"/>
         <source>un répertoire par banque</source>
         <translation>one directory per bank</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="130"/>
         <source>numéro de preset en préfixe</source>
         <translation>preset number as prefix</translation>
@@ -5296,7 +5296,7 @@ download content</translation>
         <source>Basse</source>
         <translation>Low</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="159"/>
         <source>Qualité</source>
         <translation>Quality</translation>
@@ -5311,7 +5311,7 @@ download content</translation>
         <source>Exporter</source>
         <translation>Export</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="117"/>
         <source>Choisissez un répertoire de destination</source>
         <translation>Select the destination directory</translation>
@@ -5324,22 +5324,22 @@ download content</translation>
         <source>Attention</source>
         <translation>Warning</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="133"/>
         <source>Le répertoire n&apos;est pas valide.</source>
         <translation>Invalid directory.</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="162"/>
         <source>Au moins un preset doit être sélectionné.</source>
         <translation>At least one preset must be selected.</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="168"/>
         <source>Le nombre maximal de soundfonts à exporter est de 127.</source>
         <translation>The maximal number of soundfont to export is 127.</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="177"/>
         <source>Dans le cas où plusieurs soundfonts sont exportées, le nombre maximal de presets par soundfont est de 127.</source>
         <translation>In the case where several soundfonts are exported, the maximal number of presets per soundfonts is 127.</translation>
@@ -5352,7 +5352,7 @@ download content</translation>
         <source>Un instrument ne contenant aucun sample n&apos;est pas compatible avec cet outil :</source>
         <translation>An instrument comprising no samples is not compatible with this tool:</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/transpose/tooltranspose.h" line="19"/>
         <source>Édition rapide</source>
         <translation>Fast editing</translation>
@@ -5365,7 +5365,7 @@ download content</translation>
 </context>
 <context>
     <name>ToolTransposeSmpl</name>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/transpose_smpl/tooltransposesmpl.h" line="20"/>
         <source>Traitement des échantillons</source>
         <translation>Sample processing</translation>
@@ -5378,7 +5378,7 @@ download content</translation>
 </context>
 <context>
     <name>ToolTransposeSmpl_gui</name>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/transpose_smpl/tooltransposesmpl_gui.ui" line="20"/>
         <source>Écart en demi-tons</source>
         <translation>Shift in semitones</translation>
@@ -5386,12 +5386,12 @@ download content</translation>
 </context>
 <context>
     <name>ToolTranspose_gui</name>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/transpose/tooltranspose_gui.ui" line="20"/>
         <source>Écart en demi-tons</source>
         <translation>Shift in semitones</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/transpose/tooltranspose_gui.ui" line="44"/>
         <source>Adapter l&apos;étendue de notes</source>
         <translation>Adapt keyrange</translation>
@@ -5399,12 +5399,12 @@ download content</translation>
 </context>
 <context>
     <name>ToolTrimEnd</name>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/trim_end/tooltrimend.h" line="38"/>
         <source>Ajuster à la fin de boucle</source>
         <translation>Trim to end of loop</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/trim_end/tooltrimend.h" line="20"/>
         <source>Traitement des échantillons</source>
         <translation>Sample processing</translation>
@@ -5417,7 +5417,7 @@ download content</translation>
         <source>Enlever le silence initial</source>
         <translation>Remove blank at start</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/trim_start/tooltrimstart.h" line="20"/>
         <source>Traitement des échantillons</source>
         <translation>Sample processing</translation>
@@ -5430,7 +5430,7 @@ download content</translation>
         <source>Dissocier</source>
         <translation>Unlink</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tools/unlink_sample/toolunlinksample.h" line="23"/>
         <source>Échantillons stéréo</source>
         <translation>Stereo samples</translation>
@@ -5448,7 +5448,7 @@ download content</translation>
         <source>Menu principal</source>
         <translation>Main menu</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="mainwindow/toprightwidget.cpp" line="83"/>
         <source>Souscrivez à un compte Premium pour bénéficier de toutes les fonctionnalités !</source>
         <translation>Subscribe to a Premium account to get all the features!</translation>
@@ -5459,7 +5459,7 @@ download content</translation>
         <oldsource>Bienvenue %0</oldsource>
         <translation>Welcome %1</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="mainwindow/toprightwidget.cpp" line="98"/>
         <source>Votre compte a été banni.</source>
         <oldsource>Ce compte a été banni.</oldsource>
@@ -5476,7 +5476,7 @@ download content</translation>
 </context>
 <context>
     <name>TreeViewMenu</name>
-    <message utf8="true">
+    <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="22"/>
         <source>&amp;Associer à...</source>
         <translation>&amp;Bind to...</translation>
@@ -5524,27 +5524,27 @@ download content</translation>
         <source>Attention</source>
         <translation>Warning</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="164"/>
         <source>Impossible de supprimer un échantillon s&apos;il est utilisé par un instrument.</source>
         <translation>Cannot delete a sample used by another instrument.</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="167"/>
         <source>Impossible de supprimer un instrument s&apos;il est utilisé par un preset.</source>
         <translation>Cannot delete an instrument used by another preset.</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="301"/>
         <source>Nom de l&apos;échantillon (max 20 caractères) :</source>
         <translation>Sample name (max 20 characters):</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="303"/>
         <source>Nom de l&apos;instrument (max 20 caractères) :</source>
         <translation>Instrument name (max 20 characters):</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="305"/>
         <source>Nom du preset (max 20 caractères) :</source>
         <translation>Preset name (max 20 characters):</translation>
@@ -5557,7 +5557,7 @@ download content</translation>
 </context>
 <context>
     <name>UserManager</name>
-    <message utf8="true">
+    <message>
         <location filename="repository/usermanager.cpp" line="94"/>
         <location filename="repository/usermanager.cpp" line="120"/>
         <location filename="repository/usermanager.cpp" line="126"/>
@@ -5594,7 +5594,7 @@ download content</translation>
 </context>
 <context>
     <name>WindowManager</name>
-    <message utf8="true">
+    <message>
         <location filename="mainwindow/windowmanager.cpp" line="50"/>
         <source>Préférences</source>
         <translation>Settings</translation>
@@ -5614,7 +5614,7 @@ download content</translation>
         <source>sans titre</source>
         <translation>untitled</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="mainwindow/windowmanager.cpp" line="174"/>
         <source>Le fichier « %1 » a été modifié.</source>
         <oldsource>Le fichier « %0 » a été modifié.</oldsource>
