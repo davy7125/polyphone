@@ -1706,27 +1706,27 @@ en ligne</translation>
         <translation>Créer un nouvel instrument</translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="257"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="258"/>
         <source>Name of the new instrument:</source>
         <translation>Nom du nouvel instrument :</translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="284"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="286"/>
         <source>Warning</source>
         <translation>Attention</translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="284"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="286"/>
         <source>No preset available.</source>
         <translation>Aucun preset n&apos;est disponible.</translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="297"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="299"/>
         <source>Create a new preset</source>
         <translation>Créer un nouveau preset</translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="297"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="300"/>
         <source>Name of the new preset:</source>
         <translation>Nom du nouveau preset :</translation>
     </message>
@@ -2699,74 +2699,74 @@ d&apos;échantillonnage</translation>
         <translation>Commentaires</translation>
     </message>
     <message>
-        <location filename="editor/pagesf2.ui" line="324"/>
+        <location filename="editor/pagesf2.ui" line="323"/>
         <source>Soundfont version</source>
         <translation>Version Soundfont</translation>
     </message>
     <message>
-        <location filename="editor/pagesf2.ui" line="366"/>
+        <location filename="editor/pagesf2.ui" line="359"/>
         <source>ROM name and version</source>
         <translation>Nom et version ROM</translation>
     </message>
     <message>
-        <location filename="editor/pagesf2.ui" line="408"/>
+        <location filename="editor/pagesf2.ui" line="395"/>
         <source>Sound engine</source>
         <translation>Sound engine</translation>
     </message>
     <message>
-        <location filename="editor/pagesf2.ui" line="450"/>
+        <location filename="editor/pagesf2.ui" line="431"/>
         <source>Editing software</source>
         <translation>Logiciel(s) d&apos;édition</translation>
     </message>
     <message>
-        <location filename="editor/pagesf2.ui" line="558"/>
+        <location filename="editor/pagesf2.ui" line="534"/>
         <source>Presets</source>
         <translation>Presets</translation>
     </message>
     <message>
-        <location filename="editor/pagesf2.ui" line="580"/>
-        <location filename="editor/pagesf2.ui" line="701"/>
-        <location filename="editor/pagesf2.ui" line="1029"/>
+        <location filename="editor/pagesf2.ui" line="556"/>
+        <location filename="editor/pagesf2.ui" line="677"/>
+        <location filename="editor/pagesf2.ui" line="1005"/>
         <source>Details</source>
         <translation>Détails</translation>
     </message>
     <message>
-        <location filename="editor/pagesf2.ui" line="679"/>
-        <location filename="editor/pagesf2.ui" line="778"/>
+        <location filename="editor/pagesf2.ui" line="655"/>
+        <location filename="editor/pagesf2.ui" line="754"/>
         <source>Samples</source>
         <translation>Échantillons</translation>
     </message>
     <message>
-        <location filename="editor/pagesf2.ui" line="764"/>
-        <location filename="editor/pagesf2.ui" line="833"/>
-        <location filename="editor/pagesf2.ui" line="896"/>
+        <location filename="editor/pagesf2.ui" line="740"/>
+        <location filename="editor/pagesf2.ui" line="809"/>
+        <location filename="editor/pagesf2.ui" line="872"/>
         <source>Number</source>
         <translation>Nombre</translation>
     </message>
     <message>
-        <location filename="editor/pagesf2.ui" line="792"/>
+        <location filename="editor/pagesf2.ui" line="768"/>
         <source>16 bits</source>
         <translation>16 bits</translation>
     </message>
     <message>
-        <location filename="editor/pagesf2.ui" line="797"/>
+        <location filename="editor/pagesf2.ui" line="773"/>
         <source>24 bits</source>
         <translation>24 bits</translation>
     </message>
     <message>
-        <location filename="editor/pagesf2.ui" line="826"/>
-        <location filename="editor/pagesf2.ui" line="924"/>
+        <location filename="editor/pagesf2.ui" line="802"/>
+        <location filename="editor/pagesf2.ui" line="900"/>
         <source>Modulators</source>
         <translation>Modulateurs</translation>
     </message>
     <message>
-        <location filename="editor/pagesf2.ui" line="854"/>
-        <location filename="editor/pagesf2.ui" line="889"/>
+        <location filename="editor/pagesf2.ui" line="830"/>
+        <location filename="editor/pagesf2.ui" line="865"/>
         <source>Parameters</source>
         <translation>Paramètres</translation>
     </message>
     <message>
-        <location filename="editor/pagesf2.ui" line="1007"/>
+        <location filename="editor/pagesf2.ui" line="983"/>
         <source>Instruments</source>
         <translation>Instruments</translation>
     </message>
