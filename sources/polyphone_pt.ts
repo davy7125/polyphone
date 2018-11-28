@@ -6,12 +6,12 @@
     <message>
         <location filename="core/input/abstractinput.cpp" line="18"/>
         <source>not processed yet</source>
-        <translation type="unfinished"></translation>
+        <translation>ainda não processado</translation>
     </message>
     <message>
         <location filename="core/input/abstractinput.cpp" line="56"/>
         <source>This file is already open.</source>
-        <translation type="unfinished"></translation>
+        <translation>Arquivo já aberto.</translation>
     </message>
 </context>
 <context>
@@ -19,7 +19,7 @@
     <message>
         <location filename="core/output/abstractoutput.cpp" line="16"/>
         <source>not processed yet</source>
-        <translation type="unfinished"></translation>
+        <translation>ainda não processado</translation>
     </message>
 </context>
 <context>
@@ -45,7 +45,7 @@
     <message>
         <location filename="core/types/attribute.cpp" line="512"/>
         <source>unknown</source>
-        <translation type="unfinished"></translation>
+        <translation>desconhecido</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="517"/>
@@ -241,102 +241,102 @@
     <message>
         <location filename="core/types/attribute.cpp" line="609"/>
         <source>Key → Mod env hold (c)</source>
-        <translation type="unfinished">Nota → Mod env hold (c)</translation>
+        <translation>Nota → Mod env hold (c)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="612"/>
         <source>Key → Mod env decay (c)</source>
-        <translation type="unfinished">Nota → Mod env decay (c)</translation>
+        <translation>Nota → Mod env decay (c)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="615"/>
         <source>Vol env delay (×)</source>
-        <translation type="unfinished">Vol env delay (×)</translation>
+        <translation>Vol env delay (×)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="616"/>
         <source>Vol env delay (s)</source>
-        <translation type="unfinished">Vol env delay (s)</translation>
+        <translation>Vol env delay (s)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="619"/>
         <source>Vol env attack (×)</source>
-        <translation type="unfinished">Vol env attack (×)</translation>
+        <translation>Vol env attack (×)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="620"/>
         <source>Vol env attack (s)</source>
-        <translation type="unfinished">Vol env attack (s)</translation>
+        <translation>Vol env attack (s)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="623"/>
         <source>Vol env hold (×)</source>
-        <translation type="unfinished">Vol env hold (×)</translation>
+        <translation>Vol env hold (×)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="624"/>
         <source>Vol env hold (s)</source>
-        <translation type="unfinished">Vol env hold (s)</translation>
+        <translation>Vol env hold (s)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="627"/>
         <source>Vol env decay (×)</source>
-        <translation type="unfinished">Vol env decay (×)</translation>
+        <translation>Vol env decay (×)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="628"/>
         <source>Vol env decay (s)</source>
-        <translation type="unfinished">Vol env decay (s)</translation>
+        <translation>Vol env decay (s)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="631"/>
         <source>Vol env sustain (dB)</source>
-        <translation type="unfinished">Vol env sustain (dB)</translation>
+        <translation>Vol env sustain (dB)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="634"/>
         <source>Vol env release (×)</source>
-        <translation type="unfinished">Vol env release (×)</translation>
+        <translation>Vol env release (×)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="635"/>
         <source>Vol env release (s)</source>
-        <translation type="unfinished">Vol env release (s)</translation>
+        <translation>Vol env release (s)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="638"/>
         <source>Key → Vol env hold (c)</source>
-        <translation type="unfinished">Nota → Vol env hold (c)</translation>
+        <translation>Nota → Vol env hold (c)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="641"/>
         <source>Key → Vol env decay (c)</source>
-        <translation type="unfinished">Nota → Vol env decay (c)</translation>
+        <translation>Nota → Vol env decay (c)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="644"/>
         <source>Key range</source>
-        <translation type="unfinished"></translation>
+        <translation>Alcance de notas</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="647"/>
         <source>Velocity range</source>
-        <translation type="unfinished">Alcance de velocidade</translation>
+        <translation>Alcance de velocidade</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="653"/>
         <source>Fixed key</source>
-        <translation type="unfinished">Nota fixa</translation>
+        <translation>Nota fixa</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="656"/>
         <source>Fixed velocity</source>
-        <translation type="unfinished">Velocidade fixa</translation>
+        <translation>Velocidade fixa</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="659"/>
         <source>Attenuation (dB)</source>
-        <translation type="unfinished">Atenuação (dB)</translation>
+        <translation>Atenuação (dB)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="662"/>
@@ -346,32 +346,32 @@
     <message>
         <location filename="core/types/attribute.cpp" line="665"/>
         <source>Tuning (semi-tones)</source>
-        <translation type="unfinished">Afinação (semitons)</translation>
+        <translation>Afinação (semitons)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="668"/>
         <source>Tuning (cents)</source>
-        <translation type="unfinished">Afinação (cents)</translation>
+        <translation>Afinação (cents)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="671"/>
         <source>Loop playback</source>
-        <translation type="unfinished"></translation>
+        <translation>Tocar com repetição</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="674"/>
         <source>Scale tuning</source>
-        <translation type="unfinished"></translation>
+        <translation>Afinação (escala)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="677"/>
         <source>Exclusive class</source>
-        <translation type="unfinished">Classe exclusiva</translation>
+        <translation>Classe exclusiva</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="680"/>
         <source>Root key</source>
-        <translation type="unfinished">Nota base</translation>
+        <translation>Nota base</translation>
     </message>
 </context>
 <context>
@@ -1139,12 +1139,12 @@
     <message>
         <location filename="context/interface/configpanel.ui" line="81"/>
         <source>General</source>
-        <translation type="unfinished">Geral</translation>
+        <translation>Geral</translation>
     </message>
     <message>
         <location filename="context/interface/configpanel.ui" line="114"/>
         <source>Interface</source>
-        <translation type="unfinished">Interface</translation>
+        <translation>Interface</translation>
     </message>
     <message>
         <location filename="context/interface/configpanel.ui" line="147"/>
@@ -1154,7 +1154,7 @@
     <message>
         <location filename="context/interface/configpanel.ui" line="180"/>
         <source>Virtual keyboard</source>
-        <translation type="unfinished">Teclado virtual</translation>
+        <translation>Teclado virtual</translation>
     </message>
     <message>
         <location filename="context/interface/configpanel.ui" line="213"/>
@@ -1167,52 +1167,53 @@
     <message>
         <location filename="context/interface/configsectiongeneral.ui" line="26"/>
         <source>Input / Output</source>
-        <translation type="unfinished">Entrada / Saída</translation>
+        <translation>Entrada / Saída</translation>
     </message>
     <message>
         <location filename="context/interface/configsectiongeneral.ui" line="95"/>
         <source>Audio backend</source>
-        <translation type="unfinished">Saída de áudio</translation>
+        <translation>Saída de áudio</translation>
     </message>
     <message>
         <location filename="context/interface/configsectiongeneral.ui" line="124"/>
         <source>Buffer size</source>
-        <translation type="unfinished">Tamanho do buffer</translation>
+        <translation>Tamanho do buffer</translation>
     </message>
     <message>
         <location filename="context/interface/configsectiongeneral.ui" line="147"/>
-        <source>Midi input</source>
-        <translation type="unfinished">Entrada MIDI</translation>
+        <source>MIDI input</source>
+        <oldsource>Midi input</oldsource>
+        <translation>Entrada MIDI</translation>
     </message>
     <message>
         <location filename="context/interface/configsectiongeneral.ui" line="163"/>
         <source>Options</source>
-        <translation type="unfinished">Opções</translation>
+        <translation>Opções</translation>
     </message>
     <message>
         <location filename="context/interface/configsectiongeneral.ui" line="178"/>
         <source>Wav file import</source>
-        <translation type="unfinished">Importação de arquivo WAV</translation>
+        <translation>Importação de arquivo WAV</translation>
     </message>
     <message>
         <location filename="context/interface/configsectiongeneral.ui" line="191"/>
         <source>change linked sample</source>
-        <translation type="unfinished">Refletir alterações</translation>
+        <translation>Refletir alterações</translation>
     </message>
     <message>
         <location filename="context/interface/configsectiongeneral.ui" line="204"/>
         <source>trim to loop</source>
-        <translation type="unfinished">Ajustar à repetição</translation>
+        <translation>Ajustar à repetição</translation>
     </message>
     <message>
         <location filename="context/interface/configsectiongeneral.ui" line="217"/>
         <source>Stereo editing</source>
-        <translation type="unfinished">Edição estéreo</translation>
+        <translation>Edição estéreo</translation>
     </message>
     <message>
         <location filename="context/interface/configsectiongeneral.ui" line="230"/>
         <source>remove blank at start</source>
-        <translation type="unfinished">Remover início vazio</translation>
+        <translation>Remover início vazio</translation>
     </message>
 </context>
 <context>
@@ -1220,47 +1221,47 @@
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="28"/>
         <source>Language</source>
-        <translation type="unfinished">Linguagem</translation>
+        <translation>Linguagem</translation>
     </message>
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="47"/>
         <source>Key names</source>
-        <translation type="unfinished">Nomes de notas</translation>
+        <translation>Nomes de notas</translation>
     </message>
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="67"/>
         <source>Middle C → 60, then 61</source>
-        <translation type="unfinished">C central → 60, então 61</translation>
+        <translation>C central → 60, então 61</translation>
     </message>
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="72"/>
         <source>Middle C → C3, then C♯3</source>
-        <translation type="unfinished">C central → C3, então C♯3</translation>
+        <translation>C central → C3, então C♯3</translation>
     </message>
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="77"/>
         <source>Middle C → C3, then D♭3</source>
-        <translation type="unfinished">C central→ C3, então D♭3</translation>
+        <translation>C central→ C3, então D♭3</translation>
     </message>
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="82"/>
         <source>Middle C → C4, then C♯4</source>
-        <translation type="unfinished">C central→ C4, então C♯4</translation>
+        <translation>C central→ C4, então C♯4</translation>
     </message>
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="87"/>
         <source>Middle C → C4, then D♭4</source>
-        <translation type="unfinished">Dó central→ C4, então D♭4</translation>
+        <translation>Dó central→ C4, então D♭4</translation>
     </message>
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="92"/>
         <source>Middle C → C5, then C♯5</source>
-        <translation type="unfinished">C central→ C5, então C♯5</translation>
+        <translation>C central→ C5, então C♯5</translation>
     </message>
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="97"/>
         <source>Middle C → C5, then D♭5</source>
-        <translation type="unfinished">C central→ C5, então D♭5</translation>
+        <translation>C central→ C5, então D♭5</translation>
     </message>
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="126"/>
@@ -1270,12 +1271,12 @@
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="232"/>
         <source>Selection</source>
-        <translation type="unfinished">Seleção</translation>
+        <translation>Seleção</translation>
     </message>
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="245"/>
         <source>Alternate background</source>
-        <translation type="unfinished">Fundo alternativo</translation>
+        <translation>Fundo alternativo</translation>
     </message>
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="292"/>
@@ -1283,12 +1284,12 @@
         <location filename="context/interface/configsectioninterface.ui" line="331"/>
         <location filename="context/interface/configsectioninterface.ui" line="598"/>
         <source>Text</source>
-        <translation type="unfinished">Texto</translation>
+        <translation>Texto</translation>
     </message>
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="305"/>
         <source>Window</source>
-        <translation type="unfinished">Janela</translation>
+        <translation>Janela</translation>
     </message>
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="344"/>
@@ -1296,12 +1297,12 @@
         <location filename="context/interface/configsectioninterface.ui" line="401"/>
         <location filename="context/interface/configsectioninterface.ui" line="585"/>
         <source>Background</source>
-        <translation type="unfinished">Fundo</translation>
+        <translation>Fundo</translation>
     </message>
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="414"/>
         <source>Button</source>
-        <translation type="unfinished">Botão</translation>
+        <translation>Botão</translation>
     </message>
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="624"/>
@@ -1311,12 +1312,12 @@
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="647"/>
         <source>List and table</source>
-        <translation type="unfinished">Lista e tabela</translation>
+        <translation>Lista e tabela</translation>
     </message>
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="663"/>
         <source>This modification will be applied during the next start of the software.</source>
-        <translation type="unfinished">As modificações serão aplicadas após o reinício do software.</translation>
+        <translation>As modificações serão aplicadas após o reinício do software.</translation>
     </message>
     <message>
         <location filename="context/interface/configsectioninterface.cpp" line="127"/>
@@ -1329,7 +1330,7 @@
         <location filename="context/interface/configsectioninterface.cpp" line="211"/>
         <location filename="context/interface/configsectioninterface.cpp" line="223"/>
         <source>Select a color</source>
-        <translation type="unfinished"></translation>
+        <translation>Escolha uma cor</translation>
     </message>
 </context>
 <context>
@@ -1337,32 +1338,32 @@
     <message>
         <location filename="context/interface/configsectionkeyboard.ui" line="45"/>
         <source>Octave #1</source>
-        <translation type="unfinished">Oitava #1</translation>
+        <translation>Oitava #1</translation>
     </message>
     <message>
         <location filename="context/interface/configsectionkeyboard.ui" line="50"/>
         <source>Octave #2</source>
-        <translation type="unfinished">Oitava #2</translation>
+        <translation>Oitava #2</translation>
     </message>
     <message>
         <location filename="context/interface/configsectionkeyboard.ui" line="55"/>
         <source>Octave #3</source>
-        <translation type="unfinished">Oitava #3</translation>
+        <translation>Oitava #3</translation>
     </message>
     <message>
         <location filename="context/interface/configsectionkeyboard.ui" line="60"/>
         <source>Octave #4</source>
-        <translation type="unfinished">Oitava #4</translation>
+        <translation>Oitava #4</translation>
     </message>
     <message>
         <location filename="context/interface/configsectionkeyboard.ui" line="133"/>
         <source>First C</source>
-        <translation type="unfinished">Primeiro Dó</translation>
+        <translation>Primeiro Dó</translation>
     </message>
     <message>
         <location filename="context/interface/configsectionkeyboard.ui" line="187"/>
         <source>Default velocity</source>
-        <translation type="unfinished">Velocidade padrão</translation>
+        <translation>Velocidade padrão</translation>
     </message>
 </context>
 <context>
@@ -1412,7 +1413,7 @@ Premium!</source>
     <message>
         <location filename="context/interface/configsectionrepository.cpp" line="88"/>
         <source>Cancel</source>
-        <translation type="unfinished">Cancelar</translation>
+        <translation>Cancelar</translation>
     </message>
     <message>
         <location filename="context/interface/configsectionrepository.cpp" line="91"/>
@@ -1444,48 +1445,48 @@ Premium!</source>
     <message>
         <location filename="context/interface/configsectionsound.ui" line="26"/>
         <source>Reverb</source>
-        <translation type="unfinished">Reverberação</translation>
+        <translation>Reverberação</translation>
     </message>
     <message>
         <location filename="context/interface/configsectionsound.ui" line="39"/>
         <source>Gain (dB)</source>
-        <translation type="unfinished">Ganho (dB)</translation>
+        <translation>Ganho (dB)</translation>
     </message>
     <message>
         <location filename="context/interface/configsectionsound.ui" line="88"/>
         <source>Width</source>
-        <translation type="unfinished">Largura</translation>
+        <translation>Largura</translation>
     </message>
     <message>
         <location filename="context/interface/configsectionsound.ui" line="123"/>
         <location filename="context/interface/configsectionsound.ui" line="297"/>
         <source>Level</source>
-        <translation type="unfinished">Volume</translation>
+        <translation>Volume</translation>
     </message>
     <message>
         <location filename="context/interface/configsectionsound.ui" line="178"/>
         <source>Damp</source>
-        <translation type="unfinished">Suavização</translation>
+        <translation>Suavização</translation>
     </message>
     <message>
         <location filename="context/interface/configsectionsound.ui" line="194"/>
         <source>Room</source>
-        <translation type="unfinished">Sala</translation>
+        <translation>Sala</translation>
     </message>
     <message>
         <location filename="context/interface/configsectionsound.ui" line="264"/>
         <source>Chorus</source>
-        <translation type="unfinished">Chorus</translation>
+        <translation>Chorus</translation>
     </message>
     <message>
         <location filename="context/interface/configsectionsound.ui" line="345"/>
         <source>Frequency</source>
-        <translation type="unfinished">Frequência</translation>
+        <translation>Frequência</translation>
     </message>
     <message>
         <location filename="context/interface/configsectionsound.ui" line="361"/>
         <source>Depth</source>
-        <translation type="unfinished">Profundidade</translation>
+        <translation>Profundidade</translation>
     </message>
 </context>
 <context>
@@ -1493,12 +1494,12 @@ Premium!</source>
     <message>
         <location filename="context/interface/configtoc.ui" line="59"/>
         <source>General</source>
-        <translation type="unfinished">Geral</translation>
+        <translation>Geral</translation>
     </message>
     <message>
         <location filename="context/interface/configtoc.ui" line="72"/>
         <source>Interface</source>
-        <translation type="unfinished">Interface</translation>
+        <translation>Interface</translation>
     </message>
     <message>
         <location filename="context/interface/configtoc.ui" line="85"/>
@@ -1508,7 +1509,7 @@ Premium!</source>
     <message>
         <location filename="context/interface/configtoc.ui" line="98"/>
         <source>Virtual keyboard</source>
-        <translation type="unfinished">Teclado virtual</translation>
+        <translation>Teclado virtual</translation>
     </message>
     <message>
         <location filename="context/interface/configtoc.ui" line="111"/>
@@ -1527,7 +1528,7 @@ repository</source>
     <message>
         <location filename="core/output/sfz/conversion_sfz.cpp" line="256"/>
         <source>untitled</source>
-        <translation type="unfinished">sem nome</translation>
+        <translation>sem nome</translation>
     </message>
     <message>
         <location filename="core/output/sfz/conversion_sfz.cpp" line="540"/>
@@ -1692,7 +1693,7 @@ repository</source>
     <message>
         <location filename="dialogs/dialog_about.cpp" line="48"/>
         <source>https://www.polyphone-soundfonts.com/en</source>
-        <translation type="unfinished"></translation>
+        <translation>https://www.polyphone-soundfonts.com/en</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_about.cpp" line="64"/>
@@ -1930,7 +1931,7 @@ repository</source>
     <message>
         <location filename="dialogs/dialogcreateelements.ui" line="17"/>
         <source>Question</source>
-        <translation type="unfinished">Questão</translation>
+        <translation>Questão</translation>
     </message>
     <message>
         <location filename="dialogs/dialogcreateelements.cpp" line="31"/>
