@@ -1,7 +1,7 @@
 /***************************************************************************
 **                                                                        **
 **  Polyphone, a soundfont editor                                         **
-**  Copyright (C) 2013-2017 Davy Triponney                                **
+**  Copyright (C) 2013-2018 Davy Triponney                                **
 **                                                                        **
 **  This program is free software: you can redistribute it and/or modify  **
 **  it under the terms of the GNU General Public License as published by  **
@@ -10,15 +10,15 @@
 **                                                                        **
 **  This program is distributed in the hope that it will be useful,       **
 **  but WITHOUT ANY WARRANTY; without even the implied warranty of        **
-**  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the         **
+**  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the          **
 **  GNU General Public License for more details.                          **
 **                                                                        **
 **  You should have received a copy of the GNU General Public License     **
-**  along with this program.  If not, see http://www.gnu.org/licenses/.   **
+**  along with this program. If not, see http://www.gnu.org/licenses/.    **
 **                                                                        **
 ****************************************************************************
 **           Author: Davy Triponney                                       **
-**  Website/Contact: http://polyphone-soundfonts.com                      **
+**  Website/Contact: https://www.polyphone-soundfonts.com                 **
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
@@ -45,12 +45,12 @@
 #include "macapplication.h"
 #endif
 
-int launchApplication(Options &options, QApplication& a)
+int launchApplication(Options &options)
 {
     // Application name
-    a.setApplicationName("Polyphone");
-    a.setOrganizationName("polyphone");
-    ContextManager::translation()->translate(&a);
+    QApplication::setApplicationName("Polyphone");
+    QApplication::setOrganizationName("polyphone");
+    ContextManager::translation()->translate();
 
     // Application style
     QApplication::setStyle(QStyleFactory::create("Fusion"));
@@ -74,7 +74,7 @@ int launchApplication(Options &options, QApplication& a)
     QObject::connect(&a, SIGNAL(openFile(QString)), &w, SLOT(dragAndDrop(QString)));
 #endif
 
-    return a.exec();
+    return QApplication::exec();
 }
 
 /// Error codes
@@ -135,7 +135,6 @@ int convert(Options &options)
         output->setOption("bankdir", options.sfzOneDirPerBank());
         output->setOption("gmsort", options.sfzGeneralMidi());
         qInfo() << "Exporting in directory" << options.getOutputDirectory() << "...";
-        break;
     } break;
     default:
         qWarning() << "fail";
@@ -158,12 +157,12 @@ int convert(Options &options)
     return 0;
 }
 
-int resetConfig(Options &options, QApplication& a)
+int resetConfig(Options &options)
 {
     Q_UNUSED(options)
 
-    a.setApplicationName("Polyphone");
-    a.setOrganizationName("polyphone");
+    QApplication::setApplicationName("Polyphone");
+    QApplication::setOrganizationName("polyphone");
     QSettings settings;
     settings.clear();
     qInfo() << "Previous configuration is now cleared.";
@@ -191,9 +190,9 @@ int main(int argc, char *argv[])
     if (options.error() || options.help())
         valRet = displayHelp(options);
     else if (options.mode() == Options::MODE_GUI)
-        valRet = launchApplication(options, a);
+        valRet = launchApplication(options);
     else if (options.mode() == Options::MODE_RESET_CONFIG)
-        valRet = resetConfig(options, a);
+        valRet = resetConfig(options);
     else
         valRet = convert(options);
 

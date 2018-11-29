@@ -10,7 +10,7 @@
 **                                                                        **
 **  This program is distributed in the hope that it will be useful,       **
 **  but WITHOUT ANY WARRANTY; without even the implied warranty of        **
-**  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the         **
+**  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the          **
 **  GNU General Public License for more details.                          **
 **                                                                        **
 **  You should have received a copy of the GNU General Public License     **
@@ -38,7 +38,7 @@ public:
     ~TranslationManager();
 
     /// Translate the application according to the default locale or the overwritten local in QSettings
-    void translate(QApplication * a);
+    void translate();
 
     /// Get all languages, key is two letters (en, fr, ...), value is the language native name
     QMap<QString, QString> getLanguages() { return _languages; }
