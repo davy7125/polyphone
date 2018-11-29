@@ -22,70 +22,34 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef URLREADER_H
-#define URLREADER_H
+#ifndef DOWNLOADPROGRESSBUTTON_H
+#define DOWNLOADPROGRESSBUTTON_H
 
-#include <QObject>
-class QNetworkAccessManager;
-class QNetworkReply;
-class QTimer;
-class QMutex;
+#include <QToolButton>
 #include <QMap>
+class DownloadProgressCell;
+class QMenu;
 
-// Base class for downloading data
-class UrlReader: public QObject
+class DownloadProgressButton : public QToolButton
 {
     Q_OBJECT
 
 public:
-    // Constructor, destructor
-    explicit UrlReader(QString url);
-    ~UrlReader();
+    DownloadProgressButton(QWidget *parent = nullptr);
+    ~DownloadProgressButton();
 
-    // Set the url
-    void setUrl(QString url) { _url = url; }
-    void clearArguments() { _arguments.clear(); }
-    void addArgument(QString key, QString value);
-
-    // Start the download. When this is finished, the signal "downloadCompleted" is emitted
-    void download();
-
-    // Stop the download
-    void stop();
-
-    // Get raw data
-    QByteArray getRawData() { return _data; }
-
-    QString getUrl() { return _url; }
+    void progressChanged(int percent, int soundfontId, QString soundfontName, QString finalFileName);
 
 signals:
-    // Emitted when the download is complete
-    // The download is successful when the error is empty
-    void downloadCompleted(QString error);
-
-    // Signal emitted when the download is going on
-    void progressChanged(int percent);
-
-protected:
-    // This will be specific for each specialized url reader
-    virtual void processData() {}
-
-private slots:
-    void fileDownloaded(QNetworkReply* pReply);
-    void onTimeout();
-    void downloadProgressed(qint64 bytesReceived, qint64 bytesTotal);
+    void cleared();
 
 private:
-    QString _url;
-    QMap<QString, QString> _arguments;
-    QNetworkAccessManager * _webCtrl;
-    QByteArray _data;
-    QTimer * _timer;
-    QNetworkReply* _reply;
-    bool _queryProcessed;
-    QMutex * _mutex;
+    void updatePercent();
 
-    static const int TIMEOUT_MS;
+    QMap<QString, QPair<int, QString> > _downloadStatus;
+    QMap<QString, QString> _svgReplacements;
+    QMenu * _menu;
+    QMap<QString, DownloadProgressCell *> _cells;
 };
 
-#endif // URLREADER_H
+#endif // DOWNLOADPROGRESSBUTTON_H

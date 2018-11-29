@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>123</width>
+    <width>166</width>
     <height>35</height>
    </rect>
   </property>
@@ -20,6 +20,9 @@
    <string notr="true">Form</string>
   </property>
   <layout class="QHBoxLayout" name="horizontalLayout">
+   <property name="spacing">
+    <number>3</number>
+   </property>
    <property name="leftMargin">
     <number>9</number>
    </property>
@@ -85,6 +88,28 @@
     </widget>
    </item>
    <item>
+    <widget class="DownloadProgressButton" name="toolButtonDownload">
+     <property name="cursor">
+      <cursorShape>PointingHandCursor</cursorShape>
+     </property>
+     <property name="toolTip">
+      <string>Download status</string>
+     </property>
+     <property name="text">
+      <string notr="true"/>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>28</width>
+       <height>28</height>
+      </size>
+     </property>
+     <property name="popupMode">
+      <enum>QToolButton::InstantPopup</enum>
+     </property>
+    </widget>
+   </item>
+   <item>
     <widget class="QToolButton" name="toolButton">
      <property name="cursor">
       <cursorShape>PointingHandCursor</cursorShape>
@@ -114,6 +139,11 @@
    <extends>QWidget</extends>
    <header>rotatingspinner.h</header>
    <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>DownloadProgressButton</class>
+   <extends>QToolButton</extends>
+   <header>downloadprogressbutton.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

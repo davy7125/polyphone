@@ -405,7 +405,9 @@ SOURCES	+= main.cpp \
     repository/urlreaderimage.cpp \
     repository/soundfont/soundfontdownloadcell.cpp \
     repository/soundfont/soundfontcommentcell.cpp \
-    repository/downloadmanager.cpp
+    repository/downloadmanager.cpp \
+    repository/widgets/downloadprogressbutton.cpp \
+    repository/widgets/downloadprogresscell.cpp
 
 HEADERS  += \
     core/sound.h \
@@ -672,7 +674,9 @@ HEADERS  += \
     repository/urlreaderimage.h \
     repository/soundfont/soundfontdownloadcell.h \
     repository/soundfont/soundfontcommentcell.h \
-    repository/downloadmanager.h
+    repository/downloadmanager.h \
+    repository/widgets/downloadprogressbutton.h \
+    repository/widgets/downloadprogresscell.h
 
 FORMS    += \
     dialogs/dialog_list.ui \
@@ -732,7 +736,8 @@ FORMS    += \
     repository/soundfont/soundfontdownload.ui \
     repository/soundfont/soundfontcomment.ui \
     repository/soundfont/soundfontdownloadcell.ui \
-    repository/soundfont/soundfontcommentcell.ui
+    repository/soundfont/soundfontcommentcell.ui \
+    repository/widgets/downloadprogresscell.ui
 
 RESOURCES += resources.qrc
 

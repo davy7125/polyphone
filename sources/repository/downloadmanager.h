@@ -41,8 +41,11 @@ public:
     /// Ask for downloading a soundfont
     void download(int id, QString soundfontName);
 
+    /// Stop a download
+    void cancel(int soundfontId);
+
 signals:
-    void progressChanged(int percent, QString soundfontName, QString finalFileName);
+    void progressChanged(int percent, int soundfontId, QString soundfontName, QString finalFileName);
 
 private slots:
     void fileDownloaded(QString error);

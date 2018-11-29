@@ -22,70 +22,52 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef URLREADER_H
-#define URLREADER_H
+#include "downloadprogresscell.h"
+#include "ui_downloadprogresscell.h"
+#include "contextmanager.h"
+#include "downloadmanager.h"
 
-#include <QObject>
-class QNetworkAccessManager;
-class QNetworkReply;
-class QTimer;
-class QMutex;
-#include <QMap>
-
-// Base class for downloading data
-class UrlReader: public QObject
+DownloadProgressCell::DownloadProgressCell(QString soundfontName, int soundfontId, QWidget *parent) :
+    QWidget(parent),
+    ui(new Ui::DownloadProgressCell),
+    _soundfontName(soundfontName),
+    _soundfontId(soundfontId)
 {
-    Q_OBJECT
+    ui->setupUi(this);
 
-public:
-    // Constructor, destructor
-    explicit UrlReader(QString url);
-    ~UrlReader();
+    // Style
+    ui->pushCancel->setIcon(ContextManager::theme()->getColoredSvg(":/icons/close.svg", QSize(16, 16), ThemeManager::LIST_TEXT));
+    ui->pushOpen->setIcon(ContextManager::theme()->getColoredSvg(":/icons/document-open.svg", QSize(16, 16), ThemeManager::LIST_TEXT));
+    ui->pushOpen->hide();
 
-    // Set the url
-    void setUrl(QString url) { _url = url; }
-    void clearArguments() { _arguments.clear(); }
-    void addArgument(QString key, QString value);
+    // Data
+    ui->labelTitle->setText(_soundfontName);
+}
 
-    // Start the download. When this is finished, the signal "downloadCompleted" is emitted
-    void download();
+DownloadProgressCell::~DownloadProgressCell()
+{
+    delete ui;
+}
 
-    // Stop the download
-    void stop();
+void DownloadProgressCell::progressChanged(int percent, QString finalFileName)
+{
+    _filename = finalFileName;
+    ui->labelPercent->setText(QString::number(percent) + "%");
 
-    // Get raw data
-    QByteArray getRawData() { return _data; }
+    if (finalFileName != "")
+    {
+        ui->pushOpen->setToolTip(trUtf8("Open \"%0\"").arg(_filename));
+        ui->pushCancel->hide();
+        ui->pushOpen->show();
+    }
+}
 
-    QString getUrl() { return _url; }
+void DownloadProgressCell::on_pushOpen_clicked()
+{
 
-signals:
-    // Emitted when the download is complete
-    // The download is successful when the error is empty
-    void downloadCompleted(QString error);
+}
 
-    // Signal emitted when the download is going on
-    void progressChanged(int percent);
-
-protected:
-    // This will be specific for each specialized url reader
-    virtual void processData() {}
-
-private slots:
-    void fileDownloaded(QNetworkReply* pReply);
-    void onTimeout();
-    void downloadProgressed(qint64 bytesReceived, qint64 bytesTotal);
-
-private:
-    QString _url;
-    QMap<QString, QString> _arguments;
-    QNetworkAccessManager * _webCtrl;
-    QByteArray _data;
-    QTimer * _timer;
-    QNetworkReply* _reply;
-    bool _queryProcessed;
-    QMutex * _mutex;
-
-    static const int TIMEOUT_MS;
-};
-
-#endif // URLREADER_H
+void DownloadProgressCell::on_pushCancel_clicked()
+{
+    DownloadManager::getInstance()->cancel(_soundfontId);
+}
