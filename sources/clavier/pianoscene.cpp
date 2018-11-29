@@ -52,7 +52,7 @@ qreal PianoScene::sceneWidth(int startKey, int keys)
 
 double PianoScene::getOffsetX(int numKey)
 {
-    float offset;
+    double offset;
     switch (numKey % 12)
     {
     case 1:  offset = .425; break;
@@ -172,8 +172,8 @@ void PianoScene::createKeyboard()
             numKeyX += degree / 2;
         numKeyX -= skippedWhiteKeys;
 
-        float offsetX = getOffsetX(i);
-        float coefWidth, coefHeight;
+        double offsetX = getOffsetX(i);
+        double coefWidth, coefHeight;
         if (offsetX == 0)
         {
             coefWidth = 1;
