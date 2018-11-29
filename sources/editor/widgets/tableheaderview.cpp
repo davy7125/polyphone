@@ -43,8 +43,11 @@ TableHeaderView::TableHeaderView(QWidget *parent) : QHeaderView(Qt::Horizontal, 
     _muteAction->setCheckable(true);
     connect(_muteAction, SIGNAL(toggled(bool)), this, SLOT(mute(bool)));
 
-    QAction * action = _menu->addAction(trUtf8("unmute all"));
-    connect(action, SIGNAL(triggered(bool)), this, SLOT(unmuteAll(bool)));
+    QAction * action1 = _menu->addAction(trUtf8("activate solo"));
+    connect(action1, SIGNAL(triggered(bool)), this, SLOT(activateSolo(bool)));
+
+    QAction * action2 = _menu->addAction(trUtf8("unmute all"));
+    connect(action2, SIGNAL(triggered(bool)), this, SLOT(unmuteAll(bool)));
 }
 
 TableHeaderView::~TableHeaderView()
@@ -82,6 +85,57 @@ void TableHeaderView::mute(bool isMute)
     // Update the header
     this->model()->setHeaderData(_currentSection, Qt::Horizontal,
                                  isMute ? QVariant::fromValue(_muteIcon) : QVariant(), Qt::DecorationRole);
+}
+
+void TableHeaderView::activateSolo(bool unused)
+{
+    Q_UNUSED(unused)
+    SoundfontManager * sm = SoundfontManager::getInstance();
+    AttributeValue val;
+
+    // Current id is a division of a preset?
+    if (_currentId.typeElement == elementPrstInst)
+    {
+        // First unmute all divisions of the targeted instrument
+        val.bValue = false;
+
+        EltID idInst(elementInst, _currentId.indexSf2);
+        idInst.indexElt = sm->get(_currentId, champ_instrument).wValue;
+        EltID idInstSmpl(elementInstSmpl, idInst.indexSf2, idInst.indexElt);
+        foreach (int subIndex, sm->getSiblings(idInstSmpl))
+        {
+            idInstSmpl.indexElt2 = subIndex;
+            sm->set(idInstSmpl, champ_mute, val);
+        }
+
+        // Unmute all preset divisions except current id
+        EltID idPrstInst(elementPrstInst, _currentId.indexSf2, _currentId.indexElt);
+        foreach (int subIndex, sm->getSiblings(idPrstInst))
+        {
+            idPrstInst.indexElt2 = subIndex;
+            val.bValue = (subIndex != _currentId.indexElt2);
+            sm->set(idPrstInst, champ_mute, val);
+        }
+    }
+    else
+    {
+        // Unmute all instrument divisions except current id
+        EltID idPrstInst(elementInstSmpl, _currentId.indexSf2, _currentId.indexElt);
+        foreach (int subIndex, sm->getSiblings(idPrstInst))
+        {
+            idPrstInst.indexElt2 = subIndex;
+            val.bValue = (subIndex != _currentId.indexElt2);
+            sm->set(idPrstInst, champ_mute, val);
+        }
+    }
+
+    // Update all decorations
+    for (int i = 0; i < this->model()->columnCount(); i++)
+    {
+        bool isMute = (i != _currentSection && i != 0);
+        this->model()->setHeaderData(i, Qt::Horizontal,
+                                     isMute ? QVariant::fromValue(_muteIcon) : QVariant(), Qt::DecorationRole);
+    }
 }
 
 void TableHeaderView::unmuteAll(bool unused)
