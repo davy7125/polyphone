@@ -81,6 +81,7 @@
         <file alias="skull.svg">resources/skull.svg</file>
         <file alias="file-description.svg">resources/file-description.svg</file>
         <file alias="home.svg">resources/home.svg</file>
+        <file alias="download_progress.svg">resources/download_progress.svg</file>
     </qresource>
     <qresource prefix="/translations">
         <file>resources/translations/polyphone_cs.qm</file>

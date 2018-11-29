@@ -27,6 +27,7 @@
 #include "mainmenu.h"
 #include "contextmanager.h"
 #include "usermanager.h"
+#include "downloadmanager.h"
 
 TopRightWidget::TopRightWidget(QWidget *parent) :
     QWidget(parent),
@@ -52,6 +53,8 @@ TopRightWidget::TopRightWidget(QWidget *parent) :
         _colorReplacement["currentColor"] = this->palette().color(QPalette::BrightText).lighter().name();
     }
     ui->toolButton->setStyleSheet("QToolButton::menu-indicator{width:0px;} QToolButton{margin: 3px;padding: 3px;background-color:#000}");
+    ui->toolButtonDownload->setStyleSheet("QToolButton::menu-indicator{width:0px;} QToolButton{border:0;margin: 3px;padding: 3px;}");
+    ui->toolButtonDownload->hide();
 
     // Add the main menu
     _menu = new MainMenu(ui->toolButton);
@@ -71,6 +74,9 @@ TopRightWidget::TopRightWidget(QWidget *parent) :
     connect(_menu, SIGNAL(fullScreenTriggered()), this, SIGNAL(fullScreenTriggered()));
     connect(UserManager::getInstance(), SIGNAL(connectionStateChanged(UserManager::ConnectionState)),
             this, SLOT(userStateChanged(UserManager::ConnectionState)));
+    connect(DownloadManager::getInstance(), SIGNAL(progressChanged(int,int,QString,QString)), this, SLOT(progressChanged(int,int,QString,QString)),
+            Qt::QueuedConnection);
+    connect(ui->toolButtonDownload, SIGNAL(cleared()), this, SLOT(downloadCleared()));
 
     userStateChanged(UserManager::DISCONNECTED);
 }
@@ -139,4 +145,15 @@ void TopRightWidget::userStateChanged(UserManager::ConnectionState state)
 void TopRightWidget::on_pushUser_clicked()
 {
     emit(userClicked());
+}
+
+void TopRightWidget::progressChanged(int percent, int soundfontId, QString soundfontName, QString finalFileName)
+{
+    ui->toolButtonDownload->progressChanged(percent, soundfontId, soundfontName, finalFileName);
+    ui->toolButtonDownload->show();
+}
+
+void TopRightWidget::downloadCleared()
+{
+    ui->toolButtonDownload->hide();
 }
