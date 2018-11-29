@@ -387,261 +387,313 @@
     <message>
         <location filename="context/confmanager.cpp" line="127"/>
         <source>Z</source>
+        <comment>first key mapping for bottom left C</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="128"/>
         <source>S</source>
+        <comment>first key mapping for bottom C#</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="129"/>
         <source>X</source>
+        <comment>first key mapping for bottom D</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="130"/>
         <source>D</source>
+        <comment>first key mapping for bottom D#</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="131"/>
         <source>C</source>
+        <comment>first key mapping for bottom E</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="132"/>
         <source>V</source>
+        <comment>first key mapping for bottom F</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="133"/>
         <source>G</source>
+        <comment>first key mapping for bottom F#</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="134"/>
         <source>B</source>
+        <comment>first key mapping for bottom G</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="135"/>
         <source>H</source>
+        <comment>first key mapping for bottom G#</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="136"/>
         <source>N</source>
+        <comment>first key mapping for bottom A</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="137"/>
         <source>J</source>
+        <comment>first key mapping for bottom A#</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="138"/>
         <source>M</source>
+        <comment>first key mapping for bottom B</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="139"/>
         <source>,</source>
+        <comment>first key mapping for bottom right C</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="145"/>
         <source>Q</source>
+        <comment>first key mapping for upper left C</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="146"/>
         <source>2</source>
+        <comment>first key mapping for upper C#</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="147"/>
         <source>W</source>
+        <comment>first key mapping for upper D</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="148"/>
         <source>3</source>
+        <comment>first key mapping for upper D#</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="149"/>
         <source>E</source>
+        <comment>first key mapping for upper E</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="150"/>
         <source>R</source>
+        <comment>first key mapping for upper F</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="151"/>
         <source>5</source>
+        <comment>first key mapping for upper F#</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="152"/>
         <source>T</source>
+        <comment>first key mapping for upper G</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="153"/>
         <source>6</source>
+        <comment>first key mapping for upper G#</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="154"/>
         <source>Y</source>
+        <comment>first key mapping for upper A</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="155"/>
         <source>7</source>
+        <comment>first key mapping for upper A#</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="156"/>
         <source>U</source>
+        <comment>first key mapping for upper B</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="157"/>
         <source>I</source>
+        <comment>first key mapping for upper right C</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="163"/>
         <source>Shift+Z</source>
+        <comment>second key mapping for bottom left C</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="164"/>
         <source>Shift+S</source>
+        <comment>second key mapping for bottom C#</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="165"/>
         <source>Shift+X</source>
+        <comment>second key mapping for bottom D</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="166"/>
         <source>Shift+D</source>
+        <comment>second key mapping for bottom D#</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="167"/>
         <source>Shift+C</source>
+        <comment>second key mapping for bottom E</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="168"/>
         <source>Shift+V</source>
+        <comment>second key mapping for bottom F</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="169"/>
         <source>Shift+G</source>
+        <comment>second key mapping for bottom F#</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="170"/>
         <source>Shift+B</source>
+        <comment>second key mapping for bottom G</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="171"/>
         <source>Shift+H</source>
+        <comment>second key mapping for bottom G#</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="172"/>
         <source>Shift+N</source>
+        <comment>second key mapping for bottom A</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="173"/>
         <source>Shift+J</source>
+        <comment>second key mapping for bottom A#</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="174"/>
         <source>Shift+M</source>
+        <comment>second key mapping for bottom B</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="175"/>
         <source>Shift+&lt;</source>
+        <comment>second key mapping for bottom right C</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="181"/>
         <source>Shift+Q</source>
+        <comment>second key mapping for upper left C</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="182"/>
         <source>Shift+@</source>
+        <comment>second key mapping for upper C#</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="183"/>
         <source>Shift+W</source>
+        <comment>second key mapping for upper D</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="184"/>
         <source>Shift+#</source>
+        <comment>second key mapping for upper D#</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="185"/>
         <source>Shift+E</source>
+        <comment>second key mapping for upper E</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="186"/>
         <source>Shift+R</source>
+        <comment>second key mapping for upper F</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="187"/>
         <source>Shift+%</source>
+        <comment>second key mapping for upper F#</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="188"/>
         <source>Shift+T</source>
+        <comment>second key mapping for upper G</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="189"/>
         <source>Shift+^</source>
+        <comment>second key mapping for upper G#</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="190"/>
         <source>Shift+Y</source>
+        <comment>second key mapping for upper A</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="191"/>
         <source>Shift+&amp;</source>
+        <comment>second key mapping for upper A#</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="192"/>
         <source>Shift+U</source>
+        <comment>second key mapping for upper B</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="193"/>
         <source>Shift+I</source>
+        <comment>second key mapping for upper right C</comment>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1971,57 +2023,57 @@ repository</source>
 <context>
     <name>MainMenu</name>
     <message>
-        <location filename="mainwindow/mainmenu.cpp" line="15"/>
+        <location filename="mainwindow/mainmenu.cpp" line="39"/>
         <source>&amp;New</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow/mainmenu.cpp" line="20"/>
+        <location filename="mainwindow/mainmenu.cpp" line="44"/>
         <source>&amp;Open...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow/mainmenu.cpp" line="27"/>
+        <location filename="mainwindow/mainmenu.cpp" line="51"/>
         <source>&amp;Save</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow/mainmenu.cpp" line="32"/>
+        <location filename="mainwindow/mainmenu.cpp" line="56"/>
         <source>Save &amp;as...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow/mainmenu.cpp" line="37"/>
+        <location filename="mainwindow/mainmenu.cpp" line="61"/>
         <source>&amp;Export soundfonts</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow/mainmenu.cpp" line="44"/>
+        <location filename="mainwindow/mainmenu.cpp" line="68"/>
         <source>&amp;Full screen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow/mainmenu.cpp" line="52"/>
+        <location filename="mainwindow/mainmenu.cpp" line="76"/>
         <source>Se&amp;ttings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow/mainmenu.cpp" line="56"/>
+        <location filename="mainwindow/mainmenu.cpp" line="80"/>
         <source>Online &amp;manual</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow/mainmenu.cpp" line="61"/>
+        <location filename="mainwindow/mainmenu.cpp" line="85"/>
         <source>About &amp;Polyphone...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow/mainmenu.cpp" line="67"/>
+        <location filename="mainwindow/mainmenu.cpp" line="91"/>
         <source>&amp;Close file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow/mainmenu.cpp" line="72"/>
+        <location filename="mainwindow/mainmenu.cpp" line="96"/>
         <source>&amp;Quit</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3158,98 +3210,6 @@ rate</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/keynamemanager.cpp" line="63"/>
-        <location filename="context/keynamemanager.cpp" line="81"/>
-        <source>C</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="context/keynamemanager.cpp" line="64"/>
-        <source>D♭</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="context/keynamemanager.cpp" line="65"/>
-        <location filename="context/keynamemanager.cpp" line="83"/>
-        <source>D</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="context/keynamemanager.cpp" line="66"/>
-        <source>E♭</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="context/keynamemanager.cpp" line="67"/>
-        <location filename="context/keynamemanager.cpp" line="85"/>
-        <source>E</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="context/keynamemanager.cpp" line="68"/>
-        <location filename="context/keynamemanager.cpp" line="86"/>
-        <source>F</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="context/keynamemanager.cpp" line="69"/>
-        <source>G♭</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="context/keynamemanager.cpp" line="70"/>
-        <location filename="context/keynamemanager.cpp" line="88"/>
-        <source>G</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="context/keynamemanager.cpp" line="71"/>
-        <source>A♭</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="context/keynamemanager.cpp" line="72"/>
-        <location filename="context/keynamemanager.cpp" line="90"/>
-        <source>A</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="context/keynamemanager.cpp" line="73"/>
-        <source>B♭</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="context/keynamemanager.cpp" line="74"/>
-        <location filename="context/keynamemanager.cpp" line="92"/>
-        <source>B</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="context/keynamemanager.cpp" line="82"/>
-        <source>C♯</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="context/keynamemanager.cpp" line="84"/>
-        <source>D♯</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="context/keynamemanager.cpp" line="87"/>
-        <source>F♯</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="context/keynamemanager.cpp" line="89"/>
-        <source>G♯</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="context/keynamemanager.cpp" line="91"/>
-        <source>A♯</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="dialogs/dialog_about.cpp" line="122"/>
         <source>Created by</source>
         <translation type="unfinished"></translation>
@@ -3272,6 +3232,115 @@ rate</source>
     <message>
         <location filename="repository/soundfontinformation.cpp" line="22"/>
         <source>Unknown author</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="context/keynamemanager.cpp" line="63"/>
+        <location filename="context/keynamemanager.cpp" line="81"/>
+        <source>C</source>
+        <comment>key name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="context/keynamemanager.cpp" line="64"/>
+        <source>D♭</source>
+        <comment>key name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="context/keynamemanager.cpp" line="65"/>
+        <location filename="context/keynamemanager.cpp" line="83"/>
+        <source>D</source>
+        <comment>key name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="context/keynamemanager.cpp" line="66"/>
+        <source>E♭</source>
+        <comment>key name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="context/keynamemanager.cpp" line="67"/>
+        <location filename="context/keynamemanager.cpp" line="85"/>
+        <source>E</source>
+        <comment>key name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="context/keynamemanager.cpp" line="68"/>
+        <location filename="context/keynamemanager.cpp" line="86"/>
+        <source>F</source>
+        <comment>key name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="context/keynamemanager.cpp" line="69"/>
+        <source>G♭</source>
+        <comment>key name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="context/keynamemanager.cpp" line="70"/>
+        <location filename="context/keynamemanager.cpp" line="88"/>
+        <source>G</source>
+        <comment>key name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="context/keynamemanager.cpp" line="71"/>
+        <source>A♭</source>
+        <comment>key name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="context/keynamemanager.cpp" line="72"/>
+        <location filename="context/keynamemanager.cpp" line="90"/>
+        <source>A</source>
+        <comment>key name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="context/keynamemanager.cpp" line="73"/>
+        <source>B♭</source>
+        <comment>key name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="context/keynamemanager.cpp" line="74"/>
+        <location filename="context/keynamemanager.cpp" line="92"/>
+        <source>B</source>
+        <comment>key name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="context/keynamemanager.cpp" line="82"/>
+        <source>C♯</source>
+        <comment>key name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="context/keynamemanager.cpp" line="84"/>
+        <source>D♯</source>
+        <comment>key name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="context/keynamemanager.cpp" line="87"/>
+        <source>F♯</source>
+        <comment>key name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="context/keynamemanager.cpp" line="89"/>
+        <source>G♯</source>
+        <comment>key name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="context/keynamemanager.cpp" line="91"/>
+        <source>A♯</source>
+        <comment>key name</comment>
         <translation type="unfinished"></translation>
     </message>
 </context>
