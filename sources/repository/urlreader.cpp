@@ -149,3 +149,8 @@ void UrlReader::downloadProgressed(qint64 bytesReceived, qint64 bytesTotal)
     if (bytesTotal != 0)
         emit(progressChanged(100 * bytesReceived / bytesTotal));
 }
+
+void UrlReader::stop()
+{
+
+}

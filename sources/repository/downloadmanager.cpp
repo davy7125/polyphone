@@ -133,7 +133,7 @@ void DownloadManager::fileDownloaded(QString error)
         file.close();
 
         // The download is complete, notify it
-        emit(progressChanged(100, currentDownload, pathWithoutExtension + "." + extension));
+        emit(progressChanged(100, _currentDownload, currentDownload, pathWithoutExtension + "." + extension));
     }
     else
     {
@@ -154,5 +154,21 @@ void DownloadManager::progressChanged(int percent)
     QString currentDownload = _fileNames.contains(_currentDownload) ? _fileNames[_currentDownload] : trUtf8("untitled");
     _mutex.unlock();
 
-    emit(progressChanged(percent, currentDownload, ""));
+    emit(progressChanged(percent, _currentDownload, currentDownload, ""));
+}
+
+void DownloadManager::cancel(int soundfontId)
+{
+    _mutex.lock();
+    _filesToDownload.removeAll(soundfontId);
+    _fileNames.remove(soundfontId);
+    if (_currentDownload == soundfontId)
+    {
+        _reader->stop();
+        _currentDownload = -1;
+        _mutex.unlock();
+        processOne();
+    }
+    else
+        _mutex.unlock();
 }
