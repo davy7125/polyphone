@@ -27,12 +27,12 @@
     <message>
         <location filename="editor/tools/abstracttool.cpp" line="74"/>
         <source>Warning</source>
-        <translation type="unfinished">Упозорење</translation>
+        <translation>Упозорење</translation>
     </message>
     <message>
         <location filename="editor/tools/abstracttool.cpp" line="79"/>
         <source>Information</source>
-        <translation type="unfinished">Подаци</translation>
+        <translation>Подаци</translation>
     </message>
 </context>
 <context>
@@ -50,12 +50,12 @@
     <message>
         <location filename="core/types/attribute.cpp" line="517"/>
         <source>Sample start offset</source>
-        <translation type="unfinished">Помак почетка узорка</translation>
+        <translation>Помак почетка узорка</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="520"/>
         <source>Sample end offset</source>
-        <translation type="unfinished">Помак краја узорка</translation>
+        <translation>Помак краја узорка</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="523"/>
@@ -76,17 +76,17 @@
     <message>
         <location filename="core/types/attribute.cpp" line="532"/>
         <source>Mod LFO → pitch (c)</source>
-        <translation type="unfinished">»Mod LFO« → тон (c)</translation>
+        <translation>»Mod LFO« → тон (c)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="535"/>
         <source>Vib LFO → pitch (c)</source>
-        <translation type="unfinished">»Vib LFO« → тон (c)</translation>
+        <translation>»Vib LFO« → тон (c)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="538"/>
         <source>Mod env → pitch (c)</source>
-        <translation type="unfinished">»Mod env« → тон (c)</translation>
+        <translation>»Mod env« → тон (c)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="541"/>
@@ -101,17 +101,17 @@
     <message>
         <location filename="core/types/attribute.cpp" line="545"/>
         <source>Filter, resonance (dB)</source>
-        <translation type="unfinished">Филтар, резонанса (dB)</translation>
+        <translation>Филтар, резонанса (dB)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="548"/>
         <source>Mod LFO → filter (c)</source>
-        <translation type="unfinished">»Mod LFO« → филтар (c)</translation>
+        <translation>»Mod LFO« → филтар (c)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="551"/>
         <source>Mod env → filter (c)</source>
-        <translation type="unfinished">»Mod env« → филтар (c)</translation>
+        <translation>»Mod env« → филтар (c)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="554"/>
@@ -121,197 +121,197 @@
     <message>
         <location filename="core/types/attribute.cpp" line="557"/>
         <source>Mod LFO → volume (dB)</source>
-        <translation type="unfinished">»Mod LFO« → гласноћа (dB)</translation>
+        <translation>»Mod LFO« → гласноћа (dB)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="560"/>
         <source>Chorus (%)</source>
-        <translation type="unfinished">Хорус (%)</translation>
+        <translation>Хорус (%)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="563"/>
         <source>Reverb (%)</source>
-        <translation type="unfinished">Јека (%)</translation>
+        <translation>Јека (%)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="566"/>
         <source>Pan [-100;100]</source>
-        <translation type="unfinished">Пан [-100;100]</translation>
+        <translation>Пан [-100;100]</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="567"/>
         <source>Pan [-50;50]</source>
-        <translation type="unfinished">Пан [-50;50]</translation>
+        <translation>Пан [-50;50]</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="570"/>
         <source>Mod LFO delay (×)</source>
-        <translation type="unfinished">»Mod LFO« кашњење (×)</translation>
+        <translation>»Mod LFO« кашњење (×)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="571"/>
         <source>Mod LFO delay (s)</source>
-        <translation type="unfinished">»Mod LFO« кашњење (s)</translation>
+        <translation>»Mod LFO« кашњење (s)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="574"/>
         <source>Mod LFO freq (×)</source>
-        <translation type="unfinished">»Mod LFO« учестаност (×)</translation>
+        <translation>»Mod LFO« учестаност (×)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="575"/>
         <source>Mod LFO freq (Hz)</source>
-        <translation type="unfinished">»Mod LFO« учестаност (Hz)</translation>
+        <translation>»Mod LFO« учестаност (Hz)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="578"/>
         <source>Vib LFO delay (×)</source>
-        <translation type="unfinished">»Vib LFO« кашњење (×)</translation>
+        <translation>»Vib LFO« кашњење (×)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="579"/>
         <source>Vib LFO delay (s)</source>
-        <translation type="unfinished">»Vib LFO« кашњење (s)</translation>
+        <translation>»Vib LFO« кашњење (s)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="582"/>
         <source>Vib LFO freq (×)</source>
-        <translation type="unfinished">»Vib LFO« учестаност (×)</translation>
+        <translation>»Vib LFO« учестаност (×)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="583"/>
         <source>Vib LFO freq (Hz)</source>
-        <translation type="unfinished">»Vib LFO« учестаност (Hz)</translation>
+        <translation>»Vib LFO« учестаност (Hz)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="586"/>
         <source>Mod env delay (×)</source>
-        <translation type="unfinished">»Mod env« кашњење (×)</translation>
+        <translation>»Mod env« кашњење (×)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="587"/>
         <source>Mod env delay (s)</source>
-        <translation type="unfinished">»Mod env« кашњење (s)</translation>
+        <translation>»Mod env« кашњење (s)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="590"/>
         <source>Mod env attack (×)</source>
-        <translation type="unfinished">»Mod env« пораст (×)</translation>
+        <translation>»Mod env« пораст (×)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="591"/>
         <source>Mod env attack (s)</source>
-        <translation type="unfinished">»Mod env« пораст (s)</translation>
+        <translation>»Mod env« пораст (s)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="594"/>
         <source>Mod env hold (×)</source>
-        <translation type="unfinished">»Mod env« одржавање (×)</translation>
+        <translation>»Mod env« одржавање (×)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="595"/>
         <source>Mod env hold (s)</source>
-        <translation type="unfinished">»Mod env« одржавање (s)</translation>
+        <translation>»Mod env« одржавање (s)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="598"/>
         <source>Mod env decay (×)</source>
-        <translation type="unfinished">»Mod env« пад (×)</translation>
+        <translation>»Mod env« пад (×)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="599"/>
         <source>Mod env decay (s)</source>
-        <translation type="unfinished">»Mod env« пад (s)</translation>
+        <translation>»Mod env« пад (s)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="602"/>
         <source>Mod env sustain (%)</source>
-        <translation type="unfinished">»Mod env« задршка (%)</translation>
+        <translation>»Mod env« задршка (%)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="605"/>
         <source>Mod env release (×)</source>
-        <translation type="unfinished">»Mod env« стишавање (×)</translation>
+        <translation>»Mod env« стишавање (×)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="606"/>
         <source>Mod env release (s)</source>
-        <translation type="unfinished">»Mod env« стишавање (s)</translation>
+        <translation>»Mod env« стишавање (s)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="609"/>
         <source>Key → Mod env hold (c)</source>
-        <translation type="unfinished">Нота → »Mod env« одржавање (c)</translation>
+        <translation>Нота → »Mod env« одржавање (c)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="612"/>
         <source>Key → Mod env decay (c)</source>
-        <translation type="unfinished">Нота → »Mod env« пад (c)</translation>
+        <translation>Нота → »Mod env« пад (c)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="615"/>
         <source>Vol env delay (×)</source>
-        <translation type="unfinished">»Vol env« кашњење (×)</translation>
+        <translation>»Vol env« кашњење (×)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="616"/>
         <source>Vol env delay (s)</source>
-        <translation type="unfinished">»Vol env« кашњење (s)</translation>
+        <translation>»Vol env« кашњење (s)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="619"/>
         <source>Vol env attack (×)</source>
-        <translation type="unfinished">»Vol env« пораст (×)</translation>
+        <translation>»Vol env« пораст (×)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="620"/>
         <source>Vol env attack (s)</source>
-        <translation type="unfinished">»Vol env« пораст (s)</translation>
+        <translation>»Vol env« пораст (s)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="623"/>
         <source>Vol env hold (×)</source>
-        <translation type="unfinished">»Vol env« одржавање (×)</translation>
+        <translation>»Vol env« одржавање (×)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="624"/>
         <source>Vol env hold (s)</source>
-        <translation type="unfinished">»Vol env« одржавање (s)</translation>
+        <translation>»Vol env« одржавање (s)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="627"/>
         <source>Vol env decay (×)</source>
-        <translation type="unfinished">»Vol env« пад (×)</translation>
+        <translation>»Vol env« пад (×)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="628"/>
         <source>Vol env decay (s)</source>
-        <translation type="unfinished">»Vol env« пад (s)</translation>
+        <translation>»Vol env« пад (s)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="631"/>
         <source>Vol env sustain (dB)</source>
-        <translation type="unfinished">»Vol env« задршка (dB)</translation>
+        <translation>»Vol env« задршка (dB)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="634"/>
         <source>Vol env release (×)</source>
-        <translation type="unfinished">»Vol env« стишавање (×)</translation>
+        <translation>»Vol env« стишавање (×)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="635"/>
         <source>Vol env release (s)</source>
-        <translation type="unfinished">»Vol env« стишавање (s)</translation>
+        <translation>»Vol env« стишавање (s)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="638"/>
         <source>Key → Vol env hold (c)</source>
-        <translation type="unfinished">Нота → »Vol env« одржавање (c)</translation>
+        <translation>Нота → »Vol env« одржавање (c)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="641"/>
         <source>Key → Vol env decay (c)</source>
-        <translation type="unfinished">Нота → »Vol env« пад (c)</translation>
+        <translation>Нота → »Vol env« пад (c)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="644"/>
@@ -321,22 +321,22 @@
     <message>
         <location filename="core/types/attribute.cpp" line="647"/>
         <source>Velocity range</source>
-        <translation type="unfinished">Опсег јачине удара</translation>
+        <translation>Опсег јачине удара</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="653"/>
         <source>Fixed key</source>
-        <translation type="unfinished">Учвршћена нота</translation>
+        <translation>Учвршћена нота</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="656"/>
         <source>Fixed velocity</source>
-        <translation type="unfinished">Учвршћена јачина</translation>
+        <translation>Учвршћена јачина</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="659"/>
         <source>Attenuation (dB)</source>
-        <translation type="unfinished">Пригушење (dB)</translation>
+        <translation>Пригушење (dB)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="662"/>
@@ -346,12 +346,12 @@
     <message>
         <location filename="core/types/attribute.cpp" line="665"/>
         <source>Tuning (semi-tones)</source>
-        <translation type="unfinished">Угађање (полутонови)</translation>
+        <translation>Угађање (полутонови)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="668"/>
         <source>Tuning (cents)</source>
-        <translation type="unfinished">Угађање (центи)</translation>
+        <translation>Угађање (центи)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="671"/>
@@ -366,12 +366,12 @@
     <message>
         <location filename="core/types/attribute.cpp" line="677"/>
         <source>Exclusive class</source>
-        <translation type="unfinished">Нарочита класа</translation>
+        <translation>Нарочита класа</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="680"/>
         <source>Root key</source>
-        <translation type="unfinished">Основна нота</translation>
+        <translation>Основна нота</translation>
     </message>
 </context>
 <context>
@@ -385,263 +385,383 @@
 <context>
     <name>ConfManager</name>
     <message>
+        <source>D</source>
+        <translation type="vanished">Ре</translation>
+    </message>
+    <message>
+        <source>C</source>
+        <translation type="vanished">До</translation>
+    </message>
+    <message>
+        <source>G</source>
+        <translation type="vanished">Сол</translation>
+    </message>
+    <message>
+        <source>B</source>
+        <translation type="vanished">Ти</translation>
+    </message>
+    <message>
+        <source>2</source>
+        <translation type="vanished">2</translation>
+    </message>
+    <message>
+        <source>3</source>
+        <translation type="vanished">3</translation>
+    </message>
+    <message>
+        <source>E</source>
+        <translation type="vanished">Ми</translation>
+    </message>
+    <message>
+        <source>R</source>
+        <translation type="vanished">Д</translation>
+    </message>
+    <message>
+        <source>5</source>
+        <translation type="vanished">5</translation>
+    </message>
+    <message>
+        <source>6</source>
+        <translation type="vanished">6</translation>
+    </message>
+    <message>
+        <source>7</source>
+        <translation type="vanished">7</translation>
+    </message>
+    <message>
+        <source>Shift+&lt;</source>
+        <translation type="vanished">Shift+;</translation>
+    </message>
+    <message>
+        <source>Shift+@</source>
+        <translation type="vanished">Shift+&quot;</translation>
+    </message>
+    <message>
+        <source>Shift+#</source>
+        <translation type="vanished">Shift+#</translation>
+    </message>
+    <message>
+        <source>Shift+%</source>
+        <translation type="vanished">Shift+%</translation>
+    </message>
+    <message>
+        <source>Shift+^</source>
+        <translation type="vanished">Shift+&amp;</translation>
+    </message>
+    <message>
+        <source>Shift+&amp;</source>
+        <translation type="vanished">Shift+/</translation>
+    </message>
+    <message>
         <location filename="context/confmanager.cpp" line="127"/>
         <source>Z</source>
+        <comment>first key mapping for bottom left C</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="128"/>
         <source>S</source>
+        <comment>first key mapping for bottom C#</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="129"/>
         <source>X</source>
+        <comment>first key mapping for bottom D</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="130"/>
         <source>D</source>
+        <comment>first key mapping for bottom D#</comment>
         <translation type="unfinished">Ре</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="131"/>
         <source>C</source>
+        <comment>first key mapping for bottom E</comment>
         <translation type="unfinished">До</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="132"/>
         <source>V</source>
+        <comment>first key mapping for bottom F</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="133"/>
         <source>G</source>
+        <comment>first key mapping for bottom F#</comment>
         <translation type="unfinished">Сол</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="134"/>
         <source>B</source>
+        <comment>first key mapping for bottom G</comment>
         <translation type="unfinished">Ти</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="135"/>
         <source>H</source>
+        <comment>first key mapping for bottom G#</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="136"/>
         <source>N</source>
+        <comment>first key mapping for bottom A</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="137"/>
         <source>J</source>
+        <comment>first key mapping for bottom A#</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="138"/>
         <source>M</source>
+        <comment>first key mapping for bottom B</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="139"/>
         <source>,</source>
+        <comment>first key mapping for bottom right C</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="145"/>
         <source>Q</source>
+        <comment>first key mapping for upper left C</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="146"/>
         <source>2</source>
+        <comment>first key mapping for upper C#</comment>
         <translation type="unfinished">2</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="147"/>
         <source>W</source>
+        <comment>first key mapping for upper D</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="148"/>
         <source>3</source>
+        <comment>first key mapping for upper D#</comment>
         <translation type="unfinished">3</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="149"/>
         <source>E</source>
+        <comment>first key mapping for upper E</comment>
         <translation type="unfinished">Ми</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="150"/>
         <source>R</source>
+        <comment>first key mapping for upper F</comment>
         <translation type="unfinished">Д</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="151"/>
         <source>5</source>
+        <comment>first key mapping for upper F#</comment>
         <translation type="unfinished">5</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="152"/>
         <source>T</source>
+        <comment>first key mapping for upper G</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="153"/>
         <source>6</source>
+        <comment>first key mapping for upper G#</comment>
         <translation type="unfinished">6</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="154"/>
         <source>Y</source>
+        <comment>first key mapping for upper A</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="155"/>
         <source>7</source>
+        <comment>first key mapping for upper A#</comment>
         <translation type="unfinished">7</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="156"/>
         <source>U</source>
+        <comment>first key mapping for upper B</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="157"/>
         <source>I</source>
+        <comment>first key mapping for upper right C</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="163"/>
         <source>Shift+Z</source>
+        <comment>second key mapping for bottom left C</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="164"/>
         <source>Shift+S</source>
+        <comment>second key mapping for bottom C#</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="165"/>
         <source>Shift+X</source>
+        <comment>second key mapping for bottom D</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="166"/>
         <source>Shift+D</source>
+        <comment>second key mapping for bottom D#</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="167"/>
         <source>Shift+C</source>
+        <comment>second key mapping for bottom E</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="168"/>
         <source>Shift+V</source>
+        <comment>second key mapping for bottom F</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="169"/>
         <source>Shift+G</source>
+        <comment>second key mapping for bottom F#</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="170"/>
         <source>Shift+B</source>
+        <comment>second key mapping for bottom G</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="171"/>
         <source>Shift+H</source>
+        <comment>second key mapping for bottom G#</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="172"/>
         <source>Shift+N</source>
+        <comment>second key mapping for bottom A</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="173"/>
         <source>Shift+J</source>
+        <comment>second key mapping for bottom A#</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="174"/>
         <source>Shift+M</source>
+        <comment>second key mapping for bottom B</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="175"/>
         <source>Shift+&lt;</source>
+        <comment>second key mapping for bottom right C</comment>
         <translation type="unfinished">Shift+;</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="181"/>
         <source>Shift+Q</source>
+        <comment>second key mapping for upper left C</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="182"/>
         <source>Shift+@</source>
+        <comment>second key mapping for upper C#</comment>
         <translation type="unfinished">Shift+&quot;</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="183"/>
         <source>Shift+W</source>
+        <comment>second key mapping for upper D</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="184"/>
         <source>Shift+#</source>
+        <comment>second key mapping for upper D#</comment>
         <translation type="unfinished">Shift+#</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="185"/>
         <source>Shift+E</source>
+        <comment>second key mapping for upper E</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="186"/>
         <source>Shift+R</source>
+        <comment>second key mapping for upper F</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="187"/>
         <source>Shift+%</source>
+        <comment>second key mapping for upper F#</comment>
         <translation type="unfinished">Shift+%</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="188"/>
         <source>Shift+T</source>
+        <comment>second key mapping for upper G</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="189"/>
         <source>Shift+^</source>
+        <comment>second key mapping for upper G#</comment>
         <translation type="unfinished">Shift+&amp;</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="190"/>
         <source>Shift+Y</source>
+        <comment>second key mapping for upper A</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="191"/>
         <source>Shift+&amp;</source>
+        <comment>second key mapping for upper A#</comment>
         <translation type="unfinished">Shift+/</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="192"/>
         <source>Shift+U</source>
+        <comment>second key mapping for upper B</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="193"/>
         <source>Shift+I</source>
+        <comment>second key mapping for upper right C</comment>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1130,12 +1250,12 @@
     <message>
         <location filename="context/interface/configpanel.ui" line="81"/>
         <source>General</source>
-        <translation type="unfinished">Опште</translation>
+        <translation>Опште</translation>
     </message>
     <message>
         <location filename="context/interface/configpanel.ui" line="114"/>
         <source>Interface</source>
-        <translation type="unfinished">Сучеље</translation>
+        <translation>Сучеље</translation>
     </message>
     <message>
         <location filename="context/interface/configpanel.ui" line="147"/>
@@ -1145,7 +1265,7 @@
     <message>
         <location filename="context/interface/configpanel.ui" line="180"/>
         <source>Virtual keyboard</source>
-        <translation type="unfinished">Патворена клавијатура</translation>
+        <translation>Патворена клавијатура</translation>
     </message>
     <message>
         <location filename="context/interface/configpanel.ui" line="213"/>
@@ -1158,53 +1278,53 @@
     <message>
         <location filename="context/interface/configsectiongeneral.ui" line="26"/>
         <source>Input / Output</source>
-        <translation type="unfinished">Улаз/Излаз</translation>
+        <translation>Улаз/Излаз</translation>
     </message>
     <message>
         <location filename="context/interface/configsectiongeneral.ui" line="95"/>
         <source>Audio backend</source>
-        <translation type="unfinished">Звучни посредник</translation>
+        <translation>Звучни посредник</translation>
     </message>
     <message>
         <location filename="context/interface/configsectiongeneral.ui" line="124"/>
         <source>Buffer size</source>
-        <translation type="unfinished">Величина бафера</translation>
+        <translation>Величина бафера</translation>
     </message>
     <message>
         <location filename="context/interface/configsectiongeneral.ui" line="147"/>
         <source>MIDI input</source>
         <oldsource>Midi input</oldsource>
-        <translation type="unfinished">Миди-улаз</translation>
+        <translation>Миди-улаз</translation>
     </message>
     <message>
         <location filename="context/interface/configsectiongeneral.ui" line="163"/>
         <source>Options</source>
-        <translation type="unfinished">Опције</translation>
+        <translation>Опције</translation>
     </message>
     <message>
         <location filename="context/interface/configsectiongeneral.ui" line="178"/>
         <source>Wav file import</source>
-        <translation type="unfinished">Увоз вав-датотека</translation>
+        <translation>Увоз вав-датотека</translation>
     </message>
     <message>
         <location filename="context/interface/configsectiongeneral.ui" line="191"/>
         <source>change linked sample</source>
-        <translation type="unfinished">мењај и повезани узорак</translation>
+        <translation>мењај и повезани узорак</translation>
     </message>
     <message>
         <location filename="context/interface/configsectiongeneral.ui" line="204"/>
         <source>trim to loop</source>
-        <translation type="unfinished">орежи према вртњи</translation>
+        <translation>орежи према вртњи</translation>
     </message>
     <message>
         <location filename="context/interface/configsectiongeneral.ui" line="217"/>
         <source>Stereo editing</source>
-        <translation type="unfinished">Стерео уређивање</translation>
+        <translation>Стерео уређивање</translation>
     </message>
     <message>
         <location filename="context/interface/configsectiongeneral.ui" line="230"/>
         <source>remove blank at start</source>
-        <translation type="unfinished">уклони почетну празнину</translation>
+        <translation>уклони почетну празнину</translation>
     </message>
 </context>
 <context>
@@ -1212,47 +1332,47 @@
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="28"/>
         <source>Language</source>
-        <translation type="unfinished">Језик</translation>
+        <translation>Језик</translation>
     </message>
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="47"/>
         <source>Key names</source>
-        <translation type="unfinished">Називи нота</translation>
+        <translation>Називи нота</translation>
     </message>
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="67"/>
         <source>Middle C → 60, then 61</source>
-        <translation type="unfinished">Основна »До« → 60, затим 61</translation>
+        <translation>Основна »До« → 60, затим 61</translation>
     </message>
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="72"/>
         <source>Middle C → C3, then C♯3</source>
-        <translation type="unfinished">Основна »До« → C3, затим C♯3</translation>
+        <translation>Основна »До« → C3, затим C♯3</translation>
     </message>
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="77"/>
         <source>Middle C → C3, then D♭3</source>
-        <translation type="unfinished">Основна »До« → C3, затим D♭3</translation>
+        <translation>Основна »До« → C3, затим D♭3</translation>
     </message>
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="82"/>
         <source>Middle C → C4, then C♯4</source>
-        <translation type="unfinished">Основна »До« → C4, затим C♯4</translation>
+        <translation>Основна »До« → C4, затим C♯4</translation>
     </message>
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="87"/>
         <source>Middle C → C4, then D♭4</source>
-        <translation type="unfinished">Основна »До« → C4, затим D♭4</translation>
+        <translation>Основна »До« → C4, затим D♭4</translation>
     </message>
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="92"/>
         <source>Middle C → C5, then C♯5</source>
-        <translation type="unfinished">Основна »До« → C5, затим C♯5</translation>
+        <translation>Основна »До« → C5, затим C♯5</translation>
     </message>
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="97"/>
         <source>Middle C → C5, then D♭5</source>
-        <translation type="unfinished">Основна »До« → C5, затим D♭5</translation>
+        <translation>Основна »До« → C5, затим D♭5</translation>
     </message>
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="126"/>
@@ -1262,12 +1382,12 @@
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="232"/>
         <source>Selection</source>
-        <translation type="unfinished">Избор</translation>
+        <translation>Избор</translation>
     </message>
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="245"/>
         <source>Alternate background</source>
-        <translation type="unfinished">Додатна позадина</translation>
+        <translation>Додатна позадина</translation>
     </message>
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="292"/>
@@ -1275,12 +1395,12 @@
         <location filename="context/interface/configsectioninterface.ui" line="331"/>
         <location filename="context/interface/configsectioninterface.ui" line="598"/>
         <source>Text</source>
-        <translation type="unfinished">Текст</translation>
+        <translation>Текст</translation>
     </message>
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="305"/>
         <source>Window</source>
-        <translation type="unfinished">Прозор</translation>
+        <translation>Прозор</translation>
     </message>
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="344"/>
@@ -1288,27 +1408,27 @@
         <location filename="context/interface/configsectioninterface.ui" line="401"/>
         <location filename="context/interface/configsectioninterface.ui" line="585"/>
         <source>Background</source>
-        <translation type="unfinished">Позадина</translation>
+        <translation>Позадина</translation>
     </message>
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="414"/>
         <source>Button</source>
-        <translation type="unfinished">Дугме</translation>
+        <translation>Дугме</translation>
     </message>
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="624"/>
         <source>Color theme</source>
-        <translation type="unfinished">Изглед</translation>
+        <translation>Изглед</translation>
     </message>
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="647"/>
         <source>List and table</source>
-        <translation type="unfinished">Списак и табела</translation>
+        <translation>Списак и табела</translation>
     </message>
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="663"/>
         <source>This modification will be applied during the next start of the software.</source>
-        <translation type="unfinished">Ова измена биће примењена по поновном покретању програма.</translation>
+        <translation>Ова измена биће примењена по поновном покретању програма.</translation>
     </message>
     <message>
         <location filename="context/interface/configsectioninterface.cpp" line="127"/>
@@ -1329,32 +1449,32 @@
     <message>
         <location filename="context/interface/configsectionkeyboard.ui" line="45"/>
         <source>Octave #1</source>
-        <translation type="unfinished">1. oктава</translation>
+        <translation>1. oктава</translation>
     </message>
     <message>
         <location filename="context/interface/configsectionkeyboard.ui" line="50"/>
         <source>Octave #2</source>
-        <translation type="unfinished">2. oктава</translation>
+        <translation>2. oктава</translation>
     </message>
     <message>
         <location filename="context/interface/configsectionkeyboard.ui" line="55"/>
         <source>Octave #3</source>
-        <translation type="unfinished">3. oктава</translation>
+        <translation>3. oктава</translation>
     </message>
     <message>
         <location filename="context/interface/configsectionkeyboard.ui" line="60"/>
         <source>Octave #4</source>
-        <translation type="unfinished">4. oктава</translation>
+        <translation>4. oктава</translation>
     </message>
     <message>
         <location filename="context/interface/configsectionkeyboard.ui" line="133"/>
         <source>First C</source>
-        <translation type="unfinished">Почетна »До«</translation>
+        <translation>Почетна »До«</translation>
     </message>
     <message>
         <location filename="context/interface/configsectionkeyboard.ui" line="187"/>
         <source>Default velocity</source>
-        <translation type="unfinished">Уобичајена јачина удара</translation>
+        <translation>Уобичајена јачина удара</translation>
     </message>
 </context>
 <context>
@@ -1404,7 +1524,7 @@ Premium!</source>
     <message>
         <location filename="context/interface/configsectionrepository.cpp" line="88"/>
         <source>Cancel</source>
-        <translation type="unfinished">Поништи</translation>
+        <translation>Поништи</translation>
     </message>
     <message>
         <location filename="context/interface/configsectionrepository.cpp" line="91"/>
@@ -1436,48 +1556,48 @@ Premium!</source>
     <message>
         <location filename="context/interface/configsectionsound.ui" line="26"/>
         <source>Reverb</source>
-        <translation type="unfinished">Јека</translation>
+        <translation>Јека</translation>
     </message>
     <message>
         <location filename="context/interface/configsectionsound.ui" line="39"/>
         <source>Gain (dB)</source>
-        <translation type="unfinished">Појачање (dB)</translation>
+        <translation>Појачање (dB)</translation>
     </message>
     <message>
         <location filename="context/interface/configsectionsound.ui" line="88"/>
         <source>Width</source>
-        <translation type="unfinished">Ширина</translation>
+        <translation>Ширина</translation>
     </message>
     <message>
         <location filename="context/interface/configsectionsound.ui" line="123"/>
         <location filename="context/interface/configsectionsound.ui" line="297"/>
         <source>Level</source>
-        <translation type="unfinished">Количина</translation>
+        <translation>Количина</translation>
     </message>
     <message>
         <location filename="context/interface/configsectionsound.ui" line="178"/>
         <source>Damp</source>
-        <translation type="unfinished">Пригушење</translation>
+        <translation>Пригушење</translation>
     </message>
     <message>
         <location filename="context/interface/configsectionsound.ui" line="194"/>
         <source>Room</source>
-        <translation type="unfinished">Соба</translation>
+        <translation>Соба</translation>
     </message>
     <message>
         <location filename="context/interface/configsectionsound.ui" line="264"/>
         <source>Chorus</source>
-        <translation type="unfinished">Хорус</translation>
+        <translation>Хорус</translation>
     </message>
     <message>
         <location filename="context/interface/configsectionsound.ui" line="345"/>
         <source>Frequency</source>
-        <translation type="unfinished">Учестаност</translation>
+        <translation>Учестаност</translation>
     </message>
     <message>
         <location filename="context/interface/configsectionsound.ui" line="361"/>
         <source>Depth</source>
-        <translation type="unfinished">Дубина</translation>
+        <translation>Дубина</translation>
     </message>
 </context>
 <context>
@@ -1485,12 +1605,12 @@ Premium!</source>
     <message>
         <location filename="context/interface/configtoc.ui" line="59"/>
         <source>General</source>
-        <translation type="unfinished">Опште</translation>
+        <translation>Опште</translation>
     </message>
     <message>
         <location filename="context/interface/configtoc.ui" line="72"/>
         <source>Interface</source>
-        <translation type="unfinished">Сучеље</translation>
+        <translation>Сучеље</translation>
     </message>
     <message>
         <location filename="context/interface/configtoc.ui" line="85"/>
@@ -1500,7 +1620,7 @@ Premium!</source>
     <message>
         <location filename="context/interface/configtoc.ui" line="98"/>
         <source>Virtual keyboard</source>
-        <translation type="unfinished">Патворена клавијатура</translation>
+        <translation>Патворена клавијатура</translation>
     </message>
     <message>
         <location filename="context/interface/configtoc.ui" line="111"/>
@@ -1525,92 +1645,92 @@ repository</source>
         <location filename="core/output/sfz/conversion_sfz.cpp" line="540"/>
         <location filename="core/output/sfz/conversion_sfz.cpp" line="582"/>
         <source>other</source>
-        <translation type="unfinished">друго</translation>
+        <translation>друго</translation>
     </message>
     <message>
         <location filename="core/output/sfz/conversion_sfz.cpp" line="543"/>
         <source>Piano</source>
-        <translation type="unfinished">Клавир</translation>
+        <translation>Клавир</translation>
     </message>
     <message>
         <location filename="core/output/sfz/conversion_sfz.cpp" line="545"/>
         <source>Chromatic percussion</source>
-        <translation type="unfinished">Удараљке, хроматске</translation>
+        <translation>Удараљке, хроматске</translation>
     </message>
     <message>
         <location filename="core/output/sfz/conversion_sfz.cpp" line="547"/>
         <source>Organ</source>
-        <translation type="unfinished">Оргуље</translation>
+        <translation>Оргуље</translation>
     </message>
     <message>
         <location filename="core/output/sfz/conversion_sfz.cpp" line="549"/>
         <source>Guitar</source>
-        <translation type="unfinished">Гитаре</translation>
+        <translation>Гитаре</translation>
     </message>
     <message>
         <location filename="core/output/sfz/conversion_sfz.cpp" line="551"/>
         <source>Bass</source>
-        <translation type="unfinished">Бас гитаре</translation>
+        <translation>Бас гитаре</translation>
     </message>
     <message>
         <location filename="core/output/sfz/conversion_sfz.cpp" line="553"/>
         <source>Strings</source>
-        <translation type="unfinished">Жичани</translation>
+        <translation>Жичани</translation>
     </message>
     <message>
         <location filename="core/output/sfz/conversion_sfz.cpp" line="555"/>
         <source>Ensemble</source>
-        <translation type="unfinished">Оркестар</translation>
+        <translation>Оркестар</translation>
     </message>
     <message>
         <location filename="core/output/sfz/conversion_sfz.cpp" line="557"/>
         <source>Brass</source>
-        <translation type="unfinished">Дувачки, лимени</translation>
+        <translation>Дувачки, лимени</translation>
     </message>
     <message>
         <location filename="core/output/sfz/conversion_sfz.cpp" line="559"/>
         <source>Reed</source>
-        <translation type="unfinished">Дувачки, дрвени</translation>
+        <translation>Дувачки, дрвени</translation>
     </message>
     <message>
         <location filename="core/output/sfz/conversion_sfz.cpp" line="561"/>
         <source>Pipe</source>
-        <translation type="unfinished">Дувачки, дрвени без језичка</translation>
+        <translation>Дувачки, дрвени без језичка</translation>
     </message>
     <message>
         <location filename="core/output/sfz/conversion_sfz.cpp" line="563"/>
         <source>Synth lead</source>
-        <translation type="unfinished">Синтесајзер — главни</translation>
+        <translation>Синтесајзер — главни</translation>
     </message>
     <message>
         <location filename="core/output/sfz/conversion_sfz.cpp" line="565"/>
         <source>Synth pad</source>
-        <translation type="unfinished">Синтесајзер — блок</translation>
+        <translation>Синтесајзер — блок</translation>
     </message>
     <message>
         <location filename="core/output/sfz/conversion_sfz.cpp" line="567"/>
         <source>Synth effects</source>
-        <translation type="unfinished">Синт-ефекти</translation>
+        <translation>Синт-ефекти</translation>
     </message>
     <message>
         <location filename="core/output/sfz/conversion_sfz.cpp" line="569"/>
         <source>Ethnic</source>
-        <translation type="unfinished">Традиционални</translation>
+        <translation>Традиционални</translation>
     </message>
     <message>
         <location filename="core/output/sfz/conversion_sfz.cpp" line="571"/>
         <source>Percussive</source>
-        <translation type="unfinished">Удараљке</translation>
+        <translation>Удараљке</translation>
     </message>
     <message>
         <location filename="core/output/sfz/conversion_sfz.cpp" line="573"/>
         <source>Sound effects</source>
-        <translation type="unfinished">Звучни ефекти</translation>
+        <translation>Звучни ефекти</translation>
     </message>
     <message>
         <location filename="core/output/sfz/conversion_sfz.cpp" line="575"/>
         <source>Percussion kit</source>
-        <translation type="unfinished">Скупина удараљки</translation>
+        <translation>Скупина удараљки</translation>
     </message>
 </context>
 <context>
@@ -1921,7 +2041,7 @@ repository</source>
     <message>
         <location filename="dialogs/dialogcreateelements.ui" line="17"/>
         <source>Question</source>
-        <translation type="unfinished">Питање</translation>
+        <translation>Питање</translation>
     </message>
     <message>
         <location filename="dialogs/dialogcreateelements.cpp" line="31"/>
@@ -2097,7 +2217,7 @@ repository</source>
     <message>
         <location filename="dialogs/dialogkeyboard.ui" line="14"/>
         <source>Virtual keyboard</source>
-        <translation type="unfinished">Патворена клавијатура</translation>
+        <translation>Патворена клавијатура</translation>
     </message>
     <message>
         <location filename="dialogs/dialogkeyboard.ui" line="82"/>
@@ -2122,7 +2242,7 @@ repository</source>
     <message>
         <location filename="dialogs/dialogkeyboard.ui" line="124"/>
         <source>Key</source>
-        <translation type="unfinished">Нота</translation>
+        <translation>Нота</translation>
     </message>
     <message>
         <location filename="dialogs/dialogkeyboard.ui" line="150"/>
@@ -2359,23 +2479,23 @@ repository</source>
     <message>
         <location filename="dialogs/dialogrecorder.ui" line="26"/>
         <source>Recorder</source>
-        <translation type="unfinished">Магнетофон (снимач)</translation>
+        <translation>Магнетофон (снимач)</translation>
     </message>
     <message>
         <location filename="dialogs/dialogrecorder.cpp" line="102"/>
         <source>Save a record</source>
-        <translation type="unfinished">Сачувај снимљено</translation>
+        <translation>Сачувај снимљено</translation>
     </message>
     <message>
         <location filename="dialogs/dialogrecorder.cpp" line="103"/>
         <source>Wav file</source>
-        <translation type="unfinished">Вав-датотека (*.wav)</translation>
+        <translation>Вав-датотека (*.wav)</translation>
     </message>
     <message>
         <location filename="dialogs/dialogrecorder.cpp" line="161"/>
         <location filename="dialogs/dialogrecorder.cpp" line="163"/>
         <source>record</source>
-        <translation type="unfinished">снимљено</translation>
+        <translation>снимљено</translation>
     </message>
 </context>
 <context>
@@ -2599,7 +2719,7 @@ repository</source>
     <message>
         <location filename="repository/downloadmanager.cpp" line="116"/>
         <source>Warning</source>
-        <translation type="unfinished">Упозорење</translation>
+        <translation>Упозорење</translation>
     </message>
     <message>
         <location filename="repository/downloadmanager.cpp" line="117"/>
@@ -2617,17 +2737,17 @@ repository</source>
     <message>
         <location filename="core/duplicator.cpp" line="282"/>
         <source>The global division will not be copied.</source>
-        <translation type="unfinished">Укупни део неће бити умножен.</translation>
+        <translation>Укупни део неће бити умножен.</translation>
     </message>
     <message>
         <location filename="core/duplicator.cpp" line="284"/>
         <source>&amp;Ok</source>
-        <translation type="unfinished">&amp;У реду</translation>
+        <translation>&amp;У реду</translation>
     </message>
     <message>
         <location filename="core/duplicator.cpp" line="285"/>
         <source>Ok, &amp;disable this message</source>
-        <translation type="unfinished">У реду, &amp;онемогући ову поруку</translation>
+        <translation>У реду, &amp;онемогући ову поруку</translation>
     </message>
     <message>
         <location filename="core/duplicator.cpp" line="317"/>
@@ -2647,42 +2767,42 @@ repository</source>
     <message>
         <location filename="core/duplicator.cpp" line="570"/>
         <source>Warning</source>
-        <translation type="unfinished">Упозорење</translation>
+        <translation>Упозорење</translation>
     </message>
     <message>
         <location filename="core/duplicator.cpp" line="571"/>
         <source>No preset available.</source>
-        <translation type="unfinished">Нема доступне поставке.</translation>
+        <translation>Нема доступне поставке.</translation>
     </message>
     <message>
         <location filename="core/duplicator.cpp" line="767"/>
         <source>&amp;Replace</source>
-        <translation type="unfinished">За&amp;мени</translation>
+        <translation>За&amp;мени</translation>
     </message>
     <message>
         <location filename="core/duplicator.cpp" line="768"/>
         <source>R&amp;eplace all</source>
-        <translation type="unfinished">Замени св&amp;е</translation>
+        <translation>Замени св&amp;е</translation>
     </message>
     <message>
         <location filename="core/duplicator.cpp" line="769"/>
         <source>&amp;Duplicate</source>
-        <translation type="unfinished">У&amp;двостручи</translation>
+        <translation>У&amp;двостручи</translation>
     </message>
     <message>
         <location filename="core/duplicator.cpp" line="770"/>
         <source>D&amp;uplicate all</source>
-        <translation type="unfinished">&amp;Удвостручи све</translation>
+        <translation>&amp;Удвостручи све</translation>
     </message>
     <message>
         <location filename="core/duplicator.cpp" line="771"/>
         <source>&amp;Ignore</source>
-        <translation type="unfinished">Занемар&amp;и</translation>
+        <translation>Занемар&amp;и</translation>
     </message>
     <message>
         <location filename="core/duplicator.cpp" line="772"/>
         <source>I&amp;gnore all</source>
-        <translation type="unfinished">Занемари с&amp;ве</translation>
+        <translation>Занемари с&amp;ве</translation>
     </message>
 </context>
 <context>
@@ -2690,7 +2810,7 @@ repository</source>
     <message>
         <location filename="editor/editor.ui" line="142"/>
         <source>Search...</source>
-        <translation type="unfinished">Пронађи...</translation>
+        <translation>Пронађи...</translation>
     </message>
     <message>
         <location filename="editor/editor.ui" line="242"/>
@@ -2733,7 +2853,7 @@ repository</source>
     <message>
         <location filename="editor/widgets/editortoolbar.cpp" line="46"/>
         <source>Cancel</source>
-        <translation type="unfinished">Поништи</translation>
+        <translation>Поништи</translation>
     </message>
     <message>
         <location filename="editor/widgets/editortoolbar.cpp" line="51"/>
@@ -2748,52 +2868,52 @@ repository</source>
     <message>
         <location filename="editor/widgets/editortoolbar.cpp" line="66"/>
         <source>Recorder</source>
-        <translation type="unfinished">Магнетофон (снимач)</translation>
+        <translation>Магнетофон (снимач)</translation>
     </message>
     <message>
         <location filename="editor/widgets/editortoolbar.cpp" line="72"/>
         <source>Virtual keyboard</source>
-        <translation type="unfinished">Патворена клавијатура</translation>
+        <translation>Патворена клавијатура</translation>
     </message>
     <message>
         <location filename="editor/widgets/editortoolbar.cpp" line="230"/>
         <source>Import an audio file</source>
-        <translation type="unfinished">Увези звучну датотеку</translation>
+        <translation>Увези звучну датотеку</translation>
     </message>
     <message>
         <location filename="editor/widgets/editortoolbar.cpp" line="232"/>
         <source>Wav file</source>
-        <translation type="unfinished">Вав-датотека (*.wav)</translation>
+        <translation>Вав-датотека (*.wav)</translation>
     </message>
     <message>
         <location filename="editor/widgets/editortoolbar.cpp" line="257"/>
         <source>Create a new instrument</source>
-        <translation type="unfinished">Створи нов инструменат</translation>
+        <translation>Створи нов инструменат</translation>
     </message>
     <message>
         <location filename="editor/widgets/editortoolbar.cpp" line="258"/>
         <source>Name of the new instrument:</source>
-        <translation type="unfinished">Назив новог инструмента: </translation>
+        <translation>Назив новог инструмента: </translation>
     </message>
     <message>
         <location filename="editor/widgets/editortoolbar.cpp" line="286"/>
         <source>Warning</source>
-        <translation type="unfinished">Упозорење</translation>
+        <translation>Упозорење</translation>
     </message>
     <message>
         <location filename="editor/widgets/editortoolbar.cpp" line="286"/>
         <source>No preset available.</source>
-        <translation type="unfinished">Нема доступне поставке.</translation>
+        <translation>Нема доступне поставке.</translation>
     </message>
     <message>
         <location filename="editor/widgets/editortoolbar.cpp" line="299"/>
         <source>Create a new preset</source>
-        <translation type="unfinished">Створи нову поставку</translation>
+        <translation>Створи нову поставку</translation>
     </message>
     <message>
         <location filename="editor/widgets/editortoolbar.cpp" line="300"/>
         <source>Name of the new preset:</source>
-        <translation type="unfinished">Назив нове поставке: </translation>
+        <translation>Назив нове поставке: </translation>
     </message>
 </context>
 <context>
@@ -2931,13 +3051,13 @@ repository</source>
         <location filename="editor/tools/sound_spatialization/graphspace.cpp" line="52"/>
         <source>L</source>
         <comment>first letter of Left in your language</comment>
-        <translation type="unfinished">Л</translation>
+        <translation>Л</translation>
     </message>
     <message>
         <location filename="editor/tools/sound_spatialization/graphspace.cpp" line="61"/>
         <source>R</source>
         <comment>first letter of Right in your language</comment>
-        <translation type="unfinished">Д</translation>
+        <translation>Д</translation>
     </message>
 </context>
 <context>
@@ -3063,7 +3183,7 @@ repository</source>
     <message>
         <location filename="core/input/sfz/inputsfz.cpp" line="265"/>
         <source>Sfz import</source>
-        <translation type="unfinished">Сфз — увоз</translation>
+        <translation>Сфз — увоз</translation>
     </message>
     <message>
         <location filename="core/input/sfz/inputsfz.cpp" line="436"/>
@@ -3074,59 +3194,59 @@ repository</source>
 <context>
     <name>MainMenu</name>
     <message>
-        <location filename="mainwindow/mainmenu.cpp" line="15"/>
+        <location filename="mainwindow/mainmenu.cpp" line="39"/>
         <source>&amp;New</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow/mainmenu.cpp" line="20"/>
+        <location filename="mainwindow/mainmenu.cpp" line="44"/>
         <source>&amp;Open...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow/mainmenu.cpp" line="27"/>
+        <location filename="mainwindow/mainmenu.cpp" line="51"/>
         <source>&amp;Save</source>
-        <translation type="unfinished">&amp;Сачувај</translation>
+        <translation>&amp;Сачувај</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainmenu.cpp" line="32"/>
+        <location filename="mainwindow/mainmenu.cpp" line="56"/>
         <source>Save &amp;as...</source>
-        <translation type="unfinished">Сачувај &amp;као...</translation>
+        <translation>Сачувај &amp;као...</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainmenu.cpp" line="37"/>
+        <location filename="mainwindow/mainmenu.cpp" line="61"/>
         <source>&amp;Export soundfonts</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow/mainmenu.cpp" line="44"/>
+        <location filename="mainwindow/mainmenu.cpp" line="68"/>
         <source>&amp;Full screen</source>
-        <translation type="unfinished">На &amp;целом екрану</translation>
+        <translation>На &amp;целом екрану</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainmenu.cpp" line="52"/>
+        <location filename="mainwindow/mainmenu.cpp" line="76"/>
         <source>Se&amp;ttings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow/mainmenu.cpp" line="56"/>
+        <location filename="mainwindow/mainmenu.cpp" line="80"/>
         <source>Online &amp;manual</source>
-        <translation type="unfinished">&amp;Упутство за употребу</translation>
+        <translation>&amp;Упутство за употребу</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainmenu.cpp" line="61"/>
+        <location filename="mainwindow/mainmenu.cpp" line="85"/>
         <source>About &amp;Polyphone...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow/mainmenu.cpp" line="67"/>
+        <location filename="mainwindow/mainmenu.cpp" line="91"/>
         <source>&amp;Close file</source>
-        <translation type="unfinished">&amp;Затвори датотеку</translation>
+        <translation>&amp;Затвори датотеку</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainmenu.cpp" line="72"/>
+        <location filename="mainwindow/mainmenu.cpp" line="96"/>
         <source>&amp;Quit</source>
-        <translation type="unfinished">&amp;Изађи</translation>
+        <translation>&amp;Изађи</translation>
     </message>
 </context>
 <context>
@@ -4105,7 +4225,7 @@ Splitting the file into several sf2 might solve the problem.</source>
     <message>
         <location filename="mainwindow/mainwindow.ui" line="215"/>
         <source>History</source>
-        <translation type="unfinished">Историјат</translation>
+        <translation>Историјат</translation>
     </message>
 </context>
 <context>
@@ -4408,68 +4528,68 @@ Splitting the file into several sf2 might solve the problem.</source>
     <message>
         <location filename="editor/pageinst.ui" line="141"/>
         <source>Modulators</source>
-        <translation type="unfinished">Модулатори</translation>
+        <translation>Модулатори</translation>
     </message>
     <message>
         <location filename="editor/pageinst.ui" line="178"/>
         <source>Add a modulator</source>
-        <translation type="unfinished">Додај модулатор</translation>
+        <translation>Додај модулатор</translation>
     </message>
     <message>
         <location filename="editor/pageinst.ui" line="204"/>
         <source>Delete a modulator</source>
-        <translation type="unfinished">Уклони модулатор</translation>
+        <translation>Уклони модулатор</translation>
     </message>
     <message>
         <location filename="editor/pageinst.ui" line="224"/>
         <source>Copy modulators</source>
-        <translation type="unfinished">Умножи модулаторе</translation>
+        <translation>Умножи модулаторе</translation>
     </message>
     <message>
         <location filename="editor/pageinst.ui" line="250"/>
         <source>Paste the copied modulators</source>
-        <translation type="unfinished">Убаци умножене модулаторе</translation>
+        <translation>Убаци умножене модулаторе</translation>
     </message>
     <message>
         <location filename="editor/pageinst.ui" line="364"/>
         <source>Source</source>
-        <translation type="unfinished">Извориште</translation>
+        <translation>Извориште</translation>
     </message>
     <message>
         <location filename="editor/pageinst.ui" line="375"/>
         <source>Amount</source>
-        <translation type="unfinished">Количина</translation>
+        <translation>Количина</translation>
     </message>
     <message>
         <location filename="editor/pageinst.ui" line="386"/>
         <location filename="editor/pageinst.ui" line="552"/>
         <source>Destination</source>
-        <translation type="unfinished">Одредиште</translation>
+        <translation>Одредиште</translation>
     </message>
     <message>
         <location filename="editor/pageinst.ui" line="400"/>
         <source>Source / Amount</source>
-        <translation type="unfinished">Извориште/Количина</translation>
+        <translation>Извориште/Количина</translation>
     </message>
     <message>
         <location filename="editor/pageinst.ui" line="601"/>
         <source>Abs. value</source>
-        <translation type="unfinished">Апсолутна вредност</translation>
+        <translation>Апсолутна вредност</translation>
     </message>
     <message>
         <location filename="editor/pageinst.cpp" line="177"/>
         <source>Table</source>
-        <translation type="unfinished">Таблица</translation>
+        <translation>Таблица</translation>
     </message>
     <message>
         <location filename="editor/pageinst.cpp" line="178"/>
         <source>Ranges</source>
-        <translation type="unfinished">Опсег</translation>
+        <translation>Опсег</translation>
     </message>
     <message>
         <location filename="editor/pageinst.cpp" line="179"/>
         <source>Envelopes</source>
-        <translation type="unfinished">Коверте</translation>
+        <translation>Коверте</translation>
     </message>
     <message>
         <location filename="editor/pageinst.cpp" line="221"/>
@@ -4513,7 +4633,7 @@ Splitting the file into several sf2 might solve the problem.</source>
     <message>
         <location filename="editor/overview/pageoverviewinst.cpp" line="32"/>
         <source>Instruments</source>
-        <translation type="unfinished">Инструменти</translation>
+        <translation>Инструменти</translation>
     </message>
     <message>
         <location filename="editor/overview/pageoverviewinst.cpp" line="38"/>
@@ -4611,7 +4731,7 @@ Splitting the file into several sf2 might solve the problem.</source>
     <message>
         <location filename="editor/overview/pageoverviewprst.cpp" line="32"/>
         <source>Presets</source>
-        <translation type="unfinished">Поставке</translation>
+        <translation>Поставке</translation>
     </message>
     <message>
         <location filename="editor/overview/pageoverviewprst.cpp" line="38"/>
@@ -4704,7 +4824,7 @@ duration</source>
     <message>
         <location filename="editor/overview/pageoverviewsmpl.cpp" line="32"/>
         <source>Samples</source>
-        <translation type="unfinished">Узорци</translation>
+        <translation>Узорци</translation>
     </message>
     <message>
         <location filename="editor/overview/pageoverviewsmpl.cpp" line="41"/>
@@ -4788,7 +4908,7 @@ rate</source>
     <message>
         <location filename="editor/overview/pageoverviewsmpl.cpp" line="162"/>
         <source>Hz</source>
-        <translation type="unfinished">Hz</translation>
+        <translation>Hz</translation>
     </message>
 </context>
 <context>
@@ -4796,78 +4916,78 @@ rate</source>
     <message>
         <location filename="editor/pageprst.ui" line="123"/>
         <source>Modulators</source>
-        <translation type="unfinished">Модулатори</translation>
+        <translation>Модулатори</translation>
     </message>
     <message>
         <location filename="editor/pageprst.ui" line="163"/>
         <source>Add a modulator</source>
-        <translation type="unfinished">Додај модулатор</translation>
+        <translation>Додај модулатор</translation>
     </message>
     <message>
         <location filename="editor/pageprst.ui" line="189"/>
         <source>Delete a modulator</source>
-        <translation type="unfinished">Уклони модулатор</translation>
+        <translation>Уклони модулатор</translation>
     </message>
     <message>
         <location filename="editor/pageprst.ui" line="209"/>
         <source>Copy modulators</source>
-        <translation type="unfinished">Умножи модулаторе</translation>
+        <translation>Умножи модулаторе</translation>
     </message>
     <message>
         <location filename="editor/pageprst.ui" line="235"/>
         <source>Paste the copied modulators</source>
-        <translation type="unfinished">Убаци умножене модулаторе</translation>
+        <translation>Убаци умножене модулаторе</translation>
     </message>
     <message>
         <location filename="editor/pageprst.ui" line="349"/>
         <source>Source</source>
-        <translation type="unfinished">Извориште</translation>
+        <translation>Извориште</translation>
     </message>
     <message>
         <location filename="editor/pageprst.ui" line="360"/>
         <source>Amount</source>
-        <translation type="unfinished">Количина</translation>
+        <translation>Количина</translation>
     </message>
     <message>
         <location filename="editor/pageprst.ui" line="371"/>
         <location filename="editor/pageprst.ui" line="522"/>
         <source>Destination</source>
-        <translation type="unfinished">Одредиште</translation>
+        <translation>Одредиште</translation>
     </message>
     <message>
         <location filename="editor/pageprst.ui" line="391"/>
         <source>Source / Amount</source>
-        <translation type="unfinished">Извориште/Количина</translation>
+        <translation>Извориште/Количина</translation>
     </message>
     <message>
         <location filename="editor/pageprst.ui" line="565"/>
         <source>Abs. value</source>
-        <translation type="unfinished">Апсолутна вредност</translation>
+        <translation>Апсолутна вредност</translation>
     </message>
     <message>
         <location filename="editor/pageprst.ui" line="641"/>
         <source>Bank</source>
-        <translation type="unfinished">Банка</translation>
+        <translation>Банка</translation>
     </message>
     <message>
         <location filename="editor/pageprst.ui" line="673"/>
         <source>Preset</source>
-        <translation type="unfinished">Поставка</translation>
+        <translation>Поставка</translation>
     </message>
     <message>
         <location filename="editor/pageprst.ui" line="712"/>
         <source>(percussion)</source>
-        <translation type="unfinished">(удараљке)</translation>
+        <translation>(удараљке)</translation>
     </message>
     <message>
         <location filename="editor/pageprst.cpp" line="157"/>
         <source>Table</source>
-        <translation type="unfinished">Таблица</translation>
+        <translation>Таблица</translation>
     </message>
     <message>
         <location filename="editor/pageprst.cpp" line="158"/>
         <source>Ranges</source>
-        <translation type="unfinished">Опсег</translation>
+        <translation>Опсег</translation>
     </message>
 </context>
 <context>
@@ -4890,47 +5010,47 @@ rate</source>
     <message>
         <location filename="editor/pagesf2.ui" line="202"/>
         <source>Current date</source>
-        <translation type="unfinished">Данашњи датум</translation>
+        <translation>Данашњи датум</translation>
     </message>
     <message>
         <location filename="editor/pagesf2.ui" line="234"/>
         <source>Product</source>
-        <translation type="unfinished">Намена</translation>
+        <translation>Намена</translation>
     </message>
     <message>
         <location filename="editor/pagesf2.ui" line="248"/>
         <source>Copyright</source>
-        <translation type="unfinished">Права творца</translation>
+        <translation>Права творца</translation>
     </message>
     <message>
         <location filename="editor/pagesf2.ui" line="262"/>
         <source>Comments</source>
-        <translation type="unfinished">Примедбе</translation>
+        <translation>Примедбе</translation>
     </message>
     <message>
         <location filename="editor/pagesf2.ui" line="323"/>
         <source>Soundfont version</source>
-        <translation type="unfinished">Издање звукотеке</translation>
+        <translation>Издање звукотеке</translation>
     </message>
     <message>
         <location filename="editor/pagesf2.ui" line="359"/>
         <source>ROM name and version</source>
-        <translation type="unfinished">„ROM“ — назив и издање</translation>
+        <translation>„ROM“ — назив и издање</translation>
     </message>
     <message>
         <location filename="editor/pagesf2.ui" line="395"/>
         <source>Sound engine</source>
-        <translation type="unfinished">Звучни покретач</translation>
+        <translation>Звучни покретач</translation>
     </message>
     <message>
         <location filename="editor/pagesf2.ui" line="431"/>
         <source>Editing software</source>
-        <translation type="unfinished">Програмски уређивач</translation>
+        <translation>Програмски уређивач</translation>
     </message>
     <message>
         <location filename="editor/pagesf2.ui" line="534"/>
         <source>Presets</source>
-        <translation type="unfinished">Поставке</translation>
+        <translation>Поставке</translation>
     </message>
     <message>
         <location filename="editor/pagesf2.ui" line="556"/>
@@ -4943,7 +5063,7 @@ rate</source>
         <location filename="editor/pagesf2.ui" line="655"/>
         <location filename="editor/pagesf2.ui" line="754"/>
         <source>Samples</source>
-        <translation type="unfinished">Узорци</translation>
+        <translation>Узорци</translation>
     </message>
     <message>
         <location filename="editor/pagesf2.ui" line="740"/>
@@ -4955,18 +5075,18 @@ rate</source>
     <message>
         <location filename="editor/pagesf2.ui" line="768"/>
         <source>16 bits</source>
-        <translation type="unfinished">24-бита {16 ?}</translation>
+        <translation>24-бита {16 ?}</translation>
     </message>
     <message>
         <location filename="editor/pagesf2.ui" line="773"/>
         <source>24 bits</source>
-        <translation type="unfinished">24-бита</translation>
+        <translation>24-бита</translation>
     </message>
     <message>
         <location filename="editor/pagesf2.ui" line="802"/>
         <location filename="editor/pagesf2.ui" line="900"/>
         <source>Modulators</source>
-        <translation type="unfinished">Модулатори</translation>
+        <translation>Модулатори</translation>
     </message>
     <message>
         <location filename="editor/pagesf2.ui" line="830"/>
@@ -4977,7 +5097,7 @@ rate</source>
     <message>
         <location filename="editor/pagesf2.ui" line="983"/>
         <source>Instruments</source>
-        <translation type="unfinished">Инструменти</translation>
+        <translation>Инструменти</translation>
     </message>
     <message>
         <location filename="editor/pagesf2.cpp" line="105"/>
@@ -5017,18 +5137,18 @@ rate</source>
     <message>
         <location filename="editor/pagesmpl.ui" line="724"/>
         <source>Reset</source>
-        <translation type="unfinished">Поврати</translation>
+        <translation>Поврати</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.ui" line="743"/>
         <source>Apply</source>
-        <translation type="unfinished">Примени</translation>
+        <translation>Примени</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.ui" line="790"/>
         <location filename="editor/pagesmpl.cpp" line="109"/>
         <source>Equalizer (±15 dB)</source>
-        <translation type="unfinished">Еквилајзер (±15 dB)</translation>
+        <translation>Еквилајзер (±15 dB)</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.ui" line="862"/>
@@ -5036,22 +5156,22 @@ rate</source>
         <location filename="editor/pagesmpl.cpp" line="1026"/>
         <location filename="editor/pagesmpl.cpp" line="1064"/>
         <source>Play</source>
-        <translation type="unfinished">Пусти</translation>
+        <translation>Пусти</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.ui" line="878"/>
         <source>sinus</source>
-        <translation type="unfinished">синусно</translation>
+        <translation>синусно</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.ui" line="916"/>
         <source>loop</source>
-        <translation type="unfinished">врти</translation>
+        <translation>врти</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.ui" line="929"/>
         <source>stereo</source>
-        <translation type="unfinished">стерео</translation>
+        <translation>стерео</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.ui" line="968"/>
@@ -5061,47 +5181,47 @@ rate</source>
     <message>
         <location filename="editor/pagesmpl.ui" line="998"/>
         <source>Loop</source>
-        <translation type="unfinished">Вртња</translation>
+        <translation>Вртња</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.ui" line="1124"/>
         <source>Use the full length of the sample as loop</source>
-        <translation type="unfinished">Употреби узорак за пуно трајање вртње</translation>
+        <translation>Употреби узорак за пуно трајање вртње</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.ui" line="1144"/>
         <source>Size</source>
-        <translation type="unfinished">Величина</translation>
+        <translation>Величина</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.ui" line="1151"/>
         <source>Correction (cents)</source>
-        <translation type="unfinished">Поправка (центи)</translation>
+        <translation>Поправка (центи)</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.ui" line="1158"/>
         <source>Sample rate</source>
-        <translation type="unfinished">Учестаност узорковања</translation>
+        <translation>Учестаност узорковања</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.ui" line="1165"/>
         <source>Type</source>
-        <translation type="unfinished">Врста</translation>
+        <translation>Врста</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.ui" line="1172"/>
         <source>Link</source>
-        <translation type="unfinished">Веза</translation>
+        <translation>Веза</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.ui" line="1179"/>
         <source>Root key</source>
-        <translation type="unfinished">Основна нота</translation>
+        <translation>Основна нота</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.ui" line="1192"/>
         <source>Use the estimated pitch and correction as values</source>
-        <translation type="unfinished">Узми за вредности прорачунате висину тона и исправку</translation>
+        <translation>Узми за вредности прорачунате висину тона и исправку</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.ui" line="1235"/>
@@ -5109,7 +5229,7 @@ rate</source>
         <location filename="editor/pagesmpl.cpp" line="539"/>
         <location filename="editor/pagesmpl.cpp" line="1149"/>
         <source>Information</source>
-        <translation type="unfinished">Подаци</translation>
+        <translation>Подаци</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.cpp" line="178"/>
@@ -5130,25 +5250,25 @@ rate</source>
         <location filename="editor/pagesmpl.cpp" line="669"/>
         <source>mono</source>
         <comment>opposite to stereo</comment>
-        <translation type="unfinished">моно</translation>
+        <translation>моно</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.cpp" line="274"/>
         <location filename="editor/pagesmpl.cpp" line="808"/>
         <source>right</source>
-        <translation type="unfinished">десно</translation>
+        <translation>десно</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.cpp" line="275"/>
         <location filename="editor/pagesmpl.cpp" line="809"/>
         <source>left</source>
-        <translation type="unfinished">лево</translation>
+        <translation>лево</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.cpp" line="276"/>
         <location filename="editor/pagesmpl.cpp" line="810"/>
         <source>link</source>
-        <translation type="unfinished">веза</translation>
+        <translation>веза</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.cpp" line="314"/>
@@ -5169,18 +5289,18 @@ rate</source>
         <location filename="editor/pagesmpl.cpp" line="540"/>
         <location filename="editor/pagesmpl.cpp" line="1150"/>
         <source>Change successfully applied to the different samples</source>
-        <translation type="unfinished">Успешно су примењене измене на различитим узорцима</translation>
+        <translation>Успешно су примењене измене на различитим узорцима</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.cpp" line="807"/>
         <location filename="editor/pagesmpl.cpp" line="832"/>
         <source>mono</source>
-        <translation type="unfinished">моно</translation>
+        <translation>моно</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.cpp" line="999"/>
         <source>Stop</source>
-        <translation type="unfinished">Заустави</translation>
+        <translation>Заустави</translation>
     </message>
 </context>
 <context>
@@ -6135,12 +6255,12 @@ rate</source>
     <message>
         <location filename="core/output/outputfactory.cpp" line="92"/>
         <source>Save a soundfont</source>
-        <translation type="unfinished">Сачувај звукотеку</translation>
+        <translation>Сачувај звукотеку</translation>
     </message>
     <message>
         <location filename="core/output/outputfactory.cpp" line="93"/>
         <source>Sf2 files</source>
-        <translation type="unfinished">Сф2-звукотека</translation>
+        <translation>Сф2-звукотека</translation>
     </message>
     <message>
         <location filename="core/output/outputfactory.cpp" line="115"/>
@@ -6210,7 +6330,7 @@ rate</source>
     <message>
         <location filename="core/model/soundfont.cpp" line="24"/>
         <source>General</source>
-        <translation type="unfinished">Опште</translation>
+        <translation>Опште</translation>
     </message>
     <message>
         <location filename="core/model/soundfont.cpp" line="25"/>
@@ -6384,96 +6504,32 @@ rate</source>
         <translation>Опсег јачине удара:</translation>
     </message>
     <message>
-        <location filename="context/keynamemanager.cpp" line="63"/>
-        <location filename="context/keynamemanager.cpp" line="81"/>
         <source>C</source>
-        <translation type="unfinished">До</translation>
+        <translation type="vanished">До</translation>
     </message>
     <message>
-        <location filename="context/keynamemanager.cpp" line="64"/>
-        <source>D♭</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="context/keynamemanager.cpp" line="65"/>
-        <location filename="context/keynamemanager.cpp" line="83"/>
         <source>D</source>
-        <translation type="unfinished">Ре</translation>
+        <translation type="vanished">Ре</translation>
     </message>
     <message>
-        <location filename="context/keynamemanager.cpp" line="66"/>
-        <source>E♭</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="context/keynamemanager.cpp" line="67"/>
-        <location filename="context/keynamemanager.cpp" line="85"/>
         <source>E</source>
-        <translation type="unfinished">Ми</translation>
+        <translation type="vanished">Ми</translation>
     </message>
     <message>
-        <location filename="context/keynamemanager.cpp" line="68"/>
-        <location filename="context/keynamemanager.cpp" line="86"/>
         <source>F</source>
-        <translation type="unfinished">Фа</translation>
+        <translation type="vanished">Фа</translation>
     </message>
     <message>
-        <location filename="context/keynamemanager.cpp" line="69"/>
-        <source>G♭</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="context/keynamemanager.cpp" line="70"/>
-        <location filename="context/keynamemanager.cpp" line="88"/>
         <source>G</source>
-        <translation type="unfinished">Сол</translation>
+        <translation type="vanished">Сол</translation>
     </message>
     <message>
-        <location filename="context/keynamemanager.cpp" line="71"/>
-        <source>A♭</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="context/keynamemanager.cpp" line="72"/>
-        <location filename="context/keynamemanager.cpp" line="90"/>
         <source>A</source>
-        <translation type="unfinished">Ла</translation>
+        <translation type="vanished">Ла</translation>
     </message>
     <message>
-        <location filename="context/keynamemanager.cpp" line="73"/>
-        <source>B♭</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="context/keynamemanager.cpp" line="74"/>
-        <location filename="context/keynamemanager.cpp" line="92"/>
         <source>B</source>
-        <translation type="unfinished">Ти</translation>
-    </message>
-    <message>
-        <location filename="context/keynamemanager.cpp" line="82"/>
-        <source>C♯</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="context/keynamemanager.cpp" line="84"/>
-        <source>D♯</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="context/keynamemanager.cpp" line="87"/>
-        <source>F♯</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="context/keynamemanager.cpp" line="89"/>
-        <source>G♯</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="context/keynamemanager.cpp" line="91"/>
-        <source>A♯</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Ти</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_about.cpp" line="122"/>
@@ -6498,6 +6554,115 @@ rate</source>
     <message>
         <location filename="repository/soundfontinformation.cpp" line="22"/>
         <source>Unknown author</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="context/keynamemanager.cpp" line="63"/>
+        <location filename="context/keynamemanager.cpp" line="81"/>
+        <source>C</source>
+        <comment>key name</comment>
+        <translation type="unfinished">До</translation>
+    </message>
+    <message>
+        <location filename="context/keynamemanager.cpp" line="64"/>
+        <source>D♭</source>
+        <comment>key name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="context/keynamemanager.cpp" line="65"/>
+        <location filename="context/keynamemanager.cpp" line="83"/>
+        <source>D</source>
+        <comment>key name</comment>
+        <translation type="unfinished">Ре</translation>
+    </message>
+    <message>
+        <location filename="context/keynamemanager.cpp" line="66"/>
+        <source>E♭</source>
+        <comment>key name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="context/keynamemanager.cpp" line="67"/>
+        <location filename="context/keynamemanager.cpp" line="85"/>
+        <source>E</source>
+        <comment>key name</comment>
+        <translation type="unfinished">Ми</translation>
+    </message>
+    <message>
+        <location filename="context/keynamemanager.cpp" line="68"/>
+        <location filename="context/keynamemanager.cpp" line="86"/>
+        <source>F</source>
+        <comment>key name</comment>
+        <translation type="unfinished">Фа</translation>
+    </message>
+    <message>
+        <location filename="context/keynamemanager.cpp" line="69"/>
+        <source>G♭</source>
+        <comment>key name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="context/keynamemanager.cpp" line="70"/>
+        <location filename="context/keynamemanager.cpp" line="88"/>
+        <source>G</source>
+        <comment>key name</comment>
+        <translation type="unfinished">Сол</translation>
+    </message>
+    <message>
+        <location filename="context/keynamemanager.cpp" line="71"/>
+        <source>A♭</source>
+        <comment>key name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="context/keynamemanager.cpp" line="72"/>
+        <location filename="context/keynamemanager.cpp" line="90"/>
+        <source>A</source>
+        <comment>key name</comment>
+        <translation type="unfinished">Ла</translation>
+    </message>
+    <message>
+        <location filename="context/keynamemanager.cpp" line="73"/>
+        <source>B♭</source>
+        <comment>key name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="context/keynamemanager.cpp" line="74"/>
+        <location filename="context/keynamemanager.cpp" line="92"/>
+        <source>B</source>
+        <comment>key name</comment>
+        <translation type="unfinished">Ти</translation>
+    </message>
+    <message>
+        <location filename="context/keynamemanager.cpp" line="82"/>
+        <source>C♯</source>
+        <comment>key name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="context/keynamemanager.cpp" line="84"/>
+        <source>D♯</source>
+        <comment>key name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="context/keynamemanager.cpp" line="87"/>
+        <source>F♯</source>
+        <comment>key name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="context/keynamemanager.cpp" line="89"/>
+        <source>G♯</source>
+        <comment>key name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="context/keynamemanager.cpp" line="91"/>
+        <source>A♯</source>
+        <comment>key name</comment>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -6988,7 +7153,7 @@ rate</source>
     <message>
         <location filename="repository/repositorymanager.cpp" line="466"/>
         <source>Warning</source>
-        <translation type="unfinished">Упозорење</translation>
+        <translation>Упозорење</translation>
     </message>
 </context>
 <context>
@@ -7050,7 +7215,7 @@ download the list</source>
     <message>
         <location filename="repository/browser/soundfontbrowser.ui" line="387"/>
         <source>Date</source>
-        <translation type="unfinished">Датум</translation>
+        <translation>Датум</translation>
     </message>
     <message>
         <location filename="repository/browser/soundfontbrowser.ui" line="392"/>
@@ -7075,7 +7240,7 @@ download the list</source>
     <message>
         <location filename="repository/browser/soundfontbrowser.ui" line="484"/>
         <source>Reset</source>
-        <translation type="unfinished">Поврати</translation>
+        <translation>Поврати</translation>
     </message>
     <message>
         <location filename="repository/browser/soundfontbrowser.ui" line="503"/>
@@ -7207,7 +7372,7 @@ download the list</source>
     <message>
         <location filename="repository/soundfont/soundfontviewer.ui" line="506"/>
         <source>Comments</source>
-        <translation type="unfinished">Примедбе</translation>
+        <translation>Примедбе</translation>
     </message>
     <message>
         <location filename="repository/soundfont/soundfontviewer.ui" line="575"/>
@@ -7234,57 +7399,57 @@ download content</source>
     <message>
         <location filename="context/thememanager.cpp" line="57"/>
         <source>Custom</source>
-        <translation type="unfinished">Прилагођено</translation>
+        <translation>Прилагођено</translation>
     </message>
     <message>
         <location filename="context/thememanager.cpp" line="360"/>
         <source>Default</source>
-        <translation type="unfinished">Уобичајено</translation>
+        <translation>Уобичајено</translation>
     </message>
     <message>
         <location filename="context/thememanager.cpp" line="380"/>
         <source>Gnome</source>
-        <translation type="unfinished">Гном</translation>
+        <translation>Гном</translation>
     </message>
     <message>
         <location filename="context/thememanager.cpp" line="393"/>
         <source>Dark, blue</source>
-        <translation type="unfinished">Тамно — плава</translation>
+        <translation>Тамно — плава</translation>
     </message>
     <message>
         <location filename="context/thememanager.cpp" line="406"/>
         <source>Dark, orange</source>
-        <translation type="unfinished">Тамно — наранџаста</translation>
+        <translation>Тамно — наранџаста</translation>
     </message>
     <message>
         <location filename="context/thememanager.cpp" line="419"/>
         <source>Dark, green</source>
-        <translation type="unfinished">Тамно — зелена</translation>
+        <translation>Тамно — зелена</translation>
     </message>
     <message>
         <location filename="context/thememanager.cpp" line="432"/>
         <source>Dark, yellow</source>
-        <translation type="unfinished">Тамно — жута</translation>
+        <translation>Тамно — жута</translation>
     </message>
     <message>
         <location filename="context/thememanager.cpp" line="445"/>
         <source>Aqua</source>
-        <translation type="unfinished">Вода</translation>
+        <translation>Вода</translation>
     </message>
     <message>
         <location filename="context/thememanager.cpp" line="458"/>
         <source>Spring</source>
-        <translation type="unfinished">Пролеће</translation>
+        <translation>Пролеће</translation>
     </message>
     <message>
         <location filename="context/thememanager.cpp" line="471"/>
         <source>Windows 10</source>
-        <translation type="unfinished">Виндоуз 10</translation>
+        <translation>Виндоуз 10</translation>
     </message>
     <message>
         <location filename="context/thememanager.cpp" line="484"/>
         <source>Ubuntu</source>
-        <translation type="unfinished">Убунту</translation>
+        <translation>Убунту</translation>
     </message>
 </context>
 <context>
@@ -7310,12 +7475,12 @@ download content</source>
     <message>
         <location filename="editor/tools/auto_loop/toolautoloop.cpp" line="53"/>
         <source>The following samples couldn&apos;t be looped:</source>
-        <translation type="unfinished">Ови узорци не могу да се понављају (врте):</translation>
+        <translation>Ови узорци не могу да се понављају (врте):</translation>
     </message>
     <message>
         <location filename="editor/tools/auto_loop/toolautoloop.cpp" line="58"/>
         <source>Possible reasons: too short or too turbulent.</source>
-        <translation type="unfinished">Могући узроци: прекратак или несталан.</translation>
+        <translation>Могући узроци: прекратак или несталан.</translation>
     </message>
     <message>
         <location filename="editor/tools/auto_loop/toolautoloop.h" line="23"/>
@@ -7325,7 +7490,7 @@ download content</source>
     <message>
         <location filename="editor/tools/auto_loop/toolautoloop.h" line="41"/>
         <source>Auto loop</source>
-        <translation type="unfinished">Сам врти</translation>
+        <translation>Сам врти</translation>
     </message>
 </context>
 <context>
@@ -7364,12 +7529,12 @@ download content</source>
     <message>
         <location filename="editor/tools/celeste_tuning/toolcelestetuning_gui.ui" line="20"/>
         <source>Division to the next octave</source>
-        <translation type="unfinished">Део до наредне октаве</translation>
+        <translation>Део до наредне октаве</translation>
     </message>
     <message>
         <location filename="editor/tools/celeste_tuning/toolcelestetuning_gui.ui" line="60"/>
         <source>The algebraic sign determines the tuning direction.</source>
-        <translation type="unfinished">Алгебарски знак одређује правац угађања.</translation>
+        <translation>Алгебарски знак одређује правац угађања.</translation>
     </message>
     <message>
         <location filename="editor/tools/celeste_tuning/toolcelestetuning_gui.cpp" line="26"/>
@@ -7379,7 +7544,7 @@ download content</source>
     <message>
         <location filename="editor/tools/celeste_tuning/toolcelestetuning_gui.cpp" line="26"/>
         <source>key</source>
-        <translation type="unfinished">нота</translation>
+        <translation>нота</translation>
     </message>
 </context>
 <context>
@@ -7400,22 +7565,22 @@ download content</source>
     <message>
         <location filename="editor/tools/change_attenuation/toolchangeattenuation_gui.ui" line="39"/>
         <source>Desired value</source>
-        <translation type="unfinished">Захтевана вредност</translation>
+        <translation>Захтевана вредност</translation>
     </message>
     <message>
         <location filename="editor/tools/change_attenuation/toolchangeattenuation_gui.ui" line="65"/>
         <source>Possible offset</source>
-        <translation type="unfinished">Могућ помак</translation>
+        <translation>Могућ помак</translation>
     </message>
     <message>
         <location filename="editor/tools/change_attenuation/toolchangeattenuation_gui.ui" line="78"/>
         <source>Attenuation range</source>
-        <translation type="unfinished">Опсег пригушења</translation>
+        <translation>Опсег пригушења</translation>
     </message>
     <message>
         <location filename="editor/tools/change_attenuation/toolchangeattenuation_gui.ui" line="91"/>
         <source> dB</source>
-        <translation type="unfinished"> dB</translation>
+        <translation> dB</translation>
     </message>
 </context>
 <context>
@@ -7428,7 +7593,7 @@ download content</source>
     <message>
         <location filename="editor/tools/change_volume/toolchangevolume.h" line="37"/>
         <source>Change volume</source>
-        <translation type="unfinished">Промена гласноће</translation>
+        <translation>Промена гласноће</translation>
     </message>
 </context>
 <context>
@@ -7436,27 +7601,27 @@ download content</source>
     <message>
         <location filename="editor/tools/change_volume/toolchangevolume_gui.ui" line="20"/>
         <source>Add</source>
-        <translation type="unfinished">Додај</translation>
+        <translation>Додај</translation>
     </message>
     <message>
         <location filename="editor/tools/change_volume/toolchangevolume_gui.ui" line="30"/>
         <source> dB</source>
-        <translation type="unfinished"> dB</translation>
+        <translation> dB</translation>
     </message>
     <message>
         <location filename="editor/tools/change_volume/toolchangevolume_gui.ui" line="43"/>
         <source>Multiply</source>
-        <translation type="unfinished">Помножи</translation>
+        <translation>Помножи</translation>
     </message>
     <message>
         <location filename="editor/tools/change_volume/toolchangevolume_gui.ui" line="63"/>
         <source>Normalize</source>
-        <translation type="unfinished">Уједначи</translation>
+        <translation>Уједначи</translation>
     </message>
     <message>
         <location filename="editor/tools/change_volume/toolchangevolume_gui.ui" line="73"/>
         <source> %</source>
-        <translation type="unfinished"> %</translation>
+        <translation> %</translation>
     </message>
 </context>
 <context>
@@ -7464,7 +7629,7 @@ download content</source>
     <message>
         <location filename="editor/tools/chords/toolchords.cpp" line="35"/>
         <source>The instrument contains no samples.</source>
-        <translation type="unfinished">Овај инструменат не садржи узорке.</translation>
+        <translation>Овај инструменат не садржи узорке.</translation>
     </message>
     <message>
         <location filename="editor/tools/chords/toolchords.h" line="24"/>
@@ -7487,32 +7652,32 @@ download content</source>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="35"/>
         <source>Sample creation:</source>
-        <translation type="unfinished">Стварање узорка:</translation>
+        <translation>Стварање узорка:</translation>
     </message>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="43"/>
         <source>for every key</source>
-        <translation type="unfinished">за сваку ноту</translation>
+        <translation>за сваку ноту</translation>
     </message>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="48"/>
         <source>every 3 keys</source>
-        <translation type="unfinished">за сваку 3. ноту</translation>
+        <translation>за сваку 3. ноту</translation>
     </message>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="53"/>
         <source>every 6 keys</source>
-        <translation type="unfinished">за сваку 6. ноту</translation>
+        <translation>за сваку 6. ноту</translation>
     </message>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="61"/>
         <source>Auto loop</source>
-        <translation type="unfinished">Сам врти</translation>
+        <translation>Сам врти</translation>
     </message>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="71"/>
         <source>Stereo</source>
-        <translation type="unfinished">Стерео</translation>
+        <translation>Стерео</translation>
     </message>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="86"/>
@@ -7537,7 +7702,7 @@ download content</source>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="175"/>
         <source>Root key</source>
-        <translation type="unfinished">Основна нота</translation>
+        <translation>Основна нота</translation>
     </message>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="188"/>
@@ -7551,7 +7716,7 @@ download content</source>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="360"/>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="415"/>
         <source>no</source>
-        <translation type="unfinished">не</translation>
+        <translation>не</translation>
     </message>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="232"/>
@@ -7570,7 +7735,7 @@ download content</source>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="257"/>
         <source>yes</source>
-        <translation type="unfinished">да</translation>
+        <translation>да</translation>
     </message>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="346"/>
@@ -7637,7 +7802,7 @@ download content</source>
     <message>
         <location filename="editor/tools/division_duplication/tooldivisionduplication.h" line="39"/>
         <source>Division duplication</source>
-        <translation type="unfinished">Удвостручавање делова</translation>
+        <translation>Удвостручавање делова</translation>
     </message>
 </context>
 <context>
@@ -7645,12 +7810,12 @@ download content</source>
     <message>
         <location filename="editor/tools/division_duplication/tooldivisionduplication_gui.ui" line="119"/>
         <source>A division for each velocity range</source>
-        <translation type="unfinished">Један део за сваки опсег јачине удара</translation>
+        <translation>Један део за сваки опсег јачине удара</translation>
     </message>
     <message>
         <location filename="editor/tools/division_duplication/tooldivisionduplication_gui.ui" line="126"/>
         <source>A division for each key</source>
-        <translation type="unfinished">Један део за сваку ноту</translation>
+        <translation>Један део за сваку ноту</translation>
     </message>
 </context>
 <context>
@@ -7681,22 +7846,22 @@ download content</source>
     <message>
         <location filename="editor/tools/external_command/toolexternalcommand_gui.ui" line="20"/>
         <source>Command</source>
-        <translation type="unfinished">Наредба</translation>
+        <translation>Наредба</translation>
     </message>
     <message>
         <location filename="editor/tools/external_command/toolexternalcommand_gui.ui" line="44"/>
         <source>History</source>
-        <translation type="unfinished">Историјат</translation>
+        <translation>Историјат</translation>
     </message>
     <message>
         <location filename="editor/tools/external_command/toolexternalcommand_gui.ui" line="54"/>
         <source>Authorize stereo editing</source>
-        <translation type="unfinished">Дозволи стерео уређивање</translation>
+        <translation>Дозволи стерео уређивање</translation>
     </message>
     <message>
         <location filename="editor/tools/external_command/toolexternalcommand_gui.ui" line="61"/>
         <source>Replace sample information if possible</source>
-        <translation type="unfinished">Када је то могуће, замени податке узорка</translation>
+        <translation>Када је то могуће, замени податке узорка</translation>
     </message>
     <message>
         <location filename="editor/tools/external_command/toolexternalcommand_gui.ui" line="98"/>
@@ -7706,23 +7871,23 @@ download content</source>
     <message>
         <location filename="editor/tools/external_command/toolexternalcommand_gui.cpp" line="75"/>
         <source>Executable file</source>
-        <translation type="unfinished">Извршна датотека</translation>
+        <translation>Извршна датотека</translation>
     </message>
     <message>
         <location filename="editor/tools/external_command/toolexternalcommand_gui.cpp" line="92"/>
         <location filename="editor/tools/external_command/toolexternalcommand_gui.cpp" line="99"/>
         <source>Warning</source>
-        <translation type="unfinished">Упозорење</translation>
+        <translation>Упозорење</translation>
     </message>
     <message>
         <location filename="editor/tools/external_command/toolexternalcommand_gui.cpp" line="92"/>
         <source>You must enter a command with at least {wav} as argument.</source>
-        <translation type="unfinished">Унетој наредби мора да се придружи бар {wav} као аргуменат.</translation>
+        <translation>Унетој наредби мора да се придружи бар {wav} као аргуменат.</translation>
     </message>
     <message>
         <location filename="editor/tools/external_command/toolexternalcommand_gui.cpp" line="99"/>
         <source>The command must contain the argument {wav}.</source>
-        <translation type="unfinished">Линија наредбе мора да садржи {wav} аргуменат.</translation>
+        <translation>Линија наредбе мора да садржи {wav} аргуменат.</translation>
     </message>
 </context>
 <context>
@@ -7735,7 +7900,7 @@ download content</source>
     <message>
         <location filename="editor/tools/frequency_filter/toolfrequencyfilter.h" line="37"/>
         <source>Filter frequencies</source>
-        <translation type="unfinished">Филтрирање учестаности</translation>
+        <translation>Филтрирање учестаности</translation>
     </message>
 </context>
 <context>
@@ -7743,7 +7908,7 @@ download content</source>
     <message>
         <location filename="editor/tools/frequency_filter/toolfrequencyfilter_gui.ui" line="26"/>
         <source>Put in red the part of frequencies to filter:</source>
-        <translation type="unfinished">Сместите у црвено део учестаности за филтрирање :</translation>
+        <translation>Сместите у црвено део учестаности за филтрирање :</translation>
     </message>
 </context>
 <context>
@@ -7751,7 +7916,7 @@ download content</source>
     <message>
         <location filename="editor/tools/frequency_peaks/toolfrequencypeaks.cpp" line="30"/>
         <source>Sample</source>
-        <translation type="unfinished">Узорак</translation>
+        <translation>Узорак</translation>
     </message>
     <message>
         <location filename="editor/tools/frequency_peaks/toolfrequencypeaks.cpp" line="30"/>
@@ -7761,22 +7926,22 @@ download content</source>
     <message>
         <location filename="editor/tools/frequency_peaks/toolfrequencypeaks.cpp" line="31"/>
         <source>Intensity</source>
-        <translation type="unfinished">Интензитет</translation>
+        <translation>Интензитет</translation>
     </message>
     <message>
         <location filename="editor/tools/frequency_peaks/toolfrequencypeaks.cpp" line="31"/>
         <source>Frequency</source>
-        <translation type="unfinished">Учестаност</translation>
+        <translation>Учестаност</translation>
     </message>
     <message>
         <location filename="editor/tools/frequency_peaks/toolfrequencypeaks.cpp" line="32"/>
         <source>Key</source>
-        <translation type="unfinished">Нота</translation>
+        <translation>Нота</translation>
     </message>
     <message>
         <location filename="editor/tools/frequency_peaks/toolfrequencypeaks.cpp" line="32"/>
         <source>Correction</source>
-        <translation type="unfinished">Поправка</translation>
+        <translation>Поправка</translation>
     </message>
     <message>
         <location filename="editor/tools/frequency_peaks/toolfrequencypeaks.cpp" line="57"/>
@@ -7799,17 +7964,17 @@ download content</source>
     <message>
         <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.ui" line="26"/>
         <source>Export</source>
-        <translation type="unfinished">Извези</translation>
+        <translation>Извези</translation>
     </message>
     <message>
         <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.ui" line="33"/>
         <source>Close</source>
-        <translation type="unfinished">Затвори</translation>
+        <translation>Затвори</translation>
     </message>
     <message>
         <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="60"/>
         <source>Sample</source>
-        <translation type="unfinished">Узорак</translation>
+        <translation>Узорак</translation>
     </message>
     <message>
         <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="61"/>
@@ -7819,32 +7984,32 @@ download content</source>
     <message>
         <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="62"/>
         <source>Intensity</source>
-        <translation type="unfinished">Интензитет</translation>
+        <translation>Интензитет</translation>
     </message>
     <message>
         <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="63"/>
         <source>Frequency</source>
-        <translation type="unfinished">Учестаност</translation>
+        <translation>Учестаност</translation>
     </message>
     <message>
         <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="64"/>
         <source>Key</source>
-        <translation type="unfinished">Нота</translation>
+        <translation>Нота</translation>
     </message>
     <message>
         <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="65"/>
         <source>Correction</source>
-        <translation type="unfinished">Поправка</translation>
+        <translation>Поправка</translation>
     </message>
     <message>
         <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="127"/>
         <source>Hz</source>
-        <translation type="unfinished">Hz</translation>
+        <translation>Hz</translation>
     </message>
     <message>
         <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="151"/>
         <source>Export peak frequency</source>
-        <translation type="unfinished">Извези вршне учестаности</translation>
+        <translation>Извези вршне учестаности</translation>
     </message>
     <message>
         <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="152"/>
@@ -7870,87 +8035,87 @@ download content</source>
     <message>
         <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="37"/>
         <source>Minimum</source>
-        <translation type="unfinished">Најмање</translation>
+        <translation>Најмање</translation>
     </message>
     <message>
         <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="45"/>
         <source>Addition</source>
-        <translation type="unfinished">Сабирање</translation>
+        <translation>Сабирање</translation>
     </message>
     <message>
         <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="50"/>
         <source>Multiplication</source>
-        <translation type="unfinished">Умножавање</translation>
+        <translation>Умножавање</translation>
     </message>
     <message>
         <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="55"/>
         <source>Replacement</source>
-        <translation type="unfinished">Замењивање</translation>
+        <translation>Замењивање</translation>
     </message>
     <message>
         <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="86"/>
         <source>Parameter</source>
-        <translation type="unfinished">Параметар</translation>
+        <translation>Параметар</translation>
     </message>
     <message>
         <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="106"/>
         <source>Pattern</source>
-        <translation type="unfinished">Мустра</translation>
+        <translation>Мустра</translation>
     </message>
     <message>
         <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="129"/>
         <source>Maximum</source>
-        <translation type="unfinished">Највише</translation>
+        <translation>Највише</translation>
     </message>
     <message>
         <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="136"/>
         <source>Modification</source>
-        <translation type="unfinished">Промена</translation>
+        <translation>Промена</translation>
     </message>
     <message>
         <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="163"/>
         <source>Manual</source>
-        <translation type="unfinished">Ручно</translation>
+        <translation>Ручно</translation>
     </message>
     <message>
         <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="168"/>
         <source>Linear ascending</source>
-        <translation type="unfinished">Равномеран пораст</translation>
+        <translation>Равномеран пораст</translation>
     </message>
     <message>
         <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="173"/>
         <source>Linear descending</source>
-        <translation type="unfinished">Равномеран пад</translation>
+        <translation>Равномеран пад</translation>
     </message>
     <message>
         <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="178"/>
         <source>Exponential ascending</source>
-        <translation type="unfinished">Експоненцијалан пораст</translation>
+        <translation>Експоненцијалан пораст</translation>
     </message>
     <message>
         <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="183"/>
         <source>Exponential descending</source>
-        <translation type="unfinished">Експоненцијалан пад</translation>
+        <translation>Експоненцијалан пад</translation>
     </message>
     <message>
         <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="188"/>
         <source>Random</source>
-        <translation type="unfinished">Насумице</translation>
+        <translation>Насумице</translation>
     </message>
     <message>
         <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="259"/>
         <source>Apply to a velocity range</source>
-        <translation type="unfinished">Примени на опсег јачине удара</translation>
+        <translation>Примени на опсег јачине удара</translation>
     </message>
     <message>
         <location filename="editor/tools/global_settings/toolglobalsettings_gui.cpp" line="174"/>
         <source>Stiffness</source>
-        <translation type="unfinished">Крутост</translation>
+        <translation>Крутост</translation>
     </message>
     <message>
         <location filename="editor/tools/global_settings/toolglobalsettings_gui.cpp" line="179"/>
         <source>Distribution</source>
-        <translation type="unfinished">Раздел</translation>
+        <translation>Раздел</translation>
     </message>
 </context>
 <context>
@@ -7971,7 +8136,7 @@ download content</source>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation.cpp" line="35"/>
         <source>The instrument contains no samples.</source>
-        <translation type="unfinished">Овај инструменат не садржи узорке.</translation>
+        <translation>Овај инструменат не садржи узорке.</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation.h" line="24"/>
@@ -7981,7 +8146,7 @@ download content</source>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation.h" line="39"/>
         <source>Mixture creation</source>
-        <translation type="unfinished">Стварање микстуре</translation>
+        <translation>Стварање микстуре</translation>
     </message>
 </context>
 <context>
@@ -7989,42 +8154,42 @@ download content</source>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="25"/>
         <source>Name of the mixture:</source>
-        <translation type="unfinished">Назив микстуре:</translation>
+        <translation>Назив микстуре:</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="35"/>
         <source>Sample creation:</source>
-        <translation type="unfinished">Стварање узорка:</translation>
+        <translation>Стварање узорка:</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="43"/>
         <source>for every key</source>
-        <translation type="unfinished">за сваку ноту</translation>
+        <translation>за сваку ноту</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="48"/>
         <source>every 3 keys</source>
-        <translation type="unfinished">за сваку 3. ноту</translation>
+        <translation>за сваку 3. ноту</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="53"/>
         <source>every 6 keys</source>
-        <translation type="unfinished">за сваку 6. ноту</translation>
+        <translation>за сваку 6. ноту</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="61"/>
         <source>Auto loop</source>
-        <translation type="unfinished">Сам врти</translation>
+        <translation>Сам врти</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="71"/>
         <source>Stereo</source>
-        <translation type="unfinished">Стерео</translation>
+        <translation>Стерео</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="85"/>
         <source>Divisions</source>
-        <translation type="unfinished">Делови</translation>
+        <translation>Делови</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="238"/>
@@ -8034,88 +8199,88 @@ download content</source>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="261"/>
         <source>Ranks</source>
-        <translation type="unfinished">Редослед</translation>
+        <translation>Редослед</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="334"/>
         <source>Type</source>
-        <translation type="unfinished">Врста</translation>
+        <translation>Врста</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="342"/>
         <source>octave</source>
-        <translation type="unfinished">октава</translation>
+        <translation>октава</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="347"/>
         <source>fifth</source>
-        <translation type="unfinished">квинта</translation>
+        <translation>квинта</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="352"/>
         <source>third</source>
-        <translation type="unfinished">терца</translation>
+        <translation>терца</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="357"/>
         <source>seventh</source>
-        <translation type="unfinished">септима</translation>
+        <translation>септима</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="362"/>
         <source>ninth</source>
-        <translation type="unfinished">деветина</translation>
+        <translation>деветина</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="367"/>
         <source>eleventh</source>
-        <translation type="unfinished">једанаестина</translation>
+        <translation>једанаестина</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="372"/>
         <source>thirteenth</source>
-        <translation type="unfinished">тринаестина</translation>
+        <translation>тринаестина</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="377"/>
         <source>fifteenth</source>
-        <translation type="unfinished">петнаестина</translation>
+        <translation>петнаестина</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="382"/>
         <source>seventeenth</source>
-        <translation type="unfinished">седамнаестина</translation>
+        <translation>седамнаестина</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="387"/>
         <source>nineteenth</source>
-        <translation type="unfinished">деветнаестина</translation>
+        <translation>деветнаестина</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="392"/>
         <source>twenty-first</source>
-        <translation type="unfinished">двадесетједнина</translation>
+        <translation>двадесетједнина</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="397"/>
         <source>twenty-third</source>
-        <translation type="unfinished">двадесеттрећина</translation>
+        <translation>двадесеттрећина</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="402"/>
         <source>twenty-fifth</source>
-        <translation type="unfinished">двадесетпетина</translation>
+        <translation>двадесетпетина</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="407"/>
         <source>twenty-seventh</source>
-        <translation type="unfinished">двадесетседмина</translation>
+        <translation>двадесетседмина</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.cpp" line="59"/>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.cpp" line="75"/>
         <source>Warning</source>
-        <translation type="unfinished">Упозорење</translation>
+        <translation>Упозорење</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.cpp" line="59"/>
@@ -8146,32 +8311,32 @@ download content</source>
     <message>
         <location filename="editor/tools/monitor/toolmonitor_gui.ui" line="97"/>
         <source>Display options</source>
-        <translation type="unfinished">Приказивање</translation>
+        <translation>Приказивање</translation>
     </message>
     <message>
         <location filename="editor/tools/monitor/toolmonitor_gui.ui" line="140"/>
         <source>Log scale</source>
-        <translation type="unfinished">лог. подела</translation>
+        <translation>лог. подела</translation>
     </message>
     <message>
         <location filename="editor/tools/monitor/toolmonitor_gui.ui" line="162"/>
         <source>Legend</source>
-        <translation type="unfinished">Појашњења</translation>
+        <translation>Појашњења</translation>
     </message>
     <message>
         <location filename="editor/tools/monitor/toolmonitor_gui.ui" line="221"/>
         <source>Default parameters</source>
-        <translation type="unfinished">Подразумевани параметри</translation>
+        <translation>Подразумевани параметри</translation>
     </message>
     <message>
         <location filename="editor/tools/monitor/toolmonitor_gui.ui" line="250"/>
         <source>Mean value per key</source>
-        <translation type="unfinished">Просечна вредност по ноти</translation>
+        <translation>Просечна вредност по ноти</translation>
     </message>
     <message>
         <location filename="editor/tools/monitor/toolmonitor_gui.ui" line="263"/>
         <source>Defined parameters</source>
-        <translation type="unfinished">Задати параметри</translation>
+        <translation>Задати параметри</translation>
     </message>
 </context>
 <context>
@@ -8184,7 +8349,7 @@ download content</source>
     <message>
         <location filename="editor/tools/preset_list/toolpresetlist.h" line="36"/>
         <source>Export preset list</source>
-        <translation type="unfinished">Извези списак поставки</translation>
+        <translation>Извези списак поставки</translation>
     </message>
 </context>
 <context>
@@ -8192,27 +8357,27 @@ download content</source>
     <message>
         <location filename="editor/tools/preset_list/toolpresetlist_gui.ui" line="30"/>
         <source>Copy</source>
-        <translation type="unfinished">Умножи</translation>
+        <translation>Умножи</translation>
     </message>
     <message>
         <location filename="editor/tools/preset_list/toolpresetlist_gui.ui" line="56"/>
         <source>text copied in the clipboard</source>
-        <translation type="unfinished">текст копиран у клипборд</translation>
+        <translation>текст копиран у клипборд</translation>
     </message>
     <message>
         <location filename="editor/tools/preset_list/toolpresetlist_gui.ui" line="81"/>
         <source>csv format</source>
-        <translation type="unfinished">врста ЦСВ</translation>
+        <translation>врста ЦСВ</translation>
     </message>
     <message>
         <location filename="editor/tools/preset_list/toolpresetlist_gui.ui" line="91"/>
         <source>html table</source>
-        <translation type="unfinished">ХТМЛ таблица</translation>
+        <translation>ХТМЛ таблица</translation>
     </message>
     <message>
         <location filename="editor/tools/preset_list/toolpresetlist_gui.ui" line="113"/>
         <source>Close</source>
-        <translation type="unfinished">Затвори</translation>
+        <translation>Затвори</translation>
     </message>
 </context>
 <context>
@@ -8233,12 +8398,12 @@ download content</source>
     <message>
         <location filename="editor/tools/release/toolrelease_gui.ui" line="43"/>
         <source>Division to the next octave</source>
-        <translation type="unfinished">Део до наредне октаве</translation>
+        <translation>Део до наредне октаве</translation>
     </message>
     <message>
         <location filename="editor/tools/release/toolrelease_gui.ui" line="66"/>
         <source>Detuning induced (semi-tones)</source>
-        <translation type="unfinished">Изазвано раздешавање (полутонови)</translation>
+        <translation>Изазвано раздешавање (полутонови)</translation>
     </message>
     <message>
         <location filename="editor/tools/release/toolrelease_gui.cpp" line="27"/>
@@ -8251,7 +8416,7 @@ download content</source>
     <message>
         <location filename="editor/tools/remove_mods/toolremovemods.cpp" line="88"/>
         <source>1 modulator has been deleted.</source>
-        <translation type="unfinished">1 модулатор је уклоњен.</translation>
+        <translation>1 модулатор је уклоњен.</translation>
     </message>
     <message>
         <location filename="editor/tools/remove_mods/toolremovemods.cpp" line="90"/>
@@ -8279,7 +8444,7 @@ download content</source>
     <message>
         <location filename="editor/tools/sample_export/toolsampleexport.cpp" line="15"/>
         <source>Choose a destination folder</source>
-        <translation type="unfinished">Одаберите одредишни директоријум</translation>
+        <translation>Одаберите одредишни директоријум</translation>
     </message>
     <message>
         <location filename="editor/tools/sample_export/toolsampleexport.h" line="26"/>
@@ -8310,57 +8475,57 @@ download content</source>
     <message>
         <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="70"/>
         <source>Inversions</source>
-        <translation type="unfinished">Преобртања</translation>
+        <translation>Преобртања</translation>
     </message>
     <message>
         <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="100"/>
         <source>Spreading (%)</source>
-        <translation type="unfinished">Ширина (%)</translation>
+        <translation>Ширина (%)</translation>
     </message>
     <message>
         <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="144"/>
         <source>Ascending</source>
-        <translation type="unfinished">Растући</translation>
+        <translation>Растући</translation>
     </message>
     <message>
         <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="149"/>
         <source>Descending</source>
-        <translation type="unfinished">Опадајући</translation>
+        <translation>Опадајући</translation>
     </message>
     <message>
         <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="154"/>
         <source>Hollow</source>
-        <translation type="unfinished">Изолучено</translation>
+        <translation>Изолучено</translation>
     </message>
     <message>
         <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="159"/>
         <source>Spike</source>
-        <translation type="unfinished">Зашиљено</translation>
+        <translation>Зашиљено</translation>
     </message>
     <message>
         <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="164"/>
         <source>Random</source>
-        <translation type="unfinished">Насумице</translation>
+        <translation>Насумице</translation>
     </message>
     <message>
         <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="172"/>
         <source>Pattern</source>
-        <translation type="unfinished">Мустра</translation>
+        <translation>Мустра</translation>
     </message>
     <message>
         <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="189"/>
         <source>Division number</source>
-        <translation type="unfinished">Број делова</translation>
+        <translation>Број делова</translation>
     </message>
     <message>
         <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="196"/>
         <source>Offset (0-100)</source>
-        <translation type="unfinished">Помак (0-100)</translation>
+        <translation>Помак (0-100)</translation>
     </message>
     <message>
         <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="203"/>
         <source>Filling (%)</source>
-        <translation type="unfinished">Попуњеност (%)</translation>
+        <translation>Попуњеност (%)</translation>
     </message>
 </context>
 <context>
@@ -8368,7 +8533,7 @@ download content</source>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport.cpp" line="92"/>
         <source>Merge soudfonts:</source>
-        <translation type="unfinished">Сједини звукотеке:</translation>
+        <translation>Сједини звукотеке:</translation>
     </message>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport.cpp" line="187"/>
@@ -8383,7 +8548,7 @@ download content</source>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport.h" line="37"/>
         <source>Export</source>
-        <translation type="unfinished">Извези</translation>
+        <translation>Извези</translation>
     </message>
 </context>
 <context>
@@ -8391,22 +8556,22 @@ download content</source>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="22"/>
         <source>Select all</source>
-        <translation type="unfinished">Означи све</translation>
+        <translation>Означи све</translation>
     </message>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="29"/>
         <source>Unselect all</source>
-        <translation type="unfinished">Одзначи све</translation>
+        <translation>Одзначи све</translation>
     </message>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="80"/>
         <source>Destination</source>
-        <translation type="unfinished">Одредиште</translation>
+        <translation>Одредиште</translation>
     </message>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="106"/>
         <source>Format</source>
-        <translation type="unfinished">Врста</translation>
+        <translation>Врста</translation>
     </message>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="116"/>
@@ -8416,42 +8581,42 @@ download content</source>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="123"/>
         <source>one directory per bank</source>
-        <translation type="unfinished">један директоријум по банци</translation>
+        <translation>један директоријум по банци</translation>
     </message>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="130"/>
         <source>preset number as prefix</source>
-        <translation type="unfinished">број поставке као предложак</translation>
+        <translation>број поставке као предложак</translation>
     </message>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="141"/>
         <source>High</source>
-        <translation type="unfinished">Висок</translation>
+        <translation>Висок</translation>
     </message>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="146"/>
         <source>Medium</source>
-        <translation type="unfinished">Средњи</translation>
+        <translation>Средњи</translation>
     </message>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="151"/>
         <source>Low</source>
-        <translation type="unfinished">Низак</translation>
+        <translation>Низак</translation>
     </message>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="159"/>
         <source>Quality</source>
-        <translation type="unfinished">Квалитет</translation>
+        <translation>Квалитет</translation>
     </message>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="170"/>
         <source>Cancel</source>
-        <translation type="unfinished">Поништи</translation>
+        <translation>Поништи</translation>
     </message>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="190"/>
         <source>Export</source>
-        <translation type="unfinished">Извези</translation>
+        <translation>Извези</translation>
     </message>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="117"/>
@@ -8464,27 +8629,27 @@ download content</source>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="168"/>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="177"/>
         <source>Warning</source>
-        <translation type="unfinished">Упозорење</translation>
+        <translation>Упозорење</translation>
     </message>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="133"/>
         <source>Invalid directory.</source>
-        <translation type="unfinished">Директоријум није ваљан.</translation>
+        <translation>Директоријум није ваљан.</translation>
     </message>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="162"/>
         <source>At least one preset must be selected.</source>
-        <translation type="unfinished">Морате одабрати бар једну поставку.</translation>
+        <translation>Морате одабрати бар једну поставку.</translation>
     </message>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="168"/>
         <source>The maximal number of soundfont to export is 127.</source>
-        <translation type="unfinished">Највећи број извежених звукотека је 127.</translation>
+        <translation>Највећи број извежених звукотека је 127.</translation>
     </message>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="177"/>
         <source>In the case where several soundfonts are exported, the maximal number of presets per soundfonts is 127.</source>
-        <translation type="unfinished">Код вишеструког извожења звукотека, највећи број поставки по звукотеци је 127.</translation>
+        <translation>Код вишеструког извожења звукотека, највећи број поставки по звукотеци је 127.</translation>
     </message>
 </context>
 <context>
@@ -8523,7 +8688,7 @@ download content</source>
     <message>
         <location filename="editor/tools/transpose_smpl/tooltransposesmpl_gui.ui" line="20"/>
         <source>Shift in semitones</source>
-        <translation type="unfinished">Помак у полутоновима</translation>
+        <translation>Помак у полутоновима</translation>
     </message>
 </context>
 <context>
@@ -8531,12 +8696,12 @@ download content</source>
     <message>
         <location filename="editor/tools/transpose/tooltranspose_gui.ui" line="20"/>
         <source>Shift in semitones</source>
-        <translation type="unfinished">Помак у полутоновима</translation>
+        <translation>Помак у полутоновима</translation>
     </message>
     <message>
         <location filename="editor/tools/transpose/tooltranspose_gui.ui" line="44"/>
         <source>Adapt keyrange</source>
-        <translation type="unfinished">Прилагоди нотни опсег</translation>
+        <translation>Прилагоди нотни опсег</translation>
     </message>
 </context>
 <context>
@@ -8684,12 +8849,12 @@ download content</source>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="35"/>
         <source>&amp;Copy</source>
-        <translation type="unfinished">&amp;Умножи</translation>
+        <translation>&amp;Умножи</translation>
     </message>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="41"/>
         <source>&amp;Paste</source>
-        <translation type="unfinished">У&amp;баци</translation>
+        <translation>У&amp;баци</translation>
     </message>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="47"/>
@@ -8699,55 +8864,55 @@ download content</source>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="53"/>
         <source>&amp;Delete</source>
-        <translation type="unfinished">Обр&amp;иши</translation>
+        <translation>Обр&amp;иши</translation>
     </message>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="60"/>
         <location filename="editor/tree/treeviewmenu.cpp" line="117"/>
         <location filename="editor/tree/treeviewmenu.cpp" line="121"/>
         <source>&amp;Rename...</source>
-        <translation type="unfinished">П&amp;реименуј...</translation>
+        <translation>П&amp;реименуј...</translation>
     </message>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="117"/>
         <source>Bulk &amp;rename...</source>
-        <translation type="unfinished">Скупно п&amp;реименовање...</translation>
+        <translation>Скупно п&amp;реименовање...</translation>
     </message>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="163"/>
         <location filename="editor/tree/treeviewmenu.cpp" line="166"/>
         <source>Warning</source>
-        <translation type="unfinished">Упозорење</translation>
+        <translation>Упозорење</translation>
     </message>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="164"/>
         <source>Cannot delete a sample used by another instrument.</source>
-        <translation type="unfinished">Не могу да уклоним узорак који употребљава други инструменат.</translation>
+        <translation>Не могу да уклоним узорак који употребљава други инструменат.</translation>
     </message>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="167"/>
         <source>Cannot delete an instrument used by another preset.</source>
-        <translation type="unfinished">Не могу да уклоним инструменат употребљен у другој поставци.</translation>
+        <translation>Не могу да уклоним инструменат употребљен у другој поставци.</translation>
     </message>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="301"/>
         <source>Sample name (max 20 characters):</source>
-        <translation type="unfinished">Назив узорка (до 20 знакова):</translation>
+        <translation>Назив узорка (до 20 знакова):</translation>
     </message>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="303"/>
         <source>Instrument name (max 20 characters):</source>
-        <translation type="unfinished">Назив инструмента (до 20 знакова):</translation>
+        <translation>Назив инструмента (до 20 знакова):</translation>
     </message>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="305"/>
         <source>Preset name (max 20 characters):</source>
-        <translation type="unfinished">Назив поставке (до 20 знакова):</translation>
+        <translation>Назив поставке (до 20 знакова):</translation>
     </message>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="309"/>
         <source>Question</source>
-        <translation type="unfinished">Питање</translation>
+        <translation>Питање</translation>
     </message>
 </context>
 <context>
@@ -8791,7 +8956,7 @@ download content</source>
     <message>
         <location filename="mainwindow/windowmanager.cpp" line="50"/>
         <source>Settings</source>
-        <translation type="unfinished">Подешавања</translation>
+        <translation>Подешавања</translation>
     </message>
     <message>
         <location filename="mainwindow/windowmanager.cpp" line="125"/>
@@ -8816,22 +8981,22 @@ download content</source>
     <message>
         <location filename="mainwindow/windowmanager.cpp" line="175"/>
         <source>Warning</source>
-        <translation type="unfinished">Упозорење</translation>
+        <translation>Упозорење</translation>
     </message>
     <message>
         <location filename="mainwindow/windowmanager.cpp" line="177"/>
         <source>&amp;Save</source>
-        <translation type="unfinished">&amp;Сачувај</translation>
+        <translation>&amp;Сачувај</translation>
     </message>
     <message>
         <location filename="mainwindow/windowmanager.cpp" line="178"/>
         <source>&amp;Cancel</source>
-        <translation type="unfinished">&amp;Поништи</translation>
+        <translation>&amp;Поништи</translation>
     </message>
     <message>
         <location filename="mainwindow/windowmanager.cpp" line="179"/>
         <source>Do&amp;n&apos;t save</source>
-        <translation type="unfinished">&amp;Изађи не сачувавши</translation>
+        <translation>&amp;Изађи не сачувавши</translation>
     </message>
     <message>
         <location filename="mainwindow/windowmanager.cpp" line="262"/>

@@ -27,12 +27,12 @@
     <message>
         <location filename="editor/tools/abstracttool.cpp" line="74"/>
         <source>Warning</source>
-        <translation type="unfinished">警告</translation>
+        <translation>警告</translation>
     </message>
     <message>
         <location filename="editor/tools/abstracttool.cpp" line="79"/>
         <source>Information</source>
-        <translation type="unfinished">信息</translation>
+        <translation>信息</translation>
     </message>
 </context>
 <context>
@@ -50,12 +50,12 @@
     <message>
         <location filename="core/types/attribute.cpp" line="517"/>
         <source>Sample start offset</source>
-        <translation type="unfinished">样本起点偏移</translation>
+        <translation>样本起点偏移</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="520"/>
         <source>Sample end offset</source>
-        <translation type="unfinished">样本终点偏移</translation>
+        <translation>样本终点偏移</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="523"/>
@@ -76,17 +76,17 @@
     <message>
         <location filename="core/types/attribute.cpp" line="532"/>
         <source>Mod LFO → pitch (c)</source>
-        <translation type="unfinished">Mod LFO → pitch (c)</translation>
+        <translation>Mod LFO → pitch (c)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="535"/>
         <source>Vib LFO → pitch (c)</source>
-        <translation type="unfinished">Vib LFO → pitch (c)</translation>
+        <translation>Vib LFO → pitch (c)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="538"/>
         <source>Mod env → pitch (c)</source>
-        <translation type="unfinished">Mod env → pitch (c)</translation>
+        <translation>Mod env → pitch (c)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="541"/>
@@ -101,17 +101,17 @@
     <message>
         <location filename="core/types/attribute.cpp" line="545"/>
         <source>Filter, resonance (dB)</source>
-        <translation type="unfinished">共鸣滤波(分贝)</translation>
+        <translation>共鸣滤波(分贝)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="548"/>
         <source>Mod LFO → filter (c)</source>
-        <translation type="unfinished">Mod LFO → filter (c)</translation>
+        <translation>Mod LFO → filter (c)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="551"/>
         <source>Mod env → filter (c)</source>
-        <translation type="unfinished">Mod env → filter (c)</translation>
+        <translation>Mod env → filter (c)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="554"/>
@@ -121,82 +121,82 @@
     <message>
         <location filename="core/types/attribute.cpp" line="557"/>
         <source>Mod LFO → volume (dB)</source>
-        <translation type="unfinished">Mod LFO → volume (dB)</translation>
+        <translation>Mod LFO → volume (dB)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="560"/>
         <source>Chorus (%)</source>
-        <translation type="unfinished">和声(%)</translation>
+        <translation>和声(%)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="563"/>
         <source>Reverb (%)</source>
-        <translation type="unfinished">混响(%)</translation>
+        <translation>混响(%)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="566"/>
         <source>Pan [-100;100]</source>
-        <translation type="unfinished">平衡[-100:100]</translation>
+        <translation>平衡[-100:100]</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="567"/>
         <source>Pan [-50;50]</source>
-        <translation type="unfinished">平衡[-50:50]</translation>
+        <translation>平衡[-50:50]</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="570"/>
         <source>Mod LFO delay (×)</source>
-        <translation type="unfinished">Mod LFO delay (×)</translation>
+        <translation>Mod LFO delay (×)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="571"/>
         <source>Mod LFO delay (s)</source>
-        <translation type="unfinished">Mod LFO delay (s)</translation>
+        <translation>Mod LFO delay (s)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="574"/>
         <source>Mod LFO freq (×)</source>
-        <translation type="unfinished">Mod LFO freq (×)</translation>
+        <translation>Mod LFO freq (×)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="575"/>
         <source>Mod LFO freq (Hz)</source>
-        <translation type="unfinished">Mod LFO freq (Hz)</translation>
+        <translation>Mod LFO freq (Hz)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="578"/>
         <source>Vib LFO delay (×)</source>
-        <translation type="unfinished">Vib LFO delay (×)</translation>
+        <translation>Vib LFO delay (×)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="579"/>
         <source>Vib LFO delay (s)</source>
-        <translation type="unfinished">Vib LFO delay (s)</translation>
+        <translation>Vib LFO delay (s)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="582"/>
         <source>Vib LFO freq (×)</source>
-        <translation type="unfinished">Vib LFO freq (×)</translation>
+        <translation>Vib LFO freq (×)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="583"/>
         <source>Vib LFO freq (Hz)</source>
-        <translation type="unfinished">Vib LFO freq (Hz)</translation>
+        <translation>Vib LFO freq (Hz)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="586"/>
         <source>Mod env delay (×)</source>
-        <translation type="unfinished">调制包络延迟(×)</translation>
+        <translation>调制包络延迟(×)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="587"/>
         <source>Mod env delay (s)</source>
-        <translation type="unfinished">调制包络延迟(秒)</translation>
+        <translation>调制包络延迟(秒)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="590"/>
         <source>Mod env attack (×)</source>
-        <translation type="unfinished">调制包络起音(×)</translation>
+        <translation>调制包络起音(×)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="591"/>
@@ -206,22 +206,22 @@
     <message>
         <location filename="core/types/attribute.cpp" line="594"/>
         <source>Mod env hold (×)</source>
-        <translation type="unfinished">调制包络保持(×)</translation>
+        <translation>调制包络保持(×)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="595"/>
         <source>Mod env hold (s)</source>
-        <translation type="unfinished">调制包络保持(秒)</translation>
+        <translation>调制包络保持(秒)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="598"/>
         <source>Mod env decay (×)</source>
-        <translation type="unfinished">调制包络衰减(×)</translation>
+        <translation>调制包络衰减(×)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="599"/>
         <source>Mod env decay (s)</source>
-        <translation type="unfinished">调制包络衰减(秒)</translation>
+        <translation>调制包络衰减(秒)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="602"/>
@@ -231,62 +231,62 @@
     <message>
         <location filename="core/types/attribute.cpp" line="605"/>
         <source>Mod env release (×)</source>
-        <translation type="unfinished">调制包络释音(×)</translation>
+        <translation>调制包络释音(×)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="606"/>
         <source>Mod env release (s)</source>
-        <translation type="unfinished">调制包络释音(秒)</translation>
+        <translation>调制包络释音(秒)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="609"/>
         <source>Key → Mod env hold (c)</source>
-        <translation type="unfinished">Key → Mod env hold (c)</translation>
+        <translation>Key → Mod env hold (c)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="612"/>
         <source>Key → Mod env decay (c)</source>
-        <translation type="unfinished">Key → Mod env decay (c)</translation>
+        <translation>Key → Mod env decay (c)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="615"/>
         <source>Vol env delay (×)</source>
-        <translation type="unfinished">音量包络延迟(×)</translation>
+        <translation>音量包络延迟(×)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="616"/>
         <source>Vol env delay (s)</source>
-        <translation type="unfinished">音量包络延迟(秒)</translation>
+        <translation>音量包络延迟(秒)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="619"/>
         <source>Vol env attack (×)</source>
-        <translation type="unfinished">音量包络起音(×)</translation>
+        <translation>音量包络起音(×)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="620"/>
         <source>Vol env attack (s)</source>
-        <translation type="unfinished">音量包络起音(秒)</translation>
+        <translation>音量包络起音(秒)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="623"/>
         <source>Vol env hold (×)</source>
-        <translation type="unfinished">音量包络保持(×)</translation>
+        <translation>音量包络保持(×)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="624"/>
         <source>Vol env hold (s)</source>
-        <translation type="unfinished">音量包络保持(秒)</translation>
+        <translation>音量包络保持(秒)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="627"/>
         <source>Vol env decay (×)</source>
-        <translation type="unfinished">音量包络衰减(×)</translation>
+        <translation>音量包络衰减(×)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="628"/>
         <source>Vol env decay (s)</source>
-        <translation type="unfinished">音量包络衰减(秒)</translation>
+        <translation>音量包络衰减(秒)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="631"/>
@@ -296,47 +296,47 @@
     <message>
         <location filename="core/types/attribute.cpp" line="634"/>
         <source>Vol env release (×)</source>
-        <translation type="unfinished">音量包络释音(×)</translation>
+        <translation>音量包络释音(×)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="635"/>
         <source>Vol env release (s)</source>
-        <translation type="unfinished">音量包络释音(秒)</translation>
+        <translation>音量包络释音(秒)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="638"/>
         <source>Key → Vol env hold (c)</source>
-        <translation type="unfinished">Key → Vol env hold (c)</translation>
+        <translation>Key → Vol env hold (c)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="641"/>
         <source>Key → Vol env decay (c)</source>
-        <translation type="unfinished">Key → Vol env decay (c)</translation>
+        <translation>Key → Vol env decay (c)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="644"/>
         <source>Key range</source>
-        <translation type="unfinished">音符范围</translation>
+        <translation>音符范围</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="647"/>
         <source>Velocity range</source>
-        <translation type="unfinished">力度范围</translation>
+        <translation>力度范围</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="653"/>
         <source>Fixed key</source>
-        <translation type="unfinished">固定音符</translation>
+        <translation>固定音符</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="656"/>
         <source>Fixed velocity</source>
-        <translation type="unfinished">固定力度</translation>
+        <translation>固定力度</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="659"/>
         <source>Attenuation (dB)</source>
-        <translation type="unfinished">衰减(分贝)</translation>
+        <translation>衰减(分贝)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="662"/>
@@ -346,17 +346,17 @@
     <message>
         <location filename="core/types/attribute.cpp" line="665"/>
         <source>Tuning (semi-tones)</source>
-        <translation type="unfinished">校音(半音)</translation>
+        <translation>校音(半音)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="668"/>
         <source>Tuning (cents)</source>
-        <translation type="unfinished">校音(音分)</translation>
+        <translation>校音(音分)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="671"/>
         <source>Loop playback</source>
-        <translation type="unfinished">循环播放</translation>
+        <translation>循环播放</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="674"/>
@@ -366,12 +366,12 @@
     <message>
         <location filename="core/types/attribute.cpp" line="677"/>
         <source>Exclusive class</source>
-        <translation type="unfinished">独占类</translation>
+        <translation>独占类</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="680"/>
         <source>Root key</source>
-        <translation type="unfinished">根音符</translation>
+        <translation>根音符</translation>
     </message>
 </context>
 <context>
@@ -385,263 +385,387 @@
 <context>
     <name>ConfManager</name>
     <message>
+        <source>D</source>
+        <translation type="vanished">D</translation>
+    </message>
+    <message>
+        <source>C</source>
+        <translation type="vanished">C</translation>
+    </message>
+    <message>
+        <source>G</source>
+        <translation type="vanished">G</translation>
+    </message>
+    <message>
+        <source>B</source>
+        <translation type="vanished">B</translation>
+    </message>
+    <message>
+        <source>,</source>
+        <translation type="vanished">,</translation>
+    </message>
+    <message>
+        <source>2</source>
+        <translation type="vanished">2</translation>
+    </message>
+    <message>
+        <source>3</source>
+        <translation type="vanished">3</translation>
+    </message>
+    <message>
+        <source>E</source>
+        <translation type="vanished">E</translation>
+    </message>
+    <message>
+        <source>R</source>
+        <translation type="vanished">右</translation>
+    </message>
+    <message>
+        <source>5</source>
+        <translation type="vanished">5</translation>
+    </message>
+    <message>
+        <source>6</source>
+        <translation type="vanished">6</translation>
+    </message>
+    <message>
+        <source>7</source>
+        <translation type="vanished">7</translation>
+    </message>
+    <message>
+        <source>Shift+&lt;</source>
+        <translation type="vanished">Shift+&lt;</translation>
+    </message>
+    <message>
+        <source>Shift+@</source>
+        <translation type="vanished">Shift+@</translation>
+    </message>
+    <message>
+        <source>Shift+#</source>
+        <translation type="vanished">Shift+#</translation>
+    </message>
+    <message>
+        <source>Shift+%</source>
+        <translation type="vanished">Shift+%</translation>
+    </message>
+    <message>
+        <source>Shift+^</source>
+        <translation type="vanished">Shift+^</translation>
+    </message>
+    <message>
+        <source>Shift+&amp;</source>
+        <translation type="vanished">Shift+&amp;</translation>
+    </message>
+    <message>
         <location filename="context/confmanager.cpp" line="127"/>
         <source>Z</source>
+        <comment>first key mapping for bottom left C</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="128"/>
         <source>S</source>
+        <comment>first key mapping for bottom C#</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="129"/>
         <source>X</source>
+        <comment>first key mapping for bottom D</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="130"/>
         <source>D</source>
+        <comment>first key mapping for bottom D#</comment>
         <translation type="unfinished">D</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="131"/>
         <source>C</source>
+        <comment>first key mapping for bottom E</comment>
         <translation type="unfinished">C</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="132"/>
         <source>V</source>
+        <comment>first key mapping for bottom F</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="133"/>
         <source>G</source>
+        <comment>first key mapping for bottom F#</comment>
         <translation type="unfinished">G</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="134"/>
         <source>B</source>
+        <comment>first key mapping for bottom G</comment>
         <translation type="unfinished">B</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="135"/>
         <source>H</source>
+        <comment>first key mapping for bottom G#</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="136"/>
         <source>N</source>
+        <comment>first key mapping for bottom A</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="137"/>
         <source>J</source>
+        <comment>first key mapping for bottom A#</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="138"/>
         <source>M</source>
+        <comment>first key mapping for bottom B</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="139"/>
         <source>,</source>
+        <comment>first key mapping for bottom right C</comment>
         <translation type="unfinished">,</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="145"/>
         <source>Q</source>
+        <comment>first key mapping for upper left C</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="146"/>
         <source>2</source>
+        <comment>first key mapping for upper C#</comment>
         <translation type="unfinished">2</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="147"/>
         <source>W</source>
+        <comment>first key mapping for upper D</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="148"/>
         <source>3</source>
+        <comment>first key mapping for upper D#</comment>
         <translation type="unfinished">3</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="149"/>
         <source>E</source>
+        <comment>first key mapping for upper E</comment>
         <translation type="unfinished">E</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="150"/>
         <source>R</source>
+        <comment>first key mapping for upper F</comment>
         <translation type="unfinished">右</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="151"/>
         <source>5</source>
+        <comment>first key mapping for upper F#</comment>
         <translation type="unfinished">5</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="152"/>
         <source>T</source>
+        <comment>first key mapping for upper G</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="153"/>
         <source>6</source>
+        <comment>first key mapping for upper G#</comment>
         <translation type="unfinished">6</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="154"/>
         <source>Y</source>
+        <comment>first key mapping for upper A</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="155"/>
         <source>7</source>
+        <comment>first key mapping for upper A#</comment>
         <translation type="unfinished">7</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="156"/>
         <source>U</source>
+        <comment>first key mapping for upper B</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="157"/>
         <source>I</source>
+        <comment>first key mapping for upper right C</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="163"/>
         <source>Shift+Z</source>
+        <comment>second key mapping for bottom left C</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="164"/>
         <source>Shift+S</source>
+        <comment>second key mapping for bottom C#</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="165"/>
         <source>Shift+X</source>
+        <comment>second key mapping for bottom D</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="166"/>
         <source>Shift+D</source>
+        <comment>second key mapping for bottom D#</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="167"/>
         <source>Shift+C</source>
+        <comment>second key mapping for bottom E</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="168"/>
         <source>Shift+V</source>
+        <comment>second key mapping for bottom F</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="169"/>
         <source>Shift+G</source>
+        <comment>second key mapping for bottom F#</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="170"/>
         <source>Shift+B</source>
+        <comment>second key mapping for bottom G</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="171"/>
         <source>Shift+H</source>
+        <comment>second key mapping for bottom G#</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="172"/>
         <source>Shift+N</source>
+        <comment>second key mapping for bottom A</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="173"/>
         <source>Shift+J</source>
+        <comment>second key mapping for bottom A#</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="174"/>
         <source>Shift+M</source>
+        <comment>second key mapping for bottom B</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="175"/>
         <source>Shift+&lt;</source>
+        <comment>second key mapping for bottom right C</comment>
         <translation type="unfinished">Shift+&lt;</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="181"/>
         <source>Shift+Q</source>
+        <comment>second key mapping for upper left C</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="182"/>
         <source>Shift+@</source>
+        <comment>second key mapping for upper C#</comment>
         <translation type="unfinished">Shift+@</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="183"/>
         <source>Shift+W</source>
+        <comment>second key mapping for upper D</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="184"/>
         <source>Shift+#</source>
+        <comment>second key mapping for upper D#</comment>
         <translation type="unfinished">Shift+#</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="185"/>
         <source>Shift+E</source>
+        <comment>second key mapping for upper E</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="186"/>
         <source>Shift+R</source>
+        <comment>second key mapping for upper F</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="187"/>
         <source>Shift+%</source>
+        <comment>second key mapping for upper F#</comment>
         <translation type="unfinished">Shift+%</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="188"/>
         <source>Shift+T</source>
+        <comment>second key mapping for upper G</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="189"/>
         <source>Shift+^</source>
+        <comment>second key mapping for upper G#</comment>
         <translation type="unfinished">Shift+^</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="190"/>
         <source>Shift+Y</source>
+        <comment>second key mapping for upper A</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="191"/>
         <source>Shift+&amp;</source>
+        <comment>second key mapping for upper A#</comment>
         <translation type="unfinished">Shift+&amp;</translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="192"/>
         <source>Shift+U</source>
+        <comment>second key mapping for upper B</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="context/confmanager.cpp" line="193"/>
         <source>Shift+I</source>
+        <comment>second key mapping for upper right C</comment>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1139,12 +1263,12 @@
     <message>
         <location filename="context/interface/configpanel.ui" line="81"/>
         <source>General</source>
-        <translation type="unfinished">通用</translation>
+        <translation>通用</translation>
     </message>
     <message>
         <location filename="context/interface/configpanel.ui" line="114"/>
         <source>Interface</source>
-        <translation type="unfinished">界面</translation>
+        <translation>界面</translation>
     </message>
     <message>
         <location filename="context/interface/configpanel.ui" line="147"/>
@@ -1154,7 +1278,7 @@
     <message>
         <location filename="context/interface/configpanel.ui" line="180"/>
         <source>Virtual keyboard</source>
-        <translation type="unfinished">虚拟键盘</translation>
+        <translation>虚拟键盘</translation>
     </message>
     <message>
         <location filename="context/interface/configpanel.ui" line="213"/>
@@ -1167,53 +1291,53 @@
     <message>
         <location filename="context/interface/configsectiongeneral.ui" line="26"/>
         <source>Input / Output</source>
-        <translation type="unfinished">输入/输出</translation>
+        <translation>输入/输出</translation>
     </message>
     <message>
         <location filename="context/interface/configsectiongeneral.ui" line="95"/>
         <source>Audio backend</source>
-        <translation type="unfinished">音频后端</translation>
+        <translation>音频后端</translation>
     </message>
     <message>
         <location filename="context/interface/configsectiongeneral.ui" line="124"/>
         <source>Buffer size</source>
-        <translation type="unfinished">缓冲大小</translation>
+        <translation>缓冲大小</translation>
     </message>
     <message>
         <location filename="context/interface/configsectiongeneral.ui" line="147"/>
         <source>MIDI input</source>
         <oldsource>Midi input</oldsource>
-        <translation type="unfinished">MIDI 输入</translation>
+        <translation>MIDI 输入</translation>
     </message>
     <message>
         <location filename="context/interface/configsectiongeneral.ui" line="163"/>
         <source>Options</source>
-        <translation type="unfinished">选项</translation>
+        <translation>选项</translation>
     </message>
     <message>
         <location filename="context/interface/configsectiongeneral.ui" line="178"/>
         <source>Wav file import</source>
-        <translation type="unfinished">WAV 文件导入</translation>
+        <translation>WAV 文件导入</translation>
     </message>
     <message>
         <location filename="context/interface/configsectiongeneral.ui" line="191"/>
         <source>change linked sample</source>
-        <translation type="unfinished">修改链接的样本</translation>
+        <translation>修改链接的样本</translation>
     </message>
     <message>
         <location filename="context/interface/configsectiongeneral.ui" line="204"/>
         <source>trim to loop</source>
-        <translation type="unfinished">裁剪以循环</translation>
+        <translation>裁剪以循环</translation>
     </message>
     <message>
         <location filename="context/interface/configsectiongeneral.ui" line="217"/>
         <source>Stereo editing</source>
-        <translation type="unfinished">双声道编辑</translation>
+        <translation>双声道编辑</translation>
     </message>
     <message>
         <location filename="context/interface/configsectiongeneral.ui" line="230"/>
         <source>remove blank at start</source>
-        <translation type="unfinished">删除开头空白部分</translation>
+        <translation>删除开头空白部分</translation>
     </message>
 </context>
 <context>
@@ -1221,47 +1345,47 @@
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="28"/>
         <source>Language</source>
-        <translation type="unfinished">语言</translation>
+        <translation>语言</translation>
     </message>
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="47"/>
         <source>Key names</source>
-        <translation type="unfinished">音符名格式</translation>
+        <translation>音符名格式</translation>
     </message>
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="67"/>
         <source>Middle C → 60, then 61</source>
-        <translation type="unfinished">中央 C → 60 ，之后为 61</translation>
+        <translation>中央 C → 60 ，之后为 61</translation>
     </message>
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="72"/>
         <source>Middle C → C3, then C♯3</source>
-        <translation type="unfinished">中央 C → C3 ，之后为 C♯3</translation>
+        <translation>中央 C → C3 ，之后为 C♯3</translation>
     </message>
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="77"/>
         <source>Middle C → C3, then D♭3</source>
-        <translation type="unfinished">中央 C → C3 ，之后为 D♭3</translation>
+        <translation>中央 C → C3 ，之后为 D♭3</translation>
     </message>
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="82"/>
         <source>Middle C → C4, then C♯4</source>
-        <translation type="unfinished">中央 C → C4 ，之后为 C♯4</translation>
+        <translation>中央 C → C4 ，之后为 C♯4</translation>
     </message>
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="87"/>
         <source>Middle C → C4, then D♭4</source>
-        <translation type="unfinished">中央 C → C4 ，之后为 D♭4</translation>
+        <translation>中央 C → C4 ，之后为 D♭4</translation>
     </message>
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="92"/>
         <source>Middle C → C5, then C♯5</source>
-        <translation type="unfinished">中央 C → C5 ，之后为 C♯5</translation>
+        <translation>中央 C → C5 ，之后为 C♯5</translation>
     </message>
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="97"/>
         <source>Middle C → C5, then D♭5</source>
-        <translation type="unfinished">中央 C → C5 ，之后为 D♭5</translation>
+        <translation>中央 C → C5 ，之后为 D♭5</translation>
     </message>
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="126"/>
@@ -1271,12 +1395,12 @@
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="232"/>
         <source>Selection</source>
-        <translation type="unfinished">选择</translation>
+        <translation>选择</translation>
     </message>
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="245"/>
         <source>Alternate background</source>
-        <translation type="unfinished">交替背景</translation>
+        <translation>交替背景</translation>
     </message>
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="292"/>
@@ -1284,12 +1408,12 @@
         <location filename="context/interface/configsectioninterface.ui" line="331"/>
         <location filename="context/interface/configsectioninterface.ui" line="598"/>
         <source>Text</source>
-        <translation type="unfinished">文本</translation>
+        <translation>文本</translation>
     </message>
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="305"/>
         <source>Window</source>
-        <translation type="unfinished">窗口</translation>
+        <translation>窗口</translation>
     </message>
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="344"/>
@@ -1297,27 +1421,27 @@
         <location filename="context/interface/configsectioninterface.ui" line="401"/>
         <location filename="context/interface/configsectioninterface.ui" line="585"/>
         <source>Background</source>
-        <translation type="unfinished">背景</translation>
+        <translation>背景</translation>
     </message>
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="414"/>
         <source>Button</source>
-        <translation type="unfinished">按钮</translation>
+        <translation>按钮</translation>
     </message>
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="624"/>
         <source>Color theme</source>
-        <translation type="unfinished">颜色主题</translation>
+        <translation>颜色主题</translation>
     </message>
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="647"/>
         <source>List and table</source>
-        <translation type="unfinished">表格和列表</translation>
+        <translation>表格和列表</translation>
     </message>
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="663"/>
         <source>This modification will be applied during the next start of the software.</source>
-        <translation type="unfinished">设置将在下次启动程序时生效。</translation>
+        <translation>设置将在下次启动程序时生效。</translation>
     </message>
     <message>
         <location filename="context/interface/configsectioninterface.cpp" line="127"/>
@@ -1338,32 +1462,32 @@
     <message>
         <location filename="context/interface/configsectionkeyboard.ui" line="45"/>
         <source>Octave #1</source>
-        <translation type="unfinished">音阶 #1</translation>
+        <translation>音阶 #1</translation>
     </message>
     <message>
         <location filename="context/interface/configsectionkeyboard.ui" line="50"/>
         <source>Octave #2</source>
-        <translation type="unfinished">音阶 #2</translation>
+        <translation>音阶 #2</translation>
     </message>
     <message>
         <location filename="context/interface/configsectionkeyboard.ui" line="55"/>
         <source>Octave #3</source>
-        <translation type="unfinished">音阶 #3</translation>
+        <translation>音阶 #3</translation>
     </message>
     <message>
         <location filename="context/interface/configsectionkeyboard.ui" line="60"/>
         <source>Octave #4</source>
-        <translation type="unfinished">音阶 #4</translation>
+        <translation>音阶 #4</translation>
     </message>
     <message>
         <location filename="context/interface/configsectionkeyboard.ui" line="133"/>
         <source>First C</source>
-        <translation type="unfinished">起始 C</translation>
+        <translation>起始 C</translation>
     </message>
     <message>
         <location filename="context/interface/configsectionkeyboard.ui" line="187"/>
         <source>Default velocity</source>
-        <translation type="unfinished">默认力度</translation>
+        <translation>默认力度</translation>
     </message>
 </context>
 <context>
@@ -1413,7 +1537,7 @@ Premium!</source>
     <message>
         <location filename="context/interface/configsectionrepository.cpp" line="88"/>
         <source>Cancel</source>
-        <translation type="unfinished">取消</translation>
+        <translation>取消</translation>
     </message>
     <message>
         <location filename="context/interface/configsectionrepository.cpp" line="91"/>
@@ -1445,48 +1569,48 @@ Premium!</source>
     <message>
         <location filename="context/interface/configsectionsound.ui" line="26"/>
         <source>Reverb</source>
-        <translation type="unfinished">混响</translation>
+        <translation>混响</translation>
     </message>
     <message>
         <location filename="context/interface/configsectionsound.ui" line="39"/>
         <source>Gain (dB)</source>
-        <translation type="unfinished">增益(dB)</translation>
+        <translation>增益(dB)</translation>
     </message>
     <message>
         <location filename="context/interface/configsectionsound.ui" line="88"/>
         <source>Width</source>
-        <translation type="unfinished">宽度</translation>
+        <translation>宽度</translation>
     </message>
     <message>
         <location filename="context/interface/configsectionsound.ui" line="123"/>
         <location filename="context/interface/configsectionsound.ui" line="297"/>
         <source>Level</source>
-        <translation type="unfinished">大小</translation>
+        <translation>大小</translation>
     </message>
     <message>
         <location filename="context/interface/configsectionsound.ui" line="178"/>
         <source>Damp</source>
-        <translation type="unfinished">湿度</translation>
+        <translation>湿度</translation>
     </message>
     <message>
         <location filename="context/interface/configsectionsound.ui" line="194"/>
         <source>Room</source>
-        <translation type="unfinished">体积</translation>
+        <translation>体积</translation>
     </message>
     <message>
         <location filename="context/interface/configsectionsound.ui" line="264"/>
         <source>Chorus</source>
-        <translation type="unfinished">和声</translation>
+        <translation>和声</translation>
     </message>
     <message>
         <location filename="context/interface/configsectionsound.ui" line="345"/>
         <source>Frequency</source>
-        <translation type="unfinished">频率</translation>
+        <translation>频率</translation>
     </message>
     <message>
         <location filename="context/interface/configsectionsound.ui" line="361"/>
         <source>Depth</source>
-        <translation type="unfinished">深度</translation>
+        <translation>深度</translation>
     </message>
 </context>
 <context>
@@ -1494,12 +1618,12 @@ Premium!</source>
     <message>
         <location filename="context/interface/configtoc.ui" line="59"/>
         <source>General</source>
-        <translation type="unfinished">通用</translation>
+        <translation>通用</translation>
     </message>
     <message>
         <location filename="context/interface/configtoc.ui" line="72"/>
         <source>Interface</source>
-        <translation type="unfinished">界面</translation>
+        <translation>界面</translation>
     </message>
     <message>
         <location filename="context/interface/configtoc.ui" line="85"/>
@@ -1509,7 +1633,7 @@ Premium!</source>
     <message>
         <location filename="context/interface/configtoc.ui" line="98"/>
         <source>Virtual keyboard</source>
-        <translation type="unfinished">虚拟键盘</translation>
+        <translation>虚拟键盘</translation>
     </message>
     <message>
         <location filename="context/interface/configtoc.ui" line="111"/>
@@ -1528,98 +1652,98 @@ repository</source>
     <message>
         <location filename="core/output/sfz/conversion_sfz.cpp" line="256"/>
         <source>untitled</source>
-        <translation type="unfinished">未命名</translation>
+        <translation>未命名</translation>
     </message>
     <message>
         <location filename="core/output/sfz/conversion_sfz.cpp" line="540"/>
         <location filename="core/output/sfz/conversion_sfz.cpp" line="582"/>
         <source>other</source>
-        <translation type="unfinished">其它</translation>
+        <translation>其它</translation>
     </message>
     <message>
         <location filename="core/output/sfz/conversion_sfz.cpp" line="543"/>
         <source>Piano</source>
-        <translation type="unfinished">钢琴</translation>
+        <translation>钢琴</translation>
     </message>
     <message>
         <location filename="core/output/sfz/conversion_sfz.cpp" line="545"/>
         <source>Chromatic percussion</source>
-        <translation type="unfinished">半音阶打击乐</translation>
+        <translation>半音阶打击乐</translation>
     </message>
     <message>
         <location filename="core/output/sfz/conversion_sfz.cpp" line="547"/>
         <source>Organ</source>
-        <translation type="unfinished">风琴</translation>
+        <translation>风琴</translation>
     </message>
     <message>
         <location filename="core/output/sfz/conversion_sfz.cpp" line="549"/>
         <source>Guitar</source>
-        <translation type="unfinished">吉他</translation>
+        <translation>吉他</translation>
     </message>
     <message>
         <location filename="core/output/sfz/conversion_sfz.cpp" line="551"/>
         <source>Bass</source>
-        <translation type="unfinished">低音</translation>
+        <translation>低音</translation>
     </message>
     <message>
         <location filename="core/output/sfz/conversion_sfz.cpp" line="553"/>
         <source>Strings</source>
-        <translation type="unfinished">弦乐</translation>
+        <translation>弦乐</translation>
     </message>
     <message>
         <location filename="core/output/sfz/conversion_sfz.cpp" line="555"/>
         <source>Ensemble</source>
-        <translation type="unfinished">和弦</translation>
+        <translation>和弦</translation>
     </message>
     <message>
         <location filename="core/output/sfz/conversion_sfz.cpp" line="557"/>
         <source>Brass</source>
-        <translation type="unfinished">铜管乐</translation>
+        <translation>铜管乐</translation>
     </message>
     <message>
         <location filename="core/output/sfz/conversion_sfz.cpp" line="559"/>
         <source>Reed</source>
-        <translation type="unfinished">簧乐</translation>
+        <translation>簧乐</translation>
     </message>
     <message>
         <location filename="core/output/sfz/conversion_sfz.cpp" line="561"/>
         <source>Pipe</source>
-        <translation type="unfinished">管乐</translation>
+        <translation>管乐</translation>
     </message>
     <message>
         <location filename="core/output/sfz/conversion_sfz.cpp" line="563"/>
         <source>Synth lead</source>
-        <translation type="unfinished">合成主音</translation>
+        <translation>合成主音</translation>
     </message>
     <message>
         <location filename="core/output/sfz/conversion_sfz.cpp" line="565"/>
         <source>Synth pad</source>
-        <translation type="unfinished">合成柔音</translation>
+        <translation>合成柔音</translation>
     </message>
     <message>
         <location filename="core/output/sfz/conversion_sfz.cpp" line="567"/>
         <source>Synth effects</source>
-        <translation type="unfinished">合成音效</translation>
+        <translation>合成音效</translation>
     </message>
     <message>
         <location filename="core/output/sfz/conversion_sfz.cpp" line="569"/>
         <source>Ethnic</source>
-        <translation type="unfinished">民乐</translation>
+        <translation>民乐</translation>
     </message>
     <message>
         <location filename="core/output/sfz/conversion_sfz.cpp" line="571"/>
         <source>Percussive</source>
-        <translation type="unfinished">打击乐</translation>
+        <translation>打击乐</translation>
     </message>
     <message>
         <location filename="core/output/sfz/conversion_sfz.cpp" line="573"/>
         <source>Sound effects</source>
-        <translation type="unfinished">音效</translation>
+        <translation>音效</translation>
     </message>
     <message>
         <location filename="core/output/sfz/conversion_sfz.cpp" line="575"/>
         <source>Percussion kit</source>
-        <translation type="unfinished">打击乐组</translation>
+        <translation>打击乐组</translation>
     </message>
 </context>
 <context>
@@ -1931,7 +2055,7 @@ repository</source>
     <message>
         <location filename="dialogs/dialogcreateelements.ui" line="17"/>
         <source>Question</source>
-        <translation type="unfinished">问题</translation>
+        <translation>问题</translation>
     </message>
     <message>
         <location filename="dialogs/dialogcreateelements.cpp" line="31"/>
@@ -2107,7 +2231,7 @@ repository</source>
     <message>
         <location filename="dialogs/dialogkeyboard.ui" line="14"/>
         <source>Virtual keyboard</source>
-        <translation type="unfinished">虚拟键盘</translation>
+        <translation>虚拟键盘</translation>
     </message>
     <message>
         <location filename="dialogs/dialogkeyboard.ui" line="82"/>
@@ -2132,7 +2256,7 @@ repository</source>
     <message>
         <location filename="dialogs/dialogkeyboard.ui" line="124"/>
         <source>Key</source>
-        <translation type="unfinished">音符</translation>
+        <translation>音符</translation>
     </message>
     <message>
         <location filename="dialogs/dialogkeyboard.ui" line="150"/>
@@ -2372,23 +2496,23 @@ repository</source>
     <message>
         <location filename="dialogs/dialogrecorder.ui" line="26"/>
         <source>Recorder</source>
-        <translation type="unfinished">录音机</translation>
+        <translation>录音机</translation>
     </message>
     <message>
         <location filename="dialogs/dialogrecorder.cpp" line="102"/>
         <source>Save a record</source>
-        <translation type="unfinished">保存录音</translation>
+        <translation>保存录音</translation>
     </message>
     <message>
         <location filename="dialogs/dialogrecorder.cpp" line="103"/>
         <source>Wav file</source>
-        <translation type="unfinished">WAV 文件</translation>
+        <translation>WAV 文件</translation>
     </message>
     <message>
         <location filename="dialogs/dialogrecorder.cpp" line="161"/>
         <location filename="dialogs/dialogrecorder.cpp" line="163"/>
         <source>record</source>
-        <translation type="unfinished">录音</translation>
+        <translation>录音</translation>
     </message>
 </context>
 <context>
@@ -2608,12 +2732,12 @@ repository</source>
         <location filename="repository/downloadmanager.cpp" line="82"/>
         <location filename="repository/downloadmanager.cpp" line="130"/>
         <source>untitled</source>
-        <translation type="unfinished">未命名</translation>
+        <translation>未命名</translation>
     </message>
     <message>
         <location filename="repository/downloadmanager.cpp" line="116"/>
         <source>Warning</source>
-        <translation type="unfinished">警告</translation>
+        <translation>警告</translation>
     </message>
     <message>
         <location filename="repository/downloadmanager.cpp" line="117"/>
@@ -2631,17 +2755,17 @@ repository</source>
     <message>
         <location filename="core/duplicator.cpp" line="282"/>
         <source>The global division will not be copied.</source>
-        <translation type="unfinished">全局分层将不会被复制。</translation>
+        <translation>全局分层将不会被复制。</translation>
     </message>
     <message>
         <location filename="core/duplicator.cpp" line="284"/>
         <source>&amp;Ok</source>
-        <translation type="unfinished">确定(&amp;O)</translation>
+        <translation>确定(&amp;O)</translation>
     </message>
     <message>
         <location filename="core/duplicator.cpp" line="285"/>
         <source>Ok, &amp;disable this message</source>
-        <translation type="unfinished">确定并不再提示(&amp;D)</translation>
+        <translation>确定并不再提示(&amp;D)</translation>
     </message>
     <message>
         <location filename="core/duplicator.cpp" line="317"/>
@@ -2661,17 +2785,17 @@ repository</source>
     <message>
         <location filename="core/duplicator.cpp" line="570"/>
         <source>Warning</source>
-        <translation type="unfinished">警告</translation>
+        <translation>警告</translation>
     </message>
     <message>
         <location filename="core/duplicator.cpp" line="571"/>
         <source>No preset available.</source>
-        <translation type="unfinished">无预设可用。</translation>
+        <translation>无预设可用。</translation>
     </message>
     <message>
         <location filename="core/duplicator.cpp" line="767"/>
         <source>&amp;Replace</source>
-        <translation type="unfinished">替换(&amp;R)</translation>
+        <translation>替换(&amp;R)</translation>
     </message>
     <message>
         <location filename="core/duplicator.cpp" line="768"/>
@@ -2681,22 +2805,22 @@ repository</source>
     <message>
         <location filename="core/duplicator.cpp" line="769"/>
         <source>&amp;Duplicate</source>
-        <translation type="unfinished">创建副本(&amp;D)</translation>
+        <translation>创建副本(&amp;D)</translation>
     </message>
     <message>
         <location filename="core/duplicator.cpp" line="770"/>
         <source>D&amp;uplicate all</source>
-        <translation type="unfinished">全部创建副本(&amp;U)</translation>
+        <translation>全部创建副本(&amp;U)</translation>
     </message>
     <message>
         <location filename="core/duplicator.cpp" line="771"/>
         <source>&amp;Ignore</source>
-        <translation type="unfinished">忽略(&amp;I)</translation>
+        <translation>忽略(&amp;I)</translation>
     </message>
     <message>
         <location filename="core/duplicator.cpp" line="772"/>
         <source>I&amp;gnore all</source>
-        <translation type="unfinished">全部忽略(&amp;G)</translation>
+        <translation>全部忽略(&amp;G)</translation>
     </message>
 </context>
 <context>
@@ -2704,7 +2828,7 @@ repository</source>
     <message>
         <location filename="editor/editor.ui" line="142"/>
         <source>Search...</source>
-        <translation type="unfinished">搜索...</translation>
+        <translation>搜索...</translation>
     </message>
     <message>
         <location filename="editor/editor.ui" line="242"/>
@@ -2747,7 +2871,7 @@ repository</source>
     <message>
         <location filename="editor/widgets/editortoolbar.cpp" line="46"/>
         <source>Cancel</source>
-        <translation type="unfinished">取消</translation>
+        <translation>取消</translation>
     </message>
     <message>
         <location filename="editor/widgets/editortoolbar.cpp" line="51"/>
@@ -2762,52 +2886,52 @@ repository</source>
     <message>
         <location filename="editor/widgets/editortoolbar.cpp" line="66"/>
         <source>Recorder</source>
-        <translation type="unfinished">录音机</translation>
+        <translation>录音机</translation>
     </message>
     <message>
         <location filename="editor/widgets/editortoolbar.cpp" line="72"/>
         <source>Virtual keyboard</source>
-        <translation type="unfinished">虚拟键盘</translation>
+        <translation>虚拟键盘</translation>
     </message>
     <message>
         <location filename="editor/widgets/editortoolbar.cpp" line="230"/>
         <source>Import an audio file</source>
-        <translation type="unfinished">导入音频文件</translation>
+        <translation>导入音频文件</translation>
     </message>
     <message>
         <location filename="editor/widgets/editortoolbar.cpp" line="232"/>
         <source>Wav file</source>
-        <translation type="unfinished">WAV 文件</translation>
+        <translation>WAV 文件</translation>
     </message>
     <message>
         <location filename="editor/widgets/editortoolbar.cpp" line="257"/>
         <source>Create a new instrument</source>
-        <translation type="unfinished">创建新乐器</translation>
+        <translation>创建新乐器</translation>
     </message>
     <message>
         <location filename="editor/widgets/editortoolbar.cpp" line="258"/>
         <source>Name of the new instrument:</source>
-        <translation type="unfinished">新乐器名称：</translation>
+        <translation>新乐器名称：</translation>
     </message>
     <message>
         <location filename="editor/widgets/editortoolbar.cpp" line="286"/>
         <source>Warning</source>
-        <translation type="unfinished">警告</translation>
+        <translation>警告</translation>
     </message>
     <message>
         <location filename="editor/widgets/editortoolbar.cpp" line="286"/>
         <source>No preset available.</source>
-        <translation type="unfinished">无预设可用。</translation>
+        <translation>无预设可用。</translation>
     </message>
     <message>
         <location filename="editor/widgets/editortoolbar.cpp" line="299"/>
         <source>Create a new preset</source>
-        <translation type="unfinished">创建新预设</translation>
+        <translation>创建新预设</translation>
     </message>
     <message>
         <location filename="editor/widgets/editortoolbar.cpp" line="300"/>
         <source>Name of the new preset:</source>
-        <translation type="unfinished">新预设名称：</translation>
+        <translation>新预设名称：</translation>
     </message>
 </context>
 <context>
@@ -2945,13 +3069,13 @@ repository</source>
         <location filename="editor/tools/sound_spatialization/graphspace.cpp" line="52"/>
         <source>L</source>
         <comment>first letter of Left in your language</comment>
-        <translation type="unfinished">左</translation>
+        <translation>左</translation>
     </message>
     <message>
         <location filename="editor/tools/sound_spatialization/graphspace.cpp" line="61"/>
         <source>R</source>
         <comment>first letter of Right in your language</comment>
-        <translation type="unfinished">右</translation>
+        <translation>右</translation>
     </message>
 </context>
 <context>
@@ -3077,70 +3201,70 @@ repository</source>
     <message>
         <location filename="core/input/sfz/inputsfz.cpp" line="265"/>
         <source>Sfz import</source>
-        <translation type="unfinished">导入 SFZ 文件</translation>
+        <translation>导入 SFZ 文件</translation>
     </message>
     <message>
         <location filename="core/input/sfz/inputsfz.cpp" line="436"/>
         <source>untitled</source>
-        <translation type="unfinished">未命名</translation>
+        <translation>未命名</translation>
     </message>
 </context>
 <context>
     <name>MainMenu</name>
     <message>
-        <location filename="mainwindow/mainmenu.cpp" line="15"/>
+        <location filename="mainwindow/mainmenu.cpp" line="39"/>
         <source>&amp;New</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow/mainmenu.cpp" line="20"/>
+        <location filename="mainwindow/mainmenu.cpp" line="44"/>
         <source>&amp;Open...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow/mainmenu.cpp" line="27"/>
+        <location filename="mainwindow/mainmenu.cpp" line="51"/>
         <source>&amp;Save</source>
-        <translation type="unfinished">保存(&amp;S)</translation>
+        <translation>保存(&amp;S)</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainmenu.cpp" line="32"/>
+        <location filename="mainwindow/mainmenu.cpp" line="56"/>
         <source>Save &amp;as...</source>
-        <translation type="unfinished">另存为(&amp;A)...</translation>
+        <translation>另存为(&amp;A)...</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainmenu.cpp" line="37"/>
+        <location filename="mainwindow/mainmenu.cpp" line="61"/>
         <source>&amp;Export soundfonts</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow/mainmenu.cpp" line="44"/>
+        <location filename="mainwindow/mainmenu.cpp" line="68"/>
         <source>&amp;Full screen</source>
-        <translation type="unfinished">全屏(&amp;F)</translation>
+        <translation>全屏(&amp;F)</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainmenu.cpp" line="52"/>
+        <location filename="mainwindow/mainmenu.cpp" line="76"/>
         <source>Se&amp;ttings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow/mainmenu.cpp" line="56"/>
+        <location filename="mainwindow/mainmenu.cpp" line="80"/>
         <source>Online &amp;manual</source>
-        <translation type="unfinished">在线手册(&amp;M)</translation>
+        <translation>在线手册(&amp;M)</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainmenu.cpp" line="61"/>
+        <location filename="mainwindow/mainmenu.cpp" line="85"/>
         <source>About &amp;Polyphone...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow/mainmenu.cpp" line="67"/>
+        <location filename="mainwindow/mainmenu.cpp" line="91"/>
         <source>&amp;Close file</source>
-        <translation type="unfinished">关闭文件(&amp;C)</translation>
+        <translation>关闭文件(&amp;C)</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainmenu.cpp" line="72"/>
+        <location filename="mainwindow/mainmenu.cpp" line="96"/>
         <source>&amp;Quit</source>
-        <translation type="unfinished">退出(&amp;Q)</translation>
+        <translation>退出(&amp;Q)</translation>
     </message>
 </context>
 <context>
@@ -3714,7 +3838,7 @@ repository</source>
     <message>
         <location filename="mainwindow/mainwindow.cpp" line="170"/>
         <source>untitled</source>
-        <translation type="unfinished">未命名</translation>
+        <translation>未命名</translation>
     </message>
     <message>
         <location filename="mainwindow/mainwindow.cpp" line="181"/>
@@ -4137,7 +4261,7 @@ Splitting the file into several sf2 might solve the problem.</source>
     <message>
         <location filename="mainwindow/mainwindow.ui" line="215"/>
         <source>History</source>
-        <translation type="unfinished">历史</translation>
+        <translation>历史</translation>
     </message>
 </context>
 <context>
@@ -4443,37 +4567,37 @@ Splitting the file into several sf2 might solve the problem.</source>
     <message>
         <location filename="editor/pageinst.ui" line="141"/>
         <source>Modulators</source>
-        <translation type="unfinished">调制器</translation>
+        <translation>调制器</translation>
     </message>
     <message>
         <location filename="editor/pageinst.ui" line="178"/>
         <source>Add a modulator</source>
-        <translation type="unfinished">添加调制器</translation>
+        <translation>添加调制器</translation>
     </message>
     <message>
         <location filename="editor/pageinst.ui" line="204"/>
         <source>Delete a modulator</source>
-        <translation type="unfinished">删除调制器</translation>
+        <translation>删除调制器</translation>
     </message>
     <message>
         <location filename="editor/pageinst.ui" line="224"/>
         <source>Copy modulators</source>
-        <translation type="unfinished">复制调制器</translation>
+        <translation>复制调制器</translation>
     </message>
     <message>
         <location filename="editor/pageinst.ui" line="250"/>
         <source>Paste the copied modulators</source>
-        <translation type="unfinished">粘贴调制器</translation>
+        <translation>粘贴调制器</translation>
     </message>
     <message>
         <location filename="editor/pageinst.ui" line="364"/>
         <source>Source</source>
-        <translation type="unfinished">来源值</translation>
+        <translation>来源值</translation>
     </message>
     <message>
         <location filename="editor/pageinst.ui" line="375"/>
         <source>Amount</source>
-        <translation type="unfinished">量</translation>
+        <translation>量</translation>
     </message>
     <message>
         <location filename="editor/pageinst.ui" line="386"/>
@@ -4484,17 +4608,17 @@ Splitting the file into several sf2 might solve the problem.</source>
     <message>
         <location filename="editor/pageinst.ui" line="400"/>
         <source>Source / Amount</source>
-        <translation type="unfinished">来源值/量</translation>
+        <translation>来源值/量</translation>
     </message>
     <message>
         <location filename="editor/pageinst.ui" line="601"/>
         <source>Abs. value</source>
-        <translation type="unfinished">绝对值</translation>
+        <translation>绝对值</translation>
     </message>
     <message>
         <location filename="editor/pageinst.cpp" line="177"/>
         <source>Table</source>
-        <translation type="unfinished">表格</translation>
+        <translation>表格</translation>
     </message>
     <message>
         <location filename="editor/pageinst.cpp" line="178"/>
@@ -4504,7 +4628,7 @@ Splitting the file into several sf2 might solve the problem.</source>
     <message>
         <location filename="editor/pageinst.cpp" line="179"/>
         <source>Envelopes</source>
-        <translation type="unfinished">包络</translation>
+        <translation>包络</translation>
     </message>
     <message>
         <location filename="editor/pageinst.cpp" line="221"/>
@@ -4548,7 +4672,7 @@ Splitting the file into several sf2 might solve the problem.</source>
     <message>
         <location filename="editor/overview/pageoverviewinst.cpp" line="32"/>
         <source>Instruments</source>
-        <translation type="unfinished">乐器</translation>
+        <translation>乐器</translation>
     </message>
     <message>
         <location filename="editor/overview/pageoverviewinst.cpp" line="38"/>
@@ -4641,7 +4765,7 @@ Splitting the file into several sf2 might solve the problem.</source>
     <message>
         <location filename="editor/overview/pageoverviewprst.cpp" line="32"/>
         <source>Presets</source>
-        <translation type="unfinished">预设</translation>
+        <translation>预设</translation>
     </message>
     <message>
         <location filename="editor/overview/pageoverviewprst.cpp" line="38"/>
@@ -4731,7 +4855,7 @@ duration</source>
     <message>
         <location filename="editor/overview/pageoverviewsmpl.cpp" line="32"/>
         <source>Samples</source>
-        <translation type="unfinished">样本</translation>
+        <translation>样本</translation>
     </message>
     <message>
         <location filename="editor/overview/pageoverviewsmpl.cpp" line="41"/>
@@ -4815,7 +4939,7 @@ rate</source>
     <message>
         <location filename="editor/overview/pageoverviewsmpl.cpp" line="162"/>
         <source>Hz</source>
-        <translation type="unfinished">赫兹</translation>
+        <translation>赫兹</translation>
     </message>
 </context>
 <context>
@@ -4823,37 +4947,37 @@ rate</source>
     <message>
         <location filename="editor/pageprst.ui" line="123"/>
         <source>Modulators</source>
-        <translation type="unfinished">调制器</translation>
+        <translation>调制器</translation>
     </message>
     <message>
         <location filename="editor/pageprst.ui" line="163"/>
         <source>Add a modulator</source>
-        <translation type="unfinished">添加调制器</translation>
+        <translation>添加调制器</translation>
     </message>
     <message>
         <location filename="editor/pageprst.ui" line="189"/>
         <source>Delete a modulator</source>
-        <translation type="unfinished">删除调制器</translation>
+        <translation>删除调制器</translation>
     </message>
     <message>
         <location filename="editor/pageprst.ui" line="209"/>
         <source>Copy modulators</source>
-        <translation type="unfinished">复制调制器</translation>
+        <translation>复制调制器</translation>
     </message>
     <message>
         <location filename="editor/pageprst.ui" line="235"/>
         <source>Paste the copied modulators</source>
-        <translation type="unfinished">粘贴调制器</translation>
+        <translation>粘贴调制器</translation>
     </message>
     <message>
         <location filename="editor/pageprst.ui" line="349"/>
         <source>Source</source>
-        <translation type="unfinished">来源值</translation>
+        <translation>来源值</translation>
     </message>
     <message>
         <location filename="editor/pageprst.ui" line="360"/>
         <source>Amount</source>
-        <translation type="unfinished">量</translation>
+        <translation>量</translation>
     </message>
     <message>
         <location filename="editor/pageprst.ui" line="371"/>
@@ -4864,32 +4988,32 @@ rate</source>
     <message>
         <location filename="editor/pageprst.ui" line="391"/>
         <source>Source / Amount</source>
-        <translation type="unfinished">来源值/量</translation>
+        <translation>来源值/量</translation>
     </message>
     <message>
         <location filename="editor/pageprst.ui" line="565"/>
         <source>Abs. value</source>
-        <translation type="unfinished">绝对值</translation>
+        <translation>绝对值</translation>
     </message>
     <message>
         <location filename="editor/pageprst.ui" line="641"/>
         <source>Bank</source>
-        <translation type="unfinished">库</translation>
+        <translation>库</translation>
     </message>
     <message>
         <location filename="editor/pageprst.ui" line="673"/>
         <source>Preset</source>
-        <translation type="unfinished">预设</translation>
+        <translation>预设</translation>
     </message>
     <message>
         <location filename="editor/pageprst.ui" line="712"/>
         <source>(percussion)</source>
-        <translation type="unfinished">(percussion)</translation>
+        <translation>(percussion)</translation>
     </message>
     <message>
         <location filename="editor/pageprst.cpp" line="157"/>
         <source>Table</source>
-        <translation type="unfinished">表格</translation>
+        <translation>表格</translation>
     </message>
     <message>
         <location filename="editor/pageprst.cpp" line="158"/>
@@ -4917,47 +5041,47 @@ rate</source>
     <message>
         <location filename="editor/pagesf2.ui" line="202"/>
         <source>Current date</source>
-        <translation type="unfinished">当前日期</translation>
+        <translation>当前日期</translation>
     </message>
     <message>
         <location filename="editor/pagesf2.ui" line="234"/>
         <source>Product</source>
-        <translation type="unfinished">制造商</translation>
+        <translation>制造商</translation>
     </message>
     <message>
         <location filename="editor/pagesf2.ui" line="248"/>
         <source>Copyright</source>
-        <translation type="unfinished">版权</translation>
+        <translation>版权</translation>
     </message>
     <message>
         <location filename="editor/pagesf2.ui" line="262"/>
         <source>Comments</source>
-        <translation type="unfinished">备注</translation>
+        <translation>备注</translation>
     </message>
     <message>
         <location filename="editor/pagesf2.ui" line="323"/>
         <source>Soundfont version</source>
-        <translation type="unfinished">音色库版本</translation>
+        <translation>音色库版本</translation>
     </message>
     <message>
         <location filename="editor/pagesf2.ui" line="359"/>
         <source>ROM name and version</source>
-        <translation type="unfinished">ROM 名称和版本</translation>
+        <translation>ROM 名称和版本</translation>
     </message>
     <message>
         <location filename="editor/pagesf2.ui" line="395"/>
         <source>Sound engine</source>
-        <translation type="unfinished">音频引擎</translation>
+        <translation>音频引擎</translation>
     </message>
     <message>
         <location filename="editor/pagesf2.ui" line="431"/>
         <source>Editing software</source>
-        <translation type="unfinished">编辑软件</translation>
+        <translation>编辑软件</translation>
     </message>
     <message>
         <location filename="editor/pagesf2.ui" line="534"/>
         <source>Presets</source>
-        <translation type="unfinished">预设</translation>
+        <translation>预设</translation>
     </message>
     <message>
         <location filename="editor/pagesf2.ui" line="556"/>
@@ -4970,7 +5094,7 @@ rate</source>
         <location filename="editor/pagesf2.ui" line="655"/>
         <location filename="editor/pagesf2.ui" line="754"/>
         <source>Samples</source>
-        <translation type="unfinished">样本</translation>
+        <translation>样本</translation>
     </message>
     <message>
         <location filename="editor/pagesf2.ui" line="740"/>
@@ -4982,18 +5106,18 @@ rate</source>
     <message>
         <location filename="editor/pagesf2.ui" line="768"/>
         <source>16 bits</source>
-        <translation type="unfinished">24 位 {16 ?}</translation>
+        <translation>24 位 {16 ?}</translation>
     </message>
     <message>
         <location filename="editor/pagesf2.ui" line="773"/>
         <source>24 bits</source>
-        <translation type="unfinished">24 位</translation>
+        <translation>24 位</translation>
     </message>
     <message>
         <location filename="editor/pagesf2.ui" line="802"/>
         <location filename="editor/pagesf2.ui" line="900"/>
         <source>Modulators</source>
-        <translation type="unfinished">调制器</translation>
+        <translation>调制器</translation>
     </message>
     <message>
         <location filename="editor/pagesf2.ui" line="830"/>
@@ -5004,7 +5128,7 @@ rate</source>
     <message>
         <location filename="editor/pagesf2.ui" line="983"/>
         <source>Instruments</source>
-        <translation type="unfinished">乐器</translation>
+        <translation>乐器</translation>
     </message>
     <message>
         <location filename="editor/pagesf2.cpp" line="105"/>
@@ -5044,18 +5168,18 @@ rate</source>
     <message>
         <location filename="editor/pagesmpl.ui" line="724"/>
         <source>Reset</source>
-        <translation type="unfinished">重设</translation>
+        <translation>重设</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.ui" line="743"/>
         <source>Apply</source>
-        <translation type="unfinished">应用</translation>
+        <translation>应用</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.ui" line="790"/>
         <location filename="editor/pagesmpl.cpp" line="109"/>
         <source>Equalizer (±15 dB)</source>
-        <translation type="unfinished">均衡器(±15 分贝)</translation>
+        <translation>均衡器(±15 分贝)</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.ui" line="862"/>
@@ -5063,22 +5187,22 @@ rate</source>
         <location filename="editor/pagesmpl.cpp" line="1026"/>
         <location filename="editor/pagesmpl.cpp" line="1064"/>
         <source>Play</source>
-        <translation type="unfinished">播放</translation>
+        <translation>播放</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.ui" line="878"/>
         <source>sinus</source>
-        <translation type="unfinished">正弦校准</translation>
+        <translation>正弦校准</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.ui" line="916"/>
         <source>loop</source>
-        <translation type="unfinished">循环</translation>
+        <translation>循环</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.ui" line="929"/>
         <source>stereo</source>
-        <translation type="unfinished">双声道</translation>
+        <translation>双声道</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.ui" line="968"/>
@@ -5088,47 +5212,47 @@ rate</source>
     <message>
         <location filename="editor/pagesmpl.ui" line="998"/>
         <source>Loop</source>
-        <translation type="unfinished">循环点</translation>
+        <translation>循环点</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.ui" line="1124"/>
         <source>Use the full length of the sample as loop</source>
-        <translation type="unfinished">全长循环</translation>
+        <translation>全长循环</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.ui" line="1144"/>
         <source>Size</source>
-        <translation type="unfinished">长度</translation>
+        <translation>长度</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.ui" line="1151"/>
         <source>Correction (cents)</source>
-        <translation type="unfinished">校正(音分)</translation>
+        <translation>校正(音分)</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.ui" line="1158"/>
         <source>Sample rate</source>
-        <translation type="unfinished">采样率</translation>
+        <translation>采样率</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.ui" line="1165"/>
         <source>Type</source>
-        <translation type="unfinished">类型</translation>
+        <translation>类型</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.ui" line="1172"/>
         <source>Link</source>
-        <translation type="unfinished">链接</translation>
+        <translation>链接</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.ui" line="1179"/>
         <source>Root key</source>
-        <translation type="unfinished">根音符</translation>
+        <translation>根音符</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.ui" line="1192"/>
         <source>Use the estimated pitch and correction as values</source>
-        <translation type="unfinished">使用音高测量校正音符值</translation>
+        <translation>使用音高测量校正音符值</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.ui" line="1235"/>
@@ -5136,7 +5260,7 @@ rate</source>
         <location filename="editor/pagesmpl.cpp" line="539"/>
         <location filename="editor/pagesmpl.cpp" line="1149"/>
         <source>Information</source>
-        <translation type="unfinished">信息</translation>
+        <translation>信息</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.cpp" line="178"/>
@@ -5157,25 +5281,25 @@ rate</source>
         <location filename="editor/pagesmpl.cpp" line="669"/>
         <source>mono</source>
         <comment>opposite to stereo</comment>
-        <translation type="unfinished">单声道</translation>
+        <translation>单声道</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.cpp" line="274"/>
         <location filename="editor/pagesmpl.cpp" line="808"/>
         <source>right</source>
-        <translation type="unfinished">右</translation>
+        <translation>右</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.cpp" line="275"/>
         <location filename="editor/pagesmpl.cpp" line="809"/>
         <source>left</source>
-        <translation type="unfinished">左</translation>
+        <translation>左</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.cpp" line="276"/>
         <location filename="editor/pagesmpl.cpp" line="810"/>
         <source>link</source>
-        <translation type="unfinished">链接</translation>
+        <translation>链接</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.cpp" line="314"/>
@@ -5196,18 +5320,18 @@ rate</source>
         <location filename="editor/pagesmpl.cpp" line="540"/>
         <location filename="editor/pagesmpl.cpp" line="1150"/>
         <source>Change successfully applied to the different samples</source>
-        <translation type="unfinished">更改已成功应用到其它样本</translation>
+        <translation>更改已成功应用到其它样本</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.cpp" line="807"/>
         <location filename="editor/pagesmpl.cpp" line="832"/>
         <source>mono</source>
-        <translation type="unfinished">单声道</translation>
+        <translation>单声道</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.cpp" line="999"/>
         <source>Stop</source>
-        <translation type="unfinished">停止</translation>
+        <translation>停止</translation>
     </message>
 </context>
 <context>
@@ -6194,12 +6318,12 @@ rate</source>
     <message>
         <location filename="core/output/outputfactory.cpp" line="92"/>
         <source>Save a soundfont</source>
-        <translation type="unfinished">保存音色库</translation>
+        <translation>保存音色库</translation>
     </message>
     <message>
         <location filename="core/output/outputfactory.cpp" line="93"/>
         <source>Sf2 files</source>
-        <translation type="unfinished">SF2 文件</translation>
+        <translation>SF2 文件</translation>
     </message>
     <message>
         <location filename="core/output/outputfactory.cpp" line="115"/>
@@ -6269,7 +6393,7 @@ rate</source>
     <message>
         <location filename="core/model/soundfont.cpp" line="24"/>
         <source>General</source>
-        <translation type="unfinished">通用</translation>
+        <translation>通用</translation>
     </message>
     <message>
         <location filename="core/model/soundfont.cpp" line="25"/>
@@ -6457,96 +6581,32 @@ rate</source>
         <translation>力度范围：</translation>
     </message>
     <message>
-        <location filename="context/keynamemanager.cpp" line="63"/>
-        <location filename="context/keynamemanager.cpp" line="81"/>
         <source>C</source>
-        <translation type="unfinished">C</translation>
+        <translation type="vanished">C</translation>
     </message>
     <message>
-        <location filename="context/keynamemanager.cpp" line="64"/>
-        <source>D♭</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="context/keynamemanager.cpp" line="65"/>
-        <location filename="context/keynamemanager.cpp" line="83"/>
         <source>D</source>
-        <translation type="unfinished">D</translation>
+        <translation type="vanished">D</translation>
     </message>
     <message>
-        <location filename="context/keynamemanager.cpp" line="66"/>
-        <source>E♭</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="context/keynamemanager.cpp" line="67"/>
-        <location filename="context/keynamemanager.cpp" line="85"/>
         <source>E</source>
-        <translation type="unfinished">E</translation>
+        <translation type="vanished">E</translation>
     </message>
     <message>
-        <location filename="context/keynamemanager.cpp" line="68"/>
-        <location filename="context/keynamemanager.cpp" line="86"/>
         <source>F</source>
-        <translation type="unfinished">F</translation>
+        <translation type="vanished">F</translation>
     </message>
     <message>
-        <location filename="context/keynamemanager.cpp" line="69"/>
-        <source>G♭</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="context/keynamemanager.cpp" line="70"/>
-        <location filename="context/keynamemanager.cpp" line="88"/>
         <source>G</source>
-        <translation type="unfinished">G</translation>
+        <translation type="vanished">G</translation>
     </message>
     <message>
-        <location filename="context/keynamemanager.cpp" line="71"/>
-        <source>A♭</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="context/keynamemanager.cpp" line="72"/>
-        <location filename="context/keynamemanager.cpp" line="90"/>
         <source>A</source>
-        <translation type="unfinished">A</translation>
+        <translation type="vanished">A</translation>
     </message>
     <message>
-        <location filename="context/keynamemanager.cpp" line="73"/>
-        <source>B♭</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="context/keynamemanager.cpp" line="74"/>
-        <location filename="context/keynamemanager.cpp" line="92"/>
         <source>B</source>
-        <translation type="unfinished">B</translation>
-    </message>
-    <message>
-        <location filename="context/keynamemanager.cpp" line="82"/>
-        <source>C♯</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="context/keynamemanager.cpp" line="84"/>
-        <source>D♯</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="context/keynamemanager.cpp" line="87"/>
-        <source>F♯</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="context/keynamemanager.cpp" line="89"/>
-        <source>G♯</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="context/keynamemanager.cpp" line="91"/>
-        <source>A♯</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">B</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_about.cpp" line="122"/>
@@ -6571,6 +6631,115 @@ rate</source>
     <message>
         <location filename="repository/soundfontinformation.cpp" line="22"/>
         <source>Unknown author</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="context/keynamemanager.cpp" line="63"/>
+        <location filename="context/keynamemanager.cpp" line="81"/>
+        <source>C</source>
+        <comment>key name</comment>
+        <translation type="unfinished">C</translation>
+    </message>
+    <message>
+        <location filename="context/keynamemanager.cpp" line="64"/>
+        <source>D♭</source>
+        <comment>key name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="context/keynamemanager.cpp" line="65"/>
+        <location filename="context/keynamemanager.cpp" line="83"/>
+        <source>D</source>
+        <comment>key name</comment>
+        <translation type="unfinished">D</translation>
+    </message>
+    <message>
+        <location filename="context/keynamemanager.cpp" line="66"/>
+        <source>E♭</source>
+        <comment>key name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="context/keynamemanager.cpp" line="67"/>
+        <location filename="context/keynamemanager.cpp" line="85"/>
+        <source>E</source>
+        <comment>key name</comment>
+        <translation type="unfinished">E</translation>
+    </message>
+    <message>
+        <location filename="context/keynamemanager.cpp" line="68"/>
+        <location filename="context/keynamemanager.cpp" line="86"/>
+        <source>F</source>
+        <comment>key name</comment>
+        <translation type="unfinished">F</translation>
+    </message>
+    <message>
+        <location filename="context/keynamemanager.cpp" line="69"/>
+        <source>G♭</source>
+        <comment>key name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="context/keynamemanager.cpp" line="70"/>
+        <location filename="context/keynamemanager.cpp" line="88"/>
+        <source>G</source>
+        <comment>key name</comment>
+        <translation type="unfinished">G</translation>
+    </message>
+    <message>
+        <location filename="context/keynamemanager.cpp" line="71"/>
+        <source>A♭</source>
+        <comment>key name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="context/keynamemanager.cpp" line="72"/>
+        <location filename="context/keynamemanager.cpp" line="90"/>
+        <source>A</source>
+        <comment>key name</comment>
+        <translation type="unfinished">A</translation>
+    </message>
+    <message>
+        <location filename="context/keynamemanager.cpp" line="73"/>
+        <source>B♭</source>
+        <comment>key name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="context/keynamemanager.cpp" line="74"/>
+        <location filename="context/keynamemanager.cpp" line="92"/>
+        <source>B</source>
+        <comment>key name</comment>
+        <translation type="unfinished">B</translation>
+    </message>
+    <message>
+        <location filename="context/keynamemanager.cpp" line="82"/>
+        <source>C♯</source>
+        <comment>key name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="context/keynamemanager.cpp" line="84"/>
+        <source>D♯</source>
+        <comment>key name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="context/keynamemanager.cpp" line="87"/>
+        <source>F♯</source>
+        <comment>key name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="context/keynamemanager.cpp" line="89"/>
+        <source>G♯</source>
+        <comment>key name</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="context/keynamemanager.cpp" line="91"/>
+        <source>A♯</source>
+        <comment>key name</comment>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -7061,7 +7230,7 @@ rate</source>
     <message>
         <location filename="repository/repositorymanager.cpp" line="466"/>
         <source>Warning</source>
-        <translation type="unfinished">警告</translation>
+        <translation>警告</translation>
     </message>
 </context>
 <context>
@@ -7123,7 +7292,7 @@ download the list</source>
     <message>
         <location filename="repository/browser/soundfontbrowser.ui" line="387"/>
         <source>Date</source>
-        <translation type="unfinished">日期</translation>
+        <translation>日期</translation>
     </message>
     <message>
         <location filename="repository/browser/soundfontbrowser.ui" line="392"/>
@@ -7148,7 +7317,7 @@ download the list</source>
     <message>
         <location filename="repository/browser/soundfontbrowser.ui" line="484"/>
         <source>Reset</source>
-        <translation type="unfinished">重设</translation>
+        <translation>重设</translation>
     </message>
     <message>
         <location filename="repository/browser/soundfontbrowser.ui" line="503"/>
@@ -7280,7 +7449,7 @@ download the list</source>
     <message>
         <location filename="repository/soundfont/soundfontviewer.ui" line="506"/>
         <source>Comments</source>
-        <translation type="unfinished">备注</translation>
+        <translation>备注</translation>
     </message>
     <message>
         <location filename="repository/soundfont/soundfontviewer.ui" line="575"/>
@@ -7307,57 +7476,57 @@ download content</source>
     <message>
         <location filename="context/thememanager.cpp" line="57"/>
         <source>Custom</source>
-        <translation type="unfinished">自定义</translation>
+        <translation>自定义</translation>
     </message>
     <message>
         <location filename="context/thememanager.cpp" line="360"/>
         <source>Default</source>
-        <translation type="unfinished">默认</translation>
+        <translation>默认</translation>
     </message>
     <message>
         <location filename="context/thememanager.cpp" line="380"/>
         <source>Gnome</source>
-        <translation type="unfinished">Gnome</translation>
+        <translation>Gnome</translation>
     </message>
     <message>
         <location filename="context/thememanager.cpp" line="393"/>
         <source>Dark, blue</source>
-        <translation type="unfinished">暗蓝</translation>
+        <translation>暗蓝</translation>
     </message>
     <message>
         <location filename="context/thememanager.cpp" line="406"/>
         <source>Dark, orange</source>
-        <translation type="unfinished">暗橙</translation>
+        <translation>暗橙</translation>
     </message>
     <message>
         <location filename="context/thememanager.cpp" line="419"/>
         <source>Dark, green</source>
-        <translation type="unfinished">暗绿</translation>
+        <translation>暗绿</translation>
     </message>
     <message>
         <location filename="context/thememanager.cpp" line="432"/>
         <source>Dark, yellow</source>
-        <translation type="unfinished">暗黄</translation>
+        <translation>暗黄</translation>
     </message>
     <message>
         <location filename="context/thememanager.cpp" line="445"/>
         <source>Aqua</source>
-        <translation type="unfinished">水绿</translation>
+        <translation>水绿</translation>
     </message>
     <message>
         <location filename="context/thememanager.cpp" line="458"/>
         <source>Spring</source>
-        <translation type="unfinished">Spring</translation>
+        <translation>Spring</translation>
     </message>
     <message>
         <location filename="context/thememanager.cpp" line="471"/>
         <source>Windows 10</source>
-        <translation type="unfinished">Windows 10</translation>
+        <translation>Windows 10</translation>
     </message>
     <message>
         <location filename="context/thememanager.cpp" line="484"/>
         <source>Ubuntu</source>
-        <translation type="unfinished">Ubuntu</translation>
+        <translation>Ubuntu</translation>
     </message>
 </context>
 <context>
@@ -7383,12 +7552,12 @@ download content</source>
     <message>
         <location filename="editor/tools/auto_loop/toolautoloop.cpp" line="53"/>
         <source>The following samples couldn&apos;t be looped:</source>
-        <translation type="unfinished">下列样本无法循环：</translation>
+        <translation>下列样本无法循环：</translation>
     </message>
     <message>
         <location filename="editor/tools/auto_loop/toolautoloop.cpp" line="58"/>
         <source>Possible reasons: too short or too turbulent.</source>
-        <translation type="unfinished">可能原因：样本太短或太混乱。</translation>
+        <translation>可能原因：样本太短或太混乱。</translation>
     </message>
     <message>
         <location filename="editor/tools/auto_loop/toolautoloop.h" line="23"/>
@@ -7398,7 +7567,7 @@ download content</source>
     <message>
         <location filename="editor/tools/auto_loop/toolautoloop.h" line="41"/>
         <source>Auto loop</source>
-        <translation type="unfinished">自动循环</translation>
+        <translation>自动循环</translation>
     </message>
 </context>
 <context>
@@ -7437,12 +7606,12 @@ download content</source>
     <message>
         <location filename="editor/tools/celeste_tuning/toolcelestetuning_gui.ui" line="20"/>
         <source>Division to the next octave</source>
-        <translation type="unfinished">划分到下个八度音阶</translation>
+        <translation>划分到下个八度音阶</translation>
     </message>
     <message>
         <location filename="editor/tools/celeste_tuning/toolcelestetuning_gui.ui" line="60"/>
         <source>The algebraic sign determines the tuning direction.</source>
-        <translation type="unfinished">代数符号决定调音方向。</translation>
+        <translation>代数符号决定调音方向。</translation>
     </message>
     <message>
         <location filename="editor/tools/celeste_tuning/toolcelestetuning_gui.cpp" line="26"/>
@@ -7452,7 +7621,7 @@ download content</source>
     <message>
         <location filename="editor/tools/celeste_tuning/toolcelestetuning_gui.cpp" line="26"/>
         <source>key</source>
-        <translation type="unfinished">音符</translation>
+        <translation>音符</translation>
     </message>
 </context>
 <context>
@@ -7473,22 +7642,22 @@ download content</source>
     <message>
         <location filename="editor/tools/change_attenuation/toolchangeattenuation_gui.ui" line="39"/>
         <source>Desired value</source>
-        <translation type="unfinished">期望值</translation>
+        <translation>期望值</translation>
     </message>
     <message>
         <location filename="editor/tools/change_attenuation/toolchangeattenuation_gui.ui" line="65"/>
         <source>Possible offset</source>
-        <translation type="unfinished">可偏移量</translation>
+        <translation>可偏移量</translation>
     </message>
     <message>
         <location filename="editor/tools/change_attenuation/toolchangeattenuation_gui.ui" line="78"/>
         <source>Attenuation range</source>
-        <translation type="unfinished">衰减范围</translation>
+        <translation>衰减范围</translation>
     </message>
     <message>
         <location filename="editor/tools/change_attenuation/toolchangeattenuation_gui.ui" line="91"/>
         <source> dB</source>
-        <translation type="unfinished"> 分贝</translation>
+        <translation> 分贝</translation>
     </message>
 </context>
 <context>
@@ -7501,7 +7670,7 @@ download content</source>
     <message>
         <location filename="editor/tools/change_volume/toolchangevolume.h" line="37"/>
         <source>Change volume</source>
-        <translation type="unfinished">音量调整</translation>
+        <translation>音量调整</translation>
     </message>
 </context>
 <context>
@@ -7509,27 +7678,27 @@ download content</source>
     <message>
         <location filename="editor/tools/change_volume/toolchangevolume_gui.ui" line="20"/>
         <source>Add</source>
-        <translation type="unfinished">增加</translation>
+        <translation>增加</translation>
     </message>
     <message>
         <location filename="editor/tools/change_volume/toolchangevolume_gui.ui" line="30"/>
         <source> dB</source>
-        <translation type="unfinished"> 分贝</translation>
+        <translation> 分贝</translation>
     </message>
     <message>
         <location filename="editor/tools/change_volume/toolchangevolume_gui.ui" line="43"/>
         <source>Multiply</source>
-        <translation type="unfinished">放大倍数</translation>
+        <translation>放大倍数</translation>
     </message>
     <message>
         <location filename="editor/tools/change_volume/toolchangevolume_gui.ui" line="63"/>
         <source>Normalize</source>
-        <translation type="unfinished">规格化</translation>
+        <translation>规格化</translation>
     </message>
     <message>
         <location filename="editor/tools/change_volume/toolchangevolume_gui.ui" line="73"/>
         <source> %</source>
-        <translation type="unfinished"> %</translation>
+        <translation> %</translation>
     </message>
 </context>
 <context>
@@ -7560,32 +7729,32 @@ download content</source>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="35"/>
         <source>Sample creation:</source>
-        <translation type="unfinished">创建样本：</translation>
+        <translation>创建样本：</translation>
     </message>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="43"/>
         <source>for every key</source>
-        <translation type="unfinished">每个音符</translation>
+        <translation>每个音符</translation>
     </message>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="48"/>
         <source>every 3 keys</source>
-        <translation type="unfinished">每 3 个音符</translation>
+        <translation>每 3 个音符</translation>
     </message>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="53"/>
         <source>every 6 keys</source>
-        <translation type="unfinished">每 6 个音符</translation>
+        <translation>每 6 个音符</translation>
     </message>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="61"/>
         <source>Auto loop</source>
-        <translation type="unfinished">自动循环</translation>
+        <translation>自动循环</translation>
     </message>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="71"/>
         <source>Stereo</source>
-        <translation type="unfinished">双声道</translation>
+        <translation>双声道</translation>
     </message>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="86"/>
@@ -7610,7 +7779,7 @@ download content</source>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="175"/>
         <source>Root key</source>
-        <translation type="unfinished">根音符</translation>
+        <translation>根音符</translation>
     </message>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="188"/>
@@ -7624,7 +7793,7 @@ download content</source>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="360"/>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="415"/>
         <source>no</source>
-        <translation type="unfinished">否</translation>
+        <translation>否</translation>
     </message>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="232"/>
@@ -7643,7 +7812,7 @@ download content</source>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="257"/>
         <source>yes</source>
-        <translation type="unfinished">是</translation>
+        <translation>是</translation>
     </message>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="346"/>
@@ -7710,7 +7879,7 @@ download content</source>
     <message>
         <location filename="editor/tools/division_duplication/tooldivisionduplication.h" line="39"/>
         <source>Division duplication</source>
-        <translation type="unfinished">复制分层</translation>
+        <translation>复制分层</translation>
     </message>
 </context>
 <context>
@@ -7718,12 +7887,12 @@ download content</source>
     <message>
         <location filename="editor/tools/division_duplication/tooldivisionduplication_gui.ui" line="119"/>
         <source>A division for each velocity range</source>
-        <translation type="unfinished">为每个力度范围创建分层</translation>
+        <translation>为每个力度范围创建分层</translation>
     </message>
     <message>
         <location filename="editor/tools/division_duplication/tooldivisionduplication_gui.ui" line="126"/>
         <source>A division for each key</source>
-        <translation type="unfinished">为每个音符创建分层</translation>
+        <translation>为每个音符创建分层</translation>
     </message>
 </context>
 <context>
@@ -7754,22 +7923,22 @@ download content</source>
     <message>
         <location filename="editor/tools/external_command/toolexternalcommand_gui.ui" line="20"/>
         <source>Command</source>
-        <translation type="unfinished">命令</translation>
+        <translation>命令</translation>
     </message>
     <message>
         <location filename="editor/tools/external_command/toolexternalcommand_gui.ui" line="44"/>
         <source>History</source>
-        <translation type="unfinished">历史</translation>
+        <translation>历史</translation>
     </message>
     <message>
         <location filename="editor/tools/external_command/toolexternalcommand_gui.ui" line="54"/>
         <source>Authorize stereo editing</source>
-        <translation type="unfinished">允许编辑双声道</translation>
+        <translation>允许编辑双声道</translation>
     </message>
     <message>
         <location filename="editor/tools/external_command/toolexternalcommand_gui.ui" line="61"/>
         <source>Replace sample information if possible</source>
-        <translation type="unfinished">如可能则替换样本信息</translation>
+        <translation>如可能则替换样本信息</translation>
     </message>
     <message>
         <location filename="editor/tools/external_command/toolexternalcommand_gui.ui" line="98"/>
@@ -7779,23 +7948,23 @@ download content</source>
     <message>
         <location filename="editor/tools/external_command/toolexternalcommand_gui.cpp" line="75"/>
         <source>Executable file</source>
-        <translation type="unfinished">可执行文件</translation>
+        <translation>可执行文件</translation>
     </message>
     <message>
         <location filename="editor/tools/external_command/toolexternalcommand_gui.cpp" line="92"/>
         <location filename="editor/tools/external_command/toolexternalcommand_gui.cpp" line="99"/>
         <source>Warning</source>
-        <translation type="unfinished">警告</translation>
+        <translation>警告</translation>
     </message>
     <message>
         <location filename="editor/tools/external_command/toolexternalcommand_gui.cpp" line="92"/>
         <source>You must enter a command with at least {wav} as argument.</source>
-        <translation type="unfinished">输入的命令需要包含{wav}参数。</translation>
+        <translation>输入的命令需要包含{wav}参数。</translation>
     </message>
     <message>
         <location filename="editor/tools/external_command/toolexternalcommand_gui.cpp" line="99"/>
         <source>The command must contain the argument {wav}.</source>
-        <translation type="unfinished">命令必须包含参数{wav}。</translation>
+        <translation>命令必须包含参数{wav}。</translation>
     </message>
 </context>
 <context>
@@ -7808,7 +7977,7 @@ download content</source>
     <message>
         <location filename="editor/tools/frequency_filter/toolfrequencyfilter.h" line="37"/>
         <source>Filter frequencies</source>
-        <translation type="unfinished">频率滤波</translation>
+        <translation>频率滤波</translation>
     </message>
 </context>
 <context>
@@ -7816,7 +7985,7 @@ download content</source>
     <message>
         <location filename="editor/tools/frequency_filter/toolfrequencyfilter_gui.ui" line="26"/>
         <source>Put in red the part of frequencies to filter:</source>
-        <translation type="unfinished">将要滤波的频率置于红色部分：</translation>
+        <translation>将要滤波的频率置于红色部分：</translation>
     </message>
 </context>
 <context>
@@ -7824,7 +7993,7 @@ download content</source>
     <message>
         <location filename="editor/tools/frequency_peaks/toolfrequencypeaks.cpp" line="30"/>
         <source>Sample</source>
-        <translation type="unfinished">样本</translation>
+        <translation>样本</translation>
     </message>
     <message>
         <location filename="editor/tools/frequency_peaks/toolfrequencypeaks.cpp" line="30"/>
@@ -7834,22 +8003,22 @@ download content</source>
     <message>
         <location filename="editor/tools/frequency_peaks/toolfrequencypeaks.cpp" line="31"/>
         <source>Intensity</source>
-        <translation type="unfinished">强度</translation>
+        <translation>强度</translation>
     </message>
     <message>
         <location filename="editor/tools/frequency_peaks/toolfrequencypeaks.cpp" line="31"/>
         <source>Frequency</source>
-        <translation type="unfinished">频率</translation>
+        <translation>频率</translation>
     </message>
     <message>
         <location filename="editor/tools/frequency_peaks/toolfrequencypeaks.cpp" line="32"/>
         <source>Key</source>
-        <translation type="unfinished">音符</translation>
+        <translation>音符</translation>
     </message>
     <message>
         <location filename="editor/tools/frequency_peaks/toolfrequencypeaks.cpp" line="32"/>
         <source>Correction</source>
-        <translation type="unfinished">校正</translation>
+        <translation>校正</translation>
     </message>
     <message>
         <location filename="editor/tools/frequency_peaks/toolfrequencypeaks.cpp" line="57"/>
@@ -7872,17 +8041,17 @@ download content</source>
     <message>
         <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.ui" line="26"/>
         <source>Export</source>
-        <translation type="unfinished">导出</translation>
+        <translation>导出</translation>
     </message>
     <message>
         <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.ui" line="33"/>
         <source>Close</source>
-        <translation type="unfinished">关闭</translation>
+        <translation>关闭</translation>
     </message>
     <message>
         <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="60"/>
         <source>Sample</source>
-        <translation type="unfinished">样本</translation>
+        <translation>样本</translation>
     </message>
     <message>
         <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="61"/>
@@ -7892,32 +8061,32 @@ download content</source>
     <message>
         <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="62"/>
         <source>Intensity</source>
-        <translation type="unfinished">强度</translation>
+        <translation>强度</translation>
     </message>
     <message>
         <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="63"/>
         <source>Frequency</source>
-        <translation type="unfinished">频率</translation>
+        <translation>频率</translation>
     </message>
     <message>
         <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="64"/>
         <source>Key</source>
-        <translation type="unfinished">音符</translation>
+        <translation>音符</translation>
     </message>
     <message>
         <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="65"/>
         <source>Correction</source>
-        <translation type="unfinished">校正</translation>
+        <translation>校正</translation>
     </message>
     <message>
         <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="127"/>
         <source>Hz</source>
-        <translation type="unfinished">赫兹</translation>
+        <translation>赫兹</translation>
     </message>
     <message>
         <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="151"/>
         <source>Export peak frequency</source>
-        <translation type="unfinished">导出峰值频率</translation>
+        <translation>导出峰值频率</translation>
     </message>
     <message>
         <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="152"/>
@@ -7943,87 +8112,87 @@ download content</source>
     <message>
         <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="37"/>
         <source>Minimum</source>
-        <translation type="unfinished">最小值</translation>
+        <translation>最小值</translation>
     </message>
     <message>
         <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="45"/>
         <source>Addition</source>
-        <translation type="unfinished">加</translation>
+        <translation>加</translation>
     </message>
     <message>
         <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="50"/>
         <source>Multiplication</source>
-        <translation type="unfinished">乘</translation>
+        <translation>乘</translation>
     </message>
     <message>
         <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="55"/>
         <source>Replacement</source>
-        <translation type="unfinished">替换</translation>
+        <translation>替换</translation>
     </message>
     <message>
         <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="86"/>
         <source>Parameter</source>
-        <translation type="unfinished">参数</translation>
+        <translation>参数</translation>
     </message>
     <message>
         <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="106"/>
         <source>Pattern</source>
-        <translation type="unfinished">模式</translation>
+        <translation>模式</translation>
     </message>
     <message>
         <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="129"/>
         <source>Maximum</source>
-        <translation type="unfinished">最大值</translation>
+        <translation>最大值</translation>
     </message>
     <message>
         <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="136"/>
         <source>Modification</source>
-        <translation type="unfinished">修改方式</translation>
+        <translation>修改方式</translation>
     </message>
     <message>
         <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="163"/>
         <source>Manual</source>
-        <translation type="unfinished">手动</translation>
+        <translation>手动</translation>
     </message>
     <message>
         <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="168"/>
         <source>Linear ascending</source>
-        <translation type="unfinished">线性上升</translation>
+        <translation>线性上升</translation>
     </message>
     <message>
         <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="173"/>
         <source>Linear descending</source>
-        <translation type="unfinished">线性下降</translation>
+        <translation>线性下降</translation>
     </message>
     <message>
         <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="178"/>
         <source>Exponential ascending</source>
-        <translation type="unfinished">指数上升</translation>
+        <translation>指数上升</translation>
     </message>
     <message>
         <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="183"/>
         <source>Exponential descending</source>
-        <translation type="unfinished">指数下降</translation>
+        <translation>指数下降</translation>
     </message>
     <message>
         <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="188"/>
         <source>Random</source>
-        <translation type="unfinished">随机</translation>
+        <translation>随机</translation>
     </message>
     <message>
         <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="259"/>
         <source>Apply to a velocity range</source>
-        <translation type="unfinished">应用到力度范围</translation>
+        <translation>应用到力度范围</translation>
     </message>
     <message>
         <location filename="editor/tools/global_settings/toolglobalsettings_gui.cpp" line="174"/>
         <source>Stiffness</source>
-        <translation type="unfinished">硬度</translation>
+        <translation>硬度</translation>
     </message>
     <message>
         <location filename="editor/tools/global_settings/toolglobalsettings_gui.cpp" line="179"/>
         <source>Distribution</source>
-        <translation type="unfinished">分布</translation>
+        <translation>分布</translation>
     </message>
 </context>
 <context>
@@ -8054,7 +8223,7 @@ download content</source>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation.h" line="39"/>
         <source>Mixture creation</source>
-        <translation type="unfinished">创建混合音栓</translation>
+        <translation>创建混合音栓</translation>
     </message>
 </context>
 <context>
@@ -8062,133 +8231,133 @@ download content</source>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="25"/>
         <source>Name of the mixture:</source>
-        <translation type="unfinished">名称：</translation>
+        <translation>名称：</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="35"/>
         <source>Sample creation:</source>
-        <translation type="unfinished">创建样本：</translation>
+        <translation>创建样本：</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="43"/>
         <source>for every key</source>
-        <translation type="unfinished">每个音符</translation>
+        <translation>每个音符</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="48"/>
         <source>every 3 keys</source>
-        <translation type="unfinished">每 3 个音符</translation>
+        <translation>每 3 个音符</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="53"/>
         <source>every 6 keys</source>
-        <translation type="unfinished">每 6 个音符</translation>
+        <translation>每 6 个音符</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="61"/>
         <source>Auto loop</source>
-        <translation type="unfinished">自动循环</translation>
+        <translation>自动循环</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="71"/>
         <source>Stereo</source>
-        <translation type="unfinished">双声道</translation>
+        <translation>双声道</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="85"/>
         <source>Divisions</source>
-        <translation type="unfinished">分层</translation>
+        <translation>分层</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="238"/>
         <source>Key range</source>
-        <translation type="unfinished">音符范围</translation>
+        <translation>音符范围</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="261"/>
         <source>Ranks</source>
-        <translation type="unfinished">管列</translation>
+        <translation>管列</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="334"/>
         <source>Type</source>
-        <translation type="unfinished">类型</translation>
+        <translation>类型</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="342"/>
         <source>octave</source>
-        <translation type="unfinished">八度</translation>
+        <translation>八度</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="347"/>
         <source>fifth</source>
-        <translation type="unfinished">五度</translation>
+        <translation>五度</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="352"/>
         <source>third</source>
-        <translation type="unfinished">三度</translation>
+        <translation>三度</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="357"/>
         <source>seventh</source>
-        <translation type="unfinished">七度</translation>
+        <translation>七度</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="362"/>
         <source>ninth</source>
-        <translation type="unfinished">九度</translation>
+        <translation>九度</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="367"/>
         <source>eleventh</source>
-        <translation type="unfinished">十一度</translation>
+        <translation>十一度</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="372"/>
         <source>thirteenth</source>
-        <translation type="unfinished">十三度</translation>
+        <translation>十三度</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="377"/>
         <source>fifteenth</source>
-        <translation type="unfinished">十五度</translation>
+        <translation>十五度</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="382"/>
         <source>seventeenth</source>
-        <translation type="unfinished">十七度</translation>
+        <translation>十七度</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="387"/>
         <source>nineteenth</source>
-        <translation type="unfinished">十九度</translation>
+        <translation>十九度</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="392"/>
         <source>twenty-first</source>
-        <translation type="unfinished">二十一度</translation>
+        <translation>二十一度</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="397"/>
         <source>twenty-third</source>
-        <translation type="unfinished">二十三度</translation>
+        <translation>二十三度</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="402"/>
         <source>twenty-fifth</source>
-        <translation type="unfinished">二十五度</translation>
+        <translation>二十五度</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="407"/>
         <source>twenty-seventh</source>
-        <translation type="unfinished">二十七度</translation>
+        <translation>二十七度</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.cpp" line="59"/>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.cpp" line="75"/>
         <source>Warning</source>
-        <translation type="unfinished">警告</translation>
+        <translation>警告</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.cpp" line="59"/>
@@ -8219,32 +8388,32 @@ download content</source>
     <message>
         <location filename="editor/tools/monitor/toolmonitor_gui.ui" line="97"/>
         <source>Display options</source>
-        <translation type="unfinished">显示选项</translation>
+        <translation>显示选项</translation>
     </message>
     <message>
         <location filename="editor/tools/monitor/toolmonitor_gui.ui" line="140"/>
         <source>Log scale</source>
-        <translation type="unfinished">对数刻度</translation>
+        <translation>对数刻度</translation>
     </message>
     <message>
         <location filename="editor/tools/monitor/toolmonitor_gui.ui" line="162"/>
         <source>Legend</source>
-        <translation type="unfinished">图例</translation>
+        <translation>图例</translation>
     </message>
     <message>
         <location filename="editor/tools/monitor/toolmonitor_gui.ui" line="221"/>
         <source>Default parameters</source>
-        <translation type="unfinished">默认参数</translation>
+        <translation>默认参数</translation>
     </message>
     <message>
         <location filename="editor/tools/monitor/toolmonitor_gui.ui" line="250"/>
         <source>Mean value per key</source>
-        <translation type="unfinished">每个音符的平均值</translation>
+        <translation>每个音符的平均值</translation>
     </message>
     <message>
         <location filename="editor/tools/monitor/toolmonitor_gui.ui" line="263"/>
         <source>Defined parameters</source>
-        <translation type="unfinished">定义的参数</translation>
+        <translation>定义的参数</translation>
     </message>
 </context>
 <context>
@@ -8257,7 +8426,7 @@ download content</source>
     <message>
         <location filename="editor/tools/preset_list/toolpresetlist.h" line="36"/>
         <source>Export preset list</source>
-        <translation type="unfinished">导出预设列表</translation>
+        <translation>导出预设列表</translation>
     </message>
 </context>
 <context>
@@ -8265,27 +8434,27 @@ download content</source>
     <message>
         <location filename="editor/tools/preset_list/toolpresetlist_gui.ui" line="30"/>
         <source>Copy</source>
-        <translation type="unfinished">复制</translation>
+        <translation>复制</translation>
     </message>
     <message>
         <location filename="editor/tools/preset_list/toolpresetlist_gui.ui" line="56"/>
         <source>text copied in the clipboard</source>
-        <translation type="unfinished">文本已复制到剪贴板</translation>
+        <translation>文本已复制到剪贴板</translation>
     </message>
     <message>
         <location filename="editor/tools/preset_list/toolpresetlist_gui.ui" line="81"/>
         <source>csv format</source>
-        <translation type="unfinished">CSV 表</translation>
+        <translation>CSV 表</translation>
     </message>
     <message>
         <location filename="editor/tools/preset_list/toolpresetlist_gui.ui" line="91"/>
         <source>html table</source>
-        <translation type="unfinished">HTML 表</translation>
+        <translation>HTML 表</translation>
     </message>
     <message>
         <location filename="editor/tools/preset_list/toolpresetlist_gui.ui" line="113"/>
         <source>Close</source>
-        <translation type="unfinished">关闭</translation>
+        <translation>关闭</translation>
     </message>
 </context>
 <context>
@@ -8306,12 +8475,12 @@ download content</source>
     <message>
         <location filename="editor/tools/release/toolrelease_gui.ui" line="43"/>
         <source>Division to the next octave</source>
-        <translation type="unfinished">划分到下个八度音阶</translation>
+        <translation>划分到下个八度音阶</translation>
     </message>
     <message>
         <location filename="editor/tools/release/toolrelease_gui.ui" line="66"/>
         <source>Detuning induced (semi-tones)</source>
-        <translation type="unfinished">引发失谐(半音)</translation>
+        <translation>引发失谐(半音)</translation>
     </message>
     <message>
         <location filename="editor/tools/release/toolrelease_gui.cpp" line="27"/>
@@ -8324,7 +8493,7 @@ download content</source>
     <message>
         <location filename="editor/tools/remove_mods/toolremovemods.cpp" line="88"/>
         <source>1 modulator has been deleted.</source>
-        <translation type="unfinished">1 个调制器已被删除。</translation>
+        <translation>1 个调制器已被删除。</translation>
     </message>
     <message>
         <location filename="editor/tools/remove_mods/toolremovemods.cpp" line="90"/>
@@ -8352,7 +8521,7 @@ download content</source>
     <message>
         <location filename="editor/tools/sample_export/toolsampleexport.cpp" line="15"/>
         <source>Choose a destination folder</source>
-        <translation type="unfinished">选择目标文件夹</translation>
+        <translation>选择目标文件夹</translation>
     </message>
     <message>
         <location filename="editor/tools/sample_export/toolsampleexport.h" line="26"/>
@@ -8383,57 +8552,57 @@ download content</source>
     <message>
         <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="70"/>
         <source>Inversions</source>
-        <translation type="unfinished">倒置</translation>
+        <translation>倒置</translation>
     </message>
     <message>
         <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="100"/>
         <source>Spreading (%)</source>
-        <translation type="unfinished">扩散(%)</translation>
+        <translation>扩散(%)</translation>
     </message>
     <message>
         <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="144"/>
         <source>Ascending</source>
-        <translation type="unfinished">上升</translation>
+        <translation>上升</translation>
     </message>
     <message>
         <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="149"/>
         <source>Descending</source>
-        <translation type="unfinished">下降</translation>
+        <translation>下降</translation>
     </message>
     <message>
         <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="154"/>
         <source>Hollow</source>
-        <translation type="unfinished">回荡</translation>
+        <translation>回荡</translation>
     </message>
     <message>
         <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="159"/>
         <source>Spike</source>
-        <translation type="unfinished">刺入</translation>
+        <translation>刺入</translation>
     </message>
     <message>
         <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="164"/>
         <source>Random</source>
-        <translation type="unfinished">随机</translation>
+        <translation>随机</translation>
     </message>
     <message>
         <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="172"/>
         <source>Pattern</source>
-        <translation type="unfinished">模式</translation>
+        <translation>模式</translation>
     </message>
     <message>
         <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="189"/>
         <source>Division number</source>
-        <translation type="unfinished">分割数</translation>
+        <translation>分割数</translation>
     </message>
     <message>
         <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="196"/>
         <source>Offset (0-100)</source>
-        <translation type="unfinished">偏移(0-100)</translation>
+        <translation>偏移(0-100)</translation>
     </message>
     <message>
         <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="203"/>
         <source>Filling (%)</source>
-        <translation type="unfinished">填充(%)</translation>
+        <translation>填充(%)</translation>
     </message>
 </context>
 <context>
@@ -8441,7 +8610,7 @@ download content</source>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport.cpp" line="92"/>
         <source>Merge soudfonts:</source>
-        <translation type="unfinished">合并音色库：</translation>
+        <translation>合并音色库：</translation>
     </message>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport.cpp" line="187"/>
@@ -8456,7 +8625,7 @@ download content</source>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport.h" line="37"/>
         <source>Export</source>
-        <translation type="unfinished">导出</translation>
+        <translation>导出</translation>
     </message>
 </context>
 <context>
@@ -8464,12 +8633,12 @@ download content</source>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="22"/>
         <source>Select all</source>
-        <translation type="unfinished">全选</translation>
+        <translation>全选</translation>
     </message>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="29"/>
         <source>Unselect all</source>
-        <translation type="unfinished">全不选</translation>
+        <translation>全不选</translation>
     </message>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="80"/>
@@ -8479,7 +8648,7 @@ download content</source>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="106"/>
         <source>Format</source>
-        <translation type="unfinished">格式</translation>
+        <translation>格式</translation>
     </message>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="116"/>
@@ -8489,42 +8658,42 @@ download content</source>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="123"/>
         <source>one directory per bank</source>
-        <translation type="unfinished">每个库置于单独文件夹</translation>
+        <translation>每个库置于单独文件夹</translation>
     </message>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="130"/>
         <source>preset number as prefix</source>
-        <translation type="unfinished">附加预设号前缀</translation>
+        <translation>附加预设号前缀</translation>
     </message>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="141"/>
         <source>High</source>
-        <translation type="unfinished">高</translation>
+        <translation>高</translation>
     </message>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="146"/>
         <source>Medium</source>
-        <translation type="unfinished">中</translation>
+        <translation>中</translation>
     </message>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="151"/>
         <source>Low</source>
-        <translation type="unfinished">低</translation>
+        <translation>低</translation>
     </message>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="159"/>
         <source>Quality</source>
-        <translation type="unfinished">质量</translation>
+        <translation>质量</translation>
     </message>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="170"/>
         <source>Cancel</source>
-        <translation type="unfinished">取消</translation>
+        <translation>取消</translation>
     </message>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="190"/>
         <source>Export</source>
-        <translation type="unfinished">导出</translation>
+        <translation>导出</translation>
     </message>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="117"/>
@@ -8537,27 +8706,27 @@ download content</source>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="168"/>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="177"/>
         <source>Warning</source>
-        <translation type="unfinished">警告</translation>
+        <translation>警告</translation>
     </message>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="133"/>
         <source>Invalid directory.</source>
-        <translation type="unfinished">路径不合法。</translation>
+        <translation>路径不合法。</translation>
     </message>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="162"/>
         <source>At least one preset must be selected.</source>
-        <translation type="unfinished">必须至少选择一个预设。</translation>
+        <translation>必须至少选择一个预设。</translation>
     </message>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="168"/>
         <source>The maximal number of soundfont to export is 127.</source>
-        <translation type="unfinished">一次最多只能导出 127 个音色库。</translation>
+        <translation>一次最多只能导出 127 个音色库。</translation>
     </message>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="177"/>
         <source>In the case where several soundfonts are exported, the maximal number of presets per soundfonts is 127.</source>
-        <translation type="unfinished">导出音色库时，每个音色库的预设数不能超过 127。</translation>
+        <translation>导出音色库时，每个音色库的预设数不能超过 127。</translation>
     </message>
 </context>
 <context>
@@ -8596,7 +8765,7 @@ download content</source>
     <message>
         <location filename="editor/tools/transpose_smpl/tooltransposesmpl_gui.ui" line="20"/>
         <source>Shift in semitones</source>
-        <translation type="unfinished">移动量(半音)</translation>
+        <translation>移动量(半音)</translation>
     </message>
 </context>
 <context>
@@ -8604,12 +8773,12 @@ download content</source>
     <message>
         <location filename="editor/tools/transpose/tooltranspose_gui.ui" line="20"/>
         <source>Shift in semitones</source>
-        <translation type="unfinished">移动量(半音)</translation>
+        <translation>移动量(半音)</translation>
     </message>
     <message>
         <location filename="editor/tools/transpose/tooltranspose_gui.ui" line="44"/>
         <source>Adapt keyrange</source>
-        <translation type="unfinished">适应音符范围</translation>
+        <translation>适应音符范围</translation>
     </message>
 </context>
 <context>
@@ -8757,12 +8926,12 @@ download content</source>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="35"/>
         <source>&amp;Copy</source>
-        <translation type="unfinished">复制(&amp;C)</translation>
+        <translation>复制(&amp;C)</translation>
     </message>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="41"/>
         <source>&amp;Paste</source>
-        <translation type="unfinished">粘贴(&amp;P)</translation>
+        <translation>粘贴(&amp;P)</translation>
     </message>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="47"/>
@@ -8772,55 +8941,55 @@ download content</source>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="53"/>
         <source>&amp;Delete</source>
-        <translation type="unfinished">删除(&amp;D)</translation>
+        <translation>删除(&amp;D)</translation>
     </message>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="60"/>
         <location filename="editor/tree/treeviewmenu.cpp" line="117"/>
         <location filename="editor/tree/treeviewmenu.cpp" line="121"/>
         <source>&amp;Rename...</source>
-        <translation type="unfinished">重命名(&amp;R)...</translation>
+        <translation>重命名(&amp;R)...</translation>
     </message>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="117"/>
         <source>Bulk &amp;rename...</source>
-        <translation type="unfinished">批量重命名(&amp;R)...</translation>
+        <translation>批量重命名(&amp;R)...</translation>
     </message>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="163"/>
         <location filename="editor/tree/treeviewmenu.cpp" line="166"/>
         <source>Warning</source>
-        <translation type="unfinished">警告</translation>
+        <translation>警告</translation>
     </message>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="164"/>
         <source>Cannot delete a sample used by another instrument.</source>
-        <translation type="unfinished">无法删除已被乐器使用的样本。</translation>
+        <translation>无法删除已被乐器使用的样本。</translation>
     </message>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="167"/>
         <source>Cannot delete an instrument used by another preset.</source>
-        <translation type="unfinished">无法删除已被预设使用的乐器。</translation>
+        <translation>无法删除已被预设使用的乐器。</translation>
     </message>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="301"/>
         <source>Sample name (max 20 characters):</source>
-        <translation type="unfinished">样本名称(最多 20 个半角字符)：</translation>
+        <translation>样本名称(最多 20 个半角字符)：</translation>
     </message>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="303"/>
         <source>Instrument name (max 20 characters):</source>
-        <translation type="unfinished">乐器名称(最多 20 个半角字符)：</translation>
+        <translation>乐器名称(最多 20 个半角字符)：</translation>
     </message>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="305"/>
         <source>Preset name (max 20 characters):</source>
-        <translation type="unfinished">预设名称(最多 20 个半角字符)：</translation>
+        <translation>预设名称(最多 20 个半角字符)：</translation>
     </message>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="309"/>
         <source>Question</source>
-        <translation type="unfinished">问题</translation>
+        <translation>问题</translation>
     </message>
 </context>
 <context>
@@ -8864,7 +9033,7 @@ download content</source>
     <message>
         <location filename="mainwindow/windowmanager.cpp" line="50"/>
         <source>Settings</source>
-        <translation type="unfinished">设置</translation>
+        <translation>设置</translation>
     </message>
     <message>
         <location filename="mainwindow/windowmanager.cpp" line="125"/>
@@ -8879,7 +9048,7 @@ download content</source>
     <message>
         <location filename="mainwindow/windowmanager.cpp" line="173"/>
         <source>untitled</source>
-        <translation type="unfinished">未命名</translation>
+        <translation>未命名</translation>
     </message>
     <message>
         <location filename="mainwindow/windowmanager.cpp" line="174"/>
@@ -8889,22 +9058,22 @@ download content</source>
     <message>
         <location filename="mainwindow/windowmanager.cpp" line="175"/>
         <source>Warning</source>
-        <translation type="unfinished">警告</translation>
+        <translation>警告</translation>
     </message>
     <message>
         <location filename="mainwindow/windowmanager.cpp" line="177"/>
         <source>&amp;Save</source>
-        <translation type="unfinished">保存(&amp;S)</translation>
+        <translation>保存(&amp;S)</translation>
     </message>
     <message>
         <location filename="mainwindow/windowmanager.cpp" line="178"/>
         <source>&amp;Cancel</source>
-        <translation type="unfinished">取消(&amp;C)</translation>
+        <translation>取消(&amp;C)</translation>
     </message>
     <message>
         <location filename="mainwindow/windowmanager.cpp" line="179"/>
         <source>Do&amp;n&apos;t save</source>
-        <translation type="unfinished">不保存(&amp;N)</translation>
+        <translation>不保存(&amp;N)</translation>
     </message>
     <message>
         <location filename="mainwindow/windowmanager.cpp" line="262"/>
