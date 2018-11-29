@@ -46,7 +46,7 @@ void DialogList::showDialog(EltID idSrc, bool isAssociation)
             (!_isAssociation && (idSrc.typeElement != elementInstSmpl && idSrc.typeElement != elementPrstInst)))
         return;
 
-    // Title
+    // Title and type of elements to display
     ElementType element;
     if (idSrc.typeElement == elementInstSmpl)
     {
@@ -64,12 +64,18 @@ void DialogList::showDialog(EltID idSrc, bool isAssociation)
         element = elementPrst;
     }
 
+    // Id to select
+    int selectedId = -1;
+    SoundfontManager * sm = SoundfontManager::getInstance();
+    if (!isAssociation)
+        selectedId = sm->get(idSrc, idSrc.typeElement == elementInstSmpl ? champ_sampleID : champ_instrument).wValue;
+
     // Fill the list
     ui->listWidget->clear();
+    ui->listWidget->clearSelection();
     ui->listWidget->scrollToTop();
     EltID id(element, idSrc.indexSf2, 0, 0, 0);
     ListWidgetItem *item;
-    SoundfontManager * sm = SoundfontManager::getInstance();
     foreach (int i, sm->getSiblings(id))
     {
         id.indexElt = i;
@@ -82,8 +88,9 @@ void DialogList::showDialog(EltID idSrc, bool isAssociation)
             item = new ListWidgetItem(sm->getQstr(id, champ_name));
         item->id = id;
         ui->listWidget->addItem(item);
+        if (i == selectedId)
+            ui->listWidget->setCurrentItem(item);
     }
-    ui->listWidget->clearSelection();
     ui->listWidget->sortItems();
 
     // Display the dialog
