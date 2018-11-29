@@ -44,6 +44,7 @@ protected:
 
 private slots:
     void mute(bool isMute);
+    void activateSolo(bool unused);
     void unmuteAll(bool unused);
 
 private:
