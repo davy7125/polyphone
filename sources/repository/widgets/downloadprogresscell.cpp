@@ -31,11 +31,12 @@
 #include <QFileInfo>
 #include <QDesktopServices>
 
-DownloadProgressCell::DownloadProgressCell(QString soundfontName, int soundfontId, QWidget *parent) :
+DownloadProgressCell::DownloadProgressCell(int soundfontId, QString soundfontName, QWidget *parent) :
     QWidget(parent),
     ui(new Ui::DownloadProgressCell),
+    _soundfontId(soundfontId),
     _soundfontName(soundfontName),
-    _soundfontId(soundfontId)
+    _percent(0)
 {
     ui->setupUi(this);
 
@@ -43,6 +44,7 @@ DownloadProgressCell::DownloadProgressCell(QString soundfontName, int soundfontI
     ui->pushCancel->setIcon(ContextManager::theme()->getColoredSvg(":/icons/close.svg", QSize(16, 16), ThemeManager::LIST_TEXT));
     ui->pushOpen->setIcon(ContextManager::theme()->getColoredSvg(":/icons/document-open.svg", QSize(16, 16), ThemeManager::LIST_TEXT));
     ui->pushOpen->hide();
+    ui->iconFile->setPixmap(ContextManager::theme()->getColoredSvg(":/icons/file-description.svg", QSize(16, 16), ThemeManager::LIST_TEXT));
 
     // Data
     ui->labelTitle->setText(_soundfontName);
@@ -53,12 +55,15 @@ DownloadProgressCell::~DownloadProgressCell()
     delete ui;
 }
 
-void DownloadProgressCell::progressChanged(int percent, QString finalFileName)
+void DownloadProgressCell::progressChanged(int percent, QString finalFilename)
 {
-    _filename = finalFileName;
-    ui->labelPercent->setText(QString::number(percent) + "%");
+    // Update data
+    _percent = percent;
+    _filename = finalFilename;
 
-    if (finalFileName != "")
+    // Update GUI
+    ui->labelPercent->setText(QString::number(_percent) + "%");
+    if (finalFilename != "")
     {
         ui->pushOpen->setToolTip(trUtf8("Open \"%0\"").arg(_filename));
         ui->pushCancel->hide();
