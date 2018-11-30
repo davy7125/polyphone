@@ -101,6 +101,7 @@ QString SoundfontDescription::getBody(SoundfontDescriptionData * data)
     {
         // Remove unnecessary data
         str = str.replace(QRegExp("[\r\n\t]"), "");
+        str = str.replace("background-color: initial;", "");
 
         // Format tables
         str = str.replace("<table>", "<table cellspacing=0>");
