@@ -34,7 +34,7 @@ class TreeView : public QTreeView
     Q_OBJECT
 
 public:
-    explicit TreeView(QWidget *parent = NULL);
+    explicit TreeView(QWidget *parent = nullptr);
     void setBestMatch(int sampleId, int instrumentId, int presetId);
     void setSf2Index(int sf2Index) { _sf2Index = sf2Index; }
     void expandAndScrollToSelection();
@@ -50,13 +50,13 @@ signals:
     void focusOnSearch();
 
 protected:
-    void mousePressEvent(QMouseEvent * event);
-    void mouseDoubleClickEvent(QMouseEvent * event);
+    void mousePressEvent(QMouseEvent * event) override;
+    void mouseDoubleClickEvent(QMouseEvent * event) override;
     void selectionChanged(const QItemSelection &selected, const QItemSelection &deselected) override;
-    void keyPressEvent(QKeyEvent * event);
-    void dragEnterEvent(QDragEnterEvent * event);
-    void dragMoveEvent(QDragMoveEvent * event);
-    void dropEvent(QDropEvent *event);
+    void keyPressEvent(QKeyEvent * event) override;
+    void dragEnterEvent(QDragEnterEvent * event) override;
+    void dragMoveEvent(QDragMoveEvent * event) override;
+    void dropEvent(QDropEvent *event) override;
 
 private slots:
     void openMenu(const QPoint &point);

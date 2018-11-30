@@ -27,6 +27,7 @@
 #include "utils.h"
 #include "soundfontmanager.h"
 #include "treeview.h"
+#include "contextmanager.h"
 //#include <QAbstractItemModelTester>
 
 TreeSortFilterProxy::TreeSortFilterProxy(int indexSf2, TreeView *treeView, QAbstractItemModel * model) : QSortFilterProxyModel(treeView),
@@ -40,6 +41,8 @@ TreeSortFilterProxy::TreeSortFilterProxy(int indexSf2, TreeView *treeView, QAbst
     _treeView->setSf2Index(indexSf2);
     _treeView->setModel(this);
     _treeView->setCurrentIndex(this->index(0, 0));
+
+    connect(ContextManager::configuration(), SIGNAL(divisionSortChanged()), this, SLOT(divisionSortChanged()));
 }
 
 bool TreeSortFilterProxy::lessThan(const QModelIndex &left, const QModelIndex &right) const
@@ -70,19 +73,7 @@ bool TreeSortFilterProxy::lessThan(const QModelIndex &left, const QModelIndex &r
     case elementInstSmpl: case elementPrstInst:
     {
         EltID id2 = right.data(Qt::UserRole).value<EltID>();
-        int lKey1 = _sm->get(id, champ_keyRange).rValue.byLo;
-        int lKey2 = _sm->get(id2, champ_keyRange).rValue.byLo;
-        if (lKey1 != lKey2)
-            result = (lKey1 < lKey2);
-        else
-        {
-            int lVel1 = _sm->get(id, champ_velRange).rValue.byLo;
-            int lVel2 = _sm->get(id2, champ_velRange).rValue.byLo;
-            if (lVel1 != lVel2)
-                result = (lVel1 < lVel2);
-            else
-                result = lessThan(left.data(Qt::DisplayRole).toString(), right.data(Qt::DisplayRole).toString());
-        }
+        result = (Utils::sortDivisions(id, id2) < 0);
     }
         break;
     case elementPrst:
@@ -241,4 +232,11 @@ bool TreeSortFilterProxy::isFiltered(EltID id)
         }
     }
     return isFiltered;
+}
+
+void TreeSortFilterProxy::divisionSortChanged()
+{
+    // Refresh all divisions
+    this->setDynamicSortFilter(true);
+    this->setDynamicSortFilter(false);
 }

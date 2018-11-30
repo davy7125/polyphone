@@ -29,6 +29,8 @@
 #include "openssl/rsa.h"
 #include "openssl/pem.h"
 #include "openssl/engine.h"
+#include "contextmanager.h"
+#include "soundfontmanager.h"
 
 QString Utils::s_diacriticLetters;
 QStringList Utils::s_noDiacriticLetters;
@@ -176,7 +178,7 @@ QString Utils::rsaDecrypt(QString input)
     // Create the RSA public key
     BIO *bio = BIO_new_mem_buf((void*)publicKeyData.data(), publicKeyData.size());
     BIO_set_flags(bio, BIO_FLAGS_BASE64_NO_NL); // NO NL
-    RSA* publicKey = PEM_read_bio_RSA_PUBKEY(bio, NULL, NULL, NULL);
+    RSA* publicKey = PEM_read_bio_RSA_PUBKEY(bio, nullptr, nullptr, nullptr);
     BIO_free(bio) ;
     if (publicKey == nullptr)
     {
@@ -191,12 +193,81 @@ QString Utils::rsaDecrypt(QString input)
     if (resultLen == -1)
     {
         qWarning() << "Error when decrypting with RSA:" << ERR_error_string(ERR_get_error(), nullptr);
-        delete decryptedText;
+        delete [] decryptedText;
         return "";
     }
 
     // Convert the decryptedText to QString (base 64) and return it
     QString result = QString::fromLatin1((char*) decryptedText, resultLen);
-    delete decryptedText;
+    delete [] decryptedText;
     return result;
+}
+
+int Utils::sortDivisions(EltID id1, EltID id2)
+{
+    int result = 0;
+    SoundfontManager * sm = SoundfontManager::getInstance();
+
+    switch (ContextManager::configuration()->getValue(ConfManager::SECTION_DISPLAY, "division_sort", 0).toInt())
+    {
+    case 1:
+        // Sort by velocity, by key, alphabetically
+        if ((result = compareVelocity(sm, id1, id2)) == 0)
+            if ((result = compareKey(sm, id1, id2)) == 0)
+                result = compareName(sm, id1, id2);
+        break;
+    case 2:
+        // Sort alphabetically, by key, by velocity
+        if ((result = compareName(sm, id1, id2)) == 0)
+            if ((result = compareKey(sm, id1, id2)) == 0)
+                result = compareVelocity(sm, id1, id2);
+        break;
+    case 3:
+        // Sort by id
+        if (id1.indexElt2 < id2.indexElt2)
+            result = -1;
+        else if (id1.indexElt2 > id2.indexElt2)
+            result = 1;
+        break;
+    default:
+        // Sort by key, by velocity, alphabetically
+        if ((result = compareKey(sm, id1, id2)) == 0)
+            if ((result = compareVelocity(sm, id1, id2)) == 0)
+                result = compareName(sm, id1, id2);
+        break;
+    }
+
+    return result;
+}
+
+
+int Utils::compareKey(SoundfontManager * sm, EltID idDiv1, EltID idDiv2)
+{
+    int lKey1 = sm->get(idDiv1, champ_keyRange).rValue.byLo;
+    int lKey2 = sm->get(idDiv2, champ_keyRange).rValue.byLo;
+    if (lKey1 != lKey2)
+        return (lKey1 < lKey2) ? -1 : 1;
+    return 0;
+}
+
+int Utils::compareVelocity(SoundfontManager *sm, EltID idDiv1, EltID idDiv2)
+{
+    int lVel1 = sm->get(idDiv1, champ_velRange).rValue.byLo;
+    int lVel2 = sm->get(idDiv2, champ_velRange).rValue.byLo;
+    if (lVel1 != lVel2)
+        return (lVel1 < lVel2) ? -1 : 1;
+    return 0;
+}
+
+int Utils::compareName(SoundfontManager *sm, EltID idDiv1, EltID idDiv2)
+{
+    AttributeType champId = (idDiv1.typeElement == elementInstSmpl ? champ_sampleID : champ_instrument);
+    ElementType divisionType = (idDiv1.typeElement == elementInstSmpl ? elementSmpl : elementInst);
+    QString name1 = sm->getQstr(EltID(divisionType, idDiv1.indexSf2, sm->get(idDiv1, champId).wValue), champ_name);
+    QString name2 = sm->getQstr(EltID(divisionType, idDiv2.indexSf2, sm->get(idDiv2, champId).wValue), champ_name);
+    name1 = removeAccents(name1).toLower();
+    name2 = removeAccents(name2).toLower();
+    if (name1 != name2)
+        return naturalOrder(name1, name2);
+    return 0;
 }
