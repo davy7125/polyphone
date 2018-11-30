@@ -30,6 +30,7 @@
 #include "inputfactory.h"
 #include <QFileInfo>
 #include <QDesktopServices>
+#include <QUrl>
 
 DownloadProgressCell::DownloadProgressCell(int soundfontId, QString soundfontName, QWidget *parent) :
     QWidget(parent),
@@ -80,10 +81,20 @@ void DownloadProgressCell::on_pushOpen_clicked()
     if (InputFactory::isSuffixSupported(QFileInfo(_filename).suffix()))
         WindowManager::getInstance()->openSoundfont(_filename);
     else
-        QDesktopServices::openUrl(_filename);
+        QDesktopServices::openUrl(QUrl(_filename));
 }
 
 void DownloadProgressCell::on_pushCancel_clicked()
 {
     DownloadManager::getInstance()->cancel(_soundfontId);
+}
+
+void DownloadProgressCell::cancel()
+{
+    // Nothing more to do
+    _percent = 100;
+
+    ui->pushCancel->setIcon(ContextManager::theme()->getColoredSvg(":/icons/canceled.svg", QSize(16, 16), ThemeManager::LIST_TEXT));
+    ui->pushCancel->setToolTip(trUtf8("Download canceled"));
+    ui->pushCancel->setEnabled(false);
 }

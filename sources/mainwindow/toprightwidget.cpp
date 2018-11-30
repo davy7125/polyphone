@@ -76,7 +76,7 @@ TopRightWidget::TopRightWidget(QWidget *parent) :
             this, SLOT(userStateChanged(UserManager::ConnectionState)));
     connect(DownloadManager::getInstance(), SIGNAL(progressChanged(int,int,QString,QString)), this, SLOT(progressChanged(int,int,QString,QString)),
             Qt::QueuedConnection);
-    connect(DownloadManager::getInstance(), SIGNAL(downloadCanceled(int)), this, SLOT(downloadCanceled()));
+    connect(DownloadManager::getInstance(), SIGNAL(downloadCanceled(int)), this, SLOT(downloadCanceled(int)));
     connect(ui->toolButtonDownload, SIGNAL(cleared()), this, SLOT(downloadCleared()));
 
     userStateChanged(UserManager::DISCONNECTED);
