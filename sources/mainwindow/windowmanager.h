@@ -39,8 +39,8 @@ class WindowManager : public QObject
     Q_OBJECT
 
 public:
-    explicit WindowManager(ColoredTabWidget * tabWidget);
-    ~WindowManager();
+    static WindowManager * getInstance(ColoredTabWidget * tabWidget = nullptr);
+    static void kill();
 
 public slots:
     /// Open the configuration
@@ -92,12 +92,17 @@ private slots:
     void onTabIndexChanged(int tabIndex);
 
 private:
+    explicit WindowManager(ColoredTabWidget * tabWidget);
+    ~WindowManager();
+
     ColoredTabWidget * _tabWidget;
     ConfigPanel * _configTab;
     SoundfontBrowser * _browserTab;
     UserArea * _userTab;
     QList<Editor*> _editors;
     QList<SoundfontViewer*> _viewers;
+
+    static WindowManager * s_instance;
 };
 
 #endif // WINDOWMANAGER_H
