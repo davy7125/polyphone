@@ -76,6 +76,7 @@ TopRightWidget::TopRightWidget(QWidget *parent) :
             this, SLOT(userStateChanged(UserManager::ConnectionState)));
     connect(DownloadManager::getInstance(), SIGNAL(progressChanged(int,int,QString,QString)), this, SLOT(progressChanged(int,int,QString,QString)),
             Qt::QueuedConnection);
+    connect(DownloadManager::getInstance(), SIGNAL(downloadCanceled(int)), this, SLOT(downloadCanceled()));
     connect(ui->toolButtonDownload, SIGNAL(cleared()), this, SLOT(downloadCleared()));
 
     userStateChanged(UserManager::DISCONNECTED);
@@ -151,6 +152,11 @@ void TopRightWidget::progressChanged(int percent, int soundfontId, QString sound
 {
     ui->toolButtonDownload->progressChanged(percent, soundfontId, soundfontName, finalFileName);
     ui->toolButtonDownload->show();
+}
+
+void TopRightWidget::downloadCanceled(int soundfontId)
+{
+    ui->toolButtonDownload->downloadCanceled(soundfontId);
 }
 
 void TopRightWidget::downloadCleared()

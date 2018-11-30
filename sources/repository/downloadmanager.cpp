@@ -171,4 +171,5 @@ void DownloadManager::cancel(int soundfontId)
     }
     else
         _mutex.unlock();
+    emit(downloadCanceled(soundfontId));
 }

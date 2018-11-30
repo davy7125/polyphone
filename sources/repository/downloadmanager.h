@@ -46,6 +46,7 @@ public:
 
 signals:
     void progressChanged(int percent, int soundfontId, QString soundfontName, QString finalFileName);
+    void downloadCanceled(int soundfontId);
 
 private slots:
     void fileDownloaded(QString error);
