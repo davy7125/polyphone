@@ -27,6 +27,7 @@
 
 #include <QToolButton>
 #include <QMap>
+#include <QMutex>
 class DownloadProgressCell;
 class QMenu;
 
@@ -43,13 +44,16 @@ public:
 signals:
     void cleared();
 
+private slots:
+    void clearCompletedDownloads();
+
 private:
     void updatePercent();
 
-    QMap<QString, QPair<int, QString> > _downloadStatus;
     QMap<QString, QString> _svgReplacements;
     QMenu * _menu;
-    QMap<QString, DownloadProgressCell *> _cells;
+    QMap<int, DownloadProgressCell *> _cells;
+    QMutex _mutex;
 };
 
 #endif // DOWNLOADPROGRESSBUTTON_H
