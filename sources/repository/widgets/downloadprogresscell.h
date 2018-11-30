@@ -36,10 +36,15 @@ class DownloadProgressCell : public QWidget
     Q_OBJECT
 
 public:
-    explicit DownloadProgressCell(QString soundfontName, int soundfontId, QWidget *parent = nullptr);
+    explicit DownloadProgressCell(int soundfontId, QString soundfontName, QWidget *parent = nullptr);
     ~DownloadProgressCell();
 
-    void progressChanged(int percent, QString finalFileName);
+    // Update data
+    void progressChanged(int percent, QString finalFilename);
+
+    // Get data
+    int getPercent() { return _percent; }
+    QString getFilename() { return _filename; }
 
 private slots:
     void on_pushOpen_clicked();
@@ -47,9 +52,10 @@ private slots:
 
 private:
     Ui::DownloadProgressCell *ui;
-    QString _soundfontName;
-    QString _filename;
     int _soundfontId;
+    QString _soundfontName;
+    int _percent;
+    QString _filename;
 };
 
 #endif // DOWNLOADPROGRESSCELL_H
