@@ -138,7 +138,8 @@ void UrlReader::onTimeout()
 
     // Timeout
     disconnect(_webCtrl, SIGNAL(finished(QNetworkReply*)), this, SLOT(fileDownloaded(QNetworkReply*)));
-    _reply->abort();
+    if (_reply != nullptr)
+        _reply->abort();
 
     emit(downloadCompleted("timeout"));
 }
@@ -152,5 +153,16 @@ void UrlReader::downloadProgressed(qint64 bytesReceived, qint64 bytesTotal)
 
 void UrlReader::stop()
 {
+    _mutex->lock();
+    if (!_queryProcessed)
+        _queryProcessed = true;
+    _mutex->unlock();
 
+    if (_reply != nullptr)
+    {
+        _reply->abort();
+        _reply->deleteLater();
+        _reply = nullptr;
+    }
+    _timer->stop();
 }

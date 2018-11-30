@@ -93,9 +93,8 @@ void DownloadProgressButton::downloadCanceled(int soundfontId)
 {
     _mutex.lock();
     if (_cells.contains(soundfontId))
-        removeCell(_cells.take(soundfontId));
-    if (_cells.empty())
-        emit(cleared());
+        _cells[soundfontId]->cancel();
+    updatePercent();
     _mutex.unlock();
 }
 

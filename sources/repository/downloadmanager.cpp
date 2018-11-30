@@ -54,7 +54,7 @@ void DownloadManager::kill()
 
 DownloadManager::DownloadManager() : QObject(),
     _reader(new UrlReader(RepositoryManager::BASE_URL + "download")),
-    _currentDownload(-1)
+    _currentDownloadId(-1)
 {
     // Downloader
     connect(_reader, SIGNAL(downloadCompleted(QString)), this, SLOT(fileDownloaded(QString)), Qt::QueuedConnection);
@@ -68,15 +68,14 @@ DownloadManager::~DownloadManager()
 
 void DownloadManager::download(int id, QString soundfontName)
 {
-    // Login / password
-    QString user = ContextManager::configuration()->getValue(ConfManager::SECTION_REPOSITORY, "username", "").toString();
-    QString pass = ContextManager::configuration()->getValue(ConfManager::SECTION_REPOSITORY, "password", "").toString();
-
     // Add a url to download
     _mutex.lock();
     _fileNames[id] = soundfontName;
     if (!_filesToDownload.contains(id))
+    {
         _filesToDownload << id;
+        emit(progressChanged(0, id, soundfontName, ""));
+    }
     _mutex.unlock();
 
     processOne();
@@ -85,13 +84,13 @@ void DownloadManager::download(int id, QString soundfontName)
 void DownloadManager::processOne()
 {
     QMutexLocker locker(&_mutex);
-    if (_currentDownload != -1 || _filesToDownload.empty())
+    if (_currentDownloadId != -1 || _filesToDownload.empty())
         return;
-    _currentDownload = _filesToDownload.takeFirst();
+    _currentDownloadId = _filesToDownload.takeFirst();
 
     // Build a url to download
     _reader->clearArguments();
-    _reader->addArgument("id", QString::number(_currentDownload));
+    _reader->addArgument("id", QString::number(_currentDownloadId));
     if (UserManager::getInstance()->getConnectionState() == UserManager::CONNECTED_PREMIUM)
     {
         _reader->addArgument("user", ContextManager::configuration()->getValue(ConfManager::SECTION_REPOSITORY, "username", "").toString());
@@ -103,7 +102,13 @@ void DownloadManager::processOne()
 void DownloadManager::fileDownloaded(QString error)
 {
     _mutex.lock();
-    QString currentDownload = _fileNames.contains(_currentDownload) ? _fileNames[_currentDownload] : trUtf8("untitled");
+    if (_currentDownloadId == -1)
+    {
+        _mutex.unlock();
+        return;
+    }
+
+    QString currentDownload = _fileNames.contains(_currentDownloadId) ? _fileNames[_currentDownloadId] : trUtf8("untitled");
     if (error.isEmpty())
     {
         // Download directory
@@ -133,7 +138,7 @@ void DownloadManager::fileDownloaded(QString error)
         file.close();
 
         // The download is complete, notify it
-        emit(progressChanged(100, _currentDownload, currentDownload, pathWithoutExtension + "." + extension));
+        emit(progressChanged(100, _currentDownloadId, currentDownload, pathWithoutExtension + "." + extension));
     }
     else
     {
@@ -141,7 +146,7 @@ void DownloadManager::fileDownloaded(QString error)
                              trUtf8("Couldn't download file \"%1\": %2").arg(currentDownload)
                              .arg(error));
     }
-    _currentDownload = -1;
+    _currentDownloadId = -1;
     _mutex.unlock();
 
     // Download the next file
@@ -151,10 +156,11 @@ void DownloadManager::fileDownloaded(QString error)
 void DownloadManager::progressChanged(int percent)
 {
     _mutex.lock();
-    QString currentDownload = _fileNames.contains(_currentDownload) ? _fileNames[_currentDownload] : trUtf8("untitled");
+    QString currentDownload = _fileNames.contains(_currentDownloadId) ? _fileNames[_currentDownloadId] : trUtf8("untitled");
     _mutex.unlock();
 
-    emit(progressChanged(percent, _currentDownload, currentDownload, ""));
+    if (_currentDownloadId != -1)
+        emit(progressChanged(percent, _currentDownloadId, currentDownload, ""));
 }
 
 void DownloadManager::cancel(int soundfontId)
@@ -162,11 +168,12 @@ void DownloadManager::cancel(int soundfontId)
     _mutex.lock();
     _filesToDownload.removeAll(soundfontId);
     _fileNames.remove(soundfontId);
-    if (_currentDownload == soundfontId)
+    if (_currentDownloadId == soundfontId)
     {
-        _reader->stop();
-        _currentDownload = -1;
+        _currentDownloadId = -1;
         _mutex.unlock();
+
+        _reader->stop();
         processOne();
     }
     else
