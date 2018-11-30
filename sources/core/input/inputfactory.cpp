@@ -35,7 +35,7 @@
 
 AbstractInput * InputFactory::getInput(QString fileName)
 {
-    AbstractInput * input = NULL;
+    AbstractInput * input = nullptr;
 
     if (fileName.isEmpty())
     {
@@ -75,4 +75,10 @@ AbstractInput * InputFactory::getInput(QString fileName)
     input->initialize(fileName, SoundfontManager::getInstance());
 
     return input;
+}
+
+bool InputFactory::isSuffixSupported(QString suffix)
+{
+    suffix = suffix.toLower();
+    return suffix == "sf2" || suffix == "sf3" || suffix == "sfz" || suffix == "sfark";
 }

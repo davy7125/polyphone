@@ -33,6 +33,9 @@ class InputFactory
 public:
     /// Get an input related to a file
     static AbstractInput * getInput(QString fileName);
+
+    /// Return true if the suffix (extension) is supported
+    static bool isSuffixSupported(QString suffix);
 };
 
 #endif // INPUTFACTORY_H

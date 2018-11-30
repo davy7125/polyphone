@@ -26,6 +26,10 @@
 #include "ui_downloadprogresscell.h"
 #include "contextmanager.h"
 #include "downloadmanager.h"
+#include "windowmanager.h"
+#include "inputfactory.h"
+#include <QFileInfo>
+#include <QDesktopServices>
 
 DownloadProgressCell::DownloadProgressCell(QString soundfontName, int soundfontId, QWidget *parent) :
     QWidget(parent),
@@ -64,7 +68,14 @@ void DownloadProgressCell::progressChanged(int percent, QString finalFileName)
 
 void DownloadProgressCell::on_pushOpen_clicked()
 {
+    if (_filename == "")
+        return;
 
+    // Is it possible to open the file?
+    if (InputFactory::isSuffixSupported(QFileInfo(_filename).suffix()))
+        WindowManager::getInstance()->openSoundfont(_filename);
+    else
+        QDesktopServices::openUrl(_filename);
 }
 
 void DownloadProgressCell::on_pushCancel_clicked()
