@@ -44,7 +44,6 @@ public:
 
 public slots:
     void onEditorOpen(bool isOpen);
-    void progressChanged(int percent, int soundfontId, QString soundfontName, QString finalFileName);
 
 signals:
     void openClicked();
@@ -63,6 +62,8 @@ private slots:
     void userStateChanged(UserManager::ConnectionState state);
     void on_pushUser_clicked();
     void downloadCleared();
+    void progressChanged(int percent, int soundfontId, QString soundfontName, QString finalFileName);
+    void downloadCanceled(int soundfontId);
 
 private:
     Ui::TopRightWidget *ui;
