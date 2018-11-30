@@ -60,7 +60,7 @@ private:
     UrlReader * _reader;
     QList<int> _filesToDownload;
     QMutex _mutex;
-    int _currentDownload;
+    int _currentDownloadId;
     QMap<int, QString> _fileNames;
 
     static DownloadManager * s_instance;
