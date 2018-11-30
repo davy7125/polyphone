@@ -45,6 +45,9 @@ protected:
     bool filterAcceptsRow(int sourceRow, const QModelIndex &sourceParent) const;
     bool lessThan(const QModelIndex &left, const QModelIndex &right) const;
 
+private slots:
+    void divisionSortChanged();
+
 private:
     void findMatches(int idSf2, QString filter);
     bool lessThan(QString left, QString right) const;

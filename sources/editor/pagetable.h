@@ -113,6 +113,9 @@ protected slots:
     void customizeKeyboard();
     void onOpenElement(EltID id);
 
+private slots:
+    void divisionSortChanged();
+
 private:
     class Modulator
     {

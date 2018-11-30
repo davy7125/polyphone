@@ -109,6 +109,9 @@ signals:
     /// Emitted when the mapping changed
     void keyMapChanged();
 
+    /// Emitted when the division sort type changed
+    void divisionSortChanged();
+
 private:
     /// Clear everything
     void clear();
