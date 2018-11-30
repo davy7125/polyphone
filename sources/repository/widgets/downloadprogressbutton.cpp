@@ -59,6 +59,7 @@ void DownloadProgressButton::progressChanged(int percent, int soundfontId, QStri
     {
         DownloadProgressCell * cell = new DownloadProgressCell(soundfontId, soundfontName);
         _cells[soundfontId] = cell;
+        connect(cell, SIGNAL(closeMenu()), this, SLOT(onCloseMenu()));
         QWidgetAction * wa = new QWidgetAction(_menu);
         wa->setDefaultWidget(cell);
 
@@ -129,4 +130,9 @@ void DownloadProgressButton::removeCell(DownloadProgressCell * cell)
             break;
         }
     }
+}
+
+void DownloadProgressButton::onCloseMenu()
+{
+    _menu->close();
 }
