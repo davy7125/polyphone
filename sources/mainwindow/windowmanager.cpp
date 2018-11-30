@@ -40,6 +40,21 @@
 #include <QAbstractButton>
 #include <QApplication>
 
+WindowManager * WindowManager::s_instance = nullptr;
+
+WindowManager * WindowManager::getInstance(ColoredTabWidget * tabWidget)
+{
+    if (s_instance == nullptr)
+        s_instance = new WindowManager(tabWidget);
+    return s_instance;
+}
+
+void WindowManager::kill()
+{
+    delete s_instance;
+    s_instance = nullptr;
+}
+
 WindowManager::WindowManager(ColoredTabWidget *tabWidget) : QObject(nullptr),
     _tabWidget(tabWidget),
     _configTab(new ConfigPanel()),
@@ -95,6 +110,15 @@ void WindowManager::openNewSoundfont()
 
 void WindowManager::openSoundfont(QString fileName)
 {
+    fileName = fileName.replace('\\', '/');
+    if (fileName.left(7).compare("file://") == 0)
+        fileName = fileName.right(fileName.length() - 7);
+#ifdef Q_OS_WIN
+    if (fileName.left(1).compare("/") == 0)
+        fileName = fileName.remove(0, 1);
+#endif
+    ContextManager::recentFile()->addRecentFile(RecentFileManager::FILE_TYPE_SOUNDFONT, fileName);
+
     // Check if the file is not already open?
     SoundfontManager * sf2 = SoundfontManager::getInstance();
     int indexSf2 = -1;

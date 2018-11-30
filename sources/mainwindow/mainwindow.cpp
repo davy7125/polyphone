@@ -104,7 +104,7 @@ MainWindow::MainWindow(QWidget *parent) :
     //////////////////////
 
     // Window manager
-    _windowManager = new WindowManager(ui->tabWidget);
+    _windowManager = WindowManager::getInstance(ui->tabWidget);
     connect(ui->widgetShowSoundfonts, SIGNAL(itemClicked(SoundfontFilter*)), _windowManager, SLOT(openRepository(SoundfontFilter*)));
     connect(_windowManager, SIGNAL(keyboardDisplayChanged(bool)), this, SLOT(onKeyboardDisplayChange(bool)));
     connect(_windowManager, SIGNAL(recorderDisplayChanged(bool)), this, SLOT(onRecorderDisplayChange(bool)));
@@ -141,7 +141,8 @@ MainWindow::~MainWindow()
 {
     delete ui;
     delete _recorder;
-    delete _windowManager;
+    WindowManager::kill();
+    _windowManager = nullptr;
     delete _keyboard;
     SoundfontManager::kill();
     RepositoryManager::kill();
@@ -259,7 +260,7 @@ void MainWindow::on_pushButtonSearch_clicked()
 
 void MainWindow::on_pushButtonSoundfonts_clicked()
 {
-    _windowManager->openRepository(NULL);
+    _windowManager->openRepository(nullptr);
 }
 
 void MainWindow::on_pushButtonOpen_clicked()
@@ -284,15 +285,6 @@ void MainWindow::on_pushButtonNew_clicked()
 
 void MainWindow::openFile(QString fileName)
 {
-    fileName = fileName.replace('\\', '/');
-    if (fileName.left(7).compare("file://") == 0)
-        fileName = fileName.right(fileName.length() - 7);
-#ifdef Q_OS_WIN
-    if (fileName.left(1).compare("/") == 0)
-        fileName = fileName.remove(0, 1);
-#endif
-
-    ContextManager::recentFile()->addRecentFile(RecentFileManager::FILE_TYPE_SOUNDFONT, fileName);
     _windowManager->openSoundfont(fileName);
 }
 
