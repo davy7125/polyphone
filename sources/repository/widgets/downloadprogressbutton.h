@@ -40,6 +40,7 @@ public:
     ~DownloadProgressButton();
 
     void progressChanged(int percent, int soundfontId, QString soundfontName, QString finalFileName);
+    void downloadCanceled(int soundfontId);
 
 signals:
     void cleared();
@@ -49,6 +50,7 @@ private slots:
 
 private:
     void updatePercent();
+    void removeCell(DownloadProgressCell * cell);
 
     QMap<QString, QString> _svgReplacements;
     QMenu * _menu;

@@ -89,6 +89,16 @@ void DownloadProgressButton::updatePercent()
     this->setIcon(ContextManager::theme()->getColoredSvg(":/icons/download_progress.svg", QSize(28, 28), _svgReplacements));
 }
 
+void DownloadProgressButton::downloadCanceled(int soundfontId)
+{
+    _mutex.lock();
+    if (_cells.contains(soundfontId))
+        removeCell(_cells.take(soundfontId));
+    if (_cells.empty())
+        emit(cleared());
+    _mutex.unlock();
+}
+
 void DownloadProgressButton::clearCompletedDownloads()
 {
     _mutex.lock();
@@ -97,25 +107,27 @@ void DownloadProgressButton::clearCompletedDownloads()
     {
         int soundfontId = soundfontIds[i];
         if (_cells[soundfontId]->getPercent() == 100)
-        {
-            // Search the corresponding QWidgetAction
-            DownloadProgressCell * cellToRemove = _cells.take(soundfontId);
-            QList<QAction*> actions = _menu->actions();
-            for (int i = 0; i < actions.count() - 2; i++)
-            {
-                QWidgetAction * wa = (QWidgetAction*)actions[i];
-                if (wa->defaultWidget() == cellToRemove)
-                {
-                    _menu->removeAction(wa);
-                    delete cellToRemove;
-                    break;
-                }
-            }
-        }
+            removeCell(_cells.take(soundfontId));
     }
     updatePercent();
     if (_cells.empty())
         emit(cleared());
 
     _mutex.unlock();
+}
+
+void DownloadProgressButton::removeCell(DownloadProgressCell * cell)
+{
+    // Search the corresponding QWidgetAction
+    QList<QAction*> actions = _menu->actions();
+    for (int i = 0; i < actions.count() - 2; i++)
+    {
+        QWidgetAction * wa = (QWidgetAction*)actions[i];
+        if (wa->defaultWidget() == cell)
+        {
+            _menu->removeAction(wa);
+            delete cell;
+            break;
+        }
+    }
 }
