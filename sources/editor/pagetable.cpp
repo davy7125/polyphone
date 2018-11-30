@@ -39,6 +39,7 @@ PageTable::PageTable(TypePage typePage, QWidget *parent) : Page(parent, typePage
     _table(nullptr),
     tableMod(nullptr)
 {
+    connect(ContextManager::configuration(), SIGNAL(divisionSortChanged()), this, SLOT(divisionSortChanged()));
 }
 
 void PageTable::afficheTable(bool justSelection)
@@ -221,14 +222,10 @@ void PageTable::addDivisions(EltID id)
         QString qStr = _sf2->getQstr(id3, champ_name).left(10) + "\n" + _sf2->getQstr(id3, champ_name).mid(10).left(10);
         for (int j = 1; j < nbSmplInst + 1; j++)
         {
-            // note et vélocité basses de la colonne et prise en compte du nom de l'élément lié
-            id3.indexElt = _sf2->get(_table->getID(j), cElementLie).wValue;
-            QString strOrder2 = QString("%1-%2-%3")
-                    .arg(_sf2->get(_table->getID(j), champ_keyRange).rValue.byLo, 3, 10, QChar('0'))
-                    .arg(_sf2->get(_table->getID(j), champ_velRange).rValue.byLo, 3, 10, QChar('0'))
-                    .arg(_sf2->getQstr(id3, champ_name));
-            if (Utils::naturalOrder(strOrder, strOrder2) > 0)
+            if (Utils::sortDivisions(id, _table->getID(j)) > 0)
                 numCol++;
+            else
+                break;
         }
 
         nbSmplInst++;
@@ -2502,4 +2499,9 @@ void PageTable::onShow()
 {
     // Refresh the keyboard
     customizeKeyboard();
+}
+
+void PageTable::divisionSortChanged()
+{
+    this->afficheTable(false);
 }

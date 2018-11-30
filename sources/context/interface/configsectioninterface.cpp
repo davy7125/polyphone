@@ -103,6 +103,11 @@ void ConfigSectionInterface::initialize()
     ui->comboKeyName->blockSignals(true);
     ui->comboKeyName->setCurrentIndex((int)ContextManager::keyName()->getNameMiddleC());
     ui->comboKeyName->blockSignals(false);
+
+    ui->comboSortDivisions->blockSignals(true);
+    ui->comboSortDivisions->setCurrentIndex(
+                ContextManager::configuration()->getValue(ConfManager::SECTION_DISPLAY, "division_sort", 0).toInt());
+    ui->comboSortDivisions->blockSignals(false);
 }
 
 void ConfigSectionInterface::fillColors()
@@ -263,4 +268,9 @@ void ConfigSectionInterface::on_comboKeyName_currentIndexChanged(int index)
 {
     ContextManager::keyName()->setMiddleKey((KeyNameManager::NameMiddleC)index);
     ui->labelRestart->show();
+}
+
+void ConfigSectionInterface::on_comboSortDivisions_currentIndexChanged(int index)
+{
+    ContextManager::configuration()->setValue(ConfManager::SECTION_DISPLAY, "division_sort", index);
 }

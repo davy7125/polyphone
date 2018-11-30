@@ -36,7 +36,7 @@ class ConfigSectionInterface : public QWidget
     Q_OBJECT
 
 public:
-    explicit ConfigSectionInterface(QWidget *parent = 0);
+    explicit ConfigSectionInterface(QWidget *parent = nullptr);
     ~ConfigSectionInterface();
 
     void initialize();
@@ -54,6 +54,7 @@ private slots:
     void on_pushColorListText_clicked();
     void on_comboLangue_currentIndexChanged(int index);
     void on_comboKeyName_currentIndexChanged(int index);
+    void on_comboSortDivisions_currentIndexChanged(int index);
 
 private:
     void initComboLanguage();

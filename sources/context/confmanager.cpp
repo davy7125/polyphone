@@ -61,6 +61,8 @@ void ConfManager::setValue(Section section, QString key, QVariant value)
         emit(keyMapChanged());
     else if (section == Section::SECTION_NONE && key == "name_middle_c")
         emit(interfaceChanged());
+    else if (section == Section::SECTION_DISPLAY && key == "division_sort")
+        emit(divisionSortChanged());
 }
 
 void ConfManager::setToolValue(ToolType toolType, QString toolName, QString key, QVariant value)
