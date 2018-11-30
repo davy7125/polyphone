@@ -82,6 +82,7 @@ void DownloadProgressCell::on_pushOpen_clicked()
         WindowManager::getInstance()->openSoundfont(_filename);
     else
         QDesktopServices::openUrl(QUrl(_filename));
+    emit(closeMenu());
 }
 
 void DownloadProgressCell::on_pushCancel_clicked()

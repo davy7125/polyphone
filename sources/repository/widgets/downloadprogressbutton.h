@@ -47,6 +47,7 @@ signals:
 
 private slots:
     void clearCompletedDownloads();
+    void onCloseMenu();
 
 private:
     void updatePercent();

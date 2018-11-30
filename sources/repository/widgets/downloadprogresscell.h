@@ -49,6 +49,9 @@ public:
     int getPercent() { return _percent; }
     QString getFilename() { return _filename; }
 
+signals:
+    void closeMenu();
+
 private slots:
     void on_pushOpen_clicked();
     void on_pushCancel_clicked();
