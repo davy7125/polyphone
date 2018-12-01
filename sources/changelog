@@ -1,10 +1,18 @@
 polyphone (2.0) unstable; urgency=low
 
-  * (new) access for the soundfont repository
+  * (new) software design
+  * (new) access to the soundfont repository with a Premium account
+  * (new) duplication of elements in the tree
+  * (new) fast creation of instruments or presets with a drag & drop in the tree
+  * (new) possibility to mute divisions for testing purposes
+  * (new) tool for creating chords
   * (new) German translation
-  * (improvement) one tab for each soundfont
-  * (improvement) design, icons
+  * (improvement) support for "control", "include", "default_path", "global", "group_label", "define" when importing sfz files
+  * (improvement) sample rate displayed in the sample overview page
+  * (improvement) navigation between linked elements
+  * (improvement) divisions can be sorted in different ways
   * (fix) bug when saving/loading 24-bit samples
+  * (fix) opening big soundfonts
 
  -- Davy Triponney <davy.triponney@gmail.com>
 
