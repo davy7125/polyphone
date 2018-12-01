@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="sr_RS">
+<TS version="2.0" language="sr_RS">
 <context>
     <name>AbstractInput</name>
     <message>
@@ -67,28 +67,28 @@
         <source>Loop end offset</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="core/types/attribute.cpp" line="553"/>
         <location filename="core/types/attribute.cpp" line="674"/>
         <source>Loop start offset (× 32768)</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="core/types/attribute.cpp" line="556"/>
         <source>Mod LFO → pitch (c)</source>
         <translation>»Mod LFO« → тон (c)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="core/types/attribute.cpp" line="559"/>
         <source>Vib LFO → pitch (c)</source>
         <translation>»Vib LFO« → тон (c)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="core/types/attribute.cpp" line="562"/>
         <source>Mod env → pitch (c)</source>
         <translation>»Mod env« → тон (c)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="core/types/attribute.cpp" line="565"/>
         <source>Filter, cutoff (×)</source>
         <translation type="unfinished"></translation>
@@ -103,22 +103,22 @@
         <source>Filter, resonance (dB)</source>
         <translation>Филтар, резонанса (dB)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="core/types/attribute.cpp" line="572"/>
         <source>Mod LFO → filter (c)</source>
         <translation>»Mod LFO« → филтар (c)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="core/types/attribute.cpp" line="575"/>
         <source>Mod env → filter (c)</source>
         <translation>»Mod env« → филтар (c)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="core/types/attribute.cpp" line="578"/>
         <source>Sample end offset (× 32768)</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="core/types/attribute.cpp" line="581"/>
         <source>Mod LFO → volume (dB)</source>
         <translation>»Mod LFO« → гласноћа (dB)</translation>
@@ -143,7 +143,7 @@
         <source>Pan [-50;50]</source>
         <translation>Пан [-50;50]</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="core/types/attribute.cpp" line="594"/>
         <source>Mod LFO delay (×)</source>
         <translation>»Mod LFO« кашњење (×)</translation>
@@ -153,7 +153,7 @@
         <source>Mod LFO delay (s)</source>
         <translation>»Mod LFO« кашњење (s)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="core/types/attribute.cpp" line="598"/>
         <source>Mod LFO freq (×)</source>
         <translation>»Mod LFO« учестаност (×)</translation>
@@ -163,7 +163,7 @@
         <source>Mod LFO freq (Hz)</source>
         <translation>»Mod LFO« учестаност (Hz)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="core/types/attribute.cpp" line="602"/>
         <source>Vib LFO delay (×)</source>
         <translation>»Vib LFO« кашњење (×)</translation>
@@ -173,7 +173,7 @@
         <source>Vib LFO delay (s)</source>
         <translation>»Vib LFO« кашњење (s)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="core/types/attribute.cpp" line="606"/>
         <source>Vib LFO freq (×)</source>
         <translation>»Vib LFO« учестаност (×)</translation>
@@ -183,7 +183,7 @@
         <source>Vib LFO freq (Hz)</source>
         <translation>»Vib LFO« учестаност (Hz)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="core/types/attribute.cpp" line="610"/>
         <source>Mod env delay (×)</source>
         <translation>»Mod env« кашњење (×)</translation>
@@ -193,7 +193,7 @@
         <source>Mod env delay (s)</source>
         <translation>»Mod env« кашњење (s)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="core/types/attribute.cpp" line="614"/>
         <source>Mod env attack (×)</source>
         <translation>»Mod env« пораст (×)</translation>
@@ -203,7 +203,7 @@
         <source>Mod env attack (s)</source>
         <translation>»Mod env« пораст (s)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="core/types/attribute.cpp" line="618"/>
         <source>Mod env hold (×)</source>
         <translation>»Mod env« одржавање (×)</translation>
@@ -213,7 +213,7 @@
         <source>Mod env hold (s)</source>
         <translation>»Mod env« одржавање (s)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="core/types/attribute.cpp" line="622"/>
         <source>Mod env decay (×)</source>
         <translation>»Mod env« пад (×)</translation>
@@ -228,7 +228,7 @@
         <source>Mod env sustain (%)</source>
         <translation>»Mod env« задршка (%)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="core/types/attribute.cpp" line="629"/>
         <source>Mod env release (×)</source>
         <translation>»Mod env« стишавање (×)</translation>
@@ -238,17 +238,17 @@
         <source>Mod env release (s)</source>
         <translation>»Mod env« стишавање (s)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="core/types/attribute.cpp" line="633"/>
         <source>Key → Mod env hold (c)</source>
         <translation>Нота → »Mod env« одржавање (c)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="core/types/attribute.cpp" line="636"/>
         <source>Key → Mod env decay (c)</source>
         <translation>Нота → »Mod env« пад (c)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="core/types/attribute.cpp" line="639"/>
         <source>Vol env delay (×)</source>
         <translation>»Vol env« кашњење (×)</translation>
@@ -258,7 +258,7 @@
         <source>Vol env delay (s)</source>
         <translation>»Vol env« кашњење (s)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="core/types/attribute.cpp" line="643"/>
         <source>Vol env attack (×)</source>
         <translation>»Vol env« пораст (×)</translation>
@@ -268,7 +268,7 @@
         <source>Vol env attack (s)</source>
         <translation>»Vol env« пораст (s)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="core/types/attribute.cpp" line="647"/>
         <source>Vol env hold (×)</source>
         <translation>»Vol env« одржавање (×)</translation>
@@ -278,7 +278,7 @@
         <source>Vol env hold (s)</source>
         <translation>»Vol env« одржавање (s)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="core/types/attribute.cpp" line="651"/>
         <source>Vol env decay (×)</source>
         <translation>»Vol env« пад (×)</translation>
@@ -293,7 +293,7 @@
         <source>Vol env sustain (dB)</source>
         <translation>»Vol env« задршка (dB)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="core/types/attribute.cpp" line="658"/>
         <source>Vol env release (×)</source>
         <translation>»Vol env« стишавање (×)</translation>
@@ -303,12 +303,12 @@
         <source>Vol env release (s)</source>
         <translation>»Vol env« стишавање (s)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="core/types/attribute.cpp" line="662"/>
         <source>Key → Vol env hold (c)</source>
         <translation>Нота → »Vol env« одржавање (c)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="core/types/attribute.cpp" line="665"/>
         <source>Key → Vol env decay (c)</source>
         <translation>Нота → »Vol env« пад (c)</translation>
@@ -338,7 +338,7 @@
         <source>Attenuation (dB)</source>
         <translation>Пригушење (dB)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="core/types/attribute.cpp" line="686"/>
         <source>Loop end offset (× 32768)</source>
         <translation type="unfinished"></translation>
@@ -386,380 +386,380 @@
     <name>ConfManager</name>
     <message>
         <source>D</source>
-        <translation type="vanished">Ре</translation>
+        <translation type="obsolete">Ре</translation>
     </message>
     <message>
         <source>C</source>
-        <translation type="vanished">До</translation>
+        <translation type="obsolete">До</translation>
     </message>
     <message>
         <source>G</source>
-        <translation type="vanished">Сол</translation>
+        <translation type="obsolete">Сол</translation>
     </message>
     <message>
         <source>B</source>
-        <translation type="vanished">Ти</translation>
+        <translation type="obsolete">Ти</translation>
     </message>
     <message>
         <source>2</source>
-        <translation type="vanished">2</translation>
+        <translation type="obsolete">2</translation>
     </message>
     <message>
         <source>3</source>
-        <translation type="vanished">3</translation>
+        <translation type="obsolete">3</translation>
     </message>
     <message>
         <source>E</source>
-        <translation type="vanished">Ми</translation>
+        <translation type="obsolete">Ми</translation>
     </message>
     <message>
         <source>R</source>
-        <translation type="vanished">Д</translation>
+        <translation type="obsolete">Д</translation>
     </message>
     <message>
         <source>5</source>
-        <translation type="vanished">5</translation>
+        <translation type="obsolete">5</translation>
     </message>
     <message>
         <source>6</source>
-        <translation type="vanished">6</translation>
+        <translation type="obsolete">6</translation>
     </message>
     <message>
         <source>7</source>
-        <translation type="vanished">7</translation>
+        <translation type="obsolete">7</translation>
     </message>
     <message>
         <source>Shift+&lt;</source>
-        <translation type="vanished">Shift+;</translation>
+        <translation type="obsolete">Shift+;</translation>
     </message>
     <message>
         <source>Shift+@</source>
-        <translation type="vanished">Shift+&quot;</translation>
+        <translation type="obsolete">Shift+&quot;</translation>
     </message>
     <message>
         <source>Shift+#</source>
-        <translation type="vanished">Shift+#</translation>
+        <translation type="obsolete">Shift+#</translation>
     </message>
     <message>
         <source>Shift+%</source>
-        <translation type="vanished">Shift+%</translation>
+        <translation type="obsolete">Shift+%</translation>
     </message>
     <message>
         <source>Shift+^</source>
-        <translation type="vanished">Shift+&amp;</translation>
+        <translation type="obsolete">Shift+&amp;</translation>
     </message>
     <message>
         <source>Shift+&amp;</source>
-        <translation type="vanished">Shift+/</translation>
+        <translation type="obsolete">Shift+/</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="127"/>
+        <location filename="context/confmanager.cpp" line="142"/>
         <source>Z</source>
         <comment>first key mapping for bottom left C</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="128"/>
+        <location filename="context/confmanager.cpp" line="143"/>
         <source>S</source>
         <comment>first key mapping for bottom C#</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="129"/>
+        <location filename="context/confmanager.cpp" line="144"/>
         <source>X</source>
         <comment>first key mapping for bottom D</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="130"/>
+        <location filename="context/confmanager.cpp" line="145"/>
         <source>D</source>
         <comment>first key mapping for bottom D#</comment>
         <translation type="unfinished">Ре</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="131"/>
+        <location filename="context/confmanager.cpp" line="146"/>
         <source>C</source>
         <comment>first key mapping for bottom E</comment>
         <translation type="unfinished">До</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="132"/>
+        <location filename="context/confmanager.cpp" line="147"/>
         <source>V</source>
         <comment>first key mapping for bottom F</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="133"/>
+        <location filename="context/confmanager.cpp" line="148"/>
         <source>G</source>
         <comment>first key mapping for bottom F#</comment>
         <translation type="unfinished">Сол</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="134"/>
+        <location filename="context/confmanager.cpp" line="149"/>
         <source>B</source>
         <comment>first key mapping for bottom G</comment>
         <translation type="unfinished">Ти</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="135"/>
+        <location filename="context/confmanager.cpp" line="150"/>
         <source>H</source>
         <comment>first key mapping for bottom G#</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="136"/>
+        <location filename="context/confmanager.cpp" line="151"/>
         <source>N</source>
         <comment>first key mapping for bottom A</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="137"/>
+        <location filename="context/confmanager.cpp" line="152"/>
         <source>J</source>
         <comment>first key mapping for bottom A#</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="138"/>
+        <location filename="context/confmanager.cpp" line="153"/>
         <source>M</source>
         <comment>first key mapping for bottom B</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="139"/>
+        <location filename="context/confmanager.cpp" line="154"/>
         <source>,</source>
         <comment>first key mapping for bottom right C</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="145"/>
+        <location filename="context/confmanager.cpp" line="160"/>
         <source>Q</source>
         <comment>first key mapping for upper left C</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="146"/>
+        <location filename="context/confmanager.cpp" line="161"/>
         <source>2</source>
         <comment>first key mapping for upper C#</comment>
         <translation type="unfinished">2</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="147"/>
+        <location filename="context/confmanager.cpp" line="162"/>
         <source>W</source>
         <comment>first key mapping for upper D</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="148"/>
+        <location filename="context/confmanager.cpp" line="163"/>
         <source>3</source>
         <comment>first key mapping for upper D#</comment>
         <translation type="unfinished">3</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="149"/>
+        <location filename="context/confmanager.cpp" line="164"/>
         <source>E</source>
         <comment>first key mapping for upper E</comment>
         <translation type="unfinished">Ми</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="150"/>
+        <location filename="context/confmanager.cpp" line="165"/>
         <source>R</source>
         <comment>first key mapping for upper F</comment>
         <translation type="unfinished">Д</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="151"/>
+        <location filename="context/confmanager.cpp" line="166"/>
         <source>5</source>
         <comment>first key mapping for upper F#</comment>
         <translation type="unfinished">5</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="152"/>
+        <location filename="context/confmanager.cpp" line="167"/>
         <source>T</source>
         <comment>first key mapping for upper G</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="153"/>
+        <location filename="context/confmanager.cpp" line="168"/>
         <source>6</source>
         <comment>first key mapping for upper G#</comment>
         <translation type="unfinished">6</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="154"/>
+        <location filename="context/confmanager.cpp" line="169"/>
         <source>Y</source>
         <comment>first key mapping for upper A</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="155"/>
+        <location filename="context/confmanager.cpp" line="170"/>
         <source>7</source>
         <comment>first key mapping for upper A#</comment>
         <translation type="unfinished">7</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="156"/>
+        <location filename="context/confmanager.cpp" line="171"/>
         <source>U</source>
         <comment>first key mapping for upper B</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="157"/>
+        <location filename="context/confmanager.cpp" line="172"/>
         <source>I</source>
         <comment>first key mapping for upper right C</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="163"/>
+        <location filename="context/confmanager.cpp" line="178"/>
         <source>Shift+Z</source>
         <comment>second key mapping for bottom left C</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="164"/>
+        <location filename="context/confmanager.cpp" line="179"/>
         <source>Shift+S</source>
         <comment>second key mapping for bottom C#</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="165"/>
+        <location filename="context/confmanager.cpp" line="180"/>
         <source>Shift+X</source>
         <comment>second key mapping for bottom D</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="166"/>
+        <location filename="context/confmanager.cpp" line="181"/>
         <source>Shift+D</source>
         <comment>second key mapping for bottom D#</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="167"/>
+        <location filename="context/confmanager.cpp" line="182"/>
         <source>Shift+C</source>
         <comment>second key mapping for bottom E</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="168"/>
+        <location filename="context/confmanager.cpp" line="183"/>
         <source>Shift+V</source>
         <comment>second key mapping for bottom F</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="169"/>
+        <location filename="context/confmanager.cpp" line="184"/>
         <source>Shift+G</source>
         <comment>second key mapping for bottom F#</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="170"/>
+        <location filename="context/confmanager.cpp" line="185"/>
         <source>Shift+B</source>
         <comment>second key mapping for bottom G</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="171"/>
+        <location filename="context/confmanager.cpp" line="186"/>
         <source>Shift+H</source>
         <comment>second key mapping for bottom G#</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="172"/>
+        <location filename="context/confmanager.cpp" line="187"/>
         <source>Shift+N</source>
         <comment>second key mapping for bottom A</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="173"/>
+        <location filename="context/confmanager.cpp" line="188"/>
         <source>Shift+J</source>
         <comment>second key mapping for bottom A#</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="174"/>
+        <location filename="context/confmanager.cpp" line="189"/>
         <source>Shift+M</source>
         <comment>second key mapping for bottom B</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="175"/>
+        <location filename="context/confmanager.cpp" line="190"/>
         <source>Shift+&lt;</source>
         <comment>second key mapping for bottom right C</comment>
         <translation type="unfinished">Shift+;</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="181"/>
+        <location filename="context/confmanager.cpp" line="196"/>
         <source>Shift+Q</source>
         <comment>second key mapping for upper left C</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="182"/>
+        <location filename="context/confmanager.cpp" line="197"/>
         <source>Shift+@</source>
         <comment>second key mapping for upper C#</comment>
         <translation type="unfinished">Shift+&quot;</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="183"/>
+        <location filename="context/confmanager.cpp" line="198"/>
         <source>Shift+W</source>
         <comment>second key mapping for upper D</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="184"/>
+        <location filename="context/confmanager.cpp" line="199"/>
         <source>Shift+#</source>
         <comment>second key mapping for upper D#</comment>
         <translation type="unfinished">Shift+#</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="185"/>
+        <location filename="context/confmanager.cpp" line="200"/>
         <source>Shift+E</source>
         <comment>second key mapping for upper E</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="186"/>
+        <location filename="context/confmanager.cpp" line="201"/>
         <source>Shift+R</source>
         <comment>second key mapping for upper F</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="187"/>
+        <location filename="context/confmanager.cpp" line="202"/>
         <source>Shift+%</source>
         <comment>second key mapping for upper F#</comment>
         <translation type="unfinished">Shift+%</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="188"/>
+        <location filename="context/confmanager.cpp" line="203"/>
         <source>Shift+T</source>
         <comment>second key mapping for upper G</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="189"/>
+        <location filename="context/confmanager.cpp" line="204"/>
         <source>Shift+^</source>
         <comment>second key mapping for upper G#</comment>
         <translation type="unfinished">Shift+&amp;</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="190"/>
+        <location filename="context/confmanager.cpp" line="205"/>
         <source>Shift+Y</source>
         <comment>second key mapping for upper A</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="191"/>
+        <location filename="context/confmanager.cpp" line="206"/>
         <source>Shift+&amp;</source>
         <comment>second key mapping for upper A#</comment>
         <translation type="unfinished">Shift+/</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="192"/>
+        <location filename="context/confmanager.cpp" line="207"/>
         <source>Shift+U</source>
         <comment>second key mapping for upper B</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="193"/>
+        <location filename="context/confmanager.cpp" line="208"/>
         <source>Shift+I</source>
         <comment>second key mapping for upper right C</comment>
         <translation type="unfinished"></translation>
@@ -769,480 +769,480 @@
     <name>Config</name>
     <message>
         <source>Settings</source>
-        <translation type="vanished">Подешавања</translation>
+        <translation type="obsolete">Подешавања</translation>
     </message>
     <message>
         <source>General</source>
-        <translation type="vanished">Опште</translation>
+        <translation type="obsolete">Опште</translation>
     </message>
     <message>
         <source>Interface</source>
-        <translation type="vanished">Сучеље</translation>
+        <translation type="obsolete">Сучеље</translation>
     </message>
     <message>
         <source>Middle C → 60, then 61</source>
-        <translation type="vanished">Основна »До« → 60, затим 61</translation>
+        <translation type="obsolete">Основна »До« → 60, затим 61</translation>
     </message>
     <message>
         <source>Middle C → C3, then C♯3</source>
-        <translation type="vanished">Основна »До« → C3, затим C♯3</translation>
+        <translation type="obsolete">Основна »До« → C3, затим C♯3</translation>
     </message>
     <message>
         <source>Middle C → C3, then D♭3</source>
-        <translation type="vanished">Основна »До« → C3, затим D♭3</translation>
+        <translation type="obsolete">Основна »До« → C3, затим D♭3</translation>
     </message>
     <message>
         <source>Middle C → C4, then C♯4</source>
-        <translation type="vanished">Основна »До« → C4, затим C♯4</translation>
+        <translation type="obsolete">Основна »До« → C4, затим C♯4</translation>
     </message>
     <message>
         <source>Middle C → C4, then D♭4</source>
-        <translation type="vanished">Основна »До« → C4, затим D♭4</translation>
+        <translation type="obsolete">Основна »До« → C4, затим D♭4</translation>
     </message>
     <message>
         <source>Middle C → C5, then C♯5</source>
-        <translation type="vanished">Основна »До« → C5, затим C♯5</translation>
+        <translation type="obsolete">Основна »До« → C5, затим C♯5</translation>
     </message>
     <message>
         <source>Middle C → C5, then D♭5</source>
-        <translation type="vanished">Основна »До« → C5, затим D♭5</translation>
+        <translation type="obsolete">Основна »До« → C5, затим D♭5</translation>
     </message>
     <message>
         <source>Key names</source>
-        <translation type="vanished">Називи нота</translation>
+        <translation type="obsolete">Називи нота</translation>
     </message>
     <message>
         <source>Language</source>
-        <translation type="vanished">Језик</translation>
+        <translation type="obsolete">Језик</translation>
     </message>
     <message>
         <source>Input / Output</source>
-        <translation type="vanished">Улаз/Излаз</translation>
+        <translation type="obsolete">Улаз/Излаз</translation>
     </message>
     <message>
         <source>Audio backend</source>
-        <translation type="vanished">Звучни посредник</translation>
+        <translation type="obsolete">Звучни посредник</translation>
     </message>
     <message>
         <source>Buffer size</source>
-        <translation type="vanished">Величина бафера</translation>
+        <translation type="obsolete">Величина бафера</translation>
     </message>
     <message>
         <source>Midi input</source>
-        <translation type="vanished">Миди-улаз</translation>
+        <translation type="obsolete">Миди-улаз</translation>
     </message>
     <message>
         <source>Synth</source>
-        <translation type="vanished">Синтесајзер</translation>
+        <translation type="obsolete">Синтесајзер</translation>
     </message>
     <message>
         <source>Reverb</source>
-        <translation type="vanished">Јека</translation>
+        <translation type="obsolete">Јека</translation>
     </message>
     <message>
         <source>Level</source>
-        <translation type="vanished">Количина</translation>
+        <translation type="obsolete">Количина</translation>
     </message>
     <message>
         <source>Room</source>
-        <translation type="vanished">Соба</translation>
+        <translation type="obsolete">Соба</translation>
     </message>
     <message>
         <source>Width</source>
-        <translation type="vanished">Ширина</translation>
+        <translation type="obsolete">Ширина</translation>
     </message>
     <message>
         <source>Damp</source>
-        <translation type="vanished">Пригушење</translation>
+        <translation type="obsolete">Пригушење</translation>
     </message>
     <message>
         <source>Chorus</source>
-        <translation type="vanished">Хорус</translation>
+        <translation type="obsolete">Хорус</translation>
     </message>
     <message>
         <source>Frequency</source>
-        <translation type="vanished">Учестаност</translation>
+        <translation type="obsolete">Учестаност</translation>
     </message>
     <message>
         <source>Depth</source>
-        <translation type="vanished">Дубина</translation>
+        <translation type="obsolete">Дубина</translation>
     </message>
     <message>
         <source>Gain (dB)</source>
-        <translation type="vanished">Појачање (dB)</translation>
+        <translation type="obsolete">Појачање (dB)</translation>
     </message>
     <message>
         <source>Reset</source>
-        <translation type="vanished">Поврати</translation>
+        <translation type="obsolete">Поврати</translation>
     </message>
     <message>
         <source>Options</source>
-        <translation type="vanished">Опције</translation>
+        <translation type="obsolete">Опције</translation>
     </message>
     <message>
         <source>remove blank at start</source>
-        <translation type="vanished">уклони почетну празнину</translation>
+        <translation type="obsolete">уклони почетну празнину</translation>
     </message>
     <message>
         <source>trim to loop</source>
-        <translation type="vanished">орежи према вртњи</translation>
+        <translation type="obsolete">орежи према вртњи</translation>
     </message>
     <message>
         <source>Wav file import</source>
-        <translation type="vanished">Увоз вав-датотека</translation>
+        <translation type="obsolete">Увоз вав-датотека</translation>
     </message>
     <message>
         <source>change linked sample</source>
-        <translation type="vanished">мењај и повезани узорак</translation>
+        <translation type="obsolete">мењај и повезани узорак</translation>
     </message>
     <message>
         <source>Stereo editing</source>
-        <translation type="vanished">Стерео уређивање</translation>
+        <translation type="obsolete">Стерео уређивање</translation>
     </message>
     <message>
         <source>Selection</source>
-        <translation type="vanished">Избор</translation>
+        <translation type="obsolete">Избор</translation>
     </message>
     <message>
         <source>Alternate background</source>
-        <translation type="vanished">Додатна позадина</translation>
+        <translation type="obsolete">Додатна позадина</translation>
     </message>
     <message>
         <source>Text</source>
-        <translation type="vanished">Текст</translation>
+        <translation type="obsolete">Текст</translation>
     </message>
     <message>
         <source>Window</source>
-        <translation type="vanished">Прозор</translation>
+        <translation type="obsolete">Прозор</translation>
     </message>
     <message>
         <source>Background</source>
-        <translation type="vanished">Позадина</translation>
+        <translation type="obsolete">Позадина</translation>
     </message>
     <message>
         <source>Button</source>
-        <translation type="vanished">Дугме</translation>
+        <translation type="obsolete">Дугме</translation>
     </message>
     <message>
         <source>Color theme</source>
-        <translation type="vanished">Изглед</translation>
+        <translation type="obsolete">Изглед</translation>
     </message>
     <message>
         <source>List and table</source>
-        <translation type="vanished">Списак и табела</translation>
+        <translation type="obsolete">Списак и табела</translation>
     </message>
     <message>
         <source>Toolbar</source>
-        <translation type="vanished">Алатница</translation>
+        <translation type="obsolete">Алатница</translation>
     </message>
     <message>
         <source>Available actions</source>
-        <translation type="vanished">Доступне радње</translation>
+        <translation type="obsolete">Доступне радње</translation>
     </message>
     <message>
         <source>Keyboard</source>
-        <translation type="vanished">Клавијатура</translation>
+        <translation type="obsolete">Клавијатура</translation>
     </message>
     <message>
         <source>Octave #1</source>
-        <translation type="vanished">1. oктава</translation>
+        <translation type="obsolete">1. oктава</translation>
     </message>
     <message>
         <source>Octave #2</source>
-        <translation type="vanished">2. oктава</translation>
+        <translation type="obsolete">2. oктава</translation>
     </message>
     <message>
         <source>Octave #3</source>
-        <translation type="vanished">3. oктава</translation>
+        <translation type="obsolete">3. oктава</translation>
     </message>
     <message>
         <source>Octave #4</source>
-        <translation type="vanished">4. oктава</translation>
+        <translation type="obsolete">4. oктава</translation>
     </message>
     <message>
         <source>C</source>
-        <translation type="vanished">До</translation>
+        <translation type="obsolete">До</translation>
     </message>
     <message>
         <source>C#</source>
-        <translation type="vanished">До#</translation>
+        <translation type="obsolete">До#</translation>
     </message>
     <message>
         <source>D</source>
-        <translation type="vanished">Ре</translation>
+        <translation type="obsolete">Ре</translation>
     </message>
     <message>
         <source>D#</source>
-        <translation type="vanished">Ре#</translation>
+        <translation type="obsolete">Ре#</translation>
     </message>
     <message>
         <source>E</source>
-        <translation type="vanished">Ми</translation>
+        <translation type="obsolete">Ми</translation>
     </message>
     <message>
         <source>F</source>
-        <translation type="vanished">Фа</translation>
+        <translation type="obsolete">Фа</translation>
     </message>
     <message>
         <source>F#</source>
-        <translation type="vanished">Фа#</translation>
+        <translation type="obsolete">Фа#</translation>
     </message>
     <message>
         <source>G</source>
-        <translation type="vanished">Сол</translation>
+        <translation type="obsolete">Сол</translation>
     </message>
     <message>
         <source>G#</source>
-        <translation type="vanished">Сол#</translation>
+        <translation type="obsolete">Сол#</translation>
     </message>
     <message>
         <source>A</source>
-        <translation type="vanished">Ла</translation>
+        <translation type="obsolete">Ла</translation>
     </message>
     <message>
         <source>A#</source>
-        <translation type="vanished">Ла#</translation>
+        <translation type="obsolete">Ла#</translation>
     </message>
     <message>
         <source>B</source>
-        <translation type="vanished">Ти</translation>
+        <translation type="obsolete">Ти</translation>
     </message>
     <message>
         <source>Default velocity</source>
-        <translation type="vanished">Уобичајена јачина удара</translation>
+        <translation type="obsolete">Уобичајена јачина удара</translation>
     </message>
     <message>
         <source>First C</source>
-        <translation type="vanished">Почетна »До«</translation>
+        <translation type="obsolete">Почетна »До«</translation>
     </message>
     <message>
         <source>Close</source>
-        <translation type="vanished">Затвори</translation>
+        <translation type="obsolete">Затвори</translation>
     </message>
     <message>
         <source>Information</source>
-        <translation type="vanished">Подаци</translation>
+        <translation type="obsolete">Подаци</translation>
     </message>
     <message>
         <source>This modification will be applied during the next start of the software.</source>
-        <translation type="vanished">Ова измена биће примењена по поновном покретању програма.</translation>
+        <translation type="obsolete">Ова измена биће примењена по поновном покретању програма.</translation>
     </message>
     <message>
         <source>Choose a color</source>
-        <translation type="vanished">Одабир боје</translation>
+        <translation type="obsolete">Одабир боје</translation>
     </message>
     <message>
         <source>---- separator ----</source>
-        <translation type="vanished">---- раздвајач ----</translation>
+        <translation type="obsolete">---- раздвајач ----</translation>
     </message>
     <message>
         <source>z</source>
         <translatorcomment>default mapping of the keyboard</translatorcomment>
-        <translation type="vanished">ж</translation>
+        <translation type="obsolete">ж</translation>
     </message>
     <message>
         <source>s</source>
-        <translation type="vanished">с</translation>
+        <translation type="obsolete">с</translation>
     </message>
     <message>
         <source>x</source>
-        <translation type="vanished">џ</translation>
+        <translation type="obsolete">џ</translation>
     </message>
     <message>
         <source>d</source>
-        <translation type="vanished">д</translation>
+        <translation type="obsolete">д</translation>
     </message>
     <message>
         <source>c</source>
-        <translation type="vanished">ц</translation>
+        <translation type="obsolete">ц</translation>
     </message>
     <message>
         <source>v</source>
-        <translation type="vanished">в</translation>
+        <translation type="obsolete">в</translation>
     </message>
     <message>
         <source>g</source>
-        <translation type="vanished">г</translation>
+        <translation type="obsolete">г</translation>
     </message>
     <message>
         <source>b</source>
-        <translation type="vanished">б</translation>
+        <translation type="obsolete">б</translation>
     </message>
     <message>
         <source>h</source>
-        <translation type="vanished">х</translation>
+        <translation type="obsolete">х</translation>
     </message>
     <message>
         <source>n</source>
-        <translation type="vanished">н</translation>
+        <translation type="obsolete">н</translation>
     </message>
     <message>
         <source>j</source>
-        <translation type="vanished">ј</translation>
+        <translation type="obsolete">ј</translation>
     </message>
     <message>
         <source>m</source>
-        <translation type="vanished">м</translation>
+        <translation type="obsolete">м</translation>
     </message>
     <message>
         <source>,</source>
-        <translation type="vanished">,</translation>
+        <translation type="obsolete">,</translation>
     </message>
     <message>
         <source>q</source>
-        <translation type="vanished">љ</translation>
+        <translation type="obsolete">љ</translation>
     </message>
     <message>
         <source>2</source>
-        <translation type="vanished">2</translation>
+        <translation type="obsolete">2</translation>
     </message>
     <message>
         <source>w</source>
-        <translation type="vanished">њ</translation>
+        <translation type="obsolete">њ</translation>
     </message>
     <message>
         <source>3</source>
-        <translation type="vanished">3</translation>
+        <translation type="obsolete">3</translation>
     </message>
     <message>
         <source>e</source>
-        <translation type="vanished">е</translation>
+        <translation type="obsolete">е</translation>
     </message>
     <message>
         <source>r</source>
-        <translation type="vanished">р</translation>
+        <translation type="obsolete">р</translation>
     </message>
     <message>
         <source>5</source>
-        <translation type="vanished">5</translation>
+        <translation type="obsolete">5</translation>
     </message>
     <message>
         <source>t</source>
-        <translation type="vanished">т</translation>
+        <translation type="obsolete">т</translation>
     </message>
     <message>
         <source>6</source>
-        <translation type="vanished">6</translation>
+        <translation type="obsolete">6</translation>
     </message>
     <message>
         <source>y</source>
-        <translation type="vanished">з</translation>
+        <translation type="obsolete">з</translation>
     </message>
     <message>
         <source>7</source>
-        <translation type="vanished">7</translation>
+        <translation type="obsolete">7</translation>
     </message>
     <message>
         <source>u</source>
-        <translation type="vanished">у</translation>
+        <translation type="obsolete">у</translation>
     </message>
     <message>
         <source>i</source>
-        <translation type="vanished">и</translation>
+        <translation type="obsolete">и</translation>
     </message>
     <message>
         <source>Shift+z</source>
-        <translation type="vanished">Shift+ж</translation>
+        <translation type="obsolete">Shift+ж</translation>
     </message>
     <message>
         <source>Shift+s</source>
-        <translation type="vanished">Shift+с</translation>
+        <translation type="obsolete">Shift+с</translation>
     </message>
     <message>
         <source>Shift+x</source>
-        <translation type="vanished">Shift+џ</translation>
+        <translation type="obsolete">Shift+џ</translation>
     </message>
     <message>
         <source>Shift+d</source>
-        <translation type="vanished">Shift+д</translation>
+        <translation type="obsolete">Shift+д</translation>
     </message>
     <message>
         <source>Shift+c</source>
-        <translation type="vanished">Shift+ц</translation>
+        <translation type="obsolete">Shift+ц</translation>
     </message>
     <message>
         <source>Shift+v</source>
-        <translation type="vanished">Shift+в</translation>
+        <translation type="obsolete">Shift+в</translation>
     </message>
     <message>
         <source>Shift+g</source>
-        <translation type="vanished">Shift+г</translation>
+        <translation type="obsolete">Shift+г</translation>
     </message>
     <message>
         <source>Shift+b</source>
-        <translation type="vanished">Shift+б</translation>
+        <translation type="obsolete">Shift+б</translation>
     </message>
     <message>
         <source>Shift+h</source>
-        <translation type="vanished">Shift+х</translation>
+        <translation type="obsolete">Shift+х</translation>
     </message>
     <message>
         <source>Shift+n</source>
-        <translation type="vanished">Shift+н</translation>
+        <translation type="obsolete">Shift+н</translation>
     </message>
     <message>
         <source>Shift+j</source>
-        <translation type="vanished">Shift+ј</translation>
+        <translation type="obsolete">Shift+ј</translation>
     </message>
     <message>
         <source>Shift+m</source>
-        <translation type="vanished">Shift+м</translation>
+        <translation type="obsolete">Shift+м</translation>
     </message>
     <message>
         <source>Shift+&lt;</source>
-        <translation type="vanished">Shift+;</translation>
+        <translation type="obsolete">Shift+;</translation>
     </message>
     <message>
         <source>Shift+q</source>
-        <translation type="vanished">Shift+љ</translation>
+        <translation type="obsolete">Shift+љ</translation>
     </message>
     <message>
         <source>Shift+@</source>
-        <translation type="vanished">Shift+&quot;</translation>
+        <translation type="obsolete">Shift+&quot;</translation>
     </message>
     <message>
         <source>Shift+w</source>
-        <translation type="vanished">Shift+њ</translation>
+        <translation type="obsolete">Shift+њ</translation>
     </message>
     <message>
         <source>Shift+#</source>
-        <translation type="vanished">Shift+#</translation>
+        <translation type="obsolete">Shift+#</translation>
     </message>
     <message>
         <source>Shift+e</source>
-        <translation type="vanished">Shift+е</translation>
+        <translation type="obsolete">Shift+е</translation>
     </message>
     <message>
         <source>Shift+r</source>
-        <translation type="vanished">Shift+р</translation>
+        <translation type="obsolete">Shift+р</translation>
     </message>
     <message>
         <source>Shift+%</source>
-        <translation type="vanished">Shift+%</translation>
+        <translation type="obsolete">Shift+%</translation>
     </message>
     <message>
         <source>Shift+t</source>
-        <translation type="vanished">Shift+т</translation>
+        <translation type="obsolete">Shift+т</translation>
     </message>
     <message>
         <source>Shift+^</source>
-        <translation type="vanished">Shift+&amp;</translation>
+        <translation type="obsolete">Shift+&amp;</translation>
     </message>
     <message>
         <source>Shift+y</source>
-        <translation type="vanished">Shift+з</translation>
+        <translation type="obsolete">Shift+з</translation>
     </message>
     <message>
         <source>Shift+&amp;</source>
-        <translation type="vanished">Shift+/</translation>
+        <translation type="obsolete">Shift+/</translation>
     </message>
     <message>
         <source>Shift+u</source>
-        <translation type="vanished">Shift+у</translation>
+        <translation type="obsolete">Shift+у</translation>
     </message>
     <message>
         <source>Shift+i</source>
-        <translation type="vanished">Shift+и</translation>
+        <translation type="obsolete">Shift+и</translation>
     </message>
 </context>
 <context>
@@ -1330,116 +1330,142 @@
 <context>
     <name>ConfigSectionInterface</name>
     <message>
-        <location filename="context/interface/configsectioninterface.ui" line="28"/>
+        <location filename="context/interface/configsectioninterface.ui" line="67"/>
         <source>Language</source>
         <translation>Језик</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectioninterface.ui" line="47"/>
+        <location filename="context/interface/configsectioninterface.ui" line="80"/>
         <source>Key names</source>
         <translation>Називи нота</translation>
     </message>
-    <message>
-        <location filename="context/interface/configsectioninterface.ui" line="67"/>
+    <message utf8="true">
+        <location filename="context/interface/configsectioninterface.ui" line="29"/>
         <source>Middle C → 60, then 61</source>
         <translation>Основна »До« → 60, затим 61</translation>
     </message>
-    <message>
-        <location filename="context/interface/configsectioninterface.ui" line="72"/>
+    <message utf8="true">
+        <location filename="context/interface/configsectioninterface.ui" line="34"/>
         <source>Middle C → C3, then C♯3</source>
         <translation>Основна »До« → C3, затим C♯3</translation>
     </message>
-    <message>
-        <location filename="context/interface/configsectioninterface.ui" line="77"/>
+    <message utf8="true">
+        <location filename="context/interface/configsectioninterface.ui" line="39"/>
         <source>Middle C → C3, then D♭3</source>
         <translation>Основна »До« → C3, затим D♭3</translation>
     </message>
-    <message>
-        <location filename="context/interface/configsectioninterface.ui" line="82"/>
+    <message utf8="true">
+        <location filename="context/interface/configsectioninterface.ui" line="44"/>
         <source>Middle C → C4, then C♯4</source>
         <translation>Основна »До« → C4, затим C♯4</translation>
     </message>
-    <message>
-        <location filename="context/interface/configsectioninterface.ui" line="87"/>
+    <message utf8="true">
+        <location filename="context/interface/configsectioninterface.ui" line="49"/>
         <source>Middle C → C4, then D♭4</source>
         <translation>Основна »До« → C4, затим D♭4</translation>
     </message>
-    <message>
-        <location filename="context/interface/configsectioninterface.ui" line="92"/>
+    <message utf8="true">
+        <location filename="context/interface/configsectioninterface.ui" line="54"/>
         <source>Middle C → C5, then C♯5</source>
         <translation>Основна »До« → C5, затим C♯5</translation>
     </message>
-    <message>
-        <location filename="context/interface/configsectioninterface.ui" line="97"/>
+    <message utf8="true">
+        <location filename="context/interface/configsectioninterface.ui" line="59"/>
         <source>Middle C → C5, then D♭5</source>
         <translation>Основна »До« → C5, затим D♭5</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectioninterface.ui" line="126"/>
+        <location filename="context/interface/configsectioninterface.ui" line="87"/>
+        <source>Sort divisions</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="context/interface/configsectioninterface.ui" line="108"/>
+        <source>by key range</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="context/interface/configsectioninterface.ui" line="113"/>
+        <source>by velocity range</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="context/interface/configsectioninterface.ui" line="118"/>
+        <source>in alphabetical order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="context/interface/configsectioninterface.ui" line="123"/>
+        <source>none</source>
+        <comment>speaking of the &quot;sort divisions&quot;</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="context/interface/configsectioninterface.ui" line="139"/>
         <source>Theme</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/interface/configsectioninterface.ui" line="232"/>
+        <location filename="context/interface/configsectioninterface.ui" line="245"/>
         <source>Selection</source>
         <translation>Избор</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectioninterface.ui" line="245"/>
+        <location filename="context/interface/configsectioninterface.ui" line="258"/>
         <source>Alternate background</source>
         <translation>Додатна позадина</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectioninterface.ui" line="292"/>
-        <location filename="context/interface/configsectioninterface.ui" line="318"/>
+        <location filename="context/interface/configsectioninterface.ui" line="305"/>
         <location filename="context/interface/configsectioninterface.ui" line="331"/>
-        <location filename="context/interface/configsectioninterface.ui" line="598"/>
+        <location filename="context/interface/configsectioninterface.ui" line="344"/>
+        <location filename="context/interface/configsectioninterface.ui" line="611"/>
         <source>Text</source>
         <translation>Текст</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectioninterface.ui" line="305"/>
+        <location filename="context/interface/configsectioninterface.ui" line="318"/>
         <source>Window</source>
         <translation>Прозор</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectioninterface.ui" line="344"/>
         <location filename="context/interface/configsectioninterface.ui" line="357"/>
-        <location filename="context/interface/configsectioninterface.ui" line="401"/>
-        <location filename="context/interface/configsectioninterface.ui" line="585"/>
+        <location filename="context/interface/configsectioninterface.ui" line="370"/>
+        <location filename="context/interface/configsectioninterface.ui" line="414"/>
+        <location filename="context/interface/configsectioninterface.ui" line="598"/>
         <source>Background</source>
         <translation>Позадина</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectioninterface.ui" line="414"/>
+        <location filename="context/interface/configsectioninterface.ui" line="427"/>
         <source>Button</source>
         <translation>Дугме</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectioninterface.ui" line="624"/>
+        <location filename="context/interface/configsectioninterface.ui" line="637"/>
         <source>Color theme</source>
         <translation>Изглед</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectioninterface.ui" line="647"/>
+        <location filename="context/interface/configsectioninterface.ui" line="660"/>
         <source>List and table</source>
         <translation>Списак и табела</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectioninterface.ui" line="663"/>
+        <location filename="context/interface/configsectioninterface.ui" line="676"/>
         <source>This modification will be applied during the next start of the software.</source>
         <translation>Ова измена биће примењена по поновном покретању програма.</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectioninterface.cpp" line="151"/>
-        <location filename="context/interface/configsectioninterface.cpp" line="163"/>
-        <location filename="context/interface/configsectioninterface.cpp" line="175"/>
-        <location filename="context/interface/configsectioninterface.cpp" line="187"/>
-        <location filename="context/interface/configsectioninterface.cpp" line="199"/>
-        <location filename="context/interface/configsectioninterface.cpp" line="211"/>
-        <location filename="context/interface/configsectioninterface.cpp" line="223"/>
-        <location filename="context/interface/configsectioninterface.cpp" line="235"/>
-        <location filename="context/interface/configsectioninterface.cpp" line="247"/>
+        <location filename="context/interface/configsectioninterface.cpp" line="156"/>
+        <location filename="context/interface/configsectioninterface.cpp" line="168"/>
+        <location filename="context/interface/configsectioninterface.cpp" line="180"/>
+        <location filename="context/interface/configsectioninterface.cpp" line="192"/>
+        <location filename="context/interface/configsectioninterface.cpp" line="204"/>
+        <location filename="context/interface/configsectioninterface.cpp" line="216"/>
+        <location filename="context/interface/configsectioninterface.cpp" line="228"/>
+        <location filename="context/interface/configsectioninterface.cpp" line="240"/>
+        <location filename="context/interface/configsectioninterface.cpp" line="252"/>
         <source>Select a color</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1772,7 +1798,7 @@ repository</source>
     </message>
     <message>
         <source>http://polyphone-soundfonts.com/en</source>
-        <translation type="vanished">http://polyphone-soundfonts.com/en</translation>
+        <translation type="obsolete">http://polyphone-soundfonts.com/en</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_about.cpp" line="50"/>
@@ -1782,7 +1808,7 @@ repository</source>
     <message>
         <source>Davy Triponney</source>
         <comment>this is my name</comment>
-        <translation type="vanished">Дејви Трипони (Davy Triponney)</translation>
+        <translation type="obsolete">Дејви Трипони (Davy Triponney)</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_about.cpp" line="54"/>
@@ -1833,7 +1859,7 @@ repository</source>
         <source>Steve Clarke</source>
         <translation>Стив Кларк (Steve Clarke)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="dialogs/dialog_about.cpp" line="72"/>
         <source>F.J. Martínez Murcia</source>
         <translation>Ф.Ј. Мартинез Мурција (F.J. Martínez Murcia)</translation>
@@ -1868,54 +1894,54 @@ repository</source>
     <name>DialogAttenuation</name>
     <message>
         <source>Adjust attenuations</source>
-        <translation type="vanished">Прилагоди пригушења</translation>
+        <translation type="obsolete">Прилагоди пригушења</translation>
     </message>
     <message>
         <source>Instruments</source>
-        <translation type="vanished">Инструменти</translation>
+        <translation type="obsolete">Инструменти</translation>
     </message>
     <message>
         <source>Possible offset</source>
-        <translation type="vanished">Могућ помак</translation>
+        <translation type="obsolete">Могућ помак</translation>
     </message>
     <message>
         <source>Attenuation range</source>
-        <translation type="vanished">Опсег пригушења</translation>
+        <translation type="obsolete">Опсег пригушења</translation>
     </message>
     <message>
         <source> dB</source>
-        <translation type="vanished"> dB</translation>
+        <translation type="obsolete"> dB</translation>
     </message>
     <message>
         <source>Desired value</source>
-        <translation type="vanished">Захтевана вредност</translation>
+        <translation type="obsolete">Захтевана вредност</translation>
     </message>
     <message>
         <source>Presets</source>
-        <translation type="vanished">Поставке</translation>
+        <translation type="obsolete">Поставке</translation>
     </message>
 </context>
 <context>
     <name>DialogCeleste</name>
     <message>
         <source>Celeste tuning</source>
-        <translation type="vanished">Челеста-угађање</translation>
+        <translation type="obsolete">Челеста-угађање</translation>
     </message>
     <message>
         <source>Number of beats per second at C4 (key 60)</source>
-        <translation type="vanished">Број битова по секунди на »До 4« (нота 60)</translation>
+        <translation type="obsolete">Број битова по секунди на »До 4« (нота 60)</translation>
     </message>
     <message>
         <source>The algebraic sign determines the tuning direction.</source>
-        <translation type="vanished">Алгебарски знак одређује правац угађања.</translation>
+        <translation type="obsolete">Алгебарски знак одређује правац угађања.</translation>
     </message>
     <message>
         <source>Division to the next octave</source>
-        <translation type="vanished">Део до наредне октаве</translation>
+        <translation type="obsolete">Део до наредне октаве</translation>
     </message>
     <message>
         <source>Number of beats per second (key </source>
-        <translation type="vanished">Број битова по секунди (нота </translation>
+        <translation type="obsolete">Број битова по секунди (нота </translation>
     </message>
 </context>
 <context>
@@ -1970,70 +1996,70 @@ repository</source>
     <name>DialogChangeVolume</name>
     <message>
         <source>Change volume</source>
-        <translation type="vanished">Промена гласноће</translation>
+        <translation type="obsolete">Промена гласноће</translation>
     </message>
     <message>
         <source>Add</source>
-        <translation type="vanished">Додај</translation>
+        <translation type="obsolete">Додај</translation>
     </message>
     <message>
         <source>Multiply</source>
-        <translation type="vanished">Помножи</translation>
+        <translation type="obsolete">Помножи</translation>
     </message>
     <message>
         <source>Normalize</source>
-        <translation type="vanished">Уједначи</translation>
+        <translation type="obsolete">Уједначи</translation>
     </message>
     <message>
         <source> %</source>
-        <translation type="vanished"> %</translation>
+        <translation type="obsolete"> %</translation>
     </message>
     <message>
         <source> dB</source>
-        <translation type="vanished"> dB</translation>
+        <translation type="obsolete"> dB</translation>
     </message>
 </context>
 <context>
     <name>DialogCommand</name>
     <message>
         <source>Use an external command</source>
-        <translation type="vanished">Употреба спољашње наредбе</translation>
+        <translation type="obsolete">Употреба спољашње наредбе</translation>
     </message>
     <message>
         <source>History</source>
-        <translation type="vanished">Историјат</translation>
+        <translation type="obsolete">Историјат</translation>
     </message>
     <message>
         <source>Command</source>
-        <translation type="vanished">Наредба</translation>
+        <translation type="obsolete">Наредба</translation>
     </message>
     <message>
         <source>Replace sample information if possible</source>
-        <translation type="vanished">Када је то могуће, замени податке узорка</translation>
+        <translation type="obsolete">Када је то могуће, замени податке узорка</translation>
     </message>
     <message>
         <source>Authorize stereo editing</source>
-        <translation type="vanished">Дозволи стерео уређивање</translation>
+        <translation type="obsolete">Дозволи стерео уређивање</translation>
     </message>
     <message>
         <source>Command example:</source>
-        <translation type="vanished">Команда пример:</translation>
+        <translation type="obsolete">Команда пример:</translation>
     </message>
     <message>
         <source>Executable file</source>
-        <translation type="vanished">Извршна датотека</translation>
+        <translation type="obsolete">Извршна датотека</translation>
     </message>
     <message>
         <source>Warning</source>
-        <translation type="vanished">Упозорење</translation>
+        <translation type="obsolete">Упозорење</translation>
     </message>
     <message>
         <source>You must enter a command with at least {wav} as argument.</source>
-        <translation type="vanished">Унетој наредби мора да се придружи бар {wav} као аргуменат.</translation>
+        <translation type="obsolete">Унетој наредби мора да се придружи бар {wav} као аргуменат.</translation>
     </message>
     <message>
         <source>The command must contain the argument {wav}.</source>
-        <translation type="vanished">Линија наредбе мора да садржи {wav} аргуменат.</translation>
+        <translation type="obsolete">Линија наредбе мора да садржи {wav} аргуменат.</translation>
     </message>
 </context>
 <context>
@@ -2088,128 +2114,128 @@ repository</source>
     <name>DialogDuplication</name>
     <message>
         <source>Division duplication</source>
-        <translation type="vanished">Удвостручавање делова</translation>
+        <translation type="obsolete">Удвостручавање делова</translation>
     </message>
     <message>
         <source>A division for each key</source>
-        <translation type="vanished">Један део за сваку ноту</translation>
+        <translation type="obsolete">Један део за сваку ноту</translation>
     </message>
     <message>
         <source>A division for each velocity range</source>
-        <translation type="vanished">Један део за сваки опсег јачине удара</translation>
+        <translation type="obsolete">Један део за сваки опсег јачине удара</translation>
     </message>
 </context>
 <context>
     <name>DialogExport</name>
     <message>
         <source>Export</source>
-        <translation type="vanished">Извези</translation>
+        <translation type="obsolete">Извези</translation>
     </message>
     <message>
         <source>Select all</source>
-        <translation type="vanished">Означи све</translation>
+        <translation type="obsolete">Означи све</translation>
     </message>
     <message>
         <source>Unselect all</source>
-        <translation type="vanished">Одзначи све</translation>
+        <translation type="obsolete">Одзначи све</translation>
     </message>
     <message>
         <source>Location</source>
-        <translation type="vanished">Место</translation>
+        <translation type="obsolete">Место</translation>
     </message>
     <message>
         <source>Format</source>
-        <translation type="vanished">Врста</translation>
+        <translation type="obsolete">Врста</translation>
     </message>
     <message>
         <source>preset number as prefix</source>
-        <translation type="vanished">број поставке као предложак</translation>
+        <translation type="obsolete">број поставке као предложак</translation>
     </message>
     <message>
         <source>one directory per bank</source>
-        <translation type="vanished">један директоријум по банци</translation>
+        <translation type="obsolete">један директоријум по банци</translation>
     </message>
     <message>
         <source>General Midi classification</source>
-        <translation type="vanished">Џенерал-миди распоред</translation>
+        <translation type="obsolete">Џенерал-миди распоред</translation>
     </message>
     <message>
         <source>High</source>
-        <translation type="vanished">Висок</translation>
+        <translation type="obsolete">Висок</translation>
     </message>
     <message>
         <source>Medium</source>
-        <translation type="vanished">Средњи</translation>
+        <translation type="obsolete">Средњи</translation>
     </message>
     <message>
         <source>Low</source>
-        <translation type="vanished">Низак</translation>
+        <translation type="obsolete">Низак</translation>
     </message>
     <message>
         <source>Quality</source>
-        <translation type="vanished">Квалитет</translation>
+        <translation type="obsolete">Квалитет</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="vanished">Поништи</translation>
+        <translation type="obsolete">Поништи</translation>
     </message>
     <message>
         <source>Choose a destination folder</source>
-        <translation type="vanished">Одаберите одредишни директоријум</translation>
+        <translation type="obsolete">Одаберите одредишни директоријум</translation>
     </message>
     <message>
         <source>Warning</source>
-        <translation type="vanished">Упозорење</translation>
+        <translation type="obsolete">Упозорење</translation>
     </message>
     <message>
         <source>Invalid directory.</source>
-        <translation type="vanished">Директоријум није ваљан.</translation>
+        <translation type="obsolete">Директоријум није ваљан.</translation>
     </message>
     <message>
         <source>In the case where several soundfonts are exported, the maximal number of presets per soundfonts is 127.</source>
-        <translation type="vanished">Код вишеструког извожења звукотека, највећи број поставки по звукотеци је 127.</translation>
+        <translation type="obsolete">Код вишеструког извожења звукотека, највећи број поставки по звукотеци је 127.</translation>
     </message>
     <message>
         <source>The maximal number of soundfont to export is 127.</source>
-        <translation type="vanished">Највећи број извежених звукотека је 127.</translation>
+        <translation type="obsolete">Највећи број извежених звукотека је 127.</translation>
     </message>
     <message>
         <source>At least one preset must be selected.</source>
-        <translation type="vanished">Морате одабрати бар једну поставку.</translation>
+        <translation type="obsolete">Морате одабрати бар једну поставку.</translation>
     </message>
 </context>
 <context>
     <name>DialogExportList</name>
     <message>
         <source>Export preset list</source>
-        <translation type="vanished">Извези списак поставки</translation>
+        <translation type="obsolete">Извези списак поставки</translation>
     </message>
     <message>
         <source>text copied in the clipboard</source>
-        <translation type="vanished">текст копиран у клипборд</translation>
+        <translation type="obsolete">текст копиран у клипборд</translation>
     </message>
     <message>
         <source>csv format</source>
-        <translation type="vanished">врста ЦСВ</translation>
+        <translation type="obsolete">врста ЦСВ</translation>
     </message>
     <message>
         <source>html table</source>
-        <translation type="vanished">ХТМЛ таблица</translation>
+        <translation type="obsolete">ХТМЛ таблица</translation>
     </message>
     <message>
         <source>Copy</source>
-        <translation type="vanished">Умножи</translation>
+        <translation type="obsolete">Умножи</translation>
     </message>
 </context>
 <context>
     <name>DialogFilterFrequencies</name>
     <message>
         <source>Filter frequencies</source>
-        <translation type="vanished">Филтрирање учестаности</translation>
+        <translation type="obsolete">Филтрирање учестаности</translation>
     </message>
     <message>
         <source>Put in red the part of frequencies to filter:</source>
-        <translation type="vanished">Сместите у црвено део учестаности за филтрирање :</translation>
+        <translation type="obsolete">Сместите у црвено део учестаности за филтрирање :</translation>
     </message>
 </context>
 <context>
@@ -2272,19 +2298,19 @@ repository</source>
     <name>DialogMagnetophone</name>
     <message>
         <source>Recorder</source>
-        <translation type="vanished">Магнетофон (снимач)</translation>
+        <translation type="obsolete">Магнетофон (снимач)</translation>
     </message>
     <message>
         <source>Save a record</source>
-        <translation type="vanished">Сачувај снимљено</translation>
+        <translation type="obsolete">Сачувај снимљено</translation>
     </message>
     <message>
         <source>Wav file (*.wav)</source>
-        <translation type="vanished">Вав-датотека (*.wav)</translation>
+        <translation type="obsolete">Вав-датотека (*.wav)</translation>
     </message>
     <message>
         <source>record</source>
-        <translation type="vanished">снимљено</translation>
+        <translation type="obsolete">снимљено</translation>
     </message>
 </context>
 <context>
@@ -2292,186 +2318,186 @@ repository</source>
     <message>
         <source>Mixture creation</source>
         <translatorcomment>Mixture = organ stop made of a combinaison of harmonics</translatorcomment>
-        <translation type="vanished">Стварање микстуре</translation>
+        <translation type="obsolete">Стварање микстуре</translation>
     </message>
     <message>
         <source>Name of the mixture:</source>
-        <translation type="vanished">Назив микстуре:</translation>
+        <translation type="obsolete">Назив микстуре:</translation>
     </message>
     <message>
         <source>Sample creation:</source>
-        <translation type="vanished">Стварање узорка:</translation>
+        <translation type="obsolete">Стварање узорка:</translation>
     </message>
     <message>
         <source>for every key</source>
-        <translation type="vanished">за сваку ноту</translation>
+        <translation type="obsolete">за сваку ноту</translation>
     </message>
     <message>
         <source>every 3 keys</source>
-        <translation type="vanished">за сваку 3. ноту</translation>
+        <translation type="obsolete">за сваку 3. ноту</translation>
     </message>
     <message>
         <source>every 6 keys</source>
-        <translation type="vanished">за сваку 6. ноту</translation>
+        <translation type="obsolete">за сваку 6. ноту</translation>
     </message>
     <message>
         <source>Auto loop</source>
-        <translation type="vanished">Сам врти</translation>
+        <translation type="obsolete">Сам врти</translation>
     </message>
     <message>
         <source>Stereo</source>
-        <translation type="vanished">Стерео</translation>
+        <translation type="obsolete">Стерео</translation>
     </message>
     <message>
         <source>Divisions</source>
-        <translation type="vanished">Делови</translation>
+        <translation type="obsolete">Делови</translation>
     </message>
     <message>
         <source>Key range</source>
-        <translation type="vanished">Нотни опсег</translation>
+        <translation type="obsolete">Нотни опсег</translation>
     </message>
     <message>
         <source>Ranks</source>
-        <translation type="vanished">Редослед</translation>
+        <translation type="obsolete">Редослед</translation>
     </message>
     <message>
         <source>Type</source>
-        <translation type="vanished">Врста</translation>
+        <translation type="obsolete">Врста</translation>
     </message>
     <message>
         <source>octave</source>
-        <translation type="vanished">октава</translation>
+        <translation type="obsolete">октава</translation>
     </message>
     <message>
         <source>fifth</source>
-        <translation type="vanished">квинта</translation>
+        <translation type="obsolete">квинта</translation>
     </message>
     <message>
         <source>third</source>
-        <translation type="vanished">терца</translation>
+        <translation type="obsolete">терца</translation>
     </message>
     <message>
         <source>seventh</source>
-        <translation type="vanished">септима</translation>
+        <translation type="obsolete">септима</translation>
     </message>
     <message>
         <source>ninth</source>
-        <translation type="vanished">деветина</translation>
+        <translation type="obsolete">деветина</translation>
     </message>
     <message>
         <source>eleventh</source>
-        <translation type="vanished">једанаестина</translation>
+        <translation type="obsolete">једанаестина</translation>
     </message>
     <message>
         <source>thirteenth</source>
-        <translation type="vanished">тринаестина</translation>
+        <translation type="obsolete">тринаестина</translation>
     </message>
     <message>
         <source>fifteenth</source>
-        <translation type="vanished">петнаестина</translation>
+        <translation type="obsolete">петнаестина</translation>
     </message>
     <message>
         <source>seventeenth</source>
-        <translation type="vanished">седамнаестина</translation>
+        <translation type="obsolete">седамнаестина</translation>
     </message>
     <message>
         <source>nineteenth</source>
-        <translation type="vanished">деветнаестина</translation>
+        <translation type="obsolete">деветнаестина</translation>
     </message>
     <message>
         <source>twenty-first</source>
-        <translation type="vanished">двадесетједнина</translation>
+        <translation type="obsolete">двадесетједнина</translation>
     </message>
     <message>
         <source>twenty-third</source>
-        <translation type="vanished">двадесеттрећина</translation>
+        <translation type="obsolete">двадесеттрећина</translation>
     </message>
     <message>
         <source>twenty-fifth</source>
-        <translation type="vanished">двадесетпетина</translation>
+        <translation type="obsolete">двадесетпетина</translation>
     </message>
     <message>
         <source>twenty-seventh</source>
-        <translation type="vanished">двадесетседмина</translation>
+        <translation type="obsolete">двадесетседмина</translation>
     </message>
     <message>
         <source>untitled</source>
-        <translation type="vanished">без назива</translation>
+        <translation type="obsolete">без назива</translation>
     </message>
 </context>
 <context>
     <name>DialogParamGlobal</name>
     <message>
         <source>Global setting</source>
-        <translation type="vanished">Општа подешавања</translation>
+        <translation type="obsolete">Општа подешавања</translation>
     </message>
     <message>
         <source>Addition</source>
-        <translation type="vanished">Сабирање</translation>
+        <translation type="obsolete">Сабирање</translation>
     </message>
     <message>
         <source>Multiplication</source>
-        <translation type="vanished">Умножавање</translation>
+        <translation type="obsolete">Умножавање</translation>
     </message>
     <message>
         <source>Replacement</source>
-        <translation type="vanished">Замењивање</translation>
+        <translation type="obsolete">Замењивање</translation>
     </message>
     <message>
         <source>Apply to a velocity range</source>
-        <translation type="vanished">Примени на опсег јачине удара</translation>
+        <translation type="obsolete">Примени на опсег јачине удара</translation>
     </message>
     <message>
         <source>Parameter</source>
-        <translation type="vanished">Параметар</translation>
+        <translation type="obsolete">Параметар</translation>
     </message>
     <message>
         <source>Maximum</source>
-        <translation type="vanished">Највише</translation>
+        <translation type="obsolete">Највише</translation>
     </message>
     <message>
         <source>Manual</source>
-        <translation type="vanished">Ручно</translation>
+        <translation type="obsolete">Ручно</translation>
     </message>
     <message>
         <source>Linear ascending</source>
-        <translation type="vanished">Равномеран пораст</translation>
+        <translation type="obsolete">Равномеран пораст</translation>
     </message>
     <message>
         <source>Linear descending</source>
-        <translation type="vanished">Равномеран пад</translation>
+        <translation type="obsolete">Равномеран пад</translation>
     </message>
     <message>
         <source>Exponential ascending</source>
-        <translation type="vanished">Експоненцијалан пораст</translation>
+        <translation type="obsolete">Експоненцијалан пораст</translation>
     </message>
     <message>
         <source>Exponential descending</source>
-        <translation type="vanished">Експоненцијалан пад</translation>
+        <translation type="obsolete">Експоненцијалан пад</translation>
     </message>
     <message>
         <source>Random</source>
-        <translation type="vanished">Насумице</translation>
+        <translation type="obsolete">Насумице</translation>
     </message>
     <message>
         <source>Modification</source>
-        <translation type="vanished">Промена</translation>
+        <translation type="obsolete">Промена</translation>
     </message>
     <message>
         <source>Minimum</source>
-        <translation type="vanished">Најмање</translation>
+        <translation type="obsolete">Најмање</translation>
     </message>
     <message>
         <source>Pattern</source>
-        <translation type="vanished">Мустра</translation>
+        <translation type="obsolete">Мустра</translation>
     </message>
     <message>
         <source>Stiffness</source>
-        <translation type="vanished">Крутост</translation>
+        <translation type="obsolete">Крутост</translation>
     </message>
     <message>
         <source>Distribution</source>
-        <translation type="vanished">Раздел</translation>
+        <translation type="obsolete">Раздел</translation>
     </message>
 </context>
 <context>
@@ -2502,23 +2528,23 @@ repository</source>
     <name>DialogRelease</name>
     <message>
         <source>Release maker</source>
-        <translation type="vanished">Стишавалац</translation>
+        <translation type="obsolete">Стишавалац</translation>
     </message>
     <message>
         <source>Release time at C2 (key 36)</source>
-        <translation type="vanished">Време стишавања на »До 2« (нота 36)</translation>
+        <translation type="obsolete">Време стишавања на »До 2« (нота 36)</translation>
     </message>
     <message>
         <source>Division to the next octave</source>
-        <translation type="vanished">Део до наредне октаве</translation>
+        <translation type="obsolete">Део до наредне октаве</translation>
     </message>
     <message>
         <source>Detuning induced (semi-tones)</source>
-        <translation type="vanished">Изазвано раздешавање (полутонови)</translation>
+        <translation type="obsolete">Изазвано раздешавање (полутонови)</translation>
     </message>
     <message>
         <source>Release time (key </source>
-        <translation type="vanished">Време стишавања (нота </translation>
+        <translation type="obsolete">Време стишавања (нота </translation>
     </message>
 </context>
 <context>
@@ -2614,116 +2640,143 @@ repository</source>
     <name>DialogSpace</name>
     <message>
         <source>Spatialization</source>
-        <translation type="vanished">Простирање</translation>
+        <translation type="obsolete">Простирање</translation>
     </message>
     <message>
         <source>Division number</source>
-        <translation type="vanished">Број делова</translation>
+        <translation type="obsolete">Број делова</translation>
     </message>
     <message>
         <source>Filling (%)</source>
-        <translation type="vanished">Попуњеност (%)</translation>
+        <translation type="obsolete">Попуњеност (%)</translation>
     </message>
     <message>
         <source>Inversions</source>
-        <translation type="vanished">Преобртања</translation>
+        <translation type="obsolete">Преобртања</translation>
     </message>
     <message>
         <source>Ascending</source>
-        <translation type="vanished">Растући</translation>
+        <translation type="obsolete">Растући</translation>
     </message>
     <message>
         <source>Descending</source>
-        <translation type="vanished">Опадајући</translation>
+        <translation type="obsolete">Опадајући</translation>
     </message>
     <message>
         <source>Hollow</source>
-        <translation type="vanished">Изолучено</translation>
+        <translation type="obsolete">Изолучено</translation>
     </message>
     <message>
         <source>Spike</source>
-        <translation type="vanished">Зашиљено</translation>
+        <translation type="obsolete">Зашиљено</translation>
     </message>
     <message>
         <source>Random</source>
-        <translation type="vanished">Насумице</translation>
+        <translation type="obsolete">Насумице</translation>
     </message>
     <message>
         <source>Spreading (%)</source>
-        <translation type="vanished">Ширина (%)</translation>
+        <translation type="obsolete">Ширина (%)</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Pattern&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translatorcomment>Only &quot;Pattern&quot; has to be translated</translatorcomment>
-        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Мустра&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="obsolete">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Мустра&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Offset (0-100)</source>
-        <translation type="vanished">Помак (0-100)</translation>
+        <translation type="obsolete">Помак (0-100)</translation>
     </message>
 </context>
 <context>
     <name>DialogTransposition</name>
     <message>
         <source>Transposition</source>
-        <translation type="vanished">Транспозиција</translation>
+        <translation type="obsolete">Транспозиција</translation>
     </message>
     <message>
         <source>Adapt keyrange</source>
-        <translation type="vanished">Прилагоди нотни опсег</translation>
+        <translation type="obsolete">Прилагоди нотни опсег</translation>
     </message>
     <message>
         <source>Shift in semitones</source>
-        <translation type="vanished">Помак у полутоновима</translation>
+        <translation type="obsolete">Помак у полутоновима</translation>
     </message>
 </context>
 <context>
     <name>DialogVisualizer</name>
     <message>
         <source>Visualizer</source>
-        <translation type="vanished">Приказивач</translation>
+        <translation type="obsolete">Приказивач</translation>
     </message>
     <message>
         <source>Display options</source>
-        <translation type="vanished">Приказивање</translation>
+        <translation type="obsolete">Приказивање</translation>
     </message>
     <message>
         <source>Log scale</source>
-        <translation type="vanished">лог. подела</translation>
+        <translation type="obsolete">лог. подела</translation>
     </message>
     <message>
         <source>Legend</source>
-        <translation type="vanished">Појашњења</translation>
+        <translation type="obsolete">Појашњења</translation>
     </message>
     <message>
         <source>Mean value per key</source>
-        <translation type="vanished">Просечна вредност по ноти</translation>
+        <translation type="obsolete">Просечна вредност по ноти</translation>
     </message>
     <message>
         <source>Default parameters</source>
-        <translation type="vanished">Подразумевани параметри</translation>
+        <translation type="obsolete">Подразумевани параметри</translation>
     </message>
     <message>
         <source>Defined parameters</source>
-        <translation type="vanished">Задати параметри</translation>
+        <translation type="obsolete">Задати параметри</translation>
     </message>
 </context>
 <context>
     <name>DownloadManager</name>
     <message>
-        <location filename="repository/downloadmanager.cpp" line="106"/>
-        <location filename="repository/downloadmanager.cpp" line="154"/>
+        <location filename="repository/downloadmanager.cpp" line="111"/>
+        <location filename="repository/downloadmanager.cpp" line="159"/>
         <source>untitled</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="repository/downloadmanager.cpp" line="140"/>
+        <location filename="repository/downloadmanager.cpp" line="145"/>
         <source>Warning</source>
         <translation>Упозорење</translation>
     </message>
     <message>
-        <location filename="repository/downloadmanager.cpp" line="141"/>
+        <location filename="repository/downloadmanager.cpp" line="146"/>
         <source>Couldn&apos;t download file &quot;%1&quot;: %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>DownloadProgressButton</name>
+    <message>
+        <location filename="repository/widgets/downloadprogressbutton.cpp" line="45"/>
+        <source>Clear completed downloads</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>DownloadProgressCell</name>
+    <message>
+        <location filename="repository/widgets/downloadprogresscell.ui" line="51"/>
+        <source>Cancel download</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="repository/widgets/downloadprogresscell.cpp" line="69"/>
+        <source>Open &quot;%1&quot;</source>
+        <oldsource>Open &quot;%0&quot;</oldsource>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="repository/widgets/downloadprogresscell.cpp" line="99"/>
+        <source>Download canceled</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2942,7 +2995,7 @@ repository</source>
     <message>
         <source>Key  Decay</source>
         <oldsource>Key  Decay</oldsource>
-        <translation type="vanished">Нота → Пад</translation>
+        <translation type="obsolete">Нота → Пад</translation>
     </message>
     <message>
         <location filename="editor/envelopeditor.ui" line="128"/>
@@ -2957,7 +3010,7 @@ repository</source>
     <message>
         <source>Key  Hold</source>
         <oldsource>Key  Hold</oldsource>
-        <translation type="vanished">Нота → Одржавање</translation>
+        <translation type="obsolete">Нота → Одржавање</translation>
     </message>
     <message>
         <location filename="editor/envelopeditor.ui" line="263"/>
@@ -2969,7 +3022,7 @@ repository</source>
         <source>Release</source>
         <translation>Стишавање</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="editor/envelopeditor.ui" line="181"/>
         <source>Key → Decay</source>
         <translation type="unfinished"></translation>
@@ -2979,7 +3032,7 @@ repository</source>
         <source>Attack</source>
         <translation>Пораст</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="editor/envelopeditor.ui" line="391"/>
         <source>Key → Hold</source>
         <translation type="unfinished"></translation>
@@ -3012,11 +3065,11 @@ repository</source>
     <name>ExternalCommandRunner</name>
     <message>
         <source>Cancel</source>
-        <translation type="vanished">Поништи</translation>
+        <translation type="obsolete">Поништи</translation>
     </message>
     <message>
         <source>Processing </source>
-        <translation type="vanished">Обрада </translation>
+        <translation type="obsolete">Обрада </translation>
     </message>
 </context>
 <context>
@@ -3040,12 +3093,12 @@ repository</source>
     <message>
         <source>L</source>
         <translatorcomment>почетно слово од &quot;Леви&quot;</translatorcomment>
-        <translation type="vanished">Л</translation>
+        <translation type="obsolete">Л</translation>
     </message>
     <message>
         <source>R</source>
         <translatorcomment>почетно слово од &quot;Десни&quot;</translatorcomment>
-        <translation type="vanished">Д</translation>
+        <translation type="obsolete">Д</translation>
     </message>
     <message>
         <location filename="editor/tools/sound_spatialization/graphspace.cpp" line="76"/>
@@ -3126,7 +3179,7 @@ repository</source>
     </message>
     <message>
         <source>Png file (*.png)</source>
-        <translation type="vanished">Пнг-датотека (*.png)</translation>
+        <translation type="obsolete">Пнг-датотека (*.png)</translation>
     </message>
 </context>
 <context>
@@ -3253,920 +3306,920 @@ repository</source>
     <name>MainWindow</name>
     <message>
         <source>Key</source>
-        <translation type="vanished">Нота</translation>
+        <translation type="obsolete">Нота</translation>
     </message>
     <message>
         <source>Vel.</source>
-        <translation type="vanished">Јач.</translation>
+        <translation type="obsolete">Јач.</translation>
     </message>
     <message>
         <source>&amp;File</source>
         <translatorcomment>Put the character &quot;&amp;&quot; to access an element in a menu via Alt + the following letter.</translatorcomment>
-        <translation type="vanished">&amp;Датотека</translation>
+        <translation type="obsolete">&amp;Датотека</translation>
     </message>
     <message>
         <source>&amp;Help</source>
-        <translation type="vanished">&amp;Помоћ</translation>
+        <translation type="obsolete">&amp;Помоћ</translation>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation type="vanished">&amp;Уреди</translation>
+        <translation type="obsolete">&amp;Уреди</translation>
     </message>
     <message>
         <source>&amp;Tools</source>
-        <translation type="vanished">&amp;Алати</translation>
+        <translation type="obsolete">&amp;Алати</translation>
     </message>
     <message>
         <source>&amp;Sample</source>
-        <translation type="vanished">&amp;Узорак</translation>
+        <translation type="obsolete">&amp;Узорак</translation>
     </message>
     <message>
         <source>&amp;Global</source>
-        <translation type="vanished">&amp;Опште</translation>
+        <translation type="obsolete">&amp;Опште</translation>
     </message>
     <message>
         <source>&amp;Instrument</source>
-        <translation type="vanished">&amp;Инструменат</translation>
+        <translation type="obsolete">&amp;Инструменат</translation>
     </message>
     <message>
         <source>&amp;Preset</source>
-        <translation type="vanished">&amp;Поставка</translation>
+        <translation type="obsolete">&amp;Поставка</translation>
     </message>
     <message>
         <source>&amp;View</source>
-        <translation type="vanished">П&amp;реглед</translation>
+        <translation type="obsolete">П&amp;реглед</translation>
     </message>
     <message>
         <source>&amp;Keyboard</source>
-        <translation type="vanished">&amp;Клавијатура</translation>
+        <translation type="obsolete">&amp;Клавијатура</translation>
     </message>
     <message>
         <source>Toolbar</source>
-        <translation type="vanished">Алатница</translation>
+        <translation type="obsolete">Алатница</translation>
     </message>
     <message>
         <source>Tree</source>
-        <translation type="vanished">Разгранато</translation>
+        <translation type="obsolete">Разгранато</translation>
     </message>
     <message>
         <source>Collapse the tree</source>
-        <translation type="vanished">Скупи гране</translation>
+        <translation type="obsolete">Скупи гране</translation>
     </message>
     <message>
         <source>Expand the tree</source>
-        <translation type="vanished">Рашири гране</translation>
+        <translation type="obsolete">Рашири гране</translation>
     </message>
     <message>
         <source>Clear the search</source>
-        <translation type="vanished">Очисти пронађено</translation>
+        <translation type="obsolete">Очисти пронађено</translation>
     </message>
     <message>
         <source>&amp;Open</source>
-        <translation type="vanished">&amp;Отвори...</translation>
+        <translation type="obsolete">&amp;Отвори...</translation>
     </message>
     <message>
         <source>Open a file</source>
-        <translation type="vanished">Отвори датотеку</translation>
+        <translation type="obsolete">Отвори датотеку</translation>
     </message>
     <message>
         <source>&amp;Quit</source>
-        <translation type="vanished">&amp;Изађи</translation>
+        <translation type="obsolete">&amp;Изађи</translation>
     </message>
     <message>
         <source>Online &amp;manual</source>
         <oldsource>&amp;Manuel</oldsource>
-        <translation type="vanished">&amp;Упутство за употребу</translation>
+        <translation type="obsolete">&amp;Упутство за употребу</translation>
     </message>
     <message>
         <source>&amp;About</source>
-        <translation type="vanished">&amp;О програму</translation>
+        <translation type="obsolete">&amp;О програму</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="194"/>
+        <location filename="mainwindow/mainwindow.cpp" line="195"/>
         <source>&amp;Save</source>
         <translation>&amp;Сачувај</translation>
     </message>
     <message>
         <source>Save the current file</source>
-        <translation type="vanished">Сачувај текућу датотеку</translation>
+        <translation type="obsolete">Сачувај текућу датотеку</translation>
     </message>
     <message>
         <source>Save &amp;as...</source>
-        <translation type="vanished">Сачувај &amp;као...</translation>
+        <translation type="obsolete">Сачувај &amp;као...</translation>
     </message>
     <message>
         <source>Save in another file</source>
-        <translation type="vanished">Чува у другој датотеци</translation>
+        <translation type="obsolete">Чува у другој датотеци</translation>
     </message>
     <message>
         <source>&amp;New...</source>
-        <translation type="vanished">&amp;Нова...</translation>
+        <translation type="obsolete">&amp;Нова...</translation>
     </message>
     <message>
         <source>Create a new file</source>
-        <translation type="vanished">Створи нову датотеку</translation>
+        <translation type="obsolete">Створи нову датотеку</translation>
     </message>
     <message>
         <source>&amp;Undo</source>
         <comment>1</comment>
         <translatorcomment>Undo an action</translatorcomment>
-        <translation type="vanished">&amp;Опозови</translation>
+        <translation type="obsolete">&amp;Опозови</translation>
     </message>
     <message>
         <source>Undo the last action</source>
-        <translation type="vanished">Опозови последњу радњу</translation>
+        <translation type="obsolete">Опозови последњу радњу</translation>
     </message>
     <message>
         <source>&amp;Redo</source>
-        <translation type="vanished">&amp;Понови</translation>
+        <translation type="obsolete">&amp;Понови</translation>
     </message>
     <message>
         <source>Redo the last undone action</source>
-        <translation type="vanished">Поништи опозив последње радње</translation>
+        <translation type="obsolete">Поништи опозив последње радње</translation>
     </message>
     <message>
         <source>&amp;Settings</source>
-        <translation type="vanished">Поде&amp;шавања</translation>
+        <translation type="obsolete">Поде&amp;шавања</translation>
     </message>
     <message>
         <source>Open the settings</source>
-        <translation type="vanished">Отвара прозор са подешавањима</translation>
+        <translation type="obsolete">Отвара прозор са подешавањима</translation>
     </message>
     <message>
         <source>&amp;Toolbar</source>
-        <translation type="vanished">&amp;Алатница</translation>
+        <translation type="obsolete">&amp;Алатница</translation>
     </message>
     <message>
         <source>Display / hide the toolbar</source>
-        <translation type="vanished">Приказује/Скрива траку са алатима</translation>
+        <translation type="obsolete">Приказује/Скрива траку са алатима</translation>
     </message>
     <message>
         <source>&amp;Close file</source>
-        <translation type="vanished">&amp;Затвори датотеку</translation>
+        <translation type="obsolete">&amp;Затвори датотеку</translation>
     </message>
     <message>
         <source>Close the current file</source>
-        <translation type="vanished">Затвори текућу датотеку</translation>
+        <translation type="obsolete">Затвори текућу датотеку</translation>
     </message>
     <message>
         <source>&amp;Copy</source>
-        <translation type="vanished">&amp;Умножи</translation>
+        <translation type="obsolete">&amp;Умножи</translation>
     </message>
     <message>
         <source>Copy an element</source>
-        <translation type="vanished">Умножава неки елеменат</translation>
+        <translation type="obsolete">Умножава неки елеменат</translation>
     </message>
     <message>
         <source>&amp;Paste</source>
-        <translation type="vanished">У&amp;баци</translation>
+        <translation type="obsolete">У&amp;баци</translation>
     </message>
     <message>
         <source>Paste an element</source>
-        <translation type="vanished">Убацује, умеће неки елеменат</translation>
+        <translation type="obsolete">Убацује, умеће неки елеменат</translation>
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation type="vanished">Обр&amp;иши</translation>
+        <translation type="obsolete">Обр&amp;иши</translation>
     </message>
     <message>
         <source>Delete an element</source>
-        <translation type="vanished">Уклони елеменат</translation>
+        <translation type="obsolete">Уклони елеменат</translation>
     </message>
     <message>
         <source>&amp;Remove unused elements</source>
-        <translation type="vanished">Уклони &amp;непотребне елементе</translation>
+        <translation type="obsolete">Уклони &amp;непотребне елементе</translation>
     </message>
     <message>
         <source>Remove unused samples and instruments</source>
-        <translation type="vanished">Уклања неупотребљене узорке и инструменте</translation>
+        <translation type="obsolete">Уклања неупотребљене узорке и инструменте</translation>
     </message>
     <message>
         <source>Re&amp;name</source>
-        <translation type="vanished">П&amp;реименуј</translation>
+        <translation type="obsolete">П&amp;реименуј</translation>
     </message>
     <message>
         <source>Rename one or several element(s)</source>
-        <translation type="vanished">Мења назив једног или више елемената</translation>
+        <translation type="obsolete">Мења назив једног или више елемената</translation>
     </message>
     <message>
         <source>file1</source>
-        <translation type="vanished">датотека 1</translation>
+        <translation type="obsolete">датотека 1</translation>
     </message>
     <message>
         <source>Open a recent file</source>
-        <translation type="vanished">Отвара скоро употребљивану датотеку</translation>
+        <translation type="obsolete">Отвара скоро употребљивану датотеку</translation>
     </message>
     <message>
         <source>file2</source>
-        <translation type="vanished">датотека 2</translation>
+        <translation type="obsolete">датотека 2</translation>
     </message>
     <message>
         <source>file3</source>
-        <translation type="vanished">датотека 3</translation>
+        <translation type="obsolete">датотека 3</translation>
     </message>
     <message>
         <source>file4</source>
-        <translation type="vanished">датотека 4</translation>
+        <translation type="obsolete">датотека 4</translation>
     </message>
     <message>
         <source>file5</source>
-        <translation type="vanished">датотека 5</translation>
+        <translation type="obsolete">датотека 5</translation>
     </message>
     <message>
         <source>&amp;Modulator section</source>
-        <translation type="vanished">&amp;Модулаторски одељак</translation>
+        <translation type="obsolete">&amp;Модулаторски одељак</translation>
     </message>
     <message>
         <source>Display the modulator section</source>
-        <translation type="vanished">Прикажи модулаторски одељак</translation>
+        <translation type="obsolete">Прикажи модулаторски одељак</translation>
     </message>
     <message>
         <source>&amp;Import samples...</source>
-        <translation type="vanished">&amp;Увези узорке...</translation>
+        <translation type="obsolete">&amp;Увези узорке...</translation>
     </message>
     <message>
         <source>Import an audio file</source>
-        <translation type="vanished">Увези звучну датотеку</translation>
+        <translation type="obsolete">Увези звучну датотеку</translation>
     </message>
     <message>
         <source>E&amp;xport samples...</source>
-        <translation type="vanished">Из&amp;вези узорке...</translation>
+        <translation type="obsolete">Из&amp;вези узорке...</translation>
     </message>
     <message>
         <source>Export in a wav format</source>
-        <translation type="vanished">Извоз у вав-датотеку</translation>
+        <translation type="obsolete">Извоз у вав-датотеку</translation>
     </message>
     <message>
         <source>New instrument</source>
-        <translation type="vanished">Нов инструменат</translation>
+        <translation type="obsolete">Нов инструменат</translation>
     </message>
     <message>
         <source>Create a new instrument</source>
-        <translation type="vanished">Створи нов инструменат</translation>
+        <translation type="obsolete">Створи нов инструменат</translation>
     </message>
     <message>
         <source>New preset</source>
-        <translation type="vanished">Нова поставка</translation>
+        <translation type="obsolete">Нова поставка</translation>
     </message>
     <message>
         <source>Create a new preset</source>
-        <translation type="vanished">Створи нову поставку</translation>
+        <translation type="obsolete">Створи нову поставку</translation>
     </message>
     <message>
         <source>&amp;Remove blank at start</source>
-        <translation type="vanished">&amp;Уклони почетну празнину</translation>
+        <translation type="obsolete">&amp;Уклони почетну празнину</translation>
     </message>
     <message>
         <source>Remove the blank at the beginning of a sample</source>
-        <translation type="vanished">Уклони празнине на почетку узорка</translation>
+        <translation type="obsolete">Уклони празнине на почетку узорка</translation>
     </message>
     <message>
         <source>&amp;Trim to end of loop</source>
-        <translation type="vanished">&amp;Опсеци до краја вртње</translation>
+        <translation type="obsolete">&amp;Опсеци до краја вртње</translation>
     </message>
     <message>
         <source>Cut the sample at the end of its loop</source>
-        <translation type="vanished">Исеци узорак на крају његове вртње</translation>
+        <translation type="obsolete">Исеци узорак на крају његове вртње</translation>
     </message>
     <message>
         <source>&amp;Change volume...</source>
         <oldsource>&amp;Modifier volume</oldsource>
-        <translation type="vanished">Промена &amp;гласноће...</translation>
+        <translation type="obsolete">Промена &amp;гласноће...</translation>
     </message>
     <message>
         <source>Change the volume</source>
-        <translation type="vanished">Мењање гласноће</translation>
+        <translation type="obsolete">Мењање гласноће</translation>
     </message>
     <message>
         <source>&amp;Filter frequencies...</source>
-        <translation type="vanished">&amp;Филтрирање учестаности...</translation>
+        <translation type="obsolete">&amp;Филтрирање учестаности...</translation>
     </message>
     <message>
         <source>Apply a filter to attenuate specific frequencies</source>
-        <translation type="vanished">Примена филтра за слабљење одређених учестаности</translation>
+        <translation type="obsolete">Примена филтра за слабљење одређених учестаности</translation>
     </message>
     <message>
         <source>Export &amp;preset list...</source>
         <oldsource>Exporter la liste des &amp;presets</oldsource>
-        <translation type="vanished">&amp;Извези списак поставки...</translation>
+        <translation type="obsolete">&amp;Извези списак поставки...</translation>
     </message>
     <message>
         <source>Export the preset list in a text format</source>
-        <translation type="vanished">Извези списак поставки у текстуалном врста</translation>
+        <translation type="obsolete">Извези списак поставки у текстуалном врста</translation>
     </message>
     <message>
         <source>&amp;Soundfont repository</source>
-        <translation type="vanished">Преузимање &amp;звукотеке</translation>
+        <translation type="obsolete">Преузимање &amp;звукотеке</translation>
     </message>
     <message>
         <source>&amp;Auto loop</source>
-        <translation type="vanished">&amp;Самовртња</translation>
+        <translation type="obsolete">&amp;Самовртња</translation>
     </message>
     <message>
         <source>Loop automatically the sample</source>
-        <translation type="vanished">Самовртња узорка</translation>
+        <translation type="obsolete">Самовртња узорка</translation>
     </message>
     <message>
         <source>Trans&amp;pose...</source>
-        <translation type="vanished">&amp;Транспонуј...</translation>
+        <translation type="obsolete">&amp;Транспонуј...</translation>
     </message>
     <message>
         <source>Transpose the sample</source>
-        <translation type="vanished">Транспонуј узорак</translation>
+        <translation type="obsolete">Транспонуј узорак</translation>
     </message>
     <message>
         <source>&amp;Adjust attenuations...</source>
-        <translation type="vanished">Прилагоди при&amp;гушења...</translation>
+        <translation type="obsolete">Прилагоди при&amp;гушења...</translation>
     </message>
     <message>
         <source>Globally adjust instrument and preset attenuations</source>
-        <translation type="vanished">Опште прилагођење пригушења инструмената и поставки</translation>
+        <translation type="obsolete">Опште прилагођење пригушења инструмената и поставки</translation>
     </message>
     <message>
         <source>&amp;External command...</source>
-        <translation type="vanished">Спољашња &amp;наредба...</translation>
+        <translation type="obsolete">Спољашња &amp;наредба...</translation>
     </message>
     <message>
         <source>Use an external software or command to modify a .wav file</source>
-        <translation type="vanished">Употреба спољашњег програма или наредбе за обраду вав-датотеке (.wav)</translation>
+        <translation type="obsolete">Употреба спољашњег програма или наредбе за обраду вав-датотеке (.wav)</translation>
     </message>
     <message>
         <source>&amp;Celeste tuning...</source>
-        <translation type="vanished">&amp;Челеста-угађање...</translation>
+        <translation type="obsolete">&amp;Челеста-угађање...</translation>
     </message>
     <message>
         <source>Tune the sounds to create beats</source>
-        <translation type="vanished">Угоди звук за стварање откуцаја</translation>
+        <translation type="obsolete">Угоди звук за стварање откуцаја</translation>
     </message>
     <message>
         <source>&amp;Sound spatialization...</source>
-        <translation type="vanished">П&amp;ростирање звука...</translation>
+        <translation type="obsolete">П&amp;ростирање звука...</translation>
     </message>
     <message>
         <source>Place sounds in space</source>
-        <translation type="vanished">Просторни размештај узорака</translation>
+        <translation type="obsolete">Просторни размештај узорака</translation>
     </message>
     <message>
         <source>&amp;Automatic distribution</source>
-        <translation type="vanished">Самораз&amp;дел</translation>
+        <translation type="obsolete">Самораз&amp;дел</translation>
     </message>
     <message>
         <source>Automatically arrange the samples over the keyboard</source>
-        <translation type="vanished">Самораздел узорака на клвијатури</translation>
+        <translation type="obsolete">Самораздел узорака на клвијатури</translation>
     </message>
     <message>
         <source>&amp;Division duplication...</source>
-        <translation type="vanished">&amp;Удвостручавање делова...</translation>
+        <translation type="obsolete">&amp;Удвостручавање делова...</translation>
     </message>
     <message>
         <source>Division duplication...</source>
-        <translation type="vanished">Удвостручавање делова...</translation>
+        <translation type="obsolete">Удвостручавање делова...</translation>
     </message>
     <message>
         <source>Duplicate the divisions</source>
-        <translation type="vanished">Удвостручи ове делове</translation>
+        <translation type="obsolete">Удвостручи ове делове</translation>
     </message>
     <message>
         <source>&amp;Global setting...</source>
-        <translation type="vanished">&amp;Општа подешавања...</translation>
+        <translation type="obsolete">&amp;Општа подешавања...</translation>
     </message>
     <message>
         <source>Set all divisions simultaneously</source>
-        <translation type="vanished">Једновремено постави све делове</translation>
+        <translation type="obsolete">Једновремено постави све делове</translation>
     </message>
     <message>
         <source>&amp;Balance adjustment</source>
-        <translation type="vanished">&amp;Панорамисање</translation>
+        <translation type="obsolete">&amp;Панорамисање</translation>
     </message>
     <message>
         <source>Set the sample pan</source>
-        <translation type="vanished">Панорамски постави узорак</translation>
+        <translation type="obsolete">Панорамски постави узорак</translation>
     </message>
     <message>
         <source>&amp;Mixture creation...</source>
-        <translation type="vanished">&amp;Стварање микстуре...</translation>
+        <translation type="obsolete">&amp;Стварање микстуре...</translation>
     </message>
     <message>
         <source>Create a mixture</source>
-        <translation type="vanished">Створи микстуру</translation>
+        <translation type="obsolete">Створи микстуру</translation>
     </message>
     <message>
         <source>&amp;5 octaves</source>
-        <translation type="vanished">&amp;5 октава</translation>
+        <translation type="obsolete">&amp;5 октава</translation>
     </message>
     <message>
         <source>Display a 5-octave keyboard</source>
-        <translation type="vanished">Прикажи 5-октавну клавијатуру</translation>
+        <translation type="obsolete">Прикажи 5-октавну клавијатуру</translation>
     </message>
     <message>
         <source>&amp;6 octaves</source>
-        <translation type="vanished">&amp;6 октава</translation>
+        <translation type="obsolete">&amp;6 октава</translation>
     </message>
     <message>
         <source>Display a 6-octave keyboard</source>
-        <translation type="vanished">Прикажи 6-октавну клавијатуру</translation>
+        <translation type="obsolete">Прикажи 6-октавну клавијатуру</translation>
     </message>
     <message>
         <source>&amp;128 keys (full)</source>
-        <translation type="vanished">&amp;128 нота (потпуно)</translation>
+        <translation type="obsolete">&amp;128 нота (потпуно)</translation>
     </message>
     <message>
         <source>Display a 128-key keyboard</source>
-        <translation type="vanished">Прикажи клавијатуру са 128 дирки</translation>
+        <translation type="obsolete">Прикажи клавијатуру са 128 дирки</translation>
     </message>
     <message>
         <source>&amp;None</source>
-        <translation type="vanished">&amp;Ништа</translation>
+        <translation type="obsolete">&amp;Ништа</translation>
     </message>
     <message>
         <source>Display no keyboard</source>
-        <translation type="vanished">Прикажи без клавијатуре</translation>
+        <translation type="obsolete">Прикажи без клавијатуре</translation>
     </message>
     <message>
         <source>Division duplication</source>
-        <translation type="vanished">Удвостручавање делова</translation>
+        <translation type="obsolete">Удвостручавање делова</translation>
     </message>
     <message>
         <source>&amp;Release maker</source>
-        <translation type="vanished">Ст&amp;ишавалац...</translation>
+        <translation type="obsolete">Ст&amp;ишавалац...</translation>
     </message>
     <message>
         <source>Create automatically a release for all linked sounds</source>
-        <translation type="vanished">Сам створи стишавање свих повезаних звукова</translation>
+        <translation type="obsolete">Сам створи стишавање свих повезаних звукова</translation>
     </message>
     <message>
         <source>&amp;Link all stereo samples</source>
         <oldsource>&amp;Association auto échantillons</oldsource>
-        <translation type="vanished">&amp;Повежи све стерео узорке</translation>
+        <translation type="obsolete">&amp;Повежи све стерео узорке</translation>
     </message>
     <message>
         <source>Automatically link the samples L/R according to their names</source>
-        <translation type="vanished">Према њиховом називу, сам повежи узорке »Л« или »Д«</translation>
+        <translation type="obsolete">Према њиховом називу, сам повежи узорке »Л« или »Д«</translation>
     </message>
     <message>
         <source>&amp;Recorder</source>
-        <translation type="vanished">&amp;Снимач</translation>
+        <translation type="obsolete">&amp;Снимач</translation>
     </message>
     <message>
         <source>Display the recorder</source>
-        <translation type="vanished">Прикажи снимач</translation>
+        <translation type="obsolete">Прикажи снимач</translation>
     </message>
     <message>
         <source>&amp;Visualizer</source>
-        <translation type="vanished">&amp;Приказивач</translation>
+        <translation type="obsolete">&amp;Приказивач</translation>
     </message>
     <message>
         <source>Visualize in a graph the parameters used</source>
-        <translation type="vanished">Приказивање употребљених параметара графиконом</translation>
+        <translation type="obsolete">Приказивање употребљених параметара графиконом</translation>
     </message>
     <message>
         <source>Ex&amp;port soundfont...</source>
         <oldsource>Exporter sound&amp;font...</oldsource>
-        <translation type="vanished">Извези зву&amp;котеку...</translation>
+        <translation type="obsolete">Извези зву&amp;котеку...</translation>
     </message>
     <message>
         <source>Export a soundfont</source>
-        <translation type="vanished">Извези звукотеку</translation>
+        <translation type="obsolete">Извези звукотеку</translation>
     </message>
     <message>
         <source>&amp;Unlink all stereo samples</source>
-        <translation type="vanished">&amp;Одвоји све стерео узорке</translation>
+        <translation type="obsolete">&amp;Одвоји све стерео узорке</translation>
     </message>
     <message>
         <source>Unlink all stereo samples</source>
-        <translation type="vanished">Раздвајање свих стерео-узорака</translation>
+        <translation type="obsolete">Раздвајање свих стерео-узорака</translation>
     </message>
     <message>
         <source>Peak &amp;frequency export (csv)</source>
-        <translation type="vanished">Извоз вр&amp;шних учестаности (csv)</translation>
+        <translation type="obsolete">Извоз вр&amp;шних учестаности (csv)</translation>
     </message>
     <message>
         <source>Export the peak frequency of all samples in a csv file</source>
-        <translation type="vanished">Извоз вршних учестаности свих узорака у цсв-датотеку</translation>
+        <translation type="obsolete">Извоз вршних учестаности свих узорака у цсв-датотеку</translation>
     </message>
     <message>
         <source>&amp;88 keys (piano)</source>
-        <translation type="vanished">&amp;88 нота (клавир)</translation>
+        <translation type="obsolete">&amp;88 нота (клавир)</translation>
     </message>
     <message>
         <source>In &amp;toolbar</source>
-        <translation type="vanished">У &amp;алатници</translation>
+        <translation type="obsolete">У &amp;алатници</translation>
     </message>
     <message>
         <source>&amp;Floating</source>
-        <translation type="vanished">&amp;Лебдећа</translation>
+        <translation type="obsolete">&amp;Лебдећа</translation>
     </message>
     <message>
         <source>&amp;Transposition...</source>
-        <translation type="vanished">&amp;Транспозиција...</translation>
+        <translation type="obsolete">&amp;Транспозиција...</translation>
     </message>
     <message>
         <source>Transpose every sample of an instrument</source>
-        <translation type="vanished">Транспонуј сваки узорак једног инструмента</translation>
+        <translation type="obsolete">Транспонуј сваки узорак једног инструмента</translation>
     </message>
     <message>
         <source>Remove all &amp;modulators</source>
-        <translation type="vanished">Уклони све &amp;модулаторе</translation>
+        <translation type="obsolete">Уклони све &amp;модулаторе</translation>
     </message>
     <message>
         <source>&amp;Full screen</source>
-        <translation type="vanished">На &amp;целом екрану</translation>
+        <translation type="obsolete">На &amp;целом екрану</translation>
     </message>
     <message>
         <source>&amp;Forum</source>
-        <translation type="vanished">&amp;форум</translation>
+        <translation type="obsolete">&amp;форум</translation>
     </message>
     <message>
         <source>Search...</source>
-        <translation type="vanished">Пронађи...</translation>
+        <translation type="obsolete">Пронађи...</translation>
     </message>
     <message>
         <source>Virtual keyboard</source>
-        <translation type="vanished">Патворена клавијатура</translation>
+        <translation type="obsolete">Патворена клавијатура</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="180"/>
+        <location filename="mainwindow/mainwindow.cpp" line="181"/>
         <source>Warning</source>
         <translation>Упозорење</translation>
     </message>
     <message>
         <source>&lt;b&gt;Save before exiting?&lt;/b&gt;</source>
-        <translation type="vanished">&lt;b&gt;Да ли да сачувам измене пре изласка?&lt;/b&gt;</translation>
+        <translation type="obsolete">&lt;b&gt;Да ли да сачувам измене пре изласка?&lt;/b&gt;</translation>
     </message>
     <message>
         <source>The following files have been modified:&lt;br/&gt; - </source>
-        <translation type="vanished">Ове датотеке су измењене:&lt;br/&gt; - </translation>
+        <translation type="obsolete">Ове датотеке су измењене:&lt;br/&gt; - </translation>
     </message>
     <message>
         <source>The file &quot;</source>
-        <translation type="vanished">Датотека „</translation>
+        <translation type="obsolete">Датотека „</translation>
     </message>
     <message>
         <source>&quot; has been modified.</source>
-        <translation type="vanished">« је измењена.</translation>
+        <translation type="obsolete">« је измењена.</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="195"/>
+        <location filename="mainwindow/mainwindow.cpp" line="196"/>
         <source>&amp;Cancel</source>
         <translation>&amp;Поништи</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="196"/>
+        <location filename="mainwindow/mainwindow.cpp" line="197"/>
         <source>Do&amp;n&apos;t save</source>
         <translation>&amp;Изађи не сачувавши</translation>
     </message>
     <message>
         <source>Polyphone</source>
-        <translation type="vanished">Полифон</translation>
+        <translation type="obsolete">Полифон</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="268"/>
+        <location filename="mainwindow/mainwindow.cpp" line="269"/>
         <source>Opening files</source>
         <translation>Отварање датотека</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="vanished">Поништи</translation>
+        <translation type="obsolete">Поништи</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="170"/>
+        <location filename="mainwindow/mainwindow.cpp" line="171"/>
         <source>untitled</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="181"/>
+        <location filename="mainwindow/mainwindow.cpp" line="182"/>
         <source>Save before exiting?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="184"/>
+        <location filename="mainwindow/mainwindow.cpp" line="185"/>
         <source>The following files have been modified:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="191"/>
+        <location filename="mainwindow/mainwindow.cpp" line="192"/>
         <source>File &quot;%1&quot; has been modified.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="240"/>
+        <location filename="mainwindow/mainwindow.cpp" line="241"/>
         <source>en/documentation</source>
         <comment>path for the documentation online</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="245"/>
+        <location filename="mainwindow/mainwindow.cpp" line="246"/>
         <source>en/forum</source>
         <comment>path for the forum</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="270"/>
+        <location filename="mainwindow/mainwindow.cpp" line="271"/>
         <source>Soundfonts</source>
         <translation>Звукотеке</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="271"/>
+        <location filename="mainwindow/mainwindow.cpp" line="272"/>
         <source>Sf2 files</source>
         <translation>Сф2-звукотека</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="272"/>
+        <location filename="mainwindow/mainwindow.cpp" line="273"/>
         <source>Sf3 files</source>
         <translation>Сф3-звукотека</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="273"/>
+        <location filename="mainwindow/mainwindow.cpp" line="274"/>
         <source>Sfz files</source>
         <translation>СфЗ-звукотека</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="274"/>
+        <location filename="mainwindow/mainwindow.cpp" line="275"/>
         <source>sfArk archives</source>
         <translation>Архива .сфАрк</translation>
     </message>
     <message>
         <source>Corrupted file: use of 16 bits samples.</source>
-        <translation type="vanished">Оштећена датотека: употреба 16-битних узорака.</translation>
+        <translation type="obsolete">Оштећена датотека: употреба 16-битних узорака.</translation>
     </message>
     <message>
         <source>Unknown format.</source>
-        <translation type="vanished">Врста није позната.</translation>
+        <translation type="obsolete">Врста није позната.</translation>
     </message>
     <message>
         <source>File already loaded.</source>
-        <translation type="vanished">Датотека је већ учитана.</translation>
+        <translation type="obsolete">Датотека је већ учитана.</translation>
     </message>
     <message>
         <source>Cannot open the file.</source>
-        <translation type="vanished">Не могу да отворим ову датотеку.</translation>
+        <translation type="obsolete">Не могу да отворим ову датотеку.</translation>
     </message>
     <message>
         <source>Cannot read the file.</source>
-        <translation type="vanished">Не могу да пустим ову датотеку.</translation>
+        <translation type="obsolete">Не могу да пустим ову датотеку.</translation>
     </message>
     <message>
         <source>Corrupted file.</source>
-        <translation type="vanished">Датотека је оштећена.</translation>
+        <translation type="obsolete">Датотека је оштећена.</translation>
     </message>
     <message>
         <source>Name of the new soundfont:</source>
-        <translation type="vanished">Назив нове звукотеке:</translation>
+        <translation type="obsolete">Назив нове звукотеке:</translation>
     </message>
     <message>
         <source>Operation in progress...</source>
-        <translation type="vanished">Извршавам радњу...</translation>
+        <translation type="obsolete">Извршавам радњу...</translation>
     </message>
     <message>
         <source>Cannot delete a sample used by another instrument.</source>
-        <translation type="vanished">Не могу да уклоним узорак који употребљава други инструменат.</translation>
+        <translation type="obsolete">Не могу да уклоним узорак који употребљава други инструменат.</translation>
     </message>
     <message>
         <source>Cannot delete an instrument used by another preset.</source>
-        <translation type="vanished">Не могу да уклоним инструменат употребљен у другој поставци.</translation>
+        <translation type="obsolete">Не могу да уклоним инструменат употребљен у другој поставци.</translation>
     </message>
     <message>
         <source>&lt;b&gt;Losing resolution </source>
-        <translation type="vanished">&lt;b&gt;Губитак резолуције </translation>
+        <translation type="obsolete">&lt;b&gt;Губитак резолуције </translation>
     </message>
     <message>
         <source> bits&lt;/b&gt;</source>
-        <translation type="vanished"> bits&lt;/b&gt;</translation>
+        <translation type="obsolete"> bits&lt;/b&gt;</translation>
     </message>
     <message>
         <source>The sample quality will be lowered. Continue?</source>
-        <translation type="vanished">Овим ће се умањити каквоћа узорка. Желите ли да ово урадим?</translation>
+        <translation type="obsolete">Овим ће се умањити каквоћа узорка. Желите ли да ово урадим?</translation>
     </message>
     <message>
         <source>&amp;Yes</source>
-        <translation type="vanished">&amp;Да</translation>
+        <translation type="obsolete">&amp;Да</translation>
     </message>
     <message>
         <source>&amp;No</source>
-        <translation type="vanished">&amp;Не</translation>
+        <translation type="obsolete">&amp;Не</translation>
     </message>
     <message>
         <source>&lt;b&gt;To many parameters defined in both the intruments and the presets.&lt;/b&gt;</source>
-        <translation type="vanished">&lt;b&gt;Превише постављених параметара и за инструменте, и за поставке.&lt;/b&gt;</translation>
+        <translation type="obsolete">&lt;b&gt;Превише постављених параметара и за инструменте, и за поставке.&lt;/b&gt;</translation>
     </message>
     <message>
         <source>&lt;b&gt;To many parameters defined in the instruments.&lt;/b&gt;</source>
-        <translation type="vanished">&lt;b&gt;Превише постављених параметара за инструменте.&lt;/b&gt;</translation>
+        <translation type="obsolete">&lt;b&gt;Превише постављених параметара за инструменте.&lt;/b&gt;</translation>
     </message>
     <message>
         <source>&lt;b&gt;To many parameters defined in the presets.&lt;/b&gt;</source>
-        <translation type="vanished">&lt;b&gt;Превише постављених параметара за поставке.&lt;/b&gt;</translation>
+        <translation type="obsolete">&lt;b&gt;Превише постављених параметара за поставке.&lt;/b&gt;</translation>
     </message>
     <message>
         <source>Some synthesizers skip parameters beyond the  65536th.
 Splitting the file into several sf2 might solve the problem.</source>
-        <translation type="vanished">
+        <translation type="obsolete">
 Неки синтесајзери занемарују параметре иза „65536th“. Раздвајање датотеке у неколико Сф2-звукотека може да реши проблем.</translation>
     </message>
     <message>
         <source>Save, &amp;disable this message</source>
-        <translation type="vanished">Сачувај, &amp;онемогући ову поруку</translation>
+        <translation type="obsolete">Сачувај, &amp;онемогући ову поруку</translation>
     </message>
     <message>
         <source>Save a soundfont</source>
-        <translation type="vanished">Сачувај звукотеку</translation>
+        <translation type="obsolete">Сачувај звукотеку</translation>
     </message>
     <message>
         <source>.sf2 file (*.sf2)</source>
-        <translation type="vanished">Сф2-звукотека (*.sf2)</translation>
+        <translation type="obsolete">Сф2-звукотека (*.sf2)</translation>
     </message>
     <message>
         <source>Unknown extension.</source>
-        <translation type="vanished">Непозната врста датотеке.</translation>
+        <translation type="obsolete">Непозната врста датотеке.</translation>
     </message>
     <message>
         <source>File already open, cannot save.</source>
-        <translation type="vanished">Датотека је већ отворена — не могу да је сачувам.</translation>
+        <translation type="obsolete">Датотека је већ отворена — не могу да је сачувам.</translation>
     </message>
     <message>
         <source>Cannot save the file.</source>
-        <translation type="vanished">Не могу да сачувам ову датотеку.</translation>
+        <translation type="obsolete">Не могу да сачувам ову датотеку.</translation>
     </message>
     <message>
         <source>http://polyphone-soundfonts.com/en/documentation</source>
-        <translation type="vanished">http://polyphone-soundfonts.com/en/documentation</translation>
+        <translation type="obsolete">http://polyphone-soundfonts.com/en/documentation</translation>
     </message>
     <message>
         <source>http://polyphone-soundfonts.com/en/forum</source>
-        <translation type="vanished">http://polyphone-soundfonts.com/en/forum</translation>
+        <translation type="obsolete">http://polyphone-soundfonts.com/en/forum</translation>
     </message>
     <message>
         <source>http://polyphone-soundfonts.com/en/soundfonts</source>
-        <translation type="vanished">http://polyphone-soundfonts.com/en/soundfonts</translation>
+        <translation type="obsolete">http://polyphone-soundfonts.com/en/soundfonts</translation>
     </message>
     <message>
         <source>&amp;Bulk rename</source>
-        <translation type="vanished">Скупно п&amp;реименовање</translation>
+        <translation type="obsolete">Скупно п&amp;реименовање</translation>
     </message>
     <message>
         <source>Sample name (max 20 characters):</source>
-        <translation type="vanished">Назив узорка (до 20 знакова):</translation>
+        <translation type="obsolete">Назив узорка (до 20 знакова):</translation>
     </message>
     <message>
         <source>Instrument name (max 20 characters):</source>
-        <translation type="vanished">Назив инструмента (до 20 знакова):</translation>
+        <translation type="obsolete">Назив инструмента (до 20 знакова):</translation>
     </message>
     <message>
         <source>Preset name (max 20 characters):</source>
-        <translation type="vanished">Назив поставке (до 20 знакова):</translation>
+        <translation type="obsolete">Назив поставке (до 20 знакова):</translation>
     </message>
     <message>
         <source>Soundfont name (max 255 characters):</source>
-        <translation type="vanished">Назив звукотеке (до 255 знакова):</translation>
+        <translation type="obsolete">Назив звукотеке (до 255 знакова):</translation>
     </message>
     <message>
         <source>Question</source>
-        <translation type="vanished">Питање</translation>
+        <translation type="obsolete">Питање</translation>
     </message>
     <message>
         <source>An error occurred while importing the file </source>
-        <translation type="vanished">При увожењу датотеке догодила се грешка</translation>
+        <translation type="obsolete">При увожењу датотеке догодила се грешка</translation>
     </message>
     <message>
         <source>Wav file</source>
         <oldsource>Fichier .wav (*.wav)</oldsource>
-        <translation type="vanished">Вав-датотека (*.wav)</translation>
+        <translation type="obsolete">Вав-датотека (*.wav)</translation>
     </message>
     <message>
         <source>The sample &quot;</source>
-        <translation type="vanished">Узорак „</translation>
+        <translation type="obsolete">Узорак „</translation>
     </message>
     <message>
         <source>L&quot; already exists.&lt;br/&gt;Replace?</source>
-        <translation type="vanished">Л“ већ постоји.&lt;br/&gt;Да ли да га заменим?</translation>
+        <translation type="obsolete">Л“ већ постоји.&lt;br/&gt;Да ли да га заменим?</translation>
     </message>
     <message>
         <source>R&quot; already exists.&lt;br/&gt;Replace?</source>
-        <translation type="vanished">Д“ већ постоји.&lt;br/&gt;Да ли да га заменим?</translation>
+        <translation type="obsolete">Д“ већ постоји.&lt;br/&gt;Да ли да га заменим?</translation>
     </message>
     <message>
         <source>&quot; already exists.&lt;br/&gt;Replace?</source>
-        <translation type="vanished">“ већ постоји.&lt;br/&gt;Да ли да га заменим?</translation>
+        <translation type="obsolete">“ већ постоји.&lt;br/&gt;Да ли да га заменим?</translation>
     </message>
     <message>
         <source>&amp;Replace</source>
-        <translation type="vanished">За&amp;мени</translation>
+        <translation type="obsolete">За&amp;мени</translation>
     </message>
     <message>
         <source>R&amp;eplace all</source>
-        <translation type="vanished">Замени св&amp;е</translation>
+        <translation type="obsolete">Замени св&amp;е</translation>
     </message>
     <message>
         <source>&amp;Duplicate</source>
-        <translation type="vanished">У&amp;двостручи</translation>
+        <translation type="obsolete">У&amp;двостручи</translation>
     </message>
     <message>
         <source>D&amp;uplicate all</source>
-        <translation type="vanished">&amp;Удвостручи све</translation>
+        <translation type="obsolete">&amp;Удвостручи све</translation>
     </message>
     <message>
         <source>&amp;Ignore</source>
-        <translation type="vanished">Занемар&amp;и</translation>
+        <translation type="obsolete">Занемар&amp;и</translation>
     </message>
     <message>
         <source>I&amp;gnore all</source>
-        <translation type="vanished">Занемари с&amp;ве</translation>
+        <translation type="obsolete">Занемари с&amp;ве</translation>
     </message>
     <message>
         <source>Choose a destination folder</source>
-        <translation type="vanished">Одаберите одредишни директоријум</translation>
+        <translation type="obsolete">Одаберите одредишни директоријум</translation>
     </message>
     <message>
         <source>Merge soudfonts:</source>
-        <translation type="vanished">Сједини звукотеке:</translation>
+        <translation type="obsolete">Сједини звукотеке:</translation>
     </message>
     <message>
         <source>Name of the new instrument:</source>
-        <translation type="vanished">Назив новог инструмента: </translation>
+        <translation type="obsolete">Назив новог инструмента: </translation>
     </message>
     <message>
         <source>No preset available.</source>
-        <translation type="vanished">Нема доступне поставке.</translation>
+        <translation type="obsolete">Нема доступне поставке.</translation>
     </message>
     <message>
         <source>Name of the new preset:</source>
-        <translation type="vanished">Назив нове поставке: </translation>
+        <translation type="obsolete">Назив нове поставке: </translation>
     </message>
     <message>
         <source> sample and </source>
-        <translation type="vanished"> узорак и </translation>
+        <translation type="obsolete"> узорак и </translation>
     </message>
     <message>
         <source> samples and </source>
-        <translation type="vanished"> узорци и </translation>
+        <translation type="obsolete"> узорци и </translation>
     </message>
     <message>
         <source> instrument have been deleted.</source>
         <translatorcomment>instrument: једнина</translatorcomment>
-        <translation type="vanished"> инструменат је уклоњен.</translation>
+        <translation type="obsolete"> инструменат је уклоњен.</translation>
     </message>
     <message>
         <source> instruments have been deleted.</source>
         <translatorcomment>instrument: множина</translatorcomment>
-        <translation type="vanished"> инструменат(а) је уклоњено.</translation>
+        <translation type="obsolete"> инструменат(а) је уклоњено.</translation>
     </message>
     <message>
         <source>The soundfont must contain at least one instrument.</source>
-        <translation type="vanished">Звукотека мора да садржи бар један инструменат.</translation>
+        <translation type="obsolete">Звукотека мора да садржи бар један инструменат.</translation>
     </message>
     <message>
         <source>Export peak frequency</source>
-        <translation type="vanished">Извези вршне учестаности</translation>
+        <translation type="obsolete">Извези вршне учестаности</translation>
     </message>
     <message>
         <source>Csv file (*.csv)</source>
-        <translation type="vanished">Цсв-датотека (*.csv)</translation>
+        <translation type="obsolete">Цсв-датотека (*.csv)</translation>
     </message>
     <message>
         <source>,</source>
         <translatorcomment>знак који ће да се употребљава као раздвајач колона у Цсв-датотекама</translatorcomment>
-        <translation type="vanished">;</translation>
+        <translation type="obsolete">;</translation>
     </message>
     <message>
         <source>Sample</source>
-        <translation type="vanished">Узорак</translation>
+        <translation type="obsolete">Узорак</translation>
     </message>
     <message>
         <source>Peak number</source>
-        <translation type="vanished">Број шиљка</translation>
+        <translation type="obsolete">Број шиљка</translation>
     </message>
     <message>
         <source>Factor</source>
-        <translation type="vanished">Чинилац</translation>
+        <translation type="obsolete">Чинилац</translation>
     </message>
     <message>
         <source>Frequency</source>
-        <translation type="vanished">Учестаност</translation>
+        <translation type="obsolete">Учестаност</translation>
     </message>
     <message>
         <source>Correction</source>
-        <translation type="vanished">Поправка</translation>
+        <translation type="obsolete">Поправка</translation>
     </message>
     <message>
         <source>m</source>
         <translatorcomment>децимални раздвајач</translatorcomment>
-        <translation type="vanished">,</translation>
+        <translation type="obsolete">,</translation>
     </message>
     <message>
         <source>The soundfont contains no modulators.</source>
-        <translation type="vanished">Звукотека не садржи модулаторе.</translation>
+        <translation type="obsolete">Звукотека не садржи модулаторе.</translation>
     </message>
     <message>
         <source>Information</source>
-        <translation type="vanished">Подаци</translation>
+        <translation type="obsolete">Подаци</translation>
     </message>
     <message>
         <source>1 modulator has been deleted.</source>
-        <translation type="vanished">1 модулатор је уклоњен.</translation>
+        <translation type="obsolete">1 модулатор је уклоњен.</translation>
     </message>
     <message>
         <source>modulators have been deleted.</source>
-        <translation type="vanished">модулатора је уклоњено.</translation>
+        <translation type="obsolete">модулатора је уклоњено.</translation>
     </message>
     <message>
         <location filename="mainwindow/mainwindow.ui" line="20"/>
@@ -4271,256 +4324,256 @@ Splitting the file into several sf2 might solve the problem.</source>
     <name>Page</name>
     <message>
         <source>, absolute value</source>
-        <translation type="vanished">, aпсолутна вредност</translation>
+        <translation type="obsolete">, aпсолутна вредност</translation>
     </message>
     <message>
         <source>Sample start offset</source>
-        <translation type="vanished">Помак почетка узорка</translation>
+        <translation type="obsolete">Помак почетка узорка</translation>
     </message>
     <message>
         <source>Sample end offset</source>
-        <translation type="vanished">Помак краја узорка</translation>
+        <translation type="obsolete">Помак краја узорка</translation>
     </message>
     <message>
         <source>Start loop offset</source>
-        <translation type="vanished">Помак почетка вртње</translation>
+        <translation type="obsolete">Помак почетка вртње</translation>
     </message>
     <message>
         <source>End loop offset</source>
-        <translation type="vanished">Помак краја вртње</translation>
+        <translation type="obsolete">Помак краја вртње</translation>
     </message>
     <message>
         <source>Mod LFO → pitch (c)</source>
-        <translation type="vanished">»Mod LFO« → тон (c)</translation>
+        <translation type="obsolete">»Mod LFO« → тон (c)</translation>
     </message>
     <message>
         <source>Vib LFO → pitch (c)</source>
-        <translation type="vanished">»Vib LFO« → тон (c)</translation>
+        <translation type="obsolete">»Vib LFO« → тон (c)</translation>
     </message>
     <message>
         <source>Mod env → pitch (c)</source>
-        <translation type="vanished">»Mod env« → тон (c)</translation>
+        <translation type="obsolete">»Mod env« → тон (c)</translation>
     </message>
     <message>
         <source>Filter, frequency (Hz)</source>
-        <translation type="vanished">Филтар, учестаност (Hz)</translation>
+        <translation type="obsolete">Филтар, учестаност (Hz)</translation>
     </message>
     <message>
         <source>Filter, frequency (×)</source>
-        <translation type="vanished">Филтар, учестаност (×)</translation>
+        <translation type="obsolete">Филтар, учестаност (×)</translation>
     </message>
     <message>
         <source>Filter, resonance (dB)</source>
-        <translation type="vanished">Филтар, резонанса (dB)</translation>
+        <translation type="obsolete">Филтар, резонанса (dB)</translation>
     </message>
     <message>
         <source>Mod LFO → filter (c)</source>
-        <translation type="vanished">»Mod LFO« → филтар (c)</translation>
+        <translation type="obsolete">»Mod LFO« → филтар (c)</translation>
     </message>
     <message>
         <source>Mod env → filter (c)</source>
-        <translation type="vanished">»Mod env« → филтар (c)</translation>
+        <translation type="obsolete">»Mod env« → филтар (c)</translation>
     </message>
     <message>
         <source>Mod LFO → volume (dB)</source>
-        <translation type="vanished">»Mod LFO« → гласноћа (dB)</translation>
+        <translation type="obsolete">»Mod LFO« → гласноћа (dB)</translation>
     </message>
     <message>
         <source>Chorus (%)</source>
-        <translation type="vanished">Хорус (%)</translation>
+        <translation type="obsolete">Хорус (%)</translation>
     </message>
     <message>
         <source>Reverb (%)</source>
-        <translation type="vanished">Јека (%)</translation>
+        <translation type="obsolete">Јека (%)</translation>
     </message>
     <message>
         <source>Pan [-50;50]</source>
-        <translation type="vanished">Пан [-50;50]</translation>
+        <translation type="obsolete">Пан [-50;50]</translation>
     </message>
     <message>
         <source>Pan [-100;100]</source>
-        <translation type="vanished">Пан [-100;100]</translation>
+        <translation type="obsolete">Пан [-100;100]</translation>
     </message>
     <message>
         <source>Mod LFO delay (s)</source>
         <translatorcomment>енглески изрази могу да се задрже...</translatorcomment>
-        <translation type="vanished">»Mod LFO« кашњење (s)</translation>
+        <translation type="obsolete">»Mod LFO« кашњење (s)</translation>
     </message>
     <message>
         <source>Mod LFO delay (×)</source>
-        <translation type="vanished">»Mod LFO« кашњење (×)</translation>
+        <translation type="obsolete">»Mod LFO« кашњење (×)</translation>
     </message>
     <message>
         <source>Mod LFO freq (Hz)</source>
-        <translation type="vanished">»Mod LFO« учестаност (Hz)</translation>
+        <translation type="obsolete">»Mod LFO« учестаност (Hz)</translation>
     </message>
     <message>
         <source>Mod LFO freq (×)</source>
-        <translation type="vanished">»Mod LFO« учестаност (×)</translation>
+        <translation type="obsolete">»Mod LFO« учестаност (×)</translation>
     </message>
     <message>
         <source>Vib LFO delay (s)</source>
-        <translation type="vanished">»Vib LFO« кашњење (s)</translation>
+        <translation type="obsolete">»Vib LFO« кашњење (s)</translation>
     </message>
     <message>
         <source>Vib LFO delay (×)</source>
-        <translation type="vanished">»Vib LFO« кашњење (×)</translation>
+        <translation type="obsolete">»Vib LFO« кашњење (×)</translation>
     </message>
     <message>
         <source>Vib LFO freq (Hz)</source>
-        <translation type="vanished">»Vib LFO« учестаност (Hz)</translation>
+        <translation type="obsolete">»Vib LFO« учестаност (Hz)</translation>
     </message>
     <message>
         <source>Vib LFO freq (×)</source>
-        <translation type="vanished">»Vib LFO« учестаност (×)</translation>
+        <translation type="obsolete">»Vib LFO« учестаност (×)</translation>
     </message>
     <message>
         <source>Mod env delay (s)</source>
-        <translation type="vanished">»Mod env« кашњење (s)</translation>
+        <translation type="obsolete">»Mod env« кашњење (s)</translation>
     </message>
     <message>
         <source>Mod env delay (×)</source>
-        <translation type="vanished">»Mod env« кашњење (×)</translation>
+        <translation type="obsolete">»Mod env« кашњење (×)</translation>
     </message>
     <message>
         <source>Mod env attack (s)</source>
-        <translation type="vanished">»Mod env« пораст (s)</translation>
+        <translation type="obsolete">»Mod env« пораст (s)</translation>
     </message>
     <message>
         <source>Mod env attack (×)</source>
-        <translation type="vanished">»Mod env« пораст (×)</translation>
+        <translation type="obsolete">»Mod env« пораст (×)</translation>
     </message>
     <message>
         <source>Mod env hold (s)</source>
-        <translation type="vanished">»Mod env« одржавање (s)</translation>
+        <translation type="obsolete">»Mod env« одржавање (s)</translation>
     </message>
     <message>
         <source>Mod env hold (×)</source>
-        <translation type="vanished">»Mod env« одржавање (×)</translation>
+        <translation type="obsolete">»Mod env« одржавање (×)</translation>
     </message>
     <message>
         <source>Mod env decay (s)</source>
-        <translation type="vanished">»Mod env« пад (s)</translation>
+        <translation type="obsolete">»Mod env« пад (s)</translation>
     </message>
     <message>
         <source>Mod env decay (×)</source>
-        <translation type="vanished">»Mod env« пад (×)</translation>
+        <translation type="obsolete">»Mod env« пад (×)</translation>
     </message>
     <message>
         <source>Mod env sustain (%)</source>
-        <translation type="vanished">»Mod env« задршка (%)</translation>
+        <translation type="obsolete">»Mod env« задршка (%)</translation>
     </message>
     <message>
         <source>Mod env release (s)</source>
-        <translation type="vanished">»Mod env« стишавање (s)</translation>
+        <translation type="obsolete">»Mod env« стишавање (s)</translation>
     </message>
     <message>
         <source>Mod env release (×)</source>
-        <translation type="vanished">»Mod env« стишавање (×)</translation>
+        <translation type="obsolete">»Mod env« стишавање (×)</translation>
     </message>
     <message>
         <source>Key → Mod env hold (c)</source>
-        <translation type="vanished">Нота → »Mod env« одржавање (c)</translation>
+        <translation type="obsolete">Нота → »Mod env« одржавање (c)</translation>
     </message>
     <message>
         <source>Key → Mod env decay (c)</source>
-        <translation type="vanished">Нота → »Mod env« пад (c)</translation>
+        <translation type="obsolete">Нота → »Mod env« пад (c)</translation>
     </message>
     <message>
         <source>Vol env delay (s)</source>
-        <translation type="vanished">»Vol env« кашњење (s)</translation>
+        <translation type="obsolete">»Vol env« кашњење (s)</translation>
     </message>
     <message>
         <source>Vol env delay (×)</source>
-        <translation type="vanished">»Vol env« кашњење (×)</translation>
+        <translation type="obsolete">»Vol env« кашњење (×)</translation>
     </message>
     <message>
         <source>Vol env attack (s)</source>
-        <translation type="vanished">»Vol env« пораст (s)</translation>
+        <translation type="obsolete">»Vol env« пораст (s)</translation>
     </message>
     <message>
         <source>Vol env attack (×)</source>
-        <translation type="vanished">»Vol env« пораст (×)</translation>
+        <translation type="obsolete">»Vol env« пораст (×)</translation>
     </message>
     <message>
         <source>Vol env hold (s)</source>
-        <translation type="vanished">»Vol env« одржавање (s)</translation>
+        <translation type="obsolete">»Vol env« одржавање (s)</translation>
     </message>
     <message>
         <source>Vol env hold (×)</source>
-        <translation type="vanished">»Vol env« одржавање (×)</translation>
+        <translation type="obsolete">»Vol env« одржавање (×)</translation>
     </message>
     <message>
         <source>Vol env decay (s)</source>
-        <translation type="vanished">»Vol env« пад (s)</translation>
+        <translation type="obsolete">»Vol env« пад (s)</translation>
     </message>
     <message>
         <source>Vol env decay (×)</source>
-        <translation type="vanished">»Vol env« пад (×)</translation>
+        <translation type="obsolete">»Vol env« пад (×)</translation>
     </message>
     <message>
         <source>Vol env sustain (dB)</source>
-        <translation type="vanished">»Vol env« задршка (dB)</translation>
+        <translation type="obsolete">»Vol env« задршка (dB)</translation>
     </message>
     <message>
         <source>Vol env release (s)</source>
-        <translation type="vanished">»Vol env« стишавање (s)</translation>
+        <translation type="obsolete">»Vol env« стишавање (s)</translation>
     </message>
     <message>
         <source>Vol env release (×)</source>
-        <translation type="vanished">»Vol env« стишавање (×)</translation>
+        <translation type="obsolete">»Vol env« стишавање (×)</translation>
     </message>
     <message>
         <source>Key → Vol env hold (c)</source>
-        <translation type="vanished">Нота → »Vol env« одржавање (c)</translation>
+        <translation type="obsolete">Нота → »Vol env« одржавање (c)</translation>
     </message>
     <message>
         <source>Key → Vol env decay (c)</source>
-        <translation type="vanished">Нота → »Vol env« пад (c)</translation>
+        <translation type="obsolete">Нота → »Vol env« пад (c)</translation>
     </message>
     <message>
         <source>Key range</source>
-        <translation type="vanished">Опсег нота</translation>
+        <translation type="obsolete">Опсег нота</translation>
     </message>
     <message>
         <source>Velocity range</source>
-        <translation type="vanished">Опсег јачине удара</translation>
+        <translation type="obsolete">Опсег јачине удара</translation>
     </message>
     <message>
         <source>Fixed key</source>
-        <translation type="vanished">Учвршћена нота</translation>
+        <translation type="obsolete">Учвршћена нота</translation>
     </message>
     <message>
         <source>Fixed velocity</source>
-        <translation type="vanished">Учвршћена јачина</translation>
+        <translation type="obsolete">Учвршћена јачина</translation>
     </message>
     <message>
         <source>Attenuation (dB)</source>
-        <translation type="vanished">Пригушење (dB)</translation>
+        <translation type="obsolete">Пригушење (dB)</translation>
     </message>
     <message>
         <source>Tuning (semi-tones)</source>
-        <translation type="vanished">Угађање (полутонови)</translation>
+        <translation type="obsolete">Угађање (полутонови)</translation>
     </message>
     <message>
         <source>Tuning (cents)</source>
-        <translation type="vanished">Угађање (центи)</translation>
+        <translation type="obsolete">Угађање (центи)</translation>
     </message>
     <message>
         <source>Loop playback</source>
-        <translation type="vanished">Свирање вртње</translation>
+        <translation type="obsolete">Свирање вртње</translation>
     </message>
     <message>
         <source>Tuning (scale)</source>
-        <translation type="vanished">Угађање (лествица)</translation>
+        <translation type="obsolete">Угађање (лествица)</translation>
     </message>
     <message>
         <source>Exclusive class</source>
-        <translation type="vanished">Нарочита класа</translation>
+        <translation type="obsolete">Нарочита класа</translation>
     </message>
     <message>
         <source>Root key</source>
-        <translation type="vanished">Основна нота</translation>
+        <translation type="obsolete">Основна нота</translation>
     </message>
 </context>
 <context>
@@ -4611,7 +4664,7 @@ Splitting the file into several sf2 might solve the problem.</source>
     <name>PageOverview</name>
     <message>
         <source>Name</source>
-        <translation type="vanished">Назив</translation>
+        <translation type="obsolete">Назив</translation>
     </message>
     <message>
         <location filename="editor/overview/pageoverview.cpp" line="82"/>
@@ -4628,7 +4681,7 @@ Splitting the file into several sf2 might solve the problem.</source>
     <name>PageOverviewInst</name>
     <message>
         <source>Instrument list</source>
-        <translation type="vanished">Списак инструмената</translation>
+        <translation type="obsolete">Списак инструмената</translation>
     </message>
     <message>
         <location filename="editor/overview/pageoverviewinst.cpp" line="32"/>
@@ -4726,7 +4779,7 @@ Splitting the file into several sf2 might solve the problem.</source>
     <name>PageOverviewPrst</name>
     <message>
         <source>Preset list</source>
-        <translation type="vanished">Списак поставки</translation>
+        <translation type="obsolete">Списак поставки</translation>
     </message>
     <message>
         <location filename="editor/overview/pageoverviewprst.cpp" line="32"/>
@@ -4794,7 +4847,7 @@ Splitting the file into several sf2 might solve the problem.</source>
     <name>PageOverviewSmpl</name>
     <message>
         <source>Sample list</source>
-        <translation type="vanished">Списак узорака</translation>
+        <translation type="obsolete">Списак узорака</translation>
     </message>
     <message>
         <location filename="editor/overview/pageoverviewsmpl.cpp" line="38"/>
@@ -5144,7 +5197,7 @@ rate</source>
         <source>Apply</source>
         <translation>Примени</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="editor/pagesmpl.ui" line="790"/>
         <location filename="editor/pagesmpl.cpp" line="109"/>
         <source>Equalizer (±15 dB)</source>
@@ -5306,903 +5359,903 @@ rate</source>
 <context>
     <name>PageTable</name>
     <message>
-        <location filename="editor/pagetable.cpp" line="105"/>
+        <location filename="editor/pagetable.cpp" line="106"/>
         <source>Global</source>
         <translation>Опште</translation>
     </message>
     <message>
-        <location filename="editor/pagetable.cpp" line="507"/>
-        <location filename="editor/pagetable.cpp" line="529"/>
-        <location filename="editor/pagetable.cpp" line="1575"/>
-        <location filename="editor/pagetable.cpp" line="1641"/>
+        <location filename="editor/pagetable.cpp" line="504"/>
+        <location filename="editor/pagetable.cpp" line="526"/>
+        <location filename="editor/pagetable.cpp" line="1572"/>
+        <location filename="editor/pagetable.cpp" line="1638"/>
         <source>Modulator</source>
         <translation>Модулатор</translation>
     </message>
     <message>
-        <location filename="editor/pagetable.cpp" line="509"/>
+        <location filename="editor/pagetable.cpp" line="506"/>
         <source>Link (invalid)</source>
         <translation>Веза (неваљала)</translation>
     </message>
     <message>
-        <location filename="editor/pagetable.cpp" line="561"/>
+        <location filename="editor/pagetable.cpp" line="558"/>
         <source>Copy / duplicate modulators</source>
         <translation>Умножи/Удвостручи модулаторе</translation>
     </message>
     <message>
-        <location filename="editor/pagetable.cpp" line="564"/>
+        <location filename="editor/pagetable.cpp" line="561"/>
         <source>Duplicate modulators toward...</source>
         <translation>Удвостручи модулаторе у...</translation>
     </message>
     <message>
-        <location filename="editor/pagetable.cpp" line="565"/>
-        <location filename="editor/pagetable.cpp" line="576"/>
+        <location filename="editor/pagetable.cpp" line="562"/>
+        <location filename="editor/pagetable.cpp" line="573"/>
         <source>Copy all modulators</source>
         <translation>Умножи све модулаторе</translation>
     </message>
     <message>
-        <location filename="editor/pagetable.cpp" line="569"/>
+        <location filename="editor/pagetable.cpp" line="566"/>
         <source>Duplicate the selection toward...</source>
         <translation>Удвостручи одабрано у...</translation>
     </message>
     <message>
-        <location filename="editor/pagetable.cpp" line="570"/>
-        <location filename="editor/pagetable.cpp" line="578"/>
+        <location filename="editor/pagetable.cpp" line="567"/>
+        <location filename="editor/pagetable.cpp" line="575"/>
         <source>Copy the selected modulators</source>
         <translation>Умножи одабране модулаторе</translation>
     </message>
     <message>
-        <location filename="editor/pagetable.cpp" line="1890"/>
+        <location filename="editor/pagetable.cpp" line="1887"/>
         <source>Forbidden action:</source>
         <translation>Забрањена радња:</translation>
     </message>
     <message>
-        <location filename="editor/pagetable.cpp" line="1900"/>
-        <location filename="editor/pagetable.cpp" line="1909"/>
-        <location filename="editor/pagetable.cpp" line="2388"/>
-        <location filename="editor/pagetable.cpp" line="2397"/>
+        <location filename="editor/pagetable.cpp" line="1897"/>
+        <location filename="editor/pagetable.cpp" line="1906"/>
+        <location filename="editor/pagetable.cpp" line="2385"/>
+        <location filename="editor/pagetable.cpp" line="2394"/>
         <source>Warning</source>
         <translation>Упозорење</translation>
     </message>
     <message>
-        <location filename="editor/pagetable.cpp" line="1901"/>
+        <location filename="editor/pagetable.cpp" line="1898"/>
         <source>offsets cannot be modulated in a preset.</source>
         <translation>помаци не могу да се модулирају у поставку.</translation>
     </message>
     <message>
-        <location filename="editor/pagetable.cpp" line="1910"/>
+        <location filename="editor/pagetable.cpp" line="1907"/>
         <source>%1 cannot be modulated in a preset.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>&quot; cannot be modulated in a preset.</source>
-        <translation type="vanished">“ не може да се модулира у поставку.</translation>
+        <translation type="obsolete">“ не може да се модулира у поставку.</translation>
     </message>
     <message>
-        <location filename="editor/pagetable.cpp" line="2389"/>
+        <location filename="editor/pagetable.cpp" line="2386"/>
         <source>An instrument comprising no samples is not compatible with this tool.</source>
         <translation>Инструменат који не садржи узорке није у сагласности са овим алатом.</translation>
     </message>
     <message>
-        <location filename="editor/pagetable.cpp" line="2390"/>
+        <location filename="editor/pagetable.cpp" line="2387"/>
         <source>A preset comprising no instruments is not compatible with this tool.</source>
         <translation>Поставка која не садржи инструменте није у сагласности са овим алатом.</translation>
     </message>
     <message>
-        <location filename="editor/pagetable.cpp" line="2397"/>
+        <location filename="editor/pagetable.cpp" line="2394"/>
         <source>The keyrange of all divisions must be specified.</source>
         <translation>Мора да се наведе нотни опсег свих делова.</translation>
     </message>
     <message>
         <source>The instrument contains no samples.</source>
-        <translation type="vanished">Овај инструменат не садржи узорке.</translation>
+        <translation type="obsolete">Овај инструменат не садржи узорке.</translation>
     </message>
     <message>
         <source>The preset contains no instruments.</source>
-        <translation type="vanished">Ова поставка не садржи инструменте.</translation>
+        <translation type="obsolete">Ова поставка не садржи инструменте.</translation>
     </message>
     <message>
         <source>No keyrange specified for the instrument.</source>
-        <translation type="vanished">Није постављен нотни опсег инструмента.</translation>
+        <translation type="obsolete">Није постављен нотни опсег инструмента.</translation>
     </message>
     <message>
         <source>No keyrange specified for the preset.</source>
-        <translation type="vanished">Није постављен нотни опсег за поставку.</translation>
+        <translation type="obsolete">Није постављен нотни опсег за поставку.</translation>
     </message>
 </context>
 <context>
     <name>Page_Inst</name>
     <message>
         <source>Table</source>
-        <translation type="vanished">Таблица</translation>
+        <translation type="obsolete">Таблица</translation>
     </message>
     <message>
         <source>Ranges</source>
-        <translation type="vanished">Опсег</translation>
+        <translation type="obsolete">Опсег</translation>
     </message>
     <message>
         <source>Envelopes</source>
-        <translation type="vanished">Коверте</translation>
+        <translation type="obsolete">Коверте</translation>
     </message>
     <message>
         <source>Key range</source>
-        <translation type="vanished">Нотни опсег</translation>
+        <translation type="obsolete">Нотни опсег</translation>
     </message>
     <message>
         <source>Velocity range</source>
-        <translation type="vanished">Опсег јачине удара</translation>
+        <translation type="obsolete">Опсег јачине удара</translation>
     </message>
     <message>
         <source>Attenuation (dB)</source>
-        <translation type="vanished">Пригушење (dB)</translation>
+        <translation type="obsolete">Пригушење (dB)</translation>
     </message>
     <message>
         <source>Pan [-50;50]</source>
-        <translation type="vanished">Пан [-50;50]</translation>
+        <translation type="obsolete">Пан [-50;50]</translation>
     </message>
     <message>
         <source>Loop playback</source>
-        <translation type="vanished">Свирање вртње</translation>
+        <translation type="obsolete">Свирање вртње</translation>
     </message>
     <message>
         <source>Root key</source>
-        <translation type="vanished">Основна нота</translation>
+        <translation type="obsolete">Основна нота</translation>
     </message>
     <message>
         <source>Tuning (semi-tones)</source>
-        <translation type="vanished">Угађање (полутонови)</translation>
+        <translation type="obsolete">Угађање (полутонови)</translation>
     </message>
     <message>
         <source>Tuning (cents)</source>
-        <translation type="vanished">Угађање (центи)</translation>
+        <translation type="obsolete">Угађање (центи)</translation>
     </message>
     <message>
         <source>Tuning (scale)</source>
-        <translation type="vanished">Угађање (лествица)</translation>
+        <translation type="obsolete">Угађање (лествица)</translation>
     </message>
     <message>
         <source>Filter, frequency (Hz)</source>
-        <translation type="vanished">Филтар, учестаност (Hz)</translation>
+        <translation type="obsolete">Филтар, учестаност (Hz)</translation>
     </message>
     <message>
         <source>Filter, resonance (dB)</source>
-        <translation type="vanished">Филтар, резонанса (dB)</translation>
+        <translation type="obsolete">Филтар, резонанса (dB)</translation>
     </message>
     <message>
         <source>Vol env delay (s)</source>
-        <translation type="vanished">»Vol env« кашњење (s)</translation>
+        <translation type="obsolete">»Vol env« кашњење (s)</translation>
     </message>
     <message>
         <source>Vol env attack (s)</source>
-        <translation type="vanished">»Vol env« пораст (s)</translation>
+        <translation type="obsolete">»Vol env« пораст (s)</translation>
     </message>
     <message>
         <source>Vol env hold (s)</source>
-        <translation type="vanished">»Vol env« одржавање (s)</translation>
+        <translation type="obsolete">»Vol env« одржавање (s)</translation>
     </message>
     <message>
         <source>Vol env decay (s)</source>
-        <translation type="vanished">»Vol env« пад (s)</translation>
+        <translation type="obsolete">»Vol env« пад (s)</translation>
     </message>
     <message>
         <source>Vol env sustain (dB)</source>
-        <translation type="vanished">»Vol env« задршка (dB)</translation>
+        <translation type="obsolete">»Vol env« задршка (dB)</translation>
     </message>
     <message>
         <source>Vol env release (s)</source>
-        <translation type="vanished">»Vol env« стишавање (s)</translation>
+        <translation type="obsolete">»Vol env« стишавање (s)</translation>
     </message>
     <message>
         <source>Key → Vol env hold (c)</source>
-        <translation type="vanished">Нота → »Vol env« одржавање (c)</translation>
+        <translation type="obsolete">Нота → »Vol env« одржавање (c)</translation>
     </message>
     <message>
         <source>Key → Vol env decay (c)</source>
-        <translation type="vanished">Нота → »Vol env« пад (c)</translation>
+        <translation type="obsolete">Нота → »Vol env« пад (c)</translation>
     </message>
     <message>
         <source>Mod env delay (s)</source>
-        <translation type="vanished">»Mod env« кашњење (s)</translation>
+        <translation type="obsolete">»Mod env« кашњење (s)</translation>
     </message>
     <message>
         <source>Mod env attack (s)</source>
-        <translation type="vanished">»Mod env« пораст (s)</translation>
+        <translation type="obsolete">»Mod env« пораст (s)</translation>
     </message>
     <message>
         <source>Mod env hold (s)</source>
-        <translation type="vanished">»Mod env« одржавање (s)</translation>
+        <translation type="obsolete">»Mod env« одржавање (s)</translation>
     </message>
     <message>
         <source>Mod env decay (s)</source>
-        <translation type="vanished">»Mod env« пад (s)</translation>
+        <translation type="obsolete">»Mod env« пад (s)</translation>
     </message>
     <message>
         <source>Mod env sustain (%)</source>
-        <translation type="vanished">»Mod env« задршка (%)</translation>
+        <translation type="obsolete">»Mod env« задршка (%)</translation>
     </message>
     <message>
         <source>Mod env release (s)</source>
-        <translation type="vanished">»Mod env« стишавање (s)</translation>
+        <translation type="obsolete">»Mod env« стишавање (s)</translation>
     </message>
     <message>
         <source>Mod env → pitch (c)</source>
-        <translation type="vanished">»Mod env« → тон (c)</translation>
+        <translation type="obsolete">»Mod env« → тон (c)</translation>
     </message>
     <message>
         <source>Mod env → filter (c)</source>
-        <translation type="vanished">»Mod env« → филтар (c)</translation>
+        <translation type="obsolete">»Mod env« → филтар (c)</translation>
     </message>
     <message>
         <source>Key → Mod env hold (c)</source>
-        <translation type="vanished">Нота → »Mod env« одржавање (c)</translation>
+        <translation type="obsolete">Нота → »Mod env« одржавање (c)</translation>
     </message>
     <message>
         <source>Key → Mod env decay (c)</source>
-        <translation type="vanished">Нота → »Mod env« пад (c)</translation>
+        <translation type="obsolete">Нота → »Mod env« пад (c)</translation>
     </message>
     <message>
         <source>Mod LFO delay (s)</source>
-        <translation type="vanished">»Mod LFO« кашњење (s)</translation>
+        <translation type="obsolete">»Mod LFO« кашњење (s)</translation>
     </message>
     <message>
         <source>Mod LFO freq (Hz)</source>
-        <translation type="vanished">»Mod LFO« учестаност (Hz)</translation>
+        <translation type="obsolete">»Mod LFO« учестаност (Hz)</translation>
     </message>
     <message>
         <source>Mod LFO → pitch (c)</source>
-        <translation type="vanished">»Mod LFO« → тон (c)</translation>
+        <translation type="obsolete">»Mod LFO« → тон (c)</translation>
     </message>
     <message>
         <source>Mod LFO → filter (c)</source>
-        <translation type="vanished">»Mod LFO« → филтар (c)</translation>
+        <translation type="obsolete">»Mod LFO« → филтар (c)</translation>
     </message>
     <message>
         <source>Mod LFO → volume (dB)</source>
-        <translation type="vanished">»Mod LFO« → гласноћа (dB)</translation>
+        <translation type="obsolete">»Mod LFO« → гласноћа (dB)</translation>
     </message>
     <message>
         <source>Vib LFO delay (s)</source>
-        <translation type="vanished">»Vib LFO« кашњење (s)</translation>
+        <translation type="obsolete">»Vib LFO« кашњење (s)</translation>
     </message>
     <message>
         <source>Vib LFO freq (Hz)</source>
-        <translation type="vanished">»Vib LFO« учестаност (Hz)</translation>
+        <translation type="obsolete">»Vib LFO« учестаност (Hz)</translation>
     </message>
     <message>
         <source>Vib LFO → pitch (c)</source>
-        <translation type="vanished">»Vib LFO« → тон (c)</translation>
+        <translation type="obsolete">»Vib LFO« → тон (c)</translation>
     </message>
     <message>
         <source>Exclusive class</source>
-        <translation type="vanished">Нарочита класа</translation>
+        <translation type="obsolete">Нарочита класа</translation>
     </message>
     <message>
         <source>Chorus (%)</source>
-        <translation type="vanished">Хорус (%)</translation>
+        <translation type="obsolete">Хорус (%)</translation>
     </message>
     <message>
         <source>Reverb (%)</source>
-        <translation type="vanished">Јека (%)</translation>
+        <translation type="obsolete">Јека (%)</translation>
     </message>
     <message>
         <source>Fixed key</source>
-        <translation type="vanished">Учвршћена нота</translation>
+        <translation type="obsolete">Учвршћена нота</translation>
     </message>
     <message>
         <source>Fixed velocity</source>
-        <translation type="vanished">Учвршћена јачина</translation>
+        <translation type="obsolete">Учвршћена јачина</translation>
     </message>
     <message>
         <source>Sample start offset</source>
-        <translation type="vanished">Помак почетка узорка</translation>
+        <translation type="obsolete">Помак почетка узорка</translation>
     </message>
     <message>
         <source>Sample end offset</source>
-        <translation type="vanished">Помак краја узорка</translation>
+        <translation type="obsolete">Помак краја узорка</translation>
     </message>
     <message>
         <source>Start loop offset</source>
-        <translation type="vanished">Помак почетка вртње</translation>
+        <translation type="obsolete">Помак почетка вртње</translation>
     </message>
     <message>
         <source>End loop offset</source>
-        <translation type="vanished">Помак краја вртње</translation>
+        <translation type="obsolete">Помак краја вртње</translation>
     </message>
     <message>
         <source>Global</source>
-        <translation type="vanished">Опште</translation>
+        <translation type="obsolete">Опште</translation>
     </message>
     <message>
         <source>Modulators</source>
-        <translation type="vanished">Модулатори</translation>
+        <translation type="obsolete">Модулатори</translation>
     </message>
     <message>
         <source>Add a modulator</source>
-        <translation type="vanished">Додај модулатор</translation>
+        <translation type="obsolete">Додај модулатор</translation>
     </message>
     <message>
         <source>Delete a modulator</source>
-        <translation type="vanished">Уклони модулатор</translation>
+        <translation type="obsolete">Уклони модулатор</translation>
     </message>
     <message>
         <source>Copy modulators</source>
-        <translation type="vanished">Умножи модулаторе</translation>
+        <translation type="obsolete">Умножи модулаторе</translation>
     </message>
     <message>
         <source>Paste the copied modulators</source>
-        <translation type="vanished">Убаци умножене модулаторе</translation>
+        <translation type="obsolete">Убаци умножене модулаторе</translation>
     </message>
     <message>
         <source>Source</source>
-        <translation type="vanished">Извориште</translation>
+        <translation type="obsolete">Извориште</translation>
     </message>
     <message>
         <source>Amount</source>
-        <translation type="vanished">Количина</translation>
+        <translation type="obsolete">Количина</translation>
     </message>
     <message>
         <source>Destination</source>
-        <translation type="vanished">Одредиште</translation>
+        <translation type="obsolete">Одредиште</translation>
     </message>
     <message>
         <source>Source / Amount</source>
-        <translation type="vanished">Извориште/Количина</translation>
+        <translation type="obsolete">Извориште/Количина</translation>
     </message>
     <message>
         <source>Abs. value</source>
-        <translation type="vanished">Апсолутна вредност</translation>
+        <translation type="obsolete">Апсолутна вредност</translation>
     </message>
     <message>
         <source>&lt;b&gt;Instrument is not linked to any preset.&lt;/b&gt;</source>
-        <translation type="vanished">&lt;b&gt;Овај инструменат није везан за било коју поставку.&lt;/b&gt;</translation>
+        <translation type="obsolete">&lt;b&gt;Овај инструменат није везан за било коју поставку.&lt;/b&gt;</translation>
     </message>
     <message>
         <source>&lt;b&gt;Instrument linked to preset: &lt;/b&gt;</source>
-        <translation type="vanished">&lt;b&gt;Овај инструменат је везан за поставку: &lt;/b&gt;</translation>
+        <translation type="obsolete">&lt;b&gt;Овај инструменат је везан за поставку: &lt;/b&gt;</translation>
     </message>
     <message>
         <source>&lt;b&gt;Instrument linked to presets: &lt;/b&gt;</source>
-        <translation type="vanished">&lt;b&gt;Овај инструменат је везан за поставке: &lt;/b&gt;</translation>
+        <translation type="obsolete">&lt;b&gt;Овај инструменат је везан за поставке: &lt;/b&gt;</translation>
     </message>
     <message>
         <source>Warning</source>
-        <translation type="vanished">Упозорење</translation>
+        <translation type="obsolete">Упозорење</translation>
     </message>
     <message>
         <source>The instrument contains no samples.</source>
-        <translation type="vanished">Овај инструменат не садржи узорке.</translation>
+        <translation type="obsolete">Овај инструменат не садржи узорке.</translation>
     </message>
     <message>
         <source>Creation </source>
-        <translation type="vanished">Стварање </translation>
+        <translation type="obsolete">Стварање </translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="vanished">Поништи</translation>
+        <translation type="obsolete">Поништи</translation>
     </message>
     <message>
         <source>untitled</source>
-        <translation type="vanished">без назива</translation>
+        <translation type="obsolete">без назива</translation>
     </message>
 </context>
 <context>
     <name>Page_Prst</name>
     <message>
         <source>Bank</source>
-        <translation type="vanished">Банка</translation>
+        <translation type="obsolete">Банка</translation>
     </message>
     <message>
         <source>Preset</source>
-        <translation type="vanished">Поставка</translation>
+        <translation type="obsolete">Поставка</translation>
     </message>
     <message>
         <source>(percussion)</source>
-        <translation type="vanished">(удараљке)</translation>
+        <translation type="obsolete">(удараљке)</translation>
     </message>
     <message>
         <source>Table</source>
-        <translation type="vanished">Таблица</translation>
+        <translation type="obsolete">Таблица</translation>
     </message>
     <message>
         <source>Ranges</source>
-        <translation type="vanished">Опсег</translation>
+        <translation type="obsolete">Опсег</translation>
     </message>
     <message>
         <source>Key range</source>
-        <translation type="vanished">Нотни опсег</translation>
+        <translation type="obsolete">Нотни опсег</translation>
     </message>
     <message>
         <source>Velocity range</source>
-        <translation type="vanished">Опсег јачине удара</translation>
+        <translation type="obsolete">Опсег јачине удара</translation>
     </message>
     <message>
         <source>Attenuation (dB)</source>
-        <translation type="vanished">Пригушење (dB)</translation>
+        <translation type="obsolete">Пригушење (dB)</translation>
     </message>
     <message>
         <source>Pan [-100;100]</source>
-        <translation type="vanished">Пан [-100;100]</translation>
+        <translation type="obsolete">Пан [-100;100]</translation>
     </message>
     <message>
         <source>Tuning (semi-tones)</source>
-        <translation type="vanished">Угађање (полутонови)</translation>
+        <translation type="obsolete">Угађање (полутонови)</translation>
     </message>
     <message>
         <source>Tuning (cents)</source>
-        <translation type="vanished">Угађање (центи)</translation>
+        <translation type="obsolete">Угађање (центи)</translation>
     </message>
     <message>
         <source>Tuning (scale)</source>
-        <translation type="vanished">Угађање (лествица)</translation>
+        <translation type="obsolete">Угађање (лествица)</translation>
     </message>
     <message>
         <source>Filter, frequency (×)</source>
-        <translation type="vanished">Филтар, учестаност (×)</translation>
+        <translation type="obsolete">Филтар, учестаност (×)</translation>
     </message>
     <message>
         <source>Filter, resonance (dB)</source>
-        <translation type="vanished">Филтар, резонанса (dB)</translation>
+        <translation type="obsolete">Филтар, резонанса (dB)</translation>
     </message>
     <message>
         <source>Vol env delay (×)</source>
-        <translation type="vanished">»Vol env« кашњење (×)</translation>
+        <translation type="obsolete">»Vol env« кашњење (×)</translation>
     </message>
     <message>
         <source>Vol env attack (×)</source>
-        <translation type="vanished">»Vol env« пораст (×)</translation>
+        <translation type="obsolete">»Vol env« пораст (×)</translation>
     </message>
     <message>
         <source>Vol env hold (×)</source>
-        <translation type="vanished">»Vol env« одржавање (×)</translation>
+        <translation type="obsolete">»Vol env« одржавање (×)</translation>
     </message>
     <message>
         <source>Vol env decay (×)</source>
-        <translation type="vanished">»Vol env« пад (×)</translation>
+        <translation type="obsolete">»Vol env« пад (×)</translation>
     </message>
     <message>
         <source>Vol env sustain (dB)</source>
-        <translation type="vanished">»Vol env« задршка (dB)</translation>
+        <translation type="obsolete">»Vol env« задршка (dB)</translation>
     </message>
     <message>
         <source>Vol env release (×)</source>
-        <translation type="vanished">»Vol env« стишавање (×)</translation>
+        <translation type="obsolete">»Vol env« стишавање (×)</translation>
     </message>
     <message>
         <source>Key → Vol env hold (c)</source>
-        <translation type="vanished">Нота → »Vol env« одржавање (c)</translation>
+        <translation type="obsolete">Нота → »Vol env« одржавање (c)</translation>
     </message>
     <message>
         <source>Key → Vol env decay (c)</source>
-        <translation type="vanished">Нота → »Vol env« пад (c)</translation>
+        <translation type="obsolete">Нота → »Vol env« пад (c)</translation>
     </message>
     <message>
         <source>Mod env delay (×)</source>
-        <translation type="vanished">»Mod env« кашњење (×)</translation>
+        <translation type="obsolete">»Mod env« кашњење (×)</translation>
     </message>
     <message>
         <source>Mod env attack (×)</source>
-        <translation type="vanished">»Mod env« пораст (×)</translation>
+        <translation type="obsolete">»Mod env« пораст (×)</translation>
     </message>
     <message>
         <source>Mod env hold (×)</source>
-        <translation type="vanished">»Mod env« одржавање (×)</translation>
+        <translation type="obsolete">»Mod env« одржавање (×)</translation>
     </message>
     <message>
         <source>Mod env decay (×)</source>
-        <translation type="vanished">»Mod env« пад (×)</translation>
+        <translation type="obsolete">»Mod env« пад (×)</translation>
     </message>
     <message>
         <source>Mod env sustain (%)</source>
-        <translation type="vanished">»Mod env« задршка (%)</translation>
+        <translation type="obsolete">»Mod env« задршка (%)</translation>
     </message>
     <message>
         <source>Mod env release (×)</source>
-        <translation type="vanished">»Mod env« стишавање (×)</translation>
+        <translation type="obsolete">»Mod env« стишавање (×)</translation>
     </message>
     <message>
         <source>Mod env → pitch (c)</source>
-        <translation type="vanished">»Mod env« → тон (c)</translation>
+        <translation type="obsolete">»Mod env« → тон (c)</translation>
     </message>
     <message>
         <source>Mod env → filter (c)</source>
-        <translation type="vanished">»Mod env« → филтар (c)</translation>
+        <translation type="obsolete">»Mod env« → филтар (c)</translation>
     </message>
     <message>
         <source>Key → Mod env hold (c)</source>
-        <translation type="vanished">Нота → »Mod env« одржавање (c)</translation>
+        <translation type="obsolete">Нота → »Mod env« одржавање (c)</translation>
     </message>
     <message>
         <source>Key → Mod env decay (c)</source>
-        <translation type="vanished">Нота → »Mod env« пад (c)</translation>
+        <translation type="obsolete">Нота → »Mod env« пад (c)</translation>
     </message>
     <message>
         <source>Mod LFO delay (×)</source>
-        <translation type="vanished">»Mod LFO« кашњење (×)</translation>
+        <translation type="obsolete">»Mod LFO« кашњење (×)</translation>
     </message>
     <message>
         <source>Mod LFO freq (×)</source>
-        <translation type="vanished">»Mod LFO« учестаност (×)</translation>
+        <translation type="obsolete">»Mod LFO« учестаност (×)</translation>
     </message>
     <message>
         <source>Mod LFO → pitch (c)</source>
-        <translation type="vanished">»Mod LFO« → тон (c)</translation>
+        <translation type="obsolete">»Mod LFO« → тон (c)</translation>
     </message>
     <message>
         <source>Mod LFO → filter (c)</source>
-        <translation type="vanished">»Mod LFO« → филтар (c)</translation>
+        <translation type="obsolete">»Mod LFO« → филтар (c)</translation>
     </message>
     <message>
         <source>Mod LFO → volume (dB)</source>
-        <translation type="vanished">»Mod LFO« → гласноћа (dB)</translation>
+        <translation type="obsolete">»Mod LFO« → гласноћа (dB)</translation>
     </message>
     <message>
         <source>Vib LFO delay (×)</source>
-        <translation type="vanished">»Vib LFO« кашњење (×)</translation>
+        <translation type="obsolete">»Vib LFO« кашњење (×)</translation>
     </message>
     <message>
         <source>Vib LFO freq (×)</source>
-        <translation type="vanished">»Vib LFO« учестаност (×)</translation>
+        <translation type="obsolete">»Vib LFO« учестаност (×)</translation>
     </message>
     <message>
         <source>Vib LFO → pitch (c)</source>
-        <translation type="vanished">»Vib LFO« → тон (c)</translation>
+        <translation type="obsolete">»Vib LFO« → тон (c)</translation>
     </message>
     <message>
         <source>Chorus (%)</source>
-        <translation type="vanished">Хорус (%)</translation>
+        <translation type="obsolete">Хорус (%)</translation>
     </message>
     <message>
         <source>Reverb (%)</source>
-        <translation type="vanished">Јека (%)</translation>
+        <translation type="obsolete">Јека (%)</translation>
     </message>
     <message>
         <source>Global</source>
-        <translation type="vanished">Опште</translation>
+        <translation type="obsolete">Опште</translation>
     </message>
     <message>
         <source>Modulators</source>
-        <translation type="vanished">Модулатори</translation>
+        <translation type="obsolete">Модулатори</translation>
     </message>
     <message>
         <source>Add a modulator</source>
-        <translation type="vanished">Додај модулатор</translation>
+        <translation type="obsolete">Додај модулатор</translation>
     </message>
     <message>
         <source>Delete a modulator</source>
-        <translation type="vanished">Уклони модулатор</translation>
+        <translation type="obsolete">Уклони модулатор</translation>
     </message>
     <message>
         <source>Copy modulators</source>
-        <translation type="vanished">Умножи модулаторе</translation>
+        <translation type="obsolete">Умножи модулаторе</translation>
     </message>
     <message>
         <source>Paste the copied modulators</source>
-        <translation type="vanished">Убаци умножене модулаторе</translation>
+        <translation type="obsolete">Убаци умножене модулаторе</translation>
     </message>
     <message>
         <source>Source</source>
-        <translation type="vanished">Извориште</translation>
+        <translation type="obsolete">Извориште</translation>
     </message>
     <message>
         <source>Amount</source>
-        <translation type="vanished">Количина</translation>
+        <translation type="obsolete">Количина</translation>
     </message>
     <message>
         <source>Destination</source>
-        <translation type="vanished">Одредиште</translation>
+        <translation type="obsolete">Одредиште</translation>
     </message>
     <message>
         <source>Source / Amount</source>
-        <translation type="vanished">Извориште/Количина</translation>
+        <translation type="obsolete">Извориште/Количина</translation>
     </message>
     <message>
         <source>Abs. value</source>
-        <translation type="vanished">Апсолутна вредност</translation>
+        <translation type="obsolete">Апсолутна вредност</translation>
     </message>
 </context>
 <context>
     <name>Page_Sf2</name>
     <message>
         <source>24 bits</source>
-        <translation type="vanished">24-бита</translation>
+        <translation type="obsolete">24-бита</translation>
     </message>
     <message>
         <source>Author</source>
-        <translation type="vanished">Творац</translation>
+        <translation type="obsolete">Творац</translation>
     </message>
     <message>
         <source>Copyright</source>
-        <translation type="vanished">Права творца</translation>
+        <translation type="obsolete">Права творца</translation>
     </message>
     <message>
         <source>Date</source>
-        <translation type="vanished">Датум</translation>
+        <translation type="obsolete">Датум</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation type="vanished">Назив</translation>
+        <translation type="obsolete">Назив</translation>
     </message>
     <message>
         <source>Comments</source>
-        <translation type="vanished">Примедбе</translation>
+        <translation type="obsolete">Примедбе</translation>
     </message>
     <message>
         <source>Current date</source>
-        <translation type="vanished">Данашњи датум</translation>
+        <translation type="obsolete">Данашњи датум</translation>
     </message>
     <message>
         <source>Product</source>
-        <translation type="vanished">Намена</translation>
+        <translation type="obsolete">Намена</translation>
     </message>
     <message>
         <source>Samples</source>
-        <translation type="vanished">Узорци</translation>
+        <translation type="obsolete">Узорци</translation>
     </message>
     <message>
         <source>File</source>
-        <translation type="vanished">Датотека</translation>
+        <translation type="obsolete">Датотека</translation>
     </message>
     <message>
         <source>Soundfont version</source>
-        <translation type="vanished">Издање звукотеке</translation>
+        <translation type="obsolete">Издање звукотеке</translation>
     </message>
     <message>
         <source>Instrument number</source>
-        <translation type="vanished">Број инструмената</translation>
+        <translation type="obsolete">Број инструмената</translation>
     </message>
     <message>
         <source>Sample number</source>
-        <translation type="vanished">Број узорака</translation>
+        <translation type="obsolete">Број узорака</translation>
     </message>
     <message>
         <source>Number of parameters (instruments)</source>
-        <translation type="vanished">Број параметара (инструмената)</translation>
+        <translation type="obsolete">Број параметара (инструмената)</translation>
     </message>
     <message>
         <source>Number of parameters (presets)</source>
-        <translation type="vanished">Број параметара (поставки)</translation>
+        <translation type="obsolete">Број параметара (поставки)</translation>
     </message>
     <message>
         <source>Preset number</source>
-        <translation type="vanished">Број поставки</translation>
+        <translation type="obsolete">Број поставки</translation>
     </message>
     <message>
         <source>ROM name and version</source>
-        <translation type="vanished">„ROM“ — назив и издање</translation>
+        <translation type="obsolete">„ROM“ — назив и издање</translation>
     </message>
     <message>
         <source>Sound engine</source>
-        <translation type="vanished">Звучни покретач</translation>
+        <translation type="obsolete">Звучни покретач</translation>
     </message>
     <message>
         <source>Editing software</source>
-        <translation type="vanished">Програмски уређивач</translation>
+        <translation type="obsolete">Програмски уређивач</translation>
     </message>
     <message>
         <source> (unused: </source>
         <translatorcomment>множина</translatorcomment>
-        <translation type="vanished"> (ван употребе: </translation>
+        <translation type="obsolete"> (ван употребе: </translation>
     </message>
 </context>
 <context>
     <name>Page_Smpl</name>
     <message>
         <source>&lt;b&gt;Frequency&lt;/b&gt;</source>
-        <translation type="vanished">&lt;b&gt;Учестаност&lt;/b&gt;</translation>
+        <translation type="obsolete">&lt;b&gt;Учестаност&lt;/b&gt;</translation>
     </message>
     <message>
         <source>Reset</source>
-        <translation type="vanished">Поврати</translation>
+        <translation type="obsolete">Поврати</translation>
     </message>
     <message>
         <source>Apply</source>
-        <translation type="vanished">Примени</translation>
+        <translation type="obsolete">Примени</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Equalizer (±15 dB)&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Еквилајзер (±15 dB)&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="obsolete">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Еквилајзер (±15 dB)&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Loop</source>
-        <translation type="vanished">Вртња</translation>
+        <translation type="obsolete">Вртња</translation>
     </message>
     <message>
         <source>Use the full length of the sample as loop</source>
-        <translation type="vanished">Употреби узорак за пуно трајање вртње</translation>
+        <translation type="obsolete">Употреби узорак за пуно трајање вртње</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation type="vanished">Величина</translation>
+        <translation type="obsolete">Величина</translation>
     </message>
     <message>
         <source>Correction (cents)</source>
-        <translation type="vanished">Поправка (центи)</translation>
+        <translation type="obsolete">Поправка (центи)</translation>
     </message>
     <message>
         <source>Sample rate</source>
-        <translation type="vanished">Учестаност узорковања</translation>
+        <translation type="obsolete">Учестаност узорковања</translation>
     </message>
     <message>
         <source>Type</source>
-        <translation type="vanished">Врста</translation>
+        <translation type="obsolete">Врста</translation>
     </message>
     <message>
         <source>Link</source>
-        <translation type="vanished">Веза</translation>
+        <translation type="obsolete">Веза</translation>
     </message>
     <message>
         <source>Root key</source>
-        <translation type="vanished">Основна нота</translation>
+        <translation type="obsolete">Основна нота</translation>
     </message>
     <message>
         <source>Use the estimated pitch and correction as values</source>
-        <translation type="vanished">Узми за вредности прорачунате висину тона и исправку</translation>
+        <translation type="obsolete">Узми за вредности прорачунате висину тона и исправку</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Information&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Подаци&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="obsolete">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Подаци&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Play</source>
-        <translation type="vanished">Пусти</translation>
+        <translation type="obsolete">Пусти</translation>
     </message>
     <message>
         <source>sinus</source>
-        <translation type="vanished">синусно</translation>
+        <translation type="obsolete">синусно</translation>
     </message>
     <message>
         <source>loop</source>
-        <translation type="vanished">врти</translation>
+        <translation type="obsolete">врти</translation>
     </message>
     <message>
         <source>stereo</source>
-        <translation type="vanished">стерео</translation>
+        <translation type="obsolete">стерео</translation>
     </message>
     <message>
         <source>Information</source>
-        <translation type="vanished">Подаци</translation>
+        <translation type="obsolete">Подаци</translation>
     </message>
     <message>
         <source>Equalizer (±15 dB)</source>
-        <translation type="vanished">Еквилајзер (±15 dB)</translation>
+        <translation type="obsolete">Еквилајзер (±15 dB)</translation>
     </message>
     <message>
         <source>s</source>
         <comment>unit for seconds</comment>
-        <translation type="vanished">s</translation>
+        <translation type="obsolete">s</translation>
     </message>
     <message>
         <source>(min) </source>
-        <translation type="vanished">(мин)</translation>
+        <translation type="obsolete">(мин)</translation>
     </message>
     <message>
         <source>mono</source>
-        <translation type="vanished">моно</translation>
+        <translation type="obsolete">моно</translation>
     </message>
     <message>
         <source>right</source>
-        <translation type="vanished">десно</translation>
+        <translation type="obsolete">десно</translation>
     </message>
     <message>
         <source>left</source>
-        <translation type="vanished">лево</translation>
+        <translation type="obsolete">лево</translation>
     </message>
     <message>
         <source>link</source>
-        <translation type="vanished">веза</translation>
+        <translation type="obsolete">веза</translation>
     </message>
     <message>
         <source>&lt;b&gt;Sample is not linked to any instrument.&lt;/b&gt;</source>
-        <translation type="vanished">&lt;b&gt;Овај узорак није везан за било који инструменат.&lt;/b&gt;</translation>
+        <translation type="obsolete">&lt;b&gt;Овај узорак није везан за било који инструменат.&lt;/b&gt;</translation>
     </message>
     <message>
         <source>&lt;b&gt;Sample linked to the instrument: &lt;/b&gt;</source>
-        <translation type="vanished">&lt;b&gt;Овај узорак је везан за инструменат: &lt;/b&gt;</translation>
+        <translation type="obsolete">&lt;b&gt;Овај узорак је везан за инструменат: &lt;/b&gt;</translation>
     </message>
     <message>
         <source>&lt;b&gt;Sample linked to the instruments: &lt;/b&gt;</source>
-        <translation type="vanished">&lt;b&gt;Овај узорак је везан за инструменте: &lt;/b&gt;</translation>
+        <translation type="obsolete">&lt;b&gt;Овај узорак је везан за инструменте: &lt;/b&gt;</translation>
     </message>
     <message>
         <source>Change successfully applied to the different samples</source>
-        <translation type="vanished">Успешно су примењене измене на различитим узорцима</translation>
+        <translation type="obsolete">Успешно су примењене измене на различитим узорцима</translation>
     </message>
     <message>
         <source>Processing </source>
-        <translation type="vanished">Обрада  </translation>
+        <translation type="obsolete">Обрада  </translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="vanished">Поништи</translation>
+        <translation type="obsolete">Поништи</translation>
     </message>
     <message>
         <source>The sample &quot;</source>
-        <translation type="vanished">Узорак „</translation>
+        <translation type="obsolete">Узорак „</translation>
     </message>
     <message>
         <source>&quot; couldn&apos;t be looped.</source>
-        <translation type="vanished">“ не може да се понавља (врти).</translation>
+        <translation type="obsolete">“ не може да се понавља (врти).</translation>
     </message>
     <message>
         <source>The following samples couldn&apos;t be looped:</source>
-        <translation type="vanished">Ови узорци не могу да се понављају (врте):</translation>
+        <translation type="obsolete">Ови узорци не могу да се понављају (врте):</translation>
     </message>
     <message>
         <source>Possible reasons: too short or too turbulent.</source>
-        <translation type="vanished">Могући узроци: прекратак или несталан.</translation>
+        <translation type="obsolete">Могући узроци: прекратак или несталан.</translation>
     </message>
     <message>
         <source>Warning</source>
-        <translation type="vanished">Упозорење</translation>
+        <translation type="obsolete">Упозорење</translation>
     </message>
     <message>
         <source>This tool can only be used with stereo samples.</source>
-        <translation type="vanished">Ова алатка се може применити само на стерео узорке.</translation>
+        <translation type="obsolete">Ова алатка се може применити само на стерео узорке.</translation>
     </message>
     <message>
         <source>Transposition</source>
-        <translation type="vanished">Транспозиција</translation>
+        <translation type="obsolete">Транспозиција</translation>
     </message>
     <message>
         <source>Tuning in semitones:</source>
-        <translation type="vanished">Полутонско подешавање:</translation>
+        <translation type="obsolete">Полутонско подешавање:</translation>
     </message>
     <message>
         <source>Stop</source>
-        <translation type="vanished">Заустави</translation>
+        <translation type="obsolete">Заустави</translation>
     </message>
 </context>
 <context>
     <name>Pile_sf2</name>
     <message>
         <source>untitled</source>
-        <translation type="vanished">без наслова</translation>
+        <translation type="obsolete">без наслова</translation>
     </message>
 </context>
 <context>
     <name>QApplication</name>
     <message>
         <source>Custom</source>
-        <translation type="vanished">Прилагођено</translation>
+        <translation type="obsolete">Прилагођено</translation>
     </message>
     <message>
         <source>Default</source>
-        <translation type="vanished">Уобичајено</translation>
+        <translation type="obsolete">Уобичајено</translation>
     </message>
     <message>
         <source>Gnome</source>
-        <translation type="vanished">Гном</translation>
+        <translation type="obsolete">Гном</translation>
     </message>
     <message>
         <source>Dark, blue</source>
-        <translation type="vanished">Тамно — плава</translation>
+        <translation type="obsolete">Тамно — плава</translation>
     </message>
     <message>
         <source>Dark, orange</source>
-        <translation type="vanished">Тамно — наранџаста</translation>
+        <translation type="obsolete">Тамно — наранџаста</translation>
     </message>
     <message>
         <source>Dark, green</source>
-        <translation type="vanished">Тамно — зелена</translation>
+        <translation type="obsolete">Тамно — зелена</translation>
     </message>
     <message>
         <source>Dark, yellow</source>
-        <translation type="vanished">Тамно — жута</translation>
+        <translation type="obsolete">Тамно — жута</translation>
     </message>
     <message>
         <source>Aqua</source>
-        <translation type="vanished">Вода</translation>
+        <translation type="obsolete">Вода</translation>
     </message>
     <message>
         <source>Spring</source>
-        <translation type="vanished">Пролеће</translation>
+        <translation type="obsolete">Пролеће</translation>
     </message>
     <message>
         <source>Windows 10</source>
-        <translation type="vanished">Виндоуз 10</translation>
+        <translation type="obsolete">Виндоуз 10</translation>
     </message>
     <message>
         <source>Ubuntu</source>
-        <translation type="vanished">Убунту</translation>
+        <translation type="obsolete">Убунту</translation>
     </message>
 </context>
 <context>
@@ -6210,47 +6263,47 @@ rate</source>
     <message>
         <source>Created by </source>
         <translatorcomment>пазите на празнину на крају</translatorcomment>
-        <translation type="vanished">Творац </translation>
+        <translation type="obsolete">Творац </translation>
     </message>
     <message>
         <source>Contributors </source>
-        <translation type="vanished">Сарадници </translation>
+        <translation type="obsolete">Сарадници </translation>
     </message>
     <message>
         <source>Translated by </source>
-        <translation type="vanished">Преводиоци </translation>
+        <translation type="obsolete">Преводиоци </translation>
     </message>
     <message>
         <source>&lt;b&gt;Global parameters are already filled.&lt;/b&gt;</source>
-        <translation type="vanished">&lt;b&gt;Општи параметри су већ постављени.&lt;/b&gt;</translation>
+        <translation type="obsolete">&lt;b&gt;Општи параметри су већ постављени.&lt;/b&gt;</translation>
     </message>
     <message>
         <source>The global division will not be copied.</source>
-        <translation type="vanished">Укупни део неће бити умножен.</translation>
+        <translation type="obsolete">Укупни део неће бити умножен.</translation>
     </message>
     <message>
         <source>&amp;Ok</source>
-        <translation type="vanished">&amp;У реду</translation>
+        <translation type="obsolete">&amp;У реду</translation>
     </message>
     <message>
         <source>Ok, &amp;disable this message</source>
-        <translation type="vanished">У реду, &amp;онемогући ову поруку</translation>
+        <translation type="obsolete">У реду, &amp;онемогући ову поруку</translation>
     </message>
     <message>
         <source>The sample &quot;</source>
-        <translation type="vanished">Узорак „</translation>
+        <translation type="obsolete">Узорак „</translation>
     </message>
     <message>
         <source>&quot; already exists.&lt;br/&gt;Replace?</source>
-        <translation type="vanished">“ већ постоји.&lt;br/&gt;Да ли да га заменим?</translation>
+        <translation type="obsolete">“ већ постоји.&lt;br/&gt;Да ли да га заменим?</translation>
     </message>
     <message>
         <source>The instrument &quot;</source>
-        <translation type="vanished">Инструменат „</translation>
+        <translation type="obsolete">Инструменат „</translation>
     </message>
     <message>
         <source>The preset &quot;</source>
-        <translation type="vanished">Поставка „</translation>
+        <translation type="obsolete">Поставка „</translation>
     </message>
     <message>
         <location filename="core/output/outputfactory.cpp" line="116"/>
@@ -6280,7 +6333,7 @@ rate</source>
     </message>
     <message>
         <source>No preset available.</source>
-        <translation type="vanished">Нема доступне поставке.</translation>
+        <translation type="obsolete">Нема доступне поставке.</translation>
     </message>
     <message>
         <location filename="core/sampleloader.cpp" line="71"/>
@@ -6362,11 +6415,11 @@ rate</source>
     </message>
     <message>
         <source>Error in Sound::getData.</source>
-        <translation type="vanished">Грешка код „Sound::getData“.</translation>
+        <translation type="obsolete">Грешка код „Sound::getData“.</translation>
     </message>
     <message>
         <source>Cannot open the file.</source>
-        <translation type="vanished">Не могу да отворим ову датотеку</translation>
+        <translation type="obsolete">Не могу да отворим ову датотеку</translation>
     </message>
     <message>
         <location filename="core/sound.cpp" line="663"/>
@@ -6379,7 +6432,7 @@ rate</source>
     </message>
     <message>
         <source>Extraction in progress...</source>
-        <translation type="vanished">Извожење у току...</translation>
+        <translation type="obsolete">Извожење у току...</translation>
     </message>
     <message>
         <location filename="core/output/outputfactory.cpp" line="103"/>
@@ -6388,108 +6441,108 @@ rate</source>
     </message>
     <message>
         <source>// Sfz exported from sf2 by Polyphone</source>
-        <translation type="vanished">// Сфз који је из Сф2 датотеке издвојио Вишетонац</translation>
+        <translation type="obsolete">// Сфз који је из Сф2 датотеке издвојио Вишетонац</translation>
     </message>
     <message>
         <source>// Name     :</source>
         <translatorcomment>пребројте празнине тако да су знаци &quot;:&quot; усправно поравњати</translatorcomment>
-        <translation type="vanished">// Назив       : </translation>
+        <translation type="obsolete">// Назив       : </translation>
     </message>
     <message>
         <source>// Author   :</source>
-        <translation type="vanished">// Творац      : </translation>
+        <translation type="obsolete">// Творац      : </translation>
     </message>
     <message>
         <source>// Copyright:</source>
-        <translation type="vanished">// Права творца: </translation>
+        <translation type="obsolete">// Права творца: </translation>
     </message>
     <message>
         <source>// Date     :</source>
-        <translation type="vanished">// Датум       : </translation>
+        <translation type="obsolete">// Датум       : </translation>
     </message>
     <message>
         <source>// Comment  :</source>
-        <translation type="vanished">// Примедба    : </translation>
+        <translation type="obsolete">// Примедба    : </translation>
     </message>
     <message>
         <source>other</source>
-        <translation type="vanished">друго</translation>
+        <translation type="obsolete">друго</translation>
     </message>
     <message>
         <source>Piano</source>
-        <translation type="vanished">Клавир</translation>
+        <translation type="obsolete">Клавир</translation>
     </message>
     <message>
         <source>Chromatic percussion</source>
-        <translation type="vanished">Удараљке, хроматске</translation>
+        <translation type="obsolete">Удараљке, хроматске</translation>
     </message>
     <message>
         <source>Organ</source>
-        <translation type="vanished">Оргуље</translation>
+        <translation type="obsolete">Оргуље</translation>
     </message>
     <message>
         <source>Guitar</source>
-        <translation type="vanished">Гитаре</translation>
+        <translation type="obsolete">Гитаре</translation>
     </message>
     <message>
         <source>Bass</source>
-        <translation type="vanished">Бас гитаре</translation>
+        <translation type="obsolete">Бас гитаре</translation>
     </message>
     <message>
         <source>Strings</source>
-        <translation type="vanished">Жичани</translation>
+        <translation type="obsolete">Жичани</translation>
     </message>
     <message>
         <source>Ensemble</source>
-        <translation type="vanished">Оркестар</translation>
+        <translation type="obsolete">Оркестар</translation>
     </message>
     <message>
         <source>Brass</source>
-        <translation type="vanished">Дувачки, лимени</translation>
+        <translation type="obsolete">Дувачки, лимени</translation>
     </message>
     <message>
         <source>Reed</source>
-        <translation type="vanished">Дувачки, дрвени</translation>
+        <translation type="obsolete">Дувачки, дрвени</translation>
     </message>
     <message>
         <source>Pipe</source>
-        <translation type="vanished">Дувачки, дрвени без језичка</translation>
+        <translation type="obsolete">Дувачки, дрвени без језичка</translation>
     </message>
     <message>
         <source>Synth lead</source>
-        <translation type="vanished">Синтесајзер — главни</translation>
+        <translation type="obsolete">Синтесајзер — главни</translation>
     </message>
     <message>
         <source>Synth pad</source>
-        <translation type="vanished">Синтесајзер — блок</translation>
+        <translation type="obsolete">Синтесајзер — блок</translation>
     </message>
     <message>
         <source>Synth effects</source>
-        <translation type="vanished">Синт-ефекти</translation>
+        <translation type="obsolete">Синт-ефекти</translation>
     </message>
     <message>
         <source>Ethnic</source>
-        <translation type="vanished">Традиционални</translation>
+        <translation type="obsolete">Традиционални</translation>
     </message>
     <message>
         <source>Percussive</source>
-        <translation type="vanished">Удараљке</translation>
+        <translation type="obsolete">Удараљке</translation>
     </message>
     <message>
         <source>Sound effects</source>
-        <translation type="vanished">Звучни ефекти</translation>
+        <translation type="obsolete">Звучни ефекти</translation>
     </message>
     <message>
         <source>Percussion kit</source>
-        <translation type="vanished">Скупина удараљки</translation>
+        <translation type="obsolete">Скупина удараљки</translation>
     </message>
     <message>
         <source>Sfz import</source>
-        <translation type="vanished">Сфз — увоз</translation>
+        <translation type="obsolete">Сфз — увоз</translation>
     </message>
     <message>
         <source>Sf2 imported from sfz by Polyphone</source>
-        <translation type="vanished">Сф2 који је из Сфз-датотеке издвојио Полифон</translation>
+        <translation type="obsolete">Сф2 који је из Сфз-датотеке издвојио Полифон</translation>
     </message>
     <message>
         <location filename="editor/graphics/graphicslegenditem.cpp" line="110"/>
@@ -6505,31 +6558,31 @@ rate</source>
     </message>
     <message>
         <source>C</source>
-        <translation type="vanished">До</translation>
+        <translation type="obsolete">До</translation>
     </message>
     <message>
         <source>D</source>
-        <translation type="vanished">Ре</translation>
+        <translation type="obsolete">Ре</translation>
     </message>
     <message>
         <source>E</source>
-        <translation type="vanished">Ми</translation>
+        <translation type="obsolete">Ми</translation>
     </message>
     <message>
         <source>F</source>
-        <translation type="vanished">Фа</translation>
+        <translation type="obsolete">Фа</translation>
     </message>
     <message>
         <source>G</source>
-        <translation type="vanished">Сол</translation>
+        <translation type="obsolete">Сол</translation>
     </message>
     <message>
         <source>A</source>
-        <translation type="vanished">Ла</translation>
+        <translation type="obsolete">Ла</translation>
     </message>
     <message>
         <source>B</source>
-        <translation type="vanished">Ти</translation>
+        <translation type="obsolete">Ти</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_about.cpp" line="122"/>
@@ -6563,7 +6616,7 @@ rate</source>
         <comment>key name</comment>
         <translation type="unfinished">До</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="context/keynamemanager.cpp" line="64"/>
         <source>D♭</source>
         <comment>key name</comment>
@@ -6576,7 +6629,7 @@ rate</source>
         <comment>key name</comment>
         <translation type="unfinished">Ре</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="context/keynamemanager.cpp" line="66"/>
         <source>E♭</source>
         <comment>key name</comment>
@@ -6596,7 +6649,7 @@ rate</source>
         <comment>key name</comment>
         <translation type="unfinished">Фа</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="context/keynamemanager.cpp" line="69"/>
         <source>G♭</source>
         <comment>key name</comment>
@@ -6609,7 +6662,7 @@ rate</source>
         <comment>key name</comment>
         <translation type="unfinished">Сол</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="context/keynamemanager.cpp" line="71"/>
         <source>A♭</source>
         <comment>key name</comment>
@@ -6622,7 +6675,7 @@ rate</source>
         <comment>key name</comment>
         <translation type="unfinished">Ла</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="context/keynamemanager.cpp" line="73"/>
         <source>B♭</source>
         <comment>key name</comment>
@@ -6635,31 +6688,31 @@ rate</source>
         <comment>key name</comment>
         <translation type="unfinished">Ти</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="context/keynamemanager.cpp" line="82"/>
         <source>C♯</source>
         <comment>key name</comment>
         <translation type="unfinished"></translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="context/keynamemanager.cpp" line="84"/>
         <source>D♯</source>
         <comment>key name</comment>
         <translation type="unfinished"></translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="context/keynamemanager.cpp" line="87"/>
         <source>F♯</source>
         <comment>key name</comment>
         <translation type="unfinished"></translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="context/keynamemanager.cpp" line="89"/>
         <source>G♯</source>
         <comment>key name</comment>
         <translation type="unfinished"></translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="context/keynamemanager.cpp" line="91"/>
         <source>A♯</source>
         <comment>key name</comment>
@@ -7227,7 +7280,7 @@ download the list</source>
         <source>Rating score</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="repository/browser/soundfontbrowser.ui" line="402"/>
         <source>Title (A→Z)</source>
         <translation type="unfinished"></translation>
@@ -8751,27 +8804,32 @@ download content</source>
 <context>
     <name>TopRightWidget</name>
     <message>
-        <location filename="mainwindow/toprightwidget.ui" line="71"/>
+        <location filename="mainwindow/toprightwidget.ui" line="74"/>
         <source>User area</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow/toprightwidget.ui" line="93"/>
+        <location filename="mainwindow/toprightwidget.ui" line="96"/>
+        <source>Download status</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow/toprightwidget.ui" line="118"/>
         <source>Main menu</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow/toprightwidget.cpp" line="107"/>
+        <location filename="mainwindow/toprightwidget.cpp" line="114"/>
         <source>Subscribe to a Premium account to get all the features!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow/toprightwidget.cpp" line="117"/>
+        <location filename="mainwindow/toprightwidget.cpp" line="124"/>
         <source>Welcome %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow/toprightwidget.cpp" line="122"/>
+        <location filename="mainwindow/toprightwidget.cpp" line="129"/>
         <source>Your account has been banned.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -8780,55 +8838,55 @@ download content</source>
     <name>Tree</name>
     <message>
         <source>New sample...</source>
-        <translation type="vanished">Нови узорак...</translation>
+        <translation type="obsolete">Нови узорак...</translation>
     </message>
     <message>
         <source>New &amp;instrument...</source>
-        <translation type="vanished">Нов инструменат...</translation>
+        <translation type="obsolete">Нов инструменат...</translation>
     </message>
     <message>
         <source>New &amp;preset...</source>
-        <translation type="vanished">Нова поставка...</translation>
+        <translation type="obsolete">Нова поставка...</translation>
     </message>
     <message>
         <source>Bind to...</source>
-        <translation type="vanished">Повежи са...</translation>
+        <translation type="obsolete">Повежи са...</translation>
     </message>
     <message>
         <source>Replace by...</source>
-        <translation type="vanished">Замени са...</translation>
+        <translation type="obsolete">Замени са...</translation>
     </message>
     <message>
         <source>Copy</source>
-        <translation type="vanished">Умножи</translation>
+        <translation type="obsolete">Умножи</translation>
     </message>
     <message>
         <source>Paste</source>
-        <translation type="vanished">Убаци</translation>
+        <translation type="obsolete">Убаци</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="vanished">Уклони</translation>
+        <translation type="obsolete">Уклони</translation>
     </message>
     <message>
         <source>Rename...</source>
-        <translation type="vanished">Преименуј...</translation>
+        <translation type="obsolete">Преименуј...</translation>
     </message>
     <message>
         <source>Close file</source>
-        <translation type="vanished">Затвори датотеку</translation>
+        <translation type="obsolete">Затвори датотеку</translation>
     </message>
     <message>
         <source>Display all</source>
-        <translation type="vanished">Прикажи све</translation>
+        <translation type="obsolete">Прикажи све</translation>
     </message>
     <message>
         <source>&amp;Rename...</source>
-        <translation type="vanished">П&amp;реименуј...</translation>
+        <translation type="obsolete">П&amp;реименуј...</translation>
     </message>
     <message>
         <source>Bulk &amp;rename...</source>
-        <translation type="vanished">Скупно п&amp;реименовање...</translation>
+        <translation type="obsolete">Скупно п&amp;реименовање...</translation>
     </message>
 </context>
 <context>
@@ -8959,52 +9017,52 @@ download content</source>
 <context>
     <name>WindowManager</name>
     <message>
-        <location filename="mainwindow/windowmanager.cpp" line="74"/>
+        <location filename="mainwindow/windowmanager.cpp" line="89"/>
         <source>Settings</source>
         <translation>Подешавања</translation>
     </message>
     <message>
-        <location filename="mainwindow/windowmanager.cpp" line="149"/>
+        <location filename="mainwindow/windowmanager.cpp" line="173"/>
         <source>Online repository</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow/windowmanager.cpp" line="194"/>
+        <location filename="mainwindow/windowmanager.cpp" line="218"/>
         <source>Save before exiting?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow/windowmanager.cpp" line="197"/>
+        <location filename="mainwindow/windowmanager.cpp" line="221"/>
         <source>untitled</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow/windowmanager.cpp" line="198"/>
+        <location filename="mainwindow/windowmanager.cpp" line="222"/>
         <source>File &quot;%1&quot; has been modified.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow/windowmanager.cpp" line="199"/>
+        <location filename="mainwindow/windowmanager.cpp" line="223"/>
         <source>Warning</source>
         <translation>Упозорење</translation>
     </message>
     <message>
-        <location filename="mainwindow/windowmanager.cpp" line="201"/>
+        <location filename="mainwindow/windowmanager.cpp" line="225"/>
         <source>&amp;Save</source>
         <translation>&amp;Сачувај</translation>
     </message>
     <message>
-        <location filename="mainwindow/windowmanager.cpp" line="202"/>
+        <location filename="mainwindow/windowmanager.cpp" line="226"/>
         <source>&amp;Cancel</source>
         <translation>&amp;Поништи</translation>
     </message>
     <message>
-        <location filename="mainwindow/windowmanager.cpp" line="203"/>
+        <location filename="mainwindow/windowmanager.cpp" line="227"/>
         <source>Do&amp;n&apos;t save</source>
         <translation>&amp;Изађи не сачувавши</translation>
     </message>
     <message>
-        <location filename="mainwindow/windowmanager.cpp" line="286"/>
+        <location filename="mainwindow/windowmanager.cpp" line="310"/>
         <source>User area</source>
         <translation type="unfinished"></translation>
     </message>

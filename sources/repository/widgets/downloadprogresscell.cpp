@@ -66,7 +66,7 @@ void DownloadProgressCell::progressChanged(int percent, QString finalFilename)
     ui->labelPercent->setText(QString::number(_percent) + "%");
     if (finalFilename != "")
     {
-        ui->pushOpen->setToolTip(trUtf8("Open \"%0\"").arg(_filename));
+        ui->pushOpen->setToolTip(trUtf8("Open \"%1\"").arg(_filename));
         ui->pushCancel->hide();
         ui->pushOpen->show();
     }

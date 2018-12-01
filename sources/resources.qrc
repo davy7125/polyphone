@@ -97,6 +97,7 @@
         <file>resources/translations/polyphone_tr.qm</file>
         <file>resources/translations/polyphone_zh.qm</file>
         <file>resources/translations/polyphone_fr.qm</file>
+        <file>resources/translations/polyphone_da.qm</file>
     </qresource>
     <qresource prefix="/misc">
         <file>changelog</file>

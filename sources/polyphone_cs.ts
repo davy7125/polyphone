@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="cs_CZ">
+<TS version="2.0" language="cs_CZ">
 <context>
     <name>AbstractInput</name>
     <message>
@@ -67,28 +67,28 @@
         <source>Loop end offset</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="core/types/attribute.cpp" line="553"/>
         <location filename="core/types/attribute.cpp" line="674"/>
         <source>Loop start offset (× 32768)</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="core/types/attribute.cpp" line="556"/>
         <source>Mod LFO → pitch (c)</source>
         <translation>Mod LFO → výška tónu (c)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="core/types/attribute.cpp" line="559"/>
         <source>Vib LFO → pitch (c)</source>
         <translation>Vib LFO → výška tónu (c)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="core/types/attribute.cpp" line="562"/>
         <source>Mod env → pitch (c)</source>
         <translation>Mod env → výška tónu (c)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="core/types/attribute.cpp" line="565"/>
         <source>Filter, cutoff (×)</source>
         <translation type="unfinished"></translation>
@@ -103,22 +103,22 @@
         <source>Filter, resonance (dB)</source>
         <translation>Filtr, ozvěna (dB)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="core/types/attribute.cpp" line="572"/>
         <source>Mod LFO → filter (c)</source>
         <translation>Mod LFO → filtr (c)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="core/types/attribute.cpp" line="575"/>
         <source>Mod env → filter (c)</source>
         <translation>Mod env → filtr (c)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="core/types/attribute.cpp" line="578"/>
         <source>Sample end offset (× 32768)</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="core/types/attribute.cpp" line="581"/>
         <source>Mod LFO → volume (dB)</source>
         <translation>Mod LFO → hlasitost (dB)</translation>
@@ -143,7 +143,7 @@
         <source>Pan [-50;50]</source>
         <translation>Vyvážení [-50;50]</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="core/types/attribute.cpp" line="594"/>
         <source>Mod LFO delay (×)</source>
         <translation>Mod LFO zpoždění (×)</translation>
@@ -153,7 +153,7 @@
         <source>Mod LFO delay (s)</source>
         <translation>Mod LFO zpoždění (s)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="core/types/attribute.cpp" line="598"/>
         <source>Mod LFO freq (×)</source>
         <translation>Mod LFO kmitočet (×)</translation>
@@ -163,7 +163,7 @@
         <source>Mod LFO freq (Hz)</source>
         <translation>Mod LFO knitočet (Hz)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="core/types/attribute.cpp" line="602"/>
         <source>Vib LFO delay (×)</source>
         <translation>Vib LFO zpoždění (×)</translation>
@@ -173,7 +173,7 @@
         <source>Vib LFO delay (s)</source>
         <translation>Vib LFO zpoždění (s)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="core/types/attribute.cpp" line="606"/>
         <source>Vib LFO freq (×)</source>
         <translation>Vib LFO kmitočet (×)</translation>
@@ -183,7 +183,7 @@
         <source>Vib LFO freq (Hz)</source>
         <translation>Vib LFO knitočet (Hz)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="core/types/attribute.cpp" line="610"/>
         <source>Mod env delay (×)</source>
         <translation>Mod env zpoždění (×)</translation>
@@ -193,7 +193,7 @@
         <source>Mod env delay (s)</source>
         <translation>Mod env zpoždění (s)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="core/types/attribute.cpp" line="614"/>
         <source>Mod env attack (×)</source>
         <translation>Mod env náběh (×)</translation>
@@ -203,7 +203,7 @@
         <source>Mod env attack (s)</source>
         <translation>Mod env náběh (s)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="core/types/attribute.cpp" line="618"/>
         <source>Mod env hold (×)</source>
         <translation>Mod env držení (×)</translation>
@@ -213,7 +213,7 @@
         <source>Mod env hold (s)</source>
         <translation>Mod env držení (s)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="core/types/attribute.cpp" line="622"/>
         <source>Mod env decay (×)</source>
         <translation>Mod env pokles (×)</translation>
@@ -228,7 +228,7 @@
         <source>Mod env sustain (%)</source>
         <translation>Mod env držení tónu (%)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="core/types/attribute.cpp" line="629"/>
         <source>Mod env release (×)</source>
         <translation>Mod env uvolnění (×)</translation>
@@ -238,17 +238,17 @@
         <source>Mod env release (s)</source>
         <translation>Mod env uvolnění (s)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="core/types/attribute.cpp" line="633"/>
         <source>Key → Mod env hold (c)</source>
         <translation>Nota → Mod env držení (c)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="core/types/attribute.cpp" line="636"/>
         <source>Key → Mod env decay (c)</source>
         <translation>Nota → Mod env pokles (c)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="core/types/attribute.cpp" line="639"/>
         <source>Vol env delay (×)</source>
         <translation>Vol env zpoždění (×)</translation>
@@ -258,7 +258,7 @@
         <source>Vol env delay (s)</source>
         <translation>Vol env zpoždění (s)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="core/types/attribute.cpp" line="643"/>
         <source>Vol env attack (×)</source>
         <translation>Vol env náběh (×)</translation>
@@ -268,7 +268,7 @@
         <source>Vol env attack (s)</source>
         <translation>Vol env náběh(s)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="core/types/attribute.cpp" line="647"/>
         <source>Vol env hold (×)</source>
         <translation>Vol env držení (×)</translation>
@@ -278,7 +278,7 @@
         <source>Vol env hold (s)</source>
         <translation>Vol env držení (s)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="core/types/attribute.cpp" line="651"/>
         <source>Vol env decay (×)</source>
         <translation>Vol env pokles (×)</translation>
@@ -293,7 +293,7 @@
         <source>Vol env sustain (dB)</source>
         <translation>Vol env držení tónu (dB)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="core/types/attribute.cpp" line="658"/>
         <source>Vol env release (×)</source>
         <translation>Vol env uvolnění (×)</translation>
@@ -303,12 +303,12 @@
         <source>Vol env release (s)</source>
         <translation>Vol env uvolnění (s)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="core/types/attribute.cpp" line="662"/>
         <source>Key → Vol env hold (c)</source>
         <translation>Nota → Vol env držení (c)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="core/types/attribute.cpp" line="665"/>
         <source>Key → Vol env decay (c)</source>
         <translation>Nota → Vol env pokles (c)</translation>
@@ -338,7 +338,7 @@
         <source>Attenuation (dB)</source>
         <translation>Zeslabení (dB)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="core/types/attribute.cpp" line="686"/>
         <source>Loop end offset (× 32768)</source>
         <translation type="unfinished"></translation>
@@ -386,380 +386,380 @@
     <name>ConfManager</name>
     <message>
         <source>D</source>
-        <translation type="vanished">D</translation>
+        <translation type="obsolete">D</translation>
     </message>
     <message>
         <source>C</source>
-        <translation type="vanished">C</translation>
+        <translation type="obsolete">C</translation>
     </message>
     <message>
         <source>G</source>
-        <translation type="vanished">G</translation>
+        <translation type="obsolete">G</translation>
     </message>
     <message>
         <source>B</source>
-        <translation type="vanished">B</translation>
+        <translation type="obsolete">B</translation>
     </message>
     <message>
         <source>2</source>
-        <translation type="vanished">2</translation>
+        <translation type="obsolete">2</translation>
     </message>
     <message>
         <source>3</source>
-        <translation type="vanished">3</translation>
+        <translation type="obsolete">3</translation>
     </message>
     <message>
         <source>E</source>
-        <translation type="vanished">E</translation>
+        <translation type="obsolete">E</translation>
     </message>
     <message>
         <source>R</source>
-        <translation type="vanished">P</translation>
+        <translation type="obsolete">P</translation>
     </message>
     <message>
         <source>5</source>
-        <translation type="vanished">5</translation>
+        <translation type="obsolete">5</translation>
     </message>
     <message>
         <source>6</source>
-        <translation type="vanished">6</translation>
+        <translation type="obsolete">6</translation>
     </message>
     <message>
         <source>7</source>
-        <translation type="vanished">7</translation>
+        <translation type="obsolete">7</translation>
     </message>
     <message>
         <source>Shift+&lt;</source>
-        <translation type="vanished">Shift+&lt;</translation>
+        <translation type="obsolete">Shift+&lt;</translation>
     </message>
     <message>
         <source>Shift+@</source>
-        <translation type="vanished">Shift+@</translation>
+        <translation type="obsolete">Shift+@</translation>
     </message>
     <message>
         <source>Shift+#</source>
-        <translation type="vanished">Shift+#</translation>
+        <translation type="obsolete">Shift+#</translation>
     </message>
     <message>
         <source>Shift+%</source>
-        <translation type="vanished">Shift+%</translation>
+        <translation type="obsolete">Shift+%</translation>
     </message>
     <message>
         <source>Shift+^</source>
-        <translation type="vanished">Shift+^</translation>
+        <translation type="obsolete">Shift+^</translation>
     </message>
     <message>
         <source>Shift+&amp;</source>
-        <translation type="vanished">Shift+&amp;</translation>
+        <translation type="obsolete">Shift+&amp;</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="127"/>
+        <location filename="context/confmanager.cpp" line="142"/>
         <source>Z</source>
         <comment>first key mapping for bottom left C</comment>
         <translation>Z</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="128"/>
+        <location filename="context/confmanager.cpp" line="143"/>
         <source>S</source>
         <comment>first key mapping for bottom C#</comment>
         <translation>S</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="129"/>
+        <location filename="context/confmanager.cpp" line="144"/>
         <source>X</source>
         <comment>first key mapping for bottom D</comment>
         <translation>X</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="130"/>
+        <location filename="context/confmanager.cpp" line="145"/>
         <source>D</source>
         <comment>first key mapping for bottom D#</comment>
         <translation>D</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="131"/>
+        <location filename="context/confmanager.cpp" line="146"/>
         <source>C</source>
         <comment>first key mapping for bottom E</comment>
         <translation>C</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="132"/>
+        <location filename="context/confmanager.cpp" line="147"/>
         <source>V</source>
         <comment>first key mapping for bottom F</comment>
         <translation>V</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="133"/>
+        <location filename="context/confmanager.cpp" line="148"/>
         <source>G</source>
         <comment>first key mapping for bottom F#</comment>
         <translation>G</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="134"/>
+        <location filename="context/confmanager.cpp" line="149"/>
         <source>B</source>
         <comment>first key mapping for bottom G</comment>
         <translation>B</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="135"/>
+        <location filename="context/confmanager.cpp" line="150"/>
         <source>H</source>
         <comment>first key mapping for bottom G#</comment>
         <translation>H</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="136"/>
+        <location filename="context/confmanager.cpp" line="151"/>
         <source>N</source>
         <comment>first key mapping for bottom A</comment>
         <translation>N</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="137"/>
+        <location filename="context/confmanager.cpp" line="152"/>
         <source>J</source>
         <comment>first key mapping for bottom A#</comment>
         <translation>J</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="138"/>
+        <location filename="context/confmanager.cpp" line="153"/>
         <source>M</source>
         <comment>first key mapping for bottom B</comment>
         <translation>M</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="139"/>
+        <location filename="context/confmanager.cpp" line="154"/>
         <source>,</source>
         <comment>first key mapping for bottom right C</comment>
         <translation>,</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="145"/>
+        <location filename="context/confmanager.cpp" line="160"/>
         <source>Q</source>
         <comment>first key mapping for upper left C</comment>
         <translation>Q</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="146"/>
+        <location filename="context/confmanager.cpp" line="161"/>
         <source>2</source>
         <comment>first key mapping for upper C#</comment>
         <translation>2</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="147"/>
+        <location filename="context/confmanager.cpp" line="162"/>
         <source>W</source>
         <comment>first key mapping for upper D</comment>
         <translation>W</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="148"/>
+        <location filename="context/confmanager.cpp" line="163"/>
         <source>3</source>
         <comment>first key mapping for upper D#</comment>
         <translation>3</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="149"/>
+        <location filename="context/confmanager.cpp" line="164"/>
         <source>E</source>
         <comment>first key mapping for upper E</comment>
         <translation>E</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="150"/>
+        <location filename="context/confmanager.cpp" line="165"/>
         <source>R</source>
         <comment>first key mapping for upper F</comment>
         <translation>R</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="151"/>
+        <location filename="context/confmanager.cpp" line="166"/>
         <source>5</source>
         <comment>first key mapping for upper F#</comment>
         <translation>5</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="152"/>
+        <location filename="context/confmanager.cpp" line="167"/>
         <source>T</source>
         <comment>first key mapping for upper G</comment>
         <translation>T</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="153"/>
+        <location filename="context/confmanager.cpp" line="168"/>
         <source>6</source>
         <comment>first key mapping for upper G#</comment>
         <translation>6</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="154"/>
+        <location filename="context/confmanager.cpp" line="169"/>
         <source>Y</source>
         <comment>first key mapping for upper A</comment>
         <translation>Y</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="155"/>
+        <location filename="context/confmanager.cpp" line="170"/>
         <source>7</source>
         <comment>first key mapping for upper A#</comment>
         <translation>7</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="156"/>
+        <location filename="context/confmanager.cpp" line="171"/>
         <source>U</source>
         <comment>first key mapping for upper B</comment>
         <translation>U</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="157"/>
+        <location filename="context/confmanager.cpp" line="172"/>
         <source>I</source>
         <comment>first key mapping for upper right C</comment>
         <translation>I</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="163"/>
+        <location filename="context/confmanager.cpp" line="178"/>
         <source>Shift+Z</source>
         <comment>second key mapping for bottom left C</comment>
         <translation>Shift+Z</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="164"/>
+        <location filename="context/confmanager.cpp" line="179"/>
         <source>Shift+S</source>
         <comment>second key mapping for bottom C#</comment>
         <translation>Shift+S</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="165"/>
+        <location filename="context/confmanager.cpp" line="180"/>
         <source>Shift+X</source>
         <comment>second key mapping for bottom D</comment>
         <translation>Shift+X</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="166"/>
+        <location filename="context/confmanager.cpp" line="181"/>
         <source>Shift+D</source>
         <comment>second key mapping for bottom D#</comment>
         <translation>Shift+D</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="167"/>
+        <location filename="context/confmanager.cpp" line="182"/>
         <source>Shift+C</source>
         <comment>second key mapping for bottom E</comment>
         <translation>Shift+C</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="168"/>
+        <location filename="context/confmanager.cpp" line="183"/>
         <source>Shift+V</source>
         <comment>second key mapping for bottom F</comment>
         <translation>Shift+V</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="169"/>
+        <location filename="context/confmanager.cpp" line="184"/>
         <source>Shift+G</source>
         <comment>second key mapping for bottom F#</comment>
         <translation>Shift+G</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="170"/>
+        <location filename="context/confmanager.cpp" line="185"/>
         <source>Shift+B</source>
         <comment>second key mapping for bottom G</comment>
         <translation>Shift+B</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="171"/>
+        <location filename="context/confmanager.cpp" line="186"/>
         <source>Shift+H</source>
         <comment>second key mapping for bottom G#</comment>
         <translation>Shift+H</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="172"/>
+        <location filename="context/confmanager.cpp" line="187"/>
         <source>Shift+N</source>
         <comment>second key mapping for bottom A</comment>
         <translation>Shift+N</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="173"/>
+        <location filename="context/confmanager.cpp" line="188"/>
         <source>Shift+J</source>
         <comment>second key mapping for bottom A#</comment>
         <translation>Shift+J</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="174"/>
+        <location filename="context/confmanager.cpp" line="189"/>
         <source>Shift+M</source>
         <comment>second key mapping for bottom B</comment>
         <translation>Shift+M</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="175"/>
+        <location filename="context/confmanager.cpp" line="190"/>
         <source>Shift+&lt;</source>
         <comment>second key mapping for bottom right C</comment>
         <translation>Shift+&lt;</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="181"/>
+        <location filename="context/confmanager.cpp" line="196"/>
         <source>Shift+Q</source>
         <comment>second key mapping for upper left C</comment>
         <translation>Shift+Q</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="182"/>
+        <location filename="context/confmanager.cpp" line="197"/>
         <source>Shift+@</source>
         <comment>second key mapping for upper C#</comment>
         <translation>Shift+@</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="183"/>
+        <location filename="context/confmanager.cpp" line="198"/>
         <source>Shift+W</source>
         <comment>second key mapping for upper D</comment>
         <translation>Shift+W</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="184"/>
+        <location filename="context/confmanager.cpp" line="199"/>
         <source>Shift+#</source>
         <comment>second key mapping for upper D#</comment>
         <translation>Shift+#</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="185"/>
+        <location filename="context/confmanager.cpp" line="200"/>
         <source>Shift+E</source>
         <comment>second key mapping for upper E</comment>
         <translation>Shift+E</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="186"/>
+        <location filename="context/confmanager.cpp" line="201"/>
         <source>Shift+R</source>
         <comment>second key mapping for upper F</comment>
         <translation>Shift+R</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="187"/>
+        <location filename="context/confmanager.cpp" line="202"/>
         <source>Shift+%</source>
         <comment>second key mapping for upper F#</comment>
         <translation>Shift+%</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="188"/>
+        <location filename="context/confmanager.cpp" line="203"/>
         <source>Shift+T</source>
         <comment>second key mapping for upper G</comment>
         <translation>Shift+T</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="189"/>
+        <location filename="context/confmanager.cpp" line="204"/>
         <source>Shift+^</source>
         <comment>second key mapping for upper G#</comment>
         <translation>Shift+^</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="190"/>
+        <location filename="context/confmanager.cpp" line="205"/>
         <source>Shift+Y</source>
         <comment>second key mapping for upper A</comment>
         <translation>Shift+Y</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="191"/>
+        <location filename="context/confmanager.cpp" line="206"/>
         <source>Shift+&amp;</source>
         <comment>second key mapping for upper A#</comment>
         <translation>Shift+&amp;</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="192"/>
+        <location filename="context/confmanager.cpp" line="207"/>
         <source>Shift+U</source>
         <comment>second key mapping for upper B</comment>
         <translation>Shift+U</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="193"/>
+        <location filename="context/confmanager.cpp" line="208"/>
         <source>Shift+I</source>
         <comment>second key mapping for upper right C</comment>
         <translation>Shift+I</translation>
@@ -769,489 +769,489 @@
     <name>Config</name>
     <message>
         <source>Settings</source>
-        <translation type="vanished">Nastavení</translation>
+        <translation type="obsolete">Nastavení</translation>
     </message>
     <message>
         <source>Audio backend</source>
-        <translation type="vanished">Zvukový výstup</translation>
+        <translation type="obsolete">Zvukový výstup</translation>
     </message>
     <message>
         <source>General</source>
-        <translation type="vanished">Obecné</translation>
+        <translation type="obsolete">Obecné</translation>
     </message>
     <message>
         <source>Midi input</source>
-        <translation type="vanished">Vstup MIDI</translation>
+        <translation type="obsolete">Vstup MIDI</translation>
     </message>
     <message>
         <source>trim to loop</source>
-        <translation type="vanished">Ořezat na smyčce</translation>
+        <translation type="obsolete">Ořezat na smyčce</translation>
     </message>
     <message>
         <source>remove blank at start</source>
-        <translation type="vanished">Odstranit ticho na začátku</translation>
+        <translation type="obsolete">Odstranit ticho na začátku</translation>
     </message>
     <message>
         <source>change linked sample</source>
         <oldsource>répercuter les modifications si stéréo</oldsource>
-        <translation type="vanished">Odrážet změny</translation>
+        <translation type="obsolete">Odrážet změny</translation>
     </message>
     <message>
         <source>Stereo editing</source>
         <oldsource>Édition des samples</oldsource>
-        <translation type="vanished">Úpravy stereo</translation>
+        <translation type="obsolete">Úpravy stereo</translation>
     </message>
     <message>
         <source>Buffer size</source>
         <oldsource>Taille tampon</oldsource>
-        <translation type="vanished">Velikost vyrovnávací paměti</translation>
+        <translation type="obsolete">Velikost vyrovnávací paměti</translation>
     </message>
     <message>
         <source>Input / Output</source>
-        <translation type="vanished">Vstup/Výstup</translation>
+        <translation type="obsolete">Vstup/Výstup</translation>
     </message>
     <message>
         <source>Middle C → 60, then 61</source>
         <oldsource>Numérique (do central → 60)</oldsource>
-        <translation type="vanished">Jednočárkované C (C1) → 60, pak 61</translation>
+        <translation type="obsolete">Jednočárkované C (C1) → 60, pak 61</translation>
     </message>
     <message>
         <source>Middle C → C3, then C♯3</source>
         <oldsource>Texte (do central → C3)</oldsource>
-        <translation type="vanished">Jednočárkované C (C1) → C3, pak C♯3</translation>
+        <translation type="obsolete">Jednočárkované C (C1) → C3, pak C♯3</translation>
     </message>
     <message>
         <source>Middle C → C3, then D♭3</source>
         <oldsource>Texte (do central → C4)</oldsource>
-        <translation type="vanished">Jednočárkované C (C1) → C3, pak D♭3</translation>
+        <translation type="obsolete">Jednočárkované C (C1) → C3, pak D♭3</translation>
     </message>
     <message>
         <source>Middle C → C4, then C♯4</source>
         <oldsource>Texte (do central → C5)</oldsource>
-        <translation type="vanished">Jednočárkované C (C1) C → C4, pak C♯4</translation>
+        <translation type="obsolete">Jednočárkované C (C1) C → C4, pak C♯4</translation>
     </message>
     <message>
         <source>Key names</source>
-        <translation type="vanished">Názvy not</translation>
+        <translation type="obsolete">Názvy not</translation>
     </message>
     <message>
         <source>Synth</source>
-        <translation type="vanished">Syntetizátor</translation>
+        <translation type="obsolete">Syntetizátor</translation>
     </message>
     <message>
         <source>Reverb</source>
         <oldsource>Reverbération</oldsource>
-        <translation type="vanished">Dozvuk</translation>
+        <translation type="obsolete">Dozvuk</translation>
     </message>
     <message>
         <source>Level</source>
-        <translation type="vanished">Hladina</translation>
+        <translation type="obsolete">Hladina</translation>
     </message>
     <message>
         <source>Room</source>
-        <translation type="vanished">Hloubka</translation>
+        <translation type="obsolete">Hloubka</translation>
     </message>
     <message>
         <source>Width</source>
-        <translation type="vanished">Hustota</translation>
+        <translation type="obsolete">Hustota</translation>
     </message>
     <message>
         <source>Damp</source>
-        <translation type="vanished">Ztlumení</translation>
+        <translation type="obsolete">Ztlumení</translation>
     </message>
     <message>
         <source>Chorus</source>
-        <translation type="vanished">Sbor (chorus)</translation>
+        <translation type="obsolete">Sbor (chorus)</translation>
     </message>
     <message>
         <source>Frequency</source>
-        <translation type="vanished">Kmitočet</translation>
+        <translation type="obsolete">Kmitočet</translation>
     </message>
     <message>
         <source>Depth</source>
-        <translation type="vanished">Rozkmit</translation>
+        <translation type="obsolete">Rozkmit</translation>
     </message>
     <message>
         <source>Reset</source>
-        <translation type="vanished">Nastavit znovu</translation>
+        <translation type="obsolete">Nastavit znovu</translation>
     </message>
     <message>
         <source>Options</source>
-        <translation type="vanished">Volby</translation>
+        <translation type="obsolete">Volby</translation>
     </message>
     <message>
         <source>Toolbar</source>
-        <translation type="vanished">Nástrojový pruh</translation>
+        <translation type="obsolete">Nástrojový pruh</translation>
     </message>
     <message>
         <source>Available actions</source>
-        <translation type="vanished">Dostupné činnosti</translation>
+        <translation type="obsolete">Dostupné činnosti</translation>
     </message>
     <message>
         <source>Keyboard</source>
-        <translation type="vanished">Klávesnice</translation>
+        <translation type="obsolete">Klávesnice</translation>
     </message>
     <message>
         <source>Gain (dB)</source>
-        <translation type="vanished">Zesílení (dB)</translation>
+        <translation type="obsolete">Zesílení (dB)</translation>
     </message>
     <message>
         <source>Wav file import</source>
-        <translation type="vanished">Zavedení souboru WAV</translation>
+        <translation type="obsolete">Zavedení souboru WAV</translation>
     </message>
     <message>
         <source>First C</source>
-        <translation type="vanished">První C</translation>
+        <translation type="obsolete">První C</translation>
     </message>
     <message>
         <source>Octave #1</source>
-        <translation type="vanished">Oktáva 1</translation>
+        <translation type="obsolete">Oktáva 1</translation>
     </message>
     <message>
         <source>Interface</source>
-        <translation type="vanished">Rozhraní</translation>
+        <translation type="obsolete">Rozhraní</translation>
     </message>
     <message>
         <source>Middle C → C4, then D♭4</source>
-        <translation type="vanished">Jednočárkované C (C1) → C4, pak D♭4</translation>
+        <translation type="obsolete">Jednočárkované C (C1) → C4, pak D♭4</translation>
     </message>
     <message>
         <source>Middle C → C5, then C♯5</source>
-        <translation type="vanished">Jednočárkované C (C1) → C5, pak C♯5</translation>
+        <translation type="obsolete">Jednočárkované C (C1) → C5, pak C♯5</translation>
     </message>
     <message>
         <source>Middle C → C5, then D♭5</source>
-        <translation type="vanished">Jednočárkované C (C1) → C5, pak D♭5</translation>
+        <translation type="obsolete">Jednočárkované C (C1) → C5, pak D♭5</translation>
     </message>
     <message>
         <source>Language</source>
-        <translation type="vanished">Jazyk</translation>
+        <translation type="obsolete">Jazyk</translation>
     </message>
     <message>
         <source>Selection</source>
-        <translation type="vanished">Výběr</translation>
+        <translation type="obsolete">Výběr</translation>
     </message>
     <message>
         <source>Alternate background</source>
-        <translation type="vanished">Náhradní pozadí</translation>
+        <translation type="obsolete">Náhradní pozadí</translation>
     </message>
     <message>
         <source>Text</source>
-        <translation type="vanished">Text</translation>
+        <translation type="obsolete">Text</translation>
     </message>
     <message>
         <source>Window</source>
-        <translation type="vanished">Okno</translation>
+        <translation type="obsolete">Okno</translation>
     </message>
     <message>
         <source>Background</source>
-        <translation type="vanished">Pozadí</translation>
+        <translation type="obsolete">Pozadí</translation>
     </message>
     <message>
         <source>Button</source>
-        <translation type="vanished">Tlačítko</translation>
+        <translation type="obsolete">Tlačítko</translation>
     </message>
     <message>
         <source>Color theme</source>
-        <translation type="vanished">Barevné téma</translation>
+        <translation type="obsolete">Barevné téma</translation>
     </message>
     <message>
         <source>List and table</source>
-        <translation type="vanished">Seznam a tabulka</translation>
+        <translation type="obsolete">Seznam a tabulka</translation>
     </message>
     <message>
         <source>Octave #2</source>
-        <translation type="vanished">Oktáva 2</translation>
+        <translation type="obsolete">Oktáva 2</translation>
     </message>
     <message>
         <source>Octave #3</source>
-        <translation type="vanished">Oktáva 3</translation>
+        <translation type="obsolete">Oktáva 3</translation>
     </message>
     <message>
         <source>Octave #4</source>
-        <translation type="vanished">Oktáva 4</translation>
+        <translation type="obsolete">Oktáva 4</translation>
     </message>
     <message>
         <source>C</source>
-        <translation type="vanished">C</translation>
+        <translation type="obsolete">C</translation>
     </message>
     <message>
         <source>C#</source>
-        <translation type="vanished">C#</translation>
+        <translation type="obsolete">C#</translation>
     </message>
     <message>
         <source>D</source>
-        <translation type="vanished">D</translation>
+        <translation type="obsolete">D</translation>
     </message>
     <message>
         <source>D#</source>
-        <translation type="vanished">D#</translation>
+        <translation type="obsolete">D#</translation>
     </message>
     <message>
         <source>E</source>
-        <translation type="vanished">E</translation>
+        <translation type="obsolete">E</translation>
     </message>
     <message>
         <source>F</source>
-        <translation type="vanished">F</translation>
+        <translation type="obsolete">F</translation>
     </message>
     <message>
         <source>F#</source>
-        <translation type="vanished">F#</translation>
+        <translation type="obsolete">F#</translation>
     </message>
     <message>
         <source>G</source>
-        <translation type="vanished">G</translation>
+        <translation type="obsolete">G</translation>
     </message>
     <message>
         <source>G#</source>
-        <translation type="vanished">G#</translation>
+        <translation type="obsolete">G#</translation>
     </message>
     <message>
         <source>A</source>
-        <translation type="vanished">A</translation>
+        <translation type="obsolete">A</translation>
     </message>
     <message>
         <source>A#</source>
-        <translation type="vanished">A#</translation>
+        <translation type="obsolete">A#</translation>
     </message>
     <message>
         <source>B</source>
-        <translation type="vanished">B</translation>
+        <translation type="obsolete">B</translation>
     </message>
     <message>
         <source>Default velocity</source>
-        <translation type="vanished">Výchozí síla tónu</translation>
+        <translation type="obsolete">Výchozí síla tónu</translation>
     </message>
     <message>
         <source>Close</source>
-        <translation type="vanished">Zavřít</translation>
+        <translation type="obsolete">Zavřít</translation>
     </message>
     <message>
         <source>Information</source>
-        <translation type="vanished">Informace</translation>
+        <translation type="obsolete">Informace</translation>
     </message>
     <message>
         <source>This modification will be applied during the next start of the software.</source>
         <oldsource>La modification sera prise en compte lors du prochain dÃ©marrage du logiciel.</oldsource>
-        <translation type="vanished">Tato změna se projeví při příštím spuštění programu.</translation>
+        <translation type="obsolete">Tato změna se projeví při příštím spuštění programu.</translation>
     </message>
     <message>
         <source>Choose a color</source>
-        <translation type="vanished">Vyberte barvu</translation>
+        <translation type="obsolete">Vyberte barvu</translation>
     </message>
     <message>
         <source>---- separator ----</source>
-        <translation type="vanished">---- oddělovač ----</translation>
+        <translation type="obsolete">---- oddělovač ----</translation>
     </message>
     <message>
         <source>z</source>
         <translatorcomment>default mapping of the keyboard</translatorcomment>
-        <translation type="vanished">z</translation>
+        <translation type="obsolete">z</translation>
     </message>
     <message>
         <source>s</source>
-        <translation type="vanished">s</translation>
+        <translation type="obsolete">s</translation>
     </message>
     <message>
         <source>x</source>
-        <translation type="vanished">x</translation>
+        <translation type="obsolete">x</translation>
     </message>
     <message>
         <source>d</source>
-        <translation type="vanished">d</translation>
+        <translation type="obsolete">d</translation>
     </message>
     <message>
         <source>c</source>
-        <translation type="vanished">c</translation>
+        <translation type="obsolete">c</translation>
     </message>
     <message>
         <source>v</source>
-        <translation type="vanished">v</translation>
+        <translation type="obsolete">v</translation>
     </message>
     <message>
         <source>g</source>
-        <translation type="vanished">g</translation>
+        <translation type="obsolete">g</translation>
     </message>
     <message>
         <source>b</source>
-        <translation type="vanished">b</translation>
+        <translation type="obsolete">b</translation>
     </message>
     <message>
         <source>h</source>
-        <translation type="vanished">h</translation>
+        <translation type="obsolete">h</translation>
     </message>
     <message>
         <source>n</source>
-        <translation type="vanished">n</translation>
+        <translation type="obsolete">n</translation>
     </message>
     <message>
         <source>j</source>
-        <translation type="vanished">j</translation>
+        <translation type="obsolete">j</translation>
     </message>
     <message>
         <source>m</source>
-        <translation type="vanished">m</translation>
+        <translation type="obsolete">m</translation>
     </message>
     <message>
         <source>,</source>
-        <translation type="vanished">,</translation>
+        <translation type="obsolete">,</translation>
     </message>
     <message>
         <source>q</source>
-        <translation type="vanished">q</translation>
+        <translation type="obsolete">q</translation>
     </message>
     <message>
         <source>2</source>
-        <translation type="vanished">2</translation>
+        <translation type="obsolete">2</translation>
     </message>
     <message>
         <source>w</source>
-        <translation type="vanished">w</translation>
+        <translation type="obsolete">w</translation>
     </message>
     <message>
         <source>3</source>
-        <translation type="vanished">3</translation>
+        <translation type="obsolete">3</translation>
     </message>
     <message>
         <source>e</source>
-        <translation type="vanished">e</translation>
+        <translation type="obsolete">e</translation>
     </message>
     <message>
         <source>r</source>
-        <translation type="vanished">r</translation>
+        <translation type="obsolete">r</translation>
     </message>
     <message>
         <source>5</source>
-        <translation type="vanished">5</translation>
+        <translation type="obsolete">5</translation>
     </message>
     <message>
         <source>t</source>
-        <translation type="vanished">t</translation>
+        <translation type="obsolete">t</translation>
     </message>
     <message>
         <source>6</source>
-        <translation type="vanished">6</translation>
+        <translation type="obsolete">6</translation>
     </message>
     <message>
         <source>y</source>
-        <translation type="vanished">y</translation>
+        <translation type="obsolete">y</translation>
     </message>
     <message>
         <source>7</source>
-        <translation type="vanished">7</translation>
+        <translation type="obsolete">7</translation>
     </message>
     <message>
         <source>u</source>
-        <translation type="vanished">u</translation>
+        <translation type="obsolete">u</translation>
     </message>
     <message>
         <source>i</source>
-        <translation type="vanished">i</translation>
+        <translation type="obsolete">i</translation>
     </message>
     <message>
         <source>Shift+z</source>
-        <translation type="vanished">Shift+z</translation>
+        <translation type="obsolete">Shift+z</translation>
     </message>
     <message>
         <source>Shift+s</source>
-        <translation type="vanished">Shift+s</translation>
+        <translation type="obsolete">Shift+s</translation>
     </message>
     <message>
         <source>Shift+x</source>
-        <translation type="vanished">Shift+x</translation>
+        <translation type="obsolete">Shift+x</translation>
     </message>
     <message>
         <source>Shift+d</source>
-        <translation type="vanished">Shift+d</translation>
+        <translation type="obsolete">Shift+d</translation>
     </message>
     <message>
         <source>Shift+c</source>
-        <translation type="vanished">Shift+c</translation>
+        <translation type="obsolete">Shift+c</translation>
     </message>
     <message>
         <source>Shift+v</source>
-        <translation type="vanished">Shift+v</translation>
+        <translation type="obsolete">Shift+v</translation>
     </message>
     <message>
         <source>Shift+g</source>
-        <translation type="vanished">Shift+g</translation>
+        <translation type="obsolete">Shift+g</translation>
     </message>
     <message>
         <source>Shift+b</source>
-        <translation type="vanished">Shift+b</translation>
+        <translation type="obsolete">Shift+b</translation>
     </message>
     <message>
         <source>Shift+h</source>
-        <translation type="vanished">Shift+h</translation>
+        <translation type="obsolete">Shift+h</translation>
     </message>
     <message>
         <source>Shift+n</source>
-        <translation type="vanished">Shift+n</translation>
+        <translation type="obsolete">Shift+n</translation>
     </message>
     <message>
         <source>Shift+j</source>
-        <translation type="vanished">Shift+j</translation>
+        <translation type="obsolete">Shift+j</translation>
     </message>
     <message>
         <source>Shift+m</source>
-        <translation type="vanished">Shift+m</translation>
+        <translation type="obsolete">Shift+m</translation>
     </message>
     <message>
         <source>Shift+&lt;</source>
-        <translation type="vanished">Shift+&lt;</translation>
+        <translation type="obsolete">Shift+&lt;</translation>
     </message>
     <message>
         <source>Shift+q</source>
-        <translation type="vanished">Shift+q</translation>
+        <translation type="obsolete">Shift+q</translation>
     </message>
     <message>
         <source>Shift+@</source>
-        <translation type="vanished">Shift+@</translation>
+        <translation type="obsolete">Shift+@</translation>
     </message>
     <message>
         <source>Shift+w</source>
-        <translation type="vanished">Shift+w</translation>
+        <translation type="obsolete">Shift+w</translation>
     </message>
     <message>
         <source>Shift+#</source>
-        <translation type="vanished">Shift+#</translation>
+        <translation type="obsolete">Shift+#</translation>
     </message>
     <message>
         <source>Shift+e</source>
-        <translation type="vanished">Shift+e</translation>
+        <translation type="obsolete">Shift+e</translation>
     </message>
     <message>
         <source>Shift+r</source>
-        <translation type="vanished">Shift+r</translation>
+        <translation type="obsolete">Shift+r</translation>
     </message>
     <message>
         <source>Shift+%</source>
-        <translation type="vanished">Shift+%</translation>
+        <translation type="obsolete">Shift+%</translation>
     </message>
     <message>
         <source>Shift+t</source>
-        <translation type="vanished">Shift+t</translation>
+        <translation type="obsolete">Shift+t</translation>
     </message>
     <message>
         <source>Shift+^</source>
-        <translation type="vanished">Shift+^</translation>
+        <translation type="obsolete">Shift+^</translation>
     </message>
     <message>
         <source>Shift+y</source>
-        <translation type="vanished">Shift+y</translation>
+        <translation type="obsolete">Shift+y</translation>
     </message>
     <message>
         <source>Shift+&amp;</source>
-        <translation type="vanished">Shift+&amp;</translation>
+        <translation type="obsolete">Shift+&amp;</translation>
     </message>
     <message>
         <source>Shift+u</source>
-        <translation type="vanished">Shift+u</translation>
+        <translation type="obsolete">Shift+u</translation>
     </message>
     <message>
         <source>Shift+i</source>
-        <translation type="vanished">Shift+i</translation>
+        <translation type="obsolete">Shift+i</translation>
     </message>
 </context>
 <context>
@@ -1339,116 +1339,142 @@
 <context>
     <name>ConfigSectionInterface</name>
     <message>
-        <location filename="context/interface/configsectioninterface.ui" line="28"/>
+        <location filename="context/interface/configsectioninterface.ui" line="67"/>
         <source>Language</source>
         <translation>Jazyk</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectioninterface.ui" line="47"/>
+        <location filename="context/interface/configsectioninterface.ui" line="80"/>
         <source>Key names</source>
         <translation>Názvy not</translation>
     </message>
-    <message>
-        <location filename="context/interface/configsectioninterface.ui" line="67"/>
+    <message utf8="true">
+        <location filename="context/interface/configsectioninterface.ui" line="29"/>
         <source>Middle C → 60, then 61</source>
         <translation>Jednočárkované C (C1) → 60, pak 61</translation>
     </message>
-    <message>
-        <location filename="context/interface/configsectioninterface.ui" line="72"/>
+    <message utf8="true">
+        <location filename="context/interface/configsectioninterface.ui" line="34"/>
         <source>Middle C → C3, then C♯3</source>
         <translation>Jednočárkované C (C1) → C3, pak C♯3</translation>
     </message>
-    <message>
-        <location filename="context/interface/configsectioninterface.ui" line="77"/>
+    <message utf8="true">
+        <location filename="context/interface/configsectioninterface.ui" line="39"/>
         <source>Middle C → C3, then D♭3</source>
         <translation>Jednočárkované C (C1) → C3, pak D♭3</translation>
     </message>
-    <message>
-        <location filename="context/interface/configsectioninterface.ui" line="82"/>
+    <message utf8="true">
+        <location filename="context/interface/configsectioninterface.ui" line="44"/>
         <source>Middle C → C4, then C♯4</source>
         <translation>Jednočárkované C (C1) C → C4, pak C♯4</translation>
     </message>
-    <message>
-        <location filename="context/interface/configsectioninterface.ui" line="87"/>
+    <message utf8="true">
+        <location filename="context/interface/configsectioninterface.ui" line="49"/>
         <source>Middle C → C4, then D♭4</source>
         <translation>Jednočárkované C (C1) → C4, pak D♭4</translation>
     </message>
-    <message>
-        <location filename="context/interface/configsectioninterface.ui" line="92"/>
+    <message utf8="true">
+        <location filename="context/interface/configsectioninterface.ui" line="54"/>
         <source>Middle C → C5, then C♯5</source>
         <translation>Jednočárkované C (C1) → C5, pak C♯5</translation>
     </message>
-    <message>
-        <location filename="context/interface/configsectioninterface.ui" line="97"/>
+    <message utf8="true">
+        <location filename="context/interface/configsectioninterface.ui" line="59"/>
         <source>Middle C → C5, then D♭5</source>
         <translation>Jednočárkované C (C1) → C5, pak D♭5</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectioninterface.ui" line="126"/>
+        <location filename="context/interface/configsectioninterface.ui" line="87"/>
+        <source>Sort divisions</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="context/interface/configsectioninterface.ui" line="108"/>
+        <source>by key range</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="context/interface/configsectioninterface.ui" line="113"/>
+        <source>by velocity range</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="context/interface/configsectioninterface.ui" line="118"/>
+        <source>in alphabetical order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="context/interface/configsectioninterface.ui" line="123"/>
+        <source>none</source>
+        <comment>speaking of the &quot;sort divisions&quot;</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="context/interface/configsectioninterface.ui" line="139"/>
         <source>Theme</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/interface/configsectioninterface.ui" line="232"/>
+        <location filename="context/interface/configsectioninterface.ui" line="245"/>
         <source>Selection</source>
         <translation>Výběr</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectioninterface.ui" line="245"/>
+        <location filename="context/interface/configsectioninterface.ui" line="258"/>
         <source>Alternate background</source>
         <translation>Náhradní pozadí</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectioninterface.ui" line="292"/>
-        <location filename="context/interface/configsectioninterface.ui" line="318"/>
+        <location filename="context/interface/configsectioninterface.ui" line="305"/>
         <location filename="context/interface/configsectioninterface.ui" line="331"/>
-        <location filename="context/interface/configsectioninterface.ui" line="598"/>
+        <location filename="context/interface/configsectioninterface.ui" line="344"/>
+        <location filename="context/interface/configsectioninterface.ui" line="611"/>
         <source>Text</source>
         <translation>Text</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectioninterface.ui" line="305"/>
+        <location filename="context/interface/configsectioninterface.ui" line="318"/>
         <source>Window</source>
         <translation>Okno</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectioninterface.ui" line="344"/>
         <location filename="context/interface/configsectioninterface.ui" line="357"/>
-        <location filename="context/interface/configsectioninterface.ui" line="401"/>
-        <location filename="context/interface/configsectioninterface.ui" line="585"/>
+        <location filename="context/interface/configsectioninterface.ui" line="370"/>
+        <location filename="context/interface/configsectioninterface.ui" line="414"/>
+        <location filename="context/interface/configsectioninterface.ui" line="598"/>
         <source>Background</source>
         <translation>Pozadí</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectioninterface.ui" line="414"/>
+        <location filename="context/interface/configsectioninterface.ui" line="427"/>
         <source>Button</source>
         <translation>Tlačítko</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectioninterface.ui" line="624"/>
+        <location filename="context/interface/configsectioninterface.ui" line="637"/>
         <source>Color theme</source>
         <translation>Barevné téma</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectioninterface.ui" line="647"/>
+        <location filename="context/interface/configsectioninterface.ui" line="660"/>
         <source>List and table</source>
         <translation>Seznam a tabulka</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectioninterface.ui" line="663"/>
+        <location filename="context/interface/configsectioninterface.ui" line="676"/>
         <source>This modification will be applied during the next start of the software.</source>
         <translation>Tato změna se projeví při příštím spuštění programu.</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectioninterface.cpp" line="151"/>
-        <location filename="context/interface/configsectioninterface.cpp" line="163"/>
-        <location filename="context/interface/configsectioninterface.cpp" line="175"/>
-        <location filename="context/interface/configsectioninterface.cpp" line="187"/>
-        <location filename="context/interface/configsectioninterface.cpp" line="199"/>
-        <location filename="context/interface/configsectioninterface.cpp" line="211"/>
-        <location filename="context/interface/configsectioninterface.cpp" line="223"/>
-        <location filename="context/interface/configsectioninterface.cpp" line="235"/>
-        <location filename="context/interface/configsectioninterface.cpp" line="247"/>
+        <location filename="context/interface/configsectioninterface.cpp" line="156"/>
+        <location filename="context/interface/configsectioninterface.cpp" line="168"/>
+        <location filename="context/interface/configsectioninterface.cpp" line="180"/>
+        <location filename="context/interface/configsectioninterface.cpp" line="192"/>
+        <location filename="context/interface/configsectioninterface.cpp" line="204"/>
+        <location filename="context/interface/configsectioninterface.cpp" line="216"/>
+        <location filename="context/interface/configsectioninterface.cpp" line="228"/>
+        <location filename="context/interface/configsectioninterface.cpp" line="240"/>
+        <location filename="context/interface/configsectioninterface.cpp" line="252"/>
         <source>Select a color</source>
         <translation>Vyberte barvu</translation>
     </message>
@@ -1781,7 +1807,7 @@ repository</source>
     </message>
     <message>
         <source>http://polyphone-soundfonts.com/en</source>
-        <translation type="vanished">http://polyphone-soundfonts.com/en</translation>
+        <translation type="obsolete">http://polyphone-soundfonts.com/en</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_about.cpp" line="50"/>
@@ -1791,7 +1817,7 @@ repository</source>
     <message>
         <source>Davy Triponney</source>
         <comment>this is my name</comment>
-        <translation type="vanished">Davy Triponney</translation>
+        <translation type="obsolete">Davy Triponney</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_about.cpp" line="54"/>
@@ -1842,7 +1868,7 @@ repository</source>
         <source>Steve Clarke</source>
         <translation>Steve Clarke</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="dialogs/dialog_about.cpp" line="72"/>
         <source>F.J. Martínez Murcia</source>
         <translation>F.J. Martínez Murcia</translation>
@@ -1877,55 +1903,55 @@ repository</source>
     <name>DialogAttenuation</name>
     <message>
         <source>Adjust attenuations</source>
-        <translation type="vanished">Upravit zeslabení</translation>
+        <translation type="obsolete">Upravit zeslabení</translation>
     </message>
     <message>
         <source>Instruments</source>
-        <translation type="vanished">Nástroje</translation>
+        <translation type="obsolete">Nástroje</translation>
     </message>
     <message>
         <source>Possible offset</source>
-        <translation type="vanished">Možný posun</translation>
+        <translation type="obsolete">Možný posun</translation>
     </message>
     <message>
         <source>Attenuation range</source>
-        <translation type="vanished">Rozsah zeslabení</translation>
+        <translation type="obsolete">Rozsah zeslabení</translation>
     </message>
     <message>
         <source> dB</source>
-        <translation type="vanished"> dB</translation>
+        <translation type="obsolete"> dB</translation>
     </message>
     <message>
         <source>Desired value</source>
-        <translation type="vanished">Požadovaná hodnota</translation>
+        <translation type="obsolete">Požadovaná hodnota</translation>
     </message>
     <message>
         <source>Presets</source>
-        <translation type="vanished">Přednastavení</translation>
+        <translation type="obsolete">Přednastavení</translation>
     </message>
 </context>
 <context>
     <name>DialogCeleste</name>
     <message>
         <source>Celeste tuning</source>
-        <translation type="vanished">Ladění celesty</translation>
+        <translation type="obsolete">Ladění celesty</translation>
     </message>
     <message>
         <source>Number of beats per second at C4 (key 60)</source>
         <oldsource>Nombre de battements par secondes au do 3 (note 60)</oldsource>
-        <translation type="vanished">Počet úderů za minutu C4 (nota 60)</translation>
+        <translation type="obsolete">Počet úderů za minutu C4 (nota 60)</translation>
     </message>
     <message>
         <source>The algebraic sign determines the tuning direction.</source>
-        <translation type="vanished">Matematické znaménko určuje směr rozladění.</translation>
+        <translation type="obsolete">Matematické znaménko určuje směr rozladění.</translation>
     </message>
     <message>
         <source>Division to the next octave</source>
-        <translation type="vanished">Dělení k následující oktávě</translation>
+        <translation type="obsolete">Dělení k následující oktávě</translation>
     </message>
     <message>
         <source>Number of beats per second (key </source>
-        <translation type="vanished">Počet úderů za sekundu (nota </translation>
+        <translation type="obsolete">Počet úderů za sekundu (nota </translation>
     </message>
 </context>
 <context>
@@ -1980,70 +2006,70 @@ repository</source>
     <name>DialogChangeVolume</name>
     <message>
         <source>Change volume</source>
-        <translation type="vanished">Změnit hlasitost</translation>
+        <translation type="obsolete">Změnit hlasitost</translation>
     </message>
     <message>
         <source>Add</source>
-        <translation type="vanished">Přidat</translation>
+        <translation type="obsolete">Přidat</translation>
     </message>
     <message>
         <source>Multiply</source>
-        <translation type="vanished">Násobit</translation>
+        <translation type="obsolete">Násobit</translation>
     </message>
     <message>
         <source>Normalize</source>
-        <translation type="vanished">Normalizovat</translation>
+        <translation type="obsolete">Normalizovat</translation>
     </message>
     <message>
         <source> %</source>
-        <translation type="vanished"> %</translation>
+        <translation type="obsolete"> %</translation>
     </message>
     <message>
         <source> dB</source>
-        <translation type="vanished"> dB</translation>
+        <translation type="obsolete"> dB</translation>
     </message>
 </context>
 <context>
     <name>DialogCommand</name>
     <message>
         <source>Use an external command</source>
-        <translation type="vanished">Použít vnější příkaz</translation>
+        <translation type="obsolete">Použít vnější příkaz</translation>
     </message>
     <message>
         <source>History</source>
-        <translation type="vanished">Historie</translation>
+        <translation type="obsolete">Historie</translation>
     </message>
     <message>
         <source>Command</source>
-        <translation type="vanished">Příkaz</translation>
+        <translation type="obsolete">Příkaz</translation>
     </message>
     <message>
         <source>Replace sample information if possible</source>
-        <translation type="vanished">Nahradit údaje vzorku, je-li to možné</translation>
+        <translation type="obsolete">Nahradit údaje vzorku, je-li to možné</translation>
     </message>
     <message>
         <source>Authorize stereo editing</source>
-        <translation type="vanished">Povolit upravování sterea</translation>
+        <translation type="obsolete">Povolit upravování sterea</translation>
     </message>
     <message>
         <source>Command example:</source>
-        <translation type="vanished">Příklady příkaz:</translation>
+        <translation type="obsolete">Příklady příkaz:</translation>
     </message>
     <message>
         <source>Executable file</source>
-        <translation type="vanished">Spustitelný soubor</translation>
+        <translation type="obsolete">Spustitelný soubor</translation>
     </message>
     <message>
         <source>Warning</source>
-        <translation type="vanished">Pozor</translation>
+        <translation type="obsolete">Pozor</translation>
     </message>
     <message>
         <source>You must enter a command with at least {wav} as argument.</source>
-        <translation type="vanished">Jako argument musíte zadat příkaz s alespoň {wav}.</translation>
+        <translation type="obsolete">Jako argument musíte zadat příkaz s alespoň {wav}.</translation>
     </message>
     <message>
         <source>The command must contain the argument {wav}.</source>
-        <translation type="vanished">Příkaz musí obsahovat argument {wav}.</translation>
+        <translation type="obsolete">Příkaz musí obsahovat argument {wav}.</translation>
     </message>
 </context>
 <context>
@@ -2098,128 +2124,128 @@ repository</source>
     <name>DialogDuplication</name>
     <message>
         <source>Division duplication</source>
-        <translation type="vanished">Zdvojení dělení</translation>
+        <translation type="obsolete">Zdvojení dělení</translation>
     </message>
     <message>
         <source>A division for each key</source>
-        <translation type="vanished">Dělení pro každou notu</translation>
+        <translation type="obsolete">Dělení pro každou notu</translation>
     </message>
     <message>
         <source>A division for each velocity range</source>
-        <translation type="vanished">Dělení pro každý rozsah síly tónu (dynamika)</translation>
+        <translation type="obsolete">Dělení pro každý rozsah síly tónu (dynamika)</translation>
     </message>
 </context>
 <context>
     <name>DialogExport</name>
     <message>
         <source>Export</source>
-        <translation type="vanished">Vyvést</translation>
+        <translation type="obsolete">Vyvést</translation>
     </message>
     <message>
         <source>Select all</source>
-        <translation type="vanished">Vybrat vše</translation>
+        <translation type="obsolete">Vybrat vše</translation>
     </message>
     <message>
         <source>Unselect all</source>
-        <translation type="vanished">Zrušit výběr všeho</translation>
+        <translation type="obsolete">Zrušit výběr všeho</translation>
     </message>
     <message>
         <source>Location</source>
-        <translation type="vanished">Umístění</translation>
+        <translation type="obsolete">Umístění</translation>
     </message>
     <message>
         <source>Format</source>
-        <translation type="vanished">Formát</translation>
+        <translation type="obsolete">Formát</translation>
     </message>
     <message>
         <source>preset number as prefix</source>
-        <translation type="vanished">Číslo přednastavení jako předpona</translation>
+        <translation type="obsolete">Číslo přednastavení jako předpona</translation>
     </message>
     <message>
         <source>one directory per bank</source>
-        <translation type="vanished">Jeden adresář na banku</translation>
+        <translation type="obsolete">Jeden adresář na banku</translation>
     </message>
     <message>
         <source>General Midi classification</source>
-        <translation type="vanished">Zařazení všeobecného MIDI</translation>
+        <translation type="obsolete">Zařazení všeobecného MIDI</translation>
     </message>
     <message>
         <source>High</source>
-        <translation type="vanished">Vysoká</translation>
+        <translation type="obsolete">Vysoká</translation>
     </message>
     <message>
         <source>Medium</source>
-        <translation type="vanished">Průměrná</translation>
+        <translation type="obsolete">Průměrná</translation>
     </message>
     <message>
         <source>Low</source>
-        <translation type="vanished">Nízká</translation>
+        <translation type="obsolete">Nízká</translation>
     </message>
     <message>
         <source>Quality</source>
-        <translation type="vanished">Jakost</translation>
+        <translation type="obsolete">Jakost</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="vanished">Zrušit</translation>
+        <translation type="obsolete">Zrušit</translation>
     </message>
     <message>
         <source>Choose a destination folder</source>
-        <translation type="vanished">Vybrat cílovou složku</translation>
+        <translation type="obsolete">Vybrat cílovou složku</translation>
     </message>
     <message>
         <source>Warning</source>
-        <translation type="vanished">Pozor</translation>
+        <translation type="obsolete">Pozor</translation>
     </message>
     <message>
         <source>Invalid directory.</source>
-        <translation type="vanished">Neplatný adresář.</translation>
+        <translation type="obsolete">Neplatný adresář.</translation>
     </message>
     <message>
         <source>In the case where several soundfonts are exported, the maximal number of presets per soundfonts is 127.</source>
-        <translation type="vanished">V případě, kdy je vyváděno několik zvukových bank je největší počet přednastavení na zvukovou banku 127.</translation>
+        <translation type="obsolete">V případě, kdy je vyváděno několik zvukových bank je největší počet přednastavení na zvukovou banku 127.</translation>
     </message>
     <message>
         <source>The maximal number of soundfont to export is 127.</source>
-        <translation type="vanished">Největší počet zvukových bank k vyvedení je 127.</translation>
+        <translation type="obsolete">Největší počet zvukových bank k vyvedení je 127.</translation>
     </message>
     <message>
         <source>At least one preset must be selected.</source>
-        <translation type="vanished">Musí být vybráno alespoň jedno přednastavení.</translation>
+        <translation type="obsolete">Musí být vybráno alespoň jedno přednastavení.</translation>
     </message>
 </context>
 <context>
     <name>DialogExportList</name>
     <message>
         <source>Export preset list</source>
-        <translation type="vanished">Vyvést seznam přednastavení</translation>
+        <translation type="obsolete">Vyvést seznam přednastavení</translation>
     </message>
     <message>
         <source>text copied in the clipboard</source>
-        <translation type="vanished">text zkopírován do schránky</translation>
+        <translation type="obsolete">text zkopírován do schránky</translation>
     </message>
     <message>
         <source>csv format</source>
-        <translation type="vanished">Formát csv</translation>
+        <translation type="obsolete">Formát csv</translation>
     </message>
     <message>
         <source>html table</source>
-        <translation type="vanished">Tabulka html</translation>
+        <translation type="obsolete">Tabulka html</translation>
     </message>
     <message>
         <source>Copy</source>
-        <translation type="vanished">Kopírovat</translation>
+        <translation type="obsolete">Kopírovat</translation>
     </message>
 </context>
 <context>
     <name>DialogFilterFrequencies</name>
     <message>
         <source>Filter frequencies</source>
-        <translation type="vanished">Filtrovat kmitočty</translation>
+        <translation type="obsolete">Filtrovat kmitočty</translation>
     </message>
     <message>
         <source>Put in red the part of frequencies to filter:</source>
-        <translation type="vanished">Začervenit části kmitočtů signálu k filtrování:</translation>
+        <translation type="obsolete">Začervenit části kmitočtů signálu k filtrování:</translation>
     </message>
 </context>
 <context>
@@ -2283,19 +2309,19 @@ repository</source>
     <name>DialogMagnetophone</name>
     <message>
         <source>Recorder</source>
-        <translation type="vanished">Nahrávací zařízení</translation>
+        <translation type="obsolete">Nahrávací zařízení</translation>
     </message>
     <message>
         <source>Save a record</source>
-        <translation type="vanished">Uložit nahrávku</translation>
+        <translation type="obsolete">Uložit nahrávku</translation>
     </message>
     <message>
         <source>Wav file (*.wav)</source>
-        <translation type="vanished">Soubor WAV (*.wav)</translation>
+        <translation type="obsolete">Soubor WAV (*.wav)</translation>
     </message>
     <message>
         <source>record</source>
-        <translation type="vanished">nahrávání</translation>
+        <translation type="obsolete">nahrávání</translation>
     </message>
 </context>
 <context>
@@ -2304,186 +2330,186 @@ repository</source>
         <source>Mixture creation</source>
         <oldsource>Création mutation / mixture</oldsource>
         <translatorcomment>Mixture = organ stop made of a combinaison of harmonics</translatorcomment>
-        <translation type="vanished">Vytvoření směsi</translation>
+        <translation type="obsolete">Vytvoření směsi</translation>
     </message>
     <message>
         <source>Name of the mixture:</source>
-        <translation type="vanished">Název směsi:</translation>
+        <translation type="obsolete">Název směsi:</translation>
     </message>
     <message>
         <source>Sample creation:</source>
-        <translation type="vanished">Vytvoření zvuku:</translation>
+        <translation type="obsolete">Vytvoření zvuku:</translation>
     </message>
     <message>
         <source>for every key</source>
-        <translation type="vanished">pro každou notu</translation>
+        <translation type="obsolete">pro každou notu</translation>
     </message>
     <message>
         <source>every 3 keys</source>
-        <translation type="vanished">každé 3 noty</translation>
+        <translation type="obsolete">každé 3 noty</translation>
     </message>
     <message>
         <source>every 6 keys</source>
-        <translation type="vanished">každých 6 not</translation>
+        <translation type="obsolete">každých 6 not</translation>
     </message>
     <message>
         <source>Auto loop</source>
-        <translation type="vanished">Automatická smyčka</translation>
+        <translation type="obsolete">Automatická smyčka</translation>
     </message>
     <message>
         <source>Stereo</source>
-        <translation type="vanished">Stereo</translation>
+        <translation type="obsolete">Stereo</translation>
     </message>
     <message>
         <source>Divisions</source>
-        <translation type="vanished">Dělení</translation>
+        <translation type="obsolete">Dělení</translation>
     </message>
     <message>
         <source>Key range</source>
-        <translation type="vanished">Rozsah not</translation>
+        <translation type="obsolete">Rozsah not</translation>
     </message>
     <message>
         <source>Ranks</source>
-        <translation type="vanished">Řady</translation>
+        <translation type="obsolete">Řady</translation>
     </message>
     <message>
         <source>Type</source>
-        <translation type="vanished">Typ</translation>
+        <translation type="obsolete">Typ</translation>
     </message>
     <message>
         <source>octave</source>
-        <translation type="vanished">Oktáva</translation>
+        <translation type="obsolete">Oktáva</translation>
     </message>
     <message>
         <source>fifth</source>
-        <translation type="vanished">Kvinta</translation>
+        <translation type="obsolete">Kvinta</translation>
     </message>
     <message>
         <source>third</source>
-        <translation type="vanished">Tercie</translation>
+        <translation type="obsolete">Tercie</translation>
     </message>
     <message>
         <source>seventh</source>
-        <translation type="vanished">Sedmina</translation>
+        <translation type="obsolete">Sedmina</translation>
     </message>
     <message>
         <source>ninth</source>
-        <translation type="vanished">Devítina</translation>
+        <translation type="obsolete">Devítina</translation>
     </message>
     <message>
         <source>eleventh</source>
-        <translation type="vanished">Jedenáctina</translation>
+        <translation type="obsolete">Jedenáctina</translation>
     </message>
     <message>
         <source>thirteenth</source>
-        <translation type="vanished">Třináctina</translation>
+        <translation type="obsolete">Třináctina</translation>
     </message>
     <message>
         <source>fifteenth</source>
-        <translation type="vanished">Patnáctina</translation>
+        <translation type="obsolete">Patnáctina</translation>
     </message>
     <message>
         <source>seventeenth</source>
-        <translation type="vanished">Sedmnáctina</translation>
+        <translation type="obsolete">Sedmnáctina</translation>
     </message>
     <message>
         <source>nineteenth</source>
-        <translation type="vanished">Devatenáctina</translation>
+        <translation type="obsolete">Devatenáctina</translation>
     </message>
     <message>
         <source>twenty-first</source>
-        <translation type="vanished">Jednadvacetina</translation>
+        <translation type="obsolete">Jednadvacetina</translation>
     </message>
     <message>
         <source>twenty-third</source>
-        <translation type="vanished">Třiadvacetina</translation>
+        <translation type="obsolete">Třiadvacetina</translation>
     </message>
     <message>
         <source>twenty-fifth</source>
-        <translation type="vanished">Pětadvacetina</translation>
+        <translation type="obsolete">Pětadvacetina</translation>
     </message>
     <message>
         <source>twenty-seventh</source>
-        <translation type="vanished">Sedmadvacetina</translation>
+        <translation type="obsolete">Sedmadvacetina</translation>
     </message>
     <message>
         <source>untitled</source>
-        <translation type="vanished">Bez názvu</translation>
+        <translation type="obsolete">Bez názvu</translation>
     </message>
 </context>
 <context>
     <name>DialogParamGlobal</name>
     <message>
         <source>Global setting</source>
-        <translation type="vanished">Celková nastavení</translation>
+        <translation type="obsolete">Celková nastavení</translation>
     </message>
     <message>
         <source>Pattern</source>
-        <translation type="vanished">Vzor</translation>
+        <translation type="obsolete">Vzor</translation>
     </message>
     <message>
         <source>Stiffness</source>
-        <translation type="vanished">Tuhost</translation>
+        <translation type="obsolete">Tuhost</translation>
     </message>
     <message>
         <source>Distribution</source>
-        <translation type="vanished">Rozvržení</translation>
+        <translation type="obsolete">Rozvržení</translation>
     </message>
     <message>
         <source>Minimum</source>
-        <translation type="vanished">Nejmenší</translation>
+        <translation type="obsolete">Nejmenší</translation>
     </message>
     <message>
         <source>Maximum</source>
-        <translation type="vanished">Největší</translation>
+        <translation type="obsolete">Největší</translation>
     </message>
     <message>
         <source>Modification</source>
-        <translation type="vanished">Pozměnění</translation>
+        <translation type="obsolete">Pozměnění</translation>
     </message>
     <message>
         <source>Parameter</source>
-        <translation type="vanished">Parametr</translation>
+        <translation type="obsolete">Parametr</translation>
     </message>
     <message>
         <source>Manual</source>
-        <translation type="vanished">Ruční</translation>
+        <translation type="obsolete">Ruční</translation>
     </message>
     <message>
         <source>Linear ascending</source>
-        <translation type="vanished">Přímkový stoupající (lineární)</translation>
+        <translation type="obsolete">Přímkový stoupající (lineární)</translation>
     </message>
     <message>
         <source>Linear descending</source>
-        <translation type="vanished">Přímkový klesající (lineární)</translation>
+        <translation type="obsolete">Přímkový klesající (lineární)</translation>
     </message>
     <message>
         <source>Exponential ascending</source>
-        <translation type="vanished">Exponenciální stoupající</translation>
+        <translation type="obsolete">Exponenciální stoupající</translation>
     </message>
     <message>
         <source>Exponential descending</source>
-        <translation type="vanished">Exponenciální klesající</translation>
+        <translation type="obsolete">Exponenciální klesající</translation>
     </message>
     <message>
         <source>Random</source>
-        <translation type="vanished">Náhodný</translation>
+        <translation type="obsolete">Náhodný</translation>
     </message>
     <message>
         <source>Addition</source>
-        <translation type="vanished">Sčítání</translation>
+        <translation type="obsolete">Sčítání</translation>
     </message>
     <message>
         <source>Multiplication</source>
-        <translation type="vanished">Násobení</translation>
+        <translation type="obsolete">Násobení</translation>
     </message>
     <message>
         <source>Replacement</source>
-        <translation type="vanished">Nahrazení</translation>
+        <translation type="obsolete">Nahrazení</translation>
     </message>
     <message>
         <source>Apply to a velocity range</source>
-        <translation type="vanished">Použít na rozsah síly tónu</translation>
+        <translation type="obsolete">Použít na rozsah síly tónu</translation>
     </message>
 </context>
 <context>
@@ -2514,24 +2540,24 @@ repository</source>
     <name>DialogRelease</name>
     <message>
         <source>Release maker</source>
-        <translation type="vanished">Vytvoření času vyloudění tónu</translation>
+        <translation type="obsolete">Vytvoření času vyloudění tónu</translation>
     </message>
     <message>
         <source>Detuning induced (semi-tones)</source>
-        <translation type="vanished">Rozladění vyvoláno (půltóny)</translation>
+        <translation type="obsolete">Rozladění vyvoláno (půltóny)</translation>
     </message>
     <message>
         <source>Release time at C2 (key 36)</source>
         <oldsource>Durée release au do 1 (note 36)</oldsource>
-        <translation type="vanished">Čas vyloudění tónu na C2 (nota 36)</translation>
+        <translation type="obsolete">Čas vyloudění tónu na C2 (nota 36)</translation>
     </message>
     <message>
         <source>Division to the next octave</source>
-        <translation type="vanished">Dělení k následující oktávě</translation>
+        <translation type="obsolete">Dělení k následující oktávě</translation>
     </message>
     <message>
         <source>Release time (key </source>
-        <translation type="vanished">Čas vyloudění tónu (nota </translation>
+        <translation type="obsolete">Čas vyloudění tónu (nota </translation>
     </message>
 </context>
 <context>
@@ -2627,116 +2653,143 @@ repository</source>
     <name>DialogSpace</name>
     <message>
         <source>Spatialization</source>
-        <translation type="vanished">Zprostorovění</translation>
+        <translation type="obsolete">Zprostorovění</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Pattern&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translatorcomment>Only &quot;Pattern&quot; has to be translated</translatorcomment>
-        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Vzor&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="obsolete">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Vzor&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Division number</source>
-        <translation type="vanished">Číslo dělení</translation>
+        <translation type="obsolete">Číslo dělení</translation>
     </message>
     <message>
         <source>Spreading (%)</source>
-        <translation type="vanished">Rozvržení (%)</translation>
+        <translation type="obsolete">Rozvržení (%)</translation>
     </message>
     <message>
         <source>Filling (%)</source>
-        <translation type="vanished">Vyplnění (%)</translation>
+        <translation type="obsolete">Vyplnění (%)</translation>
     </message>
     <message>
         <source>Offset (0-100)</source>
-        <translation type="vanished">Posun (0-100)</translation>
+        <translation type="obsolete">Posun (0-100)</translation>
     </message>
     <message>
         <source>Inversions</source>
-        <translation type="vanished">Převrácení</translation>
+        <translation type="obsolete">Převrácení</translation>
     </message>
     <message>
         <source>Ascending</source>
-        <translation type="vanished">Stoupající</translation>
+        <translation type="obsolete">Stoupající</translation>
     </message>
     <message>
         <source>Hollow</source>
-        <translation type="vanished">Dutý</translation>
+        <translation type="obsolete">Dutý</translation>
     </message>
     <message>
         <source>Random</source>
-        <translation type="vanished">Náhodný</translation>
+        <translation type="obsolete">Náhodný</translation>
     </message>
     <message>
         <source>Descending</source>
-        <translation type="vanished">Klesající</translation>
+        <translation type="obsolete">Klesající</translation>
     </message>
     <message>
         <source>Spike</source>
-        <translation type="vanished">Špička</translation>
+        <translation type="obsolete">Špička</translation>
     </message>
 </context>
 <context>
     <name>DialogTransposition</name>
     <message>
         <source>Transposition</source>
-        <translation type="vanished">Transpozice</translation>
+        <translation type="obsolete">Transpozice</translation>
     </message>
     <message>
         <source>Shift in semitones</source>
-        <translation type="vanished">Posun v půltónech</translation>
+        <translation type="obsolete">Posun v půltónech</translation>
     </message>
     <message>
         <source>Adapt keyrange</source>
-        <translation type="vanished">Přizpůsobit rozsah not</translation>
+        <translation type="obsolete">Přizpůsobit rozsah not</translation>
     </message>
 </context>
 <context>
     <name>DialogVisualizer</name>
     <message>
         <source>Visualizer</source>
-        <translation type="vanished">Prohlížeč</translation>
+        <translation type="obsolete">Prohlížeč</translation>
     </message>
     <message>
         <source>Display options</source>
-        <translation type="vanished">Volby pro zobrazení</translation>
+        <translation type="obsolete">Volby pro zobrazení</translation>
     </message>
     <message>
         <source>Legend</source>
-        <translation type="vanished">Vysvětlivky</translation>
+        <translation type="obsolete">Vysvětlivky</translation>
     </message>
     <message>
         <source>Mean value per key</source>
-        <translation type="vanished">Průměrná hodnota na notu</translation>
+        <translation type="obsolete">Průměrná hodnota na notu</translation>
     </message>
     <message>
         <source>Default parameters</source>
-        <translation type="vanished">Výchozí parametry</translation>
+        <translation type="obsolete">Výchozí parametry</translation>
     </message>
     <message>
         <source>Defined parameters</source>
-        <translation type="vanished">Vymezené parametry</translation>
+        <translation type="obsolete">Vymezené parametry</translation>
     </message>
     <message>
         <source>Log scale</source>
-        <translation type="vanished">Logaritmická stupnice</translation>
+        <translation type="obsolete">Logaritmická stupnice</translation>
     </message>
 </context>
 <context>
     <name>DownloadManager</name>
     <message>
-        <location filename="repository/downloadmanager.cpp" line="106"/>
-        <location filename="repository/downloadmanager.cpp" line="154"/>
+        <location filename="repository/downloadmanager.cpp" line="111"/>
+        <location filename="repository/downloadmanager.cpp" line="159"/>
         <source>untitled</source>
         <translation>Bez názvu</translation>
     </message>
     <message>
-        <location filename="repository/downloadmanager.cpp" line="140"/>
+        <location filename="repository/downloadmanager.cpp" line="145"/>
         <source>Warning</source>
         <translation>Pozor</translation>
     </message>
     <message>
-        <location filename="repository/downloadmanager.cpp" line="141"/>
+        <location filename="repository/downloadmanager.cpp" line="146"/>
         <source>Couldn&apos;t download file &quot;%1&quot;: %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>DownloadProgressButton</name>
+    <message>
+        <location filename="repository/widgets/downloadprogressbutton.cpp" line="45"/>
+        <source>Clear completed downloads</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>DownloadProgressCell</name>
+    <message>
+        <location filename="repository/widgets/downloadprogresscell.ui" line="51"/>
+        <source>Cancel download</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="repository/widgets/downloadprogresscell.cpp" line="69"/>
+        <source>Open &quot;%1&quot;</source>
+        <oldsource>Open &quot;%0&quot;</oldsource>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="repository/widgets/downloadprogresscell.cpp" line="99"/>
+        <source>Download canceled</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2955,7 +3008,7 @@ repository</source>
     <message>
         <source>Key  Decay</source>
         <oldsource>Key  Decay</oldsource>
-        <translation type="vanished">Nota  Pokles</translation>
+        <translation type="obsolete">Nota  Pokles</translation>
     </message>
     <message>
         <location filename="editor/envelopeditor.ui" line="128"/>
@@ -2970,7 +3023,7 @@ repository</source>
     <message>
         <source>Key  Hold</source>
         <oldsource>Key  Hold</oldsource>
-        <translation type="vanished">Nota  Držení</translation>
+        <translation type="obsolete">Nota  Držení</translation>
     </message>
     <message>
         <location filename="editor/envelopeditor.ui" line="263"/>
@@ -2982,7 +3035,7 @@ repository</source>
         <source>Release</source>
         <translation>Uvolnění</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="editor/envelopeditor.ui" line="181"/>
         <source>Key → Decay</source>
         <translation>Nota → Pokles</translation>
@@ -2992,7 +3045,7 @@ repository</source>
         <source>Attack</source>
         <translation>Náběh</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="editor/envelopeditor.ui" line="391"/>
         <source>Key → Hold</source>
         <translation>Nota → Držení</translation>
@@ -3025,11 +3078,11 @@ repository</source>
     <name>ExternalCommandRunner</name>
     <message>
         <source>Cancel</source>
-        <translation type="vanished">Zrušit</translation>
+        <translation type="obsolete">Zrušit</translation>
     </message>
     <message>
         <source>Processing </source>
-        <translation type="vanished">Zpracování  </translation>
+        <translation type="obsolete">Zpracování  </translation>
     </message>
 </context>
 <context>
@@ -3053,12 +3106,12 @@ repository</source>
     <message>
         <source>L</source>
         <translatorcomment>first letter of &quot;Left&quot;</translatorcomment>
-        <translation type="vanished">L</translation>
+        <translation type="obsolete">L</translation>
     </message>
     <message>
         <source>R</source>
         <translatorcomment>first letter of &quot;Right&quot;</translatorcomment>
-        <translation type="vanished">P</translation>
+        <translation type="obsolete">P</translation>
     </message>
     <message>
         <location filename="editor/tools/sound_spatialization/graphspace.cpp" line="76"/>
@@ -3139,7 +3192,7 @@ repository</source>
     </message>
     <message>
         <source>Png file (*.png)</source>
-        <translation type="vanished">Soubor PNG (*.png)</translation>
+        <translation type="obsolete">Soubor PNG (*.png)</translation>
     </message>
 </context>
 <context>
@@ -3267,935 +3320,935 @@ repository</source>
     <message>
         <source>&amp;File</source>
         <translatorcomment>Put the character &quot;&amp;&quot; to access an element in a menu via Alt + the following letter.</translatorcomment>
-        <translation type="vanished">&amp;Soubor</translation>
+        <translation type="obsolete">&amp;Soubor</translation>
     </message>
     <message>
         <source>&amp;Help</source>
-        <translation type="vanished">&amp;Nápověda</translation>
+        <translation type="obsolete">&amp;Nápověda</translation>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation type="vanished">Úp&amp;ravy</translation>
+        <translation type="obsolete">Úp&amp;ravy</translation>
     </message>
     <message>
         <source>&amp;Tools</source>
-        <translation type="vanished">Nástr&amp;oj</translation>
+        <translation type="obsolete">Nástr&amp;oj</translation>
     </message>
     <message>
         <source>&amp;Instrument</source>
-        <translation type="vanished">&amp;Nástroj</translation>
+        <translation type="obsolete">&amp;Nástroj</translation>
     </message>
     <message>
         <source>&amp;View</source>
-        <translation type="vanished">&amp;Pohled</translation>
+        <translation type="obsolete">&amp;Pohled</translation>
     </message>
     <message>
         <source>Toolbar</source>
-        <translation type="vanished">Nástrojový pruh</translation>
+        <translation type="obsolete">Nástrojový pruh</translation>
     </message>
     <message>
         <source>Tree</source>
-        <translation type="vanished">Strom</translation>
+        <translation type="obsolete">Strom</translation>
     </message>
     <message>
         <source>Collapse the tree</source>
-        <translation type="vanished">Složit strom</translation>
+        <translation type="obsolete">Složit strom</translation>
     </message>
     <message>
         <source>Expand the tree</source>
-        <translation type="vanished">Rozbalit strom</translation>
+        <translation type="obsolete">Rozbalit strom</translation>
     </message>
     <message>
         <source>Search...</source>
-        <translation type="vanished">Hledat...</translation>
+        <translation type="obsolete">Hledat...</translation>
     </message>
     <message>
         <source>Clear the search</source>
-        <translation type="vanished">Vymazat hledání</translation>
+        <translation type="obsolete">Vymazat hledání</translation>
     </message>
     <message>
         <source>&amp;Open</source>
-        <translation type="vanished">&amp;Otevřít...</translation>
+        <translation type="obsolete">&amp;Otevřít...</translation>
     </message>
     <message>
         <source>Open a file</source>
-        <translation type="vanished">Otevřít soubor</translation>
+        <translation type="obsolete">Otevřít soubor</translation>
     </message>
     <message>
         <source>&amp;Quit</source>
-        <translation type="vanished">U&amp;končit</translation>
+        <translation type="obsolete">U&amp;končit</translation>
     </message>
     <message>
         <source>&amp;About</source>
-        <translation type="vanished">&amp;O programu</translation>
+        <translation type="obsolete">&amp;O programu</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="194"/>
+        <location filename="mainwindow/mainwindow.cpp" line="195"/>
         <source>&amp;Save</source>
         <translation>&amp;Uložit</translation>
     </message>
     <message>
         <source>Save the current file</source>
-        <translation type="vanished">Uložit nynější soubor</translation>
+        <translation type="obsolete">Uložit nynější soubor</translation>
     </message>
     <message>
         <source>Save &amp;as...</source>
         <oldsource>Enregistrer &amp;sous ...</oldsource>
-        <translation type="vanished">Uložit &amp;jako...</translation>
+        <translation type="obsolete">Uložit &amp;jako...</translation>
     </message>
     <message>
         <source>Save in another file</source>
-        <translation type="vanished">Uložit v jiném souboru</translation>
+        <translation type="obsolete">Uložit v jiném souboru</translation>
     </message>
     <message>
         <source>&amp;New...</source>
-        <translation type="vanished">&amp;Nový...</translation>
+        <translation type="obsolete">&amp;Nový...</translation>
     </message>
     <message>
         <source>Create a new file</source>
-        <translation type="vanished">Vytvořit nový soubor</translation>
+        <translation type="obsolete">Vytvořit nový soubor</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="195"/>
+        <location filename="mainwindow/mainwindow.cpp" line="196"/>
         <source>&amp;Cancel</source>
         <translation>&amp;Zrušit</translation>
     </message>
     <message>
         <source>&amp;Preset</source>
-        <translation type="vanished">&amp;Přednastavení</translation>
+        <translation type="obsolete">&amp;Přednastavení</translation>
     </message>
     <message>
         <source>Online &amp;manual</source>
         <oldsource>&amp;Manuel</oldsource>
-        <translation type="vanished">Online &amp;příručka</translation>
+        <translation type="obsolete">Online &amp;příručka</translation>
     </message>
     <message>
         <source>&amp;Undo</source>
         <comment>1</comment>
         <translatorcomment>Undo an action</translatorcomment>
-        <translation type="vanished">&amp;Zrušit</translation>
+        <translation type="obsolete">&amp;Zrušit</translation>
     </message>
     <message>
         <source>Undo the last action</source>
-        <translation type="vanished">Vrátit poslední krok zpět</translation>
+        <translation type="obsolete">Vrátit poslední krok zpět</translation>
     </message>
     <message>
         <source>&amp;Redo</source>
-        <translation type="vanished">Zn&amp;ovu</translation>
+        <translation type="obsolete">Zn&amp;ovu</translation>
     </message>
     <message>
         <source>Redo the last undone action</source>
-        <translation type="vanished">Udělat poslední zpět vrácený krok znovu</translation>
+        <translation type="obsolete">Udělat poslední zpět vrácený krok znovu</translation>
     </message>
     <message>
         <source>&amp;Settings</source>
-        <translation type="vanished">&amp;Nastavení</translation>
+        <translation type="obsolete">&amp;Nastavení</translation>
     </message>
     <message>
         <source>Open the settings</source>
-        <translation type="vanished">Otevřít nastavení</translation>
+        <translation type="obsolete">Otevřít nastavení</translation>
     </message>
     <message>
         <source>&amp;Toolbar</source>
-        <translation type="vanished">Nástrojový &amp;pruh</translation>
+        <translation type="obsolete">Nástrojový &amp;pruh</translation>
     </message>
     <message>
         <source>Display / hide the toolbar</source>
-        <translation type="vanished">Zobrazit/Skrýt nástrojový pruh</translation>
+        <translation type="obsolete">Zobrazit/Skrýt nástrojový pruh</translation>
     </message>
     <message>
         <source>&amp;Close file</source>
-        <translation type="vanished">&amp;Zavřít soubor</translation>
+        <translation type="obsolete">&amp;Zavřít soubor</translation>
     </message>
     <message>
         <source>Close the current file</source>
-        <translation type="vanished">Zavřít nynější soubor</translation>
+        <translation type="obsolete">Zavřít nynější soubor</translation>
     </message>
     <message>
         <source>&amp;Copy</source>
-        <translation type="vanished">&amp;Kopírovat</translation>
+        <translation type="obsolete">&amp;Kopírovat</translation>
     </message>
     <message>
         <source>Copy an element</source>
-        <translation type="vanished">Kopírovat prvek</translation>
+        <translation type="obsolete">Kopírovat prvek</translation>
     </message>
     <message>
         <source>&amp;Paste</source>
-        <translation type="vanished">&amp;Vložit</translation>
+        <translation type="obsolete">&amp;Vložit</translation>
     </message>
     <message>
         <source>Paste an element</source>
-        <translation type="vanished">Vložit prvek</translation>
+        <translation type="obsolete">Vložit prvek</translation>
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation type="vanished">&amp;Smazat</translation>
+        <translation type="obsolete">&amp;Smazat</translation>
     </message>
     <message>
         <source>Delete an element</source>
-        <translation type="vanished">Smazat prvek</translation>
+        <translation type="obsolete">Smazat prvek</translation>
     </message>
     <message>
         <source>&amp;Remove unused elements</source>
-        <translation type="vanished">&amp;Odstranit nepoužívané prvky</translation>
+        <translation type="obsolete">&amp;Odstranit nepoužívané prvky</translation>
     </message>
     <message>
         <source>Remove unused samples and instruments</source>
         <oldsource>Enlève les samples et instruments non utilisés</oldsource>
-        <translation type="vanished">Odstranit nepoužívané vzorky a nástroje</translation>
+        <translation type="obsolete">Odstranit nepoužívané vzorky a nástroje</translation>
     </message>
     <message>
         <source>Re&amp;name</source>
-        <translation type="vanished">&amp;Přejmenovat</translation>
+        <translation type="obsolete">&amp;Přejmenovat</translation>
     </message>
     <message>
         <source>Rename one or several element(s)</source>
-        <translation type="vanished">Přejmenovat jeden nebo několik prvků</translation>
+        <translation type="obsolete">Přejmenovat jeden nebo několik prvků</translation>
     </message>
     <message>
         <source>file1</source>
-        <translation type="vanished">Soubor 1</translation>
+        <translation type="obsolete">Soubor 1</translation>
     </message>
     <message>
         <source>Open a recent file</source>
-        <translation type="vanished">Otevřít nedávný soubor</translation>
+        <translation type="obsolete">Otevřít nedávný soubor</translation>
     </message>
     <message>
         <source>file2</source>
-        <translation type="vanished">Soubor 2</translation>
+        <translation type="obsolete">Soubor 2</translation>
     </message>
     <message>
         <source>file3</source>
-        <translation type="vanished">Soubor 3</translation>
+        <translation type="obsolete">Soubor 3</translation>
     </message>
     <message>
         <source>file4</source>
-        <translation type="vanished">Soubor 4</translation>
+        <translation type="obsolete">Soubor 4</translation>
     </message>
     <message>
         <source>file5</source>
-        <translation type="vanished">Soubor 5</translation>
+        <translation type="obsolete">Soubor 5</translation>
     </message>
     <message>
         <source>&amp;Modulator section</source>
-        <translation type="vanished">Ú&amp;sek modulátorů</translation>
+        <translation type="obsolete">Ú&amp;sek modulátorů</translation>
     </message>
     <message>
         <source>&amp;Import samples...</source>
         <oldsource>&amp;Importer des sons...</oldsource>
-        <translation type="vanished">Z&amp;avést vzorky...</translation>
+        <translation type="obsolete">Z&amp;avést vzorky...</translation>
     </message>
     <message>
         <source>E&amp;xport samples...</source>
         <oldsource>E&amp;xporter des sons...</oldsource>
-        <translation type="vanished">Vy&amp;vést vzorky...</translation>
+        <translation type="obsolete">Vy&amp;vést vzorky...</translation>
     </message>
     <message>
         <source>Remove the blank at the beginning of a sample</source>
         <oldsource>Enleve le blanc au début d&apos;un sample</oldsource>
-        <translation type="vanished">Odstranit ticho na začátku vzorku</translation>
+        <translation type="obsolete">Odstranit ticho na začátku vzorku</translation>
     </message>
     <message>
         <source>Cut the sample at the end of its loop</source>
         <oldsource>Ajuste le sample à sa fin de boucle</oldsource>
-        <translation type="vanished">Ořezat vzorek na konci jeho smyčky</translation>
+        <translation type="obsolete">Ořezat vzorek na konci jeho smyčky</translation>
     </message>
     <message>
         <source>Loop automatically the sample</source>
         <oldsource>Boucle automatiquement le sample</oldsource>
-        <translation type="vanished">Smyčkovat vzorek automaticky</translation>
+        <translation type="obsolete">Smyčkovat vzorek automaticky</translation>
     </message>
     <message>
         <source>Transpose the sample</source>
         <oldsource>Transpose le sample</oldsource>
-        <translation type="vanished">Transponovat vzorek</translation>
+        <translation type="obsolete">Transponovat vzorek</translation>
     </message>
     <message>
         <source>&amp;External command...</source>
-        <translation type="vanished">&amp;Vnější příkaz...</translation>
+        <translation type="obsolete">&amp;Vnější příkaz...</translation>
     </message>
     <message>
         <source>Use an external software or command to modify a .wav file</source>
-        <translation type="vanished">Použít vnější program nebo příkaz ke změně zvukového souboru .wav</translation>
+        <translation type="obsolete">Použít vnější program nebo příkaz ke změně zvukového souboru .wav</translation>
     </message>
     <message>
         <source>Export &amp;preset list...</source>
         <oldsource>Exporter la liste des &amp;presets</oldsource>
-        <translation type="vanished">Vyvést seznam &amp;přednastavení...</translation>
+        <translation type="obsolete">Vyvést seznam &amp;přednastavení...</translation>
     </message>
     <message>
         <source>Export the preset list in a text format</source>
-        <translation type="vanished">Vyvést seznam přednastavení v textovém formátu</translation>
+        <translation type="obsolete">Vyvést seznam přednastavení v textovém formátu</translation>
     </message>
     <message>
         <source>&amp;Soundfont repository</source>
-        <translation type="vanished">&amp;Stažení zvukovou banku</translation>
+        <translation type="obsolete">&amp;Stažení zvukovou banku</translation>
     </message>
     <message>
         <source>&amp;Celeste tuning...</source>
-        <translation type="vanished">&amp;Ladění celesty...</translation>
+        <translation type="obsolete">&amp;Ladění celesty...</translation>
     </message>
     <message>
         <source>Tune the sounds to create beats</source>
-        <translation type="vanished">Ladit zvuky pro vytvoření úderů</translation>
+        <translation type="obsolete">Ladit zvuky pro vytvoření úderů</translation>
     </message>
     <message>
         <source>Division duplication...</source>
-        <translation type="vanished">Zdvojení dělení...</translation>
+        <translation type="obsolete">Zdvojení dělení...</translation>
     </message>
     <message>
         <source>Display a 6-octave keyboard</source>
-        <translation type="vanished">Zobrazit šestioktávovou klávesnici</translation>
+        <translation type="obsolete">Zobrazit šestioktávovou klávesnici</translation>
     </message>
     <message>
         <source>&amp;128 keys (full)</source>
-        <translation type="vanished">&amp;128 not (úplná)</translation>
+        <translation type="obsolete">&amp;128 not (úplná)</translation>
     </message>
     <message>
         <source>Display no keyboard</source>
-        <translation type="vanished">Nezobrazovat klávesnici</translation>
+        <translation type="obsolete">Nezobrazovat klávesnici</translation>
     </message>
     <message>
         <source>Division duplication</source>
-        <translation type="vanished">Zdvojení dělení</translation>
+        <translation type="obsolete">Zdvojení dělení</translation>
     </message>
     <message>
         <source>Display the recorder</source>
-        <translation type="vanished">Zobrazit nahrávací zařízení</translation>
+        <translation type="obsolete">Zobrazit nahrávací zařízení</translation>
     </message>
     <message>
         <source>&amp;Visualizer</source>
-        <translation type="vanished">&amp;Prohlížeč</translation>
+        <translation type="obsolete">&amp;Prohlížeč</translation>
     </message>
     <message>
         <source>Visualize in a graph the parameters used</source>
-        <translation type="vanished">Zobrazit použité parametry v grafu</translation>
+        <translation type="obsolete">Zobrazit použité parametry v grafu</translation>
     </message>
     <message>
         <source>Ex&amp;port soundfont...</source>
         <oldsource>Exporter sound&amp;font...</oldsource>
-        <translation type="vanished">Vyvést zvukovou &amp;banku...</translation>
+        <translation type="obsolete">Vyvést zvukovou &amp;banku...</translation>
     </message>
     <message>
         <source>Export a soundfont</source>
-        <translation type="vanished">Vyvést zvukovou banku</translation>
+        <translation type="obsolete">Vyvést zvukovou banku</translation>
     </message>
     <message>
         <source>&amp;Unlink all stereo samples</source>
         <oldsource>&amp;Dissocier les samples stéréo</oldsource>
-        <translation type="vanished">&amp;Rozpojit všechny vzorky stereo</translation>
+        <translation type="obsolete">&amp;Rozpojit všechny vzorky stereo</translation>
     </message>
     <message>
         <source>Unlink all stereo samples</source>
         <oldsource>Dissocie les samples stéréo</oldsource>
-        <translation type="vanished">Rozpojit všechny vzorky stereo</translation>
+        <translation type="obsolete">Rozpojit všechny vzorky stereo</translation>
     </message>
     <message>
         <source>Peak &amp;frequency export (csv)</source>
-        <translation type="vanished">Vyvést špičky &amp;kmitočtové křivky (csv)</translation>
+        <translation type="obsolete">Vyvést špičky &amp;kmitočtové křivky (csv)</translation>
     </message>
     <message>
         <source>Export the peak frequency of all samples in a csv file</source>
-        <translation type="vanished">Vyvést špičky kmitočtové křivky všech vzorků do souboru CSV</translation>
+        <translation type="obsolete">Vyvést špičky kmitočtové křivky všech vzorků do souboru CSV</translation>
     </message>
     <message>
         <source>&amp;88 keys (piano)</source>
-        <translation type="vanished">&amp;88 noty (klavír)</translation>
+        <translation type="obsolete">&amp;88 noty (klavír)</translation>
     </message>
     <message>
         <source>In &amp;toolbar</source>
-        <translation type="vanished">V nástrojovém &amp;pruhu</translation>
+        <translation type="obsolete">V nástrojovém &amp;pruhu</translation>
     </message>
     <message>
         <source>&amp;Floating</source>
-        <translation type="vanished">Pl&amp;ovoucí</translation>
+        <translation type="obsolete">Pl&amp;ovoucí</translation>
     </message>
     <message>
         <source>&amp;Transposition...</source>
-        <translation type="vanished">&amp;Transpozice...</translation>
+        <translation type="obsolete">&amp;Transpozice...</translation>
     </message>
     <message>
         <source>Transpose every sample of an instrument</source>
-        <translation type="vanished">Transponovat všechny vzorky nástroje</translation>
+        <translation type="obsolete">Transponovat všechny vzorky nástroje</translation>
     </message>
     <message>
         <source>Remove all &amp;modulators</source>
-        <translation type="vanished">Odstranit všechny &amp;modulátory</translation>
+        <translation type="obsolete">Odstranit všechny &amp;modulátory</translation>
     </message>
     <message>
         <source>&amp;Full screen</source>
-        <translation type="vanished">Na &amp;celou obrazovku</translation>
+        <translation type="obsolete">Na &amp;celou obrazovku</translation>
     </message>
     <message>
         <source>&amp;Forum</source>
-        <translation type="vanished">&amp;Forum</translation>
+        <translation type="obsolete">&amp;Forum</translation>
     </message>
     <message>
         <source>&amp;5 octaves</source>
-        <translation type="vanished">&amp;5 oktáv</translation>
+        <translation type="obsolete">&amp;5 oktáv</translation>
     </message>
     <message>
         <source>Display a 5-octave keyboard</source>
-        <translation type="vanished">Zobrazit pětioktávovou klávesnici</translation>
+        <translation type="obsolete">Zobrazit pětioktávovou klávesnici</translation>
     </message>
     <message>
         <source>&amp;6 octaves</source>
-        <translation type="vanished">&amp;6 oktáv</translation>
+        <translation type="obsolete">&amp;6 oktáv</translation>
     </message>
     <message>
         <source>Display a 128-key keyboard</source>
-        <translation type="vanished">Zobrazit klávesnici o 128 notách</translation>
+        <translation type="obsolete">Zobrazit klávesnici o 128 notách</translation>
     </message>
     <message>
         <source>&amp;None</source>
-        <translation type="vanished">Žá&amp;dný</translation>
+        <translation type="obsolete">Žá&amp;dný</translation>
     </message>
     <message>
         <source>&amp;Division duplication...</source>
         <oldsource>&amp;Duplication des divisions</oldsource>
-        <translation type="vanished">&amp;Zdvojení dělení...</translation>
+        <translation type="obsolete">&amp;Zdvojení dělení...</translation>
     </message>
     <message>
         <source>&amp;Change volume...</source>
         <oldsource>&amp;Modifier volume</oldsource>
-        <translation type="vanished">&amp;Změnit hlasitost...</translation>
+        <translation type="obsolete">&amp;Změnit hlasitost...</translation>
     </message>
     <message>
         <source>Change the volume</source>
-        <translation type="vanished">Změnit hlasitost</translation>
+        <translation type="obsolete">Změnit hlasitost</translation>
     </message>
     <message>
         <source>&amp;Filter frequencies...</source>
-        <translation type="vanished">&amp;Filtrovat kmitočty...</translation>
+        <translation type="obsolete">&amp;Filtrovat kmitočty...</translation>
     </message>
     <message>
         <source>Apply a filter to attenuate specific frequencies</source>
-        <translation type="vanished">Použít filtr k zeslabení některých kmitočtů</translation>
+        <translation type="obsolete">Použít filtr k zeslabení některých kmitočtů</translation>
     </message>
     <message>
         <source>&amp;Adjust attenuations...</source>
-        <translation type="vanished">&amp;Upravit zeslabení...</translation>
+        <translation type="obsolete">&amp;Upravit zeslabení...</translation>
     </message>
     <message>
         <source>Globally adjust instrument and preset attenuations</source>
-        <translation type="vanished">Celkově upravit zeslabení nástrojů a přednastavení</translation>
+        <translation type="obsolete">Celkově upravit zeslabení nástrojů a přednastavení</translation>
     </message>
     <message>
         <source>&amp;Release maker</source>
-        <translation type="vanished">V&amp;ytvoření času vyloudění tónu...</translation>
+        <translation type="obsolete">V&amp;ytvoření času vyloudění tónu...</translation>
     </message>
     <message>
         <source>Create automatically a release for all linked sounds</source>
-        <translation type="vanished">Vytvořit automaticky vyloudění tónu pro všechny spojené zvuky</translation>
+        <translation type="obsolete">Vytvořit automaticky vyloudění tónu pro všechny spojené zvuky</translation>
     </message>
     <message>
         <source>&amp;Link all stereo samples</source>
         <oldsource>&amp;Association auto échantillons</oldsource>
-        <translation type="vanished">&amp;Spojit všechny vzorky stereo</translation>
+        <translation type="obsolete">&amp;Spojit všechny vzorky stereo</translation>
     </message>
     <message>
         <source>Automatically link the samples L/R according to their names</source>
         <oldsource>Associe automatiquement les samples G/D</oldsource>
-        <translation type="vanished">Automaticky spojit vzorky L/P podle jejich názvů</translation>
+        <translation type="obsolete">Automaticky spojit vzorky L/P podle jejich názvů</translation>
     </message>
     <message>
         <source>&amp;Recorder</source>
         <oldsource>Magnétophone</oldsource>
-        <translation type="vanished">N&amp;ahrávací zařízení</translation>
+        <translation type="obsolete">N&amp;ahrávací zařízení</translation>
     </message>
     <message>
         <source>Display the modulator section</source>
-        <translation type="vanished">Zobrazit úsek modulátorů</translation>
+        <translation type="obsolete">Zobrazit úsek modulátorů</translation>
     </message>
     <message>
         <source>Vel.</source>
-        <translation type="vanished">Dyn.</translation>
+        <translation type="obsolete">Dyn.</translation>
     </message>
     <message>
         <source>Key</source>
-        <translation type="vanished">Nota</translation>
+        <translation type="obsolete">Nota</translation>
     </message>
     <message>
         <source>Polyphone</source>
-        <translation type="vanished">Polyphone</translation>
+        <translation type="obsolete">Polyphone</translation>
     </message>
     <message>
         <source>&amp;Sample</source>
-        <translation type="vanished">&amp;Vzorek</translation>
+        <translation type="obsolete">&amp;Vzorek</translation>
     </message>
     <message>
         <source>&amp;Global</source>
-        <translation type="vanished">&amp;Celkové</translation>
+        <translation type="obsolete">&amp;Celkové</translation>
     </message>
     <message>
         <source>&amp;Keyboard</source>
-        <translation type="vanished">&amp;Klávesnice</translation>
+        <translation type="obsolete">&amp;Klávesnice</translation>
     </message>
     <message>
         <source>Import an audio file</source>
-        <translation type="vanished">Zavést zvukový soubor</translation>
+        <translation type="obsolete">Zavést zvukový soubor</translation>
     </message>
     <message>
         <source>Export in a wav format</source>
-        <translation type="vanished">Vyvést do formátu WAV</translation>
+        <translation type="obsolete">Vyvést do formátu WAV</translation>
     </message>
     <message>
         <source>New instrument</source>
-        <translation type="vanished">Nový nástroj</translation>
+        <translation type="obsolete">Nový nástroj</translation>
     </message>
     <message>
         <source>Create a new instrument</source>
-        <translation type="vanished">Vytvořit nový nástroj</translation>
+        <translation type="obsolete">Vytvořit nový nástroj</translation>
     </message>
     <message>
         <source>New preset</source>
-        <translation type="vanished">Nové přednastavení</translation>
+        <translation type="obsolete">Nové přednastavení</translation>
     </message>
     <message>
         <source>Create a new preset</source>
-        <translation type="vanished">Vytvořit nové přednastavení</translation>
+        <translation type="obsolete">Vytvořit nové přednastavení</translation>
     </message>
     <message>
         <source>&amp;Remove blank at start</source>
-        <translation type="vanished">&amp;Odstranit ticho na začátku</translation>
+        <translation type="obsolete">&amp;Odstranit ticho na začátku</translation>
     </message>
     <message>
         <source>&amp;Trim to end of loop</source>
-        <translation type="vanished">Oř&amp;ezat na konci smyčky</translation>
+        <translation type="obsolete">Oř&amp;ezat na konci smyčky</translation>
     </message>
     <message>
         <source>&amp;Auto loop</source>
-        <translation type="vanished">Automatické &amp;smyčkování</translation>
+        <translation type="obsolete">Automatické &amp;smyčkování</translation>
     </message>
     <message>
         <source>Trans&amp;pose...</source>
-        <translation type="vanished">&amp;Transponovat...</translation>
+        <translation type="obsolete">&amp;Transponovat...</translation>
     </message>
     <message>
         <source>&amp;Sound spatialization...</source>
-        <translation type="vanished">Zp&amp;rostorovění zvuku...</translation>
+        <translation type="obsolete">Zp&amp;rostorovění zvuku...</translation>
     </message>
     <message>
         <source>Place sounds in space</source>
-        <translation type="vanished">Umístit zvuky do prostoru</translation>
+        <translation type="obsolete">Umístit zvuky do prostoru</translation>
     </message>
     <message>
         <source>&amp;Automatic distribution</source>
-        <translation type="vanished">&amp;Automatické rozvržení</translation>
+        <translation type="obsolete">&amp;Automatické rozvržení</translation>
     </message>
     <message>
         <source>Automatically arrange the samples over the keyboard</source>
-        <translation type="vanished">Automaticky rozvrhnout vzorky nad klávesnicí</translation>
+        <translation type="obsolete">Automaticky rozvrhnout vzorky nad klávesnicí</translation>
     </message>
     <message>
         <source>Duplicate the divisions</source>
-        <translation type="vanished">Zdvojit dělení</translation>
+        <translation type="obsolete">Zdvojit dělení</translation>
     </message>
     <message>
         <source>&amp;Global setting...</source>
-        <translation type="vanished">&amp;Celkové nastavení...</translation>
+        <translation type="obsolete">&amp;Celkové nastavení...</translation>
     </message>
     <message>
         <source>Set all divisions simultaneously</source>
-        <translation type="vanished">Nastavit všechna dělení současně</translation>
+        <translation type="obsolete">Nastavit všechna dělení současně</translation>
     </message>
     <message>
         <source>&amp;Balance adjustment</source>
-        <translation type="vanished">&amp;Nastavení vyvážení</translation>
+        <translation type="obsolete">&amp;Nastavení vyvážení</translation>
     </message>
     <message>
         <source>Set the sample pan</source>
         <oldsource>Règle la balance du sample</oldsource>
-        <translation type="vanished">Nastavit vyvážení vzorku</translation>
+        <translation type="obsolete">Nastavit vyvážení vzorku</translation>
     </message>
     <message>
         <source>&amp;Mixture creation...</source>
-        <translation type="vanished">&amp;Vytvoření směsi...</translation>
+        <translation type="obsolete">&amp;Vytvoření směsi...</translation>
     </message>
     <message>
         <source>Create a mixture</source>
-        <translation type="vanished">Vytvořit směs</translation>
+        <translation type="obsolete">Vytvořit směs</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="196"/>
+        <location filename="mainwindow/mainwindow.cpp" line="197"/>
         <source>Do&amp;n&apos;t save</source>
         <translation>&amp;Zavřít bez uložení</translation>
     </message>
     <message>
         <source>.sf2 file (*.sf2)</source>
-        <translation type="vanished">Soubor .sf2 (*.sf2)</translation>
+        <translation type="obsolete">Soubor .sf2 (*.sf2)</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="180"/>
+        <location filename="mainwindow/mainwindow.cpp" line="181"/>
         <source>Warning</source>
         <translation>Pozor</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="vanished">Zrušit</translation>
+        <translation type="obsolete">Zrušit</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="170"/>
+        <location filename="mainwindow/mainwindow.cpp" line="171"/>
         <source>untitled</source>
         <translation>Bez názvu</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="181"/>
+        <location filename="mainwindow/mainwindow.cpp" line="182"/>
         <source>Save before exiting?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="184"/>
+        <location filename="mainwindow/mainwindow.cpp" line="185"/>
         <source>The following files have been modified:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="191"/>
+        <location filename="mainwindow/mainwindow.cpp" line="192"/>
         <source>File &quot;%1&quot; has been modified.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="240"/>
+        <location filename="mainwindow/mainwindow.cpp" line="241"/>
         <source>en/documentation</source>
         <comment>path for the documentation online</comment>
         <translation>en/documentation</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="245"/>
+        <location filename="mainwindow/mainwindow.cpp" line="246"/>
         <source>en/forum</source>
         <comment>path for the forum</comment>
         <translation>en/forum</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="270"/>
+        <location filename="mainwindow/mainwindow.cpp" line="271"/>
         <source>Soundfonts</source>
         <translation>Zvukové banky</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="271"/>
+        <location filename="mainwindow/mainwindow.cpp" line="272"/>
         <source>Sf2 files</source>
         <translation>Soubory .sf2</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="272"/>
+        <location filename="mainwindow/mainwindow.cpp" line="273"/>
         <source>Sf3 files</source>
         <translation>Soubory .sf3</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="273"/>
+        <location filename="mainwindow/mainwindow.cpp" line="274"/>
         <source>Sfz files</source>
         <translation>Soubory .sfz</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="274"/>
+        <location filename="mainwindow/mainwindow.cpp" line="275"/>
         <source>sfArk archives</source>
         <translation>Archivy .sfArk</translation>
     </message>
     <message>
         <source>Corrupted file: use of 16 bits samples.</source>
-        <translation type="vanished">Poškozený soubor: používání vzorků o jakosti 16 bitů.</translation>
+        <translation type="obsolete">Poškozený soubor: používání vzorků o jakosti 16 bitů.</translation>
     </message>
     <message>
         <source>Cannot open the file.</source>
-        <translation type="vanished">Nelze otevřít soubor.</translation>
+        <translation type="obsolete">Nelze otevřít soubor.</translation>
     </message>
     <message>
         <source>Cannot read the file.</source>
-        <translation type="vanished">Nelze přečíst soubor.</translation>
+        <translation type="obsolete">Nelze přečíst soubor.</translation>
     </message>
     <message>
         <source>Corrupted file.</source>
-        <translation type="vanished">Soubor je poškozen.</translation>
+        <translation type="obsolete">Soubor je poškozen.</translation>
     </message>
     <message>
         <source>Name of the new soundfont:</source>
-        <translation type="vanished">Název nové zvukové banky:</translation>
+        <translation type="obsolete">Název nové zvukové banky:</translation>
     </message>
     <message>
         <source>Cannot delete a sample used by another instrument.</source>
-        <translation type="vanished">Nelze smazat vzorek používaný jiným nástrojem.</translation>
+        <translation type="obsolete">Nelze smazat vzorek používaný jiným nástrojem.</translation>
     </message>
     <message>
         <source>Cannot delete an instrument used by another preset.</source>
-        <translation type="vanished">Nelze smazat nástroj používaný jiným přednastavením.</translation>
+        <translation type="obsolete">Nelze smazat nástroj používaný jiným přednastavením.</translation>
     </message>
     <message>
         <source>Instrument name (max 20 characters):</source>
-        <translation type="vanished">Název nástroje (nejvíce 20 znaků):</translation>
+        <translation type="obsolete">Název nástroje (nejvíce 20 znaků):</translation>
     </message>
     <message>
         <source>Preset name (max 20 characters):</source>
-        <translation type="vanished">Název přednastavení (nejvíce 20 znaků):</translation>
+        <translation type="obsolete">Název přednastavení (nejvíce 20 znaků):</translation>
     </message>
     <message>
         <source>Soundfont name (max 255 characters):</source>
-        <translation type="vanished">Název zvukové banky (nejvíce 255 znaků):</translation>
+        <translation type="obsolete">Název zvukové banky (nejvíce 255 znaků):</translation>
     </message>
     <message>
         <source>L&quot; already exists.&lt;br/&gt;Replace?</source>
-        <translation type="vanished">L&quot; již existuje.&lt;br/&gt;Nahradit?</translation>
+        <translation type="obsolete">L&quot; již existuje.&lt;br/&gt;Nahradit?</translation>
     </message>
     <message>
         <source>R&quot; already exists.&lt;br/&gt;Replace?</source>
-        <translation type="vanished">P&quot; již existuje.&lt;br/&gt;Nahradit?</translation>
+        <translation type="obsolete">P&quot; již existuje.&lt;br/&gt;Nahradit?</translation>
     </message>
     <message>
         <source>&quot; already exists.&lt;br/&gt;Replace?</source>
-        <translation type="vanished">&quot; již existuje.&lt;br/&gt;Nahradit?</translation>
+        <translation type="obsolete">&quot; již existuje.&lt;br/&gt;Nahradit?</translation>
     </message>
     <message>
         <source> bits&lt;/b&gt;</source>
-        <translation type="vanished"> bitů&lt;/b&gt;</translation>
+        <translation type="obsolete"> bitů&lt;/b&gt;</translation>
     </message>
     <message>
         <source>Virtual keyboard</source>
-        <translation type="vanished">Virtuální klávesnice</translation>
+        <translation type="obsolete">Virtuální klávesnice</translation>
     </message>
     <message>
         <source>Operation in progress...</source>
-        <translation type="vanished">Probíhá operace...</translation>
+        <translation type="obsolete">Probíhá operace...</translation>
     </message>
     <message>
         <source>&lt;b&gt;Save before exiting?&lt;/b&gt;</source>
-        <translation type="vanished">&lt;b&gt;Uložit před ukončením?&lt;/b&gt;</translation>
+        <translation type="obsolete">&lt;b&gt;Uložit před ukončením?&lt;/b&gt;</translation>
     </message>
     <message>
         <source>The following files have been modified:&lt;br/&gt; - </source>
         <oldsource>Les fichiers suivants ont été modifiés depuis leur dernier enregistrement :&lt;br/&gt; - </oldsource>
-        <translation type="vanished">Následující soubory byly změněny:&lt;br/&gt; - </translation>
+        <translation type="obsolete">Následující soubory byly změněny:&lt;br/&gt; - </translation>
     </message>
     <message>
         <source>The file &quot;</source>
         <oldsource>Le fichier «&amp;#160;</oldsource>
-        <translation type="vanished">Soubor &quot;</translation>
+        <translation type="obsolete">Soubor &quot;</translation>
     </message>
     <message>
         <source>&quot; has been modified.</source>
-        <translation type="vanished">&quot; byl změněn.</translation>
+        <translation type="obsolete">&quot; byl změněn.</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="268"/>
+        <location filename="mainwindow/mainwindow.cpp" line="269"/>
         <source>Opening files</source>
         <translation>Otevírají se soubory</translation>
     </message>
     <message>
         <source>&amp;Yes</source>
-        <translation type="vanished">&amp;Ano</translation>
+        <translation type="obsolete">&amp;Ano</translation>
     </message>
     <message>
         <source>&amp;No</source>
-        <translation type="vanished">&amp;Ne</translation>
+        <translation type="obsolete">&amp;Ne</translation>
     </message>
     <message>
         <source>&lt;b&gt;To many parameters defined in both the intruments and the presets.&lt;/b&gt;</source>
-        <translation type="vanished">&lt;b&gt;Stanoveno příliš mnoho parametrů jak v nástrojích tak v přednastaveních.&lt;/b&gt;</translation>
+        <translation type="obsolete">&lt;b&gt;Stanoveno příliš mnoho parametrů jak v nástrojích tak v přednastaveních.&lt;/b&gt;</translation>
     </message>
     <message>
         <source>&lt;b&gt;To many parameters defined in the instruments.&lt;/b&gt;</source>
-        <translation type="vanished">&lt;b&gt;Stanoveno příliš mnoho parametrů v nástrojích.&lt;/b&gt;</translation>
+        <translation type="obsolete">&lt;b&gt;Stanoveno příliš mnoho parametrů v nástrojích.&lt;/b&gt;</translation>
     </message>
     <message>
         <source>&lt;b&gt;To many parameters defined in the presets.&lt;/b&gt;</source>
-        <translation type="vanished">&lt;b&gt;Stanoveno příliš mnoho parametrů v přednastaveních.&lt;/b&gt;</translation>
+        <translation type="obsolete">&lt;b&gt;Stanoveno příliš mnoho parametrů v přednastaveních.&lt;/b&gt;</translation>
     </message>
     <message>
         <source>Some synthesizers skip parameters beyond the  65536th.
 Splitting the file into several sf2 might solve the problem.</source>
-        <translation type="vanished">Některé syntetizátory přeskakují parametry za 65536tým.
+        <translation type="obsolete">Některé syntetizátory přeskakují parametry za 65536tým.
 Rozdělení souboru na několik sf2 může potíže vyřešit.</translation>
     </message>
     <message>
         <source>Save, &amp;disable this message</source>
-        <translation type="vanished">Uložit, &amp;nezobrazovzat tuto zprávu znovu</translation>
+        <translation type="obsolete">Uložit, &amp;nezobrazovzat tuto zprávu znovu</translation>
     </message>
     <message>
         <source>Save a soundfont</source>
-        <translation type="vanished">Uložit zvukovou banku</translation>
+        <translation type="obsolete">Uložit zvukovou banku</translation>
     </message>
     <message>
         <source>Unknown extension.</source>
-        <translation type="vanished">Neznámá přípona.</translation>
+        <translation type="obsolete">Neznámá přípona.</translation>
     </message>
     <message>
         <source>Cannot save the file.</source>
-        <translation type="vanished">Nelze uložit soubor.</translation>
+        <translation type="obsolete">Nelze uložit soubor.</translation>
     </message>
     <message>
         <source>http://polyphone-soundfonts.com/en/documentation</source>
-        <translation type="vanished">http://polyphone-soundfonts.com/en/documentation</translation>
+        <translation type="obsolete">http://polyphone-soundfonts.com/en/documentation</translation>
     </message>
     <message>
         <source>http://polyphone-soundfonts.com/en/forum</source>
-        <translation type="vanished">http://polyphone-soundfonts.com/en/forum</translation>
+        <translation type="obsolete">http://polyphone-soundfonts.com/en/forum</translation>
     </message>
     <message>
         <source>http://polyphone-soundfonts.com/en/soundfonts</source>
-        <translation type="vanished">http://polyphone-soundfonts.com/en/soundfonts</translation>
+        <translation type="obsolete">http://polyphone-soundfonts.com/en/soundfonts</translation>
     </message>
     <message>
         <source>&amp;Bulk rename</source>
-        <translation type="vanished">Hromadné &amp;přejmenování</translation>
+        <translation type="obsolete">Hromadné &amp;přejmenování</translation>
     </message>
     <message>
         <source>Sample name (max 20 characters):</source>
         <oldsource>Nom du sample (max 20 caractères) :</oldsource>
-        <translation type="vanished">Název vzorku (nejvíce 20 znaků):</translation>
+        <translation type="obsolete">Název vzorku (nejvíce 20 znaků):</translation>
     </message>
     <message>
         <source>Question</source>
-        <translation type="vanished">Otázka</translation>
+        <translation type="obsolete">Otázka</translation>
     </message>
     <message>
         <source>An error occurred while importing the file </source>
-        <translation type="vanished">Během zavádění souboru se vyskytla chyba </translation>
+        <translation type="obsolete">Během zavádění souboru se vyskytla chyba </translation>
     </message>
     <message>
         <source>Wav file</source>
-        <translation type="vanished">Soubor .wav</translation>
+        <translation type="obsolete">Soubor .wav</translation>
     </message>
     <message>
         <source>The sample &quot;</source>
-        <translation type="vanished">Vzorek &quot;</translation>
+        <translation type="obsolete">Vzorek &quot;</translation>
     </message>
     <message>
         <source>&amp;Replace</source>
-        <translation type="vanished">&amp;Nahradit</translation>
+        <translation type="obsolete">&amp;Nahradit</translation>
     </message>
     <message>
         <source>R&amp;eplace all</source>
-        <translation type="vanished">N&amp;ahradit vše</translation>
+        <translation type="obsolete">N&amp;ahradit vše</translation>
     </message>
     <message>
         <source>&amp;Duplicate</source>
-        <translation type="vanished">&amp;Zdvojit</translation>
+        <translation type="obsolete">&amp;Zdvojit</translation>
     </message>
     <message>
         <source>D&amp;uplicate all</source>
-        <translation type="vanished">Z&amp;dvojit vše</translation>
+        <translation type="obsolete">Z&amp;dvojit vše</translation>
     </message>
     <message>
         <source>&amp;Ignore</source>
-        <translation type="vanished">Pře&amp;hlížet</translation>
+        <translation type="obsolete">Pře&amp;hlížet</translation>
     </message>
     <message>
         <source>I&amp;gnore all</source>
-        <translation type="vanished">Přehlíž&amp;et vše</translation>
+        <translation type="obsolete">Přehlíž&amp;et vše</translation>
     </message>
     <message>
         <source>Merge soudfonts:</source>
-        <translation type="vanished">Sloučení zvukových bank:</translation>
+        <translation type="obsolete">Sloučení zvukových bank:</translation>
     </message>
     <message>
         <source>No preset available.</source>
-        <translation type="vanished">Není dostupné žádné přednastavení.</translation>
+        <translation type="obsolete">Není dostupné žádné přednastavení.</translation>
     </message>
     <message>
         <source> sample and </source>
-        <translation type="vanished"> vzorek a </translation>
+        <translation type="obsolete"> vzorek a </translation>
     </message>
     <message>
         <source> samples and </source>
-        <translation type="vanished"> vzorky a </translation>
+        <translation type="obsolete"> vzorky a </translation>
     </message>
     <message>
         <source>The soundfont must contain at least one instrument.</source>
-        <translation type="vanished">Soubor se zvukovou bankou musí obsahovat alespoň jeden nástroj.</translation>
+        <translation type="obsolete">Soubor se zvukovou bankou musí obsahovat alespoň jeden nástroj.</translation>
     </message>
     <message>
         <source>Export peak frequency</source>
-        <translation type="vanished">Vyvést špičky kmitočtové křivky</translation>
+        <translation type="obsolete">Vyvést špičky kmitočtové křivky</translation>
     </message>
     <message>
         <source>Csv file (*.csv)</source>
-        <translation type="vanished">Soubor CSV (*.csv)</translation>
+        <translation type="obsolete">Soubor CSV (*.csv)</translation>
     </message>
     <message>
         <source>,</source>
         <translatorcomment>column separator symbol in csv files</translatorcomment>
-        <translation type="vanished">;</translation>
+        <translation type="obsolete">;</translation>
     </message>
     <message>
         <source>Sample</source>
-        <translation type="vanished">Vzorek</translation>
+        <translation type="obsolete">Vzorek</translation>
     </message>
     <message>
         <source>Peak number</source>
-        <translation type="vanished">Číslo špičky</translation>
+        <translation type="obsolete">Číslo špičky</translation>
     </message>
     <message>
         <source>Factor</source>
-        <translation type="vanished">Činitel</translation>
+        <translation type="obsolete">Činitel</translation>
     </message>
     <message>
         <source>Frequency</source>
-        <translation type="vanished">Kmitočet</translation>
+        <translation type="obsolete">Kmitočet</translation>
     </message>
     <message>
         <source>Correction</source>
-        <translation type="vanished">Oprava</translation>
+        <translation type="obsolete">Oprava</translation>
     </message>
     <message>
         <source>m</source>
         <translatorcomment>decimal separator</translatorcomment>
-        <translation type="vanished">,</translation>
+        <translation type="obsolete">,</translation>
     </message>
     <message>
         <source>The soundfont contains no modulators.</source>
-        <translation type="vanished">Zvuková banka neobsahuje žádné modulátory.</translation>
+        <translation type="obsolete">Zvuková banka neobsahuje žádné modulátory.</translation>
     </message>
     <message>
         <source>Information</source>
-        <translation type="vanished">Informace</translation>
+        <translation type="obsolete">Informace</translation>
     </message>
     <message>
         <source>1 modulator has been deleted.</source>
-        <translation type="vanished">1 modulátor byl smazán.</translation>
+        <translation type="obsolete">1 modulátor byl smazán.</translation>
     </message>
     <message>
         <source>modulators have been deleted.</source>
-        <translation type="vanished">modulátory byly smazány.</translation>
+        <translation type="obsolete">modulátory byly smazány.</translation>
     </message>
     <message>
         <source>Unknown format.</source>
-        <translation type="vanished">Neznámý formát.</translation>
+        <translation type="obsolete">Neznámý formát.</translation>
     </message>
     <message>
         <source>File already loaded.</source>
-        <translation type="vanished">Soubor je již nahrán.</translation>
+        <translation type="obsolete">Soubor je již nahrán.</translation>
     </message>
     <message>
         <source>&lt;b&gt;Losing resolution </source>
-        <translation type="vanished">&lt;b&gt;Ztráta rozlišení </translation>
+        <translation type="obsolete">&lt;b&gt;Ztráta rozlišení </translation>
     </message>
     <message>
         <source>The sample quality will be lowered. Continue?</source>
-        <translation type="vanished">Jakost vzorků bude následkem této operace snížena. Pokračovat?</translation>
+        <translation type="obsolete">Jakost vzorků bude následkem této operace snížena. Pokračovat?</translation>
     </message>
     <message>
         <source>File already open, cannot save.</source>
-        <translation type="vanished">Soubor je již otevřen, nelze uložit.</translation>
+        <translation type="obsolete">Soubor je již otevřen, nelze uložit.</translation>
     </message>
     <message>
         <source>Choose a destination folder</source>
-        <translation type="vanished">Vybrat cílovou složku</translation>
+        <translation type="obsolete">Vybrat cílovou složku</translation>
     </message>
     <message>
         <source>Name of the new instrument:</source>
-        <translation type="vanished">Název nového nástroje:</translation>
+        <translation type="obsolete">Název nového nástroje:</translation>
     </message>
     <message>
         <source>Name of the new preset:</source>
-        <translation type="vanished">Název nového přednastavení:</translation>
+        <translation type="obsolete">Název nového přednastavení:</translation>
     </message>
     <message>
         <source> instrument have been deleted.</source>
         <translatorcomment>instrument: singular</translatorcomment>
-        <translation type="vanished"> nástroj byl smazán.</translation>
+        <translation type="obsolete"> nástroj byl smazán.</translation>
     </message>
     <message>
         <source> instruments have been deleted.</source>
         <translatorcomment>instrument: plural</translatorcomment>
-        <translation type="vanished"> nástroje byly smazány.</translation>
+        <translation type="obsolete"> nástroje byly smazány.</translation>
     </message>
     <message>
         <location filename="mainwindow/mainwindow.ui" line="20"/>
@@ -4300,259 +4353,259 @@ Rozdělení souboru na několik sf2 může potíže vyřešit.</translation>
     <name>Page</name>
     <message>
         <source>, absolute value</source>
-        <translation type="vanished">, absolutní hodnota</translation>
+        <translation type="obsolete">, absolutní hodnota</translation>
     </message>
     <message>
         <source>Sample start offset</source>
         <oldsource>Offset début sample</oldsource>
-        <translation type="vanished">Posun začátku vzorku</translation>
+        <translation type="obsolete">Posun začátku vzorku</translation>
     </message>
     <message>
         <source>Sample end offset</source>
         <oldsource>Offset fin sample</oldsource>
-        <translation type="vanished">Posun konce vzorku</translation>
+        <translation type="obsolete">Posun konce vzorku</translation>
     </message>
     <message>
         <source>Start loop offset</source>
-        <translation type="vanished">Posun začátku smyčky</translation>
+        <translation type="obsolete">Posun začátku smyčky</translation>
     </message>
     <message>
         <source>End loop offset</source>
-        <translation type="vanished">Posun konce smyčky</translation>
+        <translation type="obsolete">Posun konce smyčky</translation>
     </message>
     <message>
         <source>Mod LFO → pitch (c)</source>
-        <translation type="vanished">Mod LFO → výška tónu (c)</translation>
+        <translation type="obsolete">Mod LFO → výška tónu (c)</translation>
     </message>
     <message>
         <source>Vib LFO → pitch (c)</source>
-        <translation type="vanished">Vib LFO → výška tónu (c)</translation>
+        <translation type="obsolete">Vib LFO → výška tónu (c)</translation>
     </message>
     <message>
         <source>Mod env → pitch (c)</source>
-        <translation type="vanished">Mod env → výška tónu (c)</translation>
+        <translation type="obsolete">Mod env → výška tónu (c)</translation>
     </message>
     <message>
         <source>Filter, frequency (Hz)</source>
-        <translation type="vanished">Filtr, kmitočet (Hz)</translation>
+        <translation type="obsolete">Filtr, kmitočet (Hz)</translation>
     </message>
     <message>
         <source>Filter, frequency (×)</source>
-        <translation type="vanished">Filtr, kmitočet (×)</translation>
+        <translation type="obsolete">Filtr, kmitočet (×)</translation>
     </message>
     <message>
         <source>Filter, resonance (dB)</source>
-        <translation type="vanished">Filtr, ozvěna (dB)</translation>
+        <translation type="obsolete">Filtr, ozvěna (dB)</translation>
     </message>
     <message>
         <source>Mod LFO → filter (c)</source>
-        <translation type="vanished">Mod LFO → filtr (c)</translation>
+        <translation type="obsolete">Mod LFO → filtr (c)</translation>
     </message>
     <message>
         <source>Mod env → filter (c)</source>
-        <translation type="vanished">Mod env → filtr (c)</translation>
+        <translation type="obsolete">Mod env → filtr (c)</translation>
     </message>
     <message>
         <source>Mod LFO → volume (dB)</source>
-        <translation type="vanished">Mod LFO → hlasitost (dB)</translation>
+        <translation type="obsolete">Mod LFO → hlasitost (dB)</translation>
     </message>
     <message>
         <source>Chorus (%)</source>
-        <translation type="vanished">Sborový efekt (%)</translation>
+        <translation type="obsolete">Sborový efekt (%)</translation>
     </message>
     <message>
         <source>Reverb (%)</source>
-        <translation type="vanished">Dozvuk (%)</translation>
+        <translation type="obsolete">Dozvuk (%)</translation>
     </message>
     <message>
         <source>Pan [-50;50]</source>
-        <translation type="vanished">Vyvážení [-50;50]</translation>
+        <translation type="obsolete">Vyvážení [-50;50]</translation>
     </message>
     <message>
         <source>Pan [-100;100]</source>
-        <translation type="vanished">Vyvážení [-100;100]</translation>
+        <translation type="obsolete">Vyvážení [-100;100]</translation>
     </message>
     <message>
         <source>Mod LFO delay (s)</source>
         <translatorcomment>english formulations may be kept...</translatorcomment>
-        <translation type="vanished">Mod LFO zpoždění (s)</translation>
+        <translation type="obsolete">Mod LFO zpoždění (s)</translation>
     </message>
     <message>
         <source>Mod LFO delay (×)</source>
-        <translation type="vanished">Mod LFO zpoždění (×)</translation>
+        <translation type="obsolete">Mod LFO zpoždění (×)</translation>
     </message>
     <message>
         <source>Mod LFO freq (Hz)</source>
-        <translation type="vanished">Mod LFO knitočet (Hz)</translation>
+        <translation type="obsolete">Mod LFO knitočet (Hz)</translation>
     </message>
     <message>
         <source>Mod LFO freq (×)</source>
-        <translation type="vanished">Mod LFO kmitočet (×)</translation>
+        <translation type="obsolete">Mod LFO kmitočet (×)</translation>
     </message>
     <message>
         <source>Vib LFO delay (s)</source>
-        <translation type="vanished">Vib LFO zpoždění (s)</translation>
+        <translation type="obsolete">Vib LFO zpoždění (s)</translation>
     </message>
     <message>
         <source>Vib LFO delay (×)</source>
-        <translation type="vanished">Vib LFO zpoždění (×)</translation>
+        <translation type="obsolete">Vib LFO zpoždění (×)</translation>
     </message>
     <message>
         <source>Vib LFO freq (Hz)</source>
-        <translation type="vanished">Vib LFO knitočet (Hz)</translation>
+        <translation type="obsolete">Vib LFO knitočet (Hz)</translation>
     </message>
     <message>
         <source>Vib LFO freq (×)</source>
-        <translation type="vanished">Vib LFO kmitočet (×)</translation>
+        <translation type="obsolete">Vib LFO kmitočet (×)</translation>
     </message>
     <message>
         <source>Mod env delay (s)</source>
-        <translation type="vanished">Mod env zpoždění (s)</translation>
+        <translation type="obsolete">Mod env zpoždění (s)</translation>
     </message>
     <message>
         <source>Mod env delay (×)</source>
-        <translation type="vanished">Mod env zpoždění (×)</translation>
+        <translation type="obsolete">Mod env zpoždění (×)</translation>
     </message>
     <message>
         <source>Mod env attack (s)</source>
-        <translation type="vanished">Mod env náběh (s)</translation>
+        <translation type="obsolete">Mod env náběh (s)</translation>
     </message>
     <message>
         <source>Mod env attack (×)</source>
-        <translation type="vanished">Mod env náběh (×)</translation>
+        <translation type="obsolete">Mod env náběh (×)</translation>
     </message>
     <message>
         <source>Mod env hold (s)</source>
-        <translation type="vanished">Mod env držení (s)</translation>
+        <translation type="obsolete">Mod env držení (s)</translation>
     </message>
     <message>
         <source>Mod env hold (×)</source>
-        <translation type="vanished">Mod env držení (×)</translation>
+        <translation type="obsolete">Mod env držení (×)</translation>
     </message>
     <message>
         <source>Mod env decay (s)</source>
-        <translation type="vanished">Mod env pokles (s)</translation>
+        <translation type="obsolete">Mod env pokles (s)</translation>
     </message>
     <message>
         <source>Mod env decay (×)</source>
-        <translation type="vanished">Mod env pokles (×)</translation>
+        <translation type="obsolete">Mod env pokles (×)</translation>
     </message>
     <message>
         <source>Mod env sustain (%)</source>
-        <translation type="vanished">Mod env držení tónu (%)</translation>
+        <translation type="obsolete">Mod env držení tónu (%)</translation>
     </message>
     <message>
         <source>Mod env release (s)</source>
-        <translation type="vanished">Mod env uvolnění (s)</translation>
+        <translation type="obsolete">Mod env uvolnění (s)</translation>
     </message>
     <message>
         <source>Mod env release (×)</source>
-        <translation type="vanished">Mod env uvolnění (×)</translation>
+        <translation type="obsolete">Mod env uvolnění (×)</translation>
     </message>
     <message>
         <source>Key → Mod env hold (c)</source>
-        <translation type="vanished">Nota → Mod env držení (c)</translation>
+        <translation type="obsolete">Nota → Mod env držení (c)</translation>
     </message>
     <message>
         <source>Key → Mod env decay (c)</source>
-        <translation type="vanished">Nota → Mod env pokles (c)</translation>
+        <translation type="obsolete">Nota → Mod env pokles (c)</translation>
     </message>
     <message>
         <source>Vol env delay (s)</source>
-        <translation type="vanished">Vol env zpoždění (s)</translation>
+        <translation type="obsolete">Vol env zpoždění (s)</translation>
     </message>
     <message>
         <source>Vol env delay (×)</source>
-        <translation type="vanished">Vol env zpoždění (×)</translation>
+        <translation type="obsolete">Vol env zpoždění (×)</translation>
     </message>
     <message>
         <source>Vol env decay (s)</source>
-        <translation type="vanished">Vol env pokles (s)</translation>
+        <translation type="obsolete">Vol env pokles (s)</translation>
     </message>
     <message>
         <source>Vol env decay (×)</source>
-        <translation type="vanished">Vol env pokles (×)</translation>
+        <translation type="obsolete">Vol env pokles (×)</translation>
     </message>
     <message>
         <source>Vol env attack (s)</source>
-        <translation type="vanished">Vol env náběh(s)</translation>
+        <translation type="obsolete">Vol env náběh(s)</translation>
     </message>
     <message>
         <source>Vol env attack (×)</source>
-        <translation type="vanished">Vol env náběh (×)</translation>
+        <translation type="obsolete">Vol env náběh (×)</translation>
     </message>
     <message>
         <source>Vol env hold (s)</source>
-        <translation type="vanished">Vol env držení (s)</translation>
+        <translation type="obsolete">Vol env držení (s)</translation>
     </message>
     <message>
         <source>Vol env hold (×)</source>
-        <translation type="vanished">Vol env držení (×)</translation>
+        <translation type="obsolete">Vol env držení (×)</translation>
     </message>
     <message>
         <source>Vol env sustain (dB)</source>
         <oldsource>Vol env sustain (%)</oldsource>
-        <translation type="vanished">Vol env držení tónu (dB)</translation>
+        <translation type="obsolete">Vol env držení tónu (dB)</translation>
     </message>
     <message>
         <source>Vol env release (s)</source>
-        <translation type="vanished">Vol env uvolnění (s)</translation>
+        <translation type="obsolete">Vol env uvolnění (s)</translation>
     </message>
     <message>
         <source>Vol env release (×)</source>
-        <translation type="vanished">Vol env uvolnění (×)</translation>
+        <translation type="obsolete">Vol env uvolnění (×)</translation>
     </message>
     <message>
         <source>Key → Vol env hold (c)</source>
-        <translation type="vanished">Nota → Vol env držení (c)</translation>
+        <translation type="obsolete">Nota → Vol env držení (c)</translation>
     </message>
     <message>
         <source>Key → Vol env decay (c)</source>
-        <translation type="vanished">Nota → Vol env pokles (c)</translation>
+        <translation type="obsolete">Nota → Vol env pokles (c)</translation>
     </message>
     <message>
         <source>Key range</source>
-        <translation type="vanished">Rozsah not</translation>
+        <translation type="obsolete">Rozsah not</translation>
     </message>
     <message>
         <source>Velocity range</source>
-        <translation type="vanished">Rozsah dynamiky</translation>
+        <translation type="obsolete">Rozsah dynamiky</translation>
     </message>
     <message>
         <source>Fixed key</source>
-        <translation type="vanished">Pevná nota</translation>
+        <translation type="obsolete">Pevná nota</translation>
     </message>
     <message>
         <source>Fixed velocity</source>
-        <translation type="vanished">Pevná dynamika</translation>
+        <translation type="obsolete">Pevná dynamika</translation>
     </message>
     <message>
         <source>Attenuation (dB)</source>
-        <translation type="vanished">Zeslabení (dB)</translation>
+        <translation type="obsolete">Zeslabení (dB)</translation>
     </message>
     <message>
         <source>Tuning (semi-tones)</source>
-        <translation type="vanished">Ladění (půltóny)</translation>
+        <translation type="obsolete">Ladění (půltóny)</translation>
     </message>
     <message>
         <source>Tuning (cents)</source>
-        <translation type="vanished">Ladění (setiny)</translation>
+        <translation type="obsolete">Ladění (setiny)</translation>
     </message>
     <message>
         <source>Loop playback</source>
-        <translation type="vanished">Přehrávání ve smyčce</translation>
+        <translation type="obsolete">Přehrávání ve smyčce</translation>
     </message>
     <message>
         <source>Tuning (scale)</source>
-        <translation type="vanished">Ladění (stupnice)</translation>
+        <translation type="obsolete">Ladění (stupnice)</translation>
     </message>
     <message>
         <source>Exclusive class</source>
-        <translation type="vanished">Výhradní třída</translation>
+        <translation type="obsolete">Výhradní třída</translation>
     </message>
     <message>
         <source>Root key</source>
-        <translation type="vanished">Základní nota</translation>
+        <translation type="obsolete">Základní nota</translation>
     </message>
 </context>
 <context>
@@ -4643,7 +4696,7 @@ Rozdělení souboru na několik sf2 může potíže vyřešit.</translation>
     <name>PageOverview</name>
     <message>
         <source>Name</source>
-        <translation type="vanished">Název</translation>
+        <translation type="obsolete">Název</translation>
     </message>
     <message>
         <location filename="editor/overview/pageoverview.cpp" line="82"/>
@@ -4660,7 +4713,7 @@ Rozdělení souboru na několik sf2 může potíže vyřešit.</translation>
     <name>PageOverviewInst</name>
     <message>
         <source>Instrument list</source>
-        <translation type="vanished">Seznam nástrojů</translation>
+        <translation type="obsolete">Seznam nástrojů</translation>
     </message>
     <message>
         <location filename="editor/overview/pageoverviewinst.cpp" line="32"/>
@@ -4752,7 +4805,7 @@ ve smyčce</translation>
     <name>PageOverviewPrst</name>
     <message>
         <source>Preset list</source>
-        <translation type="vanished">Seznam přednastavení</translation>
+        <translation type="obsolete">Seznam přednastavení</translation>
     </message>
     <message>
         <location filename="editor/overview/pageoverviewprst.cpp" line="32"/>
@@ -4816,7 +4869,7 @@ modulátorů</translation>
     <name>PageOverviewSmpl</name>
     <message>
         <source>Sample list</source>
-        <translation type="vanished">Seznam vzorků</translation>
+        <translation type="obsolete">Seznam vzorků</translation>
     </message>
     <message>
         <location filename="editor/overview/pageoverviewsmpl.cpp" line="32"/>
@@ -5161,7 +5214,7 @@ rate</source>
         <source>Apply</source>
         <translation>Použít</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="editor/pagesmpl.ui" line="790"/>
         <location filename="editor/pagesmpl.cpp" line="109"/>
         <source>Equalizer (±15 dB)</source>
@@ -5323,979 +5376,979 @@ rate</source>
 <context>
     <name>PageTable</name>
     <message>
-        <location filename="editor/pagetable.cpp" line="105"/>
+        <location filename="editor/pagetable.cpp" line="106"/>
         <source>Global</source>
         <translation>Celkové</translation>
     </message>
     <message>
-        <location filename="editor/pagetable.cpp" line="507"/>
-        <location filename="editor/pagetable.cpp" line="529"/>
-        <location filename="editor/pagetable.cpp" line="1575"/>
-        <location filename="editor/pagetable.cpp" line="1641"/>
+        <location filename="editor/pagetable.cpp" line="504"/>
+        <location filename="editor/pagetable.cpp" line="526"/>
+        <location filename="editor/pagetable.cpp" line="1572"/>
+        <location filename="editor/pagetable.cpp" line="1638"/>
         <source>Modulator</source>
         <translation>Vlnový modulátor</translation>
     </message>
     <message>
-        <location filename="editor/pagetable.cpp" line="509"/>
+        <location filename="editor/pagetable.cpp" line="506"/>
         <source>Link (invalid)</source>
         <translation>Spojení (neplatné)</translation>
     </message>
     <message>
-        <location filename="editor/pagetable.cpp" line="561"/>
+        <location filename="editor/pagetable.cpp" line="558"/>
         <source>Copy / duplicate modulators</source>
         <translation>Kopírovat / zdvojit modulátory</translation>
     </message>
     <message>
-        <location filename="editor/pagetable.cpp" line="564"/>
+        <location filename="editor/pagetable.cpp" line="561"/>
         <source>Duplicate modulators toward...</source>
         <translation>Zdvojit modulátory k...</translation>
     </message>
     <message>
-        <location filename="editor/pagetable.cpp" line="565"/>
-        <location filename="editor/pagetable.cpp" line="576"/>
+        <location filename="editor/pagetable.cpp" line="562"/>
+        <location filename="editor/pagetable.cpp" line="573"/>
         <source>Copy all modulators</source>
         <translation>Kopírovat všechny modulátory</translation>
     </message>
     <message>
-        <location filename="editor/pagetable.cpp" line="569"/>
+        <location filename="editor/pagetable.cpp" line="566"/>
         <source>Duplicate the selection toward...</source>
         <translation>Zdvojit výběr k...</translation>
     </message>
     <message>
-        <location filename="editor/pagetable.cpp" line="570"/>
-        <location filename="editor/pagetable.cpp" line="578"/>
+        <location filename="editor/pagetable.cpp" line="567"/>
+        <location filename="editor/pagetable.cpp" line="575"/>
         <source>Copy the selected modulators</source>
         <translation>Kopírovat vybrané modulátory</translation>
     </message>
     <message>
-        <location filename="editor/pagetable.cpp" line="1890"/>
+        <location filename="editor/pagetable.cpp" line="1887"/>
         <source>Forbidden action:</source>
         <translation>Zakázaná činnost: </translation>
     </message>
     <message>
-        <location filename="editor/pagetable.cpp" line="1900"/>
-        <location filename="editor/pagetable.cpp" line="1909"/>
-        <location filename="editor/pagetable.cpp" line="2388"/>
-        <location filename="editor/pagetable.cpp" line="2397"/>
+        <location filename="editor/pagetable.cpp" line="1897"/>
+        <location filename="editor/pagetable.cpp" line="1906"/>
+        <location filename="editor/pagetable.cpp" line="2385"/>
+        <location filename="editor/pagetable.cpp" line="2394"/>
         <source>Warning</source>
         <translation>Pozor</translation>
     </message>
     <message>
-        <location filename="editor/pagetable.cpp" line="1901"/>
+        <location filename="editor/pagetable.cpp" line="1898"/>
         <source>offsets cannot be modulated in a preset.</source>
         <translation>posuny nelze v přednastavení měnit.</translation>
     </message>
     <message>
-        <location filename="editor/pagetable.cpp" line="1910"/>
+        <location filename="editor/pagetable.cpp" line="1907"/>
         <source>%1 cannot be modulated in a preset.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>&quot; cannot be modulated in a preset.</source>
-        <translation type="vanished">&quot; nelze měnit v přednastavení.</translation>
+        <translation type="obsolete">&quot; nelze měnit v přednastavení.</translation>
     </message>
     <message>
-        <location filename="editor/pagetable.cpp" line="2389"/>
+        <location filename="editor/pagetable.cpp" line="2386"/>
         <source>An instrument comprising no samples is not compatible with this tool.</source>
         <translation>Jeden nástroj neobsahující žádný vzorek není slučitelný s tímto nástrojem.</translation>
     </message>
     <message>
-        <location filename="editor/pagetable.cpp" line="2390"/>
+        <location filename="editor/pagetable.cpp" line="2387"/>
         <source>A preset comprising no instruments is not compatible with this tool.</source>
         <translation>Jedno přednastavení neobsahující žádný nástroj není slučitelný s tímto nástrojem.</translation>
     </message>
     <message>
-        <location filename="editor/pagetable.cpp" line="2397"/>
+        <location filename="editor/pagetable.cpp" line="2394"/>
         <source>The keyrange of all divisions must be specified.</source>
         <translation>Je třeba stanovit rozsah not všech dělení.</translation>
     </message>
     <message>
         <source>The instrument contains no samples.</source>
-        <translation type="vanished">Nástroj neobsahuje žádné vzorky.</translation>
+        <translation type="obsolete">Nástroj neobsahuje žádné vzorky.</translation>
     </message>
     <message>
         <source>The preset contains no instruments.</source>
-        <translation type="vanished">Přednastavení neobsahuje žádné nástroje.</translation>
+        <translation type="obsolete">Přednastavení neobsahuje žádné nástroje.</translation>
     </message>
     <message>
         <source>No keyrange specified for the instrument.</source>
-        <translation type="vanished">Pro nástroj není stanoven žádný rozsah not.</translation>
+        <translation type="obsolete">Pro nástroj není stanoven žádný rozsah not.</translation>
     </message>
     <message>
         <source>No keyrange specified for the preset.</source>
-        <translation type="vanished">Pro přednastavení není stanoven žádný rozsah not.</translation>
+        <translation type="obsolete">Pro přednastavení není stanoven žádný rozsah not.</translation>
     </message>
 </context>
 <context>
     <name>Page_Inst</name>
     <message>
         <source>Table</source>
-        <translation type="vanished">Tabulka</translation>
+        <translation type="obsolete">Tabulka</translation>
     </message>
     <message>
         <source>Ranges</source>
-        <translation type="vanished">Rozsahy</translation>
+        <translation type="obsolete">Rozsahy</translation>
     </message>
     <message>
         <source>Envelopes</source>
-        <translation type="vanished">Obálky</translation>
+        <translation type="obsolete">Obálky</translation>
     </message>
     <message>
         <source>Key range</source>
-        <translation type="vanished">Rozsah not</translation>
+        <translation type="obsolete">Rozsah not</translation>
     </message>
     <message>
         <source>Velocity range</source>
-        <translation type="vanished">Rozsah dynamiky</translation>
+        <translation type="obsolete">Rozsah dynamiky</translation>
     </message>
     <message>
         <source>Attenuation (dB)</source>
-        <translation type="vanished">Zeslabení (dB)</translation>
+        <translation type="obsolete">Zeslabení (dB)</translation>
     </message>
     <message>
         <source>Pan [-50;50]</source>
-        <translation type="vanished">Vyvážení [-50;50]</translation>
+        <translation type="obsolete">Vyvážení [-50;50]</translation>
     </message>
     <message>
         <source>Loop playback</source>
-        <translation type="vanished">Přehrávání ve smyčce</translation>
+        <translation type="obsolete">Přehrávání ve smyčce</translation>
     </message>
     <message>
         <source>Root key</source>
-        <translation type="vanished">Základní nota</translation>
+        <translation type="obsolete">Základní nota</translation>
     </message>
     <message>
         <source>Tuning (semi-tones)</source>
-        <translation type="vanished">Tuning (semi-tones)</translation>
+        <translation type="obsolete">Tuning (semi-tones)</translation>
     </message>
     <message>
         <source>Tuning (cents)</source>
-        <translation type="vanished">Ladění (setiny)</translation>
+        <translation type="obsolete">Ladění (setiny)</translation>
     </message>
     <message>
         <source>Tuning (scale)</source>
-        <translation type="vanished">Ladění (stupnice)</translation>
+        <translation type="obsolete">Ladění (stupnice)</translation>
     </message>
     <message>
         <source>Filter, frequency (Hz)</source>
-        <translation type="vanished">Filtr, kmitočet (Hz)</translation>
+        <translation type="obsolete">Filtr, kmitočet (Hz)</translation>
     </message>
     <message>
         <source>Filter, resonance (dB)</source>
-        <translation type="vanished">Filtr, ozvěna (dB)</translation>
+        <translation type="obsolete">Filtr, ozvěna (dB)</translation>
     </message>
     <message>
         <source>Vol env delay (s)</source>
-        <translation type="vanished">Vol env zpoždění (s)</translation>
+        <translation type="obsolete">Vol env zpoždění (s)</translation>
     </message>
     <message>
         <source>Vol env attack (s)</source>
-        <translation type="vanished">Vol env náběh(s)</translation>
+        <translation type="obsolete">Vol env náběh(s)</translation>
     </message>
     <message>
         <source>Vol env hold (s)</source>
-        <translation type="vanished">Vol env držení (s)</translation>
+        <translation type="obsolete">Vol env držení (s)</translation>
     </message>
     <message>
         <source>Vol env decay (s)</source>
-        <translation type="vanished">Vol env pokles (s)</translation>
+        <translation type="obsolete">Vol env pokles (s)</translation>
     </message>
     <message>
         <source>Vol env sustain (dB)</source>
-        <translation type="vanished">Vol env držení tónu (dB)</translation>
+        <translation type="obsolete">Vol env držení tónu (dB)</translation>
     </message>
     <message>
         <source>Vol env release (s)</source>
-        <translation type="vanished">Vol env uvolnění (s)</translation>
+        <translation type="obsolete">Vol env uvolnění (s)</translation>
     </message>
     <message>
         <source>Key → Vol env hold (c)</source>
         <oldsource>Vol env note → hold (c)</oldsource>
-        <translation type="vanished">Nota → Vol env držení (c)</translation>
+        <translation type="obsolete">Nota → Vol env držení (c)</translation>
     </message>
     <message>
         <source>Key → Vol env decay (c)</source>
         <oldsource>Vol env note → decay (c)</oldsource>
-        <translation type="vanished">Nota → Vol env pokles (c)</translation>
+        <translation type="obsolete">Nota → Vol env pokles (c)</translation>
     </message>
     <message>
         <source>Mod env delay (s)</source>
-        <translation type="vanished">Mod env zpoždění (s)</translation>
+        <translation type="obsolete">Mod env zpoždění (s)</translation>
     </message>
     <message>
         <source>Mod env attack (s)</source>
-        <translation type="vanished">Mod env náběh (s)</translation>
+        <translation type="obsolete">Mod env náběh (s)</translation>
     </message>
     <message>
         <source>Mod env hold (s)</source>
-        <translation type="vanished">Mod env držení (s)</translation>
+        <translation type="obsolete">Mod env držení (s)</translation>
     </message>
     <message>
         <source>Mod env decay (s)</source>
-        <translation type="vanished">Mod env pokles (s)</translation>
+        <translation type="obsolete">Mod env pokles (s)</translation>
     </message>
     <message>
         <source>Mod env sustain (%)</source>
-        <translation type="vanished">Mod env držení tónu (%)</translation>
+        <translation type="obsolete">Mod env držení tónu (%)</translation>
     </message>
     <message>
         <source>Mod env release (s)</source>
-        <translation type="vanished">Mod env uvolnění (s)</translation>
+        <translation type="obsolete">Mod env uvolnění (s)</translation>
     </message>
     <message>
         <source>Mod env → pitch (c)</source>
-        <translation type="vanished">Mod env → výška tónu (c)</translation>
+        <translation type="obsolete">Mod env → výška tónu (c)</translation>
     </message>
     <message>
         <source>Mod env → filter (c)</source>
-        <translation type="vanished">Mod env → filtr (c)</translation>
+        <translation type="obsolete">Mod env → filtr (c)</translation>
     </message>
     <message>
         <source>Key → Mod env hold (c)</source>
         <oldsource>Mod env note → hold (c)</oldsource>
-        <translation type="vanished">Nota → Mod env držení (c)</translation>
+        <translation type="obsolete">Nota → Mod env držení (c)</translation>
     </message>
     <message>
         <source>Key → Mod env decay (c)</source>
         <oldsource>Mod env note → decay (c)</oldsource>
-        <translation type="vanished">Nota → Mod env pokles (c)</translation>
+        <translation type="obsolete">Nota → Mod env pokles (c)</translation>
     </message>
     <message>
         <source>Mod LFO delay (s)</source>
-        <translation type="vanished">Mod LFO zpoždění (s)</translation>
+        <translation type="obsolete">Mod LFO zpoždění (s)</translation>
     </message>
     <message>
         <source>Mod LFO freq (Hz)</source>
-        <translation type="vanished">Mod LFO knitočet (Hz)</translation>
+        <translation type="obsolete">Mod LFO knitočet (Hz)</translation>
     </message>
     <message>
         <source>Mod LFO → pitch (c)</source>
-        <translation type="vanished">Mod LFO → výška tónu (c)</translation>
+        <translation type="obsolete">Mod LFO → výška tónu (c)</translation>
     </message>
     <message>
         <source>Mod LFO → filter (c)</source>
-        <translation type="vanished">Mod LFO → filtr (c)</translation>
+        <translation type="obsolete">Mod LFO → filtr (c)</translation>
     </message>
     <message>
         <source>Mod LFO → volume (dB)</source>
-        <translation type="vanished">Mod LFO → hlasitost (dB)</translation>
+        <translation type="obsolete">Mod LFO → hlasitost (dB)</translation>
     </message>
     <message>
         <source>Vib LFO delay (s)</source>
-        <translation type="vanished">Vib LFO zpoždění (s)</translation>
+        <translation type="obsolete">Vib LFO zpoždění (s)</translation>
     </message>
     <message>
         <source>Vib LFO freq (Hz)</source>
-        <translation type="vanished">Vib LFO knitočet (Hz)</translation>
+        <translation type="obsolete">Vib LFO knitočet (Hz)</translation>
     </message>
     <message>
         <source>Vib LFO → pitch (c)</source>
-        <translation type="vanished">Vib LFO → výška tónu (c)</translation>
+        <translation type="obsolete">Vib LFO → výška tónu (c)</translation>
     </message>
     <message>
         <source>Exclusive class</source>
-        <translation type="vanished">Výhradní třída</translation>
+        <translation type="obsolete">Výhradní třída</translation>
     </message>
     <message>
         <source>Chorus (%)</source>
-        <translation type="vanished">Sborový efekt (%)</translation>
+        <translation type="obsolete">Sborový efekt (%)</translation>
     </message>
     <message>
         <source>Reverb (%)</source>
-        <translation type="vanished">Dozvuk (%)</translation>
+        <translation type="obsolete">Dozvuk (%)</translation>
     </message>
     <message>
         <source>Fixed key</source>
-        <translation type="vanished">Pevná nota</translation>
+        <translation type="obsolete">Pevná nota</translation>
     </message>
     <message>
         <source>Fixed velocity</source>
-        <translation type="vanished">Pevná dynamika</translation>
+        <translation type="obsolete">Pevná dynamika</translation>
     </message>
     <message>
         <source>Sample start offset</source>
         <oldsource>Offset début sample</oldsource>
-        <translation type="vanished">Posun začátku vzorku</translation>
+        <translation type="obsolete">Posun začátku vzorku</translation>
     </message>
     <message>
         <source>Sample end offset</source>
         <oldsource>Offset fin sample</oldsource>
-        <translation type="vanished">Posun konce vzorku</translation>
+        <translation type="obsolete">Posun konce vzorku</translation>
     </message>
     <message>
         <source>Start loop offset</source>
-        <translation type="vanished">Posun začátku smyčky</translation>
+        <translation type="obsolete">Posun začátku smyčky</translation>
     </message>
     <message>
         <source>End loop offset</source>
-        <translation type="vanished">Posun konce smyčky</translation>
+        <translation type="obsolete">Posun konce smyčky</translation>
     </message>
     <message>
         <source>Global</source>
-        <translation type="vanished">Celkové</translation>
+        <translation type="obsolete">Celkové</translation>
     </message>
     <message>
         <source>Delete a modulator</source>
-        <translation type="vanished">Smazat modulátor</translation>
+        <translation type="obsolete">Smazat modulátor</translation>
     </message>
     <message>
         <source>Copy modulators</source>
-        <translation type="vanished">Kopírovat modulátory</translation>
+        <translation type="obsolete">Kopírovat modulátory</translation>
     </message>
     <message>
         <source>Paste the copied modulators</source>
-        <translation type="vanished">Vložit zkopírované modulátory</translation>
+        <translation type="obsolete">Vložit zkopírované modulátory</translation>
     </message>
     <message>
         <source>Modulators</source>
-        <translation type="vanished">Vlnové modulátory</translation>
+        <translation type="obsolete">Vlnové modulátory</translation>
     </message>
     <message>
         <source>Add a modulator</source>
-        <translation type="vanished">Přidat modulátor</translation>
+        <translation type="obsolete">Přidat modulátor</translation>
     </message>
     <message>
         <source>Source</source>
-        <translation type="vanished">Zdroj</translation>
+        <translation type="obsolete">Zdroj</translation>
     </message>
     <message>
         <source>Amount</source>
-        <translation type="vanished">Množství</translation>
+        <translation type="obsolete">Množství</translation>
     </message>
     <message>
         <source>Destination</source>
-        <translation type="vanished">Cíl</translation>
+        <translation type="obsolete">Cíl</translation>
     </message>
     <message>
         <source>Source / Amount</source>
-        <translation type="vanished">Zdroj/Množství</translation>
+        <translation type="obsolete">Zdroj/Množství</translation>
     </message>
     <message>
         <source>Abs. value</source>
-        <translation type="vanished">Abs. hodnota</translation>
+        <translation type="obsolete">Abs. hodnota</translation>
     </message>
     <message>
         <source>&lt;b&gt;Instrument is not linked to any preset.&lt;/b&gt;</source>
-        <oldsource>&lt;b&gt;Instrument liÃ© Ã&#xa0; aucun preset.&lt;/b&gt;</oldsource>
-        <translation type="vanished">&lt;b&gt;Nástroj není spojen s žádným přednastavením.&lt;/b&gt;</translation>
+        <oldsource>&lt;b&gt;Instrument liÃ© Ã  aucun preset.&lt;/b&gt;</oldsource>
+        <translation type="obsolete">&lt;b&gt;Nástroj není spojen s žádným přednastavením.&lt;/b&gt;</translation>
     </message>
     <message>
         <source>&lt;b&gt;Instrument linked to preset: &lt;/b&gt;</source>
         <oldsource>&lt;b&gt;Instrument liÃ© au preset : &lt;/b&gt;</oldsource>
-        <translation type="vanished">&lt;b&gt;Nástroj spojen s přednastavením.&lt;/b&gt;</translation>
+        <translation type="obsolete">&lt;b&gt;Nástroj spojen s přednastavením.&lt;/b&gt;</translation>
     </message>
     <message>
         <source>&lt;b&gt;Instrument linked to presets: &lt;/b&gt;</source>
         <oldsource>&lt;b&gt;Instrument liÃ© aux presets : &lt;/b&gt;</oldsource>
-        <translation type="vanished">&lt;b&gt;Nástroj spojen s přednastaveními.&lt;/b&gt;</translation>
+        <translation type="obsolete">&lt;b&gt;Nástroj spojen s přednastaveními.&lt;/b&gt;</translation>
     </message>
     <message>
         <source>Warning</source>
-        <translation type="vanished">Pozor</translation>
+        <translation type="obsolete">Pozor</translation>
     </message>
     <message>
         <source>The instrument contains no samples.</source>
-        <translation type="vanished">Nástroj neobsahuje žádné vzorky.</translation>
+        <translation type="obsolete">Nástroj neobsahuje žádné vzorky.</translation>
     </message>
     <message>
         <source>Creation </source>
-        <translation type="vanished">Vytvoření</translation>
+        <translation type="obsolete">Vytvoření</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="vanished">Zrušit</translation>
+        <translation type="obsolete">Zrušit</translation>
     </message>
     <message>
         <source>untitled</source>
-        <translation type="vanished">Bez názvu</translation>
+        <translation type="obsolete">Bez názvu</translation>
     </message>
 </context>
 <context>
     <name>Page_Prst</name>
     <message>
         <source>Bank</source>
-        <translation type="vanished">Banka</translation>
+        <translation type="obsolete">Banka</translation>
     </message>
     <message>
         <source>Preset</source>
-        <translation type="vanished">Přednastavení</translation>
+        <translation type="obsolete">Přednastavení</translation>
     </message>
     <message>
         <source>(percussion)</source>
-        <translation type="vanished">(bicí)</translation>
+        <translation type="obsolete">(bicí)</translation>
     </message>
     <message>
         <source>Key range</source>
-        <translation type="vanished">Rozsah not</translation>
+        <translation type="obsolete">Rozsah not</translation>
     </message>
     <message>
         <source>Velocity range</source>
-        <translation type="vanished">Rozsah dynamiky</translation>
+        <translation type="obsolete">Rozsah dynamiky</translation>
     </message>
     <message>
         <source>Attenuation (dB)</source>
-        <translation type="vanished">Zeslabení (dB)</translation>
+        <translation type="obsolete">Zeslabení (dB)</translation>
     </message>
     <message>
         <source>Pan [-100;100]</source>
         <oldsource>Balance [-50;50]</oldsource>
-        <translation type="vanished">Vyvážení [-100;100]</translation>
+        <translation type="obsolete">Vyvážení [-100;100]</translation>
     </message>
     <message>
         <source>Tuning (semi-tones)</source>
-        <translation type="vanished">Ladění (půltóny)</translation>
+        <translation type="obsolete">Ladění (půltóny)</translation>
     </message>
     <message>
         <source>Tuning (cents)</source>
-        <translation type="vanished">Ladění (setiny)</translation>
+        <translation type="obsolete">Ladění (setiny)</translation>
     </message>
     <message>
         <source>Tuning (scale)</source>
-        <translation type="vanished">Ladění (stupnice)</translation>
+        <translation type="obsolete">Ladění (stupnice)</translation>
     </message>
     <message>
         <source>Filter, frequency (×)</source>
         <oldsource>Filtre, fréquence (Hz)</oldsource>
-        <translation type="vanished">Filtr, kmitočet (×)</translation>
+        <translation type="obsolete">Filtr, kmitočet (×)</translation>
     </message>
     <message>
         <source>Filter, resonance (dB)</source>
-        <translation type="vanished">Filtr, ozvěna (dB)</translation>
+        <translation type="obsolete">Filtr, ozvěna (dB)</translation>
     </message>
     <message>
         <source>Vol env delay (×)</source>
         <oldsource>Vol env delay (s)</oldsource>
-        <translation type="vanished">Vol env zpoždění (×)</translation>
+        <translation type="obsolete">Vol env zpoždění (×)</translation>
     </message>
     <message>
         <source>Vol env attack (×)</source>
         <oldsource>Vol env attack (s)</oldsource>
-        <translation type="vanished">Vol env náběh (×)</translation>
+        <translation type="obsolete">Vol env náběh (×)</translation>
     </message>
     <message>
         <source>Vol env hold (×)</source>
         <oldsource>Vol env hold (s)</oldsource>
-        <translation type="vanished">Vol env držení (×)</translation>
+        <translation type="obsolete">Vol env držení (×)</translation>
     </message>
     <message>
         <source>Vol env decay (×)</source>
         <oldsource>Vol env decay (s)</oldsource>
-        <translation type="vanished">Vol env pokles (×)</translation>
+        <translation type="obsolete">Vol env pokles (×)</translation>
     </message>
     <message>
         <source>Vol env sustain (dB)</source>
-        <translation type="vanished">Vol env držení tónu (dB)</translation>
+        <translation type="obsolete">Vol env držení tónu (dB)</translation>
     </message>
     <message>
         <source>Vol env release (×)</source>
         <oldsource>Vol env release (s)</oldsource>
-        <translation type="vanished">Vol env uvolnění (×)</translation>
+        <translation type="obsolete">Vol env uvolnění (×)</translation>
     </message>
     <message>
         <source>Key → Vol env hold (c)</source>
         <oldsource>Vol env note → hold (c)</oldsource>
-        <translation type="vanished">Nota → Vol env držení (c)</translation>
+        <translation type="obsolete">Nota → Vol env držení (c)</translation>
     </message>
     <message>
         <source>Key → Vol env decay (c)</source>
         <oldsource>Vol env note → decay (c)</oldsource>
-        <translation type="vanished">Nota → Vol env pokles (c)</translation>
+        <translation type="obsolete">Nota → Vol env pokles (c)</translation>
     </message>
     <message>
         <source>Mod env delay (×)</source>
         <oldsource>Mod env delay (s)</oldsource>
-        <translation type="vanished">Mod env zpoždění (×)</translation>
+        <translation type="obsolete">Mod env zpoždění (×)</translation>
     </message>
     <message>
         <source>Mod env attack (×)</source>
         <oldsource>Mod env attack (s)</oldsource>
-        <translation type="vanished">Mod env náběh (×)</translation>
+        <translation type="obsolete">Mod env náběh (×)</translation>
     </message>
     <message>
         <source>Mod env hold (×)</source>
         <oldsource>Mod env hold (s)</oldsource>
-        <translation type="vanished">Mod env držení (×)</translation>
+        <translation type="obsolete">Mod env držení (×)</translation>
     </message>
     <message>
         <source>Mod env decay (×)</source>
         <oldsource>Mod env decay (s)</oldsource>
-        <translation type="vanished">Mod env pokles (×)</translation>
+        <translation type="obsolete">Mod env pokles (×)</translation>
     </message>
     <message>
         <source>Mod env sustain (%)</source>
-        <translation type="vanished">Mod env držení tónu (%)</translation>
+        <translation type="obsolete">Mod env držení tónu (%)</translation>
     </message>
     <message>
         <source>Mod env release (×)</source>
         <oldsource>Mod env release (s)</oldsource>
-        <translation type="vanished">Mod env uvolnění (×)</translation>
+        <translation type="obsolete">Mod env uvolnění (×)</translation>
     </message>
     <message>
         <source>Mod env → pitch (c)</source>
-        <translation type="vanished">Mod env → výška tónu (c)</translation>
+        <translation type="obsolete">Mod env → výška tónu (c)</translation>
     </message>
     <message>
         <source>Mod env → filter (c)</source>
-        <translation type="vanished">Mod env → filtr (c)</translation>
+        <translation type="obsolete">Mod env → filtr (c)</translation>
     </message>
     <message>
         <source>Key → Mod env hold (c)</source>
         <oldsource>Mod env note → hold (c)</oldsource>
-        <translation type="vanished">Nota → Mod env držení (c)</translation>
+        <translation type="obsolete">Nota → Mod env držení (c)</translation>
     </message>
     <message>
         <source>Key → Mod env decay (c)</source>
         <oldsource>Mod env note → decay (c)</oldsource>
-        <translation type="vanished">Nota → Mod env pokles (c)</translation>
+        <translation type="obsolete">Nota → Mod env pokles (c)</translation>
     </message>
     <message>
         <source>Mod LFO delay (×)</source>
         <oldsource>Mod LFO delay (s)</oldsource>
-        <translation type="vanished">Mod LFO zpoždění (×)</translation>
+        <translation type="obsolete">Mod LFO zpoždění (×)</translation>
     </message>
     <message>
         <source>Mod LFO freq (×)</source>
         <oldsource>Mod LFO freq (Hz)</oldsource>
-        <translation type="vanished">Mod LFO kmitočet (×)</translation>
+        <translation type="obsolete">Mod LFO kmitočet (×)</translation>
     </message>
     <message>
         <source>Mod LFO → pitch (c)</source>
-        <translation type="vanished">Mod LFO → výška tónu (c)</translation>
+        <translation type="obsolete">Mod LFO → výška tónu (c)</translation>
     </message>
     <message>
         <source>Mod LFO → filter (c)</source>
-        <translation type="vanished">Mod LFO → filtr (c)</translation>
+        <translation type="obsolete">Mod LFO → filtr (c)</translation>
     </message>
     <message>
         <source>Mod LFO → volume (dB)</source>
-        <translation type="vanished">Mod LFO → hlasitost (dB)</translation>
+        <translation type="obsolete">Mod LFO → hlasitost (dB)</translation>
     </message>
     <message>
         <source>Vib LFO delay (×)</source>
         <oldsource>Vib LFO delay (s)</oldsource>
-        <translation type="vanished">Vib LFO zpoždění (×)</translation>
+        <translation type="obsolete">Vib LFO zpoždění (×)</translation>
     </message>
     <message>
         <source>Vib LFO freq (×)</source>
         <oldsource>Vib LFO freq (Hz)</oldsource>
-        <translation type="vanished">Vib LFO kmitočet (×)</translation>
+        <translation type="obsolete">Vib LFO kmitočet (×)</translation>
     </message>
     <message>
         <source>Vib LFO → pitch (c)</source>
-        <translation type="vanished">Vib LFO → výška tónu (c)</translation>
+        <translation type="obsolete">Vib LFO → výška tónu (c)</translation>
     </message>
     <message>
         <source>Chorus (%)</source>
-        <translation type="vanished">Sborový efekt (%)</translation>
+        <translation type="obsolete">Sborový efekt (%)</translation>
     </message>
     <message>
         <source>Reverb (%)</source>
-        <translation type="vanished">Dozvuk (%)</translation>
+        <translation type="obsolete">Dozvuk (%)</translation>
     </message>
     <message>
         <source>Global</source>
-        <translation type="vanished">Celkové</translation>
+        <translation type="obsolete">Celkové</translation>
     </message>
     <message>
         <source>Copy modulators</source>
-        <translation type="vanished">Kopírovat modulátory</translation>
+        <translation type="obsolete">Kopírovat modulátory</translation>
     </message>
     <message>
         <source>Paste the copied modulators</source>
-        <translation type="vanished">Vložit zkopírované modulátory</translation>
+        <translation type="obsolete">Vložit zkopírované modulátory</translation>
     </message>
     <message>
         <source>Add a modulator</source>
-        <translation type="vanished">Přidat modulátor</translation>
+        <translation type="obsolete">Přidat modulátor</translation>
     </message>
     <message>
         <source>Delete a modulator</source>
-        <translation type="vanished">Smazat modulátor</translation>
+        <translation type="obsolete">Smazat modulátor</translation>
     </message>
     <message>
         <source>Modulators</source>
-        <translation type="vanished">Vlnové modulátory</translation>
+        <translation type="obsolete">Vlnové modulátory</translation>
     </message>
     <message>
         <source>Table</source>
-        <translation type="vanished">Tabulka</translation>
+        <translation type="obsolete">Tabulka</translation>
     </message>
     <message>
         <source>Ranges</source>
-        <translation type="vanished">Rozsahy</translation>
+        <translation type="obsolete">Rozsahy</translation>
     </message>
     <message>
         <source>Source</source>
-        <translation type="vanished">Zdroj</translation>
+        <translation type="obsolete">Zdroj</translation>
     </message>
     <message>
         <source>Amount</source>
-        <translation type="vanished">Množství</translation>
+        <translation type="obsolete">Množství</translation>
     </message>
     <message>
         <source>Destination</source>
-        <translation type="vanished">Cíl</translation>
+        <translation type="obsolete">Cíl</translation>
     </message>
     <message>
         <source>Source / Amount</source>
-        <translation type="vanished">Zdroj/Množství</translation>
+        <translation type="obsolete">Zdroj/Množství</translation>
     </message>
     <message>
         <source>Abs. value</source>
-        <translation type="vanished">Abs. hodnota</translation>
+        <translation type="obsolete">Abs. hodnota</translation>
     </message>
 </context>
 <context>
     <name>Page_Sf2</name>
     <message>
         <source>Name</source>
-        <translation type="vanished">Název</translation>
+        <translation type="obsolete">Název</translation>
     </message>
     <message>
         <source>Author</source>
-        <translation type="vanished">Autoři</translation>
+        <translation type="obsolete">Autoři</translation>
     </message>
     <message>
         <source>24 bits</source>
-        <translation type="vanished">24 bitů</translation>
+        <translation type="obsolete">24 bitů</translation>
     </message>
     <message>
         <source>Copyright</source>
-        <translation type="vanished">Autorské právo</translation>
+        <translation type="obsolete">Autorské právo</translation>
     </message>
     <message>
         <source>Date</source>
-        <translation type="vanished">Datum</translation>
+        <translation type="obsolete">Datum</translation>
     </message>
     <message>
         <source>Current date</source>
-        <translation type="vanished">Běžné datum</translation>
+        <translation type="obsolete">Běžné datum</translation>
     </message>
     <message>
         <source>Product</source>
-        <translation type="vanished">Výrobek</translation>
+        <translation type="obsolete">Výrobek</translation>
     </message>
     <message>
         <source>Comments</source>
-        <translation type="vanished">Poznámky</translation>
+        <translation type="obsolete">Poznámky</translation>
     </message>
     <message>
         <source>Samples</source>
-        <translation type="vanished">Vzorky</translation>
+        <translation type="obsolete">Vzorky</translation>
     </message>
     <message>
         <source>Soundfont version</source>
-        <translation type="vanished">Verze zvukové banky</translation>
+        <translation type="obsolete">Verze zvukové banky</translation>
     </message>
     <message>
         <source>Sound engine</source>
-        <translation type="vanished">Zvukový stroj</translation>
+        <translation type="obsolete">Zvukový stroj</translation>
     </message>
     <message>
         <source>ROM name and version</source>
         <oldsource>Version ROM</oldsource>
-        <translation type="vanished">Název a verze ROM</translation>
+        <translation type="obsolete">Název a verze ROM</translation>
     </message>
     <message>
         <source>File</source>
-        <translation type="vanished">Soubor</translation>
+        <translation type="obsolete">Soubor</translation>
     </message>
     <message>
         <source>Number of parameters (instruments)</source>
-        <translation type="vanished">Počet parametrů (nástroje)</translation>
+        <translation type="obsolete">Počet parametrů (nástroje)</translation>
     </message>
     <message>
         <source>Number of parameters (presets)</source>
-        <translation type="vanished">Počet parametrů (přednastavení)</translation>
+        <translation type="obsolete">Počet parametrů (přednastavení)</translation>
     </message>
     <message>
         <source>Editing software</source>
         <oldsource>Logiciel d&apos;édition</oldsource>
-        <translation type="vanished">Program na úpravy</translation>
+        <translation type="obsolete">Program na úpravy</translation>
     </message>
     <message>
         <source>Sample number</source>
         <oldsource>Nombre de samples</oldsource>
-        <translation type="vanished">Počet vzorků</translation>
+        <translation type="obsolete">Počet vzorků</translation>
     </message>
     <message>
         <source>Instrument number</source>
-        <translation type="vanished">Počet nástrojů</translation>
+        <translation type="obsolete">Počet nástrojů</translation>
     </message>
     <message>
         <source>Preset number</source>
-        <translation type="vanished">Počet přednastavení</translation>
+        <translation type="obsolete">Počet přednastavení</translation>
     </message>
     <message>
         <source> (unused: </source>
         <oldsource> (inutilisés: </oldsource>
         <translatorcomment>plural</translatorcomment>
-        <translation type="vanished"> (nepoužíváno: </translation>
+        <translation type="obsolete"> (nepoužíváno: </translation>
     </message>
 </context>
 <context>
     <name>Page_Smpl</name>
     <message>
         <source>&lt;b&gt;Frequency&lt;/b&gt;</source>
-        <translation type="vanished">&lt;b&gt;Kmitočet&lt;/b&gt;</translation>
+        <translation type="obsolete">&lt;b&gt;Kmitočet&lt;/b&gt;</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Information&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Informace&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="obsolete">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Informace&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Reset</source>
-        <translation type="vanished">Nastavit znovu</translation>
+        <translation type="obsolete">Nastavit znovu</translation>
     </message>
     <message>
         <source>Apply</source>
-        <translation type="vanished">Použít</translation>
+        <translation type="obsolete">Použít</translation>
     </message>
     <message>
         <source>Use the full length of the sample as loop</source>
-        <translation type="vanished">Použít celou délku vzorku jako smyčky</translation>
+        <translation type="obsolete">Použít celou délku vzorku jako smyčky</translation>
     </message>
     <message>
         <source>Use the estimated pitch and correction as values</source>
-        <translation type="vanished">Použít odhadovanou výšku tónu a opravu jako hodnoty</translation>
+        <translation type="obsolete">Použít odhadovanou výšku tónu a opravu jako hodnoty</translation>
     </message>
     <message>
         <source>Play</source>
-        <translation type="vanished">Přehrávat</translation>
+        <translation type="obsolete">Přehrávat</translation>
     </message>
     <message>
         <source>loop</source>
-        <translation type="vanished">ve smyčce</translation>
+        <translation type="obsolete">ve smyčce</translation>
     </message>
     <message>
         <source>stereo</source>
-        <translation type="vanished">stereo</translation>
+        <translation type="obsolete">stereo</translation>
     </message>
     <message>
         <source>sinus</source>
-        <translation type="vanished">sinus</translation>
+        <translation type="obsolete">sinus</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation type="vanished">Velikost</translation>
+        <translation type="obsolete">Velikost</translation>
     </message>
     <message>
         <source>Loop</source>
-        <translation type="vanished">Smyčka</translation>
+        <translation type="obsolete">Smyčka</translation>
     </message>
     <message>
         <source>Root key</source>
-        <translation type="vanished">Základní nota</translation>
+        <translation type="obsolete">Základní nota</translation>
     </message>
     <message>
         <source>Correction (cents)</source>
-        <translation type="vanished">Opravy (setiny)</translation>
+        <translation type="obsolete">Opravy (setiny)</translation>
     </message>
     <message>
         <source>Sample rate</source>
-        <translation type="vanished">Vzorkovací kmitočet</translation>
+        <translation type="obsolete">Vzorkovací kmitočet</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Equalizer (±15 dB)&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Ekvalizér (± 15 dB)&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="obsolete">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Ekvalizér (± 15 dB)&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Type</source>
-        <translation type="vanished">Typ</translation>
+        <translation type="obsolete">Typ</translation>
     </message>
     <message>
         <source>Link</source>
-        <translation type="vanished">Spojení</translation>
+        <translation type="obsolete">Spojení</translation>
     </message>
     <message>
         <source>(min) </source>
-        <translation type="vanished">(min) </translation>
+        <translation type="obsolete">(min) </translation>
     </message>
     <message>
         <source>mono</source>
-        <translation type="vanished">mono</translation>
+        <translation type="obsolete">mono</translation>
     </message>
     <message>
         <source>right</source>
-        <translation type="vanished">pravý</translation>
+        <translation type="obsolete">pravý</translation>
     </message>
     <message>
         <source>left</source>
-        <translation type="vanished">levý</translation>
+        <translation type="obsolete">levý</translation>
     </message>
     <message>
         <source>link</source>
-        <translation type="vanished">spojení</translation>
+        <translation type="obsolete">spojení</translation>
     </message>
     <message>
         <source>&lt;b&gt;Sample is not linked to any instrument.&lt;/b&gt;</source>
         <oldsource>&lt;b&gt;Sample lié à aucun instrument.&lt;/b&gt;</oldsource>
-        <translation type="vanished">&lt;b&gt;Nástroj není spojen s žádným nástrojem.&lt;/b&gt;</translation>
+        <translation type="obsolete">&lt;b&gt;Nástroj není spojen s žádným nástrojem.&lt;/b&gt;</translation>
     </message>
     <message>
         <source>&lt;b&gt;Sample linked to the instrument: &lt;/b&gt;</source>
         <oldsource>&lt;b&gt;Sample lié à l&apos;instrument : &lt;/b&gt;</oldsource>
-        <translation type="vanished">&lt;b&gt;Nástroj spojen s nástrojem: &lt;/b&gt;</translation>
+        <translation type="obsolete">&lt;b&gt;Nástroj spojen s nástrojem: &lt;/b&gt;</translation>
     </message>
     <message>
         <source>&lt;b&gt;Sample linked to the instruments: &lt;/b&gt;</source>
         <oldsource>&lt;b&gt;Sample lié aux instruments : &lt;/b&gt;</oldsource>
-        <translation type="vanished">&lt;b&gt;Nástroj spojen s nástroji: &lt;/b&gt;</translation>
+        <translation type="obsolete">&lt;b&gt;Nástroj spojen s nástroji: &lt;/b&gt;</translation>
     </message>
     <message>
         <source>Information</source>
-        <translation type="vanished">Informace</translation>
+        <translation type="obsolete">Informace</translation>
     </message>
     <message>
         <source>Change successfully applied to the different samples</source>
-        <translation type="vanished">Změna úspěšně použita na různé vzorky</translation>
+        <translation type="obsolete">Změna úspěšně použita na různé vzorky</translation>
     </message>
     <message>
         <source>The sample &quot;</source>
-        <translation type="vanished">Vzorek &quot;</translation>
+        <translation type="obsolete">Vzorek &quot;</translation>
     </message>
     <message>
         <source>&quot; couldn&apos;t be looped.</source>
-        <translation type="vanished">&quot; se nepodařilo smyčkovat.</translation>
+        <translation type="obsolete">&quot; se nepodařilo smyčkovat.</translation>
     </message>
     <message>
         <source>The following samples couldn&apos;t be looped:</source>
-        <translation type="vanished">Následující vzorky se nepodařilo smyčkovat:</translation>
+        <translation type="obsolete">Následující vzorky se nepodařilo smyčkovat:</translation>
     </message>
     <message>
         <source>Possible reasons: too short or too turbulent.</source>
-        <translation type="vanished">Možné příčiny: příliš krátké nebo příliš vířivé.</translation>
+        <translation type="obsolete">Možné příčiny: příliš krátké nebo příliš vířivé.</translation>
     </message>
     <message>
         <source>Warning</source>
-        <translation type="vanished">Pozor</translation>
+        <translation type="obsolete">Pozor</translation>
     </message>
     <message>
         <source>This tool can only be used with stereo samples.</source>
-        <translation type="vanished">Tento nástroj se používá jen se stereovzorky.</translation>
+        <translation type="obsolete">Tento nástroj se používá jen se stereovzorky.</translation>
     </message>
     <message>
         <source>Tuning in semitones:</source>
-        <translation type="vanished">Ladění v půltónech:</translation>
+        <translation type="obsolete">Ladění v půltónech:</translation>
     </message>
     <message>
         <source>Stop</source>
         <oldsource>arrêt</oldsource>
-        <translation type="vanished">Zastavení</translation>
+        <translation type="obsolete">Zastavení</translation>
     </message>
     <message>
         <source>Processing </source>
-        <translation type="vanished">Zacházení  </translation>
+        <translation type="obsolete">Zacházení  </translation>
     </message>
     <message>
         <source>Equalizer (±15 dB)</source>
-        <translation type="vanished">Ekvalizér (±15 dB)</translation>
+        <translation type="obsolete">Ekvalizér (±15 dB)</translation>
     </message>
     <message>
         <source>s</source>
         <comment>unit for seconds</comment>
-        <translation type="vanished">s</translation>
+        <translation type="obsolete">s</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="vanished">Zrušit</translation>
+        <translation type="obsolete">Zrušit</translation>
     </message>
     <message>
         <source>Transposition</source>
-        <translation type="vanished">Transpozice</translation>
+        <translation type="obsolete">Transpozice</translation>
     </message>
 </context>
 <context>
     <name>Pile_sf2</name>
     <message>
         <source>untitled</source>
-        <translation type="vanished">Bez názvu</translation>
+        <translation type="obsolete">Bez názvu</translation>
     </message>
 </context>
 <context>
     <name>QApplication</name>
     <message>
         <source>Custom</source>
-        <translation type="vanished">Vlastní</translation>
+        <translation type="obsolete">Vlastní</translation>
     </message>
     <message>
         <source>Default</source>
-        <translation type="vanished">Výchozí</translation>
+        <translation type="obsolete">Výchozí</translation>
     </message>
     <message>
         <source>Gnome</source>
-        <translation type="vanished">Gnome</translation>
+        <translation type="obsolete">Gnome</translation>
     </message>
     <message>
         <source>Dark, blue</source>
-        <translation type="vanished">Tmavé, modrá</translation>
+        <translation type="obsolete">Tmavé, modrá</translation>
     </message>
     <message>
         <source>Dark, orange</source>
-        <translation type="vanished">Tmavé, oranžová</translation>
+        <translation type="obsolete">Tmavé, oranžová</translation>
     </message>
     <message>
         <source>Dark, green</source>
-        <translation type="vanished">Tmavé, zelená</translation>
+        <translation type="obsolete">Tmavé, zelená</translation>
     </message>
     <message>
         <source>Dark, yellow</source>
-        <translation type="vanished">Tmavé, žlutá</translation>
+        <translation type="obsolete">Tmavé, žlutá</translation>
     </message>
     <message>
         <source>Aqua</source>
-        <translation type="vanished">Voda</translation>
+        <translation type="obsolete">Voda</translation>
     </message>
     <message>
         <source>Spring</source>
-        <translation type="vanished">Jaro</translation>
+        <translation type="obsolete">Jaro</translation>
     </message>
     <message>
         <source>Windows 10</source>
-        <translation type="vanished">Windows 10</translation>
+        <translation type="obsolete">Windows 10</translation>
     </message>
     <message>
         <source>Ubuntu</source>
-        <translation type="vanished">Ubuntu</translation>
+        <translation type="obsolete">Ubuntu</translation>
     </message>
 </context>
 <context>
     <name>QObject</name>
     <message>
         <source>&lt;b&gt;Global parameters are already filled.&lt;/b&gt;</source>
-        <translation type="vanished">&lt;b&gt;Celkové parametry jsou již vyplněny.&lt;/b&gt;</translation>
+        <translation type="obsolete">&lt;b&gt;Celkové parametry jsou již vyplněny.&lt;/b&gt;</translation>
     </message>
     <message>
         <source>The global division will not be copied.</source>
-        <translation type="vanished">Celkové dělení nebude zkopírováno.</translation>
+        <translation type="obsolete">Celkové dělení nebude zkopírováno.</translation>
     </message>
     <message>
         <source>&amp;Ok</source>
-        <translation type="vanished">&amp;OK</translation>
+        <translation type="obsolete">&amp;OK</translation>
     </message>
     <message>
         <source>Ok, &amp;disable this message</source>
-        <translation type="vanished">OK, &amp;nezobrazovzat tuto zprávu znovu</translation>
+        <translation type="obsolete">OK, &amp;nezobrazovzat tuto zprávu znovu</translation>
     </message>
     <message>
         <source>The sample &quot;</source>
         <oldsource>l&apos;échantillon « </oldsource>
-        <translation type="vanished">Vzorek &quot;</translation>
+        <translation type="obsolete">Vzorek &quot;</translation>
     </message>
     <message>
         <source>&quot; already exists.&lt;br/&gt;Replace?</source>
         <oldsource>&amp;#160;» existe déjà.&lt;br /&gt;Que faire ?</oldsource>
-        <translation type="vanished">&quot; již existuje.&lt;br/&gt;Nahradit?</translation>
+        <translation type="obsolete">&quot; již existuje.&lt;br/&gt;Nahradit?</translation>
     </message>
     <message>
         <source>The instrument &quot;</source>
         <oldsource>L&apos;instrument «&amp;#160;</oldsource>
-        <translation type="vanished">Nástroj &quot;</translation>
+        <translation type="obsolete">Nástroj &quot;</translation>
     </message>
     <message>
         <source>The preset &quot;</source>
         <oldsource>Le preset «&amp;#160;</oldsource>
-        <translation type="vanished">Přednastavení &quot;</translation>
+        <translation type="obsolete">Přednastavení &quot;</translation>
     </message>
     <message>
         <location filename="core/output/outputfactory.cpp" line="116"/>
@@ -6325,7 +6378,7 @@ rate</source>
     </message>
     <message>
         <source>No preset available.</source>
-        <translation type="vanished">Není dostupné žádné přednastavení.</translation>
+        <translation type="obsolete">Není dostupné žádné přednastavení.</translation>
     </message>
     <message>
         <location filename="core/sampleloader.cpp" line="71"/>
@@ -6407,11 +6460,11 @@ rate</source>
     </message>
     <message>
         <source>Error in Sound::getData.</source>
-        <translation type="vanished">Chyba v Sound::getData.</translation>
+        <translation type="obsolete">Chyba v Sound::getData.</translation>
     </message>
     <message>
         <source>Cannot open the file.</source>
-        <translation type="vanished">Nelze otevřít soubor</translation>
+        <translation type="obsolete">Nelze otevřít soubor</translation>
     </message>
     <message>
         <location filename="core/sound.cpp" line="663"/>
@@ -6430,125 +6483,125 @@ rate</source>
     <message>
         <source>// Sfz exported from sf2 by Polyphone</source>
         <oldsource>// Sfz exported from sf2 by Polyphone</oldsource>
-        <translation type="vanished">// Sfz vyveden z sf2 od Polyphone</translation>
+        <translation type="obsolete">// Sfz vyveden z sf2 od Polyphone</translation>
     </message>
     <message>
         <source>// Name     :</source>
         <translatorcomment>count the spaces so that the &quot;:&quot; are aligned</translatorcomment>
-        <translation type="vanished">// Název      :</translation>
+        <translation type="obsolete">// Název      :</translation>
     </message>
     <message>
         <source>// Author   :</source>
-        <translation type="vanished">// Autor      :</translation>
+        <translation type="obsolete">// Autor      :</translation>
     </message>
     <message>
         <source>// Copyright:</source>
-        <translation type="vanished">// Autorské právo:</translation>
+        <translation type="obsolete">// Autorské právo:</translation>
     </message>
     <message>
         <source>// Date     :</source>
-        <translation type="vanished">// Datum    :</translation>
+        <translation type="obsolete">// Datum    :</translation>
     </message>
     <message>
         <source>// Comment  :</source>
-        <translation type="vanished">// Poznámka  :</translation>
+        <translation type="obsolete">// Poznámka  :</translation>
     </message>
     <message>
         <source>other</source>
-        <translation type="vanished">jiné</translation>
+        <translation type="obsolete">jiné</translation>
     </message>
     <message>
         <source>Piano</source>
-        <translation type="vanished">Klavír</translation>
+        <translation type="obsolete">Klavír</translation>
     </message>
     <message>
         <source>Chromatic percussion</source>
-        <translation type="vanished">Chromatická bicí</translation>
+        <translation type="obsolete">Chromatická bicí</translation>
     </message>
     <message>
         <source>Organ</source>
-        <translation type="vanished">Varhany</translation>
+        <translation type="obsolete">Varhany</translation>
     </message>
     <message>
         <source>Guitar</source>
-        <translation type="vanished">Kytara</translation>
+        <translation type="obsolete">Kytara</translation>
     </message>
     <message>
         <source>Bass</source>
-        <translation type="vanished">Basa</translation>
+        <translation type="obsolete">Basa</translation>
     </message>
     <message>
         <source>Strings</source>
-        <translation type="vanished">Smyčce</translation>
+        <translation type="obsolete">Smyčce</translation>
     </message>
     <message>
         <source>Ensemble</source>
-        <translation type="vanished">Orchestr</translation>
+        <translation type="obsolete">Orchestr</translation>
     </message>
     <message>
         <source>Brass</source>
-        <translation type="vanished">Žestě</translation>
+        <translation type="obsolete">Žestě</translation>
     </message>
     <message>
         <source>Reed</source>
-        <translation type="vanished">Jazýčkové nástroje</translation>
+        <translation type="obsolete">Jazýčkové nástroje</translation>
     </message>
     <message>
         <source>Pipe</source>
-        <translation type="vanished">Flétna</translation>
+        <translation type="obsolete">Flétna</translation>
     </message>
     <message>
         <source>Synth lead</source>
-        <translation type="vanished">Hlavní syntetizátor</translation>
+        <translation type="obsolete">Hlavní syntetizátor</translation>
     </message>
     <message>
         <source>Synth pad</source>
-        <translation type="vanished">Doprovodný syntetizátor</translation>
+        <translation type="obsolete">Doprovodný syntetizátor</translation>
     </message>
     <message>
         <source>Synth effects</source>
-        <translation type="vanished">Efekty syntetizátoru</translation>
+        <translation type="obsolete">Efekty syntetizátoru</translation>
     </message>
     <message>
         <source>Ethnic</source>
-        <translation type="vanished">Národní nástroje</translation>
+        <translation type="obsolete">Národní nástroje</translation>
     </message>
     <message>
         <source>Percussive</source>
-        <translation type="vanished">Bicí</translation>
+        <translation type="obsolete">Bicí</translation>
     </message>
     <message>
         <source>Sound effects</source>
-        <translation type="vanished">Zvukové efekty</translation>
+        <translation type="obsolete">Zvukové efekty</translation>
     </message>
     <message>
         <source>Percussion kit</source>
-        <translation type="vanished">Bicí sada</translation>
+        <translation type="obsolete">Bicí sada</translation>
     </message>
     <message>
         <source>Created by </source>
         <translatorcomment>mind the final space</translatorcomment>
-        <translation type="vanished">Vytvořeno </translation>
+        <translation type="obsolete">Vytvořeno </translation>
     </message>
     <message>
         <source>Contributors </source>
-        <translation type="vanished">Přispěvatelé </translation>
+        <translation type="obsolete">Přispěvatelé </translation>
     </message>
     <message>
         <source>Translated by </source>
-        <translation type="vanished">Přeloženo </translation>
+        <translation type="obsolete">Přeloženo </translation>
     </message>
     <message>
         <source>Sfz import</source>
-        <translation type="vanished">Zavedení Sfz</translation>
+        <translation type="obsolete">Zavedení Sfz</translation>
     </message>
     <message>
         <source>Sf2 imported from sfz by Polyphone</source>
-        <translation type="vanished">Sf2 zaveden ze souboru sfz od Polyphone</translation>
+        <translation type="obsolete">Sf2 zaveden ze souboru sfz od Polyphone</translation>
     </message>
     <message>
         <source>Extraction in progress...</source>
-        <translation type="vanished">Probíhá rozbalení...</translation>
+        <translation type="obsolete">Probíhá rozbalení...</translation>
     </message>
     <message>
         <location filename="editor/graphics/graphicslegenditem.cpp" line="110"/>
@@ -6564,31 +6617,31 @@ rate</source>
     </message>
     <message>
         <source>C</source>
-        <translation type="vanished">C</translation>
+        <translation type="obsolete">C</translation>
     </message>
     <message>
         <source>D</source>
-        <translation type="vanished">D</translation>
+        <translation type="obsolete">D</translation>
     </message>
     <message>
         <source>E</source>
-        <translation type="vanished">E</translation>
+        <translation type="obsolete">E</translation>
     </message>
     <message>
         <source>F</source>
-        <translation type="vanished">F</translation>
+        <translation type="obsolete">F</translation>
     </message>
     <message>
         <source>G</source>
-        <translation type="vanished">G</translation>
+        <translation type="obsolete">G</translation>
     </message>
     <message>
         <source>A</source>
-        <translation type="vanished">A</translation>
+        <translation type="obsolete">A</translation>
     </message>
     <message>
         <source>B</source>
-        <translation type="vanished">B</translation>
+        <translation type="obsolete">B</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_about.cpp" line="122"/>
@@ -6622,7 +6675,7 @@ rate</source>
         <comment>key name</comment>
         <translation>C</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="context/keynamemanager.cpp" line="64"/>
         <source>D♭</source>
         <comment>key name</comment>
@@ -6635,7 +6688,7 @@ rate</source>
         <comment>key name</comment>
         <translation>D</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="context/keynamemanager.cpp" line="66"/>
         <source>E♭</source>
         <comment>key name</comment>
@@ -6655,7 +6708,7 @@ rate</source>
         <comment>key name</comment>
         <translation>F</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="context/keynamemanager.cpp" line="69"/>
         <source>G♭</source>
         <comment>key name</comment>
@@ -6668,7 +6721,7 @@ rate</source>
         <comment>key name</comment>
         <translation>G</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="context/keynamemanager.cpp" line="71"/>
         <source>A♭</source>
         <comment>key name</comment>
@@ -6681,7 +6734,7 @@ rate</source>
         <comment>key name</comment>
         <translation>A</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="context/keynamemanager.cpp" line="73"/>
         <source>B♭</source>
         <comment>key name</comment>
@@ -6694,31 +6747,31 @@ rate</source>
         <comment>key name</comment>
         <translation>H</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="context/keynamemanager.cpp" line="82"/>
         <source>C♯</source>
         <comment>key name</comment>
         <translation>C♯</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="context/keynamemanager.cpp" line="84"/>
         <source>D♯</source>
         <comment>key name</comment>
         <translation>D♯</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="context/keynamemanager.cpp" line="87"/>
         <source>F♯</source>
         <comment>key name</comment>
         <translation>F♯</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="context/keynamemanager.cpp" line="89"/>
         <source>G♯</source>
         <comment>key name</comment>
         <translation>G♯</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="context/keynamemanager.cpp" line="91"/>
         <source>A♯</source>
         <comment>key name</comment>
@@ -7286,7 +7339,7 @@ download the list</source>
         <source>Rating score</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="repository/browser/soundfontbrowser.ui" line="402"/>
         <source>Title (A→Z)</source>
         <translation type="unfinished"></translation>
@@ -8810,27 +8863,32 @@ download content</source>
 <context>
     <name>TopRightWidget</name>
     <message>
-        <location filename="mainwindow/toprightwidget.ui" line="71"/>
+        <location filename="mainwindow/toprightwidget.ui" line="74"/>
         <source>User area</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow/toprightwidget.ui" line="93"/>
+        <location filename="mainwindow/toprightwidget.ui" line="96"/>
+        <source>Download status</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow/toprightwidget.ui" line="118"/>
         <source>Main menu</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow/toprightwidget.cpp" line="107"/>
+        <location filename="mainwindow/toprightwidget.cpp" line="114"/>
         <source>Subscribe to a Premium account to get all the features!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow/toprightwidget.cpp" line="117"/>
+        <location filename="mainwindow/toprightwidget.cpp" line="124"/>
         <source>Welcome %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow/toprightwidget.cpp" line="122"/>
+        <location filename="mainwindow/toprightwidget.cpp" line="129"/>
         <source>Your account has been banned.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -8839,55 +8897,55 @@ download content</source>
     <name>Tree</name>
     <message>
         <source>New &amp;instrument...</source>
-        <translation type="vanished">Nový nástroj...</translation>
+        <translation type="obsolete">Nový nástroj...</translation>
     </message>
     <message>
         <source>New &amp;preset...</source>
-        <translation type="vanished">Nové přednastavení...</translation>
+        <translation type="obsolete">Nové přednastavení...</translation>
     </message>
     <message>
         <source>Replace by...</source>
-        <translation type="vanished">Nahradit...</translation>
+        <translation type="obsolete">Nahradit...</translation>
     </message>
     <message>
         <source>Bind to...</source>
-        <translation type="vanished">Spojit s...</translation>
+        <translation type="obsolete">Spojit s...</translation>
     </message>
     <message>
         <source>New sample...</source>
-        <translation type="vanished">Nový vzorek...</translation>
+        <translation type="obsolete">Nový vzorek...</translation>
     </message>
     <message>
         <source>Copy</source>
-        <translation type="vanished">Kopírovat</translation>
+        <translation type="obsolete">Kopírovat</translation>
     </message>
     <message>
         <source>Paste</source>
-        <translation type="vanished">Vložit</translation>
+        <translation type="obsolete">Vložit</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="vanished">Smazat</translation>
+        <translation type="obsolete">Smazat</translation>
     </message>
     <message>
         <source>Rename...</source>
-        <translation type="vanished">Přejmenovat...</translation>
+        <translation type="obsolete">Přejmenovat...</translation>
     </message>
     <message>
         <source>Close file</source>
-        <translation type="vanished">Zavřít soubor</translation>
+        <translation type="obsolete">Zavřít soubor</translation>
     </message>
     <message>
         <source>Display all</source>
-        <translation type="vanished">Zobrazit vše</translation>
+        <translation type="obsolete">Zobrazit vše</translation>
     </message>
     <message>
         <source>&amp;Rename...</source>
-        <translation type="vanished">&amp;Přejmenovat...</translation>
+        <translation type="obsolete">&amp;Přejmenovat...</translation>
     </message>
     <message>
         <source>Bulk &amp;rename...</source>
-        <translation type="vanished">Hromadné &amp;přejmenování...</translation>
+        <translation type="obsolete">Hromadné &amp;přejmenování...</translation>
     </message>
 </context>
 <context>
@@ -9018,52 +9076,52 @@ download content</source>
 <context>
     <name>WindowManager</name>
     <message>
-        <location filename="mainwindow/windowmanager.cpp" line="74"/>
+        <location filename="mainwindow/windowmanager.cpp" line="89"/>
         <source>Settings</source>
         <translation>Nastavení</translation>
     </message>
     <message>
-        <location filename="mainwindow/windowmanager.cpp" line="149"/>
+        <location filename="mainwindow/windowmanager.cpp" line="173"/>
         <source>Online repository</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow/windowmanager.cpp" line="194"/>
+        <location filename="mainwindow/windowmanager.cpp" line="218"/>
         <source>Save before exiting?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow/windowmanager.cpp" line="197"/>
+        <location filename="mainwindow/windowmanager.cpp" line="221"/>
         <source>untitled</source>
         <translation>Bez názvu</translation>
     </message>
     <message>
-        <location filename="mainwindow/windowmanager.cpp" line="198"/>
+        <location filename="mainwindow/windowmanager.cpp" line="222"/>
         <source>File &quot;%1&quot; has been modified.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow/windowmanager.cpp" line="199"/>
+        <location filename="mainwindow/windowmanager.cpp" line="223"/>
         <source>Warning</source>
         <translation>Pozor</translation>
     </message>
     <message>
-        <location filename="mainwindow/windowmanager.cpp" line="201"/>
+        <location filename="mainwindow/windowmanager.cpp" line="225"/>
         <source>&amp;Save</source>
         <translation>&amp;Uložit</translation>
     </message>
     <message>
-        <location filename="mainwindow/windowmanager.cpp" line="202"/>
+        <location filename="mainwindow/windowmanager.cpp" line="226"/>
         <source>&amp;Cancel</source>
         <translation>&amp;Zrušit</translation>
     </message>
     <message>
-        <location filename="mainwindow/windowmanager.cpp" line="203"/>
+        <location filename="mainwindow/windowmanager.cpp" line="227"/>
         <source>Do&amp;n&apos;t save</source>
         <translation>&amp;Zavřít bez uložení</translation>
     </message>
     <message>
-        <location filename="mainwindow/windowmanager.cpp" line="286"/>
+        <location filename="mainwindow/windowmanager.cpp" line="310"/>
         <source>User area</source>
         <translation type="unfinished"></translation>
     </message>
