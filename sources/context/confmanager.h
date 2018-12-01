@@ -112,6 +112,9 @@ signals:
     /// Emitted when the division sort type changed
     void divisionSortChanged();
 
+    /// Emitted when the key mapping octave changed (Ctrl+1, Ctrl+2, ...)
+    void keyboardOctaveChanged();
+
 private:
     /// Clear everything
     void clear();

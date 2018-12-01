@@ -135,7 +135,7 @@
     </widget>
    </item>
    <item row="1" column="1">
-    <widget class="QComboBox" name="comboDo">
+    <widget class="QComboBox" name="comboFirstC">
      <property name="currentIndex">
       <number>0</number>
      </property>

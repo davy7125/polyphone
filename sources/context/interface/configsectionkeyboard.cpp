@@ -32,7 +32,8 @@ ConfigSectionKeyboard::ConfigSectionKeyboard(QWidget *parent) :
 {
     ui->setupUi(this);
     connect(ui->tableKeyboardMap, SIGNAL(combinaisonChanged(int,int,QString)), this, SLOT(combinaisonChanged(int,int,QString)));
-    this->renameComboDo();
+    this->renameComboFirstC();
+    connect(ContextManager::configuration(), SIGNAL(keyboardOctaveChanged()), this, SLOT(initializeFirstC()));
 }
 
 ConfigSectionKeyboard::~ConfigSectionKeyboard()
@@ -54,14 +55,7 @@ void ConfigSectionKeyboard::initialize()
     ui->tableKeyboardMap->blockSignals(false);
 
     // Octave configuration
-    ui->comboDo->blockSignals(true);
-    int octaveMapping = ContextManager::configuration()->getValue(ConfManager::SECTION_MAP, "octave_offset", 3).toInt();
-    if (octaveMapping >= ui->comboDo->count())
-        octaveMapping = 3;
-    else if (octaveMapping < 0)
-        octaveMapping = 0;
-    ui->comboDo->setCurrentIndex(octaveMapping);
-    ui->comboDo->blockSignals(false);
+    initializeFirstC();
 
     // Default velocity
     ui->spinDefaultVelocity->blockSignals(true);
@@ -69,11 +63,23 @@ void ConfigSectionKeyboard::initialize()
     ui->spinDefaultVelocity->blockSignals(false);
 }
 
-void ConfigSectionKeyboard::renameComboDo()
+void ConfigSectionKeyboard::initializeFirstC()
 {
-    int nbElement = ui->comboDo->count();
+    ui->comboFirstC->blockSignals(true);
+    int octaveMapping = ContextManager::configuration()->getValue(ConfManager::SECTION_MAP, "octave_offset", 3).toInt();
+    if (octaveMapping >= ui->comboFirstC->count())
+        octaveMapping = 3;
+    else if (octaveMapping < 0)
+        octaveMapping = 0;
+    ui->comboFirstC->setCurrentIndex(octaveMapping);
+    ui->comboFirstC->blockSignals(false);
+}
+
+void ConfigSectionKeyboard::renameComboFirstC()
+{
+    int nbElement = ui->comboFirstC->count();
     for (int i = 0; i < nbElement; i++)
-        ui->comboDo->setItemText(i, ContextManager::keyName()->getKeyName(12 * i));
+        ui->comboFirstC->setItemText(i, ContextManager::keyName()->getKeyName(12 * i));
 }
 
 void ConfigSectionKeyboard::combinaisonChanged(int key, int numOctave, QString combinaison)
@@ -83,7 +89,7 @@ void ConfigSectionKeyboard::combinaisonChanged(int key, int numOctave, QString c
                                               combinaison);
 }
 
-void ConfigSectionKeyboard::on_comboDo_currentIndexChanged(int index)
+void ConfigSectionKeyboard::on_comboFirstC_currentIndexChanged(int index)
 {
     ContextManager::configuration()->setValue(ConfManager::SECTION_MAP, "octave_offset", index);
 }

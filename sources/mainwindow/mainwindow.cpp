@@ -312,6 +312,7 @@ void MainWindow::keyPressEvent(QKeyEvent * event)
             _keyboard->activateWindow();
             _keyboard->glow();
         }
+        event->accept();
     }
     else if (event->modifiers() == Qt::ControlModifier && event->key() == Qt::Key_Z)
     {
@@ -319,6 +320,7 @@ void MainWindow::keyPressEvent(QKeyEvent * event)
         int currentSf2 = _windowManager->getCurrentSf2();
         if (currentSf2 != -1)
             SoundfontManager::getInstance()->undo(currentSf2);
+        event->accept();
     }
     else if ((event->modifiers() == Qt::ControlModifier && event->key() == Qt::Key_Y) ||
              (event->modifiers() == (Qt::ControlModifier | Qt::ShiftModifier) && event->key() == Qt::Key_Z))
@@ -327,12 +329,14 @@ void MainWindow::keyPressEvent(QKeyEvent * event)
         int currentSf2 = _windowManager->getCurrentSf2();
         if (currentSf2 != -1)
             SoundfontManager::getInstance()->redo(currentSf2);
+        event->accept();
     }
     else if (event->modifiers() == Qt::ControlModifier && event->key() == Qt::Key_F)
     {
         // Search
         if (ui->lineSearch->isVisible())
             ui->lineSearch->setFocus();
+        event->accept();
     }
 
     QMainWindow::keyPressEvent(event);

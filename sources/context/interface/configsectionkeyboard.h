@@ -41,12 +41,13 @@ public:
     void initialize();
 
 private slots:
-    void on_comboDo_currentIndexChanged(int index);
+    void on_comboFirstC_currentIndexChanged(int index);
     void on_spinDefaultVelocity_editingFinished();
     void combinaisonChanged(int key, int numOctave, QString combinaison);
+    void initializeFirstC();
 
 private:
-    void renameComboDo();
+    void renameComboFirstC();
     Ui::ConfigSectionKeyboard *ui;
 };
 

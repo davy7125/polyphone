@@ -50,19 +50,32 @@ void ConfManager::setValue(Section section, QString key, QVariant value)
     _settings.setValue(getFullKey(section, key), value);
 
     // Possibly update elements
-    if (section == Section::SECTION_SOUND_ENGINE)
-        emit(soundEngineConfigurationChanged());
-    else if (section == Section::SECTION_AUDIO)
+    switch (section)
     {
+    case Section::SECTION_SOUND_ENGINE:
+        emit(soundEngineConfigurationChanged());
+        break;
+    case Section::SECTION_AUDIO:
         emit(soundEngineConfigurationChanged()); // First prepare the sound engine (the buffer can be adjusted)
         emit(audioServerConfigurationChanged()); // Then update the audio server configuration
-    }
-    else if (section == Section::SECTION_MAP)
+        break;
+    case Section::SECTION_MAP:
         emit(keyMapChanged());
-    else if (section == Section::SECTION_NONE && key == "name_middle_c")
-        emit(interfaceChanged());
-    else if (section == Section::SECTION_DISPLAY && key == "division_sort")
-        emit(divisionSortChanged());
+        if (key == "octave_offset")
+            emit(keyboardOctaveChanged());
+        break;
+    case Section::SECTION_DISPLAY:
+        if (key == "division_sort")
+            emit(divisionSortChanged());
+        break;
+    case Section::SECTION_NONE:
+        if (key == "name_middle_c")
+            emit(interfaceChanged());
+        break;
+    default:
+        // Nothing
+        break;
+    }
 }
 
 void ConfManager::setToolValue(ToolType toolType, QString toolName, QString key, QVariant value)
