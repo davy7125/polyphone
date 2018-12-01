@@ -57,7 +57,7 @@ void SoundfontCommentCell::initialize(SoundfontCommentData * data, int level)
     // Info
     ui->labelUser->setText(data->getUserName());
     ui->labelDate->setText(data->getCreationTime().toString(Qt::SystemLocaleShortDate));
-    ui->textComment->setText(data->getText());
+    ui->textComment->setHtml(data->getText());
 
     // Level
     int maxLevel = 5;
