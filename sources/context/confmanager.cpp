@@ -32,7 +32,6 @@ ConfManager::ConfManager(): QObject(),
     // Possibly reset the configuration if the previous version was < 2.0
     if (this->getValue(SECTION_NONE, "last_version_installed", 0.).toDouble() < 2.0)
         this->clear();
-    this->setValue(SECTION_NONE, "last_version_installed", VERSION);
 }
 
 QVariant ConfManager::getValue(Section section, QString key, QVariant defaultValue) const

@@ -12,8 +12,8 @@
 #DEFINES += USE_LOCAL_QCUSTOMPLOT
 
 # Polyphone version
-DEFINES += VERSION=2.0
-DEFINES += FINAL=false
+DEFINES += SOFT_VERSION=\\\"2.0\\\"
+DEFINES += IDENTIFIER=\\\"beta\\\"
 
 # List to complete if other translations are wished
 # Format: polyphone_XX.ts where XX is the language code
