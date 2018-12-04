@@ -31,6 +31,8 @@
 #include <QInputDialog>
 #include <QMessageBox>
 #include <QFileDialog>
+#include "windowmanager.h"
+#include "outputfactory.h"
 
 bool EditorToolBar::s_recorderOpen = false;
 bool EditorToolBar::s_keyboardOpen = false;
@@ -343,5 +345,8 @@ void EditorToolBar::onNewPrstClicked()
 
 void EditorToolBar::onSaveClicked()
 {
+    // Remove the focus from the interface (so that all changes are taken into account)
+    this->setFocus();
 
+    OutputFactory::save(WindowManager::getInstance()->getCurrentSf2(), false);
 }
