@@ -7,16 +7,16 @@
 ; (To generate a new GUID, click Tools | Generate GUID inside the IDE.)
 AppId={{83549E04-CB44-4E12-85B6-9FBBA3B0FE65}
 AppName=Polyphone
-AppVersion=1.9
+AppVersion=2.0
 AppPublisher=Davy Triponney
-AppPublisherURL=http://www.polyphone.fr/
-AppSupportURL=http://www.polyphone.fr/
-AppUpdatesURL=http://www.polyphone.fr/
+AppPublisherURL=https://www.polyphone-soundfonts.com
+AppSupportURL=https://www.polyphone-soundfonts.com
+AppUpdatesURL=https://www.polyphone-soundfonts.com
 ChangesAssociations=yes
 DefaultDirName={pf64}\Polyphone
 DefaultGroupName=Polyphone
 LicenseFile=license.txt
-OutputBaseFilename=Polyphone_v1.9_win64  
+OutputBaseFilename=Polyphone_v2.0_win64  
 SetupIconFile=polyphone.ico
 Compression=lzma
 SolidCompression=yes
@@ -24,9 +24,10 @@ ArchitecturesAllowed=x64
 ArchitecturesInstallIn64BitMode=x64
 
 [Languages]
-Name: "english"; MessagesFile: "compiler:Default.isl"   
-Name: "czech";  MessagesFile: "compiler:Languages\Czech.isl" 
-Name: "french";  MessagesFile: "compiler:Languages\French.isl" 
+Name: "english"; MessagesFile: "compiler:Default.isl"
+Name: "czech";  MessagesFile: "compiler:Languages\Czech.isl"
+Name: "french";  MessagesFile: "compiler:Languages\French.isl"
+Name: "german";  MessagesFile: "compiler:Languages\German.isl"
 Name: "italian"; MessagesFile: "compiler:Languages\Italian.isl"
 Name: "portuguese"; MessagesFile: "compiler:Languages\Portuguese.isl"
 Name: "serbian"; MessagesFile: "compiler:Languages\SerbianCyrillic.isl"
@@ -38,20 +39,24 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 [Files]
 Source: "polyphone.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "lib\icudt53.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "lib\icuin53.dll"; DestDir: "{app}"; Flags: ignoreversion    
+Source: "lib\icuin53.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "lib\icuuc53.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "lib\libcryptoMD.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "lib\libeay32.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "lib\libogg.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "lib\libvorbis.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "lib\libvorbisfile.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "lib\msvcp120.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "lib\msvcr120.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "lib\portaudio_x64.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "lib\Qt5Core.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "lib\Qt5Gui.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "lib\Qt5Svg.dll"; DestDir: "{app}"; Flags: ignoreversion   
+Source: "lib\Qt5Network.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "lib\Qt5Svg.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "lib\Qt5Widgets.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "lib\zlib1.dll"; DestDir: "{app}"; Flags: ignoreversion   
-Source: "lib\msvcp120.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "lib\msvcr120.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "lib\qwindows.dll"; DestDir: "{app}\platforms"; Flags: ignoreversion
+Source: "lib\ssleay32.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "lib\zlib1.dll"; DestDir: "{app}"; Flags: ignoreversion
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]
