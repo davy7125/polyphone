@@ -37,6 +37,9 @@ public:
 
 protected slots:
     void processInternal(QString fileName, SoundfontManager * sm, bool &success, QString &error, int sf2Index, QMap<QString, QVariant> & options) override;
+
+private:
+    void save(QString fileName, SoundfontManager * sm, bool &success, QString &error, int sf2Index);
 };
 
 #endif // OUTPUTSF2_H

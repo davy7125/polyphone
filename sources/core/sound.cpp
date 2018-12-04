@@ -75,7 +75,7 @@ QByteArray Sound::getData(quint16 wBps)
         else if (_info.wBpsFile >= 24)
         {
             // lecture fichier
-            QFile *fi = new QFile(fileName);
+            QFile *fi = new QFile(_fileName);
             if (!fi->exists())
             {
                 // Si impossible à ouvrir : pas de message d'erreur et remplissage 0
@@ -127,7 +127,7 @@ QByteArray Sound::getData(quint16 wBps)
         else
         {
             // lecture fichier
-            QFile *fi = new QFile(fileName);
+            QFile *fi = new QFile(_fileName);
             if (!fi->exists())
             {
                 // Si impossible à ouvrir : pas de message d'erreur et remplissage 0
@@ -200,7 +200,7 @@ QByteArray Sound::getData(quint16 wBps)
         else
         {
             // lecture fichier
-            QFile *fi = new QFile(fileName);
+            QFile *fi = new QFile(_fileName);
             if (!fi->exists())
             {
                 // Si impossible à ouvrir : pas de message d'erreur et remplissage 0
@@ -275,7 +275,7 @@ QByteArray Sound::getData(quint16 wBps)
         else
         {
             // lecture fichier
-            QFile *fi = new QFile(fileName);
+            QFile *fi = new QFile(_fileName);
             if (!fi->exists())
             {
                 // Si impossible à ouvrir : pas de message d'erreur et remplissage 0
@@ -367,7 +367,7 @@ quint32 Sound::get(AttributeType champ)
     return result;
 }
 
-QString Sound::getFileName() {return this->fileName;}
+QString Sound::getFileName() {return this->_fileName;}
 
 void Sound::setData(QByteArray data, quint16 wBps)
 {
@@ -442,7 +442,7 @@ void Sound::set(AttributeType champ, AttributeValue value)
 
 void Sound::setFileName(QString qStr, bool tryFindRootKey)
 {
-    this->fileName = qStr;
+    this->_fileName = qStr;
 
     // Récupération des infos sur le son
     this->getInfoSound(tryFindRootKey);
@@ -555,7 +555,7 @@ void Sound::exporter(QString fileName, Sound leftSound, Sound rightSound)
 
 Sound::FileType Sound::getFileType()
 {
-    QFileInfo fileInfo = this->fileName;
+    QFileInfo fileInfo = this->_fileName;
     QString ext = fileInfo.suffix().toLower();
 
     QString extCustom = "";
@@ -593,7 +593,7 @@ void Sound::getInfoSound(bool tryFindRootkey)
                     QCoreApplication::applicationDirPath() + "/extension_lecture", "getInfoSound");
         if (getInfoSound)
         {
-            if (!getInfoSound(this->fileName, &_info))
+            if (!getInfoSound(this->_fileName, &_info))
             {
                 _info.wFormat = 0;
                 _info.dwLength = 0;
@@ -642,11 +642,11 @@ void Sound::getInfoSoundWav(bool tryFindRootkey)
     _info.dwNote = 60; // Par défaut do central
     _info.iCent = 0;
     _info.pitchDefined = false;
-    QFile fi(fileName);
+    QFile fi(_fileName);
     if (!fi.exists())
     {
         QMessageBox::warning(_parent, QObject::trUtf8("Warning"),
-                             QObject::trUtf8("Cannot open file \"%1\"").arg(fileName));
+                             QObject::trUtf8("Cannot open file \"%1\"").arg(_fileName));
         return;
     }
     fi.open(QFile::ReadOnly | QFile::Unbuffered);
@@ -758,14 +758,14 @@ void Sound::determineRootKey()
         QString nomNote = ContextManager::keyName()->getKeyName(i, true);
 
         // Recherche de la note dans le nom de fichier
-        if (fileName.toUpper().contains(nomNote))
+        if (_fileName.toUpper().contains(nomNote))
             note = i;
     }
 
     if (note == -1)
     {
         // Recherche du numéro de la note
-        QString name = fileName;
+        QString name = _fileName;
         QStringList listeNum = name.replace(QRegExp("[^0-9]"), "-").split("-", QString::SkipEmptyParts);
         if (listeNum.size())
         {
