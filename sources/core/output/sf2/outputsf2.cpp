@@ -50,7 +50,7 @@ void OutputSf2::processInternal(QString fileName, SoundfontManager * sm, bool &s
     EltID id(elementSf2, sf2Index);
     if (sm->getQstr(id, champ_filenameForData) == fileName)
     {
-        // Use temporary file
+        // Use a temporary file
         QString filenameTmp = fileName.left(fileName.length() - 4) + "_tmp";
         if (QFile(filenameTmp + ".sf2").exists())
         {
@@ -63,12 +63,28 @@ void OutputSf2::processInternal(QString fileName, SoundfontManager * sm, bool &s
 
         // Save the file
         this->save(filenameTmp, sm, success, error, sf2Index);
+        if (!success)
+            return;
 
-        // Delete the initial file
-        QFile(fileName).remove();
+        // Delete the initial file and
+        if (!QFile(fileName).remove())
+        {
+            error = trUtf8("Couldn't delete file \"%1\".").arg(fileName);
+            success = false;
+            sm->clearNewEditing();
+            sm->markAsSaved(sf2Index);
+            return;
+        }
 
         // Rename the tmp file
-        QFile(filenameTmp).rename(fileName);
+        if (!QFile(filenameTmp).rename(fileName))
+        {
+            error = trUtf8("Couldn't rename file \"%1\".").arg(filenameTmp);
+            success = false;
+            sm->clearNewEditing();
+            sm->markAsSaved(sf2Index);
+            return;
+        }
 
         // Update the source for data
         sm->set(id, champ_filenameInitial, fileName);
@@ -85,6 +101,9 @@ void OutputSf2::processInternal(QString fileName, SoundfontManager * sm, bool &s
         // Just save the file
         this->save(fileName, sm, success, error, sf2Index);
     }
+
+    sm->clearNewEditing();
+    sm->markAsSaved(sf2Index);
 }
 
 void OutputSf2::save(QString fileName, SoundfontManager * sm, bool &success, QString &error, int sf2Index)
@@ -1213,8 +1232,6 @@ void OutputSf2::save(QString fileName, SoundfontManager * sm, bool &success, QSt
     sm->set(id, champ_filenameInitial, fileName);
     sm->set(id, champ_filenameForData, fileName);
     sm->set(id, champ_wBpsInit, sm->get(id, champ_wBpsSave));
-    sm->clearNewEditing();
-    sm->markAsSaved(sf2Index);
 
     success = true;
     error = "";

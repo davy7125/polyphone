@@ -31,6 +31,7 @@
 #include <QFileInfo>
 #include <QDesktopServices>
 #include <QUrl>
+#include <QMessageBox>
 
 DownloadProgressCell::DownloadProgressCell(int soundfontId, QString soundfontName, QWidget *parent) :
     QWidget(parent),
@@ -81,7 +82,14 @@ void DownloadProgressCell::on_pushOpen_clicked()
     if (InputFactory::isSuffixSupported(QFileInfo(_filename).suffix()))
         WindowManager::getInstance()->openSoundfont(_filename);
     else
-        QDesktopServices::openUrl(QUrl(_filename));
+    {
+        if (!QDesktopServices::openUrl(QUrl(_filename, QUrl::TolerantMode)))
+        {
+            // Warning message
+            QMessageBox::warning(QApplication::activeWindow(), trUtf8("Warning"),
+                                 trUtf8("Couldn't open file \"%1\". If this is an archive, you may have to extract it first.").arg(_filename));
+        }
+    }
     emit(closeMenu());
 }
 
