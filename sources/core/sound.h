@@ -45,8 +45,8 @@ public:
     void setFileName(QString qStr, bool tryFindRootKey = true);
     void setData(QByteArray data, quint16 wBps);
     void setRam(bool ram);
-    static void exporter(QString fileName, Sound son);
-    static void exporter(QString fileName, Sound leftSound, Sound rightSound);
+    static void exporter(QString _fileName, Sound son);
+    static void exporter(QString _fileName, Sound leftSound, Sound rightSound);
 
     // Utilitaires
     static QByteArray resampleMono(QByteArray data, double echInit, qint32 echFinal, quint16 wBps);
@@ -104,7 +104,7 @@ private:
     } FileType;
 
     // Attributs privés
-    QString fileName;
+    QString _fileName;
     InfoSound _info;
     QByteArray _smpl;
     QByteArray _sm24;
@@ -118,7 +118,7 @@ private:
     void determineRootKey();
     void getInfoSoundWav(bool tryFindRootkey);
     void getInfoSoundWav(QByteArray &baData, bool tryFindRootkey);
-    static void exporter(QString fileName, QByteArray baData, InfoSound info);
+    static void exporter(QString _fileName, QByteArray baData, InfoSound info);
     static void FFT_calculate(Complex * x, long N /* must be a power of 2 */,
             Complex * X, Complex * scratch, Complex * twiddles);
     static double moyenne(QByteArray baData, quint16 wBps);

@@ -122,7 +122,6 @@ bool OutputFactory::save(int indexSf2, bool saveAs)
         savePath = filePathInitial;
 
     AbstractOutput * output = OutputFactory::getOutput(savePath);
-    output->setOption("override", true);
     output->process(id.indexSf2, false);
 
     bool success = output->isSuccess();
