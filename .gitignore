@@ -4,3 +4,5 @@
 /sources/polyphone.pro.user
 /build-*
 **/polyphone.exe
+deployment/windows-32/Output/*
+deployment/windows-64/Output/*
