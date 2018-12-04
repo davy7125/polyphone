@@ -11,7 +11,7 @@ polyphone (2.0) unstable; urgency=low
   * (improvement) sample rate displayed in the sample overview page
   * (improvement) navigation between linked elements
   * (improvement) divisions can be sorted in different ways
-  * (fix) bug when saving/loading 24-bit samples
+  * (fix) bug when saving or loading 24-bit samples
   * (fix) opening big soundfonts
 
  -- Davy Triponney <davy.triponney@gmail.com>

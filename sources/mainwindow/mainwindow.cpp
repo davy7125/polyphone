@@ -130,8 +130,9 @@ MainWindow::MainWindow(QWidget *parent) :
     recentSf2Changed();
 
     // Show changelog?
-    if (ContextManager::configuration()->getValue(ConfManager::SECTION_NONE, "last_version_installed", 0.).toDouble() != VERSION && FINAL)
+    if (ContextManager::configuration()->getValue(ConfManager::SECTION_NONE, "last_version_installed", "0.0").toString() != SOFT_VERSION)
     {
+        ContextManager::configuration()->setValue(ConfManager::SECTION_NONE, "last_version_installed", SOFT_VERSION);
         DialogChangeLog * dialog = new DialogChangeLog(this);
         QTimer::singleShot(500, dialog, SLOT(show()));
     }
