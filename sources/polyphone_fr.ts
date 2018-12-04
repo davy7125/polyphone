@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="fr_FR">
+<TS version="2.1" language="fr_FR">
 <context>
     <name>AbstractInput</name>
     <message>
@@ -67,28 +67,28 @@
         <source>Loop end offset</source>
         <translation>Offset fin boucle</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/types/attribute.cpp" line="553"/>
         <location filename="core/types/attribute.cpp" line="674"/>
         <source>Loop start offset (× 32768)</source>
         <translation>Offset début échantillon (× 32768)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/types/attribute.cpp" line="556"/>
         <source>Mod LFO → pitch (c)</source>
         <translation>Mod LFO → note (c)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/types/attribute.cpp" line="559"/>
         <source>Vib LFO → pitch (c)</source>
         <translation>Vib LFO → note (c)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/types/attribute.cpp" line="562"/>
         <source>Mod env → pitch (c)</source>
         <translation>Mod env → note (c)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/types/attribute.cpp" line="565"/>
         <source>Filter, cutoff (×)</source>
         <translation>Filtre, coupure (×)</translation>
@@ -103,22 +103,22 @@
         <source>Filter, resonance (dB)</source>
         <translation>Filtre, résonance (dB)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/types/attribute.cpp" line="572"/>
         <source>Mod LFO → filter (c)</source>
         <translation>Mod LFO → filtre (c)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/types/attribute.cpp" line="575"/>
         <source>Mod env → filter (c)</source>
         <translation>Mod env → filtre (c)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/types/attribute.cpp" line="578"/>
         <source>Sample end offset (× 32768)</source>
         <translation>Offset fin échantillon (× 32768)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/types/attribute.cpp" line="581"/>
         <source>Mod LFO → volume (dB)</source>
         <translation>Mod LFO → volume (dB)</translation>
@@ -143,7 +143,7 @@
         <source>Pan [-50;50]</source>
         <translation>Balance [-50;50]</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/types/attribute.cpp" line="594"/>
         <source>Mod LFO delay (×)</source>
         <translation>Mod LFO delay (×)</translation>
@@ -153,7 +153,7 @@
         <source>Mod LFO delay (s)</source>
         <translation>Mod LFO delay (s)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/types/attribute.cpp" line="598"/>
         <source>Mod LFO freq (×)</source>
         <translation>Mod LFO freq (×)</translation>
@@ -163,7 +163,7 @@
         <source>Mod LFO freq (Hz)</source>
         <translation>Mod LFO freq (Hz)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/types/attribute.cpp" line="602"/>
         <source>Vib LFO delay (×)</source>
         <translation>Vib LFO delay (×)</translation>
@@ -173,7 +173,7 @@
         <source>Vib LFO delay (s)</source>
         <translation>Vib LFO delay (s)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/types/attribute.cpp" line="606"/>
         <source>Vib LFO freq (×)</source>
         <translation>Vib LFO freq (×)</translation>
@@ -183,7 +183,7 @@
         <source>Vib LFO freq (Hz)</source>
         <translation>Vib LFO freq (Hz)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/types/attribute.cpp" line="610"/>
         <source>Mod env delay (×)</source>
         <translation>Mod env delay (×)</translation>
@@ -193,7 +193,7 @@
         <source>Mod env delay (s)</source>
         <translation>Mod env delay (s)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/types/attribute.cpp" line="614"/>
         <source>Mod env attack (×)</source>
         <translation>Mod env attack (×)</translation>
@@ -203,7 +203,7 @@
         <source>Mod env attack (s)</source>
         <translation>Mod env attack (s)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/types/attribute.cpp" line="618"/>
         <source>Mod env hold (×)</source>
         <translation>Mod env hold (×)</translation>
@@ -213,7 +213,7 @@
         <source>Mod env hold (s)</source>
         <translation>Mod env hold (s)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/types/attribute.cpp" line="622"/>
         <source>Mod env decay (×)</source>
         <translation>Mod env decay (×)</translation>
@@ -228,7 +228,7 @@
         <source>Mod env sustain (%)</source>
         <translation>Mod env sustain (%)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/types/attribute.cpp" line="629"/>
         <source>Mod env release (×)</source>
         <translation>Mod env release (×)</translation>
@@ -238,17 +238,17 @@
         <source>Mod env release (s)</source>
         <translation>Mod env release (s)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/types/attribute.cpp" line="633"/>
         <source>Key → Mod env hold (c)</source>
         <translation>Note → Mod env hold (c)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/types/attribute.cpp" line="636"/>
         <source>Key → Mod env decay (c)</source>
         <translation>Note → Mod env decay (c)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/types/attribute.cpp" line="639"/>
         <source>Vol env delay (×)</source>
         <translation>Vol env delay (×)</translation>
@@ -258,7 +258,7 @@
         <source>Vol env delay (s)</source>
         <translation>Vol env delay (s)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/types/attribute.cpp" line="643"/>
         <source>Vol env attack (×)</source>
         <translation>Vol env attack (×)</translation>
@@ -268,7 +268,7 @@
         <source>Vol env attack (s)</source>
         <translation>Vol env attack (s)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/types/attribute.cpp" line="647"/>
         <source>Vol env hold (×)</source>
         <translation>Vol env hold (×)</translation>
@@ -278,7 +278,7 @@
         <source>Vol env hold (s)</source>
         <translation>Vol env hold (s)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/types/attribute.cpp" line="651"/>
         <source>Vol env decay (×)</source>
         <translation>Vol env decay (×)</translation>
@@ -293,7 +293,7 @@
         <source>Vol env sustain (dB)</source>
         <translation>Vol env sustain (dB)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/types/attribute.cpp" line="658"/>
         <source>Vol env release (×)</source>
         <translation>Vol env release (×)</translation>
@@ -303,12 +303,12 @@
         <source>Vol env release (s)</source>
         <translation>Vol env release (s)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/types/attribute.cpp" line="662"/>
         <source>Key → Vol env hold (c)</source>
         <translation>Note → Vol env hold (c)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/types/attribute.cpp" line="665"/>
         <source>Key → Vol env decay (c)</source>
         <translation>Note → Vol env decay (c)</translation>
@@ -338,7 +338,7 @@
         <source>Attenuation (dB)</source>
         <translation>Atténuation (dB)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="core/types/attribute.cpp" line="686"/>
         <source>Loop end offset (× 32768)</source>
         <translation>Offset fin boucle (× 32768)</translation>
@@ -791,37 +791,37 @@
         <source>Key names</source>
         <translation>Nom des notes</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="context/interface/configsectioninterface.ui" line="29"/>
         <source>Middle C → 60, then 61</source>
         <translation>Do central → 60, puis 61</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="context/interface/configsectioninterface.ui" line="34"/>
         <source>Middle C → C3, then C♯3</source>
         <translation>Do central → C3, puis C♯3</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="context/interface/configsectioninterface.ui" line="39"/>
         <source>Middle C → C3, then D♭3</source>
         <translation>Do central → C3, puis D♭3</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="context/interface/configsectioninterface.ui" line="44"/>
         <source>Middle C → C4, then C♯4</source>
         <translation>Do central → C4, puis C♯4</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="context/interface/configsectioninterface.ui" line="49"/>
         <source>Middle C → C4, then D♭4</source>
         <translation>Do central → C4, puis D♭4</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="context/interface/configsectioninterface.ui" line="54"/>
         <source>Middle C → C5, then C♯5</source>
         <translation>Do central → C5, puis C♯5</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="context/interface/configsectioninterface.ui" line="59"/>
         <source>Middle C → C5, then D♭5</source>
         <translation>Do central → C5, puis D♭5</translation>
@@ -1305,7 +1305,7 @@ en ligne</translation>
         <source>Steve Clarke</source>
         <translation>Steve Clarke</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="dialogs/dialog_about.cpp" line="72"/>
         <source>F.J. Martínez Murcia</source>
         <oldsource>F.J. Mart�nez Murcia</oldsource>
@@ -1637,13 +1637,23 @@ en ligne</translation>
         <translation>Annuler le téléchargement</translation>
     </message>
     <message>
-        <location filename="repository/widgets/downloadprogresscell.cpp" line="69"/>
+        <location filename="repository/widgets/downloadprogresscell.cpp" line="70"/>
         <source>Open &quot;%1&quot;</source>
         <oldsource>Open &quot;%0&quot;</oldsource>
         <translation>Ouvrir « %1 »</translation>
     </message>
     <message>
-        <location filename="repository/widgets/downloadprogresscell.cpp" line="99"/>
+        <location filename="repository/widgets/downloadprogresscell.cpp" line="89"/>
+        <source>Warning</source>
+        <translation>Attention</translation>
+    </message>
+    <message>
+        <location filename="repository/widgets/downloadprogresscell.cpp" line="90"/>
+        <source>Couldn&apos;t open file &quot;%1&quot;. If this is an archive, you may have to extract it first.</source>
+        <translation>Impossible d&apos;ouvrir le fichier « %1 ». S&apos;il contient une archive, peut-être devez vous d&apos;abord l&apos;extraire.</translation>
+    </message>
+    <message>
+        <location filename="repository/widgets/downloadprogresscell.cpp" line="107"/>
         <source>Download canceled</source>
         <translation>Téléchargement annulé</translation>
     </message>
@@ -1752,87 +1762,87 @@ en ligne</translation>
 <context>
     <name>EditorToolBar</name>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="51"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="53"/>
         <source>Add a sample</source>
         <translation>Ajouter un échantillon</translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="55"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="57"/>
         <source>Add an instrument</source>
         <translation>Ajouter un instrument</translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="59"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="61"/>
         <source>Add a preset</source>
         <translation>Ajouter un preset</translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="63"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="65"/>
         <source>Toolbox</source>
         <translation>Boîte à outils</translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="70"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="72"/>
         <source>Cancel</source>
         <translation>Annuler</translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="75"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="77"/>
         <source>Redo</source>
         <translation>Rétablir</translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="80"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="82"/>
         <source>Save</source>
         <translation>Sauvegarder</translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="90"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="92"/>
         <source>Recorder</source>
         <translation>Magnétophone</translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="96"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="98"/>
         <source>Virtual keyboard</source>
         <translation>Clavier virtuel</translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="254"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="256"/>
         <source>Import an audio file</source>
         <translation>Importer un fichier audio</translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="256"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="258"/>
         <source>Wav file</source>
         <translation>Fichier .wav</translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="281"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="283"/>
         <source>Create a new instrument</source>
         <translation>Créer un nouvel instrument</translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="282"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="284"/>
         <source>Name of the new instrument:</source>
         <translation>Nom du nouvel instrument :</translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="310"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="312"/>
         <source>Warning</source>
         <translation>Attention</translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="310"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="312"/>
         <source>No preset available.</source>
         <translation>Aucun preset n&apos;est disponible.</translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="323"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="325"/>
         <source>Create a new preset</source>
         <translation>Créer un nouveau preset</translation>
     </message>
     <message>
-        <location filename="editor/widgets/editortoolbar.cpp" line="324"/>
+        <location filename="editor/widgets/editortoolbar.cpp" line="326"/>
         <source>Name of the new preset:</source>
         <translation>Nom du nouveau preset :</translation>
     </message>
@@ -1860,7 +1870,7 @@ en ligne</translation>
         <source>Delay</source>
         <translation>Delay</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/envelopeditor.ui" line="181"/>
         <source>Key → Decay</source>
         <oldsource>Key ? Decay</oldsource>
@@ -1876,7 +1886,7 @@ en ligne</translation>
         <source>Sustain</source>
         <translation>Sustain</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/envelopeditor.ui" line="391"/>
         <source>Key → Hold</source>
         <oldsource>Key ? Hold</oldsource>
@@ -2308,7 +2318,19 @@ en ligne</translation>
         <translation>Fermez le fichier avant de sauvegarder par-dessus.</translation>
     </message>
     <message>
-        <location filename="core/output/sf2/outputsf2.cpp" line="250"/>
+        <location filename="core/output/sf2/outputsf2.cpp" line="72"/>
+        <source>Couldn&apos;t delete file &quot;%1&quot;.</source>
+        <oldsource>Couldn&apos;t delete file &quot;%1&quot;</oldsource>
+        <translation>Impossible de supprimer le fichier « %1 ».</translation>
+    </message>
+    <message>
+        <location filename="core/output/sf2/outputsf2.cpp" line="82"/>
+        <source>Couldn&apos;t rename file &quot;%1&quot;.</source>
+        <oldsource>Couldn&apos;t rename file &quot;%1&quot;</oldsource>
+        <translation>Impossible de renommer le fichier « %1 ».</translation>
+    </message>
+    <message>
+        <location filename="core/output/sf2/outputsf2.cpp" line="312"/>
         <source>Cannot create file &quot;%1&quot;</source>
         <translation>Impossible de créer le fichier « %1 »</translation>
     </message>
@@ -3002,7 +3024,7 @@ d&apos;échantillonnage</translation>
         <source>Information</source>
         <translation>Informations</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="editor/pagesmpl.ui" line="790"/>
         <location filename="editor/pagesmpl.cpp" line="109"/>
         <source>Equalizer (±15 dB)</source>
@@ -3184,7 +3206,7 @@ d&apos;échantillonnage</translation>
         <translation>Fichier .sf2</translation>
     </message>
     <message>
-        <location filename="core/output/outputfactory.cpp" line="139"/>
+        <location filename="core/output/outputfactory.cpp" line="138"/>
         <location filename="core/sound.cpp" line="109"/>
         <location filename="core/sound.cpp" line="161"/>
         <location filename="core/sound.cpp" line="234"/>
@@ -3330,7 +3352,7 @@ d&apos;échantillonnage</translation>
         <comment>key name</comment>
         <translation>Do</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="context/keynamemanager.cpp" line="64"/>
         <source>D♭</source>
         <comment>key name</comment>
@@ -3343,7 +3365,7 @@ d&apos;échantillonnage</translation>
         <comment>key name</comment>
         <translation>Ré</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="context/keynamemanager.cpp" line="66"/>
         <source>E♭</source>
         <comment>key name</comment>
@@ -3363,7 +3385,7 @@ d&apos;échantillonnage</translation>
         <comment>key name</comment>
         <translation>Fa</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="context/keynamemanager.cpp" line="69"/>
         <source>G♭</source>
         <comment>key name</comment>
@@ -3376,7 +3398,7 @@ d&apos;échantillonnage</translation>
         <comment>key name</comment>
         <translation>Sol</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="context/keynamemanager.cpp" line="71"/>
         <source>A♭</source>
         <comment>key name</comment>
@@ -3389,7 +3411,7 @@ d&apos;échantillonnage</translation>
         <comment>key name</comment>
         <translation>La</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="context/keynamemanager.cpp" line="73"/>
         <source>B♭</source>
         <comment>key name</comment>
@@ -3402,31 +3424,31 @@ d&apos;échantillonnage</translation>
         <comment>key name</comment>
         <translation>Si</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="context/keynamemanager.cpp" line="82"/>
         <source>C♯</source>
         <comment>key name</comment>
         <translation>Do♯</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="context/keynamemanager.cpp" line="84"/>
         <source>D♯</source>
         <comment>key name</comment>
         <translation>Ré♯</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="context/keynamemanager.cpp" line="87"/>
         <source>F♯</source>
         <comment>key name</comment>
         <translation>Fa♯</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="context/keynamemanager.cpp" line="89"/>
         <source>G♯</source>
         <comment>key name</comment>
         <translation>Sol♯</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="context/keynamemanager.cpp" line="91"/>
         <source>A♯</source>
         <comment>key name</comment>
@@ -3995,7 +4017,7 @@ de télécharger la liste</translation>
         <source>Rating score</source>
         <translation>Évaluation</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="repository/browser/soundfontbrowser.ui" line="402"/>
         <source>Title (A→Z)</source>
         <oldsource>Title (A?Z)</oldsource>
