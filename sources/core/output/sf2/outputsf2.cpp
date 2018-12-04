@@ -46,6 +46,49 @@ void OutputSf2::processInternal(QString fileName, SoundfontManager * sm, bool &s
         }
     }
 
+    // Do we override the current file?
+    EltID id(elementSf2, sf2Index);
+    if (sm->getQstr(id, champ_filenameForData) == fileName)
+    {
+        // Use temporary file
+        QString filenameTmp = fileName.left(fileName.length() - 4) + "_tmp";
+        if (QFile(filenameTmp + ".sf2").exists())
+        {
+            int index = 1;
+            while (QFile(filenameTmp + "-" + QString::number(index) + ".sf2").exists())
+                index++;
+            filenameTmp = filenameTmp + "-" + QString::number(index);
+        }
+        filenameTmp += ".sf2";
+
+        // Save the file
+        this->save(filenameTmp, sm, success, error, sf2Index);
+
+        // Delete the initial file
+        QFile(fileName).remove();
+
+        // Rename the tmp file
+        QFile(filenameTmp).rename(fileName);
+
+        // Update the source for data
+        sm->set(id, champ_filenameInitial, fileName);
+        sm->set(id, champ_filenameForData, fileName);
+        id.typeElement = elementSmpl;
+        foreach (int i, sm->getSiblings(id))
+        {
+            id.indexElt = i;
+            sm->set(id, champ_filenameForData, fileName);
+        }
+    }
+    else
+    {
+        // Just save the file
+        this->save(fileName, sm, success, error, sf2Index);
+    }
+}
+
+void OutputSf2::save(QString fileName, SoundfontManager * sm, bool &success, QString &error, int sf2Index)
+{
     EltID id(elementSf2, sf2Index, 0, 0, 0);
 
     // Préparation de la sauvegarde
@@ -435,13 +478,13 @@ void OutputSf2::processInternal(QString fileName, SoundfontManager * sm, bool &s
     QByteArray baData;
     foreach (int i, sm->getSiblings(id2))
     {
-        // copie de chaque sample
+        // Copy each sample
         id2.indexElt = i;
         dwTmp = 2 * sm->get(id2, champ_dwLength).dwValue;
         baData = sm->getData(id2, champ_sampleData16);
         fi.write(baData.data(), dwTmp);
 
-        // ajout de 46 zeros (sample de 2 valeurs)
+        // Add 46 null sample points
         charTmp = '\0';
         for (int i = 0; i < 46 * 2; i++)
             fi.write(&charTmp, 1);
@@ -453,8 +496,7 @@ void OutputSf2::processInternal(QString fileName, SoundfontManager * sm, bool &s
             valTmp.dwValue = dwTmp2;
             sm->set(id2, champ_dwStart16, valTmp);
         }
-        if (sm->getQstr(id2, champ_filenameInitial).compare(fileName) != 0)
-            sm->set(id2, champ_filenameInitial, fileName);
+        sm->set(id2, champ_filenameForData, fileName);
         dwTmp2 += dwTmp;
     }
 
