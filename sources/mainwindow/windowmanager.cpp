@@ -232,6 +232,7 @@ void WindowManager::onTabCloseRequested(int tabIndex)
         else
             ret = QMessageBox::Discard;
 
+        // Possibly cancel the close action
         switch (ret)
         {
         case QMessageBox::Cancel:
@@ -239,15 +240,19 @@ void WindowManager::onTabCloseRequested(int tabIndex)
         case QMessageBox::Save:
             if (!OutputFactory::save(id.indexSf2, false))
                 return;
+            break;
         case QMessageBox::Discard:
-            if (id.indexSf2 >= 0)
-                sf2->remove(id);
             break;
         }
 
+        // Delete the editor
         _editors.removeAll(editor);
         _tabWidget->removeTab(tabIndex);
         delete editor;
+
+        // Delete the model linked to the soundfont
+        if (id.indexSf2 >= 0)
+            sf2->remove(id);
 
         if (_editors.empty())
         {
