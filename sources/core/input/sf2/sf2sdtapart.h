@@ -38,8 +38,8 @@ public:
     char _LIST[4]; // Should be "LIST"
     quint32Reversed _sdtaSize; // Size of the section sdta
     char _sdta[4]; // Should be "sdta"
-    int _startSmplOffset; // Relative position of the first sample in the section "smpl" (absolute is 20 + infoSize + this value)
-    int _startSm24Offset; // Same for the section "sm24"
+    unsigned int _startSmplOffset; // Relative position of the first sample in the section "smpl" (absolute is 20 + infoSize + this value)
+    unsigned int _startSm24Offset; // Same for the section "sm24"
 };
 
 // Extension methods for QDataStream to serialize / deserialize
