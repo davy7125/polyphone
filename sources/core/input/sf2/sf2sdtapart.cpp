@@ -34,6 +34,15 @@ Sf2SdtaPart::Sf2SdtaPart() :
 
 }
 
+void skipData(QDataStream &in, unsigned int number)
+{
+    // number can be more than the maximum of an int
+    int bigSkip = number / 0x7FFFFFFF;
+    for (int i = 0; i < bigSkip; i++)
+        in.skipRawData(0x7FFFFFFF);
+    in.skipRawData(number % 0x7FFFFFFF);
+}
+
 QDataStream & operator >> (QDataStream &in, Sf2SdtaPart &sdta)
 {
     // 4 char, should be "LIST"
@@ -63,7 +72,7 @@ QDataStream & operator >> (QDataStream &in, Sf2SdtaPart &sdta)
 
         // Keep the position of "smpl" and skip the block
         sdta._startSmplOffset = 20;
-        in.skipRawData(smplSize.value);
+        skipData(in, smplSize.value);
 
         // Block sm24?
         {
@@ -80,7 +89,7 @@ QDataStream & operator >> (QDataStream &in, Sf2SdtaPart &sdta)
 
             // Keep the position of "sm24" and skip the block
             sdta._startSm24Offset = 20 + smplSize.value + 8;
-            in.skipRawData(sm24Size.value);
+            skipData(in, sm24Size.value);
         }
         else
         {
@@ -97,7 +106,7 @@ QDataStream & operator >> (QDataStream &in, Sf2SdtaPart &sdta)
         // Memorize the positions and skip the part
         sdta._startSmplOffset = 12;
         sdta._startSm24Offset = 0;
-        in.skipRawData(sdta._sdtaSize.value - 8);
+        skipData(in, sdta._sdtaSize.value - 8);
     }
 
     sdta._isValid = true;
