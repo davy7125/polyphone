@@ -803,9 +803,8 @@ int SoundfontManager::remove(EltID id, bool permanently, bool storeAction, int *
     case elementSf2:{
         permanently = true; // No undo possible after a file is closed
         storeAction = false;
-        // suppression d'un SF2
 
-        // Propagation aux presets /!\ si temporaire, ne pas propager aux éléments déjà supprimés de manière temporaire
+        // Delete presets /!\ si temporaire, ne pas propager aux éléments déjà supprimés de manière temporaire
         EltID id2(elementPrst, id.indexSf2, 0, 0, 0);
         QList<int> indexes = _soundfonts->getSoundfont(id.indexSf2)->getPresets().keys();
         foreach (int i, indexes)
@@ -814,7 +813,7 @@ int SoundfontManager::remove(EltID id, bool permanently, bool storeAction, int *
             this->remove(id2, true, storeAction, message);
         }
 
-        // propagation aux instruments
+        // Delete instruments
         id2.typeElement = elementInst;
         indexes = _soundfonts->getSoundfont(id.indexSf2)->getInstruments().keys();
         foreach (int i, indexes)
@@ -823,7 +822,7 @@ int SoundfontManager::remove(EltID id, bool permanently, bool storeAction, int *
             this->remove(id2, true, storeAction, message);
         }
 
-        // propagation aux samples
+        // Delete samples
         id2.typeElement = elementSmpl;
         indexes = _soundfonts->getSoundfont(id.indexSf2)->getSamples().keys();
         foreach (int i, indexes)
@@ -832,7 +831,7 @@ int SoundfontManager::remove(EltID id, bool permanently, bool storeAction, int *
             this->remove(id2, true, storeAction, message);
         }
 
-        // Suppression du sf2
+        // Finally delete sf2
         _soundfonts->deleteSoundfont(id.indexSf2);
         _undoRedo->dropSoundfont(id.indexSf2);
     }break;
