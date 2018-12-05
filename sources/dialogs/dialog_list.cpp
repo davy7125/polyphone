@@ -76,6 +76,7 @@ void DialogList::showDialog(EltID idSrc, bool isAssociation)
     ui->listWidget->scrollToTop();
     EltID id(element, idSrc.indexSf2, 0, 0, 0);
     ListWidgetItem *item;
+    ListWidgetItem * selectedItem = nullptr;
     foreach (int i, sm->getSiblings(id))
     {
         id.indexElt = i;
@@ -89,9 +90,16 @@ void DialogList::showDialog(EltID idSrc, bool isAssociation)
         item->id = id;
         ui->listWidget->addItem(item);
         if (i == selectedId)
-            ui->listWidget->setCurrentItem(item);
+            selectedItem = item;
     }
     ui->listWidget->sortItems();
+
+    // Selection
+    if (selectedItem != nullptr)
+    {
+        ui->listWidget->setCurrentItem(selectedItem);
+        ui->listWidget->scrollToItem(selectedItem, QAbstractItemView::PositionAtCenter);
+    }
 
     // Display the dialog
     this->show();
