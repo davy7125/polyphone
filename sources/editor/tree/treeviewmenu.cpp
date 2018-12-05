@@ -81,7 +81,7 @@ TreeViewMenu::TreeViewMenu(QWidget * parent) : QMenu(parent),
     this->addSeparator();
 
     // Rename
-    _renameAction = new QAction(trUtf8("&Rename..."), this);
+    _renameAction = new QAction(trUtf8("Re&name..."), this);
     _renameAction->setShortcut(Qt::Key_F2);
     connect(_renameAction, SIGNAL(triggered()), this, SLOT(rename()));
     this->addAction(_renameAction);
@@ -138,11 +138,11 @@ void TreeViewMenu::initialize(IdList ids)
     if (rename)
     {
         _renameAction->setEnabled(true);
-        _renameAction->setText(ids.count() == 1 ? trUtf8("&Rename...") : trUtf8("Bulk &rename..."));
+        _renameAction->setText(ids.count() == 1 ? trUtf8("Re&name...") : trUtf8("Bulk re&name..."));
     }
     else
     {
-        _renameAction->setText(trUtf8("&Rename..."));
+        _renameAction->setText(trUtf8("Re&name..."));
         _renameAction->setEnabled(false);
     }
 
