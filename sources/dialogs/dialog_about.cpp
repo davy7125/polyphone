@@ -34,7 +34,7 @@ DialogAbout::DialogAbout(QWidget *parent) :
     ui->setupUi(this);
     this->setWindowFlags((windowFlags() & ~Qt::WindowContextHelpButtonHint));
     ui->labelNomVersion->setText(trUtf8("Polyphone") + " " + SOFT_VERSION +
-                                 (IDENTIFIER == "" ? "" : QString(" ") + IDENTIFIER));
+                                 (QString(IDENTIFIER).isEmpty() ? "" : QString(" ") + IDENTIFIER));
 
     // Icon
     QMap<QString, QString> replacement;

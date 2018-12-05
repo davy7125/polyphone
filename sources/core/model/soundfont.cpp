@@ -116,7 +116,11 @@ Soundfont::~Soundfont()
     delete _sampleTreeItem;
     _generalTreeItem->notifyDeletion(false);
     delete _generalTreeItem;
-    _model->removeRow(0); // Root item
+
+    // Root item
+    _model->removeRow(0);
+    _rootItem->attachModel(nullptr);
+    delete _rootItem;
 
     // Delete the model
     delete _model;

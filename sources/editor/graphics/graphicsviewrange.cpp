@@ -91,6 +91,8 @@ GraphicsViewRange::~GraphicsViewRange()
     delete _legendItem;
     delete _legendItem2;
     delete _zoomLine;
+    while (!_keyLines.isEmpty())
+        delete _keyLines.takeFirst();
     while (!_mapGraphicsKeys.isEmpty())
         delete _mapGraphicsKeys.take(_mapGraphicsKeys.keys().first());
 }
@@ -113,6 +115,7 @@ void GraphicsViewRange::initItems()
         text->setText(ContextManager::keyName()->getKeyName(note));
         text->setPos(note, OFFSET + WIDTH);
         _bottomLabels << text;
+        _keyLines << line;
     }
 
     // Horizontal lines
