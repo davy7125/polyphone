@@ -81,7 +81,7 @@ QVariant TreeModel::data(const QModelIndex &index, int role) const
     return QVariant();
 }
 
-QModelIndex	TreeModel::index(int row, int column, const QModelIndex &parent) const
+QModelIndex TreeModel::index(int row, int column, const QModelIndex &parent) const
 {
     if (!hasIndex(row, column, parent))
         return QModelIndex();
@@ -99,7 +99,7 @@ QModelIndex	TreeModel::index(int row, int column, const QModelIndex &parent) con
     return QModelIndex();
 }
 
-QModelIndex	TreeModel::parent(const QModelIndex &index) const
+QModelIndex TreeModel::parent(const QModelIndex &index) const
 {
     if (!index.isValid())
         return QModelIndex();

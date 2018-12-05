@@ -48,7 +48,7 @@ int TreeItemFirstLevel::childCount() const
 TreeItem * TreeItemFirstLevel::child(int row)
 {
     if (_children == nullptr || row < _children->count())
-        return _children->values()[row];
+        return *std::next(_children->begin(), row);
     return nullptr;
 }
 
