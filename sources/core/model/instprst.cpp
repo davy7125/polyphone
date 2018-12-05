@@ -84,7 +84,7 @@ int InstPrst::childCount() const
 
 TreeItem * InstPrst::child(int row)
 {
-    return _divisions.values()[row];
+    return *std::next(_divisions.begin(), row);
 }
 
 QString InstPrst::display()

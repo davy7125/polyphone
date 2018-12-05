@@ -80,6 +80,7 @@ private:
     GraphicsLegendItem2 * _legendItem2;
     GraphicsZoomLine * _zoomLine;
     QMap<int, GraphicsKey*> _mapGraphicsKeys;
+    QList<QGraphicsLineItem *> _keyLines;
 
     // Various
     bool _dontRememberScroll;

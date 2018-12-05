@@ -72,11 +72,10 @@ QList<int> ActionManager::commitActionSet()
     return actionsPerSoundfont.keys();
 }
 
-QList<Action *> ActionManager::clearCurrentActionSet()
+void ActionManager::clearCurrentActionSet()
 {
-    QList<Action *> result = _currentActions;
-    _currentActions.clear();
-    return result;
+    while (!_currentActions.isEmpty())
+        delete _currentActions.takeFirst();
 }
 
 int ActionManager::getEdition(int sf2Index)

@@ -41,6 +41,7 @@ FilterTag::FilterTag(QWidget *parent) :
 FilterTag::~FilterTag()
 {
     delete ui;
+    delete _completer;
 }
 
 void FilterTag::setPossibleTags(QStringList tags)

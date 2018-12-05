@@ -48,7 +48,10 @@ public:
     QList<int> commitActionSet();
 
     /// Clear the current action set
-    QList<Action *> clearCurrentActionSet();
+    void clearCurrentActionSet();
+
+    /// Get the current action list
+    QList<Action *> getCurrentActions() { return _currentActions; }
 
     /// Get the current edition of an sf2
     int getEdition(int sf2Index);

@@ -545,7 +545,8 @@ void SoundfontManager::clearNewEditing()
 void SoundfontManager::revertNewEditing()
 {
     QMutexLocker locker(&_mutex);
-    undo(_undoRedo->clearCurrentActionSet());
+    undo(_undoRedo->getCurrentActions());
+    _undoRedo->clearCurrentActionSet();
 }
 
 bool SoundfontManager::isUndoable(int indexSf2)
