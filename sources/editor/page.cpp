@@ -44,7 +44,7 @@ Page::Page(QWidget *parent, TypePage typePage, QString editingSource) : QWidget(
 
 bool Page::preparePage(QString editingSource, IdList selectedIds)
 {
-    if (_preparingPage)
+    if (_preparingPage || editingSource == this->getEditingSource())
         return true;
     _preparingPage = true;
 
