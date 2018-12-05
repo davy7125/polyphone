@@ -86,7 +86,7 @@ QDataStream & operator >> (QDataStream &in, Sf2Header &header)
         // Number of bytes to read
         quint32Reversed size;
         in >> size;
-        if (size.value == 0 || size.value > 1000)
+        if (pos + 8 + size.value > header._infoSize.value)
             return in;
 
         if (bloc == "ifil" || bloc == "iver")
