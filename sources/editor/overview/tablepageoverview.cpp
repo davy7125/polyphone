@@ -54,10 +54,10 @@ void TablePageOverview::onSort(int column)
 
 void TablePageOverview::colorRows()
 {
-//    for (int row = 0; row < this->rowCount(); row++)
-//    {
-//        QColor color = (row % 2) ? QColor(255, 255, 200) : QColor(255, 255, 255);
-//        for (int col = 0; col < this->columnCount(); col++)
-//            this->item(row, col)->setBackgroundColor(color);
-//    }
+    //    for (int row = 0; row < this->rowCount(); row++)
+    //    {
+    //        QColor color = (row % 2) ? QColor(255, 255, 200) : QColor(255, 255, 255);
+    //        for (int col = 0; col < this->columnCount(); col++)
+    //            this->item(row, col)->setBackgroundColor(color);
+    //    }
 }

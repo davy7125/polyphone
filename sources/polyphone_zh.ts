@@ -4727,12 +4727,12 @@ Splitting the file into several sf2 might solve the problem.</source>
         <translation type="obsolete">名称</translation>
     </message>
     <message>
-        <location filename="editor/overview/pageoverview.cpp" line="82"/>
+        <location filename="editor/overview/pageoverview.cpp" line="83"/>
         <source>elements</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/overview/pageoverview.cpp" line="82"/>
+        <location filename="editor/overview/pageoverview.cpp" line="83"/>
         <source>element</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4806,25 +4806,25 @@ Splitting the file into several sf2 might solve the problem.</source>
         <translation>混响</translation>
     </message>
     <message>
-        <location filename="editor/overview/pageoverviewinst.cpp" line="89"/>
-        <location filename="editor/overview/pageoverviewinst.cpp" line="255"/>
+        <location filename="editor/overview/pageoverviewinst.cpp" line="100"/>
+        <location filename="editor/overview/pageoverviewinst.cpp" line="266"/>
         <source>yes</source>
         <translation>是</translation>
     </message>
     <message>
-        <location filename="editor/overview/pageoverviewinst.cpp" line="89"/>
-        <location filename="editor/overview/pageoverviewinst.cpp" line="253"/>
+        <location filename="editor/overview/pageoverviewinst.cpp" line="100"/>
+        <location filename="editor/overview/pageoverviewinst.cpp" line="264"/>
         <source>no</source>
         <translation>否</translation>
     </message>
     <message>
-        <location filename="editor/overview/pageoverviewinst.cpp" line="257"/>
+        <location filename="editor/overview/pageoverviewinst.cpp" line="268"/>
         <source>yes, to the end</source>
         <translatorcomment>speaking about a loop mode</translatorcomment>
         <translation>是，直到终点</translation>
     </message>
     <message>
-        <location filename="editor/overview/pageoverviewinst.cpp" line="263"/>
+        <location filename="editor/overview/pageoverviewinst.cpp" line="274"/>
         <source>several modes</source>
         <comment>speaking about loop modes</comment>
         <translation>几个模式</translation>
@@ -4960,58 +4960,58 @@ rate</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/overview/pageoverviewsmpl.cpp" line="85"/>
+        <location filename="editor/overview/pageoverviewsmpl.cpp" line="94"/>
         <source>yes</source>
         <translation>是</translation>
     </message>
     <message>
-        <location filename="editor/overview/pageoverviewsmpl.cpp" line="85"/>
+        <location filename="editor/overview/pageoverviewsmpl.cpp" line="94"/>
         <source>no</source>
         <translation>否</translation>
     </message>
     <message>
-        <location filename="editor/overview/pageoverviewsmpl.cpp" line="92"/>
         <location filename="editor/overview/pageoverviewsmpl.cpp" line="101"/>
+        <location filename="editor/overview/pageoverviewsmpl.cpp" line="110"/>
         <source>s</source>
         <comment>unit for seconds</comment>
         <translation>秒</translation>
     </message>
     <message>
-        <location filename="editor/overview/pageoverviewsmpl.cpp" line="123"/>
+        <location filename="editor/overview/pageoverviewsmpl.cpp" line="133"/>
         <source>Invalid link</source>
         <translation>不合法的链接</translation>
     </message>
     <message>
-        <location filename="editor/overview/pageoverviewsmpl.cpp" line="126"/>
+        <location filename="editor/overview/pageoverviewsmpl.cpp" line="136"/>
         <source>Mono</source>
         <comment>opposite to stereo</comment>
         <translation>单声道</translation>
     </message>
     <message>
-        <location filename="editor/overview/pageoverviewsmpl.cpp" line="129"/>
+        <location filename="editor/overview/pageoverviewsmpl.cpp" line="139"/>
         <source>Stereo right</source>
         <oldsource>Stereo droit</oldsource>
         <translation>左声道</translation>
     </message>
     <message>
-        <location filename="editor/overview/pageoverviewsmpl.cpp" line="132"/>
+        <location filename="editor/overview/pageoverviewsmpl.cpp" line="142"/>
         <source>Stereo left</source>
         <oldsource>Stereo gauche</oldsource>
         <translation>右声道</translation>
     </message>
     <message>
-        <location filename="editor/overview/pageoverviewsmpl.cpp" line="135"/>
+        <location filename="editor/overview/pageoverviewsmpl.cpp" line="145"/>
         <source>Stereo non defined</source>
         <oldsource>Stereo non défini</oldsource>
         <translation>双声道未定义</translation>
     </message>
     <message>
-        <location filename="editor/overview/pageoverviewsmpl.cpp" line="155"/>
+        <location filename="editor/overview/pageoverviewsmpl.cpp" line="165"/>
         <source>invalid</source>
         <translation>不合法</translation>
     </message>
     <message>
-        <location filename="editor/overview/pageoverviewsmpl.cpp" line="162"/>
+        <location filename="editor/overview/pageoverviewsmpl.cpp" line="172"/>
         <source>Hz</source>
         <translation>赫兹</translation>
     </message>
@@ -6465,22 +6465,22 @@ rate</source>
         <translation>全部忽略(&amp;G)</translation>
     </message>
     <message>
-        <location filename="core/model/soundfont.cpp" line="48"/>
+        <location filename="core/model/soundfont.cpp" line="46"/>
         <source>General</source>
         <translation>通用</translation>
     </message>
     <message>
-        <location filename="core/model/soundfont.cpp" line="49"/>
+        <location filename="core/model/soundfont.cpp" line="47"/>
         <source>Samples</source>
         <translation>样本</translation>
     </message>
     <message>
-        <location filename="core/model/soundfont.cpp" line="50"/>
+        <location filename="core/model/soundfont.cpp" line="48"/>
         <source>Instruments</source>
         <translation>乐器</translation>
     </message>
     <message>
-        <location filename="core/model/soundfont.cpp" line="51"/>
+        <location filename="core/model/soundfont.cpp" line="49"/>
         <source>Presets</source>
         <translation>预设</translation>
     </message>
@@ -9036,14 +9036,6 @@ download content</source>
         <translation type="unfinished">重命名(&amp;R)...</translation>
     </message>
     <message>
-        <location filename="editor/tree/treeviewmenu.cpp" line="84"/>
-        <location filename="editor/tree/treeviewmenu.cpp" line="141"/>
-        <location filename="editor/tree/treeviewmenu.cpp" line="145"/>
-        <source>Re&amp;name...</source>
-        <oldsource>Bulk &amp;rename...</oldsource>
-        <translation type="unfinished">批量重命名(&amp;R)...</translation>
-    </message>
-    <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="187"/>
         <location filename="editor/tree/treeviewmenu.cpp" line="190"/>
         <source>Warning</source>
@@ -9164,7 +9156,7 @@ download content</source>
         <translation>不保存(&amp;N)</translation>
     </message>
     <message>
-        <location filename="mainwindow/windowmanager.cpp" line="310"/>
+        <location filename="mainwindow/windowmanager.cpp" line="315"/>
         <source>User area</source>
         <translation type="unfinished"></translation>
     </message>
