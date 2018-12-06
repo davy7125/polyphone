@@ -50,7 +50,7 @@ public:
 
     // Name, extra fields
     void setName(QString name);
-    QString getName();
+    QString getName() { return _name; }
     void setExtraField(AttributeType champ, int value);
     int getExtraField(AttributeType champ);
 
@@ -58,6 +58,7 @@ public:
     int childCount() const override;
     TreeItem * child(int row) override;
     QString display() override;
+    QString sortText() override;
     int row() override { return _row; }
 
 private:
@@ -67,6 +68,7 @@ private:
     bool _hidden;
     int _row;
     QString _name;
+    QString _nameSort;
     QMap<AttributeType, int> _extraFields; // Used for presets only
 };
 

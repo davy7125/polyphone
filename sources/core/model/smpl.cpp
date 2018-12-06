@@ -24,6 +24,7 @@
 
 #include "smpl.h"
 #include "soundfont.h"
+#include "utils.h"
 
 Smpl::Smpl(int row, TreeItem *parent, EltID id) : TreeItem(id, parent),
     _row(row)
@@ -47,9 +48,15 @@ QString Smpl::display()
     return _name.isEmpty() ? "..." : _name;
 }
 
+QString Smpl::sortText()
+{
+    return _nameSort;
+}
+
 void Smpl::setName(QString name)
 {
     _name = name;
+    _nameSort = Utils::removeAccents(_name).toLower();
     notifyRename();
 }
 

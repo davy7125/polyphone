@@ -48,12 +48,14 @@ public:
     int childCount() const override;
     TreeItem * child(int row) override;
     QString display() override;
+    QString sortText() override;
     int row() override { return _row; }
     int indexOfId(int id) override;
 
 private:
     int _row;
     QString _name;
+    QString _nameSort;
 };
 
 #endif // SMPL_H

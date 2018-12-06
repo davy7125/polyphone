@@ -133,6 +133,7 @@ typedef enum
     champ_ICMT = 171,
     champ_ISFT = 172,
     champ_name = 173,                   // (sf2, smpl, inst et prst)
+    champ_nameSort = 174,
 
     champ_sampleData16 = 200,           // QByteArray
     champ_sampleData24 = 201,

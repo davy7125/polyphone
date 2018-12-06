@@ -144,6 +144,7 @@ private:
 
     static QList<Modulator> _modulatorCopy;
     QList<int> _listKeyEnlighted;
+    int _sortType;
 };
 
 #endif // PAGETABLE_H

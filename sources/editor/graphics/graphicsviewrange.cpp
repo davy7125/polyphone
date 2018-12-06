@@ -134,6 +134,7 @@ void GraphicsViewRange::initItems()
         text->setText(QString::number(vel));
         text->setPos(OFFSET, OFFSET + WIDTH - vel);
         _leftLabels << text;
+        _keyLines << line;
     }
 
     // Legends

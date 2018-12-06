@@ -24,6 +24,7 @@
 
 #include "instprst.h"
 #include "soundfont.h"
+#include "utils.h"
 
 InstPrst::InstPrst(Soundfont * soundfont, int row, TreeItem * parent, EltID id) : TreeItem(id, parent),
     _soundfont(soundfont),
@@ -105,15 +106,20 @@ QString InstPrst::display()
     return display;
 }
 
+QString InstPrst::sortText()
+{
+    QString sortText = "";
+    if (_extraFields.contains(champ_wBank) && _extraFields.contains(champ_wPreset))
+        sortText = QString("%1:%2 ").arg(_extraFields[champ_wBank], 3, 10, QChar('0')).arg(_extraFields[champ_wPreset], 3, 10, QChar('0'));
+    sortText += _nameSort;
+    return sortText;
+}
+
 void InstPrst::setName(QString name)
 {
     _name = name;
+    _nameSort = Utils::removeAccents(_name).toLower();
     notifyRename();
-}
-
-QString InstPrst::getName()
-{
-    return _name;
 }
 
 void InstPrst::setExtraField(AttributeType champ, int value)

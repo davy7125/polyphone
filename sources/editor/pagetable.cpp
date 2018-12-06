@@ -45,6 +45,7 @@ PageTable::PageTable(TypePage typePage, QWidget *parent) : Page(parent, typePage
 void PageTable::afficheTable(bool justSelection)
 {
     int posV = _table->verticalScrollBar()->value();
+    _sortType = ContextManager::configuration()->getValue(ConfManager::SECTION_DISPLAY, "division_sort", 0).toInt();
 
     if (!justSelection)
     {
@@ -109,7 +110,7 @@ void PageTable::addGlobal(IdList listIds)
         int numCol = 0;
         for (int i = 0; i < nbGlobal; i++)
         {
-            if (Utils::naturalOrder(qStr, _table->horizontalHeaderItem(i)->text()) > 0)
+            if (Utils::naturalOrder(_sf2->getQstr(id, champ_nameSort), _sf2->getQstr(_table->getID(i), champ_nameSort)) > 0)
                 numCol++;
             else
                 break;
@@ -222,7 +223,7 @@ void PageTable::addDivisions(EltID id)
         QString qStr = _sf2->getQstr(id3, champ_name).left(10) + "\n" + _sf2->getQstr(id3, champ_name).mid(10).left(10);
         for (int j = 1; j < nbSmplInst + 1; j++)
         {
-            if (Utils::sortDivisions(id, _table->getID(j)) > 0)
+            if (Utils::sortDivisions(id, _table->getID(j), _sortType) > 0)
                 numCol++;
             else
                 break;
