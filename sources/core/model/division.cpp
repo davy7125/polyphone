@@ -28,17 +28,20 @@
 #include "soundfont.h"
 #include "smpl.h"
 
-Division::Division(InstPrst * instPrst, TreeItem * parent, EltID id) : TreeItem(id, parent),
+Division::Division(InstPrst * instPrst, Soundfont * soundfont, TreeItem * parent, EltID id) : TreeItem(id, parent),
     _instPrst(instPrst),
-    _modCounter(0),
+    _soundfont(soundfont),
     _mute(false)
 {}
 
 Division::~Division()
 {
-    QList<int> modKeys = _modulators.keys();
-    foreach (int modKey, modKeys)
-        delete _modulators.take(modKey);
+    for (int i = _modulators.indexCount() - 1; i >= 0; i--)
+    {
+        Modulator * elt = _modulators.atIndex(i);
+        if (elt != nullptr)
+            delete _modulators.takeAtIndex(i);
+    }
 }
 
 bool Division::isSet(AttributeType champ)
@@ -70,22 +73,21 @@ void Division::resetGen(AttributeType champ)
 
 int Division::addMod()
 {
-    _modulators[_modCounter] = new Modulator(_modCounter);
-    return _modCounter++;
+    return _modulators.add(new Modulator(_modulators.indexCount()));
 }
 
 Modulator * Division::getMod(int index)
 {
-    if (_modulators.contains(index))
-        return _modulators[index];
-    return NULL;
+    if (index < _modulators.indexCount())
+        return _modulators.atIndex(index);
+    return nullptr;
 }
 
 bool Division::deleteMod(int index)
 {
-    if (_modulators.contains(index))
+    if (index < _modulators.indexCount())
     {
-        delete _modulators.take(index);
+        delete _modulators.takeAtIndex(index);
         return true;
     }
     return false;
@@ -99,7 +101,7 @@ int Division::childCount() const
 TreeItem * Division::child(int row)
 {
     Q_UNUSED(row)
-    return NULL;
+    return nullptr;
 }
 
 QString Division::display()
@@ -110,14 +112,14 @@ QString Division::display()
     ElementType type = this->getId().typeElement;
     if (type == elementInstSmpl && isSet(champ_sampleID))
     {
-        Smpl * smpl = _instPrst->soundfont()->getSample(getGen(champ_sampleID).wValue);
-        if (smpl != NULL)
+        Smpl * smpl = _soundfont->getSample(getGen(champ_sampleID).wValue);
+        if (smpl != nullptr)
             display = smpl->display();
     }
     else if (type == elementPrstInst && isSet(champ_instrument))
     {
-        InstPrst * inst = _instPrst->soundfont()->getInstrument(getGen(champ_instrument).wValue);
-        if (inst != NULL)
+        InstPrst * inst = _soundfont->getInstrument(getGen(champ_instrument).wValue);
+        if (inst != nullptr)
             display = inst->display();
     }
 
@@ -126,6 +128,7 @@ QString Division::display()
 
 int Division::row()
 {
+    // Shouldn't be used (parent->row() will never point on a division)
     return _instPrst->indexOfId(_id.indexElt);
 }
 

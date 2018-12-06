@@ -31,6 +31,7 @@
 #include "division.h"
 #include "modulator.h"
 #include "action.h"
+#include "indexedelementlist.h"
 
 SoundfontManager * SoundfontManager::s_instance = nullptr;
 
@@ -91,7 +92,7 @@ bool SoundfontManager::isSet(EltID id, AttributeType champ)
         return value;
 
     // Type d'élément à analyser
-    switch ((int)id.typeElement)
+    switch (id.typeElement)
     {
     case elementSf2:
         // Analyse d'un SF2
@@ -107,7 +108,7 @@ bool SoundfontManager::isSet(EltID id, AttributeType champ)
         break;
     case elementPrst:
         // Analyse d'un preset
-        switch ((int)champ)
+        switch (champ)
         {
         case champ_wPreset:
         case champ_wBank:
@@ -132,19 +133,21 @@ bool SoundfontManager::isSet(EltID id, AttributeType champ)
     }break;
     case elementInstMod:
         // Analyse d'un mod d'un instrument
-        value = true; break;
+        value = true;
         break;
     case elementPrstMod:
         // Analyse d'un mod d'un preset
-        value = true; break;
+        value = true;
         break;
     case elementInstSmplMod:
         // Analyse d'un mod d'un sample lié à un instrument
-        value = true; break;
+        value = true;
         break;
     case elementPrstInstMod:
         // Analyse d'un mod d'un instrument lié à un preset
-        value = true; break;
+        value = true;
+        break;
+    default:
         break;
     }
     return value;
@@ -164,7 +167,7 @@ AttributeValue SoundfontManager::get(EltID id, AttributeType champ)
     case elementSf2:{
         // Analyse d'un SF2
         Soundfont *tmp = _soundfonts->getSoundfont(id.indexSf2);
-        switch ((int)champ)
+        switch (champ)
         {
         case champ_IFIL:
             value.sfVerValue = tmp->_IFIL;
@@ -178,12 +181,14 @@ AttributeValue SoundfontManager::get(EltID id, AttributeType champ)
         case champ_wBpsSave:
             value.wValue = tmp->_wBpsSave;
             break;
+        default:
+            break;
         }
     }break;
     case elementSmpl:{
         // Analyse d'un sample
         Smpl *tmp = _soundfonts->getSoundfont(id.indexSf2)->getSample(id.indexElt);
-        switch ((int)champ)
+        switch (champ)
         {
         case champ_dwStart16:
             value.dwValue = tmp->_sound.get(champ_dwStart16); break;
@@ -211,6 +216,8 @@ AttributeValue SoundfontManager::get(EltID id, AttributeType champ)
             value.wValue = tmp->_wSampleLink; break;
         case champ_sfSampleType:
             value.sfLinkValue = tmp->_sfSampleType; break;
+        default:
+            break;
         }
     }break;
     case elementInst:{
@@ -253,7 +260,7 @@ AttributeValue SoundfontManager::get(EltID id, AttributeType champ)
     case elementInstMod: case elementPrstMod: case elementInstSmplMod: case elementPrstInstMod:{
         // Analyse d'un mod
         Modulator *tmp = nullptr;
-        switch ((int)id.typeElement)
+        switch (id.typeElement)
         {
         case elementInstMod:
             tmp = _soundfonts->getSoundfont(id.indexSf2)->getInstrument(id.indexElt)->getGlobalDivision()->getMod(id.indexMod);
@@ -267,8 +274,10 @@ AttributeValue SoundfontManager::get(EltID id, AttributeType champ)
         case elementPrstInstMod:
             tmp = _soundfonts->getSoundfont(id.indexSf2)->getPreset(id.indexElt)->getDivision(id.indexElt2)->getMod(id.indexMod);
             break;
+        default:
+            break;
         }
-        switch ((int)champ)
+        switch (champ)
         {
         case champ_sfModSrcOper:
             value.sfModValue = tmp->_sfModSrcOper; break;
@@ -282,6 +291,8 @@ AttributeValue SoundfontManager::get(EltID id, AttributeType champ)
             value.sfTransValue = tmp->_sfModTransOper; break;
         case champ_indexMod:
             value.wValue = tmp->_index; break;
+        default:
+            break;
         }
     }break;
     case elementInstGen: case elementPrstGen: case elementInstSmplGen: case elementPrstInstGen:{
@@ -334,12 +345,12 @@ QString SoundfontManager::getQstr(EltID id, AttributeType champ)
 
     // Type d'élément à analyser
     QString ret = "";
-    switch ((int)id.typeElement)
+    switch (id.typeElement)
     {
     case elementSf2:{
         // Analyse d'un SF2
         Soundfont *tmp = _soundfonts->getSoundfont(id.indexSf2);
-        switch ((int)champ)
+        switch (champ)
         {
         case champ_name:
             ret = tmp->_INAM; break;
@@ -363,37 +374,47 @@ QString SoundfontManager::getQstr(EltID id, AttributeType champ)
             ret = tmp->_fileNameInitial; break;
         case champ_filenameForData:
             ret = tmp->_fileNameForData; break;
+        default:
+            break;
         }
     }break;
     case elementSmpl:{
         // Analyse d'un sample
         Smpl *tmp = _soundfonts->getSoundfont(id.indexSf2)->getSample(id.indexElt);
-        switch ((int)champ)
+        switch (champ)
         {
         case champ_name:
             ret = tmp->getName(); break;
         case champ_filenameForData:
             ret = tmp->_sound.getFileName(); break;
+        default:
+            break;
         }
     }break;
     case elementInst:{
         // Analyse d'un instrument
         InstPrst *tmp = _soundfonts->getSoundfont(id.indexSf2)->getInstrument(id.indexElt);
-        switch ((int)champ)
+        switch (champ)
         {
         case champ_name:
             ret = tmp->getName(); break;
+        default:
+            break;
         }
     }break;
     case elementPrst:{
         // Analyse d'un preset
         InstPrst *tmp = _soundfonts->getSoundfont(id.indexSf2)->getPreset(id.indexElt);
-        switch ((int)champ)
+        switch (champ)
         {
         case champ_name:
             ret = tmp->getName(); break;
+        default:
+            break;
         }
     }break;
+    default:
+        break;
     }
 
     return ret;
@@ -407,11 +428,11 @@ QByteArray SoundfontManager::getData(EltID id, AttributeType champ)
         return baRet;
 
     // Type d'élément à analyser
-    switch ((int)id.typeElement)
+    switch (id.typeElement)
     {
     case elementSmpl:{
         Smpl *tmp = _soundfonts->getSoundfont(id.indexSf2)->getSample(id.indexElt);
-        switch ((int)champ)
+        switch (champ)
         {
         case champ_sampleData16:
             baRet = tmp->_sound.getData(16);
@@ -425,18 +446,21 @@ QByteArray SoundfontManager::getData(EltID id, AttributeType champ)
         case champ_sampleData32:
             baRet = tmp->_sound.getData(32);
             break;
+        default:
+            break;
         }
     }break;
+    default:
+        break;
     }
 
     return baRet;
 }
 
-// Freres de id (id compris)
 QList<int> SoundfontManager::getSiblings(EltID id)
 {
     QMutexLocker locker(&_mutex);
-    switch ((int)id.typeElement)
+    switch (id.typeElement)
     {
     case elementSf2:
         id.indexSf2 = -1;
@@ -447,77 +471,121 @@ QList<int> SoundfontManager::getSiblings(EltID id)
         id.indexElt2 = -1;
     case elementInstSmplMod: case elementPrstInstMod: case elementInstSmplGen: case elementPrstInstGen:
         id.indexMod = -1;
+    default:
+        break;
     }
 
     QList<int> result;
     if (!this->isValid(id, true))
         return result;
 
-    switch ((int)id.typeElement)
+    switch (id.typeElement)
     {
     case elementSf2:
         result = _soundfonts->getSoundfonts().keys();
         break;
-    case elementSmpl:
-        foreach (Smpl * elt, _soundfonts->getSoundfont(id.indexSf2)->getSamples().values())
+    case elementSmpl: {
+        QVectorIterator<Smpl*> i(_soundfonts->getSoundfont(id.indexSf2)->getSamples().values());
+        while (i.hasNext())
+        {
+            Smpl * elt = i.next();
             if (!elt->isHidden())
                 result << elt->getId().indexElt;
-        break;
-    case elementInst:
-        foreach (InstPrst * elt, _soundfonts->getSoundfont(id.indexSf2)->getInstruments().values())
+        }
+    } break;
+    case elementInst: {
+        QVectorIterator<InstPrst*> i(_soundfonts->getSoundfont(id.indexSf2)->getInstruments().values());
+        while (i.hasNext())
+        {
+            InstPrst* elt = i.next();
             if (!elt->isHidden())
                 result << elt->getId().indexElt;
-        break;
-    case elementPrst:
-        foreach (InstPrst * elt, _soundfonts->getSoundfont(id.indexSf2)->getPresets().values())
+        }
+    } break;
+    case elementPrst: {
+        QVectorIterator<InstPrst*> i(_soundfonts->getSoundfont(id.indexSf2)->getPresets().values());
+        while (i.hasNext())
+        {
+            InstPrst* elt = i.next();
             if (!elt->isHidden())
                 result << elt->getId().indexElt;
-        break;
-    case elementInstSmpl:
-        foreach (Division * elt, _soundfonts->getSoundfont(id.indexSf2)->getInstrument(id.indexElt)->getDivisions().values())
+        }
+    } break;
+    case elementInstSmpl: {
+        QVectorIterator<Division*> i(_soundfonts->getSoundfont(id.indexSf2)->getInstrument(id.indexElt)->getDivisions().values());
+        while (i.hasNext())
+        {
+            Division* elt = i.next();
             if (!elt->isHidden())
                 result << elt->getId().indexElt2;
-        break;
-    case elementPrstInst:
-        foreach (Division * elt, _soundfonts->getSoundfont(id.indexSf2)->getPreset(id.indexElt)->getDivisions().values())
+        }
+    } break;
+    case elementPrstInst: {
+        QVectorIterator<Division*> i(_soundfonts->getSoundfont(id.indexSf2)->getPreset(id.indexElt)->getDivisions().values());
+        while (i.hasNext())
+        {
+            Division* elt = i.next();
             if (!elt->isHidden())
                 result << elt->getId().indexElt2;
-        break;
-    case elementInstMod:
-        foreach (Modulator * elt, _soundfonts->getSoundfont(id.indexSf2)->getInstrument(id.indexElt)->getGlobalDivision()->getMods().values())
+        }
+    } break;
+    case elementInstMod: {
+        QVectorIterator<Modulator*> i(_soundfonts->getSoundfont(id.indexSf2)->getInstrument(id.indexElt)->getGlobalDivision()->getMods().values());
+        while (i.hasNext())
+        {
+            Modulator* elt = i.next();
             if (!elt->isHidden())
                 result << elt->_id;
-        break;
-    case elementPrstMod:
-        foreach (Modulator * elt, _soundfonts->getSoundfont(id.indexSf2)->getPreset(id.indexElt)->getGlobalDivision()->getMods().values())
+        }
+    } break;
+    case elementPrstMod: {
+        QVectorIterator<Modulator*> i(_soundfonts->getSoundfont(id.indexSf2)->getPreset(id.indexElt)->getGlobalDivision()->getMods().values());
+        while (i.hasNext())
+        {
+            Modulator* elt = i.next();
             if (!elt->isHidden())
                 result << elt->_id;
-        break;
-    case elementInstSmplMod:
-        foreach (Modulator * elt, _soundfonts->getSoundfont(id.indexSf2)->getInstrument(id.indexElt)->getDivision(id.indexElt2)->getMods().values())
+        }
+    } break;
+    case elementInstSmplMod: {
+        QVectorIterator<Modulator*> i(_soundfonts->getSoundfont(id.indexSf2)->getInstrument(id.indexElt)->getDivision(id.indexElt2)->getMods().values());
+        while (i.hasNext())
+        {
+            Modulator* elt = i.next();
             if (!elt->isHidden())
                 result << elt->_id;
-        break;
-    case elementPrstInstMod:
-        foreach (Modulator * elt, _soundfonts->getSoundfont(id.indexSf2)->getPreset(id.indexElt)->getDivision(id.indexElt2)->getMods().values())
+        }
+    } break;
+    case elementPrstInstMod: {
+        QVectorIterator<Modulator*> i(_soundfonts->getSoundfont(id.indexSf2)->getPreset(id.indexElt)->getDivision(id.indexElt2)->getMods().values());
+        while (i.hasNext())
+        {
+            Modulator* elt = i.next();
             if (!elt->isHidden())
                 result << elt->_id;
-        break;
-    case elementInstGen:
-        foreach (int key, _soundfonts->getSoundfont(id.indexSf2)->getInstrument(id.indexElt)->getGlobalDivision()->getGens().keys())
-            result << key;
-        break;
-    case elementPrstGen:
-        foreach (int key, _soundfonts->getSoundfont(id.indexSf2)->getPreset(id.indexElt)->getGlobalDivision()->getGens().keys())
-            result << key;
-        break;
-    case elementInstSmplGen:
-        foreach (int key, _soundfonts->getSoundfont(id.indexSf2)->getInstrument(id.indexElt)->getDivision(id.indexElt2)->getGens().keys())
-            result << key;
-        break;
-    case elementPrstInstGen:
-        foreach (int key, _soundfonts->getSoundfont(id.indexSf2)->getPreset(id.indexElt)->getDivision(id.indexElt2)->getGens().keys())
-            result << key;
+        }
+    } break;
+    case elementInstGen: {
+        QListIterator<AttributeType> i(_soundfonts->getSoundfont(id.indexSf2)->getInstrument(id.indexElt)->getGlobalDivision()->getGens().keys());
+        while (i.hasNext())
+            result << (int)i.next();
+    } break;
+    case elementPrstGen: {
+        QListIterator<AttributeType> i(_soundfonts->getSoundfont(id.indexSf2)->getPreset(id.indexElt)->getGlobalDivision()->getGens().keys());
+        while (i.hasNext())
+            result << (int)i.next();
+    } break;
+    case elementInstSmplGen: {
+        QListIterator<AttributeType> i(_soundfonts->getSoundfont(id.indexSf2)->getInstrument(id.indexElt)->getDivision(id.indexElt2)->getGens().keys());
+        while (i.hasNext())
+            result << (int)i.next();
+    } break;
+    case elementPrstInstGen: {
+        QListIterator<AttributeType> i(_soundfonts->getSoundfont(id.indexSf2)->getPreset(id.indexElt)->getDivision(id.indexElt2)->getGens().keys());
+        while (i.hasNext())
+            result << (int)i.next();
+    } break;
+    default:
         break;
     }
 
@@ -799,38 +867,26 @@ int SoundfontManager::remove(EltID id, bool permanently, bool storeAction, int *
     if (!this->isValid(id, permanently)) // Hidden ID are accepted for a permanent removal
         return 1;
 
-    switch ((int)id.typeElement)
+    switch (id.typeElement)
     {
     case elementSf2:{
         permanently = true; // No undo possible after a file is closed
         storeAction = false;
 
-        // Delete presets /!\ si temporaire, ne pas propager aux éléments déjà supprimés de manière temporaire
-        EltID id2(elementPrst, id.indexSf2, 0, 0, 0);
-        QList<int> indexes = _soundfonts->getSoundfont(id.indexSf2)->getPresets().keys();
-        foreach (int i, indexes)
-        {
-            id2.indexElt = i;
-            this->remove(id2, true, storeAction, message);
-        }
+        // Delete presets
+        QVector<InstPrst *> presets = _soundfonts->getSoundfont(id.indexSf2)->getPresets().values();
+        for (int i = presets.count() - 1; i >= 0; i--)
+            this->remove(presets[i]->getId(), true, storeAction, message);
 
         // Delete instruments
-        id2.typeElement = elementInst;
-        indexes = _soundfonts->getSoundfont(id.indexSf2)->getInstruments().keys();
-        foreach (int i, indexes)
-        {
-            id2.indexElt = i;
-            this->remove(id2, true, storeAction, message);
-        }
+        QVector<InstPrst *> instruments = _soundfonts->getSoundfont(id.indexSf2)->getInstruments().values();
+        for (int i = instruments.count() - 1; i >= 0; i--)
+            this->remove(instruments[i]->getId(), true, storeAction, message);
 
         // Delete samples
-        id2.typeElement = elementSmpl;
-        indexes = _soundfonts->getSoundfont(id.indexSf2)->getSamples().keys();
-        foreach (int i, indexes)
-        {
-            id2.indexElt = i;
-            this->remove(id2, true, storeAction, message);
-        }
+        QVector<Smpl *> samples = _soundfonts->getSoundfont(id.indexSf2)->getSamples().values();
+        for (int i = samples.count() - 1; i >= 0; i--)
+            this->remove(samples[i]->getId(), true, storeAction, message);
 
         // Finally delete sf2
         _soundfonts->deleteSoundfont(id.indexSf2);
@@ -858,19 +914,15 @@ int SoundfontManager::remove(EltID id, bool permanently, bool storeAction, int *
         // Linked sample?
         EltID id2(elementSmpl, id.indexSf2, 0, 0, 0);
         AttributeValue value;
-        foreach (int i, _soundfonts->getSoundfont(id.indexSf2)->getSamples().keys())
+        foreach (Smpl * smplTmp, _soundfonts->getSoundfont(id.indexSf2)->getSamples().values())
         {
-            Smpl * smplTmp = _soundfonts->getSoundfont(id.indexSf2)->getSample(i);
-            if (!smplTmp->isHidden())
+            if (!smplTmp->isHidden() && smplTmp->_wSampleLink == id.indexElt)
             {
-                if (smplTmp->_wSampleLink == id.indexElt)
-                {
-                    id2.indexElt = i;
-                    value.wValue = 0;
-                    this->set(id2, champ_wSampleLink, value);
-                    value.sfLinkValue = monoSample;
-                    this->set(id2, champ_sfSampleType, value);
-                }
+                id2 = smplTmp->getId();
+                value.wValue = 0;
+                this->set(id2, champ_wSampleLink, value);
+                value.sfLinkValue = monoSample;
+                this->set(id2, champ_sfSampleType, value);
             }
         }
 
@@ -900,22 +952,22 @@ int SoundfontManager::remove(EltID id, bool permanently, bool storeAction, int *
         }
 
         // Propagation aux samples liés
-        EltID id2(elementInstSmpl, id.indexSf2, id.indexElt, 0, 0);
-        QMap<int, Division*> divisions = _soundfonts->getSoundfont(id.indexSf2)->getInstrument(id.indexElt)->getDivisions();
-        foreach (int i, divisions.keys())
+        QVector<Division*> divisions = _soundfonts->getSoundfont(id.indexSf2)->getInstrument(id.indexElt)->getDivisions().values();
+        for (int i = divisions.count() - 1; i >= 0; i--)
         {
-            id2.indexElt2 = i;
-            if (permanently || !divisions[i]->isHidden())
-                this->remove(id2, permanently, storeAction, message);
+            Division * division = divisions[i];
+            if (permanently || !division->isHidden())
+                this->remove(division->getId(), permanently, storeAction, message);
         }
 
         // Propagation aux mods associés
-        id2.typeElement = elementInstMod;
-        QMap<int, Modulator*> mods = _soundfonts->getSoundfont(id.indexSf2)->getInstrument(id.indexElt)->getGlobalDivision()->getMods();
-        foreach (int i, mods.keys())
+        EltID id2(elementInstMod, id.indexSf2, id.indexElt, 0, 0);
+        QVector<Modulator*> mods = _soundfonts->getSoundfont(id.indexSf2)->getInstrument(id.indexElt)->getGlobalDivision()->getMods().values();
+        for (int i = mods.count() - 1; i >= 0; i--)
         {
-            id2.indexMod = i;
-            if (permanently || !mods[i]->isHidden())
+            Modulator * mod = mods[i];
+            id2.indexMod = mod->_id;
+            if (permanently || !mod->isHidden())
                 this->remove(id2, permanently, storeAction, message);
         }
 
@@ -930,22 +982,22 @@ int SoundfontManager::remove(EltID id, bool permanently, bool storeAction, int *
     }break;
     case elementPrst:{
         // Propagation aux instruments liés
-        EltID id2(elementPrstInst, id.indexSf2, id.indexElt, 0, 0);
-        QMap<int, Division*> divisions = _soundfonts->getSoundfont(id.indexSf2)->getPreset(id.indexElt)->getDivisions();
-        foreach (int i, divisions.keys())
+        QVector<Division*> divisions = _soundfonts->getSoundfont(id.indexSf2)->getPreset(id.indexElt)->getDivisions().values();
+        for (int i = divisions.count() - 1; i >= 0; i--)
         {
-            id2.indexElt2 = i;
-            if (permanently || !divisions[i]->isHidden())
-                this->remove(id2, permanently, storeAction, message);
+            Division * division = divisions[i];
+            if (permanently || !division->isHidden())
+                this->remove(division->getId(), permanently, storeAction, message);
         }
 
         // Propagation aux mods associés
-        id2.typeElement = elementPrstMod;
-        QMap<int, Modulator*> mods = _soundfonts->getSoundfont(id.indexSf2)->getPreset(id.indexElt)->getGlobalDivision()->getMods();
-        foreach (int i, mods.keys())
+        EltID id2(elementPrstMod, id.indexSf2, id.indexElt, 0, 0);
+        QVector<Modulator*> mods = _soundfonts->getSoundfont(id.indexSf2)->getPreset(id.indexElt)->getGlobalDivision()->getMods().values();
+        for (int i = mods.count() - 1; i >= 0; i--)
         {
-            id2.indexMod = i;
-            if (permanently || !mods[i]->isHidden())
+            Modulator * mod = mods[i];
+            id2.indexMod = mod->_id;
+            if (permanently || !mod->isHidden())
                 this->remove(id2, permanently, storeAction, message);
         }
 
@@ -959,15 +1011,14 @@ int SoundfontManager::remove(EltID id, bool permanently, bool storeAction, int *
             _soundfonts->getSoundfont(id.indexSf2)->getPreset(id.indexElt)->setHidden(true);
     }break;
     case elementInstSmpl:{
-        // suppression d'un sample lié à un instrument
-        EltID id2(elementInstSmplMod, id.indexSf2, id.indexElt, id.indexElt2, 0);
-
         // Propagation aux mods associés
-        QMap<int, Modulator*> mods = _soundfonts->getSoundfont(id.indexSf2)->getInstrument(id.indexElt)->getDivision(id.indexElt2)->getMods();
-        foreach (int i, mods.keys())
+        EltID id2(elementInstSmplMod, id.indexSf2, id.indexElt, id.indexElt2, 0);
+        QVector<Modulator*> mods = _soundfonts->getSoundfont(id.indexSf2)->getInstrument(id.indexElt)->getDivision(id.indexElt2)->getMods().values();
+        for (int i = mods.count() - 1; i >= 0; i--)
         {
-            id2.indexMod = i;
-            if (permanently || !mods[i]->isHidden())
+            Modulator * mod = mods[i];
+            id2.indexMod = mod->_id;
+            if (permanently || !mod->isHidden())
                 this->remove(id2, permanently, storeAction, message);
         }
 
@@ -983,11 +1034,12 @@ int SoundfontManager::remove(EltID id, bool permanently, bool storeAction, int *
     case elementPrstInst:{
         // Propagation aux mods associés
         EltID id2(elementPrstInstMod, id.indexSf2, id.indexElt, id.indexElt2, 0);
-        QMap<int, Modulator*> mods = _soundfonts->getSoundfont(id.indexSf2)->getPreset(id.indexElt)->getDivision(id.indexElt2)->getMods();
-        foreach (int i, mods.keys())
+        QVector<Modulator*> mods = _soundfonts->getSoundfont(id.indexSf2)->getPreset(id.indexElt)->getDivision(id.indexElt2)->getMods().values();
+        for (int i = mods.count() - 1; i >= 0; i--)
         {
-            id2.indexMod = i;
-            if (permanently || !mods[i]->isHidden())
+            Modulator * mod = mods[i];
+            id2.indexMod = mod->_id;
+            if (permanently || !mod->isHidden())
                 this->remove(id2, permanently, storeAction, message);
         }
 
@@ -1003,7 +1055,7 @@ int SoundfontManager::remove(EltID id, bool permanently, bool storeAction, int *
     case elementInstMod: case elementPrstMod: case elementInstSmplMod: case elementPrstInstMod:{
         // suppression d'un mod
         Division *bag = nullptr;
-        switch ((int)id.typeElement)
+        switch (id.typeElement)
         {
         case elementInstMod:
             // d'un instrument
@@ -1024,13 +1076,12 @@ int SoundfontManager::remove(EltID id, bool permanently, bool storeAction, int *
         }
 
         // If the destination of a modulator is the modulator to delete, remove the link
-        foreach (int indexMod, bag->getMods().keys())
+        foreach (Modulator * mod, bag->getMods().values())
         {
-            Modulator * mod = bag->getMod(indexMod);
             if ((int)mod->_sfModDestOper - 32768 == id.indexMod)
             {
                 EltID id2 = id;
-                id2.indexMod = indexMod;
+                id2.indexMod = mod->_id;
                 AttributeValue value;
                 value.dwValue = 0;
                 this->set(id2, champ_sfModDestOper, value);
@@ -1125,7 +1176,7 @@ int SoundfontManager::set(EltID id, AttributeType champ, AttributeValue value)
     int defaultValue = 0;
 
     // Type d'élément à modifier
-    switch ((int)id.typeElement)
+    switch (id.typeElement)
     {
     case elementSf2:{
         // Modification d'un SF2

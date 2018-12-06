@@ -27,12 +27,13 @@
 
 #include "treeitem.h"
 #include "basetypes.h"
+#include "indexedelementlist.h"
 class TreeItemRoot;
 
 class TreeItemFirstLevel: public TreeItem
 {
 public:
-    TreeItemFirstLevel(QString label, QMap<int, TreeItem *> * children, TreeItemRoot *parent, EltID id);
+    TreeItemFirstLevel(QString label, IndexedElementList<TreeItem *> * children, TreeItemRoot *parent, EltID id);
     virtual ~TreeItemFirstLevel() override;
 
     int childCount() const override;
@@ -44,7 +45,7 @@ public:
 private:
     QString _label;
     int _row;
-    QMap<int, TreeItem *> * _children;
+    IndexedElementList<TreeItem *> * _children;
 };
 
 #endif // TREEITEMFIRSTLEVEL_H
