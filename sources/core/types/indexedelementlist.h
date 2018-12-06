@@ -22,38 +22,72 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef SMPL_H
-#define SMPL_H
+#ifndef INDEXEDELEMENTLIST_H
+#define INDEXEDELEMENTLIST_H
 
-#include "basetypes.h"
-#include "sound.h"
-#include "treeitem.h"
-class Soundfont;
+#include <QVector>
 
-class Smpl: public TreeItem
+template <class T>
+class IndexedElementList
 {
 public:
-    Smpl(int row, TreeItem * parent, EltID id);
-    virtual ~Smpl() override {}
-    void decrementRow() { _row--; }
+    // Add an element and return the index
+    int add(T elt)
+    {
+        // Add the element in both vectors
+        _elementsByIndex.append(elt);
+        _elementsByPosition.append(elt);
 
-    void setName(QString name);
-    QString getName() { return _name; }
+        // Return the index
+        return _elementsByIndex.count() - 1;
+    }
 
-    Sound _sound;
-    quint16 _wSampleLink;
-    SFSampleLink _sfSampleType;
+    // Take an element at a specific index
+    T takeAtIndex(int index)
+    {
+        T elt = _elementsByIndex[index];
+        _elementsByIndex[index] = nullptr;
+        _elementsByPosition.removeOne(elt);
+        return elt;
+    }
 
-    // TreeItem implementation
-    int childCount() const override;
-    TreeItem * child(int row) override;
-    QString display() override;
-    int row() override { return _row; }
-    int indexOfId(int id) override;
+    // Get an element by index or position
+    T atIndex(int index) const
+    {
+        return _elementsByIndex[index];
+    }
+
+    T atPosition(int position) const
+    {
+        return _elementsByPosition[position];
+    }
+
+    // Get the number of elements
+    int positionCount() const
+    {
+        return _elementsByPosition.count();
+    }
+
+    // Get the number of indexes
+    int indexCount() const
+    {
+        return _elementsByIndex.count();
+    }
+
+    // Return all values for iterating over them
+    QVector<T> values() const { return _elementsByPosition; }
+
+    // Get the position corresponding to an index
+    int positionOfIndex(int index)
+    {
+        if (index < 0 || index >= _elementsByIndex.count())
+            return -1;
+        return _elementsByPosition.indexOf(_elementsByIndex[index]);
+    }
 
 private:
-    int _row;
-    QString _name;
+    QVector<T> _elementsByIndex;
+    QVector<T> _elementsByPosition;
 };
 
-#endif // SMPL_H
+#endif // INDEXEDELEMENTLIST_H

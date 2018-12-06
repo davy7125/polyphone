@@ -32,10 +32,8 @@
 #include "treesortfilterproxy.h"
 
 Soundfont::Soundfont(EltID id) :
-    _smplCounter(0),
-    _instCounter(0),
-    _prstCounter(0),
-    _id(id)
+    _id(id),
+    _smpl(IndexedElementList<Smpl *>())
 {
     // Prepare the root items and the model
     _rootItem = new TreeItemRoot(EltID(elementUnknown));
@@ -46,9 +44,9 @@ Soundfont::Soundfont(EltID id) :
 
     // Built the tree
     _generalTreeItem = new TreeItemFirstLevel(QObject::trUtf8("General"), nullptr, _rootItem, EltID(elementSf2, _id.indexSf2, -1, -1, -1));
-    _sampleTreeItem = new TreeItemFirstLevel(QObject::trUtf8("Samples"), (QMap<int, TreeItem*> *)&_smpl, _rootItem, EltID(elementRootSmpl, _id.indexSf2, -1, -1, -1));
-    _instrumentTreeItem = new TreeItemFirstLevel(QObject::trUtf8("Instruments"), (QMap<int, TreeItem*> *)&_inst, _rootItem, EltID(elementRootInst, _id.indexSf2, -1, -1, -1));
-    _presetTreeItem = new TreeItemFirstLevel(QObject::trUtf8("Presets"), (QMap<int, TreeItem*> *)&_prst, _rootItem, EltID(elementRootPrst, _id.indexSf2, -1, -1, -1));
+    _sampleTreeItem = new TreeItemFirstLevel(QObject::trUtf8("Samples"), (IndexedElementList<TreeItem *> *)&_smpl, _rootItem, EltID(elementRootSmpl, _id.indexSf2, -1, -1, -1));
+    _instrumentTreeItem = new TreeItemFirstLevel(QObject::trUtf8("Instruments"), (IndexedElementList<TreeItem *> *)&_inst, _rootItem, EltID(elementRootInst, _id.indexSf2, -1, -1, -1));
+    _presetTreeItem = new TreeItemFirstLevel(QObject::trUtf8("Presets"), (IndexedElementList<TreeItem *> *)&_prst, _rootItem, EltID(elementRootPrst, _id.indexSf2, -1, -1, -1));
 
     // Default attributes for a soundfont
     SfVersionTag sfVersionTmp;
@@ -82,29 +80,38 @@ Soundfont::~Soundfont()
     }
 
     // Delete all presets
-    QList<int> keys = _prst.keys();
-    foreach (int key, keys)
+    for (int i = _prst.indexCount() - 1; i >= 0; i--)
     {
-        _prst[key]->notifyDeletion(false);
-        delete _prst[key];
-        _prst.remove(key);
+        InstPrst * elt = _prst.atIndex(i);
+        if (elt != nullptr)
+        {
+            elt->notifyDeletion(false);
+            delete elt;
+            _prst.takeAtIndex(i);
+        }
     }
 
     // Delete all instruments
-    keys = _inst.keys();
-    foreach (int key, keys)
+    for (int i = _inst.indexCount() - 1; i >= 0; i--)
     {
-        _inst[key]->notifyDeletion(false);
-        delete _inst[key];
-        _inst.remove(key);
+        InstPrst * elt = _inst.atIndex(i);
+        if (elt != nullptr)
+        {
+            elt->notifyDeletion(false);
+            delete elt;
+            _inst.takeAtIndex(i);
+        }
     }
 
     // Delete all samples
-    keys = _smpl.keys();
-    foreach (int key, keys)
+    for (int i = _smpl.indexCount() - 1; i >= 0; i--)
     {
-        _smpl[key]->notifyDeletion(false);
-        delete _smpl.take(key);
+        Smpl * elt = _smpl.atIndex(i);
+        if (elt != nullptr)
+        {
+            elt->notifyDeletion(false);
+            delete _smpl.takeAtIndex(i);
+        }
     }
 
     // Delete headers
@@ -128,99 +135,133 @@ Soundfont::~Soundfont()
 
 int Soundfont::addSample()
 {
-    _smpl[_smplCounter] = new Smpl(this, _sampleTreeItem, EltID(elementSmpl, _id.indexSf2, _smplCounter, -1, -1));
-    _smpl[_smplCounter]->notifyCreated();
-    return _smplCounter++;
+    int index = _smpl.add(new Smpl(_smpl.positionCount(), _sampleTreeItem, EltID(elementSmpl, _id.indexSf2, _smpl.indexCount(), -1, -1)));
+    _smpl.atIndex(index)->notifyCreated();
+    return index;
 }
 
 Smpl * Soundfont::getSample(int index)
 {
-    if (_smpl.contains(index))
-        return _smpl[index];
+    if (index < _smpl.indexCount())
+        return _smpl.atIndex(index);
     return nullptr;
 }
 
 bool Soundfont::deleteSample(int index)
 {
-    if (_smpl.contains(index))
+    // Check that the index is valid
+    if (index >= _smpl.indexCount())
+        return false;
+
+    Smpl * smpl = _smpl.atIndex(index);
+    if (smpl != nullptr)
     {
-        _smpl[index]->notifyDeletion();
-        delete _smpl.take(index);
+        // Delete the sample
+        smpl->notifyDeletion();
+        delete _smpl.takeAtIndex(index);
+
+        // Update the row number of the following samples
+        for (int i = index + 1; i < _smpl.indexCount(); i++)
+        {
+            Smpl * elt = _smpl.atIndex(index);
+            if (elt != nullptr)
+                elt->decrementRow();
+        }
+
         return true;
     }
-    return false;
-}
 
-int Soundfont::indexOfSample(Smpl * smpl)
-{
-    return _smpl.values().indexOf(smpl);
+    return false;
 }
 
 int Soundfont::addInstrument()
 {
-    _inst[_instCounter] = new InstPrst(this, _instrumentTreeItem, EltID(elementInst, _id.indexSf2, _instCounter, -1, -1));
-    _inst[_instCounter]->notifyCreated();
-    return _instCounter++;
+    int index = _inst.add(new InstPrst(this, _inst.positionCount(), _instrumentTreeItem,
+                                       EltID(elementInst, _id.indexSf2, _inst.indexCount(), -1, -1)));
+    _inst.atIndex(index)->notifyCreated();
+    return index;
 }
 
 InstPrst * Soundfont::getInstrument(int index)
 {
-    if (_inst.contains(index))
-        return _inst[index];
+    if (index < _inst.indexCount())
+        return _inst.atIndex(index);
     return nullptr;
 }
 
 bool Soundfont::deleteInstrument(int index)
 {
-    if (_inst.contains(index))
+    // Check that the index is valid
+    if (index >= _inst.indexCount())
+        return false;
+
+    InstPrst * inst = _inst.atIndex(index);
+    if (inst != nullptr)
     {
-        _inst[index]->notifyDeletion();
-        delete _inst.take(index);
+        // Delete the instrument
+        inst->notifyDeletion();
+        delete _inst.takeAtIndex(index);
+
+        // Update the row number of the following samples
+        for (int i = index + 1; i < _inst.indexCount(); i++)
+        {
+            InstPrst * elt = _inst.atIndex(index);
+            if (elt != nullptr)
+                elt->decrementRow();
+        }
+
         return true;
     }
 
     return false;
 }
 
-int Soundfont::indexOfInstrument(InstPrst * inst)
-{
-    return _inst.values().indexOf(inst);
-}
-
 int Soundfont::addPreset()
 {
-    _prst[_prstCounter] = new InstPrst(this, _presetTreeItem, EltID(elementPrst, _id.indexSf2, _prstCounter, -1, -1));
-    _prst[_prstCounter]->notifyCreated();
+    int index = _prst.add(new InstPrst(this, _prst.positionCount(), _presetTreeItem,
+                                       EltID(elementPrst, _id.indexSf2, _prst.indexCount(), -1, -1)));
+    _prst.atIndex(index)->notifyCreated();
 
     // Extra fields for presets
-    _prst[_prstCounter]->setExtraField(champ_wPreset, 0);
-    _prst[_prstCounter]->setExtraField(champ_wBank, 0);
-    _prst[_prstCounter]->setExtraField(champ_dwLibrary, 0);
-    _prst[_prstCounter]->setExtraField(champ_dwGenre, 0);
-    _prst[_prstCounter]->setExtraField(champ_dwMorphology, 0);
+    _prst.atIndex(index)->setExtraField(champ_wPreset, 0);
+    _prst.atIndex(index)->setExtraField(champ_wBank, 0);
+    _prst.atIndex(index)->setExtraField(champ_dwLibrary, 0);
+    _prst.atIndex(index)->setExtraField(champ_dwGenre, 0);
+    _prst.atIndex(index)->setExtraField(champ_dwMorphology, 0);
 
-    return _prstCounter++;
+    return index;
 }
 
 InstPrst * Soundfont::getPreset(int index)
 {
-    if (_prst.contains(index))
-        return _prst[index];
+    if (index < _prst.indexCount())
+        return _prst.atIndex(index);
     return nullptr;
 }
 
 bool Soundfont::deletePreset(int index)
 {
-    if (_prst.contains(index))
+    // Check that the index is valid
+    if (index >= _prst.indexCount())
+        return false;
+
+    InstPrst * prst = _prst.atIndex(index);
+    if (prst != nullptr)
     {
-        _prst[index]->notifyDeletion();
-        delete _prst.take(index);
+        // Delete the preset
+        prst->notifyDeletion();
+        delete _prst.takeAtIndex(index);
+
+        // Update the row number of the following samples
+        for (int i = index + 1; i < _prst.indexCount(); i++)
+        {
+            InstPrst * elt = _prst.atIndex(index);
+            if (elt != nullptr)
+                elt->decrementRow();
+        }
+
         return true;
     }
-    return false;
-}
 
-int Soundfont::indexOfPreset(InstPrst * prst)
-{
-    return _prst.values().indexOf(prst);
+    return false;
 }

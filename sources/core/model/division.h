@@ -28,14 +28,16 @@
 #include "basetypes.h"
 #include <QMap>
 #include "treeitem.h"
+#include "indexedelementlist.h"
 class Modulator;
 class InstPrst;
+class Soundfont;
 
 class Division: public TreeItem
 {
 public:
-    Division(InstPrst * instPrst, TreeItem * parent, EltID id);
-    virtual ~Division();
+    Division(InstPrst * instPrst, Soundfont * soundfont, TreeItem * parent, EltID id);
+    virtual ~Division() override;
 
     // Operations on parameters
     bool isSet(AttributeType champ);
@@ -50,7 +52,7 @@ public:
     // Operations on modulators
     int addMod();
     Modulator * getMod(int index);
-    const QMap<int, Modulator *> & getMods() { return _modulators; }
+    const IndexedElementList<Modulator *> & getMods() { return _modulators; }
     bool deleteMod(int index);
 
     // TreeItem implementation
@@ -62,9 +64,9 @@ public:
 
 private:
     InstPrst * _instPrst;
-    QMap<int, Modulator *> _modulators;
+    Soundfont * _soundfont;
+    IndexedElementList<Modulator *> _modulators;
     QMap<AttributeType, AttributeValue> _parameters;
-    int _modCounter;
     bool _mute;
 };
 

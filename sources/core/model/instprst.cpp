@@ -25,21 +25,25 @@
 #include "instprst.h"
 #include "soundfont.h"
 
-InstPrst::InstPrst(Soundfont * soundfont, TreeItem * parent, EltID id) : TreeItem(id, parent),
+InstPrst::InstPrst(Soundfont * soundfont, int row, TreeItem * parent, EltID id) : TreeItem(id, parent),
     _soundfont(soundfont),
-    _globalDivision(new Division(NULL, NULL, EltID())),
-    _divisionCounter(0)
+    _globalDivision(new Division(nullptr, _soundfont, nullptr, EltID())),
+    _row(row)
 {
 }
 
 InstPrst::~InstPrst()
 {
-    QList<int> keys = _divisions.keys();
-    foreach (int key, keys)
+    for (int i = _divisions.indexCount() - 1; i >= 0; i--)
     {
-        _divisions[key]->notifyDeletion(false);
-        delete _divisions.take(key);
+        Division * elt = _divisions.atIndex(i);
+        if (elt != nullptr)
+        {
+            elt->notifyDeletion(false);
+            delete _divisions.takeAtIndex(i);
+        }
     }
+
     delete _globalDivision;
 }
 
@@ -47,44 +51,49 @@ int InstPrst::addDivision()
 {
     EltID childId = this->getId();
     childId.typeElement = (this->getId().typeElement == elementPrst ? elementPrstInst : elementInstSmpl);
-    childId.indexElt2 = _divisionCounter;
+    childId.indexElt2 = _divisions.indexCount();
 
-    _divisions[_divisionCounter] = new Division(this, this, childId);
-    _divisions[_divisionCounter]->notifyCreated();
-    return _divisionCounter++;
+    int index = _divisions.add(new Division(this, _soundfont, this, childId));
+    _divisions.atIndex(index)->notifyCreated();
+    return index;
 }
 
 Division * InstPrst::getDivision(int index)
 {
-    if (_divisions.contains(index))
-        return _divisions[index];
+    if (index < _divisions.indexCount())
+        return _divisions.atIndex(index);
     return nullptr;
 }
 
 bool InstPrst::deleteDivision(int index)
 {
-    if (_divisions.contains(index))
+    if (index < _divisions.indexCount())
     {
-        _divisions[index]->notifyDeletion();
-        delete _divisions.take(index);
-        return true;
+        Division * elt = _divisions.atIndex(index);
+        if (elt != nullptr)
+        {
+            elt->notifyDeletion();
+            delete _divisions.takeAtIndex(index);
+            return true;
+        }
     }
+
     return false;
 }
 
 int InstPrst::indexOfId(int id)
 {
-    return _divisions.keys().indexOf(id);
+    return _divisions.positionOfIndex(id);
 }
 
 int InstPrst::childCount() const
 {
-    return _divisions.count();
+    return _divisions.positionCount();
 }
 
 TreeItem * InstPrst::child(int row)
 {
-    return *std::next(_divisions.begin(), row);
+    return _divisions.atPosition(row);
 }
 
 QString InstPrst::display()
@@ -94,14 +103,6 @@ QString InstPrst::display()
         display = QString("%1:%2 ").arg(_extraFields[champ_wBank], 3, 10, QChar('0')).arg(_extraFields[champ_wPreset], 3, 10, QChar('0'));
     display += (_name.isEmpty() ? "..." : _name);
     return display;
-}
-
-int InstPrst::row()
-{
-    // Preset?
-    if (this->getId().typeElement == elementPrst)
-        return _soundfont->indexOfPreset(this);
-    return _soundfont->indexOfInstrument(this);
 }
 
 void InstPrst::setName(QString name)

@@ -26,7 +26,7 @@
 #include "treeitemroot.h"
 #include <QMap>
 
-TreeItemFirstLevel::TreeItemFirstLevel(QString label, QMap<int, TreeItem *> *children, TreeItemRoot *parent, EltID id) : TreeItem(id, parent),
+TreeItemFirstLevel::TreeItemFirstLevel(QString label, IndexedElementList<TreeItem *> *children, TreeItemRoot *parent, EltID id) : TreeItem(id, parent),
     _label(label),
     _children(children)
 {
@@ -42,13 +42,13 @@ int TreeItemFirstLevel::childCount() const
 {
     if (_children == nullptr)
         return 0;
-    return _children->count();
+    return _children->positionCount();
 }
 
 TreeItem * TreeItemFirstLevel::child(int row)
 {
-    if (_children == nullptr || row < _children->count())
-        return *std::next(_children->begin(), row);
+    if (_children == nullptr || row < _children->positionCount())
+        return _children->atPosition(row);
     return nullptr;
 }
 
@@ -66,5 +66,5 @@ int TreeItemFirstLevel::indexOfId(int id)
 {
     if (_children == nullptr)
         return -1;
-    return _children->keys().indexOf(id);
+    return _children->positionOfIndex(id);
 }

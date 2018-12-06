@@ -25,8 +25,8 @@
 #include "smpl.h"
 #include "soundfont.h"
 
-Smpl::Smpl(Soundfont * soundfont, TreeItem *parent, EltID id) : TreeItem(id, parent),
-    _soundfont(soundfont)
+Smpl::Smpl(int row, TreeItem *parent, EltID id) : TreeItem(id, parent),
+    _row(row)
 {
 
 }
@@ -39,17 +39,12 @@ int Smpl::childCount() const
 TreeItem * Smpl::child(int row)
 {
     Q_UNUSED(row)
-    return NULL;
+    return nullptr;
 }
 
 QString Smpl::display()
 {
     return _name.isEmpty() ? "..." : _name;
-}
-
-int Smpl::row()
-{
-    return _soundfont->indexOfSample(this);
 }
 
 void Smpl::setName(QString name)
