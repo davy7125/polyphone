@@ -292,7 +292,7 @@ bool sortByScore(SoundfontInformation * si1, SoundfontInformation * si2)
 
 bool sortByTitle(SoundfontInformation * si1, SoundfontInformation * si2)
 {
-    return Utils::naturalOrder(si1->getTitle(), si2->getTitle()) < 0;
+    return Utils::naturalOrder(si1->getTitle().toLower(), si2->getTitle().toLower()) < 0;
 }
 
 void SoundfontBrowser::updateList2()

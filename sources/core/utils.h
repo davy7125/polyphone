@@ -35,8 +35,8 @@ public:
     /// Return the natural comparison between two strings
     /// -1 if a should be before b, 0 if equals, 1 is a should be after b
     /// This is case insensitive
-    static int naturalOrder(const QString &a, const QString &b);
-    static int sortDivisions(EltID id1, EltID id2);
+    static int naturalOrder(QString a, QString b);
+    static int sortDivisions(EltID id1, EltID id2, int sortType);
 
     /// Remove all accents
     /// Can be useful for sorting strings

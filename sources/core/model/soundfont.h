@@ -83,6 +83,7 @@ public:
     int _numEdition;  // numéro de l'édition sauvegardée
     quint16 _wBpsInit;   // résolution sample à l'ouverture du fichier (16, 24 ou 0 si nouveau)
     quint16 _wBpsSave;   // résolution souhaitée lors d'une sauvegarde (16 ou 24)
+    QString _nameSort; // _INAM lowercase, no accent
 
 private:
     EltID _id;

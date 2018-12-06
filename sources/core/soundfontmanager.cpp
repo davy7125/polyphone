@@ -32,6 +32,7 @@
 #include "modulator.h"
 #include "action.h"
 #include "indexedelementlist.h"
+#include "utils.h"
 
 SoundfontManager * SoundfontManager::s_instance = nullptr;
 
@@ -354,6 +355,8 @@ QString SoundfontManager::getQstr(EltID id, AttributeType champ)
         {
         case champ_name:
             ret = tmp->_INAM; break;
+        case champ_nameSort:
+            ret = tmp->_nameSort; break;
         case champ_ISNG:
             ret = tmp->_ISNG; break;
         case champ_IROM:
@@ -385,6 +388,8 @@ QString SoundfontManager::getQstr(EltID id, AttributeType champ)
         {
         case champ_name:
             ret = tmp->getName(); break;
+        case champ_nameSort:
+            ret = tmp->sortText(); break;
         case champ_filenameForData:
             ret = tmp->_sound.getFileName(); break;
         default:
@@ -398,6 +403,8 @@ QString SoundfontManager::getQstr(EltID id, AttributeType champ)
         {
         case champ_name:
             ret = tmp->getName(); break;
+        case champ_nameSort:
+            ret = tmp->sortText(); break;
         default:
             break;
         }
@@ -409,6 +416,8 @@ QString SoundfontManager::getQstr(EltID id, AttributeType champ)
         {
         case champ_name:
             ret = tmp->getName(); break;
+        case champ_nameSort:
+            ret = tmp->sortText(); break;
         default:
             break;
         }
@@ -1073,6 +1082,8 @@ int SoundfontManager::remove(EltID id, bool permanently, bool storeAction, int *
             // d'un instrument lié à un prst
             bag = _soundfonts->getSoundfont(id.indexSf2)->getPreset(id.indexElt)->getDivision(id.indexElt2);
             break;
+        default:
+            break;
         }
 
         // If the destination of a modulator is the modulator to delete, remove the link
@@ -1341,6 +1352,8 @@ int SoundfontManager::set(EltID id, AttributeType champ, AttributeValue value)
             break;
         }
     }break;
+    default:
+        break;
     }
 
     if (storeAction)
@@ -1381,6 +1394,7 @@ int SoundfontManager::set(EltID id, AttributeType champ, QString qStr)
             qOldStr = tmp->_INAM;
             qStr = qStr.left(256);
             tmp->_INAM = qStr;
+            tmp->_nameSort = Utils::removeAccents(tmp->_INAM).toLower();
             break;
         case champ_ISNG:
             qOldStr = tmp->_ISNG;
