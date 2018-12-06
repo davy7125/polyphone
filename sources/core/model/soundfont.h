@@ -28,6 +28,7 @@
 #include "basetypes.h"
 #include <QList>
 #include <QMap>
+#include "indexedelementlist.h"
 class Smpl;
 class InstPrst;
 class Soundfonts;
@@ -44,23 +45,20 @@ public:
     // Add, get or delete a sample
     int addSample();
     Smpl * getSample(int index);
-    const QMap<int, Smpl *> & getSamples() { return _smpl; }
+    const IndexedElementList<Smpl *> getSamples() { return _smpl; }
     bool deleteSample(int index);
-    int indexOfSample(Smpl * smpl);
 
     // Add, get or delete an instrument
     int addInstrument();
     InstPrst *getInstrument(int index);
-    const QMap<int, InstPrst *> & getInstruments() { return _inst; }
+    const IndexedElementList<InstPrst *> & getInstruments() { return _inst; }
     bool deleteInstrument(int index);
-    int indexOfInstrument(InstPrst * inst);
 
     // Add, get or delete a preset
     int addPreset();
     InstPrst * getPreset(int index);
-    const QMap<int, InstPrst *> & getPresets() { return _prst; }
+    const IndexedElementList<InstPrst *> & getPresets() { return _prst; }
     bool deletePreset(int index);
-    int indexOfPreset(InstPrst * prst);
 
     // Tree model associated to the soundfont
     QAbstractItemModel * getModel() { return _model; }
@@ -82,16 +80,15 @@ public:
     QString _fileNameForData; // sf2 file (_fileNameInitial or extraction of the initial file). The sounds are read from this file
 
     // Other
-    double _numEdition;  // numéro de l'édition sauvegardée
+    int _numEdition;  // numéro de l'édition sauvegardée
     quint16 _wBpsInit;   // résolution sample à l'ouverture du fichier (16, 24 ou 0 si nouveau)
     quint16 _wBpsSave;   // résolution souhaitée lors d'une sauvegarde (16 ou 24)
 
 private:
-    int _smplCounter, _instCounter, _prstCounter;
     EltID _id;
-    QMap<int, Smpl *> _smpl;
-    QMap<int, InstPrst *> _inst;
-    QMap<int, InstPrst *> _prst;
+    IndexedElementList<Smpl *> _smpl;
+    IndexedElementList<InstPrst *> _inst;
+    IndexedElementList<InstPrst *> _prst;
 
     QAbstractItemModel * _model;
     TreeItemRoot * _rootItem;

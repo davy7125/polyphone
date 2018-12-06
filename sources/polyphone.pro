@@ -676,7 +676,8 @@ HEADERS  += \
     repository/soundfont/soundfontcommentcell.h \
     repository/downloadmanager.h \
     repository/widgets/downloadprogressbutton.h \
-    repository/widgets/downloadprogresscell.h
+    repository/widgets/downloadprogresscell.h \
+    core/types/indexedelementlist.h
 
 FORMS    += \
     dialogs/dialog_list.ui \

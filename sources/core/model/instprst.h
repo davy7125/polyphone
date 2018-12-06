@@ -29,24 +29,24 @@
 #include "basetypes.h"
 #include "treeitem.h"
 #include "division.h"
+#include "indexedelementlist.h"
 class Soundfont;
 
 class InstPrst: public TreeItem // Common class for inst and prst
 {
 public:
-    InstPrst(Soundfont * soundfont, TreeItem * parent, EltID id);
-    virtual ~InstPrst();
+    InstPrst(Soundfont * soundfont, int row, TreeItem * parent, EltID id);
+    virtual ~InstPrst() override;
 
-    // Link to the soundfont
-    Soundfont * soundfont() { return _soundfont; }
+    void decrementRow() { _row--; }
 
     // Division operations
     int addDivision();
     Division * getGlobalDivision() { return _globalDivision; }
     Division * getDivision(int index);
-    const QMap<int, Division *> & getDivisions() { return _divisions; }
+    const IndexedElementList<Division *> & getDivisions() { return _divisions; }
     bool deleteDivision(int index);
-    int indexOfId(int id);
+    int indexOfId(int id) override;
 
     // Name, extra fields
     void setName(QString name);
@@ -58,14 +58,14 @@ public:
     int childCount() const override;
     TreeItem * child(int row) override;
     QString display() override;
-    int row() override;
+    int row() override { return _row; }
 
 private:
     Soundfont * _soundfont;
-    QMap<int, Division *> _divisions;
+    IndexedElementList<Division *> _divisions;
     Division * _globalDivision;
     bool _hidden;
-    int _divisionCounter;
+    int _row;
     QString _name;
     QMap<AttributeType, int> _extraFields; // Used for presets only
 };
