@@ -4726,12 +4726,12 @@ Dividindo o arquivo em vários sf2 pode resolver o problema.</translation>
         <translation type="obsolete">Nome</translation>
     </message>
     <message>
-        <location filename="editor/overview/pageoverview.cpp" line="82"/>
+        <location filename="editor/overview/pageoverview.cpp" line="83"/>
         <source>elements</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/overview/pageoverview.cpp" line="82"/>
+        <location filename="editor/overview/pageoverview.cpp" line="83"/>
         <source>element</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4811,25 +4811,25 @@ reprodução</translation>
         <translation>Reverberação</translation>
     </message>
     <message>
-        <location filename="editor/overview/pageoverviewinst.cpp" line="89"/>
-        <location filename="editor/overview/pageoverviewinst.cpp" line="255"/>
+        <location filename="editor/overview/pageoverviewinst.cpp" line="100"/>
+        <location filename="editor/overview/pageoverviewinst.cpp" line="266"/>
         <source>yes</source>
         <translation>sim</translation>
     </message>
     <message>
-        <location filename="editor/overview/pageoverviewinst.cpp" line="89"/>
-        <location filename="editor/overview/pageoverviewinst.cpp" line="253"/>
+        <location filename="editor/overview/pageoverviewinst.cpp" line="100"/>
+        <location filename="editor/overview/pageoverviewinst.cpp" line="264"/>
         <source>no</source>
         <translation>não</translation>
     </message>
     <message>
-        <location filename="editor/overview/pageoverviewinst.cpp" line="257"/>
+        <location filename="editor/overview/pageoverviewinst.cpp" line="268"/>
         <source>yes, to the end</source>
         <translatorcomment>speaking about a loop mode</translatorcomment>
         <translation>sim, até o fim</translation>
     </message>
     <message>
-        <location filename="editor/overview/pageoverviewinst.cpp" line="263"/>
+        <location filename="editor/overview/pageoverviewinst.cpp" line="274"/>
         <source>several modes</source>
         <comment>speaking about loop modes</comment>
         <translation>alguns modos</translation>
@@ -4970,59 +4970,59 @@ rate</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor/overview/pageoverviewsmpl.cpp" line="85"/>
+        <location filename="editor/overview/pageoverviewsmpl.cpp" line="94"/>
         <source>yes</source>
         <translation>sim</translation>
     </message>
     <message>
-        <location filename="editor/overview/pageoverviewsmpl.cpp" line="85"/>
+        <location filename="editor/overview/pageoverviewsmpl.cpp" line="94"/>
         <source>no</source>
         <translation>não</translation>
     </message>
     <message>
-        <location filename="editor/overview/pageoverviewsmpl.cpp" line="92"/>
         <location filename="editor/overview/pageoverviewsmpl.cpp" line="101"/>
+        <location filename="editor/overview/pageoverviewsmpl.cpp" line="110"/>
         <source>s</source>
         <comment>unit for seconds</comment>
         <translation>s</translation>
     </message>
     <message>
-        <location filename="editor/overview/pageoverviewsmpl.cpp" line="123"/>
+        <location filename="editor/overview/pageoverviewsmpl.cpp" line="133"/>
         <source>Invalid link</source>
         <translation>Relação
 inválida</translation>
     </message>
     <message>
-        <location filename="editor/overview/pageoverviewsmpl.cpp" line="126"/>
+        <location filename="editor/overview/pageoverviewsmpl.cpp" line="136"/>
         <source>Mono</source>
         <comment>opposite to stereo</comment>
         <translation>Mono</translation>
     </message>
     <message>
-        <location filename="editor/overview/pageoverviewsmpl.cpp" line="129"/>
+        <location filename="editor/overview/pageoverviewsmpl.cpp" line="139"/>
         <source>Stereo right</source>
         <oldsource>Stereo droit</oldsource>
         <translation>Dir. estéreo</translation>
     </message>
     <message>
-        <location filename="editor/overview/pageoverviewsmpl.cpp" line="132"/>
+        <location filename="editor/overview/pageoverviewsmpl.cpp" line="142"/>
         <source>Stereo left</source>
         <oldsource>Stereo gauche</oldsource>
         <translation>Esq. estéreo</translation>
     </message>
     <message>
-        <location filename="editor/overview/pageoverviewsmpl.cpp" line="135"/>
+        <location filename="editor/overview/pageoverviewsmpl.cpp" line="145"/>
         <source>Stereo non defined</source>
         <oldsource>Stereo non défini</oldsource>
         <translation>Estéreo n. def</translation>
     </message>
     <message>
-        <location filename="editor/overview/pageoverviewsmpl.cpp" line="155"/>
+        <location filename="editor/overview/pageoverviewsmpl.cpp" line="165"/>
         <source>invalid</source>
         <translation>inválido</translation>
     </message>
     <message>
-        <location filename="editor/overview/pageoverviewsmpl.cpp" line="162"/>
+        <location filename="editor/overview/pageoverviewsmpl.cpp" line="172"/>
         <source>Hz</source>
         <translation>Hz</translation>
     </message>
@@ -6473,22 +6473,22 @@ inválida</translation>
         <translation>I&amp;gnorar tudo</translation>
     </message>
     <message>
-        <location filename="core/model/soundfont.cpp" line="48"/>
+        <location filename="core/model/soundfont.cpp" line="46"/>
         <source>General</source>
         <translation>Geral</translation>
     </message>
     <message>
-        <location filename="core/model/soundfont.cpp" line="49"/>
+        <location filename="core/model/soundfont.cpp" line="47"/>
         <source>Samples</source>
         <translation>Amostras</translation>
     </message>
     <message>
-        <location filename="core/model/soundfont.cpp" line="50"/>
+        <location filename="core/model/soundfont.cpp" line="48"/>
         <source>Instruments</source>
         <translation>Instrumentos</translation>
     </message>
     <message>
-        <location filename="core/model/soundfont.cpp" line="51"/>
+        <location filename="core/model/soundfont.cpp" line="49"/>
         <source>Presets</source>
         <translation>Predefinições</translation>
     </message>
@@ -9044,14 +9044,6 @@ download content</source>
         <translation type="unfinished">&amp;Renomear...</translation>
     </message>
     <message>
-        <location filename="editor/tree/treeviewmenu.cpp" line="84"/>
-        <location filename="editor/tree/treeviewmenu.cpp" line="141"/>
-        <location filename="editor/tree/treeviewmenu.cpp" line="145"/>
-        <source>Re&amp;name...</source>
-        <oldsource>Bulk &amp;rename...</oldsource>
-        <translation type="unfinished">&amp;Renomeação em massa...</translation>
-    </message>
-    <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="187"/>
         <location filename="editor/tree/treeviewmenu.cpp" line="190"/>
         <source>Warning</source>
@@ -9172,7 +9164,7 @@ download content</source>
         <translation>&amp;Não salvar</translation>
     </message>
     <message>
-        <location filename="mainwindow/windowmanager.cpp" line="310"/>
+        <location filename="mainwindow/windowmanager.cpp" line="315"/>
         <source>User area</source>
         <translation type="unfinished"></translation>
     </message>

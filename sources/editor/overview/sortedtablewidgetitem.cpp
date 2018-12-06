@@ -22,38 +22,15 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef PAGEOVERVIEWINST_H
-#define PAGEOVERVIEWINST_H
+#include "sortedtablewidgetitem.h"
+#include "utils.h"
 
-#include "pageoverview.h"
-
-class PageOverviewInst : public PageOverview
+SortedTableWidgetItem::SortedTableWidgetItem(QString text, QString order) : QTableWidgetItem(text)
 {
-    Q_OBJECT
+    this->setData(Qt::UserRole, Utils::removeAccents(order).toLower());
+}
 
-public:
-    PageOverviewInst(QWidget * parent = nullptr);
-
-protected:
-    QString getTitle();
-    QStringList getHorizontalHeader();
-    void prepare(EltID id);
-    void getInformation(EltID id, QStringList &info, QStringList &order);
-
-private:
-    QString isUsed(EltID id);
-    QString getSampleNumber(EltID id);
-    QString getParameterNumber(EltID id);
-    QString getModulatorNumber(EltID id);
-    QString getKeyRange(EltID id);
-    QString getVelocityRange(EltID id);
-    QString getAttenuation(EltID id);
-    QString getLoop(EltID id);
-    QString getChorus(EltID id);
-    QString getReverb(EltID id);
-
-    QList<int> _usedInst;
-    bool _orderMode;
-};
-
-#endif // PAGEOVERVIEWINST_H
+bool SortedTableWidgetItem::operator< (const QTableWidgetItem &other) const
+{
+    return Utils::naturalOrder(this->data(Qt::UserRole).toString(), other.data(Qt::UserRole).toString()) < 0;
+}

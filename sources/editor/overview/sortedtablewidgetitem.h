@@ -22,38 +22,16 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef PAGEOVERVIEWINST_H
-#define PAGEOVERVIEWINST_H
+#ifndef SORTEDTABLEWIDGETITEM_H
+#define SORTEDTABLEWIDGETITEM_H
 
-#include "pageoverview.h"
+#include <QTableWidgetItem>
 
-class PageOverviewInst : public PageOverview
+class SortedTableWidgetItem: public QTableWidgetItem
 {
-    Q_OBJECT
-
 public:
-    PageOverviewInst(QWidget * parent = nullptr);
-
-protected:
-    QString getTitle();
-    QStringList getHorizontalHeader();
-    void prepare(EltID id);
-    void getInformation(EltID id, QStringList &info, QStringList &order);
-
-private:
-    QString isUsed(EltID id);
-    QString getSampleNumber(EltID id);
-    QString getParameterNumber(EltID id);
-    QString getModulatorNumber(EltID id);
-    QString getKeyRange(EltID id);
-    QString getVelocityRange(EltID id);
-    QString getAttenuation(EltID id);
-    QString getLoop(EltID id);
-    QString getChorus(EltID id);
-    QString getReverb(EltID id);
-
-    QList<int> _usedInst;
-    bool _orderMode;
+    SortedTableWidgetItem(QString text, QString order);
+    bool operator< (const QTableWidgetItem &other) const;
 };
 
-#endif // PAGEOVERVIEWINST_H
+#endif // SORTEDTABLEWIDGETITEM_H

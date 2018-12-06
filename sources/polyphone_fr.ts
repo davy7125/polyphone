@@ -799,32 +799,32 @@
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="34"/>
         <source>Middle C → C3, then C♯3</source>
-        <translation>Do central → C3, puis C♯3</translation>
+        <translation>Do central → Do3, puis Do♯3</translation>
     </message>
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="39"/>
         <source>Middle C → C3, then D♭3</source>
-        <translation>Do central → C3, puis D♭3</translation>
+        <translation>Do central → Do3, puis Ré♭3</translation>
     </message>
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="44"/>
         <source>Middle C → C4, then C♯4</source>
-        <translation>Do central → C4, puis C♯4</translation>
+        <translation>Do central → Do4, puis Do♯4</translation>
     </message>
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="49"/>
         <source>Middle C → C4, then D♭4</source>
-        <translation>Do central → C4, puis D♭4</translation>
+        <translation>Do central → Do4, puis Ré♭4</translation>
     </message>
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="54"/>
         <source>Middle C → C5, then C♯5</source>
-        <translation>Do central → C5, puis C♯5</translation>
+        <translation>Do central → Do5, puis Do♯5</translation>
     </message>
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="59"/>
         <source>Middle C → C5, then D♭5</source>
-        <translation>Do central → C5, puis D♭5</translation>
+        <translation>Do central → Do5, puis Ré♭5</translation>
     </message>
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="87"/>
@@ -2439,12 +2439,12 @@ en ligne</translation>
 <context>
     <name>PageOverview</name>
     <message>
-        <location filename="editor/overview/pageoverview.cpp" line="82"/>
+        <location filename="editor/overview/pageoverview.cpp" line="83"/>
         <source>elements</source>
         <translation>éléments</translation>
     </message>
     <message>
-        <location filename="editor/overview/pageoverview.cpp" line="82"/>
+        <location filename="editor/overview/pageoverview.cpp" line="83"/>
         <source>element</source>
         <translation>élément</translation>
     </message>
@@ -2513,25 +2513,25 @@ en boucle</translation>
         <translation>Réverbération</translation>
     </message>
     <message>
-        <location filename="editor/overview/pageoverviewinst.cpp" line="89"/>
-        <location filename="editor/overview/pageoverviewinst.cpp" line="255"/>
+        <location filename="editor/overview/pageoverviewinst.cpp" line="100"/>
+        <location filename="editor/overview/pageoverviewinst.cpp" line="266"/>
         <source>yes</source>
         <translation>oui</translation>
     </message>
     <message>
-        <location filename="editor/overview/pageoverviewinst.cpp" line="89"/>
-        <location filename="editor/overview/pageoverviewinst.cpp" line="253"/>
+        <location filename="editor/overview/pageoverviewinst.cpp" line="100"/>
+        <location filename="editor/overview/pageoverviewinst.cpp" line="264"/>
         <source>no</source>
         <translation>non</translation>
     </message>
     <message>
-        <location filename="editor/overview/pageoverviewinst.cpp" line="257"/>
+        <location filename="editor/overview/pageoverviewinst.cpp" line="268"/>
         <source>yes, to the end</source>
         <translatorcomment>speaking about a loop mode</translatorcomment>
         <translation>oui, jusqu&apos;à la fin</translation>
     </message>
     <message>
-        <location filename="editor/overview/pageoverviewinst.cpp" line="263"/>
+        <location filename="editor/overview/pageoverviewinst.cpp" line="274"/>
         <source>several modes</source>
         <comment>speaking about loop modes</comment>
         <translation>plusieurs modes</translation>
@@ -2656,55 +2656,55 @@ rate</source>
 d&apos;échantillonnage</translation>
     </message>
     <message>
-        <location filename="editor/overview/pageoverviewsmpl.cpp" line="85"/>
+        <location filename="editor/overview/pageoverviewsmpl.cpp" line="94"/>
         <source>yes</source>
         <translation>oui</translation>
     </message>
     <message>
-        <location filename="editor/overview/pageoverviewsmpl.cpp" line="85"/>
+        <location filename="editor/overview/pageoverviewsmpl.cpp" line="94"/>
         <source>no</source>
         <translation>non</translation>
     </message>
     <message>
-        <location filename="editor/overview/pageoverviewsmpl.cpp" line="92"/>
         <location filename="editor/overview/pageoverviewsmpl.cpp" line="101"/>
+        <location filename="editor/overview/pageoverviewsmpl.cpp" line="110"/>
         <source>s</source>
         <comment>unit for seconds</comment>
         <translation>s</translation>
     </message>
     <message>
-        <location filename="editor/overview/pageoverviewsmpl.cpp" line="123"/>
+        <location filename="editor/overview/pageoverviewsmpl.cpp" line="133"/>
         <source>Invalid link</source>
         <translation>Lien invalide</translation>
     </message>
     <message>
-        <location filename="editor/overview/pageoverviewsmpl.cpp" line="126"/>
+        <location filename="editor/overview/pageoverviewsmpl.cpp" line="136"/>
         <source>Mono</source>
         <comment>opposite to stereo</comment>
         <translation>Mono</translation>
     </message>
     <message>
-        <location filename="editor/overview/pageoverviewsmpl.cpp" line="129"/>
+        <location filename="editor/overview/pageoverviewsmpl.cpp" line="139"/>
         <source>Stereo right</source>
         <translation>Stéréo droit</translation>
     </message>
     <message>
-        <location filename="editor/overview/pageoverviewsmpl.cpp" line="132"/>
+        <location filename="editor/overview/pageoverviewsmpl.cpp" line="142"/>
         <source>Stereo left</source>
         <translation>Stéréo gauche</translation>
     </message>
     <message>
-        <location filename="editor/overview/pageoverviewsmpl.cpp" line="135"/>
+        <location filename="editor/overview/pageoverviewsmpl.cpp" line="145"/>
         <source>Stereo non defined</source>
         <translation>Stéréo non défini</translation>
     </message>
     <message>
-        <location filename="editor/overview/pageoverviewsmpl.cpp" line="155"/>
+        <location filename="editor/overview/pageoverviewsmpl.cpp" line="165"/>
         <source>invalid</source>
         <translation>non valide</translation>
     </message>
     <message>
-        <location filename="editor/overview/pageoverviewsmpl.cpp" line="162"/>
+        <location filename="editor/overview/pageoverviewsmpl.cpp" line="172"/>
         <source>Hz</source>
         <translation>Hz</translation>
     </message>
@@ -3266,22 +3266,22 @@ d&apos;échantillonnage</translation>
         <translation>I&amp;gnorer tout</translation>
     </message>
     <message>
-        <location filename="core/model/soundfont.cpp" line="48"/>
+        <location filename="core/model/soundfont.cpp" line="46"/>
         <source>General</source>
         <translation>Général</translation>
     </message>
     <message>
-        <location filename="core/model/soundfont.cpp" line="49"/>
+        <location filename="core/model/soundfont.cpp" line="47"/>
         <source>Samples</source>
         <translation>Échantillons</translation>
     </message>
     <message>
-        <location filename="core/model/soundfont.cpp" line="50"/>
+        <location filename="core/model/soundfont.cpp" line="48"/>
         <source>Instruments</source>
         <translation>Instruments</translation>
     </message>
     <message>
-        <location filename="core/model/soundfont.cpp" line="51"/>
+        <location filename="core/model/soundfont.cpp" line="49"/>
         <source>Presets</source>
         <translation>Presets</translation>
     </message>
@@ -5742,7 +5742,7 @@ de télécharger le contenu</translation>
         <translation>&amp;Fermer sans enregistrer</translation>
     </message>
     <message>
-        <location filename="mainwindow/windowmanager.cpp" line="310"/>
+        <location filename="mainwindow/windowmanager.cpp" line="315"/>
         <source>User area</source>
         <translation>Espace utilisateur</translation>
     </message>

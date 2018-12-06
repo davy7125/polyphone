@@ -37,8 +37,8 @@ class PageOverview : public Page
     Q_OBJECT
 
 public:
-    PageOverview(TypePage typePage, ElementType typeElement, QWidget *parent = 0);
-    ~PageOverview();
+    PageOverview(TypePage typePage, ElementType typeElement, QWidget *parent = nullptr);
+    ~PageOverview() override;
 
 protected:
     // Update the interface
@@ -50,9 +50,9 @@ protected:
     virtual QString getTitle() = 0;
     virtual QStringList getHorizontalHeader() = 0;
     virtual void prepare(EltID id) = 0;
-    virtual QStringList getInformation(EltID id) = 0;
+    virtual void getInformation(EltID id, QStringList &info, QStringList &order) = 0;
 
-    QString getRange(EltID id, AttributeType champ);
+    QString getRange(bool orderMode, EltID id, AttributeType champ);
 
 private slots:
     void on_table_cellDoubleClicked(int row, int column);

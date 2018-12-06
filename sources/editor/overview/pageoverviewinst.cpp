@@ -68,9 +68,9 @@ void PageOverviewInst::prepare(EltID id)
 }
 
 // Called for each instrument
-QStringList PageOverviewInst::getInformation(EltID id)
+void PageOverviewInst::getInformation(EltID id, QStringList &info, QStringList &order)
 {
-    QStringList info;
+    _orderMode = false;
     info << isUsed(id)
          << getSampleNumber(id)
          << getParameterNumber(id)
@@ -81,7 +81,18 @@ QStringList PageOverviewInst::getInformation(EltID id)
          << getLoop(id)
          << getChorus(id)
          << getReverb(id);
-    return info;
+
+    _orderMode = true;
+    order << isUsed(id)
+          << getSampleNumber(id)
+          << getParameterNumber(id)
+          << getModulatorNumber(id)
+          << getKeyRange(id)
+          << getVelocityRange(id)
+          << getAttenuation(id)
+          << getLoop(id)
+          << getChorus(id)
+          << getReverb(id);
 }
 
 QString PageOverviewInst::isUsed(EltID id)
@@ -169,12 +180,22 @@ QString PageOverviewInst::getKeyRange(EltID id)
         }
     }
 
+    QString str = "";
     if (min > max)
-        return "?";
-    else if (min == max)
-        return ContextManager::keyName()->getKeyName(min);
+        str = "?";
     else
-        return ContextManager::keyName()->getKeyName(min) + " - " + ContextManager::keyName()->getKeyName(max);
+    {
+        if (_orderMode)
+            str = QString("%1-%2").arg(min, 3, 10, QChar('0')).arg(max, 3, 10, QChar('0'));
+        else
+        {
+            if (min == max)
+                str = ContextManager::keyName()->getKeyName(min);
+            else
+                str = ContextManager::keyName()->getKeyName(min) + " - " + ContextManager::keyName()->getKeyName(max);
+        }
+    }
+    return str;
 }
 
 QString PageOverviewInst::getVelocityRange(EltID id)
@@ -209,17 +230,27 @@ QString PageOverviewInst::getVelocityRange(EltID id)
         }
     }
 
+    QString str = "";
     if (min > max)
-        return "?";
-    else if (min == max)
-        return QString::number(min);
+        str = "?";
     else
-        return QString::number(min) + " - " + QString::number(max);
+    {
+        if (_orderMode)
+            str = QString("%1-%2").arg(min, 3, 10, QChar('0')).arg(max, 3, 10, QChar('0'));
+        else
+        {
+            if (min == max)
+                str = QString::number(min);
+            else
+                str = QString::number(min) + " - " + QString::number(max);
+        }
+    }
+    return str;
 }
 
 QString PageOverviewInst::getAttenuation(EltID id)
 {
-    return getRange(id, champ_initialAttenuation);
+    return getRange(_orderMode, id, champ_initialAttenuation);
 }
 
 QString PageOverviewInst::getLoop(EltID id)
@@ -265,10 +296,10 @@ QString PageOverviewInst::getLoop(EltID id)
 
 QString PageOverviewInst::getChorus(EltID id)
 {
-    return getRange(id, champ_chorusEffectsSend);
+    return getRange(_orderMode, id, champ_chorusEffectsSend);
 }
 
 QString PageOverviewInst::getReverb(EltID id)
 {
-    return getRange(id, champ_reverbEffectsSend);
+    return getRange(_orderMode, id, champ_reverbEffectsSend);
 }

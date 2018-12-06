@@ -32,13 +32,13 @@ class PageOverviewPrst : public PageOverview
     Q_OBJECT
 
 public:
-    PageOverviewPrst(QWidget * parent = NULL);
+    PageOverviewPrst(QWidget * parent = nullptr);
 
 protected:
     QString getTitle();
     QStringList getHorizontalHeader();
     void prepare(EltID id) { Q_UNUSED(id) }
-    QStringList getInformation(EltID id);
+    void getInformation(EltID id, QStringList &info, QStringList &order);
 
 private:
     QString getBankAndPreset(EltID id);
@@ -50,6 +50,8 @@ private:
     QString getAttenuation(EltID id);
     QString getChorus(EltID id);
     QString getReverb(EltID id);
+
+    bool _orderMode;
 };
 
 #endif // PAGEOVERVIEWPRST_H

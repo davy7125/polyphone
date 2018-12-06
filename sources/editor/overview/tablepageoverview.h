@@ -31,7 +31,7 @@ class TablePageOverview : public QTableWidget
 {
     Q_OBJECT
 public:
-    explicit TablePageOverview(QWidget *parent = 0);
+    explicit TablePageOverview(QWidget *parent = nullptr);
 
     // Colors every other row in yellow
     void colorRows();
