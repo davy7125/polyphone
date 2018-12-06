@@ -407,7 +407,8 @@ SOURCES	+= main.cpp \
     repository/soundfont/soundfontcommentcell.cpp \
     repository/downloadmanager.cpp \
     repository/widgets/downloadprogressbutton.cpp \
-    repository/widgets/downloadprogresscell.cpp
+    repository/widgets/downloadprogresscell.cpp \
+    editor/overview/sortedtablewidgetitem.cpp
 
 HEADERS  += \
     core/sound.h \
@@ -677,7 +678,8 @@ HEADERS  += \
     repository/downloadmanager.h \
     repository/widgets/downloadprogressbutton.h \
     repository/widgets/downloadprogresscell.h \
-    core/types/indexedelementlist.h
+    core/types/indexedelementlist.h \
+    editor/overview/sortedtablewidgetitem.h
 
 FORMS    += \
     dialogs/dialog_list.ui \

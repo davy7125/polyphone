@@ -66,9 +66,9 @@ void PageOverviewSmpl::prepare(EltID id)
 }
 
 // Called for each smpl
-QStringList PageOverviewSmpl::getInformation(EltID id)
+void PageOverviewSmpl::getInformation(EltID id, QStringList &info, QStringList &order)
 {
-    QStringList info;
+    _orderMode = false;
     info << isUsed(id)
          << totalLength(id)
          << loopLength(id)
@@ -77,7 +77,16 @@ QStringList PageOverviewSmpl::getInformation(EltID id)
          << type(id)
          << link(id)
          << sampleRate(id);
-    return info;
+
+    _orderMode = true;
+    order << isUsed(id)
+          << totalLength(id)
+          << loopLength(id)
+          << rootKey(id)
+          << correction(id)
+          << type(id)
+          << link(id)
+          << sampleRate(id);
 }
 
 QString PageOverviewSmpl::isUsed(EltID id)
@@ -105,7 +114,8 @@ QString PageOverviewSmpl::loopLength(EltID id)
 
 QString PageOverviewSmpl::rootKey(EltID id)
 {
-    return ContextManager::keyName()->getKeyName(_sf2->get(id, champ_byOriginalPitch).bValue);
+    unsigned char pitch = _sf2->get(id, champ_byOriginalPitch).bValue;
+    return _orderMode ? QString::number(pitch) : ContextManager::keyName()->getKeyName(pitch);
 }
 
 QString PageOverviewSmpl::correction(EltID id)
@@ -158,6 +168,6 @@ QString PageOverviewSmpl::link(EltID id)
 
 QString PageOverviewSmpl::sampleRate(EltID id)
 {
-    int sampleRate = _sf2->get(id, champ_dwSampleRate).dwValue;
+    unsigned int sampleRate = _sf2->get(id, champ_dwSampleRate).dwValue;
     return QString::number(sampleRate) + " " + trUtf8("Hz");
 }

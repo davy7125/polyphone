@@ -32,13 +32,13 @@ class PageOverviewSmpl : public PageOverview
     Q_OBJECT
 
 public:
-    PageOverviewSmpl(QWidget * parent = NULL);
+    PageOverviewSmpl(QWidget * parent = nullptr);
 
 protected:
     QString getTitle();
     QStringList getHorizontalHeader();
     void prepare(EltID id);
-    QStringList getInformation(EltID id);
+    void getInformation(EltID id, QStringList &info, QStringList &order);
 
 private:
     QString isUsed(EltID id);
@@ -51,6 +51,7 @@ private:
     QString sampleRate(EltID id);
 
     QList<int> _usedSmpl;
+    bool _orderMode;
 };
 
 #endif // PAGEOVERVIEWSMPL_H

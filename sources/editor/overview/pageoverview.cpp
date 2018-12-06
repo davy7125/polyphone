@@ -25,6 +25,7 @@
 #include "pageoverview.h"
 #include "ui_pageoverview.h"
 #include "contextmanager.h"
+#include "sortedtablewidgetitem.h"
 
 PageOverview::PageOverview(TypePage typePage, ElementType typeElement, QWidget *parent) :
     Page(parent, typePage, typePage == PAGE_SMPL ? "page:ov_smpl" : (typePage == PAGE_INST ? "page:ov_inst" : "page:ov_prst")),
@@ -94,7 +95,7 @@ bool PageOverview::updateInterface(QString editingSource, IdList selectedIds, in
                 QString::number(id.indexSf2) + ":" +
                 QString::number(id.indexElt);
         ui->table->setItem(row, 0, new QTableWidgetItem(idStr));
-        ui->table->setItem(row, 1, new QTableWidgetItem(name));
+        ui->table->setItem(row, 1, new SortedTableWidgetItem(name, name));
         row++;
     }
 
@@ -109,11 +110,12 @@ bool PageOverview::updateInterface(QString editingSource, IdList selectedIds, in
 
 QString PageOverview::fillInformation(EltID id, int row)
 {
-    QStringList info = getInformation(id);
+    QStringList info, order;
+    getInformation(id, info, order);
 
     for (int i = 0; i < info.count(); i++)
     {
-        QTableWidgetItem * item = new QTableWidgetItem(info[i]);
+        SortedTableWidgetItem * item = new SortedTableWidgetItem(info[i], order[i]);
         item->setTextAlignment(Qt::AlignHCenter | Qt::AlignCenter);
         ui->table->setItem(row, i + 2, item);
     }
@@ -122,7 +124,7 @@ QString PageOverview::fillInformation(EltID id, int row)
     return _sf2->getQstr(id, champ_name);
 }
 
-QString PageOverview::getRange(EltID id, AttributeType champ)
+QString PageOverview::getRange(bool orderMode, EltID id, AttributeType champ)
 {
     // Global value
     int globalValue = 0;
@@ -149,12 +151,22 @@ QString PageOverview::getRange(EltID id, AttributeType champ)
             max = value;
     }
 
+    QString str;
     if (min == -1)
-        return "?";
-    else if (min == max)
-        return QString::number((double)min / 10, 'f', 1);
+        str = "?";
     else
-        return QString::number((double)min / 10, 'f', 1) + " - " + QString::number((double)max / 10, 'f', 1);
+    {
+        if (orderMode)
+            str = QString("%1-%2").arg(min, 8, 10, QChar('0')).arg(max, 8, 10, QChar('0'));
+        else
+        {
+            if (min == max)
+                str = QString::number((double)min / 10, 'f', 1);
+            else
+                str = QString::number((double)min / 10, 'f', 1) + " - " + QString::number((double)max / 10, 'f', 1);
+        }
+    }
+    return str;
 }
 
 void PageOverview::on_table_cellDoubleClicked(int row, int column)
