@@ -29,17 +29,13 @@
 #include "openssl/rsa.h"
 #include "openssl/pem.h"
 #include "openssl/engine.h"
-#include "contextmanager.h"
 #include "soundfontmanager.h"
 
 QString Utils::s_diacriticLetters;
 QStringList Utils::s_noDiacriticLetters;
 
-int Utils::naturalOrder(const QString &a, const QString &b)
+int Utils::naturalOrder(QString str1, QString str2)
 {
-    QString str1 = a.toLower();
-    QString str2 = b.toLower();
-
     while (!str1.isEmpty() && !str2.isEmpty())
     {
         // Find the number part
@@ -203,12 +199,12 @@ QString Utils::rsaDecrypt(QString input)
     return result;
 }
 
-int Utils::sortDivisions(EltID id1, EltID id2)
+int Utils::sortDivisions(EltID id1, EltID id2, int sortType)
 {
     int result = 0;
     SoundfontManager * sm = SoundfontManager::getInstance();
 
-    switch (ContextManager::configuration()->getValue(ConfManager::SECTION_DISPLAY, "division_sort", 0).toInt())
+    switch (sortType)
     {
     case 1:
         // Sort by velocity, by key, alphabetically
@@ -263,10 +259,8 @@ int Utils::compareName(SoundfontManager *sm, EltID idDiv1, EltID idDiv2)
 {
     AttributeType champId = (idDiv1.typeElement == elementInstSmpl ? champ_sampleID : champ_instrument);
     ElementType divisionType = (idDiv1.typeElement == elementInstSmpl ? elementSmpl : elementInst);
-    QString name1 = sm->getQstr(EltID(divisionType, idDiv1.indexSf2, sm->get(idDiv1, champId).wValue), champ_name);
-    QString name2 = sm->getQstr(EltID(divisionType, idDiv2.indexSf2, sm->get(idDiv2, champId).wValue), champ_name);
-    name1 = removeAccents(name1).toLower();
-    name2 = removeAccents(name2).toLower();
+    QString name1 = sm->getQstr(EltID(divisionType, idDiv1.indexSf2, sm->get(idDiv1, champId).wValue), champ_nameSort);
+    QString name2 = sm->getQstr(EltID(divisionType, idDiv2.indexSf2, sm->get(idDiv2, champId).wValue), champ_nameSort);
     if (name1 != name2)
         return naturalOrder(name1, name2);
     return 0;

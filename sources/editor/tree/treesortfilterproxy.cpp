@@ -33,7 +33,8 @@
 TreeSortFilterProxy::TreeSortFilterProxy(int indexSf2, TreeView *treeView, QAbstractItemModel * model) : QSortFilterProxyModel(treeView),
     _indexSf2(indexSf2),
     _treeView(treeView),
-    _sm(SoundfontManager::getInstance())
+    _sm(SoundfontManager::getInstance()),
+    _sortType(0)
 {
     //new QAbstractItemModelTester(model, QAbstractItemModelTester::FailureReportingMode::Warning, this);
 
@@ -73,7 +74,7 @@ bool TreeSortFilterProxy::lessThan(const QModelIndex &left, const QModelIndex &r
     case elementInstSmpl: case elementPrstInst:
     {
         EltID id2 = right.data(Qt::UserRole).value<EltID>();
-        result = (Utils::sortDivisions(id, id2) < 0);
+        result = (Utils::sortDivisions(id, id2, _sortType) < 0);
     }
         break;
     case elementPrst:
@@ -84,7 +85,7 @@ bool TreeSortFilterProxy::lessThan(const QModelIndex &left, const QModelIndex &r
     }
         break;
     default: // Inst, Smpl
-        result = lessThan(left.data(Qt::DisplayRole).toString(), right.data(Qt::DisplayRole).toString());
+        result = lessThan(left.data(Qt::UserRole + 2).toString(), right.data(Qt::UserRole + 2).toString());
         break;
     }
 
@@ -93,13 +94,13 @@ bool TreeSortFilterProxy::lessThan(const QModelIndex &left, const QModelIndex &r
 
 bool TreeSortFilterProxy::lessThan(QString left, QString right) const
 {
-    return Utils::naturalOrder(Utils::removeAccents(left).toLower(), Utils::removeAccents(right).toLower()) < 0;
+    return Utils::naturalOrder(left, right) < 0;
 }
 
 void TreeSortFilterProxy::filterChanged(QString filter)
 {
     // Find the matches to prepare the filter
-    filter = filter.toLower();
+    filter = Utils::removeAccents(filter).toLower();
     findMatches(_indexSf2, filter);
     _treeView->setBestMatch(_bestMatchSample, _bestMatchInstrument, _bestMatchPreset);
 
@@ -161,7 +162,7 @@ void TreeSortFilterProxy::findMatches(int idSf2, QString filter)
     foreach (int i, _sm->getSiblings(idSmpl))
     {
         idSmpl.indexElt = i;
-        QString name = _sm->getQstr(idSmpl, champ_name).toLower();
+        QString name = _sm->getQstr(idSmpl, champ_nameSort);
         if (name.contains(filter))
         {
             _matchingSamples << i;
@@ -178,7 +179,7 @@ void TreeSortFilterProxy::findMatches(int idSf2, QString filter)
     foreach (int i, _sm->getSiblings(idInst))
     {
         idInst.indexElt = i;
-        QString name = _sm->getQstr(idInst, champ_name).toLower();
+        QString name = _sm->getQstr(idInst, champ_nameSort);
         if (name.contains(filter))
         {
             _matchingInstruments << i;
@@ -198,7 +199,7 @@ void TreeSortFilterProxy::findMatches(int idSf2, QString filter)
         QString name = QString("%1:%2 %3")
                 .arg(_sm->get(idPrst, champ_wBank).wValue, 3, 10, QChar('0'))
                 .arg(_sm->get(idPrst, champ_wPreset).wValue, 3, 10, QChar('0'))
-                .arg(_sm->getQstr(idPrst, champ_name)).toLower();
+                .arg(_sm->getQstr(idPrst, champ_nameSort));
         if (name.contains(filter))
         {
             _matchingPresets << i;
@@ -236,6 +237,9 @@ bool TreeSortFilterProxy::isFiltered(EltID id)
 
 void TreeSortFilterProxy::divisionSortChanged()
 {
+    // Update the sort type
+    _sortType = ContextManager::configuration()->getValue(ConfManager::SECTION_DISPLAY, "division_sort", 0).toInt();
+
     // Refresh all divisions
     this->setDynamicSortFilter(true);
     this->setDynamicSortFilter(false);

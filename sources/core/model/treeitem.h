@@ -52,6 +52,7 @@ public:
 
     // Data associated to the item
     virtual QString display() = 0;
+    virtual QString sortText();
     EltID getId() { return _id; }
     void setHidden(bool isHidden);
     bool isHidden() { return _isHidden; }

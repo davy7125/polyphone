@@ -67,3 +67,8 @@ void TreeItem::setHidden(bool isHidden)
     if (_model)
         _model->visibilityChanged(_id);
 }
+
+QString TreeItem::sortText()
+{
+    return this->display();
+}
