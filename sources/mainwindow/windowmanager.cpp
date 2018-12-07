@@ -117,6 +117,15 @@ void WindowManager::openSoundfont(QString fileName)
     if (fileName.left(1).compare("/") == 0)
         fileName = fileName.remove(0, 1);
 #endif
+
+    // Extension supported?
+    if (!InputFactory::isSuffixSupported(QFileInfo(fileName).suffix()))
+    {
+        QMessageBox::warning(_tabWidget, trUtf8("Attention"),
+                             trUtf8("Cannot open file \"%1\"").arg(fileName));
+        return;
+    }
+
     ContextManager::recentFile()->addRecentFile(RecentFileManager::FILE_TYPE_SOUNDFONT, fileName);
 
     // Check if the file is not already open?

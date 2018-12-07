@@ -50,7 +50,10 @@ signals:
     void openFile(QString file);
 
 protected:
-    void paintEvent(QPaintEvent *event);
+    void paintEvent(QPaintEvent *event) override;
+
+    void dragEnterEvent(QDragEnterEvent * event) override;
+    void dropEvent(QDropEvent *event) override;
 
 private slots:
     void on_listWidget_itemDoubleClicked(QListWidgetItem *item);
