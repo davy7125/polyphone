@@ -626,6 +626,10 @@ void Sound::getInfoSound(bool tryFindRootkey)
         _info.wBpsFile = 0;
         _info.pitchDefined = false;
     }
+
+    // Add default start and end loop if not specified
+    if (_info.dwStartLoop == 0 && _info.dwEndLoop == 0)
+        _info.dwEndLoop = _info.dwLength - 1;
 }
 
 void Sound::getInfoSoundWav(bool tryFindRootkey)
@@ -744,6 +748,7 @@ void Sound::getInfoSoundWav(QByteArray& baData, bool tryFindRootkey)
         }
         pos += sectionSize;
     }
+
     if (!rootKeyOk && tryFindRootkey)
         determineRootKey();
 }
