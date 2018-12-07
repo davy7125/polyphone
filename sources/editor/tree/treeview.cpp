@@ -742,6 +742,10 @@ void TreeView::dropEvent(QDropEvent *event)
                 {
                     if (path.startsWith("file://"))
                         path = path.mid(7);
+#ifdef Q_OS_WIN
+                    if (path.startsWith("/"))
+                        path = path.mid(1);
+#endif
                     smplList << sl.load(path, _sf2Index, &replace);
                 }
             }
