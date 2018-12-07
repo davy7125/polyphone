@@ -4800,23 +4800,23 @@ ve smyčce</translation>
     </message>
     <message>
         <location filename="editor/overview/pageoverviewinst.cpp" line="100"/>
-        <location filename="editor/overview/pageoverviewinst.cpp" line="266"/>
+        <location filename="editor/overview/pageoverviewinst.cpp" line="286"/>
         <source>yes</source>
         <translation>Ano</translation>
     </message>
     <message>
         <location filename="editor/overview/pageoverviewinst.cpp" line="100"/>
-        <location filename="editor/overview/pageoverviewinst.cpp" line="264"/>
+        <location filename="editor/overview/pageoverviewinst.cpp" line="284"/>
         <source>no</source>
         <translation>Ne</translation>
     </message>
     <message>
-        <location filename="editor/overview/pageoverviewinst.cpp" line="268"/>
+        <location filename="editor/overview/pageoverviewinst.cpp" line="288"/>
         <source>yes, to the end</source>
         <translation>Ano, až po konec</translation>
     </message>
     <message>
-        <location filename="editor/overview/pageoverviewinst.cpp" line="274"/>
+        <location filename="editor/overview/pageoverviewinst.cpp" line="294"/>
         <source>several modes</source>
         <comment>speaking about loop modes</comment>
         <translation>Několik režimů</translation>
@@ -5397,70 +5397,70 @@ rate</source>
 <context>
     <name>PageTable</name>
     <message>
-        <location filename="editor/pagetable.cpp" line="106"/>
+        <location filename="editor/pagetable.cpp" line="107"/>
         <source>Global</source>
         <translation>Celkové</translation>
     </message>
     <message>
-        <location filename="editor/pagetable.cpp" line="504"/>
-        <location filename="editor/pagetable.cpp" line="526"/>
-        <location filename="editor/pagetable.cpp" line="1572"/>
-        <location filename="editor/pagetable.cpp" line="1638"/>
+        <location filename="editor/pagetable.cpp" line="505"/>
+        <location filename="editor/pagetable.cpp" line="527"/>
+        <location filename="editor/pagetable.cpp" line="1573"/>
+        <location filename="editor/pagetable.cpp" line="1639"/>
         <source>Modulator</source>
         <translation>Vlnový modulátor</translation>
     </message>
     <message>
-        <location filename="editor/pagetable.cpp" line="506"/>
+        <location filename="editor/pagetable.cpp" line="507"/>
         <source>Link (invalid)</source>
         <translation>Spojení (neplatné)</translation>
     </message>
     <message>
-        <location filename="editor/pagetable.cpp" line="558"/>
+        <location filename="editor/pagetable.cpp" line="559"/>
         <source>Copy / duplicate modulators</source>
         <translation>Kopírovat / zdvojit modulátory</translation>
     </message>
     <message>
-        <location filename="editor/pagetable.cpp" line="561"/>
+        <location filename="editor/pagetable.cpp" line="562"/>
         <source>Duplicate modulators toward...</source>
         <translation>Zdvojit modulátory k...</translation>
     </message>
     <message>
-        <location filename="editor/pagetable.cpp" line="562"/>
-        <location filename="editor/pagetable.cpp" line="573"/>
+        <location filename="editor/pagetable.cpp" line="563"/>
+        <location filename="editor/pagetable.cpp" line="574"/>
         <source>Copy all modulators</source>
         <translation>Kopírovat všechny modulátory</translation>
     </message>
     <message>
-        <location filename="editor/pagetable.cpp" line="566"/>
+        <location filename="editor/pagetable.cpp" line="567"/>
         <source>Duplicate the selection toward...</source>
         <translation>Zdvojit výběr k...</translation>
     </message>
     <message>
-        <location filename="editor/pagetable.cpp" line="567"/>
-        <location filename="editor/pagetable.cpp" line="575"/>
+        <location filename="editor/pagetable.cpp" line="568"/>
+        <location filename="editor/pagetable.cpp" line="576"/>
         <source>Copy the selected modulators</source>
         <translation>Kopírovat vybrané modulátory</translation>
     </message>
     <message>
-        <location filename="editor/pagetable.cpp" line="1887"/>
+        <location filename="editor/pagetable.cpp" line="1888"/>
         <source>Forbidden action:</source>
         <translation>Zakázaná činnost: </translation>
     </message>
     <message>
-        <location filename="editor/pagetable.cpp" line="1897"/>
-        <location filename="editor/pagetable.cpp" line="1906"/>
-        <location filename="editor/pagetable.cpp" line="2385"/>
-        <location filename="editor/pagetable.cpp" line="2394"/>
+        <location filename="editor/pagetable.cpp" line="1898"/>
+        <location filename="editor/pagetable.cpp" line="1907"/>
+        <location filename="editor/pagetable.cpp" line="2386"/>
+        <location filename="editor/pagetable.cpp" line="2395"/>
         <source>Warning</source>
         <translation>Pozor</translation>
     </message>
     <message>
-        <location filename="editor/pagetable.cpp" line="1898"/>
+        <location filename="editor/pagetable.cpp" line="1899"/>
         <source>offsets cannot be modulated in a preset.</source>
         <translation>posuny nelze v přednastavení měnit.</translation>
     </message>
     <message>
-        <location filename="editor/pagetable.cpp" line="1907"/>
+        <location filename="editor/pagetable.cpp" line="1908"/>
         <source>%1 cannot be modulated in a preset.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5469,17 +5469,17 @@ rate</source>
         <translation type="obsolete">&quot; nelze měnit v přednastavení.</translation>
     </message>
     <message>
-        <location filename="editor/pagetable.cpp" line="2386"/>
+        <location filename="editor/pagetable.cpp" line="2387"/>
         <source>An instrument comprising no samples is not compatible with this tool.</source>
         <translation>Jeden nástroj neobsahující žádný vzorek není slučitelný s tímto nástrojem.</translation>
     </message>
     <message>
-        <location filename="editor/pagetable.cpp" line="2387"/>
+        <location filename="editor/pagetable.cpp" line="2388"/>
         <source>A preset comprising no instruments is not compatible with this tool.</source>
         <translation>Jedno přednastavení neobsahující žádný nástroj není slučitelný s tímto nástrojem.</translation>
     </message>
     <message>
-        <location filename="editor/pagetable.cpp" line="2394"/>
+        <location filename="editor/pagetable.cpp" line="2395"/>
         <source>The keyrange of all divisions must be specified.</source>
         <translation>Je třeba stanovit rozsah not všech dělení.</translation>
     </message>
@@ -6388,12 +6388,12 @@ rate</source>
         <location filename="core/sound.cpp" line="234"/>
         <location filename="core/sound.cpp" line="309"/>
         <location filename="core/sound.cpp" line="318"/>
-        <location filename="core/sound.cpp" line="648"/>
-        <location filename="core/sound.cpp" line="663"/>
-        <location filename="core/sound.cpp" line="671"/>
-        <location filename="core/sound.cpp" line="677"/>
-        <location filename="core/sound.cpp" line="696"/>
-        <location filename="core/sound.cpp" line="742"/>
+        <location filename="core/sound.cpp" line="652"/>
+        <location filename="core/sound.cpp" line="667"/>
+        <location filename="core/sound.cpp" line="675"/>
+        <location filename="core/sound.cpp" line="681"/>
+        <location filename="core/sound.cpp" line="700"/>
+        <location filename="core/sound.cpp" line="746"/>
         <source>Warning</source>
         <translation>Pozor</translation>
     </message>
@@ -6475,7 +6475,7 @@ rate</source>
         <translation>Soubor není podporován.</translation>
     </message>
     <message>
-        <location filename="core/sound.cpp" line="649"/>
+        <location filename="core/sound.cpp" line="653"/>
         <source>Cannot open file &quot;%1&quot;</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6488,11 +6488,11 @@ rate</source>
         <translation type="obsolete">Nelze otevřít soubor</translation>
     </message>
     <message>
-        <location filename="core/sound.cpp" line="663"/>
-        <location filename="core/sound.cpp" line="671"/>
-        <location filename="core/sound.cpp" line="677"/>
-        <location filename="core/sound.cpp" line="696"/>
-        <location filename="core/sound.cpp" line="742"/>
+        <location filename="core/sound.cpp" line="667"/>
+        <location filename="core/sound.cpp" line="675"/>
+        <location filename="core/sound.cpp" line="681"/>
+        <location filename="core/sound.cpp" line="700"/>
+        <location filename="core/sound.cpp" line="746"/>
         <source>Corrupted file.</source>
         <translation>Soubor je poškozen.</translation>
     </message>
@@ -8972,7 +8972,7 @@ download content</source>
 <context>
     <name>TreeView</name>
     <message>
-        <location filename="editor/tree/treeview.cpp" line="835"/>
+        <location filename="editor/tree/treeview.cpp" line="839"/>
         <source>instrument</source>
         <translation type="unfinished"></translation>
     </message>
@@ -9098,47 +9098,53 @@ download content</source>
         <translation>Nastavení</translation>
     </message>
     <message>
-        <location filename="mainwindow/windowmanager.cpp" line="173"/>
+        <location filename="mainwindow/windowmanager.cpp" line="125"/>
+        <source>Cannot open file &quot;%1&quot;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow/windowmanager.cpp" line="182"/>
         <source>Online repository</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow/windowmanager.cpp" line="218"/>
+        <location filename="mainwindow/windowmanager.cpp" line="227"/>
         <source>Save before exiting?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow/windowmanager.cpp" line="221"/>
+        <location filename="mainwindow/windowmanager.cpp" line="230"/>
         <source>untitled</source>
         <translation>Bez názvu</translation>
     </message>
     <message>
-        <location filename="mainwindow/windowmanager.cpp" line="222"/>
+        <location filename="mainwindow/windowmanager.cpp" line="231"/>
         <source>File &quot;%1&quot; has been modified.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow/windowmanager.cpp" line="223"/>
+        <location filename="mainwindow/windowmanager.cpp" line="124"/>
+        <location filename="mainwindow/windowmanager.cpp" line="232"/>
         <source>Warning</source>
         <translation>Pozor</translation>
     </message>
     <message>
-        <location filename="mainwindow/windowmanager.cpp" line="225"/>
+        <location filename="mainwindow/windowmanager.cpp" line="234"/>
         <source>&amp;Save</source>
         <translation>&amp;Uložit</translation>
     </message>
     <message>
-        <location filename="mainwindow/windowmanager.cpp" line="226"/>
+        <location filename="mainwindow/windowmanager.cpp" line="235"/>
         <source>&amp;Cancel</source>
         <translation>&amp;Zrušit</translation>
     </message>
     <message>
-        <location filename="mainwindow/windowmanager.cpp" line="227"/>
+        <location filename="mainwindow/windowmanager.cpp" line="236"/>
         <source>Do&amp;n&apos;t save</source>
         <translation>&amp;Zavřít bez uložení</translation>
     </message>
     <message>
-        <location filename="mainwindow/windowmanager.cpp" line="315"/>
+        <location filename="mainwindow/windowmanager.cpp" line="324"/>
         <source>User area</source>
         <translation type="unfinished"></translation>
     </message>
