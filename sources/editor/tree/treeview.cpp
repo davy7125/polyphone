@@ -734,7 +734,7 @@ void TreeView::dropEvent(QDropEvent *event)
         IdList smplList;
         for (int i = 0; i < event->mimeData()->urls().count(); i++)
         {
-            QString path = QUrl::fromPercentEncoding(event->mimeData()->urls().at(i).toEncoded());
+            QString path = QUrl::fromPercentEncoding(event->mimeData()->urls().at(i).toEncoded()).replace('\\', '/');
             if (!path.isEmpty())
             {
                 QString extension = path.split(".").last().toLower();

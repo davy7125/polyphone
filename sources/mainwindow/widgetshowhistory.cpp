@@ -28,6 +28,7 @@
 #include "contextmanager.h"
 #include <QDateTime>
 #include <QPainter>
+#include <QMimeData>
 
 const int WidgetShowHistory::SIZE = 900;
 const int WidgetShowHistory::OFFSET_X = -120;
@@ -52,6 +53,9 @@ WidgetShowHistory::WidgetShowHistory(QWidget *parent) :
     QMatrix matrix;
     matrix = matrix.scale(-1, 1);
     _decoration = _decoration.transformed(matrix);
+
+    // Drag & drop
+    this->setAcceptDrops(true);
 }
 
 WidgetShowHistory::~WidgetShowHistory()
@@ -107,3 +111,29 @@ void WidgetShowHistory::paintEvent(QPaintEvent *event)
     QWidget::paintEvent(event);
 }
 
+void WidgetShowHistory::dragEnterEvent(QDragEnterEvent * event)
+{
+    event->acceptProposedAction();
+}
+
+void WidgetShowHistory::dropEvent(QDropEvent *event)
+{
+    if (event->mimeData()->hasUrls() && event->source() == nullptr)
+    {
+        for (int i = 0; i < event->mimeData()->urls().count(); i++)
+        {
+            QString path = QUrl::fromPercentEncoding(event->mimeData()->urls().at(i).toEncoded());
+            if (!path.isEmpty())
+            {
+                // Fix path
+                if (path.startsWith("file://"))
+                    path = path.mid(7);
+#ifdef Q_OS_WIN
+                if (path.startsWith("/"))
+                    path = path.mid(1);
+#endif
+                openFile(path);
+            }
+        }
+    }
+}
