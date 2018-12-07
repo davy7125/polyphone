@@ -121,7 +121,7 @@ void WindowManager::openSoundfont(QString fileName)
     // Extension supported?
     if (!InputFactory::isSuffixSupported(QFileInfo(fileName).suffix()))
     {
-        QMessageBox::warning(_tabWidget, trUtf8("Attention"),
+        QMessageBox::warning(_tabWidget, trUtf8("Warning"),
                              trUtf8("Cannot open file \"%1\"").arg(fileName));
         return;
     }
