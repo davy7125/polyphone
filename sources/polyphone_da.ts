@@ -784,7 +784,7 @@
     <message>
         <location filename="context/interface/configsectiongeneral.ui" line="95"/>
         <source>Audio backend</source>
-        <translation type="unfinished"></translation>
+        <translation>Lydudgang</translation>
     </message>
     <message>
         <location filename="context/interface/configsectiongeneral.ui" line="124"/>
@@ -810,22 +810,22 @@
     <message>
         <location filename="context/interface/configsectiongeneral.ui" line="191"/>
         <source>change linked sample</source>
-        <translation type="unfinished"></translation>
+        <translation>udskift tilknyttet sample</translation>
     </message>
     <message>
         <location filename="context/interface/configsectiongeneral.ui" line="204"/>
         <source>trim to loop</source>
-        <translation type="unfinished"></translation>
+        <translation>trim til loop</translation>
     </message>
     <message>
         <location filename="context/interface/configsectiongeneral.ui" line="217"/>
         <source>Stereo editing</source>
-        <translation type="unfinished"></translation>
+        <translation>Stereoeditering</translation>
     </message>
     <message>
         <location filename="context/interface/configsectiongeneral.ui" line="230"/>
         <source>remove blank at start</source>
-        <translation type="unfinished"></translation>
+        <translation>fjern stilhed i starten</translation>
     </message>
 </context>
 <context>
@@ -1001,7 +1001,7 @@
     <message>
         <location filename="context/interface/configsectionkeyboard.ui" line="187"/>
         <source>Default velocity</source>
-        <translation type="unfinished"></translation>
+        <translation>Valgt anslagsstyrke</translation>
     </message>
 </context>
 <context>
@@ -1229,32 +1229,32 @@ oversigt</translation>
     <message>
         <location filename="core/output/sfz/conversion_sfz.cpp" line="563"/>
         <source>Synth lead</source>
-        <translation type="unfinished"></translation>
+        <translation>Synth lead</translation>
     </message>
     <message>
         <location filename="core/output/sfz/conversion_sfz.cpp" line="565"/>
         <source>Synth pad</source>
-        <translation type="unfinished"></translation>
+        <translation>Synth pad</translation>
     </message>
     <message>
         <location filename="core/output/sfz/conversion_sfz.cpp" line="567"/>
         <source>Synth effects</source>
-        <translation type="unfinished"></translation>
+        <translation>Synth effekter</translation>
     </message>
     <message>
         <location filename="core/output/sfz/conversion_sfz.cpp" line="569"/>
         <source>Ethnic</source>
-        <translation type="unfinished"></translation>
+        <translation>Etnisk</translation>
     </message>
     <message>
         <location filename="core/output/sfz/conversion_sfz.cpp" line="571"/>
         <source>Percussive</source>
-        <translation type="unfinished"></translation>
+        <translation>Slagtøj</translation>
     </message>
     <message>
         <location filename="core/output/sfz/conversion_sfz.cpp" line="573"/>
         <source>Sound effects</source>
-        <translation type="unfinished"></translation>
+        <translation>Lydeffekter</translation>
     </message>
     <message>
         <location filename="core/output/sfz/conversion_sfz.cpp" line="575"/>
@@ -1315,9 +1315,88 @@ oversigt</translation>
         <translation>Giv et tilskud</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_about.cpp" line="50"/>
         <location filename="dialogs/dialog_about.cpp" line="61"/>
         <location filename="dialogs/dialog_about.cpp" line="70"/>
+        <source>Davy Triponney</source>
+        <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
+        <translation type="unfinished">Davy Triponney</translation>
+    </message>
+    <message>
+        <location filename="dialogs/dialog_about.cpp" line="63"/>
+        <location filename="dialogs/dialog_about.cpp" line="69"/>
+        <source>Andrea Celani</source>
+        <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
+        <translation type="unfinished">Andrea Celani</translation>
+    </message>
+    <message>
+        <location filename="dialogs/dialog_about.cpp" line="64"/>
+        <source>Kinwie</source>
+        <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
+        <translation type="unfinished">Kinwie</translation>
+    </message>
+    <message>
+        <location filename="dialogs/dialog_about.cpp" line="65"/>
+        <source>Michael Schyllberg</source>
+        <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
+        <translation type="unfinished">Michael Schyllberg</translation>
+    </message>
+    <message>
+        <location filename="dialogs/dialog_about.cpp" line="66"/>
+        <source>Paul Stratman</source>
+        <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
+        <translation type="unfinished">Paul Stratman</translation>
+    </message>
+    <message>
+        <location filename="dialogs/dialog_about.cpp" line="67"/>
+        <location filename="dialogs/dialog_about.cpp" line="77"/>
+        <source>Steve Clarke</source>
+        <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
+        <translation type="unfinished">Steve Clarke</translation>
+    </message>
+    <message utf8="true">
+        <location filename="dialogs/dialog_about.cpp" line="71"/>
+        <source>F.J. Martínez Murcia</source>
+        <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
+        <translation type="unfinished">F.J. Martínez Murcia</translation>
+    </message>
+    <message>
+        <location filename="dialogs/dialog_about.cpp" line="72"/>
+        <source>Georg Gergull</source>
+        <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
+        <translation type="unfinished">Georg Gergull</translation>
+    </message>
+    <message>
+        <location filename="dialogs/dialog_about.cpp" line="73"/>
+        <source>Jay Alexander Fleming</source>
+        <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
+        <translation type="unfinished">Jay Alexander Fleming</translation>
+    </message>
+    <message>
+        <location filename="dialogs/dialog_about.cpp" line="74"/>
+        <source>Joel Gomes</source>
+        <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
+        <translation type="unfinished">Joel Gomes</translation>
+    </message>
+    <message>
+        <location filename="dialogs/dialog_about.cpp" line="75"/>
+        <source>Magson</source>
+        <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
+        <translation type="unfinished">Magson</translation>
+    </message>
+    <message>
+        <location filename="dialogs/dialog_about.cpp" line="76"/>
+        <source>Pavel Fric</source>
+        <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
+        <translation type="unfinished">Pavel Fric</translation>
+    </message>
+    <message>
+        <location filename="dialogs/dialog_about.cpp" line="78"/>
+        <source>Chris Hansen</source>
+        <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="dialogs/dialog_about.cpp" line="50"/>
         <source>Davy Triponney</source>
         <translation>Davy Triponney</translation>
     </message>
@@ -1328,61 +1407,48 @@ oversigt</translation>
         <translation>https://www.polyphone-soundfonts.com/en</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_about.cpp" line="63"/>
-        <location filename="dialogs/dialog_about.cpp" line="69"/>
         <source>Andrea Celani</source>
-        <translation>Andrea Celani</translation>
+        <translation type="obsolete">Andrea Celani</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_about.cpp" line="64"/>
         <source>Kinwie</source>
-        <translation>Kinwie</translation>
+        <translation type="obsolete">Kinwie</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_about.cpp" line="65"/>
         <source>Michael Schyllberg</source>
-        <translation>Michael Schyllberg</translation>
+        <translation type="obsolete">Michael Schyllberg</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_about.cpp" line="66"/>
         <source>Paul Stratman</source>
-        <translation>Paul Stratman</translation>
+        <translation type="obsolete">Paul Stratman</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_about.cpp" line="67"/>
-        <location filename="dialogs/dialog_about.cpp" line="77"/>
         <source>Steve Clarke</source>
-        <translation>Steve Clarke</translation>
+        <translation type="obsolete">Steve Clarke</translation>
     </message>
-    <message utf8="true">
-        <location filename="dialogs/dialog_about.cpp" line="71"/>
+    <message>
         <source>F.J. Martínez Murcia</source>
-        <translation>F.J. Martínez Murcia</translation>
+        <translation type="obsolete">F.J. Martínez Murcia</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_about.cpp" line="72"/>
         <source>Georg Gergull</source>
-        <translation>Georg Gergull</translation>
+        <translation type="obsolete">Georg Gergull</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_about.cpp" line="73"/>
         <source>Jay Alexander Fleming</source>
-        <translation>Jay Alexander Fleming</translation>
+        <translation type="obsolete">Jay Alexander Fleming</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_about.cpp" line="74"/>
         <source>Joel Gomes</source>
-        <translation>Joel Gomes</translation>
+        <translation type="obsolete">Joel Gomes</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_about.cpp" line="75"/>
         <source>Magson</source>
-        <translation>Magson</translation>
+        <translation type="obsolete">Magson</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_about.cpp" line="76"/>
         <source>Pavel Fric</source>
-        <translation>Pavel Fric</translation>
+        <translation type="obsolete">Pavel Fric</translation>
     </message>
 </context>
 <context>
@@ -1489,7 +1555,7 @@ oversigt</translation>
     <message>
         <location filename="dialogs/dialogkeyboard.ui" line="14"/>
         <source>Virtual keyboard</source>
-        <translation type="unfinished">Virtuelt keyboard</translation>
+        <translation>Virtuelt keyboard</translation>
     </message>
     <message>
         <location filename="dialogs/dialogkeyboard.ui" line="82"/>
@@ -1504,17 +1570,17 @@ oversigt</translation>
     <message>
         <location filename="dialogs/dialogkeyboard.ui" line="92"/>
         <source>88 keys (piano)</source>
-        <translation type="unfinished"></translation>
+        <translation>88 tangenter (piano)</translation>
     </message>
     <message>
         <location filename="dialogs/dialogkeyboard.ui" line="97"/>
         <source>128 keys (full)</source>
-        <translation type="unfinished"></translation>
+        <translation>128 tangenter (piano)</translation>
     </message>
     <message>
         <location filename="dialogs/dialogkeyboard.ui" line="124"/>
         <source>Key</source>
-        <translation type="unfinished"></translation>
+        <translation>Toneart</translation>
     </message>
     <message>
         <location filename="dialogs/dialogkeyboard.ui" line="150"/>
@@ -1715,77 +1781,78 @@ oversigt</translation>
     <message>
         <location filename="core/duplicator.cpp" line="281"/>
         <source>Global parameters are already filled.</source>
-        <translation type="unfinished"></translation>
+        <translation>Globale parametre er allerede udfyldt.</translation>
     </message>
     <message>
         <location filename="core/duplicator.cpp" line="282"/>
         <source>The global division will not be copied.</source>
-        <translation type="unfinished"></translation>
+        <translation>Den globale opdeling vil ikke blive kopieret.</translation>
     </message>
     <message>
         <location filename="core/duplicator.cpp" line="284"/>
         <source>&amp;Ok</source>
-        <translation type="unfinished">&amp;Ok</translation>
+        <translation>&amp;Ok</translation>
     </message>
     <message>
         <location filename="core/duplicator.cpp" line="285"/>
         <source>Ok, &amp;disable this message</source>
-        <translation type="unfinished"></translation>
+        <translation>Ok, &amp;vis ikke denne meddelelse</translation>
     </message>
     <message>
         <location filename="core/duplicator.cpp" line="317"/>
         <source>The sample &quot;%1&quot; already exists.&lt;br /&gt;Replace?</source>
-        <translation type="unfinished"></translation>
+        <translation>Samlen &quot;%1&quot; findes allerede.&lt;br /&gt;Udskift?</translation>
     </message>
     <message>
         <location filename="core/duplicator.cpp" line="455"/>
         <source>The instrument &quot;%1&quot; already exists.&lt;br /&gt;Replace?</source>
-        <translation type="unfinished"></translation>
+        <translation>Instrumentet &quot;%1&quot; findes allerede.&lt;br /&gt;Udskift?</translation>
     </message>
     <message>
         <location filename="core/duplicator.cpp" line="548"/>
         <source>The preset &quot;%1&quot; already exists.&lt;br/&gt;Replace?</source>
-        <translation type="unfinished"></translation>
+        <translation>Forvalg &quot;%1&quot; eksisterer allerede.&lt;br/&gt;Udskift?</translation>
     </message>
     <message>
         <location filename="core/duplicator.cpp" line="570"/>
         <source>Warning</source>
-        <translation type="unfinished">Advarsel</translation>
+        <translation>Advarsel</translation>
     </message>
     <message>
         <location filename="core/duplicator.cpp" line="571"/>
         <source>No preset available.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ingen forvalg tilgængelige.</translation>
     </message>
     <message>
         <location filename="core/duplicator.cpp" line="767"/>
         <source>&amp;Replace</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Erstat</translation>
     </message>
     <message>
         <location filename="core/duplicator.cpp" line="768"/>
         <source>R&amp;eplace all</source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>U&amp;dskift alle</translatorcomment>
+        <translation></translation>
     </message>
     <message>
         <location filename="core/duplicator.cpp" line="769"/>
         <source>&amp;Duplicate</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Kopiér</translation>
     </message>
     <message>
         <location filename="core/duplicator.cpp" line="770"/>
         <source>D&amp;uplicate all</source>
-        <translation type="unfinished"></translation>
+        <translation>K&amp;opiér alle</translation>
     </message>
     <message>
         <location filename="core/duplicator.cpp" line="771"/>
         <source>&amp;Ignore</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Ignorér</translation>
     </message>
     <message>
         <location filename="core/duplicator.cpp" line="772"/>
         <source>I&amp;gnore all</source>
-        <translation type="unfinished"></translation>
+        <translation>I&amp;gnorér alle</translation>
     </message>
 </context>
 <context>
@@ -1793,22 +1860,22 @@ oversigt</translation>
     <message>
         <location filename="editor/editor.ui" line="142"/>
         <source>Search...</source>
-        <translation type="unfinished"></translation>
+        <translation>Søg...</translation>
     </message>
     <message>
         <location filename="editor/editor.ui" line="242"/>
         <source>Opening file...</source>
-        <translation type="unfinished"></translation>
+        <translation>Åben fil...</translation>
     </message>
     <message>
         <location filename="editor/editor.ui" line="373"/>
         <source>Cannot open the file</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan ikke åbne filen</translation>
     </message>
     <message>
         <location filename="editor/editor.cpp" line="174"/>
         <source>Untitled</source>
-        <translation type="unfinished"></translation>
+        <translation>Unavngiven</translation>
     </message>
 </context>
 <context>
@@ -1816,87 +1883,87 @@ oversigt</translation>
     <message>
         <location filename="editor/widgets/editortoolbar.cpp" line="53"/>
         <source>Add a sample</source>
-        <translation type="unfinished"></translation>
+        <translation>Tilføj sample</translation>
     </message>
     <message>
         <location filename="editor/widgets/editortoolbar.cpp" line="57"/>
         <source>Add an instrument</source>
-        <translation type="unfinished"></translation>
+        <translation>Tilføj instrument</translation>
     </message>
     <message>
         <location filename="editor/widgets/editortoolbar.cpp" line="61"/>
         <source>Add a preset</source>
-        <translation type="unfinished"></translation>
+        <translation>Tilføj forvalg</translation>
     </message>
     <message>
         <location filename="editor/widgets/editortoolbar.cpp" line="65"/>
         <source>Toolbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Værktøjskasse</translation>
     </message>
     <message>
         <location filename="editor/widgets/editortoolbar.cpp" line="72"/>
         <source>Cancel</source>
-        <translation type="unfinished">Afbryd</translation>
+        <translation>Afbryd</translation>
     </message>
     <message>
         <location filename="editor/widgets/editortoolbar.cpp" line="77"/>
         <source>Redo</source>
-        <translation type="unfinished"></translation>
+        <translation>Gentag</translation>
     </message>
     <message>
         <location filename="editor/widgets/editortoolbar.cpp" line="82"/>
         <source>Save</source>
-        <translation type="unfinished"></translation>
+        <translation>Gem</translation>
     </message>
     <message>
         <location filename="editor/widgets/editortoolbar.cpp" line="92"/>
         <source>Recorder</source>
-        <translation type="unfinished">Optager</translation>
+        <translation>Optager</translation>
     </message>
     <message>
         <location filename="editor/widgets/editortoolbar.cpp" line="98"/>
         <source>Virtual keyboard</source>
-        <translation type="unfinished">Virtuelt keyboard</translation>
+        <translation>Virtuelt keyboard</translation>
     </message>
     <message>
         <location filename="editor/widgets/editortoolbar.cpp" line="256"/>
         <source>Import an audio file</source>
-        <translation type="unfinished"></translation>
+        <translation>Importér lydfil</translation>
     </message>
     <message>
         <location filename="editor/widgets/editortoolbar.cpp" line="258"/>
         <source>Wav file</source>
-        <translation type="unfinished">Wav fil</translation>
+        <translation>Wav fil</translation>
     </message>
     <message>
         <location filename="editor/widgets/editortoolbar.cpp" line="283"/>
         <source>Create a new instrument</source>
-        <translation type="unfinished"></translation>
+        <translation>Opret nyt instrument</translation>
     </message>
     <message>
         <location filename="editor/widgets/editortoolbar.cpp" line="284"/>
         <source>Name of the new instrument:</source>
-        <translation type="unfinished"></translation>
+        <translation>Navngiv nyt instrument:</translation>
     </message>
     <message>
         <location filename="editor/widgets/editortoolbar.cpp" line="312"/>
         <source>Warning</source>
-        <translation type="unfinished">Advarsel</translation>
+        <translation>Advarsel</translation>
     </message>
     <message>
         <location filename="editor/widgets/editortoolbar.cpp" line="312"/>
         <source>No preset available.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ingen forvalg tilgængelige.</translation>
     </message>
     <message>
         <location filename="editor/widgets/editortoolbar.cpp" line="325"/>
         <source>Create a new preset</source>
-        <translation type="unfinished"></translation>
+        <translation>Opret nyt forvalg</translation>
     </message>
     <message>
         <location filename="editor/widgets/editortoolbar.cpp" line="326"/>
         <source>Name of the new preset:</source>
-        <translation type="unfinished"></translation>
+        <translation>Navngiv nyt forvalg:</translation>
     </message>
 </context>
 <context>
@@ -1909,33 +1976,33 @@ oversigt</translation>
         <location filename="editor/envelopeditor.ui" line="401"/>
         <source> s</source>
         <comment>unit for second</comment>
-        <translation type="unfinished"></translation>
+        <translation> s</translation>
     </message>
     <message>
         <location filename="editor/envelopeditor.ui" line="372"/>
         <source> dB</source>
         <comment>unit for decibels</comment>
-        <translation type="unfinished"></translation>
+        <translation> dB</translation>
     </message>
     <message>
         <location filename="editor/envelopeditor.ui" line="279"/>
         <source>Delay</source>
-        <translation type="unfinished"></translation>
+        <translation>Forsinkelse</translation>
     </message>
     <message>
         <location filename="editor/envelopeditor.ui" line="128"/>
         <source>Decay</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Udklingning</translation>
     </message>
     <message>
         <location filename="editor/envelopeditor.ui" line="420"/>
         <source>Sustain</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Udtoning</translation>
     </message>
     <message>
         <location filename="editor/envelopeditor.ui" line="263"/>
         <source>Hold</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Hold</translation>
     </message>
     <message>
         <location filename="editor/envelopeditor.ui" line="138"/>
@@ -1950,34 +2017,34 @@ oversigt</translation>
     <message>
         <location filename="editor/envelopeditor.ui" line="329"/>
         <source>Attack</source>
-        <translation type="unfinished"></translation>
+        <translation>Stejlhed</translation>
     </message>
     <message utf8="true">
         <location filename="editor/envelopeditor.ui" line="391"/>
         <source>Key → Hold</source>
-        <translation type="unfinished"></translation>
+        <translation>Tangent → Hold</translation>
     </message>
     <message>
         <location filename="editor/envelopeditor.ui" line="458"/>
         <source>Volume envelope</source>
-        <translation type="unfinished"></translation>
+        <translation>Styrke kurve</translation>
     </message>
     <message>
         <location filename="editor/envelopeditor.ui" line="477"/>
         <source>Modulation envelope</source>
-        <translation type="unfinished"></translation>
+        <translation>Moduæerings kurve</translation>
     </message>
     <message>
         <location filename="editor/envelopeditor.cpp" line="113"/>
         <source>dB</source>
         <comment>unit for decibels</comment>
-        <translation type="unfinished"></translation>
+        <translation>dB</translation>
     </message>
     <message>
         <location filename="editor/envelopeditor.cpp" line="126"/>
         <source>%</source>
         <comment>percentage</comment>
-        <translation type="unfinished"></translation>
+        <translation>%</translation>
     </message>
 </context>
 <context>
@@ -1985,7 +2052,7 @@ oversigt</translation>
     <message>
         <location filename="repository/browser/filterflow.cpp" line="64"/>
         <source>All</source>
-        <translation type="unfinished"></translation>
+        <translation>Alle</translation>
     </message>
 </context>
 <context>
@@ -1993,7 +2060,7 @@ oversigt</translation>
     <message>
         <location filename="repository/browser/filtertag.ui" line="32"/>
         <source>Tag name...</source>
-        <translation type="unfinished"></translation>
+        <translation>Kaldenavn...</translation>
     </message>
 </context>
 <context>
@@ -2002,13 +2069,13 @@ oversigt</translation>
         <location filename="editor/tools/sound_spatialization/graphspace.cpp" line="76"/>
         <source>L</source>
         <comment>first letter of Left in your language</comment>
-        <translation type="unfinished"></translation>
+        <translation>V</translation>
     </message>
     <message>
         <location filename="editor/tools/sound_spatialization/graphspace.cpp" line="85"/>
         <source>R</source>
         <comment>first letter of Right in your language</comment>
-        <translation type="unfinished">R</translation>
+        <translation>H</translation>
     </message>
 </context>
 <context>
@@ -2016,7 +2083,7 @@ oversigt</translation>
     <message>
         <location filename="editor/tools/monitor/graphvisualizer.cpp" line="239"/>
         <source>Cannot display all the values.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan ikke vise alle værdierne.</translation>
     </message>
 </context>
 <context>
@@ -2024,7 +2091,7 @@ oversigt</translation>
     <message>
         <location filename="editor/graphics/graphique.cpp" line="85"/>
         <source>Multiple selection</source>
-        <translation type="unfinished"></translation>
+        <translation>Multivalg</translation>
     </message>
 </context>
 <context>
@@ -2032,48 +2099,48 @@ oversigt</translation>
     <message>
         <location filename="editor/graphics/graphiquefourier.cpp" line="51"/>
         <source>Frequency (Hz)</source>
-        <translation type="unfinished"></translation>
+        <translation>Frekvens (Hz)</translation>
     </message>
     <message>
         <location filename="editor/graphics/graphiquefourier.cpp" line="66"/>
         <source>Intensity</source>
-        <translation type="unfinished"></translation>
+        <translation>Intensitet</translation>
     </message>
     <message>
         <location filename="editor/graphics/graphiquefourier.cpp" line="123"/>
         <source>Export graph</source>
-        <translation type="unfinished"></translation>
+        <translation>Eksportér graf</translation>
     </message>
     <message>
         <location filename="editor/graphics/graphiquefourier.cpp" line="311"/>
         <source>key</source>
-        <translation type="unfinished"></translation>
+        <translation>toneart</translation>
     </message>
     <message>
         <location filename="editor/graphics/graphiquefourier.cpp" line="312"/>
         <source>correction</source>
-        <translation type="unfinished"></translation>
+        <translation>fejlkorrektion</translation>
     </message>
     <message>
         <location filename="editor/graphics/graphiquefourier.cpp" line="312"/>
         <source>estimation</source>
-        <translation type="unfinished"></translation>
+        <translation>estimeret</translation>
     </message>
     <message>
         <location filename="editor/graphics/graphiquefourier.cpp" line="324"/>
         <source>Hz</source>
         <comment>unit for Herz</comment>
-        <translation type="unfinished"></translation>
+        <translation>Hz</translation>
     </message>
     <message>
         <location filename="editor/graphics/graphiquefourier.cpp" line="393"/>
         <source>Export a graph</source>
-        <translation type="unfinished"></translation>
+        <translation>Eksportér en graf</translation>
     </message>
     <message>
         <location filename="editor/graphics/graphiquefourier.cpp" line="394"/>
         <source>Png file</source>
-        <translation type="unfinished"></translation>
+        <translation>*.png fil</translation>
     </message>
 </context>
 <context>
@@ -2081,7 +2148,7 @@ oversigt</translation>
     <message>
         <location filename="core/input/not_supported/inputnotsupported.cpp" line="38"/>
         <source>This file format is not supported.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dette filformet understøttes ikke.</translation>
     </message>
 </context>
 <context>
@@ -2089,12 +2156,12 @@ oversigt</translation>
     <message>
         <location filename="core/input/sf2/inputsf2.cpp" line="48"/>
         <source>Cannot find file &quot;%1&quot;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan ikke finde filen &quot;%1&quot;.</translation>
     </message>
     <message>
         <location filename="core/input/sf2/inputsf2.cpp" line="55"/>
         <source>Access denied for reading file &quot;%1&quot;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan ikke få adgang til filen &quot;%1&quot;.</translation>
     </message>
 </context>
 <context>
@@ -2102,17 +2169,17 @@ oversigt</translation>
     <message>
         <location filename="core/input/sf3/inputsf3.cpp" line="73"/>
         <source>Error during the sf3 =&gt; sf2 conversion</source>
-        <translation type="unfinished"></translation>
+        <translation>Fejl under sf3 =&gt; sf2 konverteringen</translation>
     </message>
     <message>
         <location filename="core/input/sf3/inputsf3.cpp" line="78"/>
         <source>Cannot create file &quot;%1&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan ikke oprette filen &quot;%1&quot;</translation>
     </message>
     <message>
         <location filename="core/input/sf3/inputsf3.cpp" line="81"/>
         <source>Cannot read file &quot;%1&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan ikke læse filen &quot;%1&quot;</translation>
     </message>
 </context>
 <context>
@@ -2120,22 +2187,22 @@ oversigt</translation>
     <message>
         <location filename="core/input/sfz/inputsfz.cpp" line="104"/>
         <source>File recursion</source>
-        <translation type="unfinished"></translation>
+        <translation>Fil loop</translation>
     </message>
     <message>
         <location filename="core/input/sfz/inputsfz.cpp" line="112"/>
         <source>Cannot open file &quot;%1&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan ikke åbne filen &quot;%1&quot;</translation>
     </message>
     <message>
         <location filename="core/input/sfz/inputsfz.cpp" line="289"/>
         <source>Sfz import</source>
-        <translation type="unfinished"></translation>
+        <translation>Sfz import</translation>
     </message>
     <message>
         <location filename="core/input/sfz/inputsfz.cpp" line="460"/>
         <source>untitled</source>
-        <translation type="unfinished">unavngiven</translation>
+        <translation>unavngiven</translation>
     </message>
 </context>
 <context>
@@ -2206,12 +2273,12 @@ oversigt</translation>
     <message>
         <location filename="mainwindow/mainwindow.cpp" line="182"/>
         <source>Warning</source>
-        <translation type="unfinished">Advarsel</translation>
+        <translation>Advarsel</translation>
     </message>
     <message>
         <location filename="mainwindow/mainwindow.cpp" line="172"/>
         <source>untitled</source>
-        <translation type="unfinished">unavngiven</translation>
+        <translation>unavngiven</translation>
     </message>
     <message>
         <location filename="mainwindow/mainwindow.cpp" line="183"/>
@@ -2221,69 +2288,70 @@ oversigt</translation>
     <message>
         <location filename="mainwindow/mainwindow.cpp" line="186"/>
         <source>The following files have been modified:</source>
-        <translation type="unfinished"></translation>
+        <translation>Følgende fil er blevet ændret:</translation>
     </message>
     <message>
         <location filename="mainwindow/mainwindow.cpp" line="193"/>
         <source>File &quot;%1&quot; has been modified.</source>
-        <translation type="unfinished"></translation>
+        <translation>Filen &quot;%1&quot; er blevet ændret.</translation>
     </message>
     <message>
         <location filename="mainwindow/mainwindow.cpp" line="197"/>
         <source>&amp;Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;AFbryd</translation>
     </message>
     <message>
         <location filename="mainwindow/mainwindow.cpp" line="198"/>
         <source>Do&amp;n&apos;t save</source>
-        <translation type="unfinished"></translation>
+        <translation>Ge&amp;m ikke</translation>
     </message>
     <message>
         <location filename="mainwindow/mainwindow.cpp" line="242"/>
         <source>en/documentation</source>
         <comment>path for the documentation online</comment>
-        <translation type="unfinished"></translation>
+        <translatorcomment>link til online dokumentation (engelsk)</translatorcomment>
+        <translation>en/documentation</translation>
     </message>
     <message>
         <location filename="mainwindow/mainwindow.cpp" line="247"/>
         <source>en/forum</source>
         <comment>path for the forum</comment>
-        <translation type="unfinished"></translation>
+        <translation>en/forum</translation>
     </message>
     <message>
         <location filename="mainwindow/mainwindow.cpp" line="270"/>
         <source>Opening files</source>
-        <translation type="unfinished"></translation>
+        <translation>Åbner filer</translation>
     </message>
     <message>
         <location filename="mainwindow/mainwindow.cpp" line="272"/>
         <source>Soundfonts</source>
-        <translation type="unfinished"></translation>
+        <translation>Soundfonts</translation>
     </message>
     <message>
         <location filename="mainwindow/mainwindow.cpp" line="273"/>
         <source>Sf2 files</source>
-        <translation type="unfinished"></translation>
+        <translation>Sf2 filer</translation>
     </message>
     <message>
         <location filename="mainwindow/mainwindow.cpp" line="274"/>
         <source>Sf3 files</source>
-        <translation type="unfinished"></translation>
+        <translation>Sf3 filer</translation>
     </message>
     <message>
         <location filename="mainwindow/mainwindow.cpp" line="275"/>
         <source>Sfz files</source>
-        <translation type="unfinished"></translation>
+        <translation>Sfz filer</translation>
     </message>
     <message>
         <location filename="mainwindow/mainwindow.cpp" line="276"/>
         <source>sfArk archives</source>
-        <translation type="unfinished"></translation>
+        <translation>sfArk arkiver</translation>
     </message>
     <message>
         <location filename="mainwindow/mainwindow.ui" line="20"/>
         <source>Polyphone Soundfont Editor</source>
-        <translation type="unfinished"></translation>
+        <translation>Polyphone Soundfont Editor</translation>
     </message>
     <message>
         <location filename="mainwindow/mainwindow.ui" line="71"/>
@@ -2295,7 +2363,7 @@ oversigt</translation>
         <location filename="mainwindow/mainwindow.ui" line="87"/>
         <source>  Documentation</source>
         <extracomment>prefixed with 2 spaces</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>  Documentation</translation>
     </message>
     <message>
         <location filename="mainwindow/mainwindow.ui" line="106"/>
@@ -2309,12 +2377,12 @@ oversigt</translation>
         <location filename="mainwindow/mainwindow.ui" line="139"/>
         <source>  Forum</source>
         <extracomment>prefixed with 2 spaces</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>  Forum</translation>
     </message>
     <message>
         <location filename="mainwindow/mainwindow.ui" line="158"/>
         <source>Daily soundfonts</source>
-        <translation type="unfinished"></translation>
+        <translation>Daglige soundfonte</translation>
     </message>
     <message>
         <location filename="mainwindow/mainwindow.ui" line="168"/>
@@ -2334,12 +2402,13 @@ oversigt</translation>
         <source>  Open
   soundfont</source>
         <extracomment>prefixed with 2 spaces for each line</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>  Åbn
+  soundfont</translation>
     </message>
     <message>
         <location filename="mainwindow/mainwindow.ui" line="215"/>
         <source>History</source>
-        <translation type="unfinished"></translation>
+        <translation>Historik</translation>
     </message>
 </context>
 <context>
@@ -2347,7 +2416,7 @@ oversigt</translation>
     <message>
         <location filename="core/output/not_supported/outputnotsupported.cpp" line="39"/>
         <source>This file format is not supported.</source>
-        <translation type="unfinished"></translation>
+        <translation>Filformatet er ikke understøttet.</translation>
     </message>
 </context>
 <context>
@@ -2355,24 +2424,24 @@ oversigt</translation>
     <message>
         <location filename="core/output/sf2/outputsf2.cpp" line="44"/>
         <source>Please close file before overriding it.</source>
-        <translation type="unfinished"></translation>
+        <translation>Luk venligst filen inden overskrivning.</translation>
     </message>
     <message>
         <location filename="core/output/sf2/outputsf2.cpp" line="72"/>
         <source>Couldn&apos;t delete file &quot;%1&quot;.</source>
         <oldsource>Couldn&apos;t delete file &quot;%1&quot;</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Kunne ikke slette filen &quot;%1&quot;.</translation>
     </message>
     <message>
         <location filename="core/output/sf2/outputsf2.cpp" line="82"/>
         <source>Couldn&apos;t rename file &quot;%1&quot;.</source>
         <oldsource>Couldn&apos;t rename file &quot;%1&quot;</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Kunne ikke omdøbe filen &quot;%1&quot;.</translation>
     </message>
     <message>
         <location filename="core/output/sf2/outputsf2.cpp" line="312"/>
         <source>Cannot create file &quot;%1&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>Kunne ikke danne filen &quot;%1&quot;</translation>
     </message>
 </context>
 <context>
@@ -2380,17 +2449,17 @@ oversigt</translation>
     <message>
         <location filename="core/output/sf3/outputsf3.cpp" line="79"/>
         <source>Error during the sf3 conversion</source>
-        <translation type="unfinished"></translation>
+        <translation>Fejl under sf3 konverteringen</translation>
     </message>
     <message>
         <location filename="core/output/sf3/outputsf3.cpp" line="86"/>
         <source>Cannot create file &quot;%1&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan ikke danne filen &quot;%1&quot;</translation>
     </message>
     <message>
         <location filename="core/output/sf3/outputsf3.cpp" line="92"/>
         <source>Cannot read file &quot;%1&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan ikke læse filen &quot;%1&quot;</translation>
     </message>
 </context>
 <context>
@@ -2398,83 +2467,83 @@ oversigt</translation>
     <message>
         <location filename="editor/pageinst.ui" line="141"/>
         <source>Modulators</source>
-        <translation type="unfinished"></translation>
+        <translation>Modulatorer</translation>
     </message>
     <message>
         <location filename="editor/pageinst.ui" line="178"/>
         <source>Add a modulator</source>
-        <translation type="unfinished"></translation>
+        <translation>Tilføj en modulator</translation>
     </message>
     <message>
         <location filename="editor/pageinst.ui" line="204"/>
         <source>Delete a modulator</source>
-        <translation type="unfinished"></translation>
+        <translation>Slet en modulator</translation>
     </message>
     <message>
         <location filename="editor/pageinst.ui" line="224"/>
         <source>Copy modulators</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopiér modulatorer</translation>
     </message>
     <message>
         <location filename="editor/pageinst.ui" line="250"/>
         <source>Paste the copied modulators</source>
-        <translation type="unfinished"></translation>
+        <translation>Indsæt de kopierede modulatorer</translation>
     </message>
     <message>
         <location filename="editor/pageinst.ui" line="364"/>
         <source>Source</source>
-        <translation type="unfinished"></translation>
+        <translation>Kilde</translation>
     </message>
     <message>
         <location filename="editor/pageinst.ui" line="375"/>
         <source>Amount</source>
-        <translation type="unfinished"></translation>
+        <translation>Mængde</translation>
     </message>
     <message>
         <location filename="editor/pageinst.ui" line="386"/>
         <location filename="editor/pageinst.ui" line="552"/>
         <source>Destination</source>
-        <translation type="unfinished"></translation>
+        <translation>Destination</translation>
     </message>
     <message>
         <location filename="editor/pageinst.ui" line="400"/>
         <source>Source / Amount</source>
-        <translation type="unfinished"></translation>
+        <translation>Kilde / Mængde</translation>
     </message>
     <message>
         <location filename="editor/pageinst.ui" line="601"/>
         <source>Abs. value</source>
-        <translation type="unfinished"></translation>
+        <translation>Absolut værdi</translation>
     </message>
     <message>
         <location filename="editor/pageinst.cpp" line="177"/>
         <source>Table</source>
-        <translation type="unfinished"></translation>
+        <translation>Oversigt</translation>
     </message>
     <message>
         <location filename="editor/pageinst.cpp" line="178"/>
         <source>Ranges</source>
-        <translation type="unfinished"></translation>
+        <translation>Inddelinger</translation>
     </message>
     <message>
         <location filename="editor/pageinst.cpp" line="179"/>
         <source>Envelopes</source>
-        <translation type="unfinished"></translation>
+        <translation>Kurver</translation>
     </message>
     <message>
         <location filename="editor/pageinst.cpp" line="221"/>
         <source>Instrument not linked to a preset yet.</source>
-        <translation type="unfinished"></translation>
+        <translation>Instrumentet mangler at blive forbundet til et forvalg.</translation>
     </message>
     <message>
         <location filename="editor/pageinst.cpp" line="223"/>
         <source>Instrument linked to preset:</source>
-        <translation type="unfinished"></translation>
+        <translation>Instrumentet er forbundet til forvalget:</translation>
     </message>
     <message>
         <location filename="editor/pageinst.cpp" line="225"/>
         <source>Instrument linked to presets:</source>
-        <translation type="unfinished"></translation>
+        <translation>Instrumentet er forbundet til følgendende forvalg:</translation>
     </message>
 </context>
 <context>
@@ -2728,7 +2797,7 @@ rate</source>
     <message>
         <location filename="editor/overview/pageoverviewsmpl.cpp" line="172"/>
         <source>Hz</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Hz</translation>
     </message>
 </context>
 <context>
@@ -2736,53 +2805,53 @@ rate</source>
     <message>
         <location filename="editor/pageprst.ui" line="123"/>
         <source>Modulators</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Modulatorer</translation>
     </message>
     <message>
         <location filename="editor/pageprst.ui" line="163"/>
         <source>Add a modulator</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Tilføj en modulator</translation>
     </message>
     <message>
         <location filename="editor/pageprst.ui" line="189"/>
         <source>Delete a modulator</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Slet en modulator</translation>
     </message>
     <message>
         <location filename="editor/pageprst.ui" line="209"/>
         <source>Copy modulators</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Kopiér modulatorer</translation>
     </message>
     <message>
         <location filename="editor/pageprst.ui" line="235"/>
         <source>Paste the copied modulators</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Indsæt de kopierede modulatorer</translation>
     </message>
     <message>
         <location filename="editor/pageprst.ui" line="349"/>
         <source>Source</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Kilde</translation>
     </message>
     <message>
         <location filename="editor/pageprst.ui" line="360"/>
         <source>Amount</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Mængde</translation>
     </message>
     <message>
         <location filename="editor/pageprst.ui" line="371"/>
         <location filename="editor/pageprst.ui" line="522"/>
         <source>Destination</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Destination</translation>
     </message>
     <message>
         <location filename="editor/pageprst.ui" line="391"/>
         <source>Source / Amount</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Kilde / Mængde</translation>
     </message>
     <message>
         <location filename="editor/pageprst.ui" line="565"/>
         <source>Abs. value</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Absolut værdi</translation>
     </message>
     <message>
         <location filename="editor/pageprst.ui" line="641"/>
@@ -2802,12 +2871,12 @@ rate</source>
     <message>
         <location filename="editor/pageprst.cpp" line="157"/>
         <source>Table</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Oversigt</translation>
     </message>
     <message>
         <location filename="editor/pageprst.cpp" line="158"/>
         <source>Ranges</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Inddelinger</translation>
     </message>
 </context>
 <context>
@@ -2906,7 +2975,7 @@ rate</source>
         <location filename="editor/pagesf2.ui" line="802"/>
         <location filename="editor/pagesf2.ui" line="900"/>
         <source>Modulators</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Modulatorer</translation>
     </message>
     <message>
         <location filename="editor/pagesf2.ui" line="830"/>
@@ -3219,7 +3288,7 @@ rate</source>
     <message>
         <location filename="core/output/outputfactory.cpp" line="117"/>
         <source>Sf2 files</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Sf2 filer</translation>
     </message>
     <message>
         <location filename="core/output/outputfactory.cpp" line="138"/>
@@ -3267,7 +3336,7 @@ rate</source>
     <message>
         <location filename="core/sampleloader.cpp" line="97"/>
         <source>&amp;Replace</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&amp;Erstat</translation>
     </message>
     <message>
         <location filename="core/sampleloader.cpp" line="98"/>
@@ -3277,22 +3346,22 @@ rate</source>
     <message>
         <location filename="core/sampleloader.cpp" line="99"/>
         <source>&amp;Duplicate</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&amp;Kopiér</translation>
     </message>
     <message>
         <location filename="core/sampleloader.cpp" line="100"/>
         <source>D&amp;uplicate all</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">K&amp;opiér alle</translation>
     </message>
     <message>
         <location filename="core/sampleloader.cpp" line="101"/>
         <source>&amp;Ignore</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&amp;Ignorér</translation>
     </message>
     <message>
         <location filename="core/sampleloader.cpp" line="102"/>
         <source>I&amp;gnore all</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">I&amp;gnorér alle</translation>
     </message>
     <message>
         <location filename="core/sound.cpp" line="109"/>
@@ -3305,7 +3374,7 @@ rate</source>
     <message>
         <location filename="core/sound.cpp" line="653"/>
         <source>Cannot open file &quot;%1&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Kan ikke åbne filen &quot;%1&quot;</translation>
     </message>
     <message>
         <location filename="core/sound.cpp" line="667"/>
@@ -3342,22 +3411,22 @@ rate</source>
         <translation type="unfinished">unavngiven</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_about.cpp" line="121"/>
+        <location filename="dialogs/dialog_about.cpp" line="122"/>
         <source>Created by</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_about.cpp" line="122"/>
+        <location filename="dialogs/dialog_about.cpp" line="123"/>
         <source>Contributors</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_about.cpp" line="123"/>
+        <location filename="dialogs/dialog_about.cpp" line="124"/>
         <source>Translated by</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_about.cpp" line="165"/>
+        <location filename="dialogs/dialog_about.cpp" line="166"/>
         <source>Icons</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4359,7 +4428,7 @@ download content</source>
     <message>
         <location filename="editor/tools/celeste_tuning/toolcelestetuning_gui.cpp" line="50"/>
         <source>key</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">toneart</translation>
     </message>
 </context>
 <context>
@@ -4395,7 +4464,7 @@ download content</source>
     <message>
         <location filename="editor/tools/change_attenuation/toolchangeattenuation_gui.ui" line="91"/>
         <source> dB</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"> dB</translation>
     </message>
 </context>
 <context>
@@ -4421,7 +4490,7 @@ download content</source>
     <message>
         <location filename="editor/tools/change_volume/toolchangevolume_gui.ui" line="30"/>
         <source> dB</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"> dB</translation>
     </message>
     <message>
         <location filename="editor/tools/change_volume/toolchangevolume_gui.ui" line="43"/>
@@ -4666,7 +4735,7 @@ download content</source>
     <message>
         <location filename="editor/tools/external_command/toolexternalcommand_gui.ui" line="44"/>
         <source>History</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Historik</translation>
     </message>
     <message>
         <location filename="editor/tools/external_command/toolexternalcommand_gui.ui" line="54"/>
@@ -4741,7 +4810,7 @@ download content</source>
     <message>
         <location filename="editor/tools/frequency_peaks/toolfrequencypeaks.cpp" line="55"/>
         <source>Intensity</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Intensitet</translation>
     </message>
     <message>
         <location filename="editor/tools/frequency_peaks/toolfrequencypeaks.cpp" line="55"/>
@@ -4751,7 +4820,7 @@ download content</source>
     <message>
         <location filename="editor/tools/frequency_peaks/toolfrequencypeaks.cpp" line="56"/>
         <source>Key</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Toneart</translation>
     </message>
     <message>
         <location filename="editor/tools/frequency_peaks/toolfrequencypeaks.cpp" line="56"/>
@@ -4799,7 +4868,7 @@ download content</source>
     <message>
         <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="86"/>
         <source>Intensity</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Intensitet</translation>
     </message>
     <message>
         <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="87"/>
@@ -4809,7 +4878,7 @@ download content</source>
     <message>
         <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="88"/>
         <source>Key</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Toneart</translation>
     </message>
     <message>
         <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="89"/>
@@ -4819,7 +4888,7 @@ download content</source>
     <message>
         <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="151"/>
         <source>Hz</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Hz</translation>
     </message>
     <message>
         <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="175"/>
@@ -5381,7 +5450,7 @@ download content</source>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="80"/>
         <source>Destination</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Destination</translation>
     </message>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="106"/>
@@ -5722,7 +5791,7 @@ download content</source>
     <message>
         <location filename="mainwindow/windowmanager.cpp" line="125"/>
         <source>Cannot open file &quot;%1&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Kan ikke åbne filen &quot;%1&quot;</translation>
     </message>
     <message>
         <location filename="mainwindow/windowmanager.cpp" line="182"/>
@@ -5742,7 +5811,7 @@ download content</source>
     <message>
         <location filename="mainwindow/windowmanager.cpp" line="231"/>
         <source>File &quot;%1&quot; has been modified.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Filen &quot;%1&quot; er blevet ændret.</translation>
     </message>
     <message>
         <location filename="mainwindow/windowmanager.cpp" line="124"/>
@@ -5758,12 +5827,12 @@ download content</source>
     <message>
         <location filename="mainwindow/windowmanager.cpp" line="235"/>
         <source>&amp;Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&amp;AFbryd</translation>
     </message>
     <message>
         <location filename="mainwindow/windowmanager.cpp" line="236"/>
         <source>Do&amp;n&apos;t save</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Ge&amp;m ikke</translation>
     </message>
     <message>
         <location filename="mainwindow/windowmanager.cpp" line="324"/>

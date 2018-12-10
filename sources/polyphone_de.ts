@@ -1824,9 +1824,88 @@ repository</source>
         <translation>Donate</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_about.cpp" line="50"/>
         <location filename="dialogs/dialog_about.cpp" line="61"/>
         <location filename="dialogs/dialog_about.cpp" line="70"/>
+        <source>Davy Triponney</source>
+        <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
+        <translation type="unfinished">Davy Triponney</translation>
+    </message>
+    <message>
+        <location filename="dialogs/dialog_about.cpp" line="63"/>
+        <location filename="dialogs/dialog_about.cpp" line="69"/>
+        <source>Andrea Celani</source>
+        <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
+        <translation type="unfinished">Andrea Celani</translation>
+    </message>
+    <message>
+        <location filename="dialogs/dialog_about.cpp" line="64"/>
+        <source>Kinwie</source>
+        <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
+        <translation type="unfinished">Kinwie</translation>
+    </message>
+    <message>
+        <location filename="dialogs/dialog_about.cpp" line="65"/>
+        <source>Michael Schyllberg</source>
+        <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
+        <translation type="unfinished">Michael Schyllberg</translation>
+    </message>
+    <message>
+        <location filename="dialogs/dialog_about.cpp" line="66"/>
+        <source>Paul Stratman</source>
+        <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
+        <translation type="unfinished">Paul Stratman</translation>
+    </message>
+    <message>
+        <location filename="dialogs/dialog_about.cpp" line="67"/>
+        <location filename="dialogs/dialog_about.cpp" line="77"/>
+        <source>Steve Clarke</source>
+        <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
+        <translation type="unfinished">Steve Clarke</translation>
+    </message>
+    <message utf8="true">
+        <location filename="dialogs/dialog_about.cpp" line="71"/>
+        <source>F.J. Martínez Murcia</source>
+        <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
+        <translation type="unfinished">F.J. Martínez Murcia</translation>
+    </message>
+    <message>
+        <location filename="dialogs/dialog_about.cpp" line="72"/>
+        <source>Georg Gergull</source>
+        <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
+        <translation type="unfinished">Georg Gergull</translation>
+    </message>
+    <message>
+        <location filename="dialogs/dialog_about.cpp" line="73"/>
+        <source>Jay Alexander Fleming</source>
+        <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
+        <translation type="unfinished">Jay Alexander Fleming</translation>
+    </message>
+    <message>
+        <location filename="dialogs/dialog_about.cpp" line="74"/>
+        <source>Joel Gomes</source>
+        <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
+        <translation type="unfinished">Joel Gomes</translation>
+    </message>
+    <message>
+        <location filename="dialogs/dialog_about.cpp" line="75"/>
+        <source>Magson</source>
+        <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
+        <translation type="unfinished">Magson</translation>
+    </message>
+    <message>
+        <location filename="dialogs/dialog_about.cpp" line="76"/>
+        <source>Pavel Fric</source>
+        <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
+        <translation type="unfinished">Pavel Fric</translation>
+    </message>
+    <message>
+        <location filename="dialogs/dialog_about.cpp" line="78"/>
+        <source>Chris Hansen</source>
+        <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="dialogs/dialog_about.cpp" line="50"/>
         <source>Davy Triponney</source>
         <translation>Davy Triponney</translation>
     </message>
@@ -1836,61 +1915,48 @@ repository</source>
         <translation>https://www.polyphone-soundfonts.com/en</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_about.cpp" line="63"/>
-        <location filename="dialogs/dialog_about.cpp" line="69"/>
         <source>Andrea Celani</source>
-        <translation>Andrea Celani</translation>
+        <translation type="obsolete">Andrea Celani</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_about.cpp" line="64"/>
         <source>Kinwie</source>
-        <translation>Kinwie</translation>
+        <translation type="obsolete">Kinwie</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_about.cpp" line="65"/>
         <source>Michael Schyllberg</source>
-        <translation>Michael Schyllberg</translation>
+        <translation type="obsolete">Michael Schyllberg</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_about.cpp" line="66"/>
         <source>Paul Stratman</source>
-        <translation>Paul Stratman</translation>
+        <translation type="obsolete">Paul Stratman</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_about.cpp" line="67"/>
-        <location filename="dialogs/dialog_about.cpp" line="77"/>
         <source>Steve Clarke</source>
-        <translation>Steve Clarke</translation>
+        <translation type="obsolete">Steve Clarke</translation>
     </message>
     <message utf8="true">
-        <location filename="dialogs/dialog_about.cpp" line="71"/>
         <source>F.J. Martínez Murcia</source>
-        <translation>F.J. Martínez Murcia</translation>
+        <translation type="obsolete">F.J. Martínez Murcia</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_about.cpp" line="72"/>
         <source>Georg Gergull</source>
-        <translation>Georg Gergull</translation>
+        <translation type="obsolete">Georg Gergull</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_about.cpp" line="73"/>
         <source>Jay Alexander Fleming</source>
-        <translation>Jay Alexander Fleming</translation>
+        <translation type="obsolete">Jay Alexander Fleming</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_about.cpp" line="74"/>
         <source>Joel Gomes</source>
-        <translation>Joel Gomes</translation>
+        <translation type="obsolete">Joel Gomes</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_about.cpp" line="75"/>
         <source>Magson</source>
-        <translation>Magson</translation>
+        <translation type="obsolete">Magson</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_about.cpp" line="76"/>
         <source>Pavel Fric</source>
-        <translation>Pavel Fric</translation>
+        <translation type="obsolete">Pavel Fric</translation>
     </message>
 </context>
 <context>
@@ -6564,22 +6630,22 @@ rate</source>
         <translation type="obsolete">B</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_about.cpp" line="121"/>
+        <location filename="dialogs/dialog_about.cpp" line="122"/>
         <source>Created by</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_about.cpp" line="122"/>
+        <location filename="dialogs/dialog_about.cpp" line="123"/>
         <source>Contributors</source>
         <translation>Mitwirkende</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_about.cpp" line="123"/>
+        <location filename="dialogs/dialog_about.cpp" line="124"/>
         <source>Translated by</source>
         <translation>Übersetzt von</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_about.cpp" line="165"/>
+        <location filename="dialogs/dialog_about.cpp" line="166"/>
         <source>Icons</source>
         <translation type="unfinished"></translation>
     </message>
