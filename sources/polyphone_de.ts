@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="de_DE">
+<TS version="2.0" language="de_DE">
 <context>
     <name>AbstractInput</name>
     <message>
@@ -67,28 +67,28 @@
         <source>Loop end offset</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="core/types/attribute.cpp" line="553"/>
         <location filename="core/types/attribute.cpp" line="674"/>
         <source>Loop start offset (× 32768)</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="core/types/attribute.cpp" line="556"/>
         <source>Mod LFO → pitch (c)</source>
         <translation>Mod LFO → Pitch (c)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="core/types/attribute.cpp" line="559"/>
         <source>Vib LFO → pitch (c)</source>
         <translation>Vib LFO → Pitch (c)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="core/types/attribute.cpp" line="562"/>
         <source>Mod env → pitch (c)</source>
         <translation>Mod env → Pitch (c)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="core/types/attribute.cpp" line="565"/>
         <source>Filter, cutoff (×)</source>
         <translation type="unfinished"></translation>
@@ -103,22 +103,22 @@
         <source>Filter, resonance (dB)</source>
         <translation>Filter, Resonanz (dB)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="core/types/attribute.cpp" line="572"/>
         <source>Mod LFO → filter (c)</source>
         <translation>Mod LFO → Filter (c)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="core/types/attribute.cpp" line="575"/>
         <source>Mod env → filter (c)</source>
         <translation>Mod env → Filter (c)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="core/types/attribute.cpp" line="578"/>
         <source>Sample end offset (× 32768)</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="core/types/attribute.cpp" line="581"/>
         <source>Mod LFO → volume (dB)</source>
         <translation>Mod LFO → Volume (dB)</translation>
@@ -143,7 +143,7 @@
         <source>Pan [-50;50]</source>
         <translation>Pan [-50;50]</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="core/types/attribute.cpp" line="594"/>
         <source>Mod LFO delay (×)</source>
         <translation>Mod LFO delay (×)</translation>
@@ -153,7 +153,7 @@
         <source>Mod LFO delay (s)</source>
         <translation>Mod LFO delay (s)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="core/types/attribute.cpp" line="598"/>
         <source>Mod LFO freq (×)</source>
         <translation>Mod LFO freq (×)</translation>
@@ -163,7 +163,7 @@
         <source>Mod LFO freq (Hz)</source>
         <translation>Mod LFO freq (Hz)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="core/types/attribute.cpp" line="602"/>
         <source>Vib LFO delay (×)</source>
         <translation>Vib LFO delay (×)</translation>
@@ -173,7 +173,7 @@
         <source>Vib LFO delay (s)</source>
         <translation>Vib LFO delay (s)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="core/types/attribute.cpp" line="606"/>
         <source>Vib LFO freq (×)</source>
         <translation>Vib LFO freq (×)</translation>
@@ -183,7 +183,7 @@
         <source>Vib LFO freq (Hz)</source>
         <translation>Vib LFO freq (Hz)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="core/types/attribute.cpp" line="610"/>
         <source>Mod env delay (×)</source>
         <translation>Mod env delay (×)</translation>
@@ -193,7 +193,7 @@
         <source>Mod env delay (s)</source>
         <translation>Mod env delay (s)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="core/types/attribute.cpp" line="614"/>
         <source>Mod env attack (×)</source>
         <translation>Mod env attack (×)</translation>
@@ -203,7 +203,7 @@
         <source>Mod env attack (s)</source>
         <translation>Mod env attack (s)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="core/types/attribute.cpp" line="618"/>
         <source>Mod env hold (×)</source>
         <translation>Mod env hold (×)</translation>
@@ -213,7 +213,7 @@
         <source>Mod env hold (s)</source>
         <translation>Mod env hold (s)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="core/types/attribute.cpp" line="622"/>
         <source>Mod env decay (×)</source>
         <translation>Mod env decay (×)</translation>
@@ -228,7 +228,7 @@
         <source>Mod env sustain (%)</source>
         <translation>Mod env sustain (%)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="core/types/attribute.cpp" line="629"/>
         <source>Mod env release (×)</source>
         <translation>Mod env release (×)</translation>
@@ -238,17 +238,17 @@
         <source>Mod env release (s)</source>
         <translation>Mod env release (s)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="core/types/attribute.cpp" line="633"/>
         <source>Key → Mod env hold (c)</source>
         <translation>Key → Mod env hold (c)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="core/types/attribute.cpp" line="636"/>
         <source>Key → Mod env decay (c)</source>
         <translation>Key → Mod env decay (c)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="core/types/attribute.cpp" line="639"/>
         <source>Vol env delay (×)</source>
         <translation>Vol env delay (×)</translation>
@@ -258,7 +258,7 @@
         <source>Vol env delay (s)</source>
         <translation>Vol env delay (s)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="core/types/attribute.cpp" line="643"/>
         <source>Vol env attack (×)</source>
         <translation>Vol env attack (×)</translation>
@@ -268,7 +268,7 @@
         <source>Vol env attack (s)</source>
         <translation>Vol env attack (s)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="core/types/attribute.cpp" line="647"/>
         <source>Vol env hold (×)</source>
         <translation>Vol env hold (×)</translation>
@@ -278,7 +278,7 @@
         <source>Vol env hold (s)</source>
         <translation>Vol env hold (s)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="core/types/attribute.cpp" line="651"/>
         <source>Vol env decay (×)</source>
         <translation>Vol env decay (×)</translation>
@@ -293,7 +293,7 @@
         <source>Vol env sustain (dB)</source>
         <translation>Vol env sustain (dB)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="core/types/attribute.cpp" line="658"/>
         <source>Vol env release (×)</source>
         <translation>Vol env release (×)</translation>
@@ -303,12 +303,12 @@
         <source>Vol env release (s)</source>
         <translation>Vol env release (s)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="core/types/attribute.cpp" line="662"/>
         <source>Key → Vol env hold (c)</source>
         <translation>Key → Vol env hold (c)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="core/types/attribute.cpp" line="665"/>
         <source>Key → Vol env decay (c)</source>
         <translation>Key → Vol env decay (c)</translation>
@@ -338,7 +338,7 @@
         <source>Attenuation (dB)</source>
         <translation>Dämpfung (dB)</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="core/types/attribute.cpp" line="686"/>
         <source>Loop end offset (× 32768)</source>
         <translation type="unfinished"></translation>
@@ -1342,37 +1342,37 @@
         <source>Key names</source>
         <translation>Notenname</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="context/interface/configsectioninterface.ui" line="29"/>
         <source>Middle C → 60, then 61</source>
         <translation>Mitte C → 60, dann 61</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="context/interface/configsectioninterface.ui" line="34"/>
         <source>Middle C → C3, then C♯3</source>
         <translation>Mitte C → C3, dann C♯3</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="context/interface/configsectioninterface.ui" line="39"/>
         <source>Middle C → C3, then D♭3</source>
         <translation>Mitte C → C3, dann D♭3</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="context/interface/configsectioninterface.ui" line="44"/>
         <source>Middle C → C4, then C♯4</source>
         <translation>Mitte C → C4, dann C♯4</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="context/interface/configsectioninterface.ui" line="49"/>
         <source>Middle C → C4, then D♭4</source>
         <translation>Mitte C → C4, dann D♭4</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="context/interface/configsectioninterface.ui" line="54"/>
         <source>Middle C → C5, then C♯5</source>
         <translation>Mitte C → C5, dann C♯5</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="context/interface/configsectioninterface.ui" line="59"/>
         <source>Middle C → C5, then D♭5</source>
         <translation>Mitte C → C5, dann D♭5</translation>
@@ -1824,9 +1824,88 @@ repository</source>
         <translation>Donate</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_about.cpp" line="50"/>
         <location filename="dialogs/dialog_about.cpp" line="61"/>
         <location filename="dialogs/dialog_about.cpp" line="70"/>
+        <source>Davy Triponney</source>
+        <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
+        <translation type="unfinished">Davy Triponney</translation>
+    </message>
+    <message>
+        <location filename="dialogs/dialog_about.cpp" line="63"/>
+        <location filename="dialogs/dialog_about.cpp" line="69"/>
+        <source>Andrea Celani</source>
+        <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
+        <translation type="unfinished">Andrea Celani</translation>
+    </message>
+    <message>
+        <location filename="dialogs/dialog_about.cpp" line="64"/>
+        <source>Kinwie</source>
+        <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
+        <translation type="unfinished">Kinwie</translation>
+    </message>
+    <message>
+        <location filename="dialogs/dialog_about.cpp" line="65"/>
+        <source>Michael Schyllberg</source>
+        <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
+        <translation type="unfinished">Michael Schyllberg</translation>
+    </message>
+    <message>
+        <location filename="dialogs/dialog_about.cpp" line="66"/>
+        <source>Paul Stratman</source>
+        <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
+        <translation type="unfinished">Paul Stratman</translation>
+    </message>
+    <message>
+        <location filename="dialogs/dialog_about.cpp" line="67"/>
+        <location filename="dialogs/dialog_about.cpp" line="77"/>
+        <source>Steve Clarke</source>
+        <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
+        <translation type="unfinished">Steve Clarke</translation>
+    </message>
+    <message utf8="true">
+        <location filename="dialogs/dialog_about.cpp" line="71"/>
+        <source>F.J. Martínez Murcia</source>
+        <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
+        <translation type="unfinished">F.J. Martínez Murcia</translation>
+    </message>
+    <message>
+        <location filename="dialogs/dialog_about.cpp" line="72"/>
+        <source>Georg Gergull</source>
+        <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
+        <translation type="unfinished">Georg Gergull</translation>
+    </message>
+    <message>
+        <location filename="dialogs/dialog_about.cpp" line="73"/>
+        <source>Jay Alexander Fleming</source>
+        <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
+        <translation type="unfinished">Jay Alexander Fleming</translation>
+    </message>
+    <message>
+        <location filename="dialogs/dialog_about.cpp" line="74"/>
+        <source>Joel Gomes</source>
+        <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
+        <translation type="unfinished">Joel Gomes</translation>
+    </message>
+    <message>
+        <location filename="dialogs/dialog_about.cpp" line="75"/>
+        <source>Magson</source>
+        <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
+        <translation type="unfinished">Magson</translation>
+    </message>
+    <message>
+        <location filename="dialogs/dialog_about.cpp" line="76"/>
+        <source>Pavel Fric</source>
+        <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
+        <translation type="unfinished">Pavel Fric</translation>
+    </message>
+    <message>
+        <location filename="dialogs/dialog_about.cpp" line="78"/>
+        <source>Chris Hansen</source>
+        <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="dialogs/dialog_about.cpp" line="50"/>
         <source>Davy Triponney</source>
         <translation>Davy Triponney</translation>
     </message>
@@ -1836,61 +1915,48 @@ repository</source>
         <translation>https://www.polyphone-soundfonts.com/en</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_about.cpp" line="63"/>
-        <location filename="dialogs/dialog_about.cpp" line="69"/>
         <source>Andrea Celani</source>
-        <translation>Andrea Celani</translation>
+        <translation type="obsolete">Andrea Celani</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_about.cpp" line="64"/>
         <source>Kinwie</source>
-        <translation>Kinwie</translation>
+        <translation type="obsolete">Kinwie</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_about.cpp" line="65"/>
         <source>Michael Schyllberg</source>
-        <translation>Michael Schyllberg</translation>
+        <translation type="obsolete">Michael Schyllberg</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_about.cpp" line="66"/>
         <source>Paul Stratman</source>
-        <translation>Paul Stratman</translation>
+        <translation type="obsolete">Paul Stratman</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_about.cpp" line="67"/>
-        <location filename="dialogs/dialog_about.cpp" line="77"/>
         <source>Steve Clarke</source>
-        <translation>Steve Clarke</translation>
+        <translation type="obsolete">Steve Clarke</translation>
     </message>
-    <message>
-        <location filename="dialogs/dialog_about.cpp" line="71"/>
+    <message utf8="true">
         <source>F.J. Martínez Murcia</source>
-        <translation>F.J. Martínez Murcia</translation>
+        <translation type="obsolete">F.J. Martínez Murcia</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_about.cpp" line="72"/>
         <source>Georg Gergull</source>
-        <translation>Georg Gergull</translation>
+        <translation type="obsolete">Georg Gergull</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_about.cpp" line="73"/>
         <source>Jay Alexander Fleming</source>
-        <translation>Jay Alexander Fleming</translation>
+        <translation type="obsolete">Jay Alexander Fleming</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_about.cpp" line="74"/>
         <source>Joel Gomes</source>
-        <translation>Joel Gomes</translation>
+        <translation type="obsolete">Joel Gomes</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_about.cpp" line="75"/>
         <source>Magson</source>
-        <translation>Magson</translation>
+        <translation type="obsolete">Magson</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_about.cpp" line="76"/>
         <source>Pavel Fric</source>
-        <translation>Pavel Fric</translation>
+        <translation type="obsolete">Pavel Fric</translation>
     </message>
 </context>
 <context>
@@ -1977,7 +2043,7 @@ repository</source>
     </message>
     <message>
         <source>version</source>
-        <translation type="vanished">Version</translation>
+        <translation type="obsolete">Version</translation>
     </message>
     <message>
         <location filename="dialogs/dialogchangelog.cpp" line="85"/>
@@ -3025,7 +3091,7 @@ repository</source>
         <source>Release</source>
         <translation>Release</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="editor/envelopeditor.ui" line="181"/>
         <source>Key → Decay</source>
         <translation type="unfinished"></translation>
@@ -3035,7 +3101,7 @@ repository</source>
         <source>Attack</source>
         <translation></translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="editor/envelopeditor.ui" line="391"/>
         <source>Key → Hold</source>
         <translation type="unfinished"></translation>
@@ -5196,7 +5262,7 @@ rate</source>
         <source>Apply</source>
         <translation>anwenden</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="editor/pagesmpl.ui" line="790"/>
         <location filename="editor/pagesmpl.cpp" line="109"/>
         <source>Equalizer (±15 dB)</source>
@@ -6564,22 +6630,22 @@ rate</source>
         <translation type="obsolete">B</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_about.cpp" line="121"/>
+        <location filename="dialogs/dialog_about.cpp" line="122"/>
         <source>Created by</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_about.cpp" line="122"/>
+        <location filename="dialogs/dialog_about.cpp" line="123"/>
         <source>Contributors</source>
         <translation>Mitwirkende</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_about.cpp" line="123"/>
+        <location filename="dialogs/dialog_about.cpp" line="124"/>
         <source>Translated by</source>
         <translation>Übersetzt von</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_about.cpp" line="165"/>
+        <location filename="dialogs/dialog_about.cpp" line="166"/>
         <source>Icons</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6595,7 +6661,7 @@ rate</source>
         <comment>key name</comment>
         <translation>C</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="context/keynamemanager.cpp" line="64"/>
         <source>D♭</source>
         <comment>key name</comment>
@@ -6608,7 +6674,7 @@ rate</source>
         <comment>key name</comment>
         <translation>D</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="context/keynamemanager.cpp" line="66"/>
         <source>E♭</source>
         <comment>key name</comment>
@@ -6628,7 +6694,7 @@ rate</source>
         <comment>key name</comment>
         <translation>F</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="context/keynamemanager.cpp" line="69"/>
         <source>G♭</source>
         <comment>key name</comment>
@@ -6641,7 +6707,7 @@ rate</source>
         <comment>key name</comment>
         <translation>G</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="context/keynamemanager.cpp" line="71"/>
         <source>A♭</source>
         <comment>key name</comment>
@@ -6654,7 +6720,7 @@ rate</source>
         <comment>key name</comment>
         <translation>A</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="context/keynamemanager.cpp" line="73"/>
         <source>B♭</source>
         <comment>key name</comment>
@@ -6667,31 +6733,31 @@ rate</source>
         <comment>key name</comment>
         <translation>H</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="context/keynamemanager.cpp" line="82"/>
         <source>C♯</source>
         <comment>key name</comment>
         <translation>C♯</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="context/keynamemanager.cpp" line="84"/>
         <source>D♯</source>
         <comment>key name</comment>
         <translation>D♯</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="context/keynamemanager.cpp" line="87"/>
         <source>F♯</source>
         <comment>key name</comment>
         <translation>F♯</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="context/keynamemanager.cpp" line="89"/>
         <source>G♯</source>
         <comment>key name</comment>
         <translation>G♯</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="context/keynamemanager.cpp" line="91"/>
         <source>A♯</source>
         <comment>key name</comment>
@@ -7259,7 +7325,7 @@ download the list</source>
         <source>Rating score</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="repository/browser/soundfontbrowser.ui" line="402"/>
         <source>Title (A→Z)</source>
         <translation type="unfinished"></translation>

@@ -29,6 +29,8 @@
 #include <QDateTime>
 #include <QPainter>
 #include <QMimeData>
+#include <QDragEnterEvent>
+#include <QDropEvent>
 
 const int WidgetShowHistory::SIZE = 900;
 const int WidgetShowHistory::OFFSET_X = -120;
