@@ -25,15 +25,26 @@
 #include "configsectionkeyboard.h"
 #include "ui_configsectionkeyboard.h"
 #include "contextmanager.h"
+#include "editkey.h"
 
 ConfigSectionKeyboard::ConfigSectionKeyboard(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::ConfigSectionKeyboard)
 {
     ui->setupUi(this);
-    connect(ui->tableKeyboardMap, SIGNAL(combinaisonChanged(int,int,QString)), this, SLOT(combinaisonChanged(int,int,QString)));
     this->renameComboFirstC();
     connect(ContextManager::configuration(), SIGNAL(keyboardOctaveChanged()), this, SLOT(initializeFirstC()));
+
+    // Style
+    QFont font = this->font();
+    font.setBold(true);
+    ui->tableKeyboardMap->horizontalHeader()->setFont(font);
+    ui->tableKeyboardMap->verticalHeader()->setFont(font);
+
+    // Populate the table with all keys and all octaves
+    for (int j = 0; j < ui->tableKeyboardMap->columnCount(); j++)
+        for (int i = 0; i < ui->tableKeyboardMap->rowCount(); i++)
+            ui->tableKeyboardMap->setCellWidget(i, j, new EditKey(i, (ConfManager::Key)j));
 }
 
 ConfigSectionKeyboard::~ConfigSectionKeyboard()
@@ -50,9 +61,9 @@ void ConfigSectionKeyboard::initialize()
     }
 
     // Populate the table
-    ui->tableKeyboardMap->blockSignals(true);
-    ui->tableKeyboardMap->populate();
-    ui->tableKeyboardMap->blockSignals(false);
+    for (int j = 0; j < ui->tableKeyboardMap->columnCount(); j++)
+        for (int i = 0; i < ui->tableKeyboardMap->rowCount(); i++)
+            ((EditKey*)ui->tableKeyboardMap->cellWidget(i, j))->updateText();
 
     // Octave configuration
     initializeFirstC();
@@ -80,13 +91,6 @@ void ConfigSectionKeyboard::renameComboFirstC()
     int nbElement = ui->comboFirstC->count();
     for (int i = 0; i < nbElement; i++)
         ui->comboFirstC->setItemText(i, ContextManager::keyName()->getKeyName(12 * i));
-}
-
-void ConfigSectionKeyboard::combinaisonChanged(int key, int numOctave, QString combinaison)
-{
-    ContextManager::configuration()->setValue(ConfManager::SECTION_MAP,
-                                              "key_" + QString::number(numOctave) + "_" + QString::number(key),
-                                              combinaison);
 }
 
 void ConfigSectionKeyboard::on_comboFirstC_currentIndexChanged(int index)
