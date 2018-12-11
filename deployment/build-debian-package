@@ -3,7 +3,7 @@
 # First adapt debian/changelog so that the version and date are correct
 # Make sure "devscripts" package is installed (available in synaptic)
 # Then run this script by opening a terminal in this current directory
-# For version 1.7 write "build-debian-package 1.7"
+# For version 2.0 write "build-debian-package 2.0"
 
 if [ -z "$1" ]
 then
@@ -11,14 +11,14 @@ then
   exit $E_NOARGS
 fi
 
-# Rename folder trunk
+# Rename folder sources
 cd ..
-mv trunk polyphone-$1
+mv sources polyphone-$1
 
 # Create archive
 tar -zcvf polyphone_$1.orig.tar.gz polyphone-$1
 
-# Copy debian directory in trunk
+# Copy debian directory in sources
 cp -r deployment/debian polyphone-$1
 
 # Build package
@@ -27,12 +27,12 @@ dpkg-buildpackage
 cd ..
 
 # Revert rename
-mv polyphone-$1 trunk
+mv polyphone-$1 sources
 
 # Delete directories
-rm -r trunk/debian
-rm -r trunk/RELEASE
-rm trunk/Makefile
+rm -r sources/debian
+rm -r sources/RELEASE
+rm sources/Makefile
 rm polyphone_$1-1.debian.tar.xz
 rm polyphone_$1-1.dsc
 rm polyphone_$1-1_amd64.changes
