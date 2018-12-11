@@ -15,7 +15,7 @@
   </property>
   <layout class="QGridLayout" name="gridLayout">
    <item row="0" column="0" colspan="2">
-    <widget class="TableKey" name="tableKeyboardMap">
+    <widget class="QTableWidget" name="tableKeyboardMap">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Expanding" vsizetype="MinimumExpanding">
        <horstretch>0</horstretch>
@@ -200,13 +200,6 @@
    </item>
   </layout>
  </widget>
- <customwidgets>
-  <customwidget>
-   <class>TableKey</class>
-   <extends>QTableWidget</extends>
-   <header>tablekey.h</header>
-  </customwidget>
- </customwidgets>
  <resources/>
  <connections/>
 </ui>

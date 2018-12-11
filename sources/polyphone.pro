@@ -167,7 +167,6 @@ SOURCES	+= main.cpp \
     context/keynamemanager.cpp \
     context/translationmanager.cpp \
     context/interface/editkey.cpp \
-    context/interface/tablekey.cpp \
     context/audiodevice.cpp \
     context/mididevice.cpp \
     dialogs/dialog_list.cpp \
@@ -425,7 +424,6 @@ HEADERS  += \
     context/keynamemanager.h \
     context/translationmanager.h \
     context/interface/editkey.h \
-    context/interface/tablekey.h \
     context/mididevice.h \
     context/audiodevice.h \
     dialogs/dialog_list.h \

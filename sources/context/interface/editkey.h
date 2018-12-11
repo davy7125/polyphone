@@ -28,27 +28,27 @@
 #include <QLineEdit>
 #include <QKeySequence>
 #include <QKeyEvent>
+#include "contextmanager.h"
 
 class EditKey : public QLineEdit
 {
     Q_OBJECT
 
 public:
-    EditKey(QWidget * parent = NULL);
-    void setCombinaison(const QString &text);
-
-signals:
-    void combinaisonChanged(QString combinaison);
+    EditKey(int octave, ConfManager::Key key, QWidget * parent = nullptr);
+    void updateText();
 
 protected:
+    void focusInEvent(QFocusEvent * event);
     void keyPressEvent(QKeyEvent * event);
     void keyReleaseEvent(QKeyEvent * event);
-    void focusInEvent(QFocusEvent *);
-    void focusOutEvent(QFocusEvent *);
+    void focusOutEvent(QFocusEvent * event);
 
 private:
-    QString _combinaison;
-    static QKeySequence getSequence(QKeyEvent * event);
+    void processKeyEvent(QKeyEvent * event);
+
+    int _octave;
+    ConfManager::Key _key;
 };
 
 #endif // EDITKEY_H
