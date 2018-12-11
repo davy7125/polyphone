@@ -36,14 +36,13 @@ class ConfigSectionKeyboard : public QWidget
     Q_OBJECT
 
 public:
-    explicit ConfigSectionKeyboard(QWidget *parent = 0);
+    explicit ConfigSectionKeyboard(QWidget *parent = nullptr);
     ~ConfigSectionKeyboard();
     void initialize();
 
 private slots:
     void on_comboFirstC_currentIndexChanged(int index);
     void on_spinDefaultVelocity_editingFinished();
-    void combinaisonChanged(int key, int numOctave, QString combinaison);
     void initializeFirstC();
 
 private:
