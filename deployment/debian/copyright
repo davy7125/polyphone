@@ -2,7 +2,7 @@ Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 Upstream-Name: polyphone
 
 Files:      *
-Copyright:  2012-2017 Davy Triponney, davy.triponney@gmail.com
+Copyright:  2012-2018 Davy Triponney, davy.triponney@gmail.com
 License:    GPL-3+
 
 Files:      clavier/*
@@ -10,10 +10,14 @@ Copyright:  2008-2014 Pedro Lopez-Cabanillas, plcl@users.sf.net
             2013-2017 Davy Triponney, davy.triponney@gmail.com
 License:    GPL-3+
 
-Files:      sfark/*
+Files:      core/input/sfark/*
 Copyright:  Jeff Glatt
             2017 Davy Triponney <davy.triponney@gmail.com>
 License:    GPL-3+
+
+Files:      lib/sf3/*
+Copyright:  2010 Werner Schweer and others
+License:    GPL-2
 
 Files:      lib/sfarklib/*
 Copyright:  1998-2000 Andy Inman
@@ -24,6 +28,19 @@ Copyright:
  2012-2017  Davy Triponney, <davy.triponney@gmail.com>
  2016-2017  Olivier Humbert <trebmuh@tuxfamily.org>
 License:    GPL-3+
+
+License: GPL-2
+ This program is free software; you can redistribute it and/or modify
+ it under the terms of the GNU General Public License version 2.
+ .
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+ .
+ You should have received a copy of the GNU General Public License
+ along with this program; if not, write to the Free Software
+ Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 
 License: GPL-3+
  This package is free software: you can redistribute it and/or modify

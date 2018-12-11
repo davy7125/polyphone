@@ -17,8 +17,9 @@ Build-Depends:
  portaudio19-dev,
  qtbase5-dev,
  zlib1g-dev,
+ libssl-dev,
 Standards-Version: 3.9.6
-Homepage: http://polyphone-soundfonts.com
+Homepage: https://www.polyphone-soundfonts.com
 
 Package: polyphone
 Architecture: any
@@ -47,5 +48,5 @@ Description: soundfont editor
   - automatic loop of samples,
   - a recorder, for the record of what is played in a .wav file,
   - built-in synthesizer, using a virtual keyboard or midi signals,
-  - user manual, forum and soundfont repository online,
+  - user manual, forum and online soundfont repository,
   - available in several languages.
