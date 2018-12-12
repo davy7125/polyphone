@@ -40,8 +40,8 @@ class PagePrst : public PageTable
 {
     Q_OBJECT
 public:
-    explicit PagePrst(QWidget *parent = 0);
-    ~PagePrst();
+    explicit PagePrst(QWidget *parent = nullptr);
+    ~PagePrst() override;
     void setModVisible(bool visible);
     void spinUpDown(int steps, SpinBox *spin);
 
@@ -59,6 +59,14 @@ private slots:
     void setPreset();
 
 private:
+    void setBank(quint16 desiredBank, int collisionResolution);
+    bool isBankAvailable(quint16 wBank);
+    QList<int> getUsedPresetsForBank(int sf2Index, quint16 wBank);
+
+    void setPreset(quint16 desiredPreset, int collisionResolution);
+    bool isPresetAvailable(quint16 wPreset);
+    QList<int> getUsedBanksForPreset(int sf2Index, quint16 wPreset);
+
     Ui::PagePrst *ui;
     QList<AttributeType> _destIndex;
 };
@@ -68,7 +76,7 @@ class TableWidgetPrst : public TableWidget
 {
     Q_OBJECT
 public:
-    TableWidgetPrst(QWidget *parent = 0);
+    TableWidgetPrst(QWidget *parent = nullptr);
     ~TableWidgetPrst();
 
     // Association champ - ligne
@@ -85,12 +93,12 @@ class SpinBox : public QSpinBox
 {
     Q_OBJECT
 public:
-    SpinBox(QWidget *parent = 0) : QSpinBox(parent) {}
+    SpinBox(QWidget *parent = nullptr) : QSpinBox(parent) {}
     // Initialisation du sf2
     void init(PagePrst *page) {this->page = page;}
 
 public slots:
-    virtual void stepBy(int steps) {this->page->spinUpDown(steps, this);}
+    virtual void stepBy(int steps) { this->page->spinUpDown(steps, this); }
 
 private:
     PagePrst *page;
