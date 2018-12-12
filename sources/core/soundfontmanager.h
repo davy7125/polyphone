@@ -82,7 +82,7 @@ public:
     // Détermination de la validité d'un ID (en acceptant ou non les ID masqués, par défaut non)
     bool isValid(EltID id, bool acceptHidden = false);
 
-    // Disponibilité de bank / preset
+    // Availability of banks / presets
     void firstAvailablePresetBank(EltID id, int &nBank, int &nPreset);
     int closestAvailablePreset(EltID id, quint16 wBank, quint16 wPreset);
     bool isAvailable(EltID id, quint16 wBank, quint16 wPreset);
