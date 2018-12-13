@@ -24,9 +24,8 @@ Copyright:  1998-2000 Andy Inman
 License:    GPL-3+
 
 Files:      deployment/debian/*
-Copyright:
- 2012-2017  Davy Triponney, <davy.triponney@gmail.com>
- 2016-2017  Olivier Humbert <trebmuh@tuxfamily.org>
+Copyright:  2012-2017  Davy Triponney, <davy.triponney@gmail.com>
+            2016-2017  Olivier Humbert <trebmuh@tuxfamily.org>
 License:    GPL-3+
 
 License: GPL-2
