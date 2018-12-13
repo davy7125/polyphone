@@ -31,7 +31,7 @@ mv polyphone-$1 sources
 
 # Delete directories
 rm -r sources/debian
-rm -r sources/RELEASE
+rm -r sources/generated_files
 rm sources/Makefile
 rm polyphone_$1-1.debian.tar.xz
 rm polyphone_$1-1.dsc
