@@ -26,6 +26,7 @@
 #include <QFileInfo>
 #include <QStyleFactory>
 #include <QItemSelection>
+#include <QDebug>
 #include "soundfontmanager.h"
 #include "inputfactory.h"
 #include "abstractinput.h"

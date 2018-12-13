@@ -15,6 +15,11 @@
 DEFINES += SOFT_VERSION=\\\"2.0\\\"
 DEFINES += IDENTIFIER=\\\"beta\\\"
 
+OBJECTS_DIR=generated_files
+MOC_DIR=generated_files
+UI_DIR=generated_files
+RCC_DIR=generated_files
+
 # List to complete if other translations are wished
 # Format: polyphone_XX.ts where XX is the language code
 TRANSLATIONS = polyphone_fr.ts \
@@ -63,6 +68,7 @@ unix:!macx {
         PREFIX = /usr/local
     }
     TARGET.path = $$PREFIX/
+    DESTDIR=bin
 }
 macx {
     QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.6
