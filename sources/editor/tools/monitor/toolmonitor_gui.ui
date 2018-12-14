@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>382</width>
+    <width>385</width>
     <height>264</height>
    </rect>
   </property>
@@ -247,7 +247,7 @@
             </font>
            </property>
            <property name="text">
-            <string>Mean value per key</string>
+            <string>Average value per key</string>
            </property>
           </widget>
          </item>

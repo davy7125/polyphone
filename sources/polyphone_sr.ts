@@ -7471,7 +7471,8 @@ download the list</source>
     </message>
     <message>
         <location filename="repository/soundfont/soundfontviewer.ui" line="103"/>
-        <source>MIDI  standard</source>
+        <source>MIDI standard</source>
+        <oldsource>MIDI  standard</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -8052,8 +8053,9 @@ download content</source>
     <name>ToolFrequencyFilter_gui</name>
     <message>
         <location filename="editor/tools/frequency_filter/toolfrequencyfilter_gui.ui" line="26"/>
-        <source>Put in red the part of frequencies to filter:</source>
-        <translation>Сместите у црвено део учестаности за филтрирање :</translation>
+        <source>Mark with red color where you want to cut the frequencies:</source>
+        <oldsource>Put in red the part of frequencies to filter:</oldsource>
+        <translation type="unfinished">Сместите у црвено део учестаности за филтрирање :</translation>
     </message>
 </context>
 <context>
@@ -8475,8 +8477,9 @@ download content</source>
     </message>
     <message>
         <location filename="editor/tools/monitor/toolmonitor_gui.ui" line="250"/>
-        <source>Mean value per key</source>
-        <translation>Просечна вредност по ноти</translation>
+        <source>Average value per key</source>
+        <oldsource>Mean value per key</oldsource>
+        <translation type="unfinished">Просечна вредност по ноти</translation>
     </message>
     <message>
         <location filename="editor/tools/monitor/toolmonitor_gui.ui" line="263"/>
@@ -9080,7 +9083,8 @@ download content</source>
     <name>WaitingToolDialog</name>
     <message>
         <location filename="editor/tools/waitingtooldialog.ui" line="50"/>
-        <source>Processing..</source>
+        <source>Processing...</source>
+        <oldsource>Processing..</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>

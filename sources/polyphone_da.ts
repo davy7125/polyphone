@@ -399,7 +399,7 @@
         <location filename="core/types/attribute.cpp" line="704"/>
         <source>Root key</source>
         <translatorcomment>Root key</translatorcomment>
-        <translation>Oprindelig tangent</translation>
+        <translation>Grundtangent</translation>
     </message>
 </context>
 <context>
@@ -1448,7 +1448,7 @@ oversigt</translation>
     <message>
         <location filename="dialogs/dialogcreateelements.cpp" line="55"/>
         <source>Create an instrument comprising the sample %1?</source>
-        <translation>Opret instrument som indeholder samplen %1?</translation>
+        <translation>Opret instrument som indeholder sample %1?</translation>
     </message>
     <message>
         <location filename="dialogs/dialogcreateelements.cpp" line="61"/>
@@ -1688,7 +1688,7 @@ oversigt</translation>
     <message>
         <location filename="repository/widgets/downloadprogresscell.ui" line="51"/>
         <source>Cancel download</source>
-        <translation>afbryd download</translation>
+        <translation>Afbryd download</translation>
     </message>
     <message>
         <location filename="repository/widgets/downloadprogresscell.cpp" line="70"/>
@@ -2055,7 +2055,7 @@ oversigt</translation>
     <message>
         <location filename="editor/graphics/graphiquefourier.cpp" line="312"/>
         <source>correction</source>
-        <translation>fejlkorrektion</translation>
+        <translation>korrektion</translation>
     </message>
     <message>
         <location filename="editor/graphics/graphiquefourier.cpp" line="312"/>
@@ -3046,7 +3046,7 @@ frekvens</translation>
     <message>
         <location filename="editor/pagesmpl.ui" line="1179"/>
         <source>Root key</source>
-        <translation>Oprindelig tangent</translation>
+        <translation>Grundtangent</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.ui" line="1192"/>
@@ -3103,7 +3103,7 @@ frekvens</translation>
     <message>
         <location filename="editor/pagesmpl.cpp" line="314"/>
         <source>Sample not linked to an instrument yet.</source>
-        <translation>Samplen er ikke forbundet til et instrument endnu.</translation>
+        <translation>Denne sample er ikke forbundet til et instrument endnu.</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.cpp" line="316"/>
@@ -3119,7 +3119,7 @@ frekvens</translation>
         <location filename="editor/pagesmpl.cpp" line="540"/>
         <location filename="editor/pagesmpl.cpp" line="1150"/>
         <source>Change successfully applied to the different samples</source>
-        <translation>Ændringerne blev tilføjet de forskellinge samples</translation>
+        <translation>Ændringerne blev tilføjet de forskellige samples</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.cpp" line="807"/>
@@ -3262,17 +3262,17 @@ frekvens</translation>
     <message>
         <location filename="core/sampleloader.cpp" line="71"/>
         <source>Sample &quot;%1L&quot; already exists.&lt;br /&gt;Replace?</source>
-        <translation>Samplen &quot;%1L&quot; eksiterer allerede.&lt;br /&gt;Erstat?</translation>
+        <translation>Sample &quot;%1L&quot; eksiterer allerede.&lt;br /&gt;Erstat?</translation>
     </message>
     <message>
         <location filename="core/sampleloader.cpp" line="76"/>
         <source>Sample &quot;%1R&quot; already exists.&lt;br /&gt;Replace?</source>
-        <translation>Samplen &quot;%1R&quot; eksiterer allerede.&lt;br /&gt;Erstat?</translation>
+        <translation>Sample &quot;%1R&quot; eksiterer allerede.&lt;br /&gt;Erstat?</translation>
     </message>
     <message>
         <location filename="core/sampleloader.cpp" line="84"/>
         <source>Sample &quot;%1&quot; already exists.&lt;br /&gt;Replace?</source>
-        <translation>Samplen &quot;%1&quot; eksiterer allerede.&lt;br /&gt;Erstat?</translation>
+        <translation>Sample &quot;%1&quot; eksiterer allerede.&lt;br /&gt;Erstat?</translation>
     </message>
     <message>
         <location filename="core/sampleloader.cpp" line="97"/>
@@ -3374,7 +3374,7 @@ frekvens</translation>
     <message>
         <location filename="repository/soundfontinformation.cpp" line="46"/>
         <source>Unknown author</source>
-        <translation>Ukendt forfatter</translation>
+        <translation>Ukendt udgiver</translation>
     </message>
     <message>
         <location filename="context/keynamemanager.cpp" line="63"/>
@@ -3446,14 +3446,14 @@ frekvens</translation>
         <location filename="context/keynamemanager.cpp" line="73"/>
         <source>B♭</source>
         <comment>key name</comment>
-        <translation>B♭</translation>
+        <translation>H♭</translation>
     </message>
     <message>
         <location filename="context/keynamemanager.cpp" line="74"/>
         <location filename="context/keynamemanager.cpp" line="92"/>
         <source>B</source>
         <comment>key name</comment>
-        <translation>B</translation>
+        <translation>H</translation>
     </message>
     <message>
         <location filename="context/keynamemanager.cpp" line="82"/>
@@ -3491,484 +3491,484 @@ frekvens</translation>
     <message>
         <location filename="repository/repositorymanager.cpp" line="77"/>
         <source>acoustic instrument</source>
-        <translation type="unfinished"></translation>
+        <translation>akustisk instrument</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="78"/>
         <source>electronic instrument</source>
-        <translation type="unfinished"></translation>
+        <translation>elektronisk instrument</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="79"/>
         <source>various records</source>
-        <translation type="unfinished"></translation>
+        <translation>forskellige optagelser</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="80"/>
         <source>additive synthesis</source>
-        <translation type="unfinished"></translation>
+        <translation>additiv synthese</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="81"/>
         <source>subtrative synthesis</source>
-        <translation type="unfinished"></translation>
+        <translation>substrativ synthese</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="82"/>
         <source>wavetable synthesis</source>
-        <translation type="unfinished"></translation>
+        <translation>wavetable synthese</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="83"/>
         <source>model synthesis</source>
-        <translation type="unfinished"></translation>
+        <translation>model synthese</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="84"/>
         <source>FM synthesis</source>
-        <translation type="unfinished"></translation>
+        <translation>FM synthese</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="85"/>
         <source>vector synthesis</source>
-        <translation type="unfinished"></translation>
+        <translation>vektor synthese</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="86"/>
         <source>granular synthesis</source>
-        <translation type="unfinished"></translation>
+        <translation>granular synthese</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="87"/>
         <source>other synthesis</source>
-        <translation type="unfinished"></translation>
+        <translation>anden synthese</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="90"/>
         <source>high</source>
-        <translation type="unfinished"></translation>
+        <translation>høj</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="91"/>
         <source>low</source>
-        <translation type="unfinished"></translation>
+        <translation>lav</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="92"/>
         <source>distorted</source>
-        <translation type="unfinished"></translation>
+        <translation>forvrænget</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="93"/>
         <source>clean</source>
-        <translation type="unfinished"></translation>
+        <translation>ryd</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="94"/>
         <source>bright</source>
-        <translation type="unfinished"></translation>
+        <translation>lys</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="95"/>
         <source>dark</source>
-        <translation type="unfinished"></translation>
+        <translation>mørk</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="96"/>
         <source>warm</source>
-        <translation type="unfinished"></translation>
+        <translation>varm</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="97"/>
         <source>cold</source>
-        <translation type="unfinished"></translation>
+        <translation>kold</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="98"/>
         <source>fat</source>
-        <translation type="unfinished"></translation>
+        <translation>fed</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="99"/>
         <source>thin</source>
-        <translation type="unfinished"></translation>
+        <translation>tynd</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="100"/>
         <source>hard</source>
-        <translation type="unfinished"></translation>
+        <translation>hård</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="101"/>
         <source>soft</source>
-        <translation type="unfinished"></translation>
+        <translation>blød</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="102"/>
         <source>muted</source>
-        <translation type="unfinished"></translation>
+        <translation>muted</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="103"/>
         <source>detuned</source>
-        <translation type="unfinished"></translation>
+        <translation>forstemt</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="104"/>
         <source>dissonant</source>
-        <translation type="unfinished"></translation>
+        <translation>dissonans</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="105"/>
         <source>noisy</source>
-        <translation type="unfinished"></translation>
+        <translation>larmende</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="106"/>
         <source>metallic</source>
-        <translation type="unfinished"></translation>
+        <translation>metallisk</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="107"/>
         <source>wooden</source>
-        <translation type="unfinished"></translation>
+        <translation>træagtig</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="108"/>
         <source>exotic</source>
-        <translation type="unfinished"></translation>
+        <translation>exsotisk</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="111"/>
         <source>slow attack</source>
-        <translation type="unfinished"></translation>
+        <translation>langsom start</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="112"/>
         <source>decaying</source>
-        <translation type="unfinished"></translation>
+        <translation>hurtig udringende</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="113"/>
         <source>sustained</source>
-        <translation type="unfinished"></translation>
+        <translation>langsomt udringende</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="114"/>
         <source>long release</source>
-        <translation type="unfinished"></translation>
+        <translation>lang efterklang</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="115"/>
         <source>percussive</source>
-        <translation type="unfinished"></translation>
+        <translation>perkussiv</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="116"/>
         <source>long / evolving</source>
-        <translation type="unfinished"></translation>
+        <translation>lang / udviklende</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="117"/>
         <source>pulsating</source>
-        <translation type="unfinished"></translation>
+        <translation>pulserende</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="118"/>
         <source>echoing</source>
-        <translation type="unfinished"></translation>
+        <translation>med ekko</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="119"/>
         <source>pad</source>
-        <translation type="unfinished"></translation>
+        <translation>pad</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="120"/>
         <source>lead</source>
-        <translation type="unfinished"></translation>
+        <translation>lead</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="121"/>
         <source>monophonic</source>
-        <translation type="unfinished"></translation>
+        <translation>monofonisk</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="122"/>
         <source>chord</source>
-        <translation type="unfinished"></translation>
+        <translation>akkord</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="123"/>
         <source>glide / pitch mod</source>
-        <translation type="unfinished"></translation>
+        <translation>glide / pitch mod</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="124"/>
         <source>sweep / filter mod</source>
-        <translation type="unfinished"></translation>
+        <translation>sweep / filter mod</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="125"/>
         <source>arpeggiated</source>
-        <translation type="unfinished"></translation>
+        <translation>arpeggiato</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="126"/>
         <source>expressive</source>
-        <translation type="unfinished"></translation>
+        <translation>udtryksfuld</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="127"/>
         <source>complex</source>
-        <translation type="unfinished"></translation>
+        <translation>kompleks</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="128"/>
         <source>randomized</source>
-        <translation type="unfinished"></translation>
+        <translation>tilfældig / random</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="131"/>
         <source>classic music</source>
-        <translation type="unfinished"></translation>
+        <translation>klassisk</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="132"/>
         <source>electronic music</source>
-        <translation type="unfinished"></translation>
+        <translation>elektronisk musik</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="133"/>
         <source>trance</source>
-        <translation type="unfinished"></translation>
+        <translation>trance</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="134"/>
         <location filename="repository/repositorymanager.cpp" line="135"/>
         <source>ambient music</source>
-        <translation type="unfinished"></translation>
+        <translation>ambient musik</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="136"/>
         <source>house</source>
-        <translation type="unfinished"></translation>
+        <translation>house</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="137"/>
         <source>techno / electro</source>
-        <translation type="unfinished"></translation>
+        <translation>techno / electro</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="138"/>
         <source>D&apos;n&apos;B / breaks</source>
-        <translation type="unfinished"></translation>
+        <translation>D&apos;n&apos;B / breaks</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="139"/>
         <source>industrial</source>
-        <translation type="unfinished"></translation>
+        <translation>industriel</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="140"/>
         <source>experimental</source>
-        <translation type="unfinished"></translation>
+        <translation>eksperimentel</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="141"/>
         <source>funk / soul</source>
-        <translation type="unfinished"></translation>
+        <translation>funk / soul</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="142"/>
         <source>reggae / dub</source>
-        <translation type="unfinished"></translation>
+        <translation>reggae / dub</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="143"/>
         <source>latin / afro-cuban</source>
-        <translation type="unfinished"></translation>
+        <translation>latin / afro-cubansk</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="144"/>
         <source>pop / rock</source>
-        <translation type="unfinished"></translation>
+        <translation>pop /rock</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="145"/>
         <source>metal music</source>
-        <translation type="unfinished"></translation>
+        <translation>metal</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="146"/>
         <source>hiphop / rap</source>
-        <translation type="unfinished"></translation>
+        <translation>hiphop / rap</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="147"/>
         <source>jazz / swing</source>
-        <translation type="unfinished"></translation>
+        <translation>jazz / swing</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="148"/>
         <source>folk / country</source>
-        <translation type="unfinished"></translation>
+        <translation>folk / country</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="149"/>
         <location filename="repository/repositorymanager.cpp" line="150"/>
         <source>ethnic / world</source>
-        <translation type="unfinished"></translation>
+        <translation>etnisk / world</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="167"/>
         <source>public domain</source>
-        <translation type="unfinished"></translation>
+        <translation>hjemmeside</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="168"/>
         <source>give credit</source>
-        <translation type="unfinished"></translation>
+        <translation>oplys forfatter</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="169"/>
         <source>give credit, don&apos;t distribute with more restrictions</source>
-        <translation type="unfinished"></translation>
+        <translation>oplys forfatter, må ikke distribueres samt andre regler</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="170"/>
         <source>don&apos;t distribute a modified version</source>
-        <translation type="unfinished"></translation>
+        <translation>må kun distribueres uden modifikationer</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="171"/>
         <source>personal use</source>
-        <translation type="unfinished"></translation>
+        <translation>kun til privat brug</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="172"/>
         <source>personal use, don&apos;t distribute with more restrictions</source>
-        <translation type="unfinished"></translation>
+        <translation>kun til personligt brug, må ikke distribueres samt andre regler</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="173"/>
         <source>personal use, don&apos;t distribute a modified version</source>
-        <translation type="unfinished"></translation>
+        <translation>kun til privat brug, modificerede versioner må ikke distribueres</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="384"/>
         <source>piano</source>
-        <translation type="unfinished"></translation>
+        <translation>piano</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="387"/>
         <source>organ</source>
-        <translation type="unfinished"></translation>
+        <translation>orgel</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="390"/>
         <source>synthesizer</source>
-        <translation type="unfinished"></translation>
+        <translation>synthesizer</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="393"/>
         <source>harpsichord</source>
-        <translation type="unfinished"></translation>
+        <translation>spinette / harpsichord</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="396"/>
         <source>guitar</source>
-        <translation type="unfinished"></translation>
+        <translation>guitar</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="399"/>
         <source>bass</source>
-        <translation type="unfinished"></translation>
+        <translation>bas</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="402"/>
         <source>plucked strings</source>
-        <translation type="unfinished"></translation>
+        <translation>knipsede strenge</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="405"/>
         <source>bowed strings</source>
-        <translation type="unfinished"></translation>
+        <translation>buede strenge</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="408"/>
         <source>flute</source>
-        <translation type="unfinished"></translation>
+        <translation>fløjte</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="411"/>
         <source>reed</source>
-        <translation type="unfinished"></translation>
+        <translation>træblæser</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="414"/>
         <source>brass</source>
-        <translation type="unfinished"></translation>
+        <translation>messingblæser</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="417"/>
         <source>vocal</source>
-        <translation type="unfinished"></translation>
+        <translation>vokal</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="420"/>
         <source>unpitched percussion</source>
-        <translation type="unfinished"></translation>
+        <translation>slagtøj</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="423"/>
         <source>melodic percussion</source>
-        <translation type="unfinished"></translation>
+        <translation>melodisk slagtøj</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="426"/>
         <source>sound effect</source>
-        <translation type="unfinished"></translation>
+        <translation>lydeffekter SFX</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="429"/>
         <source>soundscape</source>
-        <translation type="unfinished"></translation>
+        <translation>lydflader SFX</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="432"/>
         <source>loop / rythm</source>
-        <translation type="unfinished"></translation>
+        <translation>loop / beat</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="435"/>
         <source>instrument set</source>
-        <translation type="unfinished"></translation>
+        <translation>instrumentsæt</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="438"/>
         <source>unclassifiable</source>
-        <translation type="unfinished"></translation>
+        <translation>uden for kategori</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="445"/>
         <source>Category %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Kategori %1</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="473"/>
         <source>Please wait...</source>
-        <translation type="unfinished"></translation>
+        <translation>Vent venligst...</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="476"/>
         <source>Your account has been banned.</source>
-        <translation type="unfinished"></translation>
+        <translation>Din konto er blevet bannet.</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="481"/>
         <source>A Premium account allows you to browse and download all soundfonts available online.</source>
-        <translation type="unfinished"></translation>
+        <translation>En Premium konto giver dig mulighed for at se og downloade alle soundfonts som er tilgængelige online.</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="490"/>
@@ -3982,7 +3982,7 @@ frekvens</translation>
         <location filename="repository/daily/showsoundfonts.ui" line="214"/>
         <source>Oops! Cannot
 download the list</source>
-        <translation type="unfinished"></translation>
+        <translation>Oops! Kan ikke downloade listen</translation>
     </message>
 </context>
 <context>
@@ -3990,42 +3990,42 @@ download the list</source>
     <message>
         <location filename="repository/browser/soundfontbrowser.ui" line="172"/>
         <source>Category</source>
-        <translation type="unfinished"></translation>
+        <translation>Kategori</translation>
     </message>
     <message>
         <location filename="repository/browser/soundfontbrowser.ui" line="188"/>
         <source>License</source>
-        <translation type="unfinished"></translation>
+        <translation>Licens</translation>
     </message>
     <message>
         <location filename="repository/browser/soundfontbrowser.ui" line="204"/>
         <source>Sample source</source>
-        <translation type="unfinished"></translation>
+        <translation>Sample-kilde</translation>
     </message>
     <message>
         <location filename="repository/browser/soundfontbrowser.ui" line="220"/>
         <source>Timbre</source>
-        <translation type="unfinished"></translation>
+        <translation>Klang</translation>
     </message>
     <message>
         <location filename="repository/browser/soundfontbrowser.ui" line="236"/>
         <source>Articulation</source>
-        <translation type="unfinished"></translation>
+        <translation>Artikulering</translation>
     </message>
     <message>
         <location filename="repository/browser/soundfontbrowser.ui" line="252"/>
         <source>Genre</source>
-        <translation type="unfinished"></translation>
+        <translation>Genre</translation>
     </message>
     <message>
         <location filename="repository/browser/soundfontbrowser.ui" line="268"/>
         <source>MIDI standard</source>
-        <translation type="unfinished"></translation>
+        <translation>MIDI standard</translation>
     </message>
     <message>
         <location filename="repository/browser/soundfontbrowser.ui" line="284"/>
         <source>Tags</source>
-        <translation type="unfinished"></translation>
+        <translation>Tags / kaldenavn</translation>
     </message>
     <message>
         <location filename="repository/browser/soundfontbrowser.ui" line="337"/>
@@ -4035,32 +4035,32 @@ download the list</source>
     <message>
         <location filename="repository/browser/soundfontbrowser.ui" line="387"/>
         <source>Date</source>
-        <translation type="unfinished"></translation>
+        <translation>Dato</translation>
     </message>
     <message>
         <location filename="repository/browser/soundfontbrowser.ui" line="392"/>
         <source>Downloads</source>
-        <translation type="unfinished"></translation>
+        <translation>Downloads</translation>
     </message>
     <message>
         <location filename="repository/browser/soundfontbrowser.ui" line="397"/>
         <source>Rating score</source>
-        <translation type="unfinished"></translation>
+        <translation>Vurderings score</translation>
     </message>
     <message>
         <location filename="repository/browser/soundfontbrowser.ui" line="402"/>
         <source>Title (A→Z)</source>
-        <translation type="unfinished"></translation>
+        <translation>Titel (A→Z)</translation>
     </message>
     <message>
         <location filename="repository/browser/soundfontbrowser.ui" line="455"/>
         <source>Filters</source>
-        <translation type="unfinished"></translation>
+        <translation>Filtre</translation>
     </message>
     <message>
         <location filename="repository/browser/soundfontbrowser.ui" line="484"/>
         <source>Reset</source>
-        <translation type="unfinished">Reset</translation>
+        <translation>Nulstil</translation>
     </message>
     <message>
         <location filename="repository/browser/soundfontbrowser.ui" line="503"/>
@@ -4070,23 +4070,24 @@ download the list</source>
     <message>
         <location filename="repository/browser/soundfontbrowser.ui" line="525"/>
         <source>No results</source>
-        <translation type="unfinished"></translation>
+        <translation>Ingen resultater</translation>
     </message>
     <message>
         <location filename="repository/browser/soundfontbrowser.ui" line="606"/>
         <source>Oops! Cannot
 download the list</source>
-        <translation type="unfinished"></translation>
+        <translation>Oops! Kan ikke
+downloade listen</translation>
     </message>
     <message>
         <location filename="repository/browser/soundfontbrowser.cpp" line="143"/>
         <source>commercial use</source>
-        <translation type="unfinished"></translation>
+        <translation>kommerciel brug</translation>
     </message>
     <message>
         <location filename="repository/browser/soundfontbrowser.cpp" line="144"/>
         <source>share after editing</source>
-        <translation type="unfinished"></translation>
+        <translation>del efter editering</translation>
     </message>
 </context>
 <context>
@@ -4094,7 +4095,7 @@ download the list</source>
     <message>
         <location filename="repository/soundfont/soundfontcomment.cpp" line="75"/>
         <source>No comments.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ingen kommentarer.</translation>
     </message>
 </context>
 <context>
@@ -4102,7 +4103,7 @@ download the list</source>
     <message>
         <location filename="repository/soundfont/soundfontdescription.cpp" line="99"/>
         <source>No description.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ingen beskrivelse.</translation>
     </message>
 </context>
 <context>
@@ -4115,7 +4116,7 @@ download the list</source>
     <message>
         <location filename="repository/soundfont/soundfontdownloadcell.cpp" line="68"/>
         <source>bytes</source>
-        <translation type="unfinished"></translation>
+        <translation>bytes</translation>
     </message>
     <message>
         <location filename="repository/soundfont/soundfontdownloadcell.cpp" line="70"/>
@@ -4147,47 +4148,47 @@ download the list</source>
     <message>
         <location filename="repository/soundfont/soundfontviewer.ui" line="65"/>
         <source>Genre</source>
-        <translation type="unfinished"></translation>
+        <translation>Genre</translation>
     </message>
     <message>
         <location filename="repository/soundfont/soundfontviewer.ui" line="103"/>
-        <source>MIDI  standard</source>
-        <translation type="unfinished"></translation>
+        <source>MIDI standard</source>
+        <translation>MIDI standard</translation>
     </message>
     <message>
         <location filename="repository/soundfont/soundfontviewer.ui" line="116"/>
         <source>Articulation</source>
-        <translation type="unfinished"></translation>
+        <translation>Opdeling</translation>
     </message>
     <message>
         <location filename="repository/soundfont/soundfontviewer.ui" line="129"/>
         <source>Category</source>
-        <translation type="unfinished"></translation>
+        <translation>Kategori</translation>
     </message>
     <message>
         <location filename="repository/soundfont/soundfontviewer.ui" line="174"/>
         <source>Sample source</source>
-        <translation type="unfinished"></translation>
+        <translation>Sample kilde</translation>
     </message>
     <message>
         <location filename="repository/soundfont/soundfontviewer.ui" line="203"/>
         <source>Tags</source>
-        <translation type="unfinished"></translation>
+        <translation>Tags / kaldenavn</translation>
     </message>
     <message>
         <location filename="repository/soundfont/soundfontviewer.ui" line="296"/>
         <source>Timbre</source>
-        <translation type="unfinished"></translation>
+        <translation>Klang</translation>
     </message>
     <message>
         <location filename="repository/soundfont/soundfontviewer.ui" line="460"/>
         <source>Description</source>
-        <translation type="unfinished"></translation>
+        <translation>Beskrivelse</translation>
     </message>
     <message>
         <location filename="repository/soundfont/soundfontviewer.ui" line="483"/>
         <source>Downloads</source>
-        <translation type="unfinished"></translation>
+        <translation>Downloads</translation>
     </message>
     <message>
         <location filename="repository/soundfont/soundfontviewer.ui" line="506"/>
@@ -4198,7 +4199,8 @@ download the list</source>
         <location filename="repository/soundfont/soundfontviewer.ui" line="575"/>
         <source>Oops! Cannot
 download content</source>
-        <translation type="unfinished"></translation>
+        <translation>Oops! kan ikke
+downloade indholdet</translation>
     </message>
 </context>
 <context>
@@ -4206,17 +4208,17 @@ download content</source>
     <message>
         <location filename="editor/widgets/tableheaderview.cpp" line="42"/>
         <source>mute</source>
-        <translation type="unfinished"></translation>
+        <translation>mute</translation>
     </message>
     <message>
         <location filename="editor/widgets/tableheaderview.cpp" line="46"/>
         <source>activate solo</source>
-        <translation type="unfinished"></translation>
+        <translation>kun solo</translation>
     </message>
     <message>
         <location filename="editor/widgets/tableheaderview.cpp" line="49"/>
         <source>unmute all</source>
-        <translation type="unfinished"></translation>
+        <translation>unmute alt</translation>
     </message>
 </context>
 <context>
@@ -4224,57 +4226,57 @@ download content</source>
     <message>
         <location filename="context/thememanager.cpp" line="57"/>
         <source>Custom</source>
-        <translation type="unfinished"></translation>
+        <translation>Personlig</translation>
     </message>
     <message>
         <location filename="context/thememanager.cpp" line="360"/>
         <source>Default</source>
-        <translation type="unfinished"></translation>
+        <translation>Standard</translation>
     </message>
     <message>
         <location filename="context/thememanager.cpp" line="380"/>
         <source>Gnome</source>
-        <translation type="unfinished"></translation>
+        <translation>Gnom</translation>
     </message>
     <message>
         <location filename="context/thememanager.cpp" line="393"/>
         <source>Dark, blue</source>
-        <translation type="unfinished"></translation>
+        <translation>Mørkeblå</translation>
     </message>
     <message>
         <location filename="context/thememanager.cpp" line="406"/>
         <source>Dark, orange</source>
-        <translation type="unfinished"></translation>
+        <translation>Mørk orange</translation>
     </message>
     <message>
         <location filename="context/thememanager.cpp" line="419"/>
         <source>Dark, green</source>
-        <translation type="unfinished"></translation>
+        <translation>Mørkegrøn</translation>
     </message>
     <message>
         <location filename="context/thememanager.cpp" line="432"/>
         <source>Dark, yellow</source>
-        <translation type="unfinished"></translation>
+        <translation>Mørk gul</translation>
     </message>
     <message>
         <location filename="context/thememanager.cpp" line="445"/>
         <source>Aqua</source>
-        <translation type="unfinished"></translation>
+        <translation>Hav</translation>
     </message>
     <message>
         <location filename="context/thememanager.cpp" line="458"/>
         <source>Spring</source>
-        <translation type="unfinished"></translation>
+        <translation>Forår</translation>
     </message>
     <message>
         <location filename="context/thememanager.cpp" line="471"/>
         <source>Windows 10</source>
-        <translation type="unfinished"></translation>
+        <translation>Windows 10</translation>
     </message>
     <message>
         <location filename="context/thememanager.cpp" line="484"/>
         <source>Ubuntu</source>
-        <translation type="unfinished"></translation>
+        <translation>Ubuntu</translation>
     </message>
 </context>
 <context>
@@ -4282,12 +4284,12 @@ download content</source>
     <message>
         <location filename="editor/tools/auto_distribution/toolautodistribution.h" line="45"/>
         <source>Fast editing</source>
-        <translation type="unfinished"></translation>
+        <translation>Hurtig editering</translation>
     </message>
     <message>
         <location filename="editor/tools/auto_distribution/toolautodistribution.h" line="60"/>
         <source>Automatically link the samples</source>
-        <translation type="unfinished"></translation>
+        <translation>Link automatisk samplingerne</translation>
     </message>
 </context>
 <context>
@@ -4295,27 +4297,27 @@ download content</source>
     <message>
         <location filename="editor/tools/auto_loop/toolautoloop.cpp" line="74"/>
         <source>Failed to loop sample &quot;%1&quot;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kunne ikke loope sample &quot;%1&quot;.</translation>
     </message>
     <message>
         <location filename="editor/tools/auto_loop/toolautoloop.cpp" line="77"/>
         <source>The following samples couldn&apos;t be looped:</source>
-        <translation type="unfinished"></translation>
+        <translation>Følgende samplinger kunne ikke loopes:</translation>
     </message>
     <message>
         <location filename="editor/tools/auto_loop/toolautoloop.cpp" line="82"/>
         <source>Possible reasons: too short or too turbulent.</source>
-        <translation type="unfinished"></translation>
+        <translation>Mulig årsag: for kort eller for stor forskelle.</translation>
     </message>
     <message>
         <location filename="editor/tools/auto_loop/toolautoloop.h" line="47"/>
         <source>Sample processing</source>
-        <translation type="unfinished"></translation>
+        <translation>Arbejder på sampling</translation>
     </message>
     <message>
         <location filename="editor/tools/auto_loop/toolautoloop.h" line="65"/>
         <source>Auto loop</source>
-        <translation type="unfinished"></translation>
+        <translation>Auto loop</translation>
     </message>
 </context>
 <context>
@@ -4323,17 +4325,17 @@ download content</source>
     <message>
         <location filename="editor/tools/balance_adjustment/toolbalanceadjustment.cpp" line="120"/>
         <source>This tool cannot be used with mono samples:</source>
-        <translation type="unfinished"></translation>
+        <translation>Dette værktøj kan ikke bruges til mono samples:</translation>
     </message>
     <message>
         <location filename="editor/tools/balance_adjustment/toolbalanceadjustment.h" line="47"/>
         <source>Stereo samples</source>
-        <translation type="unfinished"></translation>
+        <translation>Stereo samples</translation>
     </message>
     <message>
         <location filename="editor/tools/balance_adjustment/toolbalanceadjustment.h" line="65"/>
         <source>Balance adjustement</source>
-        <translation type="unfinished"></translation>
+        <translation>Balance justering</translation>
     </message>
 </context>
 <context>
@@ -4341,12 +4343,12 @@ download content</source>
     <message>
         <location filename="editor/tools/celeste_tuning/toolcelestetuning.h" line="46"/>
         <source>Fast editing</source>
-        <translation type="unfinished"></translation>
+        <translation>Hurtig editering</translation>
     </message>
     <message>
         <location filename="editor/tools/celeste_tuning/toolcelestetuning.h" line="61"/>
         <source>Detune</source>
-        <translation type="unfinished"></translation>
+        <translation>Forstemt</translation>
     </message>
 </context>
 <context>
@@ -4354,17 +4356,17 @@ download content</source>
     <message>
         <location filename="editor/tools/celeste_tuning/toolcelestetuning_gui.ui" line="20"/>
         <source>Division to the next octave</source>
-        <translation type="unfinished"></translation>
+        <translation>Opdeling til næste oktav</translation>
     </message>
     <message>
         <location filename="editor/tools/celeste_tuning/toolcelestetuning_gui.ui" line="60"/>
         <source>The algebraic sign determines the tuning direction.</source>
-        <translation type="unfinished"></translation>
+        <translation>Algebra-tegnet bestemmer hvilken vej der tunes.</translation>
     </message>
     <message>
         <location filename="editor/tools/celeste_tuning/toolcelestetuning_gui.cpp" line="50"/>
         <source>Number of beats per second</source>
-        <translation type="unfinished"></translation>
+        <translation>Slag pr minut</translation>
     </message>
     <message>
         <location filename="editor/tools/celeste_tuning/toolcelestetuning_gui.cpp" line="50"/>
@@ -4377,12 +4379,12 @@ download content</source>
     <message>
         <location filename="editor/tools/change_attenuation/toolchangeattenuation.h" line="46"/>
         <source>Fast editing</source>
-        <translation type="unfinished"></translation>
+        <translation>Hurtig editering</translation>
     </message>
     <message>
         <location filename="editor/tools/change_attenuation/toolchangeattenuation.h" line="64"/>
         <source>Change attenuations</source>
-        <translation type="unfinished"></translation>
+        <translation>Skift lydstyrkedæmpning</translation>
     </message>
 </context>
 <context>
@@ -4390,17 +4392,17 @@ download content</source>
     <message>
         <location filename="editor/tools/change_attenuation/toolchangeattenuation_gui.ui" line="39"/>
         <source>Desired value</source>
-        <translation type="unfinished"></translation>
+        <translation>Ønsket værdi</translation>
     </message>
     <message>
         <location filename="editor/tools/change_attenuation/toolchangeattenuation_gui.ui" line="65"/>
         <source>Possible offset</source>
-        <translation type="unfinished"></translation>
+        <translation>Muligt offset</translation>
     </message>
     <message>
         <location filename="editor/tools/change_attenuation/toolchangeattenuation_gui.ui" line="78"/>
         <source>Attenuation range</source>
-        <translation type="unfinished"></translation>
+        <translation>Lyddæmpnings område</translation>
     </message>
     <message>
         <location filename="editor/tools/change_attenuation/toolchangeattenuation_gui.ui" line="91"/>
@@ -4413,12 +4415,12 @@ download content</source>
     <message>
         <location filename="editor/tools/change_volume/toolchangevolume.h" line="46"/>
         <source>Sample processing</source>
-        <translation type="unfinished"></translation>
+        <translation>Arbejder på sampling</translation>
     </message>
     <message>
         <location filename="editor/tools/change_volume/toolchangevolume.h" line="61"/>
         <source>Change volume</source>
-        <translation type="unfinished"></translation>
+        <translation>Skift lydstyrke</translation>
     </message>
 </context>
 <context>
@@ -4426,7 +4428,7 @@ download content</source>
     <message>
         <location filename="editor/tools/change_volume/toolchangevolume_gui.ui" line="20"/>
         <source>Add</source>
-        <translation type="unfinished"></translation>
+        <translation>Tildøj</translation>
     </message>
     <message>
         <location filename="editor/tools/change_volume/toolchangevolume_gui.ui" line="30"/>
@@ -4436,12 +4438,12 @@ download content</source>
     <message>
         <location filename="editor/tools/change_volume/toolchangevolume_gui.ui" line="43"/>
         <source>Multiply</source>
-        <translation type="unfinished"></translation>
+        <translation>Multiplicér (gange)</translation>
     </message>
     <message>
         <location filename="editor/tools/change_volume/toolchangevolume_gui.ui" line="63"/>
         <source>Normalize</source>
-        <translation type="unfinished"></translation>
+        <translation>Normalisér</translation>
     </message>
     <message>
         <location filename="editor/tools/change_volume/toolchangevolume_gui.ui" line="73"/>
@@ -4454,17 +4456,17 @@ download content</source>
     <message>
         <location filename="editor/tools/chords/toolchords.cpp" line="59"/>
         <source>The instrument contains no samples.</source>
-        <translation type="unfinished"></translation>
+        <translation>Instrumentet indeholder ingen samples.</translation>
     </message>
     <message>
         <location filename="editor/tools/chords/toolchords.h" line="48"/>
         <source>Transformation</source>
-        <translation type="unfinished"></translation>
+        <translation>Transformering</translation>
     </message>
     <message>
         <location filename="editor/tools/chords/toolchords.h" line="63"/>
         <source>Create chords</source>
-        <translation type="unfinished"></translation>
+        <translation>Opbyg akkorder</translation>
     </message>
 </context>
 <context>
@@ -4472,67 +4474,67 @@ download content</source>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="25"/>
         <source>Instrument name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Instrument navn:</translation>
     </message>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="35"/>
         <source>Sample creation:</source>
-        <translation type="unfinished"></translation>
+        <translation>Opbyg sample:</translation>
     </message>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="43"/>
         <source>for every key</source>
-        <translation type="unfinished"></translation>
+        <translation>for hver tangent</translation>
     </message>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="48"/>
         <source>every 3 keys</source>
-        <translation type="unfinished"></translation>
+        <translation>hver 3. tangent</translation>
     </message>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="53"/>
         <source>every 6 keys</source>
-        <translation type="unfinished"></translation>
+        <translation>hver 6. tangent</translation>
     </message>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="61"/>
         <source>Auto loop</source>
-        <translation type="unfinished"></translation>
+        <translation>Aoto loop</translation>
     </message>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="71"/>
         <source>Stereo</source>
-        <translation type="unfinished"></translation>
+        <translation>Stereo</translation>
     </message>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="86"/>
         <source>Chord</source>
-        <translation type="unfinished"></translation>
+        <translation>Akkord</translation>
     </message>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="111"/>
         <source>Seventh</source>
-        <translation type="unfinished"></translation>
+        <translation>Syvende</translation>
     </message>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="124"/>
         <source>Ninth</source>
-        <translation type="unfinished"></translation>
+        <translation>Niende</translation>
     </message>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="137"/>
         <source>Third</source>
-        <translation type="unfinished"></translation>
+        <translation>Tredie</translation>
     </message>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="175"/>
         <source>Root key</source>
-        <translation>Oprindelig tangent</translation>
+        <translation>Grundtangent</translation>
     </message>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="188"/>
         <source>Fifth</source>
-        <translation type="unfinished"></translation>
+        <translation>Femte</translation>
     </message>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="227"/>
@@ -4548,45 +4550,45 @@ download content</source>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="302"/>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="370"/>
         <source>major</source>
-        <translation type="unfinished"></translation>
+        <translation>major</translation>
     </message>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="237"/>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="307"/>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="365"/>
         <source>minor</source>
-        <translation type="unfinished"></translation>
+        <translation>minor (mol)</translation>
     </message>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="257"/>
         <source>yes</source>
-        <translation type="unfinished">ja</translation>
+        <translation>ja</translation>
     </message>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="346"/>
         <source>Inversion number</source>
-        <translation type="unfinished"></translation>
+        <translation>Inversion nummer</translation>
     </message>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="375"/>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="425"/>
         <source>diminished</source>
-        <translation type="unfinished"></translation>
+        <translation>dim</translation>
     </message>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="420"/>
         <source>perfect</source>
-        <translation type="unfinished"></translation>
+        <translation>perfekt</translation>
     </message>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="430"/>
         <source>augmented</source>
-        <translation type="unfinished"></translation>
+        <translation>augmented</translation>
     </message>
     <message>
         <location filename="editor/tools/chords/toolchords_gui.ui" line="683"/>
         <source>Octave</source>
-        <translation type="unfinished"></translation>
+        <translation>Oktav</translation>
     </message>
 </context>
 <context>
@@ -4594,17 +4596,17 @@ download content</source>
     <message>
         <location filename="editor/tools/clean_unused_elements/toolcleanunused.cpp" line="110"/>
         <source>%1 sample(s) and %2 instrument(s) have been deleted.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 sample(s) og %2 instrument(er) er blevet slettet.</translation>
     </message>
     <message>
         <location filename="editor/tools/clean_unused_elements/toolcleanunused.h" line="48"/>
         <source>Clean up</source>
-        <translation type="unfinished"></translation>
+        <translation>Ryd op</translation>
     </message>
     <message>
         <location filename="editor/tools/clean_unused_elements/toolcleanunused.h" line="69"/>
         <source>Remove unused elements</source>
-        <translation type="unfinished"></translation>
+        <translation>Fjern ubrugte elementer</translation>
     </message>
 </context>
 <context>
@@ -4612,22 +4614,22 @@ download content</source>
     <message>
         <location filename="editor/tools/division_duplication/tooldivisionduplication.cpp" line="84"/>
         <source>An instrument comprising no samples is not compatible with this tool:</source>
-        <translation type="unfinished"></translation>
+        <translation>Et instrument som ikke indeholder samples er ikke kompatibelt med dette værktøj:</translation>
     </message>
     <message>
         <location filename="editor/tools/division_duplication/tooldivisionduplication.cpp" line="85"/>
         <source>A preset comprising no instruments is not compatible with this tool:</source>
-        <translation type="unfinished"></translation>
+        <translation>Et forvalg som ikke indeholder instrumenter er ikke kompatibelt med dette værktøj:</translation>
     </message>
     <message>
         <location filename="editor/tools/division_duplication/tooldivisionduplication.h" line="45"/>
         <source>Transformation</source>
-        <translation type="unfinished"></translation>
+        <translation>Transformering</translation>
     </message>
     <message>
         <location filename="editor/tools/division_duplication/tooldivisionduplication.h" line="63"/>
         <source>Division duplication</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopier opdeling</translation>
     </message>
 </context>
 <context>
@@ -4635,12 +4637,12 @@ download content</source>
     <message>
         <location filename="editor/tools/division_duplication/tooldivisionduplication_gui.ui" line="119"/>
         <source>A division for each velocity range</source>
-        <translation type="unfinished"></translation>
+        <translation>En opdeling for hver anslagsstyrke-område</translation>
     </message>
     <message>
         <location filename="editor/tools/division_duplication/tooldivisionduplication_gui.ui" line="126"/>
         <source>A division for each key</source>
-        <translation type="unfinished"></translation>
+        <translation>En opdeling for hver enkelt tangent</translation>
     </message>
 </context>
 <context>
@@ -4648,22 +4650,22 @@ download content</source>
     <message>
         <location filename="editor/tools/external_command/toolexternalcommand.cpp" line="114"/>
         <source>Couldn&apos;t start the command.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kunne ikke starte kommandoen.</translation>
     </message>
     <message>
         <location filename="editor/tools/external_command/toolexternalcommand.cpp" line="117"/>
         <source>The execution of the command ended with an error.</source>
-        <translation type="unfinished"></translation>
+        <translation>Udførelsen af kommandoen stoppede pga. en fejl.</translation>
     </message>
     <message>
         <location filename="editor/tools/external_command/toolexternalcommand.h" line="48"/>
         <source>Sample processing</source>
-        <translation type="unfinished"></translation>
+        <translation>Arbejder på sampling</translation>
     </message>
     <message>
         <location filename="editor/tools/external_command/toolexternalcommand.h" line="66"/>
         <source>External command</source>
-        <translation type="unfinished"></translation>
+        <translation>Ekstern kommando</translation>
     </message>
 </context>
 <context>
@@ -4671,7 +4673,7 @@ download content</source>
     <message>
         <location filename="editor/tools/external_command/toolexternalcommand_gui.ui" line="20"/>
         <source>Command</source>
-        <translation type="unfinished"></translation>
+        <translation>Kommando</translation>
     </message>
     <message>
         <location filename="editor/tools/external_command/toolexternalcommand_gui.ui" line="44"/>
@@ -4681,22 +4683,22 @@ download content</source>
     <message>
         <location filename="editor/tools/external_command/toolexternalcommand_gui.ui" line="54"/>
         <source>Authorize stereo editing</source>
-        <translation type="unfinished"></translation>
+        <translation>Tillad stereo editering</translation>
     </message>
     <message>
         <location filename="editor/tools/external_command/toolexternalcommand_gui.ui" line="61"/>
         <source>Replace sample information if possible</source>
-        <translation type="unfinished"></translation>
+        <translation>Erstat samle information hvis muligt</translation>
     </message>
     <message>
         <location filename="editor/tools/external_command/toolexternalcommand_gui.ui" line="98"/>
         <source>Command examples:</source>
-        <translation type="unfinished"></translation>
+        <translation>Kommando eksempler:</translation>
     </message>
     <message>
         <location filename="editor/tools/external_command/toolexternalcommand_gui.cpp" line="99"/>
         <source>Executable file</source>
-        <translation type="unfinished"></translation>
+        <translation>Eksekvérbar fil</translation>
     </message>
     <message>
         <location filename="editor/tools/external_command/toolexternalcommand_gui.cpp" line="116"/>
@@ -4707,12 +4709,12 @@ download content</source>
     <message>
         <location filename="editor/tools/external_command/toolexternalcommand_gui.cpp" line="116"/>
         <source>You must enter a command with at least {wav} as argument.</source>
-        <translation type="unfinished"></translation>
+        <translation>Du skal indsætte en kommando med mindst {wav} som argument.</translation>
     </message>
     <message>
         <location filename="editor/tools/external_command/toolexternalcommand_gui.cpp" line="123"/>
         <source>The command must contain the argument {wav}.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kommandoen skal indeholde argumentet {wav}.</translation>
     </message>
 </context>
 <context>
@@ -4720,20 +4722,21 @@ download content</source>
     <message>
         <location filename="editor/tools/frequency_filter/toolfrequencyfilter.h" line="46"/>
         <source>Sample processing</source>
-        <translation type="unfinished"></translation>
+        <translation>Arbejder på sampling</translation>
     </message>
     <message>
         <location filename="editor/tools/frequency_filter/toolfrequencyfilter.h" line="61"/>
         <source>Filter frequencies</source>
-        <translation type="unfinished"></translation>
+        <translation>Filter frekvenser</translation>
     </message>
 </context>
 <context>
     <name>ToolFrequencyFilter_gui</name>
     <message>
         <location filename="editor/tools/frequency_filter/toolfrequencyfilter_gui.ui" line="26"/>
-        <source>Put in red the part of frequencies to filter:</source>
-        <translation type="unfinished"></translation>
+        <source>Mark with red color where you want to cut the frequencies:</source>
+        <oldsource>Put in red the part of frequencies to filter:</oldsource>
+        <translation>Markér de frekvenser du ønsker filtreret fra med rødt:</translation>
     </message>
 </context>
 <context>
@@ -4746,7 +4749,7 @@ download content</source>
     <message>
         <location filename="editor/tools/frequency_peaks/toolfrequencypeaks.cpp" line="54"/>
         <source>Peak</source>
-        <translation type="unfinished"></translation>
+        <translation>Peak</translation>
     </message>
     <message>
         <location filename="editor/tools/frequency_peaks/toolfrequencypeaks.cpp" line="55"/>
@@ -4771,17 +4774,17 @@ download content</source>
     <message>
         <location filename="editor/tools/frequency_peaks/toolfrequencypeaks.cpp" line="81"/>
         <source>Success</source>
-        <translation type="unfinished"></translation>
+        <translation>Gennemført</translation>
     </message>
     <message>
         <location filename="editor/tools/frequency_peaks/toolfrequencypeaks.h" line="45"/>
         <source>Analyze</source>
-        <translation type="unfinished"></translation>
+        <translation>Analysér</translation>
     </message>
     <message>
         <location filename="editor/tools/frequency_peaks/toolfrequencypeaks.h" line="60"/>
         <source>Show peak frequency</source>
-        <translation type="unfinished"></translation>
+        <translation>Vis peak frekvens</translation>
     </message>
 </context>
 <context>
@@ -4804,7 +4807,7 @@ download content</source>
     <message>
         <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="85"/>
         <source>Peak</source>
-        <translation type="unfinished"></translation>
+        <translation>Peak</translation>
     </message>
     <message>
         <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="86"/>
@@ -4834,7 +4837,7 @@ download content</source>
     <message>
         <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="175"/>
         <source>Export peak frequency</source>
-        <translation type="unfinished"></translation>
+        <translation>Eksportér peak frekvens</translation>
     </message>
     <message>
         <location filename="editor/tools/frequency_peaks/toolfrequencypeaks_gui.cpp" line="176"/>
@@ -4847,12 +4850,12 @@ download content</source>
     <message>
         <location filename="editor/tools/global_settings/toolglobalsettings.h" line="46"/>
         <source>Fast editing</source>
-        <translation type="unfinished"></translation>
+        <translation>Hurtig editering</translation>
     </message>
     <message>
         <location filename="editor/tools/global_settings/toolglobalsettings.h" line="64"/>
         <source>Key-based configuration</source>
-        <translation type="unfinished"></translation>
+        <translation>Tangent-baseret konfiguration</translation>
     </message>
 </context>
 <context>
@@ -4860,87 +4863,87 @@ download content</source>
     <message>
         <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="37"/>
         <source>Minimum</source>
-        <translation type="unfinished"></translation>
+        <translation>Minimum</translation>
     </message>
     <message>
         <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="45"/>
         <source>Addition</source>
-        <translation type="unfinished"></translation>
+        <translation>Addition</translation>
     </message>
     <message>
         <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="50"/>
         <source>Multiplication</source>
-        <translation type="unfinished"></translation>
+        <translation>Multiplikation</translation>
     </message>
     <message>
         <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="55"/>
         <source>Replacement</source>
-        <translation type="unfinished"></translation>
+        <translation>Erstatning</translation>
     </message>
     <message>
         <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="86"/>
         <source>Parameter</source>
-        <translation type="unfinished"></translation>
+        <translation>Parameter</translation>
     </message>
     <message>
         <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="106"/>
         <source>Pattern</source>
-        <translation type="unfinished"></translation>
+        <translation>Mønster</translation>
     </message>
     <message>
         <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="129"/>
         <source>Maximum</source>
-        <translation type="unfinished"></translation>
+        <translation>Maximum</translation>
     </message>
     <message>
         <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="136"/>
         <source>Modification</source>
-        <translation type="unfinished"></translation>
+        <translation>Modifikation</translation>
     </message>
     <message>
         <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="163"/>
         <source>Manual</source>
-        <translation type="unfinished"></translation>
+        <translation>Manual</translation>
     </message>
     <message>
         <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="168"/>
         <source>Linear ascending</source>
-        <translation type="unfinished"></translation>
+        <translation>Lineært tiltagende</translation>
     </message>
     <message>
         <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="173"/>
         <source>Linear descending</source>
-        <translation type="unfinished"></translation>
+        <translation>Lineært aftagende</translation>
     </message>
     <message>
         <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="178"/>
         <source>Exponential ascending</source>
-        <translation type="unfinished"></translation>
+        <translation>Exponentielt stigende</translation>
     </message>
     <message>
         <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="183"/>
         <source>Exponential descending</source>
-        <translation type="unfinished"></translation>
+        <translation>Exponentielt aftagende</translation>
     </message>
     <message>
         <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="188"/>
         <source>Random</source>
-        <translation type="unfinished"></translation>
+        <translation>Tilfældig</translation>
     </message>
     <message>
         <location filename="editor/tools/global_settings/toolglobalsettings_gui.ui" line="259"/>
         <source>Apply to a velocity range</source>
-        <translation type="unfinished"></translation>
+        <translation>Tilføj til et anslagsværdi-område</translation>
     </message>
     <message>
         <location filename="editor/tools/global_settings/toolglobalsettings_gui.cpp" line="198"/>
         <source>Stiffness</source>
-        <translation type="unfinished"></translation>
+        <translation>Stivhed</translation>
     </message>
     <message>
         <location filename="editor/tools/global_settings/toolglobalsettings_gui.cpp" line="203"/>
         <source>Distribution</source>
-        <translation type="unfinished"></translation>
+        <translation>Deling</translation>
     </message>
 </context>
 <context>
@@ -4948,12 +4951,12 @@ download content</source>
     <message>
         <location filename="editor/tools/link_sample/toollinksample.h" line="49"/>
         <source>Stereo samples</source>
-        <translation type="unfinished"></translation>
+        <translation>Stereo samples</translation>
     </message>
     <message>
         <location filename="editor/tools/link_sample/toollinksample.h" line="67"/>
         <source>Find a link</source>
-        <translation type="unfinished"></translation>
+        <translation>Find et link</translation>
     </message>
 </context>
 <context>
@@ -4961,17 +4964,17 @@ download content</source>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation.cpp" line="59"/>
         <source>The instrument contains no samples.</source>
-        <translation type="unfinished"></translation>
+        <translation>Instrumentet indeholder ikke samples.</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation.h" line="48"/>
         <source>Transformation</source>
-        <translation type="unfinished"></translation>
+        <translation>Transformering</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation.h" line="63"/>
         <source>Mixture creation</source>
-        <translation type="unfinished"></translation>
+        <translation>Blandet udgivelse</translation>
     </message>
 </context>
 <context>
@@ -4979,42 +4982,42 @@ download content</source>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="25"/>
         <source>Name of the mixture:</source>
-        <translation type="unfinished"></translation>
+        <translation>Navnet på blandingen:</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="35"/>
         <source>Sample creation:</source>
-        <translation type="unfinished"></translation>
+        <translation>Sample udgivelse:</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="43"/>
         <source>for every key</source>
-        <translation type="unfinished"></translation>
+        <translation>for hver tangent</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="48"/>
         <source>every 3 keys</source>
-        <translation type="unfinished"></translation>
+        <translation>hver 3. tangent</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="53"/>
         <source>every 6 keys</source>
-        <translation type="unfinished"></translation>
+        <translation>hvert 6. tangent</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="61"/>
         <source>Auto loop</source>
-        <translation type="unfinished"></translation>
+        <translation>Auto loop</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="71"/>
         <source>Stereo</source>
-        <translation type="unfinished"></translation>
+        <translation>Stereo</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="85"/>
         <source>Divisions</source>
-        <translation type="unfinished"></translation>
+        <translation>Opdelinger</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="238"/>
@@ -5024,82 +5027,82 @@ download content</source>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="261"/>
         <source>Ranks</source>
-        <translation type="unfinished"></translation>
+        <translation>Rang</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="334"/>
         <source>Type</source>
-        <translation type="unfinished">Type</translation>
+        <translation>Type</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="342"/>
         <source>octave</source>
-        <translation type="unfinished"></translation>
+        <translation>oktav</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="347"/>
         <source>fifth</source>
-        <translation type="unfinished"></translation>
+        <translation>femte</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="352"/>
         <source>third</source>
-        <translation type="unfinished"></translation>
+        <translation>tredie</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="357"/>
         <source>seventh</source>
-        <translation type="unfinished"></translation>
+        <translation>syvende</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="362"/>
         <source>ninth</source>
-        <translation type="unfinished"></translation>
+        <translation>niende</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="367"/>
         <source>eleventh</source>
-        <translation type="unfinished"></translation>
+        <translation>elvte</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="372"/>
         <source>thirteenth</source>
-        <translation type="unfinished"></translation>
+        <translation>trettende</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="377"/>
         <source>fifteenth</source>
-        <translation type="unfinished"></translation>
+        <translation>femtende</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="382"/>
         <source>seventeenth</source>
-        <translation type="unfinished"></translation>
+        <translation>syttende</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="387"/>
         <source>nineteenth</source>
-        <translation type="unfinished"></translation>
+        <translation>nittende</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="392"/>
         <source>twenty-first</source>
-        <translation type="unfinished"></translation>
+        <translation>enogtyvende</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="397"/>
         <source>twenty-third</source>
-        <translation type="unfinished"></translation>
+        <translation>treogtyvende</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="402"/>
         <source>twenty-fifth</source>
-        <translation type="unfinished"></translation>
+        <translation>femogtyvende</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="407"/>
         <source>twenty-seventh</source>
-        <translation type="unfinished"></translation>
+        <translation>syvogtyvende</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.cpp" line="83"/>
@@ -5110,12 +5113,12 @@ download content</source>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.cpp" line="83"/>
         <source>The instrument name must be provided.</source>
-        <translation type="unfinished"></translation>
+        <translation>Instrumentet skal navngives.</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.cpp" line="99"/>
         <source>At least one rank must be specified.</source>
-        <translation type="unfinished"></translation>
+        <translation>Mindst én rang skal være valgt.</translation>
     </message>
 </context>
 <context>
@@ -5123,12 +5126,12 @@ download content</source>
     <message>
         <location filename="editor/tools/monitor/toolmonitor.h" line="45"/>
         <source>Analyze</source>
-        <translation type="unfinished"></translation>
+        <translation>Analysér</translation>
     </message>
     <message>
         <location filename="editor/tools/monitor/toolmonitor.h" line="57"/>
         <source>Display parameters</source>
-        <translation type="unfinished"></translation>
+        <translation>Vis parametre</translation>
     </message>
 </context>
 <context>
@@ -5136,32 +5139,32 @@ download content</source>
     <message>
         <location filename="editor/tools/monitor/toolmonitor_gui.ui" line="97"/>
         <source>Display options</source>
-        <translation type="unfinished"></translation>
+        <translation>Vis muligheder</translation>
     </message>
     <message>
         <location filename="editor/tools/monitor/toolmonitor_gui.ui" line="140"/>
         <source>Log scale</source>
-        <translation type="unfinished"></translation>
+        <translation>Log skala</translation>
     </message>
     <message>
         <location filename="editor/tools/monitor/toolmonitor_gui.ui" line="162"/>
         <source>Legend</source>
-        <translation type="unfinished"></translation>
+        <translation>Ældre</translation>
     </message>
     <message>
         <location filename="editor/tools/monitor/toolmonitor_gui.ui" line="221"/>
         <source>Default parameters</source>
-        <translation type="unfinished"></translation>
+        <translation>Standardparametre</translation>
     </message>
     <message>
         <location filename="editor/tools/monitor/toolmonitor_gui.ui" line="250"/>
-        <source>Mean value per key</source>
-        <translation type="unfinished"></translation>
+        <source>Average value per key</source>
+        <translation>Gennemsnitlig værdi per tangent</translation>
     </message>
     <message>
         <location filename="editor/tools/monitor/toolmonitor_gui.ui" line="263"/>
         <source>Defined parameters</source>
-        <translation type="unfinished"></translation>
+        <translation>Definerede parametre</translation>
     </message>
 </context>
 <context>
@@ -5169,12 +5172,12 @@ download content</source>
     <message>
         <location filename="editor/tools/preset_list/toolpresetlist.h" line="45"/>
         <source>Utility</source>
-        <translation type="unfinished"></translation>
+        <translation>Redskab</translation>
     </message>
     <message>
         <location filename="editor/tools/preset_list/toolpresetlist.h" line="60"/>
         <source>Export preset list</source>
-        <translation type="unfinished"></translation>
+        <translation>Eksportér forvalgsliste</translation>
     </message>
 </context>
 <context>
@@ -5182,22 +5185,22 @@ download content</source>
     <message>
         <location filename="editor/tools/preset_list/toolpresetlist_gui.ui" line="30"/>
         <source>Copy</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopiér</translation>
     </message>
     <message>
         <location filename="editor/tools/preset_list/toolpresetlist_gui.ui" line="56"/>
         <source>text copied in the clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>Teksten er kopieret til udklipsholder</translation>
     </message>
     <message>
         <location filename="editor/tools/preset_list/toolpresetlist_gui.ui" line="81"/>
         <source>csv format</source>
-        <translation type="unfinished"></translation>
+        <translation>csv format</translation>
     </message>
     <message>
         <location filename="editor/tools/preset_list/toolpresetlist_gui.ui" line="91"/>
         <source>html table</source>
-        <translation type="unfinished"></translation>
+        <translation>html tabel</translation>
     </message>
     <message>
         <location filename="editor/tools/preset_list/toolpresetlist_gui.ui" line="113"/>
@@ -5210,12 +5213,12 @@ download content</source>
     <message>
         <location filename="editor/tools/release/toolrelease.h" line="46"/>
         <source>Fast editing</source>
-        <translation type="unfinished"></translation>
+        <translation>Hurtig editering</translation>
     </message>
     <message>
         <location filename="editor/tools/release/toolrelease.h" line="61"/>
         <source>Natural release</source>
-        <translation type="unfinished"></translation>
+        <translation>Naturlig release</translation>
     </message>
 </context>
 <context>
@@ -5223,17 +5226,17 @@ download content</source>
     <message>
         <location filename="editor/tools/release/toolrelease_gui.ui" line="43"/>
         <source>Division to the next octave</source>
-        <translation type="unfinished"></translation>
+        <translation>Opdeling til næste oktav</translation>
     </message>
     <message>
         <location filename="editor/tools/release/toolrelease_gui.ui" line="66"/>
         <source>Detuning induced (semi-tones)</source>
-        <translation type="unfinished"></translation>
+        <translation>Forstemt tuning indflettet (halvtoner)</translation>
     </message>
     <message>
         <location filename="editor/tools/release/toolrelease_gui.cpp" line="51"/>
         <source>Release time (key %1)</source>
-        <translation type="unfinished"></translation>
+        <translation>Release tid (tangent %1)</translation>
     </message>
 </context>
 <context>
@@ -5241,27 +5244,27 @@ download content</source>
     <message>
         <location filename="editor/tools/remove_mods/toolremovemods.cpp" line="112"/>
         <source>1 modulator has been deleted.</source>
-        <translation type="unfinished"></translation>
+        <translation>1 modulation er blevet slettet.</translation>
     </message>
     <message>
         <location filename="editor/tools/remove_mods/toolremovemods.cpp" line="114"/>
         <source>%1 modulators have been deleted.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 modulationer er blevet slettet.</translation>
     </message>
     <message>
         <location filename="editor/tools/remove_mods/toolremovemods.cpp" line="121"/>
         <source>The selection contains no modulators.</source>
-        <translation type="unfinished"></translation>
+        <translation>Det valgte indeholder ingen modulationer.</translation>
     </message>
     <message>
         <location filename="editor/tools/remove_mods/toolremovemods.h" line="45"/>
         <source>Clean up</source>
-        <translation type="unfinished"></translation>
+        <translation>Ryd op</translation>
     </message>
     <message>
         <location filename="editor/tools/remove_mods/toolremovemods.h" line="82"/>
         <source>Remove modulators</source>
-        <translation type="unfinished"></translation>
+        <translation>Fjern modulationer</translation>
     </message>
 </context>
 <context>
@@ -5269,7 +5272,7 @@ download content</source>
     <message>
         <location filename="editor/tools/sample_export/toolsampleexport.cpp" line="39"/>
         <source>Choose a destination folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Vælg hvor du vil gemme filen</translation>
     </message>
     <message>
         <location filename="editor/tools/sample_export/toolsampleexport.h" line="50"/>
@@ -5279,7 +5282,7 @@ download content</source>
     <message>
         <location filename="editor/tools/sample_export/toolsampleexport.h" line="68"/>
         <source>Wav export</source>
-        <translation type="unfinished"></translation>
+        <translation>Wav eksport</translation>
     </message>
 </context>
 <context>
@@ -5287,12 +5290,12 @@ download content</source>
     <message>
         <location filename="editor/tools/sound_spatialization/toolsoundspatialization.h" line="45"/>
         <source>Fast editing</source>
-        <translation type="unfinished"></translation>
+        <translation>Hurtig editering</translation>
     </message>
     <message>
         <location filename="editor/tools/sound_spatialization/toolsoundspatialization.h" line="63"/>
         <source>Sound spatialization</source>
-        <translation type="unfinished"></translation>
+        <translation>Fordeling af lyde (spatialization)</translation>
     </message>
 </context>
 <context>
@@ -5300,57 +5303,57 @@ download content</source>
     <message>
         <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="70"/>
         <source>Inversions</source>
-        <translation type="unfinished"></translation>
+        <translation>Invertioner</translation>
     </message>
     <message>
         <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="100"/>
         <source>Spreading (%)</source>
-        <translation type="unfinished"></translation>
+        <translation>Spredning (%)</translation>
     </message>
     <message>
         <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="144"/>
         <source>Ascending</source>
-        <translation type="unfinished"></translation>
+        <translation>Stigende</translation>
     </message>
     <message>
         <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="149"/>
         <source>Descending</source>
-        <translation type="unfinished"></translation>
+        <translation>Faldende</translation>
     </message>
     <message>
         <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="154"/>
         <source>Hollow</source>
-        <translation type="unfinished"></translation>
+        <translation>Udhulning</translation>
     </message>
     <message>
         <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="159"/>
         <source>Spike</source>
-        <translation type="unfinished"></translation>
+        <translation>Spids</translation>
     </message>
     <message>
         <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="164"/>
         <source>Random</source>
-        <translation type="unfinished"></translation>
+        <translation>Tilfældig</translation>
     </message>
     <message>
         <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="172"/>
         <source>Pattern</source>
-        <translation type="unfinished"></translation>
+        <translation>Mønster</translation>
     </message>
     <message>
         <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="189"/>
         <source>Division number</source>
-        <translation type="unfinished"></translation>
+        <translation>Opdeligns-nummer</translation>
     </message>
     <message>
         <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="196"/>
         <source>Offset (0-100)</source>
-        <translation type="unfinished"></translation>
+        <translation>Offset (0-100)</translation>
     </message>
     <message>
         <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="203"/>
         <source>Filling (%)</source>
-        <translation type="unfinished"></translation>
+        <translation>Fylning (%)</translation>
     </message>
 </context>
 <context>
@@ -5358,12 +5361,12 @@ download content</source>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport.cpp" line="116"/>
         <source>Merge soudfonts:</source>
-        <translation type="unfinished"></translation>
+        <translation>Sammenlæg soundfonts:</translation>
     </message>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport.cpp" line="211"/>
         <source>Export successful!</source>
-        <translation type="unfinished"></translation>
+        <translation>Eksport gennemført!</translation>
     </message>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport.h" line="46"/>
@@ -5373,7 +5376,7 @@ download content</source>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport.h" line="61"/>
         <source>Export</source>
-        <translation type="unfinished">Eksportér</translation>
+        <translation>Eksportér</translation>
     </message>
 </context>
 <context>
@@ -5396,42 +5399,42 @@ download content</source>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="106"/>
         <source>Format</source>
-        <translation type="unfinished"></translation>
+        <translation>Format</translation>
     </message>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="116"/>
         <source>General MIDI classification</source>
-        <translation type="unfinished"></translation>
+        <translation>General MIDI classificering</translation>
     </message>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="123"/>
         <source>one directory per bank</source>
-        <translation type="unfinished"></translation>
+        <translation>ét  bibliotek per bank</translation>
     </message>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="130"/>
         <source>preset number as prefix</source>
-        <translation type="unfinished"></translation>
+        <translation>forvalgs-nummer som prefix</translation>
     </message>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="141"/>
         <source>High</source>
-        <translation type="unfinished"></translation>
+        <translation>Høj</translation>
     </message>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="146"/>
         <source>Medium</source>
-        <translation type="unfinished"></translation>
+        <translation>Medium</translation>
     </message>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="151"/>
         <source>Low</source>
-        <translation type="unfinished"></translation>
+        <translation>Lav</translation>
     </message>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="159"/>
         <source>Quality</source>
-        <translation type="unfinished"></translation>
+        <translation>Kvalitet</translation>
     </message>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="170"/>
@@ -5441,7 +5444,7 @@ download content</source>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="190"/>
         <source>Export</source>
-        <translation type="unfinished">Eksportér</translation>
+        <translation>Eksportér</translation>
     </message>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="141"/>
@@ -5459,22 +5462,22 @@ download content</source>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="157"/>
         <source>Invalid directory.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ugyldig mappe.</translation>
     </message>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="186"/>
         <source>At least one preset must be selected.</source>
-        <translation type="unfinished"></translation>
+        <translation>Mindst ét forvalg skal vælges.</translation>
     </message>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="192"/>
         <source>The maximal number of soundfont to export is 127.</source>
-        <translation type="unfinished"></translation>
+        <translation>Maksimalt antal soundfonts som kan eksporteres  er 127.</translation>
     </message>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="201"/>
         <source>In the case where several soundfonts are exported, the maximal number of presets per soundfonts is 127.</source>
-        <translation type="unfinished"></translation>
+        <translation>I tilfælde af at flere  soundfonts eksporteres,  er det største antal af forvalg 127.</translation>
     </message>
 </context>
 <context>
@@ -5482,17 +5485,17 @@ download content</source>
     <message>
         <location filename="editor/tools/transpose/tooltranspose.cpp" line="159"/>
         <source>An instrument comprising no samples is not compatible with this tool:</source>
-        <translation type="unfinished"></translation>
+        <translation>Et instrument uden samples er ikke kompatibelt med dette værktøj:</translation>
     </message>
     <message>
         <location filename="editor/tools/transpose/tooltranspose.h" line="45"/>
         <source>Fast editing</source>
-        <translation type="unfinished"></translation>
+        <translation>Hurtig editering</translation>
     </message>
     <message>
         <location filename="editor/tools/transpose/tooltranspose.h" line="63"/>
         <source>Transpose</source>
-        <translation type="unfinished"></translation>
+        <translation>Transponér</translation>
     </message>
 </context>
 <context>
@@ -5500,12 +5503,12 @@ download content</source>
     <message>
         <location filename="editor/tools/transpose_smpl/tooltransposesmpl.h" line="46"/>
         <source>Sample processing</source>
-        <translation type="unfinished"></translation>
+        <translation>Arbejder på sampling</translation>
     </message>
     <message>
         <location filename="editor/tools/transpose_smpl/tooltransposesmpl.h" line="61"/>
         <source>Transpose</source>
-        <translation type="unfinished"></translation>
+        <translation>Transponering</translation>
     </message>
 </context>
 <context>
@@ -5513,7 +5516,7 @@ download content</source>
     <message>
         <location filename="editor/tools/transpose_smpl/tooltransposesmpl_gui.ui" line="20"/>
         <source>Shift in semitones</source>
-        <translation type="unfinished"></translation>
+        <translation>Ændring i halvtoner</translation>
     </message>
 </context>
 <context>
@@ -5521,12 +5524,12 @@ download content</source>
     <message>
         <location filename="editor/tools/transpose/tooltranspose_gui.ui" line="20"/>
         <source>Shift in semitones</source>
-        <translation type="unfinished"></translation>
+        <translation>Ændring i halvtoner</translation>
     </message>
     <message>
         <location filename="editor/tools/transpose/tooltranspose_gui.ui" line="44"/>
         <source>Adapt keyrange</source>
-        <translation type="unfinished"></translation>
+        <translation>Tilpas til tangentområde</translation>
     </message>
 </context>
 <context>
@@ -5534,12 +5537,12 @@ download content</source>
     <message>
         <location filename="editor/tools/trim_end/tooltrimend.h" line="46"/>
         <source>Sample processing</source>
-        <translation type="unfinished"></translation>
+        <translation>Arbejder på sampling</translation>
     </message>
     <message>
         <location filename="editor/tools/trim_end/tooltrimend.h" line="64"/>
         <source>Trim to end of loop</source>
-        <translation type="unfinished"></translation>
+        <translation>Trim til slutning af loop</translation>
     </message>
 </context>
 <context>
@@ -5547,12 +5550,12 @@ download content</source>
     <message>
         <location filename="editor/tools/trim_start/tooltrimstart.h" line="46"/>
         <source>Sample processing</source>
-        <translation type="unfinished"></translation>
+        <translation>Arbejder på sampling</translation>
     </message>
     <message>
         <location filename="editor/tools/trim_start/tooltrimstart.h" line="64"/>
         <source>Remove blank at start</source>
-        <translation type="unfinished"></translation>
+        <translation>Fjern stilhed i starten</translation>
     </message>
 </context>
 <context>
@@ -5560,12 +5563,12 @@ download content</source>
     <message>
         <location filename="editor/tools/unlink_sample/toolunlinksample.h" line="49"/>
         <source>Stereo samples</source>
-        <translation type="unfinished"></translation>
+        <translation>Stereo samples</translation>
     </message>
     <message>
         <location filename="editor/tools/unlink_sample/toolunlinksample.h" line="64"/>
         <source>Unlink</source>
-        <translation type="unfinished"></translation>
+        <translation>Fjern link</translation>
     </message>
 </context>
 <context>
@@ -5573,17 +5576,17 @@ download content</source>
     <message>
         <location filename="mainwindow/toprightwidget.ui" line="74"/>
         <source>User area</source>
-        <translation type="unfinished"></translation>
+        <translation>Brugerområde</translation>
     </message>
     <message>
         <location filename="mainwindow/toprightwidget.ui" line="96"/>
         <source>Download status</source>
-        <translation type="unfinished"></translation>
+        <translation>Download-status</translation>
     </message>
     <message>
         <location filename="mainwindow/toprightwidget.ui" line="118"/>
         <source>Main menu</source>
-        <translation type="unfinished"></translation>
+        <translation>Hovedmenu</translation>
     </message>
     <message>
         <location filename="mainwindow/toprightwidget.cpp" line="114"/>
@@ -5598,7 +5601,7 @@ download content</source>
     <message>
         <location filename="mainwindow/toprightwidget.cpp" line="129"/>
         <source>Your account has been banned.</source>
-        <translation type="unfinished"></translation>
+        <translation>Din konto er blevet bannet.</translation>
     </message>
 </context>
 <context>
@@ -5614,32 +5617,32 @@ download content</source>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="46"/>
         <source>&amp;Bind to...</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Bind til...</translation>
     </message>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="51"/>
         <source>&amp;Replace by...</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Erstat med...</translation>
     </message>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="59"/>
         <source>&amp;Copy</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Kopiér</translation>
     </message>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="65"/>
         <source>&amp;Paste</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Paste</translation>
     </message>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="71"/>
         <source>D&amp;uplicate</source>
-        <translation type="unfinished"></translation>
+        <translation>D&amp;uplikér</translation>
     </message>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="77"/>
         <source>&amp;Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Slet</translation>
     </message>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="84"/>
@@ -5647,7 +5650,7 @@ download content</source>
         <location filename="editor/tree/treeviewmenu.cpp" line="145"/>
         <source>Re&amp;name...</source>
         <oldsource>&amp;Rename...</oldsource>
-        <translation type="unfinished"></translation>
+        <translation>Om&amp;døb...</translation>
     </message>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="187"/>
@@ -5658,27 +5661,27 @@ download content</source>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="188"/>
         <source>Cannot delete a sample used by another instrument.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan ikke slette en sample som bruges af et andet instrument.</translation>
     </message>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="191"/>
         <source>Cannot delete an instrument used by another preset.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan ikke slette et instrument som bruges af et andet forvalg.</translation>
     </message>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="325"/>
         <source>Sample name (max 20 characters):</source>
-        <translation type="unfinished"></translation>
+        <translation>Sample navn (højt 20 karakterer):</translation>
     </message>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="327"/>
         <source>Instrument name (max 20 characters):</source>
-        <translation type="unfinished"></translation>
+        <translation>Instrument navn (højt 20 karakterer):</translation>
     </message>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="329"/>
         <source>Preset name (max 20 characters):</source>
-        <translation type="unfinished"></translation>
+        <translation>Preset navn (højt 20 karakterer):</translation>
     </message>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="333"/>
@@ -5698,20 +5701,20 @@ download content</source>
     <message>
         <location filename="repository/usermanager.cpp" line="122"/>
         <source>Wrong username or password</source>
-        <translation type="unfinished"></translation>
+        <translation>Forkert brugernavn eller password</translation>
     </message>
 </context>
 <context>
     <name>WaitingToolDialog</name>
     <message>
         <location filename="editor/tools/waitingtooldialog.ui" line="50"/>
-        <source>Processing..</source>
-        <translation type="unfinished"></translation>
+        <source>Processing...</source>
+        <translation>Arbejder...</translation>
     </message>
     <message>
         <location filename="editor/tools/waitingtooldialog.cpp" line="77"/>
         <source>Canceling...</source>
-        <translation type="unfinished"></translation>
+        <translation>Afbryder...</translation>
     </message>
 </context>
 <context>
@@ -5719,7 +5722,7 @@ download content</source>
     <message>
         <location filename="mainwindow/widgetshowhistory.ui" line="84"/>
         <source>Empty list</source>
-        <translation type="unfinished"></translation>
+        <translation>Tom liste</translation>
     </message>
 </context>
 <context>
@@ -5768,7 +5771,7 @@ download content</source>
     <message>
         <location filename="mainwindow/windowmanager.cpp" line="235"/>
         <source>&amp;Cancel</source>
-        <translation>&amp;AFbryd</translation>
+        <translation>&amp;Afbryd</translation>
     </message>
     <message>
         <location filename="mainwindow/windowmanager.cpp" line="236"/>
@@ -5778,7 +5781,7 @@ download content</source>
     <message>
         <location filename="mainwindow/windowmanager.cpp" line="324"/>
         <source>User area</source>
-        <translation type="unfinished"></translation>
+        <translation>Bruger-område</translation>
     </message>
 </context>
 </TS>

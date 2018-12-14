@@ -1271,81 +1271,81 @@ en ligne</translation>
         <location filename="dialogs/dialog_about.cpp" line="70"/>
         <source>Davy Triponney</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
-        <translation type="unfinished">Davy Triponney</translation>
+        <translation>Davy Triponney</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_about.cpp" line="63"/>
         <location filename="dialogs/dialog_about.cpp" line="69"/>
         <source>Andrea Celani</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
-        <translation type="unfinished">Andrea Celani</translation>
+        <translation>Andrea Celani</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_about.cpp" line="64"/>
         <source>Kinwie</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
-        <translation type="unfinished">Kinwie</translation>
+        <translation>Kinwie</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_about.cpp" line="65"/>
         <source>Michael Schyllberg</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
-        <translation type="unfinished">Michael Schyllberg</translation>
+        <translation>Michael Schyllberg</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_about.cpp" line="66"/>
         <source>Paul Stratman</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
-        <translation type="unfinished">Paul Stratman</translation>
+        <translation>Paul Stratman</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_about.cpp" line="67"/>
         <location filename="dialogs/dialog_about.cpp" line="77"/>
         <source>Steve Clarke</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
-        <translation type="unfinished">Steve Clarke</translation>
+        <translation>Steve Clarke</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_about.cpp" line="71"/>
         <source>F.J. Martínez Murcia</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
-        <translation type="unfinished">F.J. Martínez Murcia</translation>
+        <translation>F.J. Martínez Murcia</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_about.cpp" line="72"/>
         <source>Georg Gergull</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
-        <translation type="unfinished">Georg Gergull</translation>
+        <translation>Georg Gergull</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_about.cpp" line="73"/>
         <source>Jay Alexander Fleming</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
-        <translation type="unfinished">Jay Alexander Fleming</translation>
+        <translation>Jay Alexander Fleming</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_about.cpp" line="74"/>
         <source>Joel Gomes</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
-        <translation type="unfinished">Joel Gomes</translation>
+        <translation>Joel Gomes</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_about.cpp" line="75"/>
         <source>Magson</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
-        <translation type="unfinished">Magson</translation>
+        <translation>Magson</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_about.cpp" line="76"/>
         <source>Pavel Fric</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
-        <translation type="unfinished">Pavel Fric</translation>
+        <translation>Pavel Fric</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_about.cpp" line="78"/>
         <source>Chris Hansen</source>
         <comment>translation needed if the alphabet is not the same (cyrillic for instance)</comment>
-        <translation type="unfinished"></translation>
+        <translation>Chris Hansen</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_about.cpp" line="50"/>
@@ -4188,7 +4188,8 @@ de télécharger la liste</translation>
     </message>
     <message>
         <location filename="repository/soundfont/soundfontviewer.ui" line="103"/>
-        <source>MIDI  standard</source>
+        <source>MIDI standard</source>
+        <oldsource>MIDI  standard</oldsource>
         <translation>Standard MIDI</translation>
     </message>
     <message>
@@ -4770,8 +4771,9 @@ de télécharger le contenu</translation>
     <name>ToolFrequencyFilter_gui</name>
     <message>
         <location filename="editor/tools/frequency_filter/toolfrequencyfilter_gui.ui" line="26"/>
-        <source>Put in red the part of frequencies to filter:</source>
-        <translation>Mettre dans le rouge les fréquences du signal à filtrer :</translation>
+        <source>Mark with red color where you want to cut the frequencies:</source>
+        <oldsource>Put in red the part of frequencies to filter:</oldsource>
+        <translation>Marquer en rouge les fréquences du signal à filtrer :</translation>
     </message>
 </context>
 <context>
@@ -5193,7 +5195,8 @@ de télécharger le contenu</translation>
     </message>
     <message>
         <location filename="editor/tools/monitor/toolmonitor_gui.ui" line="250"/>
-        <source>Mean value per key</source>
+        <source>Average value per key</source>
+        <oldsource>Mean value per key</oldsource>
         <translation>Valeur moyenne par note</translation>
     </message>
     <message>
@@ -5743,7 +5746,8 @@ de télécharger le contenu</translation>
     <name>WaitingToolDialog</name>
     <message>
         <location filename="editor/tools/waitingtooldialog.ui" line="50"/>
-        <source>Processing..</source>
+        <source>Processing...</source>
+        <oldsource>Processing..</oldsource>
         <translation>Traitement en cours...</translation>
     </message>
     <message>
