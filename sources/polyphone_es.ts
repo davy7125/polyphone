@@ -40,7 +40,7 @@
     <message>
         <location filename="core/types/attribute.cpp" line="427"/>
         <source>absolute value</source>
-        <translation type="unfinished"></translation>
+        <translation>valor absoluto</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="536"/>
@@ -60,18 +60,18 @@
     <message>
         <location filename="core/types/attribute.cpp" line="547"/>
         <source>Loop start offset</source>
-        <translation type="unfinished"></translation>
+        <translation>Desfase de inicio de loop</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="550"/>
         <source>Loop end offset</source>
-        <translation type="unfinished"></translation>
+        <translation>Desfase de fin de loop</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="553"/>
         <location filename="core/types/attribute.cpp" line="674"/>
         <source>Loop start offset (× 32768)</source>
-        <translation type="unfinished"></translation>
+        <translation>Desfase de inicio de loop (× 32768)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="556"/>
@@ -91,12 +91,12 @@
     <message>
         <location filename="core/types/attribute.cpp" line="565"/>
         <source>Filter, cutoff (×)</source>
-        <translation type="unfinished"></translation>
+        <translation>Filtro, freq (×)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="566"/>
         <source>Filter, cutoff (Hz)</source>
-        <translation type="unfinished"></translation>
+        <translation>Filtro, freq (Hz)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="569"/>
@@ -116,7 +116,7 @@
     <message>
         <location filename="core/types/attribute.cpp" line="578"/>
         <source>Sample end offset (× 32768)</source>
-        <translation type="unfinished"></translation>
+        <translation>Desfase de fin de muestra (× 32768)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="581"/>
@@ -316,7 +316,7 @@
     <message>
         <location filename="core/types/attribute.cpp" line="668"/>
         <source>Key range</source>
-        <translation type="unfinished"></translation>
+        <translation>Rango de notas</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="671"/>
@@ -341,7 +341,7 @@
     <message>
         <location filename="core/types/attribute.cpp" line="686"/>
         <source>Loop end offset (× 32768)</source>
-        <translation type="unfinished"></translation>
+        <translation>Desfase de fin de loop (× 32768)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="689"/>
@@ -356,12 +356,12 @@
     <message>
         <location filename="core/types/attribute.cpp" line="695"/>
         <source>Loop playback</source>
-        <translation type="unfinished"></translation>
+        <translation>Reproducción en loop</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="698"/>
         <source>Scale tuning</source>
-        <translation type="unfinished"></translation>
+        <translation>Afinación (escala)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="701"/>
@@ -4314,7 +4314,7 @@ Dividir el fichero en diferentes sf2 puede resolver el problema.</translation>
         <location filename="mainwindow/mainwindow.ui" line="71"/>
         <source>  Settings</source>
         <extracomment>prefixed with 2 spaces</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>  Preferencias</translation>
     </message>
     <message>
         <location filename="mainwindow/mainwindow.ui" line="87"/>
@@ -4333,7 +4333,7 @@ Dividir el fichero en diferentes sf2 puede resolver el problema.</translation>
         <location filename="mainwindow/mainwindow.ui" line="139"/>
         <source>  Forum</source>
         <extracomment>prefixed with 2 spaces</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>  Foro</translation>
     </message>
     <message>
         <location filename="mainwindow/mainwindow.ui" line="158"/>
@@ -7483,7 +7483,8 @@ download the list</source>
     </message>
     <message>
         <location filename="repository/soundfont/soundfontviewer.ui" line="103"/>
-        <source>MIDI  standard</source>
+        <source>MIDI standard</source>
+        <oldsource>MIDI  standard</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -8064,8 +8065,9 @@ download content</source>
     <name>ToolFrequencyFilter_gui</name>
     <message>
         <location filename="editor/tools/frequency_filter/toolfrequencyfilter_gui.ui" line="26"/>
-        <source>Put in red the part of frequencies to filter:</source>
-        <translation>Puesto en rojo las frecuencias de señal para atenuar :</translation>
+        <source>Mark with red color where you want to cut the frequencies:</source>
+        <oldsource>Put in red the part of frequencies to filter:</oldsource>
+        <translation type="unfinished">Puesto en rojo las frecuencias de señal para atenuar :</translation>
     </message>
 </context>
 <context>
@@ -8487,8 +8489,9 @@ download content</source>
     </message>
     <message>
         <location filename="editor/tools/monitor/toolmonitor_gui.ui" line="250"/>
-        <source>Mean value per key</source>
-        <translation>Valor medio por nota</translation>
+        <source>Average value per key</source>
+        <oldsource>Mean value per key</oldsource>
+        <translation type="unfinished">Valor medio por nota</translation>
     </message>
     <message>
         <location filename="editor/tools/monitor/toolmonitor_gui.ui" line="263"/>
@@ -8993,7 +8996,7 @@ download content</source>
     <message>
         <location filename="editor/tree/treeview.cpp" line="839"/>
         <source>instrument</source>
-        <translation type="unfinished"></translation>
+        <translation>instrumento</translation>
     </message>
 </context>
 <context>
@@ -9092,8 +9095,9 @@ download content</source>
     <name>WaitingToolDialog</name>
     <message>
         <location filename="editor/tools/waitingtooldialog.ui" line="50"/>
-        <source>Processing..</source>
-        <translation type="unfinished"></translation>
+        <source>Processing...</source>
+        <oldsource>Processing..</oldsource>
+        <translation>Procesando...</translation>
     </message>
     <message>
         <location filename="editor/tools/waitingtooldialog.cpp" line="77"/>

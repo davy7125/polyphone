@@ -13,7 +13,7 @@
 
 # Polyphone version
 DEFINES += SOFT_VERSION=\\\"2.0\\\"
-DEFINES += IDENTIFIER=\\\"beta\\\"
+DEFINES += IDENTIFIER=\\\"\\\"
 
 OBJECTS_DIR=generated_files
 MOC_DIR=generated_files

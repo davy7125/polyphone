@@ -1,7 +1,9 @@
 #!/bin/bash
 
-# First adapt debian/changelog so that the version and date are correct
-# Make sure "devscripts" package is installed (available in synaptic)
+# Check to do:
+#  * adapt debian/changelog so that the version and date are correct
+#  * make sure "devscripts" package is installed (available in synaptic)
+#  * the filesystem allow the execution flags to be removed (no NTFS)
 # Then run this script by opening a terminal in this current directory
 # For version 2.0 write "build-debian-package 2.0"
 
@@ -10,6 +12,10 @@ then
   echo "Usage: build-debian-package VERSION"
   exit $E_NOARGS
 fi
+
+# Remove the execution flags
+chmod -R -x+X debian
+chmod -R -x+X ../sources
 
 # Rename folder sources
 cd ..

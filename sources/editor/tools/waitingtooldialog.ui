@@ -47,7 +47,7 @@
    <item row="1" column="0" colspan="3">
     <widget class="QLabel" name="labelProcess">
      <property name="text">
-      <string>Processing..</string>
+      <string>Processing...</string>
      </property>
     </widget>
    </item>
