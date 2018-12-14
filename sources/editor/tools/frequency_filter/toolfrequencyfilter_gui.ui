@@ -23,7 +23,7 @@
       </sizepolicy>
      </property>
      <property name="text">
-      <string>Put in red the part of frequencies to filter:</string>
+      <string>Mark with red color where you want to cut the frequencies:</string>
      </property>
     </widget>
    </item>

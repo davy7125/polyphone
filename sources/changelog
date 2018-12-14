@@ -6,11 +6,13 @@ polyphone (2.0) unstable; urgency=low
   * (new) fast creation of instruments or presets with a drag & drop in the tree
   * (new) possibility to mute divisions for testing purposes
   * (new) tool for creating chords
-  * (new) German translation
+  * (new) German and Danish translations
   * (improvement) support for "control", "include", "default_path", "global", "group_label", "define" when importing sfz files
   * (improvement) sample rate displayed in the sample overview page
   * (improvement) navigation between linked elements
   * (improvement) divisions can be sorted in different ways
+  * (improvement) preset and bank numbers can be changed in a multiple selection
+  * (improvement) faster loading of soundfonts
   * (fix) bug when saving or loading 24-bit samples
   * (fix) opening big soundfonts
 
