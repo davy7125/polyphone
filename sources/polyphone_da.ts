@@ -1415,10 +1415,6 @@ oversigt</translation>
         <translation>Polyphone</translation>
     </message>
     <message>
-        <source>version</source>
-        <translation type="obsolete">version</translation>
-    </message>
-    <message>
         <location filename="dialogs/dialogchangelog.cpp" line="85"/>
         <source>What is new</source>
         <translatorcomment>(engelsk)</translatorcomment>
