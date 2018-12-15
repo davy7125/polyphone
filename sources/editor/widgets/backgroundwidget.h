@@ -38,6 +38,7 @@ protected:
     void paintEvent(QPaintEvent *event);
 
 private:
+    bool _withDecoration;
     QPixmap _decoration;
     static const int SIZE;
     static const int OFFSET_X;

@@ -1333,142 +1333,144 @@
 <context>
     <name>ConfigSectionInterface</name>
     <message>
-        <location filename="context/interface/configsectioninterface.ui" line="67"/>
+        <location filename="context/interface/configsectioninterface.ui" line="57"/>
         <source>Language</source>
         <translation>Sprache</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectioninterface.ui" line="80"/>
+        <location filename="context/interface/configsectioninterface.ui" line="44"/>
         <source>Key names</source>
         <translation>Notenname</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectioninterface.ui" line="29"/>
+        <location filename="context/interface/configsectioninterface.ui" line="26"/>
+        <source>Options</source>
+        <translation type="unfinished">Optionen</translation>
+    </message>
+    <message>
+        <location filename="context/interface/configsectioninterface.ui" line="113"/>
         <source>Middle C → 60, then 61</source>
         <translation>Mitte C → 60, dann 61</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectioninterface.ui" line="34"/>
+        <location filename="context/interface/configsectioninterface.ui" line="118"/>
         <source>Middle C → C3, then C♯3</source>
         <translation>Mitte C → C3, dann C♯3</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectioninterface.ui" line="39"/>
+        <location filename="context/interface/configsectioninterface.ui" line="123"/>
         <source>Middle C → C3, then D♭3</source>
         <translation>Mitte C → C3, dann D♭3</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectioninterface.ui" line="44"/>
+        <location filename="context/interface/configsectioninterface.ui" line="128"/>
         <source>Middle C → C4, then C♯4</source>
         <translation>Mitte C → C4, dann C♯4</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectioninterface.ui" line="49"/>
+        <location filename="context/interface/configsectioninterface.ui" line="133"/>
         <source>Middle C → C4, then D♭4</source>
         <translation>Mitte C → C4, dann D♭4</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectioninterface.ui" line="54"/>
+        <location filename="context/interface/configsectioninterface.ui" line="138"/>
         <source>Middle C → C5, then C♯5</source>
         <translation>Mitte C → C5, dann C♯5</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectioninterface.ui" line="59"/>
+        <location filename="context/interface/configsectioninterface.ui" line="143"/>
         <source>Middle C → C5, then D♭5</source>
         <translation>Mitte C → C5, dann D♭5</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectioninterface.ui" line="87"/>
+        <location filename="context/interface/configsectioninterface.ui" line="157"/>
         <source>Sort divisions</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/interface/configsectioninterface.ui" line="108"/>
+        <location filename="context/interface/configsectioninterface.ui" line="77"/>
         <source>by key range</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/interface/configsectioninterface.ui" line="113"/>
+        <location filename="context/interface/configsectioninterface.ui" line="82"/>
         <source>by velocity range</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/interface/configsectioninterface.ui" line="118"/>
+        <location filename="context/interface/configsectioninterface.ui" line="87"/>
         <source>in alphabetical order</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/interface/configsectioninterface.ui" line="123"/>
+        <location filename="context/interface/configsectioninterface.ui" line="92"/>
         <source>none</source>
         <comment>speaking of the &quot;sort divisions&quot;</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/interface/configsectioninterface.ui" line="139"/>
+        <location filename="context/interface/configsectioninterface.ui" line="183"/>
+        <source>Decorations</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="context/interface/configsectioninterface.ui" line="212"/>
         <source>Theme</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/interface/configsectioninterface.ui" line="245"/>
+        <location filename="context/interface/configsectioninterface.ui" line="483"/>
         <source>Selection</source>
         <translation>markierter Text</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectioninterface.ui" line="258"/>
         <source>Alternate background</source>
-        <translation>alternativer Hintergrund</translation>
+        <translation type="vanished">alternativer Hintergrund</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectioninterface.ui" line="305"/>
-        <location filename="context/interface/configsectioninterface.ui" line="331"/>
-        <location filename="context/interface/configsectioninterface.ui" line="344"/>
-        <location filename="context/interface/configsectioninterface.ui" line="611"/>
+        <location filename="context/interface/configsectioninterface.ui" line="245"/>
         <source>Text</source>
         <translation>Text</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectioninterface.ui" line="318"/>
+        <location filename="context/interface/configsectioninterface.ui" line="320"/>
         <source>Window</source>
         <translation>Fenster</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectioninterface.ui" line="357"/>
-        <location filename="context/interface/configsectioninterface.ui" line="370"/>
-        <location filename="context/interface/configsectioninterface.ui" line="414"/>
-        <location filename="context/interface/configsectioninterface.ui" line="598"/>
+        <location filename="context/interface/configsectioninterface.ui" line="439"/>
         <source>Background</source>
         <translation>Hintergrund</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectioninterface.ui" line="427"/>
+        <location filename="context/interface/configsectioninterface.ui" line="420"/>
         <source>Button</source>
         <translation>Button</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectioninterface.ui" line="637"/>
         <source>Color theme</source>
-        <translation>Farbschema</translation>
+        <translation type="vanished">Farbschema</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectioninterface.ui" line="660"/>
+        <location filename="context/interface/configsectioninterface.ui" line="558"/>
         <source>List and table</source>
         <translation>Liste und Tabelle</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectioninterface.ui" line="676"/>
+        <location filename="context/interface/configsectioninterface.ui" line="610"/>
         <source>This modification will be applied during the next start of the software.</source>
         <translation>Diese Änderung wird beim nächsten Start der Software angewendet.</translation>
     </message>
     <message>
-        <location filename="context/interface/configsectioninterface.cpp" line="156"/>
-        <location filename="context/interface/configsectioninterface.cpp" line="168"/>
-        <location filename="context/interface/configsectioninterface.cpp" line="180"/>
-        <location filename="context/interface/configsectioninterface.cpp" line="192"/>
-        <location filename="context/interface/configsectioninterface.cpp" line="204"/>
-        <location filename="context/interface/configsectioninterface.cpp" line="216"/>
-        <location filename="context/interface/configsectioninterface.cpp" line="228"/>
-        <location filename="context/interface/configsectioninterface.cpp" line="240"/>
-        <location filename="context/interface/configsectioninterface.cpp" line="252"/>
+        <location filename="context/interface/configsectioninterface.cpp" line="160"/>
+        <location filename="context/interface/configsectioninterface.cpp" line="172"/>
+        <location filename="context/interface/configsectioninterface.cpp" line="184"/>
+        <location filename="context/interface/configsectioninterface.cpp" line="196"/>
+        <location filename="context/interface/configsectioninterface.cpp" line="208"/>
+        <location filename="context/interface/configsectioninterface.cpp" line="220"/>
+        <location filename="context/interface/configsectioninterface.cpp" line="232"/>
+        <location filename="context/interface/configsectioninterface.cpp" line="244"/>
+        <location filename="context/interface/configsectioninterface.cpp" line="256"/>
         <source>Select a color</source>
         <translation>Farbe wählen</translation>
     </message>
