@@ -5831,7 +5831,7 @@ rate</source>
     </message>
     <message>
         <source>&lt;b&gt;Instrument is not linked to any preset.&lt;/b&gt;</source>
-        <oldsource>&lt;b&gt;Instrument liÃ© Ã&#xa0; aucun preset.&lt;/b&gt;</oldsource>
+        <oldsource>&lt;b&gt;Instrument liÃ© Ã  aucun preset.&lt;/b&gt;</oldsource>
         <translation type="obsolete">&lt;b&gt;乐器未链接到任何预设。&lt;/b&gt;</translation>
     </message>
     <message>
