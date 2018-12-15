@@ -1357,51 +1357,6 @@ en ligne</translation>
         <source>https://www.polyphone-soundfonts.com/en</source>
         <translation>https://www.polyphone-soundfonts.com/fr</translation>
     </message>
-    <message>
-        <source>Andrea Celani</source>
-        <translation type="obsolete">Andrea Celani</translation>
-    </message>
-    <message>
-        <source>Kinwie</source>
-        <translation type="obsolete">Kinwie</translation>
-    </message>
-    <message>
-        <source>Michael Schyllberg</source>
-        <translation type="obsolete">Michael Schyllberg</translation>
-    </message>
-    <message>
-        <source>Paul Stratman</source>
-        <translation type="obsolete">Paul Stratman</translation>
-    </message>
-    <message>
-        <source>Steve Clarke</source>
-        <translation type="obsolete">Steve Clarke</translation>
-    </message>
-    <message>
-        <source>F.J. Martínez Murcia</source>
-        <oldsource>F.J. Mart�nez Murcia</oldsource>
-        <translation type="obsolete">F.J. Martínez Murcia</translation>
-    </message>
-    <message>
-        <source>Georg Gergull</source>
-        <translation type="obsolete">Georg Gergull</translation>
-    </message>
-    <message>
-        <source>Jay Alexander Fleming</source>
-        <translation type="obsolete">Jay Alexander Fleming</translation>
-    </message>
-    <message>
-        <source>Joel Gomes</source>
-        <translation type="obsolete">Joel Gomes</translation>
-    </message>
-    <message>
-        <source>Magson</source>
-        <translation type="obsolete">Magson</translation>
-    </message>
-    <message>
-        <source>Pavel Fric</source>
-        <translation type="obsolete">Pavel Fric</translation>
-    </message>
 </context>
 <context>
     <name>DialogChangeLog</name>
@@ -1429,10 +1384,6 @@ en ligne</translation>
         <location filename="dialogs/dialogchangelog.cpp" line="49"/>
         <source>Polyphone</source>
         <translation>Polyphone</translation>
-    </message>
-    <message>
-        <source>version</source>
-        <translation type="obsolete">version</translation>
     </message>
     <message>
         <location filename="dialogs/dialogchangelog.cpp" line="85"/>
