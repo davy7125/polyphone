@@ -56,6 +56,8 @@ private slots:
     void on_comboKeyName_currentIndexChanged(int index);
     void on_comboSortDivisions_currentIndexChanged(int index);
 
+    void on_checkDecorations_clicked();
+
 private:
     void initComboLanguage();
     void fillColors();

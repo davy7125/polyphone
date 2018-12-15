@@ -104,6 +104,10 @@ void ConfigSectionInterface::initialize()
     ui->comboKeyName->setCurrentIndex((int)ContextManager::keyName()->getNameMiddleC());
     ui->comboKeyName->blockSignals(false);
 
+    ui->checkDecorations->blockSignals(true);
+    ui->checkDecorations->setChecked(ContextManager::configuration()->getValue(ConfManager::SECTION_DISPLAY, "decoration", true).toBool());
+    ui->checkDecorations->blockSignals(false);
+
     ui->comboSortDivisions->blockSignals(true);
     ui->comboSortDivisions->setCurrentIndex(
                 ContextManager::configuration()->getValue(ConfManager::SECTION_DISPLAY, "division_sort", 0).toInt());
@@ -273,4 +277,10 @@ void ConfigSectionInterface::on_comboKeyName_currentIndexChanged(int index)
 void ConfigSectionInterface::on_comboSortDivisions_currentIndexChanged(int index)
 {
     ContextManager::configuration()->setValue(ConfManager::SECTION_DISPLAY, "division_sort", index);
+}
+
+void ConfigSectionInterface::on_checkDecorations_clicked()
+{
+    ContextManager::configuration()->setValue(ConfManager::SECTION_DISPLAY, "decoration", ui->checkDecorations->isChecked());
+    ui->labelRestart->show();
 }
