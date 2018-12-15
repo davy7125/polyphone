@@ -61,6 +61,7 @@ private slots:
 
 private:
     Ui::WidgetShowHistory *ui;
+    bool _withDecoration;
     QPixmap _decoration;
     static const int SIZE;
     static const int OFFSET_X;
