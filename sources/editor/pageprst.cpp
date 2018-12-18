@@ -126,10 +126,10 @@ PagePrst::PagePrst(QWidget *parent) :
     ui->rangeEditor->init(_sf2);
 
 #ifdef Q_OS_MAC
-    this->table->setStyleSheet("QHeaderView::section:horizontal{padding: 4px 10px 4px 10px;}");
-    QFont font = this->table->font();
-    font.setPixelSize(10);
-    this->table->setFont(font);
+    _table->setStyleSheet("QHeaderView::section:horizontal{padding: 4px 10px 4px 10px;}");
+    QFont fontTmp = _table->font();
+    fontTmp.setPixelSize(10);
+    _table->setFont(fontTmp);
     ui->horizontalLayout_2->setSpacing(15);
 #endif
     ui->tablePrst->verticalHeader()->setDefaultSectionSize(QFontMetrics(ui->tablePrst->font()).height() + 8);

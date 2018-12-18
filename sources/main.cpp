@@ -72,7 +72,7 @@ int launchApplication(Options &options)
         w.openFile(file);
 
 #ifdef Q_OS_MAC
-    QObject::connect(&a, SIGNAL(openFile(QString)), &w, SLOT(dragAndDrop(QString)));
+    QObject::connect(qApp, SIGNAL(openFile(QString)), &w, SLOT(openFile(QString)));
 #endif
 
     return QApplication::exec();
