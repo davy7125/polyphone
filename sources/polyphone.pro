@@ -71,13 +71,14 @@ unix:!macx {
     DESTDIR=bin
 }
 macx {
-    QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.6
-    QMAKE_MAC_SDK = macosx10.9
+    QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.7
+    QMAKE_MAC_SDK = macosx10.14
     DEFINES += __MACOSX_CORE__ USE_LOCAL_RTMIDI USE_LOCAL_STK USE_LOCAL_QCUSTOMPLOT
     INCLUDEPATH += ../lib_mac/Jackmp.framework/Headers \
-        ../lib_mac \
-        ../lib_mac/ogg_vorbis
-    LIBS += -L$$PWD/../lib_mac -lportaudio -logg -lvorbis -F$$PWD/../lib_mac/ -framework Jackmp \
+        lib \
+        lib/ogg_vorbis \
+        ../lib_mac/include
+    LIBS += -L$$PWD/../lib_mac -lportaudio -logg -lvorbis -lssl -lcrypto -F$$PWD/../lib_mac/ -framework Jackmp \
         -framework CoreAudio -framework CoreMIDI -framework CoreFoundation \
         -framework AudioUnit -framework AudioToolbox -framework Cocoa -lz
     ICON = polyphone.icns
@@ -757,7 +758,7 @@ HEADERS += lib/sfarklib/sfArkLib.h \
     core/input/sfark/sfarkextractor2.h \
     core/input/sfark/abstractextractor.h
 
-SPECIAL_SOURCE = core/input/sfark/sfarkextractor1.cpp
+SPECIAL_SOURCES = core/input/sfark/sfarkextractor1.cpp
 macx {
     SOURCES += core/input/sfark/sfarkextractor2.cpp \
         lib/sfarklib/sfklZip.cpp \
@@ -766,7 +767,7 @@ macx {
         lib/sfarklib/sfklCrunch.cpp \
         lib/sfarklib/sfklCoding.cpp
 } else {
-    SPECIAL_SOURCE += core/input/sfark/sfarkextractor2.cpp \
+    SPECIAL_SOURCES += core/input/sfark/sfarkextractor2.cpp \
         lib/sfarklib/sfklZip.cpp \
         lib/sfarklib/sfklLPC.cpp \
         lib/sfarklib/sfklDiff.cpp \
@@ -774,7 +775,7 @@ macx {
         lib/sfarklib/sfklCoding.cpp
 }
 
-ExtraCompiler.input = SPECIAL_SOURCE
+ExtraCompiler.input = SPECIAL_SOURCES
 ExtraCompiler.variable_out = OBJECTS
 ExtraCompiler.output = ${QMAKE_VAR_OBJECTS_DIR}${QMAKE_FILE_IN_BASE}$${QMAKE_EXT_OBJ}
 win32 {
@@ -783,7 +784,7 @@ win32 {
 equals(QMAKE_CXX, g++) {
     ExtraCompiler.commands = $${QMAKE_CXX} -fPIC -D__LITTLE_ENDIAN__ -mfpmath=387 $(INCPATH) -c ${QMAKE_FILE_IN} -o ${QMAKE_FILE_OUT}
 }
-equals(QMAKE_CXX, clang++) {
+macx {
     ExtraCompiler.commands = $${QMAKE_CXX} $(CXXFLAGS) -D__LITTLE_ENDIAN__ -mno-sse -mfpmath=387 $(INCPATH) -c ${QMAKE_FILE_IN} -o ${QMAKE_FILE_OUT}
 }
 QMAKE_EXTRA_COMPILERS += ExtraCompiler

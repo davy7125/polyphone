@@ -2040,6 +2040,6 @@ int SoundFont::writeUncompressedSample(Sample* s)
         ov_clear(&vf);
     }
 
-    delete ibuffer;
+    delete [] ibuffer;
     return length;
 }
