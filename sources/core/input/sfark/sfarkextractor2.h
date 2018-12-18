@@ -33,7 +33,7 @@ public:
     SfArkExtractor2(const char * fileName);
     virtual ~SfArkExtractor2();
     bool extract(const char * outputFilePath) override;
-    virtual QString getError()
+    virtual QString getError() override
     {
         QString error = "";
         switch (_errorNumber)

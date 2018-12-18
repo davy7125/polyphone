@@ -65,7 +65,6 @@ private:
     Soundfont * _soundfont;
     IndexedElementList<Division *> _divisions;
     Division * _globalDivision;
-    bool _hidden;
     int _row;
     QString _name;
     QString _nameSort;

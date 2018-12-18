@@ -41,7 +41,7 @@ public:
     virtual ~SfArkExtractor1();
     bool extract(const char * outputFilePath) override;
     bool isVersion1();
-    QString getError()
+    QString getError() override
     {
         QString error = "";
         switch (_error)
