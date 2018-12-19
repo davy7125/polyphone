@@ -29,7 +29,10 @@
 #include "sfarkglobal.h"
 #include "zlib.h"
 #include "stdint.h"
+
+#ifdef Q_OS_MAC
 #include "unistd.h"
+#endif
 
 static const char * SfArkId = ".sfArk";
 
