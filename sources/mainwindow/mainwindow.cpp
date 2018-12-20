@@ -130,6 +130,7 @@ MainWindow::MainWindow(QWidget *parent) :
     recentSf2Changed();
 
     // Show changelog?
+    qDebug() << ContextManager::configuration()->getValue(ConfManager::SECTION_NONE, "last_version_installed", "0.0").toString();
     if (ContextManager::configuration()->getValue(ConfManager::SECTION_NONE, "last_version_installed", "0.0").toString() != SOFT_VERSION)
     {
         ContextManager::configuration()->setValue(ConfManager::SECTION_NONE, "last_version_installed", SOFT_VERSION);
