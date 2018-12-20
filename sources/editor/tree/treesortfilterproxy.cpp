@@ -37,7 +37,7 @@ TreeSortFilterProxy::TreeSortFilterProxy(int indexSf2, TreeView *treeView, QAbst
     _sortType(ContextManager::configuration()->getValue(ConfManager::SECTION_DISPLAY, "division_sort", 0).toInt())
 {
     //new QAbstractItemModelTester(model, QAbstractItemModelTester::FailureReportingMode::Warning, this);
-
+    this->setDynamicSortFilter(true);
     this->setSourceModel(model);
     _treeView->setSf2Index(indexSf2);
     _treeView->setModel(this);
@@ -241,6 +241,5 @@ void TreeSortFilterProxy::divisionSortChanged()
     _sortType = ContextManager::configuration()->getValue(ConfManager::SECTION_DISPLAY, "division_sort", 0).toInt();
 
     // Refresh all divisions
-    this->setDynamicSortFilter(true);
-    this->setDynamicSortFilter(false);
+    this->invalidate();
 }
