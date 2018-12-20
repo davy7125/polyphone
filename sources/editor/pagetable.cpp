@@ -91,9 +91,13 @@ void PageTable::addGlobal(IdList listIds)
     {
         AttributeValue genValTmp;
         int offsetStart = 0;
+        bool offsetStartDefined = false;
         int offsetEnd = 0;
+        bool offsetEndDefined = false;
         int offsetStartLoop = 0;
+        bool offsetStartLoopDefined = false;
         int offsetEndLoop = 0;
+        bool offsetEndLoopDefined = false;
         int row;
 
         QString qStr;
@@ -127,27 +131,35 @@ void PageTable::addGlobal(IdList listIds)
             switch (i)
             {
             case champ_startAddrsOffset:
+                offsetStartDefined = true;
                 offsetStart += genValTmp.shValue;
                 break;
             case champ_startAddrsCoarseOffset:
+                offsetStartDefined = true;
                 offsetStart += 32768 * genValTmp.shValue;
                 break;
             case champ_endAddrsOffset:
+                offsetEndDefined = true;
                 offsetEnd += genValTmp.shValue;
                 break;
             case champ_endAddrsCoarseOffset:
+                offsetEndDefined = true;
                 offsetEnd += 32768 * genValTmp.shValue;
                 break;
             case champ_startloopAddrsOffset:
+                offsetStartLoopDefined = true;
                 offsetStartLoop += genValTmp.shValue;
                 break;
             case champ_startloopAddrsCoarseOffset:
+                offsetStartLoopDefined = true;
                 offsetStartLoop += 32768 * genValTmp.shValue;
                 break;
             case champ_endloopAddrsOffset:
+                offsetEndLoopDefined = true;
                 offsetEndLoop += genValTmp.shValue;
                 break;
             case champ_endloopAddrsCoarseOffset:
+                offsetEndLoopDefined = true;
                 offsetEndLoop += 32768 * genValTmp.shValue;
                 break;
             default:
@@ -161,29 +173,25 @@ void PageTable::addGlobal(IdList listIds)
                 }
             }
         }
-        if (offsetStart && _table->getRow(champ_startAddrsOffset) > -1)
+        if (offsetStartDefined && _table->getRow(champ_startAddrsOffset) > -1)
         {
             row = _table->getRow(champ_startAddrsOffset);
-            genValTmp.shValue = offsetStart;
-            _table->item(row, numCol)->setText(Attribute::toString(champ_startAddrsOffset, _typePage == PAGE_PRST, genValTmp));
+            _table->item(row, numCol)->setText(QString::number(offsetStart));
         }
-        if (offsetEnd && _table->getRow(champ_endAddrsOffset) > -1)
+        if (offsetEndDefined && _table->getRow(champ_endAddrsOffset) > -1)
         {
             row = _table->getRow(champ_endAddrsOffset);
-            genValTmp.shValue = offsetEnd;
-            _table->item(row, numCol)->setText(Attribute::toString(champ_endAddrsOffset, _typePage == PAGE_PRST, genValTmp));
+            _table->item(row, numCol)->setText(QString::number(offsetEnd));
         }
-        if (offsetStartLoop && _table->getRow(champ_startloopAddrsOffset) > -1)
+        if (offsetStartLoopDefined && _table->getRow(champ_startloopAddrsOffset) > -1)
         {
             row = _table->getRow(champ_startloopAddrsOffset);
-            genValTmp.shValue = offsetStartLoop;
-            _table->item(row, numCol)->setText(Attribute::toString(champ_startloopAddrsOffset, _typePage == PAGE_PRST, genValTmp));
+            _table->item(row, numCol)->setText(QString::number(offsetStartLoop));
         }
-        if (offsetEndLoop && _table->getRow(champ_endloopAddrsOffset) > -1)
+        if (offsetEndLoopDefined && _table->getRow(champ_endloopAddrsOffset) > -1)
         {
             row = _table->getRow(champ_endloopAddrsOffset);
-            genValTmp.shValue = offsetEndLoop;
-            _table->item(row, numCol)->setText(Attribute::toString(champ_endloopAddrsOffset, _typePage == PAGE_PRST, genValTmp));
+            _table->item(row, numCol)->setText(QString::number(offsetEndLoop));
         }
     }
 }
@@ -231,9 +239,13 @@ void PageTable::addDivisions(EltID id)
 
         nbSmplInst++;
         int offsetStart = 0;
+        bool offsetStartDefined = false;
         int offsetEnd = 0;
+        bool offsetEndDefined = false;
         int offsetStartLoop = 0;
+        bool offsetStartLoopDefined = false;
         int offsetEndLoop = 0;
+        bool offsetEndLoopDefined = false;
         _table->addColumn(numCol, qStr, id);
         foreach (int champTmp, _sf2->getSiblings(id2))
         {
@@ -241,27 +253,35 @@ void PageTable::addDivisions(EltID id)
             switch (champTmp)
             {
             case champ_startAddrsOffset:
+                offsetStartDefined = true;
                 offsetStart += genValTmp.shValue;
                 break;
             case champ_startAddrsCoarseOffset:
+                offsetStartDefined = true;
                 offsetStart += 32768 * genValTmp.shValue;
                 break;
             case champ_endAddrsOffset:
+                offsetEndDefined = true;
                 offsetEnd += genValTmp.shValue;
                 break;
             case champ_endAddrsCoarseOffset:
+                offsetEndDefined = true;
                 offsetEnd += 32768 * genValTmp.shValue;
                 break;
             case champ_startloopAddrsOffset:
+                offsetStartLoopDefined = true;
                 offsetStartLoop += genValTmp.shValue;
                 break;
             case champ_startloopAddrsCoarseOffset:
+                offsetStartLoopDefined = true;
                 offsetStartLoop += 32768 * genValTmp.shValue;
                 break;
             case champ_endloopAddrsOffset:
+                offsetEndLoopDefined = true;
                 offsetEndLoop += genValTmp.shValue;
                 break;
             case champ_endloopAddrsCoarseOffset:
+                offsetEndLoopDefined = true;
                 offsetEndLoop += 32768 * genValTmp.shValue;
                 break;
             default:
@@ -276,29 +296,25 @@ void PageTable::addDivisions(EltID id)
             }
         }
 
-        if (offsetStart && _table->getRow(champ_startAddrsOffset) > -1)
+        if (offsetStartDefined && _table->getRow(champ_startAddrsOffset) > -1)
         {
             row = _table->getRow(champ_startAddrsOffset);
-            genValTmp.shValue = offsetStart;
-            _table->item(row, numCol)->setText(Attribute::toString(champ_startAddrsOffset, _typePage == PAGE_PRST, genValTmp));
+            _table->item(row, numCol)->setText(QString::number(offsetStart));
         }
-        if (offsetEnd && _table->getRow(champ_endAddrsOffset) > -1)
+        if (offsetEndDefined && _table->getRow(champ_endAddrsOffset) > -1)
         {
             row = _table->getRow(champ_endAddrsOffset);
-            genValTmp.shValue = offsetEnd;
-            _table->item(row, numCol)->setText(Attribute::toString(champ_endAddrsOffset, _typePage == PAGE_PRST, genValTmp));
+            _table->item(row, numCol)->setText(QString::number(offsetEnd));
         }
-        if (offsetStartLoop && _table->getRow(champ_startloopAddrsOffset) > -1)
+        if (offsetStartLoopDefined && _table->getRow(champ_startloopAddrsOffset) > -1)
         {
             row = _table->getRow(champ_startloopAddrsOffset);
-            genValTmp.shValue = offsetStartLoop;
-            _table->item(row, numCol)->setText(Attribute::toString(champ_startloopAddrsOffset, _typePage == PAGE_PRST, genValTmp));
+            _table->item(row, numCol)->setText(QString::number(offsetStartLoop));
         }
-        if (offsetEndLoop && _table->getRow(champ_endloopAddrsOffset) > -1)
+        if (offsetEndLoopDefined && _table->getRow(champ_endloopAddrsOffset) > -1)
         {
             row = _table->getRow(champ_endloopAddrsOffset);
-            genValTmp.shValue = offsetEndLoop;
-            _table->item(row, numCol)->setText(Attribute::toString(champ_endloopAddrsOffset, _typePage == PAGE_PRST, genValTmp));
+            _table->item(row, numCol)->setText(QString::number(offsetEndLoop));
         }
     }
 }
@@ -410,7 +426,7 @@ void PageTable::afficheRanges(bool justSelection)
 
 void PageTable::afficheEnvelops(bool justSelection)
 {
-    if (_envelopEditor != NULL)
+    if (_envelopEditor != nullptr)
         _envelopEditor->display(_currentIds, justSelection);
 }
 
@@ -460,7 +476,7 @@ void PageTable::afficheMod(EltID id, int selectedIndex)
     }
     else
     {
-        _pushCopyMod->setMenu(NULL);
+        _pushCopyMod->setMenu(nullptr);
         _pushCopyMod->setStyleSheet("");
         _pushCopyMod->setMaximumWidth(24);
     }
@@ -711,9 +727,9 @@ void PageTable::setOffset(int ligne, int colonne, AttributeType champ1, Attribut
             _sf2->set(id, champ1, genAmount);
             _sf2->set(id, champ2, genAmount2);
         }
-        // Mise à jour de la valeur dans la cellule
-        genAmount.shValue = _sf2->get(id, champ1).shValue + 32768 * _sf2->get(id, champ2).shValue;
-        _table->item(ligne, colonne)->setText(Attribute::toString(champ1, _typePage == PAGE_PRST, genAmount));
+
+        // Update the cell value
+        _table->item(ligne, colonne)->setText(QString::number(genAmount.shValue + 32768 * genAmount2.shValue));
     }
     else
     {
