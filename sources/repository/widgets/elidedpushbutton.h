@@ -32,7 +32,7 @@ class ElidedPushButton : public QPushButton
 {
 public:
     /// Constructor
-    ElidedPushButton(QWidget * parent = NULL) : QPushButton(parent) {}
+    ElidedPushButton(QWidget * parent = nullptr) : QPushButton(parent) {}
 
     /// Set the text to elide. The displayed text will be set automatically
     void setTextToElide(const QString text, int availableWidth = -1);
