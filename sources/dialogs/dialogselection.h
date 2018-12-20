@@ -39,7 +39,7 @@ class DialogSelection : public QDialog
     Q_OBJECT
 
 public:
-    DialogSelection(SoundfontManager *sf2, EltID id, QWidget *parent = 0);
+    DialogSelection(SoundfontManager *sf2, EltID id, QWidget *parent = nullptr);
     ~DialogSelection();
 
 private slots:
