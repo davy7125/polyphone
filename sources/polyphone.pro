@@ -12,7 +12,7 @@
 #DEFINES += USE_LOCAL_QCUSTOMPLOT
 
 # Polyphone version
-DEFINES += SOFT_VERSION=\\\"2.0\\\"
+DEFINES += SOFT_VERSION=\\\"2.0.1\\\"
 DEFINES += IDENTIFIER=\\\"\\\"
 
 OBJECTS_DIR=generated_files

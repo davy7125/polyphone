@@ -49,13 +49,13 @@ DialogAbout::DialogAbout(QWidget *parent) :
     ui->labelDescription->setText("<html><head/><body><p align='center'>" + trUtf8("Copyright") + " © " + annee +
                                   " " + trUtf8("Davy Triponney") + "<br/><br/><a href='" + url +
                                   "'><span style=' text-decoration: underline; color:" +
-                                  this->palette().color(QPalette::Link).name() + ";'>" +
-                                  trUtf8("Polyphone website") + "</span></a>" +
-                                  "<br/><br/><a href='" + urlDonation +
-                                  "'><span style=' text-decoration: underline; color:" +
-                                  this->palette().color(QPalette::Link).name() + ";'>" +
-                                  trUtf8("Donate") + "</span></a>" +
-                                  "</p></body></html>");
+                                  replacement["secondColor"] + ";'>" +
+            trUtf8("Polyphone website") + "</span></a>" +
+            "<br/><br/><a href='" + urlDonation +
+            "'><span style=' text-decoration: underline; color:" +
+            replacement["secondColor"] + ";'>" +
+            trUtf8("Donate") + "</span></a>" +
+            "</p></body></html>");
 
     // Credits
     _credit.addCreator(trUtf8("Davy Triponney", "translation needed if the alphabet is not the same (cyrillic for instance)"), "contact@polyphone-soundfonts.com");
@@ -132,7 +132,7 @@ QString Credit::getGroup(QString nameGroup, QStringList listName, QStringList li
     if (listName.size() == 0 || listName.size() != listMail.size())
         return "";
 
-    QString text = "<tr><td width='50%'><p align='right'><span style='font-size:9pt;'>" + nameGroup + "</span></p></td>" +
+    QString text = "<tr><td width='50%'><p align='right'>" + nameGroup + "</p></td>" +
             "<td width='50%'>" + getFormattedName(listName.at(0), listMail.at(0)) + "</td></tr>";
 
     for (int i = 1; i < listName.size(); i++)
@@ -145,26 +145,25 @@ QString Credit::getFormattedName(QString name, QString email)
 {
     QString text = "<p>";
     if (email.size())
-        text += "<a href='mailto:" + email + "'><span style='font-size:9pt; text-decoration: underline; color:" +
+        text += "<a href='mailto:" + email + "'><span style='text-decoration: underline; color:" +
                 QApplication::palette().color(QPalette::Link).name() + ";'>" +
                 QString::fromUtf8(name.toStdString().c_str()) + "</span></a>";
     else
-        text += "<span style='font-size:9pt;'>" + QString::fromUtf8(name.toStdString().c_str()) + "</span>";
+        text += "<span>" + QString::fromUtf8(name.toStdString().c_str()) + "</span>";
     return text + "</p>";
 }
 
 QString Credit::getFormattedLink(QString text, QString link)
 {
-    return "<a href='" + link + "'><span style='font-size:9pt; text-decoration: underline; color:" +
+    return "<a href='" + link + "'><span style='text-decoration: underline; color:" +
             QApplication::palette().color(QPalette::Link).name() + ";'>" +
             QString::fromUtf8(text.toStdString().c_str()) + "</span></a>";
 }
 
 QString Credit::getAwesomeCredit()
 {
-    return "<tr><td width='50%'><p align='right'><span style='font-size:9pt;'>" +
-            QObject::trUtf8("Icons") +
-            " </span></p></td>" +
+    return "<tr><td width='50%'><p align='right'>" +
+            QObject::trUtf8("Icons") + " </p></td>" +
             "<td width='50%'>Most of the icons are provided by " +
             getFormattedLink("Awesome", "https://fontawesome.com/") +
             " under the license " +

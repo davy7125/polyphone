@@ -48,6 +48,12 @@ DialogChangeLog::DialogChangeLog(QWidget *parent) :
     ui->labelTitle->setText(trUtf8("Thank you for having installed") + "\n" +
                             trUtf8("Polyphone") + " " + SOFT_VERSION +
                             (QString(IDENTIFIER).isEmpty() ? "" : (QString(" ") + IDENTIFIER)));
+    QString versionSmall = SOFT_VERSION;
+    if (versionSmall.split(".").count() > 2)
+    {
+        QStringList list = versionSmall.split(".");
+        versionSmall = list[0] + "." + list[1];
+    }
 
     // Read changelog and extract information
     QStringList listNew, listFix, listImprovement;
@@ -63,7 +69,7 @@ DialogChangeLog::DialogChangeLog(QWidget *parent) :
           QString line = in.readLine();
           if (rx1.exactMatch(line))
               currentVersion = rx1.cap(1);
-          else if (currentVersion == SOFT_VERSION)
+          else if (currentVersion == versionSmall)
           {
               if (rx2.exactMatch(line))
               {
