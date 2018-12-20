@@ -28,7 +28,7 @@
 #include "repositorymanager.h"
 #include "contextmanager.h"
 
-SoundfontCellFull::IconContainer * SoundfontCellFull::s_icons = NULL;
+SoundfontCellFull::IconContainer * SoundfontCellFull::s_icons = nullptr;
 
 SoundfontCellFull::SoundfontCellFull(SoundfontInformation* soundfontInfo, QWidget *parent) :
     QWidget(parent),
@@ -38,7 +38,7 @@ SoundfontCellFull::SoundfontCellFull(SoundfontInformation* soundfontInfo, QWidge
 {
     ui->setupUi(this);
 
-    if (s_icons == NULL)
+    if (s_icons == nullptr)
         s_icons = new IconContainer();
 
     // Title
@@ -57,9 +57,8 @@ SoundfontCellFull::SoundfontCellFull(SoundfontInformation* soundfontInfo, QWidge
     ui->labelDate->setText(soundfontInfo->getDateTime().toString(Qt::SystemLocaleShortDate));
 
     // License
-    _licenseLinkContent = "style=\"text-decoration:none;color:%1;\" href=\"" +
-            RepositoryManager::getInstance()->getLicenseLink(soundfontInfo->getLicense()) + "\"";
-    _licenseLabel = RepositoryManager::getInstance()->getLicenseLabel(soundfontInfo->getLicense());
+    ui->labelLicense->setTextToElide(RepositoryManager::getInstance()->getLicenseLabel(soundfontInfo->getLicense()),
+                                     RepositoryManager::getInstance()->getLicenseLink(soundfontInfo->getLicense()));
 
     // Attributes
     connect(ui->line3, SIGNAL(itemClicked(SoundfontFilter*)), this, SIGNAL(itemClicked(SoundfontFilter*)));
@@ -76,7 +75,7 @@ SoundfontCellFull::SoundfontCellFull(SoundfontInformation* soundfontInfo, QWidge
     QColor buttonBackgroundHover = ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND, ThemeManager::HOVERED);
     QColor buttonBackgroundHover2 = ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_TEXT, ThemeManager::HOVERED);
     QString tmp = QString("QPushButton{background-color:%1; color:%2;border:0px;padding:5px;border-radius:4px;}") +
-            "QPushButton:hover{ background-color:%3;}QLabel#labelAuthor{color:%1;}";
+            "QPushButton:hover{ background-color:%3;}QLabel#labelAuthor,ElidedLabel#labelLicense{color:%1;}";
     _normalStyleSheet = tmp.arg(buttonBackground.name()).arg(buttonText.name()).arg(buttonBackgroundHover.name());
     _activeStyleSheet = tmp.arg(buttonText.name()).arg(buttonBackground.name()).arg(buttonBackgroundHover2.name()) +
             "QLabel{color:" + ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_TEXT).name() + ";}";
@@ -105,9 +104,8 @@ void SoundfontCellFull::setActive(bool isActive)
         ui->iconLicense->setPixmap(s_icons->_copyrightIconSelected);
 
         // Author and license texts
-        QString linkColor = ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_TEXT).name();
-        ui->labelAuthor->setText(QString(_authorTextNoColor).arg(linkColor));
-        ui->labelLicense->setTextToElide(_licenseLabel, QString(_licenseLinkContent).arg(linkColor));
+        QColor linkColor = ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_TEXT);
+        ui->labelAuthor->setText(QString(_authorTextNoColor).arg(linkColor.name()));
     }
     else if (!isActive && _active)
     {
@@ -122,9 +120,8 @@ void SoundfontCellFull::setActive(bool isActive)
         ui->iconLicense->setPixmap(s_icons->_copyrightIcon);
 
         // Author and license texts
-        QString linkColor = ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND).name();
-        ui->labelAuthor->setText(QString(_authorTextNoColor).arg(linkColor));
-        ui->labelLicense->setTextToElide(_licenseLabel, QString(_licenseLinkContent).arg(linkColor));
+        QColor linkColor = ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_BACKGROUND);
+        ui->labelAuthor->setText(QString(_authorTextNoColor).arg(linkColor.name()));
     }
     _active = isActive;
 

@@ -22,33 +22,39 @@
 **             Date: 01.01.2013                                           **
 ***************************************************************************/
 
-#ifndef ELIDEDLABEL_H
-#define ELIDEDLABEL_H
+#include "elidedlabel.h"
+#include <QDesktopServices>
 
-#include <QLabel>
-#include <QResizeEvent>
-
-class ElidedLabel : public QLabel
+void ElidedLabel::setTextToElide(const QString text)
 {
-    Q_OBJECT
+    _text = text;
+    _linkContent = "";
+    this->resizeEvent(nullptr);
+}
 
-public:
-    /// Constructor
-    ElidedLabel(QWidget * parent = nullptr) : QLabel(parent) {}
+void ElidedLabel::setTextToElide(const QString text, const QString link)
+{
+    _text = text;
+    _linkContent = link;
+    this->resizeEvent(nullptr);
+}
 
-    /// Set the text to elide. The displayed text will be set automatically
-    void setTextToElide(const QString text);
+void ElidedLabel::resizeEvent(QResizeEvent * event)
+{
+    QFontMetrics metrics(this->font());
+    int width = (event == nullptr ? this->width() : event->size().width());
+    QString elidedText = metrics.elidedText(_text, Qt::ElideMiddle, width);
+    this->setText(elidedText);
 
-    /// Set the text to elide, being wrap in <a> for creating a link. The displayed text will be set automatically
-    void setTextToElide(const QString text, const QString link);
+    if (event != nullptr)
+        QLabel::resizeEvent(event);
+}
 
-protected:
-    void resizeEvent(QResizeEvent * event) override;
-    void mousePressEvent(QMouseEvent * event) override;
-
-private:
-    QString _text;
-    QString _linkContent;
-};
-
-#endif // ELIDEDLABEL_H
+void ElidedLabel::mousePressEvent(QMouseEvent * event)
+{
+    if (event->button() == Qt::LeftButton && !_linkContent.isEmpty())
+    {
+        QDesktopServices::openUrl(QUrl(_linkContent));
+    }
+    QLabel::mousePressEvent(event);
+}

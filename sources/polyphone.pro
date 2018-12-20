@@ -414,7 +414,8 @@ SOURCES	+= main.cpp \
     repository/downloadmanager.cpp \
     repository/widgets/downloadprogressbutton.cpp \
     repository/widgets/downloadprogresscell.cpp \
-    editor/overview/sortedtablewidgetitem.cpp
+    editor/overview/sortedtablewidgetitem.cpp \
+    repository/widgets/elidedlabel.cpp
 
 HEADERS  += \
     core/sound.h \

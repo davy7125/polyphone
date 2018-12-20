@@ -39,7 +39,7 @@ class SoundfontBrowser : public QWidget
     Q_OBJECT
 
 public:
-    explicit SoundfontBrowser(QWidget *parent = 0);
+    explicit SoundfontBrowser(QWidget *parent = nullptr);
     ~SoundfontBrowser();
 
 public slots:
