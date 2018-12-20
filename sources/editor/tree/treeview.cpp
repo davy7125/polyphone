@@ -309,45 +309,47 @@ void TreeView::selectionChanged(const QItemSelection &selected, const QItemSelec
     // Third attempt to select an index if empty: take the element at the same position or above in the tree
     if (this->selectedIndexes().isEmpty())
     {
-        TreeSortFilterProxy * proxy = (TreeSortFilterProxy *)this->model();
-        QModelIndex indexInitial = getIndex(_lastSelectedId);
-        if (indexInitial.isValid())
+        if (!deselected.indexes().isEmpty())
         {
-            QModelIndex parent = indexInitial.parent();
+            TreeSortFilterProxy * proxy = (TreeSortFilterProxy *)this->model();
+            QModelIndex indexInitial = deselected.indexes()[0];
 
-            // We try first to select the same position
-            bool ok = false;
-            for (int i = indexInitial.row(); i < this->model()->rowCount(parent); i++)
+            if (indexInitial.isValid())
             {
-                QModelIndex sibling = parent.child(i, 0);
-                if (!sibling.data(Qt::UserRole + 1).toBool() &&
-                        !proxy->isFiltered(sibling.data(Qt::UserRole).value<EltID>()))
-                {
-                    this->setCurrentIndex(sibling);
-                    ok = true;
-                    break;
-                }
-            }
+                QModelIndex parent = indexInitial.parent();
 
-            // Then a position above
-            if (!ok)
-            {
-                for (int i = indexInitial.row() - 1; i >= 0; i--)
+                // We try first to select the same position
+                bool ok = false;
+                for (int i = indexInitial.row(); i < this->model()->rowCount(parent); i++)
                 {
                     QModelIndex sibling = parent.child(i, 0);
-                    if (!sibling.data(Qt::UserRole + 1).toBool() &&
-                            !proxy->isFiltered(sibling.data(Qt::UserRole).value<EltID>()))
+                    if (!sibling.data(Qt::UserRole + 1).toBool() && !proxy->isFiltered(sibling.data(Qt::UserRole).value<EltID>()))
                     {
                         this->setCurrentIndex(sibling);
                         ok = true;
                         break;
                     }
                 }
-            }
 
-            // Finally the parent is selected
-            if (!ok)
-                this->setCurrentIndex(parent);
+                // Then a position above
+                if (!ok)
+                {
+                    for (int i = indexInitial.row() - 1; i >= 0; i--)
+                    {
+                        QModelIndex sibling = parent.child(i, 0);
+                        if (!sibling.data(Qt::UserRole + 1).toBool() && !proxy->isFiltered(sibling.data(Qt::UserRole).value<EltID>()))
+                        {
+                            this->setCurrentIndex(sibling);
+                            ok = true;
+                            break;
+                        }
+                    }
+                }
+
+                // Finally the parent is selected
+                if (!ok)
+                    this->setCurrentIndex(parent);
+            }
         }
     }
 
