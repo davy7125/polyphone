@@ -96,13 +96,14 @@ void DialogList::showDialog(EltID idSrc, bool isAssociation)
 
     // Selection
     if (selectedItem != nullptr)
-    {
         ui->listWidget->setCurrentItem(selectedItem);
-        ui->listWidget->scrollToItem(selectedItem, QAbstractItemView::PositionAtCenter);
-    }
 
     // Display the dialog
     this->show();
+
+    // Scroll
+    if (selectedItem != nullptr)
+        ui->listWidget->scrollToItem(selectedItem, QAbstractItemView::PositionAtCenter);
 }
 
 void DialogList::accept()
