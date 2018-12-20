@@ -40,7 +40,7 @@ class DialogList : public QDialog
     Q_OBJECT
 
 public:
-    explicit DialogList(QWidget *parent = 0);
+    explicit DialogList(QWidget *parent = nullptr);
     ~DialogList();
 
     void showDialog(EltID idSrc, bool isAssociation);
@@ -63,7 +63,7 @@ private:
 class ListWidgetItem : public QListWidgetItem
 {
 public:
-    explicit ListWidgetItem(const QString &text, QListWidget *view = 0, int type = Type)
+    explicit ListWidgetItem(const QString &text, QListWidget *view = nullptr, int type = Type)
         : QListWidgetItem(text, view, type){}
     EltID id;
 };

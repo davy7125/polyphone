@@ -39,7 +39,7 @@ public:
     /// Set the text to elide. The displayed text will be set automatically
     void setTextToElide(const QString text);
 
-    /// Set the text to elide, being wrap in <a> for creating a link. The displayed text will be set automatically
+    /// Set the text to elide and specify a link when we click on it
     void setTextToElide(const QString text, const QString link);
 
 protected:

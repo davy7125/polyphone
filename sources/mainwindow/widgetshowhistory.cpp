@@ -35,7 +35,7 @@
 const int WidgetShowHistory::SIZE = 900;
 const int WidgetShowHistory::OFFSET_X = -120;
 const int WidgetShowHistory::OFFSET_Y = -140;
-const double WidgetShowHistory::COLOR_RATIO = 0.2;
+const double WidgetShowHistory::COLOR_RATIO = 0.1;
 
 WidgetShowHistory::WidgetShowHistory(QWidget *parent) :
     QWidget(parent),
