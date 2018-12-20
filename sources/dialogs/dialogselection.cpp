@@ -34,7 +34,7 @@ DialogSelection::DialogSelection(SoundfontManager *sf2, EltID id, QWidget *paren
     this->setAttribute(Qt::WA_DeleteOnClose);
     this->setWindowFlags((windowFlags() & ~Qt::WindowContextHelpButtonHint));
 
-    // Remplissage de la liste
+    // Fill the list
     QString qStr;
     int initIndex = id.indexElt;
     foreach (int i, sf2->getSiblings(id))
@@ -56,7 +56,7 @@ DialogSelection::DialogSelection(SoundfontManager *sf2, EltID id, QWidget *paren
         }
     }
 
-    // Tri
+    // Sort
     ui->listWidget->sortItems();
 }
 

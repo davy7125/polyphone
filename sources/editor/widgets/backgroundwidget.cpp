@@ -31,7 +31,7 @@
 const int BackgroundWidget::SIZE = 600;
 const int BackgroundWidget::OFFSET_X = 150;
 const int BackgroundWidget::OFFSET_Y = 50;
-const double BackgroundWidget::COLOR_RATIO = 0.2;
+const double BackgroundWidget::COLOR_RATIO = 0.1;
 
 BackgroundWidget::BackgroundWidget(QWidget *parent) : QWidget(parent)
 {
