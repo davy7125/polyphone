@@ -34,7 +34,7 @@ TreeSortFilterProxy::TreeSortFilterProxy(int indexSf2, TreeView *treeView, QAbst
     _indexSf2(indexSf2),
     _treeView(treeView),
     _sm(SoundfontManager::getInstance()),
-    _sortType(0)
+    _sortType(ContextManager::configuration()->getValue(ConfManager::SECTION_DISPLAY, "division_sort", 0).toInt())
 {
     //new QAbstractItemModelTester(model, QAbstractItemModelTester::FailureReportingMode::Warning, this);
 
