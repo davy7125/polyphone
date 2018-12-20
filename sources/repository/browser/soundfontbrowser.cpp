@@ -121,7 +121,7 @@ void SoundfontBrowser::soundfontListAvailable(QString error)
     if (error.isEmpty())
     {
         fillFilter();
-        applyFilter(NULL);
+        applyFilter(nullptr);
         ui->stackedWidget->setCurrentIndex(1);
     }
     else
@@ -227,7 +227,7 @@ void SoundfontBrowser::on_pushRetry_clicked()
 
 void SoundfontBrowser::on_pushResetFilters_clicked()
 {
-    applyFilter(NULL);
+    applyFilter(nullptr);
 }
 
 SoundfontFilter * SoundfontBrowser::getFilter()
