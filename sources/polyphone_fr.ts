@@ -146,172 +146,172 @@
     <message>
         <location filename="core/types/attribute.cpp" line="594"/>
         <source>Mod LFO delay (×)</source>
-        <translation>Mod LFO delay (×)</translation>
+        <translation>Mod LFO délai (×)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="595"/>
         <source>Mod LFO delay (s)</source>
-        <translation>Mod LFO delay (s)</translation>
+        <translation>Mod LFO délai (s)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="598"/>
         <source>Mod LFO freq (×)</source>
-        <translation>Mod LFO freq (×)</translation>
+        <translation>Mod LFO fréq.(×)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="599"/>
         <source>Mod LFO freq (Hz)</source>
-        <translation>Mod LFO freq (Hz)</translation>
+        <translation>Mod LFO fréq.(Hz)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="602"/>
         <source>Vib LFO delay (×)</source>
-        <translation>Vib LFO delay (×)</translation>
+        <translation>Vib LFO délai (×)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="603"/>
         <source>Vib LFO delay (s)</source>
-        <translation>Vib LFO delay (s)</translation>
+        <translation>Vib LFO délai (s)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="606"/>
         <source>Vib LFO freq (×)</source>
-        <translation>Vib LFO freq (×)</translation>
+        <translation>Vib LFO fréq.(×)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="607"/>
         <source>Vib LFO freq (Hz)</source>
-        <translation>Vib LFO freq (Hz)</translation>
+        <translation>Vib LFO fréq.(Hz)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="610"/>
         <source>Mod env delay (×)</source>
-        <translation>Mod env delay (×)</translation>
+        <translation>Mod env délai (×)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="611"/>
         <source>Mod env delay (s)</source>
-        <translation>Mod env delay (s)</translation>
+        <translation>Mod env délai (s)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="614"/>
         <source>Mod env attack (×)</source>
-        <translation>Mod env attack (×)</translation>
+        <translation>Mod env attaque (×)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="615"/>
         <source>Mod env attack (s)</source>
-        <translation>Mod env attack (s)</translation>
+        <translation>Mod env attaque (s)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="618"/>
         <source>Mod env hold (×)</source>
-        <translation>Mod env hold (×)</translation>
+        <translation>Mod env maintien (×)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="619"/>
         <source>Mod env hold (s)</source>
-        <translation>Mod env hold (s)</translation>
+        <translation>Mod env maintien (s)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="622"/>
         <source>Mod env decay (×)</source>
-        <translation>Mod env decay (×)</translation>
+        <translation>Mod env déclin (×)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="623"/>
         <source>Mod env decay (s)</source>
-        <translation>Mod env decay (s)</translation>
+        <translation>Mod env déclin (s)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="626"/>
         <source>Mod env sustain (%)</source>
-        <translation>Mod env sustain (%)</translation>
+        <translation>Mod env soutien (%)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="629"/>
         <source>Mod env release (×)</source>
-        <translation>Mod env release (×)</translation>
+        <translation>Mod env relâche (×)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="630"/>
         <source>Mod env release (s)</source>
-        <translation>Mod env release (s)</translation>
+        <translation>Mod env relâche (s)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="633"/>
         <source>Key → Mod env hold (c)</source>
-        <translation>Note → Mod env hold (c)</translation>
+        <translation>Note → Mod env maintien (c)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="636"/>
         <source>Key → Mod env decay (c)</source>
-        <translation>Note → Mod env decay (c)</translation>
+        <translation>Note → Mod env déclin (c)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="639"/>
         <source>Vol env delay (×)</source>
-        <translation>Vol env delay (×)</translation>
+        <translation>Vol env délai (×)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="640"/>
         <source>Vol env delay (s)</source>
-        <translation>Vol env delay (s)</translation>
+        <translation>Vol env délai (s)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="643"/>
         <source>Vol env attack (×)</source>
-        <translation>Vol env attack (×)</translation>
+        <translation>Vol env attaque (×)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="644"/>
         <source>Vol env attack (s)</source>
-        <translation>Vol env attack (s)</translation>
+        <translation>Vol env attaque (s)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="647"/>
         <source>Vol env hold (×)</source>
-        <translation>Vol env hold (×)</translation>
+        <translation>Vol env maintien (×)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="648"/>
         <source>Vol env hold (s)</source>
-        <translation>Vol env hold (s)</translation>
+        <translation>Vol env maintien (s)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="651"/>
         <source>Vol env decay (×)</source>
-        <translation>Vol env decay (×)</translation>
+        <translation>Vol env déclin (×)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="652"/>
         <source>Vol env decay (s)</source>
-        <translation>Vol env decay (s)</translation>
+        <translation>Vol env déclin (s)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="655"/>
         <source>Vol env sustain (dB)</source>
-        <translation>Vol env sustain (dB)</translation>
+        <translation>Vol env soutien (dB)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="658"/>
         <source>Vol env release (×)</source>
-        <translation>Vol env release (×)</translation>
+        <translation>Vol env relâche (×)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="659"/>
         <source>Vol env release (s)</source>
-        <translation>Vol env release (s)</translation>
+        <translation>Vol env relâche (s)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="662"/>
         <source>Key → Vol env hold (c)</source>
-        <translation>Note → Vol env hold (c)</translation>
+        <translation>Note → Vol env maintien (c)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="665"/>
         <source>Key → Vol env decay (c)</source>
-        <translation>Note → Vol env decay (c)</translation>
+        <translation>Note → Vol env déclin (c)</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="668"/>
@@ -722,7 +722,7 @@
     <message>
         <location filename="context/interface/configpanel.ui" line="213"/>
         <source>Online repository</source>
-        <translation>Soundfonts en ligne</translation>
+        <translation>Banques de son en ligne</translation>
     </message>
 </context>
 <context>
@@ -1107,7 +1107,7 @@ Premium !</translation>
         <location filename="context/interface/configtoc.ui" line="111"/>
         <source>Online
 repository</source>
-        <translation>Soundfonts
+        <translation>Banques de son
 en ligne</translation>
     </message>
 </context>
@@ -1235,7 +1235,7 @@ en ligne</translation>
     <message>
         <location filename="dialogs/dialog_about.ui" line="29"/>
         <source>About</source>
-        <translation>A propos</translation>
+        <translation>À propos</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_about.ui" line="172"/>
@@ -1433,12 +1433,12 @@ en ligne</translation>
     <message>
         <location filename="dialogs/dialogcreateelements.cpp" line="71"/>
         <source>Create a preset comprising the instrument %1?</source>
-        <translation>Créer un preset contenant l&apos;instrument %1 ?</translation>
+        <translation>Créer un préréglage contenant l&apos;instrument %1 ?</translation>
     </message>
     <message>
         <location filename="dialogs/dialogcreateelements.cpp" line="77"/>
         <source>Create a preset</source>
-        <translation>Créer un preset</translation>
+        <translation>Créer un préréglage</translation>
     </message>
     <message>
         <location filename="dialogs/dialogcreateelements.cpp" line="78"/>
@@ -1504,7 +1504,7 @@ en ligne</translation>
     <message>
         <location filename="dialogs/dialog_list.cpp" line="63"/>
         <source>Preset list</source>
-        <translation>Liste des presets</translation>
+        <translation>Liste des préréglages</translation>
     </message>
 </context>
 <context>
@@ -1711,7 +1711,7 @@ en ligne</translation>
     <message>
         <location filename="core/duplicator.cpp" line="548"/>
         <source>The preset &quot;%1&quot; already exists.&lt;br/&gt;Replace?</source>
-        <translation>Le preset « %1 » existe déjà.&lt;br /&gt;Souhaitez-vous le remplacer ?</translation>
+        <translation>Le préréglage « %1 » existe déjà.&lt;br /&gt;Souhaitez-vous le remplacer ?</translation>
     </message>
     <message>
         <location filename="core/duplicator.cpp" line="570"/>
@@ -1721,7 +1721,7 @@ en ligne</translation>
     <message>
         <location filename="core/duplicator.cpp" line="571"/>
         <source>No preset available.</source>
-        <translation>Aucun preset n&apos;est disponible.</translation>
+        <translation>Aucun préréglage n&apos;est disponible.</translation>
     </message>
     <message>
         <location filename="core/duplicator.cpp" line="767"/>
@@ -1792,7 +1792,7 @@ en ligne</translation>
     <message>
         <location filename="editor/widgets/editortoolbar.cpp" line="61"/>
         <source>Add a preset</source>
-        <translation>Ajouter un preset</translation>
+        <translation>Ajouter un préréglage</translation>
     </message>
     <message>
         <location filename="editor/widgets/editortoolbar.cpp" line="65"/>
@@ -1852,17 +1852,17 @@ en ligne</translation>
     <message>
         <location filename="editor/widgets/editortoolbar.cpp" line="312"/>
         <source>No preset available.</source>
-        <translation>Aucun preset n&apos;est disponible.</translation>
+        <translation>Aucun préréglage n&apos;est disponible.</translation>
     </message>
     <message>
         <location filename="editor/widgets/editortoolbar.cpp" line="325"/>
         <source>Create a new preset</source>
-        <translation>Créer un nouveau preset</translation>
+        <translation>Créer un nouveau préréglage</translation>
     </message>
     <message>
         <location filename="editor/widgets/editortoolbar.cpp" line="326"/>
         <source>Name of the new preset:</source>
-        <translation>Nom du nouveau preset :</translation>
+        <translation>Nom du nouveau préréglage :</translation>
     </message>
 </context>
 <context>
@@ -1918,7 +1918,7 @@ en ligne</translation>
     <message>
         <location filename="editor/envelopeditor.ui" line="138"/>
         <source>Release</source>
-        <translation>Release</translation>
+        <translation>Relâche</translation>
     </message>
     <message>
         <location filename="editor/envelopeditor.ui" line="329"/>
@@ -2131,7 +2131,7 @@ en ligne</translation>
     <message>
         <location filename="mainwindow/mainmenu.cpp" line="61"/>
         <source>&amp;Export soundfonts</source>
-        <translation>&amp;Exporter soundfonts</translation>
+        <translation>&amp;Exporter banques de son</translation>
     </message>
     <message>
         <location filename="mainwindow/mainmenu.cpp" line="68"/>
@@ -2221,7 +2221,7 @@ en ligne</translation>
     <message>
         <location filename="mainwindow/mainwindow.cpp" line="272"/>
         <source>Soundfonts</source>
-        <translation>Soundfonts</translation>
+        <translation>Banques de son</translation>
     </message>
     <message>
         <location filename="mainwindow/mainwindow.cpp" line="273"/>
@@ -2272,7 +2272,7 @@ en ligne</translation>
         <translatorcomment>  New
   soundfont</translatorcomment>
         <translation>  Nouvelle
-  soundfont</translation>
+  banque de son</translation>
     </message>
     <message>
         <location filename="mainwindow/mainwindow.ui" line="106"/>
@@ -2280,7 +2280,7 @@ en ligne</translation>
   soundfont</source>
         <extracomment>prefixed with 2 spaces for each line</extracomment>
         <translation>  Nouvelle
-  soundfont</translation>
+  banque de son</translation>
     </message>
     <message>
         <location filename="mainwindow/mainwindow.ui" line="139"/>
@@ -2291,20 +2291,20 @@ en ligne</translation>
     <message>
         <location filename="mainwindow/mainwindow.ui" line="158"/>
         <source>Daily soundfonts</source>
-        <translation>Soundfonts du jour</translation>
+        <translation>Banques de son du jour</translation>
     </message>
     <message>
         <location filename="mainwindow/mainwindow.ui" line="168"/>
         <source>  Online
   repository</source>
         <extracomment>prefixed with 2 spaces for each line</extracomment>
-        <translation>  Soundfonts
+        <translation>  Banques de son
   en ligne</translation>
     </message>
     <message>
         <location filename="mainwindow/mainwindow.ui" line="185"/>
         <source>Search a soundfont...</source>
-        <translation>Rechercher une soundfont...</translation>
+        <translation>Rechercher une banque de son...</translation>
     </message>
     <message>
         <location filename="mainwindow/mainwindow.ui" line="195"/>
@@ -2312,7 +2312,7 @@ en ligne</translation>
   soundfont</source>
         <extracomment>prefixed with 2 spaces for each line</extracomment>
         <translation>  Ouvrir
-  soundfont</translation>
+  banque de son</translation>
     </message>
     <message>
         <location filename="mainwindow/mainwindow.ui" line="215"/>
@@ -2442,17 +2442,17 @@ en ligne</translation>
     <message>
         <location filename="editor/pageinst.cpp" line="221"/>
         <source>Instrument not linked to a preset yet.</source>
-        <translation>Instrument lié à aucun preset.</translation>
+        <translation>Instrument lié à aucun préréglage.</translation>
     </message>
     <message>
         <location filename="editor/pageinst.cpp" line="223"/>
         <source>Instrument linked to preset:</source>
-        <translation>Instrument lié au preset :</translation>
+        <translation>Instrument lié au préréglage :</translation>
     </message>
     <message>
         <location filename="editor/pageinst.cpp" line="225"/>
         <source>Instrument linked to presets:</source>
-        <translation>Instrument lié aux presets :</translation>
+        <translation>Instrument lié aux préréglages :</translation>
     </message>
 </context>
 <context>
@@ -2561,13 +2561,12 @@ en boucle</translation>
     <message>
         <location filename="editor/overview/pageoverviewprst.cpp" line="32"/>
         <source>Presets</source>
-        <translation>Presets</translation>
+        <translation>Préréglages</translation>
     </message>
     <message>
         <location filename="editor/overview/pageoverviewprst.cpp" line="38"/>
         <source>Bank - Preset</source>
-        <translation>Banque
-Preset</translation>
+        <translation>Banque - Préréglage</translation>
     </message>
     <message>
         <location filename="editor/overview/pageoverviewprst.cpp" line="39"/>
@@ -2789,7 +2788,7 @@ d&apos;échantillonnage</translation>
     <message>
         <location filename="editor/pageprst.ui" line="673"/>
         <source>Preset</source>
-        <translation>Preset</translation>
+        <translation>Préréglage</translation>
     </message>
     <message>
         <location filename="editor/pageprst.ui" line="712"/>
@@ -2847,7 +2846,7 @@ d&apos;échantillonnage</translation>
     <message>
         <location filename="editor/pagesf2.ui" line="323"/>
         <source>Soundfont version</source>
-        <translation>Version Soundfont</translation>
+        <translation>Version de la banque de son</translation>
     </message>
     <message>
         <location filename="editor/pagesf2.ui" line="359"/>
@@ -2867,7 +2866,7 @@ d&apos;échantillonnage</translation>
     <message>
         <location filename="editor/pagesf2.ui" line="534"/>
         <source>Presets</source>
-        <translation>Presets</translation>
+        <translation>Préréglages</translation>
     </message>
     <message>
         <location filename="editor/pagesf2.ui" line="556"/>
@@ -3012,7 +3011,7 @@ d&apos;échantillonnage</translation>
     <message>
         <location filename="editor/pagesmpl.ui" line="1158"/>
         <source>Sample rate</source>
-        <translation>Echantillonnage</translation>
+        <translation>Échantillonnage</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.ui" line="1165"/>
@@ -3183,12 +3182,12 @@ d&apos;échantillonnage</translation>
     <message>
         <location filename="editor/pagetable.cpp" line="1899"/>
         <source>offsets cannot be modulated in a preset.</source>
-        <translation>les offsets ne peuvent être modulés dans un preset.</translation>
+        <translation>les offsets ne peuvent être modulés dans un préréglage.</translation>
     </message>
     <message>
         <location filename="editor/pagetable.cpp" line="1908"/>
         <source>%1 cannot be modulated in a preset.</source>
-        <translation>%1 ne peut être modulé dans un preset.</translation>
+        <translation>%1 ne peut être modulé dans un préréglage.</translation>
     </message>
     <message>
         <location filename="editor/pagetable.cpp" line="2387"/>
@@ -3198,7 +3197,7 @@ d&apos;échantillonnage</translation>
     <message>
         <location filename="editor/pagetable.cpp" line="2388"/>
         <source>A preset comprising no instruments is not compatible with this tool.</source>
-        <translation>Un preset ne contenant aucun instrument n&apos;est pas compatible avec cet outil</translation>
+        <translation>Un préréglage ne contenant aucun instrument n&apos;est pas compatible avec cet outil</translation>
     </message>
     <message>
         <location filename="editor/pagetable.cpp" line="2395"/>
@@ -3216,7 +3215,7 @@ d&apos;échantillonnage</translation>
     <message>
         <location filename="core/output/outputfactory.cpp" line="116"/>
         <source>Save a soundfont</source>
-        <translation>Sauvegarder une soundfont</translation>
+        <translation>Sauvegarder une banque de son</translation>
     </message>
     <message>
         <location filename="core/output/outputfactory.cpp" line="117"/>
@@ -3302,7 +3301,7 @@ d&apos;échantillonnage</translation>
     <message>
         <location filename="core/model/soundfont.cpp" line="49"/>
         <source>Presets</source>
-        <translation>Presets</translation>
+        <translation>Préréglages</translation>
     </message>
     <message>
         <location filename="core/sound.cpp" line="109"/>
@@ -3638,12 +3637,12 @@ d&apos;échantillonnage</translation>
     <message>
         <location filename="repository/repositorymanager.cpp" line="113"/>
         <source>sustained</source>
-        <translation>avec sustain</translation>
+        <translation>avec soutien</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="114"/>
         <source>long release</source>
-        <translation>longue release</translation>
+        <translation>longue relâche</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="115"/>
@@ -3955,7 +3954,7 @@ d&apos;échantillonnage</translation>
     <message>
         <location filename="repository/repositorymanager.cpp" line="481"/>
         <source>A Premium account allows you to browse and download all soundfonts available online.</source>
-        <translation>Un compte Premium vous permet de visualiser et télécharger toutes les soundfonts disponibles en ligne.</translation>
+        <translation>Un compte Premium vous permet de visualiser et télécharger toutes les banques de son disponibles en ligne.</translation>
     </message>
     <message>
         <location filename="repository/repositorymanager.cpp" line="490"/>
@@ -4018,7 +4017,7 @@ de télécharger la liste</translation>
     <message>
         <location filename="repository/browser/soundfontbrowser.ui" line="337"/>
         <source>Search a soundfont...</source>
-        <translation>Rechercher une soundfont...</translation>
+        <translation>Rechercher une banque de son...</translation>
     </message>
     <message>
         <location filename="repository/browser/soundfontbrowser.ui" line="387"/>
@@ -4049,7 +4048,7 @@ de télécharger la liste</translation>
     <message>
         <location filename="repository/browser/soundfontbrowser.ui" line="484"/>
         <source>Reset</source>
-        <translation>réinitialiser</translation>
+        <translation>Réinitialiser</translation>
     </message>
     <message>
         <location filename="repository/browser/soundfontbrowser.ui" line="503"/>
@@ -4410,7 +4409,7 @@ de télécharger le contenu</translation>
     <message>
         <location filename="editor/tools/change_volume/toolchangevolume.h" line="61"/>
         <source>Change volume</source>
-        <translation>Modifier volume</translation>
+        <translation>Modifier le volume</translation>
     </message>
 </context>
 <context>
@@ -4609,7 +4608,7 @@ de télécharger le contenu</translation>
     <message>
         <location filename="editor/tools/division_duplication/tooldivisionduplication.cpp" line="85"/>
         <source>A preset comprising no instruments is not compatible with this tool:</source>
-        <translation>Un preset ne contenant aucun instrument n&apos;est pas compatible avec cet outil :</translation>
+        <translation>Un préréglage ne contenant aucun instrument n&apos;est pas compatible avec cet outil :</translation>
     </message>
     <message>
         <location filename="editor/tools/division_duplication/tooldivisionduplication.h" line="45"/>
@@ -5012,7 +5011,7 @@ de télécharger le contenu</translation>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="238"/>
         <source>Key range</source>
-        <translation>Etendue</translation>
+        <translation>Étendue</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="261"/>
@@ -5168,7 +5167,7 @@ de télécharger le contenu</translation>
     <message>
         <location filename="editor/tools/preset_list/toolpresetlist.h" line="60"/>
         <source>Export preset list</source>
-        <translation>Exporter la liste des presets</translation>
+        <translation>Exporter la liste des préréglages</translation>
     </message>
 </context>
 <context>
@@ -5209,7 +5208,7 @@ de télécharger le contenu</translation>
     <message>
         <location filename="editor/tools/release/toolrelease.h" line="61"/>
         <source>Natural release</source>
-        <translation>Release naturelle</translation>
+        <translation>Relâche naturelle</translation>
     </message>
 </context>
 <context>
@@ -5227,7 +5226,7 @@ de télécharger le contenu</translation>
     <message>
         <location filename="editor/tools/release/toolrelease_gui.cpp" line="51"/>
         <source>Release time (key %1)</source>
-        <translation>Durée release (note %1)</translation>
+        <translation>Durée de la relâche (note %1)</translation>
     </message>
 </context>
 <context>
@@ -5299,7 +5298,7 @@ de télécharger le contenu</translation>
     <message>
         <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="100"/>
         <source>Spreading (%)</source>
-        <translation>Etalement (%)</translation>
+        <translation>Étalement (%)</translation>
     </message>
     <message>
         <location filename="editor/tools/sound_spatialization/toolsoundspatialization_gui.ui" line="144"/>
@@ -5352,7 +5351,7 @@ de télécharger le contenu</translation>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport.cpp" line="116"/>
         <source>Merge soudfonts:</source>
-        <translation>Fusion des soundfonts :</translation>
+        <translation>Fusion des banques de son :</translation>
     </message>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport.cpp" line="211"/>
@@ -5405,7 +5404,7 @@ de télécharger le contenu</translation>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="130"/>
         <source>preset number as prefix</source>
-        <translation>numéro de preset en préfixe</translation>
+        <translation>numéro de préréglage en préfixe</translation>
     </message>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.ui" line="141"/>
@@ -5458,7 +5457,7 @@ de télécharger le contenu</translation>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="186"/>
         <source>At least one preset must be selected.</source>
-        <translation>Au moins un preset doit être sélectionné.</translation>
+        <translation>Au moins un préréglage doit être sélectionné.</translation>
     </message>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="192"/>
@@ -5468,7 +5467,7 @@ de télécharger le contenu</translation>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="201"/>
         <source>In the case where several soundfonts are exported, the maximal number of presets per soundfonts is 127.</source>
-        <translation>Dans le cas où plusieurs soundfonts sont exportées, le nombre maximal de presets par soundfont est de 127.</translation>
+        <translation>Dans le cas où plusieurs soundfonts sont exportées, le nombre maximal de préréglages par soundfont est de 127.</translation>
     </message>
 </context>
 <context>
@@ -5657,7 +5656,7 @@ de télécharger le contenu</translation>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="191"/>
         <source>Cannot delete an instrument used by another preset.</source>
-        <translation>Impossible de supprimer un instrument s&apos;il est utilisé par un preset.</translation>
+        <translation>Impossible de supprimer un instrument s&apos;il est utilisé par un préréglage.</translation>
     </message>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="325"/>
@@ -5672,7 +5671,7 @@ de télécharger le contenu</translation>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="329"/>
         <source>Preset name (max 20 characters):</source>
-        <translation>Nom du preset (max 20 caractères) :</translation>
+        <translation>Nom du préréglage (max 20 caractères) :</translation>
     </message>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="333"/>
@@ -5732,7 +5731,7 @@ de télécharger le contenu</translation>
     <message>
         <location filename="mainwindow/windowmanager.cpp" line="182"/>
         <source>Online repository</source>
-        <translation>Soundfonts en ligne</translation>
+        <translation>Banques de son en ligne</translation>
     </message>
     <message>
         <location filename="mainwindow/windowmanager.cpp" line="227"/>
