@@ -385,864 +385,316 @@
 <context>
     <name>ConfManager</name>
     <message>
-        <source>D</source>
-        <translation type="obsolete">Ре</translation>
-    </message>
-    <message>
-        <source>C</source>
-        <translation type="obsolete">До</translation>
-    </message>
-    <message>
-        <source>G</source>
-        <translation type="obsolete">Сол</translation>
-    </message>
-    <message>
-        <source>B</source>
-        <translation type="obsolete">Ти</translation>
-    </message>
-    <message>
-        <source>2</source>
-        <translation type="obsolete">2</translation>
-    </message>
-    <message>
-        <source>3</source>
-        <translation type="obsolete">3</translation>
-    </message>
-    <message>
-        <source>E</source>
-        <translation type="obsolete">Ми</translation>
-    </message>
-    <message>
-        <source>R</source>
-        <translation type="obsolete">Д</translation>
-    </message>
-    <message>
-        <source>5</source>
-        <translation type="obsolete">5</translation>
-    </message>
-    <message>
-        <source>6</source>
-        <translation type="obsolete">6</translation>
-    </message>
-    <message>
-        <source>7</source>
-        <translation type="obsolete">7</translation>
-    </message>
-    <message>
-        <source>Shift+&lt;</source>
-        <translation type="obsolete">Shift+;</translation>
-    </message>
-    <message>
-        <source>Shift+@</source>
-        <translation type="obsolete">Shift+&quot;</translation>
-    </message>
-    <message>
-        <source>Shift+#</source>
-        <translation type="obsolete">Shift+#</translation>
-    </message>
-    <message>
-        <source>Shift+%</source>
-        <translation type="obsolete">Shift+%</translation>
-    </message>
-    <message>
-        <source>Shift+^</source>
-        <translation type="obsolete">Shift+&amp;</translation>
-    </message>
-    <message>
-        <source>Shift+&amp;</source>
-        <translation type="obsolete">Shift+/</translation>
-    </message>
-    <message>
-        <location filename="context/confmanager.cpp" line="141"/>
+        <location filename="context/confmanager.cpp" line="142"/>
         <source>Z</source>
         <comment>first key mapping for bottom left C</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="142"/>
+        <location filename="context/confmanager.cpp" line="143"/>
         <source>S</source>
         <comment>first key mapping for bottom C#</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="143"/>
+        <location filename="context/confmanager.cpp" line="144"/>
         <source>X</source>
         <comment>first key mapping for bottom D</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="144"/>
+        <location filename="context/confmanager.cpp" line="145"/>
         <source>D</source>
         <comment>first key mapping for bottom D#</comment>
         <translation type="unfinished">Ре</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="145"/>
+        <location filename="context/confmanager.cpp" line="146"/>
         <source>C</source>
         <comment>first key mapping for bottom E</comment>
         <translation type="unfinished">До</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="146"/>
+        <location filename="context/confmanager.cpp" line="147"/>
         <source>V</source>
         <comment>first key mapping for bottom F</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="147"/>
+        <location filename="context/confmanager.cpp" line="148"/>
         <source>G</source>
         <comment>first key mapping for bottom F#</comment>
         <translation type="unfinished">Сол</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="148"/>
+        <location filename="context/confmanager.cpp" line="149"/>
         <source>B</source>
         <comment>first key mapping for bottom G</comment>
         <translation type="unfinished">Ти</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="149"/>
+        <location filename="context/confmanager.cpp" line="150"/>
         <source>H</source>
         <comment>first key mapping for bottom G#</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="150"/>
+        <location filename="context/confmanager.cpp" line="151"/>
         <source>N</source>
         <comment>first key mapping for bottom A</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="151"/>
+        <location filename="context/confmanager.cpp" line="152"/>
         <source>J</source>
         <comment>first key mapping for bottom A#</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="152"/>
+        <location filename="context/confmanager.cpp" line="153"/>
         <source>M</source>
         <comment>first key mapping for bottom B</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="153"/>
+        <location filename="context/confmanager.cpp" line="154"/>
         <source>,</source>
         <comment>first key mapping for bottom right C</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="159"/>
+        <location filename="context/confmanager.cpp" line="160"/>
         <source>Q</source>
         <comment>first key mapping for upper left C</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="160"/>
+        <location filename="context/confmanager.cpp" line="161"/>
         <source>2</source>
         <comment>first key mapping for upper C#</comment>
         <translation type="unfinished">2</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="161"/>
+        <location filename="context/confmanager.cpp" line="162"/>
         <source>W</source>
         <comment>first key mapping for upper D</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="162"/>
+        <location filename="context/confmanager.cpp" line="163"/>
         <source>3</source>
         <comment>first key mapping for upper D#</comment>
         <translation type="unfinished">3</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="163"/>
+        <location filename="context/confmanager.cpp" line="164"/>
         <source>E</source>
         <comment>first key mapping for upper E</comment>
         <translation type="unfinished">Ми</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="164"/>
+        <location filename="context/confmanager.cpp" line="165"/>
         <source>R</source>
         <comment>first key mapping for upper F</comment>
         <translation type="unfinished">Д</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="165"/>
+        <location filename="context/confmanager.cpp" line="166"/>
         <source>5</source>
         <comment>first key mapping for upper F#</comment>
         <translation type="unfinished">5</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="166"/>
+        <location filename="context/confmanager.cpp" line="167"/>
         <source>T</source>
         <comment>first key mapping for upper G</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="167"/>
+        <location filename="context/confmanager.cpp" line="168"/>
         <source>6</source>
         <comment>first key mapping for upper G#</comment>
         <translation type="unfinished">6</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="168"/>
+        <location filename="context/confmanager.cpp" line="169"/>
         <source>Y</source>
         <comment>first key mapping for upper A</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="169"/>
+        <location filename="context/confmanager.cpp" line="170"/>
         <source>7</source>
         <comment>first key mapping for upper A#</comment>
         <translation type="unfinished">7</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="170"/>
+        <location filename="context/confmanager.cpp" line="171"/>
         <source>U</source>
         <comment>first key mapping for upper B</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="171"/>
+        <location filename="context/confmanager.cpp" line="172"/>
         <source>I</source>
         <comment>first key mapping for upper right C</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="177"/>
+        <location filename="context/confmanager.cpp" line="178"/>
         <source>Shift+Z</source>
         <comment>second key mapping for bottom left C</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="178"/>
+        <location filename="context/confmanager.cpp" line="179"/>
         <source>Shift+S</source>
         <comment>second key mapping for bottom C#</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="179"/>
+        <location filename="context/confmanager.cpp" line="180"/>
         <source>Shift+X</source>
         <comment>second key mapping for bottom D</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="180"/>
+        <location filename="context/confmanager.cpp" line="181"/>
         <source>Shift+D</source>
         <comment>second key mapping for bottom D#</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="181"/>
+        <location filename="context/confmanager.cpp" line="182"/>
         <source>Shift+C</source>
         <comment>second key mapping for bottom E</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="182"/>
+        <location filename="context/confmanager.cpp" line="183"/>
         <source>Shift+V</source>
         <comment>second key mapping for bottom F</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="183"/>
+        <location filename="context/confmanager.cpp" line="184"/>
         <source>Shift+G</source>
         <comment>second key mapping for bottom F#</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="184"/>
+        <location filename="context/confmanager.cpp" line="185"/>
         <source>Shift+B</source>
         <comment>second key mapping for bottom G</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="185"/>
+        <location filename="context/confmanager.cpp" line="186"/>
         <source>Shift+H</source>
         <comment>second key mapping for bottom G#</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="186"/>
+        <location filename="context/confmanager.cpp" line="187"/>
         <source>Shift+N</source>
         <comment>second key mapping for bottom A</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="187"/>
+        <location filename="context/confmanager.cpp" line="188"/>
         <source>Shift+J</source>
         <comment>second key mapping for bottom A#</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="188"/>
+        <location filename="context/confmanager.cpp" line="189"/>
         <source>Shift+M</source>
         <comment>second key mapping for bottom B</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="189"/>
+        <location filename="context/confmanager.cpp" line="190"/>
         <source>Shift+&lt;</source>
         <comment>second key mapping for bottom right C</comment>
         <translation type="unfinished">Shift+;</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="195"/>
+        <location filename="context/confmanager.cpp" line="196"/>
         <source>Shift+Q</source>
         <comment>second key mapping for upper left C</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="196"/>
+        <location filename="context/confmanager.cpp" line="197"/>
         <source>Shift+@</source>
         <comment>second key mapping for upper C#</comment>
         <translation type="unfinished">Shift+&quot;</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="197"/>
+        <location filename="context/confmanager.cpp" line="198"/>
         <source>Shift+W</source>
         <comment>second key mapping for upper D</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="198"/>
+        <location filename="context/confmanager.cpp" line="199"/>
         <source>Shift+#</source>
         <comment>second key mapping for upper D#</comment>
         <translation type="unfinished">Shift+#</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="199"/>
+        <location filename="context/confmanager.cpp" line="200"/>
         <source>Shift+E</source>
         <comment>second key mapping for upper E</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="200"/>
+        <location filename="context/confmanager.cpp" line="201"/>
         <source>Shift+R</source>
         <comment>second key mapping for upper F</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="201"/>
+        <location filename="context/confmanager.cpp" line="202"/>
         <source>Shift+%</source>
         <comment>second key mapping for upper F#</comment>
         <translation type="unfinished">Shift+%</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="202"/>
+        <location filename="context/confmanager.cpp" line="203"/>
         <source>Shift+T</source>
         <comment>second key mapping for upper G</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="203"/>
+        <location filename="context/confmanager.cpp" line="204"/>
         <source>Shift+^</source>
         <comment>second key mapping for upper G#</comment>
         <translation type="unfinished">Shift+&amp;</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="204"/>
+        <location filename="context/confmanager.cpp" line="205"/>
         <source>Shift+Y</source>
         <comment>second key mapping for upper A</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="205"/>
+        <location filename="context/confmanager.cpp" line="206"/>
         <source>Shift+&amp;</source>
         <comment>second key mapping for upper A#</comment>
         <translation type="unfinished">Shift+/</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="206"/>
+        <location filename="context/confmanager.cpp" line="207"/>
         <source>Shift+U</source>
         <comment>second key mapping for upper B</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="207"/>
+        <location filename="context/confmanager.cpp" line="208"/>
         <source>Shift+I</source>
         <comment>second key mapping for upper right C</comment>
         <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Config</name>
-    <message>
-        <source>Settings</source>
-        <translation type="obsolete">Подешавања</translation>
-    </message>
-    <message>
-        <source>General</source>
-        <translation type="obsolete">Опште</translation>
-    </message>
-    <message>
-        <source>Interface</source>
-        <translation type="obsolete">Сучеље</translation>
-    </message>
-    <message>
-        <source>Middle C → 60, then 61</source>
-        <translation type="obsolete">Основна »До« → 60, затим 61</translation>
-    </message>
-    <message>
-        <source>Middle C → C3, then C♯3</source>
-        <translation type="obsolete">Основна »До« → C3, затим C♯3</translation>
-    </message>
-    <message>
-        <source>Middle C → C3, then D♭3</source>
-        <translation type="obsolete">Основна »До« → C3, затим D♭3</translation>
-    </message>
-    <message>
-        <source>Middle C → C4, then C♯4</source>
-        <translation type="obsolete">Основна »До« → C4, затим C♯4</translation>
-    </message>
-    <message>
-        <source>Middle C → C4, then D♭4</source>
-        <translation type="obsolete">Основна »До« → C4, затим D♭4</translation>
-    </message>
-    <message>
-        <source>Middle C → C5, then C♯5</source>
-        <translation type="obsolete">Основна »До« → C5, затим C♯5</translation>
-    </message>
-    <message>
-        <source>Middle C → C5, then D♭5</source>
-        <translation type="obsolete">Основна »До« → C5, затим D♭5</translation>
-    </message>
-    <message>
-        <source>Key names</source>
-        <translation type="obsolete">Називи нота</translation>
-    </message>
-    <message>
-        <source>Language</source>
-        <translation type="obsolete">Језик</translation>
-    </message>
-    <message>
-        <source>Input / Output</source>
-        <translation type="obsolete">Улаз/Излаз</translation>
-    </message>
-    <message>
-        <source>Audio backend</source>
-        <translation type="obsolete">Звучни посредник</translation>
-    </message>
-    <message>
-        <source>Buffer size</source>
-        <translation type="obsolete">Величина бафера</translation>
-    </message>
-    <message>
-        <source>Midi input</source>
-        <translation type="obsolete">Миди-улаз</translation>
-    </message>
-    <message>
-        <source>Synth</source>
-        <translation type="obsolete">Синтесајзер</translation>
-    </message>
-    <message>
-        <source>Reverb</source>
-        <translation type="obsolete">Јека</translation>
-    </message>
-    <message>
-        <source>Level</source>
-        <translation type="obsolete">Количина</translation>
-    </message>
-    <message>
-        <source>Room</source>
-        <translation type="obsolete">Соба</translation>
-    </message>
-    <message>
-        <source>Width</source>
-        <translation type="obsolete">Ширина</translation>
-    </message>
-    <message>
-        <source>Damp</source>
-        <translation type="obsolete">Пригушење</translation>
-    </message>
-    <message>
-        <source>Chorus</source>
-        <translation type="obsolete">Хорус</translation>
-    </message>
-    <message>
-        <source>Frequency</source>
-        <translation type="obsolete">Учестаност</translation>
-    </message>
-    <message>
-        <source>Depth</source>
-        <translation type="obsolete">Дубина</translation>
-    </message>
-    <message>
-        <source>Gain (dB)</source>
-        <translation type="obsolete">Појачање (dB)</translation>
-    </message>
-    <message>
-        <source>Reset</source>
-        <translation type="obsolete">Поврати</translation>
-    </message>
-    <message>
-        <source>Options</source>
-        <translation type="obsolete">Опције</translation>
-    </message>
-    <message>
-        <source>remove blank at start</source>
-        <translation type="obsolete">уклони почетну празнину</translation>
-    </message>
-    <message>
-        <source>trim to loop</source>
-        <translation type="obsolete">орежи према вртњи</translation>
-    </message>
-    <message>
-        <source>Wav file import</source>
-        <translation type="obsolete">Увоз вав-датотека</translation>
-    </message>
-    <message>
-        <source>change linked sample</source>
-        <translation type="obsolete">мењај и повезани узорак</translation>
-    </message>
-    <message>
-        <source>Stereo editing</source>
-        <translation type="obsolete">Стерео уређивање</translation>
-    </message>
-    <message>
-        <source>Selection</source>
-        <translation type="obsolete">Избор</translation>
-    </message>
-    <message>
-        <source>Alternate background</source>
-        <translation type="obsolete">Додатна позадина</translation>
-    </message>
-    <message>
-        <source>Text</source>
-        <translation type="obsolete">Текст</translation>
-    </message>
-    <message>
-        <source>Window</source>
-        <translation type="obsolete">Прозор</translation>
-    </message>
-    <message>
-        <source>Background</source>
-        <translation type="obsolete">Позадина</translation>
-    </message>
-    <message>
-        <source>Button</source>
-        <translation type="obsolete">Дугме</translation>
-    </message>
-    <message>
-        <source>Color theme</source>
-        <translation type="obsolete">Изглед</translation>
-    </message>
-    <message>
-        <source>List and table</source>
-        <translation type="obsolete">Списак и табела</translation>
-    </message>
-    <message>
-        <source>Toolbar</source>
-        <translation type="obsolete">Алатница</translation>
-    </message>
-    <message>
-        <source>Available actions</source>
-        <translation type="obsolete">Доступне радње</translation>
-    </message>
-    <message>
-        <source>Keyboard</source>
-        <translation type="obsolete">Клавијатура</translation>
-    </message>
-    <message>
-        <source>Octave #1</source>
-        <translation type="obsolete">1. oктава</translation>
-    </message>
-    <message>
-        <source>Octave #2</source>
-        <translation type="obsolete">2. oктава</translation>
-    </message>
-    <message>
-        <source>Octave #3</source>
-        <translation type="obsolete">3. oктава</translation>
-    </message>
-    <message>
-        <source>Octave #4</source>
-        <translation type="obsolete">4. oктава</translation>
-    </message>
-    <message>
-        <source>C</source>
-        <translation type="obsolete">До</translation>
-    </message>
-    <message>
-        <source>C#</source>
-        <translation type="obsolete">До#</translation>
-    </message>
-    <message>
-        <source>D</source>
-        <translation type="obsolete">Ре</translation>
-    </message>
-    <message>
-        <source>D#</source>
-        <translation type="obsolete">Ре#</translation>
-    </message>
-    <message>
-        <source>E</source>
-        <translation type="obsolete">Ми</translation>
-    </message>
-    <message>
-        <source>F</source>
-        <translation type="obsolete">Фа</translation>
-    </message>
-    <message>
-        <source>F#</source>
-        <translation type="obsolete">Фа#</translation>
-    </message>
-    <message>
-        <source>G</source>
-        <translation type="obsolete">Сол</translation>
-    </message>
-    <message>
-        <source>G#</source>
-        <translation type="obsolete">Сол#</translation>
-    </message>
-    <message>
-        <source>A</source>
-        <translation type="obsolete">Ла</translation>
-    </message>
-    <message>
-        <source>A#</source>
-        <translation type="obsolete">Ла#</translation>
-    </message>
-    <message>
-        <source>B</source>
-        <translation type="obsolete">Ти</translation>
-    </message>
-    <message>
-        <source>Default velocity</source>
-        <translation type="obsolete">Уобичајена јачина удара</translation>
-    </message>
-    <message>
-        <source>First C</source>
-        <translation type="obsolete">Почетна »До«</translation>
-    </message>
-    <message>
-        <source>Close</source>
-        <translation type="obsolete">Затвори</translation>
-    </message>
-    <message>
-        <source>Information</source>
-        <translation type="obsolete">Подаци</translation>
-    </message>
-    <message>
-        <source>This modification will be applied during the next start of the software.</source>
-        <translation type="obsolete">Ова измена биће примењена по поновном покретању програма.</translation>
-    </message>
-    <message>
-        <source>Choose a color</source>
-        <translation type="obsolete">Одабир боје</translation>
-    </message>
-    <message>
-        <source>---- separator ----</source>
-        <translation type="obsolete">---- раздвајач ----</translation>
-    </message>
-    <message>
-        <source>z</source>
-        <translatorcomment>default mapping of the keyboard</translatorcomment>
-        <translation type="obsolete">ж</translation>
-    </message>
-    <message>
-        <source>s</source>
-        <translation type="obsolete">с</translation>
-    </message>
-    <message>
-        <source>x</source>
-        <translation type="obsolete">џ</translation>
-    </message>
-    <message>
-        <source>d</source>
-        <translation type="obsolete">д</translation>
-    </message>
-    <message>
-        <source>c</source>
-        <translation type="obsolete">ц</translation>
-    </message>
-    <message>
-        <source>v</source>
-        <translation type="obsolete">в</translation>
-    </message>
-    <message>
-        <source>g</source>
-        <translation type="obsolete">г</translation>
-    </message>
-    <message>
-        <source>b</source>
-        <translation type="obsolete">б</translation>
-    </message>
-    <message>
-        <source>h</source>
-        <translation type="obsolete">х</translation>
-    </message>
-    <message>
-        <source>n</source>
-        <translation type="obsolete">н</translation>
-    </message>
-    <message>
-        <source>j</source>
-        <translation type="obsolete">ј</translation>
-    </message>
-    <message>
-        <source>m</source>
-        <translation type="obsolete">м</translation>
-    </message>
-    <message>
-        <source>,</source>
-        <translation type="obsolete">,</translation>
-    </message>
-    <message>
-        <source>q</source>
-        <translation type="obsolete">љ</translation>
-    </message>
-    <message>
-        <source>2</source>
-        <translation type="obsolete">2</translation>
-    </message>
-    <message>
-        <source>w</source>
-        <translation type="obsolete">њ</translation>
-    </message>
-    <message>
-        <source>3</source>
-        <translation type="obsolete">3</translation>
-    </message>
-    <message>
-        <source>e</source>
-        <translation type="obsolete">е</translation>
-    </message>
-    <message>
-        <source>r</source>
-        <translation type="obsolete">р</translation>
-    </message>
-    <message>
-        <source>5</source>
-        <translation type="obsolete">5</translation>
-    </message>
-    <message>
-        <source>t</source>
-        <translation type="obsolete">т</translation>
-    </message>
-    <message>
-        <source>6</source>
-        <translation type="obsolete">6</translation>
-    </message>
-    <message>
-        <source>y</source>
-        <translation type="obsolete">з</translation>
-    </message>
-    <message>
-        <source>7</source>
-        <translation type="obsolete">7</translation>
-    </message>
-    <message>
-        <source>u</source>
-        <translation type="obsolete">у</translation>
-    </message>
-    <message>
-        <source>i</source>
-        <translation type="obsolete">и</translation>
-    </message>
-    <message>
-        <source>Shift+z</source>
-        <translation type="obsolete">Shift+ж</translation>
-    </message>
-    <message>
-        <source>Shift+s</source>
-        <translation type="obsolete">Shift+с</translation>
-    </message>
-    <message>
-        <source>Shift+x</source>
-        <translation type="obsolete">Shift+џ</translation>
-    </message>
-    <message>
-        <source>Shift+d</source>
-        <translation type="obsolete">Shift+д</translation>
-    </message>
-    <message>
-        <source>Shift+c</source>
-        <translation type="obsolete">Shift+ц</translation>
-    </message>
-    <message>
-        <source>Shift+v</source>
-        <translation type="obsolete">Shift+в</translation>
-    </message>
-    <message>
-        <source>Shift+g</source>
-        <translation type="obsolete">Shift+г</translation>
-    </message>
-    <message>
-        <source>Shift+b</source>
-        <translation type="obsolete">Shift+б</translation>
-    </message>
-    <message>
-        <source>Shift+h</source>
-        <translation type="obsolete">Shift+х</translation>
-    </message>
-    <message>
-        <source>Shift+n</source>
-        <translation type="obsolete">Shift+н</translation>
-    </message>
-    <message>
-        <source>Shift+j</source>
-        <translation type="obsolete">Shift+ј</translation>
-    </message>
-    <message>
-        <source>Shift+m</source>
-        <translation type="obsolete">Shift+м</translation>
-    </message>
-    <message>
-        <source>Shift+&lt;</source>
-        <translation type="obsolete">Shift+;</translation>
-    </message>
-    <message>
-        <source>Shift+q</source>
-        <translation type="obsolete">Shift+љ</translation>
-    </message>
-    <message>
-        <source>Shift+@</source>
-        <translation type="obsolete">Shift+&quot;</translation>
-    </message>
-    <message>
-        <source>Shift+w</source>
-        <translation type="obsolete">Shift+њ</translation>
-    </message>
-    <message>
-        <source>Shift+#</source>
-        <translation type="obsolete">Shift+#</translation>
-    </message>
-    <message>
-        <source>Shift+e</source>
-        <translation type="obsolete">Shift+е</translation>
-    </message>
-    <message>
-        <source>Shift+r</source>
-        <translation type="obsolete">Shift+р</translation>
-    </message>
-    <message>
-        <source>Shift+%</source>
-        <translation type="obsolete">Shift+%</translation>
-    </message>
-    <message>
-        <source>Shift+t</source>
-        <translation type="obsolete">Shift+т</translation>
-    </message>
-    <message>
-        <source>Shift+^</source>
-        <translation type="obsolete">Shift+&amp;</translation>
-    </message>
-    <message>
-        <source>Shift+y</source>
-        <translation type="obsolete">Shift+з</translation>
-    </message>
-    <message>
-        <source>Shift+&amp;</source>
-        <translation type="obsolete">Shift+/</translation>
-    </message>
-    <message>
-        <source>Shift+u</source>
-        <translation type="obsolete">Shift+у</translation>
-    </message>
-    <message>
-        <source>Shift+i</source>
-        <translation type="obsolete">Shift+и</translation>
     </message>
 </context>
 <context>
@@ -1421,10 +873,6 @@
         <translation>Избор</translation>
     </message>
     <message>
-        <source>Alternate background</source>
-        <translation type="vanished">Додатна позадина</translation>
-    </message>
-    <message>
         <location filename="context/interface/configsectioninterface.ui" line="245"/>
         <source>Text</source>
         <translation>Текст</translation>
@@ -1443,10 +891,6 @@
         <location filename="context/interface/configsectioninterface.ui" line="420"/>
         <source>Button</source>
         <translation>Дугме</translation>
-    </message>
-    <message>
-        <source>Color theme</source>
-        <translation type="vanished">Изглед</translation>
     </message>
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="558"/>
@@ -1784,12 +1228,12 @@ repository</source>
         <translation>О програму</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_about.ui" line="172"/>
+        <location filename="dialogs/dialog_about.ui" line="177"/>
         <source>Credit</source>
         <translation>Заслуге</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_about.ui" line="195"/>
+        <location filename="dialogs/dialog_about.ui" line="200"/>
         <source>Close</source>
         <translation>Затвори</translation>
     </message>
@@ -1799,18 +1243,9 @@ repository</source>
         <translation>Полифон</translation>
     </message>
     <message>
-        <source>http://polyphone-soundfonts.com/en</source>
-        <translation type="obsolete">http://polyphone-soundfonts.com/en</translation>
-    </message>
-    <message>
         <location filename="dialogs/dialog_about.cpp" line="49"/>
         <source>Copyright</source>
         <translation>Права творца</translation>
-    </message>
-    <message>
-        <source>Davy Triponney</source>
-        <comment>this is my name</comment>
-        <translation type="obsolete">Дејви Трипони (Davy Triponney)</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_about.cpp" line="53"/>
@@ -1913,104 +1348,6 @@ repository</source>
         <source>https://www.polyphone-soundfonts.com/en</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
-        <source>Andrea Celani</source>
-        <translation type="obsolete">Андреа Челани (Andrea Celani)</translation>
-    </message>
-    <message>
-        <source>Kinwie</source>
-        <translation type="obsolete">Кинви (Kinwie)</translation>
-    </message>
-    <message>
-        <source>Michael Schyllberg</source>
-        <translation type="obsolete">Мајкл Шилберг (Michael Schyllberg)</translation>
-    </message>
-    <message>
-        <source>Paul Stratman</source>
-        <translation type="obsolete">Пол Стратман (Paul Stratman)</translation>
-    </message>
-    <message>
-        <source>Steve Clarke</source>
-        <translation type="obsolete">Стив Кларк (Steve Clarke)</translation>
-    </message>
-    <message>
-        <source>F.J. Martínez Murcia</source>
-        <translation type="obsolete">Ф.Ј. Мартинез Мурција (F.J. Martínez Murcia)</translation>
-    </message>
-    <message>
-        <source>Georg Gergull</source>
-        <translation type="obsolete">Георг Гергулл (Georg Gergull)</translation>
-    </message>
-    <message>
-        <source>Jay Alexander Fleming</source>
-        <translation type="obsolete">Џеј Александар Флеминг (Jay Alexander Fleming)</translation>
-    </message>
-    <message>
-        <source>Joel Gomes</source>
-        <translation type="obsolete">Џоел Гомес (Joel Gomes)</translation>
-    </message>
-    <message>
-        <source>Magson</source>
-        <translation type="obsolete">Магсон (Magson)</translation>
-    </message>
-    <message>
-        <source>Pavel Fric</source>
-        <translation type="obsolete">павел Фриц</translation>
-    </message>
-</context>
-<context>
-    <name>DialogAttenuation</name>
-    <message>
-        <source>Adjust attenuations</source>
-        <translation type="obsolete">Прилагоди пригушења</translation>
-    </message>
-    <message>
-        <source>Instruments</source>
-        <translation type="obsolete">Инструменти</translation>
-    </message>
-    <message>
-        <source>Possible offset</source>
-        <translation type="obsolete">Могућ помак</translation>
-    </message>
-    <message>
-        <source>Attenuation range</source>
-        <translation type="obsolete">Опсег пригушења</translation>
-    </message>
-    <message>
-        <source> dB</source>
-        <translation type="obsolete"> dB</translation>
-    </message>
-    <message>
-        <source>Desired value</source>
-        <translation type="obsolete">Захтевана вредност</translation>
-    </message>
-    <message>
-        <source>Presets</source>
-        <translation type="obsolete">Поставке</translation>
-    </message>
-</context>
-<context>
-    <name>DialogCeleste</name>
-    <message>
-        <source>Celeste tuning</source>
-        <translation type="obsolete">Челеста-угађање</translation>
-    </message>
-    <message>
-        <source>Number of beats per second at C4 (key 60)</source>
-        <translation type="obsolete">Број битова по секунди на »До 4« (нота 60)</translation>
-    </message>
-    <message>
-        <source>The algebraic sign determines the tuning direction.</source>
-        <translation type="obsolete">Алгебарски знак одређује правац угађања.</translation>
-    </message>
-    <message>
-        <source>Division to the next octave</source>
-        <translation type="obsolete">Део до наредне октаве</translation>
-    </message>
-    <message>
-        <source>Number of beats per second (key </source>
-        <translation type="obsolete">Број битова по секунди (нота </translation>
-    </message>
 </context>
 <context>
     <name>DialogChangeLog</name>
@@ -2040,93 +1377,19 @@ repository</source>
         <translation>Полифон</translation>
     </message>
     <message>
-        <source>version</source>
-        <translation type="obsolete">верзија</translation>
-    </message>
-    <message>
-        <location filename="dialogs/dialogchangelog.cpp" line="85"/>
+        <location filename="dialogs/dialogchangelog.cpp" line="91"/>
         <source>What is new</source>
         <translation>Новост</translation>
     </message>
     <message>
-        <location filename="dialogs/dialogchangelog.cpp" line="88"/>
+        <location filename="dialogs/dialogchangelog.cpp" line="94"/>
         <source>What has improved</source>
         <translation>Побољшање</translation>
     </message>
     <message>
-        <location filename="dialogs/dialogchangelog.cpp" line="91"/>
+        <location filename="dialogs/dialogchangelog.cpp" line="97"/>
         <source>What is fixed</source>
         <translation>Резолуција</translation>
-    </message>
-</context>
-<context>
-    <name>DialogChangeVolume</name>
-    <message>
-        <source>Change volume</source>
-        <translation type="obsolete">Промена гласноће</translation>
-    </message>
-    <message>
-        <source>Add</source>
-        <translation type="obsolete">Додај</translation>
-    </message>
-    <message>
-        <source>Multiply</source>
-        <translation type="obsolete">Помножи</translation>
-    </message>
-    <message>
-        <source>Normalize</source>
-        <translation type="obsolete">Уједначи</translation>
-    </message>
-    <message>
-        <source> %</source>
-        <translation type="obsolete"> %</translation>
-    </message>
-    <message>
-        <source> dB</source>
-        <translation type="obsolete"> dB</translation>
-    </message>
-</context>
-<context>
-    <name>DialogCommand</name>
-    <message>
-        <source>Use an external command</source>
-        <translation type="obsolete">Употреба спољашње наредбе</translation>
-    </message>
-    <message>
-        <source>History</source>
-        <translation type="obsolete">Историјат</translation>
-    </message>
-    <message>
-        <source>Command</source>
-        <translation type="obsolete">Наредба</translation>
-    </message>
-    <message>
-        <source>Replace sample information if possible</source>
-        <translation type="obsolete">Када је то могуће, замени податке узорка</translation>
-    </message>
-    <message>
-        <source>Authorize stereo editing</source>
-        <translation type="obsolete">Дозволи стерео уређивање</translation>
-    </message>
-    <message>
-        <source>Command example:</source>
-        <translation type="obsolete">Команда пример:</translation>
-    </message>
-    <message>
-        <source>Executable file</source>
-        <translation type="obsolete">Извршна датотека</translation>
-    </message>
-    <message>
-        <source>Warning</source>
-        <translation type="obsolete">Упозорење</translation>
-    </message>
-    <message>
-        <source>You must enter a command with at least {wav} as argument.</source>
-        <translation type="obsolete">Унетој наредби мора да се придружи бар {wav} као аргуменат.</translation>
-    </message>
-    <message>
-        <source>The command must contain the argument {wav}.</source>
-        <translation type="obsolete">Линија наредбе мора да садржи {wav} аргуменат.</translation>
     </message>
 </context>
 <context>
@@ -2175,134 +1438,6 @@ repository</source>
         <location filename="dialogs/dialogcreateelements.cpp" line="79"/>
         <source>comprising the %1 instruments</source>
         <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>DialogDuplication</name>
-    <message>
-        <source>Division duplication</source>
-        <translation type="obsolete">Удвостручавање делова</translation>
-    </message>
-    <message>
-        <source>A division for each key</source>
-        <translation type="obsolete">Један део за сваку ноту</translation>
-    </message>
-    <message>
-        <source>A division for each velocity range</source>
-        <translation type="obsolete">Један део за сваки опсег јачине удара</translation>
-    </message>
-</context>
-<context>
-    <name>DialogExport</name>
-    <message>
-        <source>Export</source>
-        <translation type="obsolete">Извези</translation>
-    </message>
-    <message>
-        <source>Select all</source>
-        <translation type="obsolete">Означи све</translation>
-    </message>
-    <message>
-        <source>Unselect all</source>
-        <translation type="obsolete">Одзначи све</translation>
-    </message>
-    <message>
-        <source>Location</source>
-        <translation type="obsolete">Место</translation>
-    </message>
-    <message>
-        <source>Format</source>
-        <translation type="obsolete">Врста</translation>
-    </message>
-    <message>
-        <source>preset number as prefix</source>
-        <translation type="obsolete">број поставке као предложак</translation>
-    </message>
-    <message>
-        <source>one directory per bank</source>
-        <translation type="obsolete">један директоријум по банци</translation>
-    </message>
-    <message>
-        <source>General Midi classification</source>
-        <translation type="obsolete">Џенерал-миди распоред</translation>
-    </message>
-    <message>
-        <source>High</source>
-        <translation type="obsolete">Висок</translation>
-    </message>
-    <message>
-        <source>Medium</source>
-        <translation type="obsolete">Средњи</translation>
-    </message>
-    <message>
-        <source>Low</source>
-        <translation type="obsolete">Низак</translation>
-    </message>
-    <message>
-        <source>Quality</source>
-        <translation type="obsolete">Квалитет</translation>
-    </message>
-    <message>
-        <source>Cancel</source>
-        <translation type="obsolete">Поништи</translation>
-    </message>
-    <message>
-        <source>Choose a destination folder</source>
-        <translation type="obsolete">Одаберите одредишни директоријум</translation>
-    </message>
-    <message>
-        <source>Warning</source>
-        <translation type="obsolete">Упозорење</translation>
-    </message>
-    <message>
-        <source>Invalid directory.</source>
-        <translation type="obsolete">Директоријум није ваљан.</translation>
-    </message>
-    <message>
-        <source>In the case where several soundfonts are exported, the maximal number of presets per soundfonts is 127.</source>
-        <translation type="obsolete">Код вишеструког извожења звукотека, највећи број поставки по звукотеци је 127.</translation>
-    </message>
-    <message>
-        <source>The maximal number of soundfont to export is 127.</source>
-        <translation type="obsolete">Највећи број извежених звукотека је 127.</translation>
-    </message>
-    <message>
-        <source>At least one preset must be selected.</source>
-        <translation type="obsolete">Морате одабрати бар једну поставку.</translation>
-    </message>
-</context>
-<context>
-    <name>DialogExportList</name>
-    <message>
-        <source>Export preset list</source>
-        <translation type="obsolete">Извези списак поставки</translation>
-    </message>
-    <message>
-        <source>text copied in the clipboard</source>
-        <translation type="obsolete">текст копиран у клипборд</translation>
-    </message>
-    <message>
-        <source>csv format</source>
-        <translation type="obsolete">врста ЦСВ</translation>
-    </message>
-    <message>
-        <source>html table</source>
-        <translation type="obsolete">ХТМЛ таблица</translation>
-    </message>
-    <message>
-        <source>Copy</source>
-        <translation type="obsolete">Умножи</translation>
-    </message>
-</context>
-<context>
-    <name>DialogFilterFrequencies</name>
-    <message>
-        <source>Filter frequencies</source>
-        <translation type="obsolete">Филтрирање учестаности</translation>
-    </message>
-    <message>
-        <source>Put in red the part of frequencies to filter:</source>
-        <translation type="obsolete">Сместите у црвено део учестаности за филтрирање :</translation>
     </message>
 </context>
 <context>
@@ -2362,212 +1497,6 @@ repository</source>
     </message>
 </context>
 <context>
-    <name>DialogMagnetophone</name>
-    <message>
-        <source>Recorder</source>
-        <translation type="obsolete">Магнетофон (снимач)</translation>
-    </message>
-    <message>
-        <source>Save a record</source>
-        <translation type="obsolete">Сачувај снимљено</translation>
-    </message>
-    <message>
-        <source>Wav file (*.wav)</source>
-        <translation type="obsolete">Вав-датотека (*.wav)</translation>
-    </message>
-    <message>
-        <source>record</source>
-        <translation type="obsolete">снимљено</translation>
-    </message>
-</context>
-<context>
-    <name>DialogMixture</name>
-    <message>
-        <source>Mixture creation</source>
-        <translatorcomment>Mixture = organ stop made of a combinaison of harmonics</translatorcomment>
-        <translation type="obsolete">Стварање микстуре</translation>
-    </message>
-    <message>
-        <source>Name of the mixture:</source>
-        <translation type="obsolete">Назив микстуре:</translation>
-    </message>
-    <message>
-        <source>Sample creation:</source>
-        <translation type="obsolete">Стварање узорка:</translation>
-    </message>
-    <message>
-        <source>for every key</source>
-        <translation type="obsolete">за сваку ноту</translation>
-    </message>
-    <message>
-        <source>every 3 keys</source>
-        <translation type="obsolete">за сваку 3. ноту</translation>
-    </message>
-    <message>
-        <source>every 6 keys</source>
-        <translation type="obsolete">за сваку 6. ноту</translation>
-    </message>
-    <message>
-        <source>Auto loop</source>
-        <translation type="obsolete">Сам врти</translation>
-    </message>
-    <message>
-        <source>Stereo</source>
-        <translation type="obsolete">Стерео</translation>
-    </message>
-    <message>
-        <source>Divisions</source>
-        <translation type="obsolete">Делови</translation>
-    </message>
-    <message>
-        <source>Key range</source>
-        <translation type="obsolete">Нотни опсег</translation>
-    </message>
-    <message>
-        <source>Ranks</source>
-        <translation type="obsolete">Редослед</translation>
-    </message>
-    <message>
-        <source>Type</source>
-        <translation type="obsolete">Врста</translation>
-    </message>
-    <message>
-        <source>octave</source>
-        <translation type="obsolete">октава</translation>
-    </message>
-    <message>
-        <source>fifth</source>
-        <translation type="obsolete">квинта</translation>
-    </message>
-    <message>
-        <source>third</source>
-        <translation type="obsolete">терца</translation>
-    </message>
-    <message>
-        <source>seventh</source>
-        <translation type="obsolete">септима</translation>
-    </message>
-    <message>
-        <source>ninth</source>
-        <translation type="obsolete">деветина</translation>
-    </message>
-    <message>
-        <source>eleventh</source>
-        <translation type="obsolete">једанаестина</translation>
-    </message>
-    <message>
-        <source>thirteenth</source>
-        <translation type="obsolete">тринаестина</translation>
-    </message>
-    <message>
-        <source>fifteenth</source>
-        <translation type="obsolete">петнаестина</translation>
-    </message>
-    <message>
-        <source>seventeenth</source>
-        <translation type="obsolete">седамнаестина</translation>
-    </message>
-    <message>
-        <source>nineteenth</source>
-        <translation type="obsolete">деветнаестина</translation>
-    </message>
-    <message>
-        <source>twenty-first</source>
-        <translation type="obsolete">двадесетједнина</translation>
-    </message>
-    <message>
-        <source>twenty-third</source>
-        <translation type="obsolete">двадесеттрећина</translation>
-    </message>
-    <message>
-        <source>twenty-fifth</source>
-        <translation type="obsolete">двадесетпетина</translation>
-    </message>
-    <message>
-        <source>twenty-seventh</source>
-        <translation type="obsolete">двадесетседмина</translation>
-    </message>
-    <message>
-        <source>untitled</source>
-        <translation type="obsolete">без назива</translation>
-    </message>
-</context>
-<context>
-    <name>DialogParamGlobal</name>
-    <message>
-        <source>Global setting</source>
-        <translation type="obsolete">Општа подешавања</translation>
-    </message>
-    <message>
-        <source>Addition</source>
-        <translation type="obsolete">Сабирање</translation>
-    </message>
-    <message>
-        <source>Multiplication</source>
-        <translation type="obsolete">Умножавање</translation>
-    </message>
-    <message>
-        <source>Replacement</source>
-        <translation type="obsolete">Замењивање</translation>
-    </message>
-    <message>
-        <source>Apply to a velocity range</source>
-        <translation type="obsolete">Примени на опсег јачине удара</translation>
-    </message>
-    <message>
-        <source>Parameter</source>
-        <translation type="obsolete">Параметар</translation>
-    </message>
-    <message>
-        <source>Maximum</source>
-        <translation type="obsolete">Највише</translation>
-    </message>
-    <message>
-        <source>Manual</source>
-        <translation type="obsolete">Ручно</translation>
-    </message>
-    <message>
-        <source>Linear ascending</source>
-        <translation type="obsolete">Равномеран пораст</translation>
-    </message>
-    <message>
-        <source>Linear descending</source>
-        <translation type="obsolete">Равномеран пад</translation>
-    </message>
-    <message>
-        <source>Exponential ascending</source>
-        <translation type="obsolete">Експоненцијалан пораст</translation>
-    </message>
-    <message>
-        <source>Exponential descending</source>
-        <translation type="obsolete">Експоненцијалан пад</translation>
-    </message>
-    <message>
-        <source>Random</source>
-        <translation type="obsolete">Насумице</translation>
-    </message>
-    <message>
-        <source>Modification</source>
-        <translation type="obsolete">Промена</translation>
-    </message>
-    <message>
-        <source>Minimum</source>
-        <translation type="obsolete">Најмање</translation>
-    </message>
-    <message>
-        <source>Pattern</source>
-        <translation type="obsolete">Мустра</translation>
-    </message>
-    <message>
-        <source>Stiffness</source>
-        <translation type="obsolete">Крутост</translation>
-    </message>
-    <message>
-        <source>Distribution</source>
-        <translation type="obsolete">Раздел</translation>
-    </message>
-</context>
-<context>
     <name>DialogRecorder</name>
     <message>
         <location filename="dialogs/dialogrecorder.ui" line="26"/>
@@ -2589,29 +1518,6 @@ repository</source>
         <location filename="dialogs/dialogrecorder.cpp" line="163"/>
         <source>record</source>
         <translation>снимљено</translation>
-    </message>
-</context>
-<context>
-    <name>DialogRelease</name>
-    <message>
-        <source>Release maker</source>
-        <translation type="obsolete">Стишавалац</translation>
-    </message>
-    <message>
-        <source>Release time at C2 (key 36)</source>
-        <translation type="obsolete">Време стишавања на »До 2« (нота 36)</translation>
-    </message>
-    <message>
-        <source>Division to the next octave</source>
-        <translation type="obsolete">Део до наредне октаве</translation>
-    </message>
-    <message>
-        <source>Detuning induced (semi-tones)</source>
-        <translation type="obsolete">Изазвано раздешавање (полутонови)</translation>
-    </message>
-    <message>
-        <source>Release time (key </source>
-        <translation type="obsolete">Време стишавања (нота </translation>
     </message>
 </context>
 <context>
@@ -2701,104 +1607,6 @@ repository</source>
         <location filename="dialogs/dialogselection.ui" line="46"/>
         <source>Cancel</source>
         <translation>Поништи</translation>
-    </message>
-</context>
-<context>
-    <name>DialogSpace</name>
-    <message>
-        <source>Spatialization</source>
-        <translation type="obsolete">Простирање</translation>
-    </message>
-    <message>
-        <source>Division number</source>
-        <translation type="obsolete">Број делова</translation>
-    </message>
-    <message>
-        <source>Filling (%)</source>
-        <translation type="obsolete">Попуњеност (%)</translation>
-    </message>
-    <message>
-        <source>Inversions</source>
-        <translation type="obsolete">Преобртања</translation>
-    </message>
-    <message>
-        <source>Ascending</source>
-        <translation type="obsolete">Растући</translation>
-    </message>
-    <message>
-        <source>Descending</source>
-        <translation type="obsolete">Опадајући</translation>
-    </message>
-    <message>
-        <source>Hollow</source>
-        <translation type="obsolete">Изолучено</translation>
-    </message>
-    <message>
-        <source>Spike</source>
-        <translation type="obsolete">Зашиљено</translation>
-    </message>
-    <message>
-        <source>Random</source>
-        <translation type="obsolete">Насумице</translation>
-    </message>
-    <message>
-        <source>Spreading (%)</source>
-        <translation type="obsolete">Ширина (%)</translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Pattern&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translatorcomment>Only &quot;Pattern&quot; has to be translated</translatorcomment>
-        <translation type="obsolete">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Мустра&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-    </message>
-    <message>
-        <source>Offset (0-100)</source>
-        <translation type="obsolete">Помак (0-100)</translation>
-    </message>
-</context>
-<context>
-    <name>DialogTransposition</name>
-    <message>
-        <source>Transposition</source>
-        <translation type="obsolete">Транспозиција</translation>
-    </message>
-    <message>
-        <source>Adapt keyrange</source>
-        <translation type="obsolete">Прилагоди нотни опсег</translation>
-    </message>
-    <message>
-        <source>Shift in semitones</source>
-        <translation type="obsolete">Помак у полутоновима</translation>
-    </message>
-</context>
-<context>
-    <name>DialogVisualizer</name>
-    <message>
-        <source>Visualizer</source>
-        <translation type="obsolete">Приказивач</translation>
-    </message>
-    <message>
-        <source>Display options</source>
-        <translation type="obsolete">Приказивање</translation>
-    </message>
-    <message>
-        <source>Log scale</source>
-        <translation type="obsolete">лог. подела</translation>
-    </message>
-    <message>
-        <source>Legend</source>
-        <translation type="obsolete">Појашњења</translation>
-    </message>
-    <message>
-        <source>Mean value per key</source>
-        <translation type="obsolete">Просечна вредност по ноти</translation>
-    </message>
-    <message>
-        <source>Default parameters</source>
-        <translation type="obsolete">Подразумевани параметри</translation>
-    </message>
-    <message>
-        <source>Defined parameters</source>
-        <translation type="obsolete">Задати параметри</translation>
     </message>
 </context>
 <context>
@@ -3070,11 +1878,6 @@ repository</source>
         <translation>Кашњење</translation>
     </message>
     <message>
-        <source>Key  Decay</source>
-        <oldsource>Key  Decay</oldsource>
-        <translation type="obsolete">Нота → Пад</translation>
-    </message>
-    <message>
         <location filename="editor/envelopeditor.ui" line="128"/>
         <source>Decay</source>
         <translation>Пад</translation>
@@ -3083,11 +1886,6 @@ repository</source>
         <location filename="editor/envelopeditor.ui" line="420"/>
         <source>Sustain</source>
         <translation>Задршка</translation>
-    </message>
-    <message>
-        <source>Key  Hold</source>
-        <oldsource>Key  Hold</oldsource>
-        <translation type="obsolete">Нота → Одржавање</translation>
     </message>
     <message>
         <location filename="editor/envelopeditor.ui" line="263"/>
@@ -3139,17 +1937,6 @@ repository</source>
     </message>
 </context>
 <context>
-    <name>ExternalCommandRunner</name>
-    <message>
-        <source>Cancel</source>
-        <translation type="obsolete">Поништи</translation>
-    </message>
-    <message>
-        <source>Processing </source>
-        <translation type="obsolete">Обрада </translation>
-    </message>
-</context>
-<context>
     <name>FilterFlow</name>
     <message>
         <location filename="repository/browser/filterflow.cpp" line="64"/>
@@ -3167,16 +1954,6 @@ repository</source>
 </context>
 <context>
     <name>GraphSpace</name>
-    <message>
-        <source>L</source>
-        <translatorcomment>почетно слово од &quot;Леви&quot;</translatorcomment>
-        <translation type="obsolete">Л</translation>
-    </message>
-    <message>
-        <source>R</source>
-        <translatorcomment>почетно слово од &quot;Десни&quot;</translatorcomment>
-        <translation type="obsolete">Д</translation>
-    </message>
     <message>
         <location filename="editor/tools/sound_spatialization/graphspace.cpp" line="76"/>
         <source>L</source>
@@ -3253,10 +2030,6 @@ repository</source>
         <location filename="editor/graphics/graphiquefourier.cpp" line="394"/>
         <source>Png file</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Png file (*.png)</source>
-        <translation type="obsolete">Пнг-датотека (*.png)</translation>
     </message>
 </context>
 <context>
@@ -3382,921 +2155,86 @@ repository</source>
 <context>
     <name>MainWindow</name>
     <message>
-        <source>Key</source>
-        <translation type="obsolete">Нота</translation>
-    </message>
-    <message>
-        <source>Vel.</source>
-        <translation type="obsolete">Јач.</translation>
-    </message>
-    <message>
-        <source>&amp;File</source>
-        <translatorcomment>Put the character &quot;&amp;&quot; to access an element in a menu via Alt + the following letter.</translatorcomment>
-        <translation type="obsolete">&amp;Датотека</translation>
-    </message>
-    <message>
-        <source>&amp;Help</source>
-        <translation type="obsolete">&amp;Помоћ</translation>
-    </message>
-    <message>
-        <source>&amp;Edit</source>
-        <translation type="obsolete">&amp;Уреди</translation>
-    </message>
-    <message>
-        <source>&amp;Tools</source>
-        <translation type="obsolete">&amp;Алати</translation>
-    </message>
-    <message>
-        <source>&amp;Sample</source>
-        <translation type="obsolete">&amp;Узорак</translation>
-    </message>
-    <message>
-        <source>&amp;Global</source>
-        <translation type="obsolete">&amp;Опште</translation>
-    </message>
-    <message>
-        <source>&amp;Instrument</source>
-        <translation type="obsolete">&amp;Инструменат</translation>
-    </message>
-    <message>
-        <source>&amp;Preset</source>
-        <translation type="obsolete">&amp;Поставка</translation>
-    </message>
-    <message>
-        <source>&amp;View</source>
-        <translation type="obsolete">П&amp;реглед</translation>
-    </message>
-    <message>
-        <source>&amp;Keyboard</source>
-        <translation type="obsolete">&amp;Клавијатура</translation>
-    </message>
-    <message>
-        <source>Toolbar</source>
-        <translation type="obsolete">Алатница</translation>
-    </message>
-    <message>
-        <source>Tree</source>
-        <translation type="obsolete">Разгранато</translation>
-    </message>
-    <message>
-        <source>Collapse the tree</source>
-        <translation type="obsolete">Скупи гране</translation>
-    </message>
-    <message>
-        <source>Expand the tree</source>
-        <translation type="obsolete">Рашири гране</translation>
-    </message>
-    <message>
-        <source>Clear the search</source>
-        <translation type="obsolete">Очисти пронађено</translation>
-    </message>
-    <message>
-        <source>&amp;Open</source>
-        <translation type="obsolete">&amp;Отвори...</translation>
-    </message>
-    <message>
-        <source>Open a file</source>
-        <translation type="obsolete">Отвори датотеку</translation>
-    </message>
-    <message>
-        <source>&amp;Quit</source>
-        <translation type="obsolete">&amp;Изађи</translation>
-    </message>
-    <message>
-        <source>Online &amp;manual</source>
-        <oldsource>&amp;Manuel</oldsource>
-        <translation type="obsolete">&amp;Упутство за употребу</translation>
-    </message>
-    <message>
-        <source>&amp;About</source>
-        <translation type="obsolete">&amp;О програму</translation>
-    </message>
-    <message>
-        <location filename="mainwindow/mainwindow.cpp" line="196"/>
+        <location filename="mainwindow/mainwindow.cpp" line="197"/>
         <source>&amp;Save</source>
         <translation>&amp;Сачувај</translation>
     </message>
     <message>
-        <source>Save the current file</source>
-        <translation type="obsolete">Сачувај текућу датотеку</translation>
-    </message>
-    <message>
-        <source>Save &amp;as...</source>
-        <translation type="obsolete">Сачувај &amp;као...</translation>
-    </message>
-    <message>
-        <source>Save in another file</source>
-        <translation type="obsolete">Чува у другој датотеци</translation>
-    </message>
-    <message>
-        <source>&amp;New...</source>
-        <translation type="obsolete">&amp;Нова...</translation>
-    </message>
-    <message>
-        <source>Create a new file</source>
-        <translation type="obsolete">Створи нову датотеку</translation>
-    </message>
-    <message>
-        <source>&amp;Undo</source>
-        <comment>1</comment>
-        <translatorcomment>Undo an action</translatorcomment>
-        <translation type="obsolete">&amp;Опозови</translation>
-    </message>
-    <message>
-        <source>Undo the last action</source>
-        <translation type="obsolete">Опозови последњу радњу</translation>
-    </message>
-    <message>
-        <source>&amp;Redo</source>
-        <translation type="obsolete">&amp;Понови</translation>
-    </message>
-    <message>
-        <source>Redo the last undone action</source>
-        <translation type="obsolete">Поништи опозив последње радње</translation>
-    </message>
-    <message>
-        <source>&amp;Settings</source>
-        <translation type="obsolete">Поде&amp;шавања</translation>
-    </message>
-    <message>
-        <source>Open the settings</source>
-        <translation type="obsolete">Отвара прозор са подешавањима</translation>
-    </message>
-    <message>
-        <source>&amp;Toolbar</source>
-        <translation type="obsolete">&amp;Алатница</translation>
-    </message>
-    <message>
-        <source>Display / hide the toolbar</source>
-        <translation type="obsolete">Приказује/Скрива траку са алатима</translation>
-    </message>
-    <message>
-        <source>&amp;Close file</source>
-        <translation type="obsolete">&amp;Затвори датотеку</translation>
-    </message>
-    <message>
-        <source>Close the current file</source>
-        <translation type="obsolete">Затвори текућу датотеку</translation>
-    </message>
-    <message>
-        <source>&amp;Copy</source>
-        <translation type="obsolete">&amp;Умножи</translation>
-    </message>
-    <message>
-        <source>Copy an element</source>
-        <translation type="obsolete">Умножава неки елеменат</translation>
-    </message>
-    <message>
-        <source>&amp;Paste</source>
-        <translation type="obsolete">У&amp;баци</translation>
-    </message>
-    <message>
-        <source>Paste an element</source>
-        <translation type="obsolete">Убацује, умеће неки елеменат</translation>
-    </message>
-    <message>
-        <source>&amp;Delete</source>
-        <translation type="obsolete">Обр&amp;иши</translation>
-    </message>
-    <message>
-        <source>Delete an element</source>
-        <translation type="obsolete">Уклони елеменат</translation>
-    </message>
-    <message>
-        <source>&amp;Remove unused elements</source>
-        <translation type="obsolete">Уклони &amp;непотребне елементе</translation>
-    </message>
-    <message>
-        <source>Remove unused samples and instruments</source>
-        <translation type="obsolete">Уклања неупотребљене узорке и инструменте</translation>
-    </message>
-    <message>
-        <source>Re&amp;name</source>
-        <translation type="obsolete">П&amp;реименуј</translation>
-    </message>
-    <message>
-        <source>Rename one or several element(s)</source>
-        <translation type="obsolete">Мења назив једног или више елемената</translation>
-    </message>
-    <message>
-        <source>file1</source>
-        <translation type="obsolete">датотека 1</translation>
-    </message>
-    <message>
-        <source>Open a recent file</source>
-        <translation type="obsolete">Отвара скоро употребљивану датотеку</translation>
-    </message>
-    <message>
-        <source>file2</source>
-        <translation type="obsolete">датотека 2</translation>
-    </message>
-    <message>
-        <source>file3</source>
-        <translation type="obsolete">датотека 3</translation>
-    </message>
-    <message>
-        <source>file4</source>
-        <translation type="obsolete">датотека 4</translation>
-    </message>
-    <message>
-        <source>file5</source>
-        <translation type="obsolete">датотека 5</translation>
-    </message>
-    <message>
-        <source>&amp;Modulator section</source>
-        <translation type="obsolete">&amp;Модулаторски одељак</translation>
-    </message>
-    <message>
-        <source>Display the modulator section</source>
-        <translation type="obsolete">Прикажи модулаторски одељак</translation>
-    </message>
-    <message>
-        <source>&amp;Import samples...</source>
-        <translation type="obsolete">&amp;Увези узорке...</translation>
-    </message>
-    <message>
-        <source>Import an audio file</source>
-        <translation type="obsolete">Увези звучну датотеку</translation>
-    </message>
-    <message>
-        <source>E&amp;xport samples...</source>
-        <translation type="obsolete">Из&amp;вези узорке...</translation>
-    </message>
-    <message>
-        <source>Export in a wav format</source>
-        <translation type="obsolete">Извоз у вав-датотеку</translation>
-    </message>
-    <message>
-        <source>New instrument</source>
-        <translation type="obsolete">Нов инструменат</translation>
-    </message>
-    <message>
-        <source>Create a new instrument</source>
-        <translation type="obsolete">Створи нов инструменат</translation>
-    </message>
-    <message>
-        <source>New preset</source>
-        <translation type="obsolete">Нова поставка</translation>
-    </message>
-    <message>
-        <source>Create a new preset</source>
-        <translation type="obsolete">Створи нову поставку</translation>
-    </message>
-    <message>
-        <source>&amp;Remove blank at start</source>
-        <translation type="obsolete">&amp;Уклони почетну празнину</translation>
-    </message>
-    <message>
-        <source>Remove the blank at the beginning of a sample</source>
-        <translation type="obsolete">Уклони празнине на почетку узорка</translation>
-    </message>
-    <message>
-        <source>&amp;Trim to end of loop</source>
-        <translation type="obsolete">&amp;Опсеци до краја вртње</translation>
-    </message>
-    <message>
-        <source>Cut the sample at the end of its loop</source>
-        <translation type="obsolete">Исеци узорак на крају његове вртње</translation>
-    </message>
-    <message>
-        <source>&amp;Change volume...</source>
-        <oldsource>&amp;Modifier volume</oldsource>
-        <translation type="obsolete">Промена &amp;гласноће...</translation>
-    </message>
-    <message>
-        <source>Change the volume</source>
-        <translation type="obsolete">Мењање гласноће</translation>
-    </message>
-    <message>
-        <source>&amp;Filter frequencies...</source>
-        <translation type="obsolete">&amp;Филтрирање учестаности...</translation>
-    </message>
-    <message>
-        <source>Apply a filter to attenuate specific frequencies</source>
-        <translation type="obsolete">Примена филтра за слабљење одређених учестаности</translation>
-    </message>
-    <message>
-        <source>Export &amp;preset list...</source>
-        <oldsource>Exporter la liste des &amp;presets</oldsource>
-        <translation type="obsolete">&amp;Извези списак поставки...</translation>
-    </message>
-    <message>
-        <source>Export the preset list in a text format</source>
-        <translation type="obsolete">Извези списак поставки у текстуалном врста</translation>
-    </message>
-    <message>
-        <source>&amp;Soundfont repository</source>
-        <translation type="obsolete">Преузимање &amp;звукотеке</translation>
-    </message>
-    <message>
-        <source>&amp;Auto loop</source>
-        <translation type="obsolete">&amp;Самовртња</translation>
-    </message>
-    <message>
-        <source>Loop automatically the sample</source>
-        <translation type="obsolete">Самовртња узорка</translation>
-    </message>
-    <message>
-        <source>Trans&amp;pose...</source>
-        <translation type="obsolete">&amp;Транспонуј...</translation>
-    </message>
-    <message>
-        <source>Transpose the sample</source>
-        <translation type="obsolete">Транспонуј узорак</translation>
-    </message>
-    <message>
-        <source>&amp;Adjust attenuations...</source>
-        <translation type="obsolete">Прилагоди при&amp;гушења...</translation>
-    </message>
-    <message>
-        <source>Globally adjust instrument and preset attenuations</source>
-        <translation type="obsolete">Опште прилагођење пригушења инструмената и поставки</translation>
-    </message>
-    <message>
-        <source>&amp;External command...</source>
-        <translation type="obsolete">Спољашња &amp;наредба...</translation>
-    </message>
-    <message>
-        <source>Use an external software or command to modify a .wav file</source>
-        <translation type="obsolete">Употреба спољашњег програма или наредбе за обраду вав-датотеке (.wav)</translation>
-    </message>
-    <message>
-        <source>&amp;Celeste tuning...</source>
-        <translation type="obsolete">&amp;Челеста-угађање...</translation>
-    </message>
-    <message>
-        <source>Tune the sounds to create beats</source>
-        <translation type="obsolete">Угоди звук за стварање откуцаја</translation>
-    </message>
-    <message>
-        <source>&amp;Sound spatialization...</source>
-        <translation type="obsolete">П&amp;ростирање звука...</translation>
-    </message>
-    <message>
-        <source>Place sounds in space</source>
-        <translation type="obsolete">Просторни размештај узорака</translation>
-    </message>
-    <message>
-        <source>&amp;Automatic distribution</source>
-        <translation type="obsolete">Самораз&amp;дел</translation>
-    </message>
-    <message>
-        <source>Automatically arrange the samples over the keyboard</source>
-        <translation type="obsolete">Самораздел узорака на клвијатури</translation>
-    </message>
-    <message>
-        <source>&amp;Division duplication...</source>
-        <translation type="obsolete">&amp;Удвостручавање делова...</translation>
-    </message>
-    <message>
-        <source>Division duplication...</source>
-        <translation type="obsolete">Удвостручавање делова...</translation>
-    </message>
-    <message>
-        <source>Duplicate the divisions</source>
-        <translation type="obsolete">Удвостручи ове делове</translation>
-    </message>
-    <message>
-        <source>&amp;Global setting...</source>
-        <translation type="obsolete">&amp;Општа подешавања...</translation>
-    </message>
-    <message>
-        <source>Set all divisions simultaneously</source>
-        <translation type="obsolete">Једновремено постави све делове</translation>
-    </message>
-    <message>
-        <source>&amp;Balance adjustment</source>
-        <translation type="obsolete">&amp;Панорамисање</translation>
-    </message>
-    <message>
-        <source>Set the sample pan</source>
-        <translation type="obsolete">Панорамски постави узорак</translation>
-    </message>
-    <message>
-        <source>&amp;Mixture creation...</source>
-        <translation type="obsolete">&amp;Стварање микстуре...</translation>
-    </message>
-    <message>
-        <source>Create a mixture</source>
-        <translation type="obsolete">Створи микстуру</translation>
-    </message>
-    <message>
-        <source>&amp;5 octaves</source>
-        <translation type="obsolete">&amp;5 октава</translation>
-    </message>
-    <message>
-        <source>Display a 5-octave keyboard</source>
-        <translation type="obsolete">Прикажи 5-октавну клавијатуру</translation>
-    </message>
-    <message>
-        <source>&amp;6 octaves</source>
-        <translation type="obsolete">&amp;6 октава</translation>
-    </message>
-    <message>
-        <source>Display a 6-octave keyboard</source>
-        <translation type="obsolete">Прикажи 6-октавну клавијатуру</translation>
-    </message>
-    <message>
-        <source>&amp;128 keys (full)</source>
-        <translation type="obsolete">&amp;128 нота (потпуно)</translation>
-    </message>
-    <message>
-        <source>Display a 128-key keyboard</source>
-        <translation type="obsolete">Прикажи клавијатуру са 128 дирки</translation>
-    </message>
-    <message>
-        <source>&amp;None</source>
-        <translation type="obsolete">&amp;Ништа</translation>
-    </message>
-    <message>
-        <source>Display no keyboard</source>
-        <translation type="obsolete">Прикажи без клавијатуре</translation>
-    </message>
-    <message>
-        <source>Division duplication</source>
-        <translation type="obsolete">Удвостручавање делова</translation>
-    </message>
-    <message>
-        <source>&amp;Release maker</source>
-        <translation type="obsolete">Ст&amp;ишавалац...</translation>
-    </message>
-    <message>
-        <source>Create automatically a release for all linked sounds</source>
-        <translation type="obsolete">Сам створи стишавање свих повезаних звукова</translation>
-    </message>
-    <message>
-        <source>&amp;Link all stereo samples</source>
-        <oldsource>&amp;Association auto échantillons</oldsource>
-        <translation type="obsolete">&amp;Повежи све стерео узорке</translation>
-    </message>
-    <message>
-        <source>Automatically link the samples L/R according to their names</source>
-        <translation type="obsolete">Према њиховом називу, сам повежи узорке »Л« или »Д«</translation>
-    </message>
-    <message>
-        <source>&amp;Recorder</source>
-        <translation type="obsolete">&amp;Снимач</translation>
-    </message>
-    <message>
-        <source>Display the recorder</source>
-        <translation type="obsolete">Прикажи снимач</translation>
-    </message>
-    <message>
-        <source>&amp;Visualizer</source>
-        <translation type="obsolete">&amp;Приказивач</translation>
-    </message>
-    <message>
-        <source>Visualize in a graph the parameters used</source>
-        <translation type="obsolete">Приказивање употребљених параметара графиконом</translation>
-    </message>
-    <message>
-        <source>Ex&amp;port soundfont...</source>
-        <oldsource>Exporter sound&amp;font...</oldsource>
-        <translation type="obsolete">Извези зву&amp;котеку...</translation>
-    </message>
-    <message>
-        <source>Export a soundfont</source>
-        <translation type="obsolete">Извези звукотеку</translation>
-    </message>
-    <message>
-        <source>&amp;Unlink all stereo samples</source>
-        <translation type="obsolete">&amp;Одвоји све стерео узорке</translation>
-    </message>
-    <message>
-        <source>Unlink all stereo samples</source>
-        <translation type="obsolete">Раздвајање свих стерео-узорака</translation>
-    </message>
-    <message>
-        <source>Peak &amp;frequency export (csv)</source>
-        <translation type="obsolete">Извоз вр&amp;шних учестаности (csv)</translation>
-    </message>
-    <message>
-        <source>Export the peak frequency of all samples in a csv file</source>
-        <translation type="obsolete">Извоз вршних учестаности свих узорака у цсв-датотеку</translation>
-    </message>
-    <message>
-        <source>&amp;88 keys (piano)</source>
-        <translation type="obsolete">&amp;88 нота (клавир)</translation>
-    </message>
-    <message>
-        <source>In &amp;toolbar</source>
-        <translation type="obsolete">У &amp;алатници</translation>
-    </message>
-    <message>
-        <source>&amp;Floating</source>
-        <translation type="obsolete">&amp;Лебдећа</translation>
-    </message>
-    <message>
-        <source>&amp;Transposition...</source>
-        <translation type="obsolete">&amp;Транспозиција...</translation>
-    </message>
-    <message>
-        <source>Transpose every sample of an instrument</source>
-        <translation type="obsolete">Транспонуј сваки узорак једног инструмента</translation>
-    </message>
-    <message>
-        <source>Remove all &amp;modulators</source>
-        <translation type="obsolete">Уклони све &amp;модулаторе</translation>
-    </message>
-    <message>
-        <source>&amp;Full screen</source>
-        <translation type="obsolete">На &amp;целом екрану</translation>
-    </message>
-    <message>
-        <source>&amp;Forum</source>
-        <translation type="obsolete">&amp;форум</translation>
-    </message>
-    <message>
-        <source>Search...</source>
-        <translation type="obsolete">Пронађи...</translation>
-    </message>
-    <message>
-        <source>Virtual keyboard</source>
-        <translation type="obsolete">Патворена клавијатура</translation>
-    </message>
-    <message>
-        <location filename="mainwindow/mainwindow.cpp" line="182"/>
+        <location filename="mainwindow/mainwindow.cpp" line="183"/>
         <source>Warning</source>
         <translation>Упозорење</translation>
     </message>
     <message>
-        <source>&lt;b&gt;Save before exiting?&lt;/b&gt;</source>
-        <translation type="obsolete">&lt;b&gt;Да ли да сачувам измене пре изласка?&lt;/b&gt;</translation>
-    </message>
-    <message>
-        <source>The following files have been modified:&lt;br/&gt; - </source>
-        <translation type="obsolete">Ове датотеке су измењене:&lt;br/&gt; - </translation>
-    </message>
-    <message>
-        <source>The file &quot;</source>
-        <translation type="obsolete">Датотека „</translation>
-    </message>
-    <message>
-        <source>&quot; has been modified.</source>
-        <translation type="obsolete">« је измењена.</translation>
-    </message>
-    <message>
-        <location filename="mainwindow/mainwindow.cpp" line="197"/>
+        <location filename="mainwindow/mainwindow.cpp" line="198"/>
         <source>&amp;Cancel</source>
         <translation>&amp;Поништи</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="198"/>
+        <location filename="mainwindow/mainwindow.cpp" line="199"/>
         <source>Do&amp;n&apos;t save</source>
         <translation>&amp;Изађи не сачувавши</translation>
     </message>
     <message>
-        <source>Polyphone</source>
-        <translation type="obsolete">Полифон</translation>
-    </message>
-    <message>
-        <location filename="mainwindow/mainwindow.cpp" line="270"/>
+        <location filename="mainwindow/mainwindow.cpp" line="271"/>
         <source>Opening files</source>
         <translation>Отварање датотека</translation>
     </message>
     <message>
-        <source>Cancel</source>
-        <translation type="obsolete">Поништи</translation>
-    </message>
-    <message>
-        <location filename="mainwindow/mainwindow.cpp" line="172"/>
+        <location filename="mainwindow/mainwindow.cpp" line="173"/>
         <source>untitled</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="183"/>
+        <location filename="mainwindow/mainwindow.cpp" line="184"/>
         <source>Save before exiting?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="186"/>
+        <location filename="mainwindow/mainwindow.cpp" line="187"/>
         <source>The following files have been modified:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="193"/>
+        <location filename="mainwindow/mainwindow.cpp" line="194"/>
         <source>File &quot;%1&quot; has been modified.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="242"/>
+        <location filename="mainwindow/mainwindow.cpp" line="243"/>
         <source>en/documentation</source>
         <comment>path for the documentation online</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="247"/>
+        <location filename="mainwindow/mainwindow.cpp" line="248"/>
         <source>en/forum</source>
         <comment>path for the forum</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="272"/>
+        <location filename="mainwindow/mainwindow.cpp" line="273"/>
         <source>Soundfonts</source>
         <translation>Звукотеке</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="273"/>
+        <location filename="mainwindow/mainwindow.cpp" line="274"/>
         <source>Sf2 files</source>
         <translation>Сф2-звукотека</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="274"/>
+        <location filename="mainwindow/mainwindow.cpp" line="275"/>
         <source>Sf3 files</source>
         <translation>Сф3-звукотека</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="275"/>
+        <location filename="mainwindow/mainwindow.cpp" line="276"/>
         <source>Sfz files</source>
         <translation>СфЗ-звукотека</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="276"/>
+        <location filename="mainwindow/mainwindow.cpp" line="277"/>
         <source>sfArk archives</source>
         <translation>Архива .сфАрк</translation>
-    </message>
-    <message>
-        <source>Corrupted file: use of 16 bits samples.</source>
-        <translation type="obsolete">Оштећена датотека: употреба 16-битних узорака.</translation>
-    </message>
-    <message>
-        <source>Unknown format.</source>
-        <translation type="obsolete">Врста није позната.</translation>
-    </message>
-    <message>
-        <source>File already loaded.</source>
-        <translation type="obsolete">Датотека је већ учитана.</translation>
-    </message>
-    <message>
-        <source>Cannot open the file.</source>
-        <translation type="obsolete">Не могу да отворим ову датотеку.</translation>
-    </message>
-    <message>
-        <source>Cannot read the file.</source>
-        <translation type="obsolete">Не могу да пустим ову датотеку.</translation>
-    </message>
-    <message>
-        <source>Corrupted file.</source>
-        <translation type="obsolete">Датотека је оштећена.</translation>
-    </message>
-    <message>
-        <source>Name of the new soundfont:</source>
-        <translation type="obsolete">Назив нове звукотеке:</translation>
-    </message>
-    <message>
-        <source>Operation in progress...</source>
-        <translation type="obsolete">Извршавам радњу...</translation>
-    </message>
-    <message>
-        <source>Cannot delete a sample used by another instrument.</source>
-        <translation type="obsolete">Не могу да уклоним узорак који употребљава други инструменат.</translation>
-    </message>
-    <message>
-        <source>Cannot delete an instrument used by another preset.</source>
-        <translation type="obsolete">Не могу да уклоним инструменат употребљен у другој поставци.</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;Losing resolution </source>
-        <translation type="obsolete">&lt;b&gt;Губитак резолуције </translation>
-    </message>
-    <message>
-        <source> bits&lt;/b&gt;</source>
-        <translation type="obsolete"> bits&lt;/b&gt;</translation>
-    </message>
-    <message>
-        <source>The sample quality will be lowered. Continue?</source>
-        <translation type="obsolete">Овим ће се умањити каквоћа узорка. Желите ли да ово урадим?</translation>
-    </message>
-    <message>
-        <source>&amp;Yes</source>
-        <translation type="obsolete">&amp;Да</translation>
-    </message>
-    <message>
-        <source>&amp;No</source>
-        <translation type="obsolete">&amp;Не</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;To many parameters defined in both the intruments and the presets.&lt;/b&gt;</source>
-        <translation type="obsolete">&lt;b&gt;Превише постављених параметара и за инструменте, и за поставке.&lt;/b&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;To many parameters defined in the instruments.&lt;/b&gt;</source>
-        <translation type="obsolete">&lt;b&gt;Превише постављених параметара за инструменте.&lt;/b&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;To many parameters defined in the presets.&lt;/b&gt;</source>
-        <translation type="obsolete">&lt;b&gt;Превише постављених параметара за поставке.&lt;/b&gt;</translation>
-    </message>
-    <message>
-        <source>Some synthesizers skip parameters beyond the  65536th.
-Splitting the file into several sf2 might solve the problem.</source>
-        <translation type="obsolete">
-Неки синтесајзери занемарују параметре иза „65536th“. Раздвајање датотеке у неколико Сф2-звукотека може да реши проблем.</translation>
-    </message>
-    <message>
-        <source>Save, &amp;disable this message</source>
-        <translation type="obsolete">Сачувај, &amp;онемогући ову поруку</translation>
-    </message>
-    <message>
-        <source>Save a soundfont</source>
-        <translation type="obsolete">Сачувај звукотеку</translation>
-    </message>
-    <message>
-        <source>.sf2 file (*.sf2)</source>
-        <translation type="obsolete">Сф2-звукотека (*.sf2)</translation>
-    </message>
-    <message>
-        <source>Unknown extension.</source>
-        <translation type="obsolete">Непозната врста датотеке.</translation>
-    </message>
-    <message>
-        <source>File already open, cannot save.</source>
-        <translation type="obsolete">Датотека је већ отворена — не могу да је сачувам.</translation>
-    </message>
-    <message>
-        <source>Cannot save the file.</source>
-        <translation type="obsolete">Не могу да сачувам ову датотеку.</translation>
-    </message>
-    <message>
-        <source>http://polyphone-soundfonts.com/en/documentation</source>
-        <translation type="obsolete">http://polyphone-soundfonts.com/en/documentation</translation>
-    </message>
-    <message>
-        <source>http://polyphone-soundfonts.com/en/forum</source>
-        <translation type="obsolete">http://polyphone-soundfonts.com/en/forum</translation>
-    </message>
-    <message>
-        <source>http://polyphone-soundfonts.com/en/soundfonts</source>
-        <translation type="obsolete">http://polyphone-soundfonts.com/en/soundfonts</translation>
-    </message>
-    <message>
-        <source>&amp;Bulk rename</source>
-        <translation type="obsolete">Скупно п&amp;реименовање</translation>
-    </message>
-    <message>
-        <source>Sample name (max 20 characters):</source>
-        <translation type="obsolete">Назив узорка (до 20 знакова):</translation>
-    </message>
-    <message>
-        <source>Instrument name (max 20 characters):</source>
-        <translation type="obsolete">Назив инструмента (до 20 знакова):</translation>
-    </message>
-    <message>
-        <source>Preset name (max 20 characters):</source>
-        <translation type="obsolete">Назив поставке (до 20 знакова):</translation>
-    </message>
-    <message>
-        <source>Soundfont name (max 255 characters):</source>
-        <translation type="obsolete">Назив звукотеке (до 255 знакова):</translation>
-    </message>
-    <message>
-        <source>Question</source>
-        <translation type="obsolete">Питање</translation>
-    </message>
-    <message>
-        <source>An error occurred while importing the file </source>
-        <translation type="obsolete">При увожењу датотеке догодила се грешка</translation>
-    </message>
-    <message>
-        <source>Wav file</source>
-        <oldsource>Fichier .wav (*.wav)</oldsource>
-        <translation type="obsolete">Вав-датотека (*.wav)</translation>
-    </message>
-    <message>
-        <source>The sample &quot;</source>
-        <translation type="obsolete">Узорак „</translation>
-    </message>
-    <message>
-        <source>L&quot; already exists.&lt;br/&gt;Replace?</source>
-        <translation type="obsolete">Л“ већ постоји.&lt;br/&gt;Да ли да га заменим?</translation>
-    </message>
-    <message>
-        <source>R&quot; already exists.&lt;br/&gt;Replace?</source>
-        <translation type="obsolete">Д“ већ постоји.&lt;br/&gt;Да ли да га заменим?</translation>
-    </message>
-    <message>
-        <source>&quot; already exists.&lt;br/&gt;Replace?</source>
-        <translation type="obsolete">“ већ постоји.&lt;br/&gt;Да ли да га заменим?</translation>
-    </message>
-    <message>
-        <source>&amp;Replace</source>
-        <translation type="obsolete">За&amp;мени</translation>
-    </message>
-    <message>
-        <source>R&amp;eplace all</source>
-        <translation type="obsolete">Замени св&amp;е</translation>
-    </message>
-    <message>
-        <source>&amp;Duplicate</source>
-        <translation type="obsolete">У&amp;двостручи</translation>
-    </message>
-    <message>
-        <source>D&amp;uplicate all</source>
-        <translation type="obsolete">&amp;Удвостручи све</translation>
-    </message>
-    <message>
-        <source>&amp;Ignore</source>
-        <translation type="obsolete">Занемар&amp;и</translation>
-    </message>
-    <message>
-        <source>I&amp;gnore all</source>
-        <translation type="obsolete">Занемари с&amp;ве</translation>
-    </message>
-    <message>
-        <source>Choose a destination folder</source>
-        <translation type="obsolete">Одаберите одредишни директоријум</translation>
-    </message>
-    <message>
-        <source>Merge soudfonts:</source>
-        <translation type="obsolete">Сједини звукотеке:</translation>
-    </message>
-    <message>
-        <source>Name of the new instrument:</source>
-        <translation type="obsolete">Назив новог инструмента: </translation>
-    </message>
-    <message>
-        <source>No preset available.</source>
-        <translation type="obsolete">Нема доступне поставке.</translation>
-    </message>
-    <message>
-        <source>Name of the new preset:</source>
-        <translation type="obsolete">Назив нове поставке: </translation>
-    </message>
-    <message>
-        <source> sample and </source>
-        <translation type="obsolete"> узорак и </translation>
-    </message>
-    <message>
-        <source> samples and </source>
-        <translation type="obsolete"> узорци и </translation>
-    </message>
-    <message>
-        <source> instrument have been deleted.</source>
-        <translatorcomment>instrument: једнина</translatorcomment>
-        <translation type="obsolete"> инструменат је уклоњен.</translation>
-    </message>
-    <message>
-        <source> instruments have been deleted.</source>
-        <translatorcomment>instrument: множина</translatorcomment>
-        <translation type="obsolete"> инструменат(а) је уклоњено.</translation>
-    </message>
-    <message>
-        <source>The soundfont must contain at least one instrument.</source>
-        <translation type="obsolete">Звукотека мора да садржи бар један инструменат.</translation>
-    </message>
-    <message>
-        <source>Export peak frequency</source>
-        <translation type="obsolete">Извези вршне учестаности</translation>
-    </message>
-    <message>
-        <source>Csv file (*.csv)</source>
-        <translation type="obsolete">Цсв-датотека (*.csv)</translation>
-    </message>
-    <message>
-        <source>,</source>
-        <translatorcomment>знак који ће да се употребљава као раздвајач колона у Цсв-датотекама</translatorcomment>
-        <translation type="obsolete">;</translation>
-    </message>
-    <message>
-        <source>Sample</source>
-        <translation type="obsolete">Узорак</translation>
-    </message>
-    <message>
-        <source>Peak number</source>
-        <translation type="obsolete">Број шиљка</translation>
-    </message>
-    <message>
-        <source>Factor</source>
-        <translation type="obsolete">Чинилац</translation>
-    </message>
-    <message>
-        <source>Frequency</source>
-        <translation type="obsolete">Учестаност</translation>
-    </message>
-    <message>
-        <source>Correction</source>
-        <translation type="obsolete">Поправка</translation>
-    </message>
-    <message>
-        <source>m</source>
-        <translatorcomment>децимални раздвајач</translatorcomment>
-        <translation type="obsolete">,</translation>
-    </message>
-    <message>
-        <source>The soundfont contains no modulators.</source>
-        <translation type="obsolete">Звукотека не садржи модулаторе.</translation>
-    </message>
-    <message>
-        <source>Information</source>
-        <translation type="obsolete">Подаци</translation>
-    </message>
-    <message>
-        <source>1 modulator has been deleted.</source>
-        <translation type="obsolete">1 модулатор је уклоњен.</translation>
-    </message>
-    <message>
-        <source>modulators have been deleted.</source>
-        <translation type="obsolete">модулатора је уклоњено.</translation>
     </message>
     <message>
         <location filename="mainwindow/mainwindow.ui" line="20"/>
@@ -4410,262 +2348,6 @@ Splitting the file into several sf2 might solve the problem.</source>
     </message>
 </context>
 <context>
-    <name>Page</name>
-    <message>
-        <source>, absolute value</source>
-        <translation type="obsolete">, aпсолутна вредност</translation>
-    </message>
-    <message>
-        <source>Sample start offset</source>
-        <translation type="obsolete">Помак почетка узорка</translation>
-    </message>
-    <message>
-        <source>Sample end offset</source>
-        <translation type="obsolete">Помак краја узорка</translation>
-    </message>
-    <message>
-        <source>Start loop offset</source>
-        <translation type="obsolete">Помак почетка вртње</translation>
-    </message>
-    <message>
-        <source>End loop offset</source>
-        <translation type="obsolete">Помак краја вртње</translation>
-    </message>
-    <message>
-        <source>Mod LFO → pitch (c)</source>
-        <translation type="obsolete">»Mod LFO« → тон (c)</translation>
-    </message>
-    <message>
-        <source>Vib LFO → pitch (c)</source>
-        <translation type="obsolete">»Vib LFO« → тон (c)</translation>
-    </message>
-    <message>
-        <source>Mod env → pitch (c)</source>
-        <translation type="obsolete">»Mod env« → тон (c)</translation>
-    </message>
-    <message>
-        <source>Filter, frequency (Hz)</source>
-        <translation type="obsolete">Филтар, учестаност (Hz)</translation>
-    </message>
-    <message>
-        <source>Filter, frequency (×)</source>
-        <translation type="obsolete">Филтар, учестаност (×)</translation>
-    </message>
-    <message>
-        <source>Filter, resonance (dB)</source>
-        <translation type="obsolete">Филтар, резонанса (dB)</translation>
-    </message>
-    <message>
-        <source>Mod LFO → filter (c)</source>
-        <translation type="obsolete">»Mod LFO« → филтар (c)</translation>
-    </message>
-    <message>
-        <source>Mod env → filter (c)</source>
-        <translation type="obsolete">»Mod env« → филтар (c)</translation>
-    </message>
-    <message>
-        <source>Mod LFO → volume (dB)</source>
-        <translation type="obsolete">»Mod LFO« → гласноћа (dB)</translation>
-    </message>
-    <message>
-        <source>Chorus (%)</source>
-        <translation type="obsolete">Хорус (%)</translation>
-    </message>
-    <message>
-        <source>Reverb (%)</source>
-        <translation type="obsolete">Јека (%)</translation>
-    </message>
-    <message>
-        <source>Pan [-50;50]</source>
-        <translation type="obsolete">Пан [-50;50]</translation>
-    </message>
-    <message>
-        <source>Pan [-100;100]</source>
-        <translation type="obsolete">Пан [-100;100]</translation>
-    </message>
-    <message>
-        <source>Mod LFO delay (s)</source>
-        <translatorcomment>енглески изрази могу да се задрже...</translatorcomment>
-        <translation type="obsolete">»Mod LFO« кашњење (s)</translation>
-    </message>
-    <message>
-        <source>Mod LFO delay (×)</source>
-        <translation type="obsolete">»Mod LFO« кашњење (×)</translation>
-    </message>
-    <message>
-        <source>Mod LFO freq (Hz)</source>
-        <translation type="obsolete">»Mod LFO« учестаност (Hz)</translation>
-    </message>
-    <message>
-        <source>Mod LFO freq (×)</source>
-        <translation type="obsolete">»Mod LFO« учестаност (×)</translation>
-    </message>
-    <message>
-        <source>Vib LFO delay (s)</source>
-        <translation type="obsolete">»Vib LFO« кашњење (s)</translation>
-    </message>
-    <message>
-        <source>Vib LFO delay (×)</source>
-        <translation type="obsolete">»Vib LFO« кашњење (×)</translation>
-    </message>
-    <message>
-        <source>Vib LFO freq (Hz)</source>
-        <translation type="obsolete">»Vib LFO« учестаност (Hz)</translation>
-    </message>
-    <message>
-        <source>Vib LFO freq (×)</source>
-        <translation type="obsolete">»Vib LFO« учестаност (×)</translation>
-    </message>
-    <message>
-        <source>Mod env delay (s)</source>
-        <translation type="obsolete">»Mod env« кашњење (s)</translation>
-    </message>
-    <message>
-        <source>Mod env delay (×)</source>
-        <translation type="obsolete">»Mod env« кашњење (×)</translation>
-    </message>
-    <message>
-        <source>Mod env attack (s)</source>
-        <translation type="obsolete">»Mod env« пораст (s)</translation>
-    </message>
-    <message>
-        <source>Mod env attack (×)</source>
-        <translation type="obsolete">»Mod env« пораст (×)</translation>
-    </message>
-    <message>
-        <source>Mod env hold (s)</source>
-        <translation type="obsolete">»Mod env« одржавање (s)</translation>
-    </message>
-    <message>
-        <source>Mod env hold (×)</source>
-        <translation type="obsolete">»Mod env« одржавање (×)</translation>
-    </message>
-    <message>
-        <source>Mod env decay (s)</source>
-        <translation type="obsolete">»Mod env« пад (s)</translation>
-    </message>
-    <message>
-        <source>Mod env decay (×)</source>
-        <translation type="obsolete">»Mod env« пад (×)</translation>
-    </message>
-    <message>
-        <source>Mod env sustain (%)</source>
-        <translation type="obsolete">»Mod env« задршка (%)</translation>
-    </message>
-    <message>
-        <source>Mod env release (s)</source>
-        <translation type="obsolete">»Mod env« стишавање (s)</translation>
-    </message>
-    <message>
-        <source>Mod env release (×)</source>
-        <translation type="obsolete">»Mod env« стишавање (×)</translation>
-    </message>
-    <message>
-        <source>Key → Mod env hold (c)</source>
-        <translation type="obsolete">Нота → »Mod env« одржавање (c)</translation>
-    </message>
-    <message>
-        <source>Key → Mod env decay (c)</source>
-        <translation type="obsolete">Нота → »Mod env« пад (c)</translation>
-    </message>
-    <message>
-        <source>Vol env delay (s)</source>
-        <translation type="obsolete">»Vol env« кашњење (s)</translation>
-    </message>
-    <message>
-        <source>Vol env delay (×)</source>
-        <translation type="obsolete">»Vol env« кашњење (×)</translation>
-    </message>
-    <message>
-        <source>Vol env attack (s)</source>
-        <translation type="obsolete">»Vol env« пораст (s)</translation>
-    </message>
-    <message>
-        <source>Vol env attack (×)</source>
-        <translation type="obsolete">»Vol env« пораст (×)</translation>
-    </message>
-    <message>
-        <source>Vol env hold (s)</source>
-        <translation type="obsolete">»Vol env« одржавање (s)</translation>
-    </message>
-    <message>
-        <source>Vol env hold (×)</source>
-        <translation type="obsolete">»Vol env« одржавање (×)</translation>
-    </message>
-    <message>
-        <source>Vol env decay (s)</source>
-        <translation type="obsolete">»Vol env« пад (s)</translation>
-    </message>
-    <message>
-        <source>Vol env decay (×)</source>
-        <translation type="obsolete">»Vol env« пад (×)</translation>
-    </message>
-    <message>
-        <source>Vol env sustain (dB)</source>
-        <translation type="obsolete">»Vol env« задршка (dB)</translation>
-    </message>
-    <message>
-        <source>Vol env release (s)</source>
-        <translation type="obsolete">»Vol env« стишавање (s)</translation>
-    </message>
-    <message>
-        <source>Vol env release (×)</source>
-        <translation type="obsolete">»Vol env« стишавање (×)</translation>
-    </message>
-    <message>
-        <source>Key → Vol env hold (c)</source>
-        <translation type="obsolete">Нота → »Vol env« одржавање (c)</translation>
-    </message>
-    <message>
-        <source>Key → Vol env decay (c)</source>
-        <translation type="obsolete">Нота → »Vol env« пад (c)</translation>
-    </message>
-    <message>
-        <source>Key range</source>
-        <translation type="obsolete">Опсег нота</translation>
-    </message>
-    <message>
-        <source>Velocity range</source>
-        <translation type="obsolete">Опсег јачине удара</translation>
-    </message>
-    <message>
-        <source>Fixed key</source>
-        <translation type="obsolete">Учвршћена нота</translation>
-    </message>
-    <message>
-        <source>Fixed velocity</source>
-        <translation type="obsolete">Учвршћена јачина</translation>
-    </message>
-    <message>
-        <source>Attenuation (dB)</source>
-        <translation type="obsolete">Пригушење (dB)</translation>
-    </message>
-    <message>
-        <source>Tuning (semi-tones)</source>
-        <translation type="obsolete">Угађање (полутонови)</translation>
-    </message>
-    <message>
-        <source>Tuning (cents)</source>
-        <translation type="obsolete">Угађање (центи)</translation>
-    </message>
-    <message>
-        <source>Loop playback</source>
-        <translation type="obsolete">Свирање вртње</translation>
-    </message>
-    <message>
-        <source>Tuning (scale)</source>
-        <translation type="obsolete">Угађање (лествица)</translation>
-    </message>
-    <message>
-        <source>Exclusive class</source>
-        <translation type="obsolete">Нарочита класа</translation>
-    </message>
-    <message>
-        <source>Root key</source>
-        <translation type="obsolete">Основна нота</translation>
-    </message>
-</context>
-<context>
     <name>PageInst</name>
     <message>
         <location filename="editor/pageinst.ui" line="141"/>
@@ -4752,10 +2434,6 @@ Splitting the file into several sf2 might solve the problem.</source>
 <context>
     <name>PageOverview</name>
     <message>
-        <source>Name</source>
-        <translation type="obsolete">Назив</translation>
-    </message>
-    <message>
         <location filename="editor/overview/pageoverview.cpp" line="83"/>
         <source>elements</source>
         <translation type="unfinished"></translation>
@@ -4768,10 +2446,6 @@ Splitting the file into several sf2 might solve the problem.</source>
 </context>
 <context>
     <name>PageOverviewInst</name>
-    <message>
-        <source>Instrument list</source>
-        <translation type="obsolete">Списак инструмената</translation>
-    </message>
     <message>
         <location filename="editor/overview/pageoverviewinst.cpp" line="32"/>
         <source>Instruments</source>
@@ -4867,10 +2541,6 @@ Splitting the file into several sf2 might solve the problem.</source>
 <context>
     <name>PageOverviewPrst</name>
     <message>
-        <source>Preset list</source>
-        <translation type="obsolete">Списак поставки</translation>
-    </message>
-    <message>
         <location filename="editor/overview/pageoverviewprst.cpp" line="32"/>
         <source>Presets</source>
         <translation>Поставке</translation>
@@ -4934,10 +2604,6 @@ Splitting the file into several sf2 might solve the problem.</source>
 </context>
 <context>
     <name>PageOverviewSmpl</name>
-    <message>
-        <source>Sample list</source>
-        <translation type="obsolete">Списак узорака</translation>
-    </message>
     <message>
         <location filename="editor/overview/pageoverviewsmpl.cpp" line="38"/>
         <source>Used</source>
@@ -5448,952 +3114,91 @@ rate</source>
 <context>
     <name>PageTable</name>
     <message>
-        <location filename="editor/pagetable.cpp" line="107"/>
+        <location filename="editor/pagetable.cpp" line="111"/>
         <source>Global</source>
         <translation>Опште</translation>
     </message>
     <message>
-        <location filename="editor/pagetable.cpp" line="505"/>
-        <location filename="editor/pagetable.cpp" line="527"/>
-        <location filename="editor/pagetable.cpp" line="1573"/>
-        <location filename="editor/pagetable.cpp" line="1639"/>
+        <location filename="editor/pagetable.cpp" line="521"/>
+        <location filename="editor/pagetable.cpp" line="543"/>
+        <location filename="editor/pagetable.cpp" line="1589"/>
+        <location filename="editor/pagetable.cpp" line="1655"/>
         <source>Modulator</source>
         <translation>Модулатор</translation>
     </message>
     <message>
-        <location filename="editor/pagetable.cpp" line="507"/>
+        <location filename="editor/pagetable.cpp" line="523"/>
         <source>Link (invalid)</source>
         <translation>Веза (неваљала)</translation>
     </message>
     <message>
-        <location filename="editor/pagetable.cpp" line="559"/>
+        <location filename="editor/pagetable.cpp" line="575"/>
         <source>Copy / duplicate modulators</source>
         <translation>Умножи/Удвостручи модулаторе</translation>
     </message>
     <message>
-        <location filename="editor/pagetable.cpp" line="562"/>
+        <location filename="editor/pagetable.cpp" line="578"/>
         <source>Duplicate modulators toward...</source>
         <translation>Удвостручи модулаторе у...</translation>
     </message>
     <message>
-        <location filename="editor/pagetable.cpp" line="563"/>
-        <location filename="editor/pagetable.cpp" line="574"/>
+        <location filename="editor/pagetable.cpp" line="579"/>
+        <location filename="editor/pagetable.cpp" line="590"/>
         <source>Copy all modulators</source>
         <translation>Умножи све модулаторе</translation>
     </message>
     <message>
-        <location filename="editor/pagetable.cpp" line="567"/>
+        <location filename="editor/pagetable.cpp" line="583"/>
         <source>Duplicate the selection toward...</source>
         <translation>Удвостручи одабрано у...</translation>
     </message>
     <message>
-        <location filename="editor/pagetable.cpp" line="568"/>
-        <location filename="editor/pagetable.cpp" line="576"/>
+        <location filename="editor/pagetable.cpp" line="584"/>
+        <location filename="editor/pagetable.cpp" line="592"/>
         <source>Copy the selected modulators</source>
         <translation>Умножи одабране модулаторе</translation>
     </message>
     <message>
-        <location filename="editor/pagetable.cpp" line="1888"/>
+        <location filename="editor/pagetable.cpp" line="1904"/>
         <source>Forbidden action:</source>
         <translation>Забрањена радња:</translation>
     </message>
     <message>
-        <location filename="editor/pagetable.cpp" line="1898"/>
-        <location filename="editor/pagetable.cpp" line="1907"/>
-        <location filename="editor/pagetable.cpp" line="2386"/>
-        <location filename="editor/pagetable.cpp" line="2395"/>
+        <location filename="editor/pagetable.cpp" line="1914"/>
+        <location filename="editor/pagetable.cpp" line="1923"/>
+        <location filename="editor/pagetable.cpp" line="2402"/>
+        <location filename="editor/pagetable.cpp" line="2411"/>
         <source>Warning</source>
         <translation>Упозорење</translation>
     </message>
     <message>
-        <location filename="editor/pagetable.cpp" line="1899"/>
+        <location filename="editor/pagetable.cpp" line="1915"/>
         <source>offsets cannot be modulated in a preset.</source>
         <translation>помаци не могу да се модулирају у поставку.</translation>
     </message>
     <message>
-        <location filename="editor/pagetable.cpp" line="1908"/>
+        <location filename="editor/pagetable.cpp" line="1924"/>
         <source>%1 cannot be modulated in a preset.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&quot; cannot be modulated in a preset.</source>
-        <translation type="obsolete">“ не може да се модулира у поставку.</translation>
-    </message>
-    <message>
-        <location filename="editor/pagetable.cpp" line="2387"/>
+        <location filename="editor/pagetable.cpp" line="2403"/>
         <source>An instrument comprising no samples is not compatible with this tool.</source>
         <translation>Инструменат који не садржи узорке није у сагласности са овим алатом.</translation>
     </message>
     <message>
-        <location filename="editor/pagetable.cpp" line="2388"/>
+        <location filename="editor/pagetable.cpp" line="2404"/>
         <source>A preset comprising no instruments is not compatible with this tool.</source>
         <translation>Поставка која не садржи инструменте није у сагласности са овим алатом.</translation>
     </message>
     <message>
-        <location filename="editor/pagetable.cpp" line="2395"/>
+        <location filename="editor/pagetable.cpp" line="2411"/>
         <source>The keyrange of all divisions must be specified.</source>
         <translation>Мора да се наведе нотни опсег свих делова.</translation>
-    </message>
-    <message>
-        <source>The instrument contains no samples.</source>
-        <translation type="obsolete">Овај инструменат не садржи узорке.</translation>
-    </message>
-    <message>
-        <source>The preset contains no instruments.</source>
-        <translation type="obsolete">Ова поставка не садржи инструменте.</translation>
-    </message>
-    <message>
-        <source>No keyrange specified for the instrument.</source>
-        <translation type="obsolete">Није постављен нотни опсег инструмента.</translation>
-    </message>
-    <message>
-        <source>No keyrange specified for the preset.</source>
-        <translation type="obsolete">Није постављен нотни опсег за поставку.</translation>
-    </message>
-</context>
-<context>
-    <name>Page_Inst</name>
-    <message>
-        <source>Table</source>
-        <translation type="obsolete">Таблица</translation>
-    </message>
-    <message>
-        <source>Ranges</source>
-        <translation type="obsolete">Опсег</translation>
-    </message>
-    <message>
-        <source>Envelopes</source>
-        <translation type="obsolete">Коверте</translation>
-    </message>
-    <message>
-        <source>Key range</source>
-        <translation type="obsolete">Нотни опсег</translation>
-    </message>
-    <message>
-        <source>Velocity range</source>
-        <translation type="obsolete">Опсег јачине удара</translation>
-    </message>
-    <message>
-        <source>Attenuation (dB)</source>
-        <translation type="obsolete">Пригушење (dB)</translation>
-    </message>
-    <message>
-        <source>Pan [-50;50]</source>
-        <translation type="obsolete">Пан [-50;50]</translation>
-    </message>
-    <message>
-        <source>Loop playback</source>
-        <translation type="obsolete">Свирање вртње</translation>
-    </message>
-    <message>
-        <source>Root key</source>
-        <translation type="obsolete">Основна нота</translation>
-    </message>
-    <message>
-        <source>Tuning (semi-tones)</source>
-        <translation type="obsolete">Угађање (полутонови)</translation>
-    </message>
-    <message>
-        <source>Tuning (cents)</source>
-        <translation type="obsolete">Угађање (центи)</translation>
-    </message>
-    <message>
-        <source>Tuning (scale)</source>
-        <translation type="obsolete">Угађање (лествица)</translation>
-    </message>
-    <message>
-        <source>Filter, frequency (Hz)</source>
-        <translation type="obsolete">Филтар, учестаност (Hz)</translation>
-    </message>
-    <message>
-        <source>Filter, resonance (dB)</source>
-        <translation type="obsolete">Филтар, резонанса (dB)</translation>
-    </message>
-    <message>
-        <source>Vol env delay (s)</source>
-        <translation type="obsolete">»Vol env« кашњење (s)</translation>
-    </message>
-    <message>
-        <source>Vol env attack (s)</source>
-        <translation type="obsolete">»Vol env« пораст (s)</translation>
-    </message>
-    <message>
-        <source>Vol env hold (s)</source>
-        <translation type="obsolete">»Vol env« одржавање (s)</translation>
-    </message>
-    <message>
-        <source>Vol env decay (s)</source>
-        <translation type="obsolete">»Vol env« пад (s)</translation>
-    </message>
-    <message>
-        <source>Vol env sustain (dB)</source>
-        <translation type="obsolete">»Vol env« задршка (dB)</translation>
-    </message>
-    <message>
-        <source>Vol env release (s)</source>
-        <translation type="obsolete">»Vol env« стишавање (s)</translation>
-    </message>
-    <message>
-        <source>Key → Vol env hold (c)</source>
-        <translation type="obsolete">Нота → »Vol env« одржавање (c)</translation>
-    </message>
-    <message>
-        <source>Key → Vol env decay (c)</source>
-        <translation type="obsolete">Нота → »Vol env« пад (c)</translation>
-    </message>
-    <message>
-        <source>Mod env delay (s)</source>
-        <translation type="obsolete">»Mod env« кашњење (s)</translation>
-    </message>
-    <message>
-        <source>Mod env attack (s)</source>
-        <translation type="obsolete">»Mod env« пораст (s)</translation>
-    </message>
-    <message>
-        <source>Mod env hold (s)</source>
-        <translation type="obsolete">»Mod env« одржавање (s)</translation>
-    </message>
-    <message>
-        <source>Mod env decay (s)</source>
-        <translation type="obsolete">»Mod env« пад (s)</translation>
-    </message>
-    <message>
-        <source>Mod env sustain (%)</source>
-        <translation type="obsolete">»Mod env« задршка (%)</translation>
-    </message>
-    <message>
-        <source>Mod env release (s)</source>
-        <translation type="obsolete">»Mod env« стишавање (s)</translation>
-    </message>
-    <message>
-        <source>Mod env → pitch (c)</source>
-        <translation type="obsolete">»Mod env« → тон (c)</translation>
-    </message>
-    <message>
-        <source>Mod env → filter (c)</source>
-        <translation type="obsolete">»Mod env« → филтар (c)</translation>
-    </message>
-    <message>
-        <source>Key → Mod env hold (c)</source>
-        <translation type="obsolete">Нота → »Mod env« одржавање (c)</translation>
-    </message>
-    <message>
-        <source>Key → Mod env decay (c)</source>
-        <translation type="obsolete">Нота → »Mod env« пад (c)</translation>
-    </message>
-    <message>
-        <source>Mod LFO delay (s)</source>
-        <translation type="obsolete">»Mod LFO« кашњење (s)</translation>
-    </message>
-    <message>
-        <source>Mod LFO freq (Hz)</source>
-        <translation type="obsolete">»Mod LFO« учестаност (Hz)</translation>
-    </message>
-    <message>
-        <source>Mod LFO → pitch (c)</source>
-        <translation type="obsolete">»Mod LFO« → тон (c)</translation>
-    </message>
-    <message>
-        <source>Mod LFO → filter (c)</source>
-        <translation type="obsolete">»Mod LFO« → филтар (c)</translation>
-    </message>
-    <message>
-        <source>Mod LFO → volume (dB)</source>
-        <translation type="obsolete">»Mod LFO« → гласноћа (dB)</translation>
-    </message>
-    <message>
-        <source>Vib LFO delay (s)</source>
-        <translation type="obsolete">»Vib LFO« кашњење (s)</translation>
-    </message>
-    <message>
-        <source>Vib LFO freq (Hz)</source>
-        <translation type="obsolete">»Vib LFO« учестаност (Hz)</translation>
-    </message>
-    <message>
-        <source>Vib LFO → pitch (c)</source>
-        <translation type="obsolete">»Vib LFO« → тон (c)</translation>
-    </message>
-    <message>
-        <source>Exclusive class</source>
-        <translation type="obsolete">Нарочита класа</translation>
-    </message>
-    <message>
-        <source>Chorus (%)</source>
-        <translation type="obsolete">Хорус (%)</translation>
-    </message>
-    <message>
-        <source>Reverb (%)</source>
-        <translation type="obsolete">Јека (%)</translation>
-    </message>
-    <message>
-        <source>Fixed key</source>
-        <translation type="obsolete">Учвршћена нота</translation>
-    </message>
-    <message>
-        <source>Fixed velocity</source>
-        <translation type="obsolete">Учвршћена јачина</translation>
-    </message>
-    <message>
-        <source>Sample start offset</source>
-        <translation type="obsolete">Помак почетка узорка</translation>
-    </message>
-    <message>
-        <source>Sample end offset</source>
-        <translation type="obsolete">Помак краја узорка</translation>
-    </message>
-    <message>
-        <source>Start loop offset</source>
-        <translation type="obsolete">Помак почетка вртње</translation>
-    </message>
-    <message>
-        <source>End loop offset</source>
-        <translation type="obsolete">Помак краја вртње</translation>
-    </message>
-    <message>
-        <source>Global</source>
-        <translation type="obsolete">Опште</translation>
-    </message>
-    <message>
-        <source>Modulators</source>
-        <translation type="obsolete">Модулатори</translation>
-    </message>
-    <message>
-        <source>Add a modulator</source>
-        <translation type="obsolete">Додај модулатор</translation>
-    </message>
-    <message>
-        <source>Delete a modulator</source>
-        <translation type="obsolete">Уклони модулатор</translation>
-    </message>
-    <message>
-        <source>Copy modulators</source>
-        <translation type="obsolete">Умножи модулаторе</translation>
-    </message>
-    <message>
-        <source>Paste the copied modulators</source>
-        <translation type="obsolete">Убаци умножене модулаторе</translation>
-    </message>
-    <message>
-        <source>Source</source>
-        <translation type="obsolete">Извориште</translation>
-    </message>
-    <message>
-        <source>Amount</source>
-        <translation type="obsolete">Количина</translation>
-    </message>
-    <message>
-        <source>Destination</source>
-        <translation type="obsolete">Одредиште</translation>
-    </message>
-    <message>
-        <source>Source / Amount</source>
-        <translation type="obsolete">Извориште/Количина</translation>
-    </message>
-    <message>
-        <source>Abs. value</source>
-        <translation type="obsolete">Апсолутна вредност</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;Instrument is not linked to any preset.&lt;/b&gt;</source>
-        <translation type="obsolete">&lt;b&gt;Овај инструменат није везан за било коју поставку.&lt;/b&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;Instrument linked to preset: &lt;/b&gt;</source>
-        <translation type="obsolete">&lt;b&gt;Овај инструменат је везан за поставку: &lt;/b&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;Instrument linked to presets: &lt;/b&gt;</source>
-        <translation type="obsolete">&lt;b&gt;Овај инструменат је везан за поставке: &lt;/b&gt;</translation>
-    </message>
-    <message>
-        <source>Warning</source>
-        <translation type="obsolete">Упозорење</translation>
-    </message>
-    <message>
-        <source>The instrument contains no samples.</source>
-        <translation type="obsolete">Овај инструменат не садржи узорке.</translation>
-    </message>
-    <message>
-        <source>Creation </source>
-        <translation type="obsolete">Стварање </translation>
-    </message>
-    <message>
-        <source>Cancel</source>
-        <translation type="obsolete">Поништи</translation>
-    </message>
-    <message>
-        <source>untitled</source>
-        <translation type="obsolete">без назива</translation>
-    </message>
-</context>
-<context>
-    <name>Page_Prst</name>
-    <message>
-        <source>Bank</source>
-        <translation type="obsolete">Банка</translation>
-    </message>
-    <message>
-        <source>Preset</source>
-        <translation type="obsolete">Поставка</translation>
-    </message>
-    <message>
-        <source>(percussion)</source>
-        <translation type="obsolete">(удараљке)</translation>
-    </message>
-    <message>
-        <source>Table</source>
-        <translation type="obsolete">Таблица</translation>
-    </message>
-    <message>
-        <source>Ranges</source>
-        <translation type="obsolete">Опсег</translation>
-    </message>
-    <message>
-        <source>Key range</source>
-        <translation type="obsolete">Нотни опсег</translation>
-    </message>
-    <message>
-        <source>Velocity range</source>
-        <translation type="obsolete">Опсег јачине удара</translation>
-    </message>
-    <message>
-        <source>Attenuation (dB)</source>
-        <translation type="obsolete">Пригушење (dB)</translation>
-    </message>
-    <message>
-        <source>Pan [-100;100]</source>
-        <translation type="obsolete">Пан [-100;100]</translation>
-    </message>
-    <message>
-        <source>Tuning (semi-tones)</source>
-        <translation type="obsolete">Угађање (полутонови)</translation>
-    </message>
-    <message>
-        <source>Tuning (cents)</source>
-        <translation type="obsolete">Угађање (центи)</translation>
-    </message>
-    <message>
-        <source>Tuning (scale)</source>
-        <translation type="obsolete">Угађање (лествица)</translation>
-    </message>
-    <message>
-        <source>Filter, frequency (×)</source>
-        <translation type="obsolete">Филтар, учестаност (×)</translation>
-    </message>
-    <message>
-        <source>Filter, resonance (dB)</source>
-        <translation type="obsolete">Филтар, резонанса (dB)</translation>
-    </message>
-    <message>
-        <source>Vol env delay (×)</source>
-        <translation type="obsolete">»Vol env« кашњење (×)</translation>
-    </message>
-    <message>
-        <source>Vol env attack (×)</source>
-        <translation type="obsolete">»Vol env« пораст (×)</translation>
-    </message>
-    <message>
-        <source>Vol env hold (×)</source>
-        <translation type="obsolete">»Vol env« одржавање (×)</translation>
-    </message>
-    <message>
-        <source>Vol env decay (×)</source>
-        <translation type="obsolete">»Vol env« пад (×)</translation>
-    </message>
-    <message>
-        <source>Vol env sustain (dB)</source>
-        <translation type="obsolete">»Vol env« задршка (dB)</translation>
-    </message>
-    <message>
-        <source>Vol env release (×)</source>
-        <translation type="obsolete">»Vol env« стишавање (×)</translation>
-    </message>
-    <message>
-        <source>Key → Vol env hold (c)</source>
-        <translation type="obsolete">Нота → »Vol env« одржавање (c)</translation>
-    </message>
-    <message>
-        <source>Key → Vol env decay (c)</source>
-        <translation type="obsolete">Нота → »Vol env« пад (c)</translation>
-    </message>
-    <message>
-        <source>Mod env delay (×)</source>
-        <translation type="obsolete">»Mod env« кашњење (×)</translation>
-    </message>
-    <message>
-        <source>Mod env attack (×)</source>
-        <translation type="obsolete">»Mod env« пораст (×)</translation>
-    </message>
-    <message>
-        <source>Mod env hold (×)</source>
-        <translation type="obsolete">»Mod env« одржавање (×)</translation>
-    </message>
-    <message>
-        <source>Mod env decay (×)</source>
-        <translation type="obsolete">»Mod env« пад (×)</translation>
-    </message>
-    <message>
-        <source>Mod env sustain (%)</source>
-        <translation type="obsolete">»Mod env« задршка (%)</translation>
-    </message>
-    <message>
-        <source>Mod env release (×)</source>
-        <translation type="obsolete">»Mod env« стишавање (×)</translation>
-    </message>
-    <message>
-        <source>Mod env → pitch (c)</source>
-        <translation type="obsolete">»Mod env« → тон (c)</translation>
-    </message>
-    <message>
-        <source>Mod env → filter (c)</source>
-        <translation type="obsolete">»Mod env« → филтар (c)</translation>
-    </message>
-    <message>
-        <source>Key → Mod env hold (c)</source>
-        <translation type="obsolete">Нота → »Mod env« одржавање (c)</translation>
-    </message>
-    <message>
-        <source>Key → Mod env decay (c)</source>
-        <translation type="obsolete">Нота → »Mod env« пад (c)</translation>
-    </message>
-    <message>
-        <source>Mod LFO delay (×)</source>
-        <translation type="obsolete">»Mod LFO« кашњење (×)</translation>
-    </message>
-    <message>
-        <source>Mod LFO freq (×)</source>
-        <translation type="obsolete">»Mod LFO« учестаност (×)</translation>
-    </message>
-    <message>
-        <source>Mod LFO → pitch (c)</source>
-        <translation type="obsolete">»Mod LFO« → тон (c)</translation>
-    </message>
-    <message>
-        <source>Mod LFO → filter (c)</source>
-        <translation type="obsolete">»Mod LFO« → филтар (c)</translation>
-    </message>
-    <message>
-        <source>Mod LFO → volume (dB)</source>
-        <translation type="obsolete">»Mod LFO« → гласноћа (dB)</translation>
-    </message>
-    <message>
-        <source>Vib LFO delay (×)</source>
-        <translation type="obsolete">»Vib LFO« кашњење (×)</translation>
-    </message>
-    <message>
-        <source>Vib LFO freq (×)</source>
-        <translation type="obsolete">»Vib LFO« учестаност (×)</translation>
-    </message>
-    <message>
-        <source>Vib LFO → pitch (c)</source>
-        <translation type="obsolete">»Vib LFO« → тон (c)</translation>
-    </message>
-    <message>
-        <source>Chorus (%)</source>
-        <translation type="obsolete">Хорус (%)</translation>
-    </message>
-    <message>
-        <source>Reverb (%)</source>
-        <translation type="obsolete">Јека (%)</translation>
-    </message>
-    <message>
-        <source>Global</source>
-        <translation type="obsolete">Опште</translation>
-    </message>
-    <message>
-        <source>Modulators</source>
-        <translation type="obsolete">Модулатори</translation>
-    </message>
-    <message>
-        <source>Add a modulator</source>
-        <translation type="obsolete">Додај модулатор</translation>
-    </message>
-    <message>
-        <source>Delete a modulator</source>
-        <translation type="obsolete">Уклони модулатор</translation>
-    </message>
-    <message>
-        <source>Copy modulators</source>
-        <translation type="obsolete">Умножи модулаторе</translation>
-    </message>
-    <message>
-        <source>Paste the copied modulators</source>
-        <translation type="obsolete">Убаци умножене модулаторе</translation>
-    </message>
-    <message>
-        <source>Source</source>
-        <translation type="obsolete">Извориште</translation>
-    </message>
-    <message>
-        <source>Amount</source>
-        <translation type="obsolete">Количина</translation>
-    </message>
-    <message>
-        <source>Destination</source>
-        <translation type="obsolete">Одредиште</translation>
-    </message>
-    <message>
-        <source>Source / Amount</source>
-        <translation type="obsolete">Извориште/Количина</translation>
-    </message>
-    <message>
-        <source>Abs. value</source>
-        <translation type="obsolete">Апсолутна вредност</translation>
-    </message>
-</context>
-<context>
-    <name>Page_Sf2</name>
-    <message>
-        <source>24 bits</source>
-        <translation type="obsolete">24-бита</translation>
-    </message>
-    <message>
-        <source>Author</source>
-        <translation type="obsolete">Творац</translation>
-    </message>
-    <message>
-        <source>Copyright</source>
-        <translation type="obsolete">Права творца</translation>
-    </message>
-    <message>
-        <source>Date</source>
-        <translation type="obsolete">Датум</translation>
-    </message>
-    <message>
-        <source>Name</source>
-        <translation type="obsolete">Назив</translation>
-    </message>
-    <message>
-        <source>Comments</source>
-        <translation type="obsolete">Примедбе</translation>
-    </message>
-    <message>
-        <source>Current date</source>
-        <translation type="obsolete">Данашњи датум</translation>
-    </message>
-    <message>
-        <source>Product</source>
-        <translation type="obsolete">Намена</translation>
-    </message>
-    <message>
-        <source>Samples</source>
-        <translation type="obsolete">Узорци</translation>
-    </message>
-    <message>
-        <source>File</source>
-        <translation type="obsolete">Датотека</translation>
-    </message>
-    <message>
-        <source>Soundfont version</source>
-        <translation type="obsolete">Издање звукотеке</translation>
-    </message>
-    <message>
-        <source>Instrument number</source>
-        <translation type="obsolete">Број инструмената</translation>
-    </message>
-    <message>
-        <source>Sample number</source>
-        <translation type="obsolete">Број узорака</translation>
-    </message>
-    <message>
-        <source>Number of parameters (instruments)</source>
-        <translation type="obsolete">Број параметара (инструмената)</translation>
-    </message>
-    <message>
-        <source>Number of parameters (presets)</source>
-        <translation type="obsolete">Број параметара (поставки)</translation>
-    </message>
-    <message>
-        <source>Preset number</source>
-        <translation type="obsolete">Број поставки</translation>
-    </message>
-    <message>
-        <source>ROM name and version</source>
-        <translation type="obsolete">„ROM“ — назив и издање</translation>
-    </message>
-    <message>
-        <source>Sound engine</source>
-        <translation type="obsolete">Звучни покретач</translation>
-    </message>
-    <message>
-        <source>Editing software</source>
-        <translation type="obsolete">Програмски уређивач</translation>
-    </message>
-    <message>
-        <source> (unused: </source>
-        <translatorcomment>множина</translatorcomment>
-        <translation type="obsolete"> (ван употребе: </translation>
-    </message>
-</context>
-<context>
-    <name>Page_Smpl</name>
-    <message>
-        <source>&lt;b&gt;Frequency&lt;/b&gt;</source>
-        <translation type="obsolete">&lt;b&gt;Учестаност&lt;/b&gt;</translation>
-    </message>
-    <message>
-        <source>Reset</source>
-        <translation type="obsolete">Поврати</translation>
-    </message>
-    <message>
-        <source>Apply</source>
-        <translation type="obsolete">Примени</translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Equalizer (±15 dB)&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="obsolete">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Еквилајзер (±15 dB)&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-    </message>
-    <message>
-        <source>Loop</source>
-        <translation type="obsolete">Вртња</translation>
-    </message>
-    <message>
-        <source>Use the full length of the sample as loop</source>
-        <translation type="obsolete">Употреби узорак за пуно трајање вртње</translation>
-    </message>
-    <message>
-        <source>Size</source>
-        <translation type="obsolete">Величина</translation>
-    </message>
-    <message>
-        <source>Correction (cents)</source>
-        <translation type="obsolete">Поправка (центи)</translation>
-    </message>
-    <message>
-        <source>Sample rate</source>
-        <translation type="obsolete">Учестаност узорковања</translation>
-    </message>
-    <message>
-        <source>Type</source>
-        <translation type="obsolete">Врста</translation>
-    </message>
-    <message>
-        <source>Link</source>
-        <translation type="obsolete">Веза</translation>
-    </message>
-    <message>
-        <source>Root key</source>
-        <translation type="obsolete">Основна нота</translation>
-    </message>
-    <message>
-        <source>Use the estimated pitch and correction as values</source>
-        <translation type="obsolete">Узми за вредности прорачунате висину тона и исправку</translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Information&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="obsolete">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Подаци&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-    </message>
-    <message>
-        <source>Play</source>
-        <translation type="obsolete">Пусти</translation>
-    </message>
-    <message>
-        <source>sinus</source>
-        <translation type="obsolete">синусно</translation>
-    </message>
-    <message>
-        <source>loop</source>
-        <translation type="obsolete">врти</translation>
-    </message>
-    <message>
-        <source>stereo</source>
-        <translation type="obsolete">стерео</translation>
-    </message>
-    <message>
-        <source>Information</source>
-        <translation type="obsolete">Подаци</translation>
-    </message>
-    <message>
-        <source>Equalizer (±15 dB)</source>
-        <translation type="obsolete">Еквилајзер (±15 dB)</translation>
-    </message>
-    <message>
-        <source>s</source>
-        <comment>unit for seconds</comment>
-        <translation type="obsolete">s</translation>
-    </message>
-    <message>
-        <source>(min) </source>
-        <translation type="obsolete">(мин)</translation>
-    </message>
-    <message>
-        <source>mono</source>
-        <translation type="obsolete">моно</translation>
-    </message>
-    <message>
-        <source>right</source>
-        <translation type="obsolete">десно</translation>
-    </message>
-    <message>
-        <source>left</source>
-        <translation type="obsolete">лево</translation>
-    </message>
-    <message>
-        <source>link</source>
-        <translation type="obsolete">веза</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;Sample is not linked to any instrument.&lt;/b&gt;</source>
-        <translation type="obsolete">&lt;b&gt;Овај узорак није везан за било који инструменат.&lt;/b&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;Sample linked to the instrument: &lt;/b&gt;</source>
-        <translation type="obsolete">&lt;b&gt;Овај узорак је везан за инструменат: &lt;/b&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;Sample linked to the instruments: &lt;/b&gt;</source>
-        <translation type="obsolete">&lt;b&gt;Овај узорак је везан за инструменте: &lt;/b&gt;</translation>
-    </message>
-    <message>
-        <source>Change successfully applied to the different samples</source>
-        <translation type="obsolete">Успешно су примењене измене на различитим узорцима</translation>
-    </message>
-    <message>
-        <source>Processing </source>
-        <translation type="obsolete">Обрада  </translation>
-    </message>
-    <message>
-        <source>Cancel</source>
-        <translation type="obsolete">Поништи</translation>
-    </message>
-    <message>
-        <source>The sample &quot;</source>
-        <translation type="obsolete">Узорак „</translation>
-    </message>
-    <message>
-        <source>&quot; couldn&apos;t be looped.</source>
-        <translation type="obsolete">“ не може да се понавља (врти).</translation>
-    </message>
-    <message>
-        <source>The following samples couldn&apos;t be looped:</source>
-        <translation type="obsolete">Ови узорци не могу да се понављају (врте):</translation>
-    </message>
-    <message>
-        <source>Possible reasons: too short or too turbulent.</source>
-        <translation type="obsolete">Могући узроци: прекратак или несталан.</translation>
-    </message>
-    <message>
-        <source>Warning</source>
-        <translation type="obsolete">Упозорење</translation>
-    </message>
-    <message>
-        <source>This tool can only be used with stereo samples.</source>
-        <translation type="obsolete">Ова алатка се може применити само на стерео узорке.</translation>
-    </message>
-    <message>
-        <source>Transposition</source>
-        <translation type="obsolete">Транспозиција</translation>
-    </message>
-    <message>
-        <source>Tuning in semitones:</source>
-        <translation type="obsolete">Полутонско подешавање:</translation>
-    </message>
-    <message>
-        <source>Stop</source>
-        <translation type="obsolete">Заустави</translation>
-    </message>
-</context>
-<context>
-    <name>Pile_sf2</name>
-    <message>
-        <source>untitled</source>
-        <translation type="obsolete">без наслова</translation>
-    </message>
-</context>
-<context>
-    <name>QApplication</name>
-    <message>
-        <source>Custom</source>
-        <translation type="obsolete">Прилагођено</translation>
-    </message>
-    <message>
-        <source>Default</source>
-        <translation type="obsolete">Уобичајено</translation>
-    </message>
-    <message>
-        <source>Gnome</source>
-        <translation type="obsolete">Гном</translation>
-    </message>
-    <message>
-        <source>Dark, blue</source>
-        <translation type="obsolete">Тамно — плава</translation>
-    </message>
-    <message>
-        <source>Dark, orange</source>
-        <translation type="obsolete">Тамно — наранџаста</translation>
-    </message>
-    <message>
-        <source>Dark, green</source>
-        <translation type="obsolete">Тамно — зелена</translation>
-    </message>
-    <message>
-        <source>Dark, yellow</source>
-        <translation type="obsolete">Тамно — жута</translation>
-    </message>
-    <message>
-        <source>Aqua</source>
-        <translation type="obsolete">Вода</translation>
-    </message>
-    <message>
-        <source>Spring</source>
-        <translation type="obsolete">Пролеће</translation>
-    </message>
-    <message>
-        <source>Windows 10</source>
-        <translation type="obsolete">Виндоуз 10</translation>
-    </message>
-    <message>
-        <source>Ubuntu</source>
-        <translation type="obsolete">Убунту</translation>
     </message>
 </context>
 <context>
     <name>QObject</name>
-    <message>
-        <source>Created by </source>
-        <translatorcomment>пазите на празнину на крају</translatorcomment>
-        <translation type="obsolete">Творац </translation>
-    </message>
-    <message>
-        <source>Contributors </source>
-        <translation type="obsolete">Сарадници </translation>
-    </message>
-    <message>
-        <source>Translated by </source>
-        <translation type="obsolete">Преводиоци </translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;Global parameters are already filled.&lt;/b&gt;</source>
-        <translation type="obsolete">&lt;b&gt;Општи параметри су већ постављени.&lt;/b&gt;</translation>
-    </message>
-    <message>
-        <source>The global division will not be copied.</source>
-        <translation type="obsolete">Укупни део неће бити умножен.</translation>
-    </message>
-    <message>
-        <source>&amp;Ok</source>
-        <translation type="obsolete">&amp;У реду</translation>
-    </message>
-    <message>
-        <source>Ok, &amp;disable this message</source>
-        <translation type="obsolete">У реду, &amp;онемогући ову поруку</translation>
-    </message>
-    <message>
-        <source>The sample &quot;</source>
-        <translation type="obsolete">Узорак „</translation>
-    </message>
-    <message>
-        <source>&quot; already exists.&lt;br/&gt;Replace?</source>
-        <translation type="obsolete">“ већ постоји.&lt;br/&gt;Да ли да га заменим?</translation>
-    </message>
-    <message>
-        <source>The instrument &quot;</source>
-        <translation type="obsolete">Инструменат „</translation>
-    </message>
-    <message>
-        <source>The preset &quot;</source>
-        <translation type="obsolete">Поставка „</translation>
-    </message>
     <message>
         <location filename="core/output/outputfactory.cpp" line="116"/>
         <source>Save a soundfont</source>
@@ -6419,10 +3224,6 @@ rate</source>
         <location filename="core/sound.cpp" line="746"/>
         <source>Warning</source>
         <translation>Упозорење</translation>
-    </message>
-    <message>
-        <source>No preset available.</source>
-        <translation type="obsolete">Нема доступне поставке.</translation>
     </message>
     <message>
         <location filename="core/sampleloader.cpp" line="71"/>
@@ -6503,14 +3304,6 @@ rate</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Error in Sound::getData.</source>
-        <translation type="obsolete">Грешка код „Sound::getData“.</translation>
-    </message>
-    <message>
-        <source>Cannot open the file.</source>
-        <translation type="obsolete">Не могу да отворим ову датотеку</translation>
-    </message>
-    <message>
         <location filename="core/sound.cpp" line="667"/>
         <location filename="core/sound.cpp" line="675"/>
         <location filename="core/sound.cpp" line="681"/>
@@ -6520,118 +3313,9 @@ rate</source>
         <translation>Датотека је оштећена.</translation>
     </message>
     <message>
-        <source>Extraction in progress...</source>
-        <translation type="obsolete">Извожење у току...</translation>
-    </message>
-    <message>
         <location filename="core/output/outputfactory.cpp" line="103"/>
         <source>untitled</source>
         <translation>без назива</translation>
-    </message>
-    <message>
-        <source>// Sfz exported from sf2 by Polyphone</source>
-        <translation type="obsolete">// Сфз који је из Сф2 датотеке издвојио Вишетонац</translation>
-    </message>
-    <message>
-        <source>// Name     :</source>
-        <translatorcomment>пребројте празнине тако да су знаци &quot;:&quot; усправно поравњати</translatorcomment>
-        <translation type="obsolete">// Назив       : </translation>
-    </message>
-    <message>
-        <source>// Author   :</source>
-        <translation type="obsolete">// Творац      : </translation>
-    </message>
-    <message>
-        <source>// Copyright:</source>
-        <translation type="obsolete">// Права творца: </translation>
-    </message>
-    <message>
-        <source>// Date     :</source>
-        <translation type="obsolete">// Датум       : </translation>
-    </message>
-    <message>
-        <source>// Comment  :</source>
-        <translation type="obsolete">// Примедба    : </translation>
-    </message>
-    <message>
-        <source>other</source>
-        <translation type="obsolete">друго</translation>
-    </message>
-    <message>
-        <source>Piano</source>
-        <translation type="obsolete">Клавир</translation>
-    </message>
-    <message>
-        <source>Chromatic percussion</source>
-        <translation type="obsolete">Удараљке, хроматске</translation>
-    </message>
-    <message>
-        <source>Organ</source>
-        <translation type="obsolete">Оргуље</translation>
-    </message>
-    <message>
-        <source>Guitar</source>
-        <translation type="obsolete">Гитаре</translation>
-    </message>
-    <message>
-        <source>Bass</source>
-        <translation type="obsolete">Бас гитаре</translation>
-    </message>
-    <message>
-        <source>Strings</source>
-        <translation type="obsolete">Жичани</translation>
-    </message>
-    <message>
-        <source>Ensemble</source>
-        <translation type="obsolete">Оркестар</translation>
-    </message>
-    <message>
-        <source>Brass</source>
-        <translation type="obsolete">Дувачки, лимени</translation>
-    </message>
-    <message>
-        <source>Reed</source>
-        <translation type="obsolete">Дувачки, дрвени</translation>
-    </message>
-    <message>
-        <source>Pipe</source>
-        <translation type="obsolete">Дувачки, дрвени без језичка</translation>
-    </message>
-    <message>
-        <source>Synth lead</source>
-        <translation type="obsolete">Синтесајзер — главни</translation>
-    </message>
-    <message>
-        <source>Synth pad</source>
-        <translation type="obsolete">Синтесајзер — блок</translation>
-    </message>
-    <message>
-        <source>Synth effects</source>
-        <translation type="obsolete">Синт-ефекти</translation>
-    </message>
-    <message>
-        <source>Ethnic</source>
-        <translation type="obsolete">Традиционални</translation>
-    </message>
-    <message>
-        <source>Percussive</source>
-        <translation type="obsolete">Удараљке</translation>
-    </message>
-    <message>
-        <source>Sound effects</source>
-        <translation type="obsolete">Звучни ефекти</translation>
-    </message>
-    <message>
-        <source>Percussion kit</source>
-        <translation type="obsolete">Скупина удараљки</translation>
-    </message>
-    <message>
-        <source>Sfz import</source>
-        <translation type="obsolete">Сфз — увоз</translation>
-    </message>
-    <message>
-        <source>Sf2 imported from sfz by Polyphone</source>
-        <translation type="obsolete">Сф2 који је из Сфз-датотеке издвојио Полифон</translation>
     </message>
     <message>
         <location filename="editor/graphics/graphicslegenditem.cpp" line="110"/>
@@ -6644,34 +3328,6 @@ rate</source>
         <location filename="editor/graphics/graphicslegenditem2.cpp" line="69"/>
         <source>Velocity range:</source>
         <translation>Опсег јачине удара:</translation>
-    </message>
-    <message>
-        <source>C</source>
-        <translation type="obsolete">До</translation>
-    </message>
-    <message>
-        <source>D</source>
-        <translation type="obsolete">Ре</translation>
-    </message>
-    <message>
-        <source>E</source>
-        <translation type="obsolete">Ми</translation>
-    </message>
-    <message>
-        <source>F</source>
-        <translation type="obsolete">Фа</translation>
-    </message>
-    <message>
-        <source>G</source>
-        <translation type="obsolete">Сол</translation>
-    </message>
-    <message>
-        <source>A</source>
-        <translation type="obsolete">Ла</translation>
-    </message>
-    <message>
-        <source>B</source>
-        <translation type="obsolete">Ти</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_about.cpp" line="122"/>
@@ -8927,64 +5583,9 @@ download content</source>
     </message>
 </context>
 <context>
-    <name>Tree</name>
-    <message>
-        <source>New sample...</source>
-        <translation type="obsolete">Нови узорак...</translation>
-    </message>
-    <message>
-        <source>New &amp;instrument...</source>
-        <translation type="obsolete">Нов инструменат...</translation>
-    </message>
-    <message>
-        <source>New &amp;preset...</source>
-        <translation type="obsolete">Нова поставка...</translation>
-    </message>
-    <message>
-        <source>Bind to...</source>
-        <translation type="obsolete">Повежи са...</translation>
-    </message>
-    <message>
-        <source>Replace by...</source>
-        <translation type="obsolete">Замени са...</translation>
-    </message>
-    <message>
-        <source>Copy</source>
-        <translation type="obsolete">Умножи</translation>
-    </message>
-    <message>
-        <source>Paste</source>
-        <translation type="obsolete">Убаци</translation>
-    </message>
-    <message>
-        <source>Delete</source>
-        <translation type="obsolete">Уклони</translation>
-    </message>
-    <message>
-        <source>Rename...</source>
-        <translation type="obsolete">Преименуј...</translation>
-    </message>
-    <message>
-        <source>Close file</source>
-        <translation type="obsolete">Затвори датотеку</translation>
-    </message>
-    <message>
-        <source>Display all</source>
-        <translation type="obsolete">Прикажи све</translation>
-    </message>
-    <message>
-        <source>&amp;Rename...</source>
-        <translation type="obsolete">П&amp;реименуј...</translation>
-    </message>
-    <message>
-        <source>Bulk &amp;rename...</source>
-        <translation type="obsolete">Скупно п&amp;реименовање...</translation>
-    </message>
-</context>
-<context>
     <name>TreeView</name>
     <message>
-        <location filename="editor/tree/treeview.cpp" line="839"/>
+        <location filename="editor/tree/treeview.cpp" line="841"/>
         <source>instrument</source>
         <translation type="unfinished"></translation>
     </message>

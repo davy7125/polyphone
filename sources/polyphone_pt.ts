@@ -385,877 +385,316 @@
 <context>
     <name>ConfManager</name>
     <message>
-        <source>D</source>
-        <translation type="obsolete">D</translation>
-    </message>
-    <message>
-        <source>C</source>
-        <translation type="obsolete">C</translation>
-    </message>
-    <message>
-        <source>G</source>
-        <translation type="obsolete">G</translation>
-    </message>
-    <message>
-        <source>B</source>
-        <translation type="obsolete">B</translation>
-    </message>
-    <message>
-        <source>,</source>
-        <translation type="obsolete">,</translation>
-    </message>
-    <message>
-        <source>2</source>
-        <translation type="obsolete">2</translation>
-    </message>
-    <message>
-        <source>3</source>
-        <translation type="obsolete">3</translation>
-    </message>
-    <message>
-        <source>E</source>
-        <translation type="obsolete">E</translation>
-    </message>
-    <message>
-        <source>R</source>
-        <translation type="obsolete">D</translation>
-    </message>
-    <message>
-        <source>5</source>
-        <translation type="obsolete">5</translation>
-    </message>
-    <message>
-        <source>6</source>
-        <translation type="obsolete">6</translation>
-    </message>
-    <message>
-        <source>7</source>
-        <translation type="obsolete">7</translation>
-    </message>
-    <message>
-        <source>Shift+&lt;</source>
-        <translation type="obsolete">Shift+&lt;</translation>
-    </message>
-    <message>
-        <source>Shift+@</source>
-        <translation type="obsolete">Shift+@</translation>
-    </message>
-    <message>
-        <source>Shift+#</source>
-        <translation type="obsolete">Shift+#</translation>
-    </message>
-    <message>
-        <source>Shift+%</source>
-        <translation type="obsolete">Shift+%</translation>
-    </message>
-    <message>
-        <source>Shift+^</source>
-        <translation type="obsolete">Shift+^</translation>
-    </message>
-    <message>
-        <source>Shift+&amp;</source>
-        <translation type="obsolete">Shift+7</translation>
-    </message>
-    <message>
-        <location filename="context/confmanager.cpp" line="141"/>
+        <location filename="context/confmanager.cpp" line="142"/>
         <source>Z</source>
         <comment>first key mapping for bottom left C</comment>
         <translation>Z</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="142"/>
+        <location filename="context/confmanager.cpp" line="143"/>
         <source>S</source>
         <comment>first key mapping for bottom C#</comment>
         <translation>S</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="143"/>
+        <location filename="context/confmanager.cpp" line="144"/>
         <source>X</source>
         <comment>first key mapping for bottom D</comment>
         <translation>X</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="144"/>
+        <location filename="context/confmanager.cpp" line="145"/>
         <source>D</source>
         <comment>first key mapping for bottom D#</comment>
         <translation>D</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="145"/>
+        <location filename="context/confmanager.cpp" line="146"/>
         <source>C</source>
         <comment>first key mapping for bottom E</comment>
         <translation>C</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="146"/>
+        <location filename="context/confmanager.cpp" line="147"/>
         <source>V</source>
         <comment>first key mapping for bottom F</comment>
         <translation>V</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="147"/>
+        <location filename="context/confmanager.cpp" line="148"/>
         <source>G</source>
         <comment>first key mapping for bottom F#</comment>
         <translation>G</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="148"/>
+        <location filename="context/confmanager.cpp" line="149"/>
         <source>B</source>
         <comment>first key mapping for bottom G</comment>
         <translation>B</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="149"/>
+        <location filename="context/confmanager.cpp" line="150"/>
         <source>H</source>
         <comment>first key mapping for bottom G#</comment>
         <translation>H</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="150"/>
+        <location filename="context/confmanager.cpp" line="151"/>
         <source>N</source>
         <comment>first key mapping for bottom A</comment>
         <translation>N</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="151"/>
+        <location filename="context/confmanager.cpp" line="152"/>
         <source>J</source>
         <comment>first key mapping for bottom A#</comment>
         <translation>J</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="152"/>
+        <location filename="context/confmanager.cpp" line="153"/>
         <source>M</source>
         <comment>first key mapping for bottom B</comment>
         <translation>M</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="153"/>
+        <location filename="context/confmanager.cpp" line="154"/>
         <source>,</source>
         <comment>first key mapping for bottom right C</comment>
         <translation>,</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="159"/>
+        <location filename="context/confmanager.cpp" line="160"/>
         <source>Q</source>
         <comment>first key mapping for upper left C</comment>
         <translation>Q</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="160"/>
+        <location filename="context/confmanager.cpp" line="161"/>
         <source>2</source>
         <comment>first key mapping for upper C#</comment>
         <translation>2</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="161"/>
+        <location filename="context/confmanager.cpp" line="162"/>
         <source>W</source>
         <comment>first key mapping for upper D</comment>
         <translation>W</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="162"/>
+        <location filename="context/confmanager.cpp" line="163"/>
         <source>3</source>
         <comment>first key mapping for upper D#</comment>
         <translation>3</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="163"/>
+        <location filename="context/confmanager.cpp" line="164"/>
         <source>E</source>
         <comment>first key mapping for upper E</comment>
         <translation>E</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="164"/>
+        <location filename="context/confmanager.cpp" line="165"/>
         <source>R</source>
         <comment>first key mapping for upper F</comment>
         <translation>R</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="165"/>
+        <location filename="context/confmanager.cpp" line="166"/>
         <source>5</source>
         <comment>first key mapping for upper F#</comment>
         <translation>5</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="166"/>
+        <location filename="context/confmanager.cpp" line="167"/>
         <source>T</source>
         <comment>first key mapping for upper G</comment>
         <translation>T</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="167"/>
+        <location filename="context/confmanager.cpp" line="168"/>
         <source>6</source>
         <comment>first key mapping for upper G#</comment>
         <translation>6</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="168"/>
+        <location filename="context/confmanager.cpp" line="169"/>
         <source>Y</source>
         <comment>first key mapping for upper A</comment>
         <translation>Y</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="169"/>
+        <location filename="context/confmanager.cpp" line="170"/>
         <source>7</source>
         <comment>first key mapping for upper A#</comment>
         <translation>7</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="170"/>
+        <location filename="context/confmanager.cpp" line="171"/>
         <source>U</source>
         <comment>first key mapping for upper B</comment>
         <translation>U</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="171"/>
+        <location filename="context/confmanager.cpp" line="172"/>
         <source>I</source>
         <comment>first key mapping for upper right C</comment>
         <translation>I</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="177"/>
+        <location filename="context/confmanager.cpp" line="178"/>
         <source>Shift+Z</source>
         <comment>second key mapping for bottom left C</comment>
         <translation>Shift+Z</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="178"/>
+        <location filename="context/confmanager.cpp" line="179"/>
         <source>Shift+S</source>
         <comment>second key mapping for bottom C#</comment>
         <translation>Shift+S</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="179"/>
+        <location filename="context/confmanager.cpp" line="180"/>
         <source>Shift+X</source>
         <comment>second key mapping for bottom D</comment>
         <translation>Shift+X</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="180"/>
+        <location filename="context/confmanager.cpp" line="181"/>
         <source>Shift+D</source>
         <comment>second key mapping for bottom D#</comment>
         <translation>Shift+D</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="181"/>
+        <location filename="context/confmanager.cpp" line="182"/>
         <source>Shift+C</source>
         <comment>second key mapping for bottom E</comment>
         <translation>Shift+C</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="182"/>
+        <location filename="context/confmanager.cpp" line="183"/>
         <source>Shift+V</source>
         <comment>second key mapping for bottom F</comment>
         <translation>Shift+V</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="183"/>
+        <location filename="context/confmanager.cpp" line="184"/>
         <source>Shift+G</source>
         <comment>second key mapping for bottom F#</comment>
         <translation>Shift+G</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="184"/>
+        <location filename="context/confmanager.cpp" line="185"/>
         <source>Shift+B</source>
         <comment>second key mapping for bottom G</comment>
         <translation>Shift+B</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="185"/>
+        <location filename="context/confmanager.cpp" line="186"/>
         <source>Shift+H</source>
         <comment>second key mapping for bottom G#</comment>
         <translation>Shift+H</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="186"/>
+        <location filename="context/confmanager.cpp" line="187"/>
         <source>Shift+N</source>
         <comment>second key mapping for bottom A</comment>
         <translation>Shift+N</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="187"/>
+        <location filename="context/confmanager.cpp" line="188"/>
         <source>Shift+J</source>
         <comment>second key mapping for bottom A#</comment>
         <translation>Shift+J</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="188"/>
+        <location filename="context/confmanager.cpp" line="189"/>
         <source>Shift+M</source>
         <comment>second key mapping for bottom B</comment>
         <translation>Shift+M</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="189"/>
+        <location filename="context/confmanager.cpp" line="190"/>
         <source>Shift+&lt;</source>
         <comment>second key mapping for bottom right C</comment>
         <translation>Shift+;</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="195"/>
+        <location filename="context/confmanager.cpp" line="196"/>
         <source>Shift+Q</source>
         <comment>second key mapping for upper left C</comment>
         <translation>Shift+Q</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="196"/>
+        <location filename="context/confmanager.cpp" line="197"/>
         <source>Shift+@</source>
         <comment>second key mapping for upper C#</comment>
         <translation>Shift+&quot;</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="197"/>
+        <location filename="context/confmanager.cpp" line="198"/>
         <source>Shift+W</source>
         <comment>second key mapping for upper D</comment>
         <translation>Shift+W</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="198"/>
+        <location filename="context/confmanager.cpp" line="199"/>
         <source>Shift+#</source>
         <comment>second key mapping for upper D#</comment>
         <translation>Shift+#</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="199"/>
+        <location filename="context/confmanager.cpp" line="200"/>
         <source>Shift+E</source>
         <comment>second key mapping for upper E</comment>
         <translation>Shift+E</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="200"/>
+        <location filename="context/confmanager.cpp" line="201"/>
         <source>Shift+R</source>
         <comment>second key mapping for upper F</comment>
         <translation>Shift+R</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="201"/>
+        <location filename="context/confmanager.cpp" line="202"/>
         <source>Shift+%</source>
         <comment>second key mapping for upper F#</comment>
         <translation>Shift+%</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="202"/>
+        <location filename="context/confmanager.cpp" line="203"/>
         <source>Shift+T</source>
         <comment>second key mapping for upper G</comment>
         <translation>Shift+T</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="203"/>
+        <location filename="context/confmanager.cpp" line="204"/>
         <source>Shift+^</source>
         <comment>second key mapping for upper G#</comment>
         <translation>Shift+&amp;</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="204"/>
+        <location filename="context/confmanager.cpp" line="205"/>
         <source>Shift+Y</source>
         <comment>second key mapping for upper A</comment>
         <translation>Shift+Y</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="205"/>
+        <location filename="context/confmanager.cpp" line="206"/>
         <source>Shift+&amp;</source>
         <comment>second key mapping for upper A#</comment>
         <translation>Shift+/</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="206"/>
+        <location filename="context/confmanager.cpp" line="207"/>
         <source>Shift+U</source>
         <comment>second key mapping for upper B</comment>
         <translation>Shift+U</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="207"/>
+        <location filename="context/confmanager.cpp" line="208"/>
         <source>Shift+I</source>
         <comment>second key mapping for upper right C</comment>
         <translation>Shift+I</translation>
-    </message>
-</context>
-<context>
-    <name>Config</name>
-    <message>
-        <source>Settings</source>
-        <translation type="obsolete">Configurações</translation>
-    </message>
-    <message>
-        <source>Audio backend</source>
-        <translation type="obsolete">Saída de áudio</translation>
-    </message>
-    <message>
-        <source>General</source>
-        <translation type="obsolete">Geral</translation>
-    </message>
-    <message>
-        <source>Midi input</source>
-        <translation type="obsolete">Entrada MIDI</translation>
-    </message>
-    <message>
-        <source>trim to loop</source>
-        <translation type="obsolete">Ajustar à repetição</translation>
-    </message>
-    <message>
-        <source>remove blank at start</source>
-        <translation type="obsolete">Remover início vazio</translation>
-    </message>
-    <message>
-        <source>change linked sample</source>
-        <oldsource>répercuter les modifications si stéréo</oldsource>
-        <translation type="obsolete">Refletir alterações</translation>
-    </message>
-    <message>
-        <source>Stereo editing</source>
-        <oldsource>Édition des samples</oldsource>
-        <translation type="obsolete">Edição estéreo</translation>
-    </message>
-    <message>
-        <source>Buffer size</source>
-        <oldsource>Taille tampon</oldsource>
-        <translation type="obsolete">Tamanho do buffer</translation>
-    </message>
-    <message>
-        <source>Input / Output</source>
-        <translation type="obsolete">Entrada / Saída</translation>
-    </message>
-    <message>
-        <source>Middle C → 60, then 61</source>
-        <oldsource>Numérique (do central → 60)</oldsource>
-        <translation type="obsolete">C central → 60, então 61</translation>
-    </message>
-    <message>
-        <source>Middle C → C3, then C♯3</source>
-        <oldsource>Texte (do central → C3)</oldsource>
-        <translation type="obsolete">C central → C3, então C♯3</translation>
-    </message>
-    <message>
-        <source>Middle C → C3, then D♭3</source>
-        <oldsource>Texte (do central → C4)</oldsource>
-        <translation type="obsolete">C central→ C3, então D♭3</translation>
-    </message>
-    <message>
-        <source>Middle C → C4, then C♯4</source>
-        <oldsource>Texte (do central → C5)</oldsource>
-        <translation type="obsolete">C central→ C4, então C♯4</translation>
-    </message>
-    <message>
-        <source>Key names</source>
-        <translation type="obsolete">Nomes de notas</translation>
-    </message>
-    <message>
-        <source>Synth</source>
-        <translation type="obsolete">Sintetizador</translation>
-    </message>
-    <message>
-        <source>Reverb</source>
-        <oldsource>Reverbération</oldsource>
-        <translation type="obsolete">Reverberação</translation>
-    </message>
-    <message>
-        <source>Level</source>
-        <translation type="obsolete">Volume</translation>
-    </message>
-    <message>
-        <source>Room</source>
-        <translation type="obsolete">Sala</translation>
-    </message>
-    <message>
-        <source>Width</source>
-        <translation type="obsolete">Largura</translation>
-    </message>
-    <message>
-        <source>Damp</source>
-        <translation type="obsolete">Suavização</translation>
-    </message>
-    <message>
-        <source>Chorus</source>
-        <translation type="obsolete">Chorus</translation>
-    </message>
-    <message>
-        <source>Frequency</source>
-        <translation type="obsolete">Frequência</translation>
-    </message>
-    <message>
-        <source>Depth</source>
-        <translation type="obsolete">Profundidade</translation>
-    </message>
-    <message>
-        <source>Reset</source>
-        <translation type="obsolete">Resetar</translation>
-    </message>
-    <message>
-        <source>Options</source>
-        <translation type="obsolete">Opções</translation>
-    </message>
-    <message>
-        <source>Toolbar</source>
-        <translation type="obsolete">Ferramentas</translation>
-    </message>
-    <message>
-        <source>Available actions</source>
-        <translation type="obsolete">Ações disponíveis</translation>
-    </message>
-    <message>
-        <source>Keyboard</source>
-        <translation type="obsolete">Teclado</translation>
-    </message>
-    <message>
-        <source>Gain (dB)</source>
-        <translation type="obsolete">Ganho (dB)</translation>
-    </message>
-    <message>
-        <source>Wav file import</source>
-        <translation type="obsolete">Importação de arquivo WAV</translation>
-    </message>
-    <message>
-        <source>First C</source>
-        <translation type="obsolete">Primeiro Dó</translation>
-    </message>
-    <message>
-        <source>Octave #1</source>
-        <translation type="obsolete">Oitava #1</translation>
-    </message>
-    <message>
-        <source>Interface</source>
-        <translation type="obsolete">Interface</translation>
-    </message>
-    <message>
-        <source>Middle C → C4, then D♭4</source>
-        <translation type="obsolete">Dó central→ C4, então D♭4</translation>
-    </message>
-    <message>
-        <source>Middle C → C5, then C♯5</source>
-        <translation type="obsolete">C central→ C5, então C♯5</translation>
-    </message>
-    <message>
-        <source>Middle C → C5, then D♭5</source>
-        <translation type="obsolete">C central→ C5, então D♭5</translation>
-    </message>
-    <message>
-        <source>Language</source>
-        <translation type="obsolete">Linguagem</translation>
-    </message>
-    <message>
-        <source>Selection</source>
-        <translation type="obsolete">Seleção</translation>
-    </message>
-    <message>
-        <source>Alternate background</source>
-        <translation type="obsolete">Fundo alternativo</translation>
-    </message>
-    <message>
-        <source>Text</source>
-        <translation type="obsolete">Texto</translation>
-    </message>
-    <message>
-        <source>Window</source>
-        <translation type="obsolete">Janela</translation>
-    </message>
-    <message>
-        <source>Background</source>
-        <translation type="obsolete">Fundo</translation>
-    </message>
-    <message>
-        <source>Button</source>
-        <translation type="obsolete">Botão</translation>
-    </message>
-    <message>
-        <source>Color theme</source>
-        <translation type="obsolete">Tema</translation>
-    </message>
-    <message>
-        <source>List and table</source>
-        <translation type="obsolete">Lista e tabela</translation>
-    </message>
-    <message>
-        <source>Octave #2</source>
-        <translation type="obsolete">Oitava #2</translation>
-    </message>
-    <message>
-        <source>Octave #3</source>
-        <translation type="obsolete">Oitava #3</translation>
-    </message>
-    <message>
-        <source>Octave #4</source>
-        <translation type="obsolete">Oitava #4</translation>
-    </message>
-    <message>
-        <source>C</source>
-        <translation type="obsolete">C</translation>
-    </message>
-    <message>
-        <source>C#</source>
-        <translation type="obsolete">C#</translation>
-    </message>
-    <message>
-        <source>D</source>
-        <translation type="obsolete">D</translation>
-    </message>
-    <message>
-        <source>D#</source>
-        <translation type="obsolete">D#</translation>
-    </message>
-    <message>
-        <source>E</source>
-        <translation type="obsolete">E</translation>
-    </message>
-    <message>
-        <source>F</source>
-        <translation type="obsolete">F</translation>
-    </message>
-    <message>
-        <source>F#</source>
-        <translation type="obsolete">F#</translation>
-    </message>
-    <message>
-        <source>G</source>
-        <translation type="obsolete">G</translation>
-    </message>
-    <message>
-        <source>G#</source>
-        <translation type="obsolete">G#</translation>
-    </message>
-    <message>
-        <source>A</source>
-        <translation type="obsolete">A</translation>
-    </message>
-    <message>
-        <source>A#</source>
-        <translation type="obsolete">A#</translation>
-    </message>
-    <message>
-        <source>B</source>
-        <translation type="obsolete">B</translation>
-    </message>
-    <message>
-        <source>Default velocity</source>
-        <translation type="obsolete">Velocidade padrão</translation>
-    </message>
-    <message>
-        <source>Close</source>
-        <translation type="obsolete">Fechar</translation>
-    </message>
-    <message>
-        <source>Information</source>
-        <translation type="obsolete">Informação</translation>
-    </message>
-    <message>
-        <source>This modification will be applied during the next start of the software.</source>
-        <oldsource>La modification sera prise en compte lors du prochain dÃ©marrage du logiciel.</oldsource>
-        <translation type="obsolete">As modificações serão aplicadas após o reinício do software.</translation>
-    </message>
-    <message>
-        <source>Choose a color</source>
-        <translation type="obsolete">Escolha uma cor</translation>
-    </message>
-    <message>
-        <source>---- separator ----</source>
-        <translation type="obsolete">---- separador ----</translation>
-    </message>
-    <message>
-        <source>z</source>
-        <translatorcomment>default mapping of the keyboard</translatorcomment>
-        <translation type="obsolete">z</translation>
-    </message>
-    <message>
-        <source>s</source>
-        <translation type="obsolete">s</translation>
-    </message>
-    <message>
-        <source>x</source>
-        <translation type="obsolete">x</translation>
-    </message>
-    <message>
-        <source>d</source>
-        <translation type="obsolete">d</translation>
-    </message>
-    <message>
-        <source>c</source>
-        <translation type="obsolete">c</translation>
-    </message>
-    <message>
-        <source>v</source>
-        <translation type="obsolete">v</translation>
-    </message>
-    <message>
-        <source>g</source>
-        <translation type="obsolete">g</translation>
-    </message>
-    <message>
-        <source>b</source>
-        <translation type="obsolete">b</translation>
-    </message>
-    <message>
-        <source>h</source>
-        <translation type="obsolete">h</translation>
-    </message>
-    <message>
-        <source>n</source>
-        <translation type="obsolete">n</translation>
-    </message>
-    <message>
-        <source>j</source>
-        <translation type="obsolete">j</translation>
-    </message>
-    <message>
-        <source>m</source>
-        <translation type="obsolete">m</translation>
-    </message>
-    <message>
-        <source>,</source>
-        <translation type="obsolete">,</translation>
-    </message>
-    <message>
-        <source>q</source>
-        <translation type="obsolete">q</translation>
-    </message>
-    <message>
-        <source>2</source>
-        <translation type="obsolete">2</translation>
-    </message>
-    <message>
-        <source>w</source>
-        <translation type="obsolete">w</translation>
-    </message>
-    <message>
-        <source>3</source>
-        <translation type="obsolete">3</translation>
-    </message>
-    <message>
-        <source>e</source>
-        <translation type="obsolete">e</translation>
-    </message>
-    <message>
-        <source>r</source>
-        <translation type="obsolete">r</translation>
-    </message>
-    <message>
-        <source>5</source>
-        <translation type="obsolete">5</translation>
-    </message>
-    <message>
-        <source>t</source>
-        <translation type="obsolete">t</translation>
-    </message>
-    <message>
-        <source>6</source>
-        <translation type="obsolete">6</translation>
-    </message>
-    <message>
-        <source>y</source>
-        <translation type="obsolete">y</translation>
-    </message>
-    <message>
-        <source>7</source>
-        <translation type="obsolete">7</translation>
-    </message>
-    <message>
-        <source>u</source>
-        <translation type="obsolete">u</translation>
-    </message>
-    <message>
-        <source>i</source>
-        <translation type="obsolete">i</translation>
-    </message>
-    <message>
-        <source>Shift+z</source>
-        <translation type="obsolete">Shift+z</translation>
-    </message>
-    <message>
-        <source>Shift+s</source>
-        <translation type="obsolete">Shift+s</translation>
-    </message>
-    <message>
-        <source>Shift+x</source>
-        <translation type="obsolete">Shift+x</translation>
-    </message>
-    <message>
-        <source>Shift+d</source>
-        <translation type="obsolete">Shift+d</translation>
-    </message>
-    <message>
-        <source>Shift+c</source>
-        <translation type="obsolete">Shift+c</translation>
-    </message>
-    <message>
-        <source>Shift+v</source>
-        <translation type="obsolete">Shift+v</translation>
-    </message>
-    <message>
-        <source>Shift+g</source>
-        <translation type="obsolete">Shift+g</translation>
-    </message>
-    <message>
-        <source>Shift+b</source>
-        <translation type="obsolete">Shift+b</translation>
-    </message>
-    <message>
-        <source>Shift+h</source>
-        <translation type="obsolete">Shift+h</translation>
-    </message>
-    <message>
-        <source>Shift+n</source>
-        <translation type="obsolete">Shift+n</translation>
-    </message>
-    <message>
-        <source>Shift+j</source>
-        <translation type="obsolete">Shift+j</translation>
-    </message>
-    <message>
-        <source>Shift+m</source>
-        <translation type="obsolete">Shift+m</translation>
-    </message>
-    <message>
-        <source>Shift+&lt;</source>
-        <translation type="obsolete">Shift+&lt;</translation>
-    </message>
-    <message>
-        <source>Shift+q</source>
-        <translation type="obsolete">Shift+q</translation>
-    </message>
-    <message>
-        <source>Shift+@</source>
-        <translation type="obsolete">Shift+@</translation>
-    </message>
-    <message>
-        <source>Shift+w</source>
-        <translation type="obsolete">Shift+w</translation>
-    </message>
-    <message>
-        <source>Shift+#</source>
-        <translation type="obsolete">Shift+#</translation>
-    </message>
-    <message>
-        <source>Shift+e</source>
-        <translation type="obsolete">Shift+e</translation>
-    </message>
-    <message>
-        <source>Shift+r</source>
-        <translation type="obsolete">Shift+r</translation>
-    </message>
-    <message>
-        <source>Shift+%</source>
-        <translation type="obsolete">Shift+%</translation>
-    </message>
-    <message>
-        <source>Shift+t</source>
-        <translation type="obsolete">Shift+t</translation>
-    </message>
-    <message>
-        <source>Shift+^</source>
-        <translation type="obsolete">Shift+^</translation>
-    </message>
-    <message>
-        <source>Shift+y</source>
-        <translation type="obsolete">Shift+y</translation>
-    </message>
-    <message>
-        <source>Shift+&amp;</source>
-        <translation type="obsolete">Shift+7</translation>
-    </message>
-    <message>
-        <source>Shift+u</source>
-        <translation type="obsolete">Shift+u</translation>
-    </message>
-    <message>
-        <source>Shift+i</source>
-        <translation type="obsolete">Shift+i</translation>
     </message>
 </context>
 <context>
@@ -1434,10 +873,6 @@
         <translation>Seleção</translation>
     </message>
     <message>
-        <source>Alternate background</source>
-        <translation type="vanished">Fundo alternativo</translation>
-    </message>
-    <message>
         <location filename="context/interface/configsectioninterface.ui" line="245"/>
         <source>Text</source>
         <translation>Texto</translation>
@@ -1456,10 +891,6 @@
         <location filename="context/interface/configsectioninterface.ui" line="420"/>
         <source>Button</source>
         <translation>Botão</translation>
-    </message>
-    <message>
-        <source>Color theme</source>
-        <translation type="vanished">Tema</translation>
     </message>
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="558"/>
@@ -1797,12 +1228,12 @@ repository</source>
         <translation>Sobre</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_about.ui" line="172"/>
+        <location filename="dialogs/dialog_about.ui" line="177"/>
         <source>Credit</source>
         <translation>Créditos</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_about.ui" line="195"/>
+        <location filename="dialogs/dialog_about.ui" line="200"/>
         <source>Close</source>
         <translation>Fechar</translation>
     </message>
@@ -1812,18 +1243,9 @@ repository</source>
         <translation>Polyphone</translation>
     </message>
     <message>
-        <source>http://polyphone-soundfonts.com/en</source>
-        <translation type="obsolete">http://polyphone-soundfonts.com/en</translation>
-    </message>
-    <message>
         <location filename="dialogs/dialog_about.cpp" line="49"/>
         <source>Copyright</source>
         <translation>Licenciado</translation>
-    </message>
-    <message>
-        <source>Davy Triponney</source>
-        <comment>this is my name</comment>
-        <translation type="obsolete">Davy Triponney</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_about.cpp" line="53"/>
@@ -1926,105 +1348,6 @@ repository</source>
         <source>https://www.polyphone-soundfonts.com/en</source>
         <translation>https://www.polyphone-soundfonts.com/en</translation>
     </message>
-    <message>
-        <source>Andrea Celani</source>
-        <translation type="obsolete">Andrea Celani</translation>
-    </message>
-    <message>
-        <source>Kinwie</source>
-        <translation type="obsolete">Kinwie</translation>
-    </message>
-    <message>
-        <source>Michael Schyllberg</source>
-        <translation type="obsolete">Michael Schyllberg</translation>
-    </message>
-    <message>
-        <source>Paul Stratman</source>
-        <translation type="obsolete">Paul Stratman</translation>
-    </message>
-    <message>
-        <source>Steve Clarke</source>
-        <translation type="obsolete">Steve Clarke</translation>
-    </message>
-    <message>
-        <source>F.J. Martínez Murcia</source>
-        <translation type="obsolete">F.J. Martínez Murcia</translation>
-    </message>
-    <message>
-        <source>Georg Gergull</source>
-        <translation type="obsolete">Georg Gergull</translation>
-    </message>
-    <message>
-        <source>Jay Alexander Fleming</source>
-        <translation type="obsolete">Jay Alexander Fleming</translation>
-    </message>
-    <message>
-        <source>Joel Gomes</source>
-        <translation type="obsolete">Joel Gomes</translation>
-    </message>
-    <message>
-        <source>Magson</source>
-        <translation type="obsolete">Magson</translation>
-    </message>
-    <message>
-        <source>Pavel Fric</source>
-        <translation type="obsolete">Pavel Fric</translation>
-    </message>
-</context>
-<context>
-    <name>DialogAttenuation</name>
-    <message>
-        <source>Adjust attenuations</source>
-        <translation type="obsolete">Ajustar atenuações</translation>
-    </message>
-    <message>
-        <source>Instruments</source>
-        <translation type="obsolete">Instrumentos</translation>
-    </message>
-    <message>
-        <source>Possible offset</source>
-        <translation type="obsolete">Deslocamento possível</translation>
-    </message>
-    <message>
-        <source>Attenuation range</source>
-        <translation type="obsolete">Alcance de atenuação</translation>
-    </message>
-    <message>
-        <source> dB</source>
-        <translation type="obsolete"> dB</translation>
-    </message>
-    <message>
-        <source>Desired value</source>
-        <translation type="obsolete">Valor desejado</translation>
-    </message>
-    <message>
-        <source>Presets</source>
-        <translation type="obsolete">Predefinições</translation>
-    </message>
-</context>
-<context>
-    <name>DialogCeleste</name>
-    <message>
-        <source>Celeste tuning</source>
-        <translation type="obsolete">Afinação centesimal</translation>
-    </message>
-    <message>
-        <source>Number of beats per second at C4 (key 60)</source>
-        <oldsource>Nombre de battements par secondes au do 3 (note 60)</oldsource>
-        <translation type="obsolete">Número de pulsações por minuto em C4 (nota 60)</translation>
-    </message>
-    <message>
-        <source>The algebraic sign determines the tuning direction.</source>
-        <translation type="obsolete">O sinal algébrico que determina a direção da afinação.</translation>
-    </message>
-    <message>
-        <source>Division to the next octave</source>
-        <translation type="obsolete">Divisão à próxima oitava</translation>
-    </message>
-    <message>
-        <source>Number of beats per second (key </source>
-        <translation type="obsolete">Número de pulsações por minuto (nota </translation>
-    </message>
 </context>
 <context>
     <name>DialogChangeLog</name>
@@ -2054,93 +1377,19 @@ repository</source>
         <translation>Polyphone</translation>
     </message>
     <message>
-        <source>version</source>
-        <translation type="obsolete">versão</translation>
-    </message>
-    <message>
-        <location filename="dialogs/dialogchangelog.cpp" line="85"/>
+        <location filename="dialogs/dialogchangelog.cpp" line="91"/>
         <source>What is new</source>
         <translation>O que há de novo</translation>
     </message>
     <message>
-        <location filename="dialogs/dialogchangelog.cpp" line="88"/>
+        <location filename="dialogs/dialogchangelog.cpp" line="94"/>
         <source>What has improved</source>
         <translation>O que foi melhorado</translation>
     </message>
     <message>
-        <location filename="dialogs/dialogchangelog.cpp" line="91"/>
+        <location filename="dialogs/dialogchangelog.cpp" line="97"/>
         <source>What is fixed</source>
         <translation>O que foi consertado</translation>
-    </message>
-</context>
-<context>
-    <name>DialogChangeVolume</name>
-    <message>
-        <source>Change volume</source>
-        <translation type="obsolete">Mudar volume</translation>
-    </message>
-    <message>
-        <source>Add</source>
-        <translation type="obsolete">Adicionar</translation>
-    </message>
-    <message>
-        <source>Multiply</source>
-        <translation type="obsolete">Multiplicar</translation>
-    </message>
-    <message>
-        <source>Normalize</source>
-        <translation type="obsolete">Normalizar</translation>
-    </message>
-    <message>
-        <source> %</source>
-        <translation type="obsolete"> %</translation>
-    </message>
-    <message>
-        <source> dB</source>
-        <translation type="obsolete"> dB</translation>
-    </message>
-</context>
-<context>
-    <name>DialogCommand</name>
-    <message>
-        <source>Use an external command</source>
-        <translation type="obsolete">Usar um comando externo</translation>
-    </message>
-    <message>
-        <source>History</source>
-        <translation type="obsolete">Histórico</translation>
-    </message>
-    <message>
-        <source>Command</source>
-        <translation type="obsolete">Comando</translation>
-    </message>
-    <message>
-        <source>Replace sample information if possible</source>
-        <translation type="obsolete">Substituir informação da amostra se possível</translation>
-    </message>
-    <message>
-        <source>Authorize stereo editing</source>
-        <translation type="obsolete">Permitir edição estéreo</translation>
-    </message>
-    <message>
-        <source>Command example:</source>
-        <translation type="obsolete">Exemplo de comando:</translation>
-    </message>
-    <message>
-        <source>Executable file</source>
-        <translation type="obsolete">Arquivo executável</translation>
-    </message>
-    <message>
-        <source>Warning</source>
-        <translation type="obsolete">Aviso</translation>
-    </message>
-    <message>
-        <source>You must enter a command with at least {wav} as argument.</source>
-        <translation type="obsolete">Você precisar inserir um comando com pelo menos {wav} como argumento.</translation>
-    </message>
-    <message>
-        <source>The command must contain the argument {wav}.</source>
-        <translation type="obsolete">O comando deve conter o argumento {wav}.</translation>
     </message>
 </context>
 <context>
@@ -2189,134 +1438,6 @@ repository</source>
         <location filename="dialogs/dialogcreateelements.cpp" line="79"/>
         <source>comprising the %1 instruments</source>
         <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>DialogDuplication</name>
-    <message>
-        <source>Division duplication</source>
-        <translation type="obsolete">Duplicação de divisão</translation>
-    </message>
-    <message>
-        <source>A division for each key</source>
-        <translation type="obsolete">Uma divisão pra cada nota</translation>
-    </message>
-    <message>
-        <source>A division for each velocity range</source>
-        <translation type="obsolete">Uma divisão pra cada alcance de velocidade</translation>
-    </message>
-</context>
-<context>
-    <name>DialogExport</name>
-    <message>
-        <source>Export</source>
-        <translation type="obsolete">Exportar</translation>
-    </message>
-    <message>
-        <source>Select all</source>
-        <translation type="obsolete">Selecionar tudo</translation>
-    </message>
-    <message>
-        <source>Unselect all</source>
-        <translation type="obsolete">Remover seleção</translation>
-    </message>
-    <message>
-        <source>Location</source>
-        <translation type="obsolete">Local</translation>
-    </message>
-    <message>
-        <source>Format</source>
-        <translation type="obsolete">Formato</translation>
-    </message>
-    <message>
-        <source>preset number as prefix</source>
-        <translation type="obsolete">Número de predefinição como prefixo</translation>
-    </message>
-    <message>
-        <source>one directory per bank</source>
-        <translation type="obsolete">Uma pasta por banco</translation>
-    </message>
-    <message>
-        <source>General Midi classification</source>
-        <translation type="obsolete">Classificação General MIDI</translation>
-    </message>
-    <message>
-        <source>High</source>
-        <translation type="obsolete">Alta</translation>
-    </message>
-    <message>
-        <source>Medium</source>
-        <translation type="obsolete">Média</translation>
-    </message>
-    <message>
-        <source>Low</source>
-        <translation type="obsolete">Baixa</translation>
-    </message>
-    <message>
-        <source>Quality</source>
-        <translation type="obsolete">Qualidade</translation>
-    </message>
-    <message>
-        <source>Cancel</source>
-        <translation type="obsolete">Cancelar</translation>
-    </message>
-    <message>
-        <source>Choose a destination folder</source>
-        <translation type="obsolete">Escolha uma pasta de destino</translation>
-    </message>
-    <message>
-        <source>Warning</source>
-        <translation type="obsolete">Aviso</translation>
-    </message>
-    <message>
-        <source>Invalid directory.</source>
-        <translation type="obsolete">Pasta inválida.</translation>
-    </message>
-    <message>
-        <source>In the case where several soundfonts are exported, the maximal number of presets per soundfonts is 127.</source>
-        <translation type="obsolete">No caso de várias soundfonts serem exportadas, o número máximo de predefinições por soundfont é 127.</translation>
-    </message>
-    <message>
-        <source>The maximal number of soundfont to export is 127.</source>
-        <translation type="obsolete">O número máximo de soundfont para exportar é 127.</translation>
-    </message>
-    <message>
-        <source>At least one preset must be selected.</source>
-        <translation type="obsolete">Ao menos uma predefinição deve ser selecionada.</translation>
-    </message>
-</context>
-<context>
-    <name>DialogExportList</name>
-    <message>
-        <source>Export preset list</source>
-        <translation type="obsolete">Exportar a lista de predefinições</translation>
-    </message>
-    <message>
-        <source>text copied in the clipboard</source>
-        <translation type="obsolete">texto copiado para a área de transferência</translation>
-    </message>
-    <message>
-        <source>csv format</source>
-        <translation type="obsolete">formato csv</translation>
-    </message>
-    <message>
-        <source>html table</source>
-        <translation type="obsolete">tabela html</translation>
-    </message>
-    <message>
-        <source>Copy</source>
-        <translation type="obsolete">Copiar</translation>
-    </message>
-</context>
-<context>
-    <name>DialogFilterFrequencies</name>
-    <message>
-        <source>Filter frequencies</source>
-        <translation type="obsolete">Filtrar frequências</translation>
-    </message>
-    <message>
-        <source>Put in red the part of frequencies to filter:</source>
-        <translation type="obsolete">Marque em vermelho as frequências a se filtrar:</translation>
     </message>
 </context>
 <context>
@@ -2377,213 +1498,6 @@ repository</source>
     </message>
 </context>
 <context>
-    <name>DialogMagnetophone</name>
-    <message>
-        <source>Recorder</source>
-        <translation type="obsolete">Gravador</translation>
-    </message>
-    <message>
-        <source>Save a record</source>
-        <translation type="obsolete">Salvar uma gravação</translation>
-    </message>
-    <message>
-        <source>Wav file (*.wav)</source>
-        <translation type="obsolete">Arquivo WAV (*.wav)</translation>
-    </message>
-    <message>
-        <source>record</source>
-        <translation type="obsolete">gravação</translation>
-    </message>
-</context>
-<context>
-    <name>DialogMixture</name>
-    <message>
-        <source>Mixture creation</source>
-        <oldsource>Création mutation / mixture</oldsource>
-        <translatorcomment>Mixture = organ stop made of a combinaison of harmonics</translatorcomment>
-        <translation type="obsolete">Criação de mistura</translation>
-    </message>
-    <message>
-        <source>Name of the mixture:</source>
-        <translation type="obsolete">Nome da mistura:</translation>
-    </message>
-    <message>
-        <source>Sample creation:</source>
-        <translation type="obsolete">Criação de amostra:</translation>
-    </message>
-    <message>
-        <source>for every key</source>
-        <translation type="obsolete">para cada nota</translation>
-    </message>
-    <message>
-        <source>every 3 keys</source>
-        <translation type="obsolete">a cada 3 notas</translation>
-    </message>
-    <message>
-        <source>every 6 keys</source>
-        <translation type="obsolete">a cada 6 notas</translation>
-    </message>
-    <message>
-        <source>Auto loop</source>
-        <translation type="obsolete">Auto repetição</translation>
-    </message>
-    <message>
-        <source>Stereo</source>
-        <translation type="obsolete">Estéreo</translation>
-    </message>
-    <message>
-        <source>Divisions</source>
-        <translation type="obsolete">Divisões</translation>
-    </message>
-    <message>
-        <source>Key range</source>
-        <translation type="obsolete">Alcance de notas</translation>
-    </message>
-    <message>
-        <source>Ranks</source>
-        <translation type="obsolete">Ranks</translation>
-    </message>
-    <message>
-        <source>Type</source>
-        <translation type="obsolete">Tipo</translation>
-    </message>
-    <message>
-        <source>octave</source>
-        <translation type="obsolete">oitava</translation>
-    </message>
-    <message>
-        <source>fifth</source>
-        <translation type="obsolete">quinta</translation>
-    </message>
-    <message>
-        <source>third</source>
-        <translation type="obsolete">terça</translation>
-    </message>
-    <message>
-        <source>seventh</source>
-        <translation type="obsolete">sétima</translation>
-    </message>
-    <message>
-        <source>ninth</source>
-        <translation type="obsolete">nona</translation>
-    </message>
-    <message>
-        <source>eleventh</source>
-        <translation type="obsolete">décima primeira</translation>
-    </message>
-    <message>
-        <source>thirteenth</source>
-        <translation type="obsolete">décima terceira</translation>
-    </message>
-    <message>
-        <source>fifteenth</source>
-        <translation type="obsolete">décima quinta</translation>
-    </message>
-    <message>
-        <source>seventeenth</source>
-        <translation type="obsolete">décima sétima</translation>
-    </message>
-    <message>
-        <source>nineteenth</source>
-        <translation type="obsolete">décima nona</translation>
-    </message>
-    <message>
-        <source>twenty-first</source>
-        <translation type="obsolete">vigésima primeira</translation>
-    </message>
-    <message>
-        <source>twenty-third</source>
-        <translation type="obsolete">vigésima terceira</translation>
-    </message>
-    <message>
-        <source>twenty-fifth</source>
-        <translation type="obsolete">vigésima quinta</translation>
-    </message>
-    <message>
-        <source>twenty-seventh</source>
-        <translation type="obsolete">vigésima sétima</translation>
-    </message>
-    <message>
-        <source>untitled</source>
-        <translation type="obsolete">sem nome</translation>
-    </message>
-</context>
-<context>
-    <name>DialogParamGlobal</name>
-    <message>
-        <source>Global setting</source>
-        <translation type="obsolete">Ajustes globais</translation>
-    </message>
-    <message>
-        <source>Pattern</source>
-        <translation type="obsolete">Padrão</translation>
-    </message>
-    <message>
-        <source>Stiffness</source>
-        <translation type="obsolete">Rigidez</translation>
-    </message>
-    <message>
-        <source>Distribution</source>
-        <translation type="obsolete">Distribuição</translation>
-    </message>
-    <message>
-        <source>Minimum</source>
-        <translation type="obsolete">Mínimo</translation>
-    </message>
-    <message>
-        <source>Maximum</source>
-        <translation type="obsolete">Máximo</translation>
-    </message>
-    <message>
-        <source>Modification</source>
-        <translation type="obsolete">Modificação</translation>
-    </message>
-    <message>
-        <source>Parameter</source>
-        <translation type="obsolete">Parâmetro</translation>
-    </message>
-    <message>
-        <source>Manual</source>
-        <translation type="obsolete">Manual</translation>
-    </message>
-    <message>
-        <source>Linear ascending</source>
-        <translation type="obsolete">Linear ascendente</translation>
-    </message>
-    <message>
-        <source>Linear descending</source>
-        <translation type="obsolete">Linear descendente</translation>
-    </message>
-    <message>
-        <source>Exponential ascending</source>
-        <translation type="obsolete">Exponencial ascendente</translation>
-    </message>
-    <message>
-        <source>Exponential descending</source>
-        <translation type="obsolete">Exponencial descendente</translation>
-    </message>
-    <message>
-        <source>Random</source>
-        <translation type="obsolete">Aleatório</translation>
-    </message>
-    <message>
-        <source>Addition</source>
-        <translation type="obsolete">Adição</translation>
-    </message>
-    <message>
-        <source>Multiplication</source>
-        <translation type="obsolete">Multiplicação</translation>
-    </message>
-    <message>
-        <source>Replacement</source>
-        <translation type="obsolete">Substituição</translation>
-    </message>
-    <message>
-        <source>Apply to a velocity range</source>
-        <translation type="obsolete">Aplicar a um alcance de velocidade</translation>
-    </message>
-</context>
-<context>
     <name>DialogRecorder</name>
     <message>
         <location filename="dialogs/dialogrecorder.ui" line="26"/>
@@ -2605,30 +1519,6 @@ repository</source>
         <location filename="dialogs/dialogrecorder.cpp" line="163"/>
         <source>record</source>
         <translation>gravação</translation>
-    </message>
-</context>
-<context>
-    <name>DialogRelease</name>
-    <message>
-        <source>Release maker</source>
-        <translation type="obsolete">Criador de releases</translation>
-    </message>
-    <message>
-        <source>Detuning induced (semi-tones)</source>
-        <translation type="obsolete">Desafinação induzida (semitons)</translation>
-    </message>
-    <message>
-        <source>Release time at C2 (key 36)</source>
-        <oldsource>Durée release au do 1 (note 36)</oldsource>
-        <translation type="obsolete">Tempo de release em C2 (nota 36)</translation>
-    </message>
-    <message>
-        <source>Division to the next octave</source>
-        <translation type="obsolete">Divisão para a próxima oitava</translation>
-    </message>
-    <message>
-        <source>Release time (key </source>
-        <translation type="obsolete">Tempo de release (nota </translation>
     </message>
 </context>
 <context>
@@ -2718,104 +1608,6 @@ repository</source>
         <location filename="dialogs/dialogselection.ui" line="46"/>
         <source>Cancel</source>
         <translation>Cancelar</translation>
-    </message>
-</context>
-<context>
-    <name>DialogSpace</name>
-    <message>
-        <source>Spatialization</source>
-        <translation type="obsolete">Espacialização</translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Pattern&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translatorcomment>Only &quot;Pattern&quot; has to be translated</translatorcomment>
-        <translation type="obsolete">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Padrão&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-    </message>
-    <message>
-        <source>Division number</source>
-        <translation type="obsolete">Número de divisão</translation>
-    </message>
-    <message>
-        <source>Spreading (%)</source>
-        <translation type="obsolete">Extensão (%)</translation>
-    </message>
-    <message>
-        <source>Filling (%)</source>
-        <translation type="obsolete">Preenchimento (%)</translation>
-    </message>
-    <message>
-        <source>Offset (0-100)</source>
-        <translation type="obsolete">Deslocamento (0-100)</translation>
-    </message>
-    <message>
-        <source>Inversions</source>
-        <translation type="obsolete">Inversões</translation>
-    </message>
-    <message>
-        <source>Ascending</source>
-        <translation type="obsolete">Ascendente</translation>
-    </message>
-    <message>
-        <source>Hollow</source>
-        <translation type="obsolete">Côncavo</translation>
-    </message>
-    <message>
-        <source>Random</source>
-        <translation type="obsolete">Aleatório</translation>
-    </message>
-    <message>
-        <source>Descending</source>
-        <translation type="obsolete">Descendente</translation>
-    </message>
-    <message>
-        <source>Spike</source>
-        <translation type="obsolete">Ponta</translation>
-    </message>
-</context>
-<context>
-    <name>DialogTransposition</name>
-    <message>
-        <source>Transposition</source>
-        <translation type="obsolete">Transposição</translation>
-    </message>
-    <message>
-        <source>Shift in semitones</source>
-        <translation type="obsolete">Mudança em semitons</translation>
-    </message>
-    <message>
-        <source>Adapt keyrange</source>
-        <translation type="obsolete">Adaptar alcance de notas</translation>
-    </message>
-</context>
-<context>
-    <name>DialogVisualizer</name>
-    <message>
-        <source>Visualizer</source>
-        <translation type="obsolete">Visualizador</translation>
-    </message>
-    <message>
-        <source>Display options</source>
-        <translation type="obsolete">Opções de visualização</translation>
-    </message>
-    <message>
-        <source>Legend</source>
-        <translation type="obsolete">Legenda</translation>
-    </message>
-    <message>
-        <source>Mean value per key</source>
-        <translation type="obsolete">Valor médio por nota</translation>
-    </message>
-    <message>
-        <source>Default parameters</source>
-        <translation type="obsolete">Parâmetros padrão</translation>
-    </message>
-    <message>
-        <source>Defined parameters</source>
-        <translation type="obsolete">Parâmetros definidos</translation>
-    </message>
-    <message>
-        <source>Log scale</source>
-        <translation type="obsolete">Registrar escala</translation>
     </message>
 </context>
 <context>
@@ -3087,11 +1879,6 @@ repository</source>
         <translation>Delay</translation>
     </message>
     <message>
-        <source>Key  Decay</source>
-        <oldsource>Key  Decay</oldsource>
-        <translation type="obsolete">Altura  Decay</translation>
-    </message>
-    <message>
         <location filename="editor/envelopeditor.ui" line="128"/>
         <source>Decay</source>
         <translation>Decay</translation>
@@ -3100,11 +1887,6 @@ repository</source>
         <location filename="editor/envelopeditor.ui" line="420"/>
         <source>Sustain</source>
         <translation>Sustain</translation>
-    </message>
-    <message>
-        <source>Key  Hold</source>
-        <oldsource>Key  Hold</oldsource>
-        <translation type="obsolete">Altura  Hold</translation>
     </message>
     <message>
         <location filename="editor/envelopeditor.ui" line="263"/>
@@ -3156,17 +1938,6 @@ repository</source>
     </message>
 </context>
 <context>
-    <name>ExternalCommandRunner</name>
-    <message>
-        <source>Cancel</source>
-        <translation type="obsolete">Cancelar</translation>
-    </message>
-    <message>
-        <source>Processing </source>
-        <translation type="obsolete">Processamento </translation>
-    </message>
-</context>
-<context>
     <name>FilterFlow</name>
     <message>
         <location filename="repository/browser/filterflow.cpp" line="64"/>
@@ -3184,16 +1955,6 @@ repository</source>
 </context>
 <context>
     <name>GraphSpace</name>
-    <message>
-        <source>L</source>
-        <translatorcomment>first letter of &quot;Left&quot;</translatorcomment>
-        <translation type="obsolete">E</translation>
-    </message>
-    <message>
-        <source>R</source>
-        <translatorcomment>first letter of &quot;Right&quot;</translatorcomment>
-        <translation type="obsolete">D</translation>
-    </message>
     <message>
         <location filename="editor/tools/sound_spatialization/graphspace.cpp" line="76"/>
         <source>L</source>
@@ -3270,10 +2031,6 @@ repository</source>
         <location filename="editor/graphics/graphiquefourier.cpp" line="394"/>
         <source>Png file</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Png file (*.png)</source>
-        <translation type="obsolete">Arquivo PNG (*.png)</translation>
     </message>
 </context>
 <context>
@@ -3399,939 +2156,86 @@ repository</source>
 <context>
     <name>MainWindow</name>
     <message>
-        <source>&amp;File</source>
-        <translatorcomment>Put the character &quot;&amp;&quot; to access an element in a menu via Alt + the following letter.</translatorcomment>
-        <translation type="obsolete">&amp;Arquivo</translation>
-    </message>
-    <message>
-        <source>&amp;Help</source>
-        <translation type="obsolete">A&amp;juda</translation>
-    </message>
-    <message>
-        <source>&amp;Edit</source>
-        <translation type="obsolete">&amp;Editar</translation>
-    </message>
-    <message>
-        <source>&amp;Tools</source>
-        <translation type="obsolete">&amp;Utilitários</translation>
-    </message>
-    <message>
-        <source>&amp;Instrument</source>
-        <translation type="obsolete">&amp;Instrumento</translation>
-    </message>
-    <message>
-        <source>&amp;View</source>
-        <translation type="obsolete">&amp;Visualizar</translation>
-    </message>
-    <message>
-        <source>Toolbar</source>
-        <translation type="obsolete">Barra de Ferramentas</translation>
-    </message>
-    <message>
-        <source>Tree</source>
-        <translation type="obsolete">Árvore</translation>
-    </message>
-    <message>
-        <source>Collapse the tree</source>
-        <translation type="obsolete">Minimizar árvore</translation>
-    </message>
-    <message>
-        <source>Expand the tree</source>
-        <translation type="obsolete">Expandir árvore</translation>
-    </message>
-    <message>
-        <source>Search...</source>
-        <translation type="obsolete">Buscar...</translation>
-    </message>
-    <message>
-        <source>Clear the search</source>
-        <translation type="obsolete">Limpar pesquisa</translation>
-    </message>
-    <message>
-        <source>&amp;Open</source>
-        <translation type="obsolete">&amp;Abrir arquivo...</translation>
-    </message>
-    <message>
-        <source>Open a file</source>
-        <translation type="obsolete">Abrir um arquivo</translation>
-    </message>
-    <message>
-        <source>&amp;Quit</source>
-        <translation type="obsolete">&amp;Sair</translation>
-    </message>
-    <message>
-        <source>&amp;About</source>
-        <translation type="obsolete">So&amp;bre</translation>
-    </message>
-    <message>
-        <location filename="mainwindow/mainwindow.cpp" line="196"/>
+        <location filename="mainwindow/mainwindow.cpp" line="197"/>
         <source>&amp;Save</source>
         <translation>&amp;Salvar</translation>
     </message>
     <message>
-        <source>Save the current file</source>
-        <translation type="obsolete">Salvar arquivo atual</translation>
-    </message>
-    <message>
-        <source>Save &amp;as...</source>
-        <oldsource>Enregistrer &amp;sous ...</oldsource>
-        <translation type="obsolete">Salvar &amp;como...</translation>
-    </message>
-    <message>
-        <source>Save in another file</source>
-        <translation type="obsolete">Salvar em outro arquivo</translation>
-    </message>
-    <message>
-        <source>&amp;New...</source>
-        <translation type="obsolete">&amp;Novo...</translation>
-    </message>
-    <message>
-        <source>Create a new file</source>
-        <translation type="obsolete">Criar novo arquivo</translation>
-    </message>
-    <message>
-        <location filename="mainwindow/mainwindow.cpp" line="197"/>
+        <location filename="mainwindow/mainwindow.cpp" line="198"/>
         <source>&amp;Cancel</source>
         <translation>Cancel&amp;ar</translation>
     </message>
     <message>
-        <source>&amp;Preset</source>
-        <translation type="obsolete">&amp;Predefinição</translation>
-    </message>
-    <message>
-        <source>Online &amp;manual</source>
-        <oldsource>&amp;Manuel</oldsource>
-        <translation type="obsolete">&amp;Manual Online</translation>
-    </message>
-    <message>
-        <source>&amp;Undo</source>
-        <comment>1</comment>
-        <translatorcomment>Undo an action</translatorcomment>
-        <translation type="obsolete">Desfa&amp;zer alteração</translation>
-    </message>
-    <message>
-        <source>Undo the last action</source>
-        <translation type="obsolete">Desfazer última ação</translation>
-    </message>
-    <message>
-        <source>&amp;Redo</source>
-        <translation type="obsolete">Re&amp;fazer alteração</translation>
-    </message>
-    <message>
-        <source>Redo the last undone action</source>
-        <translation type="obsolete">Refazer última ação desfeita</translation>
-    </message>
-    <message>
-        <source>&amp;Settings</source>
-        <translation type="obsolete">&amp;Preferências</translation>
-    </message>
-    <message>
-        <source>Open the settings</source>
-        <translation type="obsolete">Abrir as preferências</translation>
-    </message>
-    <message>
-        <source>&amp;Toolbar</source>
-        <translation type="obsolete">&amp;Barra de Ferramentas</translation>
-    </message>
-    <message>
-        <source>Display / hide the toolbar</source>
-        <translation type="obsolete">Mostrar / esconder a barra de ferramentas</translation>
-    </message>
-    <message>
-        <source>&amp;Close file</source>
-        <translation type="obsolete">&amp;Fechar arquivo</translation>
-    </message>
-    <message>
-        <source>Close the current file</source>
-        <translation type="obsolete">Fecha o arquivo atual</translation>
-    </message>
-    <message>
-        <source>&amp;Copy</source>
-        <translation type="obsolete">&amp;Copiar</translation>
-    </message>
-    <message>
-        <source>Copy an element</source>
-        <translation type="obsolete">Copia um elemento</translation>
-    </message>
-    <message>
-        <source>&amp;Paste</source>
-        <translation type="obsolete">C&amp;olar</translation>
-    </message>
-    <message>
-        <source>Paste an element</source>
-        <translation type="obsolete">Cola um elemento</translation>
-    </message>
-    <message>
-        <source>&amp;Delete</source>
-        <translation type="obsolete">&amp;Deletar</translation>
-    </message>
-    <message>
-        <source>Delete an element</source>
-        <translation type="obsolete">Deleta um elemento</translation>
-    </message>
-    <message>
-        <source>&amp;Remove unused elements</source>
-        <translation type="obsolete">Remover elementos não &amp;usados</translation>
-    </message>
-    <message>
-        <source>Remove unused samples and instruments</source>
-        <oldsource>Enlève les samples et instruments non utilisés</oldsource>
-        <translation type="obsolete">Remove amostras e instrumentos não usados</translation>
-    </message>
-    <message>
-        <source>Re&amp;name</source>
-        <translation type="obsolete">&amp;Renomear</translation>
-    </message>
-    <message>
-        <source>Rename one or several element(s)</source>
-        <translation type="obsolete">Renomeia um ou mais elemento(s)</translation>
-    </message>
-    <message>
-        <source>file1</source>
-        <translation type="obsolete">arquivo1</translation>
-    </message>
-    <message>
-        <source>Open a recent file</source>
-        <translation type="obsolete">Abre um arquivo recente</translation>
-    </message>
-    <message>
-        <source>file2</source>
-        <translation type="obsolete">arquivo2</translation>
-    </message>
-    <message>
-        <source>file3</source>
-        <translation type="obsolete">arquivo3</translation>
-    </message>
-    <message>
-        <source>file4</source>
-        <translation type="obsolete">arquivo4</translation>
-    </message>
-    <message>
-        <source>file5</source>
-        <translation type="obsolete">arquivo5</translation>
-    </message>
-    <message>
-        <source>&amp;Modulator section</source>
-        <translation type="obsolete">&amp;Seção de moduladores</translation>
-    </message>
-    <message>
-        <source>&amp;Import samples...</source>
-        <oldsource>&amp;Importer des sons...</oldsource>
-        <translation type="obsolete">&amp;Importar amostras...</translation>
-    </message>
-    <message>
-        <source>E&amp;xport samples...</source>
-        <oldsource>E&amp;xporter des sons...</oldsource>
-        <translation type="obsolete">&amp;Exportar amostras...</translation>
-    </message>
-    <message>
-        <source>Remove the blank at the beginning of a sample</source>
-        <oldsource>Enleve le blanc au début d&apos;un sample</oldsource>
-        <translation type="obsolete">Remover vazio ao início da amostra</translation>
-    </message>
-    <message>
-        <source>Cut the sample at the end of its loop</source>
-        <oldsource>Ajuste le sample à sa fin de boucle</oldsource>
-        <translation type="obsolete">Cortar amostra ao fim de sua repetição</translation>
-    </message>
-    <message>
-        <source>Loop automatically the sample</source>
-        <oldsource>Boucle automatiquement le sample</oldsource>
-        <translation type="obsolete">Repetir automaticamente a amostra</translation>
-    </message>
-    <message>
-        <source>Transpose the sample</source>
-        <oldsource>Transpose le sample</oldsource>
-        <translation type="obsolete">Transpor a amostra</translation>
-    </message>
-    <message>
-        <source>&amp;External command...</source>
-        <translation type="obsolete">Comando &amp;Externo...</translation>
-    </message>
-    <message>
-        <source>Use an external software or command to modify a .wav file</source>
-        <translation type="obsolete">Usar um software ou comando externo para modificar um arquivo .wav</translation>
-    </message>
-    <message>
-        <source>Export &amp;preset list...</source>
-        <oldsource>Exporter la liste des &amp;presets</oldsource>
-        <translation type="obsolete">Exportar a lista de &amp;predefinições...</translation>
-    </message>
-    <message>
-        <source>Export the preset list in a text format</source>
-        <translation type="obsolete">Exportar a lista de predefinições em um formato de texto</translation>
-    </message>
-    <message>
-        <source>&amp;Soundfont repository</source>
-        <translation type="obsolete">Baixar &amp;soundfonts</translation>
-    </message>
-    <message>
-        <source>&amp;Celeste tuning...</source>
-        <translation type="obsolete">&amp;Afinação centesimal...</translation>
-    </message>
-    <message>
-        <source>Tune the sounds to create beats</source>
-        <translation type="obsolete">Afinar os sons para criar batidas</translation>
-    </message>
-    <message>
-        <source>Division duplication...</source>
-        <translation type="obsolete">Duplicação de divisões...</translation>
-    </message>
-    <message>
-        <source>Display a 6-octave keyboard</source>
-        <translation type="obsolete">Mostrar um teclado de 6 oitavas</translation>
-    </message>
-    <message>
-        <source>&amp;128 keys (full)</source>
-        <translation type="obsolete">&amp;128 teclas (completo)</translation>
-    </message>
-    <message>
-        <source>Display no keyboard</source>
-        <translation type="obsolete">Não mostrar teclado</translation>
-    </message>
-    <message>
-        <source>Division duplication</source>
-        <translation type="obsolete">Duplicação de divisões</translation>
-    </message>
-    <message>
-        <source>Display the recorder</source>
-        <translation type="obsolete">Mostrar o gravador</translation>
-    </message>
-    <message>
-        <source>&amp;Visualizer</source>
-        <translation type="obsolete">&amp;Visualizar</translation>
-    </message>
-    <message>
-        <source>Visualize in a graph the parameters used</source>
-        <translation type="obsolete">Mostrar em um gráfico os parâmetros usados</translation>
-    </message>
-    <message>
-        <source>Ex&amp;port soundfont...</source>
-        <oldsource>Exporter sound&amp;font...</oldsource>
-        <translation type="obsolete">E&amp;xportar soundfont...</translation>
-    </message>
-    <message>
-        <source>Export a soundfont</source>
-        <translation type="obsolete">Exportar uma soundfont</translation>
-    </message>
-    <message>
-        <source>&amp;Unlink all stereo samples</source>
-        <oldsource>&amp;Dissocier les samples stéréo</oldsource>
-        <translation type="obsolete">&amp;Limpar relação de todas amostras estéreo</translation>
-    </message>
-    <message>
-        <source>Unlink all stereo samples</source>
-        <oldsource>Dissocie les samples stéréo</oldsource>
-        <translation type="obsolete">Limpar relação de todas amostras estéreo</translation>
-    </message>
-    <message>
-        <source>Peak &amp;frequency export (csv)</source>
-        <translation type="obsolete">Exportar picos e &amp;frequências (csv)</translation>
-    </message>
-    <message>
-        <source>Export the peak frequency of all samples in a csv file</source>
-        <translation type="obsolete">Exportar os picos e frequências de todas amostras em um arquivo csv</translation>
-    </message>
-    <message>
-        <source>&amp;88 keys (piano)</source>
-        <translation type="obsolete">&amp;88 teclas (piano)</translation>
-    </message>
-    <message>
-        <source>In &amp;toolbar</source>
-        <translation type="obsolete">Na &amp;barra de ferramentas</translation>
-    </message>
-    <message>
-        <source>&amp;Floating</source>
-        <translation type="obsolete">&amp;Flutuante</translation>
-    </message>
-    <message>
-        <source>&amp;Transposition...</source>
-        <translation type="obsolete">&amp;Transposição...</translation>
-    </message>
-    <message>
-        <source>Transpose every sample of an instrument</source>
-        <translation type="obsolete">Transpor cada amostra de um instrumento</translation>
-    </message>
-    <message>
-        <source>Remove all &amp;modulators</source>
-        <translation type="obsolete">Remover todos &amp;moduladores</translation>
-    </message>
-    <message>
-        <source>&amp;Full screen</source>
-        <translation type="obsolete">&amp;Preencher tela</translation>
-    </message>
-    <message>
-        <source>&amp;Forum</source>
-        <translation type="obsolete">&amp;Forum</translation>
-    </message>
-    <message>
-        <source>&amp;5 octaves</source>
-        <translation type="obsolete">&amp;5 oitavas</translation>
-    </message>
-    <message>
-        <source>Display a 5-octave keyboard</source>
-        <translation type="obsolete">Mostrar um teclado de 5 oitavas</translation>
-    </message>
-    <message>
-        <source>&amp;6 octaves</source>
-        <translation type="obsolete">&amp;6 oitavas</translation>
-    </message>
-    <message>
-        <source>Display a 128-key keyboard</source>
-        <translation type="obsolete">Mostrar um teclado de 128 teclas</translation>
-    </message>
-    <message>
-        <source>&amp;None</source>
-        <translation type="obsolete">Nen&amp;hum</translation>
-    </message>
-    <message>
-        <source>&amp;Division duplication...</source>
-        <oldsource>&amp;Duplication des divisions</oldsource>
-        <translation type="obsolete">&amp;Duplicação de divisão...</translation>
-    </message>
-    <message>
-        <source>&amp;Change volume...</source>
-        <oldsource>&amp;Modifier volume</oldsource>
-        <translation type="obsolete">Mudar &amp;volume...</translation>
-    </message>
-    <message>
-        <source>Change the volume</source>
-        <translation type="obsolete">Mudar o volume</translation>
-    </message>
-    <message>
-        <source>&amp;Filter frequencies...</source>
-        <translation type="obsolete">&amp;Filtrar frequências...</translation>
-    </message>
-    <message>
-        <source>Apply a filter to attenuate specific frequencies</source>
-        <translation type="obsolete">Aplicar um filtro para atenuar frequências específicas</translation>
-    </message>
-    <message>
-        <source>&amp;Adjust attenuations...</source>
-        <translation type="obsolete">&amp;Ajustar atenuações...</translation>
-    </message>
-    <message>
-        <source>Globally adjust instrument and preset attenuations</source>
-        <translation type="obsolete">Ajustar atenuações de instrumentos e predefinições globalmente</translation>
-    </message>
-    <message>
-        <source>&amp;Release maker</source>
-        <translation type="obsolete">&amp;Gerenciador de release...</translation>
-    </message>
-    <message>
-        <source>Create automatically a release for all linked sounds</source>
-        <translation type="obsolete">Criar um release automaticamente para todos sons relacionados</translation>
-    </message>
-    <message>
-        <source>&amp;Link all stereo samples</source>
-        <oldsource>&amp;Association auto échantillons</oldsource>
-        <translation type="obsolete">&amp;Relacionar todas amostras estéreo</translation>
-    </message>
-    <message>
-        <source>Automatically link the samples L/R according to their names</source>
-        <oldsource>Associe automatiquement les samples G/D</oldsource>
-        <translation type="obsolete">Relacionar automaticamente amostras E/D de acordo com seus nomes</translation>
-    </message>
-    <message>
-        <source>&amp;Recorder</source>
-        <oldsource>Magnétophone</oldsource>
-        <translation type="obsolete">G&amp;ravador</translation>
-    </message>
-    <message>
-        <source>Display the modulator section</source>
-        <translation type="obsolete">Mostrar a seção modular</translation>
-    </message>
-    <message>
-        <source>Vel.</source>
-        <translation type="obsolete">Vel.</translation>
-    </message>
-    <message>
-        <source>Key</source>
-        <translation type="obsolete">Nota</translation>
-    </message>
-    <message>
-        <source>&amp;Sample</source>
-        <translation type="obsolete">&amp;Amostra</translation>
-    </message>
-    <message>
-        <source>&amp;Global</source>
-        <translation type="obsolete">&amp;Global</translation>
-    </message>
-    <message>
-        <source>&amp;Keyboard</source>
-        <translation type="obsolete">&amp;Teclado</translation>
-    </message>
-    <message>
-        <source>Import an audio file</source>
-        <translation type="obsolete">Importar um arquivo de áudio</translation>
-    </message>
-    <message>
-        <source>Export in a wav format</source>
-        <translation type="obsolete">Exportar em formato .wav</translation>
-    </message>
-    <message>
-        <source>New instrument</source>
-        <translation type="obsolete">Novo instrumento</translation>
-    </message>
-    <message>
-        <source>Create a new instrument</source>
-        <translation type="obsolete">Criar um novo instrumento</translation>
-    </message>
-    <message>
-        <source>New preset</source>
-        <translation type="obsolete">Nova predefinição</translation>
-    </message>
-    <message>
-        <source>Create a new preset</source>
-        <translation type="obsolete">Criar uma nova predefinição</translation>
-    </message>
-    <message>
-        <source>&amp;Remove blank at start</source>
-        <translation type="obsolete">&amp;Remover vazio ao início</translation>
-    </message>
-    <message>
-        <source>&amp;Trim to end of loop</source>
-        <translation type="obsolete">&amp;Cortar ao fim da repetição</translation>
-    </message>
-    <message>
-        <source>&amp;Auto loop</source>
-        <translation type="obsolete">&amp;Auto repetição</translation>
-    </message>
-    <message>
-        <source>Trans&amp;pose...</source>
-        <translation type="obsolete">&amp;Transpor...</translation>
-    </message>
-    <message>
-        <source>&amp;Sound spatialization...</source>
-        <translation type="obsolete">&amp;Espacialização de som...</translation>
-    </message>
-    <message>
-        <source>Place sounds in space</source>
-        <translation type="obsolete">Colocar sons no espaço</translation>
-    </message>
-    <message>
-        <source>&amp;Automatic distribution</source>
-        <translation type="obsolete">D&amp;istribuição automática</translation>
-    </message>
-    <message>
-        <source>Automatically arrange the samples over the keyboard</source>
-        <translation type="obsolete">Organizar amostras automaticamente sobre o teclado</translation>
-    </message>
-    <message>
-        <source>Duplicate the divisions</source>
-        <translation type="obsolete">Duplicar divisões</translation>
-    </message>
-    <message>
-        <source>&amp;Global setting...</source>
-        <translation type="obsolete">&amp;Parâmetros globais...</translation>
-    </message>
-    <message>
-        <source>Set all divisions simultaneously</source>
-        <translation type="obsolete">Definir todas divisões simultaneamente</translation>
-    </message>
-    <message>
-        <source>&amp;Balance adjustment</source>
-        <translation type="obsolete">Ajuste de &amp;balanço</translation>
-    </message>
-    <message>
-        <source>Set the sample pan</source>
-        <oldsource>Règle la balance du sample</oldsource>
-        <translation type="obsolete">Definir balanço da amostra</translation>
-    </message>
-    <message>
-        <source>&amp;Mixture creation...</source>
-        <translation type="obsolete">Criação de &amp;mistura...</translation>
-    </message>
-    <message>
-        <source>Create a mixture</source>
-        <translation type="obsolete">Criar uma mistura</translation>
-    </message>
-    <message>
-        <location filename="mainwindow/mainwindow.cpp" line="198"/>
+        <location filename="mainwindow/mainwindow.cpp" line="199"/>
         <source>Do&amp;n&apos;t save</source>
         <translation>&amp;Não salvar</translation>
     </message>
     <message>
-        <source>.sf2 file (*.sf2)</source>
-        <translation type="obsolete">Arquivo .sf2 (*.sf2)</translation>
-    </message>
-    <message>
-        <location filename="mainwindow/mainwindow.cpp" line="182"/>
+        <location filename="mainwindow/mainwindow.cpp" line="183"/>
         <source>Warning</source>
         <translation>Atenção</translation>
     </message>
     <message>
-        <source>Cancel</source>
-        <translation type="obsolete">Cancelar</translation>
-    </message>
-    <message>
-        <location filename="mainwindow/mainwindow.cpp" line="172"/>
+        <location filename="mainwindow/mainwindow.cpp" line="173"/>
         <source>untitled</source>
         <translation>sem nome</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="183"/>
+        <location filename="mainwindow/mainwindow.cpp" line="184"/>
         <source>Save before exiting?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="186"/>
+        <location filename="mainwindow/mainwindow.cpp" line="187"/>
         <source>The following files have been modified:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="193"/>
+        <location filename="mainwindow/mainwindow.cpp" line="194"/>
         <source>File &quot;%1&quot; has been modified.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="242"/>
+        <location filename="mainwindow/mainwindow.cpp" line="243"/>
         <source>en/documentation</source>
         <comment>path for the documentation online</comment>
         <translation>en/documentation</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="247"/>
+        <location filename="mainwindow/mainwindow.cpp" line="248"/>
         <source>en/forum</source>
         <comment>path for the forum</comment>
         <translation>en/forum</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="272"/>
+        <location filename="mainwindow/mainwindow.cpp" line="273"/>
         <source>Soundfonts</source>
         <translation>Soundfonts</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="273"/>
+        <location filename="mainwindow/mainwindow.cpp" line="274"/>
         <source>Sf2 files</source>
         <translation>Arquivos Sf2</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="274"/>
+        <location filename="mainwindow/mainwindow.cpp" line="275"/>
         <source>Sf3 files</source>
         <translation>Arquivos Sf3</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="275"/>
+        <location filename="mainwindow/mainwindow.cpp" line="276"/>
         <source>Sfz files</source>
         <translation>Arquivos Sfz</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="276"/>
+        <location filename="mainwindow/mainwindow.cpp" line="277"/>
         <source>sfArk archives</source>
         <translation>Arquivos sfArk</translation>
     </message>
     <message>
-        <source>Cannot open the file.</source>
-        <translation type="obsolete">Não foi possível abrir o arquivo.</translation>
-    </message>
-    <message>
-        <source>Cannot read the file.</source>
-        <translation type="obsolete">Não foi possível ler o arquivo.</translation>
-    </message>
-    <message>
-        <source>Corrupted file.</source>
-        <translation type="obsolete">O arquivo esta corrompido.</translation>
-    </message>
-    <message>
-        <source>Name of the new soundfont:</source>
-        <translation type="obsolete">Nome da nova soundfont:</translation>
-    </message>
-    <message>
-        <source>Instrument name (max 20 characters):</source>
-        <translation type="obsolete">Nome do instrumento (máx 20 caracteres):</translation>
-    </message>
-    <message>
-        <source>Preset name (max 20 characters):</source>
-        <translation type="obsolete">Nome da predefinição (máx 20 caracteres):</translation>
-    </message>
-    <message>
-        <source>Soundfont name (max 255 characters):</source>
-        <translation type="obsolete">Nome da soundfont (máx 255 caracteres):</translation>
-    </message>
-    <message>
-        <source>L&quot; already exists.&lt;br/&gt;Replace?</source>
-        <translation type="obsolete">E&quot; já existe.&lt;br/&gt;Substituir?</translation>
-    </message>
-    <message>
-        <source>R&quot; already exists.&lt;br/&gt;Replace?</source>
-        <translation type="obsolete">D&quot; já existe.&lt;br/&gt;Substituir?</translation>
-    </message>
-    <message>
-        <source>&quot; already exists.&lt;br/&gt;Replace?</source>
-        <translation type="obsolete">&quot; já existe.&lt;br/&gt;Substituir?</translation>
-    </message>
-    <message>
-        <source> bits&lt;/b&gt;</source>
-        <translation type="obsolete"> bits&lt;/b&gt;</translation>
-    </message>
-    <message>
-        <source>Virtual keyboard</source>
-        <translation type="obsolete">Teclado virtual</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;Save before exiting?&lt;/b&gt;</source>
-        <translation type="obsolete">&lt;b&gt;Salvar antes de sair?&lt;/b&gt;</translation>
-    </message>
-    <message>
-        <source>The following files have been modified:&lt;br/&gt; - </source>
-        <oldsource>Les fichiers suivants ont été modifiés depuis leur dernier enregistrement :&lt;br/&gt; - </oldsource>
-        <translation type="obsolete">Os seguintes arquivos foram modificados:&lt;br/&gt; - </translation>
-    </message>
-    <message>
-        <source>The file &quot;</source>
-        <oldsource>Le fichier «&amp;#160;</oldsource>
-        <translation type="obsolete">O arquivo &quot;</translation>
-    </message>
-    <message>
-        <source>&quot; has been modified.</source>
-        <translation type="obsolete">&quot; foi modificado.</translation>
-    </message>
-    <message>
-        <source>Polyphone</source>
-        <translation type="obsolete">Polyphone</translation>
-    </message>
-    <message>
-        <location filename="mainwindow/mainwindow.cpp" line="270"/>
+        <location filename="mainwindow/mainwindow.cpp" line="271"/>
         <source>Opening files</source>
         <translation>Abrindo arquivos</translation>
-    </message>
-    <message>
-        <source>Corrupted file: use of 16 bits samples.</source>
-        <translation type="obsolete">Arquivo corrompido: uso de amostras 16 bits.</translation>
-    </message>
-    <message>
-        <source>Cannot delete a sample used by another instrument.</source>
-        <translation type="obsolete">Não se pode deletar uma amostra usada por outro instrumento.</translation>
-    </message>
-    <message>
-        <source>Operation in progress...</source>
-        <translation type="obsolete">Operação em progresso...</translation>
-    </message>
-    <message>
-        <source>Cannot delete an instrument used by another preset.</source>
-        <translation type="obsolete">Não se pode deletar um instrumento usado por outra predefinição.</translation>
-    </message>
-    <message>
-        <source>&amp;Yes</source>
-        <translation type="obsolete">&amp;Sim</translation>
-    </message>
-    <message>
-        <source>&amp;No</source>
-        <translation type="obsolete">&amp;Não</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;To many parameters defined in both the intruments and the presets.&lt;/b&gt;</source>
-        <translation type="obsolete">&lt;b&gt;Muitos parâmetros definidos em ambos instrumentos e predefinições.&lt;/b&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;To many parameters defined in the instruments.&lt;/b&gt;</source>
-        <translation type="obsolete">&lt;b&gt;Muitos parâmetros definidos nos instrumentos.&lt;/b&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;To many parameters defined in the presets.&lt;/b&gt;</source>
-        <translation type="obsolete">&lt;b&gt;Muitos parâmetros definidos nas predefinições.&lt;/b&gt;</translation>
-    </message>
-    <message>
-        <source>Some synthesizers skip parameters beyond the  65536th.
-Splitting the file into several sf2 might solve the problem.</source>
-        <translation type="obsolete">Alguns sintetizadores pulam parâmetros além da 65536ª.
-Dividindo o arquivo em vários sf2 pode resolver o problema.</translation>
-    </message>
-    <message>
-        <source>Save, &amp;disable this message</source>
-        <translation type="obsolete">Salvar, &amp;desativar essa mensagem</translation>
-    </message>
-    <message>
-        <source>Save a soundfont</source>
-        <translation type="obsolete">Salvar uma soundfont</translation>
-    </message>
-    <message>
-        <source>Unknown extension.</source>
-        <translation type="obsolete">Extensão desconhecida.</translation>
-    </message>
-    <message>
-        <source>Cannot save the file.</source>
-        <translation type="obsolete">Não foi possível salvar o arquivo.</translation>
-    </message>
-    <message>
-        <source>http://polyphone-soundfonts.com/en/documentation</source>
-        <translatorcomment>should remain &quot;en&quot; if the documentation is not available in the current language</translatorcomment>
-        <translation type="obsolete">http://polyphone-soundfonts.com/en/documentation</translation>
-    </message>
-    <message>
-        <source>http://polyphone-soundfonts.com/en/forum</source>
-        <translation type="obsolete">http://polyphone-soundfonts.com/en/forum</translation>
-    </message>
-    <message>
-        <source>http://polyphone-soundfonts.com/en/soundfonts</source>
-        <translation type="obsolete">http://polyphone-soundfonts.com/en/soundfonts</translation>
-    </message>
-    <message>
-        <source>&amp;Bulk rename</source>
-        <translation type="obsolete">&amp;Renomeação em massa</translation>
-    </message>
-    <message>
-        <source>Sample name (max 20 characters):</source>
-        <oldsource>Nom du sample (max 20 caractères) :</oldsource>
-        <translation type="obsolete">Nome da amostra (máx 20 caracteres):</translation>
-    </message>
-    <message>
-        <source>Question</source>
-        <translation type="obsolete">Questão</translation>
-    </message>
-    <message>
-        <source>An error occurred while importing the file </source>
-        <translation type="obsolete">Um erro ocorreu ao importar o arquivo </translation>
-    </message>
-    <message>
-        <source>Wav file</source>
-        <oldsource>Fichier .wav (*.[wW][aA][vV])</oldsource>
-        <translation type="obsolete">Arquivo .wav</translation>
-    </message>
-    <message>
-        <source>The sample &quot;</source>
-        <translation type="obsolete">A amostra &quot;</translation>
-    </message>
-    <message>
-        <source>&amp;Replace</source>
-        <translation type="obsolete">Substitui&amp;r</translation>
-    </message>
-    <message>
-        <source>R&amp;eplace all</source>
-        <translation type="obsolete">Substituir &amp;tudo</translation>
-    </message>
-    <message>
-        <source>&amp;Duplicate</source>
-        <translation type="obsolete">&amp;Duplicar</translation>
-    </message>
-    <message>
-        <source>D&amp;uplicate all</source>
-        <translation type="obsolete">D&amp;uplicar tudo</translation>
-    </message>
-    <message>
-        <source>&amp;Ignore</source>
-        <translation type="obsolete">&amp;Ignorar</translation>
-    </message>
-    <message>
-        <source>I&amp;gnore all</source>
-        <translation type="obsolete">I&amp;gnorar tudo</translation>
-    </message>
-    <message>
-        <source>Merge soudfonts:</source>
-        <translation type="obsolete">Juntar soundfonts:</translation>
-    </message>
-    <message>
-        <source>No preset available.</source>
-        <translation type="obsolete">Nenhuma predefinição disponível.</translation>
-    </message>
-    <message>
-        <source> sample and </source>
-        <translation type="obsolete"> amostra e </translation>
-    </message>
-    <message>
-        <source> samples and </source>
-        <translation type="obsolete"> amostras e </translation>
-    </message>
-    <message>
-        <source>The soundfont must contain at least one instrument.</source>
-        <translation type="obsolete">A soundfont deve conter ao menos um instrumento.</translation>
-    </message>
-    <message>
-        <source>Export peak frequency</source>
-        <translation type="obsolete">Exportar picos de frequências</translation>
-    </message>
-    <message>
-        <source>Csv file (*.csv)</source>
-        <translation type="obsolete">Arquivo csv (*.csv)</translation>
-    </message>
-    <message>
-        <source>,</source>
-        <translatorcomment>column separator symbol in csv files</translatorcomment>
-        <translation type="obsolete">,</translation>
-    </message>
-    <message>
-        <source>Sample</source>
-        <translation type="obsolete">Amostra</translation>
-    </message>
-    <message>
-        <source>Peak number</source>
-        <translation type="obsolete">Numero de pico</translation>
-    </message>
-    <message>
-        <source>Factor</source>
-        <translation type="obsolete">Fator</translation>
-    </message>
-    <message>
-        <source>Frequency</source>
-        <translation type="obsolete">Frequência</translation>
-    </message>
-    <message>
-        <source>Correction</source>
-        <translation type="obsolete">Correção</translation>
-    </message>
-    <message>
-        <source>m</source>
-        <translatorcomment>decimal separator</translatorcomment>
-        <translation type="obsolete">,</translation>
-    </message>
-    <message>
-        <source>The soundfont contains no modulators.</source>
-        <translation type="obsolete">A soundfont não contém moduladores.</translation>
-    </message>
-    <message>
-        <source>Information</source>
-        <translation type="obsolete">Informação</translation>
-    </message>
-    <message>
-        <source>1 modulator has been deleted.</source>
-        <translation type="obsolete">1 modulador foi deletado.</translation>
-    </message>
-    <message>
-        <source>modulators have been deleted.</source>
-        <translation type="obsolete">moduladores foram deletados.</translation>
-    </message>
-    <message>
-        <source>Unknown format.</source>
-        <translation type="obsolete">Formato desconhecido.</translation>
-    </message>
-    <message>
-        <source>File already loaded.</source>
-        <translation type="obsolete">Arquivo já aberto.</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;Losing resolution </source>
-        <translation type="obsolete">&lt;b&gt;Perdendo resolução </translation>
-    </message>
-    <message>
-        <source>The sample quality will be lowered. Continue?</source>
-        <translation type="obsolete">A qualidade da amostra será reduzida. Continuar?</translation>
-    </message>
-    <message>
-        <source>File already open, cannot save.</source>
-        <translation type="obsolete">Arquivo já aberto, impossível salvar.</translation>
-    </message>
-    <message>
-        <source>Choose a destination folder</source>
-        <translation type="obsolete">Escolher uma pasta de destino</translation>
-    </message>
-    <message>
-        <source>Name of the new instrument:</source>
-        <translation type="obsolete">Nome do novo instrumento:</translation>
-    </message>
-    <message>
-        <source>Name of the new preset:</source>
-        <translation type="obsolete">Nome da nova predefinição:</translation>
-    </message>
-    <message>
-        <source> instrument have been deleted.</source>
-        <translatorcomment>instrument: singular</translatorcomment>
-        <translation type="obsolete"> instrumento foi deletado.</translation>
-    </message>
-    <message>
-        <source> instruments have been deleted.</source>
-        <translatorcomment>instrument: plural</translatorcomment>
-        <translation type="obsolete"> instrumentos foram deletados.</translation>
     </message>
     <message>
         <location filename="mainwindow/mainwindow.ui" line="20"/>
@@ -4445,265 +2349,6 @@ Dividindo o arquivo em vários sf2 pode resolver o problema.</translation>
     </message>
 </context>
 <context>
-    <name>Page</name>
-    <message>
-        <source>, absolute value</source>
-        <translation type="obsolete">, valor absoluto</translation>
-    </message>
-    <message>
-        <source>Sample start offset</source>
-        <oldsource>Offset début sample</oldsource>
-        <translation type="obsolete">Deslocamento do início da amostra</translation>
-    </message>
-    <message>
-        <source>Sample end offset</source>
-        <oldsource>Offset fin sample</oldsource>
-        <translation type="obsolete">Deslocamento do fim da amostra</translation>
-    </message>
-    <message>
-        <source>Start loop offset</source>
-        <translation type="obsolete">Deslocamento do início da repetição</translation>
-    </message>
-    <message>
-        <source>End loop offset</source>
-        <translation type="obsolete">Deslocamento do fim da repetição</translation>
-    </message>
-    <message>
-        <source>Mod LFO → pitch (c)</source>
-        <translation type="obsolete">Mod LFO → altura (c)</translation>
-    </message>
-    <message>
-        <source>Vib LFO → pitch (c)</source>
-        <translation type="obsolete">Vib LFO → altura (c)</translation>
-    </message>
-    <message>
-        <source>Mod env → pitch (c)</source>
-        <translation type="obsolete">Mod env → altura (c)</translation>
-    </message>
-    <message>
-        <source>Filter, frequency (Hz)</source>
-        <translation type="obsolete">Filtro, frequência (Hz)</translation>
-    </message>
-    <message>
-        <source>Filter, frequency (×)</source>
-        <translation type="obsolete">Filtro, frequência (×)</translation>
-    </message>
-    <message>
-        <source>Filter, resonance (dB)</source>
-        <translation type="obsolete">Filtro, ressonância (dB)</translation>
-    </message>
-    <message>
-        <source>Mod LFO → filter (c)</source>
-        <translation type="obsolete">Mod LFO → filtro (c)</translation>
-    </message>
-    <message>
-        <source>Mod env → filter (c)</source>
-        <translation type="obsolete">Mod env → filtro (c)</translation>
-    </message>
-    <message>
-        <source>Mod LFO → volume (dB)</source>
-        <translation type="obsolete">Mod LFO → volume (dB)</translation>
-    </message>
-    <message>
-        <source>Chorus (%)</source>
-        <translation type="obsolete">Chorus (%)</translation>
-    </message>
-    <message>
-        <source>Reverb (%)</source>
-        <translation type="obsolete">Reverberação (%)</translation>
-    </message>
-    <message>
-        <source>Pan [-50;50]</source>
-        <translation type="obsolete">Balanço [-50;50]</translation>
-    </message>
-    <message>
-        <source>Pan [-100;100]</source>
-        <translation type="obsolete">Balanço [-100;100]</translation>
-    </message>
-    <message>
-        <source>Mod LFO delay (s)</source>
-        <translatorcomment>english formulations may be kept...</translatorcomment>
-        <translation type="obsolete">Mod LFO delay (s)</translation>
-    </message>
-    <message>
-        <source>Mod LFO delay (×)</source>
-        <translation type="obsolete">Mod LFO delay (×)</translation>
-    </message>
-    <message>
-        <source>Mod LFO freq (Hz)</source>
-        <translation type="obsolete">Mod LFO freq (Hz)</translation>
-    </message>
-    <message>
-        <source>Mod LFO freq (×)</source>
-        <translation type="obsolete">Mod LFO freq (×)</translation>
-    </message>
-    <message>
-        <source>Vib LFO delay (s)</source>
-        <translation type="obsolete">Vib LFO delay (s)</translation>
-    </message>
-    <message>
-        <source>Vib LFO delay (×)</source>
-        <translation type="obsolete">Vib LFO delay (×)</translation>
-    </message>
-    <message>
-        <source>Vib LFO freq (Hz)</source>
-        <translation type="obsolete">Vib LFO freq (Hz)</translation>
-    </message>
-    <message>
-        <source>Vib LFO freq (×)</source>
-        <translation type="obsolete">Vib LFO freq (×)</translation>
-    </message>
-    <message>
-        <source>Mod env delay (s)</source>
-        <translation type="obsolete">Mod env delay (s)</translation>
-    </message>
-    <message>
-        <source>Mod env delay (×)</source>
-        <translation type="obsolete">Mod env delay (×)</translation>
-    </message>
-    <message>
-        <source>Mod env attack (s)</source>
-        <translation type="obsolete">Mod env attack (s)</translation>
-    </message>
-    <message>
-        <source>Mod env attack (×)</source>
-        <translation type="obsolete">Mod env attack (×)</translation>
-    </message>
-    <message>
-        <source>Mod env hold (s)</source>
-        <translation type="obsolete">Mod env hold (s)</translation>
-    </message>
-    <message>
-        <source>Mod env hold (×)</source>
-        <translation type="obsolete">Mod env hold (×)</translation>
-    </message>
-    <message>
-        <source>Mod env decay (s)</source>
-        <translation type="obsolete">Mod env decay (s)</translation>
-    </message>
-    <message>
-        <source>Mod env decay (×)</source>
-        <translation type="obsolete">Mod env decay (×)</translation>
-    </message>
-    <message>
-        <source>Mod env sustain (%)</source>
-        <translation type="obsolete">Mod env sustain (%)</translation>
-    </message>
-    <message>
-        <source>Mod env release (s)</source>
-        <translation type="obsolete">Mod env release (s)</translation>
-    </message>
-    <message>
-        <source>Mod env release (×)</source>
-        <translation type="obsolete">Mod env release (×)</translation>
-    </message>
-    <message>
-        <source>Key → Mod env hold (c)</source>
-        <translation type="obsolete">Nota → Mod env hold (c)</translation>
-    </message>
-    <message>
-        <source>Key → Mod env decay (c)</source>
-        <translation type="obsolete">Nota → Mod env decay (c)</translation>
-    </message>
-    <message>
-        <source>Vol env delay (s)</source>
-        <translation type="obsolete">Vol env delay (s)</translation>
-    </message>
-    <message>
-        <source>Vol env delay (×)</source>
-        <translation type="obsolete">Vol env delay (×)</translation>
-    </message>
-    <message>
-        <source>Vol env decay (s)</source>
-        <translation type="obsolete">Vol env decay (s)</translation>
-    </message>
-    <message>
-        <source>Vol env decay (×)</source>
-        <translation type="obsolete">Vol env decay (×)</translation>
-    </message>
-    <message>
-        <source>Vol env attack (s)</source>
-        <translation type="obsolete">Vol env attack (s)</translation>
-    </message>
-    <message>
-        <source>Vol env attack (×)</source>
-        <translation type="obsolete">Vol env attack (×)</translation>
-    </message>
-    <message>
-        <source>Vol env hold (s)</source>
-        <translation type="obsolete">Vol env hold (s)</translation>
-    </message>
-    <message>
-        <source>Vol env hold (×)</source>
-        <translation type="obsolete">Vol env hold (×)</translation>
-    </message>
-    <message>
-        <source>Vol env sustain (dB)</source>
-        <oldsource>Vol env sustain (%)</oldsource>
-        <translation type="obsolete">Vol env sustain (dB)</translation>
-    </message>
-    <message>
-        <source>Vol env release (s)</source>
-        <translation type="obsolete">Vol env release (s)</translation>
-    </message>
-    <message>
-        <source>Vol env release (×)</source>
-        <translation type="obsolete">Vol env release (×)</translation>
-    </message>
-    <message>
-        <source>Key → Vol env hold (c)</source>
-        <translation type="obsolete">Nota → Vol env hold (c)</translation>
-    </message>
-    <message>
-        <source>Key → Vol env decay (c)</source>
-        <translation type="obsolete">Nota → Vol env decay (c)</translation>
-    </message>
-    <message>
-        <source>Key range</source>
-        <translation type="obsolete">Alcance de notas</translation>
-    </message>
-    <message>
-        <source>Velocity range</source>
-        <translation type="obsolete">Alcance de velocidade</translation>
-    </message>
-    <message>
-        <source>Fixed key</source>
-        <translation type="obsolete">Nota fixa</translation>
-    </message>
-    <message>
-        <source>Fixed velocity</source>
-        <translation type="obsolete">Velocidade fixa</translation>
-    </message>
-    <message>
-        <source>Attenuation (dB)</source>
-        <translation type="obsolete">Atenuação (dB)</translation>
-    </message>
-    <message>
-        <source>Tuning (semi-tones)</source>
-        <translation type="obsolete">Afinação (semitons)</translation>
-    </message>
-    <message>
-        <source>Tuning (cents)</source>
-        <translation type="obsolete">Afinação (cents)</translation>
-    </message>
-    <message>
-        <source>Loop playback</source>
-        <translation type="obsolete">Tocar com repetição</translation>
-    </message>
-    <message>
-        <source>Tuning (scale)</source>
-        <translation type="obsolete">Afinação (escala)</translation>
-    </message>
-    <message>
-        <source>Exclusive class</source>
-        <translation type="obsolete">Classe exclusiva</translation>
-    </message>
-    <message>
-        <source>Root key</source>
-        <translation type="obsolete">Nota base</translation>
-    </message>
-</context>
-<context>
     <name>PageInst</name>
     <message>
         <location filename="editor/pageinst.ui" line="141"/>
@@ -4790,10 +2435,6 @@ Dividindo o arquivo em vários sf2 pode resolver o problema.</translation>
 <context>
     <name>PageOverview</name>
     <message>
-        <source>Name</source>
-        <translation type="obsolete">Nome</translation>
-    </message>
-    <message>
         <location filename="editor/overview/pageoverview.cpp" line="83"/>
         <source>elements</source>
         <translation type="unfinished"></translation>
@@ -4806,10 +2447,6 @@ Dividindo o arquivo em vários sf2 pode resolver o problema.</translation>
 </context>
 <context>
     <name>PageOverviewInst</name>
-    <message>
-        <source>Instrument list</source>
-        <translation type="obsolete">Lista de instrumentos</translation>
-    </message>
     <message>
         <location filename="editor/overview/pageoverviewinst.cpp" line="32"/>
         <source>Instruments</source>
@@ -4906,10 +2543,6 @@ reprodução</translation>
 <context>
     <name>PageOverviewPrst</name>
     <message>
-        <source>Preset list</source>
-        <translation type="obsolete">Lista de predefinições</translation>
-    </message>
-    <message>
         <location filename="editor/overview/pageoverviewprst.cpp" line="32"/>
         <source>Presets</source>
         <translation>Predefinições</translation>
@@ -4975,10 +2608,6 @@ de velocidade</translation>
 </context>
 <context>
     <name>PageOverviewSmpl</name>
-    <message>
-        <source>Sample list</source>
-        <translation type="obsolete">Lista de amostras</translation>
-    </message>
     <message>
         <location filename="editor/overview/pageoverviewsmpl.cpp" line="38"/>
         <source>Used</source>
@@ -5490,981 +3119,91 @@ inválida</translation>
 <context>
     <name>PageTable</name>
     <message>
-        <location filename="editor/pagetable.cpp" line="107"/>
+        <location filename="editor/pagetable.cpp" line="111"/>
         <source>Global</source>
         <translation>Global</translation>
     </message>
     <message>
-        <location filename="editor/pagetable.cpp" line="505"/>
-        <location filename="editor/pagetable.cpp" line="527"/>
-        <location filename="editor/pagetable.cpp" line="1573"/>
-        <location filename="editor/pagetable.cpp" line="1639"/>
+        <location filename="editor/pagetable.cpp" line="521"/>
+        <location filename="editor/pagetable.cpp" line="543"/>
+        <location filename="editor/pagetable.cpp" line="1589"/>
+        <location filename="editor/pagetable.cpp" line="1655"/>
         <source>Modulator</source>
         <translation>Modulador</translation>
     </message>
     <message>
-        <location filename="editor/pagetable.cpp" line="507"/>
+        <location filename="editor/pagetable.cpp" line="523"/>
         <source>Link (invalid)</source>
         <translation>Relação (inválida)</translation>
     </message>
     <message>
-        <location filename="editor/pagetable.cpp" line="559"/>
+        <location filename="editor/pagetable.cpp" line="575"/>
         <source>Copy / duplicate modulators</source>
         <translation>Copiar / duplicar moduladores</translation>
     </message>
     <message>
-        <location filename="editor/pagetable.cpp" line="562"/>
+        <location filename="editor/pagetable.cpp" line="578"/>
         <source>Duplicate modulators toward...</source>
         <translation>Duplicar moduladores em direção à...</translation>
     </message>
     <message>
-        <location filename="editor/pagetable.cpp" line="563"/>
-        <location filename="editor/pagetable.cpp" line="574"/>
+        <location filename="editor/pagetable.cpp" line="579"/>
+        <location filename="editor/pagetable.cpp" line="590"/>
         <source>Copy all modulators</source>
         <translation>Copiar todos moduladores</translation>
     </message>
     <message>
-        <location filename="editor/pagetable.cpp" line="567"/>
+        <location filename="editor/pagetable.cpp" line="583"/>
         <source>Duplicate the selection toward...</source>
         <translation>Duplicar seleção em direção à...</translation>
     </message>
     <message>
-        <location filename="editor/pagetable.cpp" line="568"/>
-        <location filename="editor/pagetable.cpp" line="576"/>
+        <location filename="editor/pagetable.cpp" line="584"/>
+        <location filename="editor/pagetable.cpp" line="592"/>
         <source>Copy the selected modulators</source>
         <translation>Copiar os moduladores selecionados</translation>
     </message>
     <message>
-        <location filename="editor/pagetable.cpp" line="1888"/>
+        <location filename="editor/pagetable.cpp" line="1904"/>
         <source>Forbidden action:</source>
         <translation>Ação proibida:</translation>
     </message>
     <message>
-        <location filename="editor/pagetable.cpp" line="1898"/>
-        <location filename="editor/pagetable.cpp" line="1907"/>
-        <location filename="editor/pagetable.cpp" line="2386"/>
-        <location filename="editor/pagetable.cpp" line="2395"/>
+        <location filename="editor/pagetable.cpp" line="1914"/>
+        <location filename="editor/pagetable.cpp" line="1923"/>
+        <location filename="editor/pagetable.cpp" line="2402"/>
+        <location filename="editor/pagetable.cpp" line="2411"/>
         <source>Warning</source>
         <translation>Atenção</translation>
     </message>
     <message>
-        <location filename="editor/pagetable.cpp" line="1899"/>
+        <location filename="editor/pagetable.cpp" line="1915"/>
         <source>offsets cannot be modulated in a preset.</source>
         <translation>deslocamentos não podem ser modulados em uma predefinição.</translation>
     </message>
     <message>
-        <location filename="editor/pagetable.cpp" line="1908"/>
+        <location filename="editor/pagetable.cpp" line="1924"/>
         <source>%1 cannot be modulated in a preset.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&quot; cannot be modulated in a preset.</source>
-        <translation type="obsolete">&quot; não pode ser modulado em uma predefinição.</translation>
-    </message>
-    <message>
-        <location filename="editor/pagetable.cpp" line="2387"/>
+        <location filename="editor/pagetable.cpp" line="2403"/>
         <source>An instrument comprising no samples is not compatible with this tool.</source>
         <translation>Um instrumento sem amostras não é compatível com esta ferramenta.</translation>
     </message>
     <message>
-        <location filename="editor/pagetable.cpp" line="2388"/>
+        <location filename="editor/pagetable.cpp" line="2404"/>
         <source>A preset comprising no instruments is not compatible with this tool.</source>
         <translation>Uma predefinição sem instrumentos não é compatível com esta ferramenta.</translation>
     </message>
     <message>
-        <location filename="editor/pagetable.cpp" line="2395"/>
+        <location filename="editor/pagetable.cpp" line="2411"/>
         <source>The keyrange of all divisions must be specified.</source>
         <translation>O alcance de notas de todas divisões deve ser especificado.</translation>
-    </message>
-    <message>
-        <source>The instrument contains no samples.</source>
-        <translation type="obsolete">O instrumento não contém amostras.</translation>
-    </message>
-    <message>
-        <source>The preset contains no instruments.</source>
-        <translation type="obsolete">A predefinição não possui instrumentos.</translation>
-    </message>
-    <message>
-        <source>No keyrange specified for the instrument.</source>
-        <translation type="obsolete">Nenhum alcance de notas especificado para o instrumento.</translation>
-    </message>
-    <message>
-        <source>No keyrange specified for the preset.</source>
-        <translatorcomment>Nenhum alcance de notas especificado para a predefinição.</translatorcomment>
-        <translation type="obsolete">No keyrange specified for the preset.</translation>
-    </message>
-</context>
-<context>
-    <name>Page_Inst</name>
-    <message>
-        <source>Table</source>
-        <translation type="obsolete">Tabela</translation>
-    </message>
-    <message>
-        <source>Ranges</source>
-        <translation type="obsolete">Alcances</translation>
-    </message>
-    <message>
-        <source>Envelopes</source>
-        <translation type="obsolete">Invólucros</translation>
-    </message>
-    <message>
-        <source>Key range</source>
-        <translation type="obsolete">Alcance de nota</translation>
-    </message>
-    <message>
-        <source>Velocity range</source>
-        <translation type="obsolete">Alcance de velocidade</translation>
-    </message>
-    <message>
-        <source>Attenuation (dB)</source>
-        <translation type="obsolete">Atenuação (dB)</translation>
-    </message>
-    <message>
-        <source>Pan [-50;50]</source>
-        <translation type="obsolete">Balanço [-50;50]</translation>
-    </message>
-    <message>
-        <source>Loop playback</source>
-        <translation type="obsolete">Repetir reprodução</translation>
-    </message>
-    <message>
-        <source>Root key</source>
-        <translation type="obsolete">Nota base</translation>
-    </message>
-    <message>
-        <source>Tuning (semi-tones)</source>
-        <translation type="obsolete">Afinação (semitons)</translation>
-    </message>
-    <message>
-        <source>Tuning (cents)</source>
-        <translation type="obsolete">Afinação (cents)</translation>
-    </message>
-    <message>
-        <source>Tuning (scale)</source>
-        <translation type="obsolete">Afinação (escala)</translation>
-    </message>
-    <message>
-        <source>Filter, frequency (Hz)</source>
-        <translation type="obsolete">Filtro, frequência (Hz)</translation>
-    </message>
-    <message>
-        <source>Filter, resonance (dB)</source>
-        <translation type="obsolete">Filtro, ressonância (dB)</translation>
-    </message>
-    <message>
-        <source>Vol env delay (s)</source>
-        <translation type="obsolete">Vol env delay (s)</translation>
-    </message>
-    <message>
-        <source>Vol env attack (s)</source>
-        <translation type="obsolete">Vol env attack (s)</translation>
-    </message>
-    <message>
-        <source>Vol env hold (s)</source>
-        <translation type="obsolete">Vol env hold (s)</translation>
-    </message>
-    <message>
-        <source>Vol env decay (s)</source>
-        <translation type="obsolete">Vol env decay (s)</translation>
-    </message>
-    <message>
-        <source>Vol env sustain (dB)</source>
-        <translation type="obsolete">Vol env sustain (dB)</translation>
-    </message>
-    <message>
-        <source>Vol env release (s)</source>
-        <translation type="obsolete">Vol env release (s)</translation>
-    </message>
-    <message>
-        <source>Key → Vol env hold (c)</source>
-        <oldsource>Vol env note → hold (c)</oldsource>
-        <translation type="obsolete">Nota → Vol env hold (c)</translation>
-    </message>
-    <message>
-        <source>Key → Vol env decay (c)</source>
-        <oldsource>Vol env note → decay (c)</oldsource>
-        <translation type="obsolete">Nota → Vol env decay (c)</translation>
-    </message>
-    <message>
-        <source>Mod env delay (s)</source>
-        <translation type="obsolete">Mod env delay (s)</translation>
-    </message>
-    <message>
-        <source>Mod env attack (s)</source>
-        <translation type="obsolete">Mod env attack (s)</translation>
-    </message>
-    <message>
-        <source>Mod env hold (s)</source>
-        <translation type="obsolete">Mod env hold (s)</translation>
-    </message>
-    <message>
-        <source>Mod env decay (s)</source>
-        <translation type="obsolete">Mod env decay (s)</translation>
-    </message>
-    <message>
-        <source>Mod env sustain (%)</source>
-        <translation type="obsolete">Mod env sustain (%)</translation>
-    </message>
-    <message>
-        <source>Mod env release (s)</source>
-        <translation type="obsolete">Mod env release (s)</translation>
-    </message>
-    <message>
-        <source>Mod env → pitch (c)</source>
-        <translation type="obsolete">Mod env → altura (c)</translation>
-    </message>
-    <message>
-        <source>Mod env → filter (c)</source>
-        <translation type="obsolete">Mod env → filtro (c)</translation>
-    </message>
-    <message>
-        <source>Key → Mod env hold (c)</source>
-        <oldsource>Mod env note → hold (c)</oldsource>
-        <translation type="obsolete">Nota → Mod env hold (c)</translation>
-    </message>
-    <message>
-        <source>Key → Mod env decay (c)</source>
-        <oldsource>Mod env note → decay (c)</oldsource>
-        <translation type="obsolete">Nota → Mod env decay (c)</translation>
-    </message>
-    <message>
-        <source>Mod LFO delay (s)</source>
-        <translation type="obsolete">Mod LFO delay (s)</translation>
-    </message>
-    <message>
-        <source>Mod LFO freq (Hz)</source>
-        <translation type="obsolete">Mod LFO freq (Hz)</translation>
-    </message>
-    <message>
-        <source>Mod LFO → pitch (c)</source>
-        <translation type="obsolete">Mod LFO → altura (c)</translation>
-    </message>
-    <message>
-        <source>Mod LFO → filter (c)</source>
-        <translation type="obsolete">Mod LFO → filtro (c)</translation>
-    </message>
-    <message>
-        <source>Mod LFO → volume (dB)</source>
-        <translation type="obsolete">Mod LFO → volume (dB)</translation>
-    </message>
-    <message>
-        <source>Vib LFO delay (s)</source>
-        <translation type="obsolete">Vib LFO delay (s)</translation>
-    </message>
-    <message>
-        <source>Vib LFO freq (Hz)</source>
-        <translation type="obsolete">Vib LFO freq (Hz)</translation>
-    </message>
-    <message>
-        <source>Vib LFO → pitch (c)</source>
-        <translation type="obsolete">Vib LFO → altura (c)</translation>
-    </message>
-    <message>
-        <source>Exclusive class</source>
-        <translation type="obsolete">Classe exclusiva</translation>
-    </message>
-    <message>
-        <source>Chorus (%)</source>
-        <translation type="obsolete">Chorus (%)</translation>
-    </message>
-    <message>
-        <source>Reverb (%)</source>
-        <translation type="obsolete">Reverberação (%)</translation>
-    </message>
-    <message>
-        <source>Fixed key</source>
-        <translation type="obsolete">Nota fixa</translation>
-    </message>
-    <message>
-        <source>Fixed velocity</source>
-        <translation type="obsolete">Velocidade fixa</translation>
-    </message>
-    <message>
-        <source>Sample start offset</source>
-        <oldsource>Offset début sample</oldsource>
-        <translation type="obsolete">Deslocamento no início da amostra</translation>
-    </message>
-    <message>
-        <source>Sample end offset</source>
-        <oldsource>Offset fin sample</oldsource>
-        <translation type="obsolete">Deslocamento no fim da amostra</translation>
-    </message>
-    <message>
-        <source>Start loop offset</source>
-        <translation type="obsolete">Deslocamento no início da repetição</translation>
-    </message>
-    <message>
-        <source>End loop offset</source>
-        <translation type="obsolete">Deslocamento no fim da repetição</translation>
-    </message>
-    <message>
-        <source>Global</source>
-        <translation type="obsolete">Global</translation>
-    </message>
-    <message>
-        <source>Delete a modulator</source>
-        <translation type="obsolete">Deletar um modulador</translation>
-    </message>
-    <message>
-        <source>Copy modulators</source>
-        <translation type="obsolete">Copiar moduladores</translation>
-    </message>
-    <message>
-        <source>Paste the copied modulators</source>
-        <translation type="obsolete">Colar os moduladores copiados</translation>
-    </message>
-    <message>
-        <source>Modulators</source>
-        <translation type="obsolete">Moduladores</translation>
-    </message>
-    <message>
-        <source>Add a modulator</source>
-        <translation type="obsolete">Adicionar um modulador</translation>
-    </message>
-    <message>
-        <source>Source</source>
-        <translation type="obsolete">Fonte</translation>
-    </message>
-    <message>
-        <source>Amount</source>
-        <translation type="obsolete">Quantidade</translation>
-    </message>
-    <message>
-        <source>Destination</source>
-        <translation type="obsolete">Destino</translation>
-    </message>
-    <message>
-        <source>Source / Amount</source>
-        <translation type="obsolete">Fonte / Quantidade</translation>
-    </message>
-    <message>
-        <source>Abs. value</source>
-        <translation type="obsolete">Valor abs.</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;Instrument is not linked to any preset.&lt;/b&gt;</source>
-        <oldsource>&lt;b&gt;Instrument liÃ© Ã  aucun preset.&lt;/b&gt;</oldsource>
-        <translation type="obsolete">&lt;b&gt;Instrumentos não tem relação com nenhuma predefinição.&lt;/b&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;Instrument linked to preset: &lt;/b&gt;</source>
-        <oldsource>&lt;b&gt;Instrument liÃ© au preset : &lt;/b&gt;</oldsource>
-        <translation type="obsolete">&lt;b&gt;Instrumento não relacionado à predefinição: &lt;/b&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;Instrument linked to presets: &lt;/b&gt;</source>
-        <oldsource>&lt;b&gt;Instrument liÃ© aux presets : &lt;/b&gt;</oldsource>
-        <translation type="obsolete">&lt;b&gt;Instrumento relacionado às predefinições: &lt;/b&gt;</translation>
-    </message>
-    <message>
-        <source>Warning</source>
-        <translation type="obsolete">Atenção</translation>
-    </message>
-    <message>
-        <source>The instrument contains no samples.</source>
-        <translation type="obsolete">O instrumento não contém amostras.</translation>
-    </message>
-    <message>
-        <source>Creation </source>
-        <translation type="obsolete">Criação </translation>
-    </message>
-    <message>
-        <source>Cancel</source>
-        <translation type="obsolete">Cancelar</translation>
-    </message>
-    <message>
-        <source>untitled</source>
-        <translation type="obsolete">sem nome</translation>
-    </message>
-</context>
-<context>
-    <name>Page_Prst</name>
-    <message>
-        <source>Bank</source>
-        <translation type="obsolete">Banco</translation>
-    </message>
-    <message>
-        <source>Preset</source>
-        <translation type="obsolete">Predefinição</translation>
-    </message>
-    <message>
-        <source>(percussion)</source>
-        <translation type="obsolete">(percussão)</translation>
-    </message>
-    <message>
-        <source>Key range</source>
-        <translation type="obsolete">Alcance de notas</translation>
-    </message>
-    <message>
-        <source>Velocity range</source>
-        <translation type="obsolete">Alcance de velocidade</translation>
-    </message>
-    <message>
-        <source>Attenuation (dB)</source>
-        <translation type="obsolete">Atenuação (dB)</translation>
-    </message>
-    <message>
-        <source>Pan [-100;100]</source>
-        <oldsource>Balance [-50;50]</oldsource>
-        <translation type="obsolete">Balanço [-100;100]</translation>
-    </message>
-    <message>
-        <source>Tuning (semi-tones)</source>
-        <translation type="obsolete">Afinação (semitons)</translation>
-    </message>
-    <message>
-        <source>Tuning (cents)</source>
-        <translation type="obsolete">Afinação (cents)</translation>
-    </message>
-    <message>
-        <source>Tuning (scale)</source>
-        <translation type="obsolete">Afinação (escala)</translation>
-    </message>
-    <message>
-        <source>Filter, frequency (×)</source>
-        <oldsource>Filtre, fréquence (Hz)</oldsource>
-        <translation type="obsolete">Filtro, frequência (×)</translation>
-    </message>
-    <message>
-        <source>Filter, resonance (dB)</source>
-        <translation type="obsolete">Filtro, ressonância (dB)</translation>
-    </message>
-    <message>
-        <source>Vol env delay (×)</source>
-        <oldsource>Vol env delay (s)</oldsource>
-        <translation type="obsolete">Vol env delay (×)</translation>
-    </message>
-    <message>
-        <source>Vol env attack (×)</source>
-        <oldsource>Vol env attack (s)</oldsource>
-        <translation type="obsolete">Vol env attack (×)</translation>
-    </message>
-    <message>
-        <source>Vol env hold (×)</source>
-        <oldsource>Vol env hold (s)</oldsource>
-        <translation type="obsolete">Vol env hold (×)</translation>
-    </message>
-    <message>
-        <source>Vol env decay (×)</source>
-        <oldsource>Vol env decay (s)</oldsource>
-        <translation type="obsolete">Vol env decay (×)</translation>
-    </message>
-    <message>
-        <source>Vol env sustain (dB)</source>
-        <translation type="obsolete">Vol env sustain (dB)</translation>
-    </message>
-    <message>
-        <source>Vol env release (×)</source>
-        <oldsource>Vol env release (s)</oldsource>
-        <translation type="obsolete">Vol env release (×)</translation>
-    </message>
-    <message>
-        <source>Key → Vol env hold (c)</source>
-        <oldsource>Vol env note → hold (c)</oldsource>
-        <translation type="obsolete">Nota → Vol env hold (c)</translation>
-    </message>
-    <message>
-        <source>Key → Vol env decay (c)</source>
-        <oldsource>Vol env note → decay (c)</oldsource>
-        <translation type="obsolete">Nota → Vol env decay (c)</translation>
-    </message>
-    <message>
-        <source>Mod env delay (×)</source>
-        <oldsource>Mod env delay (s)</oldsource>
-        <translation type="obsolete">Mod env delay (×)</translation>
-    </message>
-    <message>
-        <source>Mod env attack (×)</source>
-        <oldsource>Mod env attack (s)</oldsource>
-        <translation type="obsolete">Mod env attack (×)</translation>
-    </message>
-    <message>
-        <source>Mod env hold (×)</source>
-        <oldsource>Mod env hold (s)</oldsource>
-        <translation type="obsolete">Mod env hold (×)</translation>
-    </message>
-    <message>
-        <source>Mod env decay (×)</source>
-        <oldsource>Mod env decay (s)</oldsource>
-        <translation type="obsolete">Mod env decay (×)</translation>
-    </message>
-    <message>
-        <source>Mod env sustain (%)</source>
-        <translation type="obsolete">Mod env sustain (%)</translation>
-    </message>
-    <message>
-        <source>Mod env release (×)</source>
-        <oldsource>Mod env release (s)</oldsource>
-        <translation type="obsolete">Mod env release (×)</translation>
-    </message>
-    <message>
-        <source>Mod env → pitch (c)</source>
-        <translation type="obsolete">Mod env → altura (c)</translation>
-    </message>
-    <message>
-        <source>Mod env → filter (c)</source>
-        <translation type="obsolete">Mod env → filtro (c)</translation>
-    </message>
-    <message>
-        <source>Key → Mod env hold (c)</source>
-        <oldsource>Mod env note → hold (c)</oldsource>
-        <translation type="obsolete">Nota → Mod env hold (c)</translation>
-    </message>
-    <message>
-        <source>Key → Mod env decay (c)</source>
-        <oldsource>Mod env note → decay (c)</oldsource>
-        <translation type="obsolete">Nota → Mod env decay (c)</translation>
-    </message>
-    <message>
-        <source>Mod LFO delay (×)</source>
-        <oldsource>Mod LFO delay (s)</oldsource>
-        <translation type="obsolete">Mod LFO delay (×)</translation>
-    </message>
-    <message>
-        <source>Mod LFO freq (×)</source>
-        <oldsource>Mod LFO freq (Hz)</oldsource>
-        <translation type="obsolete">Mod LFO freq (×)</translation>
-    </message>
-    <message>
-        <source>Mod LFO → pitch (c)</source>
-        <translation type="obsolete">Mod LFO → altura (c)</translation>
-    </message>
-    <message>
-        <source>Mod LFO → filter (c)</source>
-        <translation type="obsolete">Mod LFO → filtro (c)</translation>
-    </message>
-    <message>
-        <source>Mod LFO → volume (dB)</source>
-        <translation type="obsolete">Mod LFO → volume (dB)</translation>
-    </message>
-    <message>
-        <source>Vib LFO delay (×)</source>
-        <oldsource>Vib LFO delay (s)</oldsource>
-        <translation type="obsolete">Vib LFO delay (×)</translation>
-    </message>
-    <message>
-        <source>Vib LFO freq (×)</source>
-        <oldsource>Vib LFO freq (Hz)</oldsource>
-        <translation type="obsolete">Vib LFO freq (×)</translation>
-    </message>
-    <message>
-        <source>Vib LFO → pitch (c)</source>
-        <translation type="obsolete">Vib LFO → altura (c)</translation>
-    </message>
-    <message>
-        <source>Chorus (%)</source>
-        <translation type="obsolete">Chorus (%)</translation>
-    </message>
-    <message>
-        <source>Reverb (%)</source>
-        <translation type="obsolete">Reverberação (%)</translation>
-    </message>
-    <message>
-        <source>Global</source>
-        <translation type="obsolete">Global</translation>
-    </message>
-    <message>
-        <source>Copy modulators</source>
-        <translation type="obsolete">Copiar moduladores</translation>
-    </message>
-    <message>
-        <source>Paste the copied modulators</source>
-        <translation type="obsolete">Colar os moduladores copiados</translation>
-    </message>
-    <message>
-        <source>Add a modulator</source>
-        <translation type="obsolete">Adicionar um modulador</translation>
-    </message>
-    <message>
-        <source>Delete a modulator</source>
-        <translation type="obsolete">Deletar um modulador</translation>
-    </message>
-    <message>
-        <source>Modulators</source>
-        <translation type="obsolete">Moduladores</translation>
-    </message>
-    <message>
-        <source>Table</source>
-        <translation type="obsolete">Tabela</translation>
-    </message>
-    <message>
-        <source>Ranges</source>
-        <translation type="obsolete">Alcances</translation>
-    </message>
-    <message>
-        <source>Source</source>
-        <translation type="obsolete">Fonte</translation>
-    </message>
-    <message>
-        <source>Amount</source>
-        <translation type="obsolete">Quantidade</translation>
-    </message>
-    <message>
-        <source>Destination</source>
-        <translation type="obsolete">Destino</translation>
-    </message>
-    <message>
-        <source>Source / Amount</source>
-        <translation type="obsolete">Fonte / Quantidade</translation>
-    </message>
-    <message>
-        <source>Abs. value</source>
-        <translation type="obsolete">Valor abs.</translation>
-    </message>
-</context>
-<context>
-    <name>Page_Sf2</name>
-    <message>
-        <source>Name</source>
-        <translation type="obsolete">Nome</translation>
-    </message>
-    <message>
-        <source>Author</source>
-        <translation type="obsolete">Autor</translation>
-    </message>
-    <message>
-        <source>24 bits</source>
-        <translation type="obsolete">24 bits</translation>
-    </message>
-    <message>
-        <source>Copyright</source>
-        <translation type="obsolete">Licença</translation>
-    </message>
-    <message>
-        <source>Date</source>
-        <translation type="obsolete">Data</translation>
-    </message>
-    <message>
-        <source>Current date</source>
-        <translation type="obsolete">Data atual</translation>
-    </message>
-    <message>
-        <source>Product</source>
-        <translation type="obsolete">Produto</translation>
-    </message>
-    <message>
-        <source>Comments</source>
-        <translation type="obsolete">Comentários</translation>
-    </message>
-    <message>
-        <source>Samples</source>
-        <translation type="obsolete">Amostras</translation>
-    </message>
-    <message>
-        <source>Soundfont version</source>
-        <translation type="obsolete">Versão da soundfont</translation>
-    </message>
-    <message>
-        <source>Sound engine</source>
-        <translation type="obsolete">Dispositivo de som</translation>
-    </message>
-    <message>
-        <source>ROM name and version</source>
-        <oldsource>Version ROM</oldsource>
-        <translation type="obsolete">Nome e versão da ROM</translation>
-    </message>
-    <message>
-        <source>File</source>
-        <translation type="obsolete">Arquivo</translation>
-    </message>
-    <message>
-        <source>Number of parameters (instruments)</source>
-        <translation type="obsolete">Número de parâmetros (instrumentos)</translation>
-    </message>
-    <message>
-        <source>Number of parameters (presets)</source>
-        <translation type="obsolete">Número de parâmetros (predefinições)</translation>
-    </message>
-    <message>
-        <source>Editing software</source>
-        <oldsource>Logiciel d&apos;édition</oldsource>
-        <translation type="obsolete">Edição de software</translation>
-    </message>
-    <message>
-        <source>Sample number</source>
-        <oldsource>Nombre de samples</oldsource>
-        <translation type="obsolete">Número de amostras</translation>
-    </message>
-    <message>
-        <source>Instrument number</source>
-        <translation type="obsolete">Número de instrumentos</translation>
-    </message>
-    <message>
-        <source>Preset number</source>
-        <translation type="obsolete">Número de predefinições</translation>
-    </message>
-    <message>
-        <source> (unused: </source>
-        <oldsource> (inutilisés: </oldsource>
-        <translatorcomment>plural</translatorcomment>
-        <translation type="obsolete"> (não usados: </translation>
-    </message>
-</context>
-<context>
-    <name>Page_Smpl</name>
-    <message>
-        <source>&lt;b&gt;Frequency&lt;/b&gt;</source>
-        <translation type="obsolete">&lt;b&gt;Frequências&lt;/b&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Information&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="obsolete">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Informação&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-    </message>
-    <message>
-        <source>Reset</source>
-        <translation type="obsolete">Reiniciar</translation>
-    </message>
-    <message>
-        <source>Apply</source>
-        <translation type="obsolete">Aplicar</translation>
-    </message>
-    <message>
-        <source>Use the full length of the sample as loop</source>
-        <translation type="obsolete">Usar a amostra inteira como loop</translation>
-    </message>
-    <message>
-        <source>Use the estimated pitch and correction as values</source>
-        <translation type="obsolete">Usar altura estimada e a correção como valores</translation>
-    </message>
-    <message>
-        <source>Play</source>
-        <translation type="obsolete">Reproduzir</translation>
-    </message>
-    <message>
-        <source>loop</source>
-        <translation type="obsolete">repetir</translation>
-    </message>
-    <message>
-        <source>stereo</source>
-        <translation type="obsolete">estéreo</translation>
-    </message>
-    <message>
-        <source>sinus</source>
-        <translation type="obsolete">sinus</translation>
-    </message>
-    <message>
-        <source>Size</source>
-        <translation type="obsolete">Tamanho</translation>
-    </message>
-    <message>
-        <source>Loop</source>
-        <translation type="obsolete">Repetição</translation>
-    </message>
-    <message>
-        <source>Root key</source>
-        <translation type="obsolete">Nota base</translation>
-    </message>
-    <message>
-        <source>Correction (cents)</source>
-        <translation type="obsolete">Correção (cents)</translation>
-    </message>
-    <message>
-        <source>Sample rate</source>
-        <translation type="obsolete">Taxa de amostragem</translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Equalizer (±15 dB)&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="obsolete">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Equalizador (±15 dB)&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-    </message>
-    <message>
-        <source>Type</source>
-        <translation type="obsolete">Tipo</translation>
-    </message>
-    <message>
-        <source>Link</source>
-        <translation type="obsolete">Relação</translation>
-    </message>
-    <message>
-        <source>(min) </source>
-        <translation type="obsolete">(mín) </translation>
-    </message>
-    <message>
-        <source>mono</source>
-        <translation type="obsolete">mono</translation>
-    </message>
-    <message>
-        <source>right</source>
-        <translation type="obsolete">direita</translation>
-    </message>
-    <message>
-        <source>left</source>
-        <translation type="obsolete">esquerda</translation>
-    </message>
-    <message>
-        <source>link</source>
-        <translation type="obsolete">relação</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;Sample is not linked to any instrument.&lt;/b&gt;</source>
-        <oldsource>&lt;b&gt;Sample lié à aucun instrument.&lt;/b&gt;</oldsource>
-        <translation type="obsolete">&lt;b&gt;Amostra não está relacionada a nenhum instrumento.&lt;/b&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;Sample linked to the instrument: &lt;/b&gt;</source>
-        <oldsource>&lt;b&gt;Sample lié à l&apos;instrument : &lt;/b&gt;</oldsource>
-        <translation type="obsolete">&lt;b&gt;Amostra relacionada ao instrumento: &lt;/b&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;Sample linked to the instruments: &lt;/b&gt;</source>
-        <oldsource>&lt;b&gt;Sample lié aux instruments : &lt;/b&gt;</oldsource>
-        <translation type="obsolete">&lt;b&gt;Amostra relacionada aos instrumentos: &lt;/b&gt;</translation>
-    </message>
-    <message>
-        <source>Information</source>
-        <translation type="obsolete">Informação</translation>
-    </message>
-    <message>
-        <source>Change successfully applied to the different samples</source>
-        <translation type="obsolete">Alteração aplicada com sucesso a várias amostras</translation>
-    </message>
-    <message>
-        <source>The sample &quot;</source>
-        <translation type="obsolete">A amostra &quot;</translation>
-    </message>
-    <message>
-        <source>&quot; couldn&apos;t be looped.</source>
-        <translation type="obsolete">&quot; não pôde ser repetida.</translation>
-    </message>
-    <message>
-        <source>The following samples couldn&apos;t be looped:</source>
-        <translation type="obsolete">As seguintes amostras não puderam ser repetidas:</translation>
-    </message>
-    <message>
-        <source>Possible reasons: too short or too turbulent.</source>
-        <translation type="obsolete">Possíveis motivos: muito curta ou muito ruidosa.</translation>
-    </message>
-    <message>
-        <source>Warning</source>
-        <translation type="obsolete">Atenção</translation>
-    </message>
-    <message>
-        <source>This tool can only be used with stereo samples.</source>
-        <translation type="obsolete">Esta ferramenta só pode ser usada com amostras estéreo.</translation>
-    </message>
-    <message>
-        <source>Tuning in semitones:</source>
-        <translation type="obsolete">Afinação em semitons:</translation>
-    </message>
-    <message>
-        <source>Stop</source>
-        <oldsource>arrêt</oldsource>
-        <translation type="obsolete">Parar</translation>
-    </message>
-    <message>
-        <source>Processing </source>
-        <translation type="obsolete">Tratamento  </translation>
-    </message>
-    <message>
-        <source>Equalizer (±15 dB)</source>
-        <translation type="obsolete">Equalizador (±15 dB)</translation>
-    </message>
-    <message>
-        <source>s</source>
-        <comment>unit for seconds</comment>
-        <translation type="obsolete">s</translation>
-    </message>
-    <message>
-        <source>Cancel</source>
-        <translation type="obsolete">Cancelar</translation>
-    </message>
-    <message>
-        <source>Transposition</source>
-        <translation type="obsolete">Transposição</translation>
-    </message>
-</context>
-<context>
-    <name>Pile_sf2</name>
-    <message>
-        <source>untitled</source>
-        <translation type="obsolete">sem nome</translation>
-    </message>
-</context>
-<context>
-    <name>QApplication</name>
-    <message>
-        <source>Custom</source>
-        <translation type="obsolete">Personalizado</translation>
-    </message>
-    <message>
-        <source>Default</source>
-        <translation type="obsolete">Padrão</translation>
-    </message>
-    <message>
-        <source>Gnome</source>
-        <translation type="obsolete">Gnome</translation>
-    </message>
-    <message>
-        <source>Dark, blue</source>
-        <translation type="obsolete">Escuro, azul</translation>
-    </message>
-    <message>
-        <source>Dark, orange</source>
-        <translation type="obsolete">Escuro, laranja</translation>
-    </message>
-    <message>
-        <source>Dark, green</source>
-        <translation type="obsolete">Escuro, verde</translation>
-    </message>
-    <message>
-        <source>Dark, yellow</source>
-        <translation type="obsolete">Escuro, amarelo</translation>
-    </message>
-    <message>
-        <source>Aqua</source>
-        <translation type="obsolete">Aqua</translation>
-    </message>
-    <message>
-        <source>Spring</source>
-        <translation type="obsolete">Primavera</translation>
-    </message>
-    <message>
-        <source>Windows 10</source>
-        <translation type="obsolete">Windows 10</translation>
-    </message>
-    <message>
-        <source>Ubuntu</source>
-        <translation type="obsolete">Ubuntu</translation>
     </message>
 </context>
 <context>
     <name>QObject</name>
-    <message>
-        <source>&lt;b&gt;Global parameters are already filled.&lt;/b&gt;</source>
-        <translation type="obsolete">&lt;b&gt;Parâmetro globais já foram preenchidos.&lt;/b&gt;</translation>
-    </message>
-    <message>
-        <source>The global division will not be copied.</source>
-        <translation type="obsolete">A divisão global não será copiada.</translation>
-    </message>
-    <message>
-        <source>&amp;Ok</source>
-        <translation type="obsolete">&amp;Ok</translation>
-    </message>
-    <message>
-        <source>Ok, &amp;disable this message</source>
-        <translation type="obsolete">Ok, &amp;desativar essa mensagem</translation>
-    </message>
-    <message>
-        <source>The sample &quot;</source>
-        <oldsource>l&apos;échantillon « </oldsource>
-        <translation type="obsolete">A amostra &quot;</translation>
-    </message>
-    <message>
-        <source>&quot; already exists.&lt;br/&gt;Replace?</source>
-        <oldsource>&amp;#160;» existe déjà.&lt;br /&gt;Que faire ?</oldsource>
-        <translation type="obsolete">&quot; já existe.&lt;br/&gt;Substituir?</translation>
-    </message>
-    <message>
-        <source>The instrument &quot;</source>
-        <oldsource>L&apos;instrument «&amp;#160;</oldsource>
-        <translation type="obsolete">O instrumento &quot;</translation>
-    </message>
-    <message>
-        <source>The preset &quot;</source>
-        <oldsource>Le preset «&amp;#160;</oldsource>
-        <translation type="obsolete">A predefinição &quot;</translation>
-    </message>
     <message>
         <location filename="core/output/outputfactory.cpp" line="116"/>
         <source>Save a soundfont</source>
@@ -6490,10 +3229,6 @@ inválida</translation>
         <location filename="core/sound.cpp" line="746"/>
         <source>Warning</source>
         <translation>Atenção</translation>
-    </message>
-    <message>
-        <source>No preset available.</source>
-        <translation type="obsolete">Nenhuma predefinição disponível.</translation>
     </message>
     <message>
         <location filename="core/sampleloader.cpp" line="71"/>
@@ -6574,14 +3309,6 @@ inválida</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Error in Sound::getData.</source>
-        <translation type="obsolete">Erro em Sound::getData.</translation>
-    </message>
-    <message>
-        <source>Cannot open the file.</source>
-        <translation type="obsolete">Não foi possível abrir o arquivo</translation>
-    </message>
-    <message>
         <location filename="core/sound.cpp" line="667"/>
         <location filename="core/sound.cpp" line="675"/>
         <location filename="core/sound.cpp" line="681"/>
@@ -6596,129 +3323,6 @@ inválida</translation>
         <translation>sem nome</translation>
     </message>
     <message>
-        <source>// Sfz exported from sf2 by Polyphone</source>
-        <oldsource>// Sfz exported from sf2 by Polyphone</oldsource>
-        <translation type="obsolete">// Sfz exportado de um sf2 por Polyphone</translation>
-    </message>
-    <message>
-        <source>// Name     :</source>
-        <translatorcomment>count the spaces so that the &quot;:&quot; are aligned</translatorcomment>
-        <translation type="obsolete">// Nome     :</translation>
-    </message>
-    <message>
-        <source>// Author   :</source>
-        <translation type="obsolete">// Autor   :</translation>
-    </message>
-    <message>
-        <source>// Copyright:</source>
-        <translation type="obsolete">// Licença:</translation>
-    </message>
-    <message>
-        <source>// Date     :</source>
-        <translation type="obsolete">// Data     :</translation>
-    </message>
-    <message>
-        <source>// Comment  :</source>
-        <translation type="obsolete">// Comentário  :</translation>
-    </message>
-    <message>
-        <source>other</source>
-        <translation type="obsolete">outro</translation>
-    </message>
-    <message>
-        <source>Piano</source>
-        <translation type="obsolete">Piano</translation>
-    </message>
-    <message>
-        <source>Chromatic percussion</source>
-        <translation type="obsolete">Percussão cromática</translation>
-    </message>
-    <message>
-        <source>Organ</source>
-        <translation type="obsolete">Órgão</translation>
-    </message>
-    <message>
-        <source>Guitar</source>
-        <translation type="obsolete">Guitarra</translation>
-    </message>
-    <message>
-        <source>Bass</source>
-        <translation type="obsolete">Baixo</translation>
-    </message>
-    <message>
-        <source>Strings</source>
-        <translation type="obsolete">Cordas</translation>
-    </message>
-    <message>
-        <source>Ensemble</source>
-        <translation type="obsolete">Orquestra</translation>
-    </message>
-    <message>
-        <source>Brass</source>
-        <translation type="obsolete">Metais</translation>
-    </message>
-    <message>
-        <source>Reed</source>
-        <translation type="obsolete">Sopro</translation>
-    </message>
-    <message>
-        <source>Pipe</source>
-        <translation type="obsolete">Flauta</translation>
-    </message>
-    <message>
-        <source>Synth lead</source>
-        <translation type="obsolete">Synth lead</translation>
-    </message>
-    <message>
-        <source>Synth pad</source>
-        <translation type="obsolete">Synth pad</translation>
-    </message>
-    <message>
-        <source>Synth effects</source>
-        <translation type="obsolete">Efeitos de Synth</translation>
-    </message>
-    <message>
-        <source>Ethnic</source>
-        <translation type="obsolete">Étnico</translation>
-    </message>
-    <message>
-        <source>Percussive</source>
-        <translation type="obsolete">Percussivo</translation>
-    </message>
-    <message>
-        <source>Sound effects</source>
-        <translation type="obsolete">Efeitos sonoros</translation>
-    </message>
-    <message>
-        <source>Percussion kit</source>
-        <translation type="obsolete">Kit de percussão</translation>
-    </message>
-    <message>
-        <source>Created by </source>
-        <translatorcomment>mind the final space</translatorcomment>
-        <translation type="obsolete">Criado por </translation>
-    </message>
-    <message>
-        <source>Contributors </source>
-        <translation type="obsolete">Contribuidores </translation>
-    </message>
-    <message>
-        <source>Translated by </source>
-        <translation type="obsolete">Traduzido por </translation>
-    </message>
-    <message>
-        <source>Sfz import</source>
-        <translation type="obsolete">Importação de SFZ</translation>
-    </message>
-    <message>
-        <source>Sf2 imported from sfz by Polyphone</source>
-        <translation type="obsolete">SF2 importado de um SFZ por Polyphone</translation>
-    </message>
-    <message>
-        <source>Extraction in progress...</source>
-        <translation type="obsolete">Extração em progresso...</translation>
-    </message>
-    <message>
         <location filename="editor/graphics/graphicslegenditem.cpp" line="110"/>
         <location filename="editor/graphics/graphicslegenditem2.cpp" line="66"/>
         <source>Key range:</source>
@@ -6729,34 +3333,6 @@ inválida</translation>
         <location filename="editor/graphics/graphicslegenditem2.cpp" line="69"/>
         <source>Velocity range:</source>
         <translation>Alcance de velocidade:</translation>
-    </message>
-    <message>
-        <source>C</source>
-        <translation type="obsolete">C</translation>
-    </message>
-    <message>
-        <source>D</source>
-        <translation type="obsolete">D</translation>
-    </message>
-    <message>
-        <source>E</source>
-        <translation type="obsolete">E</translation>
-    </message>
-    <message>
-        <source>F</source>
-        <translation type="obsolete">F</translation>
-    </message>
-    <message>
-        <source>G</source>
-        <translation type="obsolete">G</translation>
-    </message>
-    <message>
-        <source>A</source>
-        <translation type="obsolete">A</translation>
-    </message>
-    <message>
-        <source>B</source>
-        <translation type="obsolete">B</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_about.cpp" line="122"/>
@@ -9012,64 +5588,9 @@ download content</source>
     </message>
 </context>
 <context>
-    <name>Tree</name>
-    <message>
-        <source>New &amp;instrument...</source>
-        <translation type="obsolete">Novo instrumento...</translation>
-    </message>
-    <message>
-        <source>New &amp;preset...</source>
-        <translation type="obsolete">Nova predefinição...</translation>
-    </message>
-    <message>
-        <source>Replace by...</source>
-        <translation type="obsolete">Substituir por...</translation>
-    </message>
-    <message>
-        <source>Bind to...</source>
-        <translation type="obsolete">Ligar à...</translation>
-    </message>
-    <message>
-        <source>New sample...</source>
-        <translation type="obsolete">Nova amostra...</translation>
-    </message>
-    <message>
-        <source>Copy</source>
-        <translation type="obsolete">Copiar</translation>
-    </message>
-    <message>
-        <source>Paste</source>
-        <translation type="obsolete">Colar</translation>
-    </message>
-    <message>
-        <source>Delete</source>
-        <translation type="obsolete">Deletar</translation>
-    </message>
-    <message>
-        <source>Rename...</source>
-        <translation type="obsolete">Renomear...</translation>
-    </message>
-    <message>
-        <source>Close file</source>
-        <translation type="obsolete">Fechar arquivo</translation>
-    </message>
-    <message>
-        <source>Display all</source>
-        <translation type="obsolete">Mostrar tudo</translation>
-    </message>
-    <message>
-        <source>&amp;Rename...</source>
-        <translation type="obsolete">&amp;Renomear...</translation>
-    </message>
-    <message>
-        <source>Bulk &amp;rename...</source>
-        <translation type="obsolete">&amp;Renomeação em massa...</translation>
-    </message>
-</context>
-<context>
     <name>TreeView</name>
     <message>
-        <location filename="editor/tree/treeview.cpp" line="839"/>
+        <location filename="editor/tree/treeview.cpp" line="841"/>
         <source>instrument</source>
         <translation type="unfinished"></translation>
     </message>

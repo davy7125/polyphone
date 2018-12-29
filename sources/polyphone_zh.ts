@@ -385,877 +385,316 @@
 <context>
     <name>ConfManager</name>
     <message>
-        <source>D</source>
-        <translation type="obsolete">D</translation>
-    </message>
-    <message>
-        <source>C</source>
-        <translation type="obsolete">C</translation>
-    </message>
-    <message>
-        <source>G</source>
-        <translation type="obsolete">G</translation>
-    </message>
-    <message>
-        <source>B</source>
-        <translation type="obsolete">B</translation>
-    </message>
-    <message>
-        <source>,</source>
-        <translation type="obsolete">,</translation>
-    </message>
-    <message>
-        <source>2</source>
-        <translation type="obsolete">2</translation>
-    </message>
-    <message>
-        <source>3</source>
-        <translation type="obsolete">3</translation>
-    </message>
-    <message>
-        <source>E</source>
-        <translation type="obsolete">E</translation>
-    </message>
-    <message>
-        <source>R</source>
-        <translation type="obsolete">右</translation>
-    </message>
-    <message>
-        <source>5</source>
-        <translation type="obsolete">5</translation>
-    </message>
-    <message>
-        <source>6</source>
-        <translation type="obsolete">6</translation>
-    </message>
-    <message>
-        <source>7</source>
-        <translation type="obsolete">7</translation>
-    </message>
-    <message>
-        <source>Shift+&lt;</source>
-        <translation type="obsolete">Shift+&lt;</translation>
-    </message>
-    <message>
-        <source>Shift+@</source>
-        <translation type="obsolete">Shift+@</translation>
-    </message>
-    <message>
-        <source>Shift+#</source>
-        <translation type="obsolete">Shift+#</translation>
-    </message>
-    <message>
-        <source>Shift+%</source>
-        <translation type="obsolete">Shift+%</translation>
-    </message>
-    <message>
-        <source>Shift+^</source>
-        <translation type="obsolete">Shift+^</translation>
-    </message>
-    <message>
-        <source>Shift+&amp;</source>
-        <translation type="obsolete">Shift+&amp;</translation>
-    </message>
-    <message>
-        <location filename="context/confmanager.cpp" line="141"/>
+        <location filename="context/confmanager.cpp" line="142"/>
         <source>Z</source>
         <comment>first key mapping for bottom left C</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="142"/>
+        <location filename="context/confmanager.cpp" line="143"/>
         <source>S</source>
         <comment>first key mapping for bottom C#</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="143"/>
+        <location filename="context/confmanager.cpp" line="144"/>
         <source>X</source>
         <comment>first key mapping for bottom D</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="144"/>
+        <location filename="context/confmanager.cpp" line="145"/>
         <source>D</source>
         <comment>first key mapping for bottom D#</comment>
         <translation type="unfinished">D</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="145"/>
+        <location filename="context/confmanager.cpp" line="146"/>
         <source>C</source>
         <comment>first key mapping for bottom E</comment>
         <translation type="unfinished">C</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="146"/>
+        <location filename="context/confmanager.cpp" line="147"/>
         <source>V</source>
         <comment>first key mapping for bottom F</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="147"/>
+        <location filename="context/confmanager.cpp" line="148"/>
         <source>G</source>
         <comment>first key mapping for bottom F#</comment>
         <translation type="unfinished">G</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="148"/>
+        <location filename="context/confmanager.cpp" line="149"/>
         <source>B</source>
         <comment>first key mapping for bottom G</comment>
         <translation type="unfinished">B</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="149"/>
+        <location filename="context/confmanager.cpp" line="150"/>
         <source>H</source>
         <comment>first key mapping for bottom G#</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="150"/>
+        <location filename="context/confmanager.cpp" line="151"/>
         <source>N</source>
         <comment>first key mapping for bottom A</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="151"/>
+        <location filename="context/confmanager.cpp" line="152"/>
         <source>J</source>
         <comment>first key mapping for bottom A#</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="152"/>
+        <location filename="context/confmanager.cpp" line="153"/>
         <source>M</source>
         <comment>first key mapping for bottom B</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="153"/>
+        <location filename="context/confmanager.cpp" line="154"/>
         <source>,</source>
         <comment>first key mapping for bottom right C</comment>
         <translation type="unfinished">,</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="159"/>
+        <location filename="context/confmanager.cpp" line="160"/>
         <source>Q</source>
         <comment>first key mapping for upper left C</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="160"/>
+        <location filename="context/confmanager.cpp" line="161"/>
         <source>2</source>
         <comment>first key mapping for upper C#</comment>
         <translation type="unfinished">2</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="161"/>
+        <location filename="context/confmanager.cpp" line="162"/>
         <source>W</source>
         <comment>first key mapping for upper D</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="162"/>
+        <location filename="context/confmanager.cpp" line="163"/>
         <source>3</source>
         <comment>first key mapping for upper D#</comment>
         <translation type="unfinished">3</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="163"/>
+        <location filename="context/confmanager.cpp" line="164"/>
         <source>E</source>
         <comment>first key mapping for upper E</comment>
         <translation type="unfinished">E</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="164"/>
+        <location filename="context/confmanager.cpp" line="165"/>
         <source>R</source>
         <comment>first key mapping for upper F</comment>
         <translation type="unfinished">右</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="165"/>
+        <location filename="context/confmanager.cpp" line="166"/>
         <source>5</source>
         <comment>first key mapping for upper F#</comment>
         <translation type="unfinished">5</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="166"/>
+        <location filename="context/confmanager.cpp" line="167"/>
         <source>T</source>
         <comment>first key mapping for upper G</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="167"/>
+        <location filename="context/confmanager.cpp" line="168"/>
         <source>6</source>
         <comment>first key mapping for upper G#</comment>
         <translation type="unfinished">6</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="168"/>
+        <location filename="context/confmanager.cpp" line="169"/>
         <source>Y</source>
         <comment>first key mapping for upper A</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="169"/>
+        <location filename="context/confmanager.cpp" line="170"/>
         <source>7</source>
         <comment>first key mapping for upper A#</comment>
         <translation type="unfinished">7</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="170"/>
+        <location filename="context/confmanager.cpp" line="171"/>
         <source>U</source>
         <comment>first key mapping for upper B</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="171"/>
+        <location filename="context/confmanager.cpp" line="172"/>
         <source>I</source>
         <comment>first key mapping for upper right C</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="177"/>
+        <location filename="context/confmanager.cpp" line="178"/>
         <source>Shift+Z</source>
         <comment>second key mapping for bottom left C</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="178"/>
+        <location filename="context/confmanager.cpp" line="179"/>
         <source>Shift+S</source>
         <comment>second key mapping for bottom C#</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="179"/>
+        <location filename="context/confmanager.cpp" line="180"/>
         <source>Shift+X</source>
         <comment>second key mapping for bottom D</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="180"/>
+        <location filename="context/confmanager.cpp" line="181"/>
         <source>Shift+D</source>
         <comment>second key mapping for bottom D#</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="181"/>
+        <location filename="context/confmanager.cpp" line="182"/>
         <source>Shift+C</source>
         <comment>second key mapping for bottom E</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="182"/>
+        <location filename="context/confmanager.cpp" line="183"/>
         <source>Shift+V</source>
         <comment>second key mapping for bottom F</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="183"/>
+        <location filename="context/confmanager.cpp" line="184"/>
         <source>Shift+G</source>
         <comment>second key mapping for bottom F#</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="184"/>
+        <location filename="context/confmanager.cpp" line="185"/>
         <source>Shift+B</source>
         <comment>second key mapping for bottom G</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="185"/>
+        <location filename="context/confmanager.cpp" line="186"/>
         <source>Shift+H</source>
         <comment>second key mapping for bottom G#</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="186"/>
+        <location filename="context/confmanager.cpp" line="187"/>
         <source>Shift+N</source>
         <comment>second key mapping for bottom A</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="187"/>
+        <location filename="context/confmanager.cpp" line="188"/>
         <source>Shift+J</source>
         <comment>second key mapping for bottom A#</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="188"/>
+        <location filename="context/confmanager.cpp" line="189"/>
         <source>Shift+M</source>
         <comment>second key mapping for bottom B</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="189"/>
+        <location filename="context/confmanager.cpp" line="190"/>
         <source>Shift+&lt;</source>
         <comment>second key mapping for bottom right C</comment>
         <translation type="unfinished">Shift+&lt;</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="195"/>
+        <location filename="context/confmanager.cpp" line="196"/>
         <source>Shift+Q</source>
         <comment>second key mapping for upper left C</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="196"/>
+        <location filename="context/confmanager.cpp" line="197"/>
         <source>Shift+@</source>
         <comment>second key mapping for upper C#</comment>
         <translation type="unfinished">Shift+@</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="197"/>
+        <location filename="context/confmanager.cpp" line="198"/>
         <source>Shift+W</source>
         <comment>second key mapping for upper D</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="198"/>
+        <location filename="context/confmanager.cpp" line="199"/>
         <source>Shift+#</source>
         <comment>second key mapping for upper D#</comment>
         <translation type="unfinished">Shift+#</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="199"/>
+        <location filename="context/confmanager.cpp" line="200"/>
         <source>Shift+E</source>
         <comment>second key mapping for upper E</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="200"/>
+        <location filename="context/confmanager.cpp" line="201"/>
         <source>Shift+R</source>
         <comment>second key mapping for upper F</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="201"/>
+        <location filename="context/confmanager.cpp" line="202"/>
         <source>Shift+%</source>
         <comment>second key mapping for upper F#</comment>
         <translation type="unfinished">Shift+%</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="202"/>
+        <location filename="context/confmanager.cpp" line="203"/>
         <source>Shift+T</source>
         <comment>second key mapping for upper G</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="203"/>
+        <location filename="context/confmanager.cpp" line="204"/>
         <source>Shift+^</source>
         <comment>second key mapping for upper G#</comment>
         <translation type="unfinished">Shift+^</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="204"/>
+        <location filename="context/confmanager.cpp" line="205"/>
         <source>Shift+Y</source>
         <comment>second key mapping for upper A</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="205"/>
+        <location filename="context/confmanager.cpp" line="206"/>
         <source>Shift+&amp;</source>
         <comment>second key mapping for upper A#</comment>
         <translation type="unfinished">Shift+&amp;</translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="206"/>
+        <location filename="context/confmanager.cpp" line="207"/>
         <source>Shift+U</source>
         <comment>second key mapping for upper B</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="context/confmanager.cpp" line="207"/>
+        <location filename="context/confmanager.cpp" line="208"/>
         <source>Shift+I</source>
         <comment>second key mapping for upper right C</comment>
         <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Config</name>
-    <message>
-        <source>Settings</source>
-        <translation type="obsolete">设置</translation>
-    </message>
-    <message>
-        <source>Audio backend</source>
-        <translation type="obsolete">音频后端</translation>
-    </message>
-    <message>
-        <source>General</source>
-        <translation type="obsolete">通用</translation>
-    </message>
-    <message>
-        <source>Midi input</source>
-        <translation type="obsolete">MIDI 输入</translation>
-    </message>
-    <message>
-        <source>trim to loop</source>
-        <translation type="obsolete">裁剪以循环</translation>
-    </message>
-    <message>
-        <source>remove blank at start</source>
-        <translation type="obsolete">删除开头空白部分</translation>
-    </message>
-    <message>
-        <source>change linked sample</source>
-        <oldsource>répercuter les modifications si stéréo</oldsource>
-        <translation type="obsolete">修改链接的样本</translation>
-    </message>
-    <message>
-        <source>Stereo editing</source>
-        <oldsource>Édition des samples</oldsource>
-        <translation type="obsolete">双声道编辑</translation>
-    </message>
-    <message>
-        <source>Buffer size</source>
-        <oldsource>Taille tampon</oldsource>
-        <translation type="obsolete">缓冲大小</translation>
-    </message>
-    <message>
-        <source>Input / Output</source>
-        <translation type="obsolete">输入/输出</translation>
-    </message>
-    <message>
-        <source>Middle C → 60, then 61</source>
-        <oldsource>Numérique (do central → 60)</oldsource>
-        <translation type="obsolete">中央 C → 60 ，之后为 61</translation>
-    </message>
-    <message>
-        <source>Middle C → C3, then C♯3</source>
-        <oldsource>Texte (do central → C3)</oldsource>
-        <translation type="obsolete">中央 C → C3 ，之后为 C♯3</translation>
-    </message>
-    <message>
-        <source>Middle C → C3, then D♭3</source>
-        <oldsource>Texte (do central → C4)</oldsource>
-        <translation type="obsolete">中央 C → C3 ，之后为 D♭3</translation>
-    </message>
-    <message>
-        <source>Middle C → C4, then C♯4</source>
-        <oldsource>Texte (do central → C5)</oldsource>
-        <translation type="obsolete">中央 C → C4 ，之后为 C♯4</translation>
-    </message>
-    <message>
-        <source>Key names</source>
-        <translation type="obsolete">音符名格式</translation>
-    </message>
-    <message>
-        <source>Synth</source>
-        <translation type="obsolete">合成</translation>
-    </message>
-    <message>
-        <source>Reverb</source>
-        <oldsource>Reverbération</oldsource>
-        <translation type="obsolete">混响</translation>
-    </message>
-    <message>
-        <source>Level</source>
-        <translation type="obsolete">大小</translation>
-    </message>
-    <message>
-        <source>Room</source>
-        <translation type="obsolete">体积</translation>
-    </message>
-    <message>
-        <source>Width</source>
-        <translation type="obsolete">宽度</translation>
-    </message>
-    <message>
-        <source>Damp</source>
-        <translation type="obsolete">湿度</translation>
-    </message>
-    <message>
-        <source>Chorus</source>
-        <translation type="obsolete">和声</translation>
-    </message>
-    <message>
-        <source>Frequency</source>
-        <translation type="obsolete">频率</translation>
-    </message>
-    <message>
-        <source>Depth</source>
-        <translation type="obsolete">深度</translation>
-    </message>
-    <message>
-        <source>Reset</source>
-        <translation type="obsolete">重设</translation>
-    </message>
-    <message>
-        <source>Options</source>
-        <translation type="obsolete">选项</translation>
-    </message>
-    <message>
-        <source>Toolbar</source>
-        <translation type="obsolete">工具栏</translation>
-    </message>
-    <message>
-        <source>Available actions</source>
-        <translation type="obsolete">可用操作</translation>
-    </message>
-    <message>
-        <source>Keyboard</source>
-        <translation type="obsolete">键盘</translation>
-    </message>
-    <message>
-        <source>Gain (dB)</source>
-        <translation type="obsolete">增益(dB)</translation>
-    </message>
-    <message>
-        <source>Wav file import</source>
-        <translation type="obsolete">WAV 文件导入</translation>
-    </message>
-    <message>
-        <source>First C</source>
-        <translation type="obsolete">起始 C</translation>
-    </message>
-    <message>
-        <source>Octave #1</source>
-        <translation type="obsolete">音阶 #1</translation>
-    </message>
-    <message>
-        <source>Interface</source>
-        <translation type="obsolete">界面</translation>
-    </message>
-    <message>
-        <source>Middle C → C4, then D♭4</source>
-        <translation type="obsolete">中央 C → C4 ，之后为 D♭4</translation>
-    </message>
-    <message>
-        <source>Middle C → C5, then C♯5</source>
-        <translation type="obsolete">中央 C → C5 ，之后为 C♯5</translation>
-    </message>
-    <message>
-        <source>Middle C → C5, then D♭5</source>
-        <translation type="obsolete">中央 C → C5 ，之后为 D♭5</translation>
-    </message>
-    <message>
-        <source>Language</source>
-        <translation type="obsolete">语言</translation>
-    </message>
-    <message>
-        <source>Selection</source>
-        <translation type="obsolete">选择</translation>
-    </message>
-    <message>
-        <source>Alternate background</source>
-        <translation type="obsolete">交替背景</translation>
-    </message>
-    <message>
-        <source>Text</source>
-        <translation type="obsolete">文本</translation>
-    </message>
-    <message>
-        <source>Window</source>
-        <translation type="obsolete">窗口</translation>
-    </message>
-    <message>
-        <source>Background</source>
-        <translation type="obsolete">背景</translation>
-    </message>
-    <message>
-        <source>Button</source>
-        <translation type="obsolete">按钮</translation>
-    </message>
-    <message>
-        <source>Color theme</source>
-        <translation type="obsolete">颜色主题</translation>
-    </message>
-    <message>
-        <source>List and table</source>
-        <translation type="obsolete">表格和列表</translation>
-    </message>
-    <message>
-        <source>Octave #2</source>
-        <translation type="obsolete">音阶 #2</translation>
-    </message>
-    <message>
-        <source>Octave #3</source>
-        <translation type="obsolete">音阶 #3</translation>
-    </message>
-    <message>
-        <source>Octave #4</source>
-        <translation type="obsolete">音阶 #4</translation>
-    </message>
-    <message>
-        <source>C</source>
-        <translation type="obsolete">C</translation>
-    </message>
-    <message>
-        <source>C#</source>
-        <translation type="obsolete">C#</translation>
-    </message>
-    <message>
-        <source>D</source>
-        <translation type="obsolete">D</translation>
-    </message>
-    <message>
-        <source>D#</source>
-        <translation type="obsolete">D#</translation>
-    </message>
-    <message>
-        <source>E</source>
-        <translation type="obsolete">E</translation>
-    </message>
-    <message>
-        <source>F</source>
-        <translation type="obsolete">F</translation>
-    </message>
-    <message>
-        <source>F#</source>
-        <translation type="obsolete">F#</translation>
-    </message>
-    <message>
-        <source>G</source>
-        <translation type="obsolete">G</translation>
-    </message>
-    <message>
-        <source>G#</source>
-        <translation type="obsolete">G#</translation>
-    </message>
-    <message>
-        <source>A</source>
-        <translation type="obsolete">A</translation>
-    </message>
-    <message>
-        <source>A#</source>
-        <translation type="obsolete">A#</translation>
-    </message>
-    <message>
-        <source>B</source>
-        <translation type="obsolete">B</translation>
-    </message>
-    <message>
-        <source>Default velocity</source>
-        <translation type="obsolete">默认力度</translation>
-    </message>
-    <message>
-        <source>Close</source>
-        <translation type="obsolete">关闭</translation>
-    </message>
-    <message>
-        <source>Information</source>
-        <translation type="obsolete">信息</translation>
-    </message>
-    <message>
-        <source>This modification will be applied during the next start of the software.</source>
-        <oldsource>La modification sera prise en compte lors du prochain dÃ©marrage du logiciel.</oldsource>
-        <translation type="obsolete">设置将在下次启动程序时生效。</translation>
-    </message>
-    <message>
-        <source>Choose a color</source>
-        <translation type="obsolete">选择一种颜色</translation>
-    </message>
-    <message>
-        <source>---- separator ----</source>
-        <translation type="obsolete">---- 分割线 ----</translation>
-    </message>
-    <message>
-        <source>z</source>
-        <translatorcomment>default mapping of the keyboard</translatorcomment>
-        <translation type="obsolete">z</translation>
-    </message>
-    <message>
-        <source>s</source>
-        <translation type="obsolete">s</translation>
-    </message>
-    <message>
-        <source>x</source>
-        <translation type="obsolete">x</translation>
-    </message>
-    <message>
-        <source>d</source>
-        <translation type="obsolete">d</translation>
-    </message>
-    <message>
-        <source>c</source>
-        <translation type="obsolete">c</translation>
-    </message>
-    <message>
-        <source>v</source>
-        <translation type="obsolete">v</translation>
-    </message>
-    <message>
-        <source>g</source>
-        <translation type="obsolete">g</translation>
-    </message>
-    <message>
-        <source>b</source>
-        <translation type="obsolete">b</translation>
-    </message>
-    <message>
-        <source>h</source>
-        <translation type="obsolete">h</translation>
-    </message>
-    <message>
-        <source>n</source>
-        <translation type="obsolete">n</translation>
-    </message>
-    <message>
-        <source>j</source>
-        <translation type="obsolete">j</translation>
-    </message>
-    <message>
-        <source>m</source>
-        <translation type="obsolete">m</translation>
-    </message>
-    <message>
-        <source>,</source>
-        <translation type="obsolete">,</translation>
-    </message>
-    <message>
-        <source>q</source>
-        <translation type="obsolete">q</translation>
-    </message>
-    <message>
-        <source>2</source>
-        <translation type="obsolete">2</translation>
-    </message>
-    <message>
-        <source>w</source>
-        <translation type="obsolete">w</translation>
-    </message>
-    <message>
-        <source>3</source>
-        <translation type="obsolete">3</translation>
-    </message>
-    <message>
-        <source>e</source>
-        <translation type="obsolete">e</translation>
-    </message>
-    <message>
-        <source>r</source>
-        <translation type="obsolete">r</translation>
-    </message>
-    <message>
-        <source>5</source>
-        <translation type="obsolete">5</translation>
-    </message>
-    <message>
-        <source>t</source>
-        <translation type="obsolete">t</translation>
-    </message>
-    <message>
-        <source>6</source>
-        <translation type="obsolete">6</translation>
-    </message>
-    <message>
-        <source>y</source>
-        <translation type="obsolete">y</translation>
-    </message>
-    <message>
-        <source>7</source>
-        <translation type="obsolete">7</translation>
-    </message>
-    <message>
-        <source>u</source>
-        <translation type="obsolete">u</translation>
-    </message>
-    <message>
-        <source>i</source>
-        <translation type="obsolete">i</translation>
-    </message>
-    <message>
-        <source>Shift+z</source>
-        <translation type="obsolete">Shift+z</translation>
-    </message>
-    <message>
-        <source>Shift+s</source>
-        <translation type="obsolete">Shift+s</translation>
-    </message>
-    <message>
-        <source>Shift+x</source>
-        <translation type="obsolete">Shift+x</translation>
-    </message>
-    <message>
-        <source>Shift+d</source>
-        <translation type="obsolete">Shift+d</translation>
-    </message>
-    <message>
-        <source>Shift+c</source>
-        <translation type="obsolete">Shift+c</translation>
-    </message>
-    <message>
-        <source>Shift+v</source>
-        <translation type="obsolete">Shift+v</translation>
-    </message>
-    <message>
-        <source>Shift+g</source>
-        <translation type="obsolete">Shift+g</translation>
-    </message>
-    <message>
-        <source>Shift+b</source>
-        <translation type="obsolete">Shift+b</translation>
-    </message>
-    <message>
-        <source>Shift+h</source>
-        <translation type="obsolete">Shift+h</translation>
-    </message>
-    <message>
-        <source>Shift+n</source>
-        <translation type="obsolete">Shift+n</translation>
-    </message>
-    <message>
-        <source>Shift+j</source>
-        <translation type="obsolete">Shift+j</translation>
-    </message>
-    <message>
-        <source>Shift+m</source>
-        <translation type="obsolete">Shift+m</translation>
-    </message>
-    <message>
-        <source>Shift+&lt;</source>
-        <translation type="obsolete">Shift+&lt;</translation>
-    </message>
-    <message>
-        <source>Shift+q</source>
-        <translation type="obsolete">Shift+q</translation>
-    </message>
-    <message>
-        <source>Shift+@</source>
-        <translation type="obsolete">Shift+@</translation>
-    </message>
-    <message>
-        <source>Shift+w</source>
-        <translation type="obsolete">Shift+w</translation>
-    </message>
-    <message>
-        <source>Shift+#</source>
-        <translation type="obsolete">Shift+#</translation>
-    </message>
-    <message>
-        <source>Shift+e</source>
-        <translation type="obsolete">Shift+e</translation>
-    </message>
-    <message>
-        <source>Shift+r</source>
-        <translation type="obsolete">Shift+r</translation>
-    </message>
-    <message>
-        <source>Shift+%</source>
-        <translation type="obsolete">Shift+%</translation>
-    </message>
-    <message>
-        <source>Shift+t</source>
-        <translation type="obsolete">Shift+t</translation>
-    </message>
-    <message>
-        <source>Shift+^</source>
-        <translation type="obsolete">Shift+^</translation>
-    </message>
-    <message>
-        <source>Shift+y</source>
-        <translation type="obsolete">Shift+y</translation>
-    </message>
-    <message>
-        <source>Shift+&amp;</source>
-        <translation type="obsolete">Shift+&amp;</translation>
-    </message>
-    <message>
-        <source>Shift+u</source>
-        <translation type="obsolete">Shift+u</translation>
-    </message>
-    <message>
-        <source>Shift+i</source>
-        <translation type="obsolete">Shift+i</translation>
     </message>
 </context>
 <context>
@@ -1434,10 +873,6 @@
         <translation>选择</translation>
     </message>
     <message>
-        <source>Alternate background</source>
-        <translation type="vanished">交替背景</translation>
-    </message>
-    <message>
         <location filename="context/interface/configsectioninterface.ui" line="245"/>
         <source>Text</source>
         <translation>文本</translation>
@@ -1456,10 +891,6 @@
         <location filename="context/interface/configsectioninterface.ui" line="420"/>
         <source>Button</source>
         <translation>按钮</translation>
-    </message>
-    <message>
-        <source>Color theme</source>
-        <translation type="vanished">颜色主题</translation>
     </message>
     <message>
         <location filename="context/interface/configsectioninterface.ui" line="558"/>
@@ -1797,12 +1228,12 @@ repository</source>
         <translation>关于</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_about.ui" line="172"/>
+        <location filename="dialogs/dialog_about.ui" line="177"/>
         <source>Credit</source>
         <translation>制作人员</translation>
     </message>
     <message>
-        <location filename="dialogs/dialog_about.ui" line="195"/>
+        <location filename="dialogs/dialog_about.ui" line="200"/>
         <source>Close</source>
         <translation>关闭</translation>
     </message>
@@ -1812,18 +1243,9 @@ repository</source>
         <translation>Polyphone</translation>
     </message>
     <message>
-        <source>http://polyphone-soundfonts.com/en</source>
-        <translation type="obsolete">https://polyphone-soundfonts.com/en</translation>
-    </message>
-    <message>
         <location filename="dialogs/dialog_about.cpp" line="49"/>
         <source>Copyright</source>
         <translation>版权</translation>
-    </message>
-    <message>
-        <source>Davy Triponney</source>
-        <comment>this is my name</comment>
-        <translation type="obsolete">Davy Triponney</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_about.cpp" line="53"/>
@@ -1926,105 +1348,6 @@ repository</source>
         <source>https://www.polyphone-soundfonts.com/en</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
-        <source>Andrea Celani</source>
-        <translation type="obsolete">Andrea Celani</translation>
-    </message>
-    <message>
-        <source>Kinwie</source>
-        <translation type="obsolete">Kinwie</translation>
-    </message>
-    <message>
-        <source>Michael Schyllberg</source>
-        <translation type="obsolete">Michael Schyllberg</translation>
-    </message>
-    <message>
-        <source>Paul Stratman</source>
-        <translation type="obsolete">Paul Stratman</translation>
-    </message>
-    <message>
-        <source>Steve Clarke</source>
-        <translation type="obsolete">Steve Clarke</translation>
-    </message>
-    <message>
-        <source>F.J. Martínez Murcia</source>
-        <translation type="obsolete">F.J. Martínez Murcia</translation>
-    </message>
-    <message>
-        <source>Georg Gergull</source>
-        <translation type="obsolete">Georg Gergull</translation>
-    </message>
-    <message>
-        <source>Jay Alexander Fleming</source>
-        <translation type="obsolete">Jay Alexander Fleming</translation>
-    </message>
-    <message>
-        <source>Joel Gomes</source>
-        <translation type="obsolete">Joel Gomes</translation>
-    </message>
-    <message>
-        <source>Magson</source>
-        <translation type="obsolete">Magson</translation>
-    </message>
-    <message>
-        <source>Pavel Fric</source>
-        <translation type="obsolete">Pavel Fric</translation>
-    </message>
-</context>
-<context>
-    <name>DialogAttenuation</name>
-    <message>
-        <source>Adjust attenuations</source>
-        <translation type="obsolete">衰减调整</translation>
-    </message>
-    <message>
-        <source>Instruments</source>
-        <translation type="obsolete">乐器</translation>
-    </message>
-    <message>
-        <source>Possible offset</source>
-        <translation type="obsolete">可偏移量</translation>
-    </message>
-    <message>
-        <source>Attenuation range</source>
-        <translation type="obsolete">衰减范围</translation>
-    </message>
-    <message>
-        <source> dB</source>
-        <translation type="obsolete"> 分贝</translation>
-    </message>
-    <message>
-        <source>Desired value</source>
-        <translation type="obsolete">期望值</translation>
-    </message>
-    <message>
-        <source>Presets</source>
-        <translation type="obsolete">预设</translation>
-    </message>
-</context>
-<context>
-    <name>DialogCeleste</name>
-    <message>
-        <source>Celeste tuning</source>
-        <translation type="obsolete">钢片琴调音</translation>
-    </message>
-    <message>
-        <source>Number of beats per second at C4 (key 60)</source>
-        <oldsource>Nombre de battements par secondes au do 3 (note 60)</oldsource>
-        <translation type="obsolete">C4(音符 60)的每秒节拍数</translation>
-    </message>
-    <message>
-        <source>The algebraic sign determines the tuning direction.</source>
-        <translation type="obsolete">代数符号决定调音方向。</translation>
-    </message>
-    <message>
-        <source>Division to the next octave</source>
-        <translation type="obsolete">划分到下个八度音阶</translation>
-    </message>
-    <message>
-        <source>Number of beats per second (key </source>
-        <translation type="obsolete">每秒节拍数(音符 </translation>
-    </message>
 </context>
 <context>
     <name>DialogChangeLog</name>
@@ -2054,93 +1377,19 @@ repository</source>
         <translation>Polyphone</translation>
     </message>
     <message>
-        <source>version</source>
-        <translation type="obsolete">版本</translation>
-    </message>
-    <message>
-        <location filename="dialogs/dialogchangelog.cpp" line="85"/>
+        <location filename="dialogs/dialogchangelog.cpp" line="91"/>
         <source>What is new</source>
         <translation>新变化</translation>
     </message>
     <message>
-        <location filename="dialogs/dialogchangelog.cpp" line="88"/>
+        <location filename="dialogs/dialogchangelog.cpp" line="94"/>
         <source>What has improved</source>
         <translation>改进部分</translation>
     </message>
     <message>
-        <location filename="dialogs/dialogchangelog.cpp" line="91"/>
+        <location filename="dialogs/dialogchangelog.cpp" line="97"/>
         <source>What is fixed</source>
         <translation>修复问题</translation>
-    </message>
-</context>
-<context>
-    <name>DialogChangeVolume</name>
-    <message>
-        <source>Change volume</source>
-        <translation type="obsolete">音量调整</translation>
-    </message>
-    <message>
-        <source>Add</source>
-        <translation type="obsolete">增加</translation>
-    </message>
-    <message>
-        <source>Multiply</source>
-        <translation type="obsolete">放大倍数</translation>
-    </message>
-    <message>
-        <source>Normalize</source>
-        <translation type="obsolete">规格化</translation>
-    </message>
-    <message>
-        <source> %</source>
-        <translation type="obsolete"> %</translation>
-    </message>
-    <message>
-        <source> dB</source>
-        <translation type="obsolete"> 分贝</translation>
-    </message>
-</context>
-<context>
-    <name>DialogCommand</name>
-    <message>
-        <source>Use an external command</source>
-        <translation type="obsolete">使用外部命令</translation>
-    </message>
-    <message>
-        <source>History</source>
-        <translation type="obsolete">历史</translation>
-    </message>
-    <message>
-        <source>Command</source>
-        <translation type="obsolete">命令</translation>
-    </message>
-    <message>
-        <source>Replace sample information if possible</source>
-        <translation type="obsolete">如可能则替换样本信息</translation>
-    </message>
-    <message>
-        <source>Authorize stereo editing</source>
-        <translation type="obsolete">允许编辑双声道</translation>
-    </message>
-    <message>
-        <source>Command example:</source>
-        <translation type="obsolete">命令示例：</translation>
-    </message>
-    <message>
-        <source>Executable file</source>
-        <translation type="obsolete">可执行文件</translation>
-    </message>
-    <message>
-        <source>Warning</source>
-        <translation type="obsolete">警告</translation>
-    </message>
-    <message>
-        <source>You must enter a command with at least {wav} as argument.</source>
-        <translation type="obsolete">输入的命令需要包含{wav}参数。</translation>
-    </message>
-    <message>
-        <source>The command must contain the argument {wav}.</source>
-        <translation type="obsolete">命令必须包含参数{wav}。</translation>
     </message>
 </context>
 <context>
@@ -2189,134 +1438,6 @@ repository</source>
         <location filename="dialogs/dialogcreateelements.cpp" line="79"/>
         <source>comprising the %1 instruments</source>
         <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>DialogDuplication</name>
-    <message>
-        <source>Division duplication</source>
-        <translation type="obsolete">复制分层</translation>
-    </message>
-    <message>
-        <source>A division for each key</source>
-        <translation type="obsolete">为每个音符创建分层</translation>
-    </message>
-    <message>
-        <source>A division for each velocity range</source>
-        <translation type="obsolete">为每个力度范围创建分层</translation>
-    </message>
-</context>
-<context>
-    <name>DialogExport</name>
-    <message>
-        <source>Export</source>
-        <translation type="obsolete">导出</translation>
-    </message>
-    <message>
-        <source>Select all</source>
-        <translation type="obsolete">全选</translation>
-    </message>
-    <message>
-        <source>Unselect all</source>
-        <translation type="obsolete">全不选</translation>
-    </message>
-    <message>
-        <source>Location</source>
-        <translation type="obsolete">位置</translation>
-    </message>
-    <message>
-        <source>Format</source>
-        <translation type="obsolete">格式</translation>
-    </message>
-    <message>
-        <source>preset number as prefix</source>
-        <translation type="obsolete">附加预设号前缀</translation>
-    </message>
-    <message>
-        <source>one directory per bank</source>
-        <translation type="obsolete">每个库置于单独文件夹</translation>
-    </message>
-    <message>
-        <source>General Midi classification</source>
-        <translation type="obsolete">GM MIDI 分类</translation>
-    </message>
-    <message>
-        <source>High</source>
-        <translation type="obsolete">高</translation>
-    </message>
-    <message>
-        <source>Medium</source>
-        <translation type="obsolete">中</translation>
-    </message>
-    <message>
-        <source>Low</source>
-        <translation type="obsolete">低</translation>
-    </message>
-    <message>
-        <source>Quality</source>
-        <translation type="obsolete">质量</translation>
-    </message>
-    <message>
-        <source>Cancel</source>
-        <translation type="obsolete">取消</translation>
-    </message>
-    <message>
-        <source>Choose a destination folder</source>
-        <translation type="obsolete">选择目标文件夹</translation>
-    </message>
-    <message>
-        <source>Warning</source>
-        <translation type="obsolete">警告</translation>
-    </message>
-    <message>
-        <source>Invalid directory.</source>
-        <translation type="obsolete">路径不合法。</translation>
-    </message>
-    <message>
-        <source>In the case where several soundfonts are exported, the maximal number of presets per soundfonts is 127.</source>
-        <translation type="obsolete">导出音色库时，每个音色库的预设数不能超过 127。</translation>
-    </message>
-    <message>
-        <source>The maximal number of soundfont to export is 127.</source>
-        <translation type="obsolete">一次最多只能导出 127 个音色库。</translation>
-    </message>
-    <message>
-        <source>At least one preset must be selected.</source>
-        <translation type="obsolete">必须至少选择一个预设。</translation>
-    </message>
-</context>
-<context>
-    <name>DialogExportList</name>
-    <message>
-        <source>Export preset list</source>
-        <translation type="obsolete">导出预设列表</translation>
-    </message>
-    <message>
-        <source>text copied in the clipboard</source>
-        <translation type="obsolete">文本已复制到剪贴板</translation>
-    </message>
-    <message>
-        <source>csv format</source>
-        <translation type="obsolete">CSV 表</translation>
-    </message>
-    <message>
-        <source>html table</source>
-        <translation type="obsolete">HTML 表</translation>
-    </message>
-    <message>
-        <source>Copy</source>
-        <translation type="obsolete">复制</translation>
-    </message>
-</context>
-<context>
-    <name>DialogFilterFrequencies</name>
-    <message>
-        <source>Filter frequencies</source>
-        <translation type="obsolete">频率滤波</translation>
-    </message>
-    <message>
-        <source>Put in red the part of frequencies to filter:</source>
-        <translation type="obsolete">将要滤波的频率置于红色部分：</translation>
     </message>
 </context>
 <context>
@@ -2377,214 +1498,6 @@ repository</source>
     </message>
 </context>
 <context>
-    <name>DialogMagnetophone</name>
-    <message>
-        <source>Recorder</source>
-        <translation type="obsolete">录音机</translation>
-    </message>
-    <message>
-        <source>Save a record</source>
-        <translation type="obsolete">保存录音</translation>
-    </message>
-    <message>
-        <source>Wav file (*.wav)</source>
-        <translation type="obsolete">WAV 文件(*.wav)</translation>
-    </message>
-    <message>
-        <source>record</source>
-        <translation type="obsolete">录音</translation>
-    </message>
-</context>
-<context>
-    <name>DialogMixture</name>
-    <message>
-        <source>Mixture creation</source>
-        <oldsource>Création mutation / mixture</oldsource>
-        <translatorcomment>Mixture = organ stop made of a combination of harmonics</translatorcomment>
-        <translation type="obsolete">创建混合音栓</translation>
-    </message>
-    <message>
-        <source>Name of the mixture:</source>
-        <translation type="obsolete">名称：</translation>
-    </message>
-    <message>
-        <source>Sample creation:</source>
-        <translation type="obsolete">创建样本：</translation>
-    </message>
-    <message>
-        <source>for every key</source>
-        <translation type="obsolete">每个音符</translation>
-    </message>
-    <message>
-        <source>every 3 keys</source>
-        <translation type="obsolete">每 3 个音符</translation>
-    </message>
-    <message>
-        <source>every 6 keys</source>
-        <translation type="obsolete">每 6 个音符</translation>
-    </message>
-    <message>
-        <source>Auto loop</source>
-        <translation type="obsolete">自动循环</translation>
-    </message>
-    <message>
-        <source>Stereo</source>
-        <translation type="obsolete">双声道</translation>
-    </message>
-    <message>
-        <source>Divisions</source>
-        <translation type="obsolete">分层</translation>
-    </message>
-    <message>
-        <source>Key range</source>
-        <translation type="obsolete">音符范围</translation>
-    </message>
-    <message>
-        <source>Ranks</source>
-        <translatorcomment>音管</translatorcomment>
-        <translation type="obsolete">管列</translation>
-    </message>
-    <message>
-        <source>Type</source>
-        <translation type="obsolete">类型</translation>
-    </message>
-    <message>
-        <source>octave</source>
-        <translation type="obsolete">八度</translation>
-    </message>
-    <message>
-        <source>fifth</source>
-        <translation type="obsolete">五度</translation>
-    </message>
-    <message>
-        <source>third</source>
-        <translation type="obsolete">三度</translation>
-    </message>
-    <message>
-        <source>seventh</source>
-        <translation type="obsolete">七度</translation>
-    </message>
-    <message>
-        <source>ninth</source>
-        <translation type="obsolete">九度</translation>
-    </message>
-    <message>
-        <source>eleventh</source>
-        <translation type="obsolete">十一度</translation>
-    </message>
-    <message>
-        <source>thirteenth</source>
-        <translation type="obsolete">十三度</translation>
-    </message>
-    <message>
-        <source>fifteenth</source>
-        <translation type="obsolete">十五度</translation>
-    </message>
-    <message>
-        <source>seventeenth</source>
-        <translation type="obsolete">十七度</translation>
-    </message>
-    <message>
-        <source>nineteenth</source>
-        <translation type="obsolete">十九度</translation>
-    </message>
-    <message>
-        <source>twenty-first</source>
-        <translation type="obsolete">二十一度</translation>
-    </message>
-    <message>
-        <source>twenty-third</source>
-        <translation type="obsolete">二十三度</translation>
-    </message>
-    <message>
-        <source>twenty-fifth</source>
-        <translation type="obsolete">二十五度</translation>
-    </message>
-    <message>
-        <source>twenty-seventh</source>
-        <translation type="obsolete">二十七度</translation>
-    </message>
-    <message>
-        <source>untitled</source>
-        <translation type="obsolete">未命名</translation>
-    </message>
-</context>
-<context>
-    <name>DialogParamGlobal</name>
-    <message>
-        <source>Global setting</source>
-        <translation type="obsolete">全局调整</translation>
-    </message>
-    <message>
-        <source>Pattern</source>
-        <translation type="obsolete">模式</translation>
-    </message>
-    <message>
-        <source>Stiffness</source>
-        <translation type="obsolete">硬度</translation>
-    </message>
-    <message>
-        <source>Distribution</source>
-        <translation type="obsolete">分布</translation>
-    </message>
-    <message>
-        <source>Minimum</source>
-        <translation type="obsolete">最小值</translation>
-    </message>
-    <message>
-        <source>Maximum</source>
-        <translation type="obsolete">最大值</translation>
-    </message>
-    <message>
-        <source>Modification</source>
-        <translation type="obsolete">修改方式</translation>
-    </message>
-    <message>
-        <source>Parameter</source>
-        <translation type="obsolete">参数</translation>
-    </message>
-    <message>
-        <source>Manual</source>
-        <translation type="obsolete">手动</translation>
-    </message>
-    <message>
-        <source>Linear ascending</source>
-        <translation type="obsolete">线性上升</translation>
-    </message>
-    <message>
-        <source>Linear descending</source>
-        <translation type="obsolete">线性下降</translation>
-    </message>
-    <message>
-        <source>Exponential ascending</source>
-        <translation type="obsolete">指数上升</translation>
-    </message>
-    <message>
-        <source>Exponential descending</source>
-        <translation type="obsolete">指数下降</translation>
-    </message>
-    <message>
-        <source>Random</source>
-        <translation type="obsolete">随机</translation>
-    </message>
-    <message>
-        <source>Addition</source>
-        <translation type="obsolete">加</translation>
-    </message>
-    <message>
-        <source>Multiplication</source>
-        <translation type="obsolete">乘</translation>
-    </message>
-    <message>
-        <source>Replacement</source>
-        <translation type="obsolete">替换</translation>
-    </message>
-    <message>
-        <source>Apply to a velocity range</source>
-        <translation type="obsolete">应用到力度范围</translation>
-    </message>
-</context>
-<context>
     <name>DialogRecorder</name>
     <message>
         <location filename="dialogs/dialogrecorder.ui" line="26"/>
@@ -2606,30 +1519,6 @@ repository</source>
         <location filename="dialogs/dialogrecorder.cpp" line="163"/>
         <source>record</source>
         <translation>录音</translation>
-    </message>
-</context>
-<context>
-    <name>DialogRelease</name>
-    <message>
-        <source>Release maker</source>
-        <translation type="obsolete">释音制作器</translation>
-    </message>
-    <message>
-        <source>Detuning induced (semi-tones)</source>
-        <translation type="obsolete">引发失谐(半音)</translation>
-    </message>
-    <message>
-        <source>Release time at C2 (key 36)</source>
-        <oldsource>Durée release au do 1 (note 36)</oldsource>
-        <translation type="obsolete">C2(音符 36)的释音时长</translation>
-    </message>
-    <message>
-        <source>Division to the next octave</source>
-        <translation type="obsolete">划分到下个八度音阶</translation>
-    </message>
-    <message>
-        <source>Release time (key </source>
-        <translation type="obsolete">释音时长(音符 </translation>
     </message>
 </context>
 <context>
@@ -2719,104 +1608,6 @@ repository</source>
         <location filename="dialogs/dialogselection.ui" line="46"/>
         <source>Cancel</source>
         <translation>取消</translation>
-    </message>
-</context>
-<context>
-    <name>DialogSpace</name>
-    <message>
-        <source>Spatialization</source>
-        <translation type="obsolete">空间化</translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Pattern&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translatorcomment>Only &quot;Pattern&quot; has to be translated</translatorcomment>
-        <translation type="obsolete">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;模式&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-    </message>
-    <message>
-        <source>Division number</source>
-        <translation type="obsolete">分割数</translation>
-    </message>
-    <message>
-        <source>Spreading (%)</source>
-        <translation type="obsolete">扩散(%)</translation>
-    </message>
-    <message>
-        <source>Filling (%)</source>
-        <translation type="obsolete">填充(%)</translation>
-    </message>
-    <message>
-        <source>Offset (0-100)</source>
-        <translation type="obsolete">偏移(0-100)</translation>
-    </message>
-    <message>
-        <source>Inversions</source>
-        <translation type="obsolete">倒置</translation>
-    </message>
-    <message>
-        <source>Ascending</source>
-        <translation type="obsolete">上升</translation>
-    </message>
-    <message>
-        <source>Hollow</source>
-        <translation type="obsolete">回荡</translation>
-    </message>
-    <message>
-        <source>Random</source>
-        <translation type="obsolete">随机</translation>
-    </message>
-    <message>
-        <source>Descending</source>
-        <translation type="obsolete">下降</translation>
-    </message>
-    <message>
-        <source>Spike</source>
-        <translation type="obsolete">刺入</translation>
-    </message>
-</context>
-<context>
-    <name>DialogTransposition</name>
-    <message>
-        <source>Transposition</source>
-        <translation type="obsolete">音调调整</translation>
-    </message>
-    <message>
-        <source>Shift in semitones</source>
-        <translation type="obsolete">移动量(半音)</translation>
-    </message>
-    <message>
-        <source>Adapt keyrange</source>
-        <translation type="obsolete">适应音符范围</translation>
-    </message>
-</context>
-<context>
-    <name>DialogVisualizer</name>
-    <message>
-        <source>Visualizer</source>
-        <translation type="obsolete">可视化</translation>
-    </message>
-    <message>
-        <source>Display options</source>
-        <translation type="obsolete">显示选项</translation>
-    </message>
-    <message>
-        <source>Legend</source>
-        <translation type="obsolete">图例</translation>
-    </message>
-    <message>
-        <source>Mean value per key</source>
-        <translation type="obsolete">每个音符的平均值</translation>
-    </message>
-    <message>
-        <source>Default parameters</source>
-        <translation type="obsolete">默认参数</translation>
-    </message>
-    <message>
-        <source>Defined parameters</source>
-        <translation type="obsolete">定义的参数</translation>
-    </message>
-    <message>
-        <source>Log scale</source>
-        <translation type="obsolete">对数刻度</translation>
     </message>
 </context>
 <context>
@@ -3088,11 +1879,6 @@ repository</source>
         <translation>延迟(Delay)</translation>
     </message>
     <message>
-        <source>Key  Decay</source>
-        <oldsource>Key  Decay</oldsource>
-        <translation type="obsolete">Key → Decay</translation>
-    </message>
-    <message>
         <location filename="editor/envelopeditor.ui" line="128"/>
         <source>Decay</source>
         <translation>衰减(Decay)</translation>
@@ -3101,11 +1887,6 @@ repository</source>
         <location filename="editor/envelopeditor.ui" line="420"/>
         <source>Sustain</source>
         <translation>延音(Sustain)</translation>
-    </message>
-    <message>
-        <source>Key  Hold</source>
-        <oldsource>Key  Hold</oldsource>
-        <translation type="obsolete">Key → Hold</translation>
     </message>
     <message>
         <location filename="editor/envelopeditor.ui" line="263"/>
@@ -3157,17 +1938,6 @@ repository</source>
     </message>
 </context>
 <context>
-    <name>ExternalCommandRunner</name>
-    <message>
-        <source>Cancel</source>
-        <translation type="obsolete">取消</translation>
-    </message>
-    <message>
-        <source>Processing </source>
-        <translation type="obsolete">处理中 </translation>
-    </message>
-</context>
-<context>
     <name>FilterFlow</name>
     <message>
         <location filename="repository/browser/filterflow.cpp" line="64"/>
@@ -3185,16 +1955,6 @@ repository</source>
 </context>
 <context>
     <name>GraphSpace</name>
-    <message>
-        <source>L</source>
-        <translatorcomment>first letter of &quot;Left&quot;</translatorcomment>
-        <translation type="obsolete">左</translation>
-    </message>
-    <message>
-        <source>R</source>
-        <translatorcomment>first letter of &quot;Right&quot;</translatorcomment>
-        <translation type="obsolete">右</translation>
-    </message>
     <message>
         <location filename="editor/tools/sound_spatialization/graphspace.cpp" line="76"/>
         <source>L</source>
@@ -3271,10 +2031,6 @@ repository</source>
         <location filename="editor/graphics/graphiquefourier.cpp" line="394"/>
         <source>Png file</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Png file (*.png)</source>
-        <translation type="obsolete">PNG 文件(*.png)</translation>
     </message>
 </context>
 <context>
@@ -3400,939 +2156,86 @@ repository</source>
 <context>
     <name>MainWindow</name>
     <message>
-        <source>&amp;File</source>
-        <translatorcomment>Put the character &quot;&amp;&quot; to access an element in a menu via Alt + the following letter.</translatorcomment>
-        <translation type="obsolete">文件(&amp;F)</translation>
-    </message>
-    <message>
-        <source>&amp;Help</source>
-        <translation type="obsolete">帮助(&amp;H)</translation>
-    </message>
-    <message>
-        <source>&amp;Edit</source>
-        <translation type="obsolete">编辑(&amp;E)</translation>
-    </message>
-    <message>
-        <source>&amp;Tools</source>
-        <translation type="obsolete">工具(&amp;T)</translation>
-    </message>
-    <message>
-        <source>&amp;Instrument</source>
-        <translation type="obsolete">乐器(&amp;I)</translation>
-    </message>
-    <message>
-        <source>&amp;View</source>
-        <translation type="obsolete">查看(&amp;V)</translation>
-    </message>
-    <message>
-        <source>Toolbar</source>
-        <translation type="obsolete">工具栏</translation>
-    </message>
-    <message>
-        <source>Tree</source>
-        <translation type="obsolete">树</translation>
-    </message>
-    <message>
-        <source>Collapse the tree</source>
-        <translation type="obsolete">折叠树</translation>
-    </message>
-    <message>
-        <source>Expand the tree</source>
-        <translation type="obsolete">展开树</translation>
-    </message>
-    <message>
-        <source>Search...</source>
-        <translation type="obsolete">搜索...</translation>
-    </message>
-    <message>
-        <source>Clear the search</source>
-        <translation type="obsolete">清除搜索</translation>
-    </message>
-    <message>
-        <source>&amp;Open</source>
-        <translation type="obsolete">打开(&amp;O)...</translation>
-    </message>
-    <message>
-        <source>Open a file</source>
-        <translation type="obsolete">打开文件</translation>
-    </message>
-    <message>
-        <source>&amp;Quit</source>
-        <translation type="obsolete">退出(&amp;Q)</translation>
-    </message>
-    <message>
-        <source>&amp;About</source>
-        <translation type="obsolete">关于(&amp;A)</translation>
-    </message>
-    <message>
-        <location filename="mainwindow/mainwindow.cpp" line="196"/>
+        <location filename="mainwindow/mainwindow.cpp" line="197"/>
         <source>&amp;Save</source>
         <translation>保存(&amp;S)</translation>
     </message>
     <message>
-        <source>Save the current file</source>
-        <translation type="obsolete">保存当前文件</translation>
-    </message>
-    <message>
-        <source>Save &amp;as...</source>
-        <oldsource>Enregistrer &amp;sous ...</oldsource>
-        <translation type="obsolete">另存为(&amp;A)...</translation>
-    </message>
-    <message>
-        <source>Save in another file</source>
-        <translation type="obsolete">保存到另一个文件</translation>
-    </message>
-    <message>
-        <source>&amp;New...</source>
-        <translation type="obsolete">新建(&amp;N)...</translation>
-    </message>
-    <message>
-        <source>Create a new file</source>
-        <translation type="obsolete">创建新文件</translation>
-    </message>
-    <message>
-        <location filename="mainwindow/mainwindow.cpp" line="197"/>
+        <location filename="mainwindow/mainwindow.cpp" line="198"/>
         <source>&amp;Cancel</source>
         <translation>取消(&amp;C)</translation>
     </message>
     <message>
-        <source>&amp;Preset</source>
-        <translation type="obsolete">预设(&amp;P)</translation>
-    </message>
-    <message>
-        <source>Online &amp;manual</source>
-        <oldsource>&amp;Manuel</oldsource>
-        <translation type="obsolete">在线手册(&amp;M)</translation>
-    </message>
-    <message>
-        <source>&amp;Undo</source>
-        <comment>1</comment>
-        <translation type="obsolete">撤销(&amp;U)</translation>
-    </message>
-    <message>
-        <source>Undo the last action</source>
-        <translation type="obsolete">撤销最后一次操作</translation>
-    </message>
-    <message>
-        <source>&amp;Redo</source>
-        <translation type="obsolete">重做(&amp;R)</translation>
-    </message>
-    <message>
-        <source>Redo the last undone action</source>
-        <translation type="obsolete">重做撤销的操作</translation>
-    </message>
-    <message>
-        <source>&amp;Settings</source>
-        <translation type="obsolete">设置(&amp;S)</translation>
-    </message>
-    <message>
-        <source>Open the settings</source>
-        <translation type="obsolete">打开设置</translation>
-    </message>
-    <message>
-        <source>&amp;Toolbar</source>
-        <translation type="obsolete">工具栏(&amp;T)</translation>
-    </message>
-    <message>
-        <source>Display / hide the toolbar</source>
-        <translation type="obsolete">显示/隐藏工具栏</translation>
-    </message>
-    <message>
-        <source>&amp;Close file</source>
-        <translation type="obsolete">关闭文件(&amp;C)</translation>
-    </message>
-    <message>
-        <source>Close the current file</source>
-        <translation type="obsolete">关闭当前文件</translation>
-    </message>
-    <message>
-        <source>&amp;Copy</source>
-        <translation type="obsolete">复制(&amp;C)</translation>
-    </message>
-    <message>
-        <source>Copy an element</source>
-        <translation type="obsolete">复制元素</translation>
-    </message>
-    <message>
-        <source>&amp;Paste</source>
-        <translation type="obsolete">粘贴(&amp;P)</translation>
-    </message>
-    <message>
-        <source>Paste an element</source>
-        <translation type="obsolete">粘贴元素</translation>
-    </message>
-    <message>
-        <source>&amp;Delete</source>
-        <translation type="obsolete">删除(&amp;D)</translation>
-    </message>
-    <message>
-        <source>Delete an element</source>
-        <translation type="obsolete">删除元素</translation>
-    </message>
-    <message>
-        <source>&amp;Remove unused elements</source>
-        <translation type="obsolete">删除未使用的元素(&amp;R)</translation>
-    </message>
-    <message>
-        <source>Remove unused samples and instruments</source>
-        <oldsource>Enlève les samples et instruments non utilisés</oldsource>
-        <translation type="obsolete">删除未使用的样本和乐器</translation>
-    </message>
-    <message>
-        <source>Re&amp;name</source>
-        <translation type="obsolete">重命名(&amp;N)</translation>
-    </message>
-    <message>
-        <source>Rename one or several element(s)</source>
-        <translation type="obsolete">重命名一个或多个元素</translation>
-    </message>
-    <message>
-        <source>file1</source>
-        <translation type="obsolete">文件 1</translation>
-    </message>
-    <message>
-        <source>Open a recent file</source>
-        <translation type="obsolete">打开最近文件</translation>
-    </message>
-    <message>
-        <source>file2</source>
-        <translation type="obsolete">文件 2</translation>
-    </message>
-    <message>
-        <source>file3</source>
-        <translation type="obsolete">文件 3</translation>
-    </message>
-    <message>
-        <source>file4</source>
-        <translation type="obsolete">文件 4</translation>
-    </message>
-    <message>
-        <source>file5</source>
-        <translation type="obsolete">文件 5</translation>
-    </message>
-    <message>
-        <source>&amp;Modulator section</source>
-        <translation type="obsolete">调制器面板(&amp;M)</translation>
-    </message>
-    <message>
-        <source>&amp;Import samples...</source>
-        <oldsource>&amp;Importer des sons...</oldsource>
-        <translation type="obsolete">导入样本(&amp;I)...</translation>
-    </message>
-    <message>
-        <source>E&amp;xport samples...</source>
-        <oldsource>E&amp;xporter des sons...</oldsource>
-        <translation type="obsolete">导出样本(&amp;X)...</translation>
-    </message>
-    <message>
-        <source>Remove the blank at the beginning of a sample</source>
-        <oldsource>Enleve le blanc au début d&apos;un sample</oldsource>
-        <translation type="obsolete">删除样本开头的空白部分</translation>
-    </message>
-    <message>
-        <source>Cut the sample at the end of its loop</source>
-        <oldsource>Ajuste le sample à sa fin de boucle</oldsource>
-        <translation type="obsolete">裁剪样本至循环终点</translation>
-    </message>
-    <message>
-        <source>Loop automatically the sample</source>
-        <oldsource>Boucle automatiquement le sample</oldsource>
-        <translation type="obsolete">自动循环样本</translation>
-    </message>
-    <message>
-        <source>Transpose the sample</source>
-        <oldsource>Transpose le sample</oldsource>
-        <translation type="obsolete">更改样本的音调</translation>
-    </message>
-    <message>
-        <source>&amp;External command...</source>
-        <translation type="obsolete">外部命令(&amp;E)...</translation>
-    </message>
-    <message>
-        <source>Use an external software or command to modify a .wav file</source>
-        <translation type="obsolete">使用外部软件和命令来修改 WAV 文件</translation>
-    </message>
-    <message>
-        <source>Export &amp;preset list...</source>
-        <oldsource>Exporter la liste des &amp;presets</oldsource>
-        <translation type="obsolete">导出预设列表(&amp;E)...</translation>
-    </message>
-    <message>
-        <source>Export the preset list in a text format</source>
-        <translation type="obsolete">以文本格式导出预设列表</translation>
-    </message>
-    <message>
-        <source>&amp;Soundfont repository</source>
-        <translation type="obsolete">音色库仓库(&amp;S)</translation>
-    </message>
-    <message>
-        <source>&amp;Celeste tuning...</source>
-        <translation type="obsolete">钢片琴调音(&amp;C)...</translation>
-    </message>
-    <message>
-        <source>Tune the sounds to create beats</source>
-        <translation type="obsolete">调音以创建节拍</translation>
-    </message>
-    <message>
-        <source>Division duplication...</source>
-        <translation type="obsolete">复制分层...</translation>
-    </message>
-    <message>
-        <source>Display a 6-octave keyboard</source>
-        <translation type="obsolete">显示 6 音阶键盘</translation>
-    </message>
-    <message>
-        <source>&amp;128 keys (full)</source>
-        <translation type="obsolete">128 键(全键盘)(&amp;1)</translation>
-    </message>
-    <message>
-        <source>Display no keyboard</source>
-        <translation type="obsolete">隐藏键盘</translation>
-    </message>
-    <message>
-        <source>Division duplication</source>
-        <translation type="obsolete">复制分层</translation>
-    </message>
-    <message>
-        <source>Display the recorder</source>
-        <translation type="obsolete">显示录音机</translation>
-    </message>
-    <message>
-        <source>&amp;Visualizer</source>
-        <translation type="obsolete">可视化(&amp;V)</translation>
-    </message>
-    <message>
-        <source>Visualize in a graph the parameters used</source>
-        <translation type="obsolete">在图表中显示使用的参数</translation>
-    </message>
-    <message>
-        <source>Ex&amp;port soundfont...</source>
-        <oldsource>Exporter sound&amp;font...</oldsource>
-        <translation type="obsolete">导出音色库(&amp;P)...</translation>
-    </message>
-    <message>
-        <source>Export a soundfont</source>
-        <translation type="obsolete">导出音色库</translation>
-    </message>
-    <message>
-        <source>&amp;Unlink all stereo samples</source>
-        <oldsource>&amp;Dissocier les samples stéréo</oldsource>
-        <translation type="obsolete">解除双声道样本链接(&amp;U)</translation>
-    </message>
-    <message>
-        <source>Unlink all stereo samples</source>
-        <oldsource>Dissocie les samples stéréo</oldsource>
-        <translation type="obsolete">取消所有双声道样本的链接</translation>
-    </message>
-    <message>
-        <source>Peak &amp;frequency export (csv)</source>
-        <translation type="obsolete">导出峰值频率(csv)(&amp;F)</translation>
-    </message>
-    <message>
-        <source>Export the peak frequency of all samples in a csv file</source>
-        <translation type="obsolete">导出所有样本的峰值频率到 CSV 文件中</translation>
-    </message>
-    <message>
-        <source>&amp;88 keys (piano)</source>
-        <translation type="obsolete">88 键(标准钢琴)(&amp;8)</translation>
-    </message>
-    <message>
-        <source>In &amp;toolbar</source>
-        <translation type="obsolete">嵌入工具栏(&amp;T)</translation>
-    </message>
-    <message>
-        <source>&amp;Floating</source>
-        <translation type="obsolete">浮动(&amp;F)</translation>
-    </message>
-    <message>
-        <source>&amp;Transposition...</source>
-        <translation type="obsolete">音调调整(&amp;T)...</translation>
-    </message>
-    <message>
-        <source>Transpose every sample of an instrument</source>
-        <translation type="obsolete">修改乐器中每个样本的音调</translation>
-    </message>
-    <message>
-        <source>Remove all &amp;modulators</source>
-        <translation type="obsolete">删除所有调制器(&amp;M)</translation>
-    </message>
-    <message>
-        <source>&amp;Full screen</source>
-        <translation type="obsolete">全屏(&amp;F)</translation>
-    </message>
-    <message>
-        <source>&amp;Forum</source>
-        <translation type="obsolete">论坛(&amp;F)</translation>
-    </message>
-    <message>
-        <source>&amp;5 octaves</source>
-        <translation type="obsolete">5 音阶(&amp;5)</translation>
-    </message>
-    <message>
-        <source>Display a 5-octave keyboard</source>
-        <translation type="obsolete">显示 5 音阶键盘</translation>
-    </message>
-    <message>
-        <source>&amp;6 octaves</source>
-        <translation type="obsolete">6 音阶(&amp;6)</translation>
-    </message>
-    <message>
-        <source>Display a 128-key keyboard</source>
-        <translation type="obsolete">显示 128 键键盘</translation>
-    </message>
-    <message>
-        <source>&amp;None</source>
-        <translation type="obsolete">无(&amp;N)</translation>
-    </message>
-    <message>
-        <source>&amp;Division duplication...</source>
-        <oldsource>&amp;Duplication des divisions</oldsource>
-        <translation type="obsolete">复制分层(&amp;D)...</translation>
-    </message>
-    <message>
-        <source>&amp;Change volume...</source>
-        <oldsource>&amp;Modifier volume</oldsource>
-        <translation type="obsolete">音量调整(&amp;C)...</translation>
-    </message>
-    <message>
-        <source>Change the volume</source>
-        <translation type="obsolete">调整音量大小</translation>
-    </message>
-    <message>
-        <source>&amp;Filter frequencies...</source>
-        <translation type="obsolete">频率滤波(&amp;F)...</translation>
-    </message>
-    <message>
-        <source>Apply a filter to attenuate specific frequencies</source>
-        <translation type="obsolete">应用滤波器以衰减指定的频率</translation>
-    </message>
-    <message>
-        <source>&amp;Adjust attenuations...</source>
-        <translation type="obsolete">衰减调整(&amp;A)...</translation>
-    </message>
-    <message>
-        <source>Globally adjust instrument and preset attenuations</source>
-        <translation type="obsolete">全局调整乐器和预设的衰减</translation>
-    </message>
-    <message>
-        <source>&amp;Release maker</source>
-        <translation type="obsolete">释音制作器(&amp;R)...</translation>
-    </message>
-    <message>
-        <source>Create automatically a release for all linked sounds</source>
-        <translation type="obsolete">为所有链接的样本自动创建释音</translation>
-    </message>
-    <message>
-        <source>&amp;Link all stereo samples</source>
-        <oldsource>&amp;Association auto échantillons</oldsource>
-        <translation type="obsolete">链接所有双声道样本(&amp;L)</translation>
-    </message>
-    <message>
-        <source>Automatically link the samples L/R according to their names</source>
-        <oldsource>Associe automatiquement les samples G/D</oldsource>
-        <translation type="obsolete">根据文件名自动链接左/右声道样本</translation>
-    </message>
-    <message>
-        <source>&amp;Recorder</source>
-        <oldsource>Magnétophone</oldsource>
-        <translation type="obsolete">录音机(&amp;R)</translation>
-    </message>
-    <message>
-        <source>Display the modulator section</source>
-        <translation type="obsolete">显示调制器面板</translation>
-    </message>
-    <message>
-        <source>Vel.</source>
-        <translation type="obsolete">力度</translation>
-    </message>
-    <message>
-        <source>Key</source>
-        <translation type="obsolete">音符</translation>
-    </message>
-    <message>
-        <source>&amp;Sample</source>
-        <translation type="obsolete">样本(&amp;S)</translation>
-    </message>
-    <message>
-        <source>&amp;Global</source>
-        <translation type="obsolete">全局(&amp;G)</translation>
-    </message>
-    <message>
-        <source>&amp;Keyboard</source>
-        <translation type="obsolete">屏幕键盘(&amp;K)</translation>
-    </message>
-    <message>
-        <source>Import an audio file</source>
-        <translation type="obsolete">导入音频文件</translation>
-    </message>
-    <message>
-        <source>Export in a wav format</source>
-        <translation type="obsolete">导出到 WAV 格式</translation>
-    </message>
-    <message>
-        <source>New instrument</source>
-        <translation type="obsolete">新乐器</translation>
-    </message>
-    <message>
-        <source>Create a new instrument</source>
-        <translation type="obsolete">创建新乐器</translation>
-    </message>
-    <message>
-        <source>New preset</source>
-        <translation type="obsolete">新预设</translation>
-    </message>
-    <message>
-        <source>Create a new preset</source>
-        <translation type="obsolete">创建新预设</translation>
-    </message>
-    <message>
-        <source>&amp;Remove blank at start</source>
-        <translation type="obsolete">删除开头空白部分(&amp;R)</translation>
-    </message>
-    <message>
-        <source>&amp;Trim to end of loop</source>
-        <translation type="obsolete">裁剪至循环终点(&amp;T)</translation>
-    </message>
-    <message>
-        <source>&amp;Auto loop</source>
-        <translation type="obsolete">自动循环(&amp;A)</translation>
-    </message>
-    <message>
-        <source>Trans&amp;pose...</source>
-        <translation type="obsolete">音调调整(&amp;P)...</translation>
-    </message>
-    <message>
-        <source>&amp;Sound spatialization...</source>
-        <translation type="obsolete">声音空间化(&amp;S)...</translation>
-    </message>
-    <message>
-        <source>Place sounds in space</source>
-        <translation type="obsolete">在空间中放置声音</translation>
-    </message>
-    <message>
-        <source>&amp;Automatic distribution</source>
-        <translatorcomment>自动分布音符范围</translatorcomment>
-        <translation type="obsolete">自动分布(&amp;A)</translation>
-    </message>
-    <message>
-        <source>Automatically arrange the samples over the keyboard</source>
-        <translation type="obsolete">自动在键盘上编排样本</translation>
-    </message>
-    <message>
-        <source>Duplicate the divisions</source>
-        <translation type="obsolete">为乐器分层创建副本</translation>
-    </message>
-    <message>
-        <source>&amp;Global setting...</source>
-        <translation type="obsolete">全局调整(&amp;G)...</translation>
-    </message>
-    <message>
-        <source>Set all divisions simultaneously</source>
-        <translation type="obsolete">同时调整所有分层</translation>
-    </message>
-    <message>
-        <source>&amp;Balance adjustment</source>
-        <translation type="obsolete">平衡调整(&amp;B)</translation>
-    </message>
-    <message>
-        <source>Set the sample pan</source>
-        <oldsource>Règle la balance du sample</oldsource>
-        <translation type="obsolete">调整样本平衡</translation>
-    </message>
-    <message>
-        <source>&amp;Mixture creation...</source>
-        <translation type="obsolete">创建混合音栓(&amp;M)...</translation>
-    </message>
-    <message>
-        <source>Create a mixture</source>
-        <translation type="obsolete">创建一个混合音栓</translation>
-    </message>
-    <message>
-        <location filename="mainwindow/mainwindow.cpp" line="198"/>
+        <location filename="mainwindow/mainwindow.cpp" line="199"/>
         <source>Do&amp;n&apos;t save</source>
         <translation>不保存(&amp;N)</translation>
     </message>
     <message>
-        <source>.sf2 file (*.sf2)</source>
-        <translation type="obsolete">.sf2 文件(*.sf2)</translation>
-    </message>
-    <message>
-        <location filename="mainwindow/mainwindow.cpp" line="182"/>
+        <location filename="mainwindow/mainwindow.cpp" line="183"/>
         <source>Warning</source>
         <translation>警告</translation>
     </message>
     <message>
-        <source>Cancel</source>
-        <translation type="obsolete">取消</translation>
-    </message>
-    <message>
-        <location filename="mainwindow/mainwindow.cpp" line="172"/>
+        <location filename="mainwindow/mainwindow.cpp" line="173"/>
         <source>untitled</source>
         <translation>未命名</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="183"/>
+        <location filename="mainwindow/mainwindow.cpp" line="184"/>
         <source>Save before exiting?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="186"/>
+        <location filename="mainwindow/mainwindow.cpp" line="187"/>
         <source>The following files have been modified:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="193"/>
+        <location filename="mainwindow/mainwindow.cpp" line="194"/>
         <source>File &quot;%1&quot; has been modified.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="242"/>
+        <location filename="mainwindow/mainwindow.cpp" line="243"/>
         <source>en/documentation</source>
         <comment>path for the documentation online</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="247"/>
+        <location filename="mainwindow/mainwindow.cpp" line="248"/>
         <source>en/forum</source>
         <comment>path for the forum</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="272"/>
+        <location filename="mainwindow/mainwindow.cpp" line="273"/>
         <source>Soundfonts</source>
         <translation>音色库</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="273"/>
+        <location filename="mainwindow/mainwindow.cpp" line="274"/>
         <source>Sf2 files</source>
         <translation>SF2 文件</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="274"/>
+        <location filename="mainwindow/mainwindow.cpp" line="275"/>
         <source>Sf3 files</source>
         <translation>SF3 文件</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="275"/>
+        <location filename="mainwindow/mainwindow.cpp" line="276"/>
         <source>Sfz files</source>
         <translation>SFZ 文件</translation>
     </message>
     <message>
-        <location filename="mainwindow/mainwindow.cpp" line="276"/>
+        <location filename="mainwindow/mainwindow.cpp" line="277"/>
         <source>sfArk archives</source>
         <translation>sfArk 压缩文档</translation>
     </message>
     <message>
-        <source>Cannot open the file.</source>
-        <translation type="obsolete">无法打开文件。</translation>
-    </message>
-    <message>
-        <source>Cannot read the file.</source>
-        <translation type="obsolete">无法读取文件。</translation>
-    </message>
-    <message>
-        <source>Corrupted file.</source>
-        <translation type="obsolete">损坏的文件。</translation>
-    </message>
-    <message>
-        <source>Name of the new soundfont:</source>
-        <translation type="obsolete">新音色库名称：</translation>
-    </message>
-    <message>
-        <source>Instrument name (max 20 characters):</source>
-        <translation type="obsolete">乐器名称(最多 20 个半角字符)：</translation>
-    </message>
-    <message>
-        <source>Preset name (max 20 characters):</source>
-        <translation type="obsolete">预设名称(最多 20 个半角字符)：</translation>
-    </message>
-    <message>
-        <source>Soundfont name (max 255 characters):</source>
-        <translation type="obsolete">音色库名称(最多 255 个半角字符)：</translation>
-    </message>
-    <message>
-        <source>L&quot; already exists.&lt;br/&gt;Replace?</source>
-        <translation type="obsolete">左声道&quot;已存在。&lt;br/&gt;是否替换？</translation>
-    </message>
-    <message>
-        <source>R&quot; already exists.&lt;br/&gt;Replace?</source>
-        <translation type="obsolete">右声道&quot; 已存在。&lt;br/&gt;是否替换？</translation>
-    </message>
-    <message>
-        <source>&quot; already exists.&lt;br/&gt;Replace?</source>
-        <translation type="obsolete">&quot;已存在。&lt;br/&gt;是否替换？</translation>
-    </message>
-    <message>
-        <source> bits&lt;/b&gt;</source>
-        <translation type="obsolete"> 位&lt;/b&gt;</translation>
-    </message>
-    <message>
-        <source>Virtual keyboard</source>
-        <translation type="obsolete">虚拟键盘</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;Save before exiting?&lt;/b&gt;</source>
-        <translation type="obsolete">&lt;b&gt;退出前是否保存文件？&lt;/b&gt;</translation>
-    </message>
-    <message>
-        <source>The following files have been modified:&lt;br/&gt; - </source>
-        <oldsource>Les fichiers suivants ont été modifiés depuis leur dernier enregistrement :&lt;br/&gt; - </oldsource>
-        <translation type="obsolete">下列文件已被修改：&lt;br/&gt; - </translation>
-    </message>
-    <message>
-        <source>The file &quot;</source>
-        <oldsource>Le fichier «&amp;#160;</oldsource>
-        <translation type="obsolete">文件&quot;</translation>
-    </message>
-    <message>
-        <source>&quot; has been modified.</source>
-        <translation type="obsolete">&quot;已被修改。</translation>
-    </message>
-    <message>
-        <source>Polyphone</source>
-        <translation type="obsolete">Polyphone</translation>
-    </message>
-    <message>
-        <location filename="mainwindow/mainwindow.cpp" line="270"/>
+        <location filename="mainwindow/mainwindow.cpp" line="271"/>
         <source>Opening files</source>
         <translation>正在打开文件</translation>
-    </message>
-    <message>
-        <source>Corrupted file: use of 16 bits samples.</source>
-        <translation type="obsolete">损坏的文件：使用 16 位样本。</translation>
-    </message>
-    <message>
-        <source>Cannot delete a sample used by another instrument.</source>
-        <translation type="obsolete">无法删除已被乐器使用的样本。</translation>
-    </message>
-    <message>
-        <source>Operation in progress...</source>
-        <translation type="obsolete">正在执行操作...</translation>
-    </message>
-    <message>
-        <source>Cannot delete an instrument used by another preset.</source>
-        <translation type="obsolete">无法删除已被预设使用的乐器。</translation>
-    </message>
-    <message>
-        <source>&amp;Yes</source>
-        <translation type="obsolete">是(&amp;Y)</translation>
-    </message>
-    <message>
-        <source>&amp;No</source>
-        <translation type="obsolete">否(&amp;N)</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;To many parameters defined in both the intruments and the presets.&lt;/b&gt;</source>
-        <translation type="obsolete">&lt;b&gt;在乐器和预设中定义了过多参数。&lt;/b&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;To many parameters defined in the instruments.&lt;/b&gt;</source>
-        <translation type="obsolete">&lt;b&gt;此乐器中定义了过多参数。&lt;/b&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;To many parameters defined in the presets.&lt;/b&gt;</source>
-        <translation type="obsolete">&lt;b&gt;此预设中定义了过多参数。&lt;/b&gt;</translation>
-    </message>
-    <message>
-        <source>Some synthesizers skip parameters beyond the  65536th.
-Splitting the file into several sf2 might solve the problem.</source>
-        <translation type="obsolete">一些合成器会忽略第 65536 个以后的参数。
-将文件分割到几个 SF2 文件中可能可以解决这个问题。</translation>
-    </message>
-    <message>
-        <source>Save, &amp;disable this message</source>
-        <translation type="obsolete">保存并不再提示(&amp;D)</translation>
-    </message>
-    <message>
-        <source>Save a soundfont</source>
-        <translation type="obsolete">保存音色库</translation>
-    </message>
-    <message>
-        <source>Unknown extension.</source>
-        <translation type="obsolete">未知扩展名。</translation>
-    </message>
-    <message>
-        <source>Cannot save the file.</source>
-        <translation type="obsolete">无法保存文件。</translation>
-    </message>
-    <message>
-        <source>http://polyphone-soundfonts.com/en/documentation</source>
-        <translatorcomment>should remain &quot;en&quot; if the documentation is not available in the current language</translatorcomment>
-        <translation type="obsolete">https://polyphone-soundfonts.com/en/documentation</translation>
-    </message>
-    <message>
-        <source>http://polyphone-soundfonts.com/en/forum</source>
-        <translation type="obsolete">https://polyphone-soundfonts.com/en/forum</translation>
-    </message>
-    <message>
-        <source>http://polyphone-soundfonts.com/en/soundfonts</source>
-        <translation type="obsolete">https://polyphone-soundfonts.com/en/soundfonts</translation>
-    </message>
-    <message>
-        <source>&amp;Bulk rename</source>
-        <translation type="obsolete">批量重命名(&amp;B)</translation>
-    </message>
-    <message>
-        <source>Sample name (max 20 characters):</source>
-        <oldsource>Nom du sample (max 20 caractères) :</oldsource>
-        <translation type="obsolete">样本名称(最多 20 个半角字符)：</translation>
-    </message>
-    <message>
-        <source>Question</source>
-        <translation type="obsolete">问题</translation>
-    </message>
-    <message>
-        <source>An error occurred while importing the file </source>
-        <translation type="obsolete">导入文件时发生错误 </translation>
-    </message>
-    <message>
-        <source>Wav file</source>
-        <oldsource>Fichier .wav (*.[wW][aA][vV])</oldsource>
-        <translation type="obsolete">WAV 文件</translation>
-    </message>
-    <message>
-        <source>The sample &quot;</source>
-        <translation type="obsolete">样本&quot;</translation>
-    </message>
-    <message>
-        <source>&amp;Replace</source>
-        <translation type="obsolete">替换(&amp;R)</translation>
-    </message>
-    <message>
-        <source>R&amp;eplace all</source>
-        <translation type="obsolete">全部替换(&amp;A)</translation>
-    </message>
-    <message>
-        <source>&amp;Duplicate</source>
-        <translation type="obsolete">创建副本(&amp;D)</translation>
-    </message>
-    <message>
-        <source>D&amp;uplicate all</source>
-        <translation type="obsolete">全部创建副本(&amp;U)</translation>
-    </message>
-    <message>
-        <source>&amp;Ignore</source>
-        <translation type="obsolete">忽略(&amp;I)</translation>
-    </message>
-    <message>
-        <source>I&amp;gnore all</source>
-        <translation type="obsolete">全部忽略(&amp;G)</translation>
-    </message>
-    <message>
-        <source>Merge soudfonts:</source>
-        <translation type="obsolete">合并音色库：</translation>
-    </message>
-    <message>
-        <source>No preset available.</source>
-        <translation type="obsolete">无预设可用。</translation>
-    </message>
-    <message>
-        <source> sample and </source>
-        <translation type="obsolete"> 个样本和 </translation>
-    </message>
-    <message>
-        <source> samples and </source>
-        <translation type="obsolete"> 个样本和 </translation>
-    </message>
-    <message>
-        <source>The soundfont must contain at least one instrument.</source>
-        <translation type="obsolete">音色库必须包含至少一个乐器。</translation>
-    </message>
-    <message>
-        <source>Export peak frequency</source>
-        <translation type="obsolete">导出峰值频率</translation>
-    </message>
-    <message>
-        <source>Csv file (*.csv)</source>
-        <translation type="obsolete">CSV 文件 (*.csv)</translation>
-    </message>
-    <message>
-        <source>,</source>
-        <translatorcomment>column separator symbol in csv files</translatorcomment>
-        <translation type="obsolete">,</translation>
-    </message>
-    <message>
-        <source>Sample</source>
-        <translation type="obsolete">样本</translation>
-    </message>
-    <message>
-        <source>Peak number</source>
-        <translation type="obsolete">峰值</translation>
-    </message>
-    <message>
-        <source>Factor</source>
-        <translation type="obsolete">系数</translation>
-    </message>
-    <message>
-        <source>Frequency</source>
-        <translation type="obsolete">频率</translation>
-    </message>
-    <message>
-        <source>Correction</source>
-        <translation type="obsolete">校正</translation>
-    </message>
-    <message>
-        <source>m</source>
-        <translatorcomment>decimal separator</translatorcomment>
-        <translation type="obsolete">.</translation>
-    </message>
-    <message>
-        <source>The soundfont contains no modulators.</source>
-        <translation type="obsolete">此音色库不包含调制器。</translation>
-    </message>
-    <message>
-        <source>Information</source>
-        <translation type="obsolete">信息</translation>
-    </message>
-    <message>
-        <source>1 modulator has been deleted.</source>
-        <translation type="obsolete">1 个调制器已被删除。</translation>
-    </message>
-    <message>
-        <source>modulators have been deleted.</source>
-        <translation type="obsolete">个调制器已被删除。</translation>
-    </message>
-    <message>
-        <source>Unknown format.</source>
-        <translation type="obsolete">未知格式。</translation>
-    </message>
-    <message>
-        <source>File already loaded.</source>
-        <translation type="obsolete">文件已被加载。</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;Losing resolution </source>
-        <translation type="obsolete">&lt;b&gt;丢失分辨率 </translation>
-    </message>
-    <message>
-        <source>The sample quality will be lowered. Continue?</source>
-        <translation type="obsolete">样本质量将会损失。是否继续？</translation>
-    </message>
-    <message>
-        <source>File already open, cannot save.</source>
-        <translation type="obsolete">文件已打开，无法保存。</translation>
-    </message>
-    <message>
-        <source>Choose a destination folder</source>
-        <translation type="obsolete">选择目标文件夹</translation>
-    </message>
-    <message>
-        <source>Name of the new instrument:</source>
-        <translation type="obsolete">新乐器名称：</translation>
-    </message>
-    <message>
-        <source>Name of the new preset:</source>
-        <translation type="obsolete">新预设名称：</translation>
-    </message>
-    <message>
-        <source> instrument have been deleted.</source>
-        <translatorcomment>instrument: singular</translatorcomment>
-        <translation type="obsolete"> 个乐器已被删除。</translation>
-    </message>
-    <message>
-        <source> instruments have been deleted.</source>
-        <translatorcomment>instrument: plural</translatorcomment>
-        <translation type="obsolete"> 个乐器已被删除。</translation>
     </message>
     <message>
         <location filename="mainwindow/mainwindow.ui" line="20"/>
@@ -4446,265 +2349,6 @@ Splitting the file into several sf2 might solve the problem.</source>
     </message>
 </context>
 <context>
-    <name>Page</name>
-    <message>
-        <source>, absolute value</source>
-        <translation type="obsolete">，绝对值</translation>
-    </message>
-    <message>
-        <source>Sample start offset</source>
-        <oldsource>Offset début sample</oldsource>
-        <translation type="obsolete">样本起点偏移</translation>
-    </message>
-    <message>
-        <source>Sample end offset</source>
-        <oldsource>Offset fin sample</oldsource>
-        <translation type="obsolete">样本终点偏移</translation>
-    </message>
-    <message>
-        <source>Start loop offset</source>
-        <translation type="obsolete">循环起点偏移</translation>
-    </message>
-    <message>
-        <source>End loop offset</source>
-        <translation type="obsolete">循环终点偏移</translation>
-    </message>
-    <message>
-        <source>Mod LFO → pitch (c)</source>
-        <translation type="obsolete">Mod LFO → pitch (c)</translation>
-    </message>
-    <message>
-        <source>Vib LFO → pitch (c)</source>
-        <translation type="obsolete">Vib LFO → pitch (c)</translation>
-    </message>
-    <message>
-        <source>Mod env → pitch (c)</source>
-        <translation type="obsolete">Mod env → pitch (c)</translation>
-    </message>
-    <message>
-        <source>Filter, frequency (Hz)</source>
-        <translation type="obsolete">频率滤波(赫兹)</translation>
-    </message>
-    <message>
-        <source>Filter, frequency (×)</source>
-        <translation type="obsolete">频率滤波(×)</translation>
-    </message>
-    <message>
-        <source>Filter, resonance (dB)</source>
-        <translation type="obsolete">共鸣滤波(分贝)</translation>
-    </message>
-    <message>
-        <source>Mod LFO → filter (c)</source>
-        <translation type="obsolete">Mod LFO → filter (c)</translation>
-    </message>
-    <message>
-        <source>Mod env → filter (c)</source>
-        <translation type="obsolete">Mod env → filter (c)</translation>
-    </message>
-    <message>
-        <source>Mod LFO → volume (dB)</source>
-        <translation type="obsolete">Mod LFO → volume (dB)</translation>
-    </message>
-    <message>
-        <source>Chorus (%)</source>
-        <translation type="obsolete">和声(%)</translation>
-    </message>
-    <message>
-        <source>Reverb (%)</source>
-        <translation type="obsolete">混响(%)</translation>
-    </message>
-    <message>
-        <source>Pan [-50;50]</source>
-        <translation type="obsolete">平衡[-50:50]</translation>
-    </message>
-    <message>
-        <source>Pan [-100;100]</source>
-        <translation type="obsolete">平衡[-100:100]</translation>
-    </message>
-    <message>
-        <source>Mod LFO delay (s)</source>
-        <translatorcomment>english formulations may be kept...</translatorcomment>
-        <translation type="obsolete">Mod LFO delay (s)</translation>
-    </message>
-    <message>
-        <source>Mod LFO delay (×)</source>
-        <translation type="obsolete">Mod LFO delay (×)</translation>
-    </message>
-    <message>
-        <source>Mod LFO freq (Hz)</source>
-        <translation type="obsolete">Mod LFO freq (Hz)</translation>
-    </message>
-    <message>
-        <source>Mod LFO freq (×)</source>
-        <translation type="obsolete">Mod LFO freq (×)</translation>
-    </message>
-    <message>
-        <source>Vib LFO delay (s)</source>
-        <translation type="obsolete">Vib LFO delay (s)</translation>
-    </message>
-    <message>
-        <source>Vib LFO delay (×)</source>
-        <translation type="obsolete">Vib LFO delay (×)</translation>
-    </message>
-    <message>
-        <source>Vib LFO freq (Hz)</source>
-        <translation type="obsolete">Vib LFO freq (Hz)</translation>
-    </message>
-    <message>
-        <source>Vib LFO freq (×)</source>
-        <translation type="obsolete">Vib LFO freq (×)</translation>
-    </message>
-    <message>
-        <source>Mod env delay (s)</source>
-        <translation type="obsolete">调制包络延迟(秒)</translation>
-    </message>
-    <message>
-        <source>Mod env delay (×)</source>
-        <translation type="obsolete">调制包络延迟(×)</translation>
-    </message>
-    <message>
-        <source>Mod env attack (s)</source>
-        <translation type="obsolete">调制包络起音(s)</translation>
-    </message>
-    <message>
-        <source>Mod env attack (×)</source>
-        <translation type="obsolete">调制包络起音(×)</translation>
-    </message>
-    <message>
-        <source>Mod env hold (s)</source>
-        <translation type="obsolete">调制包络保持(秒)</translation>
-    </message>
-    <message>
-        <source>Mod env hold (×)</source>
-        <translation type="obsolete">调制包络保持(×)</translation>
-    </message>
-    <message>
-        <source>Mod env decay (s)</source>
-        <translation type="obsolete">调制包络衰减(秒)</translation>
-    </message>
-    <message>
-        <source>Mod env decay (×)</source>
-        <translation type="obsolete">调制包络衰减(×)</translation>
-    </message>
-    <message>
-        <source>Mod env sustain (%)</source>
-        <translation type="obsolete">调制包络延音(%)</translation>
-    </message>
-    <message>
-        <source>Mod env release (s)</source>
-        <translation type="obsolete">调制包络释音(秒)</translation>
-    </message>
-    <message>
-        <source>Mod env release (×)</source>
-        <translation type="obsolete">调制包络释音(×)</translation>
-    </message>
-    <message>
-        <source>Key → Mod env hold (c)</source>
-        <translation type="obsolete">Key → Mod env hold (c)</translation>
-    </message>
-    <message>
-        <source>Key → Mod env decay (c)</source>
-        <translation type="obsolete">Key → Mod env decay (c)</translation>
-    </message>
-    <message>
-        <source>Vol env delay (s)</source>
-        <translation type="obsolete">音量包络延迟(秒)</translation>
-    </message>
-    <message>
-        <source>Vol env delay (×)</source>
-        <translation type="obsolete">音量包络延迟(×)</translation>
-    </message>
-    <message>
-        <source>Vol env decay (s)</source>
-        <translation type="obsolete">音量包络衰减(秒)</translation>
-    </message>
-    <message>
-        <source>Vol env decay (×)</source>
-        <translation type="obsolete">音量包络衰减(×)</translation>
-    </message>
-    <message>
-        <source>Vol env attack (s)</source>
-        <translation type="obsolete">音量包络起音(秒)</translation>
-    </message>
-    <message>
-        <source>Vol env attack (×)</source>
-        <translation type="obsolete">音量包络起音(×)</translation>
-    </message>
-    <message>
-        <source>Vol env hold (s)</source>
-        <translation type="obsolete">音量包络保持(秒)</translation>
-    </message>
-    <message>
-        <source>Vol env hold (×)</source>
-        <translation type="obsolete">音量包络保持(×)</translation>
-    </message>
-    <message>
-        <source>Vol env sustain (dB)</source>
-        <oldsource>Vol env sustain (%)</oldsource>
-        <translation type="obsolete">音量包络延音(秒)</translation>
-    </message>
-    <message>
-        <source>Vol env release (s)</source>
-        <translation type="obsolete">音量包络释音(秒)</translation>
-    </message>
-    <message>
-        <source>Vol env release (×)</source>
-        <translation type="obsolete">音量包络释音(×)</translation>
-    </message>
-    <message>
-        <source>Key → Vol env hold (c)</source>
-        <translation type="obsolete">Key → Vol env hold (c)</translation>
-    </message>
-    <message>
-        <source>Key → Vol env decay (c)</source>
-        <translation type="obsolete">Key → Vol env decay (c)</translation>
-    </message>
-    <message>
-        <source>Key range</source>
-        <translation type="obsolete">音符范围</translation>
-    </message>
-    <message>
-        <source>Velocity range</source>
-        <translation type="obsolete">力度范围</translation>
-    </message>
-    <message>
-        <source>Fixed key</source>
-        <translation type="obsolete">固定音符</translation>
-    </message>
-    <message>
-        <source>Fixed velocity</source>
-        <translation type="obsolete">固定力度</translation>
-    </message>
-    <message>
-        <source>Attenuation (dB)</source>
-        <translation type="obsolete">衰减(分贝)</translation>
-    </message>
-    <message>
-        <source>Tuning (semi-tones)</source>
-        <translation type="obsolete">校音(半音)</translation>
-    </message>
-    <message>
-        <source>Tuning (cents)</source>
-        <translation type="obsolete">校音(音分)</translation>
-    </message>
-    <message>
-        <source>Loop playback</source>
-        <translation type="obsolete">循环播放</translation>
-    </message>
-    <message>
-        <source>Tuning (scale)</source>
-        <translation type="obsolete">校音(音阶)</translation>
-    </message>
-    <message>
-        <source>Exclusive class</source>
-        <translation type="obsolete">独占类</translation>
-    </message>
-    <message>
-        <source>Root key</source>
-        <translation type="obsolete">根音符</translation>
-    </message>
-</context>
-<context>
     <name>PageInst</name>
     <message>
         <location filename="editor/pageinst.ui" line="141"/>
@@ -4791,10 +2435,6 @@ Splitting the file into several sf2 might solve the problem.</source>
 <context>
     <name>PageOverview</name>
     <message>
-        <source>Name</source>
-        <translation type="obsolete">名称</translation>
-    </message>
-    <message>
         <location filename="editor/overview/pageoverview.cpp" line="83"/>
         <source>elements</source>
         <translation type="unfinished"></translation>
@@ -4807,10 +2447,6 @@ Splitting the file into several sf2 might solve the problem.</source>
 </context>
 <context>
     <name>PageOverviewInst</name>
-    <message>
-        <source>Instrument list</source>
-        <translation type="obsolete">乐器列表</translation>
-    </message>
     <message>
         <location filename="editor/overview/pageoverviewinst.cpp" line="32"/>
         <source>Instruments</source>
@@ -4901,10 +2537,6 @@ Splitting the file into several sf2 might solve the problem.</source>
 <context>
     <name>PageOverviewPrst</name>
     <message>
-        <source>Preset list</source>
-        <translation type="obsolete">预设列表</translation>
-    </message>
-    <message>
         <location filename="editor/overview/pageoverviewprst.cpp" line="32"/>
         <source>Presets</source>
         <translation>预设</translation>
@@ -4965,10 +2597,6 @@ Splitting the file into several sf2 might solve the problem.</source>
 </context>
 <context>
     <name>PageOverviewSmpl</name>
-    <message>
-        <source>Sample list</source>
-        <translation type="obsolete">样本列表</translation>
-    </message>
     <message>
         <location filename="editor/overview/pageoverviewsmpl.cpp" line="38"/>
         <source>Used</source>
@@ -5479,984 +3107,91 @@ rate</source>
 <context>
     <name>PageTable</name>
     <message>
-        <location filename="editor/pagetable.cpp" line="107"/>
+        <location filename="editor/pagetable.cpp" line="111"/>
         <source>Global</source>
         <translation>全局</translation>
     </message>
     <message>
-        <location filename="editor/pagetable.cpp" line="505"/>
-        <location filename="editor/pagetable.cpp" line="527"/>
-        <location filename="editor/pagetable.cpp" line="1573"/>
-        <location filename="editor/pagetable.cpp" line="1639"/>
+        <location filename="editor/pagetable.cpp" line="521"/>
+        <location filename="editor/pagetable.cpp" line="543"/>
+        <location filename="editor/pagetable.cpp" line="1589"/>
+        <location filename="editor/pagetable.cpp" line="1655"/>
         <source>Modulator</source>
         <translation>调制器</translation>
     </message>
     <message>
-        <location filename="editor/pagetable.cpp" line="507"/>
+        <location filename="editor/pagetable.cpp" line="523"/>
         <source>Link (invalid)</source>
         <translation>链接(不合法)</translation>
     </message>
     <message>
-        <location filename="editor/pagetable.cpp" line="559"/>
+        <location filename="editor/pagetable.cpp" line="575"/>
         <source>Copy / duplicate modulators</source>
         <translation>复制调制器</translation>
     </message>
     <message>
-        <location filename="editor/pagetable.cpp" line="562"/>
+        <location filename="editor/pagetable.cpp" line="578"/>
         <source>Duplicate modulators toward...</source>
         <translation>复制调制器到...</translation>
     </message>
     <message>
-        <location filename="editor/pagetable.cpp" line="563"/>
-        <location filename="editor/pagetable.cpp" line="574"/>
+        <location filename="editor/pagetable.cpp" line="579"/>
+        <location filename="editor/pagetable.cpp" line="590"/>
         <source>Copy all modulators</source>
         <translation>复制全部调制器</translation>
     </message>
     <message>
-        <location filename="editor/pagetable.cpp" line="567"/>
+        <location filename="editor/pagetable.cpp" line="583"/>
         <source>Duplicate the selection toward...</source>
         <translation>复制选择项到...</translation>
     </message>
     <message>
-        <location filename="editor/pagetable.cpp" line="568"/>
-        <location filename="editor/pagetable.cpp" line="576"/>
+        <location filename="editor/pagetable.cpp" line="584"/>
+        <location filename="editor/pagetable.cpp" line="592"/>
         <source>Copy the selected modulators</source>
         <translation>复制选择的调制器</translation>
     </message>
     <message>
-        <location filename="editor/pagetable.cpp" line="1888"/>
+        <location filename="editor/pagetable.cpp" line="1904"/>
         <source>Forbidden action:</source>
         <translation>禁止操作：</translation>
     </message>
     <message>
-        <location filename="editor/pagetable.cpp" line="1898"/>
-        <location filename="editor/pagetable.cpp" line="1907"/>
-        <location filename="editor/pagetable.cpp" line="2386"/>
-        <location filename="editor/pagetable.cpp" line="2395"/>
+        <location filename="editor/pagetable.cpp" line="1914"/>
+        <location filename="editor/pagetable.cpp" line="1923"/>
+        <location filename="editor/pagetable.cpp" line="2402"/>
+        <location filename="editor/pagetable.cpp" line="2411"/>
         <source>Warning</source>
         <translation>警告</translation>
     </message>
     <message>
-        <location filename="editor/pagetable.cpp" line="1899"/>
+        <location filename="editor/pagetable.cpp" line="1915"/>
         <source>offsets cannot be modulated in a preset.</source>
         <translation>在预设中偏移量无法被调制。</translation>
     </message>
     <message>
-        <location filename="editor/pagetable.cpp" line="1908"/>
+        <location filename="editor/pagetable.cpp" line="1924"/>
         <source>%1 cannot be modulated in a preset.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&quot; cannot be modulated in a preset.</source>
-        <translation type="obsolete">&quot;在预设中无法被调制。</translation>
-    </message>
-    <message>
-        <location filename="editor/pagetable.cpp" line="2387"/>
+        <location filename="editor/pagetable.cpp" line="2403"/>
         <source>An instrument comprising no samples is not compatible with this tool.</source>
         <translation>不含样本的乐器与该工具不兼容。</translation>
     </message>
     <message>
-        <location filename="editor/pagetable.cpp" line="2388"/>
+        <location filename="editor/pagetable.cpp" line="2404"/>
         <source>A preset comprising no instruments is not compatible with this tool.</source>
         <translation>不包含乐器的预设与该工具不兼容。</translation>
     </message>
     <message>
-        <location filename="editor/pagetable.cpp" line="2395"/>
+        <location filename="editor/pagetable.cpp" line="2411"/>
         <source>The keyrange of all divisions must be specified.</source>
         <translation>必须为每个分层设置音符范围。</translation>
-    </message>
-    <message>
-        <source>The instrument contains no samples.</source>
-        <translation type="obsolete">该乐器不包含样本。</translation>
-    </message>
-    <message>
-        <source>The preset contains no instruments.</source>
-        <translation type="obsolete">该预设不包含乐器。</translation>
-    </message>
-    <message>
-        <source>No keyrange specified for the instrument.</source>
-        <translation type="obsolete">该乐器未指定音符范围。</translation>
-    </message>
-    <message>
-        <source>No keyrange specified for the preset.</source>
-        <translation type="obsolete">该预设未指定音符范围。</translation>
-    </message>
-</context>
-<context>
-    <name>Page_Inst</name>
-    <message>
-        <source>Table</source>
-        <translation type="obsolete">表格</translation>
-    </message>
-    <message>
-        <source>Ranges</source>
-        <translation type="obsolete">分层范围</translation>
-    </message>
-    <message>
-        <source>Envelopes</source>
-        <translation type="obsolete">包络</translation>
-    </message>
-    <message>
-        <source>Key range</source>
-        <translation type="obsolete">音符范围</translation>
-    </message>
-    <message>
-        <source>Velocity range</source>
-        <translation type="obsolete">力度范围</translation>
-    </message>
-    <message>
-        <source>Attenuation (dB)</source>
-        <translation type="obsolete">衰减(分贝)</translation>
-    </message>
-    <message>
-        <source>Pan [-50;50]</source>
-        <translation type="obsolete">平衡[-50:50]</translation>
-    </message>
-    <message>
-        <source>Loop playback</source>
-        <translation type="obsolete">循环播放</translation>
-    </message>
-    <message>
-        <source>Root key</source>
-        <translatorcomment>基础音</translatorcomment>
-        <translation type="obsolete">根音符</translation>
-    </message>
-    <message>
-        <source>Tuning (semi-tones)</source>
-        <translation type="obsolete">校音(半音)</translation>
-    </message>
-    <message>
-        <source>Tuning (cents)</source>
-        <translation type="obsolete">校音(音分)</translation>
-    </message>
-    <message>
-        <source>Tuning (scale)</source>
-        <translation type="obsolete">校音(音阶)</translation>
-    </message>
-    <message>
-        <source>Filter, frequency (Hz)</source>
-        <translation type="obsolete">频率滤波(赫兹)</translation>
-    </message>
-    <message>
-        <source>Filter, resonance (dB)</source>
-        <translation type="obsolete">共鸣滤波(分贝)</translation>
-    </message>
-    <message>
-        <source>Vol env delay (s)</source>
-        <translation type="obsolete">音量包络延迟(秒)</translation>
-    </message>
-    <message>
-        <source>Vol env attack (s)</source>
-        <translation type="obsolete">音量包络起音(秒)</translation>
-    </message>
-    <message>
-        <source>Vol env hold (s)</source>
-        <translation type="obsolete">音量包络保持(秒)</translation>
-    </message>
-    <message>
-        <source>Vol env decay (s)</source>
-        <translation type="obsolete">音量包络衰减(秒)</translation>
-    </message>
-    <message>
-        <source>Vol env sustain (dB)</source>
-        <translation type="obsolete">音量包络延音(秒)</translation>
-    </message>
-    <message>
-        <source>Vol env release (s)</source>
-        <translation type="obsolete">音量包络释音(秒)</translation>
-    </message>
-    <message>
-        <source>Key → Vol env hold (c)</source>
-        <oldsource>Vol env note → hold (c)</oldsource>
-        <translation type="obsolete">Key → Vol env hold (c)</translation>
-    </message>
-    <message>
-        <source>Key → Vol env decay (c)</source>
-        <oldsource>Vol env note → decay (c)</oldsource>
-        <translation type="obsolete">Key → Vol env decay (c)</translation>
-    </message>
-    <message>
-        <source>Mod env delay (s)</source>
-        <translation type="obsolete">调制包络延迟(秒)</translation>
-    </message>
-    <message>
-        <source>Mod env attack (s)</source>
-        <translation type="obsolete">调制包络起音(秒)</translation>
-    </message>
-    <message>
-        <source>Mod env hold (s)</source>
-        <translation type="obsolete">调制包络保持(秒)</translation>
-    </message>
-    <message>
-        <source>Mod env decay (s)</source>
-        <translation type="obsolete">调制包络衰减(秒)</translation>
-    </message>
-    <message>
-        <source>Mod env sustain (%)</source>
-        <translation type="obsolete">调制包络延音(秒)</translation>
-    </message>
-    <message>
-        <source>Mod env release (s)</source>
-        <translation type="obsolete">调制包络释音(秒)</translation>
-    </message>
-    <message>
-        <source>Mod env → pitch (c)</source>
-        <translation type="obsolete">Mod env → pitch (c)</translation>
-    </message>
-    <message>
-        <source>Mod env → filter (c)</source>
-        <translation type="obsolete">Mod env → filter (c)</translation>
-    </message>
-    <message>
-        <source>Key → Mod env hold (c)</source>
-        <oldsource>Mod env note → hold (c)</oldsource>
-        <translation type="obsolete">Key → Mod env hold (c)</translation>
-    </message>
-    <message>
-        <source>Key → Mod env decay (c)</source>
-        <oldsource>Mod env note → decay (c)</oldsource>
-        <translation type="obsolete">Key → Mod env decay (c)</translation>
-    </message>
-    <message>
-        <source>Mod LFO delay (s)</source>
-        <translation type="obsolete">Mod LFO delay (s)</translation>
-    </message>
-    <message>
-        <source>Mod LFO freq (Hz)</source>
-        <translation type="obsolete">Mod LFO freq (Hz)</translation>
-    </message>
-    <message>
-        <source>Mod LFO → pitch (c)</source>
-        <translation type="obsolete">Mod LFO → pitch (c)</translation>
-    </message>
-    <message>
-        <source>Mod LFO → filter (c)</source>
-        <translation type="obsolete">Mod LFO → filter (c)</translation>
-    </message>
-    <message>
-        <source>Mod LFO → volume (dB)</source>
-        <translation type="obsolete">Mod LFO → volume (dB)</translation>
-    </message>
-    <message>
-        <source>Vib LFO delay (s)</source>
-        <translation type="obsolete">Vib LFO delay (s)</translation>
-    </message>
-    <message>
-        <source>Vib LFO freq (Hz)</source>
-        <translation type="obsolete">Vib LFO freq (Hz)</translation>
-    </message>
-    <message>
-        <source>Vib LFO → pitch (c)</source>
-        <translation type="obsolete">Vib LFO → pitch (c)</translation>
-    </message>
-    <message>
-        <source>Exclusive class</source>
-        <translation type="obsolete">独占类</translation>
-    </message>
-    <message>
-        <source>Chorus (%)</source>
-        <translation type="obsolete">和声(%)</translation>
-    </message>
-    <message>
-        <source>Reverb (%)</source>
-        <translation type="obsolete">混响(%)</translation>
-    </message>
-    <message>
-        <source>Fixed key</source>
-        <translation type="obsolete">固定音符</translation>
-    </message>
-    <message>
-        <source>Fixed velocity</source>
-        <translation type="obsolete">固定力度</translation>
-    </message>
-    <message>
-        <source>Sample start offset</source>
-        <oldsource>Offset début sample</oldsource>
-        <translation type="obsolete">样本起点偏移</translation>
-    </message>
-    <message>
-        <source>Sample end offset</source>
-        <oldsource>Offset fin sample</oldsource>
-        <translation type="obsolete">样本终点偏移</translation>
-    </message>
-    <message>
-        <source>Start loop offset</source>
-        <translation type="obsolete">循环起点偏移</translation>
-    </message>
-    <message>
-        <source>End loop offset</source>
-        <translation type="obsolete">循环终点偏移</translation>
-    </message>
-    <message>
-        <source>Global</source>
-        <translation type="obsolete">全局</translation>
-    </message>
-    <message>
-        <source>Delete a modulator</source>
-        <translation type="obsolete">删除调制器</translation>
-    </message>
-    <message>
-        <source>Copy modulators</source>
-        <translation type="obsolete">复制调制器</translation>
-    </message>
-    <message>
-        <source>Paste the copied modulators</source>
-        <translation type="obsolete">粘贴调制器</translation>
-    </message>
-    <message>
-        <source>Modulators</source>
-        <translation type="obsolete">调制器</translation>
-    </message>
-    <message>
-        <source>Add a modulator</source>
-        <translation type="obsolete">添加调制器</translation>
-    </message>
-    <message>
-        <source>Source</source>
-        <translation type="obsolete">来源值</translation>
-    </message>
-    <message>
-        <source>Amount</source>
-        <translation type="obsolete">量</translation>
-    </message>
-    <message>
-        <source>Destination</source>
-        <translation type="obsolete">调制目标</translation>
-    </message>
-    <message>
-        <source>Source / Amount</source>
-        <translation type="obsolete">来源值/量</translation>
-    </message>
-    <message>
-        <source>Abs. value</source>
-        <translation type="obsolete">绝对值</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;Instrument is not linked to any preset.&lt;/b&gt;</source>
-        <oldsource>&lt;b&gt;Instrument liÃ© Ã  aucun preset.&lt;/b&gt;</oldsource>
-        <translation type="obsolete">&lt;b&gt;乐器未链接到任何预设。&lt;/b&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;Instrument linked to preset: &lt;/b&gt;</source>
-        <oldsource>&lt;b&gt;Instrument liÃ© au preset : &lt;/b&gt;</oldsource>
-        <translation type="obsolete">&lt;b&gt;乐器已链接到的预设:&lt;/b&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;Instrument linked to presets: &lt;/b&gt;</source>
-        <oldsource>&lt;b&gt;Instrument liÃ© aux presets : &lt;/b&gt;</oldsource>
-        <translation type="obsolete">&lt;b&gt;乐器已链接到的预设:&lt;/b&gt;</translation>
-    </message>
-    <message>
-        <source>Warning</source>
-        <translation type="obsolete">警告</translation>
-    </message>
-    <message>
-        <source>The instrument contains no samples.</source>
-        <translation type="obsolete">此乐器不包含样本。</translation>
-    </message>
-    <message>
-        <source>Creation </source>
-        <translation type="obsolete">Creation </translation>
-    </message>
-    <message>
-        <source>Cancel</source>
-        <translation type="obsolete">取消</translation>
-    </message>
-    <message>
-        <source>untitled</source>
-        <translation type="obsolete">未命名</translation>
-    </message>
-</context>
-<context>
-    <name>Page_Prst</name>
-    <message>
-        <source>Bank</source>
-        <translation type="obsolete">库</translation>
-    </message>
-    <message>
-        <source>Preset</source>
-        <translation type="obsolete">预设</translation>
-    </message>
-    <message>
-        <source>(percussion)</source>
-        <translation type="obsolete">(percussion)</translation>
-    </message>
-    <message>
-        <source>Key range</source>
-        <translation type="obsolete">音符范围</translation>
-    </message>
-    <message>
-        <source>Velocity range</source>
-        <translation type="obsolete">力度范围</translation>
-    </message>
-    <message>
-        <source>Attenuation (dB)</source>
-        <translation type="obsolete">衰减(分贝)</translation>
-    </message>
-    <message>
-        <source>Pan [-100;100]</source>
-        <oldsource>Balance [-50;50]</oldsource>
-        <translation type="obsolete">平衡[-100:100]</translation>
-    </message>
-    <message>
-        <source>Tuning (semi-tones)</source>
-        <translation type="obsolete">校音(半音)</translation>
-    </message>
-    <message>
-        <source>Tuning (cents)</source>
-        <translation type="obsolete">校音(音分)</translation>
-    </message>
-    <message>
-        <source>Tuning (scale)</source>
-        <translation type="obsolete">校音(音阶)</translation>
-    </message>
-    <message>
-        <source>Filter, frequency (×)</source>
-        <oldsource>Filtre, fréquence (Hz)</oldsource>
-        <translation type="obsolete">频率滤波(×)</translation>
-    </message>
-    <message>
-        <source>Filter, resonance (dB)</source>
-        <translation type="obsolete">共鸣滤波(分贝)</translation>
-    </message>
-    <message>
-        <source>Vol env delay (×)</source>
-        <oldsource>Vol env delay (s)</oldsource>
-        <translation type="obsolete">音量包络延迟(×)</translation>
-    </message>
-    <message>
-        <source>Vol env attack (×)</source>
-        <oldsource>Vol env attack (s)</oldsource>
-        <translation type="obsolete">音量包络起音(×)</translation>
-    </message>
-    <message>
-        <source>Vol env hold (×)</source>
-        <oldsource>Vol env hold (s)</oldsource>
-        <translation type="obsolete">音量包络保持(×)</translation>
-    </message>
-    <message>
-        <source>Vol env decay (×)</source>
-        <oldsource>Vol env decay (s)</oldsource>
-        <translation type="obsolete">音量包络衰减(×)</translation>
-    </message>
-    <message>
-        <source>Vol env sustain (dB)</source>
-        <translation type="obsolete">音量包络延音(分贝)</translation>
-    </message>
-    <message>
-        <source>Vol env release (×)</source>
-        <oldsource>Vol env release (s)</oldsource>
-        <translation type="obsolete">音量包络释音(×)</translation>
-    </message>
-    <message>
-        <source>Key → Vol env hold (c)</source>
-        <oldsource>Vol env note → hold (c)</oldsource>
-        <translation type="obsolete">Key → Vol env hold (c)</translation>
-    </message>
-    <message>
-        <source>Key → Vol env decay (c)</source>
-        <oldsource>Vol env note → decay (c)</oldsource>
-        <translation type="obsolete">Key → Vol env decay (c)</translation>
-    </message>
-    <message>
-        <source>Mod env delay (×)</source>
-        <oldsource>Mod env delay (s)</oldsource>
-        <translation type="obsolete">调制包络延迟(×)</translation>
-    </message>
-    <message>
-        <source>Mod env attack (×)</source>
-        <oldsource>Mod env attack (s)</oldsource>
-        <translation type="obsolete">调制包络起音(×)</translation>
-    </message>
-    <message>
-        <source>Mod env hold (×)</source>
-        <oldsource>Mod env hold (s)</oldsource>
-        <translation type="obsolete">调制包络保持(×)</translation>
-    </message>
-    <message>
-        <source>Mod env decay (×)</source>
-        <oldsource>Mod env decay (s)</oldsource>
-        <translation type="obsolete">调制包络衰减(×)</translation>
-    </message>
-    <message>
-        <source>Mod env sustain (%)</source>
-        <translation type="obsolete">调制包络延音(%)</translation>
-    </message>
-    <message>
-        <source>Mod env release (×)</source>
-        <oldsource>Mod env release (s)</oldsource>
-        <translation type="obsolete">调制包络释音(×)</translation>
-    </message>
-    <message>
-        <source>Mod env → pitch (c)</source>
-        <translation type="obsolete">Mod env → pitch (c)</translation>
-    </message>
-    <message>
-        <source>Mod env → filter (c)</source>
-        <translation type="obsolete">Mod env → filter (c)</translation>
-    </message>
-    <message>
-        <source>Key → Mod env hold (c)</source>
-        <oldsource>Mod env note → hold (c)</oldsource>
-        <translation type="obsolete">Key → Mod env hold (c)</translation>
-    </message>
-    <message>
-        <source>Key → Mod env decay (c)</source>
-        <oldsource>Mod env note → decay (c)</oldsource>
-        <translation type="obsolete">Key → Mod env decay (c)</translation>
-    </message>
-    <message>
-        <source>Mod LFO delay (×)</source>
-        <oldsource>Mod LFO delay (s)</oldsource>
-        <translatorcomment>调制低频振荡延迟(×)</translatorcomment>
-        <translation type="obsolete">Mod LFO delay (×)</translation>
-    </message>
-    <message>
-        <source>Mod LFO freq (×)</source>
-        <oldsource>Mod LFO freq (Hz)</oldsource>
-        <translation type="obsolete">Mod LFO freq (×)</translation>
-    </message>
-    <message>
-        <source>Mod LFO → pitch (c)</source>
-        <translation type="obsolete">Mod LFO → pitch (c)</translation>
-    </message>
-    <message>
-        <source>Mod LFO → filter (c)</source>
-        <translation type="obsolete">Mod LFO → filter (c)</translation>
-    </message>
-    <message>
-        <source>Mod LFO → volume (dB)</source>
-        <translation type="obsolete">Mod LFO → volume (dB)</translation>
-    </message>
-    <message>
-        <source>Vib LFO delay (×)</source>
-        <oldsource>Vib LFO delay (s)</oldsource>
-        <translation type="obsolete">Vib LFO delay (×)</translation>
-    </message>
-    <message>
-        <source>Vib LFO freq (×)</source>
-        <oldsource>Vib LFO freq (Hz)</oldsource>
-        <translation type="obsolete">Vib LFO freq (×)</translation>
-    </message>
-    <message>
-        <source>Vib LFO → pitch (c)</source>
-        <translation type="obsolete">Vib LFO → pitch (c)</translation>
-    </message>
-    <message>
-        <source>Chorus (%)</source>
-        <translation type="obsolete">和声(%)</translation>
-    </message>
-    <message>
-        <source>Reverb (%)</source>
-        <translation type="obsolete">混响(%)</translation>
-    </message>
-    <message>
-        <source>Global</source>
-        <translation type="obsolete">全局</translation>
-    </message>
-    <message>
-        <source>Copy modulators</source>
-        <translation type="obsolete">复制调制器</translation>
-    </message>
-    <message>
-        <source>Paste the copied modulators</source>
-        <translation type="obsolete">粘贴调制器</translation>
-    </message>
-    <message>
-        <source>Add a modulator</source>
-        <translation type="obsolete">添加调制器</translation>
-    </message>
-    <message>
-        <source>Delete a modulator</source>
-        <translation type="obsolete">删除调制器</translation>
-    </message>
-    <message>
-        <source>Modulators</source>
-        <translation type="obsolete">调制器</translation>
-    </message>
-    <message>
-        <source>Table</source>
-        <translation type="obsolete">表格</translation>
-    </message>
-    <message>
-        <source>Ranges</source>
-        <translation type="obsolete">范围</translation>
-    </message>
-    <message>
-        <source>Source</source>
-        <translation type="obsolete">来源值</translation>
-    </message>
-    <message>
-        <source>Amount</source>
-        <translation type="obsolete">量</translation>
-    </message>
-    <message>
-        <source>Destination</source>
-        <translation type="obsolete">目标</translation>
-    </message>
-    <message>
-        <source>Source / Amount</source>
-        <translation type="obsolete">来源值/量</translation>
-    </message>
-    <message>
-        <source>Abs. value</source>
-        <translation type="obsolete">绝对值</translation>
-    </message>
-</context>
-<context>
-    <name>Page_Sf2</name>
-    <message>
-        <source>Name</source>
-        <translation type="obsolete">名称</translation>
-    </message>
-    <message>
-        <source>Author</source>
-        <translation type="obsolete">作者</translation>
-    </message>
-    <message>
-        <source>24 bits</source>
-        <translation type="obsolete">24 位</translation>
-    </message>
-    <message>
-        <source>Copyright</source>
-        <translation type="obsolete">版权</translation>
-    </message>
-    <message>
-        <source>Date</source>
-        <translation type="obsolete">日期</translation>
-    </message>
-    <message>
-        <source>Current date</source>
-        <translation type="obsolete">当前日期</translation>
-    </message>
-    <message>
-        <source>Product</source>
-        <translation type="obsolete">制造商</translation>
-    </message>
-    <message>
-        <source>Comments</source>
-        <translation type="obsolete">备注</translation>
-    </message>
-    <message>
-        <source>Samples</source>
-        <translation type="obsolete">样本</translation>
-    </message>
-    <message>
-        <source>Soundfont version</source>
-        <translation type="obsolete">音色库版本</translation>
-    </message>
-    <message>
-        <source>Sound engine</source>
-        <translation type="obsolete">音频引擎</translation>
-    </message>
-    <message>
-        <source>ROM name and version</source>
-        <oldsource>Version ROM</oldsource>
-        <translation type="obsolete">ROM 名称和版本</translation>
-    </message>
-    <message>
-        <source>File</source>
-        <translation type="obsolete">文件</translation>
-    </message>
-    <message>
-        <source>Number of parameters (instruments)</source>
-        <translation type="obsolete">乐器参数数</translation>
-    </message>
-    <message>
-        <source>Number of parameters (presets)</source>
-        <translation type="obsolete">预设参数数</translation>
-    </message>
-    <message>
-        <source>Editing software</source>
-        <oldsource>Logiciel d&apos;édition</oldsource>
-        <translation type="obsolete">编辑软件</translation>
-    </message>
-    <message>
-        <source>Sample number</source>
-        <oldsource>Nombre de samples</oldsource>
-        <translation type="obsolete">样本数</translation>
-    </message>
-    <message>
-        <source>Instrument number</source>
-        <translation type="obsolete">乐器数</translation>
-    </message>
-    <message>
-        <source>Preset number</source>
-        <translation type="obsolete">预设数</translation>
-    </message>
-    <message>
-        <source> (unused: </source>
-        <oldsource> (inutilisés: </oldsource>
-        <translatorcomment>plural</translatorcomment>
-        <translation type="obsolete"> (未使用： </translation>
-    </message>
-</context>
-<context>
-    <name>Page_Smpl</name>
-    <message>
-        <source>&lt;b&gt;Frequency&lt;/b&gt;</source>
-        <translation type="obsolete">&lt;b&gt;频率&lt;/b&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Information&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="obsolete">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;信息&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-    </message>
-    <message>
-        <source>Reset</source>
-        <translation type="obsolete">重设</translation>
-    </message>
-    <message>
-        <source>Apply</source>
-        <translation type="obsolete">应用</translation>
-    </message>
-    <message>
-        <source>Use the full length of the sample as loop</source>
-        <translation type="obsolete">全长循环</translation>
-    </message>
-    <message>
-        <source>Use the estimated pitch and correction as values</source>
-        <translation type="obsolete">使用音高测量校正音符值</translation>
-    </message>
-    <message>
-        <source>Play</source>
-        <translation type="obsolete">播放</translation>
-    </message>
-    <message>
-        <source>loop</source>
-        <translation type="obsolete">循环</translation>
-    </message>
-    <message>
-        <source>stereo</source>
-        <translation type="obsolete">双声道</translation>
-    </message>
-    <message>
-        <source>sinus</source>
-        <translatorcomment>A sinus calibration is added to the sound, allowing a sample tuning to the nearest pitch hundredth. At first the root key must be filled. At this level, beats can be heard if the frequency of the sinus differs slightly from the fundamental frequency of the sound. It remains to finely adjust the correction to make the beats as slow as possible, so that the sample is tuned at best.</translatorcomment>
-        <translation type="obsolete">正弦校准</translation>
-    </message>
-    <message>
-        <source>Size</source>
-        <translation type="obsolete">长度</translation>
-    </message>
-    <message>
-        <source>Loop</source>
-        <translation type="obsolete">循环点</translation>
-    </message>
-    <message>
-        <source>Root key</source>
-        <translatorcomment>基础音</translatorcomment>
-        <translation type="obsolete">根音符</translation>
-    </message>
-    <message>
-        <source>Correction (cents)</source>
-        <translation type="obsolete">校正(音分)</translation>
-    </message>
-    <message>
-        <source>Sample rate</source>
-        <translation type="obsolete">采样率</translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Equalizer (±15 dB)&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="obsolete">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;均衡器(±15 dB)&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-    </message>
-    <message>
-        <source>Type</source>
-        <translation type="obsolete">类型</translation>
-    </message>
-    <message>
-        <source>Link</source>
-        <translation type="obsolete">链接</translation>
-    </message>
-    <message>
-        <source>(min) </source>
-        <translation type="obsolete">(分) </translation>
-    </message>
-    <message>
-        <source>mono</source>
-        <translation type="obsolete">单声道</translation>
-    </message>
-    <message>
-        <source>right</source>
-        <translation type="obsolete">右</translation>
-    </message>
-    <message>
-        <source>left</source>
-        <translation type="obsolete">左</translation>
-    </message>
-    <message>
-        <source>link</source>
-        <translation type="obsolete">链接</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;Sample is not linked to any instrument.&lt;/b&gt;</source>
-        <oldsource>&lt;b&gt;Sample lié à aucun instrument.&lt;/b&gt;</oldsource>
-        <translation type="obsolete">&lt;b&gt;样本未链接到任何乐器。&lt;/b&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;Sample linked to the instrument: &lt;/b&gt;</source>
-        <oldsource>&lt;b&gt;Sample lié à l&apos;instrument : &lt;/b&gt;</oldsource>
-        <translation type="obsolete">&lt;b&gt;样本已链接到的乐器：&lt;/b&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;Sample linked to the instruments: &lt;/b&gt;</source>
-        <oldsource>&lt;b&gt;Sample lié aux instruments : &lt;/b&gt;</oldsource>
-        <translation type="obsolete">&lt;b&gt;样本已链接到的乐器：&lt;/b&gt;</translation>
-    </message>
-    <message>
-        <source>Information</source>
-        <translation type="obsolete">信息</translation>
-    </message>
-    <message>
-        <source>Change successfully applied to the different samples</source>
-        <translation type="obsolete">更改已成功应用到其它样本</translation>
-    </message>
-    <message>
-        <source>The sample &quot;</source>
-        <translation type="obsolete">样本&quot;</translation>
-    </message>
-    <message>
-        <source>&quot; couldn&apos;t be looped.</source>
-        <translation type="obsolete">&quot;无法循环。</translation>
-    </message>
-    <message>
-        <source>The following samples couldn&apos;t be looped:</source>
-        <translation type="obsolete">下列样本无法循环：</translation>
-    </message>
-    <message>
-        <source>Possible reasons: too short or too turbulent.</source>
-        <translation type="obsolete">可能原因：样本太短或太混乱。</translation>
-    </message>
-    <message>
-        <source>Warning</source>
-        <translation type="obsolete">警告</translation>
-    </message>
-    <message>
-        <source>This tool can only be used with stereo samples.</source>
-        <translation type="obsolete">该工具仅可用于双声道样本。</translation>
-    </message>
-    <message>
-        <source>Tuning in semitones:</source>
-        <translation type="obsolete">移动量(半音)：</translation>
-    </message>
-    <message>
-        <source>Stop</source>
-        <oldsource>arrêt</oldsource>
-        <translation type="obsolete">停止</translation>
-    </message>
-    <message>
-        <source>Processing </source>
-        <translation type="obsolete">处理 </translation>
-    </message>
-    <message>
-        <source>Equalizer (±15 dB)</source>
-        <translation type="obsolete">均衡器(±15 分贝)</translation>
-    </message>
-    <message>
-        <source>s</source>
-        <comment>unit for seconds</comment>
-        <translation type="obsolete">秒</translation>
-    </message>
-    <message>
-        <source>Cancel</source>
-        <translation type="obsolete">取消</translation>
-    </message>
-    <message>
-        <source>Transposition</source>
-        <translation type="obsolete">音调调整</translation>
-    </message>
-</context>
-<context>
-    <name>Pile_sf2</name>
-    <message>
-        <source>untitled</source>
-        <translation type="obsolete">未命名</translation>
-    </message>
-</context>
-<context>
-    <name>QApplication</name>
-    <message>
-        <source>Custom</source>
-        <translation type="obsolete">自定义</translation>
-    </message>
-    <message>
-        <source>Default</source>
-        <translation type="obsolete">默认</translation>
-    </message>
-    <message>
-        <source>Gnome</source>
-        <translation type="obsolete">Gnome</translation>
-    </message>
-    <message>
-        <source>Dark, blue</source>
-        <translation type="obsolete">暗蓝</translation>
-    </message>
-    <message>
-        <source>Dark, orange</source>
-        <translation type="obsolete">暗橙</translation>
-    </message>
-    <message>
-        <source>Dark, green</source>
-        <translation type="obsolete">暗绿</translation>
-    </message>
-    <message>
-        <source>Dark, yellow</source>
-        <translation type="obsolete">暗黄</translation>
-    </message>
-    <message>
-        <source>Aqua</source>
-        <translation type="obsolete">水绿</translation>
-    </message>
-    <message>
-        <source>Spring</source>
-        <translation type="obsolete">Spring</translation>
-    </message>
-    <message>
-        <source>Windows 10</source>
-        <translation type="obsolete">Windows 10</translation>
-    </message>
-    <message>
-        <source>Ubuntu</source>
-        <translation type="obsolete">Ubuntu</translation>
     </message>
 </context>
 <context>
     <name>QObject</name>
-    <message>
-        <source>&lt;b&gt;Global parameters are already filled.&lt;/b&gt;</source>
-        <translation type="obsolete">&lt;b&gt;全局参数已填充。&lt;/b&gt;</translation>
-    </message>
-    <message>
-        <source>The global division will not be copied.</source>
-        <translation type="obsolete">全局分层将不会被复制。</translation>
-    </message>
-    <message>
-        <source>&amp;Ok</source>
-        <translation type="obsolete">确定(&amp;O)</translation>
-    </message>
-    <message>
-        <source>Ok, &amp;disable this message</source>
-        <translation type="obsolete">确定并不再提示(&amp;D)</translation>
-    </message>
-    <message>
-        <source>The sample &quot;</source>
-        <oldsource>l&apos;échantillon « </oldsource>
-        <translation type="obsolete">样本&quot;</translation>
-    </message>
-    <message>
-        <source>&quot; already exists.&lt;br/&gt;Replace?</source>
-        <oldsource>&amp;#160;» existe déjà.&lt;br /&gt;Que faire ?</oldsource>
-        <translation type="obsolete">&quot;已存在。&lt;br/&gt;是否替换？</translation>
-    </message>
-    <message>
-        <source>The instrument &quot;</source>
-        <oldsource>L&apos;instrument «&amp;#160;</oldsource>
-        <translation type="obsolete">乐器&quot;</translation>
-    </message>
-    <message>
-        <source>The preset &quot;</source>
-        <oldsource>Le preset «&amp;#160;</oldsource>
-        <translation type="obsolete">预设&quot;</translation>
-    </message>
     <message>
         <location filename="core/output/outputfactory.cpp" line="116"/>
         <source>Save a soundfont</source>
@@ -6482,10 +3217,6 @@ rate</source>
         <location filename="core/sound.cpp" line="746"/>
         <source>Warning</source>
         <translation>警告</translation>
-    </message>
-    <message>
-        <source>No preset available.</source>
-        <translation type="obsolete">无预设可用。</translation>
     </message>
     <message>
         <location filename="core/sampleloader.cpp" line="71"/>
@@ -6566,14 +3297,6 @@ rate</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Error in Sound::getData.</source>
-        <translation type="obsolete">在 Sound::getData 中发生错误。</translation>
-    </message>
-    <message>
-        <source>Cannot open the file.</source>
-        <translation type="obsolete">无法打开该文件</translation>
-    </message>
-    <message>
         <location filename="core/sound.cpp" line="667"/>
         <location filename="core/sound.cpp" line="675"/>
         <location filename="core/sound.cpp" line="681"/>
@@ -6588,129 +3311,6 @@ rate</source>
         <translation>未命名</translation>
     </message>
     <message>
-        <source>// Sfz exported from sf2 by Polyphone</source>
-        <oldsource>// Sfz exported from sf2 by Polyphone</oldsource>
-        <translation type="obsolete">// 此 SFZ 文件由 Polyphone 从 SF2 导出</translation>
-    </message>
-    <message>
-        <source>// Name     :</source>
-        <translatorcomment>count the spaces so that the &quot;:&quot; are aligned</translatorcomment>
-        <translation type="obsolete">// 名字     : </translation>
-    </message>
-    <message>
-        <source>// Author   :</source>
-        <translation type="obsolete">// 作者     : </translation>
-    </message>
-    <message>
-        <source>// Copyright:</source>
-        <translation type="obsolete">// 版权     : </translation>
-    </message>
-    <message>
-        <source>// Date     :</source>
-        <translation type="obsolete">// 日期     : </translation>
-    </message>
-    <message>
-        <source>// Comment  :</source>
-        <translation type="obsolete">// 评论     : </translation>
-    </message>
-    <message>
-        <source>other</source>
-        <translation type="obsolete">其它</translation>
-    </message>
-    <message>
-        <source>Piano</source>
-        <translation type="obsolete">钢琴</translation>
-    </message>
-    <message>
-        <source>Chromatic percussion</source>
-        <translation type="obsolete">半音阶打击乐</translation>
-    </message>
-    <message>
-        <source>Organ</source>
-        <translation type="obsolete">风琴</translation>
-    </message>
-    <message>
-        <source>Guitar</source>
-        <translation type="obsolete">吉他</translation>
-    </message>
-    <message>
-        <source>Bass</source>
-        <translation type="obsolete">低音</translation>
-    </message>
-    <message>
-        <source>Strings</source>
-        <translation type="obsolete">弦乐</translation>
-    </message>
-    <message>
-        <source>Ensemble</source>
-        <translation type="obsolete">和弦</translation>
-    </message>
-    <message>
-        <source>Brass</source>
-        <translation type="obsolete">铜管乐</translation>
-    </message>
-    <message>
-        <source>Reed</source>
-        <translation type="obsolete">簧乐</translation>
-    </message>
-    <message>
-        <source>Pipe</source>
-        <translation type="obsolete">管乐</translation>
-    </message>
-    <message>
-        <source>Synth lead</source>
-        <translation type="obsolete">合成主音</translation>
-    </message>
-    <message>
-        <source>Synth pad</source>
-        <translation type="obsolete">合成柔音</translation>
-    </message>
-    <message>
-        <source>Synth effects</source>
-        <translation type="obsolete">合成音效</translation>
-    </message>
-    <message>
-        <source>Ethnic</source>
-        <translation type="obsolete">民乐</translation>
-    </message>
-    <message>
-        <source>Percussive</source>
-        <translation type="obsolete">打击乐</translation>
-    </message>
-    <message>
-        <source>Sound effects</source>
-        <translation type="obsolete">音效</translation>
-    </message>
-    <message>
-        <source>Percussion kit</source>
-        <translation type="obsolete">打击乐组</translation>
-    </message>
-    <message>
-        <source>Created by </source>
-        <translatorcomment>mind the final space</translatorcomment>
-        <translation type="obsolete">作者 </translation>
-    </message>
-    <message>
-        <source>Contributors </source>
-        <translation type="obsolete">贡献者 </translation>
-    </message>
-    <message>
-        <source>Translated by </source>
-        <translation type="obsolete">翻译者 </translation>
-    </message>
-    <message>
-        <source>Sfz import</source>
-        <translation type="obsolete">导入 SFZ 文件</translation>
-    </message>
-    <message>
-        <source>Sf2 imported from sfz by Polyphone</source>
-        <translation type="obsolete">此 SF2 文件由 Polyphone 从 SFZ 导入</translation>
-    </message>
-    <message>
-        <source>Extraction in progress...</source>
-        <translation type="obsolete">正在解压...</translation>
-    </message>
-    <message>
         <location filename="editor/graphics/graphicslegenditem.cpp" line="110"/>
         <location filename="editor/graphics/graphicslegenditem2.cpp" line="66"/>
         <source>Key range:</source>
@@ -6721,34 +3321,6 @@ rate</source>
         <location filename="editor/graphics/graphicslegenditem2.cpp" line="69"/>
         <source>Velocity range:</source>
         <translation>力度范围：</translation>
-    </message>
-    <message>
-        <source>C</source>
-        <translation type="obsolete">C</translation>
-    </message>
-    <message>
-        <source>D</source>
-        <translation type="obsolete">D</translation>
-    </message>
-    <message>
-        <source>E</source>
-        <translation type="obsolete">E</translation>
-    </message>
-    <message>
-        <source>F</source>
-        <translation type="obsolete">F</translation>
-    </message>
-    <message>
-        <source>G</source>
-        <translation type="obsolete">G</translation>
-    </message>
-    <message>
-        <source>A</source>
-        <translation type="obsolete">A</translation>
-    </message>
-    <message>
-        <source>B</source>
-        <translation type="obsolete">B</translation>
     </message>
     <message>
         <location filename="dialogs/dialog_about.cpp" line="122"/>
@@ -9004,64 +5576,9 @@ download content</source>
     </message>
 </context>
 <context>
-    <name>Tree</name>
-    <message>
-        <source>New &amp;instrument...</source>
-        <translation type="obsolete">新乐器...</translation>
-    </message>
-    <message>
-        <source>New &amp;preset...</source>
-        <translation type="obsolete">新预设...</translation>
-    </message>
-    <message>
-        <source>Replace by...</source>
-        <translation type="obsolete">替换为...</translation>
-    </message>
-    <message>
-        <source>Bind to...</source>
-        <translation type="obsolete">绑定到...</translation>
-    </message>
-    <message>
-        <source>New sample...</source>
-        <translation type="obsolete">新样本...</translation>
-    </message>
-    <message>
-        <source>Copy</source>
-        <translation type="obsolete">复制</translation>
-    </message>
-    <message>
-        <source>Paste</source>
-        <translation type="obsolete">粘贴</translation>
-    </message>
-    <message>
-        <source>Delete</source>
-        <translation type="obsolete">删除</translation>
-    </message>
-    <message>
-        <source>Rename...</source>
-        <translation type="obsolete">重命名...</translation>
-    </message>
-    <message>
-        <source>Close file</source>
-        <translation type="obsolete">关闭文件</translation>
-    </message>
-    <message>
-        <source>Display all</source>
-        <translation type="obsolete">全部</translation>
-    </message>
-    <message>
-        <source>&amp;Rename...</source>
-        <translation type="obsolete">重命名(&amp;R)...</translation>
-    </message>
-    <message>
-        <source>Bulk &amp;rename...</source>
-        <translation type="obsolete">批量重命名(&amp;R)...</translation>
-    </message>
-</context>
-<context>
     <name>TreeView</name>
     <message>
-        <location filename="editor/tree/treeview.cpp" line="839"/>
+        <location filename="editor/tree/treeview.cpp" line="841"/>
         <source>instrument</source>
         <translation type="unfinished"></translation>
     </message>
