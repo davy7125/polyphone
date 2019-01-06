@@ -27,7 +27,7 @@
     <message>
         <location filename="editor/tools/abstracttool.cpp" line="98"/>
         <source>Warning</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Warnung</translation>
     </message>
     <message>
         <location filename="editor/tools/abstracttool.cpp" line="103"/>
@@ -356,7 +356,8 @@
     <message>
         <location filename="core/types/attribute.cpp" line="695"/>
         <source>Loop playback</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Loop
+Wiedergabe</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="698"/>
@@ -996,7 +997,7 @@ Premium!</source>
     <message>
         <location filename="context/interface/configsectionrepository.cpp" line="112"/>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Abbrechen</translation>
     </message>
     <message>
         <location filename="context/interface/configsectionrepository.cpp" line="115"/>
@@ -1111,7 +1112,7 @@ repository</source>
     <message>
         <location filename="core/output/sfz/conversion_sfz.cpp" line="256"/>
         <source>untitled</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">kein Name</translation>
     </message>
     <message>
         <location filename="core/output/sfz/conversion_sfz.cpp" line="540"/>
@@ -1616,12 +1617,12 @@ repository</source>
         <location filename="repository/downloadmanager.cpp" line="111"/>
         <location filename="repository/downloadmanager.cpp" line="159"/>
         <source>untitled</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">kein Name</translation>
     </message>
     <message>
         <location filename="repository/downloadmanager.cpp" line="145"/>
         <source>Warning</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Warnung</translation>
     </message>
     <message>
         <location filename="repository/downloadmanager.cpp" line="146"/>
@@ -1653,7 +1654,7 @@ repository</source>
     <message>
         <location filename="repository/widgets/downloadprogresscell.cpp" line="89"/>
         <source>Warning</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Warnung</translation>
     </message>
     <message>
         <location filename="repository/widgets/downloadprogresscell.cpp" line="90"/>
@@ -1706,7 +1707,7 @@ repository</source>
     <message>
         <location filename="core/duplicator.cpp" line="570"/>
         <source>Warning</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Warnung</translation>
     </message>
     <message>
         <location filename="core/duplicator.cpp" line="571"/>
@@ -1721,7 +1722,7 @@ repository</source>
     <message>
         <location filename="core/duplicator.cpp" line="768"/>
         <source>R&amp;eplace all</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">alle e&amp;rsetzen</translation>
     </message>
     <message>
         <location filename="core/duplicator.cpp" line="769"/>
@@ -1731,7 +1732,7 @@ repository</source>
     <message>
         <location filename="core/duplicator.cpp" line="770"/>
         <source>D&amp;uplicate all</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">alle D&amp;uplizieren</translation>
     </message>
     <message>
         <location filename="core/duplicator.cpp" line="771"/>
@@ -1741,7 +1742,7 @@ repository</source>
     <message>
         <location filename="core/duplicator.cpp" line="772"/>
         <source>I&amp;gnore all</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">alle I&amp;gnorieren</translation>
     </message>
 </context>
 <context>
@@ -1792,7 +1793,7 @@ repository</source>
     <message>
         <location filename="editor/widgets/editortoolbar.cpp" line="72"/>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Abbrechen</translation>
     </message>
     <message>
         <location filename="editor/widgets/editortoolbar.cpp" line="77"/>
@@ -1837,7 +1838,7 @@ repository</source>
     <message>
         <location filename="editor/widgets/editortoolbar.cpp" line="312"/>
         <source>Warning</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Warnung</translation>
     </message>
     <message>
         <location filename="editor/widgets/editortoolbar.cpp" line="312"/>
@@ -2092,7 +2093,7 @@ repository</source>
     <message>
         <location filename="core/input/sfz/inputsfz.cpp" line="460"/>
         <source>untitled</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">kein Name</translation>
     </message>
 </context>
 <context>
@@ -2183,7 +2184,7 @@ repository</source>
     <message>
         <location filename="mainwindow/mainwindow.cpp" line="173"/>
         <source>untitled</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">kein Name</translation>
     </message>
     <message>
         <location filename="mainwindow/mainwindow.cpp" line="184"/>
@@ -2544,7 +2545,7 @@ Wiedergabe</translation>
     <message>
         <location filename="editor/overview/pageoverviewprst.cpp" line="32"/>
         <source>Presets</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Presets</translation>
     </message>
     <message>
         <location filename="editor/overview/pageoverviewprst.cpp" line="38"/>
@@ -2862,7 +2863,7 @@ rate</source>
     <message>
         <location filename="editor/pagesf2.ui" line="534"/>
         <source>Presets</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Presets</translation>
     </message>
     <message>
         <location filename="editor/pagesf2.ui" line="556"/>
@@ -3955,7 +3956,7 @@ rate</source>
     <message>
         <location filename="repository/repositorymanager.cpp" line="490"/>
         <source>Warning</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Warnung</translation>
     </message>
 </context>
 <context>
@@ -4685,7 +4686,7 @@ download content</source>
         <location filename="editor/tools/external_command/toolexternalcommand_gui.cpp" line="116"/>
         <location filename="editor/tools/external_command/toolexternalcommand_gui.cpp" line="123"/>
         <source>Warning</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Warnung</translation>
     </message>
     <message>
         <location filename="editor/tools/external_command/toolexternalcommand_gui.cpp" line="116"/>
@@ -5003,7 +5004,7 @@ download content</source>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="238"/>
         <source>Key range</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Tasten Bereich</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="261"/>
@@ -5089,7 +5090,7 @@ download content</source>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.cpp" line="83"/>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.cpp" line="99"/>
         <source>Warning</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Warnung</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.cpp" line="83"/>
@@ -5439,7 +5440,7 @@ download content</source>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="192"/>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="201"/>
         <source>Warning</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Warnung</translation>
     </message>
     <message>
         <location filename="editor/tools/soundfont_export/toolsoundfontexport_gui.cpp" line="157"/>
@@ -5638,7 +5639,7 @@ download content</source>
         <location filename="editor/tree/treeviewmenu.cpp" line="187"/>
         <location filename="editor/tree/treeviewmenu.cpp" line="190"/>
         <source>Warning</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Warnung</translation>
     </message>
     <message>
         <location filename="editor/tree/treeviewmenu.cpp" line="188"/>
@@ -5733,7 +5734,7 @@ download content</source>
     <message>
         <location filename="mainwindow/windowmanager.cpp" line="230"/>
         <source>untitled</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">kein Name</translation>
     </message>
     <message>
         <location filename="mainwindow/windowmanager.cpp" line="231"/>
@@ -5744,7 +5745,7 @@ download content</source>
         <location filename="mainwindow/windowmanager.cpp" line="124"/>
         <location filename="mainwindow/windowmanager.cpp" line="232"/>
         <source>Warning</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Warnung</translation>
     </message>
     <message>
         <location filename="mainwindow/windowmanager.cpp" line="234"/>

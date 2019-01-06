@@ -1716,12 +1716,12 @@ repository</source>
     <message>
         <location filename="core/duplicator.cpp" line="767"/>
         <source>&amp;Replace</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&amp;Substituir</translation>
     </message>
     <message>
         <location filename="core/duplicator.cpp" line="768"/>
         <source>R&amp;eplace all</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">S&amp;ubstituir tudo</translation>
     </message>
     <message>
         <location filename="core/duplicator.cpp" line="769"/>
@@ -5004,7 +5004,7 @@ download content</source>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="238"/>
         <source>Key range</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Alcance de notas</translation>
     </message>
     <message>
         <location filename="editor/tools/mixture_creation/toolmixturecreation_gui.ui" line="261"/>

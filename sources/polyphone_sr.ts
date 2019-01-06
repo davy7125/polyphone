@@ -356,7 +356,8 @@
     <message>
         <location filename="core/types/attribute.cpp" line="695"/>
         <source>Loop playback</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Свирање
+вртње</translation>
     </message>
     <message>
         <location filename="core/types/attribute.cpp" line="698"/>
@@ -1111,7 +1112,7 @@ repository</source>
     <message>
         <location filename="core/output/sfz/conversion_sfz.cpp" line="256"/>
         <source>untitled</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">без назива</translation>
     </message>
     <message>
         <location filename="core/output/sfz/conversion_sfz.cpp" line="540"/>
@@ -1615,7 +1616,7 @@ repository</source>
         <location filename="repository/downloadmanager.cpp" line="111"/>
         <location filename="repository/downloadmanager.cpp" line="159"/>
         <source>untitled</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">без назива</translation>
     </message>
     <message>
         <location filename="repository/downloadmanager.cpp" line="145"/>
@@ -2091,7 +2092,7 @@ repository</source>
     <message>
         <location filename="core/input/sfz/inputsfz.cpp" line="460"/>
         <source>untitled</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">без назива</translation>
     </message>
 </context>
 <context>
@@ -2182,7 +2183,7 @@ repository</source>
     <message>
         <location filename="mainwindow/mainwindow.cpp" line="173"/>
         <source>untitled</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">без назива</translation>
     </message>
     <message>
         <location filename="mainwindow/mainwindow.cpp" line="184"/>
@@ -3044,7 +3045,7 @@ rate</source>
         <location filename="editor/pagesmpl.cpp" line="183"/>
         <source>s</source>
         <comment>unit for seconds</comment>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">s</translation>
     </message>
     <message>
         <location filename="editor/pagesmpl.cpp" line="182"/>
@@ -5729,7 +5730,7 @@ download content</source>
     <message>
         <location filename="mainwindow/windowmanager.cpp" line="230"/>
         <source>untitled</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">без назива</translation>
     </message>
     <message>
         <location filename="mainwindow/windowmanager.cpp" line="231"/>

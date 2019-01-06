@@ -1111,7 +1111,7 @@ repository</source>
     <message>
         <location filename="core/output/sfz/conversion_sfz.cpp" line="256"/>
         <source>untitled</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">sin nombre</translation>
     </message>
     <message>
         <location filename="core/output/sfz/conversion_sfz.cpp" line="540"/>
@@ -1616,7 +1616,7 @@ repository</source>
         <location filename="repository/downloadmanager.cpp" line="111"/>
         <location filename="repository/downloadmanager.cpp" line="159"/>
         <source>untitled</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">sin nombre</translation>
     </message>
     <message>
         <location filename="repository/downloadmanager.cpp" line="145"/>
@@ -2092,7 +2092,7 @@ repository</source>
     <message>
         <location filename="core/input/sfz/inputsfz.cpp" line="460"/>
         <source>untitled</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">sin nombre</translation>
     </message>
 </context>
 <context>
@@ -2183,7 +2183,7 @@ repository</source>
     <message>
         <location filename="mainwindow/mainwindow.cpp" line="173"/>
         <source>untitled</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">sin nombre</translation>
     </message>
     <message>
         <location filename="mainwindow/mainwindow.cpp" line="184"/>
@@ -4040,7 +4040,7 @@ download the list</source>
     <message>
         <location filename="repository/browser/soundfontbrowser.ui" line="484"/>
         <source>Reset</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Reiniciar</translation>
     </message>
     <message>
         <location filename="repository/browser/soundfontbrowser.ui" line="503"/>
@@ -5731,7 +5731,7 @@ download content</source>
     <message>
         <location filename="mainwindow/windowmanager.cpp" line="230"/>
         <source>untitled</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">sin nombre</translation>
     </message>
     <message>
         <location filename="mainwindow/windowmanager.cpp" line="231"/>
