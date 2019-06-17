@@ -141,4 +141,10 @@
     <qresource prefix="/vpiano">
         <file alias="blkey.svg">resources/blkey.svg</file>
     </qresource>
+    <qresource prefix="/banners">
+        <file alias="christmas.png">resources/banners/christmas.png</file>
+        <file alias="halloween.png">resources/banners/halloween.png</file>
+        <file alias="valentine.png">resources/banners/valentine.png</file>
+        <file alias="music.png">resources/banners/music.png</file>
+    </qresource>
 </RCC>

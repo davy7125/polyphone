@@ -415,7 +415,8 @@ SOURCES	+= main.cpp \
     repository/widgets/downloadprogressbutton.cpp \
     repository/widgets/downloadprogresscell.cpp \
     editor/overview/sortedtablewidgetitem.cpp \
-    repository/widgets/elidedlabel.cpp
+    repository/widgets/elidedlabel.cpp \
+    mainwindow/animatedbackground.cpp
 
 HEADERS  += \
     core/sound.h \
@@ -685,7 +686,8 @@ HEADERS  += \
     repository/widgets/downloadprogressbutton.h \
     repository/widgets/downloadprogresscell.h \
     core/types/indexedelementlist.h \
-    editor/overview/sortedtablewidgetitem.h
+    editor/overview/sortedtablewidgetitem.h \
+    mainwindow/animatedbackground.h
 
 FORMS    += \
     dialogs/dialog_list.ui \
