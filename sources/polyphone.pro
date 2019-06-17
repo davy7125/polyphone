@@ -20,8 +20,8 @@ MOC_DIR=generated_files
 UI_DIR=generated_files
 RCC_DIR=generated_files
 
-# List to complete if other translations are wished
-# Format: polyphone_XX.ts where XX is the language code
+# List to be completed if other translations are desired
+# Format: polyphone_XX.ts, XX being the language code
 TRANSLATIONS = polyphone_fr.ts \
     polyphone_es.ts \
     polyphone_it.ts \
