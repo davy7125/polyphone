@@ -34,7 +34,8 @@ ConfigSectionInterface::ConfigSectionInterface(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    ui->labelRestart->setStyleSheet("QLabel{color:" + this->palette().color(QPalette::BrightText).name() + "}");
+    ui->labelRestart->setStyleSheet("QLabel{color:" + ContextManager::theme()->getFixedColor(
+                                        ThemeManager::RED, ThemeManager::WINDOW_BACKGROUND).name() + "}");
     ui->labelRestart->hide();
 
     // Permanent initialization

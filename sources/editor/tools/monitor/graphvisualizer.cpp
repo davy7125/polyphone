@@ -29,7 +29,7 @@ const double GraphVisualizer::MIN_LOG = 0.0001;
 
 GraphVisualizer::GraphVisualizer(QWidget *parent) :
     QCustomPlot(parent),
-    labelCoord(NULL)
+    labelCoord(nullptr)
 {
     this->setBackground(this->palette().color(QPalette::Base));
 
@@ -59,7 +59,7 @@ GraphVisualizer::GraphVisualizer(QWidget *parent) :
 
     // Layer des moyennes
     this->addGraph();
-    graphPen.setColor(this->palette().color(QPalette::NoRole));
+    graphPen.setColor(ContextManager::theme()->getFixedColor(ThemeManager::GREEN, ThemeManager::LIST_BACKGROUND));
     graphPen.setWidth(2);
     this->graph(1)->setPen(graphPen);
     this->graph(1)->setLineStyle(QCPGraph::lsNone);
@@ -107,7 +107,7 @@ GraphVisualizer::GraphVisualizer(QWidget *parent) :
     textWarning->position->setType(QCPItemPosition::ptPlotCoords);
     textWarning->position->setCoords(0, 0);
     textWarning->setFont(QFont(font().family(), 10, 100));
-    textWarning->setColor(this->palette().color(QPalette::BrightText));
+    textWarning->setColor(ContextManager::theme()->getFixedColor(ThemeManager::RED, ThemeManager::LIST_BACKGROUND));
 
     // Axes
     this->xAxis->setVisible(false);

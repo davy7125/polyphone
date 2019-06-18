@@ -40,18 +40,16 @@ TopRightWidget::TopRightWidget(QWidget *parent) :
     {
         ui->toolButton->setIcon(ContextManager::theme()->getColoredSvg(":/icons/menu.svg", QSize(28, 28), ThemeManager::WINDOW_TEXT));
         ui->pushUser->setIcon(ContextManager::theme()->getColoredSvg(":/icons/user.svg", QSize(22, 22), ThemeManager::WINDOW_TEXT));
-
-        // Red color for the warning icon
-        _colorReplacement["currentColor"] = this->palette().color(QPalette::BrightText).name();
     }
     else
     {
         ui->toolButton->setIcon(ContextManager::theme()->getColoredSvg(":/icons/menu.svg", QSize(28, 28), ThemeManager::WINDOW_BACKGROUND));
         ui->pushUser->setIcon(ContextManager::theme()->getColoredSvg(":/icons/user.svg", QSize(22, 22), ThemeManager::WINDOW_BACKGROUND));
-
-        // Red color for the warning icon
-        _colorReplacement["currentColor"] = this->palette().color(QPalette::BrightText).lighter().name();
     }
+
+    // Red color for the warning icon
+    _colorReplacement["currentColor"] = ContextManager::theme()->getFixedColor(ThemeManager::RED, ThemeManager::WINDOW_BACKGROUND).name();
+
     ui->toolButton->setStyleSheet("QToolButton::menu-indicator{width:0px;} QToolButton{margin: 3px;padding: 3px;background-color:#000}");
     ui->toolButtonDownload->setStyleSheet("QToolButton::menu-indicator{width:0px;} QToolButton{border:0;margin: 3px;padding: 3px;}");
     ui->toolButtonDownload->hide();

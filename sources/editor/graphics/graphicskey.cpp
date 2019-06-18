@@ -27,16 +27,17 @@
 #include <QTimer>
 #include <QApplication>
 #include <QPalette>
+#include "contextmanager.h"
 
 const int GraphicsKey::s_radius = 5;
 
-GraphicsKey::GraphicsKey(QGraphicsItem *parent) : QObject(NULL), QGraphicsItem(parent)
+GraphicsKey::GraphicsKey(QGraphicsItem *parent) : QObject(nullptr), QGraphicsItem(parent)
 {
     // Colors
-    QColor color = QApplication::palette().color(QPalette::NoRole);
+    QColor color = ContextManager::theme()->getFixedColor(ThemeManager::GREEN, ThemeManager::LIST_BACKGROUND);
     color.setAlpha(4);
     _colorBrush = color;
-    _colorPen = color.dark();
+    _colorPen = color.dark(); // The outside of the circle is darker
 
     this->setFlag(QGraphicsItem::ItemIgnoresTransformations);
     QTimer::singleShot(30, this, SLOT(updateColor()));

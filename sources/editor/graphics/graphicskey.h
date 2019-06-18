@@ -29,16 +29,18 @@
 #include <QBrush>
 #include <QPen>
 
+/// Graphical element used to display the notes that are being played
+/// with a circle that is fading in 1 second approximately
 class GraphicsKey : public QObject, public QGraphicsItem
 {
     Q_OBJECT
     Q_INTERFACES(QGraphicsItem)
 
 public:
-    GraphicsKey(QGraphicsItem *parent = NULL);
+    GraphicsKey(QGraphicsItem *parent = nullptr);
 
     QRectF boundingRect() const;
-    void paint(QPainter *painter, const QStyleOptionGraphicsItem * option, QWidget * widget = NULL);
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem * option, QWidget * widget = nullptr);
 
 private slots:
     void updateColor();

@@ -58,7 +58,7 @@ SoundfontBrowser::SoundfontBrowser(QWidget *parent) :
     ui->pushBecomePremium->setStyleSheet("QPushButton{border:1px solid " +
                                          this->palette().dark().color().name() +
                                          ";border-top:0;border-right:0;padding:4px;"
-                                         "color:" + palette().color(QPalette::BrightText).name() + "}");
+                                         "color:" + ContextManager::theme()->getFixedColor(ThemeManager::RED, ThemeManager::BUTTON_BACKGROUND).name() + "}");
     ui->comboSort->view()->window()->setWindowFlags(Qt::Popup | Qt::FramelessWindowHint | Qt::NoDropShadowWindowHint);
     ui->comboSort->setStyleSheet(QString("QComboBox,QComboBox::drop-down{border-top-right-radius: 2px;border-bottom-right-radius: 2px}") +
                                  "QComboBox::drop-down{border-width:0}" +

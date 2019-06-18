@@ -35,7 +35,7 @@ GraphicsLegendItem2::GraphicsLegendItem2(QString fontFamily, QGraphicsItem *pare
     _offsetY(0)
 {
     // Colors
-    QColor color = QApplication::palette().color(QPalette::BrightText);
+    QColor color = ContextManager::theme()->getFixedColor(ThemeManager::RED, ThemeManager::LIST_BACKGROUND);
     _borderPen = QPen(color, 1, Qt::SolidLine);
     color.setAlpha(200);
     _foregroundBrush = QBrush(color);

@@ -117,21 +117,19 @@ void Graphique::updateStyle()
     // Couleurs
     QColor backgroundColor;
     QColor textColor;
-    QColor redColor;
-    QColor greenColor;
+    QColor redColor = ContextManager::theme()->getFixedColor(ThemeManager::RED, true);
+    QColor greenColor = ContextManager::theme()->getFixedColor(ThemeManager::GREEN, true);
+
+    // Always use the darkest color for the background of the graphic
     if (ContextManager::theme()->isDark(ThemeManager::LIST_BACKGROUND, ThemeManager::LIST_TEXT))
     {
         backgroundColor = this->palette().color(QPalette::Base);
         textColor = this->palette().color(QPalette::Text);
-        redColor = this->palette().color(QPalette::BrightText);
-        greenColor = this->palette().color(QPalette::NoRole);
     }
     else
     {
         backgroundColor = this->palette().color(QPalette::Text);
         textColor = this->palette().color(QPalette::Base);
-        redColor = this->palette().color(QPalette::BrightText).lighter();
-        greenColor = this->palette().color(QPalette::NoRole).lighter();
     }
 
     this->setBackground(backgroundColor);

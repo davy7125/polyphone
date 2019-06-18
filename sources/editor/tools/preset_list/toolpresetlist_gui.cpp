@@ -34,7 +34,8 @@ ToolPresetList_gui::ToolPresetList_gui(QWidget *parent) :
     ui(new Ui::ToolPresetList_gui)
 {
     ui->setupUi(this);
-    ui->label->setStyleSheet("QLabel { color : " + this->palette().color(QPalette::NoRole).name() + "; }");
+    ui->label->setStyleSheet("QLabel { color : " + ContextManager::theme()->getFixedColor(
+                                 ThemeManager::GREEN, ThemeManager::WINDOW_BACKGROUND).name() + "; }");
 }
 
 ToolPresetList_gui::~ToolPresetList_gui()

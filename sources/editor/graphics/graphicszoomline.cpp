@@ -26,13 +26,14 @@
 #include <QPainter>
 #include <QApplication>
 #include <QPalette>
+#include "contextmanager.h"
 
 GraphicsZoomLine::GraphicsZoomLine(QGraphicsItem *parent)  : QGraphicsItem(parent),
     _x(0),
     _y(0)
 {
     // Pen
-    _penLine = QPen(QApplication::palette().color(QPalette::BrightText), 2, Qt::DotLine);
+    _penLine = QPen(ContextManager::theme()->getFixedColor(ThemeManager::RED, true), 2, Qt::DotLine);
 
     this->setFlag(QGraphicsItem::ItemIgnoresTransformations);
 }

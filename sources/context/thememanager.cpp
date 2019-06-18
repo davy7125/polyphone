@@ -129,6 +129,34 @@ QColor ThemeManager::getColor(ThemeManager::ColorType type, ColorContext context
     return color;
 }
 
+QColor ThemeManager::getFixedColor(FixedColorType type, ColorType background)
+{
+    return getFixedColor(type, this->isDark(background, getAssociatedColorType(background)));
+}
+
+QColor ThemeManager::getFixedColor(FixedColorType type, bool darkBackground)
+{
+    QColor color;
+
+    switch (type)
+    {
+    case FixedColorType::RED:
+        color = darkBackground ? QColor(255, 80, 80) : QColor(180, 40, 40);
+        break;
+    case FixedColorType::GREEN:
+        color = darkBackground ? QColor(0, 220, 80) : QColor(0, 160, 60);
+        break;
+    case FixedColorType::YELLOW:
+        color = darkBackground ? QColor(250, 250, 130) : QColor(200, 200, 120);
+        break;
+    case FixedColorType::BLUE:
+        color = darkBackground ? QColor(50, 150, 255) : QColor(50, 100, 180);
+        break;
+    }
+
+    return color;
+}
+
 void ThemeManager::setColor(ColorType type, QColor color)
 {
     _configuration->setValue(ConfManager::SECTION_DISPLAY, getName(type), color);
@@ -150,7 +178,7 @@ void ThemeManager::resetTheme()
 
 void ThemeManager::applyTheme(int id)
 {
-    ColorTheme * theme = NULL;
+    ColorTheme * theme = nullptr;
     for (int i = 0; i < _themes.count(); i++)
     {
         if (_themes[i].getId() == id)
@@ -160,7 +188,7 @@ void ThemeManager::applyTheme(int id)
         }
     }
 
-    if (theme != NULL)
+    if (theme != nullptr)
     {
         setColor(WINDOW_BACKGROUND, theme->getColor(WINDOW_BACKGROUND));
         setColor(WINDOW_TEXT, theme->getColor(WINDOW_TEXT));
@@ -214,7 +242,7 @@ QString ThemeManager::getName(ColorType type)
 
 QPalette::ColorRole ThemeManager::getColorRole(ColorType type)
 {
-    QPalette::ColorRole ret = QPalette::NoRole;
+    QPalette::ColorRole ret;
 
     switch (type)
     {
@@ -338,18 +366,6 @@ QPalette ThemeManager::getPalette()
     {
         palette.setColor(QPalette::Link, QColor(0, 0, 255));
         palette.setColor(QPalette::LinkVisited, QColor(80, 0, 140));
-    }
-
-    // Green and red colors
-    if (isDark(WINDOW_BACKGROUND, WINDOW_TEXT))
-    {
-        palette.setColor(QPalette::NoRole, QColor(50, 255, 50));
-        palette.setColor(QPalette::BrightText, QColor(255, 50, 50));
-    }
-    else
-    {
-        palette.setColor(QPalette::NoRole, QColor(0, 180, 0));
-        palette.setColor(QPalette::BrightText, QColor(180, 0, 0));
     }
 
     return palette;

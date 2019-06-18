@@ -237,8 +237,8 @@ void PageSf2::countElements()
     this->countElements(unusedSmpl, unusedInst, usedSmpl, usedInst, usedPrst, instGen, prstGen, instMod, prstMod);
 
     // Colors
-    QString greenStr = "QLabel { color : " + this->palette().color(QPalette::NoRole).name() + "; }";
-    QString redStr = "QLabel { color : " + this->palette().color(QPalette::BrightText).name() +
+    QString greenStr = "QLabel { color : " + ContextManager::theme()->getFixedColor(ThemeManager::GREEN, ThemeManager::WINDOW_BACKGROUND).name() + "; }";
+    QString redStr = "QLabel { color : " + ContextManager::theme()->getFixedColor(ThemeManager::RED, ThemeManager::WINDOW_BACKGROUND).name() +
             "; font-weight: bold; }";
 
     // Display

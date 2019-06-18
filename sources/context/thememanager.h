@@ -50,6 +50,15 @@ public:
         HIGHLIGHTED_TEXT
     };
 
+    /// Fixed colors that depends on the background but that cannot be changed by the user
+    enum FixedColorType
+    {
+        GREEN,
+        RED,
+        YELLOW,
+        BLUE
+    };
+
     enum ColorContext
     {
         NORMAL,
@@ -67,6 +76,10 @@ public:
 
     /// Get a color from the current theme
     QColor getColor(ColorType type, ColorContext context = NORMAL);
+
+    /// Get a fixed color depending on a background or explicitely mentioned light or dark
+    QColor getFixedColor(FixedColorType type, ColorType background);
+    QColor getFixedColor(FixedColorType type, bool darkBackground);
 
     /// Change a color
     void setColor(ColorType type, QColor color);

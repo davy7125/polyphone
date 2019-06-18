@@ -30,25 +30,15 @@
 EnvelopEditor::EnvelopEditor(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::EnvelopEditor),
-    _sf2(NULL),
+    _sf2(nullptr),
     _isVolume(true)
 {
     ui->setupUi(this);
     ui->graphicsView->linkSliderX(ui->sliderGraph);
     connect(ui->sliderGraph, SIGNAL(valueChanged(int)), ui->graphicsView, SLOT(setPosX(int)));
 
-    QColor redColor;
-    QColor greenColor;
-    if (ContextManager::theme()->isDark(ThemeManager::LIST_BACKGROUND, ThemeManager::LIST_TEXT))
-    {
-        redColor = this->palette().color(QPalette::BrightText);
-        greenColor = this->palette().color(QPalette::NoRole);
-    }
-    else
-    {
-        redColor = this->palette().color(QPalette::BrightText).lighter();
-        greenColor = this->palette().color(QPalette::NoRole).lighter();
-    }
+    QColor redColor = ContextManager::theme()->getFixedColor(ThemeManager::RED, ThemeManager::LIST_BACKGROUND);
+    QColor greenColor = ContextManager::theme()->getFixedColor(ThemeManager::GREEN, ThemeManager::LIST_BACKGROUND);
 
     QImage imageG(32, 16, QImage::Format_ARGB32);
     QImage imageR(32, 16, QImage::Format_ARGB32);

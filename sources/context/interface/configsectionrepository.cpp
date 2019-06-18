@@ -113,13 +113,13 @@ void ConfigSectionRepository::onConnectionStateChanged(UserManager::ConnectionSt
         break;
     case UserManager::CONNECTED:
         messageContent = trUtf8("Connected");
-        messageColor = this->palette().color(QPalette::NoRole);
+        messageColor = ContextManager::theme()->getFixedColor(ThemeManager::GREEN, ThemeManager::WINDOW_BACKGROUND);
         currentIndex = 1;
         buttonText = trUtf8("Log out");
         break;
     case UserManager::CONNECTED_PREMIUM:
         messageContent = trUtf8("Connected");
-        messageColor = this->palette().color(QPalette::NoRole);
+        messageColor = ContextManager::theme()->getFixedColor(ThemeManager::GREEN, ThemeManager::WINDOW_BACKGROUND);
         currentIndex = 2;
         buttonText = trUtf8("Log out");
         break;
@@ -130,7 +130,7 @@ void ConfigSectionRepository::onConnectionStateChanged(UserManager::ConnectionSt
         break;
     case UserManager::FAILED:
         messageContent = UserManager::getInstance()->error();
-        messageColor = this->palette().color(QPalette::BrightText);
+        messageColor = ContextManager::theme()->getFixedColor(ThemeManager::RED, ThemeManager::WINDOW_BACKGROUND);
         currentIndex = 0;
         buttonText = trUtf8("Connection");
         break;

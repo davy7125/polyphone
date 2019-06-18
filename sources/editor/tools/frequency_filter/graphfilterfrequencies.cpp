@@ -23,6 +23,7 @@
 ***************************************************************************/
 
 #include "graphfilterfrequencies.h"
+#include "contextmanager.h"
 
 const int GraphFilterFrequencies::POINT_NUMBER = 201;
 
@@ -67,7 +68,7 @@ GraphFilterFrequencies::GraphFilterFrequencies(QWidget * parent) : QCustomPlot(p
 
     // Layer des valeurs
     this->addGraph();
-    graphPen.setColor(this->palette().color(QPalette::BrightText));
+    graphPen.setColor(ContextManager::theme()->getFixedColor(ThemeManager::RED, ThemeManager::LIST_BACKGROUND));
     graphPen.setWidth(2);
     this->graph(1)->setPen(graphPen);
     this->graph(1)->setLineStyle(QCPGraph::lsLine);
@@ -95,7 +96,7 @@ GraphFilterFrequencies::GraphFilterFrequencies(QWidget * parent) : QCustomPlot(p
     x[0] = -1;
     x[1] = POINT_NUMBER + 1;
     y[0] = y[1] = 10;
-    color = this->palette().color(QPalette::BrightText);
+    color = ContextManager::theme()->getFixedColor(ThemeManager::RED, ThemeManager::LIST_BACKGROUND);
     color.setAlpha(30);
     this->graph(3)->setData(x, y);
     this->graph(3)->setBrush(QBrush(color));

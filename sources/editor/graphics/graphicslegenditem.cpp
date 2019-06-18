@@ -28,7 +28,7 @@
 #include <QPainter>
 #include <QApplication>
 
-SoundfontManager *   GraphicsLegendItem::s_sf2 = NULL;
+SoundfontManager *   GraphicsLegendItem::s_sf2 = nullptr;
 const int    GraphicsLegendItem::s_border = 5;
 
 GraphicsLegendItem::GraphicsLegendItem(QString fontFamily, QGraphicsItem * parent) : QGraphicsItem(parent),
