@@ -141,10 +141,10 @@ QColor ThemeManager::getFixedColor(FixedColorType type, bool darkBackground)
     switch (type)
     {
     case FixedColorType::RED:
-        color = darkBackground ? QColor(255, 80, 80) : QColor(180, 40, 40);
+        color = darkBackground ? QColor(255, 80, 80) : QColor(210, 50, 50);
         break;
     case FixedColorType::GREEN:
-        color = darkBackground ? QColor(0, 220, 80) : QColor(0, 160, 60);
+        color = darkBackground ? QColor(0, 180, 40) : QColor(0, 160, 60);
         break;
     case FixedColorType::YELLOW:
         color = darkBackground ? QColor(250, 250, 130) : QColor(200, 200, 120);

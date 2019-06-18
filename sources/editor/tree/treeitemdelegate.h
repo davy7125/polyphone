@@ -42,12 +42,13 @@ public slots:
 
 private:
     void drawRoot(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index, bool expandable) const;
-    void drawElement(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index, QString iconName, bool expandable, bool withIndent) const;
+    void drawElement(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index,
+                     const QPixmap &leftIcon, bool expandable, bool withIndent) const;
 
     class Icons
     {
     public:
-        QPixmap getPixmap(QString name, int colorType);
+        QPixmap getPixmap(QString name, int colorType, bool fixedColor);
 
     private:
         QMap<QString, QPixmap> _pixmaps;

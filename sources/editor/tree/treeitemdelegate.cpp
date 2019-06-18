@@ -30,16 +30,16 @@
 #include <QToolTip>
 #include <QHelpEvent>
 
-TreeItemDelegate::Icons * TreeItemDelegate::s_icons = NULL;
-TreeItemDelegate::Colors * TreeItemDelegate::s_colors = NULL;
+TreeItemDelegate::Icons * TreeItemDelegate::s_icons = nullptr;
+TreeItemDelegate::Colors * TreeItemDelegate::s_colors = nullptr;
 const int TreeItemDelegate::MARGIN = 8;
 
 TreeItemDelegate::TreeItemDelegate(QObject * parent) : QStyledItemDelegate(parent)
 {
     // Resources
-    if (s_colors == NULL)
+    if (s_colors == nullptr)
         s_colors = new Colors();
-    if (s_icons == NULL)
+    if (s_icons == nullptr)
         s_icons = new Icons();
 }
 
@@ -53,11 +53,23 @@ TreeItemDelegate::Colors::Colors()
     _highlightColorText = ContextManager::theme()->getColor(ThemeManager::HIGHLIGHTED_TEXT);
 }
 
-QPixmap TreeItemDelegate::Icons::getPixmap(QString name, int colorType)
+QPixmap TreeItemDelegate::Icons::getPixmap(QString name, int colorType, bool fixedColor)
 {
-    QString key = name + QString::number(colorType);
+    QString key = name + QString::number(colorType) + (fixedColor ? "a" : "b");
     if (!_pixmaps.contains(key))
-        _pixmaps[key] = ContextManager::theme()->getColoredSvg(":/icons/" + name + ".svg", QSize(16, 16), (ThemeManager::ColorType)colorType);
+    {
+        if (fixedColor)
+        {
+            QMap<QString, QString> replacement;
+            replacement["currentColor"] = ContextManager::theme()->getFixedColor(
+                        (ThemeManager::FixedColorType)colorType, ThemeManager::LIST_BACKGROUND).name();
+            _pixmaps[key] = ContextManager::theme()->getColoredSvg(
+                        ":/icons/" + name + ".svg", QSize(16, 16), replacement);
+        }
+        else
+            _pixmaps[key] = ContextManager::theme()->getColoredSvg(
+                        ":/icons/" + name + ".svg", QSize(16, 16), (ThemeManager::ColorType)colorType);
+    }
     return _pixmaps[key];
 }
 
@@ -70,6 +82,7 @@ void TreeItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem &opti
 
     // Draw an entry depending on the type of the element to display
     EltID currentId = index.data(Qt::UserRole).value<EltID>();
+    bool highlighted = option.state & QStyle::State_Selected;
     switch (currentId.typeElement)
     {
     case elementSf2:
@@ -81,19 +94,29 @@ void TreeItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem &opti
         drawRoot(painter, option, index, true);
         break;
     case elementSmpl:
-        drawElement(painter, option, index, "sample", false, false);
+        drawElement(painter, option, index, s_icons->getPixmap(
+                        "sample", highlighted ? ThemeManager::HIGHLIGHTED_TEXT : ThemeManager::YELLOW, highlighted ? false : true),
+                    false, false);
         break;
     case elementInst:
-        drawElement(painter, option, index, "instrument", true, false);
+        drawElement(painter, option, index, s_icons->getPixmap(
+                        "instrument", highlighted ? ThemeManager::HIGHLIGHTED_TEXT : ThemeManager::BLUE, highlighted ? false : true),
+                    true, false);
         break;
     case elementPrst:
-        drawElement(painter, option, index, "preset", true, false);
+        drawElement(painter, option, index, s_icons->getPixmap(
+                        "preset", highlighted ? ThemeManager::HIGHLIGHTED_TEXT : ThemeManager::RED, highlighted ? false : true),
+                    true, false);
         break;
     case elementInstSmpl:
-        drawElement(painter, option, index, "sample", false, true);
+        drawElement(painter, option, index, s_icons->getPixmap(
+                        "sample", highlighted ? ThemeManager::HIGHLIGHTED_TEXT : ThemeManager::YELLOW, highlighted ? false : true),
+                    false, true);
         break;
     case elementPrstInst:
-        drawElement(painter, option, index, "instrument", false, true);
+        drawElement(painter, option, index, s_icons->getPixmap(
+                        "instrument", highlighted ? ThemeManager::HIGHLIGHTED_TEXT : ThemeManager::BLUE, highlighted ? false : true),
+                    false, true);
         break;
     default:
         break;
@@ -145,7 +168,7 @@ void TreeItemDelegate::drawRoot(QPainter *painter, const QStyleOptionViewItem &o
     {
         const TreeView* view = qobject_cast<const TreeView*>(option.widget);
         QPixmap pix = s_icons->getPixmap(view->isExpanded(index) ? "arrow_down" : "arrow_up",
-                                         highlighted ? ThemeManager::HIGHLIGHTED_TEXT : ThemeManager::LIST_TEXT);
+                                         highlighted ? ThemeManager::HIGHLIGHTED_TEXT : ThemeManager::LIST_TEXT, false);
         int x = rect.right() - pix.width();
         int y = rect.top() + (rect.height() - pix.height()) / 2;
         painter->drawPixmap(x - MARGIN, y, pix);
@@ -177,7 +200,8 @@ void TreeItemDelegate::drawRoot(QPainter *painter, const QStyleOptionViewItem &o
     painter->drawText(rectText, text);
 }
 
-void TreeItemDelegate::drawElement(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index, QString iconName, bool expandable, bool withIndent) const
+void TreeItemDelegate::drawElement(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index,
+                                   const QPixmap &leftIcon, bool expandable, bool withIndent) const
 {
     // Background
     bool highlighted = option.state & QStyle::State_Selected;
@@ -190,8 +214,7 @@ void TreeItemDelegate::drawElement(QPainter *painter, const QStyleOptionViewItem
         rect.adjust(16, 0, 0, 0);
 
     // Left icon
-    QPixmap pix = s_icons->getPixmap(iconName, highlighted ? ThemeManager::HIGHLIGHTED_TEXT : ThemeManager::HIGHLIGHTED_BACKGROUND);
-    painter->drawPixmap(rect.left() + MARGIN, rect.top() + (rect.height() - pix.height()) / 2, pix);
+    painter->drawPixmap(rect.left() + MARGIN, rect.top() + (rect.height() - leftIcon.height()) / 2, leftIcon);
 
     // Right arrow
     int rightAreaWidth = 0;
@@ -199,7 +222,7 @@ void TreeItemDelegate::drawElement(QPainter *painter, const QStyleOptionViewItem
     {
         const TreeView* view = qobject_cast<const TreeView*>(option.widget);
         QPixmap pix = s_icons->getPixmap(view->isExpanded(index) ? "arrow_down" : "arrow_up",
-                                         highlighted ? ThemeManager::HIGHLIGHTED_TEXT : ThemeManager::HIGHLIGHTED_BACKGROUND);
+                                         highlighted ? ThemeManager::HIGHLIGHTED_TEXT : ThemeManager::LIST_TEXT, false);
         int x = rect.right() - pix.width() - MARGIN;
         int y = rect.top() + (rect.height() - pix.height()) / 2;
         painter->drawPixmap(x - MARGIN, y, pix);
