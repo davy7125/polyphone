@@ -28,7 +28,7 @@
 #include "editortoolbar.h"
 
 DialogKeyboard::DialogKeyboard(QWidget *parent) :
-    QDialog(parent, Qt::Tool | Qt::WindowStaysOnTopHint | Qt::WindowCloseButtonHint),
+    QDialog(parent, Qt::Tool | Qt::WindowCloseButtonHint),
     ui(new Ui::DialogKeyboard)
 {
     ui->setupUi(this);
