@@ -40,7 +40,7 @@ DialogRecorder::DialogRecorder(QWidget *parent) :
     ui->setupUi(this);
     _synth = ContextManager::audio()->getSynth();
     connect(_synth, SIGNAL(dataWritten(qint32,int)), this, SLOT(onDataWritten(qint32,int)));
-    this->setWindowFlags(Qt::Tool | Qt::WindowStaysOnTopHint | Qt::CustomizeWindowHint | Qt::WindowCloseButtonHint);
+    this->setWindowFlags(Qt::Tool | Qt::CustomizeWindowHint | Qt::WindowCloseButtonHint);
     this->initialize();
 }
 
