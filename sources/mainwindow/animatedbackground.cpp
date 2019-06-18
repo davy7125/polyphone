@@ -1,7 +1,7 @@
 /***************************************************************************
 **                                                                        **
 **  Polyphone, a soundfont editor                                         **
-**  Copyright (C) 2013-2018 Davy Triponney                                **
+**  Copyright (C) 2013-2019 Davy Triponney                                **
 **                                                                        **
 **  This program is free software: you can redistribute it and/or modify  **
 **  it under the terms of the GNU General Public License as published by  **
@@ -27,7 +27,7 @@
 #include <QDateTime>
 
 AnimatedBackground::AnimatedBackground(QWidget *parent) : QWidget(parent),
-    _pixmap(NULL)
+    _pixmap(nullptr)
 {
     QDate today = QDateTime::currentDateTime().date();
 
@@ -51,8 +51,8 @@ void AnimatedBackground::paintEvent(QPaintEvent *event)
     if (_pixmap)
     {
         QPainter p(this);
-        for (int i = 1; i < this->width() / _pixmap->width() + 2; i++)
-            p.drawPixmap(this->width() - i * _pixmap->width(), 0, *_pixmap);
+        for (int i = 0; i < this->width() / _pixmap->width() + 1; i++)
+            p.drawPixmap(i * _pixmap->width(), 0, *_pixmap);
     }
 
     QWidget::paintEvent(event);
