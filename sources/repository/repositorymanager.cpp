@@ -36,7 +36,7 @@
 
 //const QString RepositoryManager::BASE_URL = "http://localhost/polyphone-soundfonts/fr/api/soundfonts/";
 const QString RepositoryManager::BASE_URL = "https://www.polyphone-soundfonts.com/en/api/soundfonts/";
-RepositoryManager * RepositoryManager::s_instance = NULL;
+RepositoryManager * RepositoryManager::s_instance = nullptr;
 
 RepositoryManager * RepositoryManager::getInstance()
 {
@@ -50,7 +50,7 @@ void RepositoryManager::kill()
     if (s_instance != NULL)
     {
         delete s_instance;
-        s_instance = NULL;
+        s_instance = nullptr;
     }
 }
 

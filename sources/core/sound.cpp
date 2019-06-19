@@ -31,7 +31,7 @@
 #include <QFile>
 #include "contextmanager.h"
 
-QWidget * Sound::_parent = NULL;
+QWidget * Sound::_parent = nullptr;
 
 // Constructeur / destructeur
 Sound::Sound(QString filename, bool tryFindRootkey)

@@ -29,7 +29,7 @@
 #include "contextmanager.h"
 #include "repositorymanager.h"
 
-SoundfontCell::IconContainer * SoundfontCell::s_icons = NULL;
+SoundfontCell::IconContainer * SoundfontCell::s_icons = nullptr;
 
 SoundfontCell::SoundfontCell(SoundfontInformation* soundfontInfo, QWidget *parent) :
     QWidget(parent),

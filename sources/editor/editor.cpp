@@ -111,7 +111,7 @@ void Editor::onSelectionChanged(IdList ids)
         return;
 
     // Find the view to display and update it
-    Page * currentPage = NULL;
+    Page * currentPage = nullptr;
     switch (ids[0].typeElement)
     {
     case elementSf2:

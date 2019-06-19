@@ -33,7 +33,7 @@ GraphParamGlobal::GraphParamGlobal(QWidget * parent) : QCustomPlot(parent),
     raideurExp(50.0),
     yMin(0.), yMax(1.),
     xMin(0), xMax(140),
-    labelCoord(NULL),
+    labelCoord(nullptr),
     previousX(-1)
 {
     this->setBackground(this->palette().color(QPalette::Base));

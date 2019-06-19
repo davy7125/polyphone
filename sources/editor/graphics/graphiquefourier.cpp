@@ -29,7 +29,7 @@
 #include <QFileDialog>
 
 GraphiqueFourier::GraphiqueFourier(QWidget * parent) : QCustomPlot(parent),
-    _menu(NULL)
+    _menu(nullptr)
 {
     // Configuration du graphe
     this->addGraph();

@@ -30,16 +30,16 @@
 #include "soundfontmanager.h"
 
 // Constructeur, destructeur
-Synth::Synth(ConfManager *configuration) : QObject(NULL),
+Synth::Synth(ConfManager *configuration) : QObject(nullptr),
     _sf2(SoundfontManager::getInstance()),
     m_gain(0),
     m_choLevel(0), m_choDepth(0), m_choFrequency(0),
     m_clipCoef(1),
-    m_recordFile(NULL),
+    m_recordFile(nullptr),
     m_isRecording(true),
-    _fTmpSumRev1(NULL),
-    _fTmpSumRev2(NULL),
-    _dataWav(NULL)
+    _fTmpSumRev1(nullptr),
+    _fTmpSumRev2(nullptr),
+    _dataWav(nullptr)
 {
 
     // Création des buffers et sound engines
@@ -463,7 +463,7 @@ void Synth::startNewRecord(QString fileName)
     else
     {
         delete m_recordFile;
-        m_recordFile = NULL;
+        m_recordFile = nullptr;
     }
     m_mutexRecord.unlock();
 }
@@ -480,10 +480,10 @@ void Synth::endRecord()
         m_recordStream << m_recordLength;
 
         // Fermeture
-        m_recordStream.setDevice(NULL);
+        m_recordStream.setDevice(nullptr);
         m_recordFile->close();
         delete m_recordFile;
-        m_recordFile = NULL;
+        m_recordFile = nullptr;
 
         m_isRecording = false;
     }

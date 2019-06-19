@@ -27,7 +27,7 @@
 #include "contextmanager.h"
 #include <QPainter>
 
-FiveStarsWidget::IconContainer * FiveStarsWidget::s_icons = NULL;
+FiveStarsWidget::IconContainer * FiveStarsWidget::s_icons = nullptr;
 
 FiveStarsWidget::FiveStarsWidget(QWidget *parent) :
     QWidget(parent),

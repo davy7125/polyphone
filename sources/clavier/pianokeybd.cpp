@@ -24,7 +24,7 @@
 
 PianoKeybd::PianoKeybd(QWidget *parent, const int startKey, const int numKeys) : QGraphicsView(parent),
       m_rotation(0),
-      m_scene(NULL)
+      m_scene(nullptr)
 {
     initialize();
     initScene(startKey, numKeys);

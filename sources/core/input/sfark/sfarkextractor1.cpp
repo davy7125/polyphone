@@ -2283,7 +2283,7 @@ qint32 SfArkExtractor1::SfarkBeginExtract(const void * sfontName)
 
 qint32 SfArkExtractor1::loadSfarkHeader()
 {
-    unsigned char *	fileHdrStartPtr = NULL;
+    unsigned char *	fileHdrStartPtr = nullptr;
     unsigned char *	filename;
     quint32	bytesToProcess;
     int				result;

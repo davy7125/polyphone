@@ -26,12 +26,12 @@
 #include "qmath.h"
 
 CalibrationSinus::CalibrationSinus() :
-    _sinus(NULL),
+    _sinus(nullptr),
     _pitch(0),
     _currentPitch(-1),
     _level(0),
     _currentLevel(0),
-    _buf(NULL)
+    _buf(nullptr)
 {
     initBuffer(1024);
 }

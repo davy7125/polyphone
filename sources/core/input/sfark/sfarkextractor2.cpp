@@ -169,7 +169,7 @@ void CloseOutputFile()
 #else
 typedef FILE* HANDLE;
 
-#define INVALID_HANDLE_VALUE	(NULL)
+#define INVALID_HANDLE_VALUE	(nullptr)
 
 #define	CREATEFILE(filename) 	fopen(filename, "wb")
 #define OPENFILE(filename)	fopen(filename, "rb")

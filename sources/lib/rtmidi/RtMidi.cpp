@@ -686,7 +686,7 @@ CFStringRef EndpointName( MIDIEndpointRef endpoint, bool isExternal )
   CFStringRef str;
 
   // Begin with the endpoint's name.
-  str = NULL;
+  str = nullptr;
   MIDIObjectGetStringProperty( endpoint, kMIDIPropertyName, &str );
   if ( str != NULL ) {
     CFStringAppend( result, str );
@@ -701,7 +701,7 @@ CFStringRef EndpointName( MIDIEndpointRef endpoint, bool isExternal )
 
   if ( CFStringGetLength( result ) == 0 ) {
     // endpoint name has zero length -- try the entity
-    str = NULL;
+    str = nullptr;
     MIDIObjectGetStringProperty( entity, kMIDIPropertyName, &str );
     if ( str != NULL ) {
       CFStringAppend( result, str );
@@ -714,7 +714,7 @@ CFStringRef EndpointName( MIDIEndpointRef endpoint, bool isExternal )
   if ( device == 0 )
     return result;
 
-  str = NULL;
+  str = nullptr;
   MIDIObjectGetStringProperty( device, kMIDIPropertyName, &str );
   if ( CFStringGetLength( result ) == 0 ) {
       CFRelease( result );
@@ -758,7 +758,7 @@ static CFStringRef ConnectedEndpointName( MIDIEndpointRef endpoint )
   int i;
 
   // Does the endpoint have connections?
-  CFDataRef connections = NULL;
+  CFDataRef connections = nullptr;
   int nConnected = 0;
   bool anyStrings = false;
   err = MIDIObjectGetDataProperty( endpoint, kMIDIPropertyConnectionUniqueID, &connections );
@@ -780,7 +780,7 @@ static CFStringRef ConnectedEndpointName( MIDIEndpointRef endpoint )
             str = EndpointName( (MIDIEndpointRef)(connObject), true );
           } else {
             // Connected to an external device (10.2) (or something else, catch-
-            str = NULL;
+            str = nullptr;
             MIDIObjectGetStringProperty( connObject, kMIDIPropertyName, &str );
           }
           if ( str != NULL ) {
@@ -2519,8 +2519,8 @@ void MidiInJack :: initialize( const std::string& clientName )
   apiData_ = (void *) data;
 
   data->rtMidiIn = &inputData_;
-  data->port = NULL;
-  data->client = NULL;
+  data->port = nullptr;
+  data->client = nullptr;
   this->clientName = clientName;
 
   connect();
@@ -2646,7 +2646,7 @@ void MidiInJack :: closePort()
 
   if ( data->port == NULL ) return;
   jack_port_unregister( data->client, data->port );
-  data->port = NULL;
+  data->port = nullptr;
 }
 
 //*********************************************************************//
@@ -2687,8 +2687,8 @@ void MidiOutJack :: initialize( const std::string& clientName )
   JackMidiData *data = new JackMidiData;
   apiData_ = (void *) data;
 
-  data->port = NULL;
-  data->client = NULL;
+  data->port = nullptr;
+  data->client = nullptr;
   this->clientName = clientName;
 
   connect();
@@ -2822,7 +2822,7 @@ void MidiOutJack :: closePort()
 
   if ( data->port == NULL ) return;
   jack_port_unregister( data->client, data->port );
-  data->port = NULL;
+  data->port = nullptr;
 }
 
 void MidiOutJack :: sendMessage( std::vector<unsigned char> *message )

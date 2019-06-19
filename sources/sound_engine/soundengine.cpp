@@ -289,8 +289,8 @@ void SoundEngine::setStereoInstance(bool isStereo)
 {
     // Mise à jour voix -1 et -2
     _mutexVoices.lock();
-    Voice * voice1 = NULL;
-    Voice * voice2 = NULL;
+    Voice * voice1 = nullptr;
+    Voice * voice2 = nullptr;
     for (int i = 0; i < _listVoices.size(); i++)
     {
         if (_listVoices.at(i)->getNote() == -1)

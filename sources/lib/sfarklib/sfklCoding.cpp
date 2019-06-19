@@ -109,7 +109,7 @@ typedef struct
 const char	LicenseExt[] = ".license.txt";		// File extension for license file
 const char	NotesExt[] = ".txt";			// File extension for notes file
 
-static	BYTE *Zbuf1 = NULL, *Zbuf2 = NULL;
+static	BYTE *Zbuf1 = NULL, *Zbuf2 = nullptr;
 
 // Data per block, passed to ProcessNextBlock()
 typedef	struct

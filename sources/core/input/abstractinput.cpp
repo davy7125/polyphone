@@ -36,7 +36,7 @@
 
 AbstractInput::AbstractInput() : QObject(),
     _futureWatcher(new QFutureWatcher<void>()),
-    _sm(NULL),
+    _sm(nullptr),
     _fileName(""),
     _isSuccess(false),
     _error(trUtf8("not processed yet")),

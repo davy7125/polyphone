@@ -1080,7 +1080,7 @@ int SoundFont::writeCompressedSample(Sample* s)
     vorbis_comment_init(&vc);
     vorbis_analysis_init(&vd, &vi);
     vorbis_block_init(&vd, &vb);
-    srand(time(NULL));
+    srand(time(nullptr));
     ogg_stream_init(&os, _oggSerial == std::numeric_limits<qint64>::max() ? rand() : (int)_oggSerial);
 
     ogg_packet header;

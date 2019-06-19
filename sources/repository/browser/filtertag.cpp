@@ -32,7 +32,7 @@
 FilterTag::FilterTag(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::FilterTag),
-    _completer(NULL)
+    _completer(nullptr)
 {
     ui->setupUi(this);
     ui->tagArea->setLayout(new FlowLayout(0));
@@ -49,7 +49,7 @@ void FilterTag::setPossibleTags(QStringList tags)
     _possibleTags = tags;
     if (_completer != NULL)
     {
-        ui->lineEdit->setCompleter(NULL);
+        ui->lineEdit->setCompleter(nullptr);
         delete _completer;
     }
 

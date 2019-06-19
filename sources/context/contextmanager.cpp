@@ -25,7 +25,7 @@
 #include "contextmanager.h"
 #include "synth.h"
 
-ContextManager * ContextManager::s_instance = NULL;
+ContextManager * ContextManager::s_instance = nullptr;
 
 ConfManager * ContextManager::configuration()
 {
@@ -79,17 +79,17 @@ MidiDevice * ContextManager::midi()
 void ContextManager::kill()
 {
     delete s_instance;
-    s_instance = NULL;
+    s_instance = nullptr;
 }
 
 ContextManager::ContextManager() :
-    _configuration(NULL),
-    _keyName(NULL),
-    _recentFile(NULL),
-    _theme(NULL),
-    _translation(NULL),
-    _audio(NULL),
-    _midi(NULL)
+    _configuration(nullptr),
+    _keyName(nullptr),
+    _recentFile(nullptr),
+    _theme(nullptr),
+    _translation(nullptr),
+    _audio(nullptr),
+    _midi(nullptr)
 {
     // Build the context
 

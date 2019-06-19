@@ -30,7 +30,7 @@
 
 int RecentFileManager::MAX_SF2_FILES = 10;
 
-RecentFileManager::RecentFileManager(ConfManager * configuration) : QObject(NULL),
+RecentFileManager::RecentFileManager(ConfManager * configuration) : QObject(nullptr),
     _configuration(configuration)
 {
     // Load recent files

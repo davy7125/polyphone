@@ -749,7 +749,7 @@ bool SoundfontManager::isEdited(int indexSf2)
     if (_soundfonts->getSoundfont(indexSf2) == nullptr)
         return false;
     return this->_undoRedo->getEdition(indexSf2) != _soundfonts->getSoundfont(indexSf2)->_numEdition ||
-            !this->getQstr(EltID(elementSf2, indexSf2), champ_filenameInitial).endsWith(".sf2");
+            !this->getQstr(EltID(elementSf2, indexSf2), champ_filenameInitial).toLower().endsWith(".sf2");
 }
 
 // Récupération liste de champs et valeurs de bags

@@ -205,7 +205,7 @@ void ToolMixtureCreation::onElementProcessed(EltID idSmpl, int key, int minKey, 
     if (_currentStep >= _steps)
     {
         delete _waitingDialog;
-        _waitingDialog = NULL;
+        _waitingDialog = nullptr;
         if (_canceled)
         {
             SoundfontManager::getInstance()->revertNewEditing();

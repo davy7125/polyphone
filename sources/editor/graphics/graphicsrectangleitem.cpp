@@ -29,7 +29,7 @@
 #include <QGraphicsView>
 #include "contextmanager.h"
 
-SoundfontManager * GraphicsRectangleItem::s_sf2 = NULL;
+SoundfontManager * GraphicsRectangleItem::s_sf2 = nullptr;
 
 GraphicsRectangleItem::GraphicsRectangleItem(EltID id, QGraphicsItem *parent) : QGraphicsRectItem(parent),
     _id(id),

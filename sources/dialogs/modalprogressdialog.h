@@ -38,7 +38,7 @@ public:
         QProgressDialog(labelText, cancelButtonText, minimum, maximum, parent, flags)
     {
         this->setWindowModality(Qt::WindowModal);
-        this->setCancelButton(NULL);
+        this->setCancelButton(nullptr);
         this->setWindowFlags(this->windowFlags() & ~Qt::WindowContextHelpButtonHint & ~Qt::WindowCloseButtonHint);
         this->reset();
     }

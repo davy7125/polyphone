@@ -72,7 +72,7 @@ void midiCallback(double deltatime, std::vector< unsigned char > *message, void 
 }
 
 MidiDevice::MidiDevice(ConfManager * configuration, Synth *synth) :
-    _keyboard(NULL),
+    _keyboard(nullptr),
     _configuration(configuration),
     _synth(synth),
     _isSustainOn(false)
@@ -93,7 +93,7 @@ MidiDevice::MidiDevice(ConfManager * configuration, Synth *synth) :
     catch (std::exception &error)
     {
         Q_UNUSED(error)
-        _midiin = NULL;
+        _midiin = nullptr;
     }
     if (_midiin)
     {

@@ -35,7 +35,7 @@
 ShowSoundfonts::ShowSoundfonts(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::ShowSoundfonts),
-    _urlReaderJson(NULL),
+    _urlReaderJson(nullptr),
     _soundfontListOk(false),
     _lastWidth(-1)
 {

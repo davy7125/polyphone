@@ -30,7 +30,7 @@ const int GraphFilterFrequencies::POINT_NUMBER = 201;
 GraphFilterFrequencies::GraphFilterFrequencies(QWidget * parent) : QCustomPlot(parent),
     flagEdit(false),
     raideurExp(50.0),
-    labelCoord(NULL),
+    labelCoord(nullptr),
     previousX(-1)
 {
     this->setBackground(this->palette().color(QPalette::Base));

@@ -25,7 +25,7 @@
 
 #include "circularbuffer.h"
 
-CircularBuffer::CircularBuffer(int minBuffer, int maxBuffer) : QObject(NULL),
+CircularBuffer::CircularBuffer(int minBuffer, int maxBuffer) : QObject(nullptr),
     _minBuffer(minBuffer),
     _maxBuffer(maxBuffer),
     _bufferSize(4 * maxBuffer),

@@ -45,7 +45,7 @@ public:
         QList<int> keys;
         QList<int> corrections;
         SoundfontManager * sm = SoundfontManager::getInstance();
-        GraphiqueFourier graphTmp(NULL);
+        GraphiqueFourier graphTmp(nullptr);
         graphTmp.setData(sm->getData(_id, champ_sampleData16), sm->get(_id, champ_dwSampleRate).dwValue);
         graphTmp.setPos(sm->get(_id, champ_dwStartLoop).dwValue, sm->get(_id, champ_dwEndLoop).dwValue,
                         frequencies, factors, keys, corrections, false);

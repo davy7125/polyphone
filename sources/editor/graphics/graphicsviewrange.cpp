@@ -48,9 +48,9 @@ const double GraphicsViewRange::OFFSET = -0.5;
 
 GraphicsViewRange::GraphicsViewRange(QWidget *parent) : QGraphicsView(parent),
     _scene(new QGraphicsScene(OFFSET, OFFSET, WIDTH, WIDTH)),
-    _legendItem(NULL),
-    _legendItem2(NULL),
-    _zoomLine(NULL),
+    _legendItem(nullptr),
+    _legendItem2(nullptr),
+    _zoomLine(nullptr),
     _dontRememberScroll(false),
     _keyTriggered(-1),
     _buttonPressed(Qt::NoButton),

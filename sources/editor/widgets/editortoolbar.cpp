@@ -70,7 +70,6 @@ EditorToolBar::EditorToolBar(QWidget * parent) : QToolBar(parent),
 
     this->addSeparator();
     _actionUndo = new StyledAction(trUtf8("Cancel"), ":/icons/edit-undo.svg", this);
-//    _actionUndo->setShortcut(Qt::CTRL + Qt::Key_Z);
     connect(_actionUndo, SIGNAL(clicked()), this, SLOT(onUndo()));
     this->addWidget(_actionUndo);
 

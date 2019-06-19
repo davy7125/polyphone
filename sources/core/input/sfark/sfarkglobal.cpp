@@ -26,8 +26,8 @@
 #include "sfarkglobal.h"
 
 SfArkInfo::SfArkInfo() :
-    WorkBuffer1(NULL),
-    WorkBuffer2(NULL),
+    WorkBuffer1(nullptr),
+    WorkBuffer2(nullptr),
     InputFileHandle(-1),
     OutputFileHandle(-1),
     FileUncompSize(0),
@@ -65,11 +65,11 @@ SfArkInfo::~SfArkInfo()
 
 SfArkInfo_v1::SfArkInfo_v1() :
     PartFileHandle(-1),
-    OutbufPtr(NULL),
-    DecompBuf(NULL),
-    AppFontName(NULL),
-    PackItemArray(NULL),
-    CurPackItemArray(NULL),
+    OutbufPtr(nullptr),
+    DecompBuf(nullptr),
+    AppFontName(nullptr),
+    PackItemArray(nullptr),
+    CurPackItemArray(nullptr),
     VarDecodeDWord(0),
     VarDecodeByteCnt(0),
     EncodeCnt(0),
@@ -85,7 +85,7 @@ PackItem::PackItem() :
     EncodeCnt(0),
     BitShiftAmt(0)
 {
-    u.NextItemArray = NULL;
+    u.NextItemArray = nullptr;
     u.Data1 = 0;
 }
 

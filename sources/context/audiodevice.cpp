@@ -70,10 +70,10 @@ int standardProcess(const void* inputBuffer, void* outputBuffer,
     return 0;
 }
 
-AudioDevice::AudioDevice(ConfManager *configuration) : QObject(NULL),
+AudioDevice::AudioDevice(ConfManager *configuration) : QObject(nullptr),
     _isStandardRunning(false),
-    _standardStream(NULL),
-    _jack_client(NULL),
+    _standardStream(nullptr),
+    _jack_client(nullptr),
     _configuration(configuration),
     _initialized(false)
 {
@@ -288,7 +288,7 @@ void AudioDevice::openJackConnection(int bufferSize)
         printf("no physical playback ports\n");
         return;
     }
-    bool mono = ports[1] == NULL;
+    bool mono = ports[1] == nullptr;
 
     // Création ports de sortie
     if (mono)
@@ -297,7 +297,7 @@ void AudioDevice::openJackConnection(int bufferSize)
         _output_port_L = jack_port_register(_jack_client, "output mono",
                                             JACK_DEFAULT_AUDIO_TYPE,
                                             JackPortIsOutput, 0);
-        _output_port_R = NULL;
+        _output_port_R = nullptr;
         if (!_output_port_L)
         {
             printf("no more JACK ports available\n");
@@ -371,7 +371,7 @@ void AudioDevice::openStandardConnection(int deviceType, int numIndex, int buffe
         outputParameters.suggestedLatency = qMin(0.04, pdi->defaultLowOutputLatency);
     else
         outputParameters.suggestedLatency = qMin(0.2, pdi->defaultLowOutputLatency);
-    outputParameters.hostApiSpecificStreamInfo = NULL;
+    outputParameters.hostApiSpecificStreamInfo = nullptr;
 
     // Ouverture du flux
     PaError err = Pa_OpenStream(&_standardStream,
@@ -409,14 +409,14 @@ void AudioDevice::closeConnections()
         Pa_StopStream(_standardStream);
         Pa_CloseStream(_standardStream);
         _isStandardRunning = false;
-        _standardStream = NULL;
+        _standardStream = nullptr;
     }
 
 #ifndef Q_OS_WIN
     if (_jack_client)
     {
         jack_client_close(_jack_client);
-        _jack_client = NULL;
+        _jack_client = nullptr;
     }
 #endif
 }

@@ -28,7 +28,7 @@
 #include <QFile>
 #include "contextmanager.h"
 
-WidgetShowHistoryCell::Icons * WidgetShowHistoryCell::s_icons = NULL;
+WidgetShowHistoryCell::Icons * WidgetShowHistoryCell::s_icons = nullptr;
 
 WidgetShowHistoryCell::WidgetShowHistoryCell(QWidget *parent) :
     QWidget(parent),
