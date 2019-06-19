@@ -45,6 +45,23 @@ void DialogCreateElements::initialize(IdList ids)
 {
     if (ids.empty())
         return;
+
+    // Convert InstSmpl into Smpl and PrstInst into Inst
+    for (int i = 0; i < ids.count(); i++)
+    {
+        if (ids[i].typeElement == elementInstSmpl)
+        {
+            ids[i].indexElt = SoundfontManager::getInstance()->get(ids[i], champ_sampleID).wValue;
+            ids[i].typeElement = elementSmpl;
+        }
+        else if (ids[i].typeElement == elementPrstInst)
+        {
+            ids[i].indexElt = SoundfontManager::getInstance()->get(ids[i], champ_instrument).wValue;
+            ids[i].typeElement = elementInst;
+        }
+    }
+
+    // Store the list
     _ids = ids;
 
     if (ids[0].typeElement == elementSmpl)

@@ -764,7 +764,7 @@ void TreeView::dropEvent(QDropEvent *event)
         {
             // Possibly create one or more instruments based on samples
             foreach (EltID idSource, _draggedIds)
-                if (idSource.typeElement != elementSmpl)
+                if (idSource.typeElement != elementSmpl && idSource.typeElement != elementInstSmpl)
                     return;
             DialogCreateElements * dial = new DialogCreateElements(this);
             dial->initialize(_draggedIds);
@@ -775,7 +775,7 @@ void TreeView::dropEvent(QDropEvent *event)
         {
             // Possibly create one or more presets based on instruments
             foreach (EltID idSource, _draggedIds)
-                if (idSource.typeElement != elementInst)
+                if (idSource.typeElement != elementInst && idSource.typeElement != elementPrstInst)
                     return;
             DialogCreateElements * dial = new DialogCreateElements(this);
             dial->initialize(_draggedIds);
@@ -838,7 +838,7 @@ void TreeView::onCreateElements(IdList ids, bool oneForEach)
     else
     {
         // Find a name
-        QString elementName = trUtf8("instrument");
+        QString elementName = isSmpl ? trUtf8("instrument") : trUtf8("preset");
         if (names.contains(elementName))
         {
             int suffix = 1;
